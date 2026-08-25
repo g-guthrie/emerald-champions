@@ -202,11 +202,10 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_ExitVendingMachine:: @ 822045E
 LilycoveCity_DepartmentStoreRooftop_EventScript_SubstituteTM::
 	lock
 	faceplayer
-	checkitem ITEM_TM90_SUBSTITUTE, 1
-	compare VAR_RESULT, 1
-	goto_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_ReceivedTM90
+	goto_if_set FLAG_VERDANT_GIFT_SUBSTITUTE, LilycoveCity_DepartmentStoreRooftop_EventScript_ReceivedTM90
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_GiveSubstitute, MSGBOX_DEFAULT
-	giveitem ITEM_TM90_SUBSTITUTE
+	giveitem ITEM_PROTECTIVE_PADS
+	setflag FLAG_VERDANT_GIFT_SUBSTITUTE
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_HaveTM90, MSGBOX_DEFAULT
 	release
 	end
@@ -258,8 +257,9 @@ LilycoveCity_DepartmentStoreRooftop_Text_GiveSubstitute:
 	.string "so I could enjoy all sorts of lives.\p"
 	.string "Of course it's not possible.\n"
 	.string "Giggle…\p"
-	.string "I know! Take this TM, and you can have\n"
-	.string "your Pokémon learn Substitute!$"
+	.string "I know! Take these Protective Pads.\n"
+	.string "They shield their holder from effects\l"
+	.string "triggered by direct contact.$"
 
 LilycoveCity_DepartmentStoreRooftop_Text_HaveTM90:
 	.string "We human beings should enjoy our\n"

@@ -264,6 +264,9 @@ static const u8 sSandSongDescription[] = _("Makes sound moves Ground.");
 static const u8 sRampageDescription[] = _("No recharge after a KO.");
 static const u8 sVengeanceDescription[] = _("Ups Ghost moves in a pinch.");
 static const u8 sBlitzBoxerDescription[] = _("Punching moves go first.");
+static const u8 sPiercingDrillDescription[] = _("Contact evades protection.");
+static const u8 sDragonizeDescription[] = _("Normal moves turn Dragon.");
+static const u8 sMegaSolDescription[] = _("Battles as if in sunlight.");
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 {
@@ -545,6 +548,9 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_RAMPAGE] = _("Rampage"),
     [ABILITY_VENGEANCE] = _("Vengeance"),
     [ABILITY_BLITZ_BOXER] = _("Blitz Boxer"),
+    [ABILITY_PIERCING_DRILL] = _("Pierce Drill"),
+    [ABILITY_DRAGONIZE] = _("Dragonize"),
+    [ABILITY_MEGA_SOL] = _("Mega Sol"),
 };
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
@@ -827,4 +833,7 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_RAMPAGE] = sRampageDescription,
     [ABILITY_VENGEANCE] = sVengeanceDescription,
     [ABILITY_BLITZ_BOXER] = sBlitzBoxerDescription,
+    [ABILITY_PIERCING_DRILL] = sPiercingDrillDescription,
+    [ABILITY_DRAGONIZE] = sDragonizeDescription,
+    [ABILITY_MEGA_SOL] = sMegaSolDescription,
 };

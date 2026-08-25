@@ -25,11 +25,10 @@ MauvilleCity_EventScript_MoveWattsonBackToGym:: @ 81DF3A9
 MauvilleCity_EventScript_GyroBallTM::
 	lock
 	faceplayer
-	checkitem ITEM_TM74_GYRO_BALL, 1
-	compare VAR_RESULT, 1
-	goto_if_eq MauvilleCity_EventScript_ReceivedTM74
+	goto_if_set FLAG_VERDANT_GIFT_GYRO_BALL, MauvilleCity_EventScript_ReceivedTM74
 	msgbox MauvilleCity_Text_GiveTM74, MSGBOX_DEFAULT
-	giveitem ITEM_TM74_GYRO_BALL
+	giveitem ITEM_METRONOME
+	setflag FLAG_VERDANT_GIFT_GYRO_BALL
 	msgbox MauvilleCity_Text_HaveTM74, MSGBOX_DEFAULT
 	release
 	end
@@ -463,7 +462,7 @@ MauvilleCity_EventScript_BegunNewMauville:: @ 81DF77A
 
 MauvilleCity_EventScript_CompletedNewMauville:: @ 81DF784
 	msgbox MauvilleCity_Text_WattsonThanksTakeTM, MSGBOX_DEFAULT
-	giveitem ITEM_TM24_THUNDERBOLT
+	giveitem ITEM_THROAT_SPRAY
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_GOT_TM24_FROM_WATTSON

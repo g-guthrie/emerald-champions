@@ -1624,10 +1624,13 @@ void DestroyMegaIndicatorSprite(u32 healthboxSpriteId)
     if (*spriteId != 0xFF)
     {
         DestroySprite(&gSprites[*spriteId]);
-        //*spriteId = 0xFF; // Why does removing this fix the icon bug?
+        // The sprite slot may be reused immediately. Keeping its old id makes
+        // later healthbox updates treat an unrelated sprite as the Mega icon,
+        // corrupting HP/status UI after a Mega-evolved battler switches out.
+        *spriteId = 0xFF;
     }
 
-    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+    for (i = 0; i < gBattlersCount; i++)
     {
         if (gSprites[gSprites[gHealthboxSpriteIds[i]].oam.affineParam].hOther_IndicatorSpriteId != 0xFF)
             break;
@@ -3418,4 +3421,3 @@ void TryRestoreLastUsedBall(void)
         TryAddLastUsedBallItemSprites();
     #endif
 }
-

@@ -2349,7 +2349,7 @@ static const u8 sWATER_SHURIKENDescription[] = _(
 
 static const u8 sMYSTICAL_FIREDescription[] = _(
     "Breathes a special, hot\n"
-    "fire. May lower Sp. Atk.");
+    "fire. Lowers Sp. Atk.");
 
 static const u8 sSPIKY_SHIELDDescription[] = _(
     "Evades attack, and damages\n"

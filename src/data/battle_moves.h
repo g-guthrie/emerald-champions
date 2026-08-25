@@ -10327,7 +10327,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         #else
             .pp = 5,
         #endif
-        .effect = EFFECT_PLACEHOLDER,
+        .effect = EFFECT_SHELL_TRAP,
         .power = 150,
         .type = TYPE_FIRE,
         .accuracy = 100,
@@ -10967,7 +10967,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_TEATIME] =
     {
-        .effect = EFFECT_PLACEHOLDER,   //TODO
+        .effect = EFFECT_TEATIME,
         .power = 0,
         .type = TYPE_NORMAL,
         .accuracy = 0,
@@ -11023,7 +11023,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_COURT_CHANGE] =
     {
-        .effect = EFFECT_PLACEHOLDER,   //TODO
+        .effect = EFFECT_COURT_CHANGE,
         .power = 0,
         .type = TYPE_NORMAL,
         .accuracy = 100,

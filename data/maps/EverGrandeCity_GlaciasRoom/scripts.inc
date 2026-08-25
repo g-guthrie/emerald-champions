@@ -52,11 +52,9 @@ EverGrandeCity_GlaciasRoom_EventScript_GlaciaRematch::
 	goto_if_set FLAG_DEFEATED_ELITE_4_GLACIA, EverGrandeCity_GlaciasRoom_EventScript_PostBattleSpeechRematch
 	playbgm MUS_ENCOUNTER_ELITE_FOUR, 0
 	msgbox EverGrandeCity_GlaciasRoom_Text_IntroSpeechRematch, MSGBOX_DEFAULT
-	switch VAR_ELITE_4_MODE
-	case 0, EverGrandeCity_GlaciasRoom_EventScript_GlaciaSingles
-	case 1, EverGrandeCity_GlaciasRoom_EventScript_GlaciaSinglesLegends
-	case 2, EverGrandeCity_GlaciasRoom_EventScript_GlaciaDoubles
-	case 3, EverGrandeCity_GlaciasRoom_EventScript_GlaciaDoublesLegends
+	trainerbattle_no_intro TRAINER_GLACIA_4, EverGrandeCity_GlaciasRoom_Text_Defeat
+	goto EverGrandeCity_GlaciasRoom_EventScript_DefeatedRematch
+	end
 
 EverGrandeCity_GlaciasRoom_EventScript_GlaciaSingles::
 	trainerbattle_no_intro TRAINER_GLACIA, EverGrandeCity_GlaciasRoom_Text_Defeat
@@ -109,6 +107,8 @@ EverGrandeCity_GlaciasRoom_Text_IntroSpeech: @ 82284AC
 	.string "so that I may hone my ice skills.\p"
 	.string "But all I have seen are challenges by\n"
 	.string "weak Trainers and their Pokémon.\p"
+	.string "My snow controls the whole field.\n"
+	.string "Every step you take will cost you.\p"
 	.string "What about you?\p"
 	.string "It would please me to no end if I could\n"
 	.string "go all out against you!$"

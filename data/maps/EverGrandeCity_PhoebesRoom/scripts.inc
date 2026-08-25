@@ -52,11 +52,9 @@ EverGrandeCity_PhoebesRoom_EventScript_PhoebeRematch::
 	goto_if_set FLAG_DEFEATED_ELITE_4_PHOEBE, EverGrandeCity_PhoebesRoom_EventScript_PostBattleSpeechRematch
 	playbgm MUS_ENCOUNTER_ELITE_FOUR, 0
 	msgbox EverGrandeCity_PhoebesRoom_Text_IntroSpeechRematch, MSGBOX_DEFAULT
-	switch VAR_ELITE_4_MODE
-	case 0, EverGrandeCity_PhoebesRoom_EventScript_PhoebeSingles
-	case 1, EverGrandeCity_PhoebesRoom_EventScript_PhoebeSinglesLegends
-	case 2, EverGrandeCity_PhoebesRoom_EventScript_PhoebeDoubles
-	case 3, EverGrandeCity_PhoebesRoom_EventScript_PhoebeDoublesLegends
+	trainerbattle_no_intro TRAINER_PHOEBE_4, EverGrandeCity_PhoebesRoom_Text_Defeat
+	goto EverGrandeCity_PhoebesRoom_EventScript_DefeatedRematch
+	end
 
 EverGrandeCity_PhoebesRoom_EventScript_PhoebeSingles::
 	trainerbattle_no_intro TRAINER_PHOEBE, EverGrandeCity_PhoebesRoom_Text_Defeat
@@ -110,6 +108,8 @@ EverGrandeCity_PhoebesRoom_Text_IntroSpeech: @ 822820E
 	.string "to commune with Ghost-type Pokémon.\p"
 	.string "Yes, the bond I developed with Pokémon\n"
 	.string "is extremely tight.\p"
+	.string "My spirits guard one another. Strike\n"
+	.string "the wrong shadow and you'll regret it.\p"
 	.string "So, come on, just try and see if you can\n"
 	.string "even inflict damage on my Pokémon!$"
 

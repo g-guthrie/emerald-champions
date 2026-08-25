@@ -31,7 +31,6 @@ static void SetInitialEggData(struct Pokemon *mon, u16 species, struct DayCare *
 static u8 GetDaycareCompatibilityScore(struct DayCare *daycare);
 static void DaycarePrintMonInfo(u8 windowId, u32 daycareSlotId, u8 y);
 static void TransferEggMoves (struct DayCare *daycare);
-static bool8 DoMonsShareEggGroup(struct DayCare *daycare);
 static u8 ModifyBreedingScoreForOvalCharm(u8 score);
 
 // RAM buffers used to assist with BuildEggMoveset()
@@ -289,10 +288,9 @@ static u16 TakeSelectedPokemonFromDaycare(struct DaycareMon *daycareMon)
 static u16 TakeSelectedPokemonMonFromDaycareShiftSlots(struct DayCare *daycare, u8 slotId)
 {
     u16 species;
-    if (DoMonsShareEggGroup(daycare))
-    {
+    if (GetBoxMonData(&daycare->mons[0].mon, MON_DATA_SPECIES) != SPECIES_NONE
+     && GetBoxMonData(&daycare->mons[1].mon, MON_DATA_SPECIES) != SPECIES_NONE)
         TransferEggMoves(daycare);
-    }
 
     species = TakeSelectedPokemonFromDaycare(&daycare->mons[slotId]);
     ShiftDaycareSlots(daycare);
@@ -399,7 +397,7 @@ static void ClearAllDaycareData(struct DayCare *daycare)
 // Determines what the species of an Egg would be based on the given species.
 // It determines this by working backwards through the evolution chain of the
 // given species.
-static u16 GetEggSpecies(u16 species)
+u16 GetEggSpecies(u16 species)
 {
     int i, j, k;
     bool8 found;
@@ -455,6 +453,9 @@ static s32 GetParentToInheritNature(struct DayCare *daycare)
     }
 
     // Don't inherit nature if not holding Everstone
+    if (parent < 0)
+        return -1;
+
     if (GetBoxMonData(&daycare->mons[parent].mon, MON_DATA_HELD_ITEM) != ITEM_EVERSTONE)
     {
         return -1;
@@ -467,7 +468,8 @@ static void TryInheritAbility(struct Pokemon *egg, struct DayCare *daycare)
 {
     s32 i;
     s32 parent = -1;
-    u8 femaleCount, abilitySlot = 0;
+    u8 femaleCount = 0;
+    u8 abilitySlot = 0;
 
     // search for female
     for (i = 0; i < DAYCARE_MON_COUNT; i++)
@@ -798,8 +800,8 @@ static void TransferEggMoves (struct DayCare *daycare)
     }
 
     // Get egg moves for basic form of mon in daycare
-    baseSpeciesSlotZero = GetEggSpecies(GetBoxMonData(&daycare->mons[0].mon, MON_DATA_SPECIES));
-    baseSpeciesSlotOne = GetEggSpecies(GetBoxMonData(&daycare->mons[1].mon, MON_DATA_SPECIES));
+    baseSpeciesSlotZero = GetEggSpecies(GET_BASE_SPECIES_ID(GetBoxMonData(&daycare->mons[0].mon, MON_DATA_SPECIES)));
+    baseSpeciesSlotOne = GetEggSpecies(GET_BASE_SPECIES_ID(GetBoxMonData(&daycare->mons[1].mon, MON_DATA_SPECIES)));
 
     numEggMovesZero = GetEggMoves(baseSpeciesSlotZero, sTransferEggMovesZero);
     numEggMovesOne = GetEggMoves(baseSpeciesSlotOne, sTransferEggMovesOne);
@@ -884,7 +886,7 @@ static void BuildEggMoveset(struct Pokemon *egg, struct BoxPokemon *father, stru
         }
     }
 
-    species = GetMonData(egg, MON_DATA_SPECIES);
+    species = GET_BASE_SPECIES_ID(GetMonData(egg, MON_DATA_SPECIES));
     numEggMoves = GetEggMoves(species, sHatchedEggEggMoves);
 
     // Get egg moves from father. Egg moves from father may overwite level up moves
@@ -965,7 +967,7 @@ static void InheritPokeBall(struct Pokemon *egg, struct DayCare *daycare)
 {
     u16 ball;
     u8 parent, i;
-    u8 femaleCount, abilitySlot = 0;
+    u8 femaleCount = 0, abilitySlot = 0;
 
     // search for female
     for (i = 0; i < DAYCARE_MON_COUNT; i++)
@@ -1117,13 +1119,22 @@ static u16 DetermineEggSpeciesAndParentSlots(struct DayCare *daycare, u8 *parent
 
     eggSpecies = GetEggSpecies(species[parentSlots[0]]);
     if (eggSpecies == SPECIES_NIDORAN_F && daycare->offspringPersonality & EGG_GENDER_MALE)
-    {
         eggSpecies = SPECIES_NIDORAN_M;
-    }
-    if (eggSpecies == SPECIES_ILLUMISE && daycare->offspringPersonality & EGG_GENDER_MALE)
-    {
+    else if (eggSpecies == SPECIES_ILLUMISE && daycare->offspringPersonality & EGG_GENDER_MALE)
         eggSpecies = SPECIES_VOLBEAT;
-    }
+#if P_NIDORAN_M_DITTO_BREED >= GEN_5
+    else if (eggSpecies == SPECIES_NIDORAN_M && !(daycare->offspringPersonality & EGG_GENDER_MALE))
+        eggSpecies = SPECIES_NIDORAN_F;
+    else if (eggSpecies == SPECIES_VOLBEAT && !(daycare->offspringPersonality & EGG_GENDER_MALE))
+        eggSpecies = SPECIES_ILLUMISE;
+#endif
+
+    if (GET_BASE_SPECIES_ID(eggSpecies) == SPECIES_VIVILLON)
+        eggSpecies = SPECIES_SCATTERBUG;
+    else if (GET_BASE_SPECIES_ID(eggSpecies) == SPECIES_ROTOM)
+        eggSpecies = SPECIES_ROTOM;
+    else if (GET_BASE_SPECIES_ID(eggSpecies) == SPECIES_FURFROU)
+        eggSpecies = SPECIES_FURFROU;
 
     // Make Ditto the "mother" slot if the other daycare mon is male.
     if (species[parentSlots[1]] == SPECIES_DITTO && GetBoxMonGender(&daycare->mons[parentSlots[0]].mon) != MON_FEMALE)
@@ -1131,12 +1142,6 @@ static u16 DetermineEggSpeciesAndParentSlots(struct DayCare *daycare, u8 *parent
         u8 ditto = parentSlots[1];
         parentSlots[1] = parentSlots[0];
         parentSlots[0] = ditto;
-    }
-
-    // Rotom can only breed with Ditto, and should hatch in its base form
-    if (gSpeciesToNationalPokedexNum[species[parentSlots[1]] - 1] == SPECIES_ROTOM)
-    {
-        eggSpecies = SPECIES_ROTOM;
     }
 
     return eggSpecies;
@@ -1353,27 +1358,6 @@ static bool8 EggGroupsOverlap(u16 *eggGroups1, u16 *eggGroups2)
     }
 
     return FALSE;
-}
-
-// Checks if the two Pokemon in the daycare are in the same egg group
-static bool8 DoMonsShareEggGroup(struct DayCare *daycare)
-{
-    u8 i;
-    u16 eggGroups[DAYCARE_MON_COUNT][EGG_GROUPS_PER_MON];
-    u16 species[DAYCARE_MON_COUNT];
-
-    for (i = 0; i < DAYCARE_MON_COUNT; i++)
-    {
-        species[i] = GetBoxMonData(&daycare->mons[i].mon, MON_DATA_SPECIES);
-        eggGroups[i][0] = gBaseStats[species[i]].eggGroup1;
-        eggGroups[i][1] = gBaseStats[species[i]].eggGroup2;
-    }
-
-    if (EggGroupsOverlap(eggGroups[0], eggGroups[1]))
-    {
-        return TRUE;
-    }
-    return FALSE;        
 }
 
 static u8 GetDaycareCompatibilityScore(struct DayCare *daycare)
@@ -1680,4 +1664,3 @@ static u8 ModifyBreedingScoreForOvalCharm(u8 score)
     
     return score;
 }
-

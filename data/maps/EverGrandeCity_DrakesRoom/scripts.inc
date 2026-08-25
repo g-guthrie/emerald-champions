@@ -53,11 +53,8 @@ EverGrandeCity_DrakesRoom_EventScript_DrakeRematch::
 	goto_if_set FLAG_DEFEATED_ELITE_4_DRAKE, EverGrandeCity_DrakesRoom_EventScript_PostBattleSpeechRematch
 	playbgm MUS_ENCOUNTER_ELITE_FOUR, 0
 	msgbox EverGrandeCity_DrakesRoom_Text_IntroSpeechRematch, MSGBOX_DEFAULT
-	switch VAR_ELITE_4_MODE
-	case 0, EverGrandeCity_DrakesRoom_EventScript_DrakeSingles
-	case 1, EverGrandeCity_DrakesRoom_EventScript_DrakeSinglesLegends
-	case 2, EverGrandeCity_DrakesRoom_EventScript_DrakeDoubles
-	case 3, EverGrandeCity_DrakesRoom_EventScript_DrakeDoublesLegends
+	trainerbattle_no_intro TRAINER_DRAKE_3, EverGrandeCity_DrakesRoom_Text_Defeat
+	goto EverGrandeCity_DrakesRoom_EventScript_DefeatedRematch
 	end
 
 EverGrandeCity_DrakesRoom_EventScript_DrakeSingles::
@@ -118,6 +115,8 @@ EverGrandeCity_DrakesRoom_Text_IntroSpeech: @ 822873E
 	.string "For us to battle with Pokémon as\n"
 	.string "partners, do you know what it takes?\p"
 	.string "Do you know what is needed?\p"
+	.string "This is a singles duel. Every Pokémon\n"
+	.string "must stand on the choice you make.\p"
 	.string "If you don't, then you will never\n"
 	.string "prevail over me!$"
 

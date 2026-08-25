@@ -58,11 +58,9 @@ EverGrandeCity_SidneysRoom_EventScript_SidneyRematch::
 	goto_if_set FLAG_DEFEATED_ELITE_4_SIDNEY, EverGrandeCity_SidneysRoom_EventScript_PostBattleSpeechRematch
 	playbgm MUS_ENCOUNTER_ELITE_FOUR, 0
 	msgbox EverGrandeCity_SidneysRoom_Text_IntroSpeechRematch, MSGBOX_DEFAULT
-	switch VAR_ELITE_4_MODE
-	case 0, EverGrandeCity_SidneysRoom_EventScript_SidneySingles
-	case 1, EverGrandeCity_SidneysRoom_EventScript_SidneySinglesLegends
-	case 2, EverGrandeCity_SidneysRoom_EventScript_SidneyDoubles
-	case 3, EverGrandeCity_SidneysRoom_EventScript_SidneyDoublesLegends
+	trainerbattle_no_intro TRAINER_SIDNEY_4, EverGrandeCity_SidneysRoom_Text_Defeat
+	goto EverGrandeCity_SidneysRoom_EventScript_DefeatedRematch
+	end
 
 EverGrandeCity_SidneysRoom_EventScript_SidneySingles::
 	trainerbattle_no_intro TRAINER_SIDNEY, EverGrandeCity_SidneysRoom_Text_Defeat
@@ -116,7 +114,9 @@ EverGrandeCity_SidneysRoom_Text_IntroSpeech: @ 8227FA7
 	.string "That's good! Looking real good!\p"
 	.string "All right! You and me, let's enjoy\n"
 	.string "a battle that can only be staged\l"
-	.string "here in the Pokémon League!$"
+	.string "here in the Pokémon League!\p"
+	.string "I'll hit both sides of your plan\n"
+	.string "until something ugly breaks through!$"
 
 EverGrandeCity_SidneysRoom_Text_Defeat: @ 82280A2
 	.string "Well, how do you like that? I lost!\n"

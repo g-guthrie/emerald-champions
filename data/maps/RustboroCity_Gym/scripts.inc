@@ -28,7 +28,7 @@ RustboroCity_Gym_EventScript_RoxanneDefeated:: @ 8212F66
 	end
 
 RustboroCity_Gym_EventScript_GiveRockTomb:: @ 8212FA4
-	giveitem ITEM_TM39_ROCK_TOMB
+	giveitem ITEM_EXPERT_BELT
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM39
@@ -37,14 +37,8 @@ RustboroCity_Gym_EventScript_GiveRockTomb:: @ 8212FA4
 	end
 
 RustboroCity_Gym_EventScript_RoxanneRematch::
-	message RustboroCity_Gym_Text_RoxanneChooseFormat
-	waitmessage
-	multichoice 17, 6, MULTI_REMATCH_BATTLE_MODE, 0
-	switch VAR_RESULT
-	case 0, RustboroCity_Gym_EventScript_SetSingles
-	case 1, RustboroCity_Gym_EventScript_SetDoubles
-	case 2, RustboroCity_Gym_EventScript_Exit
-	case 127, RustboroCity_Gym_EventScript_Exit
+	trainerbattle_no_intro TRAINER_ROXANNE_5, RustboroCity_Gym_Text_RoxanneRematchDefeat
+	setflag FLAG_DAILY_REMATCH_ROXANNE
 	releaseall
 	end
 
@@ -398,7 +392,9 @@ RustboroCity_Gym_Text_RoxanneIntro: @ 821362A
 	.string "apply what I learned at the Pokémon\l"
 	.string "Trainer's School in battle.\p"
 	.string "Would you kindly demonstrate how you\n"
-	.string "battle, and with which Pokémon?$"
+	.string "battle, and with which Pokémon?\p"
+	.string "This examination has two answers at\n"
+	.string "once: pressure and protection.$"
 
 RustboroCity_Gym_Text_RoxanneDefeat: @ 821370B
 	.string "So…\n"
@@ -423,14 +419,10 @@ RustboroCity_Gym_Text_StoneBadgeInfoTakeThis: @ 8213816
 	.string "Please take this with you, too.$"
 
 RustboroCity_Gym_Text_ExplainRockTomb: @ 82138B1
-	.string "That Technical Machine, TM39,\n"
-	.string "contains Rock Tomb.\p"
-	.string "It not only inflicts damage by dropping\n"
-	.string "rocks, it also lowers Speed.\p"
-	.string "If you use a TM, it instantly teaches\n"
-	.string "the move to a Pokémon.\p"
-	.string "You can use a TM as many times as you\n"
-	.string "want, so please try it out!$"
+	.string "That Expert Belt strengthens moves\n"
+	.string "when they strike a foe's weakness.\p"
+	.string "Use your knowledge of type matchups\n"
+	.string "to get the most from it!$"
 
 RustboroCity_Gym_Text_RoxannePostBattle: @ 82139A7
 	.string "Since you are so strong, you should\n"

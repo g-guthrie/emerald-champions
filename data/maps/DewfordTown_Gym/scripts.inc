@@ -181,7 +181,7 @@ DewfordTown_Gym_EventScript_BrawlyDefeated:: @ 81FC7F7
 	end
 
 DewfordTown_Gym_EventScript_GiveBulkUp:: @ 81FC855
-	giveitem ITEM_TM08_BULK_UP
+	giveitem ITEM_FLAME_ORB
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_BagIsFull
 	msgbox DewfordTown_Gym_Text_ExplainBulkUp, MSGBOX_DEFAULT
@@ -189,7 +189,7 @@ DewfordTown_Gym_EventScript_GiveBulkUp:: @ 81FC855
 	return
 
 DewfordTown_Gym_EventScript_GiveBulkUp2: @ 81FC878
-	giveitem ITEM_TM08_BULK_UP
+	giveitem ITEM_FLAME_ORB
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox DewfordTown_Gym_Text_ExplainBulkUp, MSGBOX_DEFAULT
@@ -198,14 +198,8 @@ DewfordTown_Gym_EventScript_GiveBulkUp2: @ 81FC878
 	end
 
 DewfordTown_Gym_EventScript_BrawlyRematch::
-	message DewfordTown_Gym_Text_BrawlyChooseFormat
-	waitmessage
-	multichoice 17, 6, MULTI_REMATCH_BATTLE_MODE, 0
-	switch VAR_RESULT
-	case 0, DewfordTown_Gym_EventScript_SetSingles
-	case 1, DewfordTown_Gym_EventScript_SetDoubles
-	case 2, DewfordTown_Gym_EventScript_Exit
-	case 127, DewfordTown_Gym_EventScript_Exit
+	trainerbattle_no_intro TRAINER_BRAWLY_5, DewfordTown_Gym_Text_BrawlyRematchDefeat
+	setflag FLAG_DAILY_REMATCH_BRAWLY
 	releaseall
 	end
 
@@ -461,7 +455,9 @@ DewfordTown_Gym_Text_BrawlyIntro: @ 81FCF44
 	.string "of these parts, and I've grown tough\l"
 	.string "in the pitch-black cave!\p"
 	.string "So you wanted to challenge me?\n"
-	.string "Let me see what you're made of!$"
+	.string "Let me see what you're made of!\p"
+	.string "My partners keep momentum like a\n"
+	.string "wave. Let it break, and you're done!$"
 
 DewfordTown_Gym_Text_BrawlyDefeat: @ 81FD008
 	.string "Whoah, wow! You made a much bigger\n"
@@ -484,14 +480,12 @@ DewfordTown_Gym_Text_KnuckleBadgeInfoTakeThis: @ 81FD0A8
 	.string "Pokémon Flash to use it.\p"
 	.string "If your Pokémon can learn Flash, it\n"
 	.string "can always use it outside of battle.\p"
-	.string "If you'd like, use this Technical\n"
-	.string "Machine, too.$"
+	.string "Take this battle item, too.$"
 
 DewfordTown_Gym_Text_ExplainBulkUp: @ 81FD181
-	.string "That TM08 contains Bulk Up.\p"
-	.string "It's a move that raises both Attack\n"
-	.string "and Defense stats.\p"
-	.string "… … … … … …$"
+	.string "A Flame Orb burns its holder in battle.\p"
+	.string "That sounds rough, but some Pokémon can\n"
+	.string "turn that status into real power!$"
 
 DewfordTown_Gym_Text_RegisteredBrawly: @ 81FD1E0
 	.string "Registered Gym Leader Brawly\n"

@@ -366,9 +366,9 @@ static const u8 sCalciumDesc[] = _(
     "Pokémon by 8.");
 
 static const u8 sRareCandyDesc[] = _(
-    "Raises the level\n"
-    "of a Pokémon by\n"
-    "one.");
+    "Raises a Pokémon\n"
+    "up to 10 levels.\n"
+    "Stops at the cap.");
 
 static const u8 sPPUpDesc[] = _(
     "Raises the maximum\n"
@@ -3089,6 +3089,61 @@ static const u8 sKingdraniteDesc[] = _(
 static const u8 sFlygoniteDesc[] = _(
     "This stone enables\n"
     "Flygon to Mega\n"
+    "Evolve in battle.");
+
+static const u8 sMeganiumiteDesc[] = _(
+    "This stone enables\n"
+    "Meganium to Mega\n"
+    "Evolve in battle.");
+
+static const u8 sFeraligiteDesc[] = _(
+    "This stone enables\n"
+    "Feraligatr to Mega\n"
+    "Evolve in battle.");
+
+static const u8 sEmboariteDesc[] = _(
+    "This stone enables\n"
+    "Emboar to Mega\n"
+    "Evolve in battle.");
+
+static const u8 sRaichuniteXDesc[] = _(
+    "This stone enables\n"
+    "Raichu to Mega\n"
+    "Evolve into X form.");
+
+static const u8 sRaichuniteYDesc[] = _(
+    "This stone enables\n"
+    "Raichu to Mega\n"
+    "Evolve into Y form.");
+
+static const u8 sDragoniniteDesc[] = _(
+    "This stone enables\n"
+    "Dragonite to Mega\n"
+    "Evolve in battle.");
+
+static const u8 sExcadriteDesc[] = _(
+    "This stone enables\n"
+    "Excadrill to Mega\n"
+    "Evolve in battle.");
+
+static const u8 sMalamariteDesc[] = _(
+    "This stone enables\n"
+    "Malamar to Mega\n"
+    "Evolve in battle.");
+
+static const u8 sChandeluriteDesc[] = _(
+    "This stone enables\n"
+    "Chandelure to Mega\n"
+    "Evolve in battle.");
+
+static const u8 sHawluchaniteDesc[] = _(
+    "This stone enables\n"
+    "Hawlucha to Mega\n"
+    "Evolve in battle.");
+
+static const u8 sGreninjiteDesc[] = _(
+    "This stone enables\n"
+    "Greninja to Mega\n"
     "Evolve in battle.");
 
 static const u8 sCameruptiteDesc[] = _(

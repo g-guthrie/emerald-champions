@@ -122,7 +122,7 @@ MauvilleCity_Gym_EventScript_WattsonDefeated:: @ 820DF2B
 	end
 
 MauvilleCity_Gym_EventScript_GiveVoltSwitch2:: @ 820DF8D
-	giveitem ITEM_TM72_VOLT_SWITCH
+	giveitem ITEM_CELL_BATTERY
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox MauvilleCity_Gym_Text_ExplainVoltSwitch, MSGBOX_DEFAULT
@@ -131,7 +131,7 @@ MauvilleCity_Gym_EventScript_GiveVoltSwitch2:: @ 820DF8D
 	end
 
 MauvilleCity_Gym_EventScript_GiveVoltSwitch:: @ 820DFB1
-	giveitem ITEM_TM72_VOLT_SWITCH
+	giveitem ITEM_CELL_BATTERY
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_BagIsFull
 	msgbox MauvilleCity_Gym_Text_ExplainVoltSwitch, MSGBOX_DEFAULT
@@ -144,14 +144,8 @@ MauvilleCity_Gym_EventScript_CompletedNewMauville:: @ 820DFD4
 	end
 
 MauvilleCity_Gym_EventScript_WattsonRematch::
-	message MauvilleCity_Gym_Text_WattsonChooseFormat
-	waitmessage
-	multichoice 17, 6, MULTI_REMATCH_BATTLE_MODE, 0
-	switch VAR_RESULT
-	case 0, MauvilleCity_Gym_EventScript_SetSingles
-	case 1, MauvilleCity_Gym_EventScript_SetDoubles
-	case 2, MauvilleCity_Gym_EventScript_Exit
-	case 127, MauvilleCity_Gym_EventScript_Exit
+	trainerbattle_no_intro TRAINER_WATTSON_5, MauvilleCity_Gym_Text_WattsonRematchDefeat
+	setflag FLAG_DAILY_REMATCH_WATTSON
 	releaseall
 	end
 
@@ -419,7 +413,9 @@ MauvilleCity_Gym_Text_WattsonIntro: @ 820E602
 	.string "Wahahahah!\n"
 	.string "Now, that is amusing!\p"
 	.string "Then, I, Wattson, the Leader of\n"
-	.string "Mauville Gym, shall electrify you!$"
+	.string "Mauville Gym, shall electrify you!\p"
+	.string "My current runs across the whole\n"
+	.string "field! Wahahahah!$"
 
 MauvilleCity_Gym_Text_WattsonDefeat: @ 820E734
 	.string "Wahahahah!\n"

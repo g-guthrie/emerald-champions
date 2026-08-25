@@ -17,5 +17,6 @@
 #define P_UPDATED_ABILITIES     GEN_8 // Since Gen 6, certain Pokémon have their abilities changed. Requires BATTLE_ENGINE for Gen4+ abilities.
 #define P_UPDATED_EGG_GROUPS    GEN_8 // Since Gen 8, certain Pokémon have gained new egg groups.
 #define P_SHEDINJA_BALL         GEN_8 // Since Gen 4, Shedinja requires a Poké Ball for its evolution. In Gen 3, Shedinja inherits Nincada's Ball.
+#define P_NIDORAN_M_DITTO_BREED GEN_8 // Since Gen 5, Nidoran male and Volbeat can produce female counterparts when bred with Ditto.
 
 #endif // GUARD_CONSTANTS_POKEMON_CONFIG_H

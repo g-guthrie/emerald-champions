@@ -6136,6 +6136,18 @@ const struct MonCoords gMonFrontPicCoords[] =
         .size = 0x88,
         .y_offset = 0,
     },
+    // Champions Megas
+    [SPECIES_MEGANIUM_MEGA] = {.size = 0x88, .y_offset = 0},
+    [SPECIES_FERALIGATR_MEGA] = {.size = 0x88, .y_offset = 0},
+    [SPECIES_EMBOAR_MEGA] = {.size = 0x88, .y_offset = 0},
+    [SPECIES_RAICHU_MEGA_X] = {.size = 0x88, .y_offset = 3},
+    [SPECIES_RAICHU_MEGA_Y] = {.size = 0x88, .y_offset = 4},
+    [SPECIES_DRAGONITE_MEGA] = {.size = 0x88, .y_offset = 1},
+    [SPECIES_EXCADRILL_MEGA] = {.size = 0x88, .y_offset = 0},
+    [SPECIES_MALAMAR_MEGA] = {.size = 0x88, .y_offset = 0},
+    [SPECIES_CHANDELURE_MEGA] = {.size = 0x88, .y_offset = 0},
+    [SPECIES_HAWLUCHA_MEGA] = {.size = 0x88, .y_offset = 2},
+    [SPECIES_GRENINJA_MEGA] = {.size = 0x88, .y_offset = 0},
     // Egg
     [SPECIES_EGG] =
     {

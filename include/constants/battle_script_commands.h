@@ -209,6 +209,9 @@
 #define VARIOUS_CUT_1_3_HP_RAISE_STATS          136
 #define VARIOUS_TRY_END_NEUTRALIZING_GAS        137
 #define VARIOUS_TRY_ACTIVATE_RAMPAGE            138
+#define VARIOUS_SWAP_SIDE_STATUSES              139
+#define VARIOUS_CHECK_TEATIME_TARGETS            140
+#define VARIOUS_JUMP_IF_SHELL_TRAP               141
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0

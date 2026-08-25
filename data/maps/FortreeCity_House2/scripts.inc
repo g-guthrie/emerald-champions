@@ -19,7 +19,7 @@ FortreeCity_House2_EventScript_HiddenPowerGiver:: @ 82177CB
 	switch VAR_RESULT
 	case 0, FortreeCity_House2_EventScript_WrongGuess
 	msgbox FortreeCity_House2_Text_YourHiddenPowerHasAwoken, MSGBOX_DEFAULT
-	giveitem ITEM_TM10_HIDDEN_POWER
+	giveitem ITEM_WIDE_LENS
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM10
@@ -45,14 +45,13 @@ FortreeCity_House2_EventScript_WrongGuess:: @ 8217878
 FortreeCity_House2_EventScript_SleepTalkTM::
 	lock
 	faceplayer
-	checkitem ITEM_TM49_SLEEP_TALK, 1
-	compare VAR_RESULT, 1
-	goto_if_eq FortreeCity_House2_EventScript_ReceivedTM49
+	goto_if_set FLAG_VERDANT_GIFT_SLEEP_TALK, FortreeCity_House2_EventScript_ReceivedTM49
 	msgbox FortreeCity_House2_Text_WantSleepTalk, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq FortreeCity_House2_EventScript_SleepTalkDeclined
 	msgbox FortreeCity_Text_GiveTM49, MSGBOX_DEFAULT
-	giveitem ITEM_TM49_SLEEP_TALK
+	giveitem ITEM_SAFETY_GOGGLES
+	setflag FLAG_VERDANT_GIFT_SLEEP_TALK
 	msgbox FortreeCity_Text_HaveTM49, MSGBOX_DEFAULT
 	release
 	end
@@ -131,4 +130,3 @@ FortreeCity_House2_Text_ExplainHiddenPower: @ 8217A91
 FortreeCity_House2_Text_YouGuessedWrong: @ 8217AC7
 	.string "No, too bad.\n"
 	.string "You guessed wrong.$"
-

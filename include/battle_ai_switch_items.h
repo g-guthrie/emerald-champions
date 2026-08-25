@@ -1,6 +1,8 @@
 #ifndef GUARD_BATTLE_AI_SWITCH_ITEMS_H
 #define GUARD_BATTLE_AI_SWITCH_ITEMS_H
 
+struct Pokemon;
+
 enum
 {
     AI_ITEM_FULL_RESTORE = 1,
@@ -33,6 +35,7 @@ enum {
 
 void GetAIPartyIndexes(u32 battlerId, s32 *firstId, s32 *lastId);
 void AI_TrySwitchOrUseItem(void);
+u32 AI_CalcPartyMonHazardDamage(u8 battlerId, struct Pokemon *mon);
 u8 GetMostSuitableMonToSwitchInto(void);
 bool32 ShouldSwitch(void);
 

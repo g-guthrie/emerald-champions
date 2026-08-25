@@ -50,11 +50,8 @@ EverGrandeCity_ChampionsRoom_EventScript_Wallace:: @ 8228A45
 	end
 
 EverGrandeCity_WallacesRoom_EventScript_WallaceRematch::
-	switch VAR_ELITE_4_MODE
-	case 0, EverGrandeCity_WallacesRoom_EventScript_WallaceSingles
-	case 1, EverGrandeCity_WallacesRoom_EventScript_WallaceSinglesLegends
-	case 2, EverGrandeCity_WallacesRoom_EventScript_WallaceDoubles
-	case 3, EverGrandeCity_WallacesRoom_EventScript_WallaceDoublesLegends
+	trainerbattle_no_intro TRAINER_WALLACE_DOUBLES_LEGENDS, EverGrandeCity_ChampionsRoom_Text_Defeat
+	goto EverGrandeCity_ChampionsRoom_EventScript_Defeated
 	end
 
 EverGrandeCity_WallacesRoom_EventScript_WallaceSingles::
@@ -279,6 +276,8 @@ EverGrandeCity_ChampionsRoom_Text_IntroSpeech: @ 8228C4C
 	.string "Now!\p"
 	.string "Who can most elegantly dance with\n"
 	.string "their Pokémon in Hoenn?\p"
+	.string "The entire field is my stage. Rain,\n"
+	.string "wind, and steel will move as one.\p"
 	.string "Show me right here and now!$"
 
 EverGrandeCity_ChampionsRoom_Text_Defeat: @ 8228EAC
@@ -376,4 +375,3 @@ EverGrandeCity_ChampionsRoom_Text_BrendanCongratulations: @ 82294F5
 	.string "It can't be helped if that's the rule.\p"
 	.string "{PLAYER}, way to go!\n"
 	.string "Congratulations!$"
-

@@ -9,6 +9,7 @@
 #include "battle_setup.h"
 #include "battle_tower.h"
 #include "battle_tv.h"
+#include "battle_util.h"
 #include "bg.h"
 #include "data.h"
 #include "frontier_util.h"
@@ -107,6 +108,7 @@ static void OpponentDoMoveAnimation(void);
 static void SpriteCB_FreeOpponentSprite(struct Sprite *sprite);
 static void Task_StartSendOutAnim(u8 taskId);
 static void EndDrawPartyStatusSummary(void);
+static bool32 TrySimulateMegaEvolutionForAI(struct BattlePokemon *savedBattleMon);
 
 static void (*const sOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
 {
@@ -1573,12 +1575,17 @@ static void OpponentHandleChooseMove(void)
     else
     {
         u8 chosenMoveId;
+        bool32 simulatedMegaEvolution;
+        struct BattlePokemon savedBattleMon;
         struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct*)(&gBattleResources->bufferA[gActiveBattler][4]);
 
         if (gBattleTypeFlags & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_FIRST_BATTLE | BATTLE_TYPE_SAFARI | BATTLE_TYPE_ROAMER))
         {
+            simulatedMegaEvolution = TrySimulateMegaEvolutionForAI(&savedBattleMon);
             BattleAI_SetupAIData(0xF);
             chosenMoveId = BattleAI_ChooseMoveOrAction();
+            if (simulatedMegaEvolution)
+                gBattleMons[gActiveBattler] = savedBattleMon;
 
             switch (chosenMoveId)
             {
@@ -1630,6 +1637,47 @@ static void OpponentHandleChooseMove(void)
             OpponentBufferExecCompleted();
         }
     }
+}
+
+static bool32 TrySimulateMegaEvolutionForAI(struct BattlePokemon *savedBattleMon)
+{
+    u16 megaSpecies;
+    struct Pokemon simulatedMon;
+
+    if (!CanMegaEvolve(gActiveBattler))
+        return FALSE;
+
+    simulatedMon = gEnemyParty[gBattlerPartyIndexes[gActiveBattler]];
+    megaSpecies = GetMegaEvolutionSpecies(gBattleMons[gActiveBattler].species, gBattleMons[gActiveBattler].item);
+    if (megaSpecies == SPECIES_NONE)
+    {
+        megaSpecies = GetWishMegaEvolutionSpecies(gBattleMons[gActiveBattler].species,
+                                                  gBattleMons[gActiveBattler].moves[0],
+                                                  gBattleMons[gActiveBattler].moves[1],
+                                                  gBattleMons[gActiveBattler].moves[2],
+                                                  gBattleMons[gActiveBattler].moves[3]);
+    }
+    if (megaSpecies == SPECIES_NONE)
+        return FALSE;
+
+    *savedBattleMon = gBattleMons[gActiveBattler];
+    SetMonData(&simulatedMon, MON_DATA_SPECIES, &megaSpecies);
+    CalculateMonStats(&simulatedMon);
+
+    gBattleMons[gActiveBattler].species = megaSpecies;
+    gBattleMons[gActiveBattler].level = GetMonData(&simulatedMon, MON_DATA_LEVEL);
+    gBattleMons[gActiveBattler].hp = GetMonData(&simulatedMon, MON_DATA_HP);
+    gBattleMons[gActiveBattler].maxHP = GetMonData(&simulatedMon, MON_DATA_MAX_HP);
+    gBattleMons[gActiveBattler].attack = GetMonData(&simulatedMon, MON_DATA_ATK);
+    gBattleMons[gActiveBattler].defense = GetMonData(&simulatedMon, MON_DATA_DEF);
+    gBattleMons[gActiveBattler].speed = GetMonData(&simulatedMon, MON_DATA_SPEED);
+    gBattleMons[gActiveBattler].spAttack = GetMonData(&simulatedMon, MON_DATA_SPATK);
+    gBattleMons[gActiveBattler].spDefense = GetMonData(&simulatedMon, MON_DATA_SPDEF);
+    gBattleMons[gActiveBattler].ability = GetMonAbility(&simulatedMon);
+    gBattleMons[gActiveBattler].type1 = gBaseStats[megaSpecies].type1;
+    gBattleMons[gActiveBattler].type2 = gBaseStats[megaSpecies].type2;
+
+    return TRUE;
 }
 
 static void OpponentHandleChooseItem(void)

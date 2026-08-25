@@ -11,9 +11,21 @@ GraniteCave_StevensRoom_EventScript_Steven:: @ 822DC7B
 	call Common_EventScript_PlayerHandedOverTheItem
 	setflag FLAG_DELIVERED_STEVEN_LETTER
 	msgbox GraniteCave_StevensRoom_Text_ThankYouTakeThis, MSGBOX_DEFAULT
-	giveitem ITEM_TM47_STEEL_WING
+	giveitem ITEM_WIDE_LENS
 	compare VAR_RESULT, FALSE
 	call_if_eq GraniteCave_StevensRoom_EventScript_BagFull
+	goto_if_set FLAG_SYS_RECEIVED_KEYSTONE, GraniteCave_StevensRoom_EventScript_RegisterSteven
+	msgbox GraniteCave_StevensRoom_Text_MegaBracelet, MSGBOX_DEFAULT
+	giveitem ITEM_MEGA_BRACELET
+	setflag FLAG_SYS_RECEIVED_KEYSTONE
+	msgbox GraniteCave_StevensRoom_Text_StarterMegaStones, MSGBOX_DEFAULT
+	giveitem ITEM_SCEPTILITE
+	waitmessage
+	giveitem ITEM_BLAZIKENITE
+	waitmessage
+	giveitem ITEM_SWAMPERTITE
+	waitmessage
+GraniteCave_StevensRoom_EventScript_RegisterSteven:
 	msgbox GraniteCave_StevensRoom_Text_CouldBecomeChampionLetsRegister, MSGBOX_DEFAULT
 	closemessage
 	delay 30
@@ -98,9 +110,23 @@ GraniteCave_StevensRoom_Text_ThankYouTakeThis: @ 822DDBD
 	.string "You went through all this trouble to\n"
 	.string "deliver that. I need to thank you.\p"
 	.string "Let me see…\n"
-	.string "I'll give you this TM.\p"
-	.string "It contains my favorite move,\n"
-	.string "Steel Wing.$"
+	.string "I'll give you this Wide Lens.\p"
+	.string "It makes the holder's moves more\n"
+	.string "accurate.$"
+
+GraniteCave_StevensRoom_Text_MegaBracelet:
+	.string "Steven: There's something else.\p"
+	.string "Rare stones react to the bond between\n"
+	.string "a Trainer and their Pokémon.\p"
+	.string "This Mega Bracelet lets you draw out\n"
+	.string "that power during battle.$"
+
+GraniteCave_StevensRoom_Text_StarterMegaStones:
+	.string "Let a compatible Pokémon hold its Mega\n"
+	.string "Stone, then press START before choosing\l"
+	.string "a move.\p"
+	.string "These three stones belong with Hoenn's\n"
+	.string "partner Pokémon. Use them well.$"
 
 GraniteCave_StevensRoom_Text_CouldBecomeChampionLetsRegister: @ 822DE6B
 	.string "Steven: Your Pokémon appear quite\n"
@@ -123,4 +149,3 @@ GraniteCave_StevensRoom_Text_IveGotToHurryAlong: @ 822DF8C
 GraniteCave_StevensRoom_Text_OhBagIsFull: @ 822DFAA
 	.string "Oh, your Bag is full…\n"
 	.string "That's too bad, then.$"
-

@@ -6604,6 +6604,28 @@ extern const u8 gMonFootprint_Diancie[];
 extern const u8 gMonFootprint_Hoopa[];
 extern const u8 gMonFootprint_Volcanion[];
 
+// Champions Mega battle graphics
+#define DECLARE_CHAMPIONS_MEGA_GFX(name) \
+    extern const u32 gMonFrontPic_##name[]; \
+    extern const u32 gMonBackPic_##name[]; \
+    extern const u32 gMonPalette_##name[]; \
+    extern const u32 gMonShinyPalette_##name[]; \
+    extern const u8 gMonIcon_##name[]
+
+DECLARE_CHAMPIONS_MEGA_GFX(MeganiumMega);
+DECLARE_CHAMPIONS_MEGA_GFX(FeraligatrMega);
+DECLARE_CHAMPIONS_MEGA_GFX(EmboarMega);
+DECLARE_CHAMPIONS_MEGA_GFX(RaichuMegaX);
+DECLARE_CHAMPIONS_MEGA_GFX(RaichuMegaY);
+DECLARE_CHAMPIONS_MEGA_GFX(DragoniteMega);
+DECLARE_CHAMPIONS_MEGA_GFX(ExcadrillMega);
+DECLARE_CHAMPIONS_MEGA_GFX(MalamarMega);
+DECLARE_CHAMPIONS_MEGA_GFX(ChandelureMega);
+DECLARE_CHAMPIONS_MEGA_GFX(HawluchaMega);
+DECLARE_CHAMPIONS_MEGA_GFX(GreninjaMega);
+
+#undef DECLARE_CHAMPIONS_MEGA_GFX
+
 // trainer sprites
 extern const u32 gTrainerFrontPic_Hiker[];
 extern const u32 gTrainerFrontPic_AquaGruntM[];
@@ -8079,6 +8101,28 @@ extern const u32 gItemIcon_Kingdranite[];
 extern const u32 gItemIconPalette_Kingdranite[];
 extern const u32 gItemIcon_Flygonite[];
 extern const u32 gItemIconPalette_Flygonite[];
+extern const u32 gItemIcon_Meganiumite[];
+extern const u32 gItemIconPalette_Meganiumite[];
+extern const u32 gItemIcon_Feraligite[];
+extern const u32 gItemIconPalette_Feraligite[];
+extern const u32 gItemIcon_Emboarite[];
+extern const u32 gItemIconPalette_Emboarite[];
+extern const u32 gItemIcon_RaichuniteX[];
+extern const u32 gItemIconPalette_RaichuniteX[];
+extern const u32 gItemIcon_RaichuniteY[];
+extern const u32 gItemIconPalette_RaichuniteY[];
+extern const u32 gItemIcon_Dragoninite[];
+extern const u32 gItemIconPalette_Dragoninite[];
+extern const u32 gItemIcon_Excadrite[];
+extern const u32 gItemIconPalette_Excadrite[];
+extern const u32 gItemIcon_Malamarite[];
+extern const u32 gItemIconPalette_Malamarite[];
+extern const u32 gItemIcon_Chandelurite[];
+extern const u32 gItemIconPalette_Chandelurite[];
+extern const u32 gItemIcon_Hawluchanite[];
+extern const u32 gItemIconPalette_Hawluchanite[];
+extern const u32 gItemIcon_Greninjite[];
+extern const u32 gItemIconPalette_Greninjite[];
 extern const u32 gItemIcon_Cameruptite[];
 extern const u32 gItemIconPalette_Cameruptite[];
 extern const u32 gItemIcon_Lopunnite[];

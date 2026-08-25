@@ -286,11 +286,10 @@ MossdeepCity_EventScript_ScottExitEast:: @ 81E4CC2
 MossdeepCity_EventScript_AvalancheTM::
 	lock
 	faceplayer
-	checkitem ITEM_TM96_AVALANCHE, 1
-	compare VAR_RESULT, 1
-	goto_if_eq MossdeepCity_EventScript_ReceivedTM96
+	goto_if_set FLAG_VERDANT_GIFT_AVALANCHE, MossdeepCity_EventScript_ReceivedTM96
 	msgbox MossdeepCity_Text_AvalancheNonsense, MSGBOX_DEFAULT
-	giveitem ITEM_TM96_AVALANCHE
+	giveitem ITEM_SNOWBALL
+	setflag FLAG_VERDANT_GIFT_AVALANCHE
 	msgbox MossdeepCity_Text_HaveTM96, MSGBOX_DEFAULT
 	release
 	end

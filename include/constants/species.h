@@ -1349,8 +1349,19 @@
 #define SPECIES_LAPRAS_MEGA                 FORMS_START + 313
 #define SPECIES_FLYGON_MEGA                 FORMS_START + 314
 #define SPECIES_KINGDRA_MEGA                FORMS_START + 315
+#define SPECIES_MEGANIUM_MEGA               FORMS_START + 316
+#define SPECIES_FERALIGATR_MEGA              FORMS_START + 317
+#define SPECIES_EMBOAR_MEGA                  FORMS_START + 318
+#define SPECIES_RAICHU_MEGA_X                FORMS_START + 319
+#define SPECIES_RAICHU_MEGA_Y                FORMS_START + 320
+#define SPECIES_DRAGONITE_MEGA               FORMS_START + 321
+#define SPECIES_EXCADRILL_MEGA               FORMS_START + 322
+#define SPECIES_MALAMAR_MEGA                 FORMS_START + 323
+#define SPECIES_CHANDELURE_MEGA              FORMS_START + 324
+#define SPECIES_HAWLUCHA_MEGA                FORMS_START + 325
+#define SPECIES_GRENINJA_MEGA                FORMS_START + 326
 
-#define SPECIES_EGG SPECIES_KINGDRA_MEGA + 1
+#define SPECIES_EGG SPECIES_GRENINJA_MEGA + 1
 #define NUM_SPECIES SPECIES_EGG
 
 // National Dex Index Defines

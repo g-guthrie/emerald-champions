@@ -203,7 +203,7 @@ SlateportCity_BattleTentLobby_EventScript_TormentGiver:: @ 8208A3D
 	faceplayer
 	goto_if_set FLAG_RECEIVED_TM41, SlateportCity_BattleTentLobby_EventScript_ReceivedTorment
 	msgbox SlateportCity_BattleTentLobby_Text_CouldntFindMonForMe, MSGBOX_DEFAULT
-	giveitem ITEM_TM41_TORMENT
+	giveitem ITEM_RED_CARD
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM41
@@ -309,4 +309,3 @@ SlateportCity_BattleTentLobby_Text_BattleEvenWithoutToughMons: @ 8208DA6
 SlateportCity_BattleTentLobby_Text_NiceIfMoreSelection: @ 8208DF1
 	.string "Wouldn't it be nice if they had more of\n"
 	.string "a selection?$"
-

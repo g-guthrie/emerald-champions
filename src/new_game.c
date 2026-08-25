@@ -98,6 +98,8 @@ static void SetDefaultOptions(void)
     gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SET;
     gSaveBlock2Ptr->optionsBattleSceneOff = FALSE;
     gSaveBlock2Ptr->regionMapZoom = FALSE;
+    gSaveBlock2Ptr->gameDifficulty = DIFFICULTY_CHALLENGE;
+    gSaveBlock2Ptr->levelCaps = LEVEL_CAPS_STRICT;
 }
 
 static void ClearPokedexFlags(void)

@@ -102,7 +102,7 @@ MossdeepCity_Gym_EventScript_TateAndLizaDefeated:: @ 82208D1
 	end
 
 MossdeepCity_Gym_EventScript_GiveCalmMind2:: @ 8220937
-	giveitem ITEM_TM04_CALM_MIND
+	giveitem ITEM_LIGHT_CLAY
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox MossdeepCity_Gym_Text_ExplainCalmMind, MSGBOX_DEFAULT
@@ -111,7 +111,7 @@ MossdeepCity_Gym_EventScript_GiveCalmMind2:: @ 8220937
 	end
 
 MossdeepCity_Gym_EventScript_GiveCalmMind:: @ 822095B
-	giveitem ITEM_TM04_CALM_MIND
+	giveitem ITEM_LIGHT_CLAY
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_BagIsFull
 	msgbox MossdeepCity_Gym_Text_ExplainCalmMind, MSGBOX_DEFAULT
@@ -119,9 +119,6 @@ MossdeepCity_Gym_EventScript_GiveCalmMind:: @ 822095B
 	return
 
 MossdeepCity_Gym_EventScript_TateAndLizaRematch::
-	msgbox MossdeepCity_Gym_Text_TateAndLizaAllowLegends, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq MossdeepCity_Gym_EventScript_TateAndLizaDoublesRematch
 	trainerbattle_no_intro TRAINER_TATE_AND_LIZA_3, MossdeepCity_Gym_Text_TateAndLizaRematchDefeat
 	setflag FLAG_DAILY_REMATCH_TATE_AND_LIZA
 	clearflag FLAG_SYS_INVERSE_BATTLE
@@ -639,13 +636,10 @@ MossdeepCity_Gym_Text_TakeThis:
 	.string "Liza: You should also take this, too.$"
 
 MossdeepCity_Gym_Text_ExplainCalmMind: @ 8221A40
-	.string "Tate: That TM04 contains…\n"
-	.string "Liza: Calm Mind!\p"
-	.string "Tate: It raises Sp. Atk and…\n"
-	.string "Liza: It raises Sp. Def!\p"
-	.string "Tate: It's a move that's perfect…\n"
-	.string "Liza: For Psychic Pokémon!\p"
-	.string "… … … … … …$"
+	.string "Tate: That Light Clay makes…\n"
+	.string "Liza: Reflect and Light Screen last!\p"
+	.string "Tate: It's perfect for a team…\n"
+	.string "Liza: That plans ahead!$"
 
 MossdeepCity_Gym_Text_RegisteredTateAndLiza: @ 8221AEA
 	.string "Registered Gym Leaders Tate & Liza\n"

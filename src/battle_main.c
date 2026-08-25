@@ -4857,6 +4857,15 @@ static void CheckFocusPunch_ClearVarsBeforeTurnStarts(void)
                 BattleScriptExecute(BattleScript_FocusPunchSetUp);
                 return;
             }
+            else if (gChosenActionByBattler[gActiveBattler] == B_ACTION_USE_MOVE
+                && gChosenMoveByBattler[gActiveBattler] == MOVE_SHELL_TRAP
+                && !(gBattleMons[gActiveBattler].status1 & STATUS1_SLEEP)
+                && !(gDisableStructs[gBattlerAttacker].truantCounter)
+                && !(gProtectStructs[gActiveBattler].noValidMoves))
+            {
+                BattleScriptExecute(BattleScript_ShellTrapSetUp);
+                return;
+            }
         }
     }
 
@@ -5141,10 +5150,16 @@ static void HandleEndTurn_FinishBattle(void)
         sub_8186444();
         BeginFastPaletteFade(3);
         FadeOutMapMusic(5);
-        #if B_TRAINERS_KNOCK_OFF_ITEMS
-        if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-            TryRestoreStolenItems();
-        #endif
+        if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK
+                                | BATTLE_TYPE_RECORDED_LINK
+                                | BATTLE_TYPE_FIRST_BATTLE
+                                | BATTLE_TYPE_SAFARI
+                                | BATTLE_TYPE_FRONTIER
+                                | BATTLE_TYPE_EREADER_TRAINER
+                                | BATTLE_TYPE_SECRET_BASE
+                                | BATTLE_TYPE_TRAINER_HILL
+                                | BATTLE_TYPE_WALLY_TUTORIAL)))
+            RestorePlayerHeldItemsAfterBattle();
         for (i = 0; i < PARTY_SIZE; i++)
         {
             UndoMegaEvolution(i);
@@ -5302,7 +5317,11 @@ void SetTypeBeforeUsingMove(u16 move, u8 battlerAtk)
 
     if (gBattleMoves[move].effect == EFFECT_WEATHER_BALL)
     {
-        if (WEATHER_HAS_EFFECT)
+        if (GetBattlerAbility(battlerAtk) == ABILITY_MEGA_SOL)
+        {
+            gBattleStruct->dynamicMoveType = TYPE_FIRE | 0x80;
+        }
+        else if (WEATHER_HAS_EFFECT)
         {
             if (gBattleWeather & WEATHER_RAIN_ANY && holdEffect != HOLD_EFFECT_UTILITY_UMBRELLA)
                 gBattleStruct->dynamicMoveType = TYPE_WATER | 0x80;
@@ -5382,6 +5401,7 @@ void SetTypeBeforeUsingMove(u16 move, u8 battlerAtk)
                  || (attackerAbility == ABILITY_REFRIGERATE && (ateType = TYPE_ICE))
                  || (attackerAbility == ABILITY_AERILATE && (ateType = TYPE_FLYING))
                  || ((attackerAbility == ABILITY_GALVANIZE) && (ateType = TYPE_ELECTRIC))
+                 || (attackerAbility == ABILITY_DRAGONIZE && (ateType = TYPE_DRAGON))
                 )
              )
     {

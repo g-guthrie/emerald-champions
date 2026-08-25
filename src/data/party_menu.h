@@ -681,6 +681,7 @@ static const u16 sUnusedData[] =
 enum
 {
     MENU_SUMMARY,
+    MENU_ABILITY,
     MENU_SWITCH,
     MENU_CANCEL1,
     MENU_ITEM,
@@ -724,6 +725,8 @@ enum
 // What a weird choice of table termination;
 #define FIELD_MOVE_TERMINATOR MOVE_SWORDS_DANCE
 
+static const u8 sText_Ability[] = _("Ability");
+
 struct
 {
     const u8 *text;
@@ -731,6 +734,7 @@ struct
 } static const sCursorOptions[] =
 {
     [MENU_SUMMARY] = {gText_Summary5, CursorCb_Summary},
+    [MENU_ABILITY] = {sText_Ability, CursorCb_Ability},
     [MENU_SWITCH] = {gText_Switch2, CursorCb_Switch},
     [MENU_CANCEL1] = {gText_Cancel2, CursorCb_Cancel1},
     [MENU_ITEM] = {gText_Item, CursorCb_Item},

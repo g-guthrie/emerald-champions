@@ -6,7 +6,7 @@ SootopolisCity_House1_EventScript_BrickBreakBlackBelt:: @ 822694D
 	faceplayer
 	goto_if_set FLAG_RECEIVED_TM75, SootopolisCity_House1_EventScript_ReceivedBrickBreak
 	msgbox SootopolisCity_House1_Text_DevelopedThisTM, MSGBOX_DEFAULT
-	giveitem ITEM_TM75_SWORDS_DANCE
+	giveitem ITEM_SCOPE_LENS
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM75
@@ -41,4 +41,3 @@ SootopolisCity_House1_Text_ExplainBrickBreak: @ 8226A13
 
 SootopolisCity_House1_Text_Kecleon: @ 8226A60
 	.string "Kecleon: Puu puhyaah.$"
-

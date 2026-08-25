@@ -369,7 +369,7 @@ Route110_TrickHouseEntrance_EventScript_GiveReward:: @ 8269E8F
 	end
 
 Route110_TrickHouseEntrance_EventScript_GivePuzzle1Reward:: @ 8269EEF
-	giveitem ITEM_TM12_TAUNT
+	giveitem ITEM_MENTAL_HERB
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_GotReward
 	compare VAR_RESULT, FALSE
@@ -389,7 +389,7 @@ Route110_TrickHouseEntrance_EventScript_GivePuzzle2Reward:: @ 8269F1B
 	end
 
 Route110_TrickHouseEntrance_EventScript_GivePuzzle3Reward:: @ 8269F47
-	giveitem ITEM_TM92_TRICK_ROOM
+	giveitem ITEM_ROOM_SERVICE
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_GotReward
 	compare VAR_RESULT, FALSE
@@ -399,7 +399,7 @@ Route110_TrickHouseEntrance_EventScript_GivePuzzle3Reward:: @ 8269F47
 	end
 
 Route110_TrickHouseEntrance_EventScript_GivePuzzle4Reward:: @ 8269F73
-	giveitem ITEM_ROCKY_HELMET
+	giveitem ITEM_ROOM_SERVICE
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_GotReward
 	compare VAR_RESULT, FALSE

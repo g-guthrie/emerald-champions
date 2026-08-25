@@ -93,7 +93,7 @@ LavaridgeTown_Gym_1F_EventScript_FlanneryDefeated:: @ 81FE7C1
 	end
 
 LavaridgeTown_Gym_1F_EventScript_GiveOverheat2:: @ 81FE81D
-	giveitem ITEM_TM50_OVERHEAT
+	giveitem ITEM_FLAME_ORB
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox LavaridgeTown_Gym_1F_Text_ExplainOverheat, MSGBOX_DEFAULT
@@ -102,7 +102,7 @@ LavaridgeTown_Gym_1F_EventScript_GiveOverheat2:: @ 81FE81D
 	end
 
 LavaridgeTown_Gym_1F_EventScript_GiveOverheat:: @ 81FE841
-	giveitem ITEM_TM50_OVERHEAT
+	giveitem ITEM_FLAME_ORB
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_BagIsFull
 	msgbox LavaridgeTown_Gym_1F_Text_ExplainOverheat, MSGBOX_DEFAULT
@@ -110,14 +110,8 @@ LavaridgeTown_Gym_1F_EventScript_GiveOverheat:: @ 81FE841
 	return
 
 LavaridgeTown_Gym_1F_EventScript_FlanneryRematch::
-	message LavaridgeTown_Gym_1F_Text_FlanneryChooseFormat
-	waitmessage
-	multichoice 17, 6, MULTI_REMATCH_BATTLE_MODE, 0
-	switch VAR_RESULT
-	case 0, LavaridgeTown_Gym_1F_EventScript_SetSingles
-	case 1, LavaridgeTown_Gym_1F_EventScript_SetDoubles
-	case 2, LavaridgeTown_Gym_1F_EventScript_Exit
-	case 127, LavaridgeTown_Gym_1F_EventScript_Exit
+	trainerbattle_no_intro TRAINER_FLANNERY_4, LavaridgeTown_Gym_1F_Text_FlanneryRematchDefeat
+	setflag FLAG_DAILY_REMATCH_FLANNERY
 	releaseall
 	end
 
@@ -396,7 +390,9 @@ LavaridgeTown_Gym_1F_Text_FlanneryIntro: @ 81FF0DC
 	.string "I have been Leader only a short time!\p"
 	.string "With skills inherited from my grand-\n"
 	.string "father, I shall, uh…demonstrate the\l"
-	.string "hot moves we have honed on this land!$"
+	.string "hot moves we have honed on this land!\p"
+	.string "Fast sun or slow fire--I can burn you\n"
+	.string "at either pace!$"
 
 LavaridgeTown_Gym_1F_Text_FlanneryDefeat: @ 81FF233
 	.string "Oh…\n"

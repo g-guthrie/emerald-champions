@@ -10,6 +10,7 @@
 #include "strings.h"
 #include "load_save.h"
 #include "item_use.h"
+#include "pokemon.h"
 #include "battle_pyramid.h"
 #include "battle_pyramid_bag.h"
 #include "constants/items.h"
@@ -20,6 +21,131 @@ extern u16 gUnknown_0203CF30[];
 // this file's functions
 static bool8 CheckPyramidBagHasItem(u16 itemId, u16 count);
 static bool8 CheckPyramidBagHasSpace(u16 itemId, u16 count);
+static void UnlockBattleItem(u16 itemId);
+
+struct BattleItemUnlock
+{
+    u16 itemId;
+    u8 minimumBadges;
+};
+
+#define DISCOVERY_ONLY 0xFF
+
+static const struct BattleItemUnlock sBattleItemUnlocks[] =
+{
+    {ITEM_MENTAL_HERB,      0},
+    {ITEM_RED_CARD,         0},
+    {ITEM_CELL_BATTERY,     0},
+    {ITEM_EJECT_BUTTON,     1},
+    {ITEM_ABSORB_BULB,      1},
+    {ITEM_WHITE_HERB,       2},
+    {ITEM_SNOWBALL,         2},
+    {ITEM_LUMINOUS_MOSS,    3},
+    {ITEM_POWER_HERB,       4},
+    {ITEM_AIR_BALLOON,      4},
+    {ITEM_ELECTRIC_SEED,    5},
+    {ITEM_GRASSY_SEED,      5},
+    {ITEM_MISTY_SEED,       5},
+    {ITEM_PSYCHIC_SEED,     5},
+    {ITEM_WEAKNESS_POLICY,  6},
+    {ITEM_FOCUS_SASH,       7},
+    {ITEM_BRIGHT_POWDER,    DISCOVERY_ONLY},
+    {ITEM_QUICK_CLAW,       DISCOVERY_ONLY},
+    {ITEM_CHOICE_BAND,      DISCOVERY_ONLY},
+    {ITEM_KINGS_ROCK,       DISCOVERY_ONLY},
+    {ITEM_FOCUS_BAND,       DISCOVERY_ONLY},
+    {ITEM_SCOPE_LENS,       DISCOVERY_ONLY},
+    {ITEM_LEFTOVERS,        DISCOVERY_ONLY},
+    {ITEM_RAZOR_FANG,       DISCOVERY_ONLY},
+    {ITEM_CHOICE_SCARF,     DISCOVERY_ONLY},
+    {ITEM_CHOICE_SPECS,     DISCOVERY_ONLY},
+    {ITEM_WIDE_LENS,        DISCOVERY_ONLY},
+    {ITEM_ZOOM_LENS,        DISCOVERY_ONLY},
+    {ITEM_METRONOME,        DISCOVERY_ONLY},
+    {ITEM_MUSCLE_BAND,      DISCOVERY_ONLY},
+    {ITEM_WISE_GLASSES,     DISCOVERY_ONLY},
+    {ITEM_EXPERT_BELT,      DISCOVERY_ONLY},
+    {ITEM_LIGHT_CLAY,       DISCOVERY_ONLY},
+    {ITEM_LIFE_ORB,         DISCOVERY_ONLY},
+    {ITEM_TOXIC_ORB,        DISCOVERY_ONLY},
+    {ITEM_FLAME_ORB,        DISCOVERY_ONLY},
+    {ITEM_BLACK_SLUDGE,     DISCOVERY_ONLY},
+    {ITEM_SHED_SHELL,       DISCOVERY_ONLY},
+    {ITEM_EVIOLITE,         DISCOVERY_ONLY},
+    {ITEM_ROCKY_HELMET,     DISCOVERY_ONLY},
+    {ITEM_ASSAULT_VEST,     DISCOVERY_ONLY},
+    {ITEM_SAFETY_GOGGLES,   DISCOVERY_ONLY},
+    {ITEM_ADRENALINE_ORB,   DISCOVERY_ONLY},
+    {ITEM_TERRAIN_EXTENDER, DISCOVERY_ONLY},
+    {ITEM_PROTECTIVE_PADS,  DISCOVERY_ONLY},
+    {ITEM_THROAT_SPRAY,     DISCOVERY_ONLY},
+    {ITEM_EJECT_PACK,       DISCOVERY_ONLY},
+    {ITEM_HEAVY_DUTY_BOOTS, DISCOVERY_ONLY},
+    {ITEM_BLUNDER_POLICY,   DISCOVERY_ONLY},
+    {ITEM_ROOM_SERVICE,     DISCOVERY_ONLY},
+};
+
+static u16 GetBattleItemUnlockFlag(u16 index)
+{
+    if (index <= FLAG_UNUSED_0x2BB - FLAG_UNUSED_0x293)
+        return FLAG_UNUSED_0x293 + index;
+    if (index == 41)
+        return FLAG_UNUSED_0x8E3;
+    return FLAG_UNUSED_0x8EB + index - 42;
+}
+
+static u8 GetBadgeCount(void)
+{
+    u8 i;
+    u8 count = 0;
+
+    for (i = 0; i < NUM_BADGES; i++)
+        if (FlagGet(FLAG_BADGE01_GET + i))
+            count++;
+    return count;
+}
+
+static void UnlockBattleItem(u16 itemId)
+{
+    u16 i;
+
+    for (i = 0; i < ARRAY_COUNT(sBattleItemUnlocks); i++)
+    {
+        if (sBattleItemUnlocks[i].itemId == itemId)
+        {
+            FlagSet(GetBattleItemUnlockFlag(i));
+            return;
+        }
+    }
+}
+
+u16 BuildUnlockedBattleItemList(u16 *items, u16 capacity)
+{
+    u16 i;
+    u16 count = 0;
+    u8 partyIndex;
+    u8 badgeCount = GetBadgeCount();
+
+    for (i = 0; i < ARRAY_COUNT(sBattleItemUnlocks); i++)
+    {
+        if (CheckBagHasItem(sBattleItemUnlocks[i].itemId, 1))
+            FlagSet(GetBattleItemUnlockFlag(i));
+        for (partyIndex = 0; partyIndex < PARTY_SIZE; partyIndex++)
+        {
+            if (GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPECIES) != SPECIES_NONE
+             && GetMonData(&gPlayerParty[partyIndex], MON_DATA_HELD_ITEM) == sBattleItemUnlocks[i].itemId)
+                FlagSet(GetBattleItemUnlockFlag(i));
+        }
+
+        if ((FlagGet(GetBattleItemUnlockFlag(i))
+          || (sBattleItemUnlocks[i].minimumBadges != DISCOVERY_ONLY
+           && badgeCount >= sBattleItemUnlocks[i].minimumBadges))
+         && count + 1 < capacity)
+            items[count++] = sBattleItemUnlocks[i].itemId;
+    }
+    items[count] = ITEM_NONE;
+    return count;
+}
 
 // EWRAM variables
 EWRAM_DATA struct BagPocket gBagPockets[POCKETS_COUNT] = {0};
@@ -294,6 +420,7 @@ bool8 AddBagItem(u16 itemId, u16 count)
                     SetBagItemQuantity(&newItems[i].quantity, ownedCount + count);
                     memcpy(itemPocket->itemSlots, newItems, itemPocket->capacity * sizeof(struct ItemSlot));
                     Free(newItems);
+                    UnlockBattleItem(itemId);
                     return TRUE;
                 }
                 else
@@ -356,6 +483,7 @@ bool8 AddBagItem(u16 itemId, u16 count)
         }
         memcpy(itemPocket->itemSlots, newItems, itemPocket->capacity * sizeof(struct ItemSlot));
         Free(newItems);
+        UnlockBattleItem(itemId);
         return TRUE;
     }
 }

@@ -45,8 +45,9 @@
 static EWRAM_DATA struct MartInfo sMartInfo = {0};
 static EWRAM_DATA struct ShopData *sShopData = NULL;
 static EWRAM_DATA struct ListMenuItem *sListMenuItems = NULL;
-static EWRAM_DATA u8 (*sItemNames)[16] = {0};
+static EWRAM_DATA u8 (*sItemNames)[ITEM_NAME_LENGTH] = {0};
 static EWRAM_DATA u8 sPurchaseHistoryId = 0;
+static EWRAM_DATA u16 sPokemartItemsWithCoreStock[128] = {0};
 EWRAM_DATA struct ItemSlot gMartPurchaseHistory[SMARTSHOPPER_NUM_ITEMS] = {0};
 
 static void Task_ShopMenu(u8 taskId);
@@ -325,6 +326,51 @@ static void SetShopItemsForSale(const u16 *items)
         sMartInfo.itemCount++;
         i++;
     }
+}
+
+static const u16 sCorePokemartStock[] =
+{
+    ITEM_RARE_CANDY,
+    ITEM_LIFE_ORB,
+    ITEM_CHOICE_BAND,
+    ITEM_CHOICE_SPECS,
+    ITEM_CHOICE_SCARF,
+    ITEM_FOCUS_SASH,
+    ITEM_ASSAULT_VEST,
+    ITEM_EVIOLITE,
+    ITEM_LEFTOVERS,
+    ITEM_ROCKY_HELMET,
+    ITEM_HEAVY_DUTY_BOOTS,
+};
+
+static const u16 *BuildPokemartItemsWithCoreStock(const u16 *items)
+{
+    u16 count = 0, i, j;
+    bool8 alreadyStocked;
+
+    while (items[count] != ITEM_NONE && count + ARRAY_COUNT(sCorePokemartStock) + 1 < ARRAY_COUNT(sPokemartItemsWithCoreStock))
+    {
+        sPokemartItemsWithCoreStock[count] = items[count];
+        count++;
+    }
+
+    for (i = 0; i < ARRAY_COUNT(sCorePokemartStock); i++)
+    {
+        alreadyStocked = FALSE;
+        for (j = 0; j < count; j++)
+        {
+            if (sPokemartItemsWithCoreStock[j] == sCorePokemartStock[i])
+            {
+                alreadyStocked = TRUE;
+                break;
+            }
+        }
+        if (!alreadyStocked)
+            sPokemartItemsWithCoreStock[count++] = sCorePokemartStock[i];
+    }
+
+    sPokemartItemsWithCoreStock[count] = ITEM_NONE;
+    return sPokemartItemsWithCoreStock;
 }
 
 static void Task_ShopMenu(u8 taskId)
@@ -1245,7 +1291,7 @@ static void RecordItemPurchase(u8 taskId)
 void CreatePokemartMenu(const u16 *itemsForSale)
 {
     CreateShopMenu(MART_TYPE_NORMAL);
-    SetShopItemsForSale(itemsForSale);
+    SetShopItemsForSale(BuildPokemartItemsWithCoreStock(itemsForSale));
     ClearItemPurchases();
     SetShopMenuCallback(EnableBothScriptContexts);
 }

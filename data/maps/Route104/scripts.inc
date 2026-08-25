@@ -344,7 +344,7 @@ Route104_EventScript_Boy2:: @ 81ED057
 	faceplayer
 	goto_if_set FLAG_RECEIVED_TM09, Route104_EventScript_ReceivedBulletSeed
 	msgbox Route104_Text_LikeFillingMouthWithSeedsTakeThis, MSGBOX_DEFAULT
-	giveitem ITEM_TM09_BULLET_SEED
+	giveitem ITEM_MIRACLE_SEED
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM09
@@ -1051,9 +1051,9 @@ Route104_Text_ImNotATrainer: @ 81ED7A2
 Route104_Text_LikeFillingMouthWithSeedsTakeThis: @ 81ED838
 	.string "I like filling my mouth with seeds,\n"
 	.string "then spitting them out fast!\p"
-	.string "You can have this, so you try it out!\p"
-	.string "Use it on a Pokémon, and it will learn\n"
-	.string "a move for firing seeds rapidly.$"
+	.string "You can have this Miracle Seed!\p"
+	.string "Let a Pokémon hold it and its Grass-type\n"
+	.string "moves will become stronger.$"
 
 Route104_Text_TMsAreOneTimeUse:
 	.string "A word of advice!\p"

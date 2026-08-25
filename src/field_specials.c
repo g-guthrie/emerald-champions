@@ -19,6 +19,7 @@
 #include "field_weather.h"
 #include "graphics.h"
 #include "international_string_util.h"
+#include "item.h"
 #include "item_menu.h"
 #include "item_icon.h"
 #include "link.h"
@@ -38,6 +39,7 @@
 #include "rtc.h"
 #include "script.h"
 #include "script_menu.h"
+#include "shop.h"
 #include "sound.h"
 #include "starter_choose.h"
 #include "string_util.h"
@@ -85,8 +87,30 @@ static EWRAM_DATA u8 sBattlePointsWindowId = 0;
 static EWRAM_DATA u8 sFrontierExchangeCorner_ItemIconWindowId = 0;
 static EWRAM_DATA u8 sPCBoxToSendMon = 0;
 static EWRAM_DATA u32 sBattleTowerMultiBattleTypeFlags = 0;
+static EWRAM_DATA u16 sUnlockedBattleItemMart[52] = {0};
 
 struct ListMenuTemplate gScrollableMultichoice_ListMenuTemplate;
+
+void GiveAllTMs(void)
+{
+    u16 item;
+    u16 added = 0;
+
+    for (item = ITEM_TM01_FOCUS_PUNCH; item <= ITEM_TM100_CURSE; item++)
+    {
+        if (!CheckBagHasItem(item, 1) && AddBagItem(item, 1))
+            added++;
+    }
+
+    gSpecialVar_Result = added;
+}
+
+void OpenUnlockedBattleItemMart(void)
+{
+    BuildUnlockedBattleItemList(sUnlockedBattleItemMart, ARRAY_COUNT(sUnlockedBattleItemMart));
+    CreatePokemartMenu(sUnlockedBattleItemMart);
+    ScriptContext1_Stop();
+}
 
 void TryLoseFansFromPlayTime(void);
 void SetPlayerGotFirstFans(void);
@@ -5354,22 +5378,28 @@ void ChangeChosenMonHiddenPower (void)
 void CheckChosenMonCanGainEVs (void)
 {
     u8 i = 0;
-    u8 increment = gSpecialVar_0x8006;
+    u8 statToChange = gSpecialVar_0x8005;
+    u16 requestedIncrement = gSpecialVar_0x8006;
     u16 sumEVs = 0;
+    u16 statEVs;
+    u16 statSpace;
+    u16 totalSpace;
+    u16 actualIncrement;
 
     for (i = 0; i < NUM_STATS; i++)
     {
         sumEVs = sumEVs + GetMonData(&gPlayerParty[gSpecialVar_0x8004], (MON_DATA_HP_EV + i), NULL);
     }
 
-    if ((sumEVs + increment) > 510 )
-    {
-        gSpecialVar_Result = 0;
-    }
-    else
-    {
-        gSpecialVar_Result = 1;
-    }
+    statEVs = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HP_EV + statToChange, NULL);
+    statSpace = MAX_PER_STAT_EVS - statEVs;
+    totalSpace = MAX_TOTAL_EVS - sumEVs;
+    actualIncrement = min(requestedIncrement, min(statSpace, totalSpace));
+
+    gSpecialVar_Result = (actualIncrement > 0);
+    gSpecialVar_0x8006 = actualIncrement;
+    gSpecialVar_0x8009 = actualIncrement * 100;
+
     // Store total EVs in a variable so it can be reported to the player
     gSpecialVar_0x8008 = sumEVs;
 }

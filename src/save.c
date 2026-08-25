@@ -811,6 +811,14 @@ u8 Save_LoadGameData(u8 saveType)
     default:
         status = sub_8152DD0(0xFFFF, gRamSaveSectionLocations);
         LoadSerializedGame();
+        if (status == SAVE_STATUS_OK)
+        {
+            // This build has one canonical ruleset. Upgrade older saves on
+            // load so they cannot retain Normal/Hard or softer level caps.
+            gSaveBlock2Ptr->gameDifficulty = DIFFICULTY_CHALLENGE;
+            gSaveBlock2Ptr->levelCaps = LEVEL_CAPS_STRICT;
+            gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SET;
+        }
         gSaveFileStatus = status;
         gGameContinueCallback = 0;
         break;

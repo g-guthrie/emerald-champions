@@ -1279,4 +1279,16 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
     // Calyrex
     [SPECIES_CALYREX_ICE_RIDER] = sCalyrexIceRiderLevelUpLearnset,
     [SPECIES_CALYREX_SHADOW_RIDER] = sCalyrexShadowRiderLevelUpLearnset,
+    // Champions Megas
+    [SPECIES_MEGANIUM_MEGA] = sMeganiumLevelUpLearnset,
+    [SPECIES_FERALIGATR_MEGA] = sFeraligatrLevelUpLearnset,
+    [SPECIES_EMBOAR_MEGA] = sEmboarLevelUpLearnset,
+    [SPECIES_RAICHU_MEGA_X] = sRaichuLevelUpLearnset,
+    [SPECIES_RAICHU_MEGA_Y] = sRaichuLevelUpLearnset,
+    [SPECIES_DRAGONITE_MEGA] = sDragoniteLevelUpLearnset,
+    [SPECIES_EXCADRILL_MEGA] = sExcadrillLevelUpLearnset,
+    [SPECIES_MALAMAR_MEGA] = sMalamarLevelUpLearnset,
+    [SPECIES_CHANDELURE_MEGA] = sChandelureLevelUpLearnset,
+    [SPECIES_HAWLUCHA_MEGA] = sHawluchaLevelUpLearnset,
+    [SPECIES_GRENINJA_MEGA] = sGreninjaLevelUpLearnset,
 };

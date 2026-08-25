@@ -62,7 +62,7 @@ Route110_TrickHouseEnd_EventScript_CompletedPuzzle1:: @ 826AD84
 	msgbox Route110_TrickHouseEnd_Text_AllNightToPlantTrees, MSGBOX_DEFAULT
 	msgbox Route110_TrickHouseEnd_Text_YouHaveEarnedThisReward, MSGBOX_DEFAULT
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
-	giveitem ITEM_TM12_TAUNT
+	giveitem ITEM_MENTAL_HERB
 	compare VAR_RESULT, FALSE
 	call_if_eq Route110_TrickHouseEnd_EventScript_BagFull
 	msgbox Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou, MSGBOX_DEFAULT
@@ -88,7 +88,7 @@ Route110_TrickHouseEnd_EventScript_CompletedPuzzle3:: @ 826ADFC
 	msgbox Route110_TrickHouseEnd_Text_AllNightToPreparePanels, MSGBOX_DEFAULT
 	msgbox Route110_TrickHouseEnd_Text_YouHaveEarnedThisReward, MSGBOX_DEFAULT
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
-	giveitem ITEM_TM92_TRICK_ROOM
+	giveitem ITEM_ROOM_SERVICE
 	compare VAR_RESULT, FALSE
 	call_if_eq Route110_TrickHouseEnd_EventScript_BagFull
 	msgbox Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou, MSGBOX_DEFAULT
@@ -101,7 +101,7 @@ Route110_TrickHouseEnd_EventScript_CompletedPuzzle4:: @ 826AE38
 	msgbox Route110_TrickHouseEnd_Text_AllNightToShoveBoulders, MSGBOX_DEFAULT
 	msgbox Route110_TrickHouseEnd_Text_YouHaveEarnedThisReward, MSGBOX_DEFAULT
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
-	giveitem ITEM_ROCKY_HELMET
+	giveitem ITEM_ROOM_SERVICE
 	compare VAR_RESULT, FALSE
 	call_if_eq Route110_TrickHouseEnd_EventScript_BagFull
 	msgbox Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou, MSGBOX_DEFAULT
@@ -368,4 +368,3 @@ Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou: @ 826B7EF
 Route110_TrickHouseEnd_Text_YoureIgnoringMe: @ 826B8BD
 	.string "Now, now! You're ignoring me now?\n"
 	.string "Now that, I consider heartbreaking!$"
-

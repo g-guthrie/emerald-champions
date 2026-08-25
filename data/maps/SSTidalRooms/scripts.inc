@@ -6,7 +6,7 @@ SSTidalRooms_EventScript_SnatchGiver:: @ 823C9F2
 	faceplayer
 	goto_if_set FLAG_RECEIVED_TM49, SSTidalRooms_EventScript_ExplainSnatch
 	msgbox SSTidalRooms_Text_NotSuspiciousTakeThis, MSGBOX_DEFAULT
-	giveitem ITEM_TM49_SLEEP_TALK
+	giveitem ITEM_SAFETY_GOGGLES
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM49
@@ -173,4 +173,3 @@ SSTidalRooms_Text_ExplainSnatch: @ 823D145
 	.string "Snatch steals the beneficial effects\n"
 	.string "of certain moves before they can be\l"
 	.string "used by a foe or ally.$"
-

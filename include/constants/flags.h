@@ -1520,6 +1520,20 @@
 #define FLAG_UNUSED_0x8FD                           (SYSTEM_FLAGS + 0x9D) // Unused Flag
 #define FLAG_UNUSED_0x8FE                           (SYSTEM_FLAGS + 0x9E) // Unused Flag
 #define FLAG_UNUSED_0x8FF                           (SYSTEM_FLAGS + 0x9F) // Unused Flag
+
+#define FLAG_VERDANT_GIFT_GYRO_BALL                 FLAG_UNUSED_0x8F3
+#define FLAG_VERDANT_GIFT_AVALANCHE                 FLAG_UNUSED_0x8F4
+#define FLAG_VERDANT_GIFT_PAYBACK                   FLAG_UNUSED_0x8F5
+#define FLAG_VERDANT_GIFT_SLEEP_TALK                FLAG_UNUSED_0x8F6
+#define FLAG_VERDANT_GIFT_RETURN                    FLAG_UNUSED_0x8F7
+#define FLAG_VERDANT_GIFT_ENDURE                    FLAG_UNUSED_0x8F8
+#define FLAG_VERDANT_GIFT_FLAME_CHARGE              FLAG_UNUSED_0x8F9
+#define FLAG_VERDANT_GIFT_EXPLOSION                 FLAG_UNUSED_0x8FA
+#define FLAG_VERDANT_GIFT_DRAIN_PUNCH               FLAG_UNUSED_0x8FB
+#define FLAG_VERDANT_GIFT_FALSE_SWIPE                FLAG_UNUSED_0x8FC
+#define FLAG_VERDANT_GIFT_SUBSTITUTE                 FLAG_UNUSED_0x8FD
+#define FLAG_VERDANT_GIFT_X_SCISSOR                  FLAG_UNUSED_0x8FE
+#define FLAG_VERDANT_GIFT_SUCKER_PUNCH               FLAG_UNUSED_0x8FF
 #define FLAG_UNUSED_0x900                           (SYSTEM_FLAGS + 0xA0) // Unused Flag
 #define FLAG_UNUSED_0x901                           (SYSTEM_FLAGS + 0xA1) // Unused Flag
 #define FLAG_UNUSED_0x902                           (SYSTEM_FLAGS + 0xA2) // Unused Flag

@@ -269,11 +269,10 @@ SlateportCity_PokemonFanClub_EventScript_Azumarill:: @ 820A220
 SlateportCity_PokemonFanClub_EventScript_EndureTM::
 	lock
 	faceplayer
-	checkitem ITEM_TM58_ENDURE, 1
-	compare VAR_RESULT, 1
-	goto_if_eq SlateportCity_PokemonFanClub_EventScript_ReceivedTM58
+	goto_if_set FLAG_VERDANT_GIFT_ENDURE, SlateportCity_PokemonFanClub_EventScript_ReceivedTM58
 	msgbox SlateportCity_PokemonFanClub_Text_GiveTM58, MSGBOX_DEFAULT
-	giveitem ITEM_TM58_ENDURE
+	giveitem ITEM_FOCUS_BAND
+	setflag FLAG_VERDANT_GIFT_ENDURE
 	msgbox SlateportCity_PokemonFanClub_Text_HaveTM58, MSGBOX_DEFAULT
 	release
 	end
@@ -443,4 +442,3 @@ SlateportCity_PokemonFanClub_Text_Zigzagoon: @ 820AD6E
 
 SlateportCity_PokemonFanClub_Text_Azumarill: @ 820AD80
 	.string "Azumarill: Marimari?$"
-

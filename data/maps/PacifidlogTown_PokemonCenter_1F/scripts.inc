@@ -32,11 +32,10 @@ PacifidlogTown_PokemonCenter_1F_EventScript_OldMan:: @ 82034D6
 PacifidlogTown_PokemonCenter_1F_EventScript_ExplosionTM::
 	lock
 	faceplayer
-	checkitem ITEM_TM64_EXPLOSION, 1
-	compare VAR_RESULT, 1
-	goto_if_eq PacifidlogTown_PokemonCenter_1F_EventScript_HaveExplosion
+	goto_if_set FLAG_VERDANT_GIFT_EXPLOSION, PacifidlogTown_PokemonCenter_1F_EventScript_HaveExplosion
 	msgbox PacifidlogTown_PokemonCenter_1F_Text_GiveExplosion, MSGBOX_DEFAULT
-	giveitem ITEM_TM64_EXPLOSION
+	giveitem ITEM_ROOM_SERVICE
+	setflag FLAG_VERDANT_GIFT_EXPLOSION
 	msgbox PacifidlogTown_PokemonCenter_1F_Text_HaveExplosion, MSGBOX_DEFAULT
 	release
 	end

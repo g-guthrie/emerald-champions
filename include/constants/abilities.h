@@ -304,8 +304,11 @@
 #define ABILITY_RAMPAGE         (ABILITIES_COUNT_LATEST_GEN + 7) // If a recharge move KOs the foe, it doesn't need to recharge.
 #define ABILITY_VENGEANCE       (ABILITIES_COUNT_LATEST_GEN + 8) // Overgrow for Ghost moves.
 #define ABILITY_BLITZ_BOXER     (ABILITIES_COUNT_LATEST_GEN + 9) // Punching moves go first
+#define ABILITY_PIERCING_DRILL  (ABILITIES_COUNT_LATEST_GEN + 10) // Contact moves bypass protection.
+#define ABILITY_DRAGONIZE       (ABILITIES_COUNT_LATEST_GEN + 11) // Normal moves become Dragon type and gain power.
+#define ABILITY_MEGA_SOL        (ABILITIES_COUNT_LATEST_GEN + 12) // The user acts as though harsh sunlight is active.
 
-#define ABILITIES_COUNT_CUSTOM (ABILITY_BLITZ_BOXER + 1)
+#define ABILITIES_COUNT_CUSTOM (ABILITY_MEGA_SOL + 1)
 
 #define ABILITIES_COUNT ABILITIES_COUNT_CUSTOM
 

@@ -16,11 +16,10 @@ RustboroCity_Mart_EventScript_BugCatcher:: @ 8214F86
 RustboroCity_Mart_EventScript_FalseSwipeTM::
 	lock
 	faceplayer
-	checkitem ITEM_TM98_FALSE_SWIPE, 1
-	compare VAR_RESULT, 1
-	goto_if_eq RustboroCity_Mart_EventScript_ReceivedTM98
+	goto_if_set FLAG_VERDANT_GIFT_FALSE_SWIPE, RustboroCity_Mart_EventScript_ReceivedTM98
 	msgbox RustboroCity_Mart_Text_ExcuseMeTrainer, MSGBOX_DEFAULT
-	giveitem ITEM_TM98_FALSE_SWIPE
+	giveitem ITEM_ZOOM_LENS
+	setflag FLAG_VERDANT_GIFT_FALSE_SWIPE
 	msgbox RustboroCity_Mart_Text_HaveTM98, MSGBOX_DEFAULT
 	release
 	end
@@ -64,4 +63,3 @@ RustboroCity_Mart_Text_GettingEscapeRopeJustInCase: @ 821505C
 	.string "case I get lost in a cave.\p"
 	.string "I just need to use it to get back to\n"
 	.string "the entrance.$"
-

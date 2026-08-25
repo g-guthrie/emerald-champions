@@ -130,10 +130,10 @@ PKMN_Center_MoveDeleter_EventScript_LastMonWithSurf::
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Move Tutor @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 PKMN_Center_Move_Tutor_MoveTutorIntro::
-	goto_if_set FLAG_TALKED_TO_MOVE_TUTOR, PKMN_Center_Move_Tutor_MoveTutorMenu
+	goto_if_set FLAG_TALKED_TO_MOVE_TUTOR, PKMN_Center_MoveReminder_EventScriptChooseMon
 	msgbox PKMN_Center_Move_Tutor_Text_Explanation, MSGBOX_DEFAULT
 	setflag FLAG_TALKED_TO_MOVE_TUTOR
-	goto PKMN_Center_Move_Tutor_MoveTutorMenu
+	goto PKMN_Center_MoveReminder_EventScriptChooseMon
 
 PKMN_Center_Move_Tutor_NoBadges::
 	msgbox PKMN_Center_Move_Tutor_Text_NoBadgeNoMoves, MSGBOX_DEFAULT
@@ -459,14 +459,17 @@ PKMN_Center_Move_Tutor_Text_HowCanHelp:
 	.string "How can I help you today?$"
 
 PKMN_Center_Move_Tutor_Text_Explanation:
-	.string "I can teach your Pokémon moves\n"
-	.string "that they can't learn anywhere else.\p"
-	.string "There's no charge, but you'll only\n"
-	.string "have access to some moves to start\l"
-	.string "with.\p"
-	.string "As you earn more Gym Badges, I'll\n"
-	.string "be able to teach you more moves,\l"
-	.string "so please check back often!$"
+	.string "I can teach each Pokémon any move\n"
+	.string "that species can legally learn.\p"
+	.string "That includes level-up moves, Egg\n"
+	.string "moves, TMs, HMs, and tutor moves.\p"
+	.string "There's no charge, and no Gym Badges\n"
+	.string "are required. Choose a Pokémon!$"
+
+PKMN_Center_Move_Tutor_Text_AllTMsAvailable:
+	.string "I've added every TM to your TM Case!\p"
+	.string "They're reusable, so you can teach any\n"
+	.string "compatible Pokémon whenever you like.$"
 
 PKMN_Center_Move_Tutor_Text_NoBadgeNoMoves:
 	.string "I'm sorry, but there are no moves I\n"

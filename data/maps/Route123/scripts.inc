@@ -15,7 +15,7 @@ Route123_EventScript_GigaDrainGirl:: @ 81F6151
 	compare VAR_RESULT, FALSE
 	goto_if_eq Route123_EventScript_NoGrassMons
 	msgbox Route123_Text_YouLikeGrassMonsTooHaveThis, MSGBOX_DEFAULT
-	giveitem ITEM_TM19_GIGA_DRAIN
+	giveitem ITEM_BIG_ROOT
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM19
@@ -200,4 +200,3 @@ Route123_Text_RouteSignMtPyre: @ 81F6529
 
 Route123_Text_BerryMastersHouse: @ 81F6557
 	.string "Berry Master's House$"
-

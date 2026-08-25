@@ -64,6 +64,7 @@
 #include "union_room.h"
 #include "window.h"
 #include "constants/battle.h"
+#include "constants/abilities.h"
 #include "constants/battle_frontier.h"
 #include "constants/easy_chat.h"
 #include "constants/field_effects.h"
@@ -119,7 +120,7 @@ struct PartyMenuInternal
     u32 spriteIdCancelPokeball:7;
     u32 messageId:14;
     u8 windowId[3];
-    u8 actions[8];
+    u8 actions[9];
     u8 numActions;
     // In vanilla Emerald, only the first 0xB0 hwords (0x160 bytes) are actually used.
     // However, a full 0x100 hwords (0x200 bytes) are allocated.
@@ -154,6 +155,8 @@ static EWRAM_DATA u16 *sSlot2TilemapBuffer = 0; //
 EWRAM_DATA u8 gSelectedOrderFromParty[MAX_FRONTIER_PARTY_SIZE] = {0};
 static EWRAM_DATA u16 sPartyMenuItemId = 0;
 static EWRAM_DATA u16 sUnused = 0;
+static EWRAM_DATA u8 sRareCandyStartLevel = 0;
+static EWRAM_DATA u16 sRareCandyEvolutionSpecies = SPECIES_NONE;
 EWRAM_DATA u8 gBattlePartyCurrentOrder[PARTY_SIZE / 2] = {0}; // bits 0-3 are the current pos of Slot 1, 4-7 are Slot 2, and so on
 
 // IWRAM common
@@ -260,6 +263,7 @@ static void Task_HandleCancelParticipationYesNoInput(u8);
 static u16 GetTutorMove(u8);
 static bool8 ShouldUseChooseMonText(void);
 static void SetPartyMonFieldSelectionActions(struct Pokemon*, u8);
+static u8 GetMonAbilitySlotCount(struct Pokemon*, u8*);
 static u8 GetPartyMenuActionsTypeInBattle(struct Pokemon*);
 static u8 GetPartySlotEntryStatus(s8);
 static void Task_UpdateHeldItemSprite(u8);
@@ -343,6 +347,7 @@ static void Task_DisplayLevelUpStatsPg2(u8);
 static void DisplayLevelUpStatsPg2(u8);
 static void Task_TryLearnNewMoves(u8);
 static void PartyMenuTryEvolution(u8);
+static void CB2_ContinueRareCandyEvolution(void);
 static void DisplayMonNeedsToReplaceMove(u8);
 static void DisplayMonLearnedMove(u8, u16);
 static void UseSacredAsh(u8);
@@ -384,6 +389,7 @@ static void ShiftMoveSlot(struct Pokemon*, u8, u8);
 static void BlitBitmapToPartyWindow_LeftColumn(u8, u8, u8, u8, u8, u8);
 static void BlitBitmapToPartyWindow_RightColumn(u8, u8, u8, u8, u8, u8);
 static void CursorCb_Summary(u8);
+static void CursorCb_Ability(u8);
 static void CursorCb_Switch(u8);
 static void CursorCb_Cancel1(u8);
 static void CursorCb_Item(u8);
@@ -403,6 +409,8 @@ static void CursorCb_Trade1(u8);
 static void CursorCb_Trade2(u8);
 static void CursorCb_Toss(u8);
 static void CursorCb_FieldMove(u8);
+static void Task_HandleAbilitySelectionInput(u8);
+static void Task_ReturnToPartyActionsAfterText(u8);
 static bool8 SetUpFieldMove_Surf(void);
 static bool8 SetUpFieldMove_Fly(void);
 static bool8 SetUpFieldMove_Waterfall(void);
@@ -2568,6 +2576,9 @@ static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
     sPartyMenuInternal->numActions = 0;
     AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_SUMMARY);
 
+    if (GetMonAbilitySlotCount(&mons[slotId], NULL) > 1)
+        AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_ABILITY);
+
     // Let any Pokemon that learns Fly or Flash use it without knowing the move
     if (CanMonLearnTMHM(&mons[slotId], ITEM_HM02_FLY - ITEM_TM01_FOCUS_PUNCH))
     {
@@ -2745,6 +2756,153 @@ static void CursorCb_Summary(u8 taskId)
     PlaySE(SE_SELECT);
     sPartyMenuInternal->exitCallback = CB2_ShowPokemonSummaryScreen;
     Task_ClosePartyMenu(taskId);
+}
+
+static u8 GetMonAbilitySlotCount(struct Pokemon *mon, u8 *slots)
+{
+    u16 species = GetMonData(mon, MON_DATA_SPECIES);
+    u16 abilities[NUM_ABILITY_SLOTS];
+    u8 count = 0;
+    u8 i;
+    u8 j;
+
+    for (i = 0; i < NUM_ABILITY_SLOTS; i++)
+    {
+        u16 ability = gBaseStats[species].abilities[i];
+
+        if (ability == ABILITY_NONE)
+            continue;
+
+        for (j = 0; j < count; j++)
+        {
+            if (abilities[j] == ability)
+                break;
+        }
+
+        if (j == count)
+        {
+            abilities[count] = ability;
+            if (slots != NULL)
+                slots[count] = i;
+            count++;
+        }
+    }
+
+    return count;
+}
+
+static void DisplayAbilitySelectionWindow(u8 count, const u8 *slots, u8 initialCursor)
+{
+    struct WindowTemplate window;
+    u16 species = GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_SPECIES);
+    u8 choiceCount = count + 1;
+    u8 cursorDimension = GetMenuCursorDimensionByFont(1, 0);
+    u8 fontAttribute = GetFontAttribute(1, 2);
+    u8 i;
+
+    SetWindowTemplateFields(&window, 2, 12, 19 - (choiceCount * 2), 17, choiceCount * 2, 14, 0x2E9);
+    sPartyMenuInternal->windowId[0] = AddWindow(&window);
+    DrawStdFrameWithCustomTileAndPalette(sPartyMenuInternal->windowId[0], FALSE, 0x4F, 13);
+
+    for (i = 0; i < count; i++)
+    {
+        u16 ability = gBaseStats[species].abilities[slots[i]];
+        AddTextPrinterParameterized4(sPartyMenuInternal->windowId[0], 1, cursorDimension, (i * 16) + 1, fontAttribute, 0, sFontColorTable[3], 0, gAbilityNames[ability]);
+    }
+    AddTextPrinterParameterized4(sPartyMenuInternal->windowId[0], 1, cursorDimension, (count * 16) + 1, fontAttribute, 0, sFontColorTable[3], 0, gText_Cancel2);
+
+    InitMenuInUpperLeftCorner(sPartyMenuInternal->windowId[0], choiceCount, initialCursor, 0);
+    ScheduleBgCopyTilemapToVram(2);
+}
+
+static void ReturnToPartyActionMenu(u8 taskId)
+{
+    struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
+
+    PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);
+    PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
+    SetPartyMonSelectionActions(gPlayerParty, gPartyMenu.slotId, GetPartyMenuActionsType(mon));
+    DisplaySelectionWindow(SELECTWINDOW_ACTIONS);
+    DisplayPartyMenuStdMessage(PARTY_MSG_DO_WHAT_WITH_MON);
+    gTasks[taskId].data[0] = 0xFF;
+    gTasks[taskId].func = Task_HandleSelectionMenuInput;
+}
+
+static void CursorCb_Ability(u8 taskId)
+{
+    u8 slots[NUM_ABILITY_SLOTS];
+    u8 count = GetMonAbilitySlotCount(&gPlayerParty[gPartyMenu.slotId], slots);
+    u8 currentSlot = GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_ABILITY_NUM);
+    u8 initialCursor = 0;
+    u8 i;
+
+    PlaySE(SE_SELECT);
+    PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);
+    PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
+
+    for (i = 0; i < count; i++)
+    {
+        gTasks[taskId].data[i + 2] = slots[i];
+        if (slots[i] == currentSlot)
+            initialCursor = i;
+    }
+
+    gTasks[taskId].data[1] = count;
+    DisplayAbilitySelectionWindow(count, slots, initialCursor);
+    gTasks[taskId].func = Task_HandleAbilitySelectionInput;
+}
+
+static void Task_HandleAbilitySelectionInput(u8 taskId)
+{
+    static const u8 sAbilityChangedText[] = _("{STR_VAR_1}'s ability became\n{STR_VAR_2}!{PAUSE_UNTIL_PRESS}");
+    s16 *data = gTasks[taskId].data;
+    u8 count = data[1];
+    s8 input;
+
+    if (count + 1 <= 3)
+        input = Menu_ProcessInputNoWrapAround_other();
+    else
+        input = ProcessMenuInput_other();
+
+    if (input == MENU_NOTHING_CHOSEN)
+        return;
+
+    if (input == MENU_B_PRESSED || input == count)
+    {
+        if (input == MENU_B_PRESSED)
+            PlaySE(SE_SELECT);
+        ReturnToPartyActionMenu(taskId);
+        return;
+    }
+
+    if (input >= 0 && input < count)
+    {
+        struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
+        u8 newSlot = data[input + 2];
+        u8 currentSlot = GetMonData(mon, MON_DATA_ABILITY_NUM);
+        u16 species = GetMonData(mon, MON_DATA_SPECIES);
+
+        if (newSlot == currentSlot)
+        {
+            ReturnToPartyActionMenu(taskId);
+            return;
+        }
+
+        SetMonData(mon, MON_DATA_ABILITY_NUM, &newSlot);
+        GetMonNickname(mon, gStringVar1);
+        StringCopy(gStringVar2, gAbilityNames[gBaseStats[species].abilities[newSlot]]);
+        StringExpandPlaceholders(gStringVar4, sAbilityChangedText);
+        PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);
+        DisplayPartyMenuMessage(gStringVar4, FALSE);
+        ScheduleBgCopyTilemapToVram(2);
+        gTasks[taskId].func = Task_ReturnToPartyActionsAfterText;
+    }
+}
+
+static void Task_ReturnToPartyActionsAfterText(u8 taskId)
+{
+    if (IsPartyMenuTextPrinterActive() != TRUE)
+        ReturnToPartyActionMenu(taskId);
 }
 
 static void CB2_ShowPokemonSummaryScreen(void)
@@ -5065,11 +5223,22 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
     u16 *itemPtr = &gSpecialVar_ItemId;
     bool8 cannotUseEffect;
     u8 level = GetMonData(mon, MON_DATA_LEVEL);
+    u8 targetLevel;
+    u32 targetExp;
 
     if (level != MAX_LEVEL && (level < GetLevelCap()))
     {
+        sRareCandyStartLevel = level;
         BufferMonStatsToTaskData(mon, arrayPtr);
         cannotUseEffect = ExecuteTableBasedItemEffect_(gPartyMenu.slotId, *itemPtr, 0);
+        targetLevel = min(level + 10, GetLevelCap());
+        targetLevel = min(targetLevel, MAX_LEVEL);
+        if (targetLevel > level + 1)
+        {
+            targetExp = gExperienceTables[gBaseStats[GetMonData(mon, MON_DATA_SPECIES)].growthRate][targetLevel];
+            SetMonData(mon, MON_DATA_EXP, &targetExp);
+            CalculateMonStats(mon);
+        }
         BufferMonStatsToTaskData(mon, &ptr->data[NUM_STATS]);
     }
     else
@@ -5158,7 +5327,7 @@ static void Task_TryLearnNewMoves(u8 taskId)
     if (WaitFanfare(0) && ((JOY_NEW(A_BUTTON)) || (JOY_NEW(B_BUTTON))))
     {
         RemoveLevelUpStatsWindow();
-        learnMove = MonTryLearningNewMove(&gPlayerParty[gPartyMenu.slotId], TRUE);
+        learnMove = MonTryLearningNewMoveInRange(&gPlayerParty[gPartyMenu.slotId], TRUE, sRareCandyStartLevel);
         gPartyMenu.learnMoveState = 1;
         switch (learnMove)
         {
@@ -5180,7 +5349,7 @@ static void Task_TryLearnNewMoves(u8 taskId)
 
 static void Task_TryLearningNextMove(u8 taskId)
 {
-    u16 result = MonTryLearningNewEvolutionMove(&gPlayerParty[gPartyMenu.slotId], FALSE);
+    u16 result = MonTryLearningNewMoveInRange(&gPlayerParty[gPartyMenu.slotId], FALSE, sRareCandyStartLevel);
 
     switch (result)
     {
@@ -5204,6 +5373,33 @@ static void CB2_ReturnToPartyMenuUsingRareCandy(void)
     SetMainCallback2(CB2_ShowPartyMenuForItemUse);
 }
 
+static void CB2_ContinueRareCandyEvolution(void)
+{
+    struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
+    u16 currentSpecies = GetMonData(mon, MON_DATA_SPECIES);
+
+    // If the player canceled, stop instead of immediately asking again.
+    if (currentSpecies != sRareCandyEvolutionSpecies)
+    {
+        u16 targetSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_NORMAL, ITEM_NONE, SPECIES_NONE);
+
+        // A ten-level jump can cross more than one evolution threshold.
+        if (targetSpecies != SPECIES_NONE)
+        {
+            sRareCandyEvolutionSpecies = currentSpecies;
+            gCB2_AfterEvolution = CB2_ContinueRareCandyEvolution;
+            BeginEvolutionScene(mon, targetSpecies, TRUE, gPartyMenu.slotId);
+            return;
+        }
+    }
+
+    sRareCandyEvolutionSpecies = SPECIES_NONE;
+    if (CheckBagHasItem(ITEM_RARE_CANDY, 1))
+        CB2_ReturnToPartyMenuUsingRareCandy();
+    else
+        SetMainCallback2(gPartyMenu.exitCallback);
+}
+
 static void PartyMenuTryEvolution(u8 taskId)
 {
     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
@@ -5212,8 +5408,11 @@ static void PartyMenuTryEvolution(u8 taskId)
     if (targetSpecies != SPECIES_NONE)
     {
         FreePartyPointers();
-        if (gSpecialVar_ItemId == ITEM_RARE_CANDY && gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD && CheckBagHasItem(gSpecialVar_ItemId, 1))
-            gCB2_AfterEvolution = CB2_ReturnToPartyMenuUsingRareCandy;
+        if (gSpecialVar_ItemId == ITEM_RARE_CANDY && gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD)
+        {
+            sRareCandyEvolutionSpecies = GetMonData(mon, MON_DATA_SPECIES);
+            gCB2_AfterEvolution = CB2_ContinueRareCandyEvolution;
+        }
         else
             gCB2_AfterEvolution = gPartyMenu.exitCallback;
         BeginEvolutionScene(mon, targetSpecies, 1, gPartyMenu.slotId);

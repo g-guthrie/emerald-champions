@@ -18,14 +18,13 @@ LavaridgeTown_House_EventScript_Zigzagoon:: @ 81FF91B
 LavaridgeTown_House_EventScript_SuckerPunchTM::
 	lock
 	faceplayer
-	checkitem ITEM_TM94_SUCKER_PUNCH, 1
-	compare VAR_RESULT, 1
-	goto_if_eq LavaridgeTown_House_EventScript_ReceivedTM94
+	goto_if_set FLAG_VERDANT_GIFT_SUCKER_PUNCH, LavaridgeTown_House_EventScript_ReceivedTM94
 	msgbox MoveTutor_MimicTeach, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq MoveTutor_EventScript_MimicDeclined
 	msgbox LavaridgeTown_House_Text_GiveTM94, MSGBOX_DEFAULT
-	giveitem ITEM_TM94_SUCKER_PUNCH
+	giveitem ITEM_KINGS_ROCK
+	setflag FLAG_VERDANT_GIFT_SUCKER_PUNCH
 	msgbox LavaridgeTown_House_Text_HaveTM94, MSGBOX_DEFAULT
 	release
 	end

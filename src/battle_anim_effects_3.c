@@ -18,6 +18,7 @@
 #include "task.h"
 #include "trig.h"
 #include "util.h"
+#include "constants/abilities.h"
 #include "constants/battle_anim.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
@@ -5530,7 +5531,9 @@ void AnimTask_GetWeather(u8 taskId)
     bool32 utilityUmbrellaAffected = GetBattlerHoldEffect(gBattleAnimAttacker, TRUE) == HOLD_EFFECT_UTILITY_UMBRELLA;
     
     gBattleAnimArgs[ARG_RET_ID] = ANIM_WEATHER_NONE;
-    if (gWeatherMoveAnim & WEATHER_SUN_ANY && !utilityUmbrellaAffected)
+    if (GetBattlerAbility(gBattleAnimAttacker) == ABILITY_MEGA_SOL)
+        gBattleAnimArgs[ARG_RET_ID] = ANIM_WEATHER_SUN;
+    else if (gWeatherMoveAnim & WEATHER_SUN_ANY && !utilityUmbrellaAffected)
         gBattleAnimArgs[ARG_RET_ID] = ANIM_WEATHER_SUN;
     else if (gWeatherMoveAnim & WEATHER_RAIN_ANY && !utilityUmbrellaAffected)
         gBattleAnimArgs[ARG_RET_ID] = ANIM_WEATHER_RAIN;

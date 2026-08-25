@@ -6,9 +6,7 @@ FallarborTown_CozmosHouse_MapScripts:: @ 8200F12
 FallarborTown_CozmosHouse_EventScript_ProfCozmo:: @ 8200F13
 	lockall
 	faceplayer
-	checkitem ITEM_TM27_RETURN, 1
-	compare VAR_RESULT, TRUE
-	goto_if_eq FallarborTown_CozmosHouse_EventScript_GaveMeteorite
+	goto_if_set FLAG_VERDANT_GIFT_RETURN, FallarborTown_CozmosHouse_EventScript_GaveMeteorite
 	checkitem ITEM_METEORITE, 1
 	compare VAR_RESULT, TRUE
 	goto_if_eq FallarborTown_CozmosHouse_EventScript_PlayerHasMeteorite
@@ -22,9 +20,10 @@ FallarborTown_CozmosHouse_EventScript_PlayerHasMeteorite:: @ 8200F38
 	compare VAR_RESULT, NO
 	goto_if_eq FallarborTown_CozmosHouse_EventScript_DeclineGiveMeteorite
 	msgbox FallarborTown_CozmosHouse_Text_PleaseUseThisTM, MSGBOX_DEFAULT
-	giveitem ITEM_TM27_RETURN
+	giveitem ITEM_EXPERT_BELT
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
+	setflag FLAG_VERDANT_GIFT_RETURN
 	setvar VAR_0x8004, ITEM_METEORITE
 	call Common_EventScript_PlayerHandedOverTheItem
 	msgbox FallarborTown_CozmosHouse_Text_ReallyGoingToHelpMyResearch, MSGBOX_DEFAULT
@@ -161,9 +160,7 @@ FallarborTown_CozmosHouse_EventScript_DeoxysAlreadyThatForme::
 FallarborTown_CozmosHouse_EventScript_CozmosWife:: @ 8200FBC
 	lockall
 	faceplayer
-	checkitem ITEM_TM27_RETURN, 1
-	compare VAR_RESULT, TRUE
-	goto_if_eq FallarborTown_CozmosHouse_EventScript_CozmoIsHappy
+	goto_if_set FLAG_VERDANT_GIFT_RETURN, FallarborTown_CozmosHouse_EventScript_CozmoIsHappy
 	goto_if_set FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY, FallarborTown_CozmosHouse_EventScript_CozmoIsSad
 	msgbox FallarborTown_CozmosHouse_Text_CozmoWentToMeteorFalls, MSGBOX_DEFAULT
 	releaseall

@@ -3,7 +3,7 @@ Route102_EventScript_ItemPotion:: @ 8290CD8
 	end
 
 Route103_EventScript_ItemTM40AerialAce:: @ 8290CE5
-	finditem ITEM_TM40_AERIAL_ACE
+	finditem ITEM_RAICHUNITE_Y
 	end
 
 Route103_EventScript_ItemPPUp:: @ 8290CF2
@@ -27,7 +27,7 @@ Route104_EventScript_ItemSootheBell:: @ 8290D26
 	end
 
 Route105_EventScript_ItemAbilityPatch:: @ 8290D33
-	finditem ITEM_ABILITY_PATCH
+	finditem ITEM_RARE_CANDY
 	end
 
 Route106_EventScript_ItemKinglerite:: @ 8290D40
@@ -59,7 +59,7 @@ Route110_EventScript_ItemElixir:: @ 8290D8E
 	end
 
 Route111_EventScript_ItemTM37:: @ 8290D9B
-	finditem ITEM_TM37_SANDSTORM
+	finditem ITEM_RARE_CANDY
 	end
 
 Route111_EventScript_ItemStarPiece:: @ 8290DA8
@@ -67,7 +67,7 @@ Route111_EventScript_ItemStarPiece:: @ 8290DA8
 	end
 
 Route111_EventScript_ItemTM63RockSlide:: @ 8290DB5
-	finditem ITEM_TM63_ROCK_SLIDE
+	finditem ITEM_RARE_CANDY
 	end
 
 Route111_EventScript_ItemElixir:: @ 8290DC2
@@ -95,7 +95,7 @@ Route114_EventScript_ItemRareCandy:: @ 8290E03
 	end
 
 Route114_EventScript_ItemTM54Psyshock:: @ 8290E10
-	finditem ITEM_TM54_PSYSHOCK
+	finditem ITEM_RARE_CANDY
 	end
 
 Route114_EventScript_ItemProtectivePads:: @ 8290E1D
@@ -107,7 +107,7 @@ Route115_EventScript_ItemSuperPotion:: @ 8290E2A
 	end
 
 Route115_EventScript_ItemTM01:: @ 8290E37
-	finditem ITEM_TM01_FOCUS_PUNCH
+	finditem ITEM_RARE_CANDY
 	end
 
 Route115_EventScript_ItemMoonBall:: @ 8290E44
@@ -127,7 +127,7 @@ Route115_EventScript_ItemPPUp:: @ 8290E6B
 	end
 
 Route116_EventScript_TM77StruggleBug:: @ 8290E78
-	finditem ITEM_TM77_STRUGGLE_BUG
+	finditem ITEM_RARE_CANDY
 	end
 
 Route116_EventScript_ItemEther:: @ 8290E85
@@ -171,7 +171,7 @@ Route119_EventScript_ItemElixir:: @ 8290EFA
 	end
 
 Route119_EventScript_ItemTM84_Poison_Jab:: @ 8290F07
-	finditem ITEM_TM84_POISON_JAB
+	finditem ITEM_RARE_CANDY
 	end
 
 Route119_EventScript_ItemRareCandy:: @ 8290F14
@@ -239,7 +239,7 @@ Route123_EventScript_ItemPPUp:: @ 8290FD7
 	end
 
 Route123_EventScript_ItemTM99DazzlingGleam:: @ 8290FE4
-	finditem ITEM_TM99_DAZZLING_GLEAM
+	finditem ITEM_RARE_CANDY
 	end
 
 Route124_EventScript_ItemRedShard:: @ 8290FF1
@@ -315,7 +315,7 @@ MauvilleCity_EventScript_ItemXSpeed:: @ 82910CE
 	end
 
 RustboroCity_EventScript_ItemAbilityCapsule:: @ 82910DB
-	finditem ITEM_ABILITY_CAPSULE
+	finditem ITEM_RARE_CANDY
 	end
 
 LilycoveCity_EventScript_ItemLightClay:: @ 82910E8
@@ -367,7 +367,7 @@ GraniteCave_B2F_EventScript_ItemRareCandy:: @ 8291177
 	end
 
 JaggedPass_EventScript_ItemTM69RockPolish:: @ 8291184
-	finditem ITEM_TM69_ROCK_POLISH
+	finditem ITEM_RARE_CANDY
 	end
 
 FieryPath_EventScript_ItemCharizarditeX::
@@ -375,11 +375,11 @@ FieryPath_EventScript_ItemCharizarditeX::
 	end
 
 FieryPath_EventScript_ItemTM06:: @ 829119E
-	finditem ITEM_TM06_TOXIC
+	finditem ITEM_EMBOARITE
 	end
 
 MeteorFalls_1F_1R_EventScript_ItemTM23:: @ 82911AB
-	finditem ITEM_TM23_IRON_TAIL
+	finditem ITEM_RARE_CANDY
 	end
 
 MeteorFalls_1F_1R_EventScript_ItemCometShard:: @ 82911B8
@@ -387,7 +387,7 @@ MeteorFalls_1F_1R_EventScript_ItemCometShard:: @ 82911B8
 	end
 
 MeteorFalls_1F_1R_EventScript_ItemTM59DragonPulse:: @ 82911C5
-	finditem ITEM_TM59_DRAGON_PULSE
+	finditem ITEM_DRAGONINITE
 	end
 
 MeteorFalls_1F_1R_EventScript_ItemPPUP:: @ 82911D2
@@ -395,7 +395,7 @@ MeteorFalls_1F_1R_EventScript_ItemPPUP:: @ 82911D2
 	end
 
 MeteorFalls_B1F_2R_EventScript_ItemTM02:: @ 82911DF
-	finditem ITEM_TM02_DRAGON_CLAW
+	finditem ITEM_RARE_CANDY
 	end
 
 NewMauville_Inside_EventScript_ItemFastBall:: @ 82911EC
@@ -431,7 +431,7 @@ AbandonedShip_Rooms2_B1F_EventScript_ItemLevelBall:: @ 8291247
 	end
 
 AbandonedShip_Room_B1F_EventScript_ItemTM13:: @ 8291254
-	finditem ITEM_TM13_ICE_BEAM
+	finditem ITEM_RARE_CANDY
 	end
 
 AbandonedShip_Rooms2_1F_EventScript_ItemRevive:: @ 8291261
@@ -455,15 +455,15 @@ AbandonedShip_HiddenFloorRooms_EventScript_ItemLucarionite:: @ 8291295
 	end
 
 AbandonedShip_HiddenFloorRooms_EventScript_ItemTM18:: @ 82912A2
-	finditem ITEM_TM18_RAIN_DANCE
+	finditem ITEM_RARE_CANDY
 	end
 
 ScorchedSlab_EventScript_ItemTM11:: @ 82912AF
-	finditem ITEM_TM11_SUNNY_DAY
+	finditem ITEM_RARE_CANDY
 	end
 
 SafariZone_Northwest_EventScript_ItemTM22:: @ 82912BC
-	finditem ITEM_TM22_SOLARBEAM
+	finditem ITEM_RARE_CANDY
 	end
 
 SafariZone_North_EventScript_ItemAbsolite:: @ 82912C9
@@ -479,7 +479,7 @@ SafariZone_Northeast_EventScript_ItemKangaskhanite:: @ 82912E3
 	end
 
 SafariZone_Southeast_EventScript_ItemTM53EnergyBall:: @ 82912F0
-	finditem ITEM_TM53_ENERGY_BALL
+	finditem ITEM_RARE_CANDY
 	end
 
 MtPyre_2F_EventScript_ItemUltraBall:: @ 82912FD
@@ -499,7 +499,7 @@ MtPyre_5F_EventScript_ItemLaxIncense:: @ 8291324
 	end
 
 MtPyre_6F_EventScript_ItemTM30:: @ 8291331
-	finditem ITEM_TM30_SHADOW_BALL
+	finditem ITEM_RARE_CANDY
 	end
 
 MtPyre_Exterior_EventScript_ItemGengarite:: @ 829133E
@@ -507,7 +507,7 @@ MtPyre_Exterior_EventScript_ItemGengarite:: @ 829133E
 	end
 
 MtPyre_Exterior_EventScript_ItemTM48:: @ 829134B
-	finditem ITEM_TM48_SKILL_SWAP
+	finditem ITEM_RARE_CANDY
 	end
 
 AquaHideout_B1F_EventScript_ItemMasterBall:: @ 8291358
@@ -551,11 +551,11 @@ ShoalCave_LowTideInnerRoom_EventScript_ItemRareCandy:: @ 82913CD
 	end
 
 ShoalCave_LowTideStairsRoom_EventScript_ItemTM70AuroraVeil::
-	finditem ITEM_TM70_AURORA_VEIL
+	finditem ITEM_RARE_CANDY
 	end
 
 ShoalCave_LowTideIceRoom_EventScript_ItemTM07:: @ 82913E7
-	finditem ITEM_TM07_HAIL
+	finditem ITEM_RARE_CANDY
 	end
 
 ShoalCave_LowTideIceRoom_EventScript_ItemNeverMeltIce:: @ 82913F4
@@ -563,7 +563,7 @@ ShoalCave_LowTideIceRoom_EventScript_ItemNeverMeltIce:: @ 82913F4
 	end
 
 SeafloorCavern_Room9_EventScript_ItemTM26:: @ 8291401
-	finditem ITEM_TM26_EARTHQUAKE
+	finditem ITEM_FERALIGITE
 	end
 
 Route110_TrickHousePuzzle1_EventScript_ItemDawnStone::
@@ -587,7 +587,7 @@ Route110_TrickHousePuzzle3_EventScript_ItemExpertBelt:: @ 8291442
 	end
 
 Route110_TrickHousePuzzle4_EventScript_ItemAssaultVest:: @ 829144F
-	finditem ITEM_ASSAULT_VEST
+	finditem ITEM_RARE_CANDY
 	end
 
 Route110_TrickHousePuzzle6_EventScript_MewtwoniteX:: @ 829145C
@@ -611,7 +611,7 @@ VictoryRoad_1F_EventScript_ItemMetagrossite:: @ 8291490
 	end
 
 VictoryRoad_B1F_EventScript_ItemTM29:: @ 829149D
-	finditem ITEM_TM29_PSYCHIC
+	finditem ITEM_RARE_CANDY
 	end
 
 VictoryRoad_B1F_EventScript_ItemFullRestore:: @ 82914AA
@@ -655,11 +655,11 @@ MagmaHideout_4F_EventScript_ItemMaxRevive:: @ 829151F
 	end
 
 MagmaHideout_3F_3R_EventScript_ItemTM35Flamethrower:: @ 829152C
-	finditem ITEM_TM35_FLAMETHROWER
+	finditem ITEM_RARE_CANDY
 	end
 
 PetalburgWoods_2_Item_TM80Venoshock::
-	finditem ITEM_TM80_VENOSHOCK
+	finditem ITEM_RARE_CANDY
 	end
 
 PetalburgWoods_2_Item_SunStone::
@@ -667,11 +667,11 @@ PetalburgWoods_2_Item_SunStone::
 	end
 
 PetalburgWoods_3_TM86_GrassKnot::
-	finditem ITEM_TM86_GRASS_KNOT
+	finditem ITEM_MEGANIUMITE
 	end
 
 PetalburgWoods_3_TM34_SludgeWave::
-	finditem ITEM_TM34_SLUDGE_WAVE
+	finditem ITEM_RARE_CANDY
 	end
 
 PetalburgWoods_3_Beedrillite::
@@ -683,11 +683,11 @@ Seaspray_Cave_Lure_Ball::
 	end
 
 Seaspray_Cave_Stealth_Rock::
-	finditem ITEM_TM76_STEALTH_ROCK
+	finditem ITEM_RARE_CANDY
 	end
 
 Seaspray_Cave_Water_Pulse::
-	finditem ITEM_TM03_WATER_PULSE
+	finditem ITEM_GRENINJITE
 	end
 
 Seaspray_Cave_Blastoisinite::
@@ -695,11 +695,11 @@ Seaspray_Cave_Blastoisinite::
 	end
 
 Seaspray_Cave_ItemStoneEdge::
-	finditem ITEM_TM71_STONE_EDGE
+	finditem ITEM_RARE_CANDY
 	end
 
 Seaspray_Cave_B1F_ItemFreezeDry::
-	finditem ITEM_TM79_FREEZE_DRY
+	finditem ITEM_RARE_CANDY
 	end
 
 Seaspray_Cave_B1F_ItemAbomasite::
@@ -715,11 +715,11 @@ Seaspray_Cave_B1F_ItemKingsRock::
 	end
 
 Granite_Cave_B2F_TM31_Brick_Break::
-	finditem ITEM_TM31_BRICK_BREAK
+	finditem ITEM_RARE_CANDY
 	end
 
 Ember_Path_ItemSmack_Down::
-	finditem ITEM_TM87_SMACK_DOWN
+	finditem ITEM_RARE_CANDY
 	end
 
 Ember_Path_ItemCharizarditeY::
@@ -731,7 +731,7 @@ Ashen_Woods_ItemFlame_Orb::
 	end
 
 Ashen_Woods_ItemU_Turn::
-	finditem ITEM_TM89_U_TURN
+	finditem ITEM_RARE_CANDY
 	end
 
 Ashen_Woods_ItemPinsirite::
@@ -743,7 +743,7 @@ Sandstrewn_Ruins_ItemGarchompite::
 	end
 
 Sandstrewn_Ruins_ItemLeechLife::
-	finditem ITEM_TM56_LEECH_LIFE
+	finditem ITEM_EXCADRITE
 	end
 
 Sandstrewn_Ruins_ItemDomeFossil::
@@ -787,15 +787,15 @@ Slateport_City_ItemAlakazite::
 	end
 
 NewMauville_Inside_EventScript_ItemTM91FlashCannon::
-	finditem ITEM_TM91_FLASH_CANNON
+	finditem ITEM_RAICHUNITE_X
 	end
 
 Route119_EventScript_ItemTM62_Acrobatics::
-	finditem ITEM_TM62_ACROBATICS
+	finditem ITEM_HAWLUCHANITE
 	end
 
 MtPyre_Summit_EventScript_ItemTM61_WillOWisp::
-	finditem ITEM_TM61_WILL_O_WISP
+	finditem ITEM_CHANDELURITE
 	end
 
 Route111_RuinsExterior_EventScript_ItemMedichamite::
@@ -807,15 +807,15 @@ ShoalCave_LowTideIceRoom_EventScript_ItemGlalitite::
 	end
 
 Route124_EventScript_TM85DreamEater::
-	finditem ITEM_TM85_DREAM_EATER
+	finditem ITEM_RARE_CANDY
 	end
 
 AquaHideout_B1F_EventScript_ItemTM97DarkPulse::
-	finditem ITEM_TM97_DARK_PULSE
+	finditem ITEM_RARE_CANDY
 	end
 
 SafariZone_South_EventScript_ItemTM93WildCharge::
-	finditem ITEM_TM93_WILD_CHARGE
+	finditem ITEM_RARE_CANDY
 	end
 
 Route131_EventScript_SplashPlate::
@@ -827,7 +827,7 @@ ScorchedSlab_EventScript_ItemTyranitarite::
 	end
 
 GraniteCave_B1F_EventScript_ItemTM65ShadowClaw::
-	finditem ITEM_TM65_SHADOW_CLAW
+	finditem ITEM_RARE_CANDY
 	end
 
 Route117_EventScript_Mawilite::
@@ -847,7 +847,7 @@ TrickHouse5_EventScript_TerrainExtender::
 	end
 
 DewfordMeadow_EventScript_TM95Snarl::
-	finditem ITEM_TM95_SNARL
+	finditem ITEM_MALAMARITE
 	end
 
 DewfordMeadow_EventScript_RingTarget::
@@ -855,7 +855,7 @@ DewfordMeadow_EventScript_RingTarget::
 	end
 
 DewfordManor_EventScript_TM100Curse::
-	finditem ITEM_TM100_CURSE
+	finditem ITEM_RARE_CANDY
 	end
 
 DewfordManor_EventScript_Banettite::
@@ -863,7 +863,7 @@ DewfordManor_EventScript_Banettite::
 	end
 
 VerdanturfMeadow_EventScript_TM21::
-	finditem ITEM_TM21_FRUSTRATION
+	finditem ITEM_RARE_CANDY
 	end
 
 MagmaHideout_2F_2R_EventScript_ItemMagmaStone::

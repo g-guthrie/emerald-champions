@@ -48,7 +48,7 @@ FortreeCity_Mart_EventScript_SpenserBattle::
 	msgbox FortreeCity_Mart_Text_SpenserBeforeBattle, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_SPENSER_FORTREE, FortreeCity_Mart_Text_SpenserDefeat
 	msgbox FortreeCity_Mart_Text_SpenserGiveChoiceScarf, MSGBOX_DEFAULT
-	giveitem ITEM_CHOICE_SCARF
+	giveitem ITEM_TERRAIN_EXTENDER
 	giveitem ITEM_BOTTLE_CAP, 3
 	msgbox FortreeCity_Mart_Text_SpenserFarewell, MSGBOX_AUTOCLOSE
 	switch VAR_FACING

@@ -11,7 +11,7 @@ Route114_FossilManiacsHouse_EventScript_FossilManiacsBrother:: @ 822AD3A
 	faceplayer
 	goto_if_set FLAG_RECEIVED_TM28, Route114_FossilManiacsHouse_EventScript_ReceivedDig
 	msgbox Route114_FossilManiacsHouse_Text_HaveThisToDigLikeMyBrother, MSGBOX_DEFAULT
-	giveitem ITEM_TM28_DIG
+	giveitem ITEM_AIR_BALLOON
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM28
@@ -52,4 +52,3 @@ Route114_FossilManiacsHouse_Text_CrammedWithBooks: @ 822AEC2
 	.string "HOW RAIN SHAPES THE LAND…\l"
 	.string "STONES, SOIL, AND ROCK…\p"
 	.string "It's crammed with books.$"
-

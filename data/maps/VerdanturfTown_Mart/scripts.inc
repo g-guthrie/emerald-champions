@@ -39,11 +39,10 @@ VerdanturfTown_Mart_EventScript_Lass:: @ 82025CC
 VerdanturfTown_Mart_EventScript_PaybackTM::
 	lock
 	faceplayer
-	checkitem ITEM_TM66_PAYBACK, 1
-	compare VAR_RESULT, 1
-	goto_if_eq VerdanturfTown_Mart_EventScript_ReceivedTM66
+	goto_if_set FLAG_VERDANT_GIFT_PAYBACK, VerdanturfTown_Mart_EventScript_ReceivedTM66
 	msgbox VerdanturfTown_Mart_Text_SlowPokemon, MSGBOX_DEFAULT
-	giveitem ITEM_TM66_PAYBACK
+	giveitem ITEM_WEAKNESS_POLICY
+	setflag FLAG_VERDANT_GIFT_PAYBACK
 	msgbox VerdanturfTown_Mart_Text_HaveTM66, MSGBOX_DEFAULT
 	release
 	end
@@ -82,4 +81,3 @@ VerdanturfTown_Mart_Text_NoStrategyGuidesForBattleTent: @ 820264C
 VerdanturfTown_Mart_Text_NestBallOnWeakenedPokemon:
 	.string "The Nest Ball works better on\n"
 	.string "weaker Pokémon.$"
-

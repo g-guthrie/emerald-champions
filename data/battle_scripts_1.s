@@ -403,6 +403,60 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectOctolock                @ EFFECT_OCTOLOCK
 	.4byte BattleScript_EffectClangorousSoul          @ EFFECT_CLANGOROUS_SOUL
 	.4byte BattleScript_EffectHit                     @ EFFECT_BOLT_BEAK
+	.4byte BattleScript_EffectCourtChange             @ EFFECT_COURT_CHANGE
+	.4byte BattleScript_EffectTeatime                  @ EFFECT_TEATIME
+	.4byte BattleScript_EffectShellTrap                @ EFFECT_SHELL_TRAP
+
+BattleScript_EffectCourtChange::
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	swapsidestatuses
+	attackanimation
+	waitanimation
+	printstring STRINGID_COURTCHANGE
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectTeatime::
+	attackcanceler
+	attackstring
+	ppreduce
+	checkteatimetargets BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	selectfirstvalidtarget
+BattleScript_TeatimeLoop:
+	jumpifstatus3 BS_TARGET, STATUS3_SEMI_INVULNERABLE, BattleScript_TeatimeTargetEnd
+	jumpifnotberry BS_TARGET, BattleScript_TeatimeTargetEnd
+	orword gHitMarker, HITMARKER_NO_ANIMATIONS | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_IGNORE_DISGUISE
+	setbyte sBERRY_OVERRIDE, TRUE
+	consumeberry BS_TARGET
+	bicword gHitMarker, HITMARKER_NO_ANIMATIONS | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_IGNORE_DISGUISE
+	setbyte sBERRY_OVERRIDE, FALSE
+	removeitem BS_TARGET
+BattleScript_TeatimeTargetEnd:
+	moveendto MOVEEND_NEXT_TARGET
+	jumpifnexttargetvalid BattleScript_TeatimeLoop
+	moveendcase MOVEEND_CLEAR_BITS
+	goto BattleScript_MoveEnd
+
+BattleScript_ShellTrapSetUp::
+	printstring STRINGID_EMPTYSTRING3
+	waitmessage 1
+	printstring STRINGID_PREPARESHELLTRAP
+	waitmessage B_WAIT_TIME_LONG
+	end2
+
+BattleScript_EffectShellTrap::
+	attackcanceler
+	jumpifshelltrap BS_ATTACKER, BattleScript_HitFromAccCheck
+	jumpifword CMP_COMMON_BITS, gHitMarker, HITMARKER_NO_ATTACKSTRING | HITMARKER_NO_PPDEDUCT, BattleScript_MoveEnd
+	ppreduce
+	printstring STRINGID_SHELLTRAPDIDNTWORK
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
 
 BattleScript_EffectShellSideArm:
 	shellsidearmcheck
@@ -1051,9 +1105,11 @@ BattleScript_MoveEffectBugBite::
 	waitmessage B_WAIT_TIME_LONG
 	orword gHitMarker, HITMARKER_NO_ANIMATIONS
 	setbyte sBERRY_OVERRIDE, TRUE   @ override the requirements for eating berries
+	savetarget
 	consumeberry BS_ATTACKER, TRUE  @ consume the berry, then restore the item from changedItems
 	bicword gHitMarker, HITMARKER_NO_ANIMATIONS
 	setbyte sBERRY_OVERRIDE, FALSE
+	restoretarget
 	return
 
 BattleScript_EffectCoreEnforcer:
@@ -1854,6 +1910,7 @@ BattleScript_GrowthDoMoveAnim::
 	playstatchangeanimation BS_ATTACKER, BIT_ATK | BIT_SPATK, 0
 	jumpifweatheraffected BS_ATTACKER, WEATHER_SUN_ANY, BattleScript_GrowthAtk2
 	jumpifability BS_ATTACKER, ABILITY_CHLOROPLAST, BattleScript_GrowthAtk2
+	jumpifability BS_ATTACKER, ABILITY_MEGA_SOL, BattleScript_GrowthAtk2
 	setstatchanger STAT_ATK, 1, FALSE
 	goto BattleScript_GrowthAtk
 BattleScript_GrowthAtk2:
@@ -1866,6 +1923,7 @@ BattleScript_GrowthAtk:
 BattleScript_GrowthTrySpAtk::
 	jumpifweatheraffected BS_ATTACKER, WEATHER_SUN_ANY, BattleScript_GrowthSpAtk2
 	jumpifability BS_ATTACKER, ABILITY_CHLOROPLAST, BattleScript_GrowthSpAtk2
+	jumpifability BS_ATTACKER, ABILITY_MEGA_SOL, BattleScript_GrowthSpAtk2
 	setstatchanger STAT_SPATK, 1, FALSE
 	goto BattleScript_GrowthSpAtk
 BattleScript_GrowthSpAtk2:
@@ -4758,6 +4816,7 @@ BattleScript_EffectGust::
 
 BattleScript_EffectSolarbeam::
 	jumpifability BS_ATTACKER, ABILITY_CHLOROPLAST, BattleScript_SolarbeamOnFirstTurn
+	jumpifability BS_ATTACKER, ABILITY_MEGA_SOL, BattleScript_SolarbeamOnFirstTurn
 	jumpifweatheraffected BS_ATTACKER, WEATHER_SUN_ANY, BattleScript_SolarbeamOnFirstTurn
 BattleScript_SolarbeamDecideTurn::
 	jumpifstatus2 BS_ATTACKER, STATUS2_MULTIPLETURNS, BattleScript_TwoTurnMovesSecondTurn
@@ -6375,8 +6434,15 @@ BattleScript_RoarSuccessSwitch::
 	goto BattleScript_MoveEnd
 BattleScript_RoarSuccessSwitch_Ret:
 	@ continuation of RedCardActivates
+	@ Red Card temporarily swaps attacker and target so the forced-switch
+	@ machinery operates on the move user. Restore the original attacker slot
+	@ before returning to move-end processing, and terminate any remaining hits
+	@ so the replacement cannot continue the original user's multi-hit move.
+	copybyte gBattlerAttacker, gEffectBattler
+	jumpifbyte CMP_EQUAL, gMultiHitCounter, 0, BattleScript_RoarSuccessSwitch_RestoreTarget
+	setmultihit 1
+BattleScript_RoarSuccessSwitch_RestoreTarget:
 	restoretarget
-	removeitem BS_TARGET
 	setbyte sSWITCH_CASE, B_SWITCH_NORMAL
 	return
 
@@ -6999,6 +7065,9 @@ BattleScript_MagicCoatBounce::
 	attackstring
 	ppreduce
 	pause B_WAIT_TIME_SHORT
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0, BattleScript_MagicCoatBounce_Print
+	call BattleScript_AbilityPopUp
+BattleScript_MagicCoatBounce_Print:
 	printfromtable gMagicCoatBounceStringIds
 	waitmessage B_WAIT_TIME_LONG
 	orword gHitMarker, HITMARKER_ATTACKSTRING_PRINTED | HITMARKER_NO_PPDEDUCT | HITMARKER_x800000
@@ -9115,6 +9184,7 @@ BattleScript_RedCardActivates::
 	playanimation BS_SCRIPTING, B_ANIM_HELD_ITEM_EFFECT, NULL
 	printstring STRINGID_REDCARDACTIVATE
 	waitmessage B_WAIT_TIME_LONG
+	removeitem BS_SCRIPTING
 	swapattackerwithtarget
 	jumpifstatus3 BS_EFFECT_BATTLER, STATUS3_ROOTED, BattleScript_RedCardIngrain
 	jumpifability BS_EFFECT_BATTLER, ABILITY_SUCTION_CUPS, BattleScript_RedCardSuctionCups
@@ -9126,13 +9196,11 @@ BattleScript_RedCardEnd:
 BattleScript_RedCardIngrain:
 	printstring STRINGID_PKMNANCHOREDITSELF
 	waitmessage B_WAIT_TIME_LONG
-	removeitem BS_SCRIPTING
 	swapattackerwithtarget
 	return
 BattleScript_RedCardSuctionCups:
 	printstring STRINGID_PKMNANCHORSITSELFWITH	
 	waitmessage B_WAIT_TIME_LONG
-	removeitem BS_SCRIPTING
 	swapattackerwithtarget
 	return
 

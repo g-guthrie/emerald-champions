@@ -259,7 +259,7 @@ DewfordTown_Hall_EventScript_SludgeBombMan:: @ 81FD7DA
 	call Common_EventScript_BufferTrendyPhrase
 	goto_if_set FLAG_RECEIVED_TM36, DewfordTown_Hall_EventScript_ReceivedSludgeBomb
 	msgbox DewfordTown_Hall_Text_GiveYouSludgeBomb, MSGBOX_DEFAULT
-	giveitem ITEM_TM36_SLUDGE_BOMB
+	giveitem ITEM_BLACK_SLUDGE
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM36
@@ -530,4 +530,3 @@ DewfordTown_Hall_Text_LoveSludgeBombButTrendInToo: @ 81FE1ED
 	.string "But Pokémon with the move\n"
 	.string "“{STR_VAR_1}”\l"
 	.string "are in, too.$"
-

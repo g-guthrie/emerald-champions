@@ -1281,4 +1281,16 @@ const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1] = {
     // Calyrex
     [SPECIES_CALYREX_ICE_RIDER] = _("Calyrex"),
     [SPECIES_CALYREX_SHADOW_RIDER] = _("Calyrex"),
+    // Champions Megas
+    [SPECIES_MEGANIUM_MEGA] = _("Meganium"),
+    [SPECIES_FERALIGATR_MEGA] = _("Feraligatr"),
+    [SPECIES_EMBOAR_MEGA] = _("Emboar"),
+    [SPECIES_RAICHU_MEGA_X] = _("Raichu"),
+    [SPECIES_RAICHU_MEGA_Y] = _("Raichu"),
+    [SPECIES_DRAGONITE_MEGA] = _("Dragonite"),
+    [SPECIES_EXCADRILL_MEGA] = _("Excadrill"),
+    [SPECIES_MALAMAR_MEGA] = _("Malamar"),
+    [SPECIES_CHANDELURE_MEGA] = _("Chandelure"),
+    [SPECIES_HAWLUCHA_MEGA] = _("Hawlucha"),
+    [SPECIES_GRENINJA_MEGA] = _("Greninja"),
 };

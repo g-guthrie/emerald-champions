@@ -285,7 +285,7 @@ SafariZone_Northeast_Text_Boy: @ 82A59A4
 	.string "decide what I should catch.$"
 
 SafariZone_Northeast_Text_Woman: @ 82A5A09
-	.string "I heard that you can see PIKACHU here.\n"
+	.string "I heard that you can see Pikachu here.\n"
 	.string "Where might one be?$"
 
 SafariZone_Northeast_Text_Girl: @ 82A5A44

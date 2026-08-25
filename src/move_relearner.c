@@ -24,6 +24,7 @@
 #include "task.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#include "constants/moves.h"
 
 /*
  * Move relearner state machine
@@ -150,7 +151,7 @@
 #define JAM_HEART_EMPTY 2
 #define JAM_HEART_FULL 3
 
-#define MAX_RELEARNER_MOVES (MAX_LEVEL_UP_MOVES > 25 ? MAX_LEVEL_UP_MOVES : 25)
+#define MAX_RELEARNER_MOVES MOVES_COUNT
 
 static EWRAM_DATA struct
 {
@@ -159,8 +160,8 @@ static EWRAM_DATA struct
     u16 movesToLearn[MAX_RELEARNER_MOVES];               /*0x01A*/
     u8 partyMon;                                         /*0x044*/
     u8 moveSlot;                                         /*0x045*/
-    struct ListMenuItem menuItems[MAX_RELEARNER_MOVES];  /*0x0E8*/
-    u8 numMenuChoices;                                   /*0x110*/
+    struct ListMenuItem menuItems[MAX_RELEARNER_MOVES + 1];
+    u16 numMenuChoices;
     u8 numToShowAtOnce;                                  /*0x111*/
     u8 moveListMenuTask;                                 /*0x112*/
     u8 moveListScrollArrowTask;                          /*0x113*/

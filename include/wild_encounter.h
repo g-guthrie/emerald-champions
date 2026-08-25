@@ -2,10 +2,21 @@
 #define GUARD_WILD_ENCOUNTER_H
 
 #define LAND_WILD_COUNT     12
-#define WATER_WILD_COUNT    5
-#define ROCK_WILD_COUNT     5
+#define WATER_WILD_COUNT    4
+#define ROCK_WILD_COUNT     4
 #define FISH_WILD_COUNT     10
 #define HONEY_WILD_COUNT    6
+
+enum WildEncounterSlotType
+{
+    WILD_SLOT_LAND,
+    WILD_SLOT_WATER,
+    WILD_SLOT_ROCK_SMASH,
+    WILD_SLOT_OLD_ROD,
+    WILD_SLOT_GOOD_ROD,
+    WILD_SLOT_SUPER_ROD,
+    WILD_SLOT_HONEY,
+};
 
 struct WildPokemon
 {
@@ -51,5 +62,6 @@ bool8 UpdateRepelCounter(void);
 bool8 TryDoDoubleWildBattle(void);
 void HoneyWildEncounter(void);
 u16 GetCurrentMapWildMonHeaderId(void);
+u8 GetWildEncounterSlotChance(u8 slotType, u8 slot);
 
 #endif // GUARD_WILD_ENCOUNTER_H

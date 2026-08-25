@@ -51,7 +51,7 @@ Route114_EventScript_RoarGentleman:: @ 81F25D1
 	faceplayer
 	goto_if_set FLAG_RECEIVED_TM05, Route114_EventScript_ReceivedRoar
 	msgbox Route114_Text_AllMyMonDoesIsRoarTakeThis, MSGBOX_DEFAULT
-	giveitem ITEM_TM05_ROAR
+	giveitem ITEM_EJECT_PACK
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM05
@@ -208,4 +208,3 @@ Route114_Text_FossilManiacsHouseSign: @ 81F28DB
 
 Route114_Text_LanettesHouse: @ 81F2910
 	.string "Lanette's House$"
-

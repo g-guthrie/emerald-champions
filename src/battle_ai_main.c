@@ -282,7 +282,8 @@ static u8 ChooseMoveOrAction_Singles(void)
     if (CountUsablePartyMons(sBattler_AI) > 0
         && !IsAbilityPreventingEscape(sBattler_AI)
         && !(gBattleMons[gActiveBattler].status2 & (STATUS2_WRAPPED | STATUS2_ESCAPE_PREVENTION))
-        && !(gStatuses3[gActiveBattler] & STATUS3_ROOTED)
+        && (!(gStatuses3[gActiveBattler] & STATUS3_ROOTED)
+            || (B_GHOSTS_ESCAPE >= GEN_6 && IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_GHOST)))
         && !(gBattleTypeFlags & (BATTLE_TYPE_ARENA | BATTLE_TYPE_PALACE))
         && AI_THINKING_STRUCT->aiFlags & (AI_FLAG_CHECK_VIABILITY | AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_PREFER_BATON_PASS))
     {
@@ -1304,8 +1305,9 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             break;
         case EFFECT_SNORE:
         case EFFECT_SLEEP_TALK:
-            if (IsWakeupTurn(battlerAtk) || (!(gBattleMons[battlerAtk].status1 & STATUS1_SLEEP) || AI_DATA->atkAbility != ABILITY_COMATOSE))
-                score -= 10;    // if mon will wake up, is not asleep, or is not comatose
+            if (IsWakeupTurn(battlerAtk)
+             || (!(gBattleMons[battlerAtk].status1 & STATUS1_SLEEP) && AI_DATA->atkAbility != ABILITY_COMATOSE))
+                score -= 10;    // If the mon will wake up, or is neither asleep nor comatose.
             break;
         case EFFECT_MEAN_LOOK:
             if (IsBattlerTrapped(battlerDef, TRUE) || DoesPartnerHaveSameMoveEffect(AI_DATA->battlerAtkPartner, battlerDef, move, AI_DATA->partnerMove))
@@ -1918,7 +1920,8 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         case EFFECT_SOLARBEAM:
             if (AI_DATA->atkHoldEffect == HOLD_EFFECT_POWER_HERB
               || (AI_WeatherHasEffect() && gBattleWeather & WEATHER_SUN_ANY && AI_DATA->atkHoldEffect != HOLD_EFFECT_UTILITY_UMBRELLA)
-              || AI_DATA->atkAbility == ABILITY_CHLOROPLAST)
+              || AI_DATA->atkAbility == ABILITY_CHLOROPLAST
+              || AI_DATA->atkAbility == ABILITY_MEGA_SOL)
                 break;
             if (CanTargetFaintAi(battlerDef, battlerAtk)) //Attacker can be knocked out
                 score -= 4;
@@ -3252,7 +3255,8 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         break;
     case EFFECT_GROWTH:
             if ((AI_WeatherHasEffect() && gBattleWeather & WEATHER_SUN_ANY && AI_DATA->atkHoldEffect != HOLD_EFFECT_UTILITY_UMBRELLA)
-              || AI_DATA->atkAbility == ABILITY_CHLOROPLAST)
+              || AI_DATA->atkAbility == ABILITY_CHLOROPLAST
+              || AI_DATA->atkAbility == ABILITY_MEGA_SOL)
               score++;
               // fallthrough
     case EFFECT_ATTACK_SPATK_UP:    // work up
@@ -3447,7 +3451,7 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
           || HasMoveEffect(battlerDef, EFFECT_CONFUSE)
           || HasMoveEffect(battlerDef, EFFECT_LEECH_SEED))
             score += 2;
-        if (!gBattleMons[battlerDef].status2 & (STATUS2_WRAPPED | STATUS2_ESCAPE_PREVENTION && GetHealthPercentage(battlerAtk) > 70))
+        if (GetHealthPercentage(battlerAtk) > 70)
             score++;
         break;
     case EFFECT_MIMIC:
@@ -3530,7 +3534,9 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         break;
     case EFFECT_ENCORE:
         if (gDisableStructs[battlerDef].encoreTimer == 0
-          && (B_MENTAL_HERB >= GEN_5 && AI_DATA->defHoldEffect != HOLD_EFFECT_MENTAL_HERB))    // mental herb
+          && (B_MENTAL_HERB >= GEN_5 && AI_DATA->defHoldEffect != HOLD_EFFECT_MENTAL_HERB)
+          && gLastMoves[battlerDef] != MOVE_NONE
+          && gLastMoves[battlerDef] != 0xFFFF)
         {
             if (IsEncoreEncouragedEffect(gBattleMoves[gLastMoves[battlerDef]].effect))
                 score += 3;
@@ -3546,7 +3552,8 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         break;    
     case EFFECT_SLEEP_TALK:
     case EFFECT_SNORE:
-        if (!IsWakeupTurn(battlerAtk) && gBattleMons[battlerAtk].status1 & STATUS1_SLEEP)
+        if (!IsWakeupTurn(battlerAtk)
+         && ((gBattleMons[battlerAtk].status1 & STATUS1_SLEEP) || AI_DATA->atkAbility == ABILITY_COMATOSE))
             score += 10;
         break;
     case EFFECT_LOCK_ON:
@@ -4357,10 +4364,13 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         break;
     case EFFECT_RELIC_SONG:
         #if (defined SPECIES_MELOETTA && defined SPECIES_MELOETTA_PIROUETTE)
-        if (AI_DATA->atkSpecies == SPECIES_MELOETTA && gBattleMons[battlerDef].defense < gBattleMons[battlerDef].spDefense)
-            score += 3; // Change to pirouette if can do more damage
-        else if (AI_DATA->atkSpecies == SPECIES_MELOETTA_PIROUETTE && gBattleMons[battlerDef].spDefense < gBattleMons[battlerDef].defense)
-            score += 3; // Change to Aria if can do more damage
+        if (!(gBattleMons[battlerAtk].status2 & STATUS2_TRANSFORMED))
+        {
+            if (AI_DATA->atkSpecies == SPECIES_MELOETTA && gBattleMons[battlerDef].defense < gBattleMons[battlerDef].spDefense)
+                score += 3; // Change to pirouette if can do more damage
+            else if (AI_DATA->atkSpecies == SPECIES_MELOETTA_PIROUETTE && gBattleMons[battlerDef].spDefense < gBattleMons[battlerDef].defense)
+                score += 3; // Change to Aria if can do more damage
+        }
         #endif
         break;
     case EFFECT_ELECTRIC_TERRAIN:
@@ -4561,7 +4571,9 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             score += 2;
         break;
     case EFFECT_SOLARBEAM:
-        if (AI_DATA->atkHoldEffect == HOLD_EFFECT_POWER_HERB || AI_DATA->atkAbility == ABILITY_CHLOROPLAST)
+        if (AI_DATA->atkHoldEffect == HOLD_EFFECT_POWER_HERB
+         || AI_DATA->atkAbility == ABILITY_CHLOROPLAST
+         || AI_DATA->atkAbility == ABILITY_MEGA_SOL)
             score += 2;
         break;
     case EFFECT_COUNTER:

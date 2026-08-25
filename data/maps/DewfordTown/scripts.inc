@@ -87,7 +87,7 @@ DewfordTown_EventScript_OldRodFisherman::
 	faceplayer
 	goto_if_set FLAG_DEWFORD_EVIOLITE, DewfordTown_EventScript_ReceivedEviolite
 	msgbox DewfordTown_Text_FishedUpEviolite
-	giveitem ITEM_EVIOLITE
+	giveitem ITEM_SCOPE_LENS
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_BagIsFull
 	msgbox DewfordTown_Text_ReceivedEviolite, MSGBOX_DEFAULT
@@ -745,7 +745,7 @@ DewfordTown_Text_YeahDefinitionOfInRightNow: @ 81EA491
 	.string "definition of “in” right now.$"
 
 DewfordTown_Text_FishedUpEviolite:
-	.string "I fished up this strange rock the other\n"
+	.string "I fished up this strange lens the other\n"
 	.string "day.\p"
 	.string "It's of no use to me, so here,\n"
 	.string "you take it!$"

@@ -33,7 +33,7 @@ FortreeCity_House4_EventScript_WingullReturned:: @ 8217CD8
 	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox FortreeCity_House4_Text_WelcomeWingullTakeMentalHerb, MSGBOX_DEFAULT
-	giveitem ITEM_CHOICE_SCARF
+	giveitem ITEM_MENTAL_HERB
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_CHOICE_SCARF
@@ -84,7 +84,7 @@ FortreeCity_House4_Text_WelcomeWingullTakeMentalHerb: @ 8217E05
 	.string "Welcome back, Wingull!\p"
 	.string "Huh? What is this?\n"
 	.string "What is it holding?\p"
-	.string "A Choice Scarf?\n"
+	.string "A Mental Herb?\n"
 	.string "It must have picked it up somewhere.\p"
 	.string "But I'm not a Trainer, so you can\n"
 	.string "have it.$"
@@ -95,4 +95,3 @@ FortreeCity_House4_Text_FriendsFarAwayThanksToWingull: @ 8217EA8
 
 FortreeCity_House4_Text_Wingull: @ 8217EE0
 	.string "Wingull: Pihyoh!$"
-

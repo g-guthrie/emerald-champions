@@ -48,7 +48,7 @@ FortreeCity_Gym_EventScript_WinonaDefeated:: @ 82165FD
 	end
 
 FortreeCity_Gym_EventScript_GiveRoost2:: @ 8216646
-	giveitem ITEM_TM51_ROOST
+	giveitem ITEM_SAFETY_GOGGLES
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox FortreeCity_Gym_Text_ExplainRoost, MSGBOX_DEFAULT
@@ -57,7 +57,7 @@ FortreeCity_Gym_EventScript_GiveRoost2:: @ 8216646
 	end
 
 FortreeCity_Gym_EventScript_GiveRoost:: @ 821666A
-	giveitem ITEM_TM51_ROOST
+	giveitem ITEM_SAFETY_GOGGLES
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_BagIsFull
 	msgbox FortreeCity_Gym_Text_ExplainRoost, MSGBOX_DEFAULT
@@ -65,14 +65,8 @@ FortreeCity_Gym_EventScript_GiveRoost:: @ 821666A
 	return
 
 FortreeCity_Gym_EventScript_WinonaRematch::
-	message FortreeCity_Gym_Text_WinonaChooseFormat
-	waitmessage
-	multichoice 17, 6, MULTI_REMATCH_BATTLE_MODE, 0
-	switch VAR_RESULT
-	case 0, FortreeCity_Gym_EventScript_SetSingles
-	case 1, FortreeCity_Gym_EventScript_SetDoubles
-	case 2, FortreeCity_Gym_EventScript_Exit
-	case 127, FortreeCity_Gym_EventScript_Exit
+	trainerbattle_no_intro TRAINER_WINONA_5, FortreeCity_Gym_Text_WinonaRematchDefeat
+	setflag FLAG_DAILY_REMATCH_WINONA
 	releaseall
 	end
 
@@ -300,7 +294,9 @@ FortreeCity_Gym_Text_WinonaIntro: @ 8216D75
 	.string "However grueling the battle, we have\n"
 	.string "triumphed with grace…\p"
 	.string "Witness the elegant choreography\n"
-	.string "of Bird Pokémon and I!$"
+	.string "of Bird Pokémon and I!\p"
+	.string "Two wings turn together. Lose the\n"
+	.string "wind for one moment, and you fall.$"
 
 FortreeCity_Gym_Text_WinonaDefeat: @ 8216E60
 	.string "Never before have I seen a Trainer\n"
@@ -321,13 +317,9 @@ FortreeCity_Gym_Text_ExplainFeatherBadgeTakeThis: @ 8216F17
 	.string "This is a gift from me.$"
 
 FortreeCity_Gym_Text_ExplainRoost: @ 8216FEC
-	.string "Roost…\p"
-	.string "With this move, the user can restore its\n"
-	.string "HP by up to half of its max HP by\l"
-	.string "landing on the ground and resting.\p"
-	.string "However, the user loses its Flying-type\n"
-	.string "designation during the turn, so be\l"
-	.string "cautious.$"
+	.string "Those Safety Goggles protect their\n"
+	.string "holder from powder moves and damaging\l"
+	.string "weather. Use them well.$"
 
 FortreeCity_Gym_Text_RegisteredWinona: @ 8217044
 	.string "Registered Gym Leader Winona\n"

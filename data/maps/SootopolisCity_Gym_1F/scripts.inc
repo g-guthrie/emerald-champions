@@ -127,7 +127,7 @@ SootopolisCity_Gym_1F_EventScript_JuanDefeated:: @ 8224F82
 	end
 
 SootopolisCity_Gym_1F_EventScript_GiveScald:: @ 8224FD4
-	giveitem ITEM_TM55_SCALD
+	giveitem ITEM_WEAKNESS_POLICY
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_BagIsFull
 	msgbox SootopolisCity_Gym_1F_Text_ExplainScald, MSGBOX_DEFAULT
@@ -135,7 +135,7 @@ SootopolisCity_Gym_1F_EventScript_GiveScald:: @ 8224FD4
 	return
 
 SootopolisCity_Gym_1F_EventScript_GiveScald2:: @ 8224FF7
-	giveitem ITEM_TM55_SCALD
+	giveitem ITEM_WEAKNESS_POLICY
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox SootopolisCity_Gym_1F_Text_ExplainScald, MSGBOX_DEFAULT
@@ -149,14 +149,8 @@ SootopolisCity_Gym_1F_EventScript_GoGetFortreeBadge:: @ 822501B
 	end
 
 SootopolisCity_Gym_1F_EventScript_JuanRematch::
-	message SootopolisCity_Gym_1F_Text_JuanChooseFormat
-	waitmessage
-	multichoice 17, 6, MULTI_REMATCH_BATTLE_MODE, 0
-	switch VAR_RESULT
-	case 0, SootopolisCity_Gym_1F_EventScript_SetSingles
-	case 1, SootopolisCity_Gym_1F_EventScript_SetDoubles
-	case 2, SootopolisCity_Gym_1F_EventScript_Exit
-	case 127, SootopolisCity_Gym_1F_EventScript_Exit
+	trainerbattle_no_intro TRAINER_JUAN_5, SootopolisCity_Gym_1F_Text_JuanRematchDefeat
+	setflag FLAG_DAILY_REMATCH_JUAN
 	releaseall
 	end
 
@@ -270,7 +264,9 @@ SootopolisCity_Gym_1F_Text_JuanIntro: @ 8225268
 	.string "Please, you shall bear witness to\n"
 	.string "our artistry.\p"
 	.string "A grand illusion of water sculpted\n"
-	.string "by Pokémon and myself!$"
+	.string "by Pokémon and myself!\p"
+	.string "The tide will close around both of\n"
+	.string "your Pokémon. There is no shore.$"
 
 @ NOTE: This defeat text actually causes a buffer overflow. It's about 50 bytes too long for
 @ the gDisplayedStringBattle buffer that it's put into, and it stomps all over the gBattleTextBuffs
@@ -316,11 +312,9 @@ SootopolisCity_Gym_1F_Text_TakeThis:
 	.string "battle we shared, take this…$"
 
 SootopolisCity_Gym_1F_Text_ExplainScald: @ 82256C1
-	.string "The Technical Machine I handed you\n"
-	.string "contains Scald.\p"
-	.string "In use, it will occasionally burn\n"
-	.string "the target with boiling hot water.\p"
-	.string "… … … … … …$"
+	.string "That Weakness Policy rewards a Pokémon\n"
+	.string "for enduring a super-effective hit by\l"
+	.string "sharply raising its offenses.$"
 
 SootopolisCity_Gym_1F_Text_RegisteredJuan: @ 822574D
 	.string "Registered Gym Leader Juan\n"

@@ -114,7 +114,7 @@ LavaridgeTown_PokemonCenter_1F_EventScript_LucyBattle::
 	trainerbattle_no_intro TRAINER_LUCY_LAVARIDGE, LavaridgeTown_PokemonCenter_1F_Text_LucyDefeat
 	setvar VAR_LAVARIDGE_LUCY_STATE, 2
 	msgbox LavaridgeTown_PokemonCenter_1F_Text_LucyGiveChoiceBand, MSGBOX_DEFAULT
-	giveitem ITEM_CHOICE_BAND
+	giveitem ITEM_BLACK_SLUDGE
 	giveitem ITEM_BOTTLE_CAP, 3
 	msgbox LavaridgeTown_PokemonCenter_1F_Text_LucyGoodbye, MSGBOX_AUTOCLOSE
 	waitmessage

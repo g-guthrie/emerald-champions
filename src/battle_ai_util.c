@@ -281,6 +281,9 @@ static const s8 sAiAbilityRatings[ABILITIES_COUNT] =
     [ABILITY_PERISH_BODY] = -1,
     [ABILITY_WANDERING_SPIRIT] = 2,
     [ABILITY_GORILLA_TACTICS] = 4,
+    [ABILITY_PIERCING_DRILL] = 7,
+    [ABILITY_DRAGONIZE] = 8,
+    [ABILITY_MEGA_SOL] = 9,
 };
 
 static const u16 sEncouragedEncoreEffects[] = 
@@ -524,6 +527,9 @@ void SaveBattlerData(u8 battlerId)
         AI_THINKING_STRUCT->saved[battlerId].species = gBattleMons[battlerId].species;
         for (i = 0; i < 4; i++)
             AI_THINKING_STRUCT->saved[battlerId].moves[i] = gBattleMons[battlerId].moves[i];
+        AI_THINKING_STRUCT->saved[battlerId].types[0] = gBattleMons[battlerId].type1;
+        AI_THINKING_STRUCT->saved[battlerId].types[1] = gBattleMons[battlerId].type2;
+        AI_THINKING_STRUCT->saved[battlerId].types[2] = gBattleMons[battlerId].type3;
     }
 }
 
@@ -556,7 +562,14 @@ void SetBattlerData(u8 battlerId)
 
         // Simulate Illusion
         if ((illusionMon = GetIllusionMonPtr(battlerId)) != NULL)
-            gBattleMons[battlerId].species = GetMonData(illusionMon, MON_DATA_SPECIES2);
+        {
+            u16 illusionSpecies = GetMonData(illusionMon, MON_DATA_SPECIES2);
+
+            gBattleMons[battlerId].species = illusionSpecies;
+            gBattleMons[battlerId].type1 = gBaseStats[illusionSpecies].type1;
+            gBattleMons[battlerId].type2 = gBaseStats[illusionSpecies].type2;
+            gBattleMons[battlerId].type3 = TYPE_MYSTERY;
+        }
     }
 }
 
@@ -571,6 +584,9 @@ void RestoreBattlerData(u8 battlerId)
         gBattleMons[battlerId].species = AI_THINKING_STRUCT->saved[battlerId].species;
         for (i = 0; i < 4; i++)
             gBattleMons[battlerId].moves[i] = AI_THINKING_STRUCT->saved[battlerId].moves[i];
+        gBattleMons[battlerId].type1 = AI_THINKING_STRUCT->saved[battlerId].types[0];
+        gBattleMons[battlerId].type2 = AI_THINKING_STRUCT->saved[battlerId].types[1];
+        gBattleMons[battlerId].type3 = AI_THINKING_STRUCT->saved[battlerId].types[2];
     }
 }
 
@@ -2432,22 +2448,13 @@ struct Pokemon *GetPartyBattlerPartyData(u8 battlerId, u8 switchBattler)
 
 static bool32 PartyBattlerShouldAvoidHazards(u8 currBattler, u8 switchBattler)
 {
-    struct Pokemon *mon = GetPartyBattlerPartyData(currBattler, switchBattler);
-    u16 ability = GetMonAbility(mon);   // we know our own party data
-    u16 holdEffect = GetBattlerHoldEffect(GetMonData(mon, MON_DATA_HELD_ITEM), TRUE);
-    u32 flags = gSideStatuses[GetBattlerSide(currBattler)] & (SIDE_STATUS_SPIKES | SIDE_STATUS_STEALTH_ROCK | SIDE_STATUS_STICKY_WEB | SIDE_STATUS_TOXIC_SPIKES);
-    
-    if (flags == 0)
-        return FALSE;
-    
-    if (ability == ABILITY_MAGIC_GUARD || ability == ABILITY_LEVITATE
-      || holdEffect == HOLD_EFFECT_HEAVY_DUTY_BOOTS)
-        return FALSE;
-    
-    if (flags & (SIDE_STATUS_SPIKES | SIDE_STATUS_STEALTH_ROCK) && GetMonData(mon, MON_DATA_HP) < (GetMonData(mon, MON_DATA_MAX_HP) / 8))
+    struct Pokemon *mon;
+
+    if (switchBattler >= PARTY_SIZE)
         return TRUE;
-    
-    return FALSE;
+
+    mon = GetPartyBattlerPartyData(currBattler, switchBattler);
+    return AI_CalcPartyMonHazardDamage(currBattler, mon) >= GetMonData(mon, MON_DATA_HP);
 }
 
 enum {
@@ -2461,10 +2468,15 @@ bool32 ShouldPivot(u8 battlerAtk, u8 battlerDef, u16 defAbility, u16 move, u8 mo
     u8 backupBattler = gActiveBattler;
     bool32 shouldSwitch;
     u8 battlerToSwitch;
+
+    if (CountUsablePartyMons(battlerAtk) == 0)
+        return CAN_TRY_PIVOT;
     
     gActiveBattler = battlerAtk;
-    shouldSwitch = ShouldSwitch();    
+    shouldSwitch = ShouldSwitch();
     battlerToSwitch = *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler);
+    if (battlerToSwitch >= PARTY_SIZE)
+        battlerToSwitch = GetMostSuitableMonToSwitchInto();
     gActiveBattler = backupBattler;
 
     if (PartyBattlerShouldAvoidHazards(battlerAtk, battlerToSwitch))
@@ -2472,9 +2484,6 @@ bool32 ShouldPivot(u8 battlerAtk, u8 battlerDef, u16 defAbility, u16 move, u8 mo
 
     if (!IsDoubleBattle())
     {
-        if (CountUsablePartyMons(battlerAtk) == 0)
-            return CAN_TRY_PIVOT; // can't switch, but attack might still be useful
-
         //TODO - predict opponent switching
         /*if (IsPredictedToSwitch(battlerDef, battlerAtk) && !hasStatBoost)
             return PIVOT; // Try pivoting so you can switch to a better matchup to counter your new opponent*/

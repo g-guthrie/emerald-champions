@@ -41,11 +41,10 @@ FallarborTown_Mart_EventScript_Skitty:: @ 81FFD06
 FallarborTown_Mart_EventScript_DrainPunchTM::
 	lock
 	faceplayer
-	checkitem ITEM_TM60_DRAIN_PUNCH, 1
-	compare VAR_RESULT, 1
-	goto_if_eq FallarborTown_Mart_EventScript_ReceivedTM60
+	goto_if_set FLAG_VERDANT_GIFT_DRAIN_PUNCH, FallarborTown_Mart_EventScript_ReceivedTM60
 	msgbox FallarborTown_Mart_Text_FreeSample, MSGBOX_DEFAULT
-	giveitem ITEM_TM60_DRAIN_PUNCH
+	giveitem ITEM_MUSCLE_BAND
+	setflag FLAG_VERDANT_GIFT_DRAIN_PUNCH
 	msgbox FallarborTown_Mart_Text_HaveTM60, MSGBOX_DEFAULT
 	release
 	end
@@ -91,4 +90,3 @@ FallarborTown_Mart_Text_SellNuggetIFound: @ 81FFE09
 	.string "This Nugget I found here…\n"
 	.string "I suppose I'll have to sell it, seeing\l"
 	.string "as how it has no other use.$"
-

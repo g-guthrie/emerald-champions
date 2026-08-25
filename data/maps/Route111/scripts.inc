@@ -630,18 +630,6 @@ Route111_EventScript_UpgradeVialHideNurse::
 	msgbox Route111_Text_ThanksPlayer, MSGBOX_AUTOCLOSE
 	setvar VAR_POKE_VIAL_MAX_CHARGES, 2
 	setvar VAR_POKE_VIAL_CHARGES, 2
-	specialvar VAR_RESULT, GetPlayerFacingDirection
-	compare VAR_RESULT, DIR_NORTH
-	goto_if_eq Route111_EventScript_NurseLeaves2
-	applymovement LOCALID_NURSE, Route111_Movement_NurseLeaves1
-	waitmovement 0
-	removeobject LOCALID_NURSE
-	releaseall
-	end
-
-Route111_EventScript_NurseLeaves2::
-	applymovement LOCALID_NURSE, Route111_Movement_NurseLeaves2
-	waitmovement 0
 	removeobject LOCALID_NURSE
 	releaseall
 	end
@@ -663,25 +651,6 @@ Route111_Movement_ChanseyEscape:
 	walk_up
 	walk_up
 	walk_up
-	step_end
-
-Route111_Movement_NurseLeaves1:
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	step_end
-
-Route111_Movement_NurseLeaves2:
-	walk_right
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
 	step_end
 
 Route111_Text_BlobGetBackHere:
@@ -867,4 +836,3 @@ Route111_Text_TrainerHillSign: @ 81F1D61
 	.string "{RIGHT_ARROW} Trainer Hill Entrance\p"
 	.string "“Scale the heights, you hot-blooded\n"
 	.string "Trainers!”$"
-

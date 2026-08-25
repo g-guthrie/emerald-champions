@@ -372,14 +372,8 @@ PetalburgCity_Gym_EventScript_GiveFacade2:: @ 8204DAC
 	end
 
 PetalburgCity_Gym_EventScript_NormanRematch::
-	message PetalburgCity_Gym_Text_NormanChooseFormat
-	waitmessage
-	multichoice 17, 6, MULTI_REMATCH_BATTLE_MODE, 0
-	switch VAR_RESULT
-	case 0, PetalburgCity_Gym_EventScript_SetSingles
-	case 1, PetalburgCity_Gym_EventScript_SetDoubles
-	case 2, PetalburgCity_Gym_EventScript_Exit
-	case 127, PetalburgCity_Gym_EventScript_Exit
+	trainerbattle_no_intro TRAINER_NORMAN_4, PetalburgCity_Gym_Text_NormanRematchDefeat
+	setflag FLAG_DAILY_REMATCH_NORMAN
 	releaseall
 	end
 
@@ -451,8 +445,9 @@ PetalburgCity_Gym_EventScript_GiveEnigmaBerry:: @ 8204E1D
 	end
 
 PetalburgCity_Gym_EventScript_NormanGiveKeystone::
-	goto_if_set FLAG_SYS_RECEIVED_KEYSTONE, PetalburgCity_Gym_EventScript_NormanBattle
 	msgbox PetalburgCity_Gym_Text_NormanIntro, MSGBOX_DEFAULT
+	goto_if_set FLAG_SYS_RECEIVED_KEYSTONE, PetalburgCity_Gym_EventScript_NormanBattle
+	msgbox PetalburgCity_Gym_Text_NormanStevenFallback, MSGBOX_DEFAULT
 	giveitem ITEM_MEGA_BRACELET
 	setflag FLAG_SYS_RECEIVED_KEYSTONE
 	msgbox PetalburgCity_Gym_Text_NormanMegaBracelet, MSGBOX_DEFAULT
@@ -508,7 +503,7 @@ PetalburgCity_Gym_EventScript_NormanBattle::
 	end
 
 PetalburgCity_Gym_EventScript_GiveFacade:: @ 8204ED2
-	giveitem ITEM_TM42_FACADE
+	giveitem ITEM_TOXIC_ORB
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_BagIsFull
 	setflag FLAG_RECEIVED_TM42
@@ -1425,7 +1420,12 @@ PetalburgCity_Gym_Text_NormanIntro: @ 8205FE5
 	.string "So, you did get four Gym Badges.\p"
 	.string "Fine, as I promised, we will have\n"
 	.string "a Pokémon battle.\p"
-	.string "But first, let me give you this.$"
+	.string "I've been waiting for this.$"
+
+PetalburgCity_Gym_Text_NormanStevenFallback:
+	.string "But first… Steven meant for you to\n"
+	.string "receive something in Granite Cave.\p"
+	.string "If you missed it, take it now.$"
 
 PetalburgCity_Gym_Text_NormanMegaBracelet:
 	.string "That Mega Bracelet will allow certain\n"
@@ -1453,6 +1453,8 @@ PetalburgCity_Gym_Text_NormanBattleIntro:
 	.string "But, a battle is a battle!\p"
 	.string "I will do everything in my power as\n"
 	.string "a Gym Leader to win.\p"
+	.string "No formation, no partner to hide\n"
+	.string "behind. This is a true singles duel.\p"
 	.string "{PLAYER}, you'd better give it your\n"
 	.string "best shot, too!$"
 

@@ -21,14 +21,13 @@ VerdanturfTown_PokemonCenter_1F_EventScript_Nurse:: @ 820273A
 VerdanturfTown_PokemonCenter_1F_EventScript_XscissorTM::
 	lock
 	faceplayer
-	checkitem ITEM_TM81_X_SCISSOR, 1
-	compare VAR_RESULT, 1
-	goto_if_eq VerdanturfTown_PokemonCenter_1F_EventScript_ReceivedTM81
+	goto_if_set FLAG_VERDANT_GIFT_X_SCISSOR, VerdanturfTown_PokemonCenter_1F_EventScript_ReceivedTM81
 	msgbox VerdanturfTown_PokemonCenter_1F_Text_DoYouLikeBugs, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq VerdanturfTown_PokemonCenter_1F_EventScript_DontLikeBugs
 	msgbox VerdanturfTown_PokemonCenter_1F_Text_GiveTM81, MSGBOX_DEFAULT
-	giveitem ITEM_TM81_X_SCISSOR
+	giveitem ITEM_SILVER_POWDER
+	setflag FLAG_VERDANT_GIFT_X_SCISSOR
 	msgbox VerdanturfTown_PokemonCenter_1F_Text_HaveTM81, MSGBOX_DEFAULT
 	release
 	end
@@ -76,11 +75,11 @@ VerdanturfTown_PokemonCenter_1F_Text_DoYouLikeBugs:
 
 VerdanturfTown_PokemonCenter_1F_Text_GiveTM81:
 	.string "Yeah! I like you. We can be friends.\p"
-	.string "And you can have this TM!$"
+	.string "And you can have this Silver Powder!$"
 
 VerdanturfTown_PokemonCenter_1F_Text_HaveTM81:
-	.string "TM81 is X-scissor.\n"
-	.string "It's a wickedly cool Bug-type attack!$"
+	.string "Silver Powder powers up Bug-type moves.\n"
+	.string "It's wickedly useful for Bug Pokémon!$"
 
 VerdanturfTown_PokemonCenter_1F_Text_DontLikeBugs:
 	.string "No? We're not on the same wavelength.$"
@@ -100,4 +99,3 @@ VerdanturfTown_PokemonCenter_1F_Text_VisitForBattleTent: @ 820280B
 	.string "saying.\p"
 	.string "Or is there somebody here that you\n"
 	.string "came to see?$"
-
