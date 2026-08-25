@@ -756,6 +756,7 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] =
     [MOVE_GLACIAL_LANCE] = _("GlacialLance"),
     [MOVE_ASTRAL_BARRAGE] = _("AstrlBarrage"),
     [MOVE_EERIE_SPELL] = _("Eerie Spell"),
+#include "verdant_gen9_move_names_short.h"
 };
 
 // Second table with longer move names for places where they fit.
@@ -1517,4 +1518,5 @@ const u8 gMoveNamesLong[MOVES_COUNT][LONG_MOVE_NAME_LENGTH + 1] =
     [MOVE_GLACIAL_LANCE] = _("Glacial Lance"),
     [MOVE_ASTRAL_BARRAGE] = _("Astral Barrage"),
     [MOVE_EERIE_SPELL] = _("Eerie Spell"),
+#include "verdant_gen9_move_names_long.h"
 };

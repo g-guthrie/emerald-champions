@@ -1022,3 +1022,5 @@ static const u16 sCalyrexFormSpeciesIdTable[] = {
     SPECIES_CALYREX_SHADOW_RIDER,
     FORM_SPECIES_END,
 };
+
+#include "verdant_gen9_form_species_tables.h"

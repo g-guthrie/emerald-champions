@@ -19,6 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 TRAINERS_PATH = ROOT / "src/data/trainers.h"
 PARTIES_PATH = ROOT / "src/data/trainer_parties.h"
 BASE_STATS_PATH = ROOT / "src/data/pokemon/base_stats.h"
+CURATED_BASE_STATS_PATH = ROOT / "src/data/pokemon/verdant_gen9_base_stats.h"
 MANIFEST_PATH = ROOT / "docs/verdant_doubles_manifest.json"
 
 BASE_AI = (
@@ -120,7 +121,9 @@ def select_rebalanced(text: str) -> str:
 
 
 def base_ability_slots() -> dict[str, list[str]]:
-    text = select_rebalanced(BASE_STATS_PATH.read_text())
+    text = select_rebalanced(
+        BASE_STATS_PATH.read_text() + "\n" + CURATED_BASE_STATS_PATH.read_text()
+    )
     slots = {}
     pattern = re.compile(r"^\s*\[(SPECIES_[A-Z0-9_]+)\]\s*=\s*\{(.*?)(?=^\s*\[SPECIES_|\Z)", re.M | re.S)
     for match in pattern.finditer(text):

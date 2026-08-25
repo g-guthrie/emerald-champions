@@ -1291,4 +1291,5 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_CHANDELURE_MEGA] = sChandelureLevelUpLearnset,
     [SPECIES_HAWLUCHA_MEGA] = sHawluchaLevelUpLearnset,
     [SPECIES_GRENINJA_MEGA] = sGreninjaLevelUpLearnset,
+#include "verdant_gen9_level_up_pointers.h"
 };

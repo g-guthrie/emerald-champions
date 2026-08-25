@@ -6148,6 +6148,7 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_CHANDELURE_MEGA] = {.size = 0x88, .y_offset = 0},
     [SPECIES_HAWLUCHA_MEGA] = {.size = 0x88, .y_offset = 2},
     [SPECIES_GRENINJA_MEGA] = {.size = 0x88, .y_offset = 0},
+#include "verdant_gen9_front_pic_coordinates.h"
     // Egg
     [SPECIES_EGG] =
     {

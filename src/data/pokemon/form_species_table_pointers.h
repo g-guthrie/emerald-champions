@@ -516,4 +516,5 @@ const u16 *const gFormSpeciesIdTables[NUM_SPECIES] =
     // Calyrex
     [SPECIES_CALYREX_ICE_RIDER] = sCalyrexFormSpeciesIdTable,
     [SPECIES_CALYREX_SHADOW_RIDER] = sCalyrexFormSpeciesIdTable,
+#include "verdant_gen9_form_species_pointers.h"
 };

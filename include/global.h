@@ -139,7 +139,7 @@
 
 #define ROUND_BITS_TO_BYTES(numBits)(((numBits) / 8) + (((numBits) % 8) ? 1 : 0))
 
-#define DEX_FLAGS_NO (ROUND_BITS_TO_BYTES(POKEMON_SLOTS_NUMBER))
+#define DEX_FLAGS_NO (ROUND_BITS_TO_BYTES(VERDANT_LEGACY_POKEMON_SLOTS_NUMBER))
 #define NUM_FLAG_BYTES (ROUND_BITS_TO_BYTES(FLAGS_COUNT))
 
 struct Coords8
@@ -195,7 +195,12 @@ struct Pokedex
     /*0x04*/ u32 unownPersonality; // set when you first see Unown
     /*0x08*/ u32 spindaPersonality; // set when you first see Spinda
     /*0x0C*/ u32 unknown3;
-    /*0x10*/ u8 filler[0x68]; // Previously Dex Flags, feel free to remove.
+    // Save-stable sparse extension for official National-Dex numbers 899-1021.
+    // These fields exactly replace part of the old 0x68-byte filler.
+    /*0x10*/ u32 verdantGen9Magic;
+    /*0x14*/ u8 verdantGen9Seen[VERDANT_GEN9_DEX_FLAG_BYTES];
+    /*0x24*/ u8 verdantGen9Caught[VERDANT_GEN9_DEX_FLAG_BYTES];
+    /*0x34*/ u8 filler[0x44];
 };
 
 struct PokemonJumpRecords

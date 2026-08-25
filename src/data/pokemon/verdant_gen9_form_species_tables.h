@@ -1,0 +1,35 @@
+static const u16 sVerdantGimmighoulFormSpeciesIdTable[] = {
+    SPECIES_GIMMIGHOUL,
+    SPECIES_GIMMIGHOUL_ROAMING,
+    FORM_SPECIES_END,
+};
+
+static const u16 sVerdantPalafinFormSpeciesIdTable[] = {
+    SPECIES_PALAFIN,
+    SPECIES_PALAFIN_HERO,
+    FORM_SPECIES_END,
+};
+
+static const u16 sVerdantTatsugiriFormSpeciesIdTable[] = {
+    SPECIES_TATSUGIRI,
+    SPECIES_TATSUGIRI_DROOPY,
+    SPECIES_TATSUGIRI_STRETCHY,
+    SPECIES_TATSUGIRI_MEGA,
+    SPECIES_TATSUGIRI_DROOPY_MEGA,
+    SPECIES_TATSUGIRI_STRETCHY_MEGA,
+    FORM_SPECIES_END,
+};
+
+static const u16 sVerdantOgerponFormSpeciesIdTable[] = {
+    SPECIES_OGERPON,
+    SPECIES_OGERPON_WELLSPRING,
+    SPECIES_OGERPON_HEARTHFLAME,
+    SPECIES_OGERPON_CORNERSTONE,
+    FORM_SPECIES_END,
+};
+
+static const u16 sVerdantGlimmoraFormSpeciesIdTable[] = {
+    SPECIES_GLIMMORA,
+    SPECIES_GLIMMORA_MEGA,
+    FORM_SPECIES_END,
+};

@@ -649,6 +649,8 @@ static void SetMovingMonPriority(u8);
 static void SpriteCB_HeldMon(struct Sprite *);
 static struct Sprite *CreateMonIconSprite(u16, u32, s16, s16, u8, u8);
 static void DestroyBoxMonIcon(struct Sprite *);
+static void UpdateBoxMonFormForHeldItem(u8 boxPosition);
+static void UpdatePartyMonFormForHeldItem(u8 partyId);
 
 // Pokémon data
 static void MoveMon(void);
@@ -3793,9 +3795,15 @@ static void GiveChosenBagItem(void)
     {
         u8 pos = GetCursorPosition();
         if (sInPartyMenu)
+        {
             SetMonData(&gPlayerParty[pos], MON_DATA_HELD_ITEM, &itemId);
+            UpdatePartyMonFormForHeldItem(pos);
+        }
         else
+        {
             SetCurrentBoxMonData(pos, MON_DATA_HELD_ITEM, &itemId);
+            UpdateBoxMonFormForHeldItem(pos);
+        }
 
         RemoveBagItem(itemId, 1);
     }
@@ -4934,6 +4942,54 @@ static void SetPartyMonIconObjMode(u8 partyId, u8 objMode)
     if (sStorage->partySprites[partyId] != NULL)
     {
         sStorage->partySprites[partyId]->oam.objMode = objMode;
+    }
+}
+
+static void UpdateBoxMonFormForHeldItem(u8 boxPosition)
+{
+    struct BoxPokemon *boxMon = GetBoxedMonPtr(StorageGetCurrentBox(), boxPosition);
+
+    if (TryUpdateBoxMonFormForHeldItem(boxMon))
+    {
+        DestroyBoxMonIconAtPosition(boxPosition);
+        CreateBoxMonIconAtPos(boxPosition);
+        SetBoxMonIconObjMode(
+            boxPosition,
+            GetBoxMonData(boxMon, MON_DATA_HELD_ITEM) == ITEM_NONE
+                ? ST_OAM_OBJ_BLEND
+                : ST_OAM_OBJ_NORMAL
+        );
+    }
+}
+
+static void UpdatePartyMonFormForHeldItem(u8 partyId)
+{
+    struct Pokemon *mon = &gPlayerParty[partyId];
+
+    if (TryUpdateMonFormForHeldItem(mon))
+    {
+        s16 x = partyId == 0 ? 104 : 152;
+        s16 y = partyId == 0 ? 64 : 8 * (3 * (partyId - 1)) + 16;
+        bool8 invisible = sStorage->partySprites[partyId] != NULL
+            ? sStorage->partySprites[partyId]->invisible
+            : FALSE;
+
+        DestroyPartyMonIcon(partyId);
+        sStorage->partySprites[partyId] = CreateMonIconSprite(
+            GetMonData(mon, MON_DATA_SPECIES2),
+            GetMonData(mon, MON_DATA_PERSONALITY),
+            x,
+            y,
+            1,
+            12
+        );
+        sStorage->partySprites[partyId]->invisible = invisible;
+        SetPartyMonIconObjMode(
+            partyId,
+            GetMonData(mon, MON_DATA_HELD_ITEM) == ITEM_NONE
+                ? ST_OAM_OBJ_BLEND
+                : ST_OAM_OBJ_NORMAL
+        );
     }
 }
 
@@ -8862,11 +8918,13 @@ static void TakeItemFromMon(u8 cursorArea, u8 cursorPos)
     if (cursorArea == CURSOR_AREA_IN_BOX)
     {
         SetCurrentBoxMonData(cursorPos, MON_DATA_HELD_ITEM, &itemId);
+        UpdateBoxMonFormForHeldItem(cursorPos);
         SetBoxMonIconObjMode(cursorPos, 1);
     }
     else
     {
         SetMonData(&gPlayerParty[cursorPos], MON_DATA_HELD_ITEM, &itemId);
+        UpdatePartyMonFormForHeldItem(cursorPos);
         SetPartyMonIconObjMode(cursorPos, 1);
     }
 
@@ -8901,12 +8959,14 @@ static void SwapItemsWithMon(u8 cursorArea, u8 cursorPos)
     {
         itemId = GetCurrentBoxMonData(cursorPos, MON_DATA_HELD_ITEM);
         SetCurrentBoxMonData(cursorPos, MON_DATA_HELD_ITEM, &sStorage->movingItemId);
+        UpdateBoxMonFormForHeldItem(cursorPos);
         sStorage->movingItemId = itemId;
     }
     else
     {
         itemId = GetMonData(&gPlayerParty[cursorPos], MON_DATA_HELD_ITEM);
         SetMonData(&gPlayerParty[cursorPos], MON_DATA_HELD_ITEM, &sStorage->movingItemId);
+        UpdatePartyMonFormForHeldItem(cursorPos);
         sStorage->movingItemId = itemId;
     }
 
@@ -8928,11 +8988,13 @@ static void GiveItemToMon(u8 cursorArea, u8 cursorPos)
     if (cursorArea == CURSOR_AREA_IN_BOX)
     {
         SetCurrentBoxMonData(cursorPos, MON_DATA_HELD_ITEM, &sStorage->movingItemId);
+        UpdateBoxMonFormForHeldItem(cursorPos);
         SetBoxMonIconObjMode(cursorPos, 0);
     }
     else
     {
         SetMonData(&gPlayerParty[cursorPos], MON_DATA_HELD_ITEM, &sStorage->movingItemId);
+        UpdatePartyMonFormForHeldItem(cursorPos);
         SetPartyMonIconObjMode(cursorPos, 0);
     }
 }
@@ -8952,11 +9014,13 @@ static void MoveItemFromMonToBag(u8 cursorArea, u8 cursorPos)
     if (cursorArea == CURSOR_AREA_IN_BOX)
     {
         SetCurrentBoxMonData(cursorPos, MON_DATA_HELD_ITEM, &itemId);
+        UpdateBoxMonFormForHeldItem(cursorPos);
         SetBoxMonIconObjMode(cursorPos, 1);
     }
     else
     {
         SetMonData(&gPlayerParty[cursorPos], MON_DATA_HELD_ITEM, &itemId);
+        UpdatePartyMonFormForHeldItem(cursorPos);
         SetPartyMonIconObjMode(cursorPos, 1);
     }
 }

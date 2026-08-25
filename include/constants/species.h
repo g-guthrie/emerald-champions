@@ -1361,8 +1361,10 @@
 #define SPECIES_HAWLUCHA_MEGA                FORMS_START + 325
 #define SPECIES_GRENINJA_MEGA                FORMS_START + 326
 
-#define SPECIES_EGG SPECIES_GRENINJA_MEGA + 1
-#define NUM_SPECIES SPECIES_EGG
+#include "constants/verdant_gen9_species.h"
+
+#define SPECIES_EGG (SPECIES_GRENINJA_MEGA + 1)
+#define NUM_SPECIES (VERDANT_GEN9_END + 1)
 
 // National Dex Index Defines
 
@@ -2272,7 +2274,9 @@
 #define NATIONAL_DEX_SPECTRIER 897
 #define NATIONAL_DEX_CALYREX 898
 
-#define NATIONAL_DEX_COUNT NATIONAL_DEX_CALYREX
+#include "constants/verdant_gen9_pokedex.h"
+
+#define NATIONAL_DEX_COUNT NATIONAL_DEX_RAGING_BOLT
 #define POKEMON_SLOTS_NUMBER (NATIONAL_DEX_COUNT + 1)
 
 // Hoenn Dex(ORAS) Index Defines

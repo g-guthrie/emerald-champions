@@ -79,6 +79,8 @@ enum
 #define SAVE_STATUS_NO_FLASH 4
 #define SAVE_STATUS_ERROR    0xFF
 
+void MigrateVerdantGen9WorldItems(void);
+
 extern u16 gLastWrittenSector;
 extern u32 gLastSaveCounter;
 extern u16 gLastKnownGoodSector;

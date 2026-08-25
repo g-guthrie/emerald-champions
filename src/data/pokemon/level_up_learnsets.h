@@ -1149,6 +1149,7 @@ static const struct LevelUpMove sPrimeapeLevelUpLearnset[] = {
     LEVEL_UP_MOVE(22, MOVE_CROSS_CHOP),
     LEVEL_UP_MOVE(26, MOVE_ASSURANCE),
     LEVEL_UP_MOVE(30, MOVE_PUNISHMENT),
+    LEVEL_UP_MOVE(35, MOVE_RAGE_FIST),
     LEVEL_UP_MOVE(35, MOVE_THRASH),
     LEVEL_UP_MOVE(39, MOVE_CLOSE_COMBAT),
     LEVEL_UP_MOVE(44, MOVE_SCREECH),
@@ -4311,6 +4312,7 @@ static const struct LevelUpMove sGirafarigLevelUpLearnset[] = {
     LEVEL_UP_MOVE(19, MOVE_PSYBEAM),
     LEVEL_UP_MOVE(23, MOVE_AGILITY),
     LEVEL_UP_MOVE(28, MOVE_DOUBLE_HIT),
+    LEVEL_UP_MOVE(32, MOVE_TWIN_BEAM),
     LEVEL_UP_MOVE(32, MOVE_ZEN_HEADBUTT),
     LEVEL_UP_MOVE(37, MOVE_CRUNCH),
     #ifdef REBALANCED_VERSION
@@ -19890,3 +19892,5 @@ static const struct LevelUpMove sCalyrexShadowRiderLevelUpLearnset[] = {
     LEVEL_UP_MOVE(88, MOVE_FUTURE_SIGHT),
     LEVEL_UP_END
 };
+
+#include "verdant_gen9_level_up_learnsets.h"

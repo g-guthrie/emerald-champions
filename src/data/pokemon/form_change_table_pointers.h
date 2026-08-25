@@ -58,4 +58,5 @@ const struct FormChange *const gFormChangeTablePointers[NUM_SPECIES] =
     [SPECIES_SILVALLY_ROCK] = sSilvallyFormChangeTable,
     [SPECIES_SILVALLY_STEEL] = sSilvallyFormChangeTable,
     [SPECIES_SILVALLY_WATER] = sSilvallyFormChangeTable,
+#include "verdant_gen9_form_change_pointers.h"
 };

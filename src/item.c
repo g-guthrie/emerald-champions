@@ -83,6 +83,10 @@ static const struct BattleItemUnlock sBattleItemUnlocks[] =
     {ITEM_HEAVY_DUTY_BOOTS, DISCOVERY_ONLY},
     {ITEM_BLUNDER_POLICY,   DISCOVERY_ONLY},
     {ITEM_ROOM_SERVICE,     DISCOVERY_ONLY},
+    {ITEM_BOOSTER_ENERGY,   DISCOVERY_ONLY},
+    {ITEM_WELLSPRING_MASK,  DISCOVERY_ONLY},
+    {ITEM_HEARTHFLAME_MASK, DISCOVERY_ONLY},
+    {ITEM_CORNERSTONE_MASK, DISCOVERY_ONLY},
 };
 
 static u16 GetBattleItemUnlockFlag(u16 index)
@@ -91,7 +95,9 @@ static u16 GetBattleItemUnlockFlag(u16 index)
         return FLAG_UNUSED_0x293 + index;
     if (index == 41)
         return FLAG_UNUSED_0x8E3;
-    return FLAG_UNUSED_0x8EB + index - 42;
+    if (index < 50)
+        return FLAG_UNUSED_0x8EB + index - 42;
+    return FLAG_UNUSED_0x900 + index - 50;
 }
 
 static u8 GetBadgeCount(void)

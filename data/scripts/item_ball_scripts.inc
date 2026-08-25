@@ -67,7 +67,7 @@ Route111_EventScript_ItemStarPiece:: @ 8290DA8
 	end
 
 Route111_EventScript_ItemTM63RockSlide:: @ 8290DB5
-	finditem ITEM_RARE_CANDY
+	finditem ITEM_CORNERSTONE_MASK
 	end
 
 Route111_EventScript_ItemElixir:: @ 8290DC2
@@ -91,7 +91,7 @@ Route113_EventScript_ItemHyperPotion:: @ 8290DF6
 	end
 
 Route114_EventScript_ItemRareCandy:: @ 8290E03
-	finditem ITEM_RARE_CANDY
+	finditem ITEM_LEADERS_CREST
 	end
 
 Route114_EventScript_ItemTM54Psyshock:: @ 8290E10
@@ -171,11 +171,11 @@ Route119_EventScript_ItemElixir:: @ 8290EFA
 	end
 
 Route119_EventScript_ItemTM84_Poison_Jab:: @ 8290F07
-	finditem ITEM_RARE_CANDY
+	finditem ITEM_GLIMMORANITE
 	end
 
 Route119_EventScript_ItemRareCandy:: @ 8290F14
-	finditem ITEM_RARE_CANDY
+	finditem ITEM_METAL_ALLOY
 	end
 
 Route119_EventScript_ItemHyperPotion:: @ 8290F21
@@ -271,11 +271,11 @@ Route127_EventScript_ItemLaprasite:: @ 829103F
 	end
 
 Route127_EventScript_ItemRareCandy:: @ 829104C
-	finditem ITEM_RARE_CANDY
+	finditem ITEM_WELLSPRING_MASK
 	end
 
 Route132_EventScript_ItemRareCandy:: @ 8291059
-	finditem ITEM_RARE_CANDY
+	finditem ITEM_TATSUGIRINITE
 	end
 
 Route132_EventScript_ItemProtein:: @ 8291066
@@ -363,7 +363,7 @@ GraniteCave_B2F_EventScript_ItemSteelixite:: @ 829116A
 	end
 
 GraniteCave_B2F_EventScript_ItemRareCandy:: @ 8291177
-	finditem ITEM_RARE_CANDY
+	finditem ITEM_GIMMIGHOUL_COIN
 	end
 
 JaggedPass_EventScript_ItemTM69RockPolish:: @ 8291184
@@ -631,7 +631,7 @@ ArtisanCave_1F_EventScript_ItemCarbos:: @ 82914D1
 	end
 
 MagmaHideout_1F_EventScript_ItemRareCandy:: @ 82914DE
-	finditem ITEM_RARE_CANDY
+	finditem ITEM_BOOSTER_ENERGY
 	end
 
 MagmaHideout_2F_2R_EventScript_ItemMaxElixir:: @ 82914EB
@@ -655,7 +655,7 @@ MagmaHideout_4F_EventScript_ItemMaxRevive:: @ 829151F
 	end
 
 MagmaHideout_3F_3R_EventScript_ItemTM35Flamethrower:: @ 829152C
-	finditem ITEM_RARE_CANDY
+	finditem ITEM_HEARTHFLAME_MASK
 	end
 
 PetalburgWoods_2_Item_TM80Venoshock::

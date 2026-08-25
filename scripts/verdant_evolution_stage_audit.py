@@ -72,7 +72,14 @@ def read(path: Path) -> str:
 
 def parse_evolutions() -> list[Evolution]:
     """Parse every edge in gEvolutionTable, including non-level methods."""
-    source = re.sub(r"/\*.*?\*/|//[^\n]*", "", read(EVOLUTIONS_PATH), flags=re.S)
+    source = re.sub(
+        r"/\*.*?\*/|//[^\n]*",
+        "",
+        read(EVOLUTIONS_PATH)
+        + "\n"
+        + read(ROOT / "src/data/pokemon/verdant_gen9_evolutions.h"),
+        flags=re.S,
+    )
     entries = list(
         re.finditer(
             r"^\s*\[(SPECIES_[A-Z0-9_]+)\]\s*=\s*(.*?)"

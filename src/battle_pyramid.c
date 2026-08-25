@@ -1173,7 +1173,10 @@ static void ClearPyramidPartyHeldItems(void)
         for (j = 0; j < MAX_FRONTIER_PARTY_SIZE; j++)
         {
             if (gSaveBlock2Ptr->frontier.selectedPartyMons[j] != 0 && gSaveBlock2Ptr->frontier.selectedPartyMons[j] - 1 == i)
+            {
                 SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &item);
+                TryUpdateMonFormForHeldItem(&gPlayerParty[i]);
+            }
         }
     }
 }

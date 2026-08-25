@@ -171,7 +171,10 @@ void LoadPlayerParty(void)
     gPlayerPartyCount = gSaveBlock1Ptr->playerPartyCount;
 
     for (i = 0; i < PARTY_SIZE; i++)
+    {
         gPlayerParty[i] = gSaveBlock1Ptr->playerParty[i];
+        TryUpdateMonFormForHeldItem(&gPlayerParty[i]);
+    }
 }
 
 void SaveObjectEvents(void)

@@ -1820,3 +1820,5 @@ const u32 gItemIconPalette_EjectPack[] = INCBIN_U32("graphics/items/icon_palette
 // Custom Items
 const u32 gItemIcon_TrainingBand[] = INCBIN_U32("graphics/items/icons/focus_sash.4bpp.lz");
 const u32 gItemIconPalette_TrainingBand[] = INCBIN_U32("graphics/items/icon_palettes/training_band.gbapal.lz");
+
+#include "verdant_gen9_items.h"

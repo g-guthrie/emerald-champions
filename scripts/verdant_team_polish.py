@@ -102,6 +102,7 @@ def check() -> None:
         (ROOT / path).read_text()
         for path in (
             "include/constants/species.h", "include/constants/items.h", "include/constants/moves.h",
+            "include/constants/verdant_gen9_species.h",
             "include/constants/spreads.h",
         )
     )

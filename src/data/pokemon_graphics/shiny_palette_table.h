@@ -1291,6 +1291,8 @@ const struct CompressedSpritePalette gMonShinyPaletteTable[] =
     SPECIES_SHINY_PAL(HAWLUCHA_MEGA, gMonShinyPalette_HawluchaMega),
     SPECIES_SHINY_PAL(GRENINJA_MEGA, gMonShinyPalette_GreninjaMega),
 
+#include "verdant_gen9_shiny_palette_table.h"
+
     SPECIES_SHINY_PAL(EGG, gMonPalette_Egg),
 };
 

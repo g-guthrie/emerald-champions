@@ -1983,6 +1983,7 @@ static void HandleSpecialTrainerBattleEnd(void)
         {
             u16 itemBefore = GetMonData(&gSaveBlock1Ptr->playerParty[i], MON_DATA_HELD_ITEM);
             SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &itemBefore);
+            TryUpdateMonFormForHeldItem(&gPlayerParty[i]);
         }
         break;
     case SPECIAL_BATTLE_EREADER:

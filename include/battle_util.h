@@ -131,6 +131,7 @@ u32 IsAbilityOnSide(u32 battlerId, u32 ability);
 u32 IsAbilityOnOpposingSide(u32 battlerId, u32 ability);
 u32 IsAbilityOnField(u32 ability);
 u32 IsAbilityOnFieldExcept(u32 battlerId, u32 ability);
+bool32 IsCuratedDriveStatBoosted(u8 battlerId, u8 statId);
 u32 IsAbilityPreventingEscape(u32 battlerId);
 bool32 IsBattlerProtected(u8 battlerId, u16 move);
 bool32 CanBattlerEscape(u32 battlerId); // no ability check

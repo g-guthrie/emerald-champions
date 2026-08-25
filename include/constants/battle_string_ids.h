@@ -614,8 +614,9 @@
 #define STRINGID_COURTCHANGE                          611
 #define STRINGID_PREPARESHELLTRAP                     612
 #define STRINGID_SHELLTRAPDIDNTWORK                   613
+#define STRINGID_SALTCUREAPPLIED                      614
 
-#define BATTLESTRINGS_COUNT                           614
+#define BATTLESTRINGS_COUNT                           615
 
 // The below IDs are all indexes into battle message tables,
 // used to determine which of a set of messages to print.

@@ -9959,4 +9959,7 @@ extern const u8 gMailTilemap_Retro[];
 extern const u8 gMonMarkingsMenu_Gfx[];
 extern const u16 gMonMarkingsMenu_Pal[];
 
+#include "graphics/verdant_gen9_curated.h"
+#include "graphics/verdant_gen9_items.h"
+
 #endif //GUARD_GRAPHICS_H

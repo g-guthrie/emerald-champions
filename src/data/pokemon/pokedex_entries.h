@@ -10787,4 +10787,5 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerScale = 256,
         .trainerOffset = 0,
     },
+#include "verdant_gen9_pokedex_entries.h"
 };

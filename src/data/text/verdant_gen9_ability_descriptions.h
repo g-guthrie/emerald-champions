@@ -1,0 +1,13 @@
+static const u8 sArmorTailDescription[] = _("Blocks priority for allies.");
+static const u8 sBeadsOfRuinDescription[] = _("Lowers others' Sp. Def.");
+static const u8 sCommanderDescription[] = _("Boosts an allied Dondozo.");
+static const u8 sCudChewDescription[] = _("Reuses an eaten Berry later.");
+static const u8 sGoodAsGoldDescription[] = _("Blocks others' status moves.");
+static const u8 sProtosynthesisDescription[] = _("Sun/item boosts top stat.");
+static const u8 sPurifyingSaltDescription[] = _("Blocks status; resists Ghost.");
+static const u8 sQuarkDriveDescription[] = _("Terrain boosts top stat.");
+static const u8 sSupremeOverlordDescription[] = _("Fallen allies boost power.");
+static const u8 sSwordOfRuinDescription[] = _("Lowers others' Defense.");
+static const u8 sToxicDebrisDescription[] = _("Physical hits set T-Spikes.");
+static const u8 sVesselOfRuinDescription[] = _("Lowers others' Sp. Atk.");
+static const u8 sZeroToHeroDescription[] = _("Switching out enables Hero.");

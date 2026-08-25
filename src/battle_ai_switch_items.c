@@ -76,6 +76,18 @@ static bool8 ShouldSwitchIfPerishSong(void)
     }
 }
 
+static bool8 ShouldSwitchIfZeroToHero(void)
+{
+    if (gBattleMons[gActiveBattler].species != SPECIES_PALAFIN
+     || GetBattlerAbility(gActiveBattler) != ABILITY_ZERO_TO_HERO
+     || !IsMonHealthyEnoughToSwitch())
+        return FALSE;
+
+    *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = PARTY_SIZE;
+    BtlController_EmitTwoReturnValues(1, B_ACTION_SWITCH, 0);
+    return TRUE;
+}
+
 static bool8 ShouldSwitchIfWonderGuard(void)
 {
     u8 opposingPosition;
@@ -687,6 +699,8 @@ bool32 ShouldSwitch(void)
     if (ShouldSwitchIfAllBadMoves())
         return TRUE;
     if (ShouldSwitchIfPerishSong())
+        return TRUE;
+    if (ShouldSwitchIfZeroToHero())
         return TRUE;
     if (FindMonThatAbsorbsOpponentsMove())
         return TRUE;

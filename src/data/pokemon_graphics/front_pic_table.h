@@ -1291,6 +1291,8 @@ const struct CompressedSpriteSheet gMonFrontPicTable[] =
     SPECIES_SPRITE(HAWLUCHA_MEGA, gMonFrontPic_HawluchaMega),
     SPECIES_SPRITE(GRENINJA_MEGA, gMonFrontPic_GreninjaMega),
 
+#include "verdant_gen9_front_pic_table.h"
+
     SPECIES_SPRITE(EGG, gMonFrontPic_Egg),
 };
 

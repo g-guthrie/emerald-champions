@@ -1567,6 +1567,18 @@
 #define FLAG_UNUSED_0x91E                           (SYSTEM_FLAGS + 0xBE) // Unused Flag
 #define FLAG_UNUSED_0x91F                           (SYSTEM_FLAGS + 0xBF) // Unused Flag
 
+// One-time compatibility grants for item balls whose rewards changed in the
+// curated Gen 9 package. These keep already-collected legacy saves playable.
+#define FLAG_VERDANT_GEN9_MIGRATED_CORNERSTONE      FLAG_UNUSED_0x904
+#define FLAG_VERDANT_GEN9_MIGRATED_LEADERS_CREST    FLAG_UNUSED_0x905
+#define FLAG_VERDANT_GEN9_MIGRATED_GLIMMORANITE     FLAG_UNUSED_0x906
+#define FLAG_VERDANT_GEN9_MIGRATED_METAL_ALLOY      FLAG_UNUSED_0x907
+#define FLAG_VERDANT_GEN9_MIGRATED_WELLSPRING       FLAG_UNUSED_0x908
+#define FLAG_VERDANT_GEN9_MIGRATED_TATSUGIRINITE    FLAG_UNUSED_0x909
+#define FLAG_VERDANT_GEN9_MIGRATED_GIMMIGHOUL_COIN  FLAG_UNUSED_0x90A
+#define FLAG_VERDANT_GEN9_MIGRATED_BOOSTER_ENERGY   FLAG_UNUSED_0x90B
+#define FLAG_VERDANT_GEN9_MIGRATED_HEARTHFLAME      FLAG_UNUSED_0x90C
+
 // Daily Flags
 // These flags are cleared once per day
 // The start and end are byte-aligned because the flags are cleared in byte increments

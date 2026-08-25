@@ -5355,3 +5355,5 @@ const u8 gCalyrexPokedexText[] = _(
     "providing healing and blessings. It\n"
     "reigned over the Galar region in times\n"
     "of yore.");
+
+#include "verdant_gen9_pokedex_text.h"

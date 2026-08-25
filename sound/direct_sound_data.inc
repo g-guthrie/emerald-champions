@@ -4334,6 +4334,156 @@ Cry_CalyrexIceRider::
 Cry_CalyrexShadowRider::
 	.incbin "sound/direct_sound_samples/cries/uncomp_calyrex_shadow_rider.bin"
 
+	@ Verdant curated Gen 9 cries. Alternate masks and temporary Mega forms
+	@ intentionally share these family samples in sound/cry_tables.inc.
+	.align 2
+Cry_Gen9Sprigatito::
+	.incbin "sound/direct_sound_samples/cries/uncomp_gen9_sprigatito.bin"
+
+	.align 2
+Cry_Gen9Floragato::
+	.incbin "sound/direct_sound_samples/cries/uncomp_gen9_floragato.bin"
+
+	.align 2
+Cry_Gen9Meowscarada::
+	.incbin "sound/direct_sound_samples/cries/uncomp_gen9_meowscarada.bin"
+
+	.align 2
+Cry_Gen9Fuecoco::
+	.incbin "sound/direct_sound_samples/cries/uncomp_gen9_fuecoco.bin"
+
+	.align 2
+Cry_Gen9Crocalor::
+	.incbin "sound/direct_sound_samples/cries/uncomp_gen9_crocalor.bin"
+
+	.align 2
+Cry_Gen9Skeledirge::
+	.incbin "sound/direct_sound_samples/cries/uncomp_gen9_skeledirge.bin"
+
+	.align 2
+Cry_Gen9Nacli::
+	.incbin "sound/direct_sound_samples/cries/uncomp_gen9_nacli.bin"
+
+	.align 2
+Cry_Gen9Naclstack::
+	.incbin "sound/direct_sound_samples/cries/uncomp_gen9_naclstack.bin"
+
+	.align 2
+Cry_Gen9Garganacl::
+	.incbin "sound/direct_sound_samples/cries/uncomp_gen9_garganacl.bin"
+
+	.align 2
+Cry_Gen9Finizen::
+	.incbin "sound/direct_sound_samples/cries/uncomp_gen9_finizen.bin"
+
+	.align 2
+Cry_Gen9PalafinHero::
+	.incbin "sound/direct_sound_samples/cries/uncomp_gen9_palafin_hero.bin"
+
+	.align 2
+Cry_Gen9Dondozo::
+	.incbin "sound/direct_sound_samples/cries/uncomp_gen9_dondozo.bin"
+
+	.align 2
+Cry_Gen9TatsugiriCurly::
+	.incbin "sound/direct_sound_samples/cries/uncomp_gen9_tatsugiri_curly.bin"
+
+	.align 2
+Cry_Gen9TatsugiriDroopy::
+	.incbin "sound/direct_sound_samples/cries/uncomp_gen9_tatsugiri_droopy.bin"
+
+	.align 2
+Cry_Gen9TatsugiriStretchy::
+	.incbin "sound/direct_sound_samples/cries/uncomp_gen9_tatsugiri_stretchy.bin"
+
+	.align 2
+Cry_Gen9Annihilape::
+	.incbin "sound/direct_sound_samples/cries/uncomp_gen9_annihilape.bin"
+
+	.align 2
+Cry_Gen9Farigiraf::
+	.incbin "sound/direct_sound_samples/cries/uncomp_gen9_farigiraf.bin"
+
+	.align 2
+Cry_Gen9Kingambit::
+	.incbin "sound/direct_sound_samples/cries/uncomp_gen9_kingambit.bin"
+
+	.align 2
+Cry_Gen9GreatTusk::
+	.incbin "sound/direct_sound_samples/cries/uncomp_gen9_great_tusk.bin"
+
+	.align 2
+Cry_Gen9FlutterMane::
+	.incbin "sound/direct_sound_samples/cries/uncomp_gen9_flutter_mane.bin"
+
+	.align 2
+Cry_Gen9IronBundle::
+	.incbin "sound/direct_sound_samples/cries/uncomp_gen9_iron_bundle.bin"
+
+	.align 2
+Cry_Gen9IronHands::
+	.incbin "sound/direct_sound_samples/cries/uncomp_gen9_iron_hands.bin"
+
+	.align 2
+Cry_Gen9Glimmet::
+	.incbin "sound/direct_sound_samples/cries/uncomp_gen9_glimmet.bin"
+
+	.align 2
+Cry_Gen9Glimmora::
+	.incbin "sound/direct_sound_samples/cries/uncomp_gen9_glimmora.bin"
+
+	.align 2
+Cry_Gen9GimmighoulChest::
+	.incbin "sound/direct_sound_samples/cries/uncomp_gen9_gimmighoul_chest.bin"
+
+	.align 2
+Cry_Gen9GimmighoulRoaming::
+	.incbin "sound/direct_sound_samples/cries/uncomp_gen9_gimmighoul_roaming.bin"
+
+	.align 2
+Cry_Gen9Gholdengo::
+	.incbin "sound/direct_sound_samples/cries/uncomp_gen9_gholdengo.bin"
+
+	.align 2
+Cry_Gen9ChienPao::
+	.incbin "sound/direct_sound_samples/cries/uncomp_gen9_chien_pao.bin"
+
+	.align 2
+Cry_Gen9TingLu::
+	.incbin "sound/direct_sound_samples/cries/uncomp_gen9_ting_lu.bin"
+
+	.align 2
+Cry_Gen9ChiYu::
+	.incbin "sound/direct_sound_samples/cries/uncomp_gen9_chi_yu.bin"
+
+	.align 2
+Cry_Gen9RoaringMoon::
+	.incbin "sound/direct_sound_samples/cries/uncomp_gen9_roaring_moon.bin"
+
+	.align 2
+Cry_Gen9IronValiant::
+	.incbin "sound/direct_sound_samples/cries/uncomp_gen9_iron_valiant.bin"
+
+	.align 2
+Cry_Gen9WalkingWake::
+	.incbin "sound/direct_sound_samples/cries/uncomp_gen9_walking_wake.bin"
+
+	.align 2
+Cry_Gen9Ogerpon::
+	.incbin "sound/direct_sound_samples/cries/uncomp_gen9_ogerpon.bin"
+
+	.align 2
+Cry_Gen9Archaludon::
+	.incbin "sound/direct_sound_samples/cries/uncomp_gen9_archaludon.bin"
+
+	.align 2
+Cry_Gen9GougingFire::
+	.incbin "sound/direct_sound_samples/cries/uncomp_gen9_gouging_fire.bin"
+
+	.align 2
+Cry_Gen9RagingBolt::
+	.incbin "sound/direct_sound_samples/cries/uncomp_gen9_raging_bolt.bin"
+
 	.align 2
 DirectSoundWaveData_register_noise::
 	.incbin "sound/direct_sound_samples/register_noise.bin"

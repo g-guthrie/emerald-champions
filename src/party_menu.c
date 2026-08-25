@@ -1731,6 +1731,27 @@ static void DisplaySwitchedHeldItemMessage(u16 item, u16 item2, bool8 keepOpen)
     ScheduleBgCopyTilemapToVram(2);
 }
 
+static void UpdateMonFormForHeldItem(struct Pokemon *mon, u8 slot)
+{
+    if (TryUpdateMonFormForHeldItem(mon))
+    {
+        u16 targetSpecies = GetMonData(mon, MON_DATA_SPECIES);
+
+        if (sPartyMenuBoxes != NULL
+         && slot < PARTY_SIZE
+         && sPartyMenuBoxes[slot].monSpriteId != SPRITE_NONE)
+        {
+            FreeAndDestroyMonIconSprite(&gSprites[sPartyMenuBoxes[slot].monSpriteId]);
+            CreatePartyMonIconSpriteParameterized(
+                targetSpecies,
+                GetMonData(mon, MON_DATA_PERSONALITY),
+                &sPartyMenuBoxes[slot],
+                1
+            );
+        }
+    }
+}
+
 static void GiveItemToMon(struct Pokemon *mon, u16 item)
 {
     u8 itemBytes[2];
@@ -1743,6 +1764,7 @@ static void GiveItemToMon(struct Pokemon *mon, u16 item)
     itemBytes[0] = item;
     itemBytes[1] = item >> 8;
     SetMonData(mon, MON_DATA_HELD_ITEM, itemBytes);
+    UpdateMonFormForHeldItem(mon, gPartyMenu.slotId);
 }
 
 static u8 TryTakeMonItem(struct Pokemon* mon)
@@ -1756,6 +1778,7 @@ static u8 TryTakeMonItem(struct Pokemon* mon)
 
     item = ITEM_NONE;
     SetMonData(mon, MON_DATA_HELD_ITEM, &item);
+    UpdateMonFormForHeldItem(mon, gPartyMenu.slotId);
     return 2;
 }
 
@@ -3360,6 +3383,7 @@ static void CB2_ReturnToPartyMenuFromWritingMail(void)
     {
         TakeMailFromMon(mon);
         SetMonData(mon, MON_DATA_HELD_ITEM, &sPartyMenuItemId);
+        UpdateMonFormForHeldItem(mon, gPartyMenu.slotId);
         RemoveBagItem(sPartyMenuItemId, 1);
         AddBagItem(item, 1);
         InitPartyMenu(gPartyMenu.menuType, KEEP_PARTY_LAYOUT, gPartyMenu.action, TRUE, PARTY_MSG_CHOOSE_MON, Task_TryCreateSelectionWindow, gPartyMenu.exitCallback);
@@ -3492,6 +3516,7 @@ static void Task_TossHeldItem(u8 taskId)
         u16 item = ITEM_NONE;
 
         SetMonData(mon, MON_DATA_HELD_ITEM, &item);
+        UpdateMonFormForHeldItem(mon, gPartyMenu.slotId);
         UpdatePartyMonHeldItemSprite(mon, &sPartyMenuBoxes[gPartyMenu.slotId]);
         DisplayPartyPokemonDescriptionText(PARTYBOX_DESC_DONT_HAVE, &sPartyMenuBoxes[gPartyMenu.slotId], 1);
         gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
@@ -5559,7 +5584,13 @@ void ItemUseCB_EvolutionStone(u8 taskId, TaskFunc task)
     }
     else
     {
-        RemoveBagItem(gSpecialVar_ItemId, 1);
+        // Verdant's curated evolution tools are exploration unlocks, not
+        // one-Pokémon consumables. This keeps team building flexible without
+        // placing duplicate quest rewards around Hoenn.
+        if (gSpecialVar_ItemId != ITEM_GIMMIGHOUL_COIN
+         && gSpecialVar_ItemId != ITEM_LEADERS_CREST
+         && gSpecialVar_ItemId != ITEM_METAL_ALLOY)
+            RemoveBagItem(gSpecialVar_ItemId, 1);
         FreePartyPointers();
     }
 }
@@ -5946,6 +5977,7 @@ static void CB2_ReturnToPartyOrBagMenuFromWritingMail(void)
     {
         TakeMailFromMon(mon);
         SetMonData(mon, MON_DATA_HELD_ITEM, &sPartyMenuItemId);
+        UpdateMonFormForHeldItem(mon, gPartyMenu.slotId);
         RemoveBagItem(sPartyMenuItemId, 1);
         ReturnGiveItemToBagOrPC(item);
         SetMainCallback2(gPartyMenu.exitCallback);
@@ -6967,6 +6999,8 @@ void CursorCb_MoveItemCallback(u8 taskId)
         // swap the held items
         SetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_HELD_ITEM, &item2);
         SetMonData(&gPlayerParty[gPartyMenu.slotId2], MON_DATA_HELD_ITEM, &item1);
+        UpdateMonFormForHeldItem(&gPlayerParty[gPartyMenu.slotId], gPartyMenu.slotId);
+        UpdateMonFormForHeldItem(&gPlayerParty[gPartyMenu.slotId2], gPartyMenu.slotId2);
 
         // update the held item icons
         UpdatePartyMonHeldItemSprite(

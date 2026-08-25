@@ -741,9 +741,11 @@ static const u8 sText_NeutralizingGasOver[] = _("The effects of Neutralizing\nGa
 static const u8 sText_CourtChange[] = _("{B_ATK_NAME_WITH_PREFIX} swapped the battle\neffects affecting each side!");
 static const u8 sText_PrepareShellTrap[] = _("{B_ATK_NAME_WITH_PREFIX} set a shell trap!");
 static const u8 sText_ShellTrapDidntWork[] = _("{B_ATK_NAME_WITH_PREFIX}'s shell trap didn't work!");
+static const u8 sText_SaltCureApplied[] = _("{B_DEF_NAME_WITH_PREFIX} was salt cured!");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
+    [STRINGID_SALTCUREAPPLIED - 12] = sText_SaltCureApplied,
     [STRINGID_SHELLTRAPDIDNTWORK - 12] = sText_ShellTrapDidntWork,
     [STRINGID_PREPARESHELLTRAP - 12] = sText_PrepareShellTrap,
     [STRINGID_COURTCHANGE - 12] = sText_CourtChange,

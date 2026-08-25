@@ -2744,7 +2744,8 @@ void AnimTask_GetTrappedMoveAnimId(u8 taskId)
 {
     if (gBattleSpritesDataPtr->animationData->animArg == MOVE_FIRE_SPIN)
         gBattleAnimArgs[0] = TRAP_ANIM_FIRE_SPIN;
-    else if (gBattleSpritesDataPtr->animationData->animArg == MOVE_WHIRLPOOL)
+    else if (gBattleSpritesDataPtr->animationData->animArg == MOVE_WHIRLPOOL
+          || gBattleSpritesDataPtr->animationData->animArg == MOVE_SALT_CURE)
         gBattleAnimArgs[0] = TRAP_ANIM_WHIRLPOOL;
     else if (gBattleSpritesDataPtr->animationData->animArg == MOVE_CLAMP)
         gBattleAnimArgs[0] = TRAP_ANIM_CLAMP;
@@ -2815,4 +2816,3 @@ static void CB_CriticalCaptureThrownBallMovement(struct Sprite *sprite)
         sprite->callback = SpriteCB_Ball_Bounce_Step;
     }
 }
-

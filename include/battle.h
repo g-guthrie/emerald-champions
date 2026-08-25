@@ -116,6 +116,10 @@ struct DisableStruct
     u8 noRetreat:1;
     u8 tarShot:1;
     u8 octolock:1;
+    u8 cudChewReplaying:1;
+    u8 saltCure:1;
+    u16 cudChewBerry;
+    u8 cudChewTurn;
 };
 
 struct ProtectStruct
@@ -124,6 +128,7 @@ struct ProtectStruct
     u32 spikyShielded:1;
     u32 kingsShielded:1;
     u32 banefulBunkered:1;
+    u32 burningBulwarked:1;
     u32 obstructed:1;
     u32 endured:1;
     u32 noValidMoves:1;
@@ -504,6 +509,8 @@ struct BattleStruct
     u8 turnEffectsBattlerId;
     u8 turnCountersTracker;
     u16 wrappedMove[MAX_BATTLERS_COUNT];
+    u8 rageFistHits[PARTY_SIZE][2];
+    bool8 makeItRainStatDropped;
     u16 moveTarget[MAX_BATTLERS_COUNT];
     u8 expGetterMonId;
     u8 wildVictorySong;
@@ -656,6 +663,7 @@ struct BattleStruct
                                         || gProtectStructs[battlerId].spikyShielded                                    \
                                         || gProtectStructs[battlerId].kingsShielded                                    \
                                         || gProtectStructs[battlerId].banefulBunkered                                  \
+                                        || gProtectStructs[battlerId].burningBulwarked                                 \
                                         || gProtectStructs[battlerId].obstructed)                                      \
 
 #define GET_STAT_BUFF_ID(n)((n & 7))              // first three bits 0x1, 0x2, 0x4
@@ -707,6 +715,9 @@ struct BattleScripting
     u16 abilityPopupOverwrite;
     u8 switchCase;  // Special switching conditions, eg. red card
     u8 overrideBerryRequirements;
+    bool8 cudChewConsumptionContext;
+    bool8 blockCudChewConsumption;
+    u8 cudChewConsumptionBattler;
 };
 
 // rom_80A5C6C

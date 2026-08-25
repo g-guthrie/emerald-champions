@@ -552,13 +552,13 @@ const u32 *const gItemIconTable[][2] =
     [ITEM_CELL_BATTERY] = {gItemIcon_CellBattery, gItemIconPalette_CellBattery},
     [ITEM_COVER_FOSSIL] = {gItemIcon_CoverFossil, gItemIconPalette_CoverFossil},
     [ITEM_PLUME_FOSSIL] = {gItemIcon_PlumeFossil, gItemIconPalette_PlumeFossil},
-    [ITEM_HEALTH_FEATHER] = {gItemIcon_HealthFeather, gItemIconPalette_HealthFeather},
-    [ITEM_MUSCLE_FEATHER] = {gItemIcon_MuscleFeather, gItemIconPalette_MuscleFeather},
-    [ITEM_RESIST_FEATHER] = {gItemIcon_ResistFeather, gItemIconPalette_ResistFeather},
-    [ITEM_GENIUS_FEATHER] = {gItemIcon_GeniusFeather, gItemIconPalette_GeniusFeather},
-    [ITEM_CLEVER_FEATHER] = {gItemIcon_CleverFeather, gItemIconPalette_CleverFeather},
-    [ITEM_SWIFT_FEATHER] = {gItemIcon_SwiftFeather, gItemIconPalette_SwiftFeather},
-    [ITEM_PRETTY_FEATHER] = {gItemIcon_PrettyFeather, gItemIconPalette_PrettyFeather},
+    [ITEM_BOOSTER_ENERGY] = {gItemIcon_BoosterEnergy, gItemIconPalette_BoosterEnergy},
+    [ITEM_LEADERS_CREST] = {gItemIcon_LeadersCrest, gItemIconPalette_LeadersCrest},
+    [ITEM_GIMMIGHOUL_COIN] = {gItemIcon_GimmighoulCoin, gItemIconPalette_GimmighoulCoin},
+    [ITEM_METAL_ALLOY] = {gItemIcon_MetalAlloy, gItemIconPalette_MetalAlloy},
+    [ITEM_WELLSPRING_MASK] = {gItemIcon_WellspringMask, gItemIconPalette_WellspringMask},
+    [ITEM_HEARTHFLAME_MASK] = {gItemIcon_HearthflameMask, gItemIconPalette_HearthflameMask},
+    [ITEM_CORNERSTONE_MASK] = {gItemIcon_CornerstoneMask, gItemIconPalette_CornerstoneMask},
     [ITEM_SHINY_CHARM] = {gItemIcon_ShinyCharm, gItemIconPalette_ShinyCharm},
     [ITEM_OVAL_CHARM] = {gItemIcon_OvalCharm, gItemIconPalette_OvalCharm},
 	// Gen 6 Items
@@ -748,4 +748,6 @@ const u32 *const gItemIconTable[][2] =
 
     // Custom Items
     [ITEM_TRAINING_BAND] = {gItemIcon_TrainingBand, gItemIconPalette_TrainingBand},
+    [ITEM_TATSUGIRINITE] = {gItemIcon_Tatsugirinite, gItemIconPalette_Tatsugirinite},
+    [ITEM_GLIMMORANITE] = {gItemIcon_Glimmoranite, gItemIconPalette_Glimmoranite},
 };

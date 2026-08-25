@@ -1701,6 +1701,9 @@ void CB2_ContinueSavedGame(void)
 {
     u8 trainerHillMapId;
 
+    // Runs here, rather than during flash deserialization, because every
+    // Continue path has initialized the heap before entering this callback.
+    MigrateVerdantGen9WorldItems();
     FieldClearVBlankHBlankCallbacks();
     StopMapMusic();
     ResetSafariZoneFlag_();

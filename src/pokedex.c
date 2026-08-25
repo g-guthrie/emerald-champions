@@ -537,7 +537,7 @@ static const struct SpritePalette sStatBarSpritePal[] = //{sStatBarPalette, TAG_
 
 
 // const rom data
-#include "data/pokemon/pokedex_orders.h"
+#include "data/pokemon/verdant_gen9_pokedex_orders.h"
 
 static const struct OamData sOamData_ScrollBar =
 {
@@ -1073,7 +1073,6 @@ static const struct WindowTemplate sPokemonList_WindowTemplate[] =
     DUMMY_WIN_TEMPLATE
 };
 
-static const u8 sText_No000[] = _("{NO}000");
 static const u8 sCaughtBall_Gfx[] = INCBIN_U8("graphics/pokedex/caught_ball.4bpp");
 static const u8 sText_TenDashes[] = _("----------");
 
@@ -1081,6 +1080,15 @@ ALIGNED(4) static const u8 gExpandedPlaceholder_PokedexDescription[] = _("");
 
 #include "data/pokemon/pokedex_text.h"
 #include "data/pokemon/pokedex_entries.h"
+
+typedef char VerdantPokedexEntriesCoverCuratedRange[
+    (ARRAY_COUNT(gPokedexEntries) == NATIONAL_DEX_COUNT + 1) ? 1 : -1];
+typedef char VerdantAlphabeticalOrderCoversAvailableSpecies[
+    (ARRAY_COUNT(gVerdantPokedexOrder_Alphabetical) == VERDANT_AVAILABLE_NATIONAL_DEX_COUNT) ? 1 : -1];
+typedef char VerdantWeightOrderCoversAvailableSpecies[
+    (ARRAY_COUNT(gVerdantPokedexOrder_Weight) == VERDANT_AVAILABLE_NATIONAL_DEX_COUNT) ? 1 : -1];
+typedef char VerdantHeightOrderCoversAvailableSpecies[
+    (ARRAY_COUNT(gVerdantPokedexOrder_Height) == VERDANT_AVAILABLE_NATIONAL_DEX_COUNT) ? 1 : -1];
 
 static const u16 sSizeScreenSilhouette_Pal[] = INCBIN_U16("graphics/pokedex/size_silhouette.gbapal");
 
@@ -1767,6 +1775,9 @@ void ResetPokedex(void)
         gSaveBlock1Ptr->dexCaught[i] = 0;
         gSaveBlock1Ptr->dexSeen[i] = 0;
     }
+    gSaveBlock2Ptr->pokedex.verdantGen9Magic = VERDANT_GEN9_DEX_SAVE_MAGIC;
+    memset(gSaveBlock2Ptr->pokedex.verdantGen9Seen, 0, sizeof(gSaveBlock2Ptr->pokedex.verdantGen9Seen));
+    memset(gSaveBlock2Ptr->pokedex.verdantGen9Caught, 0, sizeof(gSaveBlock2Ptr->pokedex.verdantGen9Caught));
 }
 
 void ResetPokedexScrollPositions(void)
@@ -2462,6 +2473,15 @@ static void FreeWindowAndBgBuffers(void)
         Free(tilemapBuffer);
 }
 
+static bool8 IsNationalDexNumberAvailable(u16 nationalDexNo)
+{
+    if (nationalDexNo >= 1 && nationalDexNo <= VERDANT_LEGACY_NATIONAL_DEX_COUNT)
+        return TRUE;
+    if (nationalDexNo < VERDANT_GEN9_DEX_FIRST || nationalDexNo > VERDANT_GEN9_DEX_LAST)
+        return FALSE;
+    return NationalPokedexNumToSpecies(nationalDexNo) != SPECIES_NONE;
+}
+
 static void CreatePokedexList(u8 dexMode, u8 order)
 {
     u32 vars[3]; //I have no idea why three regular variables are stored in an array, but whatever.
@@ -2514,6 +2534,8 @@ static void CreatePokedexList(u8 dexMode, u8 order)
             for (i = 0, r5 = 0, r10 = 0; i < temp_dexCount; i++)
             {
                 temp_dexNum = i + 1;
+                if (!IsNationalDexNumberAvailable(temp_dexNum))
+                    continue;
                 if (GetSetPokedexFlag(temp_dexNum, FLAG_GET_SEEN))
                     r10 = 1;
                 if (r10)
@@ -2529,9 +2551,9 @@ static void CreatePokedexList(u8 dexMode, u8 order)
         }
         break;
     case ORDER_ALPHABETICAL:
-        for (i = 0; i < ARRAY_COUNT(gPokedexOrder_Alphabetical); i++)
+        for (i = 0; i < ARRAY_COUNT(gVerdantPokedexOrder_Alphabetical); i++)
         {
-            temp_dexNum = gPokedexOrder_Alphabetical[i];
+            temp_dexNum = gVerdantPokedexOrder_Alphabetical[i];
 
             if ((!temp_isHoennDex || NationalToHoennOrder(temp_dexNum) != 0) && GetSetPokedexFlag(temp_dexNum, FLAG_GET_SEEN))
             {
@@ -2543,9 +2565,9 @@ static void CreatePokedexList(u8 dexMode, u8 order)
         }
         break;
     case ORDER_HEAVIEST:
-        for (i = ARRAY_COUNT(gPokedexOrder_Weight) - 1; i >= 0; i--)
+        for (i = ARRAY_COUNT(gVerdantPokedexOrder_Weight) - 1; i >= 0; i--)
         {
-            temp_dexNum = gPokedexOrder_Weight[i];
+            temp_dexNum = gVerdantPokedexOrder_Weight[i];
 
             if ((!temp_isHoennDex || NationalToHoennOrder(temp_dexNum) != 0) && GetSetPokedexFlag(temp_dexNum, FLAG_GET_CAUGHT))
             {
@@ -2557,9 +2579,9 @@ static void CreatePokedexList(u8 dexMode, u8 order)
         }
         break;
     case ORDER_LIGHTEST:
-        for (i = 0; i < ARRAY_COUNT(gPokedexOrder_Weight); i++)
+        for (i = 0; i < ARRAY_COUNT(gVerdantPokedexOrder_Weight); i++)
         {
-            temp_dexNum = gPokedexOrder_Weight[i];
+            temp_dexNum = gVerdantPokedexOrder_Weight[i];
 
             if ((!temp_isHoennDex || NationalToHoennOrder(temp_dexNum) != 0) && GetSetPokedexFlag(temp_dexNum, FLAG_GET_CAUGHT))
             {
@@ -2571,9 +2593,9 @@ static void CreatePokedexList(u8 dexMode, u8 order)
         }
         break;
     case ORDER_TALLEST:
-        for (i = ARRAY_COUNT(gPokedexOrder_Height) - 1; i >= 0; i--)
+        for (i = ARRAY_COUNT(gVerdantPokedexOrder_Height) - 1; i >= 0; i--)
         {
-            temp_dexNum = gPokedexOrder_Height[i];
+            temp_dexNum = gVerdantPokedexOrder_Height[i];
 
             if ((!temp_isHoennDex || NationalToHoennOrder(temp_dexNum) != 0) && GetSetPokedexFlag(temp_dexNum, FLAG_GET_CAUGHT))
             {
@@ -2585,9 +2607,9 @@ static void CreatePokedexList(u8 dexMode, u8 order)
         }
         break;
     case ORDER_SMALLEST:
-        for (i = 0; i < ARRAY_COUNT(gPokedexOrder_Height); i++)
+        for (i = 0; i < ARRAY_COUNT(gVerdantPokedexOrder_Height); i++)
         {
-            temp_dexNum = gPokedexOrder_Height[i];
+            temp_dexNum = gVerdantPokedexOrder_Height[i];
 
             if ((!temp_isHoennDex || NationalToHoennOrder(temp_dexNum) != 0) && GetSetPokedexFlag(temp_dexNum, FLAG_GET_CAUGHT))
             {
@@ -2616,6 +2638,11 @@ static void PrintMonDexNumAndName(u8 windowId, u8 fontId, const u8* str, u8 left
     color[1] = TEXT_DYNAMIC_COLOR_6;
     color[2] = TEXT_COLOR_LIGHT_GRAY;
     AddTextPrinterParameterized4(windowId, fontId, left * 8, (top * 8) + 1, 0, 0, color, -1, str);
+}
+
+static u8 GetPokedexNumberDigitCount(u16 number)
+{
+    return number >= 1000 ? 4 : 3;
 }
 
 // u16 ignored is passed but never used
@@ -2709,16 +2736,18 @@ static void CreateMonListEntry(u8 position, u16 b, u16 ignored)
 
 static void CreateMonDexNum(u16 entryNum, u8 left, u8 top, u16 unused)
 {
-    u8 text[6];
+    u8 text[10];
     u16 dexNum;
 
-    memcpy(text, sText_No000, ARRAY_COUNT(text));
     dexNum = sPokedexView->pokedexList[entryNum].dexNum;
     if (sPokedexView->dexMode == DEX_MODE_HOENN)
         dexNum = NationalToHoennOrder(dexNum);
-    text[2] = CHAR_0 + dexNum / 100;
-    text[3] = CHAR_0 + (dexNum % 100) / 10;
-    text[4] = CHAR_0 + (dexNum % 100) % 10;
+    ConvertIntToDecimalStringN(
+        StringCopy(text, gText_NumberClear01),
+        dexNum,
+        STR_CONV_MODE_LEADING_ZEROS,
+        GetPokedexNumberDigitCount(dexNum)
+    );
     PrintMonDexNumAndName(0, 7, text, left, top);
 }
 
@@ -4544,8 +4573,13 @@ static void PrintMonInfo(u32 num, u32 value, u32 owned, u32 newEntry)
         value = NationalToHoennOrder(num);
     else
         value = num;
-    ConvertIntToDecimalStringN(StringCopy(str, gText_NumberClear01), value, STR_CONV_MODE_LEADING_ZEROS, 3);
-    PrintInfoScreenTextWhite(str, 123, 17); //HGSS_Ui
+    ConvertIntToDecimalStringN(
+        StringCopy(str, gText_NumberClear01),
+        value,
+        STR_CONV_MODE_LEADING_ZEROS,
+        GetPokedexNumberDigitCount(value)
+    );
+    PrintInfoScreenTextWhite(str, 117, 17); //HGSS_Ui; leaves room for four-digit National numbers
     natNum = NationalPokedexNumToSpecies(num);
     if (natNum)
         name = gSpeciesNames[natNum];
@@ -4703,27 +4737,54 @@ s8 GetSetPokedexFlag(u16 nationalDexNo, u8 caseID)
 {
     u32 index, bit, mask;
     s8 retVal = 0;
+    u8 *seenFlags;
+    u8 *caughtFlags;
 
-    nationalDexNo--;
-    index = nationalDexNo / 8;
-    bit = nationalDexNo % 8;
+    if (nationalDexNo == NATIONAL_DEX_NONE
+     || nationalDexNo > NATIONAL_DEX_COUNT
+     || !IsNationalDexNumberAvailable(nationalDexNo))
+        return FALSE;
+
+    if (nationalDexNo <= VERDANT_LEGACY_NATIONAL_DEX_COUNT)
+    {
+        index = (nationalDexNo - 1) / 8;
+        bit = (nationalDexNo - 1) % 8;
+        seenFlags = gSaveBlock1Ptr->dexSeen;
+        caughtFlags = gSaveBlock1Ptr->dexCaught;
+    }
+    else if (nationalDexNo >= VERDANT_GEN9_DEX_FIRST && nationalDexNo <= VERDANT_GEN9_DEX_LAST)
+    {
+        if (gSaveBlock2Ptr->pokedex.verdantGen9Magic != VERDANT_GEN9_DEX_SAVE_MAGIC)
+        {
+            gSaveBlock2Ptr->pokedex.verdantGen9Magic = VERDANT_GEN9_DEX_SAVE_MAGIC;
+            memset(gSaveBlock2Ptr->pokedex.verdantGen9Seen, 0, sizeof(gSaveBlock2Ptr->pokedex.verdantGen9Seen));
+            memset(gSaveBlock2Ptr->pokedex.verdantGen9Caught, 0, sizeof(gSaveBlock2Ptr->pokedex.verdantGen9Caught));
+        }
+        index = (nationalDexNo - VERDANT_GEN9_DEX_FIRST) / 8;
+        bit = (nationalDexNo - VERDANT_GEN9_DEX_FIRST) % 8;
+        seenFlags = gSaveBlock2Ptr->pokedex.verdantGen9Seen;
+        caughtFlags = gSaveBlock2Ptr->pokedex.verdantGen9Caught;
+    }
+    else
+    {
+        return FALSE;
+    }
+
     mask = 1 << bit;
 
     switch (caseID)
     {
     case FLAG_GET_SEEN:
-        retVal = ((gSaveBlock1Ptr->dexSeen[index] & mask) != 0);
+        retVal = ((seenFlags[index] & mask) != 0);
         break;
     case FLAG_GET_CAUGHT:
-         retVal = ((gSaveBlock1Ptr->dexCaught[index] & mask) != 0);
+         retVal = ((caughtFlags[index] & mask) != 0);
         break;
     case FLAG_SET_SEEN:
-        if (nationalDexNo < POKEMON_SLOTS_NUMBER)
-            gSaveBlock1Ptr->dexSeen[index] |= mask;
+        seenFlags[index] |= mask;
         break;
     case FLAG_SET_CAUGHT:
-        if (nationalDexNo < POKEMON_SLOTS_NUMBER)
-            gSaveBlock1Ptr->dexCaught[index] |= mask;
+        caughtFlags[index] |= mask;
         break;
     }
 
@@ -4737,6 +4798,8 @@ u16 GetNationalPokedexCount(u8 caseID)
 
     for (i = 0; i < NATIONAL_DEX_COUNT; i++)
     {
+        if (!IsNationalDexNumberAvailable(i + 1))
+            continue;
         switch (caseID)
         {
         case FLAG_GET_SEEN:
@@ -4824,26 +4887,20 @@ bool8 HasAllKantoMons(void)
 
 bool16 HasAllMons(void)
 {
-    u16 i;
+    u16 dexNum;
 
-    // -1 excludes Mew
-    for (i = 0; i < KANTO_DEX_COUNT - 1; i++)
+    for (dexNum = 1; dexNum <= NATIONAL_DEX_COUNT; dexNum++)
     {
-        if (!GetSetPokedexFlag(i + 1, FLAG_GET_CAUGHT))
-            return FALSE;
-    }
-
-    // -3 excludes Lugia, Ho-Oh, and Celebi
-    for (i = KANTO_DEX_COUNT; i < JOHTO_DEX_COUNT - 3; i++)
-    {
-        if (!GetSetPokedexFlag(i + 1, FLAG_GET_CAUGHT))
-            return FALSE;
-    }
-
-    // -2 excludes Jirachi and Deoxys
-    for (i = JOHTO_DEX_COUNT; i < NATIONAL_DEX_COUNT - 2; i++)
-    {
-        if (!GetSetPokedexFlag(i + 1, FLAG_GET_CAUGHT))
+        if (!IsNationalDexNumberAvailable(dexNum))
+            continue;
+        if (dexNum == NATIONAL_DEX_MEW
+         || dexNum == NATIONAL_DEX_LUGIA
+         || dexNum == NATIONAL_DEX_HO_OH
+         || dexNum == NATIONAL_DEX_CELEBI
+         || dexNum == NATIONAL_DEX_JIRACHI
+         || dexNum == NATIONAL_DEX_DEOXYS)
+            continue;
+        if (!GetSetPokedexFlag(dexNum, FLAG_GET_CAUGHT))
             return FALSE;
     }
     return TRUE;
@@ -6688,7 +6745,12 @@ static void PrintStatsScreen_NameGender(u8 taskId, u32 num, u32 value, u32 owned
         value = NationalToHoennOrder(num);
     else
         value = num;
-    ConvertIntToDecimalStringN(StringCopy(str, gText_NumberClear01), value, STR_CONV_MODE_LEADING_ZEROS, 3);
+    ConvertIntToDecimalStringN(
+        StringCopy(str, gText_NumberClear01),
+        value,
+        STR_CONV_MODE_LEADING_ZEROS,
+        GetPokedexNumberDigitCount(value)
+    );
     PrintInfoScreenTextSmall(str, 38, 26);
 
     //Gender ratio //MON_GENDERLESS == 0xFF
@@ -8276,4 +8338,3 @@ static void Task_ExitFormsScreen(u8 taskId)
     }
 }
 #endif
-

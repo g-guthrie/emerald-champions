@@ -2165,6 +2165,7 @@ static void RestoreHeldItems(void)
         {
             u16 item = GetMonData(&gSaveBlock1Ptr->playerParty[gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1], MON_DATA_HELD_ITEM, NULL);
             SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &item);
+            TryUpdateMonFormForHeldItem(&gPlayerParty[i]);
         }
     }
 }

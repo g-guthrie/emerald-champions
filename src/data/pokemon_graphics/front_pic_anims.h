@@ -15723,6 +15723,12 @@ static const union AnimCmd *const sAnims_PICHU_SPIKY_EARED[] ={
 #define ANIM_CMD(name)             [SPECIES_##name] = sAnims_##name
 #define ANIM_CMD_FULL(name, anims) [SPECIES_##name] = anims
 
+static const union AnimCmd *const sAnims_VerdantGen9[] =
+{
+    sAnim_GeneralFrame0,
+    sAnim_GeneralFrame0,
+};
+
 const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
 {
     ANIM_CMD(NONE),
@@ -16950,6 +16956,7 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
     ANIM_CMD_FULL(ZARUDE_DADA, sAnims_ZARUDE),
     ANIM_CMD_FULL(CALYREX_ICE_RIDER, sAnims_CALYREX),
     ANIM_CMD_FULL(CALYREX_SHADOW_RIDER, sAnims_CALYREX),
+#include "verdant_gen9_anim_table.h"
     ANIM_CMD(EGG),
 };
 

@@ -266,7 +266,7 @@ def mon_role(mon: dict, team: dict) -> str:
         return "Choice-locked breaker"
     if moves & quality.PROTECT_MOVES and len(mon["attack_moves"]) >= 2:
         return "protected attacker"
-    if any(family in mon["species"] for family in custom.LEGENDARY_FAMILIES):
+    if any(family in mon["species"] for family in custom.RARE_FAMILIES):
         return "rare centerpiece"
     if len(mon["status_moves"]) >= 2:
         return "disruption and support"
@@ -372,7 +372,7 @@ def build_guide() -> dict:
         combined_difficulty = round(float(design["manual_difficulty"]) * 10) if design else round(team["quality_score"] * 0.58 + team["manifest_difficulty"] * 0.42)
         theme = inferred_theme(team)
         lead_names = [pretty(mon["species"], "SPECIES_") for mon in team["mons"][:2 if team["format"] == "double" else 1]]
-        rare_names = [pretty(mon["species"], "SPECIES_") for mon in team["mons"] if any(family in mon["species"] for family in custom.LEGENDARY_FAMILIES)]
+        rare_names = [pretty(mon["species"], "SPECIES_") for mon in team["mons"] if any(family in mon["species"] for family in custom.RARE_FAMILIES)]
         mega_names = [pretty(mon["species"], "SPECIES_") for mon in team["mons"] if mon["item"] in MEGA_ITEMS]
         levels = [max(1, min(100, cap + mon["level_offset"])) if cap is not None else None for mon in team["mons"]]
 

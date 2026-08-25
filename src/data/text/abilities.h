@@ -268,6 +268,8 @@ static const u8 sPiercingDrillDescription[] = _("Contact evades protection.");
 static const u8 sDragonizeDescription[] = _("Normal moves turn Dragon.");
 static const u8 sMegaSolDescription[] = _("Battles as if in sunlight.");
 
+#include "verdant_gen9_ability_descriptions.h"
+
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 {
     [ABILITY_NONE] = _("-------"),
@@ -551,6 +553,7 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_PIERCING_DRILL] = _("Pierce Drill"),
     [ABILITY_DRAGONIZE] = _("Dragonize"),
     [ABILITY_MEGA_SOL] = _("Mega Sol"),
+#include "verdant_gen9_ability_names.h"
 };
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
@@ -836,4 +839,5 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_PIERCING_DRILL] = sPiercingDrillDescription,
     [ABILITY_DRAGONIZE] = sDragonizeDescription,
     [ABILITY_MEGA_SOL] = sMegaSolDescription,
+#include "verdant_gen9_ability_pointers.h"
 };

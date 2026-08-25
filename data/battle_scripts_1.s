@@ -406,6 +406,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectCourtChange             @ EFFECT_COURT_CHANGE
 	.4byte BattleScript_EffectTeatime                  @ EFFECT_TEATIME
 	.4byte BattleScript_EffectShellTrap                @ EFFECT_SHELL_TRAP
+	.4byte BattleScript_EffectElectroShot              @ EFFECT_ELECTRO_SHOT
 
 BattleScript_EffectCourtChange::
 	attackcanceler
@@ -3837,6 +3838,31 @@ BattleScript_EffectTwoTurnsAttackIceBurn:
 BattleScript_EffectTwoTurnsAttackFreezeShock:
 	setbyte sTWOTURN_STRINGID, B_MSG_TURN1_FREEZE_SHOCK
 	goto BattleScript_EffectTwoTurnsAttackContinue	
+
+BattleScript_EffectElectroShot:
+	jumpifstatus2 BS_ATTACKER, STATUS2_MULTIPLETURNS, BattleScript_TwoTurnMovesSecondTurn
+	jumpifword CMP_COMMON_BITS, gHitMarker, HITMARKER_NO_ATTACKSTRING, BattleScript_TwoTurnMovesSecondTurn
+	setbyte sTWOTURN_STRINGID, B_MSG_TURN1_GEOMANCY
+	call BattleScriptFirstChargingTurn
+	setstatchanger STAT_SPATK, 1, FALSE
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_BUFF_ALLOW_PTR, BattleScript_ElectroShotAfterBoost
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_ElectroShotAfterBoost
+	setgraphicalstatchangevalues
+	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printfromtable gStatUpStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_ElectroShotAfterBoost:
+	jumpifweatheraffected BS_ATTACKER, WEATHER_RAIN_ANY, BattleScript_ElectroShotImmediateAttack
+	jumpifnoholdeffect BS_ATTACKER, HOLD_EFFECT_POWER_HERB, BattleScript_MoveEnd
+	call BattleScript_PowerHerbActivation
+	@ The charging-turn attack canceler has already run this action.
+BattleScript_ElectroShotImmediateAttack:
+	setmoveeffect MOVE_EFFECT_CHARGING
+	setbyte sB_ANIM_TURN, 1
+	clearstatusfromeffect BS_ATTACKER
+	orword gHitMarker, HITMARKER_NO_PPDEDUCT
+	argumenttomoveeffect
+	goto BattleScript_HitFromAccCheck
 	
 BattleScript_EffectGeomancy:
 	jumpifstatus2 BS_ATTACKER, STATUS2_MULTIPLETURNS, BattleScript_GeomancySecondTurn
@@ -4591,6 +4617,8 @@ BattleScript_EffectRapidSpin::
 	resultmessage
 	waitmessage B_WAIT_TIME_LONG
 	jumpifhalfword CMP_COMMON_BITS, gMoveResultFlags, MOVE_RESULT_DOESNT_AFFECT_FOE, BattleScript_MoveEnd
+	jumpifmove MOVE_MORTAL_SPIN, BattleScript_MortalSpinPoison
+BattleScript_MortalSpinRapidSpin:
 	setmoveeffect MOVE_EFFECT_RAPIDSPIN | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
 	seteffectwithchance
 	setstatchanger STAT_SPEED, 1, FALSE
@@ -4601,6 +4629,14 @@ BattleScript_EffectRapidSpin::
 	printfromtable gStatUpStringIds
 	waitmessage B_WAIT_TIME_LONG
 BattleScript_EffectRapidSpinEnd::
+	tryfaintmon BS_TARGET, FALSE, NULL
+	moveendall
+	end
+BattleScript_MortalSpinPoison:
+	setmoveeffect MOVE_EFFECT_POISON
+	seteffectwithchance
+	setmoveeffect MOVE_EFFECT_RAPIDSPIN | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
+	seteffectwithchance
 	tryfaintmon BS_TARGET, FALSE, NULL
 	moveendall
 	end
@@ -5612,7 +5648,11 @@ BattleScript_EffectPoisonFang::
 	goto BattleScript_EffectHit
 
 BattleScript_EffectOverheat::
+	jumpifmove MOVE_MAKE_IT_RAIN, BattleScript_EffectMakeItRain
 	setmoveeffect MOVE_EFFECT_SP_ATK_TWO_DOWN | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
+	goto BattleScript_EffectHit
+BattleScript_EffectMakeItRain:
+	setmoveeffect MOVE_EFFECT_SP_ATK_MINUS_1 | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
 	goto BattleScript_EffectHit
 
 BattleScript_EffectHammerArm::
@@ -7791,6 +7831,25 @@ BattleScript_HarvestActivates::
 	waitmessage B_WAIT_TIME_LONG
 BattleScript_HarvestActivatesEnd:
 	end3
+
+BattleScript_CudChewActivates::
+	pause 5
+	call BattleScript_AbilityPopUp
+	setbyte sBERRY_OVERRIDE, TRUE
+	consumeberry BS_SCRIPTING, TRUE
+	setbyte sBERRY_OVERRIDE, FALSE
+	end3
+
+BattleScript_ToxicDebrisActivates::
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_POISONSPIKESSCATTERED
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_MoveEffectSaltCure::
+	printstring STRINGID_SALTCUREAPPLIED
+	waitmessage B_WAIT_TIME_LONG
+	return
 
 BattleScript_SolarPowerActivates::
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_DAMAGE

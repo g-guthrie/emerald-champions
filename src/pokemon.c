@@ -1608,6 +1608,7 @@ const u16 gSpeciesToNationalPokedexNum[NUM_SPECIES] = // Assigns all species to 
     // Calyrex
     [SPECIES_CALYREX_ICE_RIDER - 1] = NATIONAL_DEX_CALYREX,
     [SPECIES_CALYREX_SHADOW_RIDER - 1] = NATIONAL_DEX_CALYREX,
+#include "data/pokemon/verdant_gen9_national_map.h"
 };
 
 const u16 gHoennToNationalOrder[HOENN_DEX_COUNT] = // Assigns Hoenn Dex Pokémon (Using National Dex Index)
@@ -3942,6 +3943,7 @@ void BoxMonToMon(const struct BoxPokemon *src, struct Pokemon *dest)
     value = 255;
     SetMonData(dest, MON_DATA_MAIL, &value);
     CalculateMonStats(dest);
+    TryUpdateMonFormForHeldItem(dest);
 }
 
 u8 GetLevelFromMonExp(struct Pokemon *mon)
@@ -5356,7 +5358,7 @@ void GetSpeciesName(u8 *name, u16 species)
 
     for (i = 0; i <= POKEMON_NAME_LENGTH; i++)
     {
-        if (species > NUM_SPECIES)
+        if (species >= NUM_SPECIES)
             name[i] = gSpeciesNames[0][i];
         else
             name[i] = gSpeciesNames[species][i];
@@ -6622,15 +6624,13 @@ u16 HoennPokedexNumToSpecies(u16 hoennNum)
     if (!hoennNum)
         return 0;
 
-    species = 0;
+    for (species = 1; species < NUM_SPECIES; species++)
+    {
+        if (species != SPECIES_EGG && gSpeciesToHoennPokedexNum[species - 1] == hoennNum)
+            return species;
+    }
 
-    while (species < (NUM_SPECIES - 1) && gSpeciesToHoennPokedexNum[species] != hoennNum)
-        species++;
-
-    if (species == NUM_SPECIES - 1)
-        return 0;
-
-    return species + 1;
+    return SPECIES_NONE;
 }
 
 u16 NationalPokedexNumToSpecies(u16 nationalNum)
@@ -6640,15 +6640,13 @@ u16 NationalPokedexNumToSpecies(u16 nationalNum)
     if (!nationalNum)
         return 0;
 
-    species = 0;
+    for (species = 1; species < NUM_SPECIES; species++)
+    {
+        if (species != SPECIES_EGG && gSpeciesToNationalPokedexNum[species - 1] == nationalNum)
+            return species;
+    }
 
-    while (species < (NUM_SPECIES - 1) && gSpeciesToNationalPokedexNum[species] != nationalNum)
-        species++;
-
-    if (species == NUM_SPECIES - 1)
-        return 0;
-
-    return species + 1;
+    return SPECIES_NONE;
 }
 
 u16 NationalToHoennOrder(u16 nationalNum)
@@ -6671,7 +6669,7 @@ u16 NationalToHoennOrder(u16 nationalNum)
 
 u16 SpeciesToNationalPokedexNum(u16 species)
 {
-    if (!species)
+    if (species == SPECIES_NONE || species == SPECIES_EGG || species >= NUM_SPECIES)
         return 0;
 
     return gSpeciesToNationalPokedexNum[species - 1];
@@ -6679,7 +6677,7 @@ u16 SpeciesToNationalPokedexNum(u16 species)
 
 u16 SpeciesToHoennPokedexNum(u16 species)
 {
-    if (!species)
+    if (species == SPECIES_NONE || species == SPECIES_EGG || species >= NUM_SPECIES)
         return 0;
 
     return gSpeciesToHoennPokedexNum[species - 1];
@@ -7547,7 +7545,7 @@ const u32 *GetMonSpritePalFromSpeciesAndPersonality(u16 species, u32 otId, u32 p
 {
     u32 shinyValue;
 
-    if (species > NUM_SPECIES)
+    if (species >= NUM_SPECIES)
         return gMonPaletteTable[0].data;
 
     shinyValue = HIHALF(otId) ^ LOHALF(otId) ^ HIHALF(personality) ^ LOHALF(personality);
@@ -8346,4 +8344,52 @@ u16 GetFormChangeTargetSpecies(struct Pokemon *mon, u16 method, u32 arg)
     }
 
     return species != targetSpecies ? targetSpecies : SPECIES_NONE;
+}
+
+bool32 TryUpdateMonFormForHeldItem(struct Pokemon *mon)
+{
+    u16 currentSpecies = GetMonData(mon, MON_DATA_SPECIES, NULL);
+    u16 targetSpecies = GetFormChangeTargetSpecies(mon, FORM_ITEM_HOLD, 0);
+
+    if (targetSpecies == SPECIES_NONE)
+        targetSpecies = GetFormChangeTargetSpecies(mon, FORM_ITEM_HOLD_ABILITY, 0);
+    if (targetSpecies == SPECIES_NONE || targetSpecies == currentSpecies)
+        return FALSE;
+
+    SetMonData(mon, MON_DATA_SPECIES, &targetSpecies);
+    CalculateMonStats(mon);
+    return TRUE;
+}
+
+bool32 TryUpdateBoxMonFormForHeldItem(struct BoxPokemon *boxMon)
+{
+    u32 i;
+    u16 currentSpecies = GetBoxMonData(boxMon, MON_DATA_SPECIES, NULL);
+    u16 heldItem = GetBoxMonData(boxMon, MON_DATA_HELD_ITEM, NULL);
+    u32 ability = GetAbilityBySpecies(
+        currentSpecies,
+        GetBoxMonData(boxMon, MON_DATA_ABILITY_NUM, NULL)
+    );
+    const struct FormChange *formChanges = gFormChangeTablePointers[currentSpecies];
+    u16 targetSpecies = SPECIES_NONE;
+
+    if (formChanges == NULL)
+        return FALSE;
+
+    for (i = 0; formChanges[i].method != FORM_CHANGE_END; i++)
+    {
+        if (formChanges[i].method == FORM_ITEM_HOLD
+         && heldItem == formChanges[i].param1)
+            targetSpecies = formChanges[i].targetSpecies;
+        else if (formChanges[i].method == FORM_ITEM_HOLD_ABILITY
+              && heldItem == formChanges[i].param1
+              && ability == formChanges[i].param2)
+            targetSpecies = formChanges[i].targetSpecies;
+    }
+
+    if (targetSpecies == SPECIES_NONE || targetSpecies == currentSpecies)
+        return FALSE;
+
+    SetBoxMonData(boxMon, MON_DATA_SPECIES, &targetSpecies);
+    return TRUE;
 }

@@ -2047,6 +2047,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
                     break;
             }
             SetMonData(&party[i], MON_DATA_POKEBALL, &gTrainerBallTable[j].Ball);
+            TryUpdateMonFormForHeldItem(&party[i]);
         }
 
         gBattleTypeFlags |= gTrainers[trainerNum].doubleBattle;
@@ -2721,7 +2722,7 @@ void SpriteCB_FaintOpponentMon(struct Sprite *sprite)
     {
         yOffset = gCastformFrontSpriteCoords[gBattleMonForms[battler]].y_offset;
     }
-    else if (species > NUM_SPECIES)
+    else if (species >= NUM_SPECIES)
     {
         yOffset = gMonFrontPicCoords[SPECIES_NONE].y_offset;
     }
@@ -3240,6 +3241,7 @@ void FaintClearSetData(void)
     gProtectStructs[gActiveBattler].spikyShielded = FALSE;
     gProtectStructs[gActiveBattler].kingsShielded = FALSE;
     gProtectStructs[gActiveBattler].banefulBunkered = FALSE;
+    gProtectStructs[gActiveBattler].burningBulwarked = FALSE;
     gProtectStructs[gActiveBattler].obstructed = FALSE;
     gProtectStructs[gActiveBattler].endured = FALSE;
     gProtectStructs[gActiveBattler].noValidMoves = FALSE;
@@ -4474,6 +4476,8 @@ u32 GetBattlerTotalSpeedStat(u8 battlerId)
         speed *= 2;
     else if (ability == ABILITY_SLOW_START && gDisableStructs[battlerId].slowStartTimer != 0)
         speed /= 2;
+    if (IsCuratedDriveStatBoosted(battlerId, STAT_SPEED))
+        speed = (speed * 150) / 100;
 
     // stat stages
     speed *= gStatStageRatios[gBattleMons[battlerId].statStages[STAT_SPEED]][0];
@@ -4783,6 +4787,7 @@ static void TurnValuesCleanUp(bool8 var0)
             gProtectStructs[gActiveBattler].spikyShielded = FALSE;
             gProtectStructs[gActiveBattler].kingsShielded = FALSE;
             gProtectStructs[gActiveBattler].banefulBunkered = FALSE;
+            gProtectStructs[gActiveBattler].burningBulwarked = FALSE;
         }
         else
         {
@@ -5345,7 +5350,26 @@ void SetTypeBeforeUsingMove(u16 move, u8 battlerAtk)
     gBattleStruct->ateBoost[battlerAtk] = 0;
     gSpecialStatuses[battlerAtk].gemBoost = FALSE;
 
-    if (gBattleMoves[move].effect == EFFECT_WEATHER_BALL)
+    if (move == MOVE_IVY_CUDGEL)
+    {
+        switch (gBattleMons[battlerAtk].species)
+        {
+        case SPECIES_OGERPON_WELLSPRING:
+            gBattleStruct->dynamicMoveType = TYPE_WATER | 0x80;
+            break;
+        case SPECIES_OGERPON_HEARTHFLAME:
+            gBattleStruct->dynamicMoveType = TYPE_FIRE | 0x80;
+            break;
+        case SPECIES_OGERPON_CORNERSTONE:
+            gBattleStruct->dynamicMoveType = TYPE_ROCK | 0x80;
+            break;
+        default:
+            gBattleStruct->dynamicMoveType = TYPE_GRASS | 0x80;
+            break;
+        }
+    }
+
+    else if (gBattleMoves[move].effect == EFFECT_WEATHER_BALL)
     {
         if (GetBattlerAbility(battlerAtk) == ABILITY_MEGA_SOL)
         {

@@ -5723,6 +5723,7 @@ static void RestoreDomePlayerPartyHeldItems(void)
         int playerMonId = gSaveBlock2Ptr->frontier.selectedPartyMons[gSelectedOrderFromParty[i] - 1] - 1;
         u16 item = GetMonData(&gSaveBlock1Ptr->playerParty[playerMonId], MON_DATA_HELD_ITEM, NULL);
         SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &item);
+        TryUpdateMonFormForHeldItem(&gPlayerParty[i]);
     }
 }
 

@@ -73,6 +73,16 @@ subprocess.run(
     check=True,
 )
 subprocess.run(
+    [sys.executable, str(ROOT / "scripts/verdant_gen9_curated.py"), "--check"],
+    cwd=ROOT,
+    check=True,
+)
+subprocess.run(
+    [sys.executable, str(ROOT / "scripts/verify_verdant_gen9_battle_mechanics.py")],
+    cwd=ROOT,
+    check=True,
+)
+subprocess.run(
     [sys.executable, str(ROOT / "scripts/verdant_logical_audit.py")],
     cwd=ROOT,
     check=True,

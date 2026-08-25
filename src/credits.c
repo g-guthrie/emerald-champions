@@ -1558,7 +1558,7 @@ static void DeterminePokemonToShow(void)
     
     // Go through the Pokedex, and anything that has gotten caught we put into our massive array.
     // This basically packs all of the caught pokemon into the front of the array
-    for (dexNum = 1, j = 0; dexNum < NATIONAL_DEX_COUNT; dexNum++)
+    for (dexNum = 1, j = 0; dexNum <= NATIONAL_DEX_COUNT; dexNum++)
     {
         if (GetSetPokedexFlag(dexNum, FLAG_GET_CAUGHT))
         {

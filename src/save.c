@@ -2,6 +2,8 @@
 #include "agb_flash.h"
 #include "gba/flash_internal.h"
 #include "fieldmap.h"
+#include "event_data.h"
+#include "item.h"
 #include "save.h"
 #include "task.h"
 #include "decompress.h"
@@ -12,6 +14,14 @@
 #include "trainer_hill.h"
 #include "link.h"
 #include "constants/game_stat.h"
+#include "constants/flags.h"
+#include "constants/items.h"
+
+// Battery/cloud save compatibility gates. The curated Dex reuses existing
+// filler and must never move either save block's historical boundary.
+typedef char SaveBlock1SizeMustRemainStable[(sizeof(struct SaveBlock1) == 0x380C) ? 1 : -1];
+typedef char SaveBlock2SizeMustRemainStable[(sizeof(struct SaveBlock2) == 0x0F2C) ? 1 : -1];
+typedef char PokedexSizeMustRemainStable[(sizeof(struct Pokedex) == 0x78) ? 1 : -1];
 
 static u16 CalculateChecksum(void *data, u16 size);
 static bool8 DoReadFlashWholeSection(u8 sector, struct SaveSection *section);
@@ -20,6 +30,45 @@ static u8 sub_8152E10(u16 a1, const struct SaveSectionLocation *location);
 static u8 ClearSaveData_2(u16 a1, const struct SaveSectionLocation *location);
 static u8 TryWriteSector(u8 sector, u8 *data);
 static u8 HandleWriteSector(u16 a1, const struct SaveSectionLocation *location);
+
+struct VerdantWorldItemMigration
+{
+    u16 pickupFlag;
+    u16 item;
+    u16 migrationFlag;
+};
+
+static const struct VerdantWorldItemMigration sVerdantGen9WorldItemMigrations[] =
+{
+    {FLAG_ITEM_ROUTE_111_ROCK_SLIDE, ITEM_CORNERSTONE_MASK, FLAG_VERDANT_GEN9_MIGRATED_CORNERSTONE},
+    {FLAG_ITEM_ROUTE_114_RARE_CANDY, ITEM_LEADERS_CREST, FLAG_VERDANT_GEN9_MIGRATED_LEADERS_CREST},
+    {FLAG_ITEM_ROUTE_119_TM84_POISON_JAB, ITEM_GLIMMORANITE, FLAG_VERDANT_GEN9_MIGRATED_GLIMMORANITE},
+    {FLAG_ITEM_ROUTE_119_RARE_CANDY, ITEM_METAL_ALLOY, FLAG_VERDANT_GEN9_MIGRATED_METAL_ALLOY},
+    {FLAG_ITEM_ROUTE_127_RARE_CANDY, ITEM_WELLSPRING_MASK, FLAG_VERDANT_GEN9_MIGRATED_WELLSPRING},
+    {FLAG_ITEM_ROUTE_132_RARE_CANDY, ITEM_TATSUGIRINITE, FLAG_VERDANT_GEN9_MIGRATED_TATSUGIRINITE},
+    {FLAG_ITEM_GRANITE_CAVE_B2F_RARE_CANDY, ITEM_GIMMIGHOUL_COIN, FLAG_VERDANT_GEN9_MIGRATED_GIMMIGHOUL_COIN},
+    {FLAG_ITEM_MAGMA_HIDEOUT_1F_RARE_CANDY, ITEM_BOOSTER_ENERGY, FLAG_VERDANT_GEN9_MIGRATED_BOOSTER_ENERGY},
+    {FLAG_ITEM_MAGMA_HIDEOUT_3F_3R_TM35_FLAMETHROWER, ITEM_HEARTHFLAME_MASK, FLAG_VERDANT_GEN9_MIGRATED_HEARTHFLAME},
+};
+
+void MigrateVerdantGen9WorldItems(void)
+{
+    u32 i;
+
+    if (gSaveFileStatus != SAVE_STATUS_OK)
+        return;
+
+    for (i = 0; i < ARRAY_COUNT(sVerdantGen9WorldItemMigrations); i++)
+    {
+        const struct VerdantWorldItemMigration *migration = &sVerdantGen9WorldItemMigrations[i];
+
+        if (!FlagGet(migration->migrationFlag) && FlagGet(migration->pickupFlag))
+        {
+            if (CheckBagHasItem(migration->item, 1) || AddBagItem(migration->item, 1))
+                FlagSet(migration->migrationFlag);
+        }
+    }
+}
 
 // Divide save blocks into individual chunks to be written to flash sectors
 

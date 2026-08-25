@@ -112,7 +112,12 @@ def active_blocks(text: str, prefix: str) -> dict[str, str]:
 
 def parse_moves() -> dict[str, dict]:
     result = {}
-    for name, body in active_blocks((ROOT / "src/data/battle_moves.h").read_text(), "MOVE").items():
+    move_source = (
+        (ROOT / "src/data/battle_moves.h").read_text()
+        + "\n"
+        + (ROOT / "src/data/verdant_gen9_battle_moves.h").read_text()
+    )
+    for name, body in active_blocks(move_source, "MOVE").items():
         power_text = field(body, "power", "0")
         priority_text = field(body, "priority", "0")
         result[name] = {
@@ -128,7 +133,12 @@ def parse_moves() -> dict[str, dict]:
 
 def parse_species() -> dict[str, dict]:
     result = {}
-    for name, body in active_blocks((ROOT / "src/data/pokemon/base_stats.h").read_text(), "SPECIES").items():
+    species_source = (
+        (ROOT / "src/data/pokemon/base_stats.h").read_text()
+        + "\n"
+        + (ROOT / "src/data/pokemon/verdant_gen9_base_stats.h").read_text()
+    )
+    for name, body in active_blocks(species_source, "SPECIES").items():
         stats = []
         for key in ("baseHP", "baseAttack", "baseDefense", "baseSpeed", "baseSpAttack", "baseSpDefense"):
             value = field(body, key, "0")
@@ -145,7 +155,11 @@ def parse_species() -> dict[str, dict]:
 
 
 def mega_items() -> set[str]:
-    text = (ROOT / "src/data/pokemon/evolution.h").read_text()
+    text = (
+        (ROOT / "src/data/pokemon/evolution.h").read_text()
+        + "\n"
+        + (ROOT / "src/data/pokemon/verdant_gen9_evolutions.h").read_text()
+    )
     return set(re.findall(r"\{EVO_MEGA_EVOLUTION,\s*(ITEM_[A-Z0-9_]+),", text))
 
 
@@ -328,7 +342,7 @@ def audit() -> dict:
         item_coverage = sum(mon["item"] != "ITEM_NONE" for mon in mons) / max(1, len(mons))
         complete_coverage = sum(has_complete_moveset(mon) for mon in mons) / max(1, len(mons))
         rare_count = sum(
-            any(family in mon["species"] for family in custom.LEGENDARY_FAMILIES)
+            any(family in mon["species"] for family in custom.RARE_FAMILIES)
             for mon in mons
         )
         mega_count = sum(mon["item"] in mega_stones for mon in mons)

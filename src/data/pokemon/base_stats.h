@@ -32155,4 +32155,5 @@ const struct BaseStats gBaseStats[] =
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = FALSE,
     },
+#include "verdant_gen9_base_stats.h"
 };

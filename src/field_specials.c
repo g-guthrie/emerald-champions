@@ -87,7 +87,7 @@ static EWRAM_DATA u8 sBattlePointsWindowId = 0;
 static EWRAM_DATA u8 sFrontierExchangeCorner_ItemIconWindowId = 0;
 static EWRAM_DATA u8 sPCBoxToSendMon = 0;
 static EWRAM_DATA u32 sBattleTowerMultiBattleTypeFlags = 0;
-static EWRAM_DATA u16 sUnlockedBattleItemMart[52] = {0};
+static EWRAM_DATA u16 sUnlockedBattleItemMart[64] = {0};
 
 struct ListMenuTemplate gScrollableMultichoice_ListMenuTemplate;
 

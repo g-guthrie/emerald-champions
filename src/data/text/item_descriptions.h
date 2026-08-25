@@ -3585,3 +3585,34 @@ static const u8 sWoodenCrownDesc[] = _(
     "A mysterious wooden\n"
     "object. Is it meant\n"
     "for something?");
+
+static const u8 sBoosterEnergyDesc[] = _(
+    "Boosts a Paradox\n"
+    "Pokémon's highest stat\n"
+    "while held.");
+static const u8 sLeadersCrestDesc[] = _(
+    "A reusable crest that\n"
+    "lets Bisharp evolve.");
+static const u8 sGimmighoulCoinDesc[] = _(
+    "A reusable coin that\n"
+    "lets Gimmighoul evolve.");
+static const u8 sMetalAlloyDesc[] = _(
+    "A reusable alloy that\n"
+    "lets Duraludon evolve.");
+static const u8 sWellspringMaskDesc[] = _(
+    "Changes Ogerpon and\n"
+    "boosts Water moves.");
+static const u8 sHearthflameMaskDesc[] = _(
+    "Changes Ogerpon and\n"
+    "boosts Fire moves.");
+static const u8 sCornerstoneMaskDesc[] = _(
+    "Changes Ogerpon and\n"
+    "boosts Rock moves.");
+static const u8 sTatsugiriniteDesc[] = _(
+    "A stone that enables\n"
+    "Tatsugiri's Mega\n"
+    "Evolution.");
+static const u8 sGlimmoraniteDesc[] = _(
+    "A stone that enables\n"
+    "Glimmora's Mega\n"
+    "Evolution.");

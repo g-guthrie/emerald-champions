@@ -538,7 +538,13 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     GET_MOVE_TYPE(move, moveType);
 
     if (IsTargetingPartner(battlerAtk, battlerDef))
+    {
+        if (AI_DATA->defAbility == ABILITY_GOOD_AS_GOLD
+         && IS_MOVE_STATUS(move)
+         && !(moveTarget & (MOVE_TARGET_USER | MOVE_TARGET_OPPONENTS_FIELD)))
+            RETURN_SCORE_MINUS(20);
         return score;
+    }
 
     GET_MOVE_TYPE(move, moveType);
     
@@ -642,6 +648,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                 break;
             case ABILITY_DAZZLING:
             case ABILITY_QUEENLY_MAJESTY:
+            case ABILITY_ARMOR_TAIL:
                 if (atkPriority > 0)
                     RETURN_SCORE_MINUS(20);
                 break;
@@ -659,6 +666,10 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                 break;
             case ABILITY_MAGIC_BOUNCE:
                 if (TestMoveFlags(move, FLAG_MAGIC_COAT_AFFECTED))
+                    RETURN_SCORE_MINUS(20);
+                break;
+            case ABILITY_GOOD_AS_GOLD:
+                if (IS_MOVE_STATUS(move) && !(moveTarget & MOVE_TARGET_OPPONENTS_FIELD))
                     RETURN_SCORE_MINUS(20);
                 break;
             case ABILITY_CONTRARY:
@@ -740,6 +751,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                     break;
                 case ABILITY_DAZZLING:
                 case ABILITY_QUEENLY_MAJESTY:
+                case ABILITY_ARMOR_TAIL:
                     if (atkPriority > 0)
                         RETURN_SCORE_MINUS(10);
                     break;
@@ -1926,6 +1938,14 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
               || AI_DATA->atkAbility == ABILITY_MEGA_SOL)
                 break;
             if (CanTargetFaintAi(battlerDef, battlerAtk)) //Attacker can be knocked out
+                score -= 4;
+            score -= 10;
+            break;
+        case EFFECT_ELECTRO_SHOT:
+            if (AI_DATA->atkHoldEffect == HOLD_EFFECT_POWER_HERB
+              || (AI_WeatherHasEffect() && gBattleWeather & WEATHER_RAIN_ANY && AI_DATA->atkHoldEffect != HOLD_EFFECT_UTILITY_UMBRELLA))
+                break;
+            if (CanTargetFaintAi(battlerDef, battlerAtk))
                 score -= 4;
             score -= 10;
             break;
@@ -4813,6 +4833,11 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
          || AI_DATA->atkAbility == ABILITY_MEGA_SOL)
             score += 2;
         break;
+    case EFFECT_ELECTRO_SHOT:
+        if (AI_DATA->atkHoldEffect == HOLD_EFFECT_POWER_HERB
+         || (AI_WeatherHasEffect() && gBattleWeather & WEATHER_RAIN_ANY && AI_DATA->atkHoldEffect != HOLD_EFFECT_UTILITY_UMBRELLA))
+            score += 2;
+        break;
     case EFFECT_COUNTER:
         if (!IsBattlerIncapacitated(battlerDef, AI_DATA->defAbility) && predictedMove != MOVE_NONE)
         {
@@ -5212,6 +5237,7 @@ static s16 AI_HPAware(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             case EFFECT_PSYCH_UP:
             case EFFECT_MIRROR_COAT:
             case EFFECT_SOLARBEAM:
+            case EFFECT_ELECTRO_SHOT:
             case EFFECT_TWO_TURNS_ATTACK:
             case EFFECT_ERUPTION:
             case EFFECT_TICKLE:

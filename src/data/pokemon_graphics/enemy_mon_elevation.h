@@ -134,4 +134,5 @@ const u8 gEnemyMonElevation[NUM_SPECIES] =
     [SPECIES_GIRATINA_ORIGIN] = 7,
     [SPECIES_THUNDURUS_THERIAN] = 7,
     [SPECIES_ETERNATUS_ETERNAMAX] = 4,
+#include "verdant_gen9_enemy_mon_elevation.h"
 };

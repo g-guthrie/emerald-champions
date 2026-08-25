@@ -31,6 +31,13 @@ LEGENDARY_FAMILIES = (
     "ZACIAN", "ZAMAZENTA", "ETERNATUS", "KUBFU", "URSHIFU", "ZARUDE", "REGIELEKI", "REGIDRAGO", "GLASTRIER", "SPECTRIER", "CALYREX",
 )
 
+CURATED_GEN9_RARE_FAMILIES = (
+    "GREAT_TUSK", "FLUTTER_MANE", "IRON_BUNDLE", "IRON_HANDS",
+    "CHIEN_PAO", "TING_LU", "CHI_YU", "ROARING_MOON", "IRON_VALIANT",
+    "WALKING_WAKE", "OGERPON", "GOUGING_FIRE", "RAGING_BOLT",
+)
+RARE_FAMILIES = LEGENDARY_FAMILIES + CURATED_GEN9_RARE_FAMILIES
+
 # These are deliberate same-species gimmick fights from Inclement's authored
 # roster (Magikarp showcase, mono-Golem hiker, twins, and escalating rematches),
 # not accidental custom-plan repetition.
@@ -378,6 +385,7 @@ def check() -> None:
         (ROOT / path).read_text()
         for path in (
             "include/constants/species.h", "include/constants/items.h", "include/constants/moves.h",
+            "include/constants/verdant_gen9_species.h",
             "include/constants/spreads.h",
         )
     )

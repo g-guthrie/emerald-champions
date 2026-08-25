@@ -202,7 +202,7 @@ u8 GetBattlerYDelta(u8 battlerId, u16 species)
         {
             ret = sCastformBackSpriteYCoords[gBattleMonForms[battlerId]];
         }
-        else if (species > NUM_SPECIES)
+        else if (species >= NUM_SPECIES)
         {
             ret = gMonBackPicCoords[0].y_offset;
         }
@@ -228,7 +228,7 @@ u8 GetBattlerYDelta(u8 battlerId, u16 species)
         {
             ret = gCastformFrontSpriteCoords[gBattleMonForms[battlerId]].y_offset;
         }
-        else if (species > NUM_SPECIES)
+        else if (species >= NUM_SPECIES)
         {
             ret = gMonFrontPicCoords[0].y_offset;
         }
@@ -249,7 +249,7 @@ u8 GetBattlerElevation(u8 battlerId, u16 species)
         {
             if (species == SPECIES_CASTFORM)
                 ret = sCastformElevations[gBattleMonForms[battlerId]];
-            else if (species > NUM_SPECIES)
+            else if (species >= NUM_SPECIES)
                 ret = gEnemyMonElevation[0];
             else
                 ret = gEnemyMonElevation[species];
@@ -2140,7 +2140,7 @@ s16 GetBattlerSpriteCoordAttr(u8 battlerId, u8 attr)
         {
             coords = &gCastformFrontSpriteCoords[gBattleMonForms[battlerId]];
         }
-        else if (species <= SPECIES_EGG)
+        else if (species < NUM_SPECIES)
         {
             coords = &gMonBackPicCoords[species];
         }
@@ -2170,7 +2170,7 @@ s16 GetBattlerSpriteCoordAttr(u8 battlerId, u8 attr)
                 species = GetUnownSpeciesId(personality);
                 coords = &gMonBackPicCoords[species];
             }
-            else if (species > NUM_SPECIES)
+            else if (species >= NUM_SPECIES)
             {
                 coords = &gMonBackPicCoords[0];
             }
@@ -2202,7 +2202,7 @@ s16 GetBattlerSpriteCoordAttr(u8 battlerId, u8 attr)
             {
                 coords = &gCastformFrontSpriteCoords[gBattleMonForms[battlerId]];
             }
-            else if (species > NUM_SPECIES)
+            else if (species >= NUM_SPECIES)
             {
                 coords = &gMonFrontPicCoords[0];
             }

@@ -722,5 +722,6 @@ const u8 *const gMonFootprintTable[] =
     [SPECIES_DIANCIE] = gMonFootprint_Diancie,
     [SPECIES_HOOPA] = gMonFootprint_Hoopa,
     [SPECIES_VOLCANION] = gMonFootprint_Volcanion,
+#include "verdant_gen9_footprint_table.h"
     [SPECIES_EGG] = gMonFootprint_Bulbasaur,
 };

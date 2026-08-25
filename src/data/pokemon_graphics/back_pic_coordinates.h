@@ -6147,6 +6147,7 @@ const struct MonCoords gMonBackPicCoords[] =
     [SPECIES_CHANDELURE_MEGA] = {.size = 0x88, .y_offset = 0},
     [SPECIES_HAWLUCHA_MEGA] = {.size = 0x88, .y_offset = 4},
     [SPECIES_GRENINJA_MEGA] = {.size = 0x88, .y_offset = 11},
+#include "verdant_gen9_back_pic_coordinates.h"
     // Egg
     [SPECIES_EGG] =
     {

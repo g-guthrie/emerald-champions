@@ -778,7 +778,27 @@ gBattleAnims_Moves::
 	.4byte Move_GLACIAL_LANCE
 	.4byte Move_ASTRAL_BARRAGE
 	.4byte Move_EERIE_SPELL
-	.4byte Move_COUNT @ cannot be reached, because last move is Eerie Spell
+	.4byte Move_PROTECT          @ Burning Bulwark
+	.4byte Move_CHARGE_BEAM      @ Electro Shot
+	.4byte Move_LEAF_BLADE       @ Flower Trick
+	.4byte Move_CLOSE_COMBAT     @ Headlong Rush
+	.4byte Move_SURF             @ Hydro Steam
+	.4byte Move_LEAF_BLADE       @ Ivy Cudgel
+	.4byte Move_AQUA_JET         @ Jet Punch
+	.4byte Move_NIGHT_SLASH      @ Kowtow Cleave
+	.4byte Move_PAY_DAY          @ Make It Rain
+	.4byte Move_RAPID_SPIN       @ Mortal Spin
+	.4byte Move_DRAGON_CLAW      @ Order Up
+	.4byte Move_SHADOW_PUNCH     @ Rage Fist
+	.4byte Move_OUTRAGE          @ Raging Fury
+	.4byte Move_SUPER_FANG       @ Ruination
+	.4byte Move_WHIRLPOOL        @ Salt Cure
+	.4byte Move_HAIL             @ Snowscape
+	.4byte Move_SUCKER_PUNCH     @ Thunderclap
+	.4byte Move_FIERY_DANCE      @ Torch Song
+	.4byte Move_PSYBEAM          @ Twin Beam
+	.4byte Move_AQUA_TAIL        @ Wave Crash
+	.4byte Move_COUNT @ cannot be reached; last move is Wave Crash
 
 	.align 2
 gBattleAnims_StatusConditions::

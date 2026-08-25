@@ -1279,6 +1279,68 @@ gCryTable::
 	cry_uncomp Cry_Lapras_Mega
 	cry_uncomp Cry_Flygon_Mega
 	cry_uncomp Cry_Kingdra_Mega
+	@ Champions Megas added after the original custom cry table. Reuse the
+	@ corresponding base cry; the following Egg slot preserves species indexing.
+	cry Cry_Meganium
+	cry Cry_Feraligatr
+	cry Cry_Emboar
+	cry Cry_Raichu
+	cry Cry_Raichu
+	cry Cry_Dragonite
+	cry Cry_Excadrill
+	cry_uncomp Cry_Malamar
+	cry Cry_Chandelure
+	cry_uncomp Cry_Hawlucha
+	cry_uncomp Cry_Greninja
+	cry Cry_Togepi
+	@ Verdant curated Gen 9 package (SPECIES_SPRIGATITO through
+	@ SPECIES_GLIMMORA_MEGA). Palafin Zero, Ogerpon masks, and temporary Mega
+	@ forms intentionally share family samples to avoid redundant ROM data.
+	cry_uncomp Cry_Gen9Sprigatito
+	cry_uncomp Cry_Gen9Floragato
+	cry_uncomp Cry_Gen9Meowscarada
+	cry_uncomp Cry_Gen9Fuecoco
+	cry_uncomp Cry_Gen9Crocalor
+	cry_uncomp Cry_Gen9Skeledirge
+	cry_uncomp Cry_Gen9Nacli
+	cry_uncomp Cry_Gen9Naclstack
+	cry_uncomp Cry_Gen9Garganacl
+	cry_uncomp Cry_Gen9Finizen
+	cry_uncomp Cry_Gen9Finizen
+	cry_uncomp Cry_Gen9PalafinHero
+	cry_uncomp Cry_Gen9Dondozo
+	cry_uncomp Cry_Gen9TatsugiriCurly
+	cry_uncomp Cry_Gen9TatsugiriDroopy
+	cry_uncomp Cry_Gen9TatsugiriStretchy
+	cry_uncomp Cry_Gen9Annihilape
+	cry_uncomp Cry_Gen9Farigiraf
+	cry_uncomp Cry_Gen9Kingambit
+	cry_uncomp Cry_Gen9GreatTusk
+	cry_uncomp Cry_Gen9FlutterMane
+	cry_uncomp Cry_Gen9IronBundle
+	cry_uncomp Cry_Gen9IronHands
+	cry_uncomp Cry_Gen9Glimmet
+	cry_uncomp Cry_Gen9Glimmora
+	cry_uncomp Cry_Gen9GimmighoulChest
+	cry_uncomp Cry_Gen9GimmighoulRoaming
+	cry_uncomp Cry_Gen9Gholdengo
+	cry_uncomp Cry_Gen9ChienPao
+	cry_uncomp Cry_Gen9TingLu
+	cry_uncomp Cry_Gen9ChiYu
+	cry_uncomp Cry_Gen9RoaringMoon
+	cry_uncomp Cry_Gen9IronValiant
+	cry_uncomp Cry_Gen9WalkingWake
+	cry_uncomp Cry_Gen9Ogerpon
+	cry_uncomp Cry_Gen9Ogerpon
+	cry_uncomp Cry_Gen9Ogerpon
+	cry_uncomp Cry_Gen9Ogerpon
+	cry_uncomp Cry_Gen9Archaludon
+	cry_uncomp Cry_Gen9GougingFire
+	cry_uncomp Cry_Gen9RagingBolt
+	cry_uncomp Cry_Gen9TatsugiriCurly
+	cry_uncomp Cry_Gen9TatsugiriDroopy
+	cry_uncomp Cry_Gen9TatsugiriStretchy
+	cry_uncomp Cry_Gen9Glimmora
 
 	.align 2
 gCryTable2::
@@ -2561,3 +2623,62 @@ gCryTable2::
 	cry2_uncomp Cry_Lapras_Mega
 	cry2_uncomp Cry_Flygon_Mega
 	cry2_uncomp Cry_Kingdra_Mega
+	@ Champions Megas, Egg placeholder, and curated Gen 9 package. Keep this
+	@ order exactly parallel with gCryTable above.
+	cry2 Cry_Meganium
+	cry2 Cry_Feraligatr
+	cry2 Cry_Emboar
+	cry2 Cry_Raichu
+	cry2 Cry_Raichu
+	cry2 Cry_Dragonite
+	cry2 Cry_Excadrill
+	cry2_uncomp Cry_Malamar
+	cry2 Cry_Chandelure
+	cry2_uncomp Cry_Hawlucha
+	cry2_uncomp Cry_Greninja
+	cry2 Cry_Togepi
+	cry2_uncomp Cry_Gen9Sprigatito
+	cry2_uncomp Cry_Gen9Floragato
+	cry2_uncomp Cry_Gen9Meowscarada
+	cry2_uncomp Cry_Gen9Fuecoco
+	cry2_uncomp Cry_Gen9Crocalor
+	cry2_uncomp Cry_Gen9Skeledirge
+	cry2_uncomp Cry_Gen9Nacli
+	cry2_uncomp Cry_Gen9Naclstack
+	cry2_uncomp Cry_Gen9Garganacl
+	cry2_uncomp Cry_Gen9Finizen
+	cry2_uncomp Cry_Gen9Finizen
+	cry2_uncomp Cry_Gen9PalafinHero
+	cry2_uncomp Cry_Gen9Dondozo
+	cry2_uncomp Cry_Gen9TatsugiriCurly
+	cry2_uncomp Cry_Gen9TatsugiriDroopy
+	cry2_uncomp Cry_Gen9TatsugiriStretchy
+	cry2_uncomp Cry_Gen9Annihilape
+	cry2_uncomp Cry_Gen9Farigiraf
+	cry2_uncomp Cry_Gen9Kingambit
+	cry2_uncomp Cry_Gen9GreatTusk
+	cry2_uncomp Cry_Gen9FlutterMane
+	cry2_uncomp Cry_Gen9IronBundle
+	cry2_uncomp Cry_Gen9IronHands
+	cry2_uncomp Cry_Gen9Glimmet
+	cry2_uncomp Cry_Gen9Glimmora
+	cry2_uncomp Cry_Gen9GimmighoulChest
+	cry2_uncomp Cry_Gen9GimmighoulRoaming
+	cry2_uncomp Cry_Gen9Gholdengo
+	cry2_uncomp Cry_Gen9ChienPao
+	cry2_uncomp Cry_Gen9TingLu
+	cry2_uncomp Cry_Gen9ChiYu
+	cry2_uncomp Cry_Gen9RoaringMoon
+	cry2_uncomp Cry_Gen9IronValiant
+	cry2_uncomp Cry_Gen9WalkingWake
+	cry2_uncomp Cry_Gen9Ogerpon
+	cry2_uncomp Cry_Gen9Ogerpon
+	cry2_uncomp Cry_Gen9Ogerpon
+	cry2_uncomp Cry_Gen9Ogerpon
+	cry2_uncomp Cry_Gen9Archaludon
+	cry2_uncomp Cry_Gen9GougingFire
+	cry2_uncomp Cry_Gen9RagingBolt
+	cry2_uncomp Cry_Gen9TatsugiriCurly
+	cry2_uncomp Cry_Gen9TatsugiriDroopy
+	cry2_uncomp Cry_Gen9TatsugiriStretchy
+	cry2_uncomp Cry_Gen9Glimmora

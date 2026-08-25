@@ -2834,7 +2834,12 @@ static void PrintNotEggInfo(void)
     if (dexNum != 0xFFFF)
     {
         StringCopy(gStringVar1, &gText_NumberClear01[0]);
-        ConvertIntToDecimalStringN(gStringVar2, dexNum, STR_CONV_MODE_LEADING_ZEROS, 3);
+        ConvertIntToDecimalStringN(
+            gStringVar2,
+            dexNum,
+            STR_CONV_MODE_LEADING_ZEROS,
+            dexNum >= 1000 ? 4 : 3
+        );
         StringAppend(gStringVar1, gStringVar2);
         if (!IsMonShiny(mon))
         {

@@ -1291,6 +1291,8 @@ const struct CompressedSpritePalette gMonPaletteTable[] =
     SPECIES_PAL(HAWLUCHA_MEGA, gMonPalette_HawluchaMega),
     SPECIES_PAL(GRENINJA_MEGA, gMonPalette_GreninjaMega),
 
+#include "verdant_gen9_palette_table.h"
+
     SPECIES_PAL(EGG, gMonPalette_Egg),
 };
 

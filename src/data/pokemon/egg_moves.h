@@ -4040,5 +4040,6 @@ const u16 gEggMoves[] = {
         MOVE_PSYCHO_SHIFT,
         MOVE_HEAL_PULSE),
 
+#include "verdant_gen9_egg_moves.h"
     EGG_MOVES_TERMINATOR
 };

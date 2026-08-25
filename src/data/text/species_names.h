@@ -1293,4 +1293,5 @@ const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_CHANDELURE_MEGA] = _("Chandelure"),
     [SPECIES_HAWLUCHA_MEGA] = _("Hawlucha"),
     [SPECIES_GRENINJA_MEGA] = _("Greninja"),
+#include "verdant_gen9_species_names.h"
 };

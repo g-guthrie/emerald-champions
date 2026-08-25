@@ -3058,13 +3058,19 @@ static u16 GetRandomDifferentSpeciesSeenByPlayer(u16 passedSpecies)
     u16 species;
     u16 initSpecies;
 
-    species = (Random() % (NUM_SPECIES - 1)) + 1;
+    do
+    {
+        species = (Random() % (NUM_SPECIES - 1)) + 1;
+    } while (species == SPECIES_EGG);
     initSpecies = species;
     while (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_SEEN) != TRUE || species == passedSpecies)
     {
         if (species == SPECIES_NONE + 1)
             species = NUM_SPECIES - 1;
         else
+            species--;
+
+        if (species == SPECIES_EGG)
             species--;
 
         if (species == initSpecies)

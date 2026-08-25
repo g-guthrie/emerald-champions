@@ -182,5 +182,7 @@ static const struct FormChange sSilvallyFormChangeTable[] = {
     {FORM_CHANGE_END},
 };
 
+#include "verdant_gen9_form_change_tables.h"
+
 #undef WHEN_LEARNED
 #undef WHEN_FORGOTTEN
