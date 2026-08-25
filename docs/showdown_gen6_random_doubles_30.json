@@ -1,0 +1,5358 @@
+{
+  "source": "https://github.com/smogon/pokemon-showdown",
+  "showdown_commit": "1e169428cace3a87fe186b954b892fa93c389f6f",
+  "format": "gen6randomdoublesbattle",
+  "sample_count": 30,
+  "samples": [
+    {
+      "seed": "1,7919,1640,31348",
+      "team": [
+        {
+          "name": "Staraptor",
+          "species": "Staraptor",
+          "item": "Leftovers",
+          "ability": "Intimidate",
+          "moves": [
+            "Brave Bird",
+            "Protect",
+            "U-turn",
+            "Tailwind"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 81
+        },
+        {
+          "name": "Bisharp",
+          "species": "Bisharp",
+          "item": "Chople Berry",
+          "ability": "Defiant",
+          "moves": [
+            "Sucker Punch",
+            "Swords Dance",
+            "Substitute",
+            "Knock Off"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 80
+        },
+        {
+          "name": "Muk",
+          "species": "Muk",
+          "item": "Sitrus Berry",
+          "ability": "Poison Touch",
+          "moves": [
+            "Ice Punch",
+            "Shadow Sneak",
+            "Fire Punch",
+            "Gunk Shot"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 79
+        },
+        {
+          "name": "Jirachi",
+          "species": "Jirachi",
+          "item": "Sitrus Berry",
+          "ability": "Serene Grace",
+          "moves": [
+            "Iron Head",
+            "Follow Me",
+            "Protect",
+            "Body Slam"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 70
+        },
+        {
+          "name": "Venusaur",
+          "species": "Venusaur",
+          "item": "Venusaurite",
+          "ability": "Chlorophyll",
+          "moves": [
+            "Sleep Powder",
+            "Giga Drain",
+            "Power Whip",
+            "Hidden Power Ice"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "level": 70
+        },
+        {
+          "name": "Krookodile",
+          "species": "Krookodile",
+          "item": "Life Orb",
+          "ability": "Intimidate",
+          "moves": [
+            "Knock Off",
+            "Stone Edge",
+            "Superpower",
+            "Earthquake"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 77
+        }
+      ]
+    },
+    {
+      "seed": "2,15838,3183,62685",
+      "team": [
+        {
+          "name": "Bisharp",
+          "species": "Bisharp",
+          "item": "Chople Berry",
+          "ability": "Pressure",
+          "moves": [
+            "Protect",
+            "Brick Break",
+            "Iron Head",
+            "Sucker Punch"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 80
+        },
+        {
+          "name": "Mantine",
+          "species": "Mantine",
+          "item": "Damp Rock",
+          "ability": "Swift Swim",
+          "moves": [
+            "Protect",
+            "Tailwind",
+            "Rain Dance",
+            "Surf"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 83
+        },
+        {
+          "name": "Kyurem",
+          "species": "Kyurem-White",
+          "item": "Sitrus Berry",
+          "ability": "Turboblaze",
+          "moves": [
+            "Draco Meteor",
+            "Roost",
+            "Earth Power",
+            "Ice Beam"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 70
+        },
+        {
+          "name": "Durant",
+          "species": "Durant",
+          "item": "Occa Berry",
+          "ability": "Hustle",
+          "moves": [
+            "Rock Slide",
+            "Iron Head",
+            "X-Scissor",
+            "Hone Claws"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 81
+        },
+        {
+          "name": "Rotom",
+          "species": "Rotom-Frost",
+          "item": "Choice Specs",
+          "ability": "Levitate",
+          "moves": [
+            "Blizzard",
+            "Electroweb",
+            "Trick",
+            "Volt Switch"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 77
+        },
+        {
+          "name": "Swampert",
+          "species": "Swampert",
+          "item": "Swampertite",
+          "ability": "Torrent",
+          "moves": [
+            "Rain Dance",
+            "Earthquake",
+            "Superpower",
+            "Waterfall"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 70
+        }
+      ]
+    },
+    {
+      "seed": "3,23757,4726,28487",
+      "team": [
+        {
+          "name": "Hitmonlee",
+          "species": "Hitmonlee",
+          "item": "Sitrus Berry",
+          "ability": "Unburden",
+          "moves": [
+            "Mach Punch",
+            "Earthquake",
+            "Wide Guard",
+            "High Jump Kick"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 84
+        },
+        {
+          "name": "Unfezant",
+          "species": "Unfezant",
+          "item": "Scope Lens",
+          "ability": "Super Luck",
+          "moves": [
+            "Taunt",
+            "Roost",
+            "Pluck",
+            "Return"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 80
+        },
+        {
+          "name": "Empoleon",
+          "species": "Empoleon",
+          "item": "Life Orb",
+          "ability": "Torrent",
+          "moves": [
+            "Hidden Power Electric",
+            "Flash Cannon",
+            "Grass Knot",
+            "Surf"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 76
+        },
+        {
+          "name": "Cryogonal",
+          "species": "Cryogonal",
+          "item": "Leftovers",
+          "ability": "Levitate",
+          "moves": [
+            "Hidden Power Ground",
+            "Icy Wind",
+            "Recover",
+            "Protect"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 81
+        },
+        {
+          "name": "Florges",
+          "species": "Florges",
+          "item": "Sitrus Berry",
+          "ability": "Symbiosis",
+          "moves": [
+            "Dazzling Gleam",
+            "Wish",
+            "Psychic",
+            "Aromatherapy"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 74
+        },
+        {
+          "name": "Poliwrath",
+          "species": "Poliwrath",
+          "item": "Life Orb",
+          "ability": "Water Absorb",
+          "moves": [
+            "Brick Break",
+            "Waterfall",
+            "Earthquake",
+            "Encore"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 78
+        }
+      ]
+    },
+    {
+      "seed": "4,31676,6269,59824",
+      "team": [
+        {
+          "name": "Sharpedo",
+          "species": "Sharpedo",
+          "item": "Sharpedonite",
+          "ability": "Speed Boost",
+          "moves": [
+            "Protect",
+            "Ice Fang",
+            "Waterfall",
+            "Zen Headbutt"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 73
+        },
+        {
+          "name": "Quagsire",
+          "species": "Quagsire",
+          "item": "Leftovers",
+          "ability": "Water Absorb",
+          "moves": [
+            "Earthquake",
+            "Waterfall",
+            "Rock Slide",
+            "Protect"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 86
+        },
+        {
+          "name": "Gigalith",
+          "species": "Gigalith",
+          "item": "Sitrus Berry",
+          "ability": "Sturdy",
+          "moves": [
+            "Protect",
+            "Stone Edge",
+            "Explosion",
+            "Superpower"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 78
+        },
+        {
+          "name": "Avalugg",
+          "species": "Avalugg",
+          "item": "Sitrus Berry",
+          "ability": "Sturdy",
+          "moves": [
+            "Recover",
+            "Protect",
+            "Earthquake",
+            "Avalanche"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 78
+        },
+        {
+          "name": "Blaziken",
+          "species": "Blaziken",
+          "item": "Air Balloon",
+          "ability": "Speed Boost",
+          "moves": [
+            "High Jump Kick",
+            "Swords Dance",
+            "Baton Pass",
+            "Flare Blitz"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 76
+        },
+        {
+          "name": "Noivern",
+          "species": "Noivern",
+          "item": "Yache Berry",
+          "ability": "Infiltrator",
+          "moves": [
+            "Hurricane",
+            "Focus Blast",
+            "Protect",
+            "Dragon Pulse"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 76
+        }
+      ]
+    },
+    {
+      "seed": "5,39595,7812,25626",
+      "team": [
+        {
+          "name": "Simipour",
+          "species": "Simipour",
+          "item": "Sitrus Berry",
+          "ability": "Torrent",
+          "moves": [
+            "Ice Beam",
+            "Nasty Plot",
+            "Hydro Pump",
+            "Taunt"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 79
+        },
+        {
+          "name": "Vespiquen",
+          "species": "Vespiquen",
+          "item": "Charti Berry",
+          "ability": "Pressure",
+          "moves": [
+            "Attack Order",
+            "Tailwind",
+            "String Shot",
+            "Struggle Bug"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "level": 82
+        },
+        {
+          "name": "Delcatty",
+          "species": "Delcatty",
+          "item": "Leftovers",
+          "ability": "Wonder Skin",
+          "moves": [
+            "Fake Out",
+            "Protect",
+            "Helping Hand",
+            "Wild Charge"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 91
+        },
+        {
+          "name": "Minun",
+          "species": "Minun",
+          "item": "Leftovers",
+          "ability": "Volt Absorb",
+          "moves": [
+            "Protect",
+            "Substitute",
+            "Thunderbolt",
+            "Hidden Power Ice"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 88
+        },
+        {
+          "name": "Clefable",
+          "species": "Clefable",
+          "item": "Life Orb",
+          "ability": "Magic Guard",
+          "moves": [
+            "Light Screen",
+            "Dazzling Gleam",
+            "Protect",
+            "Follow Me"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 81
+        },
+        {
+          "name": "Tentacruel",
+          "species": "Tentacruel",
+          "item": "Black Sludge",
+          "ability": "Clear Body",
+          "moves": [
+            "Scald",
+            "Muddy Water",
+            "Protect",
+            "Acid Spray"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 78
+        }
+      ]
+    },
+    {
+      "seed": "6,47514,9355,56963",
+      "team": [
+        {
+          "name": "Butterfree",
+          "species": "Butterfree",
+          "item": "Charti Berry",
+          "ability": "Tinted Lens",
+          "moves": [
+            "Substitute",
+            "Shadow Ball",
+            "Bug Buzz",
+            "Quiver Dance"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 89
+        },
+        {
+          "name": "Blissey",
+          "species": "Blissey",
+          "item": "Sitrus Berry",
+          "ability": "Natural Cure",
+          "moves": [
+            "Ice Beam",
+            "Flamethrower",
+            "Aromatherapy",
+            "Soft-Boiled"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 75
+        },
+        {
+          "name": "Sunflora",
+          "species": "Sunflora",
+          "item": "Leftovers",
+          "ability": "Chlorophyll",
+          "moves": [
+            "Earth Power",
+            "Protect",
+            "Giga Drain",
+            "Hidden Power Ice"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 86
+        },
+        {
+          "name": "Dugtrio",
+          "species": "Dugtrio",
+          "item": "Leftovers",
+          "ability": "Arena Trap",
+          "moves": [
+            "Sucker Punch",
+            "Earthquake",
+            "Rock Slide",
+            "Protect"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 88
+        },
+        {
+          "name": "Slowbro",
+          "species": "Slowbro",
+          "item": "Slowbronite",
+          "ability": "Regenerator",
+          "moves": [
+            "Grass Knot",
+            "Slack Off",
+            "Scald",
+            "Fire Blast"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 70
+        },
+        {
+          "name": "Qwilfish",
+          "species": "Qwilfish",
+          "item": "Black Sludge",
+          "ability": "Intimidate",
+          "moves": [
+            "Taunt",
+            "Protect",
+            "Destiny Bond",
+            "Waterfall"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 86
+        }
+      ]
+    },
+    {
+      "seed": "7,55433,10898,22765",
+      "team": [
+        {
+          "name": "Weavile",
+          "species": "Weavile",
+          "item": "Chople Berry",
+          "ability": "Pressure",
+          "moves": [
+            "Taunt",
+            "Protect",
+            "Knock Off",
+            "Ice Shard"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 78
+        },
+        {
+          "name": "Blastoise",
+          "species": "Blastoise",
+          "item": "Blastoisinite",
+          "ability": "Torrent",
+          "moves": [
+            "Scald",
+            "Fake Out",
+            "Muddy Water",
+            "Follow Me"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "level": 70
+        },
+        {
+          "name": "Rotom",
+          "species": "Rotom",
+          "item": "Choice Scarf",
+          "ability": "Levitate",
+          "moves": [
+            "Electroweb",
+            "Trick",
+            "Shadow Ball",
+            "Will-O-Wisp"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 85
+        },
+        {
+          "name": "Nidoqueen",
+          "species": "Nidoqueen",
+          "item": "Life Orb",
+          "ability": "Sheer Force",
+          "moves": [
+            "Earth Power",
+            "Fire Blast",
+            "Ice Beam",
+            "Protect"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 79
+        },
+        {
+          "name": "Sunflora",
+          "species": "Sunflora",
+          "item": "Heat Rock",
+          "ability": "Chlorophyll",
+          "moves": [
+            "Hidden Power Ice",
+            "Sunny Day",
+            "Solar Beam",
+            "Protect"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 86
+        },
+        {
+          "name": "Golurk",
+          "species": "Golurk",
+          "item": "Expert Belt",
+          "ability": "No Guard",
+          "moves": [
+            "Shadow Punch",
+            "Ice Punch",
+            "Dynamic Punch",
+            "Earthquake"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 81
+        }
+      ]
+    },
+    {
+      "seed": "8,63352,12441,54102",
+      "team": [
+        {
+          "name": "Lucario",
+          "species": "Lucario",
+          "item": "Lucarionite",
+          "ability": "Justified",
+          "moves": [
+            "Bullet Punch",
+            "Protect",
+            "Flash Cannon",
+            "Vacuum Wave"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "level": 70
+        },
+        {
+          "name": "Crustle",
+          "species": "Crustle",
+          "item": "White Herb",
+          "ability": "Sturdy",
+          "moves": [
+            "Rock Slide",
+            "Earthquake",
+            "Shell Smash",
+            "X-Scissor"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 82
+        },
+        {
+          "name": "Aurorus",
+          "species": "Aurorus",
+          "item": "Chople Berry",
+          "ability": "Refrigerate",
+          "moves": [
+            "Protect",
+            "Hyper Voice",
+            "Icy Wind",
+            "Freeze-Dry"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 77
+        },
+        {
+          "name": "Tyrantrum",
+          "species": "Tyrantrum",
+          "item": "Life Orb",
+          "ability": "Strong Jaw",
+          "moves": [
+            "Dragon Claw",
+            "Head Smash",
+            "Dragon Dance",
+            "Fire Fang"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 77
+        },
+        {
+          "name": "Kyurem",
+          "species": "Kyurem",
+          "item": "Life Orb",
+          "ability": "Pressure",
+          "moves": [
+            "Ice Beam",
+            "Glaciate",
+            "Focus Blast",
+            "Dragon Pulse"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 70
+        },
+        {
+          "name": "Gardevoir",
+          "species": "Gardevoir",
+          "item": "Leftovers",
+          "ability": "Trace",
+          "moves": [
+            "Moonblast",
+            "Protect",
+            "Psyshock",
+            "Trick Room"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 0
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 0
+          },
+          "level": 77
+        }
+      ]
+    },
+    {
+      "seed": "9,5736,13984,19904",
+      "team": [
+        {
+          "name": "Manaphy",
+          "species": "Manaphy",
+          "item": "Sitrus Berry",
+          "ability": "Hydration",
+          "moves": [
+            "Surf",
+            "Protect",
+            "Helping Hand",
+            "Icy Wind"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 70
+        },
+        {
+          "name": "Charizard",
+          "species": "Charizard",
+          "item": "Charizardite Y",
+          "ability": "Blaze",
+          "moves": [
+            "Fire Blast",
+            "Protect",
+            "Heat Wave",
+            "Solar Beam"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 70
+        },
+        {
+          "name": "Abomasnow",
+          "species": "Abomasnow",
+          "item": "Occa Berry",
+          "ability": "Snow Warning",
+          "moves": [
+            "Blizzard",
+            "Giga Drain",
+            "Focus Blast",
+            "Earthquake"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "level": 80
+        },
+        {
+          "name": "Butterfree",
+          "species": "Butterfree",
+          "item": "Charti Berry",
+          "ability": "Tinted Lens",
+          "moves": [
+            "Quiver Dance",
+            "Substitute",
+            "Psychic",
+            "Bug Buzz"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 89
+        },
+        {
+          "name": "Omastar",
+          "species": "Omastar",
+          "item": "Leftovers",
+          "ability": "Shell Armor",
+          "moves": [
+            "Protect",
+            "Ice Beam",
+            "Hidden Power Electric",
+            "Muddy Water"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 80
+        },
+        {
+          "name": "Accelgor",
+          "species": "Accelgor",
+          "item": "Sitrus Berry",
+          "ability": "Hydration",
+          "moves": [
+            "Encore",
+            "Focus Blast",
+            "Yawn",
+            "Giga Drain"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 80
+        }
+      ]
+    },
+    {
+      "seed": "10,13655,15527,51241",
+      "team": [
+        {
+          "name": "Malamar",
+          "species": "Malamar",
+          "item": "Life Orb",
+          "ability": "Contrary",
+          "moves": [
+            "Psycho Cut",
+            "Knock Off",
+            "Rock Slide",
+            "Superpower"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 81
+        },
+        {
+          "name": "Luxray",
+          "species": "Luxray",
+          "item": "Toxic Orb",
+          "ability": "Intimidate",
+          "moves": [
+            "Wild Charge",
+            "Crunch",
+            "Facade",
+            "Superpower"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 77
+        },
+        {
+          "name": "Golurk",
+          "species": "Golurk",
+          "item": "Yache Berry",
+          "ability": "No Guard",
+          "moves": [
+            "Stone Edge",
+            "Shadow Punch",
+            "Earthquake",
+            "Rock Polish"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 81
+        },
+        {
+          "name": "Furret",
+          "species": "Furret",
+          "item": "Life Orb",
+          "ability": "Frisk",
+          "moves": [
+            "Sucker Punch",
+            "Helping Hand",
+            "U-turn",
+            "Ice Punch"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 87
+        },
+        {
+          "name": "Heatran",
+          "species": "Heatran",
+          "item": "Air Balloon",
+          "ability": "Flash Fire",
+          "moves": [
+            "Heat Wave",
+            "Eruption",
+            "Substitute",
+            "Will-O-Wisp"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 70
+        },
+        {
+          "name": "Aurorus",
+          "species": "Aurorus",
+          "item": "Life Orb",
+          "ability": "Snow Warning",
+          "moves": [
+            "Blizzard",
+            "Flash Cannon",
+            "Freeze-Dry",
+            "Ancient Power"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 77
+        }
+      ]
+    },
+    {
+      "seed": "11,21574,17070,17043",
+      "team": [
+        {
+          "name": "Noctowl",
+          "species": "Noctowl",
+          "item": "Yache Berry",
+          "ability": "Tinted Lens",
+          "moves": [
+            "Air Slash",
+            "Tailwind",
+            "Roost",
+            "Heat Wave"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 85
+        },
+        {
+          "name": "Keldeo",
+          "species": "Keldeo",
+          "item": "Life Orb",
+          "ability": "Justified",
+          "moves": [
+            "Hidden Power Electric",
+            "Surf",
+            "Secret Sword",
+            "Icy Wind"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 71
+        },
+        {
+          "name": "Typhlosion",
+          "species": "Typhlosion",
+          "item": "Expert Belt",
+          "ability": "Flash Fire",
+          "moves": [
+            "Eruption",
+            "Heat Wave",
+            "Extrasensory",
+            "Hidden Power Grass"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 76
+        },
+        {
+          "name": "Illumise",
+          "species": "Illumise",
+          "item": "Leftovers",
+          "ability": "Prankster",
+          "moves": [
+            "Protect",
+            "Encore",
+            "Tailwind",
+            "U-turn"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 89
+        },
+        {
+          "name": "Steelix",
+          "species": "Steelix",
+          "item": "Steelixite",
+          "ability": "Sturdy",
+          "moves": [
+            "Protect",
+            "Stealth Rock",
+            "Earthquake",
+            "Heavy Slam"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 70
+        },
+        {
+          "name": "Suicune",
+          "species": "Suicune",
+          "item": "Sitrus Berry",
+          "ability": "Pressure",
+          "moves": [
+            "Protect",
+            "Ice Beam",
+            "Tailwind",
+            "Scald"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 71
+        }
+      ]
+    },
+    {
+      "seed": "12,29493,18613,48380",
+      "team": [
+        {
+          "name": "Torterra",
+          "species": "Torterra",
+          "item": "Yache Berry",
+          "ability": "Overgrow",
+          "moves": [
+            "Earthquake",
+            "Wide Guard",
+            "Stone Edge",
+            "Wood Hammer"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 77
+        },
+        {
+          "name": "Meowstic",
+          "species": "Meowstic",
+          "item": "Light Clay",
+          "ability": "Prankster",
+          "moves": [
+            "Protect",
+            "Thunder Wave",
+            "Reflect",
+            "Light Screen"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 82
+        },
+        {
+          "name": "Exeggutor",
+          "species": "Exeggutor",
+          "item": "Leftovers",
+          "ability": "Chlorophyll",
+          "moves": [
+            "Giga Drain",
+            "Hidden Power Fire",
+            "Protect",
+            "Leech Seed"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 77
+        },
+        {
+          "name": "Klefki",
+          "species": "Klefki",
+          "item": "Air Balloon",
+          "ability": "Prankster",
+          "moves": [
+            "Dazzling Gleam",
+            "Flash Cannon",
+            "Safeguard",
+            "Play Rough"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "level": 82
+        },
+        {
+          "name": "Excadrill",
+          "species": "Excadrill",
+          "item": "Leftovers",
+          "ability": "Mold Breaker",
+          "moves": [
+            "Iron Head",
+            "Protect",
+            "Earthquake",
+            "Substitute"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 78
+        },
+        {
+          "name": "Slurpuff",
+          "species": "Slurpuff",
+          "item": "Leftovers",
+          "ability": "Sweet Veil",
+          "moves": [
+            "Protect",
+            "Return",
+            "Flamethrower",
+            "Surf"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "level": 81
+        }
+      ]
+    },
+    {
+      "seed": "13,37412,20156,14182",
+      "team": [
+        {
+          "name": "Beartic",
+          "species": "Beartic",
+          "item": "Leftovers",
+          "ability": "Snow Cloak",
+          "moves": [
+            "Protect",
+            "Night Slash",
+            "Superpower",
+            "Icicle Crash"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 81
+        },
+        {
+          "name": "Ludicolo",
+          "species": "Ludicolo",
+          "item": "Damp Rock",
+          "ability": "Swift Swim",
+          "moves": [
+            "Rain Dance",
+            "Hydro Pump",
+            "Ice Beam",
+            "Fake Out"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "level": 81
+        },
+        {
+          "name": "Lickilicky",
+          "species": "Lickilicky",
+          "item": "Sitrus Berry",
+          "ability": "Cloud Nine",
+          "moves": [
+            "Dragon Tail",
+            "Body Slam",
+            "Toxic",
+            "Earthquake"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 78
+        },
+        {
+          "name": "Genesect",
+          "species": "Genesect-Shock",
+          "item": "Shock Drive",
+          "ability": "Download",
+          "moves": [
+            "Bug Buzz",
+            "Iron Head",
+            "Protect",
+            "Techno Blast"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "level": 70
+        },
+        {
+          "name": "Mr. Mime",
+          "species": "Mr. Mime",
+          "item": "Leftovers",
+          "ability": "Technician",
+          "moves": [
+            "Thunderbolt",
+            "Icy Wind",
+            "Protect",
+            "Thunder Wave"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 83
+        },
+        {
+          "name": "Magmortar",
+          "species": "Magmortar",
+          "item": "Air Balloon",
+          "ability": "Flame Body",
+          "moves": [
+            "Thunderbolt",
+            "Will-O-Wisp",
+            "Taunt",
+            "Heat Wave"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 75
+        }
+      ]
+    },
+    {
+      "seed": "14,45331,21699,45519",
+      "team": [
+        {
+          "name": "Steelix",
+          "species": "Steelix",
+          "item": "Steelixite",
+          "ability": "Sheer Force",
+          "moves": [
+            "Heavy Slam",
+            "Explosion",
+            "Rock Slide",
+            "Earthquake"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 70
+        },
+        {
+          "name": "Octillery",
+          "species": "Octillery",
+          "item": "Leftovers",
+          "ability": "Suction Cups",
+          "moves": [
+            "Energy Ball",
+            "Ice Beam",
+            "Protect",
+            "Hydro Pump"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 81
+        },
+        {
+          "name": "Cryogonal",
+          "species": "Cryogonal",
+          "item": "Leftovers",
+          "ability": "Levitate",
+          "moves": [
+            "Reflect",
+            "Freeze-Dry",
+            "Hidden Power Ground",
+            "Protect"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 81
+        },
+        {
+          "name": "Kricketune",
+          "species": "Kricketune",
+          "item": "Leftovers",
+          "ability": "Swarm",
+          "moves": [
+            "Knock Off",
+            "Taunt",
+            "Sticky Web",
+            "Protect"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 90
+        },
+        {
+          "name": "Landorus",
+          "species": "Landorus-Therian",
+          "item": "Yache Berry",
+          "ability": "Intimidate",
+          "moves": [
+            "Protect",
+            "Rock Slide",
+            "Knock Off",
+            "Earthquake"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 70
+        },
+        {
+          "name": "Moltres",
+          "species": "Moltres",
+          "item": "Charti Berry",
+          "ability": "Flame Body",
+          "moves": [
+            "Hurricane",
+            "Tailwind",
+            "Fire Blast",
+            "Protect"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 71
+        }
+      ]
+    },
+    {
+      "seed": "15,53250,23242,11321",
+      "team": [
+        {
+          "name": "Manectric",
+          "species": "Manectric",
+          "item": "Manectite",
+          "ability": "Lightning Rod",
+          "moves": [
+            "Flamethrower",
+            "Hidden Power Grass",
+            "Volt Switch",
+            "Thunderbolt"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 72
+        },
+        {
+          "name": "Darkrai",
+          "species": "Darkrai",
+          "item": "Leftovers",
+          "ability": "Bad Dreams",
+          "moves": [
+            "Focus Blast",
+            "Snarl",
+            "Dark Pulse",
+            "Substitute"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 70
+        },
+        {
+          "name": "Meganium",
+          "species": "Meganium",
+          "item": "Yache Berry",
+          "ability": "Leaf Guard",
+          "moves": [
+            "Light Screen",
+            "Dragon Tail",
+            "Synthesis",
+            "Toxic"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 77
+        },
+        {
+          "name": "Greninja",
+          "species": "Greninja",
+          "item": "Leftovers",
+          "ability": "Protean",
+          "moves": [
+            "Protect",
+            "Dark Pulse",
+            "Mat Block",
+            "U-turn"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "level": 73
+        },
+        {
+          "name": "Dewgong",
+          "species": "Dewgong",
+          "item": "Leftovers",
+          "ability": "Thick Fat",
+          "moves": [
+            "Fake Out",
+            "Surf",
+            "Protect",
+            "Ice Beam"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "level": 82
+        },
+        {
+          "name": "Latios",
+          "species": "Latios",
+          "item": "Choice Scarf",
+          "ability": "Levitate",
+          "moves": [
+            "Hidden Power Fire",
+            "Draco Meteor",
+            "Tailwind",
+            "Trick"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 70
+        }
+      ]
+    },
+    {
+      "seed": "16,61169,24785,42658",
+      "team": [
+        {
+          "name": "Samurott",
+          "species": "Samurott",
+          "item": "Life Orb",
+          "ability": "Torrent",
+          "moves": [
+            "Hidden Power Grass",
+            "Hydro Pump",
+            "Aqua Jet",
+            "Helping Hand"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "level": 76
+        },
+        {
+          "name": "Wormadam",
+          "species": "Wormadam-Trash",
+          "item": "Occa Berry",
+          "ability": "Overcoat",
+          "moves": [
+            "String Shot",
+            "Gyro Ball",
+            "Struggle Bug",
+            "Protect"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 0
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 0
+          },
+          "level": 87
+        },
+        {
+          "name": "Beautifly",
+          "species": "Beautifly",
+          "item": "Charti Berry",
+          "ability": "Swarm",
+          "moves": [
+            "Quiver Dance",
+            "Air Cutter",
+            "Giga Drain",
+            "Bug Buzz"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 89
+        },
+        {
+          "name": "Xerneas",
+          "species": "Xerneas",
+          "item": "Sitrus Berry",
+          "ability": "Fairy Aura",
+          "moves": [
+            "Focus Blast",
+            "Thunderbolt",
+            "Dazzling Gleam",
+            "Close Combat"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "level": 70
+        },
+        {
+          "name": "Lucario",
+          "species": "Lucario",
+          "item": "Lucarionite",
+          "ability": "Justified",
+          "moves": [
+            "Vacuum Wave",
+            "Protect",
+            "Close Combat",
+            "Bullet Punch"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "level": 70
+        },
+        {
+          "name": "Giratina",
+          "species": "Giratina-Origin",
+          "item": "Griseous Orb",
+          "ability": "Levitate",
+          "moves": [
+            "Draco Meteor",
+            "Hidden Power Fire",
+            "Earthquake",
+            "Tailwind"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "level": 70
+        }
+      ]
+    },
+    {
+      "seed": "17,3553,26328,8460",
+      "team": [
+        {
+          "name": "Krookodile",
+          "species": "Krookodile",
+          "item": "Leftovers",
+          "ability": "Intimidate",
+          "moves": [
+            "Stone Edge",
+            "Earthquake",
+            "Protect",
+            "Superpower"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 77
+        },
+        {
+          "name": "Pinsir",
+          "species": "Pinsir",
+          "item": "Pinsirite",
+          "ability": "Moxie",
+          "moves": [
+            "Swords Dance",
+            "Rock Slide",
+            "Substitute",
+            "Return"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 70
+        },
+        {
+          "name": "Mantine",
+          "species": "Mantine",
+          "item": "Sitrus Berry",
+          "ability": "Water Absorb",
+          "moves": [
+            "Wide Guard",
+            "Scald",
+            "Air Slash",
+            "Tailwind"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 83
+        },
+        {
+          "name": "Clawitzer",
+          "species": "Clawitzer",
+          "item": "Life Orb",
+          "ability": "Mega Launcher",
+          "moves": [
+            "Ice Beam",
+            "Helping Hand",
+            "Water Pulse",
+            "Muddy Water"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 79
+        },
+        {
+          "name": "Chatot",
+          "species": "Chatot",
+          "item": "Life Orb",
+          "ability": "Keen Eye",
+          "moves": [
+            "Boomburst",
+            "Nasty Plot",
+            "Hyper Voice",
+            "Heat Wave"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 88
+        },
+        {
+          "name": "Diggersby",
+          "species": "Diggersby",
+          "item": "Life Orb",
+          "ability": "Huge Power",
+          "moves": [
+            "Quick Attack",
+            "Return",
+            "Earthquake",
+            "U-turn"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 81
+        }
+      ]
+    },
+    {
+      "seed": "18,11472,27871,39797",
+      "team": [
+        {
+          "name": "Vileplume",
+          "species": "Vileplume",
+          "item": "Expert Belt",
+          "ability": "Chlorophyll",
+          "moves": [
+            "Giga Drain",
+            "Hidden Power Fire",
+            "Dazzling Gleam",
+            "Sludge Bomb"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 80
+        },
+        {
+          "name": "Starmie",
+          "species": "Starmie",
+          "item": "Leftovers",
+          "ability": "Natural Cure",
+          "moves": [
+            "Psyshock",
+            "Scald",
+            "Protect",
+            "Ice Beam"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 77
+        },
+        {
+          "name": "Banette",
+          "species": "Banette",
+          "item": "Banettite",
+          "ability": "Insomnia",
+          "moves": [
+            "Shadow Claw",
+            "Sucker Punch",
+            "Knock Off",
+            "Taunt"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 74
+        },
+        {
+          "name": "Avalugg",
+          "species": "Avalugg",
+          "item": "Sitrus Berry",
+          "ability": "Sturdy",
+          "moves": [
+            "Earthquake",
+            "Recover",
+            "Protect",
+            "Avalanche"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 78
+        },
+        {
+          "name": "Liepard",
+          "species": "Liepard",
+          "item": "Life Orb",
+          "ability": "Prankster",
+          "moves": [
+            "Encore",
+            "U-turn",
+            "Play Rough",
+            "Knock Off"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 84
+        },
+        {
+          "name": "Ninjask",
+          "species": "Ninjask",
+          "item": "Charti Berry",
+          "ability": "Speed Boost",
+          "moves": [
+            "Baton Pass",
+            "Substitute",
+            "Protect",
+            "X-Scissor"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 83
+        }
+      ]
+    },
+    {
+      "seed": "19,19391,29414,5599",
+      "team": [
+        {
+          "name": "Ho-Oh",
+          "species": "Ho-Oh",
+          "item": "Charti Berry",
+          "ability": "Regenerator",
+          "moves": [
+            "Earthquake",
+            "Tailwind",
+            "Substitute",
+            "Sacred Fire"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 70
+        },
+        {
+          "name": "Crawdaunt",
+          "species": "Crawdaunt",
+          "item": "Life Orb",
+          "ability": "Adaptability",
+          "moves": [
+            "Dragon Dance",
+            "Crunch",
+            "Superpower",
+            "Crabhammer"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 82
+        },
+        {
+          "name": "Relicanth",
+          "species": "Relicanth",
+          "item": "Sitrus Berry",
+          "ability": "Sturdy",
+          "moves": [
+            "Double-Edge",
+            "Protect",
+            "Rock Slide",
+            "Waterfall"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 81
+        },
+        {
+          "name": "Delcatty",
+          "species": "Delcatty",
+          "item": "Life Orb",
+          "ability": "Wonder Skin",
+          "moves": [
+            "Sucker Punch",
+            "Fake Out",
+            "Thunder Wave",
+            "Play Rough"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 91
+        },
+        {
+          "name": "Houndoom",
+          "species": "Houndoom",
+          "item": "Houndoominite",
+          "ability": "Flash Fire",
+          "moves": [
+            "Dark Pulse",
+            "Nasty Plot",
+            "Heat Wave",
+            "Taunt"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 70
+        },
+        {
+          "name": "Clefable",
+          "species": "Clefable",
+          "item": "Life Orb",
+          "ability": "Magic Guard",
+          "moves": [
+            "Fire Blast",
+            "Light Screen",
+            "Follow Me",
+            "Soft-Boiled"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 81
+        }
+      ]
+    },
+    {
+      "seed": "20,27310,30957,36936",
+      "team": [
+        {
+          "name": "Regigigas",
+          "species": "Regigigas",
+          "item": "Sitrus Berry",
+          "ability": "Slow Start",
+          "moves": [
+            "Substitute",
+            "Return",
+            "Wide Guard",
+            "Rock Slide"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 81,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 75
+        },
+        {
+          "name": "Torterra",
+          "species": "Torterra",
+          "item": "Yache Berry",
+          "ability": "Overgrow",
+          "moves": [
+            "Rock Polish",
+            "Stone Edge",
+            "Earthquake",
+            "Wood Hammer"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 77
+        },
+        {
+          "name": "Bibarel",
+          "species": "Bibarel",
+          "item": "Chesto Berry",
+          "ability": "Simple",
+          "moves": [
+            "Protect",
+            "Rest",
+            "Waterfall",
+            "Quick Attack"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 88
+        },
+        {
+          "name": "Uxie",
+          "species": "Uxie",
+          "item": "Sitrus Berry",
+          "ability": "Levitate",
+          "moves": [
+            "Stealth Rock",
+            "Yawn",
+            "U-turn",
+            "Protect"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 71
+        },
+        {
+          "name": "Qwilfish",
+          "species": "Qwilfish",
+          "item": "Air Balloon",
+          "ability": "Intimidate",
+          "moves": [
+            "Poison Jab",
+            "Taunt",
+            "Swords Dance",
+            "Waterfall"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 86
+        },
+        {
+          "name": "Weezing",
+          "species": "Weezing",
+          "item": "Black Sludge",
+          "ability": "Levitate",
+          "moves": [
+            "Protect",
+            "Sludge Bomb",
+            "Toxic",
+            "Explosion"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "level": 80
+        }
+      ]
+    },
+    {
+      "seed": "21,35229,32500,2738",
+      "team": [
+        {
+          "name": "Pangoro",
+          "species": "Pangoro",
+          "item": "Life Orb",
+          "ability": "Mold Breaker",
+          "moves": [
+            "Ice Punch",
+            "Crunch",
+            "Poison Jab",
+            "Parting Shot"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 80
+        },
+        {
+          "name": "Mr. Mime",
+          "species": "Mr. Mime",
+          "item": "Leftovers",
+          "ability": "Technician",
+          "moves": [
+            "Hidden Power Fighting",
+            "Dazzling Gleam",
+            "Protect",
+            "Thunderbolt"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 83
+        },
+        {
+          "name": "Kabutops",
+          "species": "Kabutops",
+          "item": "Life Orb",
+          "ability": "Battle Armor",
+          "moves": [
+            "Waterfall",
+            "Swords Dance",
+            "Knock Off",
+            "Superpower"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 80
+        },
+        {
+          "name": "Mamoswine",
+          "species": "Mamoswine",
+          "item": "Life Orb",
+          "ability": "Thick Fat",
+          "moves": [
+            "Ice Shard",
+            "Superpower",
+            "Earthquake",
+            "Knock Off"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 76
+        },
+        {
+          "name": "Rotom",
+          "species": "Rotom-Fan",
+          "item": "Leftovers",
+          "ability": "Levitate",
+          "moves": [
+            "Substitute",
+            "Air Slash",
+            "Protect",
+            "Thunderbolt"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 77
+        },
+        {
+          "name": "Milotic",
+          "species": "Milotic",
+          "item": "Flame Orb",
+          "ability": "Marvel Scale",
+          "moves": [
+            "Hidden Power Grass",
+            "Recover",
+            "Dragon Tail",
+            "Hydro Pump"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "level": 75
+        }
+      ]
+    },
+    {
+      "seed": "22,43148,34043,34075",
+      "team": [
+        {
+          "name": "Mew",
+          "species": "Mew",
+          "item": "Sitrus Berry",
+          "ability": "Synchronize",
+          "moves": [
+            "Helping Hand",
+            "Fire Blast",
+            "Fake Out",
+            "Transform"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "level": 70
+        },
+        {
+          "name": "Absol",
+          "species": "Absol",
+          "item": "Absolite",
+          "ability": "Pressure",
+          "moves": [
+            "Fire Blast",
+            "Play Rough",
+            "Superpower",
+            "Knock Off"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "level": 73
+        },
+        {
+          "name": "Whiscash",
+          "species": "Whiscash",
+          "item": "Life Orb",
+          "ability": "Hydration",
+          "moves": [
+            "Earthquake",
+            "Dragon Dance",
+            "Stone Edge",
+            "Waterfall"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 82
+        },
+        {
+          "name": "Dewgong",
+          "species": "Dewgong",
+          "item": "Leftovers",
+          "ability": "Thick Fat",
+          "moves": [
+            "Ice Beam",
+            "Encore",
+            "Protect",
+            "Toxic"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 82
+        },
+        {
+          "name": "Rotom",
+          "species": "Rotom-Wash",
+          "item": "Life Orb",
+          "ability": "Levitate",
+          "moves": [
+            "Volt Switch",
+            "Electroweb",
+            "Hydro Pump",
+            "Will-O-Wisp"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 77
+        },
+        {
+          "name": "Dragonite",
+          "species": "Dragonite",
+          "item": "Yache Berry",
+          "ability": "Multiscale",
+          "moves": [
+            "Sky Drop",
+            "Earthquake",
+            "Dragon Dance",
+            "Dragon Claw"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 70
+        }
+      ]
+    },
+    {
+      "seed": "23,51067,35586,65412",
+      "team": [
+        {
+          "name": "Rayquaza",
+          "species": "Rayquaza",
+          "item": "Yache Berry",
+          "ability": "Air Lock",
+          "moves": [
+            "Extreme Speed",
+            "Dragon Ascent",
+            "Dragon Claw",
+            "Protect"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 70
+        },
+        {
+          "name": "Avalugg",
+          "species": "Avalugg",
+          "item": "Sitrus Berry",
+          "ability": "Sturdy",
+          "moves": [
+            "Avalanche",
+            "Earthquake",
+            "Protect",
+            "Recover"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 78
+        },
+        {
+          "name": "Swellow",
+          "species": "Swellow",
+          "item": "Toxic Orb",
+          "ability": "Guts",
+          "moves": [
+            "Quick Attack",
+            "Brave Bird",
+            "Protect",
+            "Facade"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 86
+        },
+        {
+          "name": "Huntail",
+          "species": "Huntail",
+          "item": "White Herb",
+          "ability": "Water Veil",
+          "moves": [
+            "Ice Fang",
+            "Baton Pass",
+            "Shell Smash",
+            "Waterfall"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 81
+        },
+        {
+          "name": "Registeel",
+          "species": "Registeel",
+          "item": "Chesto Berry",
+          "ability": "Clear Body",
+          "moves": [
+            "Rest",
+            "Iron Head",
+            "Protect",
+            "Thunder Wave"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 71
+        },
+        {
+          "name": "Granbull",
+          "species": "Granbull",
+          "item": "Leftovers",
+          "ability": "Intimidate",
+          "moves": [
+            "Play Rough",
+            "Snarl",
+            "Protect",
+            "Crunch"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "level": 84
+        }
+      ]
+    },
+    {
+      "seed": "24,58986,37129,31214",
+      "team": [
+        {
+          "name": "Klinklang",
+          "species": "Klinklang",
+          "item": "Life Orb",
+          "ability": "Clear Body",
+          "moves": [
+            "Gear Grind",
+            "Wild Charge",
+            "Shift Gear",
+            "Return"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 77
+        },
+        {
+          "name": "Beautifly",
+          "species": "Beautifly",
+          "item": "Charti Berry",
+          "ability": "Swarm",
+          "moves": [
+            "Bug Buzz",
+            "Tailwind",
+            "Air Cutter",
+            "Hidden Power Rock"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 89
+        },
+        {
+          "name": "Cobalion",
+          "species": "Cobalion",
+          "item": "Sitrus Berry",
+          "ability": "Justified",
+          "moves": [
+            "Iron Head",
+            "Thunder Wave",
+            "Substitute",
+            "Protect"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 69,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 71
+        },
+        {
+          "name": "Barbaracle",
+          "species": "Barbaracle",
+          "item": "White Herb",
+          "ability": "Tough Claws",
+          "moves": [
+            "Rock Slide",
+            "Shell Smash",
+            "Razor Shell",
+            "Cross Chop"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 79
+        },
+        {
+          "name": "Altaria",
+          "species": "Altaria",
+          "item": "Altarianite",
+          "ability": "Natural Cure",
+          "moves": [
+            "Earthquake",
+            "Double-Edge",
+            "Dragon Dance",
+            "Dragon Claw"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 70
+        },
+        {
+          "name": "Azumarill",
+          "species": "Azumarill",
+          "item": "Normalium Z",
+          "ability": "Huge Power",
+          "moves": [
+            "Superpower",
+            "Aqua Jet",
+            "Knock Off",
+            "Belly Drum"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 82
+        }
+      ]
+    },
+    {
+      "seed": "25,1370,38672,62551",
+      "team": [
+        {
+          "name": "Thundurus",
+          "species": "Thundurus",
+          "item": "Expert Belt",
+          "ability": "Defiant",
+          "moves": [
+            "Knock Off",
+            "Thunderbolt",
+            "Focus Blast",
+            "Hidden Power Flying"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "level": 71
+        },
+        {
+          "name": "Armaldo",
+          "species": "Armaldo",
+          "item": "Leftovers",
+          "ability": "Battle Armor",
+          "moves": [
+            "X-Scissor",
+            "Rock Slide",
+            "String Shot",
+            "Protect"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 80
+        },
+        {
+          "name": "Simipour",
+          "species": "Simipour",
+          "item": "Leftovers",
+          "ability": "Torrent",
+          "moves": [
+            "Surf",
+            "Ice Beam",
+            "Taunt",
+            "Protect"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 79
+        },
+        {
+          "name": "Giratina",
+          "species": "Giratina-Origin",
+          "item": "Griseous Orb",
+          "ability": "Levitate",
+          "moves": [
+            "Will-O-Wisp",
+            "Aura Sphere",
+            "Draco Meteor",
+            "Tailwind"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 70
+        },
+        {
+          "name": "Sceptile",
+          "species": "Sceptile",
+          "item": "Sceptilite",
+          "ability": "Overgrow",
+          "moves": [
+            "Leaf Storm",
+            "Focus Blast",
+            "Hidden Power Ice",
+            "Dragon Pulse"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 70
+        },
+        {
+          "name": "Ambipom",
+          "species": "Ambipom",
+          "item": "Expert Belt",
+          "ability": "Technician",
+          "moves": [
+            "Low Kick",
+            "U-turn",
+            "Ice Punch",
+            "Fake Out"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 81
+        }
+      ]
+    },
+    {
+      "seed": "26,9289,40215,28353",
+      "team": [
+        {
+          "name": "Starmie",
+          "species": "Starmie",
+          "item": "Leftovers",
+          "ability": "Natural Cure",
+          "moves": [
+            "Surf",
+            "Ice Beam",
+            "Recover",
+            "Protect"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 77
+        },
+        {
+          "name": "Krookodile",
+          "species": "Krookodile",
+          "item": "Leftovers",
+          "ability": "Intimidate",
+          "moves": [
+            "Superpower",
+            "Protect",
+            "Earthquake",
+            "Stone Edge"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 77
+        },
+        {
+          "name": "Chandelure",
+          "species": "Chandelure",
+          "item": "Choice Scarf",
+          "ability": "Flash Fire",
+          "moves": [
+            "Protect",
+            "Heat Wave",
+            "Trick",
+            "Hidden Power Ice"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 77
+        },
+        {
+          "name": "Porygon-Z",
+          "species": "Porygon-Z",
+          "item": "Choice Scarf",
+          "ability": "Download",
+          "moves": [
+            "Trick",
+            "Agility",
+            "Tri Attack",
+            "Dark Pulse"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 76
+        },
+        {
+          "name": "Vileplume",
+          "species": "Vileplume",
+          "item": "Yache Berry",
+          "ability": "Chlorophyll",
+          "moves": [
+            "Stun Spore",
+            "Sleep Powder",
+            "Sludge Bomb",
+            "Moonblast"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 80
+        },
+        {
+          "name": "Talonflame",
+          "species": "Talonflame",
+          "item": "Charti Berry",
+          "ability": "Gale Wings",
+          "moves": [
+            "Taunt",
+            "Tailwind",
+            "Flare Blitz",
+            "Brave Bird"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 79
+        }
+      ]
+    },
+    {
+      "seed": "27,17208,41758,59690",
+      "team": [
+        {
+          "name": "Crawdaunt",
+          "species": "Crawdaunt",
+          "item": "Leftovers",
+          "ability": "Adaptability",
+          "moves": [
+            "Protect",
+            "Aqua Jet",
+            "Knock Off",
+            "Crabhammer"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 82
+        },
+        {
+          "name": "Golurk",
+          "species": "Golurk",
+          "item": "Yache Berry",
+          "ability": "No Guard",
+          "moves": [
+            "Dynamic Punch",
+            "Earthquake",
+            "Ice Punch",
+            "Rock Polish"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 81
+        },
+        {
+          "name": "Swampert",
+          "species": "Swampert",
+          "item": "Swampertite",
+          "ability": "Torrent",
+          "moves": [
+            "Superpower",
+            "Waterfall",
+            "Earthquake",
+            "Rain Dance"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 70
+        },
+        {
+          "name": "Tyrantrum",
+          "species": "Tyrantrum",
+          "item": "Life Orb",
+          "ability": "Strong Jaw",
+          "moves": [
+            "Ice Fang",
+            "Rock Slide",
+            "Dragon Claw",
+            "Fire Fang"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 77
+        },
+        {
+          "name": "Forretress",
+          "species": "Forretress",
+          "item": "Occa Berry",
+          "ability": "Overcoat",
+          "moves": [
+            "Toxic",
+            "Drill Run",
+            "Rock Slide",
+            "Volt Switch"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "level": 83
+        },
+        {
+          "name": "Wigglytuff",
+          "species": "Wigglytuff",
+          "item": "Light Clay",
+          "ability": "Competitive",
+          "moves": [
+            "Dazzling Gleam",
+            "Light Screen",
+            "Knock Off",
+            "Reflect"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "level": 85
+        }
+      ]
+    },
+    {
+      "seed": "28,25127,43301,25492",
+      "team": [
+        {
+          "name": "Scolipede",
+          "species": "Scolipede",
+          "item": "Black Sludge",
+          "ability": "Speed Boost",
+          "moves": [
+            "Megahorn",
+            "Aqua Tail",
+            "Substitute",
+            "Protect"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 81
+        },
+        {
+          "name": "Scrafty",
+          "species": "Scrafty",
+          "item": "Leftovers",
+          "ability": "Intimidate",
+          "moves": [
+            "Ice Punch",
+            "Stone Edge",
+            "Protect",
+            "Drain Punch"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 80
+        },
+        {
+          "name": "Roserade",
+          "species": "Roserade",
+          "item": "Black Sludge",
+          "ability": "Natural Cure",
+          "moves": [
+            "Protect",
+            "Sleep Powder",
+            "Giga Drain",
+            "Sludge Bomb"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 78
+        },
+        {
+          "name": "Slurpuff",
+          "species": "Slurpuff",
+          "item": "Leftovers",
+          "ability": "Sweet Veil",
+          "moves": [
+            "Surf",
+            "Substitute",
+            "Return",
+            "Psychic"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "level": 81
+        },
+        {
+          "name": "Swoobat",
+          "species": "Swoobat",
+          "item": "Leftovers",
+          "ability": "Unaware",
+          "moves": [
+            "Protect",
+            "Tailwind",
+            "Psychic",
+            "Heat Wave"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 86
+        },
+        {
+          "name": "Mew",
+          "species": "Mew",
+          "item": "Sitrus Berry",
+          "ability": "Synchronize",
+          "moves": [
+            "Psyshock",
+            "Nasty Plot",
+            "Aura Sphere",
+            "Will-O-Wisp"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 70
+        }
+      ]
+    },
+    {
+      "seed": "29,33046,44844,56829",
+      "team": [
+        {
+          "name": "Clefable",
+          "species": "Clefable",
+          "item": "Light Clay",
+          "ability": "Magic Guard",
+          "moves": [
+            "Reflect",
+            "Fire Blast",
+            "Light Screen",
+            "Protect"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 81
+        },
+        {
+          "name": "Snorlax",
+          "species": "Snorlax",
+          "item": "Sitrus Berry",
+          "ability": "Thick Fat",
+          "moves": [
+            "Body Slam",
+            "Crunch",
+            "Protect",
+            "Earthquake"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 75
+        },
+        {
+          "name": "Tropius",
+          "species": "Tropius",
+          "item": "Yache Berry",
+          "ability": "Chlorophyll",
+          "moves": [
+            "Tailwind",
+            "Earthquake",
+            "Protect",
+            "Hidden Power Fire"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "level": 83
+        },
+        {
+          "name": "Pinsir",
+          "species": "Pinsir",
+          "item": "Pinsirite",
+          "ability": "Mold Breaker",
+          "moves": [
+            "X-Scissor",
+            "Close Combat",
+            "Rock Slide",
+            "Quick Attack"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 70
+        },
+        {
+          "name": "Whiscash",
+          "species": "Whiscash",
+          "item": "Life Orb",
+          "ability": "Hydration",
+          "moves": [
+            "Earthquake",
+            "Dragon Dance",
+            "Waterfall",
+            "Zen Headbutt"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 82
+        },
+        {
+          "name": "Raikou",
+          "species": "Raikou",
+          "item": "Life Orb",
+          "ability": "Pressure",
+          "moves": [
+            "Calm Mind",
+            "Thunderbolt",
+            "Hidden Power Ice",
+            "Extrasensory"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 71
+        }
+      ]
+    },
+    {
+      "seed": "30,40965,46387,22631",
+      "team": [
+        {
+          "name": "Raikou",
+          "species": "Raikou",
+          "item": "Leftovers",
+          "ability": "Pressure",
+          "moves": [
+            "Calm Mind",
+            "Extrasensory",
+            "Substitute",
+            "Thunderbolt"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 71
+        },
+        {
+          "name": "Cacturne",
+          "species": "Cacturne",
+          "item": "Leftovers",
+          "ability": "Water Absorb",
+          "moves": [
+            "Substitute",
+            "Sucker Punch",
+            "Drain Punch",
+            "Seed Bomb"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 82
+        },
+        {
+          "name": "Smeargle",
+          "species": "Smeargle",
+          "item": "Sitrus Berry",
+          "ability": "Technician",
+          "moves": [
+            "King's Shield",
+            "Fake Out",
+            "Helping Hand",
+            "Follow Me"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 99
+        },
+        {
+          "name": "Machamp",
+          "species": "Machamp",
+          "item": "Expert Belt",
+          "ability": "No Guard",
+          "moves": [
+            "Bullet Punch",
+            "Ice Punch",
+            "Dynamic Punch",
+            "Stone Edge"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 79
+        },
+        {
+          "name": "Liepard",
+          "species": "Liepard",
+          "item": "Leftovers",
+          "ability": "Prankster",
+          "moves": [
+            "Protect",
+            "U-turn",
+            "Knock Off",
+            "Play Rough"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 84
+        },
+        {
+          "name": "Feraligatr",
+          "species": "Feraligatr",
+          "item": "Life Orb",
+          "ability": "Sheer Force",
+          "moves": [
+            "Aqua Jet",
+            "Ice Punch",
+            "Swords Dance",
+            "Waterfall"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 0,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 0,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 76
+        }
+      ]
+    }
+  ]
+}

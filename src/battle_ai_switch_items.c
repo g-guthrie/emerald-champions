@@ -62,7 +62,9 @@ static bool8 ShouldSwitchIfAllBadMoves(void)
 static bool8 ShouldSwitchIfPerishSong(void)
 {
     if (gStatuses3[gActiveBattler] & STATUS3_PERISH_SONG
-        && gDisableStructs[gActiveBattler].perishSongTimer == 0)
+        && gDisableStructs[gActiveBattler].perishSongTimer <= 1
+        && CountUsablePartyMons(gActiveBattler) > 0
+        && !IsBattlerTrapped(gActiveBattler, TRUE))
     {
         *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = PARTY_SIZE;
         BtlController_EmitTwoReturnValues(1, B_ACTION_SWITCH, 0);

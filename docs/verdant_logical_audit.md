@@ -33,12 +33,12 @@ The build is accepted only when all thirty questions pass, followed by the broad
 
 ## Battle structure and difficulty
 
-18. Is every real trainer record represented in the authored format manifest? **Yes: 848 of 848.**
-19. Is the campaign genuinely mostly doubles? **Yes: 632 doubles and 216 intentional singles.**
-20. Can every doubles battle deploy safely? **Yes.** Every double has exactly four or six Pokémon.
+18. Is every real trainer record represented in the authored format manifest? **Yes: 854 of 854, including all six macro-named Meteor Falls partner teams.**
+19. Is the campaign genuinely mostly doubles without exhausting every route? **Yes: 574 doubles and 280 intentional singles.**
+20. Can every doubles battle deploy safely? **Yes.** Opponents have four/six-mon waves; the six Meteor Falls AI partner branches correctly use three-mon partner parties.
 21. Do singles remain as pacing contrast? **Yes.** Norman and Drake are signature singles anchors, with selected ordinary singles retained.
 22. Do marquee bosses exceed the cap at the ace and carry complete teams? **Yes.** All thirteen have six held-item, four-move sets and a positive ace offset.
-23. Do doubles teams use protection and speed control? **Yes.** At least 350 use Protect; at least 90 use Tailwind or Trick Room.
+23. Do doubles teams use protection and speed control? **Yes.** At least 275 use Protect; at least 70 use Tailwind or Trick Room.
 24. Do they create real spread-pressure decisions? **Yes.** More than 300 teams carry a major spread move.
 25. Does trainer AI understand foes, partners, and tactical switching? **Yes.** Foe-aware AI is universal, with partner and smart-switch flags on the relevant tiers.
 26. Are the repaired AI decisions guarded against prior defects? **Yes.** Integrated switch ranking, hazard rejection, initialized move typing, and deterministic tactical switches are regression-tested.

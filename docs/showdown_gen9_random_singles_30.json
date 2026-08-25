@@ -1,0 +1,5849 @@
+{
+  "source": "https://github.com/smogon/pokemon-showdown",
+  "showdown_commit": "5e8ead64b366aa55b83be979dd3d1050115e8bfe",
+  "format": "gen9randombattle",
+  "sample_count": 30,
+  "samples": [
+    {
+      "seed": "1,7919,1640,31348",
+      "team": [
+        {
+          "name": "Chandelure",
+          "species": "Chandelure",
+          "item": "Heavy-Duty Boots",
+          "ability": "Flash Fire",
+          "moves": [
+            "Fire Blast",
+            "Shadow Ball",
+            "Calm Mind",
+            "Pain Split"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 83,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Ghost"
+        },
+        {
+          "name": "Blastoise",
+          "species": "Blastoise",
+          "item": "White Herb",
+          "ability": "Torrent",
+          "moves": [
+            "Shell Smash",
+            "Ice Beam",
+            "Tera Blast",
+            "Hydro Pump"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 80,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Electric"
+        },
+        {
+          "name": "Dragonite",
+          "species": "Dragonite",
+          "item": "Heavy-Duty Boots",
+          "ability": "Multiscale",
+          "moves": [
+            "Outrage",
+            "Earthquake",
+            "Dragon Dance",
+            "Roost"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 74,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Ground"
+        },
+        {
+          "name": "Enamorus",
+          "species": "Enamorus-Therian",
+          "item": "Weakness Policy",
+          "ability": "Overcoat",
+          "moves": [
+            "Moonblast",
+            "Agility",
+            "Mystical Fire",
+            "Earth Power"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 83,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Ground"
+        },
+        {
+          "name": "Giratina",
+          "species": "Giratina-Origin",
+          "item": "Griseous Core",
+          "ability": "Levitate",
+          "moves": [
+            "Draco Meteor",
+            "Dragon Tail",
+            "Poltergeist",
+            "Shadow Sneak"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "N",
+          "level": 72,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Dragon"
+        },
+        {
+          "name": "Espeon",
+          "species": "Espeon",
+          "item": "Choice Specs",
+          "ability": "Magic Bounce",
+          "moves": [
+            "Psyshock",
+            "Shadow Ball",
+            "Trick",
+            "Alluring Voice"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 84,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Psychic"
+        }
+      ]
+    },
+    {
+      "seed": "2,15838,3183,62685",
+      "team": [
+        {
+          "name": "Arboliva",
+          "species": "Arboliva",
+          "item": "Sitrus Berry",
+          "ability": "Harvest",
+          "moves": [
+            "Protect",
+            "Leech Seed",
+            "Substitute",
+            "Hyper Voice"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 77,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 91,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Water"
+        },
+        {
+          "name": "Calyrex",
+          "species": "Calyrex-Ice",
+          "item": "Weakness Policy",
+          "ability": "As One (Glastrier)",
+          "moves": [
+            "High Horsepower",
+            "Close Combat",
+            "Agility",
+            "Glacial Lance"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "N",
+          "level": 72,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Ground"
+        },
+        {
+          "name": "Arcanine",
+          "species": "Arcanine",
+          "item": "Heavy-Duty Boots",
+          "ability": "Intimidate",
+          "moves": [
+            "Morning Sun",
+            "Flare Blitz",
+            "Will-O-Wisp",
+            "Close Combat"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 84,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Fighting"
+        },
+        {
+          "name": "Clawitzer",
+          "species": "Clawitzer",
+          "item": "Assault Vest",
+          "ability": "Mega Launcher",
+          "moves": [
+            "U-turn",
+            "Water Pulse",
+            "Dragon Pulse",
+            "Aura Sphere"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "level": 87,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Dragon"
+        },
+        {
+          "name": "Raging Bolt",
+          "species": "Raging Bolt",
+          "item": "Assault Vest",
+          "ability": "Protosynthesis",
+          "moves": [
+            "Thunderbolt",
+            "Volt Switch",
+            "Draco Meteor",
+            "Thunderclap"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "N",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 78,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Electric"
+        },
+        {
+          "name": "Meowscarada",
+          "species": "Meowscarada",
+          "item": "Life Orb",
+          "ability": "Protean",
+          "moves": [
+            "Flower Trick",
+            "Toxic Spikes",
+            "Knock Off",
+            "Triple Axel"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "level": 78,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Dark"
+        }
+      ]
+    },
+    {
+      "seed": "3,23757,4726,28487",
+      "team": [
+        {
+          "name": "Furret",
+          "species": "Furret",
+          "item": "Life Orb",
+          "ability": "Frisk",
+          "moves": [
+            "Knock Off",
+            "Brick Break",
+            "Double-Edge",
+            "Tidy Up"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "level": 94,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Normal"
+        },
+        {
+          "name": "Munkidori",
+          "species": "Munkidori",
+          "item": "Life Orb",
+          "ability": "Toxic Chain",
+          "moves": [
+            "Sludge Wave",
+            "Nasty Plot",
+            "Psyshock",
+            "Focus Blast"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 79,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Fighting"
+        },
+        {
+          "name": "Alcremie",
+          "species": "Alcremie-Caramel-Swirl",
+          "item": "Leftovers",
+          "ability": "Aroma Veil",
+          "moves": [
+            "Calm Mind",
+            "Tera Blast",
+            "Recover",
+            "Alluring Voice"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 90,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Ground"
+        },
+        {
+          "name": "Ogerpon",
+          "species": "Ogerpon-Cornerstone",
+          "item": "Cornerstone Mask",
+          "ability": "Sturdy",
+          "moves": [
+            "Ivy Cudgel",
+            "Power Whip",
+            "Encore",
+            "Synthesis"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "level": 76,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Rock"
+        },
+        {
+          "name": "Cinderace",
+          "species": "Cinderace",
+          "item": "Heavy-Duty Boots",
+          "ability": "Libero",
+          "moves": [
+            "Court Change",
+            "Gunk Shot",
+            "Pyro Ball",
+            "High Jump Kick"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 81,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "level": 77,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Fighting"
+        },
+        {
+          "name": "Vikavolt",
+          "species": "Vikavolt",
+          "item": "Heavy-Duty Boots",
+          "ability": "Levitate",
+          "moves": [
+            "Sticky Web",
+            "Bug Buzz",
+            "Volt Switch",
+            "Discharge"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 83,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Electric"
+        }
+      ]
+    },
+    {
+      "seed": "4,31676,6269,59824",
+      "team": [
+        {
+          "name": "Glaceon",
+          "species": "Glaceon",
+          "item": "Heavy-Duty Boots",
+          "ability": "Ice Body",
+          "moves": [
+            "Freeze-Dry",
+            "Protect",
+            "Calm Mind",
+            "Wish"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 94,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Water"
+        },
+        {
+          "name": "Ambipom",
+          "species": "Ambipom",
+          "item": "Choice Band",
+          "ability": "Technician",
+          "moves": [
+            "U-turn",
+            "Knock Off",
+            "Triple Axel",
+            "Double-Edge"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "level": 84,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Ice"
+        },
+        {
+          "name": "Hydrapple",
+          "species": "Hydrapple",
+          "item": "Life Orb",
+          "ability": "Regenerator",
+          "moves": [
+            "Giga Drain",
+            "Fickle Beam",
+            "Earth Power",
+            "Nasty Plot"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 83,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Steel"
+        },
+        {
+          "name": "Jirachi",
+          "species": "Jirachi",
+          "item": "Leftovers",
+          "ability": "Serene Grace",
+          "moves": [
+            "Wish",
+            "Iron Head",
+            "Body Slam",
+            "Protect"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "N",
+          "level": 80,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Water"
+        },
+        {
+          "name": "Mabosstiff",
+          "species": "Mabosstiff",
+          "item": "Choice Scarf",
+          "ability": "Stakeout",
+          "moves": [
+            "Play Rough",
+            "Psychic Fangs",
+            "Crunch",
+            "Wild Charge"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "level": 86,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Dark"
+        },
+        {
+          "name": "Grumpig",
+          "species": "Grumpig",
+          "item": "Leftovers",
+          "ability": "Thick Fat",
+          "moves": [
+            "Nasty Plot",
+            "Focus Blast",
+            "Shadow Ball",
+            "Psyshock"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 92,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Fighting"
+        }
+      ]
+    },
+    {
+      "seed": "5,39595,7812,25626",
+      "team": [
+        {
+          "name": "Necrozma",
+          "species": "Necrozma-Dusk-Mane",
+          "item": "Weakness Policy",
+          "ability": "Prism Armor",
+          "moves": [
+            "Earthquake",
+            "Dragon Dance",
+            "Sunsteel Strike",
+            "Morning Sun"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "N",
+          "level": 69,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Ground"
+        },
+        {
+          "name": "Volcarona",
+          "species": "Volcarona",
+          "item": "Heavy-Duty Boots",
+          "ability": "Flame Body",
+          "moves": [
+            "Quiver Dance",
+            "Giga Drain",
+            "Fiery Dance",
+            "Morning Sun"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 77,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Grass"
+        },
+        {
+          "name": "Raichu",
+          "species": "Raichu-Alola",
+          "item": "Life Orb",
+          "ability": "Surge Surfer",
+          "moves": [
+            "Surf",
+            "Thunderbolt",
+            "Psyshock",
+            "Nasty Plot"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 87,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Water"
+        },
+        {
+          "name": "Chien-Pao",
+          "species": "Chien-Pao",
+          "item": "Heavy-Duty Boots",
+          "ability": "Sword of Ruin",
+          "moves": [
+            "Swords Dance",
+            "Sacred Sword",
+            "Throat Chop",
+            "Icicle Crash"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "N",
+          "level": 72,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Ice"
+        },
+        {
+          "name": "Kilowattrel",
+          "species": "Kilowattrel",
+          "item": "Heavy-Duty Boots",
+          "ability": "Volt Absorb",
+          "moves": [
+            "Hurricane",
+            "U-turn",
+            "Discharge",
+            "Roost"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 83,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Water"
+        },
+        {
+          "name": "Gastrodon",
+          "species": "Gastrodon",
+          "item": "Leftovers",
+          "ability": "Storm Drain",
+          "moves": [
+            "Surf",
+            "Sludge Bomb",
+            "Recover",
+            "Earthquake"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 86,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Poison"
+        }
+      ]
+    },
+    {
+      "seed": "6,47514,9355,56963",
+      "team": [
+        {
+          "name": "Arbok",
+          "species": "Arbok",
+          "item": "Leftovers",
+          "ability": "Intimidate",
+          "moves": [
+            "Coil",
+            "Earthquake",
+            "Sucker Punch",
+            "Gunk Shot"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 87,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Dark"
+        },
+        {
+          "name": "Iron Bundle",
+          "species": "Iron Bundle",
+          "item": "Choice Specs",
+          "ability": "Quark Drive",
+          "moves": [
+            "Freeze-Dry",
+            "Flip Turn",
+            "Ice Beam",
+            "Hydro Pump"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "N",
+          "level": 78,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Ice"
+        },
+        {
+          "name": "Dedenne",
+          "species": "Dedenne",
+          "item": "Sitrus Berry",
+          "ability": "Cheek Pouch",
+          "moves": [
+            "U-turn",
+            "Dazzling Gleam",
+            "Thunderbolt",
+            "Super Fang"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "level": 88,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Flying"
+        },
+        {
+          "name": "Altaria",
+          "species": "Altaria",
+          "item": "Heavy-Duty Boots",
+          "ability": "Natural Cure",
+          "moves": [
+            "Dragon Dance",
+            "Roost",
+            "Earthquake",
+            "Brave Bird"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "level": 89,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Steel"
+        },
+        {
+          "name": "Glalie",
+          "species": "Glalie",
+          "item": "Heavy-Duty Boots",
+          "ability": "Inner Focus",
+          "moves": [
+            "Earthquake",
+            "Taunt",
+            "Freeze-Dry",
+            "Spikes"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 96,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Water"
+        },
+        {
+          "name": "Quagsire",
+          "species": "Quagsire",
+          "item": "Leftovers",
+          "ability": "Unaware",
+          "moves": [
+            "Earthquake",
+            "Toxic",
+            "Ice Beam",
+            "Recover"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 84,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Fairy"
+        }
+      ]
+    },
+    {
+      "seed": "7,55433,10898,22765",
+      "team": [
+        {
+          "name": "Crawdaunt",
+          "species": "Crawdaunt",
+          "item": "Life Orb",
+          "ability": "Adaptability",
+          "moves": [
+            "Aqua Jet",
+            "Knock Off",
+            "Dragon Dance",
+            "Crabhammer"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 84,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Water"
+        },
+        {
+          "name": "Mewtwo",
+          "species": "Mewtwo",
+          "item": "Life Orb",
+          "ability": "Pressure",
+          "moves": [
+            "Aura Sphere",
+            "Fire Blast",
+            "Psystrike",
+            "Nasty Plot"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "N",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 72,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Fighting"
+        },
+        {
+          "name": "Alcremie",
+          "species": "Alcremie-Rainbow-Swirl",
+          "item": "Leftovers",
+          "ability": "Aroma Veil",
+          "moves": [
+            "Calm Mind",
+            "Psyshock",
+            "Alluring Voice",
+            "Recover"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 90,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Poison"
+        },
+        {
+          "name": "Tauros",
+          "species": "Tauros-Paldea-Aqua",
+          "item": "Life Orb",
+          "ability": "Intimidate",
+          "moves": [
+            "Liquidation",
+            "Bulk Up",
+            "Close Combat",
+            "Aqua Jet"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 81,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Water"
+        },
+        {
+          "name": "Vivillon",
+          "species": "Vivillon-Savanna",
+          "item": "Heavy-Duty Boots",
+          "ability": "Compound Eyes",
+          "moves": [
+            "Quiver Dance",
+            "Sleep Powder",
+            "Hurricane",
+            "Tera Blast"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 83,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Ground"
+        },
+        {
+          "name": "Hydreigon",
+          "species": "Hydreigon",
+          "item": "Choice Specs",
+          "ability": "Levitate",
+          "moves": [
+            "Fire Blast",
+            "Dark Pulse",
+            "U-turn",
+            "Draco Meteor"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "level": 79,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Dragon"
+        }
+      ]
+    },
+    {
+      "seed": "8,63352,12441,54102",
+      "team": [
+        {
+          "name": "Delphox",
+          "species": "Delphox",
+          "item": "Heavy-Duty Boots",
+          "ability": "Blaze",
+          "moves": [
+            "Grass Knot",
+            "Nasty Plot",
+            "Fire Blast",
+            "Psyshock"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 84,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Fire"
+        },
+        {
+          "name": "Copperajah",
+          "species": "Copperajah",
+          "item": "Choice Band",
+          "ability": "Heavy Metal",
+          "moves": [
+            "Earthquake",
+            "Stone Edge",
+            "Heavy Slam",
+            "Supercell Slam"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 81,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 86,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Flying"
+        },
+        {
+          "name": "Floatzel",
+          "species": "Floatzel",
+          "item": "Leftovers",
+          "ability": "Water Veil",
+          "moves": [
+            "Wave Crash",
+            "Bulk Up",
+            "Ice Spinner",
+            "Taunt"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 86,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Water"
+        },
+        {
+          "name": "Lokix",
+          "species": "Lokix",
+          "item": "Life Orb",
+          "ability": "Tinted Lens",
+          "moves": [
+            "Leech Life",
+            "Sucker Punch",
+            "Swords Dance",
+            "Knock Off"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 82,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Dark"
+        },
+        {
+          "name": "Magearna",
+          "species": "Magearna",
+          "item": "Weakness Policy",
+          "ability": "Soul-Heart",
+          "moves": [
+            "Iron Head",
+            "Fleur Cannon",
+            "Tera Blast",
+            "Shift Gear"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "N",
+          "level": 77,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Ground"
+        },
+        {
+          "name": "Luvdisc",
+          "species": "Luvdisc",
+          "item": "Heavy-Duty Boots",
+          "ability": "Swift Swim",
+          "moves": [
+            "Surf",
+            "Endeavor",
+            "Substitute",
+            "Flip Turn"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 81,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Ground"
+        }
+      ]
+    },
+    {
+      "seed": "9,5736,13984,19904",
+      "team": [
+        {
+          "name": "Decidueye",
+          "species": "Decidueye",
+          "item": "Life Orb",
+          "ability": "Overgrow",
+          "moves": [
+            "Poltergeist",
+            "Leaf Blade",
+            "Shadow Sneak",
+            "Swords Dance"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 88,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Ghost"
+        },
+        {
+          "name": "Ludicolo",
+          "species": "Ludicolo",
+          "item": "Life Orb",
+          "ability": "Swift Swim",
+          "moves": [
+            "Giga Drain",
+            "Ice Beam",
+            "Rain Dance",
+            "Hydro Pump"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 90,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Grass"
+        },
+        {
+          "name": "Glaceon",
+          "species": "Glaceon",
+          "item": "Heavy-Duty Boots",
+          "ability": "Ice Body",
+          "moves": [
+            "Calm Mind",
+            "Protect",
+            "Wish",
+            "Freeze-Dry"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 94,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Water"
+        },
+        {
+          "name": "Iron Moth",
+          "species": "Iron Moth",
+          "item": "Choice Specs",
+          "ability": "Quark Drive",
+          "moves": [
+            "U-turn",
+            "Sludge Wave",
+            "Fiery Dance",
+            "Energy Ball"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "N",
+          "level": 78,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Grass"
+        },
+        {
+          "name": "Squawkabilly",
+          "species": "Squawkabilly-White",
+          "item": "Choice Band",
+          "ability": "Hustle",
+          "moves": [
+            "Double-Edge",
+            "Quick Attack",
+            "Brave Bird",
+            "Foul Play"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 89,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Normal"
+        },
+        {
+          "name": "Phione",
+          "species": "Phione",
+          "item": "Leftovers",
+          "ability": "Hydration",
+          "moves": [
+            "Grass Knot",
+            "Take Heart",
+            "Ice Beam",
+            "Scald"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "N",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 91,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Steel"
+        }
+      ]
+    },
+    {
+      "seed": "10,13655,15527,51241",
+      "team": [
+        {
+          "name": "Iron Valiant",
+          "species": "Iron Valiant",
+          "item": "Life Orb",
+          "ability": "Quark Drive",
+          "moves": [
+            "Swords Dance",
+            "Spirit Break",
+            "Close Combat",
+            "Knock Off"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "N",
+          "level": 78,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Dark"
+        },
+        {
+          "name": "Dragonite",
+          "species": "Dragonite",
+          "item": "Heavy-Duty Boots",
+          "ability": "Multiscale",
+          "moves": [
+            "Dragon Dance",
+            "Earthquake",
+            "Tera Blast",
+            "Outrage"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "level": 74,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Flying"
+        },
+        {
+          "name": "Crabominable",
+          "species": "Crabominable",
+          "item": "Choice Band",
+          "ability": "Iron Fist",
+          "moves": [
+            "Close Combat",
+            "Ice Hammer",
+            "Gunk Shot",
+            "Knock Off"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "level": 90,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Fighting"
+        },
+        {
+          "name": "Gyarados",
+          "species": "Gyarados",
+          "item": "Heavy-Duty Boots",
+          "ability": "Intimidate",
+          "moves": [
+            "Dragon Dance",
+            "Temper Flare",
+            "Waterfall",
+            "Earthquake"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "level": 79,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Ground"
+        },
+        {
+          "name": "Swampert",
+          "species": "Swampert",
+          "item": "Leftovers",
+          "ability": "Torrent",
+          "moves": [
+            "Earthquake",
+            "Flip Turn",
+            "Roar",
+            "Knock Off"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "level": 83,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Poison"
+        },
+        {
+          "name": "Iron Boulder",
+          "species": "Iron Boulder",
+          "item": "Booster Energy",
+          "ability": "Quark Drive",
+          "moves": [
+            "Zen Headbutt",
+            "Swords Dance",
+            "Close Combat",
+            "Mighty Cleave"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "N",
+          "level": 77,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Fighting"
+        }
+      ]
+    },
+    {
+      "seed": "11,21574,17070,17043",
+      "team": [
+        {
+          "name": "Blaziken",
+          "species": "Blaziken",
+          "item": "Life Orb",
+          "ability": "Speed Boost",
+          "moves": [
+            "Knock Off",
+            "Swords Dance",
+            "Flare Blitz",
+            "Close Combat"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 76,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Dark"
+        },
+        {
+          "name": "Lugia",
+          "species": "Lugia",
+          "item": "Heavy-Duty Boots",
+          "ability": "Multiscale",
+          "moves": [
+            "Psychic Noise",
+            "Recover",
+            "Aeroblast",
+            "Calm Mind"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "N",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 73,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Steel"
+        },
+        {
+          "name": "Reshiram",
+          "species": "Reshiram",
+          "item": "Heavy-Duty Boots",
+          "ability": "Turboblaze",
+          "moves": [
+            "Draco Meteor",
+            "Earth Power",
+            "Will-O-Wisp",
+            "Blue Flare"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "N",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 76,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Ground"
+        },
+        {
+          "name": "Beartic",
+          "species": "Beartic",
+          "item": "Heavy-Duty Boots",
+          "ability": "Slush Rush",
+          "moves": [
+            "Earthquake",
+            "Snowscape",
+            "Close Combat",
+            "Icicle Crash"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 91,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Ground"
+        },
+        {
+          "name": "Plusle",
+          "species": "Plusle",
+          "item": "Life Orb",
+          "ability": "Lightning Rod",
+          "moves": [
+            "Alluring Voice",
+            "Thunderbolt",
+            "Nasty Plot",
+            "Grass Knot"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 95,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Grass"
+        },
+        {
+          "name": "Cyclizar",
+          "species": "Cyclizar",
+          "item": "Heavy-Duty Boots",
+          "ability": "Regenerator",
+          "moves": [
+            "Shed Tail",
+            "Rapid Spin",
+            "Draco Meteor",
+            "Taunt"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 84,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Ghost"
+        }
+      ]
+    },
+    {
+      "seed": "12,29493,18613,48380",
+      "team": [
+        {
+          "name": "Amoonguss",
+          "species": "Amoonguss",
+          "item": "Leftovers",
+          "ability": "Regenerator",
+          "moves": [
+            "Giga Drain",
+            "Stomping Tantrum",
+            "Spore",
+            "Sludge Bomb"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "level": 82,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Water"
+        },
+        {
+          "name": "Barraskewda",
+          "species": "Barraskewda",
+          "item": "Choice Band",
+          "ability": "Swift Swim",
+          "moves": [
+            "Close Combat",
+            "Psychic Fangs",
+            "Flip Turn",
+            "Waterfall"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 81,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Fighting"
+        },
+        {
+          "name": "Munkidori",
+          "species": "Munkidori",
+          "item": "Assault Vest",
+          "ability": "Toxic Chain",
+          "moves": [
+            "Sludge Wave",
+            "Psychic Noise",
+            "U-turn",
+            "Fake Out"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 79,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Dark"
+        },
+        {
+          "name": "Meowscarada",
+          "species": "Meowscarada",
+          "item": "Heavy-Duty Boots",
+          "ability": "Protean",
+          "moves": [
+            "Knock Off",
+            "Flower Trick",
+            "U-turn",
+            "Toxic Spikes"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 78,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Grass"
+        },
+        {
+          "name": "Groudon",
+          "species": "Groudon",
+          "item": "Leftovers",
+          "ability": "Drought",
+          "moves": [
+            "Stone Edge",
+            "Precipice Blades",
+            "Heat Crash",
+            "Swords Dance"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "N",
+          "level": 72,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Fire"
+        },
+        {
+          "name": "Vikavolt",
+          "species": "Vikavolt",
+          "item": "Heavy-Duty Boots",
+          "ability": "Levitate",
+          "moves": [
+            "Bug Buzz",
+            "Energy Ball",
+            "Thunderbolt",
+            "Sticky Web"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 83,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Electric"
+        }
+      ]
+    },
+    {
+      "seed": "13,37412,20156,14182",
+      "team": [
+        {
+          "name": "Quaquaval",
+          "species": "Quaquaval",
+          "item": "Leftovers",
+          "ability": "Moxie",
+          "moves": [
+            "Close Combat",
+            "Roost",
+            "Aqua Step",
+            "Rapid Spin"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 79,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Steel"
+        },
+        {
+          "name": "Tyranitar",
+          "species": "Tyranitar",
+          "item": "Leftovers",
+          "ability": "Sand Stream",
+          "moves": [
+            "Stone Edge",
+            "Stealth Rock",
+            "Dragon Tail",
+            "Knock Off"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "level": 78,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Rock"
+        },
+        {
+          "name": "Mudsdale",
+          "species": "Mudsdale",
+          "item": "Leftovers",
+          "ability": "Stamina",
+          "moves": [
+            "Earthquake",
+            "Roar",
+            "Stone Edge",
+            "Heavy Slam"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 83,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Steel"
+        },
+        {
+          "name": "Dudunsparce",
+          "species": "Dudunsparce-Three-Segment",
+          "item": "Leftovers",
+          "ability": "Rattled",
+          "moves": [
+            "Boomburst",
+            "Calm Mind",
+            "Shadow Ball",
+            "Roost"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 83,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Ghost"
+        },
+        {
+          "name": "Heatran",
+          "species": "Heatran",
+          "item": "Assault Vest",
+          "ability": "Flash Fire",
+          "moves": [
+            "Lava Plume",
+            "Magma Storm",
+            "Heavy Slam",
+            "Earth Power"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 79,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Flying"
+        },
+        {
+          "name": "Reshiram",
+          "species": "Reshiram",
+          "item": "Heavy-Duty Boots",
+          "ability": "Turboblaze",
+          "moves": [
+            "Draco Meteor",
+            "Will-O-Wisp",
+            "Earth Power",
+            "Blue Flare"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "N",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 76,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Fire"
+        }
+      ]
+    },
+    {
+      "seed": "14,45331,21699,45519",
+      "team": [
+        {
+          "name": "Mewtwo",
+          "species": "Mewtwo",
+          "item": "Life Orb",
+          "ability": "Unnerve",
+          "moves": [
+            "Recover",
+            "Psystrike",
+            "Nasty Plot",
+            "Aura Sphere"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "N",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 72,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Psychic"
+        },
+        {
+          "name": "Feraligatr",
+          "species": "Feraligatr",
+          "item": "Life Orb",
+          "ability": "Sheer Force",
+          "moves": [
+            "Trailblaze",
+            "Dragon Dance",
+            "Liquidation",
+            "Ice Punch"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 79,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Water"
+        },
+        {
+          "name": "Inteleon",
+          "species": "Inteleon",
+          "item": "Choice Specs",
+          "ability": "Torrent",
+          "moves": [
+            "U-turn",
+            "Ice Beam",
+            "Hydro Pump",
+            "Scald"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "level": 81,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Water"
+        },
+        {
+          "name": "Vileplume",
+          "species": "Vileplume",
+          "item": "Leftovers",
+          "ability": "Effect Spore",
+          "moves": [
+            "Leech Seed",
+            "Giga Drain",
+            "Sludge Bomb",
+            "Strength Sap"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 85,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Water"
+        },
+        {
+          "name": "Rotom",
+          "species": "Rotom-Heat",
+          "item": "Heavy-Duty Boots",
+          "ability": "Levitate",
+          "moves": [
+            "Volt Switch",
+            "Overheat",
+            "Discharge",
+            "Will-O-Wisp"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "N",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 83,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Steel"
+        },
+        {
+          "name": "Jumpluff",
+          "species": "Jumpluff",
+          "item": "",
+          "ability": "Infiltrator",
+          "moves": [
+            "Strength Sap",
+            "Encore",
+            "Acrobatics",
+            "Sleep Powder"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 81,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "level": 87,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Steel"
+        }
+      ]
+    },
+    {
+      "seed": "15,53250,23242,11321",
+      "team": [
+        {
+          "name": "Weavile",
+          "species": "Weavile",
+          "item": "Heavy-Duty Boots",
+          "ability": "Pickpocket",
+          "moves": [
+            "Knock Off",
+            "Low Kick",
+            "Swords Dance",
+            "Triple Axel"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 79,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Dark"
+        },
+        {
+          "name": "Komala",
+          "species": "Komala",
+          "item": "Assault Vest",
+          "ability": "Comatose",
+          "moves": [
+            "U-turn",
+            "Knock Off",
+            "Rapid Spin",
+            "Body Slam"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 87,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Ghost"
+        },
+        {
+          "name": "Pikachu",
+          "species": "Pikachu-Original",
+          "item": "Light Ball",
+          "ability": "Lightning Rod",
+          "moves": [
+            "Volt Switch",
+            "Surf",
+            "Volt Tackle",
+            "Fake Out"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "level": 93,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Water"
+        },
+        {
+          "name": "Rampardos",
+          "species": "Rampardos",
+          "item": "Choice Scarf",
+          "ability": "Sheer Force",
+          "moves": [
+            "Head Smash",
+            "Rock Slide",
+            "Earthquake",
+            "Fire Punch"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "level": 90,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Rock"
+        },
+        {
+          "name": "Houndstone",
+          "species": "Houndstone",
+          "item": "Assault Vest",
+          "ability": "Fluffy",
+          "moves": [
+            "Shadow Sneak",
+            "Play Rough",
+            "Poltergeist",
+            "Body Press"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 86,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Fighting"
+        },
+        {
+          "name": "Armarouge",
+          "species": "Armarouge",
+          "item": "Power Herb",
+          "ability": "Weak Armor",
+          "moves": [
+            "Meteor Beam",
+            "Energy Ball",
+            "Armor Cannon",
+            "Psyshock"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 80,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Grass"
+        }
+      ]
+    },
+    {
+      "seed": "16,61169,24785,42658",
+      "team": [
+        {
+          "name": "Mimikyu",
+          "species": "Mimikyu",
+          "item": "Life Orb",
+          "ability": "Disguise",
+          "moves": [
+            "Drain Punch",
+            "Shadow Sneak",
+            "Swords Dance",
+            "Play Rough"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 79,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Fairy"
+        },
+        {
+          "name": "Deoxys",
+          "species": "Deoxys-Defense",
+          "item": "Leftovers",
+          "ability": "Pressure",
+          "moves": [
+            "Cosmic Power",
+            "Recover",
+            "Night Shade",
+            "Stored Power"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "N",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 84,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Steel"
+        },
+        {
+          "name": "Volcarona",
+          "species": "Volcarona",
+          "item": "Heavy-Duty Boots",
+          "ability": "Flame Body",
+          "moves": [
+            "Bug Buzz",
+            "Fiery Dance",
+            "Quiver Dance",
+            "Tera Blast"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 77,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Ground"
+        },
+        {
+          "name": "Torkoal",
+          "species": "Torkoal",
+          "item": "Heavy-Duty Boots",
+          "ability": "Drought",
+          "moves": [
+            "Lava Plume",
+            "Yawn",
+            "Stealth Rock",
+            "Solar Beam"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 88,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Grass"
+        },
+        {
+          "name": "Milotic",
+          "species": "Milotic",
+          "item": "Leftovers",
+          "ability": "Competitive",
+          "moves": [
+            "Ice Beam",
+            "Haze",
+            "Recover",
+            "Scald"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 83,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Steel"
+        },
+        {
+          "name": "Hitmontop",
+          "species": "Hitmontop",
+          "item": "Leftovers",
+          "ability": "Technician",
+          "moves": [
+            "Triple Axel",
+            "Bulk Up",
+            "Rapid Spin",
+            "Close Combat"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 88,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Ice"
+        }
+      ]
+    },
+    {
+      "seed": "17,3553,26328,8460",
+      "team": [
+        {
+          "name": "Perrserker",
+          "species": "Perrserker",
+          "item": "Life Orb",
+          "ability": "Tough Claws",
+          "moves": [
+            "Stealth Rock",
+            "Close Combat",
+            "Iron Head",
+            "Knock Off"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "level": 89,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Fighting"
+        },
+        {
+          "name": "Tornadus",
+          "species": "Tornadus",
+          "item": "Choice Specs",
+          "ability": "Defiant",
+          "moves": [
+            "Heat Wave",
+            "U-turn",
+            "Bleakwind Storm",
+            "Grass Knot"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 81,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 82,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Fire"
+        },
+        {
+          "name": "Gholdengo",
+          "species": "Gholdengo",
+          "item": "Leftovers",
+          "ability": "Good as Gold",
+          "moves": [
+            "Make It Rain",
+            "Shadow Ball",
+            "Recover",
+            "Nasty Plot"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "N",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 77,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Dark"
+        },
+        {
+          "name": "Salamence",
+          "species": "Salamence",
+          "item": "Heavy-Duty Boots",
+          "ability": "Moxie",
+          "moves": [
+            "Outrage",
+            "Earthquake",
+            "Dual Wingbeat",
+            "Dragon Dance"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 77,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Steel"
+        },
+        {
+          "name": "Slowking",
+          "species": "Slowking-Galar",
+          "item": "Leftovers",
+          "ability": "Regenerator",
+          "moves": [
+            "Sludge Bomb",
+            "Toxic Spikes",
+            "Slack Off",
+            "Psychic Noise"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 85,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Dark"
+        },
+        {
+          "name": "Samurott",
+          "species": "Samurott-Hisui",
+          "item": "Choice Band",
+          "ability": "Sharpness",
+          "moves": [
+            "Razor Shell",
+            "Ceaseless Edge",
+            "Sacred Sword",
+            "Sucker Punch"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 77,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Dark"
+        }
+      ]
+    },
+    {
+      "seed": "18,11472,27871,39797",
+      "team": [
+        {
+          "name": "Slowbro",
+          "species": "Slowbro",
+          "item": "Leftovers",
+          "ability": "Regenerator",
+          "moves": [
+            "Iron Defense",
+            "Slack Off",
+            "Scald",
+            "Body Press"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 85,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Fighting"
+        },
+        {
+          "name": "Manaphy",
+          "species": "Manaphy",
+          "item": "Leftovers",
+          "ability": "Hydration",
+          "moves": [
+            "Ice Beam",
+            "Energy Ball",
+            "Tail Glow",
+            "Hydro Pump"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "N",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 78,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Grass"
+        },
+        {
+          "name": "Skuntank",
+          "species": "Skuntank",
+          "item": "Life Orb",
+          "ability": "Aftermath",
+          "moves": [
+            "Gunk Shot",
+            "Toxic Spikes",
+            "Fire Blast",
+            "Knock Off"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "level": 84,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Poison"
+        },
+        {
+          "name": "Grumpig",
+          "species": "Grumpig",
+          "item": "Leftovers",
+          "ability": "Thick Fat",
+          "moves": [
+            "Psyshock",
+            "Earth Power",
+            "Nasty Plot",
+            "Dazzling Gleam"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 92,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Ground"
+        },
+        {
+          "name": "Grimmsnarl",
+          "species": "Grimmsnarl",
+          "item": "Leftovers",
+          "ability": "Prankster",
+          "moves": [
+            "Thunder Wave",
+            "Parting Shot",
+            "Spirit Break",
+            "Sucker Punch"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 83,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Steel"
+        },
+        {
+          "name": "Venomoth",
+          "species": "Venomoth",
+          "item": "Heavy-Duty Boots",
+          "ability": "Tinted Lens",
+          "moves": [
+            "Bug Buzz",
+            "Sludge Wave",
+            "Quiver Dance",
+            "Sleep Powder"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 84,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Steel"
+        }
+      ]
+    },
+    {
+      "seed": "19,19391,29414,5599",
+      "team": [
+        {
+          "name": "Deoxys",
+          "species": "Deoxys-Attack",
+          "item": "Life Orb",
+          "ability": "Pressure",
+          "moves": [
+            "Knock Off",
+            "Psycho Boost",
+            "Ice Beam",
+            "Superpower"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "N",
+          "level": 72,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Dark"
+        },
+        {
+          "name": "Slaking",
+          "species": "Slaking",
+          "item": "Choice Band",
+          "ability": "Truant",
+          "moves": [
+            "Knock Off",
+            "Giga Impact",
+            "Earthquake",
+            "Double-Edge"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "level": 84,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Normal"
+        },
+        {
+          "name": "Whiscash",
+          "species": "Whiscash",
+          "item": "Leftovers",
+          "ability": "Oblivious",
+          "moves": [
+            "Earthquake",
+            "Ice Beam",
+            "Spikes",
+            "Stealth Rock"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "level": 88,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Poison"
+        },
+        {
+          "name": "Inteleon",
+          "species": "Inteleon",
+          "item": "Choice Specs",
+          "ability": "Torrent",
+          "moves": [
+            "Ice Beam",
+            "U-turn",
+            "Hydro Pump",
+            "Scald"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 81,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Water"
+        },
+        {
+          "name": "Weezing",
+          "species": "Weezing",
+          "item": "Leftovers",
+          "ability": "Levitate",
+          "moves": [
+            "Fire Blast",
+            "Pain Split",
+            "Toxic Spikes",
+            "Gunk Shot"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 88,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Steel"
+        },
+        {
+          "name": "Hitmonchan",
+          "species": "Hitmonchan",
+          "item": "Leftovers",
+          "ability": "Iron Fist",
+          "moves": [
+            "Knock Off",
+            "Bulk Up",
+            "Poison Jab",
+            "Drain Punch"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 87,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Steel"
+        }
+      ]
+    },
+    {
+      "seed": "20,27310,30957,36936",
+      "team": [
+        {
+          "name": "Avalugg",
+          "species": "Avalugg",
+          "item": "Heavy-Duty Boots",
+          "ability": "Sturdy",
+          "moves": [
+            "Recover",
+            "Rapid Spin",
+            "Body Press",
+            "Avalanche"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 88,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Fighting"
+        },
+        {
+          "name": "Diancie",
+          "species": "Diancie",
+          "item": "Leftovers",
+          "ability": "Clear Body",
+          "moves": [
+            "Moonblast",
+            "Body Press",
+            "Stealth Rock",
+            "Diamond Storm"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "N",
+          "level": 82,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Fighting"
+        },
+        {
+          "name": "Seviper",
+          "species": "Seviper",
+          "item": "Leftovers",
+          "ability": "Infiltrator",
+          "moves": [
+            "Earthquake",
+            "Trailblaze",
+            "Swords Dance",
+            "Gunk Shot"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 93,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Ground"
+        },
+        {
+          "name": "Gyarados",
+          "species": "Gyarados",
+          "item": "Heavy-Duty Boots",
+          "ability": "Intimidate",
+          "moves": [
+            "Tera Blast",
+            "Earthquake",
+            "Dragon Dance",
+            "Waterfall"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 79,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Flying"
+        },
+        {
+          "name": "Morpeko",
+          "species": "Morpeko",
+          "item": "Heavy-Duty Boots",
+          "ability": "Hunger Switch",
+          "moves": [
+            "Aura Wheel",
+            "Parting Shot",
+            "Rapid Spin",
+            "Protect"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "level": 88,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Electric"
+        },
+        {
+          "name": "Glastrier",
+          "species": "Glastrier",
+          "item": "Heavy-Duty Boots",
+          "ability": "Chilling Neigh",
+          "moves": [
+            "Swords Dance",
+            "Icicle Crash",
+            "Close Combat",
+            "High Horsepower"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "N",
+          "level": 86,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Ground"
+        }
+      ]
+    },
+    {
+      "seed": "21,35229,32500,2738",
+      "team": [
+        {
+          "name": "Roaring Moon",
+          "species": "Roaring Moon",
+          "item": "Lum Berry",
+          "ability": "Protosynthesis",
+          "moves": [
+            "Outrage",
+            "Knock Off",
+            "Dragon Dance",
+            "Iron Head"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "N",
+          "level": 72,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Dragon"
+        },
+        {
+          "name": "Dragalge",
+          "species": "Dragalge",
+          "item": "Leftovers",
+          "ability": "Adaptability",
+          "moves": [
+            "Draco Meteor",
+            "Sludge Wave",
+            "Toxic Spikes",
+            "Focus Blast"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 88,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Fighting"
+        },
+        {
+          "name": "Zarude",
+          "species": "Zarude",
+          "item": "Life Orb",
+          "ability": "Leaf Guard",
+          "moves": [
+            "Close Combat",
+            "Power Whip",
+            "Knock Off",
+            "Swords Dance"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "N",
+          "level": 77,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Dark"
+        },
+        {
+          "name": "Hitmonlee",
+          "species": "Hitmonlee",
+          "item": "White Herb",
+          "ability": "Unburden",
+          "moves": [
+            "Close Combat",
+            "Swords Dance",
+            "Stone Edge",
+            "Knock Off"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 85,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Dark"
+        },
+        {
+          "name": "Grafaiai",
+          "species": "Grafaiai",
+          "item": "Assault Vest",
+          "ability": "Poison Touch",
+          "moves": [
+            "Super Fang",
+            "Knock Off",
+            "U-turn",
+            "Gunk Shot"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "level": 86,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Dark"
+        },
+        {
+          "name": "Houndstone",
+          "species": "Houndstone",
+          "item": "Leftovers",
+          "ability": "Fluffy",
+          "moves": [
+            "Sleep Talk",
+            "Body Press",
+            "Rest",
+            "Poltergeist"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 86,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Fighting"
+        }
+      ]
+    },
+    {
+      "seed": "22,43148,34043,34075",
+      "team": [
+        {
+          "name": "Suicune",
+          "species": "Suicune",
+          "item": "Leftovers",
+          "ability": "Pressure",
+          "moves": [
+            "Scald",
+            "Protect",
+            "Substitute",
+            "Calm Mind"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "N",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 82,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Steel"
+        },
+        {
+          "name": "Haxorus",
+          "species": "Haxorus",
+          "item": "Loaded Dice",
+          "ability": "Mold Breaker",
+          "moves": [
+            "Close Combat",
+            "Swords Dance",
+            "Scale Shot",
+            "Iron Head"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 77,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Steel"
+        },
+        {
+          "name": "Sableye",
+          "species": "Sableye",
+          "item": "Leftovers",
+          "ability": "Prankster",
+          "moves": [
+            "Recover",
+            "Encore",
+            "Will-O-Wisp",
+            "Knock Off"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "level": 88,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Poison"
+        },
+        {
+          "name": "Grimmsnarl",
+          "species": "Grimmsnarl",
+          "item": "Light Clay",
+          "ability": "Prankster",
+          "moves": [
+            "Spirit Break",
+            "Reflect",
+            "Light Screen",
+            "Parting Shot"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 83,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Poison"
+        },
+        {
+          "name": "Ribombee",
+          "species": "Ribombee",
+          "item": "Heavy-Duty Boots",
+          "ability": "Shield Dust",
+          "moves": [
+            "Bug Buzz",
+            "Quiver Dance",
+            "Tera Blast",
+            "Moonblast"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 83,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Ground"
+        },
+        {
+          "name": "Amoonguss",
+          "species": "Amoonguss",
+          "item": "Leftovers",
+          "ability": "Regenerator",
+          "moves": [
+            "Stomping Tantrum",
+            "Sludge Bomb",
+            "Spore",
+            "Giga Drain"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 82,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Water"
+        }
+      ]
+    },
+    {
+      "seed": "23,51067,35586,65412",
+      "team": [
+        {
+          "name": "Cinccino",
+          "species": "Cinccino",
+          "item": "Loaded Dice",
+          "ability": "Technician",
+          "moves": [
+            "Tail Slap",
+            "Triple Axel",
+            "Tidy Up",
+            "Bullet Seed"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 83,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Normal"
+        },
+        {
+          "name": "Rampardos",
+          "species": "Rampardos",
+          "item": "Life Orb",
+          "ability": "Sheer Force",
+          "moves": [
+            "Earthquake",
+            "Fire Punch",
+            "Rock Slide",
+            "Zen Headbutt"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 90,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Fire"
+        },
+        {
+          "name": "Samurott",
+          "species": "Samurott",
+          "item": "Life Orb",
+          "ability": "Torrent",
+          "moves": [
+            "Knock Off",
+            "Swords Dance",
+            "Sacred Sword",
+            "Liquidation"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 88,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Dark"
+        },
+        {
+          "name": "Cacturne",
+          "species": "Cacturne",
+          "item": "Life Orb",
+          "ability": "Water Absorb",
+          "moves": [
+            "Sucker Punch",
+            "Swords Dance",
+            "Knock Off",
+            "Seed Bomb"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 92,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Dark"
+        },
+        {
+          "name": "Talonflame",
+          "species": "Talonflame",
+          "item": "Heavy-Duty Boots",
+          "ability": "Flame Body",
+          "moves": [
+            "Roost",
+            "Brave Bird",
+            "Will-O-Wisp",
+            "Overheat"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "level": 83,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Ground"
+        },
+        {
+          "name": "Virizion",
+          "species": "Virizion",
+          "item": "Life Orb",
+          "ability": "Justified",
+          "moves": [
+            "Leaf Blade",
+            "Close Combat",
+            "Stone Edge",
+            "Swords Dance"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "N",
+          "level": 82,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Rock"
+        }
+      ]
+    },
+    {
+      "seed": "24,58986,37129,31214",
+      "team": [
+        {
+          "name": "Kleavor",
+          "species": "Kleavor",
+          "item": "Heavy-Duty Boots",
+          "ability": "Sharpness",
+          "moves": [
+            "Stone Axe",
+            "X-Scissor",
+            "Close Combat",
+            "Defog"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "level": 78,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Rock"
+        },
+        {
+          "name": "Phione",
+          "species": "Phione",
+          "item": "Leftovers",
+          "ability": "Hydration",
+          "moves": [
+            "Rest",
+            "Take Heart",
+            "Scald",
+            "Sleep Talk"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "N",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 91,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Steel"
+        },
+        {
+          "name": "Cetitan",
+          "species": "Cetitan",
+          "item": "Sitrus Berry",
+          "ability": "Thick Fat",
+          "moves": [
+            "Earthquake",
+            "Ice Spinner",
+            "Belly Drum",
+            "Ice Shard"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 81,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "level": 82,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Ice"
+        },
+        {
+          "name": "Rotom",
+          "species": "Rotom-Frost",
+          "item": "Heavy-Duty Boots",
+          "ability": "Levitate",
+          "moves": [
+            "Volt Switch",
+            "Will-O-Wisp",
+            "Thunderbolt",
+            "Blizzard"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "N",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 87,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Electric"
+        },
+        {
+          "name": "Milotic",
+          "species": "Milotic",
+          "item": "Leftovers",
+          "ability": "Competitive",
+          "moves": [
+            "Dragon Tail",
+            "Scald",
+            "Ice Beam",
+            "Recover"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "level": 83,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Steel"
+        },
+        {
+          "name": "Infernape",
+          "species": "Infernape",
+          "item": "Choice Scarf",
+          "ability": "Blaze",
+          "moves": [
+            "Knock Off",
+            "Flare Blitz",
+            "Close Combat",
+            "Stone Edge"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 82,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Dark"
+        }
+      ]
+    },
+    {
+      "seed": "25,1370,38672,62551",
+      "team": [
+        {
+          "name": "Rabsca",
+          "species": "Rabsca",
+          "item": "Heavy-Duty Boots",
+          "ability": "Synchronize",
+          "moves": [
+            "Psychic",
+            "Bug Buzz",
+            "Revival Blessing",
+            "Earth Power"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 91,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Steel"
+        },
+        {
+          "name": "Ho-Oh",
+          "species": "Ho-Oh",
+          "item": "Heavy-Duty Boots",
+          "ability": "Regenerator",
+          "moves": [
+            "Sacred Fire",
+            "Brave Bird",
+            "Earthquake",
+            "Recover"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "N",
+          "level": 71,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Ground"
+        },
+        {
+          "name": "Diancie",
+          "species": "Diancie",
+          "item": "Leftovers",
+          "ability": "Clear Body",
+          "moves": [
+            "Calm Mind",
+            "Diamond Storm",
+            "Draining Kiss",
+            "Earth Power"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "N",
+          "level": 82,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Water"
+        },
+        {
+          "name": "Torterra",
+          "species": "Torterra",
+          "item": "Loaded Dice",
+          "ability": "Overgrow",
+          "moves": [
+            "Shell Smash",
+            "Headlong Rush",
+            "Rock Blast",
+            "Bullet Seed"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 78,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Rock"
+        },
+        {
+          "name": "Cresselia",
+          "species": "Cresselia",
+          "item": "Leftovers",
+          "ability": "Levitate",
+          "moves": [
+            "Calm Mind",
+            "Moonlight",
+            "Moonblast",
+            "Psyshock"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 80,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Steel"
+        },
+        {
+          "name": "Smeargle",
+          "species": "Smeargle",
+          "item": "Wide Lens",
+          "ability": "Technician",
+          "moves": [
+            "Shell Smash",
+            "Spore",
+            "Power Trip",
+            "Population Bomb"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "level": 95,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Normal"
+        }
+      ]
+    },
+    {
+      "seed": "26,9289,40215,28353",
+      "team": [
+        {
+          "name": "Espeon",
+          "species": "Espeon",
+          "item": "Life Orb",
+          "ability": "Magic Bounce",
+          "moves": [
+            "Shadow Ball",
+            "Alluring Voice",
+            "Morning Sun",
+            "Psyshock"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 84,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Psychic"
+        },
+        {
+          "name": "Meowscarada",
+          "species": "Meowscarada",
+          "item": "Life Orb",
+          "ability": "Protean",
+          "moves": [
+            "Toxic Spikes",
+            "Knock Off",
+            "Flower Trick",
+            "Triple Axel"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 78,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Grass"
+        },
+        {
+          "name": "Stantler",
+          "species": "Stantler",
+          "item": "Eviolite",
+          "ability": "Intimidate",
+          "moves": [
+            "Calm Mind",
+            "Shadow Ball",
+            "Earth Power",
+            "Tera Blast"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 91,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Fairy"
+        },
+        {
+          "name": "Raikou",
+          "species": "Raikou",
+          "item": "Leftovers",
+          "ability": "Pressure",
+          "moves": [
+            "Thunderbolt",
+            "Calm Mind",
+            "Scald",
+            "Substitute"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "N",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 81,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Grass"
+        },
+        {
+          "name": "Arcanine",
+          "species": "Arcanine-Hisui",
+          "item": "Choice Band",
+          "ability": "Rock Head",
+          "moves": [
+            "Flare Blitz",
+            "Extreme Speed",
+            "Head Smash",
+            "Close Combat"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 81,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "level": 79,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Normal"
+        },
+        {
+          "name": "Deoxys",
+          "species": "Deoxys-Speed",
+          "item": "Life Orb",
+          "ability": "Pressure",
+          "moves": [
+            "Nasty Plot",
+            "Psycho Boost",
+            "Focus Blast",
+            "Dark Pulse"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "N",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 82,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Fighting"
+        }
+      ]
+    },
+    {
+      "seed": "27,17208,41758,59690",
+      "team": [
+        {
+          "name": "Dialga",
+          "species": "Dialga-Origin",
+          "item": "Adamant Crystal",
+          "ability": "Pressure",
+          "moves": [
+            "Fire Blast",
+            "Flash Cannon",
+            "Draco Meteor",
+            "Stealth Rock"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "N",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 73,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Steel"
+        },
+        {
+          "name": "Necrozma",
+          "species": "Necrozma",
+          "item": "Life Orb",
+          "ability": "Prism Armor",
+          "moves": [
+            "Earthquake",
+            "Swords Dance",
+            "Photon Geyser",
+            "Knock Off"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "N",
+          "level": 80,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Steel"
+        },
+        {
+          "name": "Tauros",
+          "species": "Tauros-Paldea-Blaze",
+          "item": "Choice Band",
+          "ability": "Intimidate",
+          "moves": [
+            "Stone Edge",
+            "Flare Blitz",
+            "Close Combat",
+            "Wild Charge"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 81,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Fighting"
+        },
+        {
+          "name": "Feraligatr",
+          "species": "Feraligatr",
+          "item": "Life Orb",
+          "ability": "Sheer Force",
+          "moves": [
+            "Crunch",
+            "Ice Punch",
+            "Dragon Dance",
+            "Liquidation"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "level": 79,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Dragon"
+        },
+        {
+          "name": "Ceruledge",
+          "species": "Ceruledge",
+          "item": "Heavy-Duty Boots",
+          "ability": "Weak Armor",
+          "moves": [
+            "Swords Dance",
+            "Shadow Sneak",
+            "Poltergeist",
+            "Bitter Blade"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 78,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Fire"
+        },
+        {
+          "name": "Vikavolt",
+          "species": "Vikavolt",
+          "item": "Heavy-Duty Boots",
+          "ability": "Levitate",
+          "moves": [
+            "Volt Switch",
+            "Sticky Web",
+            "Thunderbolt",
+            "Bug Buzz"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 83,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Electric"
+        }
+      ]
+    },
+    {
+      "seed": "28,25127,43301,25492",
+      "team": [
+        {
+          "name": "Barraskewda",
+          "species": "Barraskewda",
+          "item": "Choice Band",
+          "ability": "Swift Swim",
+          "moves": [
+            "Flip Turn",
+            "Throat Chop",
+            "Waterfall",
+            "Close Combat"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "level": 81,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Fighting"
+        },
+        {
+          "name": "Pyroar",
+          "species": "Pyroar",
+          "item": "Heavy-Duty Boots",
+          "ability": "Unnerve",
+          "moves": [
+            "Work Up",
+            "Fire Blast",
+            "Dark Pulse",
+            "Hyper Voice"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 88,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Fire"
+        },
+        {
+          "name": "Rotom",
+          "species": "Rotom-Frost",
+          "item": "Heavy-Duty Boots",
+          "ability": "Levitate",
+          "moves": [
+            "Blizzard",
+            "Thunderbolt",
+            "Volt Switch",
+            "Will-O-Wisp"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "N",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 87,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Electric"
+        },
+        {
+          "name": "Stonjourner",
+          "species": "Stonjourner",
+          "item": "Life Orb",
+          "ability": "Power Spot",
+          "moves": [
+            "Stealth Rock",
+            "Stone Edge",
+            "Earthquake",
+            "Heat Crash"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 91,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Ground"
+        },
+        {
+          "name": "Leavanny",
+          "species": "Leavanny",
+          "item": "Heavy-Duty Boots",
+          "ability": "Swarm",
+          "moves": [
+            "Lunge",
+            "Sticky Web",
+            "Knock Off",
+            "Leaf Blade"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 86,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Rock"
+        },
+        {
+          "name": "Whimsicott",
+          "species": "Whimsicott",
+          "item": "Leftovers",
+          "ability": "Prankster",
+          "moves": [
+            "Substitute",
+            "Moonblast",
+            "Encore",
+            "Leech Seed"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 84,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Poison"
+        }
+      ]
+    },
+    {
+      "seed": "29,33046,44844,56829",
+      "team": [
+        {
+          "name": "Arcanine",
+          "species": "Arcanine",
+          "item": "Heavy-Duty Boots",
+          "ability": "Intimidate",
+          "moves": [
+            "Roar",
+            "Close Combat",
+            "Flare Blitz",
+            "Morning Sun"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 84,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Fighting"
+        },
+        {
+          "name": "Necrozma",
+          "species": "Necrozma-Dusk-Mane",
+          "item": "Weakness Policy",
+          "ability": "Prism Armor",
+          "moves": [
+            "Dragon Dance",
+            "Earthquake",
+            "Sunsteel Strike",
+            "Morning Sun"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "N",
+          "level": 69,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Water"
+        },
+        {
+          "name": "Lycanroc",
+          "species": "Lycanroc",
+          "item": "Life Orb",
+          "ability": "Sand Rush",
+          "moves": [
+            "Close Combat",
+            "Stone Edge",
+            "Taunt",
+            "Psychic Fangs"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 86,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Fighting"
+        },
+        {
+          "name": "Venusaur",
+          "species": "Venusaur",
+          "item": "Leftovers",
+          "ability": "Chlorophyll",
+          "moves": [
+            "Leech Seed",
+            "Substitute",
+            "Sleep Powder",
+            "Sludge Bomb"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 84,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Water"
+        },
+        {
+          "name": "Torterra",
+          "species": "Torterra",
+          "item": "Loaded Dice",
+          "ability": "Overgrow",
+          "moves": [
+            "Shell Smash",
+            "Bullet Seed",
+            "Rock Blast",
+            "Headlong Rush"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "level": 78,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Rock"
+        },
+        {
+          "name": "Cyclizar",
+          "species": "Cyclizar",
+          "item": "Heavy-Duty Boots",
+          "ability": "Regenerator",
+          "moves": [
+            "Taunt",
+            "Shed Tail",
+            "Draco Meteor",
+            "Rapid Spin"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "F",
+          "level": 84,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Fairy"
+        }
+      ]
+    },
+    {
+      "seed": "30,40965,46387,22631",
+      "team": [
+        {
+          "name": "Latios",
+          "species": "Latios",
+          "item": "Choice Specs",
+          "ability": "Levitate",
+          "moves": [
+            "Luster Purge",
+            "Aura Sphere",
+            "Draco Meteor",
+            "Flip Turn"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 78,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Dragon"
+        },
+        {
+          "name": "Jirachi",
+          "species": "Jirachi",
+          "item": "Choice Scarf",
+          "ability": "Serene Grace",
+          "moves": [
+            "U-turn",
+            "Healing Wish",
+            "Psychic",
+            "Iron Head"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "N",
+          "level": 80,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Water"
+        },
+        {
+          "name": "Ursaluna",
+          "species": "Ursaluna-Bloodmoon",
+          "item": "Leftovers",
+          "ability": "Mind's Eye",
+          "moves": [
+            "Calm Mind",
+            "Blood Moon",
+            "Moonlight",
+            "Earth Power"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 79,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Poison"
+        },
+        {
+          "name": "Greedent",
+          "species": "Greedent",
+          "item": "Sitrus Berry",
+          "ability": "Cheek Pouch",
+          "moves": [
+            "Knock Off",
+            "Body Slam",
+            "Swords Dance",
+            "Earthquake"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 86,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Ground"
+        },
+        {
+          "name": "Muk",
+          "species": "Muk",
+          "item": "Leftovers",
+          "ability": "Poison Touch",
+          "moves": [
+            "Poison Jab",
+            "Toxic Spikes",
+            "Knock Off",
+            "Ice Punch"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "M",
+          "level": 86,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Dark"
+        },
+        {
+          "name": "Miraidon",
+          "species": "Miraidon",
+          "item": "Life Orb",
+          "ability": "Hadron Engine",
+          "moves": [
+            "Draco Meteor",
+            "Calm Mind",
+            "Electro Drift",
+            "Dragon Pulse"
+          ],
+          "nature": "",
+          "evs": {
+            "hp": 85,
+            "atk": 0,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "gender": "N",
+          "ivs": {
+            "hp": 31,
+            "atk": 0,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "level": 65,
+          "happiness": 255,
+          "hpType": "",
+          "pokeball": "",
+          "gigantamax": false,
+          "dynamaxLevel": 10,
+          "teraType": "Electric"
+        }
+      ]
+    }
+  ]
+}

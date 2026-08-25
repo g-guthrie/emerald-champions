@@ -1,15 +1,17 @@
 Route102_Text_CalvinIntro: @ 8294513
-	.string "If you have Pokémon with you, then\n"
-	.string "you're an official Pokémon Trainer!\l"
-	.string "You can't say no to my challenge!$"
+	.string "My team loves playing tricks!\n"
+	.string "Let's see if your pair spots them!$"
 
 Route102_Text_CalvinDefeated: @ 829457C
-	.string "Arrgh, I lost…\n"
-	.string "I should have trained mine more…$"
+	.string "Whoa! You found the real one!$"
 
 Route102_Text_CalvinPostBattle: @ 82945AC
-	.string "Listen, you. If you're strong,\n"
-	.string "you should have told me before!$"
+	.string "Battling in pairs makes every trick\n"
+	.string "better. Next time, I'll fool you!$"
+
+Route102_Text_CalvinNotEnoughPokemon:
+	.string "You need two healthy Pokémon for\n"
+	.string "this two-on-two battle!$"
 
 Route102_Text_CalvinRegister: @ 82945EB
 	.string "I've been working hard at this since\n"
@@ -35,39 +37,45 @@ Route102_Text_CalvinRematchPostBattle: @ 829473C
 	.string "I'll get stronger, too.$"
 
 Route102_Text_AllenIntro: @ 8294775
-	.string "Did you just become a Trainer?\n"
-	.string "We're both beginners!$"
+	.string "We're both beginners, but my little\n"
+	.string "Pokémon know a real doubles trick!$"
 
 Route102_Text_AllenDefeated: @ 82947AA
-	.string "I called you because I thought\n"
-	.string "I could beat you…$"
+	.string "Whoa! You broke the whole setup!$"
 
 Route102_Text_AllenPostBattle: @ 82947DB
-	.string "I haven't won once yet…\n"
-	.string "I wish I would win soon…$"
+	.string "Small Pokémon hit really hard when\n"
+	.string "their partners buy them time.$"
+
+Route102_Text_AllenNotEnoughPokemon:
+	.string "Bring two healthy Pokémon if you\n"
+	.string "want to try my doubles trick!$"
 
 Route102_Text_RickIntro: @ 829480C
-	.string "Hahah! Our eyes met!\n"
-	.string "I'll take you on with my Bug Pokémon!$"
+	.string "My bugs spin a web, then the whole\n"
+	.string "team comes rushing in! Ready?$"
 
 Route102_Text_RickDefeated: @ 8294847
-	.string "Ow! Down and out!$"
+	.string "You tore straight through my web!$"
 
 Route102_Text_RickPostBattle: @ 8294859
-	.string "If you lock eyes with a Trainer,\n"
-	.string "you have to challenge! It's a rule!$"
+	.string "Sticky Web slows every new Pokémon.\n"
+	.string "I need a plan for Flying types!$"
 
 Route102_Text_TianaIntro: @ 829489E
-	.string "I'm going to keep winning and aim\n"
-	.string "to be the best Trainer.\p"
-	.string "Help me further my career!$"
+	.string "I found the coolest way to win!\n"
+	.string "Let's battle in a snowstorm!$"
 
 Route102_Text_TianaDefeated: @ 82948F3
-	.string "I ended up furthering your career…$"
+	.string "Your team weathered my best storm!$"
 
 Route102_Text_TianaPostBattle: @ 8294916
-	.string "To keep winning my way up, I see that\n"
-	.string "I have to catch more Pokémon.$"
+	.string "When the snow stops, Arctozolt slows\n"
+	.string "down. I need a second plan!$"
+
+Route102_Text_TianaNotEnoughPokemon:
+	.string "Bring two healthy Pokémon if you\n"
+	.string "want to face my snow team!$"
 
 Route103_Text_DaisyIntro: @ 829495A
 	.string "Did you feel the tug of our\n"
@@ -295,17 +303,15 @@ Route104_Text_IvanPostBattle: @ 829554E
 	.string "I forgot I had to raise my Pokémon…$"
 
 Route104_Text_BillyIntro: @ 829558A
-	.string "Leaving footprints in the sand is\n"
-	.string "so fun!$"
+	.string "I found strange tracks in the sand…\n"
+	.string "The whole shoreline wants a battle!$"
 
 Route104_Text_BillyDefeat: @ 82955B4
-	.string "Waah! I got sand in my runners!\n"
-	.string "They're all gritty!$"
+	.string "Those tracks led straight to a loss!$"
 
 Route104_Text_BillyPostBattle: @ 82955E8
-	.string "I want to leave my footprints in\n"
-	.string "the sand everywhere, but they\l"
-	.string "disappear quickly…$"
+	.string "The sand, sea, and cliffs make one\n"
+	.string "wild team. I'll keep exploring!$"
 
 Route104_Text_HaleyIntro: @ 829563A
 	.string "Should I…\n"
@@ -657,7 +663,9 @@ Route107_Text_DenisePostBattle: @ 82969AB
 
 Route107_Text_BethIntro: @ 82969E4
 	.string "Did you want to battle me?\n"
-	.string "Sure, I'll go with you!$"
+	.string "Sure, I'll go with you!\p"
+	.string "Rain falls first. Then my whole team\n"
+	.string "moves with the current!$"
 
 Route107_Text_BethDefeated: @ 8296A17
 	.string "I wasn't good enough for you.$"
@@ -1598,7 +1606,9 @@ Route112_Text_BryantPostBattle: @ 8299BFB
 Route112_Text_ShaylaIntro: @ 8299C34
 	.string "Oh, aren't you an adorable Trainer!\n"
 	.string "Please, I need a romantic battle!\l"
-	.string "I'm somewhat decent!$"
+	.string "I'm somewhat decent!\p"
+	.string "Sunlight, flowers, and one enormous\n"
+	.string "surprise. How romantic!$"
 
 Route112_Text_ShaylaDefeat: @ 8299C8F
 	.string "Oh, how strong you are!\n"
@@ -1791,7 +1801,9 @@ Route114_Text_LennyIntro: @ 829A6B1
 	.string "… …\p"
 	.string "You're supposed to shout\n"
 	.string "“yodelayhihoo” since it doesn't\l"
-	.string "echo here!$"
+	.string "echo here!\p"
+	.string "My sandstorm carries thunder under\n"
+	.string "every step. Yodelayhihoo!$"
 
 Route114_Text_LennyDefeat: @ 829A707
 	.string "Yodelayhihoo!$"
@@ -2471,8 +2483,10 @@ Route117_Text_DerekPostBattle: @ 829CBAD
 	.string "a Bug Maniac.$"
 
 Route117_Text_AnnaIntro: @ 829CC4A
-	.string "Anna: I'm with my pretty junior student\n"
-	.string "partner. I have to do good!$"
+	.string "Anna: My junior partner and I\n"
+	.string "trained for this!\p"
+	.string "Every little hit makes our footing\n"
+	.string "stronger!$"
 
 Route117_Text_AnnaDefeat: @ 829CC8E
 	.string "Anna: I'm with my pretty junior student\n"
@@ -2492,8 +2506,10 @@ Route117_Text_AnnaNotEnoughMons: @ 829CD61
 	.string "bring two Pokémon with you.$"
 
 Route117_Text_MegIntro: @ 829CD9D
-	.string "Meg: I'm going to tag up with my super\n"
-	.string "senior student partner and beat you!$"
+	.string "Meg: I'll tag up with my senior\n"
+	.string "partner and beat you!\p"
+	.string "I'll strike first. Anna's partner\n"
+	.string "turns every hit into strength!$"
 
 Route117_Text_MegDefeat: @ 829CDE9
 	.string "Meg: Oh, no!\n"
@@ -3195,7 +3211,8 @@ Route121_Text_TammyPostBattle: @ 829F3C6
 
 Route121_Text_KateIntro: @ 829F3FB
 	.string "Kate: Together, we're fearless!\n"
-	.string "We'll demonstrate how tough we are!$"
+	.string "We'll shut down every Ability, then\n"
+	.string "wake something enormous!$"
 
 Route121_Text_KateDefeat: @ 829F43F
 	.string "Kate: I blew it in front of my junior\n"
@@ -3213,7 +3230,8 @@ Route121_Text_KateNotEnoughMons: @ 829F4C9
 
 Route121_Text_JoyIntro: @ 829F521
 	.string "Joy: Together, we're fearless!\n"
-	.string "We'll demonstrate how tough we are!$"
+	.string "Kate clears the rules away.\n"
+	.string "I bring the raw power!$"
 
 Route121_Text_JoyDefeat: @ 829F564
 	.string "Joy: Please forgive me, Kate!$"
@@ -4611,7 +4629,9 @@ Route133_Text_DebraPostBattle: @ 82A420E
 
 Route133_Text_LindaIntro: @ 82A4236
 	.string "Welcome!\n"
-	.string "I've been expecting you!$"
+	.string "I've been expecting you!\p"
+	.string "The current turns, then snow falls.\n"
+	.string "Can your team adapt as fast as mine?$"
 
 Route133_Text_LindaDefeat: @ 82A4258
 	.string "No! Please!$"

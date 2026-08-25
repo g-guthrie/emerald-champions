@@ -97,103 +97,6 @@ ABILITY_ALIASES = {
     "Power Construct": "PwrConstruct",
 }
 
-# Each module is a legal, self-contained doubles piece. Existing teams keep
-# their identity; these fill short parties to the audit's four/six-mon target.
-ARCHETYPE_POOLS = {
-    "Balanced disruption": [
-        ("SPECIES_INCINEROAR", "ITEM_EJECT_BUTTON", "ABILITY_INTIMIDATE", "SPREAD_31_IV_HP_ATK_ADAMANT", ("MOVE_FAKE_OUT", "MOVE_FLARE_BLITZ", "MOVE_SNARL", "MOVE_PARTING_SHOT")),
-        ("SPECIES_AMOONGUSS", "ITEM_SITRUS_BERRY", "ABILITY_REGENERATOR", "SPREAD_31_IV_HP_DEF_BOLD", ("MOVE_SPORE", "MOVE_RAGE_POWDER", "MOVE_POLLEN_PUFF", "MOVE_PROTECT")),
-        ("SPECIES_GRIMMSNARL", "ITEM_LIGHT_CLAY", "ABILITY_PRANKSTER", "SPREAD_31_IV_HP_SPDEF_CAREFUL", ("MOVE_REFLECT", "MOVE_LIGHT_SCREEN", "MOVE_SPIRIT_BREAK", "MOVE_TAUNT")),
-    ],
-    "Rain pressure": [
-        ("SPECIES_PELIPPER", "ITEM_DAMP_ROCK", "ABILITY_DRIZZLE", "SPREAD_31_IV_HP_SPATK_MODEST", ("MOVE_TAILWIND", "MOVE_SCALD", "MOVE_HURRICANE", "MOVE_PROTECT")),
-        ("SPECIES_LUDICOLO", "ITEM_LIFE_ORB", "ABILITY_SWIFT_SWIM", "SPREAD_31_IV_SPATK_SPEED_MODEST", ("MOVE_MUDDY_WATER", "MOVE_GIGA_DRAIN", "MOVE_ICE_BEAM", "MOVE_PROTECT")),
-        ("SPECIES_ZAPDOS", "ITEM_SITRUS_BERRY", "ABILITY_PRESSURE", "SPREAD_31_IV_SPATK_SPEED_TIMID", ("MOVE_THUNDER", "MOVE_HURRICANE", "MOVE_TAILWIND", "MOVE_ROOST")),
-    ],
-    "Normal-rule breaker": [
-        ("SPECIES_PORYGON2", "ITEM_EVIOLITE", "ABILITY_DOWNLOAD", "SPREAD_31_IV_HP_DEF_SPDEF_SASSY", ("MOVE_TRICK_ROOM", "MOVE_TRI_ATTACK", "MOVE_ICE_BEAM", "MOVE_RECOVER")),
-        ("SPECIES_EXPLOUD", "ITEM_CHOICE_SPECS", "ABILITY_SCRAPPY", "SPREAD_31_IV_HP_SPATK_MODEST", ("MOVE_BOOMBURST", "MOVE_FLAMETHROWER", "MOVE_ICE_BEAM", "MOVE_SURF")),
-        ("SPECIES_REGIGIGAS", "ITEM_LEFTOVERS", "ABILITY_SLOW_START", "SPREAD_31_IV_HP_ATK_ADAMANT", ("MOVE_CRUSH_GRIP", "MOVE_DRAIN_PUNCH", "MOVE_KNOCK_OFF", "MOVE_THUNDER_WAVE")),
-    ],
-    "Sun offense": [
-        ("SPECIES_TORKOAL", "ITEM_HEAT_ROCK", "ABILITY_DROUGHT", "SPREAD_31_IV_HP_DEF_BOLD", ("MOVE_HEAT_WAVE", "MOVE_BODY_PRESS", "MOVE_YAWN", "MOVE_PROTECT")),
-        ("SPECIES_VENUSAUR", "ITEM_LIFE_ORB", "ABILITY_CHLOROPHYLL", "SPREAD_31_IV_SPATK_SPEED_MODEST", ("MOVE_SOLAR_BEAM", "MOVE_SLUDGE_BOMB", "MOVE_SLEEP_POWDER", "MOVE_PROTECT")),
-        ("SPECIES_VICTINI", "ITEM_CHOICE_SCARF", "ABILITY_VICTORY_STAR", "SPREAD_31_IV_ATK_SPEED_JOLLY", ("MOVE_V_CREATE", "MOVE_BOLT_STRIKE", "MOVE_ZEN_HEADBUTT", "MOVE_U_TURN")),
-    ],
-    "Sand and spread": [
-        ("SPECIES_TYRANITAR", "ITEM_SMOOTH_ROCK", "ABILITY_SAND_STREAM", "SPREAD_31_IV_HP_ATK_ADAMANT", ("MOVE_ROCK_SLIDE", "MOVE_CRUNCH", "MOVE_LOW_KICK", "MOVE_PROTECT")),
-        ("SPECIES_EXCADRILL", "ITEM_FOCUS_SASH", "ABILITY_SAND_RUSH", "SPREAD_31_IV_ATK_SPEED_JOLLY", ("MOVE_EARTHQUAKE", "MOVE_IRON_HEAD", "MOVE_ROCK_SLIDE", "MOVE_PROTECT")),
-        ("SPECIES_NIHILEGO", "ITEM_POWER_HERB", "ABILITY_BEAST_BOOST", "SPREAD_31_IV_SPATK_SPEED_TIMID", ("MOVE_METEOR_BEAM", "MOVE_SLUDGE_BOMB", "MOVE_TRICK_ROOM", "MOVE_PROTECT")),
-    ],
-    "Tailwind offense": [
-        ("SPECIES_WHIMSICOTT", "ITEM_FOCUS_SASH", "ABILITY_PRANKSTER", "SPREAD_31_IV_SPATK_SPEED_TIMID", ("MOVE_TAILWIND", "MOVE_ENCORE", "MOVE_MOONBLAST", "MOVE_HELPING_HAND")),
-        ("SPECIES_TALONFLAME", "ITEM_SHARP_BEAK", "ABILITY_GALE_WINGS", "SPREAD_31_IV_ATK_SPEED_JOLLY", ("MOVE_TAILWIND", "MOVE_BRAVE_BIRD", "MOVE_FLARE_BLITZ", "MOVE_QUICK_GUARD")),
-        ("SPECIES_LANDORUS_THERIAN", "ITEM_ASSAULT_VEST", "ABILITY_INTIMIDATE", "SPREAD_31_IV_ATK_SPEED_JOLLY", ("MOVE_EARTHQUAKE", "MOVE_ROCK_SLIDE", "MOVE_U_TURN", "MOVE_KNOCK_OFF")),
-    ],
-    "Fake Out and pressure": [
-        ("SPECIES_INCINEROAR", "ITEM_EJECT_BUTTON", "ABILITY_INTIMIDATE", "SPREAD_31_IV_HP_ATK_ADAMANT", ("MOVE_FAKE_OUT", "MOVE_FLARE_BLITZ", "MOVE_SNARL", "MOVE_PARTING_SHOT")),
-        ("SPECIES_MIENSHAO", "ITEM_FOCUS_SASH", "ABILITY_INNER_FOCUS", "SPREAD_31_IV_ATK_SPEED_JOLLY", ("MOVE_FAKE_OUT", "MOVE_COACHING", "MOVE_CLOSE_COMBAT", "MOVE_PROTECT")),
-        ("SPECIES_RILLABOOM", "ITEM_ASSAULT_VEST", "ABILITY_GRASSY_SURGE", "SPREAD_31_IV_HP_ATK_ADAMANT", ("MOVE_FAKE_OUT", "MOVE_GRASSY_GLIDE", "MOVE_KNOCK_OFF", "MOVE_U_TURN")),
-    ],
-    "Bug swarm utility": [
-        ("SPECIES_RIBOMBEE", "ITEM_FOCUS_SASH", "ABILITY_SHIELD_DUST", "SPREAD_31_IV_SPATK_SPEED_TIMID", ("MOVE_STICKY_WEB", "MOVE_POLLEN_PUFF", "MOVE_DAZZLING_GLEAM", "MOVE_PROTECT")),
-        ("SPECIES_VOLCARONA", "ITEM_LIFE_ORB", "ABILITY_FLAME_BODY", "SPREAD_31_IV_SPATK_SPEED_TIMID", ("MOVE_HEAT_WAVE", "MOVE_BUG_BUZZ", "MOVE_QUIVER_DANCE", "MOVE_PROTECT")),
-        ("SPECIES_GENESECT", "ITEM_CHOICE_SCARF", "ABILITY_DOWNLOAD", "SPREAD_31_IV_ATK_SPEED_NAIVE", ("MOVE_TECHNO_BLAST", "MOVE_ICE_BEAM", "MOVE_THUNDERBOLT", "MOVE_U_TURN")),
-    ],
-    "Electric terrain": [
-        ("SPECIES_TAPU_KOKO", "ITEM_TERRAIN_EXTENDER", "ABILITY_ELECTRIC_SURGE", "SPREAD_31_IV_SPATK_SPEED_TIMID", ("MOVE_THUNDERBOLT", "MOVE_DAZZLING_GLEAM", "MOVE_VOLT_SWITCH", "MOVE_TAUNT")),
-        ("SPECIES_RAICHU", "ITEM_FOCUS_SASH", "ABILITY_LIGHTNING_ROD", "SPREAD_31_IV_SPATK_SPEED_TIMID", ("MOVE_FAKE_OUT", "MOVE_RISING_VOLTAGE", "MOVE_SURF", "MOVE_PROTECT")),
-        ("SPECIES_REGIELEKI", "ITEM_MAGNET", "ABILITY_TRANSISTOR", "SPREAD_31_IV_SPATK_SPEED_TIMID", ("MOVE_ELECTROWEB", "MOVE_RISING_VOLTAGE", "MOVE_VOLT_SWITCH", "MOVE_PROTECT")),
-    ],
-    "Trick Room control": [
-        ("SPECIES_CRESSELIA", "ITEM_MENTAL_HERB", "ABILITY_LEVITATE", "SPREAD_31_IV_HP_DEF_SPDEF_SASSY", ("MOVE_TRICK_ROOM", "MOVE_HELPING_HAND", "MOVE_ICE_BEAM", "MOVE_MOONLIGHT")),
-        ("SPECIES_HATTERENE", "ITEM_LIFE_ORB", "ABILITY_MAGIC_BOUNCE", "SPREAD_31_IV_HP_SPATK_QUIET", ("MOVE_PSYCHIC", "MOVE_DAZZLING_GLEAM", "MOVE_TRICK_ROOM", "MOVE_PROTECT")),
-        ("SPECIES_STAKATAKA", "ITEM_WEAKNESS_POLICY", "ABILITY_BEAST_BOOST", "SPREAD_STAKATAKA", ("MOVE_GYRO_BALL", "MOVE_ROCK_SLIDE", "MOVE_TRICK_ROOM", "MOVE_PROTECT")),
-    ],
-    "Shadow disruption": [
-        ("SPECIES_GENGAR", "ITEM_FOCUS_SASH", "ABILITY_CURSED_BODY", "SPREAD_31_IV_SPATK_SPEED_TIMID", ("MOVE_SHADOW_BALL", "MOVE_SLUDGE_BOMB", "MOVE_ICY_WIND", "MOVE_PROTECT")),
-        ("SPECIES_SABLEYE", "ITEM_MENTAL_HERB", "ABILITY_PRANKSTER", "SPREAD_31_IV_HP_DEF_IMPISH", ("MOVE_WILL_O_WISP", "MOVE_TAUNT", "MOVE_QUASH", "MOVE_FOUL_PLAY")),
-        ("SPECIES_DARKRAI", "ITEM_FOCUS_SASH", "ABILITY_BAD_DREAMS", "SPREAD_31_IV_SPATK_SPEED_TIMID", ("MOVE_DARK_PULSE", "MOVE_HYPNOSIS", "MOVE_ICY_WIND", "MOVE_PROTECT")),
-    ],
-    "Psychic terrain": [
-        ("SPECIES_TAPU_LELE", "ITEM_PSYCHIC_SEED", "ABILITY_PSYCHIC_SURGE", "SPREAD_31_IV_SPATK_SPEED_TIMID", ("MOVE_PSYCHIC", "MOVE_MOONBLAST", "MOVE_DAZZLING_GLEAM", "MOVE_PROTECT")),
-        ("SPECIES_INDEEDEE_FEMALE", "ITEM_SITRUS_BERRY", "ABILITY_PSYCHIC_SURGE", "SPREAD_31_IV_HP_SPDEF_CALM", ("MOVE_FOLLOW_ME", "MOVE_HELPING_HAND", "MOVE_PSYCHIC", "MOVE_PROTECT")),
-        ("SPECIES_METAGROSS", "ITEM_ASSAULT_VEST", "ABILITY_CLEAR_BODY", "SPREAD_31_IV_HP_ATK_ADAMANT", ("MOVE_METEOR_MASH", "MOVE_ZEN_HEADBUTT", "MOVE_BULLET_PUNCH", "MOVE_STOMPING_TANTRUM")),
-    ],
-    "Grassy control": [
-        ("SPECIES_RILLABOOM", "ITEM_ASSAULT_VEST", "ABILITY_GRASSY_SURGE", "SPREAD_31_IV_HP_ATK_ADAMANT", ("MOVE_FAKE_OUT", "MOVE_GRASSY_GLIDE", "MOVE_KNOCK_OFF", "MOVE_U_TURN")),
-        ("SPECIES_AMOONGUSS", "ITEM_SITRUS_BERRY", "ABILITY_REGENERATOR", "SPREAD_31_IV_HP_DEF_BOLD", ("MOVE_SPORE", "MOVE_RAGE_POWDER", "MOVE_POLLEN_PUFF", "MOVE_PROTECT")),
-        ("SPECIES_KARTANA", "ITEM_FOCUS_SASH", "ABILITY_BEAST_BOOST", "SPREAD_31_IV_ATK_SPEED_JOLLY", ("MOVE_LEAF_BLADE", "MOVE_SACRED_SWORD", "MOVE_SMART_STRIKE", "MOVE_PROTECT")),
-    ],
-    "Dragon pressure": [
-        ("SPECIES_SALAMENCE", "ITEM_LIFE_ORB", "ABILITY_INTIMIDATE", "SPREAD_31_IV_ATK_SPEED_JOLLY", ("MOVE_DRAGON_CLAW", "MOVE_DOUBLE_EDGE", "MOVE_TAILWIND", "MOVE_PROTECT")),
-        ("SPECIES_NAGANADEL", "ITEM_LIFE_ORB", "ABILITY_BEAST_BOOST", "SPREAD_31_IV_SPATK_SPEED_TIMID", ("MOVE_DRACO_METEOR", "MOVE_SLUDGE_WAVE", "MOVE_HEAT_WAVE", "MOVE_PROTECT")),
-        ("SPECIES_RAYQUAZA", "ITEM_WHITE_HERB", "ABILITY_AIR_LOCK", "SPREAD_31_IV_ATK_SPEED_JOLLY", ("MOVE_DRAGON_ASCENT", "MOVE_V_CREATE", "MOVE_EXTREME_SPEED", "MOVE_PROTECT")),
-    ],
-    "Snow and speed control": [
-        ("SPECIES_NINETALES_ALOLAN", "ITEM_LIGHT_CLAY", "ABILITY_SNOW_WARNING", "SPREAD_31_IV_SPATK_SPEED_TIMID", ("MOVE_AURORA_VEIL", "MOVE_BLIZZARD", "MOVE_ICY_WIND", "MOVE_PROTECT")),
-        ("SPECIES_FROSLASS", "ITEM_FOCUS_SASH", "ABILITY_SNOW_CLOAK", "SPREAD_31_IV_SPATK_SPEED_TIMID", ("MOVE_ICY_WIND", "MOVE_WILL_O_WISP", "MOVE_TAUNT", "MOVE_DESTINY_BOND")),
-        ("SPECIES_GLASTRIER", "ITEM_ASSAULT_VEST", "ABILITY_CHILLING_NEIGH", "SPREAD_31_IV_HP_ATK_BRAVE", ("MOVE_ICICLE_CRASH", "MOVE_HIGH_HORSEPOWER", "MOVE_CLOSE_COMBAT", "MOVE_HEAVY_SLAM")),
-    ],
-    "Steel balance": [
-        ("SPECIES_KLEFKI", "ITEM_LIGHT_CLAY", "ABILITY_PRANKSTER", "SPREAD_31_IV_HP_SPDEF_CALM", ("MOVE_REFLECT", "MOVE_LIGHT_SCREEN", "MOVE_THUNDER_WAVE", "MOVE_FOUL_PLAY")),
-        ("SPECIES_CORVIKNIGHT", "ITEM_LEFTOVERS", "ABILITY_MIRROR_ARMOR", "SPREAD_31_IV_HP_DEF_IMPISH", ("MOVE_TAILWIND", "MOVE_BRAVE_BIRD", "MOVE_BODY_PRESS", "MOVE_ROOST")),
-        ("SPECIES_MELMETAL", "ITEM_ASSAULT_VEST", "ABILITY_IRON_FIST", "SPREAD_31_IV_HP_ATK_ADAMANT", ("MOVE_DOUBLE_IRON_BASH", "MOVE_HIGH_HORSEPOWER", "MOVE_ROCK_SLIDE", "MOVE_THUNDER_PUNCH")),
-    ],
-}
-
-RARE_POOL = [
-    ("SPECIES_ZAPDOS", "ITEM_SITRUS_BERRY", "ABILITY_PRESSURE", "SPREAD_31_IV_SPATK_SPEED_TIMID", ("MOVE_THUNDERBOLT", "MOVE_HURRICANE", "MOVE_TAILWIND", "MOVE_ROOST")),
-    ("SPECIES_DARKRAI", "ITEM_FOCUS_SASH", "ABILITY_BAD_DREAMS", "SPREAD_31_IV_SPATK_SPEED_TIMID", ("MOVE_DARK_PULSE", "MOVE_HYPNOSIS", "MOVE_ICY_WIND", "MOVE_PROTECT")),
-    ("SPECIES_GENESECT", "ITEM_CHOICE_SCARF", "ABILITY_DOWNLOAD", "SPREAD_31_IV_ATK_SPEED_NAIVE", ("MOVE_TECHNO_BLAST", "MOVE_ICE_BEAM", "MOVE_THUNDERBOLT", "MOVE_U_TURN")),
-    ("SPECIES_TERRAKION", "ITEM_LIFE_ORB", "ABILITY_JUSTIFIED", "SPREAD_31_IV_ATK_SPEED_JOLLY", ("MOVE_ROCK_SLIDE", "MOVE_CLOSE_COMBAT", "MOVE_QUICK_GUARD", "MOVE_PROTECT")),
-    ("SPECIES_CRESSELIA", "ITEM_MENTAL_HERB", "ABILITY_LEVITATE", "SPREAD_31_IV_HP_DEF_SPDEF_SASSY", ("MOVE_TRICK_ROOM", "MOVE_HELPING_HAND", "MOVE_ICE_BEAM", "MOVE_MOONLIGHT")),
-    ("SPECIES_MARSHADOW", "ITEM_LIFE_ORB", "ABILITY_TECHNICIAN", "SPREAD_31_IV_ATK_SPEED_JOLLY", ("MOVE_SPECTRAL_THIEF", "MOVE_CLOSE_COMBAT", "MOVE_SHADOW_SNEAK", "MOVE_PROTECT")),
-    ("SPECIES_MANAPHY", "ITEM_WACAN_BERRY", "ABILITY_HYDRATION", "SPREAD_31_IV_HP_SPATK_MODEST", ("MOVE_TAIL_GLOW", "MOVE_MUDDY_WATER", "MOVE_ICE_BEAM", "MOVE_PROTECT")),
-    ("SPECIES_NIHILEGO", "ITEM_POWER_HERB", "ABILITY_BEAST_BOOST", "SPREAD_31_IV_SPATK_SPEED_TIMID", ("MOVE_METEOR_BEAM", "MOVE_SLUDGE_BOMB", "MOVE_TRICK_ROOM", "MOVE_PROTECT")),
-]
-
-
 def select_rebalanced(text: str) -> str:
     output, stack, active = [], [], True
     for line in text.splitlines():
@@ -258,7 +161,7 @@ def import_audit(audit_dir: Path) -> None:
     design = json.loads(design_path.read_text())
     ledger = list(csv.DictReader(ledger_path.open()))
     trainers_text = TRAINERS_PATH.read_text()
-    source_ids = set(re.findall(r"^\s*\[(TRAINER_[A-Z0-9_]+)\]\s*=", trainers_text, re.M)) - {"TRAINER_NONE"}
+    source_ids = set(re.findall(r"^\s*\[((?:TRAINER|MAY|BRENDAN)_[A-Z0-9_]+)\]\s*=", trainers_text, re.M)) - {"TRAINER_NONE"}
     ledger_ids = {row["trainer_id"] for row in ledger}
     if source_ids != ledger_ids:
         raise ValueError(f"audit/source trainer mismatch: missing={sorted(source_ids-ledger_ids)}, extra={sorted(ledger_ids-source_ids)}")
@@ -345,7 +248,7 @@ def import_audit(audit_dir: Path) -> None:
     print(f"wrote {MANIFEST_PATH} ({len(formats)} trainers, {len(resolved_bosses)} marquee teams)")
 
 
-TRAINER_BLOCK = re.compile(r"^    \[(TRAINER_[A-Z0-9_]+)\] =\n    \{.*?^    \},\n", re.M | re.S)
+TRAINER_BLOCK = re.compile(r"^    \[((?:TRAINER|MAY|BRENDAN)_[A-Z0-9_]+)\] =\n    \{.*?^    \},\n", re.M | re.S)
 PARTY_BLOCK_TEMPLATE = r"(^static const struct TrainerMonItemCustomMoves {name}\[\]\s*=\s*\{{[^\n]*\n)(.*?)(^\}};)"
 
 
@@ -426,17 +329,6 @@ def render_mon(mon: dict, level: int, note: str) -> str:
     )
 
 
-def pool_mon(spec: tuple, slots: dict[str, list[str]]) -> dict:
-    species, item, ability, spread, moves = spec
-    return {
-        "species": species,
-        "item": item,
-        "ability": ability,
-        "ability_slot": ability_slot(species, ability, slots),
-        "spread": spread,
-        "moves": list(moves),
-    }
-
 
 def replace_party(text: str, name: str, rendered: list[str]) -> str:
     match = party_match(text, name)
@@ -456,7 +348,9 @@ def rewrite_parties(text: str, trainers_text: str, manifest: dict) -> str:
         rendered = [render_mon(mon, levels[index], f"Verdant doubles: {mon['role']}") for index, mon in enumerate(boss["team"])]
         text = replace_party(text, name, rendered)
 
-    # Expand every other recommended double to an even four/six-mon wave.
+    # Ordinary teams are authored explicitly by verdant_custom_teams.py. This
+    # converter owns only format flags and the hand-authored story bosses; it
+    # must never synthesize repeated filler cores again.
     for trainer_id, rule in manifest["formats"].items():
         if rule["format"] != "double" or trainer_id in boss_ids:
             continue
@@ -465,38 +359,11 @@ def rewrite_parties(text: str, trainers_text: str, manifest: dict) -> str:
         body = match.group(2)
         existing = species_in_party(body)
         target = rule["target_size"]
-        if len(existing) > target:
-            raise ValueError(f"{trainer_id}/{name} has {len(existing)} mons, above target {target}")
-        if len(existing) == target:
-            continue
-        pool = ARCHETYPE_POOLS.get(rule["archetype"], ARCHETYPE_POOLS["Balanced disruption"])
-        rotation = int(hashlib.sha1(trainer_id.encode()).hexdigest()[:8], 16) % len(RARE_POOL)
-        candidates = list(pool) + RARE_POOL[rotation:] + RARE_POOL[:rotation]
-        additions = []
-        used = set(existing)
-        for spec in candidates:
-            mon = pool_mon(spec, slots)
-            if mon["species"] in used:
-                continue
-            used.add(mon["species"])
-            additions.append(mon)
-            if len(existing) + len(additions) == target:
-                break
-        if len(existing) + len(additions) != target:
-            raise ValueError(f"not enough unique expansion candidates for {trainer_id}")
-        stripped = body.rstrip()
-        code_only = active_code(stripped).rstrip()
-        if code_only.endswith("},"):
-            separator = "\n"
-        elif code_only.endswith("}"):
-            # A comma after trailing comments still separates the active final
-            # initializer once the comments are removed by the C preprocessor.
-            separator = "\n,\n"
-        else:
-            raise ValueError(f"unexpected party body ending for {name}")
-        rendered = [render_mon(mon, rule["level_offset"], f"Verdant doubles: {rule['archetype']}") for mon in additions]
-        new_body = stripped + separator + ",\n".join(rendered) + "\n"
-        text = text[:match.start(2)] + new_body + text[match.end(2):]
+        if len(existing) != target:
+            raise ValueError(
+                f"{trainer_id}/{name} has {len(existing)} mons, expected {target}; "
+                "run scripts/verdant_custom_teams.py --apply"
+            )
     return text
 
 
@@ -533,21 +400,8 @@ def verify_conversion() -> None:
         size = len(species_in_party(party_match(parties_text, name).group(2)))
         if expected_double and size != rule["target_size"]:
             problems.append(f"{trainer_id}: doubles size {size}, expected {rule['target_size']}")
-        if expected_double and (size < 4 or size % 2):
+        if expected_double and not rule.get("multi_partner") and (size < 4 or size % 2):
             problems.append(f"{trainer_id}: unsafe doubles party size {size}")
-
-    constants = "\n".join(path.read_text(errors="ignore") for path in [
-        ROOT / "include/constants/species.h",
-        ROOT / "include/constants/items.h",
-        ROOT / "include/constants/moves.h",
-        ROOT / "include/constants/abilities.h",
-        ROOT / "include/constants/spreads.h",
-    ])
-    all_specs = [spec for pool in ARCHETYPE_POOLS.values() for spec in pool] + RARE_POOL
-    for species, item, ability, spread, moves in all_specs:
-        for constant in (species, item, ability, spread, *moves):
-            if not re.search(rf"\b{re.escape(constant)}\b", constants):
-                problems.append(f"unknown module constant: {constant}")
 
     for boss in manifest["bosses"]:
         block = blocks[boss["trainer_id"]].group(0)

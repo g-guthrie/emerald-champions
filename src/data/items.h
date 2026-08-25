@@ -2793,7 +2793,7 @@ const struct Item gItems[] =
     {
         .name = _("Mental Herb"),
         .itemId = ITEM_MENTAL_HERB,
-        .price = 100,
+        .price = 4000,
         .holdEffect = HOLD_EFFECT_MENTAL_HERB,
         .description = sMentalHerbDesc,
         .pocket = POCKET_BATTLE,
@@ -6139,7 +6139,7 @@ const struct Item gItems[] =
     {
         .name = _("Shed Shell"),
         .itemId = ITEM_SHED_SHELL,
-        .price = 500,
+        .price = 4000,
         .holdEffect = HOLD_EFFECT_SHED_SHELL,
         .description = sShedShellDesc,
         .pocket = POCKET_BATTLE,
@@ -8075,7 +8075,7 @@ const struct Item gItems[] =
     {
         .name = _("Adrenaline Orb"),
         .itemId = ITEM_ADRENALINE_ORB,
-        .price = 300,
+        .price = 4000,
         .holdEffect = HOLD_EFFECT_ADRENALINE_ORB,
         .description = sAdrenalineOrbDesc,
         .pocket = POCKET_BATTLE,

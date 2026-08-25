@@ -41,6 +41,7 @@
 #include "safari_zone.h"
 #include "scanline_effect.h"
 #include "sound.h"
+#include "starter_choose.h"
 #include "sprite.h"
 #include "string_util.h"
 #include "strings.h"
@@ -80,6 +81,7 @@ static void CB2_HandleStartMultiBattle(void);
 static void CB2_HandleStartBattle(void);
 static void TryCorrectShedinjaLanguage(struct Pokemon *mon);
 static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 firstTrainer);
+static bool8 IsRoute103RivalTrainer(u16 trainerNum);
 static void BattleMainCB1(void);
 static void sub_8038538(struct Sprite *sprite);
 static void CB2_EndLinkBattle(void);
@@ -1969,13 +1971,25 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
             case F_TRAINER_PARTY_CUSTOM_MOVESET | F_TRAINER_PARTY_HELD_ITEM:
             {
                 const struct TrainerMonItemCustomMoves *partyData = gTrainers[trainerNum].party.ItemCustomMoves;
+                u16 species = partyData[i].species;
 
-                for (j = 0; gSpeciesNames[partyData[i].species][j] != EOS; j++)
-                    nameHash += gSpeciesNames[partyData[i].species][j];
+                // Route 103 uses the same three party records for every starter
+                // generation. Replace the Hoenn placeholder with the actual
+                // counter-starter chosen from the player's seven available
+                // trios; later rival encounters are audited separately.
+                if (i == 0 && IsRoute103RivalTrainer(trainerNum))
+                    species = GetStarterPokemonForGeneration((VarGet(VAR_STARTER_MON) + 1) % 3, VarGet(VAR_STARTER_GEN));
+
+                for (j = 0; gSpeciesNames[species][j] != EOS; j++)
+                    nameHash += gSpeciesNames[species][j];
 
                 personalityValue += nameHash << 8;
 
-                level = GetHighestLevelInPlayerParty();
+                // Verdant's trainer levels are authored as offsets from the
+                // current strict cap, not from the player's highest mon. This
+                // keeps every encounter at its intended difficulty even when
+                // the player arrives underleveled.
+                level = GetLevelCap();
                 if (level + partyData[i].lvl > 100)
                 {
                     level = 100;
@@ -1989,7 +2003,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
                     level = level + partyData[i].lvl;
                 }
 
-                CreateMon(&party[i], partyData[i].species, level, 31, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+                CreateMon(&party[i], species, level, 31, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
 
                 SetMonData(&party[i], MON_DATA_NATURE, &gSets[partyData[i].spread].nature);
                 SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
@@ -2039,6 +2053,22 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
     }
 
     return gTrainers[trainerNum].partySize;
+}
+
+static bool8 IsRoute103RivalTrainer(u16 trainerNum)
+{
+    switch (trainerNum)
+    {
+    case TRAINER_MAY_ROUTE_103_TREECKO:
+    case TRAINER_MAY_ROUTE_103_TORCHIC:
+    case TRAINER_MAY_ROUTE_103_MUDKIP:
+    case TRAINER_BRENDAN_ROUTE_103_TREECKO:
+    case TRAINER_BRENDAN_ROUTE_103_TORCHIC:
+    case TRAINER_BRENDAN_ROUTE_103_MUDKIP:
+        return TRUE;
+    default:
+        return FALSE;
+    }
 }
 
 void VBlankCB_Battle(void)

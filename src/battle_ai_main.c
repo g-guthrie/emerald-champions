@@ -58,6 +58,11 @@ static s16 AI_Roaming(u8 battlerAtk, u8 battlerDef, u16 move, s16 score);
 static s16 AI_Safari(u8 battlerAtk, u8 battlerDef, u16 move, s16 score);
 static s16 AI_FirstBattle(u8 battlerAtk, u8 battlerDef, u16 move, s16 score);
 static s16 AI_DoubleBattle(u8 battlerAtk, u8 battlerDef, u16 move, s16 score);
+static s16 AI_HelpPartner(u8 battlerAtk, u8 battlerDef, u16 move, s16 score);
+static s16 AI_PerishTrap(u8 battlerAtk, u8 battlerDef, u16 move, s16 score);
+static s16 AI_ComboSetup(u8 battlerAtk, u8 battlerDef, u16 move, s16 score);
+static s16 AI_SpeedControl(u8 battlerAtk, u8 battlerDef, u16 move, s16 score);
+static s16 AI_FieldControl(u8 battlerAtk, u8 battlerDef, u16 move, s16 score);
 
 static s16 (*const sBattleAiFuncTable[])(u8, u8, u16, s16) =
 {
@@ -72,16 +77,16 @@ static s16 (*const sBattleAiFuncTable[])(u8, u8, u16, s16) =
     [8] = AI_HPAware,                // AI_FLAG_HP_AWARE
     [9] = NULL,                      // AI_FLAG_NEGATE_UNAWARE
     [10] = NULL,                     // AI_FLAG_WILL_SUICIDE
-    [11] = NULL,                     // AI_FLAG_HELP_PARTNER
+    [11] = AI_HelpPartner,           // AI_FLAG_HELP_PARTNER
     [12] = NULL,                     // Unused
     [13] = NULL,                     // Unused
     [14] = NULL,                     // Unused
     [15] = NULL,                     // AI_FLAG_SMART_SWITCHING
     [16] = NULL,                     // AI_FLAG_CHECK_FOE
-    [17] = NULL,                     // Unused
-    [18] = NULL,                     // Unused
-    [19] = NULL,                     // Unused
-    [20] = NULL,                     // Unused
+    [17] = AI_PerishTrap,            // AI_FLAG_PERISH_TRAP
+    [18] = AI_ComboSetup,            // AI_FLAG_COMBO_SETUP
+    [19] = AI_SpeedControl,          // AI_FLAG_SPEED_CONTROL
+    [20] = AI_FieldControl,          // AI_FLAG_FIELD_CONTROL
     [21] = NULL,                     // Unused
     [22] = NULL,                     // Unused
     [23] = NULL,                     // Unused
@@ -531,9 +536,6 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
 
     SetTypeBeforeUsingMove(move, battlerAtk);
     GET_MOVE_TYPE(move, moveType);
-    
-    SetTypeBeforeUsingMove(move, battlerAtk);
-    GET_MOVE_TYPE(move, moveType);
 
     if (IsTargetingPartner(battlerAtk, battlerDef))
         return score;
@@ -554,7 +556,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         if (moveType == TYPE_GROUND
           && !IsBattlerGrounded(battlerDef)
           && ((AI_DATA->defAbility == ABILITY_LEVITATE
-          && DoesBattlerIgnoreAbilityChecks(AI_DATA->atkAbility, move))
+          && !DoesBattlerIgnoreAbilityChecks(AI_DATA->atkAbility, move))
           || AI_DATA->defHoldEffect == HOLD_EFFECT_AIR_BALLOON
           || (gStatuses3[battlerDef] & (STATUS3_MAGNET_RISE | STATUS3_TELEKINESIS)))
           && !TestMoveFlags(move, FLAG_DMG_UNGROUNDED_IGNORE_TYPE_IF_FLYING))
@@ -2569,6 +2571,8 @@ static s16 AI_DoubleBattle(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         {
         case EFFECT_HELPING_HAND:
             if (IS_MOVE_STATUS(move))
+                score -= 10;
+            else
                 score += 5;
             break;
         case EFFECT_PERISH_SONG:
@@ -2601,8 +2605,11 @@ static s16 AI_DoubleBattle(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     switch (effect)
     {
     case EFFECT_HELPING_HAND:
-        if (AI_DATA->partnerMove != 0 && !HasDamagingMove(battlerAtkPartner))
+        if (!HasDamagingMove(battlerAtkPartner)
+          || (AI_DATA->partnerMove != MOVE_NONE && IS_MOVE_STATUS(AI_DATA->partnerMove)))
             score -= 5;
+        else if (AI_DATA->partnerMove != MOVE_NONE)
+            score += 4;
         break;
     case EFFECT_PERISH_SONG:
         if (AI_DATA->partnerMove != 0 && HasTrappingMoveEffect(battlerAtkPartner))
@@ -2879,6 +2886,22 @@ static s16 AI_DoubleBattle(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     }
     else // checking opponent
     {
+        if ((target & MOVE_TARGET_FOES_AND_ALLY)
+          && IsBattlerAlive(battlerAtkPartner)
+          && !partnerProtecting
+          && AI_DATA->atkPartnerAbility != ABILITY_TELEPATHY)
+        {
+            s32 allyDamage = AI_CalcDamage(move, battlerAtk, battlerAtkPartner);
+            if (allyDamage >= gBattleMons[battlerAtkPartner].hp)
+                score -= 15;
+            else if (allyDamage * 2 >= gBattleMons[battlerAtkPartner].hp)
+                score -= 8;
+            else if (allyDamage * 4 >= gBattleMons[battlerAtkPartner].hp)
+                score -= 4;
+            else if (allyDamage == 0)
+                score += 2;
+        }
+
         // these checks mostly handled in AI_CheckBadMove and AI_CheckViability        
         switch (effect)
         {
@@ -2906,6 +2929,220 @@ static s16 AI_DoubleBattle(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         // lightning rod, flash fire against enemy handled in AI_CheckBadMove
     }
     
+    return score;
+}
+
+static bool32 PartnerHasSetupMove(u8 partner)
+{
+    u8 i;
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        u16 partnerMove = gBattleMons[partner].moves[i];
+        u16 effect;
+
+        if (partnerMove == MOVE_NONE)
+            continue;
+        effect = gBattleMoves[partnerMove].effect;
+        if (IsStatRaisingEffect(effect)
+         || effect == EFFECT_BELLY_DRUM
+         || effect == EFFECT_SUBSTITUTE)
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
+// Prefer partner support only when the current board gives it a concrete
+// payoff. This is intentionally a moderate score bonus, not a forced line.
+static s16 AI_HelpPartner(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
+{
+    u8 partner = BATTLE_PARTNER(battlerAtk);
+    u16 effect = gBattleMoves[move].effect;
+    bool32 partnerChoosingSetup = FALSE;
+
+    if (!IsValidDoubleBattle(battlerAtk) || !IsBattlerAlive(partner) || score <= 0)
+        return score;
+
+    if (AI_DATA->partnerMove != MOVE_NONE)
+    {
+        u16 partnerEffect = gBattleMoves[AI_DATA->partnerMove].effect;
+        partnerChoosingSetup = IsStatRaisingEffect(partnerEffect)
+                            || partnerEffect == EFFECT_BELLY_DRUM
+                            || partnerEffect == EFFECT_SUBSTITUTE;
+    }
+
+    if (effect == EFFECT_FOLLOW_ME && (partnerChoosingSetup || PartnerHasSetupMove(partner)))
+    {
+        // CheckBadMove applies a generic -10 when the partner selected a
+        // status move. A real setup choice is the exception this authored
+        // support flag exists to recognize, so slightly outweigh that gate.
+        score += partnerChoosingSetup ? 12 : 6;
+        if (score > 127)
+            score = 127;
+    }
+
+    return score;
+}
+
+// Trainer profile: make an authored Perish Trap team actually execute its plan.
+static s16 AI_PerishTrap(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
+{
+    u16 effect = gBattleMoves[move].effect;
+    u8 partner = BATTLE_PARTNER(battlerAtk);
+    bool32 targetPerishing = gStatuses3[battlerDef] & STATUS3_PERISH_SONG;
+    bool32 partnerStartingPerish = AI_DATA->partnerMove != MOVE_NONE
+                                && gBattleMoves[AI_DATA->partnerMove].effect == EFFECT_PERISH_SONG;
+
+    if (!IsValidDoubleBattle(battlerAtk))
+        return score;
+
+    if (effect == EFFECT_PERISH_SONG)
+    {
+        if ((!IsBattlerAlive(FOE(battlerAtk)) || gStatuses3[FOE(battlerAtk)] & STATUS3_PERISH_SONG)
+         && (!IsBattlerAlive(BATTLE_PARTNER(FOE(battlerAtk))) || gStatuses3[BATTLE_PARTNER(FOE(battlerAtk))] & STATUS3_PERISH_SONG))
+            score -= 12;
+        else
+            score += 6;
+        if (IsBattlerAlive(partner) && HasTrappingMoveEffect(partner))
+            score += 5;
+    }
+    else if (IsTrappingMoveEffect(effect) && (targetPerishing || partnerStartingPerish))
+    {
+        score += 10;
+    }
+    else if ((effect == EFFECT_PROTECT || IsHealingMoveEffect(effect))
+          && gStatuses3[battlerAtk] & STATUS3_PERISH_SONG
+          && gDisableStructs[battlerAtk].perishSongTimer > 1)
+    {
+        score += 4;
+    }
+
+    return score;
+}
+
+// Trainer profile: strongly prefer the ally activations the authored lead was
+// built around instead of falling back to a merely safe neutral attack.
+static s16 AI_ComboSetup(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
+{
+    u16 effect = gBattleMoves[move].effect;
+    u16 moveType = gBattleMoves[move].type;
+    u8 partnerAbility = AI_DATA->atkPartnerAbility;
+
+    SetTypeBeforeUsingMove(move, battlerAtk);
+    GET_MOVE_TYPE(move, moveType);
+
+    if (!IsValidDoubleBattle(battlerAtk))
+        return score;
+
+    if (AI_DATA->partnerMove != MOVE_NONE && gBattleMoves[AI_DATA->partnerMove].effect == EFFECT_HELPING_HAND)
+        score += IS_MOVE_STATUS(move) ? -12 : 7;
+
+    if (!IsTargetingPartner(battlerAtk, battlerDef))
+        return score;
+
+    if (effect == EFFECT_BEAT_UP && partnerAbility == ABILITY_JUSTIFIED)
+        score += 15;
+    else if (effect == EFFECT_ALWAYS_CRIT && partnerAbility == ABILITY_ANGER_POINT)
+        score += 15;
+    else if (move == MOVE_SURF && (partnerAbility == ABILITY_STEAM_ENGINE
+                               || partnerAbility == ABILITY_WATER_COMPACTION
+                               || partnerAbility == ABILITY_WATER_ABSORB
+                               || partnerAbility == ABILITY_DRY_SKIN))
+        score += 12;
+    else if (moveType == TYPE_ELECTRIC && (partnerAbility == ABILITY_MOTOR_DRIVE
+                                        || partnerAbility == ABILITY_VOLT_ABSORB
+                                        || partnerAbility == ABILITY_LIGHTNING_ROD))
+        score += 10;
+    else if (moveType == TYPE_FIRE && partnerAbility == ABILITY_FLASH_FIRE)
+        score += 10;
+    else if (IsStatLoweringEffect(effect) && partnerAbility == ABILITY_CONTRARY)
+        score += 10;
+    else if ((effect == EFFECT_SKILL_SWAP || effect == EFFECT_GASTRO_ACID
+           || effect == EFFECT_WORRY_SEED || effect == EFFECT_SIMPLE_BEAM)
+          && GetAbilityRating(partnerAbility) < 0)
+        score += 12;
+
+    return score;
+}
+
+static s16 AI_SpeedControl(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
+{
+    u16 effect = gBattleMoves[move].effect;
+    bool32 sideIsSlower = GetBattlerSideSpeedAverage(battlerAtk) < GetBattlerSideSpeedAverage(battlerDef);
+
+    if (effect == EFFECT_TRICK_ROOM && sideIsSlower && !(gFieldStatuses & STATUS_FIELD_TRICK_ROOM))
+        score += 8;
+    else if (effect == EFFECT_TAILWIND && sideIsSlower && gSideTimers[GetBattlerSide(battlerAtk)].tailwindTimer == 0)
+        score += 6;
+    else if ((move == MOVE_ICY_WIND || move == MOVE_ELECTROWEB) && IsValidDoubleBattle(battlerAtk))
+        score += 4;
+    else if (effect == EFFECT_PARALYZE && sideIsSlower)
+        score += 3;
+    else if ((effect == EFFECT_QUASH || effect == EFFECT_AFTER_YOU) && IsValidDoubleBattle(battlerAtk))
+        score += 3;
+
+    return score;
+}
+
+static s16 AI_FieldControl(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
+{
+    u16 effect = gBattleMoves[move].effect;
+    u8 partner = BATTLE_PARTNER(battlerAtk);
+    u8 side = GetBattlerSide(battlerAtk);
+
+    switch (effect)
+    {
+    case EFFECT_RAIN_DANCE:
+        if (!(gBattleWeather & WEATHER_RAIN_ANY) && IsBattlerAlive(partner)
+          && ShouldSetRain(partner, AI_DATA->atkPartnerAbility, AI_DATA->atkPartnerHoldEffect))
+            score += 7;
+        break;
+    case EFFECT_SUNNY_DAY:
+        if (!(gBattleWeather & WEATHER_SUN_ANY) && IsBattlerAlive(partner)
+          && ShouldSetSun(partner, AI_DATA->atkPartnerAbility, AI_DATA->atkPartnerHoldEffect))
+            score += 7;
+        break;
+    case EFFECT_SANDSTORM:
+        if (!(gBattleWeather & WEATHER_SANDSTORM_ANY) && IsBattlerAlive(partner)
+          && ShouldSetSandstorm(partner, AI_DATA->atkPartnerAbility, AI_DATA->atkPartnerHoldEffect))
+            score += 7;
+        break;
+    case EFFECT_HAIL:
+        if (!(gBattleWeather & WEATHER_HAIL_ANY) && IsBattlerAlive(partner)
+          && ShouldSetHail(partner, AI_DATA->atkPartnerAbility, AI_DATA->atkPartnerHoldEffect))
+            score += 7;
+        break;
+    case EFFECT_ELECTRIC_TERRAIN:
+        if (!(gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN))
+            score += 6;
+        break;
+    case EFFECT_GRASSY_TERRAIN:
+        if (!(gFieldStatuses & STATUS_FIELD_GRASSY_TERRAIN))
+            score += 6;
+        break;
+    case EFFECT_PSYCHIC_TERRAIN:
+        if (!(gFieldStatuses & STATUS_FIELD_PSYCHIC_TERRAIN))
+            score += 6;
+        break;
+    case EFFECT_MISTY_TERRAIN:
+        if (!(gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN))
+            score += 6;
+        break;
+    case EFFECT_REFLECT:
+        if (!(gSideStatuses[side] & SIDE_STATUS_REFLECT))
+            score += 5;
+        break;
+    case EFFECT_LIGHT_SCREEN:
+        if (!(gSideStatuses[side] & SIDE_STATUS_LIGHTSCREEN))
+            score += 5;
+        break;
+    case EFFECT_AURORA_VEIL:
+        if (!(gSideStatuses[side] & SIDE_STATUS_AURORA_VEIL))
+            score += 7;
+        break;
+    }
+
     return score;
 }
 

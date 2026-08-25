@@ -6787,7 +6787,8 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
         case F_TRAINER_PARTY_CUSTOM_MOVESET | F_TRAINER_PARTY_HELD_ITEM:
             {
                 const struct TrainerMonItemCustomMoves *party = gTrainers[trainerId].party.ItemCustomMoves;
-                lastMonLevel = GetHighestLevelInPlayerParty();
+                // Full competitive trainer parties store cap-relative levels.
+                lastMonLevel = GetLevelCap();
 
                 if (lastMonLevel + party[gTrainers[trainerId].partySize - 1].lvl < 1)
                 {

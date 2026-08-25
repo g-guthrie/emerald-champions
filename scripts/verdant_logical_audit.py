@@ -47,7 +47,7 @@ for trainer_id, rule in manifest["formats"].items():
     body = doubles.party_match(parties_text, doubles.party_name(block)).group(2)
     if rule["format"] == "double":
         double_bodies.append(body)
-        double_sizes.append(len(doubles.species_in_party(body)))
+        double_sizes.append((len(doubles.species_in_party(body)), bool(rule.get("multi_partner"))))
 
 all_map_scripts = "\n".join(path.read_text() for path in (ROOT / "data" / "maps").rglob("scripts.inc"))
 all_script_includes = "\n".join(path.read_text() for path in (ROOT / "data" / "scripts").rglob("*.inc"))
@@ -154,12 +154,12 @@ questions = [
     ("Does the Day Care still create eggs through normal compatibility rules?", all(token in read("src/daycare.c") for token in ("GetDaycareCompatibilityScore", "EggGroupsOverlap", "TriggerPendingDaycareEgg", "GiveEggFromDaycare"))),
     ("Does breeding retain incentives beyond move access?", all(token in read("src/daycare.c") for token in ("ITEM_EVERSTONE", "ITEM_DESTINY_KNOT", "InheritIVs", "TryInheritAbility"))),
     ("Are IV and EV services bounded, priced by real gain, and stat-safe?", all(token in read("src/field_specials.c") for token in ("MAX_PER_STAT_EVS", "MAX_TOTAL_EVS", "actualIncrement * 100", "CalculateMonStats"))),
-    ("Is every real trainer record represented in the authored format manifest?", len(manifest["formats"]) == 848 and set(manifest["formats"]) == set(trainer_blocks) - {"TRAINER_NONE"}),
-    ("Is the campaign genuinely mostly doubles rather than nominally so?", len(double_bodies) == 632 and len(double_bodies) > len(manifest["formats"]) * 0.7),
-    ("Can every doubles battle safely deploy an even four- or six-mon wave?", all(size in (4, 6) for size in double_sizes)),
-    ("Do intentional singles remain as pacing contrast?", manifest["formats"]["TRAINER_NORMAN_1"]["format"] == "single" and manifest["formats"]["TRAINER_DRAKE"]["format"] == "single" and len(manifest["formats"]) - len(double_bodies) == 216),
+    ("Is every real trainer record represented in the authored format manifest?", len(manifest["formats"]) == 854 and set(manifest["formats"]) == set(trainer_blocks) - {"TRAINER_NONE"}),
+    ("Is the campaign genuinely mostly doubles while low-stakes routes get relief?", len(double_bodies) == 574 and len(double_bodies) > len(manifest["formats"]) * 0.65),
+    ("Can every doubles battle safely deploy its authored four/six-mon wave or special three-mon partner party?", all(size == 3 if is_partner else size in (4, 6) for size, is_partner in double_sizes)),
+    ("Do intentional singles remain as pacing contrast?", manifest["formats"]["TRAINER_NORMAN_1"]["format"] == "single" and manifest["formats"]["TRAINER_DRAKE"]["format"] == "single" and len(manifest["formats"]) - len(double_bodies) == 280),
     ("Do marquee bosses exceed the cap at the ace and carry complete teams?", all(max(doubles.BOSS_LEVEL_OFFSETS[boss["battle"]]) >= 1 and len(boss["team"]) == 6 and all(len(mon["moves"]) == 4 and mon["item"] != "ITEM_NONE" for mon in boss["team"]) for boss in manifest["bosses"])),
-    ("Do doubles teams use protection and active speed control?", sum("MOVE_PROTECT" in body for body in double_bodies) >= 300 and sum("MOVE_TAILWIND" in body or "MOVE_TRICK_ROOM" in body for body in double_bodies) >= 90),
+    ("Do doubles teams use protection and active speed control?", sum("MOVE_PROTECT" in body for body in double_bodies) >= 275 and sum("MOVE_TAILWIND" in body or "MOVE_TRICK_ROOM" in body for body in double_bodies) >= 70),
     ("Do doubles teams create real spread-pressure decisions?", sum(any(move in body for move in ("MOVE_ROCK_SLIDE", "MOVE_EARTHQUAKE", "MOVE_HEAT_WAVE", "MOVE_DAZZLING_GLEAM", "MOVE_MUDDY_WATER", "MOVE_BLIZZARD")) for body in double_bodies) >= 300),
     ("Does trainer AI understand foes, partners, and tactical switching?", all("AI_FLAG_CHECK_FOE" in trainer_blocks[trainer_id].group(0) for trainer_id in manifest["formats"]) and "AI_FLAG_SMART_SWITCHING" in trainers_text and "AI_FLAG_HELP_PARTNER" in trainers_text),
     ("Are the repaired AI decisions guarded against prior deterministic defects?", all(token in read("src/battle_ai_switch_items.c") + read("src/battle_ai_main.c") for token in ("GetBestMonForSwitch", "AI_CalcPartyMonHazardDamage", "gLastMoves[battlerDef] != 0xFFFF")) and "Random() % 3 < 2" not in read("src/battle_ai_switch_items.c")),

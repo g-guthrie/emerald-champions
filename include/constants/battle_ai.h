@@ -56,6 +56,10 @@
 #define AI_FLAG_SCREENER                (1 << 14)  // AI prefers screening effects like reflect, mist, etc. TODO unfinished
 #define AI_FLAG_SMART_SWITCHING         (1 << 15)  // AI includes a lot more switching checks
 #define AI_FLAG_CHECK_FOE               (1 << 16)  // AI is aware of abilities and moves that a Pokemon has
+#define AI_FLAG_PERISH_TRAP             (1 << 17)  // Coordinate Perish Song, trapping, Protect, and exits
+#define AI_FLAG_COMBO_SETUP             (1 << 18)  // Commit to intentional ally-target and activation combos
+#define AI_FLAG_SPEED_CONTROL           (1 << 19)  // Prioritize the team's authored Tailwind/Trick Room mode
+#define AI_FLAG_FIELD_CONTROL           (1 << 20)  // Prioritize authored weather, terrain, and screen modes
 
 // 'other' ai logic flags
 #define AI_FLAG_ROAMING                 (1 << 29)

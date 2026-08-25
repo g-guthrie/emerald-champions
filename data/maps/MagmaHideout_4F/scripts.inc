@@ -194,12 +194,13 @@ MagmaHideout_4F_Text_Grunt13PostBattle: @ 823A8C6
 
 MagmaHideout_4F_Text_TabithaIntro: @ 823A8E1
 	.string "Hehehe!\n"
-	.string "You made it this far, so I'll tell you!\p"
+	.string "You made it this far, so listen!\p"
 	.string "That's right!\n"
-	.string "Up ahead, Groudon is sleeping!\p"
-	.string "Maxie went to Groudon just seconds\n"
-	.string "ago!\p"
-	.string "It's going to awaken real soon!\n"
+	.string "Groudon is sleeping up ahead!\p"
+	.string "Maxie got there just seconds ago!\p"
+	.string "One splash and one spark, then my\n"
+	.string "formation erupts!\p"
+	.string "Groudon will awaken very soon!\n"
 	.string "Hehe! Hehehe!$"
 
 MagmaHideout_4F_Text_TabithaDefeat: @ 823A994

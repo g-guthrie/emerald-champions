@@ -500,7 +500,7 @@ const struct TrainerMonSpread gSets[] = {
 			30,		// Special Attack
 			30		// Special Defense
 		},
-		.nature = NATURE_QUIET
+		.nature = NATURE_TIMID
 	},
 	
 	// Specialised spreads

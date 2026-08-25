@@ -49,7 +49,9 @@ Route110_TrickHousePuzzle4_Text_CoraPostBattle: @ 826C9A2
 
 Route110_TrickHousePuzzle4_Text_YujiIntro: @ 826C9E4
 	.string "Heh! Boulders like this, I can brush\n"
-	.string "aside with one finger!$"
+	.string "aside with one finger!\p"
+	.string "One partner strikes its ally.\n"
+	.string "That unlocks the real power!$"
 
 Route110_TrickHousePuzzle4_Text_YujiDefeat: @ 826CA20
 	.string "I can push boulders, but I can't solve\n"
@@ -68,4 +70,3 @@ Route110_TrickHousePuzzle4_Text_PaulaDefeat: @ 826CACB
 
 Route110_TrickHousePuzzle4_Text_PaulaPostBattle: @ 826CAD1
 	.string "Has anyone made it to the end?$"
-

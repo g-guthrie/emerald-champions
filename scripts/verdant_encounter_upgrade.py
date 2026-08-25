@@ -13,8 +13,8 @@ ROOT = Path(__file__).resolve().parents[1]
 ENCOUNTERS = ROOT / "src/data/wild_encounters.json"
 SPECIES_CONSTANTS = ROOT / "include/constants/species.h"
 
-# Four-percent land slots: accessible enough to discover naturally, rare enough
-# to remain exciting. Existing route identities and common encounters stay put.
+# Eight-percent showcase slots: common enough to support team building without
+# hunting, while the rarest land slots are never below four percent.
 LAND_UPGRADES = {
     "MAP_ROUTE101": {8: "SPECIES_DREEPY", 9: "SPECIES_LARVESTA"},
     "MAP_ROUTE102": {8: "SPECIES_HATENNA", 9: "SPECIES_INDEEDEE"},
@@ -149,6 +149,10 @@ def check() -> None:
     by_map = {encounter["map"]: encounter for encounter in all_encounters(data)}
     defined = set(re.findall(r"^#define\s+(SPECIES_[A-Z0-9_]+)\b", SPECIES_CONSTANTS.read_text(), re.M))
     problems = []
+    expected_land_rates = [13, 13, 10, 10, 10, 10, 5, 5, 8, 8, 4, 4]
+    land_field = next(field for field in data["wild_encounter_groups"][0]["fields"] if field["type"] == "land_mons")
+    if land_field["encounter_rates"] != expected_land_rates:
+        problems.append(f"land encounter rates drifted: {land_field['encounter_rates']}")
     changes = expected_changes(data)
     for map_id, method, index, species in changes:
         actual = by_map[map_id][method]["mons"][index]["species"]

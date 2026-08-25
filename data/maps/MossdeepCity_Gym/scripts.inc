@@ -554,8 +554,10 @@ MossdeepCity_Gym_Text_KathleenPostBattle: @ 8221545
 	.string "Get away from me quickly!$"
 
 MossdeepCity_Gym_Text_CliffordIntro: @ 822157C
-	.string "I may be past my prime, but I suggest\n"
-	.string "you not patronize me.$"
+	.string "I may be older, but don't you dare\n"
+	.string "patronize me.\p"
+	.string "The floor carries our current.\n"
+	.string "Keep pace with both of us!$"
 
 MossdeepCity_Gym_Text_CliffordDefeat: @ 82215B8
 	.string "Ah, you overflow with the power\n"
@@ -580,7 +582,9 @@ MossdeepCity_Gym_Text_MaceyPostBattle: @ 8221680
 
 MossdeepCity_Gym_Text_NicholasIntro: @ 82216EE
 	.string "Wroooar! Have a taste of my super\n"
-	.string "Pokémon hard-battling power!$"
+	.string "Pokémon hard-battling power!\p"
+	.string "One partner bends the room.\n"
+	.string "The other makes sure it stays bent!$"
 
 MossdeepCity_Gym_Text_NicholasDefeat: @ 822172D
 	.string "Oh!\n"

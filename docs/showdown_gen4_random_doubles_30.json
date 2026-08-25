@@ -1,0 +1,5378 @@
+{
+  "source": "https://github.com/smogon/pokemon-showdown",
+  "showdown_commit": "b5fc8c7032bad279458252acc806318e17a850ad",
+  "format": "gen4randomdoublesbattle",
+  "sample_count": 30,
+  "samples": [
+    {
+      "seed": "101,13399,24870,19368",
+      "team": [
+        {
+          "name": "Skarmory",
+          "moves": [
+            "stealthrock",
+            "bravebird",
+            "roost",
+            "spikes"
+          ],
+          "ability": "Keen Eye",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 74,
+          "shiny": false
+        },
+        {
+          "name": "Meganium",
+          "moves": [
+            "grasswhistle",
+            "synthesis",
+            "dragontail",
+            "gigadrain"
+          ],
+          "ability": "Overgrow",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 86,
+          "shiny": false
+        },
+        {
+          "name": "Azumarill",
+          "moves": [
+            "icepunch",
+            "waterfall",
+            "superpower",
+            "aquajet"
+          ],
+          "ability": "Huge Power",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Choice Band",
+          "level": 78,
+          "shiny": false
+        },
+        {
+          "name": "Weavile",
+          "moves": [
+            "swordsdance",
+            "lowkick",
+            "nightslash",
+            "icepunch"
+          ],
+          "ability": "Pressure",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Life Orb",
+          "level": 74,
+          "shiny": false
+        },
+        {
+          "name": "Snorunt",
+          "moves": [
+            "crunch",
+            "icebeam",
+            "hiddenpowerground",
+            "iceshard"
+          ],
+          "ability": "Ice Body",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 30,
+            "spd": 30,
+            "spe": 31
+          },
+          "item": "Expert Belt",
+          "level": 95,
+          "shiny": false
+        },
+        {
+          "name": "Hippowdon",
+          "moves": [
+            "roar",
+            "icefang",
+            "stoneedge",
+            "earthquake"
+          ],
+          "ability": "Sand Stream",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 74,
+          "shiny": false
+        }
+      ]
+    },
+    {
+      "seed": "102,21318,26413,50705",
+      "team": [
+        {
+          "name": "Sceptile",
+          "moves": [
+            "synthesis",
+            "hiddenpowerice",
+            "substitute",
+            "leafstorm"
+          ],
+          "ability": "Overgrow",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 30,
+            "def": 30,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 78,
+          "shiny": false
+        },
+        {
+          "name": "Illumise",
+          "moves": [
+            "wish",
+            "thunderbolt",
+            "encore",
+            "bugbuzz"
+          ],
+          "ability": "Tinted Lens",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 86,
+          "shiny": false
+        },
+        {
+          "name": "Teddiursa",
+          "moves": [
+            "firepunch",
+            "crunch",
+            "facade",
+            "closecombat"
+          ],
+          "ability": "Quick Feet",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Toxic Orb",
+          "level": 95,
+          "shiny": false
+        },
+        {
+          "name": "Weezing",
+          "moves": [
+            "clearsmog",
+            "fireblast",
+            "painsplit",
+            "willowisp"
+          ],
+          "ability": "Levitate",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Black Sludge",
+          "level": 78,
+          "shiny": false
+        },
+        {
+          "name": "Azelf",
+          "moves": [
+            "psychic",
+            "fireblast",
+            "thunderbolt",
+            "explosion"
+          ],
+          "ability": "Levitate",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Expert Belt",
+          "level": 74,
+          "shiny": false
+        },
+        {
+          "name": "Empoleon",
+          "moves": [
+            "scald",
+            "hiddenpowerfire",
+            "roar",
+            "icebeam"
+          ],
+          "ability": "Torrent",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 30,
+            "def": 31,
+            "spa": 30,
+            "spd": 31,
+            "spe": 30
+          },
+          "item": "Leftovers",
+          "level": 74,
+          "shiny": false
+        }
+      ]
+    },
+    {
+      "seed": "103,29237,27956,16507",
+      "team": [
+        {
+          "name": "Remoraid",
+          "moves": [
+            "hiddenpowerground",
+            "seedbomb",
+            "waterspout",
+            "fireblast"
+          ],
+          "ability": "Hustle",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 30,
+            "spd": 30,
+            "spe": 31
+          },
+          "item": "Choice Scarf",
+          "level": 95,
+          "shiny": false
+        },
+        {
+          "name": "Snover",
+          "moves": [
+            "substitute",
+            "gigadrain",
+            "blizzard",
+            "iceshard"
+          ],
+          "ability": "Snow Warning",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 95,
+          "shiny": false
+        },
+        {
+          "name": "Mew",
+          "moves": [
+            "superpower",
+            "earthquake",
+            "toxic",
+            "zenheadbutt"
+          ],
+          "ability": "Synchronize",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 70,
+          "shiny": false
+        },
+        {
+          "name": "Flareon",
+          "moves": [
+            "facade",
+            "sleeptalk",
+            "rest",
+            "flamecharge"
+          ],
+          "ability": "Flash Fire",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Toxic Orb",
+          "level": 86,
+          "shiny": false
+        },
+        {
+          "name": "Machamp",
+          "moves": [
+            "dynamicpunch",
+            "icepunch",
+            "bulletpunch",
+            "bulkup"
+          ],
+          "ability": "No Guard",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Life Orb",
+          "level": 74,
+          "shiny": false
+        },
+        {
+          "name": "Castform",
+          "moves": [
+            "icebeam",
+            "thunder",
+            "hydropump",
+            "solarbeam"
+          ],
+          "ability": "Forecast",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Choice Specs",
+          "level": 86,
+          "shiny": false
+        }
+      ]
+    },
+    {
+      "seed": "104,37156,29499,47844",
+      "team": [
+        {
+          "name": "Mew",
+          "moves": [
+            "rockpolish",
+            "roost",
+            "earthquake",
+            "willowisp"
+          ],
+          "ability": "Synchronize",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 70,
+          "shiny": false
+        },
+        {
+          "name": "Cloyster",
+          "moves": [
+            "iceshard",
+            "toxicspikes",
+            "spikes",
+            "rockblast"
+          ],
+          "ability": "Skill Link",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 78,
+          "shiny": false
+        },
+        {
+          "name": "Corsola",
+          "moves": [
+            "powergem",
+            "stealthrock",
+            "scald",
+            "toxic"
+          ],
+          "ability": "Natural Cure",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 86,
+          "shiny": false
+        },
+        {
+          "name": "Lileep",
+          "moves": [
+            "hiddenpowerfire",
+            "stealthrock",
+            "gigadrain",
+            "stockpile"
+          ],
+          "ability": "Suction Cups",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 30,
+            "def": 31,
+            "spa": 30,
+            "spd": 31,
+            "spe": 30
+          },
+          "item": "Leftovers",
+          "level": 95,
+          "shiny": false
+        },
+        {
+          "name": "Hitmonlee",
+          "moves": [
+            "machpunch",
+            "closecombat",
+            "stoneedge",
+            "blazekick"
+          ],
+          "ability": "Limber",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Choice Band",
+          "level": 78,
+          "shiny": false
+        },
+        {
+          "name": "Dragonite",
+          "moves": [
+            "dragondance",
+            "dragonclaw",
+            "earthquake",
+            "firepunch"
+          ],
+          "ability": "Inner Focus",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 74,
+          "shiny": false
+        }
+      ]
+    },
+    {
+      "seed": "105,45075,31042,13646",
+      "team": [
+        {
+          "name": "Kirlia",
+          "moves": [
+            "destinybond",
+            "willowisp",
+            "trickroom",
+            "hypnosis"
+          ],
+          "ability": "Synchronize",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 0
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 0
+          },
+          "item": "Focus Sash",
+          "level": 95,
+          "shiny": false
+        },
+        {
+          "name": "Beautifly",
+          "moves": [
+            "quiverdance",
+            "bugbuzz",
+            "substitute",
+            "hiddenpowerfighting"
+          ],
+          "ability": "Swarm",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 30,
+            "spa": 30,
+            "spd": 30,
+            "spe": 30
+          },
+          "item": "Leftovers",
+          "level": 86,
+          "shiny": false
+        },
+        {
+          "name": "Giratina-Origin",
+          "moves": [
+            "shadowball",
+            "substitute",
+            "dragonpulse",
+            "calmmind"
+          ],
+          "ability": "Levitate",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Griseous Orb",
+          "level": 70,
+          "shiny": false
+        },
+        {
+          "name": "Lugia",
+          "moves": [
+            "substitute",
+            "icebeam",
+            "roost",
+            "dragontail"
+          ],
+          "ability": "Pressure",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 70,
+          "shiny": false
+        },
+        {
+          "name": "Smeargle",
+          "moves": [
+            "spikes",
+            "stealthrock",
+            "spore",
+            "destinybond"
+          ],
+          "ability": "Own Tempo",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 74,
+          "shiny": false
+        },
+        {
+          "name": "Scizor",
+          "moves": [
+            "swordsdance",
+            "superpower",
+            "roost",
+            "bulletpunch"
+          ],
+          "ability": "Technician",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 74,
+          "shiny": false
+        }
+      ]
+    },
+    {
+      "seed": "106,52994,32585,44983",
+      "team": [
+        {
+          "name": "Bronzong",
+          "moves": [
+            "hypnosis",
+            "lightscreen",
+            "stealthrock",
+            "psychic"
+          ],
+          "ability": "Levitate",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Light Clay",
+          "level": 74,
+          "shiny": false
+        },
+        {
+          "name": "Marowak",
+          "moves": [
+            "earthquake",
+            "doubleedge",
+            "substitute",
+            "firepunch"
+          ],
+          "ability": "Rock Head",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Thick Club",
+          "level": 86,
+          "shiny": false
+        },
+        {
+          "name": "Gastrodon",
+          "moves": [
+            "earthpower",
+            "clearsmog",
+            "recover",
+            "scald"
+          ],
+          "ability": "Sticky Hold",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 86,
+          "shiny": false
+        },
+        {
+          "name": "Deoxys-Speed",
+          "moves": [
+            "spikes",
+            "lightscreen",
+            "icebeam",
+            "taunt"
+          ],
+          "ability": "Pressure",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Light Clay",
+          "level": 74,
+          "shiny": false
+        },
+        {
+          "name": "Feraligatr",
+          "moves": [
+            "superpower",
+            "crunch",
+            "earthquake",
+            "aquajet"
+          ],
+          "ability": "Torrent",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Choice Band",
+          "level": 78,
+          "shiny": false
+        },
+        {
+          "name": "Charizard",
+          "moves": [
+            "flamethrower",
+            "airslash",
+            "hiddenpowergrass",
+            "dragonpulse"
+          ],
+          "ability": "Blaze",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 30,
+            "def": 31,
+            "spa": 30,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Choice Specs",
+          "level": 86,
+          "shiny": false
+        }
+      ]
+    },
+    {
+      "seed": "107,60913,34128,10785",
+      "team": [
+        {
+          "name": "Nidorina",
+          "moves": [
+            "toxicspikes",
+            "crunch",
+            "honeclaws",
+            "doublekick"
+          ],
+          "ability": "Poison Point",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Focus Sash",
+          "level": 90,
+          "shiny": false
+        },
+        {
+          "name": "Scizor",
+          "moves": [
+            "superpower",
+            "bulletpunch",
+            "swordsdance",
+            "roost"
+          ],
+          "ability": "Technician",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 74,
+          "shiny": false
+        },
+        {
+          "name": "Fearow",
+          "moves": [
+            "return",
+            "drillpeck",
+            "pursuit",
+            "quickattack"
+          ],
+          "ability": "Keen Eye",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Choice Band",
+          "level": 86,
+          "shiny": false
+        },
+        {
+          "name": "Darkrai",
+          "moves": [
+            "substitute",
+            "darkvoid",
+            "focusblast",
+            "darkpulse"
+          ],
+          "ability": "Bad Dreams",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 70,
+          "shiny": false
+        },
+        {
+          "name": "Salamence",
+          "moves": [
+            "dracometeor",
+            "earthquake",
+            "roost",
+            "outrage"
+          ],
+          "ability": "Intimidate",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Lum Berry",
+          "level": 70,
+          "shiny": false
+        },
+        {
+          "name": "Shiftry",
+          "moves": [
+            "naturepower",
+            "suckerpunch",
+            "gigadrain",
+            "seedbomb"
+          ],
+          "ability": "Early Bird",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Life Orb",
+          "level": 86,
+          "shiny": false
+        }
+      ]
+    },
+    {
+      "seed": "108,3297,35671,42122",
+      "team": [
+        {
+          "name": "Sceptile",
+          "moves": [
+            "synthesis",
+            "hiddenpowerice",
+            "leafstorm",
+            "leechseed"
+          ],
+          "ability": "Overgrow",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 30,
+            "def": 30,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Focus Sash",
+          "level": 78,
+          "shiny": false
+        },
+        {
+          "name": "Breloom",
+          "moves": [
+            "spore",
+            "thunderpunch",
+            "lowsweep",
+            "swordsdance"
+          ],
+          "ability": "Poison Heal",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Toxic Orb",
+          "level": 74,
+          "shiny": false
+        },
+        {
+          "name": "Hippopotas",
+          "moves": [
+            "toxic",
+            "roar",
+            "slackoff",
+            "protect"
+          ],
+          "ability": "Sand Stream",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 95,
+          "shiny": false
+        },
+        {
+          "name": "Hariyama",
+          "moves": [
+            "closecombat",
+            "bulkup",
+            "bulletpunch",
+            "icepunch"
+          ],
+          "ability": "Thick Fat",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 78,
+          "shiny": false
+        },
+        {
+          "name": "Glalie",
+          "moves": [
+            "spikes",
+            "crunch",
+            "icebeam",
+            "explosion"
+          ],
+          "ability": "Ice Body",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Life Orb",
+          "level": 86,
+          "shiny": false
+        },
+        {
+          "name": "Rotom-Wash",
+          "moves": [
+            "trick",
+            "willowisp",
+            "hydropump",
+            "voltswitch"
+          ],
+          "ability": "Levitate",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Choice Scarf",
+          "level": 74,
+          "shiny": false
+        }
+      ]
+    },
+    {
+      "seed": "109,11216,37214,7924",
+      "team": [
+        {
+          "name": "Piloswine",
+          "moves": [
+            "earthquake",
+            "endeavor",
+            "iciclecrash",
+            "stealthrock"
+          ],
+          "ability": "Snow Cloak",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Focus Sash",
+          "level": 86,
+          "shiny": false
+        },
+        {
+          "name": "Venusaur",
+          "moves": [
+            "earthquake",
+            "powerwhip",
+            "growth",
+            "synthesis"
+          ],
+          "ability": "Overgrow",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Black Sludge",
+          "level": 78,
+          "shiny": false
+        },
+        {
+          "name": "Metapod",
+          "moves": [
+            "irondefense",
+            "tackle",
+            "bugbite",
+            "electroweb"
+          ],
+          "ability": "Shed Skin",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Life Orb",
+          "level": 99,
+          "shiny": false
+        },
+        {
+          "name": "Slowbro",
+          "moves": [
+            "slackoff",
+            "fireblast",
+            "trickroom",
+            "scald"
+          ],
+          "ability": "Own Tempo",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 0
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 0
+          },
+          "item": "Leftovers",
+          "level": 78,
+          "shiny": false
+        },
+        {
+          "name": "Gallade",
+          "moves": [
+            "closecombat",
+            "icepunch",
+            "bulkup",
+            "psychocut"
+          ],
+          "ability": "Steadfast",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Life Orb",
+          "level": 76,
+          "shiny": false
+        },
+        {
+          "name": "Charizard",
+          "moves": [
+            "airslash",
+            "roost",
+            "fireblast",
+            "hiddenpowergrass"
+          ],
+          "ability": "Blaze",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 30,
+            "def": 31,
+            "spa": 30,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 86,
+          "shiny": false
+        }
+      ]
+    },
+    {
+      "seed": "110,19135,38757,39261",
+      "team": [
+        {
+          "name": "Mantine",
+          "moves": [
+            "surf",
+            "raindance",
+            "rest",
+            "toxic"
+          ],
+          "ability": "Swift Swim",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Chesto Berry",
+          "level": 86,
+          "shiny": false
+        },
+        {
+          "name": "Charizard",
+          "moves": [
+            "dragonpulse",
+            "substitute",
+            "airslash",
+            "hiddenpowergrass"
+          ],
+          "ability": "Blaze",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 30,
+            "def": 31,
+            "spa": 30,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 86,
+          "shiny": false
+        },
+        {
+          "name": "Mesprit",
+          "moves": [
+            "calmmind",
+            "icebeam",
+            "psychic",
+            "trick"
+          ],
+          "ability": "Levitate",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Choice Scarf",
+          "level": 78,
+          "shiny": false
+        },
+        {
+          "name": "Abomasnow",
+          "moves": [
+            "focusblast",
+            "substitute",
+            "gigadrain",
+            "blizzard"
+          ],
+          "ability": "Snow Warning",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 76,
+          "shiny": false
+        },
+        {
+          "name": "Swampert",
+          "moves": [
+            "roar",
+            "earthquake",
+            "superpower",
+            "curse"
+          ],
+          "ability": "Torrent",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 74,
+          "shiny": false
+        },
+        {
+          "name": "Mamoswine",
+          "moves": [
+            "superpower",
+            "stealthrock",
+            "iceshard",
+            "iciclecrash"
+          ],
+          "ability": "Snow Cloak",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Life Orb",
+          "level": 74,
+          "shiny": false
+        }
+      ]
+    },
+    {
+      "seed": "111,27054,40300,5063",
+      "team": [
+        {
+          "name": "Muk",
+          "moves": [
+            "brickbreak",
+            "rest",
+            "payback",
+            "sleeptalk"
+          ],
+          "ability": "Sticky Hold",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Black Sludge",
+          "level": 86,
+          "shiny": false
+        },
+        {
+          "name": "Octillery",
+          "moves": [
+            "fireblast",
+            "rockblast",
+            "thunderwave",
+            "hydropump"
+          ],
+          "ability": "Suction Cups",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Life Orb",
+          "level": 86,
+          "shiny": false
+        },
+        {
+          "name": "Claydol",
+          "moves": [
+            "lightscreen",
+            "reflect",
+            "icebeam",
+            "psychic"
+          ],
+          "ability": "Levitate",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Light Clay",
+          "level": 78,
+          "shiny": false
+        },
+        {
+          "name": "Glaceon",
+          "moves": [
+            "wish",
+            "shadowball",
+            "hiddenpowerground",
+            "protect"
+          ],
+          "ability": "Snow Cloak",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 30,
+            "spd": 30,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 86,
+          "shiny": false
+        },
+        {
+          "name": "Jolteon",
+          "moves": [
+            "hiddenpowerice",
+            "batonpass",
+            "chargebeam",
+            "thunderbolt"
+          ],
+          "ability": "Volt Absorb",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 30,
+            "def": 30,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Life Orb",
+          "level": 74,
+          "shiny": false
+        },
+        {
+          "name": "Zangoose",
+          "moves": [
+            "quickattack",
+            "swordsdance",
+            "facade",
+            "nightslash"
+          ],
+          "ability": "Immunity",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Toxic Orb",
+          "level": 86,
+          "shiny": false
+        }
+      ]
+    },
+    {
+      "seed": "112,34973,41843,36400",
+      "team": [
+        {
+          "name": "Azumarill",
+          "moves": [
+            "waterfall",
+            "superpower",
+            "return",
+            "aquajet"
+          ],
+          "ability": "Huge Power",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Choice Band",
+          "level": 78,
+          "shiny": false
+        },
+        {
+          "name": "Kyogre",
+          "moves": [
+            "surf",
+            "icebeam",
+            "waterspout",
+            "calmmind"
+          ],
+          "ability": "Drizzle",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 70,
+          "shiny": false
+        },
+        {
+          "name": "Loudred",
+          "moves": [
+            "hypervoice",
+            "fireblast",
+            "icebeam",
+            "shadowball"
+          ],
+          "ability": "Soundproof",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Expert Belt",
+          "level": 90,
+          "shiny": false
+        },
+        {
+          "name": "Shroomish",
+          "moves": [
+            "toxic",
+            "protect",
+            "stunspore",
+            "substitute"
+          ],
+          "ability": "Poison Heal",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Toxic Orb",
+          "level": 95,
+          "shiny": false
+        },
+        {
+          "name": "Darkrai",
+          "moves": [
+            "substitute",
+            "darkvoid",
+            "trick",
+            "darkpulse"
+          ],
+          "ability": "Bad Dreams",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Choice Scarf",
+          "level": 70,
+          "shiny": false
+        },
+        {
+          "name": "Metang",
+          "moves": [
+            "bulletpunch",
+            "meteormash",
+            "stealthrock",
+            "earthquake"
+          ],
+          "ability": "Clear Body",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 90,
+          "shiny": false
+        }
+      ]
+    },
+    {
+      "seed": "113,42892,43386,2202",
+      "team": [
+        {
+          "name": "Geodude",
+          "moves": [
+            "firepunch",
+            "hammerarm",
+            "suckerpunch",
+            "stoneedge"
+          ],
+          "ability": "Sturdy",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Expert Belt",
+          "level": 95,
+          "shiny": false
+        },
+        {
+          "name": "Raichu",
+          "moves": [
+            "hiddenpowerice",
+            "nastyplot",
+            "encore",
+            "thunderbolt"
+          ],
+          "ability": "Static",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 30,
+            "def": 30,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 86,
+          "shiny": false
+        },
+        {
+          "name": "Vaporeon",
+          "moves": [
+            "toxic",
+            "acidarmor",
+            "scald",
+            "icebeam"
+          ],
+          "ability": "Water Absorb",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 74,
+          "shiny": false
+        },
+        {
+          "name": "Jigglypuff",
+          "moves": [
+            "seismictoss",
+            "counter",
+            "stealthrock",
+            "wish"
+          ],
+          "ability": "Cute Charm",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 95,
+          "shiny": false
+        },
+        {
+          "name": "Swellow",
+          "moves": [
+            "bravebird",
+            "uturn",
+            "protect",
+            "quickattack"
+          ],
+          "ability": "Guts",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Toxic Orb",
+          "level": 78,
+          "shiny": false
+        },
+        {
+          "name": "Celebi",
+          "moves": [
+            "psychic",
+            "hiddenpowerice",
+            "healbell",
+            "calmmind"
+          ],
+          "ability": "Natural Cure",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 30,
+            "def": 30,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 74,
+          "shiny": false
+        }
+      ]
+    },
+    {
+      "seed": "114,50811,44929,33539",
+      "team": [
+        {
+          "name": "Quagsire",
+          "moves": [
+            "toxic",
+            "waterfall",
+            "stoneedge",
+            "yawn"
+          ],
+          "ability": "Water Absorb",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Focus Sash",
+          "level": 86,
+          "shiny": false
+        },
+        {
+          "name": "Milotic",
+          "moves": [
+            "recover",
+            "hypnosis",
+            "toxic",
+            "scald"
+          ],
+          "ability": "Marvel Scale",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 30,
+            "def": 31,
+            "spa": 30,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 78,
+          "shiny": false
+        },
+        {
+          "name": "Wormadam",
+          "moves": [
+            "psychic",
+            "leafstorm",
+            "hiddenpowerrock",
+            "toxic"
+          ],
+          "ability": "Anticipation",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 30,
+            "spa": 31,
+            "spd": 30,
+            "spe": 30
+          },
+          "item": "Life Orb",
+          "level": 86,
+          "shiny": false
+        },
+        {
+          "name": "Mismagius",
+          "moves": [
+            "nastyplot",
+            "shadowball",
+            "substitute",
+            "thunderbolt"
+          ],
+          "ability": "Levitate",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 78,
+          "shiny": false
+        },
+        {
+          "name": "Ninjask",
+          "moves": [
+            "xscissor",
+            "swordsdance",
+            "substitute",
+            "batonpass"
+          ],
+          "ability": "Speed Boost",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 74,
+          "shiny": false
+        },
+        {
+          "name": "Torterra",
+          "moves": [
+            "leechseed",
+            "earthquake",
+            "stealthrock",
+            "woodhammer"
+          ],
+          "ability": "Overgrow",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 78,
+          "shiny": false
+        }
+      ]
+    },
+    {
+      "seed": "115,58730,46472,64876",
+      "team": [
+        {
+          "name": "Haunter",
+          "moves": [
+            "disable",
+            "shadowball",
+            "substitute",
+            "trick"
+          ],
+          "ability": "Levitate",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Choice Scarf",
+          "level": 86,
+          "shiny": false
+        },
+        {
+          "name": "Ponyta",
+          "moves": [
+            "flamecharge",
+            "hypnosis",
+            "wildcharge",
+            "morningsun"
+          ],
+          "ability": "Flash Fire",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 95,
+          "shiny": false
+        },
+        {
+          "name": "Machoke",
+          "moves": [
+            "bulkup",
+            "dynamicpunch",
+            "icepunch",
+            "bulletpunch"
+          ],
+          "ability": "No Guard",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Life Orb",
+          "level": 86,
+          "shiny": false
+        },
+        {
+          "name": "Zapdos",
+          "moves": [
+            "discharge",
+            "hiddenpowergrass",
+            "toxic",
+            "heatwave"
+          ],
+          "ability": "Pressure",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 30,
+            "def": 31,
+            "spa": 30,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 74,
+          "shiny": false
+        },
+        {
+          "name": "Clefairy",
+          "moves": [
+            "softboiled",
+            "protect",
+            "toxic",
+            "fireblast"
+          ],
+          "ability": "Magic Guard",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Life Orb",
+          "level": 95,
+          "shiny": false
+        },
+        {
+          "name": "Sneasel",
+          "moves": [
+            "lowkick",
+            "swordsdance",
+            "nightslash",
+            "icepunch"
+          ],
+          "ability": "Inner Focus",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Life Orb",
+          "level": 86,
+          "shiny": false
+        }
+      ]
+    },
+    {
+      "seed": "116,1114,48015,30678",
+      "team": [
+        {
+          "name": "Swinub",
+          "moves": [
+            "iciclecrash",
+            "endeavor",
+            "superpower",
+            "stealthrock"
+          ],
+          "ability": "Snow Cloak",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Focus Sash",
+          "level": 95,
+          "shiny": false
+        },
+        {
+          "name": "Bayleef",
+          "moves": [
+            "toxic",
+            "leechseed",
+            "grasswhistle",
+            "lightscreen"
+          ],
+          "ability": "Overgrow",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Light Clay",
+          "level": 90,
+          "shiny": false
+        },
+        {
+          "name": "Machoke",
+          "moves": [
+            "icepunch",
+            "bulkup",
+            "rockslide",
+            "dynamicpunch"
+          ],
+          "ability": "No Guard",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Life Orb",
+          "level": 86,
+          "shiny": false
+        },
+        {
+          "name": "Jolteon",
+          "moves": [
+            "hiddenpowerice",
+            "chargebeam",
+            "substitute",
+            "batonpass"
+          ],
+          "ability": "Volt Absorb",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 30,
+            "def": 30,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 74,
+          "shiny": false
+        },
+        {
+          "name": "Staravia",
+          "moves": [
+            "pursuit",
+            "bravebird",
+            "uturn",
+            "return"
+          ],
+          "ability": "Intimidate",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Expert Belt",
+          "level": 90,
+          "shiny": false
+        },
+        {
+          "name": "Gliscor",
+          "moves": [
+            "taunt",
+            "roost",
+            "toxic",
+            "acrobatics"
+          ],
+          "ability": "Hyper Cutter",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 74,
+          "shiny": false
+        }
+      ]
+    },
+    {
+      "seed": "117,9033,49558,62015",
+      "team": [
+        {
+          "name": "Charmeleon",
+          "moves": [
+            "hiddenpowergrass",
+            "dragonpulse",
+            "fireblast",
+            "flamethrower"
+          ],
+          "ability": "Blaze",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 30,
+            "def": 31,
+            "spa": 30,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Choice Specs",
+          "level": 90,
+          "shiny": false
+        },
+        {
+          "name": "Kricketune",
+          "moves": [
+            "swordsdance",
+            "toxic",
+            "brickbreak",
+            "aerialace"
+          ],
+          "ability": "Swarm",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 86,
+          "shiny": false
+        },
+        {
+          "name": "Murkrow",
+          "moves": [
+            "suckerpunch",
+            "hiddenpowergrass",
+            "thunderwave",
+            "substitute"
+          ],
+          "ability": "Insomnia",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 30,
+            "def": 31,
+            "spa": 30,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 95,
+          "shiny": false
+        },
+        {
+          "name": "Feraligatr",
+          "moves": [
+            "swordsdance",
+            "return",
+            "superpower",
+            "aquajet"
+          ],
+          "ability": "Torrent",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Life Orb",
+          "level": 78,
+          "shiny": false
+        },
+        {
+          "name": "Medicham",
+          "moves": [
+            "fakeout",
+            "bulletpunch",
+            "drainpunch",
+            "psychocut"
+          ],
+          "ability": "Pure Power",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Expert Belt",
+          "level": 86,
+          "shiny": false
+        },
+        {
+          "name": "Alakazam",
+          "moves": [
+            "calmmind",
+            "focusblast",
+            "shadowball",
+            "psyshock"
+          ],
+          "ability": "Synchronize",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Life Orb",
+          "level": 78,
+          "shiny": false
+        }
+      ]
+    },
+    {
+      "seed": "118,16952,51101,27817",
+      "team": [
+        {
+          "name": "Drifblim",
+          "moves": [
+            "hiddenpowerfighting",
+            "calmmind",
+            "willowisp",
+            "thunderbolt"
+          ],
+          "ability": "Unburden",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 30,
+            "spa": 30,
+            "spd": 30,
+            "spe": 30
+          },
+          "item": "Leftovers",
+          "level": 86,
+          "shiny": false
+        },
+        {
+          "name": "Wobbuffet",
+          "moves": [
+            "mirrorcoat",
+            "destinybond",
+            "counter",
+            "encore"
+          ],
+          "ability": "Shadow Tag",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Custap Berry",
+          "level": 70,
+          "shiny": false
+        },
+        {
+          "name": "Smoochum",
+          "moves": [
+            "psychic",
+            "grassknot",
+            "icebeam",
+            "shadowball"
+          ],
+          "ability": "Oblivious",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Choice Specs",
+          "level": 95,
+          "shiny": false
+        },
+        {
+          "name": "Hippowdon",
+          "moves": [
+            "stealthrock",
+            "toxic",
+            "earthquake",
+            "stoneedge"
+          ],
+          "ability": "Sand Stream",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 74,
+          "shiny": false
+        },
+        {
+          "name": "Kitsunoh",
+          "moves": [
+            "willowisp",
+            "trick",
+            "thunderpunch",
+            "uturn"
+          ],
+          "ability": "Limber",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Choice Scarf",
+          "level": 74,
+          "shiny": false
+        },
+        {
+          "name": "Seadra",
+          "moves": [
+            "agility",
+            "icebeam",
+            "hydropump",
+            "substitute"
+          ],
+          "ability": "Poison Point",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 90,
+          "shiny": false
+        }
+      ]
+    },
+    {
+      "seed": "119,24871,52644,59154",
+      "team": [
+        {
+          "name": "Chansey",
+          "moves": [
+            "seismictoss",
+            "wish",
+            "toxic",
+            "aromatherapy"
+          ],
+          "ability": "Natural Cure",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 78,
+          "shiny": false
+        },
+        {
+          "name": "Mareep",
+          "moves": [
+            "hiddenpowerice",
+            "lightscreen",
+            "discharge",
+            "reflect"
+          ],
+          "ability": "Static",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 30,
+            "def": 30,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Light Clay",
+          "level": 95,
+          "shiny": false
+        },
+        {
+          "name": "Pidgey",
+          "moves": [
+            "bravebird",
+            "roost",
+            "return",
+            "uturn"
+          ],
+          "ability": "Keen Eye",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 95,
+          "shiny": false
+        },
+        {
+          "name": "Mawile",
+          "moves": [
+            "substitute",
+            "swordsdance",
+            "crunch",
+            "firefang"
+          ],
+          "ability": "Intimidate",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 86,
+          "shiny": false
+        },
+        {
+          "name": "Forretress",
+          "moves": [
+            "voltswitch",
+            "spikes",
+            "earthquake",
+            "rapidspin"
+          ],
+          "ability": "Sturdy",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 74,
+          "shiny": false
+        },
+        {
+          "name": "Deoxys-Attack",
+          "moves": [
+            "thunderbolt",
+            "icebeam",
+            "spikes",
+            "psychoboost"
+          ],
+          "ability": "Pressure",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Life Orb",
+          "level": 70,
+          "shiny": false
+        }
+      ]
+    },
+    {
+      "seed": "120,32790,54187,24956",
+      "team": [
+        {
+          "name": "Murkrow",
+          "moves": [
+            "roost",
+            "substitute",
+            "darkpulse",
+            "hiddenpowergrass"
+          ],
+          "ability": "Insomnia",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 30,
+            "def": 31,
+            "spa": 30,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 95,
+          "shiny": false
+        },
+        {
+          "name": "Meowth",
+          "moves": [
+            "return",
+            "hypnosis",
+            "taunt",
+            "bite"
+          ],
+          "ability": "Technician",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 95,
+          "shiny": false
+        },
+        {
+          "name": "Sceptile",
+          "moves": [
+            "hiddenpowerrock",
+            "substitute",
+            "focusblast",
+            "leechseed"
+          ],
+          "ability": "Overgrow",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 30,
+            "spa": 31,
+            "spd": 30,
+            "spe": 30
+          },
+          "item": "Leftovers",
+          "level": 78,
+          "shiny": false
+        },
+        {
+          "name": "Aggron",
+          "moves": [
+            "headsmash",
+            "earthquake",
+            "thunderwave",
+            "icepunch"
+          ],
+          "ability": "Rock Head",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 78,
+          "shiny": false
+        },
+        {
+          "name": "Rotom-Fan",
+          "moves": [
+            "airslash",
+            "thunderwave",
+            "willowisp",
+            "voltswitch"
+          ],
+          "ability": "Levitate",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 74,
+          "shiny": false
+        },
+        {
+          "name": "Deoxys",
+          "moves": [
+            "extremespeed",
+            "stealthrock",
+            "thunderbolt",
+            "spikes"
+          ],
+          "ability": "Pressure",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 70,
+          "shiny": false
+        }
+      ]
+    },
+    {
+      "seed": "121,40709,55730,56293",
+      "team": [
+        {
+          "name": "Shellos",
+          "moves": [
+            "recover",
+            "scald",
+            "icebeam",
+            "toxic"
+          ],
+          "ability": "Sticky Hold",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Focus Sash",
+          "level": 95,
+          "shiny": false
+        },
+        {
+          "name": "Ninetales",
+          "moves": [
+            "fireblast",
+            "nastyplot",
+            "painsplit",
+            "solarbeam"
+          ],
+          "ability": "Flash Fire",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 78,
+          "shiny": false
+        },
+        {
+          "name": "Cloyster",
+          "moves": [
+            "iciclespear",
+            "iceshard",
+            "shellsmash",
+            "rockblast"
+          ],
+          "ability": "Skill Link",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "White Herb",
+          "level": 78,
+          "shiny": false
+        },
+        {
+          "name": "Cresselia",
+          "moves": [
+            "moonlight",
+            "lunardance",
+            "lightscreen",
+            "psychic"
+          ],
+          "ability": "Levitate",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Light Clay",
+          "level": 76,
+          "shiny": false
+        },
+        {
+          "name": "Gallade",
+          "moves": [
+            "psychocut",
+            "stoneedge",
+            "trick",
+            "drainpunch"
+          ],
+          "ability": "Steadfast",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Choice Band",
+          "level": 76,
+          "shiny": false
+        },
+        {
+          "name": "Jolteon",
+          "moves": [
+            "hiddenpowerice",
+            "thunderbolt",
+            "batonpass",
+            "substitute"
+          ],
+          "ability": "Volt Absorb",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 30,
+            "def": 30,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 74,
+          "shiny": false
+        }
+      ]
+    },
+    {
+      "seed": "122,48628,57273,22095",
+      "team": [
+        {
+          "name": "Monferno",
+          "moves": [
+            "vacuumwave",
+            "stealthrock",
+            "overheat",
+            "fakeout"
+          ],
+          "ability": "Blaze",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Focus Sash",
+          "level": 90,
+          "shiny": false
+        },
+        {
+          "name": "Gliscor",
+          "moves": [
+            "roost",
+            "icefang",
+            "swordsdance",
+            "acrobatics"
+          ],
+          "ability": "Hyper Cutter",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 74,
+          "shiny": false
+        },
+        {
+          "name": "Gardevoir",
+          "moves": [
+            "calmmind",
+            "psychic",
+            "thunderbolt",
+            "willowisp"
+          ],
+          "ability": "Trace",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 86,
+          "shiny": false
+        },
+        {
+          "name": "Rayquaza",
+          "moves": [
+            "extremespeed",
+            "dragondance",
+            "outrage",
+            "vcreate"
+          ],
+          "ability": "Air Lock",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 70,
+          "shiny": false
+        },
+        {
+          "name": "Milotic",
+          "moves": [
+            "hypnosis",
+            "scald",
+            "dragontail",
+            "toxic"
+          ],
+          "ability": "Marvel Scale",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 78,
+          "shiny": false
+        },
+        {
+          "name": "Groudon",
+          "moves": [
+            "thunderwave",
+            "stealthrock",
+            "firepunch",
+            "earthquake"
+          ],
+          "ability": "Drought",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 70,
+          "shiny": false
+        }
+      ]
+    },
+    {
+      "seed": "123,56547,58816,53432",
+      "team": [
+        {
+          "name": "Marill",
+          "moves": [
+            "doubleedge",
+            "toxic",
+            "waterfall",
+            "aquajet"
+          ],
+          "ability": "Huge Power",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Life Orb",
+          "level": 95,
+          "shiny": false
+        },
+        {
+          "name": "Heracross",
+          "moves": [
+            "closecombat",
+            "swordsdance",
+            "stoneedge",
+            "facade"
+          ],
+          "ability": "Guts",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Toxic Orb",
+          "level": 76,
+          "shiny": false
+        },
+        {
+          "name": "Cloyster",
+          "moves": [
+            "hydropump",
+            "rockblast",
+            "iciclespear",
+            "iceshard"
+          ],
+          "ability": "Skill Link",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Expert Belt",
+          "level": 78,
+          "shiny": false
+        },
+        {
+          "name": "Shuckle",
+          "moves": [
+            "rest",
+            "acupressure",
+            "rollout",
+            "powersplit"
+          ],
+          "ability": "Sturdy",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Chesto Berry",
+          "level": 86,
+          "shiny": false
+        },
+        {
+          "name": "Tangrowth",
+          "moves": [
+            "leechseed",
+            "synthesis",
+            "knockoff",
+            "stunspore"
+          ],
+          "ability": "Leaf Guard",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 30,
+            "spa": 31,
+            "spd": 30,
+            "spe": 30
+          },
+          "item": "Leftovers",
+          "level": 78,
+          "shiny": false
+        },
+        {
+          "name": "Infernape",
+          "moves": [
+            "stealthrock",
+            "hiddenpowerice",
+            "thunderpunch",
+            "flareblitz"
+          ],
+          "ability": "Blaze",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 30,
+            "def": 30,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 74,
+          "shiny": false
+        }
+      ]
+    },
+    {
+      "seed": "124,64466,60359,19234",
+      "team": [
+        {
+          "name": "Torterra",
+          "moves": [
+            "synthesis",
+            "stealthrock",
+            "earthquake",
+            "stoneedge"
+          ],
+          "ability": "Overgrow",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 78,
+          "shiny": false
+        },
+        {
+          "name": "Sealeo",
+          "moves": [
+            "protect",
+            "substitute",
+            "surf",
+            "toxic"
+          ],
+          "ability": "Thick Fat",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 90,
+          "shiny": false
+        },
+        {
+          "name": "Machamp",
+          "moves": [
+            "bulletpunch",
+            "bulkup",
+            "dynamicpunch",
+            "icepunch"
+          ],
+          "ability": "No Guard",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Life Orb",
+          "level": 74,
+          "shiny": false
+        },
+        {
+          "name": "Bellossom",
+          "moves": [
+            "leafstorm",
+            "hiddenpowerfire",
+            "aromatherapy",
+            "sleeppowder"
+          ],
+          "ability": "Chlorophyll",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 30,
+            "def": 31,
+            "spa": 30,
+            "spd": 31,
+            "spe": 30
+          },
+          "item": "Leftovers",
+          "level": 86,
+          "shiny": false
+        },
+        {
+          "name": "Rotom-Wash",
+          "moves": [
+            "painsplit",
+            "willowisp",
+            "trick",
+            "voltswitch"
+          ],
+          "ability": "Levitate",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Choice Scarf",
+          "level": 74,
+          "shiny": false
+        },
+        {
+          "name": "Wormadam-Trash",
+          "moves": [
+            "toxic",
+            "ironhead",
+            "protect",
+            "stealthrock"
+          ],
+          "ability": "Anticipation",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 86,
+          "shiny": false
+        }
+      ]
+    },
+    {
+      "seed": "125,6850,61902,50571",
+      "team": [
+        {
+          "name": "Treecko",
+          "moves": [
+            "hiddenpowerice",
+            "leechseed",
+            "leafstorm",
+            "endeavor"
+          ],
+          "ability": "Overgrow",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 30,
+            "def": 30,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Focus Sash",
+          "level": 95,
+          "shiny": false
+        },
+        {
+          "name": "Dustox",
+          "moves": [
+            "bugbuzz",
+            "roost",
+            "toxic",
+            "sludgebomb"
+          ],
+          "ability": "Shield Dust",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Black Sludge",
+          "level": 86,
+          "shiny": false
+        },
+        {
+          "name": "Hariyama",
+          "moves": [
+            "stoneedge",
+            "crosschop",
+            "bulletpunch",
+            "icepunch"
+          ],
+          "ability": "Thick Fat",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Choice Band",
+          "level": 78,
+          "shiny": false
+        },
+        {
+          "name": "Lucario",
+          "moves": [
+            "aurasphere",
+            "icepunch",
+            "bulletpunch",
+            "vacuumwave"
+          ],
+          "ability": "Inner Focus",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Expert Belt",
+          "level": 74,
+          "shiny": false
+        },
+        {
+          "name": "Celebi",
+          "moves": [
+            "calmmind",
+            "earthpower",
+            "recover",
+            "hiddenpowerice"
+          ],
+          "ability": "Natural Cure",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 30,
+            "def": 30,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 74,
+          "shiny": false
+        },
+        {
+          "name": "Dragonite",
+          "moves": [
+            "dragondance",
+            "roost",
+            "waterfall",
+            "firepunch"
+          ],
+          "ability": "Inner Focus",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 74,
+          "shiny": false
+        }
+      ]
+    },
+    {
+      "seed": "126,14769,63445,16373",
+      "team": [
+        {
+          "name": "Geodude",
+          "moves": [
+            "firepunch",
+            "suckerpunch",
+            "stoneedge",
+            "stealthrock"
+          ],
+          "ability": "Sturdy",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 95,
+          "shiny": false
+        },
+        {
+          "name": "Spinarak",
+          "moves": [
+            "xscissor",
+            "swordsdance",
+            "toxic",
+            "poisonjab"
+          ],
+          "ability": "Swarm",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Black Sludge",
+          "level": 95,
+          "shiny": false
+        },
+        {
+          "name": "Groudon",
+          "moves": [
+            "earthquake",
+            "thunderwave",
+            "firepunch",
+            "stealthrock"
+          ],
+          "ability": "Drought",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 70,
+          "shiny": false
+        },
+        {
+          "name": "Heracross",
+          "moves": [
+            "stoneedge",
+            "swordsdance",
+            "facade",
+            "megahorn"
+          ],
+          "ability": "Guts",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Toxic Orb",
+          "level": 76,
+          "shiny": false
+        },
+        {
+          "name": "Mamoswine",
+          "moves": [
+            "stoneedge",
+            "endeavor",
+            "earthquake",
+            "stealthrock"
+          ],
+          "ability": "Oblivious",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Life Orb",
+          "level": 74,
+          "shiny": false
+        },
+        {
+          "name": "Rotom-Wash",
+          "moves": [
+            "painsplit",
+            "discharge",
+            "trick",
+            "willowisp"
+          ],
+          "ability": "Levitate",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Choice Scarf",
+          "level": 74,
+          "shiny": false
+        }
+      ]
+    },
+    {
+      "seed": "127,22688,64988,47710",
+      "team": [
+        {
+          "name": "Gastly",
+          "moves": [
+            "hypnosis",
+            "trick",
+            "sludgebomb",
+            "gigadrain"
+          ],
+          "ability": "Levitate",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Choice Scarf",
+          "level": 95,
+          "shiny": false
+        },
+        {
+          "name": "Altaria",
+          "moves": [
+            "earthquake",
+            "fireblast",
+            "dragonclaw",
+            "roost"
+          ],
+          "ability": "Natural Cure",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 78,
+          "shiny": false
+        },
+        {
+          "name": "Lumineon",
+          "moves": [
+            "uturn",
+            "raindance",
+            "icebeam",
+            "surf"
+          ],
+          "ability": "Swift Swim",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Damp Rock",
+          "level": 86,
+          "shiny": false
+        },
+        {
+          "name": "Tangrowth",
+          "moves": [
+            "synthesis",
+            "stunspore",
+            "knockoff",
+            "powerwhip"
+          ],
+          "ability": "Leaf Guard",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 78,
+          "shiny": false
+        },
+        {
+          "name": "Relicanth",
+          "moves": [
+            "stealthrock",
+            "earthquake",
+            "headsmash",
+            "waterfall"
+          ],
+          "ability": "Rock Head",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 86,
+          "shiny": false
+        },
+        {
+          "name": "Metagross",
+          "moves": [
+            "meteormash",
+            "earthquake",
+            "stealthrock",
+            "zenheadbutt"
+          ],
+          "ability": "Clear Body",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 74,
+          "shiny": false
+        }
+      ]
+    },
+    {
+      "seed": "128,30607,996,13512",
+      "team": [
+        {
+          "name": "Ralts",
+          "moves": [
+            "destinybond",
+            "willowisp",
+            "trickroom",
+            "hypnosis"
+          ],
+          "ability": "Trace",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 0
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 0
+          },
+          "item": "Focus Sash",
+          "level": 99,
+          "shiny": false
+        },
+        {
+          "name": "Sandslash",
+          "moves": [
+            "xscissor",
+            "nightslash",
+            "stealthrock",
+            "earthquake"
+          ],
+          "ability": "Sand Veil",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Life Orb",
+          "level": 86,
+          "shiny": false
+        },
+        {
+          "name": "Honchkrow",
+          "moves": [
+            "suckerpunch",
+            "hiddenpowergrass",
+            "superpower",
+            "heatwave"
+          ],
+          "ability": "Insomnia",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 30,
+            "def": 31,
+            "spa": 30,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Expert Belt",
+          "level": 76,
+          "shiny": false
+        },
+        {
+          "name": "Swalot",
+          "moves": [
+            "icebeam",
+            "yawn",
+            "earthquake",
+            "painsplit"
+          ],
+          "ability": "Sticky Hold",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 86,
+          "shiny": false
+        },
+        {
+          "name": "Seadra",
+          "moves": [
+            "icebeam",
+            "hydropump",
+            "hiddenpowergrass",
+            "substitute"
+          ],
+          "ability": "Poison Point",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 30,
+            "def": 31,
+            "spa": 30,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 90,
+          "shiny": false
+        },
+        {
+          "name": "Loudred",
+          "moves": [
+            "shadowball",
+            "hypervoice",
+            "icebeam",
+            "fireblast"
+          ],
+          "ability": "Soundproof",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Choice Specs",
+          "level": 90,
+          "shiny": false
+        }
+      ]
+    },
+    {
+      "seed": "129,38526,2539,44849",
+      "team": [
+        {
+          "name": "Espeon",
+          "moves": [
+            "psychic",
+            "substitute",
+            "hiddenpowerfighting",
+            "batonpass"
+          ],
+          "ability": "Synchronize",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 30,
+            "spa": 30,
+            "spd": 30,
+            "spe": 30
+          },
+          "item": "Leftovers",
+          "level": 86,
+          "shiny": false
+        },
+        {
+          "name": "Croagunk",
+          "moves": [
+            "vacuumwave",
+            "suckerpunch",
+            "fakeout",
+            "darkpulse"
+          ],
+          "ability": "Dry Skin",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Expert Belt",
+          "level": 95,
+          "shiny": false
+        },
+        {
+          "name": "Shaymin-Sky",
+          "moves": [
+            "hiddenpowerfire",
+            "substitute",
+            "seedflare",
+            "earthpower"
+          ],
+          "ability": "Serene Grace",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 30,
+            "def": 31,
+            "spa": 30,
+            "spd": 31,
+            "spe": 30
+          },
+          "item": "Leftovers",
+          "level": 70,
+          "shiny": false
+        },
+        {
+          "name": "Kangaskhan",
+          "moves": [
+            "hammerarm",
+            "suckerpunch",
+            "doubleedge",
+            "fakeout"
+          ],
+          "ability": "Early Bird",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 78,
+          "shiny": false
+        },
+        {
+          "name": "Magneton",
+          "moves": [
+            "thunderwave",
+            "magnetrise",
+            "hiddenpowerice",
+            "flashcannon"
+          ],
+          "ability": "Magnet Pull",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 30,
+            "def": 30,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 86,
+          "shiny": false
+        },
+        {
+          "name": "Swellow",
+          "moves": [
+            "facade",
+            "quickattack",
+            "bravebird",
+            "protect"
+          ],
+          "ability": "Guts",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Toxic Orb",
+          "level": 78,
+          "shiny": false
+        }
+      ]
+    },
+    {
+      "seed": "130,46445,4082,10651",
+      "team": [
+        {
+          "name": "Regice",
+          "moves": [
+            "thunderbolt",
+            "focusblast",
+            "thunderwave",
+            "rest"
+          ],
+          "ability": "Clear Body",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Chesto Berry",
+          "level": 86,
+          "shiny": false
+        },
+        {
+          "name": "Cradily",
+          "moves": [
+            "earthquake",
+            "rockslide",
+            "recover",
+            "stealthrock"
+          ],
+          "ability": "Suction Cups",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 86,
+          "shiny": false
+        },
+        {
+          "name": "Vileplume",
+          "moves": [
+            "sludgebomb",
+            "gigadrain",
+            "leechseed",
+            "hiddenpowerfire"
+          ],
+          "ability": "Chlorophyll",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 30,
+            "def": 31,
+            "spa": 30,
+            "spd": 31,
+            "spe": 30
+          },
+          "item": "Black Sludge",
+          "level": 86,
+          "shiny": false
+        },
+        {
+          "name": "Starmie",
+          "moves": [
+            "psychic",
+            "trick",
+            "recover",
+            "surf"
+          ],
+          "ability": "Natural Cure",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Choice Scarf",
+          "level": 74,
+          "shiny": false
+        },
+        {
+          "name": "Zapdos",
+          "moves": [
+            "discharge",
+            "hiddenpowerice",
+            "toxic",
+            "agility"
+          ],
+          "ability": "Pressure",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 30,
+            "def": 30,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Leftovers",
+          "level": 74,
+          "shiny": false
+        },
+        {
+          "name": "Cloyster",
+          "moves": [
+            "spikes",
+            "razorshell",
+            "iciclespear",
+            "iceshard"
+          ],
+          "ability": "Skill Link",
+          "evs": {
+            "hp": 85,
+            "atk": 85,
+            "def": 85,
+            "spa": 85,
+            "spd": 85,
+            "spe": 85
+          },
+          "ivs": {
+            "hp": 31,
+            "atk": 31,
+            "def": 31,
+            "spa": 31,
+            "spd": 31,
+            "spe": 31
+          },
+          "item": "Life Orb",
+          "level": 78,
+          "shiny": false
+        }
+      ]
+    }
+  ]
+}

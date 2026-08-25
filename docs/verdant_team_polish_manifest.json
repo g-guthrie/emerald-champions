@@ -1,0 +1,6135 @@
+{
+  "source": "Explicit trainer-by-trainer corrections produced after the full engine-effective team audit.",
+  "rewrites": {
+    "TRAINER_LYLE": [
+      {
+        "level": -3,
+        "species": "SPECIES_VENIPEDE",
+        "item": "ITEM_EVIOLITE",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_DEF_IMPISH",
+        "moves": [
+          "MOVE_POISON_JAB",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_TOXIC_SPIKES",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": -3,
+        "species": "SPECIES_SURSKIT",
+        "item": "ITEM_FOCUS_SASH",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_STICKY_WEB",
+          "MOVE_BUBBLE_BEAM",
+          "MOVE_ICY_WIND",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": -2,
+        "species": "SPECIES_BUTTERFREE",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_SLEEP_POWDER",
+          "MOVE_HURRICANE",
+          "MOVE_POLLEN_PUFF",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": -2,
+        "species": "SPECIES_SCYTHER",
+        "item": "ITEM_EVIOLITE",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_TAILWIND",
+          "MOVE_AERIAL_ACE",
+          "MOVE_BUG_BITE",
+          "MOVE_PROTECT"
+        ]
+      }
+    ],
+    "TRAINER_NOB_5": [
+      {
+        "level": 0,
+        "species": "SPECIES_WEAVILE",
+        "item": "ITEM_FOCUS_SASH",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_BEAT_UP",
+          "MOVE_FAKE_OUT",
+          "MOVE_TRIPLE_AXEL",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_TERRAKION",
+        "item": "ITEM_LUM_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_ROCK_SLIDE",
+          "MOVE_CLOSE_COMBAT",
+          "MOVE_QUICK_GUARD",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_HITMONTOP",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_FAKE_OUT",
+          "MOVE_CLOSE_COMBAT",
+          "MOVE_WIDE_GUARD",
+          "MOVE_HELPING_HAND"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_MARSHADOW",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_SPECTRAL_THIEF",
+          "MOVE_CLOSE_COMBAT",
+          "MOVE_SHADOW_SNEAK",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_HAWLUCHA",
+        "item": "ITEM_HAWLUCHANITE",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_CLOSE_COMBAT",
+          "MOVE_ACROBATICS",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_URSHIFU_RAPID_STRIKE_STYLE",
+        "item": "ITEM_CHOICE_BAND",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_SURGING_STRIKES",
+          "MOVE_CLOSE_COMBAT",
+          "MOVE_AQUA_JET",
+          "MOVE_U_TURN"
+        ]
+      }
+    ],
+    "TRAINER_BERNIE_5": [
+      {
+        "level": 0,
+        "species": "SPECIES_DRAGAPULT",
+        "item": "ITEM_FOCUS_SASH",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_SURF",
+          "MOVE_DRACO_METEOR",
+          "MOVE_WILL_O_WISP",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_COALOSSAL",
+        "item": "ITEM_WEAKNESS_POLICY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_HEAT_WAVE",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_SOLAR_BEAM",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_TORKOAL",
+        "item": "ITEM_EJECT_BUTTON",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_HP_DEF_BOLD",
+        "moves": [
+          "MOVE_HEAT_WAVE",
+          "MOVE_BODY_PRESS",
+          "MOVE_YAWN",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_LILLIGANT",
+        "item": "ITEM_FOCUS_SASH",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_AFTER_YOU",
+          "MOVE_SLEEP_POWDER",
+          "MOVE_SOLAR_BEAM",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_VOLCARONA",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_HEAT_WAVE",
+          "MOVE_BUG_BUZZ",
+          "MOVE_RAGE_POWDER",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_VICTINI",
+        "item": "ITEM_CHOICE_SCARF",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_V_CREATE",
+          "MOVE_BOLT_STRIKE",
+          "MOVE_ZEN_HEADBUTT",
+          "MOVE_U_TURN"
+        ]
+      }
+    ],
+    "TRAINER_TIMOTHY_5": [
+      {
+        "level": 0,
+        "species": "SPECIES_DUSCLOPS",
+        "item": "ITEM_EVIOLITE",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_DEF_SPDEF_SASSY",
+        "moves": [
+          "MOVE_TRICK_ROOM",
+          "MOVE_BULLDOZE",
+          "MOVE_WILL_O_WISP",
+          "MOVE_HELPING_HAND"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_RHYPERIOR",
+        "item": "ITEM_WEAKNESS_POLICY",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_HP_ATK_BRAVE",
+        "moves": [
+          "MOVE_ROCK_SLIDE",
+          "MOVE_HIGH_HORSEPOWER",
+          "MOVE_HEAVY_SLAM",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_HARIYAMA",
+        "item": "ITEM_FLAME_ORB",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_HP_ATK_BRAVE",
+        "moves": [
+          "MOVE_FAKE_OUT",
+          "MOVE_CLOSE_COMBAT",
+          "MOVE_KNOCK_OFF",
+          "MOVE_WIDE_GUARD"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_MAGEARNA",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_SPATK_QUIET",
+        "moves": [
+          "MOVE_FLEUR_CANNON",
+          "MOVE_FLASH_CANNON",
+          "MOVE_TRICK_ROOM",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_EMBOAR",
+        "item": "ITEM_EMBOARITE",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_ATK_BRAVE",
+        "moves": [
+          "MOVE_HEAT_CRASH",
+          "MOVE_CLOSE_COMBAT",
+          "MOVE_HEAD_SMASH",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_CALYREX_ICE_RIDER",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_ATK_BRAVE",
+        "moves": [
+          "MOVE_GLACIAL_LANCE",
+          "MOVE_HIGH_HORSEPOWER",
+          "MOVE_ZEN_HEADBUTT",
+          "MOVE_PROTECT"
+        ]
+      }
+    ],
+    "TRAINER_CYNDY_5": [
+      {
+        "level": 0,
+        "species": "SPECIES_INDEEDEE_FEMALE",
+        "item": "ITEM_PSYCHIC_SEED",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_SPDEF_CALM",
+        "moves": [
+          "MOVE_FOLLOW_ME",
+          "MOVE_HELPING_HAND",
+          "MOVE_EXPANDING_FORCE",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_KOMMO_O",
+        "item": "ITEM_THROAT_SPRAY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_CLANGING_SCALES",
+          "MOVE_CLANGOROUS_SOUL",
+          "MOVE_AURA_SPHERE",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_SAMUROTT",
+        "item": "ITEM_WHITE_HERB",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_MODEST",
+        "moves": [
+          "MOVE_SHELL_SMASH",
+          "MOVE_HYDRO_PUMP",
+          "MOVE_SECRET_SWORD",
+          "MOVE_ICE_BEAM"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_WHIMSICOTT",
+        "item": "ITEM_FOCUS_SASH",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_TAILWIND",
+          "MOVE_TAUNT",
+          "MOVE_MOONBLAST",
+          "MOVE_HELPING_HAND"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_MEDICHAM",
+        "item": "ITEM_MEDICHAMITE",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_FAKE_OUT",
+          "MOVE_HIGH_JUMP_KICK",
+          "MOVE_ZEN_HEADBUTT",
+          "MOVE_ICE_PUNCH"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_ARCEUS_FIGHTING",
+        "item": "ITEM_FIST_PLATE",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_JUDGMENT",
+          "MOVE_EARTH_POWER",
+          "MOVE_RECOVER",
+          "MOVE_PROTECT"
+        ]
+      }
+    ],
+    "TRAINER_SAWYER_5": [
+      {
+        "level": 0,
+        "species": "SPECIES_TYRANITAR",
+        "item": "ITEM_SMOOTH_ROCK",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_ROCK_SLIDE",
+          "MOVE_CRUNCH",
+          "MOVE_LOW_KICK",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_EXCADRILL",
+        "item": "ITEM_EXCADRITE",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_HIGH_HORSEPOWER",
+          "MOVE_IRON_HEAD",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_NINETALES_ALOLAN",
+        "item": "ITEM_LIGHT_CLAY",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_AURORA_VEIL",
+          "MOVE_BLIZZARD",
+          "MOVE_ICY_WIND",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_ARCTOZOLT",
+        "item": "ITEM_EXPERT_BELT",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_BOLT_BEAK",
+          "MOVE_ICICLE_CRASH",
+          "MOVE_LOW_KICK",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_LANDORUS_THERIAN",
+        "item": "ITEM_ASSAULT_VEST",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_EARTHQUAKE",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_U_TURN",
+          "MOVE_KNOCK_OFF"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_KYUREM_BLACK",
+        "item": "ITEM_WEAKNESS_POLICY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_FUSION_BOLT",
+          "MOVE_ICICLE_SPEAR",
+          "MOVE_DRAGON_CLAW",
+          "MOVE_PROTECT"
+        ]
+      }
+    ],
+    "TRAINER_MAGIKARP_GUY": [
+      {
+        "level": 0,
+        "species": "SPECIES_MAGIKARP",
+        "item": "ITEM_FOCUS_SASH",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_FLAIL",
+          "MOVE_HYDRO_PUMP",
+          "MOVE_BOUNCE",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_FEEBAS",
+        "item": "ITEM_EVIOLITE",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_DEF_BOLD",
+        "moves": [
+          "MOVE_SCALD",
+          "MOVE_ICE_BEAM",
+          "MOVE_MIRROR_COAT",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_WISHIWASHI",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_WATER_SPOUT",
+          "MOVE_ICE_BEAM",
+          "MOVE_EARTHQUAKE",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_DITTO",
+        "item": "ITEM_CHOICE_SCARF",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_DEF_BOLD",
+        "moves": [
+          "MOVE_TRANSFORM",
+          "MOVE_TACKLE",
+          "MOVE_COPYCAT",
+          "MOVE_MIMIC"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_KYOGRE",
+        "item": "ITEM_MYSTIC_WATER",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_WATER_SPOUT",
+          "MOVE_ORIGIN_PULSE",
+          "MOVE_THUNDER",
+          "MOVE_ICE_BEAM"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_GYARADOS",
+        "item": "ITEM_GYARADOSITE",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_WATERFALL",
+          "MOVE_CRUNCH",
+          "MOVE_POWER_WHIP",
+          "MOVE_PROTECT"
+        ]
+      }
+    ],
+    "TRAINER_ETHAN_5": [
+      {
+        "level": 0,
+        "species": "SPECIES_BRAVIARY",
+        "item": "ITEM_WHITE_HERB",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_HONE_CLAWS",
+          "MOVE_BRAVE_BIRD",
+          "MOVE_DOUBLE_EDGE",
+          "MOVE_SUPERPOWER"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_SANDSLASH",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_EARTHQUAKE",
+          "MOVE_STONE_EDGE",
+          "MOVE_LEECH_LIFE",
+          "MOVE_SWORDS_DANCE"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_LINOONE",
+        "item": "ITEM_FIGY_BERRY",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_BELLY_DRUM",
+          "MOVE_EXTREME_SPEED",
+          "MOVE_THROAT_CHOP",
+          "MOVE_SEED_BOMB"
+        ]
+      }
+    ],
+    "TRAINER_JEFFREY_5": [
+      {
+        "level": 0,
+        "species": "SPECIES_RIBOMBEE",
+        "item": "ITEM_FOCUS_SASH",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_STICKY_WEB",
+          "MOVE_TAILWIND",
+          "MOVE_POLLEN_PUFF",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_ARAQUANID",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_LIQUIDATION",
+          "MOVE_LEECH_LIFE",
+          "MOVE_WIDE_GUARD",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_VOLCARONA",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_HEAT_WAVE",
+          "MOVE_BUG_BUZZ",
+          "MOVE_GIGA_DRAIN",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_GOLISOPOD",
+        "item": "ITEM_ASSAULT_VEST",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_FIRST_IMPRESSION",
+          "MOVE_LIQUIDATION",
+          "MOVE_LEECH_LIFE",
+          "MOVE_KNOCK_OFF"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_MASQUERAIN",
+        "item": "ITEM_WACAN_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_ICY_WIND",
+          "MOVE_HURRICANE",
+          "MOVE_BUG_BUZZ",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_GENESECT",
+        "item": "ITEM_CHOICE_SCARF",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_TECHNO_BLAST",
+          "MOVE_ICE_BEAM",
+          "MOVE_THUNDERBOLT",
+          "MOVE_U_TURN"
+        ]
+      }
+    ],
+    "TRAINER_CAMERON_5": [
+      {
+        "level": 1,
+        "species": "SPECIES_SOLROCK",
+        "item": "ITEM_WEAKNESS_POLICY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_ROCK_POLISH",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_ZEN_HEADBUTT",
+          "MOVE_FLARE_BLITZ"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_ALAKAZAM",
+        "item": "ITEM_ALAKAZITE",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_PSYCHIC",
+          "MOVE_FOCUS_BLAST",
+          "MOVE_SHADOW_BALL",
+          "MOVE_ENERGY_BALL"
+        ]
+      }
+    ],
+    "TRAINER_JACKI_5": [
+      {
+        "level": 1,
+        "species": "SPECIES_LUNATONE",
+        "item": "ITEM_POWER_HERB",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_METEOR_BEAM",
+          "MOVE_PSYCHIC",
+          "MOVE_MOONBLAST",
+          "MOVE_EARTH_POWER"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_ALAKAZAM",
+        "item": "ITEM_ALAKAZITE",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_PSYSHOCK",
+          "MOVE_FOCUS_BLAST",
+          "MOVE_SHADOW_BALL",
+          "MOVE_DAZZLING_GLEAM"
+        ]
+      }
+    ],
+    "TRAINER_WALTER_5": [
+      {
+        "level": 0,
+        "species": "SPECIES_LINOONE",
+        "item": "ITEM_FIGY_BERRY",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_BELLY_DRUM",
+          "MOVE_EXTREME_SPEED",
+          "MOVE_THROAT_CHOP",
+          "MOVE_SEED_BOMB"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_GOLDUCK",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_HYDRO_PUMP",
+          "MOVE_ICE_BEAM",
+          "MOVE_PSYSHOCK",
+          "MOVE_FOCUS_BLAST"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_MANECTRIC",
+        "item": "ITEM_MANECTITE",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_THUNDERBOLT",
+          "MOVE_FLAMETHROWER",
+          "MOVE_VOLT_SWITCH",
+          "MOVE_HIDDEN_POWER"
+        ]
+      }
+    ],
+    "TRAINER_SHELBY_5": [
+      {
+        "level": 1,
+        "species": "SPECIES_HARIYAMA",
+        "item": "ITEM_FLAME_ORB",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_FAKE_OUT",
+          "MOVE_CLOSE_COMBAT",
+          "MOVE_KNOCK_OFF",
+          "MOVE_STONE_EDGE"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_MEDICHAM",
+        "item": "ITEM_MEDICHAMITE",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_HIGH_JUMP_KICK",
+          "MOVE_ZEN_HEADBUTT",
+          "MOVE_ICE_PUNCH",
+          "MOVE_BULLET_PUNCH"
+        ]
+      }
+    ],
+    "TRAINER_ISAIAH_5": [
+      {
+        "level": 2,
+        "species": "SPECIES_STARMIE",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_HYDRO_PUMP",
+          "MOVE_PSYSHOCK",
+          "MOVE_THUNDERBOLT",
+          "MOVE_ICE_BEAM"
+        ]
+      }
+    ],
+    "TRAINER_KATELYN_5": [
+      {
+        "level": 2,
+        "species": "SPECIES_VOLCANION",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_STEAM_ERUPTION",
+          "MOVE_HEAT_WAVE",
+          "MOVE_EARTH_POWER",
+          "MOVE_SLUDGE_BOMB"
+        ]
+      }
+    ],
+    "TRAINER_NICOLAS_5": [
+      {
+        "level": 0,
+        "species": "SPECIES_DRAGAPULT",
+        "item": "ITEM_CHOICE_SPECS",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_DRACO_METEOR",
+          "MOVE_SHADOW_BALL",
+          "MOVE_FLAMETHROWER",
+          "MOVE_U_TURN"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_REGIDRAGO",
+        "item": "ITEM_DRAGON_FANG",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_DRAGON_ENERGY",
+          "MOVE_DRACO_METEOR",
+          "MOVE_EARTH_POWER",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_DRAGONITE",
+        "item": "ITEM_DRAGONINITE",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_ATK_SPEED_ADAMANT",
+        "moves": [
+          "MOVE_DRAGON_CLAW",
+          "MOVE_EXTREME_SPEED",
+          "MOVE_EARTHQUAKE",
+          "MOVE_FIRE_PUNCH"
+        ]
+      }
+    ],
+    "TRAINER_ROBERT_5": [
+      {
+        "level": 1,
+        "species": "SPECIES_XATU",
+        "item": "ITEM_FOCUS_SASH",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_TAILWIND",
+          "MOVE_PSYCHIC",
+          "MOVE_HEAT_WAVE",
+          "MOVE_ROOST"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_ALTARIA",
+        "item": "ITEM_ALTARIANITE",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_HYPER_VOICE",
+          "MOVE_FIRE_BLAST",
+          "MOVE_ICE_BEAM",
+          "MOVE_ROOST"
+        ]
+      }
+    ],
+    "TRAINER_KAYLEE": [
+      {
+        "level": 1,
+        "species": "SPECIES_POLITOED",
+        "item": "ITEM_DAMP_ROCK",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_DEF_BOLD",
+        "moves": [
+          "MOVE_SCALD",
+          "MOVE_ICE_BEAM",
+          "MOVE_HYPNOSIS",
+          "MOVE_PERISH_SONG"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_DRACOVISH",
+        "item": "ITEM_CHOICE_SCARF",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_FISHIOUS_REND",
+          "MOVE_DRAGON_RUSH",
+          "MOVE_CRUNCH",
+          "MOVE_PSYCHIC_FANGS"
+        ]
+      }
+    ],
+    "TRAINER_JENNY_5": [
+      {
+        "level": 0,
+        "species": "SPECIES_PRIMARINA",
+        "item": "ITEM_THROAT_SPRAY",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_HYPER_VOICE",
+          "MOVE_MOONBLAST",
+          "MOVE_ICE_BEAM",
+          "MOVE_ENERGY_BALL"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_MANAPHY",
+        "item": "ITEM_LEFTOVERS",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_TAIL_GLOW",
+          "MOVE_SCALD",
+          "MOVE_ICE_BEAM",
+          "MOVE_ENERGY_BALL"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_FERALIGATR",
+        "item": "ITEM_FERALIGITE",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_LIQUIDATION",
+          "MOVE_ICE_PUNCH",
+          "MOVE_CRUNCH",
+          "MOVE_DRAGON_DANCE"
+        ]
+      }
+    ],
+    "TRAINER_DIANA_5": [
+      {
+        "level": 0,
+        "species": "SPECIES_BRELOOM",
+        "item": "ITEM_FOCUS_SASH",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_SPORE",
+          "MOVE_BULLET_SEED",
+          "MOVE_MACH_PUNCH",
+          "MOVE_ROCK_TOMB"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_VOLCARONA",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_QUIVER_DANCE",
+          "MOVE_FIERY_DANCE",
+          "MOVE_BUG_BUZZ",
+          "MOVE_GIGA_DRAIN"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_MEGANIUM",
+        "item": "ITEM_MEGANIUMITE",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_GIGA_DRAIN",
+          "MOVE_EARTH_POWER",
+          "MOVE_DAZZLING_GLEAM",
+          "MOVE_SYNTHESIS"
+        ]
+      }
+    ],
+    "TRAINER_ERNEST_5": [
+      {
+        "level": 0,
+        "species": "SPECIES_THUNDURUS",
+        "item": "ITEM_DAMP_ROCK",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_RAIN_DANCE",
+          "MOVE_THUNDER",
+          "MOVE_HURRICANE",
+          "MOVE_FOCUS_BLAST"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_URSHIFU_RAPID_STRIKE_STYLE",
+        "item": "ITEM_CHOICE_BAND",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_SURGING_STRIKES",
+          "MOVE_CLOSE_COMBAT",
+          "MOVE_AQUA_JET",
+          "MOVE_U_TURN"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_TENTACRUEL",
+        "item": "ITEM_BLACK_SLUDGE",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_HYDRO_PUMP",
+          "MOVE_SLUDGE_WAVE",
+          "MOVE_ICE_BEAM",
+          "MOVE_GIGA_DRAIN"
+        ]
+      }
+    ],
+    "TRAINER_JACKSON_5": [
+      {
+        "level": 1,
+        "species": "SPECIES_KECLEON",
+        "item": "ITEM_ASSAULT_VEST",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_FAKE_OUT",
+          "MOVE_SHADOW_SNEAK",
+          "MOVE_DRAIN_PUNCH",
+          "MOVE_KNOCK_OFF"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_SCEPTILE",
+        "item": "ITEM_SCEPTILITE",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_LEAF_STORM",
+          "MOVE_DRAGON_PULSE",
+          "MOVE_FOCUS_BLAST",
+          "MOVE_HIDDEN_POWER"
+        ]
+      }
+    ],
+    "TRAINER_CATHERINE_5": [
+      {
+        "level": 1,
+        "species": "SPECIES_SHAYMIN_SKY",
+        "item": "ITEM_CHOICE_SCARF",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_SEED_FLARE",
+          "MOVE_AIR_SLASH",
+          "MOVE_EARTH_POWER",
+          "MOVE_PSYCHIC"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_VENUSAUR",
+        "item": "ITEM_VENUSAURITE",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_GIGA_DRAIN",
+          "MOVE_SLUDGE_BOMB",
+          "MOVE_EARTH_POWER",
+          "MOVE_SYNTHESIS"
+        ]
+      }
+    ],
+    "TRAINER_KIRA_AND_DAN_5": [
+      {
+        "level": 0,
+        "species": "SPECIES_VOLBEAT",
+        "item": "ITEM_FOCUS_SASH",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_TAIL_GLOW",
+          "MOVE_BUG_BUZZ",
+          "MOVE_THUNDER_WAVE",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_ILLUMISE",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_SPDEF_CALM",
+        "moves": [
+          "MOVE_TAILWIND",
+          "MOVE_HELPING_HAND",
+          "MOVE_DAZZLING_GLEAM",
+          "MOVE_ENCORE"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_PHEROMOSA",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_CLOSE_COMBAT",
+          "MOVE_TRIPLE_AXEL",
+          "MOVE_U_TURN",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_BUZZWOLE",
+        "item": "ITEM_ASSAULT_VEST",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_DRAIN_PUNCH",
+          "MOVE_LEECH_LIFE",
+          "MOVE_ICE_PUNCH",
+          "MOVE_ROCK_SLIDE"
+        ]
+      }
+    ],
+    "TRAINER_JOHN_AND_JAY_5": [
+      {
+        "level": 0,
+        "species": "SPECIES_INDEEDEE_FEMALE",
+        "item": "ITEM_PSYCHIC_SEED",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_SPDEF_CALM",
+        "moves": [
+          "MOVE_FOLLOW_ME",
+          "MOVE_HELPING_HAND",
+          "MOVE_EXPANDING_FORCE",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_MEDICHAM",
+        "item": "ITEM_MEDICHAMITE",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_FAKE_OUT",
+          "MOVE_HIGH_JUMP_KICK",
+          "MOVE_ZEN_HEADBUTT",
+          "MOVE_ICE_PUNCH"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_HITMONTOP",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_FAKE_OUT",
+          "MOVE_CLOSE_COMBAT",
+          "MOVE_WIDE_GUARD",
+          "MOVE_HELPING_HAND"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_MARSHADOW",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_SPECTRAL_THIEF",
+          "MOVE_CLOSE_COMBAT",
+          "MOVE_SHADOW_SNEAK",
+          "MOVE_PROTECT"
+        ]
+      }
+    ],
+    "TRAINER_LILA_AND_ROY_5": [
+      {
+        "level": 0,
+        "species": "SPECIES_PELIPPER",
+        "item": "ITEM_DAMP_ROCK",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_HP_DEF_BOLD",
+        "moves": [
+          "MOVE_TAILWIND",
+          "MOVE_HURRICANE",
+          "MOVE_SCALD",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_LANTURN",
+        "item": "ITEM_ASSAULT_VEST",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_DISCHARGE",
+          "MOVE_SCALD",
+          "MOVE_ICY_WIND",
+          "MOVE_DAZZLING_GLEAM"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_SWAMPERT",
+        "item": "ITEM_SWAMPERTITE",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_ATK_SPEED_ADAMANT",
+        "moves": [
+          "MOVE_LIQUIDATION",
+          "MOVE_HIGH_HORSEPOWER",
+          "MOVE_ICE_PUNCH",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_ZAPDOS",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_DISCHARGE",
+          "MOVE_HURRICANE",
+          "MOVE_HEAT_WAVE",
+          "MOVE_ROOST"
+        ]
+      }
+    ],
+    "TRAINER_TATE_AND_LIZA_4": [
+      {
+        "level": 1,
+        "species": "SPECIES_INDEEDEE_FEMALE",
+        "item": "ITEM_PSYCHIC_SEED",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_SPDEF_CALM",
+        "moves": [
+          "MOVE_FOLLOW_ME",
+          "MOVE_HELPING_HAND",
+          "MOVE_EXPANDING_FORCE",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_MEWTWO",
+        "item": "ITEM_MEWTWONITE_Y",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_EXPANDING_FORCE",
+          "MOVE_AURA_SPHERE",
+          "MOVE_ICE_BEAM",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_STAKATAKA",
+        "item": "ITEM_WEAKNESS_POLICY",
+        "ability_slot": 0,
+        "spread": "SPREAD_STAKATAKA",
+        "moves": [
+          "MOVE_TRICK_ROOM",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_GYRO_BALL",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_JIRACHI",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_IRON_HEAD",
+          "MOVE_ICY_WIND",
+          "MOVE_FOLLOW_ME",
+          "MOVE_HELPING_HAND"
+        ]
+      },
+      {
+        "level": 3,
+        "species": "SPECIES_HOOPA_UNBOUND",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_HYPERSPACE_FURY",
+          "MOVE_ZEN_HEADBUTT",
+          "MOVE_GUNK_SHOT",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 3,
+        "species": "SPECIES_NECROZMA_DAWN_WINGS",
+        "item": "ITEM_POWER_HERB",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_SPATK_QUIET",
+        "moves": [
+          "MOVE_MOONGEIST_BEAM",
+          "MOVE_METEOR_BEAM",
+          "MOVE_TRICK_ROOM",
+          "MOVE_PROTECT"
+        ]
+      }
+    ],
+    "TRAINER_TATE_AND_LIZA_5": [
+      {
+        "level": 2,
+        "species": "SPECIES_TAPU_LELE",
+        "item": "ITEM_CHOICE_SCARF",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_EXPANDING_FORCE",
+          "MOVE_MOONBLAST",
+          "MOVE_DAZZLING_GLEAM",
+          "MOVE_FOCUS_BLAST"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_DIALGA",
+        "item": "ITEM_MENTAL_HERB",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_SPATK_QUIET",
+        "moves": [
+          "MOVE_TRICK_ROOM",
+          "MOVE_FLASH_CANNON",
+          "MOVE_DRACO_METEOR",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 3,
+        "species": "SPECIES_PALKIA",
+        "item": "ITEM_ASSAULT_VEST",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_SPACIAL_REND",
+          "MOVE_HYDRO_PUMP",
+          "MOVE_THUNDER",
+          "MOVE_EARTH_POWER"
+        ]
+      },
+      {
+        "level": 3,
+        "species": "SPECIES_LUNALA",
+        "item": "ITEM_POWER_HERB",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_MOONGEIST_BEAM",
+          "MOVE_METEOR_BEAM",
+          "MOVE_DAZZLING_GLEAM",
+          "MOVE_WIDE_GUARD"
+        ]
+      },
+      {
+        "level": 4,
+        "species": "SPECIES_METAGROSS",
+        "item": "ITEM_METAGROSSITE",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_METEOR_MASH",
+          "MOVE_ZEN_HEADBUTT",
+          "MOVE_BULLET_PUNCH",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 4,
+        "species": "SPECIES_CALYREX_SHADOW_RIDER",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_ASTRAL_BARRAGE",
+          "MOVE_PSYCHIC",
+          "MOVE_DRAINING_KISS",
+          "MOVE_PROTECT"
+        ]
+      }
+    ],
+    "TRAINER_ANDRES_5": [
+      {
+        "level": 0,
+        "species": "SPECIES_HIPPOWDON",
+        "item": "ITEM_SMOOTH_ROCK",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_DEF_IMPISH",
+        "moves": [
+          "MOVE_EARTHQUAKE",
+          "MOVE_SLACK_OFF",
+          "MOVE_STEALTH_ROCK",
+          "MOVE_TOXIC"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_DRACOZOLT",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_BOLT_BEAK",
+          "MOVE_DRAGON_CLAW",
+          "MOVE_FIRE_FANG",
+          "MOVE_EARTHQUAKE"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_EXCADRILL",
+        "item": "ITEM_EXCADRITE",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_EARTHQUAKE",
+          "MOVE_IRON_HEAD",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_SWORDS_DANCE"
+        ]
+      }
+    ],
+    "TRAINER_CORY_5": [
+      {
+        "level": 0,
+        "species": "SPECIES_PELIPPER",
+        "item": "ITEM_DAMP_ROCK",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_HP_DEF_BOLD",
+        "moves": [
+          "MOVE_SCALD",
+          "MOVE_HURRICANE",
+          "MOVE_ROOST",
+          "MOVE_U_TURN"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_ZAPDOS",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_THUNDER",
+          "MOVE_HURRICANE",
+          "MOVE_HEAT_WAVE",
+          "MOVE_ROOST"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_SWAMPERT",
+        "item": "ITEM_SWAMPERTITE",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_ATK_SPEED_ADAMANT",
+        "moves": [
+          "MOVE_WATERFALL",
+          "MOVE_EARTHQUAKE",
+          "MOVE_ICE_PUNCH",
+          "MOVE_SUPERPOWER"
+        ]
+      }
+    ],
+    "TRAINER_PABLO_5": [
+      {
+        "level": 0,
+        "species": "SPECIES_KYOGRE",
+        "item": "ITEM_CHOICE_SCARF",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_WATER_SPOUT",
+          "MOVE_ORIGIN_PULSE",
+          "MOVE_THUNDER",
+          "MOVE_ICE_BEAM"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_BARRASKEWDA",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_LIQUIDATION",
+          "MOVE_CLOSE_COMBAT",
+          "MOVE_PSYCHIC_FANGS",
+          "MOVE_CRUNCH"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_GRENINJA",
+        "item": "ITEM_GRENINJITE",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_HYDRO_PUMP",
+          "MOVE_DARK_PULSE",
+          "MOVE_ICE_BEAM",
+          "MOVE_GUNK_SHOT"
+        ]
+      }
+    ],
+    "TRAINER_KOJI_5": [
+      {
+        "level": 0,
+        "species": "SPECIES_KOMMO_O",
+        "item": "ITEM_THROAT_SPRAY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_CLANGING_SCALES",
+          "MOVE_CLANGOROUS_SOUL",
+          "MOVE_AURA_SPHERE",
+          "MOVE_FLAMETHROWER"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_MARSHADOW",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_SPECTRAL_THIEF",
+          "MOVE_CLOSE_COMBAT",
+          "MOVE_SHADOW_SNEAK",
+          "MOVE_ICE_PUNCH"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_HAWLUCHA",
+        "item": "ITEM_HAWLUCHANITE",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_CLOSE_COMBAT",
+          "MOVE_ACROBATICS",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_SWORDS_DANCE"
+        ]
+      }
+    ],
+    "TRAINER_CRISTIN_5": [
+      {
+        "level": 0,
+        "species": "SPECIES_SPINDA",
+        "item": "ITEM_FOCUS_SASH",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_SUPERPOWER",
+          "MOVE_SUCKER_PUNCH",
+          "MOVE_TEETER_DANCE",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_EXPLOUD",
+        "item": "ITEM_CHOICE_SPECS",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_BOOMBURST",
+          "MOVE_FLAMETHROWER",
+          "MOVE_ICE_BEAM",
+          "MOVE_SURF"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_REGIGIGAS",
+        "item": "ITEM_LEFTOVERS",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_CRUSH_GRIP",
+          "MOVE_DRAIN_PUNCH",
+          "MOVE_KNOCK_OFF",
+          "MOVE_THUNDER_WAVE"
+        ]
+      }
+    ],
+    "TRAINER_FERNANDO_5": [
+      {
+        "level": 0,
+        "species": "SPECIES_TOXTRICITY",
+        "item": "ITEM_CHOICE_SPECS",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_OVERDRIVE",
+          "MOVE_BOOMBURST",
+          "MOVE_SLUDGE_WAVE",
+          "MOVE_VOLT_SWITCH"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_REGIELEKI",
+        "item": "ITEM_FOCUS_SASH",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_THUNDERBOLT",
+          "MOVE_ELECTROWEB",
+          "MOVE_VOLT_SWITCH",
+          "MOVE_RAPID_SPIN"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_RAICHU",
+        "item": "ITEM_RAICHUNITE_X",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_FAKE_OUT",
+          "MOVE_VOLT_TACKLE",
+          "MOVE_EXTREME_SPEED",
+          "MOVE_KNOCK_OFF"
+        ]
+      }
+    ],
+    "TRAINER_GABRIELLE_5": [
+      {
+        "level": 0,
+        "species": "SPECIES_PRIMARINA",
+        "item": "ITEM_THROAT_SPRAY",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_HYPER_VOICE",
+          "MOVE_MOONBLAST",
+          "MOVE_ICY_WIND",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_TOXTRICITY",
+        "item": "ITEM_CHOICE_SPECS",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_OVERDRIVE",
+          "MOVE_BOOMBURST",
+          "MOVE_SLUDGE_WAVE",
+          "MOVE_VOLT_SWITCH"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_NOIVERN",
+        "item": "ITEM_FOCUS_SASH",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_TAILWIND",
+          "MOVE_BOOMBURST",
+          "MOVE_DRACO_METEOR",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_MELOETTA",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_RELIC_SONG",
+          "MOVE_PSYCHIC",
+          "MOVE_HYPER_VOICE",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_EXPLOUD",
+        "item": "ITEM_ASSAULT_VEST",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_BOOMBURST",
+          "MOVE_FLAMETHROWER",
+          "MOVE_ICE_BEAM",
+          "MOVE_SURF"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_ALTARIA",
+        "item": "ITEM_ALTARIANITE",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_HYPER_VOICE",
+          "MOVE_FIRE_BLAST",
+          "MOVE_TAILWIND",
+          "MOVE_PROTECT"
+        ]
+      }
+    ],
+    "TRAINER_THALIA_5": [
+      {
+        "level": 0,
+        "species": "SPECIES_LUVDISC",
+        "item": "ITEM_FOCUS_SASH",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_HYDRO_PUMP",
+          "MOVE_DRAINING_KISS",
+          "MOVE_LOVELY_KISS",
+          "MOVE_ICE_BEAM"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_MANAPHY",
+        "item": "ITEM_LEFTOVERS",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_TAIL_GLOW",
+          "MOVE_SCALD",
+          "MOVE_ICE_BEAM",
+          "MOVE_ENERGY_BALL"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_KINGDRA",
+        "item": "ITEM_KINGDRANITE",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_MODEST",
+        "moves": [
+          "MOVE_HYDRO_PUMP",
+          "MOVE_DRACO_METEOR",
+          "MOVE_HURRICANE",
+          "MOVE_FLASH_CANNON"
+        ]
+      }
+    ],
+    "TRAINER_WALLY_MAUVILLE": [
+      {
+        "level": 0,
+        "species": "SPECIES_ROSELIA",
+        "item": "ITEM_EVIOLITE",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_DEF_BOLD",
+        "moves": [
+          "MOVE_RAGE_POWDER",
+          "MOVE_GIGA_DRAIN",
+          "MOVE_SLUDGE_BOMB",
+          "MOVE_SLEEP_POWDER"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_AZUMARILL",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_BELLY_DRUM",
+          "MOVE_AQUA_JET",
+          "MOVE_PLAY_ROUGH",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_FLETCHINDER",
+        "item": "ITEM_EVIOLITE",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_TAILWIND",
+          "MOVE_ACROBATICS",
+          "MOVE_WILL_O_WISP",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_KIRLIA",
+        "item": "ITEM_FOCUS_SASH",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_ICY_WIND",
+          "MOVE_DAZZLING_GLEAM",
+          "MOVE_HELPING_HAND",
+          "MOVE_PROTECT"
+        ]
+      }
+    ],
+    "TRAINER_WALLY_VR_1": [
+      {
+        "level": 1,
+        "species": "SPECIES_TOGEKISS",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_HP_DEF_BOLD",
+        "moves": [
+          "MOVE_FOLLOW_ME",
+          "MOVE_TAILWIND",
+          "MOVE_AIR_SLASH",
+          "MOVE_HELPING_HAND"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_GARCHOMP",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_EARTHQUAKE",
+          "MOVE_DRAGON_CLAW",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_MAGNEZONE",
+        "item": "ITEM_AIR_BALLOON",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_ELECTROWEB",
+          "MOVE_FLASH_CANNON",
+          "MOVE_THUNDERBOLT",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_ROSERADE",
+        "item": "ITEM_FOCUS_SASH",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_SLEEP_POWDER",
+          "MOVE_SLUDGE_BOMB",
+          "MOVE_LEAF_STORM",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_AZUMARILL",
+        "item": "ITEM_ASSAULT_VEST",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_LIQUIDATION",
+          "MOVE_PLAY_ROUGH",
+          "MOVE_AQUA_JET",
+          "MOVE_KNOCK_OFF"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_GALLADE",
+        "item": "ITEM_GALLADITE",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_PSYCHO_CUT",
+          "MOVE_CLOSE_COMBAT",
+          "MOVE_WIDE_GUARD",
+          "MOVE_PROTECT"
+        ]
+      }
+    ],
+    "TRAINER_WALLY_VR_2": [
+      {
+        "level": 1,
+        "species": "SPECIES_INDEEDEE_FEMALE",
+        "item": "ITEM_PSYCHIC_SEED",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_SPDEF_CALM",
+        "moves": [
+          "MOVE_FOLLOW_ME",
+          "MOVE_HELPING_HAND",
+          "MOVE_EXPANDING_FORCE",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_GALLADE",
+        "item": "ITEM_GALLADITE",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_PSYCHO_CUT",
+          "MOVE_CLOSE_COMBAT",
+          "MOVE_KNOCK_OFF",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_DRAGAPULT",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_DRACO_METEOR",
+          "MOVE_SHADOW_BALL",
+          "MOVE_WILL_O_WISP",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_HEATRAN",
+        "item": "ITEM_SHUCA_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_ERUPTION",
+          "MOVE_EARTH_POWER",
+          "MOVE_FLASH_CANNON",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_INCINEROAR",
+        "item": "ITEM_EJECT_BUTTON",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_FAKE_OUT",
+          "MOVE_FLARE_BLITZ",
+          "MOVE_SNARL",
+          "MOVE_PARTING_SHOT"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_SUICUNE",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_DEF_BOLD",
+        "moves": [
+          "MOVE_TAILWIND",
+          "MOVE_SCALD",
+          "MOVE_ICY_WIND",
+          "MOVE_PROTECT"
+        ]
+      }
+    ],
+    "TRAINER_WALLY_VR_3": [
+      {
+        "level": 1,
+        "species": "SPECIES_TYRANITAR",
+        "item": "ITEM_SMOOTH_ROCK",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_ROCK_SLIDE",
+          "MOVE_CRUNCH",
+          "MOVE_LOW_KICK",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_EXCADRILL",
+        "item": "ITEM_FOCUS_SASH",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_HIGH_HORSEPOWER",
+          "MOVE_IRON_HEAD",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_ROTOM_WASH",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_HYDRO_PUMP",
+          "MOVE_VOLT_SWITCH",
+          "MOVE_WILL_O_WISP",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_TOGEKISS",
+        "item": "ITEM_BABIRI_BERRY",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_HP_DEF_BOLD",
+        "moves": [
+          "MOVE_FOLLOW_ME",
+          "MOVE_AIR_SLASH",
+          "MOVE_TAILWIND",
+          "MOVE_HELPING_HAND"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_ROSERADE",
+        "item": "ITEM_FOCUS_SASH",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_SLEEP_POWDER",
+          "MOVE_SLUDGE_BOMB",
+          "MOVE_LEAF_STORM",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_GALLADE",
+        "item": "ITEM_GALLADITE",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_PSYCHO_CUT",
+          "MOVE_CLOSE_COMBAT",
+          "MOVE_WIDE_GUARD",
+          "MOVE_PROTECT"
+        ]
+      }
+    ],
+    "TRAINER_WALLY_VR_4": [
+      {
+        "level": 2,
+        "species": "SPECIES_PELIPPER",
+        "item": "ITEM_DAMP_ROCK",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_HP_DEF_BOLD",
+        "moves": [
+          "MOVE_TAILWIND",
+          "MOVE_HURRICANE",
+          "MOVE_SCALD",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_ZAPDOS",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_THUNDER",
+          "MOVE_HURRICANE",
+          "MOVE_HEAT_WAVE",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 3,
+        "species": "SPECIES_BARRASKEWDA",
+        "item": "ITEM_FOCUS_SASH",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_LIQUIDATION",
+          "MOVE_CLOSE_COMBAT",
+          "MOVE_PSYCHIC_FANGS",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 3,
+        "species": "SPECIES_FERROTHORN",
+        "item": "ITEM_ROCKY_HELMET",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_ATK_BRAVE",
+        "moves": [
+          "MOVE_POWER_WHIP",
+          "MOVE_GYRO_BALL",
+          "MOVE_LEECH_SEED",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 4,
+        "species": "SPECIES_DRAGAPULT",
+        "item": "ITEM_CHOICE_SPECS",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_DRACO_METEOR",
+          "MOVE_SHADOW_BALL",
+          "MOVE_THUNDER",
+          "MOVE_U_TURN"
+        ]
+      },
+      {
+        "level": 4,
+        "species": "SPECIES_GALLADE",
+        "item": "ITEM_GALLADITE",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_PSYCHO_CUT",
+          "MOVE_CLOSE_COMBAT",
+          "MOVE_KNOCK_OFF",
+          "MOVE_PROTECT"
+        ]
+      }
+    ],
+    "TRAINER_WALLY_VR_5": [
+      {
+        "level": 2,
+        "species": "SPECIES_JIRACHI",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_FOLLOW_ME",
+          "MOVE_ICY_WIND",
+          "MOVE_IRON_HEAD",
+          "MOVE_HELPING_HAND"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_TAPU_FINI",
+        "item": "ITEM_LEFTOVERS",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_MUDDY_WATER",
+          "MOVE_MOONBLAST",
+          "MOVE_CALM_MIND",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 3,
+        "species": "SPECIES_GARCHOMP",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_EARTHQUAKE",
+          "MOVE_DRAGON_CLAW",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 3,
+        "species": "SPECIES_MAGNEZONE",
+        "item": "ITEM_AIR_BALLOON",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_ELECTROWEB",
+          "MOVE_FLASH_CANNON",
+          "MOVE_THUNDERBOLT",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 4,
+        "species": "SPECIES_LATIAS",
+        "item": "ITEM_SOUL_DEW",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_TAILWIND",
+          "MOVE_DRACO_METEOR",
+          "MOVE_PSYCHIC",
+          "MOVE_HEAL_PULSE"
+        ]
+      },
+      {
+        "level": 4,
+        "species": "SPECIES_GALLADE",
+        "item": "ITEM_GALLADITE",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_PSYCHO_CUT",
+          "MOVE_CLOSE_COMBAT",
+          "MOVE_WIDE_GUARD",
+          "MOVE_PROTECT"
+        ]
+      }
+    ],
+    "TRAINER_COLTON": [
+      {
+        "level": 1,
+        "species": "SPECIES_MEOWSTIC",
+        "item": "ITEM_LIGHT_CLAY",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_DEF_BOLD",
+        "moves": [
+          "MOVE_REFLECT",
+          "MOVE_LIGHT_SCREEN",
+          "MOVE_THUNDER_WAVE",
+          "MOVE_PSYCHIC"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_LIEPARD",
+        "item": "ITEM_FOCUS_SASH",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_FAKE_OUT",
+          "MOVE_ENCORE",
+          "MOVE_THUNDER_WAVE",
+          "MOVE_FOUL_PLAY"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_PERSIAN_ALOLAN",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_DEF_BOLD",
+        "moves": [
+          "MOVE_FAKE_OUT",
+          "MOVE_ICY_WIND",
+          "MOVE_FOUL_PLAY",
+          "MOVE_PARTING_SHOT"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_INCINEROAR",
+        "item": "ITEM_EJECT_BUTTON",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_FAKE_OUT",
+          "MOVE_FLARE_BLITZ",
+          "MOVE_SNARL",
+          "MOVE_PARTING_SHOT"
+        ]
+      },
+      {
+        "level": 3,
+        "species": "SPECIES_DELCATTY",
+        "item": "ITEM_THROAT_SPRAY",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_HYPER_VOICE",
+          "MOVE_HELPING_HAND",
+          "MOVE_THUNDER_WAVE",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 3,
+        "species": "SPECIES_ABSOL",
+        "item": "ITEM_ABSOLITE",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_KNOCK_OFF",
+          "MOVE_PLAY_ROUGH",
+          "MOVE_SUCKER_PUNCH",
+          "MOVE_PROTECT"
+        ]
+      }
+    ],
+    "TRAINER_DARRIN": [
+      {
+        "level": 0,
+        "species": "SPECIES_PELIPPER",
+        "item": "ITEM_DAMP_ROCK",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_HP_DEF_BOLD",
+        "moves": [
+          "MOVE_TAILWIND",
+          "MOVE_HURRICANE",
+          "MOVE_SCALD",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_TENTACRUEL",
+        "item": "ITEM_BLACK_SLUDGE",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_SLUDGE_WAVE",
+          "MOVE_MUDDY_WATER",
+          "MOVE_ICY_WIND",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_BARRASKEWDA",
+        "item": "ITEM_FOCUS_SASH",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_LIQUIDATION",
+          "MOVE_CLOSE_COMBAT",
+          "MOVE_PSYCHIC_FANGS",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_ROTOM_WASH",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_THUNDER",
+          "MOVE_HYDRO_PUMP",
+          "MOVE_VOLT_SWITCH",
+          "MOVE_WILL_O_WISP"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_KINGDRA",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_MODEST",
+        "moves": [
+          "MOVE_MUDDY_WATER",
+          "MOVE_DRACO_METEOR",
+          "MOVE_HURRICANE",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_FERALIGATR",
+        "item": "ITEM_FERALIGITE",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_LIQUIDATION",
+          "MOVE_ICE_PUNCH",
+          "MOVE_CRUNCH",
+          "MOVE_PROTECT"
+        ]
+      }
+    ],
+    "TRAINER_GABBY_AND_TY_4": [
+      {
+        "level": 0,
+        "species": "SPECIES_NOIVERN",
+        "item": "ITEM_FOCUS_SASH",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_TAILWIND",
+          "MOVE_BOOMBURST",
+          "MOVE_DRACO_METEOR",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_EXPLOUD",
+        "item": "ITEM_CHOICE_SPECS",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_BOOMBURST",
+          "MOVE_FLAMETHROWER",
+          "MOVE_ICE_BEAM",
+          "MOVE_SURF"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_MAGNEZONE",
+        "item": "ITEM_ASSAULT_VEST",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_FLASH_CANNON",
+          "MOVE_THUNDERBOLT",
+          "MOVE_ELECTROWEB",
+          "MOVE_VOLT_SWITCH"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_SYLVEON",
+        "item": "ITEM_THROAT_SPRAY",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_HYPER_VOICE",
+          "MOVE_HELPING_HAND",
+          "MOVE_MYSTICAL_FIRE",
+          "MOVE_PROTECT"
+        ]
+      }
+    ],
+    "TRAINER_GABBY_AND_TY_5": [
+      {
+        "level": 0,
+        "species": "SPECIES_TOXTRICITY",
+        "item": "ITEM_CHOICE_SPECS",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_OVERDRIVE",
+          "MOVE_BOOMBURST",
+          "MOVE_SLUDGE_WAVE",
+          "MOVE_VOLT_SWITCH"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_KOMMO_O",
+        "item": "ITEM_THROAT_SPRAY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_CLANGING_SCALES",
+          "MOVE_CLANGOROUS_SOUL",
+          "MOVE_AURA_SPHERE",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_PRIMARINA",
+        "item": "ITEM_THROAT_SPRAY",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_HYPER_VOICE",
+          "MOVE_MOONBLAST",
+          "MOVE_ICY_WIND",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_ALTARIA",
+        "item": "ITEM_ALTARIANITE",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_HYPER_VOICE",
+          "MOVE_TAILWIND",
+          "MOVE_FIRE_BLAST",
+          "MOVE_PROTECT"
+        ]
+      }
+    ],
+    "TRAINER_GABBY_AND_TY_6": [
+      {
+        "level": 0,
+        "species": "SPECIES_MELOETTA",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_RELIC_SONG",
+          "MOVE_PSYCHIC",
+          "MOVE_HYPER_VOICE",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_EXPLOUD",
+        "item": "ITEM_ASSAULT_VEST",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_BOOMBURST",
+          "MOVE_FLAMETHROWER",
+          "MOVE_ICE_BEAM",
+          "MOVE_SURF"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_NOIVERN",
+        "item": "ITEM_FOCUS_SASH",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_TAILWIND",
+          "MOVE_BOOMBURST",
+          "MOVE_DRACO_METEOR",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_GARDEVOIR",
+        "item": "ITEM_GARDEVOIRITE",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_HYPER_VOICE",
+          "MOVE_PSYSHOCK",
+          "MOVE_MYSTICAL_FIRE",
+          "MOVE_PROTECT"
+        ]
+      }
+    ],
+    "TRAINER_TRENT_4": [
+      {
+        "level": 0,
+        "species": "SPECIES_DUSCLOPS",
+        "item": "ITEM_EVIOLITE",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_DEF_SPDEF_SASSY",
+        "moves": [
+          "MOVE_TRICK_ROOM",
+          "MOVE_WILL_O_WISP",
+          "MOVE_HELPING_HAND",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_GOLEM",
+        "item": "ITEM_CHOICE_BAND",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_HP_ATK_BRAVE",
+        "moves": [
+          "MOVE_EXPLOSION",
+          "MOVE_EARTHQUAKE",
+          "MOVE_HEAVY_SLAM",
+          "MOVE_STONE_EDGE"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_ORANGURU",
+        "item": "ITEM_MENTAL_HERB",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_DEF_SPDEF_SASSY",
+        "moves": [
+          "MOVE_TRICK_ROOM",
+          "MOVE_INSTRUCT",
+          "MOVE_PSYCHIC",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_GOLEM_ALOLAN",
+        "item": "ITEM_NORMAL_GEM",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_ATK_BRAVE",
+        "moves": [
+          "MOVE_EXPLOSION",
+          "MOVE_WILD_CHARGE",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_GIGALITH",
+        "item": "ITEM_CUSTAP_BERRY",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_HP_ATK_BRAVE",
+        "moves": [
+          "MOVE_EXPLOSION",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_WIDE_GUARD",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_GOLEM",
+        "item": "ITEM_WEAKNESS_POLICY",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_HP_ATK_BRAVE",
+        "moves": [
+          "MOVE_EARTHQUAKE",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_EXPLOSION",
+          "MOVE_PROTECT"
+        ]
+      }
+    ],
+    "TRAINER_GABBY_AND_TY_3": [
+      {
+        "level": -1,
+        "species": "SPECIES_CHATOT",
+        "item": "ITEM_FOCUS_SASH",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_TAILWIND",
+          "MOVE_BOOMBURST",
+          "MOVE_HEAT_WAVE",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": -1,
+        "species": "SPECIES_KRICKETUNE",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_STICKY_WEB",
+          "MOVE_HELPING_HAND",
+          "MOVE_X_SCISSOR",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_EXPLOUD",
+        "item": "ITEM_CHOICE_SPECS",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_BOOMBURST",
+          "MOVE_FLAMETHROWER",
+          "MOVE_ICE_BEAM",
+          "MOVE_SURF"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_SYLVEON",
+        "item": "ITEM_THROAT_SPRAY",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_HYPER_VOICE",
+          "MOVE_HELPING_HAND",
+          "MOVE_MYSTICAL_FIRE",
+          "MOVE_PROTECT"
+        ]
+      }
+    ],
+    "TRAINER_BRENDAN_RUSTBORO_TREECKO": [
+      {
+        "level": -2,
+        "species": "SPECIES_MOLTRES",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_TAILWIND",
+          "MOVE_HEAT_WAVE",
+          "MOVE_AIR_SLASH",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": -2,
+        "species": "SPECIES_DEWPIDER",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_LIQUIDATION",
+          "MOVE_BUG_BITE",
+          "MOVE_WIDE_GUARD",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": -1,
+        "species": "SPECIES_SHROOMISH",
+        "item": "ITEM_FOCUS_SASH",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_HP_DEF_BOLD",
+        "moves": [
+          "MOVE_SPORE",
+          "MOVE_RAGE_POWDER",
+          "MOVE_SEED_BOMB",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_COMBUSKEN",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_FLAME_CHARGE",
+          "MOVE_DOUBLE_KICK",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_PROTECT"
+        ]
+      }
+    ],
+    "TRAINER_BRENDAN_RUSTBORO_MUDKIP": [
+      {
+        "level": -2,
+        "species": "SPECIES_ZAPDOS",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_TAILWIND",
+          "MOVE_THUNDERBOLT",
+          "MOVE_HEAT_WAVE",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": -2,
+        "species": "SPECIES_DEWPIDER",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_LIQUIDATION",
+          "MOVE_BUG_BITE",
+          "MOVE_WIDE_GUARD",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": -1,
+        "species": "SPECIES_GROWLITHE",
+        "item": "ITEM_EVIOLITE",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_FLAME_WHEEL",
+          "MOVE_SNARL",
+          "MOVE_HELPING_HAND",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_GROVYLE",
+        "item": "ITEM_FOCUS_SASH",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_LEAF_BLADE",
+          "MOVE_ACROBATICS",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_PROTECT"
+        ]
+      }
+    ],
+    "TRAINER_BRENDAN_RUSTBORO_TORCHIC": [
+      {
+        "level": -2,
+        "species": "SPECIES_ARTICUNO",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_TAILWIND",
+          "MOVE_FREEZE_DRY",
+          "MOVE_ICY_WIND",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": -2,
+        "species": "SPECIES_GROWLITHE",
+        "item": "ITEM_EVIOLITE",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_FLAME_WHEEL",
+          "MOVE_SNARL",
+          "MOVE_HELPING_HAND",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": -1,
+        "species": "SPECIES_SHROOMISH",
+        "item": "ITEM_FOCUS_SASH",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_HP_DEF_BOLD",
+        "moves": [
+          "MOVE_SPORE",
+          "MOVE_RAGE_POWDER",
+          "MOVE_SEED_BOMB",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_MARSHTOMP",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_MUDDY_WATER",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_ICE_PUNCH",
+          "MOVE_PROTECT"
+        ]
+      }
+    ],
+    "TRAINER_MAY_RUSTBORO_MUDKIP": [
+      {
+        "level": -2,
+        "species": "SPECIES_ZAPDOS",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_TAILWIND",
+          "MOVE_THUNDERBOLT",
+          "MOVE_HEAT_WAVE",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": -2,
+        "species": "SPECIES_STARYU",
+        "item": "ITEM_EVIOLITE",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_ICY_WIND",
+          "MOVE_BUBBLE_BEAM",
+          "MOVE_PSYSHOCK",
+          "MOVE_RECOVER"
+        ]
+      },
+      {
+        "level": -1,
+        "species": "SPECIES_PONYTA",
+        "item": "ITEM_EVIOLITE",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_FLAME_CHARGE",
+          "MOVE_HIGH_HORSEPOWER",
+          "MOVE_PLAY_ROUGH",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_GROVYLE",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_LEAF_BLADE",
+          "MOVE_ACROBATICS",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_PROTECT"
+        ]
+      }
+    ],
+    "TRAINER_MAY_RUSTBORO_TREECKO": [
+      {
+        "level": -2,
+        "species": "SPECIES_MOLTRES",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_TAILWIND",
+          "MOVE_HEAT_WAVE",
+          "MOVE_AIR_SLASH",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": -2,
+        "species": "SPECIES_STARYU",
+        "item": "ITEM_EVIOLITE",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_ICY_WIND",
+          "MOVE_BUBBLE_BEAM",
+          "MOVE_PSYSHOCK",
+          "MOVE_RECOVER"
+        ]
+      },
+      {
+        "level": -1,
+        "species": "SPECIES_STEENEE",
+        "item": "ITEM_EVIOLITE",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_DEF_IMPISH",
+        "moves": [
+          "MOVE_HELPING_HAND",
+          "MOVE_RAZOR_LEAF",
+          "MOVE_CHARM",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_COMBUSKEN",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_FLAME_CHARGE",
+          "MOVE_DOUBLE_KICK",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_PROTECT"
+        ]
+      }
+    ],
+    "TRAINER_MAY_RUSTBORO_TORCHIC": [
+      {
+        "level": -2,
+        "species": "SPECIES_ARTICUNO",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_TAILWIND",
+          "MOVE_FREEZE_DRY",
+          "MOVE_ICY_WIND",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": -2,
+        "species": "SPECIES_STEENEE",
+        "item": "ITEM_EVIOLITE",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_DEF_IMPISH",
+        "moves": [
+          "MOVE_HELPING_HAND",
+          "MOVE_RAZOR_LEAF",
+          "MOVE_CHARM",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": -1,
+        "species": "SPECIES_PONYTA",
+        "item": "ITEM_EVIOLITE",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_FLAME_CHARGE",
+          "MOVE_HIGH_HORSEPOWER",
+          "MOVE_PLAY_ROUGH",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_MARSHTOMP",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_MUDDY_WATER",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_ICE_PUNCH",
+          "MOVE_PROTECT"
+        ]
+      }
+    ],
+    "TRAINER_GABRIELLE_2": [
+      {
+        "level": -1,
+        "species": "SPECIES_MIMIKYU",
+        "item": "ITEM_MENTAL_HERB",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_ATK_BRAVE",
+        "moves": [
+          "MOVE_TRICK_ROOM",
+          "MOVE_PLAY_ROUGH",
+          "MOVE_SHADOW_SNEAK",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": -1,
+        "species": "SPECIES_HATTERENE",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_SPATK_QUIET",
+        "moves": [
+          "MOVE_TRICK_ROOM",
+          "MOVE_PSYCHIC",
+          "MOVE_DAZZLING_GLEAM",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_DHELMISE",
+        "item": "ITEM_ASSAULT_VEST",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_ATK_BRAVE",
+        "moves": [
+          "MOVE_POWER_WHIP",
+          "MOVE_ANCHOR_SHOT",
+          "MOVE_POLTERGEIST",
+          "MOVE_ROCK_SLIDE"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_CURSOLA",
+        "item": "ITEM_FOCUS_SASH",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_SPATK_QUIET",
+        "moves": [
+          "MOVE_SHADOW_BALL",
+          "MOVE_EARTH_POWER",
+          "MOVE_STRENGTH_SAP",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_BANETTE",
+        "item": "ITEM_BANETTITE",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_ATK_BRAVE",
+        "moves": [
+          "MOVE_SHADOW_CLAW",
+          "MOVE_SUCKER_PUNCH",
+          "MOVE_WILL_O_WISP",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_MARSHADOW",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_SPECTRAL_THIEF",
+          "MOVE_CLOSE_COMBAT",
+          "MOVE_SHADOW_SNEAK",
+          "MOVE_PROTECT"
+        ]
+      }
+    ],
+    "TRAINER_GABRIELLE_3": [
+      {
+        "level": 0,
+        "species": "SPECIES_POLITOED",
+        "item": "ITEM_EJECT_BUTTON",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_DEF_BOLD",
+        "moves": [
+          "MOVE_PERISH_SONG",
+          "MOVE_ICY_WIND",
+          "MOVE_MUDDY_WATER",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_GENGAR",
+        "item": "ITEM_GENGARITE",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_SHADOW_BALL",
+          "MOVE_SLUDGE_BOMB",
+          "MOVE_DISABLE",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_SABLEYE",
+        "item": "ITEM_MENTAL_HERB",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_DEF_IMPISH",
+        "moves": [
+          "MOVE_FAKE_OUT",
+          "MOVE_QUASH",
+          "MOVE_WILL_O_WISP",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_GOTHITELLE",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_DEF_BOLD",
+        "moves": [
+          "MOVE_FAKE_OUT",
+          "MOVE_PSYCHIC",
+          "MOVE_HEAL_PULSE",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_JELLICENT",
+        "item": "ITEM_LEFTOVERS",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_SPATK_QUIET",
+        "moves": [
+          "MOVE_WATER_SPOUT",
+          "MOVE_SHADOW_BALL",
+          "MOVE_TRICK_ROOM",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_LUNALA",
+        "item": "ITEM_POWER_HERB",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_MOONGEIST_BEAM",
+          "MOVE_METEOR_BEAM",
+          "MOVE_DAZZLING_GLEAM",
+          "MOVE_WIDE_GUARD"
+        ]
+      }
+    ],
+    "TRAINER_GABRIELLE_4": [
+      {
+        "level": 0,
+        "species": "SPECIES_GIRATINA",
+        "item": "ITEM_LEFTOVERS",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_SHADOW_BALL",
+          "MOVE_DRACO_METEOR",
+          "MOVE_ICY_WIND",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_LUNALA",
+        "item": "ITEM_POWER_HERB",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_MOONGEIST_BEAM",
+          "MOVE_METEOR_BEAM",
+          "MOVE_DAZZLING_GLEAM",
+          "MOVE_WIDE_GUARD"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_DARKRAI",
+        "item": "ITEM_FOCUS_SASH",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_DARK_VOID",
+          "MOVE_DARK_PULSE",
+          "MOVE_ICY_WIND",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_MARSHADOW",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_SPECTRAL_THIEF",
+          "MOVE_CLOSE_COMBAT",
+          "MOVE_SHADOW_SNEAK",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_AEGISLASH",
+        "item": "ITEM_WEAKNESS_POLICY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_ATK_BRAVE",
+        "moves": [
+          "MOVE_KINGS_SHIELD",
+          "MOVE_SHADOW_SNEAK",
+          "MOVE_IRON_HEAD",
+          "MOVE_SACRED_SWORD"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_CHANDELURE",
+        "item": "ITEM_CHANDELURITE",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_SPATK_QUIET",
+        "moves": [
+          "MOVE_HEAT_WAVE",
+          "MOVE_SHADOW_BALL",
+          "MOVE_TRICK_ROOM",
+          "MOVE_PROTECT"
+        ]
+      }
+    ],
+    "TRAINER_FERNANDO_2": [
+      {
+        "level": -1,
+        "species": "SPECIES_CHATOT",
+        "item": "ITEM_FOCUS_SASH",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_BOOMBURST",
+          "MOVE_HEAT_WAVE",
+          "MOVE_U_TURN",
+          "MOVE_TAUNT"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_TOXTRICITY",
+        "item": "ITEM_CHOICE_SPECS",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_OVERDRIVE",
+          "MOVE_BOOMBURST",
+          "MOVE_SLUDGE_WAVE",
+          "MOVE_VOLT_SWITCH"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_ZEBSTRIKA",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_WILD_CHARGE",
+          "MOVE_FLARE_BLITZ",
+          "MOVE_LOW_KICK",
+          "MOVE_QUICK_ATTACK"
+        ]
+      }
+    ],
+    "TRAINER_FERNANDO_3": [
+      {
+        "level": 0,
+        "species": "SPECIES_NOIVERN",
+        "item": "ITEM_THROAT_SPRAY",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_BOOMBURST",
+          "MOVE_DRACO_METEOR",
+          "MOVE_HURRICANE",
+          "MOVE_FLAMETHROWER"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_EXPLOUD",
+        "item": "ITEM_CHOICE_SPECS",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_BOOMBURST",
+          "MOVE_FLAMETHROWER",
+          "MOVE_ICE_BEAM",
+          "MOVE_SURF"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_TOXTRICITY",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_OVERDRIVE",
+          "MOVE_BOOMBURST",
+          "MOVE_SLUDGE_WAVE",
+          "MOVE_VOLT_SWITCH"
+        ]
+      }
+    ],
+    "TRAINER_FERNANDO_4": [
+      {
+        "level": 0,
+        "species": "SPECIES_MELOETTA",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_RELIC_SONG",
+          "MOVE_PSYCHIC",
+          "MOVE_HYPER_VOICE",
+          "MOVE_FOCUS_BLAST"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_TOXTRICITY",
+        "item": "ITEM_CHOICE_SPECS",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_OVERDRIVE",
+          "MOVE_BOOMBURST",
+          "MOVE_SLUDGE_WAVE",
+          "MOVE_VOLT_SWITCH"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_ALTARIA",
+        "item": "ITEM_ALTARIANITE",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_HYPER_VOICE",
+          "MOVE_FIRE_BLAST",
+          "MOVE_ICE_BEAM",
+          "MOVE_ROOST"
+        ]
+      }
+    ],
+    "TRAINER_CAMERON_3": [
+      {
+        "level": 0,
+        "species": "SPECIES_SOLROCK",
+        "item": "ITEM_WEAKNESS_POLICY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_ATK_BRAVE",
+        "moves": [
+          "MOVE_TRICK_ROOM",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_ZEN_HEADBUTT",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_LUNATONE",
+        "item": "ITEM_POWER_HERB",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_SPATK_QUIET",
+        "moves": [
+          "MOVE_METEOR_BEAM",
+          "MOVE_PSYCHIC",
+          "MOVE_MOONBLAST",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_STAKATAKA",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_STAKATAKA",
+        "moves": [
+          "MOVE_TRICK_ROOM",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_GYRO_BALL",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_NECROZMA",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_SPATK_QUIET",
+        "moves": [
+          "MOVE_PHOTON_GEYSER",
+          "MOVE_EARTH_POWER",
+          "MOVE_DAZZLING_GLEAM",
+          "MOVE_PROTECT"
+        ]
+      }
+    ],
+    "TRAINER_CAMERON_4": [
+      {
+        "level": 0,
+        "species": "SPECIES_TAPU_LELE",
+        "item": "ITEM_PSYCHIC_SEED",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_EXPANDING_FORCE",
+          "MOVE_MOONBLAST",
+          "MOVE_DAZZLING_GLEAM",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_CRESSELIA",
+        "item": "ITEM_MENTAL_HERB",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_DEF_SPDEF_SASSY",
+        "moves": [
+          "MOVE_TRICK_ROOM",
+          "MOVE_HELPING_HAND",
+          "MOVE_ICY_WIND",
+          "MOVE_MOONLIGHT"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_SLOWBRO",
+        "item": "ITEM_SLOWBRONITE",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_SPATK_QUIET",
+        "moves": [
+          "MOVE_EXPANDING_FORCE",
+          "MOVE_SCALD",
+          "MOVE_ICE_BEAM",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_VICTINI",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_V_CREATE",
+          "MOVE_BOLT_STRIKE",
+          "MOVE_ZEN_HEADBUTT",
+          "MOVE_PROTECT"
+        ]
+      }
+    ],
+    "TRAINER_PABLO_2": [
+      {
+        "level": 0,
+        "species": "SPECIES_BARRASKEWDA",
+        "item": "ITEM_FOCUS_SASH",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_LIQUIDATION",
+          "MOVE_CLOSE_COMBAT",
+          "MOVE_PSYCHIC_FANGS",
+          "MOVE_CRUNCH"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_QWILFISH",
+        "item": "ITEM_BLACK_SLUDGE",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_WATERFALL",
+          "MOVE_POISON_JAB",
+          "MOVE_AQUA_JET",
+          "MOVE_SWORDS_DANCE"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_SHARPEDO",
+        "item": "ITEM_SHARPEDONITE",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_PROTECT",
+          "MOVE_LIQUIDATION",
+          "MOVE_CRUNCH",
+          "MOVE_PSYCHIC_FANGS"
+        ]
+      }
+    ],
+    "TRAINER_PABLO_3": [
+      {
+        "level": 0,
+        "species": "SPECIES_PELIPPER",
+        "item": "ITEM_DAMP_ROCK",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_HP_DEF_BOLD",
+        "moves": [
+          "MOVE_SCALD",
+          "MOVE_HURRICANE",
+          "MOVE_ROOST",
+          "MOVE_U_TURN"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_URSHIFU_RAPID_STRIKE_STYLE",
+        "item": "ITEM_CHOICE_BAND",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_SURGING_STRIKES",
+          "MOVE_CLOSE_COMBAT",
+          "MOVE_AQUA_JET",
+          "MOVE_U_TURN"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_GRENINJA",
+        "item": "ITEM_GRENINJITE",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_HYDRO_PUMP",
+          "MOVE_DARK_PULSE",
+          "MOVE_ICE_BEAM",
+          "MOVE_GUNK_SHOT"
+        ]
+      }
+    ],
+    "TRAINER_PABLO_4": [
+      {
+        "level": 0,
+        "species": "SPECIES_KYOGRE",
+        "item": "ITEM_CHOICE_SCARF",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_WATER_SPOUT",
+          "MOVE_ORIGIN_PULSE",
+          "MOVE_THUNDER",
+          "MOVE_ICE_BEAM"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_PALKIA",
+        "item": "ITEM_ASSAULT_VEST",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_SPACIAL_REND",
+          "MOVE_HYDRO_PUMP",
+          "MOVE_THUNDER",
+          "MOVE_EARTH_POWER"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_KINGDRA",
+        "item": "ITEM_KINGDRANITE",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_MODEST",
+        "moves": [
+          "MOVE_HYDRO_PUMP",
+          "MOVE_DRACO_METEOR",
+          "MOVE_HURRICANE",
+          "MOVE_FLASH_CANNON"
+        ]
+      }
+    ],
+    "TRAINER_ERNEST_2": [
+      {
+        "level": 0,
+        "species": "SPECIES_GOLISOPOD",
+        "item": "ITEM_ASSAULT_VEST",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_FIRST_IMPRESSION",
+          "MOVE_LIQUIDATION",
+          "MOVE_LEECH_LIFE",
+          "MOVE_KNOCK_OFF"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_CONKELDURR",
+        "item": "ITEM_FLAME_ORB",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_DRAIN_PUNCH",
+          "MOVE_FACADE",
+          "MOVE_MACH_PUNCH",
+          "MOVE_KNOCK_OFF"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_FERALIGATR",
+        "item": "ITEM_FERALIGITE",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_LIQUIDATION",
+          "MOVE_ICE_PUNCH",
+          "MOVE_CRUNCH",
+          "MOVE_DRAGON_DANCE"
+        ]
+      }
+    ],
+    "TRAINER_ERNEST_3": [
+      {
+        "level": 0,
+        "species": "SPECIES_BUZZWOLE",
+        "item": "ITEM_ASSAULT_VEST",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_DRAIN_PUNCH",
+          "MOVE_LEECH_LIFE",
+          "MOVE_ICE_PUNCH",
+          "MOVE_ROCK_SLIDE"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_URSHIFU_RAPID_STRIKE_STYLE",
+        "item": "ITEM_CHOICE_BAND",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_SURGING_STRIKES",
+          "MOVE_CLOSE_COMBAT",
+          "MOVE_AQUA_JET",
+          "MOVE_U_TURN"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_MEDICHAM",
+        "item": "ITEM_MEDICHAMITE",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_HIGH_JUMP_KICK",
+          "MOVE_ZEN_HEADBUTT",
+          "MOVE_ICE_PUNCH",
+          "MOVE_BULLET_PUNCH"
+        ]
+      }
+    ],
+    "TRAINER_JOHN_AND_JAY_2": [
+      {
+        "level": 0,
+        "species": "SPECIES_DUSCLOPS",
+        "item": "ITEM_EVIOLITE",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_DEF_SPDEF_SASSY",
+        "moves": [
+          "MOVE_TRICK_ROOM",
+          "MOVE_BULLDOZE",
+          "MOVE_WILL_O_WISP",
+          "MOVE_HELPING_HAND"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_RHYPERIOR",
+        "item": "ITEM_WEAKNESS_POLICY",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_HP_ATK_BRAVE",
+        "moves": [
+          "MOVE_ROCK_SLIDE",
+          "MOVE_HIGH_HORSEPOWER",
+          "MOVE_HEAVY_SLAM",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_HARIYAMA",
+        "item": "ITEM_FLAME_ORB",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_HP_ATK_BRAVE",
+        "moves": [
+          "MOVE_FAKE_OUT",
+          "MOVE_CLOSE_COMBAT",
+          "MOVE_KNOCK_OFF",
+          "MOVE_WIDE_GUARD"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_MEDICHAM",
+        "item": "ITEM_MEDICHAMITE",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_HIGH_JUMP_KICK",
+          "MOVE_ZEN_HEADBUTT",
+          "MOVE_ICE_PUNCH",
+          "MOVE_PROTECT"
+        ]
+      }
+    ],
+    "TRAINER_JOHN_AND_JAY_3": [
+      {
+        "level": 0,
+        "species": "SPECIES_WEAVILE",
+        "item": "ITEM_FOCUS_SASH",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_BEAT_UP",
+          "MOVE_FAKE_OUT",
+          "MOVE_TRIPLE_AXEL",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_TERRAKION",
+        "item": "ITEM_LUM_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_ROCK_SLIDE",
+          "MOVE_CLOSE_COMBAT",
+          "MOVE_QUICK_GUARD",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_HITMONTOP",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_FAKE_OUT",
+          "MOVE_CLOSE_COMBAT",
+          "MOVE_WIDE_GUARD",
+          "MOVE_HELPING_HAND"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_MARSHADOW",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_SPECTRAL_THIEF",
+          "MOVE_CLOSE_COMBAT",
+          "MOVE_SHADOW_SNEAK",
+          "MOVE_PROTECT"
+        ]
+      }
+    ],
+    "MAY_TREECKO_METEOR_FALLS": [
+      {
+        "level": 0,
+        "species": "SPECIES_BLAZIKEN",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_HEAT_WAVE",
+          "MOVE_AURA_SPHERE",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_STARMIE",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_MUDDY_WATER",
+          "MOVE_PSYCHIC",
+          "MOVE_ICY_WIND",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_MIMIKYU",
+        "item": "ITEM_LUM_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_PLAY_ROUGH",
+          "MOVE_SHADOW_SNEAK",
+          "MOVE_HELPING_HAND",
+          "MOVE_PROTECT"
+        ]
+      }
+    ],
+    "MAY_TORCHIC_METEOR_FALLS": [
+      {
+        "level": 0,
+        "species": "SPECIES_SWAMPERT",
+        "item": "ITEM_RINDO_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_MUDDY_WATER",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_ICY_WIND",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_RAPIDASH",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_FLARE_BLITZ",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_HELPING_HAND",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_MIMIKYU",
+        "item": "ITEM_LUM_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_PLAY_ROUGH",
+          "MOVE_SHADOW_SNEAK",
+          "MOVE_HELPING_HAND",
+          "MOVE_PROTECT"
+        ]
+      }
+    ],
+    "MAY_MUDKIP_METEOR_FALLS": [
+      {
+        "level": 0,
+        "species": "SPECIES_SCEPTILE",
+        "item": "ITEM_FOCUS_SASH",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_TAILWIND",
+          "MOVE_LEAF_STORM",
+          "MOVE_DRAGON_PULSE",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_RAPIDASH",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_FLARE_BLITZ",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_HELPING_HAND",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_MIMIKYU",
+        "item": "ITEM_LUM_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_PLAY_ROUGH",
+          "MOVE_SHADOW_SNEAK",
+          "MOVE_HELPING_HAND",
+          "MOVE_PROTECT"
+        ]
+      }
+    ],
+    "BRENDAN_TREECKO_METEOR_FALLS": [
+      {
+        "level": 0,
+        "species": "SPECIES_BLAZIKEN",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_HEAT_WAVE",
+          "MOVE_AURA_SPHERE",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_ARAQUANID",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_MUDDY_WATER",
+          "MOVE_ICY_WIND",
+          "MOVE_WIDE_GUARD",
+          "MOVE_LEECH_LIFE"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_MIMIKYU",
+        "item": "ITEM_LUM_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_PLAY_ROUGH",
+          "MOVE_SHADOW_SNEAK",
+          "MOVE_HELPING_HAND",
+          "MOVE_PROTECT"
+        ]
+      }
+    ],
+    "BRENDAN_TORCHIC_METEOR_FALLS": [
+      {
+        "level": 0,
+        "species": "SPECIES_SWAMPERT",
+        "item": "ITEM_RINDO_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_MUDDY_WATER",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_ICY_WIND",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_ARCANINE",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_HEAT_WAVE",
+          "MOVE_SNARL",
+          "MOVE_HELPING_HAND",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_MIMIKYU",
+        "item": "ITEM_LUM_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_PLAY_ROUGH",
+          "MOVE_SHADOW_SNEAK",
+          "MOVE_HELPING_HAND",
+          "MOVE_PROTECT"
+        ]
+      }
+    ],
+    "BRENDAN_MUDKIP_METEOR_FALLS": [
+      {
+        "level": 0,
+        "species": "SPECIES_SCEPTILE",
+        "item": "ITEM_FOCUS_SASH",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_TAILWIND",
+          "MOVE_LEAF_STORM",
+          "MOVE_DRAGON_PULSE",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_ARCANINE",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_HEAT_WAVE",
+          "MOVE_SNARL",
+          "MOVE_HELPING_HAND",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_MIMIKYU",
+        "item": "ITEM_LUM_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_PLAY_ROUGH",
+          "MOVE_SHADOW_SNEAK",
+          "MOVE_HELPING_HAND",
+          "MOVE_PROTECT"
+        ]
+      }
+    ],
+    "TRAINER_BILLY": [
+      {
+        "level": 0,
+        "species": "SPECIES_PALOSSAND",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_SHORE_UP",
+          "MOVE_EARTH_POWER",
+          "MOVE_SHADOW_BALL",
+          "MOVE_TOXIC"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_CRAMORANT",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_HURRICANE",
+          "MOVE_ICE_BEAM",
+          "MOVE_SURF",
+          "MOVE_TAILWIND"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_DHELMISE",
+        "item": "ITEM_ASSAULT_VEST",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_POWER_WHIP",
+          "MOVE_POLTERGEIST",
+          "MOVE_ANCHOR_SHOT",
+          "MOVE_RAPID_SPIN"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_CRABOMINABLE",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_ATK_SPEED_ADAMANT",
+        "moves": [
+          "MOVE_DRAIN_PUNCH",
+          "MOVE_ICE_HAMMER",
+          "MOVE_MACH_PUNCH",
+          "MOVE_PROTECT"
+        ]
+      }
+    ],
+    "TRAINER_TIANA": [
+      {
+        "level": 0,
+        "species": "SPECIES_NINETALES_ALOLAN",
+        "item": "ITEM_LIGHT_CLAY",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_BLIZZARD",
+          "MOVE_MOONBLAST",
+          "MOVE_PROTECT",
+          "MOVE_AURORA_VEIL"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_ARCTOZOLT",
+        "item": "ITEM_EXPERT_BELT",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_BOLT_BEAK",
+          "MOVE_ICICLE_CRASH",
+          "MOVE_STOMPING_TANTRUM",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_FROSLASS",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_PROTECT",
+          "MOVE_ICY_WIND",
+          "MOVE_ICE_BEAM",
+          "MOVE_SHADOW_BALL"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_MAMOSWINE",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_ICICLE_CRASH",
+          "MOVE_HIGH_HORSEPOWER",
+          "MOVE_PROTECT",
+          "MOVE_ICE_SHARD"
+        ]
+      }
+    ],
+    "TRAINER_ALLEN": [
+      {
+        "level": 0,
+        "species": "SPECIES_PIKACHU",
+        "item": "ITEM_LIGHT_BALL",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_FAKE_OUT",
+          "MOVE_PROTECT",
+          "MOVE_VOLT_TACKLE",
+          "MOVE_ENCORE"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_TAILLOW",
+        "item": "ITEM_TOXIC_ORB",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_PROTECT",
+          "MOVE_QUICK_ATTACK",
+          "MOVE_BRAVE_BIRD",
+          "MOVE_FACADE"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_PARASECT",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_HP_DEF_SPDEF_SASSY",
+        "moves": [
+          "MOVE_SPORE",
+          "MOVE_PROTECT",
+          "MOVE_SEED_BOMB",
+          "MOVE_RAGE_POWDER"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_ZIGZAGOON",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_BELLY_DRUM",
+          "MOVE_EXTREME_SPEED",
+          "MOVE_SEED_BOMB",
+          "MOVE_PROTECT"
+        ]
+      }
+    ],
+    "TRAINER_RICK": [
+      {
+        "level": 0,
+        "species": "SPECIES_LEAVANNY",
+        "item": "ITEM_FOCUS_SASH",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_X_SCISSOR",
+          "MOVE_STICKY_WEB",
+          "MOVE_KNOCK_OFF",
+          "MOVE_LEAF_BLADE"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_SCIZOR",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_TAILWIND",
+          "MOVE_U_TURN",
+          "MOVE_BULLET_PUNCH",
+          "MOVE_SUPERPOWER"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_HERACROSS",
+        "item": "ITEM_CHOICE_SCARF",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_ROCK_SLIDE",
+          "MOVE_CLOSE_COMBAT",
+          "MOVE_KNOCK_OFF",
+          "MOVE_MEGAHORN"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_FROSMOTH",
+        "item": "ITEM_CHARTI_BERRY",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_QUIVER_DANCE",
+          "MOVE_ICE_BEAM",
+          "MOVE_BUG_BUZZ",
+          "MOVE_GIGA_DRAIN"
+        ]
+      }
+    ],
+    "TRAINER_CALVIN_1": [
+      {
+        "level": 0,
+        "species": "SPECIES_ZORUA",
+        "item": "ITEM_EXPERT_BELT",
+        "ability_slot": 0,
+        "spread": "SPREAD_HP_FIGHTING_TIMID",
+        "moves": [
+          "MOVE_DARK_PULSE",
+          "MOVE_EXTRASENSORY",
+          "MOVE_SUCKER_PUNCH",
+          "MOVE_HIDDEN_POWER"
+        ]
+      },
+      {
+        "level": 0,
+        "species": "SPECIES_JIGGLYPUFF",
+        "item": "ITEM_EVIOLITE",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_DEF_SPDEF_SASSY",
+        "moves": [
+          "MOVE_ICY_WIND",
+          "MOVE_HELPING_HAND",
+          "MOVE_DAZZLING_GLEAM",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_SMEARGLE",
+        "item": "ITEM_FOCUS_SASH",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_SPEED_JOLLY",
+        "moves": [
+          "MOVE_FAKE_OUT",
+          "MOVE_FOLLOW_ME",
+          "MOVE_HELPING_HAND",
+          "MOVE_ENDEAVOR"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_MEW",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_PSYSHOCK",
+          "MOVE_NASTY_PLOT",
+          "MOVE_AURA_SPHERE",
+          "MOVE_WILL_O_WISP"
+        ]
+      }
+    ]
+  },
+  "patches": {
+    "TRAINER_ANABEL": {
+      "0": {
+        "level": 1,
+        "species": "SPECIES_SNORLAX",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_BODY_SLAM",
+          "MOVE_HIGH_HORSEPOWER",
+          "MOVE_YAWN",
+          "MOVE_PROTECT"
+        ]
+      }
+    },
+    "TRAINER_TUCKER": {
+      "0": {
+        "level": 1,
+        "species": "SPECIES_TORNADUS",
+        "item": "ITEM_FOCUS_SASH",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_TAILWIND",
+          "MOVE_TAUNT",
+          "MOVE_HURRICANE",
+          "MOVE_PROTECT"
+        ]
+      }
+    },
+    "TRAINER_SPENSER": {
+      "0": {
+        "level": 1,
+        "species": "SPECIES_WEEZING_GALARIAN",
+        "item": "ITEM_BLACK_SLUDGE",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_HP_DEF_BOLD",
+        "moves": [
+          "MOVE_STRANGE_STEAM",
+          "MOVE_SLUDGE_BOMB",
+          "MOVE_TAUNT",
+          "MOVE_PROTECT"
+        ]
+      }
+    },
+    "TRAINER_GRETA": {
+      "0": {
+        "level": 1,
+        "species": "SPECIES_WEAVILE",
+        "item": "ITEM_FOCUS_SASH",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_BEAT_UP",
+          "MOVE_FAKE_OUT",
+          "MOVE_TRIPLE_AXEL",
+          "MOVE_PROTECT"
+        ]
+      }
+    },
+    "TRAINER_NOLAND": {
+      "0": {
+        "level": 1,
+        "species": "SPECIES_METAGROSS",
+        "item": "ITEM_ASSAULT_VEST",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_METEOR_MASH",
+          "MOVE_ZEN_HEADBUTT",
+          "MOVE_BULLET_PUNCH",
+          "MOVE_STOMPING_TANTRUM"
+        ]
+      }
+    },
+    "TRAINER_LUCY": {
+      "0": {
+        "level": 1,
+        "species": "SPECIES_CROBAT",
+        "item": "ITEM_FOCUS_SASH",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_SPEED_JOLLY",
+        "moves": [
+          "MOVE_TAILWIND",
+          "MOVE_SUPER_FANG",
+          "MOVE_TAUNT",
+          "MOVE_ROOST"
+        ]
+      }
+    },
+    "TRAINER_BRANDON": {
+      "0": {
+        "level": 1,
+        "species": "SPECIES_REGIGIGAS",
+        "item": "ITEM_WEAKNESS_POLICY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_CRUSH_GRIP",
+          "MOVE_HIGH_HORSEPOWER",
+          "MOVE_DRAIN_PUNCH",
+          "MOVE_PROTECT"
+        ]
+      }
+    },
+    "TRAINER_CINDY_6": {
+      "0": {
+        "level": 2,
+        "species": "SPECIES_LINOONE",
+        "item": "ITEM_FIGY_BERRY",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_BELLY_DRUM",
+          "MOVE_EXTREME_SPEED",
+          "MOVE_THROAT_CHOP",
+          "MOVE_SEED_BOMB"
+        ]
+      }
+    },
+    "TRAINER_OWEN": {
+      "5": {
+        "moves": [
+          "MOVE_CLOSE_COMBAT",
+          "MOVE_CRUNCH",
+          "MOVE_PSYCHIC_FANGS",
+          "MOVE_BEHEMOTH_BASH"
+        ]
+      }
+    },
+    "TRAINER_SAMANTHA": {
+      "3": {
+        "moves": [
+          "MOVE_U_TURN",
+          "MOVE_ICE_BEAM",
+          "MOVE_PSYCHIC",
+          "MOVE_TRICK"
+        ]
+      }
+    },
+    "TRAINER_COURTNEY_MAGMA_HIDEOUT": {
+      "5": {
+        "moves": [
+          "MOVE_SHADOW_BALL",
+          "MOVE_HEAT_WAVE",
+          "MOVE_TRICK",
+          "MOVE_HIDDEN_POWER"
+        ]
+      }
+    },
+    "TRAINER_CYNTHIA_2": {
+      "5": {
+        "moves": [
+          "MOVE_EARTHQUAKE",
+          "MOVE_DRAGON_CLAW",
+          "MOVE_SCALE_SHOT",
+          "MOVE_PROTECT"
+        ]
+      }
+    },
+    "TRAINER_GRUNT_RUSTURF_TUNNEL": {
+      "2": {
+        "moves": [
+          "MOVE_SHADOW_SNEAK",
+          "MOVE_VENOSHOCK",
+          "MOVE_POISON_GAS",
+          "MOVE_PROTECT"
+        ]
+      }
+    },
+    "TRAINER_GABBY_AND_TY_1": {
+      "1": {
+        "moves": [
+          "MOVE_UPROAR",
+          "MOVE_EXTRASENSORY",
+          "MOVE_WORK_UP",
+          "MOVE_HYPER_VOICE"
+        ]
+      }
+    },
+    "TRAINER_BERKE": {
+      "0": {
+        "moves": [
+          "MOVE_BELLY_DRUM",
+          "MOVE_EXPLOSION",
+          "MOVE_MUDDY_WATER",
+          "MOVE_FIRE_BLAST"
+        ]
+      },
+      "1": {
+        "moves": [
+          "MOVE_FISSURE",
+          "MOVE_SELF_DESTRUCT",
+          "MOVE_BODY_SLAM",
+          "MOVE_CURSE"
+        ]
+      },
+      "2": {
+        "moves": [
+          "MOVE_PROTECT",
+          "MOVE_GIGA_IMPACT",
+          "MOVE_FACADE",
+          "MOVE_FIRE_PUNCH"
+        ]
+      }
+    },
+    "TRAINER_KEIRA": {
+      "0": {
+        "moves": [
+          "MOVE_EXPLOSION",
+          "MOVE_TOXIC",
+          "MOVE_STEALTH_ROCK",
+          "MOVE_POWER_GEM"
+        ]
+      },
+      "1": {
+        "moves": [
+          "MOVE_ENDEAVOR",
+          "MOVE_SANDSTORM",
+          "MOVE_TOXIC",
+          "MOVE_PROTECT"
+        ]
+      },
+      "2": {
+        "moves": [
+          "MOVE_RECYCLE",
+          "MOVE_TOXIC",
+          "MOVE_PROTECT",
+          "MOVE_SHOCK_WAVE"
+        ]
+      },
+      "3": {
+        "moves": [
+          "MOVE_ENDEAVOR",
+          "MOVE_ICE_SHARD",
+          "MOVE_STEALTH_ROCK",
+          "MOVE_PROTECT"
+        ]
+      },
+      "5": {
+        "moves": [
+          "MOVE_VOLT_SWITCH",
+          "MOVE_HYDRO_PUMP",
+          "MOVE_THUNDERBOLT",
+          "MOVE_TRICK"
+        ]
+      }
+    },
+    "TRAINER_WINSTON_1": {
+      "0": {
+        "moves": [
+          "MOVE_HEADBUTT",
+          "MOVE_ROLLOUT",
+          "MOVE_AQUA_JET",
+          "MOVE_PROTECT"
+        ],
+        "spread": "SPREAD_31_IV_0_EV"
+      },
+      "1": {
+        "moves": [
+          "MOVE_GUST",
+          "MOVE_QUICK_ATTACK",
+          "MOVE_TAILWIND",
+          "MOVE_PROTECT"
+        ],
+        "spread": "SPREAD_31_IV_0_EV"
+      }
+    },
+    "TRAINER_AUTUMN": {
+      "0": {
+        "moves": [
+          "MOVE_FLAMETHROWER",
+          "MOVE_HYPER_VOICE",
+          "MOVE_CRUNCH",
+          "MOVE_HYPER_BEAM"
+        ]
+      }
+    },
+    "TRAINER_EDWARD": {
+      "0": {
+        "moves": [
+          "MOVE_PSYCHIC",
+          "MOVE_DAZZLING_GLEAM",
+          "MOVE_SHADOW_BALL",
+          "MOVE_PROTECT"
+        ]
+      }
+    },
+    "TRAINER_JACLYN": {
+      "1": {
+        "moves": [
+          "MOVE_PSYCHIC",
+          "MOVE_FOCUS_BLAST",
+          "MOVE_SHADOW_BALL",
+          "MOVE_RECOVER"
+        ]
+      }
+    },
+    "TRAINER_JERRY_1": {
+      "2": {
+        "moves": [
+          "MOVE_DRAIN_PUNCH",
+          "MOVE_KNOCK_OFF",
+          "MOVE_BULLET_PUNCH",
+          "MOVE_PARTING_SHOT"
+        ],
+        "spread": "SPREAD_31_IV_0_EV"
+      }
+    },
+    "TRAINER_JERRY_2": {
+      "2": {
+        "moves": [
+          "MOVE_KARATE_CHOP",
+          "MOVE_WORK_UP",
+          "MOVE_COMET_PUNCH",
+          "MOVE_SKY_UPPERCUT"
+        ]
+      }
+    },
+    "TRAINER_KAREN_1": {
+      "0": {
+        "moves": [
+          "MOVE_LEAF_BLADE",
+          "MOVE_X_SCISSOR",
+          "MOVE_SYNTHESIS",
+          "MOVE_PROTECT"
+        ],
+        "spread": "SPREAD_31_IV_0_EV"
+      },
+      "1": {
+        "moves": [
+          "MOVE_COUNTER",
+          "MOVE_QUICK_ATTACK",
+          "MOVE_ENDURE",
+          "MOVE_ROAR"
+        ],
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT"
+      }
+    },
+    "TRAINER_TOMMY": {
+      "1": {
+        "moves": [
+          "MOVE_ROCK_SLIDE",
+          "MOVE_FIRE_FANG",
+          "MOVE_HOWL",
+          "MOVE_PROTECT"
+        ]
+      }
+    },
+    "TRAINER_JOEY": {
+      "1": {
+        "moves": [
+          "MOVE_FACADE",
+          "MOVE_SUCKER_PUNCH",
+          "MOVE_U_TURN",
+          "MOVE_PROTECT"
+        ],
+        "spread": "SPREAD_31_IV_0_EV"
+      }
+    },
+    "TRAINER_ANDREW": {
+      "1": {
+        "moves": [
+          "MOVE_SCALD",
+          "MOVE_ICE_BEAM",
+          "MOVE_DRAGON_BREATH",
+          "MOVE_SMOKESCREEN"
+        ]
+      }
+    },
+    "TRAINER_IVAN": {
+      "1": {
+        "moves": [
+          "MOVE_SCALD",
+          "MOVE_ICE_BEAM",
+          "MOVE_MIRROR_COAT",
+          "MOVE_PROTECT"
+        ],
+        "spread": "SPREAD_31_IV_0_EV"
+      },
+      "2": {
+        "moves": [
+          "MOVE_BUBBLE",
+          "MOVE_ACID",
+          "MOVE_CONSTRICT",
+          "MOVE_WRAP"
+        ],
+        "spread": "SPREAD_10_IV_0_EV"
+      }
+    },
+    "TRAINER_ELLIOT_1": {
+      "0": {
+        "moves": [
+          "MOVE_FIRST_IMPRESSION",
+          "MOVE_LIQUIDATION",
+          "MOVE_LEECH_LIFE",
+          "MOVE_PROTECT"
+        ],
+        "spread": "SPREAD_31_IV_0_EV"
+      }
+    },
+    "TRAINER_RONALD": {
+      "5": {
+        "moves": [
+          "MOVE_SPLASH",
+          "MOVE_THRASH",
+          "MOVE_OUTRAGE",
+          "MOVE_HYDRO_PUMP"
+        ]
+      }
+    },
+    "TRAINER_HUGH": {
+      "1": {
+        "moves": [
+          "MOVE_DRILL_PECK",
+          "MOVE_DRILL_RUN",
+          "MOVE_FOCUS_ENERGY",
+          "MOVE_DOUBLE_EDGE"
+        ]
+      }
+    },
+    "TRAINER_EDMOND": {
+      "1": {
+        "moves": [
+          "MOVE_ICICLE_CRASH",
+          "MOVE_PLAY_ROUGH",
+          "MOVE_SUPERPOWER",
+          "MOVE_AQUA_JET"
+        ],
+        "spread": "SPREAD_31_IV_0_EV"
+      }
+    },
+    "TRAINER_DWAYNE": {
+      "1": {
+        "moves": [
+          "MOVE_BUBBLE_BEAM",
+          "MOVE_ACID",
+          "MOVE_CONSTRICT",
+          "MOVE_WRAP"
+        ],
+        "spread": "SPREAD_10_IV_0_EV"
+      },
+      "2": {
+        "moves": [
+          "MOVE_WHIRLWIND",
+          "MOVE_FORCE_PALM",
+          "MOVE_FAKE_OUT",
+          "MOVE_KNOCK_OFF"
+        ],
+        "spread": "SPREAD_25_IV_0_EV"
+      }
+    },
+    "TRAINER_BRENDAN_ROUTE_103_MUDKIP": {
+      "0": {
+        "level": 0,
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 0,
+        "moves": [
+          "MOVE_GRASS_PLEDGE",
+          "MOVE_RETURN",
+          "MOVE_TOXIC",
+          "MOVE_PROTECT"
+        ],
+        "spread": "SPREAD_31_IV_0_EV"
+      }
+    },
+    "TRAINER_BRENDAN_ROUTE_103_TREECKO": {
+      "0": {
+        "level": 0,
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 0,
+        "moves": [
+          "MOVE_FIRE_PLEDGE",
+          "MOVE_RETURN",
+          "MOVE_TOXIC",
+          "MOVE_PROTECT"
+        ],
+        "spread": "SPREAD_31_IV_0_EV"
+      }
+    },
+    "TRAINER_BRENDAN_ROUTE_103_TORCHIC": {
+      "0": {
+        "level": 0,
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 0,
+        "moves": [
+          "MOVE_WATER_PLEDGE",
+          "MOVE_RETURN",
+          "MOVE_TOXIC",
+          "MOVE_PROTECT"
+        ],
+        "spread": "SPREAD_31_IV_0_EV"
+      }
+    },
+    "TRAINER_MAY_ROUTE_103_MUDKIP": {
+      "0": {
+        "level": 0,
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 0,
+        "moves": [
+          "MOVE_GRASS_PLEDGE",
+          "MOVE_RETURN",
+          "MOVE_TOXIC",
+          "MOVE_PROTECT"
+        ],
+        "spread": "SPREAD_31_IV_0_EV"
+      }
+    },
+    "TRAINER_MAY_ROUTE_103_TREECKO": {
+      "0": {
+        "level": 0,
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 0,
+        "moves": [
+          "MOVE_FIRE_PLEDGE",
+          "MOVE_RETURN",
+          "MOVE_TOXIC",
+          "MOVE_PROTECT"
+        ],
+        "spread": "SPREAD_31_IV_0_EV"
+      }
+    },
+    "TRAINER_MAY_ROUTE_103_TORCHIC": {
+      "0": {
+        "level": 0,
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 0,
+        "moves": [
+          "MOVE_WATER_PLEDGE",
+          "MOVE_RETURN",
+          "MOVE_TOXIC",
+          "MOVE_PROTECT"
+        ],
+        "spread": "SPREAD_31_IV_0_EV"
+      }
+    },
+    "TRAINER_MARC": {
+      "0": {
+        "moves": [
+          "MOVE_ROCK_SLIDE",
+          "MOVE_ZEN_HEADBUTT",
+          "MOVE_FIRE_PUNCH",
+          "MOVE_PROTECT"
+        ]
+      }
+    },
+    "TRAINER_JAMES_1": {
+      "0": {
+        "moves": [
+          "MOVE_SAND_ATTACK",
+          "MOVE_ABSORB",
+          "MOVE_BUG_BITE",
+          "MOVE_X_SCISSOR"
+        ],
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT"
+      }
+    },
+    "TRAINER_TRENT_1": {
+      "0": {
+        "moves": [
+          "MOVE_EXPLOSION",
+          "MOVE_HAMMER_ARM",
+          "MOVE_STEALTH_ROCK",
+          "MOVE_SUCKER_PUNCH"
+        ]
+      },
+      "1": {
+        "moves": [
+          "MOVE_EXPLOSION",
+          "MOVE_HAMMER_ARM",
+          "MOVE_STEALTH_ROCK",
+          "MOVE_SUCKER_PUNCH"
+        ]
+      },
+      "2": {
+        "moves": [
+          "MOVE_EXPLOSION",
+          "MOVE_HAMMER_ARM",
+          "MOVE_STEALTH_ROCK",
+          "MOVE_SUCKER_PUNCH"
+        ]
+      },
+      "3": {
+        "moves": [
+          "MOVE_EXPLOSION",
+          "MOVE_THUNDER_PUNCH",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_ROCK_POLISH"
+        ]
+      }
+    },
+    "TRAINER_CLARK": {
+      "0": {
+        "moves": [
+          "MOVE_ROCK_THROW",
+          "MOVE_DEFENSE_CURL",
+          "MOVE_TACKLE",
+          "MOVE_FIRE_PUNCH"
+        ],
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT"
+      },
+      "1": {
+        "moves": [
+          "MOVE_ROCK_SLIDE",
+          "MOVE_BODY_PRESS",
+          "MOVE_STEALTH_ROCK",
+          "MOVE_PROTECT"
+        ],
+        "spread": "SPREAD_31_IV_0_EV"
+      }
+    },
+    "TRAINER_TRENT_2": {
+      "0": {
+        "moves": [
+          "MOVE_EXPLOSION",
+          "MOVE_EARTHQUAKE",
+          "MOVE_HEAVY_SLAM",
+          "MOVE_STONE_EDGE"
+        ]
+      },
+      "1": {
+        "moves": [
+          "MOVE_EXPLOSION",
+          "MOVE_EARTHQUAKE",
+          "MOVE_HEAVY_SLAM",
+          "MOVE_STONE_EDGE"
+        ]
+      },
+      "2": {
+        "moves": [
+          "MOVE_EXPLOSION",
+          "MOVE_EARTHQUAKE",
+          "MOVE_HEAVY_SLAM",
+          "MOVE_STONE_EDGE"
+        ]
+      },
+      "3": {
+        "moves": [
+          "MOVE_EXPLOSION",
+          "MOVE_WILD_CHARGE",
+          "MOVE_STONE_EDGE",
+          "MOVE_ROCK_POLISH"
+        ]
+      }
+    },
+    "TRAINER_TRENT_3": {
+      "0": {
+        "moves": [
+          "MOVE_EXPLOSION",
+          "MOVE_EARTHQUAKE",
+          "MOVE_HEAVY_SLAM",
+          "MOVE_STONE_EDGE"
+        ]
+      },
+      "1": {
+        "moves": [
+          "MOVE_EXPLOSION",
+          "MOVE_EARTHQUAKE",
+          "MOVE_HEAVY_SLAM",
+          "MOVE_STONE_EDGE"
+        ]
+      },
+      "2": {
+        "moves": [
+          "MOVE_EXPLOSION",
+          "MOVE_EARTHQUAKE",
+          "MOVE_HEAVY_SLAM",
+          "MOVE_STONE_EDGE"
+        ]
+      },
+      "3": {
+        "moves": [
+          "MOVE_EXPLOSION",
+          "MOVE_WILD_CHARGE",
+          "MOVE_STONE_EDGE",
+          "MOVE_ROCK_POLISH"
+        ]
+      },
+      "4": {
+        "moves": [
+          "MOVE_EXPLOSION",
+          "MOVE_WILD_CHARGE",
+          "MOVE_STONE_EDGE",
+          "MOVE_ROCK_POLISH"
+        ]
+      }
+    },
+    "TRAINER_DAWSON": {
+      "0": {
+        "moves": [
+          "MOVE_VOLT_SWITCH",
+          "MOVE_FLAME_CHARGE",
+          "MOVE_THUNDER_WAVE",
+          "MOVE_PROTECT"
+        ],
+        "spread": "SPREAD_31_IV_0_EV"
+      }
+    },
+    "TRAINER_DARIAN": {
+      "0": {
+        "moves": [
+          "MOVE_SPLASH",
+          "MOVE_TACKLE",
+          "MOVE_HYDRO_PUMP",
+          "MOVE_REVERSAL"
+        ],
+        "spread": "SPREAD_31_IV_80_EV"
+      }
+    },
+    "TRAINER_RED": {
+      "0": {
+        "moves": [
+          "MOVE_FLAMETHROWER",
+          "MOVE_DRAGON_PULSE",
+          "MOVE_SLASH",
+          "MOVE_PROTECT"
+        ],
+        "spread": "SPREAD_31_IV_0_EV"
+      }
+    },
+    "TRAINER_LEAF": {
+      "0": {
+        "moves": [
+          "MOVE_GIGA_DRAIN",
+          "MOVE_SLUDGE_BOMB",
+          "MOVE_SLEEP_POWDER",
+          "MOVE_PROTECT"
+        ],
+        "spread": "SPREAD_31_IV_0_EV"
+      }
+    },
+    "TRAINER_BRENDAN_PLACEHOLDER": {
+      "0": {
+        "moves": [
+          "MOVE_PROTECT",
+          "MOVE_FIRE_PUNCH",
+          "MOVE_SWORDS_DANCE",
+          "MOVE_PRECIPICE_BLADES"
+        ],
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY"
+      }
+    },
+    "TRAINER_MAY_PLACEHOLDER": {
+      "0": {
+        "moves": [
+          "MOVE_PROTECT",
+          "MOVE_THUNDER",
+          "MOVE_CALM_MIND",
+          "MOVE_ORIGIN_PULSE"
+        ],
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID"
+      }
+    },
+    "TRAINER_ARCHIE": {
+      "0": {
+        "item": "ITEM_MYSTIC_WATER"
+      }
+    },
+    "TRAINER_GRETA_SLATEPORT": {
+      "5": {
+        "moves": [
+          "MOVE_VOLT_SWITCH",
+          "MOVE_DAZZLING_GLEAM",
+          "MOVE_ELECTROWEB",
+          "MOVE_GRASS_KNOT"
+        ]
+      }
+    },
+    "TRAINER_LEAF_ALTERING_CAVE": {
+      "0": {
+        "moves": [
+          "MOVE_FLAMETHROWER",
+          "MOVE_WILL_O_WISP",
+          "MOVE_CALM_MIND",
+          "MOVE_DRAINING_KISS"
+        ]
+      }
+    },
+    "TRAINER_MAXIE_MAGMA_HIDEOUT": {
+      "5": {
+        "moves": [
+          "MOVE_EARTH_POWER",
+          "MOVE_FIRE_BLAST",
+          "MOVE_SOLAR_BEAM",
+          "MOVE_PROTECT"
+        ]
+      }
+    },
+    "TRAINER_STEVEN": {
+      "1": {
+        "moves": [
+          "MOVE_BRAVE_BIRD",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_EARTHQUAKE",
+          "MOVE_TAILWIND"
+        ]
+      }
+    },
+    "TRAINER_BRENDAN_LILYCOVE_TREECKO": {
+      "5": {
+        "moves": [
+          "MOVE_FLARE_BLITZ",
+          "MOVE_HIGH_JUMP_KICK",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_PROTECT"
+        ]
+      }
+    },
+    "TRAINER_FLANNERY_2": {
+      "0": {
+        "moves": [
+          "MOVE_HEAT_WAVE",
+          "MOVE_STEALTH_ROCK",
+          "MOVE_YAWN",
+          "MOVE_PROTECT"
+        ]
+      }
+    },
+    "TRAINER_JUAN_2": {
+      "5": {
+        "moves": [
+          "MOVE_HYDRO_PUMP",
+          "MOVE_HURRICANE",
+          "MOVE_DRACO_METEOR",
+          "MOVE_PROTECT"
+        ]
+      }
+    },
+    "TRAINER_MAY_LILYCOVE_TREECKO": {
+      "1": {
+        "moves": [
+          "MOVE_BRAVE_BIRD",
+          "MOVE_FACADE",
+          "MOVE_TAILWIND",
+          "MOVE_PROTECT"
+        ]
+      },
+      "5": {
+        "moves": [
+          "MOVE_FLARE_BLITZ",
+          "MOVE_HIGH_JUMP_KICK",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_PROTECT"
+        ]
+      }
+    },
+    "TRAINER_WATTSON_3": {
+      "5": {
+        "moves": [
+          "MOVE_VOLT_SWITCH",
+          "MOVE_FLAMETHROWER",
+          "MOVE_PROTECT",
+          "MOVE_THUNDER"
+        ]
+      }
+    },
+    "TRAINER_JUAN_5": {
+      "5": {
+        "moves": [
+          "MOVE_MUDDY_WATER",
+          "MOVE_HURRICANE",
+          "MOVE_DRACO_METEOR",
+          "MOVE_PROTECT"
+        ]
+      }
+    },
+    "TRAINER_SIDNEY_3": {
+      "5": {
+        "moves": [
+          "MOVE_KNOCK_OFF",
+          "MOVE_PLAY_ROUGH",
+          "MOVE_SUCKER_PUNCH",
+          "MOVE_PROTECT"
+        ]
+      }
+    },
+    "TRAINER_BUFFEL": {
+      "4": {
+        "moves": [
+          "MOVE_AIR_SLASH",
+          "MOVE_TAILWIND",
+          "MOVE_THUNDER_WAVE",
+          "MOVE_ROOST"
+        ]
+      }
+    },
+    "TRAINER_FLANNERY_3": {
+      "4": {
+        "moves": [
+          "MOVE_FIERY_DANCE",
+          "MOVE_GIGA_DRAIN",
+          "MOVE_QUIVER_DANCE",
+          "MOVE_PROTECT"
+        ]
+      }
+    },
+    "TRAINER_MATT_MT_PYRE": {
+      "5": {
+        "moves": [
+          "MOVE_WATERFALL",
+          "MOVE_CRUNCH",
+          "MOVE_ICE_PUNCH",
+          "MOVE_PROTECT"
+        ]
+      }
+    },
+    "TRAINER_MAY_ROUTE_119_MUDKIP": {
+      "5": {
+        "moves": [
+          "MOVE_FRENZY_PLANT",
+          "MOVE_DRAGON_PULSE",
+          "MOVE_PROTECT",
+          "MOVE_GRASSY_TERRAIN"
+        ]
+      }
+    },
+    "TRAINER_MAY_ROUTE_119_TORCHIC": {
+      "3": {
+        "moves": [
+          "MOVE_SHADOW_CLAW",
+          "MOVE_PLAY_ROUGH",
+          "MOVE_PROTECT",
+          "MOVE_SHADOW_SNEAK"
+        ]
+      }
+    },
+    "TRAINER_MAY_ROUTE_119_TREECKO": {
+      "3": {
+        "moves": [
+          "MOVE_SHADOW_CLAW",
+          "MOVE_PLAY_ROUGH",
+          "MOVE_PROTECT",
+          "MOVE_SHADOW_SNEAK"
+        ]
+      }
+    },
+    "TRAINER_ROXANNE_2": {
+      "2": {
+        "moves": [
+          "MOVE_BRAVE_BIRD",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_EARTHQUAKE",
+          "MOVE_PROTECT"
+        ]
+      }
+    },
+    "TRAINER_BRAWLY_2": {
+      "5": {
+        "moves": [
+          "MOVE_CLOSE_COMBAT",
+          "MOVE_FAKE_OUT",
+          "MOVE_KNOCK_OFF",
+          "MOVE_ROCK_SLIDE"
+        ]
+      }
+    },
+    "TRAINER_CATHERINE_4": {
+      "0": {
+        "moves": [
+          "MOVE_QUIVER_DANCE",
+          "MOVE_MOONBLAST",
+          "MOVE_GIGA_DRAIN",
+          "MOVE_RAGE_POWDER"
+        ]
+      },
+      "4": {
+        "moves": [
+          "MOVE_SCALD",
+          "MOVE_PROTECT",
+          "MOVE_SHELL_SMASH",
+          "MOVE_AQUA_RING"
+        ]
+      }
+    },
+    "TRAINER_JUAN_4": {
+      "5": {
+        "moves": [
+          "MOVE_HYDRO_PUMP",
+          "MOVE_HURRICANE",
+          "MOVE_DRACO_METEOR",
+          "MOVE_PROTECT"
+        ]
+      }
+    },
+    "TRAINER_EDGAR": {
+      "5": {
+        "moves": [
+          "MOVE_VOLT_SWITCH",
+          "MOVE_FLAMETHROWER",
+          "MOVE_ELECTROWEB",
+          "MOVE_PROTECT"
+        ]
+      }
+    },
+    "TRAINER_SHELBY_4": {
+      "2": {
+        "moves": [
+          "MOVE_SCALD",
+          "MOVE_ICE_BEAM",
+          "MOVE_ICY_WIND",
+          "MOVE_PSYSHOCK"
+        ]
+      }
+    },
+    "TRAINER_VINCENT": {
+      "2": {
+        "moves": [
+          "MOVE_HYDRO_PUMP",
+          "MOVE_HURRICANE",
+          "MOVE_TAILWIND",
+          "MOVE_QUIVER_DANCE"
+        ]
+      }
+    },
+    "TRAINER_JULIE": {
+      "4": {
+        "moves": [
+          "MOVE_PSYCHIC",
+          "MOVE_SHADOW_BALL",
+          "MOVE_AURA_SPHERE",
+          "MOVE_PROTECT"
+        ]
+      }
+    },
+    "TRAINER_MICHELLE": {
+      "5": {
+        "moves": [
+          "MOVE_HYPER_VOICE",
+          "MOVE_PSYSHOCK",
+          "MOVE_MYSTICAL_FIRE",
+          "MOVE_TRICK_ROOM"
+        ]
+      }
+    },
+    "TRAINER_VITO": {
+      "2": {
+        "moves": [
+          "MOVE_DOUBLE_EDGE",
+          "MOVE_BRAVE_BIRD",
+          "MOVE_JUMP_KICK",
+          "MOVE_TAILWIND"
+        ]
+      }
+    },
+    "TRAINER_NICOLAS_4": {
+      "0": {
+        "moves": [
+          "MOVE_HURRICANE",
+          "MOVE_WATER_PULSE",
+          "MOVE_FLAMETHROWER",
+          "MOVE_TAILWIND"
+        ]
+      }
+    },
+    "TRAINER_TIMOTHY_3": {
+      "4": {
+        "moves": [
+          "MOVE_MUDDY_WATER",
+          "MOVE_PROTECT",
+          "MOVE_HYDRO_PUMP",
+          "MOVE_SECRET_SWORD"
+        ]
+      }
+    },
+    "TRAINER_CATHERINE_2": {
+      "1": {
+        "moves": [
+          "MOVE_HURRICANE",
+          "MOVE_TAILWIND",
+          "MOVE_DRAGON_PULSE",
+          "MOVE_BOOMBURST"
+        ]
+      }
+    },
+    "TRAINER_EDWARDO": {
+      "3": {
+        "item": "ITEM_FOCUS_SASH"
+      }
+    },
+    "TRAINER_BROOKE_3": {
+      "0": {
+        "moves": [
+          "MOVE_SCALD",
+          "MOVE_EARTH_POWER",
+          "MOVE_RECOVER",
+          "MOVE_ICY_WIND"
+        ]
+      }
+    },
+    "TRAINER_SUSIE": {
+      "0": {
+        "moves": [
+          "MOVE_HURRICANE",
+          "MOVE_HEAT_WAVE",
+          "MOVE_TAILWIND",
+          "MOVE_U_TURN"
+        ]
+      }
+    },
+    "TRAINER_HOPE": {
+      "3": {
+        "moves": [
+          "MOVE_BRAVE_BIRD",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_EARTHQUAKE",
+          "MOVE_TAILWIND"
+        ]
+      }
+    },
+    "TRAINER_JACKSON_2": {
+      "0": {
+        "moves": [
+          "MOVE_HYDRO_PUMP",
+          "MOVE_HURRICANE",
+          "MOVE_MUDDY_WATER",
+          "MOVE_ROOST"
+        ]
+      }
+    },
+    "TRAINER_SHELBY_3": {
+      "2": {
+        "moves": [
+          "MOVE_SCALD",
+          "MOVE_ICE_BEAM",
+          "MOVE_TRICK_ROOM",
+          "MOVE_PSYSHOCK"
+        ],
+        "item": "ITEM_SITRUS_BERRY"
+      }
+    },
+    "TRAINER_BROOKE_2": {
+      "0": {
+        "moves": [
+          "MOVE_MUDDY_WATER",
+          "MOVE_EARTH_POWER",
+          "MOVE_RECOVER",
+          "MOVE_ICY_WIND"
+        ]
+      }
+    },
+    "TRAINER_CAMERON_4": {
+      "3": {
+        "moves": [
+          "MOVE_PSYSHOCK",
+          "MOVE_SHADOW_BALL",
+          "MOVE_PROTECT",
+          "MOVE_MOONLIGHT"
+        ]
+      }
+    },
+    "TRAINER_HUMBERTO": {
+      "1": {
+        "moves": [
+          "MOVE_FOUL_PLAY",
+          "MOVE_TAILWIND",
+          "MOVE_ROOST",
+          "MOVE_SUBSTITUTE"
+        ]
+      }
+    },
+    "TRAINER_JERRY_4": {
+      "3": {
+        "moves": [
+          "MOVE_HAMMER_ARM",
+          "MOVE_CRUNCH",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_PARTING_SHOT"
+        ]
+      }
+    },
+    "TRAINER_CATHERINE_1": {
+      "1": {
+        "moves": [
+          "MOVE_HURRICANE",
+          "MOVE_TAILWIND",
+          "MOVE_DRAGON_PULSE",
+          "MOVE_BOOMBURST"
+        ]
+      }
+    },
+    "TRAINER_CORY_3": {
+      "0": {
+        "item": "ITEM_ROCKY_HELMET"
+      }
+    },
+    "TRAINER_CORY_4": {
+      "0": {
+        "item": "ITEM_ROCKY_HELMET"
+      }
+    },
+    "TRAINER_FLINT": {
+      "1": {
+        "moves": [
+          "MOVE_BUG_BUZZ",
+          "MOVE_HURRICANE",
+          "MOVE_HEAT_WAVE",
+          "MOVE_DETECT"
+        ]
+      }
+    },
+    "TRAINER_ISAAC_4": {
+      "0": {
+        "item": "ITEM_WEAKNESS_POLICY"
+      },
+      "1": {
+        "item": "ITEM_THROAT_SPRAY"
+      },
+      "3": {
+        "item": "ITEM_SITRUS_BERRY"
+      },
+      "4": {
+        "item": "ITEM_LIFE_ORB"
+      },
+      "5": {
+        "item": "ITEM_ROCKY_HELMET"
+      }
+    },
+    "TRAINER_JENNIFER": {
+      "1": {
+        "moves": [
+          "MOVE_CLANGING_SCALES",
+          "MOVE_OUTRAGE",
+          "MOVE_POISON_JAB",
+          "MOVE_DRAGON_DANCE"
+        ]
+      },
+      "2": {
+        "moves": [
+          "MOVE_MOONBLAST",
+          "MOVE_ENERGY_BALL",
+          "MOVE_TAILWIND",
+          "MOVE_PSYCHIC"
+        ]
+      },
+      "3": {
+        "moves": [
+          "MOVE_HEAD_CHARGE",
+          "MOVE_MEGAHORN",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_HEAD_SMASH"
+        ]
+      }
+    },
+    "TRAINER_KAREN_4": {
+      "4": {
+        "item": "ITEM_LIFE_ORB"
+      }
+    },
+    "TRAINER_LORENZO": {
+      "0": {
+        "moves": [
+          "MOVE_RAIN_DANCE",
+          "MOVE_SURF",
+          "MOVE_GIGA_DRAIN",
+          "MOVE_FAKE_OUT"
+        ]
+      }
+    },
+    "TRAINER_MARY": {
+      "2": {
+        "moves": [
+          "MOVE_RAIN_DANCE",
+          "MOVE_THUNDER",
+          "MOVE_HURRICANE",
+          "MOVE_PROTECT"
+        ]
+      }
+    },
+    "TRAINER_WENDY": {
+      "2": {
+        "moves": [
+          "MOVE_AIR_SLASH",
+          "MOVE_HYDRO_PUMP",
+          "MOVE_TAILWIND",
+          "MOVE_ROOST"
+        ]
+      },
+      "3": {
+        "moves": [
+          "MOVE_DARK_PULSE",
+          "MOVE_HEAT_WAVE",
+          "MOVE_EARTH_POWER",
+          "MOVE_FIRE_BLAST"
+        ]
+      }
+    },
+    "TRAINER_CYNDY_4": {
+      "2": {
+        "moves": [
+          "MOVE_DRAIN_PUNCH",
+          "MOVE_DOUBLE_EDGE",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_BULK_UP"
+        ]
+      }
+    },
+    "TRAINER_GERALD": {
+      "0": {
+        "moves": [
+          "MOVE_FIRE_PUNCH",
+          "MOVE_DRAIN_PUNCH",
+          "MOVE_AQUA_TAIL",
+          "MOVE_TRICK_ROOM"
+        ]
+      },
+      "3": {
+        "moves": [
+          "MOVE_FLARE_BLITZ",
+          "MOVE_JUMP_KICK",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_PROTECT"
+        ]
+      }
+    },
+    "TRAINER_JAZMYN": {
+      "3": {
+        "moves": [
+          "MOVE_THUNDER",
+          "MOVE_SHADOW_BALL",
+          "MOVE_AURORA_BEAM",
+          "MOVE_ELECTROWEB"
+        ]
+      }
+    },
+    "TRAINER_MAKAYLA": {
+      "1": {
+        "moves": [
+          "MOVE_HIGH_JUMP_KICK",
+          "MOVE_ZEN_HEADBUTT",
+          "MOVE_ICE_PUNCH",
+          "MOVE_SWORDS_DANCE"
+        ]
+      },
+      "3": {
+        "moves": [
+          "MOVE_PROTECT",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_SUPERPOWER",
+          "MOVE_ICICLE_CRASH"
+        ]
+      }
+    },
+    "TRAINER_MIGUEL_4": {
+      "3": {
+        "item": "ITEM_LIFE_ORB"
+      }
+    },
+    "TRAINER_NICOLAS_2": {
+      "0": {
+        "moves": [
+          "MOVE_HURRICANE",
+          "MOVE_DRAGON_PULSE",
+          "MOVE_FLAMETHROWER",
+          "MOVE_TAILWIND"
+        ]
+      },
+      "1": {
+        "moves": [
+          "MOVE_TOXIC",
+          "MOVE_HEAT_WAVE",
+          "MOVE_IRON_DEFENSE",
+          "MOVE_PROTECT"
+        ]
+      }
+    },
+    "TRAINER_WILTON_2": {
+      "1": {
+        "moves": [
+          "MOVE_PSYSHOCK",
+          "MOVE_RECOVER",
+          "MOVE_THUNDER",
+          "MOVE_TRICK_ROOM"
+        ]
+      }
+    },
+    "TRAINER_ALEXIA": {
+      "3": {
+        "moves": [
+          "MOVE_BRAVE_BIRD",
+          "MOVE_SWORDS_DANCE",
+          "MOVE_CLOSE_COMBAT",
+          "MOVE_ROCK_SLIDE"
+        ]
+      }
+    },
+    "TRAINER_GEORGE": {
+      "3": {
+        "moves": [
+          "MOVE_JUDGMENT",
+          "MOVE_DAZZLING_GLEAM",
+          "MOVE_RECOVER",
+          "MOVE_CALM_MIND"
+        ]
+      }
+    },
+    "TRAINER_HALLE": {
+      "3": {
+        "moves": [
+          "MOVE_SLUDGE_BOMB",
+          "MOVE_DRACO_METEOR",
+          "MOVE_NASTY_PLOT",
+          "MOVE_PROTECT"
+        ]
+      }
+    },
+    "TRAINER_JACKSON_1": {
+      "0": {
+        "moves": [
+          "MOVE_HYDRO_PUMP",
+          "MOVE_HURRICANE",
+          "MOVE_TAILWIND",
+          "MOVE_ROOST"
+        ]
+      },
+      "3": {
+        "moves": [
+          "MOVE_LIQUIDATION",
+          "MOVE_MUDDY_WATER",
+          "MOVE_CURSE",
+          "MOVE_REST"
+        ]
+      }
+    },
+    "TRAINER_JEFF": {
+      "2": {
+        "moves": [
+          "MOVE_FLAMETHROWER",
+          "MOVE_GIGA_DRAIN",
+          "MOVE_SHADOW_BALL",
+          "MOVE_TRICK_ROOM"
+        ]
+      }
+    },
+    "TRAINER_KIRK": {
+      "1": {
+        "moves": [
+          "MOVE_CHARGE_BEAM",
+          "MOVE_LIGHT_SCREEN",
+          "MOVE_ELECTROWEB",
+          "MOVE_MAGNET_RISE"
+        ]
+      }
+    },
+    "TRAINER_VICTORIA": {
+      "0": {
+        "moves": [
+          "MOVE_QUIVER_DANCE",
+          "MOVE_SLEEP_POWDER",
+          "MOVE_DAZZLING_GLEAM",
+          "MOVE_GIGA_DRAIN"
+        ]
+      }
+    },
+    "TRAINER_MARCEL": {
+      "0": {
+        "moves": [
+          "MOVE_ENERGY_BALL",
+          "MOVE_DARK_PULSE",
+          "MOVE_TAILWIND",
+          "MOVE_HEAT_WAVE"
+        ],
+        "item": "ITEM_FOCUS_SASH"
+      }
+    },
+    "TRAINER_BROOKE_1": {
+      "0": {
+        "moves": [
+          "MOVE_MUDDY_WATER",
+          "MOVE_ICY_WIND",
+          "MOVE_RECOVER",
+          "MOVE_ANCIENT_POWER"
+        ]
+      }
+    },
+    "TRAINER_CINDY_4": {
+      "2": {
+        "moves": [
+          "MOVE_SEED_BOMB",
+          "MOVE_GUNK_SHOT",
+          "MOVE_KNOCK_OFF",
+          "MOVE_THUNDER_WAVE"
+        ]
+      }
+    },
+    "TRAINER_CONNIE": {
+      "1": {
+        "moves": [
+          "MOVE_HYDRO_PUMP",
+          "MOVE_PSYCHIC",
+          "MOVE_ICY_WIND",
+          "MOVE_PROTECT"
+        ]
+      }
+    },
+    "TRAINER_WINSTON_4": {
+      "1": {
+        "moves": [
+          "MOVE_HURRICANE",
+          "MOVE_ROOST",
+          "MOVE_TAILWIND",
+          "MOVE_FEATHER_DANCE"
+        ]
+      },
+      "2": {
+        "moves": [
+          "MOVE_WILD_CHARGE",
+          "MOVE_CRUNCH",
+          "MOVE_PLAY_ROUGH",
+          "MOVE_ROCK_SLIDE"
+        ]
+      }
+    },
+    "TRAINER_COLE": {
+      "0": {
+        "moves": [
+          "MOVE_EARTH_POWER",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_TRICK_ROOM",
+          "MOVE_PROTECT"
+        ]
+      }
+    },
+    "TRAINER_JEFFREY_4": {
+      "0": {
+        "moves": [
+          "MOVE_X_SCISSOR",
+          "MOVE_IRON_HEAD",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_HONE_CLAWS"
+        ]
+      }
+    },
+    "TRAINER_NICOLAS_1": {
+      "0": {
+        "moves": [
+          "MOVE_HURRICANE",
+          "MOVE_DRAGON_PULSE",
+          "MOVE_HEAT_WAVE",
+          "MOVE_TAILWIND"
+        ]
+      }
+    },
+    "TRAINER_JARED": {
+      "3": {
+        "moves": [
+          "MOVE_SWORDS_DANCE",
+          "MOVE_AERIAL_ACE",
+          "MOVE_BATON_PASS",
+          "MOVE_PROTECT"
+        ]
+      }
+    },
+    "TRAINER_MARTHA": {
+      "3": {
+        "moves": [
+          "MOVE_VOLT_SWITCH",
+          "MOVE_OVERHEAT",
+          "MOVE_ELECTROWEB",
+          "MOVE_PROTECT"
+        ]
+      }
+    },
+    "TRAINER_ELI": {
+      "3": {
+        "moves": [
+          "MOVE_PARTING_SHOT",
+          "MOVE_FAKE_OUT",
+          "MOVE_FLARE_BLITZ",
+          "MOVE_ROCK_SLIDE"
+        ]
+      }
+    },
+    "TRAINER_AURON": {
+      "0": {
+        "moves": [
+          "MOVE_THUNDERBOLT",
+          "MOVE_FLAMETHROWER",
+          "MOVE_ELECTROWEB",
+          "MOVE_SIGNAL_BEAM"
+        ]
+      }
+    },
+    "TRAINER_LYDIA_4": {
+      "5": {
+        "moves": [
+          "MOVE_EXTREME_SPEED",
+          "MOVE_WATERFALL",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_PROTECT"
+        ]
+      }
+    },
+    "TRAINER_SEBASTIAN": {
+      "0": {
+        "moves": [
+          "MOVE_BULLET_PUNCH",
+          "MOVE_SWORDS_DANCE",
+          "MOVE_BUG_BITE",
+          "MOVE_ROOST"
+        ]
+      },
+      "3": {
+        "moves": [
+          "MOVE_RAGE_POWDER",
+          "MOVE_SLUDGE_BOMB",
+          "MOVE_SPORE",
+          "MOVE_GIGA_DRAIN"
+        ]
+      }
+    },
+    "TRAINER_JENNA": {
+      "0": {
+        "moves": [
+          "MOVE_LEAF_BLADE",
+          "MOVE_SUCKER_PUNCH",
+          "MOVE_LOW_KICK",
+          "MOVE_TAILWIND"
+        ]
+      },
+      "2": {
+        "moves": [
+          "MOVE_EARTHQUAKE",
+          "MOVE_POISON_JAB",
+          "MOVE_ICE_PUNCH",
+          "MOVE_PROTECT"
+        ]
+      }
+    },
+    "TRAINER_ALAN": {
+      "3": {
+        "moves": [
+          "MOVE_EARTHQUAKE",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_RECOVER",
+          "MOVE_PROTECT"
+        ]
+      }
+    },
+    "TRAINER_VIVIAN": {
+      "0": {
+        "moves": [
+          "MOVE_ELECTROWEB",
+          "MOVE_ICE_PUNCH",
+          "MOVE_THUNDER_WAVE",
+          "MOVE_THUNDER_PUNCH"
+        ]
+      }
+    },
+    "TRAINER_KALEB": {
+      "2": {
+        "moves": [
+          "MOVE_PROTECT",
+          "MOVE_HEAT_WAVE",
+          "MOVE_KNOCK_OFF",
+          "MOVE_WILL_O_WISP"
+        ]
+      }
+    },
+    "TRAINER_SARAH": {
+      "1": {
+        "level": -3,
+        "species": "SPECIES_DIANCIE",
+        "item": "ITEM_MENTAL_HERB",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_DEF_SPDEF_SASSY",
+        "moves": [
+          "MOVE_TRICK_ROOM",
+          "MOVE_DAZZLING_GLEAM",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_PROTECT"
+        ]
+      }
+    },
+    "TRAINER_ELLIOT_4": {
+      "5": {
+        "level": 0,
+        "species": "SPECIES_MANAPHY",
+        "item": "ITEM_LEFTOVERS",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_TAIL_GLOW",
+          "MOVE_MUDDY_WATER",
+          "MOVE_ICE_BEAM",
+          "MOVE_PROTECT"
+        ]
+      }
+    },
+    "TRAINER_TISHA": {
+      "2": {
+        "level": -2,
+        "species": "SPECIES_TAPU_FINI",
+        "item": "ITEM_LEFTOVERS",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_MUDDY_WATER",
+          "MOVE_MOONBLAST",
+          "MOVE_ICY_WIND",
+          "MOVE_PROTECT"
+        ]
+      }
+    },
+    "TRAINER_GRUNT_AQUA_HIDEOUT_3": {
+      "1": {
+        "level": -1,
+        "species": "SPECIES_URSHIFU_RAPID_STRIKE_STYLE",
+        "item": "ITEM_CHOICE_BAND",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_SURGING_STRIKES",
+          "MOVE_CLOSE_COMBAT",
+          "MOVE_AQUA_JET",
+          "MOVE_U_TURN"
+        ]
+      }
+    },
+    "TRAINER_MARTIN": {
+      "2": {
+        "level": -1,
+        "species": "SPECIES_ZARUDE",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_KNOCK_OFF",
+          "MOVE_POWER_WHIP",
+          "MOVE_CLOSE_COMBAT",
+          "MOVE_U_TURN"
+        ]
+      }
+    },
+    "TRAINER_GRUNT_MAGMA_HIDEOUT_6": {
+      "1": {
+        "level": -1,
+        "species": "SPECIES_HEATRAN",
+        "item": "ITEM_SHUCA_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_ERUPTION",
+          "MOVE_EARTH_POWER",
+          "MOVE_HEAT_WAVE",
+          "MOVE_PROTECT"
+        ]
+      }
+    },
+    "TRAINER_SIMON": {
+      "2": {
+        "level": -3,
+        "species": "SPECIES_KELDEO",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_MUDDY_WATER",
+          "MOVE_SECRET_SWORD",
+          "MOVE_ICY_WIND",
+          "MOVE_PROTECT"
+        ]
+      }
+    },
+    "TRAINER_ROBIN": {
+      "3": {
+        "level": -2,
+        "species": "SPECIES_MAGEARNA",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_SPATK_QUIET",
+        "moves": [
+          "MOVE_FLEUR_CANNON",
+          "MOVE_DAZZLING_GLEAM",
+          "MOVE_TRICK_ROOM",
+          "MOVE_PROTECT"
+        ]
+      }
+    },
+    "TRAINER_GEORGIA": {
+      "2": {
+        "level": -2,
+        "species": "SPECIES_JIRACHI",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_FOLLOW_ME",
+          "MOVE_ICY_WIND",
+          "MOVE_IRON_HEAD",
+          "MOVE_HELPING_HAND"
+        ]
+      }
+    },
+    "TRAINER_GRUNT_AQUA_HIDEOUT_6": {
+      "2": {
+        "level": -1,
+        "species": "SPECIES_WISHIWASHI",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_WATER_SPOUT",
+          "MOVE_ICE_BEAM",
+          "MOVE_EARTHQUAKE",
+          "MOVE_PROTECT"
+        ]
+      }
+    },
+    "TRAINER_TABITHA_MAGMA_HIDEOUT": {
+      "0": {
+        "moves": [
+          "MOVE_POWER_GEM",
+          "MOVE_EARTH_POWER",
+          "MOVE_WEATHER_BALL",
+          "MOVE_SUNNY_DAY"
+        ]
+      }
+    }
+  },
+  "level_profiles": {}
+}

@@ -395,11 +395,11 @@ static const struct SpriteTemplate sSpriteTemplate_StarterCircle =
 };
 
 // .text
-u16 GetStarterPokemon(u16 chosenStarterId)
+u16 GetStarterPokemonForGeneration(u16 chosenStarterId, u16 starterGeneration)
 {
-    if (chosenStarterId > STARTER_MON_COUNT)
+    if (chosenStarterId >= STARTER_MON_COUNT)
         chosenStarterId = 0;
-    switch (gSpecialVar_0x800A)
+    switch (starterGeneration)
     {
     case 0:
         return sStarterMonHoenn[chosenStarterId];
@@ -420,6 +420,11 @@ u16 GetStarterPokemon(u16 chosenStarterId)
     default:
         return sStarterMonHoenn[chosenStarterId];
     } 
+}
+
+u16 GetStarterPokemon(u16 chosenStarterId)
+{
+    return GetStarterPokemonForGeneration(chosenStarterId, gSpecialVar_0x800A);
 }
 
 static void VblankCB_StarterChoose(void)

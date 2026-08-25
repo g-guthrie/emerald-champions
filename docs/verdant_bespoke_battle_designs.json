@@ -1,0 +1,441 @@
+{
+  "version": 2,
+  "scope": "Manual encounter-by-encounter closure records for Verdant's first 50 real campaign battles. Mutually exclusive trainer definitions are grouped as one encounter.",
+  "designs": {
+    "BATTLE_001_ROUTE_103_RIVAL": {
+      "guide_order": 1,
+      "trainer_ids": [
+        "TRAINER_MAY_ROUTE_103_TREECKO",
+        "TRAINER_MAY_ROUTE_103_TORCHIC",
+        "TRAINER_MAY_ROUTE_103_MUDKIP",
+        "TRAINER_BRENDAN_ROUTE_103_TREECKO",
+        "TRAINER_BRENDAN_ROUTE_103_TORCHIC",
+        "TRAINER_BRENDAN_ROUTE_103_MUDKIP"
+      ],
+      "status": "closed",
+      "campaign_point": "Route 103 rival battle before the player receives capture balls",
+      "strict_cap": 14,
+      "player_state": "One starter chosen from seven regional trios. Oldale's Center teacher, ability menu, Mart core held items, $25,000 starting money, and $1,000 ten-level Rare Candy are all available.",
+      "manual_quality": 10,
+      "manual_difficulty": 6.8,
+      "corpus_review": {
+        "reference_pool_size": 983,
+        "full_team_candidates": [
+          {
+            "source": "docs/showdown_gen4_random_singles_30.json",
+            "sample": 20,
+            "decision": "set inspiration only",
+            "reason": "A full six-Pokémon team cannot fit a pre-capture one-on-one rival encounter."
+          },
+          {
+            "source": "docs/showdown_gen4_random_doubles_30.json",
+            "sample": 25,
+            "decision": "set inspiration only",
+            "reason": "The Treecko set supplies an unevolved competitive precedent, but its full doubles team is structurally unavailable to the player at this point."
+          },
+          {
+            "source": "docs/showdown_gen5_random_singles_30.json",
+            "sample": 14,
+            "decision": "set inspiration only",
+            "reason": "The Combusken team is too developed for the first rival; only its aggressive starter pressure is retained."
+          }
+        ],
+        "decision": "No complete corpus team is appropriate. Battle 1 must stay a flexible one-Pokémon type-counter fight across 21 starter choices."
+      },
+      "competitive_references": [
+        {
+          "source": "docs/showdown_gen4_random_singles_30.json",
+          "sample": 20,
+          "seed": "20,27310,30957,36936",
+          "adaptation": "The Marshtomp donor supports the rival's simple STAB-plus-coverage identity, but the first fight deliberately avoids importing a full ladder set."
+        },
+        {
+          "source": "docs/showdown_gen4_random_doubles_30.json",
+          "sample": 25,
+          "seed": "125,6850,61902,50571",
+          "adaptation": "The Treecko donor confirms that early unevolved starters can sustain real competitive pressure without turning the opening into a forced sequence."
+        },
+        {
+          "source": "docs/showdown_gen5_random_singles_30.json",
+          "sample": 14,
+          "seed": "14,45331,21699,45519",
+          "adaptation": "The Combusken donor informs the aggressive Fire-starter branch while its setup complexity is intentionally held back for later rival fights."
+        }
+      ],
+      "team_intent": "The rival always fields the type-counter starter from the same regional trio the player chose. It is level 14 with perfect IVs, a Life Orb, its universal Pledge STAB, Return, Toxic, and Protect.",
+      "intended_counterplay": "There is no single required solution. The player can use any legal coverage or status plan their chosen starter supports, or lean on Focus Sash, Eviolite, Leftovers, Life Orb, or a Choice item from Oldale. Protect, setup, Counter or Mirror Coat, Endeavor, speed control, and direct offense are all viable on different starters.",
+      "bespoke_ai": "The normal foe-aware viability AI chooses among offense, Toxic, and Protect. No opening is forced and no hidden lock-and-key sequence is required.",
+      "uniqueness": "The encounter supports all 21 starters across Generations 1-7 through one native counterpart rule, while May and Brendan remain mechanically identical. It introduces Verdant's preparation freedom without pretending the player already owns a full team.",
+      "closure": "Battle 1 is a hard but open-ended first preparation check: the rival has a competitive item and perfect IVs at the cap, the exact counterpart matches the player's chosen generation, and multiple legal plans can win."
+    },
+    "BATTLE_002_ROUTE_102_CALVIN": {
+      "guide_order": 2,
+      "trainer_ids": [
+        "TRAINER_CALVIN_1"
+      ],
+      "status": "closed",
+      "campaign_point": "First optional trainer on Route 102, after the lab supplies capture balls and Mom supplies the Old Rod",
+      "strict_cap": 14,
+      "player_state": "The player can bring six level-14 Pokémon from Routes 101, 102, and 103 plus Old Rod encounters, with every legal move, ability switching, and the core held-item shop.",
+      "manual_quality": 10,
+      "manual_difficulty": 8.2,
+      "corpus_review": {
+        "reference_pool_size": 983,
+        "full_team_candidates": [
+          {
+            "source": "docs/smogon_gen4_9_ou_uu_nu_sample_teams.json",
+            "team": "gen8ou #10 — Storm Zone Mew Sand",
+            "decision": "rejected as a full import",
+            "reason": "Mew plus sand is sound, but Hippopotas/Drilbur/Fairy support is a familiar reusable weather module and does not fit Calvin's playful trickster identity as well as Illusion does."
+          },
+          {
+            "source": "docs/showdown_gen5_random_doubles_30.json",
+            "sample": 24,
+            "decision": "individual set selected",
+            "reason": "The full generated team has no Route 102 identity, but its Zorua is an exact fit for the false-Mew lead."
+          },
+          {
+            "source": "docs/showdown_gen6_random_doubles_30.json",
+            "sample": 28,
+            "decision": "individual set selected",
+            "reason": "The full team is unrelated to the route, while its Nasty Plot Mew is the correct protected ace for this composition."
+          },
+          {
+            "source": "docs/showdown_gen6_random_doubles_30.json",
+            "sample": 30,
+            "decision": "support shell selected",
+            "reason": "The full team is not imported; Smeargle's redirection shell is adapted specifically to enable Calvin's Mew."
+          }
+        ],
+        "decision": "No full random or sample team is copied verbatim. Three sourced sets are integrated into one route-specific Illusion plan, with Jigglypuff supplying the missing speed and partner support."
+      },
+      "competitive_references": [
+        {
+          "source": "docs/showdown_gen5_random_doubles_30.json",
+          "sample": 24,
+          "seed": "124,64466,60359,19234",
+          "adaptation": "Zorua's Expert Belt, Illusion, Hidden Power Fighting, Dark Pulse, Extrasensory, and Sucker Punch set is imported verbatim as the deceptive lead."
+        },
+        {
+          "source": "docs/showdown_gen6_random_doubles_30.json",
+          "sample": 30,
+          "seed": "30,40965,46387,22631",
+          "adaptation": "Smeargle keeps the donor's Fake Out, Helping Hand, and Follow Me support shell; Focus Sash plus Endeavor replaces King's Shield so it cannot become a harmless final slot."
+        },
+        {
+          "source": "docs/showdown_gen6_random_doubles_30.json",
+          "sample": 28,
+          "seed": "28,25127,43301,25492",
+          "adaptation": "Mew's Sitrus Berry, Psyshock, Nasty Plot, Aura Sphere, and Will-O-Wisp set is imported as the real late-game ace."
+        },
+        {
+          "source": "docs/showdown_gen5_random_doubles_30.json",
+          "sample": 14,
+          "seed": "114,50811,44929,33539",
+          "adaptation": "The bulky Jigglypuff support donor is rebuilt for active doubles tempo with Friend Guard, Icy Wind, Helping Hand, Dazzling Gleam, and Protect."
+        }
+      ],
+      "team_intent": "Zorua leads beside Friend Guard Jigglypuff while Illusion makes it appear to be the Mew held in the final slot. Icy Wind and Helping Hand turn the false Mew into immediate pressure; Focus Sash Smeargle then creates a redirection or Fake Out window for the real Mew to use Nasty Plot and clean.",
+      "intended_counterplay": "This team has several answers rather than one key. Spread attacks expose Illusion and bypass Follow Me, Taunt shuts down Jigglypuff or Smeargle, priority finishes a Sash-broken Smeargle, and early Bug, Ghost, and Dark options pressure Mew. The player can also double-target the support slot, contest speed with their own Icy Wind or Electroweb, or overwhelm the frail Zorua lead.",
+      "bespoke_ai": "Calvin uses normal foe-aware doubles scoring plus partner support, speed-control preference, and smart switching. No move or turn is forced; the sets are deliberately legible to the general AI.",
+      "uniqueness": "This is Calvin's playground illusion team: the first apparent Mew is a local Zorua, the second is real, and Smeargle plus Jigglypuff make the deception function as a complete four-Pokémon plan. No later encounter will reuse this false-ace structure.",
+      "closure": "Battle 2 is the first full-team doubles exam. It is difficult because the player must identify the false Mew, manage active speed and partner support, and preserve an answer for a level-15 Nasty Plot Mew—not because the battle demands one preselected counter."
+    },
+    "BATTLE_003_ROUTE_102_RICK": {
+      "guide_order": 3,
+      "trainer_ids": [
+        "TRAINER_RICK"
+      ],
+      "status": "closed",
+      "campaign_point": "Second optional trainer in the recommended Route 102 sweep, immediately after Calvin",
+      "strict_cap": 14,
+      "player_state": "The player can bring six level-14 Pokémon from Routes 101, 102, and 103 plus Old Rod encounters, with every legal move, ability switching, and the core held-item shop.",
+      "manual_quality": 10,
+      "manual_difficulty": 8.0,
+      "corpus_review": {
+        "reference_pool_size": 983,
+        "full_team_candidates": [
+          {
+            "source": "docs/smogon_gen4_9_ou_uu_nu_sample_teams.json",
+            "team": "gen9ou #2 — ~ mana webs",
+            "decision": "rejected as a full import",
+            "reason": "Its Web-to-multiple-payoff structure fits, but four members, several moves and items, and Terastallization are unavailable in Verdant; the non-Bug roster also conflicts with Rick's identity."
+          },
+          {
+            "source": "docs/smogon_gen4_9_ou_uu_nu_sample_teams.json",
+            "team": "gen6ou #2 — Spanish Webs",
+            "decision": "rejected as a full import",
+            "reason": "The complete team is competitively sound but largely non-Bug and introduces an unrelated Mega Scizor plus several generic sweepers. Its hazard-to-payoff sequence is retained."
+          },
+          {
+            "source": "docs/showdown_gen9_random_singles_30.json",
+            "sample": 28,
+            "decision": "rejected as a full import",
+            "reason": "Leavanny is the only Bug on a rain-and-offense collage with several unavailable Gen 9 assumptions. Its legal Web lead is selected without importing the unrelated team."
+          }
+        ],
+        "decision": "No complete corpus team contains more than two Bug types or fits Rick verbatim. Rick receives a hand-integrated all-Bug web offense with one Sash and only one setup win condition."
+      },
+      "competitive_references": [
+        {
+          "source": "docs/showdown_gen9_random_singles_30.json",
+          "sample": 28,
+          "seed": "28,25127,43301,25492",
+          "adaptation": "Leavanny keeps Swarm, Sticky Web, Knock Off, and Leaf Blade; unavailable Lunge becomes legal X-Scissor, and Focus Sash replaces Heavy-Duty Boots so the lead gets one reliable action without any Tera assumption."
+        },
+        {
+          "source": "docs/showdown_gen9_random_doubles_30.json",
+          "sample": 7,
+          "seed": "7,55433,10898,22765",
+          "adaptation": "Scizor keeps the donor's Sitrus Berry, Technician, Tailwind, U-turn, and Bullet Punch; unavailable Close Combat becomes legal Superpower for the pivot and backup speed plan."
+        },
+        {
+          "source": "docs/showdown_gen9_random_doubles_30.json",
+          "sample": 13,
+          "seed": "13,37412,20156,14182",
+          "adaptation": "Heracross's Choice Scarf, Moxie, Rock Slide, Close Combat, Knock Off, and Megahorn set is imported verbatim as a four-attacks revenge cleaner rather than another setup gate."
+        },
+        {
+          "source": "docs/showdown_gen6_random_doubles_30.json",
+          "sample": 16,
+          "seed": "16,61169,24785,42658",
+          "adaptation": "Beautifly's Charti Berry Quiver Dance moth shell becomes the much less-used Frosmoth; Air Cutter becomes Ice Beam and Swarm becomes Ice Scales while Bug Buzz and Giga Drain remain."
+        }
+      ],
+      "team_intent": "Focus Sash Leavanny establishes Sticky Web while still threatening damage and item removal. Sitrus Technician Scizor pivots and can leave Tailwind behind if Web is denied, Choice Scarf Moxie Heracross supplies immediate four-attacks pressure, and Charti Ice Scales Frosmoth is the team's only setup ace.",
+      "intended_counterplay": "The player can prevent Web with Taunt or immediate pressure, remove it, use Flying or Levitate Pokémon that ignore it, or lean on priority. Fire and Rock coverage punish the Bug theme, but Scizor and Heracross prevent one Rock move from answering the whole roster. Intimidate, burns, and physical walls contain the first three; Frosmoth is specially resilient but vulnerable to physical pressure before Quiver Dance snowballs.",
+      "bespoke_ai": "Rick remains an intentional singles pacing fight and uses the normal foe-aware viability AI. Web, Tailwind, attacks, pivoting, and Quiver Dance are all already legible to that AI; no turn, move, setup, or switch is forced.",
+      "uniqueness": "This is Verdant's only early all-Bug web offense. It uses four different competitive donors, avoids repeating Calvin's Illusion or Mew spectacle, and replaces the already common Volcarona role with a scarcely used Frosmoth endgame.",
+      "closure": "Battle 3 is difficult because Web supports three different offensive tempos, but it has only one Sash and one setup win condition. The player can deny speed control, exploit shared Bug weaknesses, use priority, or outlast the choice-locked attackers without solving a lock-and-key sequence."
+    },
+    "BATTLE_004_ROUTE_102_ALLEN": {
+      "guide_order": 4,
+      "trainer_ids": [
+        "TRAINER_ALLEN"
+      ],
+      "status": "closed",
+      "campaign_point": "Third optional trainer in the recommended Route 102 sweep, after Calvin and Rick",
+      "strict_cap": 14,
+      "player_state": "The player can bring six level-14 Pokémon from Routes 101, 102, and 103 plus Old Rod encounters, with every legal move, ability switching, and the core held-item shop.",
+      "manual_quality": 10,
+      "manual_difficulty": 8.2,
+      "corpus_review": {
+        "reference_pool_size": 983,
+        "full_team_candidates": [
+          {
+            "source": "docs/showdown_gen5_random_doubles_30.json",
+            "sample": 20,
+            "decision": "rejected as a full import",
+            "reason": "Its Belly Drum Zigzagoon is ideal, but Gardevoir, Kabutops, Quagsire, Regice, and Leafeon form an unrelated six-Pokémon collage with no early-route identity or redirection plan."
+          },
+          {
+            "source": "docs/showdown_gen7_random_doubles_30.json",
+            "sample": 19,
+            "decision": "rejected as a full import",
+            "reason": "Parasect's redirection role fits, but Blacephalon, Mega Banette, Slurpuff, Seviper, and Toucannon create a later-game boss roster rather than a beginner-team puzzle."
+          },
+          {
+            "source": "docs/showdown_champions_random_doubles_30.json",
+            "sample": 30,
+            "decision": "rejected as a full import",
+            "reason": "The complete rain, Shell Smash, Web, and Mega Metagross team has no early-route identity. Its Light Ball Pikachu utility set remains fully compatible."
+          },
+          {
+            "source": "docs/showdown_gen4_random_singles_30.json",
+            "sample": 2,
+            "decision": "rejected as a full import",
+            "reason": "Taillow appears beside Zapdos, Spiritomb, Luxray, Snubbull, and Cacturne in the wrong battle format. Only its exact Guts cleaner set fits Allen."
+          }
+        ],
+        "decision": "No complete team contains more than one of these four Pokémon. Four sourced low-stage sets are integrated into one 'beginner Pokémon, expert doubles' battle with one setup move and no guaranteed redirection Sash."
+      },
+      "competitive_references": [
+        {
+          "source": "docs/showdown_gen5_random_doubles_30.json",
+          "sample": 20,
+          "seed": "120,32790,54187,24956",
+          "adaptation": "Zigzagoon keeps Quick Feet, Belly Drum, Extreme Speed, and Seed Bomb; Sitrus Berry plus Protect replaces Leftovers plus Substitute so the doubles setup is powerful but interactable."
+        },
+        {
+          "source": "docs/showdown_gen7_random_doubles_30.json",
+          "sample": 19,
+          "seed": "19,19391,29414,5599",
+          "adaptation": "Parasect's Sitrus Berry, Dry Skin, Spore, Protect, Seed Bomb, and Rage Powder set is imported verbatim as the finite redirection partner."
+        },
+        {
+          "source": "docs/showdown_champions_random_doubles_30.json",
+          "sample": 30,
+          "seed": "30,40965,46387,22631",
+          "adaptation": "Pikachu's Light Ball, Lightning Rod, Fake Out, Protect, Volt Tackle, and Encore set is imported verbatim as the disruptive second-wave partner."
+        },
+        {
+          "source": "docs/showdown_gen4_random_singles_30.json",
+          "sample": 2,
+          "seed": "2,15838,3183,62685",
+          "adaptation": "Taillow's Toxic Orb, Guts, Protect, Quick Attack, Brave Bird, and Facade set is imported verbatim as the level-15 closer."
+        }
+      ],
+      "team_intent": "Light Ball Lightning Rod Pikachu and Toxic Orb Guts Taillow lead with Fake Out, Encore, priority, immediate damage, and protection from Electric targeting. Sitrus Parasect and Sitrus Quick Feet Zigzagoon form the back-line setup mode: Rage Powder or Spore can buy Belly Drum, then Extreme Speed supplies pressure.",
+      "intended_counterplay": "The opening pair is vulnerable to Ground, Rock, Intimidate, and coordinated targeting; Protect can also expose Fake Out or consume Taillow's first Guts turn. When the back line appears, Fake Out, Taunt, spread damage, early Grass or Overcoat Pokémon, Hatenna's Magic Bounce, or a double target can stop Parasect from buying a free Drum. Dreepy, Rotom, and other Ghosts ignore Extreme Speed and Facade, while Intimidate and burns hinder Zigzagoon. The player can disrupt either wave without predicting a forced opening.",
+      "bespoke_ai": "Allen uses normal foe-aware doubles scoring plus partner awareness. The AI can choose immediate Pikachu and Taillow pressure before the later redirection option appears; Rage Powder, Spore, Belly Drum, Fake Out, Encore, Protect, and attacks are evaluated normally, with no forced move, target, turn, or switch.",
+      "uniqueness": "Allen weaponizes four familiar early-route Pokémon through real doubles roles instead of replacing them with legendaries: Light Ball mascot, Guts bird, redirection mushroom, and Belly Drum raccoon. Leading with offense keeps the later Rage Powder setup from repeating Calvin's opening redirection pattern. Wally's current Mauville redirection-plus-Belly Drum module is explicitly flagged for replacement when that encounter is audited.",
+      "closure": "Battle 4 is difficult because either two-Pokémon wave can snowball, but neither begins behind guaranteed redirection and every enabling action has several legal interruptions. It demonstrates that Verdant's ordinary Pokémon can be as dangerous as its rare showcases."
+    },
+    "BATTLE_005_ROUTE_102_TIANA": {
+      "guide_order": 5,
+      "trainer_ids": [
+        "TRAINER_TIANA"
+      ],
+      "status": "closed",
+      "campaign_point": "Final optional trainer in the recommended Route 102 sweep before Petalburg City",
+      "strict_cap": 14,
+      "player_state": "The player can bring six level-14 Pokémon from Routes 101, 102, and 103 plus Old Rod encounters, with every legal move, ability switching, and the core held-item shop.",
+      "manual_quality": 10,
+      "manual_difficulty": 8.3,
+      "corpus_review": {
+        "reference_pool_size": 983,
+        "full_team_candidates": [
+          {
+            "source": "docs/smogon_gen4_9_ou_uu_nu_sample_teams.json",
+            "team": "gen8ou #8 — Calm Mind Fini Hail",
+            "decision": "selected as the structural backbone, rejected verbatim",
+            "reason": "Alolan Ninetales plus Slush Rush Arctozolt is the correct snow core, but the singles team around Heatran, Kartana, Landorus, and Tapu Fini is unrelated to Tiana's doubles snow identity."
+          },
+          {
+            "source": "docs/showdown_gen8_random_doubles_30.json",
+            "sample": 5,
+            "decision": "snow pair retained, one exact set selected",
+            "reason": "Alolan Ninetales and Froslass already coexist here, but Heatran, Coalossal, Emolga, and Sylveon make the complete team a mixed Fire composition rather than snow offense."
+          },
+          {
+            "source": "docs/showdown_champions_random_doubles_30.json",
+            "sample": 24,
+            "decision": "individual set selected",
+            "reason": "The exact Aurora Veil Ninetales is compatible, while the full team includes unavailable Paldean Tauros and an unrelated Shell Smash, Speed Boost, and custom-Mega mixture."
+          },
+          {
+            "source": "docs/showdown_champions_random_doubles_30.json",
+            "sample": 6,
+            "decision": "rejected as a full import",
+            "reason": "Its Vanilluxe snow plus dual Trick Room is coherent, but six fully developed Pokémon and Mega Charizard X create late-boss complexity rather than a Route 102 weather lesson."
+          }
+        ],
+        "decision": "No complete team is imported. The best full-team snow backbone is rebuilt as a native four-Pokémon doubles squad with one Slush Rush fossil, one priority bruiser, and no double weather-nuke lock."
+      },
+      "competitive_references": [
+        {
+          "source": "docs/showdown_champions_random_doubles_30.json",
+          "sample": 24,
+          "seed": "24,58986,37129,31214",
+          "adaptation": "Alolan Ninetales's Light Clay, Snow Warning, Blizzard, Moonblast, Protect, and Aurora Veil set is imported verbatim as the lead."
+        },
+        {
+          "source": "docs/smogon_gen4_9_ou_uu_nu_sample_teams.json",
+          "team": "gen8ou #8 — Calm Mind Fini Hail",
+          "adaptation": "Arctozolt keeps the team's Slush Rush Bolt Beak identity; Expert Belt and Protect translate the snow core into doubles pressure without Life Orb inflation or the singles team's Boots and mixed attacks."
+        },
+        {
+          "source": "docs/showdown_gen8_random_singles_30.json",
+          "sample": 19,
+          "seed": "19,19391,29414,5599",
+          "adaptation": "This Arctozolt donor supplies Bolt Beak, Icicle Crash, and Stomping Tantrum. Protect replaces Thunder Wave, while Slush Rush and Expert Belt connect it to the selected hail backbone."
+        },
+        {
+          "source": "docs/showdown_gen8_random_doubles_30.json",
+          "sample": 5,
+          "seed": "5,39595,7812,25626",
+          "adaptation": "Froslass's Sitrus Berry, Cursed Body, Protect, Icy Wind, Ice Beam, and Shadow Ball set is imported verbatim as speed control and special pressure."
+        },
+        {
+          "source": "docs/showdown_gen9_random_doubles_30.json",
+          "sample": 27,
+          "seed": "27,17208,41758,59690",
+          "adaptation": "Mamoswine's Life Orb, Thick Fat, Icicle Crash, High Horsepower, Protect, and Ice Shard set is imported verbatim as the level-15 priority bruiser."
+        }
+      ],
+      "team_intent": "Light Clay Snow Warning Alolan Ninetales and Expert Belt Slush Rush Arctozolt lead with Aurora Veil, perfectly accurate Blizzard, and fast Bolt Beak pressure. Sitrus Cursed Body Froslass provides Icy Wind and mixed special coverage, while level-15 Life Orb Thick Fat Mamoswine supplies immediate Ground damage and Ice Shard priority without a second Slush Rush nuke.",
+      "intended_counterplay": "Remove or replace snow before Aurora Veil, Taunt or focus Ninetales, break Veil with Brick Break or Psychic Fangs, and use Wide Guard against Blizzard. Fire, Steel, Rock, Fighting, Ground, and Water coverage hit different members; priority and Trick Room bypass Slush Rush, Intimidate and burns contain both physical attackers, and Protect punishes Bolt Beak timing. Once snow ends, only Arctozolt loses its speed multiplier.",
+      "bespoke_ai": "Tiana uses foe-aware smart switching plus reusable field- and speed-control preferences. Aurora Veil and Icy Wind receive contextual bonuses only when useful; snow itself is automatic, and no move, target, switch, or opening is forced.",
+      "uniqueness": "This is Verdant's first full weather battle and its only early Galar-fossil snow sprint. It showcases rare Arctozolt and a corpus-exact Mamoswine without spending another legendary immediately after Calvin's Mew or repeating Rick and Allen's setup structures.",
+      "closure": "Battle 5 is a severe Route 102 finale because snow enables screens, accurate spread damage, and one fast fossil attacker backed by Mamoswine priority. It remains open because weather replacement, screen breaking, Wide Guard, priority, Trick Room, Intimidate, burns, typing, and focused pressure each attack a different dependency."
+    },
+    "BATTLE_006_ROUTE_104_BILLY": {
+      "guide_order": 6,
+      "trainer_ids": [
+        "TRAINER_BILLY"
+      ],
+      "status": "closed",
+      "campaign_point": "First optional trainer on Route 104 south after Petalburg City",
+      "strict_cap": 14,
+      "player_state": "The player retains the full Route 101-103 and Old Rod team pool, then gains Route 104 south catches before Billy. Every legal move, ability switching, core held items, and frictionless cap leveling remain available.",
+      "manual_quality": 10,
+      "manual_difficulty": 8.0,
+      "corpus_review": {
+        "reference_pool_size": 983,
+        "full_team_candidates": [
+          {
+            "source": "docs/showdown_gen7_random_doubles_30.json",
+            "sample": 10,
+            "decision": "individual set selected, full team rejected",
+            "reason": "Palossand fits the beach exactly, but Kartana, Togekiss, Magcargo, Meowstic, and Hariyama form an unrelated doubles support collage."
+          },
+          {
+            "source": "docs/showdown_gen8_random_doubles_30.json",
+            "sample": 2,
+            "decision": "individual set selected, full team rejected",
+            "reason": "Cramorant's Tailwind attacker fits; Marshadow, Wailord, Nidoqueen, Manectric, and Arctozolt do not form a shoreline singles progression."
+          },
+          {
+            "source": "docs/showdown_champions_random_doubles_30.json",
+            "sample": 5,
+            "decision": "individual set selected, full team rejected",
+            "reason": "Crabominable's legal Life Orb priority set fits, but Mega Aerodactyl, Tyranitar, Klefki, Banette, and Chimecho create a developed screens-and-sand team with no shoreline identity."
+          },
+          {
+            "source": "docs/smogon_gen4_9_ou_uu_nu_sample_teams.json",
+            "team": "gen8ou #1 — daunt rain",
+            "decision": "rejected as a full import",
+            "reason": "This is the closest complete shoreline offense, but importing a six-Pokémon rain engine immediately after Tiana would repeat weather and overwhelm the route pacing."
+          },
+          {
+            "source": "docs/smogon_gen4_9_ou_uu_nu_sample_teams.json",
+            "team": "gen8nu #4 — dd aero spikes",
+            "decision": "rejected as a full import",
+            "reason": "It supplies Dhelmise's legal spin-and-Poltergeist role, but the complete team repeats hazard stacking and setup offense rather than Billy's shoreline progression."
+          }
+        ],
+        "decision": "Only fourteen corpus teams contain any chosen species, and none contains more than one. Three exact donors are joined by one legal cross-donor Dhelmise to create a location-specific shoreline gauntlet."
+      },
+      "competitive_references": [
+        {
+          "source": "docs/showdown_gen7_random_doubles_30.json",
+          "sample": 10,
+          "seed": "10,13655,15527,51241",
+          "adaptation": "Palossand's Sitrus Berry, Water Compaction, Shore Up, Earth Power, Shadow Ball, and Toxic set is imported verbatim as the sandcastle opener."
+        },
+        {
+          "source": "docs/showdown_gen8_random_doubles_30.json",
+          "sample": 2,
+          "seed": "2,15838,3183,62685",
+          "adaptation": "Cramorant's Life Orb, Gulp Missile, Hurricane, Ice Beam, Surf, and Tailwind set is imported verbatim to leave speed support for the slower shoreline breakers."
+        },
+        {
+          "source": "docs/showdown_champions_random_doubles_30.json",
+          "sample": 5,
+          "seed": "5,39595,7812,25626",
+          "adaptation": "Crabominable's Life Orb, Iron Fist, Drain Punch, Ice Hammer, Mach Punch, and Protect set is imported verbatim as the legal level-15 closer."
+        },
+        {
+          "source": "docs/smogon_gen4_9_ou_uu_nu_sample_teams.json",
+          "team": "gen8nu #4 plus gen7nu #4/#7",
+          "adaptation": "Gen 8 NU supplies Poltergeist, Power Whip, and Rapid Spin; Gen 7 NU supplies Anchor Shot. Assault Vest replaces recovery so trapping, hazard cleanup, three-STAB pressure, and a Rapid Spin speed increase serve one legal singles role."
+        }
+      ],
+      "team_intent": "Sitrus Water Compaction Palossand opens with Shore Up, dual STAB, and Toxic attrition. Life Orb Gulp Missile Cramorant can establish Tailwind while attacking; Assault Vest Steelworker Dhelmise then traps and pressures through three effective STAB types, and Life Orb Iron Fist Crabominable closes with recovery, priority, and protection under the remaining speed turns.",
+      "intended_counterplay": "Grass, Water, Ice, Ghost, and Dark pressure break Palossand; Electric or Rock attacks answer Cramorant; Fire, Ghost, Dark, and Knock Off contain Dhelmise; Flying, Psychic, Fairy, or a faster revenge attack checks Crabominable. Taunt limits Palossand, Protect consumes Tailwind and Life Orb health, burns and Intimidate blunt both physical breakers, and hazards punish Cramorant unless Dhelmise spends a turn spinning.",
+      "bespoke_ai": "Billy remains a singles pacing fight. Normal foe-aware viability and smart switching are supplemented only by contextual speed-control preference, so Tailwind is attractive when the slow shoreline roster needs it but never forced.",
+      "uniqueness": "Billy's footprint dialogue now resolves into a literal shoreline team: haunted sandcastle, diving seabird, seaweed anchor, and ice crab. It contains no weather setter, no setup sweeper, no legendary, and no species used in Battles 1-5.",
+      "closure": "Battle 6 is difficult through sustained coverage, attrition, Tailwind, trapping, and two Life Orb attackers rather than a single engine. Every member has different weaknesses, so flexible teams are rewarded and no one move solves the whole fight."
+    }
+  }
+}

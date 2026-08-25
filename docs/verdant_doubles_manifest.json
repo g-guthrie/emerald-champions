@@ -3,7 +3,7 @@
     "guide_sha256": "4632181ff8126875e673a0c8df9044031c1b03501b846cd9631ced117837ca74",
     "ledger_sha256": "acdf18f9d3885f837292a25dac4bbe5f0079d9193cc7ff93b16873110323614d",
     "design_sha256": "46181a8ef996eb907bae18e29ed9a5a6fa1302c6cb10d00b5039745f878cc476",
-    "trainer_count": 848
+    "trainer_count": 854
   },
   "formats": {
     "TRAINER_SAWYER_1": {
@@ -133,9 +133,9 @@
       "location": "Seafloor Cavern Room 4"
     },
     "TRAINER_DECLAN": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 34,
       "partner_interaction": false,
       "level_offset": -2,
@@ -349,9 +349,9 @@
       "location": "Victory Road B 2 F"
     },
     "TRAINER_VIOLET": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 34,
       "partner_interaction": false,
       "level_offset": -2,
@@ -925,9 +925,9 @@
       "location": "Route 123"
     },
     "TRAINER_TAMMY": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Shadow disruption",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 34,
       "partner_interaction": false,
       "level_offset": -2,
@@ -1321,9 +1321,9 @@
       "location": "Route 105"
     },
     "TRAINER_DOUGLAS": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 34,
       "partner_interaction": false,
       "level_offset": -3,
@@ -1375,18 +1375,18 @@
       "location": "Route 109"
     },
     "TRAINER_SPENCER": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Tailwind offense",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 37,
       "partner_interaction": false,
       "level_offset": -2,
       "location": "Route 124"
     },
     "TRAINER_ROLAND": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 31,
       "partner_interaction": false,
       "level_offset": -2,
@@ -1411,9 +1411,9 @@
       "location": "Route 125"
     },
     "TRAINER_BARRY": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 33,
       "partner_interaction": false,
       "level_offset": -2,
@@ -1429,18 +1429,18 @@
       "location": "Route 126"
     },
     "TRAINER_RODNEY": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 33,
       "partner_interaction": false,
       "level_offset": -2,
       "location": "Route 130"
     },
     "TRAINER_RICHARD": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 33,
       "partner_interaction": false,
       "level_offset": -2,
@@ -1465,9 +1465,9 @@
       "location": "Route 130"
     },
     "TRAINER_GILBERT": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 33,
       "partner_interaction": false,
       "level_offset": -2,
@@ -1483,18 +1483,18 @@
       "location": "Route 133"
     },
     "TRAINER_KEVIN": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 33,
       "partner_interaction": false,
       "level_offset": -2,
       "location": "Route 131"
     },
     "TRAINER_JACK": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 31,
       "partner_interaction": false,
       "level_offset": -3,
@@ -1735,9 +1735,9 @@
       "location": "Route 118"
     },
     "TRAINER_DALTON_4": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Normal-rule breaker",
+      "format": "single",
+      "target_size": 3,
+      "archetype": "Intentional route singles relief",
       "difficulty": 41,
       "partner_interaction": false,
       "level_offset": -2,
@@ -1843,9 +1843,9 @@
       "location": "Route 114"
     },
     "TRAINER_DREW": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 34,
       "partner_interaction": false,
       "level_offset": -3,
@@ -1987,9 +1987,9 @@
       "location": "Route 120"
     },
     "TRAINER_DEREK": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Bug swarm utility",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 31,
       "partner_interaction": false,
       "level_offset": -2,
@@ -2131,9 +2131,9 @@
       "location": "Route 123"
     },
     "TRAINER_JACLYN": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 34,
       "partner_interaction": false,
       "level_offset": -2,
@@ -2815,9 +2815,9 @@
       "location": "Route 102"
     },
     "TRAINER_BILLY": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 16,
       "partner_interaction": false,
       "level_offset": -4,
@@ -3112,9 +3112,9 @@
       "location": "Route 110"
     },
     "TRAINER_ANTHONY": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 36,
       "partner_interaction": false,
       "level_offset": -2,
@@ -3148,9 +3148,9 @@
       "location": "Route 110"
     },
     "TRAINER_BENJAMIN_4": {
-      "format": "double",
+      "format": "single",
       "target_size": 4,
-      "archetype": "Electric terrain",
+      "archetype": "Intentional route singles relief",
       "difficulty": 41,
       "partner_interaction": false,
       "level_offset": -2,
@@ -3328,9 +3328,9 @@
       "location": "Abandoned Ship Rooms 1 F"
     },
     "TRAINER_ISAIAH_1": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 31,
       "partner_interaction": false,
       "level_offset": -2,
@@ -3346,9 +3346,9 @@
       "location": "Route 126"
     },
     "TRAINER_CHASE": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 33,
       "partner_interaction": false,
       "level_offset": -2,
@@ -3373,9 +3373,9 @@
       "location": "Route 128"
     },
     "TRAINER_ISAIAH_4": {
-      "format": "double",
+      "format": "single",
       "target_size": 4,
-      "archetype": "Balanced disruption",
+      "archetype": "Intentional route singles relief",
       "difficulty": 43,
       "partner_interaction": false,
       "level_offset": 0,
@@ -3391,9 +3391,9 @@
       "location": "Route 128"
     },
     "TRAINER_ISOBEL": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 33,
       "partner_interaction": false,
       "level_offset": -2,
@@ -3427,9 +3427,9 @@
       "location": "Route 128"
     },
     "TRAINER_ALLISON": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 31,
       "partner_interaction": false,
       "level_offset": -2,
@@ -3571,9 +3571,9 @@
       "location": "Fortree City Gym"
     },
     "TRAINER_PRESLEY": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 33,
       "partner_interaction": false,
       "level_offset": -2,
@@ -3724,9 +3724,9 @@
       "location": "Route 113"
     },
     "TRAINER_LUNG": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 31,
       "partner_interaction": false,
       "level_offset": -3,
@@ -4138,18 +4138,18 @@
       "location": "Route 124"
     },
     "TRAINER_JENNY_3": {
-      "format": "double",
+      "format": "single",
       "target_size": 4,
-      "archetype": "Rain pressure",
+      "archetype": "Intentional route singles relief",
       "difficulty": 47,
       "partner_interaction": false,
       "level_offset": -2,
       "location": "Route 124"
     },
     "TRAINER_JENNY_4": {
-      "format": "double",
+      "format": "single",
       "target_size": 4,
-      "archetype": "Rain pressure",
+      "archetype": "Intentional route singles relief",
       "difficulty": 46,
       "partner_interaction": false,
       "level_offset": -1,
@@ -4183,18 +4183,18 @@
       "location": "Route 111"
     },
     "TRAINER_CAROL": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 32,
       "partner_interaction": false,
       "level_offset": -3,
       "location": "Route 112"
     },
     "TRAINER_NANCY": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 34,
       "partner_interaction": false,
       "level_offset": -3,
@@ -4228,9 +4228,9 @@
       "location": "Mt Pyre 6 F"
     },
     "TRAINER_IRENE": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 43,
       "partner_interaction": false,
       "level_offset": -2,
@@ -4354,9 +4354,9 @@
       "location": "Ever Grande City Phoebes Room"
     },
     "TRAINER_HUEY": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 21,
       "partner_interaction": false,
       "level_offset": -3,
@@ -4417,27 +4417,27 @@
       "location": "Abandoned Ship Corridors B 1 F"
     },
     "TRAINER_ERNEST_2": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
+      "format": "single",
+      "target_size": 3,
+      "archetype": "Intentional route singles relief",
       "difficulty": 39,
       "partner_interaction": false,
       "level_offset": -3,
       "location": "Route 125"
     },
     "TRAINER_ERNEST_3": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
+      "format": "single",
+      "target_size": 3,
+      "archetype": "Intentional route singles relief",
       "difficulty": 39,
       "partner_interaction": false,
       "level_offset": -3,
       "location": "Route 125"
     },
     "TRAINER_ERNEST_4": {
-      "format": "double",
+      "format": "single",
       "target_size": 4,
-      "archetype": "Balanced disruption",
+      "archetype": "Intentional route singles relief",
       "difficulty": 41,
       "partner_interaction": false,
       "level_offset": -2,
@@ -4480,18 +4480,18 @@
       "location": "Route 123"
     },
     "TRAINER_JONAS": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 38,
       "partner_interaction": false,
       "level_offset": -1,
       "location": "Route 123"
     },
     "TRAINER_KAYLEY": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Sun offense",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 38,
       "partner_interaction": false,
       "level_offset": -1,
@@ -5146,9 +5146,9 @@
       "location": "Route 127"
     },
     "TRAINER_HARRISON": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Rain pressure",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 36,
       "partner_interaction": false,
       "level_offset": -2,
@@ -5299,9 +5299,9 @@
       "location": "Route 132"
     },
     "TRAINER_ISABELLA": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 31,
       "partner_interaction": false,
       "level_offset": -2,
@@ -5578,9 +5578,9 @@
       "location": "Mossdeep City Space Center 2 F"
     },
     "TRAINER_BRICE": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Sand and spread",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 33,
       "partner_interaction": false,
       "level_offset": -2,
@@ -5623,9 +5623,9 @@
       "location": "Route 110 Trick House Puzzle 3"
     },
     "TRAINER_CLARK": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Sand and spread",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 15,
       "partner_interaction": false,
       "level_offset": -5,
@@ -5947,9 +5947,9 @@
       "location": "Lilycove City | Route 103"
     },
     "TRAINER_JONAH": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 33,
       "partner_interaction": false,
       "level_offset": -2,
@@ -6010,18 +6010,18 @@
       "location": "Route 128"
     },
     "TRAINER_AIDAN": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Sun offense",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 36,
       "partner_interaction": false,
       "level_offset": -2,
       "location": "Route 127"
     },
     "TRAINER_REED": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 33,
       "partner_interaction": false,
       "level_offset": -2,
@@ -6190,9 +6190,9 @@
       "location": "Route 119"
     },
     "TRAINER_DAWSON": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 30,
       "partner_interaction": false,
       "level_offset": -4,
@@ -6226,9 +6226,9 @@
       "location": "Route 109"
     },
     "TRAINER_CHANDLER": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 22,
       "partner_interaction": false,
       "level_offset": -2,
@@ -6262,9 +6262,9 @@
       "location": "Route 110"
     },
     "TRAINER_MARCOS": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 36,
       "partner_interaction": false,
       "level_offset": -2,
@@ -6280,9 +6280,9 @@
       "location": "Route 103"
     },
     "TRAINER_TYRON": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 31,
       "partner_interaction": false,
       "level_offset": -2,
@@ -6325,18 +6325,18 @@
       "location": "Route 113"
     },
     "TRAINER_COBY": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 29,
       "partner_interaction": false,
       "level_offset": -3,
       "location": "Route 113"
     },
     "TRAINER_LAWRENCE": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Sand and spread",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 34,
       "partner_interaction": false,
       "level_offset": -3,
@@ -6559,18 +6559,18 @@
       "location": "Mossdeep City Space Center 2 F"
     },
     "TRAINER_PETE": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 31,
       "partner_interaction": false,
       "level_offset": -2,
       "location": "Route 103"
     },
     "TRAINER_ISABELLE": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Rain pressure",
+      "format": "single",
+      "target_size": 3,
+      "archetype": "Intentional route singles relief",
       "difficulty": 41,
       "partner_interaction": false,
       "level_offset": -3,
@@ -6631,9 +6631,9 @@
       "location": "Route 109"
     },
     "TRAINER_CELIA": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 50,
       "partner_interaction": false,
       "level_offset": -3,
@@ -6658,9 +6658,9 @@
       "location": "Route 111"
     },
     "TRAINER_BRYANT": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Sand and spread",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 33,
       "partner_interaction": false,
       "level_offset": -2,
@@ -6703,9 +6703,9 @@
       "location": "Route 115"
     },
     "TRAINER_HELENE": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Fake Out and pressure",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 31,
       "partner_interaction": false,
       "level_offset": -2,
@@ -6730,27 +6730,27 @@
       "location": "Route 116"
     },
     "TRAINER_JOHNSON": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 22,
       "partner_interaction": false,
       "level_offset": -4,
       "location": "Route 116"
     },
     "TRAINER_MELINA": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 31,
       "partner_interaction": false,
       "level_offset": -2,
       "location": "Route 117"
     },
     "TRAINER_BRANDI": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 36,
       "partner_interaction": false,
       "level_offset": -2,
@@ -6784,9 +6784,9 @@
       "location": "Route 119"
     },
     "TRAINER_DAYTON": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
+      "format": "single",
+      "target_size": 2,
+      "archetype": "Intentional route singles relief",
       "difficulty": 33,
       "partner_interaction": false,
       "level_offset": -2,
@@ -7333,18 +7333,18 @@
       "location": "Route 126"
     },
     "TRAINER_PABLO_3": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Rain pressure",
+      "format": "single",
+      "target_size": 3,
+      "archetype": "Intentional route singles relief",
       "difficulty": 44,
       "partner_interaction": false,
       "level_offset": -2,
       "location": "Route 126"
     },
     "TRAINER_PABLO_4": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Rain pressure",
+      "format": "single",
+      "target_size": 3,
+      "archetype": "Intentional route singles relief",
       "difficulty": 44,
       "partner_interaction": false,
       "level_offset": -2,
@@ -7432,27 +7432,27 @@
       "location": "Route 121"
     },
     "TRAINER_FERNANDO_2": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Normal-rule breaker",
+      "format": "single",
+      "target_size": 3,
+      "archetype": "Intentional route singles relief",
       "difficulty": 41,
       "partner_interaction": false,
       "level_offset": -2,
       "location": "Route 123"
     },
     "TRAINER_FERNANDO_3": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Normal-rule breaker",
+      "format": "single",
+      "target_size": 3,
+      "archetype": "Intentional route singles relief",
       "difficulty": 41,
       "partner_interaction": false,
       "level_offset": -2,
       "location": "Route 123"
     },
     "TRAINER_FERNANDO_4": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Normal-rule breaker",
+      "format": "single",
+      "target_size": 3,
+      "archetype": "Intentional route singles relief",
       "difficulty": 41,
       "partner_interaction": false,
       "level_offset": -2,
@@ -7637,6 +7637,66 @@
       "partner_interaction": false,
       "level_offset": 5,
       "location": "Unmapped"
+    },
+    "MAY_TREECKO_METEOR_FALLS": {
+      "format": "double",
+      "target_size": 3,
+      "archetype": "Story-partner coverage",
+      "difficulty": 60,
+      "partner_interaction": true,
+      "multi_partner": true,
+      "level_offset": 0,
+      "location": "Meteor Falls 1 F 1 R"
+    },
+    "MAY_TORCHIC_METEOR_FALLS": {
+      "format": "double",
+      "target_size": 3,
+      "archetype": "Story-partner coverage",
+      "difficulty": 60,
+      "partner_interaction": true,
+      "multi_partner": true,
+      "level_offset": 0,
+      "location": "Meteor Falls 1 F 1 R"
+    },
+    "MAY_MUDKIP_METEOR_FALLS": {
+      "format": "double",
+      "target_size": 3,
+      "archetype": "Story-partner coverage",
+      "difficulty": 60,
+      "partner_interaction": true,
+      "multi_partner": true,
+      "level_offset": 0,
+      "location": "Meteor Falls 1 F 1 R"
+    },
+    "BRENDAN_TREECKO_METEOR_FALLS": {
+      "format": "double",
+      "target_size": 3,
+      "archetype": "Story-partner coverage",
+      "difficulty": 60,
+      "partner_interaction": true,
+      "multi_partner": true,
+      "level_offset": 0,
+      "location": "Meteor Falls 1 F 1 R"
+    },
+    "BRENDAN_TORCHIC_METEOR_FALLS": {
+      "format": "double",
+      "target_size": 3,
+      "archetype": "Story-partner coverage",
+      "difficulty": 60,
+      "partner_interaction": true,
+      "multi_partner": true,
+      "level_offset": 0,
+      "location": "Meteor Falls 1 F 1 R"
+    },
+    "BRENDAN_MUDKIP_METEOR_FALLS": {
+      "format": "double",
+      "target_size": 3,
+      "archetype": "Story-partner coverage",
+      "difficulty": 60,
+      "partner_interaction": true,
+      "multi_partner": true,
+      "level_offset": 0,
+      "location": "Meteor Falls 1 F 1 R"
     }
   },
   "bosses": [

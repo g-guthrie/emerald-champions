@@ -7339,6 +7339,12 @@ u16 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
     for (i = 0; i < numEggMoves; i++)
         AddMoveIfLegalAndNew(eggMoves[i], learnedMoves, moves, &numMoves);
 
+    // Pichu can legally inherit Volt Tackle when bred from a Light Ball
+    // parent. The all-legal-moves teacher replaces that breeding grind, so
+    // expose the same lineage move directly to Pichu, Pikachu, and Raichu.
+    if (eggSpecies == SPECIES_PICHU)
+        AddMoveIfLegalAndNew(MOVE_VOLT_TACKLE, learnedMoves, moves, &numMoves);
+
     return numMoves;
 }
 

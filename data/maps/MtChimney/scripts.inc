@@ -831,7 +831,9 @@ MtChimney_Text_ShirleyPostBattle: @ 8230463
 
 MtChimney_Text_SawyerIntro: @ 82304B3
 	.string "This is one fine mountain! Plenty of\n"
-	.string "hot people around for company!$"
+	.string "hot people around for company!\p"
+	.string "Sand makes one partner faster and\n"
+	.string "the other harder to move!$"
 
 MtChimney_Text_SawyerDefeat: @ 82304F7
 	.string "Oh, you're a real firebrand, too!$"
