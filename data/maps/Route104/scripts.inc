@@ -914,7 +914,7 @@ Route104_EventScript_RematchHaley:: @ 81ED424
 	end
 
 Route104_EventScript_Winston:: @ 81ED43B
-	trainerbattle_single TRAINER_WINSTON_1, Route104_Text_WinstonIntro, Route104_Text_WinstonDefeat, Route104_EventScript_TryRegisterWinstonAfterBattle
+	trainerbattle_double TRAINER_WINSTON_1, Route104_Text_WinstonIntro, Route104_Text_WinstonDefeat, Route104_Text_WinstonNotEnoughPokemon, Route104_EventScript_TryRegisterWinstonAfterBattle
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route104_EventScript_RematchWinston

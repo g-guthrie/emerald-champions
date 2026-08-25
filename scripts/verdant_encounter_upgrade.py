@@ -91,6 +91,19 @@ EARLY_MEGA_HONEY = {
     5: "SPECIES_CATERPIE",
 }
 
+EARLY_WOODS_HONEY = {
+    0: "SPECIES_AUDINO",
+    1: "SPECIES_PIKACHU",
+    2: "SPECIES_PIDGEY",
+    3: "SPECIES_PIKACHU",
+    4: "SPECIES_PIDGEY",
+    5: "SPECIES_PIDGEY",
+}
+
+# Cascoon and Silcoon are already evolved from Wurmple and cannot exist below
+# level 7 in Verdant's own evolution table.
+EARLY_WOODS_LAND_MINIMUMS = {10: 7, 11: 7}
+
 
 def all_encounters(data: dict) -> list[dict]:
     return [
@@ -116,6 +129,9 @@ def expected_changes(data: dict) -> list[tuple[str, str, int, str]]:
     output = []
     for encounter in all_encounters(data):
         map_id = encounter["map"]
+        if map_id == "MAP_PETALBURG_WOODS":
+            for index, species in EARLY_WOODS_HONEY.items():
+                output.append((map_id, "honey_mons", index, species))
         if map_id == "MAP_PETALBURG_WOODS_2":
             for index, species in EARLY_MEGA_HONEY.items():
                 output.append((map_id, "honey_mons", index, species))
@@ -143,6 +159,9 @@ def expected_changes(data: dict) -> list[tuple[str, str, int, str]]:
 def apply() -> None:
     data = json.loads(ENCOUNTERS.read_text())
     by_map = {encounter["map"]: encounter for encounter in all_encounters(data)}
+    set_slots(by_map["MAP_PETALBURG_WOODS"], "honey_mons", EARLY_WOODS_HONEY)
+    for index, minimum in EARLY_WOODS_LAND_MINIMUMS.items():
+        by_map["MAP_PETALBURG_WOODS"]["land_mons"]["mons"][index]["min_level"] = minimum
     set_slots(by_map["MAP_PETALBURG_WOODS_2"], "honey_mons", EARLY_MEGA_HONEY)
     for map_id, changes in LAND_UPGRADES.items():
         set_slots(by_map[map_id], "land_mons", changes)
@@ -177,6 +196,13 @@ def check() -> None:
             problems.append(f"{map_id} {method}[{index}]: {actual} != {species}")
         if species not in defined:
             problems.append(f"unknown species constant: {species}")
+    for index, minimum in EARLY_WOODS_LAND_MINIMUMS.items():
+        mon = by_map["MAP_PETALBURG_WOODS"]["land_mons"]["mons"][index]
+        if mon["min_level"] < minimum:
+            problems.append(
+                f"MAP_PETALBURG_WOODS land_mons[{index}] {mon['species']} "
+                f"appears below legal level {minimum}"
+            )
     for encounter in by_map.values():
         for method, expected in (("land_mons", 12), ("water_mons", 4), ("rock_smash_mons", 4), ("fishing_mons", 10), ("honey_mons", 6)):
             if encounter.get(method) and len(encounter[method]["mons"]) != expected:

@@ -48,6 +48,11 @@ subprocess.run(
     check=True,
 )
 subprocess.run(
+    [sys.executable, str(ROOT / "scripts/verdant_battle_sequence_audit.py")],
+    cwd=ROOT,
+    check=True,
+)
+subprocess.run(
     [sys.executable, str(ROOT / "scripts/verdant_bespoke_battle_audit.py")],
     cwd=ROOT,
     check=True,

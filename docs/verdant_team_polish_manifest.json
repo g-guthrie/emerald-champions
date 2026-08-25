@@ -3,54 +3,270 @@
   "rewrites": {
     "TRAINER_LYLE": [
       {
-        "level": -3,
-        "species": "SPECIES_VENIPEDE",
-        "item": "ITEM_EVIOLITE",
-        "ability_slot": 2,
-        "spread": "SPREAD_31_IV_HP_DEF_IMPISH",
+        "level": 3,
+        "species": "SPECIES_PINECO",
+        "item": "ITEM_NORMAL_GEM",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_ATK_BRAVE",
         "moves": [
-          "MOVE_POISON_JAB",
-          "MOVE_ROCK_SLIDE",
-          "MOVE_TOXIC_SPIKES",
+          "MOVE_EXPLOSION",
+          "MOVE_GYRO_BALL",
+          "MOVE_BUG_BITE",
           "MOVE_PROTECT"
         ]
       },
       {
-        "level": -3,
-        "species": "SPECIES_SURSKIT",
-        "item": "ITEM_FOCUS_SASH",
+        "level": 1,
+        "species": "SPECIES_DOTTLER",
+        "item": "ITEM_LIGHT_CLAY",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_SPDEF_CALM",
+        "moves": [
+          "MOVE_REFLECT",
+          "MOVE_LIGHT_SCREEN",
+          "MOVE_PSYCHIC",
+          "MOVE_STRUGGLE_BUG"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_DWEBBLE",
+        "item": "ITEM_EVIOLITE",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_ROCK_SLIDE",
+          "MOVE_KNOCK_OFF",
+          "MOVE_X_SCISSOR",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 3,
+        "species": "SPECIES_JOLTIK",
+        "item": "ITEM_LIFE_ORB",
         "ability_slot": 0,
         "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
         "moves": [
-          "MOVE_STICKY_WEB",
-          "MOVE_BUBBLE_BEAM",
+          "MOVE_THUNDER",
+          "MOVE_BUG_BUZZ",
+          "MOVE_ENERGY_BALL",
+          "MOVE_PROTECT"
+        ]
+      }
+    ],
+    "TRAINER_GRUNT_PETALBURG_WOODS": [
+      {
+        "level": 0,
+        "species": "SPECIES_PURRLOIN",
+        "item": "ITEM_FOCUS_SASH",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_FAKE_TEARS",
+          "MOVE_THUNDER_WAVE",
+          "MOVE_ENCORE",
+          "MOVE_KNOCK_OFF"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_SKRELP",
+        "item": "ITEM_EVIOLITE",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_SLUDGE_BOMB",
+          "MOVE_SCALD",
           "MOVE_ICY_WIND",
           "MOVE_PROTECT"
         ]
       },
       {
-        "level": -2,
-        "species": "SPECIES_BUTTERFREE",
+        "level": 2,
+        "species": "SPECIES_CORPHISH",
+        "item": "ITEM_CHOICE_BAND",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_ATK_SPEED_ADAMANT",
+        "moves": [
+          "MOVE_CRABHAMMER",
+          "MOVE_KNOCK_OFF",
+          "MOVE_AQUA_JET",
+          "MOVE_SUPERPOWER"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_INKAY",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_ADAMANT",
+        "moves": [
+          "MOVE_SUPERPOWER",
+          "MOVE_PSYCHO_CUT",
+          "MOVE_KNOCK_OFF",
+          "MOVE_ROCK_SLIDE"
+        ]
+      }
+    ],
+    "TRAINER_JAMES_1": [
+      {
+        "level": 0,
+        "species": "SPECIES_CELEBI",
         "item": "ITEM_SITRUS_BERRY",
         "ability_slot": 0,
         "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
         "moves": [
-          "MOVE_SLEEP_POWDER",
-          "MOVE_HURRICANE",
-          "MOVE_POLLEN_PUFF",
+          "MOVE_PERISH_SONG",
+          "MOVE_PSYCHIC",
+          "MOVE_EARTH_POWER",
           "MOVE_PROTECT"
         ]
       },
       {
-        "level": -2,
-        "species": "SPECIES_SCYTHER",
+        "level": 2,
+        "species": "SPECIES_SHELMET",
         "item": "ITEM_EVIOLITE",
-        "ability_slot": 1,
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_DEF_SPDEF_SASSY",
+        "moves": [
+          "MOVE_INFESTATION",
+          "MOVE_ENCORE",
+          "MOVE_STRUGGLE_BUG",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 3,
+        "species": "SPECIES_NINCADA",
+        "item": "ITEM_FOCUS_SASH",
+        "ability_slot": 0,
         "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
         "moves": [
-          "MOVE_TAILWIND",
-          "MOVE_AERIAL_ACE",
-          "MOVE_BUG_BITE",
+          "MOVE_X_SCISSOR",
+          "MOVE_DIG",
+          "MOVE_TOXIC",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_HERACROSS",
+        "item": "ITEM_CHOICE_SCARF",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_MEGAHORN",
+          "MOVE_KNOCK_OFF",
+          "MOVE_ROCK_SLIDE",
+          "MOVE_CLOSE_COMBAT"
+        ]
+      }
+    ],
+    "TRAINER_WINSTON_1": [
+      {
+        "level": 1,
+        "species": "SPECIES_STONJOURNER",
+        "item": "ITEM_FOCUS_SASH",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_ROCK_SLIDE",
+          "MOVE_BODY_PRESS",
+          "MOVE_WIDE_GUARD",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_PORYGON",
+        "item": "ITEM_EVIOLITE",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_TRI_ATTACK",
+          "MOVE_ICE_BEAM",
+          "MOVE_THUNDERBOLT",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_DEDENNE",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_SUPER_FANG",
+          "MOVE_NUZZLE",
+          "MOVE_DAZZLING_GLEAM",
+          "MOVE_THUNDERBOLT"
+        ]
+      },
+      {
+        "level": 3,
+        "species": "SPECIES_HONEDGE",
+        "item": "ITEM_AIR_BALLOON",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_ATK_BRAVE",
+        "moves": [
+          "MOVE_SWORDS_DANCE",
+          "MOVE_IRON_HEAD",
+          "MOVE_SACRED_SWORD",
+          "MOVE_SHADOW_SNEAK"
+        ]
+      }
+    ],
+    "TRAINER_HALEY_1": [
+      {
+        "level": 1,
+        "species": "SPECIES_EEVEE",
+        "item": "ITEM_EVIOLITE",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_YAWN",
+          "MOVE_PROTECT",
+          "MOVE_EXTREME_SPEED",
+          "MOVE_BITE"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_RALTS",
+        "item": "ITEM_FOCUS_SASH",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_ENCORE",
+          "MOVE_PSYCHIC",
+          "MOVE_DAZZLING_GLEAM",
+          "MOVE_THUNDERBOLT"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_SNORUNT",
+        "item": "ITEM_CHOICE_SPECS",
+        "ability_slot": 0,
+        "spread": "SPREAD_HP_FIGHTING_TIMID",
+        "moves": [
+          "MOVE_ICE_BEAM",
+          "MOVE_HIDDEN_POWER",
+          "MOVE_SHADOW_BALL",
+          "MOVE_WATER_PULSE"
+        ]
+      },
+      {
+        "level": 3,
+        "species": "SPECIES_MORPEKO",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_AURA_WHEEL",
+          "MOVE_PARTING_SHOT",
+          "MOVE_SEED_BOMB",
           "MOVE_PROTECT"
         ]
       }
@@ -4668,26 +4884,6 @@
         ]
       }
     },
-    "TRAINER_WINSTON_1": {
-      "0": {
-        "moves": [
-          "MOVE_HEADBUTT",
-          "MOVE_ROLLOUT",
-          "MOVE_AQUA_JET",
-          "MOVE_PROTECT"
-        ],
-        "spread": "SPREAD_31_IV_0_EV"
-      },
-      "1": {
-        "moves": [
-          "MOVE_GUST",
-          "MOVE_QUICK_ATTACK",
-          "MOVE_TAILWIND",
-          "MOVE_PROTECT"
-        ],
-        "spread": "SPREAD_31_IV_0_EV"
-      }
-    },
     "TRAINER_AUTUMN": {
       "0": {
         "moves": [
@@ -4964,17 +5160,6 @@
           "MOVE_FIRE_PUNCH",
           "MOVE_PROTECT"
         ]
-      }
-    },
-    "TRAINER_JAMES_1": {
-      "0": {
-        "moves": [
-          "MOVE_SAND_ATTACK",
-          "MOVE_ABSORB",
-          "MOVE_BUG_BITE",
-          "MOVE_X_SCISSOR"
-        ],
-        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT"
       }
     },
     "TRAINER_TRENT_1": {

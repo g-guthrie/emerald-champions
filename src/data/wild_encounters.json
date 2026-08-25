@@ -2378,12 +2378,12 @@
                 "species": "SPECIES_FOONGUS"
               },
               {
-                "min_level": 6,
+                "min_level": 7,
                 "max_level": 8,
                 "species": "SPECIES_CASCOON"
               },
               {
-                "min_level": 6,
+                "min_level": 7,
                 "max_level": 8,
                 "species": "SPECIES_SILCOON"
               }
@@ -2430,7 +2430,7 @@
               {
                 "min_level": 2,
                 "max_level": 2,
-                "species": "SPECIES_PIDGEOTTO"
+                "species": "SPECIES_PIDGEY"
               },
               {
                 "min_level": 3,
@@ -2440,12 +2440,12 @@
               {
                 "min_level": 3,
                 "max_level": 3,
-                "species": "SPECIES_PIDGEOTTO"
+                "species": "SPECIES_PIDGEY"
               },
               {
                 "min_level": 3,
                 "max_level": 3,
-                "species": "SPECIES_PIDGEOTTO"
+                "species": "SPECIES_PIDGEY"
               }
             ]
           }

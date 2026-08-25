@@ -32,6 +32,8 @@ Stone Badge and before the player can obtain the Mega Bracelet:
 | `BATTLE_002_ROUTE_102_CALVIN` | `SPECIES_MEW` | `legendary-single-stage` | Calvin's single mythical reveal is the deliberate early signal that Verdant's roster will be surprising. |
 | `BATTLE_005_ROUTE_102_TIANA` | `SPECIES_ARCTOZOLT` | `rare-single-stage` | The fossil is the naturally single-stage centerpiece of Tiana's otherwise first-stage snow team. |
 | `BATTLE_006_ROUTE_104_BILLY` | `SPECIES_DITTO` | `rare-single-stage` | Imposter Ditto is the deliberate strange-footprint reveal in Billy's young shoreline singles puzzle. |
+| `BATTLE_011_PETALBURG_WOODS_JAMES` | `SPECIES_CELEBI` | `legendary-single-stage` | Celebi is James's deliberate forest-spirit reveal and the mythical center of Verdant's first Perish-trap lesson. |
+| `BATTLE_012_ROUTE_104_WINSTON` | `SPECIES_STONJOURNER` | `rare-single-stage` | Stonjourner is Winston's expensive display piece and introduces the doubles-only Power Spot ability. |
 
 The rebuilt opening encounters now pass this gate. Any future failure is a
 real progression regression: either the party must be rewritten or the mature

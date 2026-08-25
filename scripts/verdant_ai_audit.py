@@ -95,7 +95,10 @@ def main() -> None:
         team = teams[trainer_id]
         if not (team["speed_control_count"] or any("engine" in tag.lower() or "Trick Room" in tag for tag in team["synergy_tags"])):
             problems.append(f"{trainer_id}: speed profile has no speed mode")
-    field_markers = {"rain", "sun", "sand", "snow", "terrain", "screens", "Aurora"}
+    field_markers = {
+        "rain", "sun", "sand", "snow", "terrain", "screens", "aurora",
+        "reflect", "light_screen",
+    }
     for trainer_id in custom.AI_PROFILES["AI_FLAG_FIELD_CONTROL"]:
         tags = " ".join(teams[trainer_id]["synergy_tags"]).lower()
         moves = " ".join(move for mon in teams[trainer_id]["mons"] for move in mon["moves"]).lower()

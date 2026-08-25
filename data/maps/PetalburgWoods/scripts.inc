@@ -91,6 +91,8 @@ PetalburgWoods_EventScript_DevonResearcherPostBattle::
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
 	msgbox PetalburgWoods_Text_ThatWasAwfullyClose, MSGBOX_DEFAULT
+	msgbox PetalburgWoods_Text_HealYourTeam, MSGBOX_DEFAULT
+	special HealPlayerParty
 	giveitem ITEM_EXP_SHARE
 	compare VAR_RESULT, FALSE
 	goto_if_eq PetalburgWoods_EventScript_BagFull
@@ -98,6 +100,7 @@ PetalburgWoods_EventScript_DevonResearcherPostBattle::
 	end
 
 PetalburgWoods_EventScript_BagFull:: @ 822E17D
+	addpcitem ITEM_EXP_SHARE, 1
 	msgbox PetalburgWoods_Text_YoureLoadedWithItems, MSGBOX_DEFAULT
 	goto PetalburgWoods_EventScript_DevonResearcherFinish
 	end
@@ -275,12 +278,12 @@ PetalburgWoods_EventScript_Sign2:: @ 822E264
 	end
 
 PetalburgWoods_EventScript_Lyle:: @ 822E26D
-	trainerbattle_single TRAINER_LYLE, PetalburgWoods_Text_GoBugPokemonTeam, PetalburgWoods_Text_ICouldntWin
+	trainerbattle_double TRAINER_LYLE, PetalburgWoods_Text_GoBugPokemonTeam, PetalburgWoods_Text_ICouldntWin, PetalburgWoods_Text_LyleNotEnoughPokemon
 	msgbox PetalburgWoods_Text_ImOutOfPokeBalls, MSGBOX_AUTOCLOSE
 	end
 
 PetalburgWoods_EventScript_James:: @ 822E284
-	trainerbattle_single TRAINER_JAMES_1, PetalburgWoods_Text_InstantlyPopularWithBugPokemon, PetalburgWoods_Text_CantBePopularIfILose, PetalburgWoods_EventScript_TryRegisterJames
+	trainerbattle_double TRAINER_JAMES_1, PetalburgWoods_Text_InstantlyPopularWithBugPokemon, PetalburgWoods_Text_CantBePopularIfILose, PetalburgWoods_Text_JamesNotEnoughPokemon, PetalburgWoods_EventScript_TryRegisterJames
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq PetalburgWoods_EventScript_JamesRematch
@@ -347,8 +350,8 @@ PetalburgWoods_Text_YouHaveToHelpMe: @ 822E457
 	.string "You've got to help me, please!$"
 
 PetalburgWoods_Text_NoOneCrossesTeamAqua: @ 822E4A5
-	.string "Hunh? What do you think you're doing?\n"
-	.string "What, you're going to protect him?\p"
+	.string "Hunh? What do you think you're\n"
+	.string "doing? You'll protect him?\p"
 	.string "No one who crosses Team Aqua\n"
 	.string "gets any mercy, not even a kid!\p"
 	.string "Come on and battle me!$"
@@ -360,8 +363,8 @@ PetalburgWoods_Text_YouveGotSomeNerve: @ 822E563
 	.string "Grrr… You've got some nerve\n"
 	.string "meddling with Team Aqua!\l"
 	.string "Come on and battle me again!\p"
-	.string "I wish I could say that, but I'm out of\n"
-	.string "Pokémon…\p"
+	.string "I wish I could say that,\n"
+	.string "but I'm out of Pokémon…\p"
 	.string "And, hey, we of Team Aqua are also\n"
 	.string "after something in Rustboro.\p"
 	.string "I'll let you go today!$"
@@ -390,32 +393,42 @@ PetalburgWoods_Text_ICantBeWastingTime: @ 822E712
 	.string "I can't be wasting time!$"
 
 PetalburgWoods_Text_YoureLoadedWithItems: @ 822E741
-	.string "You're loaded with items.\n"
-	.string "I can't give you this Exp. Share.$"
+	.string "Your Bag is full, so I sent the\n"
+	.string "Exp. Share to your PC.$"
+
+PetalburgWoods_Text_HealYourTeam:
+	.string "Your team protected me.\n"
+	.string "Let me heal them before I go.$"
 
 PetalburgWoods_Text_GoBugPokemonTeam: @ 822E77D
-	.string "I caught a whole bunch of Pokémon!\p"
-	.string "Go, go, go!\n"
-	.string "My Bug Pokémon team!$"
+	.string "Go, my carefully caught Bug team!\n"
+	.string "Even explosions cannot split us up!$"
 
 PetalburgWoods_Text_ICouldntWin: @ 822E7C1
-	.string "I have all these Pokémon,\n"
-	.string "but I couldn't win…$"
+	.string "My best trick blew up in my face!$"
 
 PetalburgWoods_Text_ImOutOfPokeBalls: @ 822E7EF
-	.string "I caught a bunch of Pokémon.\n"
-	.string "Now I'm out of Poké Balls.$"
+	.string "Telepathy ignores an ally's blast.\n"
+	.string "Ghosts and Wide Guard stop it cold.$"
+
+PetalburgWoods_Text_LyleNotEnoughPokemon:
+	.string "Bring two healthy Pokémon if you\n"
+	.string "want to face my Bug team!$"
 
 PetalburgWoods_Text_InstantlyPopularWithBugPokemon: @ 822E827
-	.string "If you take Bug Pokémon to school,\n"
-	.string "you get to be instantly popular!$"
+	.string "The forest spirit joined my swarm!\n"
+	.string "Can you escape our fading song?$"
 
 PetalburgWoods_Text_CantBePopularIfILose: @ 822E86B
-	.string "I can't be popular if I lose.$"
+	.string "The song ended for my team first!$"
 
 PetalburgWoods_Text_PeopleRespectYou: @ 822E889
-	.string "If you have a big BUG Pokémon,\n"
-	.string "people respect you for it.$"
+	.string "Infestation traps one target.\n"
+	.string "Switch before Perish Song ends!$"
+
+PetalburgWoods_Text_JamesNotEnoughPokemon:
+	.string "Bring two healthy Pokémon if you\n"
+	.string "want to face my forest circle!$"
 
 PetalburgWoods_Text_IWantRematch1: @ 822E8C3
 	.string "I want a rematch when my BUG\n"
@@ -483,4 +496,3 @@ PetalburgWoods_Text_TrainerTipsPP: @ 822ED07
 	.string "make moves during battle.\p"
 	.string "If a Pokémon runs out of PP, it must be\n"
 	.string "taken to a Pokémon Center.$"
-

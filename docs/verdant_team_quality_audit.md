@@ -4,7 +4,7 @@ This report evaluates the current source as the battle engine executes it. Score
 
 ## Roster summary
 
-- 854 trainer records and 3397 party slots
+- 854 trainer records and 3398 party slots
 - 574 doubles and 280 intentional singles
 - Median quality score: 61/100
 - Blocking findings: 0
@@ -57,7 +57,6 @@ All blocking and major findings are clear. These are the lowest-scoring intentio
 | TRAINER_LUNG | Route 113 | single | 37 | -3.0 | singles pacing and coverage | none |
 | TRAINER_ISABELLA | Route 124 | single | 37 | -2.0 | singles pacing and coverage | none |
 | TRAINER_JOSUE | Route 105 | single | 37 | -2.0 | singles pacing and coverage | none |
-| TRAINER_HALEY_1 | Route 104 | single | 37 | -4.0 | singles pacing and coverage | none |
 | TRAINER_CLAUDE | Route 114 | single | 38 | -3.0 | singles pacing and coverage | none |
 | TRAINER_DUSTY_1 | Route 111 | single | 38 | -3.0 | singles pacing and coverage | none |
 | TRAINER_DUSTY_2 | Route 111 | single | 38 | -3.0 | singles pacing and coverage | none |
@@ -123,6 +122,7 @@ All blocking and major findings are clear. These are the lowest-scoring intentio
 | TRAINER_ELLIOT_1 | Route 106 | single | 41 | -3.67 | Water pressure | none |
 | TRAINER_BENJAMIN_1 | Route 110 | single | 42 | -2.0 | Electric pressure | none |
 | TRAINER_SAWYER_2 | Mt Chimney | single | 42 | -2.0 | singles pacing and coverage | none |
+| TRAINER_GRUNT_AQUA_HIDEOUT_4 | Aqua Hideout B 2 F | double | 42 | -2.0 | singles pacing and coverage | none |
 
 ## Repeated rematch rosters
 

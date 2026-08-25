@@ -90,10 +90,10 @@
     "TRAINER_GRUNT_PETALBURG_WOODS": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 31,
+      "archetype": "Smash-and-grab item denial",
+      "difficulty": 72,
       "partner_interaction": false,
-      "level_offset": -3,
+      "level_offset": 1,
       "location": "Petalburg Woods"
     },
     "TRAINER_MARCEL": {
@@ -1170,10 +1170,10 @@
     "TRAINER_WINSTON_1": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Normal-rule breaker",
-      "difficulty": 33,
+      "archetype": "Prized Power Spot",
+      "difficulty": 74,
       "partner_interaction": false,
-      "level_offset": -4,
+      "level_offset": 2,
       "location": "Route 104"
     },
     "TRAINER_MOLLIE": {
@@ -5381,11 +5381,11 @@
     },
     "TRAINER_HALEY_1": {
       "format": "single",
-      "target_size": 3,
-      "archetype": "Balanced disruption",
-      "difficulty": 29,
+      "target_size": 4,
+      "archetype": "Branching-choice singles",
+      "difficulty": 72,
       "partner_interaction": false,
-      "level_offset": -4,
+      "level_offset": 2,
       "location": "Route 104"
     },
     "TRAINER_JANICE": {
@@ -5490,10 +5490,10 @@
     "TRAINER_LYLE": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Bug swarm utility",
-      "difficulty": 27,
+      "archetype": "Telepathy safe detonation",
+      "difficulty": 72,
       "partner_interaction": false,
-      "level_offset": -2,
+      "level_offset": 2,
       "location": "Petalburg Woods"
     },
     "TRAINER_JOSE": {
@@ -5535,10 +5535,10 @@
     "TRAINER_JAMES_1": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Bug swarm utility",
-      "difficulty": 18,
+      "archetype": "Forest-circle Perish trap",
+      "difficulty": 76,
       "partner_interaction": false,
-      "level_offset": -3,
+      "level_offset": 1,
       "location": "Petalburg Woods"
     },
     "TRAINER_JAMES_2": {

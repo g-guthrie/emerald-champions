@@ -856,6 +856,687 @@ def main() -> None:
     if battles_1_to_7 & {build["species"] for build in expected_cindy}:
         problems.append("Battle 8: Cindy repeats a species from Battles 2-7")
 
+    lyle = designs["BATTLE_009_PETALBURG_WOODS_LYLE"]
+    expected_lyle = [
+        {
+            "level": 3, "species": "SPECIES_PINECO", "item": "ITEM_NORMAL_GEM", "ability_slot": 0,
+            "spread": "SPREAD_31_IV_HP_ATK_BRAVE",
+            "moves": ["MOVE_EXPLOSION", "MOVE_GYRO_BALL", "MOVE_BUG_BITE", "MOVE_PROTECT"],
+        },
+        {
+            "level": 1, "species": "SPECIES_DOTTLER", "item": "ITEM_LIGHT_CLAY", "ability_slot": 2,
+            "spread": "SPREAD_31_IV_HP_SPDEF_CALM",
+            "moves": ["MOVE_REFLECT", "MOVE_LIGHT_SCREEN", "MOVE_PSYCHIC", "MOVE_STRUGGLE_BUG"],
+        },
+        {
+            "level": 2, "species": "SPECIES_DWEBBLE", "item": "ITEM_EVIOLITE", "ability_slot": 0,
+            "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+            "moves": ["MOVE_ROCK_SLIDE", "MOVE_KNOCK_OFF", "MOVE_X_SCISSOR", "MOVE_PROTECT"],
+        },
+        {
+            "level": 3, "species": "SPECIES_JOLTIK", "item": "ITEM_LIFE_ORB", "ability_slot": 0,
+            "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+            "moves": ["MOVE_THUNDER", "MOVE_BUG_BUZZ", "MOVE_ENERGY_BALL", "MOVE_PROTECT"],
+        },
+    ]
+    if lyle["trainer_ids"] != ["TRAINER_LYLE"]:
+        problems.append("Battle 9: closure is not attached only to Lyle")
+    if party_builds("TRAINER_LYLE", trainers_text, parties_text) != expected_lyle:
+        problems.append("Battle 9: Lyle's source party differs from the closed design")
+    if [build["level"] for build in expected_lyle] != [3, 1, 2, 3]:
+        problems.append("Battle 9: Lyle must use the authored 17/15/16/17 progression")
+    if lyle.get("evolution_stage_fit", {}).get("status") != "pass":
+        problems.append("Battle 9: Lyle's evolution-stage closure is not passing")
+
+    lyle_block = trainer_blocks["TRAINER_LYLE"].group(0)
+    for token in (
+        ".doubleBattle = TRUE", "AI_FLAG_SMART_SWITCHING", "AI_FLAG_HP_AWARE",
+        "AI_FLAG_WILL_SUICIDE", "AI_FLAG_FIELD_CONTROL",
+    ):
+        if token not in lyle_block:
+            problems.append(f"Battle 9: Lyle is missing {token}")
+    for token in (
+        "AI_FLAG_SPEED_CONTROL", "AI_FLAG_SETUP_FIRST_TURN", "AI_FLAG_HELP_PARTNER",
+        "AI_FLAG_COMBO_SETUP", "AI_FLAG_RISKY",
+    ):
+        if token in lyle_block:
+            problems.append(f"Battle 9: Lyle has an unrelated AI profile: {token}")
+
+    woods_source = read("data/maps/PetalburgWoods/scripts.inc")
+    if "trainerbattle_double TRAINER_LYLE" not in woods_source or "PetalburgWoods_Text_LyleNotEnoughPokemon" not in woods_source:
+        problems.append("Battle 9: Lyle lacks the explicit doubles command or two-mon guard")
+
+    lyle_abilities = {
+        "SPECIES_PINECO": (0, "ABILITY_STURDY"),
+        "SPECIES_DOTTLER": (2, "ABILITY_TELEPATHY"),
+        "SPECIES_DWEBBLE": (0, "ABILITY_STURDY"),
+        "SPECIES_JOLTIK": (0, "ABILITY_COMPOUND_EYES"),
+    }
+    for species, (slot, ability) in lyle_abilities.items():
+        slots = ability_slots.get(species, [])
+        if len(slots) <= slot or slots[slot] != ability:
+            problems.append(f"Battle 9: {species} slot {slot} is not {ability}: {slots}")
+
+    pineco_level = level_up_body(level_source, "Pineco")
+    pineco_tmhm = species_tmhm_body(tmhm_source, "PINECO")
+    for move, tm in (("MOVE_EXPLOSION", "TM64_EXPLOSION"), ("MOVE_GYRO_BALL", "TM74_GYRO_BALL"), ("MOVE_PROTECT", "TM17_PROTECT")):
+        if move not in pineco_level and tm not in pineco_tmhm:
+            problems.append(f"Battle 9: Pineco cannot legally learn {move}")
+    if not species_has_tutor_move(tutor_source, indices, "PINECO", "MOVE_BUG_BITE"):
+        problems.append("Battle 9: Pineco cannot legally learn Bug Bite")
+
+    dottler_level = level_up_body(level_source, "Dottler")
+    dottler_tmhm = species_tmhm_body(tmhm_source, "DOTTLER")
+    for move, tm in (
+        ("MOVE_REFLECT", "TM33_REFLECT"),
+        ("MOVE_LIGHT_SCREEN", "TM16_LIGHT_SCREEN"),
+        ("MOVE_PSYCHIC", "TM29_PSYCHIC"),
+        ("MOVE_STRUGGLE_BUG", "TM76_STRUGGLE_BUG"),
+    ):
+        if move not in dottler_level and tm not in dottler_tmhm:
+            problems.append(f"Battle 9: Dottler cannot legally learn {move}")
+
+    dwebble_level = level_up_body(level_source, "Dwebble")
+    dwebble_tmhm = species_tmhm_body(tmhm_source, "DWEBBLE")
+    for move, tm in (
+        ("MOVE_ROCK_SLIDE", "TM63_ROCK_SLIDE"),
+        ("MOVE_X_SCISSOR", "TM81_X_SCISSOR"),
+        ("MOVE_PROTECT", "TM17_PROTECT"),
+    ):
+        if move not in dwebble_level and tm not in dwebble_tmhm:
+            problems.append(f"Battle 9: Dwebble cannot legally learn {move}")
+    if not species_has_tutor_move(tutor_source, indices, "DWEBBLE", "MOVE_KNOCK_OFF"):
+        problems.append("Battle 9: Dwebble cannot legally learn Knock Off")
+
+    joltik_level = level_up_body(level_source, "Joltik")
+    joltik_tmhm = species_tmhm_body(tmhm_source, "JOLTIK")
+    for move, tm in (
+        ("MOVE_THUNDER", "TM25_THUNDER"),
+        ("MOVE_ENERGY_BALL", "TM53_ENERGY_BALL"),
+        ("MOVE_PROTECT", "TM17_PROTECT"),
+    ):
+        if move not in joltik_level and tm not in joltik_tmhm:
+            problems.append(f"Battle 9: Joltik cannot legally learn {move}")
+    if not species_has_tutor_move(tutor_source, indices, "JOLTIK", "MOVE_BUG_BUZZ"):
+        problems.append("Battle 9: Joltik cannot legally learn Bug Buzz")
+
+    battle_moves = read("src/data/battle_moves.h")
+    explosion = re.search(r"\[MOVE_EXPLOSION\]\s*=\s*\{(.*?)\n\s*\},", battle_moves, re.S)
+    if not explosion or "MOVE_TARGET_FOES_AND_ALLY" not in explosion.group(1):
+        problems.append("Battle 9: Explosion no longer reaches the ally slot")
+    battle_util = read("src/battle_util.c")
+    ai_main = read("src/battle_ai_main.c")
+    if "GetBattlerAbility(battlerDef) == ABILITY_TELEPATHY && battlerDef == BATTLE_PARTNER(battlerAtk)" not in battle_util:
+        problems.append("Battle 9: Telepathy no longer nullifies allied spread damage")
+    if "AI_DATA->atkPartnerAbility != ABILITY_TELEPATHY" not in ai_main:
+        problems.append("Battle 9: AI no longer recognizes a Telepathy-safe spread move")
+
+    lyle_dialogue = woods_source.split("PetalburgWoods_Text_GoBugPokemonTeam:", 1)[1].split("PetalburgWoods_Text_InstantlyPopularWithBugPokemon:", 1)[0]
+    for truthful in ("explosions cannot split us", "Telepathy ignores", "Ghosts and Wide Guard", "two healthy Pokémon"):
+        if truthful not in lyle_dialogue:
+            problems.append(f"Battle 9: Lyle dialogue does not explain {truthful}")
+    for line in re.findall(r'\.string "([^"]*)"', lyle_dialogue):
+        visible = line.replace("\\n", "").replace("\\l", "").replace("$", "")
+        if len(visible) > 36:
+            problems.append(f"Battle 9: Lyle dialogue line is too long: {visible}")
+
+    lyle_donors = (
+        ("docs/showdown_gen7_random_doubles_30.json", 3, "4,31676,6269,59824", "Forretress"),
+        ("docs/showdown_gen8_random_doubles_30.json", 12, "13,37412,20156,14182", "Orbeetle"),
+        ("docs/showdown_gen5_random_singles_30.json", 22, "23,51067,35586,65412", "Dwebble"),
+        ("docs/showdown_gen7_random_doubles_30.json", 17, "18,11472,27871,39797", "Galvantula"),
+    )
+    for path, index, seed, species in lyle_donors:
+        sample = json.loads(read(path))["samples"][index]
+        names = {mon.get("name") for mon in sample.get("team", [])}
+        if sample.get("seed") != seed or species not in names:
+            problems.append(f"Battle 9: {species} donor sample drifted in {path}")
+
+    battles_1_to_8 = battles_1_to_7 | {build["species"] for build in expected_cindy}
+    if battles_1_to_8 & {build["species"] for build in expected_lyle}:
+        problems.append("Battle 9: Lyle repeats a species from Battles 2-8")
+
+    grunt = designs["BATTLE_010_PETALBURG_WOODS_AQUA_GRUNT"]
+    expected_grunt = [
+        {
+            "level": 0, "species": "SPECIES_PURRLOIN", "item": "ITEM_FOCUS_SASH", "ability_slot": 2,
+            "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+            "moves": ["MOVE_FAKE_TEARS", "MOVE_THUNDER_WAVE", "MOVE_ENCORE", "MOVE_KNOCK_OFF"],
+        },
+        {
+            "level": 1, "species": "SPECIES_SKRELP", "item": "ITEM_EVIOLITE", "ability_slot": 2,
+            "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+            "moves": ["MOVE_SLUDGE_BOMB", "MOVE_SCALD", "MOVE_ICY_WIND", "MOVE_PROTECT"],
+        },
+        {
+            "level": 2, "species": "SPECIES_CORPHISH", "item": "ITEM_CHOICE_BAND", "ability_slot": 2,
+            "spread": "SPREAD_31_IV_ATK_SPEED_ADAMANT",
+            "moves": ["MOVE_CRABHAMMER", "MOVE_KNOCK_OFF", "MOVE_AQUA_JET", "MOVE_SUPERPOWER"],
+        },
+        {
+            "level": 2, "species": "SPECIES_INKAY", "item": "ITEM_LIFE_ORB", "ability_slot": 0,
+            "spread": "SPREAD_31_IV_ATK_SPEED_ADAMANT",
+            "moves": ["MOVE_SUPERPOWER", "MOVE_PSYCHO_CUT", "MOVE_KNOCK_OFF", "MOVE_ROCK_SLIDE"],
+        },
+    ]
+    if grunt["trainer_ids"] != ["TRAINER_GRUNT_PETALBURG_WOODS"]:
+        problems.append("Battle 10: closure is not attached only to the first Aqua Grunt")
+    if party_builds("TRAINER_GRUNT_PETALBURG_WOODS", trainers_text, parties_text) != expected_grunt:
+        problems.append("Battle 10: Aqua Grunt source party differs from the closed design")
+    if [build["level"] for build in expected_grunt] != [0, 1, 2, 2]:
+        problems.append("Battle 10: Aqua Grunt must use the authored 14/15/16/16 progression")
+    if grunt.get("evolution_stage_fit", {}).get("status") != "pass":
+        problems.append("Battle 10: Aqua Grunt evolution-stage closure is not passing")
+
+    grunt_block = trainer_blocks["TRAINER_GRUNT_PETALBURG_WOODS"].group(0)
+    for token in (
+        ".doubleBattle = TRUE", "AI_FLAG_SMART_SWITCHING",
+        "AI_FLAG_SETUP_FIRST_TURN", "AI_FLAG_SPEED_CONTROL",
+    ):
+        if token not in grunt_block:
+            problems.append(f"Battle 10: Aqua Grunt is missing {token}")
+    for token in (
+        "AI_FLAG_HELP_PARTNER", "AI_FLAG_COMBO_SETUP", "AI_FLAG_FIELD_CONTROL",
+        "AI_FLAG_HP_AWARE", "AI_FLAG_WILL_SUICIDE",
+    ):
+        if token in grunt_block:
+            problems.append(f"Battle 10: Aqua Grunt has an unrelated AI profile: {token}")
+    if woods_source.count("trainerbattle_no_intro TRAINER_GRUNT_PETALBURG_WOODS") != 2:
+        problems.append("Battle 10: both Devon-researcher approach branches must use the same Aqua Grunt")
+
+    grunt_abilities = {
+        "SPECIES_PURRLOIN": (2, "ABILITY_PRANKSTER"),
+        "SPECIES_SKRELP": (2, "ABILITY_ADAPTABILITY"),
+        "SPECIES_CORPHISH": (2, "ABILITY_ADAPTABILITY"),
+        "SPECIES_INKAY": (0, "ABILITY_CONTRARY"),
+    }
+    for species, (slot, ability) in grunt_abilities.items():
+        slots = ability_slots.get(species, [])
+        if len(slots) <= slot or slots[slot] != ability:
+            problems.append(f"Battle 10: {species} slot {slot} is not {ability}: {slots}")
+
+    egg_source = read("src/data/pokemon/egg_moves.h")
+    purrloin_level = level_up_body(level_source, "Purrloin")
+    purrloin_tmhm = species_tmhm_body(tmhm_source, "PURRLOIN")
+    purrloin_eggs = re.search(r"egg_moves\(PURRLOIN,(.*?)\)", egg_source, re.S)
+    for move in ("MOVE_FAKE_TEARS", "MOVE_ENCORE"):
+        if move not in purrloin_level and (not purrloin_eggs or move not in purrloin_eggs.group(1)):
+            problems.append(f"Battle 10: Purrloin cannot legally learn {move}")
+    if "TM73_THUNDER_WAVE" not in purrloin_tmhm:
+        problems.append("Battle 10: Purrloin cannot legally learn Thunder Wave")
+    if not species_has_tutor_move(tutor_source, indices, "PURRLOIN", "MOVE_KNOCK_OFF"):
+        problems.append("Battle 10: Purrloin cannot legally learn Knock Off")
+
+    skrelp_level = level_up_body(level_source, "Skrelp")
+    skrelp_tmhm = species_tmhm_body(tmhm_source, "SKRELP")
+    for move, tm in (
+        ("MOVE_SLUDGE_BOMB", "TM36_SLUDGE_BOMB"),
+        ("MOVE_SCALD", "TM55_SCALD"),
+        ("MOVE_PROTECT", "TM17_PROTECT"),
+    ):
+        if move not in skrelp_level and tm not in skrelp_tmhm:
+            problems.append(f"Battle 10: Skrelp cannot legally learn {move}")
+    if not species_has_tutor_move(tutor_source, indices, "SKRELP", "MOVE_ICY_WIND"):
+        problems.append("Battle 10: Skrelp cannot legally learn Icy Wind")
+
+    corphish_level = level_up_body(level_source, "Corphish")
+    corphish_eggs = re.search(r"egg_moves\(CORPHISH,(.*?)\)", egg_source, re.S)
+    if "MOVE_CRABHAMMER" not in corphish_level:
+        problems.append("Battle 10: Corphish cannot legally learn Crabhammer")
+    if "MOVE_AQUA_JET" not in corphish_level and (not corphish_eggs or "MOVE_AQUA_JET" not in corphish_eggs.group(1)):
+        problems.append("Battle 10: Corphish cannot legally learn Aqua Jet")
+    for move in ("MOVE_KNOCK_OFF", "MOVE_SUPERPOWER"):
+        if not species_has_tutor_move(tutor_source, indices, "CORPHISH", move):
+            problems.append(f"Battle 10: Corphish cannot legally learn {move}")
+
+    inkay_level = level_up_body(level_source, "Inkay")
+    inkay_tmhm = species_tmhm_body(tmhm_source, "INKAY")
+    if "MOVE_PSYCHO_CUT" not in inkay_level:
+        problems.append("Battle 10: Inkay cannot legally learn Psycho Cut")
+    if "TM63_ROCK_SLIDE" not in inkay_tmhm:
+        problems.append("Battle 10: Inkay cannot legally learn Rock Slide")
+    for move in ("MOVE_KNOCK_OFF", "MOVE_SUPERPOWER"):
+        if move not in inkay_level and not species_has_tutor_move(tutor_source, indices, "INKAY", move):
+            problems.append(f"Battle 10: Inkay cannot legally learn {move}")
+
+    grunt_dialogue = woods_source.split("PetalburgWoods_Text_NoOneCrossesTeamAqua:", 1)[1].split("PetalburgWoods_Text_ThatWasAwfullyClose:", 1)[0]
+    for truthful in ("Team Aqua", "protect him", "out of", "Rustboro"):
+        if truthful not in grunt_dialogue:
+            problems.append(f"Battle 10: mandatory story dialogue lost: {truthful}")
+    for line in re.findall(r'\.string "([^"]*)"', grunt_dialogue):
+        visible = line.replace("\\n", "").replace("\\l", "").replace("$", "")
+        if len(visible) > 36:
+            problems.append(f"Battle 10: Aqua Grunt dialogue line is too long: {visible}")
+
+    grunt_donors = (
+        ("docs/showdown_champions_random_doubles_30.json", 17, "18,11472,27871,39797", "Liepard"),
+        ("docs/showdown_gen9_random_doubles_30.json", 6, "7,55433,10898,22765", "Dragalge"),
+        ("docs/showdown_gen6_random_doubles_30.json", 26, "27,17208,41758,59690", "Crawdaunt"),
+        ("docs/showdown_gen6_random_doubles_30.json", 9, "10,13655,15527,51241", "Malamar"),
+    )
+    for path, index, seed, species in grunt_donors:
+        sample = json.loads(read(path))["samples"][index]
+        names = {mon.get("name") for mon in sample.get("team", [])}
+        if sample.get("seed") != seed or species not in names:
+            problems.append(f"Battle 10: {species} donor sample drifted in {path}")
+
+    battles_1_to_9 = battles_1_to_8 | {build["species"] for build in expected_lyle}
+    if battles_1_to_9 & {build["species"] for build in expected_grunt}:
+        problems.append("Battle 10: Aqua Grunt repeats a species from Battles 2-9")
+
+    james = designs["BATTLE_011_PETALBURG_WOODS_JAMES"]
+    expected_james = [
+        {
+            "level": 0, "species": "SPECIES_CELEBI", "item": "ITEM_SITRUS_BERRY", "ability_slot": 0,
+            "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+            "moves": ["MOVE_PERISH_SONG", "MOVE_PSYCHIC", "MOVE_EARTH_POWER", "MOVE_PROTECT"],
+        },
+        {
+            "level": 2, "species": "SPECIES_SHELMET", "item": "ITEM_EVIOLITE", "ability_slot": 2,
+            "spread": "SPREAD_31_IV_HP_DEF_SPDEF_SASSY",
+            "moves": ["MOVE_INFESTATION", "MOVE_ENCORE", "MOVE_STRUGGLE_BUG", "MOVE_PROTECT"],
+        },
+        {
+            "level": 3, "species": "SPECIES_NINCADA", "item": "ITEM_FOCUS_SASH", "ability_slot": 0,
+            "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+            "moves": ["MOVE_X_SCISSOR", "MOVE_DIG", "MOVE_TOXIC", "MOVE_PROTECT"],
+        },
+        {
+            "level": 1, "species": "SPECIES_HERACROSS", "item": "ITEM_CHOICE_SCARF", "ability_slot": 2,
+            "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+            "moves": ["MOVE_MEGAHORN", "MOVE_KNOCK_OFF", "MOVE_ROCK_SLIDE", "MOVE_CLOSE_COMBAT"],
+        },
+    ]
+    if james["trainer_ids"] != ["TRAINER_JAMES_1"]:
+        problems.append("Battle 11: closure is not attached only to James's first encounter")
+    if party_builds("TRAINER_JAMES_1", trainers_text, parties_text) != expected_james:
+        problems.append("Battle 11: James's source party differs from the closed design")
+    if [build["level"] for build in expected_james] != [0, 2, 3, 1]:
+        problems.append("Battle 11: James must use the authored 14/16/17/15 progression")
+    if james.get("evolution_stage_fit", {}).get("status") != "pass":
+        problems.append("Battle 11: James's evolution-stage closure is not passing")
+
+    james_block = trainer_blocks["TRAINER_JAMES_1"].group(0)
+    for token in (".doubleBattle = TRUE", "AI_FLAG_SMART_SWITCHING", "AI_FLAG_PERISH_TRAP"):
+        if token not in james_block:
+            problems.append(f"Battle 11: James is missing {token}")
+    for token in (
+        "AI_FLAG_SETUP_FIRST_TURN", "AI_FLAG_SPEED_CONTROL", "AI_FLAG_FIELD_CONTROL",
+        "AI_FLAG_COMBO_SETUP", "AI_FLAG_HP_AWARE", "AI_FLAG_WILL_SUICIDE",
+    ):
+        if token in james_block:
+            problems.append(f"Battle 11: James has an unrelated AI profile: {token}")
+    if "trainerbattle_double TRAINER_JAMES_1" not in woods_source or "PetalburgWoods_Text_JamesNotEnoughPokemon" not in woods_source:
+        problems.append("Battle 11: James lacks the explicit doubles command or two-mon guard")
+
+    james_abilities = {
+        "SPECIES_CELEBI": (0, "ABILITY_NATURAL_CURE"),
+        "SPECIES_SHELMET": (2, "ABILITY_OVERCOAT"),
+        "SPECIES_NINCADA": (0, "ABILITY_COMPOUND_EYES"),
+        "SPECIES_HERACROSS": (2, "ABILITY_MOXIE"),
+    }
+    for species, (slot, ability) in james_abilities.items():
+        slots = ability_slots.get(species, [])
+        if len(slots) <= slot or slots[slot] != ability:
+            problems.append(f"Battle 11: {species} slot {slot} is not {ability}: {slots}")
+
+    celebi_level = level_up_body(level_source, "Celebi")
+    celebi_tmhm = species_tmhm_body(tmhm_source, "CELEBI")
+    if "MOVE_PERISH_SONG" not in celebi_level:
+        problems.append("Battle 11: Celebi cannot legally learn Perish Song")
+    for tm in ("TM17_PROTECT", "TM29_PSYCHIC"):
+        if tm not in celebi_tmhm:
+            problems.append(f"Battle 11: Celebi is missing {tm}")
+    if not species_has_tutor_move(tutor_source, indices, "CELEBI", "MOVE_EARTH_POWER"):
+        problems.append("Battle 11: Celebi cannot legally learn Earth Power")
+
+    shelmet_level = level_up_body(level_source, "Shelmet")
+    shelmet_tmhm = species_tmhm_body(tmhm_source, "SHELMET")
+    shelmet_eggs = re.search(r"egg_moves\(SHELMET,(.*?)\)", egg_source, re.S)
+    if not species_has_tutor_move(tutor_source, indices, "SHELMET", "MOVE_INFESTATION"):
+        problems.append("Battle 11: Shelmet cannot legally learn Infestation")
+    if (
+        "MOVE_ENCORE" not in shelmet_level
+        and (not shelmet_eggs or "MOVE_ENCORE" not in shelmet_eggs.group(1))
+        and not species_has_tutor_move(tutor_source, indices, "SHELMET", "MOVE_ENCORE")
+    ):
+        problems.append("Battle 11: Shelmet cannot legally learn Encore")
+    if "MOVE_STRUGGLE_BUG" not in shelmet_level and "TM76_STRUGGLE_BUG" not in shelmet_tmhm:
+        problems.append("Battle 11: Shelmet cannot legally learn Struggle Bug")
+    if "MOVE_PROTECT" not in shelmet_level and "TM17_PROTECT" not in shelmet_tmhm:
+        problems.append("Battle 11: Shelmet cannot legally learn Protect")
+
+    nincada_level = level_up_body(level_source, "Nincada")
+    nincada_tmhm = species_tmhm_body(tmhm_source, "NINCADA")
+    for move, tm in (
+        ("MOVE_X_SCISSOR", "TM81_X_SCISSOR"),
+        ("MOVE_DIG", "TM28_DIG"),
+        ("MOVE_TOXIC", "TM06_TOXIC"),
+        ("MOVE_PROTECT", "TM17_PROTECT"),
+    ):
+        if move not in nincada_level and tm not in nincada_tmhm:
+            problems.append(f"Battle 11: Nincada cannot legally learn {move}")
+
+    heracross_level = level_up_body(level_source, "Heracross")
+    heracross_tmhm = species_tmhm_body(tmhm_source, "HERACROSS")
+    for move in ("MOVE_MEGAHORN", "MOVE_CLOSE_COMBAT"):
+        if move not in heracross_level and not species_has_tutor_move(tutor_source, indices, "HERACROSS", move):
+            problems.append(f"Battle 11: Heracross cannot legally learn {move}")
+    if not species_has_tutor_move(tutor_source, indices, "HERACROSS", "MOVE_KNOCK_OFF"):
+        problems.append("Battle 11: Heracross cannot legally learn Knock Off")
+    if "TM63_ROCK_SLIDE" not in heracross_tmhm:
+        problems.append("Battle 11: Heracross cannot legally learn Rock Slide")
+
+    if not all(
+        token in ai_main
+        for token in (
+            "static s16 AI_PerishTrap", "HasTrappingMoveEffect(partner)",
+            "IsTrappingMoveEffect(effect) && (targetPerishing || partnerStartingPerish)",
+        )
+    ):
+        problems.append("Battle 11: reusable Perish-trap coordination is incomplete")
+    ai_switch = read("src/battle_ai_switch_items.c")
+    for token in ("perishSongTimer <= 1", "CountUsablePartyMons(gActiveBattler) > 0", "!IsBattlerTrapped(gActiveBattler, TRUE)"):
+        if token not in ai_switch:
+            problems.append(f"Battle 11: Perish switch safety is missing {token}")
+
+    james_dialogue = woods_source.split("PetalburgWoods_Text_InstantlyPopularWithBugPokemon:", 1)[1].split("PetalburgWoods_Text_StayOutOfTallGrass:", 1)[0]
+    for truthful in ("forest spirit", "fading song", "Infestation traps", "Perish Song", "two healthy Pokémon", "grow up"):
+        if truthful not in james_dialogue:
+            problems.append(f"Battle 11: James dialogue does not explain or preserve {truthful}")
+    for line in re.findall(r'\.string "([^"]*)"', james_dialogue):
+        visible = line.replace("\\n", "").replace("\\l", "").replace("$", "")
+        if len(visible) > 36:
+            problems.append(f"Battle 11: James dialogue line is too long: {visible}")
+
+    for token in (
+        "special HealPlayerParty", "addpcitem ITEM_EXP_SHARE, 1",
+        "Your Bag is full, so I sent the", "Exp. Share to your PC.",
+    ):
+        if token not in woods_source:
+            problems.append(f"Battle 11: post-Grunt preparation guarantee is missing {token}")
+
+    james_donors = (
+        ("docs/showdown_gen8_random_doubles_30.json", 11, "12,29493,18613,48380", "Celebi"),
+        ("docs/showdown_gen6_random_doubles_30.json", 8, "9,5736,13984,19904", "Accelgor"),
+        ("docs/showdown_gen5_random_doubles_30.json", 22, "123,56547,58816,53432", "Nincada"),
+        ("docs/showdown_champions_random_doubles_30.json", 16, "17,3553,26328,8460", "Heracross"),
+    )
+    for path, index, seed, species in james_donors:
+        sample = json.loads(read(path))["samples"][index]
+        names = {mon.get("name") for mon in sample.get("team", [])}
+        if sample.get("seed") != seed or species not in names:
+            problems.append(f"Battle 11: {species} donor sample drifted in {path}")
+
+    battles_1_to_10 = battles_1_to_9 | {build["species"] for build in expected_grunt}
+    if battles_1_to_10 & {build["species"] for build in expected_james}:
+        problems.append("Battle 11: James repeats a species from Battles 2-10")
+
+    winston = designs["BATTLE_012_ROUTE_104_WINSTON"]
+    expected_winston = [
+        {
+            "level": 1, "species": "SPECIES_STONJOURNER", "item": "ITEM_FOCUS_SASH", "ability_slot": 0,
+            "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+            "moves": ["MOVE_ROCK_SLIDE", "MOVE_BODY_PRESS", "MOVE_WIDE_GUARD", "MOVE_PROTECT"],
+        },
+        {
+            "level": 1, "species": "SPECIES_PORYGON", "item": "ITEM_EVIOLITE", "ability_slot": 1,
+            "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+            "moves": ["MOVE_TRI_ATTACK", "MOVE_ICE_BEAM", "MOVE_THUNDERBOLT", "MOVE_PROTECT"],
+        },
+        {
+            "level": 2, "species": "SPECIES_DEDENNE", "item": "ITEM_SITRUS_BERRY", "ability_slot": 2,
+            "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+            "moves": ["MOVE_SUPER_FANG", "MOVE_NUZZLE", "MOVE_DAZZLING_GLEAM", "MOVE_THUNDERBOLT"],
+        },
+        {
+            "level": 3, "species": "SPECIES_HONEDGE", "item": "ITEM_AIR_BALLOON", "ability_slot": 0,
+            "spread": "SPREAD_31_IV_HP_ATK_BRAVE",
+            "moves": ["MOVE_SWORDS_DANCE", "MOVE_IRON_HEAD", "MOVE_SACRED_SWORD", "MOVE_SHADOW_SNEAK"],
+        },
+    ]
+    if winston["trainer_ids"] != ["TRAINER_WINSTON_1"]:
+        problems.append("Battle 12: closure is not attached only to Winston's first encounter")
+    if party_builds("TRAINER_WINSTON_1", trainers_text, parties_text) != expected_winston:
+        problems.append("Battle 12: Winston's source party differs from the closed design")
+    if [build["level"] for build in expected_winston] != [1, 1, 2, 3]:
+        problems.append("Battle 12: Winston must use the authored 15/15/16/17 progression")
+    if winston.get("evolution_stage_fit", {}).get("status") != "pass":
+        problems.append("Battle 12: Winston's evolution-stage closure is not passing")
+
+    winston_block = trainer_blocks["TRAINER_WINSTON_1"].group(0)
+    for token in (".doubleBattle = TRUE", "AI_FLAG_SMART_SWITCHING", "AI_FLAG_SPEED_CONTROL"):
+        if token not in winston_block:
+            problems.append(f"Battle 12: Winston is missing {token}")
+    for token in (
+        "AI_FLAG_SETUP_FIRST_TURN", "AI_FLAG_HELP_PARTNER", "AI_FLAG_COMBO_SETUP",
+        "AI_FLAG_FIELD_CONTROL", "AI_FLAG_HP_AWARE", "AI_FLAG_WILL_SUICIDE",
+    ):
+        if token in winston_block:
+            problems.append(f"Battle 12: Winston has an unrelated AI profile: {token}")
+    route104 = read("data/maps/Route104/scripts.inc")
+    if "trainerbattle_double TRAINER_WINSTON_1" not in route104 or "Route104_Text_WinstonNotEnoughPokemon" not in route104:
+        problems.append("Battle 12: Winston lacks the explicit doubles command or two-mon guard")
+
+    winston_abilities = {
+        "SPECIES_STONJOURNER": (0, "ABILITY_POWER_SPOT"),
+        "SPECIES_PORYGON": (1, "ABILITY_DOWNLOAD"),
+        "SPECIES_DEDENNE": (2, "ABILITY_CHEEK_POUCH"),
+        "SPECIES_HONEDGE": (0, "ABILITY_NO_GUARD"),
+    }
+    for species, (slot, ability) in winston_abilities.items():
+        slots = ability_slots.get(species, [])
+        if len(slots) <= slot or slots[slot] != ability:
+            problems.append(f"Battle 12: {species} slot {slot} is not {ability}: {slots}")
+
+    stonjourner_level = level_up_body(level_source, "Stonjourner")
+    stonjourner_tmhm = species_tmhm_body(tmhm_source, "STONJOURNER")
+    for move, tm in (("MOVE_ROCK_SLIDE", "TM63_ROCK_SLIDE"), ("MOVE_PROTECT", "TM17_PROTECT")):
+        if move not in stonjourner_level and tm not in stonjourner_tmhm:
+            problems.append(f"Battle 12: Stonjourner cannot legally learn {move}")
+    for move in ("MOVE_BODY_PRESS", "MOVE_WIDE_GUARD"):
+        if move not in stonjourner_level and not species_has_tutor_move(tutor_source, indices, "STONJOURNER", move):
+            problems.append(f"Battle 12: Stonjourner cannot legally learn {move}")
+
+    porygon_level = level_up_body(level_source, "Porygon")
+    porygon_tmhm = species_tmhm_body(tmhm_source, "PORYGON")
+    if "MOVE_TRI_ATTACK" not in porygon_level:
+        problems.append("Battle 12: Porygon cannot legally learn Tri Attack")
+    for tm in ("TM13_ICE_BEAM", "TM17_PROTECT", "TM24_THUNDERBOLT"):
+        if tm not in porygon_tmhm:
+            problems.append(f"Battle 12: Porygon is missing {tm}")
+
+    dedenne_level = level_up_body(level_source, "Dedenne")
+    dedenne_tmhm = species_tmhm_body(tmhm_source, "DEDENNE")
+    if "MOVE_NUZZLE" not in dedenne_level:
+        problems.append("Battle 12: Dedenne cannot legally learn Nuzzle")
+    for tm in ("TM24_THUNDERBOLT", "TM99_DAZZLING_GLEAM"):
+        if tm not in dedenne_tmhm:
+            problems.append(f"Battle 12: Dedenne is missing {tm}")
+    if not species_has_tutor_move(tutor_source, indices, "DEDENNE", "MOVE_SUPER_FANG"):
+        problems.append("Battle 12: Dedenne cannot legally learn Super Fang")
+
+    honedge_level = level_up_body(level_source, "Honedge")
+    honedge_tmhm = species_tmhm_body(tmhm_source, "HONEDGE")
+    honedge_eggs = re.search(r"egg_moves\(HONEDGE,(.*?)\)", egg_source, re.S)
+    for move in ("MOVE_SWORDS_DANCE", "MOVE_IRON_HEAD", "MOVE_SACRED_SWORD", "MOVE_SHADOW_SNEAK"):
+        legal = (
+            move in honedge_level
+            or (honedge_eggs is not None and move in honedge_eggs.group(1))
+            or (move in indices and species_has_tutor_move(tutor_source, indices, "HONEDGE", move))
+            or move.removeprefix("MOVE_") in honedge_tmhm
+        )
+        if not legal:
+            problems.append(f"Battle 12: Honedge cannot legally learn {move}")
+
+    power_spot = re.search(r"case ABILITY_POWER_SPOT:(.*?)break;", battle_util, re.S)
+    if not power_spot or "UQ_4_12(1.3)" not in power_spot.group(1):
+        problems.append("Battle 12: Power Spot no longer supplies its 1.3x partner multiplier")
+
+    winston_dialogue = read("data/text/trainers.inc").split("Route104_Text_WinstonIntro:", 1)[1].split("Route104_Text_CindyIntro:", 1)[0]
+    for truthful in ("rarest Pokémon", "Power Spot", "not victory", "two healthy Pokémon"):
+        if truthful not in winston_dialogue:
+            problems.append(f"Battle 12: Winston dialogue does not explain or preserve {truthful}")
+    for line in re.findall(r'\.string "([^"]*)"', winston_dialogue):
+        visible = line.replace("\\n", "").replace("\\l", "").replace("$", "")
+        if len(visible) > 36:
+            problems.append(f"Battle 12: Winston dialogue line is too long: {visible}")
+
+    winston_donors = (
+        ("docs/showdown_gen8_random_doubles_30.json", 14, "15,53250,23242,11321", "Stonjourner"),
+        ("docs/showdown_gen8_random_doubles_30.json", 13, "14,45331,21699,45519", "Porygon2"),
+        ("docs/showdown_gen9_random_doubles_30.json", 5, "6,47514,9355,56963", "Dedenne"),
+        ("docs/showdown_gen8_random_singles_30.json", 14, "15,53250,23242,11321", "Doublade"),
+    )
+    for path, index, seed, species in winston_donors:
+        sample = json.loads(read(path))["samples"][index]
+        names = {mon.get("name") for mon in sample.get("team", [])}
+        if sample.get("seed") != seed or species not in names:
+            problems.append(f"Battle 12: {species} donor sample drifted in {path}")
+
+    battles_1_to_11 = battles_1_to_10 | {build["species"] for build in expected_james}
+    if battles_1_to_11 & {build["species"] for build in expected_winston}:
+        problems.append("Battle 12: Winston repeats a species from Battles 2-11")
+
+    haley = designs["BATTLE_013_ROUTE_104_HALEY"]
+    expected_haley = [
+        {
+            "level": 1, "species": "SPECIES_EEVEE", "item": "ITEM_EVIOLITE", "ability_slot": 1,
+            "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+            "moves": ["MOVE_YAWN", "MOVE_PROTECT", "MOVE_EXTREME_SPEED", "MOVE_BITE"],
+        },
+        {
+            "level": 2, "species": "SPECIES_RALTS", "item": "ITEM_FOCUS_SASH", "ability_slot": 1,
+            "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+            "moves": ["MOVE_ENCORE", "MOVE_PSYCHIC", "MOVE_DAZZLING_GLEAM", "MOVE_THUNDERBOLT"],
+        },
+        {
+            "level": 2, "species": "SPECIES_SNORUNT", "item": "ITEM_CHOICE_SPECS", "ability_slot": 0,
+            "spread": "SPREAD_HP_FIGHTING_TIMID",
+            "moves": ["MOVE_ICE_BEAM", "MOVE_HIDDEN_POWER", "MOVE_SHADOW_BALL", "MOVE_WATER_PULSE"],
+        },
+        {
+            "level": 3, "species": "SPECIES_MORPEKO", "item": "ITEM_LIFE_ORB", "ability_slot": 0,
+            "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+            "moves": ["MOVE_AURA_WHEEL", "MOVE_PARTING_SHOT", "MOVE_SEED_BOMB", "MOVE_PROTECT"],
+        },
+    ]
+    if haley["trainer_ids"] != ["TRAINER_HALEY_1"]:
+        problems.append("Battle 13: closure is not attached only to Haley's first encounter")
+    if party_builds("TRAINER_HALEY_1", trainers_text, parties_text) != expected_haley:
+        problems.append("Battle 13: Haley's source party differs from the closed design")
+    if [build["level"] for build in expected_haley] != [1, 2, 2, 3]:
+        problems.append("Battle 13: Haley must use the authored 15/16/16/17 progression")
+    if haley.get("evolution_stage_fit", {}).get("status") != "pass":
+        problems.append("Battle 13: Haley's evolution-stage closure is not passing")
+
+    haley_block = trainer_blocks["TRAINER_HALEY_1"].group(0)
+    for token in (".doubleBattle = FALSE", "AI_FLAG_SMART_SWITCHING", "AI_FLAG_SETUP_FIRST_TURN", "AI_FLAG_HP_AWARE"):
+        if token not in haley_block:
+            problems.append(f"Battle 13: Haley is missing {token}")
+    for token in (
+        "AI_FLAG_SPEED_CONTROL", "AI_FLAG_HELP_PARTNER", "AI_FLAG_COMBO_SETUP",
+        "AI_FLAG_FIELD_CONTROL", "AI_FLAG_PERISH_TRAP", "AI_FLAG_WILL_SUICIDE",
+    ):
+        if token in haley_block:
+            problems.append(f"Battle 13: Haley has an unrelated AI profile: {token}")
+    if "trainerbattle_single TRAINER_HALEY_1" not in route104:
+        problems.append("Battle 13: Haley is not preserved as the intended singles pacing battle")
+
+    haley_abilities = {
+        "SPECIES_EEVEE": (1, "ABILITY_ADAPTABILITY"),
+        "SPECIES_RALTS": (1, "ABILITY_TRACE"),
+        "SPECIES_SNORUNT": (0, "ABILITY_INNER_FOCUS"),
+        "SPECIES_MORPEKO": (0, "ABILITY_HUNGER_SWITCH"),
+    }
+    for species, (slot, ability) in haley_abilities.items():
+        slots = ability_slots.get(species, [])
+        if len(slots) <= slot or slots[slot] != ability:
+            problems.append(f"Battle 13: {species} slot {slot} is not {ability}: {slots}")
+
+    eevee_level = level_up_body(level_source, "Eevee")
+    eevee_tmhm = species_tmhm_body(tmhm_source, "EEVEE")
+    eevee_eggs = re.search(r"egg_moves\(EEVEE,(.*?)\)", egg_source, re.S)
+    for move in ("MOVE_YAWN", "MOVE_EXTREME_SPEED", "MOVE_BITE"):
+        legal = (
+            move in eevee_level
+            or (eevee_eggs is not None and move in eevee_eggs.group(1))
+            or (move in indices and species_has_tutor_move(tutor_source, indices, "EEVEE", move))
+        )
+        if not legal:
+            problems.append(f"Battle 13: Eevee cannot legally learn {move}")
+    if "TM17_PROTECT" not in eevee_tmhm:
+        problems.append("Battle 13: Eevee cannot legally learn Protect")
+
+    ralts_level = level_up_body(level_source, "Ralts")
+    ralts_tmhm = species_tmhm_body(tmhm_source, "RALTS")
+    ralts_eggs = re.search(r"egg_moves\(RALTS,(.*?)\)", egg_source, re.S)
+    if (
+        "MOVE_ENCORE" not in ralts_level
+        and (not ralts_eggs or "MOVE_ENCORE" not in ralts_eggs.group(1))
+        and not ("MOVE_ENCORE" in indices and species_has_tutor_move(tutor_source, indices, "RALTS", "MOVE_ENCORE"))
+    ):
+        problems.append("Battle 13: Ralts cannot legally learn Encore")
+    for tm in ("TM24_THUNDERBOLT", "TM29_PSYCHIC", "TM99_DAZZLING_GLEAM"):
+        if tm not in ralts_tmhm:
+            problems.append(f"Battle 13: Ralts is missing {tm}")
+
+    snorunt_level = level_up_body(level_source, "Snorunt")
+    snorunt_tmhm = species_tmhm_body(tmhm_source, "SNORUNT")
+    snorunt_eggs = re.search(r"egg_moves\(SNORUNT,(.*?)\)", egg_source, re.S)
+    for move, tm in (
+        ("MOVE_ICE_BEAM", "TM13_ICE_BEAM"),
+        ("MOVE_HIDDEN_POWER", "TM10_HIDDEN_POWER"),
+        ("MOVE_SHADOW_BALL", "TM30_SHADOW_BALL"),
+        ("MOVE_WATER_PULSE", "TM03_WATER_PULSE"),
+    ):
+        legal = (
+            move in snorunt_level
+            or (snorunt_eggs is not None and move in snorunt_eggs.group(1))
+            or (tm is not None and tm in snorunt_tmhm)
+            or (move in indices and species_has_tutor_move(tutor_source, indices, "SNORUNT", move))
+        )
+        if not legal:
+            problems.append(f"Battle 13: Snorunt cannot legally learn {move}")
+
+    morpeko_level = level_up_body(level_source, "Morpeko")
+    morpeko_tmhm = species_tmhm_body(tmhm_source, "MORPEKO")
+    morpeko_eggs = re.search(r"egg_moves\(MORPEKO,(.*?)\)", egg_source, re.S)
+    for move in ("MOVE_AURA_WHEEL", "MOVE_PARTING_SHOT"):
+        if move not in morpeko_level and (not morpeko_eggs or move not in morpeko_eggs.group(1)):
+            problems.append(f"Battle 13: Morpeko cannot legally learn {move}")
+    if "TM17_PROTECT" not in morpeko_tmhm:
+        problems.append("Battle 13: Morpeko cannot legally learn Protect")
+    if not species_has_tutor_move(tutor_source, indices, "MORPEKO", "MOVE_SEED_BOMB"):
+        problems.append("Battle 13: Morpeko cannot legally learn Seed Bomb")
+
+    haley_dialogue = read("data/text/trainers.inc").split("Route104_Text_HaleyIntro:", 1)[1].split("Route104_Text_WinstonIntro:", 1)[0]
+    for truthful in ("team will help me choose", "wrong choice", "Morpeko changes", "changing my mind"):
+        if truthful not in haley_dialogue:
+            problems.append(f"Battle 13: Haley dialogue does not explain {truthful}")
+    for line in re.findall(r'\.string "([^"]*)"', haley_dialogue):
+        visible = line.replace("\\n", "").replace("\\l", "").replace("$", "")
+        if len(visible) > 36:
+            problems.append(f"Battle 13: Haley dialogue line is too long: {visible}")
+    if 'gText_MatchCallLass_Haley_Strategy[] = _("I keep my options open!")' not in read("src/data/text/match_call_messages.h"):
+        problems.append("Battle 13: Haley's Match Call strategy is stale")
+
+    haley_donors = (
+        ("docs/showdown_gen5_random_singles_30.json", 0, "1,7919,1640,31348", "Eevee"),
+        ("docs/showdown_gen4_random_doubles_30.json", 27, "128,30607,996,13512", "Ralts"),
+        ("docs/showdown_gen4_random_singles_30.json", 17, "18,11472,27871,39797", "Snorunt"),
+        ("docs/showdown_gen9_random_doubles_30.json", 0, "1,7919,1640,31348", "Morpeko"),
+    )
+    for path, index, seed, species in haley_donors:
+        sample = json.loads(read(path))["samples"][index]
+        names = {mon.get("name") for mon in sample.get("team", [])}
+        if sample.get("seed") != seed or species not in names:
+            problems.append(f"Battle 13: {species} donor sample drifted in {path}")
+
+    battles_1_to_12 = battles_1_to_11 | {build["species"] for build in expected_winston}
+    if battles_1_to_12 & {build["species"] for build in expected_haley}:
+        problems.append("Battle 13: Haley repeats a species from Battles 2-12")
+
     if problems:
         raise SystemExit("\n".join(f"FAIL: {problem}" for problem in problems))
     print("PASS: Battle 1 groups all six source branches into one encounter")
@@ -868,6 +1549,11 @@ def main() -> None:
     print("PASS: Battle 6 Billy young shoreline mirror, legal stages/sets, reactive-item AI, and dialogue")
     print("PASS: Battle 7 Darian two-cast young fish team, legal stages/sets, Water Spout/Shell Smash AI, and dialogue")
     print("PASS: Battle 8 Cindy temporal singles sequence, legal stages/sets, conditional Trick Room AI, and native dialogue")
+    print("PASS: Battle 9 Lyle Telepathy detonation, legal young Bug stages, contextual suicide AI, and doubles guard")
+    print("PASS: Battle 10 Aqua Grunt smash-and-grab doubles, four legal first stages, theft AI, and story branches")
+    print("PASS: Battle 11 James forest-circle Perish trap, mythical showcase, legal sets, guard, and post-Grunt recovery")
+    print("PASS: Battle 12 Winston Power Spot collection, legal rare stages, conditional speed AI, and doubles guard")
+    print("PASS: Battle 13 Haley branching-choice singles, legal young forms, adaptive AI, and rematch identity")
     print(f"PASS: all {len(designs)} closed encounters record a full 983-team corpus fit decision")
 
 

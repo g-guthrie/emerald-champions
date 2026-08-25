@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "scope": "Canonical full-clear encounter order from the first trainer battle through Route 104 north. This frontier grows continuously until every campaign, optional, rematch, boss, and postgame trainer encounter in the 810-definition guide is assigned exactly once.",
+  "ordering_rule": "Use the earliest natural first-playthrough path. Optional trainers are never dropped. Mutually exclusive gender, starter, or partner branches of one physical encounter are grouped under one battle index. Where open terrain permits reversal, one order is selected and the ambiguity is documented.",
+  "source_definition_count": 810,
+  "entries": [
+    {
+      "index": 1,
+      "encounter_id": "BATTLE_001_ROUTE_103_RIVAL",
+      "location": "Route103",
+      "category": "required branch",
+      "status": "closed",
+      "trainer_ids": [
+        "TRAINER_MAY_ROUTE_103_TREECKO",
+        "TRAINER_MAY_ROUTE_103_TORCHIC",
+        "TRAINER_MAY_ROUTE_103_MUDKIP",
+        "TRAINER_BRENDAN_ROUTE_103_TREECKO",
+        "TRAINER_BRENDAN_ROUTE_103_TORCHIC",
+        "TRAINER_BRENDAN_ROUTE_103_MUDKIP"
+      ],
+      "access_note": "One physical rival encounter; the six source records and 21 runtime starter counterparts are mutually exclusive branches."
+    },
+    {
+      "index": 2,
+      "encounter_id": "BATTLE_002_ROUTE_102_CALVIN",
+      "location": "Route102",
+      "category": "normally forced sight",
+      "status": "closed",
+      "trainer_ids": ["TRAINER_CALVIN_1"],
+      "access_note": "First east-to-west Route 102 sight trainer. His fixed line of sight is a route choke for a normal two-healthy-Pokémon party; the native doubles guard is the only non-battle pass condition."
+    },
+    {
+      "index": 3,
+      "encounter_id": "BATTLE_003_ROUTE_102_RICK",
+      "location": "Route102",
+      "category": "optional",
+      "status": "closed",
+      "trainer_ids": ["TRAINER_RICK"],
+      "access_note": "Second east-to-west Route 102 sight trainer."
+    },
+    {
+      "index": 4,
+      "encounter_id": "BATTLE_004_ROUTE_102_ALLEN",
+      "location": "Route102",
+      "category": "optional",
+      "status": "closed",
+      "trainer_ids": ["TRAINER_ALLEN"],
+      "access_note": "Third east-to-west Route 102 sight trainer."
+    },
+    {
+      "index": 5,
+      "encounter_id": "BATTLE_005_ROUTE_102_TIANA",
+      "location": "Route102",
+      "category": "optional",
+      "status": "closed",
+      "trainer_ids": ["TRAINER_TIANA"],
+      "access_note": "Final Route 102 sight trainer before Petalburg."
+    },
+    {
+      "index": 6,
+      "encounter_id": "BATTLE_006_ROUTE_104_BILLY",
+      "location": "Route104",
+      "category": "optional",
+      "status": "closed",
+      "trainer_ids": ["TRAINER_BILLY"],
+      "access_note": "First northbound Route 104 south trainer."
+    },
+    {
+      "index": 7,
+      "encounter_id": "BATTLE_007_ROUTE_104_DARIAN",
+      "location": "Route104",
+      "category": "optional talk",
+      "status": "closed",
+      "trainer_ids": ["TRAINER_DARIAN"],
+      "access_note": "Talk-initiated fisherman immediately north of Billy."
+    },
+    {
+      "index": 8,
+      "encounter_id": "BATTLE_008_ROUTE_104_CINDY",
+      "location": "Route104",
+      "category": "optional",
+      "status": "closed",
+      "trainer_ids": ["TRAINER_CINDY_1"],
+      "access_note": "Last Route 104 south sight trainer before entering Petalburg Woods."
+    },
+    {
+      "index": 9,
+      "encounter_id": "BATTLE_009_PETALBURG_WOODS_LYLE",
+      "location": "PetalburgWoods",
+      "category": "optional",
+      "status": "closed",
+      "trainer_ids": ["TRAINER_LYLE"],
+      "access_note": "First natural south-to-north Woods sight trainer; rotating facing makes him avoidable."
+    },
+    {
+      "index": 10,
+      "encounter_id": "BATTLE_010_PETALBURG_WOODS_AQUA_GRUNT",
+      "location": "PetalburgWoods",
+      "category": "required",
+      "status": "closed",
+      "trainer_ids": ["TRAINER_GRUNT_PETALBURG_WOODS"],
+      "access_note": "Mandatory Devon researcher ambush. The two trigger directions share one trainer record."
+    },
+    {
+      "index": 11,
+      "encounter_id": "BATTLE_011_PETALBURG_WOODS_JAMES",
+      "location": "PetalburgWoods",
+      "category": "optional",
+      "status": "closed",
+      "trainer_ids": ["TRAINER_JAMES_1"],
+      "access_note": "North-Woods sight trainer after the mandatory Aqua encounter."
+    },
+    {
+      "index": 12,
+      "encounter_id": "BATTLE_012_ROUTE_104_WINSTON",
+      "location": "Route104",
+      "category": "optional",
+      "status": "closed",
+      "trainer_ids": ["TRAINER_WINSTON_1"],
+      "access_note": "Nearest trainer on the canonical full-clear path after the Woods north exit."
+    },
+    {
+      "index": 13,
+      "encounter_id": "BATTLE_013_ROUTE_104_HALEY",
+      "location": "Route104",
+      "category": "optional",
+      "status": "closed",
+      "trainer_ids": ["TRAINER_HALEY_1"],
+      "access_note": "Open terrain permits Haley and Winston to be reversed; Winston-first is the canonical full-clear order."
+    },
+    {
+      "index": 14,
+      "encounter_id": "BATTLE_014_ROUTE_104_GINA_MIA",
+      "location": "Route104",
+      "category": "optional double",
+      "status": "next",
+      "trainer_ids": ["TRAINER_GINA_AND_MIA_1"],
+      "access_note": "Two overworld twins share one doubles encounter and therefore one index."
+    },
+    {
+      "index": 15,
+      "encounter_id": "BATTLE_015_ROUTE_104_IVAN",
+      "location": "Route104",
+      "category": "optional talk",
+      "status": "queued",
+      "trainer_ids": ["TRAINER_IVAN"],
+      "access_note": "Talk-initiated northern fisherman before Rustboro; fully optional."
+    }
+  ]
+}

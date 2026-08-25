@@ -316,16 +316,14 @@ Route104_Text_BillyPostBattle: @ 82955E8
 Route104_Text_HaleyIntro: @ 829563A
 	.string "Should I…\n"
 	.string "Or shouldn't I?\p"
-	.string "Okay, sure, I will battle!$"
+	.string "Okay! My team will help me choose!$"
 
 Route104_Text_HaleyDefeat: @ 829566F
-	.string "I shouldn't have battled…$"
+	.string "I made the wrong choice…$"
 
 Route104_Text_HaleyPostBattle: @ 8295689
-	.string "If you're faced with a decision and\n"
-	.string "you let someone else choose for you,\l"
-	.string "you will regret it, however things\l"
-	.string "turn out.$"
+	.string "Morpeko changes every turn.\n"
+	.string "Maybe changing my mind is useful!$"
 
 Route104_Text_HaleyRegister1: @ 82956FF
 	.string "You're strong, but should I register\n"
@@ -352,15 +350,19 @@ Route104_Text_HaleyPostRematch: @ 829580C
 	.string "I am still upset about losing!$"
 
 Route104_Text_WinstonIntro: @ 8295870
-	.string "Oh, sure, I'll accept your challenge.\n"
-	.string "I have a lot of money.$"
+	.string "Only the rarest Pokémon suit me.\n"
+	.string "Power Spot makes them priceless!$"
 
 Route104_Text_WinstonDefeat: @ 82958AD
 	.string "Why couldn't I win?$"
 
 Route104_Text_WinstonPostBattle: @ 82958C1
-	.string "There are some things money can't buy.\n"
-	.string "That's Pokémon…$"
+	.string "Money bought power, but not victory.\n"
+	.string "I still have plenty to learn.$"
+
+Route104_Text_WinstonNotEnoughPokemon:
+	.string "Bring two healthy Pokémon if you\n"
+	.string "want to face my prized team!$"
 
 Route104_Text_WinstonRegister1: @ 82958F8
 	.string "Hm?\n"
@@ -375,8 +377,8 @@ Route104_Text_WinstonRegister2: @ 829595A
 	.string "After all, I have plenty of money.$"
 
 Route104_Text_WinstonRematchIntro: @ 82959BC
-	.string "After I lost to you, I learned a bunch\n"
-	.string "of things about Pokémon.$"
+	.string "My last loss taught me a lot\n"
+	.string "about Pokémon.$"
 
 Route104_Text_WinstonRematchDefeat: @ 82959FC
 	.string "I lost again?\n"

@@ -2115,36 +2115,36 @@ static const struct TrainerMonItemCustomMoves sParty_Cindy4[] = {
 static const struct TrainerMonItemCustomMoves sParty_Winston1[] = {
 
     {
-    .lvl = -4,
-    .species = SPECIES_BIDOOF,
-    .heldItem = ITEM_NUGGET,
-    .ability = 0,
-    .spread = SPREAD_31_IV_0_EV,
-    .moves = MOVE_HEADBUTT, MOVE_ROLLOUT, MOVE_AQUA_JET, MOVE_PROTECT
-    } /* Verdant polish: TRAINER_WINSTON_1 */,
-    {
-    .lvl = -4,
-    .species = SPECIES_PIDGEY,
-    .heldItem = ITEM_NUGGET,
-    .ability = 0,
-    .spread = SPREAD_31_IV_0_EV,
-    .moves = MOVE_GUST, MOVE_QUICK_ATTACK, MOVE_TAILWIND, MOVE_PROTECT
-    } /* Verdant polish: TRAINER_WINSTON_1 */,
-    {
-    .lvl = -4,
-    .species = SPECIES_GREEDENT,
-    .heldItem = ITEM_SITRUS_BERRY,
+    .lvl = 1,
+    .species = SPECIES_STONJOURNER,
+    .heldItem = ITEM_FOCUS_SASH,
     .ability = 0,
     .spread = SPREAD_31_IV_HP_ATK_ADAMANT,
-    .moves = MOVE_GYRO_BALL, MOVE_SWORDS_DANCE, MOVE_BODY_SLAM, MOVE_STOMPING_TANTRUM
+    .moves = MOVE_ROCK_SLIDE, MOVE_BODY_PRESS, MOVE_WIDE_GUARD, MOVE_PROTECT
     } /* Verdant polish: TRAINER_WINSTON_1 */,
     {
-    .lvl = -4,
+    .lvl = 1,
+    .species = SPECIES_PORYGON,
+    .heldItem = ITEM_EVIOLITE,
+    .ability = 1,
+    .spread = SPREAD_31_IV_HP_SPATK_MODEST,
+    .moves = MOVE_TRI_ATTACK, MOVE_ICE_BEAM, MOVE_THUNDERBOLT, MOVE_PROTECT
+    } /* Verdant polish: TRAINER_WINSTON_1 */,
+    {
+    .lvl = 2,
     .species = SPECIES_DEDENNE,
     .heldItem = ITEM_SITRUS_BERRY,
     .ability = 2,
     .spread = SPREAD_31_IV_SPATK_SPEED_TIMID,
-    .moves = MOVE_THUNDERBOLT, MOVE_NUZZLE, MOVE_DAZZLING_GLEAM, MOVE_HELPING_HAND
+    .moves = MOVE_SUPER_FANG, MOVE_NUZZLE, MOVE_DAZZLING_GLEAM, MOVE_THUNDERBOLT
+    } /* Verdant polish: TRAINER_WINSTON_1 */,
+    {
+    .lvl = 3,
+    .species = SPECIES_HONEDGE,
+    .heldItem = ITEM_AIR_BALLOON,
+    .ability = 0,
+    .spread = SPREAD_31_IV_HP_ATK_BRAVE,
+    .moves = MOVE_SWORDS_DANCE, MOVE_IRON_HEAD, MOVE_SACRED_SWORD, MOVE_SHADOW_SNEAK
     } /* Verdant polish: TRAINER_WINSTON_1 */
 };
 
@@ -2243,22 +2243,39 @@ static const struct TrainerMonItemCustomMoves sParty_Winston4[] = {
 };
 
 static const struct TrainerMonItemCustomMoves sParty_Haley1[] = {
+
     {
-    .lvl = -4,
-    .species = SPECIES_GOTHITA,
-    .moves = MOVE_CONFUSION, MOVE_FAKE_TEARS, MOVE_PLAY_NICE, MOVE_TICKLE
-    },
+    .lvl = 1,
+    .species = SPECIES_EEVEE,
+    .heldItem = ITEM_EVIOLITE,
+    .ability = 1,
+    .spread = SPREAD_31_IV_HP_ATK_ADAMANT,
+    .moves = MOVE_YAWN, MOVE_PROTECT, MOVE_EXTREME_SPEED, MOVE_BITE
+    } /* Verdant polish: TRAINER_HALEY_1 */,
     {
-    .lvl = -4,
-    .species = SPECIES_SKIDDO,
-    .moves = MOVE_TACKLE, MOVE_GROWTH, MOVE_VINE_WHIP, MOVE_LEECH_SEED
-    },
+    .lvl = 2,
+    .species = SPECIES_RALTS,
+    .heldItem = ITEM_FOCUS_SASH,
+    .ability = 1,
+    .spread = SPREAD_31_IV_SPATK_SPEED_TIMID,
+    .moves = MOVE_ENCORE, MOVE_PSYCHIC, MOVE_DAZZLING_GLEAM, MOVE_THUNDERBOLT
+    } /* Verdant polish: TRAINER_HALEY_1 */,
     {
-    .lvl = -4,
-    .species = SPECIES_STARLY,
-    .heldItem = ITEM_ORAN_BERRY,
-    .moves = MOVE_QUICK_ATTACK, MOVE_AERIAL_ACE, MOVE_GROWL, MOVE_DOUBLE_TEAM
-    },
+    .lvl = 2,
+    .species = SPECIES_SNORUNT,
+    .heldItem = ITEM_CHOICE_SPECS,
+    .ability = 0,
+    .spread = SPREAD_HP_FIGHTING_TIMID,
+    .moves = MOVE_ICE_BEAM, MOVE_HIDDEN_POWER, MOVE_SHADOW_BALL, MOVE_WATER_PULSE
+    } /* Verdant polish: TRAINER_HALEY_1 */,
+    {
+    .lvl = 3,
+    .species = SPECIES_MORPEKO,
+    .heldItem = ITEM_LIFE_ORB,
+    .ability = 0,
+    .spread = SPREAD_31_IV_ATK_SPEED_JOLLY,
+    .moves = MOVE_AURA_WHEEL, MOVE_PARTING_SHOT, MOVE_SEED_BOMB, MOVE_PROTECT
+    } /* Verdant polish: TRAINER_HALEY_1 */
 };
 
 static const struct TrainerMonItemCustomMoves sParty_Haley2[] = {
@@ -2433,72 +2450,72 @@ static const struct TrainerMonItemCustomMoves sParty_Ivan[] = {
 static const struct TrainerMonItemCustomMoves sParty_Lyle[] = {
 
     {
-    .lvl = -3,
-    .species = SPECIES_VENIPEDE,
-    .heldItem = ITEM_EVIOLITE,
+    .lvl = 3,
+    .species = SPECIES_PINECO,
+    .heldItem = ITEM_NORMAL_GEM,
+    .ability = 0,
+    .spread = SPREAD_31_IV_HP_ATK_BRAVE,
+    .moves = MOVE_EXPLOSION, MOVE_GYRO_BALL, MOVE_BUG_BITE, MOVE_PROTECT
+    } /* Verdant polish: TRAINER_LYLE */,
+    {
+    .lvl = 1,
+    .species = SPECIES_DOTTLER,
+    .heldItem = ITEM_LIGHT_CLAY,
     .ability = 2,
-    .spread = SPREAD_31_IV_HP_DEF_IMPISH,
-    .moves = MOVE_POISON_JAB, MOVE_ROCK_SLIDE, MOVE_TOXIC_SPIKES, MOVE_PROTECT
+    .spread = SPREAD_31_IV_HP_SPDEF_CALM,
+    .moves = MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_PSYCHIC, MOVE_STRUGGLE_BUG
     } /* Verdant polish: TRAINER_LYLE */,
     {
-    .lvl = -3,
-    .species = SPECIES_SURSKIT,
-    .heldItem = ITEM_FOCUS_SASH,
-    .ability = 0,
-    .spread = SPREAD_31_IV_SPATK_SPEED_TIMID,
-    .moves = MOVE_STICKY_WEB, MOVE_BUBBLE_BEAM, MOVE_ICY_WIND, MOVE_PROTECT
-    } /* Verdant polish: TRAINER_LYLE */,
-    {
-    .lvl = -2,
-    .species = SPECIES_BUTTERFREE,
-    .heldItem = ITEM_SITRUS_BERRY,
-    .ability = 0,
-    .spread = SPREAD_31_IV_SPATK_SPEED_TIMID,
-    .moves = MOVE_SLEEP_POWDER, MOVE_HURRICANE, MOVE_POLLEN_PUFF, MOVE_PROTECT
-    } /* Verdant polish: TRAINER_LYLE */,
-    {
-    .lvl = -2,
-    .species = SPECIES_SCYTHER,
+    .lvl = 2,
+    .species = SPECIES_DWEBBLE,
     .heldItem = ITEM_EVIOLITE,
-    .ability = 1,
-    .spread = SPREAD_31_IV_ATK_SPEED_JOLLY,
-    .moves = MOVE_TAILWIND, MOVE_AERIAL_ACE, MOVE_BUG_BITE, MOVE_PROTECT
+    .ability = 0,
+    .spread = SPREAD_31_IV_HP_ATK_ADAMANT,
+    .moves = MOVE_ROCK_SLIDE, MOVE_KNOCK_OFF, MOVE_X_SCISSOR, MOVE_PROTECT
+    } /* Verdant polish: TRAINER_LYLE */,
+    {
+    .lvl = 3,
+    .species = SPECIES_JOLTIK,
+    .heldItem = ITEM_LIFE_ORB,
+    .ability = 0,
+    .spread = SPREAD_31_IV_SPATK_SPEED_TIMID,
+    .moves = MOVE_THUNDER, MOVE_BUG_BUZZ, MOVE_ENERGY_BALL, MOVE_PROTECT
     } /* Verdant polish: TRAINER_LYLE */
 };
 
 static const struct TrainerMonItemCustomMoves sParty_James1[] = {
 
     {
-    .lvl = -3,
-    .species = SPECIES_NINCADA,
-    .heldItem = ITEM_NONE,
-    .ability = 0,
-    .spread = SPREAD_31_IV_HP_ATK_ADAMANT,
-    .moves = MOVE_SAND_ATTACK, MOVE_ABSORB, MOVE_BUG_BITE, MOVE_X_SCISSOR
-    } /* Verdant polish: TRAINER_JAMES_1 */,
-    {
-    .lvl = -3,
-    .species = SPECIES_PARAS,
-    .heldItem = ITEM_NONE,
-    .ability = 0,
-    .spread = SPREAD_0_IV_EV,
-    .moves = MOVE_ABSORB, MOVE_POISON_POWDER, MOVE_STUN_SPORE, MOVE_SCRATCH
-    } /* Verdant polish: TRAINER_JAMES_1 */,
-    {
-    .lvl = -3,
+    .lvl = 0,
     .species = SPECIES_CELEBI,
     .heldItem = ITEM_SITRUS_BERRY,
     .ability = 0,
     .spread = SPREAD_31_IV_SPATK_SPEED_TIMID,
-    .moves = MOVE_PROTECT, MOVE_EARTH_POWER, MOVE_RECOVER, MOVE_ENERGY_BALL
+    .moves = MOVE_PERISH_SONG, MOVE_PSYCHIC, MOVE_EARTH_POWER, MOVE_PROTECT
     } /* Verdant polish: TRAINER_JAMES_1 */,
     {
-    .lvl = -3,
-    .species = SPECIES_COMBEE,
-    .heldItem = ITEM_NONE,
+    .lvl = 2,
+    .species = SPECIES_SHELMET,
+    .heldItem = ITEM_EVIOLITE,
+    .ability = 2,
+    .spread = SPREAD_31_IV_HP_DEF_SPDEF_SASSY,
+    .moves = MOVE_INFESTATION, MOVE_ENCORE, MOVE_STRUGGLE_BUG, MOVE_PROTECT
+    } /* Verdant polish: TRAINER_JAMES_1 */,
+    {
+    .lvl = 3,
+    .species = SPECIES_NINCADA,
+    .heldItem = ITEM_FOCUS_SASH,
     .ability = 0,
-    .spread = SPREAD_15_IV_0_EV,
-    .moves = MOVE_BUG_BUZZ, MOVE_GUST, MOVE_SWEET_SCENT, MOVE_BUG_BITE
+    .spread = SPREAD_31_IV_ATK_SPEED_JOLLY,
+    .moves = MOVE_X_SCISSOR, MOVE_DIG, MOVE_TOXIC, MOVE_PROTECT
+    } /* Verdant polish: TRAINER_JAMES_1 */,
+    {
+    .lvl = 1,
+    .species = SPECIES_HERACROSS,
+    .heldItem = ITEM_CHOICE_SCARF,
+    .ability = 2,
+    .spread = SPREAD_31_IV_ATK_SPEED_JOLLY,
+    .moves = MOVE_MEGAHORN, MOVE_KNOCK_OFF, MOVE_ROCK_SLIDE, MOVE_CLOSE_COMBAT
     } /* Verdant polish: TRAINER_JAMES_1 */
 };
 
@@ -2600,36 +2617,38 @@ static const struct TrainerMonItemCustomMoves sParty_James4[] = {
 
 static const struct TrainerMonItemCustomMoves sParty_Grunt8[] = { // Aqua
 
-{
-    .lvl = -3,
-    .species = SPECIES_CARVANHA,
-    .ability = 2, // Speed Boost
-    .spread = SPREAD_15_IV_0_EV,
-    .moves = MOVE_BITE, MOVE_LEER, MOVE_AQUA_JET, MOVE_RAGE
-    },
-{
-    .lvl = -3,
-    .species = SPECIES_SKRELP,
-    .ability = 2, // Adaptability
-    .spread = SPREAD_15_IV_0_EV,
-    .moves = MOVE_BUBBLE, MOVE_TAIL_WHIP, MOVE_FEINT_ATTACK, MOVE_SMOKESCREEN
-    },
     {
-    .lvl = -3,
-    .species = SPECIES_ZAPDOS_GALARIAN,
-    .heldItem = ITEM_LIFE_ORB,
-    .ability = 0,
-    .spread = SPREAD_31_IV_ATK_SPEED_JOLLY,
-    .moves = MOVE_BULK_UP, MOVE_THUNDEROUS_KICK, MOVE_THROAT_CHOP, MOVE_BRAVE_BIRD
-    } /* Verdant custom: Petalburg Woods — Verdant custom: Petalburg Woods / Balanced disruption */,
-    {
-    .lvl = -3,
-    .species = SPECIES_DUBWOOL,
-    .heldItem = ITEM_SITRUS_BERRY,
+    .lvl = 0,
+    .species = SPECIES_PURRLOIN,
+    .heldItem = ITEM_FOCUS_SASH,
     .ability = 2,
     .spread = SPREAD_31_IV_ATK_SPEED_JOLLY,
-    .moves = MOVE_WILD_CHARGE, MOVE_SWORDS_DANCE, MOVE_DOUBLE_EDGE, MOVE_PROTECT
-    } /* Verdant custom: Petalburg Woods — Verdant custom: Petalburg Woods / Balanced disruption */
+    .moves = MOVE_FAKE_TEARS, MOVE_THUNDER_WAVE, MOVE_ENCORE, MOVE_KNOCK_OFF
+    } /* Verdant polish: TRAINER_GRUNT_PETALBURG_WOODS */,
+    {
+    .lvl = 1,
+    .species = SPECIES_SKRELP,
+    .heldItem = ITEM_EVIOLITE,
+    .ability = 2,
+    .spread = SPREAD_31_IV_HP_SPATK_MODEST,
+    .moves = MOVE_SLUDGE_BOMB, MOVE_SCALD, MOVE_ICY_WIND, MOVE_PROTECT
+    } /* Verdant polish: TRAINER_GRUNT_PETALBURG_WOODS */,
+    {
+    .lvl = 2,
+    .species = SPECIES_CORPHISH,
+    .heldItem = ITEM_CHOICE_BAND,
+    .ability = 2,
+    .spread = SPREAD_31_IV_ATK_SPEED_ADAMANT,
+    .moves = MOVE_CRABHAMMER, MOVE_KNOCK_OFF, MOVE_AQUA_JET, MOVE_SUPERPOWER
+    } /* Verdant polish: TRAINER_GRUNT_PETALBURG_WOODS */,
+    {
+    .lvl = 2,
+    .species = SPECIES_INKAY,
+    .heldItem = ITEM_LIFE_ORB,
+    .ability = 0,
+    .spread = SPREAD_31_IV_ATK_SPEED_ADAMANT,
+    .moves = MOVE_SUPERPOWER, MOVE_PSYCHO_CUT, MOVE_KNOCK_OFF, MOVE_ROCK_SLIDE
+    } /* Verdant polish: TRAINER_GRUNT_PETALBURG_WOODS */
 };
 
 // Route 116

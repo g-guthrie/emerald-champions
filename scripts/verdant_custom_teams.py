@@ -46,17 +46,25 @@ INTENTIONAL_DUPLICATE_PARTIES = {
 AI_PROFILES = {
     "AI_FLAG_SETUP_FIRST_TURN": {
         "TRAINER_DARIAN",
+        "TRAINER_GRUNT_PETALBURG_WOODS",
+        "TRAINER_HALEY_1",
         "TRAINER_RICK",
         "TRAINER_TIANA",
     },
     "AI_FLAG_HP_AWARE": {
         "TRAINER_DARIAN",
+        "TRAINER_HALEY_1",
+        "TRAINER_LYLE",
+    },
+    "AI_FLAG_WILL_SUICIDE": {
+        "TRAINER_LYLE",
     },
     "AI_FLAG_HELP_PARTNER": {
         "MAY_TREECKO_METEOR_FALLS", "MAY_TORCHIC_METEOR_FALLS", "MAY_MUDKIP_METEOR_FALLS",
         "BRENDAN_TREECKO_METEOR_FALLS", "BRENDAN_TORCHIC_METEOR_FALLS", "BRENDAN_MUDKIP_METEOR_FALLS",
     },
     "AI_FLAG_PERISH_TRAP": {
+        "TRAINER_JAMES_1",
         "TRAINER_VALERIE_4",
     },
     "AI_FLAG_COMBO_SETUP": {
@@ -65,8 +73,11 @@ AI_PROFILES = {
     },
     "AI_FLAG_SPEED_CONTROL": {
         "TRAINER_ALLEN",
+        "TRAINER_CALVIN_1",
         "TRAINER_CINDY_1",
         "TRAINER_DARIAN",
+        "TRAINER_GRUNT_PETALBURG_WOODS",
+        "TRAINER_WINSTON_1",
         "TRAINER_ROXANNE_1", "TRAINER_BRAWLY_1", "TRAINER_FLANNERY_1",
         "TRAINER_WINONA_1", "TRAINER_TATE_AND_LIZA_1", "TRAINER_JUAN_1",
         "TRAINER_SIDNEY", "TRAINER_PHOEBE", "TRAINER_GLACIA", "TRAINER_WALLACE",
@@ -76,6 +87,7 @@ AI_PROFILES = {
         "BRENDAN_TREECKO_METEOR_FALLS", "BRENDAN_TORCHIC_METEOR_FALLS", "BRENDAN_MUDKIP_METEOR_FALLS",
     },
     "AI_FLAG_FIELD_CONTROL": {
+        "TRAINER_LYLE",
         "TRAINER_TIANA",
         "TRAINER_ROXANNE_1", "TRAINER_WATTSON_1", "TRAINER_FLANNERY_1",
         "TRAINER_TATE_AND_LIZA_1", "TRAINER_JUAN_1",
@@ -178,6 +190,22 @@ def replace_party_body(parties_text: str, party_name: str, entries: list[str]) -
 
 
 def apply_ai_profiles(trainers_text: str) -> str:
+    # Profile-only flags are authoritative.  Clear stale assignments before
+    # adding the current sets so removing a trainer from a profile is just as
+    # reproducible as adding one. HELP_PARTNER is excluded because the format
+    # manifest also assigns it to bosses and story-partner battles.
+    profile_only_flags = set(AI_PROFILES) - {"AI_FLAG_HELP_PARTNER"}
+
+    def clear_stale_profiles(match: re.Match) -> str:
+        parts = [part.strip() for part in match.group(2).split("|")]
+        kept = [part for part in parts if part not in profile_only_flags]
+        return match.group(1) + " | ".join(kept)
+
+    trainers_text = re.sub(
+        r"(\.aiFlags\s*=\s*)([^,\n]+)",
+        clear_stale_profiles,
+        trainers_text,
+    )
     blocks = doubles.trainer_blocks(trainers_text)
     flags_by_trainer: dict[str, list[str]] = defaultdict(list)
     for flag, trainer_ids in AI_PROFILES.items():

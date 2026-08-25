@@ -209,7 +209,11 @@ def synergy_tags(mons: list[dict], move_data: dict[str, dict]) -> list[str]:
         tags.append("redirection setup")
     if "MOVE_FAKE_OUT" in moves and (moves & SETUP_MOVES or moves & SPEED_MOVES):
         tags.append("Fake Out tempo")
-    if "MOVE_PERISH_SONG" in moves and (moves & TRAP_MOVES or "ABILITY_SHADOW_TAG" in abilities):
+    has_trapping_effect = bool(moves & TRAP_MOVES) or any(
+        move_data.get(move, {}).get("effect") in {"EFFECT_TRAP", "EFFECT_MEAN_LOOK"}
+        for move in moves
+    )
+    if "MOVE_PERISH_SONG" in moves and (has_trapping_effect or "ABILITY_SHADOW_TAG" in abilities):
         tags.append("Perish trap")
     if "MOVE_BEAT_UP" in moves and "ABILITY_JUSTIFIED" in abilities:
         tags.append("Beat Up + Justified")

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "scope": "Manual encounter-by-encounter closure records for Verdant's first 50 real campaign battles. Mutually exclusive trainer definitions are grouped as one encounter.",
+  "scope": "Manual encounter-by-encounter closure records for every real Verdant trainer battle, including optional routes, story encounters, gym trainers, bosses, rematches, and postgame. Mutually exclusive trainer definitions are grouped only when they are branches of one physical encounter.",
   "designs": {
     "BATTLE_001_ROUTE_103_RIVAL": {
       "guide_order": 1,
@@ -83,7 +83,7 @@
         "TRAINER_CALVIN_1"
       ],
       "status": "closed",
-      "campaign_point": "First optional trainer on Route 102, after the lab supplies capture balls and Mom supplies the Old Rod",
+      "campaign_point": "First Route 102 trainer after the lab supplies capture balls and Mom supplies the Old Rod; Calvin's fixed sight line is normally a route choke, although the doubles party-size guard can let an unready player pass",
       "strict_cap": 14,
       "player_state": "The player can bring six level-14 Pokémon from Routes 101, 102, and 103 plus Old Rod encounters, with every legal move, ability switching, and the core held-item shop.",
       "evolution_stage_fit": {
@@ -583,7 +583,7 @@
         "TRAINER_CINDY_1"
       ],
       "status": "closed",
-      "campaign_point": "Next northbound Route 104 south trainer after Darian; Cindy remains an optional singles pacing battle before the remaining estate trainers and Petalburg Woods",
+      "campaign_point": "Final natural Route 104 south trainer after Darian; Cindy is an optional singles pacing battle immediately before the first-pass Petalburg Woods entrance",
       "strict_cap": 14,
       "player_state": "The player has the full pre-Woods catch pool, one of 21 starters, every legal move and ability switch, core competitive held items for $1,000, and frictionless cap leveling. The Mega Bracelet is not yet available.",
       "evolution_stage_fit": {
@@ -658,6 +658,424 @@
       "bespoke_ai": "Cindy remains a native singles trainer. Foe awareness and smart switching understand immunities, U-turn, Choice lock, and bad matchups; contextual speed control uses Trick Room only when reversing order helps the current board. Setup-first-turn is deliberately absent because Gothita may enter later, and no trainer-specific forced turn is required.",
       "uniqueness": "This is Verdant's first Trick Room lesson and its first deliberate doubles-to-singles pacing release. None of the four species appears in Battles 1-7, Debutante Furfrou gives the Lady class a native visual signature, and the fast last slot makes Trick Room a limited resource rather than a reusable module.",
       "closure": "Battle 8 is 10/10 because four evolution-appropriate luxury partners form a readable temporal arc: scout, reverse time, exploit the window, then race after it closes. Levels 15-17 and optimized items make it an 8.4/10 fight, while the mode has numerous broad counters and never demands a single answer."
+    },
+    "BATTLE_009_PETALBURG_WOODS_LYLE": {
+      "guide_order": 9,
+      "trainer_ids": [
+        "TRAINER_LYLE"
+      ],
+      "status": "closed",
+      "campaign_point": "First natural optional sight trainer after entering Petalburg Woods from Route 104 south; Lyle can be avoided by timing his rotating facing, but no earlier reachable trainer has been omitted",
+      "strict_cap": 14,
+      "player_state": "The player has the complete Routes 101-104 and pre-Grunt Petalburg Woods catch pool, every legal move and ability switch, core competitive held items, and frictionless cap leveling. The Exp. Share, Stone Badge, Honey shop tier, Cut access, and Mega Bracelet have not yet been obtained.",
+      "evolution_stage_fit": {
+        "campaign_phase": "pre-Stone youngster chapter",
+        "effective_levels": "15-17",
+        "eligible_ratio": "3/4",
+        "mature_exceptions": [
+          "Dottler is a deliberate legal middle stage: Blipbug evolves at level 10, well below Dottler's authored level 15."
+        ],
+        "mega_access": false,
+        "status": "pass",
+        "reason": "Pineco evolves at level 31, Dwebble at 34, and Joltik at 36. Dottler legally evolves from Blipbug at level 10 and does not evolve again until level 30. No Mega item or form appears."
+      },
+      "manual_quality": 10,
+      "manual_difficulty": 8.4,
+      "corpus_review": {
+        "reference_pool_size": 983,
+        "full_team_candidates": [
+          {
+            "source": "docs/showdown_gen7_random_doubles_30.json",
+            "sample": 4,
+            "decision": "Sturdy shell selected, full team rejected",
+            "reason": "Forretress supplies Sturdy, Gyro Ball, and Protect, but its mature form and unrelated Entei, Cherrim, Rotom, Chesnaught, and Chimecho partners do not fit the young forest chapter."
+          },
+          {
+            "source": "docs/showdown_gen8_random_doubles_30.json",
+            "sample": 13,
+            "decision": "screen controller selected, full team rejected",
+            "reason": "Orbeetle supplies Struggle Bug, Psychic, and Light Screen, but Dottler is the legal early form and Telepathy—not the donor's Frisk—is essential to Lyle's board."
+          },
+          {
+            "source": "docs/showdown_gen5_random_singles_30.json",
+            "sample": 23,
+            "decision": "young Rock/Bug attacker selected, full team rejected",
+            "reason": "The corpus's only exact Dwebble uses Shell Smash, which is deliberately rejected because Darian just showcased Clamperl. The mature mixed roster has no Petalburg Woods identity."
+          },
+          {
+            "source": "docs/showdown_gen7_random_doubles_30.json",
+            "sample": 18,
+            "decision": "Compound Eyes attacker selected, full team rejected",
+            "reason": "Galvantula supplies the exact Life Orb Thunder, Bug Buzz, and Protect shell, while Joltik carries it legally without importing Aegislash, Spinda, Slowking, Azumarill, or Raichu."
+          }
+        ],
+        "decision": "All 983 references were reviewed. No complete team contains two of these four families. Exact Pineco, Dottler, and Joltik appear zero times and Dwebble once, so four individually proven roles are combined into a unique young-Bug encounter instead of forcing a mature full-team import."
+      },
+      "competitive_references": [
+        {
+          "source": "docs/showdown_gen7_random_doubles_30.json",
+          "sample": 4,
+          "seed": "4,31676,6269,59824",
+          "adaptation": "Pineco inherits Forretress's Sturdy, Gyro Ball, and Protect shell. Normal Gem Explosion and Bug Bite are legal Pineco-native additions that create the encounter's one high-risk payoff."
+        },
+        {
+          "source": "docs/showdown_gen8_random_doubles_30.json",
+          "sample": 13,
+          "seed": "13,37412,20156,14182",
+          "adaptation": "Dottler inherits Orbeetle's Struggle Bug, Psychic, and Light Screen; Light Clay Reflect replaces repeated Sticky Web, and its legal Telepathy slot supplies the interactive safe-blast partner."
+        },
+        {
+          "source": "docs/showdown_gen5_random_singles_30.json",
+          "sample": 23,
+          "seed": "23,51067,35586,65412",
+          "adaptation": "Dwebble keeps the donor's Sturdy and X-Scissor identity. Eviolite, Rock Slide, Knock Off, and Protect replace Shell Smash so the battle does not repeat Darian's setup module."
+        },
+        {
+          "source": "docs/showdown_gen7_random_doubles_30.json",
+          "sample": 18,
+          "seed": "18,11472,27871,39797",
+          "adaptation": "Joltik legally de-evolves Galvantula's Life Orb Compound Eyes Thunder, Bug Buzz, and Protect shell. Energy Ball replaces Volt Switch to punish Ground and Rock answers without creating a forced switch script."
+        }
+      ],
+      "team_intent": "Normal Gem Sturdy Pineco and Light Clay Telepathy Dottler lead. Dottler chooses a relevant screen while Pineco chips or waits until damage makes Explosion worthwhile; Telepathy makes the blast safe. Removing Dottler first destroys that safe window. Eviolite Sturdy Dwebble then supplies Rock spread pressure and item denial, while Life Orb Compound Eyes Joltik attacks specially with accurate Thunder so Intimidate or one physical wall cannot solve the fight.",
+      "intended_counterplay": "Ghost leads, Protect, Wide Guard, Damp, burn, multihit attacks through Sturdy, Fake Out, or focusing Dottler can absorb or prevent the blast. Taunt, Brick Break, Psychic Fangs, Defog, or mixed damage answer the screens. Water, Grass, and Steel pressure Dwebble; Ground immunity stops Thunder but Energy Ball punishes many Ground and Rock answers. Fire remains broadly strong, Knock Off removes every durability item, and priority limits Joltik. No single catch or precise turn sequence is required.",
+      "bespoke_ai": "Native ally-damage scoring recognizes Telepathy's Explosion immunity. Lyle adds smart switching, field-control scoring for the relevant screen, HP awareness that discourages a full-health blast, and WILL_SUICIDE so a damaged Pineco can actually take the safe opportunity. Removing Dottler changes that decision naturally; no turn, target, or move is forced.",
+      "uniqueness": "Lyle is Verdant's safe-detonation lesson and the first battle centered on Telepathy rather than a generic weather, Web, Fake Out, redirection, Trick Room, or stat-setup module. Three exact species have zero representatives in the 983-team corpus, none appears in Battles 1-8, and the sole evolved member is the visually young, legally level-10 Dottler.",
+      "closure": "Battle 9 is 10/10 because a visible partner ability turns Explosion from raw power into an interruptible board puzzle: attack Pineco, remove Dottler, defend against the blast, or exploit its timing. The second pair covers physical-only answers without duplicating the gimmick. Levels 15-17, optimized items, and one severe payoff make it 8.4/10 while leaving many independent solutions."
+    },
+    "BATTLE_010_PETALBURG_WOODS_AQUA_GRUNT": {
+      "guide_order": 10,
+      "trainer_ids": [
+        "TRAINER_GRUNT_PETALBURG_WOODS"
+      ],
+      "status": "closed",
+      "campaign_point": "First mandatory Team Aqua encounter at the Petalburg Woods Devon-researcher choke, after optional Lyle and before optional James; both approach directions resolve to this one trainer record",
+      "strict_cap": 14,
+      "player_state": "The player has the full pre-Grunt wild pool and all no-grind preparation systems, but has not yet received the Exp. Share awarded immediately after this battle. The Stone Badge, Honey tier, Cut, Mega stones, and Mega Bracelet remain unavailable.",
+      "evolution_stage_fit": {
+        "campaign_phase": "pre-Stone youngster chapter",
+        "effective_levels": "14-16",
+        "eligible_ratio": "4/4",
+        "mature_exceptions": [],
+        "mega_access": false,
+        "status": "pass",
+        "reason": "Purrloin evolves at level 20, Corphish and Inkay at 30, and Skrelp at 37. Every member is a first-stage Pokémon and no Mega item or form appears."
+      },
+      "manual_quality": 10,
+      "manual_difficulty": 8.4,
+      "corpus_review": {
+        "reference_pool_size": 983,
+        "full_team_candidates": [
+          {
+            "source": "docs/showdown_champions_random_doubles_30.json",
+            "sample": 18,
+            "decision": "Prankster theft lead selected, full team rejected",
+            "reason": "Liepard supplies Focus Sash, Prankster, Encore, Thunder Wave, and Knock Off, but its mature form and unrelated sun collage do not fit the cap-14 Aqua ambush. Purrloin keeps the role and replaces repeated Fake Out with Fake Tears."
+          },
+          {
+            "source": "docs/showdown_gen9_random_doubles_30.json",
+            "sample": 7,
+            "decision": "Adaptability special shell selected, full team rejected",
+            "reason": "Dragalge supplies Adaptability Sludge Bomb and Protect, but Skrelp is the legal young form. Scald and Icy Wind add immediate board pressure without importing a legendary-heavy roster."
+          },
+          {
+            "source": "docs/showdown_gen6_random_doubles_30.json",
+            "sample": 27,
+            "decision": "Adaptability breaker selected, full team rejected",
+            "reason": "Crawdaunt supplies Crabhammer, Knock Off, Aqua Jet, and Protect, but the evolved form and its five mature partners are replaced by a Choice Band Corphish with Superpower."
+          },
+          {
+            "source": "docs/showdown_gen6_random_doubles_30.json",
+            "sample": 10,
+            "decision": "Contrary attack sequence selected, full team rejected",
+            "reason": "Malamar's exact four attacks create the desired self-boosting ace, but Inkay is the stage-legal form and the rest of the random roster has no theft or Aqua identity."
+          }
+        ],
+        "decision": "All 983 references were reviewed. None contains the four-member young theft squad and no full import fits the campaign stage. Four mature individual roles are translated into legal first stages, with repeated Knock Off used deliberately as this one paper-and-valuables robbery identity rather than a global team module."
+      },
+      "competitive_references": [
+        {
+          "source": "docs/showdown_champions_random_doubles_30.json",
+          "sample": 18,
+          "seed": "18,11472,27871,39797",
+          "adaptation": "Purrloin keeps Liepard's Focus Sash Prankster Encore, Thunder Wave, and Knock Off shell. Fake Tears replaces Fake Out so the opening uniquely amplifies Skrelp instead of repeating the common early tempo move."
+        },
+        {
+          "source": "docs/showdown_gen9_random_doubles_30.json",
+          "sample": 7,
+          "seed": "7,55433,10898,22765",
+          "adaptation": "Eviolite Skrelp legally carries Dragalge's Adaptability Sludge Bomb and Protect identity. Scald and Icy Wind exploit Fake Tears and supply burn or speed pressure without a setup turn."
+        },
+        {
+          "source": "docs/showdown_gen6_random_doubles_30.json",
+          "sample": 27,
+          "seed": "27,17208,41758,59690",
+          "adaptation": "Choice Band Corphish inherits Crawdaunt's Adaptability Crabhammer, Knock Off, and Aqua Jet. Superpower replaces Protect because its Choice lock makes immediate coverage and visible commitment the more interactive design."
+        },
+        {
+          "source": "docs/showdown_gen6_random_doubles_30.json",
+          "sample": 10,
+          "seed": "10,13655,15527,51241",
+          "adaptation": "Life Orb Contrary Inkay imports Malamar's Superpower, Psycho Cut, Knock Off, and Rock Slide verbatim. It snowballs only by dealing damage and never receives a free setup move."
+        }
+      ],
+      "team_intent": "Focus Sash Prankster Purrloin and Eviolite Adaptability Skrelp open the smash-and-grab: Fake Tears amplifies special pressure, Thunder Wave and Icy Wind contest speed, Encore punishes passive turns, and Knock Off starts the robbery theme. Choice Band Adaptability Corphish brings priority and immediate commitment; Life Orb Contrary Inkay is the sole snowball, raising Attack and Defense only while using Superpower.",
+      "intended_counterplay": "Early Dark types ignore Prankster-targeted status; Taunt or focused damage removes Purrloin, while Electric, Grass, Ground, and Psychic coverage pressure the aquatic or Poison members. Fairy, Bug, and Fighting attacks check the thieves; burn, Intimidate, Haze, Clear Smog, Unaware, Protect, and priority limit Inkay. Corphish's Choice lock is exploitable, and no one attack hits all four cleanly. The fight supports broad team-building rather than a single required capture.",
+      "bespoke_ai": "Foe-aware smart switching handles immunities and Choice lock. Contextual speed control scores Thunder Wave and Icy Wind, while the first-turn setup preference makes Purrloin consider Fake Tears or Encore without forcing either. Contrary Superpower, Adaptability, priority, Protect, and Knock Off use native scoring; no battle script dictates a move or target.",
+      "uniqueness": "This is the one early smash-and-grab battle: three Knock Off users are intentional because the Grunt is literally stealing papers and valuables. None of the four species appears in Battles 1-9, the team uses no weather, Web, redirection, Fake Out, Trick Room, safe Explosion, or free setup move, and the story dialogue already fits a coordinated multi-Pokémon ambush.",
+      "closure": "Battle 10 is 10/10 because its mechanics and story say the same thing: disrupt preparation, strip resources, and convert one opening into a robbery. Four first-stage Pokémon at levels 14-16 create severe but readable special, physical, priority, speed, and Contrary pressure. Its 8.4/10 difficulty has numerous independent answers and introduces Team Aqua without premature evolutions or a Mega."
+    },
+    "BATTLE_011_PETALBURG_WOODS_JAMES": {
+      "guide_order": 11,
+      "trainer_ids": [
+        "TRAINER_JAMES_1"
+      ],
+      "status": "closed",
+      "campaign_point": "Optional north-Petalburg-Woods Bug Catcher immediately after the mandatory Aqua Grunt; the researcher heals the party and safely awards or PC-stores the Exp. Share before James can be encountered",
+      "strict_cap": 14,
+      "player_state": "The player retains every no-grind preparation tool and now has the Exp. Share reward without a bag-capacity loss case. A native post-Grunt heal makes James's stated difficulty independent of damage carried from Battle 10. Stone Badge, Cut, Honey, and Mega access remain unavailable.",
+      "evolution_stage_fit": {
+        "campaign_phase": "pre-Stone youngster chapter",
+        "effective_levels": "14-17",
+        "eligible_ratio": "4/4",
+        "mature_exceptions": [],
+        "registered_showcases": [
+          "Celebi is the deliberate single-stage mythical forest-spirit reveal."
+        ],
+        "mega_access": false,
+        "status": "pass",
+        "reason": "Celebi and Heracross are genuinely single-stage in this engine, Shelmet evolves only by trade, and Nincada does not evolve until level 20. No Mega item or form appears."
+      },
+      "manual_quality": 10,
+      "manual_difficulty": 8.7,
+      "corpus_review": {
+        "reference_pool_size": 983,
+        "full_team_candidates": [
+          {
+            "source": "docs/showdown_gen8_random_doubles_30.json",
+            "sample": 12,
+            "decision": "mythical defensive shell selected, full team rejected",
+            "reason": "Celebi supplies Sitrus, Protect, and Earth Power, but its Groudon-centered random team has no forest-circle identity. Perish Song and Psychic replace generic Recover and Energy Ball."
+          },
+          {
+            "source": "docs/showdown_gen6_random_doubles_30.json",
+            "sample": 9,
+            "decision": "young trap-controller role selected, full team rejected",
+            "reason": "Accelgor supplies Encore utility, but first-stage Shelmet is the legal early carrier for Infestation, Encore, Struggle Bug, and Protect. The mature weather collage does not fit."
+          },
+          {
+            "source": "docs/showdown_gen5_random_doubles_30.json",
+            "sample": 23,
+            "decision": "exact young escape-piece species selected, full team rejected",
+            "reason": "The sole exact Nincada donor proves the stage can carry real coverage, but Life Orb offense and unrelated Zekrom-era partners are replaced by Sash countdown play."
+          },
+          {
+            "source": "docs/showdown_champions_random_doubles_30.json",
+            "sample": 17,
+            "decision": "exact closer selected, full team rejected",
+            "reason": "Choice Scarf Moxie Heracross is imported exactly, while its unrelated rain-and-Ghost partners do not satisfy James's young forest growth arc."
+          }
+        ],
+        "decision": "All 983 references were reviewed. No complete reference contains even two selected families, so no full import fits. The party combines one mythical defensive donor, a legally de-evolved trap controller, the only exact Nincada donor, and an exact competitive Heracross closer into the first reusable Perish puzzle."
+      },
+      "competitive_references": [
+        {
+          "source": "docs/showdown_gen8_random_doubles_30.json",
+          "sample": 12,
+          "seed": "12,29493,18613,48380",
+          "adaptation": "Celebi keeps Sitrus Berry, Natural Cure, Protect, and Earth Power. Legal Perish Song and Psychic create the forest-circle timer without adding a second setup or weather mode."
+        },
+        {
+          "source": "docs/showdown_gen6_random_doubles_30.json",
+          "sample": 9,
+          "seed": "9,5736,13984,19904",
+          "adaptation": "Eviolite Overcoat Shelmet inherits Accelgor's Encore utility. Infestation supplies the one-target trap, while Struggle Bug and Protect create interaction during the countdown."
+        },
+        {
+          "source": "docs/showdown_gen5_random_doubles_30.json",
+          "sample": 23,
+          "seed": "123,56547,58816,53432",
+          "adaptation": "Focus Sash Compound Eyes Nincada keeps X-Scissor and Toxic from the sole exact donor. Dig and Protect provide readable countdown turns without Double Team or a setup sweep."
+        },
+        {
+          "source": "docs/showdown_champions_random_doubles_30.json",
+          "sample": 17,
+          "seed": "17,3553,26328,8460",
+          "adaptation": "Choice Scarf Moxie Heracross's Megahorn, Knock Off, Rock Slide, and Close Combat set is imported verbatim as immediate post-circle pressure."
+        }
+      ],
+      "team_intent": "Sitrus Celebi and Eviolite Shelmet form the forest circle: Perish Song starts a shared timer, Infestation traps only one target, Encore punishes stalling, Struggle Bug reduces incoming special pressure, and Protect buys finite turns. Removing either lead breaks the complete plan. Focus Sash Nincada uses Toxic, Dig, and Protect as the escape pair's countdown piece; Choice Scarf Moxie Heracross supplies immediate closing pressure without setup.",
+      "intended_counterplay": "Taunt or focused damage can stop Celebi before the song or remove Shelmet before Infestation. Soundproof blocks Perish Song, Ghost types escape trapping, the untrapped slot can switch normally, and ordinary switching resets a Pokémon's own count. Celebi has seven exploitable weaknesses; Fire, Flying, and Rock pressure Shelmet and Heracross; Water, Ice, Fire, and Flying pressure Nincada. Knock Off removes the Eviolite, Protect cannot stop Perish Song itself, and eliminating either half of the lead dismantles the puzzle. No exact capture is required.",
+      "bespoke_ai": "James uses the existing reusable Perish-trap profile plus smart switching. It values Perish Song only with a trapping partner, favors Infestation on a perishing target, uses Protect while the count is safe, avoids redundant or suicidal songs, and exits at count one when a bench exists. The profile strongly encourages the concept but never forces a turn; Celebi can attack, Shelmet can Encore or use Struggle Bug, and the player can disrupt the board.",
+      "uniqueness": "James is Verdant's first Perish-trap lesson and a deliberate early mythical sighting. Celebi appears as a forest spirit rather than random raw BST, Shelmet and Nincada preserve the dialogue's later growth promise, and exact species do not repeat Battles 1-10. The current James2-4 records remain separate future encounter indices; at their five-badge cap-55 unlock they must visibly evolve Nincada and Shelmet, preserve Celebi and Heracross, and use consistent native battle formats rather than being silently treated as part of this closure.",
+      "closure": "Battle 11 is 10/10 because it makes a competitive Perish strategy readable at a glance and interruptible at both halves. Four stage-legal Pokémon at levels 14-17 combine timer, partial trapping, evasive countdown turns, and an exact Scarf closer. Difficulty is 8.7/10, but switching, targeting, typing, abilities, items, and tempo all provide independent solutions."
+    },
+    "BATTLE_012_ROUTE_104_WINSTON": {
+      "guide_order": 12,
+      "trainer_ids": [
+        "TRAINER_WINSTON_1"
+      ],
+      "status": "closed",
+      "campaign_point": "First canonical full-clear trainer after exiting Petalburg Woods onto Route 104 north; Winston is optional and open terrain allows the player to reach Haley first, but no trainer is removed from the index",
+      "strict_cap": 14,
+      "player_state": "The party is guaranteed a post-Grunt heal and the player may backtrack freely, so Winston is calibrated against a prepared cap-14 team with every legal move, ability switch, core held item, and catch pool through Petalburg Woods. Mega access remains unavailable.",
+      "evolution_stage_fit": {
+        "campaign_phase": "pre-Stone youngster chapter",
+        "effective_levels": "15-17",
+        "eligible_ratio": "4/4",
+        "mature_exceptions": [],
+        "registered_showcases": [
+          "Stonjourner is the rare single-stage Power Spot display piece."
+        ],
+        "mega_access": false,
+        "status": "pass",
+        "reason": "Stonjourner and Dedenne are genuinely single-stage, Porygon begins an item-evolution line, and Honedge does not evolve until level 35. No Mega item or form appears."
+      },
+      "manual_quality": 10,
+      "manual_difficulty": 8.5,
+      "corpus_review": {
+        "reference_pool_size": 983,
+        "full_team_candidates": [
+          {
+            "source": "docs/showdown_gen8_random_doubles_30.json",
+            "sample": 15,
+            "decision": "Power Spot centerpiece selected, full team rejected",
+            "reason": "Stonjourner supplies the unique partner damage multiplier, Body Press, and Protect, but its Zapdos, Rotom, Scolipede, Escavalier, and Dugtrio roster is a mature random collage."
+          },
+          {
+            "source": "docs/showdown_gen8_random_doubles_30.json",
+            "sample": 14,
+            "decision": "Eviolite special display selected, full team rejected",
+            "reason": "Porygon2 supplies Eviolite, Tri Attack, Ice Beam, and Protect, but base Porygon is the legal youngster and Download plus Thunderbolt better rewards Power Spot."
+          },
+          {
+            "source": "docs/showdown_gen9_random_doubles_30.json",
+            "sample": 6,
+            "decision": "exact chip controller selected, full team rejected",
+            "reason": "Dedenne's complete Sitrus Cheek Pouch set fits verbatim, while its unrelated mature partners do not form Winston's collection."
+          },
+          {
+            "source": "docs/showdown_gen8_random_singles_30.json",
+            "sample": 15,
+            "decision": "young setup shell selected, full team rejected",
+            "reason": "Doublade supplies the exact four-move Swords Dance shell, but Honedge is the legal level-17 form and Air Balloon makes its single setup opportunity visible and disruptable."
+          }
+        ],
+        "decision": "All 983 references were reviewed. No team contains even two selected families; exact base Porygon and Honedge appear zero times, while Stonjourner and Dedenne are scarce. Four individual donor roles form one bespoke expensive-collection battle rather than a global strength allocator."
+      },
+      "competitive_references": [
+        {
+          "source": "docs/showdown_gen8_random_doubles_30.json",
+          "sample": 15,
+          "seed": "15,53250,23242,11321",
+          "adaptation": "Focus Sash Stonjourner keeps Power Spot, Body Press, and Protect; Rock Slide and Wide Guard replace Stone Edge and Rock Polish so it boosts and protects its partner without becoming a second setup threat."
+        },
+        {
+          "source": "docs/showdown_gen8_random_doubles_30.json",
+          "sample": 14,
+          "seed": "14,45331,21699,45519",
+          "adaptation": "Eviolite Porygon legally de-evolves Porygon2's Tri Attack, Ice Beam, and Protect shell. Download and Thunderbolt create immediate boosted coverage beside Power Spot instead of importing Recover."
+        },
+        {
+          "source": "docs/showdown_gen9_random_doubles_30.json",
+          "sample": 6,
+          "seed": "6,47514,9355,56963",
+          "adaptation": "Sitrus Cheek Pouch Dedenne's Super Fang, Nuzzle, Dazzling Gleam, and Thunderbolt set is imported verbatim as second-wave chip and speed control."
+        },
+        {
+          "source": "docs/showdown_gen8_random_singles_30.json",
+          "sample": 15,
+          "seed": "15,53250,23242,11321",
+          "adaptation": "Air Balloon No Guard Honedge legally carries Doublade's Swords Dance, Iron Head, Sacred Sword, and Shadow Sneak set. The one interruptible setup mode is delayed to the second pair."
+        }
+      ],
+      "team_intent": "Focus Sash Power Spot Stonjourner and Eviolite Download Porygon are Winston's expensive display pieces: Power Spot passively multiplies Porygon's damage, Download may add another offensive boost, Rock Slide applies spread pressure, and Wide Guard reacts to revealed spread moves. Sitrus Cheek Pouch Dedenne uses Super Fang and Nuzzle to create a finite opening for Air Balloon Honedge's one interruptible Swords Dance and priority endgame.",
+      "intended_counterplay": "Special attacks or focused damage remove Sash Stonjourner and its Power Spot, while Knock Off strips Porygon's Eviolite. Fighting pressures Porygon but Stonjourner and Honedge change that matchup. Ground threatens Dedenne but initially misses Balloon Honedge; Fire, Dark, Ghost, burn, Taunt, Intimidate, Haze, Clear Smog, Protect, and priority all contain Honedge. Wide Guard reacts only to known spread pressure, and popping the Balloon is visible counterplay. No one team slot is mandatory.",
+      "bespoke_ai": "Normal foe-aware scoring includes the partner Power Spot multiplier in damage calculation. Smart switching handles Porygon's matchup and Honedge's setup position; contextual speed control values Nuzzle. Download, Cheek Pouch, No Guard, Super Fang, Wide Guard, Protect, priority, and Choice-free attacks use native behavior. Setup-first-turn is deliberately absent because Honedge enters later, and no move is forced.",
+      "uniqueness": "Winston is the first Power Spot battle and the only early fight framed as an expensive rare collection. None of the four species appears in Battles 1-11, and its passive damage aura, Super Fang chip, Wide Guard reaction, Balloon seam, and delayed setup do not repeat prior weather, Web, Trick Room, detonation, theft, or Perish modules. Winston2-4 remain separate five-badge rematch indices and must later preserve these families through legal Porygon and Honedge growth rather than reverting to the old Bidoof and Pidgey roster.",
+      "closure": "Battle 12 is 10/10 because every expensive piece changes a doubles decision: remove the aura, strip the digital tank, respect Super Fang and speed control, then deny the floating sword one setup turn. Levels 15-17, one rare single-stage showcase, full items, and two distinct waves make it 8.5/10 while broad type, status, item, targeting, and tempo answers remain valid."
+    },
+    "BATTLE_013_ROUTE_104_HALEY": {
+      "guide_order": 13,
+      "trainer_ids": [
+        "TRAINER_HALEY_1"
+      ],
+      "status": "closed",
+      "campaign_point": "Optional Route 104 north sight trainer in open terrain after the Petalburg Woods exit; Haley and Winston can be reversed or skipped, but both retain separate canonical indices",
+      "strict_cap": 14,
+      "player_state": "The player can backtrack to heal without advancing the story and has every legal move, ability switch, core held item, and wild option through Petalburg Woods. Haley deliberately supplies singles pacing after four canonical doubles encounters. Mega access remains unavailable.",
+      "evolution_stage_fit": {
+        "campaign_phase": "pre-Stone youngster chapter",
+        "effective_levels": "15-17",
+        "eligible_ratio": "4/4",
+        "mature_exceptions": [],
+        "mega_access": false,
+        "status": "pass",
+        "reason": "Eevee remains the base of multiple item, friendship, and move-conditioned branches; Ralts evolves at level 20, Snorunt at level 30 or by Dawn Stone, and Morpeko is genuinely single-stage. No Mega item or form appears."
+      },
+      "manual_quality": 10,
+      "manual_difficulty": 8.3,
+      "corpus_review": {
+        "reference_pool_size": 983,
+        "full_team_candidates": [
+          {
+            "source": "docs/showdown_gen5_random_singles_30.json",
+            "sample": 1,
+            "decision": "branching opener selected, full team rejected",
+            "reason": "The exact Adaptability Eevee provides Yawn and Bite, but its Magcargo, Conkeldurr, Emboar, Yanma, and Palkia partners do not form an early indecision team."
+          },
+          {
+            "source": "docs/showdown_gen4_random_doubles_30.json",
+            "sample": 28,
+            "decision": "Sash reactive stage selected, full team rejected",
+            "reason": "Focus Sash Trace Ralts proves the fragile reactive role, but its status roulette, Trick Room, Destiny Bond, and unrelated partners are replaced by Encore plus direct coverage."
+          },
+          {
+            "source": "docs/showdown_gen4_random_singles_30.json",
+            "sample": 18,
+            "decision": "young committed coverage role selected, full team rejected",
+            "reason": "Snorunt supplies legal Ice coverage precedent, while the mixed mature random team is rejected. Choice Specs makes Haley's decision visible and exploitable."
+          },
+          {
+            "source": "docs/showdown_gen9_random_doubles_30.json",
+            "sample": 1,
+            "decision": "form-changing closer selected, full team rejected",
+            "reason": "Life Orb Hunger Switch Morpeko supplies Aura Wheel, Protect, and pivoting, but its unrelated evolved partners have no branching-choice identity."
+          }
+        ],
+        "decision": "All 983 references were reviewed. No complete team contains more than one selected species, so no full import fits. Four individual choice mechanics are combined by hand: forced sleep decision, Encore response, Choice lock, and a move whose type changes every turn."
+      },
+      "competitive_references": [
+        {
+          "source": "docs/showdown_gen5_random_singles_30.json",
+          "sample": 1,
+          "seed": "1,7919,1640,31348",
+          "adaptation": "Eviolite Adaptability Eevee keeps Yawn and Bite. Protect and legal Extreme Speed replace Life Orb Return and Iron Tail so it asks a switching question without becoming a second Choice attacker."
+        },
+        {
+          "source": "docs/showdown_gen4_random_doubles_30.json",
+          "sample": 28,
+          "seed": "128,30607,996,13512",
+          "adaptation": "Focus Sash Trace Ralts keeps the donor's reactive identity. Encore, Psychic, Dazzling Gleam, and Thunderbolt punish a passive response without importing Hypnosis accuracy or a Destiny Bond lock."
+        },
+        {
+          "source": "docs/showdown_gen4_random_singles_30.json",
+          "sample": 18,
+          "seed": "18,11472,27871,39797",
+          "adaptation": "Choice Specs Inner Focus Snorunt turns the donor's Ice Beam shell into four reliable legal coverage choices: Ice Beam, Hidden Power Fighting, Shadow Ball, and Water Pulse."
+        },
+        {
+          "source": "docs/showdown_gen9_random_doubles_30.json",
+          "sample": 1,
+          "seed": "1,7919,1640,31348",
+          "adaptation": "Life Orb Hunger Switch Morpeko keeps Aura Wheel, Parting Shot, and Protect. Seed Bomb replaces repeated Knock Off and prevents one Ground answer from becoming automatic."
+        }
+      ],
+      "team_intent": "Every slot embodies Haley's choice theme. Eviolite Eevee opens with the Yawn decision while remaining active through Adaptability, Extreme Speed, and Bite. Focus Sash Trace Ralts can Encore a passive response but has no Disable lock. Choice Specs Snorunt visibly commits to one of four special coverage lines. Life Orb Hunger Switch Morpeko changes Aura Wheel between Electric and Dark every turn and can reconsider with Parting Shot.",
+      "intended_counterplay": "Taunt, sleep immunity, Safeguard, Electric Terrain, U-turn, or ordinary switching answer Yawn. Fighting pressures Eevee and Morpeko; Steel, Poison, Dark, and priority break Ralts; Fire, Rock, Fighting, and Steel plus Choice-lock exploitation check Snorunt. Ground blocks Electric Aura Wheel but not its alternating Dark turn or Seed Bomb, while Fairy, Bug, burn, Intimidate, and Protect contain Morpeko. No one wall or required catch solves all four.",
+      "bespoke_ai": "Haley remains a native singles trainer. Smart switching handles Snorunt's Choice lock, type immunities, and Parting Shot; first-turn setup preference makes Yawn plausible without forcing it; HP-aware scoring improves Protect and endgame decisions. Hunger Switch and Aura Wheel type changes are native. No trainer-only move, target, or turn script is added.",
+      "uniqueness": "Haley is the only early branching-evolution and changing-mind battle. None of the four families appears in Battles 1-12, and the fight uses no weather, hazard, trapping, detonation, Perish timer, item theft, or free stat setup. Haley2-4 remain separate cap-55 rematch indices: they must show Vaporeon/Gardevoir/Glalie, then Jolteon/Gallade/Froslass, then Sylveon plus both Ralts and Snorunt branches, rather than the current unrelated Arceus roster.",
+      "closure": "Battle 13 is 10/10 because its story and mechanics both ask the player to choose: stay or switch, act or risk Encore, commit into a Choice lock, then track Aura Wheel's changing type. Four stage-legal Pokémon at levels 15-17 make it an 8.3/10 singles fight with broad status, type, item, priority, and switching counterplay."
     }
   }
 }
