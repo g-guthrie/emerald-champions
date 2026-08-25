@@ -4,7 +4,7 @@ RustboroCity_Gym_MapScripts:: @ 8212F30
 RustboroCity_Gym_EventScript_Roxanne::
 	goto_if_set FLAG_DAILY_REMATCH_ROXANNE, RustboroCity_Gym_EventScript_AlreadyRematched
 	goto_if_set FLAG_SYS_GAME_CLEAR, RustboroCity_Gym_EventScript_RoxanneRematch
-	trainerbattle_single TRAINER_ROXANNE_1, RustboroCity_Gym_Text_RoxanneIntro, RustboroCity_Gym_Text_RoxanneDefeat, RustboroCity_Gym_EventScript_RoxanneDefeated, NO_MUSIC
+	trainerbattle_double TRAINER_ROXANNE_1, RustboroCity_Gym_Text_RoxanneIntro, RustboroCity_Gym_Text_RoxanneDefeat, RustboroCity_Gym_Text_RoxanneNotEnoughPokemon, RustboroCity_Gym_EventScript_RoxanneDefeated, NO_MUSIC
 	goto_if_eq RustboroCity_Gym_EventScript_RoxanneRematch
 	goto_if_unset FLAG_RECEIVED_TM39, RustboroCity_Gym_EventScript_GiveRockTomb
 	msgbox RustboroCity_Gym_Text_RoxannePostBattle, MSGBOX_DEFAULT
@@ -82,12 +82,12 @@ RustboroCity_Gym_EventScript_Exit::
 	end
 
 RustboroCity_Gym_EventScript_Josh:: @ 8212FE3
-	trainerbattle_single TRAINER_JOSH, RustboroCity_Gym_Text_JoshIntro, RustboroCity_Gym_Text_JoshDefeat
+	trainerbattle_double TRAINER_JOSH, RustboroCity_Gym_Text_JoshIntro, RustboroCity_Gym_Text_JoshDefeat, RustboroCity_Gym_Text_JoshNotEnoughPokemon
 	msgbox RustboroCity_Gym_Text_JoshPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 RustboroCity_Gym_EventScript_Tommy:: @ 8212FFA
-	trainerbattle_single TRAINER_TOMMY, RustboroCity_Gym_Text_TommyIntro, RustboroCity_Gym_Text_TommyDefeat
+	trainerbattle_double TRAINER_TOMMY, RustboroCity_Gym_Text_TommyIntro, RustboroCity_Gym_Text_TommyDefeat, RustboroCity_Gym_Text_TommyNotEnoughPokemon
 	msgbox RustboroCity_Gym_Text_TommyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -313,9 +313,10 @@ RustboroCity_Gym_Text_Tips::
 	.string "of Rock-type Pokémon.\p"
 	.string "She has a full team of six, with good\n"
 	.string "type variety.\p"
-	.string "You should make sure your first\n"
-	.string "partner Pokémon has evolved once\l"
-	.string "before you challenge her.\p"
+	.string "Roxanne protects her team before\n"
+	.string "raising its Attack with Swagger.\p"
+	.string "Bring a way to remove boosts or\n"
+	.string "guard against spread attacks.\p"
 	.string "Come see me afterwards, if you beat\n"
 	.string "the Gym Leader.\p"
 	.string "Oh, and take these bottles of\n"
@@ -348,65 +349,82 @@ RustboroCity_Gym_Text_GymGuidePostVictory: @ 82132E2
 	.string "That's got to feel awesome!$"
 
 RustboroCity_Gym_Text_JoshIntro: @ 82133E9
-	.string "Don't take us Gym Trainers lightly!\n"
-	.string "I'll show you why we're better!$"
+	.string "Small rocks can carry big lessons!\n"
+	.string "Shuckle, share your defenses!$"
 
 RustboroCity_Gym_Text_JoshDefeat: @ 821342D
-	.string "You were too good for me…$"
+	.string "You broke through our lesson!$"
 
 RustboroCity_Gym_Text_JoshPostBattle: @ 8213447
-	.string "You haven't seen anything of the Rock\n"
-	.string "type's terrifying power!$"
+	.string "Guard Split lends Shuckle's Defense\n"
+	.string "to my frail Cranidos.\p"
+	.string "Water feeds Lileep's Storm Drain,\n"
+	.string "and physical hits make Glimmet\l"
+	.string "scatter Toxic Spikes.$"
+
+RustboroCity_Gym_Text_JoshNotEnoughPokemon:
+	.string "You need two healthy Pokémon\n"
+	.string "for this doubles lesson!$"
 
 RustboroCity_Gym_Text_TommyIntro: @ 8213486
-	.string "If you can't beat me, you won't stand\n"
-	.string "a chance against Roxanne!$"
+	.string "A good lesson is worth repeating!\n"
+	.string "Tyrunt, show them. Oranguru,\l"
+	.string "make it do that again!$"
 
 RustboroCity_Gym_Text_TommyDefeat: @ 82134C6
-	.string "Wow! You've got some potential!$"
+	.string "You stopped me mid-lesson!$"
 
 RustboroCity_Gym_Text_TommyPostBattle: @ 82134E6
-	.string "Roxanne is stronger than me by\n"
-	.string "several times.\p"
-	.string "You'd better be on your guard!$"
+	.string "Instruct makes my partner repeat\n"
+	.string "its last move right away.\p"
+	.string "Nosepass uses Wide Guard to block\n"
+	.string "attacks aimed at both of us.$"
+
+RustboroCity_Gym_Text_TommyNotEnoughPokemon:
+	.string "Bring two healthy Pokémon.\n"
+	.string "This is a doubles lesson!$"
 
 RustboroCity_Gym_Text_MarcIntro: @ 8213533
-	.string "We might be in the middle of town,\n"
-	.string "but so what?\p"
-	.string "My Rock Pokémon need room to\n"
-	.string "rampage!$"
+	.string "Every layer underfoot tells a story.\p"
+	.string "Choose one bad step, and the whole\n"
+	.string "cliff shifts!$"
 
 RustboroCity_Gym_Text_MarcDefeat: @ 8213589
-	.string "Oh, man oh man!\n"
-	.string "Our challenger is one feisty customer!$"
+	.string "You read every layer!$"
 
 RustboroCity_Gym_Text_MarcPostBattle: @ 82135C0
-	.string "I have to hand it to our Leader.\p"
-	.string "It took smarts and sense for her to\n"
-	.string "pick the Rock type at her young age.$"
+	.string "Shieldon scatters sharp stones,\n"
+	.string "then Woobat trades away its Scarf.\p"
+	.string "If Cursed Body seals that one move,\n"
+	.string "you must choose whether to switch.$"
 
 RustboroCity_Gym_Text_RoxanneIntro: @ 821362A
 	.string "Hello, I am Roxanne, the Rustboro\n"
 	.string "Pokémon Gym Leader.\p"
-	.string "I became a Gym Leader so that I might\n"
-	.string "apply what I learned at the Pokémon\l"
+	.string "I became a Gym Leader to apply\n"
+	.string "what I learned at the Pokémon\l"
 	.string "Trainer's School in battle.\p"
-	.string "Would you kindly demonstrate how you\n"
-	.string "battle, and with which Pokémon?\p"
-	.string "This examination has two answers at\n"
-	.string "once: pressure and protection.$"
+	.string "Today's examination is confidence.\p"
+	.string "I will protect my team first,\n"
+	.string "then turn Swagger into strength.\p"
+	.string "Show me how you answer preparation\n"
+	.string "and pressure at the same time.$"
 
 RustboroCity_Gym_Text_RoxanneDefeat: @ 821370B
 	.string "So…\n"
 	.string "I lost…\p"
-	.string "It seems that I still have much more\n"
-	.string "to learn…\p"
-	.string "I understand.\p"
+	.string "You broke my protection and kept\n"
+	.string "your strategy flexible.\p"
+	.string "I still have much more to learn.\p"
 	.string "The Pokémon League's rules state\n"
 	.string "that Trainers are to be given this\l"
 	.string "if they defeat a Gym Leader.\p"
 	.string "Please accept the official Pokémon\n"
 	.string "League Stone Badge.$"
+
+RustboroCity_Gym_Text_RoxanneNotEnoughPokemon:
+	.string "A doubles examination requires\n"
+	.string "two healthy Pokémon.$"
 
 RustboroCity_Gym_Text_ReceivedStoneBadge: @ 82137EC
 	.string "{PLAYER} received the Stone Badge\n"
@@ -425,10 +443,10 @@ RustboroCity_Gym_Text_ExplainRockTomb: @ 82138B1
 	.string "to get the most from it!$"
 
 RustboroCity_Gym_Text_RoxannePostBattle: @ 82139A7
-	.string "Since you are so strong, you should\n"
-	.string "challenge other Gym Leaders.\p"
-	.string "By battling many Trainers, you should\n"
-	.string "learn many things.$"
+	.string "Safeguard prevents confusion,\n"
+	.string "so Swagger can raise Attack safely.\p"
+	.string "Taunt, Haze, Wide Guard, or focused\n"
+	.string "attacks can break that lesson.$"
 
 RustboroCity_Gym_Text_GymStatue: @ 8213A21
 	.string "Rustboro City Pokémon Gym$"

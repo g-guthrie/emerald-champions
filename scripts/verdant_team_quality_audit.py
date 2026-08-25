@@ -37,6 +37,11 @@ SETUP_MOVES = {
     "MOVE_CALM_MIND", "MOVE_BULK_UP", "MOVE_SHELL_SMASH", "MOVE_GEOMANCY",
     "MOVE_BELLY_DRUM", "MOVE_COIL", "MOVE_SHIFT_GEAR", "MOVE_TAIL_GLOW",
 }
+DANCE_MOVES = {
+    "MOVE_SWORDS_DANCE", "MOVE_PETAL_DANCE", "MOVE_FEATHER_DANCE",
+    "MOVE_TEETER_DANCE", "MOVE_DRAGON_DANCE", "MOVE_LUNAR_DANCE",
+    "MOVE_QUIVER_DANCE", "MOVE_FIERY_DANCE", "MOVE_REVELATION_DANCE",
+}
 PIVOT_MOVES = {"MOVE_U_TURN", "MOVE_VOLT_SWITCH", "MOVE_PARTING_SHOT", "MOVE_FLIP_TURN"}
 DEFENSIVE_TEMPO_MOVES = PROTECT_MOVES | REDIRECTION_MOVES | SPEED_MOVES | {
     "MOVE_FAKE_OUT", "MOVE_REFLECT", "MOVE_LIGHT_SCREEN", "MOVE_AURORA_VEIL",
@@ -249,6 +254,33 @@ def synergy_tags(mons: list[dict], move_data: dict[str, dict]) -> list[str]:
         tags.append("Neutralizing Gas + Regigigas")
     if "ABILITY_PLUS" in abilities and "ABILITY_MINUS" in abilities:
         tags.append("Plus + Minus")
+    if "ABILITY_DANCER" in abilities and len(moves & DANCE_MOVES) >= 2:
+        tags.append("Dancer recital")
+        if "MOVE_DRAGON_DANCE" in moves:
+            tags.append("Dancer physical relay")
+        if moves & {"MOVE_QUIVER_DANCE", "MOVE_PETAL_DANCE", "MOVE_FIERY_DANCE"}:
+            tags.append("Dancer special relay")
+    if "MOVE_ENDEAVOR" in moves and any(
+        mon["item"] == "ITEM_FOCUS_SASH" and "MOVE_ENDEAVOR" in mon["moves"]
+        for mon in mons
+    ):
+        tags.append("Sash Endeavor lure")
+    if "ABILITY_SCHOOLING" in abilities:
+        tags.append("Schooling HP threshold")
+    if "MOVE_GUARD_SPLIT" in moves:
+        tags.append("Guard Split transfer")
+    if "MOVE_INSTRUCT" in moves and any(
+        "MOVE_TARGET_BOTH" in move_data.get(move, {}).get("target", "")
+        or "MOVE_TARGET_FOES_AND_ALLY" in move_data.get(move, {}).get("target", "")
+        for move in moves
+    ):
+        tags.append("Instruct repetition")
+    if {"MOVE_SAFEGUARD", "MOVE_SWAGGER"} <= moves:
+        tags.append("Safeguard + Swagger")
+    if "MOVE_TRICK" in moves and "ABILITY_CURSED_BODY" in abilities and any(
+        mon["item"] in CHOICE_ITEMS for mon in mons
+    ):
+        tags.append("Choice lock + Cursed Body")
     if moves & PIVOT_MOVES and ("ABILITY_INTIMIDATE" in abilities or "MOVE_FAKE_OUT" in moves):
         tags.append("pivot control")
     if len(moves & PIVOT_MOVES) >= 2:

@@ -116,6 +116,10 @@ def main() -> None:
     if route104_north != ids_in(entries, 12, 15):
         problems.append(f"Route 104 north optional coverage drifted: source={sorted(route104_north)}")
 
+    rustboro_gym = object_trainers("RustboroCity_Gym", lambda event: True) | {"TRAINER_ROXANNE_1"}
+    if rustboro_gym != ids_in(entries, 16, 19):
+        problems.append(f"Rustboro Gym coverage drifted: source={sorted(rustboro_gym)}")
+
     route103 = read(ROOT / "data/maps/Route103/scripts.inc")
     for trainer_id in entries[0]["trainer_ids"]:
         if trainer_id not in route103:

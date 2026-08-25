@@ -1076,6 +1076,526 @@
       "bespoke_ai": "Haley remains a native singles trainer. Smart switching handles Snorunt's Choice lock, type immunities, and Parting Shot; first-turn setup preference makes Yawn plausible without forcing it; HP-aware scoring improves Protect and endgame decisions. Hunger Switch and Aura Wheel type changes are native. No trainer-only move, target, or turn script is added.",
       "uniqueness": "Haley is the only early branching-evolution and changing-mind battle. None of the four families appears in Battles 1-12, and the fight uses no weather, hazard, trapping, detonation, Perish timer, item theft, or free stat setup. Haley2-4 remain separate cap-55 rematch indices: they must show Vaporeon/Gardevoir/Glalie, then Jolteon/Gallade/Froslass, then Sylveon plus both Ralts and Snorunt branches, rather than the current unrelated Arceus roster.",
       "closure": "Battle 13 is 10/10 because its story and mechanics both ask the player to choose: stay or switch, act or risk Encore, commit into a Choice lock, then track Aura Wheel's changing type. Four stage-legal Pokémon at levels 15-17 make it an 8.3/10 singles fight with broad status, type, item, priority, and switching counterplay."
+    },
+    "BATTLE_014_ROUTE_104_GINA_MIA": {
+      "guide_order": 14,
+      "trainer_ids": [
+        "TRAINER_GINA_AND_MIA_1"
+      ],
+      "status": "closed",
+      "campaign_point": "Optional twin encounter on Route 104 north after the Petalburg Woods recovery and immediately before Rustboro; either overworld twin starts the same native doubles battle",
+      "strict_cap": 14,
+      "player_state": "The player can field six cap-14 Pokémon from every land and Old Rod pool through Petalburg Woods, including the new Sprigatito, Nacli, Fuecoco, and Finizen sources. Every legal move, ability switching, the ten core held items, $1,000 ten-level Rare Candy, and a free pre-Rustboro heal are available. Bag use is disabled in battle and Mega access remains unavailable.",
+      "evolution_stage_fit": {
+        "campaign_phase": "pre-Stone youngster chapter",
+        "effective_levels": "15-17",
+        "eligible_ratio": "4/4",
+        "mature_exceptions": [],
+        "registered_showcases": [
+          "Oricorio is the deliberate rare single-stage recital centerpiece."
+        ],
+        "mega_access": false,
+        "status": "pass",
+        "reason": "Oricorio is genuinely single-stage; Axew evolves at level 38, Cutiefly at level 25, and Oddish begins a level-21 then stone-branching family. No Mega item or form appears."
+      },
+      "manual_quality": 10,
+      "manual_difficulty": 8.6,
+      "corpus_review": {
+        "reference_pool_size": 983,
+        "full_team_candidates": [
+          {
+            "source": "docs/showdown_gen9_random_doubles_30.json",
+            "sample": 22,
+            "decision": "Dancer centerpiece and multi-dance structure selected; full team rejected",
+            "reason": "The exact Oricorio plus Hisuian Lilligant pairing proves Dancer can turn a partner's setup into a synchronized act. Beartic, Lugia, Dusknoir, and Victreebel are a mature random collage, and Petilil cannot legally inherit Quiver Dance, so three legal young dance users replace that shell."
+          },
+          {
+            "source": "docs/showdown_gen9_random_doubles_30.json",
+            "sample": 20,
+            "decision": "Oricorio competitive identity selected; full team rejected",
+            "reason": "Pa'u Oricorio supplies Dancer, Quiver Dance, Revelation Dance, Air Slash, Protect, and recovery precedent, but its Trick Room, sand, and fully evolved partners do not fit Route 104."
+          },
+          {
+            "source": "docs/showdown_gen5_random_doubles_30.json",
+            "sample": 3,
+            "decision": "exact young Dragon Dance donor selected; full team rejected",
+            "reason": "Axew already appears as a Mold Breaker Dragon Dance attacker. Eviolite and reliable Dragon Claw, Poison Jab, and Protect make the donor appropriate at cap 14 without importing five unrelated partners."
+          },
+          {
+            "source": "docs/vgc_major_champion_teams.json",
+            "team": "regional-merida-2025 / regional-curitiba-2024 / regional-liverpool-2023",
+            "decision": "Dondozo and Tatsugiri core explicitly reserved for later",
+            "reason": "The champion corpus strongly supports Commander, but another Water centerpiece on Route 104 would repeat Darian and collide with next-up Fisherman Ivan. The core is preserved for a later water-route double rather than spent here."
+          }
+        ],
+        "decision": "All 983 references and the tabled concepts were reviewed. No complete team fits. One exact Dancer pairing and one exact Axew donor are rebuilt into a single Route 104 recital: every partner carries a different legal dance, so the composition remains one idea rather than two pasted competitive modules."
+      },
+      "competitive_references": [
+        {
+          "source": "docs/showdown_gen9_random_doubles_30.json",
+          "sample": 22,
+          "seed": "22,43148,34043,34075",
+          "adaptation": "Sitrus Dancer Oricorio plus a partner dance is the structural donor. Flying Gem Acrobatics lets Axew's copied Dragon Dance matter physically, while Revelation Dance lets Cutiefly's copied Quiver Dance matter specially."
+        },
+        {
+          "source": "docs/showdown_gen9_random_doubles_30.json",
+          "sample": 20,
+          "seed": "20,27310,30957,36936",
+          "adaptation": "Oricorio retains Revelation Dance, Protect, recovery, and the Dancer identity. The donor's own Quiver Dance is moved to a legal first-stage partner so the twins must preserve both halves of the combination."
+        },
+        {
+          "source": "docs/showdown_gen5_random_doubles_30.json",
+          "sample": 3,
+          "seed": "103,29237,27956,16507",
+          "adaptation": "Eviolite Mold Breaker Axew keeps the exact donor's Dragon Dance role. Dragon Claw, Poison Jab, and Protect replace Life Orb Superpower, Aqua Tail, and Outrage to make the first act readable and interruptible."
+        },
+        {
+          "source": "docs/showdown_gen9_random_doubles_30.json",
+          "sample": 22,
+          "seed": "22,43148,34043,34075",
+          "adaptation": "The mature Lilligant dance role is split legally across Focus Sash Cutiefly's Quiver Dance and Black Sludge Oddish's Petal Dance. Neither exact young species appears in the 983-team corpus, making the adaptation genuinely bespoke."
+        }
+      ],
+      "team_intent": "Flying Gem Dancer Oricorio and Eviolite Mold Breaker Axew open the recital. Axew's Dragon Dance also raises Oricorio's Attack and Speed, turning the gem-powered Acrobatics into a physical reveal; Oricorio can instead use Revelation Dance, Roost, or Protect. Focus Sash Sweet Veil Cutiefly then brings Quiver Dance, which Dancer copies into special pressure, while Black Sludge Oddish's Petal Dance makes Oricorio repeat an immediate Grass attack. Every reserve has independent STAB and protection, so breaking the centerpiece weakens the choreography without reducing three partners to dead props.",
+      "intended_counterplay": "Oricorio has a visible 4x Rock weakness and is also vulnerable to Electric, Water, and focused neutral damage; removing it ends every copied dance. Taunt, Encore, Haze, Clear Smog, phazing, Trick Room, Unaware, priority, or doubling the current dancer stops a snowball. Steel and Poison pressure Cutiefly, Ice and Fairy pressure Axew, and Fire, Flying, Ice, or Psychic pressure Oddish. Intimidate and burn blunt the Dragon Dance/Acrobatics line, while special walls blunt the Quiver/Petal line. The player may attack the centerpiece, deny the initiator, reverse speed, or outlast finite items—no exact catch or turn sequence is required.",
+      "bespoke_ai": "Gina and Mia use normal foe-aware doubles scoring, smart switching, first-turn setup awareness, and the reusable combo profile. That profile gives a contextual bonus to any FLAG_DANCE move while a living Dancer partner is present; it does not force a move, target, turn, or switch. Dancer itself, Flying Gem consumption, Sweet Veil, Black Sludge, Protect, Roost, Petal Dance lock, and every stat change remain native engine behavior.",
+      "uniqueness": "This is Verdant's only three-dance recital and the first fight whose apparent boss changes attacking category according to the partner beside it. Oricorio, Axew, Cutiefly, and Oddish do not appear in Battles 1-13. The team uses no weather, Web, Fake Out, redirection, active speed-control move, Trick Room, detonation, screen, theft, Perish timer, Power Spot, Super Fang, or Yawn module. The flower-lined Route 104 setting and two overworld twins make the synchronized choreography feel native rather than assigned globally.",
+      "closure": "Battle 14 is 10/10 because the overworld twins now fight like twins: three young Pokémon each teach one rare centerpiece a different routine, and every copied dance changes the next targeting decision. Levels 15-17, perfect spreads, four distinct items, a 4x centerpiece weakness, and broad denial, typing, speed, status, and focus-fire answers make it an 8.6/10 puzzle without a hidden forced solution."
+    },
+    "BATTLE_015_ROUTE_104_IVAN": {
+      "guide_order": 15,
+      "trainer_ids": [
+        "TRAINER_IVAN"
+      ],
+      "status": "closed",
+      "campaign_point": "Final optional talk-initiated trainer on Route 104 north, immediately before Rustboro and after the intrinsic Gina and Mia double; Ivan has no sight range and can be skipped or revisited",
+      "strict_cap": 14,
+      "player_state": "The player can bring six cap-14 Pokémon from every land and Old Rod pool through Petalburg Woods, has received the Woods heal and Exp. Share, can teach every legal move, switch legal abilities, and buy the ten core held items. Bag use is disabled and battle style is Set. Mega access remains unavailable.",
+      "evolution_stage_fit": {
+        "campaign_phase": "pre-Stone youngster and rare single-stage chapter",
+        "effective_levels": "16-20",
+        "eligible_ratio": "4/4",
+        "mature_exceptions": [],
+        "registered_showcases": [
+          "Wishiwashi is a deliberate level-20 single-stage ace because Schooling does not activate below level 20."
+        ],
+        "mega_access": false,
+        "status": "pass",
+        "reason": "Luvdisc, Stunfisk, and Wishiwashi are genuinely single-stage, while Tentacool remains the level-30 base of its family. Wishiwashi's six-level advantage unlocks a form mechanic rather than skipping an evolution, and the form collapses below one-quarter HP."
+      },
+      "manual_quality": 10,
+      "manual_difficulty": 8.9,
+      "corpus_review": {
+        "reference_pool_size": 983,
+        "full_team_candidates": [
+          {
+            "source": "docs/showdown_gen6_random_singles_30.json",
+            "sample": 12,
+            "decision": "two-member lure and sinker skeleton selected; full team rejected",
+            "reason": "This is the only random team containing both Luvdisc and Stunfisk. Their Water presentation and Ground immunity create the bait switch, while Delphox, Banette, Murkrow, and Quagsire do not belong to an early fisherman puzzle."
+          },
+          {
+            "source": "docs/showdown_gen9_random_singles_30.json",
+            "sample": 8,
+            "decision": "active Endeavor lure selected; full team rejected",
+            "reason": "Luvdisc supplies Surf, Endeavor, Substitute, and Flip Turn, but its five unrelated mature partners are discarded. Focus Sash and Ice Beam make the low-HP exchange legible without wasting the Sash on Substitute."
+          },
+          {
+            "source": "docs/showdown_gen4_random_singles_30.json / docs/showdown_gen6_random_singles_30.json",
+            "sample": "30 / 5",
+            "decision": "first-stage Grass-hook adaptation selected; both full teams rejected",
+            "reason": "Tentacruel's Sludge Bomb, Scald, Ice Beam shell and Liquid Ooze coverage identity are compressed into Eviolite Tentacool. Giga Drain replaces repeated Toxic, hazard removal, Knock Off, and Acid Spray modules."
+          },
+          {
+            "source": "docs/showdown_gen7_random_singles_30.json",
+            "sample": 14,
+            "decision": "Schooling threshold ace selected; full team rejected",
+            "reason": "Assault Vest Wishiwashi with Earthquake and Ice Beam supplies a competitive mixed Schooling form. Five unrelated fully evolved partners are rejected, and Liquidation plus U-turn replace Scald and Hidden Power Grass."
+          },
+          {
+            "source": "docs/vgc_major_champion_teams.json",
+            "team": "regional-merida-2025 / regional-curitiba-2024 / regional-liverpool-2023",
+            "decision": "Dondozo and Tatsugiri remain reserved",
+            "reason": "Commander is a genuine later doubles centerpiece, but spending it on a singles fisherman would break the mechanic, repeat Darian's Water doubles pressure, and erase the pacing break after Gina and Mia."
+          }
+        ],
+        "decision": "All 983 competitive references and three independent concept families were reviewed. The one complete team containing two chosen species supplies the central bait; three exact role donors are then adapted by hand into a four-catch fishing sequence with no imported weather, hazard, setup, trapping, Perish, screen, or repeated early-game module."
+      },
+      "competitive_references": [
+        {
+          "source": "docs/showdown_gen9_random_singles_30.json",
+          "sample": 8,
+          "seed": "8,63352,12441,54102",
+          "adaptation": "Focus Sash Soul-Heart Luvdisc keeps Surf, Endeavor, and Flip Turn. Ice Beam replaces Substitute so the Sash survives until Endeavor matters; the checked-in legal Gen 9 donor also restores Endeavor to Luvdisc's tutor compatibility."
+        },
+        {
+          "source": "docs/showdown_gen6_random_singles_30.json",
+          "sample": 12,
+          "seed": "12,29493,18613,48380",
+          "adaptation": "Leftovers Static Stunfisk keeps Discharge, Earth Power, and Scald from the exact donor. Pain Split replaces Stealth Rock so the sinker is a live HP exchange rather than another entry-hazard lesson."
+        },
+        {
+          "source": "docs/showdown_gen4_random_singles_30.json / docs/showdown_gen6_random_singles_30.json",
+          "sample": "30 / 5",
+          "seed": "30,40965,46387,22631 / 5,39595,7812,25626",
+          "adaptation": "Eviolite Liquid Ooze Tentacool combines the donors' Sludge Bomb, Scald, Ice Beam, and coverage-tank identity. Legal Giga Drain keeps it active while punishing neither side with another status lock."
+        },
+        {
+          "source": "docs/showdown_gen7_random_singles_30.json",
+          "sample": 14,
+          "seed": "14,45331,21699,45519",
+          "adaptation": "Assault Vest Schooling Wishiwashi retains Earthquake, Ice Beam, and mixed offense. Liquidation provides reliable physical Water STAB and U-turn lets smart AI reset an unfavorable catch when a reserve remains."
+        }
+      ],
+      "team_intent": "Ivan is a single-battle pacing break built as lure, sinker, hook, and school. Focus Sash Luvdisc invites an apparent easy knockout, then trades HP with Endeavor or releases into a counter through Flip Turn. Stunfisk is immune to the obvious Electric answer and can punish contact with Static while attacking both defenses and using Pain Split. Eviolite Tentacool resists the obvious Grass answer and returns Poison, Ice, Water, or Grass coverage. Level-20 Assault Vest Wishiwashi finally forms its 620-BST School, but loses that form as soon as it falls to one-quarter HP.",
+      "intended_counterplay": "Priority, Ghost immunity, Taunt, multihit attacks, or preserving a low-HP target answer the Sash-Endeavor lure. Water, Grass, Ice, strong special damage, noncontact attacks, and recovery answer Stunfisk; Ground, Psychic, Electric, and strong physical damage answer Tentacool despite Eviolite. Wishiwashi can be burned, intimidated, walled on either attacking side, hit with fixed damage or priority, or deliberately pushed below its visible one-quarter Schooling threshold. Smart switching means one Electric or Grass move is useful but never an automatic sweep; no exact catch, starter, or turn sequence is required.",
+      "bespoke_ai": "Ivan remains a native singles trainer with universal foe awareness, viability and faint checks, smart switching, and HP-aware scoring. Existing damage estimation understands Endeavor's current-HP damage, discourages it while Luvdisc has more HP, and values it below half HP; native switching can catch an Electric attack with Stunfisk or a Grass attack with Tentacool. Schooling's level-20 and one-quarter-HP transitions are native. No trainer-only move, target, switch, or turn script is added.",
+      "uniqueness": "This is Verdant's only fishing-cast singles sequence and first Schooling threshold puzzle. Luvdisc, Stunfisk, Tentacool, and Wishiwashi do not appear in Battles 1-14. It deliberately follows a doubles recital with a talk-only single and uses no rain, speed-control move, setup, hazard, trap, Perish timer, screen, redirection, detonation, item theft, dance, Choice lock, or repeated Water Spout/Shell Smash module. Dondozo and Tatsugiri remain available for a later native Commander double.",
+      "closure": "Battle 15 is 10/10 because every member embodies a different part of Ivan's fishing metaphor and every obvious counter is useful without sweeping the roster. Three stage-valid catches at levels 16-17 establish the bait, then a level-20 Schooling ace creates a severe but transparent HP-threshold finish. Four perfect spreads, distinct items, modern-legal moves, adaptive singles AI, and broad type, tempo, contact, status, priority, and threshold counterplay make it an 8.9/10 optional puzzle."
+    },
+    "BATTLE_016_RUSTBORO_GYM_JOSH": {
+      "guide_order": 16,
+      "trainer_ids": [
+        "TRAINER_JOSH"
+      ],
+      "status": "closed",
+      "campaign_point": "First sight trainer on the natural central aisle of the Rustboro Gym; Josh is bypassable through an outer lane, and the physically open pre-badge Route 116 is documented as a noncanonical ordering branch",
+      "strict_cap": 14,
+      "player_state": "The player enters with the complete cap-14 sandbox through Rustboro: six Pokémon, all legal level, TM, tutor, egg, and lineage moves, legal ability switching, core held items, healing, the Rustboro grass pool, and the optional Gothita-for-Pawniard trade. The Gym Guide supplies Fresh Water, but Bag items are disabled in battle. Mega access remains unavailable.",
+      "evolution_stage_fit": {
+        "campaign_phase": "pre-Stone fossil and mineral classroom",
+        "effective_levels": "15-17",
+        "eligible_ratio": "4/4",
+        "mature_exceptions": [],
+        "mega_access": false,
+        "status": "pass",
+        "reason": "Shuckle is genuinely single-stage; Cranidos evolves at level 30, Lileep at level 40, and Glimmet at level 35. The first Gym lesson therefore showcases two fossils, a strange single-stage rock, and a Gen 9 mineral without spending their evolved forms or any Mega."
+      },
+      "manual_quality": 10,
+      "manual_difficulty": 8.4,
+      "corpus_review": {
+        "reference_pool_size": 983,
+        "full_team_candidates": [
+          {
+            "source": "docs/showdown_gen6_random_doubles_30.json",
+            "sample": 8,
+            "decision": "strongest complete Rock candidate rejected",
+            "reason": "Crustle, Aurorus, and Tyrantrum give the team a real competitive Rock identity, but all three are mature, Crustle and Aurorus repeat early families, and Lucario, Kyurem, and Gardevoir do not form a cap-14 Gym lesson."
+          },
+          {
+            "source": "docs/showdown_gen8_random_doubles_30.json",
+            "sample": 16,
+            "decision": "exact defensive donor selected; full team rejected",
+            "reason": "Mental Herb Sturdy Shuckle with Guard Split is the precise transfer engine. Toxic, Sticky Web, and Infestation are discarded to avoid repeating residual, Web, and trapping lessons; Helping Hand, Rock Tomb, and Protect make it active after the transfer."
+          },
+          {
+            "source": "docs/showdown_champions_random_doubles_30.json / docs/showdown_gen9_random_doubles_30.json",
+            "sample": "23 / 24",
+            "decision": "Sheer Force fossil breaker selected; both full teams rejected",
+            "reason": "Both generators independently give Rampardos Choice Scarf, Sheer Force, Rock Slide, and Fire Punch. Cranidos preserves the legal young fossil and attacking identity, while Guard Split replaces the Scarf as its speed-versus-bulk tradeoff."
+          },
+          {
+            "source": "docs/showdown_gen4_random_doubles_30.json / docs/showdown_gen5_random_doubles_30.json",
+            "sample": "4 / 8",
+            "decision": "young fossil reservoir selected; both full teams rejected",
+            "reason": "Lileep supplies Giga Drain and Stockpile while the later Cradily donor confirms Storm Drain and Stockpile. Eviolite Lileep combines those legal traits without importing a level-40 evolution or either unrelated full team."
+          },
+          {
+            "source": "docs/smogon_gen4_9_ou_uu_nu_sample_teams.json",
+            "team": "gen9ou samples 1 and 2",
+            "decision": "Toxic Debris special pressure selected; both full teams rejected",
+            "reason": "Both OU samples use fast special Glimmora with Toxic Debris, Power Gem or Sludge Bomb. Focus Sash Glimmet keeps that mineral identity, while legal Rock Polish replaces mature-only Earth Power, Mortal Spin, Meteor Beam, and the unrelated OU partners."
+          }
+        ],
+        "decision": "All 983 references and three independent bespoke concepts were reviewed. No complete team is stage-correct or sufficiently unique. One exact Guard Split donor is combined with three role-faithful young adaptations so the battle teaches a single geology lesson: defenses can be transferred, type counters can be redirected, and striking a mineral can change the field."
+      },
+      "competitive_references": [
+        {
+          "source": "docs/showdown_gen8_random_doubles_30.json",
+          "sample": 16,
+          "seed": "16,61169,24785,42658",
+          "adaptation": "Mental Herb Sturdy Shuckle keeps Guard Split exactly. Helping Hand, Rock Tomb, and Protect replace Toxic, Sticky Web, and Infestation so the defensive donor still contributes after lending bulk."
+        },
+        {
+          "source": "docs/showdown_champions_random_doubles_30.json / docs/showdown_gen9_random_doubles_30.json",
+          "sample": "23 / 24",
+          "seed": "23,51067,35586,65412 / 24,58986,37129,31214",
+          "adaptation": "Level-17 Sheer Force Cranidos retains the two independent Rampardos donors' Rock Slide and Fire Punch. Zen Headbutt and Protect replace Head Smash, Superpower, Stomping Tantrum, and the Choice lock; Sitrus Berry makes the received defenses matter without hiding an immunity."
+        },
+        {
+          "source": "docs/showdown_gen4_random_doubles_30.json / docs/showdown_gen5_random_doubles_30.json",
+          "sample": "4 / 8",
+          "seed": "104,37156,29499,47844 / 108,3297,35671,42122",
+          "adaptation": "Eviolite Storm Drain Lileep retains Giga Drain and Stockpile from the young donor and Storm Drain plus Stockpile from the mature donor. Ancient Power and Earth Power give legal dual coverage rather than another hazard slot."
+        },
+        {
+          "source": "docs/smogon_gen4_9_ou_uu_nu_sample_teams.json",
+          "team": "gen9ou sample 1 / sample 2",
+          "adaptation": "Focus Sash Toxic Debris Glimmet retains the OU leads' fast special identity, Power Gem, and Sludge Bomb. Rock Polish is its legal first-stage speed plan and Protect preserves normal doubles interaction."
+        }
+      ],
+      "team_intent": "Mental Herb Sturdy Shuckle and Sitrus Sheer Force Cranidos open the Gym's geology lab. Guard Split averages Shuckle's enormous defenses with Cranidos's frailty, turning the fossil breaker into a temporary tank while making Shuckle much easier to remove; Helping Hand and Rock Tomb keep the donor useful. Eviolite Storm Drain Lileep catches the obvious Water attack and can convert it into Giga Drain, Ancient Power, or Earth Power pressure while Stockpile creates a separate denial target. Focus Sash Toxic Debris Glimmet supplies fast special Rock and Poison pressure, can use Rock Polish, and punishes careless physical damage with Toxic Spikes.",
+      "intended_counterplay": "Immediate focus fire, Encore, Disable, phazing, or a second Taunt after the one-use Mental Herb can stop Guard Split; after it resolves, Shuckle has surrendered much of its own bulk. Burn, Intimidate, Fighting, Ground, Grass, Steel, Water, speed control, Wide Guard, or attacking Cranidos before the transfer answer the breaker. Storm Drain blocks lazy Water targeting but not Grass, Fighting, Ice, Bug, or Steel pressure on Lileep. Special attacks avoid Toxic Debris; priority, multihit attacks, Ground, Psychic, Steel, or focused damage remove Sash Glimmet. The player may deny the donor, race the recipient, exploit the weakened donor, route around Water, or manage the triggered hazard—there is no required catch or move order.",
+      "bespoke_ai": "Josh uses native doubles guards, foe and partner awareness, smart switching, first-turn setup, combo, and speed-control profiles. Guard Split scoring now recognizes a partner target only while Shuckle's combined defenses exceed that partner's; the combo profile gives that useful transfer a moderate bonus, and the condition becomes false after the stats equalize so it is not repeated. Rock Tomb, Helping Hand, Stockpile, Rock Polish, Storm Drain, Sturdy, Sheer Force, Toxic Debris, Sash, Eviolite, and Sitrus behavior remain native. No move, target, turn, or switch is forced.",
+      "uniqueness": "This is Verdant's only defense-transfer geology lab and the first Rustboro Gym lesson. Shuckle, Cranidos, Lileep, and Glimmet do not appear in Battles 1-15. It uses no weather, Trick Room, Tailwind, Fake Out, redirection, dance, detonation, Perish timer, active trap, screen, item theft, Choice lock, friendly damage, Weakness Policy, Schooling, or prior Water Spout, Shell Smash, Power Spot, or Guard Split module. Toxic Spikes arise reactively from Toxic Debris rather than from another scripted hazard lead.",
+      "closure": "Battle 16 is 10/10 because Josh's dialogue, four young mineral species, and actual turn decisions all teach the same lesson: apparent frailty can be redistributed. Levels 15-17, perfect spreads, four distinct items, mixed physical and special pressure, Water redirection, speed control, a one-use Taunt answer, a triggered hazard, and broad denial, type, status, priority, spread, and focus-fire counterplay make it an 8.4/10 optional double without a hidden forced solution."
+    },
+    "BATTLE_017_RUSTBORO_GYM_TOMMY": {
+      "guide_order": 17,
+      "trainer_ids": [
+        "TRAINER_TOMMY"
+      ],
+      "status": "closed",
+      "campaign_point": "Optional west-side Youngster detour after the Gym's central-aisle Josh encounter; Tommy faces left with a three-tile sight range and can be bypassed or fought before Josh only by deliberately taking the outer path",
+      "strict_cap": 14,
+      "player_state": "The player retains the full cap-14 Rustboro preparation sandbox: six Pokémon, every legal move and ability option, inexpensive core held items and leveling, healing, Rustboro encounters and trade, Set style, and no in-battle Bag. Mega access remains unavailable.",
+      "evolution_stage_fit": {
+        "campaign_phase": "pre-Stone classroom and young fossil chapter",
+        "effective_levels": "15-17",
+        "eligible_ratio": "4/4",
+        "mature_exceptions": [],
+        "mega_access": false,
+        "status": "pass",
+        "reason": "Oranguru is genuinely single-stage; Tyrunt evolves at level 39 in daytime, Binacle at level 39, and Nosepass remains the unevolved base of its Thunder Stone family. No evolved form or Mega is borrowed from a later chapter."
+      },
+      "manual_quality": 10,
+      "manual_difficulty": 8.8,
+      "corpus_review": {
+        "reference_pool_size": 983,
+        "full_team_candidates": [
+          {
+            "source": "docs/showdown_gen8_random_doubles_30.json",
+            "sample": 12,
+            "decision": "exact Instruct teacher selected; full team rejected",
+            "reason": "Sitrus Oranguru with Psychic, Instruct, and Protect supplies the complete repeat-after-me shell, but Groudon, Celebi, Vanilluxe, Electivire, and Heatmor are a mature random collage rather than a first-Gym lesson."
+          },
+          {
+            "source": "docs/showdown_gen6_random_doubles_30.json",
+            "sample": 27,
+            "decision": "young fossil attacker selected; full team rejected",
+            "reason": "Life Orb Strong Jaw Tyrantrum supplies Rock Slide, Dragon Claw, and Fire Fang. Level-17 Tyrunt keeps that exact legal attacking identity without importing a level-39 evolution or its five unrelated partners."
+          },
+          {
+            "source": "docs/showdown_gen7_random_doubles_30.json",
+            "sample": 2,
+            "decision": "young defensive rock selected; full team rejected",
+            "reason": "Probopass provides a Sturdy doubles-support precedent with Power Gem and protection. Eviolite Nosepass keeps the base family and replaces repeated Helping Hand with Thunder Wave, Wide Guard, and Earth Power."
+          },
+          {
+            "source": "docs/showdown_champions_random_doubles_30.json / docs/showdown_gen6_random_doubles_30.json",
+            "sample": "21 / 24",
+            "decision": "Tough Claws reserve selected; both full teams rejected",
+            "reason": "Both Barbaracle donors use Tough Claws Rock and Water offense. Binacle keeps Razor Shell, Cross Chop, Rock Slide, and Protect but deliberately rejects their repeated Shell Smash and White Herb module."
+          }
+        ],
+        "decision": "All 983 references and the tabled alternatives were reviewed. No complete team contains more than one selected family or fits cap 14. Four role-faithful donors are rebuilt into one Trainer's School idea: the teacher repeats a young fossil's spread attack, then two independent young rocks test whether the player overcommitted to that first answer."
+      },
+      "competitive_references": [
+        {
+          "source": "docs/showdown_gen8_random_doubles_30.json",
+          "sample": 12,
+          "seed": "12,29493,18613,48380",
+          "adaptation": "Sitrus Inner Focus Oranguru keeps Psychic, Instruct, and Protect exactly. Foul Play replaces Focus Blast, giving the slow teacher an independent answer to physical setup without adding another inaccurate move."
+        },
+        {
+          "source": "docs/showdown_gen6_random_doubles_30.json",
+          "sample": 27,
+          "seed": "27,17208,41758,59690",
+          "adaptation": "Life Orb Strong Jaw Tyrunt inherits Tyrantrum's Rock Slide, Dragon Claw, Fire Fang, and fast physical spread. Protect replaces Ice Fang so Instruct is interruptible and the fossil retains normal doubles counterplay."
+        },
+        {
+          "source": "docs/showdown_gen7_random_doubles_30.json",
+          "sample": 2,
+          "seed": "2,15838,3183,62685",
+          "adaptation": "Eviolite Sturdy Nosepass inherits Probopass's bulky Power Gem support identity. Wide Guard, Thunder Wave, and Earth Power give the base form legal defensive tempo, speed control, and coverage without repeating Josh's Helping Hand."
+        },
+        {
+          "source": "docs/showdown_champions_random_doubles_30.json / docs/showdown_gen6_random_doubles_30.json",
+          "sample": "21 / 24",
+          "seed": "21,35229,32500,2738 / 24,58986,37129,31214",
+          "adaptation": "Expert Belt Tough Claws Binacle keeps Barbaracle's physical Water and Rock role. Legal Razor Shell and Cross Chop provide contact-boosted coverage; Rock Slide and Protect retain doubles interaction without a second setup sweeper."
+        }
+      ],
+      "team_intent": "Sitrus Inner Focus Oranguru and Life Orb Strong Jaw Tyrunt open Tommy's repeat-after-me lesson. Tyrunt's invested Speed lets it choose Rock Slide before slower Oranguru; Instruct can then repeat that spread move immediately, while Psychic, Foul Play, Dragon Claw, Fire Fang, and both Protects keep either lead functional when the repetition is denied. Eviolite Sturdy Nosepass adds Wide Guard and Thunder Wave so blindly answering spread with more spread is unsafe. Expert Belt Tough Claws Binacle closes with physical Water, Fighting, and Rock coverage rather than another setup module.",
+      "intended_counterplay": "Taunt, Disable, Encore, Imprison, sleep, paralysis, speed reversal, or removing either half stops Instruct; Dark, Bug, and Ghost pressure Oranguru, while Fighting, Ground, Ice, Steel, Dragon, and Fairy pressure Tyrunt. Wide Guard, Protect, Rock resistance, Intimidate, burn, screens, or ordinary focus fire contain the repeated Rock Slide without requiring a single species. Fighting, Ground, Grass, Steel, and Water pressure Nosepass, while Electric, Grass, Ground, Fighting, and strong neutral damage answer Binacle. The player may break the teacher, break the pupil, reverse their action order, guard the spread move, or out-position the reserves.",
+      "bespoke_ai": "Tommy uses the native doubles guard, foe and partner awareness, smart switching, combo, and speed-control profiles. Existing partner scoring already permits Instruct when the chosen partner move is spread; the combo profile now adds a contextual bonus only when a living partner has actually selected a both-foes or foes-and-ally move. It does not force Instruct, Rock Slide, a target, a turn, or a switch. Wide Guard, Strong Jaw, Tough Claws, Sturdy, Life Orb, Eviolite, Sitrus, Thunder Wave, and Protect remain native.",
+      "uniqueness": "This is Verdant's only repeat-after-me battle and its only early team whose main threat depends on preserving action order between a teacher and pupil. Oranguru, Tyrunt, Nosepass, and Binacle do not appear in Battles 1-16. It uses no weather, terrain, Trick Room, Tailwind, Fake Out, redirection, dance, detonation, Perish timer, trap, screen, item theft, Choice lock, friendly damage, defense transfer, Toxic Debris, Schooling, or prior Water Spout, Shell Smash, Power Spot, or Guard Split module.",
+      "closure": "Battle 17 is 10/10 because Tommy's school dialogue and battle logic are the same idea: Tyrunt demonstrates a move, Oranguru makes it repeat, and the reserves punish a one-note response. Four stage-valid Pokémon at levels 15-17, perfect spreads, distinct items, mixed support and offense, a clear action-order dependency, and broad denial, type, status, speed, spread-guard, item, and focus-fire counterplay make it an 8.8/10 optional double without a forced solution."
+    },
+    "BATTLE_018_RUSTBORO_GYM_MARC": {
+      "guide_order": 18,
+      "trainer_ids": [
+        "TRAINER_MARC"
+      ],
+      "status": "closed",
+      "campaign_point": "Optional west-side Hiker beyond Tommy and immediately before Roxanne; Marc is sight-triggered but bypassable and deliberately returns the Gym to singles pacing after two consecutive doubles lessons",
+      "strict_cap": 14,
+      "player_state": "The player still has the full cap-14 Rustboro sandbox: six prepared Pokémon, every legal move and ability choice, core held items, healing, Rustboro encounters and trade, Set style, disabled battle Bag, and no Mega access.",
+      "evolution_stage_fit": {
+        "campaign_phase": "pre-Stone strata and fossil chapter",
+        "effective_levels": "15-17",
+        "eligible_ratio": "4/4",
+        "mature_exceptions": [],
+        "registered_showcases": [
+          "Aerodactyl is the deliberate rare single-stage fossil closer."
+        ],
+        "mega_access": false,
+        "status": "pass",
+        "reason": "Shieldon evolves at level 30, Woobat by friendship, and Galarian Corsola at level 38; Aerodactyl is genuinely single-stage. The fight uses no later evolution or Mega while still ending on a rare fossil."
+      },
+      "manual_quality": 10,
+      "manual_difficulty": 8.2,
+      "corpus_review": {
+        "reference_pool_size": 983,
+        "full_team_candidates": [
+          {
+            "source": "docs/showdown_gen5_random_doubles_30.json",
+            "sample": 17,
+            "decision": "Choice lock plus sharp-stone structure selected; full team rejected",
+            "reason": "The team contains two Choice Scarf Trick users and two Stealth Rock users, proving the switch-tax structure. Deino, Golett, Grumpig, Rotom-Heat, Magneton, and Gligar do not form one cap-14 Hiker story, so their roles are compressed into Shieldon and Woobat."
+          },
+          {
+            "source": "docs/showdown_gen8_random_singles_30.json",
+            "sample": 28,
+            "decision": "exact cursed wall selected; full team rejected",
+            "reason": "Eviolite Cursed Body Galarian Corsola with Haze and Strength Sap is exact. Stealth Rock is moved to the opening Shieldon, while Will-O-Wisp and Hex give Corsola an active sequence without importing five mature partners."
+          },
+          {
+            "source": "docs/smogon_gen4_9_ou_uu_nu_sample_teams.json",
+            "team": "gen8nu sample 4, dd aero spikes",
+            "decision": "hazard-to-fossil closing structure selected; full team rejected",
+            "reason": "The sample explicitly builds Spikes pressure into Jolly Unnerve Aerodactyl. Marc keeps the hazard-to-fast-fossil progression but uses a legal four-attack Life Orb cleaner instead of Dragon Dance, Roost, and five unrelated mature partners."
+          },
+          {
+            "source": "docs/showdown_gen4_random_singles_30.json",
+            "sample": 29,
+            "decision": "young Choice Scarf Trick precedent selected; full team rejected",
+            "reason": "Choice Scarf Meditite proves a first-stage Trick lead can be an active attacker. Timid Woobat replaces the inaccurate or purely physical donor line with dual STAB and U-turn."
+          }
+        ],
+        "decision": "All 983 references and two alternate bespoke concepts were reviewed. No complete team contains more than one selected family. The final hand-built order is deterministic: Shieldon establishes the layer, Woobat changes the player's commitment, Corsola makes that commitment dangerous, and Aerodactyl cashes in the accumulated switch tax."
+      },
+      "competitive_references": [
+        {
+          "source": "docs/showdown_gen5_random_doubles_30.json",
+          "sample": 17,
+          "seed": "117,9033,49558,62015",
+          "adaptation": "Rocky Helmet Sturdy Shieldon combines the donor team's Stealth Rock role with guaranteed first-turn setup scoring. Choice Scarf Unaware Woobat combines its two Trick users, then adds U-turn, Psychic, and Air Slash so it remains useful after the exchange."
+        },
+        {
+          "source": "docs/showdown_gen8_random_singles_30.json",
+          "sample": 28,
+          "seed": "28,25127,43301,25492",
+          "adaptation": "Eviolite Cursed Body Corsola-Galar keeps Haze and Strength Sap exactly. Will-O-Wisp plus Hex replace its duplicate Stealth Rock and Night Shade roles, allowing the middle layer to punish physical pressure and exploit its own status."
+        },
+        {
+          "source": "docs/smogon_gen4_9_ou_uu_nu_sample_teams.json",
+          "team": "gen8nu sample 4, dd aero spikes / gen7nu sample 3, Psychium Z Gallade",
+          "adaptation": "Both Smogon samples use fast Jolly Unnerve Aerodactyl after team support. Life Orb Stone Edge and Earthquake are exact role moves; legal Dual Wingbeat and Aqua Tail provide multihit and coverage without importing setup or a Choice lock."
+        },
+        {
+          "source": "docs/showdown_gen4_random_singles_30.json",
+          "sample": 29,
+          "seed": "29,33046,44844,56829",
+          "adaptation": "The first-stage Choice Scarf Meditite donor validates early Trick as active offense. Woobat's higher Speed, dual special STAB, U-turn, and Unaware make Marc's version readable and independently useful."
+        }
+      ],
+      "team_intent": "Rocky Helmet Sturdy Shieldon opens the strata by establishing Stealth Rock on global turn zero, while Metal Burst, Rock Tomb, and Iron Head punish a careless hit. Choice Scarf Unaware Woobat then Tricks a move lock onto the player or pivots with U-turn while retaining Psychic and Air Slash. Eviolite Cursed Body Galarian Corsola can disable that locked move, lower Attack and heal with Strength Sap, burn into Hex, or erase boosts with Haze, making a switch through the rocks attractive but costly. Level-17 Life Orb Unnerve Aerodactyl closes with fast Rock, Ground, Flying multihit, and Water coverage.",
+      "intended_counterplay": "Taunt, Magic Bounce, multihit attacks, Mold Breaker, status, hazard removal, or attacking without contact limit Shieldon's Sturdy setup and Rocky Helmet. Knock Off, Sticky Hold, an itemless target, Protect scouting, Dark or Electric pressure, or accepting and exploiting the known Choice lock answer Woobat. Taunt, Knock Off, special Dark or Ghost attacks, Toxic, Heal Block, or strong special focus break Corsola; Haze also prevents it from rewarding a setup-only plan. Water, Electric, Ice, Rock, Steel, priority, burn, Intimidate, or preserving a fast revenge killer answer Aerodactyl. No one move or catch solves all four layers.",
+      "bespoke_ai": "Marc remains a native singles trainer with smart switching, first-turn setup, and HP-aware profiles. Setup scoring makes lead Shieldon's Stealth Rock plausible only on global turn zero; native Trick logic values exchanging a Choice Scarf and rejects Sticky Hold or otherwise invalid targets. Native HP and viability checks understand Strength Sap, Will-O-Wisp, Hex, Haze, Metal Burst, U-turn, Cursed Body, Sturdy, Rocky Helmet, Eviolite, and Life Orb. No move, switch, item exchange, or turn is forced.",
+      "uniqueness": "This is Verdant's only shifting-strata singles battle and first authored sequence in which a Choice lock can collide with Cursed Body across an entry hazard. Shieldon, Woobat, Galarian Corsola, and Aerodactyl do not appear in Battles 1-17. It uses no weather, terrain, Trick Room, Tailwind, Instruct, Guard Split, dance, detonation, Perish timer, active trap, screen, redirection, friendly damage, Weakness Policy, Schooling, or repeated early setup sweeper; Stealth Rock is a deterministic layer supporting a switch puzzle rather than another generic hazard lead.",
+      "closure": "Battle 18 is 10/10 because Marc's geological layers are literal battle layers: sharp stones, a stolen commitment, a disabled locked move, then a rare fossil closer. Four stage-valid Pokémon at levels 15-17, perfect spreads, four distinct items, reliable sequencing, mixed offense and control, and broad item, status, hazard, type, contact, priority, and tempo counterplay make it an 8.2/10 singles pacing fight without a forced solution."
+    },
+    "BATTLE_019_RUSTBORO_GYM_ROXANNE": {
+      "guide_order": 19,
+      "trainer_ids": [
+        "TRAINER_ROXANNE_1"
+      ],
+      "status": "closed",
+      "campaign_point": "Required Stone Badge boss after the three optional Rustboro Gym lessons and final encounter under the opening strict cap of 14; victory raises the cap to 20 and starts the Devon Goods story",
+      "strict_cap": 14,
+      "player_state": "The player can prepare six cap-14 Pokémon from every pool through Rustboro, teach every legal move, change legal abilities, and buy the core held items. The Gym Guide supplies five Fresh Waters for recovery between fights, but Set style and the Challenge battle-Bag ban remain active. The player has no Mega Bracelet and Roxanne uses no Mega.",
+      "evolution_stage_fit": {
+        "campaign_phase": "pre-Stone final examination",
+        "effective_levels": "17-19",
+        "eligible_ratio": "6/6",
+        "mature_exceptions": [],
+        "registered_showcases": [
+          "Regirock is Roxanne's deliberate level-19 legendary mineral ace."
+        ],
+        "mega_access": false,
+        "status": "pass",
+        "reason": "Klefki, Maractus, and Regirock are genuinely single-stage; Rockruff evolves at level 25, Mudbray at level 30, and Bonsly by level-up while knowing Mimic. The six-Pokémon boss therefore closes the young-Pokémon chapter without a premature final evolution or Mega."
+      },
+      "manual_quality": 10,
+      "manual_difficulty": 10.0,
+      "corpus_review": {
+        "reference_pool_size": 983,
+        "full_team_candidates": [
+          {
+            "source": "docs/showdown_champions_random_doubles_30.json",
+            "sample": 5,
+            "decision": "strongest complete Rock-support candidate rejected",
+            "reason": "Light Clay Prankster Klefki and Mega Aerodactyl provide a legitimate screens-and-speed Rock shell, but Aerodactyl now closes Battle 18, Tyranitar and Mega Aerodactyl are chapter-inappropriate, and the remaining mature collage does not form one first-Gym examination."
+          },
+          {
+            "source": "docs/showdown_gen6_random_doubles_30.json",
+            "sample": 12,
+            "decision": "exact Safeguard instructor selected; full team rejected",
+            "reason": "Prankster Klefki carries Safeguard exactly, proving the protection half of the exam. Its unrelated mature partners are rejected, and Swagger, Foul Play, Protect, and Mental Herb turn the one move into a complete readable boss plan."
+          },
+          {
+            "source": "docs/showdown_champions_random_doubles_30.json",
+            "sample": "6 / 8",
+            "decision": "young heavy physical recipient selected; both full teams rejected",
+            "reason": "Two independent Champions generators give Sitrus Mudsdale High Horsepower plus Heavy Slam, Stone Edge, Body Press, or Stealth Rock. Own Tempo Mudbray de-evolves that competitive role and becomes an alternate confusion-proof Swagger recipient."
+          },
+          {
+            "source": "docs/showdown_gen8_random_doubles_30.json / docs/smogon_gen4_9_ou_uu_nu_sample_teams.json",
+            "sample": "1 / gen5nu sample 1",
+            "decision": "rare mineral ace selected; both full teams rejected",
+            "reason": "Both sources establish Regirock as a bulky Clear Body Rock Slide and Drain Punch presence. Expert Belt coverage and no Protect make the level-19 version a frightening but interactable final exam rather than a stall endpoint."
+          },
+          {
+            "source": "tabled bespoke alternatives",
+            "team": "applied hardness lab / Gravity planetarium",
+            "decision": "both rejected",
+            "reason": "Beat Up plus Justified and Aqua Jet plus Steam Engine split the boss into two activation modules, while Gravity plus Hypnosis makes a difficulty-10 fight too accuracy-dependent. Safeguard plus Swagger is one visible, deterministic lesson with broader denial."
+          }
+        ],
+        "decision": "All 983 competitive references and three complete boss concepts were reviewed. No reference contains even two of the six selected species. The final team is hand-authored around one protected-confidence rule, then uses four distinct young or single-stage recipients and one legendary ace to test whether the player can remove boosts, break protection, redirect tempo, and preserve multiple type answers."
+      },
+      "competitive_references": [
+        {
+          "source": "docs/showdown_gen6_random_doubles_30.json",
+          "sample": 12,
+          "seed": "12,29493,18613,48380",
+          "adaptation": "Mental Herb Prankster Klefki retains exact Safeguard. Swagger creates the exam's protected Attack boost, Foul Play punishes opposing physical setup, and Protect keeps the support piece inside ordinary doubles counterplay."
+        },
+        {
+          "source": "docs/showdown_champions_random_doubles_30.json",
+          "sample": "6 / 8",
+          "seed": "6,47514,9355,56963 / 8,63352,12441,54102",
+          "adaptation": "Level-18 Sitrus Own Tempo Mudbray retains both Mudsdale donors' High Horsepower and Heavy Slam physical role. Rock Slide replaces Stone Edge for spread pressure and Protect replaces their hazard or Body Press slot."
+        },
+        {
+          "source": "docs/showdown_gen8_random_doubles_30.json",
+          "sample": 1,
+          "seed": "1,7919,1640,31348",
+          "adaptation": "Regirock keeps the donor's Rock Slide and bruising body identity. Expert Belt Drain Punch, Thunder Punch, and Iron Head convert the ace into broad, legible coverage with no recovery or Protect."
+        },
+        {
+          "source": "docs/smogon_gen4_9_ou_uu_nu_sample_teams.json",
+          "team": "gen5nu sample 1, SD Buck Spikes",
+          "adaptation": "Clear Body Regirock retains the sample's Rock Slide and Drain Punch. Roxanne trades its passive Leftovers and Stealth Rock roles for Expert Belt coverage because the boss must close aggressively and reward type-aware play."
+        }
+      ],
+      "team_intent": "Mental Herb Prankster Klefki and Eviolite Vital Spirit Rockruff open the protected confidence exam. Klefki can establish Safeguard before most disruption, then Swagger a physical ally for +2 Attack without confusion; Foul Play and Protect prevent a passive support lock. Rockruff supplies fast Rock Slide, Psychic Fangs, Sucker Punch, and Protect. Sitrus Own Tempo Mudbray can accept Swagger even when Safeguard is denied, while High Horsepower and Heavy Slam diversify pressure. Life Orb Rock Head Bonsly turns Double-Edge into recoil-free force, Assault Vest Water Absorb Maractus blocks single-target Water autopilot, and level-19 Expert Belt Clear Body Regirock closes with four aggressive coverage attacks and no Protect.",
+      "intended_counterplay": "Focus fire, Fake Out into Rockruff, Dark-type Prankster immunity, Encore, Imprison, or a second Taunt after Mental Herb can break Klefki's sequence. Haze, Clear Smog, Unaware, Psych Up, Spectral Thief, Reflect, Charm, Intimidate, Wide Guard, Protect, phazing, item removal, or stalling Safeguard all answer boosted Rock Slide without prescribing one species. Water, Grass, Fighting, Ground, Steel, Ice, Psychic, Flying, Bug, Poison, priority, and special pressure divide naturally across Rockruff, Mudbray, Bonsly, and Maractus. Regirock has five common weaknesses, no recovery, and no Protect; Clear Body blocks Intimidate, but burn's damage penalty, ordinary status damage, and special type pressure still work. No one catch or move order solves the six.",
+      "bespoke_ai": "Roxanne uses foe and partner awareness, smart switching, first-turn setup, combo, and speed-control profiles. Safeguard is now recognized as first-turn setup. Confusion eligibility includes side Safeguard; beneficial partner Swagger is exempt from the generic bad-confusion penalty when Safeguard protects a physical recipient, and the combo profile moderately favors Safeguard before Swagger and Swagger only beside Safeguard or Own Tempo. Those conditions do not force a move, target, turn, or switch. Prankster, Mental Herb, Foul Play, Own Tempo, Rock Head, Water Absorb, Clear Body, Sucker Punch, Rock Slide, Protect, and every held item remain native.",
+      "uniqueness": "This is Verdant's only protected-confidence examination and the only opening boss with six entirely stage-valid young or single-stage Pokémon. Klefki, Rockruff, Mudbray, Bonsly, Maractus, and Regirock do not appear in Battles 1-18. It uses no weather, terrain, Trick Room, Tailwind, Instruct, Guard Split, hazard, trap, Perish timer, dance, detonation, redirection, friendly damage, Weakness Policy, Schooling, or Mega. The lone legendary appears as an aggressive mineral ace rather than a stack of unrelated boss legends.",
+      "reward_logic": "The Expert Belt reward remains correct. Receiving the discovery-only item permanently unlocks unlimited Expert Belts through the native battle-item shop exactly when all-legal move access makes super-effective coverage meaningful. The Stone Badge still raises the cap and unlocks Cut and Honey progression; stale internal TM39 and GiveRockTomb identifiers are implementation names only, not player-facing misinformation.",
+      "closure": "Battle 19 is a 10/10-quality and 10/10-difficulty boss because every source-facing layer agrees: Roxanne teaches protection, demonstrates it with a deterministic boost engine, tests boost control and spread defense across five distinct recipients, then reveals one broadly answerable level-19 legendary ace. Six perfect, nonrepeating, stage-valid Pokémon at levels 17-19, six distinct items, coherent native AI, truthful hints, a meaningful reward, and wide status, type, tempo, spread, priority, item, and focus-fire counterplay make it brutally hard without reducing victory to one hidden solution."
     }
   }
 }

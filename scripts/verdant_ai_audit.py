@@ -43,6 +43,12 @@ def main() -> None:
         "[11] = AI_HelpPartner",
         "effect == EFFECT_FOLLOW_ME && (partnerChoosingSetup || PartnerHasSetupMove(partner))",
         "score += partnerChoosingSetup ? 12 : 6",
+        "partnerAbility == ABILITY_DANCER && TestMoveFlags(move, FLAG_DANCE)",
+        "effect == EFFECT_GUARD_SPLIT",
+        "effect == EFFECT_INSTRUCT",
+        "effect == EFFECT_SAFEGUARD",
+        "effect == EFFECT_SWAGGER",
+        "> gBattleMons[battlerDef].defense + gBattleMons[battlerDef].spDefense",
     )
     for token in scoring_tokens:
         if token not in ai_main:
@@ -86,7 +92,11 @@ def main() -> None:
     for trainer_id in custom.AI_PROFILES["AI_FLAG_PERISH_TRAP"]:
         if "Perish trap" not in teams[trainer_id]["synergy_tags"]:
             problems.append(f"{trainer_id}: Perish profile has no Perish-trap team")
-    combo_tags = {"Beat Up + Justified", "Frost Breath + Anger Point", "Surf ally activation", "Neutralizing Gas + Regigigas"}
+    combo_tags = {
+        "Beat Up + Justified", "Frost Breath + Anger Point", "Surf ally activation",
+        "Neutralizing Gas + Regigigas", "Dancer recital", "Guard Split transfer", "Instruct repetition",
+        "Safeguard + Swagger",
+    }
     for trainer_id in custom.AI_PROFILES["AI_FLAG_COMBO_SETUP"]:
         moves = {move for mon in teams[trainer_id]["mons"] for move in mon["moves"]}
         if not (combo_tags & set(teams[trainer_id]["synergy_tags"]) or moves & {"MOVE_BEAT_UP", "MOVE_FROST_BREATH", "MOVE_SURF", "MOVE_SKILL_SWAP"}):

@@ -34,6 +34,10 @@ Stone Badge and before the player can obtain the Mega Bracelet:
 | `BATTLE_006_ROUTE_104_BILLY` | `SPECIES_DITTO` | `rare-single-stage` | Imposter Ditto is the deliberate strange-footprint reveal in Billy's young shoreline singles puzzle. |
 | `BATTLE_011_PETALBURG_WOODS_JAMES` | `SPECIES_CELEBI` | `legendary-single-stage` | Celebi is James's deliberate forest-spirit reveal and the mythical center of Verdant's first Perish-trap lesson. |
 | `BATTLE_012_ROUTE_104_WINSTON` | `SPECIES_STONJOURNER` | `rare-single-stage` | Stonjourner is Winston's expensive display piece and introduces the doubles-only Power Spot ability. |
+| `BATTLE_014_ROUTE_104_GINA_MIA` | `SPECIES_ORICORIO` | `rare-single-stage` | Oricorio is the twins' recital centerpiece; three young partners reveal Dancer through distinct legal dance moves. |
+| `BATTLE_015_ROUTE_104_IVAN` | `SPECIES_WISHIWASHI` | `rare-single-stage` | Ivan's level-20 ace is the first legal Schooling reveal; its extraordinary form has the visible counterplay of collapsing at one-quarter HP. |
+| `BATTLE_018_RUSTBORO_GYM_MARC` | `SPECIES_AERODACTYL` | `rare-single-stage` | Aerodactyl is Marc's fast fossil closer after Shieldon, Woobat, and Corsola turn switching itself into the puzzle. |
+| `BATTLE_019_RUSTBORO_GYM_ROXANNE` | `SPECIES_REGIROCK` | `legendary-single-stage` | Regirock is the first Gym Leader's lone legendary mineral ace; five common weaknesses and no Protect keep the level-19 finish broadly answerable. |
 
 The rebuilt opening encounters now pass this gate. Any future failure is a
 real progression regression: either the party must be rewritten or the mature

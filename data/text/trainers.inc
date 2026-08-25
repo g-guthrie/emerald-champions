@@ -254,15 +254,18 @@ Route103_Text_MarcosPostBattle: @ 8295246
 	.string "Heh, maybe I should turn pro.$"
 
 Route104_Text_GinaIntro: @ 82952BB
-	.string "Gina: Okay, let's battle with our\n"
-	.string "Pokémon!$"
+	.string "Gina: We practiced every step\n"
+	.string "together. Can you break our rhythm?$"
 
 Route104_Text_GinaDefeat: @ 82952E6
-	.string "Gina: Losing upsets me!$"
+	.string "Gina: You stopped the whole recital!$"
 
 Route104_Text_GinaPostBattle: @ 82952FE
-	.string "Gina: You are strong!\n"
-	.string "We have to train lots more!$"
+	.string "Gina: Axew's Dragon Dance and\n"
+	.string "Cutiefly's Quiver Dance both give\l"
+	.string "Oricorio the same extra step.\p"
+	.string "But if Oricorio falls, every partner\n"
+	.string "still has its own part to play.$"
 
 Route104_Text_GinaNotEnoughMons: @ 8295330
 	.string "Gina: Oh? Only one Pokémon?\n"
@@ -271,36 +274,37 @@ Route104_Text_GinaNotEnoughMons: @ 8295330
 	.string "be lonesome. That's not nice.$"
 
 Route104_Text_MiaIntro: @ 82953AF
-	.string "Mia: We are twins, so we battle\n"
-	.string "Pokémon together.$"
+	.string "Mia: Every partner knows its part.\n"
+	.string "Watch who follows each dance!$"
 
 Route104_Text_MiaDefeat: @ 82953E1
-	.string "Mia: We battled together, but we\n"
-	.string "both lost…$"
+	.string "Mia: You kept changing the tempo…$"
 
 Route104_Text_MiaPostBattle: @ 829540D
-	.string "Mia: We will train our Pokémon more\n"
-	.string "and be strong like you.$"
+	.string "Mia: Taunt or focused attacks can\n"
+	.string "stop a dance before it spreads.\p"
+	.string "We need a new routine for Trainers\n"
+	.string "who notice our centerpiece!$"
 
 Route104_Text_MiaNotEnoughMons: @ 8295449
 	.string "Mia: You want to battle with us?\p"
-	.string "It's a big no-no if you don't have two\n"
-	.string "Pokémon with you.\l"
+	.string "It's a big no-no if you don't have\n"
+	.string "two healthy Pokémon with you.\l"
 	.string "We're too strong for you!$"
 
 Route104_Text_IvanIntro: @ 82954BD
-	.string "Why keep it a secret?\n"
-	.string "I'm the Water Pokémon expert!\p"
-	.string "Huh?\n"
-	.string "You don't know me?$"
+	.string "Every catch needs the right lure.\n"
+	.string "Will you take my bait?$"
 
 Route104_Text_IvanDefeat: @ 8295509
-	.string "I thought I wasn't too bad, if I may\n"
-	.string "say so, but I guess not… Bleah…$"
+	.string "You read every cast…$"
 
 Route104_Text_IvanPostBattle: @ 829554E
-	.string "I got too into fishing.\n"
-	.string "I forgot I had to raise my Pokémon…$"
+	.string "Luvdisc is my lure, and Stunfisk\n"
+	.string "punishes an Electric bite.\p"
+	.string "Tentacool hooks Grass Pokémon.\n"
+	.string "Wishiwashi schools at level 20,\l"
+	.string "but scatters below one-quarter HP.$"
 
 Route104_Text_BillyIntro: @ 829558A
 	.string "I found strange tracks in the sand…\n"

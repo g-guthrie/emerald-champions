@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "scope": "Canonical full-clear encounter order from the first trainer battle through Route 104 north. This frontier grows continuously until every campaign, optional, rematch, boss, and postgame trainer encounter in the 810-definition guide is assigned exactly once.",
-  "ordering_rule": "Use the earliest natural first-playthrough path. Optional trainers are never dropped. Mutually exclusive gender, starter, or partner branches of one physical encounter are grouped under one battle index. Where open terrain permits reversal, one order is selected and the ambiguity is documented.",
+  "scope": "Canonical full-clear encounter order from the first trainer battle through the west entrance of Route 116 after the Stone Badge. This frontier grows continuously until every campaign, optional, rematch, boss, and postgame trainer encounter in the 810-definition guide is assigned exactly once.",
+  "ordering_rule": "Use the earliest natural first-playthrough path. Optional trainers are never dropped. Mutually exclusive gender, starter, or partner branches of one physical encounter are grouped under one battle index. Where open terrain or an open side route permits reversal, one order is selected and the ambiguity is documented. Rustboro Gym is canonicalized before the already-accessible Route 116 so each cap-relative encounter has one authored first-reach state.",
   "source_definition_count": 810,
   "entries": [
     {
@@ -133,7 +133,7 @@
       "encounter_id": "BATTLE_014_ROUTE_104_GINA_MIA",
       "location": "Route104",
       "category": "optional double",
-      "status": "next",
+      "status": "closed",
       "trainer_ids": ["TRAINER_GINA_AND_MIA_1"],
       "access_note": "Two overworld twins share one doubles encounter and therefore one index."
     },
@@ -142,9 +142,54 @@
       "encounter_id": "BATTLE_015_ROUTE_104_IVAN",
       "location": "Route104",
       "category": "optional talk",
-      "status": "queued",
+      "status": "closed",
       "trainer_ids": ["TRAINER_IVAN"],
       "access_note": "Talk-initiated northern fisherman before Rustboro; fully optional."
+    },
+    {
+      "index": 16,
+      "encounter_id": "BATTLE_016_RUSTBORO_GYM_JOSH",
+      "location": "RustboroCity_Gym",
+      "category": "optional double",
+      "status": "closed",
+      "trainer_ids": ["TRAINER_JOSH"],
+      "access_note": "First central-aisle Gym Trainer on the natural south-entry path; sight-triggered but bypassable through an outer lane. Route 116 is physically open, but Gym-first is the canonical cap-14 full-clear branch."
+    },
+    {
+      "index": 17,
+      "encounter_id": "BATTLE_017_RUSTBORO_GYM_TOMMY",
+      "location": "RustboroCity_Gym",
+      "category": "optional double",
+      "status": "closed",
+      "trainer_ids": ["TRAINER_TOMMY"],
+      "access_note": "Optional west-side Youngster detour inside the Gym; indexed before the deeper west-side Hiker."
+    },
+    {
+      "index": 18,
+      "encounter_id": "BATTLE_018_RUSTBORO_GYM_MARC",
+      "location": "RustboroCity_Gym",
+      "category": "optional single",
+      "status": "closed",
+      "trainer_ids": ["TRAINER_MARC"],
+      "access_note": "Optional west-side Hiker and deliberate singles pacing battle before the Leader."
+    },
+    {
+      "index": 19,
+      "encounter_id": "BATTLE_019_RUSTBORO_GYM_ROXANNE",
+      "location": "RustboroCity_Gym",
+      "category": "required boss double",
+      "status": "closed",
+      "trainer_ids": ["TRAINER_ROXANNE_1"],
+      "access_note": "Stone Badge boss and final cap-14 encounter; Route 116 follows at the new cap of 20 in the canonical order."
+    },
+    {
+      "index": 20,
+      "encounter_id": "BATTLE_020_ROUTE_116_JOEY",
+      "location": "Route116",
+      "category": "optional double",
+      "status": "next",
+      "trainer_ids": ["TRAINER_JOEY"],
+      "access_note": "First west-entry sight trainer on Route 116. The route was physically accessible before Roxanne, but Gym-first canon fixes Joey's first authored state at the new strict cap of 20."
     }
   ]
 }

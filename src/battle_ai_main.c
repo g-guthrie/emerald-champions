@@ -1254,6 +1254,15 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         case EFFECT_CONFUSE:
         case EFFECT_SWAGGER:
         case EFFECT_FLATTER:
+            if (IsTargetingPartner(battlerAtk, battlerDef)
+             && (gSideStatuses[GetBattlerSide(battlerDef)] & SIDE_STATUS_SAFEGUARD)
+             && ((gBattleMoves[move].effect == EFFECT_SWAGGER
+               && HasMoveWithSplit(battlerDef, SPLIT_PHYSICAL)
+               && BattlerStatCanRise(battlerDef, AI_DATA->defAbility, STAT_ATK))
+              || (gBattleMoves[move].effect == EFFECT_FLATTER
+               && HasMoveWithSplit(battlerDef, SPLIT_SPECIAL)
+               && BattlerStatCanRise(battlerDef, AI_DATA->defAbility, STAT_SPATK))))
+                break;
             if (!AI_CanConfuse(battlerAtk, battlerDef, AI_DATA->defAbility, AI_DATA->battlerAtkPartner, move, AI_DATA->partnerMove))
                 score -= 20;
             break;
@@ -2115,7 +2124,12 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         case EFFECT_GUARD_SPLIT:
             if (IsTargetingPartner(battlerAtk, battlerDef))
             {
-                score -= 10;
+                // A defensive donor can deliberately lend bulk to a frail
+                // ally. Once both defenses are equal, repeating the move is
+                // again a bad play.
+                if (gBattleMons[battlerAtk].defense + gBattleMons[battlerAtk].spDefense
+                 <= gBattleMons[battlerDef].defense + gBattleMons[battlerDef].spDefense)
+                    score -= 10;
             }
             else
             {
@@ -2890,6 +2904,13 @@ static s16 AI_DoubleBattle(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                     }
                 }
                 break;
+            case EFFECT_GUARD_SPLIT:
+                if (gBattleMons[battlerAtk].defense + gBattleMons[battlerAtk].spDefense
+                  > gBattleMons[battlerAtkPartner].defense + gBattleMons[battlerAtkPartner].spDefense)
+                {
+                    RETURN_SCORE_PLUS(2);
+                }
+                break;
             case EFFECT_AFTER_YOU:
                 if (GetWhoStrikesFirst(battlerAtkPartner, FOE(battlerAtkPartner), TRUE) == 1    // opponent mon 1 goes before partner
                   || GetWhoStrikesFirst(battlerAtkPartner, BATTLE_PARTNER(FOE(battlerAtkPartner)), TRUE) == 1)  // opponent mon 2 goes before partner
@@ -3058,12 +3079,37 @@ static s16 AI_ComboSetup(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     if (AI_DATA->partnerMove != MOVE_NONE && gBattleMoves[AI_DATA->partnerMove].effect == EFFECT_HELPING_HAND)
         score += IS_MOVE_STATUS(move) ? -12 : 7;
 
+    // Dancer teams are partner-combos even though the dance targets the user
+    // or a foe. Reward the initiating dance before the ally-targeting gate.
+    if (partnerAbility == ABILITY_DANCER && TestMoveFlags(move, FLAG_DANCE))
+        score += 12;
+
+    if (effect == EFFECT_SAFEGUARD
+      && HasMoveEffect(battlerAtk, EFFECT_SWAGGER)
+      && !(gSideStatuses[GetBattlerSide(battlerAtk)] & SIDE_STATUS_SAFEGUARD)
+      && HasMoveWithSplit(BATTLE_PARTNER(battlerAtk), SPLIT_PHYSICAL))
+        score += 12;
+
     if (!IsTargetingPartner(battlerAtk, battlerDef))
         return score;
 
     if (effect == EFFECT_BEAT_UP && partnerAbility == ABILITY_JUSTIFIED)
         score += 15;
     else if (effect == EFFECT_ALWAYS_CRIT && partnerAbility == ABILITY_ANGER_POINT)
+        score += 15;
+    else if (effect == EFFECT_GUARD_SPLIT
+          && gBattleMons[battlerAtk].defense + gBattleMons[battlerAtk].spDefense
+           > gBattleMons[battlerDef].defense + gBattleMons[battlerDef].spDefense)
+        score += 12;
+    else if (effect == EFFECT_INSTRUCT
+          && AI_DATA->partnerMove != MOVE_NONE
+          && gBattleMoves[AI_DATA->partnerMove].target & (MOVE_TARGET_BOTH | MOVE_TARGET_FOES_AND_ALLY))
+        score += 12;
+    else if (effect == EFFECT_SWAGGER
+          && HasMoveWithSplit(battlerDef, SPLIT_PHYSICAL)
+          && BattlerStatCanRise(battlerDef, partnerAbility, STAT_ATK)
+          && ((gSideStatuses[GetBattlerSide(battlerAtk)] & SIDE_STATUS_SAFEGUARD)
+           || partnerAbility == ABILITY_OWN_TEMPO))
         score += 15;
     else if (move == MOVE_SURF && (partnerAbility == ABILITY_STEAM_ENGINE
                                || partnerAbility == ABILITY_WATER_COMPACTION
@@ -4979,6 +5025,7 @@ static s16 AI_SetupFirstTurn(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     case EFFECT_ACCURACY_DOWN_2:
     case EFFECT_EVASION_DOWN_2:
     case EFFECT_REFLECT:
+    case EFFECT_SAFEGUARD:
     case EFFECT_POISON:
     case EFFECT_PARALYZE:
     case EFFECT_SUBSTITUTE:

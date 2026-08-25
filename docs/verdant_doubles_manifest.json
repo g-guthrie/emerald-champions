@@ -2331,10 +2331,10 @@
     "TRAINER_ROXANNE_1": {
       "format": "double",
       "target_size": 6,
-      "archetype": "Sand and spread",
-      "difficulty": 76,
-      "partner_interaction": false,
-      "level_offset": -3,
+      "archetype": "Protected confidence exam",
+      "difficulty": 100,
+      "partner_interaction": true,
+      "level_offset": 3,
       "location": "Rustboro City Gym"
     },
     "TRAINER_BRAWLY_1": {
@@ -2826,19 +2826,19 @@
     "TRAINER_JOSH": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Sand and spread",
-      "difficulty": 32,
-      "partner_interaction": false,
-      "level_offset": -4,
+      "archetype": "Guard Split geology lab",
+      "difficulty": 84,
+      "partner_interaction": true,
+      "level_offset": 1,
       "location": "Rustboro City Gym"
     },
     "TRAINER_TOMMY": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Sand and spread",
-      "difficulty": 31,
-      "partner_interaction": false,
-      "level_offset": -3,
+      "archetype": "Repeat-after-me Instruct lesson",
+      "difficulty": 88,
+      "partner_interaction": true,
+      "level_offset": 1,
       "location": "Rustboro City Gym"
     },
     "TRAINER_JOEY": {
@@ -2978,11 +2978,11 @@
     },
     "TRAINER_IVAN": {
       "format": "single",
-      "target_size": 3,
-      "archetype": "Rain pressure",
-      "difficulty": 22,
+      "target_size": 4,
+      "archetype": "Lure, sinker, hook, and Schooling threshold",
+      "difficulty": 89,
       "partner_interaction": false,
-      "level_offset": -3,
+      "level_offset": 2,
       "location": "Route 104"
     },
     "TRAINER_CLAUDE": {
@@ -4293,10 +4293,10 @@
     "TRAINER_GINA_AND_MIA_1": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 21,
+      "archetype": "Three-dance recital",
+      "difficulty": 86,
       "partner_interaction": false,
-      "level_offset": -3,
+      "level_offset": 2,
       "location": "Route 104"
     },
     "TRAINER_MIU_AND_YUKI": {
@@ -5084,11 +5084,11 @@
     },
     "TRAINER_MARC": {
       "format": "single",
-      "target_size": 3,
-      "archetype": "Sand and spread",
-      "difficulty": 38,
+      "target_size": 4,
+      "archetype": "Shifting-strata switch tax",
+      "difficulty": 82,
       "partner_interaction": false,
-      "level_offset": -3,
+      "level_offset": 1,
       "location": "Rustboro City Gym"
     },
     "TRAINER_BRENDEN": {
@@ -7704,91 +7704,91 @@
       "battle": "Roxanne",
       "trainer_id": "TRAINER_ROXANNE_1",
       "format": "doubles",
-      "identity": "Sand-room geology exam",
+      "identity": "Protected confidence exam",
       "team": [
         {
-          "species": "SPECIES_DIANCIE",
-          "item": "ITEM_BABIRI_BERRY",
-          "ability": "ABILITY_CLEAR_BODY",
+          "species": "SPECIES_KLEFKI",
+          "item": "ITEM_MENTAL_HERB",
+          "ability": "ABILITY_PRANKSTER",
           "ability_slot": 0,
           "spread": "SPREAD_31_IV_HP_DEF_SPDEF_SASSY",
           "moves": [
-            "MOVE_TRICK_ROOM",
-            "MOVE_DAZZLING_GLEAM",
-            "MOVE_ROCK_SLIDE",
+            "MOVE_SAFEGUARD",
+            "MOVE_SWAGGER",
+            "MOVE_FOUL_PLAY",
             "MOVE_PROTECT"
           ],
-          "role": "lead mode setter"
+          "role": "lead protection and confidence setter"
         },
         {
-          "species": "SPECIES_GIGALITH",
-          "item": "ITEM_SMOOTH_ROCK",
-          "ability": "ABILITY_SAND_STREAM",
+          "species": "SPECIES_ROCKRUFF",
+          "item": "ITEM_EVIOLITE",
+          "ability": "ABILITY_VITAL_SPIRIT",
+          "ability_slot": 1,
+          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+          "moves": [
+            "MOVE_ROCK_SLIDE",
+            "MOVE_PSYCHIC_FANGS",
+            "MOVE_SUCKER_PUNCH",
+            "MOVE_PROTECT"
+          ],
+          "role": "lead Swagger recipient and fast pressure"
+        },
+        {
+          "species": "SPECIES_MUDBRAY",
+          "item": "ITEM_SITRUS_BERRY",
+          "ability": "ABILITY_OWN_TEMPO",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+          "moves": [
+            "MOVE_HIGH_HORSEPOWER",
+            "MOVE_ROCK_SLIDE",
+            "MOVE_HEAVY_SLAM",
+            "MOVE_PROTECT"
+          ],
+          "role": "confusion-proof Swagger recipient"
+        },
+        {
+          "species": "SPECIES_BONSLY",
+          "item": "ITEM_LIFE_ORB",
+          "ability": "ABILITY_ROCK_HEAD",
           "ability_slot": 1,
           "spread": "SPREAD_31_IV_HP_ATK_BRAVE",
           "moves": [
             "MOVE_ROCK_SLIDE",
-            "MOVE_BODY_PRESS",
-            "MOVE_WIDE_GUARD",
-            "MOVE_PROTECT"
+            "MOVE_DOUBLE_EDGE",
+            "MOVE_LOW_KICK",
+            "MOVE_SUCKER_PUNCH"
           ],
-          "role": "weather and spread guard"
+          "role": "recoil-free physical reserve"
         },
         {
-          "species": "SPECIES_TYRUNT",
-          "item": "ITEM_EVIOLITE",
-          "ability": "ABILITY_STRONG_JAW",
-          "ability_slot": 0,
-          "spread": "SPREAD_31_IV_HP_ATK_BRAVE",
-          "moves": [
-            "MOVE_ROCK_SLIDE",
-            "MOVE_DRAGON_CLAW",
-            "MOVE_ICE_FANG",
-            "MOVE_PROTECT"
-          ],
-          "role": "compact physical pressure"
-        },
-        {
-          "species": "SPECIES_ARCHEN",
-          "item": "ITEM_FLYING_GEM",
-          "ability": "ABILITY_DEFEATIST",
+          "species": "SPECIES_MARACTUS",
+          "item": "ITEM_ASSAULT_VEST",
+          "ability": "ABILITY_WATER_ABSORB",
           "ability_slot": 0,
           "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
           "moves": [
-            "MOVE_ACROBATICS",
-            "MOVE_ROCK_SLIDE",
-            "MOVE_TAILWIND",
-            "MOVE_PROTECT"
+            "MOVE_SEED_BOMB",
+            "MOVE_SUCKER_PUNCH",
+            "MOVE_DRAIN_PUNCH",
+            "MOVE_POISON_JAB"
           ],
-          "role": "fast-mode setter"
-        },
-        {
-          "species": "SPECIES_CRADILY",
-          "item": "ITEM_SITRUS_BERRY",
-          "ability": "ABILITY_STORM_DRAIN",
-          "ability_slot": 2,
-          "spread": "SPREAD_31_IV_HP_SPATK_QUIET",
-          "moves": [
-            "MOVE_GIGA_DRAIN",
-            "MOVE_ANCIENT_POWER",
-            "MOVE_RECOVER",
-            "MOVE_PROTECT"
-          ],
-          "role": "Water deterrent"
+          "role": "Water deterrent and physical coverage"
         },
         {
           "species": "SPECIES_REGIROCK",
-          "item": "ITEM_WEAKNESS_POLICY",
+          "item": "ITEM_EXPERT_BELT",
           "ability": "ABILITY_CLEAR_BODY",
           "ability_slot": 0,
-          "spread": "SPREAD_31_IV_HP_ATK_BRAVE",
+          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
           "moves": [
             "MOVE_ROCK_SLIDE",
             "MOVE_DRAIN_PUNCH",
-            "MOVE_HEAVY_SLAM",
-            "MOVE_PROTECT"
+            "MOVE_THUNDER_PUNCH",
+            "MOVE_IRON_HEAD"
           ],
-          "role": "rare ace"
+          "role": "rare coverage ace"
         }
       ]
     },

@@ -4,7 +4,7 @@ This report evaluates the current source as the battle engine executes it. Score
 
 ## Roster summary
 
-- 854 trainer records and 3398 party slots
+- 854 trainer records and 3400 party slots
 - 574 doubles and 280 intentional singles
 - Median quality score: 61/100
 - Blocking findings: 0
@@ -25,7 +25,6 @@ All blocking and major findings are clear. These are the lowest-scoring intentio
 | --- | --- | --- | ---: | ---: | --- | --- |
 | TRAINER_PAUL | Route 110 Trick House Puzzle 2 | single | 30 | -3.0 | singles pacing and coverage | none |
 | TRAINER_JACLYN | Route 110 | single | 30 | -2.0 | singles pacing and coverage | none |
-| TRAINER_PETE | Route 103 | single | 30 | -2.0 | singles pacing and coverage | none |
 | TRAINER_BERNIE_2 | Route 114 | single | 32 | -3.0 | singles pacing and coverage | none |
 | TRAINER_CHANDLER | Route 109 | single | 32 | -1.5 | singles pacing and coverage | none |
 | TRAINER_HUEY | Route 109 | single | 32 | -3.0 | singles pacing and coverage | none |
@@ -34,6 +33,7 @@ All blocking and major findings are clear. These are the lowest-scoring intentio
 | TRAINER_RHETT | Route 103 | single | 34 | -3.0 | singles pacing and coverage | none |
 | TRAINER_CAROL | Route 112 | single | 35 | -3.0 | singles pacing and coverage | none |
 | TRAINER_LARRY | Route 112 | single | 35 | -2.0 | singles pacing and coverage | none |
+| TRAINER_PETE | Route 103 | single | 35 | -2.0 | Schooling HP threshold | none |
 | TRAINER_COBY | Route 113 | single | 35 | -3.0 | singles pacing and coverage | none |
 | TRAINER_ROSE_1 | Route 118 | single | 36 | -1.33 | singles pacing and coverage | none |
 | TRAINER_MARCOS | Route 103 | single | 36 | -2.0 | singles pacing and coverage | none |
@@ -62,7 +62,6 @@ All blocking and major findings are clear. These are the lowest-scoring intentio
 | TRAINER_DUSTY_2 | Route 111 | single | 38 | -3.0 | singles pacing and coverage | none |
 | TRAINER_NAOMI | SSTidal Corridor | SSTidal Rooms | single | 38 | -2.0 | singles pacing and coverage | none |
 | TRAINER_VIOLET | Route 123 | single | 38 | -2.0 | singles pacing and coverage | none |
-| TRAINER_RODNEY | Route 130 | single | 38 | -2.0 | Earthquake immunity | none |
 | TRAINER_JONAH | Route 127 | single | 38 | -2.0 | singles pacing and coverage | none |
 | TRAINER_MISSY | Route 108 | single | 38 | -1.5 | singles pacing and coverage | none |
 | TRAINER_CHARLIE | Abandoned Ship Corridors 1 F | single | 38 | -2.0 | singles pacing and coverage | none |
@@ -114,15 +113,16 @@ All blocking and major findings are clear. These are the lowest-scoring intentio
 | TRAINER_KIYO | Route 132 | single | 41 | -3.0 | Fighting pressure | none |
 | TRAINER_ATSUSHI | Mt Pyre 4 F | single | 41 | -3.0 | singles pacing and coverage | none |
 | TRAINER_JEFFREY_1 | Route 120 | single | 41 | -3.0 | Bug pressure | none |
-| TRAINER_COLIN | Route 120 | single | 41 | -3.0 | Flying pressure | none |
 | TRAINER_CEDRIC | Mt Pyre 6 F | single | 41 | -3.0 | Psychic pressure | none |
 | TRAINER_BRYANT | Route 112 | single | 41 | -2.0 | singles pacing and coverage | none |
 | TRAINER_DEMETRIUS | Abandoned Ship Rooms 1 F | single | 41 | -2.0 | singles pacing and coverage | none |
-| TRAINER_NOLAN | Route 114 | double | 41 | -3.0 | singles pacing and coverage | none |
 | TRAINER_ELLIOT_1 | Route 106 | single | 41 | -3.67 | Water pressure | none |
 | TRAINER_BENJAMIN_1 | Route 110 | single | 42 | -2.0 | Electric pressure | none |
 | TRAINER_SAWYER_2 | Mt Chimney | single | 42 | -2.0 | singles pacing and coverage | none |
 | TRAINER_GRUNT_AQUA_HIDEOUT_4 | Aqua Hideout B 2 F | double | 42 | -2.0 | singles pacing and coverage | none |
+| TRAINER_SPENCER | Route 124 | single | 42 | -2.0 | Tailwind | none |
+| TRAINER_FERNANDO_1 | Route 123 | single | 42 | -2.0 | singles pacing and coverage | none |
+| TRAINER_ISAIAH_2 | Route 128 | single | 42 | -2.0 | singles pacing and coverage | none |
 
 ## Repeated rematch rosters
 

@@ -21,6 +21,12 @@ SINGLE_LANGUAGE = re.compile(
 )
 
 STRATEGY_CUES = {
+    "Route104_Text_IvanPostBattle": "schools at level 20",
+    "Route104_Text_MiaIntro": "follows each dance",
+    "RustboroCity_Gym_Text_JoshPostBattle": "Guard Split lends",
+    "RustboroCity_Gym_Text_TommyPostBattle": "Instruct makes my partner repeat",
+    "RustboroCity_Gym_Text_MarcPostBattle": "Cursed Body seals that one move",
+    "RustboroCity_Gym_Text_RoxannePostBattle": "Safeguard prevents confusion",
     "Route107_Text_BethIntro": "Rain falls first",
     "Route112_Text_ShaylaIntro": "Sunlight, flowers",
     "Route114_Text_LennyIntro": "sandstorm carries thunder",
