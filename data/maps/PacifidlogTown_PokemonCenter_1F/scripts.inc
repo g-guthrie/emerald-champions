@@ -65,14 +65,14 @@ PacifidlogTown_PokemonCenter_1F_Text_AncestorsLivedOnBoats: @ 820356F
 	.string "something.$"
 
 PacifidlogTown_PokemonCenter_1F_Text_GiveExplosion: @ 82C7CFA
-	.string "I don't intend to be going nowhere\n"
-	.string "fast in the sticks like this forever.\p"
-	.string "You watch me, I'll get out to the city\n"
+	.string "I don't plan to stay out here in\n"
+	.string "the sticks forever.\p"
+	.string "Watch me! I'll get to the city\n"
 	.string "and become a huge hit.\p"
 	.string "Seriously, I'm going to cause\n"
 	.string "a huge Explosion of popularity!\p"
-	.string "Since you overheard that, I'll happily\n"
-	.string "give you this TM for Explosion!$"
+	.string "Since you overheard that, I'll give\n"
+	.string "you this Room Service!$"
 
 PacifidlogTown_PokemonCenter_1F_Text_HaveExplosion: @ 82C7E7A
 	.string "For a long time, I've taught Pokémon\n"

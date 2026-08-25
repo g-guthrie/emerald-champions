@@ -467,15 +467,13 @@ PKMN_Center_Move_Tutor_Text_Explanation:
 	.string "are required. Choose a Pokémon!$"
 
 PKMN_Center_Move_Tutor_Text_AllTMsAvailable:
-	.string "I've added every TM to your TM Case!\p"
-	.string "They're reusable, so you can teach any\n"
-	.string "compatible Pokémon whenever you like.$"
+	.string "Every legal move is available here.\p"
+	.string "Bring me any compatible Pokémon and\n"
+	.string "I'll teach it whenever you like.$"
 
 PKMN_Center_Move_Tutor_Text_NoBadgeNoMoves:
-	.string "I'm sorry, but there are no moves I\n"
-	.string "can teach you right now.\p"
-	.string "Come back when you have at least\n"
-	.string "one Gym Badge.$"
+	.string "I'm sorry, but that Pokémon has no\n"
+	.string "other legal moves I can teach.$"
 
 PKMN_Center_Move_Tutor_Text_WhichSetofMoves:
 	.string "Which set of moves would you\n"

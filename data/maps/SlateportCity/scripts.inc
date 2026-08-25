@@ -623,12 +623,12 @@ SlateportCity_EventScript_PowerTMClerk:: @ 81DD1D8
 
 	.align 2
 SlateportCity_Pokemart_PowerTMs: @ 81DD1F0
-	.2byte ITEM_TM57_CHARGE_BEAM
-	.2byte ITEM_TM67_RECYCLE	
-	.2byte ITEM_TM73_THUNDER_WAVE
-	.2byte ITEM_TM78_BULLDOZE
-	.2byte ITEM_TM82_DRAGON_TAIL
-	.2byte ITEM_TM88_LOW_SWEEP
+	.2byte ITEM_SOFT_SAND
+	.2byte ITEM_HARD_STONE
+	.2byte ITEM_BLACK_GLASSES
+	.2byte ITEM_BLACK_BELT
+	.2byte ITEM_MAGNET
+	.2byte ITEM_MYSTIC_WATER
 	.2byte ITEM_NONE
 	release
 	end

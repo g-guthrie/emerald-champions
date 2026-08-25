@@ -32,12 +32,12 @@ SootopolisCity_House1_EventScript_Kecleon:: @ 822698E
 SootopolisCity_House1_Text_DevelopedThisTM: @ 82269A1
 	.string "For thirty years I've remained in\n"
 	.string "Sootopolis honing my skills.\p"
-	.string "I developed a sword-dancing TM.\n"
+	.string "I perfected this Scope Lens.\n"
 	.string "I bequeath it to you!$"
 
 SootopolisCity_House1_Text_ExplainBrickBreak: @ 8226A13
-	.string "TM75 contains Swords Dance! It's a move\n"
-	.string "so horrible that I can't describe it.$"
+	.string "A Scope Lens raises the holder's\n"
+	.string "critical-hit ratio. Use it well!$"
 
 SootopolisCity_House1_Text_Kecleon: @ 8226A60
 	.string "Kecleon: Puu puhyaah.$"

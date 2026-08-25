@@ -53,18 +53,16 @@ VerdanturfTown_Mart_EventScript_ReceivedTM66::
 	end
 
 VerdanturfTown_Mart_Text_SlowPokemon:
-	.string "Do you think slow Pokémon ever get\n"
-	.string "tired of taking the first hit in every\l"
-	.string "battle?\p"
-	.string "I think they'd be itching for a little\n"
+	.string "Do you think slow Pokémon get tired\n"
+	.string "of always taking the first hit?\p"
+	.string "They'd be itching for a little\n"
 	.string "payback!\p"
-	.string "If you've got any slow Pokémon, give\n"
-	.string "this TM a try.$"
+	.string "If you've got a sturdy Pokémon, give\n"
+	.string "this Weakness Policy a try.$"
 
 VerdanturfTown_Mart_Text_HaveTM66:
-	.string "TM66 contains Payback!\p"
-	.string "It's an attack that doubles in power\n"
-	.string "if the user moves after its target.$"
+	.string "A Weakness Policy sharply raises\n"
+	.string "both offenses after a hard hit.$"
 
 VerdanturfTown_Mart_Text_XSpecialIsCrucial: @ 82025D5
 	.string "For any Pokémon match, X Special\n"

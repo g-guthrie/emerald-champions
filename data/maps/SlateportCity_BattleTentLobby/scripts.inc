@@ -288,10 +288,9 @@ SlateportCity_BattleTentLobby_Text_CouldntFindMonForMe: @ 8208B4E
 	.string "Just, you know, take this!$"
 
 SlateportCity_BattleTentLobby_Text_ExplainTorment: @ 8208C5C
-	.string "That's, like, TM41, you know?\n"
-	.string "Hey, it's Torment, you hearing me?\p"
-	.string "Like, it won't let the other guy\n"
-	.string "use the same move twice in a row, see?\p"
+	.string "That's, like, a Red Card, you know?\p"
+	.string "If its holder gets hit, the attacker\n"
+	.string "gets dragged out of battle, see?\p"
 	.string "Hey, now, you listen here, like,\n"
 	.string "I'm not laying a torment on you!$"
 

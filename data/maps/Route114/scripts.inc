@@ -188,12 +188,12 @@ Route114_EventScript_Kai:: @ 81F27F2
 Route114_Text_AllMyMonDoesIsRoarTakeThis: @ 81F2809
 	.string "All my Pokémon does is Roar…\n"
 	.string "No one dares to come near me…\p"
-	.string "Sigh… If you would, please take\n"
-	.string "this TM away…$"
+	.string "Sigh… If you would, please take this\n"
+	.string "Eject Pack away…$"
 
 Route114_Text_ExplainRoar: @ 81F2872
-	.string "TM05 contains Roar.\n"
-	.string "A Roar sends Pokémon scurrying.$"
+	.string "An Eject Pack switches its holder\n"
+	.string "after one of its stats is lowered.$"
 
 Route114_Text_Poochyena: @ 81F28A6
 	.string "Bow! Bowwow!$"

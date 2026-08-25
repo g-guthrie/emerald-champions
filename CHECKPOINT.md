@@ -11,6 +11,7 @@ This repository is a source-only checkpoint for Verdant Inclement Emerald. It in
 - Gym and League rematches use fixed authored formats rather than format/legend selectors.
 - Seventeen remaining weak Pokémon/forms receive restrained stat corrections.
 - Encounter upgrades provide high-value team-building options throughout the campaign.
+- A source-backed 30-question audit guards progression, incentives, dialogue, menus, AI, and encounter logic.
 
 ## Reproducible checks
 
@@ -18,6 +19,7 @@ This repository is a source-only checkpoint for Verdant Inclement Emerald. It in
 python3 scripts/verdant_doubles_conversion.py --check
 python3 scripts/verdant_underused_balance.py --check
 python3 scripts/verdant_encounter_upgrade.py --check
+python3 scripts/verdant_logical_audit.py
 python3 scripts/verify_verdant.py
 ```
 

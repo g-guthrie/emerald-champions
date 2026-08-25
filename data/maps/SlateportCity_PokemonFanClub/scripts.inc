@@ -288,8 +288,8 @@ SlateportCity_PokemonFanClub_Text_GiveTM58:
 	.string "Check out my Azumarill! It's pretty\n"
 	.string "sturdy, right? Almost as sturdy as\l"
 	.string "a Roggenrola with Sturdy!\p"
-	.string "Your Pokémon can be sturdy too,\n"
-	.string "if you use this TM!$"
+	.string "Your Pokémon may endure a knockout\n"
+	.string "if it holds this Focus Band!$"
 
 SlateportCity_PokemonFanClub_Text_HaveTM58:
 	.string "Endure allows a Pokémon to withstand\n"

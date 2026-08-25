@@ -66,13 +66,12 @@ FallarborTown_Mart_Text_FreeSample:
 	.string "… … … … … … … …\p"
 	.string "Hmm? You're on an adventure?\n"
 	.string "You don't need drain cleaner?\p"
-	.string "Well, how about you take this TM\n"
+	.string "Well, how about this Muscle Band\n"
 	.string "instead?$"
 
 FallarborTown_Mart_Text_HaveTM60:
-	.string "TM60 is also Drain Punch, but it's\n"
-	.string "a punch that drains HP instead.\p"
-	.string "Please don't use it on any drains!$"
+	.string "A Muscle Band strengthens physical\n"
+	.string "moves. Don't use it on drains!$"
 
 FallarborTown_Mart_Text_DecidingSkittyEvolve: @ 81FFD19
 	.string "I'm having a hard time deciding if I\n"

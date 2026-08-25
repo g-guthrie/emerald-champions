@@ -41,12 +41,11 @@ RustboroCity_CuttersHouse_Text_ExplainCut: @ 8215D33
 	.string "Any Pokémon that's learned Cut can\n"
 	.string "chop down thin trees if the Trainer\l"
 	.string "has earned the Stone Badge.\p"
-	.string "And, like a TM, an HM can be used\n"
-	.string "more than once.$"
+	.string "The Pokémon Center move teacher can\n"
+	.string "also reteach HM moves at any time.$"
 
 RustboroCity_CuttersHouse_Text_DadHelpedClearLandOfTrees: @ 8215E39
 	.string "When they were expanding the city of\n"
 	.string "Rustboro, my dad helped out.\p"
 	.string "He made his Pokémon use Cut to clear\n"
 	.string "the land of trees.$"
-

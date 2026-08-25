@@ -21,6 +21,11 @@ subprocess.run(
     cwd=ROOT,
     check=True,
 )
+subprocess.run(
+    [sys.executable, str(ROOT / "scripts/verdant_logical_audit.py")],
+    cwd=ROOT,
+    check=True,
+)
 
 
 def read(path: str) -> str:

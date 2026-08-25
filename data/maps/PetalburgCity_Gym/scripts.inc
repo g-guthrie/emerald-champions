@@ -1488,11 +1488,10 @@ PetalburgCity_Gym_Text_TakeThis:
 	.string "sure you can use it correctly.$"
 
 PetalburgCity_Gym_Text_ExplainFacade: @ 8206254
-	.string "Dad: TM42 contains Facade.\p"
-	.string "It doubles in power if the Pokémon\n"
-	.string "is poisoned, paralyzed, or burned.\p"
-	.string "It might be able to turn a bad\n"
-	.string "situation into an advantage.$"
+	.string "Dad: This Toxic Orb poisons its\n"
+	.string "holder.\p"
+	.string "Abilities like Guts and moves like\n"
+	.string "Facade turn that risk into an edge.$"
 
 PetalburgCity_Gym_Text_DadHappyAndSad: @ 82062FB
 	.string "Dad: As the Gym Leader, I can't\n"

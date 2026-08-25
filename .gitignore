@@ -24,6 +24,8 @@ tools/agbcc
 *.ld
 *.bat
 *.dump
+*.pyc
+__pycache__/
 *.sa*
 Thumbs.db
 build/

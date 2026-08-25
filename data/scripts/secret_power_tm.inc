@@ -1,10 +1,12 @@
 Route111_Text_MakingRoomUseTMToMakeYourOwn: @ 82762C9
 	.string "What's that?\n"
 	.string "What am I doing?\p"
-	.string "I'm thinking about making my own room\n"
+	.string "I'm thinking of making my own room\n"
 	.string "here using a Pokémon move.\p"
-	.string "I know! I'll give you this TM.\n"
-	.string "Will you use it to make your own room?$"
+	.string "The Pokémon Center move teacher can\n"
+	.string "teach Secret Power.\p"
+	.string "I'll give you these Protective Pads.\n"
+	.string "Will you make your own room?$"
 
 Route111_Text_ExplainSecretPower: @ 827636E
 	.string "Find a big tree that looks like it might\n"

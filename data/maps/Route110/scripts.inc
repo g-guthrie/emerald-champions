@@ -911,8 +911,8 @@ Route110_Text_ChallengeReactionBest: @ 81F0431
 	.string "You've shaken me to my very soul!$"
 
 Route110_Text_GiveTM93:
-	.string "Please, take this TM as a reward\n"
-	.string "for your cycling mastery!$"
+	.string "Please, take this Electric Seed as a\n"
+	.string "reward for your cycling mastery!$"
 
 Route110_Text_ChallengeReactionGood: @ 81F04A4
 	.string "Your technique is remarkable.\p"
@@ -920,8 +920,8 @@ Route110_Text_ChallengeReactionGood: @ 81F04A4
 	.string "still avoiding collisions.$"
 
 Route110_Text_GiveTM83:
-	.string "Here, take this TM to commemorate\n"
-	.string "your success.$"
+	.string "Here, take this Quick Claw to\n"
+	.string "commemorate your success.$"
 
 Route110_Text_ChallengeReactionOk: @ 81F0500
 	.string "I would consider you a work in\n"

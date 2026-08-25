@@ -175,7 +175,7 @@ LilycoveCity_DepartmentStore_1F_Text_FloorNamesSign: @ 821F98A
 	.string "    Lottery Corner\p"
 	.string "2F: Trainer's Zone\p"
 	.string "3F: Battle Collection\p"
-	.string "4F: TM Corner\p"
+	.string "4F: Strategy Corner\p"
 	.string "5F: Poké Doll Floor\p"
 	.string "Rooftop: Rooftop Plaza$"
 
@@ -193,4 +193,3 @@ LilycoveCity_DepartmentStore_1F_Text_WirelessCommIsFun: @ 821FA13
 LilycoveCity_DepartmentStore_1F_Text_SpreadWordAboutWirelessComm: @ 821FAE5
 	.string "I want to spread the word about how\n"
 	.string "fun Wireless Communication can be.$"
-

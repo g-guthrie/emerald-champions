@@ -1929,6 +1929,20 @@
 	various BS_ATTACKER, VARIOUS_SHELL_SIDE_ARM_CHECK
 	.endm
 
+	.macro swapsidestatuses
+	various BS_ATTACKER, VARIOUS_SWAP_SIDE_STATUSES
+	.endm
+
+	.macro checkteatimetargets ptr:req
+	various BS_ATTACKER, VARIOUS_CHECK_TEATIME_TARGETS
+	.4byte \ptr
+	.endm
+
+	.macro jumpifshelltrap battler:req, ptr:req
+	various \battler, VARIOUS_JUMP_IF_SHELL_TRAP
+	.4byte \ptr
+	.endm
+
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req
 	setbyte sSTATCHANGER \stat | \stages << 3 | \down << 7
@@ -2058,4 +2072,3 @@
 	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, \jumpptr
 	1:
 	.endm
-

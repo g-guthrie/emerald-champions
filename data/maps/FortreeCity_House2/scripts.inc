@@ -85,7 +85,7 @@ FortreeCity_House2_Text_SleepTalkDeclined:
 
 FortreeCity_Text_GiveTM49:
 	.string "Ah, an appreciative child!\n"
-	.string "Please take this TM.$"
+	.string "Please take these Safety Goggles.$"
 
 FortreeCity_Text_HaveTM49:
 	.string "I've never once gotten my wife's\n"

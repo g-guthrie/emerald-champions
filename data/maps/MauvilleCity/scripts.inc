@@ -629,10 +629,11 @@ MauvilleCity_Text_WattsonWontBeChallenge: @ 81E0154
 
 MauvilleCity_Text_WattsonThanksTakeTM: @ 81E020E
 	.string "Wattson: Wahahahaha!\p"
-	.string "I knew it, {PLAYER}{KUN}! I knew I'd made\n"
-	.string "the right choice asking you!\p"
-	.string "This is my thanks--a TM containing\n"
-	.string "Thunderbolt!\p"
+	.string "I knew it, {PLAYER}{KUN}!\p"
+	.string "I made the right choice asking you!\p"
+	.string "This is my thanks--a Throat Spray!\p"
+	.string "A sound move can trigger a Sp. Atk\n"
+	.string "boost.\p"
 	.string "Go on, you've earned it!$"
 
 MauvilleCity_Text_WattsonYoungTakeCharge: @ 81E02AA
@@ -706,10 +707,9 @@ MauvilleCity_Text_GiveTM74:
 	.string "that way.\p"
 	.string "Do you think your Pokémon will\n"
 	.string "want to roll, too?\p"
-	.string "Here, let them try out this TM\n"
+	.string "Here, let them try this Metronome\n"
 	.string "if you'd like.$"
 
 MauvilleCity_Text_HaveTM74:
-	.string "TM74 contains Gyro Ball, an attack\n"
-	.string "that does more damage the slower the\l"
-	.string "user is compared to the foe.$"
+	.string "A Metronome strengthens a move\n"
+	.string "when its holder repeats that move.$"

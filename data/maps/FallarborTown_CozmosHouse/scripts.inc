@@ -202,12 +202,12 @@ FallarborTown_CozmosHouse_Text_IsThatMeteoriteMayIHaveIt: @ 82010A2
 	.string "took from Meteor Falls?\p"
 	.string "Please, may I have it?\p"
 	.string "I'm not asking for it for free.\n"
-	.string "How about in exchange for this TM?$"
+	.string "How about this Expert Belt\n"
+	.string "in exchange?$"
 
 FallarborTown_CozmosHouse_Text_PleaseUseThisTM: @ 8201159
-	.string "Prof. Cozmo: This TM, it represents\n"
-	.string "my feeling of gratitude.\l"
-	.string "Please use it!$"
+	.string "Prof. Cozmo: This Expert Belt shows\n"
+	.string "my gratitude. Please use it!$"
 
 FallarborTown_CozmosHouse_Text_ReallyGoingToHelpMyResearch: @ 82011A5
 	.string "Prof. Cozmo: Oh, I can't believe it.\n"
@@ -222,7 +222,8 @@ FallarborTown_CozmosHouse_Text_MayIHaveMeteorite: @ 8201249
 	.string "Prof. Cozmo: Please, may I have that\n"
 	.string "Meteorite?\p"
 	.string "I'm not asking for it for free.\n"
-	.string "How about in exchange for this TM?$"
+	.string "How about this Expert Belt\n"
+	.string "in exchange?$"
 
 FallarborTown_CozmosHouse_Text_CozmoWentToMeteorFalls: @ 82012BC
 	.string "Prof. Cozmo went off to Meteor Falls\n"

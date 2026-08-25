@@ -1057,10 +1057,10 @@ Route104_Text_LikeFillingMouthWithSeedsTakeThis: @ 81ED838
 
 Route104_Text_TMsAreOneTimeUse:
 	.string "A word of advice!\p"
-	.string "A TM, Technical Machine, can be used\n"
-	.string "many times. It won't go away.\p"
-	.string "So try it out as many times as you\n"
-	.string "want!$"
+	.string "The move teacher in every Pokémon\n"
+	.string "Center can teach any legal move.\p"
+	.string "It is free and needs no Gym Badges.\n"
+	.string "So experiment with your team!$"
 
 Route104_Text_DontNeedThisTakeIt: @ 81ED96A
 	.string "This Flower Shop started selling\n"

@@ -193,10 +193,9 @@ SlateportCity_ContestHall_Text_ImLikeMajorlyCheesed: @ 82091DC
 
 @ Unused
 SlateportCity_ContestHall_Text_ExplainTorment: @ 8209322
-	.string "That's, like, TM41, you know?\n"
-	.string "Hey, it's TORMENT, you hearing me?\p"
-	.string "Like, it won't let the other guy\n"
-	.string "use the same move twice in a row, see?\p"
+	.string "That's, like, a Red Card, you know?\p"
+	.string "If its holder gets hit, the attacker\n"
+	.string "gets dragged out of battle, see?\p"
 	.string "Hey, now, you listen here, like,\n"
 	.string "I'm not laying a torment on you!$"
 
@@ -280,4 +279,3 @@ SlateportCity_ContestHall_Text_GetUrgeToMoveWithMon: @ 82098E6
 SlateportCity_ContestHall_Text_HyperRankStage: @ 820993D
 	.string "Pokémon Contests\n"
 	.string "HYPER RANK STAGE!$"
-

@@ -455,7 +455,7 @@ MossdeepCity_Text_SootopolisNewGymLeader: @ 81E5581
 
 MossdeepCity_Text_AvalancheNonsense:
 	.string "You Trainer?\p"
-	.string "Take TM!$"
+	.string "Take Snowball!$"
 
 MossdeepCity_Text_HaveTM96:
 	.string "… … … … … … … … … … … … … … … …\p"

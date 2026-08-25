@@ -40,13 +40,13 @@ LavaridgeTown_House_EventScript_ReceivedTM94::
 	end
 
 LavaridgeTown_House_Text_HaveTM94::
-	.string "TM94 teaches Sucker Punch.\p"
-	.string "It's a move that may go first if the\n"
-	.string "target Pokémon is about to attack.$"
+	.string "A King's Rock may make the target\n"
+	.string "flinch when its holder attacks.$"
 
 LavaridgeTown_House_Text_GiveTM94::
 	.string "Too bad!\p"
-	.string "You can have this TM instead.$"
+	.string "You can have this King's Rock\n"
+	.string "instead.$"
 
 LavaridgeTown_House_Text_WifeWarmingEggInHotSprings:
 	.string "My wife's warming an Egg in the hot\n"

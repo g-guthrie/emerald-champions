@@ -122,7 +122,7 @@ MauvilleCity_Gym_EventScript_WattsonDefeated:: @ 820DF2B
 	end
 
 MauvilleCity_Gym_EventScript_GiveVoltSwitch2:: @ 820DF8D
-	giveitem ITEM_CELL_BATTERY
+	giveitem ITEM_WISE_GLASSES
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox MauvilleCity_Gym_Text_ExplainVoltSwitch, MSGBOX_DEFAULT
@@ -131,7 +131,7 @@ MauvilleCity_Gym_EventScript_GiveVoltSwitch2:: @ 820DF8D
 	end
 
 MauvilleCity_Gym_EventScript_GiveVoltSwitch:: @ 820DFB1
-	giveitem ITEM_CELL_BATTERY
+	giveitem ITEM_WISE_GLASSES
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_BagIsFull
 	msgbox MauvilleCity_Gym_Text_ExplainVoltSwitch, MSGBOX_DEFAULT
@@ -440,11 +440,10 @@ MauvilleCity_Gym_Text_ExplainTakeThis:
 	.string "You should take this, too!$"
 
 MauvilleCity_Gym_Text_ExplainVoltSwitch: @ 820E844
-	.string "That TM72 there contains Volt Switch.\p"
-	.string "It's a move where your Pokémon attacks\n"
-	.string "the opponent and then rushes back to\l"
-	.string "switch places with a party Pokémon.\p"
-	.string "… … … … … …$"
+	.string "Wise Glasses strengthen special\n"
+	.string "moves without locking in one attack.\p"
+	.string "Use that freedom to keep your foe\n"
+	.string "guessing! Wahahahah!$"
 
 MauvilleCity_Gym_Text_RegisteredWattson: @ 820E8B5
 	.string "Registered Gym Leader Wattson\n"

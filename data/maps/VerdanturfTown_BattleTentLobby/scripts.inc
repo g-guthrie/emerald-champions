@@ -354,10 +354,10 @@ VerdanturfTown_BattleTentLobby_Text_GentleMonsScaryIfAngry: @ 8201D11
 VerdanturfTown_BattleTentLobby_Text_AttractionRunsDeep: @ 8201D9E
 	.string "My feelings toward my Pokémon…\n"
 	.string "The attraction runs deep…\p"
-	.string "Oh, hi, you didn't see that, did you?\n"
+	.string "Oh! You didn't see that, did you?\n"
 	.string "Well, it doesn't matter.\p"
-	.string "How would you like this TM for\n"
-	.string "your Pokémon?$"
+	.string "How would you like this Bright\n"
+	.string "Powder for your Pokémon?$"
 
 VerdanturfTown_BattleTentLobby_Text_AttractionMutual: @ 8201E43
 	.string "My feelings toward my Pokémon…\n"
