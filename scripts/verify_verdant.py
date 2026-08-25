@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import json
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -43,6 +44,16 @@ subprocess.run(
 )
 subprocess.run(
     [sys.executable, str(ROOT / "scripts/verdant_battle_guide.py"), "--check"],
+    cwd=ROOT,
+    check=True,
+)
+subprocess.run(
+    [sys.executable, str(ROOT / "scripts/verdant_bespoke_battle_audit.py")],
+    cwd=ROOT,
+    check=True,
+)
+subprocess.run(
+    [sys.executable, str(ROOT / "scripts/verdant_evolution_stage_audit.py")],
     cwd=ROOT,
     check=True,
 )
@@ -311,6 +322,14 @@ checks = {
         }
         and "#define WATER_WILD_COUNT    4" in read("include/wild_encounter.h")
         and "#define ROCK_WILD_COUNT     4" in read("include/wild_encounter.h")
+    ),
+    "disabled trainer entries leave no stray active commas": (
+        re.search(r"^\s*},?\s+\*/,\s*$", read("src/data/trainer_parties.h"), re.M) is None
+    ),
+    "Area Dex is registered in the legacy linker": (
+        "src/area_dex.o(.text);" in read("ld_script.txt")
+        and "src/area_dex.o(.rodata);" in read("ld_script.txt")
+        and '.include "src/area_dex.o"' in read("sym_ewram.txt")
     ),
     "Area Dex replaces only the redundant normal-menu Exit": (
         "MENU_ACTION_AREA_DEX" in normal_start_menu

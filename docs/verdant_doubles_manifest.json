@@ -980,11 +980,11 @@
     },
     "TRAINER_CINDY_1": {
       "format": "single",
-      "target_size": 1,
-      "archetype": "Balanced disruption",
-      "difficulty": 40,
+      "target_size": 4,
+      "archetype": "Turn-of-time luxury menagerie",
+      "difficulty": 72,
       "partner_interaction": false,
-      "level_offset": 0,
+      "level_offset": 2,
       "location": "Route 104"
     },
     "TRAINER_DAPHNE": {
@@ -2816,11 +2816,11 @@
     },
     "TRAINER_BILLY": {
       "format": "single",
-      "target_size": 2,
-      "archetype": "Intentional route singles relief",
-      "difficulty": 16,
+      "target_size": 4,
+      "archetype": "Shoreline mirror and reactive fossil",
+      "difficulty": 70,
       "partner_interaction": false,
-      "level_offset": -4,
+      "level_offset": 0,
       "location": "Route 104"
     },
     "TRAINER_JOSH": {
@@ -2943,10 +2943,10 @@
     "TRAINER_ALLEN": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Normal-rule breaker",
-      "difficulty": 17,
-      "partner_interaction": false,
-      "level_offset": -4,
+      "archetype": "Beginner redirection and Belly Drum",
+      "difficulty": 65,
+      "partner_interaction": true,
+      "level_offset": 0,
       "location": "Route 102"
     },
     "TRAINER_TIMMY": {
@@ -5373,10 +5373,10 @@
     "TRAINER_TIANA": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 16,
+      "archetype": "Young fossil snow and Aurora Veil",
+      "difficulty": 72,
       "partner_interaction": false,
-      "level_offset": -3,
+      "level_offset": 0,
       "location": "Route 102"
     },
     "TRAINER_HALEY_1": {
@@ -5480,11 +5480,11 @@
     },
     "TRAINER_RICK": {
       "format": "single",
-      "target_size": 3,
-      "archetype": "Bug swarm utility",
-      "difficulty": 18,
+      "target_size": 4,
+      "archetype": "Juvenile Bug Web offense",
+      "difficulty": 70,
       "partner_interaction": false,
-      "level_offset": -4,
+      "level_offset": 0,
       "location": "Route 102"
     },
     "TRAINER_LYLE": {
@@ -6210,8 +6210,8 @@
     "TRAINER_DARIAN": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 25,
+      "archetype": "Two-cast young fish timing",
+      "difficulty": 72,
       "partner_interaction": false,
       "level_offset": 0,
       "location": "Route 104"

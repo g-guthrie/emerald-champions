@@ -1014,7 +1014,7 @@ Route104_EventScript_Mia:: @ 81ED5B6
 	end
 
 Route104_EventScript_Darian:: @ 81ED5D5
-	trainerbattle_single TRAINER_DARIAN, Route104_Text_DarianIntro, Route104_Text_DarianDefeat
+	trainerbattle_double TRAINER_DARIAN, Route104_Text_DarianIntro, Route104_Text_DarianDefeat, Route104_Text_DarianNotEnoughMons
 	msgbox Route104_Text_DarianPostBattle, MSGBOX_AUTOCLOSE
 	end
 

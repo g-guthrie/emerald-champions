@@ -44,6 +44,14 @@ INTENTIONAL_DUPLICATE_PARTIES = {
 }
 
 AI_PROFILES = {
+    "AI_FLAG_SETUP_FIRST_TURN": {
+        "TRAINER_DARIAN",
+        "TRAINER_RICK",
+        "TRAINER_TIANA",
+    },
+    "AI_FLAG_HP_AWARE": {
+        "TRAINER_DARIAN",
+    },
     "AI_FLAG_HELP_PARTNER": {
         "MAY_TREECKO_METEOR_FALLS", "MAY_TORCHIC_METEOR_FALLS", "MAY_MUDKIP_METEOR_FALLS",
         "BRENDAN_TREECKO_METEOR_FALLS", "BRENDAN_TORCHIC_METEOR_FALLS", "BRENDAN_MUDKIP_METEOR_FALLS",
@@ -56,8 +64,9 @@ AI_PROFILES = {
         "TRAINER_TABITHA_MAGMA_HIDEOUT", "TRAINER_ANNA_AND_MEG_1",
     },
     "AI_FLAG_SPEED_CONTROL": {
-        "TRAINER_BILLY",
-        "TRAINER_TIANA",
+        "TRAINER_ALLEN",
+        "TRAINER_CINDY_1",
+        "TRAINER_DARIAN",
         "TRAINER_ROXANNE_1", "TRAINER_BRAWLY_1", "TRAINER_FLANNERY_1",
         "TRAINER_WINONA_1", "TRAINER_TATE_AND_LIZA_1", "TRAINER_JUAN_1",
         "TRAINER_SIDNEY", "TRAINER_PHOEBE", "TRAINER_GLACIA", "TRAINER_WALLACE",
@@ -133,6 +142,11 @@ def parse_species(entry: str) -> str | None:
 def clean_entry(entry: str) -> str:
     entry = re.sub(r"\s*/\* Verdant (?:doubles|custom):.*?\*/\s*", "", entry, flags=re.S)
     return entry.strip().rstrip(",").rstrip()
+
+
+def normalize_disabled_entry_commas(text: str) -> str:
+    """Remove active separators left after a whole array entry is commented."""
+    return re.sub(r"^(\s*},?\s+\*/),\s*$", r"\1", text, flags=re.M)
 
 
 def level_for_addition(rule: dict) -> int:
@@ -242,6 +256,7 @@ def apply() -> None:
         ]
         parties_text = replace_party_body(parties_text, party_name, baseline + rendered_additions)
 
+    parties_text = normalize_disabled_entry_commas(parties_text)
     TRAINERS_PATH.write_text(trainers_text)
     PARTIES_PATH.write_text(parties_text)
     print(f"applied {len(custom['plans'])} explicit team plans, {len(custom.get('replacements', {}))} diversity replacements, and {len(custom['route_single_trainers'])} route singles")
@@ -280,6 +295,8 @@ def check() -> None:
     parties_text = PARTIES_PATH.read_text()
     blocks = doubles.trainer_blocks(trainers_text)
     problems = []
+    if re.search(r"^\s*},?\s+\*/,\s*$", parties_text, re.M):
+        problems.append("disabled trainer party entries retain active separator commas")
 
     route_singles = set(custom["route_single_trainers"])
     if len(route_singles) != 64:

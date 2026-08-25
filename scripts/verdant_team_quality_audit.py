@@ -86,6 +86,14 @@ MEGA_ITEM_EXCEPTIONS = {"ITEM_EVIOLITE"}
 INTENTIONAL_LEVEL_ONE = {"TRAINER_KEIRA"}
 
 
+def has_complete_moveset(mon: dict) -> bool:
+    return len(mon["moves"]) == 4 or (
+        mon["species"] == "SPECIES_DITTO"
+        and mon["ability"] == "ABILITY_IMPOSTER"
+        and mon["moves"] == ["MOVE_TRANSFORM"]
+    )
+
+
 def field(body: str, name: str, default: str = "") -> str:
     match = re.search(rf"\.{name}\s*=\s*([^,\n}}]+)", body)
     return match.group(1).strip() if match else default
@@ -314,7 +322,7 @@ def audit() -> dict:
         if any(tag.endswith(" engine") for tag in tags):
             speed_count += 1
         item_coverage = sum(mon["item"] != "ITEM_NONE" for mon in mons) / max(1, len(mons))
-        complete_coverage = sum(len(mon["moves"]) == 4 for mon in mons) / max(1, len(mons))
+        complete_coverage = sum(has_complete_moveset(mon) for mon in mons) / max(1, len(mons))
         rare_count = sum(
             any(family in mon["species"] for family in custom.LEGENDARY_FAMILIES)
             for mon in mons
@@ -324,7 +332,7 @@ def audit() -> dict:
         avg_offset = round(sum(mon["level_offset"] for mon in mons) / max(1, len(mons)), 2)
         issues = []
 
-        incomplete = [mon["species"] for mon in mons if len(mon["moves"]) != 4]
+        incomplete = [mon["species"] for mon in mons if not has_complete_moveset(mon)]
         if incomplete:
             issues.append({"severity": "blocking", "kind": "incomplete moves", "detail": incomplete})
         invalid_offsets = [mon["level_offset"] for mon in mons if abs(mon["level_offset"]) > 10]

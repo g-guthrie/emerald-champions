@@ -78,6 +78,19 @@ SEAFLOOR_LAND = {
     11: "SPECIES_SUICUNE",
 }
 
+# Once the Stone Badge shop begins selling Honey, this pool supplies a legal
+# level-up family for the first post-badge Mega showcase.  Keep the encounter
+# in its unevolved form: Weedle reaches Beedrill naturally at level 10, before
+# Steven grants the Bracelet at the cap-20 Granite Cave milestone.
+EARLY_MEGA_HONEY = {
+    0: "SPECIES_AUDINO",
+    1: "SPECIES_WEEDLE",
+    2: "SPECIES_CATERPIE",
+    3: "SPECIES_WEEDLE",
+    4: "SPECIES_CATERPIE",
+    5: "SPECIES_CATERPIE",
+}
+
 
 def all_encounters(data: dict) -> list[dict]:
     return [
@@ -103,6 +116,9 @@ def expected_changes(data: dict) -> list[tuple[str, str, int, str]]:
     output = []
     for encounter in all_encounters(data):
         map_id = encounter["map"]
+        if map_id == "MAP_PETALBURG_WOODS_2":
+            for index, species in EARLY_MEGA_HONEY.items():
+                output.append((map_id, "honey_mons", index, species))
         for index, species in LAND_UPGRADES.get(map_id, {}).items():
             output.append((map_id, "land_mons", index, species))
         for method, changes in OCEAN_UPGRADES.get(map_id, {}).items():
@@ -127,6 +143,7 @@ def expected_changes(data: dict) -> list[tuple[str, str, int, str]]:
 def apply() -> None:
     data = json.loads(ENCOUNTERS.read_text())
     by_map = {encounter["map"]: encounter for encounter in all_encounters(data)}
+    set_slots(by_map["MAP_PETALBURG_WOODS_2"], "honey_mons", EARLY_MEGA_HONEY)
     for map_id, changes in LAND_UPGRADES.items():
         set_slots(by_map[map_id], "land_mons", changes)
     for map_id, methods in OCEAN_UPGRADES.items():

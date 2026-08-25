@@ -52,26 +52,26 @@ Route102_Text_AllenNotEnoughPokemon:
 	.string "want to try my doubles trick!$"
 
 Route102_Text_RickIntro: @ 829480C
-	.string "My bugs spin a web, then the whole\n"
-	.string "team comes rushing in! Ready?$"
+	.string "My bugs are small, but their web\n"
+	.string "slows your whole team! Ready?$"
 
 Route102_Text_RickDefeated: @ 8294847
 	.string "You tore straight through my web!$"
 
 Route102_Text_RickPostBattle: @ 8294859
-	.string "Sticky Web slows every new Pokémon.\n"
-	.string "I need a plan for Flying types!$"
+	.string "Sticky Web helps my slower bugs.\n"
+	.string "They'll be great when they evolve!$"
 
 Route102_Text_TianaIntro: @ 829489E
-	.string "I found the coolest way to win!\n"
-	.string "Let's battle in a snowstorm!$"
+	.string "My team's young, but snow makes us\n"
+	.string "strong! Let's battle!$"
 
 Route102_Text_TianaDefeated: @ 82948F3
 	.string "Your team weathered my best storm!$"
 
 Route102_Text_TianaPostBattle: @ 8294916
-	.string "When the snow stops, Arctozolt slows\n"
-	.string "down. I need a second plan!$"
+	.string "Without snow, my fastest pair slows\n"
+	.string "down. I need a backup plan!$"
 
 Route102_Text_TianaNotEnoughPokemon:
 	.string "Bring two healthy Pokémon if you\n"
@@ -388,15 +388,15 @@ Route104_Text_WinstonPostRematch: @ 8295A1E
 	.string "It's so deep, the world of Pokémon…$"
 
 Route104_Text_CindyIntro: @ 8295A7E
-	.string "We must have been fated to meet.\n"
-	.string "May I ask you for a battle?$"
+	.string "My partners are dressed for battle.\n"
+	.string "Can you keep pace when time turns?$"
 
 Route104_Text_CindyDefeat: @ 8295ABB
-	.string "Oh, my!$"
+	.string "My perfect timing slipped away!$"
 
 Route104_Text_CindyPostBattle: @ 8295AC3
-	.string "“Hello” is the beginning of “good-bye.”\n"
-	.string "I hope we meet again.$"
+	.string "Trick Room lets Mawile move first.\n"
+	.string "Outlast it, then Furfrou takes over.$"
 
 Route104_Text_CindyRegister1: @ 8295B01
 	.string "Hello, we meet again.\p"
@@ -422,16 +422,19 @@ Route104_Text_CindyPostRematch: @ 8295C1F
 	.string "I hope we meet again.$"
 
 Route104_Text_DarianIntro: @ 8295C5D
-	.string "I fished up a tough-looking Pokémon!\p"
-	.string "It has this magical quality to it!\n"
-	.string "It surely looks tough, yes it does!$"
+	.string "I hooked four strange little fish!\n"
+	.string "Watch how they battle in pairs!$"
 
 Route104_Text_DarianDefeat: @ 8295CC9
-	.string "What the…$"
+	.string "You broke both of my tricks!$"
 
 Route104_Text_DarianPostBattle: @ 8295CD3
-	.string "Hey, Magikarp, you sure don't live up\n"
-	.string "to your name, do you?$"
+	.string "Water Spout weakens after a hit.\n"
+	.string "Clamperl needs time to set up.$"
+
+Route104_Text_DarianNotEnoughMons:
+	.string "Bring two healthy Pokémon if you\n"
+	.string "want to face my strange fish!$"
 
 Route105_Text_FosterIntro: @ 8295D0F
 	.string "There's supposed to be a mystical\n"

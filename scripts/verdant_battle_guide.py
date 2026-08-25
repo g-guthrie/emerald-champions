@@ -560,7 +560,12 @@ def check(guide: dict) -> None:
         if len(entry["party"]) != entry["partySize"]:
             problems.append(f"{entry['trainerId']}: party size drift")
         for mon in entry["party"]:
-            if len(mon["moves"]) != 4:
+            is_imposter_ditto = (
+                mon["speciesId"] == "SPECIES_DITTO"
+                and mon["ability"] == "Imposter"
+                and mon["moves"] == ["Transform"]
+            )
+            if len(mon["moves"]) != 4 and not is_imposter_ditto:
                 problems.append(f"{entry['trainerId']} {mon['species']}: incomplete moves")
         if entry["designStatus"] == "closed":
             if entry["manualQuality"] != 10:

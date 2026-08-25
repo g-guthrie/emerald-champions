@@ -4,7 +4,7 @@ This report evaluates the current source as the battle engine executes it. Score
 
 ## Roster summary
 
-- 854 trainer records and 3394 party slots
+- 854 trainer records and 3397 party slots
 - 574 doubles and 280 intentional singles
 - Median quality score: 61/100
 - Blocking findings: 0

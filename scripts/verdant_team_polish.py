@@ -90,6 +90,7 @@ def apply() -> None:
         party_name = doubles.party_name(blocks[trainer_id].group(0))
         entries = [render(build, trainer_id) for build in builds]
         parties_text = custom.replace_party_body(parties_text, party_name, entries)
+    parties_text = custom.normalize_disabled_entry_commas(parties_text)
     PARTIES_PATH.write_text(parties_text)
     print(f"applied explicit polish to {len(parties)} trainer parties")
 
@@ -109,7 +110,12 @@ def check() -> None:
         if not 1 <= len(builds) <= 6:
             problems.append(f"{trainer_id}: invalid party size {len(builds)}")
         for index, build in enumerate(builds):
-            if len(build["moves"]) != 4 or len(set(build["moves"])) != 4:
+            is_imposter_ditto = (
+                build["species"] == "SPECIES_DITTO"
+                and build["ability_slot"] == 2
+                and build["moves"] == ["MOVE_TRANSFORM", "MOVE_NONE", "MOVE_NONE", "MOVE_NONE"]
+            )
+            if not is_imposter_ditto and (len(build["moves"]) != 4 or len(set(build["moves"])) != 4):
                 problems.append(f"{trainer_id}[{index}]: moves must contain four distinct entries")
             if not -100 <= build["level"] <= 7:
                 problems.append(f"{trainer_id}[{index}]: invalid cap offset {build['level']}")

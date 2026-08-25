@@ -16,6 +16,15 @@
       "campaign_point": "Route 103 rival battle before the player receives capture balls",
       "strict_cap": 14,
       "player_state": "One starter chosen from seven regional trios. Oldale's Center teacher, ability menu, Mart core held items, $25,000 starting money, and $1,000 ten-level Rare Candy are all available.",
+      "evolution_stage_fit": {
+        "campaign_phase": "pre-Stone youngster chapter",
+        "effective_levels": "14",
+        "eligible_ratio": "1/1",
+        "mature_exceptions": [],
+        "mega_access": false,
+        "status": "pass",
+        "reason": "Every dynamic branch uses the player's same-generation counter-starter before its normal evolution level."
+      },
       "manual_quality": 10,
       "manual_difficulty": 6.8,
       "corpus_review": {
@@ -77,6 +86,20 @@
       "campaign_point": "First optional trainer on Route 102, after the lab supplies capture balls and Mom supplies the Old Rod",
       "strict_cap": 14,
       "player_state": "The player can bring six level-14 Pokémon from Routes 101, 102, and 103 plus Old Rod encounters, with every legal move, ability switching, and the core held-item shop.",
+      "evolution_stage_fit": {
+        "campaign_phase": "pre-Stone youngster chapter",
+        "effective_levels": "14-15",
+        "eligible_ratio": "3/4",
+        "mature_exceptions": [
+          "Jigglypuff is the one friendship-evolved support form."
+        ],
+        "registered_showcases": [
+          "Mew is the deliberate rare single-stage reveal."
+        ],
+        "mega_access": false,
+        "status": "pass",
+        "reason": "Zorua is first-stage, Smeargle and Mew are genuinely single-stage, and only Jigglypuff is an evolved form."
+      },
       "manual_quality": 10,
       "manual_difficulty": 8.2,
       "corpus_review": {
@@ -150,63 +173,78 @@
       "campaign_point": "Second optional trainer in the recommended Route 102 sweep, immediately after Calvin",
       "strict_cap": 14,
       "player_state": "The player can bring six level-14 Pokémon from Routes 101, 102, and 103 plus Old Rod encounters, with every legal move, ability switching, and the core held-item shop.",
+      "evolution_stage_fit": {
+        "campaign_phase": "pre-Stone youngster chapter",
+        "effective_levels": "14-16",
+        "eligible_ratio": "4/4",
+        "mature_exceptions": [],
+        "mega_access": false,
+        "status": "pass",
+        "reason": "Dewpider evolves at 22, Anorith at 40, Karrablast through its Shelmet trade interaction, and Larvesta at 49; all four are legitimately young at their authored levels."
+      },
       "manual_quality": 10,
-      "manual_difficulty": 8.0,
+      "manual_difficulty": 8.2,
       "corpus_review": {
         "reference_pool_size": 983,
         "full_team_candidates": [
           {
-            "source": "docs/smogon_gen4_9_ou_uu_nu_sample_teams.json",
-            "team": "gen9ou #2 — ~ mana webs",
+            "source": "docs/showdown_gen8_random_singles_30.json",
+            "sample": 2,
             "decision": "rejected as a full import",
-            "reason": "Its Web-to-multiple-payoff structure fits, but four members, several moves and items, and Terastallization are unavailable in Verdant; the non-Bug roster also conflicts with Rick's identity."
+            "reason": "Galvantula supplies an attacking Sticky Web lead model, but the surrounding Altaria, Poliwrath, Sceptile, Dusknoir, and Persian form an unrelated mature singles team."
           },
           {
-            "source": "docs/smogon_gen4_9_ou_uu_nu_sample_teams.json",
-            "team": "gen6ou #2 — Spanish Webs",
+            "source": "docs/showdown_gen6_random_doubles_30.json",
+            "sample": 25,
             "decision": "rejected as a full import",
-            "reason": "The complete team is competitively sound but largely non-Bug and introduces an unrelated Mega Scizor plus several generic sweepers. Its hazard-to-payoff sequence is retained."
+            "reason": "Armaldo provides the correct Rock-and-Bug retaliation shell, but the complete doubles team does not fit a young Route 102 Bug Catcher and the evolved fossil itself belongs later."
           },
           {
-            "source": "docs/showdown_gen9_random_singles_30.json",
-            "sample": 28,
+            "source": "docs/showdown_gen8_random_doubles_30.json",
+            "sample": 15,
             "decision": "rejected as a full import",
-            "reason": "Leavanny is the only Bug on a rain-and-offense collage with several unavailable Gen 9 assumptions. Its legal Web lead is selected without importing the unrelated team."
+            "reason": "Escavalier's Megahorn and Swords Dance role is ideal inspiration, but its five partners and mature final form do not belong in the cap-14 chapter."
+          },
+          {
+            "source": "docs/showdown_gen6_random_singles_30.json",
+            "sample": 11,
+            "decision": "rejected as a full import",
+            "reason": "Life Orb Volcarona demonstrates late Fire/Bug pressure, but Quiver Dance and the final form are deliberately replaced by a recoil-limited juvenile Larvesta pivot."
           }
         ],
-        "decision": "No complete corpus team contains more than two Bug types or fits Rick verbatim. Rick receives a hand-integrated all-Bug web offense with one Sash and only one setup win condition."
+        "decision": "All 983 teams were reviewed, and none contains any exact proposed four-species overlap because competitive corpora rarely use these first stages. Rick therefore adapts four mature competitive roles to stage-legal youngsters instead of pretending a verbatim tournament team belongs at cap 14."
       },
       "competitive_references": [
         {
-          "source": "docs/showdown_gen9_random_singles_30.json",
-          "sample": 28,
-          "seed": "28,25127,43301,25492",
-          "adaptation": "Leavanny keeps Swarm, Sticky Web, Knock Off, and Leaf Blade; unavailable Lunge becomes legal X-Scissor, and Focus Sash replaces Heavy-Duty Boots so the lead gets one reliable action without any Tera assumption."
-        },
-        {
-          "source": "docs/showdown_gen9_random_doubles_30.json",
-          "sample": 7,
-          "seed": "7,55433,10898,22765",
-          "adaptation": "Scizor keeps the donor's Sitrus Berry, Technician, Tailwind, U-turn, and Bullet Punch; unavailable Close Combat becomes legal Superpower for the pivot and backup speed plan."
-        },
-        {
-          "source": "docs/showdown_gen9_random_doubles_30.json",
-          "sample": 13,
-          "seed": "13,37412,20156,14182",
-          "adaptation": "Heracross's Choice Scarf, Moxie, Rock Slide, Close Combat, Knock Off, and Megahorn set is imported verbatim as a four-attacks revenge cleaner rather than another setup gate."
+          "source": "docs/showdown_gen8_random_singles_30.json",
+          "sample": 2,
+          "seed": "2,15838,3183,62685",
+          "adaptation": "Dewpider translates Galvantula's attacking Web lead into a legal juvenile: Focus Sash preserves one action, while Water Bubble Scald plus Ice Beam and Giga Drain prevent the lead from becoming dead weight."
         },
         {
           "source": "docs/showdown_gen6_random_doubles_30.json",
-          "sample": 16,
-          "seed": "16,61169,24785,42658",
-          "adaptation": "Beautifly's Charti Berry Quiver Dance moth shell becomes the much less-used Frosmoth; Air Cutter becomes Ice Beam and Swarm becomes Ice Scales while Bug Buzz and Giga Drain remain."
+          "sample": 25,
+          "seed": "25,1370,38672,62551",
+          "adaptation": "Anorith inherits Armaldo's X-Scissor and Rock Slide coverage; Choice Band, Aqua Jet, and Knock Off make the unevolved fossil an immediate anti-Fire and anti-Flying breaker rather than another setup slot."
+        },
+        {
+          "source": "docs/showdown_gen8_random_doubles_30.json",
+          "sample": 15,
+          "seed": "15,53250,23242,11321",
+          "adaptation": "Karrablast receives Escavalier's Megahorn and Swords Dance identity. Eviolite and No Guard support legal Drill Run and Knock Off, leaving it as the team's single setup win condition."
+        },
+        {
+          "source": "docs/showdown_gen6_random_singles_30.json",
+          "sample": 11,
+          "seed": "11,21574,17070,17043",
+          "adaptation": "The mature Volcarona donor is not copied. Larvesta keeps only its Life Orb Fire/Bug pressure and uses legal Flare Blitz, U-turn, Wild Charge, and Morning Sun so recoil and imperfect coverage keep the level-16 ace answerable."
         }
       ],
-      "team_intent": "Focus Sash Leavanny establishes Sticky Web while still threatening damage and item removal. Sitrus Technician Scizor pivots and can leave Tailwind behind if Web is denied, Choice Scarf Moxie Heracross supplies immediate four-attacks pressure, and Charti Ice Scales Frosmoth is the team's only setup ace.",
-      "intended_counterplay": "The player can prevent Web with Taunt or immediate pressure, remove it, use Flying or Levitate Pokémon that ignore it, or lean on priority. Fire and Rock coverage punish the Bug theme, but Scizor and Heracross prevent one Rock move from answering the whole roster. Intimidate, burns, and physical walls contain the first three; Frosmoth is specially resilient but vulnerable to physical pressure before Quiver Dance snowballs.",
-      "bespoke_ai": "Rick remains an intentional singles pacing fight and uses the normal foe-aware viability AI. Web, Tailwind, attacks, pivoting, and Quiver Dance are all already legible to that AI; no turn, move, setup, or switch is forced.",
-      "uniqueness": "This is Verdant's only early all-Bug web offense. It uses four different competitive donors, avoids repeating Calvin's Illusion or Mew spectacle, and replaces the already common Volcarona role with a scarcely used Frosmoth endgame.",
-      "closure": "Battle 3 is difficult because Web supports three different offensive tempos, but it has only one Sash and one setup win condition. The player can deny speed control, exploit shared Bug weaknesses, use priority, or outlast the choice-locked attackers without solving a lock-and-key sequence."
+      "team_intent": "Focus Sash Water Bubble Dewpider establishes Sticky Web while threatening real special coverage. Choice Band Anorith immediately punishes the Fire and Flying attacks invited by the Bug theme, Eviolite No Guard Karrablast is the only setup threat, and level-16 Life Orb Larvesta closes through recoil-limited physical pressure and U-turn rather than a mature Quiver Dance sweep.",
+      "intended_counterplay": "Taunt, multihit attacks, or immediate pressure can deny Web; Flying and Levitate Pokémon ignore it, and legal removal clears it. Wingull, Shinx, Blitzle, Rotom, Bonsly, Rock coverage, priority, and faster Choice users are already available. Intimidate, burns, and physical walls constrain the three backliners, while Water and Rock pressure force Larvesta to spend recoil or recovery turns. No one counter is required.",
+      "bespoke_ai": "Rick remains an intentional singles pacing fight. First-turn setup preference makes Sticky Web or Karrablast's Swords Dance worth considering, while smart switching and normal foe-aware scoring preserve attacks, Choice locking, recovery, and pivots. No move or opening is forced.",
+      "uniqueness": "This is Verdant's juvenile Bug Web lesson: all four species are first-stage, Anorith and Karrablast appear on no other current trainer, Dewpider appears only in mutually exclusive later rival branches, and Larvesta's other uses are substantially later. The mature Leavanny/Scizor/Heracross/Frosmoth version is preserved for a cap-55 Bug specialist.",
+      "closure": "Battle 3 is 10/10 because it proves unevolved Pokémon can support a real competitive hazard plan. Web feeds three distinct physical tempos, but the team has one Sash, one setup slot, exploitable shared weaknesses, recoil, a Choice lock, and several independent forms of counterplay."
     },
     "BATTLE_004_ROUTE_102_ALLEN": {
       "guide_order": 4,
@@ -217,6 +255,17 @@
       "campaign_point": "Third optional trainer in the recommended Route 102 sweep, after Calvin and Rick",
       "strict_cap": 14,
       "player_state": "The player can bring six level-14 Pokémon from Routes 101, 102, and 103 plus Old Rod encounters, with every legal move, ability switching, and the core held-item shop.",
+      "evolution_stage_fit": {
+        "campaign_phase": "pre-Stone youngster chapter",
+        "effective_levels": "14-15",
+        "eligible_ratio": "3/4",
+        "mature_exceptions": [
+          "Pikachu is the one friendship-evolved mascot and still reads as a young middle stage."
+        ],
+        "mega_access": false,
+        "status": "pass",
+        "reason": "Taillow, Paras, and Zigzagoon are first-stage; level-15 Paras replaces the impossible level-14 Parasect without losing the doubles plan."
+      },
       "manual_quality": 10,
       "manual_difficulty": 8.2,
       "corpus_review": {
@@ -232,7 +281,7 @@
             "source": "docs/showdown_gen7_random_doubles_30.json",
             "sample": 19,
             "decision": "rejected as a full import",
-            "reason": "Parasect's redirection role fits, but Blacephalon, Mega Banette, Slurpuff, Seviper, and Toucannon create a later-game boss roster rather than a beginner-team puzzle."
+            "reason": "Parasect's redirection role fits, but its mature form and the surrounding Blacephalon, Mega Banette, Slurpuff, Seviper, and Toucannon belong later. Only the legal support role is adapted to young Paras."
           },
           {
             "source": "docs/showdown_champions_random_doubles_30.json",
@@ -247,7 +296,7 @@
             "reason": "Taillow appears beside Zapdos, Spiritomb, Luxray, Snubbull, and Cacturne in the wrong battle format. Only its exact Guts cleaner set fits Allen."
           }
         ],
-        "decision": "No complete team contains more than one of these four Pokémon. Four sourced low-stage sets are integrated into one 'beginner Pokémon, expert doubles' battle with one setup move and no guaranteed redirection Sash."
+        "decision": "No complete team contains more than one of these four Pokémon. Four competitive roles are integrated into one 'beginner Pokémon, expert doubles' battle with three first-stage members, one young mascot exception, one setup move, and no guaranteed redirection Sash."
       },
       "competitive_references": [
         {
@@ -260,13 +309,13 @@
           "source": "docs/showdown_gen7_random_doubles_30.json",
           "sample": 19,
           "seed": "19,19391,29414,5599",
-          "adaptation": "Parasect's Sitrus Berry, Dry Skin, Spore, Protect, Seed Bomb, and Rage Powder set is imported verbatim as the finite redirection partner."
+          "adaptation": "Parasect's Dry Skin, Spore, Protect, Seed Bomb, and Rage Powder shell is moved down to level-15 Paras. Eviolite replaces Sitrus Berry so the first-stage supporter remains useful without pretending it already evolved at level 24."
         },
         {
           "source": "docs/showdown_champions_random_doubles_30.json",
           "sample": 30,
           "seed": "30,40965,46387,22631",
-          "adaptation": "Pikachu's Light Ball, Lightning Rod, Fake Out, Protect, Volt Tackle, and Encore set is imported verbatim as the disruptive second-wave partner."
+          "adaptation": "Pikachu keeps Light Ball, Lightning Rod, Fake Out, Protect, and Volt Tackle. Electroweb replaces Encore to give the hard doubles battle foe-only spread pressure and active speed control."
         },
         {
           "source": "docs/showdown_gen4_random_singles_30.json",
@@ -275,11 +324,11 @@
           "adaptation": "Taillow's Toxic Orb, Guts, Protect, Quick Attack, Brave Bird, and Facade set is imported verbatim as the level-15 closer."
         }
       ],
-      "team_intent": "Light Ball Lightning Rod Pikachu and Toxic Orb Guts Taillow lead with Fake Out, Encore, priority, immediate damage, and protection from Electric targeting. Sitrus Parasect and Sitrus Quick Feet Zigzagoon form the back-line setup mode: Rage Powder or Spore can buy Belly Drum, then Extreme Speed supplies pressure.",
-      "intended_counterplay": "The opening pair is vulnerable to Ground, Rock, Intimidate, and coordinated targeting; Protect can also expose Fake Out or consume Taillow's first Guts turn. When the back line appears, Fake Out, Taunt, spread damage, early Grass or Overcoat Pokémon, Hatenna's Magic Bounce, or a double target can stop Parasect from buying a free Drum. Dreepy, Rotom, and other Ghosts ignore Extreme Speed and Facade, while Intimidate and burns hinder Zigzagoon. The player can disrupt either wave without predicting a forced opening.",
-      "bespoke_ai": "Allen uses normal foe-aware doubles scoring plus partner awareness. The AI can choose immediate Pikachu and Taillow pressure before the later redirection option appears; Rage Powder, Spore, Belly Drum, Fake Out, Encore, Protect, and attacks are evaluated normally, with no forced move, target, turn, or switch.",
-      "uniqueness": "Allen weaponizes four familiar early-route Pokémon through real doubles roles instead of replacing them with legendaries: Light Ball mascot, Guts bird, redirection mushroom, and Belly Drum raccoon. Leading with offense keeps the later Rage Powder setup from repeating Calvin's opening redirection pattern. Wally's current Mauville redirection-plus-Belly Drum module is explicitly flagged for replacement when that encounter is audited.",
-      "closure": "Battle 4 is difficult because either two-Pokémon wave can snowball, but neither begins behind guaranteed redirection and every enabling action has several legal interruptions. It demonstrates that Verdant's ordinary Pokémon can be as dangerous as its rare showcases."
+      "team_intent": "Light Ball Lightning Rod Pikachu and Toxic Orb Guts Taillow lead with Fake Out, Electroweb speed control, priority, immediate damage, and protection from Electric targeting. Eviolite Dry Skin Paras and Sitrus Quick Feet Zigzagoon form the back-line setup mode: Rage Powder or Spore can buy Belly Drum, then Extreme Speed supplies pressure.",
+      "intended_counterplay": "The opening pair is vulnerable to Ground, Rock, Intimidate, and coordinated targeting; Protect can also expose Fake Out or consume Taillow's first Guts turn. When the back line appears, Fake Out, Taunt, spread damage, early Grass or Overcoat Pokémon, Hatenna's Magic Bounce, Fire or Flying pressure, or a double target can remove the frail Eviolite Paras before it buys a free Drum. Dreepy, Rotom, and other Ghosts ignore Extreme Speed and Facade, while Intimidate and burns hinder Zigzagoon. The player can disrupt either wave without predicting a forced opening.",
+      "bespoke_ai": "Allen uses normal foe-aware doubles scoring plus partner awareness and contextual speed control. The AI can choose immediate Pikachu and Taillow pressure before the later redirection option appears; Rage Powder, Spore, Belly Drum, Fake Out, Electroweb, Protect, and attacks are evaluated normally, with no forced move, target, turn, or switch.",
+      "uniqueness": "Allen weaponizes three true first-stage Pokémon and one young mascot through real doubles roles: Light Ball Pikachu, Guts Taillow, Eviolite redirection Paras, and Belly Drum Zigzagoon. Leading with offense keeps the later Rage Powder setup from repeating Calvin's opening redirection pattern. Wally's current Mauville redirection-plus-Belly Drum module is explicitly flagged for replacement when that encounter is audited.",
+      "closure": "Battle 4 is difficult because either two-Pokémon wave can snowball, but neither begins behind guaranteed redirection and every enabling action has several legal interruptions. It now demonstrates the intended progression rule directly: young Pokémon can execute expert doubles without being replaced by premature evolved forms."
     },
     "BATTLE_005_ROUTE_102_TIANA": {
       "guide_order": 5,
@@ -290,74 +339,79 @@
       "campaign_point": "Final optional trainer in the recommended Route 102 sweep before Petalburg City",
       "strict_cap": 14,
       "player_state": "The player can bring six level-14 Pokémon from Routes 101, 102, and 103 plus Old Rod encounters, with every legal move, ability switching, and the core held-item shop.",
+      "evolution_stage_fit": {
+        "campaign_phase": "pre-Stone youngster chapter",
+        "effective_levels": "14-16",
+        "eligible_ratio": "4/4",
+        "mature_exceptions": [],
+        "registered_showcases": [
+          "Arctozolt is the deliberately rare single-stage fossil ace."
+        ],
+        "mega_access": false,
+        "status": "pass",
+        "reason": "Amaura evolves at 39, Alolan Sandshrew uses an Ice Stone, Swinub evolves at 33, and Arctozolt is genuinely single-stage."
+      },
       "manual_quality": 10,
-      "manual_difficulty": 8.3,
+      "manual_difficulty": 8.5,
       "corpus_review": {
         "reference_pool_size": 983,
         "full_team_candidates": [
           {
             "source": "docs/smogon_gen4_9_ou_uu_nu_sample_teams.json",
+            "team": "gen8nu #8 — Double Meteor Beam Waters",
+            "decision": "juvenile lead role selected, full team rejected",
+            "reason": "Focus Sash Snow Warning Aurorus supplies the correct Aurora Veil, Blizzard, and Earth Power shell, but the mature final form and its five partners belong later. Amaura carries the role legally at cap 14."
+          },
+          {
+            "source": "docs/showdown_gen8_random_singles_30.json",
+            "sample": 1,
+            "decision": "juvenile physical role selected, full team rejected",
+            "reason": "Alolan Sandslash supplies the Slush Rush Steel-and-Ice pressure model, but its final form and unrelated team are replaced by Eviolite Alolan Sandshrew without Swords Dance."
+          },
+          {
+            "source": "docs/showdown_gen4_random_doubles_30.json",
+            "sample": 16,
+            "decision": "juvenile set selected, full team rejected",
+            "reason": "The corpus actually contains a competitive Swinub, but Bayleef, Machoke, Jolteon, Staravia, and Gliscor do not form Tiana's snow squad."
+          },
+          {
+            "source": "docs/smogon_gen4_9_ou_uu_nu_sample_teams.json",
             "team": "gen8ou #8 — Calm Mind Fini Hail",
-            "decision": "selected as the structural backbone, rejected verbatim",
-            "reason": "Alolan Ninetales plus Slush Rush Arctozolt is the correct snow core, but the singles team around Heatran, Kartana, Landorus, and Tapu Fini is unrelated to Tiana's doubles snow identity."
-          },
-          {
-            "source": "docs/showdown_gen8_random_doubles_30.json",
-            "sample": 5,
-            "decision": "snow pair retained, one exact set selected",
-            "reason": "Alolan Ninetales and Froslass already coexist here, but Heatran, Coalossal, Emolga, and Sylveon make the complete team a mixed Fire composition rather than snow offense."
-          },
-          {
-            "source": "docs/showdown_champions_random_doubles_30.json",
-            "sample": 24,
-            "decision": "individual set selected",
-            "reason": "The exact Aurora Veil Ninetales is compatible, while the full team includes unavailable Paldean Tauros and an unrelated Shell Smash, Speed Boost, and custom-Mega mixture."
-          },
-          {
-            "source": "docs/showdown_champions_random_doubles_30.json",
-            "sample": 6,
-            "decision": "rejected as a full import",
-            "reason": "Its Vanilluxe snow plus dual Trick Room is coherent, but six fully developed Pokémon and Mega Charizard X create late-boss complexity rather than a Route 102 weather lesson."
+            "decision": "fossil speed role selected, full team rejected",
+            "reason": "Slush Rush Arctozolt is the right single-stage payoff, but Alolan Ninetales and the mature OU shell are tabled for a later snow specialist."
           }
         ],
-        "decision": "No complete team is imported. The best full-team snow backbone is rebuilt as a native four-Pokémon doubles squad with one Slush Rush fossil, one priority bruiser, and no double weather-nuke lock."
+        "decision": "No complete youthful snow team fits verbatim. Four mature competitive roles are translated into three first-stage Pokémon and one single-stage fossil, with one setup axis and no premature final evolution."
       },
       "competitive_references": [
         {
-          "source": "docs/showdown_champions_random_doubles_30.json",
-          "sample": 24,
-          "seed": "24,58986,37129,31214",
-          "adaptation": "Alolan Ninetales's Light Clay, Snow Warning, Blizzard, Moonblast, Protect, and Aurora Veil set is imported verbatim as the lead."
+          "source": "docs/smogon_gen4_9_ou_uu_nu_sample_teams.json",
+          "team": "gen8nu #8 — Double Meteor Beam Waters",
+          "adaptation": "Amaura inherits Aurorus's Focus Sash, Snow Warning, Aurora Veil, Blizzard, and Earth Power shell. Protect replaces Stealth Rock for a fragile doubles lead."
+        },
+        {
+          "source": "docs/showdown_gen8_random_singles_30.json",
+          "sample": 1,
+          "seed": "1,7919,1640,31348",
+          "adaptation": "Alolan Sandshrew keeps Sandslash's Slush Rush and Iron Head identity. Eviolite, Icicle Crash, Brick Break, and Protect create immediate juvenile pressure without importing Swords Dance."
+        },
+        {
+          "source": "docs/showdown_gen4_random_doubles_30.json",
+          "sample": 16,
+          "seed": "116,1114,48015,30678",
+          "adaptation": "Swinub's corpus set already supplies Icicle Crash and Superpower. Choice Band, Ice Shard, and Rock Slide turn it into a no-setup priority and spread attacker."
         },
         {
           "source": "docs/smogon_gen4_9_ou_uu_nu_sample_teams.json",
           "team": "gen8ou #8 — Calm Mind Fini Hail",
-          "adaptation": "Arctozolt keeps the team's Slush Rush Bolt Beak identity; Expert Belt and Protect translate the snow core into doubles pressure without Life Orb inflation or the singles team's Boots and mixed attacks."
-        },
-        {
-          "source": "docs/showdown_gen8_random_singles_30.json",
-          "sample": 19,
-          "seed": "19,19391,29414,5599",
-          "adaptation": "This Arctozolt donor supplies Bolt Beak, Icicle Crash, and Stomping Tantrum. Protect replaces Thunder Wave, while Slush Rush and Expert Belt connect it to the selected hail backbone."
-        },
-        {
-          "source": "docs/showdown_gen8_random_doubles_30.json",
-          "sample": 5,
-          "seed": "5,39595,7812,25626",
-          "adaptation": "Froslass's Sitrus Berry, Cursed Body, Protect, Icy Wind, Ice Beam, and Shadow Ball set is imported verbatim as speed control and special pressure."
-        },
-        {
-          "source": "docs/showdown_gen9_random_doubles_30.json",
-          "sample": 27,
-          "seed": "27,17208,41758,59690",
-          "adaptation": "Mamoswine's Life Orb, Thick Fat, Icicle Crash, High Horsepower, Protect, and Ice Shard set is imported verbatim as the level-15 priority bruiser."
+          "adaptation": "Arctozolt keeps the mature team's Slush Rush Bolt Beak identity; Expert Belt, Icicle Crash, Stomping Tantrum, and Protect make the true single-stage fossil the legal level-16 ace."
         }
       ],
-      "team_intent": "Light Clay Snow Warning Alolan Ninetales and Expert Belt Slush Rush Arctozolt lead with Aurora Veil, perfectly accurate Blizzard, and fast Bolt Beak pressure. Sitrus Cursed Body Froslass provides Icy Wind and mixed special coverage, while level-15 Life Orb Thick Fat Mamoswine supplies immediate Ground damage and Ice Shard priority without a second Slush Rush nuke.",
-      "intended_counterplay": "Remove or replace snow before Aurora Veil, Taunt or focus Ninetales, break Veil with Brick Break or Psychic Fangs, and use Wide Guard against Blizzard. Fire, Steel, Rock, Fighting, Ground, and Water coverage hit different members; priority and Trick Room bypass Slush Rush, Intimidate and burns contain both physical attackers, and Protect punishes Bolt Beak timing. Once snow ends, only Arctozolt loses its speed multiplier.",
-      "bespoke_ai": "Tiana uses foe-aware smart switching plus reusable field- and speed-control preferences. Aurora Veil and Icy Wind receive contextual bonuses only when useful; snow itself is automatic, and no move, target, switch, or opening is forced.",
-      "uniqueness": "This is Verdant's first full weather battle and its only early Galar-fossil snow sprint. It showcases rare Arctozolt and a corpus-exact Mamoswine without spending another legendary immediately after Calvin's Mew or repeating Rick and Allen's setup structures.",
-      "closure": "Battle 5 is a severe Route 102 finale because snow enables screens, accurate spread damage, and one fast fossil attacker backed by Mamoswine priority. It remains open because weather replacement, screen breaking, Wide Guard, priority, Trick Room, Intimidate, burns, typing, and focused pressure each attack a different dependency."
+      "team_intent": "Focus Sash Snow Warning Amaura and Eviolite Slush Rush Alolan Sandshrew lead with Aurora Veil, accurate Blizzard, fast Ice and Steel pressure, and Brick Break utility. Choice Band Thick Fat Swinub adds Ice Shard priority, Rock Slide spread damage, and Superpower, while level-16 Expert Belt Slush Rush Arctozolt is the single-stage Bolt Beak ace.",
+      "intended_counterplay": "Remove or replace snow, Taunt or double-target Sash Amaura before Veil, break Veil, or use Wide Guard against Blizzard and Rock Slide. Fire, Fighting, Rock, Steel, Ground, and Water coverage hit different members; Flying and Levitate avoid Ground coverage, priority and Trick Room bypass Slush Rush, and Intimidate or burns contain all three physical attackers. Protect punishes Bolt Beak timing, and the team has no second setup mode once Veil is denied.",
+      "bespoke_ai": "Tiana uses foe-aware smart switching plus field-control and first-turn setup preferences. Snow is automatic; Aurora Veil receives a contextual bonus without being forced, and the now-irrelevant generic speed-control profile is removed because no team member uses an active speed-control move.",
+      "uniqueness": "This is Verdant's first full weather battle and its juvenile fossil snow lesson. Amaura and Alolan Sandshrew appear on no other current trainer, Swinub's only other use is a much later level-one gimmick, and no Battles 1-4 species repeats. The mature Ninetales-A/Froslass/Mamoswine shell is preserved for cap-70 Route 133 trainer Linda.",
+      "closure": "Battle 5 is 10/10 because three young Pokémon and one true fossil create a complete snow puzzle without premature evolutions. Weather, Veil, two distinct Slush Rush attackers, priority, spread damage, and Bolt Beak make it severe, while every dependency has several independent answers."
     },
     "BATTLE_006_ROUTE_104_BILLY": {
       "guide_order": 6,
@@ -368,74 +422,242 @@
       "campaign_point": "First optional trainer on Route 104 south after Petalburg City",
       "strict_cap": 14,
       "player_state": "The player retains the full Route 101-103 and Old Rod team pool, then gains Route 104 south catches before Billy. Every legal move, ability switching, core held items, and frictionless cap leveling remain available.",
+      "evolution_stage_fit": {
+        "campaign_phase": "pre-Stone youngster chapter",
+        "effective_levels": "14-16",
+        "eligible_ratio": "4/4",
+        "mature_exceptions": [],
+        "registered_showcases": [
+          "Ditto is the deliberately strange single-stage mirror opener."
+        ],
+        "mega_access": false,
+        "status": "pass",
+        "reason": "Ditto is genuinely single-stage; Wimpod, Sandygast, and Tirtouga are all first-stage and below their real evolution thresholds."
+      },
       "manual_quality": 10,
-      "manual_difficulty": 8.0,
+      "manual_difficulty": 8.3,
       "corpus_review": {
         "reference_pool_size": 983,
         "full_team_candidates": [
           {
+            "source": "docs/smogon_gen4_9_ou_uu_nu_sample_teams.json",
+            "team": "gen7ou #26 — Ditto Semi Stall",
+            "decision": "mirror role selected, full team rejected",
+            "reason": "Choice Scarf Imposter Ditto is the exact proven opener, but the mature semi-stall roster is unrelated to Billy's young shoreline singles progression."
+          },
+          {
+            "source": "docs/showdown_gen7_random_singles_30.json",
+            "sample": 26,
+            "decision": "juvenile tempo role selected, full team rejected",
+            "reason": "Golisopod supplies the Emergency Exit, Spikes, and Aqua Jet tempo concept, but its mature form and full team are moved down to stage-legal Wimpod."
+          },
+          {
             "source": "docs/showdown_gen7_random_doubles_30.json",
             "sample": 10,
-            "decision": "individual set selected, full team rejected",
-            "reason": "Palossand fits the beach exactly, but Kartana, Togekiss, Magcargo, Meowstic, and Hariyama form an unrelated doubles support collage."
+            "decision": "juvenile anchor selected, full team rejected",
+            "reason": "Palossand's shoreline attrition set remains ideal, but its level-42 evolution and unrelated doubles partners are replaced by legal Eviolite Sandygast."
           },
           {
-            "source": "docs/showdown_gen8_random_doubles_30.json",
-            "sample": 2,
-            "decision": "individual set selected, full team rejected",
-            "reason": "Cramorant's Tailwind attacker fits; Marshadow, Wailord, Nidoqueen, Manectric, and Arctozolt do not form a shoreline singles progression."
-          },
-          {
-            "source": "docs/showdown_champions_random_doubles_30.json",
-            "sample": 5,
-            "decision": "individual set selected, full team rejected",
-            "reason": "Crabominable's legal Life Orb priority set fits, but Mega Aerodactyl, Tyranitar, Klefki, Banette, and Chimecho create a developed screens-and-sand team with no shoreline identity."
-          },
-          {
-            "source": "docs/smogon_gen4_9_ou_uu_nu_sample_teams.json",
-            "team": "gen8ou #1 — daunt rain",
-            "decision": "rejected as a full import",
-            "reason": "This is the closest complete shoreline offense, but importing a six-Pokémon rain engine immediately after Tiana would repeat weather and overwhelm the route pacing."
-          },
-          {
-            "source": "docs/smogon_gen4_9_ou_uu_nu_sample_teams.json",
-            "team": "gen8nu #4 — dd aero spikes",
-            "decision": "rejected as a full import",
-            "reason": "It supplies Dhelmise's legal spin-and-Poltergeist role, but the complete team repeats hazard stacking and setup offense rather than Billy's shoreline progression."
+            "source": "docs/showdown_gen6_random_singles_30.json",
+            "sample": 11,
+            "decision": "juvenile reactive ace selected, full team rejected",
+            "reason": "Choice Band Solid Rock Carracosta supplies the immediate Water/Rock pressure model, but Tirtouga uses Weakness Policy instead of importing the final form or another setup sweep."
           }
         ],
-        "decision": "Only fourteen corpus teams contain any chosen species, and none contains more than one. Three exact donors are joined by one legal cross-donor Dhelmise to create a location-specific shoreline gauntlet."
+        "decision": "All 983 teams were scanned. Wimpod, Sandygast, and Tirtouga appear in none; Ditto appears in seven, with gen7 OU #26 providing the exact Scarf Imposter role. Mature donor roles are translated to young shoreline species instead of importing any full team."
       },
       "competitive_references": [
+        {
+          "source": "docs/smogon_gen4_9_ou_uu_nu_sample_teams.json",
+          "team": "gen7ou #26 — Ditto Semi Stall",
+          "adaptation": "Ditto keeps the exact Choice Scarf and Imposter identity. Transform is its sole legal move; the copied opposing moves replace the empty slots immediately on entry."
+        },
+        {
+          "source": "docs/showdown_gen7_random_singles_30.json",
+          "sample": 26,
+          "seed": "26,9289,40215,28353",
+          "adaptation": "Wimpod adapts Golisopod's Spikes, Aqua Jet, and automatic half-HP exit. Focus Sash, Taunt, and Leech Life let the fragile first stage contribute one tempo action without masquerading as its level-30 evolution."
+        },
         {
           "source": "docs/showdown_gen7_random_doubles_30.json",
           "sample": 10,
           "seed": "10,13655,15527,51241",
-          "adaptation": "Palossand's Sitrus Berry, Water Compaction, Shore Up, Earth Power, Shadow Ball, and Toxic set is imported verbatim as the sandcastle opener."
+          "adaptation": "Sandygast inherits Palossand's Water Compaction, Shore Up, Earth Power, Shadow Ball, and Toxic plan. Eviolite replaces Sitrus Berry to make the level-15 first stage a fair midfight anchor."
+        },
+        {
+          "source": "docs/showdown_gen6_random_singles_30.json",
+          "sample": 11,
+          "seed": "11,21574,17070,17043",
+          "adaptation": "Tirtouga translates Carracosta's Solid Rock physical pressure to level 16. Weakness Policy makes super-effective hits an interactive risk, while Liquidation, Stone Edge, Aqua Jet, and Knock Off avoid another Shell Smash module."
+        }
+      ],
+      "team_intent": "Choice Scarf Imposter Ditto turns the player's chosen lead into the opening puzzle and explains Billy's strange tracks. Focus Sash Wimpod can Taunt or place one Spike before Wimp Out creates natural tempo; Eviolite Water Compaction Sandygast supplies recovery and status; level-16 Solid Rock Tirtouga is a reactive Weakness Policy ace with dual STAB, priority, and item removal rather than another setup move.",
+      "intended_counterplay": "Lead with a low-impact or status-focused Pokémon, exploit Ditto's Choice lock, or remove its Scarf. Taunt, multihit attacks, status, or immediate pressure limit Wimpod's one action. Special Water, Grass, Ice, Ghost, Dark, and Knock Off pressure Sandygast. Burn, Intimidate, Encore, item removal, safe neutral damage, or one decisive Grass attack avoids or answers Tirtouga's Weakness Policy. Ditto's variable type, Sandygast's Electric immunity, and Wimpod's Grass neutrality prevent one attack from solving the full sequence.",
+      "bespoke_ai": "Billy remains a deliberate singles pacing fight. Imposter and Wimp Out function automatically; normal foe-aware scoring understands the Choice lock, hazards, recovery, status, Weakness Policy, and priority, while smart switching escapes bad copies or matchups. The obsolete Tailwind speed-control profile is removed, and no move or turn is forced.",
+      "uniqueness": "Billy's footprint dialogue now describes a literal young shoreline mystery: a copied set of tracks, a fleeing beach bug, a living sand pile, and a fossil turtle from the cliffs. None appears in Battles 1-5; Sandygast and Tirtouga appear on no other current trainer, and Wimpod appears only once much later. The mature haunted shoreline quartet is preserved for a later ocean or abandoned-ship encounter.",
+      "closure": "Battle 6 is 10/10 because four low-stage or single-stage Pokémon create a variable mirror, tempo hazard, attrition anchor, and reactive ace without any premature evolution. Its difficulty comes from reading the sequence and managing items, not inflated final forms or a forced counter."
+    },
+    "BATTLE_007_ROUTE_104_DARIAN": {
+      "guide_order": 7,
+      "trainer_ids": [
+        "TRAINER_DARIAN"
+      ],
+      "status": "closed",
+      "campaign_point": "Second natural optional trainer on Route 104 south after Petalburg City; Darian is talk-initiated and can be skipped",
+      "strict_cap": 14,
+      "player_state": "On a first visit the player can choose from 40 distinct wild species plus one of 21 starters. Every legal move and ability switch is available, core competitive held items cost $1,000, and Rare Candies remove cap grinding, but wild IVs and natures remain random and the Mega Bracelet is not yet available.",
+      "evolution_stage_fit": {
+        "campaign_phase": "pre-Stone youngster chapter",
+        "effective_levels": "14-17",
+        "eligible_ratio": "4/4",
+        "mature_exceptions": [],
+        "mega_access": false,
+        "status": "pass",
+        "reason": "Remoraid evolves at 25, Clamperl evolves only by item, and Qwilfish plus Bruxish are genuinely single-stage in Verdant's Gen-8 engine."
+      },
+      "manual_quality": 10,
+      "manual_difficulty": 8.5,
+      "corpus_review": {
+        "reference_pool_size": 983,
+        "full_team_candidates": [
+          {
+            "source": "docs/showdown_gen4_random_doubles_30.json",
+            "sample": 3,
+            "decision": "rare lead set selected, full team rejected",
+            "reason": "The exact Scarf Water Spout Remoraid is perfect for Darian, but Snover, Mew, Flareon, Machamp, and Castform form an unrelated six-Pokémon collage."
+          },
+          {
+            "source": "docs/showdown_gen8_random_doubles_30.json",
+            "sample": 8,
+            "decision": "back-line control set selected, full team rejected",
+            "reason": "Qwilfish's Intimidate, Thunder Wave, Protect, Poison Jab, and Liquidation set fits exactly, but its mature offensive partners have no Fisherman or youngster-stage identity."
+          },
+          {
+            "source": "docs/showdown_gen7_random_doubles_30.json",
+            "sample": 26,
+            "decision": "Dazzling attacker role selected, full team rejected",
+            "reason": "Bruxish provides Dazzling and Psychic Fangs, but Swords Dance is removed and its Raichu, Spiritomb, Rhyperior, Landorus, and Mega Alakazam partners belong much later."
+          },
+          {
+            "source": "docs/showdown_gen6_random_singles_30.json",
+            "sample": 12,
+            "decision": "rejected as a full import",
+            "reason": "Luvdisc plus Stunfisk is the only corpus team containing even two eligible fish, but its passive singles shell and four unrelated mature partners do not produce a hard doubles encounter."
+          }
+        ],
+        "decision": "All 983 references were reviewed. No team contains three eligible fish and only one contains two, so no complete import fits. Darian combines three scarce individual donors with one source-legal bespoke Clamperl endgame, without reusing weather, shoreline-object, redirection, Web, or Belly Drum modules."
+      },
+      "competitive_references": [
+        {
+          "source": "docs/showdown_gen4_random_doubles_30.json",
+          "sample": 3,
+          "seed": "103,29237,27956,16507",
+          "adaptation": "Remoraid's Choice Scarf, Hustle, Water Spout, Seed Bomb, Fire Blast, and Hidden Power set is imported exactly. Its level-17 offset is safe because Remoraid does not evolve until 25."
+        },
+        {
+          "source": "docs/showdown_gen7_random_doubles_30.json",
+          "sample": 26,
+          "seed": "26,9289,40215,28353",
+          "adaptation": "Bruxish keeps Dazzling, Psychic Fangs, and Protect. Expert Belt, Crunch, and Taunt replace Sitrus, Aqua Jet, and Swords Dance so it protects the first cast and breaks screens without becoming a second setup threat."
         },
         {
           "source": "docs/showdown_gen8_random_doubles_30.json",
-          "sample": 2,
-          "seed": "2,15838,3183,62685",
-          "adaptation": "Cramorant's Life Orb, Gulp Missile, Hurricane, Ice Beam, Surf, and Tailwind set is imported verbatim to leave speed support for the slower shoreline breakers."
+          "sample": 8,
+          "seed": "8,63352,12441,54102",
+          "adaptation": "Qwilfish's Sitrus Berry, Intimidate, Thunder Wave, Protect, Poison Jab, and Liquidation set is imported verbatim as the second-wave board controller."
         },
         {
-          "source": "docs/showdown_champions_random_doubles_30.json",
-          "sample": 5,
-          "seed": "5,39595,7812,25626",
-          "adaptation": "Crabominable's Life Orb, Iron Fist, Drain Punch, Ice Hammer, Mach Punch, and Protect set is imported verbatim as the legal level-15 closer."
-        },
-        {
-          "source": "docs/smogon_gen4_9_ou_uu_nu_sample_teams.json",
-          "team": "gen8nu #4 plus gen7nu #4/#7",
-          "adaptation": "Gen 8 NU supplies Poltergeist, Power Whip, and Rapid Spin; Gen 7 NU supplies Anchor Shot. Assault Vest replaces recovery so trapping, hazard cleanup, three-STAB pressure, and a Rapid Spin speed increase serve one legal singles role."
+          "source": "Verdant source legality",
+          "adaptation": "Clamperl appears in zero corpus teams. Its Focus Sash Shell Smash, foe-only Muddy Water, Ice Beam, and Protect set is hand-authored because it is the stage-legal Fisherman payoff no mature ladder roster can supply."
         }
       ],
-      "team_intent": "Sitrus Water Compaction Palossand opens with Shore Up, dual STAB, and Toxic attrition. Life Orb Gulp Missile Cramorant can establish Tailwind while attacking; Assault Vest Steelworker Dhelmise then traps and pressures through three effective STAB types, and Life Orb Iron Fist Crabominable closes with recovery, priority, and protection under the remaining speed turns.",
-      "intended_counterplay": "Grass, Water, Ice, Ghost, and Dark pressure break Palossand; Electric or Rock attacks answer Cramorant; Fire, Ghost, Dark, and Knock Off contain Dhelmise; Flying, Psychic, Fairy, or a faster revenge attack checks Crabominable. Taunt limits Palossand, Protect consumes Tailwind and Life Orb health, burns and Intimidate blunt both physical breakers, and hazards punish Cramorant unless Dhelmise spends a turn spinning.",
-      "bespoke_ai": "Billy remains a singles pacing fight. Normal foe-aware viability and smart switching are supplemented only by contextual speed-control preference, so Tailwind is attractive when the slow shoreline roster needs it but never forced.",
-      "uniqueness": "Billy's footprint dialogue now resolves into a literal shoreline team: haunted sandcastle, diving seabird, seaweed anchor, and ice crab. It contains no weather setter, no setup sweeper, no legendary, and no species used in Battles 1-5.",
-      "closure": "Battle 6 is difficult through sustained coverage, attrition, Tailwind, trapping, and two Life Orb attackers rather than a single engine. Every member has different weaknesses, so flexible teams are rewarded and no one move solves the whole fight."
+      "team_intent": "Level-17 Choice Scarf Remoraid and Expert Belt Dazzling Bruxish form the first cast: full-HP Water Spout attacks immediately while Dazzling blocks priority and Bruxish applies Taunt, screen breaking, and physical coverage. Sitrus Intimidate Qwilfish and level-16 Focus Sash Clamperl form the second cast: Thunder Wave and Intimidate buy one Shell Smash opportunity, then Muddy Water or Ice Beam converts it into pressure.",
+      "intended_counterplay": "Any normal-speed hit weakens Water Spout; Storm Drain, Water Absorb, Dry Skin, Water resistance, Protect, Wide Guard where legal, or removing Remoraid's Scarf punish the first cast. Dazzling blocks priority but not ordinary attacks. Taunt, a double target, special pressure, Haze, Clear Smog, Trick Room, or phazing stops or reverses Clamperl; Grass and Electric attacks remain strong, while Qwilfish's Poison coverage and Clamperl's Ice Beam stop one-button sweeping. No exact capture or turn sequence is required.",
+      "bespoke_ai": "Native doubles scoring understands Water Spout's HP scaling, Choice locking, Dazzling, Intimidate, Shell Smash, Muddy Water, Protect, and Thunder Wave. Darian adds HP awareness, smart switching, first-turn setup preference, and contextual speed control. Neither wave is scripted: Remoraid can change its Choice lock, Bruxish can attack or Taunt, and Clamperl's Smash remains interruptible.",
+      "uniqueness": "Darian becomes Verdant's two-cast young-fish puzzle. Remoraid appears once, Bruxish twice, Qwilfish eight times, and Clamperl zero times across all 983 references; none appears in Battles 1-6. The mature OCIC quartet remains preserved for a later tournament-style opponent instead of being lost.",
+      "closure": "Battle 7 is 10/10 because four stage-legal fish create two readable but different doubles waves: protect the first Water Spout, then buy a Shell Smash. Low raw BSTs justify the level-17 and level-16 offsets, while broad move, ability, item, status, weather, and speed-control answers keep the fight severe without becoming a lock-and-key puzzle."
+    },
+    "BATTLE_008_ROUTE_104_CINDY": {
+      "guide_order": 8,
+      "trainer_ids": [
+        "TRAINER_CINDY_1"
+      ],
+      "status": "closed",
+      "campaign_point": "Next northbound Route 104 south trainer after Darian; Cindy remains an optional singles pacing battle before the remaining estate trainers and Petalburg Woods",
+      "strict_cap": 14,
+      "player_state": "The player has the full pre-Woods catch pool, one of 21 starters, every legal move and ability switch, core competitive held items for $1,000, and frictionless cap leveling. The Mega Bracelet is not yet available.",
+      "evolution_stage_fit": {
+        "campaign_phase": "pre-Stone youngster chapter",
+        "effective_levels": "15-17",
+        "eligible_ratio": "4/4",
+        "mature_exceptions": [],
+        "mega_access": false,
+        "status": "pass",
+        "reason": "Buneary is a first-stage friendship family, Gothita evolves at level 32, and Mawile plus Furfrou are genuinely single-stage in Verdant. Debutante Trim is cosmetic, not a Mega form."
+      },
+      "manual_quality": 10,
+      "manual_difficulty": 8.4,
+      "corpus_review": {
+        "reference_pool_size": 983,
+        "full_team_candidates": [
+          {
+            "source": "docs/showdown_champions_random_doubles_30.json",
+            "sample": 7,
+            "decision": "young scout role selected, full team rejected",
+            "reason": "Lopunny supplies the Fake Out and pivoting luxury-pet shell, but its evolved form and Garbodor, Azumarill, Arcanine, Sableye, and Milotic partners do not fit the cap-14 Route 104 chapter."
+          },
+          {
+            "source": "docs/showdown_gen5_random_singles_30.json",
+            "sample": 29,
+            "decision": "young special-control role selected, full team rejected",
+            "reason": "Gothita is the sole youthful corpus member that fits Cindy's time-control idea, but its stall set and unrelated mature partners are replaced by a finite Trick Room handoff."
+          },
+          {
+            "source": "docs/showdown_gen7_random_singles_30.json",
+            "sample": 24,
+            "decision": "non-Mega ace attacks selected, full team rejected",
+            "reason": "Mawile supplies Play Rough, Iron Head, and Sucker Punch, but Mawilite and its legendary-heavy roster are illegal before the Bracelet. Verdant's native Huge Power Mawile carries the role without a gimmick."
+          },
+          {
+            "source": "docs/showdown_champions_random_doubles_30.json",
+            "sample": 17,
+            "decision": "luxury closer identity selected, full team rejected",
+            "reason": "Fur Coat Furfrou is a perfect final showpiece, but the random rain-and-Ghost collage is not a coherent early singles battle."
+          }
+        ],
+        "decision": "All 983 references were reviewed. Buneary appears in none, Gothita once, Furfrou three times, and Mawile fourteen times; no reference contains even two of the four. Cindy therefore translates four proven individual roles into one deliberately sequenced singles fight instead of importing a mismatched mature team."
+      },
+      "competitive_references": [
+        {
+          "source": "docs/showdown_champions_random_doubles_30.json",
+          "sample": 7,
+          "seed": "7,55433,10898,22765",
+          "adaptation": "Buneary inherits Lopunny's fast Limber Fake Out identity. Eviolite, Return, Drain Punch, and Encore make the level-16 first stage a scout that punishes greed without becoming a sweeper."
+        },
+        {
+          "source": "docs/showdown_gen5_random_singles_30.json",
+          "sample": 29,
+          "seed": "29,33046,44844,56829",
+          "adaptation": "The corpus's only Gothita proves the special-attacker shell. Focus Sash, Competitive, Trick Room, Psychic, Thunderbolt, and Protect turn it into a finite speed-reversal bridge rather than importing Shadow Tag stall."
+        },
+        {
+          "source": "docs/showdown_gen7_random_singles_30.json",
+          "sample": 24,
+          "seed": "24,58986,37129,31214",
+          "adaptation": "Mawile retains Play Rough, Iron Head, and Sucker Punch from the proven set, adds Fire Fang from the Gen 4 random donor, and replaces the forbidden Mawilite with Life Orb. It has no free setup turn."
+        },
+        {
+          "source": "docs/showdown_gen7_random_singles_30.json",
+          "sample": 10,
+          "seed": "10,13655,15527,51241",
+          "adaptation": "Furfrou keeps Fur Coat and U-turn from its corpus set. Debutante Trim, Choice Band, Double-Edge, Zen Headbutt, and Sucker Punch make it a fast post-Room closer whose lock remains exploitable."
+        }
+      ],
+      "team_intent": "Eviolite Buneary scouts with Fake Out and Encore, then Focus Sash Competitive Gothita conditionally reverses speed. Level-17 Brave Huge Power Mawile spends the finite Trick Room turns attacking immediately; fast Choice Band Debutante Furfrou is intentionally awkward inside Trick Room and becomes the closer after it expires. Cindy's luxury pets look polished, but the sequence has a real temporal seam.",
+      "intended_counterplay": "Ghosts blank most of Buneary, while Taunt, multihit attacks, item removal, or reversing Trick Room stop Gothita. Fire, Ground, burn, Intimidate, Protect, and physical walls contain Mawile; Fighting pressures both Normal types, but Gothita punishes it and Mawile is neutral. Special damage ignores Fur Coat, and Furfrou's Choice lock can be exploited. The player can win through offense, denial, bulk, status, or speed-order manipulation rather than one required catch.",
+      "bespoke_ai": "Cindy remains a native singles trainer. Foe awareness and smart switching understand immunities, U-turn, Choice lock, and bad matchups; contextual speed control uses Trick Room only when reversing order helps the current board. Setup-first-turn is deliberately absent because Gothita may enter later, and no trainer-specific forced turn is required.",
+      "uniqueness": "This is Verdant's first Trick Room lesson and its first deliberate doubles-to-singles pacing release. None of the four species appears in Battles 1-7, Debutante Furfrou gives the Lady class a native visual signature, and the fast last slot makes Trick Room a limited resource rather than a reusable module.",
+      "closure": "Battle 8 is 10/10 because four evolution-appropriate luxury partners form a readable temporal arc: scout, reverse time, exploit the window, then race after it closes. Levels 15-17 and optimized items make it an 8.4/10 fight, while the mode has numerous broad counters and never demands a single answer."
     }
   }
 }

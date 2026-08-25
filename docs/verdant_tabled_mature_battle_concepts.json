@@ -1,0 +1,91 @@
+{
+  "version": 1,
+  "purpose": "Preserve strong mature battle concepts removed from Verdant's pre-Stone-Badge sequence so they can be reassigned after their species and strategies fit campaign progression.",
+  "source_checkpoint": "e8427419b88fb37deb46d6b7c8ce3b476f3126ce",
+  "policy": {
+    "do_not_restore_verbatim_before": "The selected species are naturally stage-appropriate and the player has access to the same battle gimmick, if any.",
+    "selection_rule": "A later encounter must fit the trainer, location, cap, surrounding battle variety, and current species-use ledger. This file is a donor library, not an allocator."
+  },
+  "concepts": [
+    {
+      "former_encounter": "BATTLE_003_ROUTE_102_RICK",
+      "name": "Mature Bug Web offense",
+      "team": [
+        "Leavanny",
+        "Scizor",
+        "Heracross",
+        "Frosmoth"
+      ],
+      "full_design_source": "docs/verdant_bespoke_battle_designs.json at source_checkpoint",
+      "table_reason": "Three of four members are evolved forms that do not fit a cap-14 youngster route.",
+      "later_fit": "A midgame Bug specialist or forest rematch once evolved insects are visually and mechanically natural."
+    },
+    {
+      "former_encounter": "BATTLE_005_ROUTE_102_TIANA",
+      "name": "Mature snow sprint",
+      "team": [
+        "Ninetales-Alola",
+        "Arctozolt",
+        "Froslass",
+        "Mamoswine"
+      ],
+      "full_design_source": "docs/verdant_bespoke_battle_designs.json at source_checkpoint",
+      "table_reason": "Ninetales, Froslass, and especially Mamoswine make the first-route roster look postgame despite the strong weather design.",
+      "later_fit": "Route 133 trainer Linda at cap 70. She already carries a partial Ninetales-Alola and Arctozolt shell, so the complete mature snow quartet improves an existing theme instead of displacing an unrelated trainer."
+    },
+    {
+      "former_encounter": "BATTLE_006_ROUTE_104_BILLY",
+      "name": "Mature haunted shoreline singles",
+      "team": [
+        "Palossand",
+        "Cramorant",
+        "Dhelmise",
+        "Crabominable"
+      ],
+      "full_design_source": "docs/verdant_bespoke_battle_designs.json at source_checkpoint",
+      "table_reason": "The composition is thematically excellent but reads as a fully developed coastal veteran rather than the game's first beach trainer.",
+      "later_fit": "A later ocean route, abandoned ship, deep-sea area, or Billy rematch."
+    },
+    {
+      "former_encounter": "BATTLE_007_ROUTE_104_DARIAN",
+      "name": "Marco Silva 2020 OCIC quartet",
+      "team": [
+        {
+          "level_offset": 0,
+          "species": "Whimsicott",
+          "item": "Focus Sash",
+          "ability": "Prankster",
+          "moves": ["Tailwind", "Moonblast", "Fake Tears", "Protect"]
+        },
+        {
+          "level_offset": 0,
+          "species": "Dracovish",
+          "item": "Choice Scarf",
+          "ability": "Strong Jaw",
+          "moves": ["Fishious Rend", "Rock Slide", "Crunch", "Dragon Rush"]
+        },
+        {
+          "level_offset": 0,
+          "species": "Rotom-Heat",
+          "item": "Sitrus Berry",
+          "ability": "Levitate",
+          "moves": ["Thunderbolt", "Overheat", "Protect", "Dark Pulse"]
+        },
+        {
+          "level_offset": 1,
+          "species": "Sylveon",
+          "item": "Pixie Plate",
+          "ability": "Pixilate",
+          "moves": ["Hyper Voice", "Yawn", "Quick Attack", "Protect"]
+        }
+      ],
+      "provenance": [
+        "docs/vgc_major_champion_teams.json: ocic-2020",
+        "https://victoryroad.pro/2020/03/15/marcosilva-ocic20-report/",
+        "https://limitlessvgc.com/teams/201/"
+      ],
+      "table_reason": "The battle is excellent but visibly mature; it should not define the cap-14 youngster phase.",
+      "later_fit": "A late Ace Trainer, Victory Road opponent, high-level Fisherman rematch, or tournament-style optional challenge."
+    }
+  ]
+}
