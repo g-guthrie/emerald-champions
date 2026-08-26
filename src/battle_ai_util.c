@@ -385,9 +385,6 @@ static const u16 sIgnoreMoldBreakerMoves[] =
     MOVE_MOONGEIST_BEAM,
     MOVE_SUNSTEEL_STRIKE,
     MOVE_PHOTON_GEYSER,
-    #ifdef MOVE_LIGHT_THAT_BURNS_THE_SKY
-    MOVE_LIGHT_THAT_BURNS_THE_SKY,
-    #endif
     #ifdef MOVE_MENACING_MOONRAZE_MAELSTROM
     MOVE_MENACING_MOONRAZE_MAELSTROM,
     #endif
@@ -1434,8 +1431,10 @@ u32 AI_GetMoveAccuracy(u8 battlerAtk, u8 battlerDef, u16 atkAbility, u16 defAbil
 
     if (atkHoldEffect == HOLD_EFFECT_WIDE_LENS)
         calc = (calc * (100 + atkParam)) / 100;
-    else if (atkHoldEffect == HOLD_EFFECT_ZOOM_LENS && GetBattlerTurnOrderNum(battlerAtk) > GetBattlerTurnOrderNum(battlerDef));
+    else if (atkHoldEffect == HOLD_EFFECT_ZOOM_LENS && GetBattlerTurnOrderNum(battlerAtk) > GetBattlerTurnOrderNum(battlerDef))
+    {
         calc = (calc * (100 + atkParam)) / 100;
+    }
 
     return calc;
 }
@@ -3361,7 +3360,7 @@ bool32 PartyHasMoveSplit(u8 battlerId, u8 split)
 
             if (pp > 0 && move != MOVE_NONE)
             {
-                //TODO - handle photon geyser, light that burns the sky
+                // TODO: handle moves that choose their category dynamically.
                 if (gBattleMoves[move].split == split)
                     return TRUE;
             }

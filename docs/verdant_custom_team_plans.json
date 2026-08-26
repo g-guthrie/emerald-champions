@@ -3229,7 +3229,7 @@
         {
           "level": 0,
           "species": "SPECIES_DRAGONITE",
-          "item": "ITEM_FLYINIUM_Z",
+          "item": "ITEM_WEAKNESS_POLICY",
           "ability_slot": 2,
           "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
           "moves": [
@@ -7229,7 +7229,7 @@
         {
           "level": 0,
           "species": "SPECIES_ARCEUS_POISON",
-          "item": "ITEM_POISONIUM_Z",
+          "item": "ITEM_TOXIC_PLATE",
           "ability_slot": 0,
           "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
           "moves": [
@@ -7315,7 +7315,7 @@
         {
           "level": 0,
           "species": "SPECIES_ROTOM_FROST",
-          "item": "ITEM_ICIUM_Z",
+          "item": "ITEM_WIDE_LENS",
           "ability_slot": 0,
           "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
           "moves": [
@@ -7867,7 +7867,7 @@
         {
           "level": 0,
           "species": "SPECIES_TORNADUS",
-          "item": "ITEM_FLYINIUM_Z",
+          "item": "ITEM_LIFE_ORB",
           "ability_slot": 0,
           "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
           "moves": [

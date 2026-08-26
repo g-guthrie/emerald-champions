@@ -8,7 +8,7 @@ struct PulseBlendSettings
     u8 numColors;
     u8 delay;
     u8 numFadeCycles;
-    s8 maxBlendCoeff:4;
+    u8 maxBlendCoeff:4;
     s8 fadeType:2;
     s8 restorePaletteOnUnload:1;
     s8 unk7_7:1;

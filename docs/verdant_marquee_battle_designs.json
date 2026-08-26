@@ -1,0 +1,2702 @@
+{
+  "version": 1,
+  "scope": "Design-complete, source-unimplemented marquee battle dossiers. Exact implementation and closure remain chronological.",
+  "current_phase": "pokemon_league_main_story",
+  "corpus_identity": {
+    "version": 1,
+    "record_count": 1005,
+    "sha256": "44d79fd2a5f7578013b2363f9e47d75a0f05ae4239da3bd6891e9651bca2648a"
+  },
+  "mechanics_baselines": {
+    "pokemon_league_main_story": {
+      "strict_cap": 80,
+      "level_semantics": "Trainer levels are offsets from the active strict cap.",
+      "automatic_healing_between_members": false,
+      "manual_overworld_bag_between_members": true,
+      "pokemon_menu_between_members": true,
+      "save_menu_between_members": true,
+      "items_during_trainer_battles": false,
+      "party_composition_locked_after_entry": true,
+      "drake_releases_player_control_after_victory": true,
+      "hall4_allows_normal_overworld_menu": true,
+      "champion_room_forces_approach_after_entry": true,
+      "source_evidence": [
+        "data/maps/EverGrandeCity_SidneysRoom/scripts.inc",
+        "data/maps/EverGrandeCity_PhoebesRoom/scripts.inc",
+        "data/maps/EverGrandeCity_GlaciasRoom/scripts.inc",
+        "data/maps/EverGrandeCity_DrakesRoom/scripts.inc",
+        "data/maps/EverGrandeCity_Hall4/scripts.inc",
+        "data/maps/EverGrandeCity_ChampionsRoom/scripts.inc",
+        "src/start_menu.c",
+        "src/battle_main.c",
+        "src/pokemon.c"
+      ],
+      "mechanics_proposal": null
+    }
+  },
+  "expected_phase_anchors": [
+    "ELITE_FOUR_SIDNEY",
+    "ELITE_FOUR_PHOEBE",
+    "ELITE_FOUR_GLACIA",
+    "ELITE_FOUR_DRAKE",
+    "CHAMPION_WALLACE"
+  ],
+  "designs": {
+    "ELITE_FOUR_SIDNEY": {
+      "anchor_id": "ELITE_FOUR_SIDNEY",
+      "planning_tier": "league_gauntlet",
+      "status": {
+        "design": "authored-draft",
+        "fresh_critic": "pending",
+        "source": "unimplemented",
+        "static": "design-validated",
+        "runtime": "unplayed"
+      },
+      "concise_rationale": "Sidney has one escalation: Incineroar and Urshifu create the opening target dilemma, Yveltal establishes Dark Aura and Tailwind, Mega Absol owns one stable item-and-burn disruption phase, Darkrai proactively changes speed or controls a revealed answer, and Iron Head Supreme Overlord Kingambit is the sole final boss.",
+      "campaign_state": {
+        "strict_cap": 80,
+        "player_tools": [
+          "Six cap-80 Pokemon chosen from the campaign encounter pool available before League entry",
+          "Every legal level-up, Egg, TM/HM, and tutor move through the Pokemon Center teacher",
+          "On-demand legal ability switching and completed late-game evolution access",
+          "Core competitive held items, campaign-discovered item unlocks, and frictionless leveling",
+          "Set-style play with no in-battle Bag items"
+        ],
+        "mega_access": "The Mega Bracelet has been available since Granite Cave; the player may bring any legitimately acquired Mega Stone into the League.",
+        "evolution_phase": "Fully evolved and single-stage Pokemon are expected. No early-stage preservation rule applies at cap 80.",
+        "preparation_access": "Full PC, move-teacher, ability, item, and leveling preparation is available before League entry; party composition is locked after entry.",
+        "gauntlet_position": "First Elite Four member. The player enters fully prepared, then must manually repair Sidney's HP and faint pressure before Phoebe.",
+        "mechanics_baseline_id": "pokemon_league_main_story"
+      },
+      "runtime": {
+        "trainer_ids": [
+          "TRAINER_SIDNEY"
+        ],
+        "canonical_format": "double",
+        "party_size": 6,
+        "required": true,
+        "variants": [
+          {
+            "path": "main-story League",
+            "trainer_id": "TRAINER_SIDNEY",
+            "format": "double",
+            "in_scope": true
+          },
+          {
+            "path": "postgame rematch",
+            "trainer_id": "TRAINER_SIDNEY_4",
+            "format": "double",
+            "in_scope": false
+          },
+          {
+            "path": "legacy helper labels",
+            "trainer_ids": [
+              "TRAINER_SIDNEY_2",
+              "TRAINER_SIDNEY_3"
+            ],
+            "in_scope": false,
+            "note": "Helper labels still exist in the room script, but the main-story branch calls only TRAINER_SIDNEY."
+          }
+        ],
+        "current_source_baseline": {
+          "party": [
+            "Incineroar",
+            "Yveltal",
+            "Darkrai",
+            "Urshifu",
+            "Hoopa Unbound",
+            "Mega Absol"
+          ],
+          "level_offsets": [
+            0,
+            0,
+            0,
+            0,
+            1,
+            2
+          ],
+          "guide_difficulty": 91,
+          "guide_design_status": "not individually closed"
+        },
+        "source_paths": [
+          "src/data/trainer_parties.h:sParty_Sidney",
+          "src/data/trainers.h:TRAINER_SIDNEY",
+          "data/maps/EverGrandeCity_SidneysRoom/scripts.inc"
+        ]
+      },
+      "rolling_context": {
+        "available": false,
+        "reason": "The exact chronological rolling ledger has not yet reached the Pokemon League. This dossier therefore binds to the campaign anchors and must be rechecked against the final preceding ten battles before source implementation.",
+        "protected_neighbor_anchors": [
+          "ELITE_FOUR_PHOEBE",
+          "ELITE_FOUR_GLACIA",
+          "ELITE_FOUR_DRAKE",
+          "CHAMPION_WALLACE"
+        ],
+        "required_preimplementation_review": "Compare the final Victory Road window for recent Incineroar, Urshifu, Yveltal, Darkrai, Kingambit, Absol, Tailwind, Fake Out, Sucker Punch, and setup density. Preserve the identity; change a reserve species only if the final window creates a genuine collision."
+      },
+      "identity": {
+        "memory_hook": "Sidney steals the opening, darkens the tempo, sends Mega Absol in to ruin the ordinary board, and lets the fallen empower one final king.",
+        "story_fit": "Sidney's upbeat promise to hit both sides of the player's plan becomes a visible escalation: he steals position, accelerates the fight, proactively strips or burns the response, and ends with the one ugly threat built from everything already lost.",
+        "primary_player_question": "Can the player solve the Incineroar and Urshifu target dilemma, contest Yveltal tempo, and preserve a Fighting, Ground, or boost-control answer for the final Supreme Overlord Kingambit?",
+        "primary_mode": "Fake Out plus Unseen Fist positioning offense that pivots into Yveltal Dark Aura and Tailwind.",
+        "secondary_mode": "Mega Absol removes items, burns a visible physical threat, and reflects status as one stable phase; Lum Darkrai always has Icy Wind or Dark Pulse pressure and may Taunt or Disable revealed counterplay, while Kingambit alone owns the setup climax and carries Iron Head for surviving Fairy pressure.",
+        "preview_pressure": "Protect can lose to Urshifu, attacking Incineroar can trigger an Eject Button transition, Yveltal changes speed and Dark damage, Mega Absol makes items and physical attackers unsafe, and every early knockout visibly strengthens the final Kingambit."
+      },
+      "difficulty": {
+        "target": 10,
+        "observed": null,
+        "rationale": "The player cap remains 80 while Sidney uses offsets 0, 0, +1, +1, +1, and +2. Difficulty comes from the opening target dilemma, interactable Tailwind, proactive Mega Absol disruption, Darkrai's revealed-move control bridge, and an Iron Head Supreme Overlord climax rather than a +4 Mega, generic coverage cannon, or three setup sweepers.",
+        "pressure_sources": [
+          "Fake Out, Intimidate, Knock Off, Parting Shot, and Eject Button position theft",
+          "Choice Band Wicked Blow and Unseen Fist making the opening Protect decision unsafe",
+          "Dark Aura plus interactable Tailwind controlling the middle-game speed and damage exchange",
+          "Early Mega Absol using Knock Off, Will-O-Wisp, Play Rough, Protect, and Magic Bounce as a stable physical-disruption phase",
+          "Lum Darkrai using Icy Wind, Taunt, and Disable against revealed counterplay without sleep variance",
+          "Final Supreme Overlord Kingambit converting the visible allied faint count into the only setup climax and using Iron Head against surviving Fairy pressure"
+        ],
+        "resource_tax": "The roster applies direct HP and faint pressure plus Will-O-Wisp burn from Mega Absol. Nothing is restored automatically after victory; the player may spend carried healing, status recovery, and revival stock before Phoebe.",
+        "tuning_order": [
+          "Preserve the opening target dilemma, visible reserve rules, and final Supreme Overlord climax.",
+          "Adjust Kingambit from +2 toward +1 or +3 only after representative runtime tests.",
+          "Then adjust Yveltal, Mega Absol, or Darkrai between cap and +1.",
+          "Change an item only after level tuning.",
+          "Do not restore Sash Nasty Plot Darkrai, a second setup endgame, or the former +4 Mega offset."
+        ]
+      },
+      "team": [
+        {
+          "order": 1,
+          "species": "SPECIES_INCINEROAR",
+          "display_name": "Incineroar",
+          "level_offset": 0,
+          "effective_level": 80,
+          "item": "ITEM_EJECT_BUTTON",
+          "ability": "ABILITY_INTIMIDATE",
+          "ability_slot": 2,
+          "spread": "SPREAD_31_IV_HP_SPDEF_CAREFUL",
+          "moves": [
+            "MOVE_FAKE_OUT",
+            "MOVE_PARTING_SHOT",
+            "MOVE_FLARE_BLITZ",
+            "MOVE_KNOCK_OFF"
+          ],
+          "role": "Opening information pivot; Fake Out creates the target dilemma while Parting Shot or Eject Button opens the visible-state reserve selector.",
+          "lead_group": "primary lead",
+          "mega_candidate": false,
+          "legality_basis": "Flare Blitz is in Incineroar's level learnset, Knock Off is tutor/TM legal, and Fake Out plus Parting Shot are Litten Egg moves inherited through the current lineage-aware move teacher."
+        },
+        {
+          "order": 2,
+          "species": "SPECIES_URSHIFU",
+          "display_name": "Urshifu Single Strike",
+          "level_offset": 0,
+          "effective_level": 80,
+          "item": "ITEM_CHOICE_BAND",
+          "ability": "ABILITY_UNSEEN_FIST",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+          "moves": [
+            "MOVE_WICKED_BLOW",
+            "MOVE_CLOSE_COMBAT",
+            "MOVE_IRON_HEAD",
+            "MOVE_U_TURN"
+          ],
+          "role": "Choice-locked Protect breaker and second opening pivot; its first attack makes the commitment legible.",
+          "lead_group": "primary lead",
+          "mega_candidate": false,
+          "legality_basis": "All four moves are present in Urshifu's checked-in level, TM, or tutor sources. Iron Head replaces both the source baseline's illegal Aqua Jet and the first critic's redundant third Sucker Punch."
+        },
+        {
+          "order": 3,
+          "species": "SPECIES_YVELTAL",
+          "display_name": "Yveltal",
+          "level_offset": 1,
+          "effective_level": 81,
+          "item": "ITEM_ROSELI_BERRY",
+          "ability": "ABILITY_DARK_AURA",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_HP_SPDEF_CALM",
+          "moves": [
+            "MOVE_TAILWIND",
+            "MOVE_OBLIVION_WING",
+            "MOVE_SNARL",
+            "MOVE_PROTECT"
+          ],
+          "role": "First tempo and anti-reversal reserve; Roseli Berry plus special bulk lets Dark Aura, Snarl, Protect, and Oblivion Wing survive Fairy-centered Trick Room while Tailwind remains reserved for ordinary speed states.",
+          "lead_group": "tempo reserve",
+          "mega_candidate": false,
+          "legality_basis": "All four moves resolve through Yveltal's checked-in level, TM, or tutor data."
+        },
+        {
+          "order": 4,
+          "species": "SPECIES_ABSOL",
+          "display_name": "Mega Absol",
+          "level_offset": 1,
+          "effective_level": 81,
+          "item": "ITEM_ABSOLITE",
+          "ability": "ABILITY_SUPER_LUCK",
+          "ability_slot": 1,
+          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+          "moves": [
+            "MOVE_KNOCK_OFF",
+            "MOVE_PLAY_ROUGH",
+            "MOVE_WILL_O_WISP",
+            "MOVE_PROTECT"
+          ],
+          "role": "Only Mega and stable physical-disruption phase; removes items, burns a visible physical threat, reflects status, and protects its frail body without competing for the climax.",
+          "lead_group": "proactive disruption reserve",
+          "mega_candidate": true,
+          "mega_form": "SPECIES_ABSOL_MEGA",
+          "mega_ability": "ABILITY_MAGIC_BOUNCE",
+          "legality_basis": "Absolite maps Absol to Mega Absol in evolution.h, Mega Absol exposes Magic Bounce, and Knock Off, Play Rough, Will-O-Wisp, and Protect all resolve through Absol's current level, TM, tutor, or Egg data."
+        },
+        {
+          "order": 5,
+          "species": "SPECIES_DARKRAI",
+          "display_name": "Darkrai",
+          "level_offset": 1,
+          "effective_level": 81,
+          "item": "ITEM_LUM_BERRY",
+          "ability": "ABILITY_BAD_DREAMS",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+          "moves": [
+            "MOVE_DARK_PULSE",
+            "MOVE_ICY_WIND",
+            "MOVE_TAUNT",
+            "MOVE_DISABLE"
+          ],
+          "role": "Mythical control bridge that slows, denies setup, and disables one revealed key move without sleep or setup roulette.",
+          "lead_group": "conditional control reserve",
+          "mega_candidate": false,
+          "legality_basis": "Dark Pulse, Icy Wind, Taunt, and Disable all resolve through Darkrai's checked-in level, TM, or tutor sources. Lum Berry control replaces Focus Sash, Choice Specs, Nasty Plot, and accuracy-based sleep."
+        },
+        {
+          "order": 6,
+          "species": "SPECIES_KINGAMBIT",
+          "display_name": "Kingambit",
+          "level_offset": 2,
+          "effective_level": 82,
+          "item": "ITEM_BLACK_GLASSES",
+          "ability": "ABILITY_SUPREME_OVERLORD",
+          "ability_slot": 1,
+          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+          "moves": [
+            "MOVE_KOWTOW_CLEAVE",
+            "MOVE_IRON_HEAD",
+            "MOVE_SWORDS_DANCE",
+            "MOVE_SUCKER_PUNCH"
+          ],
+          "role": "Sole final setup climax; Supreme Overlord converts the visible allied faint count into a slow, answerable last stand.",
+          "lead_group": "final climax",
+          "mega_candidate": false,
+          "legality_basis": "Kowtow Cleave, Iron Head, and Swords Dance are in Kingambit's current level data; Sucker Punch is inherited from the Pawniard Egg lineage through the lineage-aware teacher. Iron Head gives the final phase visible counterpressure into surviving Fairy types."
+        }
+      ],
+      "ordering": {
+        "intended_lead": [
+          "SPECIES_INCINEROAR",
+          "SPECIES_URSHIFU"
+        ],
+        "reserve_sequence": [
+          "When an opening pivot or Eject Button creates a vacancy, give healthy survivable Yveltal the highest tempo priority while Tailwind is absent or Trick Room is active. Under ordinary speed state it may establish Tailwind; under Trick Room it must use Roseli-backed Snarl, Protect, or Oblivion Wing to consume turns and survive Fairy pressure.",
+          "Give healthy Mega Absol a specialist priority bonus when it survives and a revealed burnable physical threat or direct Knock Off or Play Rough knockout gives its disruption phase real value. This bonus is not an absolute eligibility gate: if no specialist qualifies and Absol wins the deterministic non-Kingambit fallback, it may enter for direct legal pressure without pretending the narrow job existed.",
+          "Give Darkrai a specialist priority bonus when a revealed move is worth Disabling, visible setup or recovery is worth Taunting, or Icy Wind changes ordinary move order. Under active Trick Room, suppress Icy Wind and prefer revealed Taunt or Disable or direct Dark Pulse. If no specialist qualifies and Darkrai wins the deterministic fallback, it may use direct pressure without hidden-information control.",
+          "Withhold Kingambit until at least four allies have visibly fainted and no other healthy reserve exists. If it is the only legal reserve after an unusual simultaneous-faint or forced-replacement state, select it as the explicit emergency exception. Kingambit must be the final queued reserve, never a phase followed by Absol or Darkrai.",
+          "Apply one total algorithm: withhold Kingambit while any other healthy reserve exists; score visible specialist priority for Yveltal, Absol, and Darkrai; choose the highest qualified specialist; if none qualifies, choose the healthy non-Kingambit reserve with the best visible board value, then current HP, then stable party index. A forced fallback may use direct moves but cannot invoke an unearned specialist script.",
+          "For every predicate and tie, use only revealed attacks, observed damage and turn order, visible field state, public species typing and stats, current HP, and estimated visible damage. Break equal visible-damage ties by current HP and then stable party index; never inspect hidden player data or use a rigid next-slot procession as strategy."
+        ],
+        "mandatory_order_reason": "Party order preserves the authored lead and keeps Kingambit last for presentation, while one total visible-state algorithm controls every replacement. Yveltal owns ordinary tempo and active-Trick-Room survival, Absol and Darkrai receive bonuses for their narrow visible jobs, and any healthy non-Kingambit can still be the legal direct-pressure fallback. Kingambit remains the final queued reserve. Visible board value, current HP, and stable party index resolve ties without converting party order into strategy."
+      },
+      "ai": {
+        "existing_flags": [
+          "AI_FLAG_CHECK_BAD_MOVE",
+          "AI_FLAG_TRY_TO_FAINT",
+          "AI_FLAG_CHECK_VIABILITY",
+          "AI_FLAG_CHECK_FOE",
+          "AI_FLAG_SMART_SWITCHING",
+          "AI_FLAG_HELP_PARTNER",
+          "AI_FLAG_SPEED_CONTROL"
+        ],
+        "required_flags": [
+          "AI_FLAG_CHECK_BAD_MOVE",
+          "AI_FLAG_TRY_TO_FAINT",
+          "AI_FLAG_CHECK_VIABILITY",
+          "AI_FLAG_CHECK_FOE",
+          "AI_FLAG_SMART_SWITCHING",
+          "AI_FLAG_HELP_PARTNER",
+          "AI_FLAG_HP_AWARE",
+          "AI_FLAG_SPEED_CONTROL"
+        ],
+        "custom_requirements": [
+          "Preserve the Incineroar plus Urshifu opening and enumerate every legal joint action and target pair, including Close Combat. Resolve terrain, Ghost immunity, redirection, Fake Out eligibility, Choice lock, knockout value, Iron Head Fairy pressure, and Eject Button timing before scoring; reward distinct pressure but let an Iron Head knockout or superior shared-target board override that bonus.",
+          "Implement the visible-state healthy-reserve selector exactly as recorded in ordering; raw array order is never sufficient.",
+          "Define survival against both opposing slots from revealed attacks, observed damage, visible field modifiers, and conservative public-species ranges. Prefer Yveltal while Tailwind is absent or Trick Room is active and this two-slot survival test passes. Never select Tailwind while Tailwind or Trick Room is active; under Trick Room score Snarl, Protect, and Oblivion Wing from summed visible damage and survival value.",
+          "Mega Absol must pass the same two-slot survival test and have a burnable physical threat established by a revealed physical action or a direct Knock Off or Play Rough knockout; Protect is defensive, never a selector excuse.",
+          "Darkrai must use Disable only against the target's revealed last move and Taunt only into visible setup, recovery, or support value. Icy Wind uses observed turn order and conservative public speed ranges and is suppressed under active Trick Room; direct Dark Pulse is the legal forced-fallback action. No sleep move, hidden speed read, or generic coverage lock exists.",
+          "Include the actual Supreme Overlord faint multiplier in damage estimates and withhold Kingambit until at least four visible allied faints with no other healthy reserve. Only an empty legal replacement set may trigger the emergency exception.",
+          "Evaluate Kingambit Swords Dance only when it survives the full visible action set of both opposing slots and no revealed Taunt, Encore, Haze, Clear Smog, phazing, or burn line invalidates the turn. Use Sucker Punch only for a visible priority knockout against an established damaging pattern; never read the chosen action or repeat it after failure. Prefer Iron Head or Kowtow Cleave against visible support or non-attacking patterns.",
+          "Regression-test Eject Button replacement timing and verify that a Yveltal switch-in applies Dark Aura to Urshifu's same-turn Wicked Blow without scripting the outcome.",
+          "Continue using automatic opponent Mega Evolution; Absol is the only Mega candidate."
+        ],
+        "forbidden_behaviors": [
+          "Do not force a fixed Fake Out target or scripted first turn.",
+          "Do not inspect unrevealed player moves, abilities, or held items to choose Mega Absol, Darkrai, Disable, or Taunt.",
+          "Do not treat source array order as the reserve state machine.",
+          "Do not send Kingambit while any other healthy reserve exists merely because three allies have fainted or it has a favorable damage roll.",
+          "Do not use Swords Dance into a predicted immediate knockout or disabling move.",
+          "Do not award Mega Absol its specialist priority without survivability plus one narrow visible physical-disruption or knockout job; a forced direct-pressure fallback remains legal.",
+          "Do not invoke Darkrai's Taunt, Disable, or speed-control specialist priority without the required revealed state; a forced Dark Pulse fallback remains legal.",
+          "Do not use Tailwind or Icy Wind as automatic speed control while Trick Room is active.",
+          "Do not let Sucker Punch inspect the player's selected action or repeat after it visibly fails."
+        ],
+        "state_machine": [
+          {
+            "state": "steal-position",
+            "condition": "Opening Incineroar plus Urshifu board",
+                    "behavior": "Enumerate joint legal action and target pairs for Incineroar and Urshifu. Prefer pressure on two distinct opposing actions, allow a shared target for a knockout or superior visible board, and choose from Fake Out, Knock Off, Wicked Blow, Close Combat, Iron Head, U-turn, Flare Blitz, or Parting Shot after resolving redirection, immunity, Choice lock, Fairy knockout value, and Eject timing."
+          },
+          {
+            "state": "aura-tempo",
+                    "condition": "A reserve is required and healthy Yveltal either supplies absent-Tailwind tempo or the active-Trick-Room survival branch",
+                    "behavior": "Under ordinary speed state establish Tailwind when Yveltal survives. Under active Trick Room suppress Tailwind, use Roseli-backed Snarl, Protect, or Oblivion Wing to consume room turns and blunt Fairy pressure, then shape the next visible reserve decision."
+          },
+          {
+            "state": "mega-disruption",
+            "condition": "Tailwind has been established or Yveltal has left, Absol survives the visible board, and a burnable physical threat or direct Knock Off or Play Rough knockout gives the stable phase value",
+            "behavior": "Select Absol, Mega Evolve automatically, and choose Will-O-Wisp, Knock Off, Play Rough, or a genuinely defensive Protect."
+          },
+          {
+            "state": "revealed-control-bridge",
+            "condition": "A revealed move merits Disable, visible support merits Taunt, Icy Wind changes move order, or no other non-Kingambit reserve has a qualifying visible role",
+            "behavior": "Select Darkrai for revealed-information control or the proactive Icy Wind into Dark Pulse fallback; never invoke sleep or hidden coverage logic."
+          },
+          {
+            "state": "overlord-climax",
+            "condition": "At least four Sidney allies have visibly fainted and no other healthy reserve exists, or Kingambit is the only legal replacement in an unusual simultaneous-faint or forced-replacement state",
+                    "behavior": "Select the final queued Kingambit and use the actual Supreme Overlord multiplier. Set Swords Dance only after full two-slot survival and revealed-disruption checks. Use Sucker Punch only for a visible priority knockout against an established damaging pattern and never repeat after failure; otherwise finish through Kowtow Cleave or Iron Head."
+          }
+        ]
+      },
+      "counterplay": {
+        "intentional_weakness": "Sidney has no redirection or screens. Only Urshifu is Choice-locked, Tailwind is interactable, Mega Absol is frail and selected only into one narrow visible job, Darkrai's strongest control depends on revealed moves and visible support, and Kingambit remains 4x weak to Fighting and must spend a visible turn to Swords Dance.",
+        "first_loss_lesson": "Do not treat Protect as universal against the opener. Exploit Urshifu's lock, contest Tailwind, deny Mega Absol its visible disruption job, vary revealed moves so Darkrai cannot Disable the whole plan, and preserve Fighting, Ground, Haze, or phazing for the visibly empowered Iron Head Kingambit.",
+        "classes": [
+          "Fairy and Fighting pressure paired with coverage for Incineroar and Yveltal",
+          "Trick Room, opposing Tailwind, paralysis, or immediate Yveltal focus to reverse the speed plan",
+          "Safeguard, Misty Terrain, burn immunity, special offense, or focus fire against Mega Absol disruption",
+          "Choice-lock scouting, Disable, item removal, immunities, and resistance pivots against Urshifu; move variation, Mental Herb, direct pressure, and attacking moves limit Darkrai control",
+          "Haze, Clear Smog, Unaware, phazing, Fighting, Ground, burn, or strong special pressure against final Iron Head Kingambit",
+          "Preserving resources instead of taking every early knockout if the resulting Supreme Overlord multiplier would lose the endgame"
+        ],
+        "revealed_information": [
+          "Incineroar Eject Button and Urshifu first attack expose the opening transition and Choice commitment.",
+          "Yveltal visibly announces Dark Aura and Tailwind.",
+          "Mega Absol immediately reveals Magic Bounce and one stable item, burn, or direct-pressure phase.",
+          "Darkrai reacts only to revealed moves, visible support, and visible speed order; it has no sleep or setup line.",
+          "Four visible allied faints and the absence of another healthy reserve determine the normal Kingambit entrance; the actual faint count visibly determines Supreme Overlord strength.",
+          "Kingambit must reveal Swords Dance before adding its setup multiplier."
+        ],
+        "unacceptable_failure_modes": [
+          "A blind player is swept because a hidden move or item, rather than visible state, chose Sidney reserve.",
+          "Eject Button or smart switching exposes Kingambit before the recorded faint-count climax without necessity.",
+          "Darkrai uses Disable or Taunt from unrevealed information or becomes a generic coverage cannon.",
+          "Mega Absol enters without a credible chance to act or its narrow visible physical-disruption or knockout target.",
+          "Offsets rather than the target dilemma, tempo transition, disruption, and final Overlord create most difficulty."
+        ]
+      },
+      "competitive_research": {
+        "index": {
+          "version": 1,
+          "record_count": 1005,
+          "sha256": "44d79fd2a5f7578013b2363f9e47d75a0f05ae4239da3bd6891e9651bca2648a"
+        },
+        "queries": [
+          "search_competitive_teams.py --pokemon Incineroar --pokemon Kingambit --style doubles",
+          "search_competitive_teams.py --pokemon Yveltal --style doubles",
+          "search_competitive_teams.py --pokemon Darkrai --style doubles",
+          "search_competitive_teams.py --pokemon Absol --style doubles",
+          "search_competitive_teams.py --pokemon Urshifu --style doubles",
+          "search_competitive_teams.py --query 'dark priority pivoting setup' --style doubles",
+          "full 1005-record mechanical scan for Dark species, Fake Out, pivoting, priority, setup, Tailwind, and Protect-bypass tags"
+        ],
+        "candidates": [
+          {
+            "reference_id": "elite:marco-silva:turin-2026",
+            "decision": "selected",
+            "reason": "The 2026 Turin-winning Incineroar and Kingambit sets provide Sidney's real positioning shell and one independent setup endgame. The original alternate Mega choice is rejected; Sidney keeps only Mega Absol."
+          },
+          {
+            "reference_id": "vgc:regional-melbourne-2022",
+            "decision": "adapted",
+            "reason": "The winning Yveltal, Incineroar, and Urshifu roster validates the Dark Aura and Protect-pressure core. Its Zacian, Rillaboom, and Coalossal modes are not imported."
+          },
+          {
+            "reference_id": "showdown:gen9randomdoublesbattle:016",
+            "decision": "adapted",
+            "reason": "The generated Darkrai proves direct Dark Pulse pressure, but its generic coverage is rejected. Verdant instead uses source-legal Icy Wind, Taunt, and Disable as a revealed-information control bridge, with no sleep or setup variance."
+          },
+          {
+            "reference_id": "showdown:gen6randomdoublesbattle:022",
+            "decision": "adapted",
+            "reason": "The generated Mega Absol validates Absolite, Play Rough, Knock Off, and Protect as direct doubles tools. Verdant adds legal Will-O-Wisp and narrows selection to one stable physical-disruption or knockout phase rather than a Swiss-army counterpick."
+          },
+          {
+            "reference_id": "showdown:gen8randomdoublesbattle:021",
+            "decision": "rejected",
+            "reason": "Its Swords Dance plus Sucker Punch Absol would repeat Sidney's Kingambit setup and priority endgame; the first fresh review correctly rejected that convergence."
+          },
+          {
+            "reference_id": "elite:wolfe:players-cup-ii-2020",
+            "decision": "rejected",
+            "reason": "Its Incineroar, Urshifu, and Galarian Moltres positioning is valuable, but the Steam Engine and Weakness Policy activation is a different centerpiece and should remain reserved for a dedicated battle."
+          },
+          {
+            "reference_id": "elite:wolfe:milwaukee-2025",
+            "decision": "rejected",
+            "reason": "Illusion-backed offense is strong, but Battle 2 already owns the campaign's false-ace Illusion reveal. Sidney uses action-based information warfare instead of repeating it."
+          }
+        ],
+        "selected_reference_ids": [
+          "elite:marco-silva:turin-2026",
+          "vgc:regional-melbourne-2022",
+          "showdown:gen9randomdoublesbattle:016",
+          "showdown:gen6randomdoublesbattle:022"
+        ],
+        "external_public_sources": [
+          {
+            "url": "https://limitlessvgc.com/tournaments/435/teams",
+            "use": "Exact public 2026 Turin winner sets for Incineroar and Kingambit; also confirms the original team carried two possible Mega species, which Verdant does not copy."
+          },
+          {
+            "url": "https://limitlessvgc.com/tournaments/288",
+            "use": "Public Melbourne 2022 tournament record supporting the Yveltal, Incineroar, and Urshifu championship core."
+          }
+        ],
+        "rejected_gimmicks": [
+          "All source-format transformations other than Mega Evolution are removed; no source Tera, Z-Move, Dynamax, Gigantamax, or Primal state is active."
+        ]
+      },
+      "campaign_reservations": {
+        "spends": [
+          "The main story marquee Yveltal and Darkrai appearances",
+          "Mega Absol as Sidney only Mega and proactive disruption phase",
+          "Kingambit late-game Supreme Overlord reveal as the sole climax",
+          "One justified League use of Incineroar and Urshifu as a championship positioning core"
+        ],
+        "preserves": [
+          "Dedicated Shadow Tag Perish and Mega Gengar for Phoebe",
+          "Snow, toxic or trapping attrition, and major Wide Guard pressure for Glacia",
+          "Dragon Mega and legendary-scale singles closer for Drake",
+          "Grand rain, dual-speed restricted balance, and Mega Milotic for Wallace"
+        ],
+        "releases": [
+          "Darkrai is released as a revealed-information control bridge after being withheld from the earliest campaign ordinary encounters.",
+          "The campaign may use a tournament-authentic Incineroar core here because this is one high-status League appearance, not a global allocator default.",
+          "Kingambit full Supreme Overlord identity is saved for the single final phase now that the player owns every broad counterplay class."
+        ],
+        "collision_notes": [
+          "No species overlaps Phoebe's proposed roster.",
+          "No Shadow Tag, Perish Song, redirection, snow, rain, or Dragon Mega is spent here.",
+          "The final Victory Road rolling window must still be checked before implementation for local Incineroar, Urshifu, and Tailwind repetition."
+        ]
+      },
+      "presentation": {
+        "intro_concept": "Keep Sidney jovial, but make his escalation explicit: he steals the opening, darkens the pace, sends Absol to spoil the obvious answer, and trusts one final king with everything his fallen team learned.",
+        "defeat_concept": "He laughs that the player made his own ugly choices impossible to read and calls it the most fun loss he could have had.",
+        "post_battle_concept": "He explicitly warns that Phoebe does not race damage; she makes the player count turns and protect the ability to leave.",
+        "hint_concept": "A pre-League guide note says Sidney makes Protect unreliable, establishes Tailwind, sends Mega Absol for one item-and-burn disruption phase, then uses Darkrai to change speed or interfere with revealed moves before his fallen empower the final king.",
+        "guide_summary": "Document the cap-80 Incineroar and Urshifu lead, Eject Button and Choice Band commitment, Yveltal Dark Aura and Tailwind, Mega Absol's narrow Knock Off, burn, Play Rough, and Protect phase, Darkrai's proactive Icy Wind/Dark Pulse plus revealed Taunt/Disable control, total visible-state fallbacks, final Iron Head Supreme Overlord count, exact near-cap offsets, and the manual healing window before Phoebe.",
+        "native_width_status": "concept-only"
+      },
+      "verification": {
+        "design_schema": "pass",
+        "species_items_moves_abilities": "pass",
+        "source_implementation": "not-started",
+        "script_and_format": "not-started",
+        "dialogue_width": "concept-only",
+        "guide": "concept-only",
+        "runtime": "unplayed",
+        "observed_difficulty": null,
+        "evidence": [
+          "All six species exist in current base or curated Gen 9 stats.",
+          "Every revised item, move, spread, and selected ability slot exists and passes the lineage-aware current learnset validator.",
+          "evolution.h maps Absol plus Absolite to Mega Absol, whose checked-in ability is Magic Bounce.",
+          "The exact offsets are 0, 0, +1, +1, +1, and +2 relative to strict cap 80.",
+          "Five fresh critic revision rounds produced one climax, stable physical-disruption Mega Absol, proactive revealed-information Darkrai, Iron Head Kingambit, near-cap levels, joint opening action-pair evaluation, and a total visible-state reserve selector that makes Kingambit the final queued reserve.",
+          "No game source has been changed and no runtime difficulty is claimed."
+        ],
+        "known_tooling_note": "Static legality passes. Source implementation remains blocked on joint Incineroar and Urshifu action-pair scoring, the total visible-state Sidney reserve selector, Eject Button transition behavior, two-slot survival predicates, revealed-last-move Darkrai control, final-reserve Supreme Overlord behavior, and representative cap-80 runtime tests.",
+        "source_blockers": [
+          "Implement the total deterministic reserve selector and precedence table from visible Tailwind state, current HP, public species typing and stats, revealed actions and damage, observed turn order, and allied faint count; make Kingambit the final queued reserve and use current HP then stable party index only as final equal-score tie-breaks.",
+          "Implement joint Incineroar and Urshifu action-pair scoring that rewards pressure on distinct opposing actions, permits a shared target for a knockout or superior visible board, and never forces a target or reads hidden player data.",
+          "Regression-test Eject Button and U-turn or Parting Shot replacement behavior with the selector.",
+          "Regression-test Darkrai Disable against only revealed last moves, Taunt against visible support, and Icy Wind against actual speed order.",
+          "Regression-test Yveltal, Mega Absol, and Kingambit survival predicates against the full visible action set of both opposing slots; Mega Absol additionally requires a revealed physical action or direct Knock Off or Play Rough knockout.",
+          "Regression-test Supreme Overlord damage estimation at every faint count, Iron Head Fairy pressure, four-faint final-reserve gating, simultaneous-faint emergency replacement, Swords Dance restraint, and target difficulty.",
+          "Run the complete selector against representative cap-80 fast offense, Trick Room, screens, bulky balance, and Fairy-heavy teams before keeping target 10."
+        ]
+      },
+      "mechanics_proposal": null,
+      "fresh_critic_history": [
+        {
+          "reviewer_agent_id": "/root/ledger_1_28/fresh_critic",
+          "context_mode": "fresh-no-history",
+          "verdict": "revise",
+          "is_this_sick_and_awesome": "The Incineroar plus Urshifu opening is genuinely exciting, but the original back half repeated Dark priority cleanup instead of giving Mega Absol its own finale.",
+          "strongest_moment": "Fake Out, Eject Button, and Parting Shot beside Choice Band Unseen Fist pivoting toward Yveltal Dark Aura and Tailwind.",
+          "weakest_part": "The original Urshifu, Kingambit, and Mega Absol all converged on Sucker Punch, four members carried Protect, and raw party order could not guarantee the advertised reserve sequence.",
+          "difficulty_honesty": "The unplayed target 10 is honest but unproven; without the revised role separation and state-aware reserve gate, restricted threats plus level offsets risked raw-stat difficulty.",
+          "required_changes": [
+            "Require trainer-aware reserve selection or remove mandatory sequence claims.",
+            "Remove at least one Sucker Punch and one late Protect.",
+            "Give Mega Absol a distinct role from Kingambit.",
+            "Treat Eject Button transition behavior as a runtime gate."
+          ],
+          "author_response": "All material changes were applied. Urshifu now uses Iron Head; Mega Absol dropped Sucker Punch and Protect for Psychic Fangs and Feint; Sidney is down to one Sucker Punch and three Protect users; Mega Absol is explicitly anti-screen, anti-status, and anti-Protect control; raw party order is no longer claimed to guarantee reserves; a Sidney-aware reserve selector and Eject Button transition tests are explicit source blockers.",
+          "resolved": true
+        },
+        {
+          "reviewer_agent_id": "/root/sidney_fresh_critic_final",
+          "context_mode": "fresh-no-history",
+          "verdict": "revise",
+          "is_this_sick_and_awesome": "The Incineroar and Urshifu target dilemma is genuinely sick, but the prior middle game still felt like several rationalized good ideas competing for the same climax.",
+          "strongest_moment": "The opening choice between respecting Fake Out and respecting Choice Band Unseen Fist, followed by the Yveltal Dark Aura and Tailwind reveal.",
+          "weakest_part": "Generic Focus Sash Nasty Plot Darkrai, a late Mega Absol dependent on Feint plus Psychic Fangs conditions, inflated +1 through +4 offsets, and reserve prose that still resembled a rigid array procession.",
+          "difficulty_honesty": "The opener and tempo shift were strategically honest, but three competing endgames and a +4 Mega risked making target 10 feel inflated rather than like one readable boss escalation.",
+          "required_changes": [
+            "Choose one climax: opener, Yveltal tempo, earlier Mega Absol disruption, final Supreme Overlord Kingambit.",
+            "Remove or fundamentally repurpose Sash Nasty Plot Darkrai.",
+            "Give Mega Absol proactive ordinary-board value without depending on both Feint and Psychic Fangs.",
+            "Tighten level offsets toward the cap.",
+            "Choose reserves deterministically from visible state rather than rigid array procession."
+          ],
+          "author_response": "All changes were applied. Offsets are now 0, 0, +1, +1, +1, and +2. Mega Absol moved to slot four with Knock Off, Play Rough, Will-O-Wisp, and Protect as proactive disruption. Darkrai is a four-attack Choice Specs bridge with an exploitable lock. Kingambit moved to slot six and is the sole setup climax, gated by visible allied faint count. The reserve selector now uses visible Tailwind, HP, type matchups, public species stats, and faint count, never a rigid next-slot procession or unrevealed player data.",
+          "resolved": true
+        },
+        {
+          "reviewer_agent_id": "/root/sidney_fresh_critic_v3",
+          "context_mode": "fresh-no-history",
+          "verdict": "revise",
+          "is_this_sick_and_awesome": "Almost. The opening and casualty-powered finale are exciting, but Choice Specs Darkrai still felt like generic Dark goodstuff and final Kingambit lacked a way to pressure the obvious surviving Fairy answer.",
+          "strongest_moment": "Attacking Eject Button Incineroar grants Sidney Yveltal tempo, while hiding behind Protect risks Choice Band Wicked Blow through Unseen Fist.",
+          "weakest_part": "Generic Specs Darkrai and a frail Mega Absol selected too permissively made the middle feel like a parade rather than one position-stealing arc.",
+          "difficulty_honesty": "Near-cap offsets and visible state were honest, but obvious Fairy preparation could collapse the endgame and generic coverage supplied too much of the middle pressure.",
+          "required_changes": [
+            "Give final Kingambit a telegraphed answer to surviving Fairy pressure.",
+            "Redesign Darkrai around a unique player-facing decision.",
+            "Require visible proactive value and survivability before selecting Mega Absol."
+          ],
+          "author_response": "Kingambit replaced Protect with Iron Head. Darkrai is now a Lum Berry Icy Wind, Taunt, Disable, Dark Pulse control bridge that reacts only to revealed moves and visible support, with no sleep, setup, or coverage lock. Mega Absol dropped Protect for Psychic Fangs and may enter only when it survives and active screens, a burnable physical threat, or direct pressure gives it a visible job.",
+          "resolved": true
+        },
+        {
+          "reviewer_agent_id": "/root/sidney_fresh_critic_v4",
+          "context_mode": "fresh-no-history",
+          "verdict": "revise",
+          "is_this_sick_and_awesome": "Yes at the spine, but the middle still risked two conditional Swiss-army counterpicks and the reserve selector had uncovered states.",
+          "strongest_moment": "The player attacks Eject Button Incineroar and causes Yveltal to arrive beside locked Urshifu with Dark Aura and imminent Tailwind.",
+          "weakest_part": "Mega Absol carried too many conditional jobs and Darkrai depended too heavily on the player presenting a Taunt or Disable hook.",
+          "difficulty_honesty": "Near-cap levels and visible state were honest, but selector gaps and famous-species stacking could make the middle swing between oppressive and empty.",
+          "required_changes": [
+            "Make the reserve selector total.",
+            "Give Mega Absol one stable identity and Protect.",
+            "Give Darkrai a proactive Icy Wind into Dark Pulse fallback.",
+            "Require a representative selector matchup matrix."
+          ],
+          "author_response": "The selector now has explicit Darkrai and highest-visible-damage fallbacks. Mega Absol returned to Knock Off, Play Rough, Will-O-Wisp, and Protect and may enter only for a survivable physical-disruption or knockout phase. Darkrai always has Icy Wind or Dark Pulse and uses Taunt or Disable only from revealed state. Fast offense, Trick Room, screens, bulky balance, and Fairy-heavy selector tests are mandatory.",
+          "resolved": true
+        },
+        {
+          "reviewer_agent_id": "/root/sidney_critic_v2",
+          "reviewer_model": "gpt-5.6-sol",
+          "reasoning_effort": "ultra",
+          "review_template_version": 2,
+          "context_mode": "fresh-no-history",
+          "verdict": "revise",
+          "is_this_sick_and_awesome": "Yes, almost. The Eject Button dilemma, visible escalation, Mega Absol disruption, and loss-powered king are memorable, but the selector could break its own climax and key predicates were not deterministic enough.",
+          "strongest_moment": "Attacking Incineroar triggers Eject Button and may voluntarily summon Yveltal's tempo phase beside Choice Band Urshifu.",
+          "weakest_part": "Kingambit could enter at three faints while another healthy reserve waited behind it, reducing Supreme Overlord and creating an anticlimactic epilogue.",
+          "honest_difficulty_assessment": "Severe for a blind prepared player, but learned Fairy pressure, Tailwind denial, and a preserved Kingambit answer could reduce it below a true 10 unless joint targeting and selector predicates are implemented robustly.",
+          "easiest_player_win_line": "Use fast special Fairy pressure with anti-Fake-Out support, remove Urshifu, deny or outlast Tailwind, and preserve Fighting or burn pressure for Kingambit.",
+          "required_changes": [
+            "Make Kingambit the final queued reserve, normally requiring four visible allied faints and no other healthy reserve.",
+            "Replace prose-only reserve and survival predicates with one complete deterministic visible-information precedence table.",
+            "Specify joint Incineroar and Urshifu action-pair targeting so the opening handles two-threat boards without fixed targets or hidden reads."
+          ],
+          "author_response": "All blockers were applied to the dossier. Kingambit now normally enters only after four visible faints with no other healthy reserve; simultaneous-faint replacement is the sole emergency exception. The selector now has one total role precedence and explicit visible-data tie-breaks. Incineroar and Urshifu enumerate joint action-target pairs, reward distinct pressure, and share a target only for a knockout or superior visible board. Two-slot survival formulas and an adversarial selector test matrix are explicit implementation gates.",
+          "resolved": true
+        }
+      ],
+      "fresh_critic_review": null
+    },
+    "ELITE_FOUR_PHOEBE": {
+      "anchor_id": "ELITE_FOUR_PHOEBE",
+      "planning_tier": "league_gauntlet",
+      "status": {
+        "design": "authored-draft",
+        "fresh_critic": "pending",
+        "source": "unimplemented",
+        "static": "design-validated",
+        "runtime": "unplayed"
+      },
+      "concise_rationale": "Phoebe converts Wolfe Glick's Orlando-winning survival clock into a Ghost-led League battle: Mega Gengar is the only trapper, Gengar and Flutter Mane are credible singers, Amoonguss and Aegislash buy finite turns, then non-Protect Mimikyu and four-attack Marshadow make the direct-cleanup phase visibly different from the clock.",
+      "campaign_state": {
+        "strict_cap": 80,
+        "player_tools": [
+          "The same six-Pokemon cap-80 party carried out of Sidney's room",
+          "Every legal move and ability chosen before League entry",
+          "Campaign-earned held items and Mega access",
+          "Normal overworld Pokemon, Bag, and Save menus between rooms",
+          "Set-style play with no in-battle Bag items"
+        ],
+        "mega_access": "The player retains the Mega Bracelet and any earned stones; Phoebe uses exactly one Mega Gengar.",
+        "evolution_phase": "Fully evolved, mythical, paradox, and single-stage threats are appropriate at the League.",
+        "preparation_access": "The player may manually heal Sidney's damage before entering but cannot change the six-member party from the PC.",
+        "gauntlet_position": "Second Elite Four member. Her clock can create faints, sleep, and burn that require manual Bag recovery before Glacia.",
+        "mechanics_baseline_id": "pokemon_league_main_story"
+      },
+      "runtime": {
+        "trainer_ids": [
+          "TRAINER_PHOEBE"
+        ],
+        "canonical_format": "double",
+        "party_size": 6,
+        "required": true,
+        "variants": [
+          {
+            "path": "main-story League",
+            "trainer_id": "TRAINER_PHOEBE",
+            "format": "double",
+            "in_scope": true
+          },
+          {
+            "path": "postgame rematch",
+            "trainer_id": "TRAINER_PHOEBE_4",
+            "format": "double",
+            "in_scope": false
+          },
+          {
+            "path": "legacy helper labels",
+            "trainer_ids": [
+              "TRAINER_PHOEBE_2",
+              "TRAINER_PHOEBE_3"
+            ],
+            "in_scope": false,
+            "note": "Helper labels remain, but the main-story branch calls only TRAINER_PHOEBE."
+          }
+        ],
+        "current_source_baseline": {
+          "party": [
+            "Mega Gengar",
+            "Marshadow",
+            "Lunala",
+            "Giratina",
+            "Shedinja",
+            "Calyrex Shadow Rider"
+          ],
+          "level_offsets": [
+            0,
+            0,
+            0,
+            0,
+            1,
+            2
+          ],
+          "guide_difficulty": 92,
+          "guide_design_status": "not individually closed"
+        },
+        "source_paths": [
+          "src/data/trainer_parties.h:sParty_Phoebe",
+          "src/data/trainers.h:TRAINER_PHOEBE",
+          "data/maps/EverGrandeCity_PhoebesRoom/scripts.inc"
+        ]
+      },
+      "rolling_context": {
+        "available": false,
+        "reason": "The chronological ledger has not reached the League. This design is anchored against Sidney and the reserved later League identities and must be compared with the final preceding ten battles before implementation.",
+        "protected_neighbor_anchors": [
+          "ELITE_FOUR_SIDNEY",
+          "ELITE_FOUR_GLACIA",
+          "ELITE_FOUR_DRAKE",
+          "CHAMPION_WALLACE"
+        ],
+        "required_preimplementation_review": "Confirm that no late Victory Road boss spends the campaign's definitive Shadow Tag Perish identity, Mega Gengar, Flutter Mane singer, or Marshadow anti-setup cleanup immediately before the League."
+      },
+      "identity": {
+        "memory_hook": "Phoebe's spirits sing one shared countdown, hide the singer behind a living circle, and leave the player deciding who can still escape.",
+        "story_fit": "Her Mt. Pyre bond is expressed as preservation rather than a stack of legendary Ghosts: each spirit guards the trapper, stalls a count, or punishes the player's attempt to overpower the ritual.",
+        "primary_player_question": "Can the player preserve an escape route or remove Mega Gengar before the shared Perish clock converts two active Pokemon into unavoidable resource loss?",
+        "primary_mode": "Mega Gengar Shadow Tag plus two Perish singers, finite redirection, and coordinated count-one exits.",
+        "secondary_mode": "Direct Ghost and Fairy pressure culminating in Marshadow's Spectral Thief and priority cleanup when the trap is broken.",
+        "preview_pressure": "The player must respect Mega Gengar's first clock behind an active Amoonguss guardian, then preserve an answer for Flutter Mane staging a second clock when Gengar returns for the next opposing pair."
+      },
+      "difficulty": {
+        "target": 10,
+        "observed": null,
+        "rationale": "The cap-80 party faces levels 81 through 84, a fast Mega Shadow Tagger, two legal Perish singers, Focus Sash, redirection, sleep, self-healing, Substitute and King's Shield survival, Disguise, burn, and a level-84 Marshadow that steals setup. The team is nearly overwhelming blind, but the entire clock has a deliberately attackable single point of failure.",
+        "pressure_sources": [
+          "Mega Gengar's fast Shadow Tag, Perish Song, Disable, and Protect",
+          "Focus Sash Flutter Mane as the second singer and direct special attacker",
+          "Mental Herb Regenerator Amoonguss using Rage Powder, Spore, Synthesis, and Protect",
+          "Aegislash stalling count turns through Substitute and King's Shield while retaining mixed coverage",
+          "Disguise Mimikyu adding burn, Taunt, and durable direct pressure without another protection turn",
+          "Four-attack Life Orb Marshadow stealing setup boosts and finishing with Technician priority"
+        ],
+        "resource_tax": "Perish Song itself ends with battle, but any fainted Pokemon remain fainted, Spore sleep and Will-O-Wisp burn persist, and direct damage carries forward. Control returns after victory, so the player may spend carried Awakenings, Full Heals, recovery, and Revives before Glacia; no automatic repair occurs.",
+        "tuning_order": [
+          "Preserve the Perish state machine and competent switching.",
+          "Adjust Marshadow and Mimikyu offsets first if direct cleanup is too strong or weak.",
+          "Then adjust Gengar and Flutter Mane offsets or defensive spreads.",
+          "Reduce Amoonguss or Aegislash survival only after level tuning.",
+          "Never add a second Shadow Tag user merely to force target difficulty 10; Mega Gengar's vulnerability is intentional counterplay."
+        ]
+      },
+      "team": [
+        {
+          "order": 1,
+          "species": "SPECIES_GENGAR",
+          "display_name": "Mega Gengar",
+          "level_offset": 1,
+          "effective_level": 81,
+          "item": "ITEM_GENGARITE",
+          "ability": "ABILITY_CURSED_BODY",
+          "ability_slot": 1,
+          "spread": "SPREAD_31_IV_HP_SPEED_TIMID",
+          "moves": [
+            "MOVE_PERISH_SONG",
+            "MOVE_SHADOW_BALL",
+            "MOVE_DISABLE",
+            "MOVE_PROTECT"
+          ],
+          "role": "Only Mega and only Shadow Tag user; starts, preserves, and later renews the clock.",
+          "lead_group": "primary lead",
+          "mega_candidate": true,
+          "mega_form": "SPECIES_GENGAR_MEGA",
+          "mega_ability": "ABILITY_SHADOW_TAG",
+          "legality_basis": "evolution.h maps Gengar plus Gengarite to Mega Gengar with Shadow Tag. Perish Song and Shadow Ball are in Gengar's source; Disable is inherited from the Gastly Egg lineage; Protect is TM legal."
+        },
+        {
+          "order": 2,
+          "species": "SPECIES_AMOONGUSS",
+          "display_name": "Amoonguss",
+          "level_offset": 1,
+          "effective_level": 81,
+          "item": "ITEM_MENTAL_HERB",
+          "ability": "ABILITY_REGENERATOR",
+          "ability_slot": 2,
+          "spread": "SPREAD_31_IV_HP_DEF_SPDEF_SASSY",
+          "moves": [
+            "MOVE_RAGE_POWDER",
+            "MOVE_SPORE",
+            "MOVE_SYNTHESIS",
+            "MOVE_PROTECT"
+          ],
+          "role": "The one off-type ritual guardian; leads beside the sole trapper so Rage Powder, Spore, and Protect turn the first clock into a targeting puzzle instead of a generic Gengar double-target.",
+          "lead_group": "primary lead",
+          "mega_candidate": false,
+          "legality_basis": "Rage Powder, Spore, Synthesis, and Protect all resolve directly through Amoonguss's current learnsets. Pollen Puff from the tournament sheet was rejected because the current engine does not grant it to Amoonguss."
+        },
+        {
+          "order": 3,
+          "species": "SPECIES_FLUTTER_MANE",
+          "display_name": "Flutter Mane",
+          "level_offset": 1,
+          "effective_level": 81,
+          "item": "ITEM_FOCUS_SASH",
+          "ability": "ABILITY_PROTOSYNTHESIS",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+          "moves": [
+            "MOVE_PERISH_SONG",
+            "MOVE_MOONBLAST",
+            "MOVE_SHADOW_BALL",
+            "MOVE_PROTECT"
+          ],
+          "role": "Preserved second singer and immediate special pressure; enters through the synchronized first-cycle exit so the second clock is staged rather than merely promised.",
+          "lead_group": "second-cycle singer",
+          "mega_candidate": false,
+          "legality_basis": "All four moves are present in Flutter Mane's checked-in curated level or TM data."
+        },
+        {
+          "order": 4,
+          "species": "SPECIES_AEGISLASH",
+          "display_name": "Aegislash",
+          "level_offset": 2,
+          "effective_level": 82,
+          "item": "ITEM_LEFTOVERS",
+          "ability": "ABILITY_STANCE_CHANGE",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_HP_SPATK_QUIET",
+          "moves": [
+            "MOVE_KINGS_SHIELD",
+            "MOVE_SUBSTITUTE",
+            "MOVE_SHADOW_BALL",
+            "MOVE_SACRED_SWORD"
+          ],
+          "role": "Finite clock survival and mixed direct coverage without spending Glacia's later Wide Guard showcase.",
+          "lead_group": "survival reserve",
+          "mega_candidate": false,
+          "legality_basis": "All four moves resolve through Aegislash's current level, TM, or tutor sources."
+        },
+        {
+          "order": 5,
+          "species": "SPECIES_MIMIKYU",
+          "display_name": "Mimikyu",
+          "level_offset": 3,
+          "effective_level": 83,
+          "item": "ITEM_SITRUS_BERRY",
+          "ability": "ABILITY_DISGUISE",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+          "moves": [
+            "MOVE_WILL_O_WISP",
+            "MOVE_TAUNT",
+            "MOVE_PLAY_ROUGH",
+            "MOVE_SHADOW_CLAW"
+          ],
+          "role": "Disguise-backed disruption, persistent burn attrition, and direct physical pressure that marks the transition away from Protect cycling.",
+          "lead_group": "late survival reserve",
+          "mega_candidate": false,
+          "legality_basis": "All four moves are present across Mimikyu's checked-in level and TM sources. Taunt replaces the generated donor's Protect to resolve the first fresh critic's protection-density concern."
+        },
+        {
+          "order": 6,
+          "species": "SPECIES_MARSHADOW",
+          "display_name": "Marshadow",
+          "level_offset": 4,
+          "effective_level": 84,
+          "item": "ITEM_LIFE_ORB",
+          "ability": "ABILITY_TECHNICIAN",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+          "moves": [
+            "MOVE_SPECTRAL_THIEF",
+            "MOVE_SHADOW_SNEAK",
+            "MOVE_ICE_PUNCH",
+            "MOVE_CLOSE_COMBAT"
+          ],
+          "role": "Four-attack spectral mythical cleanup that steals setup boosts and never retreats into the survival phase's Protect rhythm.",
+          "lead_group": "final reserve",
+          "mega_candidate": false,
+          "legality_basis": "All four moves resolve through Marshadow's checked-in level, TM, or tutor data. Ice Punch replaces the generated donor's Protect to create a materially direct cleanup phase."
+        }
+      ],
+      "ordering": {
+        "intended_lead": [
+          "SPECIES_GENGAR",
+          "SPECIES_AMOONGUSS"
+        ],
+        "reserve_sequence": [
+          "Mega Gengar and Amoonguss lead. Start the first clock only when Gengar's two-slot visible survival check passes: use Perish Song plus Rage Powder against redirectable pressure, Protect plus Spore or direct disruption against two independent probable knockout lines, and direct-pressure mode against Ghost escape or revealed spread pressure.",
+          "When both leads reach count one and both primary destinations are healthy, synchronize Gengar to Flutter Mane and Amoonguss to Aegislash. Reserve those destinations before scoring fallbacks so both switches cannot select the same slot; the opposing pair was trapped when actions were chosen and now faces the final count.",
+          "If Flutter Mane is unavailable, Gengar exits first to healthy Aegislash and Amoonguss takes healthy Mimikyu, then Marshadow; if Aegislash is unavailable, Gengar still takes Flutter Mane and Amoonguss takes Mimikyu, then Marshadow. If only one lead is counted or one legal reserve exists, switch the counted lead to the highest-priority unreserved destination and let the uncounted partner act.",
+          "After the first opposing pair falls, active Flutter Mane uses Perish Song while Aegislash or the current survival partner switches to preserved Mega Gengar. The opponent may choose a legal switch before Shadow Tag returns, but the resulting active pair receives the visible second song after Gengar restores the trap.",
+          "At the second count-one exit, preserve any legal singer and transition to Mimikyu then Marshadow according to visible physical or status pressure, a visible boost Spectral Thief can steal, or an immediate Shadow Sneak knockout. If the trap is broken or no second circle is enforceable, enter this direct-cleanup phase immediately instead of singing into free switches."
+        ],
+        "mandatory_order_reason": "Gengar and Amoonguss must occupy the native lead slots so the sole visible trapper has a guardian during the first exposed turn. Flutter Mane is deliberately held in slot three for the synchronized first exit and second song; Aegislash is its survival partner; Mimikyu and Marshadow are the direct finish. A Phoebe-aware selector still controls every damaged, missing-destination, single-count, and broken-trap branch rather than assuming party order can author the cycle."
+      },
+      "ai": {
+        "existing_flags": [
+          "AI_FLAG_CHECK_BAD_MOVE",
+          "AI_FLAG_TRY_TO_FAINT",
+          "AI_FLAG_CHECK_VIABILITY",
+          "AI_FLAG_CHECK_FOE",
+          "AI_FLAG_SMART_SWITCHING",
+          "AI_FLAG_HELP_PARTNER",
+          "AI_FLAG_SPEED_CONTROL"
+        ],
+        "required_flags": [
+          "AI_FLAG_CHECK_BAD_MOVE",
+          "AI_FLAG_TRY_TO_FAINT",
+          "AI_FLAG_CHECK_VIABILITY",
+          "AI_FLAG_CHECK_FOE",
+          "AI_FLAG_SMART_SWITCHING",
+          "AI_FLAG_HELP_PARTNER",
+          "AI_FLAG_HP_AWARE",
+          "AI_FLAG_PERISH_TRAP"
+        ],
+        "custom_requirements": [
+          "Recognize Mega Gengar's post-Mega Shadow Tag before move selection and treat Gengar as the first-cycle singer and preserved Flutter Mane as the staged second-cycle singer.",
+          "Reject duplicate Perish Song when all living foes already have a count.",
+          "Attack, Disable, burn, or sleep visible Ghost-type escape pieces immediately. Treat Soundproof, pivot moves, Shed Shell, and Eject Button as escape information only after the ability, move, or item is revealed in battle; do not inspect hidden player data for the state machine.",
+          "Before either clock starts, evaluate Gengar against both opposing slots using only revealed attacks, observed damage, visible modifiers, and conservative public-species ranges. Perish Song is illegal when two independent probable knockout lines remain; use Gengar Protect plus Amoonguss Spore or direct disruption instead.",
+          "On the first clock, coordinate Gengar with Amoonguss: Perish Song plus Rage Powder against redirectable pressure, Protect plus Spore against two independent threats, and direct pressure against visible Ghost escape or revealed spread attacks. Rage Powder is never chosen into exclusively spread pressure.",
+          "At count one, switch every perishing AI Pokemon when a legal unreserved destination exists. Reserve Flutter Mane for Gengar and Aegislash for Amoonguss first, then use the total damaged-destination fallbacks recorded in ordering; current battle_ai_switch_items.c is only a baseline and does not prove synchronized doubles behavior.",
+          "After the first opposing pair falls, stage the second circle exactly: active Flutter Mane uses Perish Song while Aegislash or the current survival partner switches to preserved Mega Gengar. Do not drift into generic damage AI or claim a second cycle without this causal re-entry.",
+          "Add a Phoebe-specific phase selector that coordinates both replacement slots, tracks reserved destinations, preserves a singer when defensible, and chooses Mimikyu or Marshadow by visible physical or status pressure, a visible boost Spectral Thief can steal, or an immediate Shadow Sneak knockout when cleanup begins.",
+          "Use Spectral Thief preferentially against a boosted target and Shadow Sneak only when priority changes the knockout."
+        ],
+        "forbidden_behaviors": [
+          "Do not sing when both living foes are already perishing.",
+          "Do not Protect repeatedly at count zero or allow an AI Pokemon to remain in at count one with a legal switch.",
+          "Do not Rage Powder when both foes use spread moves or the protected partner is already safe.",
+          "Do not assume Shadow Tag traps Ghost-types; current battle configuration explicitly lets Ghosts escape.",
+          "Do not use AI_FLAG_CHECK_FOE or any custom profile to inspect an unrevealed player pivot move, Soundproof ability, Shed Shell, or Eject Button when deciding whether the trap is secure.",
+          "Do not start a clock while Gengar faces two independent visible probable knockout lines merely because Perish Song has a high preference.",
+          "Do not force exact moves or targets independently of board state, except for the documented synchronized exits and second-circle handoff whose purpose is to make the advertised battle exist."
+        ],
+        "state_machine": [
+          {
+            "state": "secure-or-break-escape",
+            "condition": "Mega Gengar is not yet active, a foe is visibly Ghost-type, or an escape ability, item, or pivot move has already been revealed",
+            "behavior": "Mega Evolve automatically; use Shadow Ball, Disable, Spore, Will-O-Wisp, Taunt, or direct focus fire until the clock can teach a fair actionable lesson. Never inspect an unrevealed player move or item for this transition."
+          },
+          {
+            "state": "start-clock",
+            "condition": "At least one living foe is unperished, Mega Gengar's Shadow Tag affects the relevant slots, and Gengar does not face two independent visible probable knockout lines",
+            "behavior": "On the first cycle Gengar sings while Amoonguss redirects or disrupts; on the staged second cycle Flutter Mane sings as the survival partner switches to preserved Gengar. Never choose two songs or start a clock from a generic move preference alone."
+          },
+          {
+            "state": "survive-three-two",
+            "condition": "A useful own-side Perish count is two or three",
+            "behavior": "Value Protect, Disable, Rage Powder, Spore, Synthesis, Substitute, King's Shield, and safe switching without forcing a deterministic sequence."
+          },
+          {
+            "state": "exit-at-one",
+            "condition": "An AI Pokemon's count is one and a legal reserve exists",
+            "behavior": "Coordinate both active slots and reserve destinations. On the first cycle prefer Gengar to Flutter Mane and Amoonguss to Aegislash, using the recorded unreserved fallbacks when damaged or unavailable. If trapped or no reserve exists, choose the highest-value attack or protection rather than pretending survival is possible."
+          },
+          {
+            "state": "second-circle",
+            "condition": "The first opposing pair has fainted, active Flutter Mane is uncounted, preserved Mega Gengar is healthy enough to re-enter, and at least one new foe is not a revealed free escape",
+            "behavior": "Flutter Mane uses Perish Song while Aegislash or the active survival partner switches to Mega Gengar. The opponent's chosen active pair receives the song after Gengar restores Shadow Tag; preserve legal exits for Phoebe's count-one turn."
+          },
+          {
+            "state": "direct-cleanup",
+            "condition": "The trapper has fainted, revealed escape counterplay remains, or only damaged foes survive",
+            "behavior": "Use the trainer-aware reserve selector to transition to non-Protect Mimikyu and four-attack Marshadow, with Flutter Mane or Aegislash attacking as appropriate, instead of wasting turns on an unenforceable clock."
+          }
+        ]
+      },
+      "counterplay": {
+        "intentional_weakness": "Mega Gengar is the only Shadow Tag user. Removing it collapses the hard trap; Ghost-types can switch through Shadow Tag under the current Gen 7 rule, pivot moves and escape items preserve exits, and spread attacks bypass Rage Powder.",
+        "first_loss_lesson": "Count both sides, not just the player's clock. Preserve one escape class or double-target Mega Gengar on a non-Protect turn; once the single trapper is gone, Phoebe becomes a hard but conventional Ghost offense.",
+        "classes": [
+          "Ghost-type switching, Shed Shell, Eject Button, U-turn, Volt Switch, Flip Turn, or Parting Shot to retain an exit",
+          "Soundproof, Throat Chop, Taunt, Imprison, Encore, or immediate pressure to prevent Perish Song",
+          "Double targeting, priority, Dark or Ghost attacks, and spread damage to remove Mega Gengar through redirection",
+          "Safeguard, Misty Terrain, sleep immunity, Lum Berry, or Taunt against Amoonguss and Mimikyu status",
+          "Feint, Unseen Fist, Encore, Disable, or setup on a correctly read protection turn",
+          "Unaware, Haze, Clear Smog, or avoiding unnecessary setup so Marshadow gains little from Spectral Thief"
+        ],
+        "revealed_information": [
+          "Mega Gengar visibly changes to Shadow Tag before the first count matters.",
+          "The Perish count is displayed every turn and switching resets an individual Pokemon's count.",
+          "Amoonguss is the visible first-cycle guardian and spread attacks ignore Rage Powder.",
+          "Flutter Mane's Focus Sash and second Perish Song become visible during the synchronized first exit and second-circle handoff.",
+          "Ghost-type escape behavior is a global Gen 7 rule and must be stated in the guide hint.",
+          "Marshadow reveals Spectral Thief only after the player chooses to accumulate boosts."
+        ],
+        "unacceptable_failure_modes": [
+          "The AI fails to switch at count one and turns the signature boss into self-destruction.",
+          "The AI sings without Shadow Tag into freely switching targets and falsely appears incompetent.",
+          "The player loses to an undocumented Shadow Tag exception or invisible count rule.",
+          "Every broad escape class is silently covered, reducing the fight to one obscure required Pokemon.",
+          "Random sleep accuracy, double Protect variance, or targeting luck becomes the primary source of difficulty."
+        ]
+      },
+      "competitive_research": {
+        "index": {
+          "version": 1,
+          "record_count": 1005,
+          "sha256": "44d79fd2a5f7578013b2363f9e47d75a0f05ae4239da3bd6891e9651bca2648a"
+        },
+        "queries": [
+          "search_competitive_teams.py --player Wolfe --tag perish-trap --style doubles",
+          "search_competitive_teams.py --pokemon Flutter-Mane --style doubles",
+          "search_competitive_teams.py --pokemon Aegislash --style doubles",
+          "search_competitive_teams.py --pokemon Mimikyu --style doubles",
+          "search_competitive_teams.py --pokemon Marshadow --style doubles",
+          "search_competitive_teams.py --pokemon Amoonguss --style doubles --tag redirection",
+          "full 1005-record mechanical scan for Perish, Shadow Tag, Disable, redirection, survival-clock, Ghost, and priority tags"
+        ],
+        "candidates": [
+          {
+            "reference_id": "elite:wolfe:orlando-2023",
+            "decision": "selected",
+            "reason": "The exact winning sheet supplies the two-singer, Shadow Tag, redirection, recovery, and direct-cleanup architecture. Flutter Mane is nearly exact; Amoonguss is adapted to current move legality; Mega Gengar replaces Gothitelle as the one trapper."
+          },
+          {
+            "reference_id": "elite:marco-silva:turin-2026",
+            "decision": "selected",
+            "reason": "Marco Silva's exact Mega Gengar Perish Song, Disable, Shadow Ball, and Protect set is the cleanest current public fit and preserves Mega Evolution as the only active gimmick."
+          },
+          {
+            "reference_id": "showdown:gen7randomdoublesbattle:015",
+            "decision": "adapted",
+            "reason": "Sitrus Disguise Mimikyu keeps Will-O-Wisp, Play Rough, and Shadow Claw, but Taunt replaces Protect so the post-clock phase does not repeat the survival shell."
+          },
+          {
+            "reference_id": "showdown:gen7randomdoublesbattle:018",
+            "decision": "adapted",
+            "reason": "The generated Aegislash establishes King's Shield special offense. Leftovers and Substitute replace Life Orb priority so Aegislash supports the clock and leaves Glacia's Wide Guard identity unspent."
+          },
+          {
+            "reference_id": "showdown:gen8randomdoublesbattle:002",
+            "decision": "adapted",
+            "reason": "Life Orb Technician Marshadow keeps Spectral Thief, Shadow Sneak, and Close Combat; legal Ice Punch replaces Protect so cleanup is materially offensive."
+          },
+          {
+            "reference_id": "elite:wolfe:toronto-2024",
+            "decision": "reserved",
+            "reason": "Its rain offense plus secondary Perish mode is excellent but rain belongs to Aqua and Wallace, while a second Shadow Tag user would erase Phoebe's intentional weakness."
+          },
+          {
+            "reference_id": "elite:wolfe:euic-2025",
+            "decision": "rejected",
+            "reason": "Its secondary Perish pressure is useful research, but Koraidon sun offense is Magma territory and would make Phoebe another offense-plus-backup-trap team instead of the definitive survival clock."
+          }
+        ],
+        "selected_reference_ids": [
+          "elite:wolfe:orlando-2023",
+          "elite:marco-silva:turin-2026",
+          "showdown:gen7randomdoublesbattle:015",
+          "showdown:gen7randomdoublesbattle:018",
+          "showdown:gen8randomdoublesbattle:002"
+        ],
+        "external_public_sources": [
+          {
+            "url": "https://limitlessvgc.com/tournaments/298/teams",
+            "use": "Exact public Wolfe Glick Orlando 2023 winning sheet: two Perish singers, Amoonguss redirection, Gothitelle Shadow Tag, and a direct cleanup mode."
+          },
+          {
+            "url": "https://limitlessvgc.com/tournaments/435/teams",
+            "use": "Exact public Marco Silva Turin 2026 winning Mega Gengar set: Shadow Ball, Perish Song, Disable, Protect."
+          },
+          {
+            "url": "https://www.smogon.com/forums/threads/gengar.3508859/",
+            "use": "Public competitive Mega Gengar Perish analysis documenting the defensive Timid set, Protect and Disable survival, count-one switching, Ghost escape, pivot counterplay, and redirection partners."
+          }
+        ],
+        "rejected_gimmicks": [
+          "All source-format transformations other than Mega Evolution are removed; no source Tera, Z-Move, Dynamax, Gigantamax, or Primal state is active."
+        ]
+      },
+      "campaign_reservations": {
+        "spends": [
+          "The campaign's definitive full Shadow Tag Perish battle",
+          "Mega Gengar as Phoebe's only Mega",
+          "Flutter Mane as the second singer",
+          "Marshadow as the spectral mythical and anti-setup final pressure",
+          "One strategically justified off-type Amoonguss redirection slot"
+        ],
+        "preserves": [
+          "Sidney's Yveltal, Darkrai, Incineroar, Urshifu, Kingambit, and Mega Absol roster",
+          "Glacia's snow, offense-plus-attrition hybrid, and Wide Guard showcase",
+          "Drake's Dragon Mega and singles format shift",
+          "Wallace's rain, dual-speed, and grand restricted spectacle"
+        ],
+        "releases": [
+          "Battle 11's partial Celebi and Shelmet Perish lesson is allowed to escalate here into the one full League trap; species, setting, counterplay, and AI phase structure are entirely different.",
+          "Wolfe Glick's Orlando survival clock is spent only once, at a battle important enough to justify dedicated AI.",
+          "Mega Gengar's competitive Perish and Disable identity is finally used at the point where the player owns every broad counterplay class."
+        ],
+        "collision_notes": [
+          "No species overlaps Sidney's dossier and no Incineroar, Urshifu, Yveltal, Darkrai, Kingambit, or Absol appears here.",
+          "Gothitelle is intentionally omitted: a second Shadow Tag user would turn a fair single-point weakness into a near-hard lock.",
+          "Trick Room, rain, snow, screens, and Wide Guard are intentionally absent to protect later League identities.",
+          "Amoonguss is the only off-type member and exists for a sourced, finite redirection job rather than generic roster strength."
+        ]
+      },
+      "presentation": {
+        "intro_concept": "Keep Phoebe's Mt. Pyre communion and tight bonds, but explain that every spirit hears the same song and each one guards the shadow that keeps the circle closed.",
+        "defeat_concept": "She recognizes that the player did not merely survive the count; they protected the bond and exit that mattered.",
+        "post_battle_concept": "She warns that Glacia will tax recovery differently: not with one shared count, but with cold offense and attrition.",
+        "hint_concept": "The pre-League guide explicitly states that Ghost-types can leave Shadow Tag, pivot moves and escape items remain valid, spread attacks bypass Rage Powder, and Phoebe has only one hard trapper.",
+        "guide_summary": "Document the cap-80 Mega Gengar and Amoonguss lead, every set and offset, automatic first legal Mega, displayed Perish counts, Ghost escape rule, Gengar's two-slot survival gate, synchronized count-one Gengar-to-Flutter and Amoonguss-to-Aegislash exits, Flutter Mane's second song as preserved Gengar re-enters, damaged-destination fallbacks, the non-Protect Mimikyu and Marshadow cleanup phase, and the manual healing window before Glacia.",
+        "native_width_status": "concept-only"
+      },
+      "verification": {
+        "design_schema": "pass",
+        "species_items_moves_abilities": "pass",
+        "source_implementation": "not-started",
+        "script_and_format": "not-started",
+        "dialogue_width": "concept-only",
+        "guide": "concept-only",
+        "runtime": "unplayed",
+        "observed_difficulty": null,
+        "evidence": [
+          "All six species exist in current base or curated Gen 9 stats.",
+          "Every proposed item, move, and spread token exists in current headers.",
+          "Ability slots resolve exactly, including Gengar slot 1 Cursed Body, Flutter Mane slot 0 Protosynthesis, and Amoonguss slot 2 Regenerator.",
+          "evolution.h maps Gengar plus Gengarite to Mega Gengar, whose checked-in ability is Shadow Tag.",
+          "Gengar and Flutter Mane both legally learn Perish Song; the current battle engine stores and displays the three-turn count.",
+          "battle_ai_switch_items.c already attempts a legal switch when an AI Pokemon's Perish count is one or lower; the new trainer profile must regression-test this in doubles.",
+          "Amoonguss Pollen Puff was rejected as unavailable in current move data and replaced by legal Synthesis.",
+          "Current source was inspected but deliberately not modified. The proposed state machine and observed target 10 remain unimplemented and unplayed.",
+          "The first fresh critic's Protect-density, hidden-information, reserve-selection, state-machine, and counterplay-test concerns were incorporated into the revised team and explicit source blockers.",
+          "The v2 critic's unsupported-trapper and undefined-second-circle blockers were resolved by the Gengar plus Amoonguss lead, synchronized first exits, explicit Flutter Mane plus returning Gengar handoff, and two-slot survival invariant."
+        ],
+        "known_tooling_note": "The current marquee legality helper walks the non-Mega pre-evolution graph, so Gengar's Gastly-line Disable passes. Source implementation remains blocked on a revealed-information Perish state machine, synchronized two-slot switching, the explicit second-circle handoff, two-slot Gengar survival evaluation, and Phoebe-specific reserve selection; all required escape-class tests and observed difficulty remain unplayed.",
+        "source_blockers": [
+          "Implement the revealed-information Perish state machine; current AI_PERISH_TRAP scoring is not sufficient.",
+          "Implement Phoebe-specific synchronized replacement selection with destination reservation: normally Gengar to Flutter Mane and Amoonguss to Aegislash at count one, plus every recorded unavailable, damaged, single-count, and single-reserve fallback.",
+          "Implement the second-circle handoff in which active Flutter Mane uses Perish Song while Aegislash or the current survival partner switches to preserved Mega Gengar; verify the new opposing active pair receives the song after Shadow Tag returns.",
+          "Implement the conservative two-slot visible Gengar survival invariant and forbid Perish Song against two independent probable knockout lines; test Protect plus Spore, Rage Powder, direct-pressure, spread, and Ghost-escape branches.",
+          "Prevent the custom profile from inspecting unrevealed pivot moves, Soundproof, Shed Shell, or Eject Button.",
+          "Regression-test mixed and double Perish counts, one and two simultaneous count-one switches, destination conflicts, second-cycle re-entry, redirection, Ghost escape, Soundproof, pivoting, escape items, spread damage, Taunt, and trapper knockout.",
+          "Run representative cap-80 teams before assigning any observed difficulty."
+        ]
+      },
+      "mechanics_proposal": null,
+      "fresh_critic_history": [
+        {
+          "reviewer_agent_id": "/root/ledger_1_28/fresh_critic",
+          "context_mode": "fresh-no-history",
+          "verdict": "revise",
+          "is_this_sick_and_awesome": "Yes. The dual-singer Mega Gengar trap with Marshadow waiting to punish setup is memorable boss design.",
+          "strongest_moment": "The player realizes both sides share the Perish count and must remove the sole trapper or preserve an exit while Phoebe cycles guardians.",
+          "weakest_part": "The original reserve phase was too Protect-heavy, generic replacement selection could not preserve Gengar or author the cycle, and hidden pivot knowledge risked fake difficulty.",
+          "difficulty_honesty": "The unplayed target 10 is honest but highly dependent on an unimplemented Perish state machine, revealed-information rules, and state-aware switching.",
+          "required_changes": [
+            "Treat the bespoke Perish state machine as an implementation blocker.",
+            "Require trainer-aware reserve selection.",
+            "Remove Protect from Marshadow and at least one other reserve.",
+            "Prevent hidden pivot-move knowledge from driving the trap state.",
+            "Require independent Ghost, Soundproof, pivot, escape-item, spread, Taunt, and trapper-KO tests."
+          ],
+          "author_response": "All material changes were applied. Mimikyu now uses Taunt instead of Protect and Marshadow uses Ice Punch instead of Protect; Phoebe is down to three Protect users; the direct-cleanup phase is explicit; a revealed-information Perish state machine and Phoebe-aware reserve selector are source blockers; unrevealed pivot moves, Soundproof, Shed Shell, and Eject Button are forbidden inputs; every requested escape-class test is recorded as mandatory.",
+          "resolved": true
+        },
+        {
+          "reviewer_agent_id": "/root/phoebe_fresh_critic_final",
+          "context_mode": "fresh-no-history",
+          "verdict": "ship",
+          "is_this_sick_and_awesome": "Yes. The apparent complexity resolves into one urgent question—break or escape Mega Gengar's clock—then evolves into guarded survival and direct spectral offense rather than a pile of strong Ghost types.",
+          "strongest_moment": "After the first countdown resolves, preserved Mega Gengar returns beside a guardian and starts a second circle, making the player's earlier targeting and escape-resource choices matter again.",
+          "weakest_part": "The opening is binary around Mega Gengar: a successful immediate double target can deflate the battle, while failing to answer it can erase a pair.",
+          "difficulty_honesty": "Mostly honest and strategy-driven. The modest offsets are not doing the heavy lifting; target priority, clock arithmetic, escape preservation, Protect prediction, and Marshadow's setup punishment are. Runtime tests must ensure the Gengar opening has a readable middle rather than only success or catastrophe.",
+          "required_changes": [],
+          "author_response": "This v1 ship verdict was superseded by the stronger v2 review standard; it is retained only as history.",
+          "resolved": true
+        },
+        {
+          "reviewer_agent_id": "/root/phoebe_critic_v2",
+          "reviewer_model": "gpt-5.6-sol",
+          "reasoning_effort": "ultra",
+          "review_template_version": 2,
+          "context_mode": "fresh-no-history",
+          "verdict": "revise",
+          "is_this_sick_and_awesome": "The visible death clock, singular trapper, finite defenses, and spectral cleanup are memorable, but the submitted lead left Gengar unsupported and the second circle was described rather than causally staged.",
+          "strongest_moment": "Preserved Mega Gengar returns beside Flutter Mane as the next opposing pair arrives, turning the understood countdown into one final circle.",
+          "weakest_part": "Gengar plus Flutter Mane left the sole trapper unsupported on turn two, allowing one generic double-target to collapse the whole state machine.",
+          "honest_difficulty_assessment": "Approximately severe blind but materially weaker learned: without an active guardian and explicit handoff, trapper removal reduces the battle to conventional Ghost offense. Exact difficulty remains unobserved until implementation and adversarial playtesting.",
+          "easiest_player_win_line": "Scout Gengar Protect on the song turn, then use two different attacks into Gengar while Flutter Mane switches; one Disable cannot stop both and incoming Amoonguss cannot redirect that turn.",
+          "required_changes": [
+            "Lead Mega Gengar with Amoonguss so the sole trapper has an active first-clock guardian and Flutter Mane remains available to stage the second song.",
+            "Specify synchronized first-cycle exits and the exact Flutter Mane song plus preserved Gengar re-entry that creates the second circle.",
+            "Add a two-slot visible Gengar-survival invariant that postpones Perish Song against two independent probable knockout lines."
+          ],
+          "author_response": "All blockers were applied. Amoonguss now occupies the second native lead slot. The dossier records synchronized Gengar-to-Flutter and Amoonguss-to-Aegislash exits with complete damaged-destination fallbacks, followed by Flutter Mane singing as the survival partner switches to preserved Gengar. The start-clock state now requires a two-slot visible survival test and chooses Protect plus Spore or direct pressure when the clock would expose Gengar to two independent probable knockouts.",
+          "resolved": true
+        }
+      ],
+      "fresh_critic_review": null
+    },
+    "ELITE_FOUR_GLACIA": {
+      "anchor_id": "ELITE_FOUR_GLACIA",
+      "planning_tier": "league_gauntlet",
+      "status": {
+        "design": "design-complete",
+        "fresh_critic": "resolved",
+        "source": "unimplemented",
+        "static": "design-validated",
+        "runtime": "unplayed"
+      },
+      "campaign_state": {
+        "canonical_stage": "Third main-story Elite Four member immediately after Phoebe",
+        "location": "EverGrandeCity_GlaciasRoom",
+        "strict_cap": 80,
+        "mechanics_baseline_id": "pokemon_league_main_story",
+        "player_tools": [
+          "One fixed six-Pokemon party chosen before League entry",
+          "Every legal move prepared before entry",
+          "On-the-fly legal ability switching",
+          "Mega Bracelet and all previously collected Mega Stones",
+          "Held-item changes and healing items from the overworld Bag between rooms",
+          "No Bag items during the Glacia battle"
+        ],
+        "mega_access": "Full main-story Mega access; one player Mega and one opponent Mega remain the only battle gimmick.",
+        "evolution_phase": "Endgame phase; fully evolved, single-stage, legendary, mythical, regional-form, curated Gen 9, and Champions Mega Pokemon are eligible.",
+        "preparation_access": "There is no automatic restoration after Phoebe. The player regains normal control in Phoebe's room and Hall 2 and may use carried healing, status, PP, held-item, Pokemon-menu, and save options before entering Glacia's room. Party composition remains locked after League entry."
+      },
+      "runtime": {
+        "trainer_ids": [
+          "TRAINER_GLACIA"
+        ],
+        "canonical_format": "double",
+        "variants": [
+          {
+            "variant_id": "main_story_glacia",
+            "trainer_ids": [
+              "TRAINER_GLACIA"
+            ],
+            "format": "double",
+            "scope": "designed-here",
+            "reachability": "required main story"
+          },
+          {
+            "variant_id": "postgame_current_reachable_rematch",
+            "trainer_ids": [
+              "TRAINER_GLACIA_4"
+            ],
+            "format": "double",
+            "scope": "deferred-to-rematch-phase",
+            "reachability": "the current Glacia rematch entry script routes directly here"
+          },
+          {
+            "variant_id": "postgame_declared_mode_labels",
+            "trainer_ids": [
+              "TRAINER_GLACIA",
+              "TRAINER_GLACIA_2",
+              "TRAINER_GLACIA_3",
+              "TRAINER_GLACIA_4"
+            ],
+            "format": "double",
+            "scope": "deferred-to-rematch-phase",
+            "reachability": "four labels exist, but current VAR_ELITE_4_MODE selections have no source consumer; audit before treating the unused labels as reachable"
+          }
+        ]
+      },
+      "rolling_context": {
+        "available": false,
+        "reason": "The chronological battle frontier is still Battle 29, so an exact previous-ten Glacia window would be fabricated. Refresh before implementation.",
+        "protected_neighbor_anchors": [
+          "ELITE_FOUR_PHOEBE",
+          "ELITE_FOUR_DRAKE",
+          "CHAMPION_WALLACE",
+          "POSTGAME_ELITE_FOUR_REMATCH_GAUNTLET"
+        ],
+        "recent_hook_refresh_required": true
+      },
+      "identity": {
+        "memory_hook": "Mega Glalie visibly pressures with Double-Edge before its later detonation window, Toxapex traps and strips an item, and Glastrier closes the shattered field as the one late snowball.",
+        "story_fit": "Glacia treats cold as pressure that seals exits and punishes stillness. Four cold-climate attackers, a venomous deep-water anchor, and a Flash Fire specter express that idea without repeating the familiar snow-and-Aurora-Veil script.",
+        "primary_player_question": "Can the player act on Glalie's explicit pre-selection crack warning, break Toxapex's trap-and-item transition, and still preserve an answer for final Chilling Neigh Glastrier?",
+        "primary_mode": "Mega Glalie and Toxapex open together, but Explosion is forbidden on global turn zero. After Glalie completes its first action, a one-time native battle message announces that its frozen body is cracking before the next move-selection window; only after that actionable cue can the AI consider Explosion beside Baneful Bunker.",
+        "secondary_mode": "Lower-offset Chien-Pao and Choice Scarf Chandelure provide distinct physical amplification and special Choice disruption, Booster Iron Bundle supplies active Icy Wind control, and bulky Assault Vest Glastrier is the real late Chilling Neigh climax.",
+        "preview_pressure": "The player receives one full turn to read Mega Glalie before Explosion becomes legal, but must decide whether to spend disruption on the lead, the midgame speed pair, or the visibly reserved Glastrier climax."
+      },
+      "difficulty": {
+        "target": 10,
+        "observed": null,
+        "rationale": "Six optimized level-81 to level-83 Pokemon create a readable multi-turn detonation, a trap and item-removal bridge, differentiated fast physical and special pressure, active speed control, and one late Chilling Neigh closer. The reduced offsets make the claimed 10 depend on decisions and mode transitions rather than raw levels.",
+        "pressure_sources": [
+          "cap +2 Mega Glalie Double-Edge and delayed Refrigerate Explosion",
+          "cap +1 Toxapex Infestation or Toxic clock plus Knock Off transition",
+          "cap +2 Life Orb Chien-Pao Sword of Ruin and Sucker Punch",
+          "cap +2 Choice Scarf Chandelure Fire immunity, Heat Wave, and Trick",
+          "cap +2 Booster Energy Iron Bundle Freeze-Dry, Hydro Pump, and Icy Wind",
+          "cap +3 Assault Vest Glastrier Chilling Neigh late snowball"
+        ],
+        "resource_tax": "Glacia enters third without automatic healing. The readable lead taxes Protect and disruption rather than surprise knowledge; trapping, poison, Knock Off, speed control, priority, and final Glastrier pressure tax HP, status cures, held items, and the Ice or Fighting answer the player must preserve before Drake.",
+        "tuning_order": [
+          "Test the no-turn-zero-Explosion rule, Toxapex transition, and final Glastrier state before changing any set",
+          "Adjust Glalie, Chien-Pao, Iron Bundle, and Glastrier offsets within +1 to +3",
+          "Adjust Toxapex survivability and trap duration",
+          "Only then reconsider coverage or a strategic mode"
+        ]
+      },
+      "team": [
+        {
+          "order": 1,
+          "species": "SPECIES_GLALIE",
+          "level_offset": 2,
+          "item": "ITEM_GLALITITE",
+          "ability": "ABILITY_REFRIGERATE",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+          "moves": [
+            "MOVE_DOUBLE_EDGE",
+            "MOVE_EXPLOSION",
+            "MOVE_ICE_SHARD",
+            "MOVE_PROTECT"
+          ],
+          "role": "sole Mega, detonation lead, and priority breaker",
+          "lead_group": "primary lead",
+          "mega_candidate": true
+        },
+        {
+          "order": 2,
+          "species": "SPECIES_TOXAPEX",
+          "level_offset": 1,
+          "item": "ITEM_LEFTOVERS",
+          "ability": "ABILITY_REGENERATOR",
+          "ability_slot": 2,
+          "spread": "SPREAD_31_IV_HP_DEF_SPDEF_SASSY",
+          "moves": [
+            "MOVE_BANEFUL_BUNKER",
+            "MOVE_INFESTATION",
+            "MOVE_TOXIC",
+            "MOVE_KNOCK_OFF"
+          ],
+          "role": "trap clock, item-removal transition, and detonation shield",
+          "lead_group": "primary lead",
+          "mega_candidate": false
+        },
+        {
+          "order": 3,
+          "species": "SPECIES_CHIEN_PAO",
+          "level_offset": 2,
+          "item": "ITEM_LIFE_ORB",
+          "ability": "ABILITY_SWORD_OF_RUIN",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+          "moves": [
+            "MOVE_ICICLE_CRASH",
+            "MOVE_SACRED_SWORD",
+            "MOVE_SUCKER_PUNCH",
+            "MOVE_PROTECT"
+          ],
+          "role": "major Ice legendary and fast physical amplifier",
+          "lead_group": "first reserve",
+          "mega_candidate": false
+        },
+        {
+          "order": 4,
+          "species": "SPECIES_CHANDELURE",
+          "level_offset": 2,
+          "item": "ITEM_CHOICE_SCARF",
+          "ability": "ABILITY_FLASH_FIRE",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+          "moves": [
+            "MOVE_HEAT_WAVE",
+            "MOVE_SHADOW_BALL",
+            "MOVE_ENERGY_BALL",
+            "MOVE_TRICK"
+          ],
+          "role": "Fire absorption, Steel punishment, and Choice disruption",
+          "lead_group": "fast-mode reserve",
+          "mega_candidate": false
+        },
+        {
+          "order": 5,
+          "species": "SPECIES_IRON_BUNDLE",
+          "level_offset": 2,
+          "item": "ITEM_BOOSTER_ENERGY",
+          "ability": "ABILITY_QUARK_DRIVE",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+          "moves": [
+            "MOVE_FREEZE_DRY",
+            "MOVE_HYDRO_PUMP",
+            "MOVE_ICY_WIND",
+            "MOVE_PROTECT"
+          ],
+          "role": "Booster Energy special speed control and pre-climax pressure",
+          "lead_group": "speed-control reserve",
+          "mega_candidate": false
+        },
+        {
+          "order": 6,
+          "species": "SPECIES_GLASTRIER",
+          "level_offset": 3,
+          "item": "ITEM_ASSAULT_VEST",
+          "ability": "ABILITY_CHILLING_NEIGH",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+          "moves": [
+            "MOVE_ICICLE_CRASH",
+            "MOVE_HIGH_HORSEPOWER",
+            "MOVE_CLOSE_COMBAT",
+            "MOVE_CRUNCH"
+          ],
+          "role": "bulky final Chilling Neigh snowball and true late climax",
+          "lead_group": "final closer",
+          "mega_candidate": false
+        }
+      ],
+      "ordering": {
+        "intended_lead": [
+          "SPECIES_GLALIE",
+          "SPECIES_TOXAPEX"
+        ],
+        "reserve_sequence": [
+          "SPECIES_CHIEN_PAO",
+          "SPECIES_CHANDELURE",
+          "SPECIES_IRON_BUNDLE",
+          "SPECIES_GLASTRIER"
+        ],
+        "mandatory_order_reason": "Glalie and Toxapex remain the fixed readable lead, and Glastrier remains the final climax. Chien-Pao, Chandelure, and Iron Bundle are selected or switched by visible board state rather than forced into a rigid pair; the AI may vary their order while preserving Glastrier unless an immediate matchup requires it."
+      },
+      "ai": {
+        "existing_flags": [
+          "AI_FLAG_CHECK_BAD_MOVE",
+          "AI_FLAG_TRY_TO_FAINT",
+          "AI_FLAG_CHECK_VIABILITY",
+          "AI_FLAG_CHECK_FOE",
+          "AI_FLAG_SMART_SWITCHING",
+          "AI_FLAG_HELP_PARTNER",
+          "AI_FLAG_SPEED_CONTROL",
+          "AI_FLAG_FIELD_CONTROL"
+        ],
+        "required_flags": [
+          "AI_FLAG_CHECK_BAD_MOVE",
+          "AI_FLAG_TRY_TO_FAINT",
+          "AI_FLAG_CHECK_VIABILITY",
+          "AI_FLAG_CHECK_FOE",
+          "AI_FLAG_SMART_SWITCHING",
+          "AI_FLAG_HELP_PARTNER",
+          "AI_FLAG_HP_AWARE",
+          "AI_FLAG_WILL_SUICIDE",
+          "AI_FLAG_COMBO_SETUP"
+        ],
+        "custom_requirements": [
+          "Forbid Explosion on global turn zero. After Glalie completes its first action, set a one-time trainer state and display a native 'Glalie's frozen body is cracking!' battle message before the next player action-selection window. Explosion remains illegal to the AI until that cue has been shown.",
+          "After the first crack cue, reward Explosion only when Toxapex or the current ally has selected protection or is immune and the expected two-target payoff justifies losing Glalie; do not repeat the cue or force detonation.",
+          "Select at most one valuable Infestation or Toxic clock, use Knock Off once it removes a meaningful item or opens the next attacker, and recognize Baneful Bunker as a visible safe-detonation signal rather than a forced loop.",
+          "Permit Toxapex to switch for Regenerator after it has trapped, poisoned, or removed an item and a reserve can exploit the new board; do not preserve it passively after its transition is complete.",
+          "Use Icy Wind when Iron Bundle actually changes move order, and treat Protect as scouting rather than a substitute for useful damage.",
+          "Keep healthy Glastrier as the preferred late climax, but release it earlier only when the visible board offers a concrete Chilling Neigh or survival advantage."
+        ],
+        "forbidden_behaviors": [
+          "Do not choose Explosion on global turn zero or before the first-crack cue has been displayed ahead of action selection.",
+          "Do not choose Explosion into an unprotected vulnerable ally or when direct pressure preserves a winning Glalie.",
+          "Do not repeat Infestation, Toxic, or Knock Off when the target state makes the action redundant.",
+          "Do not keep Toxapex on the field after its clock and item transition are complete solely to stall.",
+          "Do not use Icy Wind when it cannot change relevant move order.",
+          "Do not expose Glastrier early merely because its raw Attack is high, and do not script reserves independently of visible board state."
+        ],
+        "state_machine": "Mode A is a readable lead: turn zero permits Mega Double-Edge, Ice Shard, or Protect but never Explosion, while Toxapex establishes one trap, poison, or Knock Off transition. After that first action, the game shows the one-time crack message before the player chooses the next turn; only then can Baneful Bunker coordinate a safe detonation. Mode B selects Chien-Pao, Scarf Chandelure, or Booster Iron Bundle from the current board for distinct physical, special, or speed-control pressure. Mode C preserves Glastrier as the default final climax and uses Chilling Neigh to convert one earned knockout into the closing snowball."
+      },
+      "counterplay": {
+        "intentional_weakness": "Explosion is unavailable on turn zero and later telegraphed by protection; Toxapex has no recovery move and must progress through a legal trap, poison, or Knock Off; the fast reserves have no Tailwind or Trick Room; Chien-Pao exposes its ally; Chandelure is Choice-locked; Iron Bundle consumes one Booster; and final Glastrier is slow, physically oriented, and vulnerable to burn, Intimidate, Fighting, Steel, Fire, Rock, and focused special damage.",
+        "first_loss_lesson": "Use the guaranteed first action to identify Glalie and Toxapex choices, then watch Baneful Bunker as the detonation tell. Force Toxapex to transition without value, control Iron Bundle speed, and keep burn, Intimidate, or a Fighting or Steel answer for Glastrier.",
+        "classes": [
+          "Protect, Ghost immunity, Fake Out, Wide Guard, resist switching, or focused priority against the delayed detonation",
+          "Taunt, Encore, Substitute, status prevention, poison immunity, trapping denial, Knock Off resistance, or focus fire against Toxapex",
+          "Icy Wind, Electroweb, paralysis, Trick Room, priority, Choice Scarf users, or raw faster threats against the no-setter midgame",
+          "burn, Intimidate, Haze, Fighting, Steel, Fire, Rock, and special focus fire against final Glastrier",
+          "hazards, item disruption, multihit moves, and Choice-lock exploitation against Chandelure, Bundle, and the remaining item seams"
+        ],
+        "revealed_information": [
+          "Explosion is forbidden on turn zero and becomes legal only after a one-time crack message appears before the player's next action selection",
+          "Baneful Bunker is safe partner coordination after the advance warning, not the warning itself",
+          "Toxapex transitions actively through Knock Off and carries no Recover",
+          "Chien-Pao, Chandelure, and Iron Bundle perform distinct physical, Choice-special, and speed-control jobs",
+          "Glastrier is the reserved final Chilling Neigh climax at only cap +3"
+        ],
+        "unacceptable_failure_modes": [
+          "No hidden required catch, immunity, or exact first-turn sequence may be necessary.",
+          "The AI may not read an unrevealed action to decide whether Explosion is safe.",
+          "Explosion may not occur on global turn zero.",
+          "Accuracy misses may not be the primary source of difficulty.",
+          "Toxic and Infestation may not become an infinite stall loop.",
+          "The fight may not gain a second Mega or any non-Mega gimmick."
+        ]
+      },
+      "competitive_research": {
+        "index": {
+          "version": 1,
+          "record_count": 1005,
+          "sha256": "44d79fd2a5f7578013b2363f9e47d75a0f05ae4239da3bd6891e9651bca2648a"
+        },
+        "queries": [
+          "doubles snow stall-offense toxic infestation",
+          "Mamoswine Toxapex Glalie Chien-Pao Iron Bundle",
+          "no-dedicated-speed-mode positioning",
+          "Choice Scarf Chandelure Trick Heat Wave",
+          "Mega detonation plus protected ally"
+        ],
+        "candidates": [
+          {
+            "rank": 1,
+            "reference_id": "elite:wolfe:naic-2026",
+            "inspected_scope": "full exact public team sheet and strategy digest",
+            "decision": "adapted",
+            "reason": "The Toxapex Infestation/Toxic/Wide Guard clock, Mamoswine pressure, and primary-clock/secondary-burst discipline become Glacia's spine; Charizard-Y sun and the unrelated support roster are rejected."
+          },
+          {
+            "rank": 2,
+            "reference_id": "showdown:gen4randomdoublesbattle:008",
+            "inspected_scope": "complete reproducible Glalie Explosion set and full team",
+            "decision": "adapted",
+            "reason": "Glalie Explosion establishes a real detonation precedent. Verdant upgrades it to the one Mega slot and rejects the unrelated sand, sleep, and setup shell."
+          },
+          {
+            "rank": 3,
+            "reference_id": "showdown:gen9randomdoublesbattle:014",
+            "inspected_scope": "complete reproducible Chien-Pao set and full team",
+            "decision": "adapted",
+            "reason": "Life Orb Sword of Ruin, Icicle Crash, Sucker Punch, and Protect are retained; legal Sacred Sword replaces Throat Chop to punish Steel and Ice answers."
+          },
+          {
+            "rank": 4,
+            "reference_id": "showdown:gen9randomdoublesbattle:002",
+            "inspected_scope": "complete reproducible Iron Bundle and Dragapult sets",
+            "decision": "adapted",
+            "reason": "Booster Energy, Freeze-Dry, Hydro Pump, and Protect are retained. Encore is absent from Verdant's current Iron Bundle learnset, so legal Flip Turn replaces it."
+          },
+          {
+            "rank": 5,
+            "reference_id": "showdown:gen6randomdoublesbattle:026",
+            "inspected_scope": "complete reproducible Choice Scarf Chandelure set and full team",
+            "decision": "adapted",
+            "reason": "Choice Scarf Flash Fire, Heat Wave, and Trick supply Fire and Steel counterpressure without adding weather or another setup mode."
+          },
+          {
+            "rank": 6,
+            "reference_id": "elite:shohei-kimura:worlds-2023",
+            "inspected_scope": "official World Champion roster and curated strategy principle",
+            "decision": "adapted",
+            "reason": "The world champion roster demonstrates that positioning and Sword of Ruin can define difficulty without a dedicated speed setter; no exact roster is claimed from roster-only evidence."
+          },
+          {
+            "rank": 7,
+            "reference_id": "showdown:gen8randomdoublesbattle:005",
+            "inspected_scope": "complete reproducible snow and Aurora Veil team",
+            "decision": "rejected",
+            "reason": "Ninetales-Alola, Aurora Veil, Icy Wind, and protected setup recreate Glacia's current generic setter structure."
+          },
+          {
+            "rank": 8,
+            "reference_id": "smogon:gen8ou:002",
+            "inspected_scope": "complete published Aurora Veil offense sample",
+            "decision": "rejected",
+            "reason": "Aurora Veil into multiple setup recipients is sound but duplicates a campaign pattern and is not a radically different Glacia."
+          }
+        ],
+        "selected_reference_ids": [
+          "elite:wolfe:naic-2026",
+          "showdown:gen4randomdoublesbattle:008",
+          "showdown:gen9randomdoublesbattle:014",
+          "showdown:gen9randomdoublesbattle:002",
+          "showdown:gen6randomdoublesbattle:026",
+          "elite:shohei-kimura:worlds-2023"
+        ],
+        "imported_elements": [
+          "Wolfe's offense-plus-trapping-clock mode discipline",
+          "Toxapex Infestation, Toxic, Knock Off, and protected transition role",
+          "delayed Mega Glalie detonation rather than another screen recipient",
+          "Sword of Ruin physical pressure distinct from Chandelure special Choice pressure",
+          "Booster Energy Iron Bundle active speed control",
+          "Glastrier Chilling Neigh as the earned late climax"
+        ],
+        "rejected_gimmicks": [
+          "Tera from modern source formats",
+          "Dynamax and Gigantamax",
+          "Z-Moves",
+          "Primal Reversion",
+          "alternate Mega selection",
+          "Aurora Veil as the battle's automatic answer"
+        ]
+      },
+      "campaign_reservations": {
+        "spends": [
+          "Mega Glalie as Glacia's signature and only Mega",
+          "Chien-Pao as the League's major Ice legendary",
+          "the campaign's definitive readable detonation plus trapping-clock battle",
+          "Booster Energy Iron Bundle speed control and Glastrier as the late Ice climax"
+        ],
+        "preserves": [
+          "dedicated Perish and Shadow Tag for Phoebe and selected Aqua command fights",
+          "Dragon singles lure sequencing and Mega Dragonite for Drake",
+          "Wallace's rain and opposite-speed Champion transition",
+          "Dark information warfare for Sidney"
+        ],
+        "releases": [
+          "Abomasnow, Ninetales-Alola, Kyurem, Articuno, Glastrier, and Aurora Veil are not locked to Glacia and may be used elsewhere in distinct roles.",
+          "The exact Wolfe NAIC roster remains available as a historical reference because Glacia imports its mode discipline rather than copying its six species.",
+          "Mamoswine is released from Glacia because its role overlapped Chien-Pao; it remains available for another Wolfe-derived battle."
+        ],
+        "collision_notes": [
+          "No Glacia species may repeat across the other four main-story League dossiers without a written role distinction and fresh collision review.",
+          "Phoebe must not reuse Toxapex-style Toxic plus Infestation as a substitute for her protected Perish identity.",
+          "Wallace and later Aqua fights may use rain trapping, but not Glacia's Mega detonation plus venom-clock opening.",
+          "Refresh all species, Mega, legendary, item, move, tempo, and player-question collisions after the full League set is merged."
+        ]
+      },
+      "presentation": {
+        "intro_concept": "Glacia explains that the first crack is a warning and the second breaks the field. A one-time in-battle crack message then appears before the first turn on which Explosion is eligible, turning that poetry into actionable information.",
+        "defeat_concept": "Glacia acknowledges that the player read the fracture before it spread and still kept enough strength for the final white rider.",
+        "post_battle_concept": "She directs the player onward while warning that Drake will punish whatever answer they spent too early, preserving the manual-healing window and existing progression.",
+        "hint_concept": "A League NPC warns that Glalie's crack appears before the dangerous turn, Toxapex removes an item before yielding the field, and Glacia keeps a slow rider for the end.",
+        "guide_summary": "Turn zero is safe from Explosion. When the one-time crack message appears before move selection, protect, reposition, deny Glalie, exploit immunity, or pressure through Toxapex. Then answer Chien-Pao, Scarf Chandelure, and Bundle speed control without spending the burn, Intimidate, Fighting, or Steel plan needed for final Glastrier.",
+        "native_width_status": "concept-only; exact strings must be rendered and checked during chronological source implementation"
+      },
+      "fresh_critic_review": {
+        "reviewer_agent_id": "/root/glacia_fresh_critic_v3",
+        "context_mode": "fresh-no-history",
+        "verdict": "ship",
+        "is_this_sick_and_awesome": "Yes. The visible crack cue turns Mega Glalie's Explosion into a fair bluff-and-counterplay puzzle, Toxapex changes which answers remain available, and distinct pressure modes escalate into a Glastrier climax without adding another gimmick.",
+        "strongest_moment": "The first crack message appears before action selection, forcing a real choice among Protect, attacking Glalie, covering Explosion, or punishing Toxapex while Glacia may still choose not to detonate.",
+        "weakest_part": "Chien-Pao, Chandelure, and Iron Bundle can briefly resemble a matchup-selected premium carousel, and Toxapex's clock lightly echoes Phoebe; strict transition rules keep both below revision threshold.",
+        "difficulty_honesty": "Strategic and learnable. The +1 to +3 offsets add pressure but do not drive the fight; target selection, the advance detonation tell, trapping or item disruption, changing speed tiers, and preserving a Glastrier answer do. Fairness depends on the cue appearing before selection and every forbidden Explosion/stall behavior being enforced.",
+        "required_changes": [],
+        "author_response": "Accepted as a ship with hard implementation gates: the one-time crack message must precede action selection, Explosion must remain unavailable beforehand, reserve selection must stay board-state based, and runtime tests must prove Toxapex does not become a passive echo of Phoebe.",
+        "resolved": true
+      },
+      "verification": {
+        "design_schema": "pass",
+        "species_items_moves_abilities": "pass",
+        "source_implementation": "not-started",
+        "script_and_format": "not-started",
+        "dialogue_width": "concept-only",
+        "guide": "concept-only",
+        "runtime": "unplayed",
+        "observed_difficulty": null,
+        "evidence": [
+          "The canonical draft binds campaign_state.mechanics_baseline_id to pokemon_league_main_story and preserves the source-backed cap of 80.",
+          "src/data/pokemon/evolution.h maps Glalie plus Glalitite to Mega Glalie, and no second Mega candidate appears.",
+          "TRAINER_GLACIA is currently a six-member double trainer and the room script contains no automatic HealPlayerParty call.",
+          "The exact competitive index identity is version 1, 1005 records, SHA-256 44d79fd2a5f7578013b2363f9e47d75a0f05ae4239da3bd6891e9651bca2648a.",
+          "Current source exposes revised Glalie, Toxapex, Chien-Pao, Chandelure, Iron Bundle, and Glastrier species, items, selected ability slots, spreads, and four legal moves per Pokemon.",
+          "No game source has been changed for this revised dossier and no real-ROM battle has been run."
+        ],
+        "known_blockers": [
+          "A new separate no-history excitement critic has not reviewed the revised final team, so the dossier remains authored-draft.",
+          "The revised party, lower offsets, no-turn-zero-Explosion gate, one-time pre-selection crack cue, Toxapex transition, board-state reserve selection, and Glastrier climax are not implemented.",
+          "Exact dialogue is not written or width-rendered.",
+          "The guide still describes an older Glacia roster.",
+          "The previous-ten chronological context does not exist yet.",
+          "Real-ROM AI behavior and observed difficulty are unknown.",
+          "Postgame rematch variants remain deferred."
+        ]
+      },
+      "mechanics_proposal": null,
+      "fresh_critic_history": [
+        {
+          "reviewer_agent_id": "fresh-no-history-glacia-critic-2026-08-25",
+          "context_mode": "fresh-no-history",
+          "verdict": "revise",
+          "is_this_sick_and_awesome": "The Glalie and Toxapex concept is memorable, but the original version front-loaded a possibly opaque Explosion coin flip and then flattened into overlapping fast Ice attackers without a true final reveal.",
+          "strongest_moment": "Mega Glalie threatening detonation beside Baneful Bunker Toxapex.",
+          "weakest_part": "The opening was not readable enough, Toxapex lacked an active handoff, Chien-Pao and Mamoswine overlapped, Iron Bundle's last-slot Flip Turn had little purpose, and +4/+5 offsets plus no late climax made the difficulty feel inflated.",
+          "difficulty_honesty": "The core was strategic, but hidden detonation timing and large offsets risked making the 10 come from surprise and numbers rather than an earned sequence.",
+          "required_changes": [
+            "Keep Glalie plus Toxapex but make the detonation opening readable and multi-turn.",
+            "Give Toxapex an active transition into the reserve phase.",
+            "Remove the Chien-Pao and Mamoswine role overlap.",
+            "Create a real late climax.",
+            "Make Iron Bundle's Flip Turn useful or replace it.",
+            "Reduce the +4 and +5 level offsets."
+          ],
+          "author_response": "Explosion is now forbidden on turn zero and later telegraphed by Baneful Bunker; Toxapex gained Knock Off as an active handoff; Mamoswine was replaced by distinct slow Chilling Neigh Glastrier; Iron Bundle now uses Icy Wind; Glastrier is the final climax; and all offsets now sit between +1 and +3.",
+          "resolved": true
+        },
+        {
+          "reviewer_agent_id": "/root/glacia_fresh_critic_v2",
+          "context_mode": "fresh-no-history",
+          "verdict": "revise",
+          "is_this_sick_and_awesome": "Almost. Mega Glalie attacking once and then detonating beside Baneful Bunker is memorable, and Glastrier gives the battle a satisfying silhouette, but the first eligible Explosion lacked an actionable warning before move selection.",
+          "strongest_moment": "The first Baneful Bunker plus Refrigerate Explosion reveal violently changes the board and teaches the lead pair.",
+          "weakest_part": "Seeing Baneful Bunker animate on the detonation turn is spectacle after actions were already chosen, not advance information.",
+          "difficulty_honesty": "The revised offsets and reserve roles are honest; the remaining fake-hard spike was the potentially untelegraphed first double knockout.",
+          "required_changes": [
+            "Give the first eligible Explosion an actionable cue before the player chooses moves that turn.",
+            "Show the cue once; later reads may depend on learned board state."
+          ],
+          "author_response": "A one-time native crack message is now a hard AI and presentation requirement. It appears after Glalie's first action but before the next player action-selection window; Explosion remains unavailable until the cue is shown, the cue never repeats, and later detonation reads may use learned board state.",
+          "resolved": true
+        }
+      ]
+    },
+    "ELITE_FOUR_DRAKE": {
+      "anchor_id": "ELITE_FOUR_DRAKE",
+      "planning_tier": "league_gauntlet",
+      "status": {
+        "design": "design-complete",
+        "fresh_critic": "resolved",
+        "source": "unimplemented",
+        "static": "design-validated",
+        "runtime": "unplayed"
+      },
+      "campaign_state": {
+        "canonical_stage": "Fourth and final main-story Elite Four member immediately after Glacia",
+        "location": "EverGrandeCity_DrakesRoom",
+        "strict_cap": 80,
+        "mechanics_baseline_id": "pokemon_league_main_story",
+        "player_tools": [
+          "One fixed six-Pokemon party chosen before League entry",
+          "Every legal move prepared before entry",
+          "On-the-fly legal ability switching",
+          "Mega Bracelet and all previously collected Mega Stones",
+          "Held-item changes and healing items from the overworld Bag between rooms",
+          "No Bag items during the Drake battle"
+        ],
+        "mega_access": "Full main-story Mega access; one player Mega and one opponent Mega remain the only battle gimmick.",
+        "evolution_phase": "Endgame phase; fully evolved, single-stage, legendary, mythical, regional-form, curated Gen 9, and Champions Mega Pokemon are eligible.",
+        "preparation_access": "There is no automatic restoration after Glacia. The player regains normal control in Glacia's room and Hall 3 and may use carried healing, status, PP, held-item, Pokemon-menu, and save options before initiating Drake. After victory, Drake's room and Hall 4 provide another manual preparation window before the Champion room forces Wallace's approach."
+      },
+      "runtime": {
+        "trainer_ids": [
+          "TRAINER_DRAKE"
+        ],
+        "canonical_format": "single",
+        "variants": [
+          {
+            "variant_id": "main_story_drake",
+            "trainer_ids": [
+              "TRAINER_DRAKE"
+            ],
+            "format": "single",
+            "scope": "designed-here",
+            "reachability": "required main story"
+          },
+          {
+            "variant_id": "postgame_current_reachable_rematch",
+            "trainer_ids": [
+              "TRAINER_DRAKE_3"
+            ],
+            "format": "single",
+            "scope": "deferred-to-rematch-phase",
+            "reachability": "the current Drake rematch entry script routes directly here"
+          },
+          {
+            "variant_id": "postgame_declared_mode_labels",
+            "trainer_ids": [
+              "TRAINER_DRAKE",
+              "TRAINER_DRAKE_2",
+              "TRAINER_DRAKE_3",
+              "TRAINER_DRAKE_4"
+            ],
+            "format": "single",
+            "scope": "deferred-to-rematch-phase",
+            "reachability": "four labels exist, but current VAR_ELITE_4_MODE selections have no source consumer; audit before treating the unused labels as reachable"
+          }
+        ]
+      },
+      "rolling_context": {
+        "available": false,
+        "reason": "The chronological battle frontier is still Battle 29, so an exact previous-ten Drake window would be fabricated. Refresh before implementation.",
+        "protected_neighbor_anchors": [
+          "ELITE_FOUR_GLACIA",
+          "CHAMPION_WALLACE",
+          "POSTGAME_ELITE_FOUR_REMATCH_GAUNTLET",
+          "STEVEN_POSTGAME_SUPERBOSS"
+        ],
+        "recent_hook_refresh_required": true
+      },
+      "identity": {
+        "memory_hook": "Garchomp marks the field, mixed Dragapult and Scarf Hydreigon force different defenses, anti-Fairy Dragalge clears the lane, and Latios visibly sacrifices its momentum so special Mega Dragonite can become the one true climax.",
+        "story_fit": "Drake's existing dialogue already frames Pokemon partnership as a singles duel where every choice must stand on its own. Six Dragons with distinct sequential jobs turn that speech into a concrete preservation test rather than a legendary-stat exhibition.",
+        "primary_player_question": "Can the player exploit one visible Choice lock and shared Dragon weaknesses, then interrupt or reset Latios's Tailwind-or-Memento handoff before the sole four-attack special Mega Dragonite begins trading?",
+        "primary_mode": "Rough Skin Garchomp establishes Stealth Rock or Roar pressure, mixed Expert Belt Dragapult attacks without a Choice lock, and Choice Scarf Hydreigon supplies the roster's one readable speed commitment.",
+        "secondary_mode": "Assault Vest Dragalge punishes Fairy offense, then Soul Dew Latios either attacks or spends a visible Tailwind/Memento handoff into a four-attack Mega Dragonite with no setup or recovery loop.",
+        "preview_pressure": "The player sees one all-Dragon roster but must distinguish a hazard lead, a flexible mixed attacker, one Scarf lock, anti-Fairy Dragalge, an explicit sacrificial bridge, and a single special Mega climax."
+      },
+      "difficulty": {
+        "target": 10,
+        "observed": null,
+        "rationale": "Six optimized level-81 to level-83 Dragons create hazards, mixed damage, one exploitable Choice lock, anti-Fairy pressure, and one visible Latios-to-Mega-Dragonite climax. No Power Construct, paralysis chain, setup, recovery loop, or second ace remains; target 10 must come from preservation, denying or resetting the handoff, and answering the four-attack special category reversal.",
+        "pressure_sources": [
+          "cap +1 Rough Skin Rocky Helmet Garchomp Stealth Rock and Roar",
+          "cap +1 mixed Expert Belt Dragapult Dragon Darts, Shadow Ball, Flamethrower, and screen-breaking Psychic Fangs",
+          "cap +1 Choice Scarf Hydreigon as the sole Choice speed commitment",
+          "cap +2 Assault Vest Adaptability Dragalge accurate Poison, Water, and Electric coverage",
+          "cap +2 Soul Dew Latios Tailwind-or-Memento bridge",
+          "cap +3 special Mega Dragonite Multiscale and four accurate attacks with no setup or recovery"
+        ],
+        "resource_tax": "Drake enters fourth without automatic healing. Stealth Rock, one Scarf lock, mixed coverage, Dragalge's Fairy punishment, and the Latios-to-Mega handoff tax HP, hazard removal, scouting, denial PP, and the special wall or priority answer the player preserves before Wallace.",
+        "tuning_order": [
+          "Test board-state reserve selection, the single Choice lock, Latios handoff, verified Mega stats and Multiscale, and final four-attack Dragonite before changing sets",
+          "Adjust all offsets within +1 to +3",
+          "Adjust Dragalge or Mega Dragonite survivability",
+          "Only then reconsider accurate coverage or a role"
+        ]
+      },
+      "team": [
+        {
+          "order": 1,
+          "species": "SPECIES_GARCHOMP",
+          "level_offset": 1,
+          "item": "ITEM_ROCKY_HELMET",
+          "ability": "ABILITY_ROUGH_SKIN",
+          "ability_slot": 2,
+          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+          "moves": [
+            "MOVE_STEALTH_ROCK",
+            "MOVE_EARTHQUAKE",
+            "MOVE_ROAR",
+            "MOVE_FIRE_FANG"
+          ],
+          "role": "hazard lead, contact tax, reliable phazer, and accurate Fire coverage into Steel",
+          "lead_group": "primary lead",
+          "mega_candidate": false
+        },
+        {
+          "order": 2,
+          "species": "SPECIES_DRAGAPULT",
+          "level_offset": 1,
+          "item": "ITEM_EXPERT_BELT",
+          "ability": "ABILITY_CLEAR_BODY",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_ATK_SPEED_NAIVE",
+          "moves": [
+            "MOVE_DRAGON_DARTS",
+            "MOVE_SHADOW_BALL",
+            "MOVE_FLAMETHROWER",
+            "MOVE_PSYCHIC_FANGS"
+          ],
+          "role": "flexible mixed breaker and proactive screen-breaking commitment test",
+          "lead_group": "first reserve",
+          "mega_candidate": false
+        },
+        {
+          "order": 3,
+          "species": "SPECIES_HYDREIGON",
+          "level_offset": 1,
+          "item": "ITEM_CHOICE_SCARF",
+          "ability": "ABILITY_LEVITATE",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+          "moves": [
+            "MOVE_DRACO_METEOR",
+            "MOVE_DARK_PULSE",
+            "MOVE_FLASH_CANNON",
+            "MOVE_U_TURN"
+          ],
+          "role": "special speed check, Fairy lure, and second pivot",
+          "lead_group": "second reserve",
+          "mega_candidate": false
+        },
+        {
+          "order": 4,
+          "species": "SPECIES_LATIOS",
+          "level_offset": 2,
+          "item": "ITEM_SOUL_DEW",
+          "ability": "ABILITY_LEVITATE",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+          "moves": [
+            "MOVE_DRACO_METEOR",
+            "MOVE_PSYSHOCK",
+            "MOVE_TAILWIND",
+            "MOVE_MEMENTO"
+          ],
+          "role": "visible attacking bridge that can spend itself to create the sole Mega climax",
+          "lead_group": "late handoff reserve",
+          "mega_candidate": false
+        },
+        {
+          "order": 5,
+          "species": "SPECIES_DRAGALGE",
+          "level_offset": 2,
+          "item": "ITEM_ASSAULT_VEST",
+          "ability": "ABILITY_ADAPTABILITY",
+          "ability_slot": 2,
+          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+          "moves": [
+            "MOVE_DRAGON_PULSE",
+            "MOVE_SLUDGE_BOMB",
+            "MOVE_SURF",
+            "MOVE_THUNDERBOLT"
+          ],
+          "role": "accurate special sponge and anti-Fairy wallbreaker",
+          "lead_group": "anti-Fairy reserve",
+          "mega_candidate": false
+        },
+        {
+          "order": 6,
+          "species": "SPECIES_DRAGONITE",
+          "level_offset": 3,
+          "item": "ITEM_DRAGONINITE",
+          "ability": "ABILITY_MULTISCALE",
+          "ability_slot": 2,
+          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+          "moves": [
+            "MOVE_DRAGON_PULSE",
+            "MOVE_AIR_SLASH",
+            "MOVE_FLAMETHROWER",
+            "MOVE_THUNDERBOLT"
+          ],
+          "role": "sole Champions Mega showcase and four-attack special-category reversal with no setup or recovery loop",
+          "lead_group": "final ace",
+          "mega_candidate": true
+        }
+      ],
+      "ordering": {
+        "intended_lead": [
+          "SPECIES_GARCHOMP"
+        ],
+        "reserve_sequence": [
+          "SPECIES_DRAGAPULT",
+          "SPECIES_HYDREIGON",
+          "SPECIES_DRAGALGE",
+          "SPECIES_LATIOS",
+          "SPECIES_DRAGONITE"
+        ],
+        "mandatory_order_reason": "Garchomp is the fixed visible lead and Mega Dragonite is the sole final climax. Dragapult, Hydreigon, and Dragalge are selected by visible board state. Latios becomes the explicit late bridge only while Dragonite is the final healthy reserve: it may attack or establish Tailwind, and Memento is legal only when the player can switch to clear the drops at the cost of one tempo turn—not permanent setup."
+      },
+      "ai": {
+        "existing_flags": [
+          "AI_FLAG_CHECK_BAD_MOVE",
+          "AI_FLAG_TRY_TO_FAINT",
+          "AI_FLAG_CHECK_VIABILITY",
+          "AI_FLAG_CHECK_FOE",
+          "AI_FLAG_SMART_SWITCHING"
+        ],
+        "required_flags": [
+          "AI_FLAG_CHECK_BAD_MOVE",
+          "AI_FLAG_TRY_TO_FAINT",
+          "AI_FLAG_CHECK_VIABILITY",
+          "AI_FLAG_CHECK_FOE",
+          "AI_FLAG_SMART_SWITCHING",
+          "AI_FLAG_SETUP_FIRST_TURN",
+          "AI_FLAG_HP_AWARE",
+          "AI_FLAG_PREFER_STRONGEST_MOVE"
+        ],
+        "custom_requirements": [
+          "Prefer Stealth Rock on turn zero only when Garchomp survives and hazards have value; use Roar against visible setup or a switch worth taxing, never as an accuracy gamble.",
+          "Treat Hydreigon as the one Choice-locked pivot and use U-turn or switching to escape an immunity; Dragapult remains flexible and should choose physical or special coverage from the visible matchup.",
+          "Select Dragalge when Fairy pressure or special bulk matters, using accurate Surf and Thunderbolt rather than gambling on Hydro Pump or Focus Blast.",
+          "Select Latios as the late bridge only when Dragonite remains the final healthy reserve. Use Tailwind when its remaining turns can matter; use Memento only when Latios is expendable, the active target is not already minimized, and Dragonite can safely exploit the weakened board.",
+          "Preserve healthy Mega Dragonite as the sole final climax and Mega Evolve immediately on entry. Its checked-in Mega form is Dragon/Flying with HP 91, Attack 124, Defense 115, Speed 100, Special Attack 145, Special Defense 125, and Multiscale in every slot; choose among four attacks with no setup or recovery."
+        ],
+        "forbidden_behaviors": [
+          "Do not force Stealth Rock when immediate damage or switching is better.",
+          "Do not treat Dragapult as Choice-locked or duplicate Hydreigon's pivot logic.",
+          "Do not repeatedly choose Hydreigon's locked move into an immunity or extreme resistance.",
+          "Do not select Latios as a generic counter-pick while another reserve honestly fits the visible board better.",
+          "Do not use Memento unless Dragonite is the final healthy reserve, and do not assume the player will remain in rather than switch to clear the drops.",
+          "Do not reveal Mega Dragonite early merely because of raw BST, and do not invent an Agility, Roost, or post-Mega ability change that the final set does not carry."
+        ],
+        "state_machine": "Phase A fixes Garchomp as the visible lead and conditionally establishes hazards or phazing. Phase B selects mixed no-pivot Dragapult for flexible damage and screen breaking, Scarf Hydreigon for the sole pivot lock, or Dragalge for Fairy and special pressure. Phase C is the visible handoff: with Dragonite the final healthy reserve, Latios attacks, uses Tailwind, or conditionally sacrifices itself with Memento. Phase D Mega Evolves Dragonite as the sole climax and attacks immediately; the player can switch to erase Memento drops, stall or reverse Tailwind, break Multiscale, use priority, or rely on special bulk."
+      },
+      "counterplay": {
+        "intentional_weakness": "Every member remains a Dragon, only Hydreigon is Choice-locked, Dragapult has no pivot, setup, or defensive item, Garchomp and Dragalge use reliable but lower-ceiling coverage, Latios's Memento can be erased by switching, and special Mega Dragonite has no setup, recovery, priority, or second life after Multiscale breaks.",
+        "first_loss_lesson": "Identify Hydreigon as the one Choice lock, scout mixed screen-breaking Dragapult and anti-Fairy Dragalge, then treat Latios's Tailwind or Memento as the visible announcement of the sole climax. Switch to erase Memento drops if needed, break Multiscale, and answer Dragonite with priority, speed reversal, Ice or Fairy pressure, or special bulk.",
+        "classes": [
+          "hazard denial or removal, Magic Bounce, Taunt, and immediate pressure against Garchomp",
+          "Fairy and Ice offense combined with scouting Hydreigon Flash Cannon, Dragalge Poison STAB, and accurate Fire coverage",
+          "Protect, immunity switching, Disable, Encore, item removal, or Trick against Scarf Hydreigon; ordinary matchup and screen play against non-pivot mixed Dragapult",
+          "Taunt, Encore, priority, or offensive pressure against Latios Tailwind and Memento; switching clears Memento's stat drops",
+          "special walls, chip, hazards, status, priority, Tailwind stalling or reversal, and Multiscale breaking against four-attack Mega Dragonite"
+        ],
+        "revealed_information": [
+          "Garchomp is the only hazard setter and Roar always phazes if legal",
+          "Hydreigon is the only Choice-locked pivot; Dragapult is mixed, has no U-turn, and can break screens with Psychic Fangs",
+          "Dragalge uses accurate Surf and Thunderbolt coverage to punish Fairy and Steel responses",
+          "Latios visibly announces the final handoff through Tailwind or Memento",
+          "Mega Dragonite is the sole climax, immediately retains Multiscale after Mega Evolution, and carries four attacks with no setup or recovery loop"
+        ],
+        "unacceptable_failure_modes": [
+          "No hidden required catch, exact Fairy, exact Ice Pokemon, or single move may be necessary.",
+          "The AI may not read unrevealed switches to select a lure or reserve.",
+          "Accuracy misses may not be the primary source of difficulty.",
+          "Memento may not be selected from hidden player information or treated as an unavoidable free setup.",
+          "Drake may not gain a second Mega or any non-Mega gimmick.",
+          "The AI may not follow a mandatory reserve procession when the visible board calls for another role."
+        ]
+      },
+      "competitive_research": {
+        "index": {
+          "version": 1,
+          "record_count": 1005,
+          "sha256": "44d79fd2a5f7578013b2363f9e47d75a0f05ae4239da3bd6891e9651bca2648a"
+        },
+        "queries": [
+          "singles Dragon hazards pivoting Choice setup",
+          "Garchomp Dragapult Hydreigon Dragalge Latios Dragonite",
+          "anti-Fairy Dragon lure",
+          "Multiscale special Mega Dragonite",
+          "Latios Tailwind Memento Mega Dragonite handoff"
+        ],
+        "candidates": [
+          {
+            "rank": 1,
+            "reference_id": "elite:giovanni-cischke:worlds-2025",
+            "inspected_scope": "official World Champion roster and curated strategy digest",
+            "decision": "adapted",
+            "reason": "Giovanni's fast offense into a slower alternate mode inspires Drake's visible tempo change into the Latios handoff; no doubles support role or exact restricted roster is copied."
+          },
+          {
+            "rank": 2,
+            "reference_id": "smogon:gen8ou:002",
+            "inspected_scope": "complete published Dragapult and Garchomp offense sample",
+            "decision": "adapted",
+            "reason": "The pair divides fast Ghost and Dragon pressure from Ground pressure. Drake rejects Aurora Veil and multiple setup recipients, using hazards, phazing, and Choice commitments instead."
+          },
+          {
+            "rank": 3,
+            "reference_id": "showdown:gen9randomdoublesbattle:002",
+            "inspected_scope": "complete reproducible Choice Band Dragapult set and full team",
+            "decision": "adapted",
+            "reason": "Dragon Darts establishes Dragapult's physical pressure, but Verdant removes both the Choice lock and U-turn, adds legal special coverage and Psychic Fangs, and leaves Hydreigon as the only pivot commitment."
+          },
+          {
+            "rank": 4,
+            "reference_id": "smogon:gen7uu:001",
+            "inspected_scope": "complete published Hydreigon balance sample",
+            "decision": "adapted",
+            "reason": "Dark Pulse and Flash Cannon establish Hydreigon as a Fairy lure. Verdant uses Choice Scarf, Draco Meteor, and U-turn to make its commitment readable."
+          },
+          {
+            "rank": 5,
+            "reference_id": "showdown:gen8randombattle:026",
+            "inspected_scope": "complete reproducible Adaptability Dragalge set and full team",
+            "decision": "adapted",
+            "reason": "Dragon and Poison special pressure become Drake's anti-Fairy sponge, with Assault Vest and accurate Surf plus Thunderbolt replacing passive Black Sludge and low-accuracy coverage."
+          },
+          {
+            "rank": 6,
+            "reference_id": "smogon:gen8ou:003",
+            "inspected_scope": "complete published Multiscale Dragonite balance sample",
+            "decision": "adapted",
+            "reason": "Multiscale and Dragonite's special identity are retained, but Verdant's Champions Mega uses four accurate attacks with no recovery or setup loop; Latios provides the visible tempo bridge."
+          },
+          {
+            "rank": 7,
+            "reference_id": "showdown:gen7randombattle:007",
+            "inspected_scope": "complete reproducible special Latios set and full team",
+            "decision": "adapted",
+            "reason": "Latios supplies fast special Dragon/Psychic pressure. Soul Dew, Tailwind, and source-legal Memento turn that pressure into Drake's visible final handoff without importing the unrelated full team."
+          },
+          {
+            "rank": 8,
+            "reference_id": "smogon:gen8uu:011",
+            "inspected_scope": "complete published triple-Dragon-Dance offense sample",
+            "decision": "rejected",
+            "reason": "Layered setup works competitively, but three setup clocks would repeat Verdant's earlier overstuffing problem and make Drake less learnable."
+          },
+          {
+            "rank": 9,
+            "reference_id": "smogon:gen5ou:013",
+            "inspected_scope": "complete published TerrakChomp hyper-offense sample",
+            "decision": "rejected",
+            "reason": "Another physical Dragon Dance Dragonite would add a second setup climax and waste Mega Dragonite's special-stat identity."
+          },
+          {
+            "rank": 10,
+            "reference_id": "showdown:gen8randombattle:019",
+            "inspected_scope": "complete reproducible Salamence plus Palkia team",
+            "decision": "rejected",
+            "reason": "The roster's unrelated hazard pieces and repeated Thunder Wave do not produce a bespoke final Elite Four duel."
+          }
+        ],
+        "selected_reference_ids": [
+          "elite:giovanni-cischke:worlds-2025",
+          "smogon:gen8ou:002",
+          "showdown:gen9randomdoublesbattle:002",
+          "smogon:gen7uu:001",
+          "showdown:gen8randombattle:026",
+          "smogon:gen8ou:003",
+          "showdown:gen7randombattle:007"
+        ],
+        "imported_elements": [
+          "fast pressure into one reserved Mega climax",
+          "hazard and reliable phazing lead discipline",
+          "one readable and exploitable Choice commitment",
+          "flexible mixed Dragapult rather than a redundant Choice pivot",
+          "Adaptability Poison coverage as the anti-Fairy answer",
+          "Latios Tailwind and Memento as a visible, answerable bridge",
+          "verified Multiscale and four attacks on the sole special Mega Dragonite climax"
+        ],
+        "rejected_gimmicks": [
+          "Tera from modern source formats",
+          "Dynamax and Gigantamax",
+          "Z-Moves",
+          "Primal Reversion",
+          "alternate Mega selection",
+          "a second or third setup endgame"
+        ]
+      },
+      "campaign_reservations": {
+        "spends": [
+          "Mega Dragonite as Drake's signature, only Mega, and sole climax",
+          "Latios as Drake's visible Tailwind-or-Memento handoff legend",
+          "the League's deliberate singles format shift",
+          "the campaign's definitive all-Dragon preservation-to-handoff test"
+        ],
+        "preserves": [
+          "Wallace's rain and opposite-speed Champion transition",
+          "Glacia's Mega detonation and trapping clock",
+          "dedicated Perish and Shadow Tag for Phoebe",
+          "Mega Salamence, Dialga, Reshiram, Naganadel, and Rayquaza for distinct later roles rather than stacking them here"
+        ],
+        "releases": [
+          "The old five-legendary Drake roster, utility Power Construct, and three simultaneous setup clocks are released.",
+          "Mega Salamence is not locked to Drake and may appear elsewhere if its role does not duplicate Mega Dragonite.",
+          "Thousand Arrows is not reserved until its player-facing learnset source is made legal and explicitly approved.",
+          "Zygarde is fully released from Drake; Mega Dragonite owns the climax alone."
+        ],
+        "collision_notes": [
+          "No Drake species may repeat across the other four main-story League dossiers without a written role distinction and fresh collision review.",
+          "Other marquee battles may use individual Dragons, but not the same hazard-to-mixed-pressure-to-Memento-to-special-Mega sequence.",
+          "Steven's postgame superboss must preserve a distinct mineral and champion identity rather than reusing Drake's all-Dragon escalation.",
+          "Refresh all species, Mega, legendary, item, move, tempo, and player-question collisions after the full League set is merged."
+        ]
+      },
+      "presentation": {
+        "intro_concept": "Preserve Drake's native singles declaration and add that every earlier partner exposes the defense his final bond will challenge; Latios's sacrifice visibly announces that final test.",
+        "defeat_concept": "Drake acknowledges that the player read each board state instead of marching through a memorized order and still preserved an answer for his one final Mega.",
+        "post_battle_concept": "He keeps the existing virtuous-heart transition and sends the player toward Wallace, preserving control in Drake's room and Hall 4 for manual healing and saving.",
+        "hint_concept": "A League NPC warns that only one attacker is locked, Latios can spend itself to announce the last partner, and Drake's Mega attacks from the special side after an exposed speed setup.",
+        "guide_summary": "Garchomp establishes the switch tax, mixed screen-breaking Dragapult and Scarf Hydreigon demand different scouting, and Dragalge checks Fairy pressure with accurate coverage. Latios then attacks, sets Tailwind, or uses Memento before four-attack special Mega Dragonite arrives. Switch to clear Memento drops, stall or reverse Tailwind, break Multiscale, and preserve priority or special bulk.",
+        "native_width_status": "concept-only; exact strings must be rendered and checked during chronological source implementation"
+      },
+      "fresh_critic_review": {
+        "reviewer_agent_id": "/root/drake_fresh_critic_v5",
+        "context_mode": "fresh-no-history",
+        "verdict": "ship",
+        "is_this_sick_and_awesome": "Yes. The battle escalates from field control through distinct matchup tests into a legible Latios sacrifice and special Mega Dragonite climax; it feels authored, cohesive, fair, and memorable.",
+        "strongest_moment": "Latios uses Tailwind or Memento with Dragonite as the final reserve, followed by the immediate Mega reveal. Switching clears Memento but costs a hit; staying preserves tempo while weakened.",
+        "weakest_part": "Rocky Helmet Garchomp is familiar, and a well-prepared Fairy/Ice core can make parts of the differentiated middle act more conventional than spectacular.",
+        "difficulty_honesty": "Honest: only +1 to +3 levels, no evasion or low-accuracy dependence, no recovery or setup loop, and clear counterplay to the Choice lock, Tailwind, Memento, and Multiscale. Target 10 remains editorial until the required matchup matrix runs.",
+        "required_changes": [],
+        "author_response": "Accepted as a ship. Implementation remains gated on the total board-state selector, exact Latios handoff rules, verified Mega line, and cap-80 Fairy, Ice, priority, hazard, special-wall, Tailwind-stall, Memento-switch, and anti-Mega runtime tests.",
+        "resolved": true
+      },
+      "verification": {
+        "design_schema": "pass",
+        "species_items_moves_abilities": "pass",
+        "source_implementation": "not-started",
+        "script_and_format": "not-started",
+        "dialogue_width": "concept-only",
+        "guide": "concept-only",
+        "runtime": "unplayed",
+        "observed_difficulty": null,
+        "evidence": [
+          "The canonical draft binds campaign_state.mechanics_baseline_id to pokemon_league_main_story and preserves the source-backed cap of 80.",
+          "src/data/pokemon/evolution.h maps Dragonite plus Dragoninite to Mega Dragonite, whose current stats expose Multiscale and 145 base Special Attack, and no second Mega candidate appears.",
+          "TRAINER_DRAKE is currently a six-member single trainer, the intro truthfully announces a singles duel, and the room script contains no automatic HealPlayerParty call.",
+          "The exact competitive index identity is version 1, 1005 records, SHA-256 44d79fd2a5f7578013b2363f9e47d75a0f05ae4239da3bd6891e9651bca2648a.",
+          "Current source exposes revised Garchomp, Dragapult, Hydreigon, Dragalge, Latios, and Dragonite species, items, selected ability slots, spreads, and four legal moves per Pokemon.",
+          "Latios legally learns Draco Meteor, Psyshock, Tailwind, and Memento; Mega Dragonite legally learns Dragon Pulse, Air Slash, Flamethrower, and Thunderbolt.",
+          "Mega Dragonite's checked-in post-Mega line is Dragon/Flying, HP 91, Attack 124, Defense 115, Speed 100, Special Attack 145, Special Defense 125, and Multiscale in all three ability slots.",
+          "No game source has been changed for this revised dossier and no real-ROM battle has been run."
+        ],
+        "known_blockers": [
+          "The final no-history critic shipped the design, but no source implementation or runtime matchup evidence exists.",
+          "The revised party, lower offsets, board-state selector, no-pivot mixed Dragapult, Latios handoff, accurate coverage, and sole four-attack Mega Dragonite climax are not implemented.",
+          "Required matchup tests against cap-80 Fairy, Ice, priority, hazard, bulky-special, Tailwind-stall, Memento-switch, and anti-Mega plans have not run.",
+          "Exact dialogue is not written or width-rendered.",
+          "The guide still describes an older Drake roster.",
+          "The previous-ten chronological context does not exist yet.",
+          "Real-ROM AI behavior and observed difficulty are unknown.",
+          "Postgame rematch variants remain deferred."
+        ]
+      },
+      "mechanics_proposal": null,
+      "fresh_critic_history": [
+        {
+          "reviewer_agent_id": "fresh-no-history-drake-critic-2026-08-25",
+          "context_mode": "fresh-no-history",
+          "verdict": "revise",
+          "is_this_sick_and_awesome": "The all-Dragon singles premise and special Mega Dragonite reveal are strong, but the original six-stage procession made several members feel like competing aces and leaned too heavily on levels and inaccurate coverage.",
+          "strongest_moment": "A player preparing for another physical Dragon discovers that the one true climax is a 145 Special Attack Mega Dragonite.",
+          "weakest_part": "Zygarde and Mega Dragonite competed for the climax, Dragapult and Hydreigon duplicated Choice-pivot pressure, mandatory reserve order felt scripted, and several +4 to +6 offsets and low-accuracy attacks made the difficulty look inflated.",
+          "difficulty_honesty": "The preservation idea was real, but the original procession, redundant roles, high offsets, and coverage misses obscured it.",
+          "required_changes": [
+            "Reduce the cap-relative offsets.",
+            "Make special Mega Dragonite the sole climax.",
+            "Make Zygarde non-ace utility or replace it.",
+            "Differentiate or remove one Choice pivot and Dragapult redundancy.",
+            "Replace mandatory procession with visible board-state reserve selection.",
+            "Replace low-accuracy Garchomp, Dragalge, and Dragonite coverage."
+          ],
+          "author_response": "All offsets are now +1 to +3; Mega Dragonite is the sole final climax; Zygarde is Glare and Haze utility with no setup or recovery; Dragapult is mixed Expert Belt while Hydreigon is the only Choice user; reserve selection follows visible role need; and Fire Fang, Roar, Scald, Thunderbolt, Dragon Pulse, Air Slash, and Flamethrower replace the criticized coverage.",
+          "resolved": true
+        },
+        {
+          "reviewer_agent_id": "/root/drake_fresh_critic_v2",
+          "context_mode": "fresh-no-history",
+          "verdict": "revise",
+          "is_this_sick_and_awesome": "Almost, but Power Construct and paraflinch still overshadowed the intended special Mega climax, and the six premium Dragons lacked one visible through-line.",
+          "strongest_moment": "Mega Dragonite arriving last as a special attacker into the physical answer the earlier Dragons encouraged the player to preserve.",
+          "weakest_part": "Power Construct, Glare into Air Slash, and repeatable Roost created a second climax, action-denial variance, and grind.",
+          "difficulty_honesty": "Conditional reserve roles were learnable, but Complete Forme, paraflinch, and generic recovery supplied too much hidden-stat and variance difficulty.",
+          "required_changes": [
+            "Remove Power Construct or otherwise prevent Zygarde from becoming a second climax.",
+            "Break the Glare plus Air Slash chain.",
+            "Give Mega Dragonite a proactive recognizable plan with a clear answer.",
+            "Create a visible strategic bridge into the ace."
+          ],
+          "author_response": "Zygarde was removed entirely. Soul Dew Latios now provides the visible Tailwind-or-Memento handoff, Dragalge uses accurate Surf, and Mega Dragonite dropped Roost for Agility plus three accurate attacks. Memento drops can be cleared by switching, Agility spends an exposed turn, and Dragonite is the only climax.",
+          "resolved": true
+        },
+        {
+          "reviewer_agent_id": "/root/drake_fresh_critic_v3",
+          "context_mode": "fresh-no-history",
+          "verdict": "revise",
+          "is_this_sick_and_awesome": "Almost. Latios Memento into special Mega Dragonite was memorable, but Tailwind, Memento, Multiscale, Agility, and Air Slash overprotected the finale.",
+          "strongest_moment": "Latios spending itself immediately before the unexpected special Mega arrives.",
+          "weakest_part": "Switching cleared Memento but often donated Agility, making permanent speed control and flinch pressure feel predetermined.",
+          "difficulty_honesty": "The preservation game was strategic, but the protected setup and unspecified post-Mega line made target 10 unproven.",
+          "required_changes": [
+            "Keep Memento but remove Agility or otherwise prevent automatic permanent speed control.",
+            "Specify Mega Dragonite's post-Mega typing, ability, stats, and timing.",
+            "Differentiate Dragapult and Hydreigon.",
+            "Require representative cap-80 matchup tests."
+          ],
+          "author_response": "Agility and Roost are gone; Mega Dragonite now carries four attacks. Its exact Dragon/Flying, 91/124/115/100/145/125, all-slot Multiscale post-Mega line is recorded. Dragapult lost U-turn for Psychic Fangs while Hydreigon alone owns the Scarf pivot. A full cap-80 Fairy, Ice, priority, hazard, special-wall, Tailwind-stall, Memento-switch, and anti-Mega test matrix is a source blocker.",
+          "resolved": true
+        },
+        {
+          "reviewer_agent_id": "/root/drake_fresh_critic_v4",
+          "context_mode": "fresh-no-history",
+          "verdict": "revise",
+          "is_this_sick_and_awesome": "Yes at its peak, but the two fast U-turn Dragons still blurred the middle and Mega Dragonite's exact post-Mega behavior was not yet explicit.",
+          "strongest_moment": "Latios Memento forces a switch-or-stay decision immediately before the sole special Mega reveal.",
+          "weakest_part": "Dragapult and Hydreigon occupied the same fast coverage-and-U-turn beat.",
+          "difficulty_honesty": "Mostly honest, but target 10 needs measured matchups and verified Multiscale behavior rather than assumptions.",
+          "required_changes": [
+            "Specify and validate Mega Dragonite's post-Mega stats and ability.",
+            "Remove or sharply constrain Dragapult U-turn.",
+            "Record measurable cap-80 matchup gates.",
+            "Correct Garchomp Fire Fang role text."
+          ],
+          "author_response": "The exact Mega line and immediate transformation timing are recorded; Dragapult now uses Psychic Fangs and cannot pivot; the matchup matrix is mandatory; Garchomp now truthfully describes Fire coverage into Steel; and Dragonite carries four attacks with no setup or recovery.",
+          "resolved": true
+        }
+      ]
+    },
+    "CHAMPION_WALLACE": {
+      "anchor_id": "CHAMPION_WALLACE",
+      "planning_tier": "champion",
+      "status": {
+        "design": "design-complete",
+        "fresh_critic": "resolved",
+        "source": "unimplemented",
+        "static": "design-validated",
+        "runtime": "unplayed"
+      },
+      "campaign_state": {
+        "canonical_stage": "Main-story Champion immediately after Drake",
+        "location": "EverGrandeCity_ChampionsRoom",
+        "strict_cap": 80,
+        "mechanics_baseline_id": "pokemon_league_main_story",
+        "player_tools": [
+          "One fixed six-Pokemon party chosen before League entry",
+          "Every legal move prepared before entry",
+          "On-the-fly legal ability switching",
+          "Mega Bracelet and all previously collected Mega Stones",
+          "Held-item changes and healing items from the overworld Bag between rooms",
+          "No Bag items during the Champion battle"
+        ],
+        "mega_access": "Full main-story Mega access; one player Mega and one opponent Mega remain the only battle gimmick.",
+        "evolution_phase": "Endgame phase; fully evolved, single-stage, legendary, mythical, regional-form, curated Gen 9, and Champions Mega Pokemon are eligible.",
+        "preparation_access": "The League clerk before entry sells Hyper Potions, Max Potions, Full Restores, Revives, Full Heals, Ethers, and Max Ethers. After Drake, the player regains control in Drake's room and Hall 4 for manual healing, item changes, and saving; entering the Champion room then forces the Wallace approach."
+      },
+      "runtime": {
+        "trainer_ids": [
+          "TRAINER_WALLACE"
+        ],
+        "canonical_format": "double",
+        "variants": [
+          {
+            "variant_id": "main_story_champion",
+            "trainer_ids": [
+              "TRAINER_WALLACE"
+            ],
+            "format": "double",
+            "scope": "designed-here",
+            "reachability": "required main story"
+          },
+          {
+            "variant_id": "postgame_current_reachable_rematch",
+            "trainer_ids": [
+              "TRAINER_WALLACE_DOUBLES_LEGENDS"
+            ],
+            "format": "double",
+            "scope": "deferred-to-rematch-phase",
+            "reachability": "current rematch entry script routes directly here"
+          },
+          {
+            "variant_id": "postgame_declared_mode_labels",
+            "trainer_ids": [
+              "TRAINER_WALLACE_DOUBLES",
+              "TRAINER_WALLACE_LEGENDS"
+            ],
+            "format": "double",
+            "scope": "deferred-to-rematch-phase",
+            "reachability": "labels exist, but current VAR_ELITE_4_MODE selections have no source consumer; audit before treating them as reachable"
+          }
+        ]
+      },
+      "rolling_context": {
+        "available": false,
+        "reason": "The chronological battle frontier is still Battle 29, so an exact previous-ten Champion window would be fabricated. Refresh before implementation.",
+        "protected_neighbor_anchors": [
+          "ELITE_FOUR_GLACIA",
+          "ELITE_FOUR_DRAKE",
+          "POSTGAME_GYM_REMATCH_CYCLE",
+          "POSTGAME_ELITE_FOUR_REMATCH_GAUNTLET"
+        ],
+        "recent_hook_refresh_required": true
+      },
+      "identity": {
+        "memory_hook": "Wallace opens a royal rain assault whose speed depends on an interactable Tailwind, reverses the board behind Ogerpon, then closes with an aggressive Ferrothorn and Mega Milotic pair.",
+        "story_fit": "The Champion turns Hoenn's defining ocean, beauty, ancient legends, and graceful positioning into one theatrical final examination rather than a pile of Water-type stats.",
+        "primary_player_question": "Can the player dismantle Wallace's fast rain without spending the physical and field-control resources needed for his Trick Room and Mega Milotic endgame?",
+        "primary_mode": "Mystic Water Kyogre and Tornadus-Therian create immediate rain, HP-sensitive Water Spout, accurate Hurricane and Thunder, and an interactable Tailwind speed advantage.",
+        "secondary_mode": "Trainer-aware reserve selection pairs Wellspring Ogerpon with Palkia for a denyable Trick Room reversal, then keeps Ferrothorn beside a proactive Mega Milotic endgame.",
+        "preview_pressure": "The visible roster forces respect for both a very fast rain opening and a slow protected endgame; over-preparing for one makes the other materially stronger."
+      },
+      "difficulty": {
+        "target": 10,
+        "observed": null,
+        "rationale": "Six fully authored level-82 to level-84 Pokemon create opposite speed modes, weather amplification, redirection, a trainer-aware two-pair transition, and a physically exploitable but specially fortified Mega ace. Kyogre no longer outruns the player for free, and the endgame attacks proactively instead of relying on a Calm Mind and burn loop.",
+        "pressure_sources": [
+          "cap +2 Mystic Water rain Water Spout whose speed depends on Tailwind",
+          "accurate rain Hurricane and Thunder plus Tailwind",
+          "Wellspring Ogerpon redirection and dual-STAB recovery pressure",
+          "Palkia Trick Room reversal and rain-boosted Hydro Pump",
+          "Rocky Helmet Ferrothorn using four direct physical pressure tools under Trick Room",
+          "cap +4 Brine, Moonblast, Icy Wind, Recover Water/Fairy Mega Milotic with Prism Scales"
+        ],
+        "resource_tax": "The fight taxes weather replacement, Wide Guard or spread mitigation, speed-control PP, physical Grass/Electric coverage, Taunt, item planning, and whatever Revives or healing the player chooses to spend after Drake. It does not erase the manual healing window.",
+        "tuning_order": [
+          "Test the fixed lead, Tailwind interaction, and trainer-aware reserve-pair selector before changing any set",
+          "Adjust Kyogre, Palkia, and Milotic cap-relative offsets",
+          "Adjust Tornadus or Ogerpon survivability",
+          "Only then reconsider coverage or a strategic mode"
+        ]
+      },
+      "team": [
+        {
+          "order": 1,
+          "species": "SPECIES_KYOGRE",
+          "level_offset": 2,
+          "item": "ITEM_MYSTIC_WATER",
+          "ability": "ABILITY_DRIZZLE",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+          "moves": [
+            "MOVE_WATER_SPOUT",
+            "MOVE_ORIGIN_PULSE",
+            "MOVE_THUNDER",
+            "MOVE_ICE_BEAM"
+          ],
+          "role": "rain engine and HP-sensitive spread breaker whose speed is interactable",
+          "lead_group": "primary lead",
+          "mega_candidate": false
+        },
+        {
+          "order": 2,
+          "species": "SPECIES_TORNADUS_THERIAN",
+          "level_offset": 2,
+          "item": "ITEM_FOCUS_SASH",
+          "ability": "ABILITY_REGENERATOR",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+          "moves": [
+            "MOVE_TAILWIND",
+            "MOVE_HURRICANE",
+            "MOVE_TAUNT",
+            "MOVE_U_TURN"
+          ],
+          "role": "rain-perfect Flying pressure, speed control, denial, and pivot",
+          "lead_group": "primary lead",
+          "mega_candidate": false
+        },
+        {
+          "order": 3,
+          "species": "SPECIES_OGERPON_WELLSPRING",
+          "level_offset": 3,
+          "item": "ITEM_WELLSPRING_MASK",
+          "ability": "ABILITY_WATER_ABSORB",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+          "moves": [
+            "MOVE_IVY_CUDGEL",
+            "MOVE_FOLLOW_ME",
+            "MOVE_HORN_LEECH",
+            "MOVE_SPIKY_SHIELD"
+          ],
+          "role": "offensive redirection bridge that protects the mode transition",
+          "lead_group": "first reserve",
+          "mega_candidate": false
+        },
+        {
+          "order": 4,
+          "species": "SPECIES_PALKIA",
+          "level_offset": 3,
+          "item": "ITEM_LUSTROUS_ORB",
+          "ability": "ABILITY_PRESSURE",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_HP_SPATK_QUIET",
+          "moves": [
+            "MOVE_TRICK_ROOM",
+            "MOVE_SPACIAL_REND",
+            "MOVE_HYDRO_PUMP",
+            "MOVE_PROTECT"
+          ],
+          "role": "single slow-mode setter and rain-boosted legendary breaker",
+          "lead_group": "mode-transition reserve",
+          "mega_candidate": false
+        },
+        {
+          "order": 5,
+          "species": "SPECIES_FERROTHORN",
+          "level_offset": 3,
+          "item": "ITEM_ROCKY_HELMET",
+          "ability": "ABILITY_IRON_BARBS",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_HP_ATK_BRAVE",
+          "moves": [
+            "MOVE_POWER_WHIP",
+            "MOVE_GYRO_BALL",
+            "MOVE_KNOCK_OFF",
+            "MOVE_BODY_PRESS"
+          ],
+          "role": "slow rain-protected four-attack anchor and physical contact tax",
+          "lead_group": "slow-mode reserve",
+          "mega_candidate": false
+        },
+        {
+          "order": 6,
+          "species": "SPECIES_MILOTIC",
+          "level_offset": 4,
+          "item": "ITEM_MILOTICITE",
+          "ability": "ABILITY_COMPETITIVE",
+          "ability_slot": 1,
+          "spread": "SPREAD_31_IV_HP_DEF_BOLD",
+          "moves": [
+            "MOVE_BRINE",
+            "MOVE_MOONBLAST",
+            "MOVE_ICY_WIND",
+            "MOVE_RECOVER"
+          ],
+          "role": "specially fortified proactive Mega ace with reliable cleanup and one recovery tool",
+          "lead_group": "final ace",
+          "mega_candidate": true
+        }
+      ],
+      "ordering": {
+        "intended_lead": [
+          "SPECIES_KYOGRE",
+          "SPECIES_TORNADUS_THERIAN"
+        ],
+        "reserve_sequence": [
+          "SPECIES_OGERPON_WELLSPRING",
+          "SPECIES_PALKIA",
+          "SPECIES_FERROTHORN",
+          "SPECIES_MILOTIC"
+        ],
+        "mandatory_order_reason": "Kyogre and Tornadus establish the visible fast mode. A required trainer-aware reserve selector\u2014not raw array order\u2014must present Ogerpon with Palkia as the middle pair and Ferrothorn with Mega Milotic as the final pair whenever both members are healthy. If the state cannot produce those pairs honestly, the dossier is not implementation-ready."
+      },
+      "ai": {
+        "existing_flags": [
+          "AI_FLAG_CHECK_BAD_MOVE",
+          "AI_FLAG_TRY_TO_FAINT",
+          "AI_FLAG_CHECK_VIABILITY",
+          "AI_FLAG_CHECK_FOE",
+          "AI_FLAG_SMART_SWITCHING",
+          "AI_FLAG_HELP_PARTNER",
+          "AI_FLAG_SPEED_CONTROL",
+          "AI_FLAG_FIELD_CONTROL"
+        ],
+        "required_flags": [
+          "AI_FLAG_CHECK_FOE",
+          "AI_FLAG_SMART_SWITCHING",
+          "AI_FLAG_HELP_PARTNER",
+          "AI_FLAG_SPEED_CONTROL",
+          "AI_FLAG_FIELD_CONTROL",
+          "AI_FLAG_HP_AWARE",
+          "AI_FLAG_COMBO_SETUP"
+        ],
+        "custom_requirements": [
+          "A reusable dual-speed selector must choose Trick Room only when the opposing effective board is faster or Wallace's slow reserves dominate; it must not reverse Wallace's active Tailwind advantage.",
+          "A Wallace-specific reserve selector must pair healthy Ogerpon with healthy Palkia for the mode transition and healthy Ferrothorn with healthy Milotic for the climax; generic replacement scoring is insufficient.",
+          "Follow Me should gain value when Palkia is choosing Trick Room, without forcing Ogerpon to redirect into obvious spread damage.",
+          "Water Spout scoring must fall with Kyogre's HP and prefer Origin Pulse when appropriate.",
+          "Milotic must avoid Icy Wind during active Trick Room, use Brine proactively against damaged targets, Recover only on a survivable board, and Mega Evolve as Wallace's sole Mega."
+        ],
+        "forbidden_behaviors": [
+          "Do not set Trick Room while Wallace's effective fast mode is already winning unless the opponent is still faster.",
+          "Do not stack Tailwind into active Trick Room as a generic bonus.",
+          "Do not spam Follow Me into spread attacks or after its protected transition has no value.",
+          "Do not preserve low-HP Kyogre solely to use weak Water Spout.",
+          "Do not use Icy Wind while Trick Room makes that speed drop beneficial to the player.",
+          "Do not treat Mega Milotic's Recover as mandatory when direct Brine or Moonblast pressure is better."
+        ],
+        "state_machine": "Mode A opens with rain plus interactable Tailwind, Taunt, Hurricane, and high-HP Water Spout. The reserve selector then forms Ogerpon plus Palkia: Mode B becomes available only when the player wins the speed war or Wallace's slow pieces dominate, and Follow Me protects only a valuable Trick Room turn. The selector forms Ferrothorn plus Milotic for Mode C; both apply direct pressure, Milotic uses Icy Wind only outside Trick Room and Recover only when it survives the board."
+      },
+      "counterplay": {
+        "intentional_weakness": "Kyogre and Tornadus expose one fixed lead with no Fake Out or automatic Scarf advantage, Palkia is the only Trick Room setter, spread damage bypasses Ogerpon, weather replacement and Wide Guard sharply reduce the fast mode, and Prism Scales leaves Mega Milotic vulnerable to preserved physical Electric, Grass, and Poison pressure without random Scald burns.",
+        "first_loss_lesson": "Do not spend every answer merely surviving rain. Break or replace the fast field, deny Palkia's one reversal turn, and preserve a physical answer for Mega Milotic; Wallace is defeated by managing the transition, not by finding one anti-Water species.",
+        "classes": [
+          "weather replacement, Cloud Nine, or Air Lock",
+          "Wide Guard, spread resistance, or high-HP disruption into Water Spout",
+          "Taunt, Encore, Imprison, or focus fire into Palkia",
+          "Trick Room reversal, Tailwind, paralysis, or priority after Armor Tail is absent",
+          "physical Electric, Grass, or Poison offense reserved for Mega Milotic",
+          "Knock Off or Choice-lock exploitation against Kyogre and Palkia's mode commitments",
+          "Haze, Clear Smog, phazing, or double targeting against the final setup ace"
+        ],
+        "revealed_information": [
+          "Kyogre is not Choice Scarf and loses Water Spout power with HP",
+          "Tornadus is the only Tailwind setter",
+          "Palkia is the only Trick Room setter",
+          "Ogerpon's redirection cannot block spread attacks",
+          "Mega Milotic's Prism Scales specifically rewards preserving physical damage, and it carries no burn move or setup loop"
+        ],
+        "unacceptable_failure_modes": [
+          "No hidden required catch or single move may be necessary.",
+          "The AI may not read an unrevealed player action to choose Tailwind or Trick Room.",
+          "Rain accuracy and secondary effects may not be the primary source of difficulty.",
+          "The player must retain a real manual-healing and preparation window after Drake.",
+          "The team may not gain a second Mega or any non-Mega gimmick."
+        ]
+      },
+      "competitive_research": {
+        "index": {
+          "version": 1,
+          "record_count": 1005,
+          "sha256": "44d79fd2a5f7578013b2363f9e47d75a0f05ae4239da3bd6891e9651bca2648a"
+        },
+        "queries": [
+          "rain trick-room",
+          "rain perish",
+          "water wide-guard",
+          "Ogerpon-Wellspring",
+          "dual-speed-mode redirection"
+        ],
+        "candidates": [
+          {
+            "rank": 1,
+            "reference_id": "elite:wolfe:toronto-2024",
+            "inspected_scope": "full exact sets plus player-explained strategy",
+            "decision": "adapted",
+            "reason": "Wallace keeps the principle of primary rain offense plus one credible alternate mode, but rejects the Perish and Shadow Tag shell reserved for Phoebe and Archie."
+          },
+          {
+            "rank": 2,
+            "reference_id": "elite:wolfe:worlds-2016",
+            "inspected_scope": "full exact World Champion sets and documented support interactions",
+            "decision": "adapted",
+            "reason": "Base Kyogre, opposite speed control, and layered positioning inform the fight; Primal Reversion, alternate Megas, and the Rayquaza core are rejected."
+          },
+          {
+            "rank": 3,
+            "reference_id": "elite:luca-ceribelli:worlds-2024",
+            "inspected_scope": "verified roster and World Champion report",
+            "decision": "adapted",
+            "reason": "The fast-slow hybrid and offensive redirection structure are retained without Tera, Electric Terrain, or a copied roster."
+          },
+          {
+            "rank": 4,
+            "reference_id": "vgc:regional-houston-tx-2026",
+            "inspected_scope": "verified winning roster only",
+            "decision": "adapted",
+            "reason": "The Tornadus plus Wellspring Ogerpon pairing establishes a modern competitive precedent; exact sets are not claimed from roster-only evidence."
+          },
+          {
+            "rank": 5,
+            "reference_id": "vgc:worlds-2010",
+            "inspected_scope": "verified World Champion roster only",
+            "decision": "rejected",
+            "reason": "Kyogre and slow-mode history fit Wallace, but the full dual-weather roster is less coherent than one dominant Hoenn rain identity."
+          }
+        ],
+        "selected_reference_ids": [
+          "elite:wolfe:toronto-2024",
+          "elite:wolfe:worlds-2016",
+          "elite:luca-ceribelli:worlds-2024",
+          "vgc:regional-houston-tx-2026"
+        ],
+        "imported_elements": [
+          "primary versus secondary mode discipline",
+          "base Kyogre rain pressure",
+          "Tailwind plus conditional Trick Room",
+          "offensive redirection rather than passive Follow Me",
+          "trainer-aware paired reserve transitions"
+        ],
+        "rejected_gimmicks": [
+          "Tera from modern source formats",
+          "Primal Kyogre",
+          "alternate Mega selection",
+          "Perish and Shadow Tag",
+          "Dynamax and Z-Moves"
+        ]
+      },
+      "campaign_reservations": {
+        "spends": [
+          "Mega Milotic as Wallace's signature and only Mega",
+          "Kyogre as the Champion's Hoenn weather legend",
+          "Palkia as the Water/Dragon slow-mode legend",
+          "Tornadus-Therian and Wellspring Ogerpon as the modern rain-positioning reveal",
+          "the campaign's grand dual-speed rain identity"
+        ],
+        "preserves": [
+          "dedicated Perish and Shadow Tag for Phoebe and selected Aqua command fights",
+          "Ice stall-offense and toxic trapping for Glacia",
+          "Dark information warfare for Sidney",
+          "Dragon singles lure sequencing for Drake",
+          "Primal Reversion, Tera, Z-Moves, and Dynamax remain absent"
+        ],
+        "releases": [
+          "Zapdos, Manaphy, Arceus-Water, Latios, Omastar, and generic rain sweepers are not locked to Wallace and may be used elsewhere if their roles differ.",
+          "The exact Wolfe Toronto roster remains available for an Aqua adaptation because Wallace imports its mode discipline rather than its species."
+        ],
+        "collision_notes": [
+          "No species may repeat across the other four main-story League dossiers.",
+          "Phoebe must not reuse Wallace's alternate-mode structure as another rain-to-Perish hybrid.",
+          "Archie may own rain trapping, but not Wallace's Tailwind-to-Trick-Room-to-Mega sequence.",
+          "Refresh all collisions after the four Elite drafts are merged and after each later marquee phase."
+        ]
+      },
+      "presentation": {
+        "intro_concept": "Wallace tells the player that beauty is not stillness: the same water can become a rushing storm or a mirror that reverses every step. He explicitly frames the battle as the final test of changing tempo.",
+        "defeat_concept": "Wallace recognizes that the player did not merely resist the rain; they preserved the right answer through every change in its current.",
+        "post_battle_concept": "He names adaptability and restraint, then transitions into the existing Champion ceremony without adding a new reward or mechanics change.",
+        "hint_concept": "A League NPC can truthfully warn that Wallace attacks quickly, can turn the order around once, and keeps a specially armored beauty for last; it does not reveal exact sets.",
+        "guide_summary": "A fixed Kyogre/Tornadus rain lead pressures immediate spread damage and Tailwind. Ogerpon bridges into Palkia's conditional Trick Room, Ferrothorn exploits the slow field, and Mega Milotic closes behind Prism Scales. Beat the transition: alter weather, guard spread damage, deny the sole room setter, and save physical pressure for Milotic.",
+        "native_width_status": "concept-only; exact strings must be rendered and checked during chronological source implementation"
+      },
+      "fresh_critic_history": [
+        {
+          "reviewer_agent_id": "/root/wallace_fresh_critic",
+          "context_mode": "fresh-no-history",
+          "verdict": "revise",
+          "is_this_sick_and_awesome": "Almost: the rain-to-protected-room transition is memorable, but the original opening was too close to a blind Uber check and the original Milotic endgame risked generic recovery stall.",
+          "strongest_moment": "Ogerpon using Follow Me while Palkia reverses the speed order.",
+          "weakest_part": "Choice Scarf Water Spout at the opening and Scald plus Calm Mind plus Recover on the final Mega.",
+          "difficulty_honesty": "The transition was strategic, but the original bookends leaned on raw speed, burn RNG, and attrition.",
+          "required_changes": [
+            "Remove Choice Scarf from Kyogre and make Tailwind interactable.",
+            "Guarantee Ogerpon and Palkia overlap through an honest trainer-aware selector.",
+            "Remove Scald's burn RNG.",
+            "Break the Calm Mind plus Recover loop and make Milotic proactive.",
+            "Ensure Milotic reaches the field with a meaningful partner."
+          ],
+          "author_response": "All five changes were applied: Mystic Water replaced the Scarf; the reserve-pair selector is now an explicit implementation blocker; Brine replaced Scald; Icy Wind replaced Calm Mind while Recover remains the sole sustain tool; and Ferrothorn plus Milotic is the required final pair with four-attack Ferrothorn pressure.",
+          "resolved": true
+        }
+      ],
+      "fresh_critic_review": {
+        "reviewer_agent_id": "/root/wallace_fresh_critic_v2",
+        "context_mode": "fresh-no-history",
+        "verdict": "ship",
+        "is_this_sick_and_awesome": "Yes. The three acts form one readable Champion escalation: survive royal rain, have the speed-war answer reversed by Ogerpon plus Palkia, then face an aggressive Ferrothorn plus Mega Milotic execution phase.",
+        "strongest_moment": "The player finally gets ahead of Kyogre and Tornadus, only for Ogerpon to redirect pressure while Palkia spends a denyable turn reversing the speed order.",
+        "weakest_part": "Trainer-aware reserve choreography could feel scripted if it ignores how the board actually collapsed, and Ferrothorn plus Recover Milotic can become slow if their direct-pressure rules fail.",
+        "difficulty_honesty": "Mostly honest and strategy-led. Raw levels raise the floor, but HP-sensitive Water Spout, interactable Tailwind, denyable Trick Room, redirection, and preserving a physical Milotic answer do the real work. The fight becomes fake-hard if those conditional behaviors are opaque or unconditional.",
+        "required_changes": [],
+        "author_response": "Accepted as a ship with implementation gates: reserve pairing must remain board-state-aware rather than unconditional, the transition must be legible through visible switching, and the Ferrothorn/Milotic phase must pass runtime pacing and direct-pressure tests before source closure.",
+        "resolved": true
+      },
+      "verification": {
+        "design_schema": "pass",
+        "species_items_moves_abilities": "pass",
+        "source_implementation": "not-started",
+        "script_and_format": "not-started",
+        "dialogue_width": "concept-only",
+        "guide": "concept-only",
+        "runtime": "unplayed",
+        "observed_difficulty": null,
+        "evidence": [
+          "Current source exposes all six species, all six items, the selected ability slots, spreads, and four legal moves per Pokemon.",
+          "Mega Milotic and Miloticite have complete stats, evolution mapping, front/back sprites, palettes, icons, and Prism Scales implementation.",
+          "TRAINER_WALLACE is currently a six-member double trainer with foe, partner, speed, field, and smart-switching AI flags.",
+          "docs/dossier_packets/champion_wallace.json records the exact 1005-reference corpus identity and ranked source candidates.",
+          "No game source has been changed for this dossier and no real-ROM battle has been run."
+        ],
+        "known_blockers": [
+          "The dual-speed mode selector and Wallace-specific state machine are not implemented.",
+          "Exact dialogue is not written or width-rendered.",
+          "The previous-ten chronological context does not exist yet.",
+          "Real-ROM AI behavior and observed difficulty are unknown.",
+          "The reserve selector must prove intelligent and legible rather than manufacturing pairs regardless of board history.",
+          "The Ferrothorn and Milotic phase must prove proactive in runtime pacing tests rather than becoming slow cleanup.",
+          "Postgame rematch variants remain deferred."
+        ]
+      },
+      "mechanics_proposal": null
+    }
+  }
+}

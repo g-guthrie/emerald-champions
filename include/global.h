@@ -268,7 +268,12 @@ struct Apprentice
 struct BattleTowerPokemon
 {
     u16 species;
-    u16 heldItem;
+    // Item IDs currently fit in 10 bits. The legacy high bits were always 0,
+    // so they can preserve an explicitly changed nature without growing or
+    // shifting the record-mixing format.
+    u16 heldItem:10;
+    u16 nature:5;
+    u16 hasExplicitNature:1;
     u16 moves[MAX_MON_MOVES];
     u8 level;
     u8 ppBonuses;
@@ -285,8 +290,8 @@ struct BattleTowerPokemon
     u32 speedIV:5;
     u32 spAttackIV:5;
     u32 spDefenseIV:5;
-    u32 gap:1;
-    u32 abilityNum:1;
+    u32 hiddenAbility:1; // Reuses the legacy padding bit without changing record size.
+    u32 abilityNum:1;    // Legacy bit: 0 = first ability, 1 = second ability.
     u32 personality;
     u8 nickname[POKEMON_NAME_LENGTH + 1];
     u8 friendship;

@@ -1,0 +1,880 @@
+{
+  "version": 1,
+  "scope": "Design-complete, source-unimplemented main-story Pokemon League dossiers for Sidney and Phoebe only.",
+  "corpus_identity": {
+    "version": 1,
+    "base_snapshot_count": 983,
+    "curated_addition_count": 22,
+    "record_count": 1005,
+    "sha256": "44d79fd2a5f7578013b2363f9e47d75a0f05ae4239da3bd6891e9651bca2648a"
+  },
+  "shared_campaign_facts": {
+    "mechanics_snapshot_id": "pokemon_league_main_story",
+    "strict_cap": 80,
+    "level_semantics": "Every proposed trainer level is an integer offset from the active strict cap; effective level is recorded explicitly.",
+    "canonical_style": "Six-Pokemon challenge-mode teams, Set-style replacement behavior, no Bag items during trainer battles, and Mega Evolution as the only active battle gimmick.",
+    "league_attrition": "No Elite Four room calls HealPlayerParty. Victory returns control and the normal Pokemon, Bag, and Save menus between members, so carried recovery items may be used manually but nothing is restored automatically.",
+    "party_lock": "The party is chosen before League entry and cannot be recomposed from the PC during the gauntlet.",
+    "source_evidence": [
+      "src/pokemon.c: strict cap table includes the eight-badge cap of 80",
+      "src/pokemon.c: GetMoveRelearnerMoves merges current species, pre-evolution lineage, TM/HM, tutor, and Egg moves",
+      "docs/verdant_logical_audit.md: Pokemon Center teacher exposes every legal move source",
+      "docs/verdant_evolution_stage_policy.md: Steven grants the Mega Bracelet in Granite Cave",
+      "data/maps/EverGrandeCity_SidneysRoom/scripts.inc: main story calls TRAINER_SIDNEY and releases control after victory",
+      "data/maps/EverGrandeCity_PhoebesRoom/scripts.inc: main story calls TRAINER_PHOEBE and releases control after victory",
+      "data/scripts/elite_four.inc: room transitions contain no automatic healing",
+      "src/start_menu.c: normal overworld menu exposes Pokemon, Bag, and Save",
+      "src/battle_main.c: challenge trainer battles reject Bag-item use"
+    ],
+    "mechanics_proposal": null
+  },
+  "cross_dossier_constraints": {
+    "species_intersection": [],
+    "repeated_exact_core": false,
+    "mega_count_each": 1,
+    "active_gimmicks": ["Mega Evolution"],
+    "gimmicks_explicitly_rejected": [
+      "Terastallization",
+      "Z-Moves",
+      "Dynamax",
+      "Gigantamax",
+      "Primal Reversion"
+    ],
+    "contrast": "Sidney is a fast information-and-positioning offense with several independent endgames. Phoebe is a survival clock whose direct offense exists to punish escape attempts and finish a damaged party.",
+    "protected_neighbors": [
+      "Glacia retains snow, an offense-plus-attrition hybrid, and the League's major Wide Guard showcase.",
+      "Drake retains the deliberate singles format shift, Dragon Mega, and lure-and-setup duel.",
+      "Wallace retains the grand rain, dual-speed, and multi-legend Champion spectacle."
+    ]
+  },
+  "dossiers": {
+    "ELITE_FOUR_SIDNEY": {
+      "anchor_id": "ELITE_FOUR_SIDNEY",
+      "planning_tier": "league_gauntlet",
+      "status": {
+        "design": "design-complete",
+        "source": "unimplemented",
+        "static": "design-validated",
+        "runtime": "unplayed"
+      },
+      "concise_rationale": "Sidney opens the League by making every conventional safety button questionable: Fake Out and two pivots steal position, Urshifu punishes Protect, Dark Aura and Tailwind accelerate the middle game, Darkrai and Supreme Overlord Kingambit provide separate setup endgames, and Mega Absol closes as anti-screen, anti-status, and anti-Protect control rather than a third Sucker Punch attacker.",
+      "campaign_state": {
+        "mechanics_snapshot_id": "pokemon_league_main_story",
+        "strict_cap": 80,
+        "player_tools": [
+          "Six cap-80 Pokemon chosen from the campaign encounter pool available before League entry",
+          "Every legal level-up, Egg, TM/HM, and tutor move through the Pokemon Center teacher",
+          "On-demand legal ability switching and completed late-game evolution access",
+          "Core competitive held items, campaign-discovered item unlocks, and frictionless leveling",
+          "Set-style play with no in-battle Bag items"
+        ],
+        "mega_access": "The Mega Bracelet has been available since Granite Cave; the player may bring any legitimately acquired Mega Stone into the League.",
+        "evolution_phase": "Fully evolved and single-stage Pokemon are expected. No early-stage preservation rule applies at cap 80.",
+        "preparation_access": "Full PC, move-teacher, ability, item, and leveling preparation is available before League entry; party composition is locked after entry.",
+        "gauntlet_position": "First Elite Four member. The player enters fully prepared, then must manually repair Sidney's HP and faint pressure before Phoebe."
+      },
+      "runtime": {
+        "trainer_ids": ["TRAINER_SIDNEY"],
+        "canonical_format": "double",
+        "party_size": 6,
+        "required": true,
+        "variants": [
+          {
+            "path": "main-story League",
+            "trainer_id": "TRAINER_SIDNEY",
+            "format": "double",
+            "in_scope": true
+          },
+          {
+            "path": "postgame rematch",
+            "trainer_id": "TRAINER_SIDNEY_4",
+            "format": "double",
+            "in_scope": false
+          },
+          {
+            "path": "legacy helper labels",
+            "trainer_ids": ["TRAINER_SIDNEY_2", "TRAINER_SIDNEY_3"],
+            "in_scope": false,
+            "note": "Helper labels still exist in the room script, but the main-story branch calls only TRAINER_SIDNEY."
+          }
+        ],
+        "current_source_baseline": {
+          "party": ["Incineroar", "Yveltal", "Darkrai", "Urshifu", "Hoopa Unbound", "Mega Absol"],
+          "level_offsets": [0, 0, 0, 0, 1, 2],
+          "guide_difficulty": 91,
+          "guide_design_status": "not individually closed"
+        },
+        "source_paths": [
+          "src/data/trainer_parties.h:sParty_Sidney",
+          "src/data/trainers.h:TRAINER_SIDNEY",
+          "data/maps/EverGrandeCity_SidneysRoom/scripts.inc"
+        ]
+      },
+      "rolling_context": {
+        "available": false,
+        "reason": "The exact chronological rolling ledger has not yet reached the Pokemon League. This dossier therefore binds to the campaign anchors and must be rechecked against the final preceding ten battles before source implementation.",
+        "protected_neighbor_anchors": ["ELITE_FOUR_PHOEBE", "ELITE_FOUR_GLACIA", "ELITE_FOUR_DRAKE", "CHAMPION_WALLACE"],
+        "required_preimplementation_review": "Compare the final Victory Road window for recent Incineroar, Urshifu, Yveltal, Darkrai, Kingambit, Absol, Tailwind, Fake Out, Sucker Punch, and setup density. Preserve the identity; change a reserve species only if the final window creates a genuine collision."
+      },
+      "identity": {
+        "memory_hook": "The League's smiling brawler steals both sides of the board, makes Protect unsafe, and lets something ugly snowball from the information he learned.",
+        "story_fit": "Sidney's upbeat talk of enjoying an ugly battle becomes literal competitive pressure: he reads caution, pivots around it, and attacks the slot the player thought was safe.",
+        "primary_player_question": "Can the player identify the current source of position and speed pressure without feeding free turns to Darkrai or late-game Supreme Overlord Kingambit?",
+        "primary_mode": "Fake Out plus Unseen Fist positioning offense that pivots into Yveltal's Dark Aura and Tailwind.",
+        "secondary_mode": "Independent Nasty Plot Darkrai and Swords Dance Supreme Overlord Kingambit endgames, followed by Mega Absol's Magic Bounce, screen breaking, and Feint cleanup.",
+        "preview_pressure": "Protect can lose to Urshifu or Feint, status can rebound from Mega Absol, screens can be broken by Psychic Fangs, passive turns invite two different setup attackers, and attacking Incineroar may trigger an Eject Button transition."
+      },
+      "difficulty": {
+        "target": 10,
+        "observed": null,
+        "rationale": "The fixed cap-80 party faces levels 81 through 84, six optimized items, mixed attacking categories, immediate positioning control, Dark Aura, Tailwind, two distinct Protect-bypass tools, one late Sucker Punch threat, and two independent setup endgames. A blind loss is expected, but each loss exposes a concrete pressure source rather than a hidden required catch.",
+        "pressure_sources": [
+          "Fake Out, Intimidate, Knock Off, Parting Shot, and Eject Button board theft",
+          "Choice Band Wicked Blow and Unseen Fist pressure through Protect",
+          "Dark Aura plus Tailwind amplifying the middle game",
+          "Focus Sash Nasty Plot Darkrai as the special endgame",
+          "Supreme Overlord plus Swords Dance Kingambit as the slow physical endgame",
+          "Level-84 Mega Absol with Magic Bounce, Psychic Fangs, and Feint denying the player's passive close"
+        ],
+        "resource_tax": "The authored roster applies direct HP and faint pressure but no persistent sleep, poison, or burn. This makes Sidney the clean damage opener of the gauntlet: the player may manually spend healing and revival stock afterward, but receives no free restoration.",
+        "tuning_order": [
+          "Preserve strategy and competent AI.",
+          "Adjust Mega Absol and Kingambit offsets first if the observed fight exceeds or misses 10.",
+          "Then adjust Darkrai and Yveltal offsets or bulk.",
+          "Change an item only after level tuning.",
+          "Do not remove Unseen Fist, Dark Aura, or the separate special and physical endgames merely to lower difficulty."
+        ]
+      },
+      "team": [
+        {
+          "order": 1,
+          "species": "SPECIES_INCINEROAR",
+          "display_name": "Incineroar",
+          "level_offset": 1,
+          "effective_level": 81,
+          "item": "ITEM_EJECT_BUTTON",
+          "ability": "ABILITY_INTIMIDATE",
+          "ability_slot": 2,
+          "spread": "SPREAD_31_IV_HP_SPDEF_CAREFUL",
+          "moves": ["MOVE_FAKE_OUT", "MOVE_PARTING_SHOT", "MOVE_FLARE_BLITZ", "MOVE_KNOCK_OFF"],
+          "role": "Opening information pivot; either Parting Shot or the player's attack can release Sidney into the correct reserve.",
+          "lead_group": "primary lead",
+          "mega_candidate": false,
+          "legality_basis": "Flare Blitz is in Incineroar's level learnset, Knock Off is tutor/TM legal, and Fake Out plus Parting Shot are Litten Egg moves inherited through the current lineage-aware move teacher."
+        },
+        {
+          "order": 2,
+          "species": "SPECIES_URSHIFU",
+          "display_name": "Urshifu Single Strike",
+          "level_offset": 1,
+          "effective_level": 81,
+          "item": "ITEM_CHOICE_BAND",
+          "ability": "ABILITY_UNSEEN_FIST",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+          "moves": ["MOVE_WICKED_BLOW", "MOVE_CLOSE_COMBAT", "MOVE_IRON_HEAD", "MOVE_U_TURN"],
+          "role": "Choice-locked Protect breaker and second opening pivot.",
+          "lead_group": "primary lead",
+          "mega_candidate": false,
+          "legality_basis": "All four moves are present in Urshifu's checked-in level, TM, or tutor sources. Iron Head replaces both the source baseline's illegal Aqua Jet and the first critic's redundant third Sucker Punch."
+        },
+        {
+          "order": 3,
+          "species": "SPECIES_YVELTAL",
+          "display_name": "Yveltal",
+          "level_offset": 2,
+          "effective_level": 82,
+          "item": "ITEM_SITRUS_BERRY",
+          "ability": "ABILITY_DARK_AURA",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+          "moves": ["MOVE_TAILWIND", "MOVE_OBLIVION_WING", "MOVE_SNARL", "MOVE_PROTECT"],
+          "role": "Rare aura anchor, active speed control, mixed-damage stabilizer, and self-healing bridge.",
+          "lead_group": "first pivot target",
+          "mega_candidate": false,
+          "legality_basis": "All four moves resolve through Yveltal's checked-in level, TM, or tutor data."
+        },
+        {
+          "order": 4,
+          "species": "SPECIES_DARKRAI",
+          "display_name": "Darkrai",
+          "level_offset": 2,
+          "effective_level": 82,
+          "item": "ITEM_FOCUS_SASH",
+          "ability": "ABILITY_BAD_DREAMS",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+          "moves": ["MOVE_NASTY_PLOT", "MOVE_DARK_PULSE", "MOVE_SLUDGE_BOMB", "MOVE_PROTECT"],
+          "role": "Independent fast special setup endgame with Fairy coverage.",
+          "lead_group": "middle-game reserve",
+          "mega_candidate": false,
+          "legality_basis": "All four moves resolve through Darkrai's checked-in level and TM sources. Sleep is intentionally omitted so difficulty does not depend on inaccurate Dark Void or Hypnosis."
+        },
+        {
+          "order": 5,
+          "species": "SPECIES_KINGAMBIT",
+          "display_name": "Kingambit",
+          "level_offset": 3,
+          "effective_level": 83,
+          "item": "ITEM_BLACK_GLASSES",
+          "ability": "ABILITY_SUPREME_OVERLORD",
+          "ability_slot": 1,
+          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+          "moves": ["MOVE_KOWTOW_CLEAVE", "MOVE_SWORDS_DANCE", "MOVE_SUCKER_PUNCH", "MOVE_PROTECT"],
+          "role": "Slow late-game setup endgame whose damage rises as Sidney's earlier information pieces fall.",
+          "lead_group": "late reserve",
+          "mega_candidate": false,
+          "legality_basis": "Kowtow Cleave and Swords Dance are in the generated Kingambit level data; Protect is TM legal; Sucker Punch is inherited from the Pawniard Egg lineage through the lineage-aware teacher."
+        },
+        {
+          "order": 6,
+          "species": "SPECIES_ABSOL",
+          "display_name": "Mega Absol",
+          "level_offset": 4,
+          "effective_level": 84,
+          "item": "ITEM_ABSOLITE",
+          "ability": "ABILITY_SUPER_LUCK",
+          "ability_slot": 1,
+          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+          "moves": ["MOVE_KNOCK_OFF", "MOVE_PLAY_ROUGH", "MOVE_PSYCHIC_FANGS", "MOVE_FEINT"],
+          "role": "Only Mega and anti-defense finale; Magic Bounce reflects status, Psychic Fangs removes screens, and Feint breaks protection without repeating Kingambit's priority role.",
+          "lead_group": "final reserve",
+          "mega_candidate": true,
+          "mega_form": "SPECIES_ABSOL_MEGA",
+          "mega_ability": "ABILITY_MAGIC_BOUNCE",
+          "legality_basis": "Absolite maps Absol to Mega Absol in evolution.h, Mega Absol exposes Magic Bounce, and Knock Off, Play Rough, Psychic Fangs, and Feint all resolve through Absol's current level, TM, tutor, or Egg data."
+        }
+      ],
+      "ordering": {
+        "intended_lead": ["SPECIES_INCINEROAR", "SPECIES_URSHIFU"],
+        "reserve_sequence": [
+          "Yveltal is the preferred first pivot because Dark Aura and Tailwind change every subsequent damage and speed decision.",
+          "Darkrai is the fast special setup branch when the player overcommits to physical checks.",
+          "Kingambit is deliberately fifth so Supreme Overlord converts earlier losses into a distinct slow endgame.",
+          "Mega Absol is held for the late game so its Mega reveal, Magic Bounce, Psychic Fangs, and Feint punish a passive attempt to close the fight. This is an intended state-aware reserve choice, not a guarantee supplied by raw party order."
+        ],
+        "mandatory_order_reason": "The source party must preserve the authored lead and place Kingambit and Absol late for Supreme Overlord and Mega presentation, but raw party order does not control Emerald's replacement selector. Source implementation is blocked on a Sidney-aware reserve selector that chooses among healthy reserves from current board state."
+      },
+      "ai": {
+        "existing_flags": [
+          "AI_FLAG_CHECK_BAD_MOVE",
+          "AI_FLAG_TRY_TO_FAINT",
+          "AI_FLAG_CHECK_VIABILITY",
+          "AI_FLAG_CHECK_FOE",
+          "AI_FLAG_SMART_SWITCHING",
+          "AI_FLAG_HELP_PARTNER",
+          "AI_FLAG_SPEED_CONTROL"
+        ],
+        "required_flags": [
+          "AI_FLAG_CHECK_BAD_MOVE",
+          "AI_FLAG_TRY_TO_FAINT",
+          "AI_FLAG_CHECK_VIABILITY",
+          "AI_FLAG_CHECK_FOE",
+          "AI_FLAG_SMART_SWITCHING",
+          "AI_FLAG_HELP_PARTNER",
+          "AI_FLAG_HP_AWARE",
+          "AI_FLAG_SPEED_CONTROL"
+        ],
+        "custom_requirements": [
+          "Treat Unseen Fist and Wicked Blow as the answer to a likely Protect without blindly targeting an immune or already-lost slot.",
+          "Add a Sidney-specific healthy-reserve selector: prefer Yveltal when Tailwind is absent, choose Darkrai only for a defensible special setup board, hold Kingambit for meaningful Supreme Overlord value, and hold Absol for anti-screen, anti-status, or anti-Protect value.",
+          "Evaluate Nasty Plot and Swords Dance only when the active setup user is not threatened with an immediate KO or disabling move.",
+          "Include Supreme Overlord's current faint multiplier in damage estimates.",
+          "Preserve at least one of Darkrai, Kingambit, or Mega Absol instead of exposing every endgame through unnecessary smart switches.",
+          "Mega Absol must value Psychic Fangs only into active screens and Feint only when protection is revealed or strongly predicted; otherwise use Knock Off or Play Rough.",
+          "Continue using the engine's automatic opponent Mega Evolution; no second Mega candidate exists."
+        ],
+        "forbidden_behaviors": [
+          "Do not force a fixed Fake Out target or scripted first turn.",
+          "Do not choose Nasty Plot or Swords Dance into a predicted immediate knockout merely because setup is part of the team identity.",
+          "Do not repeatedly Parting Shot when the target is immune, already minimized, or a direct knockout is available.",
+          "Do not waste Tailwind while it is active or when both foes are already controlled by priority."
+        ],
+        "state_machine": [
+          {"state": "steal-position", "condition": "opening Incineroar plus Urshifu board", "behavior": "Use Fake Out, Knock Off, Wicked Blow, U-turn, or Parting Shot according to foe actions and damage; never hard-code one combination."},
+          {"state": "aura-tempo", "condition": "Yveltal is active and Tailwind is absent", "behavior": "Establish Tailwind when survival permits, then use Dark Aura, Snarl, and Oblivion Wing to stabilize the chosen endgame."},
+          {"state": "special-endgame", "condition": "Darkrai is healthy and physical counterplay dominates the player board", "behavior": "Take one safe Nasty Plot opportunity, otherwise attack or Protect."},
+          {"state": "overlord-endgame", "condition": "Kingambit enters after earlier allies faint", "behavior": "Use the actual Supreme Overlord multiplier, set Swords Dance only on a defensible turn, and pressure with Kowtow Cleave or Sucker Punch."},
+          {"state": "mega-close", "condition": "Absol enters", "behavior": "Mega Evolve automatically, punish passive status through Magic Bounce, remove active screens with Psychic Fangs, use Feint only into protection, and otherwise attack with Knock Off or Play Rough."}
+        ]
+      },
+      "counterplay": {
+        "intentional_weakness": "Sidney has no redirection, no teamwide screen, and little recovery beyond Yveltal. Four members remain weak to Fairy or Fighting pressure, Urshifu is Choice-locked, both setup lines must spend a visible turn, and Mega Absol has no Protect or Sucker Punch fallback.",
+        "first_loss_lesson": "Protect is not a universal safety button. Identify Urshifu's Choice lock, contest or reverse Tailwind, and stop one setup reserve before accumulated faints turn Kingambit into the real final boss.",
+        "classes": [
+          "Fairy and Fighting pressure paired with coverage for Incineroar and Yveltal",
+          "Trick Room, opposing Tailwind, paralysis, or priority denial to reverse the speed plan",
+          "Burn, Intimidate, Reflect, Charm, or physical walls against Urshifu, Kingambit, and Absol",
+          "Taunt, Encore, Haze, Clear Smog, Unaware, or phazing against Darkrai and Kingambit setup",
+          "Choice-lock scouting, Disable, item removal, and targeted Protect after Urshifu commits",
+          "Focused damage on Yveltal before Tailwind or on the active setup user during its one exposed turn"
+        ],
+        "revealed_information": [
+          "Incineroar's Eject Button visibly determines the first reserve transition.",
+          "Urshifu's first attack reveals its Choice lock and Protect-bypass role.",
+          "Yveltal visibly announces Dark Aura and Tailwind.",
+          "Darkrai and Kingambit must reveal Nasty Plot or Swords Dance before snowballing.",
+          "Supreme Overlord becomes stronger only as Sidney loses Pokemon.",
+          "Mega Absol visibly changes to Magic Bounce; Psychic Fangs requires an active screen and Feint requires a protection turn, so its finale is powerful but board-dependent."
+        ],
+        "unacceptable_failure_modes": [
+          "A blind player is swept only because the AI used an undocumented forced target or cheated knowledge.",
+          "Unseen Fist is presented as bypassing every defensive option rather than Protect specifically.",
+          "The AI repeatedly chooses setup into obvious lethal pressure.",
+          "Level tuning removes every broad Fairy, Fighting, speed, status, and setup-control answer at once."
+        ]
+      },
+      "competitive_research": {
+        "index": {
+          "version": 1,
+          "record_count": 1005,
+          "sha256": "44d79fd2a5f7578013b2363f9e47d75a0f05ae4239da3bd6891e9651bca2648a"
+        },
+        "queries": [
+          "search_competitive_teams.py --pokemon Incineroar --pokemon Kingambit --style doubles",
+          "search_competitive_teams.py --pokemon Yveltal --style doubles",
+          "search_competitive_teams.py --pokemon Darkrai --style doubles",
+          "search_competitive_teams.py --pokemon Absol --style doubles",
+          "search_competitive_teams.py --pokemon Urshifu --style doubles",
+          "search_competitive_teams.py --query 'dark priority pivoting setup' --style doubles",
+          "full 1005-record mechanical scan for Dark species, Fake Out, pivoting, priority, setup, Tailwind, and Protect-bypass tags"
+        ],
+        "candidates": [
+          {
+            "reference_id": "elite:marco-silva:turin-2026",
+            "decision": "selected",
+            "reason": "The 2026 Turin-winning Incineroar and Kingambit sets provide Sidney's real positioning shell and one independent setup endgame. The original alternate Mega choice is rejected; Sidney keeps only Mega Absol."
+          },
+          {
+            "reference_id": "vgc:regional-melbourne-2022",
+            "decision": "adapted",
+            "reason": "The winning Yveltal, Incineroar, and Urshifu roster validates the Dark Aura and Protect-pressure core. Its Zacian, Rillaboom, and Coalossal modes are not imported."
+          },
+          {
+            "reference_id": "showdown:gen9randomdoublesbattle:016",
+            "decision": "adapted",
+            "reason": "Life Orb four-attack Darkrai demonstrates reliable direct offense. Verdant changes it to Focus Sash Nasty Plot so Sidney gains a distinct special endgame without inaccurate sleep roulette."
+          },
+          {
+            "reference_id": "showdown:gen6randomdoublesbattle:022",
+            "decision": "adapted",
+            "reason": "The generated Mega Absol validates Absolite, Play Rough, and Knock Off as a direct doubles attacker. Verdant replaces raw coverage with Psychic Fangs and Feint so the Mega has an anti-defense job distinct from Kingambit."
+          },
+          {
+            "reference_id": "showdown:gen8randomdoublesbattle:021",
+            "decision": "rejected",
+            "reason": "Its Swords Dance plus Sucker Punch Absol would repeat Sidney's Kingambit setup and priority endgame; the first fresh review correctly rejected that convergence."
+          },
+          {
+            "reference_id": "elite:wolfe:players-cup-ii-2020",
+            "decision": "rejected",
+            "reason": "Its Incineroar, Urshifu, and Galarian Moltres positioning is valuable, but the Steam Engine and Weakness Policy activation is a different centerpiece and should remain reserved for a dedicated battle."
+          },
+          {
+            "reference_id": "elite:wolfe:milwaukee-2025",
+            "decision": "rejected",
+            "reason": "Illusion-backed offense is strong, but Battle 2 already owns the campaign's false-ace Illusion reveal. Sidney uses action-based information warfare instead of repeating it."
+          }
+        ],
+        "selected_reference_ids": [
+          "elite:marco-silva:turin-2026",
+          "vgc:regional-melbourne-2022",
+          "showdown:gen9randomdoublesbattle:016",
+          "showdown:gen6randomdoublesbattle:022"
+        ],
+        "external_public_sources": [
+          {
+            "url": "https://limitlessvgc.com/tournaments/435/teams",
+            "use": "Exact public 2026 Turin winner sets for Incineroar and Kingambit; also confirms the original team carried two possible Mega species, which Verdant does not copy."
+          },
+          {
+            "url": "https://limitlessvgc.com/tournaments/288",
+            "use": "Public Melbourne 2022 tournament record supporting the Yveltal, Incineroar, and Urshifu championship core."
+          }
+        ],
+        "rejected_gimmicks": ["All source-format transformations other than Mega Evolution are removed; no source Tera, Z-Move, Dynamax, Gigantamax, or Primal state is active."]
+      },
+      "campaign_reservations": {
+        "spends": [
+          "The main story's marquee Darkrai and Yveltal appearances",
+          "Kingambit's late-game Supreme Overlord setup reveal",
+          "Mega Absol as Sidney's only Mega",
+          "One justified League use of Incineroar and Urshifu as a championship positioning core"
+        ],
+        "preserves": [
+          "Dedicated Shadow Tag Perish and Mega Gengar for Phoebe",
+          "Snow, toxic or trapping attrition, and major Wide Guard pressure for Glacia",
+          "Dragon Mega and legendary-scale singles closer for Drake",
+          "Grand rain, dual-speed restricted balance, and Mega Milotic for Wallace"
+        ],
+        "releases": [
+          "Darkrai is released here after being withheld from the earliest campaign's ordinary encounters.",
+          "The campaign may finally use a tournament-authentic Incineroar core because this is a single high-status League appearance, not a global allocator default.",
+          "Kingambit's full Supreme Overlord identity is appropriate only after the player has all legal team-building tools."
+        ],
+        "collision_notes": [
+          "No species overlaps Phoebe's proposed roster.",
+          "No Shadow Tag, Perish Song, redirection, snow, rain, or Dragon Mega is spent here.",
+          "The final Victory Road rolling window must still be checked before implementation for local Incineroar, Urshifu, and Tailwind repetition."
+        ]
+      },
+      "presentation": {
+        "intro_concept": "Keep Sidney jovial, but make his warning precise: safe-looking choices tell him where to hit, and he will steal both sides of the plan until one ugly attacker breaks through.",
+        "defeat_concept": "He laughs that the player made his own ugly choices impossible to read and calls it the most fun loss he could have had.",
+        "post_battle_concept": "He explicitly warns that Phoebe does not race damage; she makes the player count turns and protect the ability to leave.",
+        "hint_concept": "A pre-League guide note says Sidney makes Protect unreliable, pivots repeatedly, and becomes more dangerous after his own Pokemon faint.",
+        "guide_summary": "Document the cap-80 lead, every exact set and offset, the Eject Button transition, Urshifu's Choice lock, Dark Aura and Tailwind, both setup branches, Supreme Overlord scaling, Mega Absol's Magic Bounce, Psychic Fangs, and Feint, and the absence of automatic healing after victory.",
+        "native_width_status": "concept-only"
+      },
+      "verification": {
+        "design_schema": "pass",
+        "species_items_moves_abilities": "pass",
+        "source_implementation": "not-started",
+        "script_and_format": "not-started",
+        "dialogue_width": "concept-only",
+        "guide": "concept-only",
+        "runtime": "unplayed",
+        "observed_difficulty": null,
+        "evidence": [
+          "All six species exist in current base or curated Gen 9 stats.",
+          "Every item, move, and spread token exists in current headers.",
+          "Ability slots resolve exactly, including Kingambit slot 1 Supreme Overlord and Absol slot 1 Super Luck.",
+          "evolution.h maps Absol plus Absolite to Mega Absol, whose checked-in ability is Magic Bounce.",
+          "Lineage-aware legality was checked against GetMoveRelearnerMoves: Litten supplies Fake Out and Parting Shot; Pawniard supplies Sucker Punch.",
+          "Urshifu's old Aqua Jet was rejected because current source does not grant it; Sucker Punch is source-legal.",
+          "Current source was inspected but deliberately not modified. No runtime result is claimed.",
+          "The first fresh critic's Sucker Punch, late Protect, Mega-role, reserve-selection, and Eject Button concerns were incorporated into the revised exact team and AI blockers."
+        ],
+        "known_tooling_note": "The current marquee legality helper walks the non-Mega pre-evolution graph before checking level, Egg, TM/HM, and tutor sources. The revised Sidney team passes that check. Source implementation remains blocked on state-aware replacement selection and Eject Button transition testing; runtime difficulty is unobserved.",
+        "source_blockers": [
+          "Implement Sidney-specific state-aware healthy-reserve selection; raw party order cannot guarantee Yveltal, Kingambit, or Absol sequencing.",
+          "Implement board-aware Nasty Plot, Swords Dance, Psychic Fangs, and Feint scoring without forced targets.",
+          "Regression-test Eject Button replacement selection, Choice-lock switching, Supreme Overlord damage estimation, and automatic Mega Absol behavior.",
+          "Run representative cap-80 teams before assigning any observed difficulty."
+        ]
+      },
+      "mechanics_proposal": null
+    },
+    "ELITE_FOUR_PHOEBE": {
+      "anchor_id": "ELITE_FOUR_PHOEBE",
+      "planning_tier": "league_gauntlet",
+      "status": {
+        "design": "design-complete",
+        "source": "unimplemented",
+        "static": "design-validated",
+        "runtime": "unplayed"
+      },
+      "concise_rationale": "Phoebe converts Wolfe Glick's Orlando-winning survival clock into a Ghost-led League battle: Mega Gengar is the only trapper, Gengar and Flutter Mane are credible singers, Amoonguss and Aegislash buy finite turns, then non-Protect Mimikyu and four-attack Marshadow make the direct-cleanup phase visibly different from the clock.",
+      "campaign_state": {
+        "mechanics_snapshot_id": "pokemon_league_main_story",
+        "strict_cap": 80,
+        "player_tools": [
+          "The same six-Pokemon cap-80 party carried out of Sidney's room",
+          "Every legal move and ability chosen before League entry",
+          "Campaign-earned held items and Mega access",
+          "Normal overworld Pokemon, Bag, and Save menus between rooms",
+          "Set-style play with no in-battle Bag items"
+        ],
+        "mega_access": "The player retains the Mega Bracelet and any earned stones; Phoebe uses exactly one Mega Gengar.",
+        "evolution_phase": "Fully evolved, mythical, paradox, and single-stage threats are appropriate at the League.",
+        "preparation_access": "The player may manually heal Sidney's damage before entering but cannot change the six-member party from the PC.",
+        "gauntlet_position": "Second Elite Four member. Her clock can create faints, sleep, and burn that require manual Bag recovery before Glacia."
+      },
+      "runtime": {
+        "trainer_ids": ["TRAINER_PHOEBE"],
+        "canonical_format": "double",
+        "party_size": 6,
+        "required": true,
+        "variants": [
+          {
+            "path": "main-story League",
+            "trainer_id": "TRAINER_PHOEBE",
+            "format": "double",
+            "in_scope": true
+          },
+          {
+            "path": "postgame rematch",
+            "trainer_id": "TRAINER_PHOEBE_4",
+            "format": "double",
+            "in_scope": false
+          },
+          {
+            "path": "legacy helper labels",
+            "trainer_ids": ["TRAINER_PHOEBE_2", "TRAINER_PHOEBE_3"],
+            "in_scope": false,
+            "note": "Helper labels remain, but the main-story branch calls only TRAINER_PHOEBE."
+          }
+        ],
+        "current_source_baseline": {
+          "party": ["Mega Gengar", "Marshadow", "Lunala", "Giratina", "Shedinja", "Calyrex Shadow Rider"],
+          "level_offsets": [0, 0, 0, 0, 1, 2],
+          "guide_difficulty": 92,
+          "guide_design_status": "not individually closed"
+        },
+        "source_paths": [
+          "src/data/trainer_parties.h:sParty_Phoebe",
+          "src/data/trainers.h:TRAINER_PHOEBE",
+          "data/maps/EverGrandeCity_PhoebesRoom/scripts.inc"
+        ]
+      },
+      "rolling_context": {
+        "available": false,
+        "reason": "The chronological ledger has not reached the League. This design is anchored against Sidney and the reserved later League identities and must be compared with the final preceding ten battles before implementation.",
+        "protected_neighbor_anchors": ["ELITE_FOUR_SIDNEY", "ELITE_FOUR_GLACIA", "ELITE_FOUR_DRAKE", "CHAMPION_WALLACE"],
+        "required_preimplementation_review": "Confirm that no late Victory Road boss spends the campaign's definitive Shadow Tag Perish identity, Mega Gengar, Flutter Mane singer, or Marshadow anti-setup cleanup immediately before the League."
+      },
+      "identity": {
+        "memory_hook": "Phoebe's spirits sing one shared countdown, hide the singer behind a living circle, and leave the player deciding who can still escape.",
+        "story_fit": "Her Mt. Pyre bond is expressed as preservation rather than a stack of legendary Ghosts: each spirit guards the trapper, stalls a count, or punishes the player's attempt to overpower the ritual.",
+        "primary_player_question": "Can the player preserve an escape route or remove Mega Gengar before the shared Perish clock converts two active Pokemon into unavoidable resource loss?",
+        "primary_mode": "Mega Gengar Shadow Tag plus two Perish singers, finite redirection, and coordinated count-one exits.",
+        "secondary_mode": "Direct Ghost and Fairy pressure culminating in Marshadow's Spectral Thief and priority cleanup when the trap is broken.",
+        "preview_pressure": "The player must respect Perish Song even when Phoebe attacks, because either lead can sing and the single Shadow Tagger may cycle back for the second opposing pair."
+      },
+      "difficulty": {
+        "target": 10,
+        "observed": null,
+        "rationale": "The cap-80 party faces levels 81 through 84, a fast Mega Shadow Tagger, two legal Perish singers, Focus Sash, redirection, sleep, self-healing, Substitute and King's Shield survival, Disguise, burn, and a level-84 Marshadow that steals setup. The team is nearly overwhelming blind, but the entire clock has a deliberately attackable single point of failure.",
+        "pressure_sources": [
+          "Mega Gengar's fast Shadow Tag, Perish Song, Disable, and Protect",
+          "Focus Sash Flutter Mane as the second singer and direct special attacker",
+          "Mental Herb Regenerator Amoonguss using Rage Powder, Spore, Synthesis, and Protect",
+          "Aegislash stalling count turns through Substitute and King's Shield while retaining mixed coverage",
+          "Disguise Mimikyu adding burn, Taunt, and durable direct pressure without another protection turn",
+          "Four-attack Life Orb Marshadow stealing setup boosts and finishing with Technician priority"
+        ],
+        "resource_tax": "Perish Song itself ends with battle, but any fainted Pokemon remain fainted, Spore sleep and Will-O-Wisp burn persist, and direct damage carries forward. Control returns after victory, so the player may spend carried Awakenings, Full Heals, recovery, and Revives before Glacia; no automatic repair occurs.",
+        "tuning_order": [
+          "Preserve the Perish state machine and competent switching.",
+          "Adjust Marshadow and Mimikyu offsets first if direct cleanup is too strong or weak.",
+          "Then adjust Gengar and Flutter Mane offsets or defensive spreads.",
+          "Reduce Amoonguss or Aegislash survival only after level tuning.",
+          "Never add a second Shadow Tag user merely to force target difficulty 10; Mega Gengar's vulnerability is intentional counterplay."
+        ]
+      },
+      "team": [
+        {
+          "order": 1,
+          "species": "SPECIES_GENGAR",
+          "display_name": "Mega Gengar",
+          "level_offset": 1,
+          "effective_level": 81,
+          "item": "ITEM_GENGARITE",
+          "ability": "ABILITY_CURSED_BODY",
+          "ability_slot": 1,
+          "spread": "SPREAD_31_IV_HP_SPEED_TIMID",
+          "moves": ["MOVE_PERISH_SONG", "MOVE_SHADOW_BALL", "MOVE_DISABLE", "MOVE_PROTECT"],
+          "role": "Only Mega and only Shadow Tag user; starts, preserves, and later renews the clock.",
+          "lead_group": "primary lead",
+          "mega_candidate": true,
+          "mega_form": "SPECIES_GENGAR_MEGA",
+          "mega_ability": "ABILITY_SHADOW_TAG",
+          "legality_basis": "evolution.h maps Gengar plus Gengarite to Mega Gengar with Shadow Tag. Perish Song and Shadow Ball are in Gengar's source; Disable is inherited from the Gastly Egg lineage; Protect is TM legal."
+        },
+        {
+          "order": 2,
+          "species": "SPECIES_FLUTTER_MANE",
+          "display_name": "Flutter Mane",
+          "level_offset": 1,
+          "effective_level": 81,
+          "item": "ITEM_FOCUS_SASH",
+          "ability": "ABILITY_PROTOSYNTHESIS",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+          "moves": ["MOVE_PERISH_SONG", "MOVE_MOONBLAST", "MOVE_SHADOW_BALL", "MOVE_PROTECT"],
+          "role": "Second singer and immediate special pressure; imported nearly exactly from Wolfe Glick's Orlando-winning sheet.",
+          "lead_group": "primary lead",
+          "mega_candidate": false,
+          "legality_basis": "All four moves are present in Flutter Mane's checked-in curated level or TM data."
+        },
+        {
+          "order": 3,
+          "species": "SPECIES_AMOONGUSS",
+          "display_name": "Amoonguss",
+          "level_offset": 2,
+          "effective_level": 82,
+          "item": "ITEM_MENTAL_HERB",
+          "ability": "ABILITY_REGENERATOR",
+          "ability_slot": 2,
+          "spread": "SPREAD_31_IV_HP_DEF_SPDEF_SASSY",
+          "moves": ["MOVE_RAGE_POWDER", "MOVE_SPORE", "MOVE_SYNTHESIS", "MOVE_PROTECT"],
+          "role": "The one off-type ritual guardian; buys finite turns, heals itself, and can cycle through Regenerator.",
+          "lead_group": "first survival reserve",
+          "mega_candidate": false,
+          "legality_basis": "Rage Powder, Spore, Synthesis, and Protect all resolve directly through Amoonguss's current learnsets. Pollen Puff from the tournament sheet was rejected because the current engine does not grant it to Amoonguss."
+        },
+        {
+          "order": 4,
+          "species": "SPECIES_AEGISLASH",
+          "display_name": "Aegislash",
+          "level_offset": 2,
+          "effective_level": 82,
+          "item": "ITEM_LEFTOVERS",
+          "ability": "ABILITY_STANCE_CHANGE",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_HP_SPATK_QUIET",
+          "moves": ["MOVE_KINGS_SHIELD", "MOVE_SUBSTITUTE", "MOVE_SHADOW_BALL", "MOVE_SACRED_SWORD"],
+          "role": "Finite clock survival and mixed direct coverage without spending Glacia's later Wide Guard showcase.",
+          "lead_group": "survival reserve",
+          "mega_candidate": false,
+          "legality_basis": "All four moves resolve through Aegislash's current level, TM, or tutor sources."
+        },
+        {
+          "order": 5,
+          "species": "SPECIES_MIMIKYU",
+          "display_name": "Mimikyu",
+          "level_offset": 3,
+          "effective_level": 83,
+          "item": "ITEM_SITRUS_BERRY",
+          "ability": "ABILITY_DISGUISE",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+          "moves": ["MOVE_WILL_O_WISP", "MOVE_TAUNT", "MOVE_PLAY_ROUGH", "MOVE_SHADOW_CLAW"],
+          "role": "Disguise-backed disruption, persistent burn attrition, and direct physical pressure that marks the transition away from Protect cycling.",
+          "lead_group": "late survival reserve",
+          "mega_candidate": false,
+          "legality_basis": "All four moves are present across Mimikyu's checked-in level and TM sources. Taunt replaces the generated donor's Protect to resolve the first fresh critic's protection-density concern."
+        },
+        {
+          "order": 6,
+          "species": "SPECIES_MARSHADOW",
+          "display_name": "Marshadow",
+          "level_offset": 4,
+          "effective_level": 84,
+          "item": "ITEM_LIFE_ORB",
+          "ability": "ABILITY_TECHNICIAN",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+          "moves": ["MOVE_SPECTRAL_THIEF", "MOVE_SHADOW_SNEAK", "MOVE_ICE_PUNCH", "MOVE_CLOSE_COMBAT"],
+          "role": "Four-attack spectral mythical cleanup that steals setup boosts and never retreats into the survival phase's Protect rhythm.",
+          "lead_group": "final reserve",
+          "mega_candidate": false,
+          "legality_basis": "All four moves resolve through Marshadow's checked-in level, TM, or tutor data. Ice Punch replaces the generated donor's Protect to create a materially direct cleanup phase."
+        }
+      ],
+      "ordering": {
+        "intended_lead": ["SPECIES_GENGAR", "SPECIES_FLUTTER_MANE"],
+        "reserve_sequence": [
+          "Mega Gengar creates the only Shadow Tag state and either singer can start the first clock.",
+          "Amoonguss is the preferred count-survival switch because Rage Powder, Spore, Protect, Synthesis, and Regenerator each buy finite time.",
+          "Aegislash supplies the last protection-based survival reserve without introducing Trick Room, weather, terrain, or screens.",
+          "Mimikyu and Marshadow are intended direct reserves: neither carries Protect, and Marshadow's Spectral Thief punishes accumulated player setup. State-aware replacement logic is required; party order alone does not guarantee this phase transition."
+        ],
+        "mandatory_order_reason": "A single visible trapper keeps the first-loss lesson fair. Party order expresses the desired shift from survival to direct offense but does not control Emerald's replacement choice; source implementation is blocked on a Phoebe-aware reserve selector that preserves Gengar and intentionally transitions to Mimikyu and Marshadow."
+      },
+      "ai": {
+        "existing_flags": [
+          "AI_FLAG_CHECK_BAD_MOVE",
+          "AI_FLAG_TRY_TO_FAINT",
+          "AI_FLAG_CHECK_VIABILITY",
+          "AI_FLAG_CHECK_FOE",
+          "AI_FLAG_SMART_SWITCHING",
+          "AI_FLAG_HELP_PARTNER",
+          "AI_FLAG_SPEED_CONTROL"
+        ],
+        "required_flags": [
+          "AI_FLAG_CHECK_BAD_MOVE",
+          "AI_FLAG_TRY_TO_FAINT",
+          "AI_FLAG_CHECK_VIABILITY",
+          "AI_FLAG_CHECK_FOE",
+          "AI_FLAG_SMART_SWITCHING",
+          "AI_FLAG_HELP_PARTNER",
+          "AI_FLAG_HP_AWARE",
+          "AI_FLAG_PERISH_TRAP"
+        ],
+        "custom_requirements": [
+          "Recognize Mega Gengar's post-Mega Shadow Tag when deciding whether either singer should start Perish Song.",
+          "Reject duplicate Perish Song when all living foes already have a count.",
+          "Attack, Disable, burn, or sleep visible Ghost-type escape pieces immediately. Treat Soundproof, pivot moves, Shed Shell, and Eject Button as escape information only after the ability, move, or item is revealed in battle; do not inspect hidden player data for the state machine.",
+          "Prefer Protect, Substitute, King's Shield, Synthesis, Rage Powder, or a safe switch while a useful own-side count remains above one.",
+          "At count one, switch a perishing AI Pokemon when a legal reserve exists; current battle_ai_switch_items.c already provides this baseline and must be regression-tested in doubles.",
+          "Add a Phoebe-specific healthy-reserve selector that preserves Mega Gengar for a second cycle when defensible, chooses Amoonguss or Aegislash during the live clock, and chooses Mimikyu or Marshadow when the trap is broken or cleanup begins.",
+          "After the first opposing pair falls, allow Mega Gengar or Flutter Mane to re-enter and establish a second clock instead of drifting into generic damage AI.",
+          "Use Spectral Thief preferentially against a boosted target and Shadow Sneak only when priority changes the knockout."
+        ],
+        "forbidden_behaviors": [
+          "Do not sing when both living foes are already perishing.",
+          "Do not Protect repeatedly at count zero or allow an AI Pokemon to remain in at count one with a legal switch.",
+          "Do not Rage Powder when both foes use spread moves or the protected partner is already safe.",
+          "Do not assume Shadow Tag traps Ghost-types; current battle configuration explicitly lets Ghosts escape.",
+          "Do not use AI_FLAG_CHECK_FOE or any custom profile to inspect an unrevealed player pivot move, Soundproof ability, Shed Shell, or Eject Button when deciding whether the trap is secure.",
+          "Do not force exact moves or targets independently of board state."
+        ],
+        "state_machine": [
+          {"state": "secure-or-break-escape", "condition": "Mega Gengar is not yet active, a foe is visibly Ghost-type, or an escape ability, item, or pivot move has already been revealed", "behavior": "Mega Evolve automatically; use Shadow Ball, Disable, Spore, Will-O-Wisp, Taunt, or direct focus fire until the clock can teach a fair actionable lesson. Never inspect an unrevealed player move or item for this transition."},
+          {"state": "start-clock", "condition": "At least one living foe is unperished and Mega Gengar's Shadow Tag affects the relevant slots", "behavior": "Give exactly one singer a strong Perish Song preference while the partner attacks, Protects, or disrupts according to the board."},
+          {"state": "survive-three-two", "condition": "A useful own-side Perish count is two or three", "behavior": "Value Protect, Disable, Rage Powder, Spore, Synthesis, Substitute, King's Shield, and safe switching without forcing a deterministic sequence."},
+          {"state": "exit-at-one", "condition": "An AI Pokemon's count is one and a legal reserve exists", "behavior": "Switch it. If trapped or no reserve exists, choose the highest-value attack or protection rather than pretending survival is possible."},
+          {"state": "second-circle", "condition": "The first opposing pair has fainted and Phoebe retains a singer plus Mega Gengar", "behavior": "Re-establish Shadow Tag and a new Perish count while preserving enough reserves to exit once more."},
+          {"state": "direct-cleanup", "condition": "The trapper has fainted, revealed escape counterplay remains, or only damaged foes survive", "behavior": "Use the trainer-aware reserve selector to transition to non-Protect Mimikyu and four-attack Marshadow, with Flutter Mane or Aegislash attacking as appropriate, instead of wasting turns on an unenforceable clock."}
+        ]
+      },
+      "counterplay": {
+        "intentional_weakness": "Mega Gengar is the only Shadow Tag user. Removing it collapses the hard trap; Ghost-types can switch through Shadow Tag under the current Gen 7 rule, pivot moves and escape items preserve exits, and spread attacks bypass Rage Powder.",
+        "first_loss_lesson": "Count both sides, not just the player's clock. Preserve one escape class or double-target Mega Gengar on a non-Protect turn; once the single trapper is gone, Phoebe becomes a hard but conventional Ghost offense.",
+        "classes": [
+          "Ghost-type switching, Shed Shell, Eject Button, U-turn, Volt Switch, Flip Turn, or Parting Shot to retain an exit",
+          "Soundproof, Throat Chop, Taunt, Imprison, Encore, or immediate pressure to prevent Perish Song",
+          "Double targeting, priority, Dark or Ghost attacks, and spread damage to remove Mega Gengar through redirection",
+          "Safeguard, Misty Terrain, sleep immunity, Lum Berry, or Taunt against Amoonguss and Mimikyu status",
+          "Feint, Unseen Fist, Encore, Disable, or setup on a correctly read protection turn",
+          "Unaware, Haze, Clear Smog, or avoiding unnecessary setup so Marshadow gains little from Spectral Thief"
+        ],
+        "revealed_information": [
+          "Mega Gengar visibly changes to Shadow Tag before the first count matters.",
+          "The Perish count is displayed every turn and switching resets an individual Pokemon's count.",
+          "Flutter Mane's Focus Sash and second Perish Song become visible during the first cycle.",
+          "Amoonguss is the only redirection user and spread attacks ignore Rage Powder.",
+          "Ghost-type escape behavior is a global Gen 7 rule and must be stated in the guide hint.",
+          "Marshadow reveals Spectral Thief only after the player chooses to accumulate boosts."
+        ],
+        "unacceptable_failure_modes": [
+          "The AI fails to switch at count one and turns the signature boss into self-destruction.",
+          "The AI sings without Shadow Tag into freely switching targets and falsely appears incompetent.",
+          "The player loses to an undocumented Shadow Tag exception or invisible count rule.",
+          "Every broad escape class is silently covered, reducing the fight to one obscure required Pokemon.",
+          "Random sleep accuracy, double Protect variance, or targeting luck becomes the primary source of difficulty."
+        ]
+      },
+      "competitive_research": {
+        "index": {
+          "version": 1,
+          "record_count": 1005,
+          "sha256": "44d79fd2a5f7578013b2363f9e47d75a0f05ae4239da3bd6891e9651bca2648a"
+        },
+        "queries": [
+          "search_competitive_teams.py --player Wolfe --tag perish-trap --style doubles",
+          "search_competitive_teams.py --pokemon Flutter-Mane --style doubles",
+          "search_competitive_teams.py --pokemon Aegislash --style doubles",
+          "search_competitive_teams.py --pokemon Mimikyu --style doubles",
+          "search_competitive_teams.py --pokemon Marshadow --style doubles",
+          "search_competitive_teams.py --pokemon Amoonguss --style doubles --tag redirection",
+          "full 1005-record mechanical scan for Perish, Shadow Tag, Disable, redirection, survival-clock, Ghost, and priority tags"
+        ],
+        "candidates": [
+          {
+            "reference_id": "elite:wolfe:orlando-2023",
+            "decision": "selected",
+            "reason": "The exact winning sheet supplies the two-singer, Shadow Tag, redirection, recovery, and direct-cleanup architecture. Flutter Mane is nearly exact; Amoonguss is adapted to current move legality; Mega Gengar replaces Gothitelle as the one trapper."
+          },
+          {
+            "reference_id": "elite:marco-silva:turin-2026",
+            "decision": "selected",
+            "reason": "Marco Silva's exact Mega Gengar Perish Song, Disable, Shadow Ball, and Protect set is the cleanest current public fit and preserves Mega Evolution as the only active gimmick."
+          },
+          {
+            "reference_id": "showdown:gen7randomdoublesbattle:015",
+            "decision": "adapted",
+            "reason": "Sitrus Disguise Mimikyu keeps Will-O-Wisp, Play Rough, and Shadow Claw, but Taunt replaces Protect so the post-clock phase does not repeat the survival shell."
+          },
+          {
+            "reference_id": "showdown:gen7randomdoublesbattle:018",
+            "decision": "adapted",
+            "reason": "The generated Aegislash establishes King's Shield special offense. Leftovers and Substitute replace Life Orb priority so Aegislash supports the clock and leaves Glacia's Wide Guard identity unspent."
+          },
+          {
+            "reference_id": "showdown:gen8randomdoublesbattle:002",
+            "decision": "adapted",
+            "reason": "Life Orb Technician Marshadow keeps Spectral Thief, Shadow Sneak, and Close Combat; legal Ice Punch replaces Protect so cleanup is materially offensive."
+          },
+          {
+            "reference_id": "elite:wolfe:toronto-2024",
+            "decision": "reserved",
+            "reason": "Its rain offense plus secondary Perish mode is excellent but rain belongs to Aqua and Wallace, while a second Shadow Tag user would erase Phoebe's intentional weakness."
+          },
+          {
+            "reference_id": "elite:wolfe:euic-2025",
+            "decision": "rejected",
+            "reason": "Its secondary Perish pressure is useful research, but Koraidon sun offense is Magma territory and would make Phoebe another offense-plus-backup-trap team instead of the definitive survival clock."
+          }
+        ],
+        "selected_reference_ids": [
+          "elite:wolfe:orlando-2023",
+          "elite:marco-silva:turin-2026",
+          "showdown:gen7randomdoublesbattle:015",
+          "showdown:gen7randomdoublesbattle:018",
+          "showdown:gen8randomdoublesbattle:002"
+        ],
+        "external_public_sources": [
+          {
+            "url": "https://limitlessvgc.com/tournaments/298/teams",
+            "use": "Exact public Wolfe Glick Orlando 2023 winning sheet: two Perish singers, Amoonguss redirection, Gothitelle Shadow Tag, and a direct cleanup mode."
+          },
+          {
+            "url": "https://limitlessvgc.com/tournaments/435/teams",
+            "use": "Exact public Marco Silva Turin 2026 winning Mega Gengar set: Shadow Ball, Perish Song, Disable, Protect."
+          },
+          {
+            "url": "https://www.smogon.com/forums/threads/gengar.3508859/",
+            "use": "Public competitive Mega Gengar Perish analysis documenting the defensive Timid set, Protect and Disable survival, count-one switching, Ghost escape, pivot counterplay, and redirection partners."
+          }
+        ],
+        "rejected_gimmicks": ["All source-format transformations other than Mega Evolution are removed; no source Tera, Z-Move, Dynamax, Gigantamax, or Primal state is active."]
+      },
+      "campaign_reservations": {
+        "spends": [
+          "The campaign's definitive full Shadow Tag Perish battle",
+          "Mega Gengar as Phoebe's only Mega",
+          "Flutter Mane as the second singer",
+          "Marshadow as the spectral mythical and anti-setup final pressure",
+          "One strategically justified off-type Amoonguss redirection slot"
+        ],
+        "preserves": [
+          "Sidney's Yveltal, Darkrai, Incineroar, Urshifu, Kingambit, and Mega Absol roster",
+          "Glacia's snow, offense-plus-attrition hybrid, and Wide Guard showcase",
+          "Drake's Dragon Mega and singles format shift",
+          "Wallace's rain, dual-speed, and grand restricted spectacle"
+        ],
+        "releases": [
+          "Battle 11's partial Celebi and Shelmet Perish lesson is allowed to escalate here into the one full League trap; species, setting, counterplay, and AI phase structure are entirely different.",
+          "Wolfe Glick's Orlando survival clock is spent only once, at a battle important enough to justify dedicated AI.",
+          "Mega Gengar's competitive Perish and Disable identity is finally used at the point where the player owns every broad counterplay class."
+        ],
+        "collision_notes": [
+          "No species overlaps Sidney's dossier and no Incineroar, Urshifu, Yveltal, Darkrai, Kingambit, or Absol appears here.",
+          "Gothitelle is intentionally omitted: a second Shadow Tag user would turn a fair single-point weakness into a near-hard lock.",
+          "Trick Room, rain, snow, screens, and Wide Guard are intentionally absent to protect later League identities.",
+          "Amoonguss is the only off-type member and exists for a sourced, finite redirection job rather than generic roster strength."
+        ]
+      },
+      "presentation": {
+        "intro_concept": "Keep Phoebe's Mt. Pyre communion and tight bonds, but explain that every spirit hears the same song and each one guards the shadow that keeps the circle closed.",
+        "defeat_concept": "She recognizes that the player did not merely survive the count; they protected the bond and exit that mattered.",
+        "post_battle_concept": "She warns that Glacia will tax recovery differently: not with one shared count, but with cold offense and attrition.",
+        "hint_concept": "The pre-League guide explicitly states that Ghost-types can leave Shadow Tag, pivot moves and escape items remain valid, spread attacks bypass Rage Powder, and Phoebe has only one hard trapper.",
+        "guide_summary": "Document the cap-80 lead, every set and offset, Mega Gengar's automatic first legal Mega, displayed Perish counts, Ghost escape rule, count-one AI exits, the second-cycle condition, Amoonguss redirection, Aegislash survival, the non-Protect Mimikyu and Marshadow cleanup phase, and the manual healing window before Glacia.",
+        "native_width_status": "concept-only"
+      },
+      "verification": {
+        "design_schema": "pass",
+        "species_items_moves_abilities": "pass",
+        "source_implementation": "not-started",
+        "script_and_format": "not-started",
+        "dialogue_width": "concept-only",
+        "guide": "concept-only",
+        "runtime": "unplayed",
+        "observed_difficulty": null,
+        "evidence": [
+          "All six species exist in current base or curated Gen 9 stats.",
+          "Every proposed item, move, and spread token exists in current headers.",
+          "Ability slots resolve exactly, including Gengar slot 1 Cursed Body, Flutter Mane slot 0 Protosynthesis, and Amoonguss slot 2 Regenerator.",
+          "evolution.h maps Gengar plus Gengarite to Mega Gengar, whose checked-in ability is Shadow Tag.",
+          "Gengar and Flutter Mane both legally learn Perish Song; the current battle engine stores and displays the three-turn count.",
+          "battle_ai_switch_items.c already attempts a legal switch when an AI Pokemon's Perish count is one or lower; the new trainer profile must regression-test this in doubles.",
+          "Amoonguss Pollen Puff was rejected as unavailable in current move data and replaced by legal Synthesis.",
+          "Current source was inspected but deliberately not modified. The proposed state machine and observed target 10 remain unimplemented and unplayed.",
+          "The first fresh critic's Protect-density, hidden-information, reserve-selection, state-machine, and counterplay-test concerns were incorporated into the revised team and explicit source blockers."
+        ],
+        "known_tooling_note": "The current marquee legality helper walks the non-Mega pre-evolution graph, so Gengar's Gastly-line Disable passes. Source implementation remains blocked on a revealed-information Perish state machine and Phoebe-specific reserve selection; all required escape-class tests and observed difficulty remain unplayed.",
+        "source_blockers": [
+          "Implement the revealed-information Perish state machine; current AI_PERISH_TRAP scoring is not sufficient.",
+          "Implement Phoebe-specific state-aware healthy-reserve selection that preserves Mega Gengar and creates a real survival-to-cleanup transition.",
+          "Prevent the custom profile from inspecting unrevealed pivot moves, Soundproof, Shed Shell, or Eject Button.",
+          "Regression-test count-one doubles switching, second-cycle re-entry, redirection, Ghost escape, Soundproof, pivoting, escape items, spread damage, Taunt, and trapper knockout.",
+          "Run representative cap-80 teams before assigning any observed difficulty."
+        ]
+      },
+      "mechanics_proposal": null
+    }
+  }
+}

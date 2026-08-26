@@ -88,14 +88,14 @@ def main() -> None:
     make_rain = block("data/battle_scripts_1.s", "BattleScript_EffectMakeItRain:", "BattleScript_EffectHammerArm::")
     assert "MOVE_EFFECT_SP_ATK_MINUS_1" in make_rain
     assert "MOVE_EFFECT_SP_ATK_TWO_DOWN" not in make_rain
-    assert "makeItRainStatDropped" in commands
+    assert "spreadMoveStatDropped" in commands
     assert "!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)" in commands
     assert commands.index("case MOVEEND_NEXT_TARGET") < commands.index("case MOVEEND_CLEAR_BITS")
 
     order_up = block(
         "src/battle_script_commands.c",
         "if (gCurrentMove == MOVE_ORDER_UP",
-        "// Make It Rain is a spread move",
+        "// Spread-move self drops happen once",
     )
     for fragment in (
         "SPECIES_DONDOZO",

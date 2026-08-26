@@ -237,7 +237,7 @@ static void PrintHeaderTexts(void)
     FillWindowPixelBuffer(1, PIXEL_FILL(0));
     FillWindowPixelBuffer(2, PIXEL_FILL(0));
     WCSS_AddTextPrinterParameterized(0, 1, sHeaderTexts[0], GetStringCenterAlignXOffset(1, sHeaderTexts[0], 0xC0), 6, COLORMODE_GREEN);
-    for (i = 0; i < (int)ARRAY_COUNT(*sHeaderTexts) - 1; i++)
+    for (i = 0; i < (int)ARRAY_COUNT(sHeaderTexts) - 2; i++)
     {
         WCSS_AddTextPrinterParameterized(1, 1, sHeaderTexts[i + 1], 0, 30 * i + 8, COLORMODE_WHITE_LGRAY);
     }
@@ -358,6 +358,11 @@ static u32 CountPlayersInGroupAndGetActivity(struct UnkStruct_x20 * unk20, u32 *
 
     for (i = 0; i < ARRAY_COUNT(sActivityGroupInfo); i++)
     {
+        // GROUPTYPE_NONE is stored as 0xFF in this u8 table and cannot index
+        // the four-element groupCounts array.
+        if (group_type(i) == (u8)GROUPTYPE_NONE)
+            continue;
+
         if (activity == group_activity(i) && unk20->groupScheduledAnim == UNION_ROOM_SPAWN_IN)
         {
             if (group_players(i) == 0)

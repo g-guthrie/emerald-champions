@@ -142,7 +142,6 @@
 #define HOLD_EFFECT_SEEDS            156
 #define HOLD_EFFECT_ADRENALINE_ORB   157
 #define HOLD_EFFECT_MEMORY           158
-#define HOLD_EFFECT_Z_CRYSTAL        159
 
 // Gen8 hold effects
 #define HOLD_EFFECT_UTILITY_UMBRELLA    169

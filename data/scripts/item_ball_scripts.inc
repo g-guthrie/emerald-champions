@@ -47,7 +47,7 @@ Route109_EventScript_ItemZoomLens:: @ 8290D67
 	end
 
 Route110_EventScript_ItemRareCandy:: @ 8290D74
-	finditem ITEM_RARE_CANDY
+	finditem ITEM_ADRENALINE_ORB
 	end
 
 Route110_EventScript_ItemManectite:: @ 8290D81
@@ -547,7 +547,7 @@ ShoalCave_LowTideEntranceRoom_EventScript_ItemBigPearl:: @ 82913C0
 	end
 
 ShoalCave_LowTideInnerRoom_EventScript_ItemRareCandy:: @ 82913CD
-	finditem ITEM_RARE_CANDY
+	finditem ITEM_SHED_SHELL
 	end
 
 ShoalCave_LowTideStairsRoom_EventScript_ItemTM70AuroraVeil::
@@ -587,7 +587,7 @@ Route110_TrickHousePuzzle3_EventScript_ItemExpertBelt:: @ 8291442
 	end
 
 Route110_TrickHousePuzzle4_EventScript_ItemAssaultVest:: @ 829144F
-	finditem ITEM_RARE_CANDY
+	finditem ITEM_BLUNDER_POLICY
 	end
 
 Route110_TrickHousePuzzle6_EventScript_MewtwoniteX:: @ 829145C

@@ -171,8 +171,9 @@ u16 ChooseMoveAndTargetInBattlePalace(void)
     // If no moves matched the selected group, pick a new move from groups the pokemon has
     // In this case the AI is not checked again, so the choice may be worse
     // If a move is chosen this way, there's a 50% chance that it will be unable to use it anyway
-    if (chosenMoveId == -1)
+    if (chosenMoveId == -1 || chosenMoveId >= MAX_MON_MOVES)
     {
+        chosenMoveId = -1;
         if (unusableMovesBits != 0xF)
         {
             validMoveFlags = 0, numValidMoveGroups = 0;
@@ -194,7 +195,7 @@ u16 ChooseMoveAndTargetInBattlePalace(void)
                 numValidMoveGroups++;
             if ((validMoveFlags & 0xF0) > 0x1F)
                 numValidMoveGroups++;
-            if ((validMoveFlags & 0xF0) > 0x1FF)
+            if ((validMoveFlags & 0xF00) >= 0x200)
                 numValidMoveGroups++;
 
 
@@ -216,7 +217,7 @@ u16 ChooseMoveAndTargetInBattlePalace(void)
                     validMoveGroup = PALACE_MOVE_GROUP_ATTACK;
                 if ((validMoveFlags & 0xF0) > 0x1F)
                     validMoveGroup = PALACE_MOVE_GROUP_DEFENSE;
-                if ((validMoveFlags & 0xF0) > 0x1FF)
+                if ((validMoveFlags & 0xF00) >= 0x200)
                     validMoveGroup = PALACE_MOVE_GROUP_SUPPORT;
 
                 do
@@ -256,6 +257,8 @@ u16 ChooseMoveAndTargetInBattlePalace(void)
 
     if (moveTarget & MOVE_TARGET_USER)
         chosenMoveId |= (gActiveBattler << 8);
+    else if (moveTarget == MOVE_TARGET_ALLY)
+        chosenMoveId |= (BATTLE_PARTNER(gActiveBattler) << 8);
     else if (moveTarget == MOVE_TARGET_SELECTED)
         chosenMoveId |= GetBattlePalaceTarget();
     else
@@ -282,6 +285,7 @@ static u8 GetBattlePalaceMoveGroup(u16 move)
     case MOVE_TARGET_RANDOM:
     case MOVE_TARGET_BOTH:
     case MOVE_TARGET_FOES_AND_ALLY:
+    case MOVE_TARGET_ALL_BATTLERS:
         if (gBattleMoves[move].power == 0)
             return PALACE_MOVE_GROUP_SUPPORT;
         else
@@ -289,6 +293,7 @@ static u8 GetBattlePalaceMoveGroup(u16 move)
         break;
     case MOVE_TARGET_DEPENDS:
     case MOVE_TARGET_OPPONENTS_FIELD:
+    case MOVE_TARGET_ALLY:
         return PALACE_MOVE_GROUP_SUPPORT;
     case MOVE_TARGET_USER:
         return PALACE_MOVE_GROUP_DEFENSE;

@@ -9,6 +9,7 @@ extern const u32 gPokeballSelection_Gfx[];
 
 u16 GetStarterPokemon(u16 chosenStarterId);
 u16 GetStarterPokemonForGeneration(u16 chosenStarterId, u16 starterGeneration);
+u16 GetMiddleEvolutionForStarter(u16 species);
 void CB2_ChooseStarter(void);
 
 #endif // GUARD_STARTER_CHOOSE_H

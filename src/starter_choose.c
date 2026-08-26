@@ -422,6 +422,35 @@ u16 GetStarterPokemonForGeneration(u16 chosenStarterId, u16 starterGeneration)
     } 
 }
 
+u16 GetMiddleEvolutionForStarter(u16 species)
+{
+    switch (species)
+    {
+    case SPECIES_BULBASAUR:  return SPECIES_IVYSAUR;
+    case SPECIES_CHARMANDER: return SPECIES_CHARMELEON;
+    case SPECIES_SQUIRTLE:   return SPECIES_WARTORTLE;
+    case SPECIES_CHIKORITA:  return SPECIES_BAYLEEF;
+    case SPECIES_CYNDAQUIL:  return SPECIES_QUILAVA;
+    case SPECIES_TOTODILE:   return SPECIES_CROCONAW;
+    case SPECIES_TREECKO:    return SPECIES_GROVYLE;
+    case SPECIES_TORCHIC:    return SPECIES_COMBUSKEN;
+    case SPECIES_MUDKIP:     return SPECIES_MARSHTOMP;
+    case SPECIES_TURTWIG:    return SPECIES_GROTLE;
+    case SPECIES_CHIMCHAR:   return SPECIES_MONFERNO;
+    case SPECIES_PIPLUP:     return SPECIES_PRINPLUP;
+    case SPECIES_SNIVY:      return SPECIES_SERVINE;
+    case SPECIES_TEPIG:      return SPECIES_PIGNITE;
+    case SPECIES_OSHAWOTT:   return SPECIES_DEWOTT;
+    case SPECIES_CHESPIN:    return SPECIES_QUILLADIN;
+    case SPECIES_FENNEKIN:   return SPECIES_BRAIXEN;
+    case SPECIES_FROAKIE:    return SPECIES_FROGADIER;
+    case SPECIES_ROWLET:     return SPECIES_DARTRIX;
+    case SPECIES_LITTEN:     return SPECIES_TORRACAT;
+    case SPECIES_POPPLIO:    return SPECIES_BRIONNE;
+    default:                 return species;
+    }
+}
+
 u16 GetStarterPokemon(u16 chosenStarterId)
 {
     return GetStarterPokemonForGeneration(chosenStarterId, gSpecialVar_0x800A);

@@ -6,6 +6,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import build_competitive_team_index as competitive_index
+
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -42,12 +44,24 @@ def main() -> None:
 
     if showdown_teams != 390:
         problems.append(f"Showdown reference corpus must contain 390 teams, found {showdown_teams}")
+
+    indexed = competitive_index.build()
+    serialized = competitive_index.serialized_index(indexed)
+    expected_metadata = competitive_index.metadata(indexed, serialized)
+    if not competitive_index.OUTPUT.exists() or competitive_index.OUTPUT.read_text() != serialized:
+        problems.append("expanded competitive index is missing or stale")
+    if not competitive_index.METADATA.exists() or json.loads(competitive_index.METADATA.read_text()) != expected_metadata:
+        problems.append("expanded competitive index metadata is missing or stale")
     if problems:
         raise SystemExit("\n".join(f"FAIL: {problem}" for problem in problems))
     print("PASS: 390 reproducible Showdown random-team references")
     print("PASS: 390 verified official-event champion teams from VGC History")
     print("PASS: 203 Smogon Gen 4-9 OU/UU/NU sample teams")
-    print("PASS: 983 complete competitive reference teams with provenance")
+    print("PASS: 983 baseline competitive reference teams with provenance")
+    print(
+        f"PASS: {len(indexed)} searchable references including "
+        f"{len(indexed) - 983} curated elite additions ({expected_metadata['sha256'][:12]})"
+    )
 
 
 if __name__ == "__main__":

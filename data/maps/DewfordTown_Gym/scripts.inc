@@ -146,7 +146,7 @@ DewfordTown_Gym_EventScript_StopCountingTrainers:: @ 81FC7C1
 DewfordTown_Gym_EventScript_Brawly:: @ 81FC7C2
 	goto_if_set FLAG_DAILY_REMATCH_BRAWLY, DewfordTown_Gym_EventScript_AlreadyRematched
 	goto_if_set FLAG_SYS_GAME_CLEAR, DewfordTown_Gym_EventScript_BrawlyRematch
-	trainerbattle_single TRAINER_BRAWLY_1, DewfordTown_Gym_Text_BrawlyIntro, DewfordTown_Gym_Text_BrawlyDefeat, DewfordTown_Gym_EventScript_BrawlyDefeated, NO_MUSIC
+	trainerbattle_double TRAINER_BRAWLY_1, DewfordTown_Gym_Text_BrawlyIntro, DewfordTown_Gym_Text_BrawlyDefeat, DewfordTown_Gym_Text_BrawlyNotEnoughPokemon, DewfordTown_Gym_EventScript_BrawlyDefeated, NO_MUSIC
 	goto_if_unset FLAG_RECEIVED_TM08, DewfordTown_Gym_EventScript_GiveBulkUp2
 	msgbox DewfordTown_Gym_Text_BrawlyPostBattle, MSGBOX_DEFAULT
 	release
@@ -253,7 +253,7 @@ DewfordTown_Gym_EventScript_TakaoBrightenRoom:: @ 81FC8D2
 	end
 
 DewfordTown_Gym_EventScript_Jocelyn:: @ 81FC8D9
-	trainerbattle_single TRAINER_JOCELYN, DewfordTown_Gym_Text_JocelynIntro, DewfordTown_Gym_Text_JocelynDefeat, DewfordTown_Gym_EventScript_JocelynBrightenRoom
+	trainerbattle_double TRAINER_JOCELYN, DewfordTown_Gym_Text_JocelynIntro, DewfordTown_Gym_Text_JocelynDefeat, DewfordTown_Gym_Text_JocelynNotEnoughPokemon, DewfordTown_Gym_EventScript_JocelynBrightenRoom
 	msgbox DewfordTown_Gym_Text_JocelynPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -263,7 +263,7 @@ DewfordTown_Gym_EventScript_JocelynBrightenRoom:: @ 81FC8F4
 	end
 
 DewfordTown_Gym_EventScript_Laura:: @ 81FC8FB
-	trainerbattle_single TRAINER_LAURA, DewfordTown_Gym_Text_LauraIntro, DewfordTown_Gym_Text_LauraDefeat, DewfordTown_Gym_EventScript_LauraBrightenRoom
+	trainerbattle_double TRAINER_LAURA, DewfordTown_Gym_Text_LauraIntro, DewfordTown_Gym_Text_LauraDefeat, DewfordTown_Gym_Text_LauraNotEnoughPokemon, DewfordTown_Gym_EventScript_LauraBrightenRoom
 	msgbox DewfordTown_Gym_Text_LauraPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -372,99 +372,117 @@ DewfordTown_Gym_Text_GymGuidePostVictory: @ 81FCB5C
 	.string "Your future is bright, too!$"
 
 DewfordTown_Gym_Text_TakaoIntro: @ 81FCB9F
-	.string "Might is right!\n"
-	.string "Come on!$"
+	.string "Might isn't only one thing.\n"
+	.string "Machop sharpens every blow,\p"
+	.string "Timburr attacks from every angle,\n"
+	.string "and Jangmo-o covers the finish!$"
 
 DewfordTown_Gym_Text_TakaoDefeat: @ 81FCBB8
-	.string "Not enough power…$"
+	.string "Your technique beat my power!$"
 
 DewfordTown_Gym_Text_TakaoPostBattle: @ 81FCBCA
-	.string "Your skill overcame my strength!\n"
-	.string "Your technique is commendable!$"
+	.string "Focus Energy makes crits loom.\n"
+	.string "Sheer Force trades effects away.\p"
+	.string "Stop the setup, or use Fairy\n"
+	.string "and Psychic pressure.$"
 
 DewfordTown_Gym_Text_JocelynIntro: @ 81FCC0A
-	.string "There's no need for Brawly to be\n"
-	.string "involved!\p"
-	.string "I'll crush you!$"
+	.string "Brawly doesn't need to step in.\n"
+	.string "Impidimp lowers your guard,\p"
+	.string "and Hoopa strikes through Protect!\n"
+	.string "Can you face what follows?$"
 
 DewfordTown_Gym_Text_JocelynDefeat: @ 81FCC45
-	.string "But… How?\n"
-	.string "How could I lose so easily?$"
+	.string "Even Hoopa couldn't hide the gap!$"
 
 DewfordTown_Gym_Text_JocelynPostBattle: @ 81FCC6B
-	.string "I'm not going to waste this loss.\n"
-	.string "I'll use it to motivate me to train!\p"
-	.string "One day I'll become a Gym Leader…\p"
-	.string "No, I'll become the Pokémon League\n"
-	.string "Champion!$"
+	.string "Fairy and Bug pressure split us.\n"
+	.string "Hoopa hits hard but can't take much.\p"
+	.string "Remove Impidimp or reflect tricks.$"
+
+DewfordTown_Gym_Text_JocelynNotEnoughPokemon:
+	.string "Bring two healthy Pokémon.\n"
+	.string "My final drill needs two partners.$"
 
 DewfordTown_Gym_Text_LauraIntro: @ 81FCD01
-	.string "Don't you dare brush me off!\n"
-	.string "It's not my fault if you cry!$"
+	.string "Don't brush off a beginner!\n"
+	.string "Mienfoo buys one breath,\p"
+	.string "then Makuhita turns pain to power.\n"
+	.string "Can you break our opening drill?$"
 
 DewfordTown_Gym_Text_LauraDefeat: @ 81FCD3C
-	.string "Waaaaaaah!\n"
-	.string "I lost!$"
+	.string "You broke our stance!$"
 
 DewfordTown_Gym_Text_LauraPostBattle: @ 81FCD4F
-	.string "I battle in the dark to make my heart\n"
-	.string "stronger.\p"
-	.string "But because it's so dark, I can never\n"
-	.string "see Brawly's face…$"
+	.string "Fake Out buys Guts one turn.\n"
+	.string "Wide Guard covers the team.\p"
+	.string "Flying, Psychic, and Fairy attacks\n"
+	.string "still break our formation.$"
+
+DewfordTown_Gym_Text_LauraNotEnoughPokemon:
+	.string "Bring two healthy Pokémon.\n"
+	.string "This drill needs two partners.$"
 
 DewfordTown_Gym_Text_LilithIntro: @ 81FCDB8
-	.string "Ufufu…\n"
-	.string "Are you stumbling around in the dark?$"
+	.string "In the dark, I read your stance.\n"
+	.string "Meditite strikes first,\p"
+	.string "then Scraggy and Stufful hold firm.\n"
+	.string "Show me your own style!$"
 
 DewfordTown_Gym_Text_LilithDefeat: @ 81FCDE5
-	.string "Oh, you…\n"
-	.string "I don't want to know you!$"
+	.string "Your style broke through!$"
 
 DewfordTown_Gym_Text_LilithPostBattle: @ 81FCE08
-	.string "You deserve to stay lost and end up\n"
-	.string "back at the entrance again!$"
+	.string "My three can fight alone,\n"
+	.string "or beside Brenden's crew.\p"
+	.string "Pressure each half differently.$"
 
 DewfordTown_Gym_Text_BrendenIntro: @ 81FCE48
-	.string "I'll show you the gumption of\n"
-	.string "a sailing man!$"
+	.string "A sailor learns every kind of force.\n"
+	.string "Kubfu presses the front,\p"
+	.string "Solosis changes the angle,\n"
+	.string "and Clobbopus closes in!$"
 
 DewfordTown_Gym_Text_BrendenDefeat: @ 81FCE75
-	.string "How'd this happen?\n"
-	.string "It's not like me to lose this way!$"
+	.string "You weathered every style!$"
 
 DewfordTown_Gym_Text_BrendenPostBattle: @ 81FCEAB
-	.string "Oh, aye! You're worthy of seeing\n"
-	.string "our Gym Leader.$"
+	.string "My crew mixes body and mind.\n"
+	.string "Lilith anchors the other side.\p"
+	.string "Together or apart, both must work.$"
 
 DewfordTown_Gym_Text_CristianIntro: @ 81FCEDC
-	.string "If you mean to pass, it has to be\n"
-	.string "through me!$"
+	.string "Three disciplines guard this path.\n"
+	.string "Riolu builds its stance,\p"
+	.string "Farfetch'd finds the critical line,\n"
+	.string "and Throh powers through!$"
 
 DewfordTown_Gym_Text_CristianDefeat: @ 81FCF0A
-	.string "Grrrrr!\n"
-	.string "Vastly overpowered!$"
+	.string "You mastered all three!$"
 
 DewfordTown_Gym_Text_CristianPostBattle: @ 81FCF26
-	.string "You win!\n"
-	.string "Go after that Badge!$"
+	.string "Taunt can stop Riolu's stance.\n"
+	.string "Burn and Intimidate blunt us all.\p"
+	.string "A strong physical wall buys time.$"
 
 DewfordTown_Gym_Text_BrawlyIntro: @ 81FCF44
 	.string "I'm Brawly!\n"
 	.string "Dewford's Gym Leader!\p"
-	.string "I've been churned in the rough waves\n"
-	.string "of these parts, and I've grown tough\l"
-	.string "in the pitch-black cave!\p"
-	.string "So you wanted to challenge me?\n"
-	.string "Let me see what you're made of!\p"
-	.string "My partners keep momentum like a\n"
-	.string "wave. Let it break, and you're done!$"
+	.string "That Bracelet means you're ready\n"
+	.string "for our full wave!\p"
+	.string "Pachirisu guards Falinks while\n"
+	.string "it commits with No Retreat.\p"
+	.string "Then Mega Hawlucha brings\n"
+	.string "perfect No Guard pressure!$"
 
 DewfordTown_Gym_Text_BrawlyDefeat: @ 81FD008
-	.string "Whoah, wow! You made a much bigger\n"
-	.string "splash than I expected!\p"
-	.string "You swamped me!\p"
+	.string "Whoa! You broke my whole formation!\p"
 	.string "Okay, you've got me.\n"
 	.string "Take this Gym Badge!$"
+
+DewfordTown_Gym_Text_BrawlyNotEnoughPokemon:
+	.string "Bring two healthy Pokémon.\n"
+	.string "A full wave needs two partners.$"
 
 DewfordTown_Gym_Text_ReceivedKnuckleBadge: @ 81FD07D
 	.string "{PLAYER} received the Knuckle Badge\n"

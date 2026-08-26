@@ -38,7 +38,7 @@ Route106_EventScript_ElliotRematch:: @ 81EE50C
 	end
 
 Route106_EventScript_Ned:: @ 81EE523
-	trainerbattle_single TRAINER_NED, Route106_Text_NedIntro, Route106_Text_NedDefeated
+	trainerbattle_double TRAINER_NED, Route106_Text_NedIntro, Route106_Text_NedDefeated, Route106_Text_NedNotEnoughPokemon
 	msgbox Route106_Text_NedPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -46,4 +46,3 @@ Route106_Text_TrainerTips: @ 81EE53A
 	.string "Trainer Tips\p"
 	.string "Advice on catching Pokémon with a Rod:\n"
 	.string "Press the A Button if you get a bite.$"
-

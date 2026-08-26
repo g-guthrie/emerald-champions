@@ -9,11 +9,13 @@
 #include "math_util.h"
 #include "palette.h"
 #include "random.h"
+#include "reshow_battle_screen.h"
 #include "scanline_effect.h"
 #include "sound.h"
 #include "trig.h"
 #include "util.h"
 #include "constants/rgb.h"
+#include "constants/abilities.h"
 #include "constants/songs.h"
 #include "constants/moves.h"
 
@@ -6271,77 +6273,459 @@ static void AnimHornHit_Step(struct Sprite* sprite)
         DestroyAnimSprite(sprite);
 }
 
-void AnimTask_DoubleTeam(u8 taskId)
-{
-    u16 i;
-    int obj;
-    u16 r3;
-    u16 r4;
-    struct Task* task = &gTasks[taskId];
-    task->data[0] = GetAnimBattlerSpriteId(ANIM_ATTACKER);
-    task->data[1] = AllocSpritePalette(ANIM_TAG_BENT_SPOON);
-    r3 = (task->data[1] * 16) + 0x100;
-    r4 = (gSprites[task->data[0]].oam.paletteNum + 16) << 4;
-    for (i = 1; i < 16; i++)
-        gPlttBufferUnfaded[r3 + i] = gPlttBufferUnfaded[r4 + i];
+// Double Team and Ally Switch share the same afterimage effect. Ally Switch
+// additionally exchanges all battler state once the two sprites cross.
+#define tBattlerSpriteId    data[0]
+#define tSpoonPal           data[1]
+#define tBlendSpritesCount  data[3]
+#define tBattlerId          data[4]
+#define tIsAllySwitch       data[5]
 
-    BlendPalette(r3, 16, 11, RGB(0, 0, 0));
-    task->data[3] = 0;
-    i = 0;
-    while (i < 2 && (obj = CloneBattlerSpriteWithBlend(0)) >= 0)
+#define sCounter            data[0]
+#define sSinIndex           data[1]
+#define sTaskId             data[2]
+#define sCounter2           data[3]
+#define sSinAmplitude       data[4]
+#define sSinIndexMod        data[5]
+#define sBattlerFlank       data[6]
+
+union AllySwitchSwapBuffer
+{
+    struct BattlePokemon battleMon;
+    struct BattleEnigmaBerry enigmaBerry;
+    struct DisableStruct disable;
+    struct SpecialStatus special;
+    struct ProtectStruct protect;
+    struct BattleSpriteInfo spriteInfo;
+    struct Illusion illusion;
+    struct TotemBoost totemBoost;
+};
+
+static EWRAM_DATA union AllySwitchSwapBuffer sAllySwitchSwapBuffer = {0};
+
+static void SwapStructData(void *a, void *b, u32 size)
+{
+    memcpy(&sAllySwitchSwapBuffer, a, size);
+    memcpy(a, b, size);
+    memcpy(b, &sAllySwitchSwapBuffer, size);
+}
+
+static void PrepareDoubleTeamAnim(u8 taskId, u8 animBattler, bool8 isAllySwitch)
+{
+    s32 i;
+    s16 spriteId;
+    u16 battlerPalOffset;
+    u16 spoonPalOffset;
+    struct Task *task = &gTasks[taskId];
+
+    task->tBattlerSpriteId = GetAnimBattlerSpriteId(animBattler);
+    task->tBattlerId = GetAnimBattlerId(animBattler);
+    task->tIsAllySwitch = isAllySwitch;
+    task->tBlendSpritesCount = 0;
+    task->tSpoonPal = AllocSpritePalette(ANIM_TAG_BENT_SPOON);
+
+    if (task->tSpoonPal != 0xFF && task->tBattlerSpriteId < MAX_SPRITES)
     {
-        gSprites[obj].oam.paletteNum = task->data[1];
-        gSprites[obj].data[0] = 0;
-        gSprites[obj].data[1] = i << 7;
-        gSprites[obj].data[2] = taskId;
-        gSprites[obj].callback = AnimDoubleTeam;
-        task->data[3]++;
-        i++;
+        spoonPalOffset = task->tSpoonPal * 16 + 0x100;
+        battlerPalOffset = (gSprites[task->tBattlerSpriteId].oam.paletteNum + 16) << 4;
+        for (i = 1; i < 16; i++)
+            gPlttBufferUnfaded[spoonPalOffset + i] = gPlttBufferUnfaded[battlerPalOffset + i];
+        BlendPalette(spoonPalOffset, 16, 11, RGB_BLACK);
+
+        for (i = 0; i < (isAllySwitch ? 1 : 2); i++)
+        {
+            spriteId = CloneBattlerSpriteWithBlend(animBattler);
+            if (spriteId < 0)
+                break;
+            gSprites[spriteId].oam.paletteNum = task->tSpoonPal;
+            gSprites[spriteId].sCounter = 0;
+            gSprites[spriteId].sSinIndex = i << 7;
+            gSprites[spriteId].sTaskId = taskId;
+            if (gBattleAnimAttacker & BIT_FLANK)
+                gSprites[spriteId].sBattlerFlank = (animBattler != ANIM_ATTACKER);
+            else
+                gSprites[spriteId].sBattlerFlank = (animBattler == ANIM_ATTACKER);
+            if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_OPPONENT)
+                gSprites[spriteId].sBattlerFlank ^= 1;
+            gSprites[spriteId].callback = AnimDoubleTeam;
+            task->tBlendSpritesCount++;
+        }
     }
 
     task->func = AnimTask_DoubleTeam_Step;
-    if (GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker) == 1)
+    if (GetBattlerSpriteBGPriorityRank(task->tBattlerId) == 1)
         ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_BG1_ON);
     else
         ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_BG2_ON);
 }
 
+void AnimTask_DoubleTeam(u8 taskId)
+{
+    PrepareDoubleTeamAnim(taskId, ANIM_ATTACKER, FALSE);
+}
+
+static void SwapBattlerReference(u8 *reference, u8 battler, u8 partner)
+{
+    if (*reference == battler)
+        *reference = partner;
+    else if (*reference == partner)
+        *reference = battler;
+}
+
+static u8 SwapBattlerFlags(u8 flags, u8 battler, u8 partner)
+{
+    bool8 battlerSet = flags & gBitTable[battler];
+    bool8 partnerSet = flags & gBitTable[partner];
+
+    flags &= ~(gBitTable[battler] | gBitTable[partner]);
+    if (battlerSet)
+        flags |= gBitTable[partner];
+    if (partnerSet)
+        flags |= gBitTable[battler];
+    return flags;
+}
+
+static void SwapAllySwitchAttractReferences(u8 battler, u8 partner)
+{
+    s32 i;
+
+    // A Pokemon stays infatuated with the same Pokemon, not its old position.
+    for (i = 0; i < gBattlersCount; i++)
+    {
+        if (i == battler || i == partner)
+            continue;
+
+        if (gBattleMons[i].status2 & STATUS2_INFATUATED_WITH(battler))
+        {
+            gBattleMons[i].status2 &= ~STATUS2_INFATUATED_WITH(battler);
+            gBattleMons[i].status2 |= STATUS2_INFATUATED_WITH(partner);
+        }
+        else if (gBattleMons[i].status2 & STATUS2_INFATUATED_WITH(partner))
+        {
+            gBattleMons[i].status2 &= ~STATUS2_INFATUATED_WITH(partner);
+            gBattleMons[i].status2 |= STATUS2_INFATUATED_WITH(battler);
+        }
+    }
+}
+
+static void SwapAllySwitchLastTakenMoves(u8 battler, u8 partner)
+{
+    s32 i;
+    u32 temp;
+
+    // Both dimensions identify Pokemon: [target][attacker].
+    for (i = 0; i < gBattlersCount; i++)
+        SWAP(gBattleStruct->lastTakenMoveFrom[battler][i], gBattleStruct->lastTakenMoveFrom[partner][i], temp);
+    for (i = 0; i < gBattlersCount; i++)
+        SWAP(gBattleStruct->lastTakenMoveFrom[i][battler], gBattleStruct->lastTakenMoveFrom[i][partner], temp);
+}
+
+static void SwapAllySwitchBattlerReferences(u8 battler, u8 partner)
+{
+    s32 i;
+
+    for (i = 0; i < gBattlersCount; i++)
+    {
+        if (gBattleMons[i].status2 & STATUS2_ESCAPE_PREVENTION)
+            SwapBattlerReference(&gDisableStructs[i].battlerPreventingEscape, battler, partner);
+        if (gStatuses3[i] & STATUS3_ALWAYS_HITS)
+            SwapBattlerReference(&gDisableStructs[i].battlerWithSureHit, battler, partner);
+        if (gBattleMons[i].status2 & STATUS2_WRAPPED)
+            SwapBattlerReference(&gBattleStruct->wrappedBy[i], battler, partner);
+        if (gProtectStructs[i].physicalDmg)
+            SwapBattlerReference(&gProtectStructs[i].physicalBattlerId, battler, partner);
+        if (gProtectStructs[i].specialDmg)
+            SwapBattlerReference(&gProtectStructs[i].specialBattlerId, battler, partner);
+        if (gSpecialStatuses[i].physicalDmg)
+            SwapBattlerReference(&gSpecialStatuses[i].physicalBattlerId, battler, partner);
+        if (gSpecialStatuses[i].specialDmg)
+            SwapBattlerReference(&gSpecialStatuses[i].specialBattlerId, battler, partner);
+        if (gSpecialStatuses[i].statLowered)
+            SwapBattlerReference(&gSpecialStatuses[i].changedStatsBattlerId, battler, partner);
+        if (gTakenDmg[i])
+            SwapBattlerReference(&gTakenDmgByBattler[i], battler, partner);
+        if (gLastHitBy[i] != 0xFF)
+            SwapBattlerReference(&gLastHitBy[i], battler, partner);
+        if (gLastMoves[i] != MOVE_NONE)
+            SwapBattlerReference(&gBattleStruct->lastMoveTarget[i], battler, partner);
+    }
+
+    SwapAllySwitchAttractReferences(battler, partner);
+}
+
+static void SwapAllySwitchMonState(u8 battler, u8 partner)
+{
+    s32 i;
+    u32 temp;
+
+    SWAP(gBattleStruct->wrappedMove[battler], gBattleStruct->wrappedMove[partner], temp);
+    SWAP(gBattleStruct->wrappedBy[battler], gBattleStruct->wrappedBy[partner], temp);
+    SWAP(gBattleStruct->ateBoost[battler], gBattleStruct->ateBoost[partner], temp);
+    SWAP(gBattleStruct->debugHoldEffects[battler], gBattleStruct->debugHoldEffects[partner], temp);
+    for (i = 0; i < ARRAY_COUNT(gBattleStruct->roostTypes[battler]); i++)
+        SWAP(gBattleStruct->roostTypes[battler][i], gBattleStruct->roostTypes[partner][i], temp);
+
+    gBattleStruct->lastMoveFailed = SwapBattlerFlags(gBattleStruct->lastMoveFailed, battler, partner);
+    SwapAllySwitchLastTakenMoves(battler, partner);
+    SwapStructData(&gEnigmaBerries[battler], &gEnigmaBerries[partner], sizeof(struct BattleEnigmaBerry));
+    SwapStructData(&gTotemBoosts[battler], &gTotemBoosts[partner], sizeof(struct TotemBoost));
+}
+
+static void ReloadAllySwitchBattlerSprite(u8 battler, struct Pokemon *party)
+{
+    struct Pokemon *mon = &party[gBattlerPartyIndexes[battler]];
+
+    if (GetBattlerSide(battler) == B_SIDE_OPPONENT)
+        BattleLoadOpponentMonSpriteGfx(mon, battler);
+    else
+        BattleLoadPlayerMonSpriteGfx(mon, battler);
+
+    CreateBattlerSprite(battler);
+    UpdateHealthboxAttribute(gHealthboxSpriteIds[battler], mon, HEALTHBOX_ALL);
+    DestroyMegaIndicatorSprite(gHealthboxSpriteIds[battler]);
+    SetHealthboxSpriteVisible(gHealthboxSpriteIds[battler]);
+    if (GetBattlerSide(battler) == B_SIDE_OPPONENT)
+        SetBattlerShadowSpriteCallback(battler, GetMonData(mon, MON_DATA_SPECIES));
+}
+
+static void SwapAllySwitchMoveData(u8 battler, u8 partner)
+{
+    u32 temp;
+    const u8 *scriptTemp;
+
+    SWAP(gBattleStruct->chosenMovePositions[battler], gBattleStruct->chosenMovePositions[partner], temp);
+    SWAP(gChosenMoveByBattler[battler], gChosenMoveByBattler[partner], temp);
+    SWAP(gBattleStruct->moveTarget[battler], gBattleStruct->moveTarget[partner], temp);
+    SWAP(gMoveSelectionCursor[battler], gMoveSelectionCursor[partner], temp);
+    SWAP(gLockedMoves[battler], gLockedMoves[partner], temp);
+    SWAP(gLastPrintedMoves[battler], gLastPrintedMoves[partner], temp);
+    SWAP(gLastMoves[battler], gLastMoves[partner], temp);
+    SWAP(gLastLandedMoves[battler], gLastLandedMoves[partner], temp);
+    SWAP(gLastHitByType[battler], gLastHitByType[partner], temp);
+    SWAP(gLastResultingMoves[battler], gLastResultingMoves[partner], temp);
+    SWAP(gLastHitBy[battler], gLastHitBy[partner], temp);
+    SWAP(gActionSelectionCursor[battler], gActionSelectionCursor[partner], temp);
+    SWAP(gChosenActionByBattler[battler], gChosenActionByBattler[partner], temp);
+    scriptTemp = gSelectionBattleScripts[battler];
+    gSelectionBattleScripts[battler] = gSelectionBattleScripts[partner];
+    gSelectionBattleScripts[partner] = scriptTemp;
+    scriptTemp = gPalaceSelectionBattleScripts[battler];
+    gPalaceSelectionBattleScripts[battler] = gPalaceSelectionBattleScripts[partner];
+    gPalaceSelectionBattleScripts[partner] = scriptTemp;
+}
+
+static void AnimTask_AllySwitchDataSwap(u8 taskId)
+{
+    s32 i;
+    s32 j;
+    u32 temp;
+    u8 battler = gBattlerAttacker;
+    u8 partner = BATTLE_PARTNER(battler);
+    struct Pokemon *party = GetBattlerSide(battler) == B_SIDE_PLAYER ? gPlayerParty : gEnemyParty;
+
+    SwapStructData(&gBattleMons[battler], &gBattleMons[partner], sizeof(struct BattlePokemon));
+    SwapStructData(&gDisableStructs[battler], &gDisableStructs[partner], sizeof(struct DisableStruct));
+    SwapStructData(&gSpecialStatuses[battler], &gSpecialStatuses[partner], sizeof(struct SpecialStatus));
+    SwapStructData(&gProtectStructs[battler], &gProtectStructs[partner], sizeof(struct ProtectStruct));
+    SwapStructData(&gBattleSpritesDataPtr->battlerData[battler], &gBattleSpritesDataPtr->battlerData[partner], sizeof(struct BattleSpriteInfo));
+    SwapStructData(&gBattleStruct->illusion[battler], &gBattleStruct->illusion[partner], sizeof(struct Illusion));
+
+    // Sprite visibility is tied to the screen slot during this animation, not
+    // to the Pokémon data being exchanged.
+    SWAP(gBattleSpritesDataPtr->battlerData[battler].invisible,
+         gBattleSpritesDataPtr->battlerData[partner].invisible, temp);
+    SWAP(gTransformedPersonalities[battler], gTransformedPersonalities[partner], temp);
+    SWAP(gStatuses3[battler], gStatuses3[partner], temp);
+    SWAP(gStatuses4[battler], gStatuses4[partner], temp);
+    SWAP(gBattleMonForms[battler], gBattleMonForms[partner], temp);
+    SWAP(gTakenDmg[battler], gTakenDmg[partner], temp);
+    SWAP(gTakenDmgByBattler[battler], gTakenDmgByBattler[partner], temp);
+    SWAP(gBattleStruct->lastTakenMove[battler], gBattleStruct->lastTakenMove[partner], temp);
+    SWAP(gBattleStruct->choicedMove[battler], gBattleStruct->choicedMove[partner], temp);
+    SWAP(gBattleStruct->changedItems[battler], gBattleStruct->changedItems[partner], temp);
+    SWAP(gBattleStruct->sameMoveTurns[battler], gBattleStruct->sameMoveTurns[partner], temp);
+    SWAP(gBattleStruct->lastMoveTarget[battler], gBattleStruct->lastMoveTarget[partner], temp);
+    SWAP(gBattleStruct->tracedAbility[battler], gBattleStruct->tracedAbility[partner], temp);
+    SWAP(gBattleStruct->hpBefore[battler], gBattleStruct->hpBefore[partner], temp);
+    SWAP(gBattleStruct->mega.evolvedSpecies[battler], gBattleStruct->mega.evolvedSpecies[partner], temp);
+    SWAP(gBattleStruct->mega.primalRevertedSpecies[battler], gBattleStruct->mega.primalRevertedSpecies[partner], temp);
+    SwapAllySwitchMonState(battler, partner);
+    SwapAllySwitchMoveData(battler, partner);
+
+    // Keep both queued actions alive after their battler IDs exchange.
+    for (i = 0; i < gBattlersCount; i++)
+    {
+        if (gBattlerByTurnOrder[i] == battler || gBattlerByTurnOrder[i] == partner)
+        {
+            for (j = i + 1; j < gBattlersCount; j++)
+            {
+                if (gBattlerByTurnOrder[j] == battler || gBattlerByTurnOrder[j] == partner)
+                    break;
+            }
+            if (j < gBattlersCount)
+            {
+                SWAP(gBattlerByTurnOrder[i], gBattlerByTurnOrder[j], temp);
+                SWAP(gActionsByTurnOrder[i], gActionsByTurnOrder[j], temp);
+            }
+            break;
+        }
+    }
+
+    SwitchTwoBattlersInParty(battler, partner);
+    SWAP(gBattlerPartyIndexes[battler], gBattlerPartyIndexes[partner], temp);
+
+    // Delayed attacks remember their user, while Wish remembers the party mon
+    // whose nickname and max HP should be used when it resolves.
+    for (i = 0; i < gBattlersCount; i++)
+    {
+        if (gWishFutureKnock.futureSightCounter[i])
+            SwapBattlerReference(&gWishFutureKnock.futureSightAttacker[i], battler, partner);
+    }
+    if (gWishFutureKnock.wishCounter[battler] || gWishFutureKnock.wishCounter[partner])
+        SWAP(gWishFutureKnock.wishPartyId[battler], gWishFutureKnock.wishPartyId[partner], temp);
+
+    // Effects that point at a Pokemon must follow it to its new battler slot.
+    SwapAllySwitchBattlerReferences(battler, partner);
+
+    if (gSideTimers[GetBattlerSide(battler)].reflectTimer)
+        SwapBattlerReference(&gSideTimers[GetBattlerSide(battler)].reflectBattlerId, battler, partner);
+    if (gSideTimers[GetBattlerSide(battler)].lightscreenTimer)
+        SwapBattlerReference(&gSideTimers[GetBattlerSide(battler)].lightscreenBattlerId, battler, partner);
+    if (gSideTimers[GetBattlerSide(battler)].mistTimer)
+        SwapBattlerReference(&gSideTimers[GetBattlerSide(battler)].mistBattlerId, battler, partner);
+    if (gSideTimers[GetBattlerSide(battler)].safeguardTimer)
+        SwapBattlerReference(&gSideTimers[GetBattlerSide(battler)].safeguardBattlerId, battler, partner);
+    if (gSideTimers[GetBattlerSide(battler)].followmeTimer)
+    {
+        if (gSideTimers[GetBattlerSide(battler)].followmeTarget == battler)
+            gSideTimers[GetBattlerSide(battler)].followmeTarget = partner;
+        else if (gSideTimers[GetBattlerSide(battler)].followmeTarget == partner)
+            gSideTimers[GetBattlerSide(battler)].followmeTarget = battler;
+    }
+    if (gSideTimers[GetBattlerSide(battler)].auroraVeilTimer)
+        SwapBattlerReference(&gSideTimers[GetBattlerSide(battler)].auroraVeilBattlerId, battler, partner);
+    if (gSideTimers[GetBattlerSide(battler)].tailwindTimer)
+        SwapBattlerReference(&gSideTimers[GetBattlerSide(battler)].tailwindBattlerId, battler, partner);
+    if (gSideTimers[GetBattlerSide(battler)].luckyChantTimer)
+        SwapBattlerReference(&gSideTimers[GetBattlerSide(battler)].luckyChantBattlerId, battler, partner);
+    for (i = 0; i < ARRAY_COUNT(gSideTimers); i++)
+        SwapBattlerReference(&gSideTimers[i].stickyWebBattlerId, battler, partner);
+
+    // Snipe Shot, Stalwart and Propeller Tail follow the original Pokémon;
+    // ordinary attacks continue to hit the selected battlefield slot.
+    for (i = 0; i < gBattlersCount; i++)
+    {
+        u16 ability = GetBattlerAbility(i);
+        if (GetBattlerSide(gBattleStruct->moveTarget[i]) == GetBattlerSide(battler)
+         && (gChosenMoveByBattler[i] == MOVE_SNIPE_SHOT
+          || ability == ABILITY_PROPELLER_TAIL
+          || ability == ABILITY_STALWART))
+            gBattleStruct->moveTarget[i] ^= BIT_FLANK;
+    }
+
+    if (gBattlerSpriteIds[battler] < MAX_SPRITES)
+        DestroySprite(&gSprites[gBattlerSpriteIds[battler]]);
+    if (gBattlerSpriteIds[partner] < MAX_SPRITES)
+        DestroySprite(&gSprites[gBattlerSpriteIds[partner]]);
+
+    // The creation order matters for battler tile/palette slots.
+    if (battler & BIT_FLANK)
+    {
+        ReloadAllySwitchBattlerSprite(battler, party);
+        ReloadAllySwitchBattlerSprite(partner, party);
+    }
+    else
+    {
+        ReloadAllySwitchBattlerSprite(partner, party);
+        ReloadAllySwitchBattlerSprite(battler, party);
+    }
+
+    gBattleScripting.battler = partner;
+    DestroyAnimVisualTask(taskId);
+}
+
 static void AnimTask_DoubleTeam_Step(u8 taskId)
 {
-    struct Task* task = &gTasks[taskId];
-    if (!task->data[3])
+    struct Task *task = &gTasks[taskId];
+
+    if (task->tBlendSpritesCount == 0)
     {
-        if (GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker) == 1)
+        if (GetBattlerSpriteBGPriorityRank(task->tBattlerId) == 1)
             SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_BG1_ON);
         else
             SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_BG2_ON);
 
-        FreeSpritePaletteByTag(ANIM_TAG_BENT_SPOON);
-        DestroyAnimVisualTask(taskId);
+        if (task->tSpoonPal != 0xFF)
+            FreeSpritePaletteByTag(ANIM_TAG_BENT_SPOON);
+        if (task->tIsAllySwitch && task->tBattlerId == BATTLE_PARTNER(gBattlerAttacker))
+            task->func = AnimTask_AllySwitchDataSwap;
+        else
+            DestroyAnimVisualTask(taskId);
     }
 }
 
-static void AnimDoubleTeam(struct Sprite* sprite)
+static void AnimDoubleTeam(struct Sprite *sprite)
 {
-    if (++sprite->data[3] > 1)
+    if (++sprite->sCounter2 > 1)
     {
-        sprite->data[3] = 0;
-        sprite->data[0]++;
+        sprite->sCounter2 = 0;
+        sprite->sCounter++;
     }
 
-    if (sprite->data[0] > 64)
+    if (sprite->sCounter > 64)
     {
-        gTasks[sprite->data[2]].data[3]--;
+        gTasks[sprite->sTaskId].tBlendSpritesCount--;
         obj_delete_but_dont_free_vram(sprite);
     }
     else
     {
-        sprite->data[4] = gSineTable[sprite->data[0]] / 6;
-        sprite->data[5] = gSineTable[sprite->data[0]] / 13;
-        sprite->data[1] = (sprite->data[1] + sprite->data[5]) & 0xFF;
-        sprite->x2 = Sin(sprite->data[1], sprite->data[4]);
+        sprite->sSinAmplitude = gSineTable[sprite->sCounter] / 6;
+        sprite->sSinIndexMod = gSineTable[sprite->sCounter] / 13;
+        sprite->sSinIndex = (sprite->sSinIndex + sprite->sSinIndexMod) & 0xFF;
+        sprite->x2 = Sin(sprite->sSinIndex, sprite->sSinAmplitude);
+        if (gTasks[sprite->sTaskId].tIsAllySwitch)
+        {
+            if (sprite->sBattlerFlank)
+                sprite->x2 = abs(sprite->x2);
+            else
+                sprite->x2 = -abs(sprite->x2);
+        }
     }
 }
+
+void AnimTask_AllySwitchAttacker(u8 taskId)
+{
+    PrepareDoubleTeamAnim(taskId, ANIM_ATTACKER, TRUE);
+    if (gBattlerSpriteIds[gBattlerAttacker] < MAX_SPRITES)
+        gSprites[gBattlerSpriteIds[gBattlerAttacker]].invisible = TRUE;
+    if (gBattlerSpriteIds[BATTLE_PARTNER(gBattlerAttacker)] < MAX_SPRITES)
+        gSprites[gBattlerSpriteIds[BATTLE_PARTNER(gBattlerAttacker)]].invisible = TRUE;
+
+    // Dig/Dive-style invisibility follows the Pokémon rather than the slot.
+    if (gBattleSpritesDataPtr->battlerData[BATTLE_PARTNER(gBattlerAttacker)].invisible)
+    {
+        gBattleSpritesDataPtr->battlerData[BATTLE_PARTNER(gBattlerAttacker)].invisible = FALSE;
+        gBattleSpritesDataPtr->battlerData[gBattlerAttacker].invisible = TRUE;
+    }
+}
+
+void AnimTask_AllySwitchPartner(u8 taskId)
+{
+    PrepareDoubleTeamAnim(taskId, ANIM_ATK_PARTNER, TRUE);
+}
+
+#undef tBattlerSpriteId
+#undef tSpoonPal
+#undef tBlendSpritesCount
+#undef tBattlerId
+#undef tIsAllySwitch
+#undef sCounter
+#undef sSinIndex
+#undef sTaskId
+#undef sCounter2
+#undef sSinAmplitude
+#undef sSinIndexMod
+#undef sBattlerFlank
 
 static void AnimSuperFang(struct Sprite* sprite)
 {

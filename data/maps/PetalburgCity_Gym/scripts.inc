@@ -448,15 +448,15 @@ PetalburgCity_Gym_EventScript_NormanGiveKeystone::
 	msgbox PetalburgCity_Gym_Text_NormanIntro, MSGBOX_DEFAULT
 	goto_if_set FLAG_SYS_RECEIVED_KEYSTONE, PetalburgCity_Gym_EventScript_NormanBattle
 	msgbox PetalburgCity_Gym_Text_NormanStevenFallback, MSGBOX_DEFAULT
-	giveitem ITEM_MEGA_BRACELET
+	special TryGiveVerdantMegaKit
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_SYS_RECEIVED_KEYSTONE
+	playfanfare MUS_OBTAIN_ITEM
+	message PetalburgCity_Gym_Text_NormanReceivedMegaKit
+	waitmessage
+	waitfanfare
 	msgbox PetalburgCity_Gym_Text_NormanMegaBracelet, MSGBOX_DEFAULT
-	giveitem ITEM_SCEPTILITE
-	waitmessage
-	giveitem ITEM_BLAZIKENITE
-	waitmessage
-	giveitem ITEM_SWAMPERTITE
-	waitmessage
 	msgbox PetalburgCity_Gym_Text_NormanWheneverReady, MSGBOX_DEFAULT
 	closemessage
 	end
@@ -1427,6 +1427,10 @@ PetalburgCity_Gym_Text_NormanStevenFallback:
 	.string "receive something in Granite Cave.\p"
 	.string "If you missed it, take it now.$"
 
+PetalburgCity_Gym_Text_NormanReceivedMegaKit:
+	.string "{PLAYER} received a Mega Bracelet\n"
+	.string "and three Mega Stones!$"
+
 PetalburgCity_Gym_Text_NormanMegaBracelet:
 	.string "That Mega Bracelet will allow certain\n"
 	.string "Pokémon to Mega Evolve in battle.\p"
@@ -1440,7 +1444,7 @@ PetalburgCity_Gym_Text_NormanMegaBracelet:
 	.string "Pokémon are ready for it.\p"
 	.string "If you can, give it a try in our\n"
 	.string "battle!\p"
-	.string "Here, take these Mega Stones too.$"
+	.string "Use those Mega Stones well.$"
 
 PetalburgCity_Gym_Text_NormanWheneverReady:
 	.string "Now then, {PLAYER}!\n"

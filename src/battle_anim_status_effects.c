@@ -1,6 +1,7 @@
 #include "global.h"
 #include "battle.h"
 #include "battle_anim.h"
+#include "battle_util.h"
 #include "decompress.h"
 #include "gpu_regs.h"
 #include "palette.h"
@@ -107,7 +108,7 @@ static const union AnimCmd sAnim_SpinningSparkle[] =
     ANIMCMD_END
 };
 
-static const union AnimCmd *const sAnims_SpinningSparkle[] =
+const union AnimCmd *const gAnims_SpinningSparkle[] =
 {
     sAnim_SpinningSparkle
 };
@@ -117,7 +118,7 @@ const struct SpriteTemplate gSpinningSparkleSpriteTemplate =
     .tileTag = ANIM_TAG_SPARKLE_4,
     .paletteTag = ANIM_TAG_SPARKLE_4,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = sAnims_SpinningSparkle,
+    .anims = gAnims_SpinningSparkle,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimSpinningSparkle,
@@ -389,6 +390,34 @@ void AnimTask_FrozenIceCube(u8 taskId)
         x -= 6;
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
+    spriteId = CreateSprite(&gFrozenIceCubeSpriteTemplate, x, y, 4);
+    if (GetSpriteTileStartByTag(ANIM_TAG_ICE_CUBE) == 0xFFFF)
+        gSprites[spriteId].invisible = TRUE;
+    SetSubspriteTables(&gSprites[spriteId], sFrozenIceCubeSubspriteTable);
+    gTasks[taskId].data[15] = spriteId;
+    gTasks[taskId].func = AnimTask_FrozenIceCube_Step1;
+}
+
+void AnimTask_CentredFrozenIceCube(u8 taskId)
+{
+    s16 x, y;
+    u8 spriteId;
+    u8 target = gBattleAnimTarget;
+    u8 partner = BATTLE_PARTNER(target);
+
+    if (!IsDoubleBattle() || IsAlly(gBattleAnimAttacker, target))
+    {
+        x = GetBattlerSpriteCoord(target, BATTLER_COORD_X_2);
+        y = GetBattlerSpriteCoord(target, BATTLER_COORD_Y_PIC_OFFSET);
+    }
+    else
+    {
+        x = (GetBattlerSpriteCoord(target, BATTLER_COORD_X_2) + GetBattlerSpriteCoord(partner, BATTLER_COORD_X_2)) / 2;
+        y = (GetBattlerSpriteCoord(target, BATTLER_COORD_Y_PIC_OFFSET) + GetBattlerSpriteCoord(partner, BATTLER_COORD_Y_PIC_OFFSET)) / 2;
+    }
+
+    x -= 32;
+    y -= 36;
     spriteId = CreateSprite(&gFrozenIceCubeSpriteTemplate, x, y, 4);
     if (GetSpriteTileStartByTag(ANIM_TAG_ICE_CUBE) == 0xFFFF)
         gSprites[spriteId].invisible = TRUE;

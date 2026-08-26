@@ -6031,7 +6031,7 @@ static u8 GetMonNicknameLanguage(u8 *nickname)
                 || *nickname == CHAR_DBL_QUOT_LEFT
                 || *nickname == CHAR_DBL_QUOT_RIGHT
                 || *nickname == CHAR_SGL_QUOT_LEFT
-                || *nickname == CHAR_DBL_QUOT_LEFT) // Most likely a typo, CHAR_SGL_QUOT_RIGHT should be here instead.
+                || *nickname == CHAR_SGL_QUOT_RIGHT)
             {
                 nickname++;
             }
@@ -6108,4 +6108,3 @@ void StripPlayerAndMonNamesForLinkContest(struct ContestPokemon *mon, s32 langua
         name[PLAYER_NAME_LENGTH] = EOS;
     }
 }
-

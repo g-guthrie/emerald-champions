@@ -8,6 +8,7 @@ void ResetWinStreaks(void);
 u32 GetCurrentFacilityWinStreak(void);
 void ResetFrontierTrainerIds(void);
 u8 GetPlayerSymbolCountForFacility(u8 facility);
+const u8 *GetFrontierBrainStreakAppearances(u8 facility);
 void ShowRankingHallRecordsWindow(void);
 void ScrollRankingHallRecordsWindow(void);
 void ClearRankingHallRecords(void);
@@ -24,6 +25,7 @@ u16 GetFrontierBrainMonMove(u8 monId, u8 moveSlotId);
 u8 GetFrontierBrainMonNature(u8 monId);
 u8 GetFrontierBrainMonEvs(u8 monId, u8 evStatId);
 s32 GetFronterBrainSymbol(void);
+void ClearEnemyPartyAfterChallenge(void);
 
 extern const u16 gFrontierBannedSpecies[];
 

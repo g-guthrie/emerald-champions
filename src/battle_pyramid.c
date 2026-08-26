@@ -2,6 +2,7 @@
 #include "battle_pyramid.h"
 #include "battle_pyramid_bag.h"
 #include "event_data.h"
+#include "frontier_util.h"
 #include "battle.h"
 #include "battle_setup.h"
 #include "battle_tower.h"
@@ -930,6 +931,7 @@ static void SetBattlePyramidData(void)
 
 static void SavePyramidChallenge(void)
 {
+    ClearEnemyPartyAfterChallenge();
     gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
     VarSet(VAR_TEMP_0, 0);
     gSaveBlock2Ptr->frontier.challengePaused = TRUE;
@@ -1204,29 +1206,58 @@ static void BattlePyramidStartMenu(void)
 static void RestorePyramidPlayerParty(void)
 {
     int i, j, k, l;
+    u8 matchedMons = 0;
+
+    ClearSelectedPartyOrder();
 
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
         int partyIndex = gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1;
+        u32 otId;
+        u32 personality;
+
+        if (partyIndex < 0 || partyIndex >= PARTY_SIZE)
+            continue;
+
+        otId = GetMonData(&gSaveBlock1Ptr->playerParty[partyIndex], MON_DATA_OT_ID, NULL);
+        personality = GetMonData(&gSaveBlock1Ptr->playerParty[partyIndex], MON_DATA_PERSONALITY, NULL);
         for (j = 0; j < FRONTIER_PARTY_SIZE; j++)
         {
-            if (GetMonData(&gSaveBlock1Ptr->playerParty[partyIndex], MON_DATA_SPECIES, NULL) == GetMonData(&gPlayerParty[j], MON_DATA_SPECIES, NULL))
-            {
-                for (k = 0; k < MAX_MON_MOVES; k++)
-                {
-                    for (l = 0; l < MAX_MON_MOVES; l++)
-                    {
-                        if (GetMonData(&gSaveBlock1Ptr->playerParty[partyIndex], MON_DATA_MOVE1 + l, NULL) == GetMonData(&gPlayerParty[j], MON_DATA_MOVE1 + k, NULL))
-                            break;
-                    }
-                    if (l == MAX_MON_MOVES)
-                        SetMonMoveSlot(&gPlayerParty[j], MOVE_SKETCH, k);
-                }
-                gSaveBlock1Ptr->playerParty[partyIndex] = gPlayerParty[j];
-                gSelectedOrderFromParty[j] = partyIndex + 1;
+            if (!(matchedMons & gBitTable[j])
+             && otId == GetMonData(&gPlayerParty[j], MON_DATA_OT_ID, NULL)
+             && personality == GetMonData(&gPlayerParty[j], MON_DATA_PERSONALITY, NULL))
                 break;
+        }
+
+        // Corrupt or legacy data may lack a usable identity. Keep the old
+        // species match as a bounded fallback, accepting item/form variants.
+        if (j == FRONTIER_PARTY_SIZE)
+        {
+            u16 species = GET_BASE_SPECIES_ID(GetMonData(&gSaveBlock1Ptr->playerParty[partyIndex], MON_DATA_SPECIES, NULL));
+            for (j = 0; j < FRONTIER_PARTY_SIZE; j++)
+            {
+                if (!(matchedMons & gBitTable[j])
+                 && species == GET_BASE_SPECIES_ID(GetMonData(&gPlayerParty[j], MON_DATA_SPECIES, NULL)))
+                    break;
             }
         }
+
+        if (j == FRONTIER_PARTY_SIZE)
+            continue;
+
+        for (k = 0; k < MAX_MON_MOVES; k++)
+        {
+            for (l = 0; l < MAX_MON_MOVES; l++)
+            {
+                if (GetMonData(&gSaveBlock1Ptr->playerParty[partyIndex], MON_DATA_MOVE1 + l, NULL) == GetMonData(&gPlayerParty[j], MON_DATA_MOVE1 + k, NULL))
+                    break;
+            }
+            if (l == MAX_MON_MOVES)
+                SetMonMoveSlot(&gPlayerParty[j], MOVE_SKETCH, k);
+        }
+        gSaveBlock1Ptr->playerParty[partyIndex] = gPlayerParty[j];
+        gSelectedOrderFromParty[j] = partyIndex + 1;
+        matchedMons |= gBitTable[j];
     }
 
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
@@ -1528,7 +1559,7 @@ void GenerateBattlePyramidFloorLayout(u16 *backupMapData, bool8 setPlayerPositio
     int y, x;
     int i;
     u8 entranceSquareId, exitSquareId;
-    u8 *floorLayoutOffsets = AllocZeroed(16);
+    u8 floorLayoutOffsets[16] = {0};
 
     GetPyramidFloorLayoutOffsets(floorLayoutOffsets);
     GetPyramidEntranceAndExitSquareIds(&entranceSquareId, &exitSquareId);
@@ -1573,7 +1604,6 @@ void GenerateBattlePyramidFloorLayout(u16 *backupMapData, bool8 setPlayerPositio
         }
     }
     RunOnLoadMapScript();
-    free(floorLayoutOffsets);
 }
 
 void LoadBattlePyramidObjectEventTemplates(void)
@@ -1656,7 +1686,7 @@ static void SetPyramidObjectPositionsUniformly(u8 objType)
     int squareId;
     u32 bits = 0;
     u8 id = GetPyramidFloorTemplateId();
-    u8 *floorLayoutOffsets = AllocZeroed(16);
+    u8 floorLayoutOffsets[16] = {0};
 
     GetPyramidFloorLayoutOffsets(floorLayoutOffsets);
     squareId = gSaveBlock2Ptr->frontier.pyramidRandoms[2] % 16;
@@ -1702,7 +1732,6 @@ static void SetPyramidObjectPositionsUniformly(u8 objType)
         } while (!(bits & 4) && TrySetPyramidObjectEventPositionInSquare(objType, floorLayoutOffsets, squareId, objectStartIndex + i));
         bits &= 1;
     }
-    free(floorLayoutOffsets);
 }
 
 static bool8 SetPyramidObjectPositionsInAndNearSquare(u8 objType, u8 squareId)
@@ -1714,7 +1743,7 @@ static bool8 SetPyramidObjectPositionsInAndNearSquare(u8 objType, u8 squareId)
     int numPlacedObjects = 0;
     int numObjects;
     u8 id = GetPyramidFloorTemplateId();
-    u8 *floorLayoutOffsets = AllocZeroed(16);
+    u8 floorLayoutOffsets[16] = {0};
 
     GetPyramidFloorLayoutOffsets(floorLayoutOffsets);
     if (objType == OBJ_TRAINERS)
@@ -1744,7 +1773,8 @@ static bool8 SetPyramidObjectPositionsInAndNearSquare(u8 objType, u8 squareId)
                 do
                 {
                     borderedIndex++;
-                    if (sBorderedSquareIds[squareId][borderedIndex] == 0xFF || borderedIndex >= 4)
+                    if (borderedIndex >= ARRAY_COUNT(sBorderedSquareIds[squareId])
+                     || sBorderedSquareIds[squareId][borderedIndex] == 0xFF)
                         borderedIndex = 0;
                     r7 += 2;
                 } while (r7 >> 1 != 4 && TrySetPyramidObjectEventPositionInSquare(objType, floorLayoutOffsets, sBorderedSquareIds[squareId][borderedIndex], objectStartIndex + i));
@@ -1753,7 +1783,8 @@ static bool8 SetPyramidObjectPositionsInAndNearSquare(u8 objType, u8 squareId)
             else
             {
                 borderedIndex++;
-                if (sBorderedSquareIds[squareId][borderedIndex] == 0xFF || borderedIndex >= 4)
+                if (borderedIndex >= ARRAY_COUNT(sBorderedSquareIds[squareId])
+                 || sBorderedSquareIds[squareId][borderedIndex] == 0xFF)
                     borderedIndex = 0;
                 numPlacedObjects++;
             }
@@ -1764,10 +1795,6 @@ static bool8 SetPyramidObjectPositionsInAndNearSquare(u8 objType, u8 squareId)
 
         r7 &= 1;
     }
-    #ifdef BUGFIX
-    free(floorLayoutOffsets);
-    #endif
-
     return (numObjects / 2) > numPlacedObjects;
 }
 
@@ -1780,7 +1807,7 @@ static bool8 SetPyramidObjectPositionsNearSquare(u8 objType, u8 squareId)
     int r8 = 0;
     int numObjects;
     u8 id = GetPyramidFloorTemplateId();
-    u8 *floorLayoutOffsets = AllocZeroed(16);
+    u8 floorLayoutOffsets[16] = {0};
 
     GetPyramidFloorLayoutOffsets(floorLayoutOffsets);
     if (objType == OBJ_TRAINERS)
@@ -1801,7 +1828,8 @@ static bool8 SetPyramidObjectPositionsNearSquare(u8 objType, u8 squareId)
             do
             {
                 borderOffset++;
-                if (sBorderedSquareIds[squareId][borderOffset] == 0xFF || borderOffset >= 4)
+                if (borderOffset >= ARRAY_COUNT(sBorderedSquareIds[squareId])
+                 || sBorderedSquareIds[squareId][borderOffset] == 0xFF)
                     borderOffset = 0;
                 r8++;
             } while (r8 != 4 && TrySetPyramidObjectEventPositionInSquare(objType, floorLayoutOffsets, sBorderedSquareIds[squareId][borderOffset], objectStartIndex + i));
@@ -1810,7 +1838,8 @@ static bool8 SetPyramidObjectPositionsNearSquare(u8 objType, u8 squareId)
         else
         {
             borderOffset++;
-            if (sBorderedSquareIds[squareId][borderOffset] == 0xFF || borderOffset >= 4)
+            if (borderOffset >= ARRAY_COUNT(sBorderedSquareIds[squareId])
+             || sBorderedSquareIds[squareId][borderOffset] == 0xFF)
                 borderOffset = 0;
             numPlacedObjects++;
         }
@@ -1818,10 +1847,6 @@ static bool8 SetPyramidObjectPositionsNearSquare(u8 objType, u8 squareId)
         if (r8 == 4)
             break;
     }
-    #ifdef BUGFIX
-    free(floorLayoutOffsets);
-    #endif
-
     return (numObjects / 2) > numPlacedObjects;
 }
 
@@ -1902,7 +1927,8 @@ static bool8 TrySetPyramidObjectEventPositionAtCoords(u8 objType, u8 x, u8 y, u8
 static void GetPyramidFloorLayoutOffsets(u8 *layoutOffsets)
 {
     int i;
-    int rand = (gSaveBlock2Ptr->frontier.pyramidRandoms[0]) | (gSaveBlock2Ptr->frontier.pyramidRandoms[1] << 16);
+    u32 rand = (u32)gSaveBlock2Ptr->frontier.pyramidRandoms[0]
+             | ((u32)gSaveBlock2Ptr->frontier.pyramidRandoms[1] << 16);
     u8 id = GetPyramidFloorTemplateId();
 
     for (i = 0; i < 16; i++)
@@ -1911,7 +1937,8 @@ static void GetPyramidFloorLayoutOffsets(u8 *layoutOffsets)
         rand >>= 3;
         if (i == 7)
         {
-            rand = (gSaveBlock2Ptr->frontier.pyramidRandoms[2]) | (gSaveBlock2Ptr->frontier.pyramidRandoms[3] << 16);
+            rand = (u32)gSaveBlock2Ptr->frontier.pyramidRandoms[2]
+                 | ((u32)gSaveBlock2Ptr->frontier.pyramidRandoms[3] << 16);
             rand >>= 8;
         }
     }

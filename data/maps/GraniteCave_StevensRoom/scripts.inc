@@ -6,25 +6,25 @@ GraniteCave_StevensRoom_MapScripts:: @ 822DC7A
 GraniteCave_StevensRoom_EventScript_Steven:: @ 822DC7B
 	lock
 	faceplayer
+	goto_if_set FLAG_DELIVERED_STEVEN_LETTER, GraniteCave_StevensRoom_EventScript_TryGiveRewards
 	msgbox GraniteCave_StevensRoom_Text_ImStevenLetterForMe, MSGBOX_DEFAULT
 	setvar VAR_0x8004, ITEM_LETTER
 	call Common_EventScript_PlayerHandedOverTheItem
 	setflag FLAG_DELIVERED_STEVEN_LETTER
-	msgbox GraniteCave_StevensRoom_Text_ThankYouTakeThis, MSGBOX_DEFAULT
-	giveitem ITEM_WIDE_LENS
-	compare VAR_RESULT, FALSE
-	call_if_eq GraniteCave_StevensRoom_EventScript_BagFull
+
+GraniteCave_StevensRoom_EventScript_TryGiveRewards:
 	goto_if_set FLAG_SYS_RECEIVED_KEYSTONE, GraniteCave_StevensRoom_EventScript_RegisterSteven
-	msgbox GraniteCave_StevensRoom_Text_MegaBracelet, MSGBOX_DEFAULT
-	giveitem ITEM_MEGA_BRACELET
+	msgbox GraniteCave_StevensRoom_Text_ThankYouTakeThis, MSGBOX_DEFAULT
+	special TryGiveVerdantStevenRewardBundle
+	compare VAR_RESULT, FALSE
+	goto_if_eq GraniteCave_StevensRoom_EventScript_BagFull
 	setflag FLAG_SYS_RECEIVED_KEYSTONE
+	playfanfare MUS_OBTAIN_ITEM
+	message GraniteCave_StevensRoom_Text_ReceivedRewards
+	waitmessage
+	waitfanfare
+	msgbox GraniteCave_StevensRoom_Text_MegaBracelet, MSGBOX_DEFAULT
 	msgbox GraniteCave_StevensRoom_Text_StarterMegaStones, MSGBOX_DEFAULT
-	giveitem ITEM_SCEPTILITE
-	waitmessage
-	giveitem ITEM_BLAZIKENITE
-	waitmessage
-	giveitem ITEM_SWAMPERTITE
-	waitmessage
 GraniteCave_StevensRoom_EventScript_RegisterSteven:
 	msgbox GraniteCave_StevensRoom_Text_CouldBecomeChampionLetsRegister, MSGBOX_DEFAULT
 	closemessage
@@ -69,7 +69,8 @@ GraniteCave_StevensRoom_EventScript_StevenExitSouth:: @ 822DD2A
 
 GraniteCave_StevensRoom_EventScript_BagFull:: @ 822DD3C
 	msgbox GraniteCave_StevensRoom_Text_OhBagIsFull, MSGBOX_DEFAULT
-	return
+	release
+	end
 
 GraniteCave_StevensRoom_Movement_StevenExit: @ 822DD45
 	walk_up
@@ -114,6 +115,11 @@ GraniteCave_StevensRoom_Text_ThankYouTakeThis: @ 822DDBD
 	.string "It makes the holder's moves more\n"
 	.string "accurate.$"
 
+GraniteCave_StevensRoom_Text_ReceivedRewards:
+	.string "{PLAYER} received a Wide Lens,\n"
+	.string "a Mega Bracelet, and three\l"
+	.string "Mega Stones from Steven!$"
+
 GraniteCave_StevensRoom_Text_MegaBracelet:
 	.string "Steven: There's something else.\p"
 	.string "Rare stones react to the bond between\n"
@@ -147,5 +153,6 @@ GraniteCave_StevensRoom_Text_IveGotToHurryAlong: @ 822DF8C
 	.string "Now, I've got to hurry along.$"
 
 GraniteCave_StevensRoom_Text_OhBagIsFull: @ 822DFAA
-	.string "Oh, your Bag is full…\n"
-	.string "That's too bad, then.$"
+	.string "Steven: Your Bag doesn't have room\n"
+	.string "for the full set. Make some space,\l"
+	.string "then speak with me again.$"

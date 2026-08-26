@@ -21,6 +21,7 @@
 #include "util.h"
 #include "constants/songs.h"
 #include "constants/battle_arena.h"
+#include "constants/battle_move_effects.h"
 #include "constants/battle_string_ids.h"
 #include "constants/battle_frontier.h"
 #include "constants/frontier_util.h"
@@ -399,6 +400,27 @@ static const s8 sMindRatings[] =
     [MOVE_PSYCHO_BOOST] = 1,
 };
 
+static s8 GetArenaMindRating(u16 move)
+{
+    u16 effect;
+
+    if (move < ARRAY_COUNT(sMindRatings))
+        return sMindRatings[move];
+    if (move >= MOVES_COUNT)
+        return 0;
+
+    effect = gBattleMoves[move].effect;
+    if (effect == EFFECT_FAKE_OUT || effect == EFFECT_PROTECT || effect == EFFECT_ENDURE)
+        return -1;
+    if (gBattleMoves[move].power != 0
+     && effect != EFFECT_COUNTER
+     && effect != EFFECT_MIRROR_COAT
+     && effect != EFFECT_METAL_BURST
+     && effect != EFFECT_BIDE)
+        return 1;
+    return 0;
+}
+
 #define TAG_JUDGEMENT_ICON 1000
 
 static const struct OamData sJudgementIconOamData =
@@ -705,7 +727,7 @@ void BattleArena_InitPoints(void)
 void BattleArena_AddMindPoints(u8 battler)
 {
     s8 *mindPoints = gBattleStruct->arenaMindPoints;
-    mindPoints[battler] += sMindRatings[gCurrentMove];
+    mindPoints[battler] += GetArenaMindRating(gCurrentMove);
 }
 
 void BattleArena_AddSkillPoints(u8 battler)
@@ -859,6 +881,7 @@ static void SetArenaData(void)
 
 static void SaveArenaChallenge(void)
 {
+    ClearEnemyPartyAfterChallenge();
     gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
     VarSet(VAR_TEMP_0, 0);
     gSaveBlock2Ptr->frontier.challengePaused = TRUE;

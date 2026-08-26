@@ -51,6 +51,8 @@ FortreeCity_House2_EventScript_SleepTalkTM::
 	goto_if_eq FortreeCity_House2_EventScript_SleepTalkDeclined
 	msgbox FortreeCity_Text_GiveTM49, MSGBOX_DEFAULT
 	giveitem ITEM_SAFETY_GOGGLES
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_VERDANT_GIFT_SLEEP_TALK
 	msgbox FortreeCity_Text_HaveTM49, MSGBOX_DEFAULT
 	release

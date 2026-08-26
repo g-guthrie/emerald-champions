@@ -1,4 +1,7 @@
 #include "constants/global.h"
+#include "constants/flags.h"
+#include "constants/species.h"
+#include "constants/vars.h"
 	.include "constants/gba_constants.inc"
 
 	.syntax unified
@@ -52,22 +55,22 @@ GPIOPortReadEnable: @ 80000C8
 	.4byte gMoveNames
 	.4byte gDecorations
 
-	.4byte 0x00001270 @ offsetof(struct SaveBlock1, flags) 
-	.4byte 0x0000139c @ offsetof(struct SaveBlock1, vars)
+	.4byte 0x000018f8 @ offsetof(struct SaveBlock1, flags)
+	.4byte 0x00001a24 @ offsetof(struct SaveBlock1, vars)
 	.4byte 0x00000018 @ offsetof(struct SaveBlock2, pokedex)
-	.4byte 0x00000988 @ offsetof(struct SaveBlock1, seen1)
-	.4byte 0x00003b24 @ offsetof(struct SaveBlock1, seen2)
-	.4byte 0x00000046 @ ?
-	.4byte 0x000008e4 @ ?
-	.4byte 0x000008ac @ ?
-	.4byte 0x00000182 @ NATIONAL_DEX_COUNT?
+	.4byte 0x00003004 @ offsetof(struct SaveBlock1, dexSeen)
+	.4byte 0x00003004 @ dexSeen is the canonical seen bitfield
+	.4byte VAR_NATIONAL_DEX - VARS_START
+	.4byte FLAG_RECEIVED_POKEDEX_FROM_BIRCH
+	.4byte FLAG_SYS_MYSTERY_EVENT_ENABLE
+	.4byte VERDANT_LEGACY_NATIONAL_DEX_COUNT @ contiguous dexSeen bit count
 
 	.byte 0x07, 0x0a, 0x0a, 0x0a, 0x0c, 0x0c, 0x06, 0x0c
 	.byte 0x06, 0x10, 0x12, 0x0c, 0x0f, 0x0b, 0x01, 0x08
 
 	.4byte 0x0000000c @ ?
 	.4byte 0x00000f2c @ sizeof(struct SaveBlock2)
-	.4byte 0x00003d88 @ sizeof(struct SaveBlock1)
+	.4byte 0x0000380c @ sizeof(struct SaveBlock1)
 	.4byte 0x00000234 @ offsetof(struct SaveBlock1, playerPartyCount)
 	.4byte 0x00000238 @ offsetof(struct SaveBlock1, playerParty)
 	.4byte 0x00000009 @ offsetof(struct SaveBlock2, specialSaveWarpFlags)
@@ -76,8 +79,8 @@ GPIOPortReadEnable: @ 80000C8
 	.4byte 0x00000008 @ offsetof(struct SaveBlock2, playerGender)
 	.4byte 0x00000ca8 @ offsetof(struct SaveBlock2, frontier.challengeStatus)
 	.4byte 0x00000ca8 @ offsetof(struct SaveBlock2, frontier.challengeStatus)
-	.4byte 0x000031c7 @ offsetof(struct SaveBlock1, externalEventFlags)
-	.4byte 0x000031b3 @ offsetof(struct SaveBlock1, externalEventData)
+	.4byte 0x00002c33 @ offsetof(struct SaveBlock1, externalEventFlags)
+	.4byte 0x00002c1f @ offsetof(struct SaveBlock1, externalEventData)
 	.4byte 0x00000000
 
 	.4byte gBaseStats
@@ -89,16 +92,17 @@ GPIOPortReadEnable: @ 80000C8
 	.4byte gBallSpritePalettes
 
 	.4byte 0x000000a8 @ offsetof(struct SaveBlock2, gcnLinkFlags)
-	.4byte 0x00000864 @ ?
-	.4byte 0x0000089b @ ?
+	.4byte FLAG_SYS_GAME_CLEAR
+	.4byte FLAG_SYS_RIBBON_GET
 
-	.byte 0x1e, 0x1e, 0x10, 0x40
+	.byte BAG_ITEMS_COUNT, BAG_KEYITEMS_COUNT, BAG_POKEBALLS_COUNT, BAG_TMHM_COUNT
+	.byte BAG_BERRIES_COUNT, PC_ITEMS_COUNT
+	.2byte 0
 
-	.4byte 0x0000322e @ offsetof(struct SaveBlock1, ? part-way into unk_322C)
 	.4byte 0x00000498 @ offsetof(struct SaveBlock1, pcItems)
-	.4byte 0x000031a8 @ offsetof(struct SaveBlock1, giftRibbons)
-	.4byte 0x000031f8 @ offsetof(struct SaveBlock1, enigmaBerry)
-	.4byte 0x00000034 @ offsetof(struct SaveBlock1, mapView)
+	.4byte 0x00002c14 @ offsetof(struct SaveBlock1, giftRibbons)
+	.4byte 0x00002c64 @ offsetof(struct SaveBlock1, enigmaBerry)
+	.4byte 0x00000034 @ sizeof(struct EnigmaBerry)
 	.4byte 0x00000000
 	.4byte 0x00000000
 

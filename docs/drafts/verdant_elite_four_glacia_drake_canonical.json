@@ -1,0 +1,938 @@
+{
+  "ELITE_FOUR_GLACIA": {
+    "anchor_id": "ELITE_FOUR_GLACIA",
+    "planning_tier": "league_gauntlet",
+    "status": {
+      "design": "authored-draft",
+      "fresh_critic": "pending",
+      "source": "unimplemented",
+      "static": "design-validation-pending",
+      "runtime": "unplayed"
+    },
+    "campaign_state": {
+      "canonical_stage": "Third main-story Elite Four member immediately after Phoebe",
+      "location": "EverGrandeCity_GlaciasRoom",
+      "strict_cap": 80,
+      "mechanics_baseline_id": "pokemon_league_main_story",
+      "player_tools": [
+        "One fixed six-Pokemon party chosen before League entry",
+        "Every legal move prepared before entry",
+        "On-the-fly legal ability switching",
+        "Mega Bracelet and all previously collected Mega Stones",
+        "Held-item changes and healing items from the overworld Bag between rooms",
+        "No Bag items during the Glacia battle"
+      ],
+      "mega_access": "Full main-story Mega access; one player Mega and one opponent Mega remain the only battle gimmick.",
+      "evolution_phase": "Endgame phase; fully evolved, single-stage, legendary, mythical, regional-form, curated Gen 9, and Champions Mega Pokemon are eligible.",
+      "preparation_access": "There is no automatic restoration after Phoebe. The player regains normal control in Phoebe's room and Hall 2 and may use carried healing, status, PP, held-item, Pokemon-menu, and save options before entering Glacia's room. Party composition remains locked after League entry."
+    },
+    "runtime": {
+      "trainer_ids": [
+        "TRAINER_GLACIA"
+      ],
+      "canonical_format": "double",
+      "variants": [
+        {
+          "variant_id": "main_story_glacia",
+          "trainer_ids": [
+            "TRAINER_GLACIA"
+          ],
+          "format": "double",
+          "scope": "designed-here",
+          "reachability": "required main story"
+        },
+        {
+          "variant_id": "postgame_current_reachable_rematch",
+          "trainer_ids": [
+            "TRAINER_GLACIA_4"
+          ],
+          "format": "double",
+          "scope": "deferred-to-rematch-phase",
+          "reachability": "the current Glacia rematch entry script routes directly here"
+        },
+        {
+          "variant_id": "postgame_declared_mode_labels",
+          "trainer_ids": [
+            "TRAINER_GLACIA",
+            "TRAINER_GLACIA_2",
+            "TRAINER_GLACIA_3",
+            "TRAINER_GLACIA_4"
+          ],
+          "format": "double",
+          "scope": "deferred-to-rematch-phase",
+          "reachability": "four labels exist, but current VAR_ELITE_4_MODE selections have no source consumer; audit before treating the unused labels as reachable"
+        }
+      ]
+    },
+    "rolling_context": {
+      "available": false,
+      "reason": "The chronological battle frontier is still Battle 29, so an exact previous-ten Glacia window would be fabricated. Refresh before implementation.",
+      "protected_neighbor_anchors": [
+        "ELITE_FOUR_PHOEBE",
+        "ELITE_FOUR_DRAKE",
+        "CHAMPION_WALLACE",
+        "POSTGAME_ELITE_FOUR_REMATCH_GAUNTLET"
+      ],
+      "recent_hook_refresh_required": true
+    },
+    "identity": {
+      "memory_hook": "Mega Glalie threatens to detonate beside a trapping Toxapex, then Chien-Pao and Iron Bundle turn the apparent stall battle into a no-setter speed assault.",
+      "story_fit": "Glacia treats cold as pressure that seals exits and punishes stillness. Four cold-climate attackers, a venomous deep-water anchor, and a Flash Fire specter express that idea without repeating the familiar snow-and-Aurora-Veil script.",
+      "primary_player_question": "Can the player scout or deny Mega Glalie's detonation while preventing Toxapex from trapping and poisoning the answer that must survive for Glacia's fast back line?",
+      "primary_mode": "Mega Glalie and Toxapex open together. Refrigerate Double-Edge or Explosion creates immediate physical pressure while Baneful Bunker, Infestation, Toxic, and Wide Guard turn passive or overprotective play into a clock.",
+      "secondary_mode": "Chien-Pao, Choice Scarf Chandelure, Focus Sash Mamoswine, and Booster Energy Iron Bundle form a mixed no-dedicated-speed-control offense whose priority, pivots, item states, and Sword of Ruin pressure reward positioning rather than one field button.",
+      "preview_pressure": "The player must respect both a two-target Mega detonation and a long trap clock at the opening, yet cannot spend every speed and priority resource before Chien-Pao and Iron Bundle appear."
+    },
+    "difficulty": {
+      "target": 10,
+      "observed": null,
+      "rationale": "Six optimized level-82 to level-85 Pokemon combine a credible double-KO threat, a trap and Toxic clock, a major Ice legendary, two priority users, a Choice Scarf Fire immunity, and a Booster Energy speed apex. Broad counterplay exists, but a blind loss is expected because preserving the wrong answer for the wrong mode is costly.",
+      "pressure_sources": [
+        "cap +3 Mega Glalie Refrigerate Double-Edge, Explosion, and Ice Shard",
+        "Toxapex Infestation plus Toxic clock with Baneful Bunker and Wide Guard",
+        "cap +4 Life Orb Chien-Pao Sword of Ruin pressure and Sucker Punch",
+        "Choice Scarf Chandelure Fire immunity, spread Heat Wave, and Trick",
+        "Focus Sash Mamoswine Ground coverage and Ice Shard",
+        "cap +5 Booster Energy Iron Bundle special speed and Flip Turn"
+      ],
+      "resource_tax": "Glacia enters as the third League member without automatic healing. Infestation, Toxic, repeated switching, detonation scouting, priority, and mixed coverage tax HP, status cures, speed-control PP, Sash-breaking tools, and whatever carried recovery the player chooses to spend before Drake.",
+      "tuning_order": [
+        "Test the fixed Mega Glalie plus Toxapex lead and custom detonation/trap decisions before changing any set",
+        "Adjust Glalie, Chien-Pao, Mamoswine, and Iron Bundle cap-relative offsets",
+        "Adjust Toxapex survivability or Regenerator switching thresholds",
+        "Only then reconsider a coverage move or strategic mode"
+      ]
+    },
+    "team": [
+      {
+        "order": 1,
+        "species": "SPECIES_GLALIE",
+        "level_offset": 3,
+        "item": "ITEM_GLALITITE",
+        "ability": "ABILITY_REFRIGERATE",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_DOUBLE_EDGE",
+          "MOVE_EXPLOSION",
+          "MOVE_ICE_SHARD",
+          "MOVE_PROTECT"
+        ],
+        "role": "sole Mega, detonation lead, and priority breaker",
+        "lead_group": "primary lead",
+        "mega_candidate": true
+      },
+      {
+        "order": 2,
+        "species": "SPECIES_TOXAPEX",
+        "level_offset": 2,
+        "item": "ITEM_LEFTOVERS",
+        "ability": "ABILITY_REGENERATOR",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_DEF_SPDEF_SASSY",
+        "moves": [
+          "MOVE_BANEFUL_BUNKER",
+          "MOVE_INFESTATION",
+          "MOVE_TOXIC",
+          "MOVE_WIDE_GUARD"
+        ],
+        "role": "trap clock, detonation shield, and spread denial",
+        "lead_group": "primary lead",
+        "mega_candidate": false
+      },
+      {
+        "order": 3,
+        "species": "SPECIES_CHIEN_PAO",
+        "level_offset": 4,
+        "item": "ITEM_LIFE_ORB",
+        "ability": "ABILITY_SWORD_OF_RUIN",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_ICICLE_CRASH",
+          "MOVE_SACRED_SWORD",
+          "MOVE_SUCKER_PUNCH",
+          "MOVE_PROTECT"
+        ],
+        "role": "major Ice legendary and fast physical amplifier",
+        "lead_group": "first reserve",
+        "mega_candidate": false
+      },
+      {
+        "order": 4,
+        "species": "SPECIES_CHANDELURE",
+        "level_offset": 3,
+        "item": "ITEM_CHOICE_SCARF",
+        "ability": "ABILITY_FLASH_FIRE",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_HEAT_WAVE",
+          "MOVE_SHADOW_BALL",
+          "MOVE_ENERGY_BALL",
+          "MOVE_TRICK"
+        ],
+        "role": "Fire absorption, Steel punishment, and Choice disruption",
+        "lead_group": "fast-mode reserve",
+        "mega_candidate": false
+      },
+      {
+        "order": 5,
+        "species": "SPECIES_MAMOSWINE",
+        "level_offset": 4,
+        "item": "ITEM_FOCUS_SASH",
+        "ability": "ABILITY_THICK_FAT",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_ICICLE_CRASH",
+          "MOVE_HIGH_HORSEPOWER",
+          "MOVE_ICE_SHARD",
+          "MOVE_PROTECT"
+        ],
+        "role": "Wolfe-derived Ground and Ice pressure with late priority",
+        "lead_group": "physical reserve",
+        "mega_candidate": false
+      },
+      {
+        "order": 6,
+        "species": "SPECIES_IRON_BUNDLE",
+        "level_offset": 5,
+        "item": "ITEM_BOOSTER_ENERGY",
+        "ability": "ABILITY_QUARK_DRIVE",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_FREEZE_DRY",
+          "MOVE_HYDRO_PUMP",
+          "MOVE_FLIP_TURN",
+          "MOVE_PROTECT"
+        ],
+        "role": "Booster Energy special speed apex and pivoting final threat",
+        "lead_group": "final reserve",
+        "mega_candidate": false
+      }
+    ],
+    "ordering": {
+      "intended_lead": [
+        "SPECIES_GLALIE",
+        "SPECIES_TOXAPEX"
+      ],
+      "reserve_sequence": [
+        "SPECIES_CHIEN_PAO",
+        "SPECIES_CHANDELURE",
+        "SPECIES_MAMOSWINE",
+        "SPECIES_IRON_BUNDLE"
+      ],
+      "mandatory_order_reason": "Glalie and Toxapex must be the visible opening so detonation and trapping define the fight immediately. The reserves intentionally alternate physical, special, physical, and special pressure; they do not require a fabricated guaranteed pair, but smart switching must not casually dismantle the opening before it presents a real decision."
+    },
+    "ai": {
+      "existing_flags": [
+        "AI_FLAG_CHECK_BAD_MOVE",
+        "AI_FLAG_TRY_TO_FAINT",
+        "AI_FLAG_CHECK_VIABILITY",
+        "AI_FLAG_CHECK_FOE",
+        "AI_FLAG_SMART_SWITCHING",
+        "AI_FLAG_HELP_PARTNER",
+        "AI_FLAG_SPEED_CONTROL",
+        "AI_FLAG_FIELD_CONTROL"
+      ],
+      "required_flags": [
+        "AI_FLAG_CHECK_BAD_MOVE",
+        "AI_FLAG_TRY_TO_FAINT",
+        "AI_FLAG_CHECK_VIABILITY",
+        "AI_FLAG_CHECK_FOE",
+        "AI_FLAG_SMART_SWITCHING",
+        "AI_FLAG_HELP_PARTNER",
+        "AI_FLAG_HP_AWARE",
+        "AI_FLAG_WILL_SUICIDE",
+        "AI_FLAG_COMBO_SETUP"
+      ],
+      "custom_requirements": [
+        "Reward Refrigerate Explosion only when Toxapex or the current ally has selected protection, is immune, or the expected two-target payoff justifies losing Glalie; otherwise prefer Double-Edge, Ice Shard, Protect, or preservation.",
+        "Select Infestation and Toxic against a target that can actually be trapped and poisoned, avoid redundant clocks, recognize Baneful Bunker as the safe Explosion partner action, and use Wide Guard only against credible spread pressure.",
+        "Permit Toxapex to switch for Regenerator when the clock is established or its board role is exhausted, without abandoning an active trap at random.",
+        "Exploit Chandelure's Choice Scarf and Trick, and recognize that Sword of Ruin exposes Chien-Pao's partner as well as opposing Pokemon.",
+        "Treat Booster Energy and Quark Drive as automatic state, and use Flip Turn when preserving Iron Bundle creates more value than direct damage."
+      ],
+      "forbidden_behaviors": [
+        "Do not choose Explosion into an unprotected vulnerable ally merely because it has high base power.",
+        "Do not force Explosion when Double-Edge, Ice Shard, switching, or protecting preserves a winning Glalie.",
+        "Do not use Infestation on an already trapped target or Toxic on an immune or already poisoned target.",
+        "Do not spam Wide Guard without a credible opposing spread move.",
+        "Do not switch Toxapex while doing so silently releases the only valuable active trap.",
+        "Do not repeatedly attack into a Choice-locked immunity with Chandelure."
+      ],
+      "state_machine": "Mode A fixes Mega Glalie beside Toxapex. Glalie evaluates direct pressure, protection, or a safe detonation while Toxapex establishes at most one meaningful trap and poison clock or shields the board. Mode B begins when the lead breaks: Chien-Pao and Chandelure apply raw fast physical and special pressure without a speed setter, while Mamoswine and Iron Bundle preserve priority, Sash, Booster Energy, and pivot resources for the final exchanges."
+    },
+    "counterplay": {
+      "intentional_weakness": "The team has no snow setter, Aurora Veil, Tailwind, Trick Room, or redirection; Taunt and status prevention can blank Toxapex, common Fighting, Steel, Rock, Water, Grass, and priority attacks pressure Mega Glalie, Sword of Ruin exposes Chien-Pao's partner, and Chandelure's Choice lock plus Mamoswine's Sash create visible item seams.",
+      "first_loss_lesson": "Do not treat Toxapex as harmless support or assume Glalie must explode immediately. Scout the detonation, deny the trap or Toxic clock, and preserve a speed-control or priority answer for Chien-Pao and Iron Bundle.",
+      "classes": [
+        "Protect, Ghost immunity, resist switching, Fake Out, or focused priority to scout or stop Mega Glalie's detonation turn",
+        "Taunt, Encore, Substitute, Misty Terrain, Safeguard, poison immunity, trapping denial, or fast focus fire against Toxapex",
+        "Icy Wind, Electroweb, paralysis, Trick Room, priority, Choice Scarf users, or raw faster threats against the no-setter fast mode",
+        "Fighting, Steel, Fire, Rock, and Water pressure distributed across the Ice attackers, with Ground or Dark pressure checking Toxapex and Chandelure differently",
+        "Knock Off, Trick, hazards, multihit moves, and Choice-lock exploitation against the item-dependent seams"
+      ],
+      "revealed_information": [
+        "Mega Glalie can spend itself on Refrigerate Explosion but is not forced to do so",
+        "Toxapex has no conventional direct attack and depends on a legal trap and poison clock",
+        "Glacia has no weather or screen mode behind the opening",
+        "Sword of Ruin also lowers the Defense of Chien-Pao's ally",
+        "Chandelure is Choice-locked, Mamoswine depends on an intact Sash, and Iron Bundle consumes Booster Energy automatically"
+      ],
+      "unacceptable_failure_modes": [
+        "No hidden required catch, immunity, or exact first-turn sequence may be necessary.",
+        "The AI may not read an unrevealed player action to decide whether Explosion is safe.",
+        "Accuracy misses from Icicle Crash or Hydro Pump may not be the primary source of difficulty.",
+        "Toxic and Infestation may not become an unavoidable infinite stall loop.",
+        "The fight may not gain a second Mega or any non-Mega gimmick.",
+        "If the AI cannot execute detonation and trapping honestly, the design must be revised rather than scripted to cheat."
+      ]
+    },
+    "competitive_research": {
+      "index": {
+        "version": 1,
+        "record_count": 1005,
+        "sha256": "44d79fd2a5f7578013b2363f9e47d75a0f05ae4239da3bd6891e9651bca2648a"
+      },
+      "queries": [
+        "doubles snow stall-offense toxic infestation",
+        "Mamoswine Toxapex Glalie Chien-Pao Iron Bundle",
+        "no-dedicated-speed-mode positioning",
+        "Choice Scarf Chandelure Trick Heat Wave",
+        "Mega detonation plus protected ally"
+      ],
+      "candidates": [
+        {
+          "rank": 1,
+          "reference_id": "elite:wolfe:naic-2026",
+          "inspected_scope": "full exact public team sheet and strategy digest",
+          "decision": "adapted",
+          "reason": "The Toxapex Infestation/Toxic/Wide Guard clock, Mamoswine pressure, and primary-clock/secondary-burst discipline become Glacia's spine; Charizard-Y sun and the unrelated support roster are rejected."
+        },
+        {
+          "rank": 2,
+          "reference_id": "showdown:gen4randomdoublesbattle:008",
+          "inspected_scope": "complete reproducible Glalie Explosion set and full team",
+          "decision": "adapted",
+          "reason": "Glalie Explosion establishes a real detonation precedent. Verdant upgrades it to the one Mega slot and rejects the unrelated sand, sleep, and setup shell."
+        },
+        {
+          "rank": 3,
+          "reference_id": "showdown:gen9randomdoublesbattle:014",
+          "inspected_scope": "complete reproducible Chien-Pao set and full team",
+          "decision": "adapted",
+          "reason": "Life Orb Sword of Ruin, Icicle Crash, Sucker Punch, and Protect are retained; legal Sacred Sword replaces Throat Chop to punish Steel and Ice answers."
+        },
+        {
+          "rank": 4,
+          "reference_id": "showdown:gen9randomdoublesbattle:002",
+          "inspected_scope": "complete reproducible Iron Bundle and Dragapult sets",
+          "decision": "adapted",
+          "reason": "Booster Energy, Freeze-Dry, Hydro Pump, and Protect are retained. Encore is absent from Verdant's current Iron Bundle learnset, so legal Flip Turn replaces it."
+        },
+        {
+          "rank": 5,
+          "reference_id": "showdown:gen6randomdoublesbattle:026",
+          "inspected_scope": "complete reproducible Choice Scarf Chandelure set and full team",
+          "decision": "adapted",
+          "reason": "Choice Scarf Flash Fire, Heat Wave, and Trick supply Fire and Steel counterpressure without adding weather or another setup mode."
+        },
+        {
+          "rank": 6,
+          "reference_id": "elite:shohei-kimura:worlds-2023",
+          "inspected_scope": "official World Champion roster and curated strategy principle",
+          "decision": "adapted",
+          "reason": "The world champion roster demonstrates that positioning and Sword of Ruin can define difficulty without a dedicated speed setter; no exact roster is claimed from roster-only evidence."
+        },
+        {
+          "rank": 7,
+          "reference_id": "showdown:gen8randomdoublesbattle:005",
+          "inspected_scope": "complete reproducible snow and Aurora Veil team",
+          "decision": "rejected",
+          "reason": "Ninetales-Alola, Aurora Veil, Icy Wind, and protected setup recreate Glacia's current generic setter structure."
+        },
+        {
+          "rank": 8,
+          "reference_id": "smogon:gen8ou:002",
+          "inspected_scope": "complete published Aurora Veil offense sample",
+          "decision": "rejected",
+          "reason": "Aurora Veil into multiple setup recipients is sound but duplicates a campaign pattern and is not a radically different Glacia."
+        }
+      ],
+      "selected_reference_ids": [
+        "elite:wolfe:naic-2026",
+        "showdown:gen4randomdoublesbattle:008",
+        "showdown:gen9randomdoublesbattle:014",
+        "showdown:gen9randomdoublesbattle:002",
+        "showdown:gen6randomdoublesbattle:026",
+        "elite:shohei-kimura:worlds-2023"
+      ],
+      "imported_elements": [
+        "Wolfe's offense-plus-trapping-clock mode discipline",
+        "Toxapex Infestation, Toxic, Wide Guard, and protected survival role",
+        "Mamoswine immediate Ice, Ground, and priority pressure",
+        "Mega Glalie detonation rather than another screen recipient",
+        "Sword of Ruin positioning without a dedicated speed mode",
+        "Booster Energy Iron Bundle and Choice Scarf Chandelure cleanup"
+      ],
+      "rejected_gimmicks": [
+        "Tera from modern source formats",
+        "Dynamax and Gigantamax",
+        "Z-Moves",
+        "Primal Reversion",
+        "alternate Mega selection",
+        "Aurora Veil as the battle's automatic answer"
+      ]
+    },
+    "campaign_reservations": {
+      "spends": [
+        "Mega Glalie as Glacia's signature and only Mega",
+        "Chien-Pao as the League's major Ice legendary",
+        "the campaign's definitive offense-plus-trapping-clock Ice battle",
+        "Booster Energy Iron Bundle as Glacia's late speed reveal"
+      ],
+      "preserves": [
+        "dedicated Perish and Shadow Tag for Phoebe and selected Aqua command fights",
+        "Dragon singles lure sequencing and Mega Dragonite for Drake",
+        "Wallace's rain and opposite-speed Champion transition",
+        "Dark information warfare for Sidney"
+      ],
+      "releases": [
+        "Abomasnow, Ninetales-Alola, Kyurem, Articuno, Glastrier, and Aurora Veil are not locked to Glacia and may be used elsewhere in distinct roles.",
+        "The exact Wolfe NAIC roster remains available as a historical reference because Glacia imports its mode discipline rather than copying its six species."
+      ],
+      "collision_notes": [
+        "No Glacia species may repeat across the other four main-story League dossiers without a written role distinction and fresh collision review.",
+        "Phoebe must not reuse Toxapex-style Toxic plus Infestation as a substitute for her protected Perish identity.",
+        "Wallace and later Aqua fights may use rain trapping, but not Glacia's Mega detonation plus venom-clock opening.",
+        "Refresh all species, Mega, legendary, item, move, tempo, and player-question collisions after the full League set is merged."
+      ]
+    },
+    "presentation": {
+      "intro_concept": "Glacia explains that true cold is pressure: it stops motion, seals exits, and makes one wrong breath final. She foreshadows that the quiet partner is as dangerous as the obvious Mega, replacing the current inaccurate promise that snow controls the whole field.",
+      "defeat_concept": "Glacia acknowledges that the player neither froze in place nor fled the clock; they kept moving through every fracture.",
+      "post_battle_concept": "She directs the player onward while warning that Drake will punish whatever answer they spent too early, preserving the manual-healing window and existing progression.",
+      "hint_concept": "A League NPC can truthfully warn that Glacia's obvious attacker may shatter the whole field while its quiet partner seals one Pokemon in place; it does not reveal exact sets.",
+      "guide_summary": "Mega Glalie and Toxapex open with a detonation-versus-trap decision. Scout Explosion, deny the legal Toxic clock, then reverse a no-setter fast mode built from Chien-Pao, Scarf Chandelure, Sash Mamoswine, and Booster Iron Bundle. No snow or screen is coming.",
+      "native_width_status": "concept-only; exact strings must be rendered and checked during chronological source implementation"
+    },
+    "fresh_critic_review": {
+      "reviewer_agent_id": null,
+      "context_mode": "fresh-no-history",
+      "verdict": null,
+      "is_this_sick_and_awesome": null,
+      "strongest_moment": null,
+      "weakest_part": null,
+      "difficulty_honesty": null,
+      "required_changes": [],
+      "author_response": null,
+      "resolved": false
+    },
+    "verification": {
+      "design_schema": "pending-fresh-critic",
+      "species_items_moves_abilities": "pass",
+      "source_implementation": "not-started",
+      "script_and_format": "not-started",
+      "dialogue_width": "concept-only",
+      "guide": "concept-only",
+      "runtime": "unplayed",
+      "observed_difficulty": null,
+      "evidence": [
+        "The canonical draft binds campaign_state.mechanics_baseline_id to pokemon_league_main_story and preserves the source-backed cap of 80.",
+        "Current source exposes all six species, items, selected ability slots, spreads, and four legal moves per Pokemon; Mamoswine legally inherits Icicle Crash through the Swinub family egg-move data.",
+        "src/data/pokemon/evolution.h maps Glalie plus Glalitite to Mega Glalie, and no second Mega candidate appears.",
+        "TRAINER_GLACIA is currently a six-member double trainer and the room script contains no automatic HealPlayerParty call.",
+        "The exact competitive index identity is version 1, 1005 records, SHA-256 44d79fd2a5f7578013b2363f9e47d75a0f05ae4239da3bd6891e9651bca2648a.",
+        "No game source has been changed for this dossier and no real-ROM battle has been run."
+      ],
+      "known_blockers": [
+        "A separate no-history excitement critic has not reviewed the final team, so the dossier cannot advance to design-complete.",
+        "The six-member party, offsets, required flags, detonation logic, trap targeting, and Regenerator policy are not implemented.",
+        "Exact dialogue is not written or width-rendered, and the current intro inaccurately promises snow control.",
+        "The guide still describes the old Aurora Veil roster.",
+        "The previous-ten chronological context does not exist yet.",
+        "Real-ROM AI behavior and observed difficulty are unknown.",
+        "Postgame rematch variants remain deferred."
+      ]
+    },
+    "mechanics_proposal": null
+  },
+  "ELITE_FOUR_DRAKE": {
+    "anchor_id": "ELITE_FOUR_DRAKE",
+    "planning_tier": "league_gauntlet",
+    "status": {
+      "design": "authored-draft",
+      "fresh_critic": "pending",
+      "source": "unimplemented",
+      "static": "design-validation-pending",
+      "runtime": "unplayed"
+    },
+    "campaign_state": {
+      "canonical_stage": "Fourth and final main-story Elite Four member immediately after Glacia",
+      "location": "EverGrandeCity_DrakesRoom",
+      "strict_cap": 80,
+      "mechanics_baseline_id": "pokemon_league_main_story",
+      "player_tools": [
+        "One fixed six-Pokemon party chosen before League entry",
+        "Every legal move prepared before entry",
+        "On-the-fly legal ability switching",
+        "Mega Bracelet and all previously collected Mega Stones",
+        "Held-item changes and healing items from the overworld Bag between rooms",
+        "No Bag items during the Drake battle"
+      ],
+      "mega_access": "Full main-story Mega access; one player Mega and one opponent Mega remain the only battle gimmick.",
+      "evolution_phase": "Endgame phase; fully evolved, single-stage, legendary, mythical, regional-form, curated Gen 9, and Champions Mega Pokemon are eligible.",
+      "preparation_access": "There is no automatic restoration after Glacia. The player regains normal control in Glacia's room and Hall 3 and may use carried healing, status, PP, held-item, Pokemon-menu, and save options before initiating Drake. After victory, Drake's room and Hall 4 provide another manual preparation window before the Champion room forces Wallace's approach."
+    },
+    "runtime": {
+      "trainer_ids": [
+        "TRAINER_DRAKE"
+      ],
+      "canonical_format": "single",
+      "variants": [
+        {
+          "variant_id": "main_story_drake",
+          "trainer_ids": [
+            "TRAINER_DRAKE"
+          ],
+          "format": "single",
+          "scope": "designed-here",
+          "reachability": "required main story"
+        },
+        {
+          "variant_id": "postgame_current_reachable_rematch",
+          "trainer_ids": [
+            "TRAINER_DRAKE_3"
+          ],
+          "format": "single",
+          "scope": "deferred-to-rematch-phase",
+          "reachability": "the current Drake rematch entry script routes directly here"
+        },
+        {
+          "variant_id": "postgame_declared_mode_labels",
+          "trainer_ids": [
+            "TRAINER_DRAKE",
+            "TRAINER_DRAKE_2",
+            "TRAINER_DRAKE_3",
+            "TRAINER_DRAKE_4"
+          ],
+          "format": "single",
+          "scope": "deferred-to-rematch-phase",
+          "reachability": "four labels exist, but current VAR_ELITE_4_MODE selections have no source consumer; audit before treating the unused labels as reachable"
+        }
+      ]
+    },
+    "rolling_context": {
+      "available": false,
+      "reason": "The chronological battle frontier is still Battle 29, so an exact previous-ten Drake window would be fabricated. Refresh before implementation.",
+      "protected_neighbor_anchors": [
+        "ELITE_FOUR_GLACIA",
+        "CHAMPION_WALLACE",
+        "POSTGAME_ELITE_FOUR_REMATCH_GAUNTLET",
+        "STEVEN_POSTGAME_SUPERBOSS"
+      ],
+      "recent_hook_refresh_required": true
+    },
+    "identity": {
+      "memory_hook": "Stealth Rock and two Choice-locked Dragons tax every preservation decision before a special Mega Dragonite reverses the expected wall and Zygarde asks whether the player saved one true endgame answer.",
+      "story_fit": "Drake's existing dialogue already frames Pokemon partnership as a singles duel where every choice must stand on its own. Six Dragons with distinct sequential jobs turn that speech into a concrete preservation test rather than a legendary-stat exhibition.",
+      "primary_player_question": "Can the player preserve the correct Ice, Fairy, status, or Unaware answer through Stealth Rock, two Choice-locked lures, and mixed damage long enough to stop both Mega Dragonite and the final Power Construct Zygarde?",
+      "primary_mode": "Rough Skin Rocky Helmet Garchomp establishes Stealth Rock and phazes greed; Choice Band Dragapult and Choice Scarf Hydreigon then force fast physical and special trades while pivoting out of bad locks.",
+      "secondary_mode": "Assault Vest Adaptability Dragalge punishes the Fairy answer, special Mega Dragonite breaks the physical wall the opening invites, and Leftovers Power Construct Zygarde is the one deliberate setup-and-paralysis endgame.",
+      "preview_pressure": "The all-Dragon roster invites Ice and Fairy offense, but the player must decide which answer can survive Garchomp's Fire lure, Hydreigon's Flash Cannon, Dragalge's Poison pressure, special Mega Dragonite, and Zygarde's separate physical endgame."
+    },
+    "difficulty": {
+      "target": 10,
+      "observed": null,
+      "rationale": "Six optimized level-82 to level-86 Pokemon cover physical, special, fast, bulky, pivoting, lure, Mega, and legendary endgame roles without adding a second gimmick. Difficulty comes from irreversible preservation mistakes: Stealth Rock taxes correction, the two Choice users punish the wrong immunity, Dragalge removes the easy Fairy shortcut, Mega Dragonite reverses the expected defensive category, and Zygarde demands one surviving endgame plan.",
+      "pressure_sources": [
+        "cap +2 Rough Skin Rocky Helmet Garchomp Stealth Rock and Dragon Tail",
+        "cap +3 Choice Band Dragapult Dragon Darts and U-turn",
+        "cap +3 Choice Scarf Hydreigon Draco Meteor, Flash Cannon, and U-turn",
+        "cap +4 Assault Vest Adaptability Dragalge anti-Fairy pressure",
+        "cap +5 special Mega Dragonite with Multiscale and Roost",
+        "cap +6 Power Construct Zygarde Glare, Coil, Earthquake, and Outrage endgame"
+      ],
+      "resource_tax": "Drake enters after Glacia without automatic healing. Stealth Rock and forced switching convert party depth into HP loss, two Choice users tax Protect and immunity knowledge, and Glare plus Coil Zygarde taxes status control and the final Ice answer. Victory returns control for manual recovery before Wallace rather than granting a free reset.",
+      "tuning_order": [
+        "Test Garchomp's conditional hazard lead, both Choice locks, Mega timing, and Zygarde's endgame decisions before changing any set",
+        "Adjust Garchomp, Dragapult, Hydreigon, Dragonite, and Zygarde cap-relative offsets",
+        "Adjust Dragalge or Mega Dragonite survivability",
+        "Only then reconsider coverage or the single Zygarde setup mode"
+      ]
+    },
+    "team": [
+      {
+        "order": 1,
+        "species": "SPECIES_GARCHOMP",
+        "level_offset": 2,
+        "item": "ITEM_ROCKY_HELMET",
+        "ability": "ABILITY_ROUGH_SKIN",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+        "moves": [
+          "MOVE_STEALTH_ROCK",
+          "MOVE_EARTHQUAKE",
+          "MOVE_DRAGON_TAIL",
+          "MOVE_FIRE_BLAST"
+        ],
+        "role": "hazard lead, contact tax, phazer, and Steel lure",
+        "lead_group": "primary lead",
+        "mega_candidate": false
+      },
+      {
+        "order": 2,
+        "species": "SPECIES_DRAGAPULT",
+        "level_offset": 3,
+        "item": "ITEM_CHOICE_BAND",
+        "ability": "ABILITY_CLEAR_BODY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_DRAGON_DARTS",
+          "MOVE_DRAGON_CLAW",
+          "MOVE_PHANTOM_FORCE",
+          "MOVE_U_TURN"
+        ],
+        "role": "fast physical Choice breaker and scouting pivot",
+        "lead_group": "first reserve",
+        "mega_candidate": false
+      },
+      {
+        "order": 3,
+        "species": "SPECIES_HYDREIGON",
+        "level_offset": 3,
+        "item": "ITEM_CHOICE_SCARF",
+        "ability": "ABILITY_LEVITATE",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_DRACO_METEOR",
+          "MOVE_DARK_PULSE",
+          "MOVE_FLASH_CANNON",
+          "MOVE_U_TURN"
+        ],
+        "role": "special speed check, Fairy lure, and second pivot",
+        "lead_group": "second reserve",
+        "mega_candidate": false
+      },
+      {
+        "order": 4,
+        "species": "SPECIES_DRAGALGE",
+        "level_offset": 4,
+        "item": "ITEM_ASSAULT_VEST",
+        "ability": "ABILITY_ADAPTABILITY",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_DRAGON_PULSE",
+          "MOVE_SLUDGE_BOMB",
+          "MOVE_HYDRO_PUMP",
+          "MOVE_FOCUS_BLAST"
+        ],
+        "role": "special sponge and anti-Fairy wallbreaker",
+        "lead_group": "midgame lure",
+        "mega_candidate": false
+      },
+      {
+        "order": 5,
+        "species": "SPECIES_DRAGONITE",
+        "level_offset": 5,
+        "item": "ITEM_DRAGONINITE",
+        "ability": "ABILITY_MULTISCALE",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_DRACO_METEOR",
+          "MOVE_HURRICANE",
+          "MOVE_FIRE_BLAST",
+          "MOVE_ROOST"
+        ],
+        "role": "sole Champions Mega showcase and special-category reversal",
+        "lead_group": "late ace",
+        "mega_candidate": true
+      },
+      {
+        "order": 6,
+        "species": "SPECIES_ZYGARDE_50_POWER_CONSTRUCT",
+        "level_offset": 6,
+        "item": "ITEM_LEFTOVERS",
+        "ability": "ABILITY_POWER_CONSTRUCT",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+          "moves": [
+            "MOVE_EARTHQUAKE",
+            "MOVE_COIL",
+            "MOVE_OUTRAGE",
+            "MOVE_GLARE"
+          ],
+          "role": "major Dragon legendary and sole setup and paralysis closer",
+        "lead_group": "final closer",
+        "mega_candidate": false
+      }
+    ],
+    "ordering": {
+      "intended_lead": [
+        "SPECIES_GARCHOMP"
+      ],
+      "reserve_sequence": [
+        "SPECIES_DRAGAPULT",
+        "SPECIES_HYDREIGON",
+        "SPECIES_DRAGALGE",
+        "SPECIES_DRAGONITE",
+        "SPECIES_ZYGARDE_50_POWER_CONSTRUCT"
+      ],
+      "mandatory_order_reason": "Garchomp must present the hazard and phazing tax before the two Choice commitments. Dragalge is deliberately positioned before special Mega Dragonite so the player is invited to preserve a physical wall, and Zygarde remains the final independent setup question. Smart switching may answer a bad matchup, but it may not casually spend the climax out of sequence."
+    },
+    "ai": {
+      "existing_flags": [
+        "AI_FLAG_CHECK_BAD_MOVE",
+        "AI_FLAG_TRY_TO_FAINT",
+        "AI_FLAG_CHECK_VIABILITY",
+        "AI_FLAG_CHECK_FOE",
+        "AI_FLAG_SMART_SWITCHING"
+      ],
+      "required_flags": [
+        "AI_FLAG_CHECK_BAD_MOVE",
+        "AI_FLAG_TRY_TO_FAINT",
+        "AI_FLAG_CHECK_VIABILITY",
+        "AI_FLAG_CHECK_FOE",
+        "AI_FLAG_SMART_SWITCHING",
+        "AI_FLAG_SETUP_FIRST_TURN",
+        "AI_FLAG_HP_AWARE",
+        "AI_FLAG_PREFER_STRONGEST_MOVE"
+      ],
+      "custom_requirements": [
+        "Prefer Stealth Rock on global turn zero only when Garchomp survives and the hazard has value; prefer Dragon Tail against a credible setup state or a switch worth taxing, not as blind low-accuracy damage.",
+        "Track Dragapult's Band and Hydreigon's Scarf locks, use U-turn to escape losing locks, and switch rather than repeatedly choose an immune or heavily resisted target.",
+        "Activate Mega Dragonite as the one Mega, value Roost when it can restore a meaningful Multiscale threshold, and recognize its special rather than physical damage role.",
+        "Use Glare when paralysis changes the endgame, Coil only when Zygarde survives the reply and gains real sweeping value, and Outrage only when its lock is an acceptable commitment.",
+        "Preserve the sequential lure structure: do not reveal or sacrifice Zygarde merely because its raw BST is high while earlier role-specific answers remain healthy."
+      ],
+      "forbidden_behaviors": [
+        "Do not force Stealth Rock when Garchomp will faint before acting or immediate damage wins the position.",
+        "Do not repeatedly select a Choice-locked move into an immunity or extreme resistance.",
+        "Do not Mega Evolve a second Pokemon or treat Dragonite as a physical Dragon Dance set it does not carry.",
+        "Do not use Roost at full HP or when Mega Dragonite cannot survive the turn.",
+        "Do not use Coil when Haze, phazing, Encore, an immediate Ice KO, or another visible denial makes setup worthless.",
+        "Do not use Glare into status immunity, Coil into immediate denial or an Ice knockout, or Outrage while its lock gives the player a free Fairy answer."
+      ],
+      "state_machine": "Phase A opens with Garchomp's conditional hazard and phazing tax. Phase B cycles the two readable Choice commitments: Dragapult supplies physical speed and Hydreigon supplies special speed plus a Fairy lure, with U-turn or smart switching escaping bad locks. Phase C uses Dragalge to punish the obvious Fairy response, then special Mega Dragonite reverses the expected defensive category. Phase D uses Glare to change an otherwise losing speed exchange and permits Zygarde to Coil or commit to Outrage only when the endgame is genuinely safe."
+    },
+    "counterplay": {
+      "intentional_weakness": "Every member is a Dragon, so Ice and Fairy offense remain structurally excellent once the legal lures are identified; Dragapult and Hydreigon expose Choice locks, the roster has no cleric, hazard removal, screen, weather, terrain, or second setup sweeper, Multiscale can be broken by chip, and Zygarde deliberately uses Earthquake rather than unsupported Thousand Arrows so Flying, Levitate, and Air Balloon remain real answers.",
+      "first_loss_lesson": "Record which attackers are Choice-locked, scout the anti-Fairy Flash Cannon and Sludge Bomb lures, and stop spending the dedicated Zygarde answer merely to win an earlier trade. Break Multiscale before trying to burst Mega Dragonite.",
+      "classes": [
+        "hazard denial or removal, Magic Bounce, Taunt, and heavy immediate pressure against lead Garchomp",
+        "Fairy and Ice offense combined with careful scouting of Hydreigon's Flash Cannon, Dragalge's Poison STAB, and Fire coverage",
+        "Protect, immunity switching, Disable, Encore, item removal, or Trick to exploit Choice Band Dragapult and Choice Scarf Hydreigon",
+        "burn, Intimidate, Reflect, physical walls, and Rocky Helmet against Dragapult, Garchomp, and Zygarde; special walls against Hydreigon, Dragalge, and Mega Dragonite",
+        "Haze, Clear Smog, Unaware, phazing, Encore, Taunt, Trick, status immunity, and strong Ice pressure against the final Glare and Coil Zygarde",
+        "chip damage, hazards, status, priority, or a sacrificial weak hit to break Mega Dragonite's Multiscale before the decisive attack"
+      ],
+      "revealed_information": [
+        "Garchomp is the only hazard setter and Dragon Tail is its only phazing tool",
+        "Dragapult is Choice Band and Hydreigon is Choice Scarf",
+        "Hydreigon carries Flash Cannon and Dragalge carries Adaptability Poison pressure for Fairy answers",
+        "Mega Dragonite is a special attacker with Multiscale and Roost, not another Dragon Dance clock",
+        "Zygarde is the only setup Pokemon and uses Earthquake, so Flying, Levitate, and Air Balloon remain immune"
+      ],
+      "unacceptable_failure_modes": [
+        "No hidden required catch, exact Fairy, exact Ice Pokemon, or single move may be necessary.",
+        "The AI may not read unrevealed switches to select a lure or Choice lock.",
+        "Dragon Tail, Hurricane, Fire Blast, Hydro Pump, and Focus Blast misses may not be the primary source of difficulty.",
+        "Zygarde may not gain unsupported Thousand Arrows or turn Outrage accuracy and confusion variance into the primary source of difficulty.",
+        "Drake may not gain a second Mega or any non-Mega gimmick.",
+        "The singles duel may not be converted to doubles merely to reuse generic partner AI."
+      ]
+    },
+    "competitive_research": {
+      "index": {
+        "version": 1,
+        "record_count": 1005,
+        "sha256": "44d79fd2a5f7578013b2363f9e47d75a0f05ae4239da3bd6891e9651bca2648a"
+      },
+      "queries": [
+        "singles Dragon hazards pivoting Choice setup",
+        "Garchomp Dragapult Hydreigon Dragalge Dragonite Zygarde",
+        "anti-Fairy Dragon lure",
+        "Multiscale Dragonite Roost",
+        "Power Construct Zygarde endgame"
+      ],
+      "candidates": [
+        {
+          "rank": 1,
+          "reference_id": "elite:giovanni-cischke:worlds-2025",
+          "inspected_scope": "official World Champion roster and curated strategy digest",
+          "decision": "adapted",
+          "reason": "Giovanni's fast offense into a slower Ursaluna and Lunala mode inspires Drake's fast Choice pressure into a slow Zygarde close; no doubles support role or exact restricted roster is copied."
+        },
+        {
+          "rank": 2,
+          "reference_id": "smogon:gen8ou:002",
+          "inspected_scope": "complete published Dragapult and Garchomp offense sample",
+          "decision": "adapted",
+          "reason": "The pair divides fast Ghost and Dragon pressure from Ground pressure. Drake rejects Aurora Veil and multiple setup recipients, using hazards, phazing, and Choice commitments instead."
+        },
+        {
+          "rank": 3,
+          "reference_id": "showdown:gen9randomdoublesbattle:002",
+          "inspected_scope": "complete reproducible Choice Band Dragapult set and full team",
+          "decision": "adapted",
+          "reason": "Dragon Darts, Dragon Claw, Phantom Force, and U-turn transfer cleanly into singles and provide an exploitable lock instead of another setup clock."
+        },
+        {
+          "rank": 4,
+          "reference_id": "smogon:gen7uu:001",
+          "inspected_scope": "complete published Hydreigon balance sample",
+          "decision": "adapted",
+          "reason": "Dark Pulse and Flash Cannon establish Hydreigon as a Fairy lure. Verdant uses Choice Scarf, Draco Meteor, and U-turn to make its commitment readable."
+        },
+        {
+          "rank": 5,
+          "reference_id": "showdown:gen8randombattle:026",
+          "inspected_scope": "complete reproducible Adaptability Dragalge set and full team",
+          "decision": "adapted",
+          "reason": "Dragon and Poison special pressure plus Focus Blast become Drake's anti-Fairy sponge, with Assault Vest replacing passive Black Sludge."
+        },
+        {
+          "rank": 6,
+          "reference_id": "smogon:gen8ou:003",
+          "inspected_scope": "complete published Multiscale Dragonite balance sample",
+          "decision": "adapted",
+          "reason": "Roost and Multiscale are retained, but Verdant's Champions Mega has 145 Special Attack, so Drake reverses the expected physical answer with Draco Meteor, Hurricane, and Fire Blast."
+        },
+        {
+          "rank": 7,
+          "reference_id": "showdown:gen8randombattle:030",
+          "inspected_scope": "complete reproducible Power Construct Zygarde set and full team",
+          "decision": "adapted",
+          "reason": "Power Construct and one setup endgame are retained. Unsupported Thousand Arrows and the second Dragon Dance clock are rejected for source-legal Earthquake, Coil, Outrage, and Glare."
+        },
+        {
+          "rank": 8,
+          "reference_id": "smogon:gen8uu:011",
+          "inspected_scope": "complete published triple-Dragon-Dance offense sample",
+          "decision": "rejected",
+          "reason": "Layered setup works competitively, but three setup clocks would repeat Verdant's earlier overstuffing problem and make Drake less learnable."
+        },
+        {
+          "rank": 9,
+          "reference_id": "smogon:gen5ou:013",
+          "inspected_scope": "complete published TerrakChomp hyper-offense sample",
+          "decision": "rejected",
+          "reason": "Another physical Dragon Dance Dragonite would duplicate Zygarde's endgame and waste Mega Dragonite's special-stat identity."
+        },
+        {
+          "rank": 10,
+          "reference_id": "showdown:gen8randombattle:019",
+          "inspected_scope": "complete reproducible Salamence plus Palkia team",
+          "decision": "rejected",
+          "reason": "The roster's unrelated hazard pieces and repeated Thunder Wave do not produce a bespoke final Elite Four duel."
+        }
+      ],
+      "selected_reference_ids": [
+        "elite:giovanni-cischke:worlds-2025",
+        "smogon:gen8ou:002",
+        "showdown:gen9randomdoublesbattle:002",
+        "smogon:gen7uu:001",
+        "showdown:gen8randombattle:026",
+        "smogon:gen8ou:003",
+        "showdown:gen8randombattle:030"
+      ],
+      "imported_elements": [
+        "fast pressure into one slower endgame rather than parallel setup clocks",
+        "hazard and phazing lead discipline",
+        "two readable and exploitable Choice commitments",
+        "Adaptability Poison coverage as the anti-Fairy lure",
+        "Multiscale and Roost on a deliberately special Mega Dragonite",
+        "one Power Construct setup and paralysis closer"
+      ],
+      "rejected_gimmicks": [
+        "Tera from modern source formats",
+        "Dynamax and Gigantamax",
+        "Z-Moves",
+        "Primal Reversion",
+        "alternate Mega selection",
+        "a second or third setup endgame"
+      ]
+    },
+    "campaign_reservations": {
+      "spends": [
+        "Mega Dragonite as Drake's signature and only Mega",
+        "Zygarde Power Construct as the major Dragon legendary closer",
+        "the League's deliberate singles format shift",
+        "the campaign's definitive all-Dragon lure and preservation sequence"
+      ],
+      "preserves": [
+        "Wallace's rain and opposite-speed Champion transition",
+        "Glacia's Mega detonation and trapping clock",
+        "dedicated Perish and Shadow Tag for Phoebe",
+        "Mega Salamence, Dialga, Reshiram, Naganadel, and Rayquaza for distinct later roles rather than stacking them here"
+      ],
+      "releases": [
+        "The old five-legendary Drake roster and three simultaneous setup clocks are released.",
+        "Mega Salamence is not locked to Drake and may appear elsewhere if its role does not duplicate Mega Dragonite.",
+        "Thousand Arrows is not reserved until its player-facing learnset source is made legal and explicitly approved."
+      ],
+      "collision_notes": [
+        "No Drake species may repeat across the other four main-story League dossiers without a written role distinction and fresh collision review.",
+        "Other marquee battles may use individual Dragons, but not the same hazard-to-two-Choice-to-special-Mega-to-Zygarde sequence.",
+        "Steven's postgame superboss must preserve a distinct mineral and champion identity rather than reusing Drake's all-Dragon escalation.",
+        "Refresh all species, Mega, legendary, item, move, tempo, and player-question collisions after the full League set is merged."
+      ]
+    },
+    "presentation": {
+      "intro_concept": "Preserve Drake's native declaration that this is a singles duel. Add one concise line that every switch leaves a mark and every Dragon tests what the player chose to preserve.",
+      "defeat_concept": "Drake acknowledges that the player did not merely overpower six Dragons; they kept the right partner and answer alive until the final choice.",
+      "post_battle_concept": "He keeps the existing virtuous-heart transition and sends the player toward Wallace, preserving control in Drake's room and Hall 4 for manual healing and saving.",
+      "hint_concept": "A League NPC can truthfully warn that Drake fights one at a time, taxes switching, carries two locked attackers, and keeps his only setup Dragon for last; it does not reveal exact moves.",
+      "guide_summary": "Garchomp establishes the switch tax, Band Dragapult and Scarf Hydreigon reveal exploitable locks, Dragalge punishes careless Fairy play, special Mega Dragonite reverses the expected wall, and Earthquake Zygarde closes with the one setup clock. Preserve answers instead of trading blindly.",
+      "native_width_status": "concept-only; exact strings must be rendered and checked during chronological source implementation"
+    },
+    "fresh_critic_review": {
+      "reviewer_agent_id": null,
+      "context_mode": "fresh-no-history",
+      "verdict": null,
+      "is_this_sick_and_awesome": null,
+      "strongest_moment": null,
+      "weakest_part": null,
+      "difficulty_honesty": null,
+      "required_changes": [],
+      "author_response": null,
+      "resolved": false
+    },
+    "verification": {
+      "design_schema": "pending-fresh-critic",
+      "species_items_moves_abilities": "pass",
+      "source_implementation": "not-started",
+      "script_and_format": "not-started",
+      "dialogue_width": "concept-only",
+      "guide": "concept-only",
+      "runtime": "unplayed",
+      "observed_difficulty": null,
+      "evidence": [
+        "The canonical draft binds campaign_state.mechanics_baseline_id to pokemon_league_main_story and preserves the source-backed cap of 80.",
+        "Current source exposes all six species, items, selected ability slots, spreads, and four legal moves per Pokemon; the Power Construct species inherits the base Zygarde family learnset.",
+        "src/data/pokemon/evolution.h maps Dragonite plus Dragoninite to Mega Dragonite, whose current stats expose Multiscale and 145 base Special Attack, and no second Mega candidate appears.",
+        "TRAINER_DRAKE is currently a six-member single trainer, the intro truthfully announces a singles duel, and the room script contains no automatic HealPlayerParty call.",
+        "Every Zygarde move in the draft resolves through current player-facing level, TM, or tutor data; unsupported Thousand Arrows is intentionally absent.",
+        "The exact competitive index identity is version 1, 1005 records, SHA-256 44d79fd2a5f7578013b2363f9e47d75a0f05ae4239da3bd6891e9651bca2648a.",
+        "No game source has been changed for this dossier and no real-ROM battle has been run."
+      ],
+      "known_blockers": [
+        "A separate no-history excitement critic has not reviewed the final team, so the dossier cannot advance to design-complete.",
+        "The six-member party, offsets, required flags, Choice preservation, Multiscale policy, and Zygarde endgame logic are not implemented.",
+        "Exact dialogue is not written or width-rendered.",
+        "The guide still describes the old legendary stack and Mega Salamence.",
+        "The previous-ten chronological context does not exist yet.",
+        "Real-ROM AI behavior and observed difficulty are unknown.",
+        "Postgame rematch variants remain deferred."
+      ]
+    },
+    "mechanics_proposal": null
+  }
+}

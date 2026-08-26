@@ -11,6 +11,7 @@
 #include "load_save.h"
 #include "item_use.h"
 #include "pokemon.h"
+#include "pokemon_storage_system.h"
 #include "battle_pyramid.h"
 #include "battle_pyramid_bag.h"
 #include "constants/items.h"
@@ -22,6 +23,7 @@ extern u16 gUnknown_0203CF30[];
 static bool8 CheckPyramidBagHasItem(u16 itemId, u16 count);
 static bool8 CheckPyramidBagHasSpace(u16 itemId, u16 count);
 static void UnlockBattleItem(u16 itemId);
+static bool8 TryAddVerdantItemBundle(const u16 *itemIds, u8 count);
 
 struct BattleItemUnlock
 {
@@ -125,23 +127,131 @@ static void UnlockBattleItem(u16 itemId)
     }
 }
 
+bool8 PlayerOwnsItemAnywhere(u16 itemId)
+{
+    u8 i;
+    u8 boxId;
+    u8 boxPosition;
+
+    if (CheckBagHasItem(itemId, 1) || CheckPCHasItem(itemId, 1))
+        return TRUE;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE
+         && GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM) == itemId)
+            return TRUE;
+    }
+
+    for (i = 0; i < DAYCARE_MON_COUNT; i++)
+    {
+        if (GetBoxMonData(&gSaveBlock1Ptr->daycare.mons[i].mon, MON_DATA_SPECIES) != SPECIES_NONE
+         && GetBoxMonData(&gSaveBlock1Ptr->daycare.mons[i].mon, MON_DATA_HELD_ITEM) == itemId)
+            return TRUE;
+    }
+
+    for (boxId = 0; boxId < TOTAL_BOXES_COUNT; boxId++)
+    {
+        for (boxPosition = 0; boxPosition < IN_BOX_COUNT; boxPosition++)
+        {
+            if (GetBoxMonDataAt(boxId, boxPosition, MON_DATA_SPECIES) != SPECIES_NONE
+             && GetBoxMonDataAt(boxId, boxPosition, MON_DATA_HELD_ITEM) == itemId)
+                return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+static bool8 TryAddVerdantItemBundle(const u16 *itemIds, u8 count)
+{
+    bool8 added[5] = {FALSE};
+    u8 i;
+
+    if (count > ARRAY_COUNT(added))
+        return FALSE;
+
+    for (i = 0; i < count; i++)
+    {
+        if (PlayerOwnsItemAnywhere(itemIds[i]))
+            continue;
+
+        if (!AddBagItem(itemIds[i], 1))
+        {
+            while (i > 0)
+            {
+                i--;
+                if (added[i])
+                    RemoveBagItem(itemIds[i], 1);
+            }
+            return FALSE;
+        }
+        added[i] = TRUE;
+    }
+
+    return TRUE;
+}
+
+bool8 TryAddVerdantMegaKit(void)
+{
+    static const u16 sMegaKit[] =
+    {
+        ITEM_MEGA_BRACELET,
+        ITEM_SCEPTILITE,
+        ITEM_BLAZIKENITE,
+        ITEM_SWAMPERTITE,
+    };
+
+    return TryAddVerdantItemBundle(sMegaKit, ARRAY_COUNT(sMegaKit));
+}
+
+bool8 TryAddVerdantStevenRewardBundle(void)
+{
+    static const u16 sStevenRewardBundle[] =
+    {
+        ITEM_WIDE_LENS,
+        ITEM_MEGA_BRACELET,
+        ITEM_SCEPTILITE,
+        ITEM_BLAZIKENITE,
+        ITEM_SWAMPERTITE,
+    };
+
+    return TryAddVerdantItemBundle(sStevenRewardBundle, ARRAY_COUNT(sStevenRewardBundle));
+}
+
 u16 BuildUnlockedBattleItemList(u16 *items, u16 capacity)
 {
     u16 i;
     u16 count = 0;
     u8 partyIndex;
+    u8 boxId;
+    u8 boxPosition;
     u8 badgeCount = GetBadgeCount();
+
+    for (partyIndex = 0; partyIndex < PARTY_SIZE; partyIndex++)
+    {
+        if (GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPECIES) != SPECIES_NONE)
+            UnlockBattleItem(GetMonData(&gPlayerParty[partyIndex], MON_DATA_HELD_ITEM));
+    }
+    for (partyIndex = 0; partyIndex < DAYCARE_MON_COUNT; partyIndex++)
+    {
+        if (GetBoxMonData(&gSaveBlock1Ptr->daycare.mons[partyIndex].mon, MON_DATA_SPECIES) != SPECIES_NONE)
+            UnlockBattleItem(GetBoxMonData(&gSaveBlock1Ptr->daycare.mons[partyIndex].mon, MON_DATA_HELD_ITEM));
+    }
+    for (boxId = 0; boxId < TOTAL_BOXES_COUNT; boxId++)
+    {
+        for (boxPosition = 0; boxPosition < IN_BOX_COUNT; boxPosition++)
+        {
+            if (GetBoxMonDataAt(boxId, boxPosition, MON_DATA_SPECIES) != SPECIES_NONE)
+                UnlockBattleItem(GetBoxMonDataAt(boxId, boxPosition, MON_DATA_HELD_ITEM));
+        }
+    }
 
     for (i = 0; i < ARRAY_COUNT(sBattleItemUnlocks); i++)
     {
-        if (CheckBagHasItem(sBattleItemUnlocks[i].itemId, 1))
+        if (CheckBagHasItem(sBattleItemUnlocks[i].itemId, 1)
+         || CheckPCHasItem(sBattleItemUnlocks[i].itemId, 1))
             FlagSet(GetBattleItemUnlockFlag(i));
-        for (partyIndex = 0; partyIndex < PARTY_SIZE; partyIndex++)
-        {
-            if (GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPECIES) != SPECIES_NONE
-             && GetMonData(&gPlayerParty[partyIndex], MON_DATA_HELD_ITEM) == sBattleItemUnlocks[i].itemId)
-                FlagSet(GetBattleItemUnlockFlag(i));
-        }
 
         if ((FlagGet(GetBattleItemUnlockFlag(i))
           || (sBattleItemUnlocks[i].minimumBadges != DISCOVERY_ONLY
@@ -399,6 +509,8 @@ bool8 AddBagItem(u16 itemId, u16 count)
 
         itemPocket = &gBagPockets[pocket];
         newItems = AllocZeroed(itemPocket->capacity * sizeof(struct ItemSlot));
+        if (newItems == NULL)
+            return FALSE;
         memcpy(newItems, itemPocket->itemSlots, itemPocket->capacity * sizeof(struct ItemSlot));
 
         if (pocket == BERRIES_POCKET)
@@ -644,6 +756,8 @@ bool8 AddPCItem(u16 itemId, u16 count)
 
     // Copy PC items
     newItems = AllocZeroed(sizeof(gSaveBlock1Ptr->pcItems));
+    if (newItems == NULL)
+        return FALSE;
     memcpy(newItems, gSaveBlock1Ptr->pcItems, sizeof(gSaveBlock1Ptr->pcItems));
 
     // Use any item slots that already contain this item
@@ -867,10 +981,10 @@ static bool8 CheckPyramidBagHasSpace(u16 itemId, u16 count)
     {
         if (items[i] == itemId || items[i] == ITEM_NONE)
         {
-            if (quantities[i] + count <= MAX_BAG_ITEM_CAPACITY)
+            if (quantities[i] + count <= MAX_PYRAMID_BAG_CAPACITY)
                 return TRUE;
 
-            count = (quantities[i] + count) - MAX_BAG_ITEM_CAPACITY;
+            count = (quantities[i] + count) - MAX_PYRAMID_BAG_CAPACITY;
             if (count == 0)
                 return TRUE;
         }
@@ -888,6 +1002,13 @@ bool8 AddPyramidBagItem(u16 itemId, u16 count)
 
     u16 *newItems = Alloc(PYRAMID_BAG_ITEMS_COUNT * sizeof(u16));
     u8 *newQuantities = Alloc(PYRAMID_BAG_ITEMS_COUNT * sizeof(u8));
+
+    if (newItems == NULL || newQuantities == NULL)
+    {
+        Free(newItems);
+        Free(newQuantities);
+        return FALSE;
+    }
 
     memcpy(newItems, items, PYRAMID_BAG_ITEMS_COUNT * sizeof(u16));
     memcpy(newQuantities, quantities, PYRAMID_BAG_ITEMS_COUNT * sizeof(u8));
@@ -971,6 +1092,13 @@ bool8 RemovePyramidBagItem(u16 itemId, u16 count)
     {
         u16 *newItems = Alloc(PYRAMID_BAG_ITEMS_COUNT * sizeof(u16));
         u8 *newQuantities = Alloc(PYRAMID_BAG_ITEMS_COUNT * sizeof(u8));
+
+        if (newItems == NULL || newQuantities == NULL)
+        {
+            Free(newItems);
+            Free(newQuantities);
+            return FALSE;
+        }
 
         memcpy(newItems, items, PYRAMID_BAG_ITEMS_COUNT * sizeof(u16));
         memcpy(newQuantities, quantities, PYRAMID_BAG_ITEMS_COUNT * sizeof(u8));
@@ -1092,6 +1220,11 @@ ItemUseFunc ItemId_GetBattleFunc(u16 itemId)
 u8 ItemId_GetSecondaryId(u16 itemId)
 {
     return gItems[SanitizeItemId(itemId)].secondaryId;
+}
+
+u8 ItemId_GetFlingPower(u16 itemId)
+{
+    return gItems[SanitizeItemId(itemId)].flingPower;
 }
 
 bool32 IsPinchBerryItemEffect(u16 holdEffect)

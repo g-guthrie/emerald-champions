@@ -102,8 +102,8 @@ FallarborTown_Text_AnnoyingIntroPart7:
 
 FallarborTown_Text_AnnoyingIntroPart8:
 	.string "Ivy: And for one Bottle Cap, I'll change\n"
-	.string "one of a Pokémon's IVs to whatever\l"
-	.string "you want.\p"
+	.string "one of a Pokémon's IVs to one of\l"
+	.string "several useful values.\p"
 	.string "Also, for three Caps, I'll change all\n"
 	.string "of a Pokémon's IVs to give them a new\l"
 	.string "Hidden Power type.$"
@@ -348,11 +348,11 @@ SuperTraining_Text_RememberEvs:
 
 FallarborTown_Text_ExplainEvs:
 	.string "Evie: EVs are part of every stat a\n"
-	.string "a Pokémon has.\p"
+	.string "Pokémon has.\p"
 	.string "They can have HP EVs, Attack EVs,\n"
 	.string "Defense EVs… you get the idea.\p"
-	.string "Every time your Pokémon gains\n"
-	.string "experience in battle, it also gains EVs.\p"
+	.string "When your Pokémon defeats a foe in\n"
+	.string "battle, it can also gain EVs.\p"
 	.string "The kind of EVs gained depends on the\n"
 	.string "kind of Pokémon you defeated.\p"
 	.string "For example, beating a Zubat will give\n"
@@ -712,14 +712,15 @@ HyperTraining_Text_WantMeExplainIVs:
 	.string "Would you like me to explain IVs again?$"
 
 HyperTraining_Text_ExplainIVs:
-	.string "Ivy: IVs are a hidden part of your\n"
-	.string "Pokémon's stats that can only be\l"
-	.string "changed with special training,\l"
-	.string "or raised by giving them Vitamins.\p"
+	.string "Ivy: IVs are hidden values that help\n"
+	.string "determine your Pokémon's stats.\p"
 	.string "They can be any value between\n"
 	.string "0 and 31, and affect things like\l"
 	.string "the type of the move Hidden Power.\p"
-	.string "Higher IVs means higher stats, but\n"
+	.string "I can set them to 0, 1, 14, 15,\n"
+	.string "30, or 31, the useful values for\l"
+	.string "specialized training.\p"
+	.string "Higher IVs mean higher stats, but\n"
 	.string "higher stats aren't always better!\p"
 	.string "Example: If your Pokémon relies on\n"
 	.string "Special Attacks, a low Attack IV will\l"
@@ -759,8 +760,7 @@ HyperTraining_ReportSpDef:
 	.string "What would you like to change it to?$"
 
 HyperTraining_Text_HyperTrainingMadeMonStronger:
-	.string "The Hyper Training made {STR_VAR_1}\n"
-	.string "stronger!\p"
+	.string "{STR_VAR_1}'s IVs were adjusted!\p"
 	.string "Would you like to train some more?$"
 
 HyperTraining_Text_ForThreeCapsChangeAllIVs:

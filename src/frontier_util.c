@@ -20,6 +20,7 @@
 #include "tv.h"
 #include "apprentice.h"
 #include "pokedex.h"
+#include "pokemon.h"
 #include "recorded_battle.h"
 #include "data.h"
 #include "record_mixing.h"
@@ -886,10 +887,16 @@ static void SetFrontierData(void)
 static void SetSelectedPartyOrder(void)
 {
     s32 i;
+    u16 selected;
+    u16 selectedCount = min(gSpecialVar_0x8005, MAX_FRONTIER_PARTY_SIZE);
 
     ClearSelectedPartyOrder();
-    for (i = 0; i < gSpecialVar_0x8005; i++)
-        gSelectedOrderFromParty[i] = gSaveBlock2Ptr->frontier.selectedPartyMons[i];
+    for (i = 0; i < selectedCount; i++)
+    {
+        selected = gSaveBlock2Ptr->frontier.selectedPartyMons[i];
+        if (selected <= PARTY_SIZE)
+            gSelectedOrderFromParty[i] = selected;
+    }
     ReducePlayerPartyToSelectedMons();
 }
 
@@ -1691,6 +1698,13 @@ u8 GetFrontierBrainStatus(void)
     return status;
 }
 
+const u8 *GetFrontierBrainStreakAppearances(u8 facility)
+{
+    if (facility >= NUM_FRONTIER_FACILITIES)
+        return NULL;
+    return sFrontierBrainStreakAppearances[facility];
+}
+
 void CopyFrontierTrainerText(u8 whichText, u16 trainerId)
 {
     switch (whichText)
@@ -1973,11 +1987,13 @@ static u8 AppendCaughtBannedMonSpeciesName(u16 species, u8 count, s32 numBannedM
 static void AppendIfValid(u16 species, u16 heldItem, u16 hp, u8 lvlMode, u8 monLevel, u16 *speciesArray, u16 *itemsArray, u8 *count)
 {
     s32 i = 0;
+    u16 baseSpecies;
 
     if (species == SPECIES_EGG || species == SPECIES_NONE)
         return;
 
-    for (i = 0; gFrontierBannedSpecies[i] != 0xFFFF && gFrontierBannedSpecies[i] != species; i++)
+    baseSpecies = GET_BASE_SPECIES_ID(species);
+    for (i = 0; gFrontierBannedSpecies[i] != 0xFFFF && gFrontierBannedSpecies[i] != baseSpecies; i++)
         ;
 
     if (gFrontierBannedSpecies[i] != 0xFFFF)
@@ -2271,13 +2287,13 @@ static void Fill1PRecords(struct RankingHall1P *dst, s32 hallFacilityId, s32 lvl
 {
     s32 i, j;
     struct RankingHall1P record1P[4];
-    struct PlayerHallRecords *playerHallRecords = calloc(1, sizeof(struct PlayerHallRecords));
-    GetPlayerHallRecords(playerHallRecords);
+    struct PlayerHallRecords playerHallRecords = {0};
+    GetPlayerHallRecords(&playerHallRecords);
 
     for (i = 0; i < 3; i++)
         record1P[i] = gSaveBlock2Ptr->hallRecords1P[hallFacilityId][lvlMode][i];
 
-    record1P[3] = playerHallRecords->onePlayer[hallFacilityId][lvlMode];
+    record1P[3] = playerHallRecords.onePlayer[hallFacilityId][lvlMode];
 
     for (i = 0; i < 3; i++)
     {
@@ -2297,21 +2313,19 @@ static void Fill1PRecords(struct RankingHall1P *dst, s32 hallFacilityId, s32 lvl
         dst[i] = record1P[highestId];
         record1P[highestId].winStreak = 0;
     }
-
-    free(playerHallRecords);
 }
 
 static void Fill2PRecords(struct RankingHall2P *dst, s32 lvlMode)
 {
     s32 i, j;
     struct RankingHall2P record2P[4];
-    struct PlayerHallRecords *playerHallRecords = calloc(1, sizeof(struct PlayerHallRecords));
-    GetPlayerHallRecords(playerHallRecords);
+    struct PlayerHallRecords playerHallRecords = {0};
+    GetPlayerHallRecords(&playerHallRecords);
 
     for (i = 0; i < 3; i++)
         record2P[i] = gSaveBlock2Ptr->hallRecords2P[lvlMode][i];
 
-    record2P[3] = playerHallRecords->twoPlayers[lvlMode];
+    record2P[3] = playerHallRecords.twoPlayers[lvlMode];
 
     for (i = 0; i < 3; i++)
     {
@@ -2331,8 +2345,6 @@ static void Fill2PRecords(struct RankingHall2P *dst, s32 lvlMode)
         dst[i] = record2P[highestId];
         record2P[highestId].winStreak = 0;
     }
-
-    free(playerHallRecords);
 }
 
 static void PrintHallRecords(s32 hallFacilityId, s32 lvlMode)
@@ -2421,10 +2433,9 @@ void ClearRankingHallRecords(void)
 void SaveGameFrontier(void)
 {
     s32 i;
-    struct Pokemon *monsParty = calloc(PARTY_SIZE, sizeof(struct Pokemon));
+    struct Pokemon monsParty[PARTY_SIZE];
 
-    for (i = 0; i < PARTY_SIZE; i++)
-        monsParty[i] = gPlayerParty[i];
+    memcpy(monsParty, gPlayerParty, sizeof(monsParty));
 
     i = gPlayerPartyCount;
     LoadPlayerParty();
@@ -2433,10 +2444,7 @@ void SaveGameFrontier(void)
     ClearContinueGameWarpStatus2();
     gPlayerPartyCount = i;
 
-    for (i = 0; i < PARTY_SIZE; i++)
-        gPlayerParty[i] = monsParty[i];
-
-    free(monsParty);
+    memcpy(gPlayerParty, monsParty, sizeof(monsParty));
 }
 
 // Frontier Brain functions.
@@ -2541,6 +2549,7 @@ void CreateFrontierBrainPokemon(void)
                 friendship = 0;
         }
         SetMonData(&gEnemyParty[monPartyId], MON_DATA_FRIENDSHIP, &friendship);
+        TryUpdateMonFormForHeldItem(&gEnemyParty[monPartyId]);
         CalculateMonStats(&gEnemyParty[monPartyId]);
         monPartyId++;
     }
@@ -2629,4 +2638,13 @@ static void CopyFrontierBrainText(bool8 playerWonText)
         StringCopy(gStringVar4, sFrontierBrainPlayerWonTexts[symbol][facility]);
         break;
     }
+}
+
+void ClearEnemyPartyAfterChallenge(void)
+{
+    // Facility battles retain the enemy party for rental swaps and post-battle
+    // scripts. Once the challenge ends, stale opponents must not become the
+    // next Factory or Slateport Tent rental pool.
+    if (gSpecialVar_0x8005 == 0)
+        ZeroEnemyPartyMons();
 }

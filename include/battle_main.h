@@ -65,6 +65,7 @@ void SwitchInClearSetData(void);
 void FaintClearSetData(void);
 void BattleTurnPassed(void);
 u8 IsRunningFromBattleImpossible(void);
+void SwitchTwoBattlersInParty(u8 battler, u8 battler2);
 void SwitchPartyOrder(u8 battlerId);
 void SwapTurnOrder(u8 id1, u8 id2);
 u32 GetBattlerTotalSpeedStat(u8 battlerId);

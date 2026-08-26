@@ -69,6 +69,7 @@ struct ResourceFlags
 #define RESOURCE_FLAG_TRACED            0x10
 #define RESOURCE_FLAG_EMERGENCY_EXIT    0x20
 #define RESOURCE_FLAG_NEUTRALIZING_GAS  0x40
+#define RESOURCE_FLAG_EMERGENCY_EXIT_LATCHED 0x80
 
 struct DisableStruct
 {
@@ -162,6 +163,8 @@ struct ProtectStruct
     u32 pranksterElevated:1;
     u32 quickDraw:1;
     u32 shellTrap:1;
+    u32 usedAllySwitch:1;
+    u32 beakBlastCharge:1;
     u32 physicalDmg;
     u32 specialDmg;
     u8 physicalBattlerId;
@@ -186,6 +189,7 @@ struct SpecialStatus
     u8 instructedChosenTarget:3; //8
     u8 berryReduced:1;
     u8 gemBoost:1;
+    u8 symbiosisPending:1;
     u8 rototillerAffected:1;  // to be affected by rototiller
     u8 parentalBondOn:2;
     u8 multiHitOn:1;
@@ -221,6 +225,8 @@ struct SideTimer
     u8 toxicSpikesAmount;
     u8 stealthRockAmount;
     u8 stickyWebAmount;
+    u8 stickyWebBattlerId;
+    u8 stickyWebBattlerSide;
     u8 auroraVeilTimer;
     u8 auroraVeilBattlerId;
     u8 tailwindTimer;
@@ -510,7 +516,7 @@ struct BattleStruct
     u8 turnCountersTracker;
     u16 wrappedMove[MAX_BATTLERS_COUNT];
     u8 rageFistHits[PARTY_SIZE][2];
-    bool8 makeItRainStatDropped;
+    bool8 spreadMoveStatDropped;
     u16 moveTarget[MAX_BATTLERS_COUNT];
     u8 expGetterMonId;
     u8 wildVictorySong;
@@ -568,6 +574,7 @@ struct BattleStruct
     u8 AI_itemFlags[2];
     u16 choicedMove[MAX_BATTLERS_COUNT];
     u16 changedItems[MAX_BATTLERS_COUNT];
+    u16 flingItem;
     u8 intimidateBattler;
     u8 switchInItemsCounter;
     u8 arenaTurnCounter;
@@ -625,9 +632,16 @@ struct BattleStruct
     u16 changedSpecies[PARTY_SIZE]; // For Zygarde or future forms when multiple mons can change into the same pokemon.
     u8 quickClawBattlerId;
     struct StolenItem itemStolen[PARTY_SIZE];  // Player's team that had items stolen (two bytes per party member)
+    u16 originalEnemyItems[PARTY_SIZE]; // Prevent wild Trick/Bestow exchanges from duplicating permanent items on capture.
+    // Explicit, bidirectional Sky Drop state. Party-slot snapshots prevent a
+    // replacement in the same battler position from being mistaken for the
+    // original target.
+    u8 skyDropTarget[MAX_BATTLERS_COUNT];
+    u8 skyDropUser[MAX_BATTLERS_COUNT];
+    u8 skyDropPartyId[MAX_BATTLERS_COUNT];
+    u8 redCardSwitched; // Battler slots whose original move user was replaced before move-end effects.
     u8 blunderPolicy:1; // should blunder policy activate
     u8 ballSpriteIds[2];    // item gfx, window gfx
-    u8 stickyWebUser;
     u8 appearedInBattle; // Bitfield to track which Pokemon appeared in battle. Used for Burmy's form change
 };
 
@@ -718,6 +732,7 @@ struct BattleScripting
     bool8 cudChewConsumptionContext;
     bool8 blockCudChewConsumption;
     u8 cudChewConsumptionBattler;
+    bool8 stickyWebStatDrop;
 };
 
 // rom_80A5C6C
@@ -886,6 +901,7 @@ extern u16 gLastMoves[MAX_BATTLERS_COUNT];
 extern u16 gLastLandedMoves[MAX_BATTLERS_COUNT];
 extern u16 gLastHitByType[MAX_BATTLERS_COUNT];
 extern u16 gLastResultingMoves[MAX_BATTLERS_COUNT];
+extern u16 gLastUsedMoveType[MAX_BATTLERS_COUNT];
 extern u16 gLockedMoves[MAX_BATTLERS_COUNT];
 extern u16 gLastUsedMove;
 extern u8 gLastHitBy[MAX_BATTLERS_COUNT];
@@ -949,6 +965,6 @@ extern u8 gBattleControllerData[MAX_BATTLERS_COUNT];
 extern bool8 gHasFetchedBall;
 extern u8 gLastUsedBall;
 extern u16 gLastThrownBall;
-extern bool8 gSwapDamageCategory; // Photon Geyser, Shell Side Arm, Light That Burns the Sky
+extern bool8 gSwapDamageCategory; // Photon Geyser and Shell Side Arm
 
 #endif // GUARD_BATTLE_H

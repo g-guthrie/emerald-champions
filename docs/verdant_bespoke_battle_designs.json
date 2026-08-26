@@ -18,7 +18,7 @@
       "player_state": "One starter chosen from seven regional trios. Oldale's Center teacher, ability menu, Mart core held items, $25,000 starting money, and $1,000 ten-level Rare Candy are all available.",
       "evolution_stage_fit": {
         "campaign_phase": "pre-Stone youngster chapter",
-        "effective_levels": "14",
+        "effective_levels": "15",
         "eligible_ratio": "1/1",
         "mature_exceptions": [],
         "mega_access": false,
@@ -26,7 +26,7 @@
         "reason": "Every dynamic branch uses the player's same-generation counter-starter before its normal evolution level."
       },
       "manual_quality": 10,
-      "manual_difficulty": 6.8,
+      "manual_difficulty": 7.5,
       "corpus_review": {
         "reference_pool_size": 983,
         "full_team_candidates": [
@@ -71,11 +71,11 @@
           "adaptation": "The Combusken donor informs the aggressive Fire-starter branch while its setup complexity is intentionally held back for later rival fights."
         }
       ],
-      "team_intent": "The rival always fields the type-counter starter from the same regional trio the player chose. It is level 14 with perfect IVs, a Life Orb, its universal Pledge STAB, Return, Toxic, and Protect.",
+      "team_intent": "The rival always fields the type-counter starter from the same regional trio the player chose. It is level 15, one above the strict cap, with perfect IVs, a Life Orb, its universal Pledge STAB, Return, Toxic, and Protect.",
       "intended_counterplay": "There is no single required solution. The player can use any legal coverage or status plan their chosen starter supports, or lean on Focus Sash, Eviolite, Leftovers, Life Orb, or a Choice item from Oldale. Protect, setup, Counter or Mirror Coat, Endeavor, speed control, and direct offense are all viable on different starters.",
       "bespoke_ai": "The normal foe-aware viability AI chooses among offense, Toxic, and Protect. No opening is forced and no hidden lock-and-key sequence is required.",
       "uniqueness": "The encounter supports all 21 starters across Generations 1-7 through one native counterpart rule, while May and Brendan remain mechanically identical. It introduces Verdant's preparation freedom without pretending the player already owns a full team.",
-      "closure": "Battle 1 is a hard but open-ended first preparation check: the rival has a competitive item and perfect IVs at the cap, the exact counterpart matches the player's chosen generation, and multiple legal plans can win."
+      "closure": "Battle 1 is a dangerous but open-ended first preparation check: the rival's exact counterpart matches the player's chosen generation, its +1 level and competitive item establish Verdant's 7.5 floor, and multiple legal plans can still win without a starter-specific lock."
     },
     "BATTLE_002_ROUTE_102_CALVIN": {
       "guide_order": 2,
@@ -315,7 +315,7 @@
           "source": "docs/showdown_champions_random_doubles_30.json",
           "sample": 30,
           "seed": "30,40965,46387,22631",
-          "adaptation": "Pikachu keeps Light Ball, Lightning Rod, Fake Out, Protect, and Volt Tackle. Electroweb replaces Encore to give the hard doubles battle foe-only spread pressure and active speed control."
+          "adaptation": "Pikachu keeps Light Ball, Lightning Rod, Fake Out, Encore, and Volt Tackle. Electroweb adds foe-only spread speed control, while Encore gives the fragile lead an active punish instead of another generic Protect."
         },
         {
           "source": "docs/showdown_gen4_random_singles_30.json",
@@ -393,7 +393,7 @@
           "source": "docs/showdown_gen8_random_singles_30.json",
           "sample": 1,
           "seed": "1,7919,1640,31348",
-          "adaptation": "Alolan Sandshrew keeps Sandslash's Slush Rush and Iron Head identity. Eviolite, Icicle Crash, Brick Break, and Protect create immediate juvenile pressure without importing Swords Dance."
+          "adaptation": "Alolan Sandshrew keeps Sandslash's Slush Rush and Iron Head identity. Eviolite, Icicle Crash, Brick Break, and Rapid Spin create immediate juvenile pressure and an active answer to the player's field setup without importing Swords Dance."
         },
         {
           "source": "docs/showdown_gen4_random_doubles_30.json",
@@ -530,7 +530,7 @@
             "source": "docs/showdown_gen8_random_doubles_30.json",
             "sample": 8,
             "decision": "back-line control set selected, full team rejected",
-            "reason": "Qwilfish's Intimidate, Thunder Wave, Protect, Poison Jab, and Liquidation set fits exactly, but its mature offensive partners have no Fisherman or youngster-stage identity."
+            "reason": "Qwilfish's Intimidate, Thunder Wave, Poison Jab, and Liquidation shell fits, but Aqua Jet replaces Protect so the reserve contributes priority and its mature partners remain rejected."
           },
           {
             "source": "docs/showdown_gen7_random_doubles_30.json",
@@ -564,7 +564,7 @@
           "source": "docs/showdown_gen8_random_doubles_30.json",
           "sample": 8,
           "seed": "8,63352,12441,54102",
-          "adaptation": "Qwilfish's Sitrus Berry, Intimidate, Thunder Wave, Protect, Poison Jab, and Liquidation set is imported verbatim as the second-wave board controller."
+          "adaptation": "Qwilfish keeps Sitrus Berry, Intimidate, Thunder Wave, Poison Jab, and Liquidation; Aqua Jet replaces Protect so the second-wave controller can also finish a weakened target."
         },
         {
           "source": "Verdant source legality",
@@ -734,7 +734,7 @@
           "source": "docs/showdown_gen7_random_doubles_30.json",
           "sample": 18,
           "seed": "18,11472,27871,39797",
-          "adaptation": "Joltik legally de-evolves Galvantula's Life Orb Compound Eyes Thunder, Bug Buzz, and Protect shell. Energy Ball replaces Volt Switch to punish Ground and Rock answers without creating a forced switch script."
+          "adaptation": "Joltik legally de-evolves Galvantula's Life Orb Compound Eyes Thunder and Bug Buzz shell. Energy Ball punishes Ground and Rock answers, while Volt Switch gives the reserve an active escape instead of another generic Protect."
         }
       ],
       "team_intent": "Normal Gem Sturdy Pineco and Light Clay Telepathy Dottler lead. Dottler chooses a relevant screen while Pineco chips or waits until damage makes Explosion worthwhile; Telepathy makes the blast safe. Removing Dottler first destroys that safe window. Eviolite Sturdy Dwebble then supplies Rock spread pressure and item denial, while Life Orb Compound Eyes Joltik attacks specially with accurate Thunder so Intimidate or one physical wall cannot solve the fight.",
@@ -1331,7 +1331,7 @@
         {
           "source": "docs/smogon_gen4_9_ou_uu_nu_sample_teams.json",
           "team": "gen9ou sample 1 / sample 2",
-          "adaptation": "Focus Sash Toxic Debris Glimmet retains the OU leads' fast special identity, Power Gem, and Sludge Bomb. Rock Polish is its legal first-stage speed plan and Protect preserves normal doubles interaction."
+          "adaptation": "Focus Sash Toxic Debris Glimmet retains the OU leads' fast special identity, Power Gem, and Sludge Bomb. Rock Polish is its legal first-stage speed plan and Acid Spray creates a partner-facing special-pressure role instead of another Protect slot."
         }
       ],
       "team_intent": "Mental Herb Sturdy Shuckle and Sitrus Sheer Force Cranidos open the Gym's geology lab. Guard Split averages Shuckle's enormous defenses with Cranidos's frailty, turning the fossil breaker into a temporary tank while making Shuckle much easier to remove; Helping Hand and Rock Tomb keep the donor useful. Eviolite Storm Drain Lileep catches the obvious Water attack and can convert it into Giga Drain, Ancient Power, or Earth Power pressure while Stockpile creates a separate denial target. Focus Sash Toxic Debris Glimmet supplies fast special Rock and Poison pressure, can use Rock Polish, and punishes careless physical damage with Toxic Spikes.",
@@ -1385,7 +1385,7 @@
             "source": "docs/showdown_champions_random_doubles_30.json / docs/showdown_gen6_random_doubles_30.json",
             "sample": "21 / 24",
             "decision": "Tough Claws reserve selected; both full teams rejected",
-            "reason": "Both Barbaracle donors use Tough Claws Rock and Water offense. Binacle keeps Razor Shell, Cross Chop, Rock Slide, and Protect but deliberately rejects their repeated Shell Smash and White Herb module."
+            "reason": "Both Barbaracle donors use Tough Claws Rock and Water offense. Binacle keeps Razor Shell and Cross Chop, then uses Stone Edge and Shadow Claw for single-target coverage while rejecting Shell Smash and the repeated Rock Slide/Protect shell."
           }
         ],
         "decision": "All 983 references and the tabled alternatives were reviewed. No complete team contains more than one selected family or fits cap 14. Four role-faithful donors are rebuilt into one Trainer's School idea: the teacher repeats a young fossil's spread attack, then two independent young rocks test whether the player overcommitted to that first answer."
@@ -1413,10 +1413,10 @@
           "source": "docs/showdown_champions_random_doubles_30.json / docs/showdown_gen6_random_doubles_30.json",
           "sample": "21 / 24",
           "seed": "21,35229,32500,2738 / 24,58986,37129,31214",
-          "adaptation": "Expert Belt Tough Claws Binacle keeps Barbaracle's physical Water and Rock role. Legal Razor Shell and Cross Chop provide contact-boosted coverage; Rock Slide and Protect retain doubles interaction without a second setup sweeper."
+          "adaptation": "Expert Belt Tough Claws Binacle keeps Barbaracle's physical Water and Rock role. Razor Shell and Cross Chop provide contact-boosted coverage; Stone Edge and Shadow Claw make the closer active without a second setup sweeper or another Rock Slide/Protect pair."
         }
       ],
-      "team_intent": "Sitrus Inner Focus Oranguru and Life Orb Strong Jaw Tyrunt open Tommy's repeat-after-me lesson. Tyrunt's invested Speed lets it choose Rock Slide before slower Oranguru; Instruct can then repeat that spread move immediately, while Psychic, Foul Play, Dragon Claw, Fire Fang, and both Protects keep either lead functional when the repetition is denied. Eviolite Sturdy Nosepass adds Wide Guard and Thunder Wave so blindly answering spread with more spread is unsafe. Expert Belt Tough Claws Binacle closes with physical Water, Fighting, and Rock coverage rather than another setup module.",
+      "team_intent": "Sitrus Inner Focus Oranguru and Life Orb Strong Jaw Tyrunt open Tommy's repeat-after-me lesson. Tyrunt's invested Speed lets it choose Rock Slide before slower Oranguru; Instruct can then repeat that spread move immediately, while Psychic, Foul Play, Dragon Claw, Fire Fang, and lead Protects keep the opening functional when repetition is denied. Eviolite Sturdy Nosepass adds Wide Guard and Thunder Wave. Expert Belt Tough Claws Binacle closes with single-target Water, Fighting, Rock, and Ghost coverage rather than another setup or Rock Slide module.",
       "intended_counterplay": "Taunt, Disable, Encore, Imprison, sleep, paralysis, speed reversal, or removing either half stops Instruct; Dark, Bug, and Ghost pressure Oranguru, while Fighting, Ground, Ice, Steel, Dragon, and Fairy pressure Tyrunt. Wide Guard, Protect, Rock resistance, Intimidate, burn, screens, or ordinary focus fire contain the repeated Rock Slide without requiring a single species. Fighting, Ground, Grass, Steel, and Water pressure Nosepass, while Electric, Grass, Ground, Fighting, and strong neutral damage answer Binacle. The player may break the teacher, break the pupil, reverse their action order, guard the spread move, or out-position the reserves.",
       "bespoke_ai": "Tommy uses the native doubles guard, foe and partner awareness, smart switching, combo, and speed-control profiles. Existing partner scoring already permits Instruct when the chosen partner move is spread; the combo profile now adds a contextual bonus only when a living partner has actually selected a both-foes or foes-and-ally move. It does not force Instruct, Rock Slide, a target, a turn, or a switch. Wide Guard, Strong Jaw, Tough Claws, Sturdy, Life Orb, Eviolite, Sitrus, Thunder Wave, and Protect remain native.",
       "uniqueness": "This is Verdant's only repeat-after-me battle and its only early team whose main threat depends on preserving action order between a teacher and pupil. Oranguru, Tyrunt, Nosepass, and Binacle do not appear in Battles 1-16. It uses no weather, terrain, Trick Room, Tailwind, Fake Out, redirection, dance, detonation, Perish timer, trap, screen, item theft, Choice lock, friendly damage, defense transfer, Toxic Debris, Schooling, or prior Water Spout, Shell Smash, Power Spot, or Guard Split module.",
@@ -1596,6 +1596,970 @@
       "uniqueness": "This is Verdant's only protected-confidence examination and the only opening boss with six entirely stage-valid young or single-stage Pokémon. Klefki, Rockruff, Mudbray, Bonsly, Maractus, and Regirock do not appear in Battles 1-18. It uses no weather, terrain, Trick Room, Tailwind, Instruct, Guard Split, hazard, trap, Perish timer, dance, detonation, redirection, friendly damage, Weakness Policy, Schooling, or Mega. The lone legendary appears as an aggressive mineral ace rather than a stack of unrelated boss legends.",
       "reward_logic": "The Expert Belt reward remains correct. Receiving the discovery-only item permanently unlocks unlimited Expert Belts through the native battle-item shop exactly when all-legal move access makes super-effective coverage meaningful. The Stone Badge still raises the cap and unlocks Cut and Honey progression; stale internal TM39 and GiveRockTomb identifiers are implementation names only, not player-facing misinformation.",
       "closure": "Battle 19 is a 10/10-quality and 10/10-difficulty boss because every source-facing layer agrees: Roxanne teaches protection, demonstrates it with a deterministic boost engine, tests boost control and spread defense across five distinct recipients, then reveals one broadly answerable level-19 legendary ace. Six perfect, nonrepeating, stage-valid Pokémon at levels 17-19, six distinct items, coherent native AI, truthful hints, a meaningful reward, and wide status, type, tempo, spread, priority, item, and focus-fire counterplay make it brutally hard without reducing victory to one hidden solution."
+    },
+    "BATTLE_020_ROUTE_116_JOEY": {
+      "guide_order": 20,
+      "trainer_ids": [
+        "TRAINER_JOEY"
+      ],
+      "status": "closed",
+      "campaign_point": "First west-entry Route 116 sight trainer in the canonical post-Stone chapter; the route was physically open earlier, but Gym-first canon fixes this first authored state at strict cap 20",
+      "strict_cap": 20,
+      "player_state": "The player can field six cap-20 Pokémon with every legal move and ability, the discovered and badge-tier held-item stock, all prior encounters plus Rustboro and west Route 116, and frictionless leveling. Set style and the battle-Bag ban remain active. Steven has not yet been reached in Granite Cave, so neither side has Mega access.",
+      "evolution_stage_fit": {
+        "campaign_phase": "post-Stone young training chapter",
+        "effective_levels": "21-22",
+        "eligible_ratio": "4/4",
+        "mature_exceptions": [],
+        "mega_access": false,
+        "status": "pass",
+        "reason": "Cubchoo evolves at level 37, Crabrawler by Ice Stone, Pancham at level 32 with a Dark-type party member, and Mankey at level 28. The first cap-20 battle therefore remains entirely young while raising the mechanical difficulty rather than skipping stage progression."
+      },
+      "manual_quality": 10,
+      "manual_difficulty": 8.7,
+      "corpus_review": {
+        "reference_pool_size": 983,
+        "full_team_candidates": [
+          {
+            "source": "docs/showdown_champions_random_doubles_30.json",
+            "sample": "5 / 8",
+            "decision": "young crab role selected; both full teams rejected",
+            "reason": "Both Champions generators give Life Orb Iron Fist Crabominable Drain Punch, Ice Hammer, Mach Punch, and Protect. Eviolite Anger Point Crabrawler keeps the legal young fighter and Drain Punch protection shell while replacing mature Ice offense with the guaranteed-critical activation puzzle."
+          },
+          {
+            "source": "docs/showdown_gen6_random_doubles_30.json",
+            "sample": 21,
+            "decision": "young pivoting fighter selected; full team rejected",
+            "reason": "Life Orb Pangoro provides Parting Shot and mixed physical coverage. Sitrus Scrappy Pancham keeps Parting Shot and adds legal Quick Guard, Knock Off, and Drain Punch so it supplies independent tempo without importing a level-32 evolution."
+          },
+          {
+            "source": "docs/showdown_gen4_random_singles_30.json",
+            "sample": 17,
+            "decision": "fast simian attacker and Anger Point precedent selected; full team rejected",
+            "reason": "Primeape provides Close Combat, U-turn, Rock coverage, and Anger Point precedent. Choice Scarf Defiant Mankey inherits the fast physical role while the actual Anger Point lesson moves to a partner that can survive Cubchoo's Frost Breath."
+          },
+          {
+            "source": "full 983-team review",
+            "team": "Cubchoo trigger search",
+            "decision": "bespoke legal trigger selected",
+            "reason": "No encoded reference pairs Frost Breath with Anger Point and no complete team contains two selected families. Cubchoo is the stage-legal source-native trigger: it learns guaranteed-critical Frost Breath at level 18 and Timid Speed investment lets it act before uninvested Crabrawler."
+          }
+        ],
+        "decision": "All 983 references and three alternate training-ring concepts were reviewed. No full import fits. Three mature competitive roles are de-evolved, then connected by one source-legal young trigger so Joey's bandage dialogue becomes a coherent doubles puzzle rather than a generic collection of fighters."
+      },
+      "competitive_references": [
+        {
+          "source": "docs/showdown_champions_random_doubles_30.json",
+          "sample": "5 / 8",
+          "seed": "5,39595,7812,25626 / 8,63352,12441,54102",
+          "adaptation": "Eviolite Anger Point Crabrawler keeps both Crabominable donors' Drain Punch and Protect resilience. Rock Slide converts the Attack maximum into visible doubles pressure, while Crabhammer prevents one Fighting resist from solving the recipient."
+        },
+        {
+          "source": "docs/showdown_gen6_random_doubles_30.json",
+          "sample": 21,
+          "seed": "21,35229,32500,2738",
+          "adaptation": "Sitrus Scrappy Pancham preserves Pangoro's Parting Shot role. Quick Guard, Knock Off, and Drain Punch make the unevolved reserve a complete tempo piece rather than a second setup recipient."
+        },
+        {
+          "source": "docs/showdown_gen4_random_singles_30.json",
+          "sample": 17,
+          "seed": "17,3553,26328,8460",
+          "adaptation": "Choice Scarf Defiant Mankey keeps Primeape's Close Combat and U-turn fast-attacker shell. Seed Bomb targets Water and Ground answers while Poison Jab punishes Fairy answers, avoiding another immediate Rock Slide after Roxanne."
+        },
+        {
+          "source": "checked-in Cubchoo learnset and native Anger Point mechanics",
+          "adaptation": "Focus Sash Rattled Cubchoo uses legal Frost Breath, Icy Wind, Encore, and Protect. Its guaranteed critical hit supplies the missing activation while HP and Speed investment minimizes partner damage and establishes the intended order without a hidden Scarf."
+        }
+      ],
+      "team_intent": "Focus Sash Rattled Cubchoo and Eviolite Anger Point Crabrawler open Joey's toughness drill. Cubchoo's guaranteed-critical Frost Breath can safely strike its slower partner, maximizing Crabrawler's Attack before Rock Slide, Drain Punch, Crabhammer, or Protect; Icy Wind and Encore keep Cubchoo useful when activation is denied. Sitrus Scrappy Pancham then supplies Quick Guard, Parting Shot, item removal, and recovery damage. Choice Scarf Defiant Mankey closes with fast Close Combat, Seed Bomb, U-turn, or Poison Jab rather than repeating the opening's spread move.",
+      "intended_counterplay": "Fake Out, Taunt, redirection, priority after Quick Guard is removed, sleep, paralysis, speed reversal, focused damage, or forcing Cubchoo to protect can stop the trigger. Protecting or switching around Crabrawler, Haze, Clear Smog, Unaware, Intimidate after activation, burn, Charm, Reflect, phazing, Wide Guard, Ghost immunity, or Flying, Fairy, and Psychic pressure answer the maximum Attack without one mandatory catch. Pancham and Mankey remain vulnerable to Fairy, Flying, Psychic, status, priority, and Choice-lock exploitation. The player may break either combo half, erase the boost, guard the spread payoff, or preserve typed answers for the reserves.",
+      "bespoke_ai": "Joey uses the native doubles guard, foe and partner awareness, smart switching, combo, and speed-control profiles. Partner targeting now treats a survivable guaranteed-critical move into an unboosted Anger Point physical attacker as beneficial rather than applying the generic ally-attack penalty; the combo bonus checks survivability and whether Attack can still rise, so Frost Breath is not repeated after activation. Icy Wind, Rock Slide, Quick Guard, Parting Shot, Choice Scarf, Defiant, Sash, Eviolite, Sitrus, and Protect remain native. No move, target, turn, or switch is forced.",
+      "uniqueness": "This is Verdant's only scrape-to-strength training drill and first authored Frost Breath plus Anger Point encounter. Cubchoo, Crabrawler, Pancham, and Mankey do not appear in Battles 1-19. It uses no weather, terrain, hazard, Safeguard, Swagger, Instruct, Guard Split, Trick Room, Tailwind, Perish timer, trap, screen, dance, detonation, item theft plan, Weakness Policy, Schooling, or Mega.",
+      "closure": "Battle 20 is 10/10 because Joey's old bandage joke now describes the actual battle: one controlled scrape creates a dangerous but interruptible young fighter, and two distinct reserves keep the lesson from becoming a single gimmick. Four perfect, stage-valid Pokémon at levels 21-22, four distinct items, contextual native AI, and broad denial, boost-control, type, speed, spread, status, priority, and focus-fire counterplay make it an 8.7/10 opening to the cap-20 chapter without a forced solution."
+    },
+    "BATTLE_021_ROUTE_116_JOSE": {
+      "guide_order": 21,
+      "trainer_ids": ["TRAINER_JOSE"],
+      "status": "closed",
+      "campaign_point": "Optional south-fork Bug Catcher in the west Route 116 clearing, canonically fought after Joey although the two forks are reversible",
+      "strict_cap": 20,
+      "player_state": "The player has the complete cap-20 pre-Steven sandbox, including every legal move and ability, core and discovered items, Cut and Honey access, and all west Route 116 encounters. Set style and the battle-Bag ban remain active; neither side has Mega access yet.",
+      "evolution_stage_fit": {
+        "campaign_phase": "post-Stone legal metamorphosis chapter",
+        "effective_levels": "21-23",
+        "eligible_ratio": "3/4",
+        "legal_early_evolutions": ["Vivillon legally evolves from Scatterbug and Spewpa by level 12."],
+        "mega_access": false,
+        "status": "pass",
+        "reason": "Vivillon is a deliberately legal early final form, Charjabug is the level-20 middle stage of Grubbin, Sizzlipede evolves at level 28, and Scyther is the item-evolving base of its family. No form is borrowed before its real source threshold."
+      },
+      "manual_quality": 10,
+      "manual_difficulty": 8.2,
+      "corpus_review": {
+        "reference_pool_size": 983,
+        "full_team_candidates": [
+          {"source": "docs/showdown_gen6_random_singles_30.json", "sample": 5, "decision": "exact accurate-air attacker selected; full team rejected", "reason": "Compound Eyes Vivillon supplies Hurricane and Sleep Powder exactly, but its mature random partners do not form a Route 116 swarm."},
+          {"source": "docs/smogon_gen4_9_ou_uu_nu_sample_teams.json", "team": "gen4uu sample 8 / gen9nu sample 1", "decision": "Choice Band Technician closer selected; both full teams rejected", "reason": "The samples establish Choice Band Technician Scyther with Brick Break, Quick Attack, and modern Dual Wingbeat. Charjabug and Sizzlipede supply bespoke young support instead of importing mature sample partners."},
+          {"source": "docs/vgc_major_champion_teams.json", "team": "regional-monterrey-2026", "decision": "Scyther relevance corroborated; full roster rejected", "reason": "The verified winning roster shows Scyther remains competitively meaningful, but no champion roster contains a second selected family and no complete team fits cap 20."}
+        ],
+        "decision": "All 983 references were flattened and reviewed. Vivillon appears once, Scyther nine times, and Charjabug and Sizzlipede zero times; no reference contains two chosen species. The final team is therefore hand-built as one Battery-powered swarm with no copied full roster."
+      },
+      "competitive_references": [
+        {"source": "docs/showdown_gen6_random_singles_30.json", "sample": 5, "seed": "5,39595,7812,25626", "adaptation": "Focus Sash Compound Eyes Vivillon keeps Hurricane and Sleep Powder. Powder and Protect make the lead interact with the obvious Fire answer while Charjabug supplies passive Battery power."},
+        {"source": "docs/smogon_gen4_9_ou_uu_nu_sample_teams.json", "team": "gen4uu sample 8 / gen9nu sample 1", "adaptation": "Choice Band Technician Scyther combines the donors' Brick Break, Quick Attack, and Dual Wingbeat identities; Bug Bite supplies legal Technician STAB and berry pressure."},
+        {"source": "checked-in Charjabug and Sizzlipede sources", "adaptation": "Eviolite Battery Charjabug uses foe-only Electroweb rather than unsafe allied Discharge, plus Volt Switch, Struggle Bug, and Protect. Sitrus Flash Fire Sizzlipede absorbs the Fire answer and uses Fire Lash to prepare Scyther's physical close."}
+      ],
+      "team_intent": "Focus Sash Compound Eyes Vivillon and Eviolite Battery Charjabug open the swarm. Battery powers accurate Hurricane while Electroweb slows both foes without striking the Flying partner; Powder and Sleep Powder punish predictable Fire or passive turns. Sitrus Flash Fire Sizzlipede then absorbs Fire and lowers Defense with Fire Lash before Choice Band Technician Scyther attacks through Dual Wingbeat, Bug Bite, Quick Attack, or Brick Break.",
+      "intended_counterplay": "Taunt, focus fire, Rock, Electric, Ice, priority, Safeguard, sleep immunity, Lum Berry, or ordinary Protect scouting answer Vivillon. Wide Guard, Ground immunity, Electric immunity, speed reversal, and special pressure answer Charjabug's foe-only spread control. Avoiding Fire denies Sizzlipede its immunity reward; Water, Rock, Flying, burn, Intimidate, physical walls, item removal, and exploiting Scyther's Choice lock answer the reserves. No single attack type or mandatory catch clears all four.",
+      "bespoke_ai": "Jose uses the native doubles guard, foe and partner awareness, smart switching, and speed-control scoring. Existing Powder logic rejects the move when a foe has no Fire attack and raises it when the predicted move is Fire; Battery, Compound Eyes, Electroweb, Volt Switch, Flash Fire, Fire Lash, Technician, Choice Band, and Protect remain native. No custom forced move, target, turn, or switch is added.",
+      "uniqueness": "This is Verdant's only Battery-powered aerial swarm and first cap-20 demonstration of a legally early final evolution. Vivillon, Charjabug, Sizzlipede, and Scyther do not appear in Battles 1-20. It uses no weather, terrain, hazard, Web, setup dance, Guard Split, Instruct, Anger Point, Perish timer, trap, screen, friendly damage, or Mega.",
+      "closure": "Battle 21 is 10/10 because every slot advances one readable swarm: Battery-powered air pressure, foe-only speed control, a Fire-absorbing bridge, and a Choice-locked Technician closer. Legal levels 21-23, four distinct items, truthful dialogue, and broad status, type, speed, spread, item, and focus-fire counterplay make it an 8.2/10 double without a forced solution."
+    },
+    "BATTLE_022_ROUTE_116_KAREN": {
+      "guide_order": 22,
+      "trainer_ids": ["TRAINER_KAREN_1"],
+      "status": "closed",
+      "campaign_point": "Optional central Route 116 schoolchild after the west fork; this first encounter is distinct from Karen's later Match Call rematches",
+      "strict_cap": 20,
+      "player_state": "The full cap-20 pre-Steven preparation sandbox remains available, with mixed physical and special attackers easy to build but no Mega Bracelet yet.",
+      "evolution_stage_fit": {"campaign_phase": "post-Stone category lesson", "effective_levels": "21-23", "eligible_ratio": "4/4", "mega_access": false, "status": "pass", "reason": "Elgyem evolves at 42, Onix and Mantyke evolve by item/party condition, and Kecleon is single-stage in the checked-in family table. All are legal at cap 20."},
+      "manual_quality": 10,
+      "manual_difficulty": 8.1,
+      "corpus_review": {
+        "reference_pool_size": 983,
+        "full_team_candidates": [
+          {"source": "docs/showdown_gen5_random_doubles_30.json", "sample": 10, "decision": "Sturdy physical wall selected; full team rejected", "reason": "Onix supplies Stone Edge, Earthquake, and Dragon Tail exactly, while its mature random partners do not fit the school exam."},
+          {"source": "docs/showdown_gen5_random_doubles_30.json", "sample": 27, "decision": "slow Psychic family role selected; full team rejected", "reason": "Beheeyem provides the mature Analytic Psychic precedent, but Elgyem preserves the legal young family and adds Wonder Room."},
+          {"source": "docs/showdown_gen6_random_doubles_30.json", "sample": 17, "decision": "opposite defensive wall selected; full team rejected", "reason": "Sitrus Water Absorb Mantine supplies Scald and Air Slash, de-evolved to Mantyke so its reversed defenses remain legible at cap 20."}
+        ],
+        "decision": "All 983 references were reviewed. Only Onix appears exactly and no reference contains two selected species, so no full import fits; the four roles are combined by hand around one finite Wonder Room seam."
+      },
+      "competitive_references": [
+        {"source": "docs/showdown_gen5_random_doubles_30.json", "sample": 10, "seed": "110,19135,38757,39261", "adaptation": "Eviolite Sturdy Onix keeps Stone Edge, Earthquake, and Dragon Tail; Iron Tail adds a second Gravity-free inaccurate physical choice and Fairy coverage."},
+        {"source": "docs/showdown_gen5_random_doubles_30.json", "sample": 27, "seed": "127,22688,64988,47710", "adaptation": "Focus Sash Analytic Elgyem inherits the slow Psychic role and adds Wonder Room, Energy Ball, and Simple Beam as a complete field setter."},
+        {"source": "docs/showdown_gen6_random_doubles_30.json", "sample": 17, "seed": "17,3553,26328,8460", "adaptation": "Sitrus Water Absorb Mantyke keeps Scald and Air Slash, with Ice Beam and legal Aqua Ring completing the inverse wall."}
+      ],
+      "team_intent": "Focus Sash Analytic Elgyem opens Wonder Room, swapping Defense and Sp. Def for five turns. Eviolite Onix changes from a physical wall into a special wall and physical liability, while Sitrus Water Absorb Mantyke flips in the opposite direction. Life Orb Protean Kecleon closes by changing its own type and attack category through Shadow Sneak, Drain Punch, Ice Punch, and Thunder Punch. Simple Beam can remove a key ability but creates no lock.",
+      "intended_counterplay": "Taunt, focus fire, priority, sleep, or Encore can stop Elgyem; the player can also stall five turns, use mixed offense, or switch attack categories. During Wonder Room, hit Onix physically and Mantyke specially; outside it, reverse that plan. Water, Grass, Ice, Electric, Rock, status, phazing, item removal, and exploiting Kecleon's newly chosen type remain broad answers. No exact team or turn sequence is required.",
+      "bespoke_ai": "Karen remains a native singles trainer with smart switching, first-turn setup, and field-control profiles. Field control gives Wonder Room a strong bonus only on global turn zero while absent, and existing bad-move logic rejects it while active, so it is neither forced nor repeated. Protean, Water Absorb, Sturdy, Sash, Eviolite, Sitrus, Life Orb, phazing, and recovery remain native.",
+      "uniqueness": "This is Verdant's only attack-category classroom and first finite Wonder Room puzzle. Elgyem, Onix, Mantyke, and Kecleon do not appear in Battles 1-21. It repeats no weather, terrain, hazard, Anger Point, Battery, Guard Split, Instruct, Trick Room, Shell Smash, or Mega module.",
+      "closure": "Battle 22 is 10/10 because a single five-turn rule changes which attacks solve two opposite walls, then Protean tests whether the player is still reading categories and types. Legal levels 21-23, four distinct items, truthful teaching dialogue, and broad denial, timer, mixed-offense, type, status, and phazing counterplay make it an 8.1/10 single."
+    },
+    "BATTLE_023_ROUTE_116_CLARK_JOHNSON": {
+      "guide_order": 23,
+      "trainer_ids": ["TRAINER_CLARK", "TRAINER_JOHNSON"],
+      "status": "closed",
+      "campaign_point": "Canonical central Route 116 sight-line intersection; fixed facing makes Clark and Johnson approach together, while native fallback still permits either three-Pokémon half as a separate single when only one trainer engages",
+      "strict_cap": 20,
+      "player_state": "The player has six cap-20 Pokémon and broad field, accuracy, spread, status, and phazing tools. No Mega Bracelet is reachable yet.",
+      "runtime_variants": ["Clark plus Johnson 3+3 native double", "Clark three-Pokémon single", "Johnson three-Pokémon single"],
+      "evolution_stage_fit": {"campaign_phase": "post-Stone quarry chapter", "effective_levels": "22-24", "eligible_ratio": "5/6", "legal_early_evolutions": ["Clefairy is a legal friendship-evolved middle stage."], "mega_access": false, "status": "pass", "reason": "Carbink and Minior are single-stage; Rhyhorn, Rufflet, and Galarian Darumaka are base forms; Clefairy is a legal middle stage. No Mega or impossible form appears."},
+      "manual_quality": 10,
+      "manual_difficulty": 9.2,
+      "solo_half_difficulty": {"TRAINER_CLARK": 7.8, "TRAINER_JOHNSON": 7.9},
+      "corpus_review": {
+        "reference_pool_size": 983,
+        "full_team_candidates": [
+          {"source": "docs/showdown_gen8_random_doubles_30.json", "sample": 6, "decision": "Friend Guard support half selected; full team rejected", "reason": "Clefairy supplies Moonblast, Follow Me, and Helping Hand exactly, but its mature partners do not form a quarry."},
+          {"source": "docs/showdown_gen4_random_singles_30.json", "sample": 7, "decision": "Rock Head quarry attacker selected; full team rejected", "reason": "Rhyhorn supplies Stone Edge and Megahorn with Rock Head, while Eviolite and High Horsepower adapt it to cap 20."},
+          {"source": "docs/showdown_gen9_random_doubles_30.json", "sample": 10, "decision": "small mineral wall selected; full team rejected", "reason": "Diancie's Body Press and Moonblast role is translated down to Sturdy Carbink with Gravity."},
+          {"source": "docs/smogon_gen4_9_ou_uu_nu_sample_teams.json", "team": "gen5nu sample 9", "decision": "Hustle bird attacker selected; full team rejected", "reason": "Braviary's Brave Bird, Superpower, and U-turn are de-evolved to Choice Band Rufflet so Gravity has a clear accuracy payoff."}
+        ],
+        "decision": "All 983 references were reviewed. No complete team contains two chosen species, so two independent three-member halves are authored by hand around redundant Gravity access and accurate high-power moves."
+      },
+      "competitive_references": [
+        {"source": "docs/showdown_gen8_random_doubles_30.json", "sample": 6, "seed": "6,47514,9355,56963", "adaptation": "Sitrus Friend Guard Clefairy keeps Moonblast, Follow Me, and Helping Hand, adding Gravity so Johnson's half works alone."},
+        {"source": "docs/showdown_gen4_random_singles_30.json", "sample": 7, "seed": "7,55433,10898,22765", "adaptation": "Eviolite Rock Head Rhyhorn keeps Stone Edge and Megahorn; High Horsepower and Protect provide reliable Ground pressure and doubles tempo."},
+        {"source": "docs/showdown_gen9_random_doubles_30.json", "sample": 10, "seed": "10,13655,15527,51241", "adaptation": "Mental Herb Sturdy Carbink inherits Diancie's Body Press and Moonblast mineral role and establishes Gravity."},
+        {"source": "checked-in Minior source", "adaptation": "Life Orb Shields Down Minior deliberately rejects the already-used Shell Smash module. Gravity makes Charge Beam reliable; Power Gem, Dazzling Gleam, and Protect create an independent special threshold attacker."}
+      ],
+      "team_intent": "Clark's half uses Mental Herb Sturdy Carbink to establish Gravity, then Eviolite Rock Head Rhyhorn fires accurate High Horsepower, Stone Edge, and Megahorn while Life Orb Shields Down Minior builds special pressure through now-perfect Charge Beam. Johnson's half independently sets Gravity with Sitrus Friend Guard Clefairy, protects partners through Follow Me and Helping Hand, and makes Choice Band Hustle Rufflet plus Expert Belt Hustle Galarian Darumaka reliable. In the joint 3+3 double, either setter prevents a single point of failure; alone, each half retains setup, protection, and a closer.",
+      "intended_counterplay": "Taunt, Encore, focus fire, field replacement, or stalling Gravity attacks either setter. Wide Guard checks Rock Slide and Dazzling Gleam; Steel, Water, Grass, Ground, Ice, burn, Intimidate, item removal, priority, and exploiting Rufflet's Choice lock divide across the six. Minior can be phazed or pressured through its defensive shell before Shields Down. Gravity also grounds Flying and Levitate users, giving the player offensive openings. No exact catch or single field answer is mandatory.",
+      "bespoke_ai": "Both trainer records remain single-format three-member parties with partner-aware flags that activate only in the native two-opponent double. Smart switching, first-turn setup, and field-control scoring value Gravity while absent and suppress duplicates through existing partner-move checks. Friend Guard, Follow Me, Helping Hand, Hustle, Shields Down, Charge Beam, Choice Band, and Protect are native; no move or turn is forced.",
+      "uniqueness": "This is Verdant's only native Gravity quarry and first indexed encounter with three legitimate runtime branches. Carbink, Rhyhorn, Minior, Clefairy, Rufflet, and Galarian Darumaka do not appear in Battles 1-22. It uses no weather, terrain, hazard, Wonder Room, Trick Room, Shell Smash, Anger Point, Battery, or Mega.",
+      "closure": "Battle 23 is 10/10 because the joint 3+3 puzzle is a coherent Gravity formation while both three-mon halves remain difficult, complete singles. Six distinct items, legal levels 22-24, fixed native sight geometry, redundant but non-wasteful field control, and broad field, status, spread, type, item, and focus-fire counterplay make the pair 9.2/10 without making the split branches disposable."
+    },
+    "BATTLE_024_ROUTE_116_DEVAN": {
+      "guide_order": 24,
+      "trainer_ids": ["TRAINER_DEVAN"],
+      "status": "closed",
+      "campaign_point": "Standalone eastern Route 116 Hiker after the canonical Clark plus Johnson intersection; choosing that pair leaves Devan as the next independent double",
+      "strict_cap": 20,
+      "player_state": "The full cap-20 pre-Steven sandbox includes weather replacement, Wide Guard, priority, status, Taunt, and many Water, Grass, Ice, Fighting, and Ground answers. No Mega Bracelet is available.",
+      "evolution_stage_fit": {"campaign_phase": "post-Stone excavation chapter", "effective_levels": "21-23", "eligible_ratio": "4/4", "mega_access": false, "status": "pass", "reason": "Hippopotas, Drilbur, Cacnea, and Aron remain base forms whose evolutions occur from levels 31-34. No mature form or Mega appears."},
+      "manual_quality": 10,
+      "manual_difficulty": 8.6,
+      "corpus_review": {
+        "reference_pool_size": 983,
+        "full_team_candidates": [
+          {"source": "docs/showdown_gen4_random_doubles_30.json", "sample": 8, "decision": "exact young sand setter selected; full team rejected", "reason": "Hippopotas supplies Sand Stream, Whirlwind, and Protect, while Sceptile, Breloom, Hariyama, Glalie, and Rotom are mature and unrelated."},
+          {"source": "docs/showdown_champions_random_doubles_30.json", "sample": 22, "decision": "sand support role selected; full team rejected", "reason": "Hippowdon corroborates High Horsepower and Whirlwind but is de-evolved for cap 20."},
+          {"source": "docs/showdown_gen8_random_singles_30.json", "sample": 26, "decision": "Sand Rush attacker selected; full team rejected", "reason": "Life Orb Excadrill supplies the competitive speed role, de-evolved to Drilbur."},
+          {"source": "docs/showdown_gen9_random_singles_30.json", "sample": 23, "decision": "Water-absorbing cactus selected; full team rejected", "reason": "Water Absorb Cacturne supplies Seed Bomb and Sucker Punch, de-evolved to Eviolite Cacnea."}
+        ],
+        "decision": "All 983 references were reviewed. No complete team is cap-20 stage-valid; four compatible young roles are assembled into Verdant's first sand battle."
+      },
+      "competitive_references": [
+        {"source": "docs/showdown_gen4_random_doubles_30.json", "sample": 8, "seed": "108,3297,35671,42122", "adaptation": "Smooth Rock Sand Stream Hippopotas keeps Whirlwind and Protect, adding Yawn and High Horsepower."},
+        {"source": "docs/showdown_gen8_random_singles_30.json", "sample": 26, "seed": "26,9289,40215,28353", "adaptation": "Life Orb Sand Rush Drilbur inherits Excadrill's fast physical role with High Horsepower, Rock Slide, X-Scissor, and Protect."},
+        {"source": "docs/showdown_gen9_random_singles_30.json", "sample": 23, "seed": "23,51067,35586,65412", "adaptation": "Eviolite Water Absorb Cacnea keeps Seed Bomb and Sucker Punch; Drain Punch and Leech Seed give the independent reserve active damage and attrition roles."}
+      ],
+      "team_intent": "Smooth Rock Sand Stream Hippopotas starts a visible sand clock and uses Yawn, Whirlwind, High Horsepower, or Protect. Life Orb Sand Rush Drilbur races through that clock with single-target Ground and spread Rock pressure. Eviolite Water Absorb Cacnea can catch Water and establish Leech Seed. Weakness Policy Sturdy Aron punishes a careless super-effective hit and can answer committed damage with Metal Burst, but remains avoidable through neutral chip, status, multihit attacks, or item removal.",
+      "intended_counterplay": "Overwrite or stall sand, Taunt Yawn and Whirlwind, use priority, paralysis, Icy Wind, Trick Room, Wide Guard, or focus either lead. Grass and Ice pressure both sand leads; Fighting, Ground, multihit attacks, Mold Breaker, burn, Knock Off, and neutral chip bypass Aron's Sturdy and avoid Weakness Policy. Cacnea covers Water but not every Grass, Ice, Bug, Fire, Fighting, or Fairy route. No single weather or type answer is mandatory.",
+      "bespoke_ai": "Devan uses a native guarded double with smart switching, partner awareness, HP-aware decisions, and field-control scoring. Sand Stream and Sand Rush activate automatically; normal switching can preserve Cacnea for Water and Sturdy Aron for a deliberate weakness decision. No custom target or forced weather line is added.",
+      "uniqueness": "This is Verdant's first sand excavation battle. Hippopotas, Drilbur, Cacnea, and Aron do not appear in Battles 1-23. It uses no prior snow, rain, Gravity, Wonder Room, terrain, hazard, Anger Point, Battery, Guard Split, Instruct, Shell Smash, or Mega module.",
+      "closure": "Battle 24 is 10/10 because one visible sand clock changes speed and switching while two independent reserves punish only the most obvious Water and weakness choices. Legal levels 21-23, four distinct items, native AI, and broad weather, status, speed, type, spread, item, and focus-fire counterplay make it an 8.6/10 double."
+    },
+    "BATTLE_025_ROUTE_116_SARAH_DAWSON": {
+      "guide_order": 25,
+      "trainer_ids": ["TRAINER_SARAH", "TRAINER_DAWSON"],
+      "status": "closed",
+      "campaign_point": "First Cut-grove native sight intersection; Sarah and Dawson form a canonical 3+3 double but each three-member party can be approached as a standalone single",
+      "strict_cap": 20,
+      "runtime_variants": ["Sarah plus Dawson 3+3 double", "Sarah three-Pokémon single", "Dawson three-Pokémon single"],
+      "evolution_stage_fit": {"campaign_phase": "post-Stone treasure and fur chapter", "effective_levels": "21-24", "eligible_ratio": "6/6", "mega_access": false, "status": "pass", "reason": "Diancie and Sableye are single-stage; Gimmighoul, Galarian Meowth, Wooloo, and Minccino are legal base forms. No Mega or premature evolution appears."},
+      "manual_quality": 10,
+      "manual_difficulty": 8.8,
+      "solo_half_difficulty": {"TRAINER_SARAH": 7.7, "TRAINER_DAWSON": 7.6},
+      "corpus_review": {
+        "reference_pool_size": 983,
+        "full_team_candidates": [
+          {"source": "docs/showdown_gen8_random_singles_30.json", "sample": 13, "decision": "strongest luxury-control candidate rejected", "reason": "Dubwool, Sableye, and Alcremie support the fur/control theme, but the mature singles roster cannot be copied into a cap-20 native pair."},
+          {"source": "docs/showdown_gen9_random_doubles_30.json", "sample": 10, "decision": "Diancie room setter selected; full team rejected", "reason": "Diancie's Trick Room and Diamond Storm are exact, while its mature random partners are replaced by young treasures."},
+          {"source": "docs/showdown_gen9_random_singles_30.json", "sample": 17, "decision": "metal and coin family roles selected; full team rejected", "reason": "Perrserker and Gholdengo co-locate in the donor, but both roles are de-evolved to Meowth and Gimmighoul."},
+          {"source": "docs/showdown_gen7_random_singles_30.json", "sample": 24, "decision": "Skill Link closer selected; full team rejected", "reason": "Choice Band Cinccino supplies the exact multihit shell, retained on legal Minccino."}
+        ],
+        "decision": "All 983 references were reviewed. No complete team is stage-valid or supplies both independent halves; six role donors become a slow treasure trio and a fur/timing trio."
+      },
+      "competitive_references": [
+        {"source": "docs/showdown_gen9_random_doubles_30.json", "sample": 10, "seed": "10,13655,15527,51241", "adaptation": "Mental Herb Clear Body Diancie keeps Trick Room, Diamond Storm, Dazzling Gleam, and Protect as Sarah's self-contained setter."},
+        {"source": "docs/showdown_gen8_random_singles_30.json", "sample": 13, "seed": "13,37412,20156,14182", "adaptation": "Chesto Fluffy Wooloo de-evolves Dubwool's curl-and-rest identity into Defense Curl, Rollout, Double-Edge, and Rest."},
+        {"source": "docs/showdown_gen7_random_singles_30.json", "sample": 24, "seed": "24,58986,37129,31214", "adaptation": "Choice Band Skill Link Minccino keeps Tail Slap, Bullet Seed, Triple Axel, and U-turn as an exploitable locked closer."}
+      ],
+      "team_intent": "Sarah owns one slow treasure engine: Mental Herb Diancie twists the room, Prankster Sableye blocks setup and burns physical answers, and Spell Tag Gimmighoul attacks, steals an item, or hides behind Substitute. Dawson's clearer luxury-fur half is one level stronger across the board: Eviolite Galarian Meowth buys tempo and pivots, Chesto Fluffy Wooloo threatens Defense Curl plus Rollout while retaining Double-Edge, and Choice Band Skill Link Minccino supplies the fast locked closer. Jointly, Meowth can buy Diancie's first room turn; separately, each three-member half remains complete.",
+      "intended_counterplay": "Taunt, Encore, priority, focus fire, room reversal, or stalling five turns answer Trick Room. Ghost or Protect blanks Fake Out; Dark, Ghost, Steel, Ground, burn, Intimidate, Knock Off, Substitute breaking, and exploiting Minccino's Choice lock divide across the halves. Wooloo's Rollout can be interrupted before it snowballs. The removed dual-screen and Quash layers leave one readable timing problem rather than six simultaneous systems.",
+      "bespoke_ai": "Both trainers remain single-format three-member records so Emerald's native intersection can create the 3+3 double or split singles. Sarah uses partner-aware, smart-switching, speed, field, and HP-aware scoring; Dawson uses partner-aware smart switching and HP awareness. The obsolete global-turn-zero setup flag is removed from Dawson because Wooloo does not lead. Fake Out, Trick Room, Taunt, item theft, Defense Curl plus Rollout, Skill Link, Choice Band, and recovery remain native and probabilistic.",
+      "uniqueness": "This is Verdant's only treasure-room and luxury-fur native pair, now centered on one room timer instead of room plus Quash plus dual screens. Diancie, Sableye, Gimmighoul, Galarian Meowth, Wooloo, and Minccino do not appear in Battles 1-24. It repeats no Gravity, Wonder Room, weather, hazard, Anger Point, Battery, Shell Smash, or Mega module.",
+      "closure": "Battle 25's static re-audit closes the structural problem: the joint 8.8 double retains its Fake Out-to-Trick Room bridge, while Sarah's estimated 7.7 and Dawson's level-raised 7.6 halves clear the floor as distinct singles. Runtime playtesting remains required before those estimates are treated as observed difficulty."
+    },
+    "BATTLE_026_ROUTE_116_JANICE_JERRY": {
+      "guide_order": 26,
+      "trainer_ids": ["TRAINER_JANICE", "TRAINER_JERRY_1"],
+      "status": "closed",
+      "campaign_point": "Second Cut-grove native sight intersection and final optional Route 116 encounter before Rusturf Tunnel; either three-member half can still be split into singles",
+      "strict_cap": 20,
+      "runtime_variants": ["Janice plus Jerry 3+3 double", "Janice three-Pokémon single", "Jerry three-Pokémon single"],
+      "evolution_stage_fit": {"campaign_phase": "post-Stone terrain practical", "effective_levels": "22-24", "eligible_ratio": "6/6", "mega_access": false, "status": "pass", "reason": "Pincurchin, Mimikyu, and Togedemaru are single-stage; Swirlix remains item/trade-unevolved, Elekid evolves at 30, and Klink at 28. All six are legal without Mega access."},
+      "manual_quality": 10,
+      "manual_difficulty": 9.0,
+      "solo_half_difficulty": {"TRAINER_JANICE": 7.8, "TRAINER_JERRY_1": 7.7},
+      "corpus_review": {
+        "reference_pool_size": 983,
+        "full_team_candidates": [
+          {"source": "docs/showdown_gen6_random_doubles_30.json", "sample": 24, "decision": "electric circuit role selected; full team rejected", "reason": "Klinklang establishes a credible Steel/Electric pressure role, but Verdant de-evolves it into an immediate Motor Drive Choice breaker rather than importing another setup clock."},
+          {"source": "docs/showdown_gen7_random_doubles_30.json", "sample": 19, "decision": "exact Unburden drum shell selected; full team rejected", "reason": "Sitrus Unburden Slurpuff supplies Belly Drum, Play Rough, and Return, translated to Swirlix."},
+          {"source": "docs/showdown_gen9_random_singles_30.json", "sample": 16, "decision": "Disguise attacker selected; full team rejected", "reason": "Life Orb Mimikyu supplies the aggressive shell, but Swords Dance is replaced with Shadow Claw so only Swirlix remains a setup clock."},
+          {"source": "docs/showdown_gen8_random_singles_30.json", "sample": 29, "decision": "disruptive circuit lead selected; full team rejected", "reason": "Sturdy Togedemaru supplies Zing Zap and Spiky Shield; Fake Out and Encore complete the school practical."}
+        ],
+        "decision": "All 983 references were reviewed. No full import is cap-20 stage-valid; six young roles become two self-sufficient electric circuits that also interlock under native pairing."
+      },
+      "competitive_references": [
+        {"source": "docs/showdown_gen7_random_doubles_30.json", "sample": 19, "seed": "19,19391,29414,5599", "adaptation": "Sitrus Unburden Swirlix inherits Slurpuff's Belly Drum, Play Rough, and Return shell, adding Protect."},
+        {"source": "docs/showdown_gen9_random_singles_30.json", "sample": 16, "seed": "16,61169,24785,42658", "adaptation": "Life Orb Disguise Mimikyu keeps Play Rough, Shadow Sneak, and Drain Punch; Shadow Claw replaces Swords Dance to create immediate pressure."},
+        {"source": "docs/showdown_gen6_random_doubles_30.json", "sample": 24, "seed": "24,58986,37129,31214", "adaptation": "Choice Band Motor Drive Klink de-evolves Klinklang into immediate Gear Grind and Wild Charge pressure whose speed comes from Pincurchin's Discharge rather than Shift Gear."},
+        {"source": "docs/showdown_gen8_random_singles_30.json", "sample": 29, "seed": "29,33046,44844,56829", "adaptation": "Air Balloon Sturdy Togedemaru retains Zing Zap and Spiky Shield while Fake Out and Encore make its half independently disruptive."}
+      ],
+      "team_intent": "The joint branch now opens with the circuit it advertised: Terrain Extender Pincurchin uses Discharge beside level-24 Choice Band Motor Drive Klink, accelerating its immediate Gear Grind, Wild Charge, Return, or Rock Smash pressure without harming it. Janice's Life Orb Mimikyu attacks immediately behind Disguise, leaving Sitrus Unburden Swirlix as the composition's one setup clock. Jerry follows Klink with Fake Out and Encore Togedemaru, then Ground-covering Elekid. Each split half still has immediate damage, disruption, and a closer.",
+      "intended_counterplay": "Overwrite terrain, use Ground, Lightning Rod, Volt Absorb, Wide Guard, burn, Intimidate, or focused damage into the visible Pincurchin-Klink lead. Break Disguise and Sturdy with chip or multihit attacks; remove Air Balloon, Sitrus, Life Orb, Choice Band, or Terrain Extender; exploit Klink's move lock; and reserve Taunt, Encore, Haze, or phazing for Swirlix's single Belly Drum clock. Scald, Ice Punch, Fairy, Fighting, Steel, Poison, Ground, and Fire coverage keep one immunity from solving every slot.",
+      "bespoke_ai": "Both trainers remain single-format three-member records for native pairing. Both halves now use partner-aware combo scoring, so Electric attacks into Motor Drive are valuable from the actual opening. The misleading global-turn-zero setup flags are removed: Mimikyu no longer sets up, Klink is Choice-locked, and later Swirlix relies on normal viability and HP-aware Belly Drum scoring. Electric Surge, terrain sleep prevention, Rising Voltage, Fake Out, Encore, Disguise, Belly Drum, Unburden, Motor Drive, and Choice lock remain native. No turn is forced.",
+      "uniqueness": "This is Verdant's first Electric Terrain practical and its only native pair whose opening deliberately attacks its own immune partner. The former three parallel setup clocks are reduced to one later Swirlix clock. Pincurchin, Mimikyu, Swirlix, Togedemaru, Elekid, and Klink do not appear in Battles 1-25, and the fight repeats no weather, Gravity, Wonder Room, Trick Room, hazard, Anger Point, Battery, or Mega module.",
+      "closure": "Battle 26's static re-audit makes the advertised circuit real on turn one and removes the redundant Mimikyu and Klink setup clocks. The joint fight remains an estimated 9.0, while Janice's 7.8 and Jerry's reordered, level-raised 7.7 branches clear the floor; runtime playtesting remains required before those estimates are observed results."
+    },
+    "BATTLE_027_RUSTURF_TUNNEL_AQUA_GRUNT": {
+      "guide_order": 27,
+      "trainer_ids": ["TRAINER_GRUNT_RUSTURF_TUNNEL"],
+      "status": "closed",
+      "campaign_point": "Mandatory Rusturf Tunnel recovery of Peeko and the Devon Goods after every reachable Route 116 trainer; victory alone resumes the escape and return-story sequence",
+      "strict_cap": 20,
+      "evolution_stage_fit": {"campaign_phase": "post-Stone Aqua hierarchy payoff", "effective_levels": "21-22", "eligible_ratio": "4/4", "mega_access": false, "status": "pass", "reason": "Dondozo and Tatsugiri are single-stage; Salandit and Mareanie are legal base forms. No Mega or premature evolution appears."},
+      "manual_quality": 10,
+      "manual_difficulty": 9.3,
+      "corpus_review": {
+        "reference_pool_size": 983,
+        "full_team_candidates": [
+          {"source": "docs/vgc_major_champion_teams.json", "team": "regional-merida-2025", "decision": "Commander core selected; full team rejected", "reason": "Dondozo and Tatsugiri form a verified championship core, but Miraidon, Gholdengo, Dragonite, and Chi-Yu are an unrelated mature roster."},
+          {"source": "docs/vgc_major_champion_teams.json", "team": "regional-curitiba-2024 / regional-liverpool-2023", "decision": "Commander core corroborated; both full teams rejected", "reason": "Both winners reinforce the core, while their later-generation mature partners are not imported."},
+          {"source": "docs/showdown_champions_random_doubles_30.json", "sample": 3, "decision": "poison escape lead selected; full team rejected", "reason": "Salazzle supplies Fake Out pressure, translated down to legal Salandit."},
+          {"source": "docs/smogon_gen4_9_ou_uu_nu_sample_teams.json", "team": "gen7ou samples 13, 14, and 16", "decision": "young poison wall selected; full teams rejected", "reason": "Toxapex's Haze and Recover shell is translated down to Eviolite Mareanie with Merciless Venoshock."}
+        ],
+        "decision": "All 983 references were reviewed. Three champion teams contain Dondozo and Tatsugiri, while exact Salandit and Mareanie never appear. The tabled Commander promise from Battles 14-15 is spent here rather than globally allocated."
+      },
+      "competitive_references": [
+        {"source": "docs/vgc_major_champion_teams.json", "team": "regional-merida-2025 / regional-curitiba-2024 / regional-liverpool-2023", "adaptation": "The championship Commander pair is rebuilt under Verdant's visible-partner rewrite: Tatsugiri remains targetable, grants Dondozo 1.5x damage while alive, and Stretchy Order Up raises Speed."},
+        {"source": "docs/showdown_champions_random_doubles_30.json", "sample": 3, "seed": "3,23757,4726,28487", "adaptation": "Black Sludge Corrosion Salandit inherits Salazzle's Fake Out tempo, adding Toxic, Venoshock, and Protect."},
+        {"source": "docs/smogon_gen4_9_ou_uu_nu_sample_teams.json", "team": "gen7ou samples 13/14/16", "adaptation": "Eviolite Merciless Mareanie translates the Haze/Recover poison wall into Venoshock, Wide Guard, Recover, and Haze."}
+      ],
+      "team_intent": "Leftovers Unaware Dondozo and Focus Sash Commander Stretchy Tatsugiri form a visible command chain: while the targetable commander lives, Dondozo deals 1.5x damage and Order Up can raise Speed. Tatsugiri supplies Muddy Water, Dragon Pulse, Taunt, and Protect. Black Sludge Corrosion Salandit then poisons even nominal Poison or Steel answers, while Eviolite Merciless Mareanie converts poison into critical Venoshock pressure and supplies Wide Guard, Recover, and Haze. Both waves are one Aqua hierarchy and escape-cover story.",
+      "intended_counterplay": "Focus, Taunt, sleep, suppress, or force Protect from Tatsugiri to sever Commander; use Grass, Electric, Water immunity, burn, Intimidate, Reflect, Wide Guard, Haze, Clear Smog, speed control, or focused damage against Dondozo. Safeguard, Misty Terrain, Lum Berry, status immunity, Taunt, Knock Off, Ground, Psychic, Electric, or removing Salandit before Toxic stops the poison wave. Nothing requires one catch or precise turn script.",
+      "bespoke_ai": "The Grunt uses a guarded double, partner awareness, and combo scoring but deliberately no smart switching so the authored Commander lead is not casually dismantled. Combo scoring moderately rewards Order Up only while a living Stretchy Commander partner exists and Speed can rise, and Toxic only beside Merciless or Venoshock against a legal target. The visible Commander multiplier and Order Up form effect remain native to Verdant's engine rewrite; no target or turn is forced.",
+      "uniqueness": "This is Verdant's sole visible Commander battle and the intentional payoff for a core reserved twice earlier. Dondozo, Tatsugiri, Salandit, and Mareanie do not appear in Battles 1-26. It uses no prior weather, terrain, room, Gravity, hazard, Anger Point, Battery, or Mega module.",
+      "story_logic": "The two-healthy guard ends the script before the Devon Goods or Peeko recovery path. Only victory continues into the existing item return and escape movements, preserving story flags and retry behavior.",
+      "closure": "Battle 27 is 10/10 because a championship core becomes a fair, visible command puzzle and the poison escape wave extends the same criminal hierarchy. Four legal levels 21-22, distinct items, story-safe guard behavior, and broad partner, status, type, speed, spread, item, and focus-fire counterplay make the required ambush 9.3/10."
+    },
+    "BATTLE_028_RUSTBORO_RIVAL": {
+      "guide_order": 28,
+      "trainer_ids": ["TRAINER_MAY_RUSTBORO_TREECKO", "TRAINER_MAY_RUSTBORO_TORCHIC", "TRAINER_MAY_RUSTBORO_MUDKIP", "TRAINER_BRENDAN_RUSTBORO_TREECKO", "TRAINER_BRENDAN_RUSTBORO_TORCHIC", "TRAINER_BRENDAN_RUSTBORO_MUDKIP"],
+      "status": "closed",
+      "campaign_point": "Optional battle inside the required post-Devon rival conversation; Rustboro City and Route 104 scripts are mutually exclusive location branches of one physical encounter",
+      "strict_cap": 20,
+      "runtime_variants": "Six source records expand to 21 same-generation dynamic counter-starter middle evolutions with May/Brendan parity.",
+      "evolution_stage_fit": {"campaign_phase": "post-Stone rival continuity", "effective_levels": "21-22", "eligible_ratio": "3/4", "legal_early_evolutions": ["Every one of the 21 possible starter middle stages evolves legally by level 17 or earlier."], "mega_access": false, "status": "pass", "reason": "Castform and Rotom are single-stage, Sneasel is a base form, and the dynamic starter is its legally reached middle evolution. No Mega appears before Steven."},
+      "manual_quality": 10,
+      "manual_difficulty": 9.0,
+      "corpus_review": {
+        "reference_pool_size": 983,
+        "full_team_candidates": [
+          {"source": "docs/showdown_gen4_random_singles_30.json", "sample": 29, "decision": "only two-companion full candidate rejected", "reason": "Life Orb Sneasel and bulky Rotom co-occur, but Magcargo, Meditite, Wigglytuff, and Scyther cannot represent 21 starter outcomes."},
+          {"source": "docs/showdown_gen4_random_doubles_30.json", "sample": 3, "decision": "Forecast role selected; full team rejected", "reason": "Choice Specs Forecast Castform supplies four-weather coverage precedent, rebuilt into a manual branch-specific setter."},
+          {"source": "docs/showdown_gen8_random_doubles_30.json", "sample": 28, "decision": "status pivot selected; full team rejected", "reason": "Sitrus Rotom supplies Protect, speed control, burn, and Ghost pressure, adapted to Volt Switch plus Hex."}
+        ],
+        "decision": "All 983 references were reviewed. No full team can stay legal across 21 starter outcomes. The rival therefore keeps narrative starter continuity and borrows only three independent competitive companion roles."
+      },
+      "competitive_references": [
+        {"source": "docs/showdown_gen4_random_doubles_30.json", "sample": 3, "seed": "103,29237,27956,16507", "adaptation": "Focus Sash Forecast Castform changes between Sunny Day or Rain Dance by starter branch, with Weather Ball, Icy Wind, and Protect."},
+        {"source": "docs/showdown_gen4_random_singles_30.json", "sample": 29, "seed": "29,33046,44844,56829", "adaptation": "Life Orb Inner Focus Sneasel keeps the donor's fragile offense and adds Fake Out, Feint, Knock Off, and Ice Punch for doubles tempo."},
+        {"source": "docs/showdown_gen8_random_doubles_30.json", "sample": 28, "seed": "28,25127,43301,25492", "adaptation": "Sitrus Levitate Rotom retains Protect and Will-O-Wisp, converting Shadow Ball to Hex and Electroweb to Volt Switch."}
+      ],
+      "team_intent": "Focus Sash Forecast Castform manually announces the branch's weather. The runtime-generated level-22 Eviolite middle starter is always the same-generation elemental counter to the player's chosen starter: Fire receives sun plus Fire Pledge/Heat Wave/Flare Blitz, Water receives rain plus Water Pledge/Icy Wind/Waterfall, and Grass receives sun plus Grass Pledge/Solar Beam/Seed Bomb. Life Orb Sneasel supplies Fake Out, Feint, Knock Off, and Ice Punch; Sitrus Rotom burns into Hex and pivots with Volt Switch. The rival plans for one starter branch, not the player's whole six.",
+      "intended_counterplay": "Fake Out, Taunt, sleep, focus fire, immediate weather replacement, Cloud Nine, Air Lock, Protect, or removing Castform's Sash can break the forecast. Knock Off removes Eviolite; status, speed reversal, screens, typed resistances, and focus fire answer every middle starter. Sneasel is fragile and takes Life Orb recoil. Dark, Ghost, Mold Breaker Ground pressure, status prevention, and denying burn reduce Rotom's Hex line. The player can win through the rest of the party rather than one exact starter response.",
+      "bespoke_ai": "All six source records use identical guarded-double, smart-switching, partner, field, and speed-control flags. Existing weather logic values Sun beside Fire or Solar Beam and Rain beside Water; Icy Wind, Forecast, Weather Ball, Fake Out, Feint, Volt Switch, burn, Hex, Eviolite, and Protect remain native. A runtime hook replaces only party slot 1 with the audited middle evolution of the same-generation counter-starter and never mutates player starter state.",
+      "uniqueness": "This is Verdant's only dynamic 21-starter forecast battle. Castform, Sneasel, and Rotom do not appear in Battles 1-27; the starter family is the deliberate narrative continuation of Battle 1 rather than incidental reuse. Manual branch weather differs from prior automatic weather speed cores and uses no Mega.",
+      "story_logic": "Declining or failing the two-healthy guard releases the player without setting either rival-defeat flag and never blocks Match Call, the Briney hint, boat access, or story variables. The optional victory grants no unique item.",
+      "closure": "Battle 28 is 10/10 because all 21 starter choices receive a legal, understandable middle-stage continuation while the three shared companions make the fight about the whole team. Levels 21-22, four distinct items, branch-safe native AI, truthful dialogue, and broad weather, item, status, speed, type, and focus-fire counterplay make the optional rival 9.0/10 without overfitting one starter."
+    },
+    "BATTLE_029_ROUTE_106_NED": {
+      "guide_order": 29,
+      "trainer_ids": ["TRAINER_NED"],
+      "status": "closed",
+      "campaign_point": "First reachable Route 106 shore trainer after arriving in Dewford and before the no-battle Steven letter event grants the Mega Bracelet",
+      "strict_cap": 20,
+      "evolution_stage_fit": {
+        "campaign_phase": "pre-Bracelet coastal rain lesson",
+        "effective_levels": "21-22",
+        "eligible_ratio": "4/4",
+        "mega_access": false,
+        "status": "pass",
+        "reason": "Finneon evolves at 31, Arrokuda at 26, and Spheal at 32; Cramorant is single-stage. All four are legal at levels 21-22 and no Mega appears before Steven."
+      },
+      "manual_quality": 10,
+      "manual_difficulty": 8.7,
+      "corpus_review": {
+        "reference_pool_size": 1005,
+        "full_team_candidates": [
+          {
+            "reference_id": "showdown:gen4randomdoublesbattle:027",
+            "decision": "Lumineon rain shell selected and de-evolved to Finneon; full team rejected",
+            "reason": "Damp Rock Swift Swim Lumineon supplies U-turn, Rain Dance, Ice Beam, and Surf, but its mature unrelated partners do not fit the cap-20 shore. Finneon keeps the legal move shell while Dazzling and Focus Sash make the opening reliable without a forced turn."
+          },
+          {
+            "reference_id": "showdown:gen9randomdoublesbattle:017",
+            "decision": "Barraskewda and Glalie pressure roles selected; full team rejected",
+            "reason": "Life Orb Barraskewda provides the direct Protect, Close Combat, and Water offense translated to Swift Swim Arrokuda, while Glalie's Freeze-Dry and Protect control shell becomes legal Eviolite Spheal."
+          },
+          {
+            "reference_id": "showdown:gen8randomdoublesbattle:002",
+            "decision": "Cramorant rain attacker selected; full team rejected",
+            "reason": "Life Orb Gulp Missile Cramorant supplies Surf, Hurricane, and Ice Beam. Tailwind is replaced with legal Roost so Battle 29 does not add another active speed-control move to the crowded rolling window."
+          }
+        ],
+        "decision": "The expanded 1,005-record index contains no complete cap-20 coastal team. Three full-set doubles donors supply one compact rain sprint and an unused four-species roster without importing mature unrelated teammates."
+      },
+      "competitive_references": [
+        {
+          "reference_id": "showdown:gen4randomdoublesbattle:027",
+          "adaptation": "Focus Sash Dazzling Finneon retains Rain Dance, Ice Beam, U-turn, and Water offense from Lumineon; Scald replaces Surf so it never attacks its partner."
+        },
+        {
+          "reference_id": "showdown:gen9randomdoublesbattle:017",
+          "adaptation": "Life Orb Swift Swim Arrokuda translates Barraskewda into legal Liquidation, Close Combat, Psychic Fangs, and Protect, while Eviolite Spheal translates the donor Glalie's Freeze-Dry control into Brine, Encore, and Protect."
+        },
+        {
+          "reference_id": "showdown:gen8randomdoublesbattle:002",
+          "adaptation": "Sitrus Gulp Missile Cramorant keeps Surf, rain-accurate Hurricane, and Ice Beam; Roost replaces Tailwind for a slower, less repetitive finish."
+        }
+      ],
+      "team_intent": "Focus Sash Dazzling Finneon leads beside Life Orb Swift Swim Arrokuda. Finneon can establish rain without priority interruption, then Scald, Ice Beam, or U-turn; Arrokuda immediately threatens Liquidation, Close Combat, Psychic Fangs, or Protect. Eviolite Thick Fat Spheal follows with Freeze-Dry, Brine, Encore, and Protect so opposing Water answers are not free. Sitrus Gulp Missile Cramorant finishes through Surf-triggered form pressure, rain-accurate Hurricane, Ice Beam, and Roost. The battle is one readable fishing tide, not a scripted state machine.",
+      "intended_counterplay": "Taunt, focus fire, weather replacement, Cloud Nine, Air Lock, Electric or Grass pressure, Wide Guard, screens, bulky Water resistance, item removal, and speed reversal all remain broad answers. Finneon has only one Focus Sash and rain is finite; Arrokuda takes Life Orb recoil; Spheal is slow; and Cramorant must use Surf before Gulp Missile matters. Denying rain weakens the whole team without making it helpless.",
+      "bespoke_ai": "Ned uses native partner-aware, HP-aware, and field-control scoring only. Party order guarantees the Finneon-Arrokuda lead; existing weather logic values Rain Dance beside Water pressure, while Dazzling, Swift Swim, Freeze-Dry, Encore, Protect, Gulp Missile, Hurricane accuracy, recoil, and recovery execute natively. No custom selector, target, or forced turn is required.",
+      "uniqueness": "This is Verdant's first Dazzling-protected rain sprint and first Gulp Missile showcase. Finneon, Arrokuda, Spheal, and Cramorant do not appear in Battles 1-28. It deliberately revisits visible weather immediately after the rival, but changes the question from a dynamic starter forecast to a short physical rain race with a form-based closer and no Tailwind, Icy Wind, terrain, room, setup, trap, hazard, or Mega.",
+      "author_self_check": {
+        "strongest_part": "The player sees a tiny Finneon prevent priority while Arrokuda suddenly outruns the board in rain, then Cramorant turns Surf into a visible Gulp Missile finish; the entire encounter reads as one escalating catch.",
+        "weakest_link": "The roster is linear and shares obvious Electric and Grass pressure, especially if rain is denied. That remains healthy counterplay rather than a defect: Focus Sash, Ice coverage, and neutral attacks let Ned resist without erasing the clean answer."
+      },
+      "closure": "Battle 29 is closed at an editorial 8.7/10: four legal levels 21-22, distinct held items, a guarded native double, three stable competitive donors, truthful rain dialogue, no repeated species from Battles 1-28, and no custom AI dependency. Runtime playtesting remains required before 8.7 is treated as observed difficulty."
+    },
+    "BATTLE_030_ROUTE_106_ELLIOT": {
+      "guide_order": 30,
+      "trainer_ids": ["TRAINER_ELLIOT_1"],
+      "status": "closed",
+      "campaign_point": "Second reachable Route 106 shore trainer and the intentional singles pacing break before Granite Cave and Dewford Gym; later Match Call parties are separate encounters",
+      "strict_cap": 20,
+      "evolution_stage_fit": {
+        "campaign_phase": "pre-Bracelet deep-water singles lesson",
+        "effective_levels": "21-23",
+        "eligible_ratio": "3/3",
+        "mega_access": false,
+        "status": "pass",
+        "reason": "Frillish evolves at 40, Clauncher at 37, and Shellder only by Water Stone. All three remain legal young forms at levels 21-23 and no Mega appears before Steven."
+      },
+      "manual_quality": 10,
+      "manual_difficulty": 8.8,
+      "corpus_review": {
+        "reference_pool_size": 1005,
+        "full_team_candidates": [
+          {
+            "reference_id": "smogon:gen5ou:004",
+            "decision": "Jellicent control shell selected and de-evolved to Frillish; full team rejected",
+            "reason": "Published Jellicent uses Night Shade, Recover, and Taunt as a durable singles controller. Frillish keeps those legal moves and adds Whirlpool so Elliot's first depth has a finite, breakable undertow rather than another burn-Hex module."
+          },
+          {
+            "reference_id": "showdown:gen8randomdoublesbattle:023",
+            "decision": "Choice Specs Mega Launcher role selected and de-evolved to Clauncher; full team rejected",
+            "reason": "The donor Clawitzer is a Specs special pivot. Clauncher cannot inherit Dark Pulse but legally keeps Water Pulse and Ice Beam, adding Mega Launcher Dragon Pulse and Sludge Bomb for one exploitable four-move lock."
+          },
+          {
+            "reference_id": "showdown:gen4randomdoublesbattle:021",
+            "decision": "White Herb Skill Link closer selected and de-evolved to Shellder; full team rejected",
+            "reason": "The exact Cloyster donor supplies White Herb, Shell Smash, Icicle Spear, and Rock Blast. Shellder keeps that legal identity and adds Liquidation instead of priority so the three-member singles climax remains direct."
+          }
+        ],
+        "decision": "The 1,005-record index supplies three exact singles roles but no complete cap-20 deep-sea team. Each mature role is translated to its legal young form, producing one short undertow-breaker-closer sequence."
+      },
+      "competitive_references": [
+        {
+          "reference_id": "smogon:gen5ou:004",
+          "adaptation": "Eviolite Water Absorb Frillish keeps Night Shade, Recover, and Taunt from Jellicent; legal Whirlpool replaces Will-O-Wisp to avoid repeating Battle 28's burn-Hex line."
+        },
+        {
+          "reference_id": "showdown:gen8randomdoublesbattle:023",
+          "adaptation": "Choice Specs Mega Launcher Clauncher keeps Water Pulse and Ice Beam, with legal Dragon Pulse and Sludge Bomb replacing unavailable Clawitzer-only coverage."
+        },
+        {
+          "reference_id": "showdown:gen4randomdoublesbattle:021",
+          "adaptation": "White Herb Skill Link Shellder retains Shell Smash, Icicle Spear, and Rock Blast from Cloyster and adds legal Liquidation as its direct Water finish."
+        }
+      ],
+      "team_intent": "Eviolite Water Absorb Frillish opens with Whirlpool, Night Shade, Recover, and Taunt, creating a finite undertow the player can break rather than an endless stall loop. Choice Specs Mega Launcher Clauncher then commits to Water Pulse, Dragon Pulse, Ice Beam, or Sludge Bomb and can be punished through the revealed lock. White Herb Skill Link Shellder closes with one Shell Smash window into Icicle Spear, Rock Blast, or Liquidation. Each depth asks one clear singles question and uses only native AI.",
+      "intended_counterplay": "Taunt, Ghost or Dark pressure, trapping escape, fixed-damage races, item removal, and strong Grass or Electric damage answer Frillish. Scout and exploit Clauncher's Choice lock with immunities, resistances, Protect, or switching. Priority, status, Haze, Clear Smog, phazing, Unaware, Focus Sash, multihit resistance, or denying the setup turn answer Shellder. No one counter is required to solve all three depths.",
+      "bespoke_ai": "Elliot remains an intentional single and uses only native smart-switching and HP-aware scoring. Whirlpool, Night Shade, Recover, Taunt, Choice lock, Mega Launcher, White Herb, Shell Smash, and Skill Link are existing mechanics; no custom move order, forced setup turn, or trainer-specific selector is added. Match Call registration and later rematch routing remain untouched.",
+      "uniqueness": "This is Verdant's first three-depth singles sequence and first Choice Specs Mega Launcher plus White Herb Skill Link progression. Frillish, Clauncher, and Shellder do not appear in Battles 1-29. It immediately releases the player from two consecutive doubles, uses no weather, active speed-control move, priority move, Protect, terrain, room, partner activation, Mega, or custom AI, and revisits Shell Smash only after more than twenty encounters in a different format.",
+      "story_logic": "The first victory still enters Elliot's native Match Call registration branch. Declining registration, registering, or returning for later rematches cannot alter Battle 30's first-party closure; every rematch definition remains separately queued in the canonical sequence.",
+      "author_self_check": {
+        "strongest_part": "The three members genuinely feel deeper as the fight progresses: finite trapping, an exploitable Specs commitment, then a visible White Herb Shell Smash closer.",
+        "weakest_link": "Shellder's Shell Smash is a familiar competitive finish rather than a new mechanic. The long gap since Battle 7, the singles format, and the preceding lock-and-trap resource tax make the reuse worthwhile without adding another layer."
+      },
+      "closure": "Battle 30 is closed at an editorial 8.8/10: three legal levels 21-23, three distinct items and unused species, stable full-set donors, native singles and Match Call behavior, truthful dialogue, and no custom AI dependency. Runtime playtesting remains required before 8.8 is treated as observed difficulty."
+    },
+    "BATTLE_031_DEWFORD_GYM_LAURA": {
+      "guide_order": 31,
+      "trainer_ids": ["TRAINER_LAURA"],
+      "status": "closed",
+      "campaign_point": "First canonical Dewford Gym branch trainer after the player completes Steven's no-battle letter event and receives the Mega Bracelet; Brawly's later Hawlucha remains the first opposing Mega",
+      "strict_cap": 20,
+      "evolution_stage_fit": {
+        "campaign_phase": "post-Bracelet young-Fighting drill",
+        "effective_levels": "21-22",
+        "eligible_ratio": "4/4",
+        "mega_access": true,
+        "status": "pass",
+        "reason": "Mienfoo evolves at 50, Makuhita at 24, and Croagunk at 37. Gumshoos is legitimately obtainable from Yungoos at level 20 in daytime. No trainer Mega appears, preserving Brawly's first-opposing-Mega reveal."
+      },
+      "manual_quality": 10,
+      "manual_difficulty": 8.7,
+      "corpus_review": {
+        "reference_pool_size": 1005,
+        "full_team_candidates": [
+          {
+            "reference_id": "showdown:gen7randomdoublesbattle:016",
+            "decision": "Regenerator Fake Out pivot selected and de-evolved to Mienfoo; full team rejected",
+            "reason": "The exact Mienshao donor uses Fake Out, Feint, U-turn, and High Jump Kick. Legal young Mienfoo keeps Fake Out and U-turn, replacing the mature attacks with Drain Punch and Acrobatics for recovery and anti-Fighting coverage."
+          },
+          {
+            "reference_id": "showdown:gen4randomdoublesbattle:008",
+            "decision": "Bulky Hariyama pressure selected and de-evolved to Makuhita; full team rejected",
+            "reason": "Hariyama supplies Close Combat and broad coverage. Flame Orb Guts Makuhita keeps the direct pressure while Heavy Slam, Knock Off, and Wide Guard answer expected Gym counterplay without importing another setup move."
+          },
+          {
+            "reference_id": "showdown:gen7randomdoublesbattle:009",
+            "decision": "Dry Skin Toxicroak coverage selected and de-evolved to Croagunk; full team rejected",
+            "reason": "Toxicroak's Gunk Shot, Drain Punch, and Sucker Punch shell remains legal on Croagunk; Ice Punch replaces Swords Dance so Laura stays immediate and preserves Brawly's boss-level setup identity."
+          }
+        ],
+        "decision": "No complete indexed team preserves a cap-20 young-Fighting Gym and Brawly's protected first-Mega reveal. Three full-set donors plus source-native Gumshoos create one immediate four-member drill with no custom mechanic."
+      },
+      "competitive_references": [
+        {
+          "reference_id": "showdown:gen7randomdoublesbattle:016",
+          "adaptation": "Focus Sash Regenerator Mienfoo keeps Fake Out and U-turn from Mienshao, with legal Drain Punch and Acrobatics replacing mature coverage."
+        },
+        {
+          "reference_id": "showdown:gen4randomdoublesbattle:008",
+          "adaptation": "Flame Orb Guts Makuhita translates Hariyama's immediate Close Combat identity and adds Heavy Slam, Knock Off, and Wide Guard."
+        },
+        {
+          "reference_id": "showdown:gen7randomdoublesbattle:009",
+          "adaptation": "Black Sludge Dry Skin Croagunk retains Gunk Shot, Drain Punch, and Sucker Punch from Toxicroak, replacing setup with Ice Punch."
+        }
+      ],
+      "team_intent": "Focus Sash Regenerator Mienfoo leads beside Flame Orb Guts Makuhita. Fake Out can buy the one turn Makuhita needs to activate Guts, while U-turn, Drain Punch, and Acrobatics keep Mienfoo useful and Makuhita supplies Close Combat, Heavy Slam, Knock Off, or Wide Guard. Black Sludge Dry Skin Croagunk checks Fairy, Psychic, Flying, and Water lines through Gunk Shot, Sucker Punch, Ice Punch, and Drain Punch. Silk Scarf Stakeout Gumshoos provides the non-Fighting finish and punishes careless switching with Return, Crunch, Earthquake, or Fire Fang. No turn is forced.",
+      "intended_counterplay": "Ghost typing or Protect can blank the opening Fake Out; Taunt, item removal, status control, fast focus fire, or denying Makuhita a safe turn limits Guts. Flying, Psychic, and Fairy attacks, burn before Flame Orb, Intimidate, Reflect, Wide Guard pressure, Ground attacks into Croagunk, and exploiting Mienfoo's Sash or Gumshoos's middling speed all remain broad answers. The coverage discourages one-button sweeping without erasing the Gym's natural weaknesses.",
+      "bespoke_ai": "Laura uses native smart-switching, partner-aware, and HP-aware scoring only. Party order creates the Mienfoo-Makuhita opening; Fake Out, Flame Orb, Guts, Regenerator, U-turn, Wide Guard, Dry Skin, Black Sludge, Sucker Punch, and Stakeout are existing mechanics. No Coaching scorer, forced activation, trainer-specific selector, or opponent Mega is introduced.",
+      "uniqueness": "This is Verdant's first Fake Out-to-Flame-Orb Guts drill and first Stakeout switch punishment. Mienfoo, Makuhita, Croagunk, and Gumshoos do not appear in Battles 1-30. It uses no weather, terrain, room, active speed-control move, setup move, ally attack, trap, hazard, redirection, Mega, or custom AI, preserving Brawly's No Retreat, redirection, No Guard, and Mega Hawlucha identity.",
+      "author_self_check": {
+        "strongest_part": "Mienfoo buying exactly one breath for Makuhita's Flame Orb makes the opening instantly understandable, while Croagunk and Stakeout Gumshoos make the obvious counter-switches matter.",
+        "weakest_link": "The reserves are strong coverage pieces rather than a second novel engine. That simplicity is intentional for the first Gym trainer and keeps Brawly's boss mechanics unspent."
+      },
+      "closure": "Battle 31 is closed at an editorial 8.7/10: four legal levels 21-22, distinct items and unused species, guarded native doubles with room-brightening continuation, three full-set donors, truthful dialogue, author self-check, and no custom AI or premature opposing Mega. Runtime playtesting remains required before 8.7 is observed."
+    },
+    "BATTLE_032_DEWFORD_GYM_LILITH_BRENDEN": {
+      "guide_order": 32,
+      "trainer_ids": ["TRAINER_LILITH", "TRAINER_BRENDEN"],
+      "status": "closed",
+      "campaign_point": "East-branch native sight intersection inside Dewford Gym after Mega Bracelet access; either three-member half can still be approached as an independent single",
+      "strict_cap": 20,
+      "runtime_variants": ["Lilith plus Brenden 3+3 double", "Lilith three-Pokémon single", "Brenden three-Pokémon single"],
+      "evolution_stage_fit": {
+        "campaign_phase": "post-Bracelet six-style young martial pair",
+        "effective_levels": "22-23",
+        "eligible_ratio": "6/6",
+        "mega_access": true,
+        "status": "pass",
+        "reason": "Kubfu requires its tower evolution, Solosis evolves at 32, Clobbopus by knowing Taunt, Meditite at 37, Scraggy at 39, and Stufful at 27. All six remain legitimate young forms at levels 22-23 and neither half spends Brawly's opposing Mega reveal."
+      },
+      "manual_quality": 10,
+      "manual_difficulty": 9.0,
+      "solo_half_difficulty": {"TRAINER_LILITH": 7.9, "TRAINER_BRENDEN": 8.0},
+      "corpus_review": {
+        "reference_pool_size": 1005,
+        "full_team_candidates": [
+          {
+            "reference_id": "showdown:gen8randombattle:030",
+            "decision": "Urshifu pressure translated to rare young Kubfu; full team rejected",
+            "reason": "The mature donor confirms broad Urshifu pressure, while Kubfu remains the story-appropriate rare young form and uses only legal Brick Break, Iron Head, Aerial Ace, and Protect."
+          },
+          {
+            "reference_id": "showdown:gen5randombattle:019",
+            "decision": "Magic Guard Reuniclus special role translated to Solosis; full team rejected",
+            "reason": "Life Orb Magic Guard creates a self-contained special counterweight to Brenden's physical fighters. Solosis legally retains Psychic, Energy Ball, Shadow Ball, and Recover."
+          },
+          {
+            "reference_id": "showdown:gen4randomdoublesbattle:017",
+            "decision": "Pure Power Medicham lead translated to Meditite; full team rejected",
+            "reason": "Focus Sash Meditite preserves Fake Out and Pure Power pressure with legal Zen Headbutt, Drain Punch, and Thunder Punch."
+          },
+          {
+            "reference_id": "showdown:gen6randomdoublesbattle:028",
+            "decision": "Scrafty bulky fighter role translated to Scraggy; full team rejected",
+            "reason": "Sitrus Intimidate Scraggy remains an independent three-member-half pivot through Fake Out, Drain Punch, Knock Off, and Headbutt without importing mature setup."
+          },
+          {
+            "reference_id": "showdown:gen8randomdoublesbattle:003",
+            "decision": "Bewear physical wall translated to Stufful; full team rejected",
+            "reason": "Rocky Helmet Fluffy Stufful supplies legal Brick Break, Rock Slide, Brutal Swing, and Wide Guard as Lilith's defensive finish."
+          }
+        ],
+        "decision": "No complete donor supplies two independent cap-20 Fighting halves. Five full-set roles and source-native Clobbopus become six distinct martial styles whose difficulty comes from the native 3+3 or split routing, not a new engine mechanic."
+      },
+      "competitive_references": [
+        {"reference_id": "showdown:gen8randombattle:030", "adaptation": "Eviolite Inner Focus Kubfu keeps rare Urshifu-family pressure through Brick Break, Iron Head, Aerial Ace, and Protect."},
+        {"reference_id": "showdown:gen5randombattle:019", "adaptation": "Life Orb Magic Guard Solosis translates Reuniclus into legal Psychic, Energy Ball, Shadow Ball, and Recover special offense."},
+        {"reference_id": "showdown:gen4randomdoublesbattle:017", "adaptation": "Focus Sash Pure Power Meditite keeps Fake Out and direct mixed-type punch pressure from Medicham."},
+        {"reference_id": "showdown:gen6randomdoublesbattle:028", "adaptation": "Sitrus Intimidate Scraggy translates Scrafty's bulky utility into Fake Out, Drain Punch, Knock Off, and Headbutt."},
+        {"reference_id": "showdown:gen8randomdoublesbattle:003", "adaptation": "Rocky Helmet Fluffy Stufful translates Bewear's physical resilience into direct attacks and Wide Guard without setup."}
+      ],
+      "team_intent": "Brenden's half is rare Kubfu physical pressure, Life Orb Magic Guard Solosis special offense, and Assault Vest Technician Clobbopus coverage. Lilith's half is Focus Sash Pure Power Meditite tempo, Sitrus Intimidate Scraggy disruption and recovery, and Rocky Helmet Fluffy Stufful spread protection. In the joint branch Kubfu and Meditite lead as two different immediate styles; in either split single, every half still owns offense, coverage, bulk, and a finish. No fixed combo or turn is required.",
+      "intended_counterplay": "Fairy, Flying, Psychic, Ghost, Bug, and strong special pressure divide differently across the six. Item removal weakens Eviolite, Life Orb, Assault Vest, Sash, Sitrus, and Helmet seams; burn and Intimidate limit five physical members; Dark pressure answers Solosis but feeds no Justified gimmick. Spread attacks can be guarded once by Stufful, priority can be blocked by Inner Focus only on Kubfu, and each three-member half can be scouted and handled independently.",
+      "bespoke_ai": "Both source trainers remain three-member intentional singles so the native sight intersection can create the 3+3 double or split encounters. Both use only native smart-switching, partner-aware, and HP-aware scoring. Inner Focus, Magic Guard, Life Orb, Recover, Technician, Assault Vest, Pure Power, Fake Out, Intimidate, Knock Off, Fluffy, Rocky Helmet, and Wide Guard require no custom selector or forced action.",
+      "uniqueness": "This is Verdant's first native pair built as six martial styles rather than one shared field engine, and its first trainer-owned Kubfu showcase. Kubfu, Solosis, Clobbopus, Meditite, Scraggy, and Stufful do not appear in Battles 1-31. It adds no weather, terrain, room, active speed control, ally activation, setup move, trap, hazard, redirection, Mega, or custom AI, leaving Brawly's protected boss identity intact.",
+      "author_self_check": {
+        "strongest_part": "The native 3+3 structure itself carries the variety: each half is a viable single, while the joint battle naturally mixes rare physical Kubfu pressure, special Solosis, and four distinct young fighting styles.",
+        "weakest_link": "The joint lead has no signature combo beyond immediate pressure. That is an intentional change of pace after several engine-centered doubles and keeps the pair scalable, readable, and independent."
+      },
+      "closure": "Battle 32 is closed at an editorial 9.0/10 jointly, 7.9 for Lilith alone, and 8.0 for Brenden alone: six legal levels 22-23, six distinct items and unused species, native split/joint routing, five stable donors, truthful dialogue, author self-check, and no custom AI or premature opposing Mega. Runtime testing must confirm all three branches before those estimates become observed."
+    },
+    "BATTLE_033_DEWFORD_GYM_TAKAO": {
+      "guide_order": 33,
+      "trainer_ids": ["TRAINER_TAKAO"],
+      "status": "closed",
+      "campaign_point": "First west-branch singles trainer after the canonical east-branch clear in Dewford Gym, still before Brawly's protected first opposing Mega",
+      "strict_cap": 20,
+      "evolution_stage_fit": {
+        "campaign_phase": "post-Bracelet young power singles lesson",
+        "effective_levels": "22-23",
+        "eligible_ratio": "3/3",
+        "mega_access": true,
+        "status": "pass",
+        "reason": "Machop evolves at 28, Timburr at 25, and Jangmo-o at 35. All three remain legal young forms at levels 22-23; Machop deliberately uses Guts rather than spending Brawly's reciprocal No Guard identity."
+      },
+      "manual_quality": 10,
+      "manual_difficulty": 8.5,
+      "corpus_review": {
+        "reference_pool_size": 1005,
+        "full_team_candidates": [
+          {"reference_id": "showdown:gen4randomdoublesbattle:003", "decision": "Machamp critical-pressure role translated to Machop; full team rejected", "reason": "The donor validates hard direct Machamp offense. Scope Lens Machop uses legal Focus Energy and high-critical Cross Chop, with Knock Off and Ice Punch coverage while No Guard remains reserved."},
+          {"reference_id": "showdown:gen5randomdoublesbattle:011", "decision": "Conkeldurr coverage role translated to Timburr; full team rejected", "reason": "Eviolite Sheer Force Timburr keeps immediate Fighting pressure and legal Rock Slide, Poison Jab, and Thunder Punch without another setup clock."},
+          {"reference_id": "showdown:gen7randomdoublesbattle:003", "decision": "Kommo-o mixed-resistance closer translated to Jangmo-o; full team rejected", "reason": "Roseli Bulletproof Jangmo-o remains a legal young rare closer with Dragon Claw, Brick Break, Iron Head, and Protect rather than importing Kommo-o setup."}
+        ],
+        "decision": "Three full-set donor families translate cleanly into an unused, stage-valid power sequence. No complete mature roster fits the cap-20 west-branch lesson or Brawly's protected Mega and No Guard reveal."
+      },
+      "competitive_references": [
+        {"reference_id": "showdown:gen4randomdoublesbattle:003", "adaptation": "Scope Lens Guts Machop uses Focus Energy, Cross Chop, Knock Off, and Ice Punch as a legal critical-pressure opener without No Guard."},
+        {"reference_id": "showdown:gen5randomdoublesbattle:011", "adaptation": "Eviolite Sheer Force Timburr translates Conkeldurr into immediate Force Palm, Rock Slide, Poison Jab, and Thunder Punch coverage."},
+        {"reference_id": "showdown:gen7randomdoublesbattle:003", "adaptation": "Roseli Bulletproof Jangmo-o translates Kommo-o into legal Dragon Claw, Brick Break, Iron Head, and Protect direct pressure without setup."}
+      ],
+      "team_intent": "Scope Lens Guts Machop may use Focus Energy to make high-critical Cross Chop loom, or attack immediately with Knock Off and Ice Punch. Eviolite Sheer Force Timburr then applies Force Palm, Rock Slide, Poison Jab, or Thunder Punch without a setup turn. Roseli Bulletproof Jangmo-o is the rare finish, using Dragon Claw, Brick Break, Iron Head, and Protect to resist one Fairy hit without erasing the type weakness. This is a direct three-member singles strength test.",
+      "intended_counterplay": "Taunt, Encore, immediate focus pressure, Ghost immunity, burn, Intimidate, Reflect, item removal, and exploiting Cross Chop accuracy limit Machop. Flying, Psychic, Fairy, special offense, Ground, status, and Eviolite removal answer Timburr. Fairy, Ice, Dragon, status, phazing, or consuming Roseli before the decisive hit answer Jangmo-o. No No Guard accuracy or custom setup script removes those seams.",
+      "bespoke_ai": "Takao remains an intentional single with only native smart-switching and HP-aware scoring. Focus Energy, critical stages, Scope Lens, Guts, Sheer Force, Eviolite, Roseli Berry, Bulletproof, Knock Off, and Protect are standard mechanics; no first-turn setup flag, No Guard, forced move, or trainer-specific code is added.",
+      "uniqueness": "This is Verdant's first Scope Lens Focus Energy singles lesson and first Jangmo-o showcase. Machop, Timburr, and Jangmo-o do not appear in Battles 1-32. It uses no weather, terrain, room, active speed-control move, priority move, trap, hazard, partner mechanic, Mega, No Guard, or custom AI, preserving Brawly's exact reveal.",
+      "author_self_check": {
+        "strongest_part": "Machop makes raw power legible through critical stages rather than inflated stats, and Jangmo-o supplies a genuinely cool young rare finish without skipping evolution progression.",
+        "weakest_link": "The three members are a sequence rather than a synergistic engine. That is healthy for a singles pacing lesson and makes its conventional Flying, Psychic, Fairy, status, and item answers easy to understand."
+      },
+      "closure": "Battle 33 is closed at an editorial 8.5/10: three legal levels 22-23, distinct items and unused species, three full-set donors, native singles continuation and dialogue, author self-check, and no No Guard, custom AI, or premature opposing Mega. Runtime playtesting remains required before 8.5 is observed."
+    },
+    "BATTLE_034_DEWFORD_GYM_CRISTIAN": {
+      "guide_order": 34,
+      "trainer_ids": ["TRAINER_CRISTIAN"],
+      "status": "closed",
+      "campaign_point": "Second west-branch singles trainer before the final optional Gym double, after player Mega access but before Brawly's opposing Mega reveal",
+      "strict_cap": 20,
+      "evolution_stage_fit": {
+        "campaign_phase": "post-Bracelet three-discipline singles gauntlet",
+        "effective_levels": "22-23",
+        "eligible_ratio": "3/3",
+        "mega_access": true,
+        "status": "pass",
+        "reason": "Riolu evolves by friendship in daytime, Galarian Farfetch'd after landing critical hits, and Throh is genuinely single-stage. All three are legal at levels 22-23 and no Mega appears."
+      },
+      "manual_quality": 10,
+      "manual_difficulty": 8.7,
+      "corpus_review": {
+        "reference_pool_size": 1005,
+        "full_team_candidates": [
+          {"reference_id": "showdown:gen4randombattle:012", "decision": "Lucario setup discipline translated to Riolu; full team rejected", "reason": "Eviolite Prankster Riolu keeps a legal Bulk Up and Drain Punch identity with Crunch and Poison Jab coverage rather than importing Lucario priority."},
+          {"reference_id": "showdown:gen8randomdoublesbattle:001", "decision": "Sirfetch'd critical discipline translated to Galarian Farfetch'd; full team rejected", "reason": "Leek Scrappy Farfetch'd keeps legal high-critical Leaf Blade and Night Slash with Brave Bird and Brick Break, making precision visible without No Guard."},
+          {"reference_id": "showdown:gen8randomdoublesbattle:024", "decision": "Mold Breaker Throh finish selected; full team rejected", "reason": "Expert Belt Throh keeps a rare single-stage power finish through Superpower, Stone Edge, Knock Off, and Poison Jab while bypassing defensive abilities without another setup turn."}
+        ],
+        "decision": "Three full-set donors map cleanly to three unused disciplines. No complete donor fits the cap-20 Gym or preserves Brawly's first Mega, redirection, No Retreat, and No Guard reveal."
+      },
+      "competitive_references": [
+        {"reference_id": "showdown:gen4randombattle:012", "adaptation": "Eviolite Prankster Riolu translates Lucario setup into Bulk Up, Drain Punch, Crunch, and Poison Jab."},
+        {"reference_id": "showdown:gen8randomdoublesbattle:001", "adaptation": "Leek Scrappy Galarian Farfetch'd retains Sirfetch'd's critical identity through Leaf Blade, Night Slash, Brave Bird, and Brick Break."},
+        {"reference_id": "showdown:gen8randomdoublesbattle:024", "adaptation": "Expert Belt Mold Breaker Throh keeps Superpower, Stone Edge, Knock Off, and Poison Jab as a direct rare closer that ignores defensive abilities."}
+      ],
+      "team_intent": "Eviolite Prankster Riolu represents stance through Bulk Up, Drain Punch, Crunch, and Poison Jab. Leek Scrappy Galarian Farfetch'd represents precision through high-critical Leaf Blade and Night Slash plus Brave Bird and Brick Break. Expert Belt Mold Breaker Throh represents committed power through Superpower, Stone Edge, Knock Off, and Poison Jab while ignoring defensive abilities. The three disciplines are individually dangerous and require no shared engine or custom sequencing.",
+      "intended_counterplay": "Taunt, Encore, Haze, phazing, Unaware, special pressure, or immediate damage limits Riolu. Burn, Intimidate, Reflect, item removal, Flying, Psychic, Fairy, Electric, Ice, and strong physical walls divide across Farfetch'd and Throh. Leek and Expert Belt are removable, Brave Bird and Superpower create self-inflicted openings, and all three are physical.",
+      "bespoke_ai": "Cristian remains an intentional single with native smart-switching and HP-aware scoring only. Prankster Bulk Up, Eviolite, Drain Punch, Leek critical stages, Scrappy, Expert Belt, Mold Breaker, recoil, stat drops, and coverage are existing mechanics. No setup-first-turn flag, forced move, Mega, No Guard, or trainer-specific code is added.",
+      "uniqueness": "This is Verdant's first Leek critical showcase and first trainer-owned Throh. Riolu, Galarian Farfetch'd, and Throh do not appear in Battles 1-33. It uses no weather, terrain, room, active speed control, priority move, trap, hazard, partner interaction, Mega, No Guard, or custom AI.",
+      "author_self_check": {
+        "strongest_part": "Leek Farfetch'd and Mold Breaker Throh make two rare physical disciplines immediately visible, while Riolu gives the player one clean setup-denial decision.",
+        "weakest_link": "All three attackers are physical, so burn, Intimidate, Reflect, or a strong wall compresses the matchup. That is intentionally retained as fair counterplay rather than patched with a special attacker."
+      },
+      "closure": "Battle 34 is closed at an editorial 8.7/10: three legal levels 22-23, distinct items and unused species, three full-set donors, native singles continuation and dialogue, author self-check, and no custom AI, No Guard, or premature opposing Mega. Runtime playtesting remains required before 8.7 is observed."
+    },
+    "BATTLE_035_DEWFORD_GYM_JOCELYN": {
+      "guide_order": 35,
+      "trainer_ids": ["TRAINER_JOCELYN"],
+      "status": "closed",
+      "campaign_point": "Final optional Dewford Gym double immediately before Brawly, after player Mega access but still preserving Mega Hawlucha as the first opposing Mega",
+      "strict_cap": 20,
+      "evolution_stage_fit": {
+        "campaign_phase": "post-Bracelet rare-pressure final drill",
+        "effective_levels": "22-23",
+        "eligible_ratio": "4/4",
+        "mega_access": true,
+        "status": "pass",
+        "reason": "Impidimp evolves at 32, Pawniard at 52, and Natu at 25; Hoopa Unbound is a genuinely single-stage mythical form. All four are legal at levels 22-23 and no Mega item appears."
+      },
+      "manual_quality": 10,
+      "manual_difficulty": 9.3,
+      "corpus_review": {
+        "reference_pool_size": 1005,
+        "full_team_candidates": [
+          {"reference_id": "smogon:gen9ou:010", "decision": "Hoopa Unbound elite special pressure selected; full team rejected", "reason": "The published Gen 9 OU roster validates Hoopa Unbound as a high-leverage breaker. Jocelyn uses a legal special Life Orb set centered on Protect-bypassing Hyperspace Hole rather than importing the mature balance team."},
+          {"reference_id": "showdown:gen8randombattle:010", "decision": "Grimmsnarl and Xatu support identities translated to Impidimp and Natu; full team rejected", "reason": "Prankster disruption and Magic Bounce are preserved on their legal young forms, while screens and Trick Room are omitted to keep Brawly's board-control reveal distinct."},
+          {"reference_id": "showdown:gen6randombattle:001", "decision": "Bisharp Defiant role translated to Pawniard; full team rejected", "reason": "Eviolite Defiant Pawniard retains Iron Head, Knock Off, Sucker Punch, and Brick Break as direct anti-stat pressure without setup."}
+        ],
+        "decision": "Three full-set records supply a rare breaker and two young support families. No complete donor fits the cap-20 final drill or preserves Brawly's first opposing Mega and redirection identity."
+      },
+      "competitive_references": [
+        {"reference_id": "smogon:gen9ou:010", "adaptation": "Life Orb Hoopa Unbound uses legal Hyperspace Hole, Dark Pulse, Focus Blast, and Thunderbolt as a special breaker that makes passive Protect unsafe."},
+        {"reference_id": "showdown:gen8randombattle:010", "adaptation": "Focus Sash Prankster Impidimp keeps disruption through Fake Out, Taunt, Fake Tears, and Foul Play; Colbur Magic Bounce Natu uses Psychic, Heat Wave, Giga Drain, and Roost without screens or Trick Room."},
+        {"reference_id": "showdown:gen6randombattle:001", "adaptation": "Eviolite Defiant Pawniard translates Bisharp into Iron Head, Knock Off, Sucker Punch, and Brick Break direct pressure."}
+      ],
+      "team_intent": "Focus Sash Prankster Impidimp leads beside Life Orb special Hoopa Unbound. Fake Out, Taunt, Fake Tears, and Foul Play can buy or amplify Hyperspace Hole, Dark Pulse, Focus Blast, or Thunderbolt, but no move is forced. Eviolite Defiant Pawniard punishes stat-lowering and supplies Iron Head, Knock Off, Sucker Punch, and Brick Break. Colbur Magic Bounce Natu deters status while attacking through Psychic, Heat Wave, Giga Drain, or Roost. The rare Hoopa shock belongs to Jocelyn; the Mega reveal remains Brawly's.",
+      "intended_counterplay": "Dark types ignore Prankster-targeted status, while Fake Out immunity, Taunt, focus fire, spread attacks, or removing Impidimp's Sash breaks the lead support. Fairy and especially Bug pressure threaten Hoopa, whose Life Orb and modest physical bulk create a clear focus target. Fighting, Fire, Ground, item removal, priority prediction, Mold Breaker status, and strong Rock, Electric, Ice, Ghost, or Dark attacks divide across Pawniard and Natu. Magic Bounce reflects but does not stop direct damage.",
+      "bespoke_ai": "Jocelyn uses guarded native doubles with smart-switching, partner-aware, and HP-aware scoring. Fake Out, Prankster, Taunt, Fake Tears, Foul Play, Hyperspace Hole's Protect bypass, Life Orb, Defiant, Eviolite, Sucker Punch, Magic Bounce, Colbur Berry, coverage, and Roost are existing mechanics. No trainer-specific target, screen, room, redirection, Mega, or forced opening is added.",
+      "uniqueness": "This is Verdant's first Protect-bypassing Hyperspace Hole lesson, first Hoopa Unbound encounter, and first Magic Bounce Natu. Impidimp, Hoopa Unbound, Pawniard, and Natu do not appear in Battles 1-34. It uses no weather, terrain, room, active speed control, setup move, ally activation, redirection, Mega, No Guard, or custom AI, preserving Brawly's full boss reveal.",
+      "author_self_check": {
+        "strongest_part": "A tiny Prankster support standing beside special Hoopa Unbound is an unmistakable final-trainer shock, and Hyperspace Hole teaches that Protect is not universal before Brawly.",
+        "weakest_link": "Hoopa concentrates much of the threat and folds quickly to Fairy, Bug, or coordinated focus fire once Impidimp is removed. That is the intended clean answer, not a gap to patch."
+      },
+      "closure": "Battle 35 is closed at an editorial 9.3/10: four legal levels 22-23, distinct items and unused species, guarded native doubles with room continuation, three stable donors, truthful dialogue, author self-check, and no custom AI or premature opposing Mega. Runtime playtesting remains required before 9.3 is observed."
+    },
+    "BATTLE_036_DEWFORD_GYM_BRAWLY": {
+      "guide_order": 36,
+      "trainer_ids": ["TRAINER_BRAWLY_1"],
+      "status": "closed",
+      "campaign_point": "Required Knuckle Badge boss after Steven grants the Mega Bracelet and before Slateport; victory raises the strict cap from 20 to 30 and introduces the first opposing Mega",
+      "strict_cap": 20,
+      "evolution_stage_fit": {
+        "campaign_phase": "first reciprocal Mega boss",
+        "effective_levels": "22-25",
+        "eligible_ratio": "6/6",
+        "mega_access": true,
+        "status": "pass",
+        "reason": "Pachirisu, Falinks, and Hawlucha are single-stage; Hitmontop is obtainable from level-20 Tyrogue, Kirlia from level-20 Ralts, and Breloom from level-23 Shroomish. The player already owns the Bracelet, and Hawluchanite creates exactly one legal opposing Mega at level 25."
+      },
+      "manual_quality": 10,
+      "manual_difficulty": 10.0,
+      "corpus_review": {
+        "reference_pool_size": 1005,
+        "full_team_candidates": [
+          {"reference_id": "showdown:gen8randomdoublesbattle:025", "decision": "Hawlucha, Follow Me, and No Retreat core selected; full team rejected", "reason": "The full-set donor already co-locates Hawlucha, Clefairy Follow Me, and Defiant Falinks No Retreat. Verdant replaces Clefairy with the protected Pachirisu redirection identity and makes Hawlucha the sole Mega."},
+          {"reference_id": "elite:sejun-park:worlds-2014", "decision": "championship redirection lesson selected; full roster rejected", "reason": "Sejun Park's Pachirisu proves that a modest support slot can define a world-class board. Pachirisu and a young Kirlia adapt the support lesson without importing Mega Gyarados, Garchomp, or Shadow Tag."},
+          {"reference_id": "elite:wolfe:worlds-2016", "decision": "Hitmontop board-control set selected; full roster rejected", "reason": "Eject Button Intimidate Hitmontop keeps Fake Out, Close Combat, Wide Guard, and Helping Hand from a world-winning positioning team without importing Primal or a second Mega mode."},
+          {"reference_id": "showdown:gen4randomdoublesbattle:008", "decision": "Breloom direct status-powered role selected; full team rejected", "reason": "Toxic Orb Poison Heal Breloom keeps immediate Fighting and Grass pressure, replacing setup and sleep with Facade, Mach Punch, Seed Bomb, and Rock Tomb so the boss retains one setup commitment."
+          }
+        ],
+        "decision": "One full-set random-doubles record already contains the protected Hawlucha-redirection-Falinks structure, while two championship references supply Pachirisu and Hitmontop board control. The final six preserve every marquee commitment without importing an unrelated complete roster."
+      },
+      "competitive_references": [
+        {"reference_id": "showdown:gen8randomdoublesbattle:025", "adaptation": "Lum Defiant Falinks keeps No Retreat, Close Combat, Rock Slide, and Poison Jab; Mega Hawlucha adapts the donor's direct Flying/Fighting offense into No Guard High Jump Kick, Stone Edge, Brave Bird, and Feint."},
+        {"reference_id": "elite:sejun-park:worlds-2014", "adaptation": "Sitrus Volt Absorb Pachirisu retains Follow Me, Nuzzle, Super Fang, and Helping Hand; Eviolite Kirlia provides young special and status board control."},
+        {"reference_id": "elite:wolfe:worlds-2016", "adaptation": "Eject Button Intimidate Hitmontop imports Fake Out, Close Combat, Wide Guard, and Helping Hand from the documented world-winning set."},
+        {"reference_id": "showdown:gen4randomdoublesbattle:008", "adaptation": "Toxic Orb Poison Heal Breloom uses Facade, Mach Punch, Seed Bomb, and Rock Tomb as immediate pressure without a second setup mode."}
+      ],
+      "team_intent": "Sitrus Volt Absorb Pachirisu and Lum Defiant Falinks lead. Follow Me can buy No Retreat's irreversible commitment, while Nuzzle, Super Fang, Helping Hand, Close Combat, Rock Slide, and Poison Jab keep both members useful from the real board. Eject Button Intimidate Hitmontop supplies Fake Out, Wide Guard, Helping Hand, and direct damage. Eviolite Synchronize Kirlia creates the special lane through Dazzling Gleam, Psychic, Will-O-Wisp, and Helping Hand. Toxic Orb Poison Heal Breloom attacks immediately through Facade, Mach Punch, Seed Bomb, and Rock Tomb. Level-25 Mega Hawlucha is the sole ace: No Guard makes High Jump Kick and Stone Edge reliable while also making the player's inaccurate answers reliable against it; Brave Bird and Feint complete the direct finish.",
+      "intended_counterplay": "Fake Out immunity, Taunt, spread damage, redirection theft, priority, or focused damage removes Pachirisu before it buys repeated turns. Haze, Clear Smog, Unaware, Spectral Thief, phazing, burn, Intimidate before Defiant activation, Reflect, or stalling the committed Falinks answer No Retreat. Wide Guard can be baited with single-target damage; item removal attacks Eject Button, Eviolite, Lum, Sitrus, Toxic Orb, and Hawluchanite seams. Flying, Psychic, Fairy, Electric, Ice, and Rock pressure Mega Hawlucha, and No Guard reciprocally makes inaccurate player moves hit it. The boss has no Protect anywhere, so coordinated offense is always meaningful.",
+      "bespoke_ai": "Brawly uses native guarded doubles with smart-switching, setup preference, partner awareness, HP awareness, and speed-control scoring. Current partner AI explicitly rewards Follow Me while Falinks chooses a setup move; No Retreat, Defiant, redirection, Nuzzle, Super Fang, Fake Out, Eject Button, Intimidate, Wide Guard, Helping Hand, Synchronize, burn, Poison Heal, and Feint are existing mechanics. Standard opponent Mega automation transforms only Hawlucha. No target, reserve, or turn is scripted, and no non-Mega gimmick exists.",
+      "uniqueness": "This is Verdant's first opposing Mega, definitive early redirection-and-commitment boss, and only reciprocal No Guard Hawlucha puzzle. Pachirisu, Falinks, Hitmontop, Kirlia, Breloom, and Hawlucha do not appear in Battles 1-35. It spends the reserved Brawly identity exactly once and uses no weather, terrain, room, trap, hazard, ally-damage activation, second Mega, legendary, Tera, Z-Move, Dynamax, Primal, or custom state machine.",
+      "author_self_check": {
+        "strongest_part": "Pachirisu visibly buying Falinks's irreversible No Retreat before Mega Hawlucha reveals reciprocal No Guard gives the boss one coherent opening, middle, and ace lesson instead of six unrelated threats.",
+        "weakest_link": "Most damage remains physical and Pachirisu is a fragile single redirection source, so Haze, burn, Intimidate timing, Reflect, spread pressure, or strong Psychic/Fairy/Flying offense can compress the fight. Those are necessary boss counterplay, not reasons to add another system."
+      },
+      "closure": "Battle 36 is design-closed at target 10/10: six legal levels 22-25, six distinct items and unused species, guarded badge routing, four stable competitive references, first-opposing-Mega and No Guard legality, truthful dialogue, author self-check, and no custom state machine or non-Mega gimmick. Runtime playtesting remains required before difficulty 10 becomes observed."
+    },
+    "BATTLE_037_ROUTE_109_HUEY": {
+      "guide_order": 37,
+      "trainer_ids": ["TRAINER_HUEY"],
+      "status": "closed",
+      "campaign_point": "First trainer on the canonical northbound Route 109 beach clear after the Knuckle Badge raises the strict cap to 30",
+      "strict_cap": 30,
+      "evolution_stage_fit": {
+        "campaign_phase": "post-Brawly harbor singles",
+        "effective_levels": "31-33",
+        "eligible_ratio": "3/3",
+        "mega_access": true,
+        "status": "pass",
+        "reason": "Pelipper evolves from Wingull at 25, Perrserker from Galarian Meowth at 28, and Dhelmise is genuinely single-stage. All three are legal at levels 31-33; no trainer Mega is needed for this route fight."
+      },
+      "manual_quality": 10,
+      "manual_difficulty": 8.6,
+      "corpus_review": {
+        "reference_pool_size": 1005,
+        "full_team_candidates": [
+          {"reference_id": "showdown:gen4randombattle:023", "decision": "Pelipper harbor-weather role selected; full team rejected", "reason": "Wacan Drizzle Pelipper uses legal Hydro Pump, Hurricane, Ice Beam, and Roost as a self-contained port opener without importing the mature rain balance roster."},
+          {"reference_id": "showdown:gen9randombattle:017", "decision": "Choice Band Perrserker commitment selected; full team rejected", "reason": "Tough Claws Perrserker keeps Iron Head, Close Combat, U-turn, and Play Rough as one visible move-lock resource question."},
+          {"reference_id": "smogon:gen7nu:002", "decision": "Dhelmise anchor selected; full team rejected", "reason": "Assault Vest Steelworker Dhelmise supplies legal Power Whip, Poltergeist, Anchor Shot, and Earthquake as Huey's rare maritime finish."}
+        ],
+        "decision": "Three full-set singles records map cleanly to a legal port-themed trio. The donor teams are not imported because their unrelated weather, hazard, and balance members would turn an ordinary beach trainer into another multi-engine battle."
+      },
+      "competitive_references": [
+        {"reference_id": "showdown:gen4randombattle:023", "adaptation": "Wacan Drizzle Pelipper uses Hydro Pump, Hurricane, Ice Beam, and Roost as the harbor opener."},
+        {"reference_id": "showdown:gen9randombattle:017", "adaptation": "Choice Band Tough Claws Perrserker uses Iron Head, Close Combat, U-turn, and Play Rough as an exploitable committed breaker."},
+        {"reference_id": "smogon:gen7nu:002", "adaptation": "Assault Vest Steelworker Dhelmise uses Power Whip, Poltergeist, Anchor Shot, and Earthquake as the rare anchor closer."}
+      ],
+      "team_intent": "Wacan Drizzle Pelipper opens with rain-accurate Hurricane, Hydro Pump, Ice Beam, or Roost. Choice Band Tough Claws Perrserker then commits visibly to Iron Head, Close Combat, U-turn, or Play Rough. Assault Vest Steelworker Dhelmise closes through Power Whip, Poltergeist, Anchor Shot, and Earthquake; Anchor Shot can prevent one careless escape. The three are a thematic harbor sequence, not a hidden combo.",
+      "intended_counterplay": "Weather replacement, Cloud Nine, Air Lock, Electric or Rock pressure, Taunt, and exploiting Roost limit Pelipper. Protect, immunities, resistances, item removal, and switching exploit Perrserker's Choice lock. Fire, Ghost, Dark, Flying, Ice, status, burn, strong special attacks, and removing Assault Vest answer Dhelmise; Anchor Shot must connect before trapping matters. No one port member covers every other weakness.",
+      "bespoke_ai": "Huey remains an intentional single with native smart-switching and HP-aware scoring. Drizzle, Wacan Berry, weather accuracy, Roost, Choice lock, Tough Claws, U-turn, Assault Vest, Steelworker, Poltergeist item checks, and Anchor Shot trapping are existing mechanics. No weather script, forced switch, custom selector, or Mega is added.",
+      "uniqueness": "This is Verdant's first Steelworker Dhelmise and first explicit harbor-anchor singles team. Pelipper, Perrserker, and Dhelmise do not appear in Battles 1-36. It uses no setup move, priority move, active speed control, Protect, terrain, room, partner mechanic, Mega, or custom AI; rain reappears only as a native opener after an eight-battle gap.",
+      "author_self_check": {
+        "strongest_part": "Dhelmise is a memorable post-badge rare encounter and Anchor Shot makes the sailor theme mechanically real without needing special scripting.",
+        "weakest_link": "The members share a port theme more than a competitive engine. That is accepted route pacing: Choice lock, common typed weaknesses, and only one trap make the battle hard but easy to read."
+      },
+      "closure": "Battle 37 is closed at an editorial 8.6/10: three legal levels 31-33, distinct items and unused species, three full-set donors, native singles routing and dialogue, author self-check, and no custom AI. Runtime playtesting remains required before 8.6 is observed."
+    },
+    "BATTLE_038_ROUTE_109_HAILEY": {
+      "guide_order": 38,
+      "trainer_ids": ["TRAINER_HAILEY"],
+      "status": "closed",
+      "campaign_point": "Next northbound Route 109 beach trainer after Huey at the post-Knuckle cap of 30",
+      "strict_cap": 30,
+      "evolution_stage_fit": {
+        "campaign_phase": "post-Brawly evolved swim drill",
+        "effective_levels": "31-33",
+        "eligible_ratio": "4/4",
+        "mega_access": true,
+        "status": "pass",
+        "reason": "Flaaffy evolves from Mareep at 15, Palpitoad from Tympole at 25, Azumarill from Marill at 18, and Bibarel from Bidoof at 15. All four are legal evolved forms by cap 30; no Mega is required."
+      },
+      "manual_quality": 10,
+      "manual_difficulty": 8.9,
+      "corpus_review": {
+        "reference_pool_size": 1005,
+        "full_team_candidates": [
+          {"reference_id": "showdown:gen4randombattle:003", "decision": "Ampharos screen-and-Electric role translated to Flaaffy; full team rejected", "reason": "Light Clay Flaaffy uses legal Light Screen, Discharge, Power Gem, and Protect as a young field-support lead rather than importing the mature sun team."},
+          {"reference_id": "showdown:gen5randomdoublesbattle:018", "decision": "Seismitoad ally-safe spread role translated to Palpitoad; full team rejected", "reason": "Assault Vest Water Absorb Palpitoad keeps Muddy Water and Earth Power, adding legal Sludge Wave and Icy Wind while its Ground type ignores Flaaffy's Discharge."},
+          {"reference_id": "showdown:gen4randomdoublesbattle:001", "decision": "Huge Power Azumarill direct role selected; full team rejected", "reason": "Sitrus Huge Power Azumarill attacks immediately through Liquidation, Play Rough, Knock Off, and Ice Punch without adding another Belly Drum clock."},
+          {"reference_id": "showdown:gen5randomdoublesbattle:019", "decision": "fast Bibarel cleanup role selected; full team rejected", "reason": "Choice Scarf Unaware Bibarel uses Return, Waterfall, Crunch, and Superpower as a move-locked closer that ignores accumulated opposing boosts."
+          }
+        ],
+        "decision": "Four full-set family donors become the legal cap-30 evolutions of Hailey's original swim-practice families. No complete donor fits the character, level regime, and simple ally-safe opening."
+      },
+      "competitive_references": [
+        {"reference_id": "showdown:gen4randombattle:003", "adaptation": "Light Clay Static Flaaffy uses Light Screen, Discharge, Power Gem, and Protect as the support lead."},
+        {"reference_id": "showdown:gen5randomdoublesbattle:018", "adaptation": "Assault Vest Water Absorb Palpitoad uses Muddy Water, Earth Power, Sludge Wave, and Icy Wind beside ally-safe Discharge."},
+        {"reference_id": "showdown:gen4randomdoublesbattle:001", "adaptation": "Sitrus Huge Power Azumarill uses Liquidation, Play Rough, Knock Off, and Ice Punch as direct pressure without setup."},
+        {"reference_id": "showdown:gen5randomdoublesbattle:019", "adaptation": "Choice Scarf Unaware Bibarel uses Return, Waterfall, Crunch, and Superpower as an exploitable locked closer."}
+      ],
+      "team_intent": "Light Clay Static Flaaffy and Assault Vest Water Absorb Palpitoad lead. Light Screen, Discharge, Power Gem, and Protect support Muddy Water, Earth Power, Sludge Wave, and Icy Wind; Palpitoad's Ground typing makes the spread Electric attack ally-safe. Sitrus Huge Power Azumarill then supplies immediate Liquidation, Play Rough, Knock Off, and Ice Punch pressure. Choice Scarf Unaware Bibarel closes through Return, Waterfall, Crunch, or Superpower while exposing a visible move lock. No action is forced.",
+      "intended_counterplay": "Taunt, Brick Break, Psychic Fangs, Defog, screen theft, or focused physical pressure removes Light Screen value. Ground types ignore Discharge; Grass pressure is 4x effective into Palpitoad; Electric, Poison, Steel, burn, Intimidate, Reflect, item removal, and strong special or physical focus divide across Azumarill and Bibarel. Scarf lock and Superpower drops create late openings.",
+      "bespoke_ai": "Hailey uses guarded native doubles with smart-switching, partner-aware, HP-aware, speed-control, and field-control scoring. Light Screen, Discharge immunity, Static, Water Absorb, Assault Vest, Icy Wind, Huge Power, Sitrus, Choice Scarf, Unaware, and move lock are existing mechanics. No custom combo scorer, target, switch rule, setup script, or Mega is added.",
+      "uniqueness": "This is Verdant's first cap-30 family-evolution payoff and first Flaaffy-to-Ground-partner Discharge drill. Flaaffy, Palpitoad, Azumarill, and Bibarel do not appear in Battles 1-37, though their younger families existed in Hailey's replaced baseline rather than prior closed encounters. It uses no weather, room, terrain, setup move, trap, hazard, redirection, Mega, or custom AI.",
+      "author_self_check": {
+        "strongest_part": "The evolved swim-practice identity is instantly readable: Flaaffy can discharge freely beside Ground-type Palpitoad, and both reserves apply familiar direct pressure.",
+        "weakest_link": "The screen setter is predictable and the physical reserves share burn and Intimidate counterplay. Those clean answers are intentionally retained rather than adding a second engine."
+      },
+      "closure": "Battle 38 is closed at an editorial 8.9/10: four legal levels 31-33, distinct items and unused species, guarded native doubles, four stable donors, truthful dialogue, author self-check, and no custom AI. Runtime playtesting remains required before 8.9 is observed."
+    },
+    "BATTLE_039_ROUTE_109_EDMOND": {
+      "guide_order": 39,
+      "trainer_ids": ["TRAINER_EDMOND"],
+      "status": "closed",
+      "campaign_point": "East-side sailor on the northbound Route 109 beach after Hailey, retained as a singles pacing battle at cap 30",
+      "strict_cap": 30,
+      "evolution_stage_fit": {"campaign_phase": "post-Brawly delayed-pressure singles", "effective_levels": "31-33", "eligible_ratio": "3/3", "mega_access": true, "status": "pass", "reason": "Slowpoke evolves at 37, Koffing at 35, and Staravia at 34. All three remain legal pre-final forms at levels 31-33 and no Mega is needed."},
+      "manual_quality": 10,
+      "manual_difficulty": 8.7,
+      "corpus_review": {
+        "reference_pool_size": 1005,
+        "full_team_candidates": [
+          {"reference_id": "showdown:gen9randombattle:018", "decision": "Slowbro delayed-control role translated to Slowpoke; full team rejected", "reason": "Eviolite Regenerator Slowpoke keeps legal Future Sight, Scald, Slack Off, and Thunder Wave as a finite delayed-pressure opener."},
+          {"reference_id": "showdown:gen4randomdoublesbattle:002", "decision": "Weezing status wall translated to Koffing; full team rejected", "reason": "Black Sludge Neutralizing Gas Koffing uses Sludge Bomb, Will-O-Wisp, Flamethrower, and Pain Split to alter ability-reliant answers without another setup move."},
+          {"reference_id": "showdown:gen4randombattle:012", "decision": "Staraptor fast recoil role translated to Staravia; full team rejected", "reason": "Choice Scarf Reckless Staravia keeps Brave Bird, Double-Edge, U-turn, and legal Steel Wing as a visible locked closer."}
+        ],
+        "decision": "Three full-set family donors form one cap-30 delayed-hit singles sequence. Their unrelated mature teams are rejected to preserve route pacing and the sailor's seasick timing theme."
+      },
+      "competitive_references": [
+        {"reference_id": "showdown:gen9randombattle:018", "adaptation": "Eviolite Regenerator Slowpoke uses Future Sight, Scald, Slack Off, and Thunder Wave as delayed control."},
+        {"reference_id": "showdown:gen4randomdoublesbattle:002", "adaptation": "Black Sludge Neutralizing Gas Koffing uses Sludge Bomb, Will-O-Wisp, Flamethrower, and Pain Split."},
+        {"reference_id": "showdown:gen4randombattle:012", "adaptation": "Choice Scarf Reckless Staravia uses Brave Bird, Double-Edge, U-turn, and Steel Wing as an exploitable fast closer."}
+      ],
+      "team_intent": "Eviolite Regenerator Slowpoke opens with Future Sight, Scald, Slack Off, or Thunder Wave, planting delayed pressure rather than trapping. Black Sludge Neutralizing Gas Koffing then removes ability-based assumptions while using Sludge Bomb, Will-O-Wisp, Flamethrower, or Pain Split. Choice Scarf Reckless Staravia closes through Brave Bird, Double-Edge, U-turn, or Steel Wing, often forcing the player to account for the pending Future Sight hit and a revealed move lock at once.",
+      "intended_counterplay": "Dark types block Future Sight, while Taunt, Toxic, strong Grass, Electric, Bug, Ghost, or Dark attacks limit Slowpoke. Ground and Psychic pressure, Mold Breaker, item removal, status immunity, and direct special damage answer Koffing. Rock, Electric, Ice, Steel, recoil stalling, Protect, and Choice-lock exploitation answer Staravia. Future Sight timing is visible and switching remains legal.",
+      "bespoke_ai": "Edmond remains an intentional single with native smart-switching, HP-aware, and speed-control scoring. Future Sight, Regenerator, Eviolite, Slack Off, Thunder Wave, Neutralizing Gas, Black Sludge, Pain Split, Choice Scarf, Reckless recoil, and U-turn are existing mechanics. No delayed-hit script, forced switch, custom selector, setup flag, or Mega is added.",
+      "uniqueness": "This is Verdant's first Future Sight timing sequence and first Neutralizing Gas Koffing. Slowpoke, Koffing, and Staravia do not appear in Battles 1-38. It uses no weather, terrain, room, setup move, priority move, trap, hazard, partner interaction, Mega, or custom AI.",
+      "author_self_check": {"strongest_part": "Future Sight makes the three-member sequence interact across turns without custom scripting, and Neutralizing Gas meaningfully changes how the middle is approached.", "weakest_link": "Dark immunity and common Ground, Psychic, Electric, Rock, and recoil answers compress the matchup. Those visible answers are retained as healthy singles counterplay."},
+      "closure": "Battle 39 is closed at an editorial 8.7/10: three legal levels 31-33, distinct items and unused species, three stable donors, native singles routing and dialogue, author self-check, and no custom AI. Runtime playtesting remains required before 8.7 is observed."
+    },
+    "BATTLE_040_ROUTE_109_RICKY": {
+      "guide_order": 40,
+      "trainer_ids": ["TRAINER_RICKY_1"],
+      "status": "closed",
+      "campaign_point": "North-edge Route 109 Tuber after Edmond; first Match Call encounter only, with later Ricky parties preserved as separate future battles",
+      "strict_cap": 30,
+      "evolution_stage_fit": {"campaign_phase": "post-Brawly hunger singles", "effective_levels": "31-33", "eligible_ratio": "3/3", "mega_access": true, "status": "pass", "reason": "Linoone evolves from Zigzagoon at 20, Greedent from Skwovet at 24, and Appletun by Sweet Apple. All three are legal by cap 30 and no Mega is needed."},
+      "manual_quality": 10,
+      "manual_difficulty": 8.8,
+      "corpus_review": {
+        "reference_pool_size": 1005,
+        "full_team_candidates": [
+          {"reference_id": "showdown:gen7randombattle:027", "decision": "Gluttony Belly Drum Linoone selected; full team rejected", "reason": "Sitrus Linoone keeps one legal Belly Drum, Extreme Speed, Shadow Claw, and Seed Bomb setup clock as the immediate appetite threat."},
+          {"reference_id": "showdown:gen8randomdoublesbattle:003", "decision": "Greedent berry-tank role selected; full team rejected", "reason": "Figy Cheek Pouch Greedent attacks directly through Body Slam, Payback, Seed Bomb, and Gyro Ball rather than adding a second setup mode."},
+          {"reference_id": "showdown:gen9randombattle:030", "decision": "Greedent competitive role corroborated; full team rejected", "reason": "A second full-set donor confirms Greedent's bulky item-dependent niche, while source-native Appletun supplies the legal food-themed special finish."
+          }
+        ],
+        "decision": "Two full-set Greedent references and one Linoone setup donor support a three-member hunger team. No complete indexed roster contains Appletun or fits Ricky's cap-30 food dialogue, so the unrelated donor partners are not imported."
+      },
+      "competitive_references": [
+        {"reference_id": "showdown:gen7randombattle:027", "adaptation": "Sitrus Gluttony Linoone uses Belly Drum, Extreme Speed, Shadow Claw, and Seed Bomb as the single setup clock."},
+        {"reference_id": "showdown:gen8randomdoublesbattle:003", "adaptation": "Figy Cheek Pouch Greedent uses Body Slam, Payback, Seed Bomb, and Gyro Ball as direct berry-powered bulk."},
+        {"reference_id": "showdown:gen9randombattle:030", "adaptation": "The second Greedent donor corroborates the bulky hunger role; Leftovers Thick Fat Appletun supplies source-legal Apple Acid, Dragon Pulse, Recover, and Leech Seed."
+        }
+      ],
+      "team_intent": "Sitrus Gluttony Linoone may Belly Drum once, then threatens Extreme Speed, Shadow Claw, or Seed Bomb. Figy Cheek Pouch Greedent attacks directly through Body Slam, Payback, Seed Bomb, and Gyro Ball, deliberately avoiding a second setup clock. Leftovers Thick Fat Appletun closes through Apple Acid, Dragon Pulse, Recover, and Leech Seed. Every member ties to Ricky's hunger dialogue while exposing a different resource seam.",
+      "intended_counterplay": "Taunt, Encore, Haze, Clear Smog, Unaware, phazing, priority resistance, Ghost typing, burn, or immediate pressure limit Linoone. Fighting attacks, item removal, special offense, Taunt, and denying Cheek Pouch recovery answer Greedent. Ice, Fairy, Bug, Poison, Flying, Dragon, Taunt, Toxic, Knock Off, and strong physical attacks answer Appletun despite Thick Fat. Only one setup timer exists.",
+      "bespoke_ai": "Ricky remains an intentional single with native smart-switching and HP-aware scoring. Belly Drum, Gluttony, Sitrus, Extreme Speed, Cheek Pouch, Figy Berry, Leftovers, Thick Fat, Apple Acid, Recover, Leech Seed, and Match Call routing are existing mechanics. No setup-first-turn flag, forced heal, custom selector, or Mega is added.",
+      "uniqueness": "This is Verdant's first complete hunger-themed singles team and first Appletun. Linoone, Greedent, and Appletun do not appear in Battles 1-39. It uses no weather, terrain, room, active speed control, trap, hazard, partner mechanic, Mega, or custom AI, and contains only one setup move.",
+      "story_logic": "The first victory still enters Ricky's native Match Call registration branch. Registration choice and later rematches do not alter Battle 40's first-party closure; Ricky 2-4 remain separate future encounter indices.",
+      "author_self_check": {"strongest_part": "The moves, items, and species all reinforce Ricky's hunger dialogue, and Greedent's direct set keeps the team from becoming two parallel setup clocks.", "weakest_link": "Linoone remains the familiar Belly Drum threat and the first two share Fighting counterplay. The long reuse gap, transparent setup, and distinct Appletun finish make that acceptable."},
+      "closure": "Battle 40 is closed at an editorial 8.8/10: three legal levels 31-33, distinct items and unused species, three stable references, native singles and Match Call routing, truthful dialogue, author self-check, and no custom AI. Runtime playtesting remains required before 8.8 is observed."
+    },
+    "BATTLE_041_ROUTE_109_LOLA": {
+      "guide_order": 41,
+      "trainer_ids": ["TRAINER_LOLA_1"],
+      "status": "closed",
+      "campaign_point": "North-edge Route 109 Tuber after Ricky; first Match Call party only, with later Lola stages preserved separately",
+      "strict_cap": 30,
+      "evolution_stage_fit": {"campaign_phase": "post-Brawly beach flower double", "effective_levels": "31-33", "eligible_ratio": "4/4", "mega_access": true, "status": "pass", "reason": "Cherrim evolves from Cherubi at 25, Leafeon by Leaf Stone, and Comfey and Shaymin are single-stage. All four are legal by cap 30 and no Mega is needed."},
+      "manual_quality": 10,
+      "manual_difficulty": 9.1,
+      "corpus_review": {
+        "reference_pool_size": 1005,
+        "full_team_candidates": [
+          {"reference_id": "showdown:gen7randomdoublesbattle:004", "decision": "Cherrim sun support selected; full team rejected", "reason": "Heat Rock Flower Gift Cherrim legally uses Sunny Day, Weather Ball, Helping Hand, and Dazzling Gleam as the single garden enabler."},
+          {"reference_id": "showdown:gen5randomdoublesbattle:002", "decision": "Leafeon physical Grass role selected; full team rejected", "reason": "Life Orb Chlorophyll Leafeon keeps direct Leaf Blade, Double-Edge, Knock Off, and X-Scissor pressure beside Cherrim's Flower Gift."},
+          {"reference_id": "smogon:gen7nu:001", "decision": "Comfey priority sustain selected; full team rejected", "reason": "Sitrus Triage Comfey uses Giga Drain, Draining Kiss, Floral Healing, and Taunt as finite support and direct pressure without Calm Mind."},
+          {"reference_id": "showdown:gen4randombattle:015", "decision": "Shaymin rare flower closer selected; full team rejected", "reason": "Expert Belt Natural Cure Shaymin keeps legal Seed Flare, Earth Power, Air Slash, and Psychic as an immediate mythical finish without setup."
+          }
+        ],
+        "decision": "Four full-set donors create a literal competitive flower garden matching Lola's dialogue. Unrelated donor rosters are rejected so sun remains the only shared engine."
+      },
+      "competitive_references": [
+        {"reference_id": "showdown:gen7randomdoublesbattle:004", "adaptation": "Heat Rock Flower Gift Cherrim uses Sunny Day, Weather Ball, Helping Hand, and Dazzling Gleam as the sole sun setter."},
+        {"reference_id": "showdown:gen5randomdoublesbattle:002", "adaptation": "Life Orb Chlorophyll Leafeon uses Leaf Blade, Double-Edge, Knock Off, and X-Scissor as the Flower Gift recipient."},
+        {"reference_id": "smogon:gen7nu:001", "adaptation": "Sitrus Triage Comfey uses Giga Drain, Draining Kiss, Floral Healing, and Taunt without adding another setup clock."},
+        {"reference_id": "showdown:gen4randombattle:015", "adaptation": "Expert Belt Natural Cure Shaymin uses Seed Flare, Earth Power, Air Slash, and Psychic as the rare direct closer."}
+      ],
+      "team_intent": "Heat Rock Flower Gift Cherrim and Life Orb Chlorophyll Leafeon lead. Sunny Day can open the flower, boosting Leafeon's Attack and both allies' special bulk while enabling Weather Ball; Helping Hand and Dazzling Gleam remain useful alternatives. Leafeon attacks immediately through Leaf Blade, Double-Edge, Knock Off, or X-Scissor. Sitrus Triage Comfey supplies priority Giga Drain, Draining Kiss, Floral Healing, and Taunt. Expert Belt Natural Cure Shaymin closes through Seed Flare, Earth Power, Air Slash, or Psychic. Sun is the only shared engine.",
+      "intended_counterplay": "Taunt, Fake Out, focus fire, weather replacement, Cloud Nine, Air Lock, or removing Heat Rock stops extended sun. Fire, Ice, Flying, Bug, Poison, and strong special or physical pressure divide across the garden; item removal weakens every seam; Leafeon takes Life Orb and Double-Edge recoil; Comfey healing is finite and Tauntable; Shaymin has no recovery or Protect. No second setter or hidden mode replaces Cherrim.",
+      "bespoke_ai": "Lola uses guarded native doubles with smart-switching, partner-aware, HP-aware, and field-control scoring. Sunny Day, Flower Gift, Heat Rock, Chlorophyll, Weather Ball, Helping Hand, Life Orb, Triage, Floral Healing, Taunt, Natural Cure, and Expert Belt are existing mechanics. No custom weather script, forced move, setup flag, selector, or Mega is added; Match Call routing remains intact.",
+      "uniqueness": "This is Verdant's first Flower Gift garden and first Shaymin encounter. Cherrim, Leafeon, Comfey, and Shaymin do not appear in Battles 1-40. It uses no terrain, room, active speed-control move, setup move, trap, hazard, redirection, Mega, or custom AI, and rain immediately gives way to a visually opposite weather identity.",
+      "story_logic": "The guarded first victory still enters Lola's Match Call registration branch. Registration and later Lola parties remain separate future encounters and cannot rewrite Battle 41's closure.",
+      "author_self_check": {"strongest_part": "The umbrella-as-flower dialogue becomes a real Flower Gift board and Shaymin provides the rare visual payoff without a separate boss mechanic.", "weakest_link": "Cherrim is the only sun setter and the roster shares broad Fire, Ice, Flying, Bug, and Poison pressure. That single point of failure is the intended clean answer."},
+      "closure": "Battle 41 is closed at an editorial 9.1/10: four legal levels 31-33, distinct items and unused species, guarded doubles and Match Call routing, four stable donors, truthful dialogue, author self-check, and no custom AI. Runtime playtesting remains required before 9.1 is observed."
+    },
+    "BATTLE_042_ROUTE_109_CHANDLER": {
+      "guide_order": 42,
+      "trainer_ids": ["TRAINER_CHANDLER"],
+      "status": "closed",
+      "campaign_point": "Final north-edge Route 109 youngster before entering Slateport proper, at the post-Knuckle cap of 30",
+      "strict_cap": 30,
+      "evolution_stage_fit": {"campaign_phase": "post-Brawly round-tide singles", "effective_levels": "31-33", "eligible_ratio": "3/3", "mega_access": true, "status": "pass", "reason": "Phione and Cryogonal are genuinely single-stage, and Electrode evolves from Voltorb at 30. All three are legal at levels 31-33 and no Mega is needed."},
+      "manual_quality": 10,
+      "manual_difficulty": 8.9,
+      "corpus_review": {
+        "reference_pool_size": 1005,
+        "full_team_candidates": [
+          {"reference_id": "showdown:gen9randombattle:009", "decision": "Hydration Phione rain role selected; full team rejected", "reason": "Damp Rock Phione keeps Rain Dance, Scald, Ice Beam, and Rest as the required rare round tide setter without importing the mature rain offense roster."},
+          {"reference_id": "showdown:gen9randomdoublesbattle:001", "decision": "fast Electrode pressure selected; full team rejected", "reason": "Choice Specs Soundproof Electrode uses accurate rain Thunder, Volt Switch, Signal Beam, and Hidden Power as an exploitable locked sphere."},
+          {"reference_id": "showdown:gen6randomdoublesbattle:003", "decision": "Cryogonal Water-check role selected; full team rejected", "reason": "Expert Belt Levitate Cryogonal uses Freeze-Dry, Flash Cannon, Ancient Power, and Signal Beam as a legal circular rare finish at cap 30; Glalie was rejected as evolution-ineligible until 42."
+          }
+        ],
+        "decision": "Three full-set donors create a legal three-round-object team and restore Phione's required campaign representation without compromising Lola's coherent flower battle."
+      },
+      "competitive_references": [
+        {"reference_id": "showdown:gen9randombattle:009", "adaptation": "Damp Rock Hydration Phione uses Rain Dance, Scald, Ice Beam, and Rest as the round tide opener."},
+        {"reference_id": "showdown:gen9randomdoublesbattle:001", "adaptation": "Choice Specs Soundproof Electrode uses Thunder, Volt Switch, Signal Beam, and Hidden Power under the rain window."},
+        {"reference_id": "showdown:gen6randomdoublesbattle:003", "adaptation": "Expert Belt Levitate Cryogonal uses Freeze-Dry, Flash Cannon, Ancient Power, and Signal Beam as the legal Water-check finish."}
+      ],
+      "team_intent": "Damp Rock Hydration Phione opens the rain ring through Rain Dance, Scald, Ice Beam, or Rest; rain turns Rest into immediate Hydration recovery. Choice Specs Soundproof Electrode converts that finite weather into accurate Thunder, Volt Switch, Signal Beam, or Hidden Power while exposing a move lock. Expert Belt Levitate Cryogonal closes through Freeze-Dry, Flash Cannon, Ancient Power, and Signal Beam, punishing Water answers without a setup turn. The team restores Phione as an intentional rare encounter rather than a coverage checkbox.",
+      "intended_counterplay": "Taunt, weather replacement, Cloud Nine, Air Lock, strong Grass or Electric attacks, and denying Rest limit Phione. Ground immunity, Lightning Rod, Volt Absorb, Protect, item removal, and Choice-lock scouting answer Electrode. Fighting, Steel, Rock, Fire, priority, physical pressure, and exploiting Cryogonal's low Defense answer the finish. Rain has one setter and a finite timer.",
+      "bespoke_ai": "Chandler remains an intentional single with native smart-switching, HP-aware, and field-control scoring. Rain Dance, Damp Rock, Hydration Rest, Choice Specs, Soundproof, Thunder accuracy, Volt Switch, Levitate, Freeze-Dry, and Expert Belt are existing mechanics. No custom rain script, forced rest, selector, setup flag, or Mega is added.",
+      "uniqueness": "This is Verdant's first intentional Phione showcase and first round-object singles team. Phione, Electrode, and Cryogonal do not appear in Battles 1-41. It uses no terrain, room, setup move, trap, hazard, partner interaction, Mega, or custom AI; one finite rain clock supplies the only shared mode.",
+      "author_self_check": {"strongest_part": "Phione's Hydration rain-and-Rest window is a real rare-species identity, and Cryogonal's Freeze-Dry gives the round theme a useful Water-check finish.", "weakest_link": "The battle depends on one rain setter and Electrode exposes a Choice lock; Ground plus common physical Fighting/Steel pressure are intentionally strong answers."},
+      "closure": "Battle 42 is closed at an editorial 8.9/10: three legal levels 31-33, distinct items and unused species, three stable donors, restored Phione-family coverage, native singles routing and dialogue, author self-check, and no custom AI. Runtime playtesting remains required before 8.9 is observed."
     }
   }
 }

@@ -51,6 +51,7 @@ struct TypePower
 enum
 {
     CANCELLER_FLAGS,
+    CANCELLER_SKY_DROP,
     CANCELLER_ASLEEP,
     CANCELLER_FROZEN,
     CANCELLER_TRUANT,
@@ -78,6 +79,8 @@ enum
 extern const struct TypePower gNaturalGiftTable[];
 
 s32 CountUsablePartyMons(u8 battlerId);
+bool32 CanBattlerActivateEmergencyExit(u8 battlerId);
+bool32 DidBattlerCrossEmergencyExitThreshold(u8 battlerId);
 void HandleAction_ThrowBall(void);
 bool32 IsAffectedByFollowMe(u32 battlerAtk, u32 defSide, u32 move);
 void HandleAction_UseMove(void);
@@ -142,6 +145,11 @@ void ClearFuryCutterDestinyBondGrudge(u8 battlerId);
 void HandleAction_RunBattleScript(void);
 u32 SetRandomTarget(u32 battlerId);
 u32 GetMoveTarget(u16 move, u8 setTarget);
+u32 GetBattlerMoveTargetType(u8 battlerId, u16 move);
+u32 GetMoveTargetCount(u16 move, u8 battlerAtk, u8 battlerDef);
+bool32 IsSkyDropUser(u8 battlerId);
+bool32 IsSkyDropTarget(u8 battlerId);
+void ReleaseSkyDrop(u8 battlerId);
 u8 IsMonDisobedient(void);
 u32 GetBattlerHoldEffect(u8 battlerId, bool32 checkNegating);
 u32 GetBattlerHoldEffectParam(u8 battlerId);
@@ -169,6 +177,7 @@ u8 GetBattleMoveSplit(u32 moveId);
 bool32 TestMoveFlags(u16 move, u32 flag);
 struct Pokemon *GetBattlerPartyData(u8 battlerId);
 bool32 CanFling(u8 battlerId);
+bool32 GetMentalHerbEffect(u8 battlerId);
 bool32 IsTelekinesisBannedSpecies(u16 species);
 bool32 IsHealBlockPreventingMove(u32 battler, u32 move);
 bool32 HasEnoughHpToEatBerry(u32 battlerId, u32 hpFraction, u32 itemId);
@@ -188,6 +197,7 @@ void DoBurmyFormChange(u32 monId);
 bool32 BlocksPrankster(u16 move, u8 battlerPrankster, u8 battlerDef, bool32 checkTarget);
 u16 GetUsedHeldItem(u8 battler);
 bool32 IsBattlerWeatherAffected(u8 battlerId, u32 weatherFlags);
+bool32 IsAlly(u32 battlerAtk, u32 battlerDef);
 void TryToApplyMimicry(u8 battlerId, bool8 various);
 void TryToRevertMimicry(void);
 void RestoreBattlerOriginalTypes(u8 battlerId);

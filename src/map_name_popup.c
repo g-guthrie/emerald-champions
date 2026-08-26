@@ -297,8 +297,13 @@ void HideMapNamePopUpWindow(void)
 {
     if (FuncIsActiveTask(Task_MapNamePopUpWindow))
     {
-        ClearStdWindowAndFrame(GetMapNamePopUpWindowId(), TRUE);
-        RemoveMapNamePopUpWindow();
+        // The popup task can still be active after another screen has already
+        // removed its window. Do not pass WINDOW_NONE into the window API.
+        if (GetMapNamePopUpWindowId() != WINDOW_NONE)
+        {
+            ClearStdWindowAndFrame(GetMapNamePopUpWindowId(), TRUE);
+            RemoveMapNamePopUpWindow();
+        }
         SetGpuReg_ForcedBlank(REG_OFFSET_BG0VOFS, 0);
         DestroyTask(sPopupTaskId);
     }

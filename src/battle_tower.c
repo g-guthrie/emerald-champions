@@ -999,7 +999,7 @@ static bool8 ChooseSpecialBattleTowerTrainer(void)
         u32 *record = (u32*)(&gSaveBlock2Ptr->frontier.towerRecords[i]);
         u32 recordHasData = 0;
         u32 checksum = 0;
-        for (j = 0; j < (sizeof(struct EmeraldBattleTowerRecord) - 4) / 4; j++) // - 4, because of the last field being the checksum itself.
+        for (j = 0; j < offsetof(struct EmeraldBattleTowerRecord, checksum) / sizeof(u32); j++)
         {
             recordHasData |= record[j];
             checksum += record[j];
@@ -1102,7 +1102,7 @@ static void SetNextFacilityOpponent(void)
     }
 }
 
-u16 GetRandomScaledFrontierTrainerId(u8 challengeNum, u8 battleNum)
+u16 GetRandomScaledFrontierTrainerId(u16 challengeNum, u8 battleNum)
 {
     u16 trainerId;
 
@@ -1131,7 +1131,7 @@ u16 GetRandomScaledFrontierTrainerId(u8 challengeNum, u8 battleNum)
 }
 
 // Unused
-static void GetRandomScaledFrontierTrainerIdRange(u8 challengeNum, u8 battleNum, u16 *trainerIdPtr, u8 *rangePtr)
+static void GetRandomScaledFrontierTrainerIdRange(u16 challengeNum, u8 battleNum, u16 *trainerIdPtr, u8 *rangePtr)
 {
     u16 trainerId, range;
 
@@ -1656,7 +1656,7 @@ static void FillTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount)
     {
         // Normal battle frontier trainer.
         fixedIV = GetFrontierTrainerFixedIvs(trainerId);
-        monSet = gFacilityTrainers[gTrainerBattleOpponent_A].monSet;
+        monSet = gFacilityTrainers[trainerId].monSet;
     }
     else if (trainerId == TRAINER_EREADER)
     {
@@ -1755,6 +1755,7 @@ static void FillTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount)
 
         SetMonData(&gEnemyParty[i + firstMonId], MON_DATA_FRIENDSHIP, &friendship);
         SetMonData(&gEnemyParty[i + firstMonId], MON_DATA_HELD_ITEM, &gBattleFrontierHeldItems[gFacilityTrainerMons[monId].itemTableId]);
+        TryUpdateMonFormForHeldItem(&gEnemyParty[i + firstMonId]);
 
         // The pokemon was successfully added to the trainer's party, so it's safe to move on to
         // the next party slot.
@@ -1837,9 +1838,9 @@ static void FillFactoryFrontierTrainerParty(u16 trainerId, u8 firstMonId)
 
     if (trainerId < FRONTIER_TRAINERS_COUNT)
     {
-        u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode; // Unused variable.
+        u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
         u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
-        u8 challengeNum = gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][0] / 7;
+        u16 challengeNum = gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode] / 7;
         if (gSaveBlock2Ptr->frontier.curChallengeBattleNum < 6)
             fixedIV = GetFactoryMonFixedIV(challengeNum, 0);
         else
@@ -1880,6 +1881,7 @@ static void FillFactoryFrontierTrainerParty(u16 trainerId, u8 firstMonId)
 
         SetMonData(&gEnemyParty[firstMonId + i], MON_DATA_FRIENDSHIP, &friendship);
         SetMonData(&gEnemyParty[firstMonId + i], MON_DATA_HELD_ITEM, &gBattleFrontierHeldItems[gFacilityTrainerMons[monId].itemTableId]);
+        TryUpdateMonFormForHeldItem(&gEnemyParty[firstMonId + i]);
     }
 }
 
@@ -1912,6 +1914,7 @@ static void FillFactoryTentTrainerParty(u16 trainerId, u8 firstMonId)
 
         SetMonData(&gEnemyParty[firstMonId + i], MON_DATA_FRIENDSHIP, &friendship);
         SetMonData(&gEnemyParty[firstMonId + i], MON_DATA_HELD_ITEM, &gBattleFrontierHeldItems[gFacilityTrainerMons[monId].itemTableId]);
+        TryUpdateMonFormForHeldItem(&gEnemyParty[firstMonId + i]);
     }
 }
 
@@ -2235,6 +2238,7 @@ static void SaveTowerChallenge(void)
     if (gSpecialVar_0x8005 == 0 && (challengeNum > 1 || gSaveBlock2Ptr->frontier.curChallengeBattleNum != 0))
         SaveBattleTowerRecord();
 
+    ClearEnemyPartyAfterChallenge();
     gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
     VarSet(VAR_TEMP_0, 0);
     gSaveBlock2Ptr->frontier.challengePaused = TRUE;
@@ -2279,7 +2283,7 @@ static void GetApprenticeMultiPartnerParty(u16 trainerId)
 static void GetRecordMixFriendMultiPartnerParty(u16 trainerId)
 {
     s32 i, count;
-    u32 validSpecies[3];
+    u32 validSpecies[MAX_FRONTIER_PARTY_SIZE];
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u16 species1 = GetMonData(&gPlayerParty[0], MON_DATA_SPECIES, NULL);
     u16 species2 = GetMonData(&gPlayerParty[1], MON_DATA_SPECIES, NULL);
@@ -2412,7 +2416,7 @@ static void LoadMultiPartnerCandidatesData(void)
         u32 *record = (u32*)(&gSaveBlock2Ptr->frontier.towerRecords[i]);
         u32 recordHasData = 0;
         u32 checksum = 0;
-        for (j = 0; j < (sizeof(struct EmeraldBattleTowerRecord) - 4) / 4; j++) // - 4, because of the last field being the checksum itself.
+        for (j = 0; j < offsetof(struct EmeraldBattleTowerRecord, checksum) / sizeof(u32); j++)
         {
             recordHasData |= record[j];
             checksum += record[j];
@@ -2728,7 +2732,7 @@ static void ValidateBattleTowerRecordChecksums(void)
     u32 *record = (u32*)(&gSaveBlock2Ptr->frontier.towerPlayer);
     u32 checksum = 0;
 
-    for (j = 0; j < (sizeof(struct EmeraldBattleTowerRecord) - 4) / 4; j++) // - 4, because of the last field being the checksum itself.
+    for (j = 0; j < offsetof(struct EmeraldBattleTowerRecord, checksum) / sizeof(u32); j++)
     {
         checksum += record[j];
     }
@@ -2739,7 +2743,7 @@ static void ValidateBattleTowerRecordChecksums(void)
     {
         record = (u32*)(&gSaveBlock2Ptr->frontier.towerRecords[i]);
         checksum = 0;
-        for (j = 0; j < (sizeof(struct EmeraldBattleTowerRecord) - 4) / 4; j++) // - 4, because of the last field being the checksum itself.
+        for (j = 0; j < offsetof(struct EmeraldBattleTowerRecord, checksum) / sizeof(u32); j++)
         {
             checksum += record[j];
         }
@@ -2753,7 +2757,7 @@ void CalcEmeraldBattleTowerChecksum(struct EmeraldBattleTowerRecord *record)
     u32 i;
 
     record->checksum = 0;
-    for (i = 0; i < (sizeof(struct EmeraldBattleTowerRecord) - 4) / 4; i++) // - 4, because of the last field being the checksum itself.
+    for (i = 0; i < offsetof(struct EmeraldBattleTowerRecord, checksum) / sizeof(u32); i++)
         record->checksum += ((u32 *)record)[i];
 }
 
@@ -2762,16 +2766,13 @@ void CalcRubyBattleTowerChecksum(struct RSBattleTowerRecord *record)
     u32 i;
 
     record->checksum = 0;
-    for (i = 0; i < (sizeof(struct RSBattleTowerRecord) - 4) / 4; i++) // - 4, because of the last field being the checksum itself.
+    for (i = 0; i < offsetof(struct RSBattleTowerRecord, checksum) / sizeof(u32); i++)
         record->checksum += ((u32 *)record)[i];
 }
 
 static void ClearBattleTowerRecord(struct EmeraldBattleTowerRecord *record)
 {
-    u32 i;
-
-    for (i = 0; i < sizeof(struct EmeraldBattleTowerRecord) / 4; i++)
-        ((u32 *)record)[i] = 0;
+    memset(record, 0, sizeof(*record));
 }
 
 u16 GetCurrentBattleTowerWinStreak(u8 lvlMode, u8 battleMode)
@@ -3122,6 +3123,9 @@ static void FillPartnerParty(u16 trainerId)
 
             StringCopy(trainerName, gTrainers[trainerId - TRAINER_CUSTOM_PARTNER].trainerName);
             SetMonData(&gPlayerParty[i + 3], MON_DATA_OT_NAME, trainerName);
+            j = gTrainers[trainerId - TRAINER_CUSTOM_PARTNER].encounterMusic_gender >> 7;
+            SetMonData(&gPlayerParty[i + 3], MON_DATA_OT_GENDER, &j);
+            TryUpdateMonFormForHeldItem(&gPlayerParty[i + 3]);
         }
     }
     else if (trainerId == TRAINER_EREADER)
@@ -3153,6 +3157,7 @@ static void FillPartnerParty(u16 trainerId)
             }
             SetMonData(&gPlayerParty[MULTI_PARTY_SIZE + i], MON_DATA_FRIENDSHIP, &friendship);
             SetMonData(&gPlayerParty[MULTI_PARTY_SIZE + i], MON_DATA_HELD_ITEM, &gBattleFrontierHeldItems[gFacilityTrainerMons[monId].itemTableId]);
+            TryUpdateMonFormForHeldItem(&gPlayerParty[MULTI_PARTY_SIZE + i]);
             for (j = 0; j < PLAYER_NAME_LENGTH + 1; j++)
                 trainerName[j] = gFacilityTrainers[trainerId].trainerName[j];
             SetMonData(&gPlayerParty[MULTI_PARTY_SIZE + i], MON_DATA_OT_NAME, &trainerName);
@@ -3228,7 +3233,7 @@ bool32 RubyBattleTowerRecordToEmerald(struct RSBattleTowerRecord *src, struct Em
             if (sRubyFacilityClassToEmerald[i][0] == src->facilityClass)
                 break;
         }
-        if (i != FACILITY_CLASSES_COUNT)
+        if (i != ARRAY_COUNT(sRubyFacilityClassToEmerald))
             dst->facilityClass = sRubyFacilityClassToEmerald[i][1];
         else
             dst->facilityClass = FACILITY_CLASS_YOUNGSTER;
@@ -3281,7 +3286,7 @@ bool32 EmeraldBattleTowerRecordToRuby(struct EmeraldBattleTowerRecord *src, stru
             if (sRubyFacilityClassToEmerald[i][1] == src->facilityClass)
                 break;
         }
-        if (i != FACILITY_CLASSES_COUNT)
+        if (i != ARRAY_COUNT(sRubyFacilityClassToEmerald))
             dst->facilityClass = sRubyFacilityClassToEmerald[i][0];
         else
             dst->facilityClass = RS_FACILITY_CLASS_YOUNGSTER;
@@ -3305,16 +3310,13 @@ void CalcApprenticeChecksum(struct Apprentice *apprentice)
     s32 i;
 
     apprentice->checksum = 0;
-    for (i = 0; i < (sizeof(struct Apprentice) - 4) / 4; i++)
+    for (i = 0; i < offsetof(struct Apprentice, checksum) / sizeof(u32); i++)
         apprentice->checksum += ((u32 *)apprentice)[i];
 }
 
 static void ClearApprentice(struct Apprentice *apprentice)
 {
-    s32 i;
-
-    for (i = 0; i < (sizeof(struct Apprentice)) / 4; i++)
-        ((u32 *)apprentice)[i] = 0;
+    memset(apprentice, 0, sizeof(*apprentice));
     ResetApprenticeStruct(apprentice);
 }
 
@@ -3326,7 +3328,7 @@ static void ValidateApprenticesChecksums(void)
     {
         u32 *data = (u32*) &gSaveBlock2Ptr->apprentices[i];
         u32 checksum = 0;
-        for (j = 0; j < (sizeof(struct Apprentice) - 4) / 4; j++)
+        for (j = 0; j < offsetof(struct Apprentice, checksum) / sizeof(u32); j++)
             checksum += data[j];
         if (gSaveBlock2Ptr->apprentices[i].checksum != checksum)
             ClearApprentice(&gSaveBlock2Ptr->apprentices[i]);
@@ -3589,6 +3591,7 @@ static void FillTentTrainerParty_(u16 trainerId, u8 firstMonId, u8 monCount)
 
         SetMonData(&gEnemyParty[i + firstMonId], MON_DATA_FRIENDSHIP, &friendship);
         SetMonData(&gEnemyParty[i + firstMonId], MON_DATA_HELD_ITEM, &gBattleFrontierHeldItems[gFacilityTrainerMons[monId].itemTableId]);
+        TryUpdateMonFormForHeldItem(&gEnemyParty[i + firstMonId]);
 
         // The pokemon was successfully added to the trainer's party, so it's safe to move on to
         // the next party slot.
@@ -3636,7 +3639,7 @@ bool32 ValidateBattleTowerRecord(u8 recordId) // unused
     u32 *record = (u32*)(&gSaveBlock2Ptr->frontier.towerRecords[recordId]);
     u32 checksum = 0;
     u32 hasData = 0;
-    for (i = 0; i < (sizeof(struct EmeraldBattleTowerRecord) - 4) / 4; i++) // - 4, because of the last fjeld bejng the checksum jtself.
+    for (i = 0; i < offsetof(struct EmeraldBattleTowerRecord, checksum) / sizeof(u32); i++)
     {
         checksum += record[i];
         hasData |= record[i];

@@ -317,8 +317,7 @@ RusturfTunnel_EventScript_Grunt:: @ 822D0C2
 	lock
 	faceplayer
 	playbgm MUS_ENCOUNTER_AQUA, FALSE
-	msgbox RusturfTunnel_Text_GruntIntro, MSGBOX_DEFAULT
-	trainerbattle_no_intro TRAINER_GRUNT_RUSTURF_TUNNEL, RusturfTunnel_Text_GruntDefeat
+	trainerbattle_double TRAINER_GRUNT_RUSTURF_TUNNEL, RusturfTunnel_Text_GruntIntro, RusturfTunnel_Text_GruntDefeat, RusturfTunnel_Text_GruntNotEnoughPokemon
 	msgbox RusturfTunnel_Text_GruntTakePackage, MSGBOX_DEFAULT
 	giveitem ITEM_DEVON_GOODS
 	closemessage
@@ -443,26 +442,24 @@ RusturfTunnel_Text_Peeko: @ 822D1F7
 	.string "Peeko: Pii pihyoh!$"
 
 RusturfTunnel_Text_GruntIntro: @ 822D20A
-	.string "Grah, keelhaul it all!\p"
-	.string "That hostage Pokémon turned out to\n"
-	.string "be worthless!\p"
-	.string "And to think I made a getaway…\n"
-	.string "In this tunnel to nowhere!\p"
-	.string "Hey! You!\n"
-	.string "So you want to battle me?$"
+	.string "Keelhaul it! The little one calls\n"
+	.string "the shots. The big one guards\l"
+	.string "the goods.\p"
+	.string "Come closer and you'll breathe\n"
+	.string "poison!$"
 
 RusturfTunnel_Text_GruntDefeat: @ 822D2B0
-	.string "Urrrggh! My career in crime comes to\n"
-	.string "a dead end!$"
+	.string "Urrgh! You broke my command chain!$"
+
+RusturfTunnel_Text_GruntNotEnoughPokemon:
+	.string "This ambush needs two healthy\n"
+	.string "Pokémon. Come back prepared!$"
 
 RusturfTunnel_Text_GruntTakePackage: @ 822D2E1
-	.string "This is plain not right…\p"
-	.string "The Boss told me this would be a\n"
-	.string "slick-and-easy job to pull.\p"
-	.string "All I had to do was steal some package\n"
-	.string "from Devon.\p"
-	.string "Tch!\n"
-	.string "You want it back that badly, take it!$"
+	.string "The little commander was meant\n"
+	.string "to cover my escape…\p"
+	.string "The Boss called this an easy job.\n"
+	.string "Take the Devon Goods and beat it!$"
 
 RusturfTunnel_Text_PeekoGladToSeeYouSafe: @ 822D395
 	.string "Peeko!\n"
@@ -541,4 +538,3 @@ RusturfTunnel_Text_MikePostBattle: @ 822D8F9
 	.string "They halted development here to\n"
 	.string "protect Pokémon, right?\l"
 	.string "There's a feel-good story!$"
-

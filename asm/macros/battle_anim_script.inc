@@ -247,6 +247,19 @@
 	.byte \battler
 	.endm
 
+	@ Modern expansion names for the same three background-priority opcodes.
+	.macro splitbgprio battler:req
+	monbgprio_28 \battler
+	.endm
+
+	.macro splitbgprio_all
+	monbgprio_29
+	.endm
+
+	.macro splitbgprio_foes battler:req
+	monbgprio_2A \battler
+	.endm
+
 	.macro invisible battler:req
 	.byte 0x2b
 	.byte \battler
@@ -269,6 +282,36 @@
 
 	.macro stopsound
 	.byte 0x2f
+	.endm
+
+	@ Runs a visual task once for every live target of the animated move.
+	@ battlerargindex identifies the argument containing ANIM_TARGET, etc.
+	.macro createvisualtaskontargets addr:req, priority:req, battlerargindex:req, argv:vararg
+	.byte 0x30
+	.4byte \addr
+	.byte \priority
+	.byte \battlerargindex
+	.byte (.Lcreatetargettask_\@_2 - .Lcreatetargettask_\@_1) / 2
+.Lcreatetargettask_\@_1:
+	.2byte \argv
+.Lcreatetargettask_\@_2:
+	.endm
+
+	@ Creates the same sprite on every live target of the animated move.
+	@ The selected explicit battler id is written back to battlerargindex.
+	.macro createspriteontargets template:req, anim_battler:req, subpriority_offset:req, battlerargindex:req, argv:vararg
+	.byte 0x31
+	.4byte \template
+	.if \anim_battler == ANIM_TARGET
+	.byte 0x80 | (\subpriority_offset & 0x7F)
+	.else
+	.byte (\subpriority_offset & 0x7F)
+	.endif
+	.byte \battlerargindex
+	.byte (.Ltargetsprite_\@_2 - .Ltargetsprite_\@_1) / 2
+.Ltargetsprite_\@_1:
+	.2byte \argv
+.Ltargetsprite_\@_2:
 	.endm
 	
 @ useful macros
@@ -326,5 +369,3 @@
 .byte 0xC
 .hword \setblends_value
 .endm
-
-

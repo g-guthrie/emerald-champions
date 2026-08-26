@@ -31,6 +31,10 @@
 #include "constants/region_map_sections.h"
 #include "constants/songs.h"
 
+// The asset contains eight 16-color palettes. The original 0x1A0-byte load
+// read another 160 bytes from the following graphics symbol as palette data.
+#define NUM_FRONTIER_PASS_BG_PALETTES 8
+
 // All windows displayed in the frontier pass.
 enum
 {
@@ -151,6 +155,8 @@ static EWRAM_DATA struct FrontierMapData *sMapData = NULL;
 static EWRAM_DATA struct FrontierPassSaved sSavedPassData = {0};
 
 static u32 AllocateFrontierPassData(void (*callback)(void));
+static u32 AllocateFrontierPassGfx(void);
+static u32 FreeFrontierPassGfx(void);
 static void ShowFrontierMap(void (*callback)(void));
 static void CB2_InitFrontierPass(void);
 static void DrawFrontierPassBg(void);
@@ -584,7 +590,17 @@ static void ResetGpuRegsAndBgs(void)
 
 void ShowFrontierPass(void (*callback)(void))
 {
-    AllocateFrontierPassData(callback);
+    if (AllocateFrontierPassData(callback) != SUCCESS)
+    {
+        SetMainCallback2(callback);
+        return;
+    }
+    if (AllocateFrontierPassGfx() != SUCCESS)
+    {
+        FreeFrontierPassData();
+        SetMainCallback2(callback);
+        return;
+    }
     SetMainCallback2(CB2_InitFrontierPass);
 }
 
@@ -737,7 +753,6 @@ static bool32 InitFrontierPass(void)
         ResetTempTileDataBuffers();
         break;
     case 3:
-        AllocateFrontierPassGfx();
         break;
     case 4:
         ResetBgsAndClearDma3BusyFlags(0);
@@ -755,6 +770,16 @@ static bool32 InitFrontierPass(void)
         sPassGfx->mapAndCardZoomTilemap = malloc_and_decompress(sMapAndCard_Zooming_Tilemap, &sizeOut);
         sPassGfx->mapAndCardTilemap = malloc_and_decompress(sMapAndCard_ZoomedOut_Tilemap, &sizeOut);
         sPassGfx->battleRecordTilemap = malloc_and_decompress(sBattleRecord_Tilemap, &sizeOut);
+        if (sPassGfx->mapAndCardZoomTilemap == NULL
+         || sPassGfx->mapAndCardTilemap == NULL
+         || sPassGfx->battleRecordTilemap == NULL)
+        {
+            void (*callback)(void) = sPassData->callback;
+            FreeFrontierPassGfx();
+            FreeFrontierPassData();
+            SetMainCallback2(callback);
+            return FALSE;
+        }
         DecompressAndCopyTileDataToVram(1, gFrontierPassBg_Gfx, 0, 0, 0);
         DecompressAndCopyTileDataToVram(2, gFrontierPassMapAndCard_Gfx, 0, 0, 0);
         break;
@@ -769,7 +794,7 @@ static bool32 InitFrontierPass(void)
         CopyBgTilemapBufferToVram(2);
         break;
     case 8:
-        LoadPalette(gFrontierPassBg_Pal[0], 0, 0x1A0);
+        LoadPalette(gFrontierPassBg_Pal, 0, NUM_FRONTIER_PASS_BG_PALETTES * sizeof(gFrontierPassBg_Pal[0]));
         LoadPalette(gFrontierPassBg_Pal[1 + sPassData->trainerStars], 0x10, 0x20);
         LoadPalette(GetTextWindowPalette(0), 0xF0, 0x20);
         DrawFrontierPassBg();
@@ -881,6 +906,21 @@ void CB2_ReshowFrontierPass(void)
 {
     u8 taskId;
 
+    // Map, Trainer Card, and recorded-battle screens tear down the Pass gfx.
+    // Reallocate before InitFrontierPass starts clearing display state.
+    if (sPassData == NULL)
+    {
+        SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
+        return;
+    }
+    if (sPassGfx == NULL && AllocateFrontierPassGfx() != SUCCESS)
+    {
+        void (*callback)(void) = sPassData->callback;
+        FreeFrontierPassData();
+        SetMainCallback2(callback);
+        return;
+    }
+
     if (!InitFrontierPass())
         return;
 
@@ -903,7 +943,14 @@ void CB2_ReshowFrontierPass(void)
 
 static void CB2_ReturnFromRecord(void)
 {
-    AllocateFrontierPassData(sSavedPassData.callback);
+    void (*callback)(void) = sSavedPassData.callback;
+
+    if (AllocateFrontierPassData(callback) != SUCCESS)
+    {
+        memset(&sSavedPassData, 0, sizeof(sSavedPassData));
+        SetMainCallback2(callback);
+        return;
+    }
     sPassData->cursorX = sSavedPassData.cursorX;
     sPassData->cursorY = sSavedPassData.cursorY;
     memset(&sSavedPassData, 0, sizeof(sSavedPassData));
@@ -1356,9 +1403,17 @@ static void HandleFrontierMapCursorMove(u8 direction);
 static void ShowFrontierMap(void (*callback)(void))
 {
     if (sMapData != NULL)
-        SetMainCallback2(callback); // This line doesn't make sense at all, since it gets overwritten later anyway.
+    {
+        SetMainCallback2(callback);
+        return;
+    }
 
     sMapData = AllocZeroed(sizeof(*sMapData));
+    if (sMapData == NULL)
+    {
+        SetMainCallback2(callback);
+        return;
+    }
     sMapData->callback = callback;
     ResetTasks();
     CreateTask(Task_HandleFrontierMap, 0);
@@ -1413,7 +1468,7 @@ static bool32 InitFrontierMap(void)
     case 5:
         if (FreeTempTileDataBuffersIfPossible())
             return FALSE;
-        LoadPalette(gFrontierPassBg_Pal[0], 0, 0x1A0);
+        LoadPalette(gFrontierPassBg_Pal, 0, NUM_FRONTIER_PASS_BG_PALETTES * sizeof(gFrontierPassBg_Pal[0]));
         LoadPalette(GetTextWindowPalette(0), 0xF0, 0x20);
         CopyToBgTilemapBuffer(2, sMapScreen_Tilemap, 0, 0);
         CopyBgTilemapBufferToVram(2);

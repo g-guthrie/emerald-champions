@@ -35,6 +35,8 @@ PacifidlogTown_PokemonCenter_1F_EventScript_ExplosionTM::
 	goto_if_set FLAG_VERDANT_GIFT_EXPLOSION, PacifidlogTown_PokemonCenter_1F_EventScript_HaveExplosion
 	msgbox PacifidlogTown_PokemonCenter_1F_Text_GiveExplosion, MSGBOX_DEFAULT
 	giveitem ITEM_ROOM_SERVICE
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_VERDANT_GIFT_EXPLOSION
 	msgbox PacifidlogTown_PokemonCenter_1F_Text_HaveExplosion, MSGBOX_DEFAULT
 	release

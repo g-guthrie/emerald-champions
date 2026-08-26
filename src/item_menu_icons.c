@@ -589,7 +589,26 @@ void AddBagItemIconSprite(u16 itemId, u8 id)
 
 void RemoveBagItemIconSprite(u8 id)
 {
-    RemoveBagSprite(id + ITEMMENUSPRITE_ITEM);
+    u8 *spriteId = &gBagMenu->spriteIds[ITEMMENUSPRITE_ITEM];
+
+    // Hide the slot about to be reused before its palette is replaced, then
+    // release the icon from the previously displayed slot.
+    if (spriteId[id ^ 1] != SPRITE_NONE)
+        gSprites[spriteId[id ^ 1]].invisible = TRUE;
+
+    if (spriteId[id] != SPRITE_NONE)
+    {
+        DestroySpriteAndFreeResources(&gSprites[spriteId[id]]);
+        spriteId[id] = SPRITE_NONE;
+    }
+}
+
+void HideBagItemIconSprite(u8 id)
+{
+    u8 spriteId = gBagMenu->spriteIds[id + ITEMMENUSPRITE_ITEM];
+
+    if (spriteId != SPRITE_NONE)
+        gSprites[spriteId].invisible = TRUE;
 }
 
 void CreateItemMenuSwapLine(void)

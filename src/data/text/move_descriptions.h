@@ -596,7 +596,7 @@ static const u8 sSporeDescription[] = _(
     "that always induce sleep.");
 
 static const u8 sFlashDescription[] = _(
-    "Looses a powerful blast of\n"
+    "Fires a powerful blast of\n"
     "light that cuts accuracy.");
 
 static const u8 sPsywaveDescription[] = _(
@@ -924,8 +924,8 @@ static const u8 sBatonPassDescription[] = _(
     "keeping effects in play.");
 
 static const u8 sEncoreDescription[] = _(
-    "Makes the foe repeat its\n"
-    "last move over 2 to 6 turns.");
+    "Forces the foe to repeat\n"
+    "its last move for three turns.");
 
 static const u8 sPursuitDescription[] = _(
     "Inflicts bad damage if used\n"
@@ -1470,8 +1470,8 @@ static const u8 sHEALING_WISHDescription[] = _(
     "the recipient.");
 
 static const u8 sBRINEDescription[] = _(
-    "Does double damage to foes\n"
-    "with half HP.");
+    "Power doubles if the foe's\n"
+    "HP is at half or less.");
 
 static const u8 sNATURAL_GIFTDescription[] = _(
     "The effectiveness varies\n"
@@ -1808,7 +1808,7 @@ static const u8 sCHARGE_BEAMDescription[] = _(
     "May raise Sp. Atk.");
 
 static const u8 sWOOD_HAMMERDescription[] = _(
-    "Slams the body into a foe\n"
+    "Slams the body into a foe.\n"
     "The user gets hurt too.");
 
 static const u8 sAQUA_JETDescription[] = _(
@@ -2128,7 +2128,7 @@ static const u8 sCOTTON_GUARDDescription[] = _(
     "Drastically raises Defense.");
 
 static const u8 sNIGHT_DAZEDescription[] = _(
-    "Looses a pitch-black shock\n"
+    "Fires a pitch-black shock\n"
     "wave. May lower accuracy.");
 
 static const u8 sHURRICANEDescription[] = _(
@@ -2237,12 +2237,12 @@ static const u8 sION_DELUGEDescription[] = _(
 
 #ifdef REBALANCED_VERSION
     static const u8 sPARABOLIC_CHARGEDescription[] = _(
-        "Damages adjacent Pokémon and\n"
-        "heals up by 1/4 of it.");
+        "Damages nearby Pokémon.\n"
+        "Restores 1/4 of the damage.");
 #else
     static const u8 sPARABOLIC_CHARGEDescription[] = _(
-        "Damages adjacent Pokémon and\n"
-        "heals up by half of it.");
+        "Damages nearby Pokémon.\n"
+        "Restores half the damage.");
 #endif
 
 static const u8 sFORESTS_CURSEDescription[] = _(
@@ -2572,7 +2572,7 @@ static const u8 sINSTRUCTDescription[] = _(
     "its last move again.");
 
 static const u8 sBEAK_BLASTDescription[] = _(
-    "Heats up beak to attack.\n"
+    "Heats beak to attack last.\n"
     "Burns foe on contact.");
 
 static const u8 sCLANGING_SCALESDescription[] = _(
@@ -2725,8 +2725,8 @@ static const u8 sDOUBLE_IRON_BASHDescription[] = _(
     
 // GEN 8
 static const u8 sDYNAMAX_CANNONDescription[] = _(
-    "Fires a strong beam. Deals\n"
-    "2x damage to Dynamaxed foes.");
+    "Fires a powerful beam of\n"
+    "concentrated energy.");
     
 static const u8 sSNIPE_SHOTDescription[] = _(
     "The user ignores effects\n"
@@ -2801,12 +2801,12 @@ static const u8 sPYRO_BALLDescription[] = _(
     "target. It may cause a burn.");
     
 static const u8 sBEHEMOTH_BLADEDescription[] = _(
-    "Strikes as a sword. It deals\n"
-    "2x damage to Dynamaxed foes.");
+    "Strikes the target with a\n"
+    "massive steel sword.");
     
 static const u8 sBEHEMOTH_BASHDescription[] = _(
-    "Attacks as a sheild. Deals\n"
-    "2x damage to Dynamaxed foes.");
+    "Slams the target with a\n"
+    "massive steel shield.");
     
 static const u8 sAURA_WHEELDescription[] = _(
     "Raises Speed to attack. The\n"

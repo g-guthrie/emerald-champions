@@ -120,6 +120,14 @@ def main() -> None:
     if rustboro_gym != ids_in(entries, 16, 19):
         problems.append(f"Rustboro Gym coverage drifted: source={sorted(rustboro_gym)}")
 
+    route116 = object_trainers("Route116", lambda event: True)
+    if route116 != ids_in(entries, 20, 26):
+        problems.append(f"Route 116 first-clear coverage drifted: source={sorted(route116)}")
+
+    route109_huey = by_encounter.get("BATTLE_037_ROUTE_109_HUEY", {})
+    if route109_huey.get("strict_cap") != 30:
+        problems.append("post-Brawly Route 109 sequence must begin at strict cap 30")
+
     route103 = read(ROOT / "data/maps/Route103/scripts.inc")
     for trainer_id in entries[0]["trainer_ids"]:
         if trainer_id not in route103:

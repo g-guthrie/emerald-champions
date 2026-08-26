@@ -151,7 +151,6 @@ Route104_EventScript_MayAskToBattle:: @ 81ECDD0
 	end
 
 Route104_EventScript_BattleMay:: @ 81ECDED
-	msgbox Route104_Text_MayIntro, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON
 	case 0, Route104_EventScript_BattleMayTreecko
 	case 1, Route104_EventScript_BattleMayTorchic
@@ -171,19 +170,19 @@ Route104_EventScript_RestoreMusic:: @ 81ECE31
 	return
 
 Route104_EventScript_BattleMayTreecko:: @ 81ECE36
-	trainerbattle_no_intro TRAINER_MAY_RUSTBORO_TREECKO, Route104_Text_MayDefeat
+	trainerbattle_double TRAINER_MAY_RUSTBORO_TREECKO, Route104_Text_MayIntro, Route104_Text_MayDefeat, Route104_Text_RivalNotEnoughPokemon
 	setflag FLAG_DEFEATED_RIVAL_ROUTE_104
 	goto Route104_EventScript_MayDefeated
 	end
 
 Route104_EventScript_BattleMayTorchic:: @ 81ECE49
-	trainerbattle_no_intro TRAINER_MAY_RUSTBORO_TORCHIC, Route104_Text_MayDefeat
+	trainerbattle_double TRAINER_MAY_RUSTBORO_TORCHIC, Route104_Text_MayIntro, Route104_Text_MayDefeat, Route104_Text_RivalNotEnoughPokemon
 	setflag FLAG_DEFEATED_RIVAL_ROUTE_104
 	goto Route104_EventScript_MayDefeated
 	end
 
 Route104_EventScript_BattleMayMudkip:: @ 81ECE5C
-	trainerbattle_no_intro TRAINER_MAY_RUSTBORO_MUDKIP, Route104_Text_MayDefeat
+	trainerbattle_double TRAINER_MAY_RUSTBORO_MUDKIP, Route104_Text_MayIntro, Route104_Text_MayDefeat, Route104_Text_RivalNotEnoughPokemon
 	setflag FLAG_DEFEATED_RIVAL_ROUTE_104
 	goto Route104_EventScript_MayDefeated
 	end
@@ -226,7 +225,6 @@ Route104_EventScript_BrendanAskToBattle:: @ 81ECEEC
 	end
 
 Route104_EventScript_BattleBrendan:: @ 81ECF09
-	msgbox Route104_Text_BrendanIntro, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON
 	case 0, Route104_EventScript_BattleBrendanTreecko
 	case 1, Route104_EventScript_BattleBrendanTorchic
@@ -241,19 +239,19 @@ Route104_EventScript_BrendanDefeated:: @ 81ECF38
 	end
 
 Route104_EventScript_BattleBrendanTreecko:: @ 81ECF4D
-	trainerbattle_no_intro TRAINER_BRENDAN_RUSTBORO_TREECKO, Route104_Text_BrendanDefeat
+	trainerbattle_double TRAINER_BRENDAN_RUSTBORO_TREECKO, Route104_Text_BrendanIntro, Route104_Text_BrendanDefeat, Route104_Text_RivalNotEnoughPokemon
 	setflag FLAG_DEFEATED_RIVAL_ROUTE_104
 	goto Route104_EventScript_BrendanDefeated
 	end
 
 Route104_EventScript_BattleBrendanTorchic:: @ 81ECF60
-	trainerbattle_no_intro TRAINER_BRENDAN_RUSTBORO_TORCHIC, Route104_Text_BrendanDefeat
+	trainerbattle_double TRAINER_BRENDAN_RUSTBORO_TORCHIC, Route104_Text_BrendanIntro, Route104_Text_BrendanDefeat, Route104_Text_RivalNotEnoughPokemon
 	setflag FLAG_DEFEATED_RIVAL_ROUTE_104
 	goto Route104_EventScript_BrendanDefeated
 	end
 
 Route104_EventScript_BattleBrendanMudkip:: @ 81ECF73
-	trainerbattle_no_intro TRAINER_BRENDAN_RUSTBORO_MUDKIP, Route104_Text_BrendanDefeat
+	trainerbattle_double TRAINER_BRENDAN_RUSTBORO_MUDKIP, Route104_Text_BrendanIntro, Route104_Text_BrendanDefeat, Route104_Text_RivalNotEnoughPokemon
 	setflag FLAG_DEFEATED_RIVAL_ROUTE_104
 	goto Route104_EventScript_BrendanDefeated
 	end
@@ -1122,30 +1120,30 @@ Route104_Text_MayMinesDecentLetsBattle: @ 81EDCED
 	.string "How about a little battle?$"
 
 Route104_Text_MayHaventRaisedPokemon: @ 81EDD2A
-	.string "May: Oh, what's the matter?\p"
-	.string "Haven't you caught or raised your\n"
-	.string "Pokémon very much?\p"
-	.string "That's not very good for a Trainer!$"
+	.string "May: No problem. We can battle when\n"
+	.string "you have two Pokémon ready.$"
 
 Route104_Text_MayLetsBattle: @ 81EDD9F
 	.string "May: So, what do you think?\n"
 	.string "How about a little battle here?$"
 
 Route104_Text_MayIntro: @ 81EDDDB
-	.string "May: You just became a Trainer,\n"
-	.string "{PLAYER}{KUN}. I'm not going to lose!$"
+	.string "May: I've trained for more than one\n"
+	.string "matchup this time.\p"
+	.string "Read the forecast, then show me\n"
+	.string "how your whole team responds!$"
 
 Route104_Text_MayDefeat: @ 81EDE18
-	.string "Yikes!\n"
-	.string "You're better than I expected!$"
+	.string "You changed the forecast on me!$"
 
 Route104_Text_MayPostBattle: @ 81EDE3E
-	.string "May: I can tell you've gotten pretty\n"
-	.string "good with the way you handle Pokémon.\p"
-	.string "But instead of only making them\n"
-	.string "battle, you should be like Mr. Briney.\p"
-	.string "It's important to become friends with\n"
-	.string "Pokémon, too.$"
+	.string "May: I planned for your starter, but\n"
+	.string "you won with your whole team.\p"
+	.string "Mr. Briney can take you onward.$"
+
+Route104_Text_RivalNotEnoughPokemon:
+	.string "Bring two healthy Pokémon. This\n"
+	.string "forecast is for a Double Battle!$"
 
 Route104_Text_BrendanWeShouldRegister: @ 81EDF04
 	.string "Brendan: Oh, hey, {PLAYER}!\p"
@@ -1168,25 +1166,23 @@ Route104_Text_BrendanDoingGreatLetsBattle: @ 81EE009
 	.string "a battle?$"
 
 Route104_Text_BrendanNoConfidence: @ 81EE04D
-	.string "Brendan: What's the matter? Don't have\n"
-	.string "any confidence in your Pokémon?$"
+	.string "Brendan: No problem. Come back when\n"
+	.string "two Pokémon are ready.$"
 
 Route104_Text_BrendanLetsBattle: @ 81EE094
 	.string "Brendan: What's up?\n"
 	.string "Want to have a battle with me?$"
 
 Route104_Text_BrendanIntro: @ 81EE0C7
-	.string "Brendan: I know you just became\n"
-	.string "a Trainer, but I won't go easy!$"
+	.string "Brendan: I've trained for more than\n"
+	.string "one matchup this time.\p"
+	.string "Read the forecast, then show me\n"
+	.string "how your whole team responds!$"
 
 Route104_Text_BrendanDefeat: @ 81EE107
-	.string "Hmm…\n"
-	.string "You're pretty good.$"
+	.string "You changed the forecast on me!$"
 
 Route104_Text_BrendanPostBattle: @ 81EE120
-	.string "Brendan: You've gotten pretty decent\n"
-	.string "at handling Pokémon.\p"
-	.string "But, you know, you shouldn't just be\n"
-	.string "making Pokémon battle.\p"
-	.string "Like Mr. Briney, it's important to\n"
-	.string "become friends with your Pokémon.$"
+	.string "Brendan: I planned for your starter,\n"
+	.string "but you won with your whole team.\p"
+	.string "Mr. Briney can take you onward.$"

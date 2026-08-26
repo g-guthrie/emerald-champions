@@ -552,7 +552,8 @@ struct PokemonStorageSystemData
     u8 displayMenuTilemapBuffer[0x800];
 };
 
-static u32 sItemIconGfxBuffer[98];
+// LoadCompressedSpriteSheet reads the full 0x200-byte item icon sheet.
+static u32 sItemIconGfxBuffer[0x200 / sizeof(u32)];
 
 EWRAM_DATA static u8 sPreviousBoxOption = 0;
 EWRAM_DATA static struct ChooseBoxMenu *sChooseBoxMenu = NULL;

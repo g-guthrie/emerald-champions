@@ -884,7 +884,6 @@ RustboroCity_EventScript_MayAskToBattle:: @ 81E1070
 	end
 
 RustboroCity_EventScript_BattleMay:: @ 81E1092
-	msgbox RustboroCity_Text_MayImNotGoingToLose, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON
 	case 0, RustboroCity_EventScript_BattleMayTreecko
 	case 1, RustboroCity_EventScript_BattleMayTorchic
@@ -904,19 +903,19 @@ RustboroCity_EventScript_RestoreBgm:: @ 81E10D6
 	return
 
 RustboroCity_EventScript_BattleMayTreecko:: @ 81E10DB
-	trainerbattle_no_intro TRAINER_MAY_RUSTBORO_TREECKO, RustboroCity_Text_MayDefeat
+	trainerbattle_double TRAINER_MAY_RUSTBORO_TREECKO, RustboroCity_Text_MayImNotGoingToLose, RustboroCity_Text_MayDefeat, RustboroCity_Text_RivalNotEnoughPokemon
 	setflag FLAG_DEFEATED_RIVAL_RUSTBORO
 	goto RustboroCity_EventScript_MayBrineyHint
 	end
 
 RustboroCity_EventScript_BattleMayTorchic:: @ 81E10EE
-	trainerbattle_no_intro TRAINER_MAY_RUSTBORO_TORCHIC, RustboroCity_Text_MayDefeat
+	trainerbattle_double TRAINER_MAY_RUSTBORO_TORCHIC, RustboroCity_Text_MayImNotGoingToLose, RustboroCity_Text_MayDefeat, RustboroCity_Text_RivalNotEnoughPokemon
 	setflag FLAG_DEFEATED_RIVAL_RUSTBORO
 	goto RustboroCity_EventScript_MayBrineyHint
 	end
 
 RustboroCity_EventScript_BattleMayMudkip:: @ 81E1101
-	trainerbattle_no_intro TRAINER_MAY_RUSTBORO_MUDKIP, RustboroCity_Text_MayDefeat
+	trainerbattle_double TRAINER_MAY_RUSTBORO_MUDKIP, RustboroCity_Text_MayImNotGoingToLose, RustboroCity_Text_MayDefeat, RustboroCity_Text_RivalNotEnoughPokemon
 	setflag FLAG_DEFEATED_RIVAL_RUSTBORO
 	goto RustboroCity_EventScript_MayBrineyHint
 	end
@@ -953,7 +952,6 @@ RustboroCity_EventScript_BrendanAskToBattle:: @ 81E1174
 	end
 
 RustboroCity_EventScript_BattleBrendan:: @ 81E1191
-	msgbox RustboroCity_Text_BrendanIWontGoEasy, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON
 	case 0, RustboroCity_EventScript_BattleBrendanTreecko
 	case 1, RustboroCity_EventScript_BattleBrendanTorchic
@@ -968,19 +966,19 @@ RustboroCity_EventScript_BrendanBrineyHint:: @ 81E11C0
 	end
 
 RustboroCity_EventScript_BattleBrendanTreecko:: @ 81E11D5
-	trainerbattle_no_intro TRAINER_BRENDAN_RUSTBORO_TREECKO, RustboroCity_Text_BrendanDefeat
+	trainerbattle_double TRAINER_BRENDAN_RUSTBORO_TREECKO, RustboroCity_Text_BrendanIWontGoEasy, RustboroCity_Text_BrendanDefeat, RustboroCity_Text_RivalNotEnoughPokemon
 	setflag FLAG_DEFEATED_RIVAL_RUSTBORO
 	goto RustboroCity_EventScript_BrendanBrineyHint
 	end
 
 RustboroCity_EventScript_BattleBrendanTorchic:: @ 81E11E8
-	trainerbattle_no_intro TRAINER_BRENDAN_RUSTBORO_TORCHIC, RustboroCity_Text_BrendanDefeat
+	trainerbattle_double TRAINER_BRENDAN_RUSTBORO_TORCHIC, RustboroCity_Text_BrendanIWontGoEasy, RustboroCity_Text_BrendanDefeat, RustboroCity_Text_RivalNotEnoughPokemon
 	setflag FLAG_DEFEATED_RIVAL_RUSTBORO
 	goto RustboroCity_EventScript_BrendanBrineyHint
 	end
 
 RustboroCity_EventScript_BattleBrendanMudkip::
-	trainerbattle_no_intro TRAINER_BRENDAN_RUSTBORO_MUDKIP, RustboroCity_Text_BrendanDefeat
+	trainerbattle_double TRAINER_BRENDAN_RUSTBORO_MUDKIP, RustboroCity_Text_BrendanIWontGoEasy, RustboroCity_Text_BrendanDefeat, RustboroCity_Text_RivalNotEnoughPokemon
 	setflag FLAG_DEFEATED_RIVAL_RUSTBORO
 	goto RustboroCity_EventScript_BrendanBrineyHint
 	end
@@ -1262,22 +1260,25 @@ RustboroCity_Text_MayPassedBrineyWantToBattle: @ 81E1AFA
 	.string "How about a little battle?$"
 
 RustboroCity_Text_MayOhHaventRaisedPokemonEnough: @ 81E1BD3
-	.string "May: Oh, what's the matter?\p"
-	.string "Haven't you caught or raised your\n"
-	.string "Pokémon very much?\p"
-	.string "That's not very good for a Trainer!$"
+	.string "May: No problem. We can battle when\n"
+	.string "you have two Pokémon ready.$"
 
 RustboroCity_Text_MayWantToBattle: @ 81E1C48
 	.string "May: So, what do you think?\n"
 	.string "How about a little battle here?$"
 
 RustboroCity_Text_MayImNotGoingToLose: @ 81E1C84
-	.string "May: You just became a Trainer,\n"
-	.string "{PLAYER}{KUN}. I'm not going to lose!$"
+	.string "May: I've trained for more than one\n"
+	.string "matchup this time.\p"
+	.string "Read the forecast, then show me\n"
+	.string "how your whole team responds!$"
 
 RustboroCity_Text_MayDefeat: @ 81E1CC1
-	.string "Yikes!\n"
-	.string "You're better than I expected!$"
+	.string "You changed the forecast on me!$"
+
+RustboroCity_Text_RivalNotEnoughPokemon:
+	.string "Bring two healthy Pokémon. This\n"
+	.string "forecast is for a Double Battle!$"
 
 RustboroCity_Text_MayMrBrineyHint: @ 81E1CE7
 	.string "May: Oh, by the way, Mr. Briney, who\n"
@@ -1310,20 +1311,21 @@ RustboroCity_Text_BrendanPassedBrineyWantToBattle: @ 81E1E34
 	.string "far you've progressed?$"
 
 RustboroCity_Text_BrendanNoConfidenceInPokemon: @ 81E1F2F
-	.string "Brendan: What's the matter? Don't have\n"
-	.string "any confidence in your Pokémon?$"
+	.string "Brendan: No problem. Come back when\n"
+	.string "two Pokémon are ready.$"
 
 RustboroCity_Text_BrendanWantToBattle: @ 81E1F76
 	.string "Brendan: What's up?\n"
 	.string "Want to have a battle with me?$"
 
 RustboroCity_Text_BrendanIWontGoEasy: @ 81E1FA9
-	.string "Brendan: I know you just became\n"
-	.string "a Trainer, but I won't go easy!$"
+	.string "Brendan: I've trained for more than\n"
+	.string "one matchup this time.\p"
+	.string "Read the forecast, then show me\n"
+	.string "how your whole team responds!$"
 
 RustboroCity_Text_BrendanDefeat: @ 81E1FE9
-	.string "Hmm…\n"
-	.string "You're pretty good.$"
+	.string "You changed the forecast on me!$"
 
 RustboroCity_Text_BrendanMrBrineyHint: @ 81E2002
 	.string "Brendan: By the way, you know\n"

@@ -170,6 +170,7 @@
 #define STATUS3_AQUA_RING               (1 << 28)
 #define STATUS3_LASER_FOCUS             (1 << 29)
 #define STATUS3_POWER_TRICK             (1 << 30)
+#define STATUS3_SKY_DROPPED             (1u << 31) // Target currently carried by Sky Drop.
 #define STATUS3_SEMI_INVULNERABLE       (STATUS3_UNDERGROUND | STATUS3_ON_AIR | STATUS3_UNDERWATER | STATUS3_PHANTOM_FORCE)
 
 #define STATUS4_ELECTRIFIED             (1 << 0)
@@ -356,7 +357,8 @@
 #define MOVE_EFFECT_THROAT_CHOP         0x43
 #define MOVE_EFFECT_RELIC_SONG          0x44
 #define MOVE_EFFECT_TRAP_BOTH           0x45
-#define NUM_MOVE_EFFECTS                0x46
+#define MOVE_EFFECT_SCALE_SHOT          0x46
+#define NUM_MOVE_EFFECTS                0x47
 
 #define MOVE_EFFECT_AFFECTS_USER        0x4000
 #define MOVE_EFFECT_CERTAIN             0x8000

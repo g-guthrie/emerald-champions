@@ -144,10 +144,11 @@
     "TRAINER_GRUNT_RUSTURF_TUNNEL": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 37,
-      "partner_interaction": false,
-      "level_offset": -3,
+      "archetype": "Visible Commander chain and poison cover",
+      "difficulty": 93,
+      "partner_interaction": true,
+      "smart_switching": false,
+      "level_offset": 1,
       "location": "Rusturf Tunnel"
     },
     "TRAINER_GRUNT_WEATHER_INST_1": {
@@ -2403,10 +2404,10 @@
     "TRAINER_JERRY_1": {
       "format": "single",
       "target_size": 3,
-      "archetype": "Balanced disruption",
-      "difficulty": 22,
+      "archetype": "Practical electric circuit",
+      "difficulty": 70,
       "partner_interaction": false,
-      "level_offset": -4,
+      "level_offset": 1,
       "location": "Route 116"
     },
     "TRAINER_TED": {
@@ -2465,11 +2466,11 @@
     },
     "TRAINER_KAREN_1": {
       "format": "single",
-      "target_size": 3,
-      "archetype": "Balanced disruption",
-      "difficulty": 20,
+      "target_size": 4,
+      "archetype": "Wonder Room category exam",
+      "difficulty": 81,
       "partner_interaction": false,
-      "level_offset": -5,
+      "level_offset": 1,
       "location": "Route 116"
     },
     "TRAINER_GEORGIA": {
@@ -2808,10 +2809,10 @@
     "TRAINER_CALVIN_1": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 20,
-      "partner_interaction": false,
-      "level_offset": -2,
+      "archetype": "Illusion and Friend Guard deception",
+      "difficulty": 82,
+      "partner_interaction": true,
+      "level_offset": 0,
       "location": "Route 102"
     },
     "TRAINER_BILLY": {
@@ -2844,10 +2845,10 @@
     "TRAINER_JOEY": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 18,
-      "partner_interaction": false,
-      "level_offset": -4,
+      "archetype": "Frost Breath and Anger Point toughness drill",
+      "difficulty": 87,
+      "partner_interaction": true,
+      "level_offset": 1,
       "location": "Route 116"
     },
     "TRAINER_BEN": {
@@ -5092,12 +5093,12 @@
       "location": "Rustboro City Gym"
     },
     "TRAINER_BRENDEN": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Fake Out and pressure",
-      "difficulty": 34,
-      "partner_interaction": false,
-      "level_offset": -3,
+      "format": "single",
+      "target_size": 3,
+      "archetype": "Three-style native-pair half",
+      "difficulty": 80,
+      "partner_interaction": true,
+      "level_offset": 2,
       "location": "Dewford Town Gym"
     },
     "TRAINER_LILITH": {
@@ -5274,19 +5275,19 @@
     "TRAINER_BRENDAN_RUSTBORO_TREECKO": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 56,
-      "partner_interaction": false,
-      "level_offset": -1,
+      "archetype": "Dynamic forecast rival",
+      "difficulty": 90,
+      "partner_interaction": true,
+      "level_offset": 1,
       "location": "Route 104 | Rustboro City"
     },
     "TRAINER_BRENDAN_RUSTBORO_MUDKIP": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 56,
-      "partner_interaction": false,
-      "level_offset": -1,
+      "archetype": "Dynamic forecast rival",
+      "difficulty": 90,
+      "partner_interaction": true,
+      "level_offset": 1,
       "location": "Route 104 | Rustboro City"
     },
     "TRAINER_PAXTON": {
@@ -5337,19 +5338,19 @@
     "TRAINER_BRENDAN_RUSTBORO_TORCHIC": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 56,
-      "partner_interaction": false,
-      "level_offset": -1,
+      "archetype": "Dynamic forecast rival",
+      "difficulty": 90,
+      "partner_interaction": true,
+      "level_offset": 1,
       "location": "Route 104 | Rustboro City"
     },
     "TRAINER_MAY_RUSTBORO_MUDKIP": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 56,
-      "partner_interaction": false,
-      "level_offset": -1,
+      "archetype": "Dynamic forecast rival",
+      "difficulty": 90,
+      "partner_interaction": true,
+      "level_offset": 1,
       "location": "Route 104 | Rustboro City"
     },
     "TRAINER_MAXIE_MAGMA_HIDEOUT": {
@@ -5389,12 +5390,12 @@
       "location": "Route 104"
     },
     "TRAINER_JANICE": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 24,
-      "partner_interaction": true,
-      "level_offset": -4,
+      "format": "single",
+      "target_size": 3,
+      "archetype": "Electric Terrain setup circuit",
+      "difficulty": 78,
+      "partner_interaction": false,
+      "level_offset": 2,
       "location": "Route 116"
     },
     "TRAINER_VIVI": {
@@ -5499,10 +5500,10 @@
     "TRAINER_JOSE": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Bug swarm utility",
-      "difficulty": 19,
-      "partner_interaction": false,
-      "level_offset": -4,
+      "archetype": "Battery-powered swarm",
+      "difficulty": 82,
+      "partner_interaction": true,
+      "level_offset": 1,
       "location": "Route 116"
     },
     "TRAINER_DOUG": {
@@ -5624,11 +5625,11 @@
     },
     "TRAINER_CLARK": {
       "format": "single",
-      "target_size": 2,
-      "archetype": "Intentional route singles relief",
-      "difficulty": 15,
-      "partner_interaction": false,
-      "level_offset": -5,
+      "target_size": 3,
+      "archetype": "Gravity quarry half",
+      "difficulty": 78,
+      "partner_interaction": true,
+      "level_offset": 2,
       "location": "Route 116"
     },
     "TRAINER_ERIC": {
@@ -6191,20 +6192,20 @@
     },
     "TRAINER_DAWSON": {
       "format": "single",
-      "target_size": 2,
-      "archetype": "Intentional route singles relief",
-      "difficulty": 30,
+      "target_size": 3,
+      "archetype": "Fur and timing",
+      "difficulty": 70,
       "partner_interaction": false,
-      "level_offset": -4,
+      "level_offset": 1,
       "location": "Route 116"
     },
     "TRAINER_SARAH": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 42,
+      "format": "single",
+      "target_size": 3,
+      "archetype": "Slow treasure room",
+      "difficulty": 76,
       "partner_interaction": false,
-      "level_offset": -3,
+      "level_offset": 1,
       "location": "Route 116"
     },
     "TRAINER_DARIAN": {
@@ -6723,19 +6724,19 @@
     "TRAINER_DEVAN": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 17,
-      "partner_interaction": false,
-      "level_offset": -5,
+      "archetype": "Sand excavation",
+      "difficulty": 86,
+      "partner_interaction": true,
+      "level_offset": 1,
       "location": "Route 116"
     },
     "TRAINER_JOHNSON": {
       "format": "single",
-      "target_size": 2,
-      "archetype": "Intentional route singles relief",
-      "difficulty": 22,
-      "partner_interaction": false,
-      "level_offset": -4,
+      "target_size": 3,
+      "archetype": "Friend Guard Hustle half",
+      "difficulty": 79,
+      "partner_interaction": true,
+      "level_offset": 2,
       "location": "Route 116"
     },
     "TRAINER_MELINA": {
@@ -6858,19 +6859,19 @@
     "TRAINER_MAY_RUSTBORO_TREECKO": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 58,
+      "archetype": "Dynamic forecast rival",
+      "difficulty": 90,
       "partner_interaction": true,
-      "level_offset": -1,
+      "level_offset": 1,
       "location": "Route 104 | Rustboro City"
     },
     "TRAINER_MAY_RUSTBORO_TORCHIC": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 58,
+      "archetype": "Dynamic forecast rival",
+      "difficulty": 90,
       "partner_interaction": true,
-      "level_offset": -1,
+      "level_offset": 1,
       "location": "Route 104 | Rustboro City"
     },
     "TRAINER_ROXANNE_2": {
@@ -7796,39 +7797,39 @@
       "battle": "Brawly",
       "trainer_id": "TRAINER_BRAWLY_1",
       "format": "doubles",
-      "identity": "Tempo dojo",
+      "identity": "Redirection, No Retreat, and reciprocal No Guard",
       "team": [
         {
-          "species": "SPECIES_SCRAFTY",
-          "item": "ITEM_EJECT_BUTTON",
-          "ability": "ABILITY_INTIMIDATE",
+          "species": "SPECIES_PACHIRISU",
+          "item": "ITEM_SITRUS_BERRY",
+          "ability": "ABILITY_VOLT_ABSORB",
+          "ability_slot": 2,
+          "spread": "SPREAD_31_IV_HP_DEF_IMPISH",
+          "moves": [
+            "MOVE_FOLLOW_ME",
+            "MOVE_NUZZLE",
+            "MOVE_SUPER_FANG",
+            "MOVE_HELPING_HAND"
+          ],
+          "role": "lead redirection and finite control"
+        },
+        {
+          "species": "SPECIES_FALINKS",
+          "item": "ITEM_LUM_BERRY",
+          "ability": "ABILITY_DEFIANT",
           "ability_slot": 2,
           "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
           "moves": [
-            "MOVE_FAKE_OUT",
-            "MOVE_DRAIN_PUNCH",
-            "MOVE_SNARL",
-            "MOVE_PARTING_SHOT"
-          ],
-          "role": "lead pivot"
-        },
-        {
-          "species": "SPECIES_MIENSHAO",
-          "item": "ITEM_FOCUS_SASH",
-          "ability": "ABILITY_INNER_FOCUS",
-          "ability_slot": 0,
-          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
-          "moves": [
-            "MOVE_COACHING",
+            "MOVE_NO_RETREAT",
             "MOVE_CLOSE_COMBAT",
             "MOVE_ROCK_SLIDE",
-            "MOVE_PROTECT"
+            "MOVE_POISON_JAB"
           ],
-          "role": "lead coach"
+          "role": "irreversible setup commitment"
         },
         {
           "species": "SPECIES_HITMONTOP",
-          "item": "ITEM_SITRUS_BERRY",
+          "item": "ITEM_EJECT_BUTTON",
           "ability": "ABILITY_INTIMIDATE",
           "ability_slot": 0,
           "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
@@ -7841,46 +7842,46 @@
           "role": "board control"
         },
         {
+          "species": "SPECIES_KIRLIA",
+          "item": "ITEM_EVIOLITE",
+          "ability": "ABILITY_SYNCHRONIZE",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+          "moves": [
+            "MOVE_DAZZLING_GLEAM",
+            "MOVE_PSYCHIC",
+            "MOVE_WILL_O_WISP",
+            "MOVE_HELPING_HAND"
+          ],
+          "role": "special and status board control"
+        },
+        {
           "species": "SPECIES_BRELOOM",
           "item": "ITEM_TOXIC_ORB",
           "ability": "ABILITY_POISON_HEAL",
           "ability_slot": 1,
           "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
           "moves": [
-            "MOVE_SPORE",
+            "MOVE_FACADE",
             "MOVE_MACH_PUNCH",
             "MOVE_SEED_BOMB",
-            "MOVE_PROTECT"
+            "MOVE_ROCK_TOMB"
           ],
-          "role": "sleep and priority"
+          "role": "status-powered direct pressure"
         },
         {
-          "species": "SPECIES_URSHIFU",
-          "item": "ITEM_CHOICE_BAND",
-          "ability": "ABILITY_UNSEEN_FIST",
-          "ability_slot": 0,
+          "species": "SPECIES_HAWLUCHA",
+          "item": "ITEM_HAWLUCHANITE",
+          "ability": "ABILITY_UNBURDEN",
+          "ability_slot": 1,
           "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
           "moves": [
-            "MOVE_WICKED_BLOW",
-            "MOVE_CLOSE_COMBAT",
-            "MOVE_AQUA_JET",
-            "MOVE_U_TURN"
+            "MOVE_HIGH_JUMP_KICK",
+            "MOVE_STONE_EDGE",
+            "MOVE_BRAVE_BIRD",
+            "MOVE_FEINT"
           ],
-          "role": "Protect breaker"
-        },
-        {
-          "species": "SPECIES_MARSHADOW",
-          "item": "ITEM_LIFE_ORB",
-          "ability": "ABILITY_TECHNICIAN",
-          "ability_slot": 0,
-          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
-          "moves": [
-            "MOVE_SPECTRAL_THIEF",
-            "MOVE_CLOSE_COMBAT",
-            "MOVE_SHADOW_SNEAK",
-            "MOVE_PROTECT"
-          ],
-          "role": "rare anti-setup ace"
+          "role": "first opposing Mega and reciprocal No Guard ace"
         }
       ]
     },

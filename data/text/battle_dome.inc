@@ -70,8 +70,8 @@ BattleDome_Text_StyleUsesStartlingMoves::
 BattleDome_Text_StyleConstantlyWatchesHP::
 	.string "Constantly watches HP in battle.$"
 
-BattleDome_Text_StyleStoresAndLoosesPower::
-	.string "Good at storing then loosing power.$"
+BattleDome_Text_StyleStoresAndReleasesPower::
+	.string "Good at storing then releasing power.$"
 
 BattleDome_Text_StyleEnfeeblesFoes::
 	.string "Skilled at enfeebling foes.$"

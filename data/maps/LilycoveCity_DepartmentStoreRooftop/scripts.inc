@@ -205,6 +205,8 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_SubstituteTM::
 	goto_if_set FLAG_VERDANT_GIFT_SUBSTITUTE, LilycoveCity_DepartmentStoreRooftop_EventScript_ReceivedTM90
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_GiveSubstitute, MSGBOX_DEFAULT
 	giveitem ITEM_PROTECTIVE_PADS
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_VERDANT_GIFT_SUBSTITUTE
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_HaveTM90, MSGBOX_DEFAULT
 	release

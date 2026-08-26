@@ -1887,7 +1887,7 @@ extern const u8 BattleDome_Text_StyleToughWinningPattern[];
 extern const u8 BattleDome_Text_StyleUsesVeryRareMove[];
 extern const u8 BattleDome_Text_StyleUsesStartlingMoves[];
 extern const u8 BattleDome_Text_StyleConstantlyWatchesHP[];
-extern const u8 BattleDome_Text_StyleStoresAndLoosesPower[];
+extern const u8 BattleDome_Text_StyleStoresAndReleasesPower[];
 extern const u8 BattleDome_Text_StyleEnfeeblesFoes[];
 extern const u8 BattleDome_Text_StylePrefersLuckTactics[];
 extern const u8 BattleDome_Text_StyleRegalAtmosphere[];

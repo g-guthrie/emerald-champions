@@ -1636,7 +1636,7 @@ void DestroyMegaIndicatorSprite(u32 healthboxSpriteId)
             break;
     }
     // Free Sprite pal/tiles only if no indicator sprite is active for all battlers.
-    if (i == MAX_BATTLERS_COUNT)
+    if (i == gBattlersCount)
     {
         FreeSpritePaletteByTag(TAG_MEGA_INDICATOR_PAL);
         FreeSpriteTilesByTag(TAG_MEGA_INDICATOR_TILE);
@@ -2473,22 +2473,30 @@ s32 MoveBattleBar(u8 battlerId, u8 healthboxSpriteId, u8 whichBar, u8 unused)
 static void MoveBattleBarGraphically(u8 battlerId, u8 whichBar)
 {
     u8 array[8];
-    u8 filledPixelsCount, level;
+    u8 level;
     u8 barElementId;
     u8 i;
 
     switch (whichBar)
     {
     case HEALTH_BAR:
-        filledPixelsCount = CalcBarFilledPixels(gBattleSpritesDataPtr->battleBars[battlerId].maxValue,
+    {
+        s32 currentHp;
+
+        CalcBarFilledPixels(gBattleSpritesDataPtr->battleBars[battlerId].maxValue,
                             gBattleSpritesDataPtr->battleBars[battlerId].oldValue,
                             gBattleSpritesDataPtr->battleBars[battlerId].receivedValue,
                             &gBattleSpritesDataPtr->battleBars[battlerId].currValue,
                             array, B_HEALTHBAR_PIXELS / 8);
 
-        if (filledPixelsCount > (B_HEALTHBAR_PIXELS * 50 / 100)) // more than 50 % hp
+        if (gBattleSpritesDataPtr->battleBars[battlerId].maxValue < B_HEALTHBAR_PIXELS)
+            currentHp = Q_24_8_TO_INT(gBattleSpritesDataPtr->battleBars[battlerId].currValue);
+        else
+            currentHp = gBattleSpritesDataPtr->battleBars[battlerId].currValue;
+
+        if ((u32)currentHp * 100 > (u32)gBattleSpritesDataPtr->battleBars[battlerId].maxValue * 50)
             barElementId = HEALTHBOX_GFX_HP_BAR_GREEN;
-        else if (filledPixelsCount > (B_HEALTHBAR_PIXELS * 20 / 100)) // more than 20% hp
+        else if ((u32)currentHp * 100 > (u32)gBattleSpritesDataPtr->battleBars[battlerId].maxValue * 20)
             barElementId = HEALTHBOX_GFX_HP_BAR_YELLOW;
         else
             barElementId = HEALTHBOX_GFX_HP_BAR_RED; // 20 % or less
@@ -2504,6 +2512,7 @@ static void MoveBattleBarGraphically(u8 battlerId, u8 whichBar)
                           (void*)(OBJ_VRAM0 + 64 + (i + gSprites[healthbarSpriteId].oam.tileNum) * TILE_SIZE_4BPP), 32);
         }
         break;
+    }
     case EXP_BAR:
         CalcBarFilledPixels(gBattleSpritesDataPtr->battleBars[battlerId].maxValue,
                     gBattleSpritesDataPtr->battleBars[battlerId].oldValue,
@@ -2690,21 +2699,22 @@ u8 GetHPBarLevel(s16 hp, s16 maxhp)
 {
     u8 result;
 
-    if (hp == maxhp)
+    if (hp <= 0)
+    {
+        result = HP_BAR_EMPTY;
+    }
+    else if (hp >= maxhp)
     {
         result = HP_BAR_FULL;
     }
     else
     {
-        u8 fraction = GetScaledHPFraction(hp, maxhp, B_HEALTHBAR_PIXELS);
-        if (fraction > (B_HEALTHBAR_PIXELS * 50 / 100)) // more than 50 % hp
+        if ((u32)hp * 100 > (u32)maxhp * 50)
             result = HP_BAR_GREEN;
-        else if (fraction > (B_HEALTHBAR_PIXELS * 20 / 100)) // more than 20% hp
+        else if ((u32)hp * 100 > (u32)maxhp * 20)
             result = HP_BAR_YELLOW;
-        else if (fraction > 0)
-            result = HP_BAR_RED;
         else
-            result = HP_BAR_EMPTY;
+            result = HP_BAR_RED;
     }
 
     return result;

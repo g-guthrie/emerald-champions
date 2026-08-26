@@ -1,0 +1,999 @@
+{
+  "anchor": {
+    "adaptation_constraints": [
+      "Mega-only gimmick policy; no Tera, Z-Moves, Dynamax, Gigantamax, or Primal Reversion.",
+      "Base Kyogre replaces Primal Kyogre; every Wallace branch must receive equivalent legality, AI, and difficulty validation."
+    ],
+    "anchor": "CHAMPION_WALLACE",
+    "campaign_order": 310,
+    "candidate_reference_ids": [
+      "elite:wolfe:worlds-2016",
+      "vgc:worlds-2010"
+    ],
+    "chronological_closure_note": "Completes the connected League gauntlet after one final manual-healing window, while leaving rematch escalation and Steven's postgame mineral superboss distinct.",
+    "design_commitment": "reserved",
+    "mega_legendary_posture": {
+      "legendary": "Multiple legends are justified only here, but each branch must remain a coherent team rather than a BST stack.",
+      "mega": "Exactly one Mega Milotic or protected Wallace Mega per branch."
+    },
+    "planning_tier": "champion",
+    "primary_candidate_modes": [
+      "championship rain offense",
+      "dual-speed restricted balance"
+    ],
+    "protected_identity": "The nearly overwhelming cap-80 conclusion: Water weather, dual speed, rare Pok\u00e9mon, and resource pressure after the player chooses how much carried healing to spend after Drake.",
+    "secondary_candidate_modes": [
+      "anti-rain weather reversal",
+      "late setup or Perish preparation tax"
+    ],
+    "signature_reveal": "Mega Milotic closes a roster containing the campaign's grandest coherent rain and legendary spectacle.",
+    "target_difficulty": 10,
+    "trainer_ids": [
+      "TRAINER_WALLACE",
+      "TRAINER_WALLACE_DOUBLES",
+      "TRAINER_WALLACE_LEGENDS",
+      "TRAINER_WALLACE_DOUBLES_LEGENDS"
+    ]
+  },
+  "competitive_filters": {
+    "limit": 12,
+    "pokemon": [],
+    "tags": []
+  },
+  "competitive_index": {
+    "record_count": 1005,
+    "sha256": "44d79fd2a5f7578013b2363f9e47d75a0f05ae4239da3bd6891e9651bca2648a",
+    "version": 1
+  },
+  "competitive_queries": [
+    "rain trick-room",
+    "rain perish",
+    "water wide-guard"
+  ],
+  "current_source_facts": [
+    {
+      "average_level_offset": 0.5,
+      "current_ai_flags": [
+        "AI_FLAG_CHECK_BAD_MOVE",
+        "AI_FLAG_TRY_TO_FAINT",
+        "AI_FLAG_CHECK_VIABILITY",
+        "AI_FLAG_CHECK_FOE",
+        "AI_FLAG_SMART_SWITCHING",
+        "AI_FLAG_HELP_PARTNER",
+        "AI_FLAG_SPEED_CONTROL",
+        "AI_FLAG_FIELD_CONTROL"
+      ],
+      "current_party": [
+        {
+          "ability": "ABILITY_DRIZZLE",
+          "item": "ITEM_CHOICE_SCARF",
+          "moves": [
+            "MOVE_WATER_SPOUT",
+            "MOVE_ORIGIN_PULSE",
+            "MOVE_THUNDER",
+            "MOVE_ICE_BEAM"
+          ],
+          "species": "SPECIES_KYOGRE"
+        },
+        {
+          "ability": "ABILITY_PRESSURE",
+          "item": "ITEM_SITRUS_BERRY",
+          "moves": [
+            "MOVE_HURRICANE",
+            "MOVE_THUNDER",
+            "MOVE_TAILWIND",
+            "MOVE_ROOST"
+          ],
+          "species": "SPECIES_ZAPDOS"
+        },
+        {
+          "ability": "ABILITY_IRON_BARBS",
+          "item": "ITEM_LEFTOVERS",
+          "moves": [
+            "MOVE_POWER_WHIP",
+            "MOVE_GYRO_BALL",
+            "MOVE_LEECH_SEED",
+            "MOVE_PROTECT"
+          ],
+          "species": "SPECIES_FERROTHORN"
+        },
+        {
+          "ability": "ABILITY_HYDRATION",
+          "item": "ITEM_WACAN_BERRY",
+          "moves": [
+            "MOVE_TAIL_GLOW",
+            "MOVE_MUDDY_WATER",
+            "MOVE_ICE_BEAM",
+            "MOVE_PROTECT"
+          ],
+          "species": "SPECIES_MANAPHY"
+        },
+        {
+          "ability": "ABILITY_PRESSURE",
+          "item": "ITEM_ASSAULT_VEST",
+          "moves": [
+            "MOVE_SPACIAL_REND",
+            "MOVE_HYDRO_PUMP",
+            "MOVE_THUNDER",
+            "MOVE_EARTH_POWER"
+          ],
+          "species": "SPECIES_PALKIA"
+        },
+        {
+          "ability": "ABILITY_COMPETITIVE",
+          "item": "ITEM_MILOTICITE",
+          "moves": [
+            "MOVE_MUDDY_WATER",
+            "MOVE_MOONBLAST",
+            "MOVE_ICE_BEAM",
+            "MOVE_RECOVER"
+          ],
+          "species": "SPECIES_MILOTIC"
+        }
+      ],
+      "format": "double",
+      "note": "Current source is baseline evidence only; a design-complete dossier does not mutate it.",
+      "party_size": 6,
+      "source_party": "sParty_Wallace",
+      "synergy_tags": [
+        "Tailwind",
+        "Water pressure",
+        "rain engine",
+        "residual control"
+      ],
+      "trainer_id": "TRAINER_WALLACE"
+    },
+    {
+      "average_level_offset": 2.17,
+      "current_ai_flags": [
+        "AI_FLAG_CHECK_BAD_MOVE",
+        "AI_FLAG_TRY_TO_FAINT",
+        "AI_FLAG_CHECK_VIABILITY",
+        "AI_FLAG_CHECK_FOE",
+        "AI_FLAG_SMART_SWITCHING"
+      ],
+      "current_party": [
+        {
+          "ability": "ABILITY_DRIZZLE",
+          "item": "ITEM_WIKI_BERRY",
+          "moves": [
+            "MOVE_WATER_SPOUT",
+            "MOVE_ICY_WIND",
+            "MOVE_WEATHER_BALL",
+            "MOVE_PROTECT"
+          ],
+          "species": "SPECIES_WAILORD"
+        },
+        {
+          "ability": "ABILITY_STATIC",
+          "item": "ITEM_LIFE_ORB",
+          "moves": [
+            "MOVE_THUNDER",
+            "MOVE_HURRICANE",
+            "MOVE_WEATHER_BALL",
+            "MOVE_ROOST"
+          ],
+          "species": "SPECIES_ZAPDOS"
+        },
+        {
+          "ability": "ABILITY_LEVITATE",
+          "item": "ITEM_SOUL_DEW",
+          "moves": [
+            "MOVE_PSYSHOCK",
+            "MOVE_DRACO_METEOR",
+            "MOVE_THUNDER",
+            "MOVE_AURA_SPHERE"
+          ],
+          "species": "SPECIES_LATIOS"
+        },
+        {
+          "ability": "ABILITY_IRON_BARBS",
+          "item": "ITEM_ROCKY_HELMET",
+          "moves": [
+            "MOVE_POWER_WHIP",
+            "MOVE_KNOCK_OFF",
+            "MOVE_LEECH_SEED",
+            "MOVE_THUNDER_WAVE"
+          ],
+          "species": "SPECIES_FERROTHORN"
+        },
+        {
+          "ability": "ABILITY_SWIFT_SWIM",
+          "item": "ITEM_SALAC_BERRY",
+          "moves": [
+            "MOVE_MUDDY_WATER",
+            "MOVE_POWER_GEM",
+            "MOVE_ICE_BEAM",
+            "MOVE_EARTH_POWER"
+          ],
+          "species": "SPECIES_OMASTAR"
+        },
+        {
+          "ability": "ABILITY_COMPETITIVE",
+          "item": "ITEM_MILOTICITE",
+          "moves": [
+            "MOVE_SCALD",
+            "MOVE_MOONBLAST",
+            "MOVE_ICE_BEAM",
+            "MOVE_RECOVER"
+          ],
+          "species": "SPECIES_MILOTIC"
+        }
+      ],
+      "format": "double",
+      "note": "Current source is baseline evidence only; a design-complete dossier does not mutate it.",
+      "party_size": 6,
+      "source_party": "sParty_WallaceDoubles",
+      "synergy_tags": [
+        "Water pressure",
+        "active speed control",
+        "rain engine",
+        "residual control",
+        "status control"
+      ],
+      "trainer_id": "TRAINER_WALLACE_DOUBLES"
+    },
+    {
+      "average_level_offset": 2.17,
+      "current_ai_flags": [
+        "AI_FLAG_CHECK_BAD_MOVE",
+        "AI_FLAG_TRY_TO_FAINT",
+        "AI_FLAG_CHECK_VIABILITY",
+        "AI_FLAG_CHECK_FOE",
+        "AI_FLAG_SMART_SWITCHING"
+      ],
+      "current_party": [
+        {
+          "ability": "ABILITY_DRIZZLE",
+          "item": "ITEM_ASSAULT_VEST",
+          "moves": [
+            "MOVE_ORIGIN_PULSE",
+            "MOVE_ICE_BEAM",
+            "MOVE_THUNDER",
+            "MOVE_HIDDEN_POWER"
+          ],
+          "species": "SPECIES_KYOGRE"
+        },
+        {
+          "ability": "ABILITY_STATIC",
+          "item": "ITEM_LIFE_ORB",
+          "moves": [
+            "MOVE_THUNDER",
+            "MOVE_HURRICANE",
+            "MOVE_WEATHER_BALL",
+            "MOVE_ROOST"
+          ],
+          "species": "SPECIES_ZAPDOS"
+        },
+        {
+          "ability": "ABILITY_LEVITATE",
+          "item": "ITEM_SOUL_DEW",
+          "moves": [
+            "MOVE_PSYSHOCK",
+            "MOVE_DRACO_METEOR",
+            "MOVE_THUNDER",
+            "MOVE_AURA_SPHERE"
+          ],
+          "species": "SPECIES_LATIOS"
+        },
+        {
+          "ability": "ABILITY_IRON_BARBS",
+          "item": "ITEM_ROCKY_HELMET",
+          "moves": [
+            "MOVE_POWER_WHIP",
+            "MOVE_KNOCK_OFF",
+            "MOVE_LEECH_SEED",
+            "MOVE_THUNDER_WAVE"
+          ],
+          "species": "SPECIES_FERROTHORN"
+        },
+        {
+          "ability": "ABILITY_MULTITYPE",
+          "item": "ITEM_SPLASH_PLATE",
+          "moves": [
+            "MOVE_WATERFALL",
+            "MOVE_EARTHQUAKE",
+            "MOVE_EXTREME_SPEED",
+            "MOVE_SWORDS_DANCE"
+          ],
+          "species": "SPECIES_ARCEUS_WATER"
+        },
+        {
+          "ability": "ABILITY_COMPETITIVE",
+          "item": "ITEM_MILOTICITE",
+          "moves": [
+            "MOVE_SCALD",
+            "MOVE_MOONBLAST",
+            "MOVE_CALM_MIND",
+            "MOVE_RECOVER"
+          ],
+          "species": "SPECIES_MILOTIC"
+        }
+      ],
+      "format": "double",
+      "note": "Current source is baseline evidence only; a design-complete dossier does not mutate it.",
+      "party_size": 6,
+      "source_party": "sParty_WallaceLegends",
+      "synergy_tags": [
+        "Earthquake immunity",
+        "Water pressure",
+        "rain engine"
+      ],
+      "trainer_id": "TRAINER_WALLACE_LEGENDS"
+    },
+    {
+      "average_level_offset": 2.17,
+      "current_ai_flags": [
+        "AI_FLAG_CHECK_BAD_MOVE",
+        "AI_FLAG_TRY_TO_FAINT",
+        "AI_FLAG_CHECK_VIABILITY",
+        "AI_FLAG_CHECK_FOE",
+        "AI_FLAG_SMART_SWITCHING"
+      ],
+      "current_party": [
+        {
+          "ability": "ABILITY_DRIZZLE",
+          "item": "ITEM_ASSAULT_VEST",
+          "moves": [
+            "MOVE_ORIGIN_PULSE",
+            "MOVE_ICE_BEAM",
+            "MOVE_THUNDER",
+            "MOVE_HIDDEN_POWER"
+          ],
+          "species": "SPECIES_KYOGRE"
+        },
+        {
+          "ability": "ABILITY_MULTITYPE",
+          "item": "ITEM_ZAP_PLATE",
+          "moves": [
+            "MOVE_THUNDER",
+            "MOVE_EARTH_POWER",
+            "MOVE_SLUDGE_BOMB",
+            "MOVE_ICE_BEAM"
+          ],
+          "species": "SPECIES_ARCEUS_ELECTRIC"
+        },
+        {
+          "ability": "ABILITY_REGENERATOR",
+          "item": "ITEM_LIFE_ORB",
+          "moves": [
+            "MOVE_HURRICANE",
+            "MOVE_FOCUS_BLAST",
+            "MOVE_GRASS_KNOT",
+            "MOVE_U_TURN"
+          ],
+          "species": "SPECIES_TORNADUS_THERIAN"
+        },
+        {
+          "ability": "ABILITY_LEVITATE",
+          "item": "ITEM_SOUL_DEW",
+          "moves": [
+            "MOVE_PSYSHOCK",
+            "MOVE_DRACO_METEOR",
+            "MOVE_THUNDER",
+            "MOVE_AURA_SPHERE"
+          ],
+          "species": "SPECIES_LATIOS"
+        },
+        {
+          "ability": "ABILITY_SWIFT_SWIM",
+          "item": "ITEM_WATER_GEM",
+          "moves": [
+            "MOVE_MUDDY_WATER",
+            "MOVE_ICE_BEAM",
+            "MOVE_EARTH_POWER",
+            "MOVE_PROTECT"
+          ],
+          "species": "SPECIES_OMASTAR"
+        },
+        {
+          "ability": "ABILITY_COMPETITIVE",
+          "item": "ITEM_MILOTICITE",
+          "moves": [
+            "MOVE_SCALD",
+            "MOVE_MOONBLAST",
+            "MOVE_CALM_MIND",
+            "MOVE_RECOVER"
+          ],
+          "species": "SPECIES_MILOTIC"
+        }
+      ],
+      "format": "double",
+      "note": "Current source is baseline evidence only; a design-complete dossier does not mutate it.",
+      "party_size": 6,
+      "source_party": "sParty_WallaceDoublesLegends",
+      "synergy_tags": [
+        "Water pressure",
+        "rain engine"
+      ],
+      "trainer_id": "TRAINER_WALLACE_DOUBLES_LEGENDS"
+    }
+  ],
+  "dossier_template": {
+    "ai": null,
+    "anchor_id": "CHAMPION_WALLACE",
+    "campaign_reservations": null,
+    "campaign_state": null,
+    "competitive_research": null,
+    "counterplay": null,
+    "difficulty": {
+      "observed": null,
+      "target": 10
+    },
+    "fresh_critic_review": null,
+    "identity": null,
+    "mechanics_proposal": null,
+    "ordering": null,
+    "planning_tier": "champion",
+    "presentation": null,
+    "rolling_context": null,
+    "runtime": null,
+    "status": {
+      "design": null,
+      "fresh_critic": null,
+      "runtime": "unplayed",
+      "source": "unimplemented",
+      "static": null
+    },
+    "team": null,
+    "verification": null
+  },
+  "mechanics_baseline": {
+    "automatic_healing_between_members": false,
+    "champion_room_forces_approach_after_entry": true,
+    "drake_releases_player_control_after_victory": true,
+    "hall4_allows_normal_overworld_menu": true,
+    "items_during_trainer_battles": false,
+    "level_semantics": "Trainer levels are offsets from the active strict cap.",
+    "manual_overworld_bag_between_members": true,
+    "mechanics_proposal": null,
+    "party_composition_locked_after_entry": true,
+    "pokemon_menu_between_members": true,
+    "save_menu_between_members": true,
+    "source_evidence": [
+      "data/maps/EverGrandeCity_SidneysRoom/scripts.inc",
+      "data/maps/EverGrandeCity_PhoebesRoom/scripts.inc",
+      "data/maps/EverGrandeCity_GlaciasRoom/scripts.inc",
+      "data/maps/EverGrandeCity_DrakesRoom/scripts.inc",
+      "data/maps/EverGrandeCity_Hall4/scripts.inc",
+      "data/maps/EverGrandeCity_ChampionsRoom/scripts.inc",
+      "src/start_menu.c",
+      "src/battle_main.c",
+      "src/pokemon.c"
+    ],
+    "strict_cap": 80
+  },
+  "mechanics_baseline_id": "pokemon_league_main_story",
+  "packet_type": "authoring-context-not-a-closed-design",
+  "ranked_candidate_digest": [
+    {
+      "ai_requirements": [
+        "primary versus secondary mode",
+        "rain",
+        "Perish clock",
+        "Encore trap",
+        "Eject Button redirection"
+      ],
+      "completeness": "full-sets-strategy-documented",
+      "confidence": "player-explained",
+      "event": "2024 Toronto Regional Championships",
+      "gimmick_dependencies": [
+        "Tera in original format"
+      ],
+      "player": "Wolfe Glick",
+      "preview_pressure": "Protecting safely against rain can expose the player to Encore plus Shadow Tag.",
+      "primary_mode": "Politoed rain offense through Kingdra and Archaludon",
+      "query": "rain trick-room",
+      "rank": 1,
+      "reference_id": "elite:wolfe:toronto-2024",
+      "roster": [
+        "Archaludon",
+        "Kingdra",
+        "Politoed",
+        "Incineroar",
+        "Gothitelle",
+        "Amoonguss"
+      ],
+      "secondary_mode": "Gothitelle Perish and Encore trap",
+      "source_kind": "curated-elite-research",
+      "strategy_notes": "Politoed enables both direct Kingdra and Archaludon offense and the secondary Gothitelle Perish mode. Encore plus Shadow Tag punishes passive choices.",
+      "tags": [
+        "eject-redirection",
+        "encore-trap",
+        "fake-out",
+        "healing",
+        "perish",
+        "perish-trap",
+        "pivoting",
+        "positioning-control",
+        "primary-rain-offense",
+        "rain",
+        "redirection",
+        "secondary-perish",
+        "shadow-tag",
+        "sleep",
+        "swift-swim",
+        "trick-room",
+        "trick-room-option"
+      ],
+      "urls": [
+        "https://limitlessvgc.com/tournaments/366/teams",
+        "https://www.youtube.com/watch?v=Jbs8Yk851_8"
+      ],
+      "year": 2024
+    },
+    {
+      "ai_requirements": [],
+      "completeness": "roster-only-indexed-full-sheet",
+      "confidence": "world-champion-player-report",
+      "event": "2024 World Championships",
+      "gimmick_dependencies": [],
+      "player": "Luca Ceribelli",
+      "preview_pressure": "",
+      "primary_mode": "",
+      "query": "rain trick-room",
+      "rank": 2,
+      "reference_id": "elite:luca-ceribelli:worlds-2024",
+      "roster": [
+        "Miraidon",
+        "Ogerpon-Hearthflame",
+        "Urshifu-Rapid",
+        "Iron Hands",
+        "Whimsicott",
+        "Farigiraf"
+      ],
+      "secondary_mode": "",
+      "source_kind": "curated-elite-research",
+      "strategy_notes": "A genuine fast/slow terrain hybrid rather than a single setter-and-sweeper module.",
+      "tags": [
+        "dual-speed-mode",
+        "electric-terrain",
+        "priority-denial",
+        "redirection",
+        "tailwind",
+        "trick-room"
+      ],
+      "urls": [
+        "https://limitlessvgc.com/teams/2196",
+        "https://victoryroad.pro/2024/09/22/luca-ceribelli-worlds-report/"
+      ],
+      "year": 2024
+    },
+    {
+      "ai_requirements": [
+        "Feint into Protect",
+        "Wide Guard",
+        "Nuzzle",
+        "Trick Room selection",
+        "Skill Swap",
+        "conditional Mega"
+      ],
+      "completeness": "full-sets-strategy-documented",
+      "confidence": "player-reported-world-champion",
+      "event": "2016 World Championships",
+      "gimmick_dependencies": [
+        "Mega",
+        "Primal"
+      ],
+      "player": "Wolfe Glick",
+      "preview_pressure": "Two Mega candidates and opposite speed modes make lead selection costly.",
+      "primary_mode": "Rayquaza and Kyogre mixed-speed offense",
+      "query": "rain trick-room",
+      "rank": 3,
+      "reference_id": "elite:wolfe:worlds-2016",
+      "roster": [
+        "Rayquaza",
+        "Kyogre",
+        "Gengar",
+        "Hitmontop",
+        "Raichu",
+        "Bronzong"
+      ],
+      "secondary_mode": "Bronzong Trick Room with layered Fake Out, Nuzzle, Wide Guard, and Feint",
+      "source_kind": "curated-elite-research",
+      "strategy_notes": "World-winning positioning team. Replace Primal Kyogre with base Kyogre; keep support interactions and conditional Mega choice under explicit AI control.",
+      "tags": [
+        "dual-speed-mode",
+        "fake-out",
+        "fake-out-layering",
+        "feint",
+        "nuzzle",
+        "offense",
+        "pivoting",
+        "priority",
+        "rain",
+        "setup",
+        "skill-swap",
+        "swords-dance",
+        "trick-room",
+        "wide-guard"
+      ],
+      "urls": [
+        "https://limitlessvgc.com/tournaments/46/teams",
+        "https://www.youtube.com/watch?v=TKqZGXSeeN8"
+      ],
+      "year": 2016
+    },
+    {
+      "ai_requirements": [],
+      "completeness": "full-sets",
+      "confidence": "reproducible",
+      "event": null,
+      "gimmick_dependencies": [],
+      "player": null,
+      "preview_pressure": "",
+      "primary_mode": "",
+      "query": "rain trick-room",
+      "rank": 4,
+      "reference_id": "showdown:gen5randomdoublesbattle:008",
+      "roster": [
+        "Poliwrath",
+        "Crustle",
+        "Monferno",
+        "Cradily",
+        "Bronzong",
+        "Lampent"
+      ],
+      "secondary_mode": "",
+      "source_kind": "showdown-random",
+      "strategy_notes": "",
+      "tags": [
+        "choice-disruption",
+        "choice-item",
+        "fake-out",
+        "hazards",
+        "screens",
+        "setup",
+        "trick-room"
+      ],
+      "urls": [
+        "https://github.com/smogon/pokemon-showdown"
+      ],
+      "year": null
+    },
+    {
+      "ai_requirements": [],
+      "completeness": "full-sets",
+      "confidence": "reproducible",
+      "event": null,
+      "gimmick_dependencies": [],
+      "player": null,
+      "preview_pressure": "",
+      "primary_mode": "",
+      "query": "rain trick-room",
+      "rank": 5,
+      "reference_id": "showdown:gen9championsrandomdoublesbattle:001",
+      "roster": [
+        "Conkeldurr",
+        "Charizard",
+        "Audino",
+        "Gyarados",
+        "Basculegion-F",
+        "Reuniclus"
+      ],
+      "secondary_mode": "",
+      "source_kind": "showdown-random",
+      "strategy_notes": "",
+      "tags": [
+        "active-speed-control",
+        "choice-item",
+        "pivoting",
+        "priority",
+        "setup",
+        "trick-room"
+      ],
+      "urls": [
+        "https://github.com/smogon/pokemon-showdown"
+      ],
+      "year": null
+    },
+    {
+      "ai_requirements": [],
+      "completeness": "full-sets",
+      "confidence": "reproducible",
+      "event": null,
+      "gimmick_dependencies": [],
+      "player": null,
+      "preview_pressure": "",
+      "primary_mode": "",
+      "query": "rain trick-room",
+      "rank": 6,
+      "reference_id": "showdown:gen9championsrandomdoublesbattle:013",
+      "roster": [
+        "Politoed",
+        "Snorlax",
+        "Polteageist-Antique",
+        "Kingambit",
+        "Spiritomb",
+        "Flapple"
+      ],
+      "secondary_mode": "",
+      "source_kind": "showdown-random",
+      "strategy_notes": "",
+      "tags": [
+        "choice-item",
+        "offense",
+        "pivoting",
+        "priority",
+        "rain",
+        "setup",
+        "trick-room"
+      ],
+      "urls": [
+        "https://github.com/smogon/pokemon-showdown"
+      ],
+      "year": null
+    },
+    {
+      "ai_requirements": [],
+      "completeness": "full-sets",
+      "confidence": "reproducible",
+      "event": null,
+      "gimmick_dependencies": [],
+      "player": null,
+      "preview_pressure": "",
+      "primary_mode": "",
+      "query": "rain trick-room",
+      "rank": 7,
+      "reference_id": "showdown:gen9championsrandomdoublesbattle:019",
+      "roster": [
+        "Aromatisse",
+        "Luxray",
+        "Absol",
+        "Conkeldurr",
+        "Excadrill",
+        "Empoleon"
+      ],
+      "secondary_mode": "",
+      "source_kind": "showdown-random",
+      "strategy_notes": "",
+      "tags": [
+        "active-speed-control",
+        "pivoting",
+        "priority",
+        "trick-room"
+      ],
+      "urls": [
+        "https://github.com/smogon/pokemon-showdown"
+      ],
+      "year": null
+    },
+    {
+      "ai_requirements": [],
+      "completeness": "full-sets",
+      "confidence": "reproducible",
+      "event": null,
+      "gimmick_dependencies": [],
+      "player": null,
+      "preview_pressure": "",
+      "primary_mode": "",
+      "query": "rain trick-room",
+      "rank": 8,
+      "reference_id": "showdown:gen9randomdoublesbattle:005",
+      "roster": [
+        "Eelektross",
+        "Magearna",
+        "Iron Treads",
+        "Swampert",
+        "Brambleghast",
+        "Dewgong"
+      ],
+      "secondary_mode": "",
+      "source_kind": "showdown-random",
+      "strategy_notes": "",
+      "tags": [
+        "active-speed-control",
+        "fake-out",
+        "hazards",
+        "pivoting",
+        "trick-room"
+      ],
+      "urls": [
+        "https://github.com/smogon/pokemon-showdown"
+      ],
+      "year": null
+    },
+    {
+      "ai_requirements": [],
+      "completeness": "full-sets",
+      "confidence": "reproducible",
+      "event": null,
+      "gimmick_dependencies": [],
+      "player": null,
+      "preview_pressure": "",
+      "primary_mode": "",
+      "query": "rain trick-room",
+      "rank": 9,
+      "reference_id": "showdown:gen9randomdoublesbattle:009",
+      "roster": [
+        "Thundurus-Therian",
+        "Primarina",
+        "Conkeldurr",
+        "Porygon2",
+        "Iron Crown",
+        "Sawsbuck-Autumn"
+      ],
+      "secondary_mode": "",
+      "source_kind": "showdown-random",
+      "strategy_notes": "",
+      "tags": [
+        "healing",
+        "priority",
+        "setup",
+        "trick-room"
+      ],
+      "urls": [
+        "https://github.com/smogon/pokemon-showdown"
+      ],
+      "year": null
+    },
+    {
+      "ai_requirements": [],
+      "completeness": "roster-only-indexed-full-sheet",
+      "confidence": "official-champion",
+      "event": "2025 North America International Championships",
+      "gimmick_dependencies": [],
+      "player": "Federico Camporesi",
+      "preview_pressure": "",
+      "primary_mode": "",
+      "query": "rain trick-room",
+      "rank": 10,
+      "reference_id": "elite:federico-camporesi:naic-2025",
+      "roster": [
+        "Whimsicott",
+        "Urshifu-Rapid",
+        "Ursaluna",
+        "Miraidon",
+        "Lunala",
+        "Incineroar"
+      ],
+      "secondary_mode": "",
+      "source_kind": "curated-elite-research",
+      "strategy_notes": "Specs Miraidon and Tailwind on one axis, Electric Seed Lunala and Ursaluna Trick Room on the other.",
+      "tags": [
+        "choice-band",
+        "dual-speed-mode",
+        "electric-offense",
+        "electric-terrain",
+        "pivoting",
+        "tailwind",
+        "trick-room"
+      ],
+      "urls": [
+        "https://limitlessvgc.com/tournaments/397/teams"
+      ],
+      "year": 2025
+    },
+    {
+      "ai_requirements": [
+        "Perish state machine",
+        "clock survival",
+        "Shadow Tag",
+        "Heal Pulse"
+      ],
+      "completeness": "full-sets",
+      "confidence": "exact-public-sheet",
+      "event": "2023 Orlando Regional Championships",
+      "gimmick_dependencies": [
+        "Tera in original format"
+      ],
+      "player": "Wolfe Glick",
+      "preview_pressure": "Two Perish users and layered survival tools make the clock credible from several leads.",
+      "primary_mode": "Dedicated Shadow Tag Perish clock",
+      "query": "rain perish",
+      "rank": 11,
+      "reference_id": "elite:wolfe:orlando-2023",
+      "roster": [
+        "Scream Tail",
+        "Palafin",
+        "Arcanine",
+        "Flutter Mane",
+        "Amoonguss",
+        "Gothitelle"
+      ],
+      "secondary_mode": "Palafin and Flutter Mane direct cleanup",
+      "source_kind": "curated-elite-research",
+      "strategy_notes": "Dedicated Perish mode with two singers and multiple survival tools. Reserve once for a late notorious trainer; ordinary damage AI is insufficient.",
+      "tags": [
+        "dedicated-perish",
+        "disable",
+        "fake-out",
+        "heal-pulse",
+        "healing",
+        "perish",
+        "perish-trap",
+        "positioning-control",
+        "priority",
+        "redirection",
+        "shadow-tag",
+        "sleep",
+        "survival-clock",
+        "two-singers"
+      ],
+      "urls": [
+        "https://limitlessvgc.com/tournaments/298/teams"
+      ],
+      "year": 2023
+    },
+    {
+      "ai_requirements": [],
+      "completeness": "full-sets",
+      "confidence": "reproducible",
+      "event": null,
+      "gimmick_dependencies": [],
+      "player": null,
+      "preview_pressure": "",
+      "primary_mode": "",
+      "query": "water wide-guard",
+      "rank": 12,
+      "reference_id": "showdown:gen6randomdoublesbattle:017",
+      "roster": [
+        "Krookodile",
+        "Pinsir",
+        "Mantine",
+        "Clawitzer",
+        "Chatot",
+        "Diggersby"
+      ],
+      "secondary_mode": "",
+      "source_kind": "showdown-random",
+      "strategy_notes": "",
+      "tags": [
+        "offense",
+        "pivoting",
+        "setup",
+        "tailwind",
+        "wide-guard"
+      ],
+      "urls": [
+        "https://github.com/smogon/pokemon-showdown"
+      ],
+      "year": null
+    },
+    {
+      "ai_requirements": [],
+      "completeness": "roster-only",
+      "confidence": "verified-event",
+      "event": "2010 Pok\u00e9mon World Championships",
+      "gimmick_dependencies": [],
+      "player": "ray-rizzo",
+      "preview_pressure": "",
+      "primary_mode": "",
+      "query": "campaign reservation",
+      "rank": 13,
+      "reference_id": "vgc:worlds-2010",
+      "roster": [
+        "ludicolo",
+        "kyogre",
+        "hariyama",
+        "dialga",
+        "cresselia",
+        "groudon"
+      ],
+      "secondary_mode": "",
+      "source_kind": "vgc-event-champion",
+      "strategy_notes": "",
+      "tags": [
+        "offense",
+        "rain",
+        "sun"
+      ],
+      "urls": [
+        "https://limitlessvgc.com/tournaments/49"
+      ],
+      "year": 2010
+    }
+  ],
+  "rolling_context": {
+    "available": false,
+    "previous_encounters": [],
+    "protected_neighbor_anchors": [
+      "ELITE_FOUR_GLACIA",
+      "ELITE_FOUR_DRAKE",
+      "POSTGAME_GYM_REMATCH_CYCLE",
+      "POSTGAME_ELITE_FOUR_REMATCH_GAUNTLET"
+    ],
+    "reason": "This future marquee anchor has campaign neighbors but no trustworthy previous-ten chronological window yet; refresh before implementation."
+  },
+  "version": 1
+}

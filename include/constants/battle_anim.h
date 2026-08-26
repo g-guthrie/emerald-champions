@@ -367,13 +367,6 @@
 #define ANIM_TAG_METAL_BITS                 (ANIM_SPRITES_START + 355)
 #define ANIM_TAG_SMALL_ROCK                 (ANIM_SPRITES_START + 356)
 #define ANIM_TAG_SPIRIT_ARROW               (ANIM_SPRITES_START + 357)
-#define ANIM_TAG_ULTRA_BURST_SYMBOL         (ANIM_SPRITES_START + 358)
-#define ANIM_TAG_Z_MOVE_SYMBOL              (ANIM_SPRITES_START + 359)
-#define ANIM_TAG_REALLY_BIG_ROCK            (ANIM_SPRITES_START + 360)
-#define ANIM_TAG_COCOON                     (ANIM_SPRITES_START + 361)
-#define ANIM_TAG_CORKSCREW                  (ANIM_SPRITES_START + 362)
-#define ANIM_TAG_HAVOC_SPEAR                (ANIM_SPRITES_START + 363)
-#define ANIM_TAG_PURPLE_DRAKE               (ANIM_SPRITES_START + 364)
 #define ANIM_TAG_MUD_BOMB                   (ANIM_SPRITES_START + 365)
 #define ANIM_TAG_BRANCH                     (ANIM_SPRITES_START + 366)
 #define ANIM_TAG_APPLE                      (ANIM_SPRITES_START + 367)
@@ -395,6 +388,7 @@
 #define ANIM_TAG_OMEGA_SYMBOL               (ANIM_SPRITES_START + 383)
 #define ANIM_TAG_PRIMAL_PARTICLES           (ANIM_SPRITES_START + 384)
 #define ANIM_TAG_STEEL_BEAM                 (ANIM_SPRITES_START + 385)
+#define ANIM_TAG_POLTERGEIST                (ANIM_SPRITES_START + 386)
 
 // battlers
 #define ANIM_ATTACKER    0
@@ -474,23 +468,10 @@
 #define BG_MAGIC_ROOM                           53
 #define BG_HYPERSPACE_FURY                      54
 #define BG_BOLT_STRIKE                          55
-#define BG_ZMOVE_ACTIVATE                       56
-#define BG_TECTONIC_RAGE                        57
 #define BG_BLUE_SKY_DAY                         58
 #define BG_BLUE_SKY_AFTERNOON                   59
 #define BG_BLUE_SKY_NIGHT                       60
-#define BG_ZMOVE_MOUNTAIN                       61
-#define BG_NEVERENDING_NIGHTMARE                62
 #define BG_WATER_PULSE                          63
-#define BG_INFERNO_OVERDRIVE                    64
-#define BG_BLOOM_DOOM                           65
-#define BG_SHATTERED_PSYCHE                     66
-#define BG_TWINKLE_TACKLE                       67
-#define BG_BLACKHOLE_ECLIPSE                    68
-#define BG_SOULSTEALING_7STAR_STRIKE            69
-#define BG_MALICIOUS_MOONSAULT                  70
-#define BG_CLANGOROUS_SOULBLAZE                 71
-#define BG_SNUGGLE_FOREVER                      72
 #define BG_MAX_LIGHTNING                        73
 #define BG_GARBAGE_FALLS                        74
 #define BG_HYPER_BEAM                           75
@@ -533,6 +514,7 @@
 #define B_ANIM_STRONG_WINDS             30
 #define B_ANIM_PRIMAL_REVERSION         31
 #define B_ANIM_ITEM_HEAL                32 // Leftovers and berries
+#define B_ANIM_BEAK_BLAST_SETUP         33
 
 // special animations table (gBattleAnims_Special)
 #define B_ANIM_LVL_UP                   0
@@ -590,6 +572,22 @@
 #define ANIM_PAL_PLAYER2        0x100
 #define ANIM_PAL_OPPONENT1      0x200
 #define ANIM_PAL_OPPONENT2      0x400
+
+// Bit-field selectors used by the Expansion move animations. These map to the
+// same palette slots as the legacy ANIM_PAL_* names above.
+#define F_PAL_BG                  (1 << 0)
+#define F_PAL_ATTACKER            (1 << 1)
+#define F_PAL_TARGET              (1 << 2)
+#define F_PAL_ATK_PARTNER         (1 << 3)
+#define F_PAL_DEF_PARTNER         (1 << 4)
+#define F_PAL_ANIM_1              (1 << 5)
+#define F_PAL_ANIM_2              (1 << 6)
+#define F_PAL_ATK_SIDE            (F_PAL_ATTACKER | F_PAL_ATK_PARTNER)
+#define F_PAL_DEF_SIDE            (F_PAL_TARGET | F_PAL_DEF_PARTNER)
+#define F_PAL_BATTLERS            (F_PAL_ATK_SIDE | F_PAL_DEF_SIDE)
+#define F_PAL_ADJACENT            (F_PAL_DEF_SIDE | F_PAL_ATK_PARTNER)
+#define F_PAL_ALL_BUT_DEF         (F_PAL_ATK_SIDE | F_PAL_DEF_PARTNER)
+#define F_PAL_ALL_BUT_ATK_PARTNER (F_PAL_ATTACKER | F_PAL_DEF_SIDE)
 
 // horseshoe/fist frames
 #define ANIM_RIGHT_FIST  0

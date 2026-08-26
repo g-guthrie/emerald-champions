@@ -28,6 +28,8 @@ MauvilleCity_EventScript_GyroBallTM::
 	goto_if_set FLAG_VERDANT_GIFT_GYRO_BALL, MauvilleCity_EventScript_ReceivedTM74
 	msgbox MauvilleCity_Text_GiveTM74, MSGBOX_DEFAULT
 	giveitem ITEM_METRONOME
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_VERDANT_GIFT_GYRO_BALL
 	msgbox MauvilleCity_Text_HaveTM74, MSGBOX_DEFAULT
 	release

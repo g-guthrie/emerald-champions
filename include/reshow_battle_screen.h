@@ -3,5 +3,6 @@
 
 void ReshowBattleScreenDummy(void);
 void ReshowBattleScreenAfterMenu(void);
+void CreateBattlerSprite(u8 battler);
 
 #endif // GUARD_RESHOW_BATTLE_SCREEN_H

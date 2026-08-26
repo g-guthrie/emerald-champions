@@ -1445,6 +1445,9 @@ void LoadBallGfx(u8 ballId)
     switch (ballId)
     {
     case BALL_DIVE:
+    // Timer Ball has its own fully-open frame in its sheet. Do not replace it
+    // with the generic open Poké Ball graphic.
+    case BALL_TIMER:
     case BALL_LUXURY:
     case BALL_PREMIER:
     case BALL_LEVEL ... POKEBALL_COUNT:

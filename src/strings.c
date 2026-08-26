@@ -911,8 +911,8 @@ const u8 gText_GiveToAPkmn[] = _("Give to a Pokémon?");
 const u8 gText_PlacedItemInBag[] = _("Placed item in the Bag.");
 const u8 gText_BagIsFull2[] = _("The Bag is full.");
 const u8 gText_PutItemInBag[] = _("Put this item in the Bag?");
-const u8 gText_ItemIsNowHeld[] = _("{DYNAMIC 0} is now held.");
-const u8 gText_ChangedToNewItem[] = _("Changed to {DYNAMIC 0}.");
+const u8 gText_ItemIsNowHeld[] = _("{DYNAMIC 0} is held.");
+const u8 gText_ChangedToNewItem[] = _("{DYNAMIC 0} is held.");
 const u8 gText_MailCantBeStored[] = _("Mail can't be stored!");
 const u8 gPCText_Cancel[] = _("Cancel");
 const u8 gPCText_Store[] = _("Store");
@@ -1671,7 +1671,7 @@ const u8 gText_SavingNormalMode[] = _("Normal Mode");
 const u8 gText_SavingHardMode[] = _("Hard Mode");
 const u8 gText_SavingChallengeMode[] = _("Challenge Mode");
 const u8 gText_SavingInsanityMode[] = _("Insanity Mode");
-const u8 gText_SavingVersionNum[] = _("Ver 1.13");
+const u8 gText_SavingVersionNum[] = _("Verdant");
 const u8 gText_WirelessCommStatus[] = _("Wireless Communication Status");
 const u8 gText_PeopleTrading[] = _("People trading:");
 const u8 gText_PeopleBattling[] = _("People battling:");
@@ -2057,12 +2057,12 @@ const u8 gText_TutorMoveSet6[] = _("Feather Badge");
 const u8 gText_TutorMoveSet7[] = _("Mind Badge");
 
 // Pokemon center move tutor/name rater menu
-const u8 gText_RememberAMove[] = _("Remember a move");
+const u8 gText_RememberAMove[] = _("Teach a move");
 const u8 gText_ForgetAMove[] = _("Forget a move");
 const u8 gText_LearnANewMove[] = _("Learn a new move");
 const u8 gText_RateANickname[] = _("Rate a nickname");
 const u8 gText_TrainEXP[] = _("Train Exp.");
-const u8 gText_ResetEvents[] = _("Reset Events");
+const u8 gText_ResetEvents[] = _("Restore Events");
 
 // Game Corner Pokemon prizes
 // Rare Pokemon
@@ -2260,7 +2260,7 @@ const u8 gText_EVO_ITEM_MALE[]                      = _("{STR_VAR_2} used on mal
 const u8 gText_EVO_ITEM_FEMALE[]                    = _("{STR_VAR_2} used on female");
 const u8 gText_EVO_LEVEL_RAIN[]                     = _("LvlUp to {STR_VAR_2} while raining");
 const u8 gText_EVO_SPECIFIC_MON_IN_PARTY[]          = _("LvlUp with {STR_VAR_2} in party");
-const u8 gText_EVO_LEVEL_DARK_TYPE_MON_IN_PARTY[]   = _("LvlUp with dark type in party");
+const u8 gText_EVO_LEVEL_DARK_TYPE_MON_IN_PARTY[]   = _("Lv. {STR_VAR_2} with Dark-type ally");
 const u8 gText_EVO_TRADE_SPECIFIC_MON[]             = _("Traded for {STR_VAR_2}");
 const u8 gText_EVO_SPECIFIC_MAP[]                   = _("LvlUp on {STR_VAR_2}");
 const u8 gText_EVO_NONE[]                           = _("{STR_VAR_1} has no evolution.");

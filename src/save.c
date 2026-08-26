@@ -22,6 +22,16 @@
 typedef char SaveBlock1SizeMustRemainStable[(sizeof(struct SaveBlock1) == 0x380C) ? 1 : -1];
 typedef char SaveBlock2SizeMustRemainStable[(sizeof(struct SaveBlock2) == 0x0F2C) ? 1 : -1];
 typedef char PokedexSizeMustRemainStable[(sizeof(struct Pokedex) == 0x78) ? 1 : -1];
+// src/crt0.s publishes these fields to save editors and GameCube link
+// software.  Keep that external save-layout header synchronized with the
+// structures the game actually serializes.
+typedef char SaveBlock1FlagsOffsetMustRemainStable[(offsetof(struct SaveBlock1, flags) == 0x18F8) ? 1 : -1];
+typedef char SaveBlock1VarsOffsetMustRemainStable[(offsetof(struct SaveBlock1, vars) == 0x1A24) ? 1 : -1];
+typedef char SaveBlock1DexSeenOffsetMustRemainStable[(offsetof(struct SaveBlock1, dexSeen) == 0x3004) ? 1 : -1];
+typedef char SaveBlock1ExternalFlagsOffsetMustRemainStable[(offsetof(struct SaveBlock1, externalEventFlags) == 0x2C33) ? 1 : -1];
+typedef char SaveBlock1ExternalDataOffsetMustRemainStable[(offsetof(struct SaveBlock1, externalEventData) == 0x2C1F) ? 1 : -1];
+typedef char SaveBlock1GiftRibbonsOffsetMustRemainStable[(offsetof(struct SaveBlock1, giftRibbons) == 0x2C14) ? 1 : -1];
+typedef char SaveBlock1EnigmaBerryOffsetMustRemainStable[(offsetof(struct SaveBlock1, enigmaBerry) == 0x2C64) ? 1 : -1];
 
 static u16 CalculateChecksum(void *data, u16 size);
 static bool8 DoReadFlashWholeSection(u8 sector, struct SaveSection *section);
@@ -49,13 +59,30 @@ static const struct VerdantWorldItemMigration sVerdantGen9WorldItemMigrations[] 
     {FLAG_ITEM_GRANITE_CAVE_B2F_RARE_CANDY, ITEM_GIMMIGHOUL_COIN, FLAG_VERDANT_GEN9_MIGRATED_GIMMIGHOUL_COIN},
     {FLAG_ITEM_MAGMA_HIDEOUT_1F_RARE_CANDY, ITEM_BOOSTER_ENERGY, FLAG_VERDANT_GEN9_MIGRATED_BOOSTER_ENERGY},
     {FLAG_ITEM_MAGMA_HIDEOUT_3F_3R_TM35_FLAMETHROWER, ITEM_HEARTHFLAME_MASK, FLAG_VERDANT_GEN9_MIGRATED_HEARTHFLAME},
+    {PETALBURG_WOODS_3_GRASS_KNOT, ITEM_MEGANIUMITE, FLAG_VERDANT_MIGRATED_MEGANIUMITE},
+    {FLAG_ITEM_SEAFLOOR_CAVERN_ROOM_9_TM_26, ITEM_FERALIGITE, FLAG_VERDANT_MIGRATED_FERALIGITE},
+    {FLAG_ITEM_FIERY_PATH_TM06, ITEM_EMBOARITE, FLAG_VERDANT_MIGRATED_EMBOARITE},
+    {FLAG_ITEM_NEW_MAUVILLE_INSIDE_TM91, ITEM_RAICHUNITE_X, FLAG_VERDANT_MIGRATED_RAICHUNITE_X},
+    {FLAG_ITEM_ROUTE_103_TM40_AERIAL_ACE, ITEM_RAICHUNITE_Y, FLAG_VERDANT_MIGRATED_RAICHUNITE_Y},
+    {FLAG_ITEM_METEOR_FALLS_1F_1R_TM59_DRAGON_PULSE, ITEM_DRAGONINITE, FLAG_VERDANT_MIGRATED_DRAGONINITE},
+    {FLAG_SANDSTREWN_RUINS_LEECH_LIFE, ITEM_EXCADRITE, FLAG_VERDANT_MIGRATED_EXCADRITE},
+    {FLAG_ITEM_DEWFORD_MEADOW_TM95, ITEM_MALAMARITE, FLAG_VERDANT_MIGRATED_MALAMARITE},
+    {FLAG_ITEM_MT_PYRE_SUMMIT_TM61_WILLOWISP, ITEM_CHANDELURITE, FLAG_VERDANT_MIGRATED_CHANDELURITE},
+    {FLAG_ITEM_ROUTE_119_TM62_ACROBATICS, ITEM_HAWLUCHANITE, FLAG_VERDANT_MIGRATED_HAWLUCHANITE},
+    {FLAG_SEASPRAY_CAVE_WATER_PULSE, ITEM_GRENINJITE, FLAG_VERDANT_MIGRATED_GRENINJITE},
+    {FLAG_ITEM_ROUTE_109_RARE_CANDY, ITEM_ADRENALINE_ORB, FLAG_VERDANT_MIGRATED_ADRENALINE_ORB},
+    {FLAG_ITEM_TRICK_HOUSE_PUZZLE_4_ASSAULT_VEST, ITEM_BLUNDER_POLICY, FLAG_VERDANT_MIGRATED_BLUNDER_POLICY},
+    {FLAG_ITEM_SHOAL_CAVE_INNER_ROOM_RARE_CANDY, ITEM_SHED_SHELL, FLAG_VERDANT_MIGRATED_SHED_SHELL},
 };
 
 void MigrateVerdantGen9WorldItems(void)
 {
     u32 i;
 
-    if (gSaveFileStatus != SAVE_STATUS_OK)
+    // SAVE_STATUS_ERROR means one slot was damaged but the other valid slot
+    // was successfully loaded.  That recovered save needs the same migrations
+    // as an entirely healthy save.
+    if (gSaveFileStatus != SAVE_STATUS_OK && gSaveFileStatus != SAVE_STATUS_ERROR)
         return;
 
     for (i = 0; i < ARRAY_COUNT(sVerdantGen9WorldItemMigrations); i++)
@@ -64,8 +91,17 @@ void MigrateVerdantGen9WorldItems(void)
 
         if (!FlagGet(migration->migrationFlag) && FlagGet(migration->pickupFlag))
         {
-            if (CheckBagHasItem(migration->item, 1) || AddBagItem(migration->item, 1))
+            if (PlayerOwnsItemAnywhere(migration->item) || AddBagItem(migration->item, 1))
                 FlagSet(migration->migrationFlag);
+        }
+    }
+
+    if (!FlagGet(FLAG_VERDANT_MIGRATED_MEGA_KIT) && FlagGet(FLAG_DELIVERED_STEVEN_LETTER))
+    {
+        if (TryAddVerdantMegaKit())
+        {
+            FlagSet(FLAG_SYS_RECEIVED_KEYSTONE);
+            FlagSet(FLAG_VERDANT_MIGRATED_MEGA_KIT);
         }
     }
 }
@@ -502,6 +538,8 @@ static u8 sub_8152E10(u16 a1, const struct SaveSectionLocation *location)
     {
         DoReadFlashWholeSection(i + v3, gFastSaveSection);
         id = gFastSaveSection->id;
+        if (id >= SECTOR_SAVE_SLOT_LENGTH)
+            continue;
         if (id == 0)
             gLastWrittenSector = i;
         checksum = CalculateChecksum(gFastSaveSection->data, location[id].size);
@@ -525,6 +563,8 @@ static u8 GetSaveValidStatus(const struct SaveSectionLocation *location)
     u32 saveSlot2Counter = 0;
     u32 slotCheckField = 0;
     bool8 securityPassed = FALSE;
+    bool8 counterSet = FALSE;
+    bool8 counterMismatch = FALSE;
     u8 saveSlot1Status;
     u8 saveSlot2Status;
 
@@ -535,18 +575,29 @@ static u8 GetSaveValidStatus(const struct SaveSectionLocation *location)
         if (gFastSaveSection->security == UNKNOWN_CHECK_VALUE)
         {
             securityPassed = TRUE;
-            checksum = CalculateChecksum(gFastSaveSection->data, location[gFastSaveSection->id].size);
-            if (gFastSaveSection->checksum == checksum)
+            if (gFastSaveSection->id < SECTOR_SAVE_SLOT_LENGTH)
             {
-                saveSlot1Counter = gFastSaveSection->counter;
-                slotCheckField |= 1 << gFastSaveSection->id;
+                checksum = CalculateChecksum(gFastSaveSection->data, location[gFastSaveSection->id].size);
+                if (gFastSaveSection->checksum == checksum)
+                {
+                    if (!counterSet)
+                    {
+                        saveSlot1Counter = gFastSaveSection->counter;
+                        counterSet = TRUE;
+                    }
+                    else if (saveSlot1Counter != gFastSaveSection->counter)
+                    {
+                        counterMismatch = TRUE;
+                    }
+                    slotCheckField |= 1 << gFastSaveSection->id;
+                }
             }
         }
     }
 
     if (securityPassed)
     {
-        if (slotCheckField == 0x3FFF)
+        if (slotCheckField == 0x3FFF && !counterMismatch)
             saveSlot1Status = SAVE_STATUS_OK;
         else
             saveSlot1Status = SAVE_STATUS_ERROR;
@@ -558,6 +609,8 @@ static u8 GetSaveValidStatus(const struct SaveSectionLocation *location)
 
     slotCheckField = 0;
     securityPassed = FALSE;
+    counterSet = FALSE;
+    counterMismatch = FALSE;
 
     // check save slot 2.
     for (i = 0; i < SECTOR_SAVE_SLOT_LENGTH; i++)
@@ -566,18 +619,29 @@ static u8 GetSaveValidStatus(const struct SaveSectionLocation *location)
         if (gFastSaveSection->security == UNKNOWN_CHECK_VALUE)
         {
             securityPassed = TRUE;
-            checksum = CalculateChecksum(gFastSaveSection->data, location[gFastSaveSection->id].size);
-            if (gFastSaveSection->checksum == checksum)
+            if (gFastSaveSection->id < SECTOR_SAVE_SLOT_LENGTH)
             {
-                saveSlot2Counter = gFastSaveSection->counter;
-                slotCheckField |= 1 << gFastSaveSection->id;
+                checksum = CalculateChecksum(gFastSaveSection->data, location[gFastSaveSection->id].size);
+                if (gFastSaveSection->checksum == checksum)
+                {
+                    if (!counterSet)
+                    {
+                        saveSlot2Counter = gFastSaveSection->counter;
+                        counterSet = TRUE;
+                    }
+                    else if (saveSlot2Counter != gFastSaveSection->counter)
+                    {
+                        counterMismatch = TRUE;
+                    }
+                    slotCheckField |= 1 << gFastSaveSection->id;
+                }
             }
         }
     }
 
     if (securityPassed)
     {
-        if (slotCheckField == 0x3FFF)
+        if (slotCheckField == 0x3FFF && !counterMismatch)
             saveSlot2Status = SAVE_STATUS_OK;
         else
             saveSlot2Status = SAVE_STATUS_ERROR;
@@ -860,10 +924,11 @@ u8 Save_LoadGameData(u8 saveType)
     default:
         status = sub_8152DD0(0xFFFF, gRamSaveSectionLocations);
         LoadSerializedGame();
-        if (status == SAVE_STATUS_OK)
+        if (status == SAVE_STATUS_OK || status == SAVE_STATUS_ERROR)
         {
             // This build has one canonical ruleset. Upgrade older saves on
-            // load so they cannot retain Normal/Hard or softer level caps.
+            // load (including a recovered backup slot) so they cannot retain
+            // Normal/Hard or softer level caps.
             gSaveBlock2Ptr->gameDifficulty = DIFFICULTY_CHALLENGE;
             gSaveBlock2Ptr->levelCaps = LEVEL_CAPS_STRICT;
             gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SET;

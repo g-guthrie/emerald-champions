@@ -301,12 +301,12 @@ Route117_Text_SeeWifeIfYoudLikeMeToRaiseMon: @ 8291FCF
 	.string "I'm the Day-Care Man.\p"
 	.string "I help take care of the precious\n"
 	.string "Pokémon of Trainers.\p"
-	.string "If you'd like me to raise your Pokémon,\n"
+	.string "If you'd like us to care for one,\n"
 	.string "have a word with my wife.$"
 
 Route117_Text_DoYouWantEgg: @ 829205D
 	.string "Ah, it's you!\p"
-	.string "We were raising your Pokémon,\n"
+	.string "We were caring for your Pokémon,\n"
 	.string "and my goodness, were we surprised!\p"
 	.string "Your Pokémon had an Egg!\p"
 	.string "We don't know how it got there,\n"
@@ -354,21 +354,23 @@ Route117_Text_IWillKeepDoYouWantIt: @ 82922C6
 
 Route117_PokemonDayCare_Text_WouldYouLikeUsToRaiseAMon: @ 82922F4
 	.string "I'm the Day-Care Lady.\p"
-	.string "We can raise Pokémon for you.\p"
-	.string "Would you like us to raise one?$"
+	.string "We can care for Pokémon and help\n"
+	.string "compatible pairs produce Eggs.\p"
+	.string "Pokémon don't gain levels here.\p"
+	.string "Would you like us to care for one?$"
 
 Route117_PokemonDayCare_Text_WhichMonShouldWeRaise: @ 8292349
-	.string "Which Pokémon should we raise for\n"
+	.string "Which Pokémon should we care for\n"
 	.string "you?$"
 
 Route117_PokemonDayCare_Text_WellRaiseYourMon: @ 8292370
-	.string "Fine, we'll raise your {STR_VAR_1}\n"
+	.string "Fine, we'll look after {STR_VAR_1}\n"
 	.string "for a while.\p"
 	.string "Come back for it later.$"
 
 Route117_PokemonDayCare_Text_WeCanRaiseOneMore: @ 82923AF
-	.string "We can raise two of your Pokémon.\n"
-	.string "Would you like us to raise one more?$"
+	.string "We can care for two Pokémon.\n"
+	.string "Would you like to leave one more?$"
 
 Route117_PokemonDayCare_Text_HusbandWasLookingForYou: @ 82923F6
 	.string "My husband was looking for you.$"
@@ -390,11 +392,11 @@ Route117_PokemonDayCare_Text_ComeAgain: @ 8292476
 
 Route117_PokemonDayCare_Text_GoodToSeeYou: @ 8292488
 	.string "Ah, it's you! Good to see you.\n"
-	.string "Your Pokémon can only be doing good!$"
+	.string "Your Pokémon is doing well!$"
 
 Route117_PokemonDayCare_Text_YourMonHasGrownXLevels: @ 82924CC
-	.string "By level, your {STR_VAR_1} has\n"
-	.string "grown by {STR_VAR_2}.$"
+	.string "Your {STR_VAR_1} has been safe and\n"
+	.string "comfortable here.$"
 
 Route117_PokemonDayCare_Text_YourTeamIsFull: @ 82924EF
 	.string "Your Pokémon team is full.\n"
@@ -405,8 +407,8 @@ Route117_PokemonDayCare_Text_TakeBackWhichMon: @ 8292527
 	.string "Which Pokémon will you take back?$"
 
 Route117_PokemonDayCare_Text_ItWillCostX: @ 8292549
-	.string "If you want your {STR_VAR_1} back,\n"
-	.string "it will cost ¥{STR_VAR_2}.$"
+	.string "Our fixed care fee for {STR_VAR_1}\n"
+	.string "is ¥{STR_VAR_2}. Would you like it back?$"
 
 Route117_PokemonDayCare_Text_HeresYourMon: @ 8292575
 	.string "Perfect!\n"

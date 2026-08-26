@@ -71,6 +71,16 @@
 #include "constants/metatile_labels.h"
 #include "palette.h"
 
+void TryGiveVerdantMegaKit(void)
+{
+    gSpecialVar_Result = TryAddVerdantMegaKit();
+}
+
+void TryGiveVerdantStevenRewardBundle(void)
+{
+    gSpecialVar_Result = TryAddVerdantStevenRewardBundle();
+}
+
 EWRAM_DATA bool8 gBikeCyclingChallenge = FALSE;
 EWRAM_DATA u8 gBikeCollisions = 0;
 static EWRAM_DATA u32 sBikeCyclingTimer = 0;
@@ -2173,7 +2183,10 @@ void ShowFrontierManiacMessage(void)
         [FRONTIER_MANIAC_BATTLE_FACTORY]       = { 7, 21 },
         [FRONTIER_MANIAC_BATTLE_PALACE]        = { 7, 21 },
         [FRONTIER_MANIAC_BATTLE_ARENA]         = { 14, 28 },
-        [FRONTIER_MANIAC_BATTLE_PIKE]          = { 13, 112 }, //BUG: 112 (0x70) is probably a mistake; the Pike Queen is battled twice well before that
+        // The maniac is only reachable between 14-room Pike runs and the
+        // comparison below is strict. These reveal Lucy's teams at 14 and
+        // 126 rooms, one complete run before her 28- and 140-room battles.
+        [FRONTIER_MANIAC_BATTLE_PIKE]          = { 13, 112 },
         [FRONTIER_MANIAC_BATTLE_PYRAMID]       = { 7, 56 }
     };
 
@@ -2536,7 +2549,7 @@ void ShowScrollableMultichoice(void)
             break;
         case SCROLL_MULTI_POKE_CENTER_TUTOR:
             task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
-            task->tNumItems = 7;
+            task->tNumItems = 6;
             task->tLeft = 20;
             task->tTop = 1;
             task->tWidth = 14;
@@ -2957,7 +2970,6 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
     {
         gText_RememberAMove,
         gText_ForgetAMove,
-        gText_LearnANewMove,
         gText_RateANickname,
         gText_MysteryGift,
         gText_ResetEvents,
@@ -3532,7 +3544,7 @@ static void HideFrontierExchangeCornerItemIcon(u16 menu, u16 unused)
             case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2:
             case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR:
             case SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR:
-                DestroySpriteAndFreeResources(&gSprites[sScrollableMultichoice_ItemSpriteId]);
+                FieldEffectFreeGraphicsResources(&gSprites[sScrollableMultichoice_ItemSpriteId]);
                 break;
         }
         sScrollableMultichoice_ItemSpriteId = MAX_SPRITES;
@@ -3692,32 +3704,38 @@ static const u16 sPokemonCenter_TutorMoves7[] =
 	MOVE_QUIVER_DANCE
 };
 
+static bool8 TryGetTutorMoveByMenu(u16 menu, u16 moveIndex, u16 *move)
+{
+#define TRY_TUTOR_LIST(menuId, list)             \
+    case menuId:                                 \
+        if (moveIndex >= ARRAY_COUNT(list))      \
+            return FALSE;                        \
+        *move = list[moveIndex];                 \
+        return TRUE
+
+    switch (menu)
+    {
+    TRY_TUTOR_LIST(SCROLL_MULTI_PC_TUTOR_SET_1, sPokemonCenter_TutorMoves1);
+    TRY_TUTOR_LIST(SCROLL_MULTI_PC_TUTOR_SET_2, sPokemonCenter_TutorMoves2);
+    TRY_TUTOR_LIST(SCROLL_MULTI_PC_TUTOR_SET_3, sPokemonCenter_TutorMoves3);
+    TRY_TUTOR_LIST(SCROLL_MULTI_PC_TUTOR_SET_4, sPokemonCenter_TutorMoves4);
+    TRY_TUTOR_LIST(SCROLL_MULTI_PC_TUTOR_SET_5, sPokemonCenter_TutorMoves5);
+    TRY_TUTOR_LIST(SCROLL_MULTI_PC_TUTOR_SET_6, sPokemonCenter_TutorMoves6);
+    TRY_TUTOR_LIST(SCROLL_MULTI_PC_TUTOR_SET_7, sPokemonCenter_TutorMoves7);
+    }
+
+    return FALSE;
+#undef TRY_TUTOR_LIST
+}
+
 void BufferBattleFrontierTutorMoveName(void)
 {
-    switch (gSpecialVar_0x8005)
-    {
-    case 0:
-        StringCopy(gStringVar1, gMoveNamesLong[sPokemonCenter_TutorMoves1[gSpecialVar_0x8004]]);
-        break;
-    case 1:
-        StringCopy(gStringVar1, gMoveNamesLong[sPokemonCenter_TutorMoves2[gSpecialVar_0x8004]]);
-        break;
-    case 2:
-        StringCopy(gStringVar1, gMoveNamesLong[sPokemonCenter_TutorMoves3[gSpecialVar_0x8004]]);
-        break;
-    case 3:
-        StringCopy(gStringVar1, gMoveNamesLong[sPokemonCenter_TutorMoves4[gSpecialVar_0x8004]]);
-        break;
-    case 4:
-        StringCopy(gStringVar1, gMoveNamesLong[sPokemonCenter_TutorMoves5[gSpecialVar_0x8004]]);
-        break;
-    case 5:
-        StringCopy(gStringVar1, gMoveNamesLong[sPokemonCenter_TutorMoves6[gSpecialVar_0x8004]]);
-        break;
-    case 6:
-        StringCopy(gStringVar1, gMoveNamesLong[sPokemonCenter_TutorMoves7[gSpecialVar_0x8004]]);
-        break;
-    }
+    u16 move;
+
+    if (TryGetTutorMoveByMenu(VarGet(VAR_TEMP_C), gSpecialVar_0x8004, &move))
+        StringCopy(gStringVar1, gMoveNamesLong[move]);
+    else
+        gStringVar1[0] = EOS;
 }
 
 static void ShowBattleFrontierTutorWindow(u8 menu, u16 selection)
@@ -3906,32 +3924,32 @@ static void ShowBattleFrontierTutorMoveDescription(u8 menu, u16 selection)
         gText_Exit,
 	};
 
-    if  ((menu >= SCROLL_MULTI_PC_TUTOR_SET_1) && (menu <= SCROLL_MULTI_PC_TUTOR_SET_7))
+    if ((menu >= SCROLL_MULTI_PC_TUTOR_SET_1) && (menu <= SCROLL_MULTI_PC_TUTOR_SET_7))
     {
-        FillWindowPixelRect(sTutorMoveAndElevatorWindowId, PIXEL_FILL(1), 0, 0, 120, 48);                                                            
+        FillWindowPixelRect(sTutorMoveAndElevatorWindowId, PIXEL_FILL(1), 0, 0, 96, 48);
         switch (menu)
         {
-            case SCROLL_MULTI_PC_TUTOR_SET_1:
-                AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, sPokemonCenter_TutorMoveDescriptions1[selection], 0, 1, 0, NULL);
-                break;
-            case SCROLL_MULTI_PC_TUTOR_SET_2:
-                AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, sPokemonCenter_TutorMoveDescriptions2[selection], 0, 1, 0, NULL);
-                break;
-            case SCROLL_MULTI_PC_TUTOR_SET_3:
-                AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, sPokemonCenter_TutorMoveDescriptions3[selection], 0, 1, 0, NULL);
-                break;
-            case SCROLL_MULTI_PC_TUTOR_SET_4:
-                AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, sPokemonCenter_TutorMoveDescriptions4[selection], 0, 1, 0, NULL);
-                break;
-            case SCROLL_MULTI_PC_TUTOR_SET_5:
-                AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, sPokemonCenter_TutorMoveDescriptions5[selection], 0, 1, 0, NULL);
-                break;
-            case SCROLL_MULTI_PC_TUTOR_SET_6:
-                AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, sPokemonCenter_TutorMoveDescriptions6[selection], 0, 1, 0, NULL);
-                break;
-            case SCROLL_MULTI_PC_TUTOR_SET_7:
-                AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, sPokemonCenter_TutorMoveDescriptions7[selection], 0, 1, 0, NULL);
-                break;        
+        case SCROLL_MULTI_PC_TUTOR_SET_1:
+            AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, sPokemonCenter_TutorMoveDescriptions1[selection], 0, 1, 0, NULL);
+            break;
+        case SCROLL_MULTI_PC_TUTOR_SET_2:
+            AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, sPokemonCenter_TutorMoveDescriptions2[selection], 0, 1, 0, NULL);
+            break;
+        case SCROLL_MULTI_PC_TUTOR_SET_3:
+            AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, sPokemonCenter_TutorMoveDescriptions3[selection], 0, 1, 0, NULL);
+            break;
+        case SCROLL_MULTI_PC_TUTOR_SET_4:
+            AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, sPokemonCenter_TutorMoveDescriptions4[selection], 0, 1, 0, NULL);
+            break;
+        case SCROLL_MULTI_PC_TUTOR_SET_5:
+            AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, sPokemonCenter_TutorMoveDescriptions5[selection], 0, 1, 0, NULL);
+            break;
+        case SCROLL_MULTI_PC_TUTOR_SET_6:
+            AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, sPokemonCenter_TutorMoveDescriptions6[selection], 0, 1, 0, NULL);
+            break;
+        case SCROLL_MULTI_PC_TUTOR_SET_7:
+            AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, sPokemonCenter_TutorMoveDescriptions7[selection], 0, 1, 0, NULL);
+            break;
         }
     }
 }
@@ -3968,99 +3986,20 @@ void sub_813ADD4(void)
 void GetBattleFrontierTutorMoveIndex(void)
 {
     u8 i;
-    u16 moveTutor = 0;
-    u16 moveIndex = 0;
+    u16 move;
+
     gSpecialVar_0x8005 = 0;
 
-    moveTutor = VarGet(VAR_TEMP_E);
-    moveIndex = VarGet(VAR_TEMP_D);
+    if (!TryGetTutorMoveByMenu(VarGet(VAR_TEMP_C), VarGet(VAR_TEMP_D), &move))
+        return;
 
-    switch (moveTutor)
+    for (i = 0; i < TUTOR_MOVE_COUNT; i++)
     {
-        case 0:
-            i = 0;
-            do
-            {
-                if (gTutorMoves[i] == sPokemonCenter_TutorMoves1[moveIndex])
-                {
-                    gSpecialVar_0x8005 = i;
-                    break;
-                }
-                i++;
-            } while (i < TUTOR_MOVE_COUNT);
-            break;
-        case 1:
-            i = 0;
-            do
-            {
-                if (gTutorMoves[i] == sPokemonCenter_TutorMoves2[moveIndex])
-                {
-                    gSpecialVar_0x8005 = i;
-                    break;
-                }
-                i++;
-            } while (i < TUTOR_MOVE_COUNT);
-            break;
-        case 2:
-            i = 0;
-            do
-            {
-                if (gTutorMoves[i] == sPokemonCenter_TutorMoves3[moveIndex])
-                {
-                    gSpecialVar_0x8005 = i;
-                    break;
-                }
-                i++;
-            } while (i < TUTOR_MOVE_COUNT);
-            break;
-        case 3:
-            i = 0;
-            do
-            {
-                if (gTutorMoves[i] == sPokemonCenter_TutorMoves4[moveIndex])
-                {
-                    gSpecialVar_0x8005 = i;
-                    break;
-                }
-                i++;
-            } while (i < TUTOR_MOVE_COUNT);
-            break;
-        case 4:
-            i = 0;
-            do
-            {
-                if (gTutorMoves[i] == sPokemonCenter_TutorMoves5[moveIndex])
-                {
-                    gSpecialVar_0x8005 = i;
-                    break;
-                }
-                i++;
-            } while (i < TUTOR_MOVE_COUNT);
-            break;
-        case 5:
-            i = 0;
-            do
-            {
-                if (gTutorMoves[i] == sPokemonCenter_TutorMoves6[moveIndex])
-                {
-                    gSpecialVar_0x8005 = i;
-                    break;
-                }
-                i++;
-            } while (i < TUTOR_MOVE_COUNT);
-            break;
-        case 6:
-            i = 0;
-            do
-            {
-                if (gTutorMoves[i] == sPokemonCenter_TutorMoves7[moveIndex])
-                {
-                    gSpecialVar_0x8005 = i;
-                    break;
-                }
-                i++;
-            } while (i < TUTOR_MOVE_COUNT);
-            break;
+        if (gTutorMoves[i] == move)
+        {
+            gSpecialVar_0x8005 = i;
+            return;
+        }
     }
 }
 

@@ -6,13 +6,12 @@ PKMN_Center_Move_Tutor::
 	special ShowScrollableMultichoice
 	waitstate
 	switch VAR_RESULT
-	case 0, PKMN_Center_MoveReminder_EventScript
+	case 0, PKMN_Center_Move_Tutor_MoveTutorIntro
 	case 1, PKMN_Center_MoveDeleter_EventScript
-	case 2, PKMN_Center_Move_Tutor_MoveTutorIntro
-	case 3, PKMN_Center_NameRater_EventScript
-	case 4, PKMN_Center_EventScript_Mystery_Gift
-	case 5, PKMN_Center_EventScript_Event_Reset
-	case 6, PKMN_Center_Move_Tutor_General_Exit
+	case 2, PKMN_Center_NameRater_EventScript
+	case 3, PKMN_Center_EventScript_Mystery_Gift
+	case 4, PKMN_Center_EventScript_Event_Reset
+	case 5, PKMN_Center_Move_Tutor_General_Exit
 	case MULTI_B_PRESSED, PKMN_Center_Move_Tutor_General_Exit
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Move Reminder @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -21,7 +20,7 @@ PKMN_Center_MoveReminder_EventScript::
 	msgbox PKMN_Center_MoveReminder_Text_WantMeToTeachMove, MSGBOX_YESNO
 	switch VAR_RESULT
 	case NO, PKMN_Center_Move_Tutor_General_Exit
-	goto PKMN_Center_MoveReminder_EventScriptChooseMon
+	goto PKMN_Center_Move_Tutor_MoveTutorIntro
 	end
 
 PKMN_Center_MoveReminder_EventScriptChooseMon::
@@ -438,20 +437,16 @@ PKMN_Center_Mystery_Gift_EventScript_ReceivedGiftFanfare::
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Strings @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 PKMN_Center_EventReset_Text_Reset:
-	.string "Events reset!$"
+	.string "Events restored!$"
 
 PKMN_Center_EventReset_Text_AlreadyReset:
-	.string "You've already reset events.$"
+	.string "You've already restored these events.$"
 
 PKMN_Center_EventResetText_WhatsBrokenThisTime:
-	.string "If you've updated from an earlier\n"
-	.string "version of Inclement Emerald, you may\l"
-	.string "have encountered some buggy events.\p"
-	.string "If needed, I can reset these events\n"
-	.string "so they can be played again.\p"
-	.string "Each event can only be reset\n"
-	.string "once per save.\p"
-	.string "Would you like to reset these events?$"
+	.string "I can restore a few special events\n"
+	.string "that may have ended too soon.\p"
+	.string "Each group can only be restored once.\p"
+	.string "Would you like me to restore them?$"
 
 PKMN_Center_EventResetText_AlreadyReset:
 
@@ -498,27 +493,26 @@ PKMN_Center_Move_Tutor_Text_SeeYou:
 	.string "See you later, then!$"
 
 PKMN_Center_MoveReminder_Text_WantMeToTeachMove:
-	.string "Would you like a Pokémon to remember\n"
-	.string "a move it has forgotten?$"
+	.string "Would you like me to teach one of your\n"
+	.string "Pokémon a legal move?$"
 
 PKMN_Center_MoveReminder_Text_TutorWhichMon:
-	.string "Which Pokémon should remember a move?$"
+	.string "Which Pokémon should I teach?$"
 
 PKMN_Center_MoveReminder_Text_TeachWhichMove:
-	.string "Which move would you like it to\n"
-	.string "remember?$"
+	.string "Which move should it learn?$"
 
 PKMN_Center_MoveReminder_Text_DontHaveMoveToTeachPokemon:
-	.string "I'm sorry, that Pokémon doesn't have\n"
-	.string "any moves it can remember.$"
+	.string "I'm sorry, that Pokémon has no other\n"
+	.string "legal moves to learn.$"
 
 PKMN_Center_MoveReminder_Text_CantTeachEgg:
-	.string "I'm sorry, an Egg can't remember any\n"
+	.string "I'm sorry, an Egg can't be taught\n"
 	.string "moves.$"
 
 PKMN_Center_MoveReminder_Text_RememberAnotherMove:
-	.string "Would you like a Pokémon to remember\n"
-	.string "another move?$"
+	.string "Would you like me to teach another\n"
+	.string "move?$"
 
 PKMN_Center_MoveDeleter_Text_ICanMakeMonForgetMove:
 	.string "Would you like one of your Pokémon\n"

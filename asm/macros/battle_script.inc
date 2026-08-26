@@ -897,8 +897,9 @@
 	.4byte \param0
 	.endm
 
-	.macro setdestinybond
+	.macro trysetdestinybond failInstr:req
 	.byte 0xaa
+	.4byte \failInstr
 	.endm
 
 	.macro trysetdestinybondtohappen
@@ -1749,6 +1750,10 @@
 	.4byte \ptr
 	.endm
 
+	.macro allyswitchswapbattlers
+	various BS_ATTACKER, VARIOUS_ALLY_SWITCH_SWAP
+	.endm
+
 	.macro jumpifnoholdeffect battler:req, holdEffet:req, ptr:req
 	various \battler, VARIOUS_JUMP_IF_NO_HOLD_EFFECT
 	.byte \holdEffet
@@ -1847,6 +1852,10 @@
 	various BS_TARGET, VARIOUS_SET_ATTACKER_STICKY_WEB_USER
 	.endm
 
+	.macro clearstickywebstatdrop
+	various BS_TARGET, VARIOUS_CLEAR_STICKY_WEB_STAT_DROP
+	.endm
+
 	.macro getrototillertargets ptr:req
 	various BS_ATTACKER, VARIOUS_GET_ROTOTILLER_TARGETS
 	.4byte \ptr
@@ -1940,6 +1949,52 @@
 
 	.macro jumpifshelltrap battler:req, ptr:req
 	various \battler, VARIOUS_JUMP_IF_SHELL_TRAP
+	.4byte \ptr
+	.endm
+
+	.macro jumpifcantfling battler:req, ptr:req
+	various \battler, VARIOUS_JUMP_IF_CANT_FLING
+	.4byte \ptr
+	.endm
+
+	.macro removeflingitem battler:req, clearSaved=FALSE
+	various \battler, VARIOUS_REMOVE_FLING_ITEM
+	.byte \clearSaved
+	.endm
+
+	.macro tryflingholdeffect
+	various BS_TARGET, VARIOUS_TRY_FLING_HOLD_EFFECT
+	.endm
+
+	@ Used by Bestow, Fling, and Bug Bite/Pluck, whose original holder loses
+	@ its item outside the normal removeitem command.
+	.macro trysymbiosis battler:req
+	various \battler, VARIOUS_TRY_SYMBIOSIS
+	.endm
+
+	@ Jump when the target is light enough for Sky Drop (< 200 kg).
+	.macro jumpifskydroptargetlight battler:req, ptr:req
+	various \battler, VARIOUS_JUMP_IF_SKY_DROP_TARGET_LIGHT
+	.4byte \ptr
+	.endm
+
+	.macro setskydrop
+	various BS_ATTACKER, VARIOUS_SET_SKY_DROP
+	.endm
+
+	@ Restore the originally lifted target or jump if that exact party member
+	@ is no longer in the recorded battler slot.
+	.macro clearskydrop ptr:req
+	various BS_ATTACKER, VARIOUS_CLEAR_SKY_DROP
+	.4byte \ptr
+	.endm
+
+	.macro setbeakblast battler:req
+	various \battler, VARIOUS_SET_BEAK_BLAST
+	.endm
+
+	.macro jumpifcantcorrode battler:req, ptr:req
+	various \battler, VARIOUS_JUMP_IF_CANT_CORRODE
 	.4byte \ptr
 	.endm
 

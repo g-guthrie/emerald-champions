@@ -451,7 +451,7 @@ Route109_EventScript_RickyRematch:: @ 81EEAE4
 	end
 
 Route109_EventScript_Lola:: @ 81EEAFB
-	trainerbattle_single TRAINER_LOLA_1, Route109_Text_LolaIntro, Route109_Text_LolaDefeated, Route109_EventScript_LolaRegisterMatchCallAfterBattle
+	trainerbattle_double TRAINER_LOLA_1, Route109_Text_LolaIntro, Route109_Text_LolaDefeated, Route109_Text_LolaNotEnoughPokemon, Route109_EventScript_LolaRegisterMatchCallAfterBattle
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route109_EventScript_LolaRematch
@@ -503,7 +503,7 @@ Route109_EventScript_Chandler:: @ 81EEBD8
 	end
 
 Route109_EventScript_Hailey:: @ 81EEBEF
-	trainerbattle_single TRAINER_HAILEY, Route109_Text_HaileyIntro, Route109_Text_HaileyDefeated
+	trainerbattle_double TRAINER_HAILEY, Route109_Text_HaileyIntro, Route109_Text_HaileyDefeated, Route109_Text_HaileyNotEnoughPokemon
 	msgbox Route109_Text_HaileyPostBattle, MSGBOX_AUTOCLOSE
 	end
 

@@ -23,7 +23,7 @@ STRICT_CAPS = [14, 20, 30, 40, 45, 55, 60, 70, 80, 100]
 
 MAP_ORDER = [
     "Route103", "Route102", "PetalburgCity", "Route104", "PetalburgWoods", "RustboroCity_Gym",
-    "Route116", "RusturfTunnel", "RustboroCity", "Route105", "Route106", "DewfordTown_Gym", "GraniteCave",
+    "Route116", "RusturfTunnel", "RustboroCity", "Route105", "Route106", "GraniteCave", "DewfordTown_Gym",
     "Route109", "SlateportCity", "Route110", "MauvilleCity", "MauvilleCity_Gym",
     "Route111", "Route112", "FieryPath", "Route113", "FallarborTown", "Route114", "MeteorFalls",
     "MtChimney", "JaggedPass", "LavaridgeTown", "LavaridgeTown_Gym",
@@ -439,6 +439,7 @@ def build_guide() -> dict:
             "manualQuality": design["manual_quality"] if design else None,
             "corpusReview": design.get("corpus_review") if design else None,
             "competitiveReferences": design["competitive_references"] if design else [],
+            "authorSelfCheck": design.get("author_self_check") if design else None,
             "closure": design["closure"] if design else "",
             "difficultyScore": combined_difficulty,
             "difficultyBand": "Allied support" if encounter_role == "ally" else difficulty_band(combined_difficulty),
@@ -538,6 +539,7 @@ def render_markdown(guide: dict) -> str:
             "",
             f"**Counterplay:** {entry['counterplay']}",
             "",
+            *( [f"**Strongest part:** {entry['authorSelfCheck']['strongest_part']}", "", f"**Weakest link:** {entry['authorSelfCheck']['weakest_link']}", ""] if entry["authorSelfCheck"] else [] ),
             *( [f"**Manual closure:** {entry['closure']}", ""] if entry["closure"] else [] ),
             "| # | Pokémon | Level | Item | Ability | Role | Moves |",
             "| ---: | --- | --- | --- | --- | --- | --- |",
@@ -570,8 +572,12 @@ def check(guide: dict) -> None:
         if entry["designStatus"] == "closed":
             if entry["manualQuality"] != 10:
                 problems.append(f"{entry['trainerId']}: closed battle quality is not 10/10")
-            if entry["difficultyScore"] < 65:
-                problems.append(f"{entry['trainerId']}: closed battle is below 6.5 difficulty")
+            if entry["difficultyScore"] < 75:
+                problems.append(f"{entry['trainerId']}: closed battle is below 7.5 difficulty")
+            if entry["encounterId"] and entry["encounterId"].startswith("BATTLE_0"):
+                number_match = re.match(r"BATTLE_(\d+)_", entry["encounterId"])
+                if number_match and int(number_match.group(1)) >= 29 and not entry["authorSelfCheck"]:
+                    problems.append(f"{entry['trainerId']}: post-28 closed battle lacks author self-check")
     if problems:
         raise SystemExit("\n".join(f"FAIL: {problem}" for problem in problems))
     print(

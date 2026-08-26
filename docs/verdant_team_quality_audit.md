@@ -4,13 +4,13 @@ This report evaluates the current source as the battle engine executes it. Score
 
 ## Roster summary
 
-- 854 trainer records and 3400 party slots
-- 574 doubles and 280 intentional singles
-- Median quality score: 61/100
+- 854 trainer records and 3407 party slots
+- 571 doubles and 283 intentional singles
+- Median quality score: 62/100
 - Blocking findings: 0
 - Major design findings: 0
 - Repeated three-plus rematch compositions: 0
-- Multi-trainer locations without a showcase opponent: 0
+- Multi-trainer locations without a showcase opponent: 1
 
 ## Finding counts
 
@@ -26,9 +26,6 @@ All blocking and major findings are clear. These are the lowest-scoring intentio
 | TRAINER_PAUL | Route 110 Trick House Puzzle 2 | single | 30 | -3.0 | singles pacing and coverage | none |
 | TRAINER_JACLYN | Route 110 | single | 30 | -2.0 | singles pacing and coverage | none |
 | TRAINER_BERNIE_2 | Route 114 | single | 32 | -3.0 | singles pacing and coverage | none |
-| TRAINER_CHANDLER | Route 109 | single | 32 | -1.5 | singles pacing and coverage | none |
-| TRAINER_HUEY | Route 109 | single | 32 | -3.0 | singles pacing and coverage | none |
-| TRAINER_CLARK | Route 116 | single | 33 | -5.0 | singles pacing and coverage | none |
 | TRAINER_IMANI | Route 105 | single | 34 | -3.0 | singles pacing and coverage | none |
 | TRAINER_RHETT | Route 103 | single | 34 | -3.0 | singles pacing and coverage | none |
 | TRAINER_CAROL | Route 112 | single | 35 | -3.0 | singles pacing and coverage | none |
@@ -40,11 +37,7 @@ All blocking and major findings are clear. These are the lowest-scoring intentio
 | TRAINER_LAWRENCE | Route 113 | single | 36 | -3.0 | Earthquake immunity | none |
 | TRAINER_DEREK | Route 117 | single | 36 | -2.0 | singles pacing and coverage | none |
 | TRAINER_HELENE | Route 115 | single | 36 | -2.0 | singles pacing and coverage | none |
-| TRAINER_EDMOND | Route 109 | single | 36 | -3.0 | singles pacing and coverage | none |
 | TRAINER_DWAYNE | Route 109 Seashore House | single | 36 | -3.0 | singles pacing and coverage | none |
-| TRAINER_RICKY_1 | Route 109 | single | 36 | +0.0 | singles pacing and coverage | none |
-| TRAINER_JERRY_1 | Route 116 | single | 36 | -3.33 | singles pacing and coverage | none |
-| TRAINER_JOHNSON | Route 116 | single | 36 | -4.0 | singles pacing and coverage | none |
 | TRAINER_ANDREW | Route 103 | single | 37 | -2.33 | Water pressure | none |
 | TRAINER_ANTHONY | Route 110 | single | 37 | -2.0 | singles pacing and coverage | none |
 | TRAINER_MELISSA | Mt Chimney | single | 37 | -3.0 | singles pacing and coverage | none |
@@ -53,7 +46,6 @@ All blocking and major findings are clear. These are the lowest-scoring intentio
 | TRAINER_TAMMY | Route 121 | single | 37 | -2.0 | singles pacing and coverage | none |
 | TRAINER_BERNIE_4 | Route 114 | single | 37 | -3.0 | singles pacing and coverage | none |
 | TRAINER_DAYTON | Route 119 | single | 37 | -2.0 | singles pacing and coverage | none |
-| TRAINER_CRISTIAN | Dewford Town Gym | single | 37 | +0.0 | singles pacing and coverage | none |
 | TRAINER_LUNG | Route 113 | single | 37 | -3.0 | singles pacing and coverage | none |
 | TRAINER_ISABELLA | Route 124 | single | 37 | -2.0 | singles pacing and coverage | none |
 | TRAINER_JOSUE | Route 105 | single | 37 | -2.0 | singles pacing and coverage | none |
@@ -69,7 +61,6 @@ All blocking and major findings are clear. These are the lowest-scoring intentio
 | TRAINER_JEROME | Route 108 | single | 38 | -2.0 | singles pacing and coverage | none |
 | TRAINER_ISAIAH_1 | Route 128 | single | 38 | -2.0 | singles pacing and coverage | none |
 | TRAINER_MELINA | Route 117 | single | 38 | -2.0 | singles pacing and coverage | none |
-| TRAINER_KAREN_1 | Route 116 | single | 38 | -5.0 | singles pacing and coverage | none |
 | TRAINER_KINDRA | Route 123 | single | 39 | -2.0 | singles pacing and coverage | none |
 | TRAINER_JOSHUA | Route 110 Trick House Puzzle 7 | single | 39 | -3.0 | singles pacing and coverage | none |
 | TRAINER_SHANE | Route 114 | single | 39 | -3.0 | singles pacing and coverage | none |
@@ -100,7 +91,6 @@ All blocking and major findings are clear. These are the lowest-scoring intentio
 | TRAINER_CALE | Route 121 | single | 40 | -3.0 | Bug pressure | none |
 | TRAINER_KAI | Route 114 | single | 40 | -1.0 | singles pacing and coverage | none |
 | TRAINER_ROLAND | Route 124 | single | 40 | -2.0 | singles pacing and coverage | none |
-| TRAINER_DAWSON | Route 116 | single | 40 | -4.0 | singles pacing and coverage | none |
 | TRAINER_CHARLOTTE | Route 114 | single | 40 | -1.0 | singles pacing and coverage | none |
 | TRAINER_FOSTER | Route 105 | single | 41 | -2.0 | singles pacing and coverage | none |
 | TRAINER_PATRICIA | Route 110 Trick House Puzzle 7 | single | 41 | -3.0 | singles pacing and coverage | none |
@@ -116,13 +106,23 @@ All blocking and major findings are clear. These are the lowest-scoring intentio
 | TRAINER_CEDRIC | Mt Pyre 6 F | single | 41 | -3.0 | Psychic pressure | none |
 | TRAINER_BRYANT | Route 112 | single | 41 | -2.0 | singles pacing and coverage | none |
 | TRAINER_DEMETRIUS | Abandoned Ship Rooms 1 F | single | 41 | -2.0 | singles pacing and coverage | none |
-| TRAINER_ELLIOT_1 | Route 106 | single | 41 | -3.67 | Water pressure | none |
 | TRAINER_BENJAMIN_1 | Route 110 | single | 42 | -2.0 | Electric pressure | none |
 | TRAINER_SAWYER_2 | Mt Chimney | single | 42 | -2.0 | singles pacing and coverage | none |
 | TRAINER_GRUNT_AQUA_HIDEOUT_4 | Aqua Hideout B 2 F | double | 42 | -2.0 | singles pacing and coverage | none |
 | TRAINER_SPENCER | Route 124 | single | 42 | -2.0 | Tailwind | none |
 | TRAINER_FERNANDO_1 | Route 123 | single | 42 | -2.0 | singles pacing and coverage | none |
 | TRAINER_ISAIAH_2 | Route 128 | single | 42 | -2.0 | singles pacing and coverage | none |
+| TRAINER_BRANDI | Route 117 | single | 42 | -2.0 | Fake Out tempo, screens setup | none |
+| TRAINER_STEVE_2 | Route 114 | single | 42 | -3.0 | singles pacing and coverage | none |
+| TRAINER_CALLIE | Route 120 | single | 42 | -2.0 | Fighting pressure | none |
+| TRAINER_DREW | Route 111 | single | 42 | -3.0 | singles pacing and coverage | none |
+| TRAINER_EDWARD | Route 110 | single | 42 | +1.0 | singles pacing and coverage | none |
+| TRAINER_JERRY_2 | Route 116 | single | 42 | -2.0 | singles pacing and coverage | none |
+| TRAINER_GRUNT_MUSEUM_2 | Slateport City Oceanic Museum 2 F | double | 42 | -3.0 | singles pacing and coverage | none |
+| TRAINER_THALIA_1 | Abandoned Ship Rooms 1 F | single | 42 | -2.0 | singles pacing and coverage | none |
+| TRAINER_DILLON | Route 113 | double | 42 | -3.0 | singles pacing and coverage | none |
+| TRAINER_REYNA | Route 134 | double | 42 | -3.0 | singles pacing and coverage | none |
+| TRAINER_DALTON_4 | Route 118 | single | 43 | -2.0 | singles pacing and coverage | none |
 
 ## Repeated rematch rosters
 
@@ -130,4 +130,4 @@ All blocking and major findings are clear. These are the lowest-scoring intentio
 
 ## Locations needing a showcase
 
-- None.
+- Route 104 | Rustboro City: 6 trainer records, no legendary/Mega/570+ BST centerpiece

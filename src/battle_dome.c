@@ -32,7 +32,9 @@
 #include "script_pokemon_util.h"
 #include "graphics.h"
 #include "constants/battle_dome.h"
+#include "constants/battle_move_effects.h"
 #include "constants/frontier_util.h"
+#include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/pokemon.h"
 #include "constants/trainers.h"
@@ -520,13 +522,13 @@ static const u8 sBattleStyleThresholds[NUM_BATTLE_STYLES - 1][NUM_MOVE_POINT_TYP
     [DOME_BATTLE_STYLE_STRAIGHTFORWARD] = {[MOVE_POINTS_ACCURATE] = 3, [MOVE_POINTS_STRONG] = 3},
     [DOME_BATTLE_STYLE_AGGRESSIVE]      = {[MOVE_POINTS_STRONG] = 4},
     [DOME_BATTLE_STYLE_DEF]             = {[MOVE_POINTS_DEF] = 3},
-    [DOME_BATTLE_STYLE_ENFEEBLE_HIGH]   = {[MOVE_POINTS_STAT_LOWER] = 2, [MOVE_POINTS_STATUS] = 2}, // BUG: This battle style is unobtainable; DOME_BATTLE_STYLE_ENFEEBLE_LOW will always succeed before it
+    [DOME_BATTLE_STYLE_ENFEEBLE_HIGH]   = {[MOVE_POINTS_STAT_LOWER] = 2, [MOVE_POINTS_STATUS] = 2},
     [DOME_BATTLE_STYLE_POPULAR_POWER]   = {[MOVE_POINTS_POWERFUL] = 3, [MOVE_POINTS_POPULAR] = 3},
     [DOME_BATTLE_STYLE_COMBO_LOW]       = {[MOVE_POINTS_COMBO] = 2},
     [DOME_BATTLE_STYLE_ACCURATE]        = {[MOVE_POINTS_HEAL] = 1, [MOVE_POINTS_ACCURATE] = 3},
     [DOME_BATTLE_STYLE_POWERFUL]        = {[MOVE_POINTS_POWERFUL] = 4},
     [DOME_BATTLE_STYLE_ATK_OVER_DEF]    = {[MOVE_POINTS_DMG] = 7},
-    [DOME_BATTLE_STYLE_DEF_OVER_ATK]    = {[MOVE_POINTS_DEF] = 4}, // BUG: This battle style is unobtainable; DOME_BATTLE_STYLE_DEF will always succeed before it
+    [DOME_BATTLE_STYLE_DEF_OVER_ATK]    = {[MOVE_POINTS_DEF] = 4},
     [DOME_BATTLE_STYLE_POPULAR_STRONG]  = {[MOVE_POINTS_POPULAR] = 2, [MOVE_POINTS_STRONG] = 4},
     [DOME_BATTLE_STYLE_EFFECTS]         = {[MOVE_POINTS_EFFECT] = 4},
     [DOME_BATTLE_STYLE_BALANCED]        = {0}, // If no other thresholds are met, this battle style is used
@@ -534,6 +536,40 @@ static const u8 sBattleStyleThresholds[NUM_BATTLE_STYLES - 1][NUM_MOVE_POINT_TYP
     [DOME_BATTLE_STYLE_UNUSED2]         = {0},
     [DOME_BATTLE_STYLE_UNUSED3]         = {0},
   //[DOME_BATTLE_STYLE_UNUSED4]         = {0}, // Excluded here, presumably was meant to be a style just for Dome Ace Tucker
+};
+
+// Specific styles must be tested before their broader subsets. The original
+// numeric order made ENFEEBLE_HIGH and DEF_OVER_ATK impossible to display.
+static const u8 sBattleStyleEvaluationOrder[] =
+{
+    DOME_BATTLE_STYLE_RISKY,
+    DOME_BATTLE_STYLE_STALL,
+    DOME_BATTLE_STYLE_VARIED,
+    DOME_BATTLE_STYLE_COMBO_HIGH,
+    DOME_BATTLE_STYLE_RARE_MOVES,
+    DOME_BATTLE_STYLE_RARE_MOVE,
+    DOME_BATTLE_STYLE_HP,
+    DOME_BATTLE_STYLE_STORE_POWER,
+    DOME_BATTLE_STYLE_ENFEEBLE_HIGH,
+    DOME_BATTLE_STYLE_ENFEEBLE_LOW,
+    DOME_BATTLE_STYLE_LUCK,
+    DOME_BATTLE_STYLE_REGAL,
+    DOME_BATTLE_STYLE_LOW_PP,
+    DOME_BATTLE_STYLE_STATUS_ATK,
+    DOME_BATTLE_STYLE_ENDURE,
+    DOME_BATTLE_STYLE_STATUS,
+    DOME_BATTLE_STYLE_STRAIGHTFORWARD,
+    DOME_BATTLE_STYLE_AGGRESSIVE,
+    DOME_BATTLE_STYLE_DEF_OVER_ATK,
+    DOME_BATTLE_STYLE_DEF,
+    DOME_BATTLE_STYLE_POPULAR_POWER,
+    DOME_BATTLE_STYLE_COMBO_LOW,
+    DOME_BATTLE_STYLE_ACCURATE,
+    DOME_BATTLE_STYLE_POWERFUL,
+    DOME_BATTLE_STYLE_ATK_OVER_DEF,
+    DOME_BATTLE_STYLE_POPULAR_STRONG,
+    DOME_BATTLE_STYLE_EFFECTS,
+    DOME_BATTLE_STYLE_BALANCED,
 };
 static const u8 sUnusedArray[] =
 {
@@ -1244,7 +1280,7 @@ static const u8 *const sBattleDomeOpponentStyleTexts[NUM_BATTLE_STYLES] =
     [DOME_BATTLE_STYLE_RARE_MOVES]      = BattleDome_Text_StyleUsesVeryRareMove,   // Seems like the text for these two was swapped
     [DOME_BATTLE_STYLE_RARE_MOVE]       = BattleDome_Text_StyleUsesStartlingMoves, //
     [DOME_BATTLE_STYLE_HP]              = BattleDome_Text_StyleConstantlyWatchesHP,
-    [DOME_BATTLE_STYLE_STORE_POWER]     = BattleDome_Text_StyleStoresAndLoosesPower,
+    [DOME_BATTLE_STYLE_STORE_POWER]     = BattleDome_Text_StyleStoresAndReleasesPower,
     [DOME_BATTLE_STYLE_ENFEEBLE_LOW]    = BattleDome_Text_StyleEnfeeblesFoes,
     [DOME_BATTLE_STYLE_LUCK]            = BattleDome_Text_StylePrefersLuckTactics,
     [DOME_BATTLE_STYLE_REGAL]           = BattleDome_Text_StyleRegalAtmosphere,
@@ -2245,16 +2281,13 @@ static void InitDomeTrainers(void)
     int monTypesBits, monTypesCount;
     int trainerId;
     int monId;
-    u16 *rankingScores;
-    int *statValues;
+    u16 rankingScores[DOME_TOURNAMENT_TRAINERS_COUNT] = {0};
+    int statValues[NUM_STATS] = {0};
     u8 ivs = 0;
 
     species[0] = 0;
     species[1] = 0;
     species[2] = 0;
-    rankingScores = AllocZeroed(sizeof(u16) * DOME_TOURNAMENT_TRAINERS_COUNT);
-    statValues = AllocZeroed(sizeof(int) * NUM_STATS);
-
     gSaveBlock2Ptr->frontier.domeLvlMode = gSaveBlock2Ptr->frontier.lvlMode + 1;
     gSaveBlock2Ptr->frontier.domeBattleMode = VarGet(VAR_FRONTIER_BATTLE_MODE) + 1;
     DOME_TRAINERS[0].trainerId = TRAINER_PLAYER;
@@ -2442,15 +2475,13 @@ static void InitDomeTrainers(void)
             DOME_MONS[j][i] = GetFrontierBrainMonSpecies(i);
     }
 
-    Free(rankingScores);
-    Free(statValues);
 }
 
 #define CALC_STAT(base, statIndex)                                                          \
 {                                                                                           \
     u8 baseStat = gBaseStats[species].base;                                                 \
     stats[statIndex] = (((2 * baseStat + ivs + evs[statIndex] / 4) * level) / 100) + 5;     \
-    stats[statIndex] = (u8) ModifyStatByNature(nature, stats[statIndex], statIndex);        \
+    stats[statIndex] = ModifyStatByNature(nature, stats[statIndex], statIndex);             \
 }
 
 static void CalcDomeMonStats(u16 species, int level, int ivs, u8 evBits, u8 nature, int *stats)
@@ -2467,7 +2498,8 @@ static void CalcDomeMonStats(u16 species, int level, int ivs, u8 evBits, u8 natu
             count++;
     }
 
-    resultingEvs = MAX_TOTAL_EVS / count;
+    resultingEvs = count == 0 ? 0 : MAX_TOTAL_EVS / count;
+    bits = 1;
     for (i = 0; i < NUM_STATS; bits <<= 1, i++)
     {
         evs[i] = 0;
@@ -2553,6 +2585,7 @@ static void CreateDomeOpponentMon(u8 monPartyId, u16 tournamentTrainerId, u8 tou
     SetMonData(&gEnemyParty[monPartyId], MON_DATA_FRIENDSHIP, &friendship);
     SetMonData(&gEnemyParty[monPartyId], MON_DATA_HELD_ITEM,
                &gBattleFrontierHeldItems[gFacilityTrainerMons[DOME_MONS[tournamentTrainerId][tournamentMonId]].itemTableId]);
+    TryUpdateMonFormForHeldItem(&gEnemyParty[monPartyId]);
 }
 
 static void CreateDomeOpponentMons(u16 tournamentTrainerId)
@@ -2753,8 +2786,7 @@ static int GetTypeEffectivenessPoints(int move, int targetSpecies, int arg2)
 
     if (defAbility == ABILITY_LEVITATE && moveType == TYPE_GROUND)
     {
-        if (arg2 == 1)
-            typePower = 8;
+        typePower = TYPE_x0;
     }
     else
     {
@@ -2765,9 +2797,12 @@ static int GetTypeEffectivenessPoints(int move, int targetSpecies, int arg2)
         if (defType2 != defType1)
             typePower = (typeEffectiveness2 * typePower) / 10;
 
-        if (defAbility == ABILITY_WONDER_GUARD && typeEffectiveness1 != 20 && typeEffectiveness2 != 20)
-            typePower = 0;
     }
+
+    // Wonder Guard checks the combined matchup. A neutral result produced by
+    // one weakness and one resistance is still blocked.
+    if (defAbility == ABILITY_WONDER_GUARD && typePower <= TYPE_x1)
+        typePower = TYPE_x0;
 
     switch (arg2)
     {
@@ -2875,12 +2910,17 @@ static int TournamentIdOfOpponent(int roundId, int trainerId)
 {
     int i, j, opponentMax;
 
+    if (roundId < DOME_ROUND1 || roundId > DOME_FINAL)
+        return 0xFF;
+
     // Get trainer's tournament id
     for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
     {
         if (DOME_TRAINERS[i].trainerId == trainerId)
             break;
     }
+    if (i == DOME_TOURNAMENT_TRAINERS_COUNT)
+        return 0xFF;
 
     // Get trainer's opponent's tournament id
     if (roundId != DOME_ROUND1)
@@ -2916,10 +2956,13 @@ static void SetDomeOpponentId(void)
     gTrainerBattleOpponent_A = TrainerIdOfPlayerOpponent();
 }
 
-// While not an issue in-game, this will overflow if called after the player's opponent for the current round has been eliminated
 static u16 TrainerIdOfPlayerOpponent(void)
 {
-    return DOME_TRAINERS[TournamentIdOfOpponent(gSaveBlock2Ptr->frontier.curChallengeBattleNum, TRAINER_PLAYER)].trainerId;
+    u16 tournamentId = TournamentIdOfOpponent(gSaveBlock2Ptr->frontier.curChallengeBattleNum, TRAINER_PLAYER);
+
+    if (tournamentId >= DOME_TOURNAMENT_TRAINERS_COUNT)
+        return TRAINER_NONE;
+    return DOME_TRAINERS[tournamentId].trainerId;
 }
 
 static void SetDomeOpponentGraphicsId(void)
@@ -2929,6 +2972,7 @@ static void SetDomeOpponentGraphicsId(void)
 
 static void SaveDomeChallenge(void)
 {
+    ClearEnemyPartyAfterChallenge();
     gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
     VarSet(VAR_TEMP_0, 0);
     gSaveBlock2Ptr->frontier.challengePaused = TRUE;
@@ -2952,9 +2996,18 @@ static void IncrementDomeStreaks(void)
 // For showing the opponent info card of the upcoming trainer
 static void ShowDomeOpponentInfo(void)
 {
-    u8 taskId = CreateTask(Task_ShowTourneyInfoCard, 0);
+    u8 taskId;
+    u16 tournamentId = TournamentIdOfOpponent(gSaveBlock2Ptr->frontier.curChallengeBattleNum, TRAINER_PLAYER);
+
+    if (tournamentId >= DOME_TOURNAMENT_TRAINERS_COUNT)
+    {
+        SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
+        return;
+    }
+
+    taskId = CreateTask(Task_ShowTourneyInfoCard, 0);
     gTasks[taskId].tState = 0;
-    gTasks[taskId].tTournamentId = TrainerIdToTournamentId(TrainerIdOfPlayerOpponent());
+    gTasks[taskId].tTournamentId = tournamentId;
     gTasks[taskId].tMode = INFOCARD_NEXT_OPPONENT;
     gTasks[taskId].tPrevTaskId = 0;
 
@@ -4220,6 +4273,270 @@ static u8 Task_GetInfoCardInput(u8 taskId)
 
 #undef tUsingAlternateSlot
 
+static bool8 IsDomeTmHmMove(u16 move)
+{
+    u16 i;
+
+    for (i = 0; i < NUM_TECHNICAL_MACHINES + NUM_HIDDEN_MACHINES; i++)
+    {
+        if (ItemIdToBattleMoveId(ITEM_TM01_FOCUS_PUNCH + i) == move)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+#define DOME_MOVE_POINT(point) (1u << (point))
+
+static u32 GetModernDomeMovePoints(u16 move)
+{
+    const struct BattleMove *moveData = &gBattleMoves[move];
+    u16 effect = moveData->effect;
+    u32 points = 0;
+
+    if (moveData->split != SPLIT_STATUS)
+        points |= DOME_MOVE_POINT(MOVE_POINTS_DMG);
+    if (moveData->accuracy == 0 || moveData->accuracy >= 100)
+        points |= DOME_MOVE_POINT(MOVE_POINTS_ACCURATE);
+    if (moveData->power >= 100)
+        points |= DOME_MOVE_POINT(MOVE_POINTS_POWERFUL);
+    if (moveData->power >= 90)
+        points |= DOME_MOVE_POINT(MOVE_POINTS_STRONG);
+    if (moveData->pp <= 5)
+        points |= DOME_MOVE_POINT(MOVE_POINTS_LOW_PP);
+    if (moveData->secondaryEffectChance != 0 || moveData->flags & FLAG_SHEER_FORCE_BOOST)
+        points |= DOME_MOVE_POINT(MOVE_POINTS_EFFECT);
+    if (IsDomeTmHmMove(move))
+        points |= DOME_MOVE_POINT(MOVE_POINTS_POPULAR);
+
+    switch (effect)
+    {
+    case EFFECT_RAIN_DANCE:
+    case EFFECT_SUNNY_DAY:
+    case EFFECT_SANDSTORM:
+    case EFFECT_HAIL:
+    case EFFECT_MISTY_TERRAIN:
+    case EFFECT_GRASSY_TERRAIN:
+    case EFFECT_ELECTRIC_TERRAIN:
+    case EFFECT_PSYCHIC_TERRAIN:
+    case EFFECT_WEATHER_BALL:
+    case EFFECT_TERRAIN_PULSE:
+    case EFFECT_STOCKPILE:
+    case EFFECT_SPIT_UP:
+    case EFFECT_SWALLOW:
+    case EFFECT_SPIKES:
+    case EFFECT_TOXIC_SPIKES:
+    case EFFECT_STEALTH_ROCK:
+    case EFFECT_STICKY_WEB:
+    case EFFECT_YAWN:
+    case EFFECT_DREAM_EATER:
+    case EFFECT_NIGHTMARE:
+    case EFFECT_SLEEP_TALK:
+    case EFFECT_SNORE:
+    case EFFECT_FOCUS_ENERGY:
+    case EFFECT_LOCK_ON:
+    case EFFECT_BATON_PASS:
+        points |= DOME_MOVE_POINT(MOVE_POINTS_COMBO);
+        break;
+    case EFFECT_ATTACK_UP:
+    case EFFECT_DEFENSE_UP:
+    case EFFECT_SPEED_UP:
+    case EFFECT_SPECIAL_ATTACK_UP:
+    case EFFECT_SPECIAL_DEFENSE_UP:
+    case EFFECT_ACCURACY_UP:
+    case EFFECT_EVASION_UP:
+    case EFFECT_SPECIAL_ATTACK_UP_3:
+    case EFFECT_ATTACK_UP_2:
+    case EFFECT_DEFENSE_UP_2:
+    case EFFECT_SPEED_UP_2:
+    case EFFECT_SPECIAL_ATTACK_UP_2:
+    case EFFECT_SPECIAL_DEFENSE_UP_2:
+    case EFFECT_ACCURACY_UP_2:
+    case EFFECT_EVASION_UP_2:
+    case EFFECT_DEFENSE_CURL:
+    case EFFECT_BELLY_DRUM:
+    case EFFECT_PSYCH_UP:
+    case EFFECT_COSMIC_POWER:
+    case EFFECT_BULK_UP:
+    case EFFECT_CALM_MIND:
+    case EFFECT_DRAGON_DANCE:
+    case EFFECT_ATTACK_ACCURACY_UP:
+    case EFFECT_ATTACK_SPATK_UP:
+    case EFFECT_QUIVER_DANCE:
+    case EFFECT_COIL:
+    case EFFECT_SHELL_SMASH:
+    case EFFECT_SHIFT_GEAR:
+    case EFFECT_DEFENSE_UP_3:
+    case EFFECT_GEOMANCY:
+    case EFFECT_NO_RETREAT:
+    case EFFECT_CLANGOROUS_SOUL:
+    case EFFECT_STUFF_CHEEKS:
+    case EFFECT_DECORATE:
+    case EFFECT_COACHING:
+        points |= DOME_MOVE_POINT(MOVE_POINTS_STAT_RAISE);
+        break;
+    case EFFECT_ATTACK_DOWN:
+    case EFFECT_DEFENSE_DOWN:
+    case EFFECT_SPEED_DOWN:
+    case EFFECT_SPECIAL_ATTACK_DOWN:
+    case EFFECT_SPECIAL_DEFENSE_DOWN:
+    case EFFECT_ACCURACY_DOWN:
+    case EFFECT_EVASION_DOWN:
+    case EFFECT_ATTACK_DOWN_2:
+    case EFFECT_DEFENSE_DOWN_2:
+    case EFFECT_SPEED_DOWN_2:
+    case EFFECT_SPECIAL_ATTACK_DOWN_2:
+    case EFFECT_SPECIAL_DEFENSE_DOWN_2:
+    case EFFECT_ACCURACY_DOWN_2:
+    case EFFECT_EVASION_DOWN_2:
+    case EFFECT_CAPTIVATE:
+    case EFFECT_TICKLE:
+    case EFFECT_NOBLE_ROAR:
+    case EFFECT_VENOM_DRENCH:
+    case EFFECT_TOXIC_THREAD:
+    case EFFECT_OCTOLOCK:
+    case EFFECT_PARTING_SHOT:
+        points |= DOME_MOVE_POINT(MOVE_POINTS_STAT_LOWER);
+        break;
+    case EFFECT_RESTORE_HP:
+    case EFFECT_SOFTBOILED:
+    case EFFECT_MORNING_SUN:
+    case EFFECT_SYNTHESIS:
+    case EFFECT_MOONLIGHT:
+    case EFFECT_WISH:
+    case EFFECT_REFRESH:
+    case EFFECT_ROOST:
+    case EFFECT_HEAL_PULSE:
+    case EFFECT_SHORE_UP:
+    case EFFECT_JUNGLE_HEALING:
+    case EFFECT_HIT_ENEMY_HEAL_ALLY:
+        points |= DOME_MOVE_POINT(MOVE_POINTS_HEAL);
+        break;
+    case EFFECT_REST:
+        points |= DOME_MOVE_POINT(MOVE_POINTS_HEAL) | DOME_MOVE_POINT(MOVE_POINTS_COMBO);
+        break;
+    case EFFECT_INGRAIN:
+    case EFFECT_AQUA_RING:
+        points |= DOME_MOVE_POINT(MOVE_POINTS_HEAL) | DOME_MOVE_POINT(MOVE_POINTS_DEF) | DOME_MOVE_POINT(MOVE_POINTS_COMBO);
+        break;
+    case EFFECT_STRENGTH_SAP:
+        points |= DOME_MOVE_POINT(MOVE_POINTS_HEAL) | DOME_MOVE_POINT(MOVE_POINTS_STAT_LOWER);
+        break;
+    case EFFECT_PROTECT:
+    case EFFECT_ENDURE:
+    case EFFECT_LIGHT_SCREEN:
+    case EFFECT_REFLECT:
+    case EFFECT_AURORA_VEIL:
+    case EFFECT_MAT_BLOCK:
+    case EFFECT_SAFEGUARD:
+    case EFFECT_MIST:
+    case EFFECT_SUBSTITUTE:
+    case EFFECT_MAGIC_COAT:
+        points |= DOME_MOVE_POINT(MOVE_POINTS_DEF);
+        break;
+    case EFFECT_SLEEP:
+    case EFFECT_POISON:
+    case EFFECT_PARALYZE:
+    case EFFECT_TOXIC:
+    case EFFECT_CONFUSE:
+    case EFFECT_DISABLE:
+    case EFFECT_LEECH_SEED:
+    case EFFECT_ENCORE:
+    case EFFECT_ATTRACT:
+    case EFFECT_TORMENT:
+    case EFFECT_TAUNT:
+    case EFFECT_WILL_O_WISP:
+    case EFFECT_MEAN_LOOK:
+    case EFFECT_IMPRISON:
+    case EFFECT_TEETER_DANCE:
+    case EFFECT_SWAGGER:
+    case EFFECT_FLATTER:
+        points |= DOME_MOVE_POINT(MOVE_POINTS_STATUS);
+        break;
+    case EFFECT_EXPLOSION:
+    case EFFECT_DESTINY_BOND:
+    case EFFECT_PERISH_SONG:
+    case EFFECT_MEMENTO:
+    case EFFECT_GRUDGE:
+    case EFFECT_FOCUS_PUNCH:
+    case EFFECT_FINAL_GAMBIT:
+    case EFFECT_MIND_BLOWN:
+    case EFFECT_HEALING_WISH:
+        points |= DOME_MOVE_POINT(MOVE_POINTS_RISKY);
+        break;
+    case EFFECT_RECHARGE:
+    case EFFECT_RECOIL_IF_MISS:
+    case EFFECT_RECOIL_25:
+    case EFFECT_RECOIL_33:
+    case EFFECT_RECOIL_33_STATUS:
+    case EFFECT_RECOIL_50:
+    case EFFECT_RECOIL_HP_25:
+        points |= DOME_MOVE_POINT(MOVE_POINTS_RISKY);
+        break;
+    case EFFECT_OHKO:
+        points |= DOME_MOVE_POINT(MOVE_POINTS_RISKY) | DOME_MOVE_POINT(MOVE_POINTS_LUCK);
+        break;
+    case EFFECT_METRONOME:
+    case EFFECT_MIRROR_MOVE:
+    case EFFECT_MIMIC:
+    case EFFECT_SKETCH:
+    case EFFECT_ASSIST:
+    case EFFECT_COPYCAT:
+    case EFFECT_ME_FIRST:
+    case EFFECT_NATURE_POWER:
+        points |= DOME_MOVE_POINT(MOVE_POINTS_RARE) | DOME_MOVE_POINT(MOVE_POINTS_LUCK);
+        break;
+    case EFFECT_TRANSFORM:
+    case EFFECT_ROLE_PLAY:
+    case EFFECT_SKILL_SWAP:
+    case EFFECT_SIMPLE_BEAM:
+    case EFFECT_ENTRAINMENT:
+    case EFFECT_REFLECT_TYPE:
+    case EFFECT_SOAK:
+    case EFFECT_TOPSY_TURVY:
+    case EFFECT_POWER_SWAP:
+    case EFFECT_GUARD_SWAP:
+    case EFFECT_HEART_SWAP:
+    case EFFECT_POWER_SPLIT:
+    case EFFECT_GUARD_SPLIT:
+        points |= DOME_MOVE_POINT(MOVE_POINTS_RARE);
+        break;
+    default:
+        break;
+    }
+
+    if (effect == EFFECT_TWO_TURNS_ATTACK && moveData->accuracy != 0 && moveData->accuracy < 100)
+        points |= DOME_MOVE_POINT(MOVE_POINTS_RISKY);
+    if (!IsDomeTmHmMove(move) && moveData->pp <= 5)
+        points |= DOME_MOVE_POINT(MOVE_POINTS_RARE);
+
+    return points;
+}
+
+static void AddDomeMovePoints(s16 *totals, u16 move)
+{
+    u32 modernPoints;
+    u8 i;
+
+    if (move == MOVE_NONE || move >= MOVES_COUNT)
+        return;
+
+    if (move <= MOVE_PSYCHO_BOOST)
+    {
+        for (i = 0; i < NUM_MOVE_POINT_TYPES; i++)
+            totals[i] += sBattleStyleMovePoints[move][i];
+        return;
+    }
+
+    modernPoints = GetModernDomeMovePoints(move);
+    for (i = 0; i < NUM_MOVE_POINT_TYPES; i++)
+    {
+        if (modernPoints & DOME_MOVE_POINT(i))
+            totals[i]++;
+    }
+}
+
+#undef DOME_MOVE_POINT
+
 // allocatedArray below needs to be large enough to hold stat totals for each mon, or totals of each type of move points
 #define ALLOC_ARRAY_SIZE (NUM_STATS * FRONTIER_PARTY_SIZE >= NUM_MOVE_POINT_TYPES ? (NUM_STATS * FRONTIER_PARTY_SIZE) :  NUM_MOVE_POINT_TYPES)
 
@@ -4227,13 +4544,15 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
 {
     struct TextPrinterTemplate textPrinter;
     int i, j, k;
+    int style;
     int trainerId = 0;
+    u16 move;
     u8 nature = 0;
     int arrId = 0;
     int windowId = 0;
     int x = 0, y = 0;
     u8 palSlot = 0;
-    s16 *allocatedArray = AllocZeroed(sizeof(s16) * ALLOC_ARRAY_SIZE);
+    s16 allocatedArray[ALLOC_ARRAY_SIZE] = {0};
     trainerId = DOME_TRAINERS[trainerTourneyId].trainerId;
 
     if (flags & CARD_ALTERNATE_SLOT)
@@ -4355,6 +4674,8 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
         else
             textPrinter.currentChar = gSpeciesNames[gFacilityTrainerMons[DOME_MONS[trainerTourneyId][i]].species];
 
+        textPrinter.fontId = GetStringWidth(2, textPrinter.currentChar, 0) > 60 ? 7 : 2;
+
         textPrinter.windowId = 1 + i + windowId;
         if (i == 1)
             textPrinter.currentX = 7;
@@ -4387,36 +4708,38 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
     {
         for (j = 0; j < MAX_MON_MOVES; j++)
         {
-            for (k = 0; k < NUM_MOVE_POINT_TYPES; k++)
-            {
-                if (trainerId == TRAINER_FRONTIER_BRAIN)
-                    allocatedArray[k] += sBattleStyleMovePoints[GetFrontierBrainMonMove(i, j)][k];
-                else if (trainerId == TRAINER_PLAYER)
-                    allocatedArray[k] += sBattleStyleMovePoints[gSaveBlock2Ptr->frontier.domePlayerPartyData[i].moves[j]][k];
-                else
-                    allocatedArray[k] += sBattleStyleMovePoints[gFacilityTrainerMons[DOME_MONS[trainerTourneyId][i]].moves[j]][k];
-            }
+            if (trainerId == TRAINER_FRONTIER_BRAIN)
+                move = GetFrontierBrainMonMove(i, j);
+            else if (trainerId == TRAINER_PLAYER)
+                move = gSaveBlock2Ptr->frontier.domePlayerPartyData[i].moves[j];
+            else
+                move = gFacilityTrainerMons[DOME_MONS[trainerTourneyId][i]].moves[j];
+            AddDomeMovePoints(allocatedArray, move);
         }
     }
 
     // Get the battle style the trainer uses
     // Each element of sBattleStyleThresholds is an array of point thresholds for particular move qualities
     // If all the point thresholds in the array are satisfied, the player is considered to be using that battle style
-    for (i = 0; i < ARRAY_COUNT(sBattleStyleThresholds); i++)
+    for (i = 0; i < ARRAY_COUNT(sBattleStyleEvaluationOrder); i++)
     {
         int thresholdStatCount = 0;
+        style = sBattleStyleEvaluationOrder[i];
 
         for (k = 0, j = 0; j < NUM_MOVE_POINT_TYPES; j++)
         {
-            if (sBattleStyleThresholds[i][j] != 0)
+            if (sBattleStyleThresholds[style][j] != 0)
             {
                 thresholdStatCount++;
-                if (allocatedArray[j] != 0 && allocatedArray[j] >= sBattleStyleThresholds[i][j])
+                if (allocatedArray[j] != 0 && allocatedArray[j] >= sBattleStyleThresholds[style][j])
                     k++; // number of point thresholds met/exceeded
             }
         }
         if (thresholdStatCount == k)
+        {
+            i = style;
             break; // All thresholds for battle style met/exceeded, player uses this battle style
+        }
     }
 
     // Print the trainers battle style
@@ -4470,8 +4793,11 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
         }
         for (j = 0, i = 0; i < NUM_STATS; i++)
             j += allocatedArray[NUM_STATS + i];
-        for (i = 0; i < NUM_STATS; i++)
-            allocatedArray[i] = (allocatedArray[NUM_STATS + i] * 100) / j;
+        if (j != 0)
+        {
+            for (i = 0; i < NUM_STATS; i++)
+                allocatedArray[i] = (allocatedArray[NUM_STATS + i] * 100) / j;
+        }
     }
     // Same as above but for regular trainers instead of the frontier brain or player
     else
@@ -4486,7 +4812,8 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
                     k++;
                 evBits >>= 1;
             }
-            k = MAX_TOTAL_EVS / k;
+            if (k != 0)
+                k = MAX_TOTAL_EVS / k;
             evBits = gFacilityTrainerMons[DOME_MONS[trainerTourneyId][i]].evSpread;
             for (j = 0; j < NUM_STATS; j++)
             {
@@ -4516,8 +4843,11 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
         }
         for (j = 0, i = 0; i < NUM_STATS; i++)
             j += allocatedArray[i + NUM_STATS];
-        for (i = 0; i < NUM_STATS; i++)
-            allocatedArray[i] = (allocatedArray[NUM_STATS + i] * 100) / j;
+        if (j != 0)
+        {
+            for (i = 0; i < NUM_STATS; i++)
+                allocatedArray[i] = (allocatedArray[NUM_STATS + i] * 100) / j;
+        }
     }
 
     // Count the number of good/bad stats for the party
@@ -4612,7 +4942,6 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
     textPrinter.y = 36;
     textPrinter.currentY = 36;
     AddTextPrinter(&textPrinter, 0, NULL);
-    Free(allocatedArray);
 }
 
 static int BufferDomeWinString(u8 matchNum, u8 *tournamentIds)
@@ -5162,19 +5491,27 @@ static u16 GetWinningMove(int winnerTournamentId, int loserTournamentId, u8 roun
             {
                 u32 personality = 0;
                 u32 targetSpecies = 0;
+                u32 targetNature = 0;
                 u32 targetAbility = 0;
                 u32 typeMultiplier = 0;
+
+                if (DOME_TRAINERS[loserTournamentId].trainerId == TRAINER_FRONTIER_BRAIN)
+                {
+                    targetSpecies = DOME_MONS[loserTournamentId][k];
+                    targetNature = GetFrontierBrainMonNature(k);
+                }
+                else
+                {
+                    targetSpecies = gFacilityTrainerMons[DOME_MONS[loserTournamentId][k]].species;
+                    targetNature = gFacilityTrainerMons[DOME_MONS[loserTournamentId][k]].nature;
+                }
+
                 do
                 {
                     personality = Random32();
-                } while (gFacilityTrainerMons[DOME_MONS[loserTournamentId][k]].nature != GetNatureFromPersonality(personality));
+                } while (targetNature != GetNatureFromPersonality(personality));
 
-                targetSpecies = gFacilityTrainerMons[DOME_MONS[loserTournamentId][k]].species;
-
-                if (personality & 1)
-                    targetAbility = gBaseStats[targetSpecies].abilities[1];
-                else
-                    targetAbility = gBaseStats[targetSpecies].abilities[0];
+                targetAbility = GetAbilityBySpecies(targetSpecies, personality & 1);
 
                 typeMultiplier = CalcPartyMonTypeEffectivenessMultiplier(moveIds[i * 4 + j], targetSpecies, targetAbility);
                 if (typeMultiplier == UQ_4_12(0))
@@ -5201,38 +5538,38 @@ static u16 GetWinningMove(int winnerTournamentId, int loserTournamentId, u8 roun
     }
 
     j = bestId;
-    do
+    while (roundId > 0)
     {
-        for (i = 0; i < roundId - 1; i++)
+        for (i = 0; i < roundId; i++)
         {
             if (gSaveBlock2Ptr->frontier.domeWinningMoves[sub_81953E8(winnerTournamentId, i)] == moveIds[j])
                 break;
         }
-        if (i != roundId - 1)
+        if (i == roundId)
+            break;
+
+        moveScores[j] = 0;
+        bestScore = 0;
+        j = 0;
+        for (k = 0; k < MAX_MON_MOVES * FRONTIER_PARTY_SIZE; k++)
+            j += moveScores[k];
+        if (j == 0)
+            break;
+        j = 0;
+        for (k = 0; k < MAX_MON_MOVES * FRONTIER_PARTY_SIZE; k++)
         {
-            moveScores[j] = 0;
-            bestScore = 0;
-            j = 0;
-            for (k = 0; k < MAX_MON_MOVES * FRONTIER_PARTY_SIZE; k++)
-                j += moveScores[k];
-            if (j == 0)
-                break;
-            j = 0;
-            for (k = 0; k < MAX_MON_MOVES * FRONTIER_PARTY_SIZE; k++)
+            if (bestScore < moveScores[k])
             {
-                if (bestScore < moveScores[k])
-                {
-                    j = k;
-                    bestScore = moveScores[k];
-                }
-                else if (bestScore == moveScores[k] && moveIds[j] < moveIds[k]) // Yes, these conditions are redundant
-                {
-                    j = k;
-                    bestScore = moveScores[k];
-                }
+                j = k;
+                bestScore = moveScores[k];
+            }
+            else if (bestScore == moveScores[k] && moveIds[j] < moveIds[k])
+            {
+                j = k;
+                bestScore = moveScores[k];
             }
         }
-    } while (i != roundId - 1);
+    }
 
     if (moveScores[j] == 0)
         j = bestId;
@@ -5766,8 +6103,8 @@ static void InitRandomTourneyTreeResults(void)
     int zero1;
     int zero2;
     u8 lvlMode;
-    u16 *statSums;
-    int *statValues;
+    u16 statSums[DOME_TOURNAMENT_TRAINERS_COUNT] = {0};
+    int statValues[NUM_STATS] = {0};
     u8 ivs = 0;
 
     species[0] = 0;
@@ -5776,8 +6113,6 @@ static void InitRandomTourneyTreeResults(void)
     if ((gSaveBlock2Ptr->frontier.domeLvlMode != -gSaveBlock2Ptr->frontier.domeBattleMode) && gSaveBlock2Ptr->frontier.challengeStatus != CHALLENGE_STATUS_SAVING)
         return;
 
-    statSums = AllocZeroed(sizeof(u16) * DOME_TOURNAMENT_TRAINERS_COUNT);
-    statValues = AllocZeroed(sizeof(int) * NUM_STATS);
     lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     gSaveBlock2Ptr->frontier.lvlMode = FRONTIER_LVL_50;
     zero1 = 0;
@@ -5880,9 +6215,6 @@ static void InitRandomTourneyTreeResults(void)
         }
     }
 
-    Free(statSums);
-    Free(statValues);
-
     for (i = 0; i < DOME_ROUNDS_COUNT; i++)
         DecideRoundWinners(i);
 
@@ -5950,7 +6282,7 @@ static void DecideRoundWinners(u8 roundId)
             gSaveBlock2Ptr->frontier.domeWinningMoves[tournamentId2] = GetWinningMove(tournamentId1, tournamentId2, roundId);
         }
         // Frontier Brain always wins, check tournamentId2.
-        else if (DOME_TRAINERS[tournamentId2].trainerId == TRAINER_FRONTIER_BRAIN && tournamentId1 != 0xFF)
+        else if (tournamentId2 != 0xFF && DOME_TRAINERS[tournamentId2].trainerId == TRAINER_FRONTIER_BRAIN && tournamentId1 != 0xFF)
         {
             DOME_TRAINERS[tournamentId1].isEliminated = TRUE;
             DOME_TRAINERS[tournamentId1].eliminatedAt = roundId;

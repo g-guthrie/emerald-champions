@@ -625,7 +625,9 @@ static void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
         else
         {
             u8 adjustedCollision = collision - COLLISION_STOP_SURFING;
-            if (adjustedCollision > 3)
+            // An immovable rotating gate is an ordinary collision here: turn
+            // the player, play the bump sound, and update the walk animation.
+            if (adjustedCollision > 2)
                 PlayerNotOnBikeCollide(direction);
             return;
         }
@@ -1678,6 +1680,9 @@ static void Task_WaitStopSurfing(u8 taskId)
         gPlayerAvatar.preventStep = FALSE;
         ScriptContext2_Disable();
         DestroySprite(&gSprites[playerObjEvent->fieldEffectSpriteId]);
+        // Refresh covering effects after changing back from the surfing
+        // graphics, so the player is drawn inside grass instead of above it.
+        playerObjEvent->triggerGroundEffectsOnMove = TRUE;
         DestroyTask(taskId);
     }
 }

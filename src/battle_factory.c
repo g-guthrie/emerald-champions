@@ -12,6 +12,7 @@
 #include "constants/battle_factory.h"
 #include "constants/battle_frontier.h"
 #include "constants/battle_frontier_mons.h"
+#include "constants/battle_move_effects.h"
 #include "constants/frontier_util.h"
 #include "constants/layouts.h"
 #include "constants/trainers.h"
@@ -38,7 +39,7 @@ static void GenerateInitialRentalMons(void);
 static void GetOpponentMostCommonMonType(void);
 static void GetOpponentBattleStyle(void);
 static void RestorePlayerPartyHeldItems(void);
-static u16 GetFactoryMonId(u8 lvlMode, u8 challengeNum, bool8 useBetterRange);
+static u16 GetFactoryMonId(u8 lvlMode, u16 challengeNum, bool8 useBetterRange);
 static u8 GetMoveBattleStyle(u16 move);
 
 // Number of moves needed on the team to be considered using a certain battle style
@@ -268,6 +269,7 @@ static void SetBattleFactoryData(void)
 
 static void SaveFactoryChallenge(void)
 {
+    ClearEnemyPartyAfterChallenge();
     gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
     VarSet(VAR_TEMP_0, 0);
     gSaveBlock2Ptr->frontier.challengePaused = TRUE;
@@ -439,12 +441,15 @@ static void SetPlayerAndOpponentParties(void)
                     count++;
             }
 
-            evs = MAX_TOTAL_EVS / count;
-            bits = 1;
-            for (j = 0; j < NUM_STATS; bits <<= 1, j++)
+            if (count != 0)
             {
-                if (gFacilityTrainerMons[monId].evSpread & bits)
-                    SetMonData(&gPlayerParty[i], MON_DATA_HP_EV + j, &evs);
+                evs = MAX_TOTAL_EVS / count;
+                bits = 1;
+                for (j = 0; j < NUM_STATS; bits <<= 1, j++)
+                {
+                    if (gFacilityTrainerMons[monId].evSpread & bits)
+                        SetMonData(&gPlayerParty[i], MON_DATA_HP_EV + j, &evs);
+                }
             }
 
             CalculateMonStats(&gPlayerParty[i]);
@@ -454,6 +459,7 @@ static void SetPlayerAndOpponentParties(void)
             SetMonData(&gPlayerParty[i], MON_DATA_FRIENDSHIP, &friendship);
             SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &gBattleFrontierHeldItems[gFacilityTrainerMons[monId].itemTableId]);
             SetMonData(&gPlayerParty[i], MON_DATA_ABILITY_NUM, &gSaveBlock2Ptr->frontier.rentalMons[i].abilityNum);
+            TryUpdateMonFormForHeldItem(&gPlayerParty[i]);
         }
     }
 
@@ -480,19 +486,25 @@ static void SetPlayerAndOpponentParties(void)
                     count++;
             }
 
-            evs = MAX_TOTAL_EVS / count;
-            bits = 1;
-            for (j = 0; j < NUM_STATS; bits <<= 1, j++)
+            if (count != 0)
             {
-                if (gFacilityTrainerMons[monId].evSpread & bits)
-                    SetMonData(&gEnemyParty[i], MON_DATA_HP_EV + j, &evs);
+                evs = MAX_TOTAL_EVS / count;
+                bits = 1;
+                for (j = 0; j < NUM_STATS; bits <<= 1, j++)
+                {
+                    if (gFacilityTrainerMons[monId].evSpread & bits)
+                        SetMonData(&gEnemyParty[i], MON_DATA_HP_EV + j, &evs);
+                }
             }
 
             CalculateMonStats(&gEnemyParty[i]);
             for (k = 0; k < MAX_MON_MOVES; k++)
                 SetMonMoveAvoidReturn(&gEnemyParty[i], gFacilityTrainerMons[monId].moves[k], k);
+            friendship = 0;
+            SetMonData(&gEnemyParty[i], MON_DATA_FRIENDSHIP, &friendship);
             SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gBattleFrontierHeldItems[gFacilityTrainerMons[monId].itemTableId]);
             SetMonData(&gEnemyParty[i], MON_DATA_ABILITY_NUM, &gSaveBlock2Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].abilityNum);
+            TryUpdateMonFormForHeldItem(&gEnemyParty[i]);
         }
         break;
     }
@@ -504,7 +516,7 @@ static void GenerateInitialRentalMons(void)
     u8 firstMonId;
     u8 battleMode;
     u8 lvlMode;
-    u8 challengeNum;
+    u16 challengeNum;
     u8 factoryLvlMode;
     u8 factoryBattleMode;
     u8 rentalRank;
@@ -685,6 +697,7 @@ static u8 GetMoveBattleStyle(u16 move)
 {
     const u16 *moves;
     u8 i, j;
+    u16 effect;
 
     for (i = 0; i < ARRAY_COUNT(sMoveStyles); i++)
     {
@@ -694,6 +707,185 @@ static u8 GetMoveBattleStyle(u16 move)
                 return i + 1;
         }
     }
+
+    // The hand-authored lists end with Gen 3. Classify later moves from their
+    // actual effect so Factory previews do not call modern teams styleless.
+    if (move == MOVE_NONE || move >= MOVES_COUNT)
+        return FACTORY_STYLE_NONE;
+
+    effect = gBattleMoves[move].effect;
+    switch (effect)
+    {
+    case EFFECT_RAIN_DANCE:
+    case EFFECT_SUNNY_DAY:
+    case EFFECT_SANDSTORM:
+    case EFFECT_HAIL:
+    case EFFECT_MISTY_TERRAIN:
+    case EFFECT_GRASSY_TERRAIN:
+    case EFFECT_ELECTRIC_TERRAIN:
+    case EFFECT_PSYCHIC_TERRAIN:
+    case EFFECT_WEATHER_BALL:
+    case EFFECT_TERRAIN_PULSE:
+        return FACTORY_STYLE_WEATHER;
+    case EFFECT_EXPLOSION:
+    case EFFECT_OHKO:
+    case EFFECT_DESTINY_BOND:
+    case EFFECT_PERISH_SONG:
+    case EFFECT_MEMENTO:
+    case EFFECT_GRUDGE:
+    case EFFECT_FOCUS_PUNCH:
+    case EFFECT_RECHARGE:
+    case EFFECT_RECOIL_IF_MISS:
+    case EFFECT_RECOIL_25:
+    case EFFECT_RECOIL_33:
+    case EFFECT_RECOIL_33_STATUS:
+    case EFFECT_RECOIL_50:
+    case EFFECT_RECOIL_HP_25:
+    case EFFECT_FINAL_GAMBIT:
+    case EFFECT_MIND_BLOWN:
+    case EFFECT_HEALING_WISH:
+        return FACTORY_STYLE_HIGH_RISK;
+    case EFFECT_RESTORE_HP:
+    case EFFECT_SOFTBOILED:
+    case EFFECT_MORNING_SUN:
+    case EFFECT_SYNTHESIS:
+    case EFFECT_MOONLIGHT:
+    case EFFECT_WISH:
+    case EFFECT_REFRESH:
+    case EFFECT_ROOST:
+    case EFFECT_HEAL_PULSE:
+    case EFFECT_SHORE_UP:
+    case EFFECT_JUNGLE_HEALING:
+    case EFFECT_HIT_ENEMY_HEAL_ALLY:
+    case EFFECT_REST:
+    case EFFECT_INGRAIN:
+    case EFFECT_AQUA_RING:
+    case EFFECT_PROTECT:
+    case EFFECT_ENDURE:
+    case EFFECT_LIGHT_SCREEN:
+    case EFFECT_REFLECT:
+    case EFFECT_AURORA_VEIL:
+    case EFFECT_MAT_BLOCK:
+    case EFFECT_SAFEGUARD:
+    case EFFECT_MIST:
+    case EFFECT_MAGIC_COAT:
+        return FACTORY_STYLE_ENDURANCE;
+    case EFFECT_ATTACK_UP:
+    case EFFECT_DEFENSE_UP:
+    case EFFECT_SPEED_UP:
+    case EFFECT_SPECIAL_ATTACK_UP:
+    case EFFECT_SPECIAL_DEFENSE_UP:
+    case EFFECT_ACCURACY_UP:
+    case EFFECT_EVASION_UP:
+    case EFFECT_SPECIAL_ATTACK_UP_3:
+    case EFFECT_ATTACK_UP_2:
+    case EFFECT_DEFENSE_UP_2:
+    case EFFECT_SPEED_UP_2:
+    case EFFECT_SPECIAL_ATTACK_UP_2:
+    case EFFECT_SPECIAL_DEFENSE_UP_2:
+    case EFFECT_ACCURACY_UP_2:
+    case EFFECT_EVASION_UP_2:
+    case EFFECT_DEFENSE_CURL:
+    case EFFECT_BELLY_DRUM:
+    case EFFECT_PSYCH_UP:
+    case EFFECT_COSMIC_POWER:
+    case EFFECT_BULK_UP:
+    case EFFECT_CALM_MIND:
+    case EFFECT_DRAGON_DANCE:
+    case EFFECT_ATTACK_ACCURACY_UP:
+    case EFFECT_ATTACK_SPATK_UP:
+    case EFFECT_QUIVER_DANCE:
+    case EFFECT_COIL:
+    case EFFECT_SHELL_SMASH:
+    case EFFECT_SHIFT_GEAR:
+    case EFFECT_DEFENSE_UP_3:
+    case EFFECT_GEOMANCY:
+    case EFFECT_NO_RETREAT:
+    case EFFECT_CLANGOROUS_SOUL:
+    case EFFECT_STUFF_CHEEKS:
+    case EFFECT_DECORATE:
+    case EFFECT_COACHING:
+        return FACTORY_STYLE_PREPARATION;
+    case EFFECT_ATTACK_DOWN:
+    case EFFECT_DEFENSE_DOWN:
+    case EFFECT_SPEED_DOWN:
+    case EFFECT_SPECIAL_ATTACK_DOWN:
+    case EFFECT_SPECIAL_DEFENSE_DOWN:
+    case EFFECT_ACCURACY_DOWN:
+    case EFFECT_EVASION_DOWN:
+    case EFFECT_ATTACK_DOWN_2:
+    case EFFECT_DEFENSE_DOWN_2:
+    case EFFECT_SPEED_DOWN_2:
+    case EFFECT_SPECIAL_ATTACK_DOWN_2:
+    case EFFECT_SPECIAL_DEFENSE_DOWN_2:
+    case EFFECT_ACCURACY_DOWN_2:
+    case EFFECT_EVASION_DOWN_2:
+    case EFFECT_ATTACK_DOWN_HIT:
+    case EFFECT_DEFENSE_DOWN_HIT:
+    case EFFECT_SPEED_DOWN_HIT:
+    case EFFECT_SPECIAL_ATTACK_DOWN_HIT:
+    case EFFECT_SPECIAL_DEFENSE_DOWN_HIT:
+    case EFFECT_ACCURACY_DOWN_HIT:
+    case EFFECT_EVASION_DOWN_HIT:
+    case EFFECT_CAPTIVATE:
+    case EFFECT_TICKLE:
+    case EFFECT_NOBLE_ROAR:
+    case EFFECT_VENOM_DRENCH:
+    case EFFECT_TOXIC_THREAD:
+    case EFFECT_OCTOLOCK:
+    case EFFECT_PARTING_SHOT:
+    case EFFECT_STRENGTH_SAP:
+        return FACTORY_STYLE_WEAKENING;
+    case EFFECT_SLEEP:
+    case EFFECT_POISON:
+    case EFFECT_PARALYZE:
+    case EFFECT_TOXIC:
+    case EFFECT_CONFUSE:
+    case EFFECT_DISABLE:
+    case EFFECT_LEECH_SEED:
+    case EFFECT_ENCORE:
+    case EFFECT_ATTRACT:
+    case EFFECT_TORMENT:
+    case EFFECT_TAUNT:
+    case EFFECT_WILL_O_WISP:
+    case EFFECT_MEAN_LOOK:
+    case EFFECT_IMPRISON:
+    case EFFECT_YAWN:
+    case EFFECT_SPIKES:
+    case EFFECT_TOXIC_SPIKES:
+    case EFFECT_STEALTH_ROCK:
+    case EFFECT_STICKY_WEB:
+        return FACTORY_STYLE_SLOW_STEADY;
+    case EFFECT_METRONOME:
+    case EFFECT_MIRROR_MOVE:
+    case EFFECT_MIMIC:
+    case EFFECT_SKETCH:
+    case EFFECT_ASSIST:
+    case EFFECT_COPYCAT:
+    case EFFECT_ME_FIRST:
+    case EFFECT_NATURE_POWER:
+    case EFFECT_TRANSFORM:
+    case EFFECT_ROLE_PLAY:
+    case EFFECT_SKILL_SWAP:
+    case EFFECT_SIMPLE_BEAM:
+    case EFFECT_ENTRAINMENT:
+    case EFFECT_REFLECT_TYPE:
+    case EFFECT_SOAK:
+    case EFFECT_TOPSY_TURVY:
+    case EFFECT_POWER_SWAP:
+    case EFFECT_GUARD_SWAP:
+    case EFFECT_HEART_SWAP:
+    case EFFECT_POWER_SPLIT:
+    case EFFECT_GUARD_SPLIT:
+        return FACTORY_STYLE_UNPREDICTABLE;
+    default:
+        break;
+    }
+
+    if (effect == EFFECT_TWO_TURNS_ATTACK
+     && gBattleMoves[move].accuracy != 0
+     && gBattleMoves[move].accuracy < 100)
+        return FACTORY_STYLE_HIGH_RISK;
     return FACTORY_STYLE_NONE;
 }
 
@@ -717,18 +909,19 @@ static void RestorePlayerPartyHeldItems(void)
         SetMonData(&gPlayerParty[i],
                    MON_DATA_HELD_ITEM,
                    &gBattleFrontierHeldItems[gFacilityTrainerMons[gSaveBlock2Ptr->frontier.rentalMons[i].monId].itemTableId]);
+        TryUpdateMonFormForHeldItem(&gPlayerParty[i]);
     }
 }
 
-u8 GetFactoryMonFixedIV(u8 arg0, u8 arg1)
+u8 GetFactoryMonFixedIV(u16 challengeNum, u8 useHighRank)
 {
     u8 a1;
-    u8 a2 = (arg1 != 0) ? 1 : 0;
+    u8 a2 = (useHighRank != 0) ? 1 : 0;
 
-    if (arg0 > 8)
-        a1 = 7;
+    if (challengeNum >= ARRAY_COUNT(sFixedIVTable))
+        a1 = ARRAY_COUNT(sFixedIVTable) - 1;
     else
-        a1 = arg0;
+        a1 = challengeNum;
 
     return sFixedIVTable[a1][a2];
 }
@@ -745,7 +938,7 @@ void FillFactoryBrainParty(void)
 
     u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
-    u8 challengeNum = gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode] / 7;
+    u16 challengeNum = gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode] / 7;
     fixedIV = GetFactoryMonFixedIV(challengeNum + 2, 0);
     monLevel = SetFacilityPtrsGetLevel();
     i = 0;
@@ -799,11 +992,12 @@ void FillFactoryBrainParty(void)
             SetMonMoveAvoidReturn(&gEnemyParty[i], gFacilityTrainerMons[monId].moves[k], k);
         SetMonData(&gEnemyParty[i], MON_DATA_FRIENDSHIP, &friendship);
         SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gBattleFrontierHeldItems[gFacilityTrainerMons[monId].itemTableId]);
+        TryUpdateMonFormForHeldItem(&gEnemyParty[i]);
         i++;
     }
 }
 
-static u16 GetFactoryMonId(u8 lvlMode, u8 challengeNum, bool8 useBetterRange)
+static u16 GetFactoryMonId(u8 lvlMode, u16 challengeNum, bool8 useBetterRange)
 {
     u16 numMons, monId;
     u16 adder; // Used to skip past early mons for open level
@@ -845,7 +1039,7 @@ static u16 GetFactoryMonId(u8 lvlMode, u8 challengeNum, bool8 useBetterRange)
 u8 GetNumPastRentalsRank(u8 battleMode, u8 lvlMode)
 {
     u8 ret;
-    u8 rents = gSaveBlock2Ptr->frontier.factoryRentsCount[battleMode][lvlMode];
+    u16 rents = gSaveBlock2Ptr->frontier.factoryRentsCount[battleMode][lvlMode];
 
     if (rents < 15)
         ret = 0;

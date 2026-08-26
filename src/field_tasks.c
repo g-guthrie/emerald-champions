@@ -508,15 +508,10 @@ static void MarkIcePuzzleCoordVisited(s16 x, s16 y)
 
 static bool32 IsIcePuzzleCoordVisited(s16 x, s16 y)
 {
-    u32 var;
     if (!CoordInIcePuzzleRegion(x, y))
         return FALSE;
 
-    var = VarGet(sSootopolisGymIceRowVars[y]) << 16;
-    if ((0x10000 << (x - 3)) & var) // TODO: fix that if
-        return TRUE;
-    else
-        return FALSE;
+    return (VarGet(sSootopolisGymIceRowVars[y]) & (1 << (x - 3))) != 0;
 }
 
 void SetSootopolisGymCrackedIceMetatiles(void)

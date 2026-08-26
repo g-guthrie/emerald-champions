@@ -54,6 +54,8 @@ extern u16 gAnimMoveIndex;
 
 void ClearBattleAnimationVars(void);
 void DoMoveAnim(u16 move);
+void AnimTask_AllySwitchAttacker(u8 taskId);
+void AnimTask_AllySwitchPartner(u8 taskId);
 void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMoveAnim);
 void DestroyAnimSprite(struct Sprite *sprite);
 void DestroyAnimVisualTask(u8 taskId);
@@ -299,6 +301,11 @@ void AnimTealAlert(struct Sprite *sprite);
 void AnimBlockX(struct Sprite *sprite);
 extern const union AnimCmd *const gOpeningEyeAnimTable[];
 extern const union AnimCmd *const gEclipsingOrbAnimTable[];
+extern const union AffineAnimCmd *const gSmokeBallEscapeCloudAffineAnimTable[];
+extern const union AffineAnimCmd *const gKnockOffStrikeAffineAnimTable[];
+extern const union AnimCmd *const gKnockOffStrikeAnimTable[];
+void AnimSmokeBallEscapeCloud(struct Sprite *sprite);
+void AnimKnockOffStrike_Step(struct Sprite *sprite);
 
 // battle_anim_water.c
 void AnimWaterPulseRing(struct Sprite *sprite);
@@ -332,6 +339,7 @@ void AnimGhostStatusSprite(struct Sprite *sprite);
 void AnimShadowBall(struct Sprite *sprite);
 void AnimTask_GrudgeFlames_Step(u8 taskId);
 extern const union AffineAnimCmd *const gAffineAnims_ShadowBall[];
+extern const union AnimCmd *const gAnims_GrudgeFlame[];
 
 // battle_anim_psychic.c
 extern const union AffineAnimCmd *const gAffineAnims_PsychoBoostOrb[];
@@ -451,6 +459,7 @@ void AnimRaiseSprite(struct Sprite *sprite);
 void AnimFallingRock_Step(struct Sprite *sprite);
 void AnimFlyingSandCrescent(struct Sprite *sprite);
 void AnimRockFragment(struct Sprite *);
+void AnimRockBlastRock(struct Sprite *sprite);
 
 // battle_anim_dark.c
 void AnimClawSlash(struct Sprite *sprite);
@@ -494,5 +503,10 @@ void AnimOverheatFlame(struct Sprite *sprite);
 
 // battle_anim_new.c
 void CoreEnforcerLoadBeamTarget(struct Sprite* sprite);
+
+// Reused by Expansion move animation templates.
+extern const union AnimCmd *const gAnims_FallingFeather[];
+extern const union AnimCmd *const gAnims_IceCrystalSmall[];
+extern const union AnimCmd *const gAnims_SpinningSparkle[];
 
 #endif // GUARD_BATTLE_ANIM_H

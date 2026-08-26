@@ -1518,7 +1518,7 @@ static void GetDaycareLevelMenuLevelText(struct DayCare *daycare, u8 *dest)
     for (i = 0; i < DAYCARE_MON_COUNT; i++)
     {
         StringAppend(dest, gText_Lv);
-        level = GetLevelAfterDaycareSteps(&daycare->mons[i].mon, daycare->mons[i].steps);
+        level = GetLevelFromBoxMonExp(&daycare->mons[i].mon);
         ConvertIntToDecimalStringN(text, level, STR_CONV_MODE_LEFT_ALIGN, 3);
         StringAppend(dest, text);
         StringAppend(dest, gText_NewLine2);

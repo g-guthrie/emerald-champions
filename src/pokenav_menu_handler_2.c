@@ -1223,7 +1223,9 @@ static void SetupPokenavMenuScanlineEffects(void)
     SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
     SetGpuRegBits(REG_OFFSET_WININ, WININ_WIN0_ALL);
     SetGpuRegBits(REG_OFFSET_WINOUT, WINOUT_WIN01_BG_ALL | WINOUT_WIN01_OBJ);
-    SetGpuRegBits(REG_OFFSET_WIN0V, DISPLAY_HEIGHT);
+    // Replace the whole range. OR-ing here preserves stale bounds from the
+    // party screen and can clip or entirely hide the selected-option glow.
+    SetGpuReg(REG_OFFSET_WIN0V, DISPLAY_HEIGHT);
     ScanlineEffect_Stop();
     SetMenuOptionGlow();
     ScanlineEffect_SetParams(sPokenavMainMenuScanlineEffectParams);

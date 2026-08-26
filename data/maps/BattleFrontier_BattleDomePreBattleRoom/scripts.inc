@@ -21,6 +21,7 @@ BattleFrontier_BattleDomePreBattleRoom_OnFrame: @ 824B218
 BattleFrontier_BattleDomePreBattleRoom_EventScript_EnterRoom:: @ 824B222
 	compare VAR_0x8006, 1
 	goto_if_eq BattleFrontier_BattleDomePreBattleRoom_EventScript_ReturnFromBattle
+	delay 1
 	frontier_set FRONTIER_DATA_RECORD_DISABLED, TRUE
 	setvar VAR_TEMP_0, 1
 	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleDomePreBattleRoom_Movement_PlayerEnter
@@ -393,4 +394,3 @@ BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForTuckerSilverShort: @ 824BC2A
 BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForTuckerGoldShort: @ 824BC63
 	.string "Your final battle against TUCKER is\n"
 	.string "next. Are you ready?$"
-

@@ -45,7 +45,7 @@ MARQUEE_TRAINERS = {
 
 BOSS_LEVEL_OFFSETS = {
     "Roxanne": [-1, -1, -2, -2, 0, 1],
-    "Brawly": [-1, -1, 0, 0, 1, 1],
+    "Brawly": [2, 3, 3, 3, 4, 5],
     "Wattson": [0, 0, 0, 0, 1, 2],
     "Flannery": [0, 0, 0, 0, 1, 2],
     "Norman": [0, 0, 0, 1, 1, 2],
@@ -277,6 +277,15 @@ def set_ai(block: str, flags: list[str]) -> str:
     return block[:match.start()] + match.group(1) + " | ".join(existing) + match.group(3) + block[match.end():]
 
 
+def clear_ai(block: str, flags: set[str]) -> str:
+    match = re.search(r"^(\s*\.aiFlags\s*=\s*)(.*?)(,\s*)$", block, re.M)
+    if not match:
+        raise ValueError("trainer block has no aiFlags")
+    existing = [part.strip() for part in match.group(2).split("|")]
+    kept = [part for part in existing if part not in flags]
+    return block[:match.start()] + match.group(1) + " | ".join(kept) + match.group(3) + block[match.end():]
+
+
 def rewrite_trainers(text: str, manifest: dict) -> str:
     marquee = {boss["trainer_id"]: boss for boss in manifest["bosses"]}
     pieces, cursor = [], 0
@@ -287,8 +296,9 @@ def rewrite_trainers(text: str, manifest: dict) -> str:
         if rule:
             desired = "TRUE" if rule["format"] == "double" else "FALSE"
             block = re.sub(r"(\.doubleBattle\s*=\s*)(TRUE|FALSE)", rf"\g<1>{desired}", block)
+            block = clear_ai(block, {"AI_FLAG_SMART_SWITCHING", "AI_FLAG_HELP_PARTNER"})
             flags = ["AI_FLAG_CHECK_FOE"]
-            if rule["target_size"] == 6 or rule["difficulty"] >= 70:
+            if rule.get("smart_switching", rule["target_size"] == 6 or rule["difficulty"] >= 70):
                 flags.append("AI_FLAG_SMART_SWITCHING")
             if rule["format"] == "double" and (rule["partner_interaction"] or trainer_id in marquee):
                 flags.append("AI_FLAG_HELP_PARTNER")

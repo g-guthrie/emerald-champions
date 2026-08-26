@@ -51,7 +51,7 @@ extern const struct BattleFrontierTrainer *gFacilityTrainers;
 extern const struct FacilityMon *gFacilityTrainerMons;
 
 void CallBattleTowerFunc(void);
-u16 GetRandomScaledFrontierTrainerId(u8 challengeNum, u8 battleNum);
+u16 GetRandomScaledFrontierTrainerId(u16 challengeNum, u8 battleNum);
 void SetBattleFacilityTrainerGfxId(u16 trainerId, u8 tempVarId);
 void SetEReaderTrainerGfxId(void);
 u8 GetBattleFacilityTrainerGfxId(u16 trainerId);

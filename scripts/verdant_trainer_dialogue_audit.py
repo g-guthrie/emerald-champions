@@ -21,6 +21,21 @@ SINGLE_LANGUAGE = re.compile(
 )
 
 STRATEGY_CUES = {
+    "Route116_Text_JoeyPostBattle": "Crabrawler's Anger Point",
+    "Route116_Text_JosePostBattle": "Charjabug's Battery",
+    "Route116_Text_DevanPostBattle": "Drilbur races through it",
+    "Route116_Text_SarahPostBattle": "Diancie twists the room",
+    "Route116_Text_DawsonPostBattle": "Wooloo curls before it rolls",
+    "Route116_Text_JanicePostBattle": "Pincurchin electrifies the field",
+    "Route116_Text_JerryPostBattle": "Klink leads when our circuits join",
+    "Route116_Text_KarenPostBattle": "Wonder Room trades Defense",
+    "Route116_Text_ClarkPostBattle": "Gravity makes Rhyhorn",
+    "Route116_Text_JohnsonPostBattle": "Friend Guard cushions",
+    "RusturfTunnel_Text_GruntTakePackage": "little commander",
+    "RustboroCity_Text_MayImNotGoingToLose": "Read the forecast",
+    "RustboroCity_Text_BrendanIWontGoEasy": "Read the forecast",
+    "Route104_Text_MayIntro": "Read the forecast",
+    "Route104_Text_BrendanIntro": "Read the forecast",
     "Route104_Text_IvanPostBattle": "schools at level 20",
     "Route104_Text_MiaIntro": "follows each dance",
     "RustboroCity_Gym_Text_JoshPostBattle": "Guard Split lends",

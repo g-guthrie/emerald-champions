@@ -554,6 +554,8 @@ gSpecials::
 	def_special GetPKMNCenterMoveListMultichoice
 	def_special GiveAllTMs
 	def_special OpenUnlockedBattleItemMart
+	def_special TryGiveVerdantMegaKit
+	def_special TryGiveVerdantStevenRewardBundle
 	def_special AreChosenMonEVsMaxedOut
 	def_special Bag_ChooseItem
 	def_special Bag_ChoosePokeBall

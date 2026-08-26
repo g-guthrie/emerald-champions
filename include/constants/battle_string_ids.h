@@ -615,8 +615,13 @@
 #define STRINGID_PREPARESHELLTRAP                     612
 #define STRINGID_SHELLTRAPDIDNTWORK                   613
 #define STRINGID_SALTCUREAPPLIED                      614
+#define STRINGID_ITEMWASUSEDUP                        615
+#define STRINGID_TARGETTOOHEAVY                       616
+#define STRINGID_METEORBEAMCHARGING                   617
+#define STRINGID_HEATUPBEAK                           618
+#define STRINGID_ITEMMELTED                           619
 
-#define BATTLESTRINGS_COUNT                           615
+#define BATTLESTRINGS_COUNT                           620
 
 // The below IDs are all indexes into battle message tables,
 // used to determine which of a set of messages to print.
@@ -667,6 +672,8 @@
 #define B_MSG_TURN1_PHANTOM_FORCE  8
 #define B_MSG_TURN1_GEOMANCY       9
 #define B_MSG_TURN1_FREEZE_SHOCK   10
+#define B_MSG_TURN1_METEOR_BEAM    11
+#define B_MSG_TURN1_SKY_DROP       12
 
 // gMoveWeatherChangeStringIds
 #define B_MSG_STARTED_RAIN      0

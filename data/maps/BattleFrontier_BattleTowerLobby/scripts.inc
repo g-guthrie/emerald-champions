@@ -429,12 +429,14 @@ BattleFrontier_BattleTowerLobby_EventScript_SaveBeforeLinkMultisChallenge:: @ 82
 	special LoadPlayerParty
 	closemessage
 	delay 2
-	tower_save 0
+	@ Do not use the partial SAVE_LINK path here. It omits Pokémon Storage,
+	@ allowing party/PC state to diverge before the full save below.
 	call Common_EventScript_SaveGame
 	setvar VAR_TEMP_0, 255
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_CancelChallengeSaveFailed
-	incrementgamestat GAME_STAT_ENTERED_BATTLE_TOWER
+	@ The cable/wireless success path increments the entry statistic once the
+	@ connection actually succeeds.
 	specialvar VAR_RESULT, IsWirelessAdapterConnected
 	compare VAR_RESULT, TRUE
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_TryWirelessLink

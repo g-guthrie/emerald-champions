@@ -9,10 +9,12 @@ actually reach them.
 `scripts/verdant_evolution_stage_audit.py` reads the checked-in evolution table,
 trainer parties, strict cap table, map battle scripts, and Mega Bracelet grant
 scripts. It enforces these rules for every closed bespoke encounter before the
-Stone Badge and before the player can obtain the Mega Bracelet:
+player can obtain the Mega Bracelet:
 
-1. At least 75% of each party must be either a first-stage Pokémon or a truly
-   single-stage Pokémon. For a four-Pokémon party, that means at least three.
+1. Before the Stone Badge, at least 75% of each party must be either a
+   first-stage Pokémon or a truly single-stage Pokémon. At cap 20, legal early
+   evolutions may appear naturally; the legal-level and pre-Mega rules still
+   apply to every slot.
 2. Any species with an incoming non-battle evolution edge is evolved. Item,
    trade, friendship, move, location, beauty, and other non-level methods all
    count; they are not mislabeled as single-stage.

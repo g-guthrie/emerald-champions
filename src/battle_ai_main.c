@@ -2371,9 +2371,6 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                   || IsInstructBannedMove(instructedMove)
                   || MoveRequiresRecharging(instructedMove)
                   || MoveCallsOtherMove(instructedMove)
-                  #ifdef ITEM_Z_POWER_RING
-                  //|| (IsZMove(instructedMove))
-                  #endif
                   || (gLockedMoves[battlerDef] != 0 && gLockedMoves[battlerDef] != 0xFFFF)
                   || gBattleMons[battlerDef].status2 & STATUS2_MULTIPLETURNS
                   || PartnerMoveIsSameAsAttacker(AI_DATA->battlerAtkPartner, battlerDef, move, AI_DATA->partnerMove))
@@ -2834,6 +2831,15 @@ static s16 AI_DoubleBattle(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                     RETURN_SCORE_PLUS(1);
                 }
                 break;
+            case EFFECT_ALWAYS_CRIT:
+                if (atkPartnerAbility == ABILITY_ANGER_POINT
+                  && HasMoveWithSplit(battlerAtkPartner, SPLIT_PHYSICAL)
+                  && BattlerStatCanRise(battlerAtkPartner, atkPartnerAbility, STAT_ATK)
+                  && !CanIndexMoveFaintTarget(battlerAtk, battlerAtkPartner, AI_THINKING_STRUCT->movesetIndex, 0))
+                {
+                    RETURN_SCORE_PLUS(2);
+                }
+                break;
             case EFFECT_BEAT_UP:
                 if (atkPartnerAbility == ABILITY_JUSTIFIED
                   && moveType == TYPE_DARK
@@ -3090,12 +3096,29 @@ static s16 AI_ComboSetup(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
       && HasMoveWithSplit(BATTLE_PARTNER(battlerAtk), SPLIT_PHYSICAL))
         score += 12;
 
+    if (move == MOVE_ORDER_UP
+      && gBattleMons[battlerAtk].species == SPECIES_DONDOZO
+      && IsBattlerAlive(BATTLE_PARTNER(battlerAtk))
+      && partnerAbility == ABILITY_COMMANDER
+      && gBattleMons[BATTLE_PARTNER(battlerAtk)].species == SPECIES_TATSUGIRI_STRETCHY
+      && BattlerStatCanRise(battlerAtk, AI_DATA->atkAbility, STAT_SPEED))
+        score += 12;
+
+    if (move == MOVE_TOXIC
+      && IsBattlerAlive(BATTLE_PARTNER(battlerAtk))
+      && (partnerAbility == ABILITY_MERCILESS || HasMove(BATTLE_PARTNER(battlerAtk), MOVE_VENOSHOCK))
+      && AI_CanPoison(battlerAtk, battlerDef, AI_DATA->defAbility, move, AI_DATA->partnerMove))
+        score += 8;
+
     if (!IsTargetingPartner(battlerAtk, battlerDef))
         return score;
 
     if (effect == EFFECT_BEAT_UP && partnerAbility == ABILITY_JUSTIFIED)
         score += 15;
-    else if (effect == EFFECT_ALWAYS_CRIT && partnerAbility == ABILITY_ANGER_POINT)
+    else if (effect == EFFECT_ALWAYS_CRIT
+          && partnerAbility == ABILITY_ANGER_POINT
+          && BattlerStatCanRise(battlerDef, partnerAbility, STAT_ATK)
+          && !CanIndexMoveFaintTarget(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex, 0))
         score += 15;
     else if (effect == EFFECT_GUARD_SPLIT
           && gBattleMons[battlerAtk].defense + gBattleMons[battlerAtk].spDefense
@@ -3206,6 +3229,11 @@ static s16 AI_FieldControl(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     case EFFECT_AURORA_VEIL:
         if (!(gSideStatuses[side] & SIDE_STATUS_AURORA_VEIL))
             score += 7;
+        break;
+    case EFFECT_WONDER_ROOM:
+        if (!(gFieldStatuses & STATUS_FIELD_WONDER_ROOM)
+          && gBattleResults.battleTurnCounter == 0)
+            score += 8;
         break;
     }
 

@@ -22,6 +22,7 @@ struct Item
     u8 battleUsage;
     ItemUseFunc battleUseFunc;
     u8 secondaryId;
+    u8 flingPower;
 };
 
 struct BagPocket
@@ -44,6 +45,9 @@ bool8 HasAtLeastOneBerry(void);
 bool8 CheckBagHasSpace(u16 itemId, u16 count);
 bool8 AddBagItem(u16 itemId, u16 count);
 u16 BuildUnlockedBattleItemList(u16 *items, u16 capacity);
+bool8 PlayerOwnsItemAnywhere(u16 itemId);
+bool8 TryAddVerdantMegaKit(void);
+bool8 TryAddVerdantStevenRewardBundle(void);
 bool8 RemoveBagItem(u16 itemId, u16 count);
 u8 GetPocketByItemId(u16 itemId);
 void ClearItemSlots(struct ItemSlot *itemSlots, u8 itemCount);
@@ -76,6 +80,7 @@ ItemUseFunc ItemId_GetFieldFunc(u16 itemId);
 u8 ItemId_GetBattleUsage(u16 itemId);
 ItemUseFunc ItemId_GetBattleFunc(u16 itemId);
 u8 ItemId_GetSecondaryId(u16 itemId);
+u8 ItemId_GetFlingPower(u16 itemId);
 bool32 IsPinchBerryItemEffect(u16 holdEffect);
 
 #endif // GUARD_ITEM_H

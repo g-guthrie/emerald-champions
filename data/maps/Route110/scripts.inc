@@ -337,9 +337,12 @@ Route110_EventScript_CyclingChallengeResults:: @ 81EF673
 
 Route110_EventScript_ChallengeReactionBest:: @ 81EF6FD
 	msgbox Route110_Text_ChallengeReactionBest, MSGBOX_DEFAULT
-	goto_if_set FLAG_TM93_WILD_CHARGE, Route110_EventScript_EndChallenge
+	goto_if_set FLAG_VERDANT_CYCLING_REWARD_ELECTRIC_SEED, Route110_EventScript_EndChallenge
 	msgbox Route110_Text_GiveTM93, MSGBOX_DEFAULT
 	giveitem ITEM_ELECTRIC_SEED
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
+	setflag FLAG_VERDANT_CYCLING_REWARD_ELECTRIC_SEED
 	goto Route110_EventScript_EndChallenge
 	end
 
@@ -348,6 +351,8 @@ Route110_EventScript_ChallengeReactionGood:: @ 81EF70B
 	goto_if_set FLAG_VERDANT_GIFT_FLAME_CHARGE, Route110_EventScript_EndChallenge
 	msgbox Route110_Text_GiveTM83, MSGBOX_DEFAULT
 	giveitem ITEM_QUICK_CLAW
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_VERDANT_GIFT_FLAME_CHARGE
 	goto Route110_EventScript_EndChallenge
 	end

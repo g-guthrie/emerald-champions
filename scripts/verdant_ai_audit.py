@@ -99,7 +99,22 @@ def main() -> None:
     }
     for trainer_id in custom.AI_PROFILES["AI_FLAG_COMBO_SETUP"]:
         moves = {move for mon in teams[trainer_id]["mons"] for move in mon["moves"]}
-        if not (combo_tags & set(teams[trainer_id]["synergy_tags"]) or moves & {"MOVE_BEAT_UP", "MOVE_FROST_BREATH", "MOVE_SURF", "MOVE_SKILL_SWAP"}):
+        abilities = {mon["ability"] for mon in teams[trainer_id]["mons"]}
+        native_motor_drive_circuit = (
+            trainer_id == "TRAINER_JANICE"
+            and "MOVE_DISCHARGE" in moves
+            and any(mon["ability"] == "ABILITY_MOTOR_DRIVE" for mon in teams["TRAINER_JERRY_1"]["mons"])
+        ) or (
+            trainer_id == "TRAINER_JERRY_1"
+            and "ABILITY_MOTOR_DRIVE" in abilities
+            and any("MOVE_DISCHARGE" in mon["moves"] for mon in teams["TRAINER_JANICE"]["mons"])
+        )
+        if not (
+            combo_tags & set(teams[trainer_id]["synergy_tags"])
+            or moves & {"MOVE_BEAT_UP", "MOVE_FROST_BREATH", "MOVE_SURF", "MOVE_SKILL_SWAP"}
+            or "ABILITY_COMMANDER" in abilities
+            or native_motor_drive_circuit
+        ):
             problems.append(f"{trainer_id}: combo profile has no ally activation")
     for trainer_id in custom.AI_PROFILES["AI_FLAG_SPEED_CONTROL"]:
         team = teams[trainer_id]
@@ -107,7 +122,8 @@ def main() -> None:
             problems.append(f"{trainer_id}: speed profile has no speed mode")
     field_markers = {
         "rain", "sun", "sand", "snow", "terrain", "screens", "aurora",
-        "reflect", "light_screen",
+        "reflect", "light_screen", "trick room", "trick_room", "gravity",
+        "wonder room", "wonder_room",
     }
     for trainer_id in custom.AI_PROFILES["AI_FLAG_FIELD_CONTROL"]:
         tags = " ".join(teams[trainer_id]["synergy_tags"]).lower()

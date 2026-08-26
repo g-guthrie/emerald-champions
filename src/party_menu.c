@@ -33,6 +33,7 @@
 #include "item_use.h"
 #include "link.h"
 #include "link_rfu.h"
+#include "list_menu.h"
 #include "mail.h"
 #include "main.h"
 #include "menu.h"
@@ -92,6 +93,10 @@
 #define MENU_DIR_RIGHT    2
 #define MENU_DIR_LEFT    -2
 
+#define PARTY_MENU_MAX_ACTIONS               (MAX_MON_MOVES + 7)
+#define PARTY_MENU_MAX_VISIBLE_ACTIONS       8
+#define PARTY_ACTION_SCROLL_ARROW_TAG        0x13F9
+
 enum
 {
     CAN_LEARN_MOVE,
@@ -120,8 +125,13 @@ struct PartyMenuInternal
     u32 spriteIdCancelPokeball:7;
     u32 messageId:14;
     u8 windowId[3];
-    u8 actions[9];
+    u8 actions[PARTY_MENU_MAX_ACTIONS];
     u8 numActions;
+    struct ListMenuItem actionListItems[PARTY_MENU_MAX_ACTIONS];
+    u16 actionScrollOffset;
+    u8 actionListTaskId;
+    u8 actionScrollArrowTaskId;
+    u8 selectedActionIndex;
     // In vanilla Emerald, only the first 0xB0 hwords (0x160 bytes) are actually used.
     // However, a full 0x100 hwords (0x200 bytes) are allocated.
     // It is likely that the 0x160 value used below is a constant defined by
@@ -268,6 +278,9 @@ static u8 GetPartyMenuActionsTypeInBattle(struct Pokemon*);
 static u8 GetPartySlotEntryStatus(s8);
 static void Task_UpdateHeldItemSprite(u8);
 static void Task_HandleSelectionMenuInput(u8);
+static void PartyActionListMoveCursor(s32, bool8, struct ListMenu *);
+static void PartyActionListItemPrint(u8, u32, u8);
+static void DestroyPartyActionList(void);
 static void CB2_ShowPokemonSummaryScreen(void);
 static void UpdatePartyToBattleOrder(void);
 static void CB2_ReturnToPartyMenuFromSummaryScreen(void);
@@ -420,6 +433,28 @@ static bool8 SetUpFieldMove_Dive(void);
 #include "data/pokemon/tutor_learnsets.h"
 #include "data/party_menu.h"
 
+static const struct ListMenuTemplate sPartyActionListTemplate =
+{
+    .items = NULL,
+    .moveCursorFunc = PartyActionListMoveCursor,
+    .itemPrintFunc = PartyActionListItemPrint,
+    .totalItems = 0,
+    .maxShowed = PARTY_MENU_MAX_VISIBLE_ACTIONS,
+    .windowId = 0,
+    .header_X = 0,
+    .item_X = 8,
+    .cursor_X = 0,
+    .upText_Y = 1,
+    .cursorPal = TEXT_COLOR_DARK_GRAY,
+    .fillValue = TEXT_COLOR_WHITE,
+    .cursorShadowPal = TEXT_COLOR_LIGHT_GRAY,
+    .lettersSpacing = 0,
+    .itemVerticalPadding = 0,
+    .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
+    .fontId = 1,
+    .cursorKind = 0,
+};
+
 // code
 static void InitPartyMenu(u8 menuType, u8 layout, u8 partyAction, bool8 keepCursorPos, u8 messageId, TaskFunc task, MainCallback callback)
 {
@@ -442,6 +477,10 @@ static void InitPartyMenu(u8 menuType, u8 layout, u8 partyAction, bool8 keepCurs
         sPartyMenuInternal->lastSelectedSlot = 0;
         sPartyMenuInternal->spriteIdConfirmPokeball = 0x7F;
         sPartyMenuInternal->spriteIdCancelPokeball = 0x7F;
+        sPartyMenuInternal->actionListTaskId = TASK_NONE;
+        sPartyMenuInternal->actionScrollArrowTaskId = TASK_NONE;
+        sPartyMenuInternal->actionScrollOffset = 0;
+        sPartyMenuInternal->selectedActionIndex = 0;
 
         if (menuType == PARTY_MENU_TYPE_CHOOSE_HALF)
             sPartyMenuInternal->chooseHalf = TRUE;
@@ -2511,14 +2550,20 @@ static bool8 ShouldUseChooseMonText(void)
 static u8 DisplaySelectionWindow(u8 windowType)
 {
     struct WindowTemplate window;
+    struct ListMenuTemplate listTemplate;
     u8 cursorDimension;
     u8 fontAttribute;
     u8 i;
+    bool8 useScrollingList = windowType == SELECTWINDOW_ACTIONS
+                          && sPartyMenuInternal->numActions > PARTY_MENU_MAX_VISIBLE_ACTIONS;
 
     switch (windowType)
     {
     case SELECTWINDOW_ACTIONS:
-        SetWindowTemplateFields(&window, 2, 19, 19 - (sPartyMenuInternal->numActions * 2), 10, sPartyMenuInternal->numActions * 2, 14, 0x2E9);
+        if (useScrollingList)
+            SetWindowTemplateFields(&window, 2, 19, 2, 10, PARTY_MENU_MAX_VISIBLE_ACTIONS * 2, 14, 0x2E9);
+        else
+            SetWindowTemplateFields(&window, 2, 19, 19 - (sPartyMenuInternal->numActions * 2), 10, sPartyMenuInternal->numActions * 2, 14, 0x2E9);
         break;
     case SELECTWINDOW_ITEM:
         window = sItemGiveTakeWindowTemplate;
@@ -2538,16 +2583,68 @@ static u8 DisplaySelectionWindow(u8 windowType)
     cursorDimension = GetMenuCursorDimensionByFont(1, 0);
     fontAttribute = GetFontAttribute(1, 2);
 
-    for (i = 0; i < sPartyMenuInternal->numActions; i++)
+    if (useScrollingList)
     {
-        u8 fontColorsId = (sPartyMenuInternal->actions[i] >= MENU_FIELD_MOVES) ? 4 : 3;
-        AddTextPrinterParameterized4(sPartyMenuInternal->windowId[0], 1, cursorDimension, (i * 16) + 1, fontAttribute, 0, sFontColorTable[fontColorsId], 0, sCursorOptions[sPartyMenuInternal->actions[i]].text);
-    }
+        for (i = 0; i < sPartyMenuInternal->numActions; i++)
+        {
+            sPartyMenuInternal->actionListItems[i].name = sCursorOptions[sPartyMenuInternal->actions[i]].text;
+            sPartyMenuInternal->actionListItems[i].id = i;
+        }
 
-    InitMenuInUpperLeftCorner(sPartyMenuInternal->windowId[0], sPartyMenuInternal->numActions, 0, 1);
+        sPartyMenuInternal->actionScrollOffset = 0;
+        listTemplate = sPartyActionListTemplate;
+        listTemplate.items = sPartyMenuInternal->actionListItems;
+        listTemplate.totalItems = sPartyMenuInternal->numActions;
+        listTemplate.windowId = sPartyMenuInternal->windowId[0];
+        sPartyMenuInternal->actionListTaskId = ListMenuInit(&listTemplate, 0, 0);
+        sPartyMenuInternal->actionScrollArrowTaskId = AddScrollIndicatorArrowPairParameterized(
+            SCROLL_ARROW_UP, 232, 12, 148,
+            sPartyMenuInternal->numActions - PARTY_MENU_MAX_VISIBLE_ACTIONS,
+            PARTY_ACTION_SCROLL_ARROW_TAG, PARTY_ACTION_SCROLL_ARROW_TAG,
+            &sPartyMenuInternal->actionScrollOffset);
+    }
+    else
+    {
+        for (i = 0; i < sPartyMenuInternal->numActions; i++)
+        {
+            u8 fontColorsId = (sPartyMenuInternal->actions[i] >= MENU_FIELD_MOVES) ? 4 : 3;
+            AddTextPrinterParameterized4(sPartyMenuInternal->windowId[0], 1, cursorDimension, (i * 16) + 1, fontAttribute, 0, sFontColorTable[fontColorsId], 0, sCursorOptions[sPartyMenuInternal->actions[i]].text);
+        }
+        InitMenuInUpperLeftCorner(sPartyMenuInternal->windowId[0], sPartyMenuInternal->numActions, 0, TRUE);
+    }
     ScheduleBgCopyTilemapToVram(2);
 
     return sPartyMenuInternal->windowId[0];
+}
+
+static void PartyActionListMoveCursor(s32 itemIndex, bool8 onInit, struct ListMenu *list)
+{
+    if (!onInit)
+        PlaySE(SE_SELECT);
+    sPartyMenuInternal->actionScrollOffset = list->scrollOffset;
+}
+
+static void PartyActionListItemPrint(u8 windowId, u32 itemId, u8 y)
+{
+    (void)windowId;
+    (void)y;
+
+    if (sPartyMenuInternal->actions[itemId] >= MENU_FIELD_MOVES)
+        ListMenuOverrideSetColors(TEXT_COLOR_BLUE, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_BLUE);
+}
+
+static void DestroyPartyActionList(void)
+{
+    if (sPartyMenuInternal->actionScrollArrowTaskId != TASK_NONE)
+    {
+        RemoveScrollIndicatorArrowPair(sPartyMenuInternal->actionScrollArrowTaskId);
+        sPartyMenuInternal->actionScrollArrowTaskId = TASK_NONE;
+    }
+    if (sPartyMenuInternal->actionListTaskId != TASK_NONE)
+    {
+        DestroyListMenuTask(sPartyMenuInternal->actionListTaskId, NULL, NULL);
+        sPartyMenuInternal->actionListTaskId = TASK_NONE;
+    }
 }
 
 static void PartyMenuPrintText(const u8 *text)
@@ -2748,25 +2845,46 @@ static void Task_HandleSelectionMenuInput(u8 taskId)
 {
     if (!gPaletteFade.active && MenuHelpers_CallLinkSomething() != TRUE)
     {
-        s8 input;
+        s32 input;
         s16 *data = gTasks[taskId].data;
 
-        if (sPartyMenuInternal->numActions <= 3)
-            input = Menu_ProcessInputNoWrapAround_other();
-        else
-            input = ProcessMenuInput_other();
+        if (sPartyMenuInternal->actionListTaskId != TASK_NONE)
+        {
+            u16 selectedAction;
 
-        data[0] = Menu_GetCursorPos();
+            input = ListMenu_ProcessInput(sPartyMenuInternal->actionListTaskId);
+            if (input == LIST_NOTHING_CHOSEN)
+                input = MENU_NOTHING_CHOSEN;
+            else if (input == LIST_CANCEL)
+                input = MENU_B_PRESSED;
+            ListMenuGetCurrentItemArrayId(sPartyMenuInternal->actionListTaskId, &selectedAction);
+            data[0] = selectedAction;
+        }
+        else if (sPartyMenuInternal->numActions <= 3)
+        {
+            input = Menu_ProcessInputNoWrapAround_other();
+            data[0] = Menu_GetCursorPos();
+        }
+        else
+        {
+            input = ProcessMenuInput_other();
+            data[0] = Menu_GetCursorPos();
+        }
+
         switch (input)
         {
         case MENU_NOTHING_CHOSEN:
             break;
         case MENU_B_PRESSED:
             PlaySE(SE_SELECT);
+            sPartyMenuInternal->selectedActionIndex = sPartyMenuInternal->numActions - 1;
+            DestroyPartyActionList();
             PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[2]);
             sCursorOptions[sPartyMenuInternal->actions[sPartyMenuInternal->numActions - 1]].func(taskId);
             break;
         default:
+            sPartyMenuInternal->selectedActionIndex = input;
+            DestroyPartyActionList();
             PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[2]);
             sCursorOptions[sPartyMenuInternal->actions[input]].func(taskId);
             break;
@@ -3858,7 +3976,7 @@ static void Task_HandleSpinTradeYesNoInput(u8 taskId)
 
 static void CursorCb_FieldMove(u8 taskId)
 {
-    u8 fieldMove = sPartyMenuInternal->actions[Menu_GetCursorPos()] - MENU_FIELD_MOVES;
+    u8 fieldMove = sPartyMenuInternal->actions[sPartyMenuInternal->selectedActionIndex] - MENU_FIELD_MOVES;
     const struct MapHeader *mapHeader;
 
     PlaySE(SE_SELECT);
@@ -6238,7 +6356,7 @@ static u8 GetMaxBattleEntries(void)
     case FACILITY_UNION_ROOM:
         return UNION_ROOM_PARTY_SIZE;
     default: // Battle Frontier
-        return gSpecialVar_0x8005;
+        return min(gSpecialVar_0x8005, MAX_FRONTIER_PARTY_SIZE);
     }
 }
 
@@ -6251,7 +6369,7 @@ static u8 GetMinBattleEntries(void)
     case FACILITY_UNION_ROOM:
         return UNION_ROOM_PARTY_SIZE;
     default: // Battle Frontier
-        return gSpecialVar_0x8005;
+        return min(gSpecialVar_0x8005, MAX_FRONTIER_PARTY_SIZE);
     }
 }
 

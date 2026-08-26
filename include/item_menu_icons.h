@@ -14,6 +14,7 @@ void ShakeBagSprite(void);
 void AddSwitchPocketRotatingBallSprite(s16 rotationDirection);
 void AddBagItemIconSprite(u16 itemId, u8 id);
 void RemoveBagItemIconSprite(u8 id);
+void HideBagItemIconSprite(u8 id);
 void CreateItemMenuSwapLine(void);
 void SetItemMenuSwapLineInvisibility(bool8 invisible);
 void UpdateItemMenuSwapLinePos(u8 y);

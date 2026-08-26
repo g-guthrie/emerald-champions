@@ -1551,7 +1551,8 @@ static void SpriteCB_CreditsMonBg(struct Sprite *sprite)
 
 static void DeterminePokemonToShow(void)
 {
-    u16 starter = SpeciesToNationalPokedexNum(GetStarterPokemon(VarGet(VAR_STARTER_MON)));
+    u16 starter = SpeciesToNationalPokedexNum(
+        GetStarterPokemonForGeneration(VarGet(VAR_STARTER_MON), VarGet(VAR_STARTER_GEN)));
     u16 page;
     u16 dexNum;
     u16 j;
@@ -1602,13 +1603,21 @@ static void DeterminePokemonToShow(void)
     // If we don't have enough pokemon in the dex to fill everything, copy the selected mon into the end of the array, so it loops
     if (sCreditsData->numMonToShow < NUM_MON_SLIDES)
     {
-        for (j = sCreditsData->numMonToShow, page = 0; j < NUM_MON_SLIDES; j++)
+        if (sCreditsData->numMonToShow == 0)
         {
-            sCreditsData->monToShow[j] = sCreditsData->monToShow[page];
+            for (j = 0; j < NUM_MON_SLIDES; j++)
+                sCreditsData->monToShow[j] = starter;
+        }
+        else
+        {
+            for (j = sCreditsData->numMonToShow, page = 0; j < NUM_MON_SLIDES; j++)
+            {
+                sCreditsData->monToShow[j] = sCreditsData->monToShow[page];
 
-            page++;
-            if (page == sCreditsData->numMonToShow)
-                page = 0;
+                page++;
+                if (page == sCreditsData->numMonToShow)
+                    page = 0;
+            }
         }
         // Ensure the last pokemon is our starter
         sCreditsData->monToShow[NUM_MON_SLIDES - 1] = starter;
@@ -1616,7 +1625,7 @@ static void DeterminePokemonToShow(void)
     else
     {
         // Check to see if our starter has already appeared in this list, break if it has
-        for (dexNum = 0; sCreditsData->monToShow[dexNum] != starter && dexNum < NUM_MON_SLIDES; dexNum++);
+        for (dexNum = 0; dexNum < NUM_MON_SLIDES && sCreditsData->monToShow[dexNum] != starter; dexNum++);
 
         // If it has, swap it with the last pokemon, to ensure our starter is the last image
         if (dexNum < sCreditsData->numMonToShow - 1)

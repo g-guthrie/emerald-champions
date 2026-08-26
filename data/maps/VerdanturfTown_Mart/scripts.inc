@@ -42,6 +42,8 @@ VerdanturfTown_Mart_EventScript_PaybackTM::
 	goto_if_set FLAG_VERDANT_GIFT_PAYBACK, VerdanturfTown_Mart_EventScript_ReceivedTM66
 	msgbox VerdanturfTown_Mart_Text_SlowPokemon, MSGBOX_DEFAULT
 	giveitem ITEM_WEAKNESS_POLICY
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_VERDANT_GIFT_PAYBACK
 	msgbox VerdanturfTown_Mart_Text_HaveTM66, MSGBOX_DEFAULT
 	release

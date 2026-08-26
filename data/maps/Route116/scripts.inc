@@ -247,12 +247,12 @@ Route116_Movement_GlassesManExitEast: @ 81F2E7E
 	step_end
 
 Route116_EventScript_Joey:: @ 81F2E89
-	trainerbattle_single TRAINER_JOEY, Route116_Text_JoeyIntro, Route116_Text_JoeyDefeat
+	trainerbattle_double TRAINER_JOEY, Route116_Text_JoeyIntro, Route116_Text_JoeyDefeat, Route116_Text_JoeyNotEnoughPokemon
 	msgbox Route116_Text_JoeyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route116_EventScript_Jose:: @ 81F2EA0
-	trainerbattle_single TRAINER_JOSE, Route116_Text_JoseIntro, Route116_Text_JoseDefeat
+	trainerbattle_double TRAINER_JOSE, Route116_Text_JoseIntro, Route116_Text_JoseDefeat, Route116_Text_JoseNotEnoughPokemon
 	msgbox Route116_Text_JosePostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -363,7 +363,7 @@ Route116_EventScript_Dawson:: @ 81F3058
 	end
 
 Route116_EventScript_Devan:: @ 81F306F
-	trainerbattle_single TRAINER_DEVAN, Route116_Text_DevanIntro, Route116_Text_DevanDefeat
+	trainerbattle_double TRAINER_DEVAN, Route116_Text_DevanIntro, Route116_Text_DevanDefeat, Route116_Text_DevanNotEnoughPokemon
 	msgbox Route116_Text_DevanPostBattle, MSGBOX_AUTOCLOSE
 	end
 

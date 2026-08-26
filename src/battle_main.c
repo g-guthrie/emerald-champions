@@ -82,6 +82,7 @@ static void CB2_HandleStartBattle(void);
 static void TryCorrectShedinjaLanguage(struct Pokemon *mon);
 static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 firstTrainer);
 static bool8 IsRoute103RivalTrainer(u16 trainerNum);
+static bool8 IsRustboroRivalTrainer(u16 trainerNum);
 static void BattleMainCB1(void);
 static void sub_8038538(struct Sprite *sprite);
 static void CB2_EndLinkBattle(void);
@@ -184,6 +185,7 @@ EWRAM_DATA u16 gLastMoves[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u16 gLastLandedMoves[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u16 gLastHitByType[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u16 gLastResultingMoves[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u16 gLastUsedMoveType[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u16 gLockedMoves[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u16 gLastUsedMove = 0;
 EWRAM_DATA u8 gLastHitBy[MAX_BATTLERS_COUNT] = {0};
@@ -238,7 +240,7 @@ EWRAM_DATA bool8 gHasFetchedBall = FALSE;
 EWRAM_DATA u8 gLastUsedBall = 0;
 EWRAM_DATA u16 gLastThrownBall = 0;
 EWRAM_DATA u8 gMaxPartyLevel = 1;
-EWRAM_DATA bool8 gSwapDamageCategory = FALSE; // Photon Geyser, Shell Side Arm, Light That Burns the Sky
+EWRAM_DATA bool8 gSwapDamageCategory = FALSE; // Photon Geyser and Shell Side Arm
 
 // IWRAM common vars
 void (*gPreBattleCallback1)(void);
@@ -1979,6 +1981,10 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
                 // trios; later rival encounters are audited separately.
                 if (i == 0 && IsRoute103RivalTrainer(trainerNum))
                     species = GetStarterPokemonForGeneration((VarGet(VAR_STARTER_MON) + 1) % 3, VarGet(VAR_STARTER_GEN));
+                else if (i == 1 && IsRustboroRivalTrainer(trainerNum))
+                    species = GetMiddleEvolutionForStarter(
+                        GetStarterPokemonForGeneration((VarGet(VAR_STARTER_MON) + 1) % 3, VarGet(VAR_STARTER_GEN))
+                    );
 
                 for (j = 0; gSpeciesNames[species][j] != EOS; j++)
                     nameHash += gSpeciesNames[species][j];
@@ -2066,6 +2072,22 @@ static bool8 IsRoute103RivalTrainer(u16 trainerNum)
     case TRAINER_BRENDAN_ROUTE_103_TREECKO:
     case TRAINER_BRENDAN_ROUTE_103_TORCHIC:
     case TRAINER_BRENDAN_ROUTE_103_MUDKIP:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
+static bool8 IsRustboroRivalTrainer(u16 trainerNum)
+{
+    switch (trainerNum)
+    {
+    case TRAINER_MAY_RUSTBORO_TREECKO:
+    case TRAINER_MAY_RUSTBORO_TORCHIC:
+    case TRAINER_MAY_RUSTBORO_MUDKIP:
+    case TRAINER_BRENDAN_RUSTBORO_TREECKO:
+    case TRAINER_BRENDAN_RUSTBORO_TORCHIC:
+    case TRAINER_BRENDAN_RUSTBORO_MUDKIP:
         return TRUE;
     default:
         return FALSE;
@@ -2990,6 +3012,16 @@ static void BattleStartClearSetData(void)
     TurnValuesCleanUp(FALSE);
     SpecialStatusesClear();
 
+    // These arrays live outside the zeroed per-battle allocation. Mark the
+    // action context inactive before any switch-in ability can query it.
+    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+    {
+        gActionsByTurnOrder[i] = B_ACTION_FINISHED;
+        gBattlerByTurnOrder[i] = i;
+    }
+    gCurrentTurnActionNumber = gBattlersCount;
+    gCurrentActionFuncId = B_ACTION_FINISHED;
+
     memset(&gDisableStructs, 0, sizeof(gDisableStructs));
     memset(&gFieldTimers, 0, sizeof(gFieldTimers));
     memset(&gSideStatuses, 0, sizeof(gSideStatuses));
@@ -3006,6 +3038,7 @@ static void BattleStartClearSetData(void)
         gLastLandedMoves[i] = 0;
         gLastHitByType[i] = 0;
         gLastResultingMoves[i] = 0;
+        gLastUsedMoveType[i] = 0;
         gLastHitBy[i] = 0xFF;
         gLockedMoves[i] = 0;
         gLastPrintedMoves[i] = 0;
@@ -3019,6 +3052,9 @@ static void BattleStartClearSetData(void)
         gBattleStruct->lastTakenMoveFrom[i][2] = 0;
         gBattleStruct->lastTakenMoveFrom[i][3] = 0;
         gBattleStruct->AI_monToSwitchIntoId[i] = PARTY_SIZE;
+        gBattleStruct->skyDropTarget[i] = 0xFF;
+        gBattleStruct->skyDropUser[i] = 0xFF;
+        gBattleStruct->skyDropPartyId[i] = 0xFF;
     }
 
     gLastUsedMove = 0;
@@ -3083,7 +3119,10 @@ static void BattleStartClearSetData(void)
 
     gBattleStruct->mega.triggerSpriteId = 0xFF;
     
-    gBattleStruct->stickyWebUser = 0xFF;
+    gSideTimers[B_SIDE_PLAYER].stickyWebBattlerId = 0xFF;
+    gSideTimers[B_SIDE_OPPONENT].stickyWebBattlerId = 0xFF;
+    gSideTimers[B_SIDE_PLAYER].stickyWebBattlerSide = B_SIDE_PLAYER;
+    gSideTimers[B_SIDE_OPPONENT].stickyWebBattlerSide = B_SIDE_OPPONENT;
     gBattleStruct->appearedInBattle = 0;
     
     for (i = 0; i < PARTY_SIZE; i++)
@@ -3091,9 +3130,10 @@ static void BattleStartClearSetData(void)
         gBattleStruct->usedHeldItems[i][0] = 0;
         gBattleStruct->usedHeldItems[i][1] = 0;
         gBattleStruct->itemStolen[i].originalItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
+        gBattleStruct->originalEnemyItems[i] = GetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM);
     }
 
-    gSwapDamageCategory = FALSE; // Photon Geyser, Shell Side Arm, Light That Burns the Sky
+    gSwapDamageCategory = FALSE; // Photon Geyser and Shell Side Arm
 }
 
 void SwitchInClearSetData(void)
@@ -3102,6 +3142,7 @@ void SwitchInClearSetData(void)
     struct DisableStruct disableStructCopy = gDisableStructs[gActiveBattler];
 
     ClearIllusionMon(gActiveBattler);
+    gProtectStructs[gActiveBattler].beakBlastCharge = FALSE;
     if (gBattleMoves[gCurrentMove].effect != EFFECT_BATON_PASS)
     {
         for (i = 0; i < NUM_BATTLE_STATS; i++)
@@ -3174,6 +3215,7 @@ void SwitchInClearSetData(void)
     gLastLandedMoves[gActiveBattler] = 0;
     gLastHitByType[gActiveBattler] = 0;
     gLastResultingMoves[gActiveBattler] = 0;
+    gLastUsedMoveType[gActiveBattler] = 0;
     gLastPrintedMoves[gActiveBattler] = 0;
     gLastHitBy[gActiveBattler] = 0xFF;
 
@@ -3186,8 +3228,11 @@ void SwitchInClearSetData(void)
     gBattleStruct->lastMoveFailed &= ~(gBitTable[gActiveBattler]);
     gBattleStruct->palaceFlags &= ~(gBitTable[gActiveBattler]);
     
-    if (gActiveBattler == gBattleStruct->stickyWebUser)
-        gBattleStruct->stickyWebUser = 0xFF;    // Switched into sticky web user slot so reset it
+    for (i = 0; i < 2; i++)
+    {
+        if (gActiveBattler == gSideTimers[i].stickyWebBattlerId)
+            gSideTimers[i].stickyWebBattlerId = 0xFF;
+    }
 
     for (i = 0; i < gBattlersCount; i++)
     {
@@ -3214,6 +3259,11 @@ void SwitchInClearSetData(void)
 void FaintClearSetData(void)
 {
     s32 i;
+
+    // Release either half before this slot's volatile state and party identity
+    // are reset, so a later replacement can never inherit a Sky Drop pair.
+    if (IsSkyDropUser(gActiveBattler) || IsSkyDropTarget(gActiveBattler))
+        ReleaseSkyDrop(gActiveBattler);
 
     for (i = 0; i < NUM_BATTLE_STATS; i++)
         gBattleMons[gActiveBattler].statStages[i] = DEFAULT_STAT_STAGE;
@@ -3267,6 +3317,7 @@ void FaintClearSetData(void)
     gProtectStructs[gActiveBattler].statRaised = FALSE;
     gProtectStructs[gActiveBattler].statFell = FALSE;
     gProtectStructs[gActiveBattler].pranksterElevated = FALSE;
+    gProtectStructs[gActiveBattler].beakBlastCharge = FALSE;
 
     gDisableStructs[gActiveBattler].isFirstTurn = 2;
 
@@ -3274,6 +3325,7 @@ void FaintClearSetData(void)
     gLastLandedMoves[gActiveBattler] = 0;
     gLastHitByType[gActiveBattler] = 0;
     gLastResultingMoves[gActiveBattler] = 0;
+    gLastUsedMoveType[gActiveBattler] = 0;
     gLastPrintedMoves[gActiveBattler] = 0;
     gLastHitBy[gActiveBattler] = 0xFF;
 
@@ -3287,8 +3339,11 @@ void FaintClearSetData(void)
 
     gBattleStruct->palaceFlags &= ~(gBitTable[gActiveBattler]);
     
-    if (gActiveBattler == gBattleStruct->stickyWebUser)
-        gBattleStruct->stickyWebUser = 0xFF;    // User of sticky web fainted, so reset the stored battler ID
+    for (i = 0; i < 2; i++)
+    {
+        if (gActiveBattler == gSideTimers[i].stickyWebBattlerId)
+            gSideTimers[i].stickyWebBattlerId = 0xFF;
+    }
 
     for (i = 0; i < gBattlersCount; i++)
     {
@@ -3789,6 +3844,19 @@ void BattleTurnPassed(void)
 {
     s32 i;
 
+    // Seed the threshold snapshot exactly once for this end-turn sequence.
+    // Subsequent callbacks advance at least one of these trackers.
+    if (gBattleOutcome == 0
+     && gBattleStruct->turnCountersTracker == 0
+     && gBattleStruct->turnEffectsTracker == 0
+     && gBattleStruct->turnEffectsBattlerId == 0
+     && gBattleStruct->wishPerishSongState == 0
+     && gBattleStruct->wishPerishSongBattlerId == 0)
+    {
+        for (i = 0; i < gBattlersCount; i++)
+            gBattleStruct->hpBefore[i] = gBattleMons[i].hp;
+    }
+
     TurnValuesCleanUp(TRUE);
     if (gBattleOutcome == 0)
     {
@@ -3902,6 +3970,26 @@ u8 IsRunningFromBattleImpossible(void)
     return 0;
 }
 
+void SwitchTwoBattlersInParty(u8 battler, u8 battler2)
+{
+    s32 i;
+    u8 partyId1;
+    u8 partyId2;
+
+    for (i = 0; i < (int)ARRAY_COUNT(gBattlePartyCurrentOrder); i++)
+        gBattlePartyCurrentOrder[i] = *(battler * 3 + i + (u8 *)(gBattleStruct->field_60));
+
+    partyId1 = GetPartyIdFromBattlePartyId(gBattlerPartyIndexes[battler]);
+    partyId2 = GetPartyIdFromBattlePartyId(gBattlerPartyIndexes[battler2]);
+    SwitchPartyMonSlots(partyId1, partyId2);
+
+    for (i = 0; i < (int)ARRAY_COUNT(gBattlePartyCurrentOrder); i++)
+    {
+        *(battler * 3 + i + (u8 *)(gBattleStruct->field_60)) = gBattlePartyCurrentOrder[i];
+        *(battler2 * 3 + i + (u8 *)(gBattleStruct->field_60)) = gBattlePartyCurrentOrder[i];
+    }
+}
+
 void SwitchPartyOrder(u8 battler)
 {
     s32 i;
@@ -3979,7 +4067,8 @@ static void HandleTurnActionSelectionState(void)
                 else
                 {
                     if (gBattleMons[gActiveBattler].status2 & STATUS2_MULTIPLETURNS
-                        || gBattleMons[gActiveBattler].status2 & STATUS2_RECHARGE)
+                        || gBattleMons[gActiveBattler].status2 & STATUS2_RECHARGE
+                        || gStatuses3[gActiveBattler] & STATUS3_SKY_DROPPED)
                     {
                         gChosenActionByBattler[gActiveBattler] = B_ACTION_USE_MOVE;
                         gBattleCommunication[gActiveBattler] = STATE_WAIT_ACTION_CONFIRMED_STANDBY;
@@ -4550,6 +4639,10 @@ s8 GetMovePriority(u32 battlerId, u16 move)
         case EFFECT_SYNTHESIS:
         case EFFECT_HEAL_PULSE:
         case EFFECT_HEALING_WISH:
+        case EFFECT_JUNGLE_HEALING:
+        case EFFECT_PURIFY:
+        case EFFECT_SHORE_UP:
+        case EFFECT_STRENGTH_SAP:
         case EFFECT_SWALLOW:
         case EFFECT_WISH:
         case EFFECT_SOFTBOILED:
@@ -4567,6 +4660,47 @@ s8 GetMovePriority(u32 battlerId, u16 move)
     return priority;
 }
 
+static bool32 IsTurnOrderBerryBlockedByUnnerve(u8 battlerId)
+{
+    return IsAbilityOnOpposingSide(battlerId, ABILITY_UNNERVE)
+        || IsAbilityOnOpposingSide(battlerId, ABILITY_AS_ONE_ICE_RIDER)
+        || IsAbilityOnOpposingSide(battlerId, ABILITY_AS_ONE_SHADOW_RIDER);
+}
+
+static void RollQuickMoveOrderEffects(void)
+{
+    u32 battler;
+
+    // Roll each chance once per battler and turn. Pairwise sorting can compare
+    // one battler several times, so RNG must not live in the comparator.
+    for (battler = 0; battler < gBattlersCount; battler++)
+    {
+        u32 holdEffect;
+
+        if (gChosenActionByBattler[battler] != B_ACTION_USE_MOVE)
+            continue;
+
+        holdEffect = GetBattlerHoldEffect(battler, TRUE);
+        if (GetBattlerAbility(battler) == ABILITY_QUICK_DRAW
+         && !IS_MOVE_STATUS(gChosenMoveByBattler[battler])
+         && Random() % 100 < 30)
+        {
+            gProtectStructs[battler].quickDraw = TRUE;
+        }
+        else if (holdEffect == HOLD_EFFECT_QUICK_CLAW
+              && Random() < (0xFFFF * GetBattlerHoldEffectParam(battler)) / 100)
+        {
+            gProtectStructs[battler].usedCustapBerry = TRUE;
+        }
+        else if (holdEffect == HOLD_EFFECT_CUSTAP_BERRY
+              && !IsTurnOrderBerryBlockedByUnnerve(battler)
+              && HasEnoughHpToEatBerry(battler, 4, gBattleMons[battler].item))
+        {
+            gProtectStructs[battler].usedCustapBerry = TRUE;
+        }
+    }
+}
+
 u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
 {
     u8 strikesFirst = 0;
@@ -4577,30 +4711,9 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
     // Battler 1
     speedBattler1 = GetBattlerTotalSpeedStat(battler1);
     holdEffectBattler1 = GetBattlerHoldEffect(battler1, TRUE);
-    // Quick Draw
-    if (!ignoreChosenMoves && GetBattlerAbility(battler1) == ABILITY_QUICK_DRAW && !IS_MOVE_STATUS(gChosenMoveByBattler[battler1]) && Random() % 100 < 30)
-        gProtectStructs[battler1].quickDraw = TRUE;
-    // Quick Claw and Custap Berry
-    if (!gProtectStructs[battler1].quickDraw
-     && ((holdEffectBattler1 == HOLD_EFFECT_QUICK_CLAW && gRandomTurnNumber < (0xFFFF * GetBattlerHoldEffectParam(battler1)) / 100)
-     || (!IsAbilityOnOpposingSide(battler1, ABILITY_UNNERVE)
-      && holdEffectBattler1 == HOLD_EFFECT_CUSTAP_BERRY
-      && HasEnoughHpToEatBerry(battler1, 4, gBattleMons[battler1].item))))
-        gProtectStructs[battler1].usedCustapBerry = TRUE;
-
     // Battler 2
     speedBattler2 = GetBattlerTotalSpeedStat(battler2);
     holdEffectBattler2 = GetBattlerHoldEffect(battler2, TRUE);
-    // Quick Draw
-    if (!ignoreChosenMoves && GetBattlerAbility(battler2) == ABILITY_QUICK_DRAW && !IS_MOVE_STATUS(gChosenMoveByBattler[battler2]) && Random() % 100 < 30)
-        gProtectStructs[battler2].quickDraw = TRUE;
-    // Quick Claw and Custap Berry
-    if (!gProtectStructs[battler2].quickDraw
-     && ((holdEffectBattler2 == HOLD_EFFECT_QUICK_CLAW && gRandomTurnNumber < (0xFFFF * GetBattlerHoldEffectParam(battler2)) / 100)
-     || (!IsAbilityOnOpposingSide(battler2, ABILITY_UNNERVE)
-      && holdEffectBattler2 == HOLD_EFFECT_CUSTAP_BERRY
-      && HasEnoughHpToEatBerry(battler2, 4, gBattleMons[battler2].item))))
-        gProtectStructs[battler2].usedCustapBerry = TRUE;
 
     if (!ignoreChosenMoves)
     {
@@ -4616,13 +4729,11 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
         // LAGGING TAIL - always last
         // STALL - always last
         
-        if (gProtectStructs[battler1].quickDraw && !gProtectStructs[battler2].quickDraw)
+        if ((gProtectStructs[battler1].quickDraw || gProtectStructs[battler1].usedCustapBerry)
+         && !(gProtectStructs[battler2].quickDraw || gProtectStructs[battler2].usedCustapBerry))
             strikesFirst = 0;
-        else if (!gProtectStructs[battler1].quickDraw && gProtectStructs[battler2].quickDraw)
-            strikesFirst = 1;
-        else if (gProtectStructs[battler1].usedCustapBerry && !gProtectStructs[battler2].usedCustapBerry)
-            strikesFirst = 0;
-        else if (gProtectStructs[battler2].usedCustapBerry && !gProtectStructs[battler1].usedCustapBerry)
+        else if ((gProtectStructs[battler2].quickDraw || gProtectStructs[battler2].usedCustapBerry)
+              && !(gProtectStructs[battler1].quickDraw || gProtectStructs[battler1].usedCustapBerry))
             strikesFirst = 1;
         else if (holdEffectBattler1 == HOLD_EFFECT_LAGGING_TAIL && holdEffectBattler2 != HOLD_EFFECT_LAGGING_TAIL)
             strikesFirst = 1;
@@ -4729,6 +4840,8 @@ static void SetActionsAndBattlersTurnOrder(void)
         }
         else
         {
+            RollQuickMoveOrderEffects();
+
             for (gActiveBattler = 0; gActiveBattler < gBattlersCount; gActiveBattler++)
             {
                 if (gChosenActionByBattler[gActiveBattler] == B_ACTION_USE_ITEM
@@ -4884,12 +4997,22 @@ static void CheckFocusPunch_ClearVarsBeforeTurnStarts(void)
         {
             gActiveBattler = gBattlerAttacker = gBattleStruct->focusPunchBattlerId;
             gBattleStruct->focusPunchBattlerId++;
-            if (gChosenMoveByBattler[gActiveBattler] == MOVE_FOCUS_PUNCH
+            if (gChosenActionByBattler[gActiveBattler] == B_ACTION_USE_MOVE
+                && gChosenMoveByBattler[gActiveBattler] == MOVE_FOCUS_PUNCH
                 && !(gBattleMons[gActiveBattler].status1 & STATUS1_SLEEP)
                 && !(gDisableStructs[gBattlerAttacker].truantCounter)
                 && !(gProtectStructs[gActiveBattler].noValidMoves))
             {
                 BattleScriptExecute(BattleScript_FocusPunchSetUp);
+                return;
+            }
+            else if (gChosenActionByBattler[gActiveBattler] == B_ACTION_USE_MOVE
+                && gChosenMoveByBattler[gActiveBattler] == MOVE_BEAK_BLAST
+                && !(gBattleMons[gActiveBattler].status1 & STATUS1_SLEEP)
+                && !(gDisableStructs[gBattlerAttacker].truantCounter)
+                && !(gProtectStructs[gActiveBattler].noValidMoves))
+            {
+                BattleScriptExecute(BattleScript_BeakBlastSetUp);
                 return;
             }
             else if (gChosenActionByBattler[gActiveBattler] == B_ACTION_USE_MOVE

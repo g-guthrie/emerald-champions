@@ -19,6 +19,8 @@ RustboroCity_Mart_EventScript_FalseSwipeTM::
 	goto_if_set FLAG_VERDANT_GIFT_FALSE_SWIPE, RustboroCity_Mart_EventScript_ReceivedTM98
 	msgbox RustboroCity_Mart_Text_ExcuseMeTrainer, MSGBOX_DEFAULT
 	giveitem ITEM_ZOOM_LENS
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_VERDANT_GIFT_FALSE_SWIPE
 	msgbox RustboroCity_Mart_Text_HaveTM98, MSGBOX_DEFAULT
 	release

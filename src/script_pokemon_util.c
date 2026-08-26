@@ -172,7 +172,7 @@ void CreateScriptedDoubleWildMon(u16 species1, u8 level1, u16 item1, u16 species
 
 void ScriptSetMonMoveSlot(u8 monIndex, u16 move, u8 slot)
 {
-    if (monIndex > PARTY_SIZE)
+    if (monIndex >= PARTY_SIZE)
         monIndex = gPlayerPartyCount - 1;
 
     SetMonMoveSlot(&gPlayerParty[monIndex], move, slot);

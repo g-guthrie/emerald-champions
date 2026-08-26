@@ -289,6 +289,8 @@ MossdeepCity_EventScript_AvalancheTM::
 	goto_if_set FLAG_VERDANT_GIFT_AVALANCHE, MossdeepCity_EventScript_ReceivedTM96
 	msgbox MossdeepCity_Text_AvalancheNonsense, MSGBOX_DEFAULT
 	giveitem ITEM_SNOWBALL
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_VERDANT_GIFT_AVALANCHE
 	msgbox MossdeepCity_Text_HaveTM96, MSGBOX_DEFAULT
 	release

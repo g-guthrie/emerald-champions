@@ -44,6 +44,8 @@ FallarborTown_Mart_EventScript_DrainPunchTM::
 	goto_if_set FLAG_VERDANT_GIFT_DRAIN_PUNCH, FallarborTown_Mart_EventScript_ReceivedTM60
 	msgbox FallarborTown_Mart_Text_FreeSample, MSGBOX_DEFAULT
 	giveitem ITEM_MUSCLE_BAND
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_VERDANT_GIFT_DRAIN_PUNCH
 	msgbox FallarborTown_Mart_Text_HaveTM60, MSGBOX_DEFAULT
 	release

@@ -1,0 +1,696 @@
+{
+  "anchor": {
+    "adaptation_constraints": [
+      "Mega-only gimmick policy; no Tera, Z-Moves, Dynamax, Gigantamax, or Primal Reversion.",
+      "Preserve the reference's offense-plus-clock philosophy while rebuilding its species and sun elements around Glacia."
+    ],
+    "anchor": "ELITE_FOUR_GLACIA",
+    "campaign_order": 290,
+    "candidate_reference_ids": [
+      "elite:wolfe:naic-2026"
+    ],
+    "chronological_closure_note": "Provides the gauntlet's mixed offense and attrition peak, then returns control for manual item healing before Drake's lethal singles duel.",
+    "design_commitment": "soft",
+    "mega_legendary_posture": {
+      "legendary": "One major ice legendary is expected at this stage, used inside a coherent role structure.",
+      "mega": "One Ice or cold-climate Mega."
+    },
+    "planning_tier": "league_gauntlet",
+    "primary_candidate_modes": [
+      "snow-enabled mixed offense",
+      "stall-offense hybrid"
+    ],
+    "protected_identity": "A snow-and-attrition hybrid that can attack brutally without collapsing into another obvious screen setter and recipient.",
+    "secondary_candidate_modes": [
+      "toxic or trapping clock",
+      "Wide Guard and spread pressure"
+    ],
+    "signature_reveal": "An Ice Mega or ancient ice legend anchors a fast offense beside one toxic or trapping clock.",
+    "target_difficulty": 10,
+    "trainer_ids": [
+      "TRAINER_GLACIA"
+    ]
+  },
+  "competitive_filters": {
+    "limit": 12,
+    "pokemon": [],
+    "tags": []
+  },
+  "competitive_index": {
+    "record_count": 1005,
+    "sha256": "44d79fd2a5f7578013b2363f9e47d75a0f05ae4239da3bd6891e9651bca2648a",
+    "version": 1
+  },
+  "competitive_queries": [
+    "snow",
+    "toxic",
+    "wide guard"
+  ],
+  "current_source_facts": [
+    {
+      "average_level_offset": 0.5,
+      "current_ai_flags": [
+        "AI_FLAG_CHECK_BAD_MOVE",
+        "AI_FLAG_TRY_TO_FAINT",
+        "AI_FLAG_CHECK_VIABILITY",
+        "AI_FLAG_CHECK_FOE",
+        "AI_FLAG_SMART_SWITCHING",
+        "AI_FLAG_HELP_PARTNER",
+        "AI_FLAG_SPEED_CONTROL",
+        "AI_FLAG_FIELD_CONTROL"
+      ],
+      "current_party": [
+        {
+          "ability": "ABILITY_SNOW_WARNING",
+          "item": "ITEM_LIGHT_CLAY",
+          "moves": [
+            "MOVE_AURORA_VEIL",
+            "MOVE_BLIZZARD",
+            "MOVE_ICY_WIND",
+            "MOVE_PROTECT"
+          ],
+          "species": "SPECIES_NINETALES_ALOLAN"
+        },
+        {
+          "ability": "ABILITY_PRESSURE",
+          "item": "ITEM_WEAKNESS_POLICY",
+          "moves": [
+            "MOVE_BLIZZARD",
+            "MOVE_DRACO_METEOR",
+            "MOVE_EARTH_POWER",
+            "MOVE_PROTECT"
+          ],
+          "species": "SPECIES_KYUREM"
+        },
+        {
+          "ability": "ABILITY_SNOW_CLOAK",
+          "item": "ITEM_FOCUS_SASH",
+          "moves": [
+            "MOVE_ICY_WIND",
+            "MOVE_WILL_O_WISP",
+            "MOVE_TAUNT",
+            "MOVE_DESTINY_BOND"
+          ],
+          "species": "SPECIES_FROSLASS"
+        },
+        {
+          "ability": "ABILITY_PRESSURE",
+          "item": "ITEM_LEFTOVERS",
+          "moves": [
+            "MOVE_FREEZE_DRY",
+            "MOVE_HURRICANE",
+            "MOVE_TAILWIND",
+            "MOVE_ROOST"
+          ],
+          "species": "SPECIES_ARTICUNO"
+        },
+        {
+          "ability": "ABILITY_CHILLING_NEIGH",
+          "item": "ITEM_ASSAULT_VEST",
+          "moves": [
+            "MOVE_ICICLE_CRASH",
+            "MOVE_HIGH_HORSEPOWER",
+            "MOVE_CLOSE_COMBAT",
+            "MOVE_HEAVY_SLAM"
+          ],
+          "species": "SPECIES_GLASTRIER"
+        },
+        {
+          "ability": "ABILITY_SNOW_WARNING",
+          "item": "ITEM_ABOMASITE",
+          "moves": [
+            "MOVE_BLIZZARD",
+            "MOVE_GIGA_DRAIN",
+            "MOVE_ICE_SHARD",
+            "MOVE_PROTECT"
+          ],
+          "species": "SPECIES_ABOMASNOW"
+        }
+      ],
+      "format": "double",
+      "note": "Current source is baseline evidence only; a design-complete dossier does not mutate it.",
+      "party_size": 6,
+      "source_party": "sParty_Glacia",
+      "synergy_tags": [
+        "Ice pressure",
+        "Tailwind",
+        "active speed control",
+        "snow engine",
+        "status control"
+      ],
+      "trainer_id": "TRAINER_GLACIA"
+    }
+  ],
+  "dossier_template": {
+    "ai": null,
+    "anchor_id": "ELITE_FOUR_GLACIA",
+    "campaign_reservations": null,
+    "campaign_state": null,
+    "competitive_research": null,
+    "counterplay": null,
+    "difficulty": {
+      "observed": null,
+      "target": 10
+    },
+    "fresh_critic_review": null,
+    "identity": null,
+    "mechanics_proposal": null,
+    "ordering": null,
+    "planning_tier": "league_gauntlet",
+    "presentation": null,
+    "rolling_context": null,
+    "runtime": null,
+    "status": {
+      "design": null,
+      "fresh_critic": null,
+      "runtime": "unplayed",
+      "source": "unimplemented",
+      "static": null
+    },
+    "team": null,
+    "verification": null
+  },
+  "mechanics_baseline": {
+    "automatic_healing_between_members": false,
+    "champion_room_forces_approach_after_entry": true,
+    "drake_releases_player_control_after_victory": true,
+    "hall4_allows_normal_overworld_menu": true,
+    "items_during_trainer_battles": false,
+    "level_semantics": "Trainer levels are offsets from the active strict cap.",
+    "manual_overworld_bag_between_members": true,
+    "mechanics_proposal": null,
+    "party_composition_locked_after_entry": true,
+    "pokemon_menu_between_members": true,
+    "save_menu_between_members": true,
+    "source_evidence": [
+      "data/maps/EverGrandeCity_SidneysRoom/scripts.inc",
+      "data/maps/EverGrandeCity_PhoebesRoom/scripts.inc",
+      "data/maps/EverGrandeCity_GlaciasRoom/scripts.inc",
+      "data/maps/EverGrandeCity_DrakesRoom/scripts.inc",
+      "data/maps/EverGrandeCity_Hall4/scripts.inc",
+      "data/maps/EverGrandeCity_ChampionsRoom/scripts.inc",
+      "src/start_menu.c",
+      "src/battle_main.c",
+      "src/pokemon.c"
+    ],
+    "strict_cap": 80
+  },
+  "mechanics_baseline_id": "pokemon_league_main_story",
+  "packet_type": "authoring-context-not-a-closed-design",
+  "ranked_candidate_digest": [
+    {
+      "ai_requirements": [],
+      "completeness": "full-sets",
+      "confidence": "reproducible",
+      "event": null,
+      "gimmick_dependencies": [],
+      "player": null,
+      "preview_pressure": "",
+      "primary_mode": "",
+      "query": "snow",
+      "rank": 1,
+      "reference_id": "showdown:gen4randomdoublesbattle:010",
+      "roster": [
+        "Mantine",
+        "Charizard",
+        "Mesprit",
+        "Abomasnow",
+        "Swampert",
+        "Mamoswine"
+      ],
+      "secondary_mode": "",
+      "source_kind": "showdown-random",
+      "strategy_notes": "",
+      "tags": [
+        "choice-disruption",
+        "choice-item",
+        "hazards",
+        "offense",
+        "priority",
+        "rain",
+        "setup",
+        "snow"
+      ],
+      "urls": [
+        "https://github.com/smogon/pokemon-showdown"
+      ],
+      "year": null
+    },
+    {
+      "ai_requirements": [],
+      "completeness": "full-sets",
+      "confidence": "reproducible",
+      "event": null,
+      "gimmick_dependencies": [],
+      "player": null,
+      "preview_pressure": "",
+      "primary_mode": "",
+      "query": "snow",
+      "rank": 2,
+      "reference_id": "showdown:gen5randomdoublesbattle:010",
+      "roster": [
+        "Onix",
+        "Seadra",
+        "Claydol",
+        "Kyurem",
+        "Rayquaza",
+        "Abomasnow"
+      ],
+      "secondary_mode": "",
+      "source_kind": "showdown-random",
+      "strategy_notes": "",
+      "tags": [
+        "choice-item",
+        "offense",
+        "screens",
+        "setup",
+        "snow"
+      ],
+      "urls": [
+        "https://github.com/smogon/pokemon-showdown"
+      ],
+      "year": null
+    },
+    {
+      "ai_requirements": [],
+      "completeness": "full-sets",
+      "confidence": "reproducible",
+      "event": null,
+      "gimmick_dependencies": [],
+      "player": null,
+      "preview_pressure": "",
+      "primary_mode": "",
+      "query": "snow",
+      "rank": 3,
+      "reference_id": "showdown:gen6randomdoublesbattle:009",
+      "roster": [
+        "Manaphy",
+        "Charizard",
+        "Abomasnow",
+        "Butterfree",
+        "Omastar",
+        "Accelgor"
+      ],
+      "secondary_mode": "",
+      "source_kind": "showdown-random",
+      "strategy_notes": "",
+      "tags": [
+        "active-speed-control",
+        "offense",
+        "setup",
+        "snow"
+      ],
+      "urls": [
+        "https://github.com/smogon/pokemon-showdown"
+      ],
+      "year": null
+    },
+    {
+      "ai_requirements": [],
+      "completeness": "full-sets",
+      "confidence": "reproducible",
+      "event": null,
+      "gimmick_dependencies": [],
+      "player": null,
+      "preview_pressure": "",
+      "primary_mode": "",
+      "query": "snow",
+      "rank": 4,
+      "reference_id": "showdown:gen8randomdoublesbattle:004",
+      "roster": [
+        "Regice",
+        "Bouffalant",
+        "Alcremie",
+        "Abomasnow",
+        "Dialga",
+        "Meowstic"
+      ],
+      "secondary_mode": "",
+      "source_kind": "showdown-random",
+      "strategy_notes": "",
+      "tags": [
+        "active-speed-control",
+        "fake-out",
+        "healing",
+        "positioning-control",
+        "priority",
+        "screens",
+        "snow"
+      ],
+      "urls": [
+        "https://github.com/smogon/pokemon-showdown"
+      ],
+      "year": null
+    },
+    {
+      "ai_requirements": [],
+      "completeness": "full-sets",
+      "confidence": "reproducible",
+      "event": null,
+      "gimmick_dependencies": [],
+      "player": null,
+      "preview_pressure": "",
+      "primary_mode": "",
+      "query": "snow",
+      "rank": 5,
+      "reference_id": "showdown:gen8randomdoublesbattle:027",
+      "roster": [
+        "Tornadus",
+        "Abomasnow",
+        "Unfezant",
+        "Virizion",
+        "Hatterene",
+        "Dusclops"
+      ],
+      "secondary_mode": "",
+      "source_kind": "showdown-random",
+      "strategy_notes": "",
+      "tags": [
+        "healing",
+        "offense",
+        "pivoting",
+        "priority",
+        "setup",
+        "snow",
+        "trick-room"
+      ],
+      "urls": [
+        "https://github.com/smogon/pokemon-showdown"
+      ],
+      "year": null
+    },
+    {
+      "ai_requirements": [],
+      "completeness": "full-sets",
+      "confidence": "reproducible",
+      "event": null,
+      "gimmick_dependencies": [],
+      "player": null,
+      "preview_pressure": "",
+      "primary_mode": "",
+      "query": "snow",
+      "rank": 6,
+      "reference_id": "showdown:gen4randomdoublesbattle:003",
+      "roster": [
+        "Remoraid",
+        "Snover",
+        "Mew",
+        "Flareon",
+        "Machamp",
+        "Castform"
+      ],
+      "secondary_mode": "",
+      "source_kind": "showdown-random",
+      "strategy_notes": "",
+      "tags": [
+        "choice-item",
+        "offense",
+        "priority",
+        "setup",
+        "snow"
+      ],
+      "urls": [
+        "https://github.com/smogon/pokemon-showdown"
+      ],
+      "year": null
+    },
+    {
+      "ai_requirements": [],
+      "completeness": "full-sets",
+      "confidence": "reproducible",
+      "event": null,
+      "gimmick_dependencies": [],
+      "player": null,
+      "preview_pressure": "",
+      "primary_mode": "",
+      "query": "snow",
+      "rank": 7,
+      "reference_id": "showdown:gen6randomdoublesbattle:010",
+      "roster": [
+        "Malamar",
+        "Luxray",
+        "Golurk",
+        "Furret",
+        "Heatran",
+        "Aurorus"
+      ],
+      "secondary_mode": "",
+      "source_kind": "showdown-random",
+      "strategy_notes": "",
+      "tags": [
+        "pivoting",
+        "priority",
+        "snow"
+      ],
+      "urls": [
+        "https://github.com/smogon/pokemon-showdown"
+      ],
+      "year": null
+    },
+    {
+      "ai_requirements": [],
+      "completeness": "full-sets",
+      "confidence": "reproducible",
+      "event": null,
+      "gimmick_dependencies": [],
+      "player": null,
+      "preview_pressure": "",
+      "primary_mode": "",
+      "query": "snow",
+      "rank": 8,
+      "reference_id": "showdown:gen8randomdoublesbattle:005",
+      "roster": [
+        "Heatran",
+        "Coalossal",
+        "Froslass",
+        "Emolga",
+        "Ninetales-Alola",
+        "Sylveon"
+      ],
+      "secondary_mode": "",
+      "source_kind": "showdown-random",
+      "strategy_notes": "",
+      "tags": [
+        "active-speed-control",
+        "hazards",
+        "offense",
+        "screens",
+        "setup",
+        "snow"
+      ],
+      "urls": [
+        "https://github.com/smogon/pokemon-showdown"
+      ],
+      "year": null
+    },
+    {
+      "ai_requirements": [],
+      "completeness": "full-sets",
+      "confidence": "reproducible",
+      "event": null,
+      "gimmick_dependencies": [],
+      "player": null,
+      "preview_pressure": "",
+      "primary_mode": "",
+      "query": "snow",
+      "rank": 9,
+      "reference_id": "showdown:gen8randomdoublesbattle:009",
+      "roster": [
+        "Hydreigon",
+        "Venusaur",
+        "Farfetch\u2019d",
+        "Necrozma-Dawn-Wings",
+        "Vanilluxe",
+        "Dugtrio-Alola"
+      ],
+      "secondary_mode": "",
+      "source_kind": "showdown-random",
+      "strategy_notes": "",
+      "tags": [
+        "active-speed-control",
+        "offense",
+        "priority",
+        "setup",
+        "sleep",
+        "snow",
+        "tailwind"
+      ],
+      "urls": [
+        "https://github.com/smogon/pokemon-showdown"
+      ],
+      "year": null
+    },
+    {
+      "ai_requirements": [],
+      "completeness": "full-sets",
+      "confidence": "reproducible",
+      "event": null,
+      "gimmick_dependencies": [],
+      "player": null,
+      "preview_pressure": "",
+      "primary_mode": "",
+      "query": "snow",
+      "rank": 10,
+      "reference_id": "showdown:gen8randomdoublesbattle:012",
+      "roster": [
+        "Electivire",
+        "Groudon",
+        "Celebi",
+        "Heatmor",
+        "Vanilluxe",
+        "Oranguru"
+      ],
+      "secondary_mode": "",
+      "source_kind": "showdown-random",
+      "strategy_notes": "",
+      "tags": [
+        "healing",
+        "offense",
+        "priority",
+        "setup",
+        "snow",
+        "sun"
+      ],
+      "urls": [
+        "https://github.com/smogon/pokemon-showdown"
+      ],
+      "year": null
+    },
+    {
+      "ai_requirements": [],
+      "completeness": "full-sets",
+      "confidence": "reproducible",
+      "event": null,
+      "gimmick_dependencies": [],
+      "player": null,
+      "preview_pressure": "",
+      "primary_mode": "",
+      "query": "snow",
+      "rank": 11,
+      "reference_id": "showdown:gen9championsrandomdoublesbattle:006",
+      "roster": [
+        "Spiritomb",
+        "Drampa",
+        "Vanilluxe",
+        "Slowking",
+        "Mudsdale",
+        "Charizard"
+      ],
+      "secondary_mode": "",
+      "source_kind": "showdown-random",
+      "strategy_notes": "",
+      "tags": [
+        "hazards",
+        "healing",
+        "offense",
+        "screens",
+        "setup",
+        "snow",
+        "trick-room"
+      ],
+      "urls": [
+        "https://github.com/smogon/pokemon-showdown"
+      ],
+      "year": null
+    },
+    {
+      "ai_requirements": [],
+      "completeness": "full-sets",
+      "confidence": "reproducible",
+      "event": null,
+      "gimmick_dependencies": [],
+      "player": null,
+      "preview_pressure": "",
+      "primary_mode": "",
+      "query": "snow",
+      "rank": 12,
+      "reference_id": "showdown:gen9championsrandomdoublesbattle:012",
+      "roster": [
+        "Vanilluxe",
+        "Weavile",
+        "Ditto",
+        "Annihilape",
+        "Jolteon",
+        "Garbodor"
+      ],
+      "secondary_mode": "",
+      "source_kind": "showdown-random",
+      "strategy_notes": "",
+      "tags": [
+        "active-speed-control",
+        "choice-item",
+        "hazards",
+        "offense",
+        "screens",
+        "setup",
+        "snow"
+      ],
+      "urls": [
+        "https://github.com/smogon/pokemon-showdown"
+      ],
+      "year": null
+    },
+    {
+      "ai_requirements": [
+        "trap timing",
+        "Toxic target selection",
+        "Baneful Bunker",
+        "Wide Guard",
+        "mode transition"
+      ],
+      "completeness": "full-sets",
+      "confidence": "exact-public-sheet",
+      "event": "2026 North America International Championships",
+      "gimmick_dependencies": [
+        "Mega"
+      ],
+      "player": "Wolfe Glick",
+      "preview_pressure": "The player must respect both a long Toxic clock and a fast sun opening.",
+      "primary_mode": "Toxapex trapping clock backed by immediate mixed offense",
+      "query": "campaign reservation",
+      "rank": 13,
+      "reference_id": "elite:wolfe:naic-2026",
+      "roster": [
+        "Mamoswine",
+        "Toxapex",
+        "Sneasler",
+        "Hydreigon",
+        "Charizard",
+        "Incineroar"
+      ],
+      "secondary_mode": "Charizard-Y sun and Choice Scarf Hydreigon burst",
+      "source_kind": "curated-elite-research",
+      "strategy_notes": "Toxapex creates a trapping and Toxic clock while Charizard-Y, Hydreigon, and Sneasler prevent the team from becoming passive. Strong late Admin or boss template.",
+      "tags": [
+        "choice-item",
+        "fake-out",
+        "fast-mode",
+        "infestation-trap",
+        "pivoting",
+        "priority",
+        "role-compression",
+        "stall-offense-hybrid",
+        "sun",
+        "toxic-clock",
+        "wide-guard"
+      ],
+      "urls": [
+        "https://limitlessvgc.com/teams/6694",
+        "https://limitlessvgc.com/tournaments/436/teams"
+      ],
+      "year": 2026
+    }
+  ],
+  "rolling_context": {
+    "available": false,
+    "previous_encounters": [],
+    "protected_neighbor_anchors": [
+      "ELITE_FOUR_SIDNEY",
+      "ELITE_FOUR_PHOEBE",
+      "ELITE_FOUR_DRAKE",
+      "CHAMPION_WALLACE"
+    ],
+    "reason": "This future marquee anchor has campaign neighbors but no trustworthy previous-ten chronological window yet; refresh before implementation."
+  },
+  "version": 1
+}

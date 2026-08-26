@@ -16,6 +16,7 @@
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
+#include "util.h"
 #include "constants/battle_anim.h"
 #include "constants/battle_config.h"
 #include "constants/moves.h"
@@ -78,6 +79,8 @@ static void ScriptCmd_visible(void);
 static void ScriptCmd_doublebattle_2D(void);
 static void ScriptCmd_doublebattle_2E(void);
 static void ScriptCmd_stopsound(void);
+static void ScriptCmd_createvisualtaskontargets(void);
+static void ScriptCmd_createspriteontargets(void);
 
 static void RunAnimScriptCommand(void);
 static void task_pA_ma0A_obj_to_bg_pal(u8 taskId);
@@ -1540,13 +1543,6 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     {gBattleAnimSpriteGfx_MetalBits, 0x140, ANIM_TAG_METAL_BITS},
     {gBattleAnimSpriteGfx_RocksSmall, 0x140, ANIM_TAG_SMALL_ROCK},
     {gBattleAnimSpriteGfx_SpiritShackleArrow, 0x200, ANIM_TAG_SPIRIT_ARROW},
-    {gBattleAnimSpriteGfx_NecrozmaStar, 0x200, ANIM_TAG_ULTRA_BURST_SYMBOL},
-    {gBattleAnimSpriteGfx_ZMoveSymbol, 0x800, ANIM_TAG_Z_MOVE_SYMBOL},
-    {gBattleAnimSpriteGfx_BigRock, 0x800, ANIM_TAG_REALLY_BIG_ROCK},
-    {gBattleAnimSpriteGfx_Cacoon, 0x800, ANIM_TAG_COCOON},
-    {gBattleAnimSpriteGfx_Drill, 0x800, ANIM_TAG_CORKSCREW},
-    {gBattleAnimSpriteGfx_GigavoltHavocSpear, 0x800, ANIM_TAG_HAVOC_SPEAR},
-    {gBattleAnimSpriteGfx_PurpleDrake, 0x800, ANIM_TAG_PURPLE_DRAKE},
     {gBattleAnimSpriteGfx_MudBomb, 0x800, ANIM_TAG_MUD_BOMB},
     {gBattleAnimSpriteGfx_Branch, 0x200, ANIM_TAG_BRANCH},
     {gBattleAnimSpriteGfx_Apple, 0x200, ANIM_TAG_APPLE},
@@ -1568,6 +1564,7 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     {gBattleAnimSpriteGfx_OmegaSymbol, 0x0200, ANIM_TAG_OMEGA_SYMBOL},
     {gBattleAnimSpriteGfx_PrimalParticles, 0x0180, ANIM_TAG_PRIMAL_PARTICLES},
     {gBattleAnimSpriteGfx_Orbs, 0x0180, ANIM_TAG_STEEL_BEAM},
+    {gBattleAnimSpriteGfx_AuraSphere, 0x0200, ANIM_TAG_POLTERGEIST},
 };
 
 const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
@@ -1991,13 +1988,6 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_BlueFlare,	ANIM_TAG_METAL_BITS},
     {gBattleAnimSpritePal_NewRocks,	ANIM_TAG_SMALL_ROCK},
     {gBattleAnimSpritePal_SpiritShackleArrow, ANIM_TAG_SPIRIT_ARROW},
-    {gBattleAnimSpritePal_NecrozmaStar,	ANIM_TAG_ULTRA_BURST_SYMBOL},
-    {gBattleAnimSpritePal_ZMoveSymbol, ANIM_TAG_Z_MOVE_SYMBOL},
-    {gBattleAnimSpritePal_BigRock, ANIM_TAG_REALLY_BIG_ROCK},
-    {gBattleAnimSpritePal_Cacoon,	ANIM_TAG_COCOON},
-    {gBattleAnimSpritePal_Drill,	ANIM_TAG_CORKSCREW},
-    {gBattleAnimSpritePal_GigavoltHavocSpear, ANIM_TAG_HAVOC_SPEAR},
-    {gBattleAnimSpritePal_PurpleDrake, ANIM_TAG_PURPLE_DRAKE},
     {gBattleAnimSpritePal_MudBomb, ANIM_TAG_MUD_BOMB},
     {gBattleAnimSpritePal_Branch, ANIM_TAG_BRANCH},
     {gBattleAnimSpritePal_Apple, ANIM_TAG_APPLE},
@@ -2019,6 +2009,7 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_OmegaSymbol, ANIM_TAG_OMEGA_SYMBOL},
     {gBattleAnimSpritePal_PrimalParticles, ANIM_TAG_PRIMAL_PARTICLES},
     {gBattleAnimSpritePal_SteelBeam, ANIM_TAG_STEEL_BEAM},
+    {gBattleAnimSpritePal_Poltergeist, ANIM_TAG_POLTERGEIST},
 };
 
 const struct BattleAnimBackground gBattleAnimBackgroundTable[] =
@@ -2080,23 +2071,10 @@ const struct BattleAnimBackground gBattleAnimBackgroundTable[] =
     [BG_MAGIC_ROOM] = {gBattleAnimBgImage_TrickRoom, gBattleAnimBgPalette_MagicRoom, gBattleAnimBgTilemap_TrickRoom},
     [BG_HYPERSPACE_FURY] = {gBattleAnimBgImage_Psychic, gBattleAnimBgPalette_HyperspaceFury, gBattleAnimBgTilemap_Psychic},
     [BG_BOLT_STRIKE] = {gBattleAnimBgImage_BoltStrike, gBattleAnimBgPalette_BoltStrike, gBattleAnimBgTilemap_BoltStrike},
-    [BG_ZMOVE_ACTIVATE] = {gBattleAnimBgImage_ZMoveActivate, gBattleAnimBgPalette_ZMoveActivate, gBattleAnimBgTilemap_ZMoveActivate},
-    [BG_TECTONIC_RAGE] = {gBattleAnimBgImage_InAir, gBattleAnimBgPalette_TectonicRage, gBattleAnimBgTilemap_InAir},
     [BG_BLUE_SKY_DAY] = {gBattleAnimBgImage_SkyDay, gBattleAnimBgPalette_SkyDay, gBattleAnimBgTilemap_SkyDay},
     [BG_BLUE_SKY_AFTERNOON] = {gBattleAnimBgImage_SkyDay, gBattleAnimBgPalette_SkyAfternoon, gBattleAnimBgTilemap_SkyDay},
     [BG_BLUE_SKY_NIGHT] = {gBattleAnimBgImage_SkyDay, gBattleAnimBgPalette_SkyNight, gBattleAnimBgTilemap_SkyDay},
-    [BG_ZMOVE_MOUNTAIN] = {gBattleAnimBgImage_ZMoveMountain, gBattleAnimBgPalette_ZMoveMountain, gBattleAnimBgTilemap_ZMoveMountain},
-    [BG_NEVERENDING_NIGHTMARE] = {gBattleAnimBgImage_NeverendingNightmare, gBattleAnimBgPalette_NeverendingNightmare, gBattleAnimBgTilemap_NeverendingNightmare},
     [BG_WATER_PULSE] = {gBattleAnimBgImage_WaterPulse, gBattleAnimBgPalette_WaterPulse, gBattleAnimBgTilemap_WaterPulse},
-    [BG_INFERNO_OVERDRIVE] = {gBattleAnimBgImage_InfernoOverdrive, gBattleAnimBgPalette_InfernoOverdrive, gBattleAnimBgTilemap_InfernoOverdrive},
-    [BG_BLOOM_DOOM] = {gBattleAnimBgImage_BloomDoom, gBattleAnimBgPalette_BloomDoom, gBattleAnimBgTilemap_BloomDoom},
-    [BG_SHATTERED_PSYCHE] = {gBattleAnimBgImage_ShatteredPsyche, gBattleAnimBgPalette_ShatteredPsyche, gBattleAnimBgTilemap_ShatteredPsyche},
-    [BG_TWINKLE_TACKLE] = {gBattleAnimBgImage_TwinkleTackle, gBattleAnimBgPalette_TwinkleTackle, gBattleAnimBgTilemap_TwinkleTackle},
-    [BG_BLACKHOLE_ECLIPSE] = {gBattleAnimBgImage_BlackholeEclipse, gBattleAnimBgPalette_BlackholeEclipse, gBattleAnimBgTilemap_BlackholeEclipse},
-    [BG_SOULSTEALING_7STAR_STRIKE] = {gBattleAnimBgImage_SoulStealing7StarStrike, gBattleAnimBgPalette_SoulStealing7StarStrike, gBattleAnimBgTilemap_SoulStealing7StarStrike},
-    [BG_MALICIOUS_MOONSAULT] = {gBattleAnimBgImage_MaliciousMoonsault, gBattleAnimBgPalette_MaliciousMoonsault, gBattleAnimBgTilemap_MaliciousMoonsault},
-    [BG_CLANGOROUS_SOULBLAZE] = {gBattleAnimBgImage_ClangorousSoulblaze, gBattleAnimBgPalette_ClangorousSoulblaze, gBattleAnimBgTilemap_ClangorousSoulblaze},
-    [BG_SNUGGLE_FOREVER] = {gBattleAnimBgImage_SnuggleForever, gBattleAnimBgPalette_SnuggleForever, gBattleAnimBgTilemap_SnuggleForever},
     [BG_MAX_LIGHTNING] = {gBattleAnimBgImage_MaxLightning, gBattleAnimBgPalette_MaxLightning, gBattleAnimBgTilemap_MaxLightning},
     [BG_GARBAGE_FALLS] = {gBattleAnimBgImage_Waterfall, gBattleAnimBgPalette_GarbageFalls, gBattleAnimBgTilemap_Waterfall},
     [BG_HYPER_BEAM] = {gBattleAnimBgImage_HydroCannon, gBattleAnimBgPalette_HyperBeam, gBattleAnimBgTilemap_HydroCannon},
@@ -2155,7 +2133,9 @@ static void (* const sScriptCmdTable[])(void) =
     ScriptCmd_visible,
     ScriptCmd_doublebattle_2D,
     ScriptCmd_doublebattle_2E,
-    ScriptCmd_stopsound
+    ScriptCmd_stopsound,
+    ScriptCmd_createvisualtaskontargets,
+    ScriptCmd_createspriteontargets,
 };
 
 // code
@@ -2380,6 +2360,93 @@ static void ScriptCmd_unloadspritegfx(void)
     ClearSpriteIndex(GET_TRUE_SPRITE_INDEX(index));
 }
 
+static s16 GetSubpriorityForMoveAnim(u8 argVar)
+{
+    s16 subpriority;
+
+    if (argVar & 0x80)
+    {
+        argVar ^= 0x80;
+        if (argVar >= 0x40)
+            argVar -= 0x40;
+        else
+            argVar *= -1;
+
+        subpriority = GetBattlerSpriteSubpriority(gBattleAnimTarget) + (s8)argVar;
+    }
+    else
+    {
+        if (argVar >= 0x40)
+            argVar -= 0x40;
+        else
+            argVar *= -1;
+
+        subpriority = GetBattlerSpriteSubpriority(gBattleAnimAttacker) + (s8)argVar;
+    }
+
+    if (subpriority < 3)
+        subpriority = 3;
+
+    return subpriority;
+}
+
+static u8 GetBattleAnimMoveTargets(u8 battlerArgIndex, u8 *targets)
+{
+    u8 i;
+    u8 ignoredTarget;
+    u8 numTargets = 0;
+    u8 animBattler = gBattleAnimArgs[battlerArgIndex];
+    u8 moveTarget = gBattleMoves[gAnimMoveIndex].target;
+
+    switch (animBattler)
+    {
+    case ANIM_ATTACKER:
+    case ANIM_ATK_PARTNER:
+        ignoredTarget = gBattleAnimTarget;
+        break;
+    case ANIM_TARGET:
+    case ANIM_DEF_PARTNER:
+    default:
+        ignoredTarget = gBattleAnimAttacker;
+        break;
+    }
+
+    switch (moveTarget)
+    {
+    case MOVE_TARGET_FOES_AND_ALLY:
+        if (animBattler == ANIM_ATTACKER)
+        {
+            targets[numTargets++] = gBattleAnimAttacker + MAX_BATTLERS_COUNT;
+        }
+        else
+        {
+            for (i = 0; i < gBattlersCount; i++)
+            {
+                if (i != gBattleAnimAttacker
+                 && gBattleMons[i].hp != 0
+                 && !(gAbsentBattlerFlags & gBitTable[i]))
+                    targets[numTargets++] = i + MAX_BATTLERS_COUNT;
+            }
+        }
+        break;
+    case MOVE_TARGET_BOTH:
+        for (i = 0; i < gBattlersCount; i++)
+        {
+            if (i != ignoredTarget
+             && GetBattlerSide(i) != GetBattlerSide(ignoredTarget)
+             && gBattleMons[i].hp != 0
+             && !(gAbsentBattlerFlags & gBitTable[i]))
+                targets[numTargets++] = i + MAX_BATTLERS_COUNT;
+        }
+        break;
+    default:
+        targets[numTargets++] = animBattler;
+        break;
+    }
+
+    return numTargets;
+}
+
 static void ScriptCmd_createsprite(void)
 {
     s32 i;
@@ -2403,35 +2470,61 @@ static void ScriptCmd_createsprite(void)
         sBattleAnimScriptPtr += 2;
     }
 
-    if (argVar & 0x80)
+    subpriority = GetSubpriorityForMoveAnim(argVar);
+
+    if (CreateSpriteAndAnimate(
+            template,
+            GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2),
+            GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET),
+            subpriority) != MAX_SPRITES)
+        gAnimVisualTaskCount++;
+}
+
+static void CreateSpriteOnTargets(const struct SpriteTemplate *template, u8 argVar, u8 battlerArgIndex, u8 argsCount)
+{
+    s32 i;
+    u8 battler;
+    u8 targets[MAX_BATTLERS_COUNT];
+    u8 numTargets;
+    s16 subpriority;
+
+    for (i = 0; i < argsCount; i++)
     {
-        argVar ^= 0x80;
-        if (argVar >= 0x40)
-            argVar -= 0x40;
-        else
-            argVar *= -1;
-
-        subpriority = GetBattlerSpriteSubpriority(gBattleAnimTarget) + (s8)(argVar);
+        gBattleAnimArgs[i] = T1_READ_16(sBattleAnimScriptPtr);
+        sBattleAnimScriptPtr += 2;
     }
-    else
+
+    subpriority = GetSubpriorityForMoveAnim(argVar);
+    numTargets = GetBattleAnimMoveTargets(battlerArgIndex, targets);
+
+    for (i = 0; i < numTargets; i++)
     {
-        if (argVar >= 0x40)
-            argVar -= 0x40;
-        else
-            argVar *= -1;
+        battler = GetAnimBattlerId(targets[i]);
+        gBattleAnimArgs[battlerArgIndex] = targets[i];
 
-        subpriority = GetBattlerSpriteSubpriority(gBattleAnimAttacker) + (s8)(argVar);
+        if (CreateSpriteAndAnimate(template,
+                                   GetBattlerSpriteCoord(battler, BATTLER_COORD_X_2),
+                                   GetBattlerSpriteCoord(battler, BATTLER_COORD_Y_PIC_OFFSET),
+                                   subpriority) != MAX_SPRITES)
+            gAnimVisualTaskCount++;
     }
+}
 
-    if (subpriority < 3)
-        subpriority = 3;
+static void ScriptCmd_createspriteontargets(void)
+{
+    const struct SpriteTemplate *template;
+    u8 argVar;
+    u8 battlerArgIndex;
+    u8 argsCount;
 
-    CreateSpriteAndAnimate(
-        template,
-        GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2),
-        GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET),
-        subpriority);
-    gAnimVisualTaskCount++;
+    sBattleAnimScriptPtr++;
+    template = (const struct SpriteTemplate *)T2_READ_32(sBattleAnimScriptPtr);
+    sBattleAnimScriptPtr += 4;
+    argVar = *sBattleAnimScriptPtr++;
+    battlerArgIndex = *sBattleAnimScriptPtr++;
+    argsCount = *sBattleAnimScriptPtr++;
+
+    CreateSpriteOnTargets(template, argVar, battlerArgIndex, argsCount);
 }
 
 static void ScriptCmd_createvisualtask(void)
@@ -2462,6 +2555,40 @@ static void ScriptCmd_createvisualtask(void)
     taskId = CreateTask(taskFunc, taskPriority);
     taskFunc(taskId);
     gAnimVisualTaskCount++;
+}
+
+static void ScriptCmd_createvisualtaskontargets(void)
+{
+    TaskFunc taskFunc;
+    u8 taskPriority;
+    u8 taskId;
+    u8 battlerArgIndex;
+    u8 argsCount;
+    u8 numTargets;
+    u8 targets[MAX_BATTLERS_COUNT];
+    s32 i;
+
+    sBattleAnimScriptPtr++;
+    taskFunc = (TaskFunc)T2_READ_32(sBattleAnimScriptPtr);
+    sBattleAnimScriptPtr += 4;
+    taskPriority = *sBattleAnimScriptPtr++;
+    battlerArgIndex = *sBattleAnimScriptPtr++;
+    argsCount = *sBattleAnimScriptPtr++;
+
+    for (i = 0; i < argsCount; i++)
+    {
+        gBattleAnimArgs[i] = T1_READ_16(sBattleAnimScriptPtr);
+        sBattleAnimScriptPtr += 2;
+    }
+
+    numTargets = GetBattleAnimMoveTargets(battlerArgIndex, targets);
+    for (i = 0; i < numTargets; i++)
+    {
+        gBattleAnimArgs[battlerArgIndex] = targets[i];
+        taskId = CreateTask(taskFunc, taskPriority);
+        taskFunc(taskId);
+        gAnimVisualTaskCount++;
+    }
 }
 
 static void ScriptCmd_delay(void)
@@ -2660,7 +2787,9 @@ static void ScriptCmd_monbg(void)
 
 u8 GetAnimBattlerId(u8 wantedBattler)
 {
-    if (wantedBattler == ANIM_ATTACKER)
+    if (wantedBattler >= MAX_BATTLERS_COUNT && wantedBattler < MAX_BATTLERS_COUNT * 2)
+        return wantedBattler - MAX_BATTLERS_COUNT;
+    else if (wantedBattler == ANIM_ATTACKER)
         return gBattleAnimAttacker;
     else if (wantedBattler == ANIM_TARGET)
         return gBattleAnimTarget;

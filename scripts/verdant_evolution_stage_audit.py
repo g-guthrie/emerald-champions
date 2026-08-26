@@ -209,10 +209,14 @@ def parse_showcase_annotations() -> dict[tuple[str, str], tuple[str, str]]:
 def parse_bracelet_access() -> list[dict]:
     """Find actual campaign scripts that grant the player's Mega Bracelet."""
     grants = []
+    grant_pattern = re.compile(
+        r"(?:\bgiveitem\s+ITEM_MEGA_BRACELET\b|"
+        r"\bspecial\s+TryGiveVerdant(?:StevenRewardBundle|MegaKit)\b)"
+    )
     for path in sorted((ROOT / "data/maps").glob("*/scripts.inc")):
         lines = path.read_text(errors="ignore").splitlines()
         for index, line in enumerate(lines, 1):
-            if re.search(r"\bgiveitem\s+ITEM_MEGA_BRACELET\b", line):
+            if grant_pattern.search(line):
                 map_name = path.parent.name
                 chapter = guide.chapter_for(map_name, "")
                 grants.append(
@@ -441,6 +445,7 @@ def encounter_campaign_state(
     trainer_ids: list[str],
     references: dict[str, list[dict]],
     strict_caps: list[int],
+    expected_cap: int | None = None,
 ) -> dict:
     sources = []
     for trainer_id in trainer_ids:
@@ -466,6 +471,17 @@ def encounter_campaign_state(
             }
         )
     earliest = min(states, key=lambda row: (row["badge"], row["rank"], row["line"]))
+    if expected_cap is not None:
+        if expected_cap not in strict_caps:
+            raise ValueError(f"documented strict cap {expected_cap} is not in the source cap table")
+        earliest = {
+            **earliest,
+            "source_badge": earliest["badge"],
+            "source_cap": earliest["cap"],
+            "badge": strict_caps.index(expected_cap),
+            "cap": expected_cap,
+            "campaign_state_source": "closed design strict_cap",
+        }
     return {"earliest": earliest, "sources": states}
 
 
@@ -527,19 +543,24 @@ def main() -> None:
         if design.get("status") != "closed":
             continue
         state = encounter_campaign_state(
-            design.get("trainer_ids", []), references, strict_caps
+            design.get("trainer_ids", []), references, strict_caps, design.get("strict_cap")
         )
-        # "Pre-Stone" means zero badges and earlier than the first reachable
-        # Mega Bracelet grant.  This selects all currently closed Battles 1-7.
+        # The strict young-stage gate applies until the first reachable Mega
+        # Bracelet grant, including the cap-20 Route 116/Dewford chapter.
+        documented_mega_access = design.get("evolution_stage_fit", {}).get("mega_access")
         before_bracelet = (
-            state["earliest"]["badge"], state["earliest"]["rank"]
-        ) < (first_bracelet["badge"], first_bracelet["rank"])
-        if state["earliest"]["badge"] != 0 or not before_bracelet:
+            not documented_mega_access
+            if isinstance(documented_mega_access, bool)
+            else (
+                state["earliest"]["badge"], state["earliest"]["rank"]
+            ) < (first_bracelet["badge"], first_bracelet["rank"])
+        )
+        if not before_bracelet:
             continue
         audited.append((encounter_id, design, state))
 
     if not audited:
-        raise ValueError("no closed pre-Stone bespoke encounters were reachable")
+        raise ValueError("no closed pre-Mega-access bespoke encounters were reachable")
 
     results = []
     for encounter_id, design, state in audited:
@@ -584,13 +605,14 @@ def main() -> None:
                         f"({describe_path(minimum_paths.get(species, []))})"
                     )
 
-            required = math.ceil(len(party) * 0.75)
-            if len(eligible) < required:
-                problems.append(
-                    f"variant {variant_number}: only {len(eligible)}/{len(party)} are "
-                    f"first-stage or truly single-stage; requires at least "
-                    f"{required}/{len(party)} (evolved: {', '.join(evolved)})"
-                )
+            if state["earliest"]["badge"] == 0:
+                required = math.ceil(len(party) * 0.75)
+                if len(eligible) < required:
+                    problems.append(
+                        f"variant {variant_number}: only {len(eligible)}/{len(party)} are "
+                        f"first-stage or truly single-stage; requires at least "
+                        f"{required}/{len(party)} (evolved: {', '.join(evolved)})"
+                    )
             variant_summaries.append(
                 f"{len(eligible)}/{len(party)} stage-eligible at "
                 f"Lv{min(max(1, cap + mon['level']) for mon in party)}-"
@@ -637,7 +659,7 @@ def main() -> None:
         print(f"  - {fact}")
     for problem in mega_path_problems:
         print(f"  - {problem}")
-    print(f"Audited {len(results)} closed, reachable pre-Stone bespoke encounters.\n")
+    print(f"Audited {len(results)} closed, reachable pre-Mega-access bespoke encounters.\n")
 
     for result in results:
         status = "FAIL" if result["problems"] else "PASS"

@@ -608,8 +608,11 @@ u8 CreateSpriteAt(u8 index, const struct SpriteTemplate *template, s16 x, s16 y,
         SetSpriteSheetFrameTileNum(sprite);
     }
 
-    if (sprite->oam.affineMode & ST_OAM_AFFINE_ON_MASK)
-        InitSpriteAffineAnim(sprite);
+    if ((sprite->oam.affineMode & ST_OAM_AFFINE_ON_MASK) && !InitSpriteAffineAnim(sprite))
+    {
+        DestroySprite(sprite);
+        return MAX_SPRITES;
+    }
 
     if (template->paletteTag != 0xFFFF)
         sprite->oam.paletteNum = IndexOfSpritePaletteTag(template->paletteTag);
@@ -1476,7 +1479,7 @@ void FreeOamMatrix(u8 matrixNum)
     SetOamMatrix(matrixNum, 0x100, 0, 0, 0x100);
 }
 
-void InitSpriteAffineAnim(struct Sprite *sprite)
+bool8 InitSpriteAffineAnim(struct Sprite *sprite)
 {
     u8 matrixNum = AllocOamMatrix();
     if (matrixNum != 0xFF)
@@ -1485,7 +1488,12 @@ void InitSpriteAffineAnim(struct Sprite *sprite)
         sprite->oam.matrixNum = matrixNum;
         sprite->affineAnimBeginning = TRUE;
         AffineAnimStateReset(matrixNum);
+        return TRUE;
     }
+
+    sprite->oam.affineMode = ST_OAM_AFFINE_OFF;
+    CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, sprite->oam.affineMode);
+    return FALSE;
 }
 
 void SetOamMatrixRotationScaling(u8 matrixNum, s16 xScale, s16 yScale, u16 rotation)

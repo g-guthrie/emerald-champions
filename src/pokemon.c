@@ -50,6 +50,10 @@
 #include "constants/songs.h"
 #include "constants/species.h"
 #include "constants/trainers.h"
+
+#if ITEMS_COUNT > (1 << 10)
+#error BattleTowerPokemon heldItem needs more than 10 bits
+#endif
 #include "constants/weather.h"
 #include "constants/battle_config.h"
 #include "data/trainer_spreads.h"
@@ -3488,15 +3492,17 @@ void CreateMonWithEVSpread(struct Pokemon *mon, u16 species, u8 level, u8 fixedI
         evsBits >>= 1;
     }
 
-    evAmount = MAX_TOTAL_EVS / statCount;
-
-    evsBits = 1;
-
-    for (i = 0; i < NUM_STATS; i++)
+    if (statCount != 0)
     {
-        if (evSpread & evsBits)
-            SetMonData(mon, MON_DATA_HP_EV + i, &evAmount);
-        evsBits <<= 1;
+        evAmount = MAX_TOTAL_EVS / statCount;
+        evsBits = 1;
+
+        for (i = 0; i < NUM_STATS; i++)
+        {
+            if (evSpread & evsBits)
+                SetMonData(mon, MON_DATA_HP_EV + i, &evAmount);
+            evsBits <<= 1;
+        }
     }
 
     CalculateMonStats(mon);
@@ -3508,6 +3514,7 @@ void CreateBattleTowerMon(struct Pokemon *mon, struct BattleTowerPokemon *src)
     u8 nickname[30];
     u8 language;
     u8 value;
+    u16 heldItem = src->heldItem;
 
     CreateMon(mon, src->species, src->level, 0, 1, src->personality, OT_ID_PRESET, src->otId);
 
@@ -3515,7 +3522,7 @@ void CreateBattleTowerMon(struct Pokemon *mon, struct BattleTowerPokemon *src)
         SetMonMoveSlot(mon, src->moves[i], i);
 
     SetMonData(mon, MON_DATA_PP_BONUSES, &src->ppBonuses);
-    SetMonData(mon, MON_DATA_HELD_ITEM, &src->heldItem);
+    SetMonData(mon, MON_DATA_HELD_ITEM, &heldItem);
     SetMonData(mon, MON_DATA_FRIENDSHIP, &src->friendship);
 
     StringCopy(nickname, src->nickname);
@@ -3538,7 +3545,7 @@ void CreateBattleTowerMon(struct Pokemon *mon, struct BattleTowerPokemon *src)
     SetMonData(mon, MON_DATA_SPEED_EV, &src->speedEV);
     SetMonData(mon, MON_DATA_SPATK_EV, &src->spAttackEV);
     SetMonData(mon, MON_DATA_SPDEF_EV, &src->spDefenseEV);
-    value = src->abilityNum;
+    value = src->hiddenAbility ? 2 : src->abilityNum;
     SetMonData(mon, MON_DATA_ABILITY_NUM, &value);
     value = src->hpIV;
     SetMonData(mon, MON_DATA_HP_IV, &value);
@@ -3552,6 +3559,12 @@ void CreateBattleTowerMon(struct Pokemon *mon, struct BattleTowerPokemon *src)
     SetMonData(mon, MON_DATA_SPATK_IV, &value);
     value = src->spDefenseIV;
     SetMonData(mon, MON_DATA_SPDEF_IV, &value);
+    if (src->hasExplicitNature)
+    {
+        value = src->nature;
+        SetMonData(mon, MON_DATA_NATURE, &value);
+    }
+    TryUpdateMonFormForHeldItem(mon);
     MonRestorePP(mon);
     CalculateMonStats(mon);
 }
@@ -3563,6 +3576,7 @@ void CreateBattleTowerMon2(struct Pokemon *mon, struct BattleTowerPokemon *src, 
     u8 level;
     u8 language;
     u8 value;
+    u16 heldItem = src->heldItem;
 
     if (gSaveBlock2Ptr->frontier.lvlMode != FRONTIER_LVL_50)
         level = GetFrontierEnemyMonLevel(gSaveBlock2Ptr->frontier.lvlMode);
@@ -3577,7 +3591,7 @@ void CreateBattleTowerMon2(struct Pokemon *mon, struct BattleTowerPokemon *src, 
         SetMonMoveSlot(mon, src->moves[i], i);
 
     SetMonData(mon, MON_DATA_PP_BONUSES, &src->ppBonuses);
-    SetMonData(mon, MON_DATA_HELD_ITEM, &src->heldItem);
+    SetMonData(mon, MON_DATA_HELD_ITEM, &heldItem);
     SetMonData(mon, MON_DATA_FRIENDSHIP, &src->friendship);
 
     StringCopy(nickname, src->nickname);
@@ -3600,7 +3614,7 @@ void CreateBattleTowerMon2(struct Pokemon *mon, struct BattleTowerPokemon *src, 
     SetMonData(mon, MON_DATA_SPEED_EV, &src->speedEV);
     SetMonData(mon, MON_DATA_SPATK_EV, &src->spAttackEV);
     SetMonData(mon, MON_DATA_SPDEF_EV, &src->spDefenseEV);
-    value = src->abilityNum;
+    value = src->hiddenAbility ? 2 : src->abilityNum;
     SetMonData(mon, MON_DATA_ABILITY_NUM, &value);
     value = src->hpIV;
     SetMonData(mon, MON_DATA_HP_IV, &value);
@@ -3614,6 +3628,12 @@ void CreateBattleTowerMon2(struct Pokemon *mon, struct BattleTowerPokemon *src, 
     SetMonData(mon, MON_DATA_SPATK_IV, &value);
     value = src->spDefenseIV;
     SetMonData(mon, MON_DATA_SPDEF_IV, &value);
+    if (src->hasExplicitNature)
+    {
+        value = src->nature;
+        SetMonData(mon, MON_DATA_NATURE, &value);
+    }
+    TryUpdateMonFormForHeldItem(mon);
     MonRestorePP(mon);
     CalculateMonStats(mon);
 }
@@ -3647,6 +3667,7 @@ void CreateApprenticeMon(struct Pokemon *mon, const struct Apprentice *src, u8 m
     language = src->language;
     SetMonData(mon, MON_DATA_LANGUAGE, &language);
     SetMonData(mon, MON_DATA_OT_NAME, GetApprenticeNameInLanguage(src->id, language));
+    TryUpdateMonFormForHeldItem(mon);
     CalculateMonStats(mon);
 }
 
@@ -3669,13 +3690,16 @@ void CreateMonWithEVSpreadNatureOTID(struct Pokemon *mon, u16 species, u8 level,
         evsBits >>= 1;
     }
 
-    evAmount = MAX_TOTAL_EVS / statCount;
-    evsBits = 1;
-    for (i = 0; i < NUM_STATS; i++)
+    if (statCount != 0)
     {
-        if (evSpread & evsBits)
-            SetMonData(mon, MON_DATA_HP_EV + i, &evAmount);
-        evsBits <<= 1;
+        evAmount = MAX_TOTAL_EVS / statCount;
+        evsBits = 1;
+        for (i = 0; i < NUM_STATS; i++)
+        {
+            if (evSpread & evsBits)
+                SetMonData(mon, MON_DATA_HP_EV + i, &evAmount);
+            evsBits <<= 1;
+        }
     }
     SetMonData(mon, MON_DATA_NATURE, &nature);
     CalculateMonStats(mon);
@@ -3707,13 +3731,17 @@ void ConvertPokemonToBattleTowerPokemon(struct Pokemon *mon, struct BattleTowerP
     dest->spAttackEV = GetMonData(mon, MON_DATA_SPATK_EV, NULL);
     dest->spDefenseEV = GetMonData(mon, MON_DATA_SPDEF_EV, NULL);
     dest->friendship = GetMonData(mon, MON_DATA_FRIENDSHIP, NULL);
+    dest->nature = GetMonData(mon, MON_DATA_NATURE, NULL);
+    dest->hasExplicitNature = TRUE;
     dest->hpIV = GetMonData(mon, MON_DATA_HP_IV, NULL);
     dest->attackIV = GetMonData(mon, MON_DATA_ATK_IV, NULL);
     dest->defenseIV = GetMonData(mon, MON_DATA_DEF_IV, NULL);
     dest->speedIV  = GetMonData(mon, MON_DATA_SPEED_IV, NULL);
     dest->spAttackIV  = GetMonData(mon, MON_DATA_SPATK_IV, NULL);
     dest->spDefenseIV  = GetMonData(mon, MON_DATA_SPDEF_IV, NULL);
-    dest->abilityNum = GetMonData(mon, MON_DATA_ABILITY_NUM, NULL);
+    i = GetMonData(mon, MON_DATA_ABILITY_NUM, NULL);
+    dest->hiddenAbility = (i == 2);
+    dest->abilityNum = (i == 1);
     dest->personality = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
     GetMonData(mon, MON_DATA_NICKNAME, dest->nickname);
 }
@@ -7342,6 +7370,11 @@ u16 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
     // expose the same lineage move directly to Pichu, Pikachu, and Raichu.
     if (eggSpecies == SPECIES_PICHU)
         AddMoveIfLegalAndNew(MOVE_VOLT_TACKLE, learnedMoves, moves, &numMoves);
+
+    // Wish Bagon was distributed officially; expose that legal event move
+    // without incorrectly making it inheritable through breeding.
+    if (eggSpecies == SPECIES_BAGON)
+        AddMoveIfLegalAndNew(MOVE_WISH, learnedMoves, moves, &numMoves);
 
     return numMoves;
 }

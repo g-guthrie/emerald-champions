@@ -24,6 +24,8 @@ LavaridgeTown_House_EventScript_SuckerPunchTM::
 	goto_if_eq MoveTutor_EventScript_MimicDeclined
 	msgbox LavaridgeTown_House_Text_GiveTM94, MSGBOX_DEFAULT
 	giveitem ITEM_KINGS_ROCK
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_VERDANT_GIFT_SUCKER_PUNCH
 	msgbox LavaridgeTown_House_Text_HaveTM94, MSGBOX_DEFAULT
 	release

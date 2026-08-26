@@ -272,6 +272,8 @@ SlateportCity_PokemonFanClub_EventScript_EndureTM::
 	goto_if_set FLAG_VERDANT_GIFT_ENDURE, SlateportCity_PokemonFanClub_EventScript_ReceivedTM58
 	msgbox SlateportCity_PokemonFanClub_Text_GiveTM58, MSGBOX_DEFAULT
 	giveitem ITEM_FOCUS_BAND
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_VERDANT_GIFT_ENDURE
 	msgbox SlateportCity_PokemonFanClub_Text_HaveTM58, MSGBOX_DEFAULT
 	release

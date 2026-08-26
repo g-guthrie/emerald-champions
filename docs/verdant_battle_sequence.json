@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "scope": "Canonical full-clear encounter order from the first trainer battle through the west entrance of Route 116 after the Stone Badge. This frontier grows continuously until every campaign, optional, rematch, boss, and postgame trainer encounter in the 810-definition guide is assigned exactly once.",
+  "scope": "Canonical full-clear encounter order from the first trainer battle through Brawly and the Knuckle Badge. This frontier grows continuously until every campaign, optional, rematch, boss, and postgame trainer encounter in the 810-definition guide is assigned exactly once.",
   "ordering_rule": "Use the earliest natural first-playthrough path. Optional trainers are never dropped. Mutually exclusive gender, starter, or partner branches of one physical encounter are grouped under one battle index. Where open terrain or an open side route permits reversal, one order is selected and the ambiguity is documented. Rustboro Gym is canonicalized before the already-accessible Route 116 so each cap-relative encounter has one authored first-reach state.",
   "source_definition_count": 810,
   "entries": [
@@ -187,9 +187,230 @@
       "encounter_id": "BATTLE_020_ROUTE_116_JOEY",
       "location": "Route116",
       "category": "optional double",
-      "status": "next",
+      "status": "closed",
       "trainer_ids": ["TRAINER_JOEY"],
       "access_note": "First west-entry sight trainer on Route 116. The route was physically accessible before Roxanne, but Gym-first canon fixes Joey's first authored state at the new strict cap of 20."
+    },
+    {
+      "index": 21,
+      "encounter_id": "BATTLE_021_ROUTE_116_JOSE",
+      "location": "Route116",
+      "category": "optional double",
+      "status": "closed",
+      "trainer_ids": ["TRAINER_JOSE"],
+      "access_note": "Bug Catcher on the lower west approach, selected second in the canonical full-clear Route 116 sweep; open terrain permits local reversal with later west-side trainers."
+    },
+    {
+      "index": 22,
+      "encounter_id": "BATTLE_022_ROUTE_116_KAREN",
+      "location": "Route116",
+      "category": "optional single",
+      "status": "closed",
+      "trainer_ids": ["TRAINER_KAREN_1"],
+      "access_note": "First central Route 116 schoolchild in the canonical west-to-east sweep; rematches are separate later encounters."
+    },
+    {
+      "index": 23,
+      "encounter_id": "BATTLE_023_ROUTE_116_CLARK_JOHNSON",
+      "location": "Route116",
+      "category": "optional native pair",
+      "status": "closed",
+      "trainer_ids": ["TRAINER_CLARK", "TRAINER_JOHNSON"],
+      "access_note": "Canonical 3+3 native double at the central coordinate intersection. Either trainer can be split into an independent three-Pokémon single. Current fixed sight geometry pairs Clark with Johnson; Devan's separate west-facing line does not intersect Johnson's south-facing line."
+    },
+    {
+      "index": 24,
+      "encounter_id": "BATTLE_024_ROUTE_116_DEVAN",
+      "location": "Route116",
+      "category": "optional double",
+      "status": "closed",
+      "trainer_ids": ["TRAINER_DEVAN"],
+      "access_note": "Eastern Hiker preserved as a standalone double after selecting Clark+Johnson at the ambiguous central intersection."
+    },
+    {
+      "index": 25,
+      "encounter_id": "BATTLE_025_ROUTE_116_SARAH_DAWSON",
+      "location": "Route116",
+      "category": "optional native pair",
+      "status": "closed",
+      "trainer_ids": ["TRAINER_SARAH", "TRAINER_DAWSON"],
+      "access_note": "First Cut-grove coordinate intersection in the canonical west-to-east clear. The joint fight loads three Pokémon per trainer, while either half can be approached as an independent single."
+    },
+    {
+      "index": 26,
+      "encounter_id": "BATTLE_026_ROUTE_116_JANICE_JERRY",
+      "location": "Route116",
+      "category": "optional native pair",
+      "status": "closed",
+      "trainer_ids": ["TRAINER_JANICE", "TRAINER_JERRY_1"],
+      "access_note": "Second Cut-grove coordinate intersection. The joint fight is a 3+3 double; either trainer can also be split into a self-sufficient three-Pokémon single."
+    },
+    {
+      "index": 27,
+      "encounter_id": "BATTLE_027_RUSTURF_TUNNEL_AQUA_GRUNT",
+      "location": "RusturfTunnel",
+      "category": "required story double",
+      "status": "closed",
+      "trainer_ids": ["TRAINER_GRUNT_RUSTURF_TUNNEL"],
+      "access_note": "Mandatory Peeko and Devon Goods recovery battle. Mike remains inaccessible beyond the Rock Smash blockage."
+    },
+    {
+      "index": 28,
+      "encounter_id": "BATTLE_028_RUSTBORO_RIVAL",
+      "location": "RustboroCity/Route104",
+      "category": "optional required-conversation branch",
+      "status": "closed",
+      "trainer_ids": [
+        "TRAINER_MAY_RUSTBORO_TREECKO",
+        "TRAINER_MAY_RUSTBORO_TORCHIC",
+        "TRAINER_MAY_RUSTBORO_MUDKIP",
+        "TRAINER_BRENDAN_RUSTBORO_TREECKO",
+        "TRAINER_BRENDAN_RUSTBORO_TORCHIC",
+        "TRAINER_BRENDAN_RUSTBORO_MUDKIP"
+      ],
+      "access_note": "One optional physical rival battle inside a mandatory post-Devon conversation. Gender, starter, and Rustboro-versus-Route104 location records are mutually exclusive runtime branches."
+    },
+    {
+      "index": 29,
+      "encounter_id": "BATTLE_029_ROUTE_106_NED",
+      "location": "Route106",
+      "category": "optional double",
+      "status": "closed",
+      "trainer_ids": ["TRAINER_NED"],
+      "access_note": "First east-to-west shore trainer from Dewford. Route 105 cannot be disembarked and Route 106 swimmers Douglas and Kyla require Surf, so they are not yet reachable."
+    },
+    {
+      "index": 30,
+      "encounter_id": "BATTLE_030_ROUTE_106_ELLIOT",
+      "location": "Route106",
+      "category": "optional single",
+      "status": "closed",
+      "trainer_ids": ["TRAINER_ELLIOT_1"],
+      "access_note": "Second reachable Route 106 shore trainer and intentional singles pacing before Dewford Gym; later Match Call stages are separate encounters."
+    },
+    {
+      "index": 31,
+      "encounter_id": "BATTLE_031_DEWFORD_GYM_LAURA",
+      "location": "DewfordTown_Gym",
+      "category": "optional double",
+      "status": "closed",
+      "trainer_ids": ["TRAINER_LAURA"],
+      "access_note": "First canonical Gym branch trainer after the player completes the no-battle Steven letter event in Granite Cave and receives the Mega Bracelet; the two interior branches are reversible."
+    },
+    {
+      "index": 32,
+      "encounter_id": "BATTLE_032_DEWFORD_GYM_LILITH_BRENDEN",
+      "location": "DewfordTown_Gym",
+      "category": "optional native pair",
+      "status": "closed",
+      "trainer_ids": ["TRAINER_LILITH", "TRAINER_BRENDEN"],
+      "access_note": "East-branch native 3+3 double. Either trainer can also be split into an independently viable three-Pokémon single."
+    },
+    {
+      "index": 33,
+      "encounter_id": "BATTLE_033_DEWFORD_GYM_TAKAO",
+      "location": "DewfordTown_Gym",
+      "category": "optional single",
+      "status": "closed",
+      "trainer_ids": ["TRAINER_TAKAO"],
+      "access_note": "First west-branch singles lesson after the canonical east-branch clear."
+    },
+    {
+      "index": 34,
+      "encounter_id": "BATTLE_034_DEWFORD_GYM_CRISTIAN",
+      "location": "DewfordTown_Gym",
+      "category": "optional single",
+      "status": "closed",
+      "trainer_ids": ["TRAINER_CRISTIAN"],
+      "access_note": "Second west-branch singles lesson before the final Gym trainer."
+    },
+    {
+      "index": 35,
+      "encounter_id": "BATTLE_035_DEWFORD_GYM_JOCELYN",
+      "location": "DewfordTown_Gym",
+      "category": "optional double",
+      "status": "closed",
+      "trainer_ids": ["TRAINER_JOCELYN"],
+      "access_note": "Final optional Gym double immediately before Brawly."
+    },
+    {
+      "index": 36,
+      "encounter_id": "BATTLE_036_DEWFORD_GYM_BRAWLY",
+      "location": "DewfordTown_Gym",
+      "category": "required boss double",
+      "status": "closed",
+      "trainer_ids": ["TRAINER_BRAWLY_1"],
+      "access_note": "Required Knuckle Badge boss at strict cap 20 after Steven grants the Mega Bracelet but before departing for Slateport; victory raises the cap to 30."
+    },
+    {
+      "index": 37,
+      "encounter_id": "BATTLE_037_ROUTE_109_HUEY",
+      "location": "Route109",
+      "category": "optional single",
+      "status": "closed",
+      "strict_cap": 30,
+      "trainer_ids": ["TRAINER_HUEY"],
+      "access_note": "First trainer on the canonical northbound beach clear after Briney lands at Route 109. The optional southern loop remains reachable and will be indexed after the direct beach approach."
+    },
+    {
+      "index": 38,
+      "encounter_id": "BATTLE_038_ROUTE_109_HAILEY",
+      "location": "Route109",
+      "category": "optional double",
+      "status": "closed",
+      "strict_cap": 30,
+      "trainer_ids": ["TRAINER_HAILEY"],
+      "access_note": "Next northbound beach trainer after Huey on the canonical Route 109 approach toward Slateport; Hailey's long sight line makes her the next natural contact."
+    },
+    {
+      "index": 39,
+      "encounter_id": "BATTLE_039_ROUTE_109_EDMOND",
+      "location": "Route109",
+      "category": "optional single",
+      "status": "closed",
+      "strict_cap": 30,
+      "trainer_ids": ["TRAINER_EDMOND"],
+      "access_note": "East-side sailor on the same northbound beach band after Hailey; retained as a singles pacing battle before the final approach trainers."
+    },
+    {
+      "index": 40,
+      "encounter_id": "BATTLE_040_ROUTE_109_RICKY",
+      "location": "Route109",
+      "category": "optional single",
+      "status": "closed",
+      "strict_cap": 30,
+      "trainer_ids": ["TRAINER_RICKY_1"],
+      "access_note": "First north-edge Tuber on the direct Route 109 approach after Edmond; Match Call rematches remain separate future encounters."
+    },
+    {
+      "index": 41,
+      "encounter_id": "BATTLE_041_ROUTE_109_LOLA",
+      "location": "Route109",
+      "category": "optional double",
+      "status": "closed",
+      "strict_cap": 30,
+      "trainer_ids": ["TRAINER_LOLA_1"],
+      "access_note": "North-edge Tuber immediately after Ricky on the canonical beach approach; later Match Call stages remain separate encounters."
+    },
+    {
+      "index": 42,
+      "encounter_id": "BATTLE_042_ROUTE_109_CHANDLER",
+      "location": "Route109",
+      "category": "optional single",
+      "status": "closed",
+      "strict_cap": 30,
+      "trainer_ids": ["TRAINER_CHANDLER"],
+      "access_note": "Final north-edge youngster after Lola on the direct Route 109 approach before entering Slateport proper."
+    },
+    {
+      "index": 43,
+      "encounter_id": "BATTLE_043_ROUTE_109_GWEN_AUSTINA",
+      "location": "Route109",
+      "category": "optional native pair",
+      "status": "next",
+      "strict_cap": 30,
+      "trainer_ids": ["TRAINER_GWEN", "TRAINER_AUSTINA"],
+      "access_note": "Adjacent southern-beach trainers cleared on the canonical return loop after the direct northbound approach; their intersecting sight geometry permits a native pair or either split single."
     }
   ]
 }

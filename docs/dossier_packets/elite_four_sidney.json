@@ -1,0 +1,681 @@
+{
+  "anchor": {
+    "adaptation_constraints": [
+      "Mega-only gimmick policy; no Tera, Z-Moves, Dynamax, Gigantamax, or Primal Reversion.",
+      "If the source offers two Megas, select one; preserve distinct non-Mega setup endgames."
+    ],
+    "anchor": "ELITE_FOUR_SIDNEY",
+    "campaign_order": 270,
+    "candidate_reference_ids": [
+      "elite:marco-silva:turin-2026"
+    ],
+    "chronological_closure_note": "Begins the connected League gauntlet. Victory returns control to the player, who may spend carried healing items before Phoebe; nothing is restored automatically.",
+    "design_commitment": "soft",
+    "mega_legendary_posture": {
+      "legendary": "One ominous legendary or mythical is appropriate at the League.",
+      "mega": "One Dark or sinister Mega, with no alternate Mega activation in the same battle."
+    },
+    "planning_tier": "league_gauntlet",
+    "primary_candidate_modes": [
+      "pivoting Dark balance",
+      "priority and setup offense"
+    ],
+    "protected_identity": "The gauntlet opens with Dark-type information warfare, priority, and multiple independent setup endgames.",
+    "secondary_candidate_modes": [
+      "Disable or Perish threat",
+      "anti-screen denial"
+    ],
+    "signature_reveal": "A Dark Mega and one rare threat make targeting and Protect prediction dangerous from turn one.",
+    "target_difficulty": 10,
+    "trainer_ids": [
+      "TRAINER_SIDNEY"
+    ]
+  },
+  "competitive_filters": {
+    "limit": 12,
+    "pokemon": [],
+    "tags": []
+  },
+  "competitive_index": {
+    "record_count": 1005,
+    "sha256": "44d79fd2a5f7578013b2363f9e47d75a0f05ae4239da3bd6891e9651bca2648a",
+    "version": 1
+  },
+  "competitive_queries": [
+    "dark setup",
+    "priority pivoting",
+    "perish trap"
+  ],
+  "current_source_facts": [
+    {
+      "average_level_offset": 0.5,
+      "current_ai_flags": [
+        "AI_FLAG_CHECK_BAD_MOVE",
+        "AI_FLAG_TRY_TO_FAINT",
+        "AI_FLAG_CHECK_VIABILITY",
+        "AI_FLAG_CHECK_FOE",
+        "AI_FLAG_SMART_SWITCHING",
+        "AI_FLAG_HELP_PARTNER",
+        "AI_FLAG_SPEED_CONTROL"
+      ],
+      "current_party": [
+        {
+          "ability": "ABILITY_INTIMIDATE",
+          "item": "ITEM_EJECT_BUTTON",
+          "moves": [
+            "MOVE_FAKE_OUT",
+            "MOVE_PARTING_SHOT",
+            "MOVE_FLARE_BLITZ",
+            "MOVE_SNARL"
+          ],
+          "species": "SPECIES_INCINEROAR"
+        },
+        {
+          "ability": "ABILITY_DARK_AURA",
+          "item": "ITEM_ASSAULT_VEST",
+          "moves": [
+            "MOVE_OBLIVION_WING",
+            "MOVE_DARK_PULSE",
+            "MOVE_SNARL",
+            "MOVE_SUCKER_PUNCH"
+          ],
+          "species": "SPECIES_YVELTAL"
+        },
+        {
+          "ability": "ABILITY_BAD_DREAMS",
+          "item": "ITEM_FOCUS_SASH",
+          "moves": [
+            "MOVE_DARK_PULSE",
+            "MOVE_HYPNOSIS",
+            "MOVE_ICY_WIND",
+            "MOVE_PROTECT"
+          ],
+          "species": "SPECIES_DARKRAI"
+        },
+        {
+          "ability": "ABILITY_UNSEEN_FIST",
+          "item": "ITEM_CHOICE_BAND",
+          "moves": [
+            "MOVE_WICKED_BLOW",
+            "MOVE_CLOSE_COMBAT",
+            "MOVE_AQUA_JET",
+            "MOVE_U_TURN"
+          ],
+          "species": "SPECIES_URSHIFU"
+        },
+        {
+          "ability": "ABILITY_MAGICIAN",
+          "item": "ITEM_LIFE_ORB",
+          "moves": [
+            "MOVE_HYPERSPACE_FURY",
+            "MOVE_ZEN_HEADBUTT",
+            "MOVE_GUNK_SHOT",
+            "MOVE_PROTECT"
+          ],
+          "species": "SPECIES_HOOPA_UNBOUND"
+        },
+        {
+          "ability": "ABILITY_SUPER_LUCK",
+          "item": "ITEM_ABSOLITE",
+          "moves": [
+            "MOVE_NIGHT_SLASH",
+            "MOVE_PLAY_ROUGH",
+            "MOVE_SUCKER_PUNCH",
+            "MOVE_PROTECT"
+          ],
+          "species": "SPECIES_ABSOL"
+        }
+      ],
+      "format": "double",
+      "note": "Current source is baseline evidence only; a design-complete dossier does not mutate it.",
+      "party_size": 6,
+      "source_party": "sParty_Sidney",
+      "synergy_tags": [
+        "Dark pressure",
+        "Fake Out tempo",
+        "active speed control",
+        "pivot control",
+        "pivot offense",
+        "priority pressure",
+        "status control"
+      ],
+      "trainer_id": "TRAINER_SIDNEY"
+    }
+  ],
+  "dossier_template": {
+    "ai": null,
+    "anchor_id": "ELITE_FOUR_SIDNEY",
+    "campaign_reservations": null,
+    "campaign_state": null,
+    "competitive_research": null,
+    "counterplay": null,
+    "difficulty": {
+      "observed": null,
+      "target": 10
+    },
+    "fresh_critic_review": null,
+    "identity": null,
+    "mechanics_proposal": null,
+    "ordering": null,
+    "planning_tier": "league_gauntlet",
+    "presentation": null,
+    "rolling_context": null,
+    "runtime": null,
+    "status": {
+      "design": null,
+      "fresh_critic": null,
+      "runtime": "unplayed",
+      "source": "unimplemented",
+      "static": null
+    },
+    "team": null,
+    "verification": null
+  },
+  "mechanics_baseline": {
+    "automatic_healing_between_members": false,
+    "champion_room_forces_approach_after_entry": true,
+    "drake_releases_player_control_after_victory": true,
+    "hall4_allows_normal_overworld_menu": true,
+    "items_during_trainer_battles": false,
+    "level_semantics": "Trainer levels are offsets from the active strict cap.",
+    "manual_overworld_bag_between_members": true,
+    "mechanics_proposal": null,
+    "party_composition_locked_after_entry": true,
+    "pokemon_menu_between_members": true,
+    "save_menu_between_members": true,
+    "source_evidence": [
+      "data/maps/EverGrandeCity_SidneysRoom/scripts.inc",
+      "data/maps/EverGrandeCity_PhoebesRoom/scripts.inc",
+      "data/maps/EverGrandeCity_GlaciasRoom/scripts.inc",
+      "data/maps/EverGrandeCity_DrakesRoom/scripts.inc",
+      "data/maps/EverGrandeCity_Hall4/scripts.inc",
+      "data/maps/EverGrandeCity_ChampionsRoom/scripts.inc",
+      "src/start_menu.c",
+      "src/battle_main.c",
+      "src/pokemon.c"
+    ],
+    "strict_cap": 80
+  },
+  "mechanics_baseline_id": "pokemon_league_main_story",
+  "packet_type": "authoring-context-not-a-closed-design",
+  "ranked_candidate_digest": [
+    {
+      "ai_requirements": [],
+      "completeness": "full-sets",
+      "confidence": "reproducible",
+      "event": null,
+      "gimmick_dependencies": [],
+      "player": null,
+      "preview_pressure": "",
+      "primary_mode": "",
+      "query": "dark setup",
+      "rank": 1,
+      "reference_id": "showdown:gen4randomdoublesbattle:007",
+      "roster": [
+        "Nidorina",
+        "Scizor",
+        "Fearow",
+        "Darkrai",
+        "Salamence",
+        "Shiftry"
+      ],
+      "secondary_mode": "",
+      "source_kind": "showdown-random",
+      "strategy_notes": "",
+      "tags": [
+        "choice-item",
+        "hazards",
+        "healing",
+        "priority",
+        "setup",
+        "sleep"
+      ],
+      "urls": [
+        "https://github.com/smogon/pokemon-showdown"
+      ],
+      "year": null
+    },
+    {
+      "ai_requirements": [],
+      "completeness": "full-sets",
+      "confidence": "reproducible",
+      "event": null,
+      "gimmick_dependencies": [],
+      "player": null,
+      "preview_pressure": "",
+      "primary_mode": "",
+      "query": "dark setup",
+      "rank": 2,
+      "reference_id": "showdown:gen4randomdoublesbattle:012",
+      "roster": [
+        "Azumarill",
+        "Kyogre",
+        "Loudred",
+        "Shroomish",
+        "Darkrai",
+        "Metang"
+      ],
+      "secondary_mode": "",
+      "source_kind": "showdown-random",
+      "strategy_notes": "",
+      "tags": [
+        "choice-disruption",
+        "choice-item",
+        "hazards",
+        "offense",
+        "priority",
+        "rain",
+        "setup",
+        "sleep"
+      ],
+      "urls": [
+        "https://github.com/smogon/pokemon-showdown"
+      ],
+      "year": null
+    },
+    {
+      "ai_requirements": [],
+      "completeness": "full-sets",
+      "confidence": "reproducible",
+      "event": null,
+      "gimmick_dependencies": [],
+      "player": null,
+      "preview_pressure": "",
+      "primary_mode": "",
+      "query": "dark setup",
+      "rank": 3,
+      "reference_id": "showdown:gen5randomdoublesbattle:030",
+      "roster": [
+        "Darkrai",
+        "Shroomish",
+        "Volcarona",
+        "Fraxure",
+        "Steelix",
+        "Ferrothorn"
+      ],
+      "secondary_mode": "",
+      "source_kind": "showdown-random",
+      "strategy_notes": "",
+      "tags": [
+        "active-speed-control",
+        "choice-disruption",
+        "choice-item",
+        "hazards",
+        "healing",
+        "setup",
+        "sleep"
+      ],
+      "urls": [
+        "https://github.com/smogon/pokemon-showdown"
+      ],
+      "year": null
+    },
+    {
+      "ai_requirements": [],
+      "completeness": "full-sets",
+      "confidence": "reproducible",
+      "event": null,
+      "gimmick_dependencies": [],
+      "player": null,
+      "preview_pressure": "",
+      "primary_mode": "",
+      "query": "dark setup",
+      "rank": 4,
+      "reference_id": "showdown:gen7randomdoublesbattle:024",
+      "roster": [
+        "Silvally-Dark",
+        "Rayquaza",
+        "Floatzel",
+        "Scrafty",
+        "Mawile",
+        "Excadrill"
+      ],
+      "secondary_mode": "",
+      "source_kind": "showdown-random",
+      "strategy_notes": "",
+      "tags": [
+        "active-speed-control",
+        "fake-out",
+        "pivoting",
+        "priority",
+        "setup"
+      ],
+      "urls": [
+        "https://github.com/smogon/pokemon-showdown"
+      ],
+      "year": null
+    },
+    {
+      "ai_requirements": [],
+      "completeness": "full-sets",
+      "confidence": "reproducible",
+      "event": null,
+      "gimmick_dependencies": [],
+      "player": null,
+      "preview_pressure": "",
+      "primary_mode": "",
+      "query": "dark setup",
+      "rank": 5,
+      "reference_id": "showdown:gen9randomdoublesbattle:016",
+      "roster": [
+        "Mewtwo",
+        "Solgaleo",
+        "Darkrai",
+        "Sawsbuck-Autumn",
+        "Pecharunt",
+        "Honchkrow"
+      ],
+      "secondary_mode": "",
+      "source_kind": "showdown-random",
+      "strategy_notes": "",
+      "tags": [
+        "healing",
+        "offense",
+        "priority",
+        "setup",
+        "tailwind"
+      ],
+      "urls": [
+        "https://github.com/smogon/pokemon-showdown"
+      ],
+      "year": null
+    },
+    {
+      "ai_requirements": [],
+      "completeness": "full-sets",
+      "confidence": "reproducible",
+      "event": null,
+      "gimmick_dependencies": [],
+      "player": null,
+      "preview_pressure": "",
+      "primary_mode": "",
+      "query": "dark setup",
+      "rank": 6,
+      "reference_id": "showdown:gen5randomdoublesbattle:022",
+      "roster": [
+        "Glameow",
+        "Shellos",
+        "Gallade",
+        "Houndoom",
+        "Lucario",
+        "Jolteon"
+      ],
+      "secondary_mode": "",
+      "source_kind": "showdown-random",
+      "strategy_notes": "",
+      "tags": [
+        "fake-out",
+        "healing",
+        "pivoting",
+        "positioning-control",
+        "priority",
+        "setup"
+      ],
+      "urls": [
+        "https://github.com/smogon/pokemon-showdown"
+      ],
+      "year": null
+    },
+    {
+      "ai_requirements": [],
+      "completeness": "full-sets",
+      "confidence": "reproducible",
+      "event": null,
+      "gimmick_dependencies": [],
+      "player": null,
+      "preview_pressure": "",
+      "primary_mode": "",
+      "query": "dark setup",
+      "rank": 7,
+      "reference_id": "showdown:gen5randomdoublesbattle:009",
+      "roster": [
+        "Pidgey",
+        "Shedinja",
+        "Arceus-Fighting",
+        "Reshiram",
+        "Dusknoir",
+        "Mollux"
+      ],
+      "secondary_mode": "",
+      "source_kind": "showdown-random",
+      "strategy_notes": "",
+      "tags": [
+        "hazards",
+        "healing",
+        "priority",
+        "setup"
+      ],
+      "urls": [
+        "https://github.com/smogon/pokemon-showdown"
+      ],
+      "year": null
+    },
+    {
+      "ai_requirements": [],
+      "completeness": "full-sets",
+      "confidence": "reproducible",
+      "event": null,
+      "gimmick_dependencies": [],
+      "player": null,
+      "preview_pressure": "",
+      "primary_mode": "",
+      "query": "dark setup",
+      "rank": 8,
+      "reference_id": "showdown:gen6randomdoublesbattle:019",
+      "roster": [
+        "Ho-Oh",
+        "Crawdaunt",
+        "Relicanth",
+        "Delcatty",
+        "Houndoom",
+        "Clefable"
+      ],
+      "secondary_mode": "",
+      "source_kind": "showdown-random",
+      "strategy_notes": "",
+      "tags": [
+        "active-speed-control",
+        "fake-out",
+        "healing",
+        "offense",
+        "positioning-control",
+        "priority",
+        "redirection",
+        "screens",
+        "setup",
+        "tailwind"
+      ],
+      "urls": [
+        "https://github.com/smogon/pokemon-showdown"
+      ],
+      "year": null
+    },
+    {
+      "ai_requirements": [],
+      "completeness": "full-sets",
+      "confidence": "reproducible",
+      "event": null,
+      "gimmick_dependencies": [],
+      "player": null,
+      "preview_pressure": "",
+      "primary_mode": "",
+      "query": "dark setup",
+      "rank": 9,
+      "reference_id": "showdown:gen8randomdoublesbattle:003",
+      "roster": [
+        "Klefki",
+        "Primarina",
+        "Eternatus",
+        "Poliwrath",
+        "Greedent",
+        "Bewear"
+      ],
+      "secondary_mode": "",
+      "source_kind": "showdown-random",
+      "strategy_notes": "",
+      "tags": [
+        "active-speed-control",
+        "hazards",
+        "healing",
+        "setup"
+      ],
+      "urls": [
+        "https://github.com/smogon/pokemon-showdown"
+      ],
+      "year": null
+    },
+    {
+      "ai_requirements": [],
+      "completeness": "full-sets",
+      "confidence": "reproducible",
+      "event": null,
+      "gimmick_dependencies": [],
+      "player": null,
+      "preview_pressure": "",
+      "primary_mode": "",
+      "query": "dark setup",
+      "rank": 10,
+      "reference_id": "showdown:gen8randomdoublesbattle:008",
+      "roster": [
+        "Zoroark",
+        "Gengar",
+        "Dunsparce",
+        "Qwilfish",
+        "Primarina",
+        "Golurk"
+      ],
+      "secondary_mode": "",
+      "source_kind": "showdown-random",
+      "strategy_notes": "",
+      "tags": [
+        "active-speed-control",
+        "setup"
+      ],
+      "urls": [
+        "https://github.com/smogon/pokemon-showdown"
+      ],
+      "year": null
+    },
+    {
+      "ai_requirements": [],
+      "completeness": "full-sets",
+      "confidence": "reproducible",
+      "event": null,
+      "gimmick_dependencies": [],
+      "player": null,
+      "preview_pressure": "",
+      "primary_mode": "",
+      "query": "dark setup",
+      "rank": 11,
+      "reference_id": "showdown:gen8randomdoublesbattle:009",
+      "roster": [
+        "Hydreigon",
+        "Venusaur",
+        "Farfetch\u2019d",
+        "Necrozma-Dawn-Wings",
+        "Vanilluxe",
+        "Dugtrio-Alola"
+      ],
+      "secondary_mode": "",
+      "source_kind": "showdown-random",
+      "strategy_notes": "",
+      "tags": [
+        "active-speed-control",
+        "offense",
+        "priority",
+        "setup",
+        "sleep",
+        "snow",
+        "tailwind"
+      ],
+      "urls": [
+        "https://github.com/smogon/pokemon-showdown"
+      ],
+      "year": null
+    },
+    {
+      "ai_requirements": [],
+      "completeness": "full-sets",
+      "confidence": "reproducible",
+      "event": null,
+      "gimmick_dependencies": [],
+      "player": null,
+      "preview_pressure": "",
+      "primary_mode": "",
+      "query": "dark setup",
+      "rank": 12,
+      "reference_id": "showdown:gen9championsrandomdoublesbattle:014",
+      "roster": [
+        "Incineroar",
+        "Annihilape",
+        "Arbok",
+        "Armarouge",
+        "Toucannon",
+        "Ditto"
+      ],
+      "secondary_mode": "",
+      "source_kind": "showdown-random",
+      "strategy_notes": "",
+      "tags": [
+        "choice-item",
+        "fake-out",
+        "offense",
+        "pivoting",
+        "setup",
+        "tailwind"
+      ],
+      "urls": [
+        "https://github.com/smogon/pokemon-showdown"
+      ],
+      "year": null
+    },
+    {
+      "ai_requirements": [],
+      "completeness": "roster-only-indexed-full-sheet",
+      "confidence": "verified-event-champion",
+      "event": "2026 Turin Special Event",
+      "gimmick_dependencies": [],
+      "player": "Marco Silva",
+      "preview_pressure": "",
+      "primary_mode": "",
+      "query": "campaign reservation",
+      "rank": 13,
+      "reference_id": "elite:marco-silva:turin-2026",
+      "roster": [
+        "Incineroar",
+        "Floette-Eternal-Mega",
+        "Sneasler",
+        "Kingambit",
+        "Gengar-Mega",
+        "Kommo-o"
+      ],
+      "secondary_mode": "",
+      "source_kind": "curated-elite-research",
+      "strategy_notes": "Alternative-Mega team with Gengar control and independent Kommo-o and Kingambit setup endgames.",
+      "tags": [
+        "clangorous-soul",
+        "disable",
+        "dual-mega-preview",
+        "perish",
+        "pivoting",
+        "swords-dance"
+      ],
+      "urls": [
+        "https://limitlessvgc.com/tournaments/435/teams"
+      ],
+      "year": 2026
+    }
+  ],
+  "rolling_context": {
+    "available": false,
+    "previous_encounters": [],
+    "protected_neighbor_anchors": [
+      "SEAFLOOR_CAVERN_ARCHIE",
+      "SOOTOPOLIS_GYM_JUAN",
+      "ELITE_FOUR_PHOEBE",
+      "ELITE_FOUR_GLACIA"
+    ],
+    "reason": "This future marquee anchor has campaign neighbors but no trustworthy previous-ten chronological window yet; refresh before implementation."
+  },
+  "version": 1
+}

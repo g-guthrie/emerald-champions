@@ -50,6 +50,7 @@ SlateportCity_BattleTentBattleRoom_EventScript_EnterRoom:: @ 82099BE
 	factory_setopponentgfx
 	setobjectxyperm LOCALID_OPPONENT, 5, 1
 	removeobject LOCALID_OPPONENT
+	delay 1
 	addobject LOCALID_OPPONENT
 	applymovement LOCALID_OPPONENT, SlateportCity_BattleTentBattleRoom_Movement_OpponentEnter
 	waitmovement 0
@@ -104,4 +105,3 @@ SlateportCity_BattleTentBattleRoom_Movement_OpponentEnter: @ 8209A9E
 	walk_down
 	walk_in_place_fastest_left
 	step_end
-

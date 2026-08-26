@@ -771,7 +771,8 @@ static void SpriteCB_Egg_2(struct Sprite* sprite)
             if (sprite->data[0] == 15)
             {
                 PlaySE(SE_BALL);
-                StartSpriteAnim(sprite, 2);
+                // Show the final cracked-egg frame before the shell breaks.
+                StartSpriteAnim(sprite, 3);
                 CreateRandomEggShardSprite();
                 CreateRandomEggShardSprite();
             }
