@@ -306,7 +306,7 @@ def synergy_tags(mons: list[dict], move_data: dict[str, dict]) -> list[str]:
         tags.append("speed-assisted Eruption")
     if len(moves & DEFENSIVE_TEMPO_MOVES) >= 4:
         tags.append("status control")
-    type_counts = Counter(type_name for mon in mons for type_name in set(mon["types"]))
+    type_counts = Counter(type_name for mon in mons for type_name in sorted(set(mon["types"])))
     if type_counts:
         dominant_type, count = type_counts.most_common(1)[0]
         if count >= max(3, (len(mons) + 1) // 2):
