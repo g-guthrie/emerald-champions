@@ -126,11 +126,20 @@ SouthernIsland_Interior_EventScript_GiveLatiStones::
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_Delay48
 	waitmovement 0
-	giveitem ITEM_LATIOSITE
-	giveitem ITEM_LATIASITE
+	special TryGiveVerdantLatiStoneBundle
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
+	playfanfare MUS_OBTAIN_ITEM
+	message SouthernIsland_Interior_Text_ReceivedLatiStones
+	waitmessage
+	waitfanfare
 	setflag FLAG_RECEIVED_LATI_STONES
 	releaseall
 	end
+
+SouthernIsland_Interior_Text_ReceivedLatiStones:
+	.string "{PLAYER} received Latiosite and\n"
+	.string "Latiasite!$"
 
 SouthernIsland_Interior_EventScript_SetLatiosBattleVars:: @ 8242BA4
 	specialvar VAR_RESULT, GetHighestLevelInPlayerParty

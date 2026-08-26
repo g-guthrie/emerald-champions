@@ -7,6 +7,8 @@ GraniteCave_1F_EventScript_Hiker:: @ 822DA5E
 	goto_if_set FLAG_RECEIVED_HM05, GraniteCave_1F_EventScript_ReceivedFlash
 	msgbox GraniteCave_1F_Text_GetsDarkAheadHereYouGo, MSGBOX_DEFAULT
 	giveitem ITEM_HM05_FLASH
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_HM05
 	msgbox GraniteCave_1F_Text_ExplainFlash, MSGBOX_DEFAULT
 	release
@@ -36,4 +38,3 @@ GraniteCave_1F_Text_ExplainFlash: @ 822DBB7
 	.string "of caves.\p"
 	.string "But, to use it, you need the Gym Badge\n"
 	.string "from Dewford's Pokémon Gym.$"
-

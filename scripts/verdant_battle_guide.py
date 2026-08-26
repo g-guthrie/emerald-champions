@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate Verdant's campaign-ordered, source-backed battle guide."""
+"""Generate Emerald Champions' campaign-ordered, source-backed battle guide."""
 
 from __future__ import annotations
 
@@ -92,6 +92,18 @@ def map_rank(map_name: str) -> int:
 
 
 def chapter_for(map_name: str, trainer_id: str) -> dict:
+    # These locations have causal gates that the broad map-order heuristic
+    # cannot infer. Steven's cave is physically opened by game clear, Cynthia
+    # is armed by the Hall of Fame script, and Ashen Woods is reached through
+    # the Badge-4 Strength path from Jagged Pass rather than a postgame gate.
+    if (map_name, trainer_id) in {
+        ("MeteorFalls_StevensCave", "TRAINER_STEVEN"),
+        ("MossdeepCity_House1", "TRAINER_CYNTHIA_1"),
+        ("MossdeepCity_House1", "TRAINER_CYNTHIA_2"),
+    }:
+        return {"id": "postgame", "title": "Postgame", "badge": 9, "cap": 100, "rank": 100}
+    if map_name == "AshenWoods":
+        return {"id": "balance", "title": "Balance Badge", "badge": 4, "cap": 45, "rank": 50}
     if trainer_id.startswith(("TRAINER_MAY_ROUTE_103_", "TRAINER_BRENDAN_ROUTE_103_")):
         return {"id": "opening", "title": "Opening rival battle", "badge": 0, "cap": 14, "rank": 0}
     if trainer_id.startswith(("TRAINER_MAY_RUSTBORO_", "TRAINER_BRENDAN_RUSTBORO_")):

@@ -1,7 +1,7 @@
-# Verdant curated Gen 9 availability
+# Emerald Champions curated Gen 9 availability
 
-Verdant keeps its existing Inclement Emerald engine and Mega Evolution as its
-only battle gimmick. The curated backport contains 25 competitive endpoints,
+Emerald Champions keeps Mega Evolution as its only battle gimmick. The curated
+backport contains 25 competitive endpoints,
 the pre-evolutions and alternate forms needed to use them normally, and four
 Expansion-supplied Mega forms: 45 numeric species entries in total. Tera forms
 are intentionally excluded.
@@ -10,7 +10,10 @@ Every family is available through a native wild encounter or evolution. Core
 sources use encounter slots of at least 10 percent; Finizen is a 40-percent Old
 Rod encounter and the three Tatsugiri forms share a 60/20/20 Good Rod pool.
 Canonical catch rates below 45 are raised to 45, so the legendary and Paradox
-showcases do not turn access into a ball-throwing grind.
+showcases do not turn access into a ball-throwing grind. The same minimum now
+applies to every legacy legendary that remains in an ordinary random wild
+table; Darkrai and Marshadow are withheld from ordinary encounters for their
+League showcases.
 
 | Progression area | New source | Endpoint or purpose |
 |---|---|---|
@@ -35,12 +38,32 @@ showcases do not turn access into a ball-throwing grind.
 | Shoal Cave Ice Room | Iron Bundle and Chien-Pao | Two ice specialists |
 | Desert Underpass | Ting-Lu | Ting-Lu |
 | Ashen Woods | Chi-Yu | Chi-Yu |
-| Meteor Falls, Steven's Cave | Roaring Moon | Roaring Moon |
+| Meteor Falls B1F, Waterfall room | Roaring Moon | Roaring Moon before the League |
 | Victory Road 1F | Iron Valiant | Iron Valiant |
+
+## Consolidated showcase pools
+
+The two 4-percent tail slots are weighting tools, not places to hide separate
+headline species. Route 104 now offers Mareanie and Wimpod at 12 percent each;
+Route 110 preserves its Rotom, Toxel, Pachirisu, and Stunky story pool; and
+Route 121 offers Zoroark and Spiritomb at 12 percent each. Porygon remains a
+Mauville Game Corner prize, while Klefki remains available on Route 113.
+
+The late-ocean identities are likewise direct: Route 124 has 15-percent
+Manaphy, Route 125 has 15-percent Suicune, Route 126 has 15-percent Tapu Fini,
+Route 127 has 15-percent Keldeo, and Route 128 has 15-percent Primarina. Their
+paired 5-percent Surf slots form one 10-percent source per route rather than
+two separate hunts.
+
+Magma Hideout consolidates Volcarona and Magmortar at 12 percent through the
+approach rooms, then reserves 12-percent Heatran and Emboar for 4F. Seafloor
+Cavern removes repeated Tapu Fini, Suicune, and Keldeo rolls: its paired tail
+slots make Greninja and Crobat 12-percent land encounters, Lapras a 10-percent
+Surf encounter, and Manaphy a 15-percent Super Rod encounter.
 
 ## Native exploration rewards
 
-Rare Candy remains sold by every ordinary Poké Mart for $1,000, so nine
+Rare Candy remains sold by the medicine Poké Marts for $1,000, so nine
 redundant Rare Candy balls now carry the progression items instead:
 
 | Location | Item | Use |

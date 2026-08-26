@@ -93,7 +93,7 @@ LavaridgeTown_Gym_1F_EventScript_FlanneryDefeated:: @ 81FE7C1
 	end
 
 LavaridgeTown_Gym_1F_EventScript_GiveOverheat2:: @ 81FE81D
-	giveitem ITEM_FLAME_ORB
+	giveitem ITEM_EJECT_PACK
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox LavaridgeTown_Gym_1F_Text_ExplainOverheat, MSGBOX_DEFAULT
@@ -102,7 +102,7 @@ LavaridgeTown_Gym_1F_EventScript_GiveOverheat2:: @ 81FE81D
 	end
 
 LavaridgeTown_Gym_1F_EventScript_GiveOverheat:: @ 81FE841
-	giveitem ITEM_FLAME_ORB
+	giveitem ITEM_EJECT_PACK
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_BagIsFull
 	msgbox LavaridgeTown_Gym_1F_Text_ExplainOverheat, MSGBOX_DEFAULT
@@ -425,9 +425,10 @@ LavaridgeTown_Gym_1F_Text_TakeThis:
 	.string "Don't be shy about taking it!$"
 
 LavaridgeTown_Gym_1F_Text_ExplainOverheat: @ 81FF45C
-	.string "That Flame Orb burns its holder.\p"
-	.string "Pokémon with Guts or other status\n"
-	.string "synergies can turn that into power.$"
+	.string "An Eject Pack switches its holder\n"
+	.string "when one of its stats is lowered.\p"
+	.string "It turns Overheat's drawback into\n"
+	.string "fresh momentum!$"
 
 LavaridgeTown_Gym_1F_Text_RegisteredFlannery: @ 81FF517
 	.string "Registered Gym Leader Flannery\n"

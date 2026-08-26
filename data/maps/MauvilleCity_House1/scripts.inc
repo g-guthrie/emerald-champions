@@ -7,6 +7,8 @@ MauvilleCity_House1_EventScript_RockSmashDude:: @ 820F976
 	goto_if_set FLAG_RECEIVED_HM06, MauvilleCity_House1_EventScript_ReceivedRockSmash
 	msgbox MauvilleCity_House1_Text_ImRockSmashDudeTakeThis, MSGBOX_DEFAULT
 	giveitem ITEM_HM06_ROCK_SMASH
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_HM06
 	msgbox MauvilleCity_House1_Text_ExplainRockSmash, MSGBOX_DEFAULT
 	release
@@ -44,4 +46,3 @@ MauvilleCity_House1_Text_MonCanFlyOutOfSmashedRock: @ 820FB67
 	.string "Sometimes you'll find an item, or even\n"
 	.string "a Fossil.\p"
 	.string "Woohoo!$"
-

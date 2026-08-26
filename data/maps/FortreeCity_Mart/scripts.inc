@@ -45,8 +45,16 @@ FortreeCity_Mart_EventScript_Spenser::
 	compare VAR_LAVARIDGE_LUCY_STATE, 2
 	goto_if_eq FortreeCity_Mart_EventScript_SpenserBeatLucy
 FortreeCity_Mart_EventScript_SpenserBattle::
+	goto_if_defeated TRAINER_SPENSER_FORTREE, FortreeCity_Mart_EventScript_SpenserReward
 	msgbox FortreeCity_Mart_Text_SpenserBeforeBattle, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_SPENSER_FORTREE, FortreeCity_Mart_Text_SpenserDefeat
+FortreeCity_Mart_EventScript_SpenserReward::
+	checkitemspace ITEM_TERRAIN_EXTENDER, 1
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
+	checkitemspace ITEM_BOTTLE_CAP, 3
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox FortreeCity_Mart_Text_SpenserGiveChoiceScarf, MSGBOX_DEFAULT
 	giveitem ITEM_TERRAIN_EXTENDER
 	giveitem ITEM_BOTTLE_CAP, 3

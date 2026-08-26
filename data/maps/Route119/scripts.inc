@@ -143,6 +143,8 @@ Route119_EventScript_DefeatedBrendan:: @ 81F45E4
 
 Route119_EventScript_GiveFlyHM:: @ 81F45FF
 	giveitem ITEM_HM02_FLY
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_HM02
 	return
 

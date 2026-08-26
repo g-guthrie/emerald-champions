@@ -4671,32 +4671,7 @@ Noivern and Turtonator are the authored opening pair. The board plan is dragon p
 | 3 | Altaria | 38 (cap -2) | Leftovers | Natural Cure | disruption and support | Hurricane, Fire Blast, Cotton Guard, Roost |
 | 4 | Hydreigon | 38 (cap -2) | Assault Vest | Levitate | coverage attacker | Dark Pulse, Fire Blast, Focus Blast, Hydro Pump |
 
-## 189. Steven — Meteor Falls Stevens Cave
-
-**Optional · Double · Cap 40 · Extreme 92/100 · Uniqueness 76/100**
-
-**Theme:** Earthquake immunity + Steel pressure + Tailwind
-
-Skarmory and Aerodactyl are the authored opening pair. The board plan is earthquake immunity + steel pressure + tailwind. The composition turns the cave's rock, darkness, and confined-board pressure into the fight's identity instead of using a generic route-trainer core. The rare showcase is Melmetal, Heatran. Metagross carries the team's one Mega slot.
-
-**How it behaves:** The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe, Smart Switching, Help Partner. Expect it to preserve earthquake immunity, steel pressure, tailwind rather than select six unrelated strong attacks.
-
-**Why it is hard:** 6 fully authored Pokémon, average BST 549.2, average cap offset +3.33, ace offset +5, and 100% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Steven (43% species overlap). Its species appear across an average of 5.0 unrelated trainer families.
-
-**Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Skarmory | 43 (cap +3) | Leftovers | Sturdy | disruption and support | Drill Peck, Toxic, Spikes, Roost |
-| 2 | Aerodactyl | 43 (cap +3) | Life Orb | Rock Head | speed control | Brave Bird, Rock Slide, Earthquake, Tailwind |
-| 3 | Cradily | 43 (cap +3) | Big Root | Storm Drain | coverage attacker | Giga Drain, Earth Power, Recover, Acid Spray |
-| 4 | Melmetal | 43 (cap +3) | Assault Vest | Iron Fist | rare centerpiece | Double Iron Bash, Earthquake, Ice Punch, Thunder Punch |
-| 5 | Heatran | 43 (cap +3) | Choice Scarf | Flash Fire | Choice-locked breaker | Eruption, Earth Power, Flash Cannon, Hidden Power |
-| 6 | Metagross | 45 (cap +5) | Metagrossite | Clear Body | Mega ace | Meteor Mash, Zen Headbutt, Grass Knot, Earthquake |
-
-## 190. John & Jay — Meteor Falls 1 F 2 R
+## 189. John & Jay — Meteor Falls 1 F 2 R
 
 **Optional · Double · Cap 40 · Brutal 65/100 · Uniqueness 61/100**
 
@@ -4719,7 +4694,7 @@ Hariyama and Medicham are the authored opening pair. The board plan is fighting 
 | 3 | Conkeldurr | 38 (cap -2) | Assault Vest | Guts | coverage attacker | Drain Punch, Fire Punch, Rock Slide, Mach Punch |
 | 4 | Crabominable | 38 (cap -2) | Sitrus Berry | Iron Fist | protected attacker | Ice Hammer, Hammer Arm, Protect, Crabhammer |
 
-## 191. Maxie — Mt Chimney
+## 190. Maxie — Mt Chimney
 
 **Required · Double · Cap 40 · Extreme 85/100 · Uniqueness 61/100**
 
@@ -4744,7 +4719,7 @@ Crobat and Zweilous are the authored opening pair. The board plan is poison pres
 | 5 | Camerupt | 43 (cap +3) | Power Herb | Sheer Force | coverage attacker | Earth Power, Fire Blast, Rock Slide, Solar Beam |
 | 6 | Groudon | 41 (cap +1) | Red Orb | Drought | setup attacker | Protect, Fire Punch, Swords Dance, Precipice Blades |
 
-## 192. Tabitha — Mt Chimney
+## 191. Tabitha — Mt Chimney
 
 **Required · Double · Cap 40 · Extreme 83/100 · Uniqueness 62/100**
 
@@ -4769,7 +4744,7 @@ Gigalith and Darmanitan are the authored opening pair. The board plan is earthqu
 | 5 | Glalie | 41 (cap +1) | Sitrus Berry | Refrigerate | speed control | Protect, Icy Wind, Disable, Freeze Dry |
 | 6 | Aurorus | 41 (cap +1) | Chople Berry | Refrigerate | speed control | Protect, Hyper Voice, Icy Wind, Freeze Dry |
 
-## 193. Grunt — Mt Chimney
+## 192. Grunt — Mt Chimney
 
 **Optional · Double · Cap 40 · Demanding 48/100 · Uniqueness 82/100**
 
@@ -4792,7 +4767,7 @@ Golbat and Rhydon are the authored opening pair. The board plan is ground pressu
 | 3 | Graveler | 38 (cap -2) | Leftovers | Sturdy | coverage attacker | Hammer Arm, Stealth Rock, Sucker Punch, Stone Edge |
 | 4 | Golurk | 38 (cap -2) | Sitrus Berry | No Guard | protected attacker | Dynamic Punch, High Horsepower, Poltergeist, Protect |
 
-## 194. Shelby — Mt Chimney
+## 193. Shelby — Mt Chimney
 
 **Optional · Double · Cap 40 · Hard 50/100 · Uniqueness 82/100**
 
@@ -4815,7 +4790,7 @@ Mienshao and Wobbuffet are the authored opening pair. The board plan is pivot co
 | 3 | Torracat | 40 (cap +0) | None | Blaze | coverage attacker | Fire Fang, Bite, Double Kick, Lick |
 | 4 | Magcargo | 40 (cap +0) | Sitrus Berry | Magma Armor | protected attacker | Protect, Incinerate, Fire Blast, Stealth Rock |
 
-## 195. Melissa — Mt Chimney
+## 194. Melissa — Mt Chimney
 
 **Optional · Single · Cap 40 · Demanding 36/100 · Uniqueness 85/100**
 
@@ -4837,7 +4812,7 @@ Granbull opens this deliberate singles fight. The roster is built as underused f
 | 2 | Togetic | 37 (cap -3) | None | Hustle | coverage attacker | Air Cutter, Ancient Power, Soft Boiled, Magical Leaf |
 | 3 | Furfrou | 37 (cap -3) | None | Fur Coat | disruption and support | Headbutt, Cotton Guard, Charm, Bite |
 
-## 196. Sheila — Mt Chimney
+## 195. Sheila — Mt Chimney
 
 **Optional · Double · Cap 40 · Demanding 40/100 · Uniqueness 83/100**
 
@@ -4860,7 +4835,7 @@ Tsareena and Cinccino are the authored opening pair. The board plan is underused
 | 3 | Quilava | 38 (cap -2) | Air Balloon | Flash Fire | coverage attacker | Eruption, Fire Blast, Nature Power, Hidden Power |
 | 4 | Pupitar | 38 (cap -2) | None | Shed Skin | coverage attacker | Payback, Rock Slide, Earthquake, Screech |
 
-## 197. Shirley — Mt Chimney
+## 196. Shirley — Mt Chimney
 
 **Optional · Double · Cap 40 · Hard 54/100 · Uniqueness 78/100**
 
@@ -4883,7 +4858,7 @@ Persian and Oricorio are the authored opening pair. The board plan is dancer rec
 | 3 | Volcarona | 38 (cap -2) | Leftovers | Flame Body | setup attacker | Fire Blast, Quiver Dance, Giga Drain, Roost |
 | 4 | Ribombee | 38 (cap -2) | Focus Sash | Shield Dust | speed control | Sticky Web, Pollen Puff, Dazzling Gleam, Protect |
 
-## 198. Grunt — Mt Chimney
+## 197. Grunt — Mt Chimney
 
 **Optional · Double · Cap 40 · Demanding 45/100 · Uniqueness 85/100**
 
@@ -4906,7 +4881,7 @@ Numel and Dugtrio are the authored opening pair. The board plan is ground pressu
 | 3 | Marowak | 38 (cap -2) | Thick Club | Rock Head | setup attacker | Swords Dance, Double Edge, Protect, Bonemerang |
 | 4 | Dugtrio (Alolan) | 38 (cap -2) | Life Orb | Tangling Hair | protected attacker | Protect, Rock Slide, Iron Head, High Horsepower |
 
-## 199. Sawyer — Mt Chimney
+## 198. Sawyer — Mt Chimney
 
 **Optional · Double · Cap 40 · Hard 52/100 · Uniqueness 81/100**
 
@@ -4929,7 +4904,7 @@ Lycanroc Midnight and Carbink are the authored opening pair. The board plan is r
 | 3 | Tyranitar | 38 (cap -2) | Sitrus Berry | Sand Stream | speed control | Thunder Wave, High Horsepower, Knock Off, Rock Slide |
 | 4 | Excadrill | 38 (cap -2) | Excadrite | Mold Breaker | Mega ace | Iron Head, Protect, High Horsepower, Rock Slide |
 
-## 200. Grunt — Jagged Pass
+## 199. Grunt — Jagged Pass
 
 **Optional · Double · Cap 40 · Demanding 44/100 · Uniqueness 81/100**
 
@@ -4952,7 +4927,7 @@ Mightyena and Turtonator are the authored opening pair. The board plan is underu
 | 3 | Dugtrio | 38 (cap -2) | Leftovers | Arena Trap | protected attacker | Sucker Punch, Earthquake, Rock Slide, Protect |
 | 4 | Rampardos | 38 (cap -2) | Life Orb | Sheer Force | protected attacker | Head Smash, Protect, Crunch, Zen Headbutt |
 
-## 201. Eric — Jagged Pass
+## 200. Eric — Jagged Pass
 
 **Optional · Single · Cap 40 · Demanding 39/100 · Uniqueness 83/100**
 
@@ -4974,7 +4949,7 @@ Pupitar opens this deliberate singles fight. The roster is built as underused gr
 | 2 | Metang | 38 (cap -2) | None | Clear Body | coverage attacker | Bullet Punch, Meteor Mash, Zen Headbutt, Miracle Eye |
 | 3 | Hakamo O | 38 (cap -2) | None | Bulletproof | setup attacker | Close Combat, Outrage, Dragon Dance, Noble Roar |
 
-## 202. Diana — Jagged Pass
+## 201. Diana — Jagged Pass
 
 **Optional · Double · Cap 40 · Demanding 48/100 · Uniqueness 76/100**
 
@@ -4997,7 +4972,7 @@ Chesnaught and Pidgeot are the authored opening pair. The board plan is fighting
 | 3 | Ampharos | 37 (cap -3) | None | Static | speed control | Thunder Wave, Dragon Breath, Discharge, Cotton Guard |
 | 4 | Houndoom | 37 (cap -3) | Focus Sash | Flash Fire | protected attacker | Protect, Sucker Punch, Dark Pulse, Heat Wave |
 
-## 203. Ethan — Jagged Pass
+## 202. Ethan — Jagged Pass
 
 **Optional · Double · Cap 40 · Hard 50/100 · Uniqueness 82/100**
 
@@ -5020,7 +4995,7 @@ Braviary and Sandslash are the authored opening pair. The board plan is tailwind
 | 3 | Golduck | 37 (cap -3) | None | Tough Claws | disruption and support | Psyshock, Aqua Tail, Disable, Screech |
 | 4 | Moltres | 37 (cap -3) | Charti Berry | Flame Body | speed control | Hurricane, Tailwind, Fire Blast, Protect |
 
-## 204. Julio — Jagged Pass
+## 203. Julio — Jagged Pass
 
 **Optional · Double · Cap 40 · Hard 50/100 · Uniqueness 81/100**
 
@@ -5043,7 +5018,7 @@ Magneton and Luxray are the authored opening pair. The board plan is active spee
 | 3 | Boldore | 38 (cap -2) | None | Sturdy | coverage attacker | Power Gem, Shock Wave, Round, Iron Defense |
 | 4 | Persian (Alolan) | 38 (cap -2) | Sitrus Berry | Fur Coat | speed control | Snarl, Icy Wind, Protect, Foul Play |
 
-## 205. Autumn — Jagged Pass
+## 204. Autumn — Jagged Pass
 
 **Optional · Double · Cap 40 · Hard 52/100 · Uniqueness 85/100**
 
@@ -5066,7 +5041,7 @@ Pyroar and Serperior are the authored opening pair. The board plan is tailwind +
 | 3 | Oricorio | 38 (cap -2) | Sitrus Berry | Dancer | speed control | Hurricane, Protect, Tailwind, Revelation Dance |
 | 4 | Alcremie | 38 (cap -2) | Sitrus Berry | Aroma Veil | protected attacker | Mystical Fire, Recover, Protect, Dazzling Gleam |
 
-## 206. Lucy — Lavaridge Town Pokemon Center 1 F
+## 205. Lucy — Lavaridge Town Pokemon Center 1 F
 
 **Optional · Double · Cap 40 · Extreme 81/100 · Uniqueness 68/100**
 
@@ -5091,7 +5066,7 @@ Shuckle and Milotic are the authored opening pair. The board plan is earthquake 
 | 5 | Gyarados | 40 (cap +0) | Leftovers | Intimidate | setup attacker | Waterfall, Bounce, Dragon Dance, Substitute |
 | 6 | Seviper | 41 (cap +1) | Life Orb | Merciless | coverage attacker | Sludge Bomb, Giga Drain, Flamethrower, Dark Pulse |
 
-## 207. Flannery — Lavaridge Town Gym 1 F
+## 206. Flannery — Lavaridge Town Gym 1 F
 
 **Required · Double · Cap 40 · Extreme 90/100 · Uniqueness 83/100**
 
@@ -5116,7 +5091,7 @@ Torkoal and Lilligant are the authored opening pair. The board plan is fire pres
 | 5 | Volcanion | 41 (cap +1) | Assault Vest | Water Absorb | rare centerpiece | Steam Eruption, Heat Wave, Earth Power, Sludge Bomb |
 | 6 | Emboar | 42 (cap +2) | Emboarite | Reckless | Mega ace | Heat Crash, Close Combat, High Horsepower, Protect |
 
-## 208. Cole — Lavaridge Town Gym 1 F
+## 207. Cole — Lavaridge Town Gym 1 F
 
 **Optional · Double · Cap 40 · Brutal 66/100 · Uniqueness 81/100**
 
@@ -5139,7 +5114,7 @@ Camerupt and Marowak (Alolan) are the authored opening pair. The board plan is f
 | 3 | Simisear | 39 (cap -1) | Petaya Berry | Blaze | coverage attacker | Flamethrower, Grass Knot, Acrobatics, Substitute |
 | 4 | Centiskorch | 40 (cap +0) | Heavy Duty Boots | Flash Fire | setup attacker | Knock Off, Coil, Power Whip, Fire Lash |
 
-## 209. Axle — Lavaridge Town Gym 1 F
+## 208. Axle — Lavaridge Town Gym 1 F
 
 **Optional · Double · Cap 40 · Brutal 65/100 · Uniqueness 83/100**
 
@@ -5162,7 +5137,7 @@ Magmortar and Rapidash are the authored opening pair. The board plan is fire pre
 | 3 | Rotom Heat | 39 (cap -1) | White Herb | Levitate | speed control | Overheat, Discharge, Pain Split, Thunder Wave |
 | 4 | Heatmor | 40 (cap +0) | Life Orb | Tough Claws | protected attacker | Fire Lash, Sucker Punch, Protect, Rock Tomb |
 
-## 210. Keegan — Lavaridge Town Gym 1 F | Lavaridge Town Gym B 1 F
+## 209. Keegan — Lavaridge Town Gym 1 F | Lavaridge Town Gym B 1 F
 
 **Optional · Single · Cap 40 · Hard 62/100 · Uniqueness 82/100**
 
@@ -5182,7 +5157,7 @@ Sunflora opens this deliberate singles fight. The roster is built as sun engine.
 | ---: | --- | --- | --- | --- | --- | --- |
 | 1 | Sunflora | 43 (cap +3) | Salac Berry | Drought | coverage attacker | Weather Ball, Solar Beam, Earth Power, Growth |
 
-## 211. Danielle — Lavaridge Town Gym 1 F
+## 210. Danielle — Lavaridge Town Gym 1 F
 
 **Optional · Double · Cap 40 · Hard 64/100 · Uniqueness 77/100**
 
@@ -5205,7 +5180,7 @@ Lopunny and Infernape are the authored opening pair. The board plan is frost bre
 | 3 | Froslass | 39 (cap -1) | Focus Sash | Cursed Body | speed control | Frost Breath, Icy Wind, Taunt, Protect |
 | 4 | Camerupt | 39 (cap -1) | Weakness Policy | Anger Point | protected attacker | Heat Wave, Earth Power, Rock Slide, Protect |
 
-## 212. Gerald — Lavaridge Town Gym 1 F
+## 211. Gerald — Lavaridge Town Gym 1 F
 
 **Optional · Double · Cap 40 · Brutal 66/100 · Uniqueness 78/100**
 
@@ -5228,7 +5203,7 @@ Kecleon and Incineroar are the authored opening pair. The board plan is trick ro
 | 3 | Octillery | 39 (cap -1) | Fire Gem | Moody | protected attacker | Flamethrower, Water Pulse, Aurora Beam, Protect |
 | 4 | Rapidash | 40 (cap +0) | Sitrus Berry | Reckless | protected attacker | Flare Blitz, Jump Kick, Rock Slide, Protect |
 
-## 213. Jace — Lavaridge Town Gym 1 F | Lavaridge Town Gym B 1 F
+## 212. Jace — Lavaridge Town Gym 1 F | Lavaridge Town Gym B 1 F
 
 **Optional · Double · Cap 40 · Hard 64/100 · Uniqueness 78/100**
 
@@ -5251,7 +5226,7 @@ Emboar and Flareon are the authored opening pair. The board plan is fire pressur
 | 3 | Camerupt | 39 (cap -1) | Cameruptite | Solid Rock | Mega ace | Protect, Earth Power, Will O Wisp, Heat Wave |
 | 4 | Bronzong | 39 (cap -1) | Light Clay | Levitate | disruption and support | Hypnosis, Light Screen, Stealth Rock, Psychic |
 
-## 214. Jeff — Lavaridge Town Gym 1 F | Lavaridge Town Gym B 1 F
+## 213. Jeff — Lavaridge Town Gym 1 F | Lavaridge Town Gym B 1 F
 
 **Optional · Double · Cap 40 · Brutal 66/100 · Uniqueness 85/100**
 
@@ -5274,7 +5249,7 @@ Magcargo and Delphox are the authored opening pair. The board plan is mixed-spee
 | 3 | Gourgeist | 39 (cap -1) | Flame Orb | Flare Boost | speed control | Flamethrower, Giga Drain, Shadow Ball, Trick Room |
 | 4 | Arceus Ground | 40 (cap +0) | Earth Plate | Multitype | setup attacker | Swords Dance, Stone Edge, Earthquake, Recover |
 
-## 215. Eli — Lavaridge Town Gym 1 F | Lavaridge Town Gym B 1 F
+## 214. Eli — Lavaridge Town Gym 1 F | Lavaridge Town Gym B 1 F
 
 **Optional · Double · Cap 40 · Brutal 67/100 · Uniqueness 82/100**
 
@@ -5297,7 +5272,7 @@ Heatmor and Lampent are the authored opening pair. The board plan is fire pressu
 | 3 | Nidoqueen | 40 (cap +0) | Life Orb | Sheer Force | protected attacker | Earth Power, Fire Blast, Ice Beam, Protect |
 | 4 | Incineroar | 40 (cap +0) | Sitrus Berry | Intimidate | coverage attacker | Parting Shot, Fake Out, Flare Blitz, Rock Slide |
 
-## 216. Isaac — Route 117
+## 215. Isaac — Route 117
 
 **Optional · Double · Cap 40 · Demanding 49/100 · Uniqueness 91/100**
 
@@ -5322,7 +5297,7 @@ Bonsly and Eevee are the authored opening pair. The board plan is tailwind. The 
 | 5 | Deino | 35 (cap -5) | None | Hustle | coverage attacker | Dark Pulse, Earth Power, Dragon Pulse, Slam |
 | 6 | Tangela | 35 (cap -5) | None | Chlorophyll | disruption and support | Sleep Powder, Wake Up Slap, Giga Drain, Amnesia |
 
-## 217. Lydia — Route 117
+## 216. Lydia — Route 117
 
 **Optional · Double · Cap 40 · Demanding 47/100 · Uniqueness 88/100**
 
@@ -5347,7 +5322,7 @@ Froakie and Elekid are the authored opening pair. The board plan is fake out tem
 | 5 | Happiny | 35 (cap -5) | None | Natural Cure | disruption and support | Seismic Toss, Aromatherapy, Counter, Soft Boiled |
 | 6 | Dratini | 35 (cap -5) | None | Shed Skin | coverage attacker | Extreme Speed, Aqua Jet, Iron Tail, Dragon Rush |
 
-## 218. Dylan — Route 117
+## 217. Dylan — Route 117
 
 **Optional · Double · Cap 40 · Demanding 46/100 · Uniqueness 82/100**
 
@@ -5370,7 +5345,7 @@ Yanma and Doduo are the authored opening pair. The board plan is flying pressure
 | 3 | Passimian | 38 (cap -2) | Choice Scarf | Defiant | Choice-locked breaker | Knock Off, U Turn, Close Combat, Gunk Shot |
 | 4 | Skarmory | 38 (cap -2) | Leftovers | Keen Eye | disruption and support | Stealth Rock, Brave Bird, Roost, Spikes |
 
-## 219. Maria — Route 117
+## 218. Maria — Route 117
 
 **Optional · Double · Cap 40 · Demanding 43/100 · Uniqueness 82/100**
 
@@ -5393,7 +5368,7 @@ Tranquill and Hawlucha are the authored opening pair. The board plan is flying p
 | 3 | Yanma | 38 (cap -2) | Leftovers | Speed Boost | protected attacker | Protect, Hidden Power, Air Slash, U Turn |
 | 4 | Hakamo O | 38 (cap -2) | None | Bulletproof | setup attacker | Close Combat, Outrage, Dragon Dance, Noble Roar |
 
-## 220. Derek — Route 117
+## 219. Derek — Route 117
 
 **Optional · Single · Cap 40 · Introductory 34/100 · Uniqueness 81/100**
 
@@ -5414,7 +5389,7 @@ Mothim opens this deliberate singles fight. The roster is built as underused bug
 | 1 | Mothim | 38 (cap -2) | None | Tinted Lens | setup attacker | Quiver Dance, Hidden Power, Silver Wind, Psybeam |
 | 2 | Wormadam Sandy Cloak | 38 (cap -2) | None | Anticipation | setup attacker | Quiver Dance, Psybeam, Hidden Power, Rock Blast |
 
-## 221. Anna & Meg — Route 117
+## 220. Anna & Meg — Route 117
 
 **Optional · Double · Cap 40 · Hard 52/100 · Uniqueness 81/100**
 
@@ -5437,7 +5412,7 @@ Minccino and Gurdurr are the authored opening pair. The board plan is underused 
 | 3 | Mudsdale | 40 (cap +0) | Assault Vest | Stamina | coverage attacker | High Horsepower, Rock Slide, Heavy Slam, Body Press |
 | 4 | Weavile | 40 (cap +0) | Focus Sash | Pressure | protected attacker | Beat Up, Fake Out, Triple Axel, Protect |
 
-## 222. Melina — Route 117
+## 221. Melina — Route 117
 
 **Optional · Single · Cap 40 · Demanding 35/100 · Uniqueness 79/100**
 
@@ -5458,7 +5433,7 @@ Ponyta opens this deliberate singles fight. The roster is built as underused fir
 | 1 | Ponyta | 38 (cap -2) | None | Reckless | coverage attacker | Blaze Kick, Jump Kick, Take Down, Inferno |
 | 2 | Sneasel | 38 (cap -2) | None | Inner Focus | coverage attacker | Feint Attack, Ice Shard, Hone Claws, Quick Attack |
 
-## 223. Brandi — Route 117
+## 222. Brandi — Route 117
 
 **Optional · Single · Cap 40 · Demanding 39/100 · Uniqueness 86/100**
 
@@ -5479,7 +5454,7 @@ Espurr opens this deliberate singles fight. The roster is built as fake out temp
 | 1 | Espurr | 38 (cap -2) | None | Keen Eye | coverage attacker | Psyshock, Disarming Voice, Fake Out, Light Screen |
 | 2 | Munna | 38 (cap -2) | None | Forewarn | setup attacker | Yawn, Nightmare, Calm Mind, Psybeam |
 
-## 224. Aisha — Route 117
+## 223. Aisha — Route 117
 
 **Optional · Single · Cap 40 · Demanding 41/100 · Uniqueness 66/100**
 
@@ -5501,7 +5476,7 @@ Lucario opens this deliberate singles fight. The roster is built as fighting mix
 
 # Balance Badge
 
-## 225. Norman — Petalburg City Gym
+## 224. Norman — Petalburg City Gym
 
 **Required · Single · Cap 45 · Extreme 85/100 · Uniqueness 83/100**
 
@@ -5526,7 +5501,7 @@ Porygon-Z opens this deliberate singles fight. The roster is built as earthquake
 | 5 | Regigigas | 46 (cap +1) | Leftovers | Slow Start | speed control | Crush Grip, Drain Punch, Knock Off, Thunder Wave |
 | 6 | Slaking | 47 (cap +2) | Life Orb | Truant | coverage attacker | Giga Impact, Earthquake, Sucker Punch, Slack Off |
 
-## 226. Randall — Petalburg City Gym
+## 225. Randall — Petalburg City Gym
 
 **Optional · Double · Cap 45 · Brutal 74/100 · Uniqueness 78/100**
 
@@ -5549,7 +5524,7 @@ Swellow and Lopunny are the authored opening pair. The board plan is normal pres
 | 3 | Sawsbuck | 45 (cap +0) | Heat Rock | Chlorophyll | coverage attacker | Sunny Day, Jump Kick, Return, Horn Leech |
 | 4 | Rillaboom | 46 (cap +1) | Assault Vest | Grassy Surge | coverage attacker | Grassy Glide, Fake Out, U Turn, Wood Hammer |
 
-## 227. Parker — Petalburg City Gym
+## 226. Parker — Petalburg City Gym
 
 **Optional · Double · Cap 45 · Brutal 70/100 · Uniqueness 82/100**
 
@@ -5572,7 +5547,7 @@ Spinda and Stantler are the authored opening pair. The board plan is normal pres
 | 3 | Girafarig | 45 (cap +0) | Damp Rock | Contrary | speed control | Psychic, Swagger, Foul Play, Thunder Wave |
 | 4 | Toucannon | 46 (cap +1) | Sitrus Berry | Keen Eye | speed control | Knock Off, Tailwind, Brave Bird, Protect |
 
-## 228. George — Petalburg City Gym
+## 227. George — Petalburg City Gym
 
 **Optional · Double · Cap 45 · Brutal 65/100 · Uniqueness 89/100**
 
@@ -5595,7 +5570,7 @@ Chansey and Dunsparce are the authored opening pair. The board plan is normal pr
 | 3 | Porygon2 | 45 (cap +0) | Eviolite | Analytic | coverage attacker | Tri Attack, Recover, Ice Beam, Thunderbolt |
 | 4 | Arceus Fighting | 45 (cap +0) | Fist Plate | Multitype | setup attacker | Judgment, Dazzling Gleam, Recover, Calm Mind |
 
-## 229. Berke — Petalburg City Gym
+## 228. Berke — Petalburg City Gym
 
 **Optional · Double · Cap 45 · Brutal 71/100 · Uniqueness 81/100**
 
@@ -5618,7 +5593,7 @@ Lickilicky and Snorlax are the authored opening pair. The board plan is normal p
 | 3 | Ursaring | 45 (cap +0) | Flame Orb | Guts | protected attacker | Protect, Giga Impact, Facade, Fire Punch |
 | 4 | Obstagoon | 45 (cap +0) | Flame Orb | Guts | protected attacker | Facade, Obstruct, Parting Shot, Knock Off |
 
-## 230. Mary — Petalburg City Gym
+## 229. Mary — Petalburg City Gym
 
 **Optional · Double · Cap 45 · Brutal 74/100 · Uniqueness 84/100**
 
@@ -5641,7 +5616,7 @@ Braviary and Raticate (Alolan) are the authored opening pair. The board plan is 
 | 3 | Drampa | 45 (cap +0) | Damp Rock | Berserk | protected attacker | Rain Dance, Thunder, Hurricane, Protect |
 | 4 | Arceus Water | 45 (cap +0) | Splash Plate | Multitype | setup attacker | Waterfall, Earthquake, Extreme Speed, Swords Dance |
 
-## 231. Alexia — Petalburg City Gym
+## 230. Alexia — Petalburg City Gym
 
 **Optional · Double · Cap 45 · Hard 63/100 · Uniqueness 81/100**
 
@@ -5664,7 +5639,7 @@ Snorlax and Furfrou are the authored opening pair. The board plan is normal pres
 | 3 | Miltank | 45 (cap +0) | Leftovers | Scrappy | disruption and support | Defense Curl, Rollout, Body Slam, Milk Drink |
 | 4 | Sirfetchd | 45 (cap +0) | Life Orb | Scrappy | setup attacker | Brave Bird, Swords Dance, Close Combat, Rock Slide |
 
-## 232. Jody — Petalburg City Gym
+## 231. Jody — Petalburg City Gym
 
 **Optional · Double · Cap 45 · Brutal 67/100 · Uniqueness 81/100**
 
@@ -5687,9 +5662,98 @@ Zangoose and Bouffalant are the authored opening pair. The board plan is normal 
 | 3 | Porygon-Z | 45 (cap +0) | Life Orb | Download | setup attacker | Tri Attack, Nasty Plot, Ice Beam, Shadow Ball |
 | 4 | Indeedee | 45 (cap +0) | Sitrus Berry | Psychic Surge | protected attacker | Hyper Voice, Encore, Expanding Force, Protect |
 
+## 232. Alannah — Ashen Woods
+
+**Optional · Single · Cap 45 · Hard 51/100 · Uniqueness 78/100**
+
+**Theme:** active speed control
+
+Primarina opens this deliberate singles fight. The roster is built as active speed control. The composition turns the surrounding forest and overgrowth into the fight's identity instead of using a generic route-trainer core.
+
+**How it behaves:** The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe. Expect it to preserve active speed control rather than select six unrelated strong attacks.
+
+**Why it is hard:** 3 fully authored Pokémon, average BST 499.7, average cap offset -1.0, ace offset -1, and 0% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Annika (20% species overlap). Its species appear across an average of 5.3 unrelated trainer families.
+
+**Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Primarina | 44 (cap -1) | None | Berserk | speed control | Sparkling Aria, Moonblast, Icy Wind, Sing |
+| 2 | Durant | 44 (cap -1) | None | Hustle | coverage attacker | X Scissor, Iron Head, Crunch, Thunder Fang |
+| 3 | Dusclops | 44 (cap -1) | None | Pressure | protected attacker | Night Shade, Curse, Protect, Infestation |
+
+## 233. Martin — Ashen Woods
+
+**Optional · Single · Cap 45 · Demanding 49/100 · Uniqueness 72/100**
+
+**Theme:** Dark rare-showcase balance
+
+Muk (Alolan) opens this deliberate singles fight. The roster is built as dark rare-showcase balance. The composition turns the surrounding forest and overgrowth into the fight's identity instead of using a generic route-trainer core. The rare showcase is Zarude.
+
+**How it behaves:** The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe. This singles or low-stakes roster emphasizes coverage, status, and matchup pressure rather than a scripted multi-Pokémon combination.
+
+**Why it is hard:** 3 fully authored Pokémon, average BST 543.3, average cap offset -1.0, ace offset -1, and 33% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Grunt (40% species overlap). Its species appear across an average of 4.3 unrelated trainer families.
+
+**Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Muk (Alolan) | 44 (cap -1) | None | Poison Touch | coverage attacker | Poison Jab, Crunch, Acid Spray, Disable |
+| 2 | Golisopod | 44 (cap -1) | None | Emergency Exit | coverage attacker | Razor Shell, First Impression, Sucker Punch, Drill Run |
+| 3 | Zarude | 44 (cap -1) | Life Orb | Leaf Guard | rare centerpiece | Knock Off, Power Whip, Close Combat, U Turn |
+
+## 234. Roman — Ashen Woods
+
+**Optional · Double · Cap 45 · Demanding 49/100 · Uniqueness 82/100**
+
+**Theme:** Earthquake immunity
+
+Bronzong and Golem are the authored opening pair. The board plan is earthquake immunity. The composition turns the surrounding forest and overgrowth into the fight's identity instead of using a generic route-trainer core.
+
+**How it behaves:** The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe, Help Partner. Expect it to preserve earthquake immunity rather than select six unrelated strong attacks.
+
+**Why it is hard:** 4 fully authored Pokémon, average BST 501.2, average cap offset -2.0, ace offset -2, and 50% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Foster (20% species overlap). Its species appear across an average of 3.2 unrelated trainer families.
+
+**Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Bronzong | 43 (cap -2) | None | Levitate | disruption and support | Gyro Ball, Extrasensory, Hypnosis, Confuse Ray |
+| 2 | Golem | 43 (cap -2) | None | Rock Head | coverage attacker | Earthquake, Rock Blast, Steamroller, Explosion |
+| 3 | Stunfisk (Galarian) | 43 (cap -2) | Leftovers | Mimicry | speed control | Earthquake, Stone Edge, Thunder Wave, Stealth Rock |
+| 4 | Shuckle | 43 (cap -2) | Chesto Berry | Sturdy | disruption and support | Rest, Acupressure, Rollout, Power Split |
+
+## 235. Elmer — Ashen Woods
+
+**Optional · Single · Cap 45 · Demanding 41/100 · Uniqueness 72/100**
+
+**Theme:** Bug pressure
+
+Scyther opens this deliberate singles fight. The roster is built as bug pressure. The composition turns the surrounding forest and overgrowth into the fight's identity instead of using a generic route-trainer core.
+
+**How it behaves:** The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe. Expect it to preserve bug pressure rather than select six unrelated strong attacks.
+
+**Why it is hard:** 3 fully authored Pokémon, average BST 500.0, average cap offset -2.0, ace offset -2, and 0% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Vicky (33% species overlap). Its species appear across an average of 4.7 unrelated trainer families.
+
+**Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Scyther | 43 (cap -2) | None | Technician | coverage attacker | Aerial Ace, X Scissor, Quick Attack, Night Slash |
+| 2 | Pinsir | 43 (cap -2) | None | Mold Breaker | setup attacker | Thrash, X Scissor, Submission, Swords Dance |
+| 3 | Heracross | 43 (cap -2) | None | Swarm | coverage attacker | Megahorn, Close Combat, Bullet Seed, Night Slash |
+
 # Feather Badge
 
-## 233. Daisy — Route 103
+## 236. Daisy — Route 103
 
 **Optional · Double · Cap 55 · Hard 51/100 · Uniqueness 88/100**
 
@@ -5712,7 +5776,7 @@ Cherubi and Roselia are the authored opening pair. The board plan is grass press
 | 3 | Sawsbuck Autumn | 53 (cap -2) | Life Orb | Sap Sipper | setup attacker | Swords Dance, Protect, Double Edge, Horn Leech |
 | 4 | Cherrim | 53 (cap -2) | Sitrus Berry | Flower Gift | protected attacker | Energy Ball, Pollen Puff, Protect, Aromatherapy |
 
-## 234. Amy & Liv — Route 103
+## 237. Amy & Liv — Route 103
 
 **Optional · Double · Cap 55 · Demanding 47/100 · Uniqueness 85/100**
 
@@ -5735,7 +5799,7 @@ Jigglypuff and Clefairy are the authored opening pair. The board plan is fairy p
 | 3 | Wigglytuff | 53 (cap -2) | Focus Sash | Frisk | disruption and support | Wish, Thunderbolt, Heal Bell, Fire Blast |
 | 4 | Whimsicott | 53 (cap -2) | Leftovers | Prankster | disruption and support | Taunt, Encore, Toxic, Leech Seed |
 
-## 235. Andrew — Route 103
+## 238. Andrew — Route 103
 
 **Optional · Single · Cap 55 · Demanding 37/100 · Uniqueness 84/100**
 
@@ -5757,7 +5821,7 @@ Barboach opens this deliberate singles fight. The roster is built as water press
 | 2 | Horsea | 53 (cap -2) | None | Swift Swim | coverage attacker | Scald, Ice Beam, Dragon Breath, Smokescreen |
 | 3 | Qwilfish | 52 (cap -3) | None | Poison Point | disruption and support | Revenge, Brine, Stockpile, Minimize |
 
-## 236. Miguel — Route 103
+## 239. Miguel — Route 103
 
 **Optional · Double · Cap 55 · Hard 60/100 · Uniqueness 88/100**
 
@@ -5780,7 +5844,7 @@ Delcatty and Meowth are the authored opening pair. The board plan is normal pres
 | 3 | Ambipom | 53 (cap -2) | Expert Belt | Technician | coverage attacker | Low Kick, U Turn, Ice Punch, Fake Out |
 | 4 | Stantler | 53 (cap -2) | Persim Berry | Sap Sipper | disruption and support | Swagger, Disable, Protect, Thrash |
 
-## 237. Marcos — Route 103
+## 240. Marcos — Route 103
 
 **Optional · Single · Cap 55 · Demanding 36/100 · Uniqueness 76/100**
 
@@ -5801,7 +5865,7 @@ Elekid opens this deliberate singles fight. The roster is built as underused ele
 | 1 | Elekid | 53 (cap -2) | None | Static | speed control | Thunder Punch, Low Kick, Swift, Thunder Wave |
 | 2 | Kricketune | 53 (cap -2) | None | Swarm | coverage attacker | X Scissor, Uproar, Air Slash, Sing |
 
-## 238. Rhett — Route 103
+## 241. Rhett — Route 103
 
 **Optional · Single · Cap 55 · Introductory 31/100 · Uniqueness 82/100**
 
@@ -5821,7 +5885,7 @@ Sawk opens this deliberate singles fight. The roster is built as underused fight
 | ---: | --- | --- | --- | --- | --- | --- |
 | 1 | Sawk | 52 (cap -3) | None | Sturdy | setup attacker | Retaliate, Bulk Up, Low Sweep, Bide |
 
-## 239. Pete — Route 103
+## 242. Pete — Route 103
 
 **Optional · Single · Cap 55 · Introductory 33/100 · Uniqueness 71/100**
 
@@ -5842,7 +5906,7 @@ Blastoise opens this deliberate singles fight. The roster is built as schooling 
 | 1 | Blastoise | 53 (cap -2) | None | Torrent | setup attacker | Water Pulse, Shell Smash, Flash Cannon, Skull Bash |
 | 2 | Wishiwashi | 53 (cap -2) | None | Schooling | rare centerpiece | Hydro Pump, Soak, Double Edge, Endeavor |
 
-## 240. Isabelle — Route 103
+## 243. Isabelle — Route 103
 
 **Optional · Single · Cap 55 · Hard 50/100 · Uniqueness 71/100**
 
@@ -5864,7 +5928,7 @@ Toxapex opens this deliberate singles fight. The roster is built as surf ally ac
 | 2 | Lapras | 52 (cap -3) | None | Water Absorb | disruption and support | Freeze Dry, Surf, Rain Dance, Safeguard |
 | 3 | Alomomola | 52 (cap -3) | None | Healer | disruption and support | Waterfall, Wish, Protect, Aqua Ring |
 
-## 241. Rose — Route 118
+## 244. Rose — Route 118
 
 **Optional · Single · Cap 55 · Demanding 38/100 · Uniqueness 88/100**
 
@@ -5886,7 +5950,7 @@ Floette opens this deliberate singles fight. The roster is built as underused fa
 | 2 | Ivysaur | 53 (cap -2) | None | Overgrow | disruption and support | Seed Bomb, Sludge, Sleep Powder, Leech Seed |
 | 3 | Combee | 55 (cap +0) | None | Honey Gather | coverage attacker | Bug Buzz, Gust, Sweet Scent, Bug Bite |
 
-## 242. Barny — Route 118
+## 245. Barny — Route 118
 
 **Optional · Single · Cap 55 · Demanding 41/100 · Uniqueness 66/100**
 
@@ -5908,7 +5972,7 @@ Tentacruel opens this deliberate singles fight. The roster is built as water pre
 | 2 | Sharpedo | 52 (cap -3) | None | Rough Skin | coverage attacker | Hydro Pump, Crunch, Ice Fang, Aqua Jet |
 | 3 | Barbaracle | 52 (cap -3) | None | Tough Claws | coverage attacker | Razor Shell, Stone Edge, Cross Chop, Night Slash |
 
-## 243. Wade — Route 118
+## 246. Wade — Route 118
 
 **Optional · Double · Cap 55 · Demanding 48/100 · Uniqueness 79/100**
 
@@ -5931,7 +5995,7 @@ Gyarados and Chinchou are the authored opening pair. The board plan is discharge
 | 3 | Farfetchd | 54 (cap -1) | Leek | Defiant | setup attacker | Swords Dance, Brave Bird, Leaf Blade, Protect |
 | 4 | Gurdurr | 54 (cap -1) | None | Guts | coverage attacker | Rock Slide, Wake Up Slap, Chip Away, Focus Energy |
 
-## 244. Dalton — Route 118
+## 247. Dalton — Route 118
 
 **Optional · Single · Cap 55 · Demanding 40/100 · Uniqueness 64/100**
 
@@ -5951,7 +6015,7 @@ Noivern opens this deliberate singles fight. The roster is built as dragon mixed
 | ---: | --- | --- | --- | --- | --- | --- |
 | 1 | Noivern | 55 (cap +0) | None | Frisk | disruption and support | Dragon Pulse, Air Cutter, Moonlight, Supersonic |
 
-## 245. Perry — Route 118
+## 248. Perry — Route 118
 
 **Optional · Single · Cap 55 · Demanding 42/100 · Uniqueness 80/100**
 
@@ -5973,7 +6037,7 @@ Toucannon opens this deliberate singles fight. The roster is built as flying mix
 | 2 | Unfezant | 52 (cap -3) | None | Super Luck | protected attacker | Drill Peck, Submission, Taunt, Detect |
 | 3 | Decidueye | 52 (cap -3) | None | Overgrow | coverage attacker | Spirit Shackle, Leaf Blade, Jump Kick, Sucker Punch |
 
-## 246. Chester — Route 118
+## 249. Chester — Route 118
 
 **Optional · Double · Cap 55 · Demanding 43/100 · Uniqueness 81/100**
 
@@ -5996,7 +6060,7 @@ Talonflame and Mandibuzz are the authored opening pair. The board plan is underu
 | 3 | Vileplume | 53 (cap -2) | Sitrus Berry | Chlorophyll | protected attacker | Protect, Energy Ball, Hidden Power, Strength Sap |
 | 4 | Machoke | 53 (cap -2) | Life Orb | No Guard | setup attacker | Bulk Up, Dynamic Punch, Ice Punch, Bullet Punch |
 
-## 247. Deandre — Route 118
+## 250. Deandre — Route 118
 
 **Optional · Double · Cap 55 · Hard 54/100 · Uniqueness 81/100**
 
@@ -6019,7 +6083,7 @@ Diggersby and Lairon are the authored opening pair. The board plan is active spe
 | 3 | Simisear | 53 (cap -2) | None | Blaze | coverage attacker | Crunch, Acrobatics, Flame Burst, Yawn |
 | 4 | Sawsbuck | 53 (cap -2) | Heat Rock | Chlorophyll | coverage attacker | Sunny Day, Jump Kick, Return, Horn Leech |
 
-## 248. Guy — Route 118
+## 251. Guy — Route 118
 
 **Optional · Double · Cap 55 · Brutal 77/100 · Uniqueness 80/100**
 
@@ -6044,7 +6108,7 @@ Magikarp and Feebas are the authored opening pair. The board plan is earthquake 
 | 5 | Kyogre | 57 (cap +2) | Mystic Water | Drizzle | rare centerpiece | Water Spout, Origin Pulse, Thunder, Ice Beam |
 | 6 | Gyarados | 57 (cap +2) | Gyaradosite | Intimidate | Mega ace | Waterfall, Crunch, Power Whip, Protect |
 
-## 249. May — Route 119
+## 252. May — Route 119
 
 **Required Branch · Double · Cap 55 · Extreme 80/100 · Uniqueness 33/100**
 
@@ -6069,7 +6133,7 @@ Swellow and Starmie are the authored opening pair. The board plan is sun engine.
 | 5 | Vikavolt | 55 (cap +0) | Assault Vest | Levitate | coverage attacker | Thunder, Bug Buzz, Energy Ball, Mud Shot |
 | 6 | Blaziken | 57 (cap +2) | Blazikenite | Blaze | Mega ace | Blast Burn, Aura Sphere, Solar Beam, Sunny Day |
 
-## 250. May — Route 119
+## 253. May — Route 119
 
 **Required Branch · Double · Cap 55 · Extreme 82/100 · Uniqueness 33/100**
 
@@ -6094,7 +6158,7 @@ Swellow and Rapidash are the authored opening pair. The board plan is earthquake
 | 5 | Vikavolt | 55 (cap +0) | Assault Vest | Levitate | coverage attacker | Thunder, Bug Buzz, Energy Ball, Mud Shot |
 | 6 | Swampert | 57 (cap +2) | Swampertite | Swift Swim | Mega ace | Hydro Cannon, Earthquake, Ice Punch, Rain Dance |
 
-## 251. May — Route 119
+## 254. May — Route 119
 
 **Required Branch · Double · Cap 55 · Extreme 80/100 · Uniqueness 33/100**
 
@@ -6119,7 +6183,7 @@ Swellow and Starmie are the authored opening pair. The board plan is grassy terr
 | 5 | Vikavolt | 55 (cap +0) | Assault Vest | Levitate | coverage attacker | Thunder, Bug Buzz, Energy Ball, Mud Shot |
 | 6 | Sceptile | 57 (cap +2) | Sceptilite | Overgrow | Mega ace | Frenzy Plant, Dragon Pulse, Protect, Grassy Terrain |
 
-## 252. Brendan — Route 119
+## 255. Brendan — Route 119
 
 **Required Branch · Double · Cap 55 · Extreme 84/100 · Uniqueness 34/100**
 
@@ -6144,7 +6208,7 @@ Araquanid and Swellow are the authored opening pair. The board plan is sun engin
 | 5 | Vikavolt | 55 (cap +0) | Assault Vest | Levitate | coverage attacker | Thunder, Bug Buzz, Energy Ball, Mud Shot |
 | 6 | Blaziken | 57 (cap +2) | Blazikenite | Blaze | Mega ace | Blast Burn, Aura Sphere, Solar Beam, Sunny Day |
 
-## 253. Brendan — Route 119
+## 256. Brendan — Route 119
 
 **Required Branch · Double · Cap 55 · Extreme 85/100 · Uniqueness 33/100**
 
@@ -6169,7 +6233,7 @@ Swellow and Arcanine are the authored opening pair. The board plan is earthquake
 | 5 | Vikavolt | 55 (cap +0) | Assault Vest | Levitate | coverage attacker | Thunder, Bug Buzz, Energy Ball, Mud Shot |
 | 6 | Swampert | 57 (cap +2) | Swampertite | Swift Swim | Mega ace | Hydro Cannon, Earthquake, Ice Punch, Rain Dance |
 
-## 254. Brendan — Route 119
+## 257. Brendan — Route 119
 
 **Required Branch · Double · Cap 55 · Extreme 85/100 · Uniqueness 34/100**
 
@@ -6194,7 +6258,7 @@ Araquanid and Swellow are the authored opening pair. The board plan is grassy te
 | 5 | Vikavolt | 55 (cap +0) | Assault Vest | Levitate | coverage attacker | Thunder, Bug Buzz, Energy Ball, Mud Shot |
 | 6 | Sceptile | 57 (cap +2) | Sceptilite | Overgrow | Mega ace | Frenzy Plant, Dragon Pulse, Focus Blast, Grassy Terrain |
 
-## 255. Brent — Route 119
+## 258. Brent — Route 119
 
 **Optional · Single · Cap 55 · Demanding 39/100 · Uniqueness 56/100**
 
@@ -6214,7 +6278,7 @@ Volcarona opens this deliberate singles fight. The roster is built as bug mixed 
 | ---: | --- | --- | --- | --- | --- | --- |
 | 1 | Volcarona | 55 (cap +0) | None | Flame Body | setup attacker | Flamethrower, Bug Buzz, Hurricane, Quiver Dance |
 
-## 256. Donald — Route 119
+## 259. Donald — Route 119
 
 **Optional · Single · Cap 55 · Demanding 45/100 · Uniqueness 78/100**
 
@@ -6236,7 +6300,7 @@ Leavanny opens this deliberate singles fight. The roster is built as bug pressur
 | 2 | Butterfree | 52 (cap -3) | None | Compound Eyes | setup attacker | Bug Buzz, Hurricane, Sleep Powder, Quiver Dance |
 | 3 | Galvantula | 52 (cap -3) | None | Compound Eyes | speed control | Thunder, Bug Buzz, Sucker Punch, Thunder Wave |
 
-## 257. Taylor — Route 119
+## 260. Taylor — Route 119
 
 **Optional · Single · Cap 55 · Demanding 41/100 · Uniqueness 78/100**
 
@@ -6258,7 +6322,7 @@ Ribombee opens this deliberate singles fight. The roster is built as bug pressur
 | 2 | Araquanid | 52 (cap -3) | None | Water Bubble | coverage attacker | Liquidation, Lunge, Ice Fang, Mirror Coat |
 | 3 | Vivillon | 52 (cap -3) | None | Shield Dust | disruption and support | Hurricane, Bug Buzz, Sleep Powder, Powder |
 
-## 258. Doug — Route 119
+## 261. Doug — Route 119
 
 **Optional · Single · Cap 55 · Demanding 42/100 · Uniqueness 78/100**
 
@@ -6280,7 +6344,7 @@ Masquerain opens this deliberate singles fight. The roster is built as bug press
 | 2 | Ariados | 52 (cap -3) | None | Merciless | coverage attacker | Poison Jab, Leech Life, Sucker Punch, Psychic Fangs |
 | 3 | Kricketune | 52 (cap -3) | None | Swarm | coverage attacker | Boomburst, Bug Buzz, Air Slash, Perish Song |
 
-## 259. Greg — Route 119
+## 262. Greg — Route 119
 
 **Optional · Single · Cap 55 · Demanding 38/100 · Uniqueness 82/100**
 
@@ -6302,7 +6366,7 @@ Ledian opens this deliberate singles fight. The roster is built as bug pressure.
 | 2 | Beedrill | 52 (cap -3) | None | Swarm | coverage attacker | X Scissor, Poison Jab, Drill Peck, Endeavor |
 | 3 | Escavalier | 52 (cap -3) | None | Swarm | coverage attacker | Iron Head, X Scissor, Razor Shell, Reversal |
 
-## 260. Kent — Route 119
+## 263. Kent — Route 119
 
 **Optional · Double · Cap 55 · Demanding 44/100 · Uniqueness 78/100**
 
@@ -6325,7 +6389,7 @@ Ninjask and Shedinja are the authored opening pair. The board plan is bug pressu
 | 3 | Kartana | 53 (cap -2) | Sitrus Berry | Beast Boost | setup attacker | Protect, Smart Strike, Swords Dance, Leaf Blade |
 | 4 | Beedrill | 53 (cap -2) | Beedrillite | Swarm | Mega ace | X Scissor, Poison Jab, Drill Run, Drill Peck |
 
-## 261. Jackson — Route 119
+## 264. Jackson — Route 119
 
 **Optional · Double · Cap 55 · Hard 60/100 · Uniqueness 78/100**
 
@@ -6348,7 +6412,7 @@ Mantine and Rotom Fan are the authored opening pair. The board plan is tailwind.
 | 3 | Parasect | 53 (cap -2) | Leftovers | Dry Skin | disruption and support | Spore, Substitute, Leech Seed, Leech Life |
 | 4 | Lapras | 53 (cap -2) | Sitrus Berry | Hydration | disruption and support | Liquidation, Muddy Water, Curse, Rest |
 
-## 262. Catherine — Route 119
+## 265. Catherine — Route 119
 
 **Optional · Double · Cap 55 · Hard 64/100 · Uniqueness 75/100**
 
@@ -6371,7 +6435,7 @@ Bellossom and Noivern are the authored opening pair. The board plan is tailwind.
 | 3 | Beartic | 53 (cap -2) | Water Gem | Swift Swim | coverage attacker | Icicle Crash, Liquidation, Throat Chop, Aqua Jet |
 | 4 | Seismitoad | 53 (cap -2) | Sitrus Berry | Swift Swim | coverage attacker | Earth Power, Hydro Pump, Sludge Wave, Power Whip |
 
-## 263. Hugh — Route 119
+## 266. Hugh — Route 119
 
 **Optional · Single · Cap 55 · Demanding 41/100 · Uniqueness 76/100**
 
@@ -6393,7 +6457,7 @@ Noctowl opens this deliberate singles fight. The roster is built as flying press
 | 2 | Fearow | 52 (cap -3) | None | Sniper | coverage attacker | Drill Peck, Drill Run, Focus Energy, Double Edge |
 | 3 | Tropius | 52 (cap -3) | None | Aerilate | setup attacker | Body Slam, Dragon Hammer, Leaf Blade, Dragon Dance |
 
-## 264. Phil — Route 119
+## 267. Phil — Route 119
 
 **Optional · Double · Cap 55 · Demanding 49/100 · Uniqueness 83/100**
 
@@ -6416,7 +6480,7 @@ Staraptor and Farfetchd are the authored opening pair. The board plan is flying 
 | 3 | Thundurus | 53 (cap -2) | Expert Belt | Defiant | rare centerpiece | Knock Off, Thunderbolt, Focus Blast, Hidden Power |
 | 4 | Gourgeist | 53 (cap -2) | Flame Orb | Flare Boost | coverage attacker | Flamethrower, Giga Drain, Shadow Ball, Trick Or Treat |
 
-## 265. Yasu — Route 119
+## 268. Yasu — Route 119
 
 **Optional · Single · Cap 55 · Demanding 39/100 · Uniqueness 63/100**
 
@@ -6438,7 +6502,7 @@ Greninja opens this deliberate singles fight. The roster is built as dark mixed 
 | 2 | Crobat | 52 (cap -3) | None | Inner Focus | coverage attacker | Wing Attack, Cross Poison, Crunch, Screech |
 | 3 | Drapion | 52 (cap -3) | None | Sniper | speed control | Night Slash, Cross Poison, Scary Face, Pursuit |
 
-## 266. Takashi — Route 119
+## 269. Takashi — Route 119
 
 **Optional · Double · Cap 55 · Demanding 49/100 · Uniqueness 66/100**
 
@@ -6461,7 +6525,7 @@ Accelgor and Weezing are the authored opening pair. The board plan is protected 
 | 3 | Palossand | 53 (cap -2) | Sitrus Berry | Water Compaction | protected attacker | Protect, Toxic, Earth Power, Shadow Ball |
 | 4 | Mudsdale | 53 (cap -2) | Sitrus Berry | Stamina | coverage attacker | High Horsepower, Stone Edge, Heavy Slam, Stealth Rock |
 
-## 267. Hideo — Route 119
+## 270. Hideo — Route 119
 
 **Optional · Double · Cap 55 · Demanding 46/100 · Uniqueness 82/100**
 
@@ -6484,7 +6548,7 @@ Bisharp and Muk are the authored opening pair. The board plan is earthquake immu
 | 3 | Grovyle | 53 (cap -2) | Leftovers | Overgrow | disruption and support | Leech Seed, Substitute, Endeavor, Hidden Power |
 | 4 | Archeops | 53 (cap -2) | Choice Band | Defeatist | Choice-locked breaker | U Turn, Dual Wingbeat, Earthquake, Rock Slide |
 
-## 268. Chris — Route 119
+## 271. Chris — Route 119
 
 **Optional · Double · Cap 55 · Demanding 44/100 · Uniqueness 69/100**
 
@@ -6507,7 +6571,7 @@ Sharpedo and Basculin are the authored opening pair. The board plan is earthquak
 | 3 | Gyarados | 51 (cap -4) | None | Intimidate | coverage attacker | Aqua Tail, Hurricane, Crunch, Whirlpool |
 | 4 | Whiscash | 51 (cap -4) | None | Adaptability | coverage attacker | Earthquake, Aqua Tail, Spark, Zen Headbutt |
 
-## 269. Fabian — Route 119
+## 272. Fabian — Route 119
 
 **Optional · Double · Cap 55 · Demanding 49/100 · Uniqueness 66/100**
 
@@ -6530,7 +6594,7 @@ Manectric and Chatot are the authored opening pair. The board plan is earthquake
 | 3 | Kricketune | 53 (cap -2) | Leftovers | Swarm | speed control | Knock Off, Taunt, Sticky Web, Protect |
 | 4 | Gogoat | 53 (cap -2) | Sitrus Berry | Sap Sipper | setup attacker | Horn Leech, Earthquake, Bulk Up, Milk Drink |
 
-## 270. Dayton — Route 119
+## 273. Dayton — Route 119
 
 **Optional · Single · Cap 55 · Demanding 35/100 · Uniqueness 70/100**
 
@@ -6551,7 +6615,7 @@ Magcargo opens this deliberate singles fight. The roster is built as underused f
 | 1 | Magcargo | 53 (cap -2) | None | Magma Armor | setup attacker | Flamethrower, Stone Edge, Earth Power, Shell Smash |
 | 2 | Darmanitan | 53 (cap -2) | None | Sheer Force | coverage attacker | Flare Blitz, Superpower, Thrash, Rock Slide |
 
-## 271. Rachel — Route 119
+## 274. Rachel — Route 119
 
 **Optional · Double · Cap 55 · Hard 53/100 · Uniqueness 80/100**
 
@@ -6574,7 +6638,7 @@ Ludicolo and Heliolisk are the authored opening pair. The board plan is fake out
 | 3 | Nuzleaf | 53 (cap -2) | None | Chlorophyll | coverage attacker | Feint Attack, Leaf Blade, Air Cutter, Growth |
 | 4 | Vespiquen | 53 (cap -2) | Charti Berry | Pressure | speed control | Attack Order, Tailwind, String Shot, Struggle Bug |
 
-## 272. Shelly — Route 119 Weather Institute 2 F
+## 275. Shelly — Route 119 Weather Institute 2 F
 
 **Required · Double · Cap 55 · Extreme 80/100 · Uniqueness 37/100**
 
@@ -6599,7 +6663,7 @@ Ninetales (Alolan) and Empoleon are the authored opening pair. The board plan is
 | 5 | Ludicolo | 55 (cap +0) | Safety Goggles | Rain Dish | coverage attacker | Scald, Giga Drain, Leech Seed, Blizzard |
 | 6 | Beedrill | 57 (cap +2) | Beedrillite | Swarm | Mega ace | X Scissor, Poison Jab, Drill Run, Drill Peck |
 
-## 273. Grunt — Route 119 Weather Institute 2 F
+## 276. Grunt — Route 119 Weather Institute 2 F
 
 **Optional · Double · Cap 55 · Hard 54/100 · Uniqueness 82/100**
 
@@ -6622,7 +6686,7 @@ Toxicroak and Eelektross are the authored opening pair. The board plan is bug ra
 | 3 | Scizor | 54 (cap -1) | Scizorite | Technician | Mega ace | Swords Dance, Superpower, Roost, Bullet Punch |
 | 4 | Ninjask | 54 (cap -1) | Charti Berry | Speed Boost | disruption and support | Baton Pass, Substitute, Protect, X Scissor |
 
-## 274. Grunt — Route 119 Weather Institute 2 F
+## 277. Grunt — Route 119 Weather Institute 2 F
 
 **Optional · Double · Cap 55 · Hard 52/100 · Uniqueness 75/100**
 
@@ -6645,7 +6709,7 @@ Pelipper and Ferrothorn are the authored opening pair. The board plan is rain en
 | 3 | Gourgeist Small | 54 (cap -1) | Life Orb | Pickup | protected attacker | Protect, Power Whip, Poltergeist, Will O Wisp |
 | 4 | Inteleon | 54 (cap -1) | Choice Specs | Torrent | Choice-locked breaker | Scald, Hydro Pump, Muddy Water, Ice Beam |
 
-## 275. Grunt — Route 119 Weather Institute 2 F
+## 278. Grunt — Route 119 Weather Institute 2 F
 
 **Optional · Double · Cap 55 · Demanding 45/100 · Uniqueness 68/100**
 
@@ -6668,7 +6732,7 @@ Mightyena and Golisopod are the authored opening pair. The board plan is tailwin
 | 3 | Muk (Alolan) | 53 (cap -2) | None | Poison Touch | coverage attacker | Crunch, Poison Jab, Fire Blast, Screech |
 | 4 | Vivillon Marine | 53 (cap -2) | Focus Sash | Compound Eyes | speed control | Tailwind, Protect, Sleep Powder, Hurricane |
 
-## 276. Grunt — Route 119 Weather Institute 1 F
+## 279. Grunt — Route 119 Weather Institute 1 F
 
 **Optional · Double · Cap 55 · Demanding 48/100 · Uniqueness 82/100**
 
@@ -6691,7 +6755,7 @@ Golbat and Dragalge are the authored opening pair. The board plan is residual co
 | 3 | Liepard | 53 (cap -2) | None | Limber | coverage attacker | Sucker Punch, Play Rough, Swagger, Iron Tail |
 | 4 | Gourgeist Large | 53 (cap -2) | Sitrus Berry | Pickup | protected attacker | Seed Bomb, Will O Wisp, Protect, Phantom Force |
 
-## 277. Grunt — Route 119 Weather Institute 1 F
+## 280. Grunt — Route 119 Weather Institute 1 F
 
 **Optional · Double · Cap 55 · Demanding 47/100 · Uniqueness 55/100**
 
@@ -6714,7 +6778,7 @@ Walrein and Floatzel are the authored opening pair. The board plan is trick room
 | 3 | Malamar | 53 (cap -2) | None | Contrary | coverage attacker | Throat Chop, Psycho Cut, Superpower, Topsy Turvy |
 | 4 | Gourgeist Super | 53 (cap -2) | Life Orb | Pickup | speed control | Poltergeist, Trick Room, Protect, Power Whip |
 
-## 278. Winona — Fortree City Gym
+## 281. Winona — Fortree City Gym
 
 **Required · Double · Cap 55 · Extreme 96/100 · Uniqueness 100/100**
 
@@ -6739,7 +6803,7 @@ Tornadus and Landorus (Therian) are the authored opening pair. The board plan is
 | 5 | Altaria | 56 (cap +1) | Altarianite | Natural Cure | Mega ace | Hyper Voice, Fire Blast, Tailwind, Protect |
 | 6 | Rayquaza | 57 (cap +2) | White Herb | Air Lock | protected attacker | Dragon Ascent, V Create, Extreme Speed, Protect |
 
-## 279. Spenser — Fortree City Mart
+## 282. Spenser — Fortree City Mart
 
 **Optional · Double · Cap 55 · Extreme 84/100 · Uniqueness 77/100**
 
@@ -6764,7 +6828,7 @@ Crobat and Slaking are the authored opening pair. The board plan is earthquake i
 | 5 | Venusaur | 55 (cap +0) | Venusaurite | Overgrow | Mega ace | Giga Drain, Sludge Bomb, Earth Power, Sleep Powder |
 | 6 | Suicune | 56 (cap +1) | Leftovers | Pressure | setup attacker | Scald, Calm Mind, Rest, Sleep Talk |
 
-## 280. Jared — Fortree City Gym
+## 283. Jared — Fortree City Gym
 
 **Optional · Double · Cap 55 · Hard 63/100 · Uniqueness 74/100**
 
@@ -6787,7 +6851,7 @@ Swoobat and Noctowl are the authored opening pair. The board plan is flying pres
 | 3 | Noivern | 55 (cap +0) | White Herb | Infiltrator | coverage attacker | Draco Meteor, Hurricane, Flamethrower, Water Pulse |
 | 4 | Scyther | 55 (cap +0) | Leftovers | Technician | setup attacker | Swords Dance, Aerial Ace, Baton Pass, Protect |
 
-## 281. Edwardo — Fortree City Gym
+## 284. Edwardo — Fortree City Gym
 
 **Optional · Double · Cap 55 · Brutal 77/100 · Uniqueness 78/100**
 
@@ -6810,7 +6874,7 @@ Staraptor and Honchkrow are the authored opening pair. The board plan is flying 
 | 3 | Drifblim | 55 (cap +0) | Flame Orb | Flare Boost | protected attacker | Shadow Ball, Thunderbolt, Protect, Hypnosis |
 | 4 | Jumpluff | 56 (cap +1) | Focus Sash | Infiltrator | redirection support | Strength Sap, Acrobatics, Tailwind, Rage Powder |
 
-## 282. Flint — Fortree City Gym
+## 285. Flint — Fortree City Gym
 
 **Optional · Double · Cap 55 · Brutal 67/100 · Uniqueness 76/100**
 
@@ -6833,7 +6897,7 @@ Swellow and Yanmega are the authored opening pair. The board plan is flying pres
 | 3 | Mantine | 55 (cap +0) | Sitrus Berry | Water Absorb | coverage attacker | Scald, Air Slash, Ice Beam, Roost |
 | 4 | Dragonite | 55 (cap +0) | Weakness Policy | Multiscale | setup attacker | Fly, Protect, Extreme Speed, Dragon Dance |
 
-## 283. Ashley — Fortree City Gym
+## 286. Ashley — Fortree City Gym
 
 **Optional · Double · Cap 55 · Hard 62/100 · Uniqueness 78/100**
 
@@ -6856,7 +6920,7 @@ Braviary and Pidgeot are the authored opening pair. The board plan is flying pre
 | 3 | Swanna | 55 (cap +0) | Life Orb | Hydration | coverage attacker | Brave Bird, Liquidation, Steel Wing, Aqua Jet |
 | 4 | Golbat | 55 (cap +0) | Black Sludge | Inner Focus | setup attacker | Heat Wave, Air Slash, Whirlwind, Nasty Plot |
 
-## 284. Humberto — Fortree City Gym
+## 287. Humberto — Fortree City Gym
 
 **Optional · Double · Cap 55 · Brutal 70/100 · Uniqueness 72/100**
 
@@ -6879,7 +6943,7 @@ Gliscor and Mandibuzz are the authored opening pair. The board plan is earthquak
 | 3 | Hawlucha | 55 (cap +0) | Sitrus Berry | Unburden | setup attacker | Brave Bird, Close Combat, Stone Edge, Swords Dance |
 | 4 | Minior | 55 (cap +0) | White Herb | Shields Down | setup attacker | Acrobatics, Rock Slide, Zen Headbutt, Shell Smash |
 
-## 285. Darius — Fortree City Gym
+## 288. Darius — Fortree City Gym
 
 **Optional · Double · Cap 55 · Brutal 68/100 · Uniqueness 78/100**
 
@@ -6902,7 +6966,7 @@ Tropius and Dodrio are the authored opening pair. The board plan is flying press
 | 3 | Emolga | 55 (cap +0) | Flying Gem | Static | speed control | Acrobatics, Wild Charge, U Turn, Thunder Wave |
 | 4 | Archeops | 55 (cap +0) | Flying Gem | Defeatist | coverage attacker | Acrobatics, Stone Edge, Dragon Claw, Crunch |
 
-## 286. Colin — Route 120
+## 289. Colin — Route 120
 
 **Optional · Single · Cap 55 · Demanding 41/100 · Uniqueness 79/100**
 
@@ -6924,7 +6988,7 @@ Dodrio opens this deliberate singles fight. The roster is built as dancer recita
 | 2 | Xatu | 52 (cap -3) | None | Magic Bounce | coverage attacker | Psychic, Air Slash, Roost, Night Shade |
 | 3 | Oricorio | 52 (cap -3) | None | Dancer | rare centerpiece | Hurricane, Revelation Dance, Roost, Agility |
 
-## 287. Robert — Route 120
+## 290. Robert — Route 120
 
 **Optional · Double · Cap 55 · Demanding 48/100 · Uniqueness 80/100**
 
@@ -6947,7 +7011,7 @@ Fearow and Staraptor are the authored opening pair. The board plan is flying pre
 | 3 | Beautifly | 53 (cap -2) | Leftovers | Swarm | setup attacker | Quiver Dance, Bug Buzz, Substitute, Hidden Power |
 | 4 | Ariados | 53 (cap -2) | Sitrus Berry | Insomnia | redirection support | Poison Jab, Megahorn, Sticky Web, Rage Powder |
 
-## 288. Lorenzo — Route 120
+## 291. Lorenzo — Route 120
 
 **Optional · Double · Cap 55 · Brutal 67/100 · Uniqueness 70/100**
 
@@ -6970,7 +7034,7 @@ Ludicolo and Zangoose are the authored opening pair. The board plan is fake out 
 | 3 | Nidoqueen | 53 (cap -2) | Shuca Berry | Poison Point | coverage attacker | Earthquake, Poison Jab, Ice Punch, Superpower |
 | 4 | Starmie | 53 (cap -2) | Sitrus Berry | Analytic | coverage attacker | Surf, Psyshock, Power Gem, Grass Knot |
 
-## 289. Jenna — Route 120
+## 292. Jenna — Route 120
 
 **Optional · Double · Cap 55 · Hard 62/100 · Uniqueness 76/100**
 
@@ -6993,7 +7057,7 @@ Shiftry and Seviper are the authored opening pair. The board plan is tailwind. T
 | 3 | Nidoking | 53 (cap -2) | Shuca Berry | Poison Point | protected attacker | Earthquake, Poison Jab, Ice Punch, Protect |
 | 4 | Cloyster | 53 (cap -2) | White Herb | Skill Link | setup attacker | Icicle Spear, Rock Blast, Razor Shell, Shell Smash |
 
-## 290. Jeffrey — Route 120
+## 293. Jeffrey — Route 120
 
 **Optional · Single · Cap 55 · Demanding 38/100 · Uniqueness 82/100**
 
@@ -7015,7 +7079,7 @@ Durant opens this deliberate singles fight. The roster is built as bug pressure.
 | 2 | Vespiquen | 52 (cap -3) | None | Pressure | disruption and support | Attack Order, Defend Order, Heal Order, Acrobatics |
 | 3 | Masquerain | 52 (cap -3) | None | Intimidate | setup attacker | Bug Buzz, Air Slash, Quiver Dance, Stun Spore |
 
-## 291. Jennifer — Route 120
+## 294. Jennifer — Route 120
 
 **Optional · Double · Cap 55 · Hard 63/100 · Uniqueness 79/100**
 
@@ -7038,7 +7102,7 @@ Sableye and Kommo O are the authored opening pair. The board plan is tailwind. T
 | 3 | Whimsicott | 54 (cap -1) | Life Orb | Prankster | speed control | Moonblast, Energy Ball, Tailwind, Psychic |
 | 4 | Bouffalant | 54 (cap -1) | Sitrus Berry | Reckless | coverage attacker | Head Charge, Megahorn, Rock Slide, Head Smash |
 
-## 292. Chip — Route 120
+## 295. Chip — Route 120
 
 **Optional · Single · Cap 55 · Demanding 38/100 · Uniqueness 76/100**
 
@@ -7060,7 +7124,7 @@ Crustle opens this deliberate singles fight. The roster is built as rock mixed o
 | 2 | Claydol | 52 (cap -3) | None | Levitate | coverage attacker | Extrasensory, Earth Power, Hyper Beam, Cosmic Power |
 | 3 | Aerodactyl | 52 (cap -3) | None | Rock Head | coverage attacker | Rock Slide, Crunch, Ice Fang, Thunder Fang |
 
-## 293. Clarissa — Route 120
+## 296. Clarissa — Route 120
 
 **Optional · Single · Cap 55 · Demanding 41/100 · Uniqueness 69/100**
 
@@ -7082,7 +7146,7 @@ Tangrowth opens this deliberate singles fight. The roster is built as grass mixe
 | 2 | Wailord | 53 (cap -2) | None | Water Veil | coverage attacker | Water Spout, Heavy Slam, Bounce, Aqua Ring |
 | 3 | Pyroar | 52 (cap -3) | None | Rivalry | disruption and support | Fire Blast, Hyper Voice, Noble Roar, Work Up |
 
-## 294. Angelica — Route 120
+## 297. Angelica — Route 120
 
 **Optional · Double · Cap 55 · Hard 60/100 · Uniqueness 78/100**
 
@@ -7105,7 +7169,7 @@ Meowstic and Castform are the authored opening pair. The board plan is rain engi
 | 3 | Emolga | 53 (cap -2) | Petaya Berry | Lightning Rod | speed control | Thunder, Hurricane, Agility, Nuzzle |
 | 4 | Feraligatr | 55 (cap +0) | Life Orb | Sheer Force | setup attacker | Dragon Dance, Liquidation, Ice Punch, Protect |
 
-## 295. Keigo — Route 120
+## 298. Keigo — Route 120
 
 **Optional · Single · Cap 55 · Demanding 41/100 · Uniqueness 57/100**
 
@@ -7127,7 +7191,7 @@ Greninja opens this deliberate singles fight. The roster is built as dark mixed 
 | 2 | Weezing | 52 (cap -3) | None | Levitate | coverage attacker | Sludge Bomb, Heat Wave, Explosion, Toxic |
 | 3 | Bisharp | 52 (cap -3) | None | Defiant | speed control | Iron Head, Night Slash, Thunder Wave, Low Kick |
 
-## 296. Riley — Route 120
+## 299. Riley — Route 120
 
 **Optional · Double · Cap 55 · Hard 53/100 · Uniqueness 84/100**
 
@@ -7150,7 +7214,7 @@ Skuntank and Mothim are the authored opening pair. The board plan is protected e
 | 3 | Yveltal | 53 (cap -2) | Shell Bell | Dark Aura | rare centerpiece | Sucker Punch, Oblivion Wing, Dark Pulse, Roost |
 | 4 | Abomasnow | 53 (cap -2) | Life Orb | Snow Warning | protected attacker | Protect, Wood Hammer, Ice Shard, Blizzard |
 
-## 297. Leonel — Route 120
+## 300. Leonel — Route 120
 
 **Optional · Single · Cap 55 · Hard 56/100 · Uniqueness 72/100**
 
@@ -7172,7 +7236,7 @@ Vikavolt opens this deliberate singles fight. The roster is built as bug mixed o
 | 2 | Venusaur | 54 (cap -1) | Wide Lens | Overgrow | coverage attacker | Giga Drain, Sludge Bomb, Weather Ball, Sleep Powder |
 | 3 | Golduck | 54 (cap -1) | Mystic Water | Swift Swim | coverage attacker | Hydro Pump, Psychic, Ice Beam, Focus Blast |
 
-## 298. Callie — Route 120
+## 301. Callie — Route 120
 
 **Optional · Single · Cap 55 · Demanding 39/100 · Uniqueness 63/100**
 
@@ -7194,7 +7258,7 @@ Medicham opens this deliberate singles fight. The roster is built as fighting pr
 | 2 | Lopunny | 53 (cap -2) | None | Scrappy | coverage attacker | High Jump Kick, Return, U Turn, Bounce |
 | 3 | Mienshao | 53 (cap -2) | None | Regenerator | coverage attacker | High Jump Kick, Stone Edge, U Turn, Knock Off |
 
-## 299. Timothy — Route 115
+## 302. Timothy — Route 115
 
 **Optional · Double · Cap 55 · Brutal 65/100 · Uniqueness 74/100**
 
@@ -7217,7 +7281,7 @@ Hariyama and Dusclops are the authored opening pair. The board plan is residual 
 | 3 | Alakazam | 54 (cap -1) | Life Orb | Magic Guard | coverage attacker | Psyshock, Focus Blast, Shadow Ball, Energy Ball |
 | 4 | Melmetal | 55 (cap +0) | Assault Vest | Iron Fist | rare centerpiece | Double Iron Bash, Earthquake, Ice Punch, Thunder Punch |
 
-## 300. Koichi — Route 115
+## 303. Koichi — Route 115
 
 **Optional · Single · Cap 55 · Demanding 41/100 · Uniqueness 70/100**
 
@@ -7239,7 +7303,7 @@ Lucario opens this deliberate singles fight. The roster is built as fighting pre
 | 2 | Passimian | 52 (cap -3) | None | Receiver | setup attacker | Close Combat, Giga Impact, Bulk Up, Seed Bomb |
 | 3 | Pangoro | 52 (cap -3) | None | Iron Fist | coverage attacker | Sky Uppercut, Crunch, Body Slam, Bullet Punch |
 
-## 301. Nob — Route 115
+## 304. Nob — Route 115
 
 **Optional · Single · Cap 55 · Demanding 43/100 · Uniqueness 56/100**
 
@@ -7259,7 +7323,7 @@ Machamp opens this deliberate singles fight. The roster is built as fighting mix
 | ---: | --- | --- | --- | --- | --- | --- |
 | 1 | Machamp | 57 (cap +2) | None | Guts | coverage attacker | Dual Chop, Submission, Knock Off, Strength |
 
-## 302. Cyndy — Route 115
+## 305. Cyndy — Route 115
 
 **Optional · Single · Cap 55 · Demanding 39/100 · Uniqueness 82/100**
 
@@ -7281,7 +7345,7 @@ Samurott opens this deliberate singles fight. The roster is built as fighting pr
 | 2 | Hakamo O | 53 (cap -2) | None | Bulletproof | setup attacker | Sky Uppercut, Dragon Claw, Dragon Dance, Noble Roar |
 | 3 | Bewear | 52 (cap -3) | None | Fluffy | coverage attacker | Hammer Arm, Thrash, Payback, Bind |
 
-## 303. Hector — Route 115
+## 306. Hector — Route 115
 
 **Optional · Double · Cap 55 · Demanding 46/100 · Uniqueness 66/100**
 
@@ -7304,7 +7368,7 @@ Zangoose and Seviper are the authored opening pair. The board plan is residual c
 | 3 | Ferrothorn | 52 (cap -3) | Leftovers | Iron Barbs | speed control | Power Whip, Spikes, Thunder Wave, Protect |
 | 4 | Roselia | 52 (cap -3) | Black Sludge | Natural Cure | disruption and support | Giga Drain, Venoshock, Poison Powder, Leech Seed |
 
-## 304. Kyra — Route 115
+## 307. Kyra — Route 115
 
 **Optional · Single · Cap 55 · Demanding 40/100 · Uniqueness 74/100**
 
@@ -7326,7 +7390,7 @@ Dodrio opens this deliberate singles fight. The roster is built as flying mixed 
 | 2 | Flareon | 52 (cap -3) | None | Flash Fire | coverage attacker | Flare Blitz, Double Edge, Quick Attack, Superpower |
 | 3 | Scolipede | 52 (cap -3) | None | Speed Boost | protected attacker | X Scissor, Poison Jab, Iron Defense, Protect |
 
-## 305. Jaiden — Route 115
+## 308. Jaiden — Route 115
 
 **Optional · Single · Cap 55 · Demanding 41/100 · Uniqueness 77/100**
 
@@ -7348,7 +7412,7 @@ Ninjask opens this deliberate singles fight. The roster is built as residual con
 | 2 | Swalot | 53 (cap -2) | None | Liquid Ooze | disruption and support | Sludge Bomb, Water Pulse, Toxic, Stockpile |
 | 3 | Skuntank | 52 (cap -3) | None | Stench | coverage attacker | Crunch, Poison Jab, Flamethrower, Smokescreen |
 
-## 306. Alix — Route 115
+## 309. Alix — Route 115
 
 **Optional · Double · Cap 55 · Hard 56/100 · Uniqueness 86/100**
 
@@ -7371,7 +7435,7 @@ Musharna and Jynx are the authored opening pair. The board plan is psychic press
 | 3 | Mawile | 53 (cap -2) | Mawilite | Intimidate | Mega ace | Play Rough, Knock Off, Protect, Swords Dance |
 | 4 | Cresselia | 53 (cap -2) | Sitrus Berry | Levitate | speed control | Icy Wind, Psyshock, Thunder Wave, Protect |
 
-## 307. Helene — Route 115
+## 310. Helene — Route 115
 
 **Optional · Single · Cap 55 · Introductory 34/100 · Uniqueness 68/100**
 
@@ -7392,7 +7456,7 @@ Medicham opens this deliberate singles fight. The roster is built as underused f
 | 1 | Medicham | 53 (cap -2) | None | Pure Power | coverage attacker | High Jump Kick, Zen Headbutt, Ice Punch, Thunder Punch |
 | 2 | Tsareena | 53 (cap -2) | None | Leaf Guard | coverage attacker | High Jump Kick, Power Whip, Play Rough, Punishment |
 
-## 308. Marlene — Route 115
+## 311. Marlene — Route 115
 
 **Optional · Double · Cap 55 · Hard 54/100 · Uniqueness 68/100**
 
@@ -7415,7 +7479,7 @@ Medicham and Grumpig are the authored opening pair. The board plan is earthquake
 | 3 | Tropius | 52 (cap -3) | Yache Berry | Chlorophyll | speed control | Tailwind, Earthquake, Protect, Hidden Power |
 | 4 | Lopunny | 52 (cap -3) | Lopunnite | Limber | Mega ace | Fake Out, Close Combat, Protect, Thunder Wave |
 
-## 309. Kira & Dan — Abandoned Ship Rooms 2 1 F
+## 312. Kira & Dan — Abandoned Ship Rooms 2 1 F
 
 **Optional · Double · Cap 55 · Hard 52/100 · Uniqueness 74/100**
 
@@ -7438,7 +7502,7 @@ Volbeat and Illumise are the authored opening pair. The board plan is bug pressu
 | 3 | Scolipede | 53 (cap -2) | Black Sludge | Speed Boost | protected attacker | Megahorn, Aqua Tail, Substitute, Protect |
 | 4 | Masquerain | 53 (cap -2) | Sitrus Berry | Intimidate | setup attacker | Protect, Quiver Dance, Hydro Pump, Air Slash |
 
-## 310. Charlie — Abandoned Ship Corridors 1 F
+## 313. Charlie — Abandoned Ship Corridors 1 F
 
 **Optional · Single · Cap 55 · Demanding 35/100 · Uniqueness 60/100**
 
@@ -7459,7 +7523,7 @@ Lumineon opens this deliberate singles fight. The roster is built as water mixed
 | 1 | Lumineon | 53 (cap -2) | None | Swift Swim | setup attacker | Hydro Pump, Air Slash, Quiver Dance, Soak |
 | 2 | Octillery | 53 (cap -2) | None | Sniper | coverage attacker | Octazooka, Ice Beam, Signal Beam, Focus Energy |
 
-## 311. Demetrius — Abandoned Ship Rooms 1 F
+## 314. Demetrius — Abandoned Ship Rooms 1 F
 
 **Optional · Single · Cap 55 · Demanding 37/100 · Uniqueness 75/100**
 
@@ -7480,7 +7544,7 @@ Luxray opens this deliberate singles fight. The roster is built as dark mixed of
 | 1 | Luxray | 53 (cap -2) | None | Strong Jaw | speed control | Wild Charge, Crunch, Ice Fang, Scary Face |
 | 2 | Stoutland | 53 (cap -2) | None | Intimidate | coverage attacker | Retaliate, Crunch, Play Rough, Work Up |
 
-## 312. Thalia — Abandoned Ship Rooms 1 F
+## 315. Thalia — Abandoned Ship Rooms 1 F
 
 **Optional · Single · Cap 55 · Demanding 38/100 · Uniqueness 74/100**
 
@@ -7501,7 +7565,7 @@ Florges opens this deliberate singles fight. The roster is built as fairy mixed 
 | 1 | Florges | 53 (cap -2) | None | Symbiosis | disruption and support | Moonblast, Petal Dance, Leech Seed, Wish |
 | 2 | Gardevoir | 53 (cap -2) | None | Trace | setup attacker | Psychic, Dazzling Gleam, Mystical Fire, Calm Mind |
 
-## 313. Jani — Abandoned Ship Rooms 2 1 F
+## 316. Jani — Abandoned Ship Rooms 2 1 F
 
 **Optional · Single · Cap 55 · Demanding 38/100 · Uniqueness 80/100**
 
@@ -7523,7 +7587,7 @@ Dragonair opens this deliberate singles fight. The roster is built as underused 
 | 2 | Simipour | 52 (cap -3) | None | Gluttony | coverage attacker | Scald, Acrobatics, Crunch, Play Nice |
 | 3 | Furret | 52 (cap -3) | None | Fur Coat | setup attacker | Coil, Slam, Sucker Punch, Amnesia |
 
-## 314. Garrison — Abandoned Ship Rooms 2 1 F
+## 317. Garrison — Abandoned Ship Rooms 2 1 F
 
 **Optional · Single · Cap 55 · Demanding 40/100 · Uniqueness 74/100**
 
@@ -7545,7 +7609,7 @@ Carracosta opens this deliberate singles fight. The roster is built as rock mixe
 | 2 | Steelix | 52 (cap -3) | None | Sturdy | coverage attacker | Earthquake, Iron Tail, Fire Fang, Screech |
 | 3 | Golem (Alolan) | 52 (cap -3) | None | Sturdy | coverage attacker | Earthquake, Stone Edge, Thunder Punch, Curse |
 
-## 315. Duncan — Abandoned Ship Corridors B 1 F
+## 318. Duncan — Abandoned Ship Corridors B 1 F
 
 **Optional · Single · Cap 55 · Demanding 44/100 · Uniqueness 62/100**
 
@@ -7567,7 +7631,7 @@ Machamp opens this deliberate singles fight. The roster is built as snow engine.
 | 2 | Walrein | 52 (cap -3) | None | Ice Body | disruption and support | Blizzard, Slack Off, Aqua Tail, Hail |
 | 3 | Dhelmise | 52 (cap -3) | None | Steelworker | coverage attacker | Anchor Shot, Phantom Force, Power Whip, Whirlpool |
 
-## 316. Wendy — Route 123
+## 319. Wendy — Route 123
 
 **Optional · Double · Cap 55 · Brutal 68/100 · Uniqueness 83/100**
 
@@ -7592,7 +7656,7 @@ Mawile and Roserade are the authored opening pair. The board plan is tailwind. T
 | 5 | Mienshao | 54 (cap -1) | Life Orb | Reckless | coverage attacker | High Jump Kick, Knock Off, Poison Jab, Blaze Kick |
 | 6 | Drifblim | 55 (cap +0) | Leftovers | Unburden | setup attacker | Hidden Power, Calm Mind, Will O Wisp, Thunderbolt |
 
-## 317. Braxton — Route 123
+## 320. Braxton — Route 123
 
 **Optional · Double · Cap 55 · Brutal 76/100 · Uniqueness 78/100**
 
@@ -7617,7 +7681,7 @@ Braviary and Garchomp are the authored opening pair. The board plan is earthquak
 | 5 | Blastoise | 54 (cap -1) | Blastoisinite | Torrent | Mega ace | Water Pulse, Dark Pulse, Aura Sphere, Ice Beam |
 | 6 | Decidueye | 56 (cap +1) | Sitrus Berry | Overgrow | speed control | Spirit Shackle, Leaf Storm, Knock Off, Tailwind |
 
-## 318. Violet — Route 123
+## 321. Violet — Route 123
 
 **Optional · Single · Cap 55 · Demanding 36/100 · Uniqueness 74/100**
 
@@ -7638,7 +7702,7 @@ Roserade opens this deliberate singles fight. The roster is built as grass mixed
 | 1 | Roserade | 53 (cap -2) | None | Natural Cure | disruption and support | Giga Drain, Sludge Bomb, Sleep Powder, Leech Seed |
 | 2 | Tropius | 53 (cap -2) | None | Chlorophyll | coverage attacker | Leaf Blade, Air Slash, Body Slam, Synthesis |
 
-## 319. Cameron — Route 123
+## 322. Cameron — Route 123
 
 **Optional · Double · Cap 55 · Hard 51/100 · Uniqueness 90/100**
 
@@ -7661,7 +7725,7 @@ Solrock and Exeggutor (Alolan) are the authored opening pair. The board plan is 
 | 3 | Delphox | 53 (cap -2) | None | Blaze | coverage attacker | Psyshock, Shadow Ball, Mystical Fire, Will O Wisp |
 | 4 | Shaymin | 53 (cap -2) | Leftovers | Natural Cure | rare centerpiece | Earth Power, Hidden Power, Substitute, Seed Flare |
 
-## 320. Jacki — Route 123
+## 323. Jacki — Route 123
 
 **Optional · Single · Cap 55 · Demanding 46/100 · Uniqueness 80/100**
 
@@ -7683,7 +7747,7 @@ Musharna opens this deliberate singles fight. The roster is built as psychic pre
 | 2 | Girafarig | 53 (cap -2) | None | Strong Jaw | coverage attacker | Psychic Fangs, Crunch, Ice Fang, Thunder Fang |
 | 3 | Espeon | 53 (cap -2) | None | Synchronize | coverage attacker | Psyshock, Shadow Ball, Grass Knot, Dazzling Gleam |
 
-## 321. Miu & Yuki — Route 123
+## 324. Miu & Yuki — Route 123
 
 **Optional · Double · Cap 55 · Demanding 40/100 · Uniqueness 80/100**
 
@@ -7706,7 +7770,7 @@ Ninetales and Ninetales (Alolan) are the authored opening pair. The board plan i
 | 3 | Torterra | 52 (cap -3) | Leftovers | Overgrow | disruption and support | Leech Seed, Earthquake, Stealth Rock, Wood Hammer |
 | 4 | Weepinbell | 52 (cap -3) | None | Chlorophyll | coverage attacker | Poison Jab, Razor Leaf, Knock Off, Gastro Acid |
 
-## 322. Kindra — Route 123
+## 325. Kindra — Route 123
 
 **Optional · Single · Cap 55 · Demanding 39/100 · Uniqueness 83/100**
 
@@ -7728,7 +7792,7 @@ Cofagrigus opens this deliberate singles fight. The roster is built as underused
 | 2 | Marowak (Alolan) | 53 (cap -2) | None | Rock Head | coverage attacker | Shadow Bone, Flare Blitz, Bonemerang, Retaliate |
 | 3 | Rotom Frost | 53 (cap -2) | None | Levitate | setup attacker | Freeze Dry, Thunderbolt, Hex, Nasty Plot |
 
-## 323. Fredrick — Route 123
+## 326. Fredrick — Route 123
 
 **Optional · Single · Cap 55 · Hard 57/100 · Uniqueness 82/100**
 
@@ -7750,7 +7814,7 @@ Aegislash opens this deliberate singles fight. The roster is built as ghost mixe
 | 2 | Comfey | 54 (cap -1) | Leftovers | Flower Veil | setup attacker | Draining Kiss, Giga Drain, Calm Mind, Charm |
 | 3 | Tyranitar | 54 (cap -1) | Water Gem | Sand Stream | coverage attacker | Hydro Pump, Dark Pulse, Fire Blast, Ice Beam |
 
-## 324. Alberto — Route 123
+## 327. Alberto — Route 123
 
 **Optional · Single · Cap 55 · Demanding 48/100 · Uniqueness 68/100**
 
@@ -7772,7 +7836,7 @@ Pelipper opens this deliberate singles fight. The roster is built as flying pres
 | 2 | Altaria | 53 (cap -2) | None | Natural Cure | coverage attacker | Brave Bird, Dragon Claw, Ice Beam, Sing |
 | 3 | Xatu | 53 (cap -2) | None | Synchronize | coverage attacker | Air Slash, Psychic, Giga Drain, Dazzling Gleam |
 
-## 325. Ed — Route 123
+## 328. Ed — Route 123
 
 **Optional · Single · Cap 55 · Demanding 40/100 · Uniqueness 68/100**
 
@@ -7794,7 +7858,7 @@ Seviper opens this deliberate singles fight. The roster is built as poison mixed
 | 2 | Zangoose | 53 (cap -2) | None | Immunity | coverage attacker | Double Edge, Close Combat, X Scissor, Quick Attack |
 | 3 | Glaceon | 53 (cap -2) | None | Snow Cloak | coverage attacker | Freeze Dry, Shadow Ball, Yawn, Ice Shard |
 
-## 326. Kayley — Route 123
+## 329. Kayley — Route 123
 
 **Optional · Single · Cap 55 · Demanding 44/100 · Uniqueness 75/100**
 
@@ -7815,7 +7879,7 @@ Castform opens this deliberate singles fight. The roster is built as sun engine.
 | 1 | Castform | 54 (cap -1) | None | Forecast | coverage attacker | Sunny Day, Weather Ball, Ice Beam, Solar Beam |
 | 2 | Sawsbuck | 54 (cap -1) | None | Chlorophyll | coverage attacker | Double Edge, Horn Leech, Jump Kick, Megahorn |
 
-## 327. Jonas — Route 123
+## 330. Jonas — Route 123
 
 **Optional · Single · Cap 55 · Demanding 43/100 · Uniqueness 65/100**
 
@@ -7836,7 +7900,7 @@ Weezing opens this deliberate singles fight. The roster is built as underused po
 | 1 | Weezing | 54 (cap -1) | None | Levitate | disruption and support | Heat Wave, Toxic, Venom Drench, Thunderbolt |
 | 2 | Salazzle | 54 (cap -1) | None | Corrosion | speed control | Sludge Bomb, Flamethrower, Dragon Pulse, Thunder Wave |
 
-## 328. Jazmyn — Route 123
+## 331. Jazmyn — Route 123
 
 **Optional · Double · Cap 55 · Brutal 66/100 · Uniqueness 81/100**
 
@@ -7859,7 +7923,7 @@ Absol and Goodra are the authored opening pair. The board plan is active speed c
 | 3 | Scizor | 54 (cap -1) | Leftovers | Technician | disruption and support | Bullet Punch, Bug Bite, Curse, Roost |
 | 4 | Jolteon | 54 (cap -1) | Expert Belt | Volt Absorb | speed control | Thunder, Shadow Ball, Aurora Beam, Electroweb |
 
-## 329. Davis — Route 123
+## 332. Davis — Route 123
 
 **Optional · Double · Cap 55 · Demanding 41/100 · Uniqueness 82/100**
 
@@ -7882,7 +7946,7 @@ Pinsir and Scolipede are the authored opening pair. The board plan is bug pressu
 | 3 | Dustox | 53 (cap -2) | Black Sludge | Shield Dust | disruption and support | Bug Buzz, Roost, Toxic, Sludge Bomb |
 | 4 | Venomoth | 53 (cap -2) | Life Orb | Tinted Lens | setup attacker | Sludge Bomb, Bug Buzz, Sleep Powder, Quiver Dance |
 
-## 330. Fernando — Route 123
+## 333. Fernando — Route 123
 
 **Optional · Single · Cap 55 · Demanding 40/100 · Uniqueness 67/100**
 
@@ -7904,7 +7968,7 @@ Zebstrika opens this deliberate singles fight. The roster is built as underused 
 | 2 | Chatot | 53 (cap -2) | None | Keen Eye | setup attacker | Hyper Voice, Chatter, Nasty Plot, Sing |
 | 3 | Kricketune | 53 (cap -2) | None | Swarm | coverage attacker | Hyper Voice, Bug Buzz, Giga Drain, Sing |
 
-## 331. Darrin — Route 107
+## 334. Darrin — Route 107
 
 **Optional · Double · Cap 55 · Extreme 83/100 · Uniqueness 69/100**
 
@@ -7929,7 +7993,7 @@ Pelipper and Tentacruel are the authored opening pair. The board plan is tailwin
 | 5 | Kingdra | 57 (cap +2) | Life Orb | Swift Swim | protected attacker | Muddy Water, Draco Meteor, Hurricane, Protect |
 | 6 | Feraligatr | 57 (cap +2) | Feraligite | Sheer Force | Mega ace | Liquidation, Ice Punch, Crunch, Protect |
 
-## 332. Jerome — Route 108
+## 335. Jerome — Route 108
 
 **Optional · Single · Cap 55 · Demanding 35/100 · Uniqueness 73/100**
 
@@ -7950,7 +8014,7 @@ Barbaracle opens this deliberate singles fight. The roster is built as rock mixe
 | 1 | Barbaracle | 53 (cap -2) | None | Tough Claws | coverage attacker | Razor Shell, Strength, Night Slash, Cross Chop |
 | 2 | Beartic | 53 (cap -2) | None | Snow Cloak | coverage attacker | Icicle Crash, Liquidation, Thrash, Charm |
 
-## 333. Matthew — Route 108
+## 336. Matthew — Route 108
 
 **Optional · Single · Cap 55 · Demanding 40/100 · Uniqueness 66/100**
 
@@ -7971,7 +8035,7 @@ Mantine opens this deliberate singles fight. The roster is built as surf ally ac
 | 1 | Mantine | 53 (cap -2) | None | Water Absorb | disruption and support | Air Slash, Aqua Ring, Agility, Roost |
 | 2 | Raichu | 53 (cap -2) | None | Lightning Rod | setup attacker | Thunder, Surf, Grass Knot, Nasty Plot |
 
-## 334. Tony — Route 107
+## 337. Tony — Route 107
 
 **Optional · Double · Cap 55 · Hard 56/100 · Uniqueness 80/100**
 
@@ -7994,7 +8058,7 @@ Sharpedo and Golisopod are the authored opening pair. The board plan is dancer r
 | 3 | Oricorio Pom Pom | 53 (cap -2) | Electric Gem | Dancer | setup attacker | Revelation Dance, Hurricane, Heat Wave, Quiver Dance |
 | 4 | Cryogonal | 53 (cap -2) | Leftovers | Levitate | speed control | Hidden Power, Icy Wind, Recover, Protect |
 
-## 335. Tara — Route 108
+## 338. Tara — Route 108
 
 **Optional · Single · Cap 55 · Demanding 44/100 · Uniqueness 78/100**
 
@@ -8016,7 +8080,7 @@ Seadra opens this deliberate singles fight. The roster is built as underused wat
 | 2 | Feraligatr | 52 (cap -3) | None | Sheer Force | coverage attacker | Waterfall, Aqua Jet, Crunch, Ice Punch |
 | 3 | Audino | 52 (cap -3) | None | Healer | coverage attacker | Surf, Hyper Voice, Moonblast, Attract |
 
-## 336. Missy — Route 108
+## 339. Missy — Route 108
 
 **Optional · Single · Cap 55 · Demanding 35/100 · Uniqueness 81/100**
 
@@ -8037,7 +8101,7 @@ Gorebyss opens this deliberate singles fight. The roster is built as underused w
 | 1 | Gorebyss | 53 (cap -2) | None | Hydration | setup attacker | Hydro Pump, Draining Kiss, Psychic, Shell Smash |
 | 2 | Pyukumuku | 54 (cap -1) | None | Innards Out | disruption and support | Recover, Counter, Soak, Toxic |
 
-## 337. Carolina — Route 108
+## 340. Carolina — Route 108
 
 **Optional · Single · Cap 55 · Hard 55/100 · Uniqueness 70/100**
 
@@ -8059,7 +8123,7 @@ Manectric opens this deliberate singles fight. The roster is built as underused 
 | 2 | Hawlucha | 54 (cap -1) | Electric Seed | Unburden | setup attacker | Acrobatics, Drain Punch, Swords Dance, Rock Slide |
 | 3 | Sawsbuck | 54 (cap -1) | Electric Gem | Chlorophyll | coverage attacker | Double Edge, Horn Leech, Wild Charge, Jump Kick |
 
-## 338. Cory — Route 108
+## 341. Cory — Route 108
 
 **Optional · Single · Cap 55 · Demanding 47/100 · Uniqueness 78/100**
 
@@ -8080,7 +8144,7 @@ Stunfisk opens this deliberate singles fight. The roster is built as electric te
 | 1 | Stunfisk | 53 (cap -2) | None | Electric Surge | disruption and support | Thunderbolt, Earth Power, Yawn, Charge |
 | 2 | Poliwrath | 53 (cap -2) | Electric Seed | Swift Swim | coverage attacker | Waterfall, Drain Punch, Ice Punch, Hypnosis |
 
-## 339. Denise — Route 107
+## 342. Denise — Route 107
 
 **Optional · Double · Cap 55 · Hard 56/100 · Uniqueness 76/100**
 
@@ -8103,7 +8167,7 @@ Swanna and Seaking are the authored opening pair. The board plan is earthquake i
 | 3 | Rotom Wash | 53 (cap -2) | Sitrus Berry | Levitate | protected attacker | Hydro Pump, Will O Wisp, Thunderbolt, Protect |
 | 4 | Quagsire | 53 (cap -2) | Leftovers | Water Absorb | protected attacker | Earthquake, Waterfall, Rock Slide, Protect |
 
-## 340. Beth — Route 107
+## 343. Beth — Route 107
 
 **Optional · Double · Cap 55 · Brutal 72/100 · Uniqueness 62/100**
 
@@ -8126,7 +8190,7 @@ Politoed and Kingdra are the authored opening pair. The board plan is water pres
 | 3 | Swampert | 55 (cap +0) | Swampertite | Torrent | Mega ace | Waterfall, High Horsepower, Ice Punch, Protect |
 | 4 | Raichu | 55 (cap +0) | Focus Sash | Lightning Rod | protected attacker | Fake Out, Thunder, Encore, Protect |
 
-## 341. Lisa & Ray — Route 107
+## 344. Lisa & Ray — Route 107
 
 **Optional · Double · Cap 55 · Demanding 45/100 · Uniqueness 80/100**
 
@@ -8149,7 +8213,7 @@ Clawitzer and Dragalge are the authored opening pair. The board plan is water pr
 | 3 | Basculin | 52 (cap -3) | None | Reckless | coverage attacker | Aqua Tail, Crunch, Double Edge, Head Smash |
 | 4 | Alomomola | 52 (cap -3) | None | Healer | disruption and support | Heal Pulse, Whirlpool, Helping Hand, Aqua Ring |
 
-## 342. Camron — Route 107
+## 345. Camron — Route 107
 
 **Optional · Single · Cap 55 · Hard 51/100 · Uniqueness 62/100**
 
@@ -8171,7 +8235,7 @@ Starmie opens this deliberate singles fight. The roster is built as psychic mixe
 
 # Mind Badge
 
-## 343. May — Lilycove City | Route 103
+## 346. May — Lilycove City | Route 103
 
 **Required Branch · Double · Cap 60 · Extreme 84/100 · Uniqueness 33/100**
 
@@ -8196,7 +8260,7 @@ Vikavolt and Swellow are the authored opening pair. The board plan is tailwind +
 | 5 | Mimikyu | 61 (cap +1) | Lum Berry | Disguise | setup attacker | Shadow Claw, Play Rough, Swords Dance, Shadow Sneak |
 | 6 | Blaziken | 63 (cap +3) | Blazikenite | Blaze | Mega ace | Flare Blitz, High Jump Kick, Rock Slide, Protect |
 
-## 344. May — Lilycove City | Route 103
+## 347. May — Lilycove City | Route 103
 
 **Required Branch · Double · Cap 60 · Extreme 89/100 · Uniqueness 33/100**
 
@@ -8221,7 +8285,7 @@ Vikavolt and Swellow are the authored opening pair. The board plan is earthquake
 | 5 | Mimikyu | 61 (cap +1) | Lum Berry | Disguise | setup attacker | Shadow Claw, Play Rough, Swords Dance, Shadow Sneak |
 | 6 | Swampert | 63 (cap +3) | Swampertite | Swift Swim | Mega ace | Liquidation, Earthquake, Ice Punch, Rain Dance |
 
-## 345. May — Lilycove City | Route 103
+## 348. May — Lilycove City | Route 103
 
 **Required Branch · Double · Cap 60 · Extreme 85/100 · Uniqueness 33/100**
 
@@ -8246,7 +8310,7 @@ Vikavolt and Swellow are the authored opening pair. The board plan is earthquake
 | 5 | Mimikyu | 61 (cap +1) | Lum Berry | Disguise | setup attacker | Shadow Claw, Play Rough, Swords Dance, Shadow Sneak |
 | 6 | Sceptile | 63 (cap +3) | Sceptilite | Overgrow | Mega ace | Solar Beam, Dragon Pulse, Earthquake, Growth |
 
-## 346. Brendan — Lilycove City | Route 103
+## 349. Brendan — Lilycove City | Route 103
 
 **Required Branch · Double · Cap 60 · Extreme 83/100 · Uniqueness 34/100**
 
@@ -8271,7 +8335,7 @@ Araquanid and Swellow are the authored opening pair. The board plan is priority 
 | 5 | Vikavolt | 61 (cap +1) | Life Orb | Levitate | coverage attacker | Thunderbolt, Bug Buzz, Energy Ball, Aurora Beam |
 | 6 | Blaziken | 63 (cap +3) | Blazikenite | Blaze | Mega ace | Flare Blitz, High Jump Kick, Rock Slide, Protect |
 
-## 347. Brendan — Lilycove City | Route 103
+## 350. Brendan — Lilycove City | Route 103
 
 **Required Branch · Double · Cap 60 · Extreme 90/100 · Uniqueness 33/100**
 
@@ -8296,7 +8360,7 @@ Vikavolt and Swellow are the authored opening pair. The board plan is earthquake
 | 5 | Mimikyu | 61 (cap +1) | Lum Berry | Disguise | setup attacker | Shadow Claw, Play Rough, Swords Dance, Shadow Sneak |
 | 6 | Swampert | 63 (cap +3) | Swampertite | Swift Swim | Mega ace | Liquidation, Earthquake, Ice Punch, Rain Dance |
 
-## 348. Brendan — Lilycove City | Route 103
+## 351. Brendan — Lilycove City | Route 103
 
 **Required Branch · Double · Cap 60 · Extreme 84/100 · Uniqueness 34/100**
 
@@ -8321,7 +8385,7 @@ Araquanid and Swellow are the authored opening pair. The board plan is earthquak
 | 5 | Vikavolt | 60 (cap +0) | Life Orb | Levitate | coverage attacker | Thunderbolt, Bug Buzz, Energy Ball, Aurora Beam |
 | 6 | Sceptile | 63 (cap +3) | Sceptilite | Overgrow | Mega ace | Solar Beam, Dragon Pulse, Earthquake, Growth |
 
-## 349. Vanessa — Route 121
+## 352. Vanessa — Route 121
 
 **Optional · Double · Cap 60 · Brutal 66/100 · Uniqueness 76/100**
 
@@ -8344,7 +8408,7 @@ Raichu and Togedemaru are the authored opening pair. The board plan is electric 
 | 3 | Granbull | 58 (cap -2) | Sitrus Berry | Intimidate | coverage attacker | Play Rough, Crunch, Fire Fang, Roar |
 | 4 | Rotom Fan | 60 (cap +0) | Leftovers | Motor Drive | protected attacker | Substitute, Air Slash, Protect, Thunderbolt |
 
-## 350. Walter — Route 121
+## 353. Walter — Route 121
 
 **Optional · Single · Cap 60 · Demanding 43/100 · Uniqueness 76/100**
 
@@ -8366,7 +8430,7 @@ Luxray opens this deliberate singles fight. The roster is built as underused dar
 | 2 | Linoone | 58 (cap -2) | None | Pickup | coverage attacker | Extreme Speed, Play Rough, Shadow Claw, Seed Bomb |
 | 3 | Slowking | 58 (cap -2) | None | Oblivious | disruption and support | Rain Dance, Surf, Psychic, Slack Off |
 
-## 351. Tammy — Route 121
+## 354. Tammy — Route 121
 
 **Optional · Single · Cap 60 · Demanding 36/100 · Uniqueness 52/100**
 
@@ -8387,7 +8451,7 @@ Banette opens this deliberate singles fight. The roster is built as underused gh
 | 1 | Banette | 58 (cap -2) | None | Vengeance | disruption and support | Shadow Claw, Crush Claw, Will O Wisp, Curse |
 | 2 | Mismagius | 58 (cap -2) | None | Levitate | coverage attacker | Shadow Ball, Power Gem, Mystical Fire, Pain Split |
 
-## 352. Kate & Joy — Route 121
+## 355. Kate & Joy — Route 121
 
 **Optional · Double · Cap 60 · Hard 61/100 · Uniqueness 66/100**
 
@@ -8410,7 +8474,7 @@ Swoobat and Slaking are the authored opening pair. The board plan is neutralizin
 | 3 | Weezing | 60 (cap +0) | Black Sludge | Neutralizing Gas | disruption and support | Will O Wisp, Sludge Bomb, Helping Hand, Protect |
 | 4 | Regigigas | 60 (cap +0) | Life Orb | Slow Start | protected attacker | Crush Grip, Drain Punch, Knock Off, Protect |
 
-## 353. Jessica — Route 121
+## 356. Jessica — Route 121
 
 **Optional · Single · Cap 60 · Demanding 40/100 · Uniqueness 78/100**
 
@@ -8432,7 +8496,7 @@ Krookodile opens this deliberate singles fight. The roster is built as underused
 | 2 | Arbok | 57 (cap -3) | None | Shed Skin | setup attacker | Coil, Gunk Shot, Rest, Crunch |
 | 3 | Kecleon | 57 (cap -3) | None | Protean | disruption and support | Substitute, Recover, Sucker Punch, Drain Punch |
 
-## 354. Cale — Route 121
+## 357. Cale — Route 121
 
 **Optional · Single · Cap 60 · Demanding 37/100 · Uniqueness 83/100**
 
@@ -8454,7 +8518,7 @@ Wormadam Trash Cloak opens this deliberate singles fight. The roster is built as
 | 2 | Wormadam Sandy Cloak | 57 (cap -3) | None | Overcoat | setup attacker | Quiver Dance, Bug Buzz, Earth Power, Psychic |
 | 3 | Wormadam | 57 (cap -3) | None | Overcoat | setup attacker | Quiver Dance, Bug Buzz, Leaf Storm, Psychic |
 
-## 355. Myles — Route 121
+## 358. Myles — Route 121
 
 **Optional · Double · Cap 60 · Hard 56/100 · Uniqueness 75/100**
 
@@ -8479,7 +8543,7 @@ Lucario and Togekiss are the authored opening pair. The board plan is earthquake
 | 5 | Whiscash | 55 (cap -5) | None | Adaptability | setup attacker | Aqua Tail, Earthquake, Dragon Dance, Spark |
 | 6 | Miltank | 56 (cap -4) | None | Thick Fat | disruption and support | Curse, Hammer Arm, Double Edge, Milk Drink |
 
-## 356. Pat — Route 121
+## 359. Pat — Route 121
 
 **Optional · Double · Cap 60 · Hard 50/100 · Uniqueness 81/100**
 
@@ -8504,7 +8568,7 @@ Swampert and Bouffalant are the authored opening pair. The board plan is earthqu
 | 5 | Simisear | 56 (cap -4) | None | Gluttony | setup attacker | Heat Wave, Focus Blast, Grass Knot, Nasty Plot |
 | 6 | Lycanroc Dusk | 56 (cap -4) | None | Tough Claws | coverage attacker | Thrash, Sucker Punch, Stone Edge, Fire Fang |
 
-## 357. Marcel — Route 121
+## 360. Marcel — Route 121
 
 **Optional · Double · Cap 60 · Brutal 67/100 · Uniqueness 82/100**
 
@@ -8527,7 +8591,7 @@ Shiftry and Zebstrika are the authored opening pair. The board plan is tailwind.
 | 3 | Stoutland | 60 (cap +0) | Weakness Policy | Intimidate | coverage attacker | Return, Crunch, Play Rough, Work Up |
 | 4 | Zarude | 60 (cap +0) | Life Orb | Leaf Guard | protected attacker | Knock Off, Protect, Power Whip, Close Combat |
 
-## 358. Cristin — Route 121
+## 361. Cristin — Route 121
 
 **Optional · Double · Cap 60 · Brutal 68/100 · Uniqueness 75/100**
 
@@ -8550,7 +8614,7 @@ Ninetales and Flygon are the authored opening pair. The board plan is sun engine
 | 3 | Pidgeot | 60 (cap +0) | Yache Berry | No Guard | coverage attacker | Hyper Voice, Air Slash, Heat Wave, Roost |
 | 4 | Tangrowth | 61 (cap +1) | Leftovers | Leaf Guard | disruption and support | Leech Seed, Synthesis, Knock Off, Stun Spore |
 
-## 359. Matt — Mt Pyre Summit
+## 362. Matt — Mt Pyre Summit
 
 **Required · Double · Cap 60 · Extreme 82/100 · Uniqueness 74/100**
 
@@ -8575,7 +8639,7 @@ Pelipper and Dhelmise are the authored opening pair. The board plan is earthquak
 | 5 | Seismitoad | 60 (cap +0) | Rindo Berry | Swift Swim | coverage attacker | Liquidation, Earthquake, Power Whip, Ice Punch |
 | 6 | Feraligatr | 62 (cap +2) | Feraligite | Strong Jaw | Mega ace | Waterfall, Crunch, Ice Punch, Protect |
 
-## 360. Valerie — Mt Pyre 6 F
+## 363. Valerie — Mt Pyre 6 F
 
 **Optional · Single · Cap 60 · Demanding 42/100 · Uniqueness 75/100**
 
@@ -8597,7 +8661,7 @@ Sableye opens this deliberate singles fight. The roster is built as fake out tem
 | 2 | Dusknoir | 57 (cap -3) | None | Pressure | coverage attacker | Phantom Force, Ice Punch, Fire Punch, Thunder Punch |
 | 3 | Spiritomb | 57 (cap -3) | None | Pressure | setup attacker | Hypnosis, Dream Eater, Dark Pulse, Calm Mind |
 
-## 361. William — Mt Pyre 3 F
+## 364. William — Mt Pyre 3 F
 
 **Optional · Double · Cap 60 · Hard 54/100 · Uniqueness 83/100**
 
@@ -8620,7 +8684,7 @@ Beheeyem and Gardevoir are the authored opening pair. The board plan is psychic 
 | 3 | Gallade | 57 (cap -3) | None | Steadfast | setup attacker | Close Combat, Psycho Cut, Leaf Blade, Swords Dance |
 | 4 | Deoxys Speed | 57 (cap -3) | Light Clay | Pressure | rare centerpiece | Spikes, Light Screen, Ice Beam, Taunt |
 
-## 362. Atsushi — Mt Pyre 4 F
+## 365. Atsushi — Mt Pyre 4 F
 
 **Optional · Single · Cap 60 · Demanding 38/100 · Uniqueness 68/100**
 
@@ -8642,7 +8706,7 @@ Samurott opens this deliberate singles fight. The roster is built as fighting mi
 | 2 | Machamp | 57 (cap -3) | None | No Guard | coverage attacker | Dynamic Punch, Dual Chop, Knock Off, Stone Edge |
 | 3 | Aggron | 57 (cap -3) | None | Rock Head | coverage attacker | Head Smash, Ice Punch, Iron Head, Metal Burst |
 
-## 363. Tasha — Mt Pyre 5 F
+## 366. Tasha — Mt Pyre 5 F
 
 **Optional · Single · Cap 60 · Demanding 39/100 · Uniqueness 76/100**
 
@@ -8664,7 +8728,7 @@ Chandelure opens this deliberate singles fight. The roster is built as ghost pre
 | 2 | Banette | 57 (cap -3) | None | Insomnia | coverage attacker | Phantom Force, Crush Claw, Will O Wisp, Thunderbolt |
 | 3 | Trevenant | 57 (cap -3) | None | Natural Cure | disruption and support | Horn Leech, Shadow Claw, Will O Wisp, Leech Seed |
 
-## 364. Kayla — Mt Pyre 3 F
+## 367. Kayla — Mt Pyre 3 F
 
 **Optional · Single · Cap 60 · Demanding 38/100 · Uniqueness 79/100**
 
@@ -8686,7 +8750,7 @@ Wobbuffet opens this deliberate singles fight. The roster is built as psychic pr
 | 2 | Alakazam | 57 (cap -3) | None | Synchronize | setup attacker | Psychic, Shadow Ball, Calm Mind, Recover |
 | 3 | Hypno | 57 (cap -3) | None | Insomnia | setup attacker | Dream Eater, Hypnosis, Shadow Ball, Nasty Plot |
 
-## 365. Gabrielle — Mt Pyre 3 F
+## 368. Gabrielle — Mt Pyre 3 F
 
 **Optional · Double · Cap 60 · Hard 59/100 · Uniqueness 83/100**
 
@@ -8711,7 +8775,7 @@ Avalugg and Meganium are the authored opening pair. The board plan is fake out t
 | 5 | Gorebyss | 56 (cap -4) | None | Swift Swim | setup attacker | Muddy Water, Draining Kiss, Ice Beam, Shell Smash |
 | 6 | Kommo O | 56 (cap -4) | None | Bulletproof | coverage attacker | Clanging Scales, Aura Sphere, Flash Cannon, Flamethrower |
 
-## 366. Mark — Mt Pyre 2 F
+## 369. Mark — Mt Pyre 2 F
 
 **Optional · Single · Cap 60 · Demanding 40/100 · Uniqueness 73/100**
 
@@ -8733,7 +8797,7 @@ Rhyperior opens this deliberate singles fight. The roster is built as ground mix
 | 2 | Haxorus | 57 (cap -3) | None | Rivalry | coverage attacker | Outrage, Close Combat, First Impression, Crunch |
 | 3 | Lickilicky | 57 (cap -3) | None | Own Tempo | coverage attacker | Body Slam, Power Whip, Fire Blast, Thunder |
 
-## 367. Dez & Luke — Mt Pyre 2 F
+## 370. Dez & Luke — Mt Pyre 2 F
 
 **Optional · Double · Cap 60 · Hard 55/100 · Uniqueness 82/100**
 
@@ -8756,7 +8820,7 @@ Cloyster and Steelix are the authored opening pair. The board plan is active spe
 | 3 | Banette | 59 (cap -1) | Banettite | Insomnia | Mega ace | Shadow Sneak, Gunk Shot, Poltergeist, Protect |
 | 4 | Spiritomb | 59 (cap -1) | Sitrus Berry | Infiltrator | speed control | Icy Wind, Protect, Foul Play, Shadow Sneak |
 
-## 368. Cedric — Mt Pyre 6 F
+## 371. Cedric — Mt Pyre 6 F
 
 **Optional · Single · Cap 60 · Demanding 38/100 · Uniqueness 76/100**
 
@@ -8778,7 +8842,7 @@ Bronzong opens this deliberate singles fight. The roster is built as psychic pre
 | 2 | Reuniclus | 57 (cap -3) | None | Overcoat | disruption and support | Psyshock, Thunder, Recover, Acid Armor |
 | 3 | Meowstic Female | 57 (cap -3) | None | Sheer Force | coverage attacker | Psychic, Dark Pulse, Energy Ball, Signal Beam |
 
-## 369. Leah — Mt Pyre 2 F
+## 372. Leah — Mt Pyre 2 F
 
 **Optional · Double · Cap 60 · Hard 55/100 · Uniqueness 74/100**
 
@@ -8801,7 +8865,7 @@ Gengar and Grumpig are the authored opening pair. The board plan is active speed
 | 3 | Jynx | 57 (cap -3) | None | Oblivious | setup attacker | Freeze Dry, Psychic, Lovely Kiss, Nasty Plot |
 | 4 | Spectrier | 57 (cap -3) | Life Orb | Grim Neigh | protected attacker | Shadow Ball, Snarl, Will O Wisp, Protect |
 
-## 370. Zander — Mt Pyre 2 F
+## 373. Zander — Mt Pyre 2 F
 
 **Optional · Single · Cap 60 · Demanding 41/100 · Uniqueness 75/100**
 
@@ -8823,7 +8887,7 @@ Hariyama opens this deliberate singles fight. The roster is built as fighting pr
 | 2 | Hitmonlee | 57 (cap -3) | None | Limber | coverage attacker | High Jump Kick, Knock Off, Blaze Kick, Fake Out |
 | 3 | Emboar | 57 (cap -3) | None | Reckless | coverage attacker | Hammer Arm, Heat Crash, Wild Charge, Head Smash |
 
-## 371. Grunt — Mt Pyre Summit
+## 374. Grunt — Mt Pyre Summit
 
 **Optional · Double · Cap 60 · Demanding 48/100 · Uniqueness 72/100**
 
@@ -8846,7 +8910,7 @@ Muk and Raticate (Alolan) are the authored opening pair. The board plan is poiso
 | 3 | Tentacruel | 58 (cap -2) | None | Clear Body | coverage attacker | Scald, Sludge Bomb, Mirror Coat, Hex |
 | 4 | Slowking (Galarian) | 58 (cap -2) | Life Orb | Regenerator | speed control | Fire Blast, Psychic, Sludge Bomb, Trick Room |
 
-## 372. Grunt — Mt Pyre Summit
+## 375. Grunt — Mt Pyre Summit
 
 **Optional · Double · Cap 60 · Demanding 43/100 · Uniqueness 77/100**
 
@@ -8869,7 +8933,7 @@ Bruxish and Weavile are the authored opening pair. The board plan is water mixed
 | 3 | Wailord | 58 (cap -2) | None | Water Veil | coverage attacker | Scald, Ice Beam, Body Slam, Noble Roar |
 | 4 | Polteageist Antique | 58 (cap -2) | White Herb | Cursed Body | setup attacker | Protect, Shell Smash, Shadow Ball, Stored Power |
 
-## 373. Grunt — Mt Pyre Summit
+## 376. Grunt — Mt Pyre Summit
 
 **Optional · Double · Cap 60 · Hard 52/100 · Uniqueness 81/100**
 
@@ -8892,7 +8956,7 @@ Jellicent and Amoonguss are the authored opening pair. The board plan is water p
 | 3 | Lanturn | 58 (cap -2) | None | Volt Absorb | redirection support | Scald, Thunder, Confuse Ray, Spotlight |
 | 4 | Urshifu (Rapid Strike) | 58 (cap -2) | Choice Scarf | Unseen Fist | Choice-locked breaker | Surging Strikes, U Turn, Thunder Punch, Close Combat |
 
-## 374. Grunt — Mt Pyre Summit
+## 377. Grunt — Mt Pyre Summit
 
 **Optional · Double · Cap 60 · Demanding 48/100 · Uniqueness 77/100**
 
@@ -8915,7 +8979,7 @@ Carracosta and Liepard are the authored opening pair. The board plan is pivot co
 | 3 | Qwilfish | 58 (cap -2) | None | Intimidate | speed control | Waterfall, Poison Jab, Payback, Thunder Wave |
 | 4 | Drapion | 58 (cap -2) | Air Balloon | Sniper | setup attacker | Crunch, Swords Dance, Poison Jab, Toxic Spikes |
 
-## 375. Buffel — Lilycove City Cove Lily Motel 2 F
+## 378. Buffel — Lilycove City Cove Lily Motel 2 F
 
 **Optional · Double · Cap 60 · Brutal 77/100 · Uniqueness 79/100**
 
@@ -8940,7 +9004,7 @@ Mienshao and Milotic are the authored opening pair. The board plan is tailwind. 
 | 5 | Togekiss | 60 (cap +0) | Shell Bell | Serene Grace | speed control | Air Slash, Tailwind, Thunder Wave, Roost |
 | 6 | Gardevoir | 60 (cap +0) | Gardevoirite | Trace | Mega ace | Hyper Voice, Psyshock, Mystical Fire, Shadow Ball |
 
-## 376. Maxie — Magma Hideout 4 F
+## 379. Maxie — Magma Hideout 4 F
 
 **Required · Double · Cap 60 · Extreme 85/100 · Uniqueness 66/100**
 
@@ -8965,7 +9029,7 @@ Groudon and Lycanroc Dusk are the authored opening pair. The board plan is sleep
 | 5 | Victreebel | 61 (cap +1) | Life Orb | Chlorophyll | coverage attacker | Solar Blade, Poison Jab, Weather Ball, Sleep Powder |
 | 6 | Camerupt | 62 (cap +2) | Cameruptite | Anger Point | Mega ace | Earth Power, Fire Blast, Solar Beam, Protect |
 
-## 377. Tabitha — Magma Hideout 4 F
+## 380. Tabitha — Magma Hideout 4 F
 
 **Required · Double · Cap 60 · Brutal 78/100 · Uniqueness 66/100**
 
@@ -8990,7 +9054,7 @@ Gigalith and Darmanitan are the authored opening pair. The board plan is surf al
 | 5 | Dragapult | 61 (cap +1) | Focus Sash | Clear Body | protected attacker | Surf, Dragon Darts, Will O Wisp, Protect |
 | 6 | Gastrodon | 61 (cap +1) | Sitrus Berry | Storm Drain | protected attacker | Scald, Earth Power, Yawn, Protect |
 
-## 378. Courtney — Magma Hideout 4 F
+## 381. Courtney — Magma Hideout 4 F
 
 **Required · Double · Cap 60 · Extreme 83/100 · Uniqueness 81/100**
 
@@ -9015,7 +9079,7 @@ Ninetales and Krookodile are the authored opening pair. The board plan is fire p
 | 5 | Landorus | 61 (cap +1) | Life Orb | Sheer Force | protected attacker | Focus Blast, Rock Slide, Protect, Earth Power |
 | 6 | Chandelure | 61 (cap +1) | Choice Scarf | Flash Fire | Choice-locked breaker | Shadow Ball, Heat Wave, Trick, Hidden Power |
 
-## 379. Grunt — Magma Hideout 3 F 2 R
+## 382. Grunt — Magma Hideout 3 F 2 R
 
 **Optional · Double · Cap 60 · Demanding 47/100 · Uniqueness 80/100**
 
@@ -9038,7 +9102,7 @@ Cacturne and Pyroar are the authored opening pair. The board plan is dark mixed 
 | 3 | Palossand | 59 (cap -1) | None | Water Compaction | coverage attacker | Earth Power, Shadow Ball, Giga Drain, Shore Up |
 | 4 | Clefable | 59 (cap -1) | Life Orb | Magic Guard | redirection support | Light Screen, Dazzling Gleam, Protect, Follow Me |
 
-## 380. Grunt — Magma Hideout 2 F 1 R
+## 383. Grunt — Magma Hideout 2 F 1 R
 
 **Optional · Double · Cap 60 · Hard 54/100 · Uniqueness 77/100**
 
@@ -9061,7 +9125,7 @@ Liepard and Salazzle are the authored opening pair. The board plan is tailwind. 
 | 3 | Nidoqueen | 59 (cap -1) | None | Sheer Force | coverage attacker | Earth Power, Shadow Ball, Sludge Wave, Flamethrower |
 | 4 | Aerodactyl | 59 (cap -1) | Aerodactylite | Unnerve | Mega ace | Dual Wingbeat, Protect, Rock Slide, Tailwind |
 
-## 381. Grunt — Magma Hideout 2 F 2 R
+## 384. Grunt — Magma Hideout 2 F 2 R
 
 **Optional · Double · Cap 60 · Demanding 48/100 · Uniqueness 75/100**
 
@@ -9084,7 +9148,7 @@ Krookodile and Victreebel are the authored opening pair. The board plan is earth
 | 3 | Incineroar | 59 (cap -1) | None | Intimidate | coverage attacker | Darkest Lariat, Flare Blitz, Close Combat, Thunder Punch |
 | 4 | Lunatone | 59 (cap -1) | Sitrus Berry | Levitate | setup attacker | Psyshock, Shadow Ball, Calm Mind, Moonlight |
 
-## 382. Grunt — Magma Hideout 3 F 1 R
+## 385. Grunt — Magma Hideout 3 F 1 R
 
 **Optional · Double · Cap 60 · Hard 60/100 · Uniqueness 70/100**
 
@@ -9107,7 +9171,7 @@ Camerupt and Crobat are the authored opening pair. The board plan is earthquake 
 | 3 | Shiftry | 59 (cap -1) | None | Chlorophyll | coverage attacker | Sunny Day, Solar Blade, Heat Wave, Dark Pulse |
 | 4 | Blacephalon | 59 (cap -1) | Life Orb | Beast Boost | protected attacker | Shadow Ball, Fire Blast, Protect, Hidden Power |
 
-## 383. Grunt — Magma Hideout 1 F
+## 386. Grunt — Magma Hideout 1 F
 
 **Optional · Double · Cap 60 · Hard 50/100 · Uniqueness 73/100**
 
@@ -9130,7 +9194,7 @@ Swalot and Camerupt are the authored opening pair. The board plan is residual co
 | 3 | Persian (Alolan) | 59 (cap -1) | None | Fur Coat | setup attacker | Dark Pulse, Thunderbolt, Power Gem, Nasty Plot |
 | 4 | Liepard | 59 (cap -1) | Leftovers | Prankster | protected attacker | Protect, U Turn, Knock Off, Play Rough |
 
-## 384. Grunt — Magma Hideout 3 F 1 R
+## 387. Grunt — Magma Hideout 3 F 1 R
 
 **Optional · Double · Cap 60 · Hard 51/100 · Uniqueness 78/100**
 
@@ -9153,7 +9217,7 @@ Gliscor and Dustox are the authored opening pair. The board plan is earthquake i
 | 3 | Magmortar | 59 (cap -1) | None | Mega Launcher | coverage attacker | Fire Blast, Aura Sphere, Dark Pulse, Psychic |
 | 4 | Seismitoad | 59 (cap -1) | Life Orb | Water Absorb | coverage attacker | Sludge Wave, Stealth Rock, Surf, Earth Power |
 
-## 385. Grunt — Magma Hideout 2 F 1 R
+## 388. Grunt — Magma Hideout 2 F 1 R
 
 **Optional · Double · Cap 60 · Hard 55/100 · Uniqueness 83/100**
 
@@ -9176,7 +9240,7 @@ Claydol and Garbodor are the authored opening pair. The board plan is earthquake
 | 3 | Umbreon | 59 (cap -1) | None | Magic Guard | disruption and support | Payback, Curse, Moonlight, Toxic |
 | 4 | Arbok | 59 (cap -1) | Leftovers | Intimidate | setup attacker | Protect, Gunk Shot, Coil, Stomping Tantrum |
 
-## 386. Grunt — Magma Hideout 2 F 2 R
+## 389. Grunt — Magma Hideout 2 F 2 R
 
 **Optional · Double · Cap 60 · Hard 59/100 · Uniqueness 85/100**
 
@@ -9199,7 +9263,7 @@ Ariados and Heatran are the authored opening pair. The board plan is fake out te
 | 3 | Golurk | 59 (cap -1) | None | Iron Fist | coverage attacker | Earthquake, Shadow Punch, Heavy Slam, Close Combat |
 | 4 | Infernape | 59 (cap -1) | Focus Sash | Blaze | protected attacker | Overheat, Fake Out, Protect, Close Combat |
 
-## 387. Grunt — Magma Hideout 1 F
+## 390. Grunt — Magma Hideout 1 F
 
 **Optional · Double · Cap 60 · Hard 51/100 · Uniqueness 73/100**
 
@@ -9222,7 +9286,7 @@ Hippowdon and Sandslash are the authored opening pair. The board plan is ground 
 | 3 | Gastrodon | 59 (cap -1) | None | Sand Force | coverage attacker | Earth Power, Scald, Sludge Wave, Recover |
 | 4 | Kabuto | 59 (cap -1) | Focus Sash | Battle Armor | disruption and support | Rapid Spin, Waterfall, Hone Claws, Toxic |
 
-## 388. Grunt — Magma Hideout 2 F 1 R
+## 391. Grunt — Magma Hideout 2 F 1 R
 
 **Optional · Double · Cap 60 · Demanding 41/100 · Uniqueness 80/100**
 
@@ -9245,7 +9309,7 @@ Scrafty and Nidoking are the authored opening pair. The board plan is underused 
 | 3 | Magcargo | 59 (cap -1) | None | Magma Armor | setup attacker | Fire Blast, Stone Edge, Earth Power, Shell Smash |
 | 4 | Herdier | 59 (cap -1) | None | Intimidate | coverage attacker | Take Down, Bite, Odor Sleuth, Surf |
 
-## 389. Grunt — Magma Hideout 2 F 2 R
+## 392. Grunt — Magma Hideout 2 F 2 R
 
 **Optional · Double · Cap 60 · Hard 54/100 · Uniqueness 78/100**
 
@@ -9268,7 +9332,7 @@ Golem and Skuntank are the authored opening pair. The board plan is earthquake i
 | 3 | Weezing | 59 (cap -1) | None | Levitate | protected attacker | Sludge Bomb, Flamethrower, Toxic, Protect |
 | 4 | Larvesta | 59 (cap -1) | None | Flame Body | coverage attacker | Flare Blitz, Leech Life, Double Edge, Zen Headbutt |
 
-## 390. Grunt — Magma Hideout 2 F 1 R
+## 393. Grunt — Magma Hideout 2 F 1 R
 
 **Optional · Double · Cap 60 · Demanding 48/100 · Uniqueness 80/100**
 
@@ -9291,7 +9355,7 @@ Talonflame and Bisharp are the authored opening pair. The board plan is earthqua
 | 3 | Venomoth | 59 (cap -1) | None | Shield Dust | setup attacker | Bug Buzz, Psychic, Sleep Powder, Quiver Dance |
 | 4 | Dusknoir | 59 (cap -1) | Leftovers | Pressure | disruption and support | Will O Wisp, Ice Beam, Earthquake, Substitute |
 
-## 391. Grunt — Magma Hideout 2 F 2 R
+## 394. Grunt — Magma Hideout 2 F 2 R
 
 **Optional · Double · Cap 60 · Demanding 45/100 · Uniqueness 72/100**
 
@@ -9314,7 +9378,7 @@ Mightyena and Flygon are the authored opening pair. The board plan is earthquake
 | 3 | Drapion | 59 (cap -1) | None | Sniper | coverage attacker | Cross Poison, Night Slash, Earthquake, Focus Energy |
 | 4 | Floette | 59 (cap -1) | None | Flower Veil | disruption and support | Magical Leaf, Draining Kiss, Wish, Leech Seed |
 
-## 392. Grunt — Magma Hideout 4 F
+## 395. Grunt — Magma Hideout 4 F
 
 **Optional · Double · Cap 60 · Hard 52/100 · Uniqueness 79/100**
 
@@ -9337,7 +9401,7 @@ Mamoswine and Mandibuzz are the authored opening pair. The board plan is earthqu
 | 3 | Scolipede | 59 (cap -1) | None | Speed Boost | coverage attacker | Megahorn, Poison Jab, Earthquake, Rock Climb |
 | 4 | Delcatty | 59 (cap -1) | Leftovers | Wonder Skin | protected attacker | Fake Out, Protect, Helping Hand, Wild Charge |
 
-## 393. Grunt — Magma Hideout 4 F
+## 396. Grunt — Magma Hideout 4 F
 
 **Optional · Double · Cap 60 · Demanding 47/100 · Uniqueness 76/100**
 
@@ -9360,7 +9424,7 @@ Sableye and Torkoal are the authored opening pair. The board plan is underused d
 | 3 | Excadrill | 59 (cap -1) | None | Mold Breaker | coverage attacker | Earthquake, Iron Head, X Scissor, Rock Climb |
 | 4 | Persian | 59 (cap -1) | Sitrus Berry | Technician | setup attacker | Feint Attack, Swift, Power Gem, Nasty Plot |
 
-## 394. Grunt — Magma Hideout 4 F
+## 397. Grunt — Magma Hideout 4 F
 
 **Optional · Double · Cap 60 · Demanding 46/100 · Uniqueness 77/100**
 
@@ -9383,7 +9447,7 @@ Rhyperior and Amoonguss are the authored opening pair. The board plan is ground 
 | 3 | Pangoro | 59 (cap -1) | None | Iron Fist | coverage attacker | Close Combat, Crunch, Gunk Shot, Zen Headbutt |
 | 4 | Tauros | 59 (cap -1) | Life Orb | Sheer Force | coverage attacker | Body Slam, Earthquake, Throat Chop, Close Combat |
 
-## 395. Matt — Aqua Hideout B 2 F
+## 398. Matt — Aqua Hideout B 2 F
 
 **Required · Double · Cap 60 · Extreme 84/100 · Uniqueness 73/100**
 
@@ -9408,7 +9472,7 @@ Pelipper and Dhelmise are the authored opening pair. The board plan is earthquak
 | 5 | Seismitoad | 60 (cap +0) | Assault Vest | Swift Swim | coverage attacker | Liquidation, Earthquake, Power Whip, Ice Punch |
 | 6 | Gyarados | 62 (cap +2) | Gyaradosite | Intimidate | Mega ace | Waterfall, Crunch, Power Whip, Dragon Dance |
 
-## 396. Grunt — Aqua Hideout 1 F
+## 399. Grunt — Aqua Hideout 1 F
 
 **Optional · Double · Cap 60 · Demanding 46/100 · Uniqueness 78/100**
 
@@ -9431,7 +9495,7 @@ Tentacruel and Dhelmise are the authored opening pair. The board plan is poison 
 | 3 | Mightyena | 59 (cap -1) | None | Intimidate | coverage attacker | Sucker Punch, Play Rough, Swagger, Fire Fang |
 | 4 | Poipole | 59 (cap -1) | Eviolite | Beast Boost | protected attacker | Sludge Bomb, Dragon Pulse, Helping Hand, Protect |
 
-## 397. Grunt — Aqua Hideout B 2 F
+## 400. Grunt — Aqua Hideout B 2 F
 
 **Optional · Double · Cap 60 · Demanding 41/100 · Uniqueness 81/100**
 
@@ -9454,7 +9518,7 @@ Golbat and Clawitzer are the authored opening pair. The board plan is poison mix
 | 3 | Muk (Alolan) | 58 (cap -2) | None | Poison Touch | disruption and support | Poison Jab, Crunch, Disable, Minimize |
 | 4 | Eelektross | 58 (cap -2) | None | Levitate | coverage attacker | Wild Charge, Crunch, Aqua Tail, Dragon Claw |
 
-## 398. Grunt — Aqua Hideout B 2 F
+## 401. Grunt — Aqua Hideout B 2 F
 
 **Optional · Double · Cap 60 · Hard 57/100 · Uniqueness 80/100**
 
@@ -9477,7 +9541,7 @@ Toxicroak and Toxapex are the authored opening pair. The board plan is schooling
 | 3 | Wishiwashi | 59 (cap -1) | Sitrus Berry | Schooling | protected attacker | Water Spout, Ice Beam, Earthquake, Protect |
 | 4 | Basculin Blue Striped | 59 (cap -1) | Choice Band | Adaptability | Choice-locked breaker | Aqua Jet, Waterfall, Superpower, Crunch |
 
-## 399. Grunt — Aqua Hideout B 2 F
+## 402. Grunt — Aqua Hideout B 2 F
 
 **Optional · Double · Cap 60 · Demanding 48/100 · Uniqueness 81/100**
 
@@ -9500,7 +9564,7 @@ Relicanth and Pangoro are the authored opening pair. The board plan is earthquak
 | 3 | Vileplume | 59 (cap -1) | None | Chlorophyll | disruption and support | Giga Drain, Sleep Powder, Sludge Bomb, Synthesis |
 | 4 | Misdreavus | 59 (cap -1) | Life Orb | Levitate | setup attacker | Thunderbolt, Hidden Power, Shadow Ball, Nasty Plot |
 
-## 400. Grunt — Aqua Hideout B 1 F
+## 403. Grunt — Aqua Hideout B 1 F
 
 **Optional · Double · Cap 60 · Demanding 49/100 · Uniqueness 78/100**
 
@@ -9523,7 +9587,7 @@ Sharpedo and Dragalge are the authored opening pair. The board plan is poison pr
 | 3 | Muk | 59 (cap -1) | None | Poison Touch | coverage attacker | Shadow Sneak, Gunk Shot, Fire Punch, Ice Punch |
 | 4 | Haunter | 59 (cap -1) | Choice Scarf | Levitate | Choice-locked breaker | Disable, Shadow Ball, Substitute, Trick |
 
-## 401. Grunt — Aqua Hideout B 1 F
+## 404. Grunt — Aqua Hideout B 1 F
 
 **Optional · Double · Cap 60 · Hard 57/100 · Uniqueness 85/100**
 
@@ -9546,7 +9610,7 @@ Seismitoad and Urshifu (Rapid Strike) are the authored opening pair. The board p
 | 3 | Scrafty | 59 (cap -1) | None | Shed Skin | setup attacker | Crunch, Drain Punch, Bulk Up, Rest |
 | 4 | Drednaw | 59 (cap -1) | White Herb | Shell Armor | setup attacker | Protect, Shell Smash, Liquidation, Rock Slide |
 
-## 402. Grunt — Aqua Hideout B 1 F
+## 405. Grunt — Aqua Hideout B 1 F
 
 **Optional · Double · Cap 60 · Demanding 47/100 · Uniqueness 56/100**
 
@@ -9569,7 +9633,7 @@ Walrein and Floatzel are the authored opening pair. The board plan is underused 
 | 3 | Malamar | 59 (cap -1) | None | Contrary | coverage attacker | Throat Chop, Psycho Cut, Superpower, Topsy Turvy |
 | 4 | Murkrow | 59 (cap -1) | Leftovers | Insomnia | speed control | Sucker Punch, Hidden Power, Thunder Wave, Substitute |
 
-## 403. Grunt — Aqua Hideout B 1 F
+## 406. Grunt — Aqua Hideout B 1 F
 
 **Optional · Double · Cap 60 · Demanding 43/100 · Uniqueness 83/100**
 
@@ -9592,7 +9656,7 @@ Cloyster and Kingler are the authored opening pair. The board plan is underused 
 | 3 | Skuntank | 59 (cap -1) | None | Stench | coverage attacker | Fire Blast, Dark Pulse, Sludge Bomb, Sucker Punch |
 | 4 | Thievul | 59 (cap -1) | Leftovers | Stakeout | setup attacker | Grass Knot, Nasty Plot, Parting Shot, Dark Pulse |
 
-## 404. Spencer — Route 124
+## 407. Spencer — Route 124
 
 **Optional · Single · Cap 60 · Demanding 40/100 · Uniqueness 58/100**
 
@@ -9613,7 +9677,7 @@ Tentacruel opens this deliberate singles fight. The roster is built as tailwind.
 | 1 | Tentacruel | 58 (cap -2) | None | Clear Body | coverage attacker | Hydro Pump, Poison Jab, Mirror Coat, Knock Off |
 | 2 | Pelipper | 58 (cap -2) | None | Keen Eye | speed control | Air Slash, Hydro Pump, Shock Wave, Tailwind |
 
-## 405. Roland — Route 124
+## 408. Roland — Route 124
 
 **Optional · Single · Cap 60 · Demanding 36/100 · Uniqueness 72/100**
 
@@ -9634,7 +9698,7 @@ Octillery opens this deliberate singles fight. The roster is built as water mixe
 | 1 | Octillery | 58 (cap -2) | None | Moody | coverage attacker | Octazooka, Flamethrower, Ice Beam, Recover |
 | 2 | Clawitzer | 58 (cap -2) | None | Mega Launcher | coverage attacker | Water Pulse, Dark Pulse, Aura Sphere, Aqua Jet |
 
-## 406. Jenny — Route 124
+## 409. Jenny — Route 124
 
 **Optional · Single · Cap 60 · Demanding 47/100 · Uniqueness 65/100**
 
@@ -9656,7 +9720,7 @@ Wailord opens this deliberate singles fight. The roster is built as water pressu
 | 2 | Starmie | 57 (cap -3) | None | Illuminate | coverage attacker | Psychic, Hydro Pump, Power Gem, Recover |
 | 3 | Primarina | 57 (cap -3) | None | Torrent | speed control | Sparkling Aria, Moonblast, Hyper Voice, Icy Wind |
 
-## 407. Grace — Route 124
+## 410. Grace — Route 124
 
 **Optional · Double · Cap 60 · Demanding 42/100 · Uniqueness 80/100**
 
@@ -9679,7 +9743,7 @@ Lanturn and Gorebyss are the authored opening pair. The board plan is water pres
 | 3 | Charjabug | 58 (cap -2) | None | Battery | coverage attacker | X Scissor, Wild Charge, Crunch, Acrobatics |
 | 4 | Palpitoad | 58 (cap -2) | Life Orb | Water Absorb | coverage attacker | Stealth Rock, Hidden Power, Hydro Pump, Earth Power |
 
-## 408. Chad — Route 124
+## 411. Chad — Route 124
 
 **Optional · Single · Cap 60 · Demanding 41/100 · Uniqueness 72/100**
 
@@ -9701,7 +9765,7 @@ Stoutland opens this deliberate singles fight. The roster is built as surf ally 
 | 2 | Jellicent | 57 (cap -3) | None | Water Absorb | coverage attacker | Water Spout, Shadow Ball, Giga Drain, Recover |
 | 3 | Lumineon | 57 (cap -3) | None | Swift Swim | setup attacker | Surf, Air Slash, Signal Beam, Quiver Dance |
 
-## 409. Lila & Roy — Route 124
+## 412. Lila & Roy — Route 124
 
 **Optional · Double · Cap 60 · Hard 55/100 · Uniqueness 81/100**
 
@@ -9724,7 +9788,7 @@ Gastrodon East Sea and Lanturn are the authored opening pair. The board plan is 
 | 3 | Nidorina | 60 (cap +0) | Focus Sash | Poison Point | disruption and support | Toxic Spikes, Crunch, Hone Claws, Double Kick |
 | 4 | Druddigon | 60 (cap +0) | Sitrus Berry | Mold Breaker | speed control | Scale Shot, Glare, Protect, Sucker Punch |
 
-## 410. Declan — Route 124
+## 413. Declan — Route 124
 
 **Optional · Single · Cap 60 · Demanding 38/100 · Uniqueness 66/100**
 
@@ -9745,7 +9809,7 @@ Gyarados opens this deliberate singles fight. The roster is built as water mixed
 | 1 | Gyarados | 58 (cap -2) | None | Intimidate | coverage attacker | Waterfall, Crunch, Bounce, Outrage |
 | 2 | Dewgong | 58 (cap -2) | None | Fur Coat | coverage attacker | Ice Beam, Aqua Tail, Fake Out, Encore |
 
-## 411. Isabella — Route 124
+## 414. Isabella — Route 124
 
 **Optional · Single · Cap 60 · Introductory 34/100 · Uniqueness 67/100**
 
@@ -9766,7 +9830,7 @@ Mantine opens this deliberate singles fight. The roster is built as underused wa
 | 1 | Mantine | 58 (cap -2) | None | Swift Swim | coverage attacker | Air Slash, Scald, Signal Beam, Roost |
 | 2 | Azumarill | 58 (cap -2) | None | Huge Power | coverage attacker | Aqua Tail, Play Rough, Superpower, Aqua Jet |
 
-## 412. Nolen — Route 125
+## 415. Nolen — Route 125
 
 **Optional · Single · Cap 60 · Demanding 43/100 · Uniqueness 73/100**
 
@@ -9788,7 +9852,7 @@ Poliwrath opens this deliberate singles fight. The roster is built as schooling 
 | 2 | Wishiwashi | 57 (cap -3) | None | Schooling | rare centerpiece | Liquidation, Double Edge, Aqua Ring, Endeavor |
 | 3 | Raichu | 57 (cap -3) | None | Static | speed control | Thunderbolt, Surf, Extreme Speed, Nuzzle |
 
-## 413. Stan — Route 125
+## 416. Stan — Route 125
 
 **Optional · Double · Cap 60 · Hard 51/100 · Uniqueness 81/100**
 
@@ -9811,7 +9875,7 @@ Kingdra and Bibarel are the authored opening pair. The board plan is water press
 | 3 | Goodra | 58 (cap -2) | Assault Vest | Poison Heal | coverage attacker | Dragon Pulse, Sludge Wave, Flamethrower, Thunderbolt |
 | 4 | Seadra | 58 (cap -2) | Leftovers | Poison Point | disruption and support | Agility, Ice Beam, Hydro Pump, Substitute |
 
-## 414. Tanya — Route 125
+## 417. Tanya — Route 125
 
 **Optional · Double · Cap 60 · Hard 55/100 · Uniqueness 71/100**
 
@@ -9834,7 +9898,7 @@ Luvdisc and Alomomola are the authored opening pair. The board plan is surf ally
 | 3 | Vaporeon | 57 (cap -3) | None | Water Absorb | disruption and support | Surf, Ice Beam, Yawn, Wish |
 | 4 | Empoleon | 57 (cap -3) | Sitrus Berry | Competitive | speed control | Hydro Pump, Icy Wind, Protect, Flash Cannon |
 
-## 415. Sharon — Route 125
+## 418. Sharon — Route 125
 
 **Optional · Double · Cap 60 · Demanding 45/100 · Uniqueness 70/100**
 
@@ -9857,7 +9921,7 @@ Seaking and Slowbro are the authored opening pair. The board plan is water press
 | 3 | Bruxish | 58 (cap -2) | Sitrus Berry | Strong Jaw | setup attacker | Psychic Fangs, Aqua Jet, Swords Dance, Protect |
 | 4 | Dragonair | 58 (cap -2) | None | Marvel Scale | coverage attacker | Extreme Speed, Aqua Jet, Iron Tail, Dragon Rush |
 
-## 416. Ernest — Route 125
+## 419. Ernest — Route 125
 
 **Optional · Single · Cap 60 · Demanding 41/100 · Uniqueness 70/100**
 
@@ -9879,7 +9943,7 @@ Conkeldurr opens this deliberate singles fight. The roster is built as priority 
 | 2 | Golisopod | 57 (cap -3) | None | Emergency Exit | coverage attacker | Liquidation, First Impression, Close Combat, Aqua Jet |
 | 3 | Kangaskhan | 57 (cap -3) | None | Early Bird | coverage attacker | Crush Claw, Sucker Punch, Hammer Arm, Fire Punch |
 
-## 417. Kim & Iris — Route 125
+## 420. Kim & Iris — Route 125
 
 **Optional · Double · Cap 60 · Demanding 47/100 · Uniqueness 77/100**
 
@@ -9902,7 +9966,7 @@ Altaria and Rhyperior are the authored opening pair. The board plan is earthquak
 | 3 | Cryogonal | 58 (cap -2) | None | Levitate | coverage attacker | Ice Beam, Power Gem, Water Pulse, Confuse Ray |
 | 4 | Rotom Wash | 58 (cap -2) | None | Levitate | coverage attacker | Hydro Pump, Thunderbolt, Will O Wisp, Shadow Ball |
 
-## 418. Presley — Route 125
+## 421. Presley — Route 125
 
 **Optional · Single · Cap 60 · Demanding 39/100 · Uniqueness 65/100**
 
@@ -9923,7 +9987,7 @@ Staraptor opens this deliberate singles fight. The roster is built as pivot cont
 | 1 | Staraptor | 58 (cap -2) | None | Intimidate | coverage attacker | Double Edge, Brave Bird, Close Combat, U Turn |
 | 2 | Gliscor | 58 (cap -2) | None | Hyper Cutter | disruption and support | Rock Slide, Wing Attack, Toxic, Roost |
 
-## 419. Auron — Route 125
+## 422. Auron — Route 125
 
 **Optional · Double · Cap 60 · Hard 59/100 · Uniqueness 73/100**
 
@@ -9946,32 +10010,7 @@ Manectric and Lucario are the authored opening pair. The board plan is active sp
 | 3 | Vaporeon | 59 (cap -1) | Leftovers | Water Absorb | disruption and support | Toxic, Acid Armor, Scald, Ice Beam |
 | 4 | Corsola | 59 (cap -1) | Leftovers | Natural Cure | disruption and support | Power Gem, Stealth Rock, Scald, Toxic |
 
-## 420. Cynthia — Mossdeep City House 1
-
-**Optional · Double · Cap 60 · Extreme 85/100 · Uniqueness 73/100**
-
-**Theme:** Earthquake immunity
-
-Roserade and Togekiss are the authored opening pair. The board plan is earthquake immunity. The composition turns this point in the campaign into the fight's identity instead of using a generic route-trainer core. Garchomp carries the team's one Mega slot.
-
-**How it behaves:** The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe, Smart Switching. Expect it to preserve earthquake immunity rather than select six unrelated strong attacks.
-
-**Why it is hard:** 6 fully authored Pokémon, average BST 543.7, average cap offset +5.33, ace offset +7, and 100% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Wally (33% species overlap). Its species appear across an average of 6.3 unrelated trainer families.
-
-**Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Roserade | 65 (cap +5) | Focus Sash | Natural Cure | disruption and support | Sleep Powder, Sludge Bomb, Giga Drain, Spikes |
-| 2 | Togekiss | 65 (cap +5) | Shell Bell | Serene Grace | speed control | Air Slash, Aura Sphere, Thunder Wave, Roost |
-| 3 | Spiritomb | 65 (cap +5) | Leftovers | Pressure | setup attacker | Dark Pulse, Calm Mind, Substitute, Recover |
-| 4 | Lucario | 65 (cap +5) | Choice Scarf | Steadfast | Choice-locked breaker | Close Combat, Meteor Mash, Strength, Ice Punch |
-| 5 | Milotic | 65 (cap +5) | Leftovers | Multiscale | coverage attacker | Scald, Ice Beam, Recover, Mirror Coat |
-| 6 | Garchomp | 67 (cap +7) | Garchompite | Rough Skin | Mega ace | Earthquake, Draco Meteor, Stone Edge, Fire Blast |
-
-## 421. Tate&Liza — Mossdeep City Gym
+## 423. Tate&Liza — Mossdeep City Gym
 
 **Required · Double · Cap 60 · Extreme 95/100 · Uniqueness 74/100**
 
@@ -9996,7 +10035,7 @@ Tapu Lele and Cresselia are the authored opening pair. The board plan is psychic
 | 5 | Victini | 61 (cap +1) | Weakness Policy | Victory Star | protected attacker | V Create, Zen Headbutt, Bolt Strike, Protect |
 | 6 | Calyrex (Ice Rider) | 62 (cap +2) | Life Orb | As One (Ice Rider) | protected attacker | Glacial Lance, High Horsepower, Zen Headbutt, Protect |
 
-## 422. Preston — Mossdeep City Gym
+## 424. Preston — Mossdeep City Gym
 
 **Optional · Double · Cap 60 · Hard 62/100 · Uniqueness 86/100**
 
@@ -10019,7 +10058,7 @@ Slowking and Alakazam are the authored opening pair. The board plan is psychic p
 | 3 | Jirachi | 58 (cap -2) | Sitrus Berry | Serene Grace | redirection support | Iron Head, Follow Me, Protect, Body Slam |
 | 4 | Deoxys Attack | 58 (cap -2) | Life Orb | Pressure | protected attacker | Protect, Knock Off, Psycho Boost, Extreme Speed |
 
-## 423. Virgil — Mossdeep City Gym
+## 425. Virgil — Mossdeep City Gym
 
 **Optional · Double · Cap 60 · Brutal 67/100 · Uniqueness 52/100**
 
@@ -10042,7 +10081,7 @@ Medicham and Bronzong are the authored opening pair. The board plan is fake out 
 | 3 | Dusclops | 58 (cap -2) | Eviolite | Frisk | speed control | Trick Room, Bulldoze, Will O Wisp, Helping Hand |
 | 4 | Rhyperior | 58 (cap -2) | Weakness Policy | Solid Rock | protected attacker | Rock Slide, High Horsepower, Heavy Slam, Protect |
 
-## 424. Blake — Mossdeep City Gym
+## 426. Blake — Mossdeep City Gym
 
 **Optional · Double · Cap 60 · Hard 58/100 · Uniqueness 82/100**
 
@@ -10065,7 +10104,7 @@ Girafarig and Meowstic Female are the authored opening pair. The board plan is p
 | 3 | Cosmog | 58 (cap -2) | Eviolite | Unaware | rare centerpiece | Cosmic Power, Teleport, Splash, Protect |
 | 4 | Mr Mime | 58 (cap -2) | Leftovers | Technician | speed control | Thunderbolt, Icy Wind, Protect, Thunder Wave |
 
-## 425. Hannah — Mossdeep City Gym
+## 427. Hannah — Mossdeep City Gym
 
 **Optional · Double · Cap 60 · Hard 61/100 · Uniqueness 89/100**
 
@@ -10088,7 +10127,7 @@ Bruxish and Malamar are the authored opening pair. The board plan is psychic pre
 | 3 | Cosmoem | 58 (cap -2) | Eviolite | Sturdy | rare centerpiece | Cosmic Power, Psychic, Teleport, Protect |
 | 4 | Azelf | 58 (cap -2) | Expert Belt | Levitate | rare centerpiece | Psychic, Fire Blast, Thunderbolt, Explosion |
 
-## 426. Samantha — Mossdeep City Gym
+## 428. Samantha — Mossdeep City Gym
 
 **Optional · Double · Cap 60 · Hard 64/100 · Uniqueness 85/100**
 
@@ -10111,7 +10150,7 @@ Xatu and Gardevoir are the authored opening pair. The board plan is psychic pres
 | 3 | Magearna | 58 (cap -2) | Life Orb | Soul Heart | speed control | Fleur Cannon, Trick Room, Protect, Flash Cannon |
 | 4 | Mesprit | 58 (cap -2) | Choice Scarf | Levitate | Choice-locked breaker | U Turn, Ice Beam, Psychic, Trick |
 
-## 427. Maura — Mossdeep City Gym
+## 429. Maura — Mossdeep City Gym
 
 **Optional · Double · Cap 60 · Brutal 70/100 · Uniqueness 93/100**
 
@@ -10134,7 +10173,7 @@ Beheeyem and Espeon are the authored opening pair. The board plan is psychic pre
 | 3 | Uxie | 60 (cap +0) | Sitrus Berry | Levitate | rare centerpiece | Stealth Rock, Yawn, U Turn, Protect |
 | 4 | Calyrex | 60 (cap +0) | Mental Herb | Unnerve | speed control | Trick Room, Psychic, Helping Hand, Pollen Puff |
 
-## 428. Sylvia — Mossdeep City Gym
+## 430. Sylvia — Mossdeep City Gym
 
 **Optional · Double · Cap 60 · Brutal 69/100 · Uniqueness 70/100**
 
@@ -10157,7 +10196,7 @@ Oranguru and Gothitelle are the authored opening pair. The board plan is trick r
 | 3 | Torkoal | 60 (cap +0) | Charcoal | Drought | protected attacker | Eruption, Heat Wave, Earth Power, Protect |
 | 4 | Drampa | 60 (cap +0) | Life Orb | Berserk | protected attacker | Hyper Voice, Draco Meteor, Flamethrower, Protect |
 
-## 429. Nate — Mossdeep City Gym
+## 431. Nate — Mossdeep City Gym
 
 **Optional · Double · Cap 60 · Hard 57/100 · Uniqueness 78/100**
 
@@ -10180,7 +10219,7 @@ Grumpig and Starmie are the authored opening pair. The board plan is psychic pre
 | 3 | Necrozma | 58 (cap -2) | Life Orb | Prism Armor | setup attacker | Earthquake, Swords Dance, Photon Geyser, Knock Off |
 | 4 | Meowstic Female | 58 (cap -2) | Expert Belt | Sheer Force | coverage attacker | Psychic, Shadow Ball, Signal Beam, Energy Ball |
 
-## 430. Macey — Mossdeep City Gym
+## 432. Macey — Mossdeep City Gym
 
 **Optional · Double · Cap 60 · Hard 64/100 · Uniqueness 71/100**
 
@@ -10203,7 +10242,7 @@ Jynx and Delphox are the authored opening pair. The board plan is psychic pressu
 | 3 | Reuniclus | 58 (cap -2) | Life Orb | Magic Guard | speed control | Protect, Psychic, Trick Room, Focus Blast |
 | 4 | Grumpig | 58 (cap -2) | Sitrus Berry | Thick Fat | speed control | Thunder Wave, Protect, Psychic, Taunt |
 
-## 431. Clifford — Mossdeep City Gym
+## 433. Clifford — Mossdeep City Gym
 
 **Optional · Double · Cap 60 · Brutal 66/100 · Uniqueness 88/100**
 
@@ -10226,7 +10265,7 @@ Raichu (Alolan) and Mr Mime are the authored opening pair. The board plan is ele
 | 3 | Pincurchin | 60 (cap +0) | Terrain Extender | Electric Surge | protected attacker | Electric Terrain, Thunderbolt, Sucker Punch, Protect |
 | 4 | Tapu Koko | 60 (cap +0) | Life Orb | Telepathy | protected attacker | Thunderbolt, Dazzling Gleam, Volt Switch, Protect |
 
-## 432. Nicholas — Mossdeep City Gym
+## 434. Nicholas — Mossdeep City Gym
 
 **Optional · Double · Cap 60 · Brutal 68/100 · Uniqueness 73/100**
 
@@ -10249,7 +10288,7 @@ Musharna and Wobbuffet are the authored opening pair. The board plan is psychic 
 | 3 | Hatterene | 60 (cap +0) | Life Orb | Magic Bounce | speed control | Protect, Trick Room, Dazzling Gleam, Psychic |
 | 4 | Indeedee Female | 60 (cap +0) | Sitrus Berry | Psychic Surge | redirection support | Protect, Follow Me, Expanding Force, Heal Pulse |
 
-## 433. Kathleen — Mossdeep City Gym
+## 435. Kathleen — Mossdeep City Gym
 
 **Optional · Double · Cap 60 · Hard 60/100 · Uniqueness 80/100**
 
@@ -10272,7 +10311,7 @@ Hypno and Swoobat are the authored opening pair. The board plan is residual cont
 | 3 | Slurpuff | 58 (cap -2) | Leftovers | Sweet Veil | protected attacker | Protect, Return, Flamethrower, Surf |
 | 4 | Comfey | 58 (cap -2) | Big Root | Triage | disruption and support | Draining Kiss, Giga Drain, Leech Seed, Synthesis |
 
-## 434. Barry — Route 126
+## 436. Barry — Route 126
 
 **Optional · Single · Cap 60 · Demanding 39/100 · Uniqueness 69/100**
 
@@ -10293,7 +10332,7 @@ Swampert opens this deliberate singles fight. The roster is built as ground mixe
 | 1 | Swampert | 58 (cap -2) | None | Torrent | coverage attacker | Aqua Tail, Earthquake, Avalanche, Rock Slide |
 | 2 | Gogoat | 58 (cap -2) | None | Sap Sipper | coverage attacker | Surf, Horn Leech, Earthquake, Milk Drink |
 
-## 435. Dean — Route 126
+## 437. Dean — Route 126
 
 **Optional · Single · Cap 60 · Demanding 46/100 · Uniqueness 72/100**
 
@@ -10315,7 +10354,7 @@ Haxorus opens this deliberate singles fight. The roster is built as rain engine.
 | 2 | Ludicolo | 58 (cap -2) | None | Swift Swim | disruption and support | Giga Drain, Surf, Leech Seed, Rain Dance |
 | 3 | Quagsire | 58 (cap -2) | None | Damp | disruption and support | Liquidation, Earthquake, Recover, Toxic |
 
-## 436. Nikki — Route 126
+## 438. Nikki — Route 126
 
 **Optional · Double · Cap 60 · Demanding 48/100 · Uniqueness 78/100**
 
@@ -10338,7 +10377,7 @@ Lapras and Audino are the authored opening pair. The board plan is surf ally act
 | 3 | Zweilous | 58 (cap -2) | Choice Scarf | Hustle | Choice-locked breaker | Outrage, Crunch, Head Smash, Superpower |
 | 4 | Mamoswine | 58 (cap -2) | Life Orb | Thick Fat | protected attacker | Icicle Crash, High Horsepower, Protect, Ice Shard |
 
-## 437. Brenda — Route 126
+## 439. Brenda — Route 126
 
 **Optional · Double · Cap 60 · Demanding 43/100 · Uniqueness 75/100**
 
@@ -10361,7 +10400,7 @@ Seaking and Raichu are the authored opening pair. The board plan is water mixed 
 | 3 | Glaceon | 57 (cap -3) | Leftovers | Snow Cloak | protected attacker | Wish, Shadow Ball, Hidden Power, Protect |
 | 4 | Octillery | 57 (cap -3) | Leftovers | Suction Cups | protected attacker | Energy Ball, Ice Beam, Protect, Hydro Pump |
 
-## 438. Leonardo — Route 126
+## 440. Leonardo — Route 126
 
 **Optional · Double · Cap 60 · Demanding 43/100 · Uniqueness 80/100**
 
@@ -10384,7 +10423,7 @@ Floatzel and Barbaracle are the authored opening pair. The board plan is residua
 | 3 | Dragalge | 58 (cap -2) | Sitrus Berry | Adaptability | protected attacker | Focus Blast, Draco Meteor, Protect, Sludge Bomb |
 | 4 | Vullaby | 58 (cap -2) | Leftovers | Big Pecks | disruption and support | Toxic, Roost, Knock Off, Taunt |
 
-## 439. Isobel — Route 126
+## 441. Isobel — Route 126
 
 **Optional · Single · Cap 60 · Demanding 37/100 · Uniqueness 70/100**
 
@@ -10405,7 +10444,7 @@ Beartic opens this deliberate singles fight. The roster is built as fighting mix
 | 1 | Beartic | 58 (cap -2) | None | Snow Cloak | coverage attacker | Icicle Crash, Close Combat, Play Rough, Surf |
 | 2 | Swanna | 58 (cap -2) | None | Competitive | coverage attacker | Brave Bird, Hydro Pump, Steel Wing, Roost |
 
-## 440. Sienna — Route 126
+## 442. Sienna — Route 126
 
 **Optional · Single · Cap 60 · Demanding 46/100 · Uniqueness 72/100**
 
@@ -10427,7 +10466,7 @@ Huntail opens this deliberate singles fight. The roster is built as surf ally ac
 | 2 | Whiscash | 58 (cap -2) | None | Adaptability | setup attacker | Aqua Tail, Zen Headbutt, Earthquake, Dragon Dance |
 | 3 | Politoed | 58 (cap -2) | None | Water Absorb | coverage attacker | Surf, Hyper Voice, Sing, Mud Shot |
 
-## 441. Pablo — Route 126
+## 443. Pablo — Route 126
 
 **Optional · Single · Cap 60 · Demanding 46/100 · Uniqueness 78/100**
 
@@ -10449,7 +10488,7 @@ Kabutops opens this deliberate singles fight. The roster is built as water press
 | 2 | Golduck | 57 (cap -3) | None | Swift Swim | coverage attacker | Hydro Pump, Zen Headbutt, Cross Chop, Hone Claws |
 | 3 | Qwilfish | 57 (cap -3) | None | Swift Swim | setup attacker | Waterfall, Poison Jab, Swords Dance, Explosion |
 
-## 442. Camden — Route 127
+## 444. Camden — Route 127
 
 **Optional · Single · Cap 60 · Demanding 41/100 · Uniqueness 78/100**
 
@@ -10471,7 +10510,7 @@ Klinklang opens this deliberate singles fight. The roster is built as discharge 
 | 2 | Greninja | 57 (cap -3) | None | Torrent | coverage attacker | Water Shuriken, Scald, Ice Beam, Grass Knot |
 | 3 | Emolga | 57 (cap -3) | None | Static | coverage attacker | Acrobatics, Discharge, Energy Ball, Eerie Impulse |
 
-## 443. Donny — Route 127
+## 445. Donny — Route 127
 
 **Optional · Double · Cap 60 · Demanding 44/100 · Uniqueness 84/100**
 
@@ -10494,7 +10533,7 @@ Yanmega and Blastoise are the authored opening pair. The board plan is residual 
 | 3 | Glastrier | 58 (cap -2) | Assault Vest | Chilling Neigh | rare centerpiece | Icicle Crash, High Horsepower, Close Combat, Heavy Slam |
 | 4 | Pyukumuku | 58 (cap -2) | None | Innards Out | disruption and support | Recover, Counter, Soak, Toxic |
 
-## 444. Jonah — Route 127
+## 446. Jonah — Route 127
 
 **Optional · Single · Cap 60 · Demanding 36/100 · Uniqueness 60/100**
 
@@ -10515,7 +10554,7 @@ Corsola opens this deliberate singles fight. The roster is built as underused wa
 | 1 | Corsola | 58 (cap -2) | None | Serene Grace | coverage attacker | Recover, Mirror Coat, Power Gem, Scald |
 | 2 | Toxapex | 58 (cap -2) | None | Merciless | disruption and support | Toxic, Venoshock, Recover, Venom Drench |
 
-## 445. Henry — Route 127
+## 447. Henry — Route 127
 
 **Optional · Double · Cap 60 · Demanding 49/100 · Uniqueness 76/100**
 
@@ -10538,7 +10577,7 @@ Tentacruel and Jellicent are the authored opening pair. The board plan is residu
 | 3 | Chatot | 58 (cap -2) | Life Orb | Keen Eye | setup attacker | Boomburst, Nasty Plot, Hyper Voice, Heat Wave |
 | 4 | Fletchinder | 58 (cap -2) | Flying Gem | Gale Wings | coverage attacker | Flame Charge, Acrobatics, Steel Wing, Roost |
 
-## 446. Roger — Route 127
+## 448. Roger — Route 127
 
 **Optional · Double · Cap 60 · Hard 51/100 · Uniqueness 85/100**
 
@@ -10561,7 +10600,7 @@ Crawdaunt and Pyukumuku are the authored opening pair. The board plan is water p
 | 3 | Kingler | 58 (cap -2) | Kinglerite | Sheer Force | Mega ace | Rock Slide, Crabhammer, Substitute, Agility |
 | 4 | Crabominable | 58 (cap -2) | Life Orb | Iron Fist | protected attacker | Drain Punch, Ice Hammer, Mach Punch, Protect |
 
-## 447. Aidan — Route 127
+## 449. Aidan — Route 127
 
 **Optional · Single · Cap 60 · Demanding 43/100 · Uniqueness 75/100**
 
@@ -10582,7 +10621,7 @@ Pidgeot opens this deliberate singles fight. The roster is built as sun engine. 
 | 1 | Pidgeot | 58 (cap -2) | None | No Guard | coverage attacker | Hyper Voice, Hurricane, Heat Wave, Work Up |
 | 2 | Talonflame | 58 (cap -2) | None | Gale Wings | coverage attacker | Brave Bird, Flare Blitz, Sunny Day, Solar Beam |
 
-## 448. Athena — Route 127
+## 450. Athena — Route 127
 
 **Optional · Double · Cap 60 · Hard 54/100 · Uniqueness 82/100**
 
@@ -10605,7 +10644,7 @@ Infernape and Accelgor are the authored opening pair. The board plan is fighting
 | 3 | Pheromosa | 58 (cap -2) | Focus Sash | Beast Boost | protected attacker | Close Combat, Ice Beam, U Turn, Protect |
 | 4 | Swanna | 58 (cap -2) | Water Gem | Competitive | setup attacker | Hydro Pump, Hurricane, Ice Beam, Quiver Dance |
 
-## 449. Koji — Route 127
+## 451. Koji — Route 127
 
 **Optional · Double · Cap 60 · Demanding 49/100 · Uniqueness 76/100**
 
@@ -10628,7 +10667,7 @@ Hariyama and Aggron are the authored opening pair. The board plan is earthquake 
 | 3 | Basculin | 58 (cap -2) | None | Reckless | coverage attacker | Aqua Tail, Crunch, Double Edge, Head Smash |
 | 4 | Togekiss | 58 (cap -2) | Sitrus Berry | Serene Grace | redirection support | Follow Me, Dazzling Gleam, Protect, Air Slash |
 
-## 450. Isaiah — Route 128
+## 452. Isaiah — Route 128
 
 **Optional · Single · Cap 60 · Demanding 35/100 · Uniqueness 77/100**
 
@@ -10649,7 +10688,7 @@ Dodrio opens this deliberate singles fight. The roster is built as flying mixed 
 | 1 | Dodrio | 58 (cap -2) | None | Moxie | coverage attacker | Brave Bird, Double Edge, Jump Kick, Knock Off |
 | 2 | Jolteon | 58 (cap -2) | None | Volt Absorb | coverage attacker | Electro Ball, Aurora Beam, Shadow Ball, Agility |
 
-## 451. Katelyn — Route 128
+## 453. Katelyn — Route 128
 
 **Optional · Double · Cap 60 · Demanding 41/100 · Uniqueness 82/100**
 
@@ -10672,7 +10711,7 @@ Fearow and Zebstrika are the authored opening pair. The board plan is underused 
 | 3 | Butterfree | 58 (cap -2) | Sitrus Berry | Compound Eyes | setup attacker | Hurricane, Pollen Puff, Protect, Quiver Dance |
 | 4 | Corsola (Galarian) | 58 (cap -2) | Eviolite | Cursed Body | disruption and support | Haze, Night Shade, Strength Sap, Will O Wisp |
 
-## 452. Alexa — Route 128
+## 454. Alexa — Route 128
 
 **Optional · Double · Cap 60 · Brutal 75/100 · Uniqueness 86/100**
 
@@ -10697,7 +10736,7 @@ Feraligatr and Marowak (Alolan) are the authored opening pair. The board plan is
 | 5 | Ampharos | 60 (cap +0) | Ampharosite | Static | Mega ace | Volt Switch, Dragon Pulse, Focus Blast, Power Gem |
 | 6 | Cloyster | 61 (cap +1) | White Herb | Skill Link | setup attacker | Protect, Icicle Spear, Hydro Pump, Shell Smash |
 
-## 453. Ruben — Route 128
+## 455. Ruben — Route 128
 
 **Optional · Double · Cap 60 · Brutal 75/100 · Uniqueness 83/100**
 
@@ -10722,7 +10761,7 @@ Heatmor and Meganium are the authored opening pair. The board plan is earthquake
 | 5 | Milotic | 59 (cap -1) | Leftovers | Marvel Scale | disruption and support | Scald, Ice Beam, Recover, Hypnosis |
 | 6 | Lumineon | 61 (cap +1) | Damp Rock | Swift Swim | coverage attacker | U Turn, Rain Dance, Ice Beam, Surf |
 
-## 454. Wayne — Route 128
+## 456. Wayne — Route 128
 
 **Optional · Double · Cap 60 · Demanding 45/100 · Uniqueness 75/100**
 
@@ -10745,7 +10784,7 @@ Wailord and Dhelmise are the authored opening pair. The board plan is earthquake
 | 3 | Lickilicky | 58 (cap -2) | Sitrus Berry | Cloud Nine | coverage attacker | Dragon Tail, Body Slam, Toxic, Earthquake |
 | 4 | Mandibuzz | 58 (cap -2) | Sitrus Berry | Overcoat | disruption and support | Knock Off, Brave Bird, Taunt, Roost |
 
-## 455. Harrison — Route 128
+## 457. Harrison — Route 128
 
 **Optional · Single · Cap 60 · Demanding 43/100 · Uniqueness 71/100**
 
@@ -10766,7 +10805,7 @@ Lickilicky opens this deliberate singles fight. The roster is built as rain engi
 | 1 | Lickilicky | 58 (cap -2) | None | Own Tempo | coverage attacker | Surf, Ice Beam, Flamethrower, Power Whip |
 | 2 | Omastar | 58 (cap -2) | None | Swift Swim | coverage attacker | Surf, Ice Beam, Earth Power, Rain Dance |
 
-## 456. Carlee — Route 128
+## 458. Carlee — Route 128
 
 **Optional · Double · Cap 60 · Hard 50/100 · Uniqueness 83/100**
 
@@ -10791,7 +10830,7 @@ Seaking and Drampa are the authored opening pair. The board plan is trick room. 
 
 # Rain Badge
 
-## 457. Courtney — Mossdeep City Space Center 2 F
+## 459. Courtney — Mossdeep City Space Center 2 F
 
 **Required · Double · Cap 70 · Extreme 86/100 · Uniqueness 80/100**
 
@@ -10816,7 +10855,7 @@ Ninetales and Krookodile are the authored opening pair. The board plan is fire p
 | 5 | Heatran | 71 (cap +1) | Sitrus Berry | Flash Fire | protected attacker | Eruption, Earth Power, Protect, Magma Storm |
 | 6 | Malamar | 71 (cap +1) | Sitrus Berry | Contrary | protected attacker | Superpower, Knock Off, Protect, Zen Headbutt |
 
-## 458. Maxie — Mossdeep City Space Center 2 F
+## 460. Maxie — Mossdeep City Space Center 2 F
 
 **Required · Double · Cap 70 · Extreme 80/100 · Uniqueness 78/100**
 
@@ -10841,7 +10880,7 @@ Victreebel and Crobat are the authored opening pair. The board plan is fire pres
 | 5 | Heatran | 71 (cap +1) | Sitrus Berry | Flash Fire | protected attacker | Eruption, Earth Power, Protect, Magma Storm |
 | 6 | Volcarona | 71 (cap +1) | Leftovers | Flame Body | setup attacker | Fire Blast, Quiver Dance, Giga Drain, Roost |
 
-## 459. Steven — Mossdeep City Space Center 2 F
+## 461. Steven — Mossdeep City Space Center 2 F
 
 **Required Ally · Double · Cap 70 · Allied support 82/100 · Uniqueness 74/100**
 
@@ -10864,7 +10903,7 @@ Steven fights beside the player in this multi battle. The partner roster supplie
 | 3 | Metagross | 72 (cap +2) | Metagrossite | Clear Body | Mega ace | Meteor Mash, Zen Headbutt, Hammer Arm, Bullet Punch |
 | 4 | Deoxys | 71 (cap +1) | Leftovers | Pressure | rare centerpiece | Extreme Speed, Stealth Rock, Thunderbolt, Spikes |
 
-## 460. Grunt — Mossdeep City Space Center 2 F
+## 462. Grunt — Mossdeep City Space Center 2 F
 
 **Optional · Double · Cap 70 · Hard 58/100 · Uniqueness 72/100**
 
@@ -10887,7 +10926,7 @@ Hippowdon and Sandslash are the authored opening pair. The board plan is earthqu
 | 3 | Claydol | 69 (cap -1) | Sitrus Berry | Levitate | protected attacker | Toxic, Protect, Earth Power, Rapid Spin |
 | 4 | Durant | 69 (cap -1) | Occa Berry | Hustle | coverage attacker | Rock Slide, Iron Head, X Scissor, Hone Claws |
 
-## 461. Grunt — Mossdeep City Space Center 2 F
+## 463. Grunt — Mossdeep City Space Center 2 F
 
 **Optional · Double · Cap 70 · Hard 53/100 · Uniqueness 74/100**
 
@@ -10910,7 +10949,7 @@ Liepard and Incineroar are the authored opening pair. The board plan is pivot co
 | 3 | Mamoswine | 69 (cap -1) | None | Oblivious | coverage attacker | Icicle Crash, Earthquake, Ice Shard, Superpower |
 | 4 | Miltank | 69 (cap -1) | Sitrus Berry | Sap Sipper | protected attacker | Protect, Helping Hand, Rock Slide, Body Slam |
 
-## 462. Grunt — Mossdeep City Space Center 1 F
+## 464. Grunt — Mossdeep City Space Center 1 F
 
 **Optional · Double · Cap 70 · Demanding 47/100 · Uniqueness 79/100**
 
@@ -10933,7 +10972,7 @@ Salazzle and Palossand are the authored opening pair. The board plan is sleep pr
 | 3 | Amoonguss | 69 (cap -1) | None | Effect Spore | disruption and support | Spore, Ingrain, Sludge Bomb, Foul Play |
 | 4 | Hypno | 69 (cap -1) | Electric Seed | Insomnia | coverage attacker | Future Sight, Shadow Ball, Hypnosis, Focus Blast |
 
-## 463. Grunt — Mossdeep City Space Center 1 F
+## 465. Grunt — Mossdeep City Space Center 1 F
 
 **Optional · Double · Cap 70 · Hard 54/100 · Uniqueness 72/100**
 
@@ -10956,7 +10995,7 @@ Mightyena and Camerupt are the authored opening pair. The board plan is sun engi
 | 3 | Shiftry | 69 (cap -1) | None | Chlorophyll | coverage attacker | Sunny Day, Solar Blade, Heat Wave, Knock Off |
 | 4 | Necrozma Dusk Mane | 69 (cap -1) | Weakness Policy | Prism Armor | setup attacker | Protect, Sunsteel Strike, Dragon Dance, Photon Geyser |
 
-## 464. Grunt — Mossdeep City Space Center 1 F
+## 466. Grunt — Mossdeep City Space Center 1 F
 
 **Optional · Double · Cap 70 · Hard 52/100 · Uniqueness 77/100**
 
@@ -10979,7 +11018,7 @@ Torkoal and Claydol are the authored opening pair. The board plan is earthquake 
 | 3 | Rhyperior | 69 (cap -1) | None | Lightning Rod | coverage attacker | Earthquake, Rock Blast, Crunch, Ice Punch |
 | 4 | Carbink | 69 (cap -1) | Light Clay | Clear Body | disruption and support | Explosion, Moonblast, Reflect, Light Screen |
 
-## 465. Tabitha — Mossdeep City Space Center 2 F
+## 467. Tabitha — Mossdeep City Space Center 2 F
 
 **Optional · Double · Cap 70 · Extreme 87/100 · Uniqueness 62/100**
 
@@ -11004,7 +11043,7 @@ Gigalith and Darmanitan are the authored opening pair. The board plan is earthqu
 | 5 | Excadrill | 70 (cap +0) | Focus Sash | Sand Rush | setup attacker | Earthquake, Iron Head, Rock Slide, Swords Dance |
 | 6 | Gastrodon | 70 (cap +0) | Leftovers | Storm Drain | disruption and support | Earth Power, Scald, Toxic, Recover |
 
-## 466. Shelly — Seafloor Cavern Room 3
+## 468. Shelly — Seafloor Cavern Room 3
 
 **Required · Double · Cap 70 · Extreme 80/100 · Uniqueness 37/100**
 
@@ -11029,7 +11068,7 @@ Ninetales (Alolan) and Empoleon are the authored opening pair. The board plan is
 | 5 | Ludicolo | 70 (cap +0) | Safety Goggles | Rain Dish | coverage attacker | Scald, Giga Drain, Leech Seed, Blizzard |
 | 6 | Beedrill | 72 (cap +2) | Beedrillite | Swarm | Mega ace | Megahorn, Poison Jab, Drill Run, Knock Off |
 
-## 467. Archie — Seafloor Cavern Room 9
+## 469. Archie — Seafloor Cavern Room 9
 
 **Required · Double · Cap 70 · Extreme 86/100 · Uniqueness 76/100**
 
@@ -11054,7 +11093,7 @@ Kyogre and Goodra are the authored opening pair. The board plan is water pressur
 | 5 | Eelektross | 71 (cap +1) | Assault Vest | Swift Swim | coverage attacker | Thunder, Grass Knot, Flash Cannon, Acid Spray |
 | 6 | Sharpedo | 72 (cap +2) | Sharpedonite | Speed Boost | Mega ace | Liquidation, Crunch, Psychic Fangs, Close Combat |
 
-## 468. Grunt — Seafloor Cavern Room 1
+## 470. Grunt — Seafloor Cavern Room 1
 
 **Optional · Double · Cap 70 · Demanding 48/100 · Uniqueness 62/100**
 
@@ -11077,7 +11116,7 @@ Mightyena and Crobat are the authored opening pair. The board plan is earthquake
 | 3 | Sharpedo | 69 (cap -1) | None | Speed Boost | coverage attacker | Waterfall, Crunch, Ice Fang, Earthquake |
 | 4 | Barraskewda | 69 (cap -1) | Life Orb | Propeller Tail | protected attacker | Protect, Close Combat, Waterfall, Poison Jab |
 
-## 469. Grunt — Seafloor Cavern Room 4
+## 471. Grunt — Seafloor Cavern Room 4
 
 **Optional · Double · Cap 70 · Demanding 48/100 · Uniqueness 79/100**
 
@@ -11100,7 +11139,7 @@ Wailord and Skuntank are the authored opening pair. The board plan is residual c
 | 3 | Seaking | 69 (cap -1) | None | Lightning Rod | setup attacker | Waterfall, Megahorn, Throat Chop, Swords Dance |
 | 4 | Morpeko | 69 (cap -1) | Life Orb | Hunger Switch | protected attacker | Protect, Knock Off, Aura Wheel, Volt Switch |
 
-## 470. Grunt — Seafloor Cavern Room 1
+## 472. Grunt — Seafloor Cavern Room 1
 
 **Optional · Double · Cap 70 · Hard 54/100 · Uniqueness 84/100**
 
@@ -11123,7 +11162,7 @@ Huntail and Muk are the authored opening pair. The board plan is trick room + re
 | 3 | Scrafty | 69 (cap -1) | None | Intimidate | coverage attacker | Drain Punch, Crunch, Head Smash, Earthquake |
 | 4 | Slowbro (Galarian) | 69 (cap -1) | Sitrus Berry | Regenerator | speed control | Shell Side Arm, Fire Blast, Trick Room, Protect |
 
-## 471. Grunt — Seafloor Cavern Room 4
+## 473. Grunt — Seafloor Cavern Room 4
 
 **Optional · Double · Cap 70 · Hard 59/100 · Uniqueness 77/100**
 
@@ -11146,7 +11185,7 @@ Gorebyss and Purugly are the authored opening pair. The board plan is fake out t
 | 3 | Toxapex | 69 (cap -1) | None | Merciless | disruption and support | Liquidation, Toxic, Baneful Bunker, Recover |
 | 4 | Silvally Dark | 69 (cap -1) | Dark Memory | Rks System | speed control | Snarl, Thunder Wave, Parting Shot, Multi Attack |
 
-## 472. Grunt — Seafloor Cavern Room 3
+## 474. Grunt — Seafloor Cavern Room 3
 
 **Optional · Double · Cap 70 · Hard 51/100 · Uniqueness 74/100**
 
@@ -11169,7 +11208,7 @@ Mandibuzz and Gyarados are the authored opening pair. The board plan is dark pre
 | 3 | Arbok | 69 (cap -1) | None | Intimidate | setup attacker | Poison Jab, Crunch, Coil, Seed Bomb |
 | 4 | Skuntank | 69 (cap -1) | Life Orb | Aftermath | coverage attacker | Knock Off, Toxic Spikes, Gunk Shot, Fire Blast |
 
-## 473. Juan — Sootopolis City Gym 1 F
+## 475. Juan — Sootopolis City Gym 1 F
 
 **Required · Double · Cap 70 · Extreme 90/100 · Uniqueness 68/100**
 
@@ -11194,7 +11233,7 @@ Politoed and Gothitelle are the authored opening pair. The board plan is perish 
 | 5 | Palkia | 71 (cap +1) | Assault Vest | Pressure | rare centerpiece | Spacial Rend, Hydro Pump, Thunder, Earth Power |
 | 6 | Kingdra | 72 (cap +2) | Kingdranite | Swift Swim | Mega ace | Muddy Water, Draco Meteor, Hurricane, Protect |
 
-## 474. Andrea — Sootopolis City Gym B 1 F
+## 476. Andrea — Sootopolis City Gym B 1 F
 
 **Optional · Double · Cap 70 · Brutal 67/100 · Uniqueness 64/100**
 
@@ -11217,7 +11256,7 @@ Cloyster and Floatzel are the authored opening pair. The board plan is surf ally
 | 3 | Jellicent | 69 (cap -1) | Leftovers | Water Absorb | disruption and support | Scald, Hex, Strength Sap, Will O Wisp |
 | 4 | Simipour | 70 (cap +0) | Leftovers | Torrent | protected attacker | Surf, Ice Beam, Taunt, Protect |
 
-## 475. Crissy — Sootopolis City Gym B 1 F
+## 477. Crissy — Sootopolis City Gym B 1 F
 
 **Optional · Double · Cap 70 · Brutal 72/100 · Uniqueness 74/100**
 
@@ -11240,7 +11279,7 @@ Lanturn and Golisopod are the authored opening pair. The board plan is tailwind 
 | 3 | Swanna | 69 (cap -1) | Flying Gem | Competitive | speed control | Scald, Hurricane, Ice Beam, Tailwind |
 | 4 | Primarina | 70 (cap +0) | Life Orb | Liquid Voice | protected attacker | Protect, Moonblast, Hyper Voice, Psychic |
 
-## 476. Brianna — Sootopolis City Gym B 1 F
+## 478. Brianna — Sootopolis City Gym B 1 F
 
 **Optional · Double · Cap 70 · Brutal 73/100 · Uniqueness 82/100**
 
@@ -11263,7 +11302,7 @@ Greninja and Dewgong are the authored opening pair. The board plan is fake out t
 | 3 | Quagsire | 69 (cap -1) | Leftovers | Damp | speed control | Scald, Recover, Haze, Icy Wind |
 | 4 | Tapu Fini | 70 (cap +0) | Leftovers | Misty Surge | setup attacker | Moonblast, Taunt, Scald, Calm Mind |
 
-## 477. Connie — Sootopolis City Gym B 1 F
+## 479. Connie — Sootopolis City Gym B 1 F
 
 **Optional · Double · Cap 70 · Brutal 67/100 · Uniqueness 72/100**
 
@@ -11286,7 +11325,7 @@ Seaking and Starmie are the authored opening pair. The board plan is water press
 | 3 | Lumineon | 69 (cap -1) | Water Gem | Swift Swim | setup attacker | Surf, Ice Beam, Dazzling Gleam, Quiver Dance |
 | 4 | Huntail | 70 (cap +0) | White Herb | Water Veil | setup attacker | Ice Fang, Baton Pass, Shell Smash, Waterfall |
 
-## 478. Bridget — Sootopolis City Gym B 1 F
+## 480. Bridget — Sootopolis City Gym B 1 F
 
 **Optional · Double · Cap 70 · Brutal 71/100 · Uniqueness 73/100**
 
@@ -11309,7 +11348,7 @@ Gorebyss and Omastar are the authored opening pair. The board plan is water pres
 | 3 | Toxapex | 69 (cap -1) | Sitrus Berry | Merciless | coverage attacker | Liquidation, Toxic, Poison Jab, Payback |
 | 4 | Manaphy | 70 (cap +0) | Sitrus Berry | Hydration | speed control | Surf, Protect, Helping Hand, Icy Wind |
 
-## 479. Olivia — Sootopolis City Gym B 1 F
+## 481. Olivia — Sootopolis City Gym B 1 F
 
 **Optional · Single · Cap 70 · Hard 60/100 · Uniqueness 75/100**
 
@@ -11331,7 +11370,7 @@ Carracosta opens this deliberate singles fight. The roster is built as schooling
 | 2 | Araquanid | 69 (cap -1) | Mystic Water | Water Bubble | protected attacker | Liquidation, Leech Life, Mirror Coat, Wide Guard |
 | 3 | Wishiwashi | 69 (cap -1) | Ice Gem | Schooling | rare centerpiece | Aqua Tail, Ice Beam, U Turn, Return |
 
-## 480. Tiffany — Sootopolis City Gym B 1 F
+## 482. Tiffany — Sootopolis City Gym B 1 F
 
 **Optional · Double · Cap 70 · Brutal 65/100 · Uniqueness 77/100**
 
@@ -11354,7 +11393,7 @@ Vaporeon and Feraligatr are the authored opening pair. The board plan is water p
 | 3 | Gastrodon East Sea | 69 (cap -1) | Rindo Berry | Storm Drain | coverage attacker | Earth Power, Sludge Bomb, Ice Beam, Recover |
 | 4 | Barbaracle | 70 (cap +0) | White Herb | Tough Claws | setup attacker | Liquidation, Protect, Shell Smash, Rock Slide |
 
-## 481. Bethany — Sootopolis City Gym B 1 F
+## 483. Bethany — Sootopolis City Gym B 1 F
 
 **Optional · Double · Cap 70 · Brutal 69/100 · Uniqueness 81/100**
 
@@ -11377,7 +11416,7 @@ Slowking and Azumarill are the authored opening pair. The board plan is trick ro
 | 3 | Relicanth | 69 (cap -1) | Rock Gem | Rock Head | coverage attacker | Liquidation, Head Smash, Zen Headbutt, Yawn |
 | 4 | Calyrex (Ice Rider) | 70 (cap +0) | Sitrus Berry | As One (Ice Rider) | speed control | Glacial Lance, Swords Dance, Trick Room, High Horsepower |
 
-## 482. Annika — Sootopolis City Gym B 1 F
+## 484. Annika — Sootopolis City Gym B 1 F
 
 **Optional · Single · Cap 70 · Hard 58/100 · Uniqueness 73/100**
 
@@ -11399,7 +11438,7 @@ Milotic opens this deliberate singles fight. The roster is built as water pressu
 | 2 | Primarina | 69 (cap -1) | Fairy Gem | Torrent | coverage attacker | Hydro Pump, Moonblast, Energy Ball, Psychic |
 | 3 | Golduck | 69 (cap -1) | Scope Lens | Tough Claws | coverage attacker | Aqua Tail, Zen Headbutt, Cross Chop, Aqua Jet |
 
-## 483. Daphne — Sootopolis City Gym B 1 F
+## 485. Daphne — Sootopolis City Gym B 1 F
 
 **Optional · Single · Cap 70 · Hard 56/100 · Uniqueness 72/100**
 
@@ -11421,7 +11460,7 @@ Luvdisc opens this deliberate singles fight. The roster is built as water pressu
 | 2 | Lapras | 69 (cap -1) | Ground Gem | Water Absorb | setup attacker | Waterfall, Icicle Crash, Drill Run, Dragon Dance |
 | 3 | Samurott | 69 (cap -1) | Assault Vest | Keen Edge | coverage attacker | Razor Shell, Sacred Sword, Night Slash, X Scissor |
 
-## 484. Chase — Route 129
+## 486. Chase — Route 129
 
 **Optional · Single · Cap 70 · Demanding 42/100 · Uniqueness 71/100**
 
@@ -11442,7 +11481,7 @@ Slowking opens this deliberate singles fight. The roster is built as psychic mix
 | 1 | Slowking | 68 (cap -2) | Sitrus Berry | Regenerator | protected attacker | Psyshock, Protect, Scald, Fire Blast |
 | 2 | Braviary | 68 (cap -2) | None | Keen Eye | coverage attacker | Brave Bird, Double Edge, Close Combat, Rock Slide |
 
-## 485. Allison — Route 129
+## 487. Allison — Route 129
 
 **Optional · Single · Cap 70 · Demanding 36/100 · Uniqueness 72/100**
 
@@ -11463,7 +11502,7 @@ Unfezant opens this deliberate singles fight. The roster is built as underused f
 | 1 | Unfezant | 68 (cap -2) | None | Tough Claws | disruption and support | Drill Peck, Night Slash, Roost, Focus Energy |
 | 2 | Galvantula | 68 (cap -2) | None | Compound Eyes | coverage attacker | Thunder, Bug Buzz, Sucker Punch, Poison Jab |
 
-## 486. Reed — Route 129
+## 488. Reed — Route 129
 
 **Optional · Single · Cap 70 · Demanding 37/100 · Uniqueness 62/100**
 
@@ -11484,7 +11523,7 @@ Walrein opens this deliberate singles fight. The roster is built as water mixed 
 | 1 | Walrein | 68 (cap -2) | None | Thick Fat | coverage attacker | Surf, Ice Beam, Crunch, Yawn |
 | 2 | Sharpedo | 68 (cap -2) | None | Rough Skin | coverage attacker | Surf, Ice Beam, Dark Pulse, Psychic Fangs |
 
-## 487. Tisha — Route 129
+## 489. Tisha — Route 129
 
 **Optional · Double · Cap 70 · Hard 55/100 · Uniqueness 81/100**
 
@@ -11507,7 +11546,7 @@ Lanturn and Slurpuff are the authored opening pair. The board plan is surf ally 
 | 3 | Tapu Fini | 68 (cap -2) | Leftovers | Misty Surge | speed control | Muddy Water, Moonblast, Icy Wind, Protect |
 | 4 | Unfezant | 68 (cap -2) | Scope Lens | Super Luck | disruption and support | Taunt, Roost, Pluck, Return |
 
-## 488. Clarence — Route 129
+## 490. Clarence — Route 129
 
 **Optional · Double · Cap 70 · Demanding 46/100 · Uniqueness 79/100**
 
@@ -11530,7 +11569,7 @@ Diggersby and Empoleon are the authored opening pair. The board plan is water pr
 | 3 | Marshtomp | 68 (cap -2) | Life Orb | Torrent | coverage attacker | Earthquake, Superpower, Stealth Rock, Ice Punch |
 | 4 | Carracosta | 68 (cap -2) | White Herb | Solid Rock | setup attacker | Earthquake, Waterfall, Shell Smash, Aqua Jet |
 
-## 489. Rodney — Route 130
+## 491. Rodney — Route 130
 
 **Optional · Single · Cap 70 · Demanding 39/100 · Uniqueness 65/100**
 
@@ -11551,7 +11590,7 @@ Gyarados opens this deliberate singles fight. The roster is built as earthquake 
 | 1 | Gyarados | 68 (cap -2) | None | Moxie | coverage attacker | Outrage, Giga Impact, Ice Fang, Bounce |
 | 2 | Wishiwashi | 68 (cap -2) | None | Schooling | rare centerpiece | Surf, Ice Beam, Earthquake, Aqua Ring |
 
-## 490. Katie — Route 130
+## 492. Katie — Route 130
 
 **Optional · Double · Cap 70 · Demanding 45/100 · Uniqueness 80/100**
 
@@ -11574,7 +11613,7 @@ Seaking and Beartic are the authored opening pair. The board plan is residual co
 | 3 | Electabuzz | 68 (cap -2) | Salac Berry | Static | speed control | Cross Chop, Ice Punch, Thunder Wave, Thunder Punch |
 | 4 | Aromatisse | 68 (cap -2) | Sitrus Berry | Aroma Veil | protected attacker | Heal Pulse, Thunderbolt, Moonblast, Protect |
 
-## 491. Santiago — Route 130
+## 493. Santiago — Route 130
 
 **Optional · Double · Cap 70 · Hard 52/100 · Uniqueness 84/100**
 
@@ -11597,7 +11636,7 @@ Gastrodon East Sea and Poliwrath are the authored opening pair. The board plan i
 | 3 | Vanilluxe | 68 (cap -2) | Light Clay | Snow Warning | protected attacker | Freeze Dry, Aurora Veil, Protect, Blizzard |
 | 4 | Zekrom | 68 (cap -2) | Leftovers | Teravolt | rare centerpiece | Bolt Strike, Hone Claws, Outrage, Draco Meteor |
 
-## 492. Richard — Route 131
+## 494. Richard — Route 131
 
 **Optional · Single · Cap 70 · Demanding 37/100 · Uniqueness 73/100**
 
@@ -11618,7 +11657,7 @@ Tauros opens this deliberate singles fight. The roster is built as normal mixed 
 | 1 | Tauros | 68 (cap -2) | None | Intimidate | coverage attacker | Giga Impact, Close Combat, Megahorn, Surf |
 | 2 | Slowking | 68 (cap -2) | None | Oblivious | coverage attacker | Power Gem, Flamethrower, Psychic, Slack Off |
 
-## 493. Herman — Route 131
+## 495. Herman — Route 131
 
 **Optional · Double · Cap 70 · Brutal 73/100 · Uniqueness 90/100**
 
@@ -11643,7 +11682,7 @@ Heracross and Florges are the authored opening pair. The board plan is earthquak
 | 5 | Gourgeist | 69 (cap -1) | Flame Orb | Pickup | coverage attacker | Shadow Ball, Giga Drain, Flamethrower, Psychic |
 | 6 | Kyurem White | 70 (cap +0) | Sitrus Berry | Turboblaze | protected attacker | Ice Beam, Protect, Draco Meteor, Roost |
 
-## 494. Susie — Route 131
+## 496. Susie — Route 131
 
 **Optional · Double · Cap 70 · Brutal 74/100 · Uniqueness 83/100**
 
@@ -11668,7 +11707,7 @@ Pidgeot and Probopass are the authored opening pair. The board plan is tailwind 
 | 5 | Froslass | 69 (cap -1) | Expert Belt | Snow Cloak | coverage attacker | Shadow Ball, Ice Beam, Thunder, Will O Wisp |
 | 6 | Umbreon | 71 (cap +1) | Leftovers | Inner Focus | speed control | Thunder Wave, Foul Play, Moonlight, Snarl |
 
-## 495. Kara — Route 131
+## 497. Kara — Route 131
 
 **Optional · Double · Cap 70 · Demanding 48/100 · Uniqueness 76/100**
 
@@ -11691,7 +11730,7 @@ Miltank and Azumarill are the authored opening pair. The board plan is active sp
 | 3 | Furfrou Kabuki Trim | 68 (cap -2) | None | Fur Coat | speed control | Headbutt, Thunder Wave, Cotton Guard, Endeavor |
 | 4 | Whiscash | 68 (cap -2) | Life Orb | Hydration | setup attacker | Earthquake, Dragon Dance, Stone Edge, Waterfall |
 
-## 496. Reli & Ian — Route 131
+## 498. Reli & Ian — Route 131
 
 **Optional · Double · Cap 70 · Hard 62/100 · Uniqueness 80/100**
 
@@ -11714,7 +11753,7 @@ Pelipper and Relicanth are the authored opening pair. The board plan is earthqua
 | 3 | Kabutops | 68 (cap -2) | Life Orb | Swift Swim | coverage attacker | Superpower, Toxic, Waterfall, Aqua Jet |
 | 4 | Blastoise | 68 (cap -2) | Blastoisinite | Rain Dish | Mega ace | Dark Pulse, Muddy Water, Aura Sphere, Protect |
 
-## 497. Talia — Route 131
+## 499. Talia — Route 131
 
 **Optional · Double · Cap 70 · Demanding 40/100 · Uniqueness 85/100**
 
@@ -11737,7 +11776,7 @@ Scyther and Dedenne are the authored opening pair. The board plan is water rare-
 | 3 | Palkia | 68 (cap -2) | Sitrus Berry | Telepathy | speed control | Hydro Pump, Thunder Wave, Fire Blast, Spacial Rend |
 | 4 | Wailmer | 68 (cap -2) | None | Water Veil | coverage attacker | Brine, Rollout, Defense Curl, Whirlpool |
 
-## 498. Kevin — Route 131
+## 500. Kevin — Route 131
 
 **Optional · Single · Cap 70 · Demanding 36/100 · Uniqueness 74/100**
 
@@ -11758,7 +11797,7 @@ Snorlax opens this deliberate singles fight. The roster is built as underused no
 | 1 | Snorlax | 68 (cap -2) | None | Immunity | disruption and support | Body Slam, Crunch, Rest, Sleep Talk |
 | 2 | Quagsire | 68 (cap -2) | None | Damp | disruption and support | Earthquake, Stockpile, Recover, Scald |
 
-## 499. Gilbert — Route 132
+## 501. Gilbert — Route 132
 
 **Optional · Single · Cap 70 · Demanding 38/100 · Uniqueness 63/100**
 
@@ -11779,7 +11818,7 @@ Nidoking opens this deliberate singles fight. The roster is built as underused g
 | 1 | Nidoking | 68 (cap -2) | None | Poison Point | coverage attacker | Surf, Sludge Bomb, Earthquake, Megahorn |
 | 2 | Sharpedo | 68 (cap -2) | None | Rough Skin | coverage attacker | Waterfall, Psychic Fangs, Crunch, Double Edge |
 
-## 500. Dana — Route 132
+## 502. Dana — Route 132
 
 **Optional · Double · Cap 70 · Demanding 45/100 · Uniqueness 78/100**
 
@@ -11802,7 +11841,7 @@ Nidoqueen and Primarina are the authored opening pair. The board plan is underus
 | 3 | Galvantula | 68 (cap -2) | Life Orb | Compound Eyes | protected attacker | Volt Switch, Thunder, Protect, Bug Buzz |
 | 4 | Castform | 68 (cap -2) | Choice Specs | Forecast | Choice-locked breaker | Ice Beam, Thunder, Hydro Pump, Solar Beam |
 
-## 501. Ronald — Route 132
+## 503. Ronald — Route 132
 
 **Optional · Double · Cap 70 · Hard 56/100 · Uniqueness 61/100**
 
@@ -11827,7 +11866,7 @@ Magikarp and Gyarados are the authored opening pair. The board plan is earthquak
 | 5 | Gyarados | 66 (cap -4) | None | Intimidate | coverage attacker | Waterfall, Crunch, Earthquake, Ice Fang |
 | 6 | Gyarados | 66 (cap -4) | None | Intimidate | coverage attacker | Splash, Thrash, Outrage, Hydro Pump |
 
-## 502. Kiyo — Route 132
+## 504. Kiyo — Route 132
 
 **Optional · Single · Cap 70 · Demanding 38/100 · Uniqueness 78/100**
 
@@ -11849,7 +11888,7 @@ Hawlucha opens this deliberate singles fight. The roster is built as fighting pr
 | 2 | Primeape | 67 (cap -3) | None | Vital Spirit | coverage attacker | Close Combat, Thrash, Outrage, Night Slash |
 | 3 | Throh | 67 (cap -3) | None | Guts | setup attacker | Storm Throw, Payback, Bulk Up, Body Slam |
 
-## 503. Paxton — Route 132
+## 505. Paxton — Route 132
 
 **Optional · Single · Cap 70 · Hard 55/100 · Uniqueness 76/100**
 
@@ -11871,7 +11910,7 @@ Breloom opens this deliberate singles fight. The roster is built as fighting mix
 | 2 | Ursaring | 69 (cap -1) | Flame Orb | Guts | setup attacker | Facade, Close Combat, Crunch, Swords Dance |
 | 3 | Luxray | 69 (cap -1) | Expert Belt | Strong Jaw | coverage attacker | Thunder Fang, Crunch, Fire Fang, Ice Fang |
 
-## 504. Darcy — Route 132
+## 506. Darcy — Route 132
 
 **Optional · Single · Cap 70 · Hard 57/100 · Uniqueness 82/100**
 
@@ -11893,7 +11932,7 @@ Charizard opens this deliberate singles fight. The roster is built as fire rare-
 | 2 | Lilligant | 69 (cap -1) | Grass Gem | Own Tempo | setup attacker | Petal Dance, Moonblast, Sleep Powder, Quiver Dance |
 | 3 | Porygon-Z | 69 (cap -1) | Silk Scarf | Adaptability | coverage attacker | Techno Blast, Thunderbolt, Ice Beam, Dark Pulse |
 
-## 505. Jonathan — Route 132
+## 507. Jonathan — Route 132
 
 **Optional · Double · Cap 70 · Brutal 67/100 · Uniqueness 82/100**
 
@@ -11916,7 +11955,7 @@ Rampardos and Charizard are the authored opening pair. The board plan is tailwin
 | 3 | Sawsbuck | 69 (cap -1) | Sitrus Berry | Chlorophyll | coverage attacker | Horn Leech, Double Edge, Wild Charge, Jump Kick |
 | 4 | Noctowl | 70 (cap +0) | Life Orb | Tinted Lens | speed control | Protect, Hyper Voice, Hurricane, Tailwind |
 
-## 506. Makayla — Route 132
+## 508. Makayla — Route 132
 
 **Optional · Double · Cap 70 · Hard 64/100 · Uniqueness 76/100**
 
@@ -11939,7 +11978,7 @@ Amoonguss and Medicham are the authored opening pair. The board plan is redirect
 | 3 | Flareon | 69 (cap -1) | Toxic Orb | Guts | protected attacker | Flare Blitz, Facade, Superpower, Protect |
 | 4 | Beartic | 70 (cap +0) | Leftovers | Snow Cloak | protected attacker | Protect, Rock Slide, Superpower, Icicle Crash |
 
-## 507. Franklin — Route 133
+## 509. Franklin — Route 133
 
 **Optional · Double · Cap 70 · Demanding 42/100 · Uniqueness 82/100**
 
@@ -11962,7 +12001,7 @@ Walrein and Vaporeon are the authored opening pair. The board plan is ice rare-s
 | 3 | Lugia | 67 (cap -3) | Leftovers | Pressure | rare centerpiece | Substitute, Ice Beam, Roost, Dragon Tail |
 | 4 | Sneasel | 67 (cap -3) | Life Orb | Inner Focus | setup attacker | Low Kick, Swords Dance, Night Slash, Ice Punch |
 
-## 508. Debra — Route 133
+## 510. Debra — Route 133
 
 **Optional · Double · Cap 70 · Demanding 49/100 · Uniqueness 80/100**
 
@@ -11985,7 +12024,7 @@ Qwilfish and Seismitoad are the authored opening pair. The board plan is water p
 | 3 | Crawdaunt | 67 (cap -3) | Leftovers | Adaptability | protected attacker | Protect, Aqua Jet, Knock Off, Crabhammer |
 | 4 | Swalot | 67 (cap -3) | Leftovers | Sticky Hold | disruption and support | Ice Beam, Yawn, Earthquake, Pain Split |
 
-## 509. Linda — Route 133
+## 511. Linda — Route 133
 
 **Optional · Double · Cap 70 · Hard 53/100 · Uniqueness 77/100**
 
@@ -12008,7 +12047,7 @@ Kingdra and Lumineon are the authored opening pair. The board plan is rain engin
 | 3 | Ninetales (Alolan) | 67 (cap -3) | Light Clay | Snow Warning | protected attacker | Blizzard, Moonblast, Protect, Aurora Veil |
 | 4 | Arctozolt | 67 (cap -3) | Life Orb | Slush Rush | protected attacker | Bolt Beak, Icicle Crash, Rock Slide, Protect |
 
-## 510. Warren — Route 133
+## 512. Warren — Route 133
 
 **Optional · Double · Cap 70 · Extreme 80/100 · Uniqueness 87/100**
 
@@ -12033,7 +12072,7 @@ Golem (Alolan) and Musharna are the authored opening pair. The board plan is fak
 | 5 | Aggron | 70 (cap +0) | Aggronite | Sturdy | Mega ace | Heavy Slam, Earthquake, Dragon Claw, Aqua Tail |
 | 6 | Mr Rime | 71 (cap +1) | Sitrus Berry | Screen Cleaner | speed control | Icy Wind, Fake Out, Freeze Dry, Encore |
 
-## 511. Beck — Route 133
+## 513. Beck — Route 133
 
 **Optional · Double · Cap 70 · Demanding 49/100 · Uniqueness 76/100**
 
@@ -12056,7 +12095,7 @@ Honchkrow and Altaria are the authored opening pair. The board plan is flying pr
 | 3 | Noctowl | 67 (cap -3) | None | Insomnia | setup attacker | Boomburst, Hurricane, Hypnosis, Nasty Plot |
 | 4 | Emolga | 67 (cap -3) | Sitrus Berry | Motor Drive | protected attacker | Air Slash, Roost, Protect, Thunderbolt |
 
-## 512. Mollie — Route 133
+## 514. Mollie — Route 133
 
 **Optional · Double · Cap 70 · Brutal 69/100 · Uniqueness 78/100**
 
@@ -12079,7 +12118,7 @@ Gengar and Carracosta are the authored opening pair. The board plan is active sp
 | 3 | Aromatisse | 69 (cap -1) | Fairy Gem | Healer | disruption and support | Moonblast, Disable, Heal Pulse, Charm |
 | 4 | Rotom Frost | 70 (cap +0) | Wide Lens | Levitate | speed control | Protect, Electroweb, Blizzard, Thunderbolt |
 
-## 513. Conor — Route 133
+## 515. Conor — Route 133
 
 **Optional · Double · Cap 70 · Brutal 71/100 · Uniqueness 76/100**
 
@@ -12102,7 +12141,7 @@ Hariyama and Ferrothorn are the authored opening pair. The board plan is fake ou
 | 3 | Gothitelle | 69 (cap -1) | Sitrus Berry | Frisk | coverage attacker | Psychic, Dark Pulse, Thunderbolt, Fake Out |
 | 4 | Avalugg | 70 (cap +0) | Sitrus Berry | Sturdy | protected attacker | Recover, Protect, Earthquake, Avalanche |
 
-## 514. Jack — Route 134
+## 516. Jack — Route 134
 
 **Optional · Single · Cap 70 · Demanding 36/100 · Uniqueness 72/100**
 
@@ -12123,7 +12162,7 @@ Linoone opens this deliberate singles fight. The roster is built as underused no
 | 1 | Linoone | 67 (cap -3) | None | Pickup | coverage attacker | Extreme Speed, Surf, Seed Bomb, Shadow Claw |
 | 2 | Simipour | 67 (cap -3) | None | Gluttony | coverage attacker | Surf, Grass Knot, Acrobatics, Focus Blast |
 
-## 515. Laurel — Route 134
+## 517. Laurel — Route 134
 
 **Optional · Double · Cap 70 · Demanding 48/100 · Uniqueness 75/100**
 
@@ -12146,7 +12185,7 @@ Luvdisc and Alomomola are the authored opening pair. The board plan is water pre
 | 3 | Omastar | 67 (cap -3) | Leftovers | Shell Armor | protected attacker | Protect, Ice Beam, Hidden Power, Muddy Water |
 | 4 | Tapu Lele | 67 (cap -3) | Psychic Seed | Psychic Surge | protected attacker | Psychic, Moonblast, Dazzling Gleam, Protect |
 
-## 516. Alex — Route 134
+## 518. Alex — Route 134
 
 **Optional · Double · Cap 70 · Demanding 46/100 · Uniqueness 85/100**
 
@@ -12169,7 +12208,7 @@ Cramorant and Togekiss are the authored opening pair. The board plan is tailwind
 | 3 | Oshawott | 67 (cap -3) | Life Orb | Torrent | setup attacker | Aqua Jet, Waterfall, X Scissor, Swords Dance |
 | 4 | Remoraid | 67 (cap -3) | Choice Scarf | Hustle | Choice-locked breaker | Hidden Power, Seed Bomb, Water Spout, Fire Blast |
 
-## 517. Aaron — Route 134
+## 519. Aaron — Route 134
 
 **Optional · Single · Cap 70 · Demanding 43/100 · Uniqueness 69/100**
 
@@ -12191,7 +12230,7 @@ Druddigon opens this deliberate singles fight. The roster is built as dragon pre
 | 2 | Tyrantrum | 69 (cap -1) | None | Rock Head | setup attacker | Head Smash, High Horsepower, Outrage, Dragon Dance |
 | 3 | Noivern | 69 (cap -1) | None | Frisk | coverage attacker | Air Slash, Dragon Pulse, Flamethrower, Water Pulse |
 
-## 518. Hitoshi — Route 134
+## 520. Hitoshi — Route 134
 
 **Optional · Single · Cap 70 · Demanding 41/100 · Uniqueness 72/100**
 
@@ -12213,7 +12252,7 @@ Hitmonchan opens this deliberate singles fight. The roster is built as fighting 
 | 2 | Machamp | 67 (cap -3) | None | No Guard | coverage attacker | Dynamic Punch, Grass Knot, Acrobatics, Focus Blast |
 | 3 | Crabominable | 67 (cap -3) | None | Hyper Cutter | coverage attacker | Ice Hammer, Close Combat, Crabhammer, Ice Shard |
 
-## 519. Hudson — Route 134
+## 521. Hudson — Route 134
 
 **Optional · Double · Cap 70 · Demanding 42/100 · Uniqueness 83/100**
 
@@ -12236,7 +12275,7 @@ Poliwrath and Raticate are the authored opening pair. The board plan is discharg
 | 3 | Psyduck | 67 (cap -3) | Focus Sash | Cloud Nine | coverage attacker | Hydro Pump, Hidden Power, Ice Beam, Encore |
 | 4 | Chinchou | 67 (cap -3) | None | Volt Absorb | speed control | Discharge, Signal Beam, Water Pulse, Thunder Wave |
 
-## 520. Reyna — Route 134
+## 522. Reyna — Route 134
 
 **Optional · Double · Cap 70 · Demanding 37/100 · Uniqueness 87/100**
 
@@ -12259,7 +12298,7 @@ Bewear and Passimian are the authored opening pair. The board plan is underused 
 | 3 | Wooper | 67 (cap -3) | Focus Sash | Water Absorb | disruption and support | Recover, Toxic, Stockpile, Earthquake |
 | 4 | Snorunt | 67 (cap -3) | Expert Belt | Ice Body | coverage attacker | Crunch, Ice Beam, Hidden Power, Ice Shard |
 
-## 521. Marley — Route 134
+## 523. Marley — Route 134
 
 **Optional · Single · Cap 70 · Hard 57/100 · Uniqueness 75/100**
 
@@ -12281,7 +12320,7 @@ Venusaur opens this deliberate singles fight. The roster is built as grass rare-
 | 2 | Escavalier | 69 (cap -1) | Occa Berry | Swarm | coverage attacker | Megahorn, Iron Head, Close Combat, Razor Shell |
 | 3 | Arcanine | 69 (cap -1) | Normal Gem | Intimidate | coverage attacker | Flare Blitz, Wild Charge, Extreme Speed, Play Rough |
 
-## 522. Kelvin — Route 134
+## 524. Kelvin — Route 134
 
 **Optional · Double · Cap 70 · Demanding 35/100 · Uniqueness 69/100**
 
@@ -12306,7 +12345,7 @@ Machamp and Dhelmise are the authored opening pair. The board plan is underused 
 
 # Pokémon League
 
-## 523. Wally — Victory Road 1 F
+## 525. Wally — Victory Road 1 F
 
 **Required · Double · Cap 80 · Extreme 91/100 · Uniqueness 74/100**
 
@@ -12331,7 +12370,7 @@ Togekiss and Garchomp are the authored opening pair. The board plan is earthquak
 | 5 | Azumarill | 81 (cap +1) | Assault Vest | Huge Power | coverage attacker | Liquidation, Play Rough, Aqua Jet, Knock Off |
 | 6 | Gallade | 82 (cap +2) | Galladite | Justified | Mega ace | Psycho Cut, Close Combat, Wide Guard, Protect |
 
-## 524. Samuel — Victory Road B 1 F
+## 526. Samuel — Victory Road B 1 F
 
 **Optional · Double · Cap 80 · Brutal 73/100 · Uniqueness 88/100**
 
@@ -12356,7 +12395,7 @@ Galvantula and Nidoking are the authored opening pair. The board plan is web off
 | 5 | Druddigon | 79 (cap -1) | Life Orb | Sheer Force | coverage attacker | Dragon Rush, Gunk Shot, Fire Punch, Crunch |
 | 6 | Zacian | 81 (cap +1) | Sitrus Berry | Intrepid Sword | setup attacker | Play Rough, Protect, Close Combat, Swords Dance |
 
-## 525. Vito — Victory Road B 2 F
+## 527. Vito — Victory Road B 2 F
 
 **Optional · Double · Cap 80 · Brutal 72/100 · Uniqueness 87/100**
 
@@ -12381,7 +12420,7 @@ Bisharp and Delphox are the authored opening pair. The board plan is tailwind. T
 | 5 | Lurantis | 79 (cap -1) | Assault Vest | Contrary | coverage attacker | Leaf Storm, Superpower, Leech Life, Knock Off |
 | 6 | Flygon | 80 (cap +0) | Flygonite | Levitate | Mega ace | Boomburst, Draco Meteor, Fire Blast, Quiver Dance |
 
-## 526. Owen — Victory Road B 2 F
+## 528. Owen — Victory Road B 2 F
 
 **Optional · Double · Cap 80 · Brutal 70/100 · Uniqueness 86/100**
 
@@ -12406,7 +12445,7 @@ Torterra and Staraptor are the authored opening pair. The board plan is earthqua
 | 5 | Tentacruel | 79 (cap -1) | Life Orb | Clear Body | coverage attacker | Hydro Pump, Sludge Wave, Ice Beam, Giga Drain |
 | 6 | Zamazenta | 80 (cap +0) | Assault Vest | Dauntless Shield | rare centerpiece | Close Combat, Crunch, Psychic Fangs, Behemoth Bash |
 
-## 527. Shannon — Victory Road B 1 F
+## 529. Shannon — Victory Road B 1 F
 
 **Optional · Double · Cap 80 · Brutal 79/100 · Uniqueness 85/100**
 
@@ -12431,7 +12470,7 @@ Blaziken and Escavalier are the authored opening pair. The board plan is bug pre
 | 5 | Ribombee | 79 (cap -1) | Psychic Gem | Shield Dust | setup attacker | Bug Buzz, Moonblast, Psychic, Quiver Dance |
 | 6 | Orbeetle | 81 (cap +1) | Sitrus Berry | Frisk | speed control | Struggle Bug, Psychic, Light Screen, Sticky Web |
 
-## 528. Caroline — Victory Road B 2 F
+## 530. Caroline — Victory Road B 2 F
 
 **Optional · Double · Cap 80 · Brutal 74/100 · Uniqueness 91/100**
 
@@ -12456,7 +12495,7 @@ Tyranitar and Leavanny are the authored opening pair. The board plan is sand eng
 | 5 | Dugtrio (Alolan) | 79 (cap -1) | Steel Gem | Sand Force | coverage attacker | Earthquake, Stone Edge, Iron Head, Sucker Punch |
 | 6 | Eternatus | 81 (cap +1) | Sitrus Berry | Pressure | rare centerpiece | Cosmic Power, Dynamax Cannon, Flamethrower, Recover |
 
-## 529. Michelle — Victory Road B 1 F
+## 531. Michelle — Victory Road B 1 F
 
 **Optional · Double · Cap 80 · Brutal 73/100 · Uniqueness 82/100**
 
@@ -12481,7 +12520,7 @@ Chansey and Meganium are the authored opening pair. The board plan is trick room
 | 5 | Probopass | 79 (cap -1) | Fire Gem | Magnet Pull | coverage attacker | Sunny Day, Hidden Power, Earth Power, Power Gem |
 | 6 | Gardevoir | 80 (cap +0) | Gardevoirite | Synchronize | Mega ace | Hyper Voice, Psyshock, Mystical Fire, Trick Room |
 
-## 530. Julie — Victory Road B 2 F
+## 532. Julie — Victory Road B 2 F
 
 **Optional · Double · Cap 80 · Brutal 74/100 · Uniqueness 85/100**
 
@@ -12506,7 +12545,7 @@ Torkoal and Venusaur are the authored opening pair. The board plan is sun engine
 | 5 | Alakazam | 80 (cap +0) | Alakazite | Magic Guard | Mega ace | Psychic, Shadow Ball, Aura Sphere, Protect |
 | 6 | Tyrantrum | 80 (cap +0) | Choice Scarf | Strong Jaw | Choice-locked breaker | Strength, Outrage, Fire Fang, Poison Fang |
 
-## 531. Mitchell — Victory Road B 1 F
+## 533. Mitchell — Victory Road B 1 F
 
 **Optional · Double · Cap 80 · Brutal 65/100 · Uniqueness 71/100**
 
@@ -12529,7 +12568,7 @@ Machamp and Shiinotic are the authored opening pair. The board plan is status co
 | 3 | Gothitelle | 79 (cap -1) | Sitrus Berry | Shadow Tag | setup attacker | Psychic, Flatter, Nasty Plot, Thunderbolt |
 | 4 | Mismagius | 80 (cap +0) | Life Orb | Levitate | protected attacker | Taunt, Protect, Dazzling Gleam, Shadow Ball |
 
-## 532. Felix — Victory Road B 2 F
+## 534. Felix — Victory Road B 2 F
 
 **Optional · Double · Cap 80 · Brutal 69/100 · Uniqueness 84/100**
 
@@ -12552,7 +12591,7 @@ Jynx and Sceptile are the authored opening pair. The board plan is residual cont
 | 3 | Avalugg | 79 (cap -1) | Leftovers | Ice Body | disruption and support | Avalanche, Toxic, Protect, Iron Defense |
 | 4 | Duraludon | 80 (cap +0) | Eviolite | Stalwart | coverage attacker | Snarl, Iron Defense, Flash Cannon, Body Press |
 
-## 533. Halle — Victory Road B 1 F
+## 535. Halle — Victory Road B 1 F
 
 **Optional · Double · Cap 80 · Brutal 68/100 · Uniqueness 90/100**
 
@@ -12575,7 +12614,7 @@ Pinsir and Pachirisu are the authored opening pair. The board plan is redirectio
 | 3 | Lickilicky | 79 (cap -1) | Assault Vest | Own Tempo | coverage attacker | Muddy Water, Fire Blast, Thunder, Ice Beam |
 | 4 | Naganadel | 80 (cap +0) | White Herb | Beast Boost | setup attacker | Sludge Bomb, Draco Meteor, Nasty Plot, Protect |
 
-## 534. Dianne — Victory Road B 2 F
+## 536. Dianne — Victory Road B 2 F
 
 **Optional · Double · Cap 80 · Brutal 66/100 · Uniqueness 85/100**
 
@@ -12598,7 +12637,7 @@ Abomasnow and Magmortar are the authored opening pair. The board plan is snow en
 | 3 | Rampardos | 79 (cap -1) | Life Orb | Sheer Force | coverage attacker | Rock Slide, Blizzard, Fire Blast, Zen Headbutt |
 | 4 | Bisharp | 80 (cap +0) | Chople Berry | Pressure | protected attacker | Protect, Brick Break, Iron Head, Sucker Punch |
 
-## 535. Wally — Victory Road 1 F
+## 537. Wally — Victory Road 1 F
 
 **Optional · Double · Cap 80 · Extreme 92/100 · Uniqueness 94/100**
 
@@ -12623,7 +12662,7 @@ Indeedee Female and Gallade are the authored opening pair. The board plan is fak
 | 5 | Incineroar | 81 (cap +1) | Eject Button | Intimidate | coverage attacker | Fake Out, Flare Blitz, Snarl, Parting Shot |
 | 6 | Suicune | 82 (cap +2) | Sitrus Berry | Inner Focus | speed control | Tailwind, Scald, Icy Wind, Protect |
 
-## 536. Edgar — Victory Road 1 F
+## 538. Edgar — Victory Road 1 F
 
 **Optional · Double · Cap 80 · Extreme 80/100 · Uniqueness 85/100**
 
@@ -12648,7 +12687,7 @@ Trevenant and Sudowoodo are the authored opening pair. The board plan is active 
 | 5 | Chesnaught | 79 (cap -1) | White Herb | Bulletproof | setup attacker | Wood Hammer, Drain Punch, Thunder Punch, Shell Smash |
 | 6 | Manectric | 80 (cap +0) | Manectite | Static | Mega ace | Volt Switch, Flamethrower, Electroweb, Protect |
 
-## 537. Albert — Victory Road 1 F
+## 539. Albert — Victory Road 1 F
 
 **Optional · Double · Cap 80 · Brutal 73/100 · Uniqueness 84/100**
 
@@ -12673,7 +12712,7 @@ Rhyperior and Sigilyph are the authored opening pair. The board plan is dark pre
 | 5 | Conkeldurr | 79 (cap -1) | Flame Orb | Guts | coverage attacker | Knock Off, Drain Punch, Facade, Mach Punch |
 | 6 | Guzzlord | 81 (cap +1) | Sitrus Berry | Beast Boost | protected attacker | Protect, Knock Off, Draco Meteor, Fire Blast |
 
-## 538. Hope — Victory Road 1 F
+## 540. Hope — Victory Road 1 F
 
 **Optional · Double · Cap 80 · Brutal 75/100 · Uniqueness 81/100**
 
@@ -12698,7 +12737,7 @@ Forretress and Lilligant are the authored opening pair. The board plan is earthq
 | 5 | Vaporeon | 79 (cap -1) | Leftovers | Water Absorb | disruption and support | Scald, Wish, Baton Pass, Toxic |
 | 6 | Stakataka | 81 (cap +1) | Sitrus Berry | Beast Boost | rare centerpiece | Stone Edge, Stealth Rock, Superpower, Earthquake |
 
-## 539. Quincy — Victory Road 1 F
+## 541. Quincy — Victory Road 1 F
 
 **Optional · Double · Cap 80 · Brutal 73/100 · Uniqueness 89/100**
 
@@ -12721,7 +12760,7 @@ Slaking and Durant are the authored opening pair. The board plan is tailwind. Th
 | 3 | Butterfree | 80 (cap +0) | Butterfrenite | Compound Eyes | Mega ace | Hurricane, Energy Ball, Sleep Powder, Tailwind |
 | 4 | Rayquaza | 81 (cap +1) | Yache Berry | Air Lock | protected attacker | Extreme Speed, Dragon Ascent, Dragon Claw, Protect |
 
-## 540. Katelynn — Victory Road 1 F
+## 542. Katelynn — Victory Road 1 F
 
 **Optional · Double · Cap 80 · Brutal 72/100 · Uniqueness 88/100**
 
@@ -12744,7 +12783,7 @@ Audino and Slaking are the authored opening pair. The board plan is fake out tem
 | 3 | Infernape | 80 (cap +0) | Fire Gem | Blaze | coverage attacker | Fake Out, Heat Wave, Focus Blast, Grass Knot |
 | 4 | Dialga | 80 (cap +0) | Sitrus Berry | Telepathy | speed control | Protect, Flash Cannon, Thunder Wave, Draco Meteor |
 
-## 541. Sidney — Ever Grande City Sidneys Room
+## 543. Sidney — Ever Grande City Sidneys Room
 
 **Required · Double · Cap 80 · Extreme 91/100 · Uniqueness 98/100**
 
@@ -12769,7 +12808,7 @@ Incineroar and Yveltal are the authored opening pair. The board plan is dark pre
 | 5 | Hoopa Unbound | 81 (cap +1) | Life Orb | Magician | protected attacker | Hyperspace Fury, Zen Headbutt, Gunk Shot, Protect |
 | 6 | Absol | 82 (cap +2) | Absolite | Super Luck | Mega ace | Night Slash, Play Rough, Sucker Punch, Protect |
 
-## 542. Phoebe — Ever Grande City Phoebes Room
+## 544. Phoebe — Ever Grande City Phoebes Room
 
 **Required · Double · Cap 80 · Extreme 92/100 · Uniqueness 88/100**
 
@@ -12794,7 +12833,7 @@ Gengar and Marshadow are the authored opening pair. The board plan is ghost pres
 | 5 | Shedinja | 81 (cap +1) | Safety Goggles | Wonder Guard | redirection support | Ally Switch, Shadow Sneak, Will O Wisp, Protect |
 | 6 | Calyrex (Shadow Rider) | 82 (cap +2) | Life Orb | As One (Shadow Rider) | protected attacker | Astral Barrage, Psychic, Draining Kiss, Protect |
 
-## 543. Glacia — Ever Grande City Glacias Room
+## 545. Glacia — Ever Grande City Glacias Room
 
 **Required · Double · Cap 80 · Extreme 92/100 · Uniqueness 95/100**
 
@@ -12819,7 +12858,7 @@ Ninetales (Alolan) and Kyurem are the authored opening pair. The board plan is i
 | 5 | Glastrier | 81 (cap +1) | Assault Vest | Chilling Neigh | rare centerpiece | Icicle Crash, High Horsepower, Close Combat, Heavy Slam |
 | 6 | Abomasnow | 82 (cap +2) | Abomasite | Snow Warning | Mega ace | Blizzard, Giga Drain, Ice Shard, Protect |
 
-## 544. Drake — Ever Grande City Drakes Room
+## 546. Drake — Ever Grande City Drakes Room
 
 **Required · Single · Cap 80 · Extreme 85/100 · Uniqueness 100/100**
 
@@ -12844,7 +12883,7 @@ Dialga opens this deliberate singles fight. The roster is built as dragon pressu
 | 5 | Rayquaza | 81 (cap +1) | White Herb | Air Lock | setup attacker | Dragon Ascent, V Create, Extreme Speed, Dragon Dance |
 | 6 | Salamence | 82 (cap +2) | Salamencite | Intimidate | Mega ace | Double Edge, Earthquake, Roost, Dragon Dance |
 
-## 545. Wallace — Ever Grande City Champions Room
+## 547. Wallace — Ever Grande City Champions Room
 
 **Required · Double · Cap 80 · Extreme 93/100 · Uniqueness 73/100**
 
@@ -12869,7 +12908,7 @@ Kyogre and Zapdos are the authored opening pair. The board plan is tailwind + wa
 | 5 | Palkia | 81 (cap +1) | Assault Vest | Pressure | rare centerpiece | Spacial Rend, Hydro Pump, Thunder, Earth Power |
 | 6 | Milotic | 82 (cap +2) | Miloticite | Competitive | Mega ace | Muddy Water, Moonblast, Ice Beam, Recover |
 
-## 546. Wallace — Ever Grande City Champions Room
+## 548. Wallace — Ever Grande City Champions Room
 
 **Optional · Double · Cap 80 · Extreme 91/100 · Uniqueness 86/100**
 
@@ -12894,7 +12933,7 @@ Kyogre and Arceus Electric are the authored opening pair. The board plan is wate
 | 5 | Omastar | 82 (cap +2) | Water Gem | Swift Swim | protected attacker | Muddy Water, Ice Beam, Earth Power, Protect |
 | 6 | Milotic | 83 (cap +3) | Miloticite | Competitive | Mega ace | Scald, Moonblast, Calm Mind, Recover |
 
-## 547. Wallace — Ever Grande City Champions Room
+## 549. Wallace — Ever Grande City Champions Room
 
 **Optional · Double · Cap 80 · Extreme 92/100 · Uniqueness 74/100**
 
@@ -12919,7 +12958,7 @@ Kyogre and Zapdos are the authored opening pair. The board plan is earthquake im
 | 5 | Arceus Water | 82 (cap +2) | Splash Plate | Multitype | setup attacker | Waterfall, Earthquake, Extreme Speed, Swords Dance |
 | 6 | Milotic | 83 (cap +3) | Miloticite | Competitive | Mega ace | Scald, Moonblast, Calm Mind, Recover |
 
-## 548. Wallace — Ever Grande City Champions Room
+## 550. Wallace — Ever Grande City Champions Room
 
 **Optional · Double · Cap 80 · Extreme 96/100 · Uniqueness 67/100**
 
@@ -12946,7 +12985,57 @@ Wailord and Zapdos are the authored opening pair. The board plan is water pressu
 
 # Postgame
 
-## 549. Phillip — Battle Frontier Battle Pyramid Floor | SSTidal Corridor | SSTidal Lower Deck
+## 551. Steven — Meteor Falls Stevens Cave
+
+**Optional · Double · Cap 100 · Extreme 92/100 · Uniqueness 76/100**
+
+**Theme:** Earthquake immunity + Steel pressure + Tailwind
+
+Skarmory and Aerodactyl are the authored opening pair. The board plan is earthquake immunity + steel pressure + tailwind. The composition turns the cave's rock, darkness, and confined-board pressure into the fight's identity instead of using a generic route-trainer core. The rare showcase is Melmetal, Heatran. Metagross carries the team's one Mega slot.
+
+**How it behaves:** The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe, Smart Switching, Help Partner. Expect it to preserve earthquake immunity, steel pressure, tailwind rather than select six unrelated strong attacks.
+
+**Why it is hard:** 6 fully authored Pokémon, average BST 549.2, average cap offset +3.33, ace offset +5, and 100% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Steven (43% species overlap). Its species appear across an average of 5.0 unrelated trainer families.
+
+**Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Skarmory | 100 (cap +3) | Leftovers | Sturdy | disruption and support | Drill Peck, Toxic, Spikes, Roost |
+| 2 | Aerodactyl | 100 (cap +3) | Life Orb | Rock Head | speed control | Brave Bird, Rock Slide, Earthquake, Tailwind |
+| 3 | Cradily | 100 (cap +3) | Big Root | Storm Drain | coverage attacker | Giga Drain, Earth Power, Recover, Acid Spray |
+| 4 | Melmetal | 100 (cap +3) | Assault Vest | Iron Fist | rare centerpiece | Double Iron Bash, Earthquake, Ice Punch, Thunder Punch |
+| 5 | Heatran | 100 (cap +3) | Choice Scarf | Flash Fire | Choice-locked breaker | Eruption, Earth Power, Flash Cannon, Hidden Power |
+| 6 | Metagross | 100 (cap +5) | Metagrossite | Clear Body | Mega ace | Meteor Mash, Zen Headbutt, Grass Knot, Earthquake |
+
+## 552. Cynthia — Mossdeep City House 1
+
+**Optional · Double · Cap 100 · Extreme 85/100 · Uniqueness 73/100**
+
+**Theme:** Earthquake immunity
+
+Roserade and Togekiss are the authored opening pair. The board plan is earthquake immunity. The composition turns this point in the campaign into the fight's identity instead of using a generic route-trainer core. Garchomp carries the team's one Mega slot.
+
+**How it behaves:** The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe, Smart Switching. Expect it to preserve earthquake immunity rather than select six unrelated strong attacks.
+
+**Why it is hard:** 6 fully authored Pokémon, average BST 543.7, average cap offset +5.33, ace offset +7, and 100% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Wally (33% species overlap). Its species appear across an average of 6.3 unrelated trainer families.
+
+**Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Roserade | 100 (cap +5) | Focus Sash | Natural Cure | disruption and support | Sleep Powder, Sludge Bomb, Giga Drain, Spikes |
+| 2 | Togekiss | 100 (cap +5) | Shell Bell | Serene Grace | speed control | Air Slash, Aura Sphere, Thunder Wave, Roost |
+| 3 | Spiritomb | 100 (cap +5) | Leftovers | Pressure | setup attacker | Dark Pulse, Calm Mind, Substitute, Recover |
+| 4 | Lucario | 100 (cap +5) | Choice Scarf | Steadfast | Choice-locked breaker | Close Combat, Meteor Mash, Strength, Ice Punch |
+| 5 | Milotic | 100 (cap +5) | Leftovers | Multiscale | coverage attacker | Scald, Ice Beam, Recover, Mirror Coat |
+| 6 | Garchomp | 100 (cap +7) | Garchompite | Rough Skin | Mega ace | Earthquake, Draco Meteor, Stone Edge, Fire Blast |
+
+## 553. Phillip — Battle Frontier Battle Pyramid Floor | SSTidal Corridor | SSTidal Lower Deck
 
 **Optional · Single · Cap 100 · Demanding 36/100 · Uniqueness 60/100**
 
@@ -12967,7 +13056,7 @@ Machamp opens this deliberate singles fight. The roster is built as underused fi
 | 1 | Machamp | 98 (cap -2) | None | No Guard | coverage attacker | Dynamic Punch, Stone Edge, Knock Off, Dual Chop |
 | 2 | Basculin | 98 (cap -2) | None | Adaptability | coverage attacker | Liquidation, Crunch, Aqua Jet, Psychic Fangs |
 
-## 550. Leonard — SSTidal Corridor | SSTidal Lower Deck
+## 554. Leonard — SSTidal Corridor | SSTidal Lower Deck
 
 **Optional · Single · Cap 100 · Demanding 44/100 · Uniqueness 64/100**
 
@@ -12988,7 +13077,7 @@ Carracosta opens this deliberate singles fight. The roster is built as spread + 
 | 1 | Carracosta | 98 (cap -2) | None | Solid Rock | protected attacker | Liquidation, Rock Slide, Crunch, Wide Guard |
 | 2 | Sharpedo | 98 (cap -2) | None | Speed Boost | protected attacker | Hydro Pump, Crunch, Ice Beam, Protect |
 
-## 551. Colton — SSTidal Corridor | SSTidal Rooms
+## 555. Colton — SSTidal Corridor | SSTidal Rooms
 
 **Optional · Double · Cap 100 · Extreme 86/100 · Uniqueness 81/100**
 
@@ -13013,7 +13102,7 @@ Meowstic and Liepard are the authored opening pair. The board plan is dark press
 | 5 | Delcatty | 100 (cap +3) | Throat Spray | Normalize | speed control | Hyper Voice, Helping Hand, Thunder Wave, Protect |
 | 6 | Absol | 100 (cap +3) | Absolite | Super Luck | Mega ace | Knock Off, Play Rough, Sucker Punch, Protect |
 
-## 552. Micah — SSTidal Corridor | SSTidal Rooms
+## 556. Micah — SSTidal Corridor | SSTidal Rooms
 
 **Optional · Double · Cap 100 · Hard 59/100 · Uniqueness 80/100**
 
@@ -13036,7 +13125,7 @@ Manectric and Lapras are the authored opening pair. The board plan is water pres
 | 3 | Clawitzer | 98 (cap -2) | Life Orb | Mega Launcher | coverage attacker | Ice Beam, Helping Hand, Water Pulse, Muddy Water |
 | 4 | Relicanth | 98 (cap -2) | Sitrus Berry | Sturdy | protected attacker | Double Edge, Protect, Rock Slide, Waterfall |
 
-## 553. Thomas — SSTidal Corridor | SSTidal Rooms
+## 557. Thomas — SSTidal Corridor | SSTidal Rooms
 
 **Optional · Single · Cap 100 · Demanding 41/100 · Uniqueness 72/100**
 
@@ -13058,7 +13147,7 @@ Braviary opens this deliberate singles fight. The roster is built as flying mixe
 | 2 | Simisage | 98 (cap -2) | None | Gluttony | setup attacker | Hydro Pump, Ice Beam, Nasty Plot, Focus Blast |
 | 3 | Scolipede | 98 (cap -2) | None | Speed Boost | protected attacker | Megahorn, Poison Jab, Rock Climb, Protect |
 
-## 554. Lea & Jed — SSTidal Corridor | SSTidal Rooms
+## 558. Lea & Jed — SSTidal Corridor | SSTidal Rooms
 
 **Optional · Double · Cap 100 · Demanding 49/100 · Uniqueness 80/100**
 
@@ -13081,7 +13170,7 @@ Miltank and Tauros are the authored opening pair. The board plan is normal press
 | 3 | Spinda | 98 (cap -2) | Sitrus Berry | Contrary | speed control | Return, Superpower, Sucker Punch, Trick Room |
 | 4 | Primeape | 98 (cap -2) | Lum Berry | Vital Spirit | coverage attacker | Close Combat, U Turn, Night Slash, Outrage |
 
-## 555. Garret — SSTidal Corridor | SSTidal Rooms
+## 559. Garret — SSTidal Corridor | SSTidal Rooms
 
 **Optional · Single · Cap 100 · Demanding 49/100 · Uniqueness 80/100**
 
@@ -13103,7 +13192,7 @@ Persian (Alolan) opens this deliberate singles fight. The roster is built as fak
 | 2 | Furfrou Kabuki Trim | 98 (cap -2) | None | Fur Coat | speed control | Headbutt, Thunder Wave, Cotton Guard, Endeavor |
 | 3 | Weavile | 98 (cap -2) | None | Pressure | coverage attacker | Icicle Crash, Knock Off, Low Kick, Poison Jab |
 
-## 556. Naomi — SSTidal Corridor | SSTidal Rooms
+## 560. Naomi — SSTidal Corridor | SSTidal Rooms
 
 **Optional · Single · Cap 100 · Demanding 37/100 · Uniqueness 74/100**
 
@@ -13125,7 +13214,7 @@ Tsareena opens this deliberate singles fight. The roster is built as underused f
 | 2 | Mawile | 98 (cap -2) | None | Intimidate | disruption and support | Play Rough, Iron Head, Stockpile, Swallow |
 | 3 | Salazzle | 98 (cap -2) | None | Corrosion | disruption and support | Fire Blast, Sludge Bomb, Toxic, Attract |
 
-## 557. Green — Altering Cave B 1 F
+## 561. Green — Altering Cave B 1 F
 
 **Optional · Double · Cap 100 · Extreme 83/100 · Uniqueness 82/100**
 
@@ -13149,95 +13238,6 @@ Ninetales and Kangaskhan are the authored opening pair. The board plan is earthq
 | 4 | Tangrowth | 100 (cap +5) | Assault Vest | Regenerator | coverage attacker | Giga Drain, Knock Off, Earthquake, Poison Jab |
 | 5 | Mewtwo | 100 (cap +5) | Shell Bell | Unnerve | setup attacker | Psystrike, Ice Beam, Flamethrower, Nasty Plot |
 | 6 | Blastoise | 100 (cap +7) | White Herb | Mega Launcher | setup attacker | Water Pulse, Dark Pulse, Ice Beam, Shell Smash |
-
-## 558. Alannah — Ashen Woods
-
-**Optional · Single · Cap 100 · Hard 51/100 · Uniqueness 78/100**
-
-**Theme:** active speed control
-
-Primarina opens this deliberate singles fight. The roster is built as active speed control. The composition turns the surrounding forest and overgrowth into the fight's identity instead of using a generic route-trainer core.
-
-**How it behaves:** The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe. Expect it to preserve active speed control rather than select six unrelated strong attacks.
-
-**Why it is hard:** 3 fully authored Pokémon, average BST 499.7, average cap offset -1.0, ace offset -1, and 0% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Annika (20% species overlap). Its species appear across an average of 5.3 unrelated trainer families.
-
-**Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Primarina | 99 (cap -1) | None | Berserk | speed control | Sparkling Aria, Moonblast, Icy Wind, Sing |
-| 2 | Durant | 99 (cap -1) | None | Hustle | coverage attacker | X Scissor, Iron Head, Crunch, Thunder Fang |
-| 3 | Dusclops | 99 (cap -1) | None | Pressure | protected attacker | Night Shade, Curse, Protect, Infestation |
-
-## 559. Martin — Ashen Woods
-
-**Optional · Single · Cap 100 · Demanding 49/100 · Uniqueness 72/100**
-
-**Theme:** Dark rare-showcase balance
-
-Muk (Alolan) opens this deliberate singles fight. The roster is built as dark rare-showcase balance. The composition turns the surrounding forest and overgrowth into the fight's identity instead of using a generic route-trainer core. The rare showcase is Zarude.
-
-**How it behaves:** The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe. This singles or low-stakes roster emphasizes coverage, status, and matchup pressure rather than a scripted multi-Pokémon combination.
-
-**Why it is hard:** 3 fully authored Pokémon, average BST 543.3, average cap offset -1.0, ace offset -1, and 33% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Grunt (40% species overlap). Its species appear across an average of 4.3 unrelated trainer families.
-
-**Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Muk (Alolan) | 99 (cap -1) | None | Poison Touch | coverage attacker | Poison Jab, Crunch, Acid Spray, Disable |
-| 2 | Golisopod | 99 (cap -1) | None | Emergency Exit | coverage attacker | Razor Shell, First Impression, Sucker Punch, Drill Run |
-| 3 | Zarude | 99 (cap -1) | Life Orb | Leaf Guard | rare centerpiece | Knock Off, Power Whip, Close Combat, U Turn |
-
-## 560. Roman — Ashen Woods
-
-**Optional · Double · Cap 100 · Demanding 49/100 · Uniqueness 82/100**
-
-**Theme:** Earthquake immunity
-
-Bronzong and Golem are the authored opening pair. The board plan is earthquake immunity. The composition turns the surrounding forest and overgrowth into the fight's identity instead of using a generic route-trainer core.
-
-**How it behaves:** The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe, Help Partner. Expect it to preserve earthquake immunity rather than select six unrelated strong attacks.
-
-**Why it is hard:** 4 fully authored Pokémon, average BST 501.2, average cap offset -2.0, ace offset -2, and 50% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Foster (20% species overlap). Its species appear across an average of 3.2 unrelated trainer families.
-
-**Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Bronzong | 98 (cap -2) | None | Levitate | disruption and support | Gyro Ball, Extrasensory, Hypnosis, Confuse Ray |
-| 2 | Golem | 98 (cap -2) | None | Rock Head | coverage attacker | Earthquake, Rock Blast, Steamroller, Explosion |
-| 3 | Stunfisk (Galarian) | 98 (cap -2) | Leftovers | Mimicry | speed control | Earthquake, Stone Edge, Thunder Wave, Stealth Rock |
-| 4 | Shuckle | 98 (cap -2) | Chesto Berry | Sturdy | disruption and support | Rest, Acupressure, Rollout, Power Split |
-
-## 561. Elmer — Ashen Woods
-
-**Optional · Single · Cap 100 · Demanding 41/100 · Uniqueness 72/100**
-
-**Theme:** Bug pressure
-
-Scyther opens this deliberate singles fight. The roster is built as bug pressure. The composition turns the surrounding forest and overgrowth into the fight's identity instead of using a generic route-trainer core.
-
-**How it behaves:** The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe. Expect it to preserve bug pressure rather than select six unrelated strong attacks.
-
-**Why it is hard:** 3 fully authored Pokémon, average BST 500.0, average cap offset -2.0, ace offset -2, and 0% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Vicky (33% species overlap). Its species appear across an average of 4.7 unrelated trainer families.
-
-**Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Scyther | 98 (cap -2) | None | Technician | coverage attacker | Aerial Ace, X Scissor, Quick Attack, Night Slash |
-| 2 | Pinsir | 98 (cap -2) | None | Mold Breaker | setup attacker | Thrash, X Scissor, Submission, Swords Dance |
-| 3 | Heracross | 98 (cap -2) | None | Swarm | coverage attacker | Megahorn, Close Combat, Bullet Seed, Night Slash |
 
 # Rematches · Feather Badge
 
@@ -17938,6 +17938,8 @@ Conkeldurr opens this deliberate singles fight. The roster is built as priority 
 | 3 | Kangaskhan | active cap -2 | None | Early Bird | coverage attacker | Double Edge, Sucker Punch, Hammer Arm, Fire Punch |
 | 4 | Cramorant | active cap -2 | None | Gulp Missile | coverage attacker | Surf, Hurricane, Ice Beam, Feather Dance |
 
+# Rematches · Postgame
+
 ## 761. Cynthia — Mossdeep City House 1
 
 **Rematch · Double · Active cap at rematch time · Extreme 93/100 · Uniqueness 73/100**
@@ -17962,6 +17964,8 @@ Togekiss and Roserade are the authored opening pair. The board plan is earthquak
 | 4 | Milotic | active cap +5 | Leftovers | Multiscale | disruption and support | Scald, Ice Beam, Recover, Toxic |
 | 5 | Lucario | active cap +5 | Lucarionite | Steadfast | Mega ace | Close Combat, Crunch, Bullet Punch, Swords Dance |
 | 6 | Garchomp | active cap +7 | Shell Bell | Rough Skin | protected attacker | Earthquake, Dragon Claw, Scale Shot, Protect |
+
+# Rematches · Mind Badge
 
 ## 762. Tate&Liza — Mossdeep City Gym
 

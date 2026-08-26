@@ -20,7 +20,7 @@ Route111_WinstrateFamilysHouse_EventScript_Victoria:: @ 822A4A2
 	setvar VAR_0x8008, LOCALID_VICTORIA
 	goto_if_set FLAG_RECEIVED_LIFE_ORB, Route111_WinstrateFamilysHouse_EventScript_ReceivedLifeOrb
 	msgbox Route111_WinstrateFamilysHouse_Text_LikeYouToHaveLifeOrb, MSGBOX_DEFAULT
-	giveitem ITEM_TOXIC_ORB
+	giveitem ITEM_DESTINY_KNOT
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_LIFE_ORB
@@ -71,11 +71,10 @@ Route111_WinstrateFamilysHouse_Text_MySonIsStrongerThanYou: @ 822A539
 	.string "challenge, I'll have you know.$"
 
 Route111_WinstrateFamilysHouse_Text_LikeYouToHaveLifeOrb: @ 822A5F4
-	.string "We sometimes use this Toxic Orb for\n"
-	.string "clever battle strategies.\p"
+	.string "Our family treasures a Destiny Knot\n"
+	.string "as a symbol of the ties between us.\p"
 	.string "Since you've beaten all of us here,\n"
-	.string "I don't know if you need it, but we\l"
-	.string "would like you to have our Toxic Orb.$"
+	.string "we would like you to have it.$"
 
 Route111_WinstrateFamilysHouse_Text_PassionateAboutBattles: @ 822A6B4
 	.string "When it comes to Pokémon battles,\n"

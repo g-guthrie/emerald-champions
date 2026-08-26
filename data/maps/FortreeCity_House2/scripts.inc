@@ -74,26 +74,22 @@ FortreeCity_House2_EventScript_SleepTalkTaught::
 	end
 
 FortreeCity_House2_Text_WantSleepTalk:
-	.string "Humph! My wife relies on Hidden\n"
-	.string "Power to stay awake.\p"
-	.string "She should just take a nap like I do,\n"
-	.string "and Sleep Talk.\p"
-	.string "I can teach your Pokémon how to\n"
-	.string "Sleep Talk instead. Interested?$"
+	.string "Humph! My wife trusts Hidden Power.\p"
+	.string "I prefer a good nap, but powder and\n"
+	.string "rough weather can ruin one.\p"
+	.string "I have spare Safety Goggles.\n"
+	.string "Would you like them?$"
 
 FortreeCity_House2_Text_SleepTalkDeclined:
-	.string "Oh, fine, fine. You want to stay awake\n"
-	.string "with Hidden Power, too…$"
+	.string "Fine, fine. Stay alert out there!$"
 
 FortreeCity_Text_GiveTM49:
 	.string "Ah, an appreciative child!\n"
 	.string "Please take these Safety Goggles.$"
 
 FortreeCity_Text_HaveTM49:
-	.string "I've never once gotten my wife's\n"
-	.string "coin trick right.\p"
-	.string "I would be happy if I got it right\n"
-	.string "even as I Sleep Talk…$"
+	.string "Safety Goggles block powder moves\n"
+	.string "and sandstorm or hail damage.$"
 
 FortreeCity_House2_Text_HiddenPowersArousedByNature: @ 8217882
 	.string "People… Pokémon…\p"
@@ -121,13 +117,13 @@ FortreeCity_House2_Text_CorrectTryAgainWhichHand2: @ 82179C9
 
 FortreeCity_House2_Text_YourHiddenPowerHasAwoken: @ 8217A28
 	.string "Oh! Splendid!\n"
-	.string "Your hidden power has awoken!\p"
-	.string "Here, take this and awaken the hidden\n"
-	.string "power of your Pokémon.$"
+	.string "Your insight has awoken!\p"
+	.string "Take this Wide Lens. It makes a\n"
+	.string "holder's moves more accurate.$"
 
 FortreeCity_House2_Text_ExplainHiddenPower: @ 8217A91
-	.string "Hidden Power is a move that changes\n"
-	.string "with the Pokémon.$"
+	.string "A Wide Lens improves the accuracy of\n"
+	.string "every move its holder uses.$"
 
 FortreeCity_House2_Text_YouGuessedWrong: @ 8217AC7
 	.string "No, too bad.\n"

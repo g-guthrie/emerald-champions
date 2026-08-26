@@ -18,12 +18,16 @@ DesertUnderpass_EventScript_Fossil:: @ 823AF41
 
 DesertUnderpass_EventScript_GiveClawFossil:: @ 823AF57
 	giveitem ITEM_CLAW_FOSSIL
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	removeobject LOCALID_FOSSIL
 	release
 	end
 
 DesertUnderpass_EventScript_GiveRootFossil:: @ 823AF68
 	giveitem ITEM_ROOT_FOSSIL
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	removeobject LOCALID_FOSSIL
 	release
 	end
@@ -35,4 +39,3 @@ DesertUnderpass_Text_FoundRootFossil:: @ 823AF79
 @ Unused
 DesertUnderpass_Text_FoundClawFossil:: @ 823AF93
 	.string "{PLAYER} found the Claw Fossil.$"
-

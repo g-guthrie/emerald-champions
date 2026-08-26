@@ -17,6 +17,7 @@ This repository is the source-only checkpoint for Emerald Champions. It intentio
 - Seventeen remaining weak Pokémon/forms receive restrained stat corrections.
 - Encounter upgrades provide high-value team-building options throughout the campaign.
 - A source-backed 30-question audit guards progression, incentives, dialogue, menus, AI, and encounter logic.
+- A causal story audit guards Gym order, first-Mega access, ferry destinations, postgame rival lifecycle, guide chronology, and retry safety for irreversible progression gifts.
 
 ## Reproducible checks
 
@@ -29,6 +30,7 @@ python3 scripts/verdant_team_quality_audit.py --check
 python3 scripts/verdant_battle_guide.py --check
 python3 scripts/verdant_ai_audit.py
 python3 scripts/verdant_logical_audit.py
+python3 scripts/emerald_champions_story_progression_audit.py
 python3 scripts/verify_verdant.py
 ```
 

@@ -17,6 +17,7 @@ EverGrandeCity_HallOfFame_EventScript_SetGameClearFlags:: @ 82717C1
 	setflag FLAG_HIDE_SAFARI_ZONE_SOUTH_CONSTRUCTION_WORKERS
 	clearflag FLAG_HIDE_SAFARI_ZONE_SOUTH_EAST_EXPANSION
 	setflag FLAG_HIDE_LILYCOVE_CITY_RIVAL
+	clearflag FLAG_HIDE_ROUTE_103_RIVAL
 	compare VAR_CYNTHIA_STATE, 0
 	call_if_eq EverGrandeCity_HallOfFame_EventScript_ReadyCynthiaEvent
 	special UpdateTrainerFanClubGameClear

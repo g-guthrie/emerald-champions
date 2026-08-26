@@ -1,12 +1,17 @@
-General_Pokemart_Script::
+PokemonCenter_BattleItemMart_Script::
+General_Pokemart_Script:: @ Compatibility alias for old maps and scripts.
 	lock
 	faceplayer
-	message gText_HowMayIServeYou
+	message PokemonCenter_BattleItemMart_Text_Welcome
 	waitmessage
 	special OpenUnlockedBattleItemMart
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
+
+PokemonCenter_BattleItemMart_Text_Welcome:
+	.string "I stock held items for serious\n"
+	.string "team building. What do you need?$"
 
 	.align 2
 PokeMart_No_Badges::

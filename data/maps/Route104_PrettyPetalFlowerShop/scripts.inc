@@ -78,6 +78,8 @@ Route104_PrettyPetalFlowerShop_EventScript_WailmerPailGirl:: @ 822A40C
 Route104_PrettyPetalFlowerShop_EventScript_GiveWailmerPail:: @ 822A421
 	msgbox Route104_PrettyPetalFlowerShop_Text_YouCanHaveThis, MSGBOX_DEFAULT
 	giveitem ITEM_WAILMER_PAIL
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox Route104_PrettyPetalFlowerShop_Text_WailmerPailExplanation, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_WAILMER_PAIL
 	release

@@ -41,6 +41,8 @@ RustboroCity_Flat2_2F_EventScript_GiveFloatStone::
 	goto_if_set FLAG_ITEM_RUSTBORO_FLOAT_STONE, RustboroCity_Flat2_2F_EventScript_GaveFloatStone
 	msgbox RustboroCity_Flat2_2F_Text_MyDadsAceAtDevon, MSGBOX_DEFAULT
 	giveitem ITEM_FLOAT_STONE
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox RustboroCity_Flat2_2F_Text_PokemonHoldFloatStone, MSGBOX_DEFAULT
 	setflag FLAG_ITEM_RUSTBORO_FLOAT_STONE
 	release

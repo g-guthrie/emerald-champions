@@ -491,6 +491,8 @@ Route110_EventScript_BrendanDefeated:: @ 81EF8C4
 
 Route110_EventScript_GiveItemfinder:: @ 81EF8DF
 	giveitem ITEM_ITEMFINDER
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	return
 
 Route110_EventScript_RivalExit:: @ 81EF8EC

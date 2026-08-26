@@ -5,6 +5,9 @@ MeteorFalls_StevensCave_MapScripts:: @ 823B181
 
 MeteorFalls_StevensCave_EventScript_Steven:: @ 823B182
 	lock
+	goto_if_set FLAG_RECEIVED_AURORA_TICKET, MeteorFalls_StevensCave_EventScript_CheckDailyRematch
+	goto_if_defeated TRAINER_STEVEN, MeteorFalls_StevensCave_EventScript_GiveAuroraTicket
+MeteorFalls_StevensCave_EventScript_CheckDailyRematch:
 	goto_if_set FLAG_DAILY_REMATCH_STEVEN, MeteorFalls_StevensCave_EventScript_Defeated
 	waitse
 	playse SE_PIN
@@ -25,6 +28,7 @@ MeteorFalls_StevensCave_EventScript_Steven:: @ 823B182
 MeteorFalls_StevensCave_EventScript_Defeated:: @ 823B1CD
 	applymovement LOCALID_STEVEN, Common_Movement_FacePlayer
 	waitmovement 0
+	goto_if_unset FLAG_RECEIVED_AURORA_TICKET, MeteorFalls_StevensCave_EventScript_GiveAuroraTicket
 	msgbox MeteorFalls_StevensCave_Text_MyPredictionCameTrue, MSGBOX_DEFAULT
 	release
 	end
@@ -32,6 +36,8 @@ MeteorFalls_StevensCave_EventScript_Defeated:: @ 823B1CD
 MeteorFalls_StevensCave_EventScript_GiveAuroraTicket:
 	msgbox MeteorFalls_StevensCave_Text_BirthIsland, MSGBOX_DEFAULT
 	giveitem ITEM_AURORA_TICKET
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_AURORA_TICKET
 	setflag FLAG_ENABLE_SHIP_BIRTH_ISLAND
 	release

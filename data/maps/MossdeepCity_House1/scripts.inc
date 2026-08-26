@@ -34,13 +34,9 @@ MossdeepCity_House1_EventScript_CynthiaBattle::
 	msgbox MossdeepCity_House1_Text_BeyondExpectation, MSGBOX_DEFAULT
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkUp
 	waitmovement 0
-	giveitem ITEM_MYSTIC_TICKET
-	setflag FLAG_ENABLE_SHIP_NAVEL_ROCK
-	setflag FLAG_RECEIVED_MYSTIC_TICKET
 	setflag FLAG_DAILY_REMATCH_CYNTHIA
 	setvar VAR_CYNTHIA_STATE, 2
-	releaseall
-	end
+	goto MossdeepCity_House1_EventScript_GiveMysticTicket
 
 MossdeepCity_House1_EventScript_CynthiaHeal::
 	msgbox MossdeepCity_House1_Text_LetMeHealYourPokemon, MSGBOX_DEFAULT
@@ -52,8 +48,26 @@ MossdeepCity_House1_EventScript_CynthiaHeal::
 MossdeepCity_House1_EventScript_Cynthia::
 	lockall
 	faceplayer
+	compare VAR_CYNTHIA_STATE, 2
+	goto_if_eq MossdeepCity_House1_EventScript_CynthiaAfterFirstVictory
 	goto_if_unset FLAG_DAILY_REMATCH_CYNTHIA, MossdeepCity_House1_EventScript_CynthiaRematch
 	msgbox MossdeepCity_House1_Text_AfterBattle, MSGBOX_DEFAULT
+	releaseall
+	end
+
+MossdeepCity_House1_EventScript_CynthiaAfterFirstVictory::
+	goto_if_unset FLAG_RECEIVED_MYSTIC_TICKET, MossdeepCity_House1_EventScript_GiveMysticTicket
+	goto_if_unset FLAG_DAILY_REMATCH_CYNTHIA, MossdeepCity_House1_EventScript_CynthiaRematch
+	msgbox MossdeepCity_House1_Text_AfterBattle, MSGBOX_DEFAULT
+	releaseall
+	end
+
+MossdeepCity_House1_EventScript_GiveMysticTicket::
+	giveitem ITEM_MYSTIC_TICKET
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
+	setflag FLAG_ENABLE_SHIP_NAVEL_ROCK
+	setflag FLAG_RECEIVED_MYSTIC_TICKET
 	releaseall
 	end
 

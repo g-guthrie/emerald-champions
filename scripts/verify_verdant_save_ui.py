@@ -2,6 +2,7 @@
 """Focused, source-level regression checks for Verdant save and native UI code."""
 
 from pathlib import Path
+import re
 import sys
 
 
@@ -23,6 +24,14 @@ tutor = read("data/scripts/pokemon_center_move_tutor.inc")
 daycare_script = read("data/scripts/day_care.inc")
 daycare = read("src/daycare.c")
 overworld = read("src/overworld.c")
+general_mart_stock = read("data/scripts/general_mart.inc")
+battle_item_unlocks = item.split("sBattleItemUnlocks[]", 1)[1].split("};", 1)[0]
+all_map_json = "\n".join(path.read_text() for path in (ROOT / "data" / "maps").rglob("map.json"))
+core_items = (
+    "ITEM_LIFE_ORB", "ITEM_CHOICE_BAND", "ITEM_CHOICE_SPECS", "ITEM_CHOICE_SCARF",
+    "ITEM_FOCUS_SASH", "ITEM_ASSAULT_VEST", "ITEM_EVIOLITE", "ITEM_LEFTOVERS",
+    "ITEM_ROCKY_HELMET", "ITEM_HEAVY_DUTY_BOOTS",
+)
 
 
 checks = {
@@ -110,10 +119,12 @@ checks = {
         item.count("if (newItems == NULL)") >= 2
         and item.count("if (newItems == NULL || newQuantities == NULL)") >= 2
     ),
-    "regular Marts append the core stock once": (
-        "BuildPokemartItemsWithCoreStock(itemsForSale)" in shop
-        and "alreadyStocked" in shop
-        and "ITEM_RARE_CANDY" in shop.split("sCorePokemartStock[]", 1)[1].split("};", 1)[0]
+    "medicine Marts and Center battle vendors keep separate useful stock": (
+        "BuildPokemartItemsWithCoreStock" not in shop
+        and general_mart_stock.count("ITEM_RARE_CANDY") == 9
+        and all(re.search(rf"\{{{item},\s+0\}}", battle_item_unlocks) for item in core_items)
+        and all_map_json.count('"script": "PokemonCenter_BattleItemMart_Script"') == 16
+        and all_map_json.count('"script": "General_Pokemart_Script"') == 0
     ),
     "shop item-name storage includes the EOS byte": (
         "u8 (*sItemNames)[ITEM_NAME_LENGTH]" in shop

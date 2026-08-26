@@ -127,7 +127,7 @@ SootopolisCity_Gym_1F_EventScript_JuanDefeated:: @ 8224F82
 	end
 
 SootopolisCity_Gym_1F_EventScript_GiveScald:: @ 8224FD4
-	giveitem ITEM_WEAKNESS_POLICY
+	giveitem ITEM_UTILITY_UMBRELLA
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_BagIsFull
 	msgbox SootopolisCity_Gym_1F_Text_ExplainScald, MSGBOX_DEFAULT
@@ -135,7 +135,7 @@ SootopolisCity_Gym_1F_EventScript_GiveScald:: @ 8224FD4
 	return
 
 SootopolisCity_Gym_1F_EventScript_GiveScald2:: @ 8224FF7
-	giveitem ITEM_WEAKNESS_POLICY
+	giveitem ITEM_UTILITY_UMBRELLA
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox SootopolisCity_Gym_1F_Text_ExplainScald, MSGBOX_DEFAULT
@@ -312,9 +312,9 @@ SootopolisCity_Gym_1F_Text_TakeThis:
 	.string "battle we shared, take this…$"
 
 SootopolisCity_Gym_1F_Text_ExplainScald: @ 82256C1
-	.string "That Weakness Policy rewards a Pokémon\n"
-	.string "for enduring a super-effective hit by\l"
-	.string "sharply raising its offenses.$"
+	.string "A Utility Umbrella shields a holder\n"
+	.string "from the effects of harsh sunlight\l"
+	.string "and rain. Use it with elegance.$"
 
 SootopolisCity_Gym_1F_Text_RegisteredJuan: @ 822574D
 	.string "Registered Gym Leader Juan\n"

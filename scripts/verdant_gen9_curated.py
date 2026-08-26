@@ -52,8 +52,18 @@ WILD_AVAILABILITY = {
     },
     "MAP_DESERT_UNDERPASS": {"land_mons": {4: "SPECIES_TING_LU"}},
     "MAP_ASHEN_WOODS": {"land_mons": {4: "SPECIES_CHI_YU"}},
-    "MAP_METEOR_FALLS_STEVENS_CAVE": {"land_mons": {4: "SPECIES_ROARING_MOON"}},
+    # Steven's Cave is opened only after game clear.  Use the Waterfall-gated
+    # pre-League room so every curated endpoint can join the campaign before
+    # the credits.
+    "MAP_METEOR_FALLS_B1F_2R": {"land_mons": {4: "SPECIES_ROARING_MOON"}},
     "MAP_VICTORY_ROAD_1F": {"land_mons": {4: "SPECIES_IRON_VALIANT"}},
+}
+
+# Clear the former postgame-only source when restoring availability.  This is
+# not an additional curated source and therefore is excluded from the reported
+# 25-source total.
+RETIRED_WILD_SOURCES = {
+    "MAP_METEOR_FALLS_STEVENS_CAVE": {"land_mons": {4: "SPECIES_METAGROSS"}},
 }
 
 # These replace redundant Rare Candy balls; Rare Candy remains universal Mart
@@ -790,6 +800,13 @@ def apply_availability() -> None:
                 if mons[index]["species"] != species:
                     mons[index]["species"] = species
                     changed_slots += 1
+    for map_id, methods in RETIRED_WILD_SOURCES.items():
+        for method, slots in methods.items():
+            mons = by_map[map_id][method]["mons"]
+            for index, species in slots.items():
+                if mons[index]["species"] != species:
+                    mons[index]["species"] = species
+                    changed_slots += 1
     ENCOUNTERS.write_text(json.dumps(data, indent=2) + "\n")
 
     scripts = ITEM_BALL_SCRIPTS.read_text()
@@ -856,6 +873,18 @@ def availability_problems() -> list[str]:
                 if rate < 10:
                     problems.append(
                         f"{map_id} {method}[{index}] {species} is grindy at {rate}%"
+                    )
+
+    for map_id, methods in RETIRED_WILD_SOURCES.items():
+        for method, slots in methods.items():
+            mons = by_map.get(map_id, {}).get(method, {}).get("mons", [])
+            for index, species in slots.items():
+                if index >= len(mons):
+                    problems.append(f"{map_id} {method} has no retired-source slot {index}")
+                elif mons[index]["species"] != species:
+                    problems.append(
+                        f"{map_id} {method}[{index}] retained former curated source "
+                        f"{mons[index]['species']}, expected {species}"
                     )
 
     for species in ("SPECIES_PAWNIARD", "SPECIES_PRIMEAPE", "SPECIES_GIRAFARIG"):

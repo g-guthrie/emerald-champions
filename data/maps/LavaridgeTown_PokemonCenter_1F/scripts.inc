@@ -110,12 +110,20 @@ LavaridgeTown_PokemonCenter_1F_EventScript_LucyTrigger::
 	compare VAR_RESULT, NO
 	goto_if_eq LavaridgeTown_PokemonCenter_1F_EventScript_LucyRefuse
 LavaridgeTown_PokemonCenter_1F_EventScript_LucyBattle::
+	goto_if_defeated TRAINER_LUCY_LAVARIDGE, LavaridgeTown_PokemonCenter_1F_EventScript_LucyReward
 	msgbox LavaridgeTown_PokemonCenter_1F_Text_LucyBattle, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_LUCY_LAVARIDGE, LavaridgeTown_PokemonCenter_1F_Text_LucyDefeat
-	setvar VAR_LAVARIDGE_LUCY_STATE, 2
+LavaridgeTown_PokemonCenter_1F_EventScript_LucyReward::
+	checkitemspace ITEM_BLACK_SLUDGE, 1
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
+	checkitemspace ITEM_BOTTLE_CAP, 3
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox LavaridgeTown_PokemonCenter_1F_Text_LucyGiveChoiceBand, MSGBOX_DEFAULT
 	giveitem ITEM_BLACK_SLUDGE
 	giveitem ITEM_BOTTLE_CAP, 3
+	setvar VAR_LAVARIDGE_LUCY_STATE, 2
 	msgbox LavaridgeTown_PokemonCenter_1F_Text_LucyGoodbye, MSGBOX_AUTOCLOSE
 	waitmessage
 	getplayerxy VAR_0x8004, VAR_0x8005

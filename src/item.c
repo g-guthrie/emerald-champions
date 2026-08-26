@@ -24,6 +24,7 @@ static bool8 CheckPyramidBagHasItem(u16 itemId, u16 count);
 static bool8 CheckPyramidBagHasSpace(u16 itemId, u16 count);
 static void UnlockBattleItem(u16 itemId);
 static bool8 TryAddVerdantItemBundle(const u16 *itemIds, u8 count);
+static bool8 TryAddItemQuantityBundle(const struct ItemSlot *items, u8 count);
 
 struct BattleItemUnlock
 {
@@ -50,17 +51,17 @@ static const struct BattleItemUnlock sBattleItemUnlocks[] =
     {ITEM_MISTY_SEED,       5},
     {ITEM_PSYCHIC_SEED,     5},
     {ITEM_WEAKNESS_POLICY,  6},
-    {ITEM_FOCUS_SASH,       7},
+    {ITEM_FOCUS_SASH,       0},
     {ITEM_BRIGHT_POWDER,    DISCOVERY_ONLY},
     {ITEM_QUICK_CLAW,       DISCOVERY_ONLY},
-    {ITEM_CHOICE_BAND,      DISCOVERY_ONLY},
+    {ITEM_CHOICE_BAND,      0},
     {ITEM_KINGS_ROCK,       DISCOVERY_ONLY},
     {ITEM_FOCUS_BAND,       DISCOVERY_ONLY},
     {ITEM_SCOPE_LENS,       DISCOVERY_ONLY},
-    {ITEM_LEFTOVERS,        DISCOVERY_ONLY},
+    {ITEM_LEFTOVERS,        0},
     {ITEM_RAZOR_FANG,       DISCOVERY_ONLY},
-    {ITEM_CHOICE_SCARF,     DISCOVERY_ONLY},
-    {ITEM_CHOICE_SPECS,     DISCOVERY_ONLY},
+    {ITEM_CHOICE_SCARF,     0},
+    {ITEM_CHOICE_SPECS,     0},
     {ITEM_WIDE_LENS,        DISCOVERY_ONLY},
     {ITEM_ZOOM_LENS,        DISCOVERY_ONLY},
     {ITEM_METRONOME,        DISCOVERY_ONLY},
@@ -68,27 +69,28 @@ static const struct BattleItemUnlock sBattleItemUnlocks[] =
     {ITEM_WISE_GLASSES,     DISCOVERY_ONLY},
     {ITEM_EXPERT_BELT,      DISCOVERY_ONLY},
     {ITEM_LIGHT_CLAY,       DISCOVERY_ONLY},
-    {ITEM_LIFE_ORB,         DISCOVERY_ONLY},
+    {ITEM_LIFE_ORB,         0},
     {ITEM_TOXIC_ORB,        DISCOVERY_ONLY},
     {ITEM_FLAME_ORB,        DISCOVERY_ONLY},
     {ITEM_BLACK_SLUDGE,     DISCOVERY_ONLY},
     {ITEM_SHED_SHELL,       DISCOVERY_ONLY},
-    {ITEM_EVIOLITE,         DISCOVERY_ONLY},
-    {ITEM_ROCKY_HELMET,     DISCOVERY_ONLY},
-    {ITEM_ASSAULT_VEST,     DISCOVERY_ONLY},
+    {ITEM_EVIOLITE,         0},
+    {ITEM_ROCKY_HELMET,     0},
+    {ITEM_ASSAULT_VEST,     0},
     {ITEM_SAFETY_GOGGLES,   DISCOVERY_ONLY},
     {ITEM_ADRENALINE_ORB,   DISCOVERY_ONLY},
     {ITEM_TERRAIN_EXTENDER, DISCOVERY_ONLY},
     {ITEM_PROTECTIVE_PADS,  DISCOVERY_ONLY},
     {ITEM_THROAT_SPRAY,     DISCOVERY_ONLY},
     {ITEM_EJECT_PACK,       DISCOVERY_ONLY},
-    {ITEM_HEAVY_DUTY_BOOTS, DISCOVERY_ONLY},
+    {ITEM_HEAVY_DUTY_BOOTS, 0},
     {ITEM_BLUNDER_POLICY,   DISCOVERY_ONLY},
     {ITEM_ROOM_SERVICE,     DISCOVERY_ONLY},
     {ITEM_BOOSTER_ENERGY,   DISCOVERY_ONLY},
     {ITEM_WELLSPRING_MASK,  DISCOVERY_ONLY},
     {ITEM_HEARTHFLAME_MASK, DISCOVERY_ONLY},
     {ITEM_CORNERSTONE_MASK, DISCOVERY_ONLY},
+    {ITEM_UTILITY_UMBRELLA, DISCOVERY_ONLY},
 };
 
 static u16 GetBattleItemUnlockFlag(u16 index)
@@ -99,6 +101,8 @@ static u16 GetBattleItemUnlockFlag(u16 index)
         return FLAG_UNUSED_0x8E3;
     if (index < 50)
         return FLAG_UNUSED_0x8EB + index - 42;
+    if (index == 54)
+        return FLAG_VERDANT_BATTLE_ITEM_UTILITY_UMBRELLA;
     return FLAG_UNUSED_0x900 + index - 50;
 }
 
@@ -192,6 +196,34 @@ static bool8 TryAddVerdantItemBundle(const u16 *itemIds, u8 count)
     return TRUE;
 }
 
+static bool8 TryAddItemQuantityBundle(const struct ItemSlot *items, u8 count)
+{
+    bool8 added[4] = {FALSE};
+    u8 i;
+
+    if (count > ARRAY_COUNT(added))
+        return FALSE;
+
+    for (i = 0; i < count; i++)
+    {
+        if (items[i].quantity == 0)
+            continue;
+        if (!AddBagItem(items[i].itemId, items[i].quantity))
+        {
+            while (i > 0)
+            {
+                i--;
+                if (added[i])
+                    RemoveBagItem(items[i].itemId, items[i].quantity);
+            }
+            return FALSE;
+        }
+        added[i] = TRUE;
+    }
+
+    return TRUE;
+}
+
 bool8 TryAddVerdantMegaKit(void)
 {
     static const u16 sMegaKit[] =
@@ -217,6 +249,93 @@ bool8 TryAddVerdantStevenRewardBundle(void)
     };
 
     return TryAddVerdantItemBundle(sStevenRewardBundle, ARRAY_COUNT(sStevenRewardBundle));
+}
+
+bool8 TryAddVerdantLatiStoneBundle(void)
+{
+    static const u16 sLatiStoneBundle[] =
+    {
+        ITEM_LATIOSITE,
+        ITEM_LATIASITE,
+    };
+
+    return TryAddVerdantItemBundle(sLatiStoneBundle, ARRAY_COUNT(sLatiStoneBundle));
+}
+
+bool8 TryAddVerdantWeatherRockBundle(void)
+{
+    static const u16 sWeatherRockBundle[] =
+    {
+        ITEM_HEAT_ROCK,
+        ITEM_DAMP_ROCK,
+        ITEM_ICY_ROCK,
+        ITEM_SMOOTH_ROCK,
+    };
+
+    return TryAddVerdantItemBundle(sWeatherRockBundle, ARRAY_COUNT(sWeatherRockBundle));
+}
+
+bool8 TryAddEmeraldChampionsGymRewardMigration(void)
+{
+    u16 items[4];
+    u8 count = 0;
+
+    if (FlagGet(FLAG_RECEIVED_TM50))
+        items[count++] = ITEM_EJECT_PACK;
+    if (FlagGet(FLAG_RECEIVED_TM51))
+        items[count++] = ITEM_ADRENALINE_ORB;
+    if (FlagGet(FLAG_RECEIVED_TM03))
+        items[count++] = ITEM_UTILITY_UMBRELLA;
+    if (FlagGet(FLAG_RECEIVED_LIFE_ORB))
+        items[count++] = ITEM_DESTINY_KNOT;
+
+    return TryAddVerdantItemBundle(items, count);
+}
+
+bool8 TryAddEmeraldChampionsItemBallMigration(void)
+{
+    struct ItemSlot items[4] = {0};
+
+    items[0].itemId = ITEM_PP_MAX;
+    items[0].quantity =
+        FlagGet(FLAG_ITEM_ROUTE_109_RARE_CANDY)
+      + FlagGet(FLAG_ITEM_SHOAL_CAVE_INNER_ROOM_RARE_CANDY)
+      + FlagGet(FLAG_ITEM_ROUTE_114_TM53_PSYSHOCK)
+      + FlagGet(FLAG_ITEM_JAGGED_PASS_TM69_ROCK_POLISH)
+      + FlagGet(FLAG_ITEM_METEOR_FALLS_B1F_2R_TM_02)
+      + FlagGet(FLAG_ITEM_SCORCHED_SLAB_TM_11)
+      + FlagGet(FLAG_ITEM_MT_PYRE_EXTERIOR_TM_48)
+      + FlagGet(FLAG_ITEM_SHOAL_CAVE_ICE_ROOM_TM_07)
+      + FlagGet(FLAG_EMBER_PATH_SMACK_DOWN)
+      + FlagGet(FLAG_TM21_FRUSTRATION);
+
+    items[1].itemId = ITEM_GOLD_BOTTLE_CAP;
+    items[1].quantity =
+        FlagGet(FLAG_ITEM_LILYCOVE_CITY_LIGHT_CLAY)
+      + FlagGet(FLAG_ITEM_TRICK_HOUSE_PUZZLE_8_DESTINY_KNOT)
+      + FlagGet(FLAG_ITEM_ROUTE_105_ABILITY_PATCH)
+      + FlagGet(FLAG_ITEM_ROUTE_115_TM_01)
+      + FlagGet(FLAG_ITEM_ROUTE_123_TM99_DAZZLING_GLEAM)
+      + FlagGet(FLAG_ITEM_METEOR_FALLS_1F_1R_TM_23)
+      + FlagGet(FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOM_1_TM_18)
+      + FlagGet(FLAG_ITEM_MT_PYRE_6F_TM_30)
+      + FlagGet(FLAG_ITEM_SHOAL_CAVE_STAIRS_ROOM_TM70_AURORA_VEIL)
+      + FlagGet(FLAG_ITEM_VICTORY_ROAD_B1F_TM_29)
+      + FlagGet(FLAG_ITEM_AQUA_HIDEOUT_B1F_TM97_DARK_PULSE);
+
+    items[2].itemId = ITEM_SPORT_BALL;
+    items[2].quantity =
+        FlagGet(FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_TM_13)
+      + FlagGet(FLAG_ITEM_SAFARI_ZONE_NORTH_WEST_TM_22)
+      + FlagGet(FLAG_ASHEN_WOODS_U_TURN);
+
+    items[3].itemId = ITEM_BEAST_BALL;
+    items[3].quantity =
+        FlagGet(FLAG_ITEM_SAFARI_ZONE_SOUTH_EAST_TM53_ENERGY_BALL)
+      + FlagGet(FLAG_ITEM_ROUTE_124_TM85_DREAM_EATER)
+      + FlagGet(FLAG_TM93_WILD_CHARGE);
+
+    return TryAddItemQuantityBundle(items, ARRAY_COUNT(items));
 }
 
 u16 BuildUnlockedBattleItemList(u16 *items, u16 capacity)

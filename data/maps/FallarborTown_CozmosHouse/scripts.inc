@@ -175,6 +175,8 @@ FallarborTown_CozmosHouse_EventScript_CozmoIsSad:: @ 8200FDA
 FallarborTown_CozmosHouse_EventScript_GiveGalladite::
 	msgbox FallarborTown_CozmosHouse_Text_PleaseTakeThis, MSGBOX_DEFAULT
 	giveitem ITEM_GALLADITE
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_GALLADITE
 	releaseall
 	end

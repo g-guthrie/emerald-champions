@@ -27,6 +27,8 @@ VerdanturfTown_PokemonCenter_1F_EventScript_XscissorTM::
 	goto_if_eq VerdanturfTown_PokemonCenter_1F_EventScript_DontLikeBugs
 	msgbox VerdanturfTown_PokemonCenter_1F_Text_GiveTM81, MSGBOX_DEFAULT
 	giveitem ITEM_SILVER_POWDER
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_VERDANT_GIFT_X_SCISSOR
 	msgbox VerdanturfTown_PokemonCenter_1F_Text_HaveTM81, MSGBOX_DEFAULT
 	release

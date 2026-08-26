@@ -1,4 +1,4 @@
-# Verdant logical audit
+# Emerald Champions logical audit
 
 This is the design and code gate for the mostly-doubles checkpoint. The audit is executable:
 
@@ -15,15 +15,15 @@ The build is accepted only when all thirty questions pass, followed by the broad
 3. Does one Rare Candy add ten levels but stop at the current cap? **Yes.** The target is `min(level + 10, cap)`.
 4. Does that jump preserve move learning and chained evolutions? **Yes.** Every crossed level is checked and evolution callbacks can continue.
 5. Can leveling stay frictionless without being free? **Yes.** Rare Candies cost $1,000.
-6. Are the ten foundational held items sold by every normal Poké Mart? **Yes.** Normal Mart stock is safely augmented in code.
-7. Can a long Mart inventory or item name corrupt the Cancel row? **No.** The shared stock buffer is bounded and names use `ITEM_NAME_LENGTH`.
+6. Are the ten foundational held items sold by every Pokémon Center battle vendor? **Yes.** The second Center clerk offers them from the beginning for $1,000 each.
+7. Do ordinary Poké Marts retain their medicine, Ball, and Repel progression while keeping Rare Candy available? **Yes.** Their native tiered inventories are unchanged except for one $1,000 Rare Candy entry, and battle gear is no longer appended to unrelated shops.
 
 ## Rewards and team construction
 
 8. Are obsolete TM pickups, gifts, and shop entries completely gone? **Yes.** TM objects are no longer distributed; legal moves live at the teacher.
 9. Do the old TM specialty vendors still have a purpose? **Yes.** Slateport sells early type boosters; Lilycove sells advanced type and weather items.
 10. Do campaign gifts duplicate the ten always-stocked core items? **No.** Those gifts and pickups were replaced.
-11. Does finding or receiving a non-core battle item permanently unlock it? **Yes.** Bag acquisition records the unlock and Marts rebuild from it.
+11. Does finding or receiving a non-core battle item permanently unlock it? **Yes.** Bag acquisition records the unlock and the Center battle vendor rebuilds from it.
 12. Can the Pokémon Center teacher offer every legal move source? **Yes.** Level-up, Egg, TM/HM, and tutor lists are merged and deduplicated.
 13. Is that complete move list available before the first Badge? **Yes.** The live teacher path has no Badge gate.
 14. Can abilities be changed natively without consumables? **Yes.** The party action menu lists only that species' unique legal ability slots.
@@ -47,7 +47,7 @@ The build is accepted only when all thirty questions pass, followed by the broad
 
 27. Are Megas and Primals constrained and deliberately showcased? **Yes.** Bosses retain at most one Mega, every new Mega appears during campaign progression, and source-legal Blue Orb/Red Orb Primals are allowed only when an intentional dossier records them.
 28. Does the player receive Mega access early enough to experiment? **Yes.** Steven gives the Bracelet and Hoenn starter stones in Granite Cave, with a Norman fallback.
-29. Are exciting early encounters accessible without one-percent hunting? **Yes.** Six early areas each have two new high-value species at 4% or better, while all native slot counts remain intact.
+29. Are exciting encounters accessible without one-percent or catch-rate-3 hunting? **Yes.** No land slot remains at 1%; the six early showcase areas remain at 8% or better; paired late tail slots aggregate to 10-15% identities; and every legacy legendary retained in an ordinary wild table now has catch rate 45. Darkrai and Marshadow are withheld from random encounters for the League.
 30. Are rewritten rewards, dialogue, and menus visually and semantically clean? **Yes.** Stale TM speech is gone, rewritten reward lines have a conservative 36-character limit, and item menus use the canonical name width.
 
 ## Concrete findings fixed during this audit
@@ -56,4 +56,10 @@ The build is accepted only when all thirty questions pass, followed by the broad
 - Replaced the last two TM shop inventories with useful held-item strategy stock.
 - Reflowed the touched reward dialogue to a conservative in-game line budget.
 - Replaced Wattson's already-available Cell Battery reward with Wise Glasses so the Gym prize remains meaningful.
-- Added a permanent thirty-question audit to the main Verdant verifier.
+- Made every one-time Mega Stone and multi-item trainer reward retry-safe on a full Bag.
+- Gave all eight Gyms a distinct first fixed item unlock: Expert Belt, Flame Orb, Wise Glasses, Eject Pack, Toxic Orb, Adrenaline Orb, Light Clay, and Utility Umbrella.
+- Replaced twenty-three mid/late former-TM filler balls with PP Max, Gold Bottle Caps, Sport Balls, or Beast Balls while retaining eleven intentional early Rare Candies.
+- Added a generated item-economy ledger that gates first sources, reward delivery, stale dialogue, and fixed Gym-reward collisions.
+- Consolidated Route 104, Route 110, Route 121, the eastern ocean, Magma Hideout, and Seafloor Cavern so desirable species are not isolated in 4-5% slots.
+- Moved Roaring Moon from postgame-only Steven's Cave to the pre-League Waterfall room in Meteor Falls.
+- Added a permanent thirty-question audit to the main source verifier.

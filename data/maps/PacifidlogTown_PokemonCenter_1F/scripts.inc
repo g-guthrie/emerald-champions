@@ -77,8 +77,6 @@ PacifidlogTown_PokemonCenter_1F_Text_GiveExplosion: @ 82C7CFA
 	.string "you this Room Service!$"
 
 PacifidlogTown_PokemonCenter_1F_Text_HaveExplosion: @ 82C7E7A
-	.string "For a long time, I've taught Pokémon\n"
-	.string "how to use Explosion, but I've yet\l"
-	.string "to ignite my own Explosion…\p"
-	.string "Maybe it's because deep down,\n"
-	.string "I would rather stay here…$"
+	.string "Room Service lowers its holder's\n"
+	.string "Speed when Trick Room begins.\p"
+	.string "Maybe slowing down isn't so bad.$"

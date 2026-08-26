@@ -32,6 +32,8 @@ LilycoveCity_ContestLobby_EventScript_ReceptionWelcome:: @ 8279CEA
 LilycoveCity_ContestLobby_EventScript_GivePokeblockCase:: @ 8279CF3
 	msgbox LilycoveCity_ContestLobby_Text_ReceptionDontHavePokeblockCase, MSGBOX_DEFAULT
 	giveitem ITEM_POKEBLOCK_CASE
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_POKEBLOCK_CASE
 	msgbox LilycoveCity_ContestLobby_Text_NowThatWeveClearedThatUp, MSGBOX_DEFAULT
 	return

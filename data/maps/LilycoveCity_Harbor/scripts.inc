@@ -53,7 +53,7 @@ LilycoveCity_Harbor_EventScript_FerryRegularLocationSelect:: @ 821E09F
 	special GetLilycoveSSTidalSelection
 	switch VAR_RESULT
 	case 0, LilycoveCity_Harbor_EventScript_GoToSlateport
-	case 1, LilycoveCity_Harbor_EventScript_GoToBattleFrontierTemp
+	case 1, LilycoveCity_Harbor_EventScript_GoToBattleFrontier
 	case 2, LilycoveCity_Harbor_EventScript_GoToSouthernIsland
 	case 3, LilycoveCity_Harbor_EventScript_GoToNavelRock
 	case 4, LilycoveCity_Harbor_EventScript_GoToBirthIsland

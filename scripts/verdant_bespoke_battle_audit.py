@@ -298,11 +298,14 @@ def main() -> None:
                     problems.append(f"Battle 1: {species} is missing {move}")
 
     oldale = read("data/maps/OldaleTown_PokemonCenter_1F/map.json")
-    shop = read("src/shop.c")
-    if not all(token in oldale for token in ("PKMN_Center_Move_Tutor", "General_Mart_Script")):
+    item_source = read("src/item.c")
+    if not all(token in oldale for token in ("PKMN_Center_Move_Tutor", "PokemonCenter_BattleItemMart_Script")):
         problems.append("Battle 1: Oldale preparation NPCs are not both accessible")
-    if not all(token in shop for token in ("ITEM_RARE_CANDY", "ITEM_LIFE_ORB", "ITEM_FOCUS_SASH", "ITEM_EVIOLITE", "ITEM_LEFTOVERS")):
-        problems.append("Battle 1: documented core preparation items are not in normal Mart stock")
+    unlocks = item_source.split("sBattleItemUnlocks[]", 1)[1].split("};", 1)[0]
+    if not all(re.search(rf"\{{{token},\s+0\}}", unlocks) for token in ("ITEM_LIFE_ORB", "ITEM_FOCUS_SASH", "ITEM_EVIOLITE", "ITEM_LEFTOVERS")):
+        problems.append("Battle 1: documented core preparation items are not in the Center battle vendor's opening stock")
+    if "ITEM_RARE_CANDY" not in read("data/scripts/general_mart.inc"):
+        problems.append("Battle 1: Rare Candy is missing from ordinary medicine Mart stock")
     if "SetMoney(&gSaveBlock1Ptr->money, 25000);" not in read("src/new_game.c"):
         problems.append("Battle 1: documented starting money is not $25,000")
 

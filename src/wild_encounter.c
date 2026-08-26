@@ -47,31 +47,105 @@ const struct WildPokemon gWildFeebasRoute119Data = {20, 25, SPECIES_FEEBAS};
 
 u8 GetWildEncounterSlotChance(u8 slotType, u8 slot)
 {
-    static const u8 sLandChances[LAND_WILD_COUNT] = {20, 20, 10, 10, 10, 10, 5, 5, 4, 4, 1, 1};
-    static const u8 sWaterChances[WATER_WILD_COUNT] = {60, 30, 5, 5};
-    static const u8 sOldRodChances[2] = {60, 40};
-    static const u8 sGoodRodChances[3] = {60, 20, 20};
-    static const u8 sSuperRodChances[5] = {40, 30, 15, 10, 5};
-    static const u8 sHoneyChances[HONEY_WILD_COUNT] = {50, 15, 15, 10, 5, 5};
+    static const u8 sLandThresholds[LAND_WILD_COUNT] =
+    {
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_0,
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_1,
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_2,
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_3,
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_4,
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_5,
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_6,
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_7,
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_8,
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_9,
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_10,
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_11,
+    };
+    static const u8 sWaterThresholds[WATER_WILD_COUNT] =
+    {
+        ENCOUNTER_CHANCE_WATER_MONS_SLOT_0,
+        ENCOUNTER_CHANCE_WATER_MONS_SLOT_1,
+        ENCOUNTER_CHANCE_WATER_MONS_SLOT_2,
+        ENCOUNTER_CHANCE_WATER_MONS_SLOT_3,
+    };
+    static const u8 sRockSmashThresholds[ROCK_WILD_COUNT] =
+    {
+        ENCOUNTER_CHANCE_ROCK_SMASH_MONS_SLOT_0,
+        ENCOUNTER_CHANCE_ROCK_SMASH_MONS_SLOT_1,
+        ENCOUNTER_CHANCE_ROCK_SMASH_MONS_SLOT_2,
+        ENCOUNTER_CHANCE_ROCK_SMASH_MONS_SLOT_3,
+    };
+    static const u8 sOldRodThresholds[2] =
+    {
+        ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_0,
+        ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_1,
+    };
+    static const u8 sGoodRodThresholds[3] =
+    {
+        ENCOUNTER_CHANCE_FISHING_MONS_GOOD_ROD_SLOT_2,
+        ENCOUNTER_CHANCE_FISHING_MONS_GOOD_ROD_SLOT_3,
+        ENCOUNTER_CHANCE_FISHING_MONS_GOOD_ROD_SLOT_4,
+    };
+    static const u8 sSuperRodThresholds[5] =
+    {
+        ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_5,
+        ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_6,
+        ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_7,
+        ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_8,
+        ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_9,
+    };
+    static const u8 sHoneyThresholds[HONEY_WILD_COUNT] =
+    {
+        ENCOUNTER_CHANCE_HONEY_MONS_SLOT_0,
+        ENCOUNTER_CHANCE_HONEY_MONS_SLOT_1,
+        ENCOUNTER_CHANCE_HONEY_MONS_SLOT_2,
+        ENCOUNTER_CHANCE_HONEY_MONS_SLOT_3,
+        ENCOUNTER_CHANCE_HONEY_MONS_SLOT_4,
+        ENCOUNTER_CHANCE_HONEY_MONS_SLOT_5,
+    };
+    const u8 *thresholds;
+    u8 count;
 
     switch (slotType)
     {
     case WILD_SLOT_LAND:
-        return slot < ARRAY_COUNT(sLandChances) ? sLandChances[slot] : 0;
+        thresholds = sLandThresholds;
+        count = ARRAY_COUNT(sLandThresholds);
+        break;
     case WILD_SLOT_WATER:
+        thresholds = sWaterThresholds;
+        count = ARRAY_COUNT(sWaterThresholds);
+        break;
     case WILD_SLOT_ROCK_SMASH:
-        return slot < ARRAY_COUNT(sWaterChances) ? sWaterChances[slot] : 0;
+        thresholds = sRockSmashThresholds;
+        count = ARRAY_COUNT(sRockSmashThresholds);
+        break;
     case WILD_SLOT_OLD_ROD:
-        return slot < ARRAY_COUNT(sOldRodChances) ? sOldRodChances[slot] : 0;
+        thresholds = sOldRodThresholds;
+        count = ARRAY_COUNT(sOldRodThresholds);
+        break;
     case WILD_SLOT_GOOD_ROD:
-        return slot < ARRAY_COUNT(sGoodRodChances) ? sGoodRodChances[slot] : 0;
+        thresholds = sGoodRodThresholds;
+        count = ARRAY_COUNT(sGoodRodThresholds);
+        break;
     case WILD_SLOT_SUPER_ROD:
-        return slot < ARRAY_COUNT(sSuperRodChances) ? sSuperRodChances[slot] : 0;
+        thresholds = sSuperRodThresholds;
+        count = ARRAY_COUNT(sSuperRodThresholds);
+        break;
     case WILD_SLOT_HONEY:
-        return slot < ARRAY_COUNT(sHoneyChances) ? sHoneyChances[slot] : 0;
+        thresholds = sHoneyThresholds;
+        count = ARRAY_COUNT(sHoneyThresholds);
+        break;
     default:
         return 0;
     }
+
+    if (slot >= count)
+        return 0;
+    if (slot == 0)
+        return thresholds[0];
+    return thresholds[slot] - thresholds[slot - 1];
 }
 
 // code

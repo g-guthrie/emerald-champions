@@ -696,6 +696,7 @@ SlateportCity_EventScript_Greta::
 	faceplayer
 	checkflag FLAG_DEFEATED_SLATEPORT_GRETA
 	goto_if_eq SlateportCity_EventScript_GretaDefeated
+	goto_if_defeated TRAINER_GRETA_SLATEPORT, SlateportCity_EventScript_GretaReward
 	msgbox SlateportCity_Text_GretaHowdy, MSGBOX_DEFAULT
 	goto_if_unset FLAG_HIDE_LAVARIDGE_POKECENTER_LUCY, SlateportCity_EventScript_GretaNotStrongEnough
 	goto_if_unset FLAG_HIDE_FORTREE_POKECENTER_SPENSER, SlateportCity_EventScript_GretaNotStrongEnough
@@ -704,6 +705,13 @@ SlateportCity_EventScript_Greta::
 	goto_if_eq SlateportCity_EventScript_GretaRefuse
 	msgbox SlateportCity_Text_GretaLetsBattle, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_GRETA_SLATEPORT, SlateportCity_Text_GretaDefeat
+SlateportCity_EventScript_GretaReward::
+	checkitemspace ITEM_THROAT_SPRAY, 1
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
+	checkitemspace ITEM_BOTTLE_CAP, 6
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox SlateportCity_Text_GretaHereHaveStuff, MSGBOX_AUTOCLOSE
 	giveitem ITEM_THROAT_SPRAY
 	giveitem ITEM_BOTTLE_CAP, 6
@@ -833,6 +841,8 @@ SlateportCity_EventScript_BerryPowderClerk:: @ 81DD36E
 	goto_if_set FLAG_RECEIVED_POWDER_JAR, SlateportCity_EventScript_ReceivedPowderJar
 	msgbox SlateportCity_Text_ExplainBerries, MSGBOX_DEFAULT
 	giveitem ITEM_POWDER_JAR
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_POWDER_JAR
 	msgbox SlateportCity_Text_ExplainBerryPowder, MSGBOX_DEFAULT
 	release

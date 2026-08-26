@@ -32,21 +32,17 @@ RustboroCity_Mart_EventScript_ReceivedTM98::
 	end
 
 RustboroCity_Mart_Text_ExcuseMeTrainer:
-	.string "Excuse me, Trainer over there.\n"
-	.string "Do you have a minute?\p"
-	.string "You know, sometimes moves are too\n"
-	.string "strong to catch a Pokémon.\p"
-	.string "You end up making a Pokémon faint even\n"
-	.string "when you don't want to.\p"
-	.string "For such a common problem, use this!$"
+	.string "Excuse me, Trainer!\p"
+	.string "Accuracy can decide a close battle.\p"
+	.string "A Zoom Lens helps a slower holder\n"
+	.string "land moves that might miss.\p"
+	.string "I'm offering one free today.\n"
+	.string "Put it to good use!$"
 
 RustboroCity_Mart_Text_HaveTM98:
-	.string "False Swipe is a very handy move.\p"
-	.string "No matter how many times it's used on\n"
-	.string "the opposing Pokémon, it won't cause\l"
-	.string "the Pokémon to faint!\p"
-	.string "I'm offering it for free right now.\n"
-	.string "This is a limited-time promotion!$"
+	.string "A Zoom Lens boosts accuracy when its\n"
+	.string "holder moves after the target.\p"
+	.string "Slow Pokémon can use it well!$"
 
 RustboroCity_Mart_Text_BuyingHealsInCaseOfShroomish: @ 8214F8F
 	.string "I'm buying some Parlyz Heals and\n"

@@ -51,7 +51,7 @@ Route114_EventScript_RoarGentleman:: @ 81F25D1
 	faceplayer
 	goto_if_set FLAG_RECEIVED_TM05, Route114_EventScript_ReceivedRoar
 	msgbox Route114_Text_AllMyMonDoesIsRoarTakeThis, MSGBOX_DEFAULT
-	giveitem ITEM_EJECT_PACK
+	giveitem ITEM_SHED_SHELL
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM05
@@ -189,11 +189,11 @@ Route114_Text_AllMyMonDoesIsRoarTakeThis: @ 81F2809
 	.string "All my Pokémon does is Roar…\n"
 	.string "No one dares to come near me…\p"
 	.string "Sigh… If you would, please take this\n"
-	.string "Eject Pack away…$"
+	.string "Shed Shell away…$"
 
 Route114_Text_ExplainRoar: @ 81F2872
-	.string "An Eject Pack switches its holder\n"
-	.string "after one of its stats is lowered.$"
+	.string "A Shed Shell lets its holder escape\n"
+	.string "from trapping moves and abilities.$"
 
 Route114_Text_Poochyena: @ 81F28A6
 	.string "Bow! Bowwow!$"

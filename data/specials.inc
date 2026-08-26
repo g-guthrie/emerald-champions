@@ -556,6 +556,8 @@ gSpecials::
 	def_special OpenUnlockedBattleItemMart
 	def_special TryGiveVerdantMegaKit
 	def_special TryGiveVerdantStevenRewardBundle
+	def_special TryGiveVerdantLatiStoneBundle
+	def_special TryGiveVerdantWeatherRockBundle
 	def_special AreChosenMonEVsMaxedOut
 	def_special Bag_ChooseItem
 	def_special Bag_ChoosePokeBall

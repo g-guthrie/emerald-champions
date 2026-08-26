@@ -22,15 +22,21 @@ Route119_WeatherInstitute_1F_EventScript_LittleBoy:: @ 826FAA4
 	goto_if_eq Route119_WeatherInstitute_1F_EventScript_LittleBoyTeamAquaHere
 	goto_if_set FLAG_WEATHER_INSTITUTE_ROCKS, Route119_WeatherInstitute_1F_EventScript_LittleBoyGaveRocks
 	msgbox Route119_WeatherInstitute_1F_Text_WowYoureStrong, MSGBOX_DEFAULT
-	giveitem ITEM_HEAT_ROCK
-	giveitem ITEM_DAMP_ROCK
-	giveitem ITEM_ICY_ROCK
-	giveitem ITEM_SMOOTH_ROCK
+	special TryGiveVerdantWeatherRockBundle
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
+	playfanfare MUS_OBTAIN_ITEM
+	message Route119_WeatherInstitute_1F_Text_ReceivedWeatherRocks
+	waitmessage
+	waitfanfare
 	setflag FLAG_WEATHER_INSTITUTE_ROCKS
 Route119_WeatherInstitute_1F_EventScript_LittleBoyGaveRocks:
 	msgbox Route119_WeatherInstitute_1F_Text_Rocks, MSGBOX_DEFAULT
 	release
 	end
+
+Route119_WeatherInstitute_1F_Text_ReceivedWeatherRocks:
+	.string "{PLAYER} received four weather rocks!$"
 
 Route119_WeatherInstitute_1F_EventScript_LittleBoyTeamAquaHere:: @ 826FABE
 	msgbox Route119_WeatherInstitute_1F_Text_EveryoneWentUpstairs, MSGBOX_DEFAULT
@@ -158,4 +164,3 @@ Route119_WeatherInstitute_1F_Text_WhatWereAquasUpTo:
 Route119_WeatherInstitute_1F_Text_TakeRestInBed: @ 826FEFC
 	.string "There's a bed…\n"
 	.string "Let's take a rest.$"
-

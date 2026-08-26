@@ -6,6 +6,8 @@ Common_EventScript_PkmnCenterNurse::
     goto_if_eq EventScript_PkmnCenterNurseHasVial
     msgbox gText_AreYouARookieTrainer, MSGBOX_DEFAULT
     giveitem ITEM_POKE_VIAL, 1
+    compare VAR_RESULT, FALSE
+    goto_if_eq Common_EventScript_ShowBagIsFull
     setvar VAR_POKE_VIAL_MAX_CHARGES, 1
     setvar VAR_POKE_VIAL_CHARGES, 1
     msgbox gText_ExplainPokeVial, MSGBOX_YESNO

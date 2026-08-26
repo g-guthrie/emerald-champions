@@ -42,6 +42,8 @@ MossdeepCity_StevensHouse_EventScript_StevenGivesDive:: @ 82227CA
 	waitmovement 0
 	msgbox MossdeepCity_StevensHouse_Text_YouveEarnedHMDive, MSGBOX_DEFAULT
 	giveitem ITEM_HM08_DIVE
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_HM08
 	setflag FLAG_OMIT_DIVE_FROM_STEVEN_LETTER
 	msgbox MossdeepCity_StevensHouse_Text_ExplainDive, MSGBOX_DEFAULT
@@ -220,4 +222,3 @@ MossdeepCity_StevensHouse_Text_LetterFromSteven: @ 8222C4E
 MossdeepCity_StevensHouse_Text_CollectionOfRareRocks: @ 8222D97
 	.string "It's a collection of rare rocks and\n"
 	.string "stones assembled by Steven.$"
-

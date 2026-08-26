@@ -173,6 +173,7 @@ Route120_EventScript_BerryNotLove:: @ 81F5638
 Route120_EventScript_Steven:: @ 81F5641
 	lock
 	faceplayer
+	goto_if_set FLAG_HIDE_ROUTE_120_KECLEON_BRIDGE, Route120_EventScript_StevenGiveDeconScope
 	goto_if_set FLAG_NOT_READY_FOR_BATTLE_ROUTE_120, Route120_EventScript_StevenAskReadyForBattle
 	msgbox Route120_Text_StevenGreeting, MSGBOX_YESNO
 	compare VAR_RESULT, NO
@@ -234,6 +235,8 @@ Route120_EventScript_RemoveBridgeKecleonPostBattle:: @ 81F571C
 	fadescreenswapbuffers FADE_TO_BLACK
 	removeobject LOCALID_BRIDGE_KECLEON
 	removeobject LOCALID_BRIDGE_KECLEON_SHADOW
+	setflag FLAG_HIDE_ROUTE_120_KECLEON_BRIDGE
+	setflag FLAG_HIDE_ROUTE_120_KECLEON_BRIDGE_SHADOW
 	fadescreenswapbuffers FADE_FROM_BLACK
 	goto Route120_EventScript_StevenGiveDeconScope
 	end
@@ -244,6 +247,8 @@ Route120_EventScript_StevenGiveDeconScope:: @ 81F572C
 	waitmovement 0
 	msgbox Route120_Text_StevenGiveDevonScope, MSGBOX_DEFAULT
 	giveitem ITEM_DEVON_SCOPE
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_DEVON_SCOPE
 	msgbox Route120_Text_StevenGoodbye, MSGBOX_DEFAULT
 	closemessage

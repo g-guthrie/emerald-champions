@@ -518,15 +518,12 @@ DewfordTown_Hall_Text_WellBeTrendDuo: @ 81FE0F2
 	.string "Hahahah!$"
 
 DewfordTown_Hall_Text_GiveYouSludgeBomb: @ 81FE142
-	.string "For me, Sludge Bomb is at the peak\n"
-	.string "of popularity. It's the one.\p"
-	.string "Hunh? You're telling me that you don't\n"
-	.string "know about Sludge Bomb?\p"
-	.string "That's outright pitiful.\n"
-	.string "I'll give you one.$"
+	.string "Black Sludge is at the peak of\n"
+	.string "popularity for Poison Pokémon.\p"
+	.string "It restores a Poison-type holder but\n"
+	.string "hurts most other Pokémon.\p"
+	.string "Take this one and try it yourself!$"
 
 DewfordTown_Hall_Text_LoveSludgeBombButTrendInToo: @ 81FE1ED
-	.string "I love Sludge Bomb.\p"
-	.string "But Pokémon with the move\n"
-	.string "“{STR_VAR_1}”\l"
-	.string "are in, too.$"
+	.string "Black Sludge rewards Poison Pokémon,\n"
+	.string "but harms every other type.$"

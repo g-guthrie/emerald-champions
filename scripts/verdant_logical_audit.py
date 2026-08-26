@@ -90,6 +90,30 @@ mega_items = set(re.findall(
 wild_group = json.loads(read("src/data/wild_encounters.json"))["wild_encounter_groups"][0]
 wild_fields = {field["type"]: field["encounter_rates"] for field in wild_group["fields"]}
 wild_by_map = {entry["map"]: entry for entry in wild_group["encounters"] if "map" in entry}
+all_ordinary_wild_species = {
+    mon["species"]
+    for entry in wild_by_map.values()
+    for method in wild_fields
+    for mon in entry.get(method, {}).get("mons", [])
+}
+ordinary_wild_legend_species = {
+    "SPECIES_KUBFU", "SPECIES_TYPE_NULL", "SPECIES_SUICUNE", "SPECIES_HEATRAN",
+    "SPECIES_MANAPHY", "SPECIES_TERRAKION", "SPECIES_KELDEO", "SPECIES_TAPU_FINI",
+}
+withheld_ordinary_wild_species = {"SPECIES_DARKRAI", "SPECIES_MARSHADOW"}
+base_stats_text = read("src/data/pokemon/base_stats.h")
+
+
+def species_catch_rate(species: str) -> int | None:
+    match = re.search(
+        rf"^\s*\[{re.escape(species)}\]\s*=\s*\{{"
+        rf"(?:(?!^\s*\[SPECIES_).)*?^\s*\.catchRate\s*=\s*(\d+)",
+        base_stats_text,
+        re.M | re.S,
+    )
+    return int(match.group(1)) if match else None
+
+
 early_showcases = {
     "MAP_ROUTE101": {"SPECIES_DREEPY", "SPECIES_LARVESTA"},
     "MAP_ROUTE102": {"SPECIES_HATENNA", "SPECIES_INDEEDEE"},
@@ -134,6 +158,8 @@ for path in list((ROOT / "data" / "maps").rglob("scripts.inc")) + list((ROOT / "
             stale_tm_dialogue.append(f"{path.relative_to(ROOT)}:{line_no}")
 
 item_names = re.findall(r'\.name\s*=\s*_\("([^"]+)"\)', read("src/data/items.h"))
+battle_item_unlocks = read("src/item.c").split("sBattleItemUnlocks[]", 1)[1].split("};", 1)[0]
+general_mart_stock = read("data/scripts/general_mart.inc")
 
 
 questions = [
@@ -142,8 +168,8 @@ questions = [
     ("Does one Rare Candy add ten levels but stop at the current cap?", "targetLevel = min(level + 10, GetLevelCap())" in read("src/party_menu.c")),
     ("Does a ten-level jump preserve move learning and chained evolutions?", "MonTryLearningNewMoveInRange" in read("src/party_menu.c") and "CB2_ContinueRareCandyEvolution" in read("src/party_menu.c")),
     ("Can leveling stay frictionless without being free?", ".price = 1000" in read("src/data/items.h").split("[ITEM_RARE_CANDY]", 1)[1].split("},", 1)[0]),
-    ("Are the ten foundational held items sold by every normal Poké Mart?", "BuildPokemartItemsWithCoreStock(itemsForSale)" in read("src/shop.c") and all(item in read("src/shop.c").split("sCorePokemartStock[]", 1)[1].split("};", 1)[0] for item in core_items)),
-    ("Can a long Mart inventory or item name corrupt the Cancel row?", "sPokemartItemsWithCoreStock[128]" in read("src/shop.c") and "u8 (*sItemNames)[ITEM_NAME_LENGTH]" in read("src/shop.c") and max(map(len, item_names)) < 17),
+    ("Are the ten foundational held items sold by every Pokémon Center battle vendor?", all(f"{{{item}," in battle_item_unlocks and re.search(rf"\{{{item},\s+0\}}", battle_item_unlocks) for item in core_items) and all_map_json.count('"script": "PokemonCenter_BattleItemMart_Script"') == 16 and "BuildPokemartItemsWithCoreStock" not in read("src/shop.c")),
+    ("Do medicine Marts keep progression and Rare Candy while both vendor menus remain bounded?", general_mart_stock.count("ITEM_RARE_CANDY") == 9 and "ITEM_ULTRA_BALL" in general_mart_stock and "ITEM_FULL_RESTORE" in general_mart_stock and "ITEM_MAX_ETHER" in general_mart_stock and "sUnlockedBattleItemMart[64]" in read("src/field_specials.c") and "count + 1 < capacity" in read("src/item.c") and "u8 (*sItemNames)[ITEM_NAME_LENGTH]" in read("src/shop.c") and max(map(len, item_names)) < 17),
     ("Are obsolete TM pickups, gifts, and shop entries completely gone?", "ITEM_TM" not in all_reward_data),
     ("Do the old TM specialty vendors still have a useful role?", all(item in read("data/maps/SlateportCity/scripts.inc") for item in ("ITEM_SOFT_SAND", "ITEM_HARD_STONE", "ITEM_BLACK_BELT", "ITEM_MAGNET")) and all(item in read("data/maps/LilycoveCity_DepartmentStore_4F/scripts.inc") for item in ("ITEM_DAMP_ROCK", "ITEM_HEAT_ROCK", "ITEM_SMOOTH_ROCK", "ITEM_ICY_ROCK"))),
     ("Do campaign gifts avoid duplicating the ten always-stocked items?", all(f"giveitem {item}" not in all_map_scripts for item in core_items)),
@@ -165,7 +191,7 @@ questions = [
     ("Are the repaired AI decisions guarded against prior deterministic defects?", all(token in read("src/battle_ai_switch_items.c") + read("src/battle_ai_main.c") for token in ("GetBestMonForSwitch", "AI_CalcPartyMonHazardDamage", "gLastMoves[battlerDef] != 0xFFFF")) and "Random() % 3 < 2" not in read("src/battle_ai_switch_items.c")),
     ("Are Megas and Primals constrained and deliberately showcased?", all(sum(mon["item"] in mega_items for mon in boss["team"]) <= 1 for boss in manifest["bosses"]) and all(stone in parties_text for stone in champions_mega_stones) and all(token in read("src/data/pokemon/evolution.h") for token in ("EVO_PRIMAL_REVERSION, ITEM_BLUE_ORB, SPECIES_KYOGRE_PRIMAL", "EVO_PRIMAL_REVERSION, ITEM_RED_ORB, SPECIES_GROUDON_PRIMAL"))),
     ("Does the player receive Mega access early enough to experiment?", "special TryGiveVerdantStevenRewardBundle" in read("data/maps/GraniteCave_StevensRoom/scripts.inc") and "setflag FLAG_SYS_RECEIVED_KEYSTONE" in read("data/maps/GraniteCave_StevensRoom/scripts.inc") and all(stone in read("src/item.c").split("TryAddVerdantStevenRewardBundle", 1)[1].split("}", 1)[0] for stone in ("ITEM_MEGA_BRACELET", "ITEM_SCEPTILITE", "ITEM_BLAZIKENITE", "ITEM_SWAMPERTITE"))),
-    ("Are exciting early encounters accessible without one-percent hunting?", all(showcases <= {mon["species"] for mon in wild_by_map[map_id]["land_mons"]["mons"] if wild_fields["land_mons"][wild_by_map[map_id]["land_mons"]["mons"].index(mon)] >= 4} for map_id, showcases in early_showcases.items()) and all(len(entry[field]["mons"]) == len(wild_fields[field]) for entry in wild_by_map.values() for field in wild_fields if field in entry)),
+    ("Are exciting encounters accessible without one-percent or catch-rate-3 hunting?", all(showcases <= {mon["species"] for mon in wild_by_map[map_id]["land_mons"]["mons"] if wild_fields["land_mons"][wild_by_map[map_id]["land_mons"]["mons"].index(mon)] >= 4} for map_id, showcases in early_showcases.items()) and 1 not in wild_fields["land_mons"] and ordinary_wild_legend_species <= all_ordinary_wild_species and not (withheld_ordinary_wild_species & all_ordinary_wild_species) and all(species_catch_rate(species) == 45 for species in ordinary_wild_legend_species) and all(len(entry[field]["mons"]) == len(wild_fields[field]) for entry in wild_by_map.values() for field in wild_fields if field in entry)),
     ("Are rewritten rewards, dialogue, and menus visually and semantically clean?", not stale_tm_dialogue and all(visible_line_length(line) <= 36 for block in dialogue_blocks for line in block.splitlines()) and "ITEM_NAME_LENGTH" in read("src/shop.c")),
 ]
 

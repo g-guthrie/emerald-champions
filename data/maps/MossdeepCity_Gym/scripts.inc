@@ -49,14 +49,20 @@ MossdeepCity_Gym_EventScript_SetSwitch4Metatiles:: @ 8220885
 	end
 
 MossdeepCity_Gym_EventScript_TateAndLiza:: @ 8220898
-	setflag FLAG_SYS_INVERSE_BATTLE
 	goto_if_set FLAG_DAILY_REMATCH_TATE_AND_LIZA, MossdeepCity_Gym_EventScript_AlreadyRematched
 	goto_if_set FLAG_SYS_GAME_CLEAR, MossdeepCity_Gym_EventScript_TateAndLizaRematch
+	goto_if_unset FLAG_BADGE06_GET, MossdeepCity_Gym_EventScript_NeedFeatherBadge
+	setflag FLAG_SYS_INVERSE_BATTLE
 	trainerbattle_double TRAINER_TATE_AND_LIZA_1, MossdeepCity_Gym_Text_TateAndLizaIntro, MossdeepCity_Gym_Text_TateAndLizaDefeat, MossdeepCity_Gym_Text_TateAndLizaNeedTwoMons, MossdeepCity_Gym_EventScript_TateAndLizaDefeated, NO_MUSIC
 	clearflag FLAG_SYS_INVERSE_BATTLE
 	goto_if_eq MossdeepCity_Gym_EventScript_TateAndLizaRematch
 	goto_if_unset FLAG_RECEIVED_TM04, MossdeepCity_Gym_EventScript_GiveCalmMind2
 	msgbox MossdeepCity_Gym_Text_TateAndLizaPostBattle, MSGBOX_DEFAULT
+	release
+	end
+
+MossdeepCity_Gym_EventScript_NeedFeatherBadge::
+	msgbox MossdeepCity_Gym_Text_NeedFeatherBadge, MSGBOX_DEFAULT
 	release
 	end
 
@@ -593,6 +599,12 @@ MossdeepCity_Gym_Text_NicholasDefeat: @ 822172D
 MossdeepCity_Gym_Text_NicholasPostBattle: @ 822173A
 	.string "All right! I think I'll develop a special\n"
 	.string "invincible Pokémon power next.$"
+
+MossdeepCity_Gym_Text_NeedFeatherBadge:
+	.string "Tate: The winds around you are\n"
+	.string "still unsettled…\p"
+	.string "Liza: Winona's Feather Badge will\n"
+	.string "show that you're ready for us.$"
 
 MossdeepCity_Gym_Text_TateAndLizaIntro: @ 8221783
 	.string "Tate: Hehehe… Were you surprised?\p"

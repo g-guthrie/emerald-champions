@@ -76,11 +76,17 @@ MauvilleCity_Gym_EventScript_DeactivatePuzzle:: @ 820DEE7
 MauvilleCity_Gym_EventScript_Wattson:: @ 820DEEB
 	goto_if_set FLAG_DAILY_REMATCH_WATTSON, MauvilleCity_Gym_EventScript_AlreadyRematched
 	goto_if_set FLAG_SYS_GAME_CLEAR, MauvilleCity_Gym_EventScript_WattsonRematch
+	goto_if_unset FLAG_BADGE02_GET, MauvilleCity_Gym_EventScript_NeedKnuckleBadge
 	trainerbattle_double TRAINER_WATTSON_1, MauvilleCity_Gym_Text_WattsonIntro, MauvilleCity_Gym_Text_WattsonDefeat, MauvilleCity_Gym_Text_WattsonRematchNeedTwoMons, MauvilleCity_Gym_EventScript_WattsonDefeated, NO_MUSIC
 	goto_if_unset FLAG_RECEIVED_TM72, MauvilleCity_Gym_EventScript_GiveVoltSwitch2
 	compare VAR_NEW_MAUVILLE_STATE, 6
 	goto_if_eq MauvilleCity_Gym_EventScript_CompletedNewMauville
 	msgbox MauvilleCity_Gym_Text_WattsonPostBattle, MSGBOX_DEFAULT
+	release
+	end
+
+MauvilleCity_Gym_EventScript_NeedKnuckleBadge::
+	msgbox MauvilleCity_Gym_Text_NeedKnuckleBadge, MSGBOX_DEFAULT
 	release
 	end
 
@@ -399,6 +405,12 @@ MauvilleCity_Gym_Text_AngeloDefeat: @ 820E5A8
 MauvilleCity_Gym_Text_AngeloPostBattle: @ 820E5C2
 	.string "When an ally uses its item,\n"
 	.string "Symbiosis passes mine across!$"
+
+MauvilleCity_Gym_Text_NeedKnuckleBadge:
+	.string "Wattson: Your Dewford challenge\n"
+	.string "is still unfinished!\p"
+	.string "Earn Brawly's Knuckle Badge, then\n"
+	.string "come show me what you've learned.$"
 
 MauvilleCity_Gym_Text_WattsonIntro: @ 820E602
 	.string "I've given up on my plans to convert\n"

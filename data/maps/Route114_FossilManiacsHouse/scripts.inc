@@ -33,15 +33,14 @@ Route114_FossilManiacsHouse_EventScript_Bookshelf:: @ 822AD7C
 
 Route114_FossilManiacsHouse_Text_HaveThisToDigLikeMyBrother: @ 822AD85
 	.string "My big brother's the Fossil Maniac…\n"
-	.string "He's a nice guy who loves Fossils…\p"
-	.string "He loves digging holes, too…\n"
-	.string "He dug this hole by himself…\p"
-	.string "You can have this, so you can Dig\n"
-	.string "holes just like my big brother…$"
+	.string "He dug this whole tunnel himself!\p"
+	.string "An Air Balloon can hold a Pokémon\n"
+	.string "above Ground-type attacks until hit.\p"
+	.string "Take this one for your journey!$"
 
 Route114_FossilManiacsHouse_Text_DigReturnsYouToEntrance: @ 822AE48
-	.string "If you make a Pokémon Dig inside a\n"
-	.string "cave, you're returned to the entrance…$"
+	.string "An Air Balloon pops after its holder\n"
+	.string "is struck, so plan that turn well.$"
 
 Route114_FossilManiacsHouse_Text_RocksFillDisplayCase: @ 822AE92
 	.string "Rocks in peculiar shapes fill\n"

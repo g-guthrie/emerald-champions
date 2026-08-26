@@ -73,6 +73,12 @@ LavaridgeTown_EventScript_RivalGiveGoGoggles:: @ 81EA551
 
 LavaridgeTown_EventScript_MayGiveGoGoggles:: @ 81EA5B5
 	msgbox LavaridgeTown_Text_MayNiceBadgesTakeThis, MSGBOX_DEFAULT
+	checkitemspace ITEM_GO_GOGGLES, 1
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
+	checkitemspace ITEM_SAFETY_GOGGLES, 1
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	giveitem ITEM_GO_GOGGLES
 	setflag FLAG_RECEIVED_GO_GOGGLES
 	msgbox LavaridgeTown_Text_MayExplainGoGoggles, MSGBOX_DEFAULT
@@ -83,6 +89,12 @@ LavaridgeTown_EventScript_MayGiveGoGoggles:: @ 81EA5B5
 
 LavaridgeTown_EventScript_BrendanGiveGoGoggles:: @ 81EA5DA
 	msgbox LavaridgeTown_Text_BrendanNiceBadgesTakeThis, MSGBOX_DEFAULT
+	checkitemspace ITEM_GO_GOGGLES, 1
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
+	checkitemspace ITEM_SAFETY_GOGGLES, 1
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	giveitem ITEM_GO_GOGGLES
 	setflag FLAG_RECEIVED_GO_GOGGLES
 	msgbox LavaridgeTown_Text_BrendanExplainGoGoggles, MSGBOX_DEFAULT
@@ -440,4 +452,3 @@ LavaridgeTown_Text_GymSign: @ 81EB178
 LavaridgeTown_Text_HerbShopSign: @ 81EB1CB
 	.string "Pokémon Herb Shop\n"
 	.string "“Bitter taste--better cure!”$"
-

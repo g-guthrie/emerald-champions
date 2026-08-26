@@ -6896,7 +6896,7 @@
         "map": "RusturfTunnel",
         "command": "trainerbattle_double",
         "role": "opponent",
-        "line": 320,
+        "line": 322,
         "file": "data/maps/RusturfTunnel/scripts.inc"
       },
       "badge": 1,
@@ -7071,7 +7071,7 @@
         "map": "RusturfTunnel",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 433,
+        "line": 437,
         "file": "data/maps/RusturfTunnel/scripts.inc"
       },
       "badge": 1,
@@ -8328,7 +8328,7 @@
         "map": "DewfordTown_Gym",
         "command": "trainerbattle_double",
         "role": "opponent",
-        "line": 149,
+        "line": 150,
         "file": "data/maps/DewfordTown_Gym/scripts.inc"
       },
       "badge": 1,
@@ -8543,7 +8543,7 @@
         "map": "DewfordTown_Gym",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 246,
+        "line": 252,
         "file": "data/maps/DewfordTown_Gym/scripts.inc"
       },
       "badge": 1,
@@ -8687,7 +8687,7 @@
         "map": "DewfordTown_Gym",
         "command": "trainerbattle_double",
         "role": "opponent",
-        "line": 256,
+        "line": 262,
         "file": "data/maps/DewfordTown_Gym/scripts.inc"
       },
       "badge": 1,
@@ -8852,7 +8852,7 @@
         "map": "DewfordTown_Gym",
         "command": "trainerbattle_double",
         "role": "opponent",
-        "line": 266,
+        "line": 272,
         "file": "data/maps/DewfordTown_Gym/scripts.inc"
       },
       "badge": 1,
@@ -9020,7 +9020,7 @@
         "map": "DewfordTown_Gym",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 276,
+        "line": 282,
         "file": "data/maps/DewfordTown_Gym/scripts.inc"
       },
       "badge": 1,
@@ -9183,7 +9183,7 @@
         "map": "DewfordTown_Gym",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 286,
+        "line": 292,
         "file": "data/maps/DewfordTown_Gym/scripts.inc"
       },
       "badge": 1,
@@ -9330,7 +9330,7 @@
         "map": "DewfordTown_Gym",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 296,
+        "line": 302,
         "file": "data/maps/DewfordTown_Gym/scripts.inc"
       },
       "badge": 1,
@@ -13781,7 +13781,7 @@
         "map": "SlateportCity",
         "command": "trainerbattle_no_intro",
         "role": "opponent",
-        "line": 706,
+        "line": 707,
         "file": "data/maps/SlateportCity/scripts.inc"
       },
       "badge": 2,
@@ -18117,7 +18117,7 @@
         "map": "MauvilleCity_Gym",
         "command": "trainerbattle_double",
         "role": "opponent",
-        "line": 79,
+        "line": 80,
         "file": "data/maps/MauvilleCity_Gym/scripts.inc"
       },
       "badge": 2,
@@ -18347,7 +18347,7 @@
         "map": "MauvilleCity_Gym",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 256,
+        "line": 262,
         "file": "data/maps/MauvilleCity_Gym/scripts.inc"
       },
       "badge": 2,
@@ -18532,7 +18532,7 @@
         "map": "MauvilleCity_Gym",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 261,
+        "line": 267,
         "file": "data/maps/MauvilleCity_Gym/scripts.inc"
       },
       "badge": 2,
@@ -18706,7 +18706,7 @@
         "map": "MauvilleCity_Gym",
         "command": "trainerbattle_double",
         "role": "opponent",
-        "line": 266,
+        "line": 272,
         "file": "data/maps/MauvilleCity_Gym/scripts.inc"
       },
       "badge": 2,
@@ -18883,7 +18883,7 @@
         "map": "MauvilleCity_Gym",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 271,
+        "line": 277,
         "file": "data/maps/MauvilleCity_Gym/scripts.inc"
       },
       "badge": 2,
@@ -19065,7 +19065,7 @@
         "map": "MauvilleCity_Gym",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 276,
+        "line": 282,
         "file": "data/maps/MauvilleCity_Gym/scripts.inc"
       },
       "badge": 2,
@@ -27087,171 +27087,6 @@
       "order": 188
     },
     {
-      "trainerId": "TRAINER_STEVEN",
-      "encounterId": null,
-      "encounterAlternatives": [],
-      "runtimePartyAlternatives": null,
-      "name": "Steven",
-      "trainerClass": "Pkmn Trainer 5",
-      "category": "optional",
-      "encounterRole": "opponent",
-      "chapter": "Heat Badge",
-      "chapterRank": 40,
-      "location": "Meteor Falls Stevens Cave",
-      "sourceMap": "MeteorFalls_StevensCave",
-      "source": {
-        "map": "MeteorFalls_StevensCave",
-        "command": "trainerbattle_no_intro",
-        "role": "opponent",
-        "line": 18,
-        "file": "data/maps/MeteorFalls_StevensCave/scripts.inc"
-      },
-      "badge": 3,
-      "levelCap": 40,
-      "format": "double",
-      "partySize": 6,
-      "theme": "Earthquake immunity + Steel pressure + Tailwind",
-      "plan": "Skarmory and Aerodactyl are the authored opening pair. The board plan is earthquake immunity + steel pressure + tailwind. The composition turns the cave's rock, darkness, and confined-board pressure into the fight's identity instead of using a generic route-trainer core. The rare showcase is Melmetal, Heatran. Metagross carries the team's one Mega slot.",
-      "behavior": "The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe, Smart Switching, Help Partner. Expect it to preserve earthquake immunity, steel pressure, tailwind rather than select six unrelated strong attacks.",
-      "counterplay": "Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.",
-      "designStatus": "not individually closed",
-      "manualQuality": null,
-      "corpusReview": null,
-      "competitiveReferences": [],
-      "authorSelfCheck": null,
-      "closure": "",
-      "difficultyScore": 92,
-      "difficultyBand": "Extreme",
-      "difficultyExplanation": "6 fully authored Pok\u00e9mon, average BST 549.2, average cap offset +3.33, ace offset +5, and 100% held-item coverage.",
-      "uniquenessScore": 76,
-      "uniquenessExplanation": "Closest unrelated roster: Steven (43% species overlap). Its species appear across an average of 5.0 unrelated trainer families.",
-      "synergyTags": [
-        "Earthquake immunity",
-        "Steel pressure",
-        "Tailwind",
-        "speed-assisted Eruption"
-      ],
-      "ai": [
-        "Check Bad Move",
-        "Try To Faint",
-        "Check Viability",
-        "Check Foe",
-        "Smart Switching",
-        "Help Partner"
-      ],
-      "party": [
-        {
-          "slot": 1,
-          "speciesId": "SPECIES_SKARMORY",
-          "species": "Skarmory",
-          "levelOffset": 3,
-          "effectiveLevel": 43,
-          "itemId": "ITEM_LEFTOVERS",
-          "item": "Leftovers",
-          "ability": "Sturdy",
-          "spread": "31 Iv Hp Def Impish",
-          "moves": [
-            "Drill Peck",
-            "Toxic",
-            "Spikes",
-            "Roost"
-          ],
-          "role": "disruption and support"
-        },
-        {
-          "slot": 2,
-          "speciesId": "SPECIES_AERODACTYL",
-          "species": "Aerodactyl",
-          "levelOffset": 3,
-          "effectiveLevel": 43,
-          "itemId": "ITEM_LIFE_ORB",
-          "item": "Life Orb",
-          "ability": "Rock Head",
-          "spread": "31 Iv Atk Speed Jolly",
-          "moves": [
-            "Brave Bird",
-            "Rock Slide",
-            "Earthquake",
-            "Tailwind"
-          ],
-          "role": "speed control"
-        },
-        {
-          "slot": 3,
-          "speciesId": "SPECIES_CRADILY",
-          "species": "Cradily",
-          "levelOffset": 3,
-          "effectiveLevel": 43,
-          "itemId": "ITEM_BIG_ROOT",
-          "item": "Big Root",
-          "ability": "Storm Drain",
-          "spread": "31 Iv Hp Spatk Modest",
-          "moves": [
-            "Giga Drain",
-            "Earth Power",
-            "Recover",
-            "Acid Spray"
-          ],
-          "role": "coverage attacker"
-        },
-        {
-          "slot": 4,
-          "speciesId": "SPECIES_MELMETAL",
-          "species": "Melmetal",
-          "levelOffset": 3,
-          "effectiveLevel": 43,
-          "itemId": "ITEM_ASSAULT_VEST",
-          "item": "Assault Vest",
-          "ability": "Iron Fist",
-          "spread": "31 Iv Atk Spdef",
-          "moves": [
-            "Double Iron Bash",
-            "Earthquake",
-            "Ice Punch",
-            "Thunder Punch"
-          ],
-          "role": "rare centerpiece"
-        },
-        {
-          "slot": 5,
-          "speciesId": "SPECIES_HEATRAN",
-          "species": "Heatran",
-          "levelOffset": 3,
-          "effectiveLevel": 43,
-          "itemId": "ITEM_CHOICE_SCARF",
-          "item": "Choice Scarf",
-          "ability": "Flash Fire",
-          "spread": "Hp Ice Timid",
-          "moves": [
-            "Eruption",
-            "Earth Power",
-            "Flash Cannon",
-            "Hidden Power"
-          ],
-          "role": "Choice-locked breaker"
-        },
-        {
-          "slot": 6,
-          "speciesId": "SPECIES_METAGROSS",
-          "species": "Metagross",
-          "levelOffset": 5,
-          "effectiveLevel": 45,
-          "itemId": "ITEM_METAGROSSITE",
-          "item": "Metagrossite",
-          "ability": "Clear Body",
-          "spread": "31 Iv Spatk Speed Hasty",
-          "moves": [
-            "Meteor Mash",
-            "Zen Headbutt",
-            "Grass Knot",
-            "Earthquake"
-          ],
-          "role": "Mega ace"
-        }
-      ],
-      "order": 189
-    },
-    {
       "trainerId": "TRAINER_JOHN_AND_JAY_1",
       "encounterId": null,
       "encounterAlternatives": [],
@@ -27373,7 +27208,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 190
+      "order": 189
     },
     {
       "trainerId": "TRAINER_MAXIE_MT_CHIMNEY",
@@ -27538,7 +27373,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 191
+      "order": 190
     },
     {
       "trainerId": "TRAINER_TABITHA_MT_CHIMNEY",
@@ -27702,7 +27537,7 @@
           "role": "speed control"
         }
       ],
-      "order": 192
+      "order": 191
     },
     {
       "trainerId": "TRAINER_GRUNT_MT_CHIMNEY_2",
@@ -27826,7 +27661,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 193
+      "order": 192
     },
     {
       "trainerId": "TRAINER_SHELBY_1",
@@ -27845,7 +27680,7 @@
         "map": "MtChimney",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 484,
+        "line": 486,
         "file": "data/maps/MtChimney/scripts.inc"
       },
       "badge": 3,
@@ -27950,7 +27785,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 194
+      "order": 193
     },
     {
       "trainerId": "TRAINER_MELISSA",
@@ -27969,7 +27804,7 @@
         "map": "MtChimney",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 506,
+        "line": 508,
         "file": "data/maps/MtChimney/scripts.inc"
       },
       "badge": 3,
@@ -28054,7 +27889,7 @@
           "role": "disruption and support"
         }
       ],
-      "order": 195
+      "order": 194
     },
     {
       "trainerId": "TRAINER_SHEILA",
@@ -28073,7 +27908,7 @@
         "map": "MtChimney",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 511,
+        "line": 513,
         "file": "data/maps/MtChimney/scripts.inc"
       },
       "badge": 3,
@@ -28176,7 +28011,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 196
+      "order": 195
     },
     {
       "trainerId": "TRAINER_SHIRLEY",
@@ -28195,7 +28030,7 @@
         "map": "MtChimney",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 516,
+        "line": 518,
         "file": "data/maps/MtChimney/scripts.inc"
       },
       "badge": 3,
@@ -28302,7 +28137,7 @@
           "role": "speed control"
         }
       ],
-      "order": 197
+      "order": 196
     },
     {
       "trainerId": "TRAINER_GRUNT_MT_CHIMNEY_1",
@@ -28321,7 +28156,7 @@
         "map": "MtChimney",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 521,
+        "line": 523,
         "file": "data/maps/MtChimney/scripts.inc"
       },
       "badge": 3,
@@ -28426,7 +28261,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 198
+      "order": 197
     },
     {
       "trainerId": "TRAINER_SAWYER_1",
@@ -28445,7 +28280,7 @@
         "map": "MtChimney",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 526,
+        "line": 528,
         "file": "data/maps/MtChimney/scripts.inc"
       },
       "badge": 3,
@@ -28551,7 +28386,7 @@
           "role": "Mega ace"
         }
       ],
-      "order": 199
+      "order": 198
     },
     {
       "trainerId": "TRAINER_GRUNT_JAGGED_PASS",
@@ -28673,7 +28508,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 200
+      "order": 199
     },
     {
       "trainerId": "TRAINER_ERIC",
@@ -28777,7 +28612,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 201
+      "order": 200
     },
     {
       "trainerId": "TRAINER_DIANA_1",
@@ -28899,7 +28734,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 202
+      "order": 201
     },
     {
       "trainerId": "TRAINER_ETHAN_1",
@@ -29023,7 +28858,7 @@
           "role": "speed control"
         }
       ],
-      "order": 203
+      "order": 202
     },
     {
       "trainerId": "TRAINER_JULIO",
@@ -29148,7 +28983,7 @@
           "role": "speed control"
         }
       ],
-      "order": 204
+      "order": 203
     },
     {
       "trainerId": "TRAINER_AUTUMN",
@@ -29273,7 +29108,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 205
+      "order": 204
     },
     {
       "trainerId": "TRAINER_LUCY_LAVARIDGE",
@@ -29292,7 +29127,7 @@
         "map": "LavaridgeTown_PokemonCenter_1F",
         "command": "trainerbattle_no_intro",
         "role": "opponent",
-        "line": 114,
+        "line": 115,
         "file": "data/maps/LavaridgeTown_PokemonCenter_1F/scripts.inc"
       },
       "badge": 3,
@@ -29436,7 +29271,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 206
+      "order": 205
     },
     {
       "trainerId": "TRAINER_FLANNERY_1",
@@ -29604,7 +29439,7 @@
           "role": "Mega ace"
         }
       ],
-      "order": 207
+      "order": 206
     },
     {
       "trainerId": "TRAINER_COLE",
@@ -29729,7 +29564,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 208
+      "order": 207
     },
     {
       "trainerId": "TRAINER_AXLE",
@@ -29853,7 +29688,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 209
+      "order": 208
     },
     {
       "trainerId": "TRAINER_KEEGAN",
@@ -29923,7 +29758,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 210
+      "order": 209
     },
     {
       "trainerId": "TRAINER_DANIELLE",
@@ -30049,7 +29884,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 211
+      "order": 210
     },
     {
       "trainerId": "TRAINER_GERALD",
@@ -30173,7 +30008,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 212
+      "order": 211
     },
     {
       "trainerId": "TRAINER_JACE",
@@ -30298,7 +30133,7 @@
           "role": "disruption and support"
         }
       ],
-      "order": 213
+      "order": 212
     },
     {
       "trainerId": "TRAINER_JEFF",
@@ -30422,7 +30257,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 214
+      "order": 213
     },
     {
       "trainerId": "TRAINER_ELI",
@@ -30548,7 +30383,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 215
+      "order": 214
     },
     {
       "trainerId": "TRAINER_ISAAC_1",
@@ -30709,7 +30544,7 @@
           "role": "disruption and support"
         }
       ],
-      "order": 216
+      "order": 215
     },
     {
       "trainerId": "TRAINER_LYDIA_1",
@@ -30871,7 +30706,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 217
+      "order": 216
     },
     {
       "trainerId": "TRAINER_DYLAN_1",
@@ -30996,7 +30831,7 @@
           "role": "disruption and support"
         }
       ],
-      "order": 218
+      "order": 217
     },
     {
       "trainerId": "TRAINER_MARIA_1",
@@ -31120,7 +30955,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 219
+      "order": 218
     },
     {
       "trainerId": "TRAINER_DEREK",
@@ -31206,7 +31041,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 220
+      "order": 219
     },
     {
       "trainerId": "TRAINER_ANNA_AND_MEG_1",
@@ -31330,7 +31165,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 221
+      "order": 220
     },
     {
       "trainerId": "TRAINER_MELINA",
@@ -31416,7 +31251,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 222
+      "order": 221
     },
     {
       "trainerId": "TRAINER_BRANDI",
@@ -31505,7 +31340,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 223
+      "order": 222
     },
     {
       "trainerId": "TRAINER_AISHA",
@@ -31573,7 +31408,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 224
+      "order": 223
     },
     {
       "trainerId": "TRAINER_NORMAN_1",
@@ -31737,7 +31572,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 225
+      "order": 224
     },
     {
       "trainerId": "TRAINER_RANDALL",
@@ -31865,7 +31700,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 226
+      "order": 225
     },
     {
       "trainerId": "TRAINER_PARKER",
@@ -31990,7 +31825,7 @@
           "role": "speed control"
         }
       ],
-      "order": 227
+      "order": 226
     },
     {
       "trainerId": "TRAINER_GEORGE",
@@ -32114,7 +31949,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 228
+      "order": 227
     },
     {
       "trainerId": "TRAINER_BERKE",
@@ -32239,7 +32074,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 229
+      "order": 228
     },
     {
       "trainerId": "TRAINER_MARY",
@@ -32365,7 +32200,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 230
+      "order": 229
     },
     {
       "trainerId": "TRAINER_ALEXIA",
@@ -32489,7 +32324,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 231
+      "order": 230
     },
     {
       "trainerId": "TRAINER_JODY",
@@ -32614,7 +32449,448 @@
           "role": "protected attacker"
         }
       ],
+      "order": 231
+    },
+    {
+      "trainerId": "TRAINER_ALANNAH",
+      "encounterId": null,
+      "encounterAlternatives": [],
+      "runtimePartyAlternatives": null,
+      "name": "Alannah",
+      "trainerClass": "Pkmn Ranger",
+      "category": "optional",
+      "encounterRole": "opponent",
+      "chapter": "Balance Badge",
+      "chapterRank": 50,
+      "location": "Ashen Woods",
+      "sourceMap": "AshenWoods",
+      "source": {
+        "map": "AshenWoods",
+        "command": "trainerbattle_single",
+        "role": "opponent",
+        "line": 164,
+        "file": "data/maps/AshenWoods/scripts.inc"
+      },
+      "badge": 4,
+      "levelCap": 45,
+      "format": "single",
+      "partySize": 3,
+      "theme": "active speed control",
+      "plan": "Primarina opens this deliberate singles fight. The roster is built as active speed control. The composition turns the surrounding forest and overgrowth into the fight's identity instead of using a generic route-trainer core.",
+      "behavior": "The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe. Expect it to preserve active speed control rather than select six unrelated strong attacks.",
+      "counterplay": "Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.",
+      "designStatus": "not individually closed",
+      "manualQuality": null,
+      "corpusReview": null,
+      "competitiveReferences": [],
+      "authorSelfCheck": null,
+      "closure": "",
+      "difficultyScore": 51,
+      "difficultyBand": "Hard",
+      "difficultyExplanation": "3 fully authored Pok\u00e9mon, average BST 499.7, average cap offset -1.0, ace offset -1, and 0% held-item coverage.",
+      "uniquenessScore": 78,
+      "uniquenessExplanation": "Closest unrelated roster: Annika (20% species overlap). Its species appear across an average of 5.3 unrelated trainer families.",
+      "synergyTags": [
+        "active speed control"
+      ],
+      "ai": [
+        "Check Bad Move",
+        "Try To Faint",
+        "Check Viability",
+        "Check Foe"
+      ],
+      "party": [
+        {
+          "slot": 1,
+          "speciesId": "SPECIES_PRIMARINA",
+          "species": "Primarina",
+          "levelOffset": -1,
+          "effectiveLevel": 44,
+          "itemId": "ITEM_NONE",
+          "item": "None",
+          "ability": "Berserk",
+          "spread": "31 Iv 20 Ev",
+          "moves": [
+            "Sparkling Aria",
+            "Moonblast",
+            "Icy Wind",
+            "Sing"
+          ],
+          "role": "speed control"
+        },
+        {
+          "slot": 2,
+          "speciesId": "SPECIES_DURANT",
+          "species": "Durant",
+          "levelOffset": -1,
+          "effectiveLevel": 44,
+          "itemId": "ITEM_NONE",
+          "item": "None",
+          "ability": "Hustle",
+          "spread": "31 Iv 20 Ev",
+          "moves": [
+            "X Scissor",
+            "Iron Head",
+            "Crunch",
+            "Thunder Fang"
+          ],
+          "role": "coverage attacker"
+        },
+        {
+          "slot": 3,
+          "speciesId": "SPECIES_DUSCLOPS",
+          "species": "Dusclops",
+          "levelOffset": -1,
+          "effectiveLevel": 44,
+          "itemId": "ITEM_NONE",
+          "item": "None",
+          "ability": "Pressure",
+          "spread": "31 Iv 20 Ev",
+          "moves": [
+            "Night Shade",
+            "Curse",
+            "Protect",
+            "Infestation"
+          ],
+          "role": "protected attacker"
+        }
+      ],
       "order": 232
+    },
+    {
+      "trainerId": "TRAINER_MARTIN",
+      "encounterId": null,
+      "encounterAlternatives": [],
+      "runtimePartyAlternatives": null,
+      "name": "Martin",
+      "trainerClass": "Pkmn Ranger",
+      "category": "optional",
+      "encounterRole": "opponent",
+      "chapter": "Balance Badge",
+      "chapterRank": 50,
+      "location": "Ashen Woods",
+      "sourceMap": "AshenWoods",
+      "source": {
+        "map": "AshenWoods",
+        "command": "trainerbattle_single",
+        "role": "opponent",
+        "line": 169,
+        "file": "data/maps/AshenWoods/scripts.inc"
+      },
+      "badge": 4,
+      "levelCap": 45,
+      "format": "single",
+      "partySize": 3,
+      "theme": "Dark rare-showcase balance",
+      "plan": "Muk (Alolan) opens this deliberate singles fight. The roster is built as dark rare-showcase balance. The composition turns the surrounding forest and overgrowth into the fight's identity instead of using a generic route-trainer core. The rare showcase is Zarude.",
+      "behavior": "The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe. This singles or low-stakes roster emphasizes coverage, status, and matchup pressure rather than a scripted multi-Pok\u00e9mon combination.",
+      "counterplay": "Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.",
+      "designStatus": "not individually closed",
+      "manualQuality": null,
+      "corpusReview": null,
+      "competitiveReferences": [],
+      "authorSelfCheck": null,
+      "closure": "",
+      "difficultyScore": 49,
+      "difficultyBand": "Demanding",
+      "difficultyExplanation": "3 fully authored Pok\u00e9mon, average BST 543.3, average cap offset -1.0, ace offset -1, and 33% held-item coverage.",
+      "uniquenessScore": 72,
+      "uniquenessExplanation": "Closest unrelated roster: Grunt (40% species overlap). Its species appear across an average of 4.3 unrelated trainer families.",
+      "synergyTags": [],
+      "ai": [
+        "Check Bad Move",
+        "Try To Faint",
+        "Check Viability",
+        "Check Foe"
+      ],
+      "party": [
+        {
+          "slot": 1,
+          "speciesId": "SPECIES_MUK_ALOLAN",
+          "species": "Muk (Alolan)",
+          "levelOffset": -1,
+          "effectiveLevel": 44,
+          "itemId": "ITEM_NONE",
+          "item": "None",
+          "ability": "Poison Touch",
+          "spread": "31 Iv 20 Ev",
+          "moves": [
+            "Poison Jab",
+            "Crunch",
+            "Acid Spray",
+            "Disable"
+          ],
+          "role": "coverage attacker"
+        },
+        {
+          "slot": 2,
+          "speciesId": "SPECIES_GOLISOPOD",
+          "species": "Golisopod",
+          "levelOffset": -1,
+          "effectiveLevel": 44,
+          "itemId": "ITEM_NONE",
+          "item": "None",
+          "ability": "Emergency Exit",
+          "spread": "31 Iv 20 Ev",
+          "moves": [
+            "Razor Shell",
+            "First Impression",
+            "Sucker Punch",
+            "Drill Run"
+          ],
+          "role": "coverage attacker"
+        },
+        {
+          "slot": 3,
+          "speciesId": "SPECIES_ZARUDE",
+          "species": "Zarude",
+          "levelOffset": -1,
+          "effectiveLevel": 44,
+          "itemId": "ITEM_LIFE_ORB",
+          "item": "Life Orb",
+          "ability": "Leaf Guard",
+          "spread": "31 Iv Atk Speed Jolly",
+          "moves": [
+            "Knock Off",
+            "Power Whip",
+            "Close Combat",
+            "U Turn"
+          ],
+          "role": "rare centerpiece"
+        }
+      ],
+      "order": 233
+    },
+    {
+      "trainerId": "TRAINER_ROMAN",
+      "encounterId": null,
+      "encounterAlternatives": [],
+      "runtimePartyAlternatives": null,
+      "name": "Roman",
+      "trainerClass": "Hiker",
+      "category": "optional",
+      "encounterRole": "opponent",
+      "chapter": "Balance Badge",
+      "chapterRank": 50,
+      "location": "Ashen Woods",
+      "sourceMap": "AshenWoods",
+      "source": {
+        "map": "AshenWoods",
+        "command": "trainerbattle_single",
+        "role": "opponent",
+        "line": 174,
+        "file": "data/maps/AshenWoods/scripts.inc"
+      },
+      "badge": 4,
+      "levelCap": 45,
+      "format": "double",
+      "partySize": 4,
+      "theme": "Earthquake immunity",
+      "plan": "Bronzong and Golem are the authored opening pair. The board plan is earthquake immunity. The composition turns the surrounding forest and overgrowth into the fight's identity instead of using a generic route-trainer core.",
+      "behavior": "The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe, Help Partner. Expect it to preserve earthquake immunity rather than select six unrelated strong attacks.",
+      "counterplay": "Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.",
+      "designStatus": "not individually closed",
+      "manualQuality": null,
+      "corpusReview": null,
+      "competitiveReferences": [],
+      "authorSelfCheck": null,
+      "closure": "",
+      "difficultyScore": 49,
+      "difficultyBand": "Demanding",
+      "difficultyExplanation": "4 fully authored Pok\u00e9mon, average BST 501.2, average cap offset -2.0, ace offset -2, and 50% held-item coverage.",
+      "uniquenessScore": 82,
+      "uniquenessExplanation": "Closest unrelated roster: Foster (20% species overlap). Its species appear across an average of 3.2 unrelated trainer families.",
+      "synergyTags": [
+        "Earthquake immunity"
+      ],
+      "ai": [
+        "Check Bad Move",
+        "Try To Faint",
+        "Check Viability",
+        "Check Foe",
+        "Help Partner"
+      ],
+      "party": [
+        {
+          "slot": 1,
+          "speciesId": "SPECIES_BRONZONG",
+          "species": "Bronzong",
+          "levelOffset": -2,
+          "effectiveLevel": 43,
+          "itemId": "ITEM_NONE",
+          "item": "None",
+          "ability": "Levitate",
+          "spread": "31 Iv 0 Ev",
+          "moves": [
+            "Gyro Ball",
+            "Extrasensory",
+            "Hypnosis",
+            "Confuse Ray"
+          ],
+          "role": "disruption and support"
+        },
+        {
+          "slot": 2,
+          "speciesId": "SPECIES_GOLEM",
+          "species": "Golem",
+          "levelOffset": -2,
+          "effectiveLevel": 43,
+          "itemId": "ITEM_NONE",
+          "item": "None",
+          "ability": "Rock Head",
+          "spread": "31 Iv 0 Ev",
+          "moves": [
+            "Earthquake",
+            "Rock Blast",
+            "Steamroller",
+            "Explosion"
+          ],
+          "role": "coverage attacker"
+        },
+        {
+          "slot": 3,
+          "speciesId": "SPECIES_STUNFISK_GALARIAN",
+          "species": "Stunfisk (Galarian)",
+          "levelOffset": -2,
+          "effectiveLevel": 43,
+          "itemId": "ITEM_LEFTOVERS",
+          "item": "Leftovers",
+          "ability": "Mimicry",
+          "spread": "31 Iv Hp Atk Adamant",
+          "moves": [
+            "Earthquake",
+            "Stone Edge",
+            "Thunder Wave",
+            "Stealth Rock"
+          ],
+          "role": "speed control"
+        },
+        {
+          "slot": 4,
+          "speciesId": "SPECIES_SHUCKLE",
+          "species": "Shuckle",
+          "levelOffset": -2,
+          "effectiveLevel": 43,
+          "itemId": "ITEM_CHESTO_BERRY",
+          "item": "Chesto Berry",
+          "ability": "Sturdy",
+          "spread": "31 Iv Hp Atk Adamant",
+          "moves": [
+            "Rest",
+            "Acupressure",
+            "Rollout",
+            "Power Split"
+          ],
+          "role": "disruption and support"
+        }
+      ],
+      "order": 234
+    },
+    {
+      "trainerId": "TRAINER_ELMER",
+      "encounterId": null,
+      "encounterAlternatives": [],
+      "runtimePartyAlternatives": null,
+      "name": "Elmer",
+      "trainerClass": "Bug Maniac",
+      "category": "optional",
+      "encounterRole": "opponent",
+      "chapter": "Balance Badge",
+      "chapterRank": 50,
+      "location": "Ashen Woods",
+      "sourceMap": "AshenWoods",
+      "source": {
+        "map": "AshenWoods",
+        "command": "trainerbattle_single",
+        "role": "opponent",
+        "line": 179,
+        "file": "data/maps/AshenWoods/scripts.inc"
+      },
+      "badge": 4,
+      "levelCap": 45,
+      "format": "single",
+      "partySize": 3,
+      "theme": "Bug pressure",
+      "plan": "Scyther opens this deliberate singles fight. The roster is built as bug pressure. The composition turns the surrounding forest and overgrowth into the fight's identity instead of using a generic route-trainer core.",
+      "behavior": "The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe. Expect it to preserve bug pressure rather than select six unrelated strong attacks.",
+      "counterplay": "Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.",
+      "designStatus": "not individually closed",
+      "manualQuality": null,
+      "corpusReview": null,
+      "competitiveReferences": [],
+      "authorSelfCheck": null,
+      "closure": "",
+      "difficultyScore": 41,
+      "difficultyBand": "Demanding",
+      "difficultyExplanation": "3 fully authored Pok\u00e9mon, average BST 500.0, average cap offset -2.0, ace offset -2, and 0% held-item coverage.",
+      "uniquenessScore": 72,
+      "uniquenessExplanation": "Closest unrelated roster: Vicky (33% species overlap). Its species appear across an average of 4.7 unrelated trainer families.",
+      "synergyTags": [
+        "Bug pressure"
+      ],
+      "ai": [
+        "Check Bad Move",
+        "Try To Faint",
+        "Check Viability",
+        "Check Foe"
+      ],
+      "party": [
+        {
+          "slot": 1,
+          "speciesId": "SPECIES_SCYTHER",
+          "species": "Scyther",
+          "levelOffset": -2,
+          "effectiveLevel": 43,
+          "itemId": "ITEM_NONE",
+          "item": "None",
+          "ability": "Technician",
+          "spread": "31 Iv 0 Ev",
+          "moves": [
+            "Aerial Ace",
+            "X Scissor",
+            "Quick Attack",
+            "Night Slash"
+          ],
+          "role": "coverage attacker"
+        },
+        {
+          "slot": 2,
+          "speciesId": "SPECIES_PINSIR",
+          "species": "Pinsir",
+          "levelOffset": -2,
+          "effectiveLevel": 43,
+          "itemId": "ITEM_NONE",
+          "item": "None",
+          "ability": "Mold Breaker",
+          "spread": "31 Iv 0 Ev",
+          "moves": [
+            "Thrash",
+            "X Scissor",
+            "Submission",
+            "Swords Dance"
+          ],
+          "role": "setup attacker"
+        },
+        {
+          "slot": 3,
+          "speciesId": "SPECIES_HERACROSS",
+          "species": "Heracross",
+          "levelOffset": -2,
+          "effectiveLevel": 43,
+          "itemId": "ITEM_NONE",
+          "item": "None",
+          "ability": "Swarm",
+          "spread": "31 Iv 0 Ev",
+          "moves": [
+            "Megahorn",
+            "Close Combat",
+            "Bullet Seed",
+            "Night Slash"
+          ],
+          "role": "coverage attacker"
+        }
+      ],
+      "order": 235
     },
     {
       "trainerId": "TRAINER_DAISY",
@@ -32633,7 +32909,7 @@
         "map": "Route103",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 304,
+        "line": 309,
         "file": "data/maps/Route103/scripts.inc"
       },
       "badge": 5,
@@ -32740,7 +33016,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 233
+      "order": 236
     },
     {
       "trainerId": "TRAINER_AMY_AND_LIV_1",
@@ -32759,7 +33035,7 @@
         "map": "Route103",
         "command": "trainerbattle_double",
         "role": "opponent",
-        "line": 309,
+        "line": 314,
         "file": "data/maps/Route103/scripts.inc"
       },
       "badge": 5,
@@ -32865,7 +33141,7 @@
           "role": "disruption and support"
         }
       ],
-      "order": 234
+      "order": 237
     },
     {
       "trainerId": "TRAINER_ANDREW",
@@ -32884,7 +33160,7 @@
         "map": "Route103",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 347,
+        "line": 352,
         "file": "data/maps/Route103/scripts.inc"
       },
       "badge": 5,
@@ -32971,7 +33247,7 @@
           "role": "disruption and support"
         }
       ],
-      "order": 235
+      "order": 238
     },
     {
       "trainerId": "TRAINER_MIGUEL_1",
@@ -32990,7 +33266,7 @@
         "map": "Route103",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 352,
+        "line": 357,
         "file": "data/maps/Route103/scripts.inc"
       },
       "badge": 5,
@@ -33096,7 +33372,7 @@
           "role": "disruption and support"
         }
       ],
-      "order": 236
+      "order": 239
     },
     {
       "trainerId": "TRAINER_MARCOS",
@@ -33115,7 +33391,7 @@
         "map": "Route103",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 374,
+        "line": 379,
         "file": "data/maps/Route103/scripts.inc"
       },
       "badge": 5,
@@ -33182,7 +33458,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 237
+      "order": 240
     },
     {
       "trainerId": "TRAINER_RHETT",
@@ -33201,7 +33477,7 @@
         "map": "Route103",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 379,
+        "line": 384,
         "file": "data/maps/Route103/scripts.inc"
       },
       "badge": 5,
@@ -33250,7 +33526,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 238
+      "order": 241
     },
     {
       "trainerId": "TRAINER_PETE",
@@ -33269,7 +33545,7 @@
         "map": "Route103",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 384,
+        "line": 389,
         "file": "data/maps/Route103/scripts.inc"
       },
       "badge": 5,
@@ -33338,7 +33614,7 @@
           "role": "rare centerpiece"
         }
       ],
-      "order": 239
+      "order": 242
     },
     {
       "trainerId": "TRAINER_ISABELLE",
@@ -33357,7 +33633,7 @@
         "map": "Route103",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 389,
+        "line": 394,
         "file": "data/maps/Route103/scripts.inc"
       },
       "badge": 5,
@@ -33445,7 +33721,7 @@
           "role": "disruption and support"
         }
       ],
-      "order": 240
+      "order": 243
     },
     {
       "trainerId": "TRAINER_ROSE_1",
@@ -33464,7 +33740,7 @@
         "map": "Route118",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 191,
+        "line": 193,
         "file": "data/maps/Route118/scripts.inc"
       },
       "badge": 5,
@@ -33549,7 +33825,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 241
+      "order": 244
     },
     {
       "trainerId": "TRAINER_BARNY",
@@ -33568,7 +33844,7 @@
         "map": "Route118",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 213,
+        "line": 215,
         "file": "data/maps/Route118/scripts.inc"
       },
       "badge": 5,
@@ -33655,7 +33931,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 242
+      "order": 245
     },
     {
       "trainerId": "TRAINER_WADE",
@@ -33674,7 +33950,7 @@
         "map": "Route118",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 218,
+        "line": 220,
         "file": "data/maps/Route118/scripts.inc"
       },
       "badge": 5,
@@ -33779,7 +34055,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 243
+      "order": 246
     },
     {
       "trainerId": "TRAINER_DALTON_1",
@@ -33798,7 +34074,7 @@
         "map": "Route118",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 223,
+        "line": 225,
         "file": "data/maps/Route118/scripts.inc"
       },
       "badge": 5,
@@ -33847,7 +34123,7 @@
           "role": "disruption and support"
         }
       ],
-      "order": 244
+      "order": 247
     },
     {
       "trainerId": "TRAINER_PERRY",
@@ -33866,7 +34142,7 @@
         "map": "Route118",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 245,
+        "line": 247,
         "file": "data/maps/Route118/scripts.inc"
       },
       "badge": 5,
@@ -33951,7 +34227,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 245
+      "order": 248
     },
     {
       "trainerId": "TRAINER_CHESTER",
@@ -33970,7 +34246,7 @@
         "map": "Route118",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 250,
+        "line": 252,
         "file": "data/maps/Route118/scripts.inc"
       },
       "badge": 5,
@@ -34073,7 +34349,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 246
+      "order": 249
     },
     {
       "trainerId": "TRAINER_DEANDRE",
@@ -34092,7 +34368,7 @@
         "map": "Route118",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 255,
+        "line": 257,
         "file": "data/maps/Route118/scripts.inc"
       },
       "badge": 5,
@@ -34198,7 +34474,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 247
+      "order": 250
     },
     {
       "trainerId": "TRAINER_MAGIKARP_GUY",
@@ -34217,7 +34493,7 @@
         "map": "Route118",
         "command": "trainerbattle_no_intro",
         "role": "opponent",
-        "line": 295,
+        "line": 298,
         "file": "data/maps/Route118/scripts.inc"
       },
       "badge": 5,
@@ -34362,7 +34638,7 @@
           "role": "Mega ace"
         }
       ],
-      "order": 248
+      "order": 251
     },
     {
       "trainerId": "TRAINER_MAY_ROUTE_119_TREECKO",
@@ -34523,7 +34799,7 @@
           "role": "Mega ace"
         }
       ],
-      "order": 249
+      "order": 252
     },
     {
       "trainerId": "TRAINER_MAY_ROUTE_119_TORCHIC",
@@ -34685,7 +34961,7 @@
           "role": "Mega ace"
         }
       ],
-      "order": 250
+      "order": 253
     },
     {
       "trainerId": "TRAINER_MAY_ROUTE_119_MUDKIP",
@@ -34846,7 +35122,7 @@
           "role": "Mega ace"
         }
       ],
-      "order": 251
+      "order": 254
     },
     {
       "trainerId": "TRAINER_BRENDAN_ROUTE_119_TREECKO",
@@ -35008,7 +35284,7 @@
           "role": "Mega ace"
         }
       ],
-      "order": 252
+      "order": 255
     },
     {
       "trainerId": "TRAINER_BRENDAN_ROUTE_119_TORCHIC",
@@ -35171,7 +35447,7 @@
           "role": "Mega ace"
         }
       ],
-      "order": 253
+      "order": 256
     },
     {
       "trainerId": "TRAINER_BRENDAN_ROUTE_119_MUDKIP",
@@ -35334,7 +35610,7 @@
           "role": "Mega ace"
         }
       ],
-      "order": 254
+      "order": 257
     },
     {
       "trainerId": "TRAINER_BRENT",
@@ -35353,7 +35629,7 @@
         "map": "Route119",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 343,
+        "line": 345,
         "file": "data/maps/Route119/scripts.inc"
       },
       "badge": 5,
@@ -35402,7 +35678,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 255
+      "order": 258
     },
     {
       "trainerId": "TRAINER_DONALD",
@@ -35421,7 +35697,7 @@
         "map": "Route119",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 348,
+        "line": 350,
         "file": "data/maps/Route119/scripts.inc"
       },
       "badge": 5,
@@ -35509,7 +35785,7 @@
           "role": "speed control"
         }
       ],
-      "order": 256
+      "order": 259
     },
     {
       "trainerId": "TRAINER_TAYLOR",
@@ -35528,7 +35804,7 @@
         "map": "Route119",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 353,
+        "line": 355,
         "file": "data/maps/Route119/scripts.inc"
       },
       "badge": 5,
@@ -35615,7 +35891,7 @@
           "role": "disruption and support"
         }
       ],
-      "order": 257
+      "order": 260
     },
     {
       "trainerId": "TRAINER_DOUG",
@@ -35634,7 +35910,7 @@
         "map": "Route119",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 358,
+        "line": 360,
         "file": "data/maps/Route119/scripts.inc"
       },
       "badge": 5,
@@ -35721,7 +35997,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 258
+      "order": 261
     },
     {
       "trainerId": "TRAINER_GREG",
@@ -35740,7 +36016,7 @@
         "map": "Route119",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 363,
+        "line": 365,
         "file": "data/maps/Route119/scripts.inc"
       },
       "badge": 5,
@@ -35827,7 +36103,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 259
+      "order": 262
     },
     {
       "trainerId": "TRAINER_KENT",
@@ -35846,7 +36122,7 @@
         "map": "Route119",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 368,
+        "line": 370,
         "file": "data/maps/Route119/scripts.inc"
       },
       "badge": 5,
@@ -35951,7 +36227,7 @@
           "role": "Mega ace"
         }
       ],
-      "order": 260
+      "order": 263
     },
     {
       "trainerId": "TRAINER_JACKSON_1",
@@ -35970,7 +36246,7 @@
         "map": "Route119",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 373,
+        "line": 375,
         "file": "data/maps/Route119/scripts.inc"
       },
       "badge": 5,
@@ -36075,7 +36351,7 @@
           "role": "disruption and support"
         }
       ],
-      "order": 261
+      "order": 264
     },
     {
       "trainerId": "TRAINER_CATHERINE_1",
@@ -36094,7 +36370,7 @@
         "map": "Route119",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 395,
+        "line": 397,
         "file": "data/maps/Route119/scripts.inc"
       },
       "badge": 5,
@@ -36199,7 +36475,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 262
+      "order": 265
     },
     {
       "trainerId": "TRAINER_HUGH",
@@ -36218,7 +36494,7 @@
         "map": "Route119",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 417,
+        "line": 419,
         "file": "data/maps/Route119/scripts.inc"
       },
       "badge": 5,
@@ -36305,7 +36581,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 263
+      "order": 266
     },
     {
       "trainerId": "TRAINER_PHIL",
@@ -36324,7 +36600,7 @@
         "map": "Route119",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 422,
+        "line": 424,
         "file": "data/maps/Route119/scripts.inc"
       },
       "badge": 5,
@@ -36429,7 +36705,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 264
+      "order": 267
     },
     {
       "trainerId": "TRAINER_YASU",
@@ -36448,7 +36724,7 @@
         "map": "Route119",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 427,
+        "line": 429,
         "file": "data/maps/Route119/scripts.inc"
       },
       "badge": 5,
@@ -36533,7 +36809,7 @@
           "role": "speed control"
         }
       ],
-      "order": 265
+      "order": 268
     },
     {
       "trainerId": "TRAINER_TAKASHI",
@@ -36552,7 +36828,7 @@
         "map": "Route119",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 432,
+        "line": 434,
         "file": "data/maps/Route119/scripts.inc"
       },
       "badge": 5,
@@ -36658,7 +36934,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 266
+      "order": 269
     },
     {
       "trainerId": "TRAINER_HIDEO",
@@ -36677,7 +36953,7 @@
         "map": "Route119",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 437,
+        "line": 439,
         "file": "data/maps/Route119/scripts.inc"
       },
       "badge": 5,
@@ -36782,7 +37058,7 @@
           "role": "Choice-locked breaker"
         }
       ],
-      "order": 267
+      "order": 270
     },
     {
       "trainerId": "TRAINER_CHRIS",
@@ -36801,7 +37077,7 @@
         "map": "Route119",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 442,
+        "line": 444,
         "file": "data/maps/Route119/scripts.inc"
       },
       "badge": 5,
@@ -36907,7 +37183,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 268
+      "order": 271
     },
     {
       "trainerId": "TRAINER_FABIAN",
@@ -36926,7 +37202,7 @@
         "map": "Route119",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 447,
+        "line": 449,
         "file": "data/maps/Route119/scripts.inc"
       },
       "badge": 5,
@@ -37032,7 +37308,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 269
+      "order": 272
     },
     {
       "trainerId": "TRAINER_DAYTON",
@@ -37051,7 +37327,7 @@
         "map": "Route119",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 452,
+        "line": 454,
         "file": "data/maps/Route119/scripts.inc"
       },
       "badge": 5,
@@ -37118,7 +37394,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 270
+      "order": 273
     },
     {
       "trainerId": "TRAINER_RACHEL",
@@ -37137,7 +37413,7 @@
         "map": "Route119",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 457,
+        "line": 459,
         "file": "data/maps/Route119/scripts.inc"
       },
       "badge": 5,
@@ -37244,7 +37520,7 @@
           "role": "speed control"
         }
       ],
-      "order": 271
+      "order": 274
     },
     {
       "trainerId": "TRAINER_SHELLY_WEATHER_INSTITUTE",
@@ -37407,7 +37683,7 @@
           "role": "Mega ace"
         }
       ],
-      "order": 272
+      "order": 275
     },
     {
       "trainerId": "TRAINER_GRUNT_WEATHER_INST_5",
@@ -37529,7 +37805,7 @@
           "role": "disruption and support"
         }
       ],
-      "order": 273
+      "order": 276
     },
     {
       "trainerId": "TRAINER_GRUNT_WEATHER_INST_2",
@@ -37653,7 +37929,7 @@
           "role": "Choice-locked breaker"
         }
       ],
-      "order": 274
+      "order": 277
     },
     {
       "trainerId": "TRAINER_GRUNT_WEATHER_INST_3",
@@ -37777,7 +38053,7 @@
           "role": "speed control"
         }
       ],
-      "order": 275
+      "order": 278
     },
     {
       "trainerId": "TRAINER_GRUNT_WEATHER_INST_1",
@@ -37796,7 +38072,7 @@
         "map": "Route119_WeatherInstitute_1F",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 83,
+        "line": 89,
         "file": "data/maps/Route119_WeatherInstitute_1F/scripts.inc"
       },
       "badge": 5,
@@ -37902,7 +38178,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 276
+      "order": 279
     },
     {
       "trainerId": "TRAINER_GRUNT_WEATHER_INST_4",
@@ -37921,7 +38197,7 @@
         "map": "Route119_WeatherInstitute_1F",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 88,
+        "line": 94,
         "file": "data/maps/Route119_WeatherInstitute_1F/scripts.inc"
       },
       "badge": 5,
@@ -38026,7 +38302,7 @@
           "role": "speed control"
         }
       ],
-      "order": 277
+      "order": 280
     },
     {
       "trainerId": "TRAINER_WINONA_1",
@@ -38195,7 +38471,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 278
+      "order": 281
     },
     {
       "trainerId": "TRAINER_SPENSER_FORTREE",
@@ -38214,7 +38490,7 @@
         "map": "FortreeCity_Mart",
         "command": "trainerbattle_no_intro",
         "role": "opponent",
-        "line": 49,
+        "line": 50,
         "file": "data/maps/FortreeCity_Mart/scripts.inc"
       },
       "badge": 5,
@@ -38358,7 +38634,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 279
+      "order": 282
     },
     {
       "trainerId": "TRAINER_JARED",
@@ -38482,7 +38758,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 280
+      "order": 283
     },
     {
       "trainerId": "TRAINER_EDWARDO",
@@ -38610,7 +38886,7 @@
           "role": "redirection support"
         }
       ],
-      "order": 281
+      "order": 284
     },
     {
       "trainerId": "TRAINER_FLINT",
@@ -38735,7 +39011,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 282
+      "order": 285
     },
     {
       "trainerId": "TRAINER_ASHLEY",
@@ -38859,7 +39135,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 283
+      "order": 286
     },
     {
       "trainerId": "TRAINER_HUMBERTO",
@@ -38985,7 +39261,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 284
+      "order": 287
     },
     {
       "trainerId": "TRAINER_DARIUS",
@@ -39109,7 +39385,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 285
+      "order": 288
     },
     {
       "trainerId": "TRAINER_COLIN",
@@ -39128,7 +39404,7 @@
         "map": "Route120",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 294,
+        "line": 299,
         "file": "data/maps/Route120/scripts.inc"
       },
       "badge": 5,
@@ -39216,7 +39492,7 @@
           "role": "rare centerpiece"
         }
       ],
-      "order": 286
+      "order": 289
     },
     {
       "trainerId": "TRAINER_ROBERT_1",
@@ -39235,7 +39511,7 @@
         "map": "Route120",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 299,
+        "line": 304,
         "file": "data/maps/Route120/scripts.inc"
       },
       "badge": 5,
@@ -39342,7 +39618,7 @@
           "role": "redirection support"
         }
       ],
-      "order": 287
+      "order": 290
     },
     {
       "trainerId": "TRAINER_LORENZO",
@@ -39361,7 +39637,7 @@
         "map": "Route120",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 321,
+        "line": 326,
         "file": "data/maps/Route120/scripts.inc"
       },
       "badge": 5,
@@ -39467,7 +39743,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 288
+      "order": 291
     },
     {
       "trainerId": "TRAINER_JENNA",
@@ -39486,7 +39762,7 @@
         "map": "Route120",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 326,
+        "line": 331,
         "file": "data/maps/Route120/scripts.inc"
       },
       "badge": 5,
@@ -39591,7 +39867,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 289
+      "order": 292
     },
     {
       "trainerId": "TRAINER_JEFFREY_1",
@@ -39610,7 +39886,7 @@
         "map": "Route120",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 331,
+        "line": 336,
         "file": "data/maps/Route120/scripts.inc"
       },
       "badge": 5,
@@ -39697,7 +39973,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 290
+      "order": 293
     },
     {
       "trainerId": "TRAINER_JENNIFER",
@@ -39716,7 +39992,7 @@
         "map": "Route120",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 353,
+        "line": 358,
         "file": "data/maps/Route120/scripts.inc"
       },
       "badge": 5,
@@ -39821,7 +40097,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 291
+      "order": 294
     },
     {
       "trainerId": "TRAINER_CHIP",
@@ -39840,7 +40116,7 @@
         "map": "Route120",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 358,
+        "line": 363,
         "file": "data/maps/Route120/scripts.inc"
       },
       "badge": 5,
@@ -39925,7 +40201,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 292
+      "order": 295
     },
     {
       "trainerId": "TRAINER_CLARISSA",
@@ -39944,7 +40220,7 @@
         "map": "Route120",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 363,
+        "line": 368,
         "file": "data/maps/Route120/scripts.inc"
       },
       "badge": 5,
@@ -40029,7 +40305,7 @@
           "role": "disruption and support"
         }
       ],
-      "order": 293
+      "order": 296
     },
     {
       "trainerId": "TRAINER_ANGELICA",
@@ -40048,7 +40324,7 @@
         "map": "Route120",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 368,
+        "line": 373,
         "file": "data/maps/Route120/scripts.inc"
       },
       "badge": 5,
@@ -40153,7 +40429,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 294
+      "order": 297
     },
     {
       "trainerId": "TRAINER_KEIGO",
@@ -40172,7 +40448,7 @@
         "map": "Route120",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 373,
+        "line": 378,
         "file": "data/maps/Route120/scripts.inc"
       },
       "badge": 5,
@@ -40257,7 +40533,7 @@
           "role": "speed control"
         }
       ],
-      "order": 295
+      "order": 298
     },
     {
       "trainerId": "TRAINER_RILEY",
@@ -40276,7 +40552,7 @@
         "map": "Route120",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 378,
+        "line": 383,
         "file": "data/maps/Route120/scripts.inc"
       },
       "badge": 5,
@@ -40382,7 +40658,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 296
+      "order": 299
     },
     {
       "trainerId": "TRAINER_LEONEL",
@@ -40401,7 +40677,7 @@
         "map": "Route120",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 383,
+        "line": 388,
         "file": "data/maps/Route120/scripts.inc"
       },
       "badge": 5,
@@ -40486,7 +40762,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 297
+      "order": 300
     },
     {
       "trainerId": "TRAINER_CALLIE",
@@ -40505,7 +40781,7 @@
         "map": "Route120",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 388,
+        "line": 393,
         "file": "data/maps/Route120/scripts.inc"
       },
       "badge": 5,
@@ -40592,7 +40868,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 298
+      "order": 301
     },
     {
       "trainerId": "TRAINER_TIMOTHY_1",
@@ -40716,7 +40992,7 @@
           "role": "rare centerpiece"
         }
       ],
-      "order": 299
+      "order": 302
     },
     {
       "trainerId": "TRAINER_KOICHI",
@@ -40822,7 +41098,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 300
+      "order": 303
     },
     {
       "trainerId": "TRAINER_NOB_1",
@@ -40890,7 +41166,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 301
+      "order": 304
     },
     {
       "trainerId": "TRAINER_CYNDY_1",
@@ -40996,7 +41272,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 302
+      "order": 305
     },
     {
       "trainerId": "TRAINER_HECTOR",
@@ -41121,7 +41397,7 @@
           "role": "disruption and support"
         }
       ],
-      "order": 303
+      "order": 306
     },
     {
       "trainerId": "TRAINER_KYRA",
@@ -41225,7 +41501,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 304
+      "order": 307
     },
     {
       "trainerId": "TRAINER_JAIDEN",
@@ -41331,7 +41607,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 305
+      "order": 308
     },
     {
       "trainerId": "TRAINER_ALIX",
@@ -41458,7 +41734,7 @@
           "role": "speed control"
         }
       ],
-      "order": 306
+      "order": 309
     },
     {
       "trainerId": "TRAINER_HELENE",
@@ -41544,7 +41820,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 307
+      "order": 310
     },
     {
       "trainerId": "TRAINER_MARLENE",
@@ -41671,7 +41947,7 @@
           "role": "Mega ace"
         }
       ],
-      "order": 308
+      "order": 311
     },
     {
       "trainerId": "TRAINER_KIRA_AND_DAN_1",
@@ -41795,7 +42071,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 309
+      "order": 312
     },
     {
       "trainerId": "TRAINER_CHARLIE",
@@ -41881,7 +42157,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 310
+      "order": 313
     },
     {
       "trainerId": "TRAINER_DEMETRIUS",
@@ -41967,7 +42243,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 311
+      "order": 314
     },
     {
       "trainerId": "TRAINER_THALIA_1",
@@ -42053,7 +42329,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 312
+      "order": 315
     },
     {
       "trainerId": "TRAINER_JANI",
@@ -42157,7 +42433,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 313
+      "order": 316
     },
     {
       "trainerId": "TRAINER_GARRISON",
@@ -42261,7 +42537,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 314
+      "order": 317
     },
     {
       "trainerId": "TRAINER_DUNCAN",
@@ -42367,7 +42643,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 315
+      "order": 318
     },
     {
       "trainerId": "TRAINER_WENDY",
@@ -42528,7 +42804,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 316
+      "order": 319
     },
     {
       "trainerId": "TRAINER_BRAXTON",
@@ -42691,7 +42967,7 @@
           "role": "speed control"
         }
       ],
-      "order": 317
+      "order": 320
     },
     {
       "trainerId": "TRAINER_VIOLET",
@@ -42777,7 +43053,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 318
+      "order": 321
     },
     {
       "trainerId": "TRAINER_CAMERON_1",
@@ -42901,7 +43177,7 @@
           "role": "rare centerpiece"
         }
       ],
-      "order": 319
+      "order": 322
     },
     {
       "trainerId": "TRAINER_JACKI_1",
@@ -43008,7 +43284,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 320
+      "order": 323
     },
     {
       "trainerId": "TRAINER_MIU_AND_YUKI",
@@ -43130,7 +43406,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 321
+      "order": 324
     },
     {
       "trainerId": "TRAINER_KINDRA",
@@ -43234,7 +43510,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 322
+      "order": 325
     },
     {
       "trainerId": "TRAINER_FREDRICK",
@@ -43338,7 +43614,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 323
+      "order": 326
     },
     {
       "trainerId": "TRAINER_ALBERTO",
@@ -43445,7 +43721,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 324
+      "order": 327
     },
     {
       "trainerId": "TRAINER_ED",
@@ -43549,7 +43825,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 325
+      "order": 328
     },
     {
       "trainerId": "TRAINER_KAYLEY",
@@ -43637,7 +43913,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 326
+      "order": 329
     },
     {
       "trainerId": "TRAINER_JONAS",
@@ -43723,7 +43999,7 @@
           "role": "speed control"
         }
       ],
-      "order": 327
+      "order": 330
     },
     {
       "trainerId": "TRAINER_JAZMYN",
@@ -43847,7 +44123,7 @@
           "role": "speed control"
         }
       ],
-      "order": 328
+      "order": 331
     },
     {
       "trainerId": "TRAINER_DAVIS",
@@ -43971,7 +44247,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 329
+      "order": 332
     },
     {
       "trainerId": "TRAINER_FERNANDO_1",
@@ -44075,7 +44351,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 330
+      "order": 333
     },
     {
       "trainerId": "TRAINER_DARRIN",
@@ -44240,7 +44516,7 @@
           "role": "Mega ace"
         }
       ],
-      "order": 331
+      "order": 334
     },
     {
       "trainerId": "TRAINER_JEROME",
@@ -44326,7 +44602,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 332
+      "order": 335
     },
     {
       "trainerId": "TRAINER_MATTHEW",
@@ -44414,7 +44690,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 333
+      "order": 336
     },
     {
       "trainerId": "TRAINER_TONY_1",
@@ -44540,7 +44816,7 @@
           "role": "speed control"
         }
       ],
-      "order": 334
+      "order": 337
     },
     {
       "trainerId": "TRAINER_TARA",
@@ -44644,7 +44920,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 335
+      "order": 338
     },
     {
       "trainerId": "TRAINER_MISSY",
@@ -44730,7 +45006,7 @@
           "role": "disruption and support"
         }
       ],
-      "order": 336
+      "order": 339
     },
     {
       "trainerId": "TRAINER_CAROLINA",
@@ -44834,7 +45110,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 337
+      "order": 340
     },
     {
       "trainerId": "TRAINER_CORY_1",
@@ -44922,7 +45198,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 338
+      "order": 341
     },
     {
       "trainerId": "TRAINER_DENISE",
@@ -45049,7 +45325,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 339
+      "order": 342
     },
     {
       "trainerId": "TRAINER_BETH",
@@ -45177,7 +45453,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 340
+      "order": 343
     },
     {
       "trainerId": "TRAINER_LISA_AND_RAY",
@@ -45302,7 +45578,7 @@
           "role": "disruption and support"
         }
       ],
-      "order": 341
+      "order": 344
     },
     {
       "trainerId": "TRAINER_CAMRON",
@@ -45370,7 +45646,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 342
+      "order": 345
     },
     {
       "trainerId": "TRAINER_MAY_LILYCOVE_TREECKO",
@@ -45532,7 +45808,7 @@
           "role": "Mega ace"
         }
       ],
-      "order": 343
+      "order": 346
     },
     {
       "trainerId": "TRAINER_MAY_LILYCOVE_TORCHIC",
@@ -45695,7 +45971,7 @@
           "role": "Mega ace"
         }
       ],
-      "order": 344
+      "order": 347
     },
     {
       "trainerId": "TRAINER_MAY_LILYCOVE_MUDKIP",
@@ -45857,7 +46133,7 @@
           "role": "Mega ace"
         }
       ],
-      "order": 345
+      "order": 348
     },
     {
       "trainerId": "TRAINER_BRENDAN_LILYCOVE_TREECKO",
@@ -46019,7 +46295,7 @@
           "role": "Mega ace"
         }
       ],
-      "order": 346
+      "order": 349
     },
     {
       "trainerId": "TRAINER_BRENDAN_LILYCOVE_TORCHIC",
@@ -46183,7 +46459,7 @@
           "role": "Mega ace"
         }
       ],
-      "order": 347
+      "order": 350
     },
     {
       "trainerId": "TRAINER_BRENDAN_LILYCOVE_MUDKIP",
@@ -46346,7 +46622,7 @@
           "role": "Mega ace"
         }
       ],
-      "order": 348
+      "order": 351
     },
     {
       "trainerId": "TRAINER_VANESSA",
@@ -46471,7 +46747,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 349
+      "order": 352
     },
     {
       "trainerId": "TRAINER_WALTER_1",
@@ -46575,7 +46851,7 @@
           "role": "disruption and support"
         }
       ],
-      "order": 350
+      "order": 353
     },
     {
       "trainerId": "TRAINER_TAMMY",
@@ -46661,7 +46937,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 351
+      "order": 354
     },
     {
       "trainerId": "TRAINER_KATE_AND_JOY",
@@ -46789,7 +47065,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 352
+      "order": 355
     },
     {
       "trainerId": "TRAINER_JESSICA_1",
@@ -46893,7 +47169,7 @@
           "role": "disruption and support"
         }
       ],
-      "order": 353
+      "order": 356
     },
     {
       "trainerId": "TRAINER_CALE",
@@ -46999,7 +47275,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 354
+      "order": 357
     },
     {
       "trainerId": "TRAINER_MYLES",
@@ -47161,7 +47437,7 @@
           "role": "disruption and support"
         }
       ],
-      "order": 355
+      "order": 358
     },
     {
       "trainerId": "TRAINER_PAT",
@@ -47322,7 +47598,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 356
+      "order": 359
     },
     {
       "trainerId": "TRAINER_MARCEL",
@@ -47446,7 +47722,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 357
+      "order": 360
     },
     {
       "trainerId": "TRAINER_CRISTIN_1",
@@ -47570,7 +47846,7 @@
           "role": "disruption and support"
         }
       ],
-      "order": 358
+      "order": 361
     },
     {
       "trainerId": "TRAINER_MATT_MT_PYRE",
@@ -47589,7 +47865,7 @@
         "map": "MtPyre_Summit",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 456,
+        "line": 473,
         "file": "data/maps/MtPyre_Summit/scripts.inc"
       },
       "badge": 6,
@@ -47733,7 +48009,7 @@
           "role": "Mega ace"
         }
       ],
-      "order": 359
+      "order": 362
     },
     {
       "trainerId": "TRAINER_VALERIE_1",
@@ -47840,7 +48116,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 360
+      "order": 363
     },
     {
       "trainerId": "TRAINER_WILLIAM",
@@ -47967,7 +48243,7 @@
           "role": "rare centerpiece"
         }
       ],
-      "order": 361
+      "order": 364
     },
     {
       "trainerId": "TRAINER_ATSUSHI",
@@ -48071,7 +48347,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 362
+      "order": 365
     },
     {
       "trainerId": "TRAINER_TASHA",
@@ -48177,7 +48453,7 @@
           "role": "disruption and support"
         }
       ],
-      "order": 363
+      "order": 366
     },
     {
       "trainerId": "TRAINER_KAYLA",
@@ -48283,7 +48559,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 364
+      "order": 367
     },
     {
       "trainerId": "TRAINER_GABRIELLE_1",
@@ -48446,7 +48722,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 365
+      "order": 368
     },
     {
       "trainerId": "TRAINER_MARK",
@@ -48550,7 +48826,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 366
+      "order": 369
     },
     {
       "trainerId": "TRAINER_DEZ_AND_LUKE",
@@ -48674,7 +48950,7 @@
           "role": "speed control"
         }
       ],
-      "order": 367
+      "order": 370
     },
     {
       "trainerId": "TRAINER_CEDRIC",
@@ -48780,7 +49056,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 368
+      "order": 371
     },
     {
       "trainerId": "TRAINER_LEAH",
@@ -48906,7 +49182,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 369
+      "order": 372
     },
     {
       "trainerId": "TRAINER_ZANDER",
@@ -49012,7 +49288,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 370
+      "order": 373
     },
     {
       "trainerId": "TRAINER_GRUNT_MT_PYRE_1",
@@ -49031,7 +49307,7 @@
         "map": "MtPyre_Summit",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 436,
+        "line": 453,
         "file": "data/maps/MtPyre_Summit/scripts.inc"
       },
       "badge": 6,
@@ -49137,7 +49413,7 @@
           "role": "speed control"
         }
       ],
-      "order": 371
+      "order": 374
     },
     {
       "trainerId": "TRAINER_GRUNT_MT_PYRE_2",
@@ -49156,7 +49432,7 @@
         "map": "MtPyre_Summit",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 441,
+        "line": 458,
         "file": "data/maps/MtPyre_Summit/scripts.inc"
       },
       "badge": 6,
@@ -49259,7 +49535,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 372
+      "order": 375
     },
     {
       "trainerId": "TRAINER_GRUNT_MT_PYRE_3",
@@ -49278,7 +49554,7 @@
         "map": "MtPyre_Summit",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 446,
+        "line": 463,
         "file": "data/maps/MtPyre_Summit/scripts.inc"
       },
       "badge": 6,
@@ -49384,7 +49660,7 @@
           "role": "Choice-locked breaker"
         }
       ],
-      "order": 373
+      "order": 376
     },
     {
       "trainerId": "TRAINER_GRUNT_MT_PYRE_4",
@@ -49403,7 +49679,7 @@
         "map": "MtPyre_Summit",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 451,
+        "line": 468,
         "file": "data/maps/MtPyre_Summit/scripts.inc"
       },
       "badge": 6,
@@ -49508,7 +49784,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 374
+      "order": 377
     },
     {
       "trainerId": "TRAINER_BUFFEL",
@@ -49669,7 +49945,7 @@
           "role": "Mega ace"
         }
       ],
-      "order": 375
+      "order": 378
     },
     {
       "trainerId": "TRAINER_MAXIE_MAGMA_HIDEOUT",
@@ -49831,7 +50107,7 @@
           "role": "Mega ace"
         }
       ],
-      "order": 376
+      "order": 379
     },
     {
       "trainerId": "TRAINER_TABITHA_MAGMA_HIDEOUT",
@@ -49995,7 +50271,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 377
+      "order": 380
     },
     {
       "trainerId": "TRAINER_COURTNEY_MAGMA_HIDEOUT",
@@ -50158,7 +50434,7 @@
           "role": "Choice-locked breaker"
         }
       ],
-      "order": 378
+      "order": 381
     },
     {
       "trainerId": "TRAINER_GRUNT_MAGMA_HIDEOUT_10",
@@ -50280,7 +50556,7 @@
           "role": "redirection support"
         }
       ],
-      "order": 379
+      "order": 382
     },
     {
       "trainerId": "TRAINER_GRUNT_MAGMA_HIDEOUT_14",
@@ -50404,7 +50680,7 @@
           "role": "Mega ace"
         }
       ],
-      "order": 380
+      "order": 383
     },
     {
       "trainerId": "TRAINER_GRUNT_MAGMA_HIDEOUT_15",
@@ -50528,7 +50804,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 381
+      "order": 384
     },
     {
       "trainerId": "TRAINER_GRUNT_MAGMA_HIDEOUT_9",
@@ -50654,7 +50930,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 382
+      "order": 385
     },
     {
       "trainerId": "TRAINER_GRUNT_MAGMA_HIDEOUT_1",
@@ -50778,7 +51054,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 383
+      "order": 386
     },
     {
       "trainerId": "TRAINER_GRUNT_MAGMA_HIDEOUT_16",
@@ -50903,7 +51179,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 384
+      "order": 387
     },
     {
       "trainerId": "TRAINER_GRUNT_MAGMA_HIDEOUT_3",
@@ -51029,7 +51305,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 385
+      "order": 388
     },
     {
       "trainerId": "TRAINER_GRUNT_MAGMA_HIDEOUT_6",
@@ -51154,7 +51430,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 386
+      "order": 389
     },
     {
       "trainerId": "TRAINER_GRUNT_MAGMA_HIDEOUT_2",
@@ -51279,7 +51555,7 @@
           "role": "disruption and support"
         }
       ],
-      "order": 387
+      "order": 390
     },
     {
       "trainerId": "TRAINER_GRUNT_MAGMA_HIDEOUT_4",
@@ -51401,7 +51677,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 388
+      "order": 391
     },
     {
       "trainerId": "TRAINER_GRUNT_MAGMA_HIDEOUT_7",
@@ -51527,7 +51803,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 389
+      "order": 392
     },
     {
       "trainerId": "TRAINER_GRUNT_MAGMA_HIDEOUT_5",
@@ -51651,7 +51927,7 @@
           "role": "disruption and support"
         }
       ],
-      "order": 390
+      "order": 393
     },
     {
       "trainerId": "TRAINER_GRUNT_MAGMA_HIDEOUT_8",
@@ -51775,7 +52051,7 @@
           "role": "disruption and support"
         }
       ],
-      "order": 391
+      "order": 394
     },
     {
       "trainerId": "TRAINER_GRUNT_MAGMA_HIDEOUT_11",
@@ -51899,7 +52175,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 392
+      "order": 395
     },
     {
       "trainerId": "TRAINER_GRUNT_MAGMA_HIDEOUT_12",
@@ -52021,7 +52297,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 393
+      "order": 396
     },
     {
       "trainerId": "TRAINER_GRUNT_MAGMA_HIDEOUT_13",
@@ -52143,7 +52419,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 394
+      "order": 397
     },
     {
       "trainerId": "TRAINER_MATT",
@@ -52307,7 +52583,7 @@
           "role": "Mega ace"
         }
       ],
-      "order": 395
+      "order": 398
     },
     {
       "trainerId": "TRAINER_GRUNT_AQUA_HIDEOUT_1",
@@ -52429,7 +52705,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 396
+      "order": 399
     },
     {
       "trainerId": "TRAINER_GRUNT_AQUA_HIDEOUT_4",
@@ -52551,7 +52827,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 397
+      "order": 400
     },
     {
       "trainerId": "TRAINER_GRUNT_AQUA_HIDEOUT_6",
@@ -52676,7 +52952,7 @@
           "role": "Choice-locked breaker"
         }
       ],
-      "order": 398
+      "order": 401
     },
     {
       "trainerId": "TRAINER_GRUNT_AQUA_HIDEOUT_8",
@@ -52800,7 +53076,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 399
+      "order": 402
     },
     {
       "trainerId": "TRAINER_GRUNT_AQUA_HIDEOUT_2",
@@ -52924,7 +53200,7 @@
           "role": "Choice-locked breaker"
         }
       ],
-      "order": 400
+      "order": 403
     },
     {
       "trainerId": "TRAINER_GRUNT_AQUA_HIDEOUT_3",
@@ -53050,7 +53326,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 401
+      "order": 404
     },
     {
       "trainerId": "TRAINER_GRUNT_AQUA_HIDEOUT_5",
@@ -53172,7 +53448,7 @@
           "role": "speed control"
         }
       ],
-      "order": 402
+      "order": 405
     },
     {
       "trainerId": "TRAINER_GRUNT_AQUA_HIDEOUT_7",
@@ -53294,7 +53570,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 403
+      "order": 406
     },
     {
       "trainerId": "TRAINER_SPENCER",
@@ -53382,7 +53658,7 @@
           "role": "speed control"
         }
       ],
-      "order": 404
+      "order": 407
     },
     {
       "trainerId": "TRAINER_ROLAND",
@@ -53468,7 +53744,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 405
+      "order": 408
     },
     {
       "trainerId": "TRAINER_JENNY_1",
@@ -53575,7 +53851,7 @@
           "role": "speed control"
         }
       ],
-      "order": 406
+      "order": 409
     },
     {
       "trainerId": "TRAINER_GRACE",
@@ -53699,7 +53975,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 407
+      "order": 410
     },
     {
       "trainerId": "TRAINER_CHAD",
@@ -53805,7 +54081,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 408
+      "order": 411
     },
     {
       "trainerId": "TRAINER_LILA_AND_ROY_1",
@@ -53929,7 +54205,7 @@
           "role": "speed control"
         }
       ],
-      "order": 409
+      "order": 412
     },
     {
       "trainerId": "TRAINER_DECLAN",
@@ -54015,7 +54291,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 410
+      "order": 413
     },
     {
       "trainerId": "TRAINER_ISABELLA",
@@ -54101,7 +54377,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 411
+      "order": 414
     },
     {
       "trainerId": "TRAINER_NOLEN",
@@ -54208,7 +54484,7 @@
           "role": "speed control"
         }
       ],
-      "order": 412
+      "order": 415
     },
     {
       "trainerId": "TRAINER_STAN",
@@ -54333,7 +54609,7 @@
           "role": "disruption and support"
         }
       ],
-      "order": 413
+      "order": 416
     },
     {
       "trainerId": "TRAINER_TANYA",
@@ -54462,7 +54738,7 @@
           "role": "speed control"
         }
       ],
-      "order": 414
+      "order": 417
     },
     {
       "trainerId": "TRAINER_SHARON",
@@ -54586,7 +54862,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 415
+      "order": 418
     },
     {
       "trainerId": "TRAINER_ERNEST_1",
@@ -54692,7 +54968,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 416
+      "order": 419
     },
     {
       "trainerId": "TRAINER_KIM_AND_IRIS",
@@ -54816,7 +55092,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 417
+      "order": 420
     },
     {
       "trainerId": "TRAINER_PRESLEY",
@@ -54904,7 +55180,7 @@
           "role": "disruption and support"
         }
       ],
-      "order": 418
+      "order": 421
     },
     {
       "trainerId": "TRAINER_AURON",
@@ -55028,168 +55304,7 @@
           "role": "disruption and support"
         }
       ],
-      "order": 419
-    },
-    {
-      "trainerId": "TRAINER_CYNTHIA_1",
-      "encounterId": null,
-      "encounterAlternatives": [],
-      "runtimePartyAlternatives": null,
-      "name": "Cynthia",
-      "trainerClass": "Pkmn Trainer 1",
-      "category": "optional",
-      "encounterRole": "opponent",
-      "chapter": "Mind Badge",
-      "chapterRank": 70,
-      "location": "Mossdeep City House 1",
-      "sourceMap": "MossdeepCity_House1",
-      "source": {
-        "map": "MossdeepCity_House1",
-        "command": "trainerbattle_no_intro",
-        "role": "opponent",
-        "line": 33,
-        "file": "data/maps/MossdeepCity_House1/scripts.inc"
-      },
-      "badge": 6,
-      "levelCap": 60,
-      "format": "double",
-      "partySize": 6,
-      "theme": "Earthquake immunity",
-      "plan": "Roserade and Togekiss are the authored opening pair. The board plan is earthquake immunity. The composition turns this point in the campaign into the fight's identity instead of using a generic route-trainer core. Garchomp carries the team's one Mega slot.",
-      "behavior": "The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe, Smart Switching. Expect it to preserve earthquake immunity rather than select six unrelated strong attacks.",
-      "counterplay": "Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.",
-      "designStatus": "not individually closed",
-      "manualQuality": null,
-      "corpusReview": null,
-      "competitiveReferences": [],
-      "authorSelfCheck": null,
-      "closure": "",
-      "difficultyScore": 85,
-      "difficultyBand": "Extreme",
-      "difficultyExplanation": "6 fully authored Pok\u00e9mon, average BST 543.7, average cap offset +5.33, ace offset +7, and 100% held-item coverage.",
-      "uniquenessScore": 73,
-      "uniquenessExplanation": "Closest unrelated roster: Wally (33% species overlap). Its species appear across an average of 6.3 unrelated trainer families.",
-      "synergyTags": [
-        "Earthquake immunity"
-      ],
-      "ai": [
-        "Check Bad Move",
-        "Try To Faint",
-        "Check Viability",
-        "Check Foe",
-        "Smart Switching"
-      ],
-      "party": [
-        {
-          "slot": 1,
-          "speciesId": "SPECIES_ROSERADE",
-          "species": "Roserade",
-          "levelOffset": 5,
-          "effectiveLevel": 65,
-          "itemId": "ITEM_FOCUS_SASH",
-          "item": "Focus Sash",
-          "ability": "Natural Cure",
-          "spread": "31 Iv Spatk Speed Timid",
-          "moves": [
-            "Sleep Powder",
-            "Sludge Bomb",
-            "Giga Drain",
-            "Spikes"
-          ],
-          "role": "disruption and support"
-        },
-        {
-          "slot": 2,
-          "speciesId": "SPECIES_TOGEKISS",
-          "species": "Togekiss",
-          "levelOffset": 5,
-          "effectiveLevel": 65,
-          "itemId": "ITEM_SHELL_BELL",
-          "item": "Shell Bell",
-          "ability": "Serene Grace",
-          "spread": "31 Iv Spatk Speed Timid",
-          "moves": [
-            "Air Slash",
-            "Aura Sphere",
-            "Thunder Wave",
-            "Roost"
-          ],
-          "role": "speed control"
-        },
-        {
-          "slot": 3,
-          "speciesId": "SPECIES_SPIRITOMB",
-          "species": "Spiritomb",
-          "levelOffset": 5,
-          "effectiveLevel": 65,
-          "itemId": "ITEM_LEFTOVERS",
-          "item": "Leftovers",
-          "ability": "Pressure",
-          "spread": "31 Iv Hp Def Bold",
-          "moves": [
-            "Dark Pulse",
-            "Calm Mind",
-            "Substitute",
-            "Recover"
-          ],
-          "role": "setup attacker"
-        },
-        {
-          "slot": 4,
-          "speciesId": "SPECIES_LUCARIO",
-          "species": "Lucario",
-          "levelOffset": 5,
-          "effectiveLevel": 65,
-          "itemId": "ITEM_CHOICE_SCARF",
-          "item": "Choice Scarf",
-          "ability": "Steadfast",
-          "spread": "31 Iv Atk Speed Jolly",
-          "moves": [
-            "Close Combat",
-            "Meteor Mash",
-            "Strength",
-            "Ice Punch"
-          ],
-          "role": "Choice-locked breaker"
-        },
-        {
-          "slot": 5,
-          "speciesId": "SPECIES_MILOTIC",
-          "species": "Milotic",
-          "levelOffset": 5,
-          "effectiveLevel": 65,
-          "itemId": "ITEM_LEFTOVERS",
-          "item": "Leftovers",
-          "ability": "Multiscale",
-          "spread": "31 Iv Hp Def Bold",
-          "moves": [
-            "Scald",
-            "Ice Beam",
-            "Recover",
-            "Mirror Coat"
-          ],
-          "role": "coverage attacker"
-        },
-        {
-          "slot": 6,
-          "speciesId": "SPECIES_GARCHOMP",
-          "species": "Garchomp",
-          "levelOffset": 7,
-          "effectiveLevel": 67,
-          "itemId": "ITEM_GARCHOMPITE",
-          "item": "Garchompite",
-          "ability": "Rough Skin",
-          "spread": "31 Iv Atk Speed Naive",
-          "moves": [
-            "Earthquake",
-            "Draco Meteor",
-            "Stone Edge",
-            "Fire Blast"
-          ],
-          "role": "Mega ace"
-        }
-      ],
-      "order": 420
+      "order": 422
     },
     {
       "trainerId": "TRAINER_TATE_AND_LIZA_1",
@@ -55208,7 +55323,7 @@
         "map": "MossdeepCity_Gym",
         "command": "trainerbattle_double",
         "role": "opponent",
-        "line": 55,
+        "line": 56,
         "file": "data/maps/MossdeepCity_Gym/scripts.inc"
       },
       "badge": 6,
@@ -55356,7 +55471,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 421
+      "order": 423
     },
     {
       "trainerId": "TRAINER_PRESTON",
@@ -55375,7 +55490,7 @@
         "map": "MossdeepCity_Gym",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 241,
+        "line": 247,
         "file": "data/maps/MossdeepCity_Gym/scripts.inc"
       },
       "badge": 6,
@@ -55480,7 +55595,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 422
+      "order": 424
     },
     {
       "trainerId": "TRAINER_VIRGIL",
@@ -55499,7 +55614,7 @@
         "map": "MossdeepCity_Gym",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 246,
+        "line": 252,
         "file": "data/maps/MossdeepCity_Gym/scripts.inc"
       },
       "badge": 6,
@@ -55608,7 +55723,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 423
+      "order": 425
     },
     {
       "trainerId": "TRAINER_BLAKE",
@@ -55627,7 +55742,7 @@
         "map": "MossdeepCity_Gym",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 251,
+        "line": 257,
         "file": "data/maps/MossdeepCity_Gym/scripts.inc"
       },
       "badge": 6,
@@ -55733,7 +55848,7 @@
           "role": "speed control"
         }
       ],
-      "order": 424
+      "order": 426
     },
     {
       "trainerId": "TRAINER_HANNAH",
@@ -55752,7 +55867,7 @@
         "map": "MossdeepCity_Gym",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 256,
+        "line": 262,
         "file": "data/maps/MossdeepCity_Gym/scripts.inc"
       },
       "badge": 6,
@@ -55858,7 +55973,7 @@
           "role": "rare centerpiece"
         }
       ],
-      "order": 425
+      "order": 427
     },
     {
       "trainerId": "TRAINER_SAMANTHA",
@@ -55877,7 +55992,7 @@
         "map": "MossdeepCity_Gym",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 261,
+        "line": 267,
         "file": "data/maps/MossdeepCity_Gym/scripts.inc"
       },
       "badge": 6,
@@ -55983,7 +56098,7 @@
           "role": "Choice-locked breaker"
         }
       ],
-      "order": 426
+      "order": 428
     },
     {
       "trainerId": "TRAINER_MAURA",
@@ -56002,7 +56117,7 @@
         "map": "MossdeepCity_Gym",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 266,
+        "line": 272,
         "file": "data/maps/MossdeepCity_Gym/scripts.inc"
       },
       "badge": 6,
@@ -56110,7 +56225,7 @@
           "role": "speed control"
         }
       ],
-      "order": 427
+      "order": 429
     },
     {
       "trainerId": "TRAINER_SYLVIA",
@@ -56129,7 +56244,7 @@
         "map": "MossdeepCity_Gym",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 271,
+        "line": 277,
         "file": "data/maps/MossdeepCity_Gym/scripts.inc"
       },
       "badge": 6,
@@ -56237,7 +56352,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 428
+      "order": 430
     },
     {
       "trainerId": "TRAINER_NATE",
@@ -56256,7 +56371,7 @@
         "map": "MossdeepCity_Gym",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 276,
+        "line": 282,
         "file": "data/maps/MossdeepCity_Gym/scripts.inc"
       },
       "badge": 6,
@@ -56361,7 +56476,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 429
+      "order": 431
     },
     {
       "trainerId": "TRAINER_MACEY",
@@ -56380,7 +56495,7 @@
         "map": "MossdeepCity_Gym",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 281,
+        "line": 287,
         "file": "data/maps/MossdeepCity_Gym/scripts.inc"
       },
       "badge": 6,
@@ -56487,7 +56602,7 @@
           "role": "speed control"
         }
       ],
-      "order": 430
+      "order": 432
     },
     {
       "trainerId": "TRAINER_CLIFFORD",
@@ -56506,7 +56621,7 @@
         "map": "MossdeepCity_Gym",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 286,
+        "line": 292,
         "file": "data/maps/MossdeepCity_Gym/scripts.inc"
       },
       "badge": 6,
@@ -56613,7 +56728,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 431
+      "order": 433
     },
     {
       "trainerId": "TRAINER_NICHOLAS",
@@ -56632,7 +56747,7 @@
         "map": "MossdeepCity_Gym",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 291,
+        "line": 297,
         "file": "data/maps/MossdeepCity_Gym/scripts.inc"
       },
       "badge": 6,
@@ -56742,7 +56857,7 @@
           "role": "redirection support"
         }
       ],
-      "order": 432
+      "order": 434
     },
     {
       "trainerId": "TRAINER_KATHLEEN",
@@ -56761,7 +56876,7 @@
         "map": "MossdeepCity_Gym",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 296,
+        "line": 302,
         "file": "data/maps/MossdeepCity_Gym/scripts.inc"
       },
       "badge": 6,
@@ -56866,7 +56981,7 @@
           "role": "disruption and support"
         }
       ],
-      "order": 433
+      "order": 435
     },
     {
       "trainerId": "TRAINER_BARRY",
@@ -56952,7 +57067,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 434
+      "order": 436
     },
     {
       "trainerId": "TRAINER_DEAN",
@@ -57058,7 +57173,7 @@
           "role": "disruption and support"
         }
       ],
-      "order": 435
+      "order": 437
     },
     {
       "trainerId": "TRAINER_NIKKI",
@@ -57182,7 +57297,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 436
+      "order": 438
     },
     {
       "trainerId": "TRAINER_BRENDA",
@@ -57304,7 +57419,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 437
+      "order": 439
     },
     {
       "trainerId": "TRAINER_LEONARDO",
@@ -57428,7 +57543,7 @@
           "role": "disruption and support"
         }
       ],
-      "order": 438
+      "order": 440
     },
     {
       "trainerId": "TRAINER_ISOBEL",
@@ -57514,7 +57629,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 439
+      "order": 441
     },
     {
       "trainerId": "TRAINER_SIENNA",
@@ -57621,7 +57736,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 440
+      "order": 442
     },
     {
       "trainerId": "TRAINER_PABLO_1",
@@ -57728,7 +57843,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 441
+      "order": 443
     },
     {
       "trainerId": "TRAINER_CAMDEN",
@@ -57834,7 +57949,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 442
+      "order": 444
     },
     {
       "trainerId": "TRAINER_DONNY",
@@ -57958,7 +58073,7 @@
           "role": "disruption and support"
         }
       ],
-      "order": 443
+      "order": 445
     },
     {
       "trainerId": "TRAINER_JONAH",
@@ -58044,7 +58159,7 @@
           "role": "disruption and support"
         }
       ],
-      "order": 444
+      "order": 446
     },
     {
       "trainerId": "TRAINER_HENRY",
@@ -58169,7 +58284,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 445
+      "order": 447
     },
     {
       "trainerId": "TRAINER_ROGER",
@@ -58294,7 +58409,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 446
+      "order": 448
     },
     {
       "trainerId": "TRAINER_AIDAN",
@@ -58382,7 +58497,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 447
+      "order": 449
     },
     {
       "trainerId": "TRAINER_ATHENA",
@@ -58504,7 +58619,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 448
+      "order": 450
     },
     {
       "trainerId": "TRAINER_KOJI_1",
@@ -58628,7 +58743,7 @@
           "role": "redirection support"
         }
       ],
-      "order": 449
+      "order": 451
     },
     {
       "trainerId": "TRAINER_ISAIAH_1",
@@ -58714,7 +58829,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 450
+      "order": 452
     },
     {
       "trainerId": "TRAINER_KATELYN_1",
@@ -58836,7 +58951,7 @@
           "role": "disruption and support"
         }
       ],
-      "order": 451
+      "order": 453
     },
     {
       "trainerId": "TRAINER_ALEXA",
@@ -58998,7 +59113,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 452
+      "order": 454
     },
     {
       "trainerId": "TRAINER_RUBEN",
@@ -59160,7 +59275,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 453
+      "order": 455
     },
     {
       "trainerId": "TRAINER_WAYNE",
@@ -59284,7 +59399,7 @@
           "role": "disruption and support"
         }
       ],
-      "order": 454
+      "order": 456
     },
     {
       "trainerId": "TRAINER_HARRISON",
@@ -59372,7 +59487,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 455
+      "order": 457
     },
     {
       "trainerId": "TRAINER_CARLEE",
@@ -59496,7 +59611,7 @@
           "role": "speed control"
         }
       ],
-      "order": 456
+      "order": 458
     },
     {
       "trainerId": "TRAINER_COURTNEY_MOSSDEEP",
@@ -59662,7 +59777,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 457
+      "order": 459
     },
     {
       "trainerId": "TRAINER_MAXIE_MOSSDEEP",
@@ -59825,7 +59940,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 458
+      "order": 460
     },
     {
       "trainerId": "TRAINER_STEVEN_MOSSDEEP",
@@ -59952,7 +60067,7 @@
           "role": "rare centerpiece"
         }
       ],
-      "order": 459
+      "order": 461
     },
     {
       "trainerId": "TRAINER_GRUNT_SPACE_CENTER_6",
@@ -60079,7 +60194,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 460
+      "order": 462
     },
     {
       "trainerId": "TRAINER_GRUNT_SPACE_CENTER_7",
@@ -60203,7 +60318,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 461
+      "order": 463
     },
     {
       "trainerId": "TRAINER_GRUNT_SPACE_CENTER_3",
@@ -60327,7 +60442,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 462
+      "order": 464
     },
     {
       "trainerId": "TRAINER_GRUNT_SPACE_CENTER_1",
@@ -60451,7 +60566,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 463
+      "order": 465
     },
     {
       "trainerId": "TRAINER_GRUNT_SPACE_CENTER_4",
@@ -60576,7 +60691,7 @@
           "role": "disruption and support"
         }
       ],
-      "order": 464
+      "order": 466
     },
     {
       "trainerId": "TRAINER_TABITHA_MOSSDEEP",
@@ -60741,7 +60856,7 @@
           "role": "disruption and support"
         }
       ],
-      "order": 465
+      "order": 467
     },
     {
       "trainerId": "TRAINER_SHELLY_SEAFLOOR_CAVERN",
@@ -60904,7 +61019,7 @@
           "role": "Mega ace"
         }
       ],
-      "order": 466
+      "order": 468
     },
     {
       "trainerId": "TRAINER_ARCHIE",
@@ -61066,7 +61181,7 @@
           "role": "Mega ace"
         }
       ],
-      "order": 467
+      "order": 469
     },
     {
       "trainerId": "TRAINER_GRUNT_SEAFLOOR_CAVERN_1",
@@ -61190,7 +61305,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 468
+      "order": 470
     },
     {
       "trainerId": "TRAINER_GRUNT_SEAFLOOR_CAVERN_3",
@@ -61314,7 +61429,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 469
+      "order": 471
     },
     {
       "trainerId": "TRAINER_GRUNT_SEAFLOOR_CAVERN_2",
@@ -61439,7 +61554,7 @@
           "role": "speed control"
         }
       ],
-      "order": 470
+      "order": 472
     },
     {
       "trainerId": "TRAINER_GRUNT_SEAFLOOR_CAVERN_4",
@@ -61567,7 +61682,7 @@
           "role": "speed control"
         }
       ],
-      "order": 471
+      "order": 473
     },
     {
       "trainerId": "TRAINER_GRUNT_SEAFLOOR_CAVERN_5",
@@ -61692,7 +61807,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 472
+      "order": 474
     },
     {
       "trainerId": "TRAINER_JUAN_1",
@@ -61858,7 +61973,7 @@
           "role": "Mega ace"
         }
       ],
-      "order": 473
+      "order": 475
     },
     {
       "trainerId": "TRAINER_ANDREA",
@@ -61984,7 +62099,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 474
+      "order": 476
     },
     {
       "trainerId": "TRAINER_CRISSY",
@@ -62110,7 +62225,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 475
+      "order": 477
     },
     {
       "trainerId": "TRAINER_BRIANNA",
@@ -62238,7 +62353,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 476
+      "order": 478
     },
     {
       "trainerId": "TRAINER_CONNIE",
@@ -62363,7 +62478,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 477
+      "order": 479
     },
     {
       "trainerId": "TRAINER_BRIDGET",
@@ -62489,7 +62604,7 @@
           "role": "speed control"
         }
       ],
-      "order": 478
+      "order": 480
     },
     {
       "trainerId": "TRAINER_OLIVIA",
@@ -62596,7 +62711,7 @@
           "role": "rare centerpiece"
         }
       ],
-      "order": 479
+      "order": 481
     },
     {
       "trainerId": "TRAINER_TIFFANY",
@@ -62722,7 +62837,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 480
+      "order": 482
     },
     {
       "trainerId": "TRAINER_BETHANY",
@@ -62847,7 +62962,7 @@
           "role": "speed control"
         }
       ],
-      "order": 481
+      "order": 483
     },
     {
       "trainerId": "TRAINER_ANNIKA",
@@ -62953,7 +63068,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 482
+      "order": 484
     },
     {
       "trainerId": "TRAINER_DAPHNE",
@@ -63059,7 +63174,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 483
+      "order": 485
     },
     {
       "trainerId": "TRAINER_CHASE",
@@ -63145,7 +63260,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 484
+      "order": 486
     },
     {
       "trainerId": "TRAINER_ALLISON",
@@ -63231,7 +63346,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 485
+      "order": 487
     },
     {
       "trainerId": "TRAINER_REED",
@@ -63317,7 +63432,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 486
+      "order": 488
     },
     {
       "trainerId": "TRAINER_TISHA",
@@ -63444,7 +63559,7 @@
           "role": "disruption and support"
         }
       ],
-      "order": 487
+      "order": 489
     },
     {
       "trainerId": "TRAINER_CLARENCE",
@@ -63568,7 +63683,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 488
+      "order": 490
     },
     {
       "trainerId": "TRAINER_RODNEY",
@@ -63657,7 +63772,7 @@
           "role": "rare centerpiece"
         }
       ],
-      "order": 489
+      "order": 491
     },
     {
       "trainerId": "TRAINER_KATIE",
@@ -63781,7 +63896,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 490
+      "order": 492
     },
     {
       "trainerId": "TRAINER_SANTIAGO",
@@ -63907,7 +64022,7 @@
           "role": "rare centerpiece"
         }
       ],
-      "order": 491
+      "order": 493
     },
     {
       "trainerId": "TRAINER_RICHARD",
@@ -63993,7 +64108,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 492
+      "order": 494
     },
     {
       "trainerId": "TRAINER_HERMAN",
@@ -64155,7 +64270,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 493
+      "order": 495
     },
     {
       "trainerId": "TRAINER_SUSIE",
@@ -64317,7 +64432,7 @@
           "role": "speed control"
         }
       ],
-      "order": 494
+      "order": 496
     },
     {
       "trainerId": "TRAINER_KARA",
@@ -64441,7 +64556,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 495
+      "order": 497
     },
     {
       "trainerId": "TRAINER_RELI_AND_IAN",
@@ -64571,7 +64686,7 @@
           "role": "Mega ace"
         }
       ],
-      "order": 496
+      "order": 498
     },
     {
       "trainerId": "TRAINER_TALIA",
@@ -64693,7 +64808,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 497
+      "order": 499
     },
     {
       "trainerId": "TRAINER_KEVIN",
@@ -64779,7 +64894,7 @@
           "role": "disruption and support"
         }
       ],
-      "order": 498
+      "order": 500
     },
     {
       "trainerId": "TRAINER_GILBERT",
@@ -64865,7 +64980,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 499
+      "order": 501
     },
     {
       "trainerId": "TRAINER_DANA",
@@ -64987,7 +65102,7 @@
           "role": "Choice-locked breaker"
         }
       ],
-      "order": 500
+      "order": 502
     },
     {
       "trainerId": "TRAINER_RONALD",
@@ -65150,7 +65265,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 501
+      "order": 503
     },
     {
       "trainerId": "TRAINER_KIYO",
@@ -65256,7 +65371,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 502
+      "order": 504
     },
     {
       "trainerId": "TRAINER_PAXTON",
@@ -65360,7 +65475,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 503
+      "order": 505
     },
     {
       "trainerId": "TRAINER_DARCY",
@@ -65464,7 +65579,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 504
+      "order": 506
     },
     {
       "trainerId": "TRAINER_JONATHAN",
@@ -65588,7 +65703,7 @@
           "role": "speed control"
         }
       ],
-      "order": 505
+      "order": 507
     },
     {
       "trainerId": "TRAINER_MAKAYLA",
@@ -65712,7 +65827,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 506
+      "order": 508
     },
     {
       "trainerId": "TRAINER_FRANKLIN",
@@ -65834,7 +65949,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 507
+      "order": 509
     },
     {
       "trainerId": "TRAINER_DEBRA",
@@ -65959,7 +66074,7 @@
           "role": "disruption and support"
         }
       ],
-      "order": 508
+      "order": 510
     },
     {
       "trainerId": "TRAINER_LINDA",
@@ -66086,7 +66201,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 509
+      "order": 511
     },
     {
       "trainerId": "TRAINER_WARREN",
@@ -66252,7 +66367,7 @@
           "role": "speed control"
         }
       ],
-      "order": 510
+      "order": 512
     },
     {
       "trainerId": "TRAINER_BECK",
@@ -66376,7 +66491,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 511
+      "order": 513
     },
     {
       "trainerId": "TRAINER_MOLLIE",
@@ -66501,7 +66616,7 @@
           "role": "speed control"
         }
       ],
-      "order": 512
+      "order": 514
     },
     {
       "trainerId": "TRAINER_CONOR",
@@ -66627,7 +66742,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 513
+      "order": 515
     },
     {
       "trainerId": "TRAINER_JACK",
@@ -66713,7 +66828,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 514
+      "order": 516
     },
     {
       "trainerId": "TRAINER_LAUREL",
@@ -66838,7 +66953,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 515
+      "order": 517
     },
     {
       "trainerId": "TRAINER_ALEX",
@@ -66963,7 +67078,7 @@
           "role": "Choice-locked breaker"
         }
       ],
-      "order": 516
+      "order": 518
     },
     {
       "trainerId": "TRAINER_AARON",
@@ -67069,7 +67184,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 517
+      "order": 519
     },
     {
       "trainerId": "TRAINER_HITOSHI",
@@ -67175,7 +67290,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 518
+      "order": 520
     },
     {
       "trainerId": "TRAINER_HUDSON",
@@ -67300,7 +67415,7 @@
           "role": "speed control"
         }
       ],
-      "order": 519
+      "order": 521
     },
     {
       "trainerId": "TRAINER_REYNA",
@@ -67422,7 +67537,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 520
+      "order": 522
     },
     {
       "trainerId": "TRAINER_MARLEY",
@@ -67526,7 +67641,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 521
+      "order": 523
     },
     {
       "trainerId": "TRAINER_KELVIN",
@@ -67648,7 +67763,7 @@
           "role": "disruption and support"
         }
       ],
-      "order": 522
+      "order": 524
     },
     {
       "trainerId": "TRAINER_WALLY_VR_1",
@@ -67813,7 +67928,7 @@
           "role": "Mega ace"
         }
       ],
-      "order": 523
+      "order": 525
     },
     {
       "trainerId": "TRAINER_SAMUEL",
@@ -67974,7 +68089,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 524
+      "order": 526
     },
     {
       "trainerId": "TRAINER_VITO",
@@ -68135,7 +68250,7 @@
           "role": "Mega ace"
         }
       ],
-      "order": 525
+      "order": 527
     },
     {
       "trainerId": "TRAINER_OWEN",
@@ -68296,7 +68411,7 @@
           "role": "rare centerpiece"
         }
       ],
-      "order": 526
+      "order": 528
     },
     {
       "trainerId": "TRAINER_SHANNON",
@@ -68460,7 +68575,7 @@
           "role": "speed control"
         }
       ],
-      "order": 527
+      "order": 529
     },
     {
       "trainerId": "TRAINER_CAROLINE",
@@ -68622,7 +68737,7 @@
           "role": "rare centerpiece"
         }
       ],
-      "order": 528
+      "order": 530
     },
     {
       "trainerId": "TRAINER_MICHELLE",
@@ -68783,7 +68898,7 @@
           "role": "Mega ace"
         }
       ],
-      "order": 529
+      "order": 531
     },
     {
       "trainerId": "TRAINER_JULIE",
@@ -68944,7 +69059,7 @@
           "role": "Choice-locked breaker"
         }
       ],
-      "order": 530
+      "order": 532
     },
     {
       "trainerId": "TRAINER_MITCHELL",
@@ -69068,7 +69183,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 531
+      "order": 533
     },
     {
       "trainerId": "TRAINER_FELIX",
@@ -69193,7 +69308,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 532
+      "order": 534
     },
     {
       "trainerId": "TRAINER_HALLE",
@@ -69317,7 +69432,7 @@
           "role": "setup attacker"
         }
       ],
-      "order": 533
+      "order": 535
     },
     {
       "trainerId": "TRAINER_DIANNE",
@@ -69441,7 +69556,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 534
+      "order": 536
     },
     {
       "trainerId": "TRAINER_WALLY_VR_2",
@@ -69608,7 +69723,7 @@
           "role": "speed control"
         }
       ],
-      "order": 535
+      "order": 537
     },
     {
       "trainerId": "TRAINER_EDGAR",
@@ -69773,7 +69888,7 @@
           "role": "Mega ace"
         }
       ],
-      "order": 536
+      "order": 538
     },
     {
       "trainerId": "TRAINER_ALBERT",
@@ -69935,7 +70050,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 537
+      "order": 539
     },
     {
       "trainerId": "TRAINER_HOPE",
@@ -70099,7 +70214,7 @@
           "role": "rare centerpiece"
         }
       ],
-      "order": 538
+      "order": 540
     },
     {
       "trainerId": "TRAINER_QUINCY",
@@ -70223,7 +70338,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 539
+      "order": 541
     },
     {
       "trainerId": "TRAINER_KATELYNN",
@@ -70348,7 +70463,7 @@
           "role": "speed control"
         }
       ],
-      "order": 540
+      "order": 542
     },
     {
       "trainerId": "TRAINER_SIDNEY",
@@ -70517,7 +70632,7 @@
           "role": "Mega ace"
         }
       ],
-      "order": 541
+      "order": 543
     },
     {
       "trainerId": "TRAINER_PHOEBE",
@@ -70684,7 +70799,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 542
+      "order": 544
     },
     {
       "trainerId": "TRAINER_GLACIA",
@@ -70852,7 +70967,7 @@
           "role": "Mega ace"
         }
       ],
-      "order": 543
+      "order": 545
     },
     {
       "trainerId": "TRAINER_DRAKE",
@@ -71014,7 +71129,7 @@
           "role": "Mega ace"
         }
       ],
-      "order": 544
+      "order": 546
     },
     {
       "trainerId": "TRAINER_WALLACE",
@@ -71181,7 +71296,7 @@
           "role": "Mega ace"
         }
       ],
-      "order": 545
+      "order": 547
     },
     {
       "trainerId": "TRAINER_WALLACE_DOUBLES_LEGENDS",
@@ -71343,7 +71458,7 @@
           "role": "Mega ace"
         }
       ],
-      "order": 546
+      "order": 548
     },
     {
       "trainerId": "TRAINER_WALLACE_LEGENDS",
@@ -71506,7 +71621,7 @@
           "role": "Mega ace"
         }
       ],
-      "order": 547
+      "order": 549
     },
     {
       "trainerId": "TRAINER_WALLACE_DOUBLES",
@@ -71671,7 +71786,333 @@
           "role": "Mega ace"
         }
       ],
-      "order": 548
+      "order": 550
+    },
+    {
+      "trainerId": "TRAINER_STEVEN",
+      "encounterId": null,
+      "encounterAlternatives": [],
+      "runtimePartyAlternatives": null,
+      "name": "Steven",
+      "trainerClass": "Pkmn Trainer 5",
+      "category": "optional",
+      "encounterRole": "opponent",
+      "chapter": "Postgame",
+      "chapterRank": 100,
+      "location": "Meteor Falls Stevens Cave",
+      "sourceMap": "MeteorFalls_StevensCave",
+      "source": {
+        "map": "MeteorFalls_StevensCave",
+        "command": "trainerbattle_no_intro",
+        "role": "opponent",
+        "line": 21,
+        "file": "data/maps/MeteorFalls_StevensCave/scripts.inc"
+      },
+      "badge": 9,
+      "levelCap": 100,
+      "format": "double",
+      "partySize": 6,
+      "theme": "Earthquake immunity + Steel pressure + Tailwind",
+      "plan": "Skarmory and Aerodactyl are the authored opening pair. The board plan is earthquake immunity + steel pressure + tailwind. The composition turns the cave's rock, darkness, and confined-board pressure into the fight's identity instead of using a generic route-trainer core. The rare showcase is Melmetal, Heatran. Metagross carries the team's one Mega slot.",
+      "behavior": "The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe, Smart Switching, Help Partner. Expect it to preserve earthquake immunity, steel pressure, tailwind rather than select six unrelated strong attacks.",
+      "counterplay": "Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.",
+      "designStatus": "not individually closed",
+      "manualQuality": null,
+      "corpusReview": null,
+      "competitiveReferences": [],
+      "authorSelfCheck": null,
+      "closure": "",
+      "difficultyScore": 92,
+      "difficultyBand": "Extreme",
+      "difficultyExplanation": "6 fully authored Pok\u00e9mon, average BST 549.2, average cap offset +3.33, ace offset +5, and 100% held-item coverage.",
+      "uniquenessScore": 76,
+      "uniquenessExplanation": "Closest unrelated roster: Steven (43% species overlap). Its species appear across an average of 5.0 unrelated trainer families.",
+      "synergyTags": [
+        "Earthquake immunity",
+        "Steel pressure",
+        "Tailwind",
+        "speed-assisted Eruption"
+      ],
+      "ai": [
+        "Check Bad Move",
+        "Try To Faint",
+        "Check Viability",
+        "Check Foe",
+        "Smart Switching",
+        "Help Partner"
+      ],
+      "party": [
+        {
+          "slot": 1,
+          "speciesId": "SPECIES_SKARMORY",
+          "species": "Skarmory",
+          "levelOffset": 3,
+          "effectiveLevel": 100,
+          "itemId": "ITEM_LEFTOVERS",
+          "item": "Leftovers",
+          "ability": "Sturdy",
+          "spread": "31 Iv Hp Def Impish",
+          "moves": [
+            "Drill Peck",
+            "Toxic",
+            "Spikes",
+            "Roost"
+          ],
+          "role": "disruption and support"
+        },
+        {
+          "slot": 2,
+          "speciesId": "SPECIES_AERODACTYL",
+          "species": "Aerodactyl",
+          "levelOffset": 3,
+          "effectiveLevel": 100,
+          "itemId": "ITEM_LIFE_ORB",
+          "item": "Life Orb",
+          "ability": "Rock Head",
+          "spread": "31 Iv Atk Speed Jolly",
+          "moves": [
+            "Brave Bird",
+            "Rock Slide",
+            "Earthquake",
+            "Tailwind"
+          ],
+          "role": "speed control"
+        },
+        {
+          "slot": 3,
+          "speciesId": "SPECIES_CRADILY",
+          "species": "Cradily",
+          "levelOffset": 3,
+          "effectiveLevel": 100,
+          "itemId": "ITEM_BIG_ROOT",
+          "item": "Big Root",
+          "ability": "Storm Drain",
+          "spread": "31 Iv Hp Spatk Modest",
+          "moves": [
+            "Giga Drain",
+            "Earth Power",
+            "Recover",
+            "Acid Spray"
+          ],
+          "role": "coverage attacker"
+        },
+        {
+          "slot": 4,
+          "speciesId": "SPECIES_MELMETAL",
+          "species": "Melmetal",
+          "levelOffset": 3,
+          "effectiveLevel": 100,
+          "itemId": "ITEM_ASSAULT_VEST",
+          "item": "Assault Vest",
+          "ability": "Iron Fist",
+          "spread": "31 Iv Atk Spdef",
+          "moves": [
+            "Double Iron Bash",
+            "Earthquake",
+            "Ice Punch",
+            "Thunder Punch"
+          ],
+          "role": "rare centerpiece"
+        },
+        {
+          "slot": 5,
+          "speciesId": "SPECIES_HEATRAN",
+          "species": "Heatran",
+          "levelOffset": 3,
+          "effectiveLevel": 100,
+          "itemId": "ITEM_CHOICE_SCARF",
+          "item": "Choice Scarf",
+          "ability": "Flash Fire",
+          "spread": "Hp Ice Timid",
+          "moves": [
+            "Eruption",
+            "Earth Power",
+            "Flash Cannon",
+            "Hidden Power"
+          ],
+          "role": "Choice-locked breaker"
+        },
+        {
+          "slot": 6,
+          "speciesId": "SPECIES_METAGROSS",
+          "species": "Metagross",
+          "levelOffset": 5,
+          "effectiveLevel": 100,
+          "itemId": "ITEM_METAGROSSITE",
+          "item": "Metagrossite",
+          "ability": "Clear Body",
+          "spread": "31 Iv Spatk Speed Hasty",
+          "moves": [
+            "Meteor Mash",
+            "Zen Headbutt",
+            "Grass Knot",
+            "Earthquake"
+          ],
+          "role": "Mega ace"
+        }
+      ],
+      "order": 551
+    },
+    {
+      "trainerId": "TRAINER_CYNTHIA_1",
+      "encounterId": null,
+      "encounterAlternatives": [],
+      "runtimePartyAlternatives": null,
+      "name": "Cynthia",
+      "trainerClass": "Pkmn Trainer 1",
+      "category": "optional",
+      "encounterRole": "opponent",
+      "chapter": "Postgame",
+      "chapterRank": 100,
+      "location": "Mossdeep City House 1",
+      "sourceMap": "MossdeepCity_House1",
+      "source": {
+        "map": "MossdeepCity_House1",
+        "command": "trainerbattle_no_intro",
+        "role": "opponent",
+        "line": 33,
+        "file": "data/maps/MossdeepCity_House1/scripts.inc"
+      },
+      "badge": 9,
+      "levelCap": 100,
+      "format": "double",
+      "partySize": 6,
+      "theme": "Earthquake immunity",
+      "plan": "Roserade and Togekiss are the authored opening pair. The board plan is earthquake immunity. The composition turns this point in the campaign into the fight's identity instead of using a generic route-trainer core. Garchomp carries the team's one Mega slot.",
+      "behavior": "The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe, Smart Switching. Expect it to preserve earthquake immunity rather than select six unrelated strong attacks.",
+      "counterplay": "Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.",
+      "designStatus": "not individually closed",
+      "manualQuality": null,
+      "corpusReview": null,
+      "competitiveReferences": [],
+      "authorSelfCheck": null,
+      "closure": "",
+      "difficultyScore": 85,
+      "difficultyBand": "Extreme",
+      "difficultyExplanation": "6 fully authored Pok\u00e9mon, average BST 543.7, average cap offset +5.33, ace offset +7, and 100% held-item coverage.",
+      "uniquenessScore": 73,
+      "uniquenessExplanation": "Closest unrelated roster: Wally (33% species overlap). Its species appear across an average of 6.3 unrelated trainer families.",
+      "synergyTags": [
+        "Earthquake immunity"
+      ],
+      "ai": [
+        "Check Bad Move",
+        "Try To Faint",
+        "Check Viability",
+        "Check Foe",
+        "Smart Switching"
+      ],
+      "party": [
+        {
+          "slot": 1,
+          "speciesId": "SPECIES_ROSERADE",
+          "species": "Roserade",
+          "levelOffset": 5,
+          "effectiveLevel": 100,
+          "itemId": "ITEM_FOCUS_SASH",
+          "item": "Focus Sash",
+          "ability": "Natural Cure",
+          "spread": "31 Iv Spatk Speed Timid",
+          "moves": [
+            "Sleep Powder",
+            "Sludge Bomb",
+            "Giga Drain",
+            "Spikes"
+          ],
+          "role": "disruption and support"
+        },
+        {
+          "slot": 2,
+          "speciesId": "SPECIES_TOGEKISS",
+          "species": "Togekiss",
+          "levelOffset": 5,
+          "effectiveLevel": 100,
+          "itemId": "ITEM_SHELL_BELL",
+          "item": "Shell Bell",
+          "ability": "Serene Grace",
+          "spread": "31 Iv Spatk Speed Timid",
+          "moves": [
+            "Air Slash",
+            "Aura Sphere",
+            "Thunder Wave",
+            "Roost"
+          ],
+          "role": "speed control"
+        },
+        {
+          "slot": 3,
+          "speciesId": "SPECIES_SPIRITOMB",
+          "species": "Spiritomb",
+          "levelOffset": 5,
+          "effectiveLevel": 100,
+          "itemId": "ITEM_LEFTOVERS",
+          "item": "Leftovers",
+          "ability": "Pressure",
+          "spread": "31 Iv Hp Def Bold",
+          "moves": [
+            "Dark Pulse",
+            "Calm Mind",
+            "Substitute",
+            "Recover"
+          ],
+          "role": "setup attacker"
+        },
+        {
+          "slot": 4,
+          "speciesId": "SPECIES_LUCARIO",
+          "species": "Lucario",
+          "levelOffset": 5,
+          "effectiveLevel": 100,
+          "itemId": "ITEM_CHOICE_SCARF",
+          "item": "Choice Scarf",
+          "ability": "Steadfast",
+          "spread": "31 Iv Atk Speed Jolly",
+          "moves": [
+            "Close Combat",
+            "Meteor Mash",
+            "Strength",
+            "Ice Punch"
+          ],
+          "role": "Choice-locked breaker"
+        },
+        {
+          "slot": 5,
+          "speciesId": "SPECIES_MILOTIC",
+          "species": "Milotic",
+          "levelOffset": 5,
+          "effectiveLevel": 100,
+          "itemId": "ITEM_LEFTOVERS",
+          "item": "Leftovers",
+          "ability": "Multiscale",
+          "spread": "31 Iv Hp Def Bold",
+          "moves": [
+            "Scald",
+            "Ice Beam",
+            "Recover",
+            "Mirror Coat"
+          ],
+          "role": "coverage attacker"
+        },
+        {
+          "slot": 6,
+          "speciesId": "SPECIES_GARCHOMP",
+          "species": "Garchomp",
+          "levelOffset": 7,
+          "effectiveLevel": 100,
+          "itemId": "ITEM_GARCHOMPITE",
+          "item": "Garchompite",
+          "ability": "Rough Skin",
+          "spread": "31 Iv Atk Speed Naive",
+          "moves": [
+            "Earthquake",
+            "Draco Meteor",
+            "Stone Edge",
+            "Fire Blast"
+          ],
+          "role": "Mega ace"
+        }
+      ],
+      "order": 552
     },
     {
       "trainerId": "TRAINER_PHILLIP",
@@ -71757,7 +72198,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 549
+      "order": 553
     },
     {
       "trainerId": "TRAINER_LEONARD",
@@ -71845,7 +72286,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 550
+      "order": 554
     },
     {
       "trainerId": "TRAINER_COLTON",
@@ -72010,7 +72451,7 @@
           "role": "Mega ace"
         }
       ],
-      "order": 551
+      "order": 555
     },
     {
       "trainerId": "TRAINER_MICAH",
@@ -72134,7 +72575,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 552
+      "order": 556
     },
     {
       "trainerId": "TRAINER_THOMAS",
@@ -72238,7 +72679,7 @@
           "role": "protected attacker"
         }
       ],
-      "order": 553
+      "order": 557
     },
     {
       "trainerId": "TRAINER_LEA_AND_JED",
@@ -72363,7 +72804,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 554
+      "order": 558
     },
     {
       "trainerId": "TRAINER_GARRET",
@@ -72471,7 +72912,7 @@
           "role": "coverage attacker"
         }
       ],
-      "order": 555
+      "order": 559
     },
     {
       "trainerId": "TRAINER_NAOMI",
@@ -72575,7 +73016,7 @@
           "role": "disruption and support"
         }
       ],
-      "order": 556
+      "order": 560
     },
     {
       "trainerId": "TRAINER_LEAF_ALTERING_CAVE",
@@ -72737,447 +73178,6 @@
           "role": "setup attacker"
         }
       ],
-      "order": 557
-    },
-    {
-      "trainerId": "TRAINER_ALANNAH",
-      "encounterId": null,
-      "encounterAlternatives": [],
-      "runtimePartyAlternatives": null,
-      "name": "Alannah",
-      "trainerClass": "Pkmn Ranger",
-      "category": "optional",
-      "encounterRole": "opponent",
-      "chapter": "Postgame",
-      "chapterRank": 100,
-      "location": "Ashen Woods",
-      "sourceMap": "AshenWoods",
-      "source": {
-        "map": "AshenWoods",
-        "command": "trainerbattle_single",
-        "role": "opponent",
-        "line": 164,
-        "file": "data/maps/AshenWoods/scripts.inc"
-      },
-      "badge": 9,
-      "levelCap": 100,
-      "format": "single",
-      "partySize": 3,
-      "theme": "active speed control",
-      "plan": "Primarina opens this deliberate singles fight. The roster is built as active speed control. The composition turns the surrounding forest and overgrowth into the fight's identity instead of using a generic route-trainer core.",
-      "behavior": "The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe. Expect it to preserve active speed control rather than select six unrelated strong attacks.",
-      "counterplay": "Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.",
-      "designStatus": "not individually closed",
-      "manualQuality": null,
-      "corpusReview": null,
-      "competitiveReferences": [],
-      "authorSelfCheck": null,
-      "closure": "",
-      "difficultyScore": 51,
-      "difficultyBand": "Hard",
-      "difficultyExplanation": "3 fully authored Pok\u00e9mon, average BST 499.7, average cap offset -1.0, ace offset -1, and 0% held-item coverage.",
-      "uniquenessScore": 78,
-      "uniquenessExplanation": "Closest unrelated roster: Annika (20% species overlap). Its species appear across an average of 5.3 unrelated trainer families.",
-      "synergyTags": [
-        "active speed control"
-      ],
-      "ai": [
-        "Check Bad Move",
-        "Try To Faint",
-        "Check Viability",
-        "Check Foe"
-      ],
-      "party": [
-        {
-          "slot": 1,
-          "speciesId": "SPECIES_PRIMARINA",
-          "species": "Primarina",
-          "levelOffset": -1,
-          "effectiveLevel": 99,
-          "itemId": "ITEM_NONE",
-          "item": "None",
-          "ability": "Berserk",
-          "spread": "31 Iv 20 Ev",
-          "moves": [
-            "Sparkling Aria",
-            "Moonblast",
-            "Icy Wind",
-            "Sing"
-          ],
-          "role": "speed control"
-        },
-        {
-          "slot": 2,
-          "speciesId": "SPECIES_DURANT",
-          "species": "Durant",
-          "levelOffset": -1,
-          "effectiveLevel": 99,
-          "itemId": "ITEM_NONE",
-          "item": "None",
-          "ability": "Hustle",
-          "spread": "31 Iv 20 Ev",
-          "moves": [
-            "X Scissor",
-            "Iron Head",
-            "Crunch",
-            "Thunder Fang"
-          ],
-          "role": "coverage attacker"
-        },
-        {
-          "slot": 3,
-          "speciesId": "SPECIES_DUSCLOPS",
-          "species": "Dusclops",
-          "levelOffset": -1,
-          "effectiveLevel": 99,
-          "itemId": "ITEM_NONE",
-          "item": "None",
-          "ability": "Pressure",
-          "spread": "31 Iv 20 Ev",
-          "moves": [
-            "Night Shade",
-            "Curse",
-            "Protect",
-            "Infestation"
-          ],
-          "role": "protected attacker"
-        }
-      ],
-      "order": 558
-    },
-    {
-      "trainerId": "TRAINER_MARTIN",
-      "encounterId": null,
-      "encounterAlternatives": [],
-      "runtimePartyAlternatives": null,
-      "name": "Martin",
-      "trainerClass": "Pkmn Ranger",
-      "category": "optional",
-      "encounterRole": "opponent",
-      "chapter": "Postgame",
-      "chapterRank": 100,
-      "location": "Ashen Woods",
-      "sourceMap": "AshenWoods",
-      "source": {
-        "map": "AshenWoods",
-        "command": "trainerbattle_single",
-        "role": "opponent",
-        "line": 169,
-        "file": "data/maps/AshenWoods/scripts.inc"
-      },
-      "badge": 9,
-      "levelCap": 100,
-      "format": "single",
-      "partySize": 3,
-      "theme": "Dark rare-showcase balance",
-      "plan": "Muk (Alolan) opens this deliberate singles fight. The roster is built as dark rare-showcase balance. The composition turns the surrounding forest and overgrowth into the fight's identity instead of using a generic route-trainer core. The rare showcase is Zarude.",
-      "behavior": "The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe. This singles or low-stakes roster emphasizes coverage, status, and matchup pressure rather than a scripted multi-Pok\u00e9mon combination.",
-      "counterplay": "Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.",
-      "designStatus": "not individually closed",
-      "manualQuality": null,
-      "corpusReview": null,
-      "competitiveReferences": [],
-      "authorSelfCheck": null,
-      "closure": "",
-      "difficultyScore": 49,
-      "difficultyBand": "Demanding",
-      "difficultyExplanation": "3 fully authored Pok\u00e9mon, average BST 543.3, average cap offset -1.0, ace offset -1, and 33% held-item coverage.",
-      "uniquenessScore": 72,
-      "uniquenessExplanation": "Closest unrelated roster: Grunt (40% species overlap). Its species appear across an average of 4.3 unrelated trainer families.",
-      "synergyTags": [],
-      "ai": [
-        "Check Bad Move",
-        "Try To Faint",
-        "Check Viability",
-        "Check Foe"
-      ],
-      "party": [
-        {
-          "slot": 1,
-          "speciesId": "SPECIES_MUK_ALOLAN",
-          "species": "Muk (Alolan)",
-          "levelOffset": -1,
-          "effectiveLevel": 99,
-          "itemId": "ITEM_NONE",
-          "item": "None",
-          "ability": "Poison Touch",
-          "spread": "31 Iv 20 Ev",
-          "moves": [
-            "Poison Jab",
-            "Crunch",
-            "Acid Spray",
-            "Disable"
-          ],
-          "role": "coverage attacker"
-        },
-        {
-          "slot": 2,
-          "speciesId": "SPECIES_GOLISOPOD",
-          "species": "Golisopod",
-          "levelOffset": -1,
-          "effectiveLevel": 99,
-          "itemId": "ITEM_NONE",
-          "item": "None",
-          "ability": "Emergency Exit",
-          "spread": "31 Iv 20 Ev",
-          "moves": [
-            "Razor Shell",
-            "First Impression",
-            "Sucker Punch",
-            "Drill Run"
-          ],
-          "role": "coverage attacker"
-        },
-        {
-          "slot": 3,
-          "speciesId": "SPECIES_ZARUDE",
-          "species": "Zarude",
-          "levelOffset": -1,
-          "effectiveLevel": 99,
-          "itemId": "ITEM_LIFE_ORB",
-          "item": "Life Orb",
-          "ability": "Leaf Guard",
-          "spread": "31 Iv Atk Speed Jolly",
-          "moves": [
-            "Knock Off",
-            "Power Whip",
-            "Close Combat",
-            "U Turn"
-          ],
-          "role": "rare centerpiece"
-        }
-      ],
-      "order": 559
-    },
-    {
-      "trainerId": "TRAINER_ROMAN",
-      "encounterId": null,
-      "encounterAlternatives": [],
-      "runtimePartyAlternatives": null,
-      "name": "Roman",
-      "trainerClass": "Hiker",
-      "category": "optional",
-      "encounterRole": "opponent",
-      "chapter": "Postgame",
-      "chapterRank": 100,
-      "location": "Ashen Woods",
-      "sourceMap": "AshenWoods",
-      "source": {
-        "map": "AshenWoods",
-        "command": "trainerbattle_single",
-        "role": "opponent",
-        "line": 174,
-        "file": "data/maps/AshenWoods/scripts.inc"
-      },
-      "badge": 9,
-      "levelCap": 100,
-      "format": "double",
-      "partySize": 4,
-      "theme": "Earthquake immunity",
-      "plan": "Bronzong and Golem are the authored opening pair. The board plan is earthquake immunity. The composition turns the surrounding forest and overgrowth into the fight's identity instead of using a generic route-trainer core.",
-      "behavior": "The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe, Help Partner. Expect it to preserve earthquake immunity rather than select six unrelated strong attacks.",
-      "counterplay": "Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.",
-      "designStatus": "not individually closed",
-      "manualQuality": null,
-      "corpusReview": null,
-      "competitiveReferences": [],
-      "authorSelfCheck": null,
-      "closure": "",
-      "difficultyScore": 49,
-      "difficultyBand": "Demanding",
-      "difficultyExplanation": "4 fully authored Pok\u00e9mon, average BST 501.2, average cap offset -2.0, ace offset -2, and 50% held-item coverage.",
-      "uniquenessScore": 82,
-      "uniquenessExplanation": "Closest unrelated roster: Foster (20% species overlap). Its species appear across an average of 3.2 unrelated trainer families.",
-      "synergyTags": [
-        "Earthquake immunity"
-      ],
-      "ai": [
-        "Check Bad Move",
-        "Try To Faint",
-        "Check Viability",
-        "Check Foe",
-        "Help Partner"
-      ],
-      "party": [
-        {
-          "slot": 1,
-          "speciesId": "SPECIES_BRONZONG",
-          "species": "Bronzong",
-          "levelOffset": -2,
-          "effectiveLevel": 98,
-          "itemId": "ITEM_NONE",
-          "item": "None",
-          "ability": "Levitate",
-          "spread": "31 Iv 0 Ev",
-          "moves": [
-            "Gyro Ball",
-            "Extrasensory",
-            "Hypnosis",
-            "Confuse Ray"
-          ],
-          "role": "disruption and support"
-        },
-        {
-          "slot": 2,
-          "speciesId": "SPECIES_GOLEM",
-          "species": "Golem",
-          "levelOffset": -2,
-          "effectiveLevel": 98,
-          "itemId": "ITEM_NONE",
-          "item": "None",
-          "ability": "Rock Head",
-          "spread": "31 Iv 0 Ev",
-          "moves": [
-            "Earthquake",
-            "Rock Blast",
-            "Steamroller",
-            "Explosion"
-          ],
-          "role": "coverage attacker"
-        },
-        {
-          "slot": 3,
-          "speciesId": "SPECIES_STUNFISK_GALARIAN",
-          "species": "Stunfisk (Galarian)",
-          "levelOffset": -2,
-          "effectiveLevel": 98,
-          "itemId": "ITEM_LEFTOVERS",
-          "item": "Leftovers",
-          "ability": "Mimicry",
-          "spread": "31 Iv Hp Atk Adamant",
-          "moves": [
-            "Earthquake",
-            "Stone Edge",
-            "Thunder Wave",
-            "Stealth Rock"
-          ],
-          "role": "speed control"
-        },
-        {
-          "slot": 4,
-          "speciesId": "SPECIES_SHUCKLE",
-          "species": "Shuckle",
-          "levelOffset": -2,
-          "effectiveLevel": 98,
-          "itemId": "ITEM_CHESTO_BERRY",
-          "item": "Chesto Berry",
-          "ability": "Sturdy",
-          "spread": "31 Iv Hp Atk Adamant",
-          "moves": [
-            "Rest",
-            "Acupressure",
-            "Rollout",
-            "Power Split"
-          ],
-          "role": "disruption and support"
-        }
-      ],
-      "order": 560
-    },
-    {
-      "trainerId": "TRAINER_ELMER",
-      "encounterId": null,
-      "encounterAlternatives": [],
-      "runtimePartyAlternatives": null,
-      "name": "Elmer",
-      "trainerClass": "Bug Maniac",
-      "category": "optional",
-      "encounterRole": "opponent",
-      "chapter": "Postgame",
-      "chapterRank": 100,
-      "location": "Ashen Woods",
-      "sourceMap": "AshenWoods",
-      "source": {
-        "map": "AshenWoods",
-        "command": "trainerbattle_single",
-        "role": "opponent",
-        "line": 179,
-        "file": "data/maps/AshenWoods/scripts.inc"
-      },
-      "badge": 9,
-      "levelCap": 100,
-      "format": "single",
-      "partySize": 3,
-      "theme": "Bug pressure",
-      "plan": "Scyther opens this deliberate singles fight. The roster is built as bug pressure. The composition turns the surrounding forest and overgrowth into the fight's identity instead of using a generic route-trainer core.",
-      "behavior": "The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe. Expect it to preserve bug pressure rather than select six unrelated strong attacks.",
-      "counterplay": "Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.",
-      "designStatus": "not individually closed",
-      "manualQuality": null,
-      "corpusReview": null,
-      "competitiveReferences": [],
-      "authorSelfCheck": null,
-      "closure": "",
-      "difficultyScore": 41,
-      "difficultyBand": "Demanding",
-      "difficultyExplanation": "3 fully authored Pok\u00e9mon, average BST 500.0, average cap offset -2.0, ace offset -2, and 0% held-item coverage.",
-      "uniquenessScore": 72,
-      "uniquenessExplanation": "Closest unrelated roster: Vicky (33% species overlap). Its species appear across an average of 4.7 unrelated trainer families.",
-      "synergyTags": [
-        "Bug pressure"
-      ],
-      "ai": [
-        "Check Bad Move",
-        "Try To Faint",
-        "Check Viability",
-        "Check Foe"
-      ],
-      "party": [
-        {
-          "slot": 1,
-          "speciesId": "SPECIES_SCYTHER",
-          "species": "Scyther",
-          "levelOffset": -2,
-          "effectiveLevel": 98,
-          "itemId": "ITEM_NONE",
-          "item": "None",
-          "ability": "Technician",
-          "spread": "31 Iv 0 Ev",
-          "moves": [
-            "Aerial Ace",
-            "X Scissor",
-            "Quick Attack",
-            "Night Slash"
-          ],
-          "role": "coverage attacker"
-        },
-        {
-          "slot": 2,
-          "speciesId": "SPECIES_PINSIR",
-          "species": "Pinsir",
-          "levelOffset": -2,
-          "effectiveLevel": 98,
-          "itemId": "ITEM_NONE",
-          "item": "None",
-          "ability": "Mold Breaker",
-          "spread": "31 Iv 0 Ev",
-          "moves": [
-            "Thrash",
-            "X Scissor",
-            "Submission",
-            "Swords Dance"
-          ],
-          "role": "setup attacker"
-        },
-        {
-          "slot": 3,
-          "speciesId": "SPECIES_HERACROSS",
-          "species": "Heracross",
-          "levelOffset": -2,
-          "effectiveLevel": 98,
-          "itemId": "ITEM_NONE",
-          "item": "None",
-          "ability": "Swarm",
-          "spread": "31 Iv 0 Ev",
-          "moves": [
-            "Megahorn",
-            "Close Combat",
-            "Bullet Seed",
-            "Night Slash"
-          ],
-          "role": "coverage attacker"
-        }
-      ],
       "order": 561
     },
     {
@@ -73197,7 +73197,7 @@
         "map": "Route103",
         "command": "trainerbattle_double",
         "role": "opponent",
-        "line": 309,
+        "line": 314,
         "file": "data/maps/Route103/scripts.inc"
       },
       "badge": null,
@@ -73321,7 +73321,7 @@
         "map": "Route103",
         "command": "trainerbattle_double",
         "role": "opponent",
-        "line": 309,
+        "line": 314,
         "file": "data/maps/Route103/scripts.inc"
       },
       "badge": null,
@@ -73446,7 +73446,7 @@
         "map": "Route103",
         "command": "trainerbattle_double",
         "role": "opponent",
-        "line": 309,
+        "line": 314,
         "file": "data/maps/Route103/scripts.inc"
       },
       "badge": null,
@@ -73572,7 +73572,7 @@
         "map": "Route103",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 352,
+        "line": 357,
         "file": "data/maps/Route103/scripts.inc"
       },
       "badge": null,
@@ -73698,7 +73698,7 @@
         "map": "Route103",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 352,
+        "line": 357,
         "file": "data/maps/Route103/scripts.inc"
       },
       "badge": null,
@@ -73824,7 +73824,7 @@
         "map": "Route103",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 352,
+        "line": 357,
         "file": "data/maps/Route103/scripts.inc"
       },
       "badge": null,
@@ -78080,7 +78080,7 @@
         "map": "DewfordTown_Gym",
         "command": "trainerbattle_no_intro",
         "role": "opponent",
-        "line": 201,
+        "line": 207,
         "file": "data/maps/DewfordTown_Gym/scripts.inc"
       },
       "badge": null,
@@ -78247,7 +78247,7 @@
         "map": "DewfordTown_Gym",
         "command": "trainerbattle_no_intro",
         "role": "opponent",
-        "line": 210,
+        "line": 216,
         "file": "data/maps/DewfordTown_Gym/scripts.inc"
       },
       "badge": null,
@@ -78411,7 +78411,7 @@
         "map": "DewfordTown_Gym",
         "command": "trainerbattle_no_intro",
         "role": "opponent",
-        "line": 225,
+        "line": 231,
         "file": "data/maps/DewfordTown_Gym/scripts.inc"
       },
       "badge": null,
@@ -78574,7 +78574,7 @@
         "map": "DewfordTown_Gym",
         "command": "trainerbattle_no_intro",
         "role": "opponent",
-        "line": 231,
+        "line": 237,
         "file": "data/maps/DewfordTown_Gym/scripts.inc"
       },
       "badge": null,
@@ -81143,7 +81143,7 @@
         "map": "MauvilleCity_Gym",
         "command": "trainerbattle_no_intro",
         "role": "opponent",
-        "line": 147,
+        "line": 153,
         "file": "data/maps/MauvilleCity_Gym/scripts.inc"
       },
       "badge": null,
@@ -81306,7 +81306,7 @@
         "map": "MauvilleCity_Gym",
         "command": "trainerbattle_no_intro",
         "role": "opponent",
-        "line": 156,
+        "line": 162,
         "file": "data/maps/MauvilleCity_Gym/scripts.inc"
       },
       "badge": null,
@@ -81470,7 +81470,7 @@
         "map": "MauvilleCity_Gym",
         "command": "trainerbattle_no_intro",
         "role": "opponent",
-        "line": 171,
+        "line": 177,
         "file": "data/maps/MauvilleCity_Gym/scripts.inc"
       },
       "badge": null,
@@ -81632,7 +81632,7 @@
         "map": "MauvilleCity_Gym",
         "command": "trainerbattle_no_intro",
         "role": "opponent",
-        "line": 177,
+        "line": 183,
         "file": "data/maps/MauvilleCity_Gym/scripts.inc"
       },
       "badge": null,
@@ -85812,7 +85812,7 @@
         "map": "MtChimney",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 484,
+        "line": 486,
         "file": "data/maps/MtChimney/scripts.inc"
       },
       "badge": null,
@@ -85916,7 +85916,7 @@
         "map": "MtChimney",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 484,
+        "line": 486,
         "file": "data/maps/MtChimney/scripts.inc"
       },
       "badge": null,
@@ -86040,7 +86040,7 @@
         "map": "MtChimney",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 484,
+        "line": 486,
         "file": "data/maps/MtChimney/scripts.inc"
       },
       "badge": null,
@@ -86202,7 +86202,7 @@
         "map": "MtChimney",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 526,
+        "line": 528,
         "file": "data/maps/MtChimney/scripts.inc"
       },
       "badge": null,
@@ -86288,7 +86288,7 @@
         "map": "MtChimney",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 526,
+        "line": 528,
         "file": "data/maps/MtChimney/scripts.inc"
       },
       "badge": null,
@@ -86410,7 +86410,7 @@
         "map": "MtChimney",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 526,
+        "line": 528,
         "file": "data/maps/MtChimney/scripts.inc"
       },
       "badge": null,
@@ -90774,7 +90774,7 @@
         "map": "Route118",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 191,
+        "line": 193,
         "file": "data/maps/Route118/scripts.inc"
       },
       "badge": null,
@@ -90900,7 +90900,7 @@
         "map": "Route118",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 191,
+        "line": 193,
         "file": "data/maps/Route118/scripts.inc"
       },
       "badge": null,
@@ -91024,7 +91024,7 @@
         "map": "Route118",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 191,
+        "line": 193,
         "file": "data/maps/Route118/scripts.inc"
       },
       "badge": null,
@@ -91146,7 +91146,7 @@
         "map": "Route118",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 223,
+        "line": 225,
         "file": "data/maps/Route118/scripts.inc"
       },
       "badge": null,
@@ -91232,7 +91232,7 @@
         "map": "Route118",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 223,
+        "line": 225,
         "file": "data/maps/Route118/scripts.inc"
       },
       "badge": null,
@@ -91318,7 +91318,7 @@
         "map": "Route118",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 223,
+        "line": 225,
         "file": "data/maps/Route118/scripts.inc"
       },
       "badge": null,
@@ -91422,7 +91422,7 @@
         "map": "Route119",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 373,
+        "line": 375,
         "file": "data/maps/Route119/scripts.inc"
       },
       "badge": null,
@@ -91586,7 +91586,7 @@
         "map": "Route119",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 373,
+        "line": 375,
         "file": "data/maps/Route119/scripts.inc"
       },
       "badge": null,
@@ -91747,7 +91747,7 @@
         "map": "Route119",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 373,
+        "line": 375,
         "file": "data/maps/Route119/scripts.inc"
       },
       "badge": null,
@@ -91910,7 +91910,7 @@
         "map": "Route119",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 395,
+        "line": 397,
         "file": "data/maps/Route119/scripts.inc"
       },
       "badge": null,
@@ -92072,7 +92072,7 @@
         "map": "Route119",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 395,
+        "line": 397,
         "file": "data/maps/Route119/scripts.inc"
       },
       "badge": null,
@@ -92234,7 +92234,7 @@
         "map": "Route119",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 395,
+        "line": 397,
         "file": "data/maps/Route119/scripts.inc"
       },
       "badge": null,
@@ -93053,7 +93053,7 @@
         "map": "Route120",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 299,
+        "line": 304,
         "file": "data/maps/Route120/scripts.inc"
       },
       "badge": null,
@@ -93139,7 +93139,7 @@
         "map": "Route120",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 299,
+        "line": 304,
         "file": "data/maps/Route120/scripts.inc"
       },
       "badge": null,
@@ -93263,7 +93263,7 @@
         "map": "Route120",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 299,
+        "line": 304,
         "file": "data/maps/Route120/scripts.inc"
       },
       "badge": null,
@@ -93387,7 +93387,7 @@
         "map": "Route120",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 331,
+        "line": 336,
         "file": "data/maps/Route120/scripts.inc"
       },
       "badge": null,
@@ -93511,7 +93511,7 @@
         "map": "Route120",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 331,
+        "line": 336,
         "file": "data/maps/Route120/scripts.inc"
       },
       "badge": null,
@@ -93636,7 +93636,7 @@
         "map": "Route120",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 331,
+        "line": 336,
         "file": "data/maps/Route120/scripts.inc"
       },
       "badge": null,
@@ -99823,7 +99823,7 @@
       "trainerClass": "Pkmn Trainer 1",
       "category": "rematch",
       "encounterRole": "opponent",
-      "chapter": "Rematches \u00b7 Mind Badge",
+      "chapter": "Rematches \u00b7 Postgame",
       "chapterRank": 110,
       "location": "Mossdeep City House 1",
       "sourceMap": "MossdeepCity_House1",
@@ -99831,7 +99831,7 @@
         "map": "MossdeepCity_House1",
         "command": "trainerbattle_no_intro",
         "role": "opponent",
-        "line": 72,
+        "line": 86,
         "file": "data/maps/MossdeepCity_House1/scripts.inc"
       },
       "badge": null,
@@ -99994,7 +99994,7 @@
         "map": "MossdeepCity_Gym",
         "command": "trainerbattle_double",
         "role": "opponent",
-        "line": 55,
+        "line": 56,
         "file": "data/maps/MossdeepCity_Gym/scripts.inc"
       },
       "badge": null,
@@ -100159,7 +100159,7 @@
         "map": "MossdeepCity_Gym",
         "command": "trainerbattle_no_intro",
         "role": "opponent",
-        "line": 122,
+        "line": 128,
         "file": "data/maps/MossdeepCity_Gym/scripts.inc"
       },
       "badge": null,
@@ -100322,7 +100322,7 @@
         "map": "MossdeepCity_Gym",
         "command": "trainerbattle_no_intro",
         "role": "opponent",
-        "line": 129,
+        "line": 135,
         "file": "data/maps/MossdeepCity_Gym/scripts.inc"
       },
       "badge": null,

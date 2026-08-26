@@ -1375,6 +1375,8 @@ SootopolisCity_EventScript_Wallace:: @ 81E6446
 SootopolisCity_EventScript_GiveWaterfall:: @ 81E646F
 	msgbox SootopolisCity_Text_ThankYouForHelpAcceptThis, MSGBOX_DEFAULT
 	giveitem ITEM_HM07_WATERFALL
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_HM07
 	msgbox SootopolisCity_Text_ExplainWaterfallGoToGym, MSGBOX_DEFAULT
 	closemessage

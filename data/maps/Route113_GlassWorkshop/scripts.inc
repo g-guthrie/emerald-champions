@@ -32,6 +32,8 @@ Route113_GlassWorkshop_EventScript_GlassWorker:: @ 826ED1E
 	goto_if_eq Route113_GlassWorkshop_EventScript_ExplainSootSack
 	msgbox Route113_GlassWorkshop_Text_GoCollectAshWithThis, MSGBOX_DEFAULT
 	giveitem ITEM_SOOT_SACK
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setvar VAR_GLASS_WORKSHOP_STATE, 1
 	msgbox Route113_GlassWorkshop_Text_ExplainSootSack, MSGBOX_DEFAULT
 	release
@@ -403,4 +405,3 @@ Route113_GlassWorkshop_Text_FunToBlowGlassFlute: @ 826F7EC
 	.string "It's fun to blow a glass flute while\n"
 	.string "my boss is talking.\p"
 	.string "Huff-huff! Puff-puff!$"
-

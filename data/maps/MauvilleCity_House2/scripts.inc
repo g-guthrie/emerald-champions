@@ -27,6 +27,9 @@ MauvilleCity_House2_EventScript_AskToTradeForIceStone:: @ 8210C82
 
 MauvilleCity_House2_EventScript_AcceptTrade:: @ 8210CB8
 	msgbox MauvilleCity_House2_Text_IllTradeYouCoinCase, MSGBOX_DEFAULT
+	checkitemspace ITEM_COIN_CASE, 1
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	removeitem ITEM_ICE_STONE
 	giveitem ITEM_COIN_CASE
 	setflag FLAG_RECEIVED_COIN_CASE

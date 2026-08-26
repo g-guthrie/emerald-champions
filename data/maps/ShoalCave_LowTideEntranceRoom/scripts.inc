@@ -34,6 +34,11 @@ ShoalCave_LowTideEntranceRoom_EventScript_ShellBellExpert:: @ 8236DD9
 	call_if_eq ShoalCave_LowTideEntranceRoom_EventScript_CheckSpaceWillBeFreed
 	compare VAR_RESULT, 2
 	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_NoRoomForShellBell
+	goto_if_set FLAG_SHOALCAVE_SLOWBRONITE, ShoalCave_LowTideEntranceRoom_EventScript_MakeShellBell
+	checkitemspace ITEM_SLOWBRONITE, 1
+	compare VAR_RESULT, FALSE
+	goto_if_eq ShoalCave_LowTideEntranceRoom_EventScript_NoRoomForShellBell
+ShoalCave_LowTideEntranceRoom_EventScript_MakeShellBell::
 	msgbox ShoalCave_LowTideEntranceRoom_Text_MakeShellBellRightAway, MSGBOX_DEFAULT
 	removeitem ITEM_SHOAL_SALT, 4
 	removeitem ITEM_SHOAL_SHELL, 4
@@ -49,6 +54,9 @@ ShoalCave_LowTideEntranceRoom_EventScript_ShellBellExpert:: @ 8236DD9
 ShoalCave_LowTideEntranceRoom_EventScript_Slowbronite::
 	msgbox ShoalCave_LowTideEntranceRoom_Text_Slowbronite, MSGBOX_DEFAULT
 	giveitem ITEM_SLOWBRONITE
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
+	setflag FLAG_SHOALCAVE_SLOWBRONITE
 	release
 	end
 

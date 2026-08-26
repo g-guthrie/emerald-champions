@@ -338,9 +338,9 @@ def validate_first_mega_path(
     if not stone_mart or "ITEM_HONEY" not in stone_mart.group(1):
         problems.append("Stone Badge Pokémon Center shop does not sell Honey")
 
-    rustboro_center = read(ROOT / "data/maps/RustboroCity_PokemonCenter_1F/map.json")
-    if "General_Mart_Script" not in rustboro_center:
-        problems.append("Rustboro Pokémon Center no longer exposes the badge-tier shop")
+    rustboro_mart = read(ROOT / "data/maps/RustboroCity_Mart/map.json")
+    if "General_Mart_Script" not in rustboro_mart:
+        problems.append("Rustboro Poké Mart no longer exposes the badge-tier medicine shop")
 
     roxanne = read(ROOT / "data/maps/RustboroCity_Gym/scripts.inc")
     if "setflag FLAG_BADGE01_GET" not in roxanne:
@@ -377,7 +377,7 @@ def validate_first_mega_path(
     if not problems:
         evidence.extend(
             [
-                "Rustboro supplies Cut and its Pokémon Center badge-tier shop supplies Honey",
+                "Rustboro supplies Cut and its Poké Mart badge-tier medicine shop supplies Honey",
                 "the main Woods Cut route reaches Woods 2 and the Beedrillite map",
                 "Weedle evolves at 7/10 and Beedrill Mega Evolves with Beedrillite",
             ]

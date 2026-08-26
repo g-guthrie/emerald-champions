@@ -81,6 +81,16 @@ void TryGiveVerdantStevenRewardBundle(void)
     gSpecialVar_Result = TryAddVerdantStevenRewardBundle();
 }
 
+void TryGiveVerdantLatiStoneBundle(void)
+{
+    gSpecialVar_Result = TryAddVerdantLatiStoneBundle();
+}
+
+void TryGiveVerdantWeatherRockBundle(void)
+{
+    gSpecialVar_Result = TryAddVerdantWeatherRockBundle();
+}
+
 EWRAM_DATA bool8 gBikeCyclingChallenge = FALSE;
 EWRAM_DATA u8 gBikeCollisions = 0;
 static EWRAM_DATA u32 sBikeCyclingTimer = 0;

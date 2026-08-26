@@ -41,6 +41,8 @@ Route114_EventScript_GoodRodFisherman:: @ 81F3E14
 Route118_EventScript_ReceiveGoodRod:: @ 81F3E3E
 	msgbox Route118_Text_IdenticalMindsTakeThis, MSGBOX_DEFAULT
 	giveitem ITEM_GOOD_ROD
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_GOOD_ROD
 	msgbox Route118_Text_TryYourLuckFishing, MSGBOX_DEFAULT
 	release
@@ -260,6 +262,7 @@ Route114_EventScript_MagikarpGuy::
 	lock
 	faceplayer
 	goto_if_set FLAG_ROUTE118_GYARADOSITE, Route118_EventScript_ReceivedGyaradosite
+	goto_if_defeated TRAINER_MAGIKARP_GUY, Route118_EventScript_GiveGyaradosite
 	msgbox Route118_Text_DoYouLiekKarp, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq Route118_EventScript_ILuurveKarp
@@ -293,8 +296,14 @@ Route118_EventScript_CheckParty::
 	goto_if_eq Route118_EventScript_NeedMoreKarp
 	msgbox Route118_Text_KarpFiteStart, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_MAGIKARP_GUY, Route118_Text_MagikarpDefeat
+	goto Route118_EventScript_GiveGyaradosite
+	end
+
+Route118_EventScript_GiveGyaradosite::
 	msgbox Route118_Text_TakeGyaradosite, MSGBOX_DEFAULT
 	giveitem ITEM_GYARADOSITE
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_ROUTE118_GYARADOSITE
 	msgbox Route118_Text_KarpBetterThanGyara, MSGBOX_DEFAULT
 	release
@@ -404,4 +413,3 @@ Route118_Text_RouteSignMauville: @ 81F43F4
 Route118_Text_RouteSign119: @ 81F440E
 	.string "Route 118\n"
 	.string "{UP_ARROW} Route 119$"
-

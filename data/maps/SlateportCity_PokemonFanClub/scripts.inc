@@ -294,10 +294,8 @@ SlateportCity_PokemonFanClub_Text_GiveTM58:
 	.string "if it holds this Focus Band!$"
 
 SlateportCity_PokemonFanClub_Text_HaveTM58:
-	.string "Endure allows a Pokémon to withstand\n"
-	.string "any attack with one HP left.\p"
-	.string "It might not work if you use it too\n"
-	.string "many times in a row, though.$"
+	.string "A Focus Band can sometimes let its\n"
+	.string "holder endure a knockout at one HP.$"
 
 SlateportCity_PokemonFanClub_Text_MeetChairman: @ 820A233
 	.string "Er-hem! I am the Chairman of the\n"

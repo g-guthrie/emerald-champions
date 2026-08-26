@@ -146,9 +146,15 @@ DewfordTown_Gym_EventScript_StopCountingTrainers:: @ 81FC7C1
 DewfordTown_Gym_EventScript_Brawly:: @ 81FC7C2
 	goto_if_set FLAG_DAILY_REMATCH_BRAWLY, DewfordTown_Gym_EventScript_AlreadyRematched
 	goto_if_set FLAG_SYS_GAME_CLEAR, DewfordTown_Gym_EventScript_BrawlyRematch
+	goto_if_unset FLAG_SYS_RECEIVED_KEYSTONE, DewfordTown_Gym_EventScript_NeedMegaBracelet
 	trainerbattle_double TRAINER_BRAWLY_1, DewfordTown_Gym_Text_BrawlyIntro, DewfordTown_Gym_Text_BrawlyDefeat, DewfordTown_Gym_Text_BrawlyNotEnoughPokemon, DewfordTown_Gym_EventScript_BrawlyDefeated, NO_MUSIC
 	goto_if_unset FLAG_RECEIVED_TM08, DewfordTown_Gym_EventScript_GiveBulkUp2
 	msgbox DewfordTown_Gym_Text_BrawlyPostBattle, MSGBOX_DEFAULT
+	release
+	end
+
+DewfordTown_Gym_EventScript_NeedMegaBracelet::
+	msgbox DewfordTown_Gym_Text_NeedMegaBracelet, MSGBOX_DEFAULT
 	release
 	end
 
@@ -464,6 +470,12 @@ DewfordTown_Gym_Text_CristianPostBattle: @ 81FCF26
 	.string "Taunt can stop Riolu's stance.\n"
 	.string "Burn and Intimidate blunt us all.\p"
 	.string "A strong physical wall buys time.$"
+
+DewfordTown_Gym_Text_NeedMegaBracelet:
+	.string "Brawly: Steven is waiting for you\n"
+	.string "in Granite Cave.\p"
+	.string "Speak with him, then come back\n"
+	.string "when you're ready to battle.$"
 
 DewfordTown_Gym_Text_BrawlyIntro: @ 81FCF44
 	.string "I'm Brawly!\n"

@@ -75,6 +75,8 @@ MtPyre_Summit_EventScript_TeamAquaExits:: @ 823203C
 	call_if_eq MtPyre_Summit_EventScript_OldLadyApproachPlayer2
 	msgbox MtPyre_Summit_Text_BothOrbsTakenMagmaLeftThis, MSGBOX_DEFAULT
 	giveitem ITEM_MAGMA_EMBLEM
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_RED_OR_BLUE_ORB
 	setflag FLAG_HIDE_JAGGED_PASS_MAGMA_GUARD
 	releaseall
@@ -175,10 +177,25 @@ MtPyre_Summit_EventScript_OldManNewTale:: @ 8232199
 MtPyre_Summit_EventScript_OldLady:: @ 82321A2
 	lock
 	faceplayer
+	compare VAR_MT_PYRE_STATE, 1
+	goto_if_eq MtPyre_Summit_EventScript_TryGiveMagmaEmblem
 	goto_if_set FLAG_RETURNED_RED_OR_BLUE_ORB, MtPyre_Summit_EventScript_OldLadyAfterOrbsReturned
 	compare VAR_MT_PYRE_STATE, 3
 	call_if_ge MtPyre_Summit_EventScript_OldLadyOrbsReturned
 	goto_if_set FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN, MtPyre_Summit_EventScript_OldLadyLegendariesAwake
+	msgbox MtPyre_Summit_Text_OrbsHaveBeenTaken, MSGBOX_DEFAULT
+	release
+	end
+
+MtPyre_Summit_EventScript_TryGiveMagmaEmblem::
+	goto_if_set FLAG_RECEIVED_RED_OR_BLUE_ORB, MtPyre_Summit_EventScript_OldLadyOrbsTaken
+	msgbox MtPyre_Summit_Text_BothOrbsTakenMagmaLeftThis, MSGBOX_DEFAULT
+	giveitem ITEM_MAGMA_EMBLEM
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
+	setflag FLAG_RECEIVED_RED_OR_BLUE_ORB
+	setflag FLAG_HIDE_JAGGED_PASS_MAGMA_GUARD
+MtPyre_Summit_EventScript_OldLadyOrbsTaken:
 	msgbox MtPyre_Summit_Text_OrbsHaveBeenTaken, MSGBOX_DEFAULT
 	release
 	end
@@ -669,4 +686,3 @@ MtPyre_Summit_Text_HoennTrioTale: @ 823325D
 	.string "becalmed the two enraged Pokémon.\p"
 	.string "Then, its duty done, the green Pokémon\n"
 	.string "flew off into the wild blue yonder…$"
-

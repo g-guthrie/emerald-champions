@@ -163,13 +163,11 @@ SSTidalRooms_Text_NaomiPostBattle: @ 823D013
 	.string "side to touring Hoenn by ferry.$"
 
 SSTidalRooms_Text_NotSuspiciousTakeThis: @ 823D098
-	.string "Uh… Hi! I… I'm not acting suspicious!\n"
-	.string "Uh… You can have this! For free!\p"
-	.string "It… Honestly, I didn't Snatch it from\n"
-	.string "someone! I'd never do such a thing!\l"
-	.string "It's clean! You can use it!$"
+	.string "Uh… Hi! I'm not acting suspicious!\n"
+	.string "You can have these Safety Goggles!\p"
+	.string "I didn't snatch them from anyone.\n"
+	.string "Honestly! They're clean!$"
 
 SSTidalRooms_Text_ExplainSnatch: @ 823D145
-	.string "Snatch steals the beneficial effects\n"
-	.string "of certain moves before they can be\l"
-	.string "used by a foe or ally.$"
+	.string "Safety Goggles block powder moves\n"
+	.string "and sandstorm or hail damage.$"

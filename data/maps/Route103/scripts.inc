@@ -183,8 +183,10 @@ Route103_EventScript_AfterBrendanRematch:: @ 81EC4FC
 
 Route103_EventScript_BrendanGiveEonTicket::
 	msgbox Route103_Text_BrendanGiveEonTicket, MSGBOX_DEFAULT
-	setflag FLAG_ENABLE_SHIP_SOUTHERN_ISLAND
 	giveitem ITEM_EON_TICKET
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
+	setflag FLAG_ENABLE_SHIP_SOUTHERN_ISLAND
 	savebgm MUS_DUMMY
 	fadedefaultbgm
 	releaseall
@@ -192,8 +194,10 @@ Route103_EventScript_BrendanGiveEonTicket::
 
 Route103_EventScript_MayGiveEonTicket::
 	msgbox Route103_Text_MayGiveEonTicket, MSGBOX_DEFAULT
-	setflag FLAG_ENABLE_SHIP_SOUTHERN_ISLAND
 	giveitem ITEM_EON_TICKET
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
+	setflag FLAG_ENABLE_SHIP_SOUTHERN_ISLAND
 	savebgm MUS_DUMMY
 	fadedefaultbgm
 	releaseall
@@ -239,6 +243,7 @@ Route103_EventScript_RivalExitFacingSouth:: @ 81EC585
 
 Route103_EventScript_RivalEnd:: @ 81EC5A2
 	removeobject LOCALID_RIVAL
+	setflag FLAG_HIDE_ROUTE_103_RIVAL
 	setvar VAR_BIRCH_LAB_STATE, 4
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_RIVAL
 	setflag FLAG_DEFEATED_RIVAL_ROUTE103
