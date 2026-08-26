@@ -104,10 +104,10 @@ def build() -> dict:
 
     repeated_species = {key: sorted(set(value)) for key, value in species_uses.items() if len(set(value)) > 1}
     if repeated_species:
-        hard.append({"code": "LEAGUE_SPECIES_COLLISION", "uses": repeated_species})
+        advisory.append({"code": "LEAGUE_SPECIES_REUSE", "uses": repeated_species})
     repeated_megas = {key: sorted(set(value)) for key, value in mega_uses.items() if len(set(value)) > 1}
     if repeated_megas:
-        hard.append({"code": "LEAGUE_MEGA_COLLISION", "uses": repeated_megas})
+        advisory.append({"code": "LEAGUE_MEGA_REUSE", "uses": repeated_megas})
     repeated_questions = {key: value for key, value in question_uses.items() if len(value) > 1}
     if repeated_questions:
         hard.append({"code": "PRIMARY_QUESTION_DUPLICATE", "uses": repeated_questions})
@@ -137,7 +137,7 @@ def build() -> dict:
         "resource_taxes": resource_taxes,
         "hard_errors": hard,
         "advisories": advisory,
-        "policy": "Hard collisions block the current phase. Advisories require judgment and written disposition; they are not scores, quotas, or automatic bans.",
+        "policy": "Correctness and phase-identity errors block the current phase. Species and Mega reuse require judgment and written disposition; they are not quotas or automatic bans.",
     }
 
 

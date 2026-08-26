@@ -258,6 +258,17 @@ const struct SpriteTemplate gEmberFlareSpriteTemplate =
     .callback = AnimEmberFlare,
 };
 
+const struct SpriteTemplate gTwisterEmberSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_SMALL_EMBER,
+    .paletteTag = ANIM_TAG_SMALL_EMBER,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
+    .anims = gAnims_BasicFire,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimMoveTwisterParticle,
+};
+
 const union AnimCmd gIncinerateAnim1[] =
 {
     ANIMCMD_FRAME(0, 2),

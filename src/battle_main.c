@@ -5,6 +5,7 @@
 #include "battle_ai_util.h"
 #include "battle_arena.h"
 #include "battle_controllers.h"
+#include "battle_gfx_sfx_util.h"
 #include "battle_interface.h"
 #include "battle_main.h"
 #include "battle_message.h"
@@ -13,6 +14,7 @@
 #include "battle_setup.h"
 #include "battle_tower.h"
 #include "battle_util.h"
+#include "battle_util2.h"
 #include "berry.h"
 #include "bg.h"
 #include "data.h"
@@ -83,6 +85,7 @@ static void TryCorrectShedinjaLanguage(struct Pokemon *mon);
 static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 firstTrainer);
 static bool8 IsRoute103RivalTrainer(u16 trainerNum);
 static bool8 IsRustboroRivalTrainer(u16 trainerNum);
+static bool8 IsRoute110RivalTrainer(u16 trainerNum);
 static void BattleMainCB1(void);
 static void sub_8038538(struct Sprite *sprite);
 static void CB2_EndLinkBattle(void);
@@ -524,12 +527,35 @@ const u8 * const gStatusConditionStringsTable[7][2] =
 };
 
 // code
+static void AbortBattleInitAllocationFailure(void)
+{
+    // A partially initialized battle cannot safely continue. Release every
+    // cluster, report a loss (never a false victory), and hand control back to
+    // the battle-specific exit callback.
+    FreeMonSpritesGfx();
+    FreeBattleSpritesData();
+    FreeBattleResources();
+    gSpecialVar_Result = gBattleOutcome = B_OUTCOME_LOST;
+    gMain.inBattle = FALSE;
+
+    if (gMain.savedCallback != NULL)
+        SetMainCallback2(gMain.savedCallback);
+    else
+        DoSoftReset();
+}
+
 void CB2_InitBattle(void)
 {
     MoveSaveBlocks_ResetHeap();
-    AllocateBattleResources();
-    AllocateBattleSpritesData();
-    AllocateMonSpritesGfx();
+    // The heap reset invalidates any interrupted scene's cached identity.
+    gMonSpritesGfxPtr = NULL;
+    if (!AllocateBattleResources()
+     || !AllocateBattleSpritesData()
+     || !TryAllocateMonSpritesGfx())
+    {
+        AbortBattleInitAllocationFailure();
+        return;
+    }
     RecordedBattle_ClearFrontierPassFlag();
 
     if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
@@ -1985,6 +2011,10 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
                     species = GetMiddleEvolutionForStarter(
                         GetStarterPokemonForGeneration((VarGet(VAR_STARTER_MON) + 1) % 3, VarGet(VAR_STARTER_GEN))
                     );
+                else if (i == 2 && IsRoute110RivalTrainer(trainerNum))
+                    species = GetMiddleEvolutionForStarter(
+                        GetStarterPokemonForGeneration((VarGet(VAR_STARTER_MON) + 1) % 3, VarGet(VAR_STARTER_GEN))
+                    );
 
                 for (j = 0; gSpeciesNames[species][j] != EOS; j++)
                     nameHash += gSpeciesNames[species][j];
@@ -2088,6 +2118,22 @@ static bool8 IsRustboroRivalTrainer(u16 trainerNum)
     case TRAINER_BRENDAN_RUSTBORO_TREECKO:
     case TRAINER_BRENDAN_RUSTBORO_TORCHIC:
     case TRAINER_BRENDAN_RUSTBORO_MUDKIP:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
+static bool8 IsRoute110RivalTrainer(u16 trainerNum)
+{
+    switch (trainerNum)
+    {
+    case TRAINER_MAY_ROUTE_110_TREECKO:
+    case TRAINER_MAY_ROUTE_110_TORCHIC:
+    case TRAINER_MAY_ROUTE_110_MUDKIP:
+    case TRAINER_BRENDAN_ROUTE_110_TREECKO:
+    case TRAINER_BRENDAN_ROUTE_110_TORCHIC:
+    case TRAINER_BRENDAN_ROUTE_110_MUDKIP:
         return TRUE;
     default:
         return FALSE;
@@ -3745,10 +3791,11 @@ static void TryDoEventsBeforeFirstTurn(void)
     // Primal Reversion
     for (i = 0; i < gBattlersCount; i++)
     {
-        if (CanMegaEvolve(i)
-         && GetBattlerHoldEffect(i, TRUE) == HOLD_EFFECT_PRIMAL_ORB)
+        u8 battlerId = gBattlerByTurnOrder[i];
+
+        if (CanPrimalRevert(battlerId))
         {
-            gBattlerAttacker = i;
+            gBattlerAttacker = battlerId;
             BattleScriptExecute(BattleScript_PrimalReversion);
             return;
         }
@@ -3795,7 +3842,7 @@ static void TryDoEventsBeforeFirstTurn(void)
     for (i = 0; i < BATTLE_COMMUNICATION_ENTRIES_COUNT; i++)
         gBattleCommunication[i] = 0;
 
-    for (i = 0; i < gBattlersCount; i++)
+    for (i = 0; i < min(gBattlersCount, MAX_BATTLERS_COUNT); i++)
         gBattleMons[i].status2 &= ~(STATUS2_FLINCHED);
 
     *(&gBattleStruct->turnEffectsTracker) = 0;
@@ -4592,6 +4639,9 @@ u32 GetBattlerTotalSpeedStat(u8 battlerId)
     if (gBattleMons[battlerId].status1 & STATUS1_PARALYSIS && ability != ABILITY_QUICK_FEET)
         speed /= (B_PARALYSIS_SPEED >= GEN_7 ? 2 : 4);
 
+    if (gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_SWAMP)
+        speed /= 4;
+
     return speed;
 }
 
@@ -4602,6 +4652,8 @@ s8 GetChosenMovePriority(u32 battlerId)
     gProtectStructs[battlerId].pranksterElevated = 0;
     if (gProtectStructs[battlerId].noValidMoves)
         move = MOVE_STRUGGLE;
+    else if (gBattleMons[battlerId].status2 & (STATUS2_MULTIPLETURNS | STATUS2_RECHARGE))
+        move = gLockedMoves[battlerId];
     else
         move = gBattleMons[battlerId].moves[*(gBattleStruct->chosenMovePositions + battlerId)];
 
@@ -4779,6 +4831,22 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
     return strikesFirst;
 }
 
+static bool32 ShouldSwapSwitchActions(u8 battler1, u8 battler2)
+{
+    u32 speed1 = GetBattlerTotalSpeedStat(battler1);
+    u32 speed2 = GetBattlerTotalSpeedStat(battler2);
+
+    // Modern simultaneous manual switches use action Speed. Trick Room
+    // reverses that ordering, just as it does for equal-priority move actions.
+    // Move-only ordering effects (Quick Draw, Stall, Lagging Tail) must not
+    // influence a switch.
+    if (speed1 == speed2)
+        return Random() & 1;
+    if (gFieldStatuses & STATUS_FIELD_TRICK_ROOM)
+        return speed1 > speed2;
+    return speed1 < speed2;
+}
+
 static void SetActionsAndBattlersTurnOrder(void)
 {
     s32 turnOrderId = 0;
@@ -4870,7 +4938,13 @@ static void SetActionsAndBattlersTurnOrder(void)
                 {
                     u8 battler1 = gBattlerByTurnOrder[i];
                     u8 battler2 = gBattlerByTurnOrder[j];
-                    if (gActionsByTurnOrder[i] != B_ACTION_USE_ITEM
+                    if (gActionsByTurnOrder[i] == B_ACTION_SWITCH
+                     && gActionsByTurnOrder[j] == B_ACTION_SWITCH)
+                    {
+                        if (ShouldSwapSwitchActions(battler1, battler2))
+                            SwapTurnOrder(i, j);
+                    }
+                    else if (gActionsByTurnOrder[i] != B_ACTION_USE_ITEM
                         && gActionsByTurnOrder[j] != B_ACTION_USE_ITEM
                         && gActionsByTurnOrder[i] != B_ACTION_SWITCH
                         && gActionsByTurnOrder[j] != B_ACTION_SWITCH
@@ -4927,6 +5001,8 @@ static void TurnValuesCleanUp(bool8 var0)
     gSideStatuses[1] &= ~(SIDE_STATUS_QUICK_GUARD | SIDE_STATUS_WIDE_GUARD | SIDE_STATUS_CRAFTY_SHIELD | SIDE_STATUS_MAT_BLOCK);
     gSideTimers[0].followmeTimer = 0;
     gSideTimers[1].followmeTimer = 0;
+    gBattleStruct->pledgeState = PLEDGE_COMBO_NONE;
+    gBattleStruct->pledgeOriginalMove = MOVE_NONE;
 }
 
 void SpecialStatusesClear(void)
@@ -5428,11 +5504,7 @@ static void ReturnFromBattleToOverworld(void)
     {
         UpdateRoamerHPStatus(&gEnemyParty[0]);
 
-#ifndef BUGFIX
-        if ((gBattleOutcome & B_OUTCOME_WON) || gBattleOutcome == B_OUTCOME_CAUGHT)
-#else
         if ((gBattleOutcome == B_OUTCOME_WON) || gBattleOutcome == B_OUTCOME_CAUGHT) // Bug: When Roar is used by roamer, gBattleOutcome is B_OUTCOME_PLAYER_TELEPORTED (5).
-#endif                                                                               // & with B_OUTCOME_WON (1) will return TRUE and deactivates the roamer.
             SetRoamerInactive();
     }
 

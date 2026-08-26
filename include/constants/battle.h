@@ -223,9 +223,20 @@
 #define SIDE_STATUS_WIDE_GUARD              (1 << 19)
 #define SIDE_STATUS_CRAFTY_SHIELD           (1 << 20)
 #define SIDE_STATUS_MAT_BLOCK               (1 << 21)
+#define SIDE_STATUS_RAINBOW                 (1 << 22)
+#define SIDE_STATUS_SEA_OF_FIRE             (1 << 23)
+#define SIDE_STATUS_SWAMP                   (1 << 24)
 
 #define SIDE_STATUS_HAZARDS_ANY    (SIDE_STATUS_SPIKES | SIDE_STATUS_STICKY_WEB | SIDE_STATUS_TOXIC_SPIKES | SIDE_STATUS_STEALTH_ROCK)
 #define SIDE_STATUS_SCREEN_ANY     (SIDE_STATUS_REFLECT | SIDE_STATUS_LIGHTSCREEN | SIDE_STATUS_AURORA_VEIL)
+#define SIDE_STATUS_PLEDGE_ANY     (SIDE_STATUS_RAINBOW | SIDE_STATUS_SEA_OF_FIRE | SIDE_STATUS_SWAMP)
+
+// A Pledge pair is staged across two battlers' actions. Keeping waiting and
+// attacking distinct prevents failed second moves from leaking combo power or
+// side effects into later actions.
+#define PLEDGE_COMBO_NONE          0
+#define PLEDGE_COMBO_WAITING       1
+#define PLEDGE_COMBO_ATTACK        2
 
 // Field affecting statuses.
 #define STATUS_FIELD_MAGIC_ROOM                     (1 << 0)

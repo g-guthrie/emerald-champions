@@ -9,6 +9,9 @@ SlateportCity_OceanicMuseum_2F_MapScripts:: @ 820BAFF
 SlateportCity_OceanicMuseum_2F_EventScript_CaptStern:: @ 820BB00
 	lock
 	faceplayer
+	special HasEnoughMonsForDoubleBattle
+	compare VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS
+	goto_if_ne SlateportCity_OceanicMuseum_2F_EventScript_NeedTwoHealthyPokemon
 	msgbox SlateportCity_OceanicMuseum_2F_Text_ThankYouForTheParts, MSGBOX_DEFAULT
 	closemessage
 	playbgm MUS_ENCOUNTER_AQUA, TRUE
@@ -96,6 +99,11 @@ SlateportCity_OceanicMuseum_2F_EventScript_CaptStern:: @ 820BB00
 	setflag FLAG_HIDE_RUSTBORO_CITY_DEVON_CORP_3F_EMPLOYEE
 	setvar VAR_SLATEPORT_OUTSIDE_MUSEUM_STATE, 1
 	fadescreen FADE_FROM_BLACK
+	release
+	end
+
+SlateportCity_OceanicMuseum_2F_EventScript_NeedTwoHealthyPokemon:
+	msgbox SlateportCity_OceanicMuseum_2F_Text_NeedTwoHealthyPokemon, MSGBOX_DEFAULT
 	release
 	end
 
@@ -300,34 +308,39 @@ SlateportCity_OceanicMuseum_2F_Text_SternWhoAreYou: @ 820BE69
 SlateportCity_OceanicMuseum_2F_Text_WereTeamAqua: @ 820BE93
 	.string "We're Team Aqua!\p"
 	.string "Our Boss wants those parts!\n"
-	.string "Shut your yap and fork them over!$"
+	.string "First, I'll cut your team in half!$"
 
 SlateportCity_OceanicMuseum_2F_Text_Grunt1Defeat: @ 820BEE2
-	.string "Awaaaah!\n"
-	.string "A kid beat me!$"
+	.string "I softened you up…\n"
+	.string "How did I lose?$"
 
 SlateportCity_OceanicMuseum_2F_Text_BossGoingToBeFurious: @ 820BEFA
 	.string "Oh, man, what a disaster…\n"
 	.string "The Boss is going to be furious…$"
 
 SlateportCity_OceanicMuseum_2F_Text_LetMeTakeCareOfThis: @ 820BF35
-	.string "Humph, sniveling wimp!\n"
-	.string "Let me take care of this!$"
+	.string "No time to recover!\n"
+	.string "I'll finish what he started!$"
+
+SlateportCity_OceanicMuseum_2F_Text_NeedTwoHealthyPokemon:
+	.string "Capt. Stern: I have a bad feeling.\n"
+	.string "Bring two healthy Pokémon before\l"
+	.string "we hand over these parts.$"
 
 SlateportCity_OceanicMuseum_2F_Text_Grunt2Defeat: @ 820BF66
 	.string "What?!\n"
-	.string "I lost, too!$"
+	.string "You survived both waves!$"
 
 SlateportCity_OceanicMuseum_2F_Text_MeddlingKid: @ 820BF7A
-	.string "Now what? If we don't get the parts,\n"
-	.string "we're in for it!\p"
-	.string "Arrgh, I didn't count on being meddled\n"
-	.string "with by some meddling kid!$"
+	.string "You still have Pokémon standing?\n"
+	.string "The Boss is going to be furious!\p"
+	.string "We didn't count on a kid managing\n"
+	.string "both waves this well!$"
 
 SlateportCity_OceanicMuseum_2F_Text_CameToSeeWhatsTakingSoLong: @ 820BFF2
 	.string "I came to see what was taking so\n"
-	.string "long to snatch some parts, and you\l"
-	.string "simps are held up by a mere child?$"
+	.string "long to snatch some parts, and my\l"
+	.string "crew is held up by a mere child?$"
 
 SlateportCity_OceanicMuseum_2F_Text_ArchieWarning: @ 820C059
 	.string "We are Team Aqua,\n"
@@ -357,19 +370,21 @@ SlateportCity_OceanicMuseum_2F_Text_ArchieWarning: @ 820C059
 	.string "Hmph! That look on your face!\p"
 	.string "You're not taking this seriously,\n"
 	.string "are you?\p"
-	.string "Fine!\p"
-	.string "I, Archie, will put a stop to\n"
-	.string "your meddling!$"
+	.string "Fine! You survived both waves.\p"
+	.string "Now Kyogre calls the primal rain,\n"
+	.string "and Mega Malamar turns every\l"
+	.string "setback into power!\p"
+	.string "I, Archie, will stop your meddling!$"
 
 SlateportCity_OceanicMuseum_2F_Text_ArchieDefeat:
-	.string "What?!\n"
-	.string "I, Archie, was caught off guard?$"
+	.string "What?! You broke the primal rain\n"
+	.string "and my Mega's advance?$"
 
 SlateportCity_OceanicMuseum_2F_Text_ArchieDefeated:
 	.string "Ah, whatever. You can keep the parts\n"
 	.string "for the time being.\p"
-	.string "But no one can ever stop us!\n"
-	.string "Team Aqua will prevail!\p"
+	.string "This was only Aqua's first tide!\n"
+	.string "Our complete plan will prevail!\p"
 	.string "And don't you forget it!$"
 
 SlateportCity_OceanicMuseum_2F_Text_SternThankYouForSavingUs: @ 820C2BE
@@ -462,4 +477,3 @@ SlateportCity_OceanicMuseum_2F_Text_SSAnneReplica: @ 820C93A
 	.string "“S.S. ANNE\p"
 	.string "“A replica of the luxury liner that\n"
 	.string "circles the globe.”$"
-

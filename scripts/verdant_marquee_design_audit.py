@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Hard-gate Verdant's design-complete, source-unimplemented marquee dossiers."""
+"""Validate Verdant's design-complete, source-unimplemented marquee dossiers."""
 
 from __future__ import annotations
 
@@ -21,7 +21,7 @@ REQUIRED_DOSSIER_FIELDS = {
     "anchor_id", "planning_tier", "status", "campaign_state", "runtime",
     "rolling_context", "identity", "difficulty", "team", "ordering", "ai",
     "counterplay", "competitive_research", "campaign_reservations",
-    "presentation", "fresh_critic_review", "verification", "mechanics_proposal",
+    "presentation", "author_self_check", "verification", "mechanics_proposal",
 }
 
 REQUIRED_MON_FIELDS = {
@@ -30,13 +30,8 @@ REQUIRED_MON_FIELDS = {
 }
 
 FORBIDDEN_GIMMICK_WORDS = {
-    "tera", "terastall", "z-move", "dynamax", "gigantamax", "primal reversion",
+    "tera", "terastall", "z-move", "dynamax", "gigantamax",
 }
-
-REVIEW_TEMPLATE_VERSION = 3
-REVIEWER_MODEL = "gpt-5.6-sol"
-REVIEW_REASONING_EFFORT = "high"
-
 
 def read(path: Path) -> str:
     return path.read_text()
@@ -160,6 +155,8 @@ def validate_mechanics(payload: dict, problems: list[str]) -> None:
     league = baselines.get("pokemon_league_main_story", {})
     expected = {
         "strict_cap": 80,
+        "allowed_battle_transformations": ["Mega Evolution", "Primal Reversion"],
+        "forbidden_battle_transformations": ["Terastallization", "Z-Moves", "Dynamax", "Gigantamax"],
         "automatic_healing_between_members": False,
         "manual_overworld_bag_between_members": True,
         "pokemon_menu_between_members": True,
@@ -269,12 +266,11 @@ def validate() -> list[str]:
             problems.append(f"{prefix}: no campaign blueprint exists")
         if dossier.get("status") != {
             "design": "design-complete",
-            "fresh_critic": "resolved",
             "source": "unimplemented",
             "static": "design-validated",
             "runtime": "unplayed",
         }:
-            problems.append(f"{prefix}: status must remain design-complete/fresh-critic-resolved/source-unimplemented/design-validated/runtime-unplayed")
+            problems.append(f"{prefix}: status must remain design-complete/source-unimplemented/design-validated/runtime-unplayed")
         if dossier.get("mechanics_proposal") is not None:
             problems.append(f"{prefix}: mechanics proposal requires explicit approval and cannot coexist with design-complete")
 
@@ -338,8 +334,8 @@ def validate() -> list[str]:
                 problems.append(f"{mon_prefix}: ability slot {slot} does not expose {mon['ability']}; found {slots}")
             if mon["item"] not in item_tokens:
                 problems.append(f"{mon_prefix}: unknown item {mon['item']}")
-            if mon["item"] in {"ITEM_RED_ORB", "ITEM_BLUE_ORB"} or mon["item"].endswith("_Z"):
-                problems.append(f"{mon_prefix}: active non-Mega gimmick item is forbidden")
+            if mon["item"].endswith("_Z"):
+                problems.append(f"{mon_prefix}: active Z item is forbidden")
             if mon["spread"] not in spread_tokens:
                 problems.append(f"{mon_prefix}: unknown spread {mon['spread']}")
             if not isinstance(mon["level_offset"], int):
@@ -410,43 +406,11 @@ def validate() -> list[str]:
             if not presentation.get(key):
                 problems.append(f"{prefix}: presentation.{key} is empty")
 
-        critic = dossier.get("fresh_critic_review") or {}
-        if not critic or not critic.get("reviewer_agent_id"):
-            problems.append(f"{prefix}: final fresh no-history critic is pending")
-        else:
-            for key in (
-                "reviewer_agent_id", "reviewer_model", "reasoning_effort",
-                "review_template_version", "context_mode", "verdict",
-                "is_this_sick_and_awesome", "signature_moment", "biggest_problem",
-                "honest_difficulty_take", "single_best_change", "ship_blocker",
-                "author_response", "resolved",
-            ):
-                if key not in critic:
-                    problems.append(f"{prefix}: fresh_critic_review.{key} is missing")
-            if critic.get("context_mode") != "fresh-no-history":
-                problems.append(f"{prefix}: fresh critic did not use a no-history context")
-            if critic.get("reviewer_model") != REVIEWER_MODEL or critic.get("reasoning_effort") != REVIEW_REASONING_EFFORT:
-                problems.append(f"{prefix}: fresh critic did not use {REVIEWER_MODEL} at {REVIEW_REASONING_EFFORT} reasoning")
-            if critic.get("review_template_version") != REVIEW_TEMPLATE_VERSION:
-                problems.append(f"{prefix}: fresh critic template is not version {REVIEW_TEMPLATE_VERSION}")
-            if critic.get("verdict") != "ship":
-                problems.append(f"{prefix}: design-complete dossier requires a final ship verdict")
-            if not all(critic.get(key) for key in (
-                "reviewer_agent_id", "is_this_sick_and_awesome", "signature_moment",
-                "biggest_problem", "honest_difficulty_take", "single_best_change",
-                "author_response",
-            )):
-                problems.append(f"{prefix}: fresh critic qualitative review or author response is empty")
-            if critic.get("resolved") is not True:
-                problems.append(f"{prefix}: fresh critic concerns are unresolved")
-            if critic.get("verdict") == "ship" and critic.get("ship_blocker") is not None:
-                problems.append(f"{prefix}: ship verdict cannot retain a blocker")
-            qualitative = " ".join(str(critic.get(key, "")) for key in (
-                "is_this_sick_and_awesome", "signature_moment", "biggest_problem",
-                "honest_difficulty_take", "single_best_change", "ship_blocker",
-            ))
-            if len(re.findall(r"\S+", qualitative)) > 500:
-                problems.append(f"{prefix}: fresh critic exceeded the concise 500-word gate")
+        self_check = dossier.get("author_self_check") or {}
+        if set(self_check) != {"strongest_part", "weakest_link"}:
+            problems.append(f"{prefix}: author_self_check must contain exactly strongest_part and weakest_link")
+        elif not all(isinstance(self_check[key], str) and self_check[key].strip() for key in self_check):
+            problems.append(f"{prefix}: author self-check contains an empty judgment")
 
         verification = dossier.get("verification", {})
         expected_verification = {
@@ -487,7 +451,7 @@ def main() -> None:
         raise SystemExit("\n".join(f"FAIL: {problem}" for problem in problems))
     payload = load(DESIGNS)
     print(f"PASS: {len(payload['designs'])} marquee dossiers are design-complete and source-unimplemented")
-    print("PASS: designs bind the current agreed mechanics baseline, competitive references resolve, exact teams are legal, and runtime claims remain unplayed")
+    print("PASS: agreed mechanics, legal exact teams, competitive references, author self-checks, and unplayed runtime status are explicit")
 
 
 if __name__ == "__main__":

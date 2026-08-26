@@ -29,6 +29,12 @@ def blocks(text: str, prefix: str) -> dict[str, str]:
     }
 
 
+def strip_comments(text: str) -> str:
+    text = re.sub(r"/\*.*?\*/", "", text, flags=re.S)
+    text = re.sub(r"//[^\n]*", "", text)
+    return re.sub(r"@[^\n]*", "", text)
+
+
 failures: list[str] = []
 checks = 0
 
@@ -44,13 +50,23 @@ learnset_files = (
 )
 learnset_text = "\n".join(read(path) for path in learnset_files)
 available_moves = set(re.findall(r"(?<![A-Z0-9_])MOVE_[A-Z0-9_]+", learnset_text))
+trainer_move_tokens = set(re.findall(r"\bMOVE_[A-Z0-9_]+\b", read("src/data/trainer_parties.h")))
+script_move_tokens: set[str] = set()
+for path in (ROOT / "data").rglob("*"):
+    if path.is_file() and path.suffix in {".inc", ".s"}:
+        script_move_tokens.update(re.findall(r"\bMOVE_[A-Z0-9_]+\b", path.read_text(errors="ignore")))
 
 move_data_text = read("src/data/battle_moves.h") + read("src/data/verdant_gen9_battle_moves.h")
 move_blocks = blocks(move_data_text, "MOVE")
-require(available_moves <= move_blocks.keys(), "every learnable move has battle data")
+available_moves.update(
+    move
+    for move in trainer_move_tokens | script_move_tokens
+    if move != "MOVE_NONE" and move in move_blocks
+)
+require(available_moves <= move_blocks.keys(), "every player-, trainer-, or script-usable move has battle data")
 require(
     not [move for move in available_moves if "EFFECT_PLACEHOLDER" in move_blocks[move]],
-    "no learnable move uses EFFECT_PLACEHOLDER",
+    "no player-, trainer-, or script-usable move uses EFFECT_PLACEHOLDER",
 )
 
 name_text = "\n".join(
@@ -62,18 +78,31 @@ name_text = "\n".join(
     )
 )
 named_moves = set(re.findall(r"\[(MOVE_[A-Z0-9_]+)\]", name_text))
-require(available_moves <= named_moves, "every learnable move has a displayed name")
+require(available_moves <= named_moves, "every player-, trainer-, or script-usable move has a displayed name")
 
 description_text = read("src/data/text/move_descriptions.h") + read("src/data/text/verdant_gen9_move_description_pointers.h")
 described_moves = set(re.findall(r"\[(MOVE_[A-Z0-9_]+)\s*-\s*1\]", description_text))
-require(available_moves <= described_moves, "every learnable move has a description")
+require(available_moves <= described_moves, "every player-, trainer-, or script-usable move has a description")
 
 effect_constants = read("include/constants/battle_move_effects.h")
 effect_count = int(re.search(r"#define\s+NUM_BATTLE_MOVE_EFFECTS\s+(\d+)", effect_constants).group(1))
+effect_definitions = [
+    (name, int(value))
+    for name, value in re.findall(r"^#define\s+(EFFECT_[A-Z0-9_]+)\s+(\d+)\s*$", effect_constants, re.M)
+]
+require(
+    [value for _, value in effect_definitions] == list(range(effect_count)),
+    "move effect constants are contiguous and end immediately before NUM_BATTLE_MOVE_EFFECTS",
+)
 script_table = read("data/battle_scripts_1.s").split("gBattleScriptsForMoveEffects::", 1)[1]
 script_table = script_table.split("BattleScript_BeakBlastSetUp::", 1)[0]
 require(len(re.findall(r"^\s*\.4byte\s+", script_table, re.M)) == effect_count,
         "every move effect has a script-table entry")
+dispatch_effects = re.findall(r"^\s*\.4byte\s+[^@\n]+@\s*(EFFECT_[A-Z0-9_]+)\s*$", script_table, re.M)
+require(
+    dispatch_effects == [name for name, _ in effect_definitions],
+    "move effect script-table comments align exactly with the effect constants",
+)
 
 base_stats = read("src/data/pokemon/base_stats.h") + read("src/data/pokemon/verdant_gen9_base_stats.h")
 species_abilities = set(re.findall(r"ABILITY_[A-Z0-9_]+", base_stats))
@@ -81,8 +110,10 @@ ability_text = read("src/data/text/abilities.h") + read("src/data/text/verdant_g
 text_abilities = set(re.findall(r"\[(ABILITY_[A-Z0-9_]+)\]", ability_text))
 require(species_abilities <= text_abilities, "every species-used ability has display text")
 
-runtime_text = "\n".join(path.read_text(errors="ignore") for path in (ROOT / "src").glob("*.c"))
-runtime_text += read("data/battle_scripts_1.s")
+runtime_text = strip_comments(
+    "\n".join(path.read_text(errors="ignore") for path in (ROOT / "src").glob("*.c"))
+    + read("data/battle_scripts_1.s")
+)
 require(not [ability for ability in species_abilities if ability != "ABILITY_NONE" and ability not in runtime_text],
         "every species-used ability has a runtime path")
 
@@ -210,7 +241,7 @@ require("gLastPrintedMoves[gBattlerTarget] != MOVE_CHATTER" in commands, "Sketch
 
 print(
     f"mechanics completeness: {checks - len(failures)}/{checks} checks passed; "
-    f"{len(available_moves)} learnable moves, {len(move_blocks)} move data entries, "
+    f"{len(available_moves)} usable moves, {len(move_blocks)} move data entries, "
     f"{effect_count} move effects, {len(species_abilities)} species abilities, "
     f"{len(used_hold_effects)} hold effects"
 )

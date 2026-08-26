@@ -1,10 +1,16 @@
 #include "global.h"
 #include "task.h"
 
-struct Task gTasks[NUM_TASKS];
+struct Task gTasks[NUM_TASKS + 1];
 
 static void InsertTask(u8 newTaskId);
 static u8 FindFirstActiveTask(void);
+static void ResetOverflowTask(void);
+
+bool8 IsTaskIdValid(u8 taskId)
+{
+    return taskId < NUM_TASKS;
+}
 
 void ResetTasks(void)
 {
@@ -22,11 +28,28 @@ void ResetTasks(void)
 
     gTasks[0].prev = HEAD_SENTINEL;
     gTasks[NUM_TASKS - 1].next = TAIL_SENTINEL;
+    ResetOverflowTask();
+}
+
+static void ResetOverflowTask(void)
+{
+    gTasks[NUM_TASKS].func = TaskDummy;
+    gTasks[NUM_TASKS].isActive = FALSE;
+    gTasks[NUM_TASKS].prev = HEAD_SENTINEL;
+    gTasks[NUM_TASKS].next = TAIL_SENTINEL;
+    gTasks[NUM_TASKS].priority = -1;
+    memset(gTasks[NUM_TASKS].data, 0, sizeof(gTasks[NUM_TASKS].data));
 }
 
 u8 CreateTask(TaskFunc func, u8 priority)
 {
     u8 i;
+
+    if (func == NULL)
+    {
+        ResetOverflowTask();
+        return NUM_TASKS;
+    }
 
     for (i = 0; i < NUM_TASKS; i++)
     {
@@ -41,7 +64,11 @@ u8 CreateTask(TaskFunc func, u8 priority)
         }
     }
 
-    return 0;
+    // Legacy callers commonly initialize gTasks[CreateTask(...)]. Returning a
+    // dedicated in-bounds dummy preserves that pattern without corrupting an
+    // active real task. The overflow slot is never inserted or run.
+    ResetOverflowTask();
+    return NUM_TASKS;
 }
 
 static void InsertTask(u8 newTaskId)
@@ -83,6 +110,9 @@ static void InsertTask(u8 newTaskId)
 
 void DestroyTask(u8 taskId)
 {
+    if (!IsTaskIdValid(taskId))
+        return;
+
     if (gTasks[taskId].isActive)
     {
         gTasks[taskId].isActive = FALSE;
@@ -140,6 +170,9 @@ void SetTaskFuncWithFollowupFunc(u8 taskId, TaskFunc func, TaskFunc followupFunc
 {
     u8 followupFuncIndex = NUM_TASK_DATA - 2; // Should be const.
 
+    if (!IsTaskIdValid(taskId))
+        return;
+
     gTasks[taskId].data[followupFuncIndex] = (s16)((u32)followupFunc);
     gTasks[taskId].data[followupFuncIndex + 1] = (s16)((u32)followupFunc >> 16); // Store followupFunc as two half-words in the data array.
     gTasks[taskId].func = func;
@@ -149,7 +182,11 @@ void SwitchTaskToFollowupFunc(u8 taskId)
 {
     u8 followupFuncIndex = NUM_TASK_DATA - 2; // Should be const.
 
-    gTasks[taskId].func = (TaskFunc)((u16)(gTasks[taskId].data[followupFuncIndex]) | (gTasks[taskId].data[followupFuncIndex + 1] << 16));
+    if (!IsTaskIdValid(taskId))
+        return;
+
+    gTasks[taskId].func = (TaskFunc)((u16)gTasks[taskId].data[followupFuncIndex]
+                                  | ((u32)(u16)gTasks[taskId].data[followupFuncIndex + 1] << 16));
 }
 
 bool8 FuncIsActiveTask(TaskFunc func)
@@ -188,7 +225,7 @@ u8 GetTaskCount(void)
 
 void SetWordTaskArg(u8 taskId, u8 dataElem, u32 value)
 {
-    if (dataElem < NUM_TASK_DATA - 1)
+    if (IsTaskIdValid(taskId) && dataElem < NUM_TASK_DATA - 1)
     {
         gTasks[taskId].data[dataElem] = value;
         gTasks[taskId].data[dataElem + 1] = value >> 16;
@@ -197,8 +234,9 @@ void SetWordTaskArg(u8 taskId, u8 dataElem, u32 value)
 
 u32 GetWordTaskArg(u8 taskId, u8 dataElem)
 {
-    if (dataElem < NUM_TASK_DATA - 1)
-        return (u16)gTasks[taskId].data[dataElem] | (gTasks[taskId].data[dataElem + 1] << 16);
+    if (IsTaskIdValid(taskId) && dataElem < NUM_TASK_DATA - 1)
+        return (u16)gTasks[taskId].data[dataElem]
+             | ((u32)(u16)gTasks[taskId].data[dataElem + 1] << 16);
     else
         return 0;
 }

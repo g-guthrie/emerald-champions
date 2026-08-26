@@ -1,6 +1,7 @@
 #include "global.h"
 #include "malloc.h"
 #include "battle.h"
+#include "battle_gfx_sfx_util.h"
 #include "battle_message.h"
 #include "bg.h"
 #include "data.h"
@@ -248,7 +249,13 @@ void EvolutionScene(struct Pokemon* mon, u16 postEvoSpecies, bool8 canStopEvo, u
     gReservedSpritePaletteCount = 4;
 
     sEvoStructPtr = AllocZeroed(sizeof(struct EvoInfo));
-    AllocateMonSpritesGfx();
+    if (sEvoStructPtr == NULL || !TryAllocateMonSpritesGfx())
+    {
+        FREE_AND_SET_NULL(sEvoStructPtr);
+        FreeAllWindowBuffers();
+        SetMainCallback2(gCB2_AfterEvolution);
+        return;
+    }
 
     GetMonData(mon, MON_DATA_NICKNAME, name);
     StringCopy10(gStringVar1, name);

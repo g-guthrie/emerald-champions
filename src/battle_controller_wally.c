@@ -1463,7 +1463,15 @@ static void WallyHandleIntroTrainerBallThrow(void)
         gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
 
     gBattleSpritesDataPtr->animationData->introAnimActive = TRUE;
-    gBattlerControllerFuncs[gActiveBattler] = BattleControllerDummy;
+    if (IsTaskIdValid(taskId))
+    {
+        gBattlerControllerFuncs[gActiveBattler] = BattleControllerDummy;
+    }
+    else
+    {
+        gTasks[taskId].data[1] = 31;
+        Task_StartSendOutAnim(taskId);
+    }
 }
 
 static void StartSendOutAnim(u8 battlerId)

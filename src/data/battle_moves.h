@@ -3687,7 +3687,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
-        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED | FLAG_SHEER_FORCE_BOOST,
         .split = SPLIT_PHYSICAL,
     },
 
@@ -8249,7 +8249,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         #else
             .power = 50,
         #endif
-        .effect = EFFECT_HIT, //EFFECT_PLEDGE,
+        .effect = EFFECT_PLEDGE,
         .type = TYPE_WATER,
         .accuracy = 100,
         .pp = 10,
@@ -8267,7 +8267,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         #else
             .power = 50,
         #endif
-        .effect = EFFECT_HIT, //EFFECT_PLEDGE,
+        .effect = EFFECT_PLEDGE,
         .type = TYPE_FIRE,
         .accuracy = 100,
         .pp = 10,
@@ -8285,7 +8285,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         #else
             .power = 50,
         #endif
-        .effect = EFFECT_HIT, //EFFECT_PLEDGE,
+        .effect = EFFECT_PLEDGE,
         .type = TYPE_GRASS,
         .accuracy = 100,
         .pp = 10,

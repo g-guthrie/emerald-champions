@@ -875,6 +875,7 @@ const struct SpriteTemplate gBellSpriteTemplate =
 };
 
 #define NUM_MUSIC_NOTE_PAL_TAGS  3
+#define MUSIC_NOTE_PAL_SIZE      (16 * sizeof(u16))
 
 static const u16 sMusicNotePaletteTagsTable[NUM_MUSIC_NOTE_PAL_TAGS] =
 {
@@ -3044,18 +3045,50 @@ static void AnimSpeedDust(struct Sprite *sprite)
 void AnimTask_LoadMusicNotesPals(u8 taskId)
 {
     int i;
+    u32 bufferSize;
+    u8 *buffer = NULL;
+    bool8 loaded = FALSE;
     u8 paletteNums[NUM_MUSIC_NOTE_PAL_TAGS];
 
-    paletteNums[0] = IndexOfSpritePaletteTag(ANIM_TAG_MUSIC_NOTES_2);
-    for (i = 1; i < NUM_MUSIC_NOTE_PAL_TAGS; i++)
-        paletteNums[i] = AllocSpritePalette(ANIM_SPRITES_START - i);
-
-    gMonSpritesGfxPtr->buffer = AllocZeroed(0x2000);
-    LZDecompressWram(gBattleAnimSpritePal_MusicNotes2, gMonSpritesGfxPtr->buffer);
     for (i = 0; i < NUM_MUSIC_NOTE_PAL_TAGS; i++)
-        LoadPalette(&gMonSpritesGfxPtr->buffer[i * 32], (u16)((paletteNums[i] << 4) + 0x100), 32);
+        paletteNums[i] = 0xFF;
 
-    FREE_AND_SET_NULL(gMonSpritesGfxPtr->buffer);
+    paletteNums[0] = IndexOfSpritePaletteTag(ANIM_TAG_MUSIC_NOTES_2);
+    if (paletteNums[0] == 0xFF)
+        goto cleanup;
+
+    for (i = 1; i < NUM_MUSIC_NOTE_PAL_TAGS; i++)
+    {
+        paletteNums[i] = AllocSpritePalette(ANIM_SPRITES_START - i);
+        if (paletteNums[i] == 0xFF)
+            goto cleanup;
+    }
+
+    bufferSize = GetDecompressedDataSize(gBattleAnimSpritePal_MusicNotes2);
+    if (bufferSize < NUM_MUSIC_NOTE_PAL_TAGS * MUSIC_NOTE_PAL_SIZE)
+        goto cleanup;
+
+    buffer = AllocZeroed(bufferSize);
+    if (buffer == NULL)
+        goto cleanup;
+
+    LZDecompressWram(gBattleAnimSpritePal_MusicNotes2, buffer);
+    for (i = 0; i < NUM_MUSIC_NOTE_PAL_TAGS; i++)
+        LoadPalette(&buffer[i * MUSIC_NOTE_PAL_SIZE], (u16)((paletteNums[i] << 4) + 0x100), MUSIC_NOTE_PAL_SIZE);
+    loaded = TRUE;
+
+cleanup:
+    TRY_FREE_AND_SET_NULL(buffer);
+    if (!loaded)
+    {
+        // Palette zero is owned by the animation script's loadspritegfx.
+        // Release only the extra palette slots successfully allocated here.
+        for (i = 1; i < NUM_MUSIC_NOTE_PAL_TAGS; i++)
+        {
+            if (paletteNums[i] != 0xFF)
+                FreeSpritePaletteByTag(ANIM_SPRITES_START - i);
+        }
+    }
     DestroyAnimVisualTask(taskId);
 }
 
@@ -3071,10 +3104,16 @@ void AnimTask_FreeMusicNotesPals(u8 taskId)
 static void SetMusicNotePalette(struct Sprite *sprite, u8 a, u8 b)
 {
     u8 tile;
+    u8 paletteNum;
     tile = (b & 1);
     tile = ((-tile | tile) >> 31) & 32;
     sprite->oam.tileNum += tile + (a << 2);
-    sprite->oam.paletteNum = IndexOfSpritePaletteTag(sMusicNotePaletteTagsTable[b >> 1]);
+    paletteNum = IndexOfSpritePaletteTag(sMusicNotePaletteTagsTable[b >> 1]);
+    if (paletteNum == 0xFF)
+        paletteNum = IndexOfSpritePaletteTag(ANIM_TAG_MUSIC_NOTES_2);
+    if (paletteNum == 0xFF)
+        paletteNum = 0;
+    sprite->oam.paletteNum = paletteNum;
 }
 
 static void AnimHealBellMusicNote(struct Sprite *sprite)

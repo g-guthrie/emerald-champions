@@ -9527,6 +9527,12 @@ extern const u32 gBattleAnimBgPalette_WonderRoom[];
 extern const u32 gBattleAnimSpritePal_SteelBeam[];
 extern const u32 gBattleAnimSpritePal_Poltergeist[];
 extern const u32 gBattleAnimBgPalette_SteelBeam[];
+extern const u32 gBattleAnimBgImage_Rainbow[];
+extern const u32 gBattleAnimBgPalette_Rainbow[];
+extern const u32 gBattleAnimBgTilemap_Rainbow[];
+extern const u32 gBattleAnimBgImage_Swamp[];
+extern const u32 gBattleAnimBgPalette_Swamp[];
+extern const u32 gBattleAnimBgTilemap_Swamp[];
 
 extern const u32 gMetalShineGfx[];
 extern const u32 gMetalShinePalette[];

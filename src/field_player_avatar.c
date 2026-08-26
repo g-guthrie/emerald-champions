@@ -1472,7 +1472,8 @@ static void StartStrengthAnim(u8 a, u8 b)
 
     gTasks[taskId].data[1] = a;
     gTasks[taskId].data[2] = b;
-    Task_PushBoulder(taskId);
+    if (taskId < NUM_TASKS)
+        Task_PushBoulder(taskId);
 }
 
 static void Task_PushBoulder(u8 taskId)
@@ -1539,7 +1540,10 @@ static bool8 PushBoulder_End(struct Task *task, struct ObjectEvent *playerObject
 
 static void DoPlayerMatJump(void)
 {
-    DoPlayerAvatarSecretBaseMatJump(CreateTask(DoPlayerAvatarSecretBaseMatJump, 0xFF));
+    u8 taskId = CreateTask(DoPlayerAvatarSecretBaseMatJump, 0xFF);
+
+    if (IsTaskIdValid(taskId))
+        DoPlayerAvatarSecretBaseMatJump(taskId);
 }
 
 static void DoPlayerAvatarSecretBaseMatJump(u8 taskId)
@@ -1573,7 +1577,8 @@ static void DoPlayerMatSpin(void)
 {
     u8 taskId = CreateTask(PlayerAvatar_DoSecretBaseMatSpin, 0xFF);
 
-    PlayerAvatar_DoSecretBaseMatSpin(taskId);
+    if (taskId < NUM_TASKS)
+        PlayerAvatar_DoSecretBaseMatSpin(taskId);
 }
 
 static void PlayerAvatar_DoSecretBaseMatSpin(u8 taskId)
@@ -1642,7 +1647,10 @@ static bool8 PlayerAvatar_SecretBaseMatSpinStep3(struct Task *task, struct Objec
 
 static void CreateStopSurfingTask(u8 direction)
 {
-    u8 taskId;
+    u8 taskId = CreateTask(Task_StopSurfingInit, 0xFF);
+
+    if (!IsTaskIdValid(taskId))
+        return;
 
     ScriptContext2_Enable();
     Overworld_ClearSavedMusic();
@@ -1650,7 +1658,6 @@ static void CreateStopSurfingTask(u8 direction)
     gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_SURFING;
     gPlayerAvatar.flags |= PLAYER_AVATAR_FLAG_ON_FOOT;
     gPlayerAvatar.preventStep = TRUE;
-    taskId = CreateTask(Task_StopSurfingInit, 0xFF);
     gTasks[taskId].data[0] = direction;
     Task_StopSurfingInit(taskId);
 }
@@ -1729,7 +1736,8 @@ void StartFishing(u8 rod)
     u8 taskId = CreateTask(Task_Fishing, 0xFF);
 
     gTasks[taskId].tFishingRod = rod;
-    Task_Fishing(taskId);
+    if (taskId < NUM_TASKS)
+        Task_Fishing(taskId);
 }
 
 static void Task_Fishing(u8 taskId)
@@ -2128,7 +2136,10 @@ static void Task_DoPlayerSpinEntrance(u8 taskId);
 
 void DoPlayerSpinEntrance(void)
 {
-    Task_DoPlayerSpinEntrance(CreateTask(Task_DoPlayerSpinEntrance, 0));
+    u8 taskId = CreateTask(Task_DoPlayerSpinEntrance, 0);
+
+    if (IsTaskIdValid(taskId))
+        Task_DoPlayerSpinEntrance(taskId);
 }
 
 bool32 IsPlayerSpinEntranceActive(void)
@@ -2138,7 +2149,10 @@ bool32 IsPlayerSpinEntranceActive(void)
 
 void DoPlayerSpinExit(void)
 {
-    Task_DoPlayerSpinExit(CreateTask(Task_DoPlayerSpinExit, 0));
+    u8 taskId = CreateTask(Task_DoPlayerSpinExit, 0);
+
+    if (IsTaskIdValid(taskId))
+        Task_DoPlayerSpinExit(taskId);
 }
 
 bool32 IsPlayerSpinExitActive(void)

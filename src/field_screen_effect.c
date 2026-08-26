@@ -1243,7 +1243,9 @@ void DoOrbEffect(void)
 void FadeOutOrbEffect(void)
 {
     u8 taskId = FindTaskIdByFunc(Task_OrbEffect);
-    gTasks[taskId].tState = 6;
+
+    if (taskId != TASK_NONE)
+        gTasks[taskId].tState = 6;
 }
 
 #undef tBlueOrb

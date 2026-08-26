@@ -936,7 +936,8 @@ u8 CreateBicycleBgAnimationTask(u8 mode, u16 bg1Speed, u16 bg2Speed, u16 bg3Spee
     gTasks[taskId].tBg3Speed = bg3Speed;
     gTasks[taskId].tBg3PosHi = 8;
     gTasks[taskId].tBg3PosLo = 0;
-    Task_BicycleBgAnimation(taskId);
+    if (taskId < NUM_TASKS)
+        Task_BicycleBgAnimation(taskId);
     return taskId;
 }
 

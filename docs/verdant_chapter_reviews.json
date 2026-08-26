@@ -1,0 +1,152 @@
+{
+  "version": 1,
+  "scope": "Durable comparative reviews at route, Gym, faction, and other natural campaign checkpoints. These reviews validate source-closed design variety; they never claim observed runtime difficulty.",
+  "reviews": [
+    {
+      "chapter_id": "POST_BRAWLY_ROUTE109_AND_SEASHORE_HOUSE",
+      "encounter_indexes": [37, 38, 39, 40, 41, 42, 43, 44, 45],
+      "encounter_ids": [
+        "BATTLE_037_ROUTE_109_HUEY",
+        "BATTLE_038_ROUTE_109_HAILEY",
+        "BATTLE_039_ROUTE_109_EDMOND",
+        "BATTLE_040_ROUTE_109_RICKY",
+        "BATTLE_041_ROUTE_109_LOLA",
+        "BATTLE_042_ROUTE_109_CHANDLER",
+        "BATTLE_043_SEASHORE_HOUSE_DWAYNE",
+        "BATTLE_044_SEASHORE_HOUSE_JOHANNA",
+        "BATTLE_045_SEASHORE_HOUSE_SIMON"
+      ],
+      "campaign_state": {
+        "strict_cap": 30,
+        "mega_access": true,
+        "chapter_start": "Briney lands the player on Route 109 after Brawly",
+        "chapter_end": "All three freely ordered Seashore House trainers are source-closed and the shared Soda Pop reward is available"
+      },
+      "derived_summary": {
+        "source_closed_encounters": 9,
+        "format_counts": {"single": 5, "double": 4},
+        "difficulty_min": 8.6,
+        "difficulty_max": 9.3,
+        "difficulty_average": 8.94,
+        "exact_species_used": 31,
+        "within_chapter_species_repeats": []
+      },
+      "comparative_findings": {
+        "strongest_part": "The chapter changes player questions continuously: harbor weather, ally-safe spread damage, Future Sight timing, one hunger setup clock, Flower Gift sun, Hydration rain, a direct thermal ladder, Steam Engine ally activation, and finally a four-mount Tailwind formation.",
+        "weakest_link": "Nine consecutive encounters all target at least 8.6, so runtime fatigue remains possible even though formats and engines vary. The intended answer is the House's free ordering, useful healing reward, and mixed single/double pacing; representative runtime tests must still measure actual fatigue.",
+        "difficulty_disposition": "Static targets satisfy Verdant's hard-game identity without using a route-level boss score. No target is reduced before runtime evidence; levels remain the first tuning knob.",
+        "species_disposition": "No exact species repeats inside the nine-encounter chapter. Sandygast repeats once across the wider campaign after thirty-eight encounters, moving from Billy's simple shoreline single to Johanna's Eviolite Water Compaction reserve; the distinct role earns the reuse.",
+        "rare_showcase_disposition": "Shaymin, Phione, Volcanion, and Keldeo appear as coherent flower, tide, steam, and sea-rider pieces. Their density is intentional under Verdant's rare-Pokémon promise and none is present solely to repair the next coverage slot.",
+        "mechanic_collision_disposition": "Huey's harbor rain and Chandler's Hydration rain are separated by four encounters and ask different questions. Lola's sun is a single Flower Gift window. Dwayne has no field engine, Johanna has one fragile ally activation, and Simon has one Tailwind setter; no primary engine is duplicated.",
+        "reward_and_story_disposition": "Dwayne, Johanna, and Simon retain independent flags, any-order access, guarded doubles where needed, the retry-safe six-Soda-Pop reward, and 300-yen follow-up sales. No new reward or progression rule was invented.",
+        "next_chapter_handoff": "The museum should avoid another ordinary weather, ally-activation, Tailwind, or route-single module. Its first two no-heal Grunts should form one explicit attrition lesson, while the healed Archie battle should be a fresh boss that deliberately authors and verifies its allowed Primal Kyogre plus Mega interaction."
+      },
+      "runtime_status": "static-review-runtime-unplayed",
+      "required_runtime_samples": [
+        "Battle 38 ally-safe spread double",
+        "Battle 41 Flower Gift sun double",
+        "Battle 42 Hydration rain single",
+        "Battle 44 Steam Engine activation double",
+        "Battle 45 Tailwind convoy double",
+        "All three House battles in at least two player-selected orders"
+      ],
+      "disposition": "source-closed chapter review passes; runtime observation remains required before release closure"
+    },
+    {
+      "chapter_id": "SLATEPORT_MUSEUM_AQUA_GAUNTLET",
+      "encounter_indexes": [46, 47, 48],
+      "encounter_ids": [
+        "BATTLE_046_SLATEPORT_MUSEUM_AQUA_GRUNT_1",
+        "BATTLE_047_SLATEPORT_MUSEUM_AQUA_GRUNT_2",
+        "BATTLE_048_SLATEPORT_MUSEUM_ARCHIE"
+      ],
+      "campaign_state": {
+        "strict_cap": 30,
+        "mega_access": true,
+        "chapter_start": "Captain Stern interaction begins a locked two-Grunt no-heal sequence with a two-usable-Pokémon entry requirement",
+        "chapter_end": "The player receives a full heal before target-10 Archie, another full heal after victory, Devon Goods delivery, and Route 110 access"
+      },
+      "derived_summary": {
+        "source_closed_encounters": 3,
+        "format_counts": {"double": 3},
+        "difficulty_min": 9.4,
+        "difficulty_max": 10,
+        "difficulty_average": 9.63,
+        "exact_species_used": 14,
+        "within_chapter_species_repeats": []
+      },
+      "comparative_findings": {
+        "strongest_part": "The three battles form one causal story: Grunt 1 taxes persistent HP, status, and PP; Grunt 2 conditionally converts those exact states without depending on them; the full heal then cleanly resets the player for Primal Kyogre plus Mega Malamar as a genuine fresh boss.",
+        "weakest_link": "A player who exits Grunt 1 with one survivor legally faces a compressed 1-v-2, and Primal Kyogre is an enormous cap-30 stat spike after the reset. Both are intentional hard-game states, but representative runtime evidence is mandatory before either can be called fair.",
+        "difficulty_disposition": "The Grunts target 9.4 and 9.5 as one no-heal resource puzzle; Archie alone targets 10 after a full restore. Levels remain the first tuning knob, with Zoroark and Mega Malamar adjusted before weakening the connected strategies.",
+        "species_disposition": "Fourteen exact species appear with no repetition inside the block. Clauncher and Hitmontop repeat earlier campaign appearances only with written, materially different roles: flexible Venoshock cleanup and World Champion Eject/Wide Guard/Feint positioning.",
+        "rare_showcase_disposition": "Primal Kyogre and Mega Malamar are explicit leader-grade transformation reveals authorized by the Mega-and-Primal policy. Their placement spends the Slateport Archie reservation while preserving the later Toronto-derived complete doctrine.",
+        "mechanic_collision_disposition": "The three-double format streak is story-mandated, but the questions change from attrition to cleanup to fully healed primordial positioning. No Grunt weather, Tailwind, ally activation, or Mega leaks into Archie's distinct transformation climax.",
+        "reward_and_story_disposition": "The entry guard occurs before actors move, no heal or menu interrupts the Grunts, one-slot Grunt 2 is source-supported, and both scripted Archie heals and all Devon Goods/Route 110 flags remain intact. No item reward is invented.",
+        "next_chapter_handoff": "Battle 49 is another unavoidable native double because Isabel and Kaleb share the only Route 110 corridor. Its two-opponent formation must supply a lighter fresh question, and the following Trick House block should provide the earliest sensible format or tempo relief."
+      },
+      "runtime_status": "static-review-runtime-unplayed",
+      "required_runtime_samples": [
+        "Two healthy entrants completing both Grunts without carried poison",
+        "Two healthy entrants carrying poison and sub-half HP into Grunt 2",
+        "One-survivor 1-v-2 Grunt 2 continuation",
+        "Loss and full scene replay from Stern",
+        "Archie versus Wide Guard or Water-immunity preparation",
+        "Archie versus Cloud Nine or Air Lock weather suppression",
+        "Archie endgame versus Bug, Fairy, burn, Haze, phazing, and strong special Mega Malamar answers"
+      ],
+      "disposition": "source-closed faction-block review passes; runtime observation remains required before release closure"
+    },
+    {
+      "chapter_id": "ROUTE110_SOUTH_TRICK_HOUSE_AND_RIVAL",
+      "encounter_indexes": [49, 50, 51, 52, 53, 54],
+      "encounter_ids": [
+        "BATTLE_049_ROUTE_110_ISABEL_KALEB",
+        "BATTLE_050_TRICK_HOUSE_PUZZLE_1_SALLY",
+        "BATTLE_051_TRICK_HOUSE_PUZZLE_1_EDDIE",
+        "BATTLE_052_TRICK_HOUSE_PUZZLE_1_ROBIN",
+        "BATTLE_053_ROUTE_110_TIMMY",
+        "BATTLE_054_ROUTE_110_RIVAL"
+      ],
+      "campaign_state": {
+        "strict_cap": 30,
+        "mega_access": true,
+        "chapter_start": "The Museum heal and story release place the player at the forced Isabel/Kaleb Route 110 corridor",
+        "chapter_end": "The generation-correct six-member rival is defeated, the Itemfinder is awarded, Route 110 state advances, and the northern road toward Mauville opens"
+      },
+      "derived_summary": {
+        "source_closed_encounters": 6,
+        "format_counts": {"double": 3, "native-pair double": 1, "single": 2},
+        "difficulty_min": 8.7,
+        "difficulty_max": 9.7,
+        "difficulty_average": 9.07,
+        "exact_species_used": 49,
+        "within_chapter_species_repeats": ["SPECIES_FROGADIER"]
+      },
+      "comparative_findings": {
+        "strongest_part": "The six encounters never ask the same primary question: a branch-safe Round chorus, four sequential cutting disciplines, Arena Trap with invariant Ground immunity, Follow Me versus Soul-Heart target order, four low-cohesion exact local catches, and finally a six-member generation-correct adaptive rival.",
+        "weakest_link": "Protect and speed-or-priority density are high across the rolling window, and completing Puzzle 1 forces two demanding doubles after Sally before the 9.7 rival milestone. The two singles and free healing/menu access between map encounters are intentional relief, but runtime must measure fatigue rather than assuming variety alone solves it.",
+        "difficulty_disposition": "Targets span 8.7 to 9.7 and average 9.07. Timmy is the deliberate concentration break; the rival is the severe required climax. No level is reduced before representative runtime evidence, and offsets remain the first tuning knob.",
+        "species_disposition": "Forty-nine exact species are represented. Frogadier is the only within-chapter repeat: it is one possible B49 joint/split Protean chorus reserve and, only for the corresponding Kalos starter branch, the actual same-generation rival counter in B54. Rival continuity earns that conditional reuse rather than forcing a replacement.",
+        "rare_showcase_disposition": "Meloetta, Kartana, Magearna, Type: Null, and Dracovish are integrated as sound lead, paper blade, Soul-Heart focus, rival continuity seed, and Fishious Rend opener. Their density is intentional under Verdant's rare-Pokémon promise, while Timmy deliberately showcases obtainable local rarity rather than another assigned legendary.",
+        "mechanic_collision_disposition": "Round coordination, physical singles sequencing, trapping, redirection and target order, low-cohesion ecological singles, and mixed rival positioning remain mechanically distinct. Timmy's rejected Plus/Minus draft was removed specifically because it duplicated the recent every-member-circuit shape.",
+        "reward_and_story_disposition": "Isabel alone retains Match Call ownership; Puzzle 1 trainers are forced by collision but not falsely added to the Mental Herb flag logic; Timmy has no invented reward; the rival loss remains retryable at state 0 and victory preserves the native Itemfinder and bike exit. No heal, Mega, Primal, or extra item is inserted.",
+        "next_chapter_handoff": "Battle 55 is Edwin and Joseph's native joint-or-split pair. It should avoid another broad Protect-heavy speed module, preserve Edwin's sole Match Call ownership, and exploit the exact prefix-slice branch without copying Isabel and Kaleb's all-member circuit."
+      },
+      "runtime_status": "static-review-runtime-unplayed",
+      "required_runtime_samples": [
+        "Battle 49 joint 3+3 and both independent split-four branches",
+        "Battle 50 singles pacing and level-33 Kartana counterplay",
+        "Puzzle 1 in both Sally-Robin-Eddie and Sally-Eddie-Robin orders",
+        "One-usable-player continuation against Eddie and Robin",
+        "Timmy with early Ground offense and with no Ground type",
+        "Route 110 rival Fire, Water, and Grass elemental branches",
+        "Route 110 rival using at least one non-Hoenn starter generation from each elemental slot",
+        "Rival opening versus Water immunity, Fake Out, opposing speed control, and Choice-lock exploitation",
+        "Rival Metang, Alcremie, and Duraludon endgame counterplay",
+        "Rival loss retry and Itemfinder/state-1 victory flow"
+      ],
+      "disposition": "source-closed Route 110 south chapter review passes; runtime observation remains required before release closure"
+    }
+  ]
+}

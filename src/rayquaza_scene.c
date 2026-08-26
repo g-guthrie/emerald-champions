@@ -2880,7 +2880,11 @@ static void ChasesAway_CreateTrioSprites(u8 taskId)
 
 static void ChasesAway_PushDuoBack(u8 taskId)
 {
-    s16 *taskData = gTasks[taskId].data;
+    s16 *taskData;
+
+    if (taskId >= NUM_TASKS)
+        return;
+    taskData = gTasks[taskId].data;
 
     gSprites[tGroudonSpriteId].callback = SpriteCB_ChasesAway_DuoRingPush;
     gSprites[tGroudonSpriteId].sTimer = 0;

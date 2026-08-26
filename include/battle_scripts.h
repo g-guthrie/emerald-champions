@@ -415,6 +415,7 @@ extern const u8 BattleScript_AttackWeakenedByStrongWinds[];
 extern const u8 BattleScript_BlockedByPrimalWeatherEnd3[];
 extern const u8 BattleScript_BlockedByPrimalWeatherRet[];
 extern const u8 BattleScript_PrimalReversion[];
+extern const u8 BattleScript_PrimalReversionRet[];
 extern const u8 BattleScript_HyperspaceFuryRemoveProtect[];
 extern const u8 BattleScript_SelectingNotAllowedMoveGorillaTactics[];
 extern const u8 BattleScript_WanderingSpiritActivates[];
@@ -436,5 +437,12 @@ extern const u8 BattleScript_BurnUpRemoveType[];
 extern const u8 BattleScript_CudChewActivates[];
 extern const u8 BattleScript_ToxicDebrisActivates[];
 extern const u8 BattleScript_MoveEffectSaltCure[];
+extern const u8 BattleScript_EffectCombinedPledge_Water[];
+extern const u8 BattleScript_EffectCombinedPledge_Fire[];
+extern const u8 BattleScript_EffectCombinedPledge_Grass[];
+extern const u8 BattleScript_TheRainbowDisappeared[];
+extern const u8 BattleScript_HurtByTheSeaOfFire[];
+extern const u8 BattleScript_TheSeaOfFireDisappeared[];
+extern const u8 BattleScript_TheSwampDisappeared[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

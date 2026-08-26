@@ -1,4 +1,5 @@
 #include "global.h"
+#include "battle_gfx_sfx_util.h"
 #include "pokemon.h"
 #include "egg_hatch.h"
 #include "pokedex.h"
@@ -52,6 +53,8 @@ struct EggHatchData
     u8 unused_A;
     u16 species;
     u8 textColor[3];
+    void *bg0TilemapBuffer;
+    void *bg1TilemapBuffer;
 };
 
 extern const u32 gTradePlatform_Tilemap[];
@@ -71,6 +74,7 @@ static void SpriteCB_EggShard(struct Sprite* sprite);
 static void EggHatchPrintMessage(u8 windowId, u8* string, u8 x, u8 y, u8 speed);
 static void CreateRandomEggShardSprite(void);
 static void CreateEggShardSprite(u8 x, u8 y, s16 data1, s16 data2, s16 data3, u8 spriteAnimIndex);
+static void FreeEggHatchSceneResources(void);
 
 // IWRAM bss
 static struct EggHatchData *sEggHatchData;
@@ -483,8 +487,20 @@ static void CB2_EggHatch_0(void)
     case 0:
         SetGpuReg(REG_OFFSET_DISPCNT, 0);
 
-        sEggHatchData = Alloc(sizeof(struct EggHatchData));
-        AllocateMonSpritesGfx();
+        sEggHatchData = AllocZeroed(sizeof(struct EggHatchData));
+        if (sEggHatchData == NULL)
+        {
+            SetMainCallback2(CB2_ReturnToField);
+            return;
+        }
+
+        sEggHatchData->windowId = WINDOW_NONE;
+        if (!TryAllocateMonSpritesGfx())
+        {
+            FREE_AND_SET_NULL(sEggHatchData);
+            SetMainCallback2(CB2_ReturnToField);
+            return;
+        }
         sEggHatchData->eggPartyID = gSpecialVar_0x8004;
         sEggHatchData->eggShardVelocityID = 0;
 
@@ -501,8 +517,16 @@ static void CB2_EggHatch_0(void)
         ChangeBgY(0, 0, 0);
 
         SetBgAttribute(1, BG_ATTR_PRIORITY, 2);
-        SetBgTilemapBuffer(1, Alloc(0x1000));
-        SetBgTilemapBuffer(0, Alloc(0x2000));
+        sEggHatchData->bg1TilemapBuffer = Alloc(0x1000);
+        sEggHatchData->bg0TilemapBuffer = Alloc(0x2000);
+        if (sEggHatchData->bg0TilemapBuffer == NULL || sEggHatchData->bg1TilemapBuffer == NULL)
+        {
+            FreeEggHatchSceneResources();
+            SetMainCallback2(CB2_ReturnToField);
+            return;
+        }
+        SetBgTilemapBuffer(1, sEggHatchData->bg1TilemapBuffer);
+        SetBgTilemapBuffer(0, sEggHatchData->bg0TilemapBuffer);
 
         DeactivateAllTextPrinters();
         ResetPaletteFade();
@@ -514,7 +538,12 @@ static void CB2_EggHatch_0(void)
         gMain.state++;
         break;
     case 1:
-        InitWindows(sWinTemplates_EggHatch);
+        if (!InitWindows(sWinTemplates_EggHatch))
+        {
+            FreeEggHatchSceneResources();
+            SetMainCallback2(CB2_ReturnToField);
+            return;
+        }
         sEggHatchData->windowId = 0;
         gMain.state++;
         break;
@@ -566,9 +595,21 @@ static void CB2_EggHatch_0(void)
 static void EggHatchSetMonNickname(void)
 {
     SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar3);
-    FreeMonSpritesGfx();
-    Free(sEggHatchData);
     SetMainCallback2(CB2_ReturnToField);
+}
+
+static void FreeEggHatchSceneResources(void)
+{
+    if (sEggHatchData == NULL)
+        return;
+
+    FreeMonSpritesGfx();
+    FreeAllWindowBuffers();
+    UnsetBgTilemapBuffer(0);
+    UnsetBgTilemapBuffer(1);
+    Free(sEggHatchData->bg0TilemapBuffer);
+    Free(sEggHatchData->bg1TilemapBuffer);
+    FREE_AND_SET_NULL(sEggHatchData);
 }
 
 static void Task_EggHatchPlayBGM(u8 taskID)
@@ -584,10 +625,7 @@ static void Task_EggHatchPlayBGM(u8 taskID)
     {
         PlayBGM(MUS_EVOLUTION);
         DestroyTask(taskID);
-        // UB: task is destroyed, yet the value is incremented
-        #ifdef UBFIX
         return;
-        #endif
     }
     gTasks[taskID].data[0]++;
 }
@@ -676,8 +714,9 @@ static void CB2_EggHatch_1(void)
             species = GetMonData(&gPlayerParty[sEggHatchData->eggPartyID], MON_DATA_SPECIES);
             gender = GetMonGender(&gPlayerParty[sEggHatchData->eggPartyID]);
             personality = GetMonData(&gPlayerParty[sEggHatchData->eggPartyID], MON_DATA_PERSONALITY, 0);
+            FreeEggHatchSceneResources();
             DoNamingScreen(NAMING_SCREEN_NICKNAME, gStringVar3, species, gender, personality, EggHatchSetMonNickname);
-            break;
+            return;
         case 1:
         case -1:
             sEggHatchData->CB2_state++;
@@ -690,12 +729,9 @@ static void CB2_EggHatch_1(void)
     case 12:
         if (!gPaletteFade.active)
         {
-            FreeMonSpritesGfx();
-            RemoveWindow(sEggHatchData->windowId);
-            UnsetBgTilemapBuffer(0);
-            UnsetBgTilemapBuffer(1);
-            Free(sEggHatchData);
+            FreeEggHatchSceneResources();
             SetMainCallback2(CB2_ReturnToField);
+            return;
         }
         break;
     }
@@ -855,6 +891,9 @@ static void CreateRandomEggShardSprite(void)
 static void CreateEggShardSprite(u8 x, u8 y, s16 data1, s16 data2, s16 data3, u8 spriteAnimIndex)
 {
     u8 spriteID = CreateSprite(&sSpriteTemplate_EggShard, x, y, 4);
+    if (spriteID == MAX_SPRITES)
+        return;
+
     gSprites[spriteID].data[1] = data1;
     gSprites[spriteID].data[2] = data2;
     gSprites[spriteID].data[3] = data3;

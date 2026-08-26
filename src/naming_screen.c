@@ -915,7 +915,12 @@ static void CreateButtonFlashTask(void)
 
 static void TryStartButtonFlash(u8 button, bool8 keepFlashing, bool8 interruptCurFlash)
 {
-    struct Task *task = &gTasks[FindTaskIdByFunc(Task_UpdateButtonFlash)];
+    u8 taskId = FindTaskIdByFunc(Task_UpdateButtonFlash);
+    struct Task *task;
+
+    if (taskId == TASK_NONE)
+        return;
+    task = &gTasks[taskId];
 
     if (button == task->tButtonId && !interruptCurFlash)
     {
@@ -1560,6 +1565,8 @@ static u8 GetInputEvent(void)
 {
     u8 taskId = FindTaskIdByFunc(Task_HandleInput);
 
+    if (taskId == TASK_NONE)
+        return INPUT_NONE;
     return gTasks[taskId].tKeyboardEvent;
 }
 
@@ -1567,7 +1574,8 @@ static void SetInputState(u8 state)
 {
     u8 taskId = FindTaskIdByFunc(Task_HandleInput);
 
-    gTasks[taskId].tState = state;
+    if (taskId != TASK_NONE)
+        gTasks[taskId].tState = state;
 }
 
 static void Task_HandleInput(u8 taskId)
@@ -2566,5 +2574,3 @@ static const struct SpritePalette sSpritePalettes[] =
     {gNamingScreenMenu_Pal + 0x40,  PALTAG_OK_BUTTON},
     {}
 };
-
-

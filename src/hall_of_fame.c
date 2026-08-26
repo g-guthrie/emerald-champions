@@ -1444,7 +1444,7 @@ void DoDomeConfetti(void)
 
     gSpecialVar_0x8004 = 180;
     taskId = CreateTask(Task_DoDomeConfetti, 0);
-    if (taskId != TASK_NONE)
+    if (IsTaskIdValid(taskId))
     {
         gTasks[taskId].tTimer = gSpecialVar_0x8004;
         gSpecialVar_0x8005 = taskId;

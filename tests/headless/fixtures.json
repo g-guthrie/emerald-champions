@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "source_contract": {
+    "force_rebuild": true,
+    "fixed_rtc_epoch": 946684800,
+    "resolve_addresses_from_current_elf": true,
+    "permit_stale_fixture_checkout": false
+  },
+  "fixtures": [
+    {
+      "id": "boot.clean",
+      "category": "boot",
+      "implementation": "production",
+      "requires_fixture_bridge": false,
+      "max_frames": 900,
+      "assertions": [
+        "two identical runs have identical video hashes and memory observations",
+        "gMain.callback2 points into ROM",
+        "gMain.vblankCounter1 advances",
+        "gSaveBlock1Ptr and gSaveBlock2Ptr point into EWRAM",
+        "final PNG is nonblank",
+        "save geometry is 128 KiB"
+      ]
+    },
+    {
+      "id": "save.native_round_trip",
+      "category": "save",
+      "implementation": "planned",
+      "requires_fixture_bridge": true,
+      "assertions": [
+        "native Save writes a complete valid slot",
+        "a second emulator process loads the dumped save",
+        "Continue is available and restores map, party, bag, flags, and play time",
+        "interrupted save leaves the previous complete slot loadable",
+        "recorded-battle sector does not corrupt normal save sections"
+      ]
+    },
+    {
+      "id": "ui.native_menu_matrix",
+      "category": "ui",
+      "implementation": "planned",
+      "requires_fixture_bridge": true,
+      "assertions": [
+        "party action menu opens, scrolls, cancels, and restores sprites",
+        "move tutor list has one Cancel row and no text overflow",
+        "Pokemart list and quantity dialogs fit every item name",
+        "storage Summary round-trip restores icon blending",
+        "multi-target battle selection never leaves a battler invisible"
+      ]
+    },
+    {
+      "id": "battle.mechanics_matrix",
+      "category": "battle",
+      "implementation": "planned",
+      "requires_fixture_bridge": true,
+      "assertions": [
+        "single and double battle setup is deterministic",
+        "scripted parties, items, abilities, statuses, moves, targets, and RNG are observable",
+        "battle result words distinguish precondition, observed state, and pass state",
+        "battle teardown returns through the native callback without stale state"
+      ]
+    },
+    {
+      "id": "frontier.record_and_dome",
+      "category": "frontier",
+      "implementation": "planned",
+      "requires_fixture_bridge": true,
+      "assertions": [
+        "Battle Tower double battle records and replays through turn one to completion",
+        "recorded AI consumes deterministic RNG",
+        "Battle Dome completes every match in the first round and enters round two",
+        "Frontier Pass child screens return with valid palettes and allocations",
+        "all facilities survive enter, battle, retire, resume, and save/reload flows"
+      ]
+    }
+  ]
+}

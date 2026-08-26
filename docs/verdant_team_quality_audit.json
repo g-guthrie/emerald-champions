@@ -1,13 +1,17 @@
 {
   "summary": {
     "trainer_records": 854,
-    "trainer_pokemon": 3407,
-    "doubles": 571,
-    "singles": 283,
-    "median_quality_score": 62,
+    "trainer_pokemon": 3410,
+    "doubles": 569,
+    "singles": 285,
+    "median_quality_score": 63,
     "blocking_issues": 0,
-    "major_issues": 0,
-    "issue_counts": {},
+    "major_issues": 4,
+    "issue_counts": {
+      "no detected team interaction": 1,
+      "no speed control": 1,
+      "serious item gap": 2
+    },
     "repeated_rematch_compositions": 0,
     "uncovered_multi_trainer_locations": 1
   },
@@ -2597,63 +2601,94 @@
       "manifest_difficulty": 35,
       "party_name": "sParty_Grunt14",
       "party_size": 4,
-      "avg_level_offset": -2.0,
-      "max_level_offset": -2,
-      "item_coverage": 0.5,
+      "avg_level_offset": 2.0,
+      "max_level_offset": 3,
+      "item_coverage": 1.0,
       "complete_moveset_coverage": 1.0,
-      "avg_bst": 470.5,
+      "avg_bst": 484.5,
       "rare_count": 0,
       "mega_count": 0,
-      "speed_control_count": 2,
+      "speed_control_count": 4,
       "protect_count": 1,
       "defensive_tempo_count": 4,
       "spread_count": 1,
       "synergy_tags": [
-        "screens setup",
+        "Water pressure",
+        "active speed control",
+        "residual control",
         "status control"
       ],
-      "quality_score": 60,
+      "quality_score": 86,
       "issues": [],
       "mons": [
         {
-          "species": "SPECIES_PALPITOAD",
-          "level_offset": -2,
-          "item": "ITEM_NONE",
-          "ability_slot": 2,
-          "ability": "ABILITY_WATER_ABSORB",
-          "spread": "SPREAD_15_IV_0_EV",
+          "species": "SPECIES_RATICATE_ALOLAN",
+          "level_offset": 1,
+          "item": "ITEM_FIGY_BERRY",
+          "ability_slot": 0,
+          "ability": "ABILITY_GLUTTONY",
+          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
           "moves": [
-            "MOVE_BUBBLE_BEAM",
-            "MOVE_ACID",
-            "MOVE_MUD_SHOT",
-            "MOVE_ROUND"
+            "MOVE_SUPER_FANG",
+            "MOVE_KNOCK_OFF",
+            "MOVE_SUCKER_PUNCH",
+            "MOVE_TAUNT"
           ],
-          "bst": 384,
-          "speed": 69,
+          "bst": 438,
+          "speed": 77,
           "types": [
-            "TYPE_WATER",
-            "TYPE_GROUND"
+            "TYPE_DARK",
+            "TYPE_NORMAL"
           ],
           "attack_moves": [
-            "MOVE_BUBBLE_BEAM",
-            "MOVE_ACID",
-            "MOVE_MUD_SHOT",
-            "MOVE_ROUND"
+            "MOVE_SUPER_FANG",
+            "MOVE_KNOCK_OFF",
+            "MOVE_SUCKER_PUNCH"
           ],
-          "status_moves": []
+          "status_moves": [
+            "MOVE_TAUNT"
+          ]
+        },
+        {
+          "species": "SPECIES_TENTACRUEL",
+          "level_offset": 2,
+          "item": "ITEM_BLACK_SLUDGE",
+          "ability_slot": 1,
+          "ability": "ABILITY_LIQUID_OOZE",
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+          "moves": [
+            "MOVE_TOXIC",
+            "MOVE_ACID_SPRAY",
+            "MOVE_ICY_WIND",
+            "MOVE_HYDRO_PUMP"
+          ],
+          "bst": 515,
+          "speed": 100,
+          "types": [
+            "TYPE_WATER",
+            "TYPE_POISON"
+          ],
+          "attack_moves": [
+            "MOVE_ACID_SPRAY",
+            "MOVE_ICY_WIND",
+            "MOVE_HYDRO_PUMP"
+          ],
+          "status_moves": [
+            "MOVE_TOXIC"
+          ]
         },
         {
           "species": "SPECIES_BASCULIN",
-          "level_offset": -2,
-          "item": "ITEM_NONE",
+          "level_offset": 2,
+          "item": "ITEM_CHOICE_BAND",
           "ability_slot": 1,
           "ability": "ABILITY_ADAPTABILITY",
-          "spread": "SPREAD_15_IV_0_EV",
+          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
           "moves": [
             "MOVE_AQUA_JET",
+            "MOVE_WATERFALL",
             "MOVE_CRUNCH",
-            "MOVE_TAKE_DOWN",
-            "MOVE_REVENGE"
+            "MOVE_PSYCHIC_FANGS"
           ],
           "bst": 480,
           "speed": 118,
@@ -2663,66 +2698,38 @@
           ],
           "attack_moves": [
             "MOVE_AQUA_JET",
+            "MOVE_WATERFALL",
             "MOVE_CRUNCH",
-            "MOVE_TAKE_DOWN",
-            "MOVE_REVENGE"
+            "MOVE_PSYCHIC_FANGS"
           ],
           "status_moves": []
         },
         {
-          "species": "SPECIES_POLTEAGEIST",
-          "level_offset": -2,
-          "item": "ITEM_WHITE_HERB",
-          "ability_slot": 2,
-          "ability": "ABILITY_CURSED_BODY",
-          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
-          "moves": [
-            "MOVE_PROTECT",
-            "MOVE_SHADOW_BALL",
-            "MOVE_SHELL_SMASH",
-            "MOVE_STORED_POWER"
-          ],
-          "bst": 508,
-          "speed": 70,
-          "types": [
-            "TYPE_GHOST",
-            "TYPE_GHOST"
-          ],
-          "attack_moves": [
-            "MOVE_SHADOW_BALL",
-            "MOVE_STORED_POWER"
-          ],
-          "status_moves": [
-            "MOVE_PROTECT",
-            "MOVE_SHELL_SMASH"
-          ]
-        },
-        {
-          "species": "SPECIES_GRIMMSNARL",
-          "level_offset": -2,
-          "item": "ITEM_LIGHT_CLAY",
-          "ability_slot": 0,
-          "ability": "ABILITY_PRANKSTER",
+          "species": "SPECIES_RELICANTH",
+          "level_offset": 3,
+          "item": "ITEM_EXPERT_BELT",
+          "ability_slot": 1,
+          "ability": "ABILITY_ROCK_HEAD",
           "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
           "moves": [
-            "MOVE_LIGHT_SCREEN",
-            "MOVE_REFLECT",
-            "MOVE_SPIRIT_BREAK",
-            "MOVE_PARTING_SHOT"
+            "MOVE_HEAD_SMASH",
+            "MOVE_WATERFALL",
+            "MOVE_BODY_PRESS",
+            "MOVE_PROTECT"
           ],
-          "bst": 510,
-          "speed": 60,
+          "bst": 505,
+          "speed": 55,
           "types": [
-            "TYPE_DARK",
-            "TYPE_FAIRY"
+            "TYPE_WATER",
+            "TYPE_ROCK"
           ],
           "attack_moves": [
-            "MOVE_SPIRIT_BREAK"
+            "MOVE_HEAD_SMASH",
+            "MOVE_WATERFALL",
+            "MOVE_BODY_PRESS"
           ],
           "status_moves": [
-            "MOVE_LIGHT_SCREEN",
-            "MOVE_REFLECT",
-            "MOVE_PARTING_SHOT"
+            "MOVE_PROTECT"
           ]
         }
       ]
@@ -2735,61 +2742,33 @@
       "manifest_difficulty": 33,
       "party_name": "sParty_Grunt15",
       "party_size": 4,
-      "avg_level_offset": -3.0,
-      "max_level_offset": -3,
-      "item_coverage": 0.25,
+      "avg_level_offset": 2.0,
+      "max_level_offset": 3,
+      "item_coverage": 1.0,
       "complete_moveset_coverage": 1.0,
-      "avg_bst": 405.0,
+      "avg_bst": 393.8,
       "rare_count": 0,
       "mega_count": 0,
       "speed_control_count": 2,
       "protect_count": 1,
-      "defensive_tempo_count": 1,
+      "defensive_tempo_count": 2,
       "spread_count": 0,
       "synergy_tags": [],
-      "quality_score": 42,
+      "quality_score": 63,
       "issues": [],
       "mons": [
         {
-          "species": "SPECIES_GOLBAT",
-          "level_offset": -3,
-          "item": "ITEM_NONE",
-          "ability_slot": 0,
-          "ability": "ABILITY_INNER_FOCUS",
-          "spread": "SPREAD_15_IV_0_EV",
-          "moves": [
-            "MOVE_AERIAL_ACE",
-            "MOVE_POISON_FANG",
-            "MOVE_CONFUSE_RAY",
-            "MOVE_SCREECH"
-          ],
-          "bst": 455,
-          "speed": 90,
-          "types": [
-            "TYPE_POISON",
-            "TYPE_FLYING"
-          ],
-          "attack_moves": [
-            "MOVE_AERIAL_ACE",
-            "MOVE_POISON_FANG"
-          ],
-          "status_moves": [
-            "MOVE_CONFUSE_RAY",
-            "MOVE_SCREECH"
-          ]
-        },
-        {
           "species": "SPECIES_CLAUNCHER",
-          "level_offset": -3,
-          "item": "ITEM_NONE",
+          "level_offset": 1,
+          "item": "ITEM_EXPERT_BELT",
           "ability_slot": 0,
           "ability": "ABILITY_MEGA_LAUNCHER",
-          "spread": "SPREAD_15_IV_0_EV",
+          "spread": "SPREAD_31_IV_SPATK_SPEED_MODEST",
           "moves": [
-            "MOVE_BUBBLE_BEAM",
-            "MOVE_AQUA_JET",
-            "MOVE_SMACK_DOWN",
-            "MOVE_VENOSHOCK"
+            "MOVE_WATER_PULSE",
+            "MOVE_VENOSHOCK",
+            "MOVE_ICE_BEAM",
+            "MOVE_PROTECT"
           ],
           "bst": 330,
           "speed": 44,
@@ -2798,53 +2777,54 @@
             "TYPE_WATER"
           ],
           "attack_moves": [
-            "MOVE_BUBBLE_BEAM",
-            "MOVE_AQUA_JET",
-            "MOVE_SMACK_DOWN",
-            "MOVE_VENOSHOCK"
-          ],
-          "status_moves": []
-        },
-        {
-          "species": "SPECIES_GRIMER_ALOLAN",
-          "level_offset": -3,
-          "item": "ITEM_NONE",
-          "ability_slot": 0,
-          "ability": "ABILITY_POISON_TOUCH",
-          "spread": "SPREAD_15_IV_0_EV",
-          "moves": [
-            "MOVE_POISON_FANG",
-            "MOVE_BITE",
-            "MOVE_DISABLE",
-            "MOVE_MINIMIZE"
-          ],
-          "bst": 325,
-          "speed": 25,
-          "types": [
-            "TYPE_POISON",
-            "TYPE_DARK"
-          ],
-          "attack_moves": [
-            "MOVE_POISON_FANG",
-            "MOVE_BITE"
+            "MOVE_WATER_PULSE",
+            "MOVE_VENOSHOCK",
+            "MOVE_ICE_BEAM"
           ],
           "status_moves": [
-            "MOVE_DISABLE",
-            "MOVE_MINIMIZE"
+            "MOVE_PROTECT"
+          ]
+        },
+        {
+          "species": "SPECIES_SEALEO",
+          "level_offset": 2,
+          "item": "ITEM_EVIOLITE",
+          "ability_slot": 0,
+          "ability": "ABILITY_THICK_FAT",
+          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+          "moves": [
+            "MOVE_BRINE",
+            "MOVE_FREEZE_DRY",
+            "MOVE_ENCORE",
+            "MOVE_PROTECT"
+          ],
+          "bst": 410,
+          "speed": 45,
+          "types": [
+            "TYPE_ICE",
+            "TYPE_WATER"
+          ],
+          "attack_moves": [
+            "MOVE_BRINE",
+            "MOVE_FREEZE_DRY"
+          ],
+          "status_moves": [
+            "MOVE_ENCORE",
+            "MOVE_PROTECT"
           ]
         },
         {
           "species": "SPECIES_ZOROARK",
-          "level_offset": -3,
-          "item": "ITEM_SITRUS_BERRY",
+          "level_offset": 3,
+          "item": "ITEM_FOCUS_SASH",
           "ability_slot": 0,
           "ability": "ABILITY_ILLUSION",
           "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
           "moves": [
-            "MOVE_PROTECT",
-            "MOVE_NASTY_PLOT",
+            "MOVE_DARK_PULSE",
             "MOVE_FLAMETHROWER",
-            "MOVE_DARK_PULSE"
+            "MOVE_SLUDGE_BOMB",
+            "MOVE_PROTECT"
           ],
           "bst": 510,
           "speed": 105,
@@ -2853,13 +2833,40 @@
             "TYPE_DARK"
           ],
           "attack_moves": [
+            "MOVE_DARK_PULSE",
             "MOVE_FLAMETHROWER",
-            "MOVE_DARK_PULSE"
+            "MOVE_SLUDGE_BOMB"
           ],
           "status_moves": [
-            "MOVE_PROTECT",
-            "MOVE_NASTY_PLOT"
+            "MOVE_PROTECT"
           ]
+        },
+        {
+          "species": "SPECIES_GRIMER_ALOLAN",
+          "level_offset": 2,
+          "item": "ITEM_ASSAULT_VEST",
+          "ability_slot": 0,
+          "ability": "ABILITY_POISON_TOUCH",
+          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+          "moves": [
+            "MOVE_KNOCK_OFF",
+            "MOVE_POISON_JAB",
+            "MOVE_SHADOW_SNEAK",
+            "MOVE_ICE_PUNCH"
+          ],
+          "bst": 325,
+          "speed": 25,
+          "types": [
+            "TYPE_POISON",
+            "TYPE_DARK"
+          ],
+          "attack_moves": [
+            "MOVE_KNOCK_OFF",
+            "MOVE_POISON_JAB",
+            "MOVE_SHADOW_SNEAK",
+            "MOVE_ICE_PUNCH"
+          ],
+          "status_moves": []
         }
       ]
     },
@@ -8642,92 +8649,61 @@
       "manifest_difficulty": 31,
       "party_name": "sParty_Simon",
       "party_size": 4,
-      "avg_level_offset": -3.0,
-      "max_level_offset": -3,
-      "item_coverage": 0.5,
+      "avg_level_offset": 2.0,
+      "max_level_offset": 3,
+      "item_coverage": 1.0,
       "complete_moveset_coverage": 1.0,
-      "avg_bst": 404.8,
+      "avg_bst": 531.2,
       "rare_count": 1,
       "mega_count": 0,
-      "speed_control_count": 5,
+      "speed_control_count": 3,
       "protect_count": 1,
-      "defensive_tempo_count": 5,
-      "spread_count": 3,
+      "defensive_tempo_count": 3,
+      "spread_count": 2,
       "synergy_tags": [
-        "Fake Out tempo",
         "Tailwind",
-        "Water pressure",
-        "active speed control",
-        "status control"
+        "active speed control"
       ],
-      "quality_score": 67,
+      "quality_score": 84,
       "issues": [],
       "mons": [
         {
-          "species": "SPECIES_SEEL",
-          "level_offset": -3,
-          "item": "ITEM_NONE",
-          "ability_slot": 0,
-          "ability": "ABILITY_FUR_COAT",
-          "spread": "SPREAD_0_IV_EV",
+          "species": "SPECIES_TROPIUS",
+          "level_offset": 1,
+          "item": "ITEM_MENTAL_HERB",
+          "ability_slot": 1,
+          "ability": "ABILITY_AERILATE",
+          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
           "moves": [
-            "MOVE_ICE_SHARD",
-            "MOVE_ENCORE",
-            "MOVE_HEADBUTT",
-            "MOVE_ICY_WIND"
+            "MOVE_TAILWIND",
+            "MOVE_RETURN",
+            "MOVE_SEED_BOMB",
+            "MOVE_PROTECT"
           ],
-          "bst": 325,
-          "speed": 45,
+          "bst": 500,
+          "speed": 51,
           "types": [
-            "TYPE_WATER",
-            "TYPE_WATER"
+            "TYPE_GRASS",
+            "TYPE_FLYING"
           ],
           "attack_moves": [
-            "MOVE_ICE_SHARD",
-            "MOVE_HEADBUTT",
-            "MOVE_ICY_WIND"
+            "MOVE_RETURN",
+            "MOVE_SEED_BOMB"
           ],
           "status_moves": [
-            "MOVE_ENCORE"
-          ]
-        },
-        {
-          "species": "SPECIES_TOTODILE",
-          "level_offset": -3,
-          "item": "ITEM_NONE",
-          "ability_slot": 0,
-          "ability": "ABILITY_TORRENT",
-          "spread": "SPREAD_0_IV_EV",
-          "moves": [
-            "MOVE_WATER_GUN",
-            "MOVE_BITE",
-            "MOVE_RAGE",
-            "MOVE_LEER"
-          ],
-          "bst": 314,
-          "speed": 43,
-          "types": [
-            "TYPE_WATER",
-            "TYPE_WATER"
-          ],
-          "attack_moves": [
-            "MOVE_WATER_GUN",
-            "MOVE_BITE",
-            "MOVE_RAGE"
-          ],
-          "status_moves": [
-            "MOVE_LEER"
+            "MOVE_TAILWIND",
+            "MOVE_PROTECT"
           ]
         },
         {
           "species": "SPECIES_KELDEO",
-          "level_offset": -3,
+          "level_offset": 2,
           "item": "ITEM_LIFE_ORB",
           "ability_slot": 0,
           "ability": "ABILITY_JUSTIFIED",
           "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
           "moves": [
-            "MOVE_MUDDY_WATER",
+            "MOVE_HYDRO_PUMP",
             "MOVE_SECRET_SWORD",
             "MOVE_ICY_WIND",
             "MOVE_PROTECT"
@@ -8739,7 +8715,7 @@
             "TYPE_FIGHTING"
           ],
           "attack_moves": [
-            "MOVE_MUDDY_WATER",
+            "MOVE_HYDRO_PUMP",
             "MOVE_SECRET_SWORD",
             "MOVE_ICY_WIND"
           ],
@@ -8748,32 +8724,58 @@
           ]
         },
         {
-          "species": "SPECIES_DELIBIRD",
-          "level_offset": -3,
-          "item": "ITEM_SITRUS_BERRY",
+          "species": "SPECIES_MUDSDALE",
+          "level_offset": 2,
+          "item": "ITEM_ASSAULT_VEST",
           "ability_slot": 1,
-          "ability": "ABILITY_HUSTLE",
-          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+          "ability": "ABILITY_STAMINA",
+          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
           "moves": [
-            "MOVE_FAKE_OUT",
-            "MOVE_TAILWIND",
-            "MOVE_BRAVE_BIRD",
-            "MOVE_ICE_PUNCH"
+            "MOVE_HIGH_HORSEPOWER",
+            "MOVE_HEAVY_SLAM",
+            "MOVE_ROCK_SLIDE",
+            "MOVE_BODY_PRESS"
           ],
-          "bst": 400,
-          "speed": 95,
+          "bst": 500,
+          "speed": 35,
           "types": [
-            "TYPE_ICE",
-            "TYPE_FLYING"
+            "TYPE_GROUND",
+            "TYPE_GROUND"
           ],
           "attack_moves": [
-            "MOVE_FAKE_OUT",
-            "MOVE_BRAVE_BIRD",
-            "MOVE_ICE_PUNCH"
+            "MOVE_HIGH_HORSEPOWER",
+            "MOVE_HEAVY_SLAM",
+            "MOVE_ROCK_SLIDE",
+            "MOVE_BODY_PRESS"
           ],
-          "status_moves": [
-            "MOVE_TAILWIND"
-          ]
+          "status_moves": []
+        },
+        {
+          "species": "SPECIES_LAPRAS",
+          "level_offset": 3,
+          "item": "ITEM_CHOICE_SPECS",
+          "ability_slot": 1,
+          "ability": "ABILITY_SHELL_ARMOR",
+          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+          "moves": [
+            "MOVE_FREEZE_DRY",
+            "MOVE_HYDRO_PUMP",
+            "MOVE_THUNDERBOLT",
+            "MOVE_PSYCHIC"
+          ],
+          "bst": 545,
+          "speed": 60,
+          "types": [
+            "TYPE_WATER",
+            "TYPE_ICE"
+          ],
+          "attack_moves": [
+            "MOVE_FREEZE_DRY",
+            "MOVE_HYDRO_PUMP",
+            "MOVE_THUNDERBOLT",
+            "MOVE_PSYCHIC"
+          ],
+          "status_moves": []
         }
       ]
     },
@@ -29660,50 +29662,141 @@
       "name": "Edward",
       "location": "Route 110",
       "format": "single",
-      "manifest_difficulty": 34,
+      "manifest_difficulty": 87,
       "party_name": "sParty_Edward",
-      "party_size": 1,
-      "avg_level_offset": 1.0,
-      "max_level_offset": 1,
+      "party_size": 4,
+      "avg_level_offset": 2.0,
+      "max_level_offset": 3,
       "item_coverage": 0.0,
       "complete_moveset_coverage": 1.0,
-      "avg_bst": 310.0,
+      "avg_bst": 461.8,
       "rare_count": 0,
       "mega_count": 0,
-      "speed_control_count": 1,
-      "protect_count": 1,
-      "defensive_tempo_count": 1,
-      "spread_count": 1,
-      "synergy_tags": [],
-      "quality_score": 42,
-      "issues": [],
+      "speed_control_count": 0,
+      "protect_count": 0,
+      "defensive_tempo_count": 0,
+      "spread_count": 2,
+      "synergy_tags": [
+        "Psychic pressure"
+      ],
+      "quality_score": 60,
+      "issues": [
+        {
+          "severity": "major",
+          "kind": "serious item gap",
+          "detail": 0.0
+        }
+      ],
       "mons": [
         {
-          "species": "SPECIES_ABRA",
+          "species": "SPECIES_LUNATONE",
           "level_offset": 1,
           "item": "ITEM_NONE",
           "ability_slot": 0,
-          "ability": "ABILITY_SYNCHRONIZE",
-          "spread": "SPREAD_HP_FIGHTING_TIMID",
+          "ability": "ABILITY_LEVITATE",
+          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+          "moves": [
+            "MOVE_MAGIC_ROOM",
+            "MOVE_PSYCHIC",
+            "MOVE_POWER_GEM",
+            "MOVE_MOONLIGHT"
+          ],
+          "bst": 520,
+          "speed": 70,
+          "types": [
+            "TYPE_ROCK",
+            "TYPE_PSYCHIC"
+          ],
+          "attack_moves": [
+            "MOVE_PSYCHIC",
+            "MOVE_POWER_GEM"
+          ],
+          "status_moves": [
+            "MOVE_MAGIC_ROOM",
+            "MOVE_MOONLIGHT"
+          ]
+        },
+        {
+          "species": "SPECIES_HYPNO",
+          "level_offset": 2,
+          "item": "ITEM_NONE",
+          "ability_slot": 0,
+          "ability": "ABILITY_INSOMNIA",
+          "spread": "SPREAD_31_IV_HP_SPDEF_CALM",
           "moves": [
             "MOVE_PSYCHIC",
-            "MOVE_DAZZLING_GLEAM",
+            "MOVE_FOCUS_BLAST",
             "MOVE_SHADOW_BALL",
-            "MOVE_PROTECT"
+            "MOVE_DISABLE"
           ],
-          "bst": 310,
-          "speed": 90,
+          "bst": 535,
+          "speed": 67,
           "types": [
             "TYPE_PSYCHIC",
             "TYPE_PSYCHIC"
           ],
           "attack_moves": [
             "MOVE_PSYCHIC",
-            "MOVE_DAZZLING_GLEAM",
+            "MOVE_FOCUS_BLAST",
             "MOVE_SHADOW_BALL"
           ],
           "status_moves": [
-            "MOVE_PROTECT"
+            "MOVE_DISABLE"
+          ]
+        },
+        {
+          "species": "SPECIES_XATU",
+          "level_offset": 2,
+          "item": "ITEM_NONE",
+          "ability_slot": 2,
+          "ability": "ABILITY_MAGIC_BOUNCE",
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+          "moves": [
+            "MOVE_FUTURE_SIGHT",
+            "MOVE_AIR_SLASH",
+            "MOVE_HEAT_WAVE",
+            "MOVE_U_TURN"
+          ],
+          "bst": 500,
+          "speed": 105,
+          "types": [
+            "TYPE_PSYCHIC",
+            "TYPE_FLYING"
+          ],
+          "attack_moves": [
+            "MOVE_FUTURE_SIGHT",
+            "MOVE_AIR_SLASH",
+            "MOVE_HEAT_WAVE",
+            "MOVE_U_TURN"
+          ],
+          "status_moves": []
+        },
+        {
+          "species": "SPECIES_MUNNA",
+          "level_offset": 3,
+          "item": "ITEM_NONE",
+          "ability_slot": 1,
+          "ability": "ABILITY_SYNCHRONIZE",
+          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+          "moves": [
+            "MOVE_MOONBLAST",
+            "MOVE_ENERGY_BALL",
+            "MOVE_PSYCHIC",
+            "MOVE_MOONLIGHT"
+          ],
+          "bst": 292,
+          "speed": 24,
+          "types": [
+            "TYPE_PSYCHIC",
+            "TYPE_PSYCHIC"
+          ],
+          "attack_moves": [
+            "MOVE_MOONBLAST",
+            "MOVE_ENERGY_BALL",
+            "MOVE_PSYCHIC"
+          ],
+          "status_moves": [
+            "MOVE_MOONLIGHT"
           ]
         }
       ]
@@ -30670,7 +30763,7 @@
       "defensive_tempo_count": 2,
       "spread_count": 4,
       "synergy_tags": [
-        "Rock pressure",
+        "Psychic pressure",
         "Trick Room"
       ],
       "quality_score": 82,
@@ -39873,133 +39966,132 @@
       "manifest_difficulty": 54,
       "party_name": "sParty_Isabel1",
       "party_size": 4,
-      "avg_level_offset": -3.0,
-      "max_level_offset": -3,
+      "avg_level_offset": 2.0,
+      "max_level_offset": 3,
       "item_coverage": 1.0,
       "complete_moveset_coverage": 1.0,
-      "avg_bst": 461.2,
-      "rare_count": 0,
+      "avg_bst": 435.0,
+      "rare_count": 1,
       "mega_count": 0,
-      "speed_control_count": 3,
+      "speed_control_count": 2,
       "protect_count": 1,
-      "defensive_tempo_count": 2,
-      "spread_count": 1,
+      "defensive_tempo_count": 1,
+      "spread_count": 3,
       "synergy_tags": [
-        "Electric pressure",
-        "Plus + Minus"
+        "Normal pressure"
       ],
-      "quality_score": 64,
+      "quality_score": 75,
       "issues": [],
       "mons": [
         {
-          "species": "SPECIES_PLUSLE",
-          "level_offset": -3,
-          "item": "ITEM_ORAN_BERRY",
+          "species": "SPECIES_MELOETTA",
+          "level_offset": 1,
+          "item": "ITEM_THROAT_SPRAY",
           "ability_slot": 0,
-          "ability": "ABILITY_PLUS",
-          "spread": "SPREAD_10_IV_0_EV",
-          "moves": [
-            "MOVE_ELECTRO_BALL",
-            "MOVE_NUZZLE",
-            "MOVE_HELPING_HAND",
-            "MOVE_CHARM"
-          ],
-          "bst": 435,
-          "speed": 105,
-          "types": [
-            "TYPE_ELECTRIC",
-            "TYPE_ELECTRIC"
-          ],
-          "attack_moves": [
-            "MOVE_ELECTRO_BALL",
-            "MOVE_NUZZLE"
-          ],
-          "status_moves": [
-            "MOVE_HELPING_HAND",
-            "MOVE_CHARM"
-          ]
-        },
-        {
-          "species": "SPECIES_PACHIRISU",
-          "level_offset": -3,
-          "item": "ITEM_ORAN_BERRY",
-          "ability_slot": 0,
-          "ability": "ABILITY_FUR_COAT",
-          "spread": "SPREAD_10_IV_0_EV",
-          "moves": [
-            "MOVE_ELECTRO_BALL",
-            "MOVE_NUZZLE",
-            "MOVE_SWIFT",
-            "MOVE_SWEET_KISS"
-          ],
-          "bst": 455,
-          "speed": 95,
-          "types": [
-            "TYPE_ELECTRIC",
-            "TYPE_ELECTRIC"
-          ],
-          "attack_moves": [
-            "MOVE_ELECTRO_BALL",
-            "MOVE_NUZZLE",
-            "MOVE_SWIFT"
-          ],
-          "status_moves": [
-            "MOVE_SWEET_KISS"
-          ]
-        },
-        {
-          "species": "SPECIES_MINUN",
-          "level_offset": -3,
-          "item": "ITEM_LEFTOVERS",
-          "ability_slot": 0,
-          "ability": "ABILITY_MINUS",
+          "ability": "ABILITY_SERENE_GRACE",
           "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
           "moves": [
-            "MOVE_PROTECT",
-            "MOVE_SUBSTITUTE",
-            "MOVE_THUNDERBOLT",
-            "MOVE_HIDDEN_POWER"
+            "MOVE_ROUND",
+            "MOVE_HYPER_VOICE",
+            "MOVE_PSYCHIC",
+            "MOVE_PROTECT"
           ],
-          "bst": 435,
-          "speed": 105,
+          "bst": 600,
+          "speed": 90,
           "types": [
-            "TYPE_ELECTRIC",
-            "TYPE_ELECTRIC"
+            "TYPE_NORMAL",
+            "TYPE_PSYCHIC"
           ],
           "attack_moves": [
-            "MOVE_THUNDERBOLT",
-            "MOVE_HIDDEN_POWER"
+            "MOVE_ROUND",
+            "MOVE_HYPER_VOICE",
+            "MOVE_PSYCHIC"
           ],
           "status_moves": [
-            "MOVE_PROTECT",
-            "MOVE_SUBSTITUTE"
+            "MOVE_PROTECT"
           ]
         },
         {
-          "species": "SPECIES_KLINKLANG",
-          "level_offset": -3,
+          "species": "SPECIES_WIGGLYTUFF",
+          "level_offset": 2,
           "item": "ITEM_LIFE_ORB",
           "ability_slot": 1,
-          "ability": "ABILITY_MINUS",
-          "spread": "SPREAD_31_IV_ATK_SPEED_ADAMANT",
+          "ability": "ABILITY_COMPETITIVE",
+          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
           "moves": [
-            "MOVE_GEAR_GRIND",
-            "MOVE_WILD_CHARGE",
-            "MOVE_SHIFT_GEAR",
+            "MOVE_ROUND",
+            "MOVE_DAZZLING_GLEAM",
+            "MOVE_ICE_BEAM",
             "MOVE_PROTECT"
           ],
-          "bst": 520,
-          "speed": 90,
+          "bst": 445,
+          "speed": 45,
           "types": [
-            "TYPE_STEEL",
-            "TYPE_STEEL"
+            "TYPE_NORMAL",
+            "TYPE_FAIRY"
           ],
           "attack_moves": [
-            "MOVE_GEAR_GRIND",
-            "MOVE_WILD_CHARGE"
+            "MOVE_ROUND",
+            "MOVE_DAZZLING_GLEAM",
+            "MOVE_ICE_BEAM"
           ],
           "status_moves": [
-            "MOVE_SHIFT_GEAR",
+            "MOVE_PROTECT"
+          ]
+        },
+        {
+          "species": "SPECIES_CHATOT",
+          "level_offset": 2,
+          "item": "ITEM_FOCUS_SASH",
+          "ability_slot": 0,
+          "ability": "ABILITY_KEEN_EYE",
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+          "moves": [
+            "MOVE_ROUND",
+            "MOVE_CHATTER",
+            "MOVE_HEAT_WAVE",
+            "MOVE_PROTECT"
+          ],
+          "bst": 445,
+          "speed": 101,
+          "types": [
+            "TYPE_NORMAL",
+            "TYPE_FLYING"
+          ],
+          "attack_moves": [
+            "MOVE_ROUND",
+            "MOVE_CHATTER",
+            "MOVE_HEAT_WAVE"
+          ],
+          "status_moves": [
+            "MOVE_PROTECT"
+          ]
+        },
+        {
+          "species": "SPECIES_GOSSIFLEUR",
+          "level_offset": 3,
+          "item": "ITEM_EVIOLITE",
+          "ability_slot": 1,
+          "ability": "ABILITY_REGENERATOR",
+          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+          "moves": [
+            "MOVE_ROUND",
+            "MOVE_GIGA_DRAIN",
+            "MOVE_HELPING_HAND",
+            "MOVE_PROTECT"
+          ],
+          "bst": 250,
+          "speed": 10,
+          "types": [
+            "TYPE_GRASS",
+            "TYPE_GRASS"
+          ],
+          "attack_moves": [
+            "MOVE_ROUND",
+            "MOVE_GIGA_DRAIN"
+          ],
+          "status_moves": [
+            "MOVE_HELPING_HAND",
             "MOVE_PROTECT"
           ]
         }
@@ -44254,136 +44346,136 @@
       "name": "Eddie",
       "location": "Route 110 Trick House Puzzle 1",
       "format": "double",
-      "manifest_difficulty": 33,
+      "manifest_difficulty": 90,
       "party_name": "sParty_Eddie",
       "party_size": 4,
-      "avg_level_offset": -2.0,
-      "max_level_offset": -2,
-      "item_coverage": 0.5,
+      "avg_level_offset": 1.75,
+      "max_level_offset": 3,
+      "item_coverage": 1.0,
       "complete_moveset_coverage": 1.0,
-      "avg_bst": 381.2,
+      "avg_bst": 465.0,
       "rare_count": 0,
       "mega_count": 0,
-      "speed_control_count": 0,
-      "protect_count": 0,
-      "defensive_tempo_count": 1,
-      "spread_count": 1,
+      "speed_control_count": 1,
+      "protect_count": 1,
+      "defensive_tempo_count": 2,
+      "spread_count": 3,
       "synergy_tags": [
-        "pivot offense"
+        "Earthquake immunity"
       ],
-      "quality_score": 47,
+      "quality_score": 73,
       "issues": [],
       "mons": [
         {
-          "species": "SPECIES_DUCKLETT",
-          "level_offset": -2,
-          "item": "ITEM_NONE",
-          "ability_slot": 0,
-          "ability": "ABILITY_COMPETITIVE",
-          "spread": "SPREAD_10_IV_0_EV",
+          "species": "SPECIES_DUGTRIO",
+          "level_offset": 1,
+          "item": "ITEM_GROUND_GEM",
+          "ability_slot": 1,
+          "ability": "ABILITY_ARENA_TRAP",
+          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
           "moves": [
-            "MOVE_AIR_SLASH",
-            "MOVE_BUBBLE_BEAM",
-            "MOVE_STEEL_WING",
-            "MOVE_ROOST"
+            "MOVE_EARTHQUAKE",
+            "MOVE_ROCK_SLIDE",
+            "MOVE_NIGHT_SLASH",
+            "MOVE_PROTECT"
           ],
-          "bst": 305,
-          "speed": 55,
+          "bst": 425,
+          "speed": 120,
           "types": [
-            "TYPE_WATER",
-            "TYPE_FLYING"
+            "TYPE_GROUND",
+            "TYPE_GROUND"
           ],
           "attack_moves": [
-            "MOVE_AIR_SLASH",
-            "MOVE_BUBBLE_BEAM",
-            "MOVE_STEEL_WING"
+            "MOVE_EARTHQUAKE",
+            "MOVE_ROCK_SLIDE",
+            "MOVE_NIGHT_SLASH"
           ],
           "status_moves": [
-            "MOVE_ROOST"
+            "MOVE_PROTECT"
           ]
         },
         {
-          "species": "SPECIES_DARTRIX",
-          "level_offset": -2,
-          "item": "ITEM_NONE",
-          "ability_slot": 0,
-          "ability": "ABILITY_OVERGROW",
-          "spread": "SPREAD_10_IV_0_EV",
-          "moves": [
-            "MOVE_RAZOR_LEAF",
-            "MOVE_PLUCK",
-            "MOVE_OMINOUS_WIND",
-            "MOVE_SYNTHESIS"
-          ],
-          "bst": 420,
-          "speed": 52,
-          "types": [
-            "TYPE_GRASS",
-            "TYPE_FLYING"
-          ],
-          "attack_moves": [
-            "MOVE_RAZOR_LEAF",
-            "MOVE_PLUCK",
-            "MOVE_OMINOUS_WIND"
-          ],
-          "status_moves": [
-            "MOVE_SYNTHESIS"
-          ]
-        },
-        {
-          "species": "SPECIES_EELEKTRIK",
-          "level_offset": -2,
-          "item": "ITEM_EXPERT_BELT",
+          "species": "SPECIES_MISDREAVUS",
+          "level_offset": 1,
+          "item": "ITEM_COLBUR_BERRY",
           "ability_slot": 0,
           "ability": "ABILITY_LEVITATE",
-          "spread": "SPREAD_31_IV_HP_DEF_SPDEF_SASSY",
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
           "moves": [
-            "MOVE_AQUA_TAIL",
-            "MOVE_GIGA_DRAIN",
-            "MOVE_U_TURN",
-            "MOVE_VOLT_SWITCH"
+            "MOVE_SHADOW_BALL",
+            "MOVE_THUNDERBOLT",
+            "MOVE_WILL_O_WISP",
+            "MOVE_PROTECT"
           ],
-          "bst": 405,
-          "speed": 40,
+          "bst": 435,
+          "speed": 85,
           "types": [
-            "TYPE_ELECTRIC",
-            "TYPE_ELECTRIC"
+            "TYPE_GHOST",
+            "TYPE_FAIRY"
           ],
           "attack_moves": [
-            "MOVE_AQUA_TAIL",
-            "MOVE_GIGA_DRAIN",
-            "MOVE_U_TURN",
-            "MOVE_VOLT_SWITCH"
+            "MOVE_SHADOW_BALL",
+            "MOVE_THUNDERBOLT"
           ],
-          "status_moves": []
+          "status_moves": [
+            "MOVE_WILL_O_WISP",
+            "MOVE_PROTECT"
+          ]
         },
         {
-          "species": "SPECIES_GLOOM",
-          "level_offset": -2,
-          "item": "ITEM_BLACK_SLUDGE",
+          "species": "SPECIES_CARNIVINE",
+          "level_offset": 2,
+          "item": "ITEM_COBA_BERRY",
           "ability_slot": 0,
-          "ability": "ABILITY_CHLOROPHYLL",
-          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+          "ability": "ABILITY_LEVITATE",
+          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
           "moves": [
-            "MOVE_TOXIC",
-            "MOVE_HIDDEN_POWER",
-            "MOVE_GIGA_DRAIN",
-            "MOVE_SLUDGE_BOMB"
+            "MOVE_POWER_WHIP",
+            "MOVE_KNOCK_OFF",
+            "MOVE_SLUDGE_BOMB",
+            "MOVE_PROTECT"
           ],
-          "bst": 395,
-          "speed": 40,
+          "bst": 510,
+          "speed": 46,
           "types": [
             "TYPE_GRASS",
-            "TYPE_POISON"
+            "TYPE_GRASS"
           ],
           "attack_moves": [
-            "MOVE_HIDDEN_POWER",
-            "MOVE_GIGA_DRAIN",
+            "MOVE_POWER_WHIP",
+            "MOVE_KNOCK_OFF",
             "MOVE_SLUDGE_BOMB"
           ],
           "status_moves": [
-            "MOVE_TOXIC"
+            "MOVE_PROTECT"
           ]
+        },
+        {
+          "species": "SPECIES_SIGILYPH",
+          "level_offset": 3,
+          "item": "ITEM_WISE_GLASSES",
+          "ability_slot": 2,
+          "ability": "ABILITY_TINTED_LENS",
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+          "moves": [
+            "MOVE_AIR_SLASH",
+            "MOVE_ENERGY_BALL",
+            "MOVE_HEAT_WAVE",
+            "MOVE_PSYSHOCK"
+          ],
+          "bst": 490,
+          "speed": 97,
+          "types": [
+            "TYPE_PSYCHIC",
+            "TYPE_FLYING"
+          ],
+          "attack_moves": [
+            "MOVE_AIR_SLASH",
+            "MOVE_ENERGY_BALL",
+            "MOVE_HEAT_WAVE",
+            "MOVE_PSYSHOCK"
+          ],
+          "status_moves": []
         }
       ]
     },
@@ -44534,135 +44626,134 @@
       "trainer_id": "TRAINER_TIMMY",
       "name": "Timmy",
       "location": "Route 110",
-      "format": "double",
-      "manifest_difficulty": 33,
+      "format": "single",
+      "manifest_difficulty": 87,
       "party_name": "sParty_Timmy",
       "party_size": 4,
-      "avg_level_offset": -2.0,
-      "max_level_offset": -2,
-      "item_coverage": 0.5,
+      "avg_level_offset": 2.0,
+      "max_level_offset": 3,
+      "item_coverage": 1.0,
       "complete_moveset_coverage": 1.0,
-      "avg_bst": 333.8,
-      "rare_count": 1,
+      "avg_bst": 376.0,
+      "rare_count": 0,
       "mega_count": 0,
-      "speed_control_count": 3,
+      "speed_control_count": 2,
       "protect_count": 1,
-      "defensive_tempo_count": 3,
+      "defensive_tempo_count": 2,
       "spread_count": 1,
       "synergy_tags": [],
-      "quality_score": 48,
+      "quality_score": 64,
       "issues": [],
       "mons": [
         {
-          "species": "SPECIES_FERROSEED",
-          "level_offset": -2,
-          "item": "ITEM_NONE",
+          "species": "SPECIES_GIMMIGHOUL_ROAMING",
+          "level_offset": 1,
+          "item": "ITEM_FOCUS_SASH",
           "ability_slot": 0,
-          "ability": "ABILITY_IRON_BARBS",
-          "spread": "SPREAD_10_IV_0_EV",
+          "ability": "ABILITY_RUN_AWAY",
+          "spread": "SPREAD_HP_FIGHTING_TIMID",
           "moves": [
-            "MOVE_INGRAIN",
-            "MOVE_IRON_HEAD",
-            "MOVE_PIN_MISSILE",
-            "MOVE_BULLET_SEED"
+            "MOVE_SHADOW_BALL",
+            "MOVE_HIDDEN_POWER",
+            "MOVE_THIEF",
+            "MOVE_PROTECT"
           ],
-          "bst": 305,
-          "speed": 10,
+          "bst": 300,
+          "speed": 80,
           "types": [
-            "TYPE_GRASS",
-            "TYPE_STEEL"
+            "TYPE_GHOST",
+            "TYPE_GHOST"
           ],
           "attack_moves": [
-            "MOVE_IRON_HEAD",
-            "MOVE_PIN_MISSILE",
-            "MOVE_BULLET_SEED"
+            "MOVE_SHADOW_BALL",
+            "MOVE_HIDDEN_POWER",
+            "MOVE_THIEF"
           ],
           "status_moves": [
-            "MOVE_INGRAIN"
+            "MOVE_PROTECT"
           ]
         },
         {
-          "species": "SPECIES_ELECTRIKE",
-          "level_offset": -2,
-          "item": "ITEM_NONE",
-          "ability_slot": 0,
-          "ability": "ABILITY_STATIC",
-          "spread": "SPREAD_10_IV_0_EV",
+          "species": "SPECIES_STUNKY",
+          "level_offset": 2,
+          "item": "ITEM_EVIOLITE",
+          "ability_slot": 1,
+          "ability": "ABILITY_AFTERMATH",
+          "spread": "SPREAD_31_IV_HP_ATK_MIXED",
           "moves": [
-            "MOVE_DISCHARGE",
-            "MOVE_BITE",
-            "MOVE_QUICK_ATTACK",
-            "MOVE_ODOR_SLEUTH"
+            "MOVE_FOUL_PLAY",
+            "MOVE_SUCKER_PUNCH",
+            "MOVE_SLUDGE_BOMB",
+            "MOVE_FLAMETHROWER"
           ],
-          "bst": 295,
-          "speed": 65,
+          "bst": 329,
+          "speed": 74,
+          "types": [
+            "TYPE_POISON",
+            "TYPE_DARK"
+          ],
+          "attack_moves": [
+            "MOVE_FOUL_PLAY",
+            "MOVE_SUCKER_PUNCH",
+            "MOVE_SLUDGE_BOMB",
+            "MOVE_FLAMETHROWER"
+          ],
+          "status_moves": []
+        },
+        {
+          "species": "SPECIES_PLUSLE",
+          "level_offset": 2,
+          "item": "ITEM_SHUCA_BERRY",
+          "ability_slot": 2,
+          "ability": "ABILITY_LIGHTNING_ROD",
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+          "moves": [
+            "MOVE_THUNDERBOLT",
+            "MOVE_GRASS_KNOT",
+            "MOVE_DAZZLING_GLEAM",
+            "MOVE_ENCORE"
+          ],
+          "bst": 435,
+          "speed": 105,
           "types": [
             "TYPE_ELECTRIC",
             "TYPE_ELECTRIC"
           ],
           "attack_moves": [
-            "MOVE_DISCHARGE",
-            "MOVE_BITE",
-            "MOVE_QUICK_ATTACK"
+            "MOVE_THUNDERBOLT",
+            "MOVE_GRASS_KNOT",
+            "MOVE_DAZZLING_GLEAM"
           ],
           "status_moves": [
-            "MOVE_ODOR_SLEUTH"
+            "MOVE_ENCORE"
           ]
         },
         {
-          "species": "SPECIES_MELTAN",
-          "level_offset": -2,
-          "item": "ITEM_EVIOLITE",
+          "species": "SPECIES_ROTOM",
+          "level_offset": 3,
+          "item": "ITEM_CHOICE_SPECS",
           "ability_slot": 0,
-          "ability": "ABILITY_MAGNET_PULL",
-          "spread": "SPREAD_31_IV_HP_DEF_SPDEF_SASSY",
+          "ability": "ABILITY_LEVITATE",
+          "spread": "SPREAD_HP_ICE_TIMID",
           "moves": [
-            "MOVE_FLASH_CANNON",
-            "MOVE_THUNDER_WAVE",
-            "MOVE_HEADBUTT",
-            "MOVE_PROTECT"
-          ],
-          "bst": 300,
-          "speed": 34,
-          "types": [
-            "TYPE_STEEL",
-            "TYPE_STEEL"
-          ],
-          "attack_moves": [
-            "MOVE_FLASH_CANNON",
-            "MOVE_HEADBUTT"
-          ],
-          "status_moves": [
-            "MOVE_THUNDER_WAVE",
-            "MOVE_PROTECT"
-          ]
-        },
-        {
-          "species": "SPECIES_TANGELA",
-          "level_offset": -2,
-          "item": "ITEM_FOCUS_SASH",
-          "ability_slot": 1,
-          "ability": "ABILITY_LEAF_GUARD",
-          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
-          "moves": [
-            "MOVE_KNOCK_OFF",
-            "MOVE_LEAF_STORM",
+            "MOVE_VOLT_SWITCH",
+            "MOVE_SHADOW_BALL",
             "MOVE_HIDDEN_POWER",
-            "MOVE_SLEEP_POWDER"
+            "MOVE_TRICK"
           ],
-          "bst": 435,
-          "speed": 60,
+          "bst": 440,
+          "speed": 91,
           "types": [
-            "TYPE_GRASS",
-            "TYPE_GRASS"
+            "TYPE_ELECTRIC",
+            "TYPE_GHOST"
           ],
           "attack_moves": [
-            "MOVE_KNOCK_OFF",
-            "MOVE_LEAF_STORM",
+            "MOVE_VOLT_SWITCH",
+            "MOVE_SHADOW_BALL",
             "MOVE_HIDDEN_POWER"
           ],
           "status_moves": [
-            "MOVE_SLEEP_POWDER"
+            "MOVE_TRICK"
           ]
         }
       ]
@@ -65122,103 +65213,103 @@
       "manifest_difficulty": 26,
       "party_name": "sParty_Dwayne",
       "party_size": 3,
-      "avg_level_offset": -3.0,
-      "max_level_offset": -3,
-      "item_coverage": 0.0,
+      "avg_level_offset": 2.0,
+      "max_level_offset": 3,
+      "item_coverage": 1.0,
       "complete_moveset_coverage": 1.0,
-      "avg_bst": 293.3,
-      "rare_count": 0,
+      "avg_bst": 523.3,
+      "rare_count": 1,
       "mega_count": 0,
-      "speed_control_count": 1,
+      "speed_control_count": 0,
       "protect_count": 0,
       "defensive_tempo_count": 2,
-      "spread_count": 2,
+      "spread_count": 0,
       "synergy_tags": [],
-      "quality_score": 36,
+      "quality_score": 64,
       "issues": [],
       "mons": [
         {
-          "species": "SPECIES_CORPHISH",
-          "level_offset": -3,
-          "item": "ITEM_NONE",
-          "ability_slot": 0,
-          "ability": "ABILITY_HYPER_CUTTER",
-          "spread": "SPREAD_0_IV_EV",
+          "species": "SPECIES_JYNX",
+          "level_offset": 1,
+          "item": "ITEM_FOCUS_SASH",
+          "ability_slot": 2,
+          "ability": "ABILITY_DRY_SKIN",
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
           "moves": [
-            "MOVE_BUBBLE_BEAM",
-            "MOVE_VISE_GRIP",
-            "MOVE_LEER",
-            "MOVE_HARDEN"
+            "MOVE_FREEZE_DRY",
+            "MOVE_PSYSHOCK",
+            "MOVE_AURA_SPHERE",
+            "MOVE_TAUNT"
           ],
-          "bst": 308,
-          "speed": 35,
+          "bst": 475,
+          "speed": 115,
           "types": [
-            "TYPE_WATER",
+            "TYPE_ICE",
+            "TYPE_PSYCHIC"
+          ],
+          "attack_moves": [
+            "MOVE_FREEZE_DRY",
+            "MOVE_PSYSHOCK",
+            "MOVE_AURA_SPHERE"
+          ],
+          "status_moves": [
+            "MOVE_TAUNT"
+          ]
+        },
+        {
+          "species": "SPECIES_MAGMAR",
+          "level_offset": 2,
+          "item": "ITEM_EVIOLITE",
+          "ability_slot": 0,
+          "ability": "ABILITY_FLAME_BODY",
+          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+          "moves": [
+            "MOVE_FLAMETHROWER",
+            "MOVE_SCORCHING_SANDS",
+            "MOVE_HIDDEN_POWER",
+            "MOVE_WILL_O_WISP"
+          ],
+          "bst": 495,
+          "speed": 93,
+          "types": [
+            "TYPE_FIRE",
+            "TYPE_FIRE"
+          ],
+          "attack_moves": [
+            "MOVE_FLAMETHROWER",
+            "MOVE_SCORCHING_SANDS",
+            "MOVE_HIDDEN_POWER"
+          ],
+          "status_moves": [
+            "MOVE_WILL_O_WISP"
+          ]
+        },
+        {
+          "species": "SPECIES_VOLCANION",
+          "level_offset": 3,
+          "item": "ITEM_CHOICE_SCARF",
+          "ability_slot": 0,
+          "ability": "ABILITY_WATER_ABSORB",
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+          "moves": [
+            "MOVE_STEAM_ERUPTION",
+            "MOVE_FLAMETHROWER",
+            "MOVE_SLUDGE_BOMB",
+            "MOVE_EARTH_POWER"
+          ],
+          "bst": 600,
+          "speed": 70,
+          "types": [
+            "TYPE_FIRE",
             "TYPE_WATER"
           ],
           "attack_moves": [
-            "MOVE_BUBBLE_BEAM",
-            "MOVE_VISE_GRIP"
-          ],
-          "status_moves": [
-            "MOVE_LEER",
-            "MOVE_HARDEN"
-          ]
-        },
-        {
-          "species": "SPECIES_TENTACOOL",
-          "level_offset": -3,
-          "item": "ITEM_NONE",
-          "ability_slot": 0,
-          "ability": "ABILITY_CLEAR_BODY",
-          "spread": "SPREAD_10_IV_0_EV",
-          "moves": [
-            "MOVE_BUBBLE_BEAM",
-            "MOVE_ACID",
-            "MOVE_CONSTRICT",
-            "MOVE_WRAP"
-          ],
-          "bst": 335,
-          "speed": 70,
-          "types": [
-            "TYPE_WATER",
-            "TYPE_POISON"
-          ],
-          "attack_moves": [
-            "MOVE_BUBBLE_BEAM",
-            "MOVE_ACID",
-            "MOVE_CONSTRICT",
-            "MOVE_WRAP"
+            "MOVE_STEAM_ERUPTION",
+            "MOVE_FLAMETHROWER",
+            "MOVE_SLUDGE_BOMB",
+            "MOVE_EARTH_POWER"
           ],
           "status_moves": []
-        },
-        {
-          "species": "SPECIES_MAKUHITA",
-          "level_offset": -3,
-          "item": "ITEM_NONE",
-          "ability_slot": 0,
-          "ability": "ABILITY_THICK_FAT",
-          "spread": "SPREAD_25_IV_0_EV",
-          "moves": [
-            "MOVE_WHIRLWIND",
-            "MOVE_FORCE_PALM",
-            "MOVE_FAKE_OUT",
-            "MOVE_KNOCK_OFF"
-          ],
-          "bst": 237,
-          "speed": 25,
-          "types": [
-            "TYPE_FIGHTING",
-            "TYPE_FIGHTING"
-          ],
-          "attack_moves": [
-            "MOVE_FORCE_PALM",
-            "MOVE_FAKE_OUT",
-            "MOVE_KNOCK_OFF"
-          ],
-          "status_moves": [
-            "MOVE_WHIRLWIND"
-          ]
         }
       ]
     },
@@ -67297,136 +67388,135 @@
       "name": "Edwin",
       "location": "Route 110",
       "format": "double",
-      "manifest_difficulty": 36,
+      "manifest_difficulty": 88,
       "party_name": "sParty_Edwin1",
       "party_size": 4,
-      "avg_level_offset": -2.0,
-      "max_level_offset": -2,
-      "item_coverage": 0.25,
+      "avg_level_offset": 1.75,
+      "max_level_offset": 3,
+      "item_coverage": 1.0,
       "complete_moveset_coverage": 1.0,
-      "avg_bst": 392.5,
-      "rare_count": 0,
+      "avg_bst": 416.5,
+      "rare_count": 1,
       "mega_count": 0,
-      "speed_control_count": 3,
-      "protect_count": 1,
-      "defensive_tempo_count": 2,
-      "spread_count": 3,
+      "speed_control_count": 1,
+      "protect_count": 0,
+      "defensive_tempo_count": 1,
+      "spread_count": 1,
       "synergy_tags": [
-        "protected Explosion"
+        "Beat Up + Justified"
       ],
-      "quality_score": 53,
+      "quality_score": 67,
       "issues": [],
       "mons": [
         {
-          "species": "SPECIES_LOMBRE",
-          "level_offset": -2,
-          "item": "ITEM_NONE",
+          "species": "SPECIES_TERRAKION",
+          "level_offset": 1,
+          "item": "ITEM_WHITE_HERB",
           "ability_slot": 0,
-          "ability": "ABILITY_SWIFT_SWIM",
-          "spread": "SPREAD_10_IV_0_EV",
+          "ability": "ABILITY_JUSTIFIED",
+          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
           "moves": [
-            "MOVE_FAKE_OUT",
-            "MOVE_KNOCK_OFF",
-            "MOVE_MEGA_DRAIN",
-            "MOVE_BUBBLE_BEAM"
+            "MOVE_ROCK_SLIDE",
+            "MOVE_CLOSE_COMBAT",
+            "MOVE_IRON_HEAD",
+            "MOVE_TAUNT"
           ],
-          "bst": 340,
-          "speed": 50,
+          "bst": 580,
+          "speed": 108,
           "types": [
-            "TYPE_WATER",
-            "TYPE_GRASS"
+            "TYPE_ROCK",
+            "TYPE_FIGHTING"
           ],
           "attack_moves": [
-            "MOVE_FAKE_OUT",
-            "MOVE_KNOCK_OFF",
-            "MOVE_MEGA_DRAIN",
-            "MOVE_BUBBLE_BEAM"
+            "MOVE_ROCK_SLIDE",
+            "MOVE_CLOSE_COMBAT",
+            "MOVE_IRON_HEAD"
+          ],
+          "status_moves": [
+            "MOVE_TAUNT"
+          ]
+        },
+        {
+          "species": "SPECIES_COTTONEE",
+          "level_offset": 1,
+          "item": "ITEM_OCCA_BERRY",
+          "ability_slot": 0,
+          "ability": "ABILITY_PRANKSTER",
+          "spread": "SPREAD_31_IV_HP_DEF_BOLD",
+          "moves": [
+            "MOVE_BEAT_UP",
+            "MOVE_HELPING_HAND",
+            "MOVE_CHARM",
+            "MOVE_GIGA_DRAIN"
+          ],
+          "bst": 280,
+          "speed": 66,
+          "types": [
+            "TYPE_GRASS",
+            "TYPE_FAIRY"
+          ],
+          "attack_moves": [
+            "MOVE_BEAT_UP",
+            "MOVE_GIGA_DRAIN"
+          ],
+          "status_moves": [
+            "MOVE_HELPING_HAND",
+            "MOVE_CHARM"
+          ]
+        },
+        {
+          "species": "SPECIES_ARCHEN",
+          "level_offset": 2,
+          "item": "ITEM_FLYING_GEM",
+          "ability_slot": 0,
+          "ability": "ABILITY_DEFEATIST",
+          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+          "moves": [
+            "MOVE_ACROBATICS",
+            "MOVE_ROCK_SLIDE",
+            "MOVE_CRUNCH",
+            "MOVE_U_TURN"
+          ],
+          "bst": 401,
+          "speed": 70,
+          "types": [
+            "TYPE_ROCK",
+            "TYPE_FLYING"
+          ],
+          "attack_moves": [
+            "MOVE_ACROBATICS",
+            "MOVE_ROCK_SLIDE",
+            "MOVE_CRUNCH",
+            "MOVE_U_TURN"
           ],
           "status_moves": []
         },
         {
-          "species": "SPECIES_NUZLEAF",
-          "level_offset": -2,
-          "item": "ITEM_NONE",
+          "species": "SPECIES_EELEKTRIK",
+          "level_offset": 3,
+          "item": "ITEM_EXPERT_BELT",
           "ability_slot": 0,
-          "ability": "ABILITY_CHLOROPHYLL",
-          "spread": "SPREAD_10_IV_0_EV",
+          "ability": "ABILITY_LEVITATE",
+          "spread": "SPREAD_31_IV_HP_ATK_MIXED",
           "moves": [
-            "MOVE_FEINT_ATTACK",
-            "MOVE_LEAF_BLADE",
-            "MOVE_AIR_CUTTER",
-            "MOVE_GROWTH"
+            "MOVE_THUNDERBOLT",
+            "MOVE_GIGA_DRAIN",
+            "MOVE_CRUNCH",
+            "MOVE_AQUA_TAIL"
           ],
-          "bst": 340,
-          "speed": 60,
+          "bst": 405,
+          "speed": 40,
           "types": [
-            "TYPE_GRASS",
-            "TYPE_DARK"
-          ],
-          "attack_moves": [
-            "MOVE_FEINT_ATTACK",
-            "MOVE_LEAF_BLADE",
-            "MOVE_AIR_CUTTER"
-          ],
-          "status_moves": [
-            "MOVE_GROWTH"
-          ]
-        },
-        {
-          "species": "SPECIES_GRAVELER_ALOLAN",
-          "level_offset": -2,
-          "item": "ITEM_NONE",
-          "ability_slot": 0,
-          "ability": "ABILITY_MAGNET_PULL",
-          "spread": "SPREAD_31_IV_80_EV",
-          "moves": [
-            "MOVE_THUNDER_PUNCH",
-            "MOVE_ROCK_SLIDE",
-            "MOVE_EXPLOSION",
-            "MOVE_ROCK_POLISH"
-          ],
-          "bst": 390,
-          "speed": 35,
-          "types": [
-            "TYPE_ROCK",
+            "TYPE_ELECTRIC",
             "TYPE_ELECTRIC"
           ],
           "attack_moves": [
-            "MOVE_THUNDER_PUNCH",
-            "MOVE_ROCK_SLIDE",
-            "MOVE_EXPLOSION"
+            "MOVE_THUNDERBOLT",
+            "MOVE_GIGA_DRAIN",
+            "MOVE_CRUNCH",
+            "MOVE_AQUA_TAIL"
           ],
-          "status_moves": [
-            "MOVE_ROCK_POLISH"
-          ]
-        },
-        {
-          "species": "SPECIES_AEGISLASH",
-          "level_offset": -2,
-          "item": "ITEM_LIFE_ORB",
-          "ability_slot": 0,
-          "ability": "ABILITY_STANCE_CHANGE",
-          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
-          "moves": [
-            "MOVE_CLOSE_COMBAT",
-            "MOVE_POLTERGEIST",
-            "MOVE_SHADOW_SNEAK",
-            "MOVE_KINGS_SHIELD"
-          ],
-          "bst": 500,
-          "speed": 60,
-          "types": [
-            "TYPE_STEEL",
-            "TYPE_GHOST"
-          ],
-          "attack_moves": [
-            "MOVE_CLOSE_COMBAT",
-            "MOVE_POLTERGEIST",
-            "MOVE_SHADOW_SNEAK"
-          ],
-          "status_moves": [
-            "MOVE_KINGS_SHIELD"
-          ]
+          "status_moves": []
         }
       ]
     },
@@ -68601,179 +68691,37 @@
       "name": "Brendan",
       "location": "Route 110",
       "format": "double",
-      "manifest_difficulty": 57,
+      "manifest_difficulty": 97,
       "party_name": "sParty_BrendanRoute110Mudkip",
       "party_size": 6,
-      "avg_level_offset": -0.5,
-      "max_level_offset": 1,
-      "item_coverage": 0.333,
+      "avg_level_offset": 1.83,
+      "max_level_offset": 3,
+      "item_coverage": 1.0,
       "complete_moveset_coverage": 1.0,
-      "avg_bst": 484.8,
+      "avg_bst": 482.3,
       "rare_count": 1,
       "mega_count": 0,
-      "speed_control_count": 6,
+      "speed_control_count": 2,
       "protect_count": 1,
-      "defensive_tempo_count": 5,
-      "spread_count": 1,
+      "defensive_tempo_count": 2,
+      "spread_count": 2,
       "synergy_tags": [
-        "active speed control",
-        "pivot control",
-        "priority pressure",
-        "status control"
+        "active speed control"
       ],
-      "quality_score": 76,
+      "quality_score": 80,
       "issues": [],
       "mons": [
         {
-          "species": "SPECIES_SWELLOW",
-          "level_offset": -1,
-          "item": "ITEM_NONE",
-          "ability_slot": 0,
-          "ability": "ABILITY_GUTS",
-          "spread": "SPREAD_25_IV_0_EV",
-          "moves": [
-            "MOVE_WING_ATTACK",
-            "MOVE_QUICK_ATTACK",
-            "MOVE_ROOST",
-            "MOVE_U_TURN"
-          ],
-          "bst": 465,
-          "speed": 125,
-          "types": [
-            "TYPE_NORMAL",
-            "TYPE_FLYING"
-          ],
-          "attack_moves": [
-            "MOVE_WING_ATTACK",
-            "MOVE_QUICK_ATTACK",
-            "MOVE_U_TURN"
-          ],
-          "status_moves": [
-            "MOVE_ROOST"
-          ]
-        },
-        {
-          "species": "SPECIES_ARAQUANID",
-          "level_offset": -1,
-          "item": "ITEM_NONE",
-          "ability_slot": 0,
-          "ability": "ABILITY_WATER_BUBBLE",
-          "spread": "SPREAD_25_IV_0_EV",
-          "moves": [
-            "MOVE_BUG_BITE",
-            "MOVE_WATER_PULSE",
-            "MOVE_ICE_FANG",
-            "MOVE_SPIDER_WEB"
-          ],
-          "bst": 474,
-          "speed": 42,
-          "types": [
-            "TYPE_WATER",
-            "TYPE_BUG"
-          ],
-          "attack_moves": [
-            "MOVE_BUG_BITE",
-            "MOVE_WATER_PULSE",
-            "MOVE_ICE_FANG"
-          ],
-          "status_moves": [
-            "MOVE_SPIDER_WEB"
-          ]
-        },
-        {
-          "species": "SPECIES_ARCANINE",
-          "level_offset": -1,
-          "item": "ITEM_NONE",
-          "ability_slot": 0,
-          "ability": "ABILITY_INTIMIDATE",
-          "spread": "SPREAD_25_IV_0_EV",
-          "moves": [
-            "MOVE_FLAME_BURST",
-            "MOVE_THUNDER_FANG",
-            "MOVE_EXTREME_SPEED",
-            "MOVE_ROAR"
-          ],
-          "bst": 555,
-          "speed": 95,
-          "types": [
-            "TYPE_FIRE",
-            "TYPE_FIRE"
-          ],
-          "attack_moves": [
-            "MOVE_FLAME_BURST",
-            "MOVE_THUNDER_FANG",
-            "MOVE_EXTREME_SPEED"
-          ],
-          "status_moves": [
-            "MOVE_ROAR"
-          ]
-        },
-        {
-          "species": "SPECIES_MIMIKYU",
-          "level_offset": -1,
-          "item": "ITEM_NONE",
-          "ability_slot": 0,
-          "ability": "ABILITY_DISGUISE",
-          "spread": "SPREAD_25_IV_0_EV",
-          "moves": [
-            "MOVE_SHADOW_CLAW",
-            "MOVE_SHADOW_SNEAK",
-            "MOVE_BULK_UP",
-            "MOVE_DRAIN_PUNCH"
-          ],
-          "bst": 476,
-          "speed": 96,
-          "types": [
-            "TYPE_GHOST",
-            "TYPE_FAIRY"
-          ],
-          "attack_moves": [
-            "MOVE_SHADOW_CLAW",
-            "MOVE_SHADOW_SNEAK",
-            "MOVE_DRAIN_PUNCH"
-          ],
-          "status_moves": [
-            "MOVE_BULK_UP"
-          ]
-        },
-        {
-          "species": "SPECIES_GROVYLE",
-          "level_offset": 1,
-          "item": "ITEM_SITRUS_BERRY",
-          "ability_slot": 0,
-          "ability": "ABILITY_OVERGROW",
-          "spread": "SPREAD_25_IV_0_EV",
-          "moves": [
-            "MOVE_GRASS_PLEDGE",
-            "MOVE_DRAGON_BREATH",
-            "MOVE_FURY_CUTTER",
-            "MOVE_ROCK_TOMB"
-          ],
-          "bst": 405,
-          "speed": 95,
-          "types": [
-            "TYPE_GRASS",
-            "TYPE_GRASS"
-          ],
-          "attack_moves": [
-            "MOVE_GRASS_PLEDGE",
-            "MOVE_DRAGON_BREATH",
-            "MOVE_FURY_CUTTER",
-            "MOVE_ROCK_TOMB"
-          ],
-          "status_moves": []
-        },
-        {
           "species": "SPECIES_TYPE_NULL",
-          "level_offset": 0,
+          "level_offset": 1,
           "item": "ITEM_EVIOLITE",
           "ability_slot": 0,
           "ability": "ABILITY_BATTLE_ARMOR",
-          "spread": "SPREAD_31_IV_HP_DEF_SPDEF_SASSY",
+          "spread": "SPREAD_31_IV_HP_ATK_MIXED",
           "moves": [
             "MOVE_TRI_ATTACK",
             "MOVE_ICY_WIND",
-            "MOVE_THUNDER_WAVE",
+            "MOVE_U_TURN",
             "MOVE_PROTECT"
           ],
           "bst": 534,
@@ -68784,12 +68732,150 @@
           ],
           "attack_moves": [
             "MOVE_TRI_ATTACK",
-            "MOVE_ICY_WIND"
+            "MOVE_ICY_WIND",
+            "MOVE_U_TURN"
           ],
           "status_moves": [
-            "MOVE_THUNDER_WAVE",
             "MOVE_PROTECT"
           ]
+        },
+        {
+          "species": "SPECIES_DRACOVISH",
+          "level_offset": 2,
+          "item": "ITEM_CHOICE_BAND",
+          "ability_slot": 1,
+          "ability": "ABILITY_STRONG_JAW",
+          "spread": "SPREAD_31_IV_ATK_SPEED_ADAMANT",
+          "moves": [
+            "MOVE_FISHIOUS_REND",
+            "MOVE_PSYCHIC_FANGS",
+            "MOVE_CRUNCH",
+            "MOVE_ICE_FANG"
+          ],
+          "bst": 505,
+          "speed": 75,
+          "types": [
+            "TYPE_WATER",
+            "TYPE_DRAGON"
+          ],
+          "attack_moves": [
+            "MOVE_FISHIOUS_REND",
+            "MOVE_PSYCHIC_FANGS",
+            "MOVE_CRUNCH",
+            "MOVE_ICE_FANG"
+          ],
+          "status_moves": []
+        },
+        {
+          "species": "SPECIES_GROVYLE",
+          "level_offset": 1,
+          "item": "ITEM_SITRUS_BERRY",
+          "ability_slot": 0,
+          "ability": "ABILITY_OVERGROW",
+          "spread": "SPREAD_31_IV_SPATK_SPEED_HASTY",
+          "moves": [
+            "MOVE_GRASS_PLEDGE",
+            "MOVE_ENERGY_BALL",
+            "MOVE_DOUBLE_EDGE",
+            "MOVE_PROTECT"
+          ],
+          "bst": 405,
+          "speed": 95,
+          "types": [
+            "TYPE_GRASS",
+            "TYPE_GRASS"
+          ],
+          "attack_moves": [
+            "MOVE_GRASS_PLEDGE",
+            "MOVE_ENERGY_BALL",
+            "MOVE_DOUBLE_EDGE"
+          ],
+          "status_moves": [
+            "MOVE_PROTECT"
+          ]
+        },
+        {
+          "species": "SPECIES_METANG",
+          "level_offset": 2,
+          "item": "ITEM_WEAKNESS_POLICY",
+          "ability_slot": 0,
+          "ability": "ABILITY_CLEAR_BODY",
+          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+          "moves": [
+            "MOVE_IRON_HEAD",
+            "MOVE_ZEN_HEADBUTT",
+            "MOVE_ICE_PUNCH",
+            "MOVE_PROTECT"
+          ],
+          "bst": 420,
+          "speed": 50,
+          "types": [
+            "TYPE_STEEL",
+            "TYPE_PSYCHIC"
+          ],
+          "attack_moves": [
+            "MOVE_IRON_HEAD",
+            "MOVE_ZEN_HEADBUTT",
+            "MOVE_ICE_PUNCH"
+          ],
+          "status_moves": [
+            "MOVE_PROTECT"
+          ]
+        },
+        {
+          "species": "SPECIES_ALCREMIE",
+          "level_offset": 2,
+          "item": "ITEM_BABIRI_BERRY",
+          "ability_slot": 2,
+          "ability": "ABILITY_AROMA_VEIL",
+          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+          "moves": [
+            "MOVE_DECORATE",
+            "MOVE_DAZZLING_GLEAM",
+            "MOVE_MYSTICAL_FIRE",
+            "MOVE_PROTECT"
+          ],
+          "bst": 495,
+          "speed": 64,
+          "types": [
+            "TYPE_FAIRY",
+            "TYPE_FAIRY"
+          ],
+          "attack_moves": [
+            "MOVE_DAZZLING_GLEAM",
+            "MOVE_MYSTICAL_FIRE"
+          ],
+          "status_moves": [
+            "MOVE_DECORATE",
+            "MOVE_PROTECT"
+          ]
+        },
+        {
+          "species": "SPECIES_DURALUDON",
+          "level_offset": 3,
+          "item": "ITEM_ASSAULT_VEST",
+          "ability_slot": 2,
+          "ability": "ABILITY_STALWART",
+          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+          "moves": [
+            "MOVE_FLASH_CANNON",
+            "MOVE_DRAGON_PULSE",
+            "MOVE_THUNDERBOLT",
+            "MOVE_BODY_PRESS"
+          ],
+          "bst": 535,
+          "speed": 85,
+          "types": [
+            "TYPE_STEEL",
+            "TYPE_DRAGON"
+          ],
+          "attack_moves": [
+            "MOVE_FLASH_CANNON",
+            "MOVE_DRAGON_PULSE",
+            "MOVE_THUNDERBOLT",
+            "MOVE_BODY_PRESS"
+          ],
+          "status_moves": []
         }
       ]
     },
@@ -69047,138 +69133,80 @@
       "name": "Brendan",
       "location": "Route 110",
       "format": "double",
-      "manifest_difficulty": 57,
+      "manifest_difficulty": 97,
       "party_name": "sParty_BrendanRoute110Treecko",
       "party_size": 6,
-      "avg_level_offset": -0.5,
-      "max_level_offset": 1,
-      "item_coverage": 0.333,
+      "avg_level_offset": 1.83,
+      "max_level_offset": 3,
+      "item_coverage": 1.0,
       "complete_moveset_coverage": 1.0,
-      "avg_bst": 461.8,
-      "rare_count": 0,
+      "avg_bst": 482.3,
+      "rare_count": 1,
       "mega_count": 0,
-      "speed_control_count": 5,
+      "speed_control_count": 2,
       "protect_count": 1,
       "defensive_tempo_count": 2,
-      "spread_count": 1,
+      "spread_count": 2,
       "synergy_tags": [
-        "pivot offense",
-        "priority pressure"
+        "active speed control"
       ],
-      "quality_score": 67,
+      "quality_score": 80,
       "issues": [],
       "mons": [
         {
-          "species": "SPECIES_SWELLOW",
-          "level_offset": -1,
-          "item": "ITEM_NONE",
+          "species": "SPECIES_TYPE_NULL",
+          "level_offset": 1,
+          "item": "ITEM_EVIOLITE",
           "ability_slot": 0,
-          "ability": "ABILITY_GUTS",
-          "spread": "SPREAD_25_IV_0_EV",
+          "ability": "ABILITY_BATTLE_ARMOR",
+          "spread": "SPREAD_31_IV_HP_ATK_MIXED",
           "moves": [
-            "MOVE_WING_ATTACK",
-            "MOVE_QUICK_ATTACK",
-            "MOVE_ROOST",
-            "MOVE_U_TURN"
+            "MOVE_TRI_ATTACK",
+            "MOVE_ICY_WIND",
+            "MOVE_U_TURN",
+            "MOVE_PROTECT"
           ],
-          "bst": 465,
-          "speed": 125,
+          "bst": 534,
+          "speed": 59,
           "types": [
             "TYPE_NORMAL",
-            "TYPE_FLYING"
+            "TYPE_NORMAL"
           ],
           "attack_moves": [
-            "MOVE_WING_ATTACK",
-            "MOVE_QUICK_ATTACK",
+            "MOVE_TRI_ATTACK",
+            "MOVE_ICY_WIND",
             "MOVE_U_TURN"
           ],
           "status_moves": [
-            "MOVE_ROOST"
+            "MOVE_PROTECT"
           ]
         },
         {
-          "species": "SPECIES_ARAQUANID",
-          "level_offset": -1,
-          "item": "ITEM_NONE",
-          "ability_slot": 0,
-          "ability": "ABILITY_WATER_BUBBLE",
-          "spread": "SPREAD_25_IV_0_EV",
+          "species": "SPECIES_DRACOVISH",
+          "level_offset": 2,
+          "item": "ITEM_CHOICE_BAND",
+          "ability_slot": 1,
+          "ability": "ABILITY_STRONG_JAW",
+          "spread": "SPREAD_31_IV_ATK_SPEED_ADAMANT",
           "moves": [
-            "MOVE_BUG_BITE",
-            "MOVE_WATER_PULSE",
-            "MOVE_ICE_FANG",
-            "MOVE_SPIDER_WEB"
-          ],
-          "bst": 474,
-          "speed": 42,
-          "types": [
-            "TYPE_WATER",
-            "TYPE_BUG"
-          ],
-          "attack_moves": [
-            "MOVE_BUG_BITE",
-            "MOVE_WATER_PULSE",
+            "MOVE_FISHIOUS_REND",
+            "MOVE_PSYCHIC_FANGS",
+            "MOVE_CRUNCH",
             "MOVE_ICE_FANG"
           ],
-          "status_moves": [
-            "MOVE_SPIDER_WEB"
-          ]
-        },
-        {
-          "species": "SPECIES_BRELOOM",
-          "level_offset": -1,
-          "item": "ITEM_NONE",
-          "ability_slot": 1,
-          "ability": "ABILITY_POISON_HEAL",
-          "spread": "SPREAD_25_IV_0_EV",
-          "moves": [
-            "MOVE_BULLET_SEED",
-            "MOVE_MACH_PUNCH",
-            "MOVE_ROCK_TOMB",
-            "MOVE_BULK_UP"
-          ],
-          "bst": 460,
-          "speed": 70,
+          "bst": 505,
+          "speed": 75,
           "types": [
-            "TYPE_GRASS",
-            "TYPE_FIGHTING"
+            "TYPE_WATER",
+            "TYPE_DRAGON"
           ],
           "attack_moves": [
-            "MOVE_BULLET_SEED",
-            "MOVE_MACH_PUNCH",
-            "MOVE_ROCK_TOMB"
+            "MOVE_FISHIOUS_REND",
+            "MOVE_PSYCHIC_FANGS",
+            "MOVE_CRUNCH",
+            "MOVE_ICE_FANG"
           ],
-          "status_moves": [
-            "MOVE_BULK_UP"
-          ]
-        },
-        {
-          "species": "SPECIES_MIMIKYU",
-          "level_offset": -1,
-          "item": "ITEM_NONE",
-          "ability_slot": 0,
-          "ability": "ABILITY_DISGUISE",
-          "spread": "SPREAD_25_IV_0_EV",
-          "moves": [
-            "MOVE_SHADOW_CLAW",
-            "MOVE_SHADOW_SNEAK",
-            "MOVE_BULK_UP",
-            "MOVE_DRAIN_PUNCH"
-          ],
-          "bst": 476,
-          "speed": 96,
-          "types": [
-            "TYPE_GHOST",
-            "TYPE_FAIRY"
-          ],
-          "attack_moves": [
-            "MOVE_SHADOW_CLAW",
-            "MOVE_SHADOW_SNEAK",
-            "MOVE_DRAIN_PUNCH"
-          ],
-          "status_moves": [
-            "MOVE_BULK_UP"
-          ]
+          "status_moves": []
         },
         {
           "species": "SPECIES_COMBUSKEN",
@@ -69186,12 +69214,12 @@
           "item": "ITEM_SITRUS_BERRY",
           "ability_slot": 0,
           "ability": "ABILITY_BLAZE",
-          "spread": "SPREAD_25_IV_0_EV",
+          "spread": "SPREAD_31_IV_SPATK_SPEED_HASTY",
           "moves": [
-            "MOVE_BRICK_BREAK",
-            "MOVE_ROCK_TOMB",
             "MOVE_FIRE_PLEDGE",
-            "MOVE_BULK_UP"
+            "MOVE_FLAMETHROWER",
+            "MOVE_DOUBLE_EDGE",
+            "MOVE_PROTECT"
           ],
           "bst": 405,
           "speed": 55,
@@ -69200,41 +69228,96 @@
             "TYPE_FIGHTING"
           ],
           "attack_moves": [
-            "MOVE_BRICK_BREAK",
-            "MOVE_ROCK_TOMB",
-            "MOVE_FIRE_PLEDGE"
+            "MOVE_FIRE_PLEDGE",
+            "MOVE_FLAMETHROWER",
+            "MOVE_DOUBLE_EDGE"
           ],
           "status_moves": [
-            "MOVE_BULK_UP"
+            "MOVE_PROTECT"
           ]
         },
         {
-          "species": "SPECIES_HELIOLISK",
-          "level_offset": 0,
-          "item": "ITEM_SITRUS_BERRY",
+          "species": "SPECIES_METANG",
+          "level_offset": 2,
+          "item": "ITEM_WEAKNESS_POLICY",
           "ability_slot": 0,
-          "ability": "ABILITY_DRY_SKIN",
-          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+          "ability": "ABILITY_CLEAR_BODY",
+          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
           "moves": [
-            "MOVE_PROTECT",
-            "MOVE_VOLT_SWITCH",
-            "MOVE_GLARE",
-            "MOVE_HYPER_VOICE"
+            "MOVE_IRON_HEAD",
+            "MOVE_ZEN_HEADBUTT",
+            "MOVE_ICE_PUNCH",
+            "MOVE_PROTECT"
           ],
-          "bst": 491,
-          "speed": 109,
+          "bst": 420,
+          "speed": 50,
           "types": [
-            "TYPE_ELECTRIC",
-            "TYPE_NORMAL"
+            "TYPE_STEEL",
+            "TYPE_PSYCHIC"
           ],
           "attack_moves": [
-            "MOVE_VOLT_SWITCH",
-            "MOVE_HYPER_VOICE"
+            "MOVE_IRON_HEAD",
+            "MOVE_ZEN_HEADBUTT",
+            "MOVE_ICE_PUNCH"
           ],
           "status_moves": [
-            "MOVE_PROTECT",
-            "MOVE_GLARE"
+            "MOVE_PROTECT"
           ]
+        },
+        {
+          "species": "SPECIES_ALCREMIE",
+          "level_offset": 2,
+          "item": "ITEM_BABIRI_BERRY",
+          "ability_slot": 2,
+          "ability": "ABILITY_AROMA_VEIL",
+          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+          "moves": [
+            "MOVE_DECORATE",
+            "MOVE_DAZZLING_GLEAM",
+            "MOVE_MYSTICAL_FIRE",
+            "MOVE_PROTECT"
+          ],
+          "bst": 495,
+          "speed": 64,
+          "types": [
+            "TYPE_FAIRY",
+            "TYPE_FAIRY"
+          ],
+          "attack_moves": [
+            "MOVE_DAZZLING_GLEAM",
+            "MOVE_MYSTICAL_FIRE"
+          ],
+          "status_moves": [
+            "MOVE_DECORATE",
+            "MOVE_PROTECT"
+          ]
+        },
+        {
+          "species": "SPECIES_DURALUDON",
+          "level_offset": 3,
+          "item": "ITEM_ASSAULT_VEST",
+          "ability_slot": 2,
+          "ability": "ABILITY_STALWART",
+          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+          "moves": [
+            "MOVE_FLASH_CANNON",
+            "MOVE_DRAGON_PULSE",
+            "MOVE_THUNDERBOLT",
+            "MOVE_BODY_PRESS"
+          ],
+          "bst": 535,
+          "speed": 85,
+          "types": [
+            "TYPE_STEEL",
+            "TYPE_DRAGON"
+          ],
+          "attack_moves": [
+            "MOVE_FLASH_CANNON",
+            "MOVE_DRAGON_PULSE",
+            "MOVE_THUNDERBOLT",
+            "MOVE_BODY_PRESS"
+          ],
+          "status_moves": []
         }
       ]
     },
@@ -69492,139 +69575,80 @@
       "name": "Brendan",
       "location": "Route 110",
       "format": "double",
-      "manifest_difficulty": 59,
+      "manifest_difficulty": 97,
       "party_name": "sParty_BrendanRoute110Torchic",
       "party_size": 6,
-      "avg_level_offset": -0.5,
-      "max_level_offset": 1,
-      "item_coverage": 0.333,
+      "avg_level_offset": 1.83,
+      "max_level_offset": 3,
+      "item_coverage": 1.0,
       "complete_moveset_coverage": 1.0,
-      "avg_bst": 481.3,
-      "rare_count": 0,
+      "avg_bst": 482.3,
+      "rare_count": 1,
       "mega_count": 0,
-      "speed_control_count": 6,
+      "speed_control_count": 2,
       "protect_count": 1,
-      "defensive_tempo_count": 4,
-      "spread_count": 4,
+      "defensive_tempo_count": 2,
+      "spread_count": 2,
       "synergy_tags": [
-        "active speed control",
-        "pivot control",
-        "priority pressure"
+        "active speed control"
       ],
-      "quality_score": 75,
+      "quality_score": 80,
       "issues": [],
       "mons": [
         {
-          "species": "SPECIES_SWELLOW",
-          "level_offset": -1,
-          "item": "ITEM_NONE",
+          "species": "SPECIES_TYPE_NULL",
+          "level_offset": 1,
+          "item": "ITEM_EVIOLITE",
           "ability_slot": 0,
-          "ability": "ABILITY_GUTS",
-          "spread": "SPREAD_25_IV_0_EV",
+          "ability": "ABILITY_BATTLE_ARMOR",
+          "spread": "SPREAD_31_IV_HP_ATK_MIXED",
           "moves": [
-            "MOVE_WING_ATTACK",
-            "MOVE_QUICK_ATTACK",
-            "MOVE_ROOST",
-            "MOVE_U_TURN"
+            "MOVE_TRI_ATTACK",
+            "MOVE_ICY_WIND",
+            "MOVE_U_TURN",
+            "MOVE_PROTECT"
           ],
-          "bst": 465,
-          "speed": 125,
+          "bst": 534,
+          "speed": 59,
           "types": [
             "TYPE_NORMAL",
-            "TYPE_FLYING"
+            "TYPE_NORMAL"
           ],
           "attack_moves": [
-            "MOVE_WING_ATTACK",
-            "MOVE_QUICK_ATTACK",
+            "MOVE_TRI_ATTACK",
+            "MOVE_ICY_WIND",
             "MOVE_U_TURN"
           ],
           "status_moves": [
-            "MOVE_ROOST"
+            "MOVE_PROTECT"
           ]
         },
         {
-          "species": "SPECIES_ARCANINE",
-          "level_offset": -1,
-          "item": "ITEM_NONE",
-          "ability_slot": 0,
-          "ability": "ABILITY_INTIMIDATE",
-          "spread": "SPREAD_25_IV_0_EV",
-          "moves": [
-            "MOVE_FLAME_BURST",
-            "MOVE_THUNDER_FANG",
-            "MOVE_EXTREME_SPEED",
-            "MOVE_ROAR"
-          ],
-          "bst": 555,
-          "speed": 95,
-          "types": [
-            "TYPE_FIRE",
-            "TYPE_FIRE"
-          ],
-          "attack_moves": [
-            "MOVE_FLAME_BURST",
-            "MOVE_THUNDER_FANG",
-            "MOVE_EXTREME_SPEED"
-          ],
-          "status_moves": [
-            "MOVE_ROAR"
-          ]
-        },
-        {
-          "species": "SPECIES_BRELOOM",
-          "level_offset": -1,
-          "item": "ITEM_NONE",
+          "species": "SPECIES_DRACOVISH",
+          "level_offset": 2,
+          "item": "ITEM_CHOICE_BAND",
           "ability_slot": 1,
-          "ability": "ABILITY_POISON_HEAL",
-          "spread": "SPREAD_25_IV_0_EV",
+          "ability": "ABILITY_STRONG_JAW",
+          "spread": "SPREAD_31_IV_ATK_SPEED_ADAMANT",
           "moves": [
-            "MOVE_BULLET_SEED",
-            "MOVE_MACH_PUNCH",
-            "MOVE_ROCK_TOMB",
-            "MOVE_BULK_UP"
+            "MOVE_FISHIOUS_REND",
+            "MOVE_PSYCHIC_FANGS",
+            "MOVE_CRUNCH",
+            "MOVE_ICE_FANG"
           ],
-          "bst": 460,
-          "speed": 70,
+          "bst": 505,
+          "speed": 75,
           "types": [
-            "TYPE_GRASS",
-            "TYPE_FIGHTING"
+            "TYPE_WATER",
+            "TYPE_DRAGON"
           ],
           "attack_moves": [
-            "MOVE_BULLET_SEED",
-            "MOVE_MACH_PUNCH",
-            "MOVE_ROCK_TOMB"
+            "MOVE_FISHIOUS_REND",
+            "MOVE_PSYCHIC_FANGS",
+            "MOVE_CRUNCH",
+            "MOVE_ICE_FANG"
           ],
-          "status_moves": [
-            "MOVE_BULK_UP"
-          ]
-        },
-        {
-          "species": "SPECIES_MIMIKYU",
-          "level_offset": -1,
-          "item": "ITEM_NONE",
-          "ability_slot": 0,
-          "ability": "ABILITY_DISGUISE",
-          "spread": "SPREAD_25_IV_0_EV",
-          "moves": [
-            "MOVE_SHADOW_CLAW",
-            "MOVE_SHADOW_SNEAK",
-            "MOVE_BULK_UP",
-            "MOVE_DRAIN_PUNCH"
-          ],
-          "bst": 476,
-          "speed": 96,
-          "types": [
-            "TYPE_GHOST",
-            "TYPE_FAIRY"
-          ],
-          "attack_moves": [
-            "MOVE_SHADOW_CLAW",
-            "MOVE_SHADOW_SNEAK",
-            "MOVE_DRAIN_PUNCH"
-          ],
-          "status_moves": [
-            "MOVE_BULK_UP"
-          ]
+          "status_moves": []
         },
         {
           "species": "SPECIES_MARSHTOMP",
@@ -69632,12 +69656,12 @@
           "item": "ITEM_SITRUS_BERRY",
           "ability_slot": 0,
           "ability": "ABILITY_TORRENT",
-          "spread": "SPREAD_25_IV_0_EV",
+          "spread": "SPREAD_31_IV_SPATK_SPEED_HASTY",
           "moves": [
-            "MOVE_BULLDOZE",
             "MOVE_WATER_PLEDGE",
-            "MOVE_ROCK_SLIDE",
-            "MOVE_BRICK_BREAK"
+            "MOVE_SCALD",
+            "MOVE_DOUBLE_EDGE",
+            "MOVE_PROTECT"
           ],
           "bst": 405,
           "speed": 50,
@@ -69646,40 +69670,96 @@
             "TYPE_GROUND"
           ],
           "attack_moves": [
-            "MOVE_BULLDOZE",
             "MOVE_WATER_PLEDGE",
-            "MOVE_ROCK_SLIDE",
-            "MOVE_BRICK_BREAK"
-          ],
-          "status_moves": []
-        },
-        {
-          "species": "SPECIES_PYROAR",
-          "level_offset": 0,
-          "item": "ITEM_SITRUS_BERRY",
-          "ability_slot": 0,
-          "ability": "ABILITY_RIVALRY",
-          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
-          "moves": [
-            "MOVE_HEAT_WAVE",
-            "MOVE_HYPER_VOICE",
-            "MOVE_FIRE_BLAST",
-            "MOVE_PROTECT"
-          ],
-          "bst": 527,
-          "speed": 106,
-          "types": [
-            "TYPE_FIRE",
-            "TYPE_NORMAL"
-          ],
-          "attack_moves": [
-            "MOVE_HEAT_WAVE",
-            "MOVE_HYPER_VOICE",
-            "MOVE_FIRE_BLAST"
+            "MOVE_SCALD",
+            "MOVE_DOUBLE_EDGE"
           ],
           "status_moves": [
             "MOVE_PROTECT"
           ]
+        },
+        {
+          "species": "SPECIES_METANG",
+          "level_offset": 2,
+          "item": "ITEM_WEAKNESS_POLICY",
+          "ability_slot": 0,
+          "ability": "ABILITY_CLEAR_BODY",
+          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+          "moves": [
+            "MOVE_IRON_HEAD",
+            "MOVE_ZEN_HEADBUTT",
+            "MOVE_ICE_PUNCH",
+            "MOVE_PROTECT"
+          ],
+          "bst": 420,
+          "speed": 50,
+          "types": [
+            "TYPE_STEEL",
+            "TYPE_PSYCHIC"
+          ],
+          "attack_moves": [
+            "MOVE_IRON_HEAD",
+            "MOVE_ZEN_HEADBUTT",
+            "MOVE_ICE_PUNCH"
+          ],
+          "status_moves": [
+            "MOVE_PROTECT"
+          ]
+        },
+        {
+          "species": "SPECIES_ALCREMIE",
+          "level_offset": 2,
+          "item": "ITEM_BABIRI_BERRY",
+          "ability_slot": 2,
+          "ability": "ABILITY_AROMA_VEIL",
+          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+          "moves": [
+            "MOVE_DECORATE",
+            "MOVE_DAZZLING_GLEAM",
+            "MOVE_MYSTICAL_FIRE",
+            "MOVE_PROTECT"
+          ],
+          "bst": 495,
+          "speed": 64,
+          "types": [
+            "TYPE_FAIRY",
+            "TYPE_FAIRY"
+          ],
+          "attack_moves": [
+            "MOVE_DAZZLING_GLEAM",
+            "MOVE_MYSTICAL_FIRE"
+          ],
+          "status_moves": [
+            "MOVE_DECORATE",
+            "MOVE_PROTECT"
+          ]
+        },
+        {
+          "species": "SPECIES_DURALUDON",
+          "level_offset": 3,
+          "item": "ITEM_ASSAULT_VEST",
+          "ability_slot": 2,
+          "ability": "ABILITY_STALWART",
+          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+          "moves": [
+            "MOVE_FLASH_CANNON",
+            "MOVE_DRAGON_PULSE",
+            "MOVE_THUNDERBOLT",
+            "MOVE_BODY_PRESS"
+          ],
+          "bst": 535,
+          "speed": 85,
+          "types": [
+            "TYPE_STEEL",
+            "TYPE_DRAGON"
+          ],
+          "attack_moves": [
+            "MOVE_FLASH_CANNON",
+            "MOVE_DRAGON_PULSE",
+            "MOVE_THUNDERBOLT",
+            "MOVE_BODY_PRESS"
+          ],
+          "status_moves": []
         }
       ]
     },
@@ -69937,139 +70017,80 @@
       "name": "May",
       "location": "Route 110",
       "format": "double",
-      "manifest_difficulty": 59,
+      "manifest_difficulty": 97,
       "party_name": "sParty_MayRoute110Mudkip",
       "party_size": 6,
-      "avg_level_offset": -0.5,
-      "max_level_offset": 1,
-      "item_coverage": 0.333,
+      "avg_level_offset": 1.83,
+      "max_level_offset": 3,
+      "item_coverage": 1.0,
       "complete_moveset_coverage": 1.0,
-      "avg_bst": 479.3,
+      "avg_bst": 482.3,
       "rare_count": 1,
       "mega_count": 0,
-      "speed_control_count": 5,
+      "speed_control_count": 2,
       "protect_count": 1,
-      "defensive_tempo_count": 4,
-      "spread_count": 1,
+      "defensive_tempo_count": 2,
+      "spread_count": 2,
       "synergy_tags": [
-        "Tailwind",
-        "active speed control",
-        "pivot offense",
-        "status control"
+        "active speed control"
       ],
-      "quality_score": 75,
+      "quality_score": 80,
       "issues": [],
       "mons": [
         {
-          "species": "SPECIES_SWELLOW",
-          "level_offset": -1,
-          "item": "ITEM_NONE",
+          "species": "SPECIES_TYPE_NULL",
+          "level_offset": 1,
+          "item": "ITEM_EVIOLITE",
           "ability_slot": 0,
-          "ability": "ABILITY_GUTS",
-          "spread": "SPREAD_25_IV_0_EV",
+          "ability": "ABILITY_BATTLE_ARMOR",
+          "spread": "SPREAD_31_IV_HP_ATK_MIXED",
           "moves": [
-            "MOVE_WING_ATTACK",
-            "MOVE_QUICK_ATTACK",
-            "MOVE_ROOST",
-            "MOVE_U_TURN"
+            "MOVE_TRI_ATTACK",
+            "MOVE_ICY_WIND",
+            "MOVE_U_TURN",
+            "MOVE_PROTECT"
           ],
-          "bst": 465,
-          "speed": 125,
+          "bst": 534,
+          "speed": 59,
           "types": [
             "TYPE_NORMAL",
-            "TYPE_FLYING"
+            "TYPE_NORMAL"
           ],
           "attack_moves": [
-            "MOVE_WING_ATTACK",
-            "MOVE_QUICK_ATTACK",
+            "MOVE_TRI_ATTACK",
+            "MOVE_ICY_WIND",
             "MOVE_U_TURN"
           ],
           "status_moves": [
-            "MOVE_ROOST"
+            "MOVE_PROTECT"
           ]
         },
         {
-          "species": "SPECIES_STARMIE",
-          "level_offset": -1,
-          "item": "ITEM_NONE",
+          "species": "SPECIES_DRACOVISH",
+          "level_offset": 2,
+          "item": "ITEM_CHOICE_BAND",
           "ability_slot": 1,
-          "ability": "ABILITY_NATURAL_CURE",
-          "spread": "SPREAD_25_IV_0_EV",
+          "ability": "ABILITY_STRONG_JAW",
+          "spread": "SPREAD_31_IV_ATK_SPEED_ADAMANT",
           "moves": [
-            "MOVE_WATER_PULSE",
-            "MOVE_RECOVER",
-            "MOVE_PSYBEAM",
-            "MOVE_ICY_WIND"
+            "MOVE_FISHIOUS_REND",
+            "MOVE_PSYCHIC_FANGS",
+            "MOVE_CRUNCH",
+            "MOVE_ICE_FANG"
           ],
-          "bst": 520,
-          "speed": 115,
+          "bst": 505,
+          "speed": 75,
           "types": [
             "TYPE_WATER",
-            "TYPE_PSYCHIC"
+            "TYPE_DRAGON"
           ],
           "attack_moves": [
-            "MOVE_WATER_PULSE",
-            "MOVE_PSYBEAM",
-            "MOVE_ICY_WIND"
-          ],
-          "status_moves": [
-            "MOVE_RECOVER"
-          ]
-        },
-        {
-          "species": "SPECIES_PONYTA",
-          "level_offset": -1,
-          "item": "ITEM_NONE",
-          "ability_slot": 0,
-          "ability": "ABILITY_RECKLESS",
-          "spread": "SPREAD_25_IV_0_EV",
-          "moves": [
-            "MOVE_BLAZE_KICK",
-            "MOVE_WILD_CHARGE",
-            "MOVE_TAKE_DOWN",
-            "MOVE_DOUBLE_KICK"
-          ],
-          "bst": 410,
-          "speed": 90,
-          "types": [
-            "TYPE_FIRE",
-            "TYPE_FIRE"
-          ],
-          "attack_moves": [
-            "MOVE_BLAZE_KICK",
-            "MOVE_WILD_CHARGE",
-            "MOVE_TAKE_DOWN",
-            "MOVE_DOUBLE_KICK"
+            "MOVE_FISHIOUS_REND",
+            "MOVE_PSYCHIC_FANGS",
+            "MOVE_CRUNCH",
+            "MOVE_ICE_FANG"
           ],
           "status_moves": []
-        },
-        {
-          "species": "SPECIES_MIMIKYU",
-          "level_offset": -1,
-          "item": "ITEM_NONE",
-          "ability_slot": 0,
-          "ability": "ABILITY_DISGUISE",
-          "spread": "SPREAD_25_IV_0_EV",
-          "moves": [
-            "MOVE_SHADOW_CLAW",
-            "MOVE_SHADOW_SNEAK",
-            "MOVE_BULK_UP",
-            "MOVE_DRAIN_PUNCH"
-          ],
-          "bst": 476,
-          "speed": 96,
-          "types": [
-            "TYPE_GHOST",
-            "TYPE_FAIRY"
-          ],
-          "attack_moves": [
-            "MOVE_SHADOW_CLAW",
-            "MOVE_SHADOW_SNEAK",
-            "MOVE_DRAIN_PUNCH"
-          ],
-          "status_moves": [
-            "MOVE_BULK_UP"
-          ]
         },
         {
           "species": "SPECIES_GROVYLE",
@@ -70077,12 +70098,12 @@
           "item": "ITEM_SITRUS_BERRY",
           "ability_slot": 0,
           "ability": "ABILITY_OVERGROW",
-          "spread": "SPREAD_25_IV_0_EV",
+          "spread": "SPREAD_31_IV_SPATK_SPEED_HASTY",
           "moves": [
             "MOVE_GRASS_PLEDGE",
-            "MOVE_DRAGON_BREATH",
-            "MOVE_FURY_CUTTER",
-            "MOVE_ROCK_TOMB"
+            "MOVE_ENERGY_BALL",
+            "MOVE_DOUBLE_EDGE",
+            "MOVE_PROTECT"
           ],
           "bst": 405,
           "speed": 95,
@@ -70092,39 +70113,95 @@
           ],
           "attack_moves": [
             "MOVE_GRASS_PLEDGE",
-            "MOVE_DRAGON_BREATH",
-            "MOVE_FURY_CUTTER",
-            "MOVE_ROCK_TOMB"
-          ],
-          "status_moves": []
-        },
-        {
-          "species": "SPECIES_SILVALLY",
-          "level_offset": 0,
-          "item": "ITEM_LIFE_ORB",
-          "ability_slot": 0,
-          "ability": "ABILITY_RKS_SYSTEM",
-          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
-          "moves": [
-            "MOVE_MULTI_ATTACK",
-            "MOVE_PARTING_SHOT",
-            "MOVE_TAILWIND",
-            "MOVE_PROTECT"
-          ],
-          "bst": 600,
-          "speed": 100,
-          "types": [
-            "TYPE_NORMAL",
-            "TYPE_NORMAL"
-          ],
-          "attack_moves": [
-            "MOVE_MULTI_ATTACK"
+            "MOVE_ENERGY_BALL",
+            "MOVE_DOUBLE_EDGE"
           ],
           "status_moves": [
-            "MOVE_PARTING_SHOT",
-            "MOVE_TAILWIND",
             "MOVE_PROTECT"
           ]
+        },
+        {
+          "species": "SPECIES_METANG",
+          "level_offset": 2,
+          "item": "ITEM_WEAKNESS_POLICY",
+          "ability_slot": 0,
+          "ability": "ABILITY_CLEAR_BODY",
+          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+          "moves": [
+            "MOVE_IRON_HEAD",
+            "MOVE_ZEN_HEADBUTT",
+            "MOVE_ICE_PUNCH",
+            "MOVE_PROTECT"
+          ],
+          "bst": 420,
+          "speed": 50,
+          "types": [
+            "TYPE_STEEL",
+            "TYPE_PSYCHIC"
+          ],
+          "attack_moves": [
+            "MOVE_IRON_HEAD",
+            "MOVE_ZEN_HEADBUTT",
+            "MOVE_ICE_PUNCH"
+          ],
+          "status_moves": [
+            "MOVE_PROTECT"
+          ]
+        },
+        {
+          "species": "SPECIES_ALCREMIE",
+          "level_offset": 2,
+          "item": "ITEM_BABIRI_BERRY",
+          "ability_slot": 2,
+          "ability": "ABILITY_AROMA_VEIL",
+          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+          "moves": [
+            "MOVE_DECORATE",
+            "MOVE_DAZZLING_GLEAM",
+            "MOVE_MYSTICAL_FIRE",
+            "MOVE_PROTECT"
+          ],
+          "bst": 495,
+          "speed": 64,
+          "types": [
+            "TYPE_FAIRY",
+            "TYPE_FAIRY"
+          ],
+          "attack_moves": [
+            "MOVE_DAZZLING_GLEAM",
+            "MOVE_MYSTICAL_FIRE"
+          ],
+          "status_moves": [
+            "MOVE_DECORATE",
+            "MOVE_PROTECT"
+          ]
+        },
+        {
+          "species": "SPECIES_DURALUDON",
+          "level_offset": 3,
+          "item": "ITEM_ASSAULT_VEST",
+          "ability_slot": 2,
+          "ability": "ABILITY_STALWART",
+          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+          "moves": [
+            "MOVE_FLASH_CANNON",
+            "MOVE_DRAGON_PULSE",
+            "MOVE_THUNDERBOLT",
+            "MOVE_BODY_PRESS"
+          ],
+          "bst": 535,
+          "speed": 85,
+          "types": [
+            "TYPE_STEEL",
+            "TYPE_DRAGON"
+          ],
+          "attack_moves": [
+            "MOVE_FLASH_CANNON",
+            "MOVE_DRAGON_PULSE",
+            "MOVE_THUNDERBOLT",
+            "MOVE_BODY_PRESS"
+          ],
+          "status_moves": []
         }
       ]
     },
@@ -70379,138 +70456,80 @@
       "name": "May",
       "location": "Route 110",
       "format": "double",
-      "manifest_difficulty": 59,
+      "manifest_difficulty": 97,
       "party_name": "sParty_MayRoute110Treecko",
       "party_size": 6,
-      "avg_level_offset": -0.5,
-      "max_level_offset": 1,
-      "item_coverage": 0.333,
+      "avg_level_offset": 1.83,
+      "max_level_offset": 3,
+      "item_coverage": 1.0,
       "complete_moveset_coverage": 1.0,
-      "avg_bst": 489.3,
-      "rare_count": 0,
+      "avg_bst": 482.3,
+      "rare_count": 1,
       "mega_count": 0,
-      "speed_control_count": 3,
-      "protect_count": 0,
-      "defensive_tempo_count": 1,
-      "spread_count": 1,
+      "speed_control_count": 2,
+      "protect_count": 1,
+      "defensive_tempo_count": 2,
+      "spread_count": 2,
       "synergy_tags": [
-        "Fighting pressure",
         "active speed control"
       ],
-      "quality_score": 67,
+      "quality_score": 80,
       "issues": [],
       "mons": [
         {
-          "species": "SPECIES_SWELLOW",
-          "level_offset": -1,
-          "item": "ITEM_NONE",
+          "species": "SPECIES_TYPE_NULL",
+          "level_offset": 1,
+          "item": "ITEM_EVIOLITE",
           "ability_slot": 0,
-          "ability": "ABILITY_GUTS",
-          "spread": "SPREAD_25_IV_0_EV",
+          "ability": "ABILITY_BATTLE_ARMOR",
+          "spread": "SPREAD_31_IV_HP_ATK_MIXED",
           "moves": [
-            "MOVE_WING_ATTACK",
-            "MOVE_QUICK_ATTACK",
-            "MOVE_ROOST",
-            "MOVE_U_TURN"
+            "MOVE_TRI_ATTACK",
+            "MOVE_ICY_WIND",
+            "MOVE_U_TURN",
+            "MOVE_PROTECT"
           ],
-          "bst": 465,
-          "speed": 125,
+          "bst": 534,
+          "speed": 59,
           "types": [
             "TYPE_NORMAL",
-            "TYPE_FLYING"
+            "TYPE_NORMAL"
           ],
           "attack_moves": [
-            "MOVE_WING_ATTACK",
-            "MOVE_QUICK_ATTACK",
+            "MOVE_TRI_ATTACK",
+            "MOVE_ICY_WIND",
             "MOVE_U_TURN"
           ],
           "status_moves": [
-            "MOVE_ROOST"
+            "MOVE_PROTECT"
           ]
         },
         {
-          "species": "SPECIES_STARMIE",
-          "level_offset": -1,
-          "item": "ITEM_NONE",
+          "species": "SPECIES_DRACOVISH",
+          "level_offset": 2,
+          "item": "ITEM_CHOICE_BAND",
           "ability_slot": 1,
-          "ability": "ABILITY_NATURAL_CURE",
-          "spread": "SPREAD_25_IV_0_EV",
+          "ability": "ABILITY_STRONG_JAW",
+          "spread": "SPREAD_31_IV_ATK_SPEED_ADAMANT",
           "moves": [
-            "MOVE_WATER_PULSE",
-            "MOVE_RECOVER",
-            "MOVE_PSYBEAM",
-            "MOVE_ICY_WIND"
+            "MOVE_FISHIOUS_REND",
+            "MOVE_PSYCHIC_FANGS",
+            "MOVE_CRUNCH",
+            "MOVE_ICE_FANG"
           ],
-          "bst": 520,
-          "speed": 115,
+          "bst": 505,
+          "speed": 75,
           "types": [
             "TYPE_WATER",
-            "TYPE_PSYCHIC"
+            "TYPE_DRAGON"
           ],
           "attack_moves": [
-            "MOVE_WATER_PULSE",
-            "MOVE_PSYBEAM",
-            "MOVE_ICY_WIND"
+            "MOVE_FISHIOUS_REND",
+            "MOVE_PSYCHIC_FANGS",
+            "MOVE_CRUNCH",
+            "MOVE_ICE_FANG"
           ],
-          "status_moves": [
-            "MOVE_RECOVER"
-          ]
-        },
-        {
-          "species": "SPECIES_TSAREENA",
-          "level_offset": -1,
-          "item": "ITEM_NONE",
-          "ability_slot": 1,
-          "ability": "ABILITY_QUEENLY_MAJESTY",
-          "spread": "SPREAD_15_IV_0_EV",
-          "moves": [
-            "MOVE_TROP_KICK",
-            "MOVE_LOW_SWEEP",
-            "MOVE_U_TURN",
-            "MOVE_SYNTHESIS"
-          ],
-          "bst": 530,
-          "speed": 108,
-          "types": [
-            "TYPE_GRASS",
-            "TYPE_FIGHTING"
-          ],
-          "attack_moves": [
-            "MOVE_TROP_KICK",
-            "MOVE_LOW_SWEEP",
-            "MOVE_U_TURN"
-          ],
-          "status_moves": [
-            "MOVE_SYNTHESIS"
-          ]
-        },
-        {
-          "species": "SPECIES_MIMIKYU",
-          "level_offset": -1,
-          "item": "ITEM_NONE",
-          "ability_slot": 0,
-          "ability": "ABILITY_DISGUISE",
-          "spread": "SPREAD_25_IV_0_EV",
-          "moves": [
-            "MOVE_SHADOW_CLAW",
-            "MOVE_SHADOW_SNEAK",
-            "MOVE_BULK_UP",
-            "MOVE_DRAIN_PUNCH"
-          ],
-          "bst": 476,
-          "speed": 96,
-          "types": [
-            "TYPE_GHOST",
-            "TYPE_FAIRY"
-          ],
-          "attack_moves": [
-            "MOVE_SHADOW_CLAW",
-            "MOVE_SHADOW_SNEAK",
-            "MOVE_DRAIN_PUNCH"
-          ],
-          "status_moves": [
-            "MOVE_BULK_UP"
-          ]
+          "status_moves": []
         },
         {
           "species": "SPECIES_COMBUSKEN",
@@ -70518,12 +70537,12 @@
           "item": "ITEM_SITRUS_BERRY",
           "ability_slot": 0,
           "ability": "ABILITY_BLAZE",
-          "spread": "SPREAD_25_IV_0_EV",
+          "spread": "SPREAD_31_IV_SPATK_SPEED_HASTY",
           "moves": [
-            "MOVE_BRICK_BREAK",
-            "MOVE_ROCK_TOMB",
             "MOVE_FIRE_PLEDGE",
-            "MOVE_BULK_UP"
+            "MOVE_FLAMETHROWER",
+            "MOVE_DOUBLE_EDGE",
+            "MOVE_PROTECT"
           ],
           "bst": 405,
           "speed": 55,
@@ -70532,38 +70551,94 @@
             "TYPE_FIGHTING"
           ],
           "attack_moves": [
-            "MOVE_BRICK_BREAK",
-            "MOVE_ROCK_TOMB",
-            "MOVE_FIRE_PLEDGE"
+            "MOVE_FIRE_PLEDGE",
+            "MOVE_FLAMETHROWER",
+            "MOVE_DOUBLE_EDGE"
           ],
           "status_moves": [
-            "MOVE_BULK_UP"
+            "MOVE_PROTECT"
           ]
         },
         {
-          "species": "SPECIES_ELECTIVIRE",
-          "level_offset": 0,
-          "item": "ITEM_LIFE_ORB",
+          "species": "SPECIES_METANG",
+          "level_offset": 2,
+          "item": "ITEM_WEAKNESS_POLICY",
           "ability_slot": 0,
-          "ability": "ABILITY_MOTOR_DRIVE",
-          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+          "ability": "ABILITY_CLEAR_BODY",
+          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
           "moves": [
-            "MOVE_WILD_CHARGE",
+            "MOVE_IRON_HEAD",
+            "MOVE_ZEN_HEADBUTT",
             "MOVE_ICE_PUNCH",
-            "MOVE_STOMPING_TANTRUM",
-            "MOVE_CROSS_CHOP"
+            "MOVE_PROTECT"
           ],
-          "bst": 540,
-          "speed": 95,
+          "bst": 420,
+          "speed": 50,
           "types": [
-            "TYPE_ELECTRIC",
-            "TYPE_FIGHTING"
+            "TYPE_STEEL",
+            "TYPE_PSYCHIC"
           ],
           "attack_moves": [
-            "MOVE_WILD_CHARGE",
-            "MOVE_ICE_PUNCH",
-            "MOVE_STOMPING_TANTRUM",
-            "MOVE_CROSS_CHOP"
+            "MOVE_IRON_HEAD",
+            "MOVE_ZEN_HEADBUTT",
+            "MOVE_ICE_PUNCH"
+          ],
+          "status_moves": [
+            "MOVE_PROTECT"
+          ]
+        },
+        {
+          "species": "SPECIES_ALCREMIE",
+          "level_offset": 2,
+          "item": "ITEM_BABIRI_BERRY",
+          "ability_slot": 2,
+          "ability": "ABILITY_AROMA_VEIL",
+          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+          "moves": [
+            "MOVE_DECORATE",
+            "MOVE_DAZZLING_GLEAM",
+            "MOVE_MYSTICAL_FIRE",
+            "MOVE_PROTECT"
+          ],
+          "bst": 495,
+          "speed": 64,
+          "types": [
+            "TYPE_FAIRY",
+            "TYPE_FAIRY"
+          ],
+          "attack_moves": [
+            "MOVE_DAZZLING_GLEAM",
+            "MOVE_MYSTICAL_FIRE"
+          ],
+          "status_moves": [
+            "MOVE_DECORATE",
+            "MOVE_PROTECT"
+          ]
+        },
+        {
+          "species": "SPECIES_DURALUDON",
+          "level_offset": 3,
+          "item": "ITEM_ASSAULT_VEST",
+          "ability_slot": 2,
+          "ability": "ABILITY_STALWART",
+          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+          "moves": [
+            "MOVE_FLASH_CANNON",
+            "MOVE_DRAGON_PULSE",
+            "MOVE_THUNDERBOLT",
+            "MOVE_BODY_PRESS"
+          ],
+          "bst": 535,
+          "speed": 85,
+          "types": [
+            "TYPE_STEEL",
+            "TYPE_DRAGON"
+          ],
+          "attack_moves": [
+            "MOVE_FLASH_CANNON",
+            "MOVE_DRAGON_PULSE",
+            "MOVE_THUNDERBOLT",
+            "MOVE_BODY_PRESS"
           ],
           "status_moves": []
         }
@@ -70820,136 +70895,80 @@
       "name": "May",
       "location": "Route 110",
       "format": "double",
-      "manifest_difficulty": 59,
+      "manifest_difficulty": 97,
       "party_name": "sParty_MayRoute110Torchic",
       "party_size": 6,
-      "avg_level_offset": -0.5,
-      "max_level_offset": 1,
-      "item_coverage": 0.333,
+      "avg_level_offset": 1.83,
+      "max_level_offset": 3,
+      "item_coverage": 1.0,
       "complete_moveset_coverage": 1.0,
-      "avg_bst": 464.3,
-      "rare_count": 0,
-      "mega_count": 1,
-      "speed_control_count": 5,
+      "avg_bst": 482.3,
+      "rare_count": 1,
+      "mega_count": 0,
+      "speed_control_count": 2,
       "protect_count": 1,
       "defensive_tempo_count": 2,
       "spread_count": 2,
       "synergy_tags": [
         "active speed control"
       ],
-      "quality_score": 67,
+      "quality_score": 80,
       "issues": [],
       "mons": [
         {
-          "species": "SPECIES_SWELLOW",
-          "level_offset": -1,
-          "item": "ITEM_NONE",
+          "species": "SPECIES_TYPE_NULL",
+          "level_offset": 1,
+          "item": "ITEM_EVIOLITE",
           "ability_slot": 0,
-          "ability": "ABILITY_GUTS",
-          "spread": "SPREAD_25_IV_0_EV",
+          "ability": "ABILITY_BATTLE_ARMOR",
+          "spread": "SPREAD_31_IV_HP_ATK_MIXED",
           "moves": [
-            "MOVE_WING_ATTACK",
-            "MOVE_QUICK_ATTACK",
-            "MOVE_ROOST",
-            "MOVE_U_TURN"
+            "MOVE_TRI_ATTACK",
+            "MOVE_ICY_WIND",
+            "MOVE_U_TURN",
+            "MOVE_PROTECT"
           ],
-          "bst": 465,
-          "speed": 125,
+          "bst": 534,
+          "speed": 59,
           "types": [
             "TYPE_NORMAL",
-            "TYPE_FLYING"
+            "TYPE_NORMAL"
           ],
           "attack_moves": [
-            "MOVE_WING_ATTACK",
-            "MOVE_QUICK_ATTACK",
+            "MOVE_TRI_ATTACK",
+            "MOVE_ICY_WIND",
             "MOVE_U_TURN"
           ],
           "status_moves": [
-            "MOVE_ROOST"
+            "MOVE_PROTECT"
           ]
         },
         {
-          "species": "SPECIES_TSAREENA",
-          "level_offset": -1,
-          "item": "ITEM_NONE",
+          "species": "SPECIES_DRACOVISH",
+          "level_offset": 2,
+          "item": "ITEM_CHOICE_BAND",
           "ability_slot": 1,
-          "ability": "ABILITY_QUEENLY_MAJESTY",
-          "spread": "SPREAD_15_IV_0_EV",
+          "ability": "ABILITY_STRONG_JAW",
+          "spread": "SPREAD_31_IV_ATK_SPEED_ADAMANT",
           "moves": [
-            "MOVE_TROP_KICK",
-            "MOVE_LOW_SWEEP",
-            "MOVE_U_TURN",
-            "MOVE_SYNTHESIS"
+            "MOVE_FISHIOUS_REND",
+            "MOVE_PSYCHIC_FANGS",
+            "MOVE_CRUNCH",
+            "MOVE_ICE_FANG"
           ],
-          "bst": 530,
-          "speed": 108,
+          "bst": 505,
+          "speed": 75,
           "types": [
-            "TYPE_GRASS",
-            "TYPE_FIGHTING"
+            "TYPE_WATER",
+            "TYPE_DRAGON"
           ],
           "attack_moves": [
-            "MOVE_TROP_KICK",
-            "MOVE_LOW_SWEEP",
-            "MOVE_U_TURN"
-          ],
-          "status_moves": [
-            "MOVE_SYNTHESIS"
-          ]
-        },
-        {
-          "species": "SPECIES_PONYTA",
-          "level_offset": -1,
-          "item": "ITEM_NONE",
-          "ability_slot": 0,
-          "ability": "ABILITY_RECKLESS",
-          "spread": "SPREAD_25_IV_0_EV",
-          "moves": [
-            "MOVE_BLAZE_KICK",
-            "MOVE_WILD_CHARGE",
-            "MOVE_TAKE_DOWN",
-            "MOVE_DOUBLE_KICK"
-          ],
-          "bst": 410,
-          "speed": 90,
-          "types": [
-            "TYPE_FIRE",
-            "TYPE_FIRE"
-          ],
-          "attack_moves": [
-            "MOVE_BLAZE_KICK",
-            "MOVE_WILD_CHARGE",
-            "MOVE_TAKE_DOWN",
-            "MOVE_DOUBLE_KICK"
+            "MOVE_FISHIOUS_REND",
+            "MOVE_PSYCHIC_FANGS",
+            "MOVE_CRUNCH",
+            "MOVE_ICE_FANG"
           ],
           "status_moves": []
-        },
-        {
-          "species": "SPECIES_MIMIKYU",
-          "level_offset": -1,
-          "item": "ITEM_NONE",
-          "ability_slot": 0,
-          "ability": "ABILITY_DISGUISE",
-          "spread": "SPREAD_25_IV_0_EV",
-          "moves": [
-            "MOVE_SHADOW_CLAW",
-            "MOVE_SHADOW_SNEAK",
-            "MOVE_BULK_UP",
-            "MOVE_DRAIN_PUNCH"
-          ],
-          "bst": 476,
-          "speed": 96,
-          "types": [
-            "TYPE_GHOST",
-            "TYPE_FAIRY"
-          ],
-          "attack_moves": [
-            "MOVE_SHADOW_CLAW",
-            "MOVE_SHADOW_SNEAK",
-            "MOVE_DRAIN_PUNCH"
-          ],
-          "status_moves": [
-            "MOVE_BULK_UP"
-          ]
         },
         {
           "species": "SPECIES_MARSHTOMP",
@@ -70957,12 +70976,12 @@
           "item": "ITEM_SITRUS_BERRY",
           "ability_slot": 0,
           "ability": "ABILITY_TORRENT",
-          "spread": "SPREAD_25_IV_0_EV",
+          "spread": "SPREAD_31_IV_SPATK_SPEED_HASTY",
           "moves": [
-            "MOVE_BULLDOZE",
             "MOVE_WATER_PLEDGE",
-            "MOVE_ROCK_SLIDE",
-            "MOVE_BRICK_BREAK"
+            "MOVE_SCALD",
+            "MOVE_DOUBLE_EDGE",
+            "MOVE_PROTECT"
           ],
           "bst": 405,
           "speed": 50,
@@ -70971,40 +70990,96 @@
             "TYPE_GROUND"
           ],
           "attack_moves": [
-            "MOVE_BULLDOZE",
             "MOVE_WATER_PLEDGE",
-            "MOVE_ROCK_SLIDE",
-            "MOVE_BRICK_BREAK"
-          ],
-          "status_moves": []
-        },
-        {
-          "species": "SPECIES_PINSIR",
-          "level_offset": 0,
-          "item": "ITEM_PINSIRITE",
-          "ability_slot": 0,
-          "ability": "ABILITY_HYPER_CUTTER",
-          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
-          "moves": [
-            "MOVE_FEINT",
-            "MOVE_DETECT",
-            "MOVE_CLOSE_COMBAT",
-            "MOVE_BODY_SLAM"
-          ],
-          "bst": 500,
-          "speed": 85,
-          "types": [
-            "TYPE_BUG",
-            "TYPE_BUG"
-          ],
-          "attack_moves": [
-            "MOVE_FEINT",
-            "MOVE_CLOSE_COMBAT",
-            "MOVE_BODY_SLAM"
+            "MOVE_SCALD",
+            "MOVE_DOUBLE_EDGE"
           ],
           "status_moves": [
-            "MOVE_DETECT"
+            "MOVE_PROTECT"
           ]
+        },
+        {
+          "species": "SPECIES_METANG",
+          "level_offset": 2,
+          "item": "ITEM_WEAKNESS_POLICY",
+          "ability_slot": 0,
+          "ability": "ABILITY_CLEAR_BODY",
+          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+          "moves": [
+            "MOVE_IRON_HEAD",
+            "MOVE_ZEN_HEADBUTT",
+            "MOVE_ICE_PUNCH",
+            "MOVE_PROTECT"
+          ],
+          "bst": 420,
+          "speed": 50,
+          "types": [
+            "TYPE_STEEL",
+            "TYPE_PSYCHIC"
+          ],
+          "attack_moves": [
+            "MOVE_IRON_HEAD",
+            "MOVE_ZEN_HEADBUTT",
+            "MOVE_ICE_PUNCH"
+          ],
+          "status_moves": [
+            "MOVE_PROTECT"
+          ]
+        },
+        {
+          "species": "SPECIES_ALCREMIE",
+          "level_offset": 2,
+          "item": "ITEM_BABIRI_BERRY",
+          "ability_slot": 2,
+          "ability": "ABILITY_AROMA_VEIL",
+          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+          "moves": [
+            "MOVE_DECORATE",
+            "MOVE_DAZZLING_GLEAM",
+            "MOVE_MYSTICAL_FIRE",
+            "MOVE_PROTECT"
+          ],
+          "bst": 495,
+          "speed": 64,
+          "types": [
+            "TYPE_FAIRY",
+            "TYPE_FAIRY"
+          ],
+          "attack_moves": [
+            "MOVE_DAZZLING_GLEAM",
+            "MOVE_MYSTICAL_FIRE"
+          ],
+          "status_moves": [
+            "MOVE_DECORATE",
+            "MOVE_PROTECT"
+          ]
+        },
+        {
+          "species": "SPECIES_DURALUDON",
+          "level_offset": 3,
+          "item": "ITEM_ASSAULT_VEST",
+          "ability_slot": 2,
+          "ability": "ABILITY_STALWART",
+          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+          "moves": [
+            "MOVE_FLASH_CANNON",
+            "MOVE_DRAGON_PULSE",
+            "MOVE_THUNDERBOLT",
+            "MOVE_BODY_PRESS"
+          ],
+          "bst": 535,
+          "speed": 85,
+          "types": [
+            "TYPE_STEEL",
+            "TYPE_DRAGON"
+          ],
+          "attack_moves": [
+            "MOVE_FLASH_CANNON",
+            "MOVE_DRAGON_PULSE",
+            "MOVE_THUNDERBOLT",
+            "MOVE_BODY_PRESS"
+          ],
+          "status_moves": []
         }
       ]
     },
@@ -82194,135 +82269,132 @@
       "trainer_id": "TRAINER_SALLY",
       "name": "Sally",
       "location": "Route 110 Trick House Puzzle 1",
-      "format": "double",
-      "manifest_difficulty": 36,
+      "format": "single",
+      "manifest_difficulty": 88,
       "party_name": "sParty_Sally",
       "party_size": 4,
-      "avg_level_offset": -2.0,
-      "max_level_offset": -2,
-      "item_coverage": 0.5,
+      "avg_level_offset": 1.75,
+      "max_level_offset": 3,
+      "item_coverage": 1.0,
       "complete_moveset_coverage": 1.0,
-      "avg_bst": 435.0,
-      "rare_count": 0,
+      "avg_bst": 501.5,
+      "rare_count": 1,
       "mega_count": 0,
-      "speed_control_count": 3,
-      "protect_count": 1,
-      "defensive_tempo_count": 3,
-      "spread_count": 1,
+      "speed_control_count": 1,
+      "protect_count": 0,
+      "defensive_tempo_count": 0,
+      "spread_count": 0,
       "synergy_tags": [],
-      "quality_score": 51,
+      "quality_score": 66,
       "issues": [],
       "mons": [
         {
-          "species": "SPECIES_GLOOM",
-          "level_offset": -2,
-          "item": "ITEM_NONE",
-          "ability_slot": 0,
-          "ability": "ABILITY_CHLOROPHYLL",
-          "spread": "SPREAD_10_IV_0_EV",
+          "species": "SPECIES_FLORAGATO",
+          "level_offset": 1,
+          "item": "ITEM_EVIOLITE",
+          "ability_slot": 2,
+          "ability": "ABILITY_PROTEAN",
+          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
           "moves": [
-            "MOVE_GIGA_DRAIN",
-            "MOVE_SLEEP_POWDER",
-            "MOVE_ACID",
-            "MOVE_LUCKY_CHANT"
+            "MOVE_SLASH",
+            "MOVE_SEED_BOMB",
+            "MOVE_PLAY_ROUGH",
+            "MOVE_U_TURN"
           ],
-          "bst": 395,
-          "speed": 40,
+          "bst": 410,
+          "speed": 83,
           "types": [
             "TYPE_GRASS",
-            "TYPE_POISON"
+            "TYPE_GRASS"
           ],
           "attack_moves": [
-            "MOVE_GIGA_DRAIN",
-            "MOVE_ACID"
-          ],
-          "status_moves": [
-            "MOVE_SLEEP_POWDER",
-            "MOVE_LUCKY_CHANT"
-          ]
-        },
-        {
-          "species": "SPECIES_TORRACAT",
-          "level_offset": -2,
-          "item": "ITEM_NONE",
-          "ability_slot": 0,
-          "ability": "ABILITY_BLAZE",
-          "spread": "SPREAD_10_IV_0_EV",
-          "moves": [
-            "MOVE_FIRE_FANG",
-            "MOVE_BITE",
-            "MOVE_DOUBLE_KICK",
-            "MOVE_LICK"
-          ],
-          "bst": 420,
-          "speed": 90,
-          "types": [
-            "TYPE_FIRE",
-            "TYPE_FIRE"
-          ],
-          "attack_moves": [
-            "MOVE_FIRE_FANG",
-            "MOVE_BITE",
-            "MOVE_DOUBLE_KICK",
-            "MOVE_LICK"
+            "MOVE_SLASH",
+            "MOVE_SEED_BOMB",
+            "MOVE_PLAY_ROUGH",
+            "MOVE_U_TURN"
           ],
           "status_moves": []
         },
         {
-          "species": "SPECIES_PLUSLE",
-          "level_offset": -2,
-          "item": "ITEM_ORAN_BERRY",
-          "ability_slot": 0,
-          "ability": "ABILITY_PLUS",
-          "spread": "SPREAD_31_IV_80_EV",
+          "species": "SPECIES_GALLADE",
+          "level_offset": 1,
+          "item": "ITEM_SCOPE_LENS",
+          "ability_slot": 2,
+          "ability": "ABILITY_JUSTIFIED",
+          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
           "moves": [
-            "MOVE_ELECTRO_BALL",
-            "MOVE_NUZZLE",
-            "MOVE_HELPING_HAND",
-            "MOVE_CHARM"
+            "MOVE_LEAF_BLADE",
+            "MOVE_PSYCHO_CUT",
+            "MOVE_NIGHT_SLASH",
+            "MOVE_AERIAL_ACE"
           ],
-          "bst": 435,
-          "speed": 105,
+          "bst": 533,
+          "speed": 100,
           "types": [
-            "TYPE_ELECTRIC",
-            "TYPE_ELECTRIC"
+            "TYPE_PSYCHIC",
+            "TYPE_FIGHTING"
           ],
           "attack_moves": [
-            "MOVE_ELECTRO_BALL",
-            "MOVE_NUZZLE"
+            "MOVE_LEAF_BLADE",
+            "MOVE_PSYCHO_CUT",
+            "MOVE_NIGHT_SLASH",
+            "MOVE_AERIAL_ACE"
           ],
-          "status_moves": [
-            "MOVE_HELPING_HAND",
-            "MOVE_CHARM"
-          ]
+          "status_moves": []
         },
         {
-          "species": "SPECIES_VICTREEBEL",
-          "level_offset": -2,
-          "item": "ITEM_LIFE_ORB",
-          "ability_slot": 0,
-          "ability": "ABILITY_CHLOROPHYLL",
-          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+          "species": "SPECIES_ZANGOOSE",
+          "level_offset": 2,
+          "item": "ITEM_TOXIC_ORB",
+          "ability_slot": 2,
+          "ability": "ABILITY_TOXIC_BOOST",
+          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
           "moves": [
-            "MOVE_SLUDGE_BOMB",
-            "MOVE_POWER_WHIP",
-            "MOVE_PROTECT",
-            "MOVE_KNOCK_OFF"
+            "MOVE_FACADE",
+            "MOVE_NIGHT_SLASH",
+            "MOVE_CLOSE_COMBAT",
+            "MOVE_QUICK_ATTACK"
           ],
-          "bst": 490,
-          "speed": 70,
+          "bst": 493,
+          "speed": 105,
           "types": [
-            "TYPE_GRASS",
-            "TYPE_POISON"
+            "TYPE_NORMAL",
+            "TYPE_NORMAL"
           ],
           "attack_moves": [
-            "MOVE_SLUDGE_BOMB",
-            "MOVE_POWER_WHIP",
-            "MOVE_KNOCK_OFF"
+            "MOVE_FACADE",
+            "MOVE_NIGHT_SLASH",
+            "MOVE_CLOSE_COMBAT",
+            "MOVE_QUICK_ATTACK"
           ],
-          "status_moves": [
-            "MOVE_PROTECT"
-          ]
+          "status_moves": []
+        },
+        {
+          "species": "SPECIES_KARTANA",
+          "level_offset": 3,
+          "item": "ITEM_LIFE_ORB",
+          "ability_slot": 0,
+          "ability": "ABILITY_BEAST_BOOST",
+          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+          "moves": [
+            "MOVE_LEAF_BLADE",
+            "MOVE_SACRED_SWORD",
+            "MOVE_NIGHT_SLASH",
+            "MOVE_X_SCISSOR"
+          ],
+          "bst": 570,
+          "speed": 109,
+          "types": [
+            "TYPE_GRASS",
+            "TYPE_STEEL"
+          ],
+          "attack_moves": [
+            "MOVE_LEAF_BLADE",
+            "MOVE_SACRED_SWORD",
+            "MOVE_NIGHT_SLASH",
+            "MOVE_X_SCISSOR"
+          ],
+          "status_moves": []
         }
       ]
     },
@@ -82331,124 +82403,66 @@
       "name": "Robin",
       "location": "Route 110 Trick House Puzzle 1",
       "format": "double",
-      "manifest_difficulty": 39,
+      "manifest_difficulty": 92,
       "party_name": "sParty_Robin",
       "party_size": 4,
-      "avg_level_offset": -2.0,
-      "max_level_offset": -2,
-      "item_coverage": 0.5,
+      "avg_level_offset": 1.5,
+      "max_level_offset": 3,
+      "item_coverage": 1.0,
       "complete_moveset_coverage": 1.0,
-      "avg_bst": 468.2,
+      "avg_bst": 435.0,
       "rare_count": 1,
       "mega_count": 0,
       "speed_control_count": 3,
       "protect_count": 1,
-      "defensive_tempo_count": 4,
-      "spread_count": 4,
+      "defensive_tempo_count": 3,
+      "spread_count": 1,
       "synergy_tags": [
-        "Trick Room",
-        "active speed control",
-        "status control"
+        "psychic terrain"
       ],
-      "quality_score": 69,
+      "quality_score": 71,
       "issues": [],
       "mons": [
         {
-          "species": "SPECIES_FLETCHINDER",
-          "level_offset": -2,
-          "item": "ITEM_NONE",
-          "ability_slot": 0,
-          "ability": "ABILITY_FLAME_BODY",
-          "spread": "SPREAD_10_IV_0_EV",
+          "species": "SPECIES_INDEEDEE_FEMALE",
+          "level_offset": 1,
+          "item": "ITEM_MENTAL_HERB",
+          "ability_slot": 2,
+          "ability": "ABILITY_PSYCHIC_SURGE",
+          "spread": "SPREAD_31_IV_HP_DEF_BOLD",
           "moves": [
-            "MOVE_AERIAL_ACE",
-            "MOVE_FLAME_CHARGE",
-            "MOVE_STEEL_WING",
-            "MOVE_ROOST"
+            "MOVE_FOLLOW_ME",
+            "MOVE_HELPING_HAND",
+            "MOVE_EXPANDING_FORCE",
+            "MOVE_HEAL_PULSE"
           ],
-          "bst": 382,
-          "speed": 84,
+          "bst": 475,
+          "speed": 85,
           "types": [
-            "TYPE_FIRE",
-            "TYPE_FLYING"
+            "TYPE_PSYCHIC",
+            "TYPE_NORMAL"
           ],
           "attack_moves": [
-            "MOVE_AERIAL_ACE",
-            "MOVE_FLAME_CHARGE",
-            "MOVE_STEEL_WING"
+            "MOVE_EXPANDING_FORCE"
           ],
           "status_moves": [
-            "MOVE_ROOST"
-          ]
-        },
-        {
-          "species": "SPECIES_BRIONNE",
-          "level_offset": -2,
-          "item": "ITEM_NONE",
-          "ability_slot": 0,
-          "ability": "ABILITY_TORRENT",
-          "spread": "SPREAD_10_IV_0_EV",
-          "moves": [
-            "MOVE_WATER_PULSE",
-            "MOVE_ICY_WIND",
-            "MOVE_SING",
-            "MOVE_ENCORE"
-          ],
-          "bst": 420,
-          "speed": 50,
-          "types": [
-            "TYPE_WATER",
-            "TYPE_WATER"
-          ],
-          "attack_moves": [
-            "MOVE_WATER_PULSE",
-            "MOVE_ICY_WIND"
-          ],
-          "status_moves": [
-            "MOVE_SING",
-            "MOVE_ENCORE"
-          ]
-        },
-        {
-          "species": "SPECIES_STUNFISK",
-          "level_offset": -2,
-          "item": "ITEM_LEFTOVERS",
-          "ability_slot": 0,
-          "ability": "ABILITY_STATIC",
-          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
-          "moves": [
-            "MOVE_STEALTH_ROCK",
-            "MOVE_DISCHARGE",
-            "MOVE_EARTH_POWER",
-            "MOVE_SCALD"
-          ],
-          "bst": 471,
-          "speed": 32,
-          "types": [
-            "TYPE_GROUND",
-            "TYPE_ELECTRIC"
-          ],
-          "attack_moves": [
-            "MOVE_DISCHARGE",
-            "MOVE_EARTH_POWER",
-            "MOVE_SCALD"
-          ],
-          "status_moves": [
-            "MOVE_STEALTH_ROCK"
+            "MOVE_FOLLOW_ME",
+            "MOVE_HELPING_HAND",
+            "MOVE_HEAL_PULSE"
           ]
         },
         {
           "species": "SPECIES_MAGEARNA",
-          "level_offset": -2,
-          "item": "ITEM_LIFE_ORB",
+          "level_offset": 0,
+          "item": "ITEM_ASSAULT_VEST",
           "ability_slot": 0,
           "ability": "ABILITY_SOUL_HEART",
-          "spread": "SPREAD_31_IV_HP_SPATK_QUIET",
+          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
           "moves": [
             "MOVE_FLEUR_CANNON",
-            "MOVE_DAZZLING_GLEAM",
-            "MOVE_TRICK_ROOM",
-            "MOVE_PROTECT"
+            "MOVE_FLASH_CANNON",
+            "MOVE_AURA_SPHERE",
+            "MOVE_DAZZLING_GLEAM"
           ],
           "bst": 600,
           "speed": 65,
@@ -82458,10 +82472,65 @@
           ],
           "attack_moves": [
             "MOVE_FLEUR_CANNON",
+            "MOVE_FLASH_CANNON",
+            "MOVE_AURA_SPHERE",
             "MOVE_DAZZLING_GLEAM"
           ],
+          "status_moves": []
+        },
+        {
+          "species": "SPECIES_SHUPPET",
+          "level_offset": 2,
+          "item": "ITEM_EVIOLITE",
+          "ability_slot": 1,
+          "ability": "ABILITY_FRISK",
+          "spread": "SPREAD_31_IV_ATK_SPEED_ADAMANT",
+          "moves": [
+            "MOVE_POLTERGEIST",
+            "MOVE_WILL_O_WISP",
+            "MOVE_GUNK_SHOT",
+            "MOVE_PROTECT"
+          ],
+          "bst": 295,
+          "speed": 45,
+          "types": [
+            "TYPE_GHOST",
+            "TYPE_NORMAL"
+          ],
+          "attack_moves": [
+            "MOVE_POLTERGEIST",
+            "MOVE_GUNK_SHOT"
+          ],
           "status_moves": [
-            "MOVE_TRICK_ROOM",
+            "MOVE_WILL_O_WISP",
+            "MOVE_PROTECT"
+          ]
+        },
+        {
+          "species": "SPECIES_DUOSION",
+          "level_offset": 3,
+          "item": "ITEM_LIFE_ORB",
+          "ability_slot": 1,
+          "ability": "ABILITY_MAGIC_GUARD",
+          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+          "moves": [
+            "MOVE_EXPANDING_FORCE",
+            "MOVE_ENERGY_BALL",
+            "MOVE_SHADOW_BALL",
+            "MOVE_PROTECT"
+          ],
+          "bst": 370,
+          "speed": 30,
+          "types": [
+            "TYPE_PSYCHIC",
+            "TYPE_PSYCHIC"
+          ],
+          "attack_moves": [
+            "MOVE_EXPANDING_FORCE",
+            "MOVE_ENERGY_BALL",
+            "MOVE_SHADOW_BALL"
+          ],
+          "status_moves": [
             "MOVE_PROTECT"
           ]
         }
@@ -85356,134 +85425,28 @@
       "manifest_difficulty": 59,
       "party_name": "sParty_Archie1",
       "party_size": 6,
-      "avg_level_offset": 0.33,
-      "max_level_offset": 1,
-      "item_coverage": 0.5,
+      "avg_level_offset": 1.5,
+      "max_level_offset": 3,
+      "item_coverage": 1.0,
       "complete_moveset_coverage": 1.0,
-      "avg_bst": 526.2,
+      "avg_bst": 527.0,
       "rare_count": 1,
       "mega_count": 1,
-      "speed_control_count": 4,
-      "protect_count": 1,
-      "defensive_tempo_count": 4,
-      "spread_count": 2,
+      "speed_control_count": 6,
+      "protect_count": 2,
+      "defensive_tempo_count": 7,
+      "spread_count": 1,
       "synergy_tags": [
-        "Dark pressure",
-        "rain engine"
+        "Fake Out tempo",
+        "pivot control",
+        "pivot offense",
+        "rain engine",
+        "spread + Wide Guard",
+        "status control"
       ],
-      "quality_score": 80,
+      "quality_score": 94,
       "issues": [],
       "mons": [
-        {
-          "species": "SPECIES_MIGHTYENA",
-          "level_offset": 0,
-          "item": "ITEM_NONE",
-          "ability_slot": 0,
-          "ability": "ABILITY_INTIMIDATE",
-          "spread": "SPREAD_ARCHIE_ONE_MON",
-          "moves": [
-            "MOVE_BITE",
-            "MOVE_FIRE_FANG",
-            "MOVE_THUNDER_FANG",
-            "MOVE_SCARY_FACE"
-          ],
-          "bst": 460,
-          "speed": 90,
-          "types": [
-            "TYPE_DARK",
-            "TYPE_DARK"
-          ],
-          "attack_moves": [
-            "MOVE_BITE",
-            "MOVE_FIRE_FANG",
-            "MOVE_THUNDER_FANG"
-          ],
-          "status_moves": [
-            "MOVE_SCARY_FACE"
-          ]
-        },
-        {
-          "species": "SPECIES_CROBAT",
-          "level_offset": 0,
-          "item": "ITEM_NONE",
-          "ability_slot": 0,
-          "ability": "ABILITY_INNER_FOCUS",
-          "spread": "SPREAD_ARCHIE_ONE_MON",
-          "moves": [
-            "MOVE_AIR_CUTTER",
-            "MOVE_VENOSHOCK",
-            "MOVE_GIGA_DRAIN",
-            "MOVE_SUPER_FANG"
-          ],
-          "bst": 535,
-          "speed": 130,
-          "types": [
-            "TYPE_POISON",
-            "TYPE_FLYING"
-          ],
-          "attack_moves": [
-            "MOVE_AIR_CUTTER",
-            "MOVE_VENOSHOCK",
-            "MOVE_GIGA_DRAIN",
-            "MOVE_SUPER_FANG"
-          ],
-          "status_moves": []
-        },
-        {
-          "species": "SPECIES_SHARPEDO",
-          "level_offset": 1,
-          "item": "ITEM_NONE",
-          "ability_slot": 2,
-          "ability": "ABILITY_SPEED_BOOST",
-          "spread": "SPREAD_ARCHIE_ONE_MON",
-          "moves": [
-            "MOVE_POISON_FANG",
-            "MOVE_BITE",
-            "MOVE_AQUA_JET",
-            "MOVE_ICE_FANG"
-          ],
-          "bst": 480,
-          "speed": 95,
-          "types": [
-            "TYPE_WATER",
-            "TYPE_DARK"
-          ],
-          "attack_moves": [
-            "MOVE_POISON_FANG",
-            "MOVE_BITE",
-            "MOVE_AQUA_JET",
-            "MOVE_ICE_FANG"
-          ],
-          "status_moves": []
-        },
-        {
-          "species": "SPECIES_MALAMAR",
-          "level_offset": 1,
-          "item": "ITEM_MALAMARITE",
-          "ability_slot": 0,
-          "ability": "ABILITY_CONTRARY",
-          "spread": "SPREAD_ARCHIE_ONE_MON",
-          "moves": [
-            "MOVE_PSYCHO_CUT",
-            "MOVE_KNOCK_OFF",
-            "MOVE_SUPERPOWER",
-            "MOVE_HYPNOSIS"
-          ],
-          "bst": 482,
-          "speed": 73,
-          "types": [
-            "TYPE_DARK",
-            "TYPE_PSYCHIC"
-          ],
-          "attack_moves": [
-            "MOVE_PSYCHO_CUT",
-            "MOVE_KNOCK_OFF",
-            "MOVE_SUPERPOWER"
-          ],
-          "status_moves": [
-            "MOVE_HYPNOSIS"
-          ]
-        },
         {
           "species": "SPECIES_KYOGRE",
           "level_offset": 0,
@@ -85492,10 +85455,10 @@
           "ability": "ABILITY_DRIZZLE",
           "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
           "moves": [
-            "MOVE_PROTECT",
+            "MOVE_ORIGIN_PULSE",
+            "MOVE_ICE_BEAM",
             "MOVE_THUNDER",
-            "MOVE_CALM_MIND",
-            "MOVE_ORIGIN_PULSE"
+            "MOVE_PROTECT"
           ],
           "bst": 670,
           "speed": 90,
@@ -85504,37 +85467,148 @@
             "TYPE_WATER"
           ],
           "attack_moves": [
-            "MOVE_THUNDER",
-            "MOVE_ORIGIN_PULSE"
+            "MOVE_ORIGIN_PULSE",
+            "MOVE_ICE_BEAM",
+            "MOVE_THUNDER"
           ],
           "status_moves": [
-            "MOVE_PROTECT",
-            "MOVE_CALM_MIND"
+            "MOVE_PROTECT"
           ]
         },
         {
-          "species": "SPECIES_GRENINJA",
-          "level_offset": 0,
-          "item": "ITEM_LIFE_ORB",
+          "species": "SPECIES_RAICHU",
+          "level_offset": 1,
+          "item": "ITEM_SITRUS_BERRY",
           "ability_slot": 2,
-          "ability": "ABILITY_PROTEAN",
-          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+          "ability": "ABILITY_LIGHTNING_ROD",
+          "spread": "SPREAD_31_IV_HP_SPEED_TIMID",
           "moves": [
-            "MOVE_GRASS_KNOT",
-            "MOVE_PROTECT",
-            "MOVE_HYDRO_PUMP",
-            "MOVE_ICE_BEAM"
+            "MOVE_NUZZLE",
+            "MOVE_VOLT_SWITCH",
+            "MOVE_THUNDERBOLT",
+            "MOVE_ENCORE"
           ],
-          "bst": 530,
-          "speed": 122,
+          "bst": 490,
+          "speed": 115,
           "types": [
-            "TYPE_WATER",
-            "TYPE_DARK"
+            "TYPE_ELECTRIC",
+            "TYPE_ELECTRIC"
           ],
           "attack_moves": [
-            "MOVE_GRASS_KNOT",
+            "MOVE_NUZZLE",
+            "MOVE_VOLT_SWITCH",
+            "MOVE_THUNDERBOLT"
+          ],
+          "status_moves": [
+            "MOVE_ENCORE"
+          ]
+        },
+        {
+          "species": "SPECIES_HITMONTOP",
+          "level_offset": 1,
+          "item": "ITEM_EJECT_BUTTON",
+          "ability_slot": 0,
+          "ability": "ABILITY_INTIMIDATE",
+          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+          "moves": [
+            "MOVE_FAKE_OUT",
+            "MOVE_WIDE_GUARD",
+            "MOVE_FEINT",
+            "MOVE_CLOSE_COMBAT"
+          ],
+          "bst": 485,
+          "speed": 70,
+          "types": [
+            "TYPE_FIGHTING",
+            "TYPE_FIGHTING"
+          ],
+          "attack_moves": [
+            "MOVE_FAKE_OUT",
+            "MOVE_FEINT",
+            "MOVE_CLOSE_COMBAT"
+          ],
+          "status_moves": [
+            "MOVE_WIDE_GUARD"
+          ]
+        },
+        {
+          "species": "SPECIES_LUDICOLO",
+          "level_offset": 2,
+          "item": "ITEM_LIFE_ORB",
+          "ability_slot": 0,
+          "ability": "ABILITY_SWIFT_SWIM",
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+          "moves": [
+            "MOVE_FAKE_OUT",
             "MOVE_HYDRO_PUMP",
+            "MOVE_GIGA_DRAIN",
             "MOVE_ICE_BEAM"
+          ],
+          "bst": 500,
+          "speed": 80,
+          "types": [
+            "TYPE_WATER",
+            "TYPE_GRASS"
+          ],
+          "attack_moves": [
+            "MOVE_FAKE_OUT",
+            "MOVE_HYDRO_PUMP",
+            "MOVE_GIGA_DRAIN",
+            "MOVE_ICE_BEAM"
+          ],
+          "status_moves": []
+        },
+        {
+          "species": "SPECIES_CROBAT",
+          "level_offset": 2,
+          "item": "ITEM_BLACK_SLUDGE",
+          "ability_slot": 0,
+          "ability": "ABILITY_INNER_FOCUS",
+          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+          "moves": [
+            "MOVE_ROOST",
+            "MOVE_TAUNT",
+            "MOVE_BRAVE_BIRD",
+            "MOVE_U_TURN"
+          ],
+          "bst": 535,
+          "speed": 130,
+          "types": [
+            "TYPE_POISON",
+            "TYPE_FLYING"
+          ],
+          "attack_moves": [
+            "MOVE_BRAVE_BIRD",
+            "MOVE_U_TURN"
+          ],
+          "status_moves": [
+            "MOVE_ROOST",
+            "MOVE_TAUNT"
+          ]
+        },
+        {
+          "species": "SPECIES_MALAMAR",
+          "level_offset": 3,
+          "item": "ITEM_MALAMARITE",
+          "ability_slot": 0,
+          "ability": "ABILITY_CONTRARY",
+          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+          "moves": [
+            "MOVE_SUPERPOWER",
+            "MOVE_PSYCHO_CUT",
+            "MOVE_KNOCK_OFF",
+            "MOVE_PROTECT"
+          ],
+          "bst": 482,
+          "speed": 73,
+          "types": [
+            "TYPE_DARK",
+            "TYPE_PSYCHIC"
+          ],
+          "attack_moves": [
+            "MOVE_SUPERPOWER",
+            "MOVE_PSYCHO_CUT",
+            "MOVE_KNOCK_OFF"
           ],
           "status_moves": [
             "MOVE_PROTECT"
@@ -87357,133 +87431,134 @@
       "manifest_difficulty": 20,
       "party_name": "sParty_Johanna",
       "party_size": 4,
-      "avg_level_offset": -2.25,
-      "max_level_offset": -2,
-      "item_coverage": 0.5,
+      "avg_level_offset": 2.0,
+      "max_level_offset": 3,
+      "item_coverage": 1.0,
       "complete_moveset_coverage": 1.0,
-      "avg_bst": 361.2,
+      "avg_bst": 365.0,
       "rare_count": 0,
       "mega_count": 0,
       "speed_control_count": 2,
-      "protect_count": 0,
+      "protect_count": 1,
       "defensive_tempo_count": 2,
-      "spread_count": 0,
+      "spread_count": 3,
       "synergy_tags": [
-        "Water pressure"
+        "Surf ally activation",
+        "active speed control"
       ],
-      "quality_score": 47,
+      "quality_score": 75,
       "issues": [],
       "mons": [
         {
-          "species": "SPECIES_GOLDEEN",
-          "level_offset": -2,
-          "item": "ITEM_NONE",
-          "ability_slot": 2,
-          "ability": "ABILITY_LIGHTNING_ROD",
-          "spread": "",
+          "species": "SPECIES_FEEBAS",
+          "level_offset": 1,
+          "item": "ITEM_FOCUS_SASH",
+          "ability_slot": 1,
+          "ability": "ABILITY_OBLIVIOUS",
+          "spread": "SPREAD_31_IV_HP_SPEED_TIMID",
           "moves": [
-            "MOVE_BUBBLE_BEAM",
-            "MOVE_PECK",
-            "MOVE_HORN_ATTACK",
-            "MOVE_SUPERSONIC"
+            "MOVE_SURF",
+            "MOVE_ICY_WIND",
+            "MOVE_MIRROR_COAT",
+            "MOVE_PROTECT"
           ],
-          "bst": 320,
-          "speed": 63,
+          "bst": 200,
+          "speed": 80,
           "types": [
             "TYPE_WATER",
             "TYPE_WATER"
           ],
           "attack_moves": [
-            "MOVE_BUBBLE_BEAM",
-            "MOVE_PECK",
-            "MOVE_HORN_ATTACK"
+            "MOVE_SURF",
+            "MOVE_ICY_WIND",
+            "MOVE_MIRROR_COAT"
           ],
           "status_moves": [
-            "MOVE_SUPERSONIC"
+            "MOVE_PROTECT"
           ]
         },
         {
-          "species": "SPECIES_BRUXISH",
-          "level_offset": -3,
-          "item": "ITEM_NONE",
-          "ability_slot": 1,
-          "ability": "ABILITY_STRONG_JAW",
-          "spread": "",
-          "moves": [
-            "MOVE_AQUA_JET",
-            "MOVE_BITE",
-            "MOVE_CONFUSION",
-            "MOVE_ASTONISH"
-          ],
-          "bst": 475,
-          "speed": 92,
-          "types": [
-            "TYPE_WATER",
-            "TYPE_PSYCHIC"
-          ],
-          "attack_moves": [
-            "MOVE_AQUA_JET",
-            "MOVE_BITE",
-            "MOVE_CONFUSION",
-            "MOVE_ASTONISH"
-          ],
-          "status_moves": []
-        },
-        {
-          "species": "SPECIES_BUIZEL",
-          "level_offset": -2,
-          "item": "ITEM_LIFE_ORB",
-          "ability_slot": 2,
-          "ability": "ABILITY_WATER_VEIL",
-          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
-          "moves": [
-            "MOVE_BRICK_BREAK",
-            "MOVE_ICE_PUNCH",
-            "MOVE_BULK_UP",
-            "MOVE_AQUA_JET"
-          ],
-          "bst": 330,
-          "speed": 85,
-          "types": [
-            "TYPE_WATER",
-            "TYPE_WATER"
-          ],
-          "attack_moves": [
-            "MOVE_BRICK_BREAK",
-            "MOVE_ICE_PUNCH",
-            "MOVE_AQUA_JET"
-          ],
-          "status_moves": [
-            "MOVE_BULK_UP"
-          ]
-        },
-        {
-          "species": "SPECIES_NATU",
-          "level_offset": -2,
-          "item": "ITEM_LEFTOVERS",
-          "ability_slot": 1,
-          "ability": "ABILITY_EARLY_BIRD",
+          "species": "SPECIES_CARKOL",
+          "level_offset": 2,
+          "item": "ITEM_WEAKNESS_POLICY",
+          "ability_slot": 0,
+          "ability": "ABILITY_STEAM_ENGINE",
           "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
           "moves": [
-            "MOVE_THUNDER_WAVE",
-            "MOVE_PSYCHIC",
-            "MOVE_TOXIC",
-            "MOVE_ROOST"
+            "MOVE_HEAT_WAVE",
+            "MOVE_POWER_GEM",
+            "MOVE_SCORCHING_SANDS",
+            "MOVE_PROTECT"
           ],
-          "bst": 320,
-          "speed": 70,
+          "bst": 410,
+          "speed": 50,
           "types": [
-            "TYPE_PSYCHIC",
-            "TYPE_FLYING"
+            "TYPE_ROCK",
+            "TYPE_FIRE"
           ],
           "attack_moves": [
-            "MOVE_PSYCHIC"
+            "MOVE_HEAT_WAVE",
+            "MOVE_POWER_GEM",
+            "MOVE_SCORCHING_SANDS"
           ],
           "status_moves": [
-            "MOVE_THUNDER_WAVE",
-            "MOVE_TOXIC",
-            "MOVE_ROOST"
+            "MOVE_PROTECT"
           ]
+        },
+        {
+          "species": "SPECIES_SANDYGAST",
+          "level_offset": 2,
+          "item": "ITEM_EVIOLITE",
+          "ability_slot": 0,
+          "ability": "ABILITY_WATER_COMPACTION",
+          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+          "moves": [
+            "MOVE_SHORE_UP",
+            "MOVE_EARTH_POWER",
+            "MOVE_SHADOW_BALL",
+            "MOVE_GIGA_DRAIN"
+          ],
+          "bst": 320,
+          "speed": 15,
+          "types": [
+            "TYPE_GHOST",
+            "TYPE_GROUND"
+          ],
+          "attack_moves": [
+            "MOVE_EARTH_POWER",
+            "MOVE_SHADOW_BALL",
+            "MOVE_GIGA_DRAIN"
+          ],
+          "status_moves": [
+            "MOVE_SHORE_UP"
+          ]
+        },
+        {
+          "species": "SPECIES_TSAREENA",
+          "level_offset": 3,
+          "item": "ITEM_LIFE_ORB",
+          "ability_slot": 1,
+          "ability": "ABILITY_QUEENLY_MAJESTY",
+          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+          "moves": [
+            "MOVE_POWER_WHIP",
+            "MOVE_HIGH_JUMP_KICK",
+            "MOVE_KNOCK_OFF",
+            "MOVE_TROP_KICK"
+          ],
+          "bst": 530,
+          "speed": 108,
+          "types": [
+            "TYPE_GRASS",
+            "TYPE_FIGHTING"
+          ],
+          "attack_moves": [
+            "MOVE_POWER_WHIP",
+            "MOVE_HIGH_JUMP_KICK",
+            "MOVE_KNOCK_OFF",
+            "MOVE_TROP_KICK"
+          ],
+          "status_moves": []
         }
       ]
     },
@@ -95029,133 +95104,136 @@
       "manifest_difficulty": 52,
       "party_name": "sParty_Kaleb",
       "party_size": 4,
-      "avg_level_offset": -3.0,
-      "max_level_offset": -3,
+      "avg_level_offset": 2.0,
+      "max_level_offset": 3,
       "item_coverage": 1.0,
       "complete_moveset_coverage": 1.0,
-      "avg_bst": 493.2,
+      "avg_bst": 457.5,
       "rare_count": 0,
-      "mega_count": 1,
-      "speed_control_count": 4,
-      "protect_count": 2,
-      "defensive_tempo_count": 4,
+      "mega_count": 0,
+      "speed_control_count": 2,
+      "protect_count": 1,
+      "defensive_tempo_count": 1,
       "spread_count": 1,
-      "synergy_tags": [
-        "status control"
+      "synergy_tags": [],
+      "quality_score": 68,
+      "issues": [
+        {
+          "severity": "major",
+          "kind": "no detected team interaction",
+          "detail": null
+        }
       ],
-      "quality_score": 64,
-      "issues": [],
       "mons": [
         {
-          "species": "SPECIES_MINUN",
-          "level_offset": -3,
-          "item": "ITEM_ORAN_BERRY",
-          "ability_slot": 0,
-          "ability": "ABILITY_MINUS",
-          "spread": "SPREAD_10_IV_0_EV",
+          "species": "SPECIES_AUDINO",
+          "level_offset": 1,
+          "item": "ITEM_LEFTOVERS",
+          "ability_slot": 1,
+          "ability": "ABILITY_REGENERATOR",
+          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
           "moves": [
-            "MOVE_ELECTRO_BALL",
-            "MOVE_NUZZLE",
+            "MOVE_ROUND",
+            "MOVE_HEAL_PULSE",
             "MOVE_HELPING_HAND",
-            "MOVE_FAKE_TEARS"
+            "MOVE_PROTECT"
           ],
-          "bst": 435,
-          "speed": 105,
+          "bst": 485,
+          "speed": 50,
           "types": [
-            "TYPE_ELECTRIC",
-            "TYPE_ELECTRIC"
+            "TYPE_NORMAL",
+            "TYPE_NORMAL"
           ],
           "attack_moves": [
-            "MOVE_ELECTRO_BALL",
-            "MOVE_NUZZLE"
+            "MOVE_ROUND"
           ],
           "status_moves": [
+            "MOVE_HEAL_PULSE",
             "MOVE_HELPING_HAND",
-            "MOVE_FAKE_TEARS"
+            "MOVE_PROTECT"
           ]
         },
         {
-          "species": "SPECIES_EMOLGA",
-          "level_offset": -3,
-          "item": "ITEM_ORAN_BERRY",
-          "ability_slot": 0,
-          "ability": "ABILITY_STATIC",
-          "spread": "SPREAD_10_IV_0_EV",
-          "moves": [
-            "MOVE_SHOCK_WAVE",
-            "MOVE_NUZZLE",
-            "MOVE_ACROBATICS",
-            "MOVE_NASTY_PLOT"
-          ],
-          "bst": 468,
-          "speed": 113,
-          "types": [
-            "TYPE_ELECTRIC",
-            "TYPE_FLYING"
-          ],
-          "attack_moves": [
-            "MOVE_SHOCK_WAVE",
-            "MOVE_NUZZLE",
-            "MOVE_ACROBATICS"
-          ],
-          "status_moves": [
-            "MOVE_NASTY_PLOT"
-          ]
-        },
-        {
-          "species": "SPECIES_MAGMORTAR",
-          "level_offset": -3,
+          "species": "SPECIES_SLURPUFF",
+          "level_offset": 2,
           "item": "ITEM_SITRUS_BERRY",
-          "ability_slot": 0,
-          "ability": "ABILITY_FLAME_BODY",
-          "spread": "SPREAD_31_IV_HP_DEF_SPDEF_SASSY",
+          "ability_slot": 2,
+          "ability": "ABILITY_UNBURDEN",
+          "spread": "SPREAD_31_IV_SPATK_SPEED_MODEST",
           "moves": [
-            "MOVE_PROTECT",
-            "MOVE_HEAT_WAVE",
-            "MOVE_KNOCK_OFF",
-            "MOVE_WILL_O_WISP"
+            "MOVE_ROUND",
+            "MOVE_DAZZLING_GLEAM",
+            "MOVE_FLAMETHROWER",
+            "MOVE_PROTECT"
           ],
-          "bst": 540,
-          "speed": 93,
+          "bst": 480,
+          "speed": 72,
           "types": [
-            "TYPE_FIRE",
-            "TYPE_FIRE"
+            "TYPE_FAIRY",
+            "TYPE_FAIRY"
           ],
           "attack_moves": [
-            "MOVE_HEAT_WAVE",
-            "MOVE_KNOCK_OFF"
+            "MOVE_ROUND",
+            "MOVE_DAZZLING_GLEAM",
+            "MOVE_FLAMETHROWER"
           ],
           "status_moves": [
-            "MOVE_PROTECT",
-            "MOVE_WILL_O_WISP"
+            "MOVE_PROTECT"
           ]
         },
         {
-          "species": "SPECIES_SCEPTILE",
-          "level_offset": -3,
-          "item": "ITEM_SCEPTILITE",
-          "ability_slot": 0,
-          "ability": "ABILITY_OVERGROW",
+          "species": "SPECIES_FROGADIER",
+          "level_offset": 2,
+          "item": "ITEM_EXPERT_BELT",
+          "ability_slot": 2,
+          "ability": "ABILITY_PROTEAN",
           "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
           "moves": [
-            "MOVE_LEAF_STORM",
-            "MOVE_EARTH_POWER",
-            "MOVE_DRAGON_PULSE",
-            "MOVE_DETECT"
+            "MOVE_ROUND",
+            "MOVE_WATER_PULSE",
+            "MOVE_ICE_BEAM",
+            "MOVE_DARK_PULSE"
           ],
-          "bst": 530,
-          "speed": 120,
+          "bst": 405,
+          "speed": 97,
           "types": [
-            "TYPE_GRASS",
-            "TYPE_DRAGON"
+            "TYPE_WATER",
+            "TYPE_WATER"
           ],
           "attack_moves": [
-            "MOVE_LEAF_STORM",
-            "MOVE_EARTH_POWER",
-            "MOVE_DRAGON_PULSE"
+            "MOVE_ROUND",
+            "MOVE_WATER_PULSE",
+            "MOVE_ICE_BEAM",
+            "MOVE_DARK_PULSE"
+          ],
+          "status_moves": []
+        },
+        {
+          "species": "SPECIES_ELDEGOSS",
+          "level_offset": 3,
+          "item": "ITEM_ROCKY_HELMET",
+          "ability_slot": 1,
+          "ability": "ABILITY_REGENERATOR",
+          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+          "moves": [
+            "MOVE_ROUND",
+            "MOVE_GIGA_DRAIN",
+            "MOVE_HELPING_HAND",
+            "MOVE_PROTECT"
+          ],
+          "bst": 460,
+          "speed": 60,
+          "types": [
+            "TYPE_GRASS",
+            "TYPE_GRASS"
+          ],
+          "attack_moves": [
+            "MOVE_ROUND",
+            "MOVE_GIGA_DRAIN"
           ],
           "status_moves": [
-            "MOVE_DETECT"
+            "MOVE_HELPING_HAND",
+            "MOVE_PROTECT"
           ]
         }
       ]
@@ -95165,137 +95243,136 @@
       "name": "Joseph",
       "location": "Route 110",
       "format": "double",
-      "manifest_difficulty": 36,
+      "manifest_difficulty": 88,
       "party_name": "sParty_Joseph",
       "party_size": 4,
-      "avg_level_offset": -2.0,
-      "max_level_offset": -2,
-      "item_coverage": 0.5,
+      "avg_level_offset": 1.0,
+      "max_level_offset": 3,
+      "item_coverage": 1.0,
       "complete_moveset_coverage": 1.0,
-      "avg_bst": 375.8,
+      "avg_bst": 363.2,
       "rare_count": 0,
       "mega_count": 0,
       "speed_control_count": 1,
-      "protect_count": 1,
+      "protect_count": 0,
       "defensive_tempo_count": 3,
-      "spread_count": 2,
+      "spread_count": 3,
       "synergy_tags": [
-        "protected Explosion"
+        "Beat Up + Justified"
       ],
-      "quality_score": 51,
+      "quality_score": 65,
       "issues": [],
       "mons": [
         {
-          "species": "SPECIES_LUXIO",
-          "level_offset": -2,
-          "item": "ITEM_NONE",
-          "ability_slot": 0,
-          "ability": "ABILITY_RIVALRY",
-          "spread": "SPREAD_10_IV_0_EV",
-          "moves": [
-            "MOVE_BITE",
-            "MOVE_SPARK",
-            "MOVE_HOWL",
-            "MOVE_ROAR"
-          ],
-          "bst": 363,
-          "speed": 60,
-          "types": [
-            "TYPE_ELECTRIC",
-            "TYPE_ELECTRIC"
-          ],
-          "attack_moves": [
-            "MOVE_BITE",
-            "MOVE_SPARK"
-          ],
-          "status_moves": [
-            "MOVE_HOWL",
-            "MOVE_ROAR"
-          ]
-        },
-        {
-          "species": "SPECIES_VOLTORB",
-          "level_offset": -2,
-          "item": "ITEM_NONE",
-          "ability_slot": 0,
-          "ability": "ABILITY_SOUNDPROOF",
-          "spread": "SPREAD_10_IV_0_EV",
-          "moves": [
-            "MOVE_SWIFT",
-            "MOVE_SELF_DESTRUCT",
-            "MOVE_LIGHT_SCREEN",
-            "MOVE_ELECTRO_BALL"
-          ],
-          "bst": 330,
-          "speed": 100,
-          "types": [
-            "TYPE_ELECTRIC",
-            "TYPE_ELECTRIC"
-          ],
-          "attack_moves": [
-            "MOVE_SWIFT",
-            "MOVE_SELF_DESTRUCT",
-            "MOVE_ELECTRO_BALL"
-          ],
-          "status_moves": [
-            "MOVE_LIGHT_SCREEN"
-          ]
-        },
-        {
-          "species": "SPECIES_MAROWAK_ALOLAN",
-          "level_offset": -2,
-          "item": "ITEM_THICK_CLUB",
+          "species": "SPECIES_HOUNDOOM",
+          "level_offset": 1,
+          "item": "ITEM_WIDE_LENS",
           "ability_slot": 1,
-          "ability": "ABILITY_LIGHTNING_ROD",
-          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
-          "moves": [
-            "MOVE_SHADOW_BONE",
-            "MOVE_FLARE_BLITZ",
-            "MOVE_BONEMERANG",
-            "MOVE_PROTECT"
-          ],
-          "bst": 440,
-          "speed": 45,
-          "types": [
-            "TYPE_FIRE",
-            "TYPE_GHOST"
-          ],
-          "attack_moves": [
-            "MOVE_SHADOW_BONE",
-            "MOVE_FLARE_BLITZ",
-            "MOVE_BONEMERANG"
-          ],
-          "status_moves": [
-            "MOVE_PROTECT"
-          ]
-        },
-        {
-          "species": "SPECIES_LAMPENT",
-          "level_offset": -2,
-          "item": "ITEM_CHOICE_SPECS",
-          "ability_slot": 0,
           "ability": "ABILITY_FLASH_FIRE",
-          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
           "moves": [
-            "MOVE_HIDDEN_POWER",
-            "MOVE_OVERHEAT",
-            "MOVE_TRICK",
-            "MOVE_SHADOW_BALL"
+            "MOVE_BEAT_UP",
+            "MOVE_HEAT_WAVE",
+            "MOVE_SNARL",
+            "MOVE_WILL_O_WISP"
           ],
-          "bst": 370,
-          "speed": 55,
+          "bst": 510,
+          "speed": 105,
           "types": [
-            "TYPE_GHOST",
+            "TYPE_DARK",
             "TYPE_FIRE"
           ],
           "attack_moves": [
-            "MOVE_HIDDEN_POWER",
-            "MOVE_OVERHEAT",
-            "MOVE_SHADOW_BALL"
+            "MOVE_BEAT_UP",
+            "MOVE_HEAT_WAVE",
+            "MOVE_SNARL"
           ],
           "status_moves": [
-            "MOVE_TRICK"
+            "MOVE_WILL_O_WISP"
           ]
+        },
+        {
+          "species": "SPECIES_GROWLITHE",
+          "level_offset": 1,
+          "item": "ITEM_EVIOLITE",
+          "ability_slot": 2,
+          "ability": "ABILITY_JUSTIFIED",
+          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+          "moves": [
+            "MOVE_FLARE_BLITZ",
+            "MOVE_CLOSE_COMBAT",
+            "MOVE_CRUNCH",
+            "MOVE_MORNING_SUN"
+          ],
+          "bst": 350,
+          "speed": 60,
+          "types": [
+            "TYPE_FIRE",
+            "TYPE_FIRE"
+          ],
+          "attack_moves": [
+            "MOVE_FLARE_BLITZ",
+            "MOVE_CLOSE_COMBAT",
+            "MOVE_CRUNCH"
+          ],
+          "status_moves": [
+            "MOVE_MORNING_SUN"
+          ]
+        },
+        {
+          "species": "SPECIES_TOXEL",
+          "level_offset": -1,
+          "item": "ITEM_BERRY_JUICE",
+          "ability_slot": 0,
+          "ability": "ABILITY_RATTLED",
+          "spread": "SPREAD_31_IV_HP_DEF_SPDEF_SASSY",
+          "moves": [
+            "MOVE_NUZZLE",
+            "MOVE_ENDEAVOR",
+            "MOVE_METAL_SOUND",
+            "MOVE_TEARFUL_LOOK"
+          ],
+          "bst": 242,
+          "speed": 40,
+          "types": [
+            "TYPE_ELECTRIC",
+            "TYPE_POISON"
+          ],
+          "attack_moves": [
+            "MOVE_NUZZLE",
+            "MOVE_ENDEAVOR"
+          ],
+          "status_moves": [
+            "MOVE_METAL_SOUND",
+            "MOVE_TEARFUL_LOOK"
+          ]
+        },
+        {
+          "species": "SPECIES_KROKOROK",
+          "level_offset": 3,
+          "item": "ITEM_SOFT_SAND",
+          "ability_slot": 1,
+          "ability": "ABILITY_MOXIE",
+          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+          "moves": [
+            "MOVE_DIG",
+            "MOVE_CRUNCH",
+            "MOVE_ROCK_SLIDE",
+            "MOVE_ICE_FANG"
+          ],
+          "bst": 351,
+          "speed": 74,
+          "types": [
+            "TYPE_GROUND",
+            "TYPE_DARK"
+          ],
+          "attack_moves": [
+            "MOVE_DIG",
+            "MOVE_CRUNCH",
+            "MOVE_ROCK_SLIDE",
+            "MOVE_ICE_FANG"
+          ],
+          "status_moves": []
         }
       ]
     },
@@ -95304,136 +95381,150 @@
       "name": "Alyssa",
       "location": "Route 110",
       "format": "double",
-      "manifest_difficulty": 37,
+      "manifest_difficulty": 88,
       "party_name": "sParty_Alyssa",
       "party_size": 4,
-      "avg_level_offset": -1.75,
-      "max_level_offset": -1,
-      "item_coverage": 0.5,
+      "avg_level_offset": 2.0,
+      "max_level_offset": 3,
+      "item_coverage": 0.0,
       "complete_moveset_coverage": 1.0,
-      "avg_bst": 406.2,
+      "avg_bst": 454.0,
       "rare_count": 0,
       "mega_count": 0,
-      "speed_control_count": 2,
-      "protect_count": 1,
-      "defensive_tempo_count": 2,
+      "speed_control_count": 0,
+      "protect_count": 0,
+      "defensive_tempo_count": 4,
       "spread_count": 2,
       "synergy_tags": [
-        "Discharge immunity"
+        "Earthquake immunity",
+        "Flying pressure",
+        "pivot offense",
+        "status control"
       ],
-      "quality_score": 56,
-      "issues": [],
+      "quality_score": 70,
+      "issues": [
+        {
+          "severity": "major",
+          "kind": "serious item gap",
+          "detail": 0.0
+        },
+        {
+          "severity": "major",
+          "kind": "no speed control",
+          "detail": null
+        }
+      ],
       "mons": [
         {
-          "species": "SPECIES_MAGNEMITE",
-          "level_offset": -1,
+          "species": "SPECIES_GLIGAR",
+          "level_offset": 1,
           "item": "ITEM_NONE",
-          "ability_slot": 0,
-          "ability": "ABILITY_MAGNET_PULL",
-          "spread": "SPREAD_10_IV_0_EV",
+          "ability_slot": 2,
+          "ability": "ABILITY_IMMUNITY",
+          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
           "moves": [
-            "MOVE_SHOCK_WAVE",
-            "MOVE_THUNDER_WAVE",
-            "MOVE_METAL_SOUND",
-            "MOVE_MIRROR_SHOT"
+            "MOVE_ACROBATICS",
+            "MOVE_EARTHQUAKE",
+            "MOVE_U_TURN",
+            "MOVE_ROOST"
           ],
-          "bst": 325,
-          "speed": 45,
+          "bst": 430,
+          "speed": 85,
           "types": [
-            "TYPE_ELECTRIC",
-            "TYPE_STEEL"
+            "TYPE_GROUND",
+            "TYPE_FLYING"
           ],
           "attack_moves": [
-            "MOVE_SHOCK_WAVE",
-            "MOVE_MIRROR_SHOT"
+            "MOVE_ACROBATICS",
+            "MOVE_EARTHQUAKE",
+            "MOVE_U_TURN"
           ],
           "status_moves": [
-            "MOVE_THUNDER_WAVE",
-            "MOVE_METAL_SOUND"
+            "MOVE_ROOST"
           ]
         },
         {
-          "species": "SPECIES_KLINK",
-          "level_offset": -2,
+          "species": "SPECIES_GOTHORITA",
+          "level_offset": 2,
           "item": "ITEM_NONE",
-          "ability_slot": 0,
-          "ability": "ABILITY_MOTOR_DRIVE",
-          "spread": "SPREAD_10_IV_0_EV",
+          "ability_slot": 1,
+          "ability": "ABILITY_COMPETITIVE",
+          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
           "moves": [
-            "MOVE_DISCHARGE",
-            "MOVE_THUNDER_WAVE",
-            "MOVE_METAL_SOUND",
-            "MOVE_AUTOTOMIZE"
-          ],
-          "bst": 300,
-          "speed": 30,
-          "types": [
-            "TYPE_STEEL",
-            "TYPE_STEEL"
-          ],
-          "attack_moves": [
-            "MOVE_DISCHARGE"
-          ],
-          "status_moves": [
-            "MOVE_THUNDER_WAVE",
-            "MOVE_METAL_SOUND",
-            "MOVE_AUTOTOMIZE"
-          ]
-        },
-        {
-          "species": "SPECIES_RAICHU_ALOLAN",
-          "level_offset": -2,
-          "item": "ITEM_LIFE_ORB",
-          "ability_slot": 0,
-          "ability": "ABILITY_SURGE_SURFER",
-          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
-          "moves": [
-            "MOVE_NASTY_PLOT",
-            "MOVE_PROTECT",
+            "MOVE_MAGIC_ROOM",
+            "MOVE_PSYCHIC",
             "MOVE_THUNDERBOLT",
-            "MOVE_PSYCHIC"
+            "MOVE_ENERGY_BALL"
           ],
-          "bst": 490,
-          "speed": 115,
+          "bst": 390,
+          "speed": 55,
           "types": [
-            "TYPE_ELECTRIC",
+            "TYPE_PSYCHIC",
             "TYPE_PSYCHIC"
           ],
           "attack_moves": [
+            "MOVE_PSYCHIC",
             "MOVE_THUNDERBOLT",
-            "MOVE_PSYCHIC"
+            "MOVE_ENERGY_BALL"
           ],
           "status_moves": [
-            "MOVE_NASTY_PLOT",
-            "MOVE_PROTECT"
+            "MOVE_MAGIC_ROOM"
           ]
         },
         {
-          "species": "SPECIES_LURANTIS",
-          "level_offset": -2,
-          "item": "ITEM_LEFTOVERS",
-          "ability_slot": 2,
-          "ability": "ABILITY_CONTRARY",
-          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+          "species": "SPECIES_DRIFBLIM",
+          "level_offset": 2,
+          "item": "ITEM_NONE",
+          "ability_slot": 0,
+          "ability": "ABILITY_AFTERMATH",
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
           "moves": [
-            "MOVE_PETAL_BLIZZARD",
-            "MOVE_SUPERPOWER",
-            "MOVE_LEECH_LIFE",
-            "MOVE_SYNTHESIS"
+            "MOVE_ACROBATICS",
+            "MOVE_SHADOW_BALL",
+            "MOVE_WILL_O_WISP",
+            "MOVE_STRENGTH_SAP"
           ],
-          "bst": 510,
-          "speed": 45,
+          "bst": 528,
+          "speed": 80,
           "types": [
-            "TYPE_GRASS",
-            "TYPE_GRASS"
+            "TYPE_GHOST",
+            "TYPE_FLYING"
           ],
           "attack_moves": [
-            "MOVE_PETAL_BLIZZARD",
-            "MOVE_SUPERPOWER",
-            "MOVE_LEECH_LIFE"
+            "MOVE_ACROBATICS",
+            "MOVE_SHADOW_BALL"
           ],
           "status_moves": [
-            "MOVE_SYNTHESIS"
+            "MOVE_WILL_O_WISP",
+            "MOVE_STRENGTH_SAP"
+          ]
+        },
+        {
+          "species": "SPECIES_EMOLGA",
+          "level_offset": 3,
+          "item": "ITEM_NONE",
+          "ability_slot": 2,
+          "ability": "ABILITY_MOTOR_DRIVE",
+          "spread": "SPREAD_31_IV_ATK_SPEED_NAIVE",
+          "moves": [
+            "MOVE_ACROBATICS",
+            "MOVE_VOLT_SWITCH",
+            "MOVE_ENCORE",
+            "MOVE_TAUNT"
+          ],
+          "bst": 468,
+          "speed": 113,
+          "types": [
+            "TYPE_ELECTRIC",
+            "TYPE_FLYING"
+          ],
+          "attack_moves": [
+            "MOVE_ACROBATICS",
+            "MOVE_VOLT_SWITCH"
+          ],
+          "status_moves": [
+            "MOVE_ENCORE",
+            "MOVE_TAUNT"
           ]
         }
       ]
@@ -100777,7 +100868,7 @@
       "defensive_tempo_count": 4,
       "spread_count": 2,
       "synergy_tags": [
-        "Fairy pressure",
+        "Grass pressure",
         "screens setup",
         "status control",
         "sun engine"

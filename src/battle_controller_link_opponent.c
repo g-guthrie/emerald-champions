@@ -1725,7 +1725,10 @@ static void LinkOpponentHandleIntroTrainerBallThrow(void)
         gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
 
     gBattleSpritesDataPtr->animationData->introAnimActive = TRUE;
-    gBattlerControllerFuncs[gActiveBattler] = LinkOpponentDummy;
+    if (IsTaskIdValid(taskId))
+        gBattlerControllerFuncs[gActiveBattler] = LinkOpponentDummy;
+    else
+        Task_StartSendOutAnim(taskId);
 }
 
 static void Task_StartSendOutAnim(u8 taskId)

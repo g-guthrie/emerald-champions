@@ -133,6 +133,7 @@ MAPJSON := tools/mapjson/mapjson$(EXE)
 JSONPROC := tools/jsonproc/jsonproc$(EXE)
 
 PERL := perl
+PYTHON ?= python3
 
 TOOLDIRS := $(filter-out tools/agbcc tools/binutils,$(wildcard tools/*))
 TOOLBASE = $(TOOLDIRS:tools/%=%)
@@ -150,7 +151,9 @@ MAKEFLAGS += --no-print-directory
 # Secondary expansion is required for dependency variables in object rules.
 .SECONDEXPANSION:
 
-.PHONY: all rom clean compare tidy tools mostlyclean clean-tools $(TOOLDIRS) berry_fix libagbsyscall modern tidymodern tidynonmodern
+.PHONY: all rom clean compare tidy tools mostlyclean clean-tools $(TOOLDIRS)
+.PHONY: berry_fix libagbsyscall modern tidymodern tidynonmodern
+.PHONY: verify verify-static verify-campaign verify-build
 
 infoshell = $(foreach line, $(shell $1 | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
 
@@ -213,6 +216,23 @@ endif
 AUTO_GEN_TARGETS :=
 
 all: rom
+
+verify:
+	@$(MAKE) verify-static
+	@$(MAKE) verify-campaign
+	@$(MAKE) verify-build
+
+verify-static:
+	@$(PYTHON) scripts/verify_engine.py
+
+verify-campaign:
+	@$(PYTHON) scripts/verify_verdant.py
+
+verify-build:
+	@$(MAKE) -B MODERN=0 all
+	@$(PYTHON) scripts/check_rom_layout.py --elf pokeemerald.elf --rom pokeemerald.gba
+	@$(MAKE) -B MODERN=1 all
+	@$(PYTHON) scripts/check_rom_layout.py --elf pokeemerald_modern.elf --rom pokeemerald_modern.gba
 
 tools: $(TOOLDIRS)
 

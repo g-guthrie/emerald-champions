@@ -119,6 +119,8 @@ struct DisableStruct
     u8 octolock:1;
     u8 cudChewReplaying:1;
     u8 saltCure:1;
+    u8 roomServiceEligible:1;
+    u8 roomServiceBlocked:1;
     u16 cudChewBerry;
     u8 cudChewTurn;
 };
@@ -206,6 +208,8 @@ struct SpecialStatus
     u8 physicalBattlerId;
     u8 specialBattlerId;
     u8 changedStatsBattlerId; // Battler that was responsible for the latest stat change. Can be self.
+    u8 moveStartAbilitySet;
+    u16 moveStartAbility;
 };
 
 struct SideTimer
@@ -234,6 +238,9 @@ struct SideTimer
     u8 luckyChantTimer;
     u8 luckyChantBattlerId;
     u8 retaliateTimer;
+    u8 rainbowTimer;
+    u8 seaOfFireTimer;
+    u8 swampTimer;
 };
 
 struct FieldTimer
@@ -491,7 +498,6 @@ struct MegaEvolutionData
     bool8 playerSelect;
     u8 triggerSpriteId;
     bool8 isWishMegaEvo;
-    bool8 isPrimalReversion;
 };
 
 struct Illusion
@@ -631,6 +637,7 @@ struct BattleStruct
     u16 moveEffect2; // For Knock Off
     u16 changedSpecies[PARTY_SIZE]; // For Zygarde or future forms when multiple mons can change into the same pokemon.
     u8 quickClawBattlerId;
+    u8 roomServiceCheck;
     struct StolenItem itemStolen[PARTY_SIZE];  // Player's team that had items stolen (two bytes per party member)
     u16 originalEnemyItems[PARTY_SIZE]; // Prevent wild Trick/Bestow exchanges from duplicating permanent items on capture.
     // Explicit, bidirectional Sky Drop state. Party-slot snapshots prevent a
@@ -643,6 +650,8 @@ struct BattleStruct
     u8 blunderPolicy:1; // should blunder policy activate
     u8 ballSpriteIds[2];    // item gfx, window gfx
     u8 appearedInBattle; // Bitfield to track which Pokemon appeared in battle. Used for Burmy's form change
+    u8 pledgeState;
+    u16 pledgeOriginalMove;
 };
 
 #define GET_MOVE_TYPE(move, typeArg)                        \

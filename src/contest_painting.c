@@ -199,7 +199,11 @@ static void ShowContestPainting(void)
     case 0:
         ScanlineEffect_Stop();
         SetVBlankCallback(NULL);
-        AllocateMonSpritesGfx();
+        if (!TryAllocateMonSpritesGfx())
+        {
+            SetMainCallback2(gMain.savedCallback);
+            return;
+        }
         gContestPaintingWinner = &gCurContestWinner;
         InitContestPaintingVars(TRUE);
         InitContestPaintingBg();
@@ -597,4 +601,3 @@ static void CreateContestPaintingPicture(u8 contestWinnerId, bool8 isForArtist)
     InitPaintingMonOamData(contestWinnerId);
     LoadContestPaintingFrame(contestWinnerId, isForArtist);
 }
-

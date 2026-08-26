@@ -763,6 +763,8 @@ void sub_818603C(u8 arg0)
                                 break;
                             }
                         }
+                        if (k == MAX_MON_MOVES)
+                            RecordedBattle_SetBattlerAction(battlerId, j);
                     }
                 }
             }
@@ -785,6 +787,8 @@ void sub_818603C(u8 arg0)
                     for (j = 0; j < MAX_MON_MOVES; j++)
                     {
                         array1[j] = RecordedBattle_GetBattlerAction(battlerId);
+                        if (array1[j] >= MAX_MON_MOVES)
+                            array1[j] = j;
                         movePp.moves[j] = gBattleMons[battlerId].moves[array1[j]];
                         movePp.pp[j] = gBattleMons[battlerId].pp[array1[j]];
                         array3[j] = ppBonuses[array1[j]];

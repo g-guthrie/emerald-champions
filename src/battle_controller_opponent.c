@@ -1947,7 +1947,10 @@ static void OpponentHandleIntroTrainerBallThrow(void)
         gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
 
     gBattleSpritesDataPtr->animationData->introAnimActive = TRUE;
-    gBattlerControllerFuncs[gActiveBattler] = OpponentDummy;
+    if (IsTaskIdValid(taskId))
+        gBattlerControllerFuncs[gActiveBattler] = OpponentDummy;
+    else
+        Task_StartSendOutAnim(taskId);
 }
 
 static void SpriteCB_FreeOpponentSprite(struct Sprite *sprite)

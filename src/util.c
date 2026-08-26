@@ -119,6 +119,10 @@ const u8 gMiscBlank_Gfx[] = INCBIN_U8("graphics/interface/blank.4bpp");
 u8 CreateInvisibleSpriteWithCallback(void (*callback)(struct Sprite *))
 {
     u8 sprite = CreateSprite(&sInvisibleSpriteTemplate, 248, 168, 14);
+
+    if (sprite == MAX_SPRITES)
+        return MAX_SPRITES;
+
     gSprites[sprite].invisible = TRUE;
     gSprites[sprite].callback = callback;
     return sprite;
@@ -264,16 +268,20 @@ u32 CalcByteArraySum(const u8* data, u32 length)
 void BlendPalette(u16 palOffset, u16 numEntries, u8 coeff, u16 blendColor)
 {
     u16 i;
+
+    if (palOffset >= PLTT_BUFFER_SIZE || numEntries > PLTT_BUFFER_SIZE - palOffset)
+        return;
+
     for (i = 0; i < numEntries; i++)
     {
         u16 index = i + palOffset;
-        struct PlttData *data1 = (struct PlttData *)&gPlttBufferUnfaded[index];
-        s8 r = data1->r;
-        s8 g = data1->g;
-        s8 b = data1->b;
-        struct PlttData *data2 = (struct PlttData *)&blendColor;
-        gPlttBufferFaded[index] = RGB(r + (((data2->r - r) * coeff) >> 4),
-                                      g + (((data2->g - g) * coeff) >> 4),
-                                      b + (((data2->b - b) * coeff) >> 4));
+        u16 color = gPlttBufferUnfaded[index];
+        s8 r = GET_R(color);
+        s8 g = GET_G(color);
+        s8 b = GET_B(color);
+
+        gPlttBufferFaded[index] = RGB(r + (((GET_R(blendColor) - r) * coeff) >> 4),
+                                      g + (((GET_G(blendColor) - g) * coeff) >> 4),
+                                      b + (((GET_B(blendColor) - b) * coeff) >> 4));
     }
 }

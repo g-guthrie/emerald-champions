@@ -71,6 +71,25 @@ Similarity is a warning that prompts judgment. It is never an automatic ban.
 Two nearby weather teams are valid when they create materially different player
 decisions.
 
+### Species ledger, repetition, and legendary coverage
+
+Maintain a source-derived used-species ledger for every closed physical
+encounter. It records where each species or form appeared; it describes usage,
+not demand.
+
+Minimize repetition by judgment. Prefer a fresh species when it serves equally
+well, but repeat a cool or iconic species when trainer fit, battle role, or
+campaign payoff earns it. Ordinary unused species do not create coverage debt,
+and weak or unhelpful species never need a showcase merely to fill a quota.
+
+Every supported legendary and mythical family must appear in at least one
+opponent encounter by campaign end. Placement remains flexible: the usage
+ledger tracks what has appeared, while explicit reservations protect future
+showcases. An open legendary slot is backlog for chapter and campaign reviews;
+it never forces the next chronological roster to repair the gap or spend a
+protected reveal. Full coverage becomes blocking only at final campaign
+closure.
+
 ### Immediate encounter: bespoke construction
 
 For the current trainer, record:
@@ -143,9 +162,10 @@ Do not reduce elite teams to an archetype label. Preserve, where known:
 - the AI state machine and engine interactions required to make it authentic.
 
 A famous roster is not automatically a good encounter. It earns a place only
-when its decision structure survives removal of Tera, Z-Moves, Dynamax, Primals,
-or other non-Mega gimmicks and naturally belongs to the trainer and campaign
-stage.
+when its decision structure survives removal of Tera, Z-Moves, Dynamax, and
+Gigantamax and naturally belongs to the trainer and campaign stage. Mega
+Evolution and Primal Reversion are both supported, but a Primal must belong to
+an intentional Groudon/Kyogre boss design rather than leak in as donor baggage.
 
 ## Correctness gates
 
@@ -203,9 +223,10 @@ proposal and obtain explicit approval before mutating that campaign behavior.
 4. Query the compact competitive index; inspect relevant full teams.
 5. Author exact sets and contextual, reusable AI only where source needs it.
 6. Run correctness gates and rolling-similarity warnings.
-7. Generate the guide entry from source and brief.
-8. After a route or Gym, perform a comparative chapter review and playtest.
-9. Commit the coherent, verified chapter checkpoint.
+7. Refresh the cumulative used-species and legendary-coverage ledger.
+8. Generate the guide entry from source and brief.
+9. After a route or Gym, perform a comparative chapter review and playtest.
+10. Commit the coherent, verified chapter checkpoint.
 
 The pipeline should make later battles faster to design without making them
 formulaic: durable state supplies memory, while local judgment supplies the
@@ -228,6 +249,20 @@ Rebuild and verify the deterministic corpus index:
 ```sh
 python3 scripts/build_competitive_team_index.py --write
 python3 scripts/build_competitive_team_index.py --check
+```
+
+Refresh the cumulative source-backed usage ledger after closing an encounter:
+
+```sh
+python3 scripts/verdant_species_usage_ledger.py --write
+python3 scripts/verdant_species_usage_ledger.py --check
+```
+
+Only after the canonical sequence explicitly declares the campaign complete,
+run the release-only representation gate:
+
+```sh
+python3 scripts/verdant_species_usage_ledger.py --check --final-coverage
 ```
 
 Request a small digest from the whole corpus, then expand only the strongest

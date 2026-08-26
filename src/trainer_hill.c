@@ -277,6 +277,11 @@ static const u8 sTrainerPartySlots[][PARTY_SIZE / 2] =
 // code
 void CallTrainerHillFunction(void)
 {
+    if (gSpecialVar_0x8004 >= ARRAY_COUNT(sHillFunctions))
+    {
+        gSpecialVar_Result = FALSE;
+        return;
+    }
     SetUpDataStruct();
     sHillFunctions[gSpecialVar_0x8004]();
     FreeDataStruct();
@@ -326,12 +331,24 @@ u8 GetTrainerHillTrainerFrontSpriteId(u16 trainerId)
     return gFacilityClassToPicIndex[facilityClass];
 }
 
-void InitTrainerHillBattleStruct(void)
+bool32 InitTrainerHillBattleStruct(void)
 {
     s32 i, j;
 
+    // Battle setup has just reset the heap, so cached heap identities from an
+    // interrupted prior setup are no longer owners of valid allocations.
+    sHillData = NULL;
+    sRoomTrainers = NULL;
     SetUpDataStruct();
+    if (sHillData == NULL)
+        return FALSE;
+
     sRoomTrainers = AllocZeroed(sizeof(*sRoomTrainers));
+    if (sRoomTrainers == NULL)
+    {
+        FreeDataStruct();
+        return FALSE;
+    }
 
     for (i = 0; i < 2; i++)
     {
@@ -343,6 +360,7 @@ void InitTrainerHillBattleStruct(void)
     }
     SetTrainerHillVBlankCounter(&gSaveBlock1Ptr->trainerHill.timer);
     FreeDataStruct();
+    return TRUE;
 }
 
 void FreeTrainerHillBattleStruct(void)
@@ -356,6 +374,8 @@ static void SetUpDataStruct(void)
     if (sHillData == NULL)
     {
         sHillData = AllocZeroed(sizeof(*sHillData));
+        if (sHillData == NULL)
+            return;
         sHillData->floorId = gMapHeader.mapLayoutId - LAYOUT_TRAINER_HILL_1F;
         CpuCopy32(sDataPerTag[gSaveBlock1Ptr->trainerHill.tag], &sHillData->tag, sizeof(sHillData->tag) + 4 * sizeof(struct TrHillFloor));
         TrainerHillDummy();

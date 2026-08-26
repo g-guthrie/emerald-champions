@@ -28,6 +28,21 @@ subprocess.run(
     check=True,
 )
 subprocess.run(
+    [sys.executable, str(ROOT / "scripts/verdant_marquee_design_audit.py")],
+    cwd=ROOT,
+    check=True,
+)
+subprocess.run(
+    [sys.executable, str(ROOT / "scripts/verdant_marquee_collision_audit.py"), "--check"],
+    cwd=ROOT,
+    check=True,
+)
+subprocess.run(
+    [sys.executable, str(ROOT / "scripts/verdant_marquee_report.py"), "--check"],
+    cwd=ROOT,
+    check=True,
+)
+subprocess.run(
     [sys.executable, str(ROOT / "scripts/verdant_custom_teams.py"), "--check"],
     cwd=ROOT,
     check=True,
@@ -49,6 +64,16 @@ subprocess.run(
 )
 subprocess.run(
     [sys.executable, str(ROOT / "scripts/verdant_battle_sequence_audit.py")],
+    cwd=ROOT,
+    check=True,
+)
+subprocess.run(
+    [sys.executable, str(ROOT / "scripts/verdant_species_usage_ledger.py"), "--check"],
+    cwd=ROOT,
+    check=True,
+)
+subprocess.run(
+    [sys.executable, str(ROOT / "scripts/verdant_chapter_review_audit.py")],
     cwd=ROOT,
     check=True,
 )

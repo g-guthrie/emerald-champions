@@ -106,6 +106,11 @@ static const u16 sSlateportTentRewards[] = {ITEM_BOTTLE_CAP};
 // code
 void CallVerdanturfTentFunction(void)
 {
+    if (gSpecialVar_0x8004 >= ARRAY_COUNT(sVerdanturfTentFuncs))
+    {
+        gSpecialVar_Result = FALSE;
+        return;
+    }
     sVerdanturfTentFuncs[gSpecialVar_0x8004]();
 }
 
@@ -169,6 +174,11 @@ static void GiveVerdanturfTentPrize(void)
 
 void CallFallarborTentFunction(void)
 {
+    if (gSpecialVar_0x8004 >= ARRAY_COUNT(sFallarborTentFuncs))
+    {
+        gSpecialVar_Result = FALSE;
+        return;
+    }
     sFallarborTentFuncs[gSpecialVar_0x8004]();
 }
 
@@ -225,6 +235,11 @@ static void BufferFallarborTentTrainerName(void)
 
 void CallSlateportTentFunction(void)
 {
+    if (gSpecialVar_0x8004 >= ARRAY_COUNT(sSlateportTentFuncs))
+    {
+        gSpecialVar_Result = FALSE;
+        return;
+    }
     sSlateportTentFuncs[gSpecialVar_0x8004]();
 }
 

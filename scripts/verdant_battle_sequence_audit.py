@@ -55,6 +55,10 @@ def main() -> None:
     designs = json.loads(read(DESIGNS_PATH))["designs"]
     guide = json.loads(read(GUIDE_PATH))
     problems: list[str] = []
+    campaign_complete = index.get("campaign_complete")
+
+    if not isinstance(campaign_complete, bool):
+        problems.append("campaign_complete must be an explicit boolean")
 
     if index.get("source_definition_count") != len(guide["entries"]):
         problems.append(
@@ -93,7 +97,10 @@ def main() -> None:
 
     nonclosed = [entry for entry in entries if entry["status"] != "closed"]
     next_entries = [entry for entry in entries if entry["status"] == "next"]
-    if len(next_entries) != 1 or not nonclosed or next_entries[0] is not nonclosed[0]:
+    if campaign_complete:
+        if nonclosed or next_entries:
+            problems.append("a complete campaign sequence must contain only closed encounters")
+    elif len(next_entries) != 1 or not nonclosed or next_entries[0] is not nonclosed[0]:
         problems.append("exactly the first non-closed encounter must be marked next")
 
     route102 = object_trainers("Route102", lambda event: True)
@@ -137,10 +144,8 @@ def main() -> None:
         raise SystemExit("\n".join(f"FAIL: {problem}" for problem in problems))
 
     closed = sum(entry["status"] == "closed" for entry in entries)
-    print(
-        f"PASS: canonical encounter index is contiguous through {len(entries)}; "
-        f"{closed} closed and Battle {next_entries[0]['index']} is next"
-    )
+    queue_state = "campaign complete" if campaign_complete else f"Battle {next_entries[0]['index']} is next"
+    print(f"PASS: canonical encounter index is contiguous through {len(entries)}; {closed} closed and {queue_state}")
     print("PASS: every opening optional, story, branch, and twin trainer is indexed exactly once")
 
 

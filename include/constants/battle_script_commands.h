@@ -223,6 +223,9 @@
 #define VARIOUS_CLEAR_SKY_DROP                     150
 #define VARIOUS_SET_BEAK_BLAST                     151
 #define VARIOUS_JUMP_IF_CANT_CORRODE               152
+#define VARIOUS_SET_PLEDGE                         153
+#define VARIOUS_SET_PLEDGE_STATUS                  154
+#define VARIOUS_ROOM_SERVICE_MAGIC_ROOM_END        155
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0

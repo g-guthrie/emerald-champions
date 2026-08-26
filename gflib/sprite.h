@@ -317,6 +317,7 @@ bool8 AddSpriteToOamBuffer(struct Sprite *object, u8 *oamIndex);
 bool8 AddSubspritesToOamBuffer(struct Sprite *sprite, struct OamData *destOam, u8 *oamIndex);
 void CopyToSprites(u8 *src);
 void CopyFromSprites(u8 *dest);
+void CopySpriteResourceTags(struct Sprite *dest, const struct Sprite *src);
 u8 SpriteTileAllocBitmapOp(u16 bit, u8 op);
 void ClearSpriteCopyRequests(void);
 void ResetAffineAnimData(void);

@@ -526,6 +526,11 @@ static const u16 sLongStreakPrizeItems[] =
 // code
 void CallBattleArenaFunction(void)
 {
+    if (gSpecialVar_0x8004 >= ARRAY_COUNT(sArenaFunctions))
+    {
+        gSpecialVar_Result = FALSE;
+        return;
+    }
     sArenaFunctions[gSpecialVar_0x8004]();
 }
 

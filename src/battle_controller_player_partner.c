@@ -1627,6 +1627,11 @@ static void PlayerPartnerHandleExpUpdate(void)
         GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES);  // unused return value
         expPointsToGive = gBattleResources->bufferA[gActiveBattler][2] | (gBattleResources->bufferA[gActiveBattler][3] << 8);
         taskId = CreateTask(Task_GiveExpToMon, 10);
+        if (!IsTaskIdValid(taskId))
+        {
+            PlayerPartnerBufferExecCompleted();
+            return;
+        }
         gTasks[taskId].tExpTask_monId = monId;
         gTasks[taskId].tExpTask_gainedExp = expPointsToGive;
         gTasks[taskId].tExpTask_bank = gActiveBattler;
@@ -1837,7 +1842,15 @@ static void PlayerPartnerHandleIntroTrainerBallThrow(void)
         gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
 
     gBattleSpritesDataPtr->animationData->introAnimActive = TRUE;
-    gBattlerControllerFuncs[gActiveBattler] = PlayerPartnerDummy;
+    if (IsTaskIdValid(taskId))
+    {
+        gBattlerControllerFuncs[gActiveBattler] = PlayerPartnerDummy;
+    }
+    else
+    {
+        gTasks[taskId].data[1] = 24;
+        Task_StartSendOutAnim(taskId);
+    }
 }
 
 static void Task_StartSendOutAnim(u8 taskId)

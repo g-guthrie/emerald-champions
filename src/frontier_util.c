@@ -786,6 +786,11 @@ static const u8 *const *const sFrontierBrainPlayerWonTexts[] =
 // code
 void CallFrontierUtilFunc(void)
 {
+    if (gSpecialVar_0x8004 >= ARRAY_COUNT(sFrontierUtilFuncs))
+    {
+        gSpecialVar_Result = FALSE;
+        return;
+    }
     sFrontierUtilFuncs[gSpecialVar_0x8004]();
 }
 
@@ -2396,13 +2401,8 @@ void ClearRankingHallRecords(void)
 {
     s32 i, j, k;
 
-    // UB: Passing 0 as a pointer instead of a pointer holding a value of 0.
-#ifdef UBFIX
     u8 emptyId[TRAINER_ID_LENGTH] = {0};
     #define ZERO emptyId
-#else
-    #define ZERO 0
-#endif
 
     for (i = 0; i < HALL_FACILITIES_COUNT; i++)
     {

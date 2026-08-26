@@ -2012,6 +2012,24 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_Poltergeist, ANIM_TAG_POLTERGEIST},
 };
 
+bool8 TryLoadBattleAnimPalette(u16 tag)
+{
+    u32 index;
+
+    if (IndexOfSpritePaletteTag(tag) != 0xFF)
+        return TRUE;
+    if (tag < ANIM_SPRITES_START)
+        return FALSE;
+
+    index = GET_TRUE_SPRITE_INDEX(tag);
+    if (index >= ARRAY_COUNT(gBattleAnimPaletteTable)
+     || gBattleAnimPaletteTable[index].data == NULL)
+        return FALSE;
+
+    LoadCompressedSpritePaletteUsingHeap(&gBattleAnimPaletteTable[index]);
+    return IndexOfSpritePaletteTag(tag) != 0xFF;
+}
+
 const struct BattleAnimBackground gBattleAnimBackgroundTable[] =
 {
     [BG_DARK_] = {gBattleAnimBgImage_Dark, gBattleAnimBgPalette_Dark, gBattleAnimBgTilemap_Dark},
@@ -2082,6 +2100,8 @@ const struct BattleAnimBackground gBattleAnimBackgroundTable[] =
     [BG_AURA_SPHERE] = {gBattleAnimBgImage_FocusBlast, gBattleAnimBgPalette_AuraSphere, gBattleAnimBgTilemap_FocusBlast},
     [BG_STEEL_BEAM_OPPONENT] = {gBattleAnimBgImage_Highspeed, gBattleAnimBgPalette_SteelBeam, gBattleAnimBgTilemap_HighspeedOpponent},
     [BG_STEEL_BEAM_PLAYER] = {gBattleAnimBgImage_Highspeed, gBattleAnimBgPalette_SteelBeam, gBattleAnimBgTilemap_HighspeedPlayer},
+    [BG_RAINBOW] = {gBattleAnimBgImage_Rainbow, gBattleAnimBgPalette_Rainbow, gBattleAnimBgTilemap_Rainbow},
+    [BG_SWAMP] = {gBattleAnimBgImage_Swamp, gBattleAnimBgPalette_Swamp, gBattleAnimBgTilemap_Swamp},
 };
 
 static void (* const sScriptCmdTable[])(void) =
@@ -2204,6 +2224,9 @@ void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMo
         case B_ANIM_WISH_HEAL:
         case B_ANIM_MEGA_EVOLUTION:
         case B_ANIM_GULP_MISSILE:
+        case B_ANIM_RAINBOW:
+        case B_ANIM_SEA_OF_FIRE:
+        case B_ANIM_SWAMP:
             hideHpBoxes = TRUE;
             break;
         default:
@@ -2553,8 +2576,11 @@ static void ScriptCmd_createvisualtask(void)
     }
 
     taskId = CreateTask(taskFunc, taskPriority);
-    taskFunc(taskId);
-    gAnimVisualTaskCount++;
+    if (taskId < NUM_TASKS)
+    {
+        taskFunc(taskId);
+        gAnimVisualTaskCount++;
+    }
 }
 
 static void ScriptCmd_createvisualtaskontargets(void)
@@ -2586,8 +2612,11 @@ static void ScriptCmd_createvisualtaskontargets(void)
     {
         gBattleAnimArgs[battlerArgIndex] = targets[i];
         taskId = CreateTask(taskFunc, taskPriority);
-        taskFunc(taskId);
-        gAnimVisualTaskCount++;
+        if (taskId < NUM_TASKS)
+        {
+            taskFunc(taskId);
+            gAnimVisualTaskCount++;
+        }
     }
 }
 
@@ -2752,13 +2781,16 @@ static void ScriptCmd_monbg(void)
         else
             toBG_2 = TRUE;
 
-        MoveBattlerSpriteToBG(battlerId, toBG_2, FALSE);
         taskId = CreateTask(sub_80A40F4, 10);
-        gAnimVisualTaskCount++;
-        gTasks[taskId].data[t1_MONBG_BATTLER] = battlerId;
-        gTasks[taskId].data[t1_MON_IN_BG2] = toBG_2;
-        gTasks[taskId].data[t1_CREATE_ANOTHER_TASK] = TRUE;
-        gTasks[taskId].data[t1_IS_SECONDMON_BG] = 0;
+        if (taskId < NUM_TASKS)
+        {
+            MoveBattlerSpriteToBG(battlerId, toBG_2, FALSE);
+            gAnimVisualTaskCount++;
+            gTasks[taskId].data[t1_MONBG_BATTLER] = battlerId;
+            gTasks[taskId].data[t1_MON_IN_BG2] = toBG_2;
+            gTasks[taskId].data[t1_CREATE_ANOTHER_TASK] = TRUE;
+            gTasks[taskId].data[t1_IS_SECONDMON_BG] = 0;
+        }
 
     }
 
@@ -2771,13 +2803,16 @@ static void ScriptCmd_monbg(void)
         else
             toBG_2 = TRUE;
 
-        MoveBattlerSpriteToBG(battlerId, toBG_2, FALSE);
         taskId = CreateTask(sub_80A40F4, 10);
-        gAnimVisualTaskCount++;
-        gTasks[taskId].data[0] = battlerId;
-        gTasks[taskId].data[1] = toBG_2;
-        gTasks[taskId].data[t1_CREATE_ANOTHER_TASK] = TRUE;
-        gTasks[taskId].data[t1_IS_SECONDMON_BG] = 1;
+        if (taskId < NUM_TASKS)
+        {
+            MoveBattlerSpriteToBG(battlerId, toBG_2, FALSE);
+            gAnimVisualTaskCount++;
+            gTasks[taskId].data[0] = battlerId;
+            gTasks[taskId].data[1] = toBG_2;
+            gTasks[taskId].data[t1_CREATE_ANOTHER_TASK] = TRUE;
+            gTasks[taskId].data[t1_IS_SECONDMON_BG] = 1;
+        }
     }
 
     sBattleAnimScriptPtr++;
@@ -3697,9 +3732,11 @@ static void ScriptCmd_loopsewithpan(void)
     gTasks[taskId].tFramesToWait = framesToWait;
     gTasks[taskId].tNumberOfPlays = numberOfPlays;
     gTasks[taskId].tFrameCounter = framesToWait;
-    gTasks[taskId].func(taskId);
-
-    gAnimSoundTaskCount++;
+    if (taskId < NUM_TASKS)
+    {
+        gTasks[taskId].func(taskId);
+        gAnimSoundTaskCount++;
+    }
     sBattleAnimScriptPtr += 5;
 }
 
@@ -3787,8 +3824,11 @@ static void ScriptCmd_createsoundtask(void)
         sBattleAnimScriptPtr += 2;
     }
     taskId = CreateTask(func, 1);
-    func(taskId);
-    gAnimSoundTaskCount++;
+    if (taskId < NUM_TASKS)
+    {
+        func(taskId);
+        gAnimSoundTaskCount++;
+    }
 }
 
 static void ScriptCmd_waitsound(void)

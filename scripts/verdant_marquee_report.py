@@ -39,7 +39,7 @@ def markdown() -> str:
             continue
         status = dossier["status"]
         lines.extend([
-            f"- Status: `{status['design']}` / critic `{status['fresh_critic']}` / source `{status['source']}` / runtime `{status['runtime']}`",
+            f"- Status: `{status['design']}` / source `{status['source']}` / runtime `{status['runtime']}`",
             f"- Format: `{dossier['runtime']['canonical_format']}`",
             f"- Strict cap: {dossier['campaign_state']['strict_cap']}",
             f"- Target / observed difficulty: **{dossier['difficulty']['target']} / {dossier['difficulty']['observed']}**",
@@ -72,24 +72,14 @@ def markdown() -> str:
             f"- Selected references: {', '.join(f'`{ref}`' for ref in dossier['competitive_research']['selected_reference_ids'])}",
             f"- Required source work: {'; '.join(dossier['ai']['custom_requirements'])}",
             "",
-            "### Fresh-context verdict",
+            "### Author self-check",
             "",
         ])
-        critic = dossier.get("fresh_critic_review") or {}
-        if critic:
-            lines.extend([
-                f"- Reviewer: `{critic.get('reviewer_agent_id')}`",
-                f"- Review engine: `{critic.get('reviewer_model')}` / `{critic.get('reasoning_effort')}` / template `{critic.get('review_template_version')}`",
-                f"- Verdict: **{critic.get('verdict')}**",
-                f"- Is it sick and awesome? {critic.get('is_this_sick_and_awesome')}",
-                f"- Signature moment: {critic.get('signature_moment')}",
-                f"- Biggest problem: {critic.get('biggest_problem')}",
-                f"- Honest difficulty take: {critic.get('honest_difficulty_take')}",
-                f"- Single best change: {critic.get('single_best_change')}",
-                f"- Ship blocker: {critic.get('ship_blocker')}",
-            ])
-        else:
-            lines.append("- Final fresh no-history review is pending.")
+        self_check = dossier["author_self_check"]
+        lines.extend([
+            f"- Strongest part: {self_check['strongest_part']}",
+            f"- Weakest link: {self_check['weakest_link']}",
+        ])
         lines.extend([
             "",
             "### Campaign reservations",

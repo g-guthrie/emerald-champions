@@ -4426,7 +4426,10 @@ void AnimTask_LeafBlade(u8 taskId)
     task->data[8] = task->data[7] - task->data[9] + task->data[6];
     task->data[2] = CreateSprite(&gLeafBladeSpriteTemplate, task->data[8], task->data[9], task->data[4]);
     if (task->data[2] == MAX_SPRITES)
+    {
         DestroyAnimVisualTask(taskId);
+        return;
+    }
 
     gSprites[task->data[2]].data[0] = 10;
     gSprites[task->data[2]].data[1] = task->data[8];
@@ -4749,6 +4752,12 @@ void AnimTask_CycleMagicalLeafPal(u8 taskId)
     switch (task->data[0])
     {
     case 0:
+        if (!TryLoadBattleAnimPalette(ANIM_TAG_LEAF)
+         || !TryLoadBattleAnimPalette(ANIM_TAG_RAZOR_LEAF))
+        {
+            DestroyAnimVisualTask(taskId);
+            return;
+        }
         task->data[8] = IndexOfSpritePaletteTag(ANIM_TAG_LEAF) * 16 + 256;
         task->data[12] = IndexOfSpritePaletteTag(ANIM_TAG_RAZOR_LEAF) * 16 + 256;
         task->data[0]++;
@@ -5843,7 +5852,7 @@ static void AnimFalseSwipeSlice(struct Sprite* sprite)
 
 static void AnimFalseSwipePositionedSlice(struct Sprite* sprite)
 {
-    sprite->x = sprite->x = GetBattlerSpriteCoord(gBattleAnimTarget, 2) + 0xFFD0 + gBattleAnimArgs[0];
+    sprite->x = GetBattlerSpriteCoord(gBattleAnimTarget, 2) + 0xFFD0 + gBattleAnimArgs[0];
     sprite->y = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
     StartSpriteAnim(sprite, 1);
     sprite->data[0] = 0;
@@ -7153,7 +7162,15 @@ static void AnimPoisonJabProjectile(struct Sprite *sprite)
 
 void AnimTask_BlendNightSlash(u8 taskId)
 {
-    int paletteOffset = IndexOfSpritePaletteTag(ANIM_TAG_SLASH) * 16 + 256;
+    int paletteOffset;
+
+    if (!TryLoadBattleAnimPalette(ANIM_TAG_SLASH))
+    {
+        DestroyAnimVisualTask(taskId);
+        return;
+    }
+
+    paletteOffset = IndexOfSpritePaletteTag(ANIM_TAG_SLASH) * 16 + 256;
     BlendPalette(paletteOffset, 16, 6, RGB_RED);
     DestroyAnimVisualTask(taskId);
 }

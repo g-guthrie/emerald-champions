@@ -3355,6 +3355,11 @@ void AnimTask_RolePlaySilhouette(u8 taskId)
     coord1 = GetBattlerSpriteCoord(gBattleAnimAttacker, 0);
     coord2 = GetBattlerSpriteCoord(gBattleAnimAttacker, 1);
     spriteId = CreateAdditionalMonSpriteForMoveAnim(species, isBackPic, 0, coord1 + xOffset, coord2, 5, personality, otId, gBattleAnimTarget);
+    if (spriteId == MAX_SPRITES)
+    {
+        DestroyAnimVisualTask(taskId);
+        return;
+    }
 
     gSprites[spriteId].oam.priority = priority;
     gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
@@ -5184,6 +5189,13 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
         }
 
         spriteId2 = CreateAdditionalMonSpriteForMoveAnim(species, isBackPic, 0, x, GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y), subpriority, personality, otId, gBattleAnimAttacker);
+        if (spriteId2 == MAX_SPRITES)
+        {
+            spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
+            gSprites[spriteId].x2 = 0;
+            DestroyAnimVisualTask(taskId);
+            return;
+        }
         if (gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies != SPECIES_NONE)
             BlendPalette((gSprites[spriteId2].oam.paletteNum * 16) | 0x100, 16, 6, RGB_WHITE);
 

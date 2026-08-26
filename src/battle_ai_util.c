@@ -495,6 +495,10 @@ void RecordLastUsedMoveBy(u32 battlerId, u32 move)
 void RecordKnownMove(u8 battlerId, u32 move)
 {
     s32 i;
+
+    if (battlerId >= gBattlersCount || move == MOVE_NONE || move >= MOVES_COUNT)
+        return;
+
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (BATTLE_HISTORY->usedMoves[battlerId][i] == move)
@@ -734,7 +738,10 @@ static bool32 AI_GetIfCrit(u32 move, u8 battlerAtk, u8 battlerDef)
 s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef)
 {
     s32 dmg, moveType, critDmg, normalDmg;
+    s32 unresistedDmg, unresistedCritDmg, unresistedNormalDmg;
     s8 critChance;
+    u8 hitScale = 1;
+    u16 savedItem;
 
     SaveBattlerData(battlerAtk);
     SaveBattlerData(battlerDef);
@@ -769,10 +776,13 @@ s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef)
         dmg = 20 * (AI_DATA->atkAbility == ABILITY_PARENTAL_BOND ? 2 : 1);
         break;
     case EFFECT_MULTI_HIT:
-        dmg *= (AI_DATA->atkAbility == ABILITY_SKILL_LINK ? 5 : 3);
+    case EFFECT_SCALE_SHOT:
+        hitScale = (AI_DATA->atkAbility == ABILITY_SKILL_LINK ? 5 : 3);
         break;
     case EFFECT_TRIPLE_KICK:
-        dmg *= (AI_DATA->atkAbility == ABILITY_SKILL_LINK ? 6 : 5);
+        // Triple Kick's three escalating strikes total six base-power units;
+        // the non-Skill Link estimate retains this engine's five-unit median.
+        hitScale = (AI_DATA->atkAbility == ABILITY_SKILL_LINK ? 6 : 5);
         break;
     case EFFECT_ENDEAVOR:
         // If target has less HP than user, Endeavor does no damage
@@ -790,9 +800,38 @@ s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef)
 
     // Handle other multi-strike moves
     if (gBattleMoves[move].flags & FLAG_TWO_STRIKES)
-        dmg *= 2;
+        hitScale = 2;
     else if (move == MOVE_SURGING_STRIKES || (move == MOVE_WATER_SHURIKEN && gBattleMons[battlerAtk].species == SPECIES_GRENINJA_ASH))
-        dmg *= 3;
+        hitScale = 3;
+
+    if (hitScale > 1)
+    {
+        // A resist Berry (including Ripen's stronger reduction) is consumed by
+        // the first relevant strike only. Recalculate one unresisted strike,
+        // then use it for every remaining hit instead of multiplying the
+        // Berry-reduced first hit across the whole move.
+        if (GetBattlerHoldEffect(battlerDef, TRUE) == HOLD_EFFECT_RESIST_BERRY)
+        {
+            savedItem = gBattleMons[battlerDef].item;
+            gBattleMons[battlerDef].item = ITEM_NONE;
+            unresistedNormalDmg = CalculateMoveDamage(move, battlerAtk, battlerDef, moveType, 0, FALSE, FALSE, FALSE);
+            unresistedCritDmg = CalculateMoveDamage(move, battlerAtk, battlerDef, moveType, 0, TRUE, FALSE, FALSE);
+            if (critChance == -1)
+                unresistedDmg = unresistedNormalDmg;
+            else
+                unresistedDmg = (unresistedCritDmg + unresistedNormalDmg * (critChance - 1)) / critChance;
+            gBattleMons[battlerDef].item = savedItem;
+
+            if (unresistedDmg > dmg)
+                dmg += unresistedDmg * (hitScale - 1);
+            else
+                dmg *= hitScale;
+        }
+        else
+        {
+            dmg *= hitScale;
+        }
+    }
 
     RestoreBattlerData(battlerAtk);
     RestoreBattlerData(battlerDef);
@@ -862,7 +901,6 @@ u8 GetMoveDamageResult(u16 move)
 {
     s32 i, checkedMove, bestId, currId, hp;
     s32 moveDmgs[MAX_MON_MOVES];
-    u8 result;
 
     for (i = 0; sDiscouragedPowerfulMoveEffects[i] != 0xFFFF; i++)
     {
@@ -1055,7 +1093,7 @@ bool32 IsAiFaster(u8 battler)
 // Check if target has means to faint ai mon.
 bool32 CanTargetFaintAi(u8 battlerDef, u8 battlerAtk)
 {
-    s32 i, dmg;
+    s32 i;
     u32 unusable = CheckMoveLimitations(battlerDef, 0, 0xFF);
     u16 *moves = GetMovesArray(battlerDef);
     
@@ -1099,11 +1137,24 @@ bool32 CanAIFaintTarget(u8 battlerAtk, u8 battlerDef, u8 numHits)
 
 bool32 CanMoveFaintBattler(u16 move, u8 battlerDef, u8 battlerAtk, u8 nHits)
 {
-    s32 i, dmg;
+    s32 i;
     u32 unusable = CheckMoveLimitations(battlerDef, 0, 0xFF);
 
-    if (move != MOVE_NONE && move != 0xFFFF && !(unusable & gBitTable[i]) && AI_CalcDamage(move, battlerDef, battlerAtk) >= gBattleMons[battlerAtk].hp)
-        return TRUE;
+    if (move == MOVE_NONE || move >= MOVES_COUNT)
+        return FALSE;
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        s32 damage;
+
+        if (gBattleMons[battlerDef].moves[i] != move || unusable & gBitTable[i])
+            continue;
+
+        damage = AI_CalcDamage(move, battlerDef, battlerAtk);
+        if (nHits > 1)
+            damage *= nHits;
+        return damage >= gBattleMons[battlerAtk].hp;
+    }
 
     return FALSE;
 }
@@ -1117,12 +1168,18 @@ bool32 CanTargetFaintAiWithMod(u8 battlerDef, u8 battlerAtk, s32 hpMod, s32 dmgM
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        u32 dmg = AI_CalcDamage(moves[i], battlerDef, battlerAtk);
-        u32 hpCheck = gBattleMons[battlerAtk].hp + hpMod;
+        u32 dmg;
+        s32 hpCheck;
+
+        if (moves[i] == MOVE_NONE || moves[i] >= MOVES_COUNT || unusable & gBitTable[i])
+            continue;
+
+        dmg = AI_CalcDamage(moves[i], battlerDef, battlerAtk);
+        hpCheck = gBattleMons[battlerAtk].hp + hpMod;
         if (dmgMod)
             dmg *= dmgMod;
         
-        if (moves[i] != MOVE_NONE && moves[i] != 0xFFFF && !(unusable & gBitTable[i]) && dmg >= hpCheck)
+        if (hpCheck <= 0 || dmg >= (u32)hpCheck)
         {
             return TRUE;
         }
@@ -1374,7 +1431,9 @@ bool32 IsMoveRedirectionPrevented(u16 move, u16 atkAbility)
 // differs from GetTotalAccuracy in that we need to check AI history for item, ability, etc
 u32 AI_GetMoveAccuracy(u8 battlerAtk, u8 battlerDef, u16 atkAbility, u16 defAbility, u8 atkHoldEffect, u8 defHoldEffect, u16 move)
 {
-    u32 calc, moveAcc, atkParam, defParam;
+    u32 calc, moveAcc;
+    u32 atkParam = GetBattlerHoldEffectParam(battlerAtk);
+    u32 defParam = GetBattlerHoldEffectParam(battlerDef);
     s8 buff, accStage, evasionStage;
     
     gPotentialItemEffectBattler = battlerDef;
@@ -1468,7 +1527,8 @@ bool32 IsMoveEncouragedToHit(u8 battlerAtk, u8 battlerDef, u16 move)
     //TODO - anticipate protect move?
         
     // always hits
-    if (gStatuses3[battlerDef] & STATUS3_ALWAYS_HITS || gDisableStructs[battlerDef].battlerWithSureHit == battlerAtk)
+    if ((gStatuses3[battlerDef] & STATUS3_ALWAYS_HITS)
+     && gDisableStructs[battlerDef].battlerWithSureHit == battlerAtk)
         return TRUE;
         
     // discouraged from hitting
@@ -1619,8 +1679,6 @@ bool32 ShouldSetSun(u8 battlerAtk, u16 atkAbility, u16 holdEffect)
 void ProtectChecks(u8 battlerAtk, u8 battlerDef, u16 move, u16 predictedMove, s16 *score)
 {
     // TODO more sophisticated logic
-    u16 predictedEffect = gBattleMoves[predictedMove].effect;
-    u8 defAbility = AI_GetAbility(battlerDef);
     u32 uses = gDisableStructs[battlerAtk].protectUses;
     
     /*if (GetMoveResultFlags(predictedMove) & (MOVE_RESULT_NO_EFFECT | MOVE_RESULT_MISSED))
@@ -3197,8 +3255,8 @@ bool32 PartnerMoveIsSameNoTarget(u8 battlerAtkPartner, u16 move, u16 partnerMove
 
 bool32 ShouldUseWishAromatherapy(u8 battlerAtk, u8 battlerDef, u16 move)
 {
-    u32 i;
-    u32 firstId, lastId;
+    s32 i;
+    s32 firstId, lastId;
     struct Pokemon* party;
     bool32 hasStatus = FALSE;
     bool32 needHealing = FALSE;
@@ -3269,6 +3327,11 @@ s32 AI_CalcPartyMonDamage(u16 move, u8 battlerAtk, u8 battlerDef, struct Pokemon
     s32 dmg;
     u32 i;
     struct BattlePokemon *battleMons = Alloc(sizeof(struct BattlePokemon) * MAX_BATTLERS_COUNT);
+
+    // No live battle state has been modified yet. Treat an unavailable scratch
+    // snapshot as no actionable damage estimate rather than corrupting it.
+    if (battleMons == NULL)
+        return 0;
 
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
         battleMons[i] = gBattleMons[i];
@@ -3344,7 +3407,6 @@ bool32 IsPartyFullyHealedExceptBattler(u8 battlerId)
 
 bool32 PartyHasMoveSplit(u8 battlerId, u8 split)
 {
-    u8 firstId, lastId;
     struct Pokemon* party = GetBattlerPartyData(battlerId);
     u32 i, j;
 
@@ -3494,10 +3556,10 @@ void IncreaseStatUpScore(u8 battlerAtk, u8 battlerDef, u8 statId, s16 *score)
             if (gBattleMons[battlerAtk].statStages[STAT_ATK] < STAT_UP_2_STAGE)
                 *score += 2;
             else if (gBattleMons[battlerAtk].statStages[STAT_ATK] < STAT_UP_STAGE)
-                *(score)++;
+                (*score)++;
         }
         if (HasMoveEffect(battlerAtk, EFFECT_FOUL_PLAY))
-            *(score)++;
+            (*score)++;
         break;
     case STAT_DEF:
         if ((HasMoveWithSplit(battlerDef, SPLIT_PHYSICAL)|| IS_MOVE_PHYSICAL(gLastMoves[battlerDef]))
@@ -3506,7 +3568,7 @@ void IncreaseStatUpScore(u8 battlerAtk, u8 battlerDef, u8 statId, s16 *score)
             if (gBattleMons[battlerAtk].statStages[STAT_DEF] < STAT_UP_2_STAGE)
                 *score += 2; // seems better to raise def at higher HP
             else if (gBattleMons[battlerAtk].statStages[STAT_DEF] < STAT_UP_STAGE)
-                *(score)++;
+                (*score)++;
         }
         break;
     case STAT_SPEED:
@@ -3515,7 +3577,7 @@ void IncreaseStatUpScore(u8 battlerAtk, u8 battlerDef, u8 statId, s16 *score)
             if (gBattleMons[battlerAtk].statStages[STAT_SPEED] < STAT_UP_2_STAGE)
                 *score += 2;
             else if (gBattleMons[battlerAtk].statStages[STAT_SPEED] < STAT_UP_STAGE)
-                *(score)++;
+                (*score)++;
         }
         break;
     case STAT_SPATK:
@@ -3524,7 +3586,7 @@ void IncreaseStatUpScore(u8 battlerAtk, u8 battlerDef, u8 statId, s16 *score)
             if (gBattleMons[battlerAtk].statStages[STAT_SPATK] < STAT_UP_2_STAGE)
                 *score += 2;
             else if (gBattleMons[battlerAtk].statStages[STAT_SPATK] < STAT_UP_STAGE)
-                *(score)++;
+                (*score)++;
         }
         break;
     case STAT_SPDEF:
@@ -3534,14 +3596,14 @@ void IncreaseStatUpScore(u8 battlerAtk, u8 battlerDef, u8 statId, s16 *score)
             if (gBattleMons[battlerAtk].statStages[STAT_SPDEF] < STAT_UP_2_STAGE)
                 *score += 2; // seems better to raise spdef at higher HP
             else if (gBattleMons[battlerAtk].statStages[STAT_SPDEF] < STAT_UP_STAGE)
-                *(score)++;
+                (*score)++;
         }
         break;
     case STAT_ACC:
         if (HasMoveWithLowAccuracy(battlerAtk, battlerDef, 80, TRUE, AI_DATA->atkAbility, AI_DATA->defAbility, AI_DATA->atkHoldEffect, AI_DATA->defHoldEffect))
             *score += 2; // has moves with less than 80% accuracy
         else if (HasMoveWithLowAccuracy(battlerAtk, battlerDef, 90, TRUE, AI_DATA->atkAbility, AI_DATA->defAbility, AI_DATA->atkHoldEffect, AI_DATA->defHoldEffect))
-            *(score)++;
+            (*score)++;
         break;
     case STAT_EVASION:
         if (!BattlerWillFaintFromWeather(battlerAtk, AI_DATA->atkAbility))
@@ -3549,7 +3611,7 @@ void IncreaseStatUpScore(u8 battlerAtk, u8 battlerDef, u8 statId, s16 *score)
             if (!GetBattlerSecondaryDamage(battlerAtk) && !(gStatuses3[battlerAtk] & STATUS3_ROOTED))
                 *score += 2;
             else
-                *(score)++;
+                (*score)++;
         }
         break;
     }
@@ -3574,7 +3636,7 @@ void IncreasePoisonScore(u8 battlerAtk, u8 battlerDef, u16 move, s16 *score)
           || AI_DATA->atkAbility == ABILITY_MERCILESS)
             *(score) += 2;
         else
-            *(score)++;
+            (*score)++;
     }
 }
 

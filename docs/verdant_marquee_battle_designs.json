@@ -11,6 +11,8 @@
     "pokemon_league_main_story": {
       "strict_cap": 80,
       "level_semantics": "Trainer levels are offsets from the active strict cap.",
+      "allowed_battle_transformations": ["Mega Evolution", "Primal Reversion"],
+      "forbidden_battle_transformations": ["Terastallization", "Z-Moves", "Dynamax", "Gigantamax"],
       "automatic_healing_between_members": false,
       "manual_overworld_bag_between_members": true,
       "pokemon_menu_between_members": true,
@@ -46,8 +48,7 @@
       "anchor_id": "ELITE_FOUR_SIDNEY",
       "planning_tier": "league_gauntlet",
       "status": {
-        "design": "authored-draft",
-        "fresh_critic": "pending",
+        "design": "design-complete",
         "source": "unimplemented",
         "static": "design-validated",
         "runtime": "unplayed"
@@ -629,14 +630,17 @@
           "resolved": true
         }
       ],
-      "fresh_critic_review": null
+      "fresh_critic_review": null,
+      "author_self_check": {
+        "strongest_part": "The Eject Button transition can visibly turn an attack on Incineroar into Dark Aura pressure beside Urshifu, while the same early knockouts build toward a readable Supreme Overlord final king.",
+        "weakest_link": "The joint opening scorer and total visible-state reserve selector are substantial unimplemented AI work; the design is complete, but its target 10 remains unobserved until those behaviors and broad matchup families run in the ROM."
+      }
     },
     "ELITE_FOUR_PHOEBE": {
       "anchor_id": "ELITE_FOUR_PHOEBE",
       "planning_tier": "league_gauntlet",
       "status": {
-        "design": "authored-draft",
-        "fresh_critic": "pending",
+        "design": "design-complete",
         "source": "unimplemented",
         "static": "design-validated",
         "runtime": "unplayed"
@@ -1193,14 +1197,17 @@
           "resolved": true
         }
       ],
-      "fresh_critic_review": null
+      "fresh_critic_review": null,
+      "author_self_check": {
+        "strongest_part": "One Mega Gengar supports two staged Perish circles, yet removing that single visible trapper collapses the hard clock and forces Phoebe into a materially different direct-cleanup phase.",
+        "weakest_link": "Coordinated count-one exits, the returning-Gengar second circle, and the escape-aware fallback can become slow or brittle unless the source state machine is implemented and exercised against several visible escape plans."
+      }
     },
     "ELITE_FOUR_GLACIA": {
       "anchor_id": "ELITE_FOUR_GLACIA",
       "planning_tier": "league_gauntlet",
       "status": {
         "design": "design-complete",
-        "fresh_critic": "resolved",
         "source": "unimplemented",
         "static": "design-validated",
         "runtime": "unplayed"
@@ -1262,7 +1269,7 @@
       },
       "rolling_context": {
         "available": false,
-        "reason": "The chronological battle frontier is still Battle 29, so an exact previous-ten Glacia window would be fabricated. Refresh before implementation.",
+        "reason": "The chronological frontier has not reached Glacia, so an exact previous-ten window would be fabricated. Refresh when this anchor reaches implementation.",
         "protected_neighbor_anchors": [
           "ELITE_FOUR_PHOEBE",
           "ELITE_FOUR_DRAKE",
@@ -1647,7 +1654,7 @@
           "No game source has been changed for this revised dossier and no real-ROM battle has been run."
         ],
         "known_blockers": [
-          "A new separate no-history excitement critic has not reviewed the revised final team, so the dossier remains authored-draft.",
+          "The detonation cue, source state machine, and revised reserve roles remain unimplemented and unplayed.",
           "The revised party, lower offsets, no-turn-zero-Explosion gate, one-time pre-selection crack cue, Toxapex transition, board-state reserve selection, and Glastrier climax are not implemented.",
           "Exact dialogue is not written or width-rendered.",
           "The guide still describes an older Glacia roster.",
@@ -1692,14 +1699,17 @@
           "author_response": "A one-time native crack message is now a hard AI and presentation requirement. It appears after Glalie's first action but before the next player action-selection window; Explosion remains unavailable until the cue is shown, the cue never repeats, and later detonation reads may use learned board state.",
           "resolved": true
         }
-      ]
+      ],
+      "author_self_check": {
+        "strongest_part": "The one-time crack cue makes Mega Glalie's later Refrigerate detonation actionable before move selection, and final Glastrier gives the shattered board one distinct late snowball rather than another interchangeable fast Ice attacker.",
+        "weakest_link": "The battle depends on a bespoke cue and no-turn-zero detonation gate; the middle Chien-Pao, Chandelure, and Iron Bundle selection must prove distinct and Glastrier must prove climactic rather than merely slow in runtime."
+      }
     },
     "ELITE_FOUR_DRAKE": {
       "anchor_id": "ELITE_FOUR_DRAKE",
       "planning_tier": "league_gauntlet",
       "status": {
         "design": "design-complete",
-        "fresh_critic": "resolved",
         "source": "unimplemented",
         "static": "design-validated",
         "runtime": "unplayed"
@@ -1761,7 +1771,7 @@
       },
       "rolling_context": {
         "available": false,
-        "reason": "The chronological battle frontier is still Battle 29, so an exact previous-ten Drake window would be fabricated. Refresh before implementation.",
+        "reason": "The chronological frontier has not reached Drake, so an exact previous-ten window would be fabricated. Refresh when this anchor reaches implementation.",
         "protected_neighbor_anchors": [
           "ELITE_FOUR_GLACIA",
           "CHAMPION_WALLACE",
@@ -2160,7 +2170,7 @@
           "No game source has been changed for this revised dossier and no real-ROM battle has been run."
         ],
         "known_blockers": [
-          "The final no-history critic shipped the design, but no source implementation or runtime matchup evidence exists.",
+          "No source implementation or runtime matchup evidence exists for the revised handoff and final Mega sequence.",
           "The revised party, lower offsets, board-state selector, no-pivot mixed Dragapult, Latios handoff, accurate coverage, and sole four-attack Mega Dragonite climax are not implemented.",
           "Required matchup tests against cap-80 Fairy, Ice, priority, hazard, bulky-special, Tailwind-stall, Memento-switch, and anti-Mega plans have not run.",
           "Exact dialogue is not written or width-rendered.",
@@ -2242,14 +2252,17 @@
           "author_response": "The exact Mega line and immediate transformation timing are recorded; Dragapult now uses Psychic Fangs and cannot pivot; the matchup matrix is mandatory; Garchomp now truthfully describes Fire coverage into Steel; and Dragonite carries four attacks with no setup or recovery.",
           "resolved": true
         }
-      ]
+      ],
+      "author_self_check": {
+        "strongest_part": "Latios visibly spending Tailwind or Memento before an unexpected four-attack special Mega Dragonite turns the familiar all-Dragon weakness into a memorable category reversal.",
+        "weakest_link": "The Latios handoff and board-state reserve choice remain unimplemented; Memento can be cleared by switching and shared Fairy or Ice pressure may compress the roster, so target 10 depends on measured matchup play rather than the dossier alone."
+      }
     },
     "CHAMPION_WALLACE": {
       "anchor_id": "CHAMPION_WALLACE",
       "planning_tier": "champion",
       "status": {
         "design": "design-complete",
-        "fresh_critic": "resolved",
         "source": "unimplemented",
         "static": "design-validated",
         "runtime": "unplayed"
@@ -2309,7 +2322,7 @@
       },
       "rolling_context": {
         "available": false,
-        "reason": "The chronological battle frontier is still Battle 29, so an exact previous-ten Champion window would be fabricated. Refresh before implementation.",
+        "reason": "The chronological frontier has not reached the Champion, so an exact previous-ten window would be fabricated. Refresh when this anchor reaches implementation.",
         "protected_neighbor_anchors": [
           "ELITE_FOUR_GLACIA",
           "ELITE_FOUR_DRAKE",
@@ -2617,7 +2630,7 @@
           "Ice stall-offense and toxic trapping for Glacia",
           "Dark information warfare for Sidney",
           "Dragon singles lure sequencing for Drake",
-          "Primal Reversion, Tera, Z-Moves, and Dynamax remain absent"
+          "Primal Reversion remains reserved for Magma and Aqua bosses; Tera, Z-Moves, and Dynamax remain absent"
         ],
         "releases": [
           "Zapdos, Manaphy, Arceus-Water, Latios, Omastar, and generic rain sweepers are not locked to Wallace and may be used elsewhere if their roles differ.",
@@ -2669,6 +2682,10 @@
         "required_changes": [],
         "author_response": "Accepted as a ship with implementation gates: reserve pairing must remain board-state-aware rather than unconditional, the transition must be legible through visible switching, and the Ferrothorn/Milotic phase must pass runtime pacing and direct-pressure tests before source closure.",
         "resolved": true
+      },
+      "author_self_check": {
+        "strongest_part": "The player can finally win the visible Kyogre-Tornadus speed war only to face a denyable Ogerpon-Palkia reversal, then must cash in the physical answer preserved for Mega Milotic.",
+        "weakest_link": "The two reserve pairs can feel manufactured and the Ferrothorn-Milotic finish can drag unless replacement choice remains board-aware and both members choose proactive pressure in runtime."
       },
       "verification": {
         "design_schema": "pass",

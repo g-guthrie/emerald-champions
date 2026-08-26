@@ -33,8 +33,21 @@ def main() -> int:
     failures: list[str] = []
 
     constants = (ROOT / "include/constants/items.h").read_text()
-    if "#define ITEMS_COUNT   (ITEM_SAPPHIRE + 1)" not in constants:
-        failures.append("ITEMS_COUNT is not truncated immediately after ITEM_SAPPHIRE")
+    count_match = re.search(
+        r"^#define\s+ITEMS_COUNT\s+\((ITEM_[A-Z0-9_]+)\s*\+\s*1\)\s*$",
+        constants,
+        re.M,
+    )
+    if count_match is None:
+        failures.append("ITEMS_COUNT is not defined as the final active item plus one")
+    else:
+        terminal_item = count_match.group(1)
+        prefix = constants[: count_match.start()]
+        item_definitions = re.findall(r"^#define\s+(ITEM_[A-Z0-9_]+)\b", prefix, re.M)
+        if not item_definitions or item_definitions[-1] != terminal_item:
+            failures.append(
+                f"ITEMS_COUNT terminal {terminal_item} is not the final active item definition"
+            )
 
     for source_root in SOURCE_ROOTS:
         for path in (ROOT / source_root).rglob("*"):

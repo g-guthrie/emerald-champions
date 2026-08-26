@@ -801,15 +801,16 @@ Route110_Text_AquaActionsBringSmiles: @ 81EFC0D
 	.string "smiles to people's faces!$"
 
 Route110_Text_MayLetsBattle: @ 81EFC48
-	.string "May: Hi, {PLAYER}{KUN}, long time no see!\p"
-	.string "While I was searching for other\n"
-	.string "Pokémon, my Pokémon grew stronger.\p"
-	.string "So…\n"
-	.string "How about a little battle?$"
+	.string "May: Hi, {PLAYER}{KUN}!\n"
+	.string "I've rebuilt my whole team.\p"
+	.string "Your first partner's counterpart\n"
+	.string "is still at the heart of it.\p"
+	.string "But everyone else can adapt, too.\n"
+	.string "Let's see how your pair responds!$"
 
 Route110_Text_MayDefeated: @ 81EFCCB
-	.string "Yikes!\n"
-	.string "You're better than I expected!$"
+	.string "You adapted faster than I did!\n"
+	.string "What a battle!$"
 
 Route110_Text_MayTakeThis: @ 81EFCF1
 	.string "May: {PLAYER}{KUN}, you've been busy\n"
@@ -828,14 +829,15 @@ Route110_Text_MayExplainItemfinder: @ 81EFD58
 
 Route110_Text_BrendanLetsBattle: @ 81EFE3F
 	.string "Brendan: Hey, {PLAYER}.\n"
-	.string "So this is where you were.\l"
-	.string "How's it going?\p"
-	.string "Have you been raising your Pokémon?\n"
-	.string "I'll check for you.$"
+	.string "I've rebuilt my whole team.\p"
+	.string "Your first partner's counterpart\n"
+	.string "is still at the heart of it.\p"
+	.string "The rest are ready to adapt, too.\n"
+	.string "Show me how your pair responds!$"
 
 Route110_Text_BrendanDefeated: @ 81EFEB4
-	.string "Hmm…\n"
-	.string "You're pretty good.$"
+	.string "You broke through every answer…\n"
+	.string "Nice work.$"
 
 Route110_Text_BrendanTakeThis: @ 81EFECD
 	.string "Brendan: {PLAYER}, you've trained\n"

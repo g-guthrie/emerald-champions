@@ -3,6 +3,7 @@
 #include "battle_controllers.h"
 #include "battle_ai_main.h"
 #include "battle_anim.h"
+#include "battle_gfx_sfx_util.h"
 #include "constants/battle_anim.h"
 #include "battle_interface.h"
 #include "main.h"
@@ -89,13 +90,31 @@ static const struct SpritePalette sSpritePalettes_HealthBoxHealthBar[2] =
 };
 
 // code
-void AllocateBattleSpritesData(void)
+bool32 AllocateBattleSpritesData(void)
 {
+    gBattleSpritesDataPtr = NULL;
     gBattleSpritesDataPtr = AllocZeroed(sizeof(struct BattleSpriteData));
+    if (gBattleSpritesDataPtr == NULL)
+        return FALSE;
+
     gBattleSpritesDataPtr->battlerData = AllocZeroed(sizeof(struct BattleSpriteInfo) * MAX_BATTLERS_COUNT);
+    if (gBattleSpritesDataPtr->battlerData == NULL)
+        goto fail;
     gBattleSpritesDataPtr->healthBoxesData = AllocZeroed(sizeof(struct BattleHealthboxInfo) * MAX_BATTLERS_COUNT);
+    if (gBattleSpritesDataPtr->healthBoxesData == NULL)
+        goto fail;
     gBattleSpritesDataPtr->animationData = AllocZeroed(sizeof(struct BattleAnimationInfo));
+    if (gBattleSpritesDataPtr->animationData == NULL)
+        goto fail;
     gBattleSpritesDataPtr->battleBars = AllocZeroed(sizeof(struct BattleBarInfo) * MAX_BATTLERS_COUNT);
+    if (gBattleSpritesDataPtr->battleBars == NULL)
+        goto fail;
+
+    return TRUE;
+
+fail:
+    FreeBattleSpritesData();
+    return FALSE;
 }
 
 void FreeBattleSpritesData(void)
@@ -472,8 +491,11 @@ bool8 TryHandleLaunchBattleTableAnimation(u8 activeBattler, u8 atkBattler, u8 de
     gBattleAnimAttacker = atkBattler;
     gBattleAnimTarget = defBattler;
     gBattleSpritesDataPtr->animationData->animArg = argument;
-    LaunchBattleAnimation(gBattleAnims_General, tableId, FALSE);
     taskId = CreateTask(Task_ClearBitWhenBattleTableAnimDone, 10);
+    if (!IsTaskIdValid(taskId))
+        return TRUE;
+
+    LaunchBattleAnimation(gBattleAnims_General, tableId, FALSE);
     gTasks[taskId].tBattlerId = activeBattler;
     gBattleSpritesDataPtr->healthBoxesData[gTasks[taskId].tBattlerId].animFromTableActive = 1;
 
@@ -516,8 +538,11 @@ void InitAndLaunchSpecialAnimation(u8 activeBattler, u8 atkBattler, u8 defBattle
 
     gBattleAnimAttacker = atkBattler;
     gBattleAnimTarget = defBattler;
-    LaunchBattleAnimation(gBattleAnims_Special, tableId, FALSE);
     taskId = CreateTask(Task_ClearBitWhenSpecialAnimDone, 10);
+    if (!IsTaskIdValid(taskId))
+        return;
+
+    LaunchBattleAnimation(gBattleAnims_Special, tableId, FALSE);
     gTasks[taskId].tBattlerId = activeBattler;
     gBattleSpritesDataPtr->healthBoxesData[gTasks[taskId].tBattlerId].specialAnimActive = 1;
 }
@@ -1113,13 +1138,15 @@ void LoadAndCreateEnemyShadowSprites(void)
 
     battlerId = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
     gBattleSpritesDataPtr->healthBoxesData[battlerId].shadowSpriteId = CreateSprite(&gSpriteTemplate_EnemyShadow, GetBattlerSpriteCoord(battlerId, 0), GetBattlerSpriteCoord(battlerId, 1) + 29, 0xC8);
-    gSprites[gBattleSpritesDataPtr->healthBoxesData[battlerId].shadowSpriteId].data[0] = battlerId;
+    if (gBattleSpritesDataPtr->healthBoxesData[battlerId].shadowSpriteId < MAX_SPRITES)
+        gSprites[gBattleSpritesDataPtr->healthBoxesData[battlerId].shadowSpriteId].data[0] = battlerId;
 
     if (IsDoubleBattle())
     {
         battlerId = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
         gBattleSpritesDataPtr->healthBoxesData[battlerId].shadowSpriteId = CreateSprite(&gSpriteTemplate_EnemyShadow, GetBattlerSpriteCoord(battlerId, 0), GetBattlerSpriteCoord(battlerId, 1) + 29, 0xC8);
-        gSprites[gBattleSpritesDataPtr->healthBoxesData[battlerId].shadowSpriteId].data[0] = battlerId;
+        if (gBattleSpritesDataPtr->healthBoxesData[battlerId].shadowSpriteId < MAX_SPRITES)
+            gSprites[gBattleSpritesDataPtr->healthBoxesData[battlerId].shadowSpriteId].data[0] = battlerId;
     }
 }
 
@@ -1164,6 +1191,9 @@ void SetBattlerShadowSpriteCallback(u8 battlerId, u16 species)
     if (gBattleSpritesDataPtr->battlerData[battlerId].transformSpecies != SPECIES_NONE)
         species = gBattleSpritesDataPtr->battlerData[battlerId].transformSpecies;
 
+    if (gBattleSpritesDataPtr->healthBoxesData[battlerId].shadowSpriteId >= MAX_SPRITES)
+        return;
+
     if (gEnemyMonElevation[species] != 0)
         gSprites[gBattleSpritesDataPtr->healthBoxesData[battlerId].shadowSpriteId].callback = SpriteCB_EnemyShadow;
     else
@@ -1172,7 +1202,8 @@ void SetBattlerShadowSpriteCallback(u8 battlerId, u16 species)
 
 void HideBattlerShadowSprite(u8 battlerId)
 {
-    gSprites[gBattleSpritesDataPtr->healthBoxesData[battlerId].shadowSpriteId].callback = SpriteCB_SetInvisible;
+    if (gBattleSpritesDataPtr->healthBoxesData[battlerId].shadowSpriteId < MAX_SPRITES)
+        gSprites[gBattleSpritesDataPtr->healthBoxesData[battlerId].shadowSpriteId].callback = SpriteCB_SetInvisible;
 }
 
 void sub_805EF14(void)
@@ -1206,13 +1237,21 @@ void ClearTemporarySpeciesSpriteData(u8 battlerId, bool8 dontClearSubstitute)
         ClearBehindSubstituteBit(battlerId);
 }
 
-void AllocateMonSpritesGfx(void)
+bool32 TryAllocateMonSpritesGfx(void)
 {
     u8 i = 0, j;
 
-    gMonSpritesGfxPtr = NULL;
+    // Every caller owns one complete cluster. Re-entry must not orphan it.
+    if (gMonSpritesGfxPtr != NULL)
+        return FALSE;
+
     gMonSpritesGfxPtr = AllocZeroed(sizeof(*gMonSpritesGfxPtr));
+    if (gMonSpritesGfxPtr == NULL)
+        return FALSE;
+
     gMonSpritesGfxPtr->firstDecompressed = AllocZeroed(0x8000);
+    if (gMonSpritesGfxPtr->firstDecompressed == NULL)
+        goto fail;
 
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
@@ -1229,6 +1268,22 @@ void AllocateMonSpritesGfx(void)
     }
 
     gMonSpritesGfxPtr->barFontGfx = AllocZeroed(0x1000);
+    if (gMonSpritesGfxPtr->barFontGfx == NULL)
+        goto fail;
+
+    return TRUE;
+
+fail:
+    FreeMonSpritesGfx();
+    return FALSE;
+}
+
+void AllocateMonSpritesGfx(void)
+{
+    // Kept only for the two explicitly audited contest flows whose correct
+    // recovery requires script/link redesign. All local-recovery callers use
+    // the checked entry point above.
+    (void)TryAllocateMonSpritesGfx();
 }
 
 void FreeMonSpritesGfx(void)

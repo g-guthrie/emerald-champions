@@ -60,7 +60,7 @@ static void ShowShopMenuAfterExitingBuyOrSellMenu(u8 taskId);
 static void BuyMenuDrawGraphics(void);
 static void BuyMenuAddScrollIndicatorArrows(void);
 static void Task_BuyMenu(u8 taskId);
-static void BuyMenuBuildListMenuTemplate(void);
+static bool8 BuyMenuBuildListMenuTemplate(void);
 static void BuyMenuInitBgs(void);
 static void BuyMenuInitWindows(void);
 static void BuyMenuDecompressBgGraphics(void);
@@ -496,10 +496,23 @@ static void CB2_InitBuyMenu(void)
         ResetTasks();
         ClearScheduledBgCopiesToVram();
         sShopData = AllocZeroed(sizeof(struct ShopData));
+        if (sShopData == NULL)
+        {
+            gFieldCallback = MapPostLoadHook_ReturnToShopMenu;
+            SetMainCallback2(CB2_ReturnToField);
+            return;
+        }
         sShopData->scrollIndicatorsTaskId = TASK_NONE;
         sShopData->itemSpriteIds[0] = SPRITE_NONE;
         sShopData->itemSpriteIds[1] = SPRITE_NONE;
-        BuyMenuBuildListMenuTemplate();
+        if (!BuyMenuBuildListMenuTemplate())
+        {
+            Free(sShopData);
+            sShopData = NULL;
+            gFieldCallback = MapPostLoadHook_ReturnToShopMenu;
+            SetMainCallback2(CB2_ReturnToField);
+            return;
+        }
         BuyMenuInitBgs();
         FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x20, 0x20);
         FillBgTilemapBufferRect_Palette0(1, 0, 0, 0, 0x20, 0x20);
@@ -534,12 +547,21 @@ static void BuyMenuFreeMemory(void)
     FreeAllWindowBuffers();
 }
 
-static void BuyMenuBuildListMenuTemplate(void)
+static bool8 BuyMenuBuildListMenuTemplate(void)
 {
     u16 i;
 
     sListMenuItems = Alloc((sMartInfo.itemCount + 1) * sizeof(*sListMenuItems));
     sItemNames = Alloc((sMartInfo.itemCount + 1) * sizeof(*sItemNames));
+    if (sListMenuItems == NULL || sItemNames == NULL)
+    {
+        Free(sListMenuItems);
+        Free(sItemNames);
+        sListMenuItems = NULL;
+        sItemNames = NULL;
+        return FALSE;
+    }
+
     for (i = 0; i < sMartInfo.itemCount; i++)
         BuyMenuSetListEntry(&sListMenuItems[i], sMartInfo.itemList[i], sItemNames[i]);
 
@@ -556,6 +578,7 @@ static void BuyMenuBuildListMenuTemplate(void)
         gMultiuseListMenuTemplate.maxShowed = gMultiuseListMenuTemplate.totalItems;
 
     sShopData->itemsShowed = gMultiuseListMenuTemplate.maxShowed;
+    return TRUE;
 }
 
 static void BuyMenuSetListEntry(struct ListMenuItem *menuItem, u16 item, u8 *name)

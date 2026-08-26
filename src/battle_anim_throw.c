@@ -687,6 +687,8 @@ void AnimTask_UnusedLevelUpHealthBox(u8 taskId)
     gSprites[spriteId2].oam.priority = 1;
     gSprites[spriteId3] = gSprites[healthBoxSpriteId];
     gSprites[spriteId4] = gSprites[spriteId1];
+    CopySpriteResourceTags(&gSprites[spriteId3], &gSprites[healthBoxSpriteId]);
+    CopySpriteResourceTags(&gSprites[spriteId4], &gSprites[spriteId1]);
     gSprites[spriteId3].oam.objMode = ST_OAM_OBJ_WINDOW;
     gSprites[spriteId4].oam.objMode = ST_OAM_OBJ_WINDOW;
     gSprites[spriteId3].callback = SpriteCallbackDummy;

@@ -1,7 +1,7 @@
 #ifndef GUARD_BATTLE_UTIL2_H
 #define GUARD_BATTLE_UTIL2_H
 
-void AllocateBattleResources(void);
+bool32 AllocateBattleResources(void);
 void FreeBattleResources(void);
 void AdjustFriendshipOnBattleFaint(u8 battler);
 void SwitchPartyOrderInGameMulti(u8 battler, u8 arg1);

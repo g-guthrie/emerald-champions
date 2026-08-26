@@ -234,7 +234,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectCalmMind                @ EFFECT_CALM_MIND
 	.4byte BattleScript_EffectDragonDance             @ EFFECT_DRAGON_DANCE
 	.4byte BattleScript_EffectCamouflage              @ EFFECT_CAMOUFLAGE
-	.4byte BattleScript_EffectHit                     @ EFFECT_PLEDGE
+	.4byte BattleScript_EffectPledge                  @ EFFECT_PLEDGE
 	.4byte BattleScript_EffectFling                   @ EFFECT_FLING
 	.4byte BattleScript_EffectNaturalGift             @ EFFECT_NATURAL_GIFT
 	.4byte BattleScript_EffectWakeUpSlap              @ EFFECT_WAKE_UP_SLAP
@@ -414,6 +414,94 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectHit                      @ EFFECT_RISING_VOLTAGE
 	.4byte BattleScript_EffectHit                      @ EFFECT_BEAK_BLAST
 	.4byte BattleScript_EffectCorrosiveGas             @ EFFECT_CORROSIVE_GAS
+
+BattleScript_EffectPledge::
+	attackcanceler
+	setpledge BattleScript_HitFromAccCheck
+	attackstring
+	pause B_WAIT_TIME_MED
+	ppreduce
+	printstring STRINGID_WAITINGFORPARTNERSMOVE
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectCombinedPledge_Water::
+	call BattleScript_EffectHit_Pledge
+	setpledgestatus BS_ATTACKER, SIDE_STATUS_RAINBOW
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_ARAINBOWAPPEAREDONSIDE
+	waitmessage B_WAIT_TIME_LONG
+	playanimation BS_ATTACKER, B_ANIM_RAINBOW, NULL
+	waitanimation
+	goto BattleScript_MoveEnd
+
+BattleScript_TheRainbowDisappeared::
+	printstring STRINGID_THERAINBOWDISAPPEARED
+	waitmessage B_WAIT_TIME_LONG
+	end2
+
+BattleScript_EffectCombinedPledge_Fire::
+	call BattleScript_EffectHit_Pledge
+	setpledgestatus BS_TARGET, SIDE_STATUS_SEA_OF_FIRE
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_SEAOFFIREENVELOPEDSIDE
+	waitmessage B_WAIT_TIME_LONG
+	playanimation BS_TARGET, B_ANIM_SEA_OF_FIRE, NULL
+	waitanimation
+	goto BattleScript_MoveEnd
+
+BattleScript_HurtByTheSeaOfFire::
+	printstring STRINGID_HURTBYTHESEAOFFIRE
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_DoTurnDmg
+
+BattleScript_TheSeaOfFireDisappeared::
+	printstring STRINGID_THESEAOFFIREDISAPPEARED
+	waitmessage B_WAIT_TIME_LONG
+	end2
+
+BattleScript_EffectCombinedPledge_Grass::
+	call BattleScript_EffectHit_Pledge
+	setpledgestatus BS_TARGET, SIDE_STATUS_SWAMP
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_SWAMPENVELOPEDSIDE
+	waitmessage B_WAIT_TIME_LONG
+	playanimation BS_TARGET, B_ANIM_SWAMP, NULL
+	waitanimation
+	goto BattleScript_MoveEnd
+
+BattleScript_TheSwampDisappeared::
+	printstring STRINGID_THESWAMPDISAPPEARED
+	waitmessage B_WAIT_TIME_LONG
+	end2
+
+@ The second battler pays PP and supplies the attacking stats and target. The
+@ result move selected by VARIOUS_SET_PLEDGE supplies the combination's type
+@ and animation. Accuracy failure leaves through BattleScript_PrintMoveMissed,
+@ so no side status can be applied after a miss or protection.
+BattleScript_EffectHit_Pledge::
+	pause B_WAIT_TIME_MED
+	printstring STRINGID_THETWOMOVESBECOMEONE
+	waitmessage B_WAIT_TIME_LONG
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	ppreduce
+	critcalc
+	damagecalc
+	adjustdamage
+	attackanimation
+	waitanimation
+	effectivenesssound
+	hitanimation BS_TARGET
+	waitstate
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET
+	critmessage
+	waitmessage B_WAIT_TIME_LONG
+	resultmessage
+	waitmessage B_WAIT_TIME_LONG
+	seteffectwithchance
+	tryfaintmon BS_TARGET, FALSE, NULL
+	return
 
 BattleScript_BeakBlastSetUp::
 	setbeakblast BS_ATTACKER
@@ -608,7 +696,9 @@ BattleScript_EffectFling::
 BattleScript_EffectFlingConsumeBerry::
 	setbyte sBERRY_OVERRIDE, TRUE
 	orword gHitMarker, HITMARKER_NO_ANIMATIONS
-	consumeberry BS_TARGET, TRUE
+	@ Mode 2 restores the target's real item like Bug Bite mode 1, but lets a
+	@ successfully applied flung Berry seed the target's Cud Chew replay.
+	consumeberry BS_TARGET, 2
 	bicword gHitMarker, HITMARKER_NO_ANIMATIONS
 	setbyte sBERRY_OVERRIDE, FALSE
 	return
@@ -1225,7 +1315,6 @@ BattleScript_EffectAllySwitch:
 	
 BattleScript_EffectFairyLock:
 	attackcanceler
-	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
 	attackstring
 	ppreduce
 	trysetfairylock BattleScript_ButItFailed
@@ -1368,6 +1457,7 @@ BattleScript_MoveEffectCoreEnforcer::
 	trytoclearprimalweather
 	printstring STRINGID_EMPTYSTRING3
 	waitmessage 1
+	call BattleScript_WeatherFormChanges
 BattleScript_CoreEnforcerRet:
 	return
 
@@ -1760,7 +1850,6 @@ BattleScript_MoveEffectFlameBurst::
 
 BattleScript_EffectPowerTrick:
 	attackcanceler
-	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
 	attackstring
 	ppreduce
 	powertrick BS_ATTACKER
@@ -2435,7 +2524,6 @@ BattleScript_EffectTopsyTurvyWorks:
 
 BattleScript_EffectIonDeluge:
 	attackcanceler
-	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
 	attackstring
 	ppreduce
 	orword gFieldStatuses, STATUS_FIELD_ION_DELUGE
@@ -2483,6 +2571,7 @@ BattleScript_EffectEntrainment:
 	setlastusedability BS_TARGET
 	printstring STRINGID_PKMNACQUIREDABILITY
 	waitmessage B_WAIT_TIME_LONG
+	call BattleScript_WeatherFormChanges
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectSimpleBeam:
@@ -2499,6 +2588,7 @@ BattleScript_EffectSimpleBeam:
 	printstring STRINGID_EMPTYSTRING3
 	waitmessage 1
 	tryendneutralizinggas BS_TARGET
+	call BattleScript_WeatherFormChanges
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectSuckerPunch:
@@ -2590,6 +2680,7 @@ BattleScript_EffectWorrySeed:
 	trytoclearprimalweather
 	printstring STRINGID_EMPTYSTRING3
 	waitmessage 1
+	call BattleScript_WeatherFormChanges
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectPowerSplit:
@@ -2722,6 +2813,7 @@ BattleScript_EffectGastroAcid:
 	printstring STRINGID_EMPTYSTRING3
 	waitmessage 1
 	tryendneutralizinggas BS_TARGET
+	call BattleScript_WeatherFormChanges
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectToxicSpikes:
@@ -2777,6 +2869,7 @@ BattleScript_EffectMagicRoom:
 	waitanimation
 	printfromtable gRoomsStringIds
 	waitmessage B_WAIT_TIME_LONG
+	tryroomserviceaftermagicroom
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectAquaRing:
@@ -4862,6 +4955,7 @@ BattleScript_EffectRapidSpin::
 BattleScript_MortalSpinRapidSpin:
 	setmoveeffect MOVE_EFFECT_RAPIDSPIN | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
 	seteffectwithchance
+	jumpifability BS_ATTACKER, ABILITY_SHEER_FORCE, BattleScript_EffectRapidSpinEnd
 	setstatchanger STAT_SPEED, 1, FALSE
 	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_BUFF_ALLOW_PTR, BattleScript_EffectRapidSpinEnd
 	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_EffectRapidSpinEnd
@@ -5596,6 +5690,7 @@ BattleScript_EffectRolePlay::
 	waitanimation
 	printstring STRINGID_PKMNCOPIEDFOE
 	waitmessage B_WAIT_TIME_LONG
+	call BattleScript_WeatherFormChanges
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectWish::
@@ -5756,6 +5851,7 @@ BattleScript_EffectSkillSwap:
 .if B_SKILL_SWAP >= GEN_4
 	switchinabilities BS_ATTACKER
 	switchinabilities BS_TARGET
+	call BattleScript_WeatherFormChanges
 .endif
 	goto BattleScript_MoveEnd
 
@@ -6403,9 +6499,6 @@ BattleScript_DoSwitchOut::
 	hidepartystatussummary BS_ATTACKER
 	switchinanim BS_ATTACKER, FALSE
 	waitstate
-	jumpifcantreverttoprimal BattleScript_DoSwitchOut2
-	call BattleScript_PrimalReversionRet
-BattleScript_DoSwitchOut2:
 	switchineffects BS_ATTACKER
 	moveendcase MOVEEND_STATUS_IMMUNITY_ABILITIES
 	moveendcase MOVEEND_MIRROR_MOVE
@@ -6581,6 +6674,7 @@ BattleScript_WonderRoomEnds::
 BattleScript_MagicRoomEnds::
 	printstring STRINGID_MAGICROOMENDS
 	waitmessage B_WAIT_TIME_LONG
+	tryroomserviceaftermagicroom
 	end2
 
 BattleScript_ElectricTerrainEnds::
@@ -8641,6 +8735,7 @@ BattleScript_MummyActivates::
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_ATTACKERACQUIREDABILITY
 	waitmessage B_WAIT_TIME_LONG
+	call BattleScript_WeatherFormChanges
 	return
 
 BattleScript_WanderingSpiritActivates::
@@ -8669,6 +8764,7 @@ BattleScript_WanderingSpiritActivates::
 	waitmessage B_WAIT_TIME_LONG
 	switchinabilities BS_ATTACKER
 	switchinabilities BS_TARGET
+	call BattleScript_WeatherFormChanges
 	return
 
 BattleScript_TargetsStatWasMaxedOut::

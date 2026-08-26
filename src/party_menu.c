@@ -162,6 +162,7 @@ EWRAM_DATA u8 gSelectedMonPartyId = 0;
 EWRAM_DATA MainCallback gPostMenuFieldCallback = NULL;
 static EWRAM_DATA u16 *sSlot1TilemapBuffer = 0; // for switching party slots
 static EWRAM_DATA u16 *sSlot2TilemapBuffer = 0; //
+static EWRAM_DATA struct Pokemon sPartyOrderBuffer[PARTY_SIZE] = {0};
 EWRAM_DATA u8 gSelectedOrderFromParty[MAX_FRONTIER_PARTY_SIZE] = {0};
 static EWRAM_DATA u16 sPartyMenuItemId = 0;
 static EWRAM_DATA u16 sUnused = 0;
@@ -179,8 +180,8 @@ static void SetPartyMonsAllowedInMinigame(void);
 static void ExitPartyMenu(void);
 static bool8 AllocPartyMenuBg(void);
 static bool8 AllocPartyMenuBgGfx(void);
-static void InitPartyMenuWindows(u8);
-static void InitPartyMenuBoxes(u8);
+static bool8 InitPartyMenuWindows(u8);
+static bool8 InitPartyMenuBoxes(u8);
 static void LoadPartyMenuPokeballGfx(void);
 static void LoadPartyMenuAilmentGfx(void);
 static bool8 CreatePartyMonSpritesLoop(void);
@@ -581,14 +582,29 @@ static bool8 ShowPartyMenu(void)
         break;
     case 8:
         if (AllocPartyMenuBgGfx())
+        {
+            if (sPartyBgGfxTilemap == NULL)
+            {
+                ExitPartyMenu();
+                return TRUE;
+            }
             gMain.state++;
+        }
         break;
     case 9:
-        InitPartyMenuWindows(gPartyMenu.layout);
+        if (!InitPartyMenuWindows(gPartyMenu.layout))
+        {
+            ExitPartyMenu();
+            return TRUE;
+        }
         gMain.state++;
         break;
     case 10:
-        InitPartyMenuBoxes(gPartyMenu.layout);
+        if (!InitPartyMenuBoxes(gPartyMenu.layout))
+        {
+            ExitPartyMenu();
+            return TRUE;
+        }
         sPartyMenuInternal->data[0] = 0;
         gMain.state++;
         break;
@@ -709,6 +725,8 @@ static bool8 AllocPartyMenuBgGfx(void)
     {
     case 0:
         sPartyBgGfxTilemap = malloc_and_decompress(gPartyMenuBg_Gfx, &sizeout);
+        if (sPartyBgGfxTilemap == NULL)
+            return TRUE;
         LoadBgTiles(1, sPartyBgGfxTilemap, sizeout, 0);
         sPartyMenuInternal->data[0]++;
         break;
@@ -770,11 +788,13 @@ static void FreePartyPointers(void)
     FreeAllWindowBuffers();
 }
 
-static void InitPartyMenuBoxes(u8 layout)
+static bool8 InitPartyMenuBoxes(u8 layout)
 {
     u8 i;
 
     sPartyMenuBoxes = Alloc(sizeof(struct PartyMenuBox[PARTY_SIZE]));
+    if (sPartyMenuBoxes == NULL)
+        return FALSE;
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
@@ -793,6 +813,8 @@ static void InitPartyMenuBoxes(u8 layout)
         sPartyMenuBoxes[3].infoRects = &sPartyBoxInfoRects[PARTY_BOX_LEFT_COLUMN];
     else if (layout != PARTY_LAYOUT_SINGLE)
         sPartyMenuBoxes[1].infoRects = &sPartyBoxInfoRects[PARTY_BOX_LEFT_COLUMN];
+
+    return TRUE;
 }
 
 static void RenderPartyMenuBox(u8 slot)
@@ -1187,13 +1209,11 @@ bool8 IsMultiBattle(void)
 
 static void SwapPartyPokemon(struct Pokemon *mon1, struct Pokemon *mon2)
 {
-    struct Pokemon *temp = Alloc(sizeof(struct Pokemon));
+    struct Pokemon temp;
 
-    *temp = *mon1;
+    temp = *mon1;
     *mon1 = *mon2;
-    *mon2 = *temp;
-
-    Free(temp);
+    *mon2 = temp;
 }
 
 static void Task_ClosePartyMenu(u8 taskId)
@@ -2097,31 +2117,36 @@ bool32 CanLearnTutorMove(u16 species, u8 tutor) // note the change to bool32
     }
 }
 
-static void InitPartyMenuWindows(u8 layout)
+static bool8 InitPartyMenuWindows(u8 layout)
 {
     u8 i;
+    bool8 initialized;
 
     switch (layout)
     {
     case PARTY_LAYOUT_SINGLE:
-        InitWindows(sSinglePartyMenuWindowTemplate);
+        initialized = InitWindows(sSinglePartyMenuWindowTemplate);
         break;
     case PARTY_LAYOUT_DOUBLE:
-        InitWindows(sDoublePartyMenuWindowTemplate);
+        initialized = InitWindows(sDoublePartyMenuWindowTemplate);
         break;
     case PARTY_LAYOUT_MULTI:
-        InitWindows(sMultiPartyMenuWindowTemplate);
+        initialized = InitWindows(sMultiPartyMenuWindowTemplate);
         break;
     default: // PARTY_LAYOUT_MULTI_SHOWCASE
-        InitWindows(sShowcaseMultiPartyMenuWindowTemplate);
+        initialized = InitWindows(sShowcaseMultiPartyMenuWindowTemplate);
         break;
     }
+    if (!initialized)
+        return FALSE;
+
     DeactivateAllTextPrinters();
     for (i = 0; i < PARTY_SIZE; i++)
         FillWindowPixelBuffer(i, PIXEL_FILL(0));
     LoadUserWindowBorderGfx(0, 0x4F, 0xD0);
     LoadPalette(GetOverworldTextboxPalettePtr(), 0xE0, 0x20);
     LoadPalette(gUnknown_0860F074, 0xF0, 0x20);
+    return TRUE;
 }
 
 static void CreateCancelConfirmWindows(bool8 chooseHalf)
@@ -3125,6 +3150,21 @@ static void SwitchSelectedMons(u8 taskId)
             tSlot2SlideDir = 1;
         sSlot1TilemapBuffer = Alloc(tSlot1Width * (tSlot1Height << 1));
         sSlot2TilemapBuffer = Alloc(tSlot2Width * (tSlot2Height << 1));
+        if (sSlot1TilemapBuffer == NULL || sSlot2TilemapBuffer == NULL)
+        {
+            Free(sSlot1TilemapBuffer);
+            Free(sSlot2TilemapBuffer);
+            sSlot1TilemapBuffer = NULL;
+            sSlot2TilemapBuffer = NULL;
+            SwitchPartyMon();
+            DisplayPartyPokemonData(gPartyMenu.slotId);
+            DisplayPartyPokemonData(gPartyMenu.slotId2);
+            PutWindowTilemap(windowIds[0]);
+            PutWindowTilemap(windowIds[1]);
+            ScheduleBgCopyTilemapToVram(0);
+            FinishTwoMonAction(taskId);
+            return;
+        }
         CopyToBufferFromBgTilemap(0, sSlot1TilemapBuffer, tSlot1Left, tSlot1Top, tSlot1Width, tSlot1Height);
         CopyToBufferFromBgTilemap(0, sSlot2TilemapBuffer, tSlot2Left, tSlot2Top, tSlot2Width, tSlot2Height);
         ClearWindowTilemap(windowIds[0]);
@@ -3290,17 +3330,15 @@ static void SwitchPartyMon(void)
 {
     struct PartyMenuBox *menuBoxes[2];
     struct Pokemon *mon1, *mon2;
-    struct Pokemon *monBuffer;
+    struct Pokemon monBuffer;
 
     menuBoxes[0] = &sPartyMenuBoxes[gPartyMenu.slotId];
     menuBoxes[1] = &sPartyMenuBoxes[gPartyMenu.slotId2];
     mon1 = &gPlayerParty[gPartyMenu.slotId];
     mon2 = &gPlayerParty[gPartyMenu.slotId2];
-    monBuffer = Alloc(sizeof(struct Pokemon));
-    *monBuffer = *mon1;
+    monBuffer = *mon1;
     *mon1 = *mon2;
-    *mon2 = *monBuffer;
-    Free(monBuffer);
+    *mon2 = monBuffer;
     SwitchMenuBoxSprites(&menuBoxes[0]->pokeballSpriteId, &menuBoxes[1]->pokeballSpriteId);
     SwitchMenuBoxSprites(&menuBoxes[0]->itemSpriteId, &menuBoxes[1]->itemSpriteId);
     SwitchMenuBoxSprites(&menuBoxes[0]->monSpriteId, &menuBoxes[1]->monSpriteId);
@@ -6730,24 +6768,20 @@ u8 GetPartyIdFromBattlePartyId(u8 battlePartyId)
 
 static void UpdatePartyToBattleOrder(void)
 {
-    struct Pokemon *partyBuffer = Alloc(sizeof(gPlayerParty));
     u8 i;
 
-    memcpy(partyBuffer, gPlayerParty, sizeof(gPlayerParty));
+    memcpy(sPartyOrderBuffer, gPlayerParty, sizeof(gPlayerParty));
     for (i = 0; i < PARTY_SIZE; i++)
-        memcpy(&gPlayerParty[GetPartyIdFromBattlePartyId(i)], &partyBuffer[i], sizeof(struct Pokemon));
-    Free(partyBuffer);
+        memcpy(&gPlayerParty[GetPartyIdFromBattlePartyId(i)], &sPartyOrderBuffer[i], sizeof(struct Pokemon));
 }
 
 static void UpdatePartyToFieldOrder(void)
 {
-    struct Pokemon *partyBuffer = Alloc(sizeof(gPlayerParty));
     u8 i;
 
-    memcpy(partyBuffer, gPlayerParty, sizeof(gPlayerParty));
+    memcpy(sPartyOrderBuffer, gPlayerParty, sizeof(gPlayerParty));
     for (i = 0; i < PARTY_SIZE; i++)
-        memcpy(&gPlayerParty[GetPartyIdFromBattleSlot(i)], &partyBuffer[i], sizeof(struct Pokemon));
-    Free(partyBuffer);
+        memcpy(&gPlayerParty[GetPartyIdFromBattleSlot(i)], &sPartyOrderBuffer[i], sizeof(struct Pokemon));
 }
 
 // Unused

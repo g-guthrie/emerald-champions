@@ -113,10 +113,11 @@ struct TempWallyBag {
 
 static void CB2_Bag(void);
 static bool8 SetupBagMenu(void);
+static void FreeBagMenu(void);
 static void BagMenu_InitBGs(void);
 static bool8 LoadBagMenu_Graphics(void);
 static void LoadBagMenuTextWindows(void);
-static void AllocateBagItemListBuffers(void);
+static bool8 AllocateBagItemListBuffers(void);
 static void LoadBagItemListBuffers(u8);
 static void PrintPocketNames(const u8*, const u8*);
 static void CopyPocketNameToWindow(u32);
@@ -742,7 +743,13 @@ static bool8 SetupBagMenu(void)
         gMain.state++;
         break;
     case 11:
-        AllocateBagItemListBuffers();
+        if (!AllocateBagItemListBuffers())
+        {
+            MainCallback exitCallback = gBagPosition.exitCallback;
+            FreeBagMenu();
+            SetMainCallback2(exitCallback);
+            return TRUE;
+        }
         gMain.state++;
         break;
     case 12:
@@ -864,10 +871,19 @@ static u8 CreateBagInputHandlerTask(u8 location)
     return taskId;
 }
 
-static void AllocateBagItemListBuffers(void)
+static bool8 AllocateBagItemListBuffers(void)
 {
     sListBuffer1 = Alloc(sizeof(*sListBuffer1));
     sListBuffer2 = Alloc(sizeof(*sListBuffer2));
+    if (sListBuffer1 == NULL || sListBuffer2 == NULL)
+    {
+        Free(sListBuffer1);
+        Free(sListBuffer2);
+        sListBuffer1 = NULL;
+        sListBuffer2 = NULL;
+        return FALSE;
+    }
+    return TRUE;
 }
 
 static void LoadBagItemListBuffers(u8 pocketId)
@@ -2315,11 +2331,14 @@ static bool8 IsWallysBag(void)
     return FALSE;
 }
 
-static void PrepareBagForWallyTutorial(void)
+static bool8 PrepareBagForWallyTutorial(void)
 {
     u32 i;
 
     sTempWallyBag = AllocZeroed(sizeof(*sTempWallyBag));
+    if (sTempWallyBag == NULL)
+        return FALSE;
+
     memcpy(sTempWallyBag->bagPocket_Items, gSaveBlock1Ptr->bagPocket_Items, sizeof(gSaveBlock1Ptr->bagPocket_Items));
     memcpy(sTempWallyBag->bagPocket_PokeBalls, gSaveBlock1Ptr->bagPocket_PokeBalls, sizeof(gSaveBlock1Ptr->bagPocket_PokeBalls));
     sTempWallyBag->pocket = gBagPosition.pocket;
@@ -2330,6 +2349,7 @@ static void PrepareBagForWallyTutorial(void)
     }
     ClearItemSlots(gSaveBlock1Ptr->bagPocket_PokeBalls, BAG_POKEBALLS_COUNT);
     ResetBagScrollPositions();
+    return TRUE;
 }
 
 static void RestoreBagAfterWallyTutorial(void)
@@ -2348,7 +2368,12 @@ static void RestoreBagAfterWallyTutorial(void)
 
 void DoWallyTutorialBagMenu(void)
 {
-    PrepareBagForWallyTutorial();
+    if (!PrepareBagForWallyTutorial())
+    {
+        gSpecialVar_ItemId = ITEM_POKE_BALL;
+        SetMainCallback2(CB2_SetUpReshowBattleScreenAfterMenu2);
+        return;
+    }
     AddBagItem(ITEM_POKE_BALL, 1);
     GoToBagMenu(ITEMMENULOCATION_WALLY, BALLS_POCKET, CB2_SetUpReshowBattleScreenAfterMenu2);
 }

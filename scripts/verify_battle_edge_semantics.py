@@ -118,15 +118,29 @@ checks = {
         )
     ),
     "Residual damage snapshots and checks Emergency Exit between events": (
-        "Seed the threshold snapshot exactly once for this end-turn sequence" in main
+        all(
+            token in section(main, "void BattleTurnPassed(void)\n{", "void HandleTurnActionSelectionState")
+            for token in (
+                "gBattleStruct->turnCountersTracker == 0",
+                "gBattleStruct->turnEffectsTracker == 0",
+                "gBattleStruct->hpBefore[i] = gBattleMons[i].hp;",
+            )
+        )
         and "gBattleStruct->turnEffectsTracker > ENDTURN_ITEMS1" in util
         and "BattleScript_EmergencyExitEnd2" in util
         and "BattleScript_EmergencyExitWildEnd2" in util
     ),
     "Hazards reset threshold state and can interrupt the remaining hazard queue": (
         "gBattleStruct->hpBefore[gActiveBattler] = gBattleMons[gActiveBattler].hp;" in section(commands, "static void Cmd_switchindataupdate(void)\n{", "static void Cmd_switchinanim(void)\n{")
-        and "Re-entering this command after a damaging hazard" in commands
-        and "BattleScriptPush(gBattlescriptCurrInstr + 2);" in section(commands, "static void Cmd_switchineffects(void)\n{", "static void Cmd_trainerslidein(void)\n{")
+        and all(
+            token in section(commands, "static void Cmd_switchineffects(void)\n{", "static void Cmd_trainerslidein(void)\n{")
+            for token in (
+                "SIDE_STATUS_SPIKES_DAMAGED | SIDE_STATUS_STEALTH_ROCK_DAMAGED",
+                "CanBattlerActivateEmergencyExit(gActiveBattler)",
+                "DidBattlerCrossEmergencyExitThreshold(gActiveBattler)",
+                "BattleScriptPush(gBattlescriptCurrInstr + 2);",
+            )
+        )
     ),
     "End-turn Emergency Exit scripts terminate through the callback stack": all(
         token in scripts and token in battle_scripts_h

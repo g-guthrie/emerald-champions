@@ -906,22 +906,30 @@ u8 AddNewGameBirchObject(s16 x, s16 y, u8 subpriority)
 u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y, u8 subpriority)
 {
     s32 spriteId = CreateMonPicSprite(species, 0, 0x8000, 1, x, y, 0, gMonPaletteTable[species].tag);
-    PreservePaletteInWeather(IndexOfSpritePaletteTag(gMonPaletteTable[species].tag) + 0x10);
+    u8 paletteIndex;
+
     if (spriteId == 0xFFFF)
         return MAX_SPRITES;
-    else
-        return spriteId;
+
+    paletteIndex = IndexOfSpritePaletteTag(gMonPaletteTable[species].tag);
+    if (paletteIndex != 0xFF)
+        PreservePaletteInWeather(paletteIndex + 0x10);
+    return spriteId;
 }
 
 u8 CreateMonSprite_FieldMove(u16 species, u32 otId, u32 personality, s16 x, s16 y, u8 subpriority)
 {
     const struct CompressedSpritePalette *spritePalette = GetMonSpritePalStructFromOtIdPersonality(species, otId, personality);
     u16 spriteId = CreateMonPicSprite(species, otId, personality, 1, x, y, 0, spritePalette->tag);
-    PreservePaletteInWeather(IndexOfSpritePaletteTag(spritePalette->tag) + 0x10);
+    u8 paletteIndex;
+
     if (spriteId == 0xFFFF)
         return MAX_SPRITES;
-    else
-        return spriteId;
+
+    paletteIndex = IndexOfSpritePaletteTag(spritePalette->tag);
+    if (paletteIndex != 0xFF)
+        PreservePaletteInWeather(paletteIndex + 0x10);
+    return spriteId;
 }
 
 void FreeResourcesAndDestroySprite(struct Sprite *sprite, u8 spriteId)
@@ -1001,10 +1009,17 @@ void MultiplyPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
 bool8 FldEff_PokecenterHeal(void)
 {
     u8 nPokemon;
+    u8 taskId;
     struct Task *task;
 
     nPokemon = CalculatePlayerPartyCount();
-    task = &gTasks[CreateTask(Task_PokecenterHeal, 0xff)];
+    taskId = CreateTask(Task_PokecenterHeal, 0xff);
+    if (!IsTaskIdValid(taskId))
+    {
+        FieldEffectActiveListRemove(FLDEFF_POKECENTER_HEAL);
+        return FALSE;
+    }
+    task = &gTasks[taskId];
     task->tNumMons = nPokemon;
     task->tFirstBallX = 93;
     task->tFirstBallY = 36;
@@ -1057,10 +1072,17 @@ static void PokecenterHealEffect_WaitForSoundAndEnd(struct Task *task)
 bool8 FldEff_HallOfFameRecord(void)
 {
     u8 nPokemon;
+    u8 taskId;
     struct Task *task;
 
     nPokemon = CalculatePlayerPartyCount();
-    task = &gTasks[CreateTask(Task_HallOfFameRecord, 0xff)];
+    taskId = CreateTask(Task_HallOfFameRecord, 0xff);
+    if (!IsTaskIdValid(taskId))
+    {
+        FieldEffectActiveListRemove(FLDEFF_HALL_OF_FAME_RECORD);
+        return FALSE;
+    }
+    task = &gTasks[taskId];
     task->tNumMons = nPokemon;
     task->tFirstBallX = 117;
     task->tFirstBallY = 52;
@@ -1821,6 +1843,11 @@ bool8 FldEff_UseWaterfall(void)
 {
     u8 taskId;
     taskId = CreateTask(Task_UseWaterfall, 0xff);
+    if (!IsTaskIdValid(taskId))
+    {
+        FieldEffectActiveListRemove(FLDEFF_USE_WATERFALL);
+        return FALSE;
+    }
     gTasks[taskId].tMonId = gFieldEffectArguments[0];
     Task_UseWaterfall(taskId);
     return FALSE;
@@ -1895,6 +1922,11 @@ bool8 FldEff_UseDive(void)
 {
     u8 taskId;
     taskId = CreateTask(Task_UseDive, 0xff);
+    if (!IsTaskIdValid(taskId))
+    {
+        FieldEffectActiveListRemove(FLDEFF_USE_DIVE);
+        return FALSE;
+    }
     gTasks[taskId].data[15] = gFieldEffectArguments[0];
     gTasks[taskId].data[14] = gFieldEffectArguments[1];
     Task_UseDive(taskId);
@@ -2745,7 +2777,12 @@ static void FieldMoveShowMonOutdoorsEffect_End(struct Task *task)
 static void VBlankCB_FieldMoveShowMonOutdoors(void)
 {
     IntrCallback callback;
-    struct Task *task = &gTasks[FindTaskIdByFunc(Task_FieldMoveShowMonOutdoors)];
+    u8 taskId = FindTaskIdByFunc(Task_FieldMoveShowMonOutdoors);
+    struct Task *task;
+
+    if (taskId == TASK_NONE)
+        return;
+    task = &gTasks[taskId];
     LoadWordFromTwoHalfwords((u16 *)&task->data[13], (u32 *)&callback);
     callback();
     SetGpuReg(REG_OFFSET_WIN0H, task->tWinHoriz);
@@ -2874,8 +2911,12 @@ static void FieldMoveShowMonIndoorsEffect_End(struct Task *task)
 static void VBlankCB_FieldMoveShowMonIndoors(void)
 {
     IntrCallback intrCallback;
+    u8 taskId = FindTaskIdByFunc(Task_FieldMoveShowMonIndoors);
     struct Task *task;
-    task = &gTasks[FindTaskIdByFunc(Task_FieldMoveShowMonIndoors)];
+
+    if (taskId == TASK_NONE)
+        return;
+    task = &gTasks[taskId];
     LoadWordFromTwoHalfwords((u16 *)&task->data[13], (u32 *)&intrCallback);
     intrCallback();
     SetGpuReg(REG_OFFSET_BG0HOFS, task->tBgHoriz);
@@ -3916,4 +3957,3 @@ static void Task_MoveDeoxysRock(u8 taskId)
             break;
     }
 }
-

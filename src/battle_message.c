@@ -747,9 +747,27 @@ static const u8 sText_CourtChange[] = _("{B_ATK_NAME_WITH_PREFIX} swapped the ba
 static const u8 sText_PrepareShellTrap[] = _("{B_ATK_NAME_WITH_PREFIX} set a shell trap!");
 static const u8 sText_ShellTrapDidntWork[] = _("{B_ATK_NAME_WITH_PREFIX}'s shell trap didn't work!");
 static const u8 sText_SaltCureApplied[] = _("{B_DEF_NAME_WITH_PREFIX} was salt cured!");
+static const u8 sText_TheTwoMovesBecomeOne[] = _("The two moves have become one!\nIt's a combined move!{PAUSE 16}");
+static const u8 sText_ARainbowAppearedOnSide[] = _("A rainbow appeared above\n{B_ATK_TEAM2} team!");
+static const u8 sText_TheRainbowDisappeared[] = _("The rainbow above\n{B_ATK_TEAM2} team disappeared!");
+static const u8 sText_WaitingForPartnersMove[] = _("{B_ATK_NAME_WITH_PREFIX} is waiting\nfor its partner's move…{PAUSE 16}");
+static const u8 sText_SeaOfFireEnvelopedSide[] = _("A sea of fire enveloped\n{B_DEF_TEAM2} team!");
+static const u8 sText_HurtByTheSeaOfFire[] = _("{B_ATK_NAME_WITH_PREFIX} was hurt\nby the sea of fire!");
+static const u8 sText_TheSeaOfFireDisappeared[] = _("The sea of fire around\n{B_ATK_TEAM2} team disappeared!");
+static const u8 sText_SwampEnvelopedSide[] = _("A swamp enveloped\n{B_DEF_TEAM2} team!");
+static const u8 sText_TheSwampDisappeared[] = _("The swamp around\n{B_ATK_TEAM2} team disappeared!");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
+    [STRINGID_THESWAMPDISAPPEARED - 12] = sText_TheSwampDisappeared,
+    [STRINGID_SWAMPENVELOPEDSIDE - 12] = sText_SwampEnvelopedSide,
+    [STRINGID_THESEAOFFIREDISAPPEARED - 12] = sText_TheSeaOfFireDisappeared,
+    [STRINGID_HURTBYTHESEAOFFIRE - 12] = sText_HurtByTheSeaOfFire,
+    [STRINGID_SEAOFFIREENVELOPEDSIDE - 12] = sText_SeaOfFireEnvelopedSide,
+    [STRINGID_WAITINGFORPARTNERSMOVE - 12] = sText_WaitingForPartnersMove,
+    [STRINGID_THERAINBOWDISAPPEARED - 12] = sText_TheRainbowDisappeared,
+    [STRINGID_ARAINBOWAPPEAREDONSIDE - 12] = sText_ARainbowAppearedOnSide,
+    [STRINGID_THETWOMOVESBECOMEONE - 12] = sText_TheTwoMovesBecomeOne,
     [STRINGID_ITEMMELTED - 12] = sText_PkmnItemMelted,
     [STRINGID_HEATUPBEAK - 12] = sText_HeatingUpBeak,
     [STRINGID_METEORBEAMCHARGING - 12] = sText_MeteorBeamCharging,

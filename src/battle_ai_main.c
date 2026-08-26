@@ -520,6 +520,39 @@ static void BattleAI_DoAIProcessing(void)
 }
 
 // AI Score Functions
+static bool32 PartnerHasCompatiblePledgeMove(u8 partner, u16 move)
+{
+    u32 i;
+
+    if (!IsBattlerAlive(partner))
+        return FALSE;
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (ArePledgeMovesCompatible(move, gBattleMons[partner].moves[i])
+         && gBattleMons[partner].pp[i] != 0)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+static bool32 IsBattlerLockedOnTarget(u8 battlerAtk, u8 battlerDef)
+{
+    return (gStatuses3[battlerDef] & STATUS3_ALWAYS_HITS)
+        && gDisableStructs[battlerDef].battlerWithSureHit == battlerAtk;
+}
+
+static bool32 HasBattlerLockedOn(u8 battlerAtk)
+{
+    u32 battlerDef;
+
+    for (battlerDef = 0; battlerDef < gBattlersCount; battlerDef++)
+    {
+        if (IsBattlerLockedOnTarget(battlerAtk, battlerDef))
+            return TRUE;
+    }
+    return FALSE;
+}
+
 // AI_FLAG_CHECK_BAD_MOVE - decreases move scores
 static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
 {
@@ -534,8 +567,17 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     u32 i;
     u16 predictedMove = gLastMoves[battlerDef]; // TODO better move prediction
 
+    if (predictedMove >= MOVES_COUNT)
+        predictedMove = MOVE_NONE;
+
     SetTypeBeforeUsingMove(move, battlerAtk);
     GET_MOVE_TYPE(move, moveType);
+
+    // Decorate is only constructive on the user's ally. Without this hard
+    // target gate, foe and ally candidates can begin at the same score and the
+    // general doubles ally penalty makes boosting the foe look preferable.
+    if (moveEffect == EFFECT_DECORATE && !IsTargetingPartner(battlerAtk, battlerDef))
+        RETURN_SCORE_MINUS(60);
 
     if (IsTargetingPartner(battlerAtk, battlerDef))
     {
@@ -1592,15 +1634,26 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                 score -= 10;
             break;
         case EFFECT_PSYCHO_SHIFT:
-            if (gBattleMons[battlerAtk].status1 & STATUS1_PSN_ANY && !AI_CanPoison(battlerAtk, battlerDef, AI_DATA->defAbility, move, AI_DATA->partnerMove))
-                score -= 10;
-            else if (gBattleMons[battlerAtk].status1 & STATUS1_BURN && !AI_CanBurn(battlerAtk, battlerDef,
-              AI_DATA->defAbility, AI_DATA->battlerAtkPartner, move, AI_DATA->partnerMove))
-                score -= 10;
-            else if (gBattleMons[battlerAtk].status1 & STATUS1_PARALYSIS && !AI_CanParalyze(battlerAtk, battlerDef, AI_DATA->defAbility, move, AI_DATA->partnerMove))
-                score -= 10;
-            else if (gBattleMons[battlerAtk].status1 & STATUS1_SLEEP && !AI_CanPutToSleep(battlerAtk, battlerDef, AI_DATA->defAbility, move, AI_DATA->partnerMove))
-                score -= 10;
+            if (gBattleMons[battlerAtk].status1 & STATUS1_PSN_ANY)
+            {
+                if (!AI_CanPoison(battlerAtk, battlerDef, AI_DATA->defAbility, move, AI_DATA->partnerMove))
+                    score -= 10;
+            }
+            else if (gBattleMons[battlerAtk].status1 & STATUS1_BURN)
+            {
+                if (!AI_CanBurn(battlerAtk, battlerDef, AI_DATA->defAbility, AI_DATA->battlerAtkPartner, move, AI_DATA->partnerMove))
+                    score -= 10;
+            }
+            else if (gBattleMons[battlerAtk].status1 & STATUS1_PARALYSIS)
+            {
+                if (!AI_CanParalyze(battlerAtk, battlerDef, AI_DATA->defAbility, move, AI_DATA->partnerMove))
+                    score -= 10;
+            }
+            else if (gBattleMons[battlerAtk].status1 & STATUS1_SLEEP)
+            {
+                if (!AI_CanPutToSleep(battlerAtk, battlerDef, AI_DATA->defAbility, move, AI_DATA->partnerMove))
+                    score -= 10;
+            }
             else
                 score -= 10;    // attacker has no status to transmit
             break;
@@ -1778,7 +1831,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             //TODO
             break;
         case EFFECT_LOCK_ON:
-            if (gStatuses3[battlerDef] & STATUS3_ALWAYS_HITS
+            if (HasBattlerLockedOn(battlerAtk)
               || AI_DATA->atkAbility == ABILITY_NO_GUARD
               || AI_DATA->defAbility == ABILITY_NO_GUARD
               || DoesPartnerHaveSameMoveEffect(AI_DATA->battlerAtkPartner, battlerDef, move, AI_DATA->partnerMove))
@@ -2182,12 +2235,23 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             if (isDoubleBattle && gBattleMons[AI_DATA->battlerAtkPartner].hp > 0)
             {
                 if (AI_DATA->partnerMove != MOVE_NONE
-                  && gBattleMoves[AI_DATA->partnerMove].effect == EFFECT_PLEDGE
-                  && move != AI_DATA->partnerMove) // Different pledge moves
+                  && ArePledgeMovesCompatible(move, AI_DATA->partnerMove))
                 {
                     if (gBattleMons[AI_DATA->battlerAtkPartner].status1 & (STATUS1_SLEEP | STATUS1_FREEZE))
-                    // && gBattleMons[AI_DATA->battlerAtkPartner].status1 != 1) // Will wake up this turn - how would AI know
                         score -= 10; // Don't use combo move if your partner will cause failure
+                    else
+                    {
+                        u16 resultMove = GetPledgeCombinationMove(move, AI_DATA->partnerMove);
+                        u8 resultType = gBattleMoves[resultMove].type;
+
+                        if ((resultType == TYPE_WATER
+                          && (AI_DATA->defAbility == ABILITY_WATER_ABSORB
+                           || AI_DATA->defAbility == ABILITY_DRY_SKIN
+                           || AI_DATA->defAbility == ABILITY_STORM_DRAIN))
+                         || (resultType == TYPE_FIRE && AI_DATA->defAbility == ABILITY_FLASH_FIRE)
+                         || (resultType == TYPE_GRASS && AI_DATA->defAbility == ABILITY_SAP_SIPPER))
+                            score -= 20;
+                    }
                 }
             }
             break;
@@ -2592,6 +2656,9 @@ static s16 AI_DoubleBattle(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     bool32 partnerHasBadAbility = (GetAbilityRating(atkPartnerAbility) < 0);
     u16 predictedMove = gLastMoves[battlerDef]; //for now
 
+    if (predictedMove >= MOVES_COUNT)
+        predictedMove = MOVE_NONE;
+
     SetTypeBeforeUsingMove(move, battlerAtk);
     GET_MOVE_TYPE(move, moveType);
         
@@ -2800,6 +2867,20 @@ static s16 AI_DoubleBattle(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             } // ability checks
         } // move power check
         
+        // Decorate bypasses Protect and is useful only if it can raise a stat
+        // the partner actually attacks with. Contrary turns both boosts into
+        // drops, while Good as Gold blocks the move entirely.
+        if (effect == EFFECT_DECORATE
+         && atkPartnerAbility != ABILITY_CONTRARY
+         && atkPartnerAbility != ABILITY_GOOD_AS_GOLD
+         && ((gBattleMons[battlerAtkPartner].statStages[STAT_ATK] < MAX_STAT_STAGE
+           && HasMoveWithSplit(battlerAtkPartner, SPLIT_PHYSICAL))
+          || (gBattleMons[battlerAtkPartner].statStages[STAT_SPATK] < MAX_STAT_STAGE
+           && HasMoveWithSplit(battlerAtkPartner, SPLIT_SPECIAL))))
+        {
+            RETURN_SCORE_PLUS(5);
+        }
+
         // attacker move effects specifically targeting partner
         if (!partnerProtecting)
         {
@@ -3074,7 +3155,7 @@ static s16 AI_ComboSetup(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
 {
     u16 effect = gBattleMoves[move].effect;
     u16 moveType = gBattleMoves[move].type;
-    u8 partnerAbility = AI_DATA->atkPartnerAbility;
+    u16 partnerAbility = AI_DATA->atkPartnerAbility;
 
     SetTypeBeforeUsingMove(move, battlerAtk);
     GET_MOVE_TYPE(move, moveType);
@@ -3084,6 +3165,12 @@ static s16 AI_ComboSetup(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
 
     if (AI_DATA->partnerMove != MOVE_NONE && gBattleMoves[AI_DATA->partnerMove].effect == EFFECT_HELPING_HAND)
         score += IS_MOVE_STATUS(move) ? -12 : 7;
+
+    // Round is a foe-targeting partner combo: a second singer acts
+    // immediately and doubles its power. Encourage a legal duet without
+    // forcing either target or requiring an ally-targeting move.
+    if (move == MOVE_ROUND && HasMove(BATTLE_PARTNER(battlerAtk), MOVE_ROUND))
+        score += AI_DATA->partnerMove == MOVE_ROUND ? 10 : 4;
 
     // Dancer teams are partner-combos even though the dance targets the user
     // or a foe. Reward the initiating dance before the ally-targeting gate.
@@ -3252,10 +3339,21 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     u32 i;
     u8 atkHpPercent = GetHealthPercentage(battlerAtk);
     u8 defHpPercent = GetHealthPercentage(battlerDef);
+
+    if (predictedMove >= MOVES_COUNT)
+        predictedMove = MOVE_NONE;
     
     // Targeting partner, check benefits of doing that instead
     if (IsTargetingPartner(battlerAtk, battlerDef))
         return score;
+
+    // In doubles, once Mind Reader or Lock-On is active, prefer spending the
+    // guaranteed hit on that target rather than attacking the other foe.
+    if (isDoubleBattle
+     && !IS_MOVE_STATUS(move)
+     && gBattleMoves[move].target == MOVE_TARGET_SELECTED
+     && IsBattlerLockedOnTarget(battlerAtk, battlerDef))
+        score++;
     
     // check always hits
     if (!IS_MOVE_STATUS(move) && gBattleMoves[move].accuracy == 0)
@@ -4341,6 +4439,8 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
           && IsBattlerAlive(AI_DATA->battlerAtkPartner))
         {
             u16 predictedMoveOnPartner = gLastMoves[AI_DATA->battlerAtkPartner];
+            if (predictedMoveOnPartner >= MOVES_COUNT)
+                predictedMoveOnPartner = MOVE_NONE;
             if (predictedMoveOnPartner != MOVE_NONE && !IS_MOVE_STATUS(predictedMoveOnPartner))
                 score += 3;
         }
@@ -4718,8 +4818,28 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     case EFFECT_PLEDGE:
         if (isDoubleBattle)
         {
-            if (HasMoveEffect(AI_DATA->battlerAtkPartner, EFFECT_PLEDGE))
-                score += 3; // Partner might use pledge move
+            if (AI_DATA->partnerMove != MOVE_NONE
+             && ArePledgeMovesCompatible(move, AI_DATA->partnerMove)
+             && !(gBattleMons[AI_DATA->battlerAtkPartner].status1 & (STATUS1_SLEEP | STATUS1_FREEZE)))
+            {
+                u16 resultMove = GetPledgeCombinationMove(move, AI_DATA->partnerMove);
+                u32 relevantStatus = resultMove == MOVE_WATER_PLEDGE ? SIDE_STATUS_RAINBOW
+                                   : resultMove == MOVE_FIRE_PLEDGE ? SIDE_STATUS_SEA_OF_FIRE
+                                   : SIDE_STATUS_SWAMP;
+                u32 relevantSide = resultMove == MOVE_WATER_PLEDGE
+                                 ? GetBattlerSide(battlerAtk)
+                                 : GetBattlerSide(battlerDef);
+
+                // The 150-power attack remains valuable when the field effect
+                // is already active, but a fresh four-turn effect deserves a
+                // stronger preference.
+                score += (gSideStatuses[relevantSide] & relevantStatus) ? 4 : 7;
+            }
+            else if (AI_DATA->partnerMove == MOVE_NONE
+                  && PartnerHasCompatiblePledgeMove(AI_DATA->battlerAtkPartner, move))
+            {
+                score += 3; // Encourage the first AI battler to offer a pair.
+            }
         }
         break;
     case EFFECT_TRICK_ROOM:

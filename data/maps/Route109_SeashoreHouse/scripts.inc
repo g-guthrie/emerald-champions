@@ -79,12 +79,12 @@ Route109_SeashoreHouse_EventScript_Dwayne:: @ 82694E2
 	end
 
 Route109_SeashoreHouse_EventScript_Johanna:: @ 82694FD
-	trainerbattle_single TRAINER_JOHANNA, Route109_SeashoreHouse_Text_JohannaIntro, Route109_SeashoreHouse_Text_JohannaDefeated, Route109_SeashoreHouse_EventScript_CheckTrainersCompletion
+	trainerbattle_double TRAINER_JOHANNA, Route109_SeashoreHouse_Text_JohannaIntro, Route109_SeashoreHouse_Text_JohannaDefeated, Route109_SeashoreHouse_Text_JohannaNotEnoughPokemon, Route109_SeashoreHouse_EventScript_CheckTrainersCompletion
 	msgbox Route109_SeashoreHouse_Text_JohannaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route109_SeashoreHouse_EventScript_Simon:: @ 8269518
-	trainerbattle_single TRAINER_SIMON, Route109_SeashoreHouse_Text_SimonIntro, Route109_SeashoreHouse_Text_SimonDefeated, Route109_SeashoreHouse_EventScript_CheckTrainersCompletion
+	trainerbattle_double TRAINER_SIMON, Route109_SeashoreHouse_Text_SimonIntro, Route109_SeashoreHouse_Text_SimonDefeated, Route109_SeashoreHouse_Text_SimonNotEnoughPokemon, Route109_SeashoreHouse_EventScript_CheckTrainersCompletion
 	msgbox Route109_SeashoreHouse_Text_SimonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -143,39 +143,50 @@ Route109_SeashoreHouse_Text_ThatsTooBad: @ 82697EF
 	.string "That's too bad.$"
 
 Route109_SeashoreHouse_Text_DwayneIntro: @ 8269803
-	.string "If you're looking for a battle in the\n"
-	.string "Seashore House, you'll find no\l"
-	.string "hotter Trainer than me, matey!$"
+	.string "My Jynx freezes, Magmar burns,\n"
+	.string "and Volcanion brings the steam!\p"
+	.string "Let's have a hot battle, matey!$"
 
 Route109_SeashoreHouse_Text_DwayneDefeated: @ 8269867
-	.string "That was a hot battle!\n"
-	.string "I can accept that loss, matey!$"
+	.string "That thermal shock beat me!\n"
+	.string "I can take the heat, matey!$"
 
 Route109_SeashoreHouse_Text_DwaynePostBattle: @ 826989D
-	.string "Whenever I'm in Slateport, I enjoy\n"
-	.string "hot battles and ice-cold Soda Pop!$"
+	.string "Jynx chills the Soda Pop,\n"
+	.string "Magmar heats the room, and\l"
+	.string "Volcanion makes the steam!$"
 
 Route109_SeashoreHouse_Text_JohannaIntro: @ 82698E3
-	.string "Boring battles aren't worth the effort.\p"
-	.string "Fiery hot battles are what toughen up\n"
-	.string "Trainers and Pokémon!$"
+	.string "Hot battles make Pokémon tougher!\p"
+	.string "Feebas starts my pressure test.\n"
+	.string "Can you stop the engine?$"
 
 Route109_SeashoreHouse_Text_JohannaDefeated: @ 8269947
-	.string "That's hot!$"
+	.string "You broke through the pressure!$"
 
 Route109_SeashoreHouse_Text_JohannaPostBattle: @ 8269953
-	.string "Whew, I'm all thirsty.\n"
-	.string "Maybe I'll have a Soda Pop.$"
+	.string "Surf wakes Carkol's Steam Engine\n"
+	.string "or hardens Sandygast.\p"
+	.string "That's how hot battles toughen us!$"
+
+Route109_SeashoreHouse_Text_JohannaNotEnoughPokemon:
+	.string "A pressure test needs two healthy\n"
+	.string "Pokémon. Come back prepared!$"
 
 Route109_SeashoreHouse_Text_SimonIntro: @ 8269986
-	.string "I'm going to show you how great\n"
-	.string "my Pokémon are, but don't cry!$"
+	.string "Tropius and Mudsdale carry me,\n"
+	.string "Lapras and Keldeo cross the sea!\p"
+	.string "Don't cry when my great team wins!$"
 
 Route109_SeashoreHouse_Text_SimonDefeated: @ 82699C5
-	.string "…I lost, but I won't cry…$"
+	.string "They carried me into a loss…\n"
+	.string "But I won't cry!$"
 
 Route109_SeashoreHouse_Text_SimonPostBattle: @ 82699DF
-	.string "If one of my Pokémon knew the move\n"
-	.string "for carrying me across water on its\l"
-	.string "back, I could get rid of this inner tube.$"
+	.string "Tropius starts Tailwind while\n"
+	.string "Keldeo races across the field.\p"
+	.string "That's a team worth riding with!$"
 
+Route109_SeashoreHouse_Text_SimonNotEnoughPokemon:
+	.string "My four riders need two healthy\n"
+	.string "Pokémon to race. Come back ready!$"

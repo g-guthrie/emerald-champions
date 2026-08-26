@@ -720,6 +720,11 @@ static void CreateChooseAnswerTask(bool8 noBButton, u8 answers, u8 windowId)
 
 void CallApprenticeFunction(void)
 {
+    if (gSpecialVar_0x8004 >= ARRAY_COUNT(sApprenticeFunctions))
+    {
+        gSpecialVar_Result = FALSE;
+        return;
+    }
     sApprenticeFunctions[gSpecialVar_0x8004]();
 }
 

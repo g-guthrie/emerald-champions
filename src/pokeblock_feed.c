@@ -1,6 +1,7 @@
 #include "global.h"
 #include "malloc.h"
 #include "battle.h"
+#include "battle_gfx_sfx_util.h"
 #include "bg.h"
 #include "data.h"
 #include "decompress.h"
@@ -622,6 +623,11 @@ static bool8 LoadPokeblockFeedScene(void)
     {
     case 0:
         sPokeblockFeed = AllocZeroed(sizeof(*sPokeblockFeed));
+        if (sPokeblockFeed == NULL)
+        {
+            SetMainCallback2(gMain.savedCallback);
+            return TRUE;
+        }
         SetVBlankHBlankCallbacksToNull();
         ClearScheduledBgCopiesToVram();
         gMain.state++;
@@ -640,7 +646,13 @@ static bool8 LoadPokeblockFeedScene(void)
         gMain.state++;
         break;
     case 4:
-        AllocateMonSpritesGfx();
+        if (!TryAllocateMonSpritesGfx())
+        {
+            gPaletteFade.bufferTransferDisabled = FALSE;
+            FREE_AND_SET_NULL(sPokeblockFeed);
+            SetMainCallback2(gMain.savedCallback);
+            return TRUE;
+        }
         gMain.state++;
         break;
     case 5:

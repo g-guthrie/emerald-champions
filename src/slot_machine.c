@@ -293,7 +293,7 @@ struct DigitalDisplaySprite
 
 static void CB2_SlotMachineSetup(void);
 static void CB2_SlotMachine(void);
-static void PlaySlotMachine_Internal(u8, MainCallback);
+static bool8 PlaySlotMachine_Internal(u8, MainCallback);
 static void SlotMachineDummyTask(u8);
 static void SlotMachineSetup_InitBgsWindows(void);
 static void SlotMachineSetup_InitVRAM(void);
@@ -307,7 +307,7 @@ static void SlotMachineSetup_InitVBlank(void);
 static void AllocDigitalDisplayGfx(void);
 static void SetDigitalDisplayImagePtrs(void);
 static void CreateSlotMachineSprites(void);
-static void CreateGameplayTasks(void);
+static bool8 CreateGameplayTasks(void);
 static void CreateSlotMachineTask(void);
 static void DestroyDigitalDisplayScene(void);
 static void Task_SlotMachine(u8);
@@ -358,7 +358,7 @@ static bool8 AwardPayoutAction0(struct Task *);
 static bool8 AwardPayoutAction_GivePayoutToPlayer(struct Task *);
 static bool8 AwardPayoutAction_FreeTask(struct Task *);
 static u8 GetTagAtRest(u8, s16);
-static void CreateSlotReelTasks(void);
+static bool8 CreateSlotReelTasks(void);
 static void SpinSlotReel(u8);
 static void StopSlotReel(u8);
 static bool8 IsSlotReelMoving(u8);
@@ -893,9 +893,27 @@ void PlaySlotMachine(u8 slotMachineIndex, MainCallback exitCallback)
 {
     u8 taskId;
 
+    if (GetTaskCount() > NUM_TASKS - 2)
+    {
+        SetMainCallback2(exitCallback);
+        return;
+    }
+
     sSlotMachine = AllocZeroed(sizeof(*sSlotMachine));
-    PlaySlotMachine_Internal(slotMachineIndex, exitCallback);
+    if (sSlotMachine == NULL || !PlaySlotMachine_Internal(slotMachineIndex, exitCallback))
+    {
+        FREE_AND_SET_NULL(sSlotMachine);
+        SetMainCallback2(exitCallback);
+        return;
+    }
     taskId = CreateTask(Task_FadeToSlotMachine, 0);
+    if (!IsTaskIdValid(taskId))
+    {
+        DestroyTask(FindTaskIdByFunc(SlotMachineDummyTask));
+        FREE_AND_SET_NULL(sSlotMachine);
+        SetMainCallback2(exitCallback);
+        return;
+    }
     gTasks[taskId].tState = 0;
 }
 
@@ -953,7 +971,11 @@ static void CB2_SlotMachineSetup(void)
             break;
         case 10:
             CreateSlotMachineSprites();
-            CreateGameplayTasks();
+            if (!CreateGameplayTasks())
+            {
+                SetMainCallback2(sSlotMachine->prevMainCb);
+                return;
+            }
             gMain.state++;
             break;
         case 11:
@@ -981,17 +1003,28 @@ static void SlotMachine_VBlankCB(void)
     SetGpuReg(REG_OFFSET_WINOUT, sSlotMachine->winOut);
 }
 
-static void PlaySlotMachine_Internal(u8 slotMachineIndex, MainCallback exitCallback)
+static bool8 PlaySlotMachine_Internal(u8 slotMachineIndex, MainCallback exitCallback)
 {
-    struct Task *task = &gTasks[CreateTask(SlotMachineDummyTask, 0xFF)];
+    u8 taskId = CreateTask(SlotMachineDummyTask, 0xFF);
+    struct Task *task;
+
+    if (!IsTaskIdValid(taskId))
+        return FALSE;
+    task = &gTasks[taskId];
     task->data[0] = slotMachineIndex;
     StoreWordInTwoHalfwords(&task->data[1], (intptr_t)exitCallback);
+    return TRUE;
 }
 
 
 static void SlotMachineInitDummyTask(void)
 {
-    struct Task *task = &gTasks[FindTaskIdByFunc(SlotMachineDummyTask)];
+    u8 taskId = FindTaskIdByFunc(SlotMachineDummyTask);
+    struct Task *task;
+
+    if (taskId == TASK_NONE)
+        return;
+    task = &gTasks[taskId];
     sSlotMachine->machineId = task->data[0];
     LoadWordFromTwoHalfwords((u16 *)&task->data[1], (u32 *)&sSlotMachine->prevMainCb);
 }
@@ -1126,17 +1159,27 @@ static void CreateSlotMachineSprites(void)
     CreateReelBackgroundSprite();
 }
 
-static void CreateGameplayTasks(void)
+static bool8 CreateGameplayTasks(void)
 {
+    // One Pika task, three reel tasks, one digital-display task, and the main
+    // slot task are created synchronously with no intervening scheduler run.
+    if (GetTaskCount() > NUM_TASKS - (NUM_REELS + 3))
+        return FALSE;
+
     CreatePikaPowerBoltTask();
-    CreateSlotReelTasks();
+    if (!CreateSlotReelTasks())
+        return FALSE;
     CreateDigitalDisplayTask();
     CreateSlotMachineTask();
+    return TRUE;
 }
 
 static void CreateSlotMachineTask(void)
 {
-    Task_SlotMachine(CreateTask(Task_SlotMachine, 0));
+    u8 taskId = CreateTask(Task_SlotMachine, 0);
+
+    if (IsTaskIdValid(taskId))
+        Task_SlotMachine(taskId);
 }
 
 // task->data[0] is a timer
@@ -1904,7 +1947,10 @@ static u8 GetMatchFromSymbols(u8 c1, u8 c2, u8 c3)
 
 static void AwardPayout(void)
 {
-    RunAwardPayoutActions(CreateTask(RunAwardPayoutActions, 4));
+    u8 taskId = CreateTask(RunAwardPayoutActions, 4);
+
+    if (IsTaskIdValid(taskId))
+        RunAwardPayoutActions(taskId);
 }
 
 static bool8 IsFinalTask_RunAwardPayoutActions(void)
@@ -2050,16 +2096,23 @@ s16 AdvanceReeltimeReelToNextTag(s16 value)
 #define tMoving data[14]
 #define tReelId data[15]
 
-static void CreateSlotReelTasks(void)
+static bool8 CreateSlotReelTasks(void)
 {
     u8 i;
     for (i = 0; i < NUM_REELS; i++)
     {
         u8 taskId = CreateTask(Task_RunSlotReelActions, 2);
+        if (!IsTaskIdValid(taskId))
+        {
+            while (i != 0)
+                DestroyTask(sSlotMachine->slotReelTasks[--i]);
+            return FALSE;
+        }
         gTasks[taskId].tReelId = i;
         sSlotMachine->slotReelTasks[i] = taskId;
         Task_RunSlotReelActions(taskId);
     }
+    return TRUE;
 }
 
 static void SpinSlotReel(u8 reelIndex)
@@ -2719,7 +2772,8 @@ static void PressStopReelButton(u8 reelNum)
 {
     u8 taskId = CreateTask(Task_PressStopReelButton, 5);
     gTasks[taskId].data[15] = reelNum;
-    Task_PressStopReelButton(taskId);
+    if (taskId < NUM_TASKS)
+        Task_PressStopReelButton(taskId);
 }
 
 static void Task_PressStopReelButton(u8 taskId)
@@ -2887,12 +2941,16 @@ static void FlashSlotMachineLights(void)
 {
     u8 taskId = CreateTask(Task_FlashSlotMachineLights, 6);
     gTasks[taskId].sFlashDir = 1;
-    Task_FlashSlotMachineLights(taskId);
+    if (taskId < NUM_TASKS)
+        Task_FlashSlotMachineLights(taskId);
 }
 
 static bool8 TryStopSlotMachineLights(void)
 {
     u8 taskId = FindTaskIdByFunc(Task_FlashSlotMachineLights);
+
+    if (taskId == TASK_NONE)
+        return TRUE;
     if (gTasks[taskId].sFlashState == 0)
     {
         DestroyTask(taskId);
@@ -3059,7 +3117,8 @@ static void LoadPikaPowerMeter(u8 pikaPower)
 static void BeginReelTime(void)
 {
     u8 taskId = CreateTask(Task_ReelTime, 7);
-    Task_ReelTime(taskId);
+    if (taskId < NUM_TASKS)
+        Task_ReelTime(taskId);
 }
 
 static bool8 IsReelTimeTaskDone(void)
@@ -3404,7 +3463,8 @@ static void OpenInfoBox(u8 digDisplayId)
 {
     u8 taskId = CreateTask(RunInfoBoxActions, 1);
     gTasks[taskId].data[1] = digDisplayId;
-    RunInfoBoxActions(taskId);
+    if (taskId < NUM_TASKS)
+        RunInfoBoxActions(taskId);
 }
 
 static bool8 IsInfoBoxClosed(void)

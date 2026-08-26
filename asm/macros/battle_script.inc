@@ -1808,6 +1808,10 @@
 	various \battler, VARIOUS_ROOM_SERVICE
 	.4byte \ptr
 	.endm
+
+	.macro tryroomserviceaftermagicroom
+	various BS_ATTACKER, VARIOUS_ROOM_SERVICE_MAGIC_ROOM_END
+	.endm
 	
 	.macro jumpifterrainaffected battler:req, terrainFlags:req, ptr:req
 	various \battler, VARIOUS_JUMP_IF_TERRAIN_AFFECTED
@@ -1996,6 +2000,21 @@
 	.macro jumpifcantcorrode battler:req, ptr:req
 	various \battler, VARIOUS_JUMP_IF_CANT_CORRODE
 	.4byte \ptr
+	.endm
+
+	@ Either stages the first Pledge user and moves its partner next in turn
+	@ order, resolves the waiting pair into a combined move, or jumps to the
+	@ ordinary single-move damage path.
+	.macro setpledge ptr:req
+	various BS_ATTACKER, VARIOUS_SET_PLEDGE
+	.4byte \ptr
+	.endm
+
+	@ Applies the result of a successful combined Pledge without refreshing an
+	@ already-active four-turn side effect.
+	.macro setpledgestatus battler:req, sidestatus:req
+	various \battler, VARIOUS_SET_PLEDGE_STATUS
+	.4byte \sidestatus
 	.endm
 
 @ helpful macros

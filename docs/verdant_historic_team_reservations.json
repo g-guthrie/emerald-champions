@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "purpose": "Sparse historic-team reservations plus soft marquee blueprints. Ordinary trainers remain unassigned until rolling-context design, and no blueprint is a finalized party.",
+  "purpose": "Sparse historic-team reservations plus soft marquee blueprints. This registry stores explicit future showcase commitments and protected reveals; it is separate from the descriptive used-species ledger. Ordinary trainers remain unassigned until rolling-context design, and no blueprint is a finalized party.",
   "statuses": ["available", "reserved", "adapted", "spent"],
   "reservations": [
     {
@@ -59,6 +59,7 @@
     "non_goals": [
       "Do not allocate ordinary trainers, exact parties, exact sets, or exact level offsets here.",
       "Do not spend a protected reveal merely to satisfy a campaign-wide quota.",
+      "Preserve the final campaign promise that every supported legendary and mythical family appears on an opponent without assigning temporary gaps to the next battle.",
       "Finish each encounter in canonical sequence with rolling context and source validation."
     ],
     "entries": [
@@ -74,7 +75,7 @@
           "TRAINER_BRENDAN_ROUTE_103_MUDKIP"
         ],
         "planning_tier": "rival_milestone",
-        "design_commitment": "soft",
+        "design_commitment": "spent",
         "target_difficulty": 7.5,
         "protected_identity": "A fair one-on-one introduction that follows every supported starter choice without pretending the player already owns a team.",
         "signature_reveal": "The rival's same-generation counter-starter and Verdant's open preparation rules, not a narrow lock-and-key puzzle.",
@@ -86,7 +87,7 @@
         },
         "candidate_reference_ids": [],
         "adaptation_constraints": [
-          "Mega-only gimmick policy; no Tera, Z-Moves, Dynamax, Gigantamax, or Primal Reversion.",
+          "Mega-and-Primal policy; no Tera, Z-Moves, Dynamax, or Gigantamax.",
           "All starter branches must remain broadly solvable and mechanically equivalent."
         ],
         "chronological_closure_note": "Closes the pre-capture tutorial battle and leaves the cap-14 young-Pokémon chapter, Roxanne, and later rival escalation unspent."
@@ -108,7 +109,7 @@
         },
         "candidate_reference_ids": [],
         "adaptation_constraints": [
-          "Mega-only gimmick policy; no Tera, Z-Moves, Dynamax, Gigantamax, or Primal Reversion.",
+          "Mega-and-Primal policy; no Tera, Z-Moves, Dynamax, or Gigantamax.",
           "Preserve the already-authored stage-legal identity and do not import a mature tournament roster."
         ],
         "chronological_closure_note": "Closes the no-Mega cap-14 chapter, awards the Stone Badge, and opens the cap-20 journey toward Steven and the first usable Mega."
@@ -125,7 +126,7 @@
           "TRAINER_BRENDAN_RUSTBORO_MUDKIP"
         ],
         "planning_tier": "rival_milestone",
-        "design_commitment": "reserved",
+        "design_commitment": "spent",
         "target_difficulty": 9,
         "protected_identity": "A dynamic forecast battle whose weather, middle-stage starter, and coverage remain correct for all twenty-one starter choices.",
         "signature_reveal": "Manual weather announcement plus the rival's legally evolved counterpart; this is the last rival fight before Mega access.",
@@ -137,7 +138,7 @@
         },
         "candidate_reference_ids": [],
         "adaptation_constraints": [
-          "Mega-only gimmick policy; no Tera, Z-Moves, Dynamax, Gigantamax, or Primal Reversion.",
+          "Mega-and-Primal policy; no Tera, Z-Moves, Dynamax, or Gigantamax.",
           "Weather and move legality must be validated separately for every runtime starter branch."
         ],
         "chronological_closure_note": "Pays off the opening starter choice at cap 20, then hands the campaign to Granite Cave, Brawly, and player-controlled Mega experimentation."
@@ -147,7 +148,7 @@
         "anchor": "DEWFORD_GYM_BRAWLY",
         "trainer_ids": ["TRAINER_BRAWLY_1"],
         "planning_tier": "badge_boss",
-        "design_commitment": "reserved",
+        "design_commitment": "spent",
         "target_difficulty": 10,
         "protected_identity": "Redirection, No Retreat, board control, and reciprocal No Guard form the first boss-level Mega puzzle.",
         "signature_reveal": "Mega Hawlucha is the first opposing Mega after the player can actually use the bracelet.",
@@ -159,7 +160,7 @@
         },
         "candidate_reference_ids": ["elite:sejun-park:worlds-2014"],
         "adaptation_constraints": [
-          "Mega-only gimmick policy; no Tera, Z-Moves, Dynamax, Gigantamax, or Primal Reversion.",
+          "Mega-and-Primal policy; no Tera, Z-Moves, Dynamax, or Gigantamax.",
           "Adapt the redirection lesson, not Sejun Park's complete championship roster."
         ],
         "chronological_closure_note": "Introduces enemy Mega play at cap 20 and closes the young-Fighting chapter before Slateport's first leader-grade faction battle."
@@ -169,19 +170,19 @@
         "anchor": "SLATEPORT_ARCHIE_INTERCEPTION",
         "trainer_ids": ["TRAINER_ARCHIE_SLATEPORT"],
         "planning_tier": "faction_leader",
-        "design_commitment": "soft",
+        "design_commitment": "spent",
         "target_difficulty": 10,
         "protected_identity": "The first proof that Aqua leadership understands rain positioning rather than merely carrying Water types.",
-        "signature_reveal": "A readable early rain board with aggressive switching and one leader-grade closer, while Archie's complete doctrine remains reserved for Seafloor Cavern.",
+        "signature_reveal": "A readable early Primal Kyogre rain board plus one Mega, while Archie's complete positioning doctrine remains reserved for Seafloor Cavern.",
         "primary_candidate_modes": ["rain-enabled tempo offense", "Water-pressure positioning"],
         "secondary_candidate_modes": ["anti-passive Encore or trapping hint"],
         "mega_legendary_posture": {
-          "mega": "At most one available Mega; do not upstage Brawly's first-Mega reveal.",
-          "legendary": "A restrained oceanic rare is optional, but Kyogre and Archie's ultimate centerpiece remain late."
+          "mega": "Exactly one available Mega may accompany the Primal; Brawly's first-Mega reveal has already occurred.",
+          "legendary": "Primal Kyogre is explicitly allowed here as the shocking early faction-leader centerpiece. Later Archie may reuse Kyogre only with a materially different complete doctrine."
         },
         "candidate_reference_ids": [],
         "adaptation_constraints": [
-          "Mega-only gimmick policy; no Tera, Z-Moves, Dynamax, Gigantamax, or Primal Reversion.",
+          "Mega-and-Primal policy; no Tera, Z-Moves, Dynamax, or Gigantamax.",
           "Foreshadow rain-plus-positioning without spending the reserved Toronto-derived final doctrine."
         ],
         "chronological_closure_note": "Escalates Aqua from grunts to genuine competitive command, then leaves Route 110's rival and Wattson to broaden Mega-era counterplay."
@@ -210,7 +211,7 @@
         },
         "candidate_reference_ids": [],
         "adaptation_constraints": [
-          "Mega-only gimmick policy; no Tera, Z-Moves, Dynamax, Gigantamax, or Primal Reversion.",
+          "Mega-and-Primal policy; no Tera, Z-Moves, Dynamax, or Gigantamax.",
           "Every starter branch must preserve comparable pressure, information, and counterplay."
         ],
         "chronological_closure_note": "Shows that the rival learned from Rustboro and prepares the player for Wattson's first fully mature badge-boss board."
@@ -232,7 +233,7 @@
         },
         "candidate_reference_ids": ["elite:luca-ceribelli:worlds-2024"],
         "adaptation_constraints": [
-          "Mega-only gimmick policy; no Tera, Z-Moves, Dynamax, Gigantamax, or Primal Reversion.",
+          "Mega-and-Primal policy; no Tera, Z-Moves, Dynamax, or Gigantamax.",
           "Translate Miraidon-dependent terrain power into engine-legal terrain, abilities, and levels."
         ],
         "chronological_closure_note": "Closes the cap-30 electric chapter and establishes that future bosses can combine a Mega with genuine alternate board modes."
@@ -254,7 +255,7 @@
         },
         "candidate_reference_ids": [],
         "adaptation_constraints": [
-          "Mega-only gimmick policy; no Tera, Z-Moves, Dynamax, Gigantamax, or Primal Reversion.",
+          "Mega-and-Primal policy; no Tera, Z-Moves, Dynamax, or Gigantamax.",
           "Validate both enemy AI halves and every rival-partner branch; no plan may rely on scripted player cooperation."
         ],
         "chronological_closure_note": "Introduces Magma's coordinated doctrine, while Tabitha and Maxie at Mt. Chimney remain the first hostile sun-command escalation."
@@ -276,7 +277,7 @@
         },
         "candidate_reference_ids": ["elite:yuma-kinugawa:laic-2026"],
         "adaptation_constraints": [
-          "Mega-only gimmick policy; no Tera, Z-Moves, Dynamax, Gigantamax, or Primal Reversion.",
+          "Mega-and-Primal policy; no Tera, Z-Moves, Dynamax, or Gigantamax.",
           "Use the TailRoom and anti-Protect ideas without copying the complete modern roster."
         ],
         "chronological_closure_note": "Acts as Maxie's tactical prelude; its speed pattern should make the immediately following leader battle feel deeper, not repetitive."
@@ -298,7 +299,7 @@
         },
         "candidate_reference_ids": [],
         "adaptation_constraints": [
-          "Mega-only gimmick policy; no Tera, Z-Moves, Dynamax, Gigantamax, or Primal Reversion.",
+          "Mega-and-Primal policy; no Tera, Z-Moves, Dynamax, or Gigantamax.",
           "Keep sun intelligent and flexible while reserving Maxie's EUIC-derived full doctrine for Magma Hideout."
         ],
         "chronological_closure_note": "Closes the first Magma command arc and leaves Flannery to reinterpret heat as a badge puzzle rather than repeat faction sun."
@@ -320,7 +321,7 @@
         },
         "candidate_reference_ids": ["elite:arsal-puri:indianapolis-2026"],
         "adaptation_constraints": [
-          "Mega-only gimmick policy; no Tera, Z-Moves, Dynamax, Gigantamax, or Primal Reversion.",
+          "Mega-and-Primal policy; no Tera, Z-Moves, Dynamax, or Gigantamax.",
           "If adapting the dual-Mega source, choose one legal Mega for this encounter and preserve the other mode without double activation."
         ],
         "chronological_closure_note": "Closes the cap-40 heat chapter with a badge-boss interpretation of sun, then hands the campaign to Norman's deliberate singles change of pace."
@@ -342,7 +343,7 @@
         },
         "candidate_reference_ids": ["elite:shohei-kimura:worlds-2023"],
         "adaptation_constraints": [
-          "Mega-only gimmick policy; no Tera, Z-Moves, Dynamax, Gigantamax, or Primal Reversion.",
+          "Mega-and-Primal policy; no Tera, Z-Moves, Dynamax, or Gigantamax.",
           "Adapt the source's pure-positioning philosophy to singles; do not transplant its doubles support shell."
         ],
         "chronological_closure_note": "Provides a high-concentration singles peak at cap 45 before the campaign returns to route doubles and Weather Institute board play."
@@ -364,7 +365,7 @@
         },
         "candidate_reference_ids": ["elite:wolfe:baltimore-2024"],
         "adaptation_constraints": [
-          "Mega-only gimmick policy; no Tera, Z-Moves, Dynamax, Gigantamax, or Primal Reversion.",
+          "Mega-and-Primal policy; no Tera, Z-Moves, Dynamax, or Gigantamax.",
           "Engine-test Neutralizing Gas and any modified ability ordering before using the reference's core interaction."
         ],
         "chronological_closure_note": "Deepens Aqua through a scientific mechanic, leaving Route 119's rival and Winona to change tempo and visual language."
@@ -393,7 +394,7 @@
         },
         "candidate_reference_ids": ["elite:wolfe:milwaukee-2025"],
         "adaptation_constraints": [
-          "Mega-only gimmick policy; no Tera, Z-Moves, Dynamax, Gigantamax, or Primal Reversion.",
+          "Mega-and-Primal policy; no Tera, Z-Moves, Dynamax, or Gigantamax.",
           "Party order and Illusion behavior must work identically across May, Brendan, and all starter branches."
         ],
         "chronological_closure_note": "Marks the rival's transition into a real competitive peer and sets up Winona without spending the Lilycove farewell roster."
@@ -415,7 +416,7 @@
         },
         "candidate_reference_ids": ["elite:yuma-kinugawa:laic-2026"],
         "adaptation_constraints": [
-          "Mega-only gimmick policy; no Tera, Z-Moves, Dynamax, Gigantamax, or Primal Reversion.",
+          "Mega-and-Primal policy; no Tera, Z-Moves, Dynamax, or Gigantamax.",
           "Translate Farigiraf-style priority denial and TailRoom concepts into Flying-native or location-fitting roles."
         ],
         "chronological_closure_note": "Closes cap 55 with an aerial speed exam, then leaves Lilycove's rival to deliver a personal mixed-style climax."
@@ -444,7 +445,7 @@
         },
         "candidate_reference_ids": ["elite:paul-chua:euic-2026"],
         "adaptation_constraints": [
-          "Mega-only gimmick policy; no Tera, Z-Moves, Dynamax, Gigantamax, or Primal Reversion.",
+          "Mega-and-Primal policy; no Tera, Z-Moves, Dynamax, or Gigantamax.",
           "Maintain equivalent identity and difficulty for every runtime starter branch without forcing one counter-team."
         ],
         "chronological_closure_note": "Closes the main rival arc before the villain endgame and frees later rare reveals for faction leaders, the League, and postgame Steven."
@@ -466,7 +467,7 @@
         },
         "candidate_reference_ids": [],
         "adaptation_constraints": [
-          "Mega-only gimmick policy; no Tera, Z-Moves, Dynamax, Gigantamax, or Primal Reversion.",
+          "Mega-and-Primal policy; no Tera, Z-Moves, Dynamax, or Gigantamax.",
           "Keep Matt distinct from Archie's rain engines and Shelly's technical control."
         ],
         "chronological_closure_note": "Turns Aqua's physical archetype into a serious threat and sets up the paired hideout offensives without duplicating their leaders."
@@ -488,7 +489,7 @@
         },
         "candidate_reference_ids": [],
         "adaptation_constraints": [
-          "Mega-only gimmick policy; no Tera, Z-Moves, Dynamax, Gigantamax, or Primal Reversion.",
+          "Mega-and-Primal policy; no Tera, Z-Moves, Dynamax, or Gigantamax.",
           "Build from Tabitha's Mt. Chimney lesson but change the primary question."
         ],
         "chronological_closure_note": "Shows admin progression inside the hideout while preserving Maxie's reserved sun-plus-positioning doctrine for the climax."
@@ -510,7 +511,7 @@
         },
         "candidate_reference_ids": [],
         "adaptation_constraints": [
-          "Mega-only gimmick policy; no Tera, Z-Moves, Dynamax, Gigantamax, or Primal Reversion.",
+          "Mega-and-Primal policy; no Tera, Z-Moves, Dynamax, or Gigantamax.",
           "Avoid another sun setter-and-recipient shell; her identity is denial."
         ],
         "chronological_closure_note": "Completes the two-admin contrast and immediately hands the player to Maxie's full tournament-grade doctrine."
@@ -528,11 +529,11 @@
         "secondary_candidate_modes": ["Perish or trapping preparation tax", "redirection and sleep control"],
         "mega_legendary_posture": {
           "mega": "Exactly one major Mega selected from any preview alternatives.",
-          "legendary": "One land, sun, or dragon-scale legendary is encouraged; never use Primal Reversion."
+          "legendary": "Primal Groudon is allowed and is the preferred faction-climax centerpiece when the full team and AI earn it."
         },
         "candidate_reference_ids": ["elite:wolfe:euic-2025"],
         "adaptation_constraints": [
-          "Mega-only gimmick policy; no Tera, Z-Moves, Dynamax, Gigantamax, or Primal Reversion.",
+          "Mega-and-Primal policy; no Tera, Z-Moves, Dynamax, or Gigantamax.",
           "Koraidon or equivalent weather power must be translated without Terastallization; the AI must understand primary offense versus secondary trap mode."
         ],
         "chronological_closure_note": "Pays off every earlier Magma lesson at cap 60 while preserving the later Mossdeep multi battle as a different coordination climax."
@@ -554,7 +555,7 @@
         },
         "candidate_reference_ids": [],
         "adaptation_constraints": [
-          "Mega-only gimmick policy; no Tera, Z-Moves, Dynamax, Gigantamax, or Primal Reversion.",
+          "Mega-and-Primal policy; no Tera, Z-Moves, Dynamax, or Gigantamax.",
           "Do not turn the fight into another rain setter-plus-Swift Swim recipient."
         ],
         "chronological_closure_note": "Closes Matt's arc with a high-speed escape battle and leaves the cosmic gym and Mossdeep assault as the next mechanical escalation."
@@ -576,7 +577,7 @@
         },
         "candidate_reference_ids": ["elite:federico-camporesi:naic-2025"],
         "adaptation_constraints": [
-          "Mega-only gimmick policy; no Tera, Z-Moves, Dynamax, Gigantamax, or Primal Reversion.",
+          "Mega-and-Primal policy; no Tera, Z-Moves, Dynamax, or Gigantamax.",
           "Validate the joint native-pair battle and both solo halves; translate Miraidon and Lunala roles without Tera."
         ],
         "chronological_closure_note": "Closes cap 60 with the campaign's strongest native-pair boss and foreshadows the larger allied formation at the Space Center."
@@ -598,7 +599,7 @@
         },
         "candidate_reference_ids": [],
         "adaptation_constraints": [
-          "Mega-only gimmick policy; no Tera, Z-Moves, Dynamax, Gigantamax, or Primal Reversion.",
+          "Mega-and-Primal policy; no Tera, Z-Moves, Dynamax, or Gigantamax.",
           "Counter common preparation without cheating information or requiring one lead."
         ],
         "chronological_closure_note": "Finishes Tabitha's tactical arc and creates a clean reset before Maxie, Courtney, and Steven share the next board."
@@ -620,7 +621,7 @@
         },
         "candidate_reference_ids": ["elite:wolfe:worlds-2025"],
         "adaptation_constraints": [
-          "Mega-only gimmick policy; no Tera, Z-Moves, Dynamax, Gigantamax, or Primal Reversion.",
+          "Mega-and-Primal policy; no Tera, Z-Moves, Dynamax, or Gigantamax.",
           "The allied AI must execute independently of hidden player cooperation; Koraidon and Lunala roles require engine-legal translation."
         ],
         "chronological_closure_note": "Closes Magma's story-scale escalation and establishes Steven's competence before the Seafloor Aqua climax and his postgame challenge."
@@ -642,7 +643,7 @@
         },
         "candidate_reference_ids": [],
         "adaptation_constraints": [
-          "Mega-only gimmick policy; no Tera, Z-Moves, Dynamax, Gigantamax, or Primal Reversion.",
+          "Mega-and-Primal policy; no Tera, Z-Moves, Dynamax, or Gigantamax.",
           "The clock must teach an actionable positional lesson and must not depend on hidden AI scripting."
         ],
         "chronological_closure_note": "Completes Shelly's scientist-to-control-specialist arc and drains resources intelligently before Archie's final command battle."
@@ -660,11 +661,11 @@
         "secondary_candidate_modes": ["Perish trap", "Trick Room option and redirection"],
         "mega_legendary_posture": {
           "mega": "Exactly one major Water Mega.",
-          "legendary": "One ocean-scale legendary is encouraged; no Primal Kyogre."
+          "legendary": "Primal Kyogre is allowed and is the preferred faction-climax centerpiece when the full team and AI earn it."
         },
         "candidate_reference_ids": ["elite:wolfe:toronto-2024"],
         "adaptation_constraints": [
-          "Mega-only gimmick policy; no Tera, Z-Moves, Dynamax, Gigantamax, or Primal Reversion.",
+          "Mega-and-Primal policy; no Tera, Z-Moves, Dynamax, or Gigantamax.",
           "AI must distinguish primary rain offense from the secondary Perish mode and understand trapping, Encore, and survival turns."
         ],
         "chronological_closure_note": "Pays off every Aqua lesson before Sootopolis and leaves Juan and Wallace to express Water through different primary questions."
@@ -686,8 +687,8 @@
         },
         "candidate_reference_ids": ["vgc:worlds-2010"],
         "adaptation_constraints": [
-          "Mega-only gimmick policy; no Tera, Z-Moves, Dynamax, Gigantamax, or Primal Reversion.",
-          "Use base Kyogre and Groudon roles only if needed; remove Primal assumptions and avoid importing the full restricted roster."
+          "Mega-and-Primal policy; no Tera, Z-Moves, Dynamax, or Gigantamax.",
+          "Reserve Primal Groudon and Kyogre for intentional Magma/Aqua boss use; Juan should not import a full restricted roster merely because Primals are legal."
         ],
         "chronological_closure_note": "Closes the badge campaign at cap 70 with a distinct Water puzzle and reserves maximum rain spectacle for the Champion."
       },
@@ -708,7 +709,7 @@
         },
         "candidate_reference_ids": ["elite:marco-silva:turin-2026"],
         "adaptation_constraints": [
-          "Mega-only gimmick policy; no Tera, Z-Moves, Dynamax, Gigantamax, or Primal Reversion.",
+          "Mega-and-Primal policy; no Tera, Z-Moves, Dynamax, or Gigantamax.",
           "If the source offers two Megas, select one; preserve distinct non-Mega setup endgames."
         ],
         "chronological_closure_note": "Begins the connected League gauntlet. Victory returns control to the player, who may spend carried healing items before Phoebe; nothing is restored automatically."
@@ -730,7 +731,7 @@
         },
         "candidate_reference_ids": ["elite:wolfe:orlando-2023"],
         "adaptation_constraints": [
-          "Mega-only gimmick policy; no Tera, Z-Moves, Dynamax, Gigantamax, or Primal Reversion.",
+          "Mega-and-Primal policy; no Tera, Z-Moves, Dynamax, or Gigantamax.",
           "Implement explicit Perish, trapping, recovery, and switching AI; do not rely on ordinary damage scoring."
         ],
         "chronological_closure_note": "Changes the gauntlet from Sidney's information offense to a survival puzzle, then returns control for manual item healing before Glacia."
@@ -752,7 +753,7 @@
         },
         "candidate_reference_ids": ["elite:wolfe:naic-2026"],
         "adaptation_constraints": [
-          "Mega-only gimmick policy; no Tera, Z-Moves, Dynamax, Gigantamax, or Primal Reversion.",
+          "Mega-and-Primal policy; no Tera, Z-Moves, Dynamax, or Gigantamax.",
           "Preserve the reference's offense-plus-clock philosophy while rebuilding its species and sun elements around Glacia."
         ],
         "chronological_closure_note": "Provides the gauntlet's mixed offense and attrition peak, then returns control for manual item healing before Drake's lethal singles duel."
@@ -774,7 +775,7 @@
         },
         "candidate_reference_ids": ["elite:giovanni-cischke:worlds-2025"],
         "adaptation_constraints": [
-          "Mega-only gimmick policy; no Tera, Z-Moves, Dynamax, Gigantamax, or Primal Reversion.",
+          "Mega-and-Primal policy; no Tera, Z-Moves, Dynamax, or Gigantamax.",
           "Adapt the fast-slow and preservation concepts to singles instead of copying doubles support roles."
         ],
         "chronological_closure_note": "Ends the Elite Four with a format shift. After victory, the player regains control in Drake's room and Hall 4 and may use carried items; entering Wallace's room then forces the Champion approach."
@@ -801,8 +802,8 @@
         },
         "candidate_reference_ids": ["elite:wolfe:worlds-2016", "vgc:worlds-2010"],
         "adaptation_constraints": [
-          "Mega-only gimmick policy; no Tera, Z-Moves, Dynamax, Gigantamax, or Primal Reversion.",
-          "Base Kyogre replaces Primal Kyogre; every Wallace branch must receive equivalent legality, AI, and difficulty validation."
+          "Mega-and-Primal policy; no Tera, Z-Moves, Dynamax, or Gigantamax.",
+          "The current Wallace design deliberately uses base Kyogre, while Primal Kyogre remains legal for Aqua bosses; every Wallace branch still requires equivalent legality, AI, and difficulty validation."
         ],
         "chronological_closure_note": "Completes the connected League gauntlet after one final manual-healing window, while leaving rematch escalation and Steven's postgame mineral superboss distinct."
       },
@@ -832,7 +833,7 @@
         },
         "candidate_reference_ids": [],
         "adaptation_constraints": [
-          "Mega-only gimmick policy; no Tera, Z-Moves, Dynamax, Gigantamax, or Primal Reversion.",
+          "Mega-and-Primal policy; no Tera, Z-Moves, Dynamax, or Gigantamax.",
           "Audit every actual rematch definition separately; Tate and Liza currently use only rematches 2 through 4."
         ],
         "chronological_closure_note": "Provides optional postgame mastery loops after Wallace without spending Steven's unique mineral-and-Steel final challenge."
@@ -859,7 +860,7 @@
         },
         "candidate_reference_ids": [],
         "adaptation_constraints": [
-          "Mega-only gimmick policy; no Tera, Z-Moves, Dynamax, Gigantamax, or Primal Reversion.",
+          "Mega-and-Primal policy; no Tera, Z-Moves, Dynamax, or Gigantamax.",
           "Model healing and resource persistence between rooms before finalizing any rematch party."
         ],
         "chronological_closure_note": "Extends the League as a postgame endurance system and funnels the player's deepest preparation toward Steven."
@@ -881,7 +882,7 @@
         },
         "candidate_reference_ids": ["elite:ray-rizzo:worlds-2012"],
         "adaptation_constraints": [
-          "Mega-only gimmick policy; no Tera, Z-Moves, Dynamax, Gigantamax, or Primal Reversion.",
+          "Mega-and-Primal policy; no Tera, Z-Moves, Dynamax, or Gigantamax.",
           "Translate Gems and variance-heavy Swagger lines into reliable engine-legal items and interactions while preserving mixed-speed sand."
         ],
         "chronological_closure_note": "Closes Steven's Granite Cave-to-Mossdeep-to-Meteor Falls arc and serves as the campaign's final authored trainer-battle benchmark before Birth Island."

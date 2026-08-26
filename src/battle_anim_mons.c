@@ -32,9 +32,11 @@ static void AnimTask_AttackerPunchWithTrace_Step(u8 taskId);
 static void AnimTask_BlendMonInAndOut_Step(u8 taskId);
 static bool8 sub_80A7238(void);
 static void sub_80A8D78(struct Task *task, u8 taskId);
+static void Task_FreeAdditionalMonSpriteBuffer(u8 taskId);
 
 // EWRAM vars
 EWRAM_DATA static union AffineAnimCmd *gAnimTaskAffineAnim = NULL;
+EWRAM_DATA static u16 *sAdditionalMonSpriteBuffer = NULL;
 
 // Const rom data
 static const struct UCoords8 sBattlerCoords[][4] =
@@ -1612,6 +1614,7 @@ s16 CloneBattlerSpriteWithBlend(u8 animBattler)
             if (!gSprites[i].inUse)
             {
                 gSprites[i] = gSprites[spriteId];
+                CopySpriteResourceTags(&gSprites[i], &gSprites[spriteId]);
                 gSprites[i].oam.objMode = ST_OAM_OBJ_BLEND;
                 gSprites[i].invisible = FALSE;
                 return i;
@@ -2065,12 +2068,46 @@ u8 GetBattlerSpriteBGPriorityRank(u8 battlerId)
 // Create pokemon sprite to be used for a move animation effect (e.g. Role Play / Snatch)
 u8 CreateAdditionalMonSpriteForMoveAnim(u16 species, bool8 isBackpic, u8 id, s16 x, s16 y, u8 subpriority, u32 personality, u32 trainerId, u32 battlerId)
 {
-    u8 spriteId;
-    u16 sheet = LoadSpriteSheet(&sSpriteSheet_MoveEffectMons[id]);
-    u16 palette = AllocSpritePalette(sSpriteTemplate_MoveEffectMons[id].paletteTag);
+    s16 dmaRequest;
+    u8 cleanupTaskId;
+    u8 spriteId = MAX_SPRITES;
+    u8 palette;
+    u16 sheet;
+    u16 tilesTag;
+    u16 paletteTag;
 
-    if (gMonSpritesGfxPtr != NULL && gMonSpritesGfxPtr->buffer == NULL)
-        gMonSpritesGfxPtr->buffer = AllocZeroed(0x2000);
+    if (id >= ARRAY_COUNT(sSpriteSheet_MoveEffectMons))
+        return MAX_SPRITES;
+
+    tilesTag = sSpriteSheet_MoveEffectMons[id].tag;
+    paletteTag = sSpriteTemplate_MoveEffectMons[id].paletteTag;
+    if (GetSpriteTileStartByTag(tilesTag) != 0xFFFF
+     || IndexOfSpritePaletteTag(paletteTag) != 0xFF)
+        return MAX_SPRITES;
+
+    LoadSpriteSheet(&sSpriteSheet_MoveEffectMons[id]);
+    sheet = GetSpriteTileStartByTag(tilesTag);
+    if (sheet == 0xFFFF)
+        return MAX_SPRITES;
+
+    palette = AllocSpritePalette(paletteTag);
+    if (palette == 0xFF)
+        goto fail_tiles;
+
+    // FreeMonSpritesGfx may have torn down an animation before this cleanup
+    // task ran. Drop that stale identity before considering a new owner.
+    if (sAdditionalMonSpriteBuffer != NULL
+     && (gMonSpritesGfxPtr == NULL || gMonSpritesGfxPtr->buffer != sAdditionalMonSpriteBuffer))
+        sAdditionalMonSpriteBuffer = NULL;
+
+    if (gMonSpritesGfxPtr == NULL || gMonSpritesGfxPtr->buffer != NULL)
+        goto fail_palette;
+
+    gMonSpritesGfxPtr->buffer = AllocZeroed(MON_PIC_SIZE);
+    if (gMonSpritesGfxPtr->buffer == NULL)
+        goto fail_palette;
+    sAdditionalMonSpriteBuffer = gMonSpritesGfxPtr->buffer;
+
     if (!isBackpic)
     {
         LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, trainerId, personality), (palette * 0x10) + 0x100, 0x20);
@@ -2090,13 +2127,34 @@ u8 CreateAdditionalMonSpriteForMoveAnim(u16 species, bool8 isBackpic, u8 id, s16
                            FALSE);
     }
 
-    RequestDma3Copy(gMonSpritesGfxPtr->buffer, (void *)(OBJ_VRAM0 + (sheet * 0x20)), MON_PIC_SIZE, 1);
-    FREE_AND_SET_NULL(gMonSpritesGfxPtr->buffer);
+    // The DMA manager retains its source pointer until VBlank. A cleanup task
+    // owns the buffer (and, on sprite failure, its tags) until that request is
+    // complete; freeing here would make the queued DMA read reused heap data.
+    cleanupTaskId = CreateTask(Task_FreeAdditionalMonSpriteBuffer, 0);
+    if (cleanupTaskId >= NUM_TASKS)
+        goto fail_buffer;
+
+    dmaRequest = RequestDma3Copy(gMonSpritesGfxPtr->buffer, (void *)(OBJ_VRAM0 + (sheet * TILE_SIZE_4BPP)), MON_PIC_SIZE, 1);
+    if (dmaRequest < 0)
+    {
+        DestroyTask(cleanupTaskId);
+        goto fail_buffer;
+    }
+    gTasks[cleanupTaskId].data[0] = dmaRequest;
+    gTasks[cleanupTaskId].data[1] = FALSE;
+    gTasks[cleanupTaskId].data[2] = tilesTag;
+    gTasks[cleanupTaskId].data[3] = paletteTag;
 
     if (!isBackpic)
         spriteId = CreateSprite(&sSpriteTemplate_MoveEffectMons[id], x, y + gMonFrontPicCoords[species].y_offset, subpriority);
     else
         spriteId = CreateSprite(&sSpriteTemplate_MoveEffectMons[id], x, y + gMonBackPicCoords[species].y_offset, subpriority);
+
+    if (spriteId == MAX_SPRITES)
+    {
+        gTasks[cleanupTaskId].data[1] = TRUE;
+        return MAX_SPRITES;
+    }
 
     if (IsContest())
     {
@@ -2104,6 +2162,35 @@ u8 CreateAdditionalMonSpriteForMoveAnim(u16 species, bool8 isBackpic, u8 id, s16
         StartSpriteAffineAnim(&gSprites[spriteId], BATTLER_AFFINE_NORMAL);
     }
     return spriteId;
+
+fail_buffer:
+    if (gMonSpritesGfxPtr->buffer == sAdditionalMonSpriteBuffer)
+        TRY_FREE_AND_SET_NULL(gMonSpritesGfxPtr->buffer);
+    sAdditionalMonSpriteBuffer = NULL;
+fail_palette:
+    FreeSpritePaletteByTag(paletteTag);
+fail_tiles:
+    FreeSpriteTilesByTag(tilesTag);
+    return MAX_SPRITES;
+}
+
+static void Task_FreeAdditionalMonSpriteBuffer(u8 taskId)
+{
+    if (CheckForSpaceForDma3Request(gTasks[taskId].data[0]) == -1)
+        return;
+
+    if (sAdditionalMonSpriteBuffer != NULL
+     && gMonSpritesGfxPtr != NULL
+     && gMonSpritesGfxPtr->buffer == sAdditionalMonSpriteBuffer)
+        TRY_FREE_AND_SET_NULL(gMonSpritesGfxPtr->buffer);
+    sAdditionalMonSpriteBuffer = NULL;
+
+    if (gTasks[taskId].data[1])
+    {
+        FreeSpritePaletteByTag((u16)gTasks[taskId].data[3]);
+        FreeSpriteTilesByTag((u16)gTasks[taskId].data[2]);
+    }
+    DestroyTask(taskId);
 }
 
 void DestroySpriteAndFreeResources_(struct Sprite *sprite)
@@ -2273,6 +2360,7 @@ u8 CreateInvisibleSpriteCopy(int battlerId, u8 spriteId, int species)
 {
     u8 newSpriteId = CreateInvisibleSpriteWithCallback(SpriteCallbackDummy);
     gSprites[newSpriteId] = gSprites[spriteId];
+    CopySpriteResourceTags(&gSprites[newSpriteId], &gSprites[spriteId]);
     gSprites[newSpriteId].usingSheet = TRUE;
     gSprites[newSpriteId].oam.priority = 0;
     gSprites[newSpriteId].oam.objMode = ST_OAM_OBJ_WINDOW;

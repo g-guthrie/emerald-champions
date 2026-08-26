@@ -1,7 +1,7 @@
 #ifndef GUARD_BATTLE_GFX_SFX_UTIL_H
 #define GUARD_BATTLE_GFX_SFX_UTIL_H
 
-void AllocateBattleSpritesData(void);
+bool32 AllocateBattleSpritesData(void);
 void FreeBattleSpritesData(void);
 u16 ChooseMoveAndTargetInBattlePalace(void);
 void SpriteCB_WaitForBattlerBallReleaseAnim(struct Sprite *sprite);
@@ -41,6 +41,7 @@ void SetBattlerShadowSpriteCallback(u8 battlerId, u16 species);
 void HideBattlerShadowSprite(u8 battlerId);
 void sub_805EF14(void);
 void ClearTemporarySpeciesSpriteData(u8 battlerId, bool8 dontClearSubstitute);
+bool32 TryAllocateMonSpritesGfx(void);
 void AllocateMonSpritesGfx(void);
 void FreeMonSpritesGfx(void);
 bool32 ShouldPlayNormalMonCry(struct Pokemon *mon);

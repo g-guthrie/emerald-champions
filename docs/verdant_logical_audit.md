@@ -45,7 +45,7 @@ The build is accepted only when all thirty questions pass, followed by the broad
 
 ## Megas, encounters, and presentation
 
-27. Are Megas constrained and deliberately showcased? **Yes.** Marquee teams cannot carry multiple Mega items, and every new Mega appears during campaign progression.
+27. Are Megas and Primals constrained and deliberately showcased? **Yes.** Bosses retain at most one Mega, every new Mega appears during campaign progression, and source-legal Blue Orb/Red Orb Primals are allowed only when an intentional dossier records them.
 28. Does the player receive Mega access early enough to experiment? **Yes.** Steven gives the Bracelet and Hoenn starter stones in Granite Cave, with a Norman fallback.
 29. Are exciting early encounters accessible without one-percent hunting? **Yes.** Six early areas each have two new high-value species at 4% or better, while all native slot counts remain intact.
 30. Are rewritten rewards, dialogue, and menus visually and semantically clean? **Yes.** Stale TM speech is gone, rewritten reward lines have a conservative 36-character limit, and item menus use the canonical name width.

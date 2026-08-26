@@ -182,7 +182,18 @@ def main() -> int:
             and "for (i = 0; i < roundId; i++)" in dome
             and "roundId - 1" not in section(dome, "static u16 GetWinningMove", "static void Task_ShowTourneyTree")
         ),
-        "Factory classifies post-Gen-3 moves from move data": "The hand-authored lists end with Gen 3" in factory,
+        "Factory classifies post-Gen-3 moves from executable move data": all(
+            token in section(factory, "static u8 GetMoveBattleStyle", "bool8 InBattleFactory")
+            for token in (
+                "effect = gBattleMoves[move].effect;",
+                "case EFFECT_MISTY_TERRAIN:",
+                "return FACTORY_STYLE_WEATHER;",
+                "case EFFECT_FINAL_GAMBIT:",
+                "return FACTORY_STYLE_HIGH_RISK;",
+                "case EFFECT_HEAL_PULSE:",
+                "return FACTORY_STYLE_ENDURANCE;",
+            )
+        ),
         "Factory rentals update held-item-dependent forms": (
             factory.count("TryUpdateMonFormForHeldItem(&gPlayerParty[i]);") >= 2
             and "TryUpdateMonFormForHeldItem(&gEnemyParty[i]);" in factory

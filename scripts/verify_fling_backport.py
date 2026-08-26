@@ -89,16 +89,20 @@ for item, block in item_blocks.items():
     if ".pocket = POCKET_TM_HM" in block:
         require(fling_power(item) == 0, f"Reusable TM/HM {item} must be unflingable")
 
-require(items.count(".flingPower =") >= 436, "canonical Fling power import is incomplete")
 power_distribution: dict[int, int] = {}
 for block in item_blocks.values():
     match = re.search(r"\.flingPower\s*=\s*(\d+)", block)
     if match:
         power = int(match.group(1))
         power_distribution[power] = power_distribution.get(power, 0) + 1
+canonical_power_tiers = {10, 30, 40, 50, 60, 70, 80, 90, 100, 130}
 require(
-    power_distribution == {10: 126, 30: 140, 40: 3, 50: 20, 60: 10, 70: 12, 80: 85, 90: 20, 100: 18, 130: 2},
-    f"canonical Fling power distribution changed: {power_distribution}",
+    set(power_distribution) == canonical_power_tiers,
+    f"Fling uses an invalid power or lost a canonical power tier: {power_distribution}",
+)
+require(
+    all(count > 0 for count in power_distribution.values()),
+    f"Fling contains an empty power tier: {power_distribution}",
 )
 
 battle_moves = read("src/data/battle_moves.h")

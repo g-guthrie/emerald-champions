@@ -858,10 +858,14 @@ static void AnimDestinyBondWhiteShadow_Step(struct Sprite *sprite)
 void AnimTask_DestinyBondWhiteShadow(u8 taskId)
 {
     struct Task *task;
+    u8 moveTarget = MOVE_TARGET_USER;
     s16 battler;
     u8 spriteId;
     s16 baseX, baseY;
     s16 x, y;
+
+    if (gAnimMoveIndex < MOVES_COUNT)
+        moveTarget = gBattleMoves[gAnimMoveIndex].target;
 
     task = &gTasks[taskId];
     SetGpuReg(REG_OFFSET_BLDCNT, (BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL));
@@ -881,7 +885,10 @@ void AnimTask_DestinyBondWhiteShadow(u8 taskId)
         {
             if (battler != gBattleAnimAttacker
              && battler != (gBattleAnimAttacker ^ 2)
-             && IsBattlerSpriteVisible(battler))
+             && IsBattlerSpriteVisible(battler)
+             && (moveTarget == MOVE_TARGET_BOTH
+              || moveTarget == MOVE_TARGET_USER
+              || battler == gBattleAnimTarget))
             {
                 if (gAnimMoveIndex == MOVE_DARK_VOID)
                     spriteId = CreateSprite(&gDarkVoidBlackHoleTemplate, baseX, baseY, 55);   //dark void

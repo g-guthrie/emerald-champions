@@ -2607,7 +2607,8 @@ u8 CreateMonIcon(u16 species, void (*callback)(struct Sprite *), s16 x, s16 y, u
 
     spriteId = CreateMonIconSprite(&iconTemplate, x, y, subpriority);
 
-    UpdateMonIconFrame(&gSprites[spriteId]);
+    if (spriteId != MAX_SPRITES)
+        UpdateMonIconFrame(&gSprites[spriteId]);
 
     return spriteId;
 }
@@ -2629,7 +2630,8 @@ u8 CreateMonIconNoPersonality(u16 species, void (*callback)(struct Sprite *), s1
     iconTemplate.image = GetMonIconTiles(iconSpecies, 0);
     spriteId = CreateMonIconSprite(&iconTemplate, x, y, subpriority);
 
-    UpdateMonIconFrame(&gSprites[spriteId]);
+    if (spriteId != MAX_SPRITES)
+        UpdateMonIconFrame(&gSprites[spriteId]);
 
     return spriteId;
 }
@@ -2847,6 +2849,9 @@ static u8 CreateMonIconSprite(struct MonIconSpriteTemplate *iconTemplate, s16 x,
     };
 
     spriteId = CreateSprite(&spriteTemplate, x, y, subpriority);
+    if (spriteId == MAX_SPRITES)
+        return MAX_SPRITES;
+
     gSprites[spriteId].animPaused = TRUE;
     gSprites[spriteId].animBeginning = FALSE;
     gSprites[spriteId].images = (const struct SpriteFrameImage *)iconTemplate->image;

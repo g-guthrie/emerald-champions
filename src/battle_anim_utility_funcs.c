@@ -22,6 +22,9 @@ struct AnimStatsChangeData
 };
 
 static EWRAM_DATA struct AnimStatsChangeData *sAnimStatsChangeData = {0};
+static EWRAM_DATA u16 *sBackupPalBuffer = NULL;
+
+#define BACKUP_PAL_BUFFER_SIZE 0x2000
 
 static void StartBlendAnimSpriteColor(u8, u32);
 static void AnimTask_BlendSpriteColor_Step2(u8);
@@ -393,7 +396,21 @@ void InitStatsChangeAnimation(u8 taskId)
 {
     u8 i;
 
+    // This animation owns a single global work block until Step3. Do not
+    // replace a live owner or advance a task without its state.
+    if (sAnimStatsChangeData != NULL)
+    {
+        DestroyAnimVisualTask(taskId);
+        return;
+    }
+
     sAnimStatsChangeData = AllocZeroed(sizeof(struct AnimStatsChangeData));
+    if (sAnimStatsChangeData == NULL)
+    {
+        DestroyAnimVisualTask(taskId);
+        return;
+    }
+
     for (i = 0; i < 8; i++)
         sAnimStatsChangeData->data[i] = gBattleAnimArgs[i];
 
@@ -913,13 +930,40 @@ void AnimTask_GetFieldTerrain(u8 taskId)
 
 void AnimTask_AllocBackupPalBuffer(u8 taskId)
 {
-    gMonSpritesGfxPtr->buffer = AllocZeroed(0x2000);
+    if (gMonSpritesGfxPtr == NULL)
+    {
+        sBackupPalBuffer = NULL;
+        DestroyAnimVisualTask(taskId);
+        return;
+    }
+
+    if (sBackupPalBuffer != NULL && gMonSpritesGfxPtr->buffer != sBackupPalBuffer)
+        sBackupPalBuffer = NULL;
+
+    if (sBackupPalBuffer != NULL)
+    {
+        DestroyAnimVisualTask(taskId);
+        return;
+    }
+
+    // A non-NULL buffer without our ownership flag belongs to another
+    // animation. Refuse to overwrite it and leak its allocation.
+    if (gMonSpritesGfxPtr->buffer == NULL)
+    {
+        gMonSpritesGfxPtr->buffer = AllocZeroed(BACKUP_PAL_BUFFER_SIZE);
+        if (gMonSpritesGfxPtr->buffer != NULL)
+            sBackupPalBuffer = gMonSpritesGfxPtr->buffer;
+    }
     DestroyAnimVisualTask(taskId);
 }
 
 void AnimTask_FreeBackupPalBuffer(u8 taskId)
 {
-    FREE_AND_SET_NULL(gMonSpritesGfxPtr->buffer);
+    if (sBackupPalBuffer != NULL
+     && gMonSpritesGfxPtr != NULL
+     && gMonSpritesGfxPtr->buffer == sBackupPalBuffer)
+        TRY_FREE_AND_SET_NULL(gMonSpritesGfxPtr->buffer);
+    sBackupPalBuffer = NULL;
     DestroyAnimVisualTask(taskId);
 }
 
@@ -927,6 +971,16 @@ void AnimTask_CopyPalUnfadedToBackup(u8 taskId)
 {
     u32 selectedPalettes;
     int paletteIndex = 0;
+
+    if (sBackupPalBuffer == NULL
+     || gMonSpritesGfxPtr == NULL
+     || gMonSpritesGfxPtr->buffer != sBackupPalBuffer
+     || gBattleAnimArgs[1] < 0
+     || gBattleAnimArgs[1] >= BACKUP_PAL_BUFFER_SIZE / (16 * sizeof(u16)))
+    {
+        DestroyAnimVisualTask(taskId);
+        return;
+    }
 
     if (gBattleAnimArgs[0] == 0)
     {
@@ -954,6 +1008,16 @@ void AnimTask_CopyPalUnfadedFromBackup(u8 taskId)
 {
     u32 selectedPalettes;
     int paletteIndex = 0;
+
+    if (sBackupPalBuffer == NULL
+     || gMonSpritesGfxPtr == NULL
+     || gMonSpritesGfxPtr->buffer != sBackupPalBuffer
+     || gBattleAnimArgs[1] < 0
+     || gBattleAnimArgs[1] >= BACKUP_PAL_BUFFER_SIZE / (16 * sizeof(u16)))
+    {
+        DestroyAnimVisualTask(taskId);
+        return;
+    }
 
     if (gBattleAnimArgs[0] == 0)
     {

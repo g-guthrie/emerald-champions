@@ -62,7 +62,7 @@ void ResetTrainerHillResults(void);
 u8 GetTrainerHillOpponentClass(u16 trainerId);
 void GetTrainerHillTrainerName(u8 *dst, u16 trainerId);
 u8 GetTrainerHillTrainerFrontSpriteId(u16 trainerId);
-void InitTrainerHillBattleStruct(void);
+bool32 InitTrainerHillBattleStruct(void);
 void FreeTrainerHillBattleStruct(void);
 void CopyTrainerHillTrainerText(u8 which, u16 trainerId);
 bool8 InTrainerHillChallenge(void);

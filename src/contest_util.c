@@ -2555,22 +2555,47 @@ void ShowContestEntryMonPic(void)
 
     if (FindTaskIdByFunc(Task_ShowContestEntryMonPic) == TASK_NONE)
     {
-        AllocateMonSpritesGfx();
+        if (!TryAllocateMonSpritesGfx())
+            return;
         left = 10;
         top = 3;
         species = gContestMons[gSpecialVar_0x8006].species;
         personality = gContestMons[gSpecialVar_0x8006].personality;
         otId = gContestMons[gSpecialVar_0x8006].otId;
         taskId = CreateTask(Task_ShowContestEntryMonPic, 0x50);
+        if (taskId >= NUM_TASKS)
+        {
+            FreeMonSpritesGfx();
+            return;
+        }
         gTasks[taskId].data[0] = 0;
         gTasks[taskId].data[1] = species;
         HandleLoadSpecialPokePic(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites.ptr[1], species, personality);
 
         palette = GetMonSpritePalStructFromOtIdPersonality(species, otId, personality);
+        if (IndexOfSpritePaletteTag(palette->tag) != 0xFF)
+        {
+            DestroyTask(taskId);
+            FreeMonSpritesGfx();
+            return;
+        }
         LoadCompressedSpritePalette(palette);
+        if (IndexOfSpritePaletteTag(palette->tag) == 0xFF)
+        {
+            DestroyTask(taskId);
+            FreeMonSpritesGfx();
+            return;
+        }
         SetMultiuseSpriteTemplateToPokemon(species, 1);
         gMultiuseSpriteTemplate.paletteTag = palette->tag;
         spriteId = CreateSprite(&gMultiuseSpriteTemplate, (left + 1) * 8 + 32, (top * 8) + 40, 0);
+        if (spriteId == MAX_SPRITES)
+        {
+            FreeSpritePaletteByTag(palette->tag);
+            DestroyTask(taskId);
+            FreeMonSpritesGfx();
+            return;
+        }
 
         if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
         {
@@ -2612,6 +2637,13 @@ static void Task_ShowContestEntryMonPic(u8 taskId)
         break;
     case 1:
         task->data[5] = CreateWindowFromRect(10, 3, 8, 8);
+        if (task->data[5] == WINDOW_NONE)
+        {
+            DestroySpriteAndFreeResources(&gSprites[task->data[2]]);
+            FreeMonSpritesGfx();
+            DestroyTask(taskId);
+            return;
+        }
         SetStandardWindowBorderStyle(task->data[5], 1);
         task->data[0]++;
         break;

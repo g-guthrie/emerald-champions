@@ -620,8 +620,17 @@
 #define STRINGID_METEORBEAMCHARGING                   617
 #define STRINGID_HEATUPBEAK                           618
 #define STRINGID_ITEMMELTED                           619
+#define STRINGID_THETWOMOVESBECOMEONE                 620
+#define STRINGID_ARAINBOWAPPEAREDONSIDE               621
+#define STRINGID_THERAINBOWDISAPPEARED                622
+#define STRINGID_WAITINGFORPARTNERSMOVE               623
+#define STRINGID_SEAOFFIREENVELOPEDSIDE               624
+#define STRINGID_HURTBYTHESEAOFFIRE                   625
+#define STRINGID_THESEAOFFIREDISAPPEARED              626
+#define STRINGID_SWAMPENVELOPEDSIDE                   627
+#define STRINGID_THESWAMPDISAPPEARED                  628
 
-#define BATTLESTRINGS_COUNT                           620
+#define BATTLESTRINGS_COUNT                           629
 
 // The below IDs are all indexes into battle message tables,
 // used to determine which of a set of messages to print.

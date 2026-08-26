@@ -1700,7 +1700,15 @@ static void RecordedPlayerHandleIntroTrainerBallThrow(void)
         gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
 
     gBattleSpritesDataPtr->animationData->introAnimActive = TRUE;
-    gBattlerControllerFuncs[gActiveBattler] = RecordedPlayerDummy;
+    if (IsTaskIdValid(taskId))
+    {
+        gBattlerControllerFuncs[gActiveBattler] = RecordedPlayerDummy;
+    }
+    else
+    {
+        gTasks[taskId].data[1] = 24;
+        Task_StartSendOutAnim(taskId);
+    }
 }
 
 static void Task_StartSendOutAnim(u8 taskId)

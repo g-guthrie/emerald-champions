@@ -532,6 +532,11 @@ static const u32 sWinStreakFlags[] = {STREAK_PIKE_50, STREAK_PIKE_OPEN};
 // code
 void CallBattlePikeFunction(void)
 {
+    if (gSpecialVar_0x8004 >= ARRAY_COUNT(sBattlePikeFunctions))
+    {
+        gSpecialVar_Result = FALSE;
+        return;
+    }
     sBattlePikeFunctions[gSpecialVar_0x8004]();
 }
 

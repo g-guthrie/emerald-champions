@@ -3947,12 +3947,9 @@ void CalculateMonStats(struct Pokemon *mon)
         if (currentHP == 0 && oldMaxHP == 0)
             currentHP = newMaxHP;
         else if (currentHP != 0) {
-            // BUG: currentHP is unintentionally able to become <= 0 after the instruction below. This causes the pomeg berry glitch.
             currentHP += newMaxHP - oldMaxHP;
-            #ifdef BUGFIX
             if (currentHP <= 0)
                 currentHP = 1;
-            #endif
         }
         else
             return;
@@ -6941,24 +6938,8 @@ void MonGainEVs(struct Pokemon *mon, u16 defeatedSpecies)
     u8 powerItemBonus;
     u8 powerItemStat;
     int i, multiplier;
-    u8 stat;
-    u8 bonus;
 
     heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, 0);
-    if (heldItem == ITEM_ENIGMA_BERRY)
-    {
-        if (gMain.inBattle)
-            holdEffect = gEnigmaBerries[0].holdEffect;
-        else
-            holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
-    }
-    else
-    {
-        holdEffect = ItemId_GetHoldEffect(heldItem);
-    }
-
-    stat = ItemId_GetSecondaryId(heldItem);
-    bonus = ItemId_GetHoldEffectParam(heldItem);
 
     for (i = 0; i < NUM_STATS; i++)
     {
@@ -6966,8 +6947,6 @@ void MonGainEVs(struct Pokemon *mon, u16 defeatedSpecies)
         totalEVs += evs[i];
     }
 
-    heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, 0);
-    
     if (heldItem == ITEM_ENIGMA_BERRY)
     {
         if (gMain.inBattle)
@@ -6978,9 +6957,9 @@ void MonGainEVs(struct Pokemon *mon, u16 defeatedSpecies)
     else
     {
         holdEffect = ItemId_GetHoldEffect(heldItem);
-        powerItemStat = ItemId_GetSecondaryId(heldItem);
     }
 
+    powerItemStat = ItemId_GetSecondaryId(heldItem);
     powerItemBonus = ItemId_GetHoldEffectParam(heldItem);
 
     for (i = 0; i < NUM_STATS; i++)

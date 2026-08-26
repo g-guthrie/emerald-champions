@@ -2090,11 +2090,8 @@ static void InitStartingPosData(void)
 
 static void SetMonIconTransparency(void)
 {
-    if (sStorage->boxOption == OPTION_MOVE_ITEMS)
-    {
-        SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL);
-        SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(7, 11));
-    }
+    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL);
+    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(7, 11));
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_1D_MAP);
 }
 
@@ -8609,10 +8606,7 @@ static void MultiMove_GetMonsFromSelection(void)
         for (j = sMultiMove->minColumn; j < columnCount; j++)
         {
             struct BoxPokemon *boxMon = GetBoxedMonPtr(boxId, boxPosition);
-            // UB: possible null dereference
-#ifdef UBFIX
             if (boxMon != NULL)
-#endif
                 sMultiMove->boxMons[monArrayId] = *boxMon;
 
             monArrayId++;
@@ -9555,9 +9549,7 @@ u32 GetBoxMonLevelAt(u8 boxId, u8 boxPosition)
 
     if (boxId < TOTAL_BOXES_COUNT && boxPosition < IN_BOX_COUNT && GetBoxMonData(&gPokemonStoragePtr->boxes[boxId][boxPosition], MON_DATA_SANITY_HAS_SPECIES))
         lvl = GetLevelFromBoxMonExp(&gPokemonStoragePtr->boxes[boxId][boxPosition]);
-#ifdef BUGFIX
     else
-#endif
         lvl = 0;
 
     return lvl;

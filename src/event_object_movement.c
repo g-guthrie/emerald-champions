@@ -2300,18 +2300,10 @@ static u8 CameraObjectGetFollowedSpriteId(void)
 
 void CameraObjectReset2(void)
 {
-    // UB: Possible null dereference
-#ifdef UBFIX
-    struct Sprite *camera;
+    struct Sprite *camera = FindCameraSprite();
 
-    camera = FindCameraSprite();
     if (camera != NULL)
-    {
         camera->sState = 2;
-    }
-#else
-    FindCameraSprite()->sState = 2;
-#endif // UBFIX
 }
 
 u8 CopySprite(struct Sprite *sprite, s16 x, s16 y, u8 subpriority)
@@ -2323,6 +2315,7 @@ u8 CopySprite(struct Sprite *sprite, s16 x, s16 y, u8 subpriority)
         if (!gSprites[i].inUse)
         {
             gSprites[i] = *sprite;
+            CopySpriteResourceTags(&gSprites[i], sprite);
             gSprites[i].x = x;
             gSprites[i].y = y;
             gSprites[i].subpriority = subpriority;
@@ -2341,6 +2334,7 @@ u8 CreateCopySpriteAt(struct Sprite *sprite, s16 x, s16 y, u8 subpriority)
         if (!gSprites[i].inUse)
         {
             gSprites[i] = *sprite;
+            CopySpriteResourceTags(&gSprites[i], sprite);
             gSprites[i].x = x;
             gSprites[i].y = y;
             gSprites[i].subpriority = subpriority;
@@ -2375,11 +2369,8 @@ const u8 *GetObjectEventScriptPointerByObjectEventId(u8 objectEventId)
 static u16 GetObjectEventFlagIdByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
 {
     struct ObjectEventTemplate *obj = GetObjectEventTemplateByLocalIdAndMap(localId, mapNum, mapGroup);
-#ifdef UBFIX
-    // BUG: The function may return NULL, and attempting to read from NULL may freeze the game using modern compilers.
     if (obj == NULL)
         return 0;
-#endif // UBFIX
     return obj->flagId;
 }
 

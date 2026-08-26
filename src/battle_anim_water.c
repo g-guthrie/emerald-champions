@@ -778,6 +778,12 @@ static void AnimAuroraBeamRings_Step(struct Sprite *sprite)
 // Updates the palette on the rainbow rings used in Aurora Beam to make them appear to be rotating counterclockwise
 void AnimTask_RotateAuroraRingColors(u8 taskId)
 {
+    if (!TryLoadBattleAnimPalette(ANIM_TAG_RAINBOW_RINGS))
+    {
+        DestroyAnimVisualTask(taskId);
+        return;
+    }
+
     gTasks[taskId].data[0] = gBattleAnimArgs[0];
     gTasks[taskId].data[2] = IndexOfSpritePaletteTag(ANIM_TAG_RAINBOW_RINGS) * 16 + 256;
     gTasks[taskId].func = AnimTask_RotateAuroraRingColors_Step;
@@ -1453,14 +1459,14 @@ static void AnimTask_WaterSpoutRain_Step(u8 taskId)
             gBattleAnimArgs[1] = 0;
             gBattleAnimArgs[2] = 12;
             taskId2 = CreateTask(AnimTask_HorizontalShake, 80);
-            if (taskId2 != TASK_NONE)
+            if (taskId2 < NUM_TASKS)
             {
                 gTasks[taskId2].func(taskId2);
                 gAnimVisualTaskCount++;
             }
             gBattleAnimArgs[0] = ANIM_DEF_PARTNER;
             taskId2 = CreateTask(AnimTask_HorizontalShake, 80);
-            if (taskId2 != TASK_NONE)
+            if (taskId2 < NUM_TASKS)
             {
                 gTasks[taskId2].func(taskId2);
                 gAnimVisualTaskCount++;

@@ -835,6 +835,21 @@ static u32 HandleMoveInputUnused(void)
     return var;
 }
 
+static u8 SwapMoveSlotFlags(u8 flags, u8 slot1, u8 slot2)
+{
+    u8 slot1Mask = gBitTable[slot1];
+    u8 slot2Mask = gBitTable[slot2];
+    bool8 slot1Set = (flags & slot1Mask) != 0;
+    bool8 slot2Set = (flags & slot2Mask) != 0;
+
+    flags &= ~(slot1Mask | slot2Mask);
+    if (slot1Set)
+        flags |= slot2Mask;
+    if (slot2Set)
+        flags |= slot1Mask;
+    return flags;
+}
+
 static void HandleMoveSwitching(void)
 {
     u8 perMovePPBonuses[MAX_MON_MOVES];
@@ -863,11 +878,18 @@ static void HandleMoveSwitching(void)
             moveInfo->maxPp[gMoveSelectionCursor[gActiveBattler]] = moveInfo->maxPp[gMultiUsePlayerCursor];
             moveInfo->maxPp[gMultiUsePlayerCursor] = i;
 
-            if (gDisableStructs[gActiveBattler].mimickedMoves & gBitTable[gMoveSelectionCursor[gActiveBattler]])
-            {
-                gDisableStructs[gActiveBattler].mimickedMoves &= (~gBitTable[gMoveSelectionCursor[gActiveBattler]]);
-                gDisableStructs[gActiveBattler].mimickedMoves |= gBitTable[gMultiUsePlayerCursor];
-            }
+            // These histories describe the move occupying each slot, so they
+            // must travel with moves reordered by SELECT. In particular,
+            // Last Resort's used-move history cannot remain attached to the
+            // old slot. Swap both directions, including the Mimic history.
+            gDisableStructs[gActiveBattler].mimickedMoves = SwapMoveSlotFlags(
+                gDisableStructs[gActiveBattler].mimickedMoves,
+                gMoveSelectionCursor[gActiveBattler],
+                gMultiUsePlayerCursor);
+            gDisableStructs[gActiveBattler].usedMoves = SwapMoveSlotFlags(
+                gDisableStructs[gActiveBattler].usedMoves,
+                gMoveSelectionCursor[gActiveBattler],
+                gMultiUsePlayerCursor);
 
             MoveSelectionDisplayMoveNames();
 
@@ -2940,6 +2962,11 @@ static void PlayerHandleExpUpdate(void)
         GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES);  // Unused return value.
         expPointsToGive = T1_READ_32(&gBattleResources->bufferA[gActiveBattler][2]);
         taskId = CreateTask(Task_GiveExpToMon, 10);
+        if (!IsTaskIdValid(taskId))
+        {
+            PlayerBufferExecCompleted();
+            return;
+        }
         gTasks[taskId].tExpTask_monId = monId;
         gTasks[taskId].tExpTask_gainedExp_1 = expPointsToGive;
         gTasks[taskId].tExpTask_gainedExp_2 = expPointsToGive >> 16;
@@ -3172,7 +3199,15 @@ static void PlayerHandleIntroTrainerBallThrow(void)
         gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
 
     gBattleSpritesDataPtr->animationData->introAnimActive = TRUE;
-    gBattlerControllerFuncs[gActiveBattler] = BattleControllerDummy;
+    if (IsTaskIdValid(taskId))
+    {
+        gBattlerControllerFuncs[gActiveBattler] = BattleControllerDummy;
+    }
+    else
+    {
+        gTasks[taskId].tStartTimer = 31;
+        Task_StartSendOutAnim(taskId);
+    }
 }
 
 void SpriteCB_FreePlayerSpriteLoadMonSprite(struct Sprite *sprite)

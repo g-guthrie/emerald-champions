@@ -367,16 +367,28 @@ void NewGameInitPCItems(void)
 
 void BedroomPC(void)
 {
+    u8 taskId;
+
     sTopMenuOptionOrder = sBedroomPC_OptionOrder;
     sTopMenuNumOptions = NUM_BEDROOM_PC_OPTIONS;
-    DisplayItemMessageOnField(CreateTask(TaskDummy, 0), gText_WhatWouldYouLike, InitPlayerPCMenu);
+    taskId = CreateTask(TaskDummy, 0);
+    if (IsTaskIdValid(taskId))
+        DisplayItemMessageOnField(taskId, gText_WhatWouldYouLike, InitPlayerPCMenu);
+    else
+        EnableBothScriptContexts();
 }
 
 void PlayerPC(void)
 {
+    u8 taskId;
+
     sTopMenuOptionOrder = sPlayerPC_OptionOrder;
     sTopMenuNumOptions = NUM_PLAYER_PC_OPTIONS;
-    DisplayItemMessageOnField(CreateTask(TaskDummy, 0), gText_WhatWouldYouLike, InitPlayerPCMenu);
+    taskId = CreateTask(TaskDummy, 0);
+    if (IsTaskIdValid(taskId))
+        DisplayItemMessageOnField(taskId, gText_WhatWouldYouLike, InitPlayerPCMenu);
+    else
+        EnableBothScriptContexts();
 }
 
 #define tUsedSlots  data[1]
@@ -571,9 +583,13 @@ void CB2_PlayerPCExitBagMenu(void)
 
 static void ItemStorage_ReshowAfterBagMenu(void)
 {
+    u8 taskId;
+
     LoadMessageBoxAndBorderGfx();
     DrawDialogueFrame(0, 1);
-    InitItemStorageMenu(CreateTask(ItemStorage_HandleReturnToProcessInput, 0), 1);
+    taskId = CreateTask(ItemStorage_HandleReturnToProcessInput, 0);
+    if (IsTaskIdValid(taskId))
+        InitItemStorageMenu(taskId, 1);
     FadeInFromBlack();
 }
 

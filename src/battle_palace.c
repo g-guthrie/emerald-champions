@@ -78,6 +78,11 @@ static const u32 sWinStreakMasks[][2] =
 // code
 void CallBattlePalaceFunction(void)
 {
+    if (gSpecialVar_0x8004 >= ARRAY_COUNT(sBattlePalaceFunctions))
+    {
+        gSpecialVar_Result = FALSE;
+        return;
+    }
     sBattlePalaceFunctions[gSpecialVar_0x8004]();
 }
 

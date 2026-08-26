@@ -43,6 +43,8 @@ def main() -> None:
         "[11] = AI_HelpPartner",
         "effect == EFFECT_FOLLOW_ME && (partnerChoosingSetup || PartnerHasSetupMove(partner))",
         "score += partnerChoosingSetup ? 12 : 6",
+        "move == MOVE_ROUND && HasMove(BATTLE_PARTNER(battlerAtk), MOVE_ROUND)",
+        "AI_DATA->partnerMove == MOVE_ROUND ? 10 : 4",
         "partnerAbility == ABILITY_DANCER && TestMoveFlags(move, FLAG_DANCE)",
         "effect == EFFECT_GUARD_SPLIT",
         "effect == EFFECT_INSTRUCT",
@@ -111,7 +113,7 @@ def main() -> None:
         )
         if not (
             combo_tags & set(teams[trainer_id]["synergy_tags"])
-            or moves & {"MOVE_BEAT_UP", "MOVE_FROST_BREATH", "MOVE_SURF", "MOVE_SKILL_SWAP"}
+            or moves & {"MOVE_BEAT_UP", "MOVE_FROST_BREATH", "MOVE_SURF", "MOVE_SKILL_SWAP", "MOVE_ROUND"}
             or "ABILITY_COMMANDER" in abilities
             or native_motor_drive_circuit
         ):

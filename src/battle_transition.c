@@ -948,6 +948,12 @@ void BattleTransition_Start(u8 transitionId)
 bool8 IsBattleTransitionDone(void)
 {
     u8 taskId = FindTaskIdByFunc(Task_BattleTransitionMain);
+
+    if (taskId == TASK_NONE)
+    {
+        FREE_AND_SET_NULL(sTransitionStructPtr);
+        return TRUE;
+    }
     if (gTasks[taskId].tTransitionDone)
     {
         DestroyTask(taskId);
@@ -4327,9 +4333,6 @@ static bool8 Phase2_FrontierSquaresScroll_Func5(struct Task *task)
 
     DestroyTask(FindTaskIdByFunc(task->func));
 
-#ifndef UBFIX
-    task->tState++; // UB: changing value of a destroyed task
-#endif
     return FALSE;
 }
 

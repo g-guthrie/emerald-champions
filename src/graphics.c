@@ -1486,6 +1486,14 @@ const u32 gBattleAnimSpritePal_SteelBeam[] = INCBIN_U32("graphics/battle_anims/s
 const u32 gBattleAnimSpritePal_Poltergeist[] = INCBIN_U32("graphics/battle_anims/sprites/new/poltergeist.gbapal.lz");
 const u32 gBattleAnimBgPalette_SteelBeam[] = INCBIN_U32("graphics/battle_anims/backgrounds/new/steel_beam_bg.gbapal.lz");
 
+// Pledge combination side effects.
+const u32 gBattleAnimBgImage_Rainbow[] = INCBIN_U32("graphics/battle_anims/backgrounds/rainbow.4bpp.lz");
+const u32 gBattleAnimBgPalette_Rainbow[] = INCBIN_U32("graphics/battle_anims/backgrounds/rainbow.gbapal.lz");
+const u32 gBattleAnimBgTilemap_Rainbow[] = INCBIN_U32("graphics/battle_anims/backgrounds/rainbow.bin.lz");
+const u32 gBattleAnimBgImage_Swamp[] = INCBIN_U32("graphics/battle_anims/backgrounds/swampswizzle.4bpp.lz");
+const u32 gBattleAnimBgPalette_Swamp[] = INCBIN_U32("graphics/battle_anims/backgrounds/swampswizzle.gbapal.lz");
+const u32 gBattleAnimBgTilemap_Swamp[] = INCBIN_U32("graphics/battle_anims/backgrounds/swampswizzle.bin.lz");
+
 // misc
 const u32 gUnknown_E6BC04[] = INCBIN_U32("graphics/unknown/unknown_E6BC04.bin.lz");
 

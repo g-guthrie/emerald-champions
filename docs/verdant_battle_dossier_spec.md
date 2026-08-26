@@ -37,9 +37,19 @@ Every encounter advances through these states in order:
 5. **source-implemented** — the approved design is represented in game source.
 6. **static-validated** — legality, format, scripts, AI flags, dialogue width,
    branches, guide, and source contracts pass.
-7. **runtime-playtested** — representative real-ROM tests establish actual
+7. **source-closed** — design, source, guide, and static verification are
+   complete, so chronological implementation may advance while runtime status
+   remains explicit.
+8. **runtime-playtested** — representative real-ROM tests establish actual
    behavior and observed difficulty.
-8. **closed** — every reachable variant passes and no required work remains.
+9. **release-closed** — every reachable variant passes and no required work
+   remains.
+
+For compatibility, chronological sequence and bespoke-design records serialize
+`source-closed` as `status: closed`. That status never implies observed
+difficulty or a real-ROM playtest; `playtest_status` and
+`observed_difficulty` remain authoritative. `campaign_complete` cannot become
+true until the later runtime and release gates are satisfied.
 
 `design-complete` must never be described as implemented, validated in the ROM,
 or playtested. `target_difficulty` is an intention; `observed_difficulty` remains
@@ -77,11 +87,13 @@ Each dossier contains the following sections.
 
 - Previous eight-to-ten physical encounters when chronological context exists.
 - Nearby protected boss mechanics and future reveals.
-- Species, family, Mega, legendary, item, move, tempo, and player-question
-  overlap.
+- Cumulative used-species history plus rolling species, family, Mega,
+  legendary, item, move, tempo, and player-question overlap.
 - Historic-team reservations and whether this encounter spends or preserves
   them.
-- Any deliberate repetition and its written justification.
+- Any deliberate repeat and why this encounter earns it.
+- Outstanding legendary, mythical, Mega, rare-form, story, or historic-team
+  showcase commitments, tracked separately from ordinary usage.
 
 ### Competitive research
 
@@ -105,8 +117,10 @@ and expands only the strongest candidates.
 - Exact party order and intended leads/reserve sequence.
 - For every Pokémon: species/form, level offset, item, ability and slot, spread,
   four moves, role, and Mega candidacy.
-- Exactly one usable Mega at most. Tera, Z-Moves, Dynamax, Gigantamax, and
-  Primal Reversion are never imported as Verdant gimmicks.
+- Exactly one usable Mega at most. Tera, Z-Moves, Dynamax, and Gigantamax are
+  never imported as Verdant gimmicks. Primal Reversion is supported separately
+  for intentional Groudon/Kyogre boss designs and does not consume the Mega
+  slot; every active Primal must be source-legal and recorded explicitly.
 - AI flags, reusable AI requirements, custom state-machine requirements, and
   explicitly forbidden behaviors.
 
@@ -175,6 +189,6 @@ The marquee order is:
 4. Rival milestones, Steven, rematches, and superbosses.
 5. Campaign-wide collision and coverage review.
 
-Exact source implementation then resumes at Battle 29 and advances through
-every required, optional, paired, branched, rematch, and postgame encounter in
-canonical order.
+Exact source implementation continues from the unique sequence entry marked
+`next` and advances through every required, optional, paired, branched,
+rematch, and postgame encounter in canonical order.

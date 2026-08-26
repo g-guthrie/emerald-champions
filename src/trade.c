@@ -1,6 +1,7 @@
 #include "global.h"
 #include "malloc.h"
 #include "battle_anim.h"
+#include "battle_gfx_sfx_util.h"
 #include "battle_interface.h"
 #include "bg.h"
 #include "cable_club.h"
@@ -2794,7 +2795,15 @@ void CB2_LinkTrade(void)
             CloseLink();
         }
         sTradeData = AllocZeroed(sizeof(*sTradeData));
-        AllocateMonSpritesGfx();
+        if (sTradeData == NULL || !TryAllocateMonSpritesGfx())
+        {
+            FREE_AND_SET_NULL(sTradeData);
+            if (gMain.savedCallback != NULL)
+                SetMainCallback2(gMain.savedCallback);
+            else
+                SetMainCallback2(CB2_ReturnToField);
+            return;
+        }
         ResetTasks();
         ResetSpriteData();
         FreeAllSpritePalettes();
@@ -2965,7 +2974,12 @@ static void CB2_InGameTrade(void)
         gLinkPlayers[0].language = GAME_LANGUAGE;
         gLinkPlayers[1].language = GetMonData(&gEnemyParty[0], MON_DATA_LANGUAGE);
         sTradeData = AllocZeroed(sizeof(*sTradeData));
-        AllocateMonSpritesGfx();
+        if (sTradeData == NULL || !TryAllocateMonSpritesGfx())
+        {
+            FREE_AND_SET_NULL(sTradeData);
+            SetMainCallback2(CB2_ReturnToField);
+            return;
+        }
         ResetTasks();
         ResetSpriteData();
         FreeAllSpritePalettes();

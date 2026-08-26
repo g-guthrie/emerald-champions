@@ -756,7 +756,7 @@ const u8 sTVSecretBaseSecretsActions[NUM_SECRET_BASE_FLAGS] =
     SBSECRETS_STATE_USED_SLIDE,             // SECRET_BASE_USED_SLIDE
     SBSECRETS_STATE_DECLINED_SLIDE,         // SECRET_BASE_DECLINED_SLIDE
     SBSECRETS_STATE_USED_JUMP_MAT,          // SECRET_BASE_USED_JUMP_MAT
-    SBSECRETS_NUM_STATES                    // SECRET_BASE_UNUSED_FLAG. Odd that this is included, if it were used it would overflow sTVSecretBaseSecretsTextGroup
+    SBSECRETS_STATE_INTRO,                  // SECRET_BASE_UNUSED_FLAG
 };
 
 void ClearTVShowData(void)
@@ -6545,7 +6545,7 @@ u8 SecretBaseSecrets_GetNumActionsTaken(TVShow *show)
     u8 i;
     u8 flagsSet;
 
-    for (i = 0, flagsSet = 0; i < NUM_SECRET_BASE_FLAGS; i++)
+    for (i = 0, flagsSet = 0; i < ARRAY_COUNT(sTVSecretBaseSecretsActions) - 1; i++)
     {
         if ((show->secretBaseSecrets.flags >> i) & 1)
             flagsSet++;
@@ -6558,7 +6558,7 @@ static u8 SecretBaseSecrets_GetStateByFlagNumber(TVShow *show, u8 flagId)
     u8 i;
     u8 flagsSet;
 
-    for (i = 0, flagsSet = 0; i < NUM_SECRET_BASE_FLAGS; i++)
+    for (i = 0, flagsSet = 0; i < ARRAY_COUNT(sTVSecretBaseSecretsActions) - 1; i++)
     {
         if ((show->secretBaseSecrets.flags >> i) & 1)
         {
@@ -6686,10 +6686,12 @@ static void DoTVShowSecretBaseSecrets(void)
         else
             sTVShowState = SBSECRETS_STATE_HIT_CUSHION;
         break;
-    case SBSECRETS_STATE_HIT_CUSHION ... SBSECRETS_NUM_STATES:
+    case SBSECRETS_STATE_HIT_CUSHION ... SBSECRETS_NUM_STATES - 1:
         sTVShowState = show->secretBaseSecrets.savedState;
         break;
     }
+    if (state >= ARRAY_COUNT(sTVSecretBaseSecretsTextGroup))
+        state = SBSECRETS_STATE_INTRO;
     ShowFieldMessage(sTVSecretBaseSecretsTextGroup[state]);
 }
 

@@ -1417,8 +1417,24 @@ static void Task_WaitForBattleTowerLinkSave(u8 taskId)
 void SaveForBattleTowerLink(void)
 {
     u8 taskId = CreateTask(Task_LinkSave, 5);
+    u8 waitTaskId;
+
+    if (!IsTaskIdValid(taskId))
+    {
+        EnableBothScriptContexts();
+        return;
+    }
+
+    waitTaskId = CreateTask(Task_WaitForBattleTowerLinkSave, 6);
+    if (!IsTaskIdValid(waitTaskId))
+    {
+        DestroyTask(taskId);
+        EnableBothScriptContexts();
+        return;
+    }
+
     gTasks[taskId].tPartialSave = TRUE;
-    gTasks[CreateTask(Task_WaitForBattleTowerLinkSave, 6)].data[1] = taskId;
+    gTasks[waitTaskId].data[1] = taskId;
 }
 
 #undef tPartialSave

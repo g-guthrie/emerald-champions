@@ -120,6 +120,7 @@ enum
 #define MAX_SEARCH_PARAM_CURSOR_POS  (MAX_SEARCH_PARAM_ON_SCREEN - 1)
 
 #define MAX_MONS_ON_SCREEN 4
+#define MAX_POKEDEX_AUX_SPRITES 30
 
 #define LIST_SCROLL_STEP         16
 
@@ -198,6 +199,8 @@ struct PokedexView
     u16 seenCount;
     u16 ownCount;
     u16 monSpriteIds[MAX_MONS_ON_SCREEN];
+    u8 auxSpriteIds[MAX_POKEDEX_AUX_SPRITES];
+    u8 numAuxSprites;
     u8 typeIconSpriteIds[2]; //HGSS_Ui
     u16 moveSelected; //HGSS_Ui
     u8 moveMax; //HGSS_Ui
@@ -365,6 +368,9 @@ static void Task_HandleEvolutionScreenInput(u8 taskId);
 static void Task_SwitchScreensFromEvolutionScreen(u8 taskId);
 static void Task_ExitEvolutionScreen(u8 taskId);
 static u8 PrintEvolutionTargetSpeciesAndMethod(u8 taskId, u16 species, u8 depth, u8 depth_i);
+static void ResetPokedexAuxSprites(void);
+static void TrackPokedexAuxSprite(u8 spriteId);
+static void DestroyPokedexAuxSprites(void);
 //Stat bars on scrolling screens
 static void TryDestroyStatBars(void);
 static void TryDestroyStatBarsBg(void);
@@ -5001,11 +5007,7 @@ static void UnusedPrintMonName(u8 windowId, const u8* name, u8 left, u8 top)
         ;
     for (i = 0; i < nameLength; i++)
         str[ARRAY_COUNT(str) - nameLength + i] = name[i];
-#ifdef UBFIX
     str[ARRAY_COUNT(str) - 1] = EOS;
-#else
-    str[ARRAY_COUNT(str)] = EOS;
-#endif
     PrintInfoSubMenuText(windowId, str, left, top);
 }
 
@@ -7417,13 +7419,14 @@ static void Task_LoadEvolutionScreen(u8 taskId)
                 gTasks[taskId].data[4] = CreateMonIcon(NationalPokedexNumToSpecies(sPokedexListItem->dexNum), SpriteCB_MonIcon, 18, 31, 4, 0); //Create pokemon sprite
                 EvoFormsPage_PrintAToggleUpdownEvos(); //HGSS_Ui Navigation buttons
             #endif
-            gSprites[gTasks[taskId].data[4]].oam.priority = 0;
+            if (gTasks[taskId].data[4] < MAX_SPRITES)
+                gSprites[gTasks[taskId].data[4]].oam.priority = 0;
         }
         gMain.state++;
         break;
     case 4:
         //Print evo info and icons
-        gTasks[taskId].data[3] = 0;
+        ResetPokedexAuxSprites();
         PrintEvolutionTargetSpeciesAndMethod(taskId, NationalPokedexNumToSpecies(sPokedexListItem->dexNum), 0, 0);
         gMain.state++;
         break;
@@ -7514,9 +7517,37 @@ static void Task_HandleEvolutionScreenInput(u8 taskId)
         }
     }
 }
+static void ResetPokedexAuxSprites(void)
+{
+    sPokedexView->numAuxSprites = 0;
+}
+
+static void TrackPokedexAuxSprite(u8 spriteId)
+{
+    if (spriteId >= MAX_SPRITES)
+        return;
+
+    if (sPokedexView->numAuxSprites < ARRAY_COUNT(sPokedexView->auxSpriteIds))
+        sPokedexView->auxSpriteIds[sPokedexView->numAuxSprites++] = spriteId;
+    else
+        FreeAndDestroyMonIconSprite(&gSprites[spriteId]);
+}
+
+static void DestroyPokedexAuxSprites(void)
+{
+    u8 i;
+
+    for (i = 0; i < sPokedexView->numAuxSprites; i++)
+        FreeAndDestroyMonIconSprite(&gSprites[sPokedexView->auxSpriteIds[i]]);
+    sPokedexView->numAuxSprites = 0;
+}
+
 static void handleTargetSpeciesPrint(u8 taskId, u16 targetSpecies, u8 base_x, u8 base_y, u8 base_y_offset, u8 base_i)
 {
     bool8 seen = GetSetPokedexFlag(SpeciesToNationalPokedexNum(targetSpecies), FLAG_GET_SEEN);
+    u8 spriteId;
+
+    (void)taskId;
 
     if (seen || !HGSS_HIDE_UNSEEN_EVOLUTION_NAMES)
         StringCopy(gStringVar3, gSpeciesNames[targetSpecies]); //evolution mon name
@@ -7525,16 +7556,20 @@ static void handleTargetSpeciesPrint(u8 taskId, u16 targetSpecies, u8 base_x, u8
     StringExpandPlaceholders(gStringVar3, gText_EVO_Name); //evolution mon name
     PrintInfoScreenTextSmall(gStringVar3, base_x, base_y + base_y_offset*base_i); //evolution mon name
 
-    if(base_i < 6)
+    if (base_i < 6)
     {
         LoadMonIconPalette(targetSpecies); //Loads pallete for current mon
         #ifndef POKEMON_EXPANSION
-            gTasks[taskId].data[4+base_i] = CreateMonIcon(targetSpecies, SpriteCB_MonIcon, 50 + 32*base_i, 31, 4, 0, TRUE); //Create pokemon sprite
+            spriteId = CreateMonIcon(targetSpecies, SpriteCB_MonIcon, 50 + 32*base_i, 31, 4, 0, TRUE); //Create pokemon sprite
         #endif
         #ifdef POKEMON_EXPANSION
-            gTasks[taskId].data[4+base_i] = CreateMonIcon(targetSpecies, SpriteCB_MonIcon, 50 + 32*base_i, 31, 4, 0); //Create pokemon sprite
+            spriteId = CreateMonIcon(targetSpecies, SpriteCB_MonIcon, 50 + 32*base_i, 31, 4, 0); //Create pokemon sprite
         #endif
-        gSprites[gTasks[taskId].data[4+base_i]].oam.priority = 0;
+        if (spriteId < MAX_SPRITES)
+        {
+            gSprites[spriteId].oam.priority = 0;
+            TrackPokedexAuxSprite(spriteId);
+        }
     }
 }
 static void CreateCaughtBallEvolutionScreen(u16 targetSpecies, u8 x, u8 y, u16 unused)
@@ -7579,12 +7614,13 @@ static u8 PrintEvolutionTargetSpeciesAndMethod(u8 taskId, u16 species, u8 depth,
                 times += 1;
         #endif
         #ifdef POKEMON_EXPANSION
-            if(gEvolutionTable[species][i].method != 0 && gEvolutionTable[species][i].method != EVO_MEGA_EVOLUTION)
+            if (gEvolutionTable[species][i].method != 0
+             && gEvolutionTable[species][i].method != EVO_MEGA_EVOLUTION
+             && gEvolutionTable[species][i].method != EVO_MOVE_MEGA_EVOLUTION
+             && gEvolutionTable[species][i].method != EVO_PRIMAL_REVERSION)
                 times += 1;
         #endif
     }
-    gTasks[taskId].data[3] = times;
-
     //If there are no evolutions print text
     if (times == 0 && depth == 0)
     {
@@ -7880,15 +7916,12 @@ static u8 PrintEvolutionTargetSpeciesAndMethod(u8 taskId, u16 species, u8 depth,
 }
 static void Task_SwitchScreensFromEvolutionScreen(u8 taskId)
 {
-    u8 i;
     if (!gPaletteFade.active)
     {
         FreeMonIconPalettes();                                          //Destroy pokemon icon sprite
-        FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].data[4]]); //Destroy pokemon icon sprite
-        for (i = 1; i <= gTasks[taskId].data[3]; i++)
-        {
-            FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].data[4+i]]); //Destroy pokemon icon sprite
-        }
+        if (gTasks[taskId].data[4] < MAX_SPRITES)
+            FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].data[4]]); //Destroy pokemon icon sprite
+        DestroyPokedexAuxSprites();
         FreeAndDestroyMonPicSprite(gTasks[taskId].tMonSpriteId);
 
         switch (sPokedexView->screenSwitchState)
@@ -7912,15 +7945,12 @@ static void Task_SwitchScreensFromEvolutionScreen(u8 taskId)
 }
 static void Task_ExitEvolutionScreen(u8 taskId)
 {
-    u8 i;
     if (!gPaletteFade.active)
     {
         FreeMonIconPalettes();                                          //Destroy pokemon icon sprite
-        FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].data[4]]); //Destroy pokemon icon sprite
-        for (i = 1; i <= gTasks[taskId].data[3]; i++)
-        {
-            FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].data[4+i]]); //Destroy pokemon icon sprite
-        }
+        if (gTasks[taskId].data[4] < MAX_SPRITES)
+            FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].data[4]]); //Destroy pokemon icon sprite
+        DestroyPokedexAuxSprites();
         FreeAndDestroyMonPicSprite(gTasks[taskId].tMonSpriteId);
 
         FreeInfoScreenWindowAndBgBuffers();
@@ -8179,14 +8209,15 @@ static void Task_LoadFormsScreen(u8 taskId)
             FreeMonIconPalettes(); //Free space for new pallete
             LoadMonIconPalette(NationalPokedexNumToSpecies(sPokedexListItem->dexNum)); //Loads pallete for current mon
             gTasks[taskId].data[4] = CreateMonIcon(NationalPokedexNumToSpecies(sPokedexListItem->dexNum), SpriteCB_MonIcon, 18, 31, 4, 0); //Create pokemon sprite
-            gSprites[gTasks[taskId].data[4]].oam.priority = 0;
+            if (gTasks[taskId].data[4] < MAX_SPRITES)
+                gSprites[gTasks[taskId].data[4]].oam.priority = 0;
         }
         EvoFormsPage_PrintAToggleUpdownEvos(); //HGSS_Ui Navigation buttons
         gMain.state++;
         break;
     case 4:
         //Print form icons
-        gTasks[taskId].data[3] = 0;
+        ResetPokedexAuxSprites();
         PrintForms(taskId, NationalPokedexNumToSpecies(sPokedexListItem->dexNum));
         gMain.state++;
         break;
@@ -8257,6 +8288,7 @@ static void PrintForms(u8 taskId, u16 species)
 {
     int i;
     u16 speciesForm;
+    u8 spriteId;
 
 
     bool8 left = TRUE;
@@ -8267,6 +8299,8 @@ static void PrintForms(u8 taskId, u16 species)
     u8 base_i = 0;
     u8 times = 0;
     u8 y_offset_icons = 0; //For unown only
+
+    (void)taskId;
 
     if (species == SPECIES_UNOWN)
         y_offset_icons = 8;
@@ -8285,17 +8319,20 @@ static void PrintForms(u8 taskId, u16 species)
             times += 1;
             LoadMonIconPalette(speciesForm); //Loads pallete for current mon
             if (times < 7)
-                gTasks[taskId].data[4+times] = CreateMonIcon(speciesForm, SpriteCB_MonIcon, 52 + 34*(times-1), 31, 4, 0); //Create pokemon sprite
+                spriteId = CreateMonIcon(speciesForm, SpriteCB_MonIcon, 52 + 34*(times-1), 31, 4, 0); //Create pokemon sprite
             else if (times < 14)
-                gTasks[taskId].data[4+times] = CreateMonIcon(speciesForm, SpriteCB_MonIcon, 18 + 34*(times-7), 70 - y_offset_icons, 4, 0); //Create pokemon sprite
+                spriteId = CreateMonIcon(speciesForm, SpriteCB_MonIcon, 18 + 34*(times-7), 70 - y_offset_icons, 4, 0); //Create pokemon sprite
             else if (times < 21)
-                gTasks[taskId].data[4+times] = CreateMonIcon(speciesForm, SpriteCB_MonIcon, 18 + 34*(times-14), 104 - y_offset_icons, 4, 0); //Create pokemon sprite
+                spriteId = CreateMonIcon(speciesForm, SpriteCB_MonIcon, 18 + 34*(times-14), 104 - y_offset_icons, 4, 0); //Create pokemon sprite
             else
-                gTasks[taskId].data[4+times] = CreateMonIcon(speciesForm, SpriteCB_MonIcon, 18 + 34*(times-21), 138 - y_offset_icons, 4, 0); //Create pokemon sprite
-            gSprites[gTasks[taskId].data[4+times]].oam.priority = 0;
+                spriteId = CreateMonIcon(speciesForm, SpriteCB_MonIcon, 18 + 34*(times-21), 138 - y_offset_icons, 4, 0); //Create pokemon sprite
+            if (spriteId < MAX_SPRITES)
+            {
+                gSprites[spriteId].oam.priority = 0;
+                TrackPokedexAuxSprite(spriteId);
+            }
         }
     }
-    gTasks[taskId].data[3] = times;
 
     //If there are no forms print text
     if (times == 0)
@@ -8306,15 +8343,12 @@ static void PrintForms(u8 taskId, u16 species)
 }
 static void Task_SwitchScreensFromFormsScreen(u8 taskId)
 {
-    u8 i;
     if (!gPaletteFade.active)
     {
         FreeMonIconPalettes();                                          //Destroy pokemon icon sprite
-        FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].data[4]]); //Destroy pokemon icon sprite
-        for (i = 1; i <= gTasks[taskId].data[3]; i++)
-        {
-            FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].data[4+i]]); //Destroy pokemon icon sprite
-        }
+        if (gTasks[taskId].data[4] < MAX_SPRITES)
+            FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].data[4]]); //Destroy pokemon icon sprite
+        DestroyPokedexAuxSprites();
         FreeAndDestroyMonPicSprite(gTasks[taskId].tMonSpriteId);
 
         switch (sPokedexView->screenSwitchState)
@@ -8330,15 +8364,12 @@ static void Task_SwitchScreensFromFormsScreen(u8 taskId)
 }
 static void Task_ExitFormsScreen(u8 taskId)
 {
-    u8 i;
     if (!gPaletteFade.active)
     {
         FreeMonIconPalettes();                                          //Destroy pokemon icon sprite
-        FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].data[4]]); //Destroy pokemon icon sprite
-        for (i = 1; i <= gTasks[taskId].data[3]; i++)
-        {
-            FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].data[4+i]]); //Destroy pokemon icon sprite
-        }
+        if (gTasks[taskId].data[4] < MAX_SPRITES)
+            FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].data[4]]); //Destroy pokemon icon sprite
+        DestroyPokedexAuxSprites();
         FreeAndDestroyMonPicSprite(gTasks[taskId].tMonSpriteId);
 
         FreeInfoScreenWindowAndBgBuffers();

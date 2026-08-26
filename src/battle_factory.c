@@ -193,6 +193,11 @@ static const u16 sInitialRentalMonRanges[][2] =
 // code
 void CallBattleFactoryFunction(void)
 {
+    if (gSpecialVar_0x8004 >= ARRAY_COUNT(sBattleFactoryFunctions))
+    {
+        gSpecialVar_Result = FALSE;
+        return;
+    }
     sBattleFactoryFunctions[gSpecialVar_0x8004]();
 }
 

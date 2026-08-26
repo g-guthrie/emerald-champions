@@ -219,7 +219,7 @@ def trainer_metadata() -> dict[str, dict]:
 def inferred_theme(team: dict) -> str:
     if team["synergy_tags"]:
         return " + ".join(team["synergy_tags"][:3])
-    types = Counter(type_name for mon in team["mons"] for type_name in set(mon["types"]))
+    types = Counter(type_name for mon in team["mons"] for type_name in sorted(set(mon["types"])))
     dominant = types.most_common(1)[0][0].removeprefix("TYPE_").title() if types else "mixed"
     if team["rare_count"] or team["mega_count"]:
         return f"{dominant} rare-showcase balance"
@@ -358,7 +358,11 @@ def build_guide() -> dict:
             badge = chapter["badge"]
             chapter_title = chapter["title"]
 
-        other_ids = [value for value in reachable if custom.trainer_family(value) != custom.trainer_family(trainer_id)]
+        other_ids = sorted(
+            value
+            for value in reachable
+            if custom.trainer_family(value) != custom.trainer_family(trainer_id)
+        )
         closest_id = None
         closest_similarity = 0.0
         for other_id in other_ids:
@@ -414,10 +418,23 @@ def build_guide() -> dict:
             behavior = design["bespoke_ai"]
             counterplay = design["intended_counterplay"]
 
+        runtime_alternatives = None
+        if design:
+            branch_contract = design.get("branch_contract", {})
+            branch = branch_contract.get("branches", {}).get(trainer_id.rsplit("_", 1)[-1])
+            if branch and branch.get("runtime_species"):
+                runtime_alternatives = {
+                    "slot": branch_contract["dynamic_source_slot"] + 1,
+                    "speciesIds": branch["runtime_species"],
+                    "species": [pretty(species, "SPECIES_") for species in branch["runtime_species"]],
+                    "rule": branch_contract["runtime_rule"],
+                }
+
         entries.append({
             "trainerId": trainer_id,
             "encounterId": encounter_id,
             "encounterAlternatives": design.get("trainer_ids", []) if design else [],
+            "runtimePartyAlternatives": runtime_alternatives,
             "name": metadata[trainer_id]["name"],
             "trainerClass": metadata[trainer_id]["class"],
             "category": category,
@@ -547,6 +564,12 @@ def render_markdown(guide: dict) -> str:
         for mon in entry["party"]:
             level = f"{mon['effectiveLevel']} (cap {mon['levelOffset']:+})" if mon["effectiveLevel"] is not None else f"active cap {mon['levelOffset']:+}"
             lines.append(f"| {mon['slot']} | {mon['species']} | {level} | {mon['item']} | {mon['ability']} | {mon['role']} | {', '.join(mon['moves'])} |")
+        if entry["runtimePartyAlternatives"]:
+            alternatives = entry["runtimePartyAlternatives"]
+            lines.extend([
+                "",
+                f"**Runtime slot {alternatives['slot']} alternatives:** {', '.join(alternatives['species'])}.",
+            ])
         lines.append("")
     return "\n".join(lines)
 
@@ -561,6 +584,10 @@ def check(guide: dict) -> None:
             problems.append(f"{entry['trainerId']}: incomplete guide commentary")
         if len(entry["party"]) != entry["partySize"]:
             problems.append(f"{entry['trainerId']}: party size drift")
+        if entry["encounterId"] == "BATTLE_054_ROUTE_110_RIVAL":
+            alternatives = entry.get("runtimePartyAlternatives") or {}
+            if alternatives.get("slot") != 3 or len(alternatives.get("speciesIds", [])) != 7:
+                problems.append(f"{entry['trainerId']}: Route 110 dynamic starter alternatives are incomplete")
         for mon in entry["party"]:
             is_imposter_ditto = (
                 mon["speciesId"] == "SPECIES_DITTO"

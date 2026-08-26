@@ -1,8 +1,9 @@
 {
   "version": 1,
-  "scope": "Canonical full-clear encounter order from the first trainer battle through Brawly and the Knuckle Badge. This frontier grows continuously until every campaign, optional, rematch, boss, and postgame trainer encounter in the 810-definition guide is assigned exactly once.",
+  "scope": "Canonical full-clear encounter order from the first trainer battle through the current authored frontier. This frontier grows continuously until every campaign, optional, rematch, boss, and postgame trainer encounter in the 810-definition guide is assigned exactly once.",
   "ordering_rule": "Use the earliest natural first-playthrough path. Optional trainers are never dropped. Mutually exclusive gender, starter, or partner branches of one physical encounter are grouped under one battle index. Where open terrain or an open side route permits reversal, one order is selected and the ambiguity is documented. Rustboro Gym is canonicalized before the already-accessible Route 116 so each cap-relative encounter has one authored first-reach state.",
   "source_definition_count": 810,
+  "campaign_complete": false,
   "entries": [
     {
       "index": 1,
@@ -404,13 +405,220 @@
     },
     {
       "index": 43,
-      "encounter_id": "BATTLE_043_ROUTE_109_GWEN_AUSTINA",
-      "location": "Route109",
+      "encounter_id": "BATTLE_043_SEASHORE_HOUSE_DWAYNE",
+      "location": "Route109_SeashoreHouse",
+      "category": "optional single",
+      "status": "closed",
+      "strict_cap": 30,
+      "trainer_ids": ["TRAINER_DWAYNE"],
+      "access_note": "First chosen encounter inside the foot-accessible Seashore House on Route 109's main beach. Dwayne, Johanna, and Simon may be challenged in different orders; Dwayne is canonicalized first, and defeating all three unlocks the shared six-Soda-Pop reward and Soda Pop shop."
+    },
+    {
+      "index": 44,
+      "encounter_id": "BATTLE_044_SEASHORE_HOUSE_JOHANNA",
+      "location": "Route109_SeashoreHouse",
+      "category": "optional double",
+      "status": "closed",
+      "strict_cap": 30,
+      "trainer_ids": ["TRAINER_JOHANNA"],
+      "access_note": "Second canonical Seashore House challenge. The room permits a different player-selected order, but all three independent trainer flags feed one retry-safe completion callback."
+    },
+    {
+      "index": 45,
+      "encounter_id": "BATTLE_045_SEASHORE_HOUSE_SIMON",
+      "location": "Route109_SeashoreHouse",
+      "category": "optional double",
+      "status": "closed",
+      "strict_cap": 30,
+      "trainer_ids": ["TRAINER_SIMON"],
+      "access_note": "Third canonical Seashore House challenge and final contributor to the shared completion flag. The owner awards six Soda Pops only after Dwayne, Johanna, and Simon have all been defeated."
+    },
+    {
+      "index": 46,
+      "encounter_id": "BATTLE_046_SLATEPORT_MUSEUM_AQUA_GRUNT_1",
+      "location": "SlateportCity_OceanicMuseum_2F",
+      "category": "required scripted",
+      "status": "closed",
+      "strict_cap": 30,
+      "trainer_ids": ["TRAINER_GRUNT_MUSEUM_1"],
+      "access_note": "First mandatory museum ambush after delivering the Devon Goods to Captain Stern. This no-intro battle begins a three-fight scripted Aqua sequence; the player receives no automatic healing before the second Grunt."
+    },
+    {
+      "index": 47,
+      "encounter_id": "BATTLE_047_SLATEPORT_MUSEUM_AQUA_GRUNT_2",
+      "location": "SlateportCity_OceanicMuseum_2F",
+      "category": "required scripted attrition",
+      "status": "closed",
+      "strict_cap": 30,
+      "trainer_ids": ["TRAINER_GRUNT_MUSEUM_2"],
+      "access_note": "Second mandatory Grunt attacks immediately after the first Grunt's defeat dialogue and movement, with no party heal or normal preparation window between the two battles."
+    },
+    {
+      "index": 48,
+      "encounter_id": "BATTLE_048_SLATEPORT_MUSEUM_ARCHIE",
+      "location": "SlateportCity_OceanicMuseum_2F",
+      "category": "required boss",
+      "status": "closed",
+      "strict_cap": 30,
+      "trainer_ids": ["TRAINER_ARCHIE_SLATEPORT"],
+      "access_note": "Archie enters after both Grunts. The native script explicitly heals the player's party before this boss battle, so Archie is designed as a fresh maximum-difficulty fight rather than the third leg of the Grunt attrition check."
+    },
+    {
+      "index": 49,
+      "encounter_id": "BATTLE_049_ROUTE_110_ISABEL_KALEB",
+      "location": "Route110",
+      "category": "unavoidable native pair",
+      "status": "closed",
+      "strict_cap": 30,
+      "trainer_ids": ["TRAINER_ISABEL_1", "TRAINER_KALEB"],
+      "access_note": "First trainer encounter after the Museum clears Route 110. Isabel at (10,76) and Kaleb at (7,76) have intersecting two-tile sight lines across the only ground corridor, producing a native 3+3 two-opponent double when the player has at least two usable Pokémon. Each source record remains independently reachable if the other has already been defeated."
+    },
+    {
+      "index": 50,
+      "encounter_id": "BATTLE_050_TRICK_HOUSE_PUZZLE_1_SALLY",
+      "location": "Route110_TrickHousePuzzle1",
+      "category": "optional puzzle single",
+      "status": "closed",
+      "strict_cap": 30,
+      "trainer_ids": ["TRAINER_SALLY"],
+      "access_note": "First Puzzle 1 trainer after the Route 110 pair. Sally is always first and geometrically unavoidable during a normal completion: her six-tile sight line crosses the only route out of the entrance region. Her defeat flag is not checked by the scroll, door, or Mental Herb reward."
+    },
+    {
+      "index": 51,
+      "encounter_id": "BATTLE_051_TRICK_HOUSE_PUZZLE_1_EDDIE",
+      "location": "Route110_TrickHousePuzzle1",
+      "category": "optional puzzle double",
+      "status": "closed",
+      "strict_cap": 30,
+      "trainer_ids": ["TRAINER_EDDIE"],
+      "access_note": "Required within optional Puzzle 1 by current collision geometry, but not by a script flag. Eddie's two-tile sight line crosses every exit approach. Eddie and Robin may be fought in either order after Sally; Eddie is the canonical guide tie-break only."
+    },
+    {
+      "index": 52,
+      "encounter_id": "BATTLE_052_TRICK_HOUSE_PUZZLE_1_ROBIN",
+      "location": "Route110_TrickHousePuzzle1",
+      "category": "optional puzzle double",
+      "status": "closed",
+      "strict_cap": 30,
+      "trainer_ids": ["TRAINER_ROBIN"],
+      "access_note": "Required within optional Puzzle 1 by current collision geometry, but not by a script flag. Robin's two-tile sight line crosses every scroll approach. Robin and Eddie may be fought in either order after Sally; the Mental Herb reward itself depends only on puzzle state."
+    },
+    {
+      "index": 53,
+      "encounter_id": "BATTLE_053_ROUTE_110_TIMMY",
+      "location": "Route110",
+      "category": "optional single",
+      "status": "closed",
+      "strict_cap": 30,
+      "trainer_ids": ["TRAINER_TIMMY"],
+      "access_note": "Optional eastern Route 110 detour near the Trick House latitude. It may be cleared before or after Puzzle 1; puzzle-first is the canonical full-clear choice."
+    },
+    {
+      "index": 54,
+      "encounter_id": "BATTLE_054_ROUTE_110_RIVAL",
+      "location": "Route110",
+      "category": "required branch",
+      "status": "closed",
+      "strict_cap": 30,
+      "trainer_ids": [
+        "TRAINER_MAY_ROUTE_110_TREECKO",
+        "TRAINER_MAY_ROUTE_110_TORCHIC",
+        "TRAINER_MAY_ROUTE_110_MUDKIP",
+        "TRAINER_BRENDAN_ROUTE_110_TREECKO",
+        "TRAINER_BRENDAN_ROUTE_110_TORCHIC",
+        "TRAINER_BRENDAN_ROUTE_110_MUDKIP"
+      ],
+      "access_note": "Mandatory three-tile coordinate-triggered rival milestone before Mauville. Player gender and starter element choose one of six records, while source slot three dynamically becomes the same-generation middle counter-starter across all seven supported trios. Loss cleanly retriggers state 0; victory awards the Itemfinder and keeps the cap at 30."
+    },
+    {
+      "index": 55,
+      "encounter_id": "BATTLE_055_ROUTE_110_EDWIN_JOSEPH",
+      "location": "Route110",
       "category": "optional native pair",
+      "status": "closed",
+      "strict_cap": 30,
+      "trainer_ids": ["TRAINER_EDWIN_1", "TRAINER_JOSEPH"],
+      "access_note": "Ground-road Edwin at (34,40) faces right four tiles and Joseph at (36,40) faces left three tiles; their shared trigger at (35,40) creates a native 3+3 pair when both are undefeated and the player has two usable Pokémon. Either surviving trainer remains independently fightable. Edwin owns the Match Call chain; Joseph has no rematch or item reward."
+    },
+    {
+      "index": 56,
+      "encounter_id": "BATTLE_056_ROUTE_110_EDWARD_ALYSSA",
+      "location": "Route110",
+      "category": "optional native pair",
+      "status": "closed",
+      "strict_cap": 30,
+      "trainer_ids": ["TRAINER_EDWARD", "TRAINER_ALYSSA"],
+      "access_note": "Edward at (3,39) and Alyssa at (10,39) face each other across the six-tile corridor, producing a deterministic native pair when entered between them. Either can run independently if the other is already defeated or the player has only one usable Pokémon. Neither owns a rematch or scripted reward."
+    },
+    {
+      "index": 57,
+      "encounter_id": "BATTLE_057_ROUTE_110_DALE",
+      "location": "Route110",
+      "category": "optional double",
       "status": "next",
       "strict_cap": 30,
-      "trainer_ids": ["TRAINER_GWEN", "TRAINER_AUSTINA"],
-      "access_note": "Adjacent southern-beach trainers cleared on the canonical return loop after the direct northbound approach; their intersecting sight geometry permits a native pair or either split single."
+      "trainer_ids": ["TRAINER_DALE"],
+      "access_note": "Optional ground-road detour at (10,19), facing down one tile. Dale uses one independent trainer script and has no rematch, callback, or item reward."
+    },
+    {
+      "index": 58,
+      "encounter_id": "BATTLE_058_ROUTE_110_JACLYN",
+      "location": "Route110",
+      "category": "optional single",
+      "status": "pending",
+      "strict_cap": 30,
+      "trainer_ids": ["TRAINER_JACLYN"],
+      "access_note": "Optional northern ground-road detour at (33,15), facing left one tile. Jaclyn follows Dale in the south-to-north full-clear order and has no rematch, callback, or item reward."
+    },
+    {
+      "index": 59,
+      "encounter_id": "BATTLE_059_ROUTE_110_CYCLING_ANTHONY_ABIGAIL",
+      "location": "Route110",
+      "category": "optional moving pair branch",
+      "status": "pending",
+      "strict_cap": 30,
+      "trainer_ids": ["TRAINER_ANTHONY", "TRAINER_ABIGAIL_1"],
+      "access_note": "First canonical Cycling Road clear after obtaining a Bike in Mauville. Anthony moves through a broad box around (19,31), while Abigail faces left from (30,31); joint pairing depends on Anthony's live position and facing, so the dossier must support both joint and split branches. Abigail owns a Match Call chain; Anthony does not."
+    },
+    {
+      "index": 60,
+      "encounter_id": "BATTLE_060_ROUTE_110_CYCLING_BENJAMIN",
+      "location": "Route110",
+      "category": "optional cycling single",
+      "status": "pending",
+      "strict_cap": 30,
+      "trainer_ids": ["TRAINER_BENJAMIN_1"],
+      "access_note": "Moving Cycling Road trainer centered at (16,55) with three-tile sight. Benjamin owns a Match Call rematch chain but no direct item reward."
+    },
+    {
+      "index": 61,
+      "encounter_id": "BATTLE_061_ROUTE_110_CYCLING_JASMINE",
+      "location": "Route110",
+      "category": "optional cycling single",
+      "status": "pending",
+      "strict_cap": 30,
+      "trainer_ids": ["TRAINER_JASMINE"],
+      "access_note": "Moving Cycling Road trainer centered at (16,73) with a long vertical route and three-tile sight. Jasmine has no rematch, callback, or direct item reward."
+    },
+    {
+      "index": 62,
+      "encounter_id": "BATTLE_062_ROUTE_110_CYCLING_JACOB",
+      "location": "Route110",
+      "category": "optional cycling double",
+      "status": "pending",
+      "strict_cap": 30,
+      "trainer_ids": ["TRAINER_JACOB"],
+      "access_note": "Southern moving Cycling Road trainer centered at (21,78) with two-tile sight. Jacob has no rematch or direct item reward. Cycling course rating independently awards Electric Seed or Quick Claw and is not gated by trainer victories."
+    },
+    {
+      "index": 63,
+      "encounter_id": "BATTLE_063_MAUVILLE_WALLY",
+      "location": "MauvilleCity",
+      "category": "required declinable gate",
+      "status": "pending",
+      "strict_cap": 30,
+      "trainer_ids": ["TRAINER_WALLY_MAUVILLE"],
+      "access_note": "Script-driven Wally scene at the Mauville Gym doorway. The player may initially decline, but victory sets FLAG_DEFEATED_WALLY_MAUVILLE, moves Wally and his uncle, enables the later call, and physically clears the Gym entrance. No item reward or automatic cap change occurs."
     }
   ]
 }

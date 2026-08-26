@@ -46,34 +46,34 @@ Route110_TrickHousePuzzle1_Text_WroteSecretCodeLockOpened:: @ 826B98D
 	.string "The lock clicked open!$"
 
 Route110_TrickHousePuzzle1_Text_SallyIntro: @ 826B9FB
-	.string "I'll hack and slash my way to victory\n"
-	.string "with the Cut we just learned!$"
+	.string "Cut taught me every blade has a\n"
+	.string "different edge. Try all four!$"
 
 Route110_TrickHousePuzzle1_Text_SallyDefeat: @ 826BA3F
-	.string "Why are you so serious?$"
+	.string "You blunted every blade!$"
 
 Route110_TrickHousePuzzle1_Text_SallyPostBattle: @ 826BA57
-	.string "I never get tired of hacking\n"
-	.string "and slashing!$"
+	.string "Even the sharpest edge has a\n"
+	.string "weak side. That's the real trick!$"
 
 Route110_TrickHousePuzzle1_Text_EddieIntro: @ 826BA82
-	.string "I wandered into this weird house\n"
-	.string "by accident…$"
+	.string "I got lost… Then my team made\n"
+	.string "every way out disappear!$"
 
 Route110_TrickHousePuzzle1_Text_EddieDefeat: @ 826BAB0
-	.string "And now I've lost…$"
+	.string "That was the wrong way, too!$"
 
 Route110_TrickHousePuzzle1_Text_EddiePostBattle: @ 826BAC3
-	.string "I lost my way, I lost a battle, and I'm\n"
-	.string "now even more lost… I can't get out…$"
+	.string "The floating symbol points both\n"
+	.string "ways… That's not helping!$"
 
 Route110_TrickHousePuzzle1_Text_RobinIntro: @ 826BB10
-	.string "Just who is the Trick Master?$"
+	.string "I wondered who the Trick Master is…\n"
+	.string "Then lost track of who I watched!$"
 
 Route110_TrickHousePuzzle1_Text_RobinDefeat: @ 826BB2E
-	.string "I lost while I was lost in thought!$"
+	.string "I followed the wrong thought…$"
 
 Route110_TrickHousePuzzle1_Text_RobinPostBattle: @ 826BB52
-	.string "You're strong!\n"
-	.string "Just who are you?$"
-
+	.string "The obvious target feeds the gear.\n"
+	.string "Maybe I should watch the quiet one!$"

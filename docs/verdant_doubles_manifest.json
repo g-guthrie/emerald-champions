@@ -2034,9 +2034,9 @@
     },
     "TRAINER_EDWARD": {
       "format": "single",
-      "target_size": 1,
-      "archetype": "Balanced disruption",
-      "difficulty": 34,
+      "target_size": 4,
+      "archetype": "Itemless Magic Room prophecy",
+      "difficulty": 87,
       "partner_interaction": false,
       "level_offset": 1,
       "location": "Route 110"
@@ -2935,10 +2935,10 @@
     "TRAINER_EDDIE": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 33,
+      "archetype": "No Exit positional trap",
+      "difficulty": 90,
       "partner_interaction": false,
-      "level_offset": -2,
+      "level_offset": 1,
       "location": "Route 110 Trick House Puzzle 1"
     },
     "TRAINER_ALLEN": {
@@ -2951,12 +2951,12 @@
       "location": "Route 102"
     },
     "TRAINER_TIMMY": {
-      "format": "double",
+      "format": "single",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 33,
+      "archetype": "Route 110 exact-catch sampler",
+      "difficulty": 87,
       "partner_interaction": false,
-      "level_offset": -2,
+      "level_offset": 1,
       "location": "Route 110"
     },
     "TRAINER_WALLACE": {
@@ -4555,10 +4555,10 @@
     "TRAINER_EDWIN_1": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 36,
-      "partner_interaction": false,
-      "level_offset": -2,
+      "archetype": "Beat Up and Justified activation",
+      "difficulty": 88,
+      "partner_interaction": true,
+      "level_offset": 1,
       "location": "Route 110"
     },
     "TRAINER_HECTOR": {
@@ -4636,10 +4636,10 @@
     "TRAINER_BRENDAN_ROUTE_110_MUDKIP": {
       "format": "double",
       "target_size": 6,
-      "archetype": "Balanced disruption",
-      "difficulty": 57,
-      "partner_interaction": false,
-      "level_offset": -1,
+      "archetype": "Adaptive rival field test",
+      "difficulty": 97,
+      "partner_interaction": true,
+      "level_offset": 1,
       "location": "Route 110"
     },
     "TRAINER_BRENDAN_ROUTE_119_MUDKIP": {
@@ -4663,10 +4663,10 @@
     "TRAINER_BRENDAN_ROUTE_110_TREECKO": {
       "format": "double",
       "target_size": 6,
-      "archetype": "Fake Out and pressure",
-      "difficulty": 57,
-      "partner_interaction": false,
-      "level_offset": -1,
+      "archetype": "Adaptive rival field test",
+      "difficulty": 97,
+      "partner_interaction": true,
+      "level_offset": 1,
       "location": "Route 110"
     },
     "TRAINER_BRENDAN_ROUTE_119_TREECKO": {
@@ -4690,10 +4690,10 @@
     "TRAINER_BRENDAN_ROUTE_110_TORCHIC": {
       "format": "double",
       "target_size": 6,
-      "archetype": "Balanced disruption",
-      "difficulty": 59,
-      "partner_interaction": false,
-      "level_offset": -1,
+      "archetype": "Adaptive rival field test",
+      "difficulty": 97,
+      "partner_interaction": true,
+      "level_offset": 1,
       "location": "Route 110"
     },
     "TRAINER_BRENDAN_ROUTE_119_TORCHIC": {
@@ -4717,10 +4717,10 @@
     "TRAINER_MAY_ROUTE_110_MUDKIP": {
       "format": "double",
       "target_size": 6,
-      "archetype": "Balanced disruption",
-      "difficulty": 59,
-      "partner_interaction": false,
-      "level_offset": -1,
+      "archetype": "Adaptive rival field test",
+      "difficulty": 97,
+      "partner_interaction": true,
+      "level_offset": 1,
       "location": "Route 110"
     },
     "TRAINER_MAY_ROUTE_119_MUDKIP": {
@@ -4744,10 +4744,10 @@
     "TRAINER_MAY_ROUTE_110_TREECKO": {
       "format": "double",
       "target_size": 6,
-      "archetype": "Fake Out and pressure",
-      "difficulty": 59,
-      "partner_interaction": false,
-      "level_offset": -1,
+      "archetype": "Adaptive rival field test",
+      "difficulty": 97,
+      "partner_interaction": true,
+      "level_offset": 1,
       "location": "Route 110"
     },
     "TRAINER_MAY_ROUTE_119_TREECKO": {
@@ -4771,10 +4771,10 @@
     "TRAINER_MAY_ROUTE_110_TORCHIC": {
       "format": "double",
       "target_size": 6,
-      "archetype": "Balanced disruption",
-      "difficulty": 59,
-      "partner_interaction": false,
-      "level_offset": -1,
+      "archetype": "Adaptive rival field test",
+      "difficulty": 97,
+      "partner_interaction": true,
+      "level_offset": 1,
       "location": "Route 110"
     },
     "TRAINER_MAY_ROUTE_119_TORCHIC": {
@@ -5444,21 +5444,21 @@
       "location": "Magma Hideout 4 F"
     },
     "TRAINER_SALLY": {
-      "format": "double",
+      "format": "single",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 36,
+      "archetype": "Four cutting disciplines",
+      "difficulty": 88,
       "partner_interaction": false,
-      "level_offset": -2,
+      "level_offset": 1,
       "location": "Route 110 Trick House Puzzle 1"
     },
     "TRAINER_ROBIN": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 39,
-      "partner_interaction": false,
-      "level_offset": -2,
+      "archetype": "False Focus redirection",
+      "difficulty": 92,
+      "partner_interaction": true,
+      "level_offset": 0,
       "location": "Route 110 Trick House Puzzle 1"
     },
     "TRAINER_ANDREA": {
@@ -6247,19 +6247,19 @@
     "TRAINER_JOSEPH": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 36,
-      "partner_interaction": false,
-      "level_offset": -2,
+      "archetype": "Beat Up and Justified activation",
+      "difficulty": 88,
+      "partner_interaction": true,
+      "level_offset": 1,
       "location": "Route 110"
     },
     "TRAINER_ALYSSA": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Steel balance",
-      "difficulty": 37,
-      "partner_interaction": false,
-      "level_offset": -2,
+      "archetype": "Itemless Magic Room cycling",
+      "difficulty": 88,
+      "partner_interaction": true,
+      "level_offset": 1,
       "location": "Route 110"
     },
     "TRAINER_MARCOS": {

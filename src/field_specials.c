@@ -1884,8 +1884,16 @@ void MoveElevator(void)
 {
     static const u8 sElevatorTripLength[] = { 8, 16, 24, 32, 38, 46, 52, 56, 57 };
 
-    s16 *data = gTasks[CreateTask(Task_MoveElevator, 9)].data;
+    u8 taskId = CreateTask(Task_MoveElevator, 9);
+    s16 *data;
     u16 floorDelta;
+
+    if (!IsTaskIdValid(taskId))
+    {
+        EnableBothScriptContexts();
+        return;
+    }
+    data = gTasks[taskId].data;
 
     data[1] = 0;
     data[2] = 0;

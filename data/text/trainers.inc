@@ -1139,16 +1139,15 @@ Route110_Text_JasminePostBattle: @ 8297FF1
 	.string "No wonder you're so strong!$"
 
 Route110_Text_EdwardIntro: @ 829802B
-	.string "I have foreseen your intentions!\n"
-	.string "I cannot possibly lose!$"
+	.string "I foresaw your expensive gear fail.\n"
+	.string "Magic Room makes every item go dark!$"
 
 Route110_Text_EdwardDefeated: @ 8298064
-	.string "I failed to prophesize my own demise!$"
+	.string "You had a future without your gear!$"
 
 Route110_Text_EdwardPostBattle: @ 829808A
-	.string "I see your future…\p"
-	.string "Hmm…\n"
-	.string "I see a shining light…$"
+	.string "Magic Room lasts only five turns.\n"
+	.string "Your Pokémon still keep their skills!$"
 
 Route110_Text_JaclynIntro: @ 82980B9
 	.string "Ahahahaha!\n"
@@ -1163,16 +1162,15 @@ Route110_Text_JaclynPostBattle: @ 82980F8
 	.string "Don't think you can win all the time!$"
 
 Route110_Text_EdwinIntro: @ 829815E
-	.string "Could I see your Pokémon?\n"
-	.string "Just one look, please?$"
+	.string "Could I see your rarest Pokémon?\n"
+	.string "I'll trade you one rare trick!$"
 
 Route110_Text_EdwinDefeated: @ 829818F
-	.string "I wanted to complete\n"
-	.string "my collection…$"
+	.string "You broke my prized combination!$"
 
 Route110_Text_EdwinPostBattle: @ 82981B3
-	.string "When I see a Pokémon that I don't know,\n"
-	.string "my passion as a collector is ignited!$"
+	.string "Beat Up raises Justified each hit.\n"
+	.string "I need to collect better timing!$"
 
 Route110_Text_EdwinRegister: @ 8298201
 	.string "I like collecting Match Call\n"
@@ -1204,21 +1202,22 @@ Route110_Text_DalePostBattle: @ 8298303
 	.string "You have to focus on the floater.$"
 
 Route110_Text_IsabelIntro: @ 8298349
-	.string "Ahahaha! I would go anywhere to show\n"
-	.string "off my delightful Pokémon.$"
+	.string "Together or alone, my delightful\n"
+	.string "Pokémon know how to steal the show!\p"
+	.string "Listen to our perfect Round!$"
 
 Route110_Text_IsabelDefeated: @ 8298389
-	.string "Oh, dear, this won't do.$"
+	.string "Oh, dear! Our encore fell flat!$"
 
 Route110_Text_IsabelPostBattle: @ 82983A2
-	.string "Rather than battling, perhaps I should\n"
-	.string "show off my Pokémon at the Fan Club.$"
+	.string "Round calls the next singer at once\n"
+	.string "and doubles that singer's power!\p"
+	.string "That's a delightful duet!$"
 
 Route110_Text_IsabelRegister: @ 82983EE
-	.string "That wasn't close to what I could\n"
-	.string "do to show off my Pokémon.\p"
-	.string "I'll have you as my captive audience\n"
-	.string "as often as possible!$"
+	.string "Our first chorus needs an encore!\p"
+	.string "I'll keep you as my captive audience\n"
+	.string "for the next performance!$"
 
 Route110_Text_IsabelRematchIntro: @ 8298466
 	.string "Ahahahaha! I would be happy to show\n"
@@ -1233,50 +1232,50 @@ Route110_Text_IsabelRematchPostBattle: @ 82984C8
 	.string "But I like to battle, too!$"
 
 Route110_Text_TimmyIntro: @ 8298525
-	.string "I found some cool Pokémon in the grass\n"
-	.string "around here!$"
+	.string "I caught these four in this grass!\n"
+	.string "Let's see how each one battles!$"
 
 Route110_Text_TimmyDefeated: @ 8298559
-	.string "Being cool isn't enough to win…$"
+	.string "Cool catches still need a plan…$"
 
 Route110_Text_TimmyPostBattle: @ 8298579
-	.string "It's hard to battle with Pokémon you\n"
-	.string "just caught.$"
+	.string "Rotom and the roaming coin are rare.\n"
+	.string "Keep looking in this grass!$"
 
 Route110_Text_AlyssaIntro: @ 82985AB
-	.string "I fell off Cycling Road…\p"
-	.string "I'll get over my embarrassment by\n"
-	.string "battling with you!$"
+	.string "I fell when my gear failed once.\n"
+	.string "Now your held items fail with it!$"
 
 Route110_Text_AlyssaDefeated: @ 82985F9
-	.string "Oops!\n"
-	.string "I ended up losing!$"
+	.string "You raced through without your gear!$"
 
 Route110_Text_AlyssaPostBattle: @ 8298612
-	.string "Falling… Losing…\n"
-	.string "This is so humiliating for me!$"
+	.string "Stop Magic Room or wait five turns.\n"
+	.string "Then your held items switch back on!$"
 
 Route110_Text_JosephIntro: @ 8298642
-	.string "Okay! Full-throttle time! If you can't\n"
-	.string "groove, you get left behind!$"
+	.string "Every hit adds to the groove!\n"
+	.string "Can you stop it before it builds?$"
 
 Route110_Text_JosephDefeated: @ 8298686
-	.string "You got into the groove all right…$"
+	.string "You stopped the groove at the start!$"
 
 Route110_Text_JosephPostBattle: @ 82986A9
-	.string "This isn't going to bring me down!\n"
-	.string "Losing has made me a better man!$"
+	.string "Stop the fragile hitter first,\n"
+	.string "or clear the boosts after the beat!$"
 
 Route110_Text_KalebIntro: @ 82986ED
-	.string "When cute Pokémon help each other…\n"
-	.string "You won't see a more adorable sight!$"
+	.string "Together or alone, my cute Pokémon\n"
+	.string "always help the next singer!\p"
+	.string "One Round starts the whole chorus!$"
 
 Route110_Text_KalebDefeated: @ 8298735
-	.string "Have you no compassion or pity?$"
+	.string "Aw… You stopped the whole chorus!$"
 
 Route110_Text_KalebPostBattle: @ 8298755
-	.string "Okay, okay, you've done the best you\n"
-	.string "could, my pretties.$"
+	.string "Audino heals, Slurpuff sings, and\n"
+	.string "Frogadier changes type!\p"
+	.string "Helping each other is adorable!$"
 
 Route111_Text_DrewIntro: @ 829878E
 	.string "Oh, hey! Those Go-Goggles suit you.\n"

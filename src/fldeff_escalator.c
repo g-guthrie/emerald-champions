@@ -162,7 +162,8 @@ static u8 CreateEscalatorTask(bool16 goingUp)
     tState = 0;
     tTransitionStage = 0;
     tGoingUp = goingUp;
-    Task_DrawEscalator(taskId);
+    if (taskId < NUM_TASKS)
+        Task_DrawEscalator(taskId);
     return taskId;
 }
 
