@@ -207,7 +207,7 @@ Route110_EventScript_Dale:: @ 81EF482
 	end
 
 Route110_EventScript_Jacob:: @ 81EF499
-	trainerbattle_single TRAINER_JACOB, Route110_Text_JacobIntro, Route110_Text_JacobDefeated
+	trainerbattle_double TRAINER_JACOB, Route110_Text_JacobIntro, Route110_Text_JacobDefeated, Route110_Text_JacobNotEnoughPokemon
 	msgbox Route110_Text_JacobPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -239,7 +239,7 @@ Route110_EventScript_BenjaminRematch:: @ 81EF512
 	end
 
 Route110_EventScript_Jasmine:: @ 81EF529
-	trainerbattle_single TRAINER_JASMINE, Route110_Text_JasmineIntro, Route110_Text_JasmineDefeated
+	trainerbattle_double TRAINER_JASMINE, Route110_Text_JasmineIntro, Route110_Text_JasmineDefeated, Route110_Text_JasmineNotEnoughPokemon
 	msgbox Route110_Text_JasminePostBattle, MSGBOX_AUTOCLOSE
 	end
 

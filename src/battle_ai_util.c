@@ -3130,7 +3130,8 @@ u16 GetAllyChosenMove(void)
     
     if (!IsBattlerAlive(partnerBattler) || !IsBattlerAIControlled(partnerBattler))
         return MOVE_NONE;   // TODO: prediction?
-    else if (partnerBattler > sBattler_AI) // Battler with the lower id chooses the move first.
+    else if (partnerBattler > sBattler_AI // Battler with the lower id chooses the action first.
+          || gChosenActionByBattler[partnerBattler] != B_ACTION_USE_MOVE)
         return MOVE_NONE;
     else
         return gBattleMons[partnerBattler].moves[gBattleStruct->chosenMovePositions[partnerBattler]];

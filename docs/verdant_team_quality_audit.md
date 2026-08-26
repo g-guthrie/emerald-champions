@@ -4,11 +4,11 @@ This report evaluates the current source as the battle engine executes it. Score
 
 ## Roster summary
 
-- 854 trainer records and 3410 party slots
-- 569 doubles and 285 intentional singles
+- 854 trainer records and 3421 party slots
+- 566 doubles and 288 intentional singles
 - Median quality score: 63/100
 - Blocking findings: 0
-- Major design findings: 4
+- Major design findings: 5
 - Repeated three-plus rematch compositions: 0
 - Multi-trainer locations without a showcase opponent: 1
 
@@ -16,7 +16,7 @@ This report evaluates the current source as the battle engine executes it. Score
 
 | Finding | Count |
 | --- | ---: |
-| no detected team interaction | 1 |
+| no detected team interaction | 2 |
 | no speed control | 1 |
 | serious item gap | 2 |
 
@@ -25,6 +25,7 @@ This report evaluates the current source as the battle engine executes it. Score
 | Trainer | Location | Format | Score | Offset | Theme | Findings |
 | --- | --- | --- | ---: | ---: | --- | --- |
 | TRAINER_EDWARD | Route 110 | single | 60 | +2.0 | Psychic pressure | serious item gap |
+| TRAINER_JASMINE | Route 110 | double | 68 | +2.0 | singles pacing and coverage | no detected team interaction |
 | TRAINER_KALEB | Route 110 | double | 68 | +2.0 | singles pacing and coverage | no detected team interaction |
 | TRAINER_ALYSSA | Route 110 | double | 70 | +2.0 | Earthquake immunity, Flying pressure, pivot offense, status control | no speed control; serious item gap |
 

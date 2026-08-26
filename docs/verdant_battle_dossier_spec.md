@@ -114,7 +114,14 @@ and expands only the strongest candidates.
 - One-sentence memory hook and trainer/location story fit.
 - Primary player question, primary mode, credible secondary mode, and preview
   pressure.
-- Exact party order and intended leads/reserve sequence.
+- Exact party order, guaranteed lead formation, and the engine's real
+  replacement policy. Never describe source order as a scripted reserve wave
+  when native AI chooses replacements by board state.
+- For a Gym Leader, the specialty type must remain the clear visual and
+  mechanical identity—normally a majority of the party—while every off-type
+  support slot names the strategy or story job that earns the exception.
+  Competitive references inform the Gym team; they do not overwrite the
+  Leader's identity.
 - For every Pokémon: species/form, level offset, item, ability and slot, spread,
   four moves, role, and Mega candidacy.
 - Exactly one usable Mega at most. Tera, Z-Moves, Dynamax, and Gigantamax are

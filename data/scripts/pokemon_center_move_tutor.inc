@@ -576,7 +576,7 @@ PKMN_Center_Mystery_Gift_Text_ReceivedGift::
 
 PKMN_Center_Text_Mystery_Gift_WouldYouLikeGift::
 	.string "Thank you for playing\n"
-	.string "Inclement Emerald!\p"
+	.string "Emerald Champions!\p"
 	.string "You have a Mystery Gift available:\n"
 	.string "a special {STR_VAR_1}!\p"
 	.string "Would you like to receive\n"

@@ -1050,43 +1050,45 @@ Route109_Text_ElijahPostBattle: @ 8297AE5
 	.string "I guess I'll head for Slateport.$"
 
 Route110_Text_JacobIntro: @ 8297B3F
-	.string "Whoa! Watch it!\n"
-	.string "I guess you're not used to Bike racing.$"
+	.string "Check your brakes before contact!\n"
+	.string "Every collision wears you down!$"
 
 Route110_Text_JacobDefeated: @ 8297B77
-	.string "Whoa!\n"
-	.string "My brakes failed!$"
+	.string "You found the safe line!$"
 
 Route110_Text_JacobPostBattle: @ 8297B8F
-	.string "Flat tires and brake problems can\n"
-	.string "cause serious injury!\l"
-	.string "Inspect your Bike for problems!$"
+	.string "Barbs and rough skin punish contact.\n"
+	.string "Fight from range when crashes hurt!$"
+
+Route110_Text_JacobNotEnoughPokemon:
+	.string "Double traffic needs two Pokémon!\n"
+	.string "Bring a partner before you ride!$"
 
 Route110_Text_AnthonyIntro: @ 8297BE7
-	.string "Yo, you!\n"
-	.string "Can you keep up with my speed?$"
+	.string "Yo! Four sprints with no brakes.\n"
+	.string "Can you survive every crash?$"
 
 Route110_Text_AnthonyDefeated: @ 8297C0F
-	.string "Crash and burn!$"
+	.string "You broke every racing line!$"
 
 Route110_Text_AnthonyPostBattle: @ 8297C1F
-	.string "Speed alone won't let me win at Pokémon.\n"
-	.string "I need to reconsider this…$"
+	.string "Recoil, drops, even recharging...\n"
+	.string "Every hard sprint leaves an opening.$"
 
 Route110_Text_BenjaminIntro: @ 8297C63
-	.string "Don't panic if your Bike's going fast!$"
+	.string "Don't panic when time turns around!\n"
+	.string "The slowest rider moves first!$"
 
 Route110_Text_BenjaminDefeated: @ 8297C8A
-	.string "I shouldn't panic during Pokémon\n"
-	.string "battles…$"
+	.string "You stayed calm through both flips!$"
 
 Route110_Text_BenjaminPostBattle: @ 8297CB4
-	.string "There's no need to panic or stress.\n"
-	.string "Take it easy. There's plenty of time.$"
+	.string "Trick Room lasts only five turns.\n"
+	.string "I can start it again at the finish.$"
 
 Route110_Text_BenjaminRegister: @ 8297CFE
-	.string "I'll keep chugging on without stressing.\n"
-	.string "Give me a shout if you're up to it.$"
+	.string "That was a perfectly paced ride!\n"
+	.string "Let's trade numbers and race again.$"
 
 Route110_Text_BenjaminRematchIntro: @ 8297D4B
 	.string "Aren't you going a little too fast?\n"
@@ -1100,20 +1102,19 @@ Route110_Text_BenjaminRematchPostBattle: @ 8297DB0
 	.string "Take it easy. There's plenty of time.$"
 
 Route110_Text_AbigailIntro: @ 8297DFA
-	.string "The triathlon is hard in the extreme.\p"
-	.string "You have to complete the three events\n"
-	.string "of swimming, cycling, and running.$"
+	.string "My triathlon has four legs:\n"
+	.string "swim, cycle, run, then recover!$"
 
 Route110_Text_AbigailDefeated: @ 8297E69
-	.string "Pokémon battles are hard, too!$"
+	.string "You found the finish before I did!$"
 
 Route110_Text_AbigailPostBattle: @ 8297E88
-	.string "I'm exhausted, so I need a break.\n"
-	.string "It's important to get proper rest.$"
+	.string "Pacing matters more than raw speed.\n"
+	.string "Every recovery buys another lap.$"
 
 Route110_Text_AbigailRegister: @ 8297ECD
-	.string "You know, I like you!\n"
-	.string "Let's have a rematch on Cycling Road.$"
+	.string "Your endurance impressed me!\n"
+	.string "Let's train again on Cycling Road.$"
 
 Route110_Text_AbigailRematchIntro: @ 8297F09
 	.string "Isn't it neat to hold a battle while\n"
@@ -1128,15 +1129,19 @@ Route110_Text_AbigailRematchPostBattle: @ 8297F58
 	.string "I'm sorry if I held you up!$"
 
 Route110_Text_JasmineIntro: @ 8297F93
-	.string "I've been riding without stopping.\n"
-	.string "My thighs are like rocks!$"
+	.string "My starter relay changes course!\n"
+	.string "Two Pledges combine into one!$"
 
 Route110_Text_JasmineDefeated: @ 8297FD0
-	.string "I'm worried about muscle cramps…$"
+	.string "Your line change broke my rhythm!$"
 
 Route110_Text_JasminePostBattle: @ 8297FF1
-	.string "Oh, you have some Gym Badges?\n"
-	.string "No wonder you're so strong!$"
+	.string "Drop one rider and the next pairing\n"
+	.string "changes the whole course!$"
+
+Route110_Text_JasmineNotEnoughPokemon:
+	.string "A relay needs two Pokémon!\n"
+	.string "Bring a partner and ride again!$"
 
 Route110_Text_EdwardIntro: @ 829802B
 	.string "I foresaw your expensive gear fail.\n"
@@ -1150,16 +1155,15 @@ Route110_Text_EdwardPostBattle: @ 829808A
 	.string "Your Pokémon still keep their skills!$"
 
 Route110_Text_JaclynIntro: @ 82980B9
-	.string "Ahahahaha!\n"
-	.string "I'll dazzle you with my wonders!$"
+	.string "Four wonders, one after another!\n"
+	.string "Can you solve what each one changes?$"
 
 Route110_Text_JaclynDefeated: @ 82980E5
-	.string "I wondrously lost!$"
+	.string "You saw through every wonder!$"
 
 Route110_Text_JaclynPostBattle: @ 82980F8
-	.string "You managed to win only because it was\n"
-	.string "a wonder! Yes, a wonder!\l"
-	.string "Don't think you can win all the time!$"
+	.string "Simple makes one boost count twice.\n"
+	.string "Stop Swoobat before it grows!$"
 
 Route110_Text_EdwinIntro: @ 829815E
 	.string "Could I see your rarest Pokémon?\n"
@@ -1190,16 +1194,15 @@ Route110_Text_EdwinRematchPostBattle: @ 82982A2
 	.string "mine!$"
 
 Route110_Text_DaleIntro: @ 82982CC
-	.string "Hey!\n"
-	.string "Don't sneak up behind me like that!$"
+	.string "Watch the float--I mark one target.\n"
+	.string "Then every cast hits that spot!$"
 
 Route110_Text_DaleDefeated: @ 82982F5
-	.string "I lost!\n"
-	.string "Drat!$"
+	.string "You cut my line before the bite!$"
 
 Route110_Text_DalePostBattle: @ 8298303
-	.string "Fishing is all about concentration.\n"
-	.string "You have to focus on the floater.$"
+	.string "Soak makes its target Water-type.\n"
+	.string "Freeze-Dry and Grass hit it hard!$"
 
 Route110_Text_IsabelIntro: @ 8298349
 	.string "Together or alone, my delightful\n"

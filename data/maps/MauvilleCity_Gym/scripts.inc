@@ -76,7 +76,7 @@ MauvilleCity_Gym_EventScript_DeactivatePuzzle:: @ 820DEE7
 MauvilleCity_Gym_EventScript_Wattson:: @ 820DEEB
 	goto_if_set FLAG_DAILY_REMATCH_WATTSON, MauvilleCity_Gym_EventScript_AlreadyRematched
 	goto_if_set FLAG_SYS_GAME_CLEAR, MauvilleCity_Gym_EventScript_WattsonRematch
-	trainerbattle_single TRAINER_WATTSON_1, MauvilleCity_Gym_Text_WattsonIntro, MauvilleCity_Gym_Text_WattsonDefeat, MauvilleCity_Gym_EventScript_WattsonDefeated, NO_MUSIC
+	trainerbattle_double TRAINER_WATTSON_1, MauvilleCity_Gym_Text_WattsonIntro, MauvilleCity_Gym_Text_WattsonDefeat, MauvilleCity_Gym_Text_WattsonRematchNeedTwoMons, MauvilleCity_Gym_EventScript_WattsonDefeated, NO_MUSIC
 	goto_if_unset FLAG_RECEIVED_TM72, MauvilleCity_Gym_EventScript_GiveVoltSwitch2
 	compare VAR_NEW_MAUVILLE_STATE, 6
 	goto_if_eq MauvilleCity_Gym_EventScript_CompletedNewMauville
@@ -263,7 +263,7 @@ MauvilleCity_Gym_EventScript_Shawn:: @ 820E0D0
 	end
 
 MauvilleCity_Gym_EventScript_Ben:: @ 820E0E7
-	trainerbattle_single TRAINER_BEN, MauvilleCity_Gym_Text_BenIntro, MauvilleCity_Gym_Text_BenDefeat
+	trainerbattle_double TRAINER_BEN, MauvilleCity_Gym_Text_BenIntro, MauvilleCity_Gym_Text_BenDefeat, MauvilleCity_Gym_Text_BenNotEnoughPokemon
 	msgbox MauvilleCity_Gym_Text_BenPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -342,65 +342,63 @@ MauvilleCity_Gym_Text_GymGuidePostVictory: @ 820E283
 	.string "You've powered the door open!$"
 
 MauvilleCity_Gym_Text_KirkIntro: @ 820E2BC
-	.string "My electric soul, it'll shatter your\n"
-	.string "dreams whole, whoa-yeahah!$"
+	.string "One chord--full volume!\n"
+	.string "My partners never fear Boomburst!$"
 
 MauvilleCity_Gym_Text_KirkDefeat: @ 820E2FC
-	.string "That was plugged in, amped up,\n"
-	.string "over-driven electric, man!$"
+	.string "You cut the power to my chorus!$"
 
 MauvilleCity_Gym_Text_KirkPostBattle: @ 820E336
-	.string "Pokémon and rock, it's all about heart,\n"
-	.string "whoa-yeah!$"
+	.string "A Ghost or Soundproof partner makes\n"
+	.string "perfect backup, whoa-yeah!$"
 
 MauvilleCity_Gym_Text_ShawnIntro: @ 820E369
-	.string "I trained under Wattson!\n"
-	.string "There ain't no way I'll lose easily!$"
+	.string "I train for a second wind!\n"
+	.string "Try stopping every recovery!$"
 
 MauvilleCity_Gym_Text_ShawnDefeat: @ 820E3A7
-	.string "Unplugged and turned off…$"
+	.string "You drained my backup!$"
 
 MauvilleCity_Gym_Text_ShawnPostBattle: @ 820E3C1
-	.string "Wattson, our Gym Leader, has been\n"
-	.string "around for a long, long time.\p"
-	.string "He was battling even before your\n"
-	.string "daddy was born, that tough coot.$"
+	.string "Berries buy time and power.\n"
+	.string "Symbiosis can pass a second item!$"
 
 MauvilleCity_Gym_Text_BenIntro: @ 820E443
-	.string "This Gym's got puzzles!\n"
-	.string "Isn't it fun?$"
+	.string "This Gym is a switch maze!\n"
+	.string "My Pokémon make one, too!$"
 
 MauvilleCity_Gym_Text_BenDefeat: @ 820E469
-	.string "It's no fun to lose…$"
+	.string "You escaped my maze…$"
 
 MauvilleCity_Gym_Text_BenPostBattle: @ 820E47E
-	.string "Wattson says he likes setting up\n"
-	.string "little traps with switches.$"
+	.string "Hazards punish every forced switch.\n"
+	.string "Stop the setup before it starts!$"
+
+MauvilleCity_Gym_Text_BenNotEnoughPokemon:
+	.string "This puzzle needs two Pokémon!\n"
+	.string "Bring a partner and try again!$"
 
 MauvilleCity_Gym_Text_VivianIntro: @ 820E4BB
-	.string "With my charm and my Pokémon's moves,\n"
-	.string "you'll be shocked!$"
+	.string "My form won't break inside the sound!\n"
+	.string "Can yours?$"
 
 MauvilleCity_Gym_Text_VivianDefeat: @ 820E4F4
-	.string "I'm shocked by your power!$"
+	.string "Your rhythm broke my guard!$"
 
 MauvilleCity_Gym_Text_VivianPostBattle: @ 820E50F
-	.string "I've heard that Mauville was founded\n"
-	.string "by Wattson.\p"
-	.string "He was a Trainer long before we\n"
-	.string "became Trainers.\l"
-	.string "He must know all sorts of things!$"
+	.string "Soundproof and Ghost types ignore\n"
+	.string "Boomburst. Everyone else feels it!$"
 
 MauvilleCity_Gym_Text_AngeloIntro: @ 820E593
-	.string "I love shiny things!$"
+	.string "I collect bright flowers and items!\n"
+	.string "Each one has Symbiosis!$"
 
 MauvilleCity_Gym_Text_AngeloDefeat: @ 820E5A8
-	.string "Oh…\n"
-	.string "My eyes are frazzled…$"
+	.string "My collection scattered!$"
 
 MauvilleCity_Gym_Text_AngeloPostBattle: @ 820E5C2
-	.string "Mauville Gym's Wattson has a shiny\n"
-	.string "forehead. It makes me happy!$"
+	.string "When an ally uses its item,\n"
+	.string "Symbiosis passes mine across!$"
 
 MauvilleCity_Gym_Text_WattsonIntro: @ 820E602
 	.string "I've given up on my plans to convert\n"
@@ -414,8 +412,10 @@ MauvilleCity_Gym_Text_WattsonIntro: @ 820E602
 	.string "Now, that is amusing!\p"
 	.string "Then, I, Wattson, the Leader of\n"
 	.string "Mauville Gym, shall electrify you!\p"
-	.string "My current runs across the whole\n"
-	.string "field! Wahahahah!$"
+	.string "Fast current, slow current--\n"
+	.string "can you control them both?\p"
+	.string "Bring out your Mega, youngster!\n"
+	.string "Raichu and I are ready! Wahahahah!$"
 
 MauvilleCity_Gym_Text_WattsonDefeat: @ 820E734
 	.string "Wahahahah!\n"
@@ -454,8 +454,8 @@ MauvilleCity_Gym_Text_RegisteredRaichu: @ 820E8B5
 	.string "in the PokéNav.$"
 
 MauvilleCity_Gym_Text_WattsonPostBattle: @ 820E8E3
-	.string "I swell with optimism, seeing a promising\n"
-	.string "young Trainer like you!$"
+	.string "Seeing a promising young Trainer\n"
+	.string "fills me with optimism!$"
 
 MauvilleCity_Gym_Text_WattsonGoForthAndEndeavor: @ 820E925
 	.string "Wahahahah!\n"
@@ -486,10 +486,10 @@ MauvilleCity_Gym_Text_WattsonPostRematch: @ 820EA5E
 	.string "won't you?$"
 
 MauvilleCity_Gym_Text_WattsonRematchNeedTwoMons: @ 820EAFD
-	.string "Wattson: Oops! Wait!\n"
-	.string "You've only one Pokémon with you!\p"
-	.string "Come see me with two or more\n"
-	.string "Pokémon, all right?$"
+	.string "Wattson: Oops! Only one Pokémon\n"
+	.string "can battle right now!\p"
+	.string "Come back with two healthy partners,\n"
+	.string "all right?$"
 
 MauvilleCity_Gym_Text_WattsonChooseFormat:
 	.string "Wattson: Ah-ha! Here at last!\n"

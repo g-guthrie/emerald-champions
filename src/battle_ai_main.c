@@ -3017,7 +3017,9 @@ static s16 AI_DoubleBattle(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         if ((target & MOVE_TARGET_FOES_AND_ALLY)
           && IsBattlerAlive(battlerAtkPartner)
           && !partnerProtecting
-          && AI_DATA->atkPartnerAbility != ABILITY_TELEPATHY)
+          && AI_DATA->atkPartnerAbility != ABILITY_TELEPATHY
+          && !(AI_DATA->atkPartnerAbility == ABILITY_SOUNDPROOF && TestMoveFlags(move, FLAG_SOUND))
+          && AI_GetMoveEffectiveness(move, battlerAtk, battlerAtkPartner) != AI_EFFECTIVENESS_x0)
         {
             s32 allyDamage = AI_CalcDamage(move, battlerAtk, battlerAtkPartner);
             if (allyDamage >= gBattleMons[battlerAtkPartner].hp)
@@ -3172,6 +3174,46 @@ static s16 AI_ComboSetup(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     if (move == MOVE_ROUND && HasMove(BATTLE_PARTNER(battlerAtk), MOVE_ROUND))
         score += AI_DATA->partnerMove == MOVE_ROUND ? 10 : 4;
 
+    // Soak is a foe-targeting conversion combo. Reward the setter when its
+    // partner can exploit Water typing, and reward the exploiting move when
+    // the partner has already selected Soak. This never fixes either target.
+    if (effect == EFFECT_SOAK
+      && (HasMoveWithType(BATTLE_PARTNER(battlerAtk), TYPE_ELECTRIC)
+       || HasMoveWithType(BATTLE_PARTNER(battlerAtk), TYPE_GRASS)
+       || HasMoveEffect(BATTLE_PARTNER(battlerAtk), EFFECT_FREEZE_DRY)))
+        score += 8;
+    if (AI_DATA->partnerMove == MOVE_SOAK
+      && (moveType == TYPE_ELECTRIC || moveType == TYPE_GRASS || effect == EFFECT_FREEZE_DRY))
+        score += 10;
+
+    if (effect == EFFECT_STUFF_CHEEKS
+      && partnerAbility == ABILITY_SYMBIOSIS
+      && gBattleMons[battlerAtk].item != ITEM_NONE
+      && GetPocketByItemId(gBattleMons[battlerAtk].item) == POCKET_BERRIES
+      && gBattleMons[BATTLE_PARTNER(battlerAtk)].item != ITEM_NONE)
+        score += 8;
+
+    // Hazard teams cash their layers through phazing. Reward that real board
+    // state, or a partner visibly preparing it, without fixing a target.
+    if (effect == EFFECT_ROAR && CountUsablePartyMons(battlerDef) > 0)
+    {
+        u8 foeSide = GetBattlerSide(battlerDef);
+        bool32 hazardsAreSet = gSideStatuses[foeSide] & SIDE_STATUS_HAZARDS_ANY;
+        bool32 partnerSettingHazards = AI_DATA->partnerMove != MOVE_NONE
+                                    && IsHazardMoveEffect(gBattleMoves[AI_DATA->partnerMove].effect);
+
+        if (hazardsAreSet)
+            score += 6;
+        else if (partnerSettingHazards)
+            score += GetWhoStrikesFirst(AI_DATA->battlerAtkPartner, battlerAtk, TRUE) == 0 ? 8 : 3;
+    }
+    else if (IsHazardMoveEffect(effect)
+          && CountUsablePartyMons(battlerDef) > 0
+          && HasMoveEffect(BATTLE_PARTNER(battlerAtk), EFFECT_ROAR))
+    {
+        score += 3;
+    }
+
     // Dancer teams are partner-combos even though the dance targets the user
     // or a foe. Reward the initiating dance before the ally-targeting gate.
     if (partnerAbility == ABILITY_DANCER && TestMoveFlags(move, FLAG_DANCE))
@@ -3245,10 +3287,53 @@ static s16 AI_ComboSetup(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
 static s16 AI_SpeedControl(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
 {
     u16 effect = gBattleMoves[move].effect;
+    u16 partnerEffect = AI_DATA->partnerMove == MOVE_NONE ? EFFECT_HIT : gBattleMoves[AI_DATA->partnerMove].effect;
     bool32 sideIsSlower = GetBattlerSideSpeedAverage(battlerAtk) < GetBattlerSideSpeedAverage(battlerDef);
+    u8 partner = BATTLE_PARTNER(battlerAtk);
+    u8 foe1 = FOE(partner);
+    u8 foe2 = BATTLE_PARTNER(foe1);
+    bool32 partnerOutrunsFoes = IsValidDoubleBattle(battlerAtk)
+                              && IsBattlerAlive(partner)
+                              && (!IsBattlerAlive(foe1) || GetWhoStrikesFirst(partner, foe1, TRUE) == 0)
+                              && (!IsBattlerAlive(foe2) || GetWhoStrikesFirst(partner, foe2, TRUE) == 0);
+    bool32 stableTrickRoom = (gFieldStatuses & STATUS_FIELD_TRICK_ROOM)
+                          && gFieldTimers.trickRoomTimer > 1;
+    bool32 fastControlMove = effect == EFFECT_TAILWIND
+                          || move == MOVE_ICY_WIND
+                          || move == MOVE_ELECTROWEB
+                          || effect == EFFECT_PARALYZE;
+    bool32 partnerFastControl = partnerEffect == EFFECT_TAILWIND
+                             || AI_DATA->partnerMove == MOVE_ICY_WIND
+                             || AI_DATA->partnerMove == MOVE_ELECTROWEB
+                             || partnerEffect == EFFECT_PARALYZE;
+
+    // When Trick Room is currently absent, partners must not spend the same
+    // turn establishing opposite speed plans. Whichever battler chooses
+    // second can see the ally's selected move, so this works from either
+    // flank without fixing a move or target. If Trick Room is already active,
+    // selecting it again deliberately reverses the room and can pair with
+    // fast control, so do not apply this conflict penalty there.
+    if (!(gFieldStatuses & STATUS_FIELD_TRICK_ROOM)
+      && ((effect == EFFECT_TRICK_ROOM && partnerFastControl)
+       || (fastControlMove && partnerEffect == EFFECT_TRICK_ROOM)))
+        score -= 15;
+
+    // Do not strengthen the fast lane while a stable Trick Room still
+    // governs move order. One remaining turn may justify preparing the next
+    // board, so leave that end-state to normal scoring.
+    if (stableTrickRoom)
+    {
+        if (effect == EFFECT_TAILWIND)
+            score -= 8;
+        else if (move == MOVE_ICY_WIND || move == MOVE_ELECTROWEB || effect == EFFECT_PARALYZE)
+            score -= 6;
+        else if ((effect == EFFECT_QUASH || effect == EFFECT_AFTER_YOU) && IsValidDoubleBattle(battlerAtk))
+            score += 3;
+        return score;
+    }
 
     if (effect == EFFECT_TRICK_ROOM && sideIsSlower && !(gFieldStatuses & STATUS_FIELD_TRICK_ROOM))
-        score += 8;
+        score += partnerOutrunsFoes ? -4 : 8;
     else if (effect == EFFECT_TAILWIND && sideIsSlower && gSideTimers[GetBattlerSide(battlerAtk)].tailwindTimer == 0)
         score += 6;
     else if ((move == MOVE_ICY_WIND || move == MOVE_ELECTROWEB) && IsValidDoubleBattle(battlerAtk))
@@ -5219,6 +5304,7 @@ static s16 AI_SetupFirstTurn(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     case EFFECT_SANDSTORM:
     case EFFECT_HAIL:
     case EFFECT_GEOMANCY:
+    case EFFECT_STUFF_CHEEKS:
         score += 2;
         break;
     default:

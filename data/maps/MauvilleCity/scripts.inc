@@ -229,6 +229,9 @@ MauvilleCity_EventScript_ScottExitEast:: @ 81DF628
 	return
 
 MauvilleCity_EventScript_BattleWally:: @ 81DF63A
+	special HasEnoughMonsForDoubleBattle
+	compare VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS
+	goto_if_ne MauvilleCity_EventScript_WallyNeedsTwoMons
 	msgbox MauvilleCity_Text_WallyHereICome, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_WALLY_MAUVILLE, MauvilleCity_Text_WallyDefeat
 	applymovement LOCALID_WALLY, Common_Movement_WalkInPlaceFastestRight
@@ -241,6 +244,11 @@ MauvilleCity_EventScript_BattleWally:: @ 81DF63A
 	waitmovement 0
 	msgbox MauvilleCity_Text_UncleNoNeedToBeDown, MSGBOX_DEFAULT
 	return
+
+MauvilleCity_EventScript_WallyNeedsTwoMons::
+	msgbox MauvilleCity_Text_WallyNeedsTwoMons, MSGBOX_DEFAULT
+	releaseall
+	end
 
 MauvilleCity_EventScript_DeclineWallyBattle:: @ 81DF683
 	setflag FLAG_DECLINED_WALLY_BATTLE_MAUVILLE
@@ -512,8 +520,8 @@ MauvilleCity_Text_UncleYourePushingIt: @ 81DF8B9
 
 MauvilleCity_Text_WallyWeCanBeatAnyone: @ 81DF963
 	.string "Wally: I'm not pushing it.\p"
-	.string "If I combine forces with Kirlia,\n"
-	.string "we can beat anyone!$"
+	.string "Gallade and I trained a whole team.\n"
+	.string "We can handle anyone!$"
 
 MauvilleCity_Text_WallyWillYouBattleMe: @ 81DF9B2
 	.string "Wally: Oh! Hi, {PLAYER}!\p"
@@ -541,13 +549,17 @@ MauvilleCity_Text_WallyPleaseBattleMe: @ 81DFB42
 	.string "Battle with me, please.$"
 
 MauvilleCity_Text_WallyHereICome: @ 81DFB6D
-	.string "Wally: {PLAYER}, thank you.\p"
-	.string "Okay… Here I come!$"
+	.string "Wally: I studied every matchup.\n"
+	.string "Watch how my team covers itself!$"
 
 MauvilleCity_Text_WallyDefeat: @ 81DFB96
-	.string "Wally: … … … … … … …\p"
-	.string "… … … … … … … …\p"
-	.string "I lost…$"
+	.string "Wally: I saw so many paths…\n"
+	.string "You found the one I missed.$"
+
+MauvilleCity_Text_WallyNeedsTwoMons:
+	.string "Wally: Please bring two healthy\n"
+	.string "Pokémon. I want a real\n"
+	.string "Double Battle!$"
 
 MauvilleCity_Text_WallyIllGoBackToVerdanturf: @ 81DFBC3
 	.string "Wally: Uncle…\n"

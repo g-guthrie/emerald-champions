@@ -46,7 +46,7 @@ MARQUEE_TRAINERS = {
 BOSS_LEVEL_OFFSETS = {
     "Roxanne": [-1, -1, -2, -2, 0, 1],
     "Brawly": [2, 3, 3, 3, 4, 5],
-    "Wattson": [0, 0, 0, 0, 1, 2],
+    "Wattson": [2, 2, 3, 3, 4, 5],
     "Flannery": [0, 0, 0, 0, 1, 2],
     "Norman": [0, 0, 0, 1, 1, 2],
     "Winona": [0, 0, 0, 0, 1, 2],

@@ -555,7 +555,7 @@
       "encounter_id": "BATTLE_057_ROUTE_110_DALE",
       "location": "Route110",
       "category": "optional double",
-      "status": "next",
+      "status": "closed",
       "strict_cap": 30,
       "trainer_ids": ["TRAINER_DALE"],
       "access_note": "Optional ground-road detour at (10,19), facing down one tile. Dale uses one independent trainer script and has no rematch, callback, or item reward."
@@ -565,60 +565,190 @@
       "encounter_id": "BATTLE_058_ROUTE_110_JACLYN",
       "location": "Route110",
       "category": "optional single",
-      "status": "pending",
+      "status": "closed",
       "strict_cap": 30,
       "trainer_ids": ["TRAINER_JACLYN"],
       "access_note": "Optional northern ground-road detour at (33,15), facing left one tile. Jaclyn follows Dale in the south-to-north full-clear order and has no rematch, callback, or item reward."
     },
     {
       "index": 59,
-      "encounter_id": "BATTLE_059_ROUTE_110_CYCLING_ANTHONY_ABIGAIL",
+      "encounter_id": "BATTLE_059_ROUTE_110_CYCLING_ANTHONY",
       "location": "Route110",
-      "category": "optional moving pair branch",
-      "status": "pending",
+      "category": "optional moving cycling single",
+      "status": "closed",
       "strict_cap": 30,
-      "trainer_ids": ["TRAINER_ANTHONY", "TRAINER_ABIGAIL_1"],
-      "access_note": "First canonical Cycling Road clear after obtaining a Bike in Mauville. Anthony moves through a broad box around (19,31), while Abigail faces left from (30,31); joint pairing depends on Anthony's live position and facing, so the dossier must support both joint and split branches. Abigail owns a Match Call chain; Anthony does not."
+      "trainer_ids": ["TRAINER_ANTHONY"],
+      "access_note": "First canonical Cycling Road clear after obtaining a Bike in Mauville. Anthony patrols x=9-19 across y=30-31 with three-tile sight. His live sight region never intersects Abigail's fixed westward line, so he is an independent optional single with no callback, Match Call chain, scripted reward, or native-pair branch."
     },
     {
       "index": 60,
-      "encounter_id": "BATTLE_060_ROUTE_110_CYCLING_BENJAMIN",
+      "encounter_id": "BATTLE_060_ROUTE_110_CYCLING_ABIGAIL",
       "location": "Route110",
       "category": "optional cycling single",
-      "status": "pending",
+      "status": "closed",
+      "strict_cap": 30,
+      "trainer_ids": ["TRAINER_ABIGAIL_1"],
+      "access_note": "Independent fixed Cycling Road trainer at (30,31), facing left four tiles. Her sight region x=26-29 never intersects Anthony's patrol, so no joint branch exists. Abigail alone owns the Match Call registration and later rematch chain; the first encounter remains an ordinary single."
+    },
+    {
+      "index": 61,
+      "encounter_id": "BATTLE_061_ROUTE_110_CYCLING_BENJAMIN",
+      "location": "Route110",
+      "category": "optional cycling single",
+      "status": "closed",
       "strict_cap": 30,
       "trainer_ids": ["TRAINER_BENJAMIN_1"],
       "access_note": "Moving Cycling Road trainer centered at (16,55) with three-tile sight. Benjamin owns a Match Call rematch chain but no direct item reward."
     },
     {
-      "index": 61,
-      "encounter_id": "BATTLE_061_ROUTE_110_CYCLING_JASMINE",
+      "index": 62,
+      "encounter_id": "BATTLE_062_ROUTE_110_CYCLING_JASMINE",
       "location": "Route110",
-      "category": "optional cycling single",
-      "status": "pending",
+      "category": "optional guarded cycling double",
+      "status": "closed",
       "strict_cap": 30,
       "trainer_ids": ["TRAINER_JASMINE"],
       "access_note": "Moving Cycling Road trainer centered at (16,73) with a long vertical route and three-tile sight. Jasmine has no rematch, callback, or direct item reward."
     },
     {
-      "index": 62,
-      "encounter_id": "BATTLE_062_ROUTE_110_CYCLING_JACOB",
+      "index": 63,
+      "encounter_id": "BATTLE_063_ROUTE_110_CYCLING_JACOB",
       "location": "Route110",
       "category": "optional cycling double",
-      "status": "pending",
+      "status": "closed",
       "strict_cap": 30,
       "trainer_ids": ["TRAINER_JACOB"],
       "access_note": "Southern moving Cycling Road trainer centered at (21,78) with two-tile sight. Jacob has no rematch or direct item reward. Cycling course rating independently awards Electric Seed or Quick Claw and is not gated by trainer victories."
     },
     {
-      "index": 63,
-      "encounter_id": "BATTLE_063_MAUVILLE_WALLY",
+      "index": 64,
+      "encounter_id": "BATTLE_064_MAUVILLE_WALLY",
       "location": "MauvilleCity",
       "category": "required declinable gate",
-      "status": "pending",
+      "status": "closed",
       "strict_cap": 30,
       "trainer_ids": ["TRAINER_WALLY_MAUVILLE"],
-      "access_note": "Script-driven Wally scene at the Mauville Gym doorway. The player may initially decline, but victory sets FLAG_DEFEATED_WALLY_MAUVILLE, moves Wally and his uncle, enables the later call, and physically clears the Gym entrance. No item reward or automatic cap change occurs."
+      "access_note": "Script-driven Wally scene at the Mauville Gym doorway. The player may initially decline and a loss remains retryable; an explicit two-usable-Pokémon guard now protects the no-intro double. Victory sets FLAG_DEFEATED_WALLY_MAUVILLE, moves Wally and his uncle, enables the later call, and physically clears the Gym entrance. No item reward or automatic cap change occurs."
+    },
+    {
+      "index": 65,
+      "encounter_id": "BATTLE_065_MAUVILLE_GYM_VIVIAN_KIRK",
+      "location": "MauvilleCity_Gym",
+      "category": "optional native pair",
+      "status": "closed",
+      "strict_cap": 30,
+      "trainer_ids": ["TRAINER_VIVIAN", "TRAINER_KIRK"],
+      "access_note": "Vivian at (1,16) faces up two tiles and Kirk at (1,13) faces down two tiles; both see (1,14) and (1,15). Crossing the shared lane with two usable Pokémon and both undefeated creates a native 3+3 joint double, while side lanes or manual engagement allow either independent four-member single. Both trainer records intentionally remain single so the one-usable fallback is safe. They are globally optional and own no callback, rematch, or reward."
+    },
+    {
+      "index": 66,
+      "encounter_id": "BATTLE_066_MAUVILLE_GYM_BEN",
+      "location": "MauvilleCity_Gym",
+      "category": "optional puzzle-route double",
+      "status": "closed",
+      "strict_cap": 30,
+      "trainer_ids": ["TRAINER_BEN"],
+      "access_note": "Ben at (5,10) faces left across the center choke. He is unavoidable on the Switch-3 solution but globally optional because the Switch-4 right route bypasses him. His independent trainer record is a four-member double with no callback, rematch, or reward."
+    },
+    {
+      "index": 67,
+      "encounter_id": "BATTLE_067_MAUVILLE_GYM_SHAWN_ANGELO",
+      "location": "MauvilleCity_Gym",
+      "category": "optional native pair",
+      "status": "closed",
+      "strict_cap": 30,
+      "trainer_ids": ["TRAINER_SHAWN", "TRAINER_ANGELO"],
+      "access_note": "Shawn at (7,8) faces down one tile and Angelo at (7,10) faces up one tile; both see exactly (7,9). The Switch-4 right route creates a native 3+3 joint double when both are undefeated and the player has two usable Pokémon, while manual engagement permits either independent four-member single. Both trainer records intentionally remain single so the one-usable fallback is safe. Ben's route bypasses both. Neither owns a callback, rematch, or reward."
+    },
+    {
+      "index": 68,
+      "encounter_id": "BATTLE_068_MAUVILLE_GYM_WATTSON",
+      "location": "MauvilleCity_Gym",
+      "category": "required badge boss",
+      "status": "closed",
+      "strict_cap": 30,
+      "trainer_ids": ["TRAINER_WATTSON_1"],
+      "access_note": "Fixed six-member double after either valid barrier route. Victory grants the Dynamo Badge, raises the strict cap from 30 to 40, enables Rock Smash field use, preserves the native Raichu and Wattson registrations, and gives Wise Glasses through legacy Volt Switch-named script labels. There is no scripted post-battle heal; the Gym Guide's separate twelve Moomoo Milks are not a trainer reward."
+    },
+    {
+      "index": 69,
+      "encounter_id": "BATTLE_069_ROUTE_117_ANNA_AND_MEG",
+      "location": "Route117",
+      "category": "optional guarded solo double with two avatars",
+      "status": "next",
+      "strict_cap": 40,
+      "trainer_ids": ["TRAINER_ANNA_AND_MEG_1"],
+      "access_note": "Canonical post-Wattson westward full-clear begins on Route 117; the route was already open, so this is a documented ordering tie-break rather than a hard story gate. Anna at (42,6) and Meg at (43,6) are two overworld avatars for the same trainer definition, not two native opponents. Either script starts the same guarded four-member solo double and registers the same Match Call/rematch chain."
+    },
+    {
+      "index": 70,
+      "encounter_id": "BATTLE_070_ROUTE_117_ISAAC",
+      "location": "Route117",
+      "category": "optional solo double",
+      "status": "queued",
+      "strict_cap": 40,
+      "trainer_ids": ["TRAINER_ISAAC_1"],
+      "access_note": "Fixed lower-lane trainer at (33,11), alternating up/right with four-tile sight. His six-member trainer record is double while the current first-fight and rematch opcodes are single, so source closure must add an explicit two-usable-Pokémon guard without changing Isaac's Match Call ownership. Isaac and Dylan are reversible in open terrain; Isaac is the canonical lower-lane-first tie-break."
+    },
+    {
+      "index": 71,
+      "encounter_id": "BATTLE_071_ROUTE_117_DYLAN",
+      "location": "Route117",
+      "category": "optional moving solo double",
+      "status": "queued",
+      "strict_cap": 40,
+      "trainer_ids": ["TRAINER_DYLAN_1"],
+      "access_note": "Horizontal patrol from (38,16) with range eight and four-tile sight. His four-member trainer record is double while the current first-fight and rematch opcodes are single, so source closure must add a usable-party guard and preserve Dylan's independent Match Call chain."
+    },
+    {
+      "index": 72,
+      "encounter_id": "BATTLE_072_ROUTE_117_MARIA",
+      "location": "Route117",
+      "category": "optional moving solo double",
+      "status": "queued",
+      "strict_cap": 40,
+      "trainer_ids": ["TRAINER_MARIA_1"],
+      "access_note": "Maria wanders around (26,13) in a two-by-two range with five-tile sight. Her four-member trainer record is double while the current first-fight and rematch opcodes are single; source closure must add the explicit two-usable-Pokémon path while preserving her Match Call registration."
+    },
+    {
+      "index": 73,
+      "encounter_id": "BATTLE_073_ROUTE_117_DEREK",
+      "location": "Route117",
+      "category": "optional single",
+      "status": "queued",
+      "strict_cap": 40,
+      "trainer_ids": ["TRAINER_DEREK"],
+      "access_note": "Fixed at (17,12), facing up with four-tile sight. Derek is a normal independent single with no callback, direct reward, Match Call registration, or rematch. Derek and the upper-meadow cluster are reversible in open terrain; the lower-lane sweep is the canonical tie-break."
+    },
+    {
+      "index": 74,
+      "encounter_id": "BATTLE_074_ROUTE_117_AISHA_MELINA_BRANDI",
+      "location": "Route117",
+      "category": "optional dynamic native-pair cluster",
+      "status": "queued",
+      "strict_cap": 40,
+      "trainer_ids": ["TRAINER_AISHA", "TRAINER_MELINA", "TRAINER_BRANDI"],
+      "access_note": "One upper-meadow formation dossier must cover every real branch. Aisha at (21,4) faces west four tiles; moving Melina begins at (16,4) and can face east; Brandi at (15,4) faces east four tiles. Approach and patrol timing can create Aisha+Melina or Brandi+Melina native doubles, leave the third trainer for a later single, or permit manual split singles. All three records remain independently source-owned and none has a callback, reward, or rematch."
+    },
+    {
+      "index": 75,
+      "encounter_id": "BATTLE_075_ROUTE_117_LYDIA",
+      "location": "Route117",
+      "category": "optional solo double",
+      "status": "queued",
+      "strict_cap": 40,
+      "trainer_ids": ["TRAINER_LYDIA_1"],
+      "access_note": "Lydia rotates counterclockwise at (8,10) with three-tile sight. Her six-member record is double while the current first-fight and rematch opcodes are single, so source closure must add the usable-party guard while preserving Lydia's independent Match Call chain and lack of direct item reward."
+    },
+    {
+      "index": 76,
+      "encounter_id": "BATTLE_076_RUSTURF_TUNNEL_MIKE",
+      "location": "RusturfTunnel",
+      "category": "optional single on deferred east side",
+      "status": "queued",
+      "strict_cap": 40,
+      "trainer_ids": ["TRAINER_MIKE_2"],
+      "access_note": "The Verdanturf-side warp reaches Mike at (32,13), facing left with three-tile sight. He is the ordinary three-member single deliberately deferred after Battle 27 and owns no callback, item, or rematch. The farther-west Rock Smash reunion, HM04 Strength gift, and permanent tunnel opening are separate non-battle progression and not Mike's reward. Route 111 south follows this westward detour in the canonical full-clear sequence."
     }
   ]
 }

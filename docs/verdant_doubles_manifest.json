@@ -1664,12 +1664,12 @@
       "location": "Mt Pyre 4 F"
     },
     "TRAINER_KIRK": {
-      "format": "double",
+      "format": "single",
       "target_size": 4,
-      "archetype": "Electric terrain",
+      "archetype": "Boomburst ghost band",
       "difficulty": 60,
-      "partner_interaction": false,
-      "level_offset": -1,
+      "partner_interaction": true,
+      "level_offset": 2,
       "location": "Mauville City Gym"
     },
     "TRAINER_GRUNT_AQUA_HIDEOUT_7": {
@@ -1691,12 +1691,12 @@
       "location": "Aqua Hideout B 2 F"
     },
     "TRAINER_SHAWN": {
-      "format": "double",
+      "format": "single",
       "target_size": 4,
-      "archetype": "Sun offense",
-      "difficulty": 38,
-      "partner_interaction": false,
-      "level_offset": -1,
+      "archetype": "Berry second wind",
+      "difficulty": 60,
+      "partner_interaction": true,
+      "level_offset": 2.5,
       "location": "Mauville City Gym"
     },
     "TRAINER_FERNANDO_1": {
@@ -2133,11 +2133,11 @@
     },
     "TRAINER_JACLYN": {
       "format": "single",
-      "target_size": 2,
-      "archetype": "Intentional route singles relief",
-      "difficulty": 34,
+      "target_size": 4,
+      "archetype": "Four stage-magic wonders",
+      "difficulty": 88,
       "partner_interaction": false,
-      "level_offset": -2,
+      "level_offset": 1,
       "location": "Route 110"
     },
     "TRAINER_HANNAH": {
@@ -2350,10 +2350,10 @@
     "TRAINER_WATTSON_1": {
       "format": "double",
       "target_size": 6,
-      "archetype": "Electric terrain",
-      "difficulty": 84,
+      "archetype": "World Champion fast-slow circuit",
+      "difficulty": 100,
       "partner_interaction": true,
-      "level_offset": 0,
+      "level_offset": 2,
       "location": "Mauville City Gym"
     },
     "TRAINER_FLANNERY_1": {
@@ -2854,10 +2854,10 @@
     "TRAINER_BEN": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Electric terrain",
-      "difficulty": 60,
-      "partner_interaction": false,
-      "level_offset": -1,
+      "archetype": "Hazard phazing maze",
+      "difficulty": 62,
+      "partner_interaction": true,
+      "level_offset": 2.5,
       "location": "Mauville City Gym"
     },
     "TRAINER_QUINCY": {
@@ -3016,10 +3016,10 @@
     "TRAINER_DALE": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Rain pressure",
-      "difficulty": 41,
-      "partner_interaction": false,
-      "level_offset": -2,
+      "archetype": "Soak target painting",
+      "difficulty": 89,
+      "partner_interaction": true,
+      "level_offset": 1,
       "location": "Route 110"
     },
     "TRAINER_NOLAN": {
@@ -3106,28 +3106,28 @@
     "TRAINER_JACOB": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Sand and spread",
-      "difficulty": 36,
+      "archetype": "Contact tax",
+      "difficulty": 55,
       "partner_interaction": false,
-      "level_offset": -1,
+      "level_offset": 1.5,
       "location": "Route 110"
     },
     "TRAINER_ANTHONY": {
       "format": "single",
-      "target_size": 2,
-      "archetype": "Intentional route singles relief",
-      "difficulty": 36,
+      "target_size": 4,
+      "archetype": "No-brakes commitment",
+      "difficulty": 50,
       "partner_interaction": false,
-      "level_offset": -2,
+      "level_offset": 1.5,
       "location": "Route 110"
     },
     "TRAINER_BENJAMIN_1": {
       "format": "single",
-      "target_size": 3,
-      "archetype": "Electric terrain",
-      "difficulty": 40,
+      "target_size": 4,
+      "archetype": "Slow-lane Trick Room",
+      "difficulty": 55,
       "partner_interaction": false,
-      "level_offset": -2,
+      "level_offset": 1.5,
       "location": "Route 110"
     },
     "TRAINER_BENJAMIN_2": {
@@ -3168,20 +3168,20 @@
     },
     "TRAINER_ABIGAIL_1": {
       "format": "single",
-      "target_size": 1,
-      "archetype": "Balanced disruption",
-      "difficulty": 37,
+      "target_size": 4,
+      "archetype": "Triathlon endurance",
+      "difficulty": 54,
       "partner_interaction": false,
-      "level_offset": 0,
+      "level_offset": 2,
       "location": "Route 110"
     },
     "TRAINER_JASMINE": {
-      "format": "single",
-      "target_size": 3,
-      "archetype": "Normal-rule breaker",
-      "difficulty": 40,
-      "partner_interaction": false,
-      "level_offset": -2,
+      "format": "double",
+      "target_size": 4,
+      "archetype": "Branching Pledge relay",
+      "difficulty": 55,
+      "partner_interaction": true,
+      "level_offset": 2,
       "location": "Route 110"
     },
     "TRAINER_ABIGAIL_2": {
@@ -5786,12 +5786,12 @@
       "location": "Lavaridge Town Gym 1 F"
     },
     "TRAINER_VIVIAN": {
-      "format": "double",
+      "format": "single",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 56,
-      "partner_interaction": false,
-      "level_offset": -1,
+      "archetype": "Soundproof screen half",
+      "difficulty": 58,
+      "partner_interaction": true,
+      "level_offset": 2,
       "location": "Mauville City Gym"
     },
     "TRAINER_DANIELLE": {
@@ -5850,11 +5850,11 @@
     },
     "TRAINER_WALLY_MAUVILLE": {
       "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 75,
-      "partner_interaction": false,
-      "level_offset": 0,
+      "target_size": 6,
+      "archetype": "Mega Gallade balance",
+      "difficulty": 80,
+      "partner_interaction": true,
+      "level_offset": 2,
       "location": "Mauville City"
     },
     "TRAINER_WALLY_VR_2": {
@@ -7163,12 +7163,12 @@
       "location": "Sootopolis City Gym 1 F"
     },
     "TRAINER_ANGELO": {
-      "format": "double",
+      "format": "single",
       "target_size": 4,
-      "archetype": "Bug swarm utility",
-      "difficulty": 53,
-      "partner_interaction": false,
-      "level_offset": -1,
+      "archetype": "Symbiosis flower collection",
+      "difficulty": 58,
+      "partner_interaction": true,
+      "level_offset": 2.5,
       "location": "Mauville City Gym"
     },
     "TRAINER_DARIUS": {
@@ -7889,21 +7889,77 @@
       "battle": "Wattson",
       "trainer_id": "TRAINER_WATTSON_1",
       "format": "doubles",
-      "identity": "Electric-terrain pinball",
+      "identity": "World Champion fast-slow circuit",
       "team": [
         {
           "species": "SPECIES_TAPU_KOKO",
           "item": "ITEM_TERRAIN_EXTENDER",
           "ability": "ABILITY_ELECTRIC_SURGE",
           "ability_slot": 0,
-          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
           "moves": [
-            "MOVE_THUNDERBOLT",
-            "MOVE_DAZZLING_GLEAM",
-            "MOVE_VOLT_SWITCH",
+            "MOVE_WILD_CHARGE",
+            "MOVE_NATURES_MADNESS",
+            "MOVE_U_TURN",
             "MOVE_TAUNT"
           ],
-          "role": "terrain lead"
+          "role": "terrain lead and physical pivot"
+        },
+        {
+          "species": "SPECIES_EMOLGA",
+          "item": "ITEM_FOCUS_SASH",
+          "ability": "ABILITY_LIGHTNING_ROD",
+          "ability_slot": 1,
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+          "moves": [
+            "MOVE_TAILWIND",
+            "MOVE_ENCORE",
+            "MOVE_HELPING_HAND",
+            "MOVE_THUNDERBOLT"
+          ],
+          "role": "Electric-native fast-mode support"
+        },
+        {
+          "species": "SPECIES_IRON_HANDS",
+          "item": "ITEM_ASSAULT_VEST",
+          "ability": "ABILITY_QUARK_DRIVE",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+          "moves": [
+            "MOVE_FAKE_OUT",
+            "MOVE_CLOSE_COMBAT",
+            "MOVE_WILD_CHARGE",
+            "MOVE_ICE_PUNCH"
+          ],
+          "role": "terrain-activated slow physical breaker"
+        },
+        {
+          "species": "SPECIES_FARIGIRAF",
+          "item": "ITEM_SITRUS_BERRY",
+          "ability": "ABILITY_ARMOR_TAIL",
+          "ability_slot": 1,
+          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+          "moves": [
+            "MOVE_TWIN_BEAM",
+            "MOVE_ICY_WIND",
+            "MOVE_LIGHT_SCREEN",
+            "MOVE_PROTECT"
+          ],
+          "role": "priority denial and secondary speed control"
+        },
+        {
+          "species": "SPECIES_PORYGON2",
+          "item": "ITEM_EVIOLITE",
+          "ability": "ABILITY_DOWNLOAD",
+          "ability_slot": 1,
+          "spread": "SPREAD_31_IV_HP_DEF_SPDEF_SASSY",
+          "moves": [
+            "MOVE_TRICK_ROOM",
+            "MOVE_TRI_ATTACK",
+            "MOVE_ICE_BEAM",
+            "MOVE_RECOVER"
+          ],
+          "role": "sole slow-mode setter"
         },
         {
           "species": "SPECIES_RAICHU",
@@ -7912,68 +7968,12 @@
           "ability_slot": 0,
           "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
           "moves": [
-            "MOVE_FAKE_OUT",
-            "MOVE_RISING_VOLTAGE",
-            "MOVE_SURF",
+            "MOVE_THUNDER",
+            "MOVE_FOCUS_BLAST",
+            "MOVE_GRASS_KNOT",
             "MOVE_PROTECT"
           ],
-          "role": "Mega terrain abuser"
-        },
-        {
-          "species": "SPECIES_REGIELEKI",
-          "item": "ITEM_FOCUS_SASH",
-          "ability": "ABILITY_TRANSISTOR",
-          "ability_slot": 0,
-          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
-          "moves": [
-            "MOVE_ELECTROWEB",
-            "MOVE_RISING_VOLTAGE",
-            "MOVE_VOLT_SWITCH",
-            "MOVE_PROTECT"
-          ],
-          "role": "speed control"
-        },
-        {
-          "species": "SPECIES_LANTURN",
-          "item": "ITEM_ASSAULT_VEST",
-          "ability": "ABILITY_VOLT_ABSORB",
-          "ability_slot": 0,
-          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
-          "moves": [
-            "MOVE_SCALD",
-            "MOVE_THUNDERBOLT",
-            "MOVE_ICY_WIND",
-            "MOVE_DAZZLING_GLEAM"
-          ],
-          "role": "immunity pivot"
-        },
-        {
-          "species": "SPECIES_ROTOM_MOW",
-          "item": "ITEM_SITRUS_BERRY",
-          "ability": "ABILITY_LEVITATE",
-          "ability_slot": 0,
-          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
-          "moves": [
-            "MOVE_LEAF_STORM",
-            "MOVE_THUNDERBOLT",
-            "MOVE_WILL_O_WISP",
-            "MOVE_PROTECT"
-          ],
-          "role": "Ground answer"
-        },
-        {
-          "species": "SPECIES_GENESECT",
-          "item": "ITEM_CHOICE_SCARF",
-          "ability": "ABILITY_DOWNLOAD",
-          "ability_slot": 0,
-          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
-          "moves": [
-            "MOVE_TECHNO_BLAST",
-            "MOVE_ICE_BEAM",
-            "MOVE_THUNDERBOLT",
-            "MOVE_U_TURN"
-          ],
-          "role": "rare coverage closer"
+          "role": "No Guard story Mega closer"
         }
       ]
     },

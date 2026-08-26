@@ -144,8 +144,8 @@ checks = {
         and "Our fixed care fee" in daycare_script
         and "level = GetLevelFromBoxMonExp" in daycare
     ),
-    "native save card does not advertise obsolete Inclement version 1.13": (
-        'gText_SavingVersionNum[] = _("Verdant")' in strings
+    "native save card uses the compact Emerald Champions label": (
+        'gText_SavingVersionNum[] = _("E. Champs")' in strings
         and 'gText_SavingVersionNum[] = _("Ver 1.13")' not in strings
     ),
 }

@@ -1,6 +1,6 @@
-# Verdant source checkpoint
+# Emerald Champions source checkpoint
 
-This repository is a source-only checkpoint for Verdant Inclement Emerald. It intentionally excludes compiled ROMs and proprietary base-ROM data.
+This repository is the source-only checkpoint for Emerald Champions. It intentionally excludes compiled ROMs and proprietary base-ROM data.
 
 ## Current design
 

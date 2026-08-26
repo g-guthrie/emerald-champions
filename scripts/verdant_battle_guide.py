@@ -510,7 +510,7 @@ def build_guide() -> dict:
     unused = sorted(set(teams) - reachable)
     return {
         "meta": {
-            "title": "Verdant Complete Battle Guide",
+            "title": "Emerald Champions Complete Battle Guide",
             "ordering": "Canonical campaign route; optional fights follow their local chapter; rematches and postgame are separate.",
             "levelRule": "Opponent level = active strict cap + authored offset, clamped to levels 1-100.",
             "reachableBattleDefinitions": len(entries),
@@ -525,7 +525,7 @@ def build_guide() -> dict:
 
 def render_markdown(guide: dict) -> str:
     lines = [
-        "# Verdant Complete Battle Guide",
+        "# Emerald Champions Complete Battle Guide",
         "",
         "This is the campaign-order guide to every reachable trainer definition. Optional fights are kept in their earliest chapter; rematches and postgame challenges are separate. Levels use the active strict cap plus the listed offset.",
         "",

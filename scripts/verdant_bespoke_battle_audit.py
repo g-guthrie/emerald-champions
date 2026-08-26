@@ -197,6 +197,7 @@ def puzzle1_geometry_problems() -> list[str]:
 
 def main() -> None:
     designs = json.loads(read("docs/verdant_bespoke_battle_designs.json"))["designs"]
+    sequence = json.loads(read("docs/verdant_battle_sequence.json"))
     trainers_text = read("src/data/trainers.h")
     parties_text = read("src/data/trainer_parties.h")
     trainer_blocks = doubles.trainer_blocks(trainers_text)
@@ -5023,6 +5024,799 @@ def main() -> None:
     if battles_1_to_55 & {build["species"] for build in expected_edward56 + expected_alyssa56}:
         problems.append("Battle 56 repeats a species from Battles 1-55")
 
+    dale57 = designs["BATTLE_057_ROUTE_110_DALE"]
+    expected_dale57 = [
+        {"level": 1, "species": "SPECIES_LUMINEON", "item": "ITEM_SITRUS_BERRY", "ability_slot": 1, "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID", "moves": ["MOVE_SOAK", "MOVE_SCALD", "MOVE_AIR_SLASH", "MOVE_PROTECT"]},
+        {"level": 2, "species": "SPECIES_ARCTOVISH", "item": "ITEM_EXPERT_BELT", "ability_slot": 0, "spread": "SPREAD_31_IV_ATK_SPEED_NAIVE", "moves": ["MOVE_FREEZE_DRY", "MOVE_FISHIOUS_REND", "MOVE_CRUNCH", "MOVE_ROCK_SLIDE"]},
+        {"level": 2, "species": "SPECIES_OCTILLERY", "item": "ITEM_SCOPE_LENS", "ability_slot": 1, "spread": "SPREAD_31_IV_HP_SPATK_MODEST", "moves": ["MOVE_FOCUS_ENERGY", "MOVE_ENERGY_BALL", "MOVE_HYDRO_PUMP", "MOVE_ICE_BEAM"]},
+        {"level": 3, "species": "SPECIES_FLOATZEL", "item": "ITEM_MYSTIC_WATER", "ability_slot": 2, "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY", "moves": ["MOVE_WATERFALL", "MOVE_AQUA_JET", "MOVE_ICE_PUNCH", "MOVE_CRUNCH"]},
+    ]
+    if dale57.get("trainer_ids") != ["TRAINER_DALE"] or party_builds("TRAINER_DALE", trainers_text, parties_text) != expected_dale57:
+        problems.append("Battle 57: Dale source party or ownership differs")
+    if dale57.get("strict_cap") != 30 or dale57.get("evolution_stage_fit", {}).get("status") != "pass" or dale57.get("manual_quality") != 10 or dale57.get("manual_difficulty") != 8.9:
+        problems.append("Battle 57: cap, stage, quality, or difficulty closure drifted")
+    dale_block57 = trainer_blocks["TRAINER_DALE"].group(0)
+    for token in (".doubleBattle = TRUE", "AI_FLAG_SMART_SWITCHING", "AI_FLAG_HELP_PARTNER", "AI_FLAG_HP_AWARE", "AI_FLAG_COMBO_SETUP"):
+        if token not in dale_block57:
+            problems.append(f"Battle 57: Dale missing {token}")
+    abilities57 = {"SPECIES_LUMINEON": (1, "ABILITY_STORM_DRAIN"), "SPECIES_ARCTOVISH": (0, "ABILITY_WATER_ABSORB"), "SPECIES_OCTILLERY": (1, "ABILITY_SNIPER"), "SPECIES_FLOATZEL": (2, "ABILITY_WATER_VEIL")}
+    for species, (slot, ability) in abilities57.items():
+        slots = ability_slots.get(species, [])
+        if len(slots) <= slot or slots[slot] != ability:
+            problems.append(f"Battle 57: {species} slot {slot} is not {ability}: {slots}")
+    names57 = {"LUMINEON": "Lumineon", "ARCTOVISH": "Arctovish", "OCTILLERY": "Octillery", "FLOATZEL": "Floatzel"}
+    for build in expected_dale57:
+        species = build["species"].removeprefix("SPECIES_")
+        for move in build["moves"]:
+            if not move_is_legal(species, names57[species], move, level_source, tmhm_source, tm_indices, tutor_source, indices, egg_source):
+                problems.append(f"Battle 57: {species} cannot legally learn {move}")
+    dale_object57 = next(row for row in route110_map["object_events"] if row.get("script") == "Route110_EventScript_Dale")
+    if (dale_object57.get("x"), dale_object57.get("y"), dale_object57.get("movement_type"), dale_object57.get("trainer_sight_or_berry_tree_id")) != (10, 19, "MOVEMENT_TYPE_FACE_DOWN", "1"):
+        problems.append("Battle 57: Dale optional sight geometry drifted")
+    if "trainerbattle_single TRAINER_DALE" not in route110_scripts:
+        problems.append("Battle 57: Dale independent script drifted")
+    ai57 = read("src/battle_ai_main.c")
+    for token in ("effect == EFFECT_SOAK", "HasMoveEffect(BATTLE_PARTNER(battlerAtk), EFFECT_FREEZE_DRY)", "AI_DATA->partnerMove == MOVE_SOAK", "score += 10"):
+        if token not in ai57:
+            problems.append(f"Battle 57: reusable Soak coordination lost {token}")
+    dialogue57 = read("data/text/trainers.inc").split("Route110_Text_DaleIntro:", 1)[1].split("Route110_Text_IsabelIntro:", 1)[0]
+    for cue in ("mark one target", "every cast", "Soak makes", "Freeze-Dry"):
+        if cue not in dialogue57:
+            problems.append(f"Battle 57: dialogue misses {cue}")
+    donor_requirements57 = {"showdown:gen9randomdoublesbattle:011": {"Cryogonal"}, "showdown:gen6randomdoublesbattle:014": {"Octillery"}, "showdown:gen7randomdoublesbattle:024": {"Floatzel"}, "smogon:gen4nu:005": {"Floatzel"}}
+    for reference_id, required_species in donor_requirements57.items():
+        row = refs29.get(reference_id)
+        if row is None or row.get("completeness") != "full-sets" or not required_species <= set(row.get("roster", [])):
+            problems.append(f"Battle 57: competitive donor drifted {reference_id}")
+    battles_1_to_56 = battles_1_to_55 | {build["species"] for build in expected_edward56 + expected_alyssa56}
+    if battles_1_to_56 & {build["species"] for build in expected_dale57}:
+        problems.append("Battle 57 repeats a species from Battles 1-56")
+
+    jaclyn58 = designs["BATTLE_058_ROUTE_110_JACLYN"]
+    expected_jaclyn58 = [
+        {"level": 2, "species": "SPECIES_HATTREM", "item": "ITEM_EVIOLITE", "ability_slot": 2, "spread": "SPREAD_31_IV_HP_SPATK_MODEST", "moves": ["MOVE_PSYSHOCK", "MOVE_MYSTICAL_FIRE", "MOVE_DRAINING_KISS", "MOVE_HEALING_WISH"]},
+        {"level": 1, "species": "SPECIES_KADABRA", "item": "ITEM_FOCUS_SASH", "ability_slot": 2, "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID", "moves": ["MOVE_PSYCHIC", "MOVE_SHADOW_BALL", "MOVE_ENERGY_BALL", "MOVE_ENCORE"]},
+        {"level": 2, "species": "SPECIES_CHIMECHO", "item": "ITEM_COLBUR_BERRY", "ability_slot": 0, "spread": "SPREAD_31_IV_HP_SPDEF_CALM", "moves": ["MOVE_YAWN", "MOVE_PSYCHIC", "MOVE_SIGNAL_BEAM", "MOVE_RECOVER"]},
+        {"level": 3, "species": "SPECIES_SWOOBAT", "item": "ITEM_KEE_BERRY", "ability_slot": 2, "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID", "moves": ["MOVE_CALM_MIND", "MOVE_STORED_POWER", "MOVE_AIR_SLASH", "MOVE_ROOST"]},
+    ]
+    if jaclyn58.get("trainer_ids") != ["TRAINER_JACLYN"] or party_builds("TRAINER_JACLYN", trainers_text, parties_text) != expected_jaclyn58:
+        problems.append("Battle 58: Jaclyn source party or ownership differs")
+    if jaclyn58.get("strict_cap") != 30 or jaclyn58.get("evolution_stage_fit", {}).get("status") != "pass" or jaclyn58.get("manual_quality") != 10 or jaclyn58.get("manual_difficulty") != 8.8:
+        problems.append("Battle 58: cap, stage, quality, or difficulty closure drifted")
+    jaclyn_block58 = trainer_blocks["TRAINER_JACLYN"].group(0)
+    for token in (".doubleBattle = FALSE", "AI_FLAG_SMART_SWITCHING", "AI_FLAG_HP_AWARE", "AI_FLAG_SETUP_FIRST_TURN"):
+        if token not in jaclyn_block58:
+            problems.append(f"Battle 58: Jaclyn missing {token}")
+    abilities58 = {"SPECIES_HATTREM": (2, "ABILITY_MAGIC_BOUNCE"), "SPECIES_KADABRA": (2, "ABILITY_MAGIC_GUARD"), "SPECIES_CHIMECHO": (0, "ABILITY_LEVITATE"), "SPECIES_SWOOBAT": (2, "ABILITY_SIMPLE")}
+    names58 = {"HATTREM": "Hattrem", "KADABRA": "Kadabra", "CHIMECHO": "Chimecho", "SWOOBAT": "Swoobat"}
+    for species, (slot, ability) in abilities58.items():
+        slots = ability_slots.get(species, [])
+        if len(slots) <= slot or slots[slot] != ability:
+            problems.append(f"Battle 58: {species} slot {slot} is not {ability}: {slots}")
+    for build in expected_jaclyn58:
+        species = build["species"].removeprefix("SPECIES_")
+        for move in build["moves"]:
+            if not move_is_legal(species, names58[species], move, level_source, tmhm_source, tm_indices, tutor_source, indices, egg_source):
+                problems.append(f"Battle 58: {species} cannot legally learn {move}")
+    jaclyn_object58 = next(row for row in route110_map["object_events"] if row.get("script") == "Route110_EventScript_Jaclyn")
+    if (jaclyn_object58.get("x"), jaclyn_object58.get("y"), jaclyn_object58.get("movement_type"), jaclyn_object58.get("trainer_sight_or_berry_tree_id")) != (33, 15, "MOVEMENT_TYPE_FACE_LEFT", "1"):
+        problems.append("Battle 58: Jaclyn optional sight geometry drifted")
+    if "trainerbattle_single TRAINER_JACLYN" not in route110_scripts:
+        problems.append("Battle 58: Jaclyn singles script drifted")
+    dialogue58 = read("data/text/trainers.inc").split("Route110_Text_JaclynIntro:", 1)[1].split("Route110_Text_EdwinIntro:", 1)[0]
+    for cue in ("Four wonders", "every wonder", "one boost count twice", "Stop Swoobat"):
+        if cue not in dialogue58:
+            problems.append(f"Battle 58: dialogue misses {cue}")
+    for reference_id in ("showdown:gen6randombattle:028", "showdown:gen7randombattle:008"):
+        row = refs29.get(reference_id)
+        if row is None or row.get("completeness") != "full-sets" or "Swoobat" not in set(row.get("roster", [])):
+            problems.append(f"Battle 58: Simple donor drifted {reference_id}")
+    battles_1_to_57 = battles_1_to_56 | {build["species"] for build in expected_dale57}
+    if battles_1_to_57 & {build["species"] for build in expected_jaclyn58}:
+        problems.append("Battle 58 repeats a species from Battles 1-57")
+
+    anthony59 = designs["BATTLE_059_ROUTE_110_CYCLING_ANTHONY"]
+    expected_anthony59 = [
+        {"level": 0, "species": "SPECIES_DODUO", "item": "ITEM_SHARP_BEAK", "ability_slot": 2, "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY", "moves": ["MOVE_BRAVE_BIRD", "MOVE_DOUBLE_EDGE", "MOVE_JUMP_KICK", "MOVE_STEEL_WING"]},
+        {"level": 1, "species": "SPECIES_ZEBSTRIKA", "item": "ITEM_MAGNET", "ability_slot": 2, "spread": "SPREAD_31_IV_ATK_SPEED_NAIVE", "moves": ["MOVE_WILD_CHARGE", "MOVE_OVERHEAT", "MOVE_DOUBLE_EDGE", "MOVE_LOW_KICK"]},
+        {"level": 2, "species": "SPECIES_RAMPARDOS", "item": "ITEM_SITRUS_BERRY", "ability_slot": 2, "spread": "SPREAD_31_IV_HP_ATK_ADAMANT", "moves": ["MOVE_HEAD_SMASH", "MOVE_SUPERPOWER", "MOVE_ZEN_HEADBUTT", "MOVE_IRON_HEAD"]},
+        {"level": 3, "species": "SPECIES_PORYGON_Z", "item": "ITEM_WISE_GLASSES", "ability_slot": 1, "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID", "moves": ["MOVE_HYPER_BEAM", "MOVE_TRI_ATTACK", "MOVE_ICE_BEAM", "MOVE_DARK_PULSE"]},
+    ]
+    if anthony59.get("trainer_ids") != ["TRAINER_ANTHONY"] or party_builds("TRAINER_ANTHONY", trainers_text, parties_text) != expected_anthony59:
+        problems.append("Battle 59: Anthony source party or ownership differs")
+    if anthony59.get("strict_cap") != 30 or anthony59.get("evolution_stage_fit", {}).get("status") != "pass" or anthony59.get("manual_quality") != 10 or anthony59.get("manual_difficulty") != 8.9:
+        problems.append("Battle 59: cap, stage, quality, or difficulty closure drifted")
+    anthony_block59 = trainer_blocks["TRAINER_ANTHONY"].group(0)
+    for token in (".doubleBattle = FALSE", "AI_FLAG_SMART_SWITCHING"):
+        if token not in anthony_block59:
+            problems.append(f"Battle 59: Anthony missing {token}")
+    for token in ("AI_FLAG_COMBO_SETUP", "AI_FLAG_FIELD_CONTROL", "AI_FLAG_SETUP_FIRST_TURN", "AI_FLAG_SPEED_CONTROL", "AI_FLAG_PERISH_TRAP"):
+        if token in anthony_block59:
+            problems.append(f"Battle 59: Anthony has unrelated {token}")
+    abilities59 = {"SPECIES_DODUO": (2, "ABILITY_TANGLED_FEET"), "SPECIES_ZEBSTRIKA": (2, "ABILITY_SAP_SIPPER"), "SPECIES_RAMPARDOS": (2, "ABILITY_SHEER_FORCE"), "SPECIES_PORYGON_Z": (1, "ABILITY_DOWNLOAD")}
+    names59 = {"DODUO": "Doduo", "ZEBSTRIKA": "Zebstrika", "RAMPARDOS": "Rampardos", "PORYGON_Z": "PorygonZ"}
+    for species, (slot, ability) in abilities59.items():
+        slots = ability_slots.get(species, [])
+        if len(slots) <= slot or slots[slot] != ability:
+            problems.append(f"Battle 59: {species} slot {slot} is not {ability}: {slots}")
+    for build in expected_anthony59:
+        species = build["species"].removeprefix("SPECIES_")
+        for move in build["moves"]:
+            if not move_is_legal(species, names59[species], move, level_source, tmhm_source, tm_indices, tutor_source, indices, egg_source):
+                problems.append(f"Battle 59: {species} cannot legally learn {move}")
+    anthony_object59 = next(row for row in route110_map["object_events"] if row.get("script") == "Route110_EventScript_Anthony")
+    abigail_object59 = next(row for row in route110_map["object_events"] if row.get("script") == "Route110_EventScript_Abigail")
+    if (anthony_object59.get("x"), anthony_object59.get("y"), anthony_object59.get("movement_type"), anthony_object59.get("movement_range_x"), anthony_object59.get("movement_range_y"), anthony_object59.get("trainer_sight_or_berry_tree_id")) != (19, 31, "MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_UP_RIGHT_DOWN", 10, 1, "3"):
+        problems.append("Battle 59: Anthony moving patrol geometry drifted")
+    if (abigail_object59.get("x"), abigail_object59.get("y"), abigail_object59.get("movement_type"), abigail_object59.get("trainer_sight_or_berry_tree_id")) != (30, 31, "MOVEMENT_TYPE_FACE_LEFT", "4"):
+        problems.append("Battle 59: Abigail comparison geometry drifted")
+    if "trainerbattle_single TRAINER_ANTHONY" not in route110_scripts or "trainerbattle_single TRAINER_ABIGAIL_1" not in route110_scripts:
+        problems.append("Battle 59: independent Anthony/Abigail scripts drifted")
+    sequence59 = next(row for row in sequence["entries"] if row.get("index") == 59)
+    if sequence59.get("trainer_ids") != ["TRAINER_ANTHONY"] or "never intersects Abigail" not in sequence59.get("access_note", ""):
+        problems.append("Battle 59: source-correct non-pair sequence contract drifted")
+    dialogue59 = read("data/text/trainers.inc").split("Route110_Text_AnthonyIntro:", 1)[1].split("Route110_Text_BenjaminIntro:", 1)[0]
+    for cue in ("Four sprints", "survive every crash", "recharging", "opening"):
+        if cue not in dialogue59:
+            problems.append(f"Battle 59: dialogue misses {cue}")
+    donor_requirements59 = {"showdown:gen9championsrandomdoublesbattle:023": {"Rampardos"}, "showdown:gen9randomdoublesbattle:024": {"Rampardos"}, "showdown:gen6randomdoublesbattle:026": {"Porygon-Z"}}
+    for reference_id, required_species in donor_requirements59.items():
+        row = refs29.get(reference_id)
+        if row is None or row.get("completeness") != "full-sets" or not required_species <= set(row.get("roster", [])):
+            problems.append(f"Battle 59: commitment donor drifted {reference_id}")
+    battles_1_to_58 = battles_1_to_57 | {build["species"] for build in expected_jaclyn58}
+    if battles_1_to_58 & {build["species"] for build in expected_anthony59}:
+        problems.append("Battle 59 repeats a species from Battles 1-58")
+
+    abigail60 = designs["BATTLE_060_ROUTE_110_CYCLING_ABIGAIL"]
+    expected_abigail60 = [
+        {"level": 1, "species": "SPECIES_GASTRODON", "item": "ITEM_RINDO_BERRY", "ability_slot": 1, "spread": "SPREAD_31_IV_HP_DEF_BOLD", "moves": ["MOVE_SCALD", "MOVE_EARTH_POWER", "MOVE_ICE_BEAM", "MOVE_RECOVER"]},
+        {"level": 2, "species": "SPECIES_SCOLIPEDE", "item": "ITEM_BLACK_SLUDGE", "ability_slot": 2, "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY", "moves": ["MOVE_MEGAHORN", "MOVE_POISON_JAB", "MOVE_EARTHQUAKE", "MOVE_PROTECT"]},
+        {"level": 2, "species": "SPECIES_PONYTA", "item": "ITEM_LUM_BERRY", "ability_slot": 2, "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY", "moves": ["MOVE_FLARE_BLITZ", "MOVE_HIGH_HORSEPOWER", "MOVE_PLAY_ROUGH", "MOVE_MORNING_SUN"]},
+        {"level": 3, "species": "SPECIES_SNORLAX", "item": "ITEM_CHESTO_BERRY", "ability_slot": 1, "spread": "SPREAD_31_IV_HP_SPDEF_CAREFUL", "moves": ["MOVE_CURSE", "MOVE_BODY_SLAM", "MOVE_CRUNCH", "MOVE_REST"]},
+    ]
+    if abigail60.get("trainer_ids") != ["TRAINER_ABIGAIL_1"] or party_builds("TRAINER_ABIGAIL_1", trainers_text, parties_text) != expected_abigail60:
+        problems.append("Battle 60: Abigail source party or ownership differs")
+    if abigail60.get("strict_cap") != 30 or abigail60.get("evolution_stage_fit", {}).get("status") != "pass" or abigail60.get("manual_quality") != 10 or abigail60.get("manual_difficulty") != 9.0:
+        problems.append("Battle 60: cap, stage, quality, or difficulty closure drifted")
+    abigail_block60 = trainer_blocks["TRAINER_ABIGAIL_1"].group(0)
+    for token in (".doubleBattle = FALSE", "AI_FLAG_SMART_SWITCHING", "AI_FLAG_HP_AWARE"):
+        if token not in abigail_block60:
+            problems.append(f"Battle 60: Abigail missing {token}")
+    for token in ("AI_FLAG_COMBO_SETUP", "AI_FLAG_FIELD_CONTROL", "AI_FLAG_SETUP_FIRST_TURN", "AI_FLAG_SPEED_CONTROL", "AI_FLAG_PERISH_TRAP"):
+        if token in abigail_block60:
+            problems.append(f"Battle 60: Abigail has unrelated {token}")
+    abilities60 = {"SPECIES_GASTRODON": (1, "ABILITY_STORM_DRAIN"), "SPECIES_SCOLIPEDE": (2, "ABILITY_SPEED_BOOST"), "SPECIES_PONYTA": (2, "ABILITY_FLAME_BODY"), "SPECIES_SNORLAX": (1, "ABILITY_THICK_FAT")}
+    names60 = {"GASTRODON": "Gastrodon", "SCOLIPEDE": "Scolipede", "PONYTA": "Ponyta", "SNORLAX": "Snorlax"}
+    for species, (slot, ability) in abilities60.items():
+        slots = ability_slots.get(species, [])
+        if len(slots) <= slot or slots[slot] != ability:
+            problems.append(f"Battle 60: {species} slot {slot} is not {ability}: {slots}")
+    for build in expected_abigail60:
+        species = build["species"].removeprefix("SPECIES_")
+        for move in build["moves"]:
+            if not move_is_legal(species, names60[species], move, level_source, tmhm_source, tm_indices, tutor_source, indices, egg_source):
+                problems.append(f"Battle 60: {species} cannot legally learn {move}")
+    abigail_object60 = next(row for row in route110_map["object_events"] if row.get("script") == "Route110_EventScript_Abigail")
+    if (abigail_object60.get("x"), abigail_object60.get("y"), abigail_object60.get("movement_type"), abigail_object60.get("trainer_sight_or_berry_tree_id")) != (30, 31, "MOVEMENT_TYPE_FACE_LEFT", "4"):
+        problems.append("Battle 60: Abigail fixed Cycling Road geometry drifted")
+    abigail_script60 = route110_scripts.split("Route110_EventScript_Abigail::", 1)[1].split("Route110_EventScript_Isabel::", 1)[0]
+    for token in ("trainerbattle_single TRAINER_ABIGAIL_1", "Route110_EventScript_AbigailRegisterMatchCallAfterBattle", "register_matchcall TRAINER_ABIGAIL_1", "trainerbattle_rematch TRAINER_ABIGAIL_1"):
+        if token not in abigail_script60:
+            problems.append(f"Battle 60: Abigail callback/rematch script misses {token}")
+    if "[REMATCH_ABIGAIL] = REMATCH(TRAINER_ABIGAIL_1, TRAINER_ABIGAIL_2, TRAINER_ABIGAIL_3, TRAINER_ABIGAIL_4, ROUTE110)" not in read("src/battle_setup.c"):
+        problems.append("Battle 60: Abigail four-stage rematch table drifted")
+    if ".trainerId = TRAINER_ABIGAIL_1" not in read("src/match_call.c"):
+        problems.append("Battle 60: Abigail Match Call ownership drifted")
+    sequence60 = next(row for row in sequence["entries"] if row.get("index") == 60)
+    if sequence60.get("trainer_ids") != ["TRAINER_ABIGAIL_1"] or "never intersects Anthony" not in sequence60.get("access_note", ""):
+        problems.append("Battle 60: source-correct independent sequence contract drifted")
+    dialogue60 = read("data/text/trainers.inc").split("Route110_Text_AbigailIntro:", 1)[1].split("Route110_Text_JasmineIntro:", 1)[0]
+    for cue in ("four legs", "swim, cycle, run", "Pacing", "Every recovery", "endurance"):
+        if cue not in dialogue60:
+            problems.append(f"Battle 60: dialogue misses {cue}")
+    donor_requirements60 = {"smogon:gen8nu:007": {"Gastrodon"}, "showdown:gen8randomdoublesbattle:015": {"Scolipede"}, "showdown:gen4randomdoublesbattle:015": {"Ponyta"}, "showdown:gen4randombattle:019": {"Snorlax"}, "showdown:gen9championsrandomdoublesbattle:002": {"Snorlax"}}
+    for reference_id, required_species in donor_requirements60.items():
+        row = refs29.get(reference_id)
+        if row is None or row.get("completeness") != "full-sets" or not required_species <= set(row.get("roster", [])):
+            problems.append(f"Battle 60: endurance donor drifted {reference_id}")
+    battles_1_to_59 = battles_1_to_58 | {build["species"] for build in expected_anthony59}
+    if battles_1_to_59 & {build["species"] for build in expected_abigail60}:
+        problems.append("Battle 60 repeats a species from Battles 1-59")
+
+    benjamin61 = designs["BATTLE_061_ROUTE_110_CYCLING_BENJAMIN"]
+    expected_benjamin61 = [
+        {"level": 0, "species": "SPECIES_BRONZOR", "item": "ITEM_MENTAL_HERB", "ability_slot": 0, "spread": "SPREAD_31_IV_HP_DEF_SPDEF_SASSY", "moves": ["MOVE_TRICK_ROOM", "MOVE_STEALTH_ROCK", "MOVE_GYRO_BALL", "MOVE_PSYCHIC"]},
+        {"level": 1, "species": "SPECIES_DRAMPA", "item": "ITEM_THROAT_SPRAY", "ability_slot": 0, "spread": "SPREAD_31_IV_HP_SPATK_QUIET", "moves": ["MOVE_HYPER_VOICE", "MOVE_DRACO_METEOR", "MOVE_FLAMETHROWER", "MOVE_ROOST"]},
+        {"level": 2, "species": "SPECIES_CRABOMINABLE", "item": "ITEM_CHOICE_BAND", "ability_slot": 1, "spread": "SPREAD_31_IV_HP_ATK_BRAVE", "moves": ["MOVE_CLOSE_COMBAT", "MOVE_ICE_HAMMER", "MOVE_THUNDER_PUNCH", "MOVE_EARTHQUAKE"]},
+        {"level": 3, "species": "SPECIES_STAKATAKA", "item": "ITEM_AIR_BALLOON", "ability_slot": 0, "spread": "SPREAD_31_IV_HP_ATK_BRAVE", "moves": ["MOVE_TRICK_ROOM", "MOVE_GYRO_BALL", "MOVE_BODY_PRESS", "MOVE_STONE_EDGE"]},
+    ]
+    if benjamin61.get("trainer_ids") != ["TRAINER_BENJAMIN_1"] or party_builds("TRAINER_BENJAMIN_1", trainers_text, parties_text) != expected_benjamin61:
+        problems.append("Battle 61: Benjamin source party or ownership differs")
+    if benjamin61.get("strict_cap") != 30 or benjamin61.get("evolution_stage_fit", {}).get("status") != "pass" or benjamin61.get("manual_quality") != 10 or benjamin61.get("manual_difficulty") != 9.1:
+        problems.append("Battle 61: cap, stage, quality, or difficulty closure drifted")
+    benjamin_block61 = trainer_blocks["TRAINER_BENJAMIN_1"].group(0)
+    for token in (".doubleBattle = FALSE", "AI_FLAG_SMART_SWITCHING", "AI_FLAG_HP_AWARE", "AI_FLAG_SETUP_FIRST_TURN", "AI_FLAG_SPEED_CONTROL"):
+        if token not in benjamin_block61:
+            problems.append(f"Battle 61: Benjamin missing {token}")
+    for token in ("AI_FLAG_COMBO_SETUP", "AI_FLAG_FIELD_CONTROL", "AI_FLAG_PERISH_TRAP"):
+        if token in benjamin_block61:
+            problems.append(f"Battle 61: Benjamin has unrelated {token}")
+    abilities61 = {"SPECIES_BRONZOR": (0, "ABILITY_LEVITATE"), "SPECIES_DRAMPA": (0, "ABILITY_BERSERK"), "SPECIES_CRABOMINABLE": (1, "ABILITY_IRON_FIST"), "SPECIES_STAKATAKA": (0, "ABILITY_BEAST_BOOST")}
+    names61 = {"BRONZOR": "Bronzor", "DRAMPA": "Drampa", "CRABOMINABLE": "Crabominable", "STAKATAKA": "Stakataka"}
+    for species, (slot, ability) in abilities61.items():
+        slots = ability_slots.get(species, [])
+        if len(slots) <= slot or slots[slot] != ability:
+            problems.append(f"Battle 61: {species} slot {slot} is not {ability}: {slots}")
+    for build in expected_benjamin61:
+        species = build["species"].removeprefix("SPECIES_")
+        for move in build["moves"]:
+            if not move_is_legal(species, names61[species], move, level_source, tmhm_source, tm_indices, tutor_source, indices, egg_source):
+                problems.append(f"Battle 61: {species} cannot legally learn {move}")
+    benjamin_object61 = next(row for row in route110_map["object_events"] if row.get("script") == "Route110_EventScript_Benjamin")
+    if (benjamin_object61.get("x"), benjamin_object61.get("y"), benjamin_object61.get("movement_type"), benjamin_object61.get("movement_range_x"), benjamin_object61.get("movement_range_y"), benjamin_object61.get("trainer_sight_or_berry_tree_id")) != (16, 55, "MOVEMENT_TYPE_WALK_SEQUENCE_UP_LEFT_DOWN_RIGHT", 4, 4, "3"):
+        problems.append("Battle 61: Benjamin moving Cycling Road geometry drifted")
+    benjamin_script61 = route110_scripts.split("Route110_EventScript_Benjamin::", 1)[1].split("Route110_EventScript_Jasmine::", 1)[0]
+    for token in ("trainerbattle_single TRAINER_BENJAMIN_1", "Route110_EventScript_BenjaminRegisterMatchCallAfterBattle", "register_matchcall TRAINER_BENJAMIN_1", "trainerbattle_rematch TRAINER_BENJAMIN_1"):
+        if token not in benjamin_script61:
+            problems.append(f"Battle 61: Benjamin callback/rematch script misses {token}")
+    if "[REMATCH_BENJAMIN] = REMATCH(TRAINER_BENJAMIN_1, TRAINER_BENJAMIN_2, TRAINER_BENJAMIN_3, TRAINER_BENJAMIN_4, ROUTE110)" not in read("src/battle_setup.c"):
+        problems.append("Battle 61: Benjamin four-stage rematch table drifted")
+    if ".trainerId = TRAINER_BENJAMIN_1" not in read("src/match_call.c"):
+        problems.append("Battle 61: Benjamin Match Call ownership drifted")
+    sequence61 = next(row for row in sequence["entries"] if row.get("index") == 61)
+    if sequence61.get("trainer_ids") != ["TRAINER_BENJAMIN_1"] or sequence61.get("status") != "closed":
+        problems.append("Battle 61: sequence identity or closure drifted")
+    dialogue61 = read("data/text/trainers.inc").split("Route110_Text_BenjaminIntro:", 1)[1].split("Route110_Text_AbigailIntro:", 1)[0]
+    for cue in ("time turns around", "slowest rider", "both flips", "five turns", "again at the finish", "perfectly paced"):
+        if cue not in dialogue61:
+            problems.append(f"Battle 61: dialogue misses {cue}")
+    donor_requirements61 = {"showdown:gen9championsrandomdoublesbattle:006": {"Drampa"}, "showdown:gen9randombattle:010": {"Crabominable"}, "showdown:gen7randombattle:019": {"Stakataka"}}
+    for reference_id, required_species in donor_requirements61.items():
+        row = refs29.get(reference_id)
+        if row is None or row.get("completeness") != "full-sets" or not required_species <= set(row.get("roster", [])):
+            problems.append(f"Battle 61: slow-lane donor drifted {reference_id}")
+    battles_1_to_60 = battles_1_to_59 | {build["species"] for build in expected_abigail60}
+    if battles_1_to_60 & {build["species"] for build in expected_benjamin61}:
+        problems.append("Battle 61 repeats a species from Battles 1-60")
+
+    jasmine62 = designs["BATTLE_062_ROUTE_110_CYCLING_JASMINE"]
+    expected_jasmine62 = [
+        {"level": 1, "species": "SPECIES_THWACKEY", "item": "ITEM_MIRACLE_SEED", "ability_slot": 0, "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY", "moves": ["MOVE_GRASS_PLEDGE", "MOVE_KNOCK_OFF", "MOVE_WOOD_HAMMER", "MOVE_PROTECT"]},
+        {"level": 2, "species": "SPECIES_RABOOT", "item": "ITEM_WIDE_LENS", "ability_slot": 2, "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY", "moves": ["MOVE_FIRE_PLEDGE", "MOVE_FLARE_BLITZ", "MOVE_GUNK_SHOT", "MOVE_SUCKER_PUNCH"]},
+        {"level": 2, "species": "SPECIES_DRIZZILE", "item": "ITEM_MYSTIC_WATER", "ability_slot": 0, "spread": "SPREAD_31_IV_HP_SPATK_MODEST", "moves": ["MOVE_WATER_PLEDGE", "MOVE_WATER_PULSE", "MOVE_MUD_SHOT", "MOVE_PROTECT"]},
+        {"level": 3, "species": "SPECIES_BRIONNE", "item": "ITEM_WACAN_BERRY", "ability_slot": 2, "spread": "SPREAD_31_IV_HP_SPATK_MODEST", "moves": ["MOVE_WATER_PLEDGE", "MOVE_HYPER_VOICE", "MOVE_MOONBLAST", "MOVE_HELPING_HAND"]},
+    ]
+    if jasmine62.get("trainer_ids") != ["TRAINER_JASMINE"] or party_builds("TRAINER_JASMINE", trainers_text, parties_text) != expected_jasmine62:
+        problems.append("Battle 62: Jasmine source party or ownership differs")
+    if jasmine62.get("strict_cap") != 30 or jasmine62.get("evolution_stage_fit", {}).get("status") != "pass" or jasmine62.get("manual_quality") != 10 or jasmine62.get("manual_difficulty") != 9.1:
+        problems.append("Battle 62: cap, stage, quality, or difficulty closure drifted")
+    jasmine_block62 = trainer_blocks["TRAINER_JASMINE"].group(0)
+    for token in (".doubleBattle = TRUE", "AI_FLAG_HELP_PARTNER", "AI_FLAG_HP_AWARE"):
+        if token not in jasmine_block62:
+            problems.append(f"Battle 62: Jasmine missing {token}")
+    for token in ("AI_FLAG_SMART_SWITCHING", "AI_FLAG_COMBO_SETUP", "AI_FLAG_FIELD_CONTROL", "AI_FLAG_SPEED_CONTROL", "AI_FLAG_SETUP_FIRST_TURN", "AI_FLAG_PERISH_TRAP"):
+        if token in jasmine_block62:
+            problems.append(f"Battle 62: Jasmine has unrelated {token}")
+    abilities62 = {"SPECIES_THWACKEY": (0, "ABILITY_OVERGROW"), "SPECIES_RABOOT": (2, "ABILITY_LIBERO"), "SPECIES_DRIZZILE": (0, "ABILITY_TORRENT"), "SPECIES_BRIONNE": (2, "ABILITY_LIQUID_VOICE")}
+    names62 = {"THWACKEY": "Thwackey", "RABOOT": "Raboot", "DRIZZILE": "Drizzile", "BRIONNE": "Brionne"}
+    for species, (slot, ability) in abilities62.items():
+        slots = ability_slots.get(species, [])
+        if len(slots) <= slot or slots[slot] != ability:
+            problems.append(f"Battle 62: {species} slot {slot} is not {ability}: {slots}")
+    for build in expected_jasmine62:
+        species = build["species"].removeprefix("SPECIES_")
+        for move in build["moves"]:
+            if not move_is_legal(species, names62[species], move, level_source, tmhm_source, tm_indices, tutor_source, indices, egg_source):
+                problems.append(f"Battle 62: {species} cannot legally learn {move}")
+    jasmine_object62 = next(row for row in route110_map["object_events"] if row.get("script") == "Route110_EventScript_Jasmine")
+    if (jasmine_object62.get("x"), jasmine_object62.get("y"), jasmine_object62.get("movement_type"), jasmine_object62.get("movement_range_x"), jasmine_object62.get("movement_range_y"), jasmine_object62.get("trainer_sight_or_berry_tree_id")) != (16, 73, "MOVEMENT_TYPE_WALK_SEQUENCE_UP_RIGHT_DOWN_LEFT", 2, 14, "3"):
+        problems.append("Battle 62: Jasmine long-patrol geometry drifted")
+    jasmine_script62 = route110_scripts.split("Route110_EventScript_Jasmine::", 1)[1].split("Route110_EventScript_Abigail::", 1)[0]
+    if "trainerbattle_double TRAINER_JASMINE, Route110_Text_JasmineIntro, Route110_Text_JasmineDefeated, Route110_Text_JasmineNotEnoughPokemon" not in jasmine_script62:
+        problems.append("Battle 62: Jasmine guarded double script drifted")
+    for forbidden in ("trainerbattle_single TRAINER_JASMINE", "register_matchcall", "trainerbattle_rematch"):
+        if forbidden in jasmine_script62:
+            problems.append(f"Battle 62: Jasmine retained forbidden source behavior {forbidden}")
+    dialogue62 = read("data/text/trainers.inc").split("Route110_Text_JasmineIntro:", 1)[1].split("Route110_Text_EdwardIntro:", 1)[0]
+    for cue in ("relay changes course", "Two Pledges", "line change", "next pairing", "needs two Pokémon", "Bring a partner"):
+        if cue not in dialogue62:
+            problems.append(f"Battle 62: dialogue misses {cue}")
+    ai62 = read("src/battle_ai_main.c")
+    for token in ("case EFFECT_PLEDGE:", "ArePledgeMovesCompatible(move, AI_DATA->partnerMove)", "PartnerHasCompatiblePledgeMove", "GetPledgeCombinationMove"):
+        if token not in ai62:
+            problems.append(f"Battle 62: native Pledge coordination lost {token}")
+    donor_requirements62 = {"smogon:gen9ou:003": {"Rillaboom"}, "smogon:gen9ou:010": {"Cinderace"}, "showdown:gen9randomdoublesbattle:003": {"Inteleon"}, "showdown:gen8randomdoublesbattle:003": {"Primarina"}}
+    for reference_id, required_species in donor_requirements62.items():
+        row = refs29.get(reference_id)
+        if row is None or row.get("completeness") != "full-sets" or not required_species <= set(row.get("roster", [])):
+            problems.append(f"Battle 62: Pledge family donor drifted {reference_id}")
+    battles_1_to_61 = battles_1_to_60 | {build["species"] for build in expected_benjamin61}
+    repeats62 = battles_1_to_61 & {build["species"] for build in expected_jasmine62}
+    if repeats62 != {"SPECIES_BRIONNE"}:
+        problems.append(f"Battle 62: intended dynamic-only Brionne repeat changed: {sorted(repeats62)}")
+
+    jacob63 = designs["BATTLE_063_ROUTE_110_CYCLING_JACOB"]
+    expected_jacob63 = [
+        {"level": 0, "species": "SPECIES_FERROSEED", "item": "ITEM_ROCKY_HELMET", "ability_slot": 0, "spread": "SPREAD_31_IV_HP_ATK_BRAVE", "moves": ["MOVE_LEECH_SEED", "MOVE_GYRO_BALL", "MOVE_KNOCK_OFF", "MOVE_PROTECT"]},
+        {"level": 1, "species": "SPECIES_DRUDDIGON", "item": "ITEM_ASSAULT_VEST", "ability_slot": 0, "spread": "SPREAD_31_IV_HP_ATK_ADAMANT", "moves": ["MOVE_DRAGON_CLAW", "MOVE_FIRE_PUNCH", "MOVE_SUCKER_PUNCH", "MOVE_IRON_HEAD"]},
+        {"level": 2, "species": "SPECIES_SHARPEDO", "item": "ITEM_EXPERT_BELT", "ability_slot": 0, "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY", "moves": ["MOVE_LIQUIDATION", "MOVE_PSYCHIC_FANGS", "MOVE_ICE_FANG", "MOVE_PROTECT"]},
+        {"level": 3, "species": "SPECIES_MOLTRES", "item": "ITEM_CHARTI_BERRY", "ability_slot": 2, "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID", "moves": ["MOVE_HEAT_WAVE", "MOVE_AIR_SLASH", "MOVE_ROOST", "MOVE_PROTECT"]},
+    ]
+    if jacob63.get("trainer_ids") != ["TRAINER_JACOB"] or party_builds("TRAINER_JACOB", trainers_text, parties_text) != expected_jacob63:
+        problems.append("Battle 63: Jacob source party or ownership differs")
+    if jacob63.get("strict_cap") != 30 or jacob63.get("evolution_stage_fit", {}).get("status") != "pass" or jacob63.get("manual_quality") != 10 or jacob63.get("manual_difficulty") != 9.0:
+        problems.append("Battle 63: cap, stage, quality, or difficulty closure drifted")
+    jacob_block63 = trainer_blocks["TRAINER_JACOB"].group(0)
+    for token in (".doubleBattle = TRUE", "AI_FLAG_HELP_PARTNER", "AI_FLAG_HP_AWARE", "AI_FLAG_SMART_SWITCHING"):
+        if token not in jacob_block63:
+            problems.append(f"Battle 63: Jacob missing {token}")
+    for token in ("AI_FLAG_COMBO_SETUP", "AI_FLAG_FIELD_CONTROL", "AI_FLAG_SPEED_CONTROL", "AI_FLAG_SETUP_FIRST_TURN", "AI_FLAG_PERISH_TRAP"):
+        if token in jacob_block63:
+            problems.append(f"Battle 63: Jacob has unrelated {token}")
+    abilities63 = {"SPECIES_FERROSEED": (0, "ABILITY_IRON_BARBS"), "SPECIES_DRUDDIGON": (0, "ABILITY_ROUGH_SKIN"), "SPECIES_SHARPEDO": (0, "ABILITY_ROUGH_SKIN"), "SPECIES_MOLTRES": (2, "ABILITY_FLAME_BODY")}
+    names63 = {"FERROSEED": "Ferroseed", "DRUDDIGON": "Druddigon", "SHARPEDO": "Sharpedo", "MOLTRES": "Moltres"}
+    for species, (slot, ability) in abilities63.items():
+        slots = ability_slots.get(species, [])
+        if len(slots) <= slot or slots[slot] != ability:
+            problems.append(f"Battle 63: {species} slot {slot} is not {ability}: {slots}")
+    for build in expected_jacob63:
+        species = build["species"].removeprefix("SPECIES_")
+        for move in build["moves"]:
+            if not move_is_legal(species, names63[species], move, level_source, tmhm_source, tm_indices, tutor_source, indices, egg_source):
+                problems.append(f"Battle 63: {species} cannot legally learn {move}")
+    jacob_object63 = next(row for row in route110_map["object_events"] if row.get("script") == "Route110_EventScript_Jacob")
+    if (jacob_object63.get("x"), jacob_object63.get("y"), jacob_object63.get("movement_type"), jacob_object63.get("movement_range_x"), jacob_object63.get("movement_range_y"), jacob_object63.get("trainer_sight_or_berry_tree_id")) != (21, 78, "MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_UP_RIGHT_DOWN", 7, 1, "2"):
+        problems.append("Battle 63: Jacob southern patrol geometry drifted")
+    jacob_script63 = route110_scripts.split("Route110_EventScript_Jacob::", 1)[1].split("Route110_EventScript_Anthony::", 1)[0]
+    if "trainerbattle_double TRAINER_JACOB, Route110_Text_JacobIntro, Route110_Text_JacobDefeated, Route110_Text_JacobNotEnoughPokemon" not in jacob_script63:
+        problems.append("Battle 63: Jacob guarded double script drifted")
+    for forbidden in ("trainerbattle_single TRAINER_JACOB", "register_matchcall", "trainerbattle_rematch"):
+        if forbidden in jacob_script63:
+            problems.append(f"Battle 63: Jacob retained forbidden source behavior {forbidden}")
+    dialogue63 = read("data/text/trainers.inc").split("Route110_Text_JacobIntro:", 1)[1].split("Route110_Text_AnthonyIntro:", 1)[0]
+    for cue in ("brakes before contact", "collision", "safe line", "rough skin", "Fight from range", "needs two Pokémon"):
+        if cue not in dialogue63:
+            problems.append(f"Battle 63: dialogue misses {cue}")
+    donor_requirements63 = {"showdown:gen5randomdoublesbattle:027": {"Ferroseed", "Druddigon"}, "showdown:gen6randomdoublesbattle:004": {"Sharpedo"}, "showdown:gen6randomdoublesbattle:014": {"Moltres"}}
+    for reference_id, required_species in donor_requirements63.items():
+        row = refs29.get(reference_id)
+        if row is None or row.get("completeness") != "full-sets" or not required_species <= set(row.get("roster", [])):
+            problems.append(f"Battle 63: contact donor drifted {reference_id}")
+    battles_1_to_62 = battles_1_to_61 | {build["species"] for build in expected_jasmine62}
+    if battles_1_to_62 & {build["species"] for build in expected_jacob63}:
+        problems.append("Battle 63 repeats a species from Battles 1-62")
+
+    wally64 = designs["BATTLE_064_MAUVILLE_WALLY"]
+    expected_wally64 = [
+        {"level": 2, "species": "SPECIES_WEAVILE", "item": "ITEM_FOCUS_SASH", "ability_slot": 2, "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY", "moves": ["MOVE_TRIPLE_AXEL", "MOVE_KNOCK_OFF", "MOVE_LOW_KICK", "MOVE_ICE_SHARD"]},
+        {"level": 2, "species": "SPECIES_ZAPDOS", "item": "ITEM_MAGNET", "ability_slot": 2, "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID", "moves": ["MOVE_TAILWIND", "MOVE_THUNDERBOLT", "MOVE_HEAT_WAVE", "MOVE_ROOST"]},
+        {"level": 0, "species": "SPECIES_DRILBUR", "item": "ITEM_SOFT_SAND", "ability_slot": 2, "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY", "moves": ["MOVE_EARTHQUAKE", "MOVE_DRILL_RUN", "MOVE_ROCK_SLIDE", "MOVE_PROTECT"]},
+        {"level": 1, "species": "SPECIES_ROSELIA", "item": "ITEM_EVIOLITE", "ability_slot": 0, "spread": "SPREAD_31_IV_HP_SPATK_MODEST", "moves": ["MOVE_SLUDGE_BOMB", "MOVE_GIGA_DRAIN", "MOVE_DAZZLING_GLEAM", "MOVE_PROTECT"]},
+        {"level": 3, "species": "SPECIES_AZUMARILL", "item": "ITEM_ASSAULT_VEST", "ability_slot": 1, "spread": "SPREAD_31_IV_HP_ATK_ADAMANT", "moves": ["MOVE_WATERFALL", "MOVE_PLAY_ROUGH", "MOVE_KNOCK_OFF", "MOVE_ICE_PUNCH"]},
+        {"level": 4, "species": "SPECIES_GALLADE", "item": "ITEM_GALLADITE", "ability_slot": 2, "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY", "moves": ["MOVE_SACRED_SWORD", "MOVE_PSYCHO_CUT", "MOVE_NIGHT_SLASH", "MOVE_WIDE_GUARD"]},
+    ]
+    if wally64.get("trainer_ids") != ["TRAINER_WALLY_MAUVILLE"] or party_builds("TRAINER_WALLY_MAUVILLE", trainers_text, parties_text) != expected_wally64:
+        problems.append("Battle 64: Wally source party or ownership differs")
+    if wally64.get("strict_cap") != 30 or wally64.get("evolution_stage_fit", {}).get("status") != "pass" or wally64.get("manual_quality") != 10 or wally64.get("manual_difficulty") != 9.7:
+        problems.append("Battle 64: cap, stage, quality, or difficulty closure drifted")
+    wally_block64 = trainer_blocks["TRAINER_WALLY_MAUVILLE"].group(0)
+    for token in (".doubleBattle = TRUE", "AI_FLAG_SMART_SWITCHING", "AI_FLAG_HELP_PARTNER", "AI_FLAG_HP_AWARE", "AI_FLAG_SPEED_CONTROL"):
+        if token not in wally_block64:
+            problems.append(f"Battle 64: Wally missing {token}")
+    for token in ("AI_FLAG_COMBO_SETUP", "AI_FLAG_FIELD_CONTROL", "AI_FLAG_SETUP_FIRST_TURN", "AI_FLAG_PERISH_TRAP"):
+        if token in wally_block64:
+            problems.append(f"Battle 64: Wally has unrelated {token}")
+    abilities64 = {"SPECIES_WEAVILE": (2, "ABILITY_PICKPOCKET"), "SPECIES_ZAPDOS": (2, "ABILITY_STATIC"), "SPECIES_DRILBUR": (2, "ABILITY_MOLD_BREAKER"), "SPECIES_ROSELIA": (0, "ABILITY_NATURAL_CURE"), "SPECIES_AZUMARILL": (1, "ABILITY_HUGE_POWER"), "SPECIES_GALLADE": (2, "ABILITY_JUSTIFIED")}
+    names64 = {"WEAVILE": "Weavile", "ZAPDOS": "Zapdos", "DRILBUR": "Drilbur", "ROSELIA": "Roselia", "AZUMARILL": "Azumarill", "GALLADE": "Gallade"}
+    for species, (slot, ability) in abilities64.items():
+        slots = ability_slots.get(species, [])
+        if len(slots) <= slot or slots[slot] != ability:
+            problems.append(f"Battle 64: {species} slot {slot} is not {ability}: {slots}")
+    for build in expected_wally64:
+        species = build["species"].removeprefix("SPECIES_")
+        for move in build["moves"]:
+            if not move_is_legal(species, names64[species], move, level_source, tmhm_source, tm_indices, tutor_source, indices, egg_source):
+                problems.append(f"Battle 64: {species} cannot legally learn {move}")
+    if "[SPECIES_GALLADE]\t = {{EVO_MEGA_EVOLUTION, ITEM_GALLADITE, SPECIES_GALLADE_MEGA}}" not in read("src/data/pokemon/evolution.h"):
+        problems.append("Battle 64: Galladite Mega mapping drifted")
+    mauville64 = read("data/maps/MauvilleCity/scripts.inc")
+    battle_script64 = mauville64.split("MauvilleCity_EventScript_BattleWally::", 1)[1].split("MauvilleCity_EventScript_DeclineWallyBattle::", 1)[0]
+    for token in ("special HasEnoughMonsForDoubleBattle", "compare VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS", "goto_if_ne MauvilleCity_EventScript_WallyNeedsTwoMons", "trainerbattle_no_intro TRAINER_WALLY_MAUVILLE", "MauvilleCity_EventScript_WallyNeedsTwoMons::", "releaseall", "end"):
+        if token not in battle_script64:
+            problems.append(f"Battle 64: guarded no-intro battle misses {token}")
+    guard64 = battle_script64.split("MauvilleCity_EventScript_WallyNeedsTwoMons::", 1)[1]
+    if "return" in guard64:
+        problems.append("Battle 64: one-usable guard can fall through into victory choreography")
+    for token in ("setflag FLAG_DECLINED_WALLY_BATTLE_MAUVILLE", "setflag FLAG_DEFEATED_WALLY_MAUVILLE", "setflag FLAG_ENABLE_FIRST_WALLY_POKENAV_CALL", "clearflag FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_WALLY"):
+        if token not in mauville64:
+            problems.append(f"Battle 64: native decline/victory continuity misses {token}")
+    dialogue64 = mauville64.split("MauvilleCity_Text_WallyWeCanBeatAnyone:", 1)[1].split("MauvilleCity_Text_WallyIllGoBackToVerdanturf:", 1)[0]
+    for cue in ("Gallade and I trained a whole team", "studied every matchup", "team covers itself", "one I missed", "bring two healthy", "real", "Double Battle"):
+        if cue not in dialogue64:
+            problems.append(f"Battle 64: dialogue misses {cue}")
+    donor_requirements64 = {"smogon:gen6ou:010": {"Weavile", "Zapdos", "Excadrill", "Gallade"}, "showdown:gen9championsrandomdoublesbattle:012": {"Weavile"}, "showdown:gen9championsrandomdoublesbattle:007": {"Azumarill"}}
+    for reference_id, required_species in donor_requirements64.items():
+        row = refs29.get(reference_id)
+        if row is None or row.get("completeness") != "full-sets" or not required_species <= set(row.get("roster", [])):
+            problems.append(f"Battle 64: balance donor drifted {reference_id}")
+    battles_1_to_63 = battles_1_to_62 | {build["species"] for build in expected_jacob63}
+    repeats64 = battles_1_to_63 & {build["species"] for build in expected_wally64}
+    if repeats64 != {"SPECIES_DRILBUR", "SPECIES_AZUMARILL", "SPECIES_GALLADE"}:
+        problems.append(f"Battle 64: intended continuity repeats changed: {sorted(repeats64)}")
+
+    pair65 = designs["BATTLE_065_MAUVILLE_GYM_VIVIAN_KIRK"]
+    expected_vivian65 = [
+        {"level": 1, "species": "SPECIES_MR_MIME", "item": "ITEM_FOCUS_SASH", "ability_slot": 0, "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID", "moves": ["MOVE_FAKE_OUT", "MOVE_PSYCHIC", "MOVE_DAZZLING_GLEAM", "MOVE_ENCORE"]},
+        {"level": 2, "species": "SPECIES_LOUDRED", "item": "ITEM_EVIOLITE", "ability_slot": 0, "spread": "SPREAD_31_IV_HP_SPATK_MODEST", "moves": ["MOVE_HYPER_VOICE", "MOVE_FLAMETHROWER", "MOVE_ICE_BEAM", "MOVE_SHADOW_BALL"]},
+        {"level": 3, "species": "SPECIES_BASTIODON", "item": "ITEM_SHUCA_BERRY", "ability_slot": 2, "spread": "SPREAD_31_IV_HP_SPDEF_CALM", "moves": ["MOVE_METAL_BURST", "MOVE_FLASH_CANNON", "MOVE_ROCK_SLIDE", "MOVE_PROTECT"]},
+        {"level": 4, "species": "SPECIES_PUMPKABOO", "item": "ITEM_FLAME_ORB", "ability_slot": 1, "spread": "SPREAD_31_IV_HP_SPATK_MODEST", "moves": ["MOVE_SHADOW_BALL", "MOVE_GIGA_DRAIN", "MOVE_MYSTICAL_FIRE", "MOVE_PROTECT"]},
+    ]
+    expected_kirk65 = [
+        {"level": 2, "species": "SPECIES_TOXTRICITY", "item": "ITEM_THROAT_SPRAY", "ability_slot": 0, "spread": "SPREAD_31_IV_SPATK_SPEED_MODEST", "moves": ["MOVE_BOOMBURST", "MOVE_OVERDRIVE", "MOVE_SLUDGE_BOMB", "MOVE_PROTECT"]},
+        {"level": 2, "species": "SPECIES_MISMAGIUS", "item": "ITEM_WISE_GLASSES", "ability_slot": 2, "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID", "moves": ["MOVE_HYPER_VOICE", "MOVE_POWER_GEM", "MOVE_MYSTICAL_FIRE", "MOVE_PROTECT"]},
+        {"level": 3, "species": "SPECIES_GOLETT", "item": "ITEM_EXPERT_BELT", "ability_slot": 0, "spread": "SPREAD_31_IV_HP_ATK_ADAMANT", "moves": ["MOVE_STOMPING_TANTRUM", "MOVE_ICE_PUNCH", "MOVE_DRAIN_PUNCH", "MOVE_SHADOW_PUNCH"]},
+        {"level": 4, "species": "SPECIES_GENGAR", "item": "ITEM_LIFE_ORB", "ability_slot": 0, "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID", "moves": ["MOVE_SHADOW_BALL", "MOVE_SLUDGE_BOMB", "MOVE_FOCUS_BLAST", "MOVE_THUNDERBOLT"]},
+    ]
+    if pair65.get("trainer_ids") != ["TRAINER_VIVIAN", "TRAINER_KIRK"] or party_builds("TRAINER_VIVIAN", trainers_text, parties_text) != expected_vivian65 or party_builds("TRAINER_KIRK", trainers_text, parties_text) != expected_kirk65:
+        problems.append("Battle 65: Vivian/Kirk source halves or ownership differ")
+    if pair65.get("strict_cap") != 30 or pair65.get("evolution_stage_fit", {}).get("status") != "pass" or pair65.get("manual_quality") != 10 or pair65.get("manual_difficulty") != 9.3:
+        problems.append("Battle 65: cap, stage, quality, or difficulty closure drifted")
+    branch65 = pair65.get("branch_contract", {})
+    if branch65.get("joint", {}).get("vivian_source_slots") != [0, 1, 2] or branch65.get("joint", {}).get("kirk_source_slots") != [0, 1, 2] or branch65.get("joint", {}).get("intended_lead") != ["SPECIES_MR_MIME", "SPECIES_TOXTRICITY"]:
+        problems.append("Battle 65: joint prefix contract drifted")
+    if branch65.get("split_vivian", {}).get("format") != "single" or branch65.get("split_kirk", {}).get("format") != "single" or not branch65.get("split_vivian", {}).get("one_usable_supported"):
+        problems.append("Battle 65: safe split-single contracts drifted")
+    for trainer_id in ("TRAINER_VIVIAN", "TRAINER_KIRK"):
+        block65 = trainer_blocks[trainer_id].group(0)
+        for token in (".doubleBattle = FALSE", "AI_FLAG_SMART_SWITCHING", "AI_FLAG_HELP_PARTNER", "AI_FLAG_HP_AWARE"):
+            if token not in block65:
+                problems.append(f"Battle 65: {trainer_id} missing {token}")
+        for token in ("AI_FLAG_COMBO_SETUP", "AI_FLAG_FIELD_CONTROL", "AI_FLAG_SPEED_CONTROL", "AI_FLAG_SETUP_FIRST_TURN", "AI_FLAG_PERISH_TRAP"):
+            if token in block65:
+                problems.append(f"Battle 65: {trainer_id} has unrelated {token}")
+    abilities65 = {"SPECIES_MR_MIME": (0, "ABILITY_SOUNDPROOF"), "SPECIES_LOUDRED": (0, "ABILITY_SOUNDPROOF"), "SPECIES_BASTIODON": (2, "ABILITY_SOUNDPROOF"), "SPECIES_PUMPKABOO": (1, "ABILITY_FLARE_BOOST"), "SPECIES_TOXTRICITY": (0, "ABILITY_PUNK_ROCK"), "SPECIES_MISMAGIUS": (2, "ABILITY_PIXILATE"), "SPECIES_GOLETT": (0, "ABILITY_IRON_FIST"), "SPECIES_GENGAR": (0, "ABILITY_LEVITATE")}
+    names65 = {"MR_MIME": "MrMime", "LOUDRED": "Loudred", "BASTIODON": "Bastiodon", "PUMPKABOO": "Pumpkaboo", "TOXTRICITY": "Toxtricity", "MISMAGIUS": "Mismagius", "GOLETT": "Golett", "GENGAR": "Gengar"}
+    for species, (slot, ability) in abilities65.items():
+        slots = ability_slots.get(species, [])
+        if len(slots) <= slot or slots[slot] != ability:
+            problems.append(f"Battle 65: {species} slot {slot} is not {ability}: {slots}")
+    for build in expected_vivian65 + expected_kirk65:
+        species = build["species"].removeprefix("SPECIES_")
+        for move in build["moves"]:
+            if not move_is_legal(species, names65[species], move, level_source, tmhm_source, tm_indices, tutor_source, indices, egg_source):
+                problems.append(f"Battle 65: {species} cannot legally learn {move}")
+    gym_map65 = json.loads(read("data/maps/MauvilleCity_Gym/map.json"))
+    vivian_object65 = next(row for row in gym_map65["object_events"] if row.get("script") == "MauvilleCity_Gym_EventScript_Vivian")
+    kirk_object65 = next(row for row in gym_map65["object_events"] if row.get("script") == "MauvilleCity_Gym_EventScript_Kirk")
+    if (vivian_object65.get("x"), vivian_object65.get("y"), vivian_object65.get("movement_type"), vivian_object65.get("trainer_sight_or_berry_tree_id")) != (1, 16, "MOVEMENT_TYPE_FACE_UP", "2") or (kirk_object65.get("x"), kirk_object65.get("y"), kirk_object65.get("movement_type"), kirk_object65.get("trainer_sight_or_berry_tree_id")) != (1, 13, "MOVEMENT_TYPE_FACE_DOWN", "2"):
+        problems.append("Battle 65: shared two-tile native-pair geometry drifted")
+    gym_scripts65 = read("data/maps/MauvilleCity_Gym/scripts.inc")
+    for token in ("trainerbattle_single TRAINER_VIVIAN", "trainerbattle_single TRAINER_KIRK"):
+        if token not in gym_scripts65:
+            problems.append(f"Battle 65: native pair script lost {token}")
+    ai65 = read("src/battle_ai_main.c")
+    for token in ("AI_DATA->atkPartnerAbility == ABILITY_SOUNDPROOF && TestMoveFlags(move, FLAG_SOUND)", "AI_GetMoveEffectiveness(move, battlerAtk, battlerAtkPartner) != AI_EFFECTIVENESS_x0"):
+        if token not in ai65:
+            problems.append(f"Battle 65: reusable spread-immunity AI lost {token}")
+    dialogue65 = gym_scripts65.split("MauvilleCity_Gym_Text_KirkIntro:", 1)[1].split("MauvilleCity_Gym_Text_ShawnIntro:", 1)[0] + gym_scripts65.split("MauvilleCity_Gym_Text_VivianIntro:", 1)[1].split("MauvilleCity_Gym_Text_AngeloIntro:", 1)[0]
+    for cue in ("full volume", "never fear Boomburst", "Ghost or Soundproof", "inside the sound", "Soundproof and Ghost types ignore", "Boomburst"):
+        if cue not in dialogue65:
+            problems.append(f"Battle 65: dialogue misses {cue}")
+    donor_requirements65 = {"showdown:gen9randomdoublesbattle:028": {"Toxtricity"}, "showdown:gen4randomdoublesbattle:012": {"Loudred"}, "showdown:gen9championsrandomdoublesbattle:002": {"Bastiodon"}, "showdown:gen5randomdoublesbattle:017": {"Golett"}, "showdown:gen8randomdoublesbattle:028": {"Gengar"}}
+    for reference_id, required_species in donor_requirements65.items():
+        row = refs29.get(reference_id)
+        if row is None or row.get("completeness") != "full-sets" or not required_species <= set(row.get("roster", [])):
+            problems.append(f"Battle 65: sound donor drifted {reference_id}")
+    battles_1_to_64 = battles_1_to_63 | {build["species"] for build in expected_wally64}
+    if battles_1_to_64 & {build["species"] for build in expected_vivian65 + expected_kirk65}:
+        problems.append("Battle 65 repeats a species from Battles 1-64")
+
+    ben66 = designs["BATTLE_066_MAUVILLE_GYM_BEN"]
+    expected_ben66 = [
+        {"level": 1, "species": "SPECIES_GLIMMET", "item": "ITEM_SHUCA_BERRY", "ability_slot": 0, "spread": "SPREAD_31_IV_HP_SPATK_MODEST", "moves": ["MOVE_STEALTH_ROCK", "MOVE_SLUDGE_WAVE", "MOVE_POWER_GEM", "MOVE_PROTECT"]},
+        {"level": 2, "species": "SPECIES_SKARMORY", "item": "ITEM_RED_CARD", "ability_slot": 1, "spread": "SPREAD_31_IV_HP_DEF_IMPISH", "moves": ["MOVE_SPIKES", "MOVE_WHIRLWIND", "MOVE_BODY_PRESS", "MOVE_ROOST"]},
+        {"level": 3, "species": "SPECIES_GHOLDENGO", "item": "ITEM_AIR_BALLOON", "ability_slot": 0, "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID", "moves": ["MOVE_MAKE_IT_RAIN", "MOVE_SHADOW_BALL", "MOVE_THUNDERBOLT", "MOVE_RECOVER"]},
+        {"level": 4, "species": "SPECIES_GUZZLORD", "item": "ITEM_ASSAULT_VEST", "ability_slot": 0, "spread": "SPREAD_31_IV_HP_ATK_ADAMANT", "moves": ["MOVE_DRAGON_TAIL", "MOVE_KNOCK_OFF", "MOVE_HEAVY_SLAM", "MOVE_STOMPING_TANTRUM"]},
+    ]
+    if ben66.get("trainer_ids") != ["TRAINER_BEN"] or party_builds("TRAINER_BEN", trainers_text, parties_text) != expected_ben66:
+        problems.append("Battle 66: Ben source party or ownership differs")
+    if ben66.get("strict_cap") != 30 or ben66.get("evolution_stage_fit", {}).get("status") != "pass" or ben66.get("manual_quality") != 10 or ben66.get("manual_difficulty") != 9.3:
+        problems.append("Battle 66: cap, stage, quality, or difficulty closure drifted")
+    ben_block66 = trainer_blocks["TRAINER_BEN"].group(0)
+    for token in (".doubleBattle = TRUE", "AI_FLAG_SMART_SWITCHING", "AI_FLAG_HELP_PARTNER", "AI_FLAG_HP_AWARE", "AI_FLAG_SETUP_FIRST_TURN", "AI_FLAG_COMBO_SETUP"):
+        if token not in ben_block66:
+            problems.append(f"Battle 66: Ben missing {token}")
+    for token in ("AI_FLAG_FIELD_CONTROL", "AI_FLAG_SPEED_CONTROL", "AI_FLAG_PERISH_TRAP"):
+        if token in ben_block66:
+            problems.append(f"Battle 66: Ben has unrelated {token}")
+    abilities66 = {"SPECIES_GLIMMET": (0, "ABILITY_TOXIC_DEBRIS"), "SPECIES_SKARMORY": (1, "ABILITY_STURDY"), "SPECIES_GHOLDENGO": (0, "ABILITY_GOOD_AS_GOLD"), "SPECIES_GUZZLORD": (0, "ABILITY_BEAST_BOOST")}
+    names66 = {"GLIMMET": "Glimmet", "SKARMORY": "Skarmory", "GHOLDENGO": "Gholdengo", "GUZZLORD": "Guzzlord"}
+    for species, (slot, ability) in abilities66.items():
+        slots = ability_slots.get(species, [])
+        if len(slots) <= slot or slots[slot] != ability:
+            problems.append(f"Battle 66: {species} slot {slot} is not {ability}: {slots}")
+    for build in expected_ben66:
+        species = build["species"].removeprefix("SPECIES_")
+        for move in build["moves"]:
+            if species in {"GLIMMET", "GHOLDENGO"}:
+                legal = move in level_up_body(level_source, names66[species]) or species_has_gen9_tm_move(gen9_tm_source, tm_indices, species, move) or (move in indices and species_has_tutor_move(gen9_tutor_source, indices, species, move))
+            else:
+                legal = move_is_legal(species, names66[species], move, level_source, tmhm_source, tm_indices, tutor_source, indices, egg_source)
+            if not legal:
+                problems.append(f"Battle 66: {species} cannot legally learn {move}")
+    ben_object66 = next(row for row in gym_map65["object_events"] if row.get("script") == "MauvilleCity_Gym_EventScript_Ben")
+    if (ben_object66.get("x"), ben_object66.get("y"), ben_object66.get("movement_type"), ben_object66.get("trainer_sight_or_berry_tree_id")) != (5, 10, "MOVEMENT_TYPE_FACE_LEFT", "2"):
+        problems.append("Battle 66: Ben center-choke geometry drifted")
+    ben_script66 = gym_scripts65.split("MauvilleCity_Gym_EventScript_Ben::", 1)[1].split("MauvilleCity_Gym_EventScript_Vivian::", 1)[0]
+    if "trainerbattle_double TRAINER_BEN, MauvilleCity_Gym_Text_BenIntro, MauvilleCity_Gym_Text_BenDefeat, MauvilleCity_Gym_Text_BenNotEnoughPokemon" not in ben_script66:
+        problems.append("Battle 66: Ben guarded double script drifted")
+    dialogue66 = gym_scripts65.split("MauvilleCity_Gym_Text_BenIntro:", 1)[1].split("MauvilleCity_Gym_Text_VivianIntro:", 1)[0]
+    for cue in ("switch maze", "make one, too", "escaped my maze", "Hazards punish every forced switch", "needs two Pokémon"):
+        if cue not in dialogue66:
+            problems.append(f"Battle 66: dialogue misses {cue}")
+    ai66 = read("src/battle_ai_main.c")
+    for token in ("effect == EFFECT_ROAR && CountUsablePartyMons(battlerDef) > 0", "gSideStatuses[foeSide] & SIDE_STATUS_HAZARDS_ANY", "IsHazardMoveEffect(gBattleMoves[AI_DATA->partnerMove].effect)", "HasMoveEffect(BATTLE_PARTNER(battlerAtk), EFFECT_ROAR)"):
+        if token not in ai66:
+            problems.append(f"Battle 66: reusable hazard-phazing AI lost {token}")
+    donor_requirements66 = {"smogon:gen9ou:001": {"Glimmora"}, "smogon:gen9ou:002": {"Gholdengo", "Glimmora"}, "smogon:gen4ou:008": {"Skarmory"}, "showdown:gen8randombattle:022": {"Guzzlord"}}
+    for reference_id, required_species in donor_requirements66.items():
+        row = refs29.get(reference_id)
+        if row is None or row.get("completeness") != "full-sets" or not required_species <= set(row.get("roster", [])):
+            problems.append(f"Battle 66: hazard donor drifted {reference_id}")
+    battles_1_to_65 = battles_1_to_64 | {build["species"] for build in expected_vivian65 + expected_kirk65}
+    repeats66 = battles_1_to_65 & {build["species"] for build in expected_ben66}
+    if repeats66 != {"SPECIES_GLIMMET"}:
+        problems.append(f"Battle 66: intended fifty-battle Glimmet repeat changed: {sorted(repeats66)}")
+
+    pair67 = designs["BATTLE_067_MAUVILLE_GYM_SHAWN_ANGELO"]
+    expected_shawn67 = [
+        {"level": 1, "species": "SPECIES_GREEDENT", "item": "ITEM_SITRUS_BERRY", "ability_slot": 0, "spread": "SPREAD_31_IV_HP_DEF_IMPISH", "moves": ["MOVE_STUFF_CHEEKS", "MOVE_BODY_PRESS", "MOVE_SEED_BOMB", "MOVE_PROTECT"]},
+        {"level": 2, "species": "SPECIES_DEDENNE", "item": "ITEM_PETAYA_BERRY", "ability_slot": 2, "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID", "moves": ["MOVE_PARABOLIC_CHARGE", "MOVE_DAZZLING_GLEAM", "MOVE_NUZZLE", "MOVE_PROTECT"]},
+        {"level": 3, "species": "SPECIES_SIMISAGE", "item": "ITEM_LIECHI_BERRY", "ability_slot": 0, "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY", "moves": ["MOVE_SEED_BOMB", "MOVE_KNOCK_OFF", "MOVE_ROCK_SLIDE", "MOVE_PROTECT"]},
+        {"level": 4, "species": "SPECIES_SWALOT", "item": "ITEM_PETAYA_BERRY", "ability_slot": 2, "spread": "SPREAD_31_IV_HP_SPATK_MODEST", "moves": ["MOVE_BELCH", "MOVE_SLUDGE_BOMB", "MOVE_GIGA_DRAIN", "MOVE_ICE_BEAM"]},
+    ]
+    expected_angelo67 = [
+        {"level": 1, "species": "SPECIES_FLOETTE_ETERNAL_FLOWER", "item": "ITEM_LIFE_ORB", "ability_slot": 1, "spread": "SPREAD_31_IV_HP_SPATK_MODEST", "moves": ["MOVE_LIGHT_OF_RUIN", "MOVE_DAZZLING_GLEAM", "MOVE_PSYCHIC", "MOVE_PROTECT"]},
+        {"level": 2, "species": "SPECIES_FLORGES_ORANGE_FLOWER", "item": "ITEM_EXPERT_BELT", "ability_slot": 1, "spread": "SPREAD_31_IV_HP_SPATK_MODEST", "moves": ["MOVE_MOONBLAST", "MOVE_PSYCHIC", "MOVE_ENERGY_BALL", "MOVE_PROTECT"]},
+        {"level": 3, "species": "SPECIES_FLOETTE_WHITE_FLOWER", "item": "ITEM_LEFTOVERS", "ability_slot": 1, "spread": "SPREAD_31_IV_HP_SPATK_MODEST", "moves": ["MOVE_MOONBLAST", "MOVE_GIGA_DRAIN", "MOVE_ENERGY_BALL", "MOVE_PROTECT"]},
+        {"level": 4, "species": "SPECIES_FLORGES_BLUE_FLOWER", "item": "ITEM_WISE_GLASSES", "ability_slot": 1, "spread": "SPREAD_31_IV_HP_SPATK_MODEST", "moves": ["MOVE_CALM_MIND", "MOVE_MOONBLAST", "MOVE_PSYCHIC", "MOVE_SYNTHESIS"]},
+    ]
+    if pair67.get("trainer_ids") != ["TRAINER_SHAWN", "TRAINER_ANGELO"] or party_builds("TRAINER_SHAWN", trainers_text, parties_text) != expected_shawn67 or party_builds("TRAINER_ANGELO", trainers_text, parties_text) != expected_angelo67:
+        problems.append("Battle 67: Shawn/Angelo source halves or ownership differ")
+    if pair67.get("strict_cap") != 30 or pair67.get("evolution_stage_fit", {}).get("status") != "pass" or pair67.get("manual_quality") != 10 or pair67.get("manual_difficulty") != 9.2:
+        problems.append("Battle 67: cap, stage, quality, or difficulty closure drifted")
+    branch67 = pair67.get("branch_contract", {})
+    if branch67.get("joint", {}).get("shawn_source_slots") != [0, 1, 2] or branch67.get("joint", {}).get("angelo_source_slots") != [0, 1, 2] or set(branch67.get("joint", {}).get("intended_lead", [])) != {"SPECIES_GREEDENT", "SPECIES_FLOETTE_ETERNAL_FLOWER"}:
+        problems.append("Battle 67: joint prefix contract drifted")
+    if branch67.get("split_shawn", {}).get("format") != "single" or branch67.get("split_angelo", {}).get("format") != "single" or not branch67.get("split_shawn", {}).get("one_usable_supported"):
+        problems.append("Battle 67: safe split-single contracts drifted")
+    shawn_block67 = trainer_blocks["TRAINER_SHAWN"].group(0)
+    angelo_block67 = trainer_blocks["TRAINER_ANGELO"].group(0)
+    for token in (".doubleBattle = FALSE", "AI_FLAG_SMART_SWITCHING", "AI_FLAG_HELP_PARTNER", "AI_FLAG_HP_AWARE", "AI_FLAG_SETUP_FIRST_TURN", "AI_FLAG_COMBO_SETUP"):
+        if token not in shawn_block67:
+            problems.append(f"Battle 67: Shawn missing {token}")
+    for token in (".doubleBattle = FALSE", "AI_FLAG_SMART_SWITCHING", "AI_FLAG_HELP_PARTNER", "AI_FLAG_HP_AWARE"):
+        if token not in angelo_block67:
+            problems.append(f"Battle 67: Angelo missing {token}")
+    for token in ("AI_FLAG_FIELD_CONTROL", "AI_FLAG_SPEED_CONTROL", "AI_FLAG_PERISH_TRAP"):
+        if token in shawn_block67 or token in angelo_block67:
+            problems.append(f"Battle 67: unrelated profile leaked into Shawn/Angelo: {token}")
+    abilities67 = {"SPECIES_GREEDENT": (0, "ABILITY_CHEEK_POUCH"), "SPECIES_DEDENNE": (2, "ABILITY_CHEEK_POUCH"), "SPECIES_SIMISAGE": (0, "ABILITY_GLUTTONY"), "SPECIES_SWALOT": (2, "ABILITY_GLUTTONY"), "SPECIES_FLOETTE_ETERNAL_FLOWER": (1, "ABILITY_SYMBIOSIS"), "SPECIES_FLORGES_ORANGE_FLOWER": (1, "ABILITY_SYMBIOSIS"), "SPECIES_FLOETTE_WHITE_FLOWER": (1, "ABILITY_SYMBIOSIS"), "SPECIES_FLORGES_BLUE_FLOWER": (1, "ABILITY_SYMBIOSIS")}
+    names67 = {"GREEDENT": "Greedent", "DEDENNE": "Dedenne", "SIMISAGE": "Simisage", "SWALOT": "Swalot", "FLOETTE_ETERNAL_FLOWER": "FloetteEternalFlower", "FLORGES_ORANGE_FLOWER": "Florges", "FLOETTE_WHITE_FLOWER": "Floette", "FLORGES_BLUE_FLOWER": "Florges"}
+    for species, (slot, ability) in abilities67.items():
+        slots = ability_slots.get(species, [])
+        if len(slots) <= slot or slots[slot] != ability:
+            problems.append(f"Battle 67: {species} slot {slot} is not {ability}: {slots}")
+    for build in expected_shawn67 + expected_angelo67:
+        species = build["species"].removeprefix("SPECIES_")
+        for move in build["moves"]:
+            legal = move_is_legal(species, names67[species], move, level_source, tmhm_source, tm_indices, tutor_source, indices, egg_source)
+            if not legal:
+                problems.append(f"Battle 67: {species} cannot legally learn {move}")
+    shawn_object67 = next(row for row in gym_map65["object_events"] if row.get("script") == "MauvilleCity_Gym_EventScript_Shawn")
+    angelo_object67 = next(row for row in gym_map65["object_events"] if row.get("script") == "MauvilleCity_Gym_EventScript_Angelo")
+    if (shawn_object67.get("x"), shawn_object67.get("y"), shawn_object67.get("movement_type"), shawn_object67.get("trainer_sight_or_berry_tree_id")) != (7, 8, "MOVEMENT_TYPE_FACE_DOWN", "1") or (angelo_object67.get("x"), angelo_object67.get("y"), angelo_object67.get("movement_type"), angelo_object67.get("trainer_sight_or_berry_tree_id")) != (7, 10, "MOVEMENT_TYPE_FACE_UP", "1"):
+        problems.append("Battle 67: shared one-tile native-pair geometry drifted")
+    for token in ("trainerbattle_single TRAINER_SHAWN", "trainerbattle_single TRAINER_ANGELO"):
+        if token not in gym_scripts65:
+            problems.append(f"Battle 67: native pair script lost {token}")
+    ai67 = read("src/battle_ai_main.c")
+    for token in ("effect == EFFECT_STUFF_CHEEKS", "partnerAbility == ABILITY_SYMBIOSIS", "GetPocketByItemId(gBattleMons[battlerAtk].item) == POCKET_BERRIES", "case EFFECT_STUFF_CHEEKS:"):
+        if token not in ai67:
+            problems.append(f"Battle 67: reusable Stuff Cheeks relay AI lost {token}")
+    symbiosis67 = read("src/battle_script_commands.c")
+    for token in ("GetBattlerAbility(partner) != ABILITY_SYMBIOSIS", "PassHeldItem(partner, battler)", "gBattleResources->flags->flags[battlerRecipient] &= ~RESOURCE_FLAG_UNBURDEN"):
+        if token not in symbiosis67:
+            problems.append(f"Battle 67: Symbiosis/Unburden engine truth drifted {token}")
+    dialogue67 = gym_scripts65.split("MauvilleCity_Gym_Text_ShawnIntro:", 1)[1].split("MauvilleCity_Gym_Text_BenIntro:", 1)[0] + gym_scripts65.split("MauvilleCity_Gym_Text_AngeloIntro:", 1)[1].split("MauvilleCity_Gym_Text_WattsonIntro:", 1)[0]
+    for cue in ("second wind", "Berries buy time and power", "Symbiosis can pass a second item", "bright flowers and items", "Each one has Symbiosis", "passes mine across"):
+        if cue not in dialogue67:
+            problems.append(f"Battle 67: dialogue misses {cue}")
+    donor_requirements67 = {"showdown:gen8randomdoublesbattle:003": {"Greedent"}, "showdown:gen9championsrandomdoublesbattle:016": {"Dedenne"}, "showdown:gen7randomdoublesbattle:014": {"Dedenne"}, "showdown:gen6randomdoublesbattle:003": {"Florges"}}
+    for reference_id, required_species in donor_requirements67.items():
+        row = refs29.get(reference_id)
+        if row is None or row.get("completeness") != "full-sets" or not required_species <= set(row.get("roster", [])):
+            problems.append(f"Battle 67: item-relay donor drifted {reference_id}")
+    battles_1_to_66 = battles_1_to_65 | {build["species"] for build in expected_ben66}
+    repeats67 = battles_1_to_66 & {build["species"] for build in expected_shawn67 + expected_angelo67}
+    if repeats67 != {"SPECIES_GREEDENT", "SPECIES_DEDENNE"}:
+        problems.append(f"Battle 67: intended earned repeats changed: {sorted(repeats67)}")
+
+    wattson68 = designs["BATTLE_068_MAUVILLE_GYM_WATTSON"]
+    expected_wattson68 = [
+        {"level": 2, "species": "SPECIES_TAPU_KOKO", "item": "ITEM_TERRAIN_EXTENDER", "ability_slot": 0, "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY", "moves": ["MOVE_WILD_CHARGE", "MOVE_NATURES_MADNESS", "MOVE_U_TURN", "MOVE_TAUNT"]},
+        {"level": 2, "species": "SPECIES_EMOLGA", "item": "ITEM_FOCUS_SASH", "ability_slot": 1, "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID", "moves": ["MOVE_TAILWIND", "MOVE_ENCORE", "MOVE_HELPING_HAND", "MOVE_THUNDERBOLT"]},
+        {"level": 3, "species": "SPECIES_IRON_HANDS", "item": "ITEM_ASSAULT_VEST", "ability_slot": 0, "spread": "SPREAD_31_IV_HP_ATK_ADAMANT", "moves": ["MOVE_FAKE_OUT", "MOVE_CLOSE_COMBAT", "MOVE_WILD_CHARGE", "MOVE_ICE_PUNCH"]},
+        {"level": 3, "species": "SPECIES_FARIGIRAF", "item": "ITEM_SITRUS_BERRY", "ability_slot": 1, "spread": "SPREAD_31_IV_HP_SPATK_MODEST", "moves": ["MOVE_TWIN_BEAM", "MOVE_ICY_WIND", "MOVE_LIGHT_SCREEN", "MOVE_PROTECT"]},
+        {"level": 4, "species": "SPECIES_PORYGON2", "item": "ITEM_EVIOLITE", "ability_slot": 1, "spread": "SPREAD_31_IV_HP_DEF_SPDEF_SASSY", "moves": ["MOVE_TRICK_ROOM", "MOVE_TRI_ATTACK", "MOVE_ICE_BEAM", "MOVE_RECOVER"]},
+        {"level": 5, "species": "SPECIES_RAICHU", "item": "ITEM_RAICHUNITE_Y", "ability_slot": 0, "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID", "moves": ["MOVE_THUNDER", "MOVE_FOCUS_BLAST", "MOVE_GRASS_KNOT", "MOVE_PROTECT"]},
+    ]
+    if wattson68.get("trainer_ids") != ["TRAINER_WATTSON_1"] or party_builds("TRAINER_WATTSON_1", trainers_text, parties_text) != expected_wattson68:
+        problems.append("Battle 68: Wattson source party or ownership differs")
+    if wattson68.get("strict_cap") != 30 or wattson68.get("evolution_stage_fit", {}).get("status") != "pass" or wattson68.get("manual_quality") != 10 or wattson68.get("manual_difficulty") != 10.0:
+        problems.append("Battle 68: cap, stage, quality, or boss difficulty closure drifted")
+    branch68 = wattson68.get("branch_contract", {})
+    if branch68.get("format") != "double" or branch68.get("source_slots") != [0, 1, 2, 3, 4, 5] or branch68.get("intended_lead") != ["SPECIES_TAPU_KOKO", "SPECIES_EMOLGA"] or branch68.get("reserve_order") != ["SPECIES_IRON_HANDS", "SPECIES_FARIGIRAF", "SPECIES_PORYGON2", "SPECIES_RAICHU"]:
+        problems.append("Battle 68: six-member source order or guarded-double contract drifted")
+    if "native AI selects the most suitable legal reserve" not in branch68.get("runtime_replacement_policy", ""):
+        problems.append("Battle 68: dynamic native replacement truth is missing")
+    ordering68 = wattson68.get("ordering", {}).get("reason", "")
+    for token in ("only guaranteed pair", "native resistance-and-damage replacement scoring", "any legal reserve"):
+        if token not in ordering68:
+            problems.append(f"Battle 68: ordering truth misses {token}")
+    for false_claim in ("Removing Koko first brings", "removing Emolga first brings", "source-last Mega"):
+        if false_claim in ordering68:
+            problems.append(f"Battle 68: false fixed-wave claim remains: {false_claim}")
+    if "Terrain-boosted Thunderbolt" in json.dumps(wattson68):
+        problems.append("Battle 68: dossier falsely gives Flying Emolga the grounded Electric Terrain boost")
+
+    wattson_block68 = trainer_blocks["TRAINER_WATTSON_1"].group(0)
+    for token in (".doubleBattle = TRUE", "AI_FLAG_SMART_SWITCHING", "AI_FLAG_HELP_PARTNER", "AI_FLAG_HP_AWARE", "AI_FLAG_SPEED_CONTROL", "AI_FLAG_FIELD_CONTROL", "AI_FLAG_COMBO_SETUP"):
+        if token not in wattson_block68:
+            problems.append(f"Battle 68: Wattson missing {token}")
+    for token in ("AI_FLAG_SETUP_FIRST_TURN", "AI_FLAG_PERISH_TRAP", "AI_FLAG_WILL_SUICIDE"):
+        if token in wattson_block68:
+            problems.append(f"Battle 68: unrelated or rigid AI leaked into Wattson: {token}")
+
+    abilities68 = {
+        "SPECIES_TAPU_KOKO": (0, "ABILITY_ELECTRIC_SURGE"),
+        "SPECIES_EMOLGA": (1, "ABILITY_LIGHTNING_ROD"),
+        "SPECIES_IRON_HANDS": (0, "ABILITY_QUARK_DRIVE"),
+        "SPECIES_FARIGIRAF": (1, "ABILITY_ARMOR_TAIL"),
+        "SPECIES_PORYGON2": (1, "ABILITY_DOWNLOAD"),
+        "SPECIES_RAICHU": (0, "ABILITY_STATIC"),
+        "SPECIES_RAICHU_MEGA_Y": (0, "ABILITY_NO_GUARD"),
+    }
+    names68 = {
+        "TAPU_KOKO": "TapuKoko", "EMOLGA": "Emolga", "IRON_HANDS": "IronHands",
+        "FARIGIRAF": "Farigiraf", "PORYGON2": "Porygon2", "RAICHU": "Raichu",
+    }
+    for species, (slot, ability) in abilities68.items():
+        slots = ability_slots.get(species, [])
+        if len(slots) <= slot or slots[slot] != ability:
+            problems.append(f"Battle 68: {species} slot {slot} is not {ability}: {slots}")
+    for build in expected_wattson68:
+        species = build["species"].removeprefix("SPECIES_")
+        for move in build["moves"]:
+            if species in {"IRON_HANDS", "FARIGIRAF"}:
+                legal = (
+                    move in level_up_body(level_source, names68[species])
+                    or species_has_gen9_tm_move(gen9_tm_source, tm_indices, species, move)
+                    or (move in indices and species_has_tutor_move(gen9_tutor_source, indices, species, move))
+                )
+            else:
+                legal = move_is_legal(species, names68[species], move, level_source, tmhm_source, tm_indices, tutor_source, indices, egg_source)
+            if not legal:
+                problems.append(f"Battle 68: {species} cannot legally learn {move}")
+
+    evolution68 = read("src/data/pokemon/evolution.h")
+    mega_stats68 = read("src/data/pokemon/base_stats.h")
+    mega_items68 = read("src/data/items.h")
+    if not re.search(r"\[SPECIES_RAICHU\]\s*=\s*\{.*?ITEM_RAICHUNITE_Y,\s*SPECIES_RAICHU_MEGA_Y", evolution68, re.S):
+        problems.append("Battle 68: Raichunite Y no longer maps Raichu to Mega Raichu Y")
+    mega_y_block68 = re.search(r"\[SPECIES_RAICHU_MEGA_Y\]\s*=\s*\{(.*?)(?=\n\s*\[SPECIES_|\Z)", mega_stats68, re.S)
+    if not mega_y_block68 or "ABILITY_NO_GUARD, ABILITY_NO_GUARD, ABILITY_NO_GUARD" not in mega_y_block68.group(1):
+        problems.append("Battle 68: Mega Raichu Y no longer exposes No Guard in every ability slot")
+    raichunite_y_block68 = re.search(r"\[ITEM_RAICHUNITE_Y\]\s*=\s*\{(.*?)(?=\n\s*\[ITEM_|\Z)", mega_items68, re.S)
+    if not raichunite_y_block68 or ".holdEffect = HOLD_EFFECT_MEGA_STONE" not in raichunite_y_block68.group(1):
+        problems.append("Battle 68: Raichunite Y is not a live Mega Stone")
+
+    wattson_script68 = gym_scripts65.split("MauvilleCity_Gym_EventScript_Wattson::", 1)[1].split("MauvilleCity_Gym_EventScript_WattsonDefeated::", 1)[0]
+    guarded_wattson68 = "trainerbattle_double TRAINER_WATTSON_1, MauvilleCity_Gym_Text_WattsonIntro, MauvilleCity_Gym_Text_WattsonDefeat, MauvilleCity_Gym_Text_WattsonRematchNeedTwoMons, MauvilleCity_Gym_EventScript_WattsonDefeated, NO_MUSIC"
+    if guarded_wattson68 not in wattson_script68 or "trainerbattle_single TRAINER_WATTSON_1" in wattson_script68:
+        problems.append("Battle 68: main Wattson fight is not the exact guarded NO_MUSIC double")
+    wattson_object68 = next(row for row in gym_map65["object_events"] if row.get("script") == "MauvilleCity_Gym_EventScript_Wattson")
+    if (wattson_object68.get("x"), wattson_object68.get("y"), wattson_object68.get("movement_type")) != (5, 2, "MOVEMENT_TYPE_FACE_DOWN"):
+        problems.append("Battle 68: Wattson's fixed boss geometry drifted")
+    wattson_victory68 = gym_scripts65.split("MauvilleCity_Gym_EventScript_WattsonDefeated::", 1)[1].split("MauvilleCity_Gym_EventScript_GiveVoltSwitch2::", 1)[0]
+    for token in ("setflag FLAG_DEFEATED_MAUVILLE_GYM", "setflag FLAG_BADGE03_GET", "call Common_EventScript_SetGymTrainers", "special MauvilleGymDeactivatePuzzle", "call MauvilleCity_Gym_EventScript_GiveVoltSwitch", "setflag FLAG_ENABLE_WATTSON_MATCH_CALL"):
+        if token not in wattson_victory68:
+            problems.append(f"Battle 68: native badge/reward flow lost {token}")
+    if "HealPlayerParty" in wattson_victory68:
+        problems.append("Battle 68: an unauthorized post-Wattson heal was added")
+    level_cap68 = read("src/pokemon.c")
+    if "static const u8 levelCapsStrict[] =   {14, 20, 30, 40" not in level_cap68:
+        problems.append("Battle 68: strict Badge-3 cap no longer advances from 30 to 40")
+    for token in ("giveitem ITEM_WISE_GLASSES", "setflag FLAG_RECEIVED_TM72"):
+        if gym_scripts65.count(token) < 2:
+            problems.append(f"Battle 68: retry-safe Wise Glasses flow lost {token}")
+
+    wattson_dialogue68 = gym_scripts65.split("MauvilleCity_Gym_Text_WattsonIntro:", 1)[1].split("MauvilleCity_Gym_Text_WattsonChooseFormat:", 1)[0]
+    for cue in ("Fast current, slow current", "Bring out your Mega", "Raichu and I are ready", "Only one Pokémon", "two healthy partners"):
+        if cue not in wattson_dialogue68:
+            problems.append(f"Battle 68: Wattson dialogue misses {cue}")
+    for line in re.findall(r'\.string "([^"]*)"', wattson_dialogue68):
+        visible = line.replace("\\n", "").replace("\\l", "").replace("\\p", "").replace("$", "")
+        if len(visible) > 36:
+            problems.append(f"Battle 68: Wattson dialogue line is too long: {visible}")
+
+    ai68 = read("src/battle_ai_main.c")
+    for token in (
+        "bool32 stableTrickRoom = (gFieldStatuses & STATUS_FIELD_TRICK_ROOM)",
+        "gFieldTimers.trickRoomTimer > 1",
+        "bool32 partnerFastControl = partnerEffect == EFFECT_TAILWIND",
+        "effect == EFFECT_TRICK_ROOM && partnerFastControl",
+        "fastControlMove && partnerEffect == EFFECT_TRICK_ROOM",
+        "score -= 15",
+        "if (effect == EFFECT_TAILWIND)",
+        "move == MOVE_ICY_WIND || move == MOVE_ELECTROWEB || effect == EFFECT_PARALYZE",
+        "score -= 8",
+        "score -= 6",
+        "effect == EFFECT_QUASH || effect == EFFECT_AFTER_YOU",
+        "score += partnerOutrunsFoes ? -4 : 8",
+        "moveType == TYPE_ELECTRIC && (partnerAbility == ABILITY_MOTOR_DRIVE",
+        "partnerAbility == ABILITY_LIGHTNING_ROD",
+        "TrySimulateMegaEvolutionForAI(&savedBattleMon)",
+        "if (CanMegaEvolve(gActiveBattler)) // If opponent can mega evolve, do it.",
+    ):
+        source = read("src/battle_controller_opponent.c") if "MegaEvolve" in token or "TrySimulate" in token else ai68
+        if token not in source:
+            problems.append(f"Battle 68: reusable speed/Mega AI truth lost {token}")
+    terrain68 = read("src/battle_util.c")
+    if "STATUS_FIELD_ELECTRIC_TERRAIN && moveType == TYPE_ELECTRIC && IsBattlerGrounded(battlerAtk)" not in terrain68:
+        problems.append("Battle 68: grounded-only Electric Terrain damage truth drifted")
+    ally_move68 = read("src/battle_ai_util.c")
+    if "gChosenActionByBattler[partnerBattler] != B_ACTION_USE_MOVE" not in ally_move68:
+        problems.append("Battle 68: partner scoring can consume a stale move while the ally switches or uses an item")
+    switch_ai68 = read("src/battle_ai_switch_items.c")
+    opponent_controller68 = read("src/battle_controller_opponent.c")
+    for token, source in (
+        ("GetMostSuitableMonToSwitchInto(); // switch after party mon is KO'ed?", opponent_controller68),
+        ("GetBestMonForSwitch(party, firstId, lastId, invalidMons, opposingBattler)", switch_ai68),
+        ("Prefer a genuine resistance, then use real outgoing damage as the tie-breaker", switch_ai68),
+    ):
+        if token not in source:
+            problems.append(f"Battle 68: native adaptive replacement truth lost {token}")
+
+    manifest68 = json.loads(read("docs/verdant_doubles_manifest.json"))
+    format68 = manifest68.get("formats", {}).get("TRAINER_WATTSON_1", {})
+    boss68 = next((row for row in manifest68.get("bosses", []) if row.get("trainer_id") == "TRAINER_WATTSON_1"), {})
+    if format68.get("archetype") != "World Champion fast-slow circuit" or format68.get("difficulty") != 100 or format68.get("level_offset") != 2:
+        problems.append("Battle 68: Wattson manifest summary is stale")
+    if [mon.get("species") for mon in boss68.get("team", [])] != [build["species"] for build in expected_wattson68]:
+        problems.append("Battle 68: converter manifest roster is stale")
+    if '"Wattson": [2, 2, 3, 3, 4, 5]' not in read("scripts/verdant_doubles_conversion.py"):
+        problems.append("Battle 68: converter would overwrite Wattson's exact cap-relative levels")
+
+    donor_requirements68 = {
+        "showdown:gen9randomdoublesbattle:009": {"Porygon2"},
+        "smogon:gen8ou:005": {"Tapu Koko"},
+        "showdown:gen9championsrandomdoublesbattle:029": {"Raichu"},
+        "showdown:gen8randomdoublesbattle:005": {"Emolga"},
+    }
+    for reference_id, required_species in donor_requirements68.items():
+        row = refs29.get(reference_id)
+        if row is None or row.get("completeness") != "full-sets" or not required_species <= set(row.get("roster", [])):
+            problems.append(f"Battle 68: Wattson donor drifted {reference_id}")
+    luca68 = refs29.get("elite:luca-ceribelli:worlds-2024")
+    if luca68 is None or luca68.get("placement") != 1 or luca68.get("event") != "2024 World Championships" or not {"Iron Hands", "Whimsicott", "Farigiraf"} <= set(luca68.get("roster", [])):
+        problems.append("Battle 68: Luca Ceribelli World Champion architecture drifted")
+    battles_1_to_67 = battles_1_to_66 | {build["species"] for build in expected_shawn67 + expected_angelo67}
+    repeats68 = battles_1_to_67 & {build["species"] for build in expected_wattson68}
+    if repeats68 != {"SPECIES_EMOLGA", "SPECIES_RAICHU"}:
+        problems.append(f"Battle 68: intended earned Emolga/Raichu repeats changed: {sorted(repeats68)}")
+
     # Cross-encounter species reuse is an editorial signal, not a correctness
     # failure. Keep the existing exact comparisons so deliberate repeats stay
     # visible, but never force a replacement merely to preserve a zero-repeat
@@ -5096,6 +5890,18 @@ def main() -> None:
     print("PASS: Battle 54 adaptive rival, six parity records, 21 dynamic middle starters, native reward, donors, dialogue, and self-check")
     print("PASS: Battle 55 Beat Up native pair, exact joint/split prefixes, stage-legal young reserves, Match Call routing, donors, dialogue, and self-check")
     print("PASS: Battle 56 itemless Magic Room pair, asymmetric joint/splits, fresh stage-legal species, native AI, donors, and dialogue")
+    print("PASS: Battle 57 Soak target-painting double, fresh legal fishing roster, reusable AI, donors, and dialogue")
+    print("PASS: Battle 58 stage-magic single, fresh legal Psychic roster, Simple finale, donors, and dialogue")
+    print("PASS: Battle 59 no-brakes single, exact non-pair geometry, four legal commitments, donors, and dialogue")
+    print("PASS: Battle 60 endurance triathlon single, exact Match Call ownership, four legal legs, donors, and dialogue")
+    print("PASS: Battle 61 slow-lane single, young legal Bronzor, contextual Trick Room AI, rare Stakataka, donors, and dialogue")
+    print("PASS: Battle 62 guarded Pledge double, branch-sensitive native coordination, legal middle forms, donors, and dialogue")
+    print("PASS: Battle 63 guarded contact-tax double, four fresh legal bodies, rare Moltres, donors, and dialogue")
+    print("PASS: Battle 64 guarded Wally balance double, published chassis, legal six, Mega continuity, story flags, and dialogue")
+    print("PASS: Battle 65 branch-invariant sound pair, safe split singles, eight legal fresh species, reusable AI, donors, and dialogue")
+    print("PASS: Battle 66 guarded hazard maze, legal young Glimmet, Gholdengo/Guzzlord reveals, reusable phazing AI, donors, and dialogue")
+    print("PASS: Battle 67 truthful Symbiosis item relay, safe split singles, legal berry consumers/forms, reusable AI, donors, and dialogue")
+    print("PASS: Battle 68 guarded Wattson World Champion circuit, six legal sets, reciprocal Mega Raichu Y, exact badge flow, and Trick Room-aware AI")
     print(f"PASS: all {len(designs)} closed encounters record their truthful legacy-983 or current-1005 corpus fit decision")
 
 
