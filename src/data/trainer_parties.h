@@ -7263,36 +7263,38 @@ static const struct TrainerMonItemCustomMoves sParty_Maria4[] = {
 };
 
 static const struct TrainerMonItemCustomMoves sParty_AnnaAndMeg1[] = {
-
-{
-    .lvl = 0,
-    .species = SPECIES_MINCCINO,
-    .ability = 2, // Skill Link
-    .spread = SPREAD_25_IV_0_EV,    
-    .moves = MOVE_TAIL_SLAP, MOVE_HELPING_HAND, MOVE_WAKE_UP_SLAP, MOVE_SING
-    },
-{
-    .lvl = 0,
-    .species = SPECIES_GURDURR,
-    .spread = SPREAD_25_IV_0_EV,    
-    .moves = MOVE_ROCK_SLIDE, MOVE_WAKE_UP_SLAP, MOVE_CHIP_AWAY, MOVE_FOCUS_ENERGY
-    },
     {
-    .lvl = 0,
-    .species = SPECIES_MUDSDALE,
-    .heldItem = ITEM_ASSAULT_VEST,
-    .ability = 1,
-    .spread = SPREAD_31_IV_HP_ATK_ADAMANT,
-    .moves = MOVE_HIGH_HORSEPOWER, MOVE_ROCK_SLIDE, MOVE_HEAVY_SLAM, MOVE_BODY_PRESS
-    } /* Verdant custom: Route 117 — Verdant hand-authored competitive core */,
-    {
-    .lvl = 0,
-    .species = SPECIES_WEAVILE,
-    .heldItem = ITEM_FOCUS_SASH,
+    .lvl = 1,
+    .species = SPECIES_PASSIMIAN,
+    .heldItem = ITEM_ROSELI_BERRY,
     .ability = 0,
     .spread = SPREAD_31_IV_ATK_SPEED_JOLLY,
-    .moves = MOVE_BEAT_UP, MOVE_FAKE_OUT, MOVE_TRIPLE_AXEL, MOVE_PROTECT
-    } /* Verdant custom: Route 117 — Verdant hand-authored competitive core */
+    .moves = MOVE_BEAT_UP, MOVE_CLOSE_COMBAT, MOVE_KNOCK_OFF, MOVE_PROTECT
+    } /* Verdant polish: TRAINER_ANNA_AND_MEG_1 */,
+    {
+    .lvl = 2,
+    .species = SPECIES_MUDSDALE,
+    .heldItem = ITEM_LEFTOVERS,
+    .ability = 1,
+    .spread = SPREAD_31_IV_HP_DEF_IMPISH,
+    .moves = MOVE_HIGH_HORSEPOWER, MOVE_BODY_PRESS, MOVE_HEAVY_SLAM, MOVE_ROCK_SLIDE
+    } /* Verdant polish: TRAINER_ANNA_AND_MEG_1 */,
+    {
+    .lvl = 2,
+    .species = SPECIES_MUK_ALOLAN,
+    .heldItem = ITEM_BLACK_SLUDGE,
+    .ability = 2,
+    .spread = SPREAD_31_IV_HP_SPDEF_CAREFUL,
+    .moves = MOVE_GUNK_SHOT, MOVE_KNOCK_OFF, MOVE_SNARL, MOVE_PROTECT
+    } /* Verdant polish: TRAINER_ANNA_AND_MEG_1 */,
+    {
+    .lvl = 3,
+    .species = SPECIES_MEDICHAM,
+    .heldItem = ITEM_EXPERT_BELT,
+    .ability = 0,
+    .spread = SPREAD_31_IV_ATK_SPEED_JOLLY,
+    .moves = MOVE_FEINT, MOVE_ZEN_HEADBUTT, MOVE_DRAIN_PUNCH, MOVE_ICE_PUNCH
+    } /* Verdant polish: TRAINER_ANNA_AND_MEG_1 */
 };
 
 static const struct TrainerMonItemCustomMoves sParty_AnnaAndMeg2[] = {

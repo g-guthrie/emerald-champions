@@ -735,7 +735,7 @@ static bool32 AI_GetIfCrit(u32 move, u8 battlerAtk, u8 battlerDef)
     return isCrit;
 }
 
-s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef)
+static s32 AI_CalcDamageInternal(u16 move, u8 battlerAtk, u8 battlerDef, bool32 forceCritical)
 {
     s32 dmg, moveType, critDmg, normalDmg;
     s32 unresistedDmg, unresistedCritDmg, unresistedNormalDmg;
@@ -757,7 +757,9 @@ s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef)
     normalDmg = CalculateMoveDamage(move, battlerAtk, battlerDef, moveType, 0, FALSE, FALSE, FALSE);
     critDmg = CalculateMoveDamage(move, battlerAtk, battlerDef, moveType, 0, TRUE, FALSE, FALSE);
 
-    if(critChance == -1)
+    if (forceCritical)
+        dmg = critDmg;
+    else if (critChance == -1)
         dmg = normalDmg;
     else
         dmg = (critDmg + normalDmg * (critChance - 1)) / critChance;
@@ -816,7 +818,9 @@ s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef)
             gBattleMons[battlerDef].item = ITEM_NONE;
             unresistedNormalDmg = CalculateMoveDamage(move, battlerAtk, battlerDef, moveType, 0, FALSE, FALSE, FALSE);
             unresistedCritDmg = CalculateMoveDamage(move, battlerAtk, battlerDef, moveType, 0, TRUE, FALSE, FALSE);
-            if (critChance == -1)
+            if (forceCritical)
+                unresistedDmg = unresistedCritDmg;
+            else if (critChance == -1)
                 unresistedDmg = unresistedNormalDmg;
             else
                 unresistedDmg = (unresistedCritDmg + unresistedNormalDmg * (critChance - 1)) / critChance;
@@ -837,6 +841,11 @@ s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef)
     RestoreBattlerData(battlerDef);
 
     return dmg;
+}
+
+s32 AI_CalcDamage(u16 move, u8 battlerAtk, u8 battlerDef)
+{
+    return AI_CalcDamageInternal(move, battlerAtk, battlerDef, FALSE);
 }
 
 // Checks if one of the moves has side effects or perks
@@ -1910,6 +1919,52 @@ bool32 CanIndexMoveFaintTarget(u8 battlerAtk, u8 battlerDef, u8 index, u8 numHit
     if (gBattleMons[battlerDef].hp <= dmg)
         return TRUE;
     return FALSE;
+}
+
+bool32 CanBeatUpFaintTarget(u8 battlerAtk, u8 battlerDef, u8 index)
+{
+    struct Pokemon *party;
+    u32 i, hitCount = 0;
+    s32 maxHitDamage = 0;
+    u8 savedPartyIndex = gBattleCommunication[0];
+    u16 savedTargetItem = gBattleMons[battlerDef].item;
+    u16 move = gBattleMons[battlerAtk].moves[index];
+
+    if (gBattleMoves[move].effect != EFFECT_BEAT_UP)
+        return CanIndexMoveFaintTarget(battlerAtk, battlerDef, index, 0);
+
+    if (GetBattlerSide(battlerAtk) == B_SIDE_PLAYER)
+        party = gPlayerParty;
+    else
+        party = gEnemyParty;
+
+    // Runtime Beat Up derives each strike's power from a different healthy,
+    // status-free party member. Model every eligible strike with the correct
+    // party index, then use the strongest strike for a conservative safety
+    // bound. Ignoring the target's defensive item also prevents a resist Berry
+    // or Eviolite from making the estimate unsafe.
+    gBattleMons[battlerDef].item = ITEM_NONE;
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(&party[i], MON_DATA_HP) != 0
+         && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_NONE
+         && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_EGG
+         && (i == gBattlerPartyIndexes[battlerAtk]
+          || GetMonData(&party[i], MON_DATA_STATUS) == 0))
+        {
+            s32 hitDamage;
+
+            gBattleCommunication[0] = i + 1;
+            hitDamage = AI_CalcDamageInternal(move, battlerAtk, battlerDef, TRUE);
+            if (hitDamage > maxHitDamage)
+                maxHitDamage = hitDamage;
+            hitCount++;
+        }
+    }
+    gBattleCommunication[0] = savedPartyIndex;
+    gBattleMons[battlerDef].item = savedTargetItem;
+
+    return hitCount != 0 && gBattleMons[battlerDef].hp <= maxHitDamage * hitCount;
 }
 
 u16 *GetMovesArray(u32 battler)

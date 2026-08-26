@@ -9,19 +9,19 @@
     "final_coverage": "Requires an explicitly complete canonical sequence and actual use of every required legendary family and Mega mechanism."
   },
   "source_identity": {
-    "docs/verdant_battle_sequence.json": "587725f7402a710a8bf795bb69b83634a743a0440e0eef376e7759effb083ec4",
-    "docs/verdant_bespoke_battle_designs.json": "0f42da871755ec74f26d61054c4e516feaafc1d84bd80802a1a878532f498b9f",
+    "docs/verdant_battle_sequence.json": "de383b9fe77e8c8c24f5026d52bff245944723d1e0d60e7a2fc78e7be6362d41",
+    "docs/verdant_bespoke_battle_designs.json": "62af80b14a14079a74b3c63b4d9c2c3fd19c060aff88095333c8962052dc8c6e",
     "docs/verdant_historic_team_reservations.json": "b6d485c178a02919a1c5709776d813d98bd416d0c7384616d2dc0376e4ab30ae",
     "docs/verdant_marquee_battle_designs.json": "ffa1c35cf391bc4dbed8aa708b7a2d4d7cd7c9eb02f00385b898c5fa902f1870",
     "src/data/trainers.h": "35c2ee74fdbaf358ed92a45ef3635f4d062d35b0fb436d986c087ebac6933c17",
-    "src/data/trainer_parties.h": "d3a8edd993cfed3236ae1c0a1b2c5d85fe78a2f9825e2b7a122c076c4c8e412b",
+    "src/data/trainer_parties.h": "527b04b4f04291a679a4354baea794d2657ea77dc39d5763c97febc1a6c92773",
     "src/starter_choose.c": "7cc07796e9226a479d1b7da66ef17555e8a8e6de50516434720559d902b1b7d8"
   },
   "summary": {
     "sequence_entries": 76,
-    "closed_encounters": 68,
-    "used_species": 326,
-    "duplicated_species": 33,
+    "closed_encounters": 69,
+    "used_species": 329,
+    "duplicated_species": 34,
     "legendary_families": {
       "used": 21,
       "reserved": 10,
@@ -3360,6 +3360,22 @@
       ]
     },
     {
+      "species": "SPECIES_MEDICHAM",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 69,
+          "encounter_id": "BATTLE_069_ROUTE_117_ANNA_AND_MEG",
+          "trainer_ids": [
+            "TRAINER_ANNA_AND_MEG_1"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_MEDITITE",
       "appearance_count": 1,
       "appearances": [
@@ -3672,13 +3688,39 @@
     },
     {
       "species": "SPECIES_MUDSDALE",
-      "appearance_count": 1,
+      "appearance_count": 2,
       "appearances": [
         {
           "battle_index": 45,
           "encounter_id": "BATTLE_045_SEASHORE_HOUSE_SIMON",
           "trainer_ids": [
             "TRAINER_SIMON"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 69,
+          "encounter_id": "BATTLE_069_ROUTE_117_ANNA_AND_MEG",
+          "trainer_ids": [
+            "TRAINER_ANNA_AND_MEG_1"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_MUK_ALOLAN",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 69,
+          "encounter_id": "BATTLE_069_ROUTE_117_ANNA_AND_MEG",
+          "trainer_ids": [
+            "TRAINER_ANNA_AND_MEG_1"
           ],
           "basis": [
             "trainer-party"
@@ -3909,6 +3951,22 @@
           "encounter_id": "BATTLE_004_ROUTE_102_ALLEN",
           "trainer_ids": [
             "TRAINER_ALLEN"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_PASSIMIAN",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 69,
+          "encounter_id": "BATTLE_069_ROUTE_117_ANNA_AND_MEG",
+          "trainer_ids": [
+            "TRAINER_ANNA_AND_MEG_1"
           ],
           "basis": [
             "trainer-party"
@@ -6214,6 +6272,14 @@
       "encounter_ids": [
         "BATTLE_028_RUSTBORO_RIVAL",
         "BATTLE_054_ROUTE_110_RIVAL"
+      ]
+    },
+    {
+      "species": "SPECIES_MUDSDALE",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_045_SEASHORE_HOUSE_SIMON",
+        "BATTLE_069_ROUTE_117_ANNA_AND_MEG"
       ]
     },
     {

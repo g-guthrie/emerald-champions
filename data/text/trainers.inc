@@ -2560,19 +2560,19 @@ Route117_Text_DerekPostBattle: @ 829CBAD
 	.string "a Bug Maniac.$"
 
 Route117_Text_AnnaIntro: @ 829CC4A
-	.string "Anna: My junior partner and I\n"
-	.string "trained for this!\p"
-	.string "Every little hit makes our footing\n"
-	.string "stronger!$"
+	.string "Anna: Meg and I trained a relay!\p"
+	.string "Each hit strengthens our footing.\n"
+	.string "If Stamina falls first, Receiver\l"
+	.string "can carry it forward!$"
 
 Route117_Text_AnnaDefeat: @ 829CC8E
-	.string "Anna: I'm with my pretty junior student\n"
-	.string "partner! Let me win!$"
+	.string "Anna: You broke our relay before\n"
+	.string "it could carry us!$"
 
 Route117_Text_AnnaPostBattle: @ 829CCCB
-	.string "Anna: Your Pokémon have some good\n"
-	.string "combinations.\p"
-	.string "I'd say you're second only to us!$"
+	.string "Anna: Receiver and Power of Alchemy\n"
+	.string "inherit a fallen ally's Ability.\p"
+	.string "The order you target us matters!$"
 
 Route117_Text_AnnaAndMegRegister: @ 829CD1D
 	.string "Anna: We can't take this lying down!\n"
@@ -2583,23 +2583,27 @@ Route117_Text_AnnaNotEnoughMons: @ 829CD61
 	.string "bring two Pokémon with you.$"
 
 Route117_Text_MegIntro: @ 829CD9D
-	.string "Meg: I'll tag up with my senior\n"
-	.string "partner and beat you!\p"
-	.string "I'll strike first. Anna's partner\n"
-	.string "turns every hit into strength!$"
+	.string "Meg: I'll strike first for Anna!\p"
+	.string "If Muk joins us, Power of Alchemy\n"
+	.string "can copy its partner's Ability!$"
 
 Route117_Text_MegDefeat: @ 829CDE9
 	.string "Meg: Oh, no!\n"
-	.string "I'm sorry, Anna! I let you down…$"
+	.string "Our chain came apart…$"
 
 Route117_Text_MegPostBattle: @ 829CE17
-	.string "Meg: I dragged Anna down…\n"
-	.string "If I didn't, she would have won!$"
+	.string "Meg: Beat Up can raise Stamina\n"
+	.string "several times before Mudsdale moves.\p"
+	.string "Special attacks ignore that Defense!$"
 
 Route117_Text_MegNotEnoughMons: @ 829CE52
 	.string "Meg: Do you only have one Pokémon?\n"
 	.string "We can't battle with you, then.\p"
 	.string "We want to have a 2-on-2 battle.$"
+
+Route117_Text_AnnaAndMegStillTraining:
+	.string "We're still perfecting our relay.\n"
+	.string "Come back with the Dynamo Badge!$"
 
 Route117_Text_AnnaRematchIntro: @ 829CEB6
 	.string "Anna: I can't keep losing in front of\n"

@@ -675,17 +675,17 @@
       "encounter_id": "BATTLE_069_ROUTE_117_ANNA_AND_MEG",
       "location": "Route117",
       "category": "optional guarded solo double with two avatars",
-      "status": "next",
+      "status": "closed",
       "strict_cap": 40,
       "trainer_ids": ["TRAINER_ANNA_AND_MEG_1"],
-      "access_note": "Canonical post-Wattson westward full-clear begins on Route 117; the route was already open, so this is a documented ordering tie-break rather than a hard story gate. Anna at (42,6) and Meg at (43,6) are two overworld avatars for the same trainer definition, not two native opponents. Either script starts the same guarded four-member solo double and registers the same Match Call/rematch chain."
+      "access_note": "Canonical post-Wattson westward full-clear begins on Route 117. Because the route is physically open earlier, both Anna and Meg now truthfully wait for the Dynamo Badge before loading the fixed cap-40 endpoint roster. Anna at (42,6) and Meg at (43,6) are two overworld avatars for one trainer definition, not two native opponents. Either script starts the same guarded four-member solo double and registers the same Match Call/rematch chain."
     },
     {
       "index": 70,
       "encounter_id": "BATTLE_070_ROUTE_117_ISAAC",
       "location": "Route117",
       "category": "optional solo double",
-      "status": "queued",
+      "status": "next",
       "strict_cap": 40,
       "trainer_ids": ["TRAINER_ISAAC_1"],
       "access_note": "Fixed lower-lane trainer at (33,11), alternating up/right with four-tile sight. His six-member trainer record is double while the current first-fight and rematch opcodes are single, so source closure must add an explicit two-usable-Pokémon guard without changing Isaac's Match Call ownership. Isaac and Dylan are reversible in open terrain; Isaac is the canonical lower-lane-first tie-break."

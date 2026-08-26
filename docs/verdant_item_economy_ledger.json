@@ -12,7 +12,7 @@
   "bossRewards": [
     {
       "boss": "Roxanne",
-      "guideOrder": 27,
+      "guideOrder": 30,
       "badgesBeforeBattle": 0,
       "item": "ITEM_EXPERT_BELT",
       "source": {
@@ -24,7 +24,7 @@
     },
     {
       "boss": "Brawly",
-      "guideOrder": 54,
+      "guideOrder": 60,
       "badgesBeforeBattle": 1,
       "item": "ITEM_FLAME_ORB",
       "source": {
@@ -36,7 +36,7 @@
     },
     {
       "boss": "Wattson",
-      "guideOrder": 113,
+      "guideOrder": 118,
       "badgesBeforeBattle": 2,
       "item": "ITEM_WISE_GLASSES",
       "source": {
@@ -504,7 +504,7 @@
         "label": "sBattleItemUnlocks",
         "map": null,
         "fixed": true,
-        "order": 28,
+        "order": 31,
         "badge": 1,
         "cap": null,
         "note": "available with 1 badge(s)"
@@ -517,7 +517,7 @@
           "label": "sBattleItemUnlocks",
           "map": null,
           "fixed": true,
-          "order": 28,
+          "order": 31,
           "badge": 1,
           "cap": null,
           "note": "available with 1 badge(s)"
@@ -3244,7 +3244,7 @@
         "label": "sBattleItemUnlocks",
         "map": null,
         "fixed": true,
-        "order": 28,
+        "order": 31,
         "badge": 1,
         "cap": null,
         "note": "available with 1 badge(s)"
@@ -3257,7 +3257,7 @@
           "label": "sBattleItemUnlocks",
           "map": null,
           "fixed": true,
-          "order": 28,
+          "order": 31,
           "badge": 1,
           "cap": null,
           "note": "available with 1 badge(s)"
@@ -3590,7 +3590,7 @@
         "label": "RustboroCity_Gym_EventScript_GiveRockTomb",
         "map": "RustboroCity_Gym",
         "fixed": true,
-        "order": 27,
+        "order": 30,
         "badge": 0,
         "cap": 14,
         "note": ""
@@ -3603,7 +3603,7 @@
           "label": "RustboroCity_Gym_EventScript_GiveRockTomb",
           "map": "RustboroCity_Gym",
           "fixed": true,
-          "order": 27,
+          "order": 30,
           "badge": 0,
           "cap": 14,
           "note": ""
@@ -3796,7 +3796,7 @@
         "label": "DewfordTown_Gym_EventScript_GiveBulkUp",
         "map": "DewfordTown_Gym",
         "fixed": true,
-        "order": 54,
+        "order": 60,
         "badge": 1,
         "cap": 20,
         "note": ""
@@ -3809,7 +3809,7 @@
           "label": "DewfordTown_Gym_EventScript_GiveBulkUp",
           "map": "DewfordTown_Gym",
           "fixed": true,
-          "order": 54,
+          "order": 60,
           "badge": 1,
           "cap": 20,
           "note": ""
@@ -3821,7 +3821,7 @@
           "label": "DewfordTown_Gym_EventScript_GiveBulkUp2",
           "map": "DewfordTown_Gym",
           "fixed": true,
-          "order": 54,
+          "order": 60,
           "badge": 1,
           "cap": 20,
           "note": ""
@@ -7428,7 +7428,7 @@
         "label": "sBattleItemUnlocks",
         "map": null,
         "fixed": true,
-        "order": 114,
+        "order": 119,
         "badge": 3,
         "cap": null,
         "note": "available with 3 badge(s)"
@@ -7441,7 +7441,7 @@
           "label": "sBattleItemUnlocks",
           "map": null,
           "fixed": true,
-          "order": 114,
+          "order": 119,
           "badge": 3,
           "cap": null,
           "note": "available with 3 badge(s)"
@@ -14196,7 +14196,7 @@
         "label": "sBattleItemUnlocks",
         "map": null,
         "fixed": true,
-        "order": 55,
+        "order": 61,
         "badge": 2,
         "cap": null,
         "note": "available with 2 badge(s)"
@@ -14209,7 +14209,7 @@
           "label": "sBattleItemUnlocks",
           "map": null,
           "fixed": true,
-          "order": 55,
+          "order": 61,
           "badge": 2,
           "cap": null,
           "note": "available with 2 badge(s)"
@@ -14266,7 +14266,7 @@
         "label": "Route109_EventScript_SoftSandGirl",
         "map": "Route109",
         "fixed": true,
-        "order": 76,
+        "order": 73,
         "badge": 2,
         "cap": 30,
         "note": ""
@@ -14279,7 +14279,7 @@
           "label": "Route109_EventScript_SoftSandGirl",
           "map": "Route109",
           "fixed": true,
-          "order": 76,
+          "order": 73,
           "badge": 2,
           "cap": 30,
           "note": ""
@@ -16092,7 +16092,7 @@
           "label": "sBattleItemUnlocks",
           "map": null,
           "fixed": true,
-          "order": 55,
+          "order": 61,
           "badge": 2,
           "cap": null,
           "note": "available with 2 badge(s)"
@@ -16327,7 +16327,7 @@
         "label": "MauvilleCity_Gym_EventScript_GiveVoltSwitch2",
         "map": "MauvilleCity_Gym",
         "fixed": true,
-        "order": 113,
+        "order": 118,
         "badge": 2,
         "cap": 30,
         "note": ""
@@ -16340,7 +16340,7 @@
           "label": "MauvilleCity_Gym_EventScript_GiveVoltSwitch2",
           "map": "MauvilleCity_Gym",
           "fixed": true,
-          "order": 113,
+          "order": 118,
           "badge": 2,
           "cap": 30,
           "note": ""
@@ -16352,7 +16352,7 @@
           "label": "MauvilleCity_Gym_EventScript_GiveVoltSwitch",
           "map": "MauvilleCity_Gym",
           "fixed": true,
-          "order": 113,
+          "order": 118,
           "badge": 2,
           "cap": 30,
           "note": ""
@@ -16914,7 +16914,7 @@
           "label": "Route109_EventScript_ItemZoomLens",
           "map": "Route109",
           "fixed": true,
-          "order": 76,
+          "order": 73,
           "badge": 2,
           "cap": 30,
           "note": "data/maps/Route109/map.json; FLAG_ITEM_ROUTE_109_ZOOM_LENS"

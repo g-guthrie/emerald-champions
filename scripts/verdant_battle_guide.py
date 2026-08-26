@@ -18,6 +18,7 @@ ROOT = Path(__file__).resolve().parents[1]
 JSON_PATH = ROOT / "docs/verdant_battle_guide.json"
 MARKDOWN_PATH = ROOT / "docs/verdant_battle_guide.md"
 BESPOKE_PATH = ROOT / "docs/verdant_bespoke_battle_designs.json"
+SEQUENCE_PATH = ROOT / "docs/verdant_battle_sequence.json"
 
 STRICT_CAPS = [14, 20, 30, 40, 45, 55, 60, 70, 80, 100]
 
@@ -301,6 +302,12 @@ def build_guide() -> dict:
     report = quality.audit()
     bespoke = json.loads(BESPOKE_PATH.read_text()) if BESPOKE_PATH.exists() else {"designs": {}}
     bespoke_designs = bespoke.get("designs", {})
+    sequence = json.loads(SEQUENCE_PATH.read_text())
+    sequence_rank = {
+        trainer_id: entry["index"]
+        for entry in sequence.get("entries", [])
+        for trainer_id in entry.get("trainer_ids", [])
+    }
     bespoke_by_trainer = {}
     bespoke_ids_by_trainer = {}
     for design_id, design in bespoke_designs.items():
@@ -445,6 +452,7 @@ def build_guide() -> dict:
         entries.append({
             "trainerId": trainer_id,
             "encounterId": encounter_id,
+            "sequenceIndex": sequence_rank.get(trainer_id),
             "encounterAlternatives": design.get("trainer_ids", []) if design else [],
             "runtimePartyAlternatives": runtime_alternatives,
             "name": metadata[trainer_id]["name"],
@@ -511,6 +519,7 @@ def build_guide() -> dict:
     entries.sort(key=lambda row: (
         row["chapterRank"],
         -100 if row["trainerId"].startswith(("TRAINER_MAY_ROUTE_103_", "TRAINER_BRENDAN_ROUTE_103_")) else map_rank(row["sourceMap"]),
+        row["sequenceIndex"] if row["sequenceIndex"] is not None else 100000,
         category_order[row["category"]],
         league_order.get(row["trainerId"], 0),
         row["source"]["line"],

@@ -4924,7 +4924,7 @@ def main() -> None:
         if token not in battle_main54:
             problems.append(f"Battle 55: native joint or split engine contract lost {token}")
     ai55 = read("src/battle_ai_main.c")
-    for token in ("effect == EFFECT_BEAT_UP && partnerAbility == ABILITY_JUSTIFIED", "score += 15"):
+    for token in ("effect == EFFECT_BEAT_UP", "partnerAbility == ABILITY_JUSTIFIED", "!CanBeatUpFaintTarget(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex)", "score += 15"):
         if token not in ai55:
             problems.append(f"Battle 55: native Beat Up activation scoring lost {token}")
     dialogue55 = read("data/text/trainers.inc")
@@ -5820,6 +5820,125 @@ def main() -> None:
     if repeats68 != {"SPECIES_EMOLGA", "SPECIES_RAICHU"}:
         problems.append(f"Battle 68: intended earned Emolga/Raichu repeats changed: {sorted(repeats68)}")
 
+    anna_meg69 = designs["BATTLE_069_ROUTE_117_ANNA_AND_MEG"]
+    expected_anna_meg69 = [
+        {"level": 1, "species": "SPECIES_PASSIMIAN", "item": "ITEM_ROSELI_BERRY", "ability_slot": 0, "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY", "moves": ["MOVE_BEAT_UP", "MOVE_CLOSE_COMBAT", "MOVE_KNOCK_OFF", "MOVE_PROTECT"]},
+        {"level": 2, "species": "SPECIES_MUDSDALE", "item": "ITEM_LEFTOVERS", "ability_slot": 1, "spread": "SPREAD_31_IV_HP_DEF_IMPISH", "moves": ["MOVE_HIGH_HORSEPOWER", "MOVE_BODY_PRESS", "MOVE_HEAVY_SLAM", "MOVE_ROCK_SLIDE"]},
+        {"level": 2, "species": "SPECIES_MUK_ALOLAN", "item": "ITEM_BLACK_SLUDGE", "ability_slot": 2, "spread": "SPREAD_31_IV_HP_SPDEF_CAREFUL", "moves": ["MOVE_GUNK_SHOT", "MOVE_KNOCK_OFF", "MOVE_SNARL", "MOVE_PROTECT"]},
+        {"level": 3, "species": "SPECIES_MEDICHAM", "item": "ITEM_EXPERT_BELT", "ability_slot": 0, "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY", "moves": ["MOVE_FEINT", "MOVE_ZEN_HEADBUTT", "MOVE_DRAIN_PUNCH", "MOVE_ICE_PUNCH"]},
+    ]
+    if anna_meg69.get("trainer_ids") != ["TRAINER_ANNA_AND_MEG_1"] or party_builds("TRAINER_ANNA_AND_MEG_1", trainers_text, parties_text) != expected_anna_meg69:
+        problems.append("Battle 69: Anna and Meg source party or shared ownership differs")
+    if anna_meg69.get("strict_cap") != 40 or anna_meg69.get("evolution_stage_fit", {}).get("status") != "pass" or anna_meg69.get("manual_quality") != 10 or anna_meg69.get("manual_difficulty") != 9.0:
+        problems.append("Battle 69: cap, stage, quality, or difficulty closure drifted")
+    branch69 = anna_meg69.get("branch_contract", {})
+    if branch69.get("format") != "double" or branch69.get("source_slots") != [0, 1, 2, 3] or branch69.get("intended_lead") != ["SPECIES_PASSIMIAN", "SPECIES_MUDSDALE"] or branch69.get("reserve_order") != ["SPECIES_MUK_ALOLAN", "SPECIES_MEDICHAM"]:
+        problems.append("Battle 69: fixed lead, reserve, or shared double contract drifted")
+
+    anna_meg_block69 = trainer_blocks["TRAINER_ANNA_AND_MEG_1"].group(0)
+    for token in (".doubleBattle = TRUE", "AI_FLAG_HELP_PARTNER", "AI_FLAG_COMBO_SETUP"):
+        if token not in anna_meg_block69:
+            problems.append(f"Battle 69: Anna and Meg missing {token}")
+    for token in ("AI_FLAG_SMART_SWITCHING", "AI_FLAG_SPEED_CONTROL", "AI_FLAG_FIELD_CONTROL", "AI_FLAG_PERISH_TRAP"):
+        if token in anna_meg_block69:
+            problems.append(f"Battle 69: unrelated or order-breaking profile leaked into Anna and Meg: {token}")
+
+    abilities69 = {
+        "SPECIES_PASSIMIAN": (0, "ABILITY_RECEIVER"),
+        "SPECIES_MUDSDALE": (1, "ABILITY_STAMINA"),
+        "SPECIES_MUK_ALOLAN": (2, "ABILITY_POWER_OF_ALCHEMY"),
+        "SPECIES_MEDICHAM": (0, "ABILITY_PURE_POWER"),
+    }
+    names69 = {"PASSIMIAN": "Passimian", "MUDSDALE": "Mudsdale", "MUK_ALOLAN": "MukAlolan", "MEDICHAM": "Medicham"}
+    for species, (slot, ability) in abilities69.items():
+        slots = ability_slots.get(species, [])
+        if len(slots) <= slot or slots[slot] != ability:
+            problems.append(f"Battle 69: {species} slot {slot} is not {ability}: {slots}")
+    for build in expected_anna_meg69:
+        species = build["species"].removeprefix("SPECIES_")
+        for move in build["moves"]:
+            if not move_is_legal(species, names69[species], move, level_source, tmhm_source, tm_indices, tutor_source, indices, egg_source):
+                problems.append(f"Battle 69: {species} cannot legally learn {move}")
+
+    evolution69 = read("src/data/pokemon/evolution.h")
+    for token in (
+        "[SPECIES_MUDBRAY]     = {{EVO_LEVEL, 30, SPECIES_MUDSDALE}}",
+        "[SPECIES_GRIMER_ALOLAN]       = {{EVO_LEVEL, 38, SPECIES_MUK_ALOLAN}}",
+        "[SPECIES_MEDITITE]    = {{EVO_LEVEL, 37, SPECIES_MEDICHAM}}",
+    ):
+        compact_token = re.sub(r"\s+", " ", token)
+        compact_source = re.sub(r"\s+", " ", evolution69)
+        if compact_token not in compact_source:
+            problems.append(f"Battle 69: evolution-stage proof lost {token}")
+
+    route117_map69 = json.loads(read("data/maps/Route117/map.json"))
+    anna_object69 = next(row for row in route117_map69["object_events"] if row.get("script") == "Route117_EventScript_Anna")
+    meg_object69 = next(row for row in route117_map69["object_events"] if row.get("script") == "Route117_EventScript_Meg")
+    if (anna_object69.get("x"), anna_object69.get("y"), anna_object69.get("movement_type"), anna_object69.get("trainer_sight_or_berry_tree_id")) != (42, 6, "MOVEMENT_TYPE_FACE_DOWN", "1") or (meg_object69.get("x"), meg_object69.get("y"), meg_object69.get("movement_type"), meg_object69.get("trainer_sight_or_berry_tree_id")) != (43, 6, "MOVEMENT_TYPE_FACE_DOWN", "1"):
+        problems.append("Battle 69: Anna/Meg adjacent shared-record geometry drifted")
+    route117_scripts69 = read("data/maps/Route117/scripts.inc")
+    if route117_scripts69.count("goto_if_unset FLAG_BADGE03_GET, Route117_EventScript_AnnaAndMegStillTraining") != 2:
+        problems.append("Battle 69: both early-reachable avatars are not gated behind Badge 3")
+    if route117_scripts69.count("trainerbattle_double TRAINER_ANNA_AND_MEG_1") != 2 or route117_scripts69.count("trainerbattle_rematch_double TRAINER_ANNA_AND_MEG_1") != 2 or route117_scripts69.count("register_matchcall TRAINER_ANNA_AND_MEG_1") != 2:
+        problems.append("Battle 69: shared first-fight/rematch/Match Call routing drifted")
+
+    dialogue_source69 = read("data/text/trainers.inc")
+    dialogue69 = dialogue_source69.split("Route117_Text_AnnaIntro:", 1)[1].split("Route117_Text_AnnaRematchIntro:", 1)[0]
+    for cue in ("trained a relay", "strengthens our footing", "If Stamina falls first", "If Muk joins us", "Receiver and Power of Alchemy", "Beat Up can raise Stamina", "Special attacks ignore that Defense", "Dynamo Badge"):
+        if cue not in dialogue69:
+            problems.append(f"Battle 69: dialogue misses {cue}")
+    for line in re.findall(r'\.string "([^"]*)"', dialogue69):
+        visible = line.replace("\\n", "").replace("\\l", "").replace("\\p", "").replace("$", "")
+        if len(visible) > 36:
+            problems.append(f"Battle 69: dialogue line is too long: {visible}")
+
+    ai69 = read("src/battle_ai_main.c")
+    ai_util69 = read("src/battle_ai_util.c")
+    for token in (
+        "atkPartnerAbility == ABILITY_STAMINA",
+        "HasMove(battlerAtkPartner, MOVE_BODY_PRESS)",
+        "BattlerStatCanRise(battlerAtkPartner, atkPartnerAbility, STAT_DEF)",
+        "partnerAbility == ABILITY_STAMINA",
+        "HasMove(battlerDef, MOVE_BODY_PRESS)",
+        "!CanBeatUpFaintTarget(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex)",
+    ):
+        if token not in ai69:
+            problems.append(f"Battle 69: safe reusable Beat Up-Stamina AI lost {token}")
+    for token in (
+        "bool32 CanBeatUpFaintTarget",
+        "gBattleCommunication[0] = i + 1",
+        "gBattleMons[battlerDef].item = ITEM_NONE",
+        "AI_CalcDamageInternal(move, battlerAtk, battlerDef, TRUE)",
+        "maxHitDamage * hitCount",
+    ):
+        if token not in ai_util69:
+            problems.append(f"Battle 69: conservative full-party Beat Up safety lost {token}")
+    receiver69 = read("src/battle_script_commands.c")
+    for token in ("VARIOUS_TRY_ACTIVATE_RECEIVER", "i == ABILITY_RECEIVER || i == ABILITY_POWER_OF_ALCHEMY", "gBattleStruct->tracedAbility[gBattlerAbility] = gBattleMons[gActiveBattler].ability"):
+        if token not in receiver69:
+            problems.append(f"Battle 69: Receiver/Power of Alchemy engine truth lost {token}")
+
+    manifest69 = json.loads(read("docs/verdant_doubles_manifest.json")).get("formats", {}).get("TRAINER_ANNA_AND_MEG_1", {})
+    if manifest69.get("archetype") != "Beat Up-Stamina adaptive inheritance" or manifest69.get("difficulty") != 64 or manifest69.get("level_offset") != 2:
+        problems.append("Battle 69: format manifest summary is stale")
+    donor_requirements69 = {
+        "showdown:gen9championsrandomdoublesbattle:008": {"Passimian", "Mudsdale"},
+        "showdown:gen7randomdoublesbattle:009": {"Passimian"},
+        "showdown:gen7randomdoublesbattle:002": {"Muk-Alola"},
+        "showdown:gen4randomdoublesbattle:017": {"Medicham"},
+    }
+    for reference_id, required_species in donor_requirements69.items():
+        row = refs29.get(reference_id)
+        if row is None or row.get("completeness") != "full-sets" or not required_species <= set(row.get("roster", [])):
+            problems.append(f"Battle 69: inheritance donor drifted {reference_id}")
+    san_jose69 = refs29.get("vgc:regional-san-jose-ca-2018")
+    if san_jose69 is None or san_jose69.get("placement") != 1 or not {"muk-alola", "mudsdale"} <= {species.lower() for species in san_jose69.get("roster", [])}:
+        problems.append("Battle 69: San Jose champion Muk/Mudsdale reference drifted")
+    battles_1_to_68 = battles_1_to_67 | {build["species"] for build in expected_wattson68}
+    repeats69 = battles_1_to_68 & {build["species"] for build in expected_anna_meg69}
+    if repeats69 != {"SPECIES_MUDSDALE"}:
+        problems.append(f"Battle 69: intended earned Mudsdale repeat changed: {sorted(repeats69)}")
+
     # Cross-encounter species reuse is an editorial signal, not a correctness
     # failure. Keep the existing exact comparisons so deliberate repeats stay
     # visible, but never force a replacement merely to preserve a zero-repeat
@@ -5905,6 +6024,7 @@ def main() -> None:
     print("PASS: Battle 66 guarded hazard maze, legal young Glimmet, Gholdengo/Guzzlord reveals, reusable phazing AI, donors, and dialogue")
     print("PASS: Battle 67 truthful Symbiosis item relay, safe split singles, legal berry consumers/forms, reusable AI, donors, and dialogue")
     print("PASS: Battle 68 guarded Wattson World Champion circuit, six legal sets, reciprocal Mega Raichu Y, exact badge flow, and Trick Room-aware AI")
+    print("PASS: Battle 69 Badge-gated Beat Up-Stamina adaptive inheritance, legal four, full-party-safe AI, donors, and dialogue")
     print(f"PASS: all {len(designs)} closed encounters record their truthful legacy-983 or current-1005 corpus fit decision")
 
 

@@ -2927,7 +2927,14 @@ static s16 AI_DoubleBattle(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                   && !IS_MOVE_STATUS(move)
                   && HasMoveWithSplit(battlerAtkPartner, SPLIT_PHYSICAL)
                   && BattlerStatCanRise(battlerAtkPartner, atkPartnerAbility, STAT_ATK)
-                  && !CanIndexMoveFaintTarget(battlerAtk, battlerAtkPartner, AI_THINKING_STRUCT->movesetIndex, 0))
+                  && !CanBeatUpFaintTarget(battlerAtk, battlerAtkPartner, AI_THINKING_STRUCT->movesetIndex))
+                {
+                    RETURN_SCORE_PLUS(1);
+                }
+                else if (atkPartnerAbility == ABILITY_STAMINA
+                      && HasMove(battlerAtkPartner, MOVE_BODY_PRESS)
+                      && BattlerStatCanRise(battlerAtkPartner, atkPartnerAbility, STAT_DEF)
+                      && !CanBeatUpFaintTarget(battlerAtk, battlerAtkPartner, AI_THINKING_STRUCT->movesetIndex))
                 {
                     RETURN_SCORE_PLUS(1);
                 }
@@ -3242,7 +3249,15 @@ static s16 AI_ComboSetup(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     if (!IsTargetingPartner(battlerAtk, battlerDef))
         return score;
 
-    if (effect == EFFECT_BEAT_UP && partnerAbility == ABILITY_JUSTIFIED)
+    if (effect == EFFECT_BEAT_UP
+      && partnerAbility == ABILITY_JUSTIFIED
+      && !CanBeatUpFaintTarget(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex))
+        score += 15;
+    else if (effect == EFFECT_BEAT_UP
+          && partnerAbility == ABILITY_STAMINA
+          && HasMove(battlerDef, MOVE_BODY_PRESS)
+          && BattlerStatCanRise(battlerDef, partnerAbility, STAT_DEF)
+          && !CanBeatUpFaintTarget(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex))
         score += 15;
     else if (effect == EFFECT_ALWAYS_CRIT
           && partnerAbility == ABILITY_ANGER_POINT

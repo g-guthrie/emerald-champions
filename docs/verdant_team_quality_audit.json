@@ -37767,92 +37767,67 @@
       "name": "Anna & Meg",
       "location": "Route 117",
       "format": "double",
-      "manifest_difficulty": 44,
+      "manifest_difficulty": 64,
       "party_name": "sParty_AnnaAndMeg1",
       "party_size": 4,
-      "avg_level_offset": 0.0,
-      "max_level_offset": 0,
-      "item_coverage": 0.5,
+      "avg_level_offset": 2.0,
+      "max_level_offset": 3,
+      "item_coverage": 1.0,
       "complete_moveset_coverage": 1.0,
-      "avg_bst": 428.8,
+      "avg_bst": 475.0,
       "rare_count": 0,
       "mega_count": 0,
-      "speed_control_count": 3,
+      "speed_control_count": 2,
       "protect_count": 1,
       "defensive_tempo_count": 2,
-      "spread_count": 1,
-      "synergy_tags": [],
-      "quality_score": 57,
+      "spread_count": 2,
+      "synergy_tags": [
+        "Beat Up + Stamina",
+        "ability inheritance relay"
+      ],
+      "quality_score": 79,
       "issues": [],
       "mons": [
         {
-          "species": "SPECIES_MINCCINO",
-          "level_offset": 0,
-          "item": "ITEM_NONE",
-          "ability_slot": 2,
-          "ability": "ABILITY_SKILL_LINK",
-          "spread": "SPREAD_25_IV_0_EV",
-          "moves": [
-            "MOVE_TAIL_SLAP",
-            "MOVE_HELPING_HAND",
-            "MOVE_WAKE_UP_SLAP",
-            "MOVE_SING"
-          ],
-          "bst": 300,
-          "speed": 75,
-          "types": [
-            "TYPE_NORMAL",
-            "TYPE_NORMAL"
-          ],
-          "attack_moves": [
-            "MOVE_TAIL_SLAP",
-            "MOVE_WAKE_UP_SLAP"
-          ],
-          "status_moves": [
-            "MOVE_HELPING_HAND",
-            "MOVE_SING"
-          ]
-        },
-        {
-          "species": "SPECIES_GURDURR",
-          "level_offset": 0,
-          "item": "ITEM_NONE",
+          "species": "SPECIES_PASSIMIAN",
+          "level_offset": 1,
+          "item": "ITEM_ROSELI_BERRY",
           "ability_slot": 0,
-          "ability": "ABILITY_GUTS",
-          "spread": "SPREAD_25_IV_0_EV",
+          "ability": "ABILITY_RECEIVER",
+          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
           "moves": [
-            "MOVE_ROCK_SLIDE",
-            "MOVE_WAKE_UP_SLAP",
-            "MOVE_CHIP_AWAY",
-            "MOVE_FOCUS_ENERGY"
+            "MOVE_BEAT_UP",
+            "MOVE_CLOSE_COMBAT",
+            "MOVE_KNOCK_OFF",
+            "MOVE_PROTECT"
           ],
-          "bst": 405,
-          "speed": 40,
+          "bst": 490,
+          "speed": 80,
           "types": [
             "TYPE_FIGHTING",
             "TYPE_FIGHTING"
           ],
           "attack_moves": [
-            "MOVE_ROCK_SLIDE",
-            "MOVE_WAKE_UP_SLAP",
-            "MOVE_CHIP_AWAY"
+            "MOVE_BEAT_UP",
+            "MOVE_CLOSE_COMBAT",
+            "MOVE_KNOCK_OFF"
           ],
           "status_moves": [
-            "MOVE_FOCUS_ENERGY"
+            "MOVE_PROTECT"
           ]
         },
         {
           "species": "SPECIES_MUDSDALE",
-          "level_offset": 0,
-          "item": "ITEM_ASSAULT_VEST",
+          "level_offset": 2,
+          "item": "ITEM_LEFTOVERS",
           "ability_slot": 1,
           "ability": "ABILITY_STAMINA",
-          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+          "spread": "SPREAD_31_IV_HP_DEF_IMPISH",
           "moves": [
             "MOVE_HIGH_HORSEPOWER",
-            "MOVE_ROCK_SLIDE",
+            "MOVE_BODY_PRESS",
             "MOVE_HEAVY_SLAM",
-            "MOVE_BODY_PRESS"
+            "MOVE_ROCK_SLIDE"
           ],
           "bst": 500,
           "speed": 35,
@@ -37862,39 +37837,66 @@
           ],
           "attack_moves": [
             "MOVE_HIGH_HORSEPOWER",
-            "MOVE_ROCK_SLIDE",
+            "MOVE_BODY_PRESS",
             "MOVE_HEAVY_SLAM",
-            "MOVE_BODY_PRESS"
+            "MOVE_ROCK_SLIDE"
           ],
           "status_moves": []
         },
         {
-          "species": "SPECIES_WEAVILE",
-          "level_offset": 0,
-          "item": "ITEM_FOCUS_SASH",
-          "ability_slot": 0,
-          "ability": "ABILITY_PRESSURE",
-          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+          "species": "SPECIES_MUK_ALOLAN",
+          "level_offset": 2,
+          "item": "ITEM_BLACK_SLUDGE",
+          "ability_slot": 2,
+          "ability": "ABILITY_POWER_OF_ALCHEMY",
+          "spread": "SPREAD_31_IV_HP_SPDEF_CAREFUL",
           "moves": [
-            "MOVE_BEAT_UP",
-            "MOVE_FAKE_OUT",
-            "MOVE_TRIPLE_AXEL",
+            "MOVE_GUNK_SHOT",
+            "MOVE_KNOCK_OFF",
+            "MOVE_SNARL",
             "MOVE_PROTECT"
           ],
-          "bst": 510,
-          "speed": 125,
+          "bst": 500,
+          "speed": 50,
           "types": [
-            "TYPE_DARK",
-            "TYPE_ICE"
+            "TYPE_POISON",
+            "TYPE_DARK"
           ],
           "attack_moves": [
-            "MOVE_BEAT_UP",
-            "MOVE_FAKE_OUT",
-            "MOVE_TRIPLE_AXEL"
+            "MOVE_GUNK_SHOT",
+            "MOVE_KNOCK_OFF",
+            "MOVE_SNARL"
           ],
           "status_moves": [
             "MOVE_PROTECT"
           ]
+        },
+        {
+          "species": "SPECIES_MEDICHAM",
+          "level_offset": 3,
+          "item": "ITEM_EXPERT_BELT",
+          "ability_slot": 0,
+          "ability": "ABILITY_PURE_POWER",
+          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+          "moves": [
+            "MOVE_FEINT",
+            "MOVE_ZEN_HEADBUTT",
+            "MOVE_DRAIN_PUNCH",
+            "MOVE_ICE_PUNCH"
+          ],
+          "bst": 410,
+          "speed": 80,
+          "types": [
+            "TYPE_FIGHTING",
+            "TYPE_PSYCHIC"
+          ],
+          "attack_moves": [
+            "MOVE_FEINT",
+            "MOVE_ZEN_HEADBUTT",
+            "MOVE_DRAIN_PUNCH",
+            "MOVE_ICE_PUNCH"
+          ],
+          "status_moves": []
         }
       ]
     },

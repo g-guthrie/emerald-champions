@@ -8,15 +8,15 @@
     "tuning_preference": "Preserve sound strategy; tune opponent levels relative to the fixed cap first."
   },
   "selection": {
-    "index": 69,
-    "encounter_id": "BATTLE_069_ROUTE_117_ANNA_AND_MEG",
+    "index": 70,
+    "encounter_id": "BATTLE_070_ROUTE_117_ISAAC",
     "location": "Route117",
-    "category": "optional guarded solo double with two avatars",
+    "category": "optional solo double",
     "status": "next",
     "trainer_ids": [
-      "TRAINER_ANNA_AND_MEG_1"
+      "TRAINER_ISAAC_1"
     ],
-    "access_note": "Canonical post-Wattson westward full-clear begins on Route 117; the route was already open, so this is a documented ordering tie-break rather than a hard story gate. Anna at (42,6) and Meg at (43,6) are two overworld avatars for the same trainer definition, not two native opponents. Either script starts the same guarded four-member solo double and registers the same Match Call/rematch chain.",
+    "access_note": "Fixed lower-lane trainer at (33,11), alternating up/right with four-tile sight. His six-member trainer record is double while the current first-fight and rematch opcodes are single, so source closure must add an explicit two-usable-Pok\u00e9mon guard without changing Isaac's Match Call ownership. Isaac and Dylan are reversible in open terrain; Isaac is the canonical lower-lane-first tie-break.",
     "strict_cap": 40,
     "strict_cap_source": "canonical-sequence-stage",
     "campaign_point": null,
@@ -28,68 +28,79 @@
         "double"
       ],
       "source_variant_count": 1,
-      "representative_party_size": 4,
-      "average_party_size": 4.0,
+      "representative_party_size": 6,
+      "average_party_size": 6.0,
       "species": [
-        "SPECIES_GURDURR",
-        "SPECIES_MINCCINO",
-        "SPECIES_MUDSDALE",
-        "SPECIES_WEAVILE"
+        "SPECIES_BONSLY",
+        "SPECIES_DEINO",
+        "SPECIES_EEVEE",
+        "SPECIES_LITWICK",
+        "SPECIES_MANTYKE",
+        "SPECIES_TANGELA"
       ],
-      "items": [
-        "ITEM_ASSAULT_VEST",
-        "ITEM_FOCUS_SASH"
-      ],
+      "items": [],
       "moves": [
-        "MOVE_BEAT_UP",
-        "MOVE_BODY_PRESS",
-        "MOVE_CHIP_AWAY",
-        "MOVE_FAKE_OUT",
-        "MOVE_FOCUS_ENERGY",
-        "MOVE_HEAVY_SLAM",
-        "MOVE_HELPING_HAND",
-        "MOVE_HIGH_HORSEPOWER",
-        "MOVE_PROTECT",
+        "MOVE_ACID_ARMOR",
+        "MOVE_AMNESIA",
+        "MOVE_BATON_PASS",
+        "MOVE_CONFUSE_RAY",
+        "MOVE_CURSE",
+        "MOVE_DARK_PULSE",
+        "MOVE_DRAGON_PULSE",
+        "MOVE_EARTH_POWER",
+        "MOVE_FEINT_ATTACK",
+        "MOVE_FLAME_BURST",
+        "MOVE_GIGA_DRAIN",
+        "MOVE_HYDRO_PUMP",
+        "MOVE_HYPER_VOICE",
+        "MOVE_LOW_KICK",
+        "MOVE_PAIN_SPLIT",
         "MOVE_ROCK_SLIDE",
-        "MOVE_SING",
-        "MOVE_TAIL_SLAP",
-        "MOVE_TRIPLE_AXEL",
-        "MOVE_WAKE_UP_SLAP"
+        "MOVE_SHADOW_BALL",
+        "MOVE_SIGNAL_BEAM",
+        "MOVE_SLAM",
+        "MOVE_SLEEP_POWDER",
+        "MOVE_TAILWIND",
+        "MOVE_WAKE_UP_SLAP",
+        "MOVE_WISH",
+        "MOVE_YAWN"
       ],
-      "synergy_tags": [],
+      "synergy_tags": [
+        "Tailwind"
+      ],
       "level_offsets": [
-        0
+        -5
       ],
-      "average_level_offset": 0.0,
-      "max_level_offset": 0,
+      "average_level_offset": -5.0,
+      "max_level_offset": -5,
       "densities": {
-        "protect": 0.25,
-        "fake_out": 0.25,
+        "protect": 0.0,
+        "fake_out": 0.0,
         "setup": 0.0,
-        "speed_control_or_priority": 0.5,
-        "premium_item": 0.5
+        "speed_control_or_priority": 0.167,
+        "premium_item": 0.0
       }
     }
   },
   "ledger": {
     "path": "docs/verdant_battle_experience_ledger.json",
     "present": true,
-    "records": 68,
+    "records": 69,
     "rolling_fallback_records": []
   },
   "rolling_window": {
     "requested_size": 10,
     "actual_size": 10,
     "encounter_range": [
-      59,
-      68
+      60,
+      69
     ],
     "tempo_counts": {
       "Ally-safe Punk Rock spread in the 3+3 joint, Vivian's disruptive/bulky coverage single, or Kirk's direct Ghost-backed special single.": 1,
       "Branch-sensitive Grass-Fire lead into player-selected Rainbow, Swamp, Sea of Fire continuation, or no-combo Water endgame.": 1,
       "Fast item-removal and Tailwind lead, target-order-sensitive young Ground reserve, returning mixed partners, then source-last signature Mega balance closer.": 1,
-      "Immediate mixed damage whose mandatory drawbacks create the player's turns; no setup, field, pivot, priority, Protect, or teammate engine.": 1,
       "One guaranteed Terrain/Tailwind opening followed by native resistance-and-base-damage reserve selection, reciprocal speed modes, priority denial, and a dynamically deployed story Mega.": 1,
+      "One visible ally-targeting activation, Defense-powered physical pressure, then conditional inheritance or immediate reserve offense selected by the native matchup logic rather than a speed field.": 1,
       "Proactive Stuff Cheeks opening, reactive berry thresholds, cross-trainer second-item transfers, and two independent item-economy singles.": 1,
       "Recovering swim, passively accelerating cycle, recoil-and-recovery run, and one Curse plus Chesto Rest finish-line wall.": 1,
       "Two passive-but-dangerous trap leads, Good as Gold removal tax, then rare bulky phazing cashout with no speed field.": 1,
@@ -97,26 +108,29 @@
       "Young room-and-rock lead, special Throat Spray pressure, Choice Band slow breaker, and rare Beast Boost clock reset.": 1
     },
     "format_counts": {
-      "double": 5,
+      "double": 6,
       "native-pair double": 2,
-      "single": 3
+      "single": 2
     },
     "novelty_tag_counts": {
-      "guarded-double": 4,
-      "cycling-single": 3,
+      "guarded-double": 5,
       "cycling-double": 2,
+      "cycling-single": 2,
       "gym-native-pair": 2,
       "joint-3-plus-3": 2,
       "match-call-owner": 2,
       "no-speed-mode": 2,
       "safe-one-usable": 2,
-      "source-proven-non-pair": 2,
       "split-four-singles": 2,
       "trick-room": 2,
+      "ability-inheritance-relay": 1,
       "adaptive-reserve-selection": 1,
       "air-balloon": 1,
+      "alolan-muk": 1,
       "armor-tail": 1,
       "beast-boost": 1,
+      "beat-up-stamina": 1,
+      "body-press-conversion": 1,
       "boomburst": 1,
       "cheek-pouch": 1,
       "chesto-rest-snorlax": 1,
@@ -140,33 +154,35 @@
       "guzzlord": 1,
       "gym-double": 1,
       "hazard-maze": 1,
-      "hyper-beam-recharge": 1,
       "iron-barbs": 1,
       "iron-hands": 1,
-      "jump-kick-crash": 1,
+      "knockout-order": 1,
       "libero-raboot": 1,
       "lightning-rod-ally-activation": 1,
       "liquid-voice-brionne": 1,
       "mega-gallade": 1,
       "mega-raichu-y": 1,
       "middle-starters": 1,
-      "mixed-axis-finale": 1,
       "moltres": 1,
-      "no-brakes": 1,
       "no-forced-ai": 1,
       "no-guard": 1,
+      "no-legendary": 1,
+      "no-mega": 1,
       "no-scripted-heal": 1,
       "no-single-engine": 1,
+      "no-speed-field": 1,
       "noncontact-counterplay": 1,
       "normal-gengar": 1,
-      "overheat-drop": 1,
+      "passimian": 1,
       "player-chosen-branch": 1,
       "pledge-relay": 1,
+      "power-of-alchemy": 1,
       "published-balance-chassis": 1,
       "punk-rock-toxtricity": 1,
+      "pure-power-medicham": 1,
       "rainbow": 1,
+      "receiver": 1,
       "reciprocal-mega": 1,
-      "recoil": 1,
       "recovery-denial": 1,
       "red-card-skarmory": 1,
       "removal-tax": 1,
@@ -176,15 +192,16 @@
       "reusable-spread-ai": 1,
       "rocky-helmet": 1,
       "rough-skin": 1,
+      "route-double": 1,
       "sea-of-fire": 1,
       "second-item-relay": 1,
       "sharpedo": 1,
       "slow-lane": 1,
       "soundproof-prefix": 1,
+      "source-proven-non-pair": 1,
       "speed-boost-scolipede": 1,
       "stakataka": 1,
       "stuff-cheeks": 1,
-      "superpower-drop": 1,
       "swamp": 1,
       "swim-cycle-run-recover": 1,
       "switch-puzzle": 1,
@@ -206,146 +223,9 @@
       "young-drilbur": 1,
       "young-ferroseed": 1,
       "young-ponyta": 1,
-      "zapdos": 1,
-      "zero-protect": 1,
-      "zero-setup": 1
+      "zapdos": 1
     },
     "entries": [
-      {
-        "index": 59,
-        "encounter_id": "BATTLE_059_ROUTE_110_CYCLING_ANTHONY",
-        "identity": {
-          "location": "Route110",
-          "category": "optional moving cycling single",
-          "format": "single",
-          "strict_cap": 30,
-          "memory_hook": "Anthony runs four brakeless commitments: Doduo and Zebstrika spend recoil or stats, Rampardos risks everything on Head Smash, and Porygon-Z exposes a recharge turn."
-        },
-        "primary_player_question": "Can the player survive four escalating committed hits and punish recoil, crash risk, stat drops, or recharge before the next burst lands?",
-        "tempo": "Immediate mixed damage whose mandatory drawbacks create the player's turns; no setup, field, pivot, priority, Protect, or teammate engine.",
-        "pressure_sources": [
-          "Sharp Beak Brave Bird Doduo",
-          "Jump Kick crash risk",
-          "Magnet Wild Charge Zebstrika",
-          "Overheat Special Attack drop",
-          "Sheer Force Rampardos",
-          "Head Smash recoil",
-          "Superpower Attack and Defense drops",
-          "Download Porygon-Z",
-          "Wise Glasses Hyper Beam and recharge"
-        ],
-        "intentional_opening": "Doduo attacks through ordinary visible-board scoring. Each member chooses among immediate legal attacks; no action, target, switch, setup turn, or hidden threshold is forced.",
-        "intentional_weakness": "Every defining attack spends HP, accuracy risk, stats, or a turn. The first three lean physical, while Porygon-Z flips the damage axis so one burn or wall cannot solve all four.",
-        "first_loss_lesson": "Do not try to outrun every leg. Survive or invalidate one committed hit, then cash the recoil, crash, stat-drop, or recharge opening it necessarily creates.",
-        "revealed_information": [
-          "Anthony and Abigail cannot form a native pair",
-          "Doduo remains unevolved at the cap",
-          "Zebstrika is mixed",
-          "Rampardos has Sheer Force and Sitrus Berry",
-          "Porygon-Z has Download",
-          "Hyper Beam requires recharge",
-          "Anthony has no reward or rematch"
-        ],
-        "counterplay_classes": [
-          "Protect, immunity pivots, recovery, or resistance cycling",
-          "burn, Intimidate, Reflect, or physical walls",
-          "Ground, Rock, Steel, Ghost, or Fighting answers by phase",
-          "forcing or exploiting Jump Kick crash",
-          "priority or chip after recoil",
-          "special bulk",
-          "Disable or Encore",
-          "punishing Hyper Beam recharge"
-        ],
-        "target_difficulty": 8.9,
-        "difficulty_rationale": "Four optimized legal levels 30-33 apply extreme immediate mixed pressure, while every signature attack creates a broad visible punish window and cap-even Doduo preserves early-stage counterplay.",
-        "tuning_knob": "Tune Porygon-Z from +3 to +2 first, then Rampardos; preserve the four distinct commitments and physical-to-special axis flip.",
-        "playtest_status": "static-pass-runtime-unplayed",
-        "novelty_tags": [
-          "cycling-single",
-          "no-brakes",
-          "zero-setup",
-          "zero-protect",
-          "recoil",
-          "jump-kick-crash",
-          "overheat-drop",
-          "superpower-drop",
-          "hyper-beam-recharge",
-          "mixed-axis-finale",
-          "source-proven-non-pair"
-        ],
-        "historic_reference_ids": [
-          "showdown:gen9championsrandomdoublesbattle:023",
-          "showdown:gen9randomdoublesbattle:024",
-          "showdown:gen6randomdoublesbattle:026"
-        ],
-        "corpus_search": {
-          "status": "complete-current-review",
-          "pool_size": 1005,
-          "selection": "Two full-set Rampardos donors and one Download Porygon-Z donor support the hardest commitment phases; no complete roster fits the cap-30 no-brakes ladder."
-        },
-        "author_self_check": {
-          "strongest_part": "Every dangerous hit creates its own answer window, and Porygon-Z flips the damage axis after three physical legs.",
-          "weakest_link": "A bulky Ghost, Ground, or physical-control core compresses the first three phases; Download special coverage prevents that answer from becoming autopilot."
-        },
-        "record_source": "v2-ledger",
-        "location": "Route110",
-        "category": "optional moving cycling single",
-        "strict_cap": 30,
-        "source_facts": {
-          "format": "single",
-          "source_record_formats": [
-            "single"
-          ],
-          "source_variant_count": 1,
-          "representative_party_size": 4,
-          "average_party_size": 4.0,
-          "species": [
-            "SPECIES_DODUO",
-            "SPECIES_PORYGON_Z",
-            "SPECIES_RAMPARDOS",
-            "SPECIES_ZEBSTRIKA"
-          ],
-          "items": [
-            "ITEM_MAGNET",
-            "ITEM_SHARP_BEAK",
-            "ITEM_SITRUS_BERRY",
-            "ITEM_WISE_GLASSES"
-          ],
-          "moves": [
-            "MOVE_BRAVE_BIRD",
-            "MOVE_DARK_PULSE",
-            "MOVE_DOUBLE_EDGE",
-            "MOVE_HEAD_SMASH",
-            "MOVE_HYPER_BEAM",
-            "MOVE_ICE_BEAM",
-            "MOVE_IRON_HEAD",
-            "MOVE_JUMP_KICK",
-            "MOVE_LOW_KICK",
-            "MOVE_OVERHEAT",
-            "MOVE_STEEL_WING",
-            "MOVE_SUPERPOWER",
-            "MOVE_TRI_ATTACK",
-            "MOVE_WILD_CHARGE",
-            "MOVE_ZEN_HEADBUTT"
-          ],
-          "synergy_tags": [],
-          "level_offsets": [
-            0,
-            1,
-            2,
-            3
-          ],
-          "average_level_offset": 1.5,
-          "max_level_offset": 3,
-          "densities": {
-            "protect": 0.0,
-            "fake_out": 0.0,
-            "setup": 0.0,
-            "speed_control_or_priority": 0.0,
-            "premium_item": 0.25
-          }
-        }
-      },
       {
         "index": 60,
         "encounter_id": "BATTLE_060_ROUTE_110_CYCLING_ABIGAIL",
@@ -1647,6 +1527,146 @@
             "premium_item": 0.667
           }
         }
+      },
+      {
+        "index": 69,
+        "encounter_id": "BATTLE_069_ROUTE_117_ANNA_AND_MEG",
+        "identity": {
+          "location": "Route117",
+          "category": "optional guarded solo double with two avatars",
+          "format": "double",
+          "strict_cap": 40,
+          "memory_hook": "Passimian Beats Up Stamina Mudsdale to turn little hits into Body Press power; knockout order and native reserve selection determine whether Receiver, Power of Alchemy, or Pure Power defines the next board."
+        },
+        "primary_player_question": "Can the player stop the initial multi-hit Defense conversion, then choose a knockout order that limits Receiver or a matchup-selected Power of Alchemy branch before Pure Power Medicham creates another phase?",
+        "tempo": "One visible ally-targeting activation, Defense-powered physical pressure, then conditional inheritance or immediate reserve offense selected by the native matchup logic rather than a speed field.",
+        "pressure_sources": [
+          "Roseli Receiver Passimian",
+          "ally-targeted Beat Up",
+          "Leftovers Stamina Mudsdale",
+          "Stamina-powered Body Press",
+          "High Horsepower, Heavy Slam, and Rock Slide",
+          "Black Sludge Power of Alchemy Alolan Muk",
+          "Gunk Shot, Knock Off, and Snarl",
+          "level-43 Expert Belt Pure Power Medicham",
+          "Feint, Zen Headbutt, Drain Punch, and Ice Punch"
+        ],
+        "intentional_opening": "Passimian and Mudsdale are fixed leads. Combo scoring strongly but non-forcingly values a safe Beat Up into a living Stamina partner that knows Body Press and can still raise Defense. No switch, sacrifice, target, or move is forced, and Mudsdale has no Protect that can invalidate its partner's activation.",
+        "intentional_weakness": "Special attacks ignore Stamina, the whole roster is physical, the activation can be disrupted, and simultaneous lead KOs skip Receiver and Power of Alchemy handoffs. Passimian and Medicham are Fairy weak; Mudsdale has exposed Water, Grass, and Ice weaknesses; Alolan Muk is Ground weak.",
+        "first_loss_lesson": "The ally hit was the setup. Stop Passimian or pressure Mudsdale specially; Mudsdale-first passes Stamina to Receiver, while a double knockout skips that transfer and native matchup selection determines which reserve appears.",
+        "revealed_information": [
+          "both avatars load one shared trainer record",
+          "Badge 3 is required",
+          "Passimian leads beside Mudsdale",
+          "Beat Up may target allied Stamina",
+          "Mudsdale converts Defense through Body Press",
+          "forced reserves use native matchup ranking",
+          "Receiver and Power of Alchemy copy only allowed current abilities",
+          "simultaneous lead KOs skip the first handoff",
+          "the battle gives only Match Call and ordinary rewards"
+        ],
+        "counterplay_classes": [
+          "Fake Out, sleep, paralysis, Encore, Taunt, focus fire, or ally-move denial",
+          "special Water, Grass, Ice, Psychic, Fairy, Ground, or Flying pressure by slot",
+          "Haze, Clear Smog, Unaware, phazing, critical hits, or simultaneous spread KOs",
+          "burn, Intimidate, Charm, Reflect, physical walls, or contact punishment",
+          "Protect scouting and deliberate target order"
+        ],
+        "target_difficulty": 9.0,
+        "difficulty_rationale": "Four optimized legal levels 41-43, full items, a multi-hit Body Press conversion, two conditional inheritance mechanics, native matchup-selected reserves, and Pure Power cleanup make a severe optional route puzzle. Broad special offense, status, stat resets, exposed type seams, and player-controlled simultaneous KOs keep it from becoming a boss-scale lock.",
+        "tuning_knob": "Tune Medicham from +3 to +2 first, then Alolan Muk from +2 to +1; preserve the fixed Beat Up-Stamina lead and native adaptive reserve selection.",
+        "playtest_status": "static-pass-runtime-unplayed",
+        "novelty_tags": [
+          "route-double",
+          "guarded-double",
+          "beat-up-stamina",
+          "body-press-conversion",
+          "receiver",
+          "power-of-alchemy",
+          "ability-inheritance-relay",
+          "knockout-order",
+          "passimian",
+          "alolan-muk",
+          "pure-power-medicham",
+          "no-speed-field",
+          "no-mega",
+          "no-legendary"
+        ],
+        "historic_reference_ids": [
+          "showdown:gen9championsrandomdoublesbattle:008",
+          "showdown:gen7randomdoublesbattle:009",
+          "showdown:gen7randomdoublesbattle:002",
+          "showdown:gen4randomdoublesbattle:017",
+          "vgc:regional-san-jose-ca-2018"
+        ],
+        "corpus_search": {
+          "status": "complete-current-review",
+          "pool_size": 1005,
+          "selection": "Four full-set donors and one verified champion roster support the exact species and direct sets; the Beat Up-Stamina opening and knockout-dependent Receiver/Power of Alchemy branches are transparently hand-authored from native mechanics."
+        },
+        "author_self_check": {
+          "strongest_part": "The readable fixed lead produces an honestly adaptive aftermath: Mudsdale-first yields Receiver, native matchup selection chooses the reserve, and an active Muk can add a second handoff while a simultaneous knockout skips the first.",
+          "weakest_link": "Fast special Water or Grass pressure and physical debuffs compress the battle, and not every native reserve choice creates an inheritance phase; those are intentional broad answers and Medicham level is the first tuning knob."
+        },
+        "record_source": "v2-ledger",
+        "location": "Route117",
+        "category": "optional guarded solo double with two avatars",
+        "strict_cap": 40,
+        "source_facts": {
+          "format": "double",
+          "source_record_formats": [
+            "double"
+          ],
+          "source_variant_count": 1,
+          "representative_party_size": 4,
+          "average_party_size": 4.0,
+          "species": [
+            "SPECIES_MEDICHAM",
+            "SPECIES_MUDSDALE",
+            "SPECIES_MUK_ALOLAN",
+            "SPECIES_PASSIMIAN"
+          ],
+          "items": [
+            "ITEM_BLACK_SLUDGE",
+            "ITEM_EXPERT_BELT",
+            "ITEM_LEFTOVERS",
+            "ITEM_ROSELI_BERRY"
+          ],
+          "moves": [
+            "MOVE_BEAT_UP",
+            "MOVE_BODY_PRESS",
+            "MOVE_CLOSE_COMBAT",
+            "MOVE_DRAIN_PUNCH",
+            "MOVE_FEINT",
+            "MOVE_GUNK_SHOT",
+            "MOVE_HEAVY_SLAM",
+            "MOVE_HIGH_HORSEPOWER",
+            "MOVE_ICE_PUNCH",
+            "MOVE_KNOCK_OFF",
+            "MOVE_PROTECT",
+            "MOVE_ROCK_SLIDE",
+            "MOVE_SNARL",
+            "MOVE_ZEN_HEADBUTT"
+          ],
+          "synergy_tags": [
+            "Beat Up + Stamina",
+            "ability inheritance relay"
+          ],
+          "level_offsets": [
+            1,
+            2,
+            3
+          ],
+          "average_level_offset": 2.0,
+          "max_level_offset": 3,
+          "densities": {
+            "protect": 0.5,
+            "fake_out": 0.0,
+            "setup": 0.0,
+            "speed_control_or_priority": 0.75,
+            "premium_item": 0.5
+          }
+        }
       }
     ]
   },
@@ -1656,18 +1676,15 @@
       "code": "NOVELTY_TAG_REPEAT",
       "scope": "rolling-window",
       "encounter_ids": [
-        "BATTLE_059_ROUTE_110_CYCLING_ANTHONY",
-        "BATTLE_060_ROUTE_110_CYCLING_ABIGAIL",
-        "BATTLE_061_ROUTE_110_CYCLING_BENJAMIN",
         "BATTLE_062_ROUTE_110_CYCLING_JASMINE",
         "BATTLE_063_ROUTE_110_CYCLING_JACOB",
         "BATTLE_066_MAUVILLE_GYM_BEN",
-        "BATTLE_068_MAUVILLE_GYM_WATTSON"
+        "BATTLE_068_MAUVILLE_GYM_WATTSON",
+        "BATTLE_069_ROUTE_117_ANNA_AND_MEG"
       ],
       "message": "One or more mechanics recur in at least three rolling encounters.",
       "evidence": {
-        "cycling-single": 3,
-        "guarded-double": 4
+        "guarded-double": 5
       },
       "overridden": false,
       "override_reason": null
@@ -1676,7 +1693,6 @@
       "code": "SPEED_CONTROL_DENSITY",
       "scope": "rolling-window",
       "encounter_ids": [
-        "BATTLE_059_ROUTE_110_CYCLING_ANTHONY",
         "BATTLE_060_ROUTE_110_CYCLING_ABIGAIL",
         "BATTLE_061_ROUTE_110_CYCLING_BENJAMIN",
         "BATTLE_062_ROUTE_110_CYCLING_JASMINE",
@@ -1685,11 +1701,12 @@
         "BATTLE_065_MAUVILLE_GYM_VIVIAN_KIRK",
         "BATTLE_066_MAUVILLE_GYM_BEN",
         "BATTLE_067_MAUVILLE_GYM_SHAWN_ANGELO",
-        "BATTLE_068_MAUVILLE_GYM_WATTSON"
+        "BATTLE_068_MAUVILLE_GYM_WATTSON",
+        "BATTLE_069_ROUTE_117_ANNA_AND_MEG"
       ],
       "message": "Rolling speed control or priority density is high enough to merit an editorial look, not an automatic change.",
       "evidence": {
-        "density": 0.625,
+        "density": 0.693,
         "threshold": 0.55
       },
       "overridden": false,
@@ -1701,12 +1718,16 @@
       "encounter_ids": [
         "BATTLE_063_ROUTE_110_CYCLING_JACOB",
         "BATTLE_064_MAUVILLE_WALLY",
+        "BATTLE_065_MAUVILLE_GYM_VIVIAN_KIRK",
         "BATTLE_066_MAUVILLE_GYM_BEN",
-        "BATTLE_068_MAUVILLE_GYM_WATTSON"
+        "BATTLE_067_MAUVILLE_GYM_SHAWN_ANGELO",
+        "BATTLE_068_MAUVILLE_GYM_WATTSON",
+        "BATTLE_069_ROUTE_117_ANNA_AND_MEG"
       ],
       "message": "A premium item appears across at least four rolling encounters.",
       "evidence": {
-        "Assault Vest": 4
+        "Assault Vest": 4,
+        "Expert Belt": 4
       },
       "overridden": false,
       "override_reason": null
@@ -1715,7 +1736,6 @@
       "code": "SIGNATURE_MOVE_REPEAT",
       "scope": "rolling-window",
       "encounter_ids": [
-        "BATTLE_059_ROUTE_110_CYCLING_ANTHONY",
         "BATTLE_060_ROUTE_110_CYCLING_ABIGAIL",
         "BATTLE_061_ROUTE_110_CYCLING_BENJAMIN",
         "BATTLE_063_ROUTE_110_CYCLING_JACOB",
@@ -1723,11 +1743,15 @@
         "BATTLE_065_MAUVILLE_GYM_VIVIAN_KIRK",
         "BATTLE_066_MAUVILLE_GYM_BEN",
         "BATTLE_067_MAUVILLE_GYM_SHAWN_ANGELO",
-        "BATTLE_068_MAUVILLE_GYM_WATTSON"
+        "BATTLE_068_MAUVILLE_GYM_WATTSON",
+        "BATTLE_069_ROUTE_117_ANNA_AND_MEG"
       ],
       "message": "A non-generic move appears across at least four rolling encounters.",
       "evidence": {
-        "Ice Beam": 5,
+        "Body Press": 4,
+        "Ice Beam": 4,
+        "Ice Punch": 4,
+        "Rock Slide": 4,
         "Roost": 4,
         "Thunderbolt": 4
       },

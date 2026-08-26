@@ -236,6 +236,10 @@ def synergy_tags(mons: list[dict], move_data: dict[str, dict]) -> list[str]:
         tags.append("Perish trap")
     if "MOVE_BEAT_UP" in moves and "ABILITY_JUSTIFIED" in abilities:
         tags.append("Beat Up + Justified")
+    if "MOVE_BEAT_UP" in moves and "ABILITY_STAMINA" in abilities:
+        tags.append("Beat Up + Stamina")
+    if {"ABILITY_RECEIVER", "ABILITY_POWER_OF_ALCHEMY"} <= abilities:
+        tags.append("ability inheritance relay")
     if "MOVE_FROST_BREATH" in moves and "ABILITY_ANGER_POINT" in abilities:
         tags.append("Frost Breath + Anger Point")
     if "MOVE_SURF" in moves and abilities & {

@@ -4272,6 +4272,76 @@
       "campaign_reservations": {"spends": ["the definitive Electric Terrain fast/slow boss", "the first Armor Tail priority-denial boss", "the first Mega Raichu Y showcase", "the Luca Ceribelli World Champion strategic spine"], "preserves": ["Regieleki and Genesect for later rare roles rather than legacy token placement", "Miraidon and Tera-dependent concepts outside this engine", "Wattson rematches for separately guarded and authored progression"], "repeat_rule": "Later terrain teams may use one field or speed mode, but no later encounter should repeat Koko/Emolga fast control, Hands/Farigiraf priority pressure, Porygon2 sole Trick Room, and dynamically deployed No Guard Mega Raichu."},
       "author_self_check": {"strongest_part": "The fixed opening teaches the vocabulary, then every adaptive reserve pairing asks the player to reclassify the board without abandoning the Terrain, priority, and speed identity.", "weakest_link": "Ground spread plus Fake Out is the broadest fair opening answer, while disrupting sole-setter Porygon2 simplifies the slow circuit. The partner-move conflict guard prevents Wattson's two mixed-speed pairs from establishing opposite controls on the same turn; Mega Raichu from +5 to +4 is the first runtime tuning knob."},
       "closure": "Battle 68 is source-closed at editorial 10/10: one guarded six-member badge double at legal levels 32-35, four Electric-types, a World Champion-inspired Terrain/priority/dual-speed system whose four reserves remain coherent under native dynamic replacement, four fresh species plus two earned repeats, one reciprocal story Mega, five concrete references, exact reward/cap/no-heal flow, reusable Trick Room-aware AI, native-width dialogue, author self-check, and no forbidden gimmick. Runtime playtesting remains required before the target is observed."
+    },
+    "BATTLE_069_ROUTE_117_ANNA_AND_MEG": {
+      "guide_order": 69,
+      "trainer_ids": ["TRAINER_ANNA_AND_MEG_1"],
+      "status": "closed",
+      "campaign_point": "Optional two-avatar shared-record double at the start of the canonical post-Wattson Route 117 clear; both entry scripts now truthfully wait for the Dynamo Badge so the fixed strict cap is 40",
+      "strict_cap": 40,
+      "branch_contract": {
+        "format": "double",
+        "source_slots": [0, 1, 2, 3],
+        "intended_lead": ["SPECIES_PASSIMIAN", "SPECIES_MUDSDALE"],
+        "reserve_order": ["SPECIES_MUK_ALOLAN", "SPECIES_MEDICHAM"],
+        "target_difficulty": 9.0,
+        "one_usable_policy": "guarded refusal through the existing trainerbattle_double not-enough-Pokémon paths",
+        "avatar_contract": "Anna and Meg are two adjacent overworld entry points for the same trainer flag, party, Match Call registration, and rematch chain; winning either defeats the shared record"
+      },
+      "evolution_stage_fit": {
+        "campaign_phase": "cap-40 mature route puzzle immediately after Wattson, with Mega access available but deliberately unused",
+        "effective_levels": "41-43",
+        "eligible_ratio": "4/4",
+        "mega_access": true,
+        "status": "pass",
+        "reason": "Passimian is single-stage, Mudbray evolves into Mudsdale at 30, Alolan Grimer evolves into Alolan Muk at 38, and Meditite evolves into Medicham at 37. The Dynamo Badge gate prevents these endpoints from appearing at the physically reachable cap-20 or cap-30 states."
+      },
+      "manual_quality": 10,
+      "manual_difficulty": 9.0,
+      "observed_difficulty": null,
+      "difficulty_status": "editorial target; runtime playtest pending",
+      "corpus_review": {
+        "reference_pool_size": 1005,
+        "full_team_candidates": [
+          {"reference_id": "showdown:gen9championsrandomdoublesbattle:008", "decision": "Passimian and Stamina Mudsdale chassis selected; full team rejected", "reason": "The reproducible team contains both exact species and validates their direct doubles sets. Emerald Champions changes Defiant Passimian to Receiver and gives it legal Beat Up so the existing Route 117 footing dialogue becomes one visible defensive activation."},
+          {"reference_id": "showdown:gen7randomdoublesbattle:009", "decision": "Passimian Knock Off and Close Combat pressure selected; full team rejected", "reason": "The donor supplies the legal physical pressure that keeps Passimian useful after the one activation turn without importing speed control, setup, or another Mega."},
+          {"reference_id": "showdown:gen7randomdoublesbattle:002", "decision": "Alolan Muk bulk and Protect selected; full team rejected", "reason": "The donor validates a bulky Alolan Muk set. Power of Alchemy replaces Poison Touch so a matchup-selected Muk can inherit its active partner's current ability when that partner later falls."},
+          {"reference_id": "showdown:gen4randomdoublesbattle:017", "decision": "Pure Power Medicham coverage selected; full team rejected", "reason": "The donor validates Pure Power, priority, Psychic/Fighting pressure, and elemental coverage. Legal Feint replaces Fake Out to avoid another opening-tempo module and punish careless Protect late."},
+          {"reference_id": "vgc:regional-san-jose-ca-2018", "decision": "Muk plus Mudsdale tournament coexistence noted; exact roster rejected", "reason": "The verified regional champion roster establishes that the two bulky species can coexist competitively, while this route fight uses inheritance rather than its Porygon2 and Tapu framework."}
+        ],
+        "decision": "All 1,005 indexed references were reviewed for fit. Four full-set donors and one verified champion roster support the exact species and moves; the Beat Up-Stamina opening and knockout-dependent Receiver/Power of Alchemy branches are transparently engine-native bespoke."
+      },
+      "competitive_references": [
+        {"reference_id": "showdown:gen9championsrandomdoublesbattle:008", "adaptation": "Passimian and Mudsdale become the fixed lead; Beat Up raises Stamina repeatedly and Stamina-powered Body Press cashes the visible Defense gains."},
+        {"reference_id": "showdown:gen7randomdoublesbattle:009", "adaptation": "Passimian retains Close Combat and Knock Off after its activation role."},
+        {"reference_id": "showdown:gen7randomdoublesbattle:002", "adaptation": "Alolan Muk retains bulky Dark/Poison pressure and Protect while Power of Alchemy makes its native matchup-selected entrance consequential."},
+        {"reference_id": "showdown:gen4randomdoublesbattle:017", "adaptation": "Medicham retains Pure Power, Zen Headbutt, Drain Punch, Ice Punch, and a legal priority move."},
+        {"reference_id": "vgc:regional-san-jose-ca-2018", "adaptation": "The champion roster supports a Mudsdale plus Alolan Muk defensive backbone without importing its field-control shell."}
+      ],
+      "ordering": {
+        "intended_lead": ["SPECIES_PASSIMIAN", "SPECIES_MUDSDALE"],
+        "source_order": ["SPECIES_PASSIMIAN", "SPECIES_MUDSDALE", "SPECIES_MUK_ALOLAN", "SPECIES_MEDICHAM"],
+        "reason": "Passimian can Beat Up its active Stamina partner, raising Mudsdale's Defense several times before Body Press. If Mudsdale falls while Passimian remains active, Receiver copies Stamina. Forced replacements use the engine's native matchup ranking, so either Alolan Muk or Medicham may enter next. An active Muk can later copy its fallen partner's current allowed Ability through Power of Alchemy; Medicham instead supplies immediate Pure Power pressure. Simultaneous lead KOs fairly skip the first handoff."
+      },
+      "primary_player_question": "Can the player stop the initial multi-hit Defense conversion, then choose a knockout order that limits Receiver or a matchup-selected Power of Alchemy branch before Pure Power Medicham turns the surviving board into another phase?",
+      "team_intent": "Level-41 Roseli Receiver Passimian uses Beat Up, Close Combat, Knock Off, and Protect. Level-42 Leftovers Stamina Mudsdale uses High Horsepower, Body Press, Heavy Slam, and Rock Slide with an Impish physical-wall spread and no Protect that can conflict with allied Beat Up. Level-42 Black Sludge Power of Alchemy Alolan Muk uses Gunk Shot, Knock Off, Snarl, and Protect. Level-43 Expert Belt Pure Power Medicham uses Feint, Zen Headbutt, Drain Punch, and Ice Punch. There is no weather, terrain, room, Tailwind, screen, hazard, redirection, Mega, Primal, legendary, or battle-Bag item.",
+      "intentional_weakness": "The visible activation depends on Passimian and Mudsdale remaining together for one action, special attacks ignore Stamina's Defense gains, and Body Press is the only move that converts those gains into damage. Passimian and Medicham are Fairy weak, Mudsdale is Water/Grass/Ice weak, Alolan Muk is Ground weak, and the roster is overwhelmingly physical. Simultaneous spread KOs, Haze, Clear Smog, Unaware, burn, Intimidate, and focused special pressure all simplify the relay.",
+      "intended_counterplay": "Fake Out, flinching, sleep, paralysis, Encore, Taunt into Protect, redirection or direct focus can deny Passimian's activation; Water, Grass, Ice, strong special moves, Haze, Clear Smog, Unaware, phazing, or critical hits answer Mudsdale. Burn, Intimidate, Reflect, Charm, physical walls, and contact punishment compress the whole damage axis. Ground and Psychic pressure Alolan Muk; Ghost, Flying, Fairy, and faster offense pressure Medicham. Targeting both leads together can force a simultaneous replacement and erase the inheritance handoff.",
+      "first_loss_lesson": "The harmless-looking ally hit was the setup turn. Stop Passimian or hit Mudsdale specially before Body Press scales. If Mudsdale falls first, Receiver copies Stamina; if Muk is selected into an active slot, its later Power of Alchemy handoff depends on which partner falls beside it. A double knockout can skip the first transfer entirely.",
+      "bespoke_ai": "Anna and Meg retain foe-aware, partner-helping, and combo-setup doubles scoring. A reusable non-forcing rule rewards Beat Up targeting a living Stamina partner only when Defense can rise, the partner knows Body Press, and a conservative full-party, worst-critical damage bound cannot faint it; the same exact safety repair now protects existing Justified combos. Forced replacements remain the engine's native matchup-ranked choices rather than pretending party order is guaranteed. Receiver and Power of Alchemy are automatic engine events and copy only allowed current abilities; no sacrifice, switch, target, reserve, or ordinary move is forced.",
+      "uniqueness": "Passimian, Alolan Muk, and Medicham are fresh exact species across Battles 1-68. Mudsdale returns twenty-four battles after B45's Tailwind riding-school attacker as a no-speed defensive Body Press recipient. Beat Up returns fourteen battles after B55's Justified Attack snowball, but here each hit raises Defense and powers Body Press before knockout order can unlock one or two conditional inheritance branches. Wally's immediate Sash Weavile and the rolling Assault Vest repetition are both removed.",
+      "story_logic": "Anna and Meg remain two junior/senior avatars invoking one guarded four-member double and one shared Match Call/rematch chain. Both scripts now decline before Badge 3 with truthful training dialogue, making the canonical cap-40 endpoint roster real despite Route 117 being physically open earlier. Their two intros teach the same relay from different voices, and both post-battle speeches explain the actual abilities and special-attack seam in native-width text.",
+      "reward_logic": "Battle 69 grants EXP, ordinary prize money, and the existing shared Match Call registration only. It sets no story flag beyond the trainer defeat state, gives no item or heal, and leaves the separately unresolved records 2-4 for their own rematch progression.",
+      "campaign_reservations": {
+        "spends": ["the campaign's definitive Beat Up plus Stamina defensive activation", "the first Receiver and Power of Alchemy inheritance relay", "the first fixed Alolan Muk and Passimian opponent roles"],
+        "preserves": ["Palafin and multi-form tag teams for a later visually driven encounter", "Tailwind and Flying/hazard identities for the next Route 117 trainers", "weather science for Shelly and the Weather Institute", "every Mega and legendary slot for later encounters"],
+        "repeat_rule": "Later Receiver or Power of Alchemy users may copy one ability, but no later battle should repeat a Beat Up-Stamina lead plus matchup-dependent Power of Alchemy and Pure Power reserve branches. Dylan's untouched Passimian must be rewritten when Battle 71 is reached."
+      },
+      "author_self_check": {
+        "strongest_part": "The fixed opening is readable, but the aftermath is honestly adaptive: Mudsdale-first yields Receiver, native matchup selection chooses the first reserve, and an active Muk can create a second inheritance branch while simultaneous KOs skip the opening transfer.",
+        "weakest_link": "Fast special Water or Grass pressure can remove Mudsdale before the lesson becomes dangerous, and not every native reserve choice creates an inheritance phase. Those are intentional broad answers and honest engine variance; Medicham from +3 to +2 is the first runtime tuning knob if the adaptive endgame is too punishing."
+      },
+      "closure": "Battle 69 is source-closed at editorial 10/10 and target difficulty 9.0: one Badge-3-gated shared-avatar four-member double at legal levels 41-43, a readable Beat Up-Stamina-Body Press lead, truthful native matchup-selected reserves with conditional Receiver and Power of Alchemy branches, conservative full-party Beat Up safety, three fresh exact species plus one earned repeat, four distinct non-warning items, five corpus references, broad special and status counterplay, native-width dialogue, author self-check, and no reserved field mode, Mega, or legendary. Runtime playtesting remains required before the target is observed."
     }
   }
 }

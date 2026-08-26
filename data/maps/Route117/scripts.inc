@@ -132,6 +132,7 @@ Route117_EventScript_Derek:: @ 81F3B58
 	end
 
 Route117_EventScript_Anna:: @ 81F3B6F
+	goto_if_unset FLAG_BADGE03_GET, Route117_EventScript_AnnaAndMegStillTraining
 	trainerbattle_double TRAINER_ANNA_AND_MEG_1, Route117_Text_AnnaIntro, Route117_Text_AnnaDefeat, Route117_Text_AnnaNotEnoughMons, Route117_EventScript_RegisterAnna
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
@@ -152,6 +153,7 @@ Route117_EventScript_RematchAnna:: @ 81F3BB8
 	end
 
 Route117_EventScript_Meg:: @ 81F3BD3
+	goto_if_unset FLAG_BADGE03_GET, Route117_EventScript_AnnaAndMegStillTraining
 	trainerbattle_double TRAINER_ANNA_AND_MEG_1, Route117_Text_MegIntro, Route117_Text_MegDefeat, Route117_Text_MegNotEnoughMons, Route117_EventScript_RegisterMeg
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
@@ -169,6 +171,10 @@ Route117_EventScript_RegisterMeg:: @ 81F3C03
 Route117_EventScript_RematchMeg:: @ 81F3C1C
 	trainerbattle_rematch_double TRAINER_ANNA_AND_MEG_1, Route117_Text_MegRematchIntro, Route117_Text_MegRematchDefeat, Route117_Text_MegRematchNotEnoughMons
 	msgbox Route117_Text_MegPostRematch, MSGBOX_AUTOCLOSE
+	end
+
+Route117_EventScript_AnnaAndMegStillTraining::
+	msgbox Route117_Text_AnnaAndMegStillTraining, MSGBOX_AUTOCLOSE
 	end
 
 Route117_EventScript_Melina:: @ 81F3C37
@@ -211,4 +217,3 @@ Route117_Text_RouteSignMauville: @ 81F3D74
 Route117_Text_DayCareSign: @ 81F3D8E
 	.string "Pokémon Day Care\n"
 	.string "“Let us raise your Pokémon.”$"
-

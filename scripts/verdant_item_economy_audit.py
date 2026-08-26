@@ -400,6 +400,41 @@ def build_ledger() -> tuple[dict, list[str]]:
     by_map, badge_unlock_order = guide_phases()
     sources, hidden = collect_sources(unlocks, by_map, badge_unlock_order)
     problems = validate_contracts()
+
+    # A Gym reward is acquired only after its boss battle.  Map-level phase
+    # inference normally uses the first trainer on a map, which becomes earlier
+    # than the leader once the guide follows physical room order.  Pin both the
+    # canonical reward label and its bag-full retry label to the leader instead
+    # of misreporting the same reward as a pre-boss duplicate.
+    guide_entries = json.loads(read("docs/verdant_battle_guide.json"))["entries"]
+    boss_phases = {}
+    for boss, guide_name, item, path, label in BOSS_REWARDS:
+        matches = [
+            entry for entry in guide_entries
+            if entry.get("name") == guide_name and entry.get("badge") is not None
+        ]
+        if not matches:
+            problems.append(f"{boss}: no canonical campaign row in generated battle guide")
+            continue
+        phase = min(matches, key=lambda entry: entry["order"])
+        boss_phases[boss] = phase
+        for entry in sources.get(item, []):
+            entry_label = entry["label"] or ""
+            is_reward_label = (
+                entry_label == label
+                or (entry_label.startswith(label) and entry_label[len(label):].isdigit())
+            )
+            if entry["fixed"] and entry["path"] == path and is_reward_label:
+                entry["order"] = phase["order"]
+                entry["badge"] = phase["badge"]
+                entry["cap"] = phase["levelCap"]
+    for item_sources in sources.values():
+        item_sources.sort(key=lambda entry: (
+            entry["order"] is None,
+            entry["order"] if entry["order"] is not None else 1_000_000,
+            entry["kind"], entry["path"], entry["line"] or 0,
+        ))
+
     unlock_order = list(unlocks)
     if unlock_order[-1:] != ["ITEM_UTILITY_UMBRELLA"] or unlock_order.index("ITEM_UTILITY_UMBRELLA") != 54:
         problems.append("Utility Umbrella must remain append-only at discovery index 54")
@@ -430,18 +465,6 @@ def build_ledger() -> tuple[dict, list[str]]:
 
     boss_rows = []
     duplicate_bosses = set()
-    guide_entries = json.loads(read("docs/verdant_battle_guide.json"))["entries"]
-    boss_phases = {}
-    for boss, guide_name, *_ in BOSS_REWARDS:
-        matches = [
-            entry for entry in guide_entries
-            if entry.get("name") == guide_name and entry.get("badge") is not None
-        ]
-        if not matches:
-            problems.append(f"{boss}: no canonical campaign row in generated battle guide")
-            continue
-        boss_phases[boss] = min(matches, key=lambda entry: entry["order"])
-
     for boss, _guide_name, item, path, label in BOSS_REWARDS:
         if boss not in boss_phases:
             continue

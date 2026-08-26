@@ -2530,10 +2530,10 @@
     "TRAINER_ANNA_AND_MEG_1": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 44,
+      "archetype": "Beat Up-Stamina adaptive inheritance",
+      "difficulty": 64,
       "partner_interaction": true,
-      "level_offset": 0,
+      "level_offset": 2,
       "location": "Route 117"
     },
     "TRAINER_ANNA_AND_MEG_2": {

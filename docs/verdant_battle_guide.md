@@ -191,32 +191,7 @@ Focus Sash Water Bubble Dewpider establishes Sticky Web while threatening real s
 | 3 | Karrablast | 15 (cap +1) | Eviolite | No Guard | setup attacker | Megahorn, Drill Run, Knock Off, Swords Dance |
 | 4 | Larvesta | 16 (cap +2) | Life Orb | Flame Body | coverage attacker | Flare Blitz, U Turn, Wild Charge, Morning Sun |
 
-## 009. Tiana — Route 102
-
-**Optional · Double · Cap 14 · Extreme 85/100 · Uniqueness 89/100**
-
-**Theme:** Ice pressure + snow engine
-
-Focus Sash Snow Warning Amaura and Eviolite Slush Rush Alolan Sandshrew lead with Aurora Veil, accurate Blizzard, fast Ice and Steel pressure, and Brick Break utility. Choice Band Thick Fat Swinub adds Ice Shard priority, Rock Slide spread damage, and Superpower, while level-16 Expert Belt Slush Rush Arctozolt is the single-stage Bolt Beak ace. This is Verdant's first full weather battle and its juvenile fossil snow lesson. Amaura and Alolan Sandshrew appear on no other current trainer, Swinub's only other use is a much later level-one gimmick, and no Battles 1-4 species repeats. The mature Ninetales-A/Froslass/Mamoswine shell is preserved for cap-70 Route 133 trainer Linda.
-
-**How it behaves:** Tiana uses foe-aware smart switching plus field-control and first-turn setup preferences. Snow is automatic; Aurora Veil receives a contextual bonus without being forced, and the now-irrelevant generic speed-control profile is removed because no team member uses an active speed-control move.
-
-**Why it is hard:** 4 fully authored Pokémon, average BST 354.2, average cap offset +1.0, ace offset +2, and 100% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Linda (14% species overlap). Its species appear across an average of 1.8 unrelated trainer families.
-
-**Counterplay:** Remove or replace snow, Taunt or double-target Sash Amaura before Veil, break Veil, or use Wide Guard against Blizzard and Rock Slide. Fire, Fighting, Rock, Steel, Ground, and Water coverage hit different members; Flying and Levitate avoid Ground coverage, priority and Trick Room bypass Slush Rush, and Intimidate or burns contain all three physical attackers. Protect punishes Bolt Beak timing, and the team has no second setup mode once Veil is denied.
-
-**Manual closure:** Battle 5 is 10/10 because three young Pokémon and one true fossil create a complete snow puzzle without premature evolutions. Weather, Veil, two distinct Slush Rush attackers, priority, spread damage, and Bolt Beak make it severe, while every dependency has several independent answers.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Amaura | 14 (cap +0) | Focus Sash | Snow Warning | protected attacker | Aurora Veil, Blizzard, Earth Power, Protect |
-| 2 | Sandshrew (Alolan) | 15 (cap +1) | Eviolite | Slush Rush | coverage attacker | Icicle Crash, Iron Head, Brick Break, Rapid Spin |
-| 3 | Swinub | 15 (cap +1) | Choice Band | Thick Fat | Choice-locked breaker | Icicle Crash, Superpower, Ice Shard, Rock Slide |
-| 4 | Arctozolt | 16 (cap +2) | Expert Belt | Slush Rush | protected attacker | Bolt Beak, Icicle Crash, Stomping Tantrum, Protect |
-
-## 010. Allen — Route 102
+## 009. Allen — Route 102
 
 **Optional · Double · Cap 14 · Extreme 82/100 · Uniqueness 90/100**
 
@@ -241,155 +216,180 @@ Light Ball Lightning Rod Pikachu and Toxic Orb Guts Taillow lead with Fake Out, 
 | 3 | Paras | 15 (cap +1) | Eviolite | Dry Skin | redirection support | Spore, Protect, Seed Bomb, Rage Powder |
 | 4 | Zigzagoon | 14 (cap +0) | Sitrus Berry | Quick Feet | setup attacker | Belly Drum, Extreme Speed, Seed Bomb, Protect |
 
-## 011. May — Route 104 | Rustboro City
+## 010. Tiana — Route 102
 
-**Required Branch · Double · Cap 14 · Extreme 90/100 · Uniqueness 36/100**
+**Optional · Double · Cap 14 · Extreme 85/100 · Uniqueness 89/100**
 
-**Theme:** Fake Out tempo + active speed control + pivot control
+**Theme:** Ice pressure + snow engine
 
-Focus Sash Forecast Castform manually announces the branch's weather. The runtime-generated level-22 Eviolite middle starter is always the same-generation elemental counter to the player's chosen starter: Fire receives sun plus Fire Pledge/Heat Wave/Flare Blitz, Water receives rain plus Water Pledge/Icy Wind/Waterfall, and Grass receives sun plus Grass Pledge/Solar Beam/Seed Bomb. Life Orb Sneasel supplies Fake Out, Feint, Knock Off, and Ice Punch; Sitrus Rotom burns into Hex and pivots with Volt Switch. The rival plans for one starter branch, not the player's whole six. This is Verdant's only dynamic 21-starter forecast battle. Castform, Sneasel, and Rotom do not appear in Battles 1-27; the starter family is the deliberate narrative continuation of Battle 1 rather than incidental reuse. Manual branch weather differs from prior automatic weather speed cores and uses no Mega.
+Focus Sash Snow Warning Amaura and Eviolite Slush Rush Alolan Sandshrew lead with Aurora Veil, accurate Blizzard, fast Ice and Steel pressure, and Brick Break utility. Choice Band Thick Fat Swinub adds Ice Shard priority, Rock Slide spread damage, and Superpower, while level-16 Expert Belt Slush Rush Arctozolt is the single-stage Bolt Beak ace. This is Verdant's first full weather battle and its juvenile fossil snow lesson. Amaura and Alolan Sandshrew appear on no other current trainer, Swinub's only other use is a much later level-one gimmick, and no Battles 1-4 species repeats. The mature Ninetales-A/Froslass/Mamoswine shell is preserved for cap-70 Route 133 trainer Linda.
 
-**How it behaves:** All six source records use identical guarded-double, smart-switching, partner, field, and speed-control flags. Existing weather logic values Sun beside Fire or Solar Beam and Rain beside Water; Icy Wind, Forecast, Weather Ball, Fake Out, Feint, Volt Switch, burn, Hex, Eviolite, and Protect remain native. A runtime hook replaces only party slot 1 with the audited middle evolution of the same-generation counter-starter and never mutates player starter state.
+**How it behaves:** Tiana uses foe-aware smart switching plus field-control and first-turn setup preferences. Snow is automatic; Aurora Veil receives a contextual bonus without being forced, and the now-irrelevant generic speed-control profile is removed because no team member uses an active speed-control move.
 
-**Why it is hard:** 4 fully authored Pokémon, average BST 438.8, average cap offset +1.5, ace offset +2, and 100% held-item coverage.
+**Why it is hard:** 4 fully authored Pokémon, average BST 354.2, average cap offset +1.0, ace offset +2, and 100% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Brendan (100% species overlap). Its species appear across an average of 4.5 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Linda (14% species overlap). Its species appear across an average of 1.8 unrelated trainer families.
 
-**Counterplay:** Fake Out, Taunt, sleep, focus fire, immediate weather replacement, Cloud Nine, Air Lock, Protect, or removing Castform's Sash can break the forecast. Knock Off removes Eviolite; status, speed reversal, screens, typed resistances, and focus fire answer every middle starter. Sneasel is fragile and takes Life Orb recoil. Dark, Ghost, Mold Breaker Ground pressure, status prevention, and denying burn reduce Rotom's Hex line. The player can win through the rest of the party rather than one exact starter response.
+**Counterplay:** Remove or replace snow, Taunt or double-target Sash Amaura before Veil, break Veil, or use Wide Guard against Blizzard and Rock Slide. Fire, Fighting, Rock, Steel, Ground, and Water coverage hit different members; Flying and Levitate avoid Ground coverage, priority and Trick Room bypass Slush Rush, and Intimidate or burns contain all three physical attackers. Protect punishes Bolt Beak timing, and the team has no second setup mode once Veil is denied.
 
-**Manual closure:** Battle 28 is 10/10 because all 21 starter choices receive a legal, understandable middle-stage continuation while the three shared companions make the fight about the whole team. Levels 21-22, four distinct items, branch-safe native AI, truthful dialogue, and broad weather, item, status, speed, type, and focus-fire counterplay make the optional rival 9.0/10 without overfitting one starter.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Castform | 15 (cap +1) | Focus Sash | Forecast | speed control | Sunny Day, Weather Ball, Icy Wind, Protect |
-| 2 | Combusken | 16 (cap +2) | Eviolite | Blaze | protected attacker | Fire Pledge, Heat Wave, Flare Blitz, Protect |
-| 3 | Sneasel | 15 (cap +1) | Life Orb | Inner Focus | coverage attacker | Fake Out, Feint, Knock Off, Ice Punch |
-| 4 | Rotom | 16 (cap +2) | Sitrus Berry | Levitate | protected attacker | Volt Switch, Will O Wisp, Hex, Protect |
-
-## 012. May — Route 104 | Rustboro City
-
-**Required Branch · Double · Cap 14 · Extreme 90/100 · Uniqueness 36/100**
-
-**Theme:** Fake Out tempo + active speed control + pivot control
-
-Focus Sash Forecast Castform manually announces the branch's weather. The runtime-generated level-22 Eviolite middle starter is always the same-generation elemental counter to the player's chosen starter: Fire receives sun plus Fire Pledge/Heat Wave/Flare Blitz, Water receives rain plus Water Pledge/Icy Wind/Waterfall, and Grass receives sun plus Grass Pledge/Solar Beam/Seed Bomb. Life Orb Sneasel supplies Fake Out, Feint, Knock Off, and Ice Punch; Sitrus Rotom burns into Hex and pivots with Volt Switch. The rival plans for one starter branch, not the player's whole six. This is Verdant's only dynamic 21-starter forecast battle. Castform, Sneasel, and Rotom do not appear in Battles 1-27; the starter family is the deliberate narrative continuation of Battle 1 rather than incidental reuse. Manual branch weather differs from prior automatic weather speed cores and uses no Mega.
-
-**How it behaves:** All six source records use identical guarded-double, smart-switching, partner, field, and speed-control flags. Existing weather logic values Sun beside Fire or Solar Beam and Rain beside Water; Icy Wind, Forecast, Weather Ball, Fake Out, Feint, Volt Switch, burn, Hex, Eviolite, and Protect remain native. A runtime hook replaces only party slot 1 with the audited middle evolution of the same-generation counter-starter and never mutates player starter state.
-
-**Why it is hard:** 4 fully authored Pokémon, average BST 438.8, average cap offset +1.5, ace offset +2, and 100% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Brendan (100% species overlap). Its species appear across an average of 4.5 unrelated trainer families.
-
-**Counterplay:** Fake Out, Taunt, sleep, focus fire, immediate weather replacement, Cloud Nine, Air Lock, Protect, or removing Castform's Sash can break the forecast. Knock Off removes Eviolite; status, speed reversal, screens, typed resistances, and focus fire answer every middle starter. Sneasel is fragile and takes Life Orb recoil. Dark, Ghost, Mold Breaker Ground pressure, status prevention, and denying burn reduce Rotom's Hex line. The player can win through the rest of the party rather than one exact starter response.
-
-**Manual closure:** Battle 28 is 10/10 because all 21 starter choices receive a legal, understandable middle-stage continuation while the three shared companions make the fight about the whole team. Levels 21-22, four distinct items, branch-safe native AI, truthful dialogue, and broad weather, item, status, speed, type, and focus-fire counterplay make the optional rival 9.0/10 without overfitting one starter.
+**Manual closure:** Battle 5 is 10/10 because three young Pokémon and one true fossil create a complete snow puzzle without premature evolutions. Weather, Veil, two distinct Slush Rush attackers, priority, spread damage, and Bolt Beak make it severe, while every dependency has several independent answers.
 
 | # | Pokémon | Level | Item | Ability | Role | Moves |
 | ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Castform | 15 (cap +1) | Focus Sash | Forecast | speed control | Rain Dance, Weather Ball, Icy Wind, Protect |
-| 2 | Marshtomp | 16 (cap +2) | Eviolite | Torrent | speed control | Water Pledge, Icy Wind, Waterfall, Protect |
-| 3 | Sneasel | 15 (cap +1) | Life Orb | Inner Focus | coverage attacker | Fake Out, Feint, Knock Off, Ice Punch |
-| 4 | Rotom | 16 (cap +2) | Sitrus Berry | Levitate | protected attacker | Volt Switch, Will O Wisp, Hex, Protect |
+| 1 | Amaura | 14 (cap +0) | Focus Sash | Snow Warning | protected attacker | Aurora Veil, Blizzard, Earth Power, Protect |
+| 2 | Sandshrew (Alolan) | 15 (cap +1) | Eviolite | Slush Rush | coverage attacker | Icicle Crash, Iron Head, Brick Break, Rapid Spin |
+| 3 | Swinub | 15 (cap +1) | Choice Band | Thick Fat | Choice-locked breaker | Icicle Crash, Superpower, Ice Shard, Rock Slide |
+| 4 | Arctozolt | 16 (cap +2) | Expert Belt | Slush Rush | protected attacker | Bolt Beak, Icicle Crash, Stomping Tantrum, Protect |
 
-## 013. May — Route 104 | Rustboro City
+## 011. Billy — Route 104
 
-**Required Branch · Double · Cap 14 · Extreme 90/100 · Uniqueness 36/100**
+**Optional · Single · Cap 14 · Extreme 83/100 · Uniqueness 89/100**
 
-**Theme:** Fake Out tempo + active speed control + pivot control
+**Theme:** underused water mixture
 
-Focus Sash Forecast Castform manually announces the branch's weather. The runtime-generated level-22 Eviolite middle starter is always the same-generation elemental counter to the player's chosen starter: Fire receives sun plus Fire Pledge/Heat Wave/Flare Blitz, Water receives rain plus Water Pledge/Icy Wind/Waterfall, and Grass receives sun plus Grass Pledge/Solar Beam/Seed Bomb. Life Orb Sneasel supplies Fake Out, Feint, Knock Off, and Ice Punch; Sitrus Rotom burns into Hex and pivots with Volt Switch. The rival plans for one starter branch, not the player's whole six. This is Verdant's only dynamic 21-starter forecast battle. Castform, Sneasel, and Rotom do not appear in Battles 1-27; the starter family is the deliberate narrative continuation of Battle 1 rather than incidental reuse. Manual branch weather differs from prior automatic weather speed cores and uses no Mega.
+Choice Scarf Imposter Ditto turns the player's chosen lead into the opening puzzle and explains Billy's strange tracks. Focus Sash Wimpod can Taunt or place one Spike before Wimp Out creates natural tempo; Eviolite Water Compaction Sandygast supplies recovery and status; level-16 Solid Rock Tirtouga is a reactive Weakness Policy ace with dual STAB, priority, and item removal rather than another setup move. Billy's footprint dialogue now describes a literal young shoreline mystery: a copied set of tracks, a fleeing beach bug, a living sand pile, and a fossil turtle from the cliffs. None appears in Battles 1-5; Sandygast and Tirtouga appear on no other current trainer, and Wimpod appears only once much later. The mature haunted shoreline quartet is preserved for a later ocean or abandoned-ship encounter.
 
-**How it behaves:** All six source records use identical guarded-double, smart-switching, partner, field, and speed-control flags. Existing weather logic values Sun beside Fire or Solar Beam and Rain beside Water; Icy Wind, Forecast, Weather Ball, Fake Out, Feint, Volt Switch, burn, Hex, Eviolite, and Protect remain native. A runtime hook replaces only party slot 1 with the audited middle evolution of the same-generation counter-starter and never mutates player starter state.
+**How it behaves:** Billy remains a deliberate singles pacing fight. Imposter and Wimp Out function automatically; normal foe-aware scoring understands the Choice lock, hazards, recovery, status, Weakness Policy, and priority, while smart switching escapes bad copies or matchups. The obsolete Tailwind speed-control profile is removed, and no move or turn is forced.
 
-**Why it is hard:** 4 fully authored Pokémon, average BST 438.8, average cap offset +1.5, ace offset +2, and 100% held-item coverage.
+**Why it is hard:** 4 fully authored Pokémon, average BST 298.2, average cap offset +1.0, ace offset +2, and 100% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Brendan (100% species overlap). Its species appear across an average of 4.5 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Johanna (14% species overlap). Its species appear across an average of 1.5 unrelated trainer families.
 
-**Counterplay:** Fake Out, Taunt, sleep, focus fire, immediate weather replacement, Cloud Nine, Air Lock, Protect, or removing Castform's Sash can break the forecast. Knock Off removes Eviolite; status, speed reversal, screens, typed resistances, and focus fire answer every middle starter. Sneasel is fragile and takes Life Orb recoil. Dark, Ghost, Mold Breaker Ground pressure, status prevention, and denying burn reduce Rotom's Hex line. The player can win through the rest of the party rather than one exact starter response.
+**Counterplay:** Lead with a low-impact or status-focused Pokémon, exploit Ditto's Choice lock, or remove its Scarf. Taunt, multihit attacks, status, or immediate pressure limit Wimpod's one action. Special Water, Grass, Ice, Ghost, Dark, and Knock Off pressure Sandygast. Burn, Intimidate, Encore, item removal, safe neutral damage, or one decisive Grass attack avoids or answers Tirtouga's Weakness Policy. Ditto's variable type, Sandygast's Electric immunity, and Wimpod's Grass neutrality prevent one attack from solving the full sequence.
 
-**Manual closure:** Battle 28 is 10/10 because all 21 starter choices receive a legal, understandable middle-stage continuation while the three shared companions make the fight about the whole team. Levels 21-22, four distinct items, branch-safe native AI, truthful dialogue, and broad weather, item, status, speed, type, and focus-fire counterplay make the optional rival 9.0/10 without overfitting one starter.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Castform | 15 (cap +1) | Focus Sash | Forecast | speed control | Sunny Day, Weather Ball, Icy Wind, Protect |
-| 2 | Grovyle | 16 (cap +2) | Eviolite | Overgrow | protected attacker | Grass Pledge, Solar Beam, Seed Bomb, Protect |
-| 3 | Sneasel | 15 (cap +1) | Life Orb | Inner Focus | coverage attacker | Fake Out, Feint, Knock Off, Ice Punch |
-| 4 | Rotom | 16 (cap +2) | Sitrus Berry | Levitate | protected attacker | Volt Switch, Will O Wisp, Hex, Protect |
-
-## 014. Brendan — Route 104 | Rustboro City
-
-**Required Branch · Double · Cap 14 · Extreme 90/100 · Uniqueness 36/100**
-
-**Theme:** Fake Out tempo + active speed control + pivot control
-
-Focus Sash Forecast Castform manually announces the branch's weather. The runtime-generated level-22 Eviolite middle starter is always the same-generation elemental counter to the player's chosen starter: Fire receives sun plus Fire Pledge/Heat Wave/Flare Blitz, Water receives rain plus Water Pledge/Icy Wind/Waterfall, and Grass receives sun plus Grass Pledge/Solar Beam/Seed Bomb. Life Orb Sneasel supplies Fake Out, Feint, Knock Off, and Ice Punch; Sitrus Rotom burns into Hex and pivots with Volt Switch. The rival plans for one starter branch, not the player's whole six. This is Verdant's only dynamic 21-starter forecast battle. Castform, Sneasel, and Rotom do not appear in Battles 1-27; the starter family is the deliberate narrative continuation of Battle 1 rather than incidental reuse. Manual branch weather differs from prior automatic weather speed cores and uses no Mega.
-
-**How it behaves:** All six source records use identical guarded-double, smart-switching, partner, field, and speed-control flags. Existing weather logic values Sun beside Fire or Solar Beam and Rain beside Water; Icy Wind, Forecast, Weather Ball, Fake Out, Feint, Volt Switch, burn, Hex, Eviolite, and Protect remain native. A runtime hook replaces only party slot 1 with the audited middle evolution of the same-generation counter-starter and never mutates player starter state.
-
-**Why it is hard:** 4 fully authored Pokémon, average BST 438.8, average cap offset +1.5, ace offset +2, and 100% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: May (100% species overlap). Its species appear across an average of 4.5 unrelated trainer families.
-
-**Counterplay:** Fake Out, Taunt, sleep, focus fire, immediate weather replacement, Cloud Nine, Air Lock, Protect, or removing Castform's Sash can break the forecast. Knock Off removes Eviolite; status, speed reversal, screens, typed resistances, and focus fire answer every middle starter. Sneasel is fragile and takes Life Orb recoil. Dark, Ghost, Mold Breaker Ground pressure, status prevention, and denying burn reduce Rotom's Hex line. The player can win through the rest of the party rather than one exact starter response.
-
-**Manual closure:** Battle 28 is 10/10 because all 21 starter choices receive a legal, understandable middle-stage continuation while the three shared companions make the fight about the whole team. Levels 21-22, four distinct items, branch-safe native AI, truthful dialogue, and broad weather, item, status, speed, type, and focus-fire counterplay make the optional rival 9.0/10 without overfitting one starter.
+**Manual closure:** Battle 6 is 10/10 because four low-stage or single-stage Pokémon create a variable mirror, tempo hazard, attrition anchor, and reactive ace without any premature evolution. Its difficulty comes from reading the sequence and managing items, not inflated final forms or a forced counter.
 
 | # | Pokémon | Level | Item | Ability | Role | Moves |
 | ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Castform | 15 (cap +1) | Focus Sash | Forecast | speed control | Sunny Day, Weather Ball, Icy Wind, Protect |
-| 2 | Combusken | 16 (cap +2) | Eviolite | Blaze | protected attacker | Fire Pledge, Heat Wave, Flare Blitz, Protect |
-| 3 | Sneasel | 15 (cap +1) | Life Orb | Inner Focus | coverage attacker | Fake Out, Feint, Knock Off, Ice Punch |
-| 4 | Rotom | 16 (cap +2) | Sitrus Berry | Levitate | protected attacker | Volt Switch, Will O Wisp, Hex, Protect |
+| 1 | Ditto | 14 (cap +0) | Choice Scarf | Imposter | Choice-locked breaker | Transform |
+| 2 | Wimpod | 15 (cap +1) | Focus Sash | Wimp Out | disruption and support | Taunt, Spikes, Aqua Jet, Leech Life |
+| 3 | Sandygast | 15 (cap +1) | Eviolite | Water Compaction | disruption and support | Shore Up, Earth Power, Shadow Ball, Toxic |
+| 4 | Tirtouga | 16 (cap +2) | Weakness Policy | Solid Rock | coverage attacker | Liquidation, Stone Edge, Aqua Jet, Knock Off |
 
-## 015. Brendan — Route 104 | Rustboro City
+## 012. Darian — Route 104
 
-**Required Branch · Double · Cap 14 · Extreme 90/100 · Uniqueness 36/100**
+**Optional · Double · Cap 14 · Extreme 85/100 · Uniqueness 82/100**
 
-**Theme:** Fake Out tempo + active speed control + pivot control
+**Theme:** Water pressure
 
-Focus Sash Forecast Castform manually announces the branch's weather. The runtime-generated level-22 Eviolite middle starter is always the same-generation elemental counter to the player's chosen starter: Fire receives sun plus Fire Pledge/Heat Wave/Flare Blitz, Water receives rain plus Water Pledge/Icy Wind/Waterfall, and Grass receives sun plus Grass Pledge/Solar Beam/Seed Bomb. Life Orb Sneasel supplies Fake Out, Feint, Knock Off, and Ice Punch; Sitrus Rotom burns into Hex and pivots with Volt Switch. The rival plans for one starter branch, not the player's whole six. This is Verdant's only dynamic 21-starter forecast battle. Castform, Sneasel, and Rotom do not appear in Battles 1-27; the starter family is the deliberate narrative continuation of Battle 1 rather than incidental reuse. Manual branch weather differs from prior automatic weather speed cores and uses no Mega.
+Level-17 Choice Scarf Remoraid and Expert Belt Dazzling Bruxish form the first cast: full-HP Water Spout attacks immediately while Dazzling blocks priority and Bruxish applies Taunt, screen breaking, and physical coverage. Sitrus Intimidate Qwilfish and level-16 Focus Sash Clamperl form the second cast: Thunder Wave and Intimidate buy one Shell Smash opportunity, then Muddy Water or Ice Beam converts it into pressure. Darian becomes Verdant's two-cast young-fish puzzle. Remoraid appears once, Bruxish twice, Qwilfish eight times, and Clamperl zero times across all 983 references; none appears in Battles 1-6. The mature OCIC quartet remains preserved for a later tournament-style opponent instead of being lost.
 
-**How it behaves:** All six source records use identical guarded-double, smart-switching, partner, field, and speed-control flags. Existing weather logic values Sun beside Fire or Solar Beam and Rain beside Water; Icy Wind, Forecast, Weather Ball, Fake Out, Feint, Volt Switch, burn, Hex, Eviolite, and Protect remain native. A runtime hook replaces only party slot 1 with the audited middle evolution of the same-generation counter-starter and never mutates player starter state.
+**How it behaves:** Native doubles scoring understands Water Spout's HP scaling, Choice locking, Dazzling, Intimidate, Shell Smash, Muddy Water, Protect, and Thunder Wave. Darian adds HP awareness, smart switching, first-turn setup preference, and contextual speed control. Neither wave is scripted: Remoraid can change its Choice lock, Bruxish can attack or Taunt, and Clamperl's Smash remains interruptible.
 
-**Why it is hard:** 4 fully authored Pokémon, average BST 438.8, average cap offset +1.5, ace offset +2, and 100% held-item coverage.
+**Why it is hard:** 4 fully authored Pokémon, average BST 397.5, average cap offset +1.25, ace offset +3, and 100% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: May (100% species overlap). Its species appear across an average of 4.5 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Dominik (20% species overlap). Its species appear across an average of 3.5 unrelated trainer families.
 
-**Counterplay:** Fake Out, Taunt, sleep, focus fire, immediate weather replacement, Cloud Nine, Air Lock, Protect, or removing Castform's Sash can break the forecast. Knock Off removes Eviolite; status, speed reversal, screens, typed resistances, and focus fire answer every middle starter. Sneasel is fragile and takes Life Orb recoil. Dark, Ghost, Mold Breaker Ground pressure, status prevention, and denying burn reduce Rotom's Hex line. The player can win through the rest of the party rather than one exact starter response.
+**Counterplay:** Any normal-speed hit weakens Water Spout; Storm Drain, Water Absorb, Dry Skin, Water resistance, Protect, Wide Guard where legal, or removing Remoraid's Scarf punish the first cast. Dazzling blocks priority but not ordinary attacks. Taunt, a double target, special pressure, Haze, Clear Smog, Trick Room, or phazing stops or reverses Clamperl; Grass and Electric attacks remain strong, while Qwilfish's Poison coverage and Clamperl's Ice Beam stop one-button sweeping. No exact capture or turn sequence is required.
 
-**Manual closure:** Battle 28 is 10/10 because all 21 starter choices receive a legal, understandable middle-stage continuation while the three shared companions make the fight about the whole team. Levels 21-22, four distinct items, branch-safe native AI, truthful dialogue, and broad weather, item, status, speed, type, and focus-fire counterplay make the optional rival 9.0/10 without overfitting one starter.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Castform | 15 (cap +1) | Focus Sash | Forecast | speed control | Rain Dance, Weather Ball, Icy Wind, Protect |
-| 2 | Marshtomp | 16 (cap +2) | Eviolite | Torrent | speed control | Water Pledge, Icy Wind, Waterfall, Protect |
-| 3 | Sneasel | 15 (cap +1) | Life Orb | Inner Focus | coverage attacker | Fake Out, Feint, Knock Off, Ice Punch |
-| 4 | Rotom | 16 (cap +2) | Sitrus Berry | Levitate | protected attacker | Volt Switch, Will O Wisp, Hex, Protect |
-
-## 016. Brendan — Route 104 | Rustboro City
-
-**Required Branch · Double · Cap 14 · Extreme 90/100 · Uniqueness 36/100**
-
-**Theme:** Fake Out tempo + active speed control + pivot control
-
-Focus Sash Forecast Castform manually announces the branch's weather. The runtime-generated level-22 Eviolite middle starter is always the same-generation elemental counter to the player's chosen starter: Fire receives sun plus Fire Pledge/Heat Wave/Flare Blitz, Water receives rain plus Water Pledge/Icy Wind/Waterfall, and Grass receives sun plus Grass Pledge/Solar Beam/Seed Bomb. Life Orb Sneasel supplies Fake Out, Feint, Knock Off, and Ice Punch; Sitrus Rotom burns into Hex and pivots with Volt Switch. The rival plans for one starter branch, not the player's whole six. This is Verdant's only dynamic 21-starter forecast battle. Castform, Sneasel, and Rotom do not appear in Battles 1-27; the starter family is the deliberate narrative continuation of Battle 1 rather than incidental reuse. Manual branch weather differs from prior automatic weather speed cores and uses no Mega.
-
-**How it behaves:** All six source records use identical guarded-double, smart-switching, partner, field, and speed-control flags. Existing weather logic values Sun beside Fire or Solar Beam and Rain beside Water; Icy Wind, Forecast, Weather Ball, Fake Out, Feint, Volt Switch, burn, Hex, Eviolite, and Protect remain native. A runtime hook replaces only party slot 1 with the audited middle evolution of the same-generation counter-starter and never mutates player starter state.
-
-**Why it is hard:** 4 fully authored Pokémon, average BST 438.8, average cap offset +1.5, ace offset +2, and 100% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: May (100% species overlap). Its species appear across an average of 4.5 unrelated trainer families.
-
-**Counterplay:** Fake Out, Taunt, sleep, focus fire, immediate weather replacement, Cloud Nine, Air Lock, Protect, or removing Castform's Sash can break the forecast. Knock Off removes Eviolite; status, speed reversal, screens, typed resistances, and focus fire answer every middle starter. Sneasel is fragile and takes Life Orb recoil. Dark, Ghost, Mold Breaker Ground pressure, status prevention, and denying burn reduce Rotom's Hex line. The player can win through the rest of the party rather than one exact starter response.
-
-**Manual closure:** Battle 28 is 10/10 because all 21 starter choices receive a legal, understandable middle-stage continuation while the three shared companions make the fight about the whole team. Levels 21-22, four distinct items, branch-safe native AI, truthful dialogue, and broad weather, item, status, speed, type, and focus-fire counterplay make the optional rival 9.0/10 without overfitting one starter.
+**Manual closure:** Battle 7 is 10/10 because four stage-legal fish create two readable but different doubles waves: protect the first Water Spout, then buy a Shell Smash. Low raw BSTs justify the level-17 and level-16 offsets, while broad move, ability, item, status, weather, and speed-control answers keep the fight severe without becoming a lock-and-key puzzle.
 
 | # | Pokémon | Level | Item | Ability | Role | Moves |
 | ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Castform | 15 (cap +1) | Focus Sash | Forecast | speed control | Sunny Day, Weather Ball, Icy Wind, Protect |
-| 2 | Grovyle | 16 (cap +2) | Eviolite | Overgrow | protected attacker | Grass Pledge, Solar Beam, Seed Bomb, Protect |
-| 3 | Sneasel | 15 (cap +1) | Life Orb | Inner Focus | coverage attacker | Fake Out, Feint, Knock Off, Ice Punch |
-| 4 | Rotom | 16 (cap +2) | Sitrus Berry | Levitate | protected attacker | Volt Switch, Will O Wisp, Hex, Protect |
+| 1 | Remoraid | 17 (cap +3) | Choice Scarf | Hustle | Choice-locked breaker | Water Spout, Seed Bomb, Fire Blast, Hidden Power |
+| 2 | Bruxish | 14 (cap +0) | Expert Belt | Dazzling | protected attacker | Psychic Fangs, Crunch, Taunt, Protect |
+| 3 | Qwilfish | 14 (cap +0) | Sitrus Berry | Intimidate | speed control | Thunder Wave, Aqua Jet, Poison Jab, Liquidation |
+| 4 | Clamperl | 16 (cap +2) | Focus Sash | Shell Armor | setup attacker | Shell Smash, Muddy Water, Ice Beam, Protect |
+
+## 013. Cindy — Route 104
+
+**Optional · Single · Cap 14 · Extreme 84/100 · Uniqueness 87/100**
+
+**Theme:** Fake Out tempo + Trick Room + pivot control
+
+Eviolite Buneary scouts with Fake Out and Encore, then Focus Sash Competitive Gothita conditionally reverses speed. Level-17 Brave Huge Power Mawile spends the finite Trick Room turns attacking immediately; fast Choice Band Debutante Furfrou is intentionally awkward inside Trick Room and becomes the closer after it expires. Cindy's luxury pets look polished, but the sequence has a real temporal seam. This is Verdant's first Trick Room lesson and its first deliberate doubles-to-singles pacing release. None of the four species appears in Battles 1-7, Debutante Furfrou gives the Lady class a native visual signature, and the fast last slot makes Trick Room a limited resource rather than a reusable module.
+
+**How it behaves:** Cindy remains a native singles trainer. Foe awareness and smart switching understand immunities, U-turn, Choice lock, and bad matchups; contextual speed control uses Trick Room only when reversing order helps the current board. Setup-first-turn is deliberately absent because Gothita may enter later, and no trainer-specific forced turn is required.
+
+**Why it is hard:** 4 fully authored Pokémon, average BST 380.5, average cap offset +2.0, ace offset +3, and 100% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Naomi (17% species overlap). Its species appear across an average of 2.0 unrelated trainer families.
+
+**Counterplay:** Ghosts blank most of Buneary, while Taunt, multihit attacks, item removal, or reversing Trick Room stop Gothita. Fire, Ground, burn, Intimidate, Protect, and physical walls contain Mawile; Fighting pressures both Normal types, but Gothita punishes it and Mawile is neutral. Special damage ignores Fur Coat, and Furfrou's Choice lock can be exploited. The player can win through offense, denial, bulk, status, or speed-order manipulation rather than one required catch.
+
+**Manual closure:** Battle 8 is 10/10 because four evolution-appropriate luxury partners form a readable temporal arc: scout, reverse time, exploit the window, then race after it closes. Levels 15-17 and optimized items make it an 8.4/10 fight, while the mode has numerous broad counters and never demands a single answer.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Buneary | 16 (cap +2) | Eviolite | Limber | coverage attacker | Fake Out, Return, Drain Punch, Encore |
+| 2 | Gothita | 15 (cap +1) | Focus Sash | Competitive | speed control | Trick Room, Psychic, Thunderbolt, Protect |
+| 3 | Mawile | 17 (cap +3) | Life Orb | Huge Power | coverage attacker | Play Rough, Iron Head, Fire Fang, Sucker Punch |
+| 4 | Furfrou Debutante Trim | 16 (cap +2) | Choice Band | Fur Coat | Choice-locked breaker | Double Edge, U Turn, Zen Headbutt, Sucker Punch |
+
+## 014. Winston — Route 104
+
+**Optional · Double · Cap 14 · Extreme 85/100 · Uniqueness 89/100**
+
+**Theme:** spread + Wide Guard
+
+Focus Sash Power Spot Stonjourner and Eviolite Download Porygon are Winston's expensive display pieces: Power Spot passively multiplies Porygon's damage, Download may add another offensive boost, Rock Slide applies spread pressure, and Wide Guard reacts to revealed spread moves. Sitrus Cheek Pouch Dedenne uses Super Fang and Nuzzle to create a finite opening for Air Balloon Honedge's one interruptible Swords Dance and priority endgame. Winston is the first Power Spot battle and the only early fight framed as an expensive rare collection. None of the four species appears in Battles 1-11, and its passive damage aura, Super Fang chip, Wide Guard reaction, Balloon seam, and delayed setup do not repeat prior weather, Web, Trick Room, detonation, theft, or Perish modules. Winston2-4 remain separate five-badge rematch indices and must later preserve these families through legal Porygon and Honedge growth rather than reverting to the old Bidoof and Pidgey roster.
+
+**How it behaves:** Normal foe-aware scoring includes the partner Power Spot multiplier in damage calculation. Smart switching handles Porygon's matchup and Honedge's setup position; contextual speed control values Nuzzle. Download, Cheek Pouch, No Guard, Super Fang, Wide Guard, Protect, priority, and Choice-free attacks use native behavior. Setup-first-turn is deliberately absent because Honedge enters later, and no move is forced.
+
+**Why it is hard:** 4 fully authored Pokémon, average BST 415.2, average cap offset +1.75, ace offset +3, and 100% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Shawn (14% species overlap). Its species appear across an average of 1.8 unrelated trainer families.
+
+**Counterplay:** Special attacks or focused damage remove Sash Stonjourner and its Power Spot, while Knock Off strips Porygon's Eviolite. Fighting pressures Porygon but Stonjourner and Honedge change that matchup. Ground threatens Dedenne but initially misses Balloon Honedge; Fire, Dark, Ghost, burn, Taunt, Intimidate, Haze, Clear Smog, Protect, and priority all contain Honedge. Wide Guard reacts only to known spread pressure, and popping the Balloon is visible counterplay. No one team slot is mandatory.
+
+**Manual closure:** Battle 12 is 10/10 because every expensive piece changes a doubles decision: remove the aura, strip the digital tank, respect Super Fang and speed control, then deny the floating sword one setup turn. Levels 15-17, one rare single-stage showcase, full items, and two distinct waves make it 8.5/10 while broad type, status, item, targeting, and tempo answers remain valid.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Stonjourner | 15 (cap +1) | Focus Sash | Power Spot | protected attacker | Rock Slide, Body Press, Wide Guard, Protect |
+| 2 | Porygon | 15 (cap +1) | Eviolite | Download | protected attacker | Tri Attack, Ice Beam, Thunderbolt, Protect |
+| 3 | Dedenne | 16 (cap +2) | Sitrus Berry | Cheek Pouch | speed control | Super Fang, Nuzzle, Dazzling Gleam, Thunderbolt |
+| 4 | Honedge | 17 (cap +3) | Air Balloon | No Guard | setup attacker | Swords Dance, Iron Head, Sacred Sword, Shadow Sneak |
+
+## 015. Haley — Route 104
+
+**Optional · Single · Cap 14 · Extreme 83/100 · Uniqueness 89/100**
+
+**Theme:** status control
+
+Every slot embodies Haley's choice theme. Eviolite Eevee opens with the Yawn decision while remaining active through Adaptability, Extreme Speed, and Bite. Focus Sash Trace Ralts can Encore a passive response but has no Disable lock. Choice Specs Snorunt visibly commits to one of four special coverage lines. Life Orb Hunger Switch Morpeko changes Aura Wheel between Electric and Dark every turn and can reconsider with Parting Shot. Haley is the only early branching-evolution and changing-mind battle. None of the four families appears in Battles 1-12, and the fight uses no weather, hazard, trapping, detonation, Perish timer, item theft, or free stat setup. Haley2-4 remain separate cap-55 rematch indices: they must show Vaporeon/Gardevoir/Glalie, then Jolteon/Gallade/Froslass, then Sylveon plus both Ralts and Snorunt branches, rather than the current unrelated Arceus roster.
+
+**How it behaves:** Haley remains a native singles trainer. Smart switching handles Snorunt's Choice lock, type immunities, and Parting Shot; first-turn setup preference makes Yawn plausible without forcing it; HP-aware scoring improves Protect and endgame decisions. Hunger Switch and Aura Wheel type changes are native. No trainer-only move, target, or turn script is added.
+
+**Why it is hard:** 4 fully authored Pokémon, average BST 318.2, average cap offset +2.0, ace offset +3, and 100% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Grunt (14% species overlap). Its species appear across an average of 1.8 unrelated trainer families.
+
+**Counterplay:** Taunt, sleep immunity, Safeguard, Electric Terrain, U-turn, or ordinary switching answer Yawn. Fighting pressures Eevee and Morpeko; Steel, Poison, Dark, and priority break Ralts; Fire, Rock, Fighting, and Steel plus Choice-lock exploitation check Snorunt. Ground blocks Electric Aura Wheel but not its alternating Dark turn or Seed Bomb, while Fairy, Bug, burn, Intimidate, and Protect contain Morpeko. No one wall or required catch solves all four.
+
+**Manual closure:** Battle 13 is 10/10 because its story and mechanics both ask the player to choose: stay or switch, act or risk Encore, commit into a Choice lock, then track Aura Wheel's changing type. Four stage-legal Pokémon at levels 15-17 make it an 8.3/10 singles fight with broad status, type, item, priority, and switching counterplay.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Eevee | 15 (cap +1) | Eviolite | Adaptability | protected attacker | Yawn, Protect, Extreme Speed, Bite |
+| 2 | Ralts | 16 (cap +2) | Focus Sash | Trace | coverage attacker | Encore, Psychic, Dazzling Gleam, Thunderbolt |
+| 3 | Snorunt | 16 (cap +2) | Choice Specs | Inner Focus | Choice-locked breaker | Ice Beam, Hidden Power, Shadow Ball, Water Pulse |
+| 4 | Morpeko | 17 (cap +3) | Life Orb | Hunger Switch | protected attacker | Aura Wheel, Parting Shot, Seed Bomb, Protect |
+
+## 016. Gina & Mia — Route 104
+
+**Optional · Double · Cap 14 · Extreme 86/100 · Uniqueness 90/100**
+
+**Theme:** Dancer physical relay + Dancer recital + Dancer special relay
+
+Flying Gem Dancer Oricorio and Eviolite Mold Breaker Axew open the recital. Axew's Dragon Dance also raises Oricorio's Attack and Speed, turning the gem-powered Acrobatics into a physical reveal; Oricorio can instead use Revelation Dance, Roost, or Protect. Focus Sash Sweet Veil Cutiefly then brings Quiver Dance, which Dancer copies into special pressure, while Black Sludge Oddish's Petal Dance makes Oricorio repeat an immediate Grass attack. Every reserve has independent STAB and protection, so breaking the centerpiece weakens the choreography without reducing three partners to dead props. This is Verdant's only three-dance recital and the first fight whose apparent boss changes attacking category according to the partner beside it. Oricorio, Axew, Cutiefly, and Oddish do not appear in Battles 1-13. The team uses no weather, Web, Fake Out, redirection, active speed-control move, Trick Room, detonation, screen, theft, Perish timer, Power Spot, Super Fang, or Yawn module. The flower-lined Route 104 setting and two overworld twins make the synchronized choreography feel native rather than assigned globally.
+
+**How it behaves:** Gina and Mia use normal foe-aware doubles scoring, smart switching, first-turn setup awareness, and the reusable combo profile. That profile gives a contextual bonus to any FLAG_DANCE move while a living Dancer partner is present; it does not force a move, target, turn, or switch. Dancer itself, Flying Gem consumption, Sweet Veil, Black Sludge, Protect, Roost, Petal Dance lock, and every stat change remain native engine behavior.
+
+**Why it is hard:** 4 fully authored Pokémon, average BST 360.0, average cap offset +2.0, ace offset +3, and 100% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Colin (17% species overlap). Its species appear across an average of 1.8 unrelated trainer families.
+
+**Counterplay:** Oricorio has a visible 4x Rock weakness and is also vulnerable to Electric, Water, and focused neutral damage; removing it ends every copied dance. Taunt, Encore, Haze, Clear Smog, phazing, Trick Room, Unaware, priority, or doubling the current dancer stops a snowball. Steel and Poison pressure Cutiefly, Ice and Fairy pressure Axew, and Fire, Flying, Ice, or Psychic pressure Oddish. Intimidate and burn blunt the Dragon Dance/Acrobatics line, while special walls blunt the Quiver/Petal line. The player may attack the centerpiece, deny the initiator, reverse speed, or outlast finite items—no exact catch or turn sequence is required.
+
+**Manual closure:** Battle 14 is 10/10 because the overworld twins now fight like twins: three young Pokémon each teach one rare centerpiece a different routine, and every copied dance changes the next targeting decision. Levels 15-17, perfect spreads, four distinct items, a 4x centerpiece weakness, and broad denial, typing, speed, status, and focus-fire answers make it an 8.6/10 puzzle without a hidden forced solution.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Oricorio | 16 (cap +2) | Flying Gem | Dancer | protected attacker | Acrobatics, Revelation Dance, Roost, Protect |
+| 2 | Axew | 15 (cap +1) | Eviolite | Mold Breaker | setup attacker | Dragon Dance, Dragon Claw, Poison Jab, Protect |
+| 3 | Cutiefly | 16 (cap +2) | Focus Sash | Sweet Veil | setup attacker | Quiver Dance, Bug Buzz, Dazzling Gleam, Protect |
+| 4 | Oddish | 17 (cap +3) | Black Sludge | Chlorophyll | coverage attacker | Petal Dance, Sludge Bomb, Giga Drain, Strength Sap |
 
 ## 017. Ivan — Route 104
 
@@ -416,182 +416,157 @@ Ivan is a single-battle pacing break built as lure, sinker, hook, and school. Fo
 | 3 | Tentacool | 17 (cap +3) | Eviolite | Liquid Ooze | coverage attacker | Sludge Bomb, Scald, Ice Beam, Giga Drain |
 | 4 | Wishiwashi | 20 (cap +6) | Assault Vest | Schooling | rare centerpiece | Liquidation, Ice Beam, Earthquake, U Turn |
 
-## 018. Billy — Route 104
+## 018. May — Route 104 | Rustboro City
 
-**Optional · Single · Cap 14 · Extreme 83/100 · Uniqueness 89/100**
+**Required Branch · Double · Cap 14 · Extreme 90/100 · Uniqueness 36/100**
 
-**Theme:** underused water mixture
+**Theme:** Fake Out tempo + active speed control + pivot control
 
-Choice Scarf Imposter Ditto turns the player's chosen lead into the opening puzzle and explains Billy's strange tracks. Focus Sash Wimpod can Taunt or place one Spike before Wimp Out creates natural tempo; Eviolite Water Compaction Sandygast supplies recovery and status; level-16 Solid Rock Tirtouga is a reactive Weakness Policy ace with dual STAB, priority, and item removal rather than another setup move. Billy's footprint dialogue now describes a literal young shoreline mystery: a copied set of tracks, a fleeing beach bug, a living sand pile, and a fossil turtle from the cliffs. None appears in Battles 1-5; Sandygast and Tirtouga appear on no other current trainer, and Wimpod appears only once much later. The mature haunted shoreline quartet is preserved for a later ocean or abandoned-ship encounter.
+Focus Sash Forecast Castform manually announces the branch's weather. The runtime-generated level-22 Eviolite middle starter is always the same-generation elemental counter to the player's chosen starter: Fire receives sun plus Fire Pledge/Heat Wave/Flare Blitz, Water receives rain plus Water Pledge/Icy Wind/Waterfall, and Grass receives sun plus Grass Pledge/Solar Beam/Seed Bomb. Life Orb Sneasel supplies Fake Out, Feint, Knock Off, and Ice Punch; Sitrus Rotom burns into Hex and pivots with Volt Switch. The rival plans for one starter branch, not the player's whole six. This is Verdant's only dynamic 21-starter forecast battle. Castform, Sneasel, and Rotom do not appear in Battles 1-27; the starter family is the deliberate narrative continuation of Battle 1 rather than incidental reuse. Manual branch weather differs from prior automatic weather speed cores and uses no Mega.
 
-**How it behaves:** Billy remains a deliberate singles pacing fight. Imposter and Wimp Out function automatically; normal foe-aware scoring understands the Choice lock, hazards, recovery, status, Weakness Policy, and priority, while smart switching escapes bad copies or matchups. The obsolete Tailwind speed-control profile is removed, and no move or turn is forced.
+**How it behaves:** All six source records use identical guarded-double, smart-switching, partner, field, and speed-control flags. Existing weather logic values Sun beside Fire or Solar Beam and Rain beside Water; Icy Wind, Forecast, Weather Ball, Fake Out, Feint, Volt Switch, burn, Hex, Eviolite, and Protect remain native. A runtime hook replaces only party slot 1 with the audited middle evolution of the same-generation counter-starter and never mutates player starter state.
 
-**Why it is hard:** 4 fully authored Pokémon, average BST 298.2, average cap offset +1.0, ace offset +2, and 100% held-item coverage.
+**Why it is hard:** 4 fully authored Pokémon, average BST 438.8, average cap offset +1.5, ace offset +2, and 100% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Johanna (14% species overlap). Its species appear across an average of 1.5 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Brendan (100% species overlap). Its species appear across an average of 4.5 unrelated trainer families.
 
-**Counterplay:** Lead with a low-impact or status-focused Pokémon, exploit Ditto's Choice lock, or remove its Scarf. Taunt, multihit attacks, status, or immediate pressure limit Wimpod's one action. Special Water, Grass, Ice, Ghost, Dark, and Knock Off pressure Sandygast. Burn, Intimidate, Encore, item removal, safe neutral damage, or one decisive Grass attack avoids or answers Tirtouga's Weakness Policy. Ditto's variable type, Sandygast's Electric immunity, and Wimpod's Grass neutrality prevent one attack from solving the full sequence.
+**Counterplay:** Fake Out, Taunt, sleep, focus fire, immediate weather replacement, Cloud Nine, Air Lock, Protect, or removing Castform's Sash can break the forecast. Knock Off removes Eviolite; status, speed reversal, screens, typed resistances, and focus fire answer every middle starter. Sneasel is fragile and takes Life Orb recoil. Dark, Ghost, Mold Breaker Ground pressure, status prevention, and denying burn reduce Rotom's Hex line. The player can win through the rest of the party rather than one exact starter response.
 
-**Manual closure:** Battle 6 is 10/10 because four low-stage or single-stage Pokémon create a variable mirror, tempo hazard, attrition anchor, and reactive ace without any premature evolution. Its difficulty comes from reading the sequence and managing items, not inflated final forms or a forced counter.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Ditto | 14 (cap +0) | Choice Scarf | Imposter | Choice-locked breaker | Transform |
-| 2 | Wimpod | 15 (cap +1) | Focus Sash | Wimp Out | disruption and support | Taunt, Spikes, Aqua Jet, Leech Life |
-| 3 | Sandygast | 15 (cap +1) | Eviolite | Water Compaction | disruption and support | Shore Up, Earth Power, Shadow Ball, Toxic |
-| 4 | Tirtouga | 16 (cap +2) | Weakness Policy | Solid Rock | coverage attacker | Liquidation, Stone Edge, Aqua Jet, Knock Off |
-
-## 019. Haley — Route 104
-
-**Optional · Single · Cap 14 · Extreme 83/100 · Uniqueness 89/100**
-
-**Theme:** status control
-
-Every slot embodies Haley's choice theme. Eviolite Eevee opens with the Yawn decision while remaining active through Adaptability, Extreme Speed, and Bite. Focus Sash Trace Ralts can Encore a passive response but has no Disable lock. Choice Specs Snorunt visibly commits to one of four special coverage lines. Life Orb Hunger Switch Morpeko changes Aura Wheel between Electric and Dark every turn and can reconsider with Parting Shot. Haley is the only early branching-evolution and changing-mind battle. None of the four families appears in Battles 1-12, and the fight uses no weather, hazard, trapping, detonation, Perish timer, item theft, or free stat setup. Haley2-4 remain separate cap-55 rematch indices: they must show Vaporeon/Gardevoir/Glalie, then Jolteon/Gallade/Froslass, then Sylveon plus both Ralts and Snorunt branches, rather than the current unrelated Arceus roster.
-
-**How it behaves:** Haley remains a native singles trainer. Smart switching handles Snorunt's Choice lock, type immunities, and Parting Shot; first-turn setup preference makes Yawn plausible without forcing it; HP-aware scoring improves Protect and endgame decisions. Hunger Switch and Aura Wheel type changes are native. No trainer-only move, target, or turn script is added.
-
-**Why it is hard:** 4 fully authored Pokémon, average BST 318.2, average cap offset +2.0, ace offset +3, and 100% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Grunt (14% species overlap). Its species appear across an average of 1.8 unrelated trainer families.
-
-**Counterplay:** Taunt, sleep immunity, Safeguard, Electric Terrain, U-turn, or ordinary switching answer Yawn. Fighting pressures Eevee and Morpeko; Steel, Poison, Dark, and priority break Ralts; Fire, Rock, Fighting, and Steel plus Choice-lock exploitation check Snorunt. Ground blocks Electric Aura Wheel but not its alternating Dark turn or Seed Bomb, while Fairy, Bug, burn, Intimidate, and Protect contain Morpeko. No one wall or required catch solves all four.
-
-**Manual closure:** Battle 13 is 10/10 because its story and mechanics both ask the player to choose: stay or switch, act or risk Encore, commit into a Choice lock, then track Aura Wheel's changing type. Four stage-legal Pokémon at levels 15-17 make it an 8.3/10 singles fight with broad status, type, item, priority, and switching counterplay.
+**Manual closure:** Battle 28 is 10/10 because all 21 starter choices receive a legal, understandable middle-stage continuation while the three shared companions make the fight about the whole team. Levels 21-22, four distinct items, branch-safe native AI, truthful dialogue, and broad weather, item, status, speed, type, and focus-fire counterplay make the optional rival 9.0/10 without overfitting one starter.
 
 | # | Pokémon | Level | Item | Ability | Role | Moves |
 | ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Eevee | 15 (cap +1) | Eviolite | Adaptability | protected attacker | Yawn, Protect, Extreme Speed, Bite |
-| 2 | Ralts | 16 (cap +2) | Focus Sash | Trace | coverage attacker | Encore, Psychic, Dazzling Gleam, Thunderbolt |
-| 3 | Snorunt | 16 (cap +2) | Choice Specs | Inner Focus | Choice-locked breaker | Ice Beam, Hidden Power, Shadow Ball, Water Pulse |
-| 4 | Morpeko | 17 (cap +3) | Life Orb | Hunger Switch | protected attacker | Aura Wheel, Parting Shot, Seed Bomb, Protect |
+| 1 | Castform | 15 (cap +1) | Focus Sash | Forecast | speed control | Sunny Day, Weather Ball, Icy Wind, Protect |
+| 2 | Combusken | 16 (cap +2) | Eviolite | Blaze | protected attacker | Fire Pledge, Heat Wave, Flare Blitz, Protect |
+| 3 | Sneasel | 15 (cap +1) | Life Orb | Inner Focus | coverage attacker | Fake Out, Feint, Knock Off, Ice Punch |
+| 4 | Rotom | 16 (cap +2) | Sitrus Berry | Levitate | protected attacker | Volt Switch, Will O Wisp, Hex, Protect |
 
-## 020. Winston — Route 104
+## 019. May — Route 104 | Rustboro City
 
-**Optional · Double · Cap 14 · Extreme 85/100 · Uniqueness 89/100**
+**Required Branch · Double · Cap 14 · Extreme 90/100 · Uniqueness 36/100**
 
-**Theme:** spread + Wide Guard
+**Theme:** Fake Out tempo + active speed control + pivot control
 
-Focus Sash Power Spot Stonjourner and Eviolite Download Porygon are Winston's expensive display pieces: Power Spot passively multiplies Porygon's damage, Download may add another offensive boost, Rock Slide applies spread pressure, and Wide Guard reacts to revealed spread moves. Sitrus Cheek Pouch Dedenne uses Super Fang and Nuzzle to create a finite opening for Air Balloon Honedge's one interruptible Swords Dance and priority endgame. Winston is the first Power Spot battle and the only early fight framed as an expensive rare collection. None of the four species appears in Battles 1-11, and its passive damage aura, Super Fang chip, Wide Guard reaction, Balloon seam, and delayed setup do not repeat prior weather, Web, Trick Room, detonation, theft, or Perish modules. Winston2-4 remain separate five-badge rematch indices and must later preserve these families through legal Porygon and Honedge growth rather than reverting to the old Bidoof and Pidgey roster.
+Focus Sash Forecast Castform manually announces the branch's weather. The runtime-generated level-22 Eviolite middle starter is always the same-generation elemental counter to the player's chosen starter: Fire receives sun plus Fire Pledge/Heat Wave/Flare Blitz, Water receives rain plus Water Pledge/Icy Wind/Waterfall, and Grass receives sun plus Grass Pledge/Solar Beam/Seed Bomb. Life Orb Sneasel supplies Fake Out, Feint, Knock Off, and Ice Punch; Sitrus Rotom burns into Hex and pivots with Volt Switch. The rival plans for one starter branch, not the player's whole six. This is Verdant's only dynamic 21-starter forecast battle. Castform, Sneasel, and Rotom do not appear in Battles 1-27; the starter family is the deliberate narrative continuation of Battle 1 rather than incidental reuse. Manual branch weather differs from prior automatic weather speed cores and uses no Mega.
 
-**How it behaves:** Normal foe-aware scoring includes the partner Power Spot multiplier in damage calculation. Smart switching handles Porygon's matchup and Honedge's setup position; contextual speed control values Nuzzle. Download, Cheek Pouch, No Guard, Super Fang, Wide Guard, Protect, priority, and Choice-free attacks use native behavior. Setup-first-turn is deliberately absent because Honedge enters later, and no move is forced.
+**How it behaves:** All six source records use identical guarded-double, smart-switching, partner, field, and speed-control flags. Existing weather logic values Sun beside Fire or Solar Beam and Rain beside Water; Icy Wind, Forecast, Weather Ball, Fake Out, Feint, Volt Switch, burn, Hex, Eviolite, and Protect remain native. A runtime hook replaces only party slot 1 with the audited middle evolution of the same-generation counter-starter and never mutates player starter state.
 
-**Why it is hard:** 4 fully authored Pokémon, average BST 415.2, average cap offset +1.75, ace offset +3, and 100% held-item coverage.
+**Why it is hard:** 4 fully authored Pokémon, average BST 438.8, average cap offset +1.5, ace offset +2, and 100% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Shawn (14% species overlap). Its species appear across an average of 1.8 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Brendan (100% species overlap). Its species appear across an average of 4.5 unrelated trainer families.
 
-**Counterplay:** Special attacks or focused damage remove Sash Stonjourner and its Power Spot, while Knock Off strips Porygon's Eviolite. Fighting pressures Porygon but Stonjourner and Honedge change that matchup. Ground threatens Dedenne but initially misses Balloon Honedge; Fire, Dark, Ghost, burn, Taunt, Intimidate, Haze, Clear Smog, Protect, and priority all contain Honedge. Wide Guard reacts only to known spread pressure, and popping the Balloon is visible counterplay. No one team slot is mandatory.
+**Counterplay:** Fake Out, Taunt, sleep, focus fire, immediate weather replacement, Cloud Nine, Air Lock, Protect, or removing Castform's Sash can break the forecast. Knock Off removes Eviolite; status, speed reversal, screens, typed resistances, and focus fire answer every middle starter. Sneasel is fragile and takes Life Orb recoil. Dark, Ghost, Mold Breaker Ground pressure, status prevention, and denying burn reduce Rotom's Hex line. The player can win through the rest of the party rather than one exact starter response.
 
-**Manual closure:** Battle 12 is 10/10 because every expensive piece changes a doubles decision: remove the aura, strip the digital tank, respect Super Fang and speed control, then deny the floating sword one setup turn. Levels 15-17, one rare single-stage showcase, full items, and two distinct waves make it 8.5/10 while broad type, status, item, targeting, and tempo answers remain valid.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Stonjourner | 15 (cap +1) | Focus Sash | Power Spot | protected attacker | Rock Slide, Body Press, Wide Guard, Protect |
-| 2 | Porygon | 15 (cap +1) | Eviolite | Download | protected attacker | Tri Attack, Ice Beam, Thunderbolt, Protect |
-| 3 | Dedenne | 16 (cap +2) | Sitrus Berry | Cheek Pouch | speed control | Super Fang, Nuzzle, Dazzling Gleam, Thunderbolt |
-| 4 | Honedge | 17 (cap +3) | Air Balloon | No Guard | setup attacker | Swords Dance, Iron Head, Sacred Sword, Shadow Sneak |
-
-## 021. Cindy — Route 104
-
-**Optional · Single · Cap 14 · Extreme 84/100 · Uniqueness 87/100**
-
-**Theme:** Fake Out tempo + Trick Room + pivot control
-
-Eviolite Buneary scouts with Fake Out and Encore, then Focus Sash Competitive Gothita conditionally reverses speed. Level-17 Brave Huge Power Mawile spends the finite Trick Room turns attacking immediately; fast Choice Band Debutante Furfrou is intentionally awkward inside Trick Room and becomes the closer after it expires. Cindy's luxury pets look polished, but the sequence has a real temporal seam. This is Verdant's first Trick Room lesson and its first deliberate doubles-to-singles pacing release. None of the four species appears in Battles 1-7, Debutante Furfrou gives the Lady class a native visual signature, and the fast last slot makes Trick Room a limited resource rather than a reusable module.
-
-**How it behaves:** Cindy remains a native singles trainer. Foe awareness and smart switching understand immunities, U-turn, Choice lock, and bad matchups; contextual speed control uses Trick Room only when reversing order helps the current board. Setup-first-turn is deliberately absent because Gothita may enter later, and no trainer-specific forced turn is required.
-
-**Why it is hard:** 4 fully authored Pokémon, average BST 380.5, average cap offset +2.0, ace offset +3, and 100% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Naomi (17% species overlap). Its species appear across an average of 2.0 unrelated trainer families.
-
-**Counterplay:** Ghosts blank most of Buneary, while Taunt, multihit attacks, item removal, or reversing Trick Room stop Gothita. Fire, Ground, burn, Intimidate, Protect, and physical walls contain Mawile; Fighting pressures both Normal types, but Gothita punishes it and Mawile is neutral. Special damage ignores Fur Coat, and Furfrou's Choice lock can be exploited. The player can win through offense, denial, bulk, status, or speed-order manipulation rather than one required catch.
-
-**Manual closure:** Battle 8 is 10/10 because four evolution-appropriate luxury partners form a readable temporal arc: scout, reverse time, exploit the window, then race after it closes. Levels 15-17 and optimized items make it an 8.4/10 fight, while the mode has numerous broad counters and never demands a single answer.
+**Manual closure:** Battle 28 is 10/10 because all 21 starter choices receive a legal, understandable middle-stage continuation while the three shared companions make the fight about the whole team. Levels 21-22, four distinct items, branch-safe native AI, truthful dialogue, and broad weather, item, status, speed, type, and focus-fire counterplay make the optional rival 9.0/10 without overfitting one starter.
 
 | # | Pokémon | Level | Item | Ability | Role | Moves |
 | ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Buneary | 16 (cap +2) | Eviolite | Limber | coverage attacker | Fake Out, Return, Drain Punch, Encore |
-| 2 | Gothita | 15 (cap +1) | Focus Sash | Competitive | speed control | Trick Room, Psychic, Thunderbolt, Protect |
-| 3 | Mawile | 17 (cap +3) | Life Orb | Huge Power | coverage attacker | Play Rough, Iron Head, Fire Fang, Sucker Punch |
-| 4 | Furfrou Debutante Trim | 16 (cap +2) | Choice Band | Fur Coat | Choice-locked breaker | Double Edge, U Turn, Zen Headbutt, Sucker Punch |
+| 1 | Castform | 15 (cap +1) | Focus Sash | Forecast | speed control | Rain Dance, Weather Ball, Icy Wind, Protect |
+| 2 | Marshtomp | 16 (cap +2) | Eviolite | Torrent | speed control | Water Pledge, Icy Wind, Waterfall, Protect |
+| 3 | Sneasel | 15 (cap +1) | Life Orb | Inner Focus | coverage attacker | Fake Out, Feint, Knock Off, Ice Punch |
+| 4 | Rotom | 16 (cap +2) | Sitrus Berry | Levitate | protected attacker | Volt Switch, Will O Wisp, Hex, Protect |
 
-## 022. Gina & Mia — Route 104
+## 020. May — Route 104 | Rustboro City
 
-**Optional · Double · Cap 14 · Extreme 86/100 · Uniqueness 90/100**
+**Required Branch · Double · Cap 14 · Extreme 90/100 · Uniqueness 36/100**
 
-**Theme:** Dancer physical relay + Dancer recital + Dancer special relay
+**Theme:** Fake Out tempo + active speed control + pivot control
 
-Flying Gem Dancer Oricorio and Eviolite Mold Breaker Axew open the recital. Axew's Dragon Dance also raises Oricorio's Attack and Speed, turning the gem-powered Acrobatics into a physical reveal; Oricorio can instead use Revelation Dance, Roost, or Protect. Focus Sash Sweet Veil Cutiefly then brings Quiver Dance, which Dancer copies into special pressure, while Black Sludge Oddish's Petal Dance makes Oricorio repeat an immediate Grass attack. Every reserve has independent STAB and protection, so breaking the centerpiece weakens the choreography without reducing three partners to dead props. This is Verdant's only three-dance recital and the first fight whose apparent boss changes attacking category according to the partner beside it. Oricorio, Axew, Cutiefly, and Oddish do not appear in Battles 1-13. The team uses no weather, Web, Fake Out, redirection, active speed-control move, Trick Room, detonation, screen, theft, Perish timer, Power Spot, Super Fang, or Yawn module. The flower-lined Route 104 setting and two overworld twins make the synchronized choreography feel native rather than assigned globally.
+Focus Sash Forecast Castform manually announces the branch's weather. The runtime-generated level-22 Eviolite middle starter is always the same-generation elemental counter to the player's chosen starter: Fire receives sun plus Fire Pledge/Heat Wave/Flare Blitz, Water receives rain plus Water Pledge/Icy Wind/Waterfall, and Grass receives sun plus Grass Pledge/Solar Beam/Seed Bomb. Life Orb Sneasel supplies Fake Out, Feint, Knock Off, and Ice Punch; Sitrus Rotom burns into Hex and pivots with Volt Switch. The rival plans for one starter branch, not the player's whole six. This is Verdant's only dynamic 21-starter forecast battle. Castform, Sneasel, and Rotom do not appear in Battles 1-27; the starter family is the deliberate narrative continuation of Battle 1 rather than incidental reuse. Manual branch weather differs from prior automatic weather speed cores and uses no Mega.
 
-**How it behaves:** Gina and Mia use normal foe-aware doubles scoring, smart switching, first-turn setup awareness, and the reusable combo profile. That profile gives a contextual bonus to any FLAG_DANCE move while a living Dancer partner is present; it does not force a move, target, turn, or switch. Dancer itself, Flying Gem consumption, Sweet Veil, Black Sludge, Protect, Roost, Petal Dance lock, and every stat change remain native engine behavior.
+**How it behaves:** All six source records use identical guarded-double, smart-switching, partner, field, and speed-control flags. Existing weather logic values Sun beside Fire or Solar Beam and Rain beside Water; Icy Wind, Forecast, Weather Ball, Fake Out, Feint, Volt Switch, burn, Hex, Eviolite, and Protect remain native. A runtime hook replaces only party slot 1 with the audited middle evolution of the same-generation counter-starter and never mutates player starter state.
 
-**Why it is hard:** 4 fully authored Pokémon, average BST 360.0, average cap offset +2.0, ace offset +3, and 100% held-item coverage.
+**Why it is hard:** 4 fully authored Pokémon, average BST 438.8, average cap offset +1.5, ace offset +2, and 100% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Colin (17% species overlap). Its species appear across an average of 1.8 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Brendan (100% species overlap). Its species appear across an average of 4.5 unrelated trainer families.
 
-**Counterplay:** Oricorio has a visible 4x Rock weakness and is also vulnerable to Electric, Water, and focused neutral damage; removing it ends every copied dance. Taunt, Encore, Haze, Clear Smog, phazing, Trick Room, Unaware, priority, or doubling the current dancer stops a snowball. Steel and Poison pressure Cutiefly, Ice and Fairy pressure Axew, and Fire, Flying, Ice, or Psychic pressure Oddish. Intimidate and burn blunt the Dragon Dance/Acrobatics line, while special walls blunt the Quiver/Petal line. The player may attack the centerpiece, deny the initiator, reverse speed, or outlast finite items—no exact catch or turn sequence is required.
+**Counterplay:** Fake Out, Taunt, sleep, focus fire, immediate weather replacement, Cloud Nine, Air Lock, Protect, or removing Castform's Sash can break the forecast. Knock Off removes Eviolite; status, speed reversal, screens, typed resistances, and focus fire answer every middle starter. Sneasel is fragile and takes Life Orb recoil. Dark, Ghost, Mold Breaker Ground pressure, status prevention, and denying burn reduce Rotom's Hex line. The player can win through the rest of the party rather than one exact starter response.
 
-**Manual closure:** Battle 14 is 10/10 because the overworld twins now fight like twins: three young Pokémon each teach one rare centerpiece a different routine, and every copied dance changes the next targeting decision. Levels 15-17, perfect spreads, four distinct items, a 4x centerpiece weakness, and broad denial, typing, speed, status, and focus-fire answers make it an 8.6/10 puzzle without a hidden forced solution.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Oricorio | 16 (cap +2) | Flying Gem | Dancer | protected attacker | Acrobatics, Revelation Dance, Roost, Protect |
-| 2 | Axew | 15 (cap +1) | Eviolite | Mold Breaker | setup attacker | Dragon Dance, Dragon Claw, Poison Jab, Protect |
-| 3 | Cutiefly | 16 (cap +2) | Focus Sash | Sweet Veil | setup attacker | Quiver Dance, Bug Buzz, Dazzling Gleam, Protect |
-| 4 | Oddish | 17 (cap +3) | Black Sludge | Chlorophyll | coverage attacker | Petal Dance, Sludge Bomb, Giga Drain, Strength Sap |
-
-## 023. Darian — Route 104
-
-**Optional · Double · Cap 14 · Extreme 85/100 · Uniqueness 82/100**
-
-**Theme:** Water pressure
-
-Level-17 Choice Scarf Remoraid and Expert Belt Dazzling Bruxish form the first cast: full-HP Water Spout attacks immediately while Dazzling blocks priority and Bruxish applies Taunt, screen breaking, and physical coverage. Sitrus Intimidate Qwilfish and level-16 Focus Sash Clamperl form the second cast: Thunder Wave and Intimidate buy one Shell Smash opportunity, then Muddy Water or Ice Beam converts it into pressure. Darian becomes Verdant's two-cast young-fish puzzle. Remoraid appears once, Bruxish twice, Qwilfish eight times, and Clamperl zero times across all 983 references; none appears in Battles 1-6. The mature OCIC quartet remains preserved for a later tournament-style opponent instead of being lost.
-
-**How it behaves:** Native doubles scoring understands Water Spout's HP scaling, Choice locking, Dazzling, Intimidate, Shell Smash, Muddy Water, Protect, and Thunder Wave. Darian adds HP awareness, smart switching, first-turn setup preference, and contextual speed control. Neither wave is scripted: Remoraid can change its Choice lock, Bruxish can attack or Taunt, and Clamperl's Smash remains interruptible.
-
-**Why it is hard:** 4 fully authored Pokémon, average BST 397.5, average cap offset +1.25, ace offset +3, and 100% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Dominik (20% species overlap). Its species appear across an average of 3.5 unrelated trainer families.
-
-**Counterplay:** Any normal-speed hit weakens Water Spout; Storm Drain, Water Absorb, Dry Skin, Water resistance, Protect, Wide Guard where legal, or removing Remoraid's Scarf punish the first cast. Dazzling blocks priority but not ordinary attacks. Taunt, a double target, special pressure, Haze, Clear Smog, Trick Room, or phazing stops or reverses Clamperl; Grass and Electric attacks remain strong, while Qwilfish's Poison coverage and Clamperl's Ice Beam stop one-button sweeping. No exact capture or turn sequence is required.
-
-**Manual closure:** Battle 7 is 10/10 because four stage-legal fish create two readable but different doubles waves: protect the first Water Spout, then buy a Shell Smash. Low raw BSTs justify the level-17 and level-16 offsets, while broad move, ability, item, status, weather, and speed-control answers keep the fight severe without becoming a lock-and-key puzzle.
+**Manual closure:** Battle 28 is 10/10 because all 21 starter choices receive a legal, understandable middle-stage continuation while the three shared companions make the fight about the whole team. Levels 21-22, four distinct items, branch-safe native AI, truthful dialogue, and broad weather, item, status, speed, type, and focus-fire counterplay make the optional rival 9.0/10 without overfitting one starter.
 
 | # | Pokémon | Level | Item | Ability | Role | Moves |
 | ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Remoraid | 17 (cap +3) | Choice Scarf | Hustle | Choice-locked breaker | Water Spout, Seed Bomb, Fire Blast, Hidden Power |
-| 2 | Bruxish | 14 (cap +0) | Expert Belt | Dazzling | protected attacker | Psychic Fangs, Crunch, Taunt, Protect |
-| 3 | Qwilfish | 14 (cap +0) | Sitrus Berry | Intimidate | speed control | Thunder Wave, Aqua Jet, Poison Jab, Liquidation |
-| 4 | Clamperl | 16 (cap +2) | Focus Sash | Shell Armor | setup attacker | Shell Smash, Muddy Water, Ice Beam, Protect |
+| 1 | Castform | 15 (cap +1) | Focus Sash | Forecast | speed control | Sunny Day, Weather Ball, Icy Wind, Protect |
+| 2 | Grovyle | 16 (cap +2) | Eviolite | Overgrow | protected attacker | Grass Pledge, Solar Beam, Seed Bomb, Protect |
+| 3 | Sneasel | 15 (cap +1) | Life Orb | Inner Focus | coverage attacker | Fake Out, Feint, Knock Off, Ice Punch |
+| 4 | Rotom | 16 (cap +2) | Sitrus Berry | Levitate | protected attacker | Volt Switch, Will O Wisp, Hex, Protect |
 
-## 024. Grunt — Petalburg Woods
+## 021. Brendan — Route 104 | Rustboro City
 
-**Required · Double · Cap 14 · Extreme 84/100 · Uniqueness 98/100**
+**Required Branch · Double · Cap 14 · Extreme 90/100 · Uniqueness 36/100**
 
-**Theme:** active speed control + status control
+**Theme:** Fake Out tempo + active speed control + pivot control
 
-Focus Sash Prankster Purrloin and Eviolite Adaptability Skrelp open the smash-and-grab: Fake Tears amplifies special pressure, Thunder Wave and Icy Wind contest speed, Encore punishes passive turns, and Knock Off starts the robbery theme. Choice Band Adaptability Corphish brings priority and immediate commitment; Life Orb Contrary Inkay is the sole snowball, raising Attack and Defense only while using Superpower. This is the one early smash-and-grab battle: three Knock Off users are intentional because the Grunt is literally stealing papers and valuables. None of the four species appears in Battles 1-9, the team uses no weather, Web, redirection, Fake Out, Trick Room, safe Explosion, or free setup move, and the story dialogue already fits a coordinated multi-Pokémon ambush.
+Focus Sash Forecast Castform manually announces the branch's weather. The runtime-generated level-22 Eviolite middle starter is always the same-generation elemental counter to the player's chosen starter: Fire receives sun plus Fire Pledge/Heat Wave/Flare Blitz, Water receives rain plus Water Pledge/Icy Wind/Waterfall, and Grass receives sun plus Grass Pledge/Solar Beam/Seed Bomb. Life Orb Sneasel supplies Fake Out, Feint, Knock Off, and Ice Punch; Sitrus Rotom burns into Hex and pivots with Volt Switch. The rival plans for one starter branch, not the player's whole six. This is Verdant's only dynamic 21-starter forecast battle. Castform, Sneasel, and Rotom do not appear in Battles 1-27; the starter family is the deliberate narrative continuation of Battle 1 rather than incidental reuse. Manual branch weather differs from prior automatic weather speed cores and uses no Mega.
 
-**How it behaves:** Foe-aware smart switching handles immunities and Choice lock. Contextual speed control scores Thunder Wave and Icy Wind, while the first-turn setup preference makes Purrloin consider Fake Tears or Encore without forcing either. Contrary Superpower, Adaptability, priority, Protect, and Knock Off use native scoring; no battle script dictates a move or target.
+**How it behaves:** All six source records use identical guarded-double, smart-switching, partner, field, and speed-control flags. Existing weather logic values Sun beside Fire or Solar Beam and Rain beside Water; Icy Wind, Forecast, Weather Ball, Fake Out, Feint, Volt Switch, burn, Hex, Eviolite, and Protect remain native. A runtime hook replaces only party slot 1 with the audited middle evolution of the same-generation counter-starter and never mutates player starter state.
 
-**Why it is hard:** 4 fully authored Pokémon, average BST 299.2, average cap offset +1.25, ace offset +2, and 100% held-item coverage.
+**Why it is hard:** 4 fully authored Pokémon, average BST 438.8, average cap offset +1.5, ace offset +2, and 100% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: none (0% species overlap). Its species appear across an average of 1.0 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: May (100% species overlap). Its species appear across an average of 4.5 unrelated trainer families.
 
-**Counterplay:** Early Dark types ignore Prankster-targeted status; Taunt or focused damage removes Purrloin, while Electric, Grass, Ground, and Psychic coverage pressure the aquatic or Poison members. Fairy, Bug, and Fighting attacks check the thieves; burn, Intimidate, Haze, Clear Smog, Unaware, Protect, and priority limit Inkay. Corphish's Choice lock is exploitable, and no one attack hits all four cleanly. The fight supports broad team-building rather than a single required capture.
+**Counterplay:** Fake Out, Taunt, sleep, focus fire, immediate weather replacement, Cloud Nine, Air Lock, Protect, or removing Castform's Sash can break the forecast. Knock Off removes Eviolite; status, speed reversal, screens, typed resistances, and focus fire answer every middle starter. Sneasel is fragile and takes Life Orb recoil. Dark, Ghost, Mold Breaker Ground pressure, status prevention, and denying burn reduce Rotom's Hex line. The player can win through the rest of the party rather than one exact starter response.
 
-**Manual closure:** Battle 10 is 10/10 because its mechanics and story say the same thing: disrupt preparation, strip resources, and convert one opening into a robbery. Four first-stage Pokémon at levels 14-16 create severe but readable special, physical, priority, speed, and Contrary pressure. Its 8.4/10 difficulty has numerous independent answers and introduces Team Aqua without premature evolutions or a Mega.
+**Manual closure:** Battle 28 is 10/10 because all 21 starter choices receive a legal, understandable middle-stage continuation while the three shared companions make the fight about the whole team. Levels 21-22, four distinct items, branch-safe native AI, truthful dialogue, and broad weather, item, status, speed, type, and focus-fire counterplay make the optional rival 9.0/10 without overfitting one starter.
 
 | # | Pokémon | Level | Item | Ability | Role | Moves |
 | ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Purrloin | 14 (cap +0) | Focus Sash | Prankster | speed control | Fake Tears, Thunder Wave, Encore, Knock Off |
-| 2 | Skrelp | 15 (cap +1) | Eviolite | Adaptability | speed control | Sludge Bomb, Scald, Icy Wind, Protect |
-| 3 | Corphish | 16 (cap +2) | Choice Band | Adaptability | Choice-locked breaker | Crabhammer, Knock Off, Aqua Jet, Superpower |
-| 4 | Inkay | 16 (cap +2) | Life Orb | Contrary | coverage attacker | Superpower, Psycho Cut, Knock Off, Rock Slide |
+| 1 | Castform | 15 (cap +1) | Focus Sash | Forecast | speed control | Sunny Day, Weather Ball, Icy Wind, Protect |
+| 2 | Combusken | 16 (cap +2) | Eviolite | Blaze | protected attacker | Fire Pledge, Heat Wave, Flare Blitz, Protect |
+| 3 | Sneasel | 15 (cap +1) | Life Orb | Inner Focus | coverage attacker | Fake Out, Feint, Knock Off, Ice Punch |
+| 4 | Rotom | 16 (cap +2) | Sitrus Berry | Levitate | protected attacker | Volt Switch, Will O Wisp, Hex, Protect |
 
-## 025. Lyle — Petalburg Woods
+## 022. Brendan — Route 104 | Rustboro City
+
+**Required Branch · Double · Cap 14 · Extreme 90/100 · Uniqueness 36/100**
+
+**Theme:** Fake Out tempo + active speed control + pivot control
+
+Focus Sash Forecast Castform manually announces the branch's weather. The runtime-generated level-22 Eviolite middle starter is always the same-generation elemental counter to the player's chosen starter: Fire receives sun plus Fire Pledge/Heat Wave/Flare Blitz, Water receives rain plus Water Pledge/Icy Wind/Waterfall, and Grass receives sun plus Grass Pledge/Solar Beam/Seed Bomb. Life Orb Sneasel supplies Fake Out, Feint, Knock Off, and Ice Punch; Sitrus Rotom burns into Hex and pivots with Volt Switch. The rival plans for one starter branch, not the player's whole six. This is Verdant's only dynamic 21-starter forecast battle. Castform, Sneasel, and Rotom do not appear in Battles 1-27; the starter family is the deliberate narrative continuation of Battle 1 rather than incidental reuse. Manual branch weather differs from prior automatic weather speed cores and uses no Mega.
+
+**How it behaves:** All six source records use identical guarded-double, smart-switching, partner, field, and speed-control flags. Existing weather logic values Sun beside Fire or Solar Beam and Rain beside Water; Icy Wind, Forecast, Weather Ball, Fake Out, Feint, Volt Switch, burn, Hex, Eviolite, and Protect remain native. A runtime hook replaces only party slot 1 with the audited middle evolution of the same-generation counter-starter and never mutates player starter state.
+
+**Why it is hard:** 4 fully authored Pokémon, average BST 438.8, average cap offset +1.5, ace offset +2, and 100% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: May (100% species overlap). Its species appear across an average of 4.5 unrelated trainer families.
+
+**Counterplay:** Fake Out, Taunt, sleep, focus fire, immediate weather replacement, Cloud Nine, Air Lock, Protect, or removing Castform's Sash can break the forecast. Knock Off removes Eviolite; status, speed reversal, screens, typed resistances, and focus fire answer every middle starter. Sneasel is fragile and takes Life Orb recoil. Dark, Ghost, Mold Breaker Ground pressure, status prevention, and denying burn reduce Rotom's Hex line. The player can win through the rest of the party rather than one exact starter response.
+
+**Manual closure:** Battle 28 is 10/10 because all 21 starter choices receive a legal, understandable middle-stage continuation while the three shared companions make the fight about the whole team. Levels 21-22, four distinct items, branch-safe native AI, truthful dialogue, and broad weather, item, status, speed, type, and focus-fire counterplay make the optional rival 9.0/10 without overfitting one starter.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Castform | 15 (cap +1) | Focus Sash | Forecast | speed control | Rain Dance, Weather Ball, Icy Wind, Protect |
+| 2 | Marshtomp | 16 (cap +2) | Eviolite | Torrent | speed control | Water Pledge, Icy Wind, Waterfall, Protect |
+| 3 | Sneasel | 15 (cap +1) | Life Orb | Inner Focus | coverage attacker | Fake Out, Feint, Knock Off, Ice Punch |
+| 4 | Rotom | 16 (cap +2) | Sitrus Berry | Levitate | protected attacker | Volt Switch, Will O Wisp, Hex, Protect |
+
+## 023. Brendan — Route 104 | Rustboro City
+
+**Required Branch · Double · Cap 14 · Extreme 90/100 · Uniqueness 36/100**
+
+**Theme:** Fake Out tempo + active speed control + pivot control
+
+Focus Sash Forecast Castform manually announces the branch's weather. The runtime-generated level-22 Eviolite middle starter is always the same-generation elemental counter to the player's chosen starter: Fire receives sun plus Fire Pledge/Heat Wave/Flare Blitz, Water receives rain plus Water Pledge/Icy Wind/Waterfall, and Grass receives sun plus Grass Pledge/Solar Beam/Seed Bomb. Life Orb Sneasel supplies Fake Out, Feint, Knock Off, and Ice Punch; Sitrus Rotom burns into Hex and pivots with Volt Switch. The rival plans for one starter branch, not the player's whole six. This is Verdant's only dynamic 21-starter forecast battle. Castform, Sneasel, and Rotom do not appear in Battles 1-27; the starter family is the deliberate narrative continuation of Battle 1 rather than incidental reuse. Manual branch weather differs from prior automatic weather speed cores and uses no Mega.
+
+**How it behaves:** All six source records use identical guarded-double, smart-switching, partner, field, and speed-control flags. Existing weather logic values Sun beside Fire or Solar Beam and Rain beside Water; Icy Wind, Forecast, Weather Ball, Fake Out, Feint, Volt Switch, burn, Hex, Eviolite, and Protect remain native. A runtime hook replaces only party slot 1 with the audited middle evolution of the same-generation counter-starter and never mutates player starter state.
+
+**Why it is hard:** 4 fully authored Pokémon, average BST 438.8, average cap offset +1.5, ace offset +2, and 100% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: May (100% species overlap). Its species appear across an average of 4.5 unrelated trainer families.
+
+**Counterplay:** Fake Out, Taunt, sleep, focus fire, immediate weather replacement, Cloud Nine, Air Lock, Protect, or removing Castform's Sash can break the forecast. Knock Off removes Eviolite; status, speed reversal, screens, typed resistances, and focus fire answer every middle starter. Sneasel is fragile and takes Life Orb recoil. Dark, Ghost, Mold Breaker Ground pressure, status prevention, and denying burn reduce Rotom's Hex line. The player can win through the rest of the party rather than one exact starter response.
+
+**Manual closure:** Battle 28 is 10/10 because all 21 starter choices receive a legal, understandable middle-stage continuation while the three shared companions make the fight about the whole team. Levels 21-22, four distinct items, branch-safe native AI, truthful dialogue, and broad weather, item, status, speed, type, and focus-fire counterplay make the optional rival 9.0/10 without overfitting one starter.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Castform | 15 (cap +1) | Focus Sash | Forecast | speed control | Sunny Day, Weather Ball, Icy Wind, Protect |
+| 2 | Grovyle | 16 (cap +2) | Eviolite | Overgrow | protected attacker | Grass Pledge, Solar Beam, Seed Bomb, Protect |
+| 3 | Sneasel | 15 (cap +1) | Life Orb | Inner Focus | coverage attacker | Fake Out, Feint, Knock Off, Ice Punch |
+| 4 | Rotom | 16 (cap +2) | Sitrus Berry | Levitate | protected attacker | Volt Switch, Will O Wisp, Hex, Protect |
+
+## 024. Lyle — Petalburg Woods
 
 **Optional · Double · Cap 14 · Extreme 84/100 · Uniqueness 98/100**
 
@@ -615,6 +590,31 @@ Normal Gem Sturdy Pineco and Light Clay Telepathy Dottler lead. Dottler chooses 
 | 2 | Dottler | 15 (cap +1) | Light Clay | Telepathy | disruption and support | Reflect, Light Screen, Psychic, Struggle Bug |
 | 3 | Dwebble | 16 (cap +2) | Eviolite | Sturdy | protected attacker | Rock Slide, Knock Off, X Scissor, Protect |
 | 4 | Joltik | 17 (cap +3) | Life Orb | Compound Eyes | coverage attacker | Thunder, Bug Buzz, Energy Ball, Volt Switch |
+
+## 025. Grunt — Petalburg Woods
+
+**Required · Double · Cap 14 · Extreme 84/100 · Uniqueness 98/100**
+
+**Theme:** active speed control + status control
+
+Focus Sash Prankster Purrloin and Eviolite Adaptability Skrelp open the smash-and-grab: Fake Tears amplifies special pressure, Thunder Wave and Icy Wind contest speed, Encore punishes passive turns, and Knock Off starts the robbery theme. Choice Band Adaptability Corphish brings priority and immediate commitment; Life Orb Contrary Inkay is the sole snowball, raising Attack and Defense only while using Superpower. This is the one early smash-and-grab battle: three Knock Off users are intentional because the Grunt is literally stealing papers and valuables. None of the four species appears in Battles 1-9, the team uses no weather, Web, redirection, Fake Out, Trick Room, safe Explosion, or free setup move, and the story dialogue already fits a coordinated multi-Pokémon ambush.
+
+**How it behaves:** Foe-aware smart switching handles immunities and Choice lock. Contextual speed control scores Thunder Wave and Icy Wind, while the first-turn setup preference makes Purrloin consider Fake Tears or Encore without forcing either. Contrary Superpower, Adaptability, priority, Protect, and Knock Off use native scoring; no battle script dictates a move or target.
+
+**Why it is hard:** 4 fully authored Pokémon, average BST 299.2, average cap offset +1.25, ace offset +2, and 100% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: none (0% species overlap). Its species appear across an average of 1.0 unrelated trainer families.
+
+**Counterplay:** Early Dark types ignore Prankster-targeted status; Taunt or focused damage removes Purrloin, while Electric, Grass, Ground, and Psychic coverage pressure the aquatic or Poison members. Fairy, Bug, and Fighting attacks check the thieves; burn, Intimidate, Haze, Clear Smog, Unaware, Protect, and priority limit Inkay. Corphish's Choice lock is exploitable, and no one attack hits all four cleanly. The fight supports broad team-building rather than a single required capture.
+
+**Manual closure:** Battle 10 is 10/10 because its mechanics and story say the same thing: disrupt preparation, strip resources, and convert one opening into a robbery. Four first-stage Pokémon at levels 14-16 create severe but readable special, physical, priority, speed, and Contrary pressure. Its 8.4/10 difficulty has numerous independent answers and introduces Team Aqua without premature evolutions or a Mega.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Purrloin | 14 (cap +0) | Focus Sash | Prankster | speed control | Fake Tears, Thunder Wave, Encore, Knock Off |
+| 2 | Skrelp | 15 (cap +1) | Eviolite | Adaptability | speed control | Sludge Bomb, Scald, Icy Wind, Protect |
+| 3 | Corphish | 16 (cap +2) | Choice Band | Adaptability | Choice-locked breaker | Crabhammer, Knock Off, Aqua Jet, Superpower |
+| 4 | Inkay | 16 (cap +2) | Life Orb | Contrary | coverage attacker | Superpower, Psycho Cut, Knock Off, Rock Slide |
 
 ## 026. James — Petalburg Woods
 
@@ -641,7 +641,82 @@ Sitrus Celebi and Eviolite Shelmet form the forest circle: Perish Song starts a 
 | 3 | Nincada | 17 (cap +3) | Focus Sash | Compound Eyes | protected attacker | X Scissor, Dig, Toxic, Protect |
 | 4 | Heracross | 15 (cap +1) | Choice Scarf | Moxie | Choice-locked breaker | Megahorn, Knock Off, Rock Slide, Close Combat |
 
-## 027. Roxanne — Rustboro City Gym
+## 027. Josh — Rustboro City Gym
+
+**Optional · Double · Cap 14 · Extreme 84/100 · Uniqueness 89/100**
+
+**Theme:** Guard Split transfer + Rock pressure
+
+Mental Herb Sturdy Shuckle and Sitrus Sheer Force Cranidos open the Gym's geology lab. Guard Split averages Shuckle's enormous defenses with Cranidos's frailty, turning the fossil breaker into a temporary tank while making Shuckle much easier to remove; Helping Hand and Rock Tomb keep the donor useful. Eviolite Storm Drain Lileep catches the obvious Water attack and can convert it into Giga Drain, Ancient Power, or Earth Power pressure while Stockpile creates a separate denial target. Focus Sash Toxic Debris Glimmet supplies fast special Rock and Poison pressure, can use Rock Polish, and punishes careless physical damage with Toxic Spikes. This is Verdant's only defense-transfer geology lab and the first Rustboro Gym lesson. Shuckle, Cranidos, Lileep, and Glimmet do not appear in Battles 1-15. It uses no weather, Trick Room, Tailwind, Fake Out, redirection, dance, detonation, Perish timer, active trap, screen, item theft, Choice lock, friendly damage, Weakness Policy, Schooling, or prior Water Spout, Shell Smash, Power Spot, or Guard Split module. Toxic Spikes arise reactively from Toxic Debris rather than from another scripted hazard lead.
+
+**How it behaves:** Josh uses native doubles guards, foe and partner awareness, smart switching, first-turn setup, combo, and speed-control profiles. Guard Split scoring now recognizes a partner target only while Shuckle's combined defenses exceed that partner's; the combo profile gives that useful transfer a moderate bonus, and the condition becomes false after the stats equalize so it is not repeated. Rock Tomb, Helping Hand, Stockpile, Rock Polish, Storm Drain, Sturdy, Sheer Force, Toxic Debris, Sash, Eviolite, and Sitrus behavior remain native. No move, target, turn, or switch is forced.
+
+**Why it is hard:** 4 fully authored Pokémon, average BST 390.0, average cap offset +2.0, ace offset +3, and 100% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Ben (14% species overlap). Its species appear across an average of 1.8 unrelated trainer families.
+
+**Counterplay:** Immediate focus fire, Encore, Disable, phazing, or a second Taunt after the one-use Mental Herb can stop Guard Split; after it resolves, Shuckle has surrendered much of its own bulk. Burn, Intimidate, Fighting, Ground, Grass, Steel, Water, speed control, Wide Guard, or attacking Cranidos before the transfer answer the breaker. Storm Drain blocks lazy Water targeting but not Grass, Fighting, Ice, Bug, or Steel pressure on Lileep. Special attacks avoid Toxic Debris; priority, multihit attacks, Ground, Psychic, Steel, or focused damage remove Sash Glimmet. The player may deny the donor, race the recipient, exploit the weakened donor, route around Water, or manage the triggered hazard—there is no required catch or move order.
+
+**Manual closure:** Battle 16 is 10/10 because Josh's dialogue, four young mineral species, and actual turn decisions all teach the same lesson: apparent frailty can be redistributed. Levels 15-17, perfect spreads, four distinct items, mixed physical and special pressure, Water redirection, speed control, a one-use Taunt answer, a triggered hazard, and broad denial, type, status, priority, spread, and focus-fire counterplay make it an 8.4/10 optional double without a hidden forced solution.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Shuckle | 15 (cap +1) | Mental Herb | Sturdy | disruption and support | Guard Split, Helping Hand, Rock Tomb, Protect |
+| 2 | Cranidos | 17 (cap +3) | Sitrus Berry | Sheer Force | protected attacker | Rock Slide, Zen Headbutt, Fire Punch, Protect |
+| 3 | Lileep | 16 (cap +2) | Eviolite | Storm Drain | coverage attacker | Giga Drain, Ancient Power, Earth Power, Stockpile |
+| 4 | Glimmet | 16 (cap +2) | Focus Sash | Toxic Debris | coverage attacker | Power Gem, Sludge Bomb, Rock Polish, Acid Spray |
+
+## 028. Tommy — Rustboro City Gym
+
+**Optional · Double · Cap 14 · Extreme 88/100 · Uniqueness 88/100**
+
+**Theme:** Instruct repetition + Rock pressure + spread + Wide Guard
+
+Sitrus Inner Focus Oranguru and Life Orb Strong Jaw Tyrunt open Tommy's repeat-after-me lesson. Tyrunt's invested Speed lets it choose Rock Slide before slower Oranguru; Instruct can then repeat that spread move immediately, while Psychic, Foul Play, Dragon Claw, Fire Fang, and lead Protects keep the opening functional when repetition is denied. Eviolite Sturdy Nosepass adds Wide Guard and Thunder Wave. Expert Belt Tough Claws Binacle closes with single-target Water, Fighting, Rock, and Ghost coverage rather than another setup or Rock Slide module. This is Verdant's only repeat-after-me battle and its only early team whose main threat depends on preserving action order between a teacher and pupil. Oranguru, Tyrunt, Nosepass, and Binacle do not appear in Battles 1-16. It uses no weather, terrain, Trick Room, Tailwind, Fake Out, redirection, dance, detonation, Perish timer, trap, screen, item theft, Choice lock, friendly damage, defense transfer, Toxic Debris, Schooling, or prior Water Spout, Shell Smash, Power Spot, or Guard Split module.
+
+**How it behaves:** Tommy uses the native doubles guard, foe and partner awareness, smart switching, combo, and speed-control profiles. Existing partner scoring already permits Instruct when the chosen partner move is spread; the combo profile now adds a contextual bonus only when a living partner has actually selected a both-foes or foes-and-ally move. It does not force Instruct, Rock Slide, a target, a turn, or a switch. Wide Guard, Strong Jaw, Tough Claws, Sturdy, Life Orb, Eviolite, Sitrus, Thunder Wave, and Protect remain native.
+
+**Why it is hard:** 4 fully authored Pokémon, average BST 383.2, average cap offset +2.25, ace offset +3, and 100% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Alexis (14% species overlap). Its species appear across an average of 2.2 unrelated trainer families.
+
+**Counterplay:** Taunt, Disable, Encore, Imprison, sleep, paralysis, speed reversal, or removing either half stops Instruct; Dark, Bug, and Ghost pressure Oranguru, while Fighting, Ground, Ice, Steel, Dragon, and Fairy pressure Tyrunt. Wide Guard, Protect, Rock resistance, Intimidate, burn, screens, or ordinary focus fire contain the repeated Rock Slide without requiring a single species. Fighting, Ground, Grass, Steel, and Water pressure Nosepass, while Electric, Grass, Ground, Fighting, and strong neutral damage answer Binacle. The player may break the teacher, break the pupil, reverse their action order, guard the spread move, or out-position the reserves.
+
+**Manual closure:** Battle 17 is 10/10 because Tommy's school dialogue and battle logic are the same idea: Tyrunt demonstrates a move, Oranguru makes it repeat, and the reserves punish a one-note response. Four stage-valid Pokémon at levels 15-17, perfect spreads, distinct items, mixed support and offense, a clear action-order dependency, and broad denial, type, status, speed, spread-guard, item, and focus-fire counterplay make it an 8.8/10 optional double without a forced solution.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Oranguru | 15 (cap +1) | Sitrus Berry | Inner Focus | protected attacker | Instruct, Psychic, Foul Play, Protect |
+| 2 | Tyrunt | 17 (cap +3) | Life Orb | Strong Jaw | protected attacker | Rock Slide, Dragon Claw, Fire Fang, Protect |
+| 3 | Nosepass | 16 (cap +2) | Eviolite | Sturdy | speed control | Wide Guard, Thunder Wave, Power Gem, Earth Power |
+| 4 | Binacle | 17 (cap +3) | Expert Belt | Tough Claws | coverage attacker | Razor Shell, Cross Chop, Stone Edge, Shadow Claw |
+
+## 029. Marc — Rustboro City Gym
+
+**Optional · Single · Cap 14 · Extreme 82/100 · Uniqueness 85/100**
+
+**Theme:** Choice lock + Cursed Body + Earthquake immunity
+
+Rocky Helmet Sturdy Shieldon opens the strata by establishing Stealth Rock on global turn zero, while Metal Burst, Rock Tomb, and Iron Head punish a careless hit. Choice Scarf Unaware Woobat then Tricks a move lock onto the player or pivots with U-turn while retaining Psychic and Air Slash. Eviolite Cursed Body Galarian Corsola can disable that locked move, lower Attack and heal with Strength Sap, burn into Hex, or erase boosts with Haze, making a switch through the rocks attractive but costly. Level-17 Life Orb Unnerve Aerodactyl closes with fast Rock, Ground, Flying multihit, and Water coverage. This is Verdant's only shifting-strata singles battle and first authored sequence in which a Choice lock can collide with Cursed Body across an entry hazard. Shieldon, Woobat, Galarian Corsola, and Aerodactyl do not appear in Battles 1-17. It uses no weather, terrain, Trick Room, Tailwind, Instruct, Guard Split, dance, detonation, Perish timer, active trap, screen, redirection, friendly damage, Weakness Policy, Schooling, or repeated early setup sweeper; Stealth Rock is a deterministic layer supporting a switch puzzle rather than another generic hazard lead.
+
+**How it behaves:** Marc remains a native singles trainer with smart switching, first-turn setup, and HP-aware profiles. Setup scoring makes lead Shieldon's Stealth Rock plausible only on global turn zero; native Trick logic values exchanging a Choice Scarf and rejects Sticky Hold or otherwise invalid targets. Native HP and viability checks understand Strength Sap, Will-O-Wisp, Hex, Haze, Metal Burst, U-turn, Cursed Body, Sturdy, Rocky Helmet, Eviolite, and Life Orb. No move, switch, item exchange, or turn is forced.
+
+**Why it is hard:** 4 fully authored Pokémon, average BST 399.5, average cap offset +2.0, ace offset +3, and 100% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Chip (17% species overlap). Its species appear across an average of 3.0 unrelated trainer families.
+
+**Counterplay:** Taunt, Magic Bounce, multihit attacks, Mold Breaker, status, hazard removal, or attacking without contact limit Shieldon's Sturdy setup and Rocky Helmet. Knock Off, Sticky Hold, an itemless target, Protect scouting, Dark or Electric pressure, or accepting and exploiting the known Choice lock answer Woobat. Taunt, Knock Off, special Dark or Ghost attacks, Toxic, Heal Block, or strong special focus break Corsola; Haze also prevents it from rewarding a setup-only plan. Water, Electric, Ice, Rock, Steel, priority, burn, Intimidate, or preserving a fast revenge killer answer Aerodactyl. No one move or catch solves all four layers.
+
+**Manual closure:** Battle 18 is 10/10 because Marc's geological layers are literal battle layers: sharp stones, a stolen commitment, a disabled locked move, then a rare fossil closer. Four stage-valid Pokémon at levels 15-17, perfect spreads, four distinct items, reliable sequencing, mixed offense and control, and broad item, status, hazard, type, contact, priority, and tempo counterplay make it an 8.2/10 singles pacing fight without a forced solution.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Shieldon | 15 (cap +1) | Rocky Helmet | Sturdy | disruption and support | Stealth Rock, Metal Burst, Rock Tomb, Iron Head |
+| 2 | Woobat | 16 (cap +2) | Choice Scarf | Unaware | Choice-locked breaker | Trick, U Turn, Psychic, Air Slash |
+| 3 | Corsola (Galarian) | 16 (cap +2) | Eviolite | Cursed Body | disruption and support | Strength Sap, Will O Wisp, Hex, Haze |
+| 4 | Aerodactyl | 17 (cap +3) | Life Orb | Unnerve | coverage attacker | Stone Edge, Earthquake, Dual Wingbeat, Aqua Tail |
+
+## 030. Roxanne — Rustboro City Gym
 
 **Required · Double · Cap 14 · Extreme 100/100 · Uniqueness 94/100**
 
@@ -667,81 +742,6 @@ Mental Herb Prankster Klefki and Eviolite Vital Spirit Rockruff open the protect
 | 4 | Bonsly | 18 (cap +4) | Life Orb | Rock Head | coverage attacker | Rock Slide, Double Edge, Low Kick, Sucker Punch |
 | 5 | Maractus | 18 (cap +4) | Assault Vest | Water Absorb | coverage attacker | Seed Bomb, Sucker Punch, Drain Punch, Poison Jab |
 | 6 | Regirock | 19 (cap +5) | Expert Belt | Clear Body | rare centerpiece | Rock Slide, Drain Punch, Thunder Punch, Iron Head |
-
-## 028. Josh — Rustboro City Gym
-
-**Optional · Double · Cap 14 · Extreme 84/100 · Uniqueness 89/100**
-
-**Theme:** Guard Split transfer + Rock pressure
-
-Mental Herb Sturdy Shuckle and Sitrus Sheer Force Cranidos open the Gym's geology lab. Guard Split averages Shuckle's enormous defenses with Cranidos's frailty, turning the fossil breaker into a temporary tank while making Shuckle much easier to remove; Helping Hand and Rock Tomb keep the donor useful. Eviolite Storm Drain Lileep catches the obvious Water attack and can convert it into Giga Drain, Ancient Power, or Earth Power pressure while Stockpile creates a separate denial target. Focus Sash Toxic Debris Glimmet supplies fast special Rock and Poison pressure, can use Rock Polish, and punishes careless physical damage with Toxic Spikes. This is Verdant's only defense-transfer geology lab and the first Rustboro Gym lesson. Shuckle, Cranidos, Lileep, and Glimmet do not appear in Battles 1-15. It uses no weather, Trick Room, Tailwind, Fake Out, redirection, dance, detonation, Perish timer, active trap, screen, item theft, Choice lock, friendly damage, Weakness Policy, Schooling, or prior Water Spout, Shell Smash, Power Spot, or Guard Split module. Toxic Spikes arise reactively from Toxic Debris rather than from another scripted hazard lead.
-
-**How it behaves:** Josh uses native doubles guards, foe and partner awareness, smart switching, first-turn setup, combo, and speed-control profiles. Guard Split scoring now recognizes a partner target only while Shuckle's combined defenses exceed that partner's; the combo profile gives that useful transfer a moderate bonus, and the condition becomes false after the stats equalize so it is not repeated. Rock Tomb, Helping Hand, Stockpile, Rock Polish, Storm Drain, Sturdy, Sheer Force, Toxic Debris, Sash, Eviolite, and Sitrus behavior remain native. No move, target, turn, or switch is forced.
-
-**Why it is hard:** 4 fully authored Pokémon, average BST 390.0, average cap offset +2.0, ace offset +3, and 100% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Ben (14% species overlap). Its species appear across an average of 1.8 unrelated trainer families.
-
-**Counterplay:** Immediate focus fire, Encore, Disable, phazing, or a second Taunt after the one-use Mental Herb can stop Guard Split; after it resolves, Shuckle has surrendered much of its own bulk. Burn, Intimidate, Fighting, Ground, Grass, Steel, Water, speed control, Wide Guard, or attacking Cranidos before the transfer answer the breaker. Storm Drain blocks lazy Water targeting but not Grass, Fighting, Ice, Bug, or Steel pressure on Lileep. Special attacks avoid Toxic Debris; priority, multihit attacks, Ground, Psychic, Steel, or focused damage remove Sash Glimmet. The player may deny the donor, race the recipient, exploit the weakened donor, route around Water, or manage the triggered hazard—there is no required catch or move order.
-
-**Manual closure:** Battle 16 is 10/10 because Josh's dialogue, four young mineral species, and actual turn decisions all teach the same lesson: apparent frailty can be redistributed. Levels 15-17, perfect spreads, four distinct items, mixed physical and special pressure, Water redirection, speed control, a one-use Taunt answer, a triggered hazard, and broad denial, type, status, priority, spread, and focus-fire counterplay make it an 8.4/10 optional double without a hidden forced solution.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Shuckle | 15 (cap +1) | Mental Herb | Sturdy | disruption and support | Guard Split, Helping Hand, Rock Tomb, Protect |
-| 2 | Cranidos | 17 (cap +3) | Sitrus Berry | Sheer Force | protected attacker | Rock Slide, Zen Headbutt, Fire Punch, Protect |
-| 3 | Lileep | 16 (cap +2) | Eviolite | Storm Drain | coverage attacker | Giga Drain, Ancient Power, Earth Power, Stockpile |
-| 4 | Glimmet | 16 (cap +2) | Focus Sash | Toxic Debris | coverage attacker | Power Gem, Sludge Bomb, Rock Polish, Acid Spray |
-
-## 029. Tommy — Rustboro City Gym
-
-**Optional · Double · Cap 14 · Extreme 88/100 · Uniqueness 88/100**
-
-**Theme:** Instruct repetition + Rock pressure + spread + Wide Guard
-
-Sitrus Inner Focus Oranguru and Life Orb Strong Jaw Tyrunt open Tommy's repeat-after-me lesson. Tyrunt's invested Speed lets it choose Rock Slide before slower Oranguru; Instruct can then repeat that spread move immediately, while Psychic, Foul Play, Dragon Claw, Fire Fang, and lead Protects keep the opening functional when repetition is denied. Eviolite Sturdy Nosepass adds Wide Guard and Thunder Wave. Expert Belt Tough Claws Binacle closes with single-target Water, Fighting, Rock, and Ghost coverage rather than another setup or Rock Slide module. This is Verdant's only repeat-after-me battle and its only early team whose main threat depends on preserving action order between a teacher and pupil. Oranguru, Tyrunt, Nosepass, and Binacle do not appear in Battles 1-16. It uses no weather, terrain, Trick Room, Tailwind, Fake Out, redirection, dance, detonation, Perish timer, trap, screen, item theft, Choice lock, friendly damage, defense transfer, Toxic Debris, Schooling, or prior Water Spout, Shell Smash, Power Spot, or Guard Split module.
-
-**How it behaves:** Tommy uses the native doubles guard, foe and partner awareness, smart switching, combo, and speed-control profiles. Existing partner scoring already permits Instruct when the chosen partner move is spread; the combo profile now adds a contextual bonus only when a living partner has actually selected a both-foes or foes-and-ally move. It does not force Instruct, Rock Slide, a target, a turn, or a switch. Wide Guard, Strong Jaw, Tough Claws, Sturdy, Life Orb, Eviolite, Sitrus, Thunder Wave, and Protect remain native.
-
-**Why it is hard:** 4 fully authored Pokémon, average BST 383.2, average cap offset +2.25, ace offset +3, and 100% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Alexis (14% species overlap). Its species appear across an average of 2.2 unrelated trainer families.
-
-**Counterplay:** Taunt, Disable, Encore, Imprison, sleep, paralysis, speed reversal, or removing either half stops Instruct; Dark, Bug, and Ghost pressure Oranguru, while Fighting, Ground, Ice, Steel, Dragon, and Fairy pressure Tyrunt. Wide Guard, Protect, Rock resistance, Intimidate, burn, screens, or ordinary focus fire contain the repeated Rock Slide without requiring a single species. Fighting, Ground, Grass, Steel, and Water pressure Nosepass, while Electric, Grass, Ground, Fighting, and strong neutral damage answer Binacle. The player may break the teacher, break the pupil, reverse their action order, guard the spread move, or out-position the reserves.
-
-**Manual closure:** Battle 17 is 10/10 because Tommy's school dialogue and battle logic are the same idea: Tyrunt demonstrates a move, Oranguru makes it repeat, and the reserves punish a one-note response. Four stage-valid Pokémon at levels 15-17, perfect spreads, distinct items, mixed support and offense, a clear action-order dependency, and broad denial, type, status, speed, spread-guard, item, and focus-fire counterplay make it an 8.8/10 optional double without a forced solution.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Oranguru | 15 (cap +1) | Sitrus Berry | Inner Focus | protected attacker | Instruct, Psychic, Foul Play, Protect |
-| 2 | Tyrunt | 17 (cap +3) | Life Orb | Strong Jaw | protected attacker | Rock Slide, Dragon Claw, Fire Fang, Protect |
-| 3 | Nosepass | 16 (cap +2) | Eviolite | Sturdy | speed control | Wide Guard, Thunder Wave, Power Gem, Earth Power |
-| 4 | Binacle | 17 (cap +3) | Expert Belt | Tough Claws | coverage attacker | Razor Shell, Cross Chop, Stone Edge, Shadow Claw |
-
-## 030. Marc — Rustboro City Gym
-
-**Optional · Single · Cap 14 · Extreme 82/100 · Uniqueness 85/100**
-
-**Theme:** Choice lock + Cursed Body + Earthquake immunity
-
-Rocky Helmet Sturdy Shieldon opens the strata by establishing Stealth Rock on global turn zero, while Metal Burst, Rock Tomb, and Iron Head punish a careless hit. Choice Scarf Unaware Woobat then Tricks a move lock onto the player or pivots with U-turn while retaining Psychic and Air Slash. Eviolite Cursed Body Galarian Corsola can disable that locked move, lower Attack and heal with Strength Sap, burn into Hex, or erase boosts with Haze, making a switch through the rocks attractive but costly. Level-17 Life Orb Unnerve Aerodactyl closes with fast Rock, Ground, Flying multihit, and Water coverage. This is Verdant's only shifting-strata singles battle and first authored sequence in which a Choice lock can collide with Cursed Body across an entry hazard. Shieldon, Woobat, Galarian Corsola, and Aerodactyl do not appear in Battles 1-17. It uses no weather, terrain, Trick Room, Tailwind, Instruct, Guard Split, dance, detonation, Perish timer, active trap, screen, redirection, friendly damage, Weakness Policy, Schooling, or repeated early setup sweeper; Stealth Rock is a deterministic layer supporting a switch puzzle rather than another generic hazard lead.
-
-**How it behaves:** Marc remains a native singles trainer with smart switching, first-turn setup, and HP-aware profiles. Setup scoring makes lead Shieldon's Stealth Rock plausible only on global turn zero; native Trick logic values exchanging a Choice Scarf and rejects Sticky Hold or otherwise invalid targets. Native HP and viability checks understand Strength Sap, Will-O-Wisp, Hex, Haze, Metal Burst, U-turn, Cursed Body, Sturdy, Rocky Helmet, Eviolite, and Life Orb. No move, switch, item exchange, or turn is forced.
-
-**Why it is hard:** 4 fully authored Pokémon, average BST 399.5, average cap offset +2.0, ace offset +3, and 100% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Chip (17% species overlap). Its species appear across an average of 3.0 unrelated trainer families.
-
-**Counterplay:** Taunt, Magic Bounce, multihit attacks, Mold Breaker, status, hazard removal, or attacking without contact limit Shieldon's Sturdy setup and Rocky Helmet. Knock Off, Sticky Hold, an itemless target, Protect scouting, Dark or Electric pressure, or accepting and exploiting the known Choice lock answer Woobat. Taunt, Knock Off, special Dark or Ghost attacks, Toxic, Heal Block, or strong special focus break Corsola; Haze also prevents it from rewarding a setup-only plan. Water, Electric, Ice, Rock, Steel, priority, burn, Intimidate, or preserving a fast revenge killer answer Aerodactyl. No one move or catch solves all four layers.
-
-**Manual closure:** Battle 18 is 10/10 because Marc's geological layers are literal battle layers: sharp stones, a stolen commitment, a disabled locked move, then a rare fossil closer. Four stage-valid Pokémon at levels 15-17, perfect spreads, four distinct items, reliable sequencing, mixed offense and control, and broad item, status, hazard, type, contact, priority, and tempo counterplay make it an 8.2/10 singles pacing fight without a forced solution.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Shieldon | 15 (cap +1) | Rocky Helmet | Sturdy | disruption and support | Stealth Rock, Metal Burst, Rock Tomb, Iron Head |
-| 2 | Woobat | 16 (cap +2) | Choice Scarf | Unaware | Choice-locked breaker | Trick, U Turn, Psychic, Air Slash |
-| 3 | Corsola (Galarian) | 16 (cap +2) | Eviolite | Cursed Body | disruption and support | Strength Sap, Will O Wisp, Hex, Haze |
-| 4 | Aerodactyl | 17 (cap +3) | Life Orb | Unnerve | coverage attacker | Stone Edge, Earthquake, Dual Wingbeat, Aqua Tail |
 
 # Knuckle Badge
 
@@ -795,29 +795,30 @@ Focus Sash Compound Eyes Vivillon and Eviolite Battery Charjabug open the swarm.
 | 3 | Sizzlipede | 22 (cap +2) | Sitrus Berry | Flash Fire | protected attacker | Fire Lash, Leech Life, Knock Off, Protect |
 | 4 | Scyther | 23 (cap +3) | Choice Band | Technician | Choice-locked breaker | Dual Wingbeat, Bug Bite, Quick Attack, Brick Break |
 
-## 033. Jerry — Route 116
+## 033. Karen — Route 116
 
-**Optional · Single · Cap 20 · Extreme 90/100 · Uniqueness 80/100**
+**Optional · Single · Cap 20 · Extreme 81/100 · Uniqueness 86/100**
 
-**Theme:** pivot control
+**Theme:** Earthquake immunity
 
-The joint branch now opens with the circuit it advertised: Terrain Extender Pincurchin uses Discharge beside level-24 Choice Band Motor Drive Klink, accelerating its immediate Gear Grind, Wild Charge, Return, or Rock Smash pressure without harming it. Janice's Life Orb Mimikyu attacks immediately behind Disguise, leaving Sitrus Unburden Swirlix as the composition's one setup clock. Jerry follows Klink with Fake Out and Encore Togedemaru, then Ground-covering Elekid. Each split half still has immediate damage, disruption, and a closer. This is Verdant's first Electric Terrain practical and its only native pair whose opening deliberately attacks its own immune partner. The former three parallel setup clocks are reduced to one later Swirlix clock. Pincurchin, Mimikyu, Swirlix, Togedemaru, Elekid, and Klink do not appear in Battles 1-25, and the fight repeats no weather, Gravity, Wonder Room, Trick Room, hazard, Anger Point, Battery, or Mega module.
+Focus Sash Analytic Elgyem opens Wonder Room, swapping Defense and Sp. Def for five turns. Eviolite Onix changes from a physical wall into a special wall and physical liability, while Sitrus Water Absorb Mantyke flips in the opposite direction. Life Orb Protean Kecleon closes by changing its own type and attack category through Shadow Sneak, Drain Punch, Ice Punch, and Thunder Punch. Simple Beam can remove a key ability but creates no lock. This is Verdant's only attack-category classroom and first finite Wonder Room puzzle. Elgyem, Onix, Mantyke, and Kecleon do not appear in Battles 1-21. It repeats no weather, terrain, hazard, Anger Point, Battery, Guard Split, Instruct, Trick Room, Shell Smash, or Mega module.
 
-**How it behaves:** Both trainers remain single-format three-member records for native pairing. Both halves now use partner-aware combo scoring, so Electric attacks into Motor Drive are valuable from the actual opening. The misleading global-turn-zero setup flags are removed: Mimikyu no longer sets up, Klink is Choice-locked, and later Swirlix relies on normal viability and HP-aware Belly Drum scoring. Electric Surge, terrain sleep prevention, Rising Voltage, Fake Out, Encore, Disguise, Belly Drum, Unburden, Motor Drive, and Choice lock remain native. No turn is forced.
+**How it behaves:** Karen remains a native singles trainer with smart switching, first-turn setup, and field-control profiles. Field control gives Wonder Room a strong bonus only on global turn zero while absent, and existing bad-move logic rejects it while active, so it is neither forced nor repeated. Protean, Water Absorb, Sturdy, Sash, Eviolite, Sitrus, Life Orb, phazing, and recovery remain native.
 
-**Why it is hard:** 3 fully authored Pokémon, average BST 378.3, average cap offset +3.0, ace offset +4, and 100% held-item coverage.
+**Why it is hard:** 4 fully authored Pokémon, average BST 383.8, average cap offset +2.0, ace offset +3, and 100% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Marcos (25% species overlap). Its species appear across an average of 3.0 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Jessica (17% species overlap). Its species appear across an average of 2.5 unrelated trainer families.
 
-**Counterplay:** Overwrite terrain, use Ground, Lightning Rod, Volt Absorb, Wide Guard, burn, Intimidate, or focused damage into the visible Pincurchin-Klink lead. Break Disguise and Sturdy with chip or multihit attacks; remove Air Balloon, Sitrus, Life Orb, Choice Band, or Terrain Extender; exploit Klink's move lock; and reserve Taunt, Encore, Haze, or phazing for Swirlix's single Belly Drum clock. Scald, Ice Punch, Fairy, Fighting, Steel, Poison, Ground, and Fire coverage keep one immunity from solving every slot.
+**Counterplay:** Taunt, focus fire, priority, sleep, or Encore can stop Elgyem; the player can also stall five turns, use mixed offense, or switch attack categories. During Wonder Room, hit Onix physically and Mantyke specially; outside it, reverse that plan. Water, Grass, Ice, Electric, Rock, status, phazing, item removal, and exploiting Kecleon's newly chosen type remain broad answers. No exact team or turn sequence is required.
 
-**Manual closure:** Battle 26's static re-audit makes the advertised circuit real on turn one and removes the redundant Mimikyu and Klink setup clocks. The joint fight remains an estimated 9.0, while Janice's 7.8 and Jerry's reordered, level-raised 7.7 branches clear the floor; runtime playtesting remains required before those estimates are observed results.
+**Manual closure:** Battle 22 is 10/10 because a single five-turn rule changes which attacks solve two opposite walls, then Protean tests whether the player is still reading categories and types. Legal levels 21-23, four distinct items, truthful teaching dialogue, and broad denial, timer, mixed-offense, type, status, and phazing counterplay make it an 8.1/10 single.
 
 | # | Pokémon | Level | Item | Ability | Role | Moves |
 | ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Klink | 24 (cap +4) | Choice Band | Motor Drive | Choice-locked breaker | Gear Grind, Wild Charge, Return, Rock Smash |
-| 2 | Togedemaru | 22 (cap +2) | Air Balloon | Sturdy | protected attacker | Fake Out, Zing Zap, Encore, Spiky Shield |
-| 3 | Elekid | 23 (cap +3) | Expert Belt | Vital Spirit | coverage attacker | Thunder Punch, Ice Punch, Cross Chop, Volt Switch |
+| 1 | Elgyem | 21 (cap +1) | Focus Sash | Analytic | disruption and support | Wonder Room, Psychic, Energy Ball, Simple Beam |
+| 2 | Onix | 22 (cap +2) | Eviolite | Sturdy | coverage attacker | Stone Edge, Earthquake, Iron Tail, Dragon Tail |
+| 3 | Mantyke | 22 (cap +2) | Sitrus Berry | Water Absorb | coverage attacker | Scald, Air Slash, Ice Beam, Aqua Ring |
+| 4 | Kecleon | 23 (cap +3) | Life Orb | Protean | coverage attacker | Shadow Sneak, Drain Punch, Ice Punch, Thunder Punch |
 
 ## 034. Clark — Route 116
 
@@ -843,54 +844,54 @@ Clark's half uses Mental Herb Sturdy Carbink to establish Gravity, then Eviolite
 | 2 | Rhyhorn | 23 (cap +3) | Eviolite | Rock Head | protected attacker | High Horsepower, Stone Edge, Megahorn, Protect |
 | 3 | Minior | 24 (cap +4) | Life Orb | Shields Down | protected attacker | Charge Beam, Power Gem, Dazzling Gleam, Protect |
 
-## 035. Janice — Route 116
+## 035. Johnson — Route 116
 
-**Optional · Single · Cap 20 · Extreme 90/100 · Uniqueness 82/100**
+**Optional · Single · Cap 20 · Extreme 92/100 · Uniqueness 88/100**
 
-**Theme:** electric terrain
+**Theme:** underused fairy mixture
 
-The joint branch now opens with the circuit it advertised: Terrain Extender Pincurchin uses Discharge beside level-24 Choice Band Motor Drive Klink, accelerating its immediate Gear Grind, Wild Charge, Return, or Rock Smash pressure without harming it. Janice's Life Orb Mimikyu attacks immediately behind Disguise, leaving Sitrus Unburden Swirlix as the composition's one setup clock. Jerry follows Klink with Fake Out and Encore Togedemaru, then Ground-covering Elekid. Each split half still has immediate damage, disruption, and a closer. This is Verdant's first Electric Terrain practical and its only native pair whose opening deliberately attacks its own immune partner. The former three parallel setup clocks are reduced to one later Swirlix clock. Pincurchin, Mimikyu, Swirlix, Togedemaru, Elekid, and Klink do not appear in Battles 1-25, and the fight repeats no weather, Gravity, Wonder Room, Trick Room, hazard, Anger Point, Battery, or Mega module.
+Clark's half uses Mental Herb Sturdy Carbink to establish Gravity, then Eviolite Rock Head Rhyhorn fires accurate High Horsepower, Stone Edge, and Megahorn while Life Orb Shields Down Minior builds special pressure through now-perfect Charge Beam. Johnson's half independently sets Gravity with Sitrus Friend Guard Clefairy, protects partners through Follow Me and Helping Hand, and makes Choice Band Hustle Rufflet plus Expert Belt Hustle Galarian Darumaka reliable. In the joint 3+3 double, either setter prevents a single point of failure; alone, each half retains setup, protection, and a closer. This is Verdant's only native Gravity quarry and first indexed encounter with three legitimate runtime branches. Carbink, Rhyhorn, Minior, Clefairy, Rufflet, and Galarian Darumaka do not appear in Battles 1-22. It uses no weather, terrain, hazard, Wonder Room, Trick Room, Shell Smash, Anger Point, Battery, or Mega.
 
-**How it behaves:** Both trainers remain single-format three-member records for native pairing. Both halves now use partner-aware combo scoring, so Electric attacks into Motor Drive are valuable from the actual opening. The misleading global-turn-zero setup flags are removed: Mimikyu no longer sets up, Klink is Choice-locked, and later Swirlix relies on normal viability and HP-aware Belly Drum scoring. Electric Surge, terrain sleep prevention, Rising Voltage, Fake Out, Encore, Disguise, Belly Drum, Unburden, Motor Drive, and Choice lock remain native. No turn is forced.
+**How it behaves:** Both trainer records remain single-format three-member parties with partner-aware flags that activate only in the native two-opponent double. Smart switching, first-turn setup, and field-control scoring value Gravity while absent and suppress duplicates through existing partner-move checks. Friend Guard, Follow Me, Helping Hand, Hustle, Shields Down, Charge Beam, Choice Band, and Protect are native; no move or turn is forced.
 
-**Why it is hard:** 3 fully authored Pokémon, average BST 417.3, average cap offset +2.33, ace offset +3, and 100% held-item coverage.
+**Why it is hard:** 3 fully authored Pokémon, average BST 329.3, average cap offset +3.0, ace offset +4, and 100% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Brendan (20% species overlap). Its species appear across an average of 3.7 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Amy & Liv (17% species overlap). Its species appear across an average of 1.7 unrelated trainer families.
 
-**Counterplay:** Overwrite terrain, use Ground, Lightning Rod, Volt Absorb, Wide Guard, burn, Intimidate, or focused damage into the visible Pincurchin-Klink lead. Break Disguise and Sturdy with chip or multihit attacks; remove Air Balloon, Sitrus, Life Orb, Choice Band, or Terrain Extender; exploit Klink's move lock; and reserve Taunt, Encore, Haze, or phazing for Swirlix's single Belly Drum clock. Scald, Ice Punch, Fairy, Fighting, Steel, Poison, Ground, and Fire coverage keep one immunity from solving every slot.
+**Counterplay:** Taunt, Encore, focus fire, field replacement, or stalling Gravity attacks either setter. Wide Guard checks Rock Slide and Dazzling Gleam; Steel, Water, Grass, Ground, Ice, burn, Intimidate, item removal, priority, and exploiting Rufflet's Choice lock divide across the six. Minior can be phazed or pressured through its defensive shell before Shields Down. Gravity also grounds Flying and Levitate users, giving the player offensive openings. No exact catch or single field answer is mandatory.
 
-**Manual closure:** Battle 26's static re-audit makes the advertised circuit real on turn one and removes the redundant Mimikyu and Klink setup clocks. The joint fight remains an estimated 9.0, while Janice's 7.8 and Jerry's reordered, level-raised 7.7 branches clear the floor; runtime playtesting remains required before those estimates are observed results.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Pincurchin | 22 (cap +2) | Terrain Extender | Electric Surge | coverage attacker | Rising Voltage, Discharge, Scald, Recover |
-| 2 | Mimikyu | 22 (cap +2) | Life Orb | Disguise | coverage attacker | Shadow Claw, Play Rough, Shadow Sneak, Drain Punch |
-| 3 | Swirlix | 23 (cap +3) | Sitrus Berry | Unburden | setup attacker | Belly Drum, Play Rough, Return, Protect |
-
-## 036. Karen — Route 116
-
-**Optional · Single · Cap 20 · Extreme 81/100 · Uniqueness 86/100**
-
-**Theme:** Earthquake immunity
-
-Focus Sash Analytic Elgyem opens Wonder Room, swapping Defense and Sp. Def for five turns. Eviolite Onix changes from a physical wall into a special wall and physical liability, while Sitrus Water Absorb Mantyke flips in the opposite direction. Life Orb Protean Kecleon closes by changing its own type and attack category through Shadow Sneak, Drain Punch, Ice Punch, and Thunder Punch. Simple Beam can remove a key ability but creates no lock. This is Verdant's only attack-category classroom and first finite Wonder Room puzzle. Elgyem, Onix, Mantyke, and Kecleon do not appear in Battles 1-21. It repeats no weather, terrain, hazard, Anger Point, Battery, Guard Split, Instruct, Trick Room, Shell Smash, or Mega module.
-
-**How it behaves:** Karen remains a native singles trainer with smart switching, first-turn setup, and field-control profiles. Field control gives Wonder Room a strong bonus only on global turn zero while absent, and existing bad-move logic rejects it while active, so it is neither forced nor repeated. Protean, Water Absorb, Sturdy, Sash, Eviolite, Sitrus, Life Orb, phazing, and recovery remain native.
-
-**Why it is hard:** 4 fully authored Pokémon, average BST 383.8, average cap offset +2.0, ace offset +3, and 100% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Jessica (17% species overlap). Its species appear across an average of 2.5 unrelated trainer families.
-
-**Counterplay:** Taunt, focus fire, priority, sleep, or Encore can stop Elgyem; the player can also stall five turns, use mixed offense, or switch attack categories. During Wonder Room, hit Onix physically and Mantyke specially; outside it, reverse that plan. Water, Grass, Ice, Electric, Rock, status, phazing, item removal, and exploiting Kecleon's newly chosen type remain broad answers. No exact team or turn sequence is required.
-
-**Manual closure:** Battle 22 is 10/10 because a single five-turn rule changes which attacks solve two opposite walls, then Protean tests whether the player is still reading categories and types. Legal levels 21-23, four distinct items, truthful teaching dialogue, and broad denial, timer, mixed-offense, type, status, and phazing counterplay make it an 8.1/10 single.
+**Manual closure:** Battle 23 is 10/10 because the joint 3+3 puzzle is a coherent Gravity formation while both three-mon halves remain difficult, complete singles. Six distinct items, legal levels 22-24, fixed native sight geometry, redundant but non-wasteful field control, and broad field, status, spread, type, item, and focus-fire counterplay make the pair 9.2/10 without making the split branches disposable.
 
 | # | Pokémon | Level | Item | Ability | Role | Moves |
 | ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Elgyem | 21 (cap +1) | Focus Sash | Analytic | disruption and support | Wonder Room, Psychic, Energy Ball, Simple Beam |
-| 2 | Onix | 22 (cap +2) | Eviolite | Sturdy | coverage attacker | Stone Edge, Earthquake, Iron Tail, Dragon Tail |
-| 3 | Mantyke | 22 (cap +2) | Sitrus Berry | Water Absorb | coverage attacker | Scald, Air Slash, Ice Beam, Aqua Ring |
-| 4 | Kecleon | 23 (cap +3) | Life Orb | Protean | coverage attacker | Shadow Sneak, Drain Punch, Ice Punch, Thunder Punch |
+| 1 | Clefairy | 22 (cap +2) | Sitrus Berry | Friend Guard | redirection support | Gravity, Follow Me, Helping Hand, Moonblast |
+| 2 | Rufflet | 23 (cap +3) | Choice Band | Hustle | Choice-locked breaker | Brave Bird, Rock Slide, Superpower, U Turn |
+| 3 | Darumaka (Galarian) | 24 (cap +4) | Expert Belt | Hustle | protected attacker | Ice Punch, Zen Headbutt, Hammer Arm, Protect |
+
+## 036. Devan — Route 116
+
+**Optional · Double · Cap 20 · Extreme 86/100 · Uniqueness 86/100**
+
+**Theme:** residual control + sand engine + status control
+
+Smooth Rock Sand Stream Hippopotas starts a visible sand clock and uses Yawn, Whirlwind, High Horsepower, or Protect. Life Orb Sand Rush Drilbur races through that clock with single-target Ground and spread Rock pressure. Eviolite Water Absorb Cacnea can catch Water and establish Leech Seed. Weakness Policy Sturdy Aron punishes a careless super-effective hit and can answer committed damage with Metal Burst, but remains avoidable through neutral chip, status, multihit attacks, or item removal. This is Verdant's first sand excavation battle. Hippopotas, Drilbur, Cacnea, and Aron do not appear in Battles 1-23. It uses no prior snow, rain, Gravity, Wonder Room, terrain, hazard, Anger Point, Battery, Guard Split, Instruct, Shell Smash, or Mega module.
+
+**How it behaves:** Devan uses a native guarded double with smart switching, partner awareness, HP-aware decisions, and field-control scoring. Sand Stream and Sand Rush activate automatically; normal switching can preserve Cacnea for Water and Sturdy Aron for a deliberate weakness decision. No custom target or forced weather line is added.
+
+**Why it is hard:** 4 fully authored Pokémon, average BST 330.8, average cap offset +2.0, ace offset +3, and 100% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Lawrence (20% species overlap). Its species appear across an average of 1.8 unrelated trainer families.
+
+**Counterplay:** Overwrite or stall sand, Taunt Yawn and Whirlwind, use priority, paralysis, Icy Wind, Trick Room, Wide Guard, or focus either lead. Grass and Ice pressure both sand leads; Fighting, Ground, multihit attacks, Mold Breaker, burn, Knock Off, and neutral chip bypass Aron's Sturdy and avoid Weakness Policy. Cacnea covers Water but not every Grass, Ice, Bug, Fire, Fighting, or Fairy route. No single weather or type answer is mandatory.
+
+**Manual closure:** Battle 24 is 10/10 because one visible sand clock changes speed and switching while two independent reserves punish only the most obvious Water and weakness choices. Legal levels 21-23, four distinct items, native AI, and broad weather, status, speed, type, spread, item, and focus-fire counterplay make it an 8.6/10 double.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Hippopotas | 21 (cap +1) | Smooth Rock | Sand Stream | disruption and support | Yawn, High Horsepower, Whirlwind, Protect |
+| 2 | Drilbur | 22 (cap +2) | Life Orb | Sand Rush | protected attacker | High Horsepower, Rock Slide, X Scissor, Protect |
+| 3 | Cacnea | 22 (cap +2) | Eviolite | Water Absorb | coverage attacker | Seed Bomb, Sucker Punch, Drain Punch, Leech Seed |
+| 4 | Aron | 23 (cap +3) | Weakness Policy | Sturdy | protected attacker | Heavy Slam, Body Press, Metal Burst, Protect |
 
 ## 037. Sarah — Route 116
 
@@ -918,7 +919,7 @@ Sarah owns one slow treasure engine: Mental Herb Diancie twists the room, Pranks
 
 ## 038. Dawson — Route 116
 
-**Optional · Single · Cap 20 · Extreme 88/100 · Uniqueness 88/100**
+**Optional · Single · Cap 20 · Extreme 88/100 · Uniqueness 98/100**
 
 **Theme:** pivot control
 
@@ -928,7 +929,7 @@ Sarah owns one slow treasure engine: Mental Herb Diancie twists the room, Pranks
 
 **Why it is hard:** 3 fully authored Pokémon, average BST 286.7, average cap offset +3.0, ace offset +4, and 100% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Anna & Meg (17% species overlap). Its species appear across an average of 1.3 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: none (0% species overlap). Its species appear across an average of 1.0 unrelated trainer families.
 
 **Counterplay:** Taunt, Encore, priority, focus fire, room reversal, or stalling five turns answer Trick Room. Ghost or Protect blanks Fake Out; Dark, Ghost, Steel, Ground, burn, Intimidate, Knock Off, Substitute breaking, and exploiting Minccino's Choice lock divide across the halves. Wooloo's Rollout can be interrupted before it snowballs. The removed dual-screen and Quash layers leave one readable timing problem rather than six simultaneous systems.
 
@@ -940,54 +941,53 @@ Sarah owns one slow treasure engine: Mental Herb Diancie twists the room, Pranks
 | 2 | Wooloo | 23 (cap +3) | Chesto Berry | Fluffy | disruption and support | Defense Curl, Rollout, Double Edge, Rest |
 | 3 | Minccino | 24 (cap +4) | Choice Band | Skill Link | Choice-locked breaker | Tail Slap, Bullet Seed, Triple Axel, U Turn |
 
-## 039. Devan — Route 116
+## 039. Jerry — Route 116
 
-**Optional · Double · Cap 20 · Extreme 86/100 · Uniqueness 86/100**
+**Optional · Single · Cap 20 · Extreme 90/100 · Uniqueness 80/100**
 
-**Theme:** residual control + sand engine + status control
+**Theme:** pivot control
 
-Smooth Rock Sand Stream Hippopotas starts a visible sand clock and uses Yawn, Whirlwind, High Horsepower, or Protect. Life Orb Sand Rush Drilbur races through that clock with single-target Ground and spread Rock pressure. Eviolite Water Absorb Cacnea can catch Water and establish Leech Seed. Weakness Policy Sturdy Aron punishes a careless super-effective hit and can answer committed damage with Metal Burst, but remains avoidable through neutral chip, status, multihit attacks, or item removal. This is Verdant's first sand excavation battle. Hippopotas, Drilbur, Cacnea, and Aron do not appear in Battles 1-23. It uses no prior snow, rain, Gravity, Wonder Room, terrain, hazard, Anger Point, Battery, Guard Split, Instruct, Shell Smash, or Mega module.
+The joint branch now opens with the circuit it advertised: Terrain Extender Pincurchin uses Discharge beside level-24 Choice Band Motor Drive Klink, accelerating its immediate Gear Grind, Wild Charge, Return, or Rock Smash pressure without harming it. Janice's Life Orb Mimikyu attacks immediately behind Disguise, leaving Sitrus Unburden Swirlix as the composition's one setup clock. Jerry follows Klink with Fake Out and Encore Togedemaru, then Ground-covering Elekid. Each split half still has immediate damage, disruption, and a closer. This is Verdant's first Electric Terrain practical and its only native pair whose opening deliberately attacks its own immune partner. The former three parallel setup clocks are reduced to one later Swirlix clock. Pincurchin, Mimikyu, Swirlix, Togedemaru, Elekid, and Klink do not appear in Battles 1-25, and the fight repeats no weather, Gravity, Wonder Room, Trick Room, hazard, Anger Point, Battery, or Mega module.
 
-**How it behaves:** Devan uses a native guarded double with smart switching, partner awareness, HP-aware decisions, and field-control scoring. Sand Stream and Sand Rush activate automatically; normal switching can preserve Cacnea for Water and Sturdy Aron for a deliberate weakness decision. No custom target or forced weather line is added.
+**How it behaves:** Both trainers remain single-format three-member records for native pairing. Both halves now use partner-aware combo scoring, so Electric attacks into Motor Drive are valuable from the actual opening. The misleading global-turn-zero setup flags are removed: Mimikyu no longer sets up, Klink is Choice-locked, and later Swirlix relies on normal viability and HP-aware Belly Drum scoring. Electric Surge, terrain sleep prevention, Rising Voltage, Fake Out, Encore, Disguise, Belly Drum, Unburden, Motor Drive, and Choice lock remain native. No turn is forced.
 
-**Why it is hard:** 4 fully authored Pokémon, average BST 330.8, average cap offset +2.0, ace offset +3, and 100% held-item coverage.
+**Why it is hard:** 3 fully authored Pokémon, average BST 378.3, average cap offset +3.0, ace offset +4, and 100% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Lawrence (20% species overlap). Its species appear across an average of 1.8 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Marcos (25% species overlap). Its species appear across an average of 3.0 unrelated trainer families.
 
-**Counterplay:** Overwrite or stall sand, Taunt Yawn and Whirlwind, use priority, paralysis, Icy Wind, Trick Room, Wide Guard, or focus either lead. Grass and Ice pressure both sand leads; Fighting, Ground, multihit attacks, Mold Breaker, burn, Knock Off, and neutral chip bypass Aron's Sturdy and avoid Weakness Policy. Cacnea covers Water but not every Grass, Ice, Bug, Fire, Fighting, or Fairy route. No single weather or type answer is mandatory.
+**Counterplay:** Overwrite terrain, use Ground, Lightning Rod, Volt Absorb, Wide Guard, burn, Intimidate, or focused damage into the visible Pincurchin-Klink lead. Break Disguise and Sturdy with chip or multihit attacks; remove Air Balloon, Sitrus, Life Orb, Choice Band, or Terrain Extender; exploit Klink's move lock; and reserve Taunt, Encore, Haze, or phazing for Swirlix's single Belly Drum clock. Scald, Ice Punch, Fairy, Fighting, Steel, Poison, Ground, and Fire coverage keep one immunity from solving every slot.
 
-**Manual closure:** Battle 24 is 10/10 because one visible sand clock changes speed and switching while two independent reserves punish only the most obvious Water and weakness choices. Legal levels 21-23, four distinct items, native AI, and broad weather, status, speed, type, spread, item, and focus-fire counterplay make it an 8.6/10 double.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Hippopotas | 21 (cap +1) | Smooth Rock | Sand Stream | disruption and support | Yawn, High Horsepower, Whirlwind, Protect |
-| 2 | Drilbur | 22 (cap +2) | Life Orb | Sand Rush | protected attacker | High Horsepower, Rock Slide, X Scissor, Protect |
-| 3 | Cacnea | 22 (cap +2) | Eviolite | Water Absorb | coverage attacker | Seed Bomb, Sucker Punch, Drain Punch, Leech Seed |
-| 4 | Aron | 23 (cap +3) | Weakness Policy | Sturdy | protected attacker | Heavy Slam, Body Press, Metal Burst, Protect |
-
-## 040. Johnson — Route 116
-
-**Optional · Single · Cap 20 · Extreme 92/100 · Uniqueness 88/100**
-
-**Theme:** underused fairy mixture
-
-Clark's half uses Mental Herb Sturdy Carbink to establish Gravity, then Eviolite Rock Head Rhyhorn fires accurate High Horsepower, Stone Edge, and Megahorn while Life Orb Shields Down Minior builds special pressure through now-perfect Charge Beam. Johnson's half independently sets Gravity with Sitrus Friend Guard Clefairy, protects partners through Follow Me and Helping Hand, and makes Choice Band Hustle Rufflet plus Expert Belt Hustle Galarian Darumaka reliable. In the joint 3+3 double, either setter prevents a single point of failure; alone, each half retains setup, protection, and a closer. This is Verdant's only native Gravity quarry and first indexed encounter with three legitimate runtime branches. Carbink, Rhyhorn, Minior, Clefairy, Rufflet, and Galarian Darumaka do not appear in Battles 1-22. It uses no weather, terrain, hazard, Wonder Room, Trick Room, Shell Smash, Anger Point, Battery, or Mega.
-
-**How it behaves:** Both trainer records remain single-format three-member parties with partner-aware flags that activate only in the native two-opponent double. Smart switching, first-turn setup, and field-control scoring value Gravity while absent and suppress duplicates through existing partner-move checks. Friend Guard, Follow Me, Helping Hand, Hustle, Shields Down, Charge Beam, Choice Band, and Protect are native; no move or turn is forced.
-
-**Why it is hard:** 3 fully authored Pokémon, average BST 329.3, average cap offset +3.0, ace offset +4, and 100% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Amy & Liv (17% species overlap). Its species appear across an average of 1.7 unrelated trainer families.
-
-**Counterplay:** Taunt, Encore, focus fire, field replacement, or stalling Gravity attacks either setter. Wide Guard checks Rock Slide and Dazzling Gleam; Steel, Water, Grass, Ground, Ice, burn, Intimidate, item removal, priority, and exploiting Rufflet's Choice lock divide across the six. Minior can be phazed or pressured through its defensive shell before Shields Down. Gravity also grounds Flying and Levitate users, giving the player offensive openings. No exact catch or single field answer is mandatory.
-
-**Manual closure:** Battle 23 is 10/10 because the joint 3+3 puzzle is a coherent Gravity formation while both three-mon halves remain difficult, complete singles. Six distinct items, legal levels 22-24, fixed native sight geometry, redundant but non-wasteful field control, and broad field, status, spread, type, item, and focus-fire counterplay make the pair 9.2/10 without making the split branches disposable.
+**Manual closure:** Battle 26's static re-audit makes the advertised circuit real on turn one and removes the redundant Mimikyu and Klink setup clocks. The joint fight remains an estimated 9.0, while Janice's 7.8 and Jerry's reordered, level-raised 7.7 branches clear the floor; runtime playtesting remains required before those estimates are observed results.
 
 | # | Pokémon | Level | Item | Ability | Role | Moves |
 | ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Clefairy | 22 (cap +2) | Sitrus Berry | Friend Guard | redirection support | Gravity, Follow Me, Helping Hand, Moonblast |
-| 2 | Rufflet | 23 (cap +3) | Choice Band | Hustle | Choice-locked breaker | Brave Bird, Rock Slide, Superpower, U Turn |
-| 3 | Darumaka (Galarian) | 24 (cap +4) | Expert Belt | Hustle | protected attacker | Ice Punch, Zen Headbutt, Hammer Arm, Protect |
+| 1 | Klink | 24 (cap +4) | Choice Band | Motor Drive | Choice-locked breaker | Gear Grind, Wild Charge, Return, Rock Smash |
+| 2 | Togedemaru | 22 (cap +2) | Air Balloon | Sturdy | protected attacker | Fake Out, Zing Zap, Encore, Spiky Shield |
+| 3 | Elekid | 23 (cap +3) | Expert Belt | Vital Spirit | coverage attacker | Thunder Punch, Ice Punch, Cross Chop, Volt Switch |
+
+## 040. Janice — Route 116
+
+**Optional · Single · Cap 20 · Extreme 90/100 · Uniqueness 82/100**
+
+**Theme:** electric terrain
+
+The joint branch now opens with the circuit it advertised: Terrain Extender Pincurchin uses Discharge beside level-24 Choice Band Motor Drive Klink, accelerating its immediate Gear Grind, Wild Charge, Return, or Rock Smash pressure without harming it. Janice's Life Orb Mimikyu attacks immediately behind Disguise, leaving Sitrus Unburden Swirlix as the composition's one setup clock. Jerry follows Klink with Fake Out and Encore Togedemaru, then Ground-covering Elekid. Each split half still has immediate damage, disruption, and a closer. This is Verdant's first Electric Terrain practical and its only native pair whose opening deliberately attacks its own immune partner. The former three parallel setup clocks are reduced to one later Swirlix clock. Pincurchin, Mimikyu, Swirlix, Togedemaru, Elekid, and Klink do not appear in Battles 1-25, and the fight repeats no weather, Gravity, Wonder Room, Trick Room, hazard, Anger Point, Battery, or Mega module.
+
+**How it behaves:** Both trainers remain single-format three-member records for native pairing. Both halves now use partner-aware combo scoring, so Electric attacks into Motor Drive are valuable from the actual opening. The misleading global-turn-zero setup flags are removed: Mimikyu no longer sets up, Klink is Choice-locked, and later Swirlix relies on normal viability and HP-aware Belly Drum scoring. Electric Surge, terrain sleep prevention, Rising Voltage, Fake Out, Encore, Disguise, Belly Drum, Unburden, Motor Drive, and Choice lock remain native. No turn is forced.
+
+**Why it is hard:** 3 fully authored Pokémon, average BST 417.3, average cap offset +2.33, ace offset +3, and 100% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Brendan (20% species overlap). Its species appear across an average of 3.7 unrelated trainer families.
+
+**Counterplay:** Overwrite terrain, use Ground, Lightning Rod, Volt Absorb, Wide Guard, burn, Intimidate, or focused damage into the visible Pincurchin-Klink lead. Break Disguise and Sturdy with chip or multihit attacks; remove Air Balloon, Sitrus, Life Orb, Choice Band, or Terrain Extender; exploit Klink's move lock; and reserve Taunt, Encore, Haze, or phazing for Swirlix's single Belly Drum clock. Scald, Ice Punch, Fairy, Fighting, Steel, Poison, Ground, and Fire coverage keep one immunity from solving every slot.
+
+**Manual closure:** Battle 26's static re-audit makes the advertised circuit real on turn one and removes the redundant Mimikyu and Klink setup clocks. The joint fight remains an estimated 9.0, while Janice's 7.8 and Jerry's reordered, level-raised 7.7 branches clear the floor; runtime playtesting remains required before those estimates are observed results.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Pincurchin | 22 (cap +2) | Terrain Extender | Electric Surge | coverage attacker | Rising Voltage, Discharge, Scald, Recover |
+| 2 | Mimikyu | 22 (cap +2) | Life Orb | Disguise | coverage attacker | Shadow Claw, Play Rough, Shadow Sneak, Drain Punch |
+| 3 | Swirlix | 23 (cap +3) | Sitrus Berry | Unburden | setup attacker | Belly Drum, Play Rough, Return, Protect |
 
 ## 041. Grunt — Rusturf Tunnel
 
@@ -1185,78 +1185,7 @@ Archeops opens this deliberate singles fight. The roster is built as rock pressu
 | 2 | Aurorus | 18 (cap -2) | None | Refrigerate | coverage attacker | Hyper Voice, Power Gem, Discharge, Roar |
 | 3 | Probopass | 18 (cap -2) | None | Sturdy | coverage attacker | Power Gem, Earth Power, Flash Cannon, Zap Cannon |
 
-## 050. Douglas — Route 106
-
-**Optional · Single · Cap 20 · Demanding 37/100 · Uniqueness 60/100**
-
-**Theme:** Water mixed offense
-
-Lapras opens this deliberate singles fight. The roster is built as water mixed offense. The composition turns the surrounding water route and coastal terrain into the fight's identity instead of using a generic route-trainer core.
-
-**How it behaves:** The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe. This singles or low-stakes roster emphasizes coverage, status, and matchup pressure rather than a scripted multi-Pokémon combination.
-
-**Why it is hard:** 2 fully authored Pokémon, average BST 530.0, average cap offset -3.0, ace offset -3, and 0% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Spencer (33% species overlap). Its species appear across an average of 11.0 unrelated trainer families.
-
-**Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Lapras | 17 (cap -3) | None | Water Absorb | disruption and support | Freeze Dry, Water Pulse, Perish Song, Sing |
-| 2 | Tentacruel | 17 (cap -3) | None | Clear Body | coverage attacker | Sludge Bomb, Hydro Pump, Hex, Reflect Type |
-
-## 051. Kyla — Route 106
-
-**Optional · Single · Cap 20 · Demanding 41/100 · Uniqueness 76/100**
-
-**Theme:** Surf ally activation
-
-Nidoqueen opens this deliberate singles fight. The roster is built as surf ally activation. The composition turns the surrounding water route and coastal terrain into the fight's identity instead of using a generic route-trainer core.
-
-**How it behaves:** The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe. Expect it to preserve surf ally activation rather than select six unrelated strong attacks.
-
-**Why it is hard:** 3 fully authored Pokémon, average BST 505.0, average cap offset -3.0, ace offset -3, and 0% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Annika (20% species overlap). Its species appear across an average of 6.7 unrelated trainer families.
-
-**Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Nidoqueen | 17 (cap -3) | None | Sheer Force | coverage attacker | Surf, Sludge Bomb, Superpower, Crunch |
-| 2 | Golduck | 17 (cap -3) | None | Tough Claws | coverage attacker | Aqua Tail, Zen Headbutt, Cross Chop, Soak |
-| 3 | Jellicent | 17 (cap -3) | None | Water Absorb | disruption and support | Water Spout, Shadow Ball, Recover, Acid Armor |
-
-## 052. Elliot — Route 106
-
-**Optional · Single · Cap 20 · Extreme 88/100 · Uniqueness 88/100**
-
-**Theme:** Water pressure
-
-Eviolite Water Absorb Frillish opens with Whirlpool, Night Shade, Recover, and Taunt, creating a finite undertow the player can break rather than an endless stall loop. Choice Specs Mega Launcher Clauncher then commits to Water Pulse, Dragon Pulse, Ice Beam, or Sludge Bomb and can be punished through the revealed lock. White Herb Skill Link Shellder closes with one Shell Smash window into Icicle Spear, Rock Blast, or Liquidation. Each depth asks one clear singles question and uses only native AI. This is Verdant's first three-depth singles sequence and first Choice Specs Mega Launcher plus White Herb Skill Link progression. Frillish, Clauncher, and Shellder do not appear in Battles 1-29. It immediately releases the player from two consecutive doubles, uses no weather, active speed-control move, priority move, Protect, terrain, room, partner activation, Mega, or custom AI, and revisits Shell Smash only after more than twenty encounters in a different format.
-
-**How it behaves:** Elliot remains an intentional single and uses only native smart-switching and HP-aware scoring. Whirlpool, Night Shade, Recover, Taunt, Choice lock, Mega Launcher, White Herb, Shell Smash, and Skill Link are existing mechanics; no custom move order, forced setup turn, or trainer-specific selector is added. Match Call registration and later rematch routing remain untouched.
-
-**Why it is hard:** 3 fully authored Pokémon, average BST 323.3, average cap offset +2.0, ace offset +3, and 100% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Grunt (17% species overlap). Its species appear across an average of 1.3 unrelated trainer families.
-
-**Counterplay:** Taunt, Ghost or Dark pressure, trapping escape, fixed-damage races, item removal, and strong Grass or Electric damage answer Frillish. Scout and exploit Clauncher's Choice lock with immunities, resistances, Protect, or switching. Priority, status, Haze, Clear Smog, phazing, Unaware, Focus Sash, multihit resistance, or denying the setup turn answer Shellder. No one counter is required to solve all three depths.
-
-**Strongest part:** The three members genuinely feel deeper as the fight progresses: finite trapping, an exploitable Specs commitment, then a visible White Herb Shell Smash closer.
-
-**Weakest link:** Shellder's Shell Smash is a familiar competitive finish rather than a new mechanic. The long gap since Battle 7, the singles format, and the preceding lock-and-trap resource tax make the reuse worthwhile without adding another layer.
-
-**Manual closure:** Battle 30 is closed at an editorial 8.8/10: three legal levels 21-23, three distinct items and unused species, stable full-set donors, native singles and Match Call behavior, truthful dialogue, and no custom AI dependency. Runtime playtesting remains required before 8.8 is treated as observed difficulty.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Frillish | 21 (cap +1) | Eviolite | Water Absorb | disruption and support | Whirlpool, Night Shade, Recover, Taunt |
-| 2 | Clauncher | 22 (cap +2) | Choice Specs | Mega Launcher | Choice-locked breaker | Water Pulse, Dragon Pulse, Ice Beam, Sludge Bomb |
-| 3 | Shellder | 23 (cap +3) | White Herb | Skill Link | setup attacker | Shell Smash, Icicle Spear, Rock Blast, Liquidation |
-
-## 053. Ned — Route 106
+## 050. Ned — Route 106
 
 **Optional · Double · Cap 20 · Extreme 87/100 · Uniqueness 89/100**
 
@@ -1285,7 +1214,248 @@ Focus Sash Dazzling Finneon leads beside Life Orb Swift Swim Arrokuda. Finneon c
 | 3 | Spheal | 21 (cap +1) | Eviolite | Thick Fat | protected attacker | Freeze Dry, Brine, Encore, Protect |
 | 4 | Cramorant | 22 (cap +2) | Sitrus Berry | Gulp Missile | coverage attacker | Surf, Hurricane, Ice Beam, Roost |
 
-## 054. Brawly — Dewford Town Gym
+## 051. Elliot — Route 106
+
+**Optional · Single · Cap 20 · Extreme 88/100 · Uniqueness 88/100**
+
+**Theme:** Water pressure
+
+Eviolite Water Absorb Frillish opens with Whirlpool, Night Shade, Recover, and Taunt, creating a finite undertow the player can break rather than an endless stall loop. Choice Specs Mega Launcher Clauncher then commits to Water Pulse, Dragon Pulse, Ice Beam, or Sludge Bomb and can be punished through the revealed lock. White Herb Skill Link Shellder closes with one Shell Smash window into Icicle Spear, Rock Blast, or Liquidation. Each depth asks one clear singles question and uses only native AI. This is Verdant's first three-depth singles sequence and first Choice Specs Mega Launcher plus White Herb Skill Link progression. Frillish, Clauncher, and Shellder do not appear in Battles 1-29. It immediately releases the player from two consecutive doubles, uses no weather, active speed-control move, priority move, Protect, terrain, room, partner activation, Mega, or custom AI, and revisits Shell Smash only after more than twenty encounters in a different format.
+
+**How it behaves:** Elliot remains an intentional single and uses only native smart-switching and HP-aware scoring. Whirlpool, Night Shade, Recover, Taunt, Choice lock, Mega Launcher, White Herb, Shell Smash, and Skill Link are existing mechanics; no custom move order, forced setup turn, or trainer-specific selector is added. Match Call registration and later rematch routing remain untouched.
+
+**Why it is hard:** 3 fully authored Pokémon, average BST 323.3, average cap offset +2.0, ace offset +3, and 100% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Grunt (17% species overlap). Its species appear across an average of 1.3 unrelated trainer families.
+
+**Counterplay:** Taunt, Ghost or Dark pressure, trapping escape, fixed-damage races, item removal, and strong Grass or Electric damage answer Frillish. Scout and exploit Clauncher's Choice lock with immunities, resistances, Protect, or switching. Priority, status, Haze, Clear Smog, phazing, Unaware, Focus Sash, multihit resistance, or denying the setup turn answer Shellder. No one counter is required to solve all three depths.
+
+**Strongest part:** The three members genuinely feel deeper as the fight progresses: finite trapping, an exploitable Specs commitment, then a visible White Herb Shell Smash closer.
+
+**Weakest link:** Shellder's Shell Smash is a familiar competitive finish rather than a new mechanic. The long gap since Battle 7, the singles format, and the preceding lock-and-trap resource tax make the reuse worthwhile without adding another layer.
+
+**Manual closure:** Battle 30 is closed at an editorial 8.8/10: three legal levels 21-23, three distinct items and unused species, stable full-set donors, native singles and Match Call behavior, truthful dialogue, and no custom AI dependency. Runtime playtesting remains required before 8.8 is treated as observed difficulty.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Frillish | 21 (cap +1) | Eviolite | Water Absorb | disruption and support | Whirlpool, Night Shade, Recover, Taunt |
+| 2 | Clauncher | 22 (cap +2) | Choice Specs | Mega Launcher | Choice-locked breaker | Water Pulse, Dragon Pulse, Ice Beam, Sludge Bomb |
+| 3 | Shellder | 23 (cap +3) | White Herb | Skill Link | setup attacker | Shell Smash, Icicle Spear, Rock Blast, Liquidation |
+
+## 052. Douglas — Route 106
+
+**Optional · Single · Cap 20 · Demanding 37/100 · Uniqueness 60/100**
+
+**Theme:** Water mixed offense
+
+Lapras opens this deliberate singles fight. The roster is built as water mixed offense. The composition turns the surrounding water route and coastal terrain into the fight's identity instead of using a generic route-trainer core.
+
+**How it behaves:** The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe. This singles or low-stakes roster emphasizes coverage, status, and matchup pressure rather than a scripted multi-Pokémon combination.
+
+**Why it is hard:** 2 fully authored Pokémon, average BST 530.0, average cap offset -3.0, ace offset -3, and 0% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Spencer (33% species overlap). Its species appear across an average of 11.0 unrelated trainer families.
+
+**Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Lapras | 17 (cap -3) | None | Water Absorb | disruption and support | Freeze Dry, Water Pulse, Perish Song, Sing |
+| 2 | Tentacruel | 17 (cap -3) | None | Clear Body | coverage attacker | Sludge Bomb, Hydro Pump, Hex, Reflect Type |
+
+## 053. Kyla — Route 106
+
+**Optional · Single · Cap 20 · Demanding 41/100 · Uniqueness 76/100**
+
+**Theme:** Surf ally activation
+
+Nidoqueen opens this deliberate singles fight. The roster is built as surf ally activation. The composition turns the surrounding water route and coastal terrain into the fight's identity instead of using a generic route-trainer core.
+
+**How it behaves:** The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe. Expect it to preserve surf ally activation rather than select six unrelated strong attacks.
+
+**Why it is hard:** 3 fully authored Pokémon, average BST 505.0, average cap offset -3.0, ace offset -3, and 0% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Annika (20% species overlap). Its species appear across an average of 6.7 unrelated trainer families.
+
+**Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Nidoqueen | 17 (cap -3) | None | Sheer Force | coverage attacker | Surf, Sludge Bomb, Superpower, Crunch |
+| 2 | Golduck | 17 (cap -3) | None | Tough Claws | coverage attacker | Aqua Tail, Zen Headbutt, Cross Chop, Soak |
+| 3 | Jellicent | 17 (cap -3) | None | Water Absorb | disruption and support | Water Spout, Shadow Ball, Recover, Acid Armor |
+
+## 054. Laura — Dewford Town Gym
+
+**Optional · Double · Cap 20 · Extreme 87/100 · Uniqueness 90/100**
+
+**Theme:** Fighting pressure + pivot control + spread + Wide Guard
+
+Focus Sash Regenerator Mienfoo leads beside Flame Orb Guts Makuhita. Fake Out can buy the one turn Makuhita needs to activate Guts, while U-turn, Drain Punch, and Acrobatics keep Mienfoo useful and Makuhita supplies Close Combat, Heavy Slam, Knock Off, or Wide Guard. Black Sludge Dry Skin Croagunk checks Fairy, Psychic, Flying, and Water lines through Gunk Shot, Sucker Punch, Ice Punch, and Drain Punch. Silk Scarf Stakeout Gumshoos provides the non-Fighting finish and punishes careless switching with Return, Crunch, Earthquake, or Fire Fang. No turn is forced. This is Verdant's first Fake Out-to-Flame-Orb Guts drill and first Stakeout switch punishment. Mienfoo, Makuhita, Croagunk, and Gumshoos do not appear in Battles 1-30. It uses no weather, terrain, room, active speed-control move, setup move, ally attack, trap, hazard, redirection, Mega, or custom AI, preserving Brawly's No Retreat, redirection, No Guard, and Mega Hawlucha identity.
+
+**How it behaves:** Laura uses native smart-switching, partner-aware, and HP-aware scoring only. Party order creates the Mienfoo-Makuhita opening; Fake Out, Flame Orb, Guts, Regenerator, U-turn, Wide Guard, Dry Skin, Black Sludge, Sucker Punch, and Stakeout are existing mechanics. No Coaching scorer, forced activation, trainer-specific selector, or opponent Mega is introduced.
+
+**Why it is hard:** 4 fully authored Pokémon, average BST 336.2, average cap offset +1.5, ace offset +2, and 100% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Victor (14% species overlap). Its species appear across an average of 1.2 unrelated trainer families.
+
+**Counterplay:** Ghost typing or Protect can blank the opening Fake Out; Taunt, item removal, status control, fast focus fire, or denying Makuhita a safe turn limits Guts. Flying, Psychic, and Fairy attacks, burn before Flame Orb, Intimidate, Reflect, Wide Guard pressure, Ground attacks into Croagunk, and exploiting Mienfoo's Sash or Gumshoos's middling speed all remain broad answers. The coverage discourages one-button sweeping without erasing the Gym's natural weaknesses.
+
+**Strongest part:** Mienfoo buying exactly one breath for Makuhita's Flame Orb makes the opening instantly understandable, while Croagunk and Stakeout Gumshoos make the obvious counter-switches matter.
+
+**Weakest link:** The reserves are strong coverage pieces rather than a second novel engine. That simplicity is intentional for the first Gym trainer and keeps Brawly's boss mechanics unspent.
+
+**Manual closure:** Battle 31 is closed at an editorial 8.7/10: four legal levels 21-22, distinct items and unused species, guarded native doubles with room-brightening continuation, three full-set donors, truthful dialogue, author self-check, and no custom AI or premature opposing Mega. Runtime playtesting remains required before 8.7 is observed.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Mienfoo | 21 (cap +1) | Focus Sash | Regenerator | coverage attacker | Fake Out, U Turn, Drain Punch, Acrobatics |
+| 2 | Makuhita | 22 (cap +2) | Flame Orb | Guts | protected attacker | Close Combat, Heavy Slam, Knock Off, Wide Guard |
+| 3 | Croagunk | 21 (cap +1) | Black Sludge | Dry Skin | coverage attacker | Gunk Shot, Drain Punch, Sucker Punch, Ice Punch |
+| 4 | Gumshoos | 22 (cap +2) | Silk Scarf | Stakeout | coverage attacker | Return, Crunch, Earthquake, Fire Fang |
+
+## 055. Brenden — Dewford Town Gym
+
+**Optional · Single · Cap 20 · Extreme 90/100 · Uniqueness 100/100**
+
+**Theme:** Fighting rare-showcase balance
+
+Brenden's half is rare Kubfu physical pressure, Life Orb Magic Guard Solosis special offense, and Assault Vest Technician Clobbopus coverage. Lilith's half is Focus Sash Pure Power Meditite tempo, Sitrus Intimidate Scraggy disruption and recovery, and Rocky Helmet Fluffy Stufful spread protection. In the joint branch Kubfu and Meditite lead as two different immediate styles; in either split single, every half still owns offense, coverage, bulk, and a finish. No fixed combo or turn is required. This is Verdant's first native pair built as six martial styles rather than one shared field engine, and its first trainer-owned Kubfu showcase. Kubfu, Solosis, Clobbopus, Meditite, Scraggy, and Stufful do not appear in Battles 1-31. It adds no weather, terrain, room, active speed control, ally activation, setup move, trap, hazard, redirection, Mega, or custom AI, leaving Brawly's protected boss identity intact.
+
+**How it behaves:** Both source trainers remain three-member intentional singles so the native sight intersection can create the 3+3 double or split encounters. Both use only native smart-switching, partner-aware, and HP-aware scoring. Inner Focus, Magic Guard, Life Orb, Recover, Technician, Assault Vest, Pure Power, Fake Out, Intimidate, Knock Off, Fluffy, Rocky Helmet, and Wide Guard require no custom selector or forced action.
+
+**Why it is hard:** 3 fully authored Pokémon, average BST 328.3, average cap offset +2.33, ace offset +3, and 100% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: none (0% species overlap). Its species appear across an average of 1.0 unrelated trainer families.
+
+**Counterplay:** Fairy, Flying, Psychic, Ghost, Bug, and strong special pressure divide differently across the six. Item removal weakens Eviolite, Life Orb, Assault Vest, Sash, Sitrus, and Helmet seams; burn and Intimidate limit five physical members; Dark pressure answers Solosis but feeds no Justified gimmick. Spread attacks can be guarded once by Stufful, priority can be blocked by Inner Focus only on Kubfu, and each three-member half can be scouted and handled independently.
+
+**Strongest part:** The native 3+3 structure itself carries the variety: each half is a viable single, while the joint battle naturally mixes rare physical Kubfu pressure, special Solosis, and four distinct young fighting styles.
+
+**Weakest link:** The joint lead has no signature combo beyond immediate pressure. That is an intentional change of pace after several engine-centered doubles and keeps the pair scalable, readable, and independent.
+
+**Manual closure:** Battle 32 is closed at an editorial 9.0/10 jointly, 7.9 for Lilith alone, and 8.0 for Brenden alone: six legal levels 22-23, six distinct items and unused species, native split/joint routing, five stable donors, truthful dialogue, author self-check, and no custom AI or premature opposing Mega. Runtime testing must confirm all three branches before those estimates become observed.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Kubfu | 22 (cap +2) | Eviolite | Inner Focus | protected attacker | Brick Break, Iron Head, Aerial Ace, Protect |
+| 2 | Solosis | 23 (cap +3) | Life Orb | Magic Guard | coverage attacker | Psychic, Energy Ball, Shadow Ball, Recover |
+| 3 | Clobbopus | 22 (cap +2) | Assault Vest | Technician | coverage attacker | Brick Break, Ice Punch, Sucker Punch, Waterfall |
+
+## 056. Lilith — Dewford Town Gym
+
+**Optional · Single · Cap 20 · Extreme 90/100 · Uniqueness 98/100**
+
+**Theme:** Fighting pressure + spread + Wide Guard
+
+Brenden's half is rare Kubfu physical pressure, Life Orb Magic Guard Solosis special offense, and Assault Vest Technician Clobbopus coverage. Lilith's half is Focus Sash Pure Power Meditite tempo, Sitrus Intimidate Scraggy disruption and recovery, and Rocky Helmet Fluffy Stufful spread protection. In the joint branch Kubfu and Meditite lead as two different immediate styles; in either split single, every half still owns offense, coverage, bulk, and a finish. No fixed combo or turn is required. This is Verdant's first native pair built as six martial styles rather than one shared field engine, and its first trainer-owned Kubfu showcase. Kubfu, Solosis, Clobbopus, Meditite, Scraggy, and Stufful do not appear in Battles 1-31. It adds no weather, terrain, room, active speed control, ally activation, setup move, trap, hazard, redirection, Mega, or custom AI, leaving Brawly's protected boss identity intact.
+
+**How it behaves:** Both source trainers remain three-member intentional singles so the native sight intersection can create the 3+3 double or split encounters. Both use only native smart-switching, partner-aware, and HP-aware scoring. Inner Focus, Magic Guard, Life Orb, Recover, Technician, Assault Vest, Pure Power, Fake Out, Intimidate, Knock Off, Fluffy, Rocky Helmet, and Wide Guard require no custom selector or forced action.
+
+**Why it is hard:** 3 fully authored Pokémon, average BST 322.7, average cap offset +2.33, ace offset +3, and 100% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: none (0% species overlap). Its species appear across an average of 1.0 unrelated trainer families.
+
+**Counterplay:** Fairy, Flying, Psychic, Ghost, Bug, and strong special pressure divide differently across the six. Item removal weakens Eviolite, Life Orb, Assault Vest, Sash, Sitrus, and Helmet seams; burn and Intimidate limit five physical members; Dark pressure answers Solosis but feeds no Justified gimmick. Spread attacks can be guarded once by Stufful, priority can be blocked by Inner Focus only on Kubfu, and each three-member half can be scouted and handled independently.
+
+**Strongest part:** The native 3+3 structure itself carries the variety: each half is a viable single, while the joint battle naturally mixes rare physical Kubfu pressure, special Solosis, and four distinct young fighting styles.
+
+**Weakest link:** The joint lead has no signature combo beyond immediate pressure. That is an intentional change of pace after several engine-centered doubles and keeps the pair scalable, readable, and independent.
+
+**Manual closure:** Battle 32 is closed at an editorial 9.0/10 jointly, 7.9 for Lilith alone, and 8.0 for Brenden alone: six legal levels 22-23, six distinct items and unused species, native split/joint routing, five stable donors, truthful dialogue, author self-check, and no custom AI or premature opposing Mega. Runtime testing must confirm all three branches before those estimates become observed.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Meditite | 22 (cap +2) | Focus Sash | Pure Power | coverage attacker | Fake Out, Zen Headbutt, Drain Punch, Thunder Punch |
+| 2 | Scraggy | 22 (cap +2) | Sitrus Berry | Intimidate | coverage attacker | Fake Out, Drain Punch, Knock Off, Headbutt |
+| 3 | Stufful | 23 (cap +3) | Rocky Helmet | Fluffy | protected attacker | Brick Break, Rock Slide, Brutal Swing, Wide Guard |
+
+## 057. Takao — Dewford Town Gym
+
+**Optional · Single · Cap 20 · Extreme 85/100 · Uniqueness 98/100**
+
+**Theme:** underused fighting mixture
+
+Scope Lens Guts Machop may use Focus Energy to make high-critical Cross Chop loom, or attack immediately with Knock Off and Ice Punch. Eviolite Sheer Force Timburr then applies Force Palm, Rock Slide, Poison Jab, or Thunder Punch without a setup turn. Roseli Bulletproof Jangmo-o is the rare finish, using Dragon Claw, Brick Break, Iron Head, and Protect to resist one Fairy hit without erasing the type weakness. This is a direct three-member singles strength test. This is Verdant's first Scope Lens Focus Energy singles lesson and first Jangmo-o showcase. Machop, Timburr, and Jangmo-o do not appear in Battles 1-32. It uses no weather, terrain, room, active speed-control move, priority move, trap, hazard, partner mechanic, Mega, No Guard, or custom AI, preserving Brawly's exact reveal.
+
+**How it behaves:** Takao remains an intentional single with only native smart-switching and HP-aware scoring. Focus Energy, critical stages, Scope Lens, Guts, Sheer Force, Eviolite, Roseli Berry, Bulletproof, Knock Off, and Protect are standard mechanics; no first-turn setup flag, No Guard, forced move, or trainer-specific code is added.
+
+**Why it is hard:** 3 fully authored Pokémon, average BST 303.3, average cap offset +2.33, ace offset +3, and 100% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: none (0% species overlap). Its species appear across an average of 1.0 unrelated trainer families.
+
+**Counterplay:** Taunt, Encore, immediate focus pressure, Ghost immunity, burn, Intimidate, Reflect, item removal, and exploiting Cross Chop accuracy limit Machop. Flying, Psychic, Fairy, special offense, Ground, status, and Eviolite removal answer Timburr. Fairy, Ice, Dragon, status, phazing, or consuming Roseli before the decisive hit answer Jangmo-o. No No Guard accuracy or custom setup script removes those seams.
+
+**Strongest part:** Machop makes raw power legible through critical stages rather than inflated stats, and Jangmo-o supplies a genuinely cool young rare finish without skipping evolution progression.
+
+**Weakest link:** The three members are a sequence rather than a synergistic engine. That is healthy for a singles pacing lesson and makes its conventional Flying, Psychic, Fairy, status, and item answers easy to understand.
+
+**Manual closure:** Battle 33 is closed at an editorial 8.5/10: three legal levels 22-23, distinct items and unused species, three full-set donors, native singles continuation and dialogue, author self-check, and no No Guard, custom AI, or premature opposing Mega. Runtime playtesting remains required before 8.5 is observed.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Machop | 22 (cap +2) | Scope Lens | Guts | coverage attacker | Focus Energy, Cross Chop, Knock Off, Ice Punch |
+| 2 | Timburr | 22 (cap +2) | Eviolite | Sheer Force | coverage attacker | Force Palm, Rock Slide, Poison Jab, Thunder Punch |
+| 3 | Jangmo O | 23 (cap +3) | Roseli Berry | Bulletproof | protected attacker | Dragon Claw, Brick Break, Iron Head, Protect |
+
+## 058. Cristian — Dewford Town Gym
+
+**Optional · Single · Cap 20 · Extreme 87/100 · Uniqueness 86/100**
+
+**Theme:** Fighting pressure
+
+Eviolite Prankster Riolu represents stance through Bulk Up, Drain Punch, Crunch, and Poison Jab. Leek Scrappy Galarian Farfetch'd represents precision through high-critical Leaf Blade and Night Slash plus Brave Bird and Brick Break. Expert Belt Mold Breaker Throh represents committed power through Superpower, Stone Edge, Knock Off, and Poison Jab while ignoring defensive abilities. The three disciplines are individually dangerous and require no shared engine or custom sequencing. This is Verdant's first Leek critical showcase and first trainer-owned Throh. Riolu, Galarian Farfetch'd, and Throh do not appear in Battles 1-33. It uses no weather, terrain, room, active speed control, priority move, trap, hazard, partner interaction, Mega, No Guard, or custom AI.
+
+**How it behaves:** Cristian remains an intentional single with native smart-switching and HP-aware scoring only. Prankster Bulk Up, Eviolite, Drain Punch, Leek critical stages, Scrappy, Expert Belt, Mold Breaker, recoil, stat drops, and coverage are existing mechanics. No setup-first-turn flag, forced move, Mega, No Guard, or trainer-specific code is added.
+
+**Why it is hard:** 3 fully authored Pokémon, average BST 375.7, average cap offset +2.33, ace offset +3, and 100% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Kiyo (20% species overlap). Its species appear across an average of 1.7 unrelated trainer families.
+
+**Counterplay:** Taunt, Encore, Haze, phazing, Unaware, special pressure, or immediate damage limits Riolu. Burn, Intimidate, Reflect, item removal, Flying, Psychic, Fairy, Electric, Ice, and strong physical walls divide across Farfetch'd and Throh. Leek and Expert Belt are removable, Brave Bird and Superpower create self-inflicted openings, and all three are physical.
+
+**Strongest part:** Leek Farfetch'd and Mold Breaker Throh make two rare physical disciplines immediately visible, while Riolu gives the player one clean setup-denial decision.
+
+**Weakest link:** All three attackers are physical, so burn, Intimidate, Reflect, or a strong wall compresses the matchup. That is intentionally retained as fair counterplay rather than patched with a special attacker.
+
+**Manual closure:** Battle 34 is closed at an editorial 8.7/10: three legal levels 22-23, distinct items and unused species, three full-set donors, native singles continuation and dialogue, author self-check, and no custom AI, No Guard, or premature opposing Mega. Runtime playtesting remains required before 8.7 is observed.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Riolu | 22 (cap +2) | Eviolite | Prankster | setup attacker | Bulk Up, Drain Punch, Crunch, Poison Jab |
+| 2 | Farfetchd (Galarian) | 22 (cap +2) | Leek | Scrappy | coverage attacker | Leaf Blade, Night Slash, Brave Bird, Brick Break |
+| 3 | Throh | 23 (cap +3) | Expert Belt | Mold Breaker | coverage attacker | Superpower, Stone Edge, Knock Off, Poison Jab |
+
+## 059. Jocelyn — Dewford Town Gym
+
+**Optional · Double · Cap 20 · Extreme 93/100 · Uniqueness 94/100**
+
+**Theme:** Dark pressure
+
+Focus Sash Prankster Impidimp leads beside Life Orb special Hoopa Unbound. Fake Out, Taunt, Fake Tears, and Foul Play can buy or amplify Hyperspace Hole, Dark Pulse, Focus Blast, or Thunderbolt, but no move is forced. Eviolite Defiant Pawniard punishes stat-lowering and supplies Iron Head, Knock Off, Sucker Punch, and Brick Break. Colbur Magic Bounce Natu deters status while attacking through Psychic, Heat Wave, Giga Drain, or Roost. The rare Hoopa shock belongs to Jocelyn; the Mega reveal remains Brawly's. This is Verdant's first Protect-bypassing Hyperspace Hole lesson, first Hoopa Unbound encounter, and first Magic Bounce Natu. Impidimp, Hoopa Unbound, Pawniard, and Natu do not appear in Battles 1-34. It uses no weather, terrain, room, active speed control, setup move, ally activation, redirection, Mega, No Guard, or custom AI, preserving Brawly's full boss reveal.
+
+**How it behaves:** Jocelyn uses guarded native doubles with smart-switching, partner-aware, and HP-aware scoring. Fake Out, Prankster, Taunt, Fake Tears, Foul Play, Hyperspace Hole's Protect bypass, Life Orb, Defiant, Eviolite, Sucker Punch, Magic Bounce, Colbur Berry, coverage, and Roost are existing mechanics. No trainer-specific target, screen, room, redirection, Mega, or forced opening is added.
+
+**Why it is hard:** 4 fully authored Pokémon, average BST 401.2, average cap offset +2.25, ace offset +3, and 100% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Sidney (11% species overlap). Its species appear across an average of 1.5 unrelated trainer families.
+
+**Counterplay:** Dark types ignore Prankster-targeted status, while Fake Out immunity, Taunt, focus fire, spread attacks, or removing Impidimp's Sash breaks the lead support. Fairy and especially Bug pressure threaten Hoopa, whose Life Orb and modest physical bulk create a clear focus target. Fighting, Fire, Ground, item removal, priority prediction, Mold Breaker status, and strong Rock, Electric, Ice, Ghost, or Dark attacks divide across Pawniard and Natu. Magic Bounce reflects but does not stop direct damage.
+
+**Strongest part:** A tiny Prankster support standing beside special Hoopa Unbound is an unmistakable final-trainer shock, and Hyperspace Hole teaches that Protect is not universal before Brawly.
+
+**Weakest link:** Hoopa concentrates much of the threat and folds quickly to Fairy, Bug, or coordinated focus fire once Impidimp is removed. That is the intended clean answer, not a gap to patch.
+
+**Manual closure:** Battle 35 is closed at an editorial 9.3/10: four legal levels 22-23, distinct items and unused species, guarded native doubles with room continuation, three stable donors, truthful dialogue, author self-check, and no custom AI or premature opposing Mega. Runtime playtesting remains required before 9.3 is observed.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Impidimp | 22 (cap +2) | Focus Sash | Prankster | disruption and support | Fake Out, Taunt, Fake Tears, Foul Play |
+| 2 | Hoopa Unbound | 23 (cap +3) | Life Orb | Magician | rare centerpiece | Hyperspace Hole, Dark Pulse, Focus Blast, Thunderbolt |
+| 3 | Pawniard | 22 (cap +2) | Eviolite | Defiant | coverage attacker | Iron Head, Knock Off, Sucker Punch, Brick Break |
+| 4 | Natu | 22 (cap +2) | Colbur Berry | Magic Bounce | coverage attacker | Psychic, Heat Wave, Giga Drain, Roost |
+
+## 060. Brawly — Dewford Town Gym
 
 **Required · Double · Cap 20 · Extreme 100/100 · Uniqueness 88/100**
 
@@ -1315,176 +1485,6 @@ Sitrus Volt Absorb Pachirisu and Lum Defiant Falinks lead. Follow Me can buy No 
 | 4 | Kirlia | 23 (cap +3) | Eviolite | Synchronize | disruption and support | Dazzling Gleam, Psychic, Will O Wisp, Helping Hand |
 | 5 | Breloom | 24 (cap +4) | Toxic Orb | Poison Heal | coverage attacker | Facade, Mach Punch, Seed Bomb, Rock Tomb |
 | 6 | Hawlucha | 25 (cap +5) | Hawluchanite | Unburden | Mega ace | High Jump Kick, Stone Edge, Brave Bird, Feint |
-
-## 055. Takao — Dewford Town Gym
-
-**Optional · Single · Cap 20 · Extreme 85/100 · Uniqueness 98/100**
-
-**Theme:** underused fighting mixture
-
-Scope Lens Guts Machop may use Focus Energy to make high-critical Cross Chop loom, or attack immediately with Knock Off and Ice Punch. Eviolite Sheer Force Timburr then applies Force Palm, Rock Slide, Poison Jab, or Thunder Punch without a setup turn. Roseli Bulletproof Jangmo-o is the rare finish, using Dragon Claw, Brick Break, Iron Head, and Protect to resist one Fairy hit without erasing the type weakness. This is a direct three-member singles strength test. This is Verdant's first Scope Lens Focus Energy singles lesson and first Jangmo-o showcase. Machop, Timburr, and Jangmo-o do not appear in Battles 1-32. It uses no weather, terrain, room, active speed-control move, priority move, trap, hazard, partner mechanic, Mega, No Guard, or custom AI, preserving Brawly's exact reveal.
-
-**How it behaves:** Takao remains an intentional single with only native smart-switching and HP-aware scoring. Focus Energy, critical stages, Scope Lens, Guts, Sheer Force, Eviolite, Roseli Berry, Bulletproof, Knock Off, and Protect are standard mechanics; no first-turn setup flag, No Guard, forced move, or trainer-specific code is added.
-
-**Why it is hard:** 3 fully authored Pokémon, average BST 303.3, average cap offset +2.33, ace offset +3, and 100% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: none (0% species overlap). Its species appear across an average of 1.0 unrelated trainer families.
-
-**Counterplay:** Taunt, Encore, immediate focus pressure, Ghost immunity, burn, Intimidate, Reflect, item removal, and exploiting Cross Chop accuracy limit Machop. Flying, Psychic, Fairy, special offense, Ground, status, and Eviolite removal answer Timburr. Fairy, Ice, Dragon, status, phazing, or consuming Roseli before the decisive hit answer Jangmo-o. No No Guard accuracy or custom setup script removes those seams.
-
-**Strongest part:** Machop makes raw power legible through critical stages rather than inflated stats, and Jangmo-o supplies a genuinely cool young rare finish without skipping evolution progression.
-
-**Weakest link:** The three members are a sequence rather than a synergistic engine. That is healthy for a singles pacing lesson and makes its conventional Flying, Psychic, Fairy, status, and item answers easy to understand.
-
-**Manual closure:** Battle 33 is closed at an editorial 8.5/10: three legal levels 22-23, distinct items and unused species, three full-set donors, native singles continuation and dialogue, author self-check, and no No Guard, custom AI, or premature opposing Mega. Runtime playtesting remains required before 8.5 is observed.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Machop | 22 (cap +2) | Scope Lens | Guts | coverage attacker | Focus Energy, Cross Chop, Knock Off, Ice Punch |
-| 2 | Timburr | 22 (cap +2) | Eviolite | Sheer Force | coverage attacker | Force Palm, Rock Slide, Poison Jab, Thunder Punch |
-| 3 | Jangmo O | 23 (cap +3) | Roseli Berry | Bulletproof | protected attacker | Dragon Claw, Brick Break, Iron Head, Protect |
-
-## 056. Jocelyn — Dewford Town Gym
-
-**Optional · Double · Cap 20 · Extreme 93/100 · Uniqueness 94/100**
-
-**Theme:** Dark pressure
-
-Focus Sash Prankster Impidimp leads beside Life Orb special Hoopa Unbound. Fake Out, Taunt, Fake Tears, and Foul Play can buy or amplify Hyperspace Hole, Dark Pulse, Focus Blast, or Thunderbolt, but no move is forced. Eviolite Defiant Pawniard punishes stat-lowering and supplies Iron Head, Knock Off, Sucker Punch, and Brick Break. Colbur Magic Bounce Natu deters status while attacking through Psychic, Heat Wave, Giga Drain, or Roost. The rare Hoopa shock belongs to Jocelyn; the Mega reveal remains Brawly's. This is Verdant's first Protect-bypassing Hyperspace Hole lesson, first Hoopa Unbound encounter, and first Magic Bounce Natu. Impidimp, Hoopa Unbound, Pawniard, and Natu do not appear in Battles 1-34. It uses no weather, terrain, room, active speed control, setup move, ally activation, redirection, Mega, No Guard, or custom AI, preserving Brawly's full boss reveal.
-
-**How it behaves:** Jocelyn uses guarded native doubles with smart-switching, partner-aware, and HP-aware scoring. Fake Out, Prankster, Taunt, Fake Tears, Foul Play, Hyperspace Hole's Protect bypass, Life Orb, Defiant, Eviolite, Sucker Punch, Magic Bounce, Colbur Berry, coverage, and Roost are existing mechanics. No trainer-specific target, screen, room, redirection, Mega, or forced opening is added.
-
-**Why it is hard:** 4 fully authored Pokémon, average BST 401.2, average cap offset +2.25, ace offset +3, and 100% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Sidney (11% species overlap). Its species appear across an average of 1.5 unrelated trainer families.
-
-**Counterplay:** Dark types ignore Prankster-targeted status, while Fake Out immunity, Taunt, focus fire, spread attacks, or removing Impidimp's Sash breaks the lead support. Fairy and especially Bug pressure threaten Hoopa, whose Life Orb and modest physical bulk create a clear focus target. Fighting, Fire, Ground, item removal, priority prediction, Mold Breaker status, and strong Rock, Electric, Ice, Ghost, or Dark attacks divide across Pawniard and Natu. Magic Bounce reflects but does not stop direct damage.
-
-**Strongest part:** A tiny Prankster support standing beside special Hoopa Unbound is an unmistakable final-trainer shock, and Hyperspace Hole teaches that Protect is not universal before Brawly.
-
-**Weakest link:** Hoopa concentrates much of the threat and folds quickly to Fairy, Bug, or coordinated focus fire once Impidimp is removed. That is the intended clean answer, not a gap to patch.
-
-**Manual closure:** Battle 35 is closed at an editorial 9.3/10: four legal levels 22-23, distinct items and unused species, guarded native doubles with room continuation, three stable donors, truthful dialogue, author self-check, and no custom AI or premature opposing Mega. Runtime playtesting remains required before 9.3 is observed.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Impidimp | 22 (cap +2) | Focus Sash | Prankster | disruption and support | Fake Out, Taunt, Fake Tears, Foul Play |
-| 2 | Hoopa Unbound | 23 (cap +3) | Life Orb | Magician | rare centerpiece | Hyperspace Hole, Dark Pulse, Focus Blast, Thunderbolt |
-| 3 | Pawniard | 22 (cap +2) | Eviolite | Defiant | coverage attacker | Iron Head, Knock Off, Sucker Punch, Brick Break |
-| 4 | Natu | 22 (cap +2) | Colbur Berry | Magic Bounce | coverage attacker | Psychic, Heat Wave, Giga Drain, Roost |
-
-## 057. Laura — Dewford Town Gym
-
-**Optional · Double · Cap 20 · Extreme 87/100 · Uniqueness 90/100**
-
-**Theme:** Fighting pressure + pivot control + spread + Wide Guard
-
-Focus Sash Regenerator Mienfoo leads beside Flame Orb Guts Makuhita. Fake Out can buy the one turn Makuhita needs to activate Guts, while U-turn, Drain Punch, and Acrobatics keep Mienfoo useful and Makuhita supplies Close Combat, Heavy Slam, Knock Off, or Wide Guard. Black Sludge Dry Skin Croagunk checks Fairy, Psychic, Flying, and Water lines through Gunk Shot, Sucker Punch, Ice Punch, and Drain Punch. Silk Scarf Stakeout Gumshoos provides the non-Fighting finish and punishes careless switching with Return, Crunch, Earthquake, or Fire Fang. No turn is forced. This is Verdant's first Fake Out-to-Flame-Orb Guts drill and first Stakeout switch punishment. Mienfoo, Makuhita, Croagunk, and Gumshoos do not appear in Battles 1-30. It uses no weather, terrain, room, active speed-control move, setup move, ally attack, trap, hazard, redirection, Mega, or custom AI, preserving Brawly's No Retreat, redirection, No Guard, and Mega Hawlucha identity.
-
-**How it behaves:** Laura uses native smart-switching, partner-aware, and HP-aware scoring only. Party order creates the Mienfoo-Makuhita opening; Fake Out, Flame Orb, Guts, Regenerator, U-turn, Wide Guard, Dry Skin, Black Sludge, Sucker Punch, and Stakeout are existing mechanics. No Coaching scorer, forced activation, trainer-specific selector, or opponent Mega is introduced.
-
-**Why it is hard:** 4 fully authored Pokémon, average BST 336.2, average cap offset +1.5, ace offset +2, and 100% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Victor (14% species overlap). Its species appear across an average of 1.2 unrelated trainer families.
-
-**Counterplay:** Ghost typing or Protect can blank the opening Fake Out; Taunt, item removal, status control, fast focus fire, or denying Makuhita a safe turn limits Guts. Flying, Psychic, and Fairy attacks, burn before Flame Orb, Intimidate, Reflect, Wide Guard pressure, Ground attacks into Croagunk, and exploiting Mienfoo's Sash or Gumshoos's middling speed all remain broad answers. The coverage discourages one-button sweeping without erasing the Gym's natural weaknesses.
-
-**Strongest part:** Mienfoo buying exactly one breath for Makuhita's Flame Orb makes the opening instantly understandable, while Croagunk and Stakeout Gumshoos make the obvious counter-switches matter.
-
-**Weakest link:** The reserves are strong coverage pieces rather than a second novel engine. That simplicity is intentional for the first Gym trainer and keeps Brawly's boss mechanics unspent.
-
-**Manual closure:** Battle 31 is closed at an editorial 8.7/10: four legal levels 21-22, distinct items and unused species, guarded native doubles with room-brightening continuation, three full-set donors, truthful dialogue, author self-check, and no custom AI or premature opposing Mega. Runtime playtesting remains required before 8.7 is observed.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Mienfoo | 21 (cap +1) | Focus Sash | Regenerator | coverage attacker | Fake Out, U Turn, Drain Punch, Acrobatics |
-| 2 | Makuhita | 22 (cap +2) | Flame Orb | Guts | protected attacker | Close Combat, Heavy Slam, Knock Off, Wide Guard |
-| 3 | Croagunk | 21 (cap +1) | Black Sludge | Dry Skin | coverage attacker | Gunk Shot, Drain Punch, Sucker Punch, Ice Punch |
-| 4 | Gumshoos | 22 (cap +2) | Silk Scarf | Stakeout | coverage attacker | Return, Crunch, Earthquake, Fire Fang |
-
-## 058. Brenden — Dewford Town Gym
-
-**Optional · Single · Cap 20 · Extreme 90/100 · Uniqueness 100/100**
-
-**Theme:** Fighting rare-showcase balance
-
-Brenden's half is rare Kubfu physical pressure, Life Orb Magic Guard Solosis special offense, and Assault Vest Technician Clobbopus coverage. Lilith's half is Focus Sash Pure Power Meditite tempo, Sitrus Intimidate Scraggy disruption and recovery, and Rocky Helmet Fluffy Stufful spread protection. In the joint branch Kubfu and Meditite lead as two different immediate styles; in either split single, every half still owns offense, coverage, bulk, and a finish. No fixed combo or turn is required. This is Verdant's first native pair built as six martial styles rather than one shared field engine, and its first trainer-owned Kubfu showcase. Kubfu, Solosis, Clobbopus, Meditite, Scraggy, and Stufful do not appear in Battles 1-31. It adds no weather, terrain, room, active speed control, ally activation, setup move, trap, hazard, redirection, Mega, or custom AI, leaving Brawly's protected boss identity intact.
-
-**How it behaves:** Both source trainers remain three-member intentional singles so the native sight intersection can create the 3+3 double or split encounters. Both use only native smart-switching, partner-aware, and HP-aware scoring. Inner Focus, Magic Guard, Life Orb, Recover, Technician, Assault Vest, Pure Power, Fake Out, Intimidate, Knock Off, Fluffy, Rocky Helmet, and Wide Guard require no custom selector or forced action.
-
-**Why it is hard:** 3 fully authored Pokémon, average BST 328.3, average cap offset +2.33, ace offset +3, and 100% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: none (0% species overlap). Its species appear across an average of 1.0 unrelated trainer families.
-
-**Counterplay:** Fairy, Flying, Psychic, Ghost, Bug, and strong special pressure divide differently across the six. Item removal weakens Eviolite, Life Orb, Assault Vest, Sash, Sitrus, and Helmet seams; burn and Intimidate limit five physical members; Dark pressure answers Solosis but feeds no Justified gimmick. Spread attacks can be guarded once by Stufful, priority can be blocked by Inner Focus only on Kubfu, and each three-member half can be scouted and handled independently.
-
-**Strongest part:** The native 3+3 structure itself carries the variety: each half is a viable single, while the joint battle naturally mixes rare physical Kubfu pressure, special Solosis, and four distinct young fighting styles.
-
-**Weakest link:** The joint lead has no signature combo beyond immediate pressure. That is an intentional change of pace after several engine-centered doubles and keeps the pair scalable, readable, and independent.
-
-**Manual closure:** Battle 32 is closed at an editorial 9.0/10 jointly, 7.9 for Lilith alone, and 8.0 for Brenden alone: six legal levels 22-23, six distinct items and unused species, native split/joint routing, five stable donors, truthful dialogue, author self-check, and no custom AI or premature opposing Mega. Runtime testing must confirm all three branches before those estimates become observed.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Kubfu | 22 (cap +2) | Eviolite | Inner Focus | protected attacker | Brick Break, Iron Head, Aerial Ace, Protect |
-| 2 | Solosis | 23 (cap +3) | Life Orb | Magic Guard | coverage attacker | Psychic, Energy Ball, Shadow Ball, Recover |
-| 3 | Clobbopus | 22 (cap +2) | Assault Vest | Technician | coverage attacker | Brick Break, Ice Punch, Sucker Punch, Waterfall |
-
-## 059. Cristian — Dewford Town Gym
-
-**Optional · Single · Cap 20 · Extreme 87/100 · Uniqueness 86/100**
-
-**Theme:** Fighting pressure
-
-Eviolite Prankster Riolu represents stance through Bulk Up, Drain Punch, Crunch, and Poison Jab. Leek Scrappy Galarian Farfetch'd represents precision through high-critical Leaf Blade and Night Slash plus Brave Bird and Brick Break. Expert Belt Mold Breaker Throh represents committed power through Superpower, Stone Edge, Knock Off, and Poison Jab while ignoring defensive abilities. The three disciplines are individually dangerous and require no shared engine or custom sequencing. This is Verdant's first Leek critical showcase and first trainer-owned Throh. Riolu, Galarian Farfetch'd, and Throh do not appear in Battles 1-33. It uses no weather, terrain, room, active speed control, priority move, trap, hazard, partner interaction, Mega, No Guard, or custom AI.
-
-**How it behaves:** Cristian remains an intentional single with native smart-switching and HP-aware scoring only. Prankster Bulk Up, Eviolite, Drain Punch, Leek critical stages, Scrappy, Expert Belt, Mold Breaker, recoil, stat drops, and coverage are existing mechanics. No setup-first-turn flag, forced move, Mega, No Guard, or trainer-specific code is added.
-
-**Why it is hard:** 3 fully authored Pokémon, average BST 375.7, average cap offset +2.33, ace offset +3, and 100% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Kiyo (20% species overlap). Its species appear across an average of 1.7 unrelated trainer families.
-
-**Counterplay:** Taunt, Encore, Haze, phazing, Unaware, special pressure, or immediate damage limits Riolu. Burn, Intimidate, Reflect, item removal, Flying, Psychic, Fairy, Electric, Ice, and strong physical walls divide across Farfetch'd and Throh. Leek and Expert Belt are removable, Brave Bird and Superpower create self-inflicted openings, and all three are physical.
-
-**Strongest part:** Leek Farfetch'd and Mold Breaker Throh make two rare physical disciplines immediately visible, while Riolu gives the player one clean setup-denial decision.
-
-**Weakest link:** All three attackers are physical, so burn, Intimidate, Reflect, or a strong wall compresses the matchup. That is intentionally retained as fair counterplay rather than patched with a special attacker.
-
-**Manual closure:** Battle 34 is closed at an editorial 8.7/10: three legal levels 22-23, distinct items and unused species, three full-set donors, native singles continuation and dialogue, author self-check, and no custom AI, No Guard, or premature opposing Mega. Runtime playtesting remains required before 8.7 is observed.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Riolu | 22 (cap +2) | Eviolite | Prankster | setup attacker | Bulk Up, Drain Punch, Crunch, Poison Jab |
-| 2 | Farfetchd (Galarian) | 22 (cap +2) | Leek | Scrappy | coverage attacker | Leaf Blade, Night Slash, Brave Bird, Brick Break |
-| 3 | Throh | 23 (cap +3) | Expert Belt | Mold Breaker | coverage attacker | Superpower, Stone Edge, Knock Off, Poison Jab |
-
-## 060. Lilith — Dewford Town Gym
-
-**Optional · Single · Cap 20 · Extreme 90/100 · Uniqueness 98/100**
-
-**Theme:** Fighting pressure + spread + Wide Guard
-
-Brenden's half is rare Kubfu physical pressure, Life Orb Magic Guard Solosis special offense, and Assault Vest Technician Clobbopus coverage. Lilith's half is Focus Sash Pure Power Meditite tempo, Sitrus Intimidate Scraggy disruption and recovery, and Rocky Helmet Fluffy Stufful spread protection. In the joint branch Kubfu and Meditite lead as two different immediate styles; in either split single, every half still owns offense, coverage, bulk, and a finish. No fixed combo or turn is required. This is Verdant's first native pair built as six martial styles rather than one shared field engine, and its first trainer-owned Kubfu showcase. Kubfu, Solosis, Clobbopus, Meditite, Scraggy, and Stufful do not appear in Battles 1-31. It adds no weather, terrain, room, active speed control, ally activation, setup move, trap, hazard, redirection, Mega, or custom AI, leaving Brawly's protected boss identity intact.
-
-**How it behaves:** Both source trainers remain three-member intentional singles so the native sight intersection can create the 3+3 double or split encounters. Both use only native smart-switching, partner-aware, and HP-aware scoring. Inner Focus, Magic Guard, Life Orb, Recover, Technician, Assault Vest, Pure Power, Fake Out, Intimidate, Knock Off, Fluffy, Rocky Helmet, and Wide Guard require no custom selector or forced action.
-
-**Why it is hard:** 3 fully authored Pokémon, average BST 322.7, average cap offset +2.33, ace offset +3, and 100% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: none (0% species overlap). Its species appear across an average of 1.0 unrelated trainer families.
-
-**Counterplay:** Fairy, Flying, Psychic, Ghost, Bug, and strong special pressure divide differently across the six. Item removal weakens Eviolite, Life Orb, Assault Vest, Sash, Sitrus, and Helmet seams; burn and Intimidate limit five physical members; Dark pressure answers Solosis but feeds no Justified gimmick. Spread attacks can be guarded once by Stufful, priority can be blocked by Inner Focus only on Kubfu, and each three-member half can be scouted and handled independently.
-
-**Strongest part:** The native 3+3 structure itself carries the variety: each half is a viable single, while the joint battle naturally mixes rare physical Kubfu pressure, special Solosis, and four distinct young fighting styles.
-
-**Weakest link:** The joint lead has no signature combo beyond immediate pressure. That is an intentional change of pace after several engine-centered doubles and keeps the pair scalable, readable, and independent.
-
-**Manual closure:** Battle 32 is closed at an editorial 9.0/10 jointly, 7.9 for Lilith alone, and 8.0 for Brenden alone: six legal levels 22-23, six distinct items and unused species, native split/joint routing, five stable donors, truthful dialogue, author self-check, and no custom AI or premature opposing Mega. Runtime testing must confirm all three branches before those estimates become observed.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Meditite | 22 (cap +2) | Focus Sash | Pure Power | coverage attacker | Fake Out, Zen Headbutt, Drain Punch, Thunder Punch |
-| 2 | Scraggy | 22 (cap +2) | Sitrus Berry | Intimidate | coverage attacker | Fake Out, Drain Punch, Knock Off, Headbutt |
-| 3 | Stufful | 23 (cap +3) | Rocky Helmet | Fluffy | protected attacker | Brick Break, Rock Slide, Brutal Swing, Wide Guard |
 
 # Trick House puzzle 1
 
@@ -1730,7 +1730,7 @@ Medicham opens this deliberate singles fight. The roster is built as fighting pr
 
 **Why it is hard:** 3 fully authored Pokémon, average BST 470.0, average cap offset -3.0, ace offset -3, and 33% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Brawly (29% species overlap). Its species appear across an average of 9.0 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Brawly (29% species overlap). Its species appear across an average of 9.3 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -1752,7 +1752,7 @@ Hariyama and Scrafty are the authored opening pair. The board plan is beat up + 
 
 **Why it is hard:** 4 fully authored Pokémon, average BST 520.5, average cap offset -2.0, ace offset -2, and 100% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: John & Jay (33% species overlap). Its species appear across an average of 7.5 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: John & Jay (33% species overlap). Its species appear across an average of 7.2 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -1787,138 +1787,7 @@ Breloom opens this deliberate singles fight. The roster is built as fighting pre
 
 # Dynamo Badge
 
-## 073. Dwayne — Route 109 Seashore House
-
-**Optional · Single · Cap 30 · Extreme 90/100 · Uniqueness 78/100**
-
-**Theme:** Fire rare-showcase balance
-
-Focus Sash Dry Skin Jynx opens the cold side through Freeze-Dry, Psyshock, Aura Sphere, or Taunt. Eviolite Flame Body Magmar turns the sequence hot with Flamethrower, Scorching Sands, Hidden Power, and Will-O-Wisp. Level-33 Choice Scarf Water Absorb Volcanion fuses both halves into a steam finish through Steam Eruption, Flamethrower, Sludge Bomb, or Earth Power. Smart switching may expose either Water immunity when the player attacks Magmar, but no switch or move is forced. This is Verdant's first hot-and-cold singles ladder and first Volcanion opponent encounter. Jynx and Magmar become legal exactly as the cap-30 evolution phase begins, while Volcanion earns its early mythical placement by literally completing Dwayne's steam-and-Soda-Pop theme. The battle uses no weather, room, terrain, hazard, setup move, recovery move, trap, redirection, partner activation, or Mega; its one commitment is Volcanion's visible Choice lock.
-
-**How it behaves:** Dwayne remains an intentional single with native foe-aware, smart-switching, and HP-aware scoring. Focus Sash, Dry Skin, Taunt, Eviolite, Flame Body, burns, Choice Scarf, Water Absorb, Steam Eruption, and Choice locking are existing mechanics. No custom selector, fixed switch, setup flag, weather, terrain, Mega, or hidden-information rule is added.
-
-**Why it is hard:** 3 fully authored Pokémon, average BST 523.3, average cap offset +2.0, ace offset +3, and 100% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Lydia (29% species overlap). Its species appear across an average of 4.7 unrelated trainer families.
-
-**Counterplay:** Priority or multihit attacks break Jynx's Sash; Ghost, Dark, Bug, Fire, Rock, and Steel pressure it, while special bulk absorbs its accurate coverage. Rock, Ground, Water, item removal, Taunt, status immunity, and strong special attacks answer Eviolite Magmar despite Flame Body. Electric, Ground, Rock, Dragon, special walls, Protect, immunity pivots, Disable, Encore, or scouting and exploiting Volcanion's Choice lock answer the finish. The two Water immunities punish autopilot but do not cover Rock, Ground, Electric, or broad neutral pressure.
-
-**Strongest part:** Jynx and Volcanion can each absorb the obvious Water attack into Magmar, and the final Water/Fire mythical turns Dwayne's hot-battle and ice-cold-Soda dialogue into one readable temperature progression.
-
-**Weakest link:** This is a direct coverage ladder rather than a layered puzzle. That simplicity is retained as a deliberate singles pacing change, while shared Rock and Ground pressure plus Volcanion's Choice lock keep the mythical finish broadly answerable.
-
-**Manual closure:** Battle 43 is source-closed at an editorial 9.0/10: three legal levels 31-33, three distinct items, four stable full-set references, a truthful thermal dialogue rewrite, intact shared reward routing, native smart-switching and HP awareness, author self-check, and no custom AI or non-Mega gimmick. Runtime playtesting remains required before 9.0 is observed.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Jynx | 31 (cap +1) | Focus Sash | Dry Skin | coverage attacker | Freeze Dry, Psyshock, Aura Sphere, Taunt |
-| 2 | Magmar | 32 (cap +2) | Eviolite | Flame Body | coverage attacker | Flamethrower, Scorching Sands, Hidden Power, Will O Wisp |
-| 3 | Volcanion | 33 (cap +3) | Choice Scarf | Water Absorb | Choice-locked breaker | Steam Eruption, Flamethrower, Sludge Bomb, Earth Power |
-
-## 074. Johanna — Route 109 Seashore House
-
-**Optional · Double · Cap 30 · Extreme 92/100 · Uniqueness 83/100**
-
-**Theme:** Surf ally activation + active speed control
-
-Focus Sash Oblivious Feebas and Weakness Policy Steam Engine Carkol lead. Feebas's extremely weak Surf damages both foes while activating Carkol's Speed and offensive boosts; Icy Wind, Mirror Coat, and Protect remain useful if activation is denied. Carkol converts the boost through Heat Wave, Power Gem, Scorching Sands, or Protect. Eviolite Water Compaction Sandygast gives a surviving Feebas a second, defensive Surf interaction through Shore Up and three attacks. Life Orb Queenly Majesty Tsareena closes directly through Power Whip, High Jump Kick, Knock Off, and Trop Kick while denying priority only after it actually reaches the field. This is Verdant's first Steam Engine plus Weakness Policy activation and first Feebas opponent. It deliberately keeps Carkol and Sandygast unevolved at cap 30 and turns Johanna's line about hot battles making Pokémon tougher into two literal ally-activation routes. Sandygast last appeared thirty-eight encounters earlier in Billy's simple shoreline single; its Eviolite Water Compaction reserve job is a deliberate, materially different reuse. Dwayne's preceding direct single gives way to a real doubles combo; no weather, terrain, room, screen, hazard, trap, redirection, sleep, Mega, or second setup mode is present.
-
-**How it behaves:** Johanna uses guarded native doubles with smart-switching, partner-aware, HP-aware, combo-setup, and speed-control scoring. The checked-in reusable combo layer explicitly rewards Surf into Steam Engine or Water Compaction, while ordinary collateral scoring still rejects suicidal ally damage. Weakness Policy, Icy Wind, Mirror Coat, Eviolite, Shore Up, Queenly Majesty, Life Orb, and all attacks are existing mechanics. No trainer-specific state machine, forced first turn, Mega, weather, or non-Mega gimmick is added.
-
-**Why it is hard:** 4 fully authored Pokémon, average BST 365.0, average cap offset +2.0, ace offset +3, and 100% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Helene (20% species overlap). Its species appear across an average of 3.0 unrelated trainer families.
-
-**Counterplay:** Fake Out, priority, spread denial, Wide Guard, Taunt, Storm Drain, Water Absorb, Dry Skin, or immediate Electric or Grass pressure can stop Feebas or its Surf. Strong Water or Ground damage may knock out Carkol before it converts Weakness Policy; Haze, Clear Smog, Unaware, Trick Room, phazing, item removal, and focused special damage erase or reverse the boost. Sandygast remains vulnerable to Water, Grass, Ice, Ghost, and Dark pressure despite Eviolite, while Tsareena has common Fire, Ice, Flying, Poison, and Bug weaknesses and takes Life Orb or High Jump Kick risk. No backup setter recreates Steam Engine.
-
-**Strongest part:** A deliberately weak Feebas uses Surf to make Carkol explosively fast and strong, then can repurpose the same move to harden Sandygast; the mechanic literally fulfills Johanna's claim that hot battles toughen Pokémon.
-
-**Weakest link:** If Feebas is removed immediately, the team becomes four ordinary stage-appropriate attackers. That single fragile activator is the intended fair answer, and Tsareena supplies pressure rather than a hidden replacement engine.
-
-**Manual closure:** Battle 44 is source-closed at an editorial 9.2/10: four legal levels 31-33, two meaningful unevolved stages, four distinct items, one historic elite activation core, three full-set donors, guarded double routing, truthful native-width hints, reusable combo AI, shared reward preservation, and no custom state machine or non-Mega gimmick. Runtime playtesting remains required before 9.2 is observed.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Feebas | 31 (cap +1) | Focus Sash | Oblivious | speed control | Surf, Icy Wind, Mirror Coat, Protect |
-| 2 | Carkol | 32 (cap +2) | Weakness Policy | Steam Engine | protected attacker | Heat Wave, Power Gem, Scorching Sands, Protect |
-| 3 | Sandygast | 32 (cap +2) | Eviolite | Water Compaction | coverage attacker | Shore Up, Earth Power, Shadow Ball, Giga Drain |
-| 4 | Tsareena | 33 (cap +3) | Life Orb | Queenly Majesty | coverage attacker | Power Whip, High Jump Kick, Knock Off, Trop Kick |
-
-## 075. Simon — Route 109 Seashore House
-
-**Optional · Double · Cap 30 · Extreme 93/100 · Uniqueness 80/100**
-
-**Theme:** Tailwind + active speed control
-
-Mental Herb Aerilate Tropius and Life Orb Justified Keldeo lead the four-rider formation. Tropius may establish Tailwind, attack through Flying-type Return or Seed Bomb, or Protect; Keldeo applies immediate Hydro Pump and Secret Sword pressure, uses Icy Wind when Tailwind is denied, or Protects. Assault Vest Stamina Mudsdale supplies physical Ground, Steel, Rock, and Body Press coverage. Level-33 Choice Specs Shell Armor Lapras closes through Freeze-Dry, Hydro Pump, Thunderbolt, or Psychic, exposing one final lock rather than adding setup or sustain. This is Verdant's first all-mount formation and first Keldeo encounter. Tropius carries through the air, Mudsdale over land, and Lapras and Keldeo across water, turning Simon's old inner-tube line into an exact visual identity. It follows Johanna's ally-activation puzzle with a conventional but very strong Tailwind balance team: no ally-target move, weather, terrain, room, setup move, hazard, trap, redirection, recovery move, Mega, or custom AI is present.
-
-**How it behaves:** Simon uses guarded native doubles with smart-switching, partner-aware, HP-aware, and speed-control scoring. Tailwind, Mental Herb, Aerilate, Icy Wind, Life Orb, Assault Vest, Stamina, Body Press, Choice Specs, Shell Armor, Freeze-Dry, and Choice locking are existing mechanics. No custom selector, forced Tailwind, setup flag, weather, terrain, Mega, or non-Mega gimmick is added.
-
-**Why it is hard:** 4 fully authored Pokémon, average BST 531.2, average cap offset +2.0, ace offset +3, and 100% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Douglas (20% species overlap). Its species appear across an average of 6.2 unrelated trainer families.
-
-**Counterplay:** Fake Out, Taunt after Mental Herb is spent, opposing Tailwind, Trick Room, paralysis, Icy Wind, priority, or immediate Ice, Rock, Fire, Flying, or Poison pressure can deny or outlast Tropius's single speed window. Fairy, Psychic, Flying, Grass, and Electric pressure answer Keldeo with the relevant partner covered but not erased. Special Water, Grass, and Ice attacks bypass Mudsdale's Stamina plan; burn, Intimidate, item removal, and focused damage reduce its offense. Fighting, Rock, Electric, Grass, strong physical damage, Protect, immunity pivots, Trick, Disable, or exploiting Lapras's Choice lock answer the finish. No one field condition returns after Tropius falls.
-
-**Strongest part:** Every member visibly answers Simon's wish for a Pokémon that can carry him, and Keldeo provides the rare sea-rider payoff inside a coherent Tailwind formation rather than as isolated legendary stats.
-
-**Weakest link:** Tailwind balance is a familiar competitive structure. The literal four-mount identity, mixed physical and special reserves, one setter, and broad speed-reversal counterplay make that familiarity a clean final House exam rather than repetitive filler.
-
-**Manual closure:** Battle 45 is source-closed at an editorial 9.3/10: four legal levels 31-33, four distinct items and roles, four full-set donors, guarded native doubles, truthful transport dialogue, one Tailwind window, shared reward completion, author self-check, and no custom AI or non-Mega gimmick. Runtime playtesting remains required before 9.3 is observed.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Tropius | 31 (cap +1) | Mental Herb | Aerilate | speed control | Tailwind, Return, Seed Bomb, Protect |
-| 2 | Keldeo | 32 (cap +2) | Life Orb | Justified | speed control | Hydro Pump, Secret Sword, Icy Wind, Protect |
-| 3 | Mudsdale | 32 (cap +2) | Assault Vest | Stamina | coverage attacker | High Horsepower, Heavy Slam, Rock Slide, Body Press |
-| 4 | Lapras | 33 (cap +3) | Choice Specs | Shell Armor | Choice-locked breaker | Freeze Dry, Hydro Pump, Thunderbolt, Psychic |
-
-## 076. David — Route 109
-
-**Optional · Double · Cap 30 · Demanding 44/100 · Uniqueness 86/100**
-
-**Theme:** Sash Endeavor lure
-
-Crawdaunt and Palossand are the authored opening pair. The board plan is sash endeavor lure. The composition turns the surrounding water route and coastal terrain into the fight's identity instead of using a generic route-trainer core.
-
-**How it behaves:** The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe. Expect it to preserve sash endeavor lure rather than select six unrelated strong attacks.
-
-**Why it is hard:** 4 fully authored Pokémon, average BST 455.8, average cap offset -2.0, ace offset -2, and 50% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Debra (14% species overlap). Its species appear across an average of 3.2 unrelated trainer families.
-
-**Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Crawdaunt | 28 (cap -2) | None | Hyper Cutter | setup attacker | Liquidation, Crunch, Swords Dance, Aqua Jet |
-| 2 | Palossand | 28 (cap -2) | None | Water Compaction | coverage attacker | Earth Power, Shadow Ball, Giga Drain, Hypnosis |
-| 3 | Prinplup | 28 (cap -2) | Leftovers | Torrent | disruption and support | Hidden Power, Ice Beam, Stealth Rock, Yawn |
-| 4 | Piloswine | 28 (cap -2) | Focus Sash | Snow Cloak | coverage attacker | Earthquake, Endeavor, Icicle Crash, Stealth Rock |
-
-## 077. Alice — Route 109
-
-**Optional · Single · Cap 30 · Demanding 37/100 · Uniqueness 76/100**
-
-**Theme:** underused water mixture
-
-Corsola opens this deliberate singles fight. The roster is built as underused water mixture. The composition turns the surrounding water route and coastal terrain into the fight's identity instead of using a generic route-trainer core.
-
-**How it behaves:** The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe. This singles or low-stakes roster emphasizes coverage, status, and matchup pressure rather than a scripted multi-Pokémon combination.
-
-**Why it is hard:** 3 fully authored Pokémon, average BST 488.3, average cap offset -3.0, ace offset -3, and 0% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Jonah (25% species overlap). Its species appear across an average of 5.0 unrelated trainer families.
-
-**Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Corsola | 27 (cap -3) | None | Serene Grace | coverage attacker | Power Gem, Earth Power, Brine, Recover |
-| 2 | Cloyster | 27 (cap -3) | None | Skill Link | setup attacker | Icicle Spear, Rock Blast, Hydro Pump, Shell Smash |
-| 3 | Kangaskhan | 27 (cap -3) | None | Early Bird | coverage attacker | Surf, Crunch, Outrage, Mega Punch |
-
-## 078. Huey — Route 109
+## 073. Huey — Route 109
 
 **Optional · Single · Cap 30 · Extreme 86/100 · Uniqueness 70/100**
 
@@ -1946,7 +1815,36 @@ Wacan Drizzle Pelipper opens with rain-accurate Hurricane, Hydro Pump, Ice Beam,
 | 2 | Perrserker | 32 (cap +2) | Choice Band | Tough Claws | Choice-locked breaker | Iron Head, Close Combat, U Turn, Play Rough |
 | 3 | Dhelmise | 33 (cap +3) | Assault Vest | Steelworker | coverage attacker | Power Whip, Poltergeist, Anchor Shot, Earthquake |
 
-## 079. Edmond — Route 109
+## 074. Hailey — Route 109
+
+**Optional · Double · Cap 30 · Extreme 89/100 · Uniqueness 80/100**
+
+**Theme:** Water pressure + active speed control
+
+Light Clay Static Flaaffy and Assault Vest Water Absorb Palpitoad lead. Light Screen, Discharge, Power Gem, and Protect support Muddy Water, Earth Power, Sludge Wave, and Icy Wind; Palpitoad's Ground typing makes the spread Electric attack ally-safe. Sitrus Huge Power Azumarill then supplies immediate Liquidation, Play Rough, Knock Off, and Ice Punch pressure. Choice Scarf Unaware Bibarel closes through Return, Waterfall, Crunch, or Superpower while exposing a visible move lock. No action is forced. This is Verdant's first cap-30 family-evolution payoff and first Flaaffy-to-Ground-partner Discharge drill. Flaaffy, Palpitoad, Azumarill, and Bibarel do not appear in Battles 1-37, though their younger families existed in Hailey's replaced baseline rather than prior closed encounters. It uses no weather, room, terrain, setup move, trap, hazard, redirection, Mega, or custom AI.
+
+**How it behaves:** Hailey uses guarded native doubles with smart-switching, partner-aware, HP-aware, speed-control, and field-control scoring. Light Screen, Discharge immunity, Static, Water Absorb, Assault Vest, Icy Wind, Huge Power, Sitrus, Choice Scarf, Unaware, and move lock are existing mechanics. No custom combo scorer, target, switch rule, setup script, or Mega is added.
+
+**Why it is hard:** 4 fully authored Pokémon, average BST 402.2, average cap offset +2.0, ace offset +3, and 100% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Imani (20% species overlap). Its species appear across an average of 4.5 unrelated trainer families.
+
+**Counterplay:** Taunt, Brick Break, Psychic Fangs, Defog, screen theft, or focused physical pressure removes Light Screen value. Ground types ignore Discharge; Grass pressure is 4x effective into Palpitoad; Electric, Poison, Steel, burn, Intimidate, Reflect, item removal, and strong special or physical focus divide across Azumarill and Bibarel. Scarf lock and Superpower drops create late openings.
+
+**Strongest part:** The evolved swim-practice identity is instantly readable: Flaaffy can discharge freely beside Ground-type Palpitoad, and both reserves apply familiar direct pressure.
+
+**Weakest link:** The screen setter is predictable and the physical reserves share burn and Intimidate counterplay. Those clean answers are intentionally retained rather than adding a second engine.
+
+**Manual closure:** Battle 38 is closed at an editorial 8.9/10: four legal levels 31-33, distinct items and unused species, guarded native doubles, four stable donors, truthful dialogue, author self-check, and no custom AI. Runtime playtesting remains required before 8.9 is observed.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Flaaffy | 31 (cap +1) | Light Clay | Static | protected attacker | Light Screen, Discharge, Power Gem, Protect |
+| 2 | Palpitoad | 32 (cap +2) | Assault Vest | Water Absorb | speed control | Muddy Water, Earth Power, Sludge Wave, Icy Wind |
+| 3 | Azumarill | 32 (cap +2) | Sitrus Berry | Huge Power | coverage attacker | Liquidation, Play Rough, Knock Off, Ice Punch |
+| 4 | Bibarel | 33 (cap +3) | Choice Scarf | Unaware | Choice-locked breaker | Return, Waterfall, Crunch, Superpower |
+
+## 075. Edmond — Route 109
 
 **Optional · Single · Cap 30 · Extreme 87/100 · Uniqueness 86/100**
 
@@ -1974,7 +1872,7 @@ Eviolite Regenerator Slowpoke opens with Future Sight, Scald, Slack Off, or Thun
 | 2 | Koffing | 32 (cap +2) | Black Sludge | Neutralizing Gas | disruption and support | Sludge Bomb, Will O Wisp, Flamethrower, Pain Split |
 | 3 | Staravia | 33 (cap +3) | Choice Scarf | Reckless | Choice-locked breaker | Brave Bird, Double Edge, U Turn, Steel Wing |
 
-## 080. Ricky — Route 109
+## 076. Ricky — Route 109
 
 **Optional · Single · Cap 30 · Extreme 88/100 · Uniqueness 80/100**
 
@@ -2002,7 +1900,7 @@ Sitrus Gluttony Linoone may Belly Drum once, then threatens Extreme Speed, Shado
 | 2 | Greedent | 32 (cap +2) | Figy Berry | Cheek Pouch | coverage attacker | Body Slam, Payback, Seed Bomb, Gyro Ball |
 | 3 | Appletun | 33 (cap +3) | Leftovers | Thick Fat | disruption and support | Apple Acid, Dragon Pulse, Recover, Leech Seed |
 
-## 081. Lola — Route 109
+## 077. Lola — Route 109
 
 **Optional · Double · Cap 30 · Extreme 91/100 · Uniqueness 88/100**
 
@@ -2031,98 +1929,7 @@ Heat Rock Flower Gift Cherrim and Life Orb Chlorophyll Leafeon lead. Sunny Day c
 | 3 | Comfey | 32 (cap +2) | Sitrus Berry | Triage | disruption and support | Giga Drain, Draining Kiss, Floral Healing, Taunt |
 | 4 | Shaymin | 33 (cap +3) | Expert Belt | Natural Cure | rare centerpiece | Seed Flare, Earth Power, Air Slash, Psychic |
 
-## 082. Austina — Route 109
-
-**Optional · Double · Cap 30 · Hard 57/100 · Uniqueness 81/100**
-
-**Theme:** Tailwind + Water pressure + rain engine
-
-Gastrodon East Sea and Bibarel are the authored opening pair. The board plan is tailwind + water pressure + rain engine. The composition turns the surrounding water route and coastal terrain into the fight's identity instead of using a generic route-trainer core.
-
-**How it behaves:** The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe, Help Partner. Expect it to preserve tailwind, water pressure, rain engine rather than select six unrelated strong attacks.
-
-**Why it is hard:** 4 fully authored Pokémon, average BST 450.0, average cap offset -2.0, ace offset -2, and 50% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Lola (17% species overlap). Its species appear across an average of 4.8 unrelated trainer families.
-
-**Counterplay:** Contest the weather setter, preserve your speed-control answer, and use Protect or Wide Guard against the amplified spread turns.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Gastrodon East Sea | 28 (cap -2) | None | Storm Drain | disruption and support | Muddy Water, Earth Power, Rain Dance, Recover |
-| 2 | Bibarel | 28 (cap -2) | None | Simple | setup attacker | Aqua Jet, Quick Attack, Crunch, Swords Dance |
-| 3 | Cramorant | 28 (cap -2) | Life Orb | Gulp Missile | speed control | Hurricane, Ice Beam, Surf, Tailwind |
-| 4 | Sealeo | 28 (cap -2) | Leftovers | Thick Fat | disruption and support | Protect, Substitute, Surf, Toxic |
-
-## 083. Gwen — Route 109
-
-**Optional · Single · Cap 30 · Demanding 40/100 · Uniqueness 73/100**
-
-**Theme:** Water pressure
-
-Floatzel opens this deliberate singles fight. The roster is built as water pressure. The composition turns the surrounding water route and coastal terrain into the fight's identity instead of using a generic route-trainer core.
-
-**How it behaves:** The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe. Expect it to preserve water pressure rather than select six unrelated strong attacks.
-
-**Why it is hard:** 3 fully authored Pokémon, average BST 453.3, average cap offset -3.0, ace offset -3, and 0% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Kevin (25% species overlap). Its species appear across an average of 6.7 unrelated trainer families.
-
-**Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Floatzel | 27 (cap -3) | None | Swift Swim | coverage attacker | Hydro Pump, Crunch, Ice Fang, Aqua Jet |
-| 2 | Luvdisc | 27 (cap -3) | None | Soul Heart | disruption and support | Hydro Pump, Draining Kiss, Lovely Kiss, Charm |
-| 3 | Quagsire | 27 (cap -3) | None | Water Absorb | disruption and support | Earthquake, Aqua Tail, Toxic, Recover |
-
-## 084. Carter — Route 109
-
-**Optional · Double · Cap 30 · Demanding 42/100 · Uniqueness 77/100**
-
-**Theme:** underused water mixture
-
-Tentacruel and Lanturn are the authored opening pair. The board plan is underused water mixture. The composition turns the surrounding water route and coastal terrain into the fight's identity instead of using a generic route-trainer core.
-
-**How it behaves:** The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe. This singles or low-stakes roster emphasizes coverage, status, and matchup pressure rather than a scripted multi-Pokémon combination.
-
-**Why it is hard:** 4 fully authored Pokémon, average BST 448.8, average cap offset -2.0, ace offset -2, and 50% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Douglas (20% species overlap). Its species appear across an average of 6.0 unrelated trainer families.
-
-**Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Tentacruel | 28 (cap -2) | None | Clear Body | disruption and support | Sludge Wave, Hydro Pump, Acid Armor, Screech |
-| 2 | Lanturn | 28 (cap -2) | None | Volt Absorb | coverage attacker | Charge Beam, Signal Beam, Hydro Pump, Confuse Ray |
-| 3 | Togetic | 28 (cap -2) | Leftovers | Serene Grace | setup attacker | Fire Blast, Hyper Voice, Baton Pass, Nasty Plot |
-| 4 | Vanillish | 28 (cap -2) | Life Orb | Ice Body | coverage attacker | Ice Beam, Explosion, Autotomize, Hidden Power |
-
-## 085. Mel & Paul — Route 109
-
-**Optional · Double · Cap 30 · Hard 53/100 · Uniqueness 77/100**
-
-**Theme:** Bug pressure + Tailwind + residual control
-
-Dustox and Beautifly are the authored opening pair. The board plan is bug pressure + tailwind + residual control. The composition turns the surrounding water route and coastal terrain into the fight's identity instead of using a generic route-trainer core.
-
-**How it behaves:** The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe. Expect it to preserve bug pressure, tailwind, residual control rather than select six unrelated strong attacks.
-
-**Why it is hard:** 4 fully authored Pokémon, average BST 452.5, average cap offset -2.0, ace offset -2, and 50% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Kira & Dan (33% species overlap). Its species appear across an average of 2.5 unrelated trainer families.
-
-**Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Dustox | 28 (cap -2) | None | Shield Dust | setup attacker | Bug Buzz, Quiver Dance, Toxic, Protect |
-| 2 | Beautifly | 28 (cap -2) | None | Swarm | setup attacker | Hurricane, Giga Drain, Attract, Quiver Dance |
-| 3 | Volbeat | 28 (cap -2) | Leftovers | Swarm | speed control | Bug Buzz, Baton Pass, Substitute, Thunder Wave |
-| 4 | Illumise | 28 (cap -2) | Leftovers | Prankster | speed control | Protect, Encore, Tailwind, U Turn |
-
-## 086. Chandler — Route 109
+## 078. Chandler — Route 109
 
 **Optional · Single · Cap 30 · Extreme 89/100 · Uniqueness 88/100**
 
@@ -2150,34 +1957,227 @@ Damp Rock Hydration Phione opens the rain ring through Rain Dance, Scald, Ice Be
 | 2 | Electrode | 32 (cap +2) | Choice Specs | Soundproof | Choice-locked breaker | Thunder, Volt Switch, Signal Beam, Hidden Power |
 | 3 | Cryogonal | 33 (cap +3) | Expert Belt | Levitate | coverage attacker | Freeze Dry, Flash Cannon, Ancient Power, Signal Beam |
 
-## 087. Hailey — Route 109
+## 079. Dwayne — Route 109 Seashore House
 
-**Optional · Double · Cap 30 · Extreme 89/100 · Uniqueness 80/100**
+**Optional · Single · Cap 30 · Extreme 90/100 · Uniqueness 78/100**
 
-**Theme:** Water pressure + active speed control
+**Theme:** Fire rare-showcase balance
 
-Light Clay Static Flaaffy and Assault Vest Water Absorb Palpitoad lead. Light Screen, Discharge, Power Gem, and Protect support Muddy Water, Earth Power, Sludge Wave, and Icy Wind; Palpitoad's Ground typing makes the spread Electric attack ally-safe. Sitrus Huge Power Azumarill then supplies immediate Liquidation, Play Rough, Knock Off, and Ice Punch pressure. Choice Scarf Unaware Bibarel closes through Return, Waterfall, Crunch, or Superpower while exposing a visible move lock. No action is forced. This is Verdant's first cap-30 family-evolution payoff and first Flaaffy-to-Ground-partner Discharge drill. Flaaffy, Palpitoad, Azumarill, and Bibarel do not appear in Battles 1-37, though their younger families existed in Hailey's replaced baseline rather than prior closed encounters. It uses no weather, room, terrain, setup move, trap, hazard, redirection, Mega, or custom AI.
+Focus Sash Dry Skin Jynx opens the cold side through Freeze-Dry, Psyshock, Aura Sphere, or Taunt. Eviolite Flame Body Magmar turns the sequence hot with Flamethrower, Scorching Sands, Hidden Power, and Will-O-Wisp. Level-33 Choice Scarf Water Absorb Volcanion fuses both halves into a steam finish through Steam Eruption, Flamethrower, Sludge Bomb, or Earth Power. Smart switching may expose either Water immunity when the player attacks Magmar, but no switch or move is forced. This is Verdant's first hot-and-cold singles ladder and first Volcanion opponent encounter. Jynx and Magmar become legal exactly as the cap-30 evolution phase begins, while Volcanion earns its early mythical placement by literally completing Dwayne's steam-and-Soda-Pop theme. The battle uses no weather, room, terrain, hazard, setup move, recovery move, trap, redirection, partner activation, or Mega; its one commitment is Volcanion's visible Choice lock.
 
-**How it behaves:** Hailey uses guarded native doubles with smart-switching, partner-aware, HP-aware, speed-control, and field-control scoring. Light Screen, Discharge immunity, Static, Water Absorb, Assault Vest, Icy Wind, Huge Power, Sitrus, Choice Scarf, Unaware, and move lock are existing mechanics. No custom combo scorer, target, switch rule, setup script, or Mega is added.
+**How it behaves:** Dwayne remains an intentional single with native foe-aware, smart-switching, and HP-aware scoring. Focus Sash, Dry Skin, Taunt, Eviolite, Flame Body, burns, Choice Scarf, Water Absorb, Steam Eruption, and Choice locking are existing mechanics. No custom selector, fixed switch, setup flag, weather, terrain, Mega, or hidden-information rule is added.
 
-**Why it is hard:** 4 fully authored Pokémon, average BST 402.2, average cap offset +2.0, ace offset +3, and 100% held-item coverage.
+**Why it is hard:** 3 fully authored Pokémon, average BST 523.3, average cap offset +2.0, ace offset +3, and 100% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Imani (20% species overlap). Its species appear across an average of 4.5 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Lydia (29% species overlap). Its species appear across an average of 4.7 unrelated trainer families.
 
-**Counterplay:** Taunt, Brick Break, Psychic Fangs, Defog, screen theft, or focused physical pressure removes Light Screen value. Ground types ignore Discharge; Grass pressure is 4x effective into Palpitoad; Electric, Poison, Steel, burn, Intimidate, Reflect, item removal, and strong special or physical focus divide across Azumarill and Bibarel. Scarf lock and Superpower drops create late openings.
+**Counterplay:** Priority or multihit attacks break Jynx's Sash; Ghost, Dark, Bug, Fire, Rock, and Steel pressure it, while special bulk absorbs its accurate coverage. Rock, Ground, Water, item removal, Taunt, status immunity, and strong special attacks answer Eviolite Magmar despite Flame Body. Electric, Ground, Rock, Dragon, special walls, Protect, immunity pivots, Disable, Encore, or scouting and exploiting Volcanion's Choice lock answer the finish. The two Water immunities punish autopilot but do not cover Rock, Ground, Electric, or broad neutral pressure.
 
-**Strongest part:** The evolved swim-practice identity is instantly readable: Flaaffy can discharge freely beside Ground-type Palpitoad, and both reserves apply familiar direct pressure.
+**Strongest part:** Jynx and Volcanion can each absorb the obvious Water attack into Magmar, and the final Water/Fire mythical turns Dwayne's hot-battle and ice-cold-Soda dialogue into one readable temperature progression.
 
-**Weakest link:** The screen setter is predictable and the physical reserves share burn and Intimidate counterplay. Those clean answers are intentionally retained rather than adding a second engine.
+**Weakest link:** This is a direct coverage ladder rather than a layered puzzle. That simplicity is retained as a deliberate singles pacing change, while shared Rock and Ground pressure plus Volcanion's Choice lock keep the mythical finish broadly answerable.
 
-**Manual closure:** Battle 38 is closed at an editorial 8.9/10: four legal levels 31-33, distinct items and unused species, guarded native doubles, four stable donors, truthful dialogue, author self-check, and no custom AI. Runtime playtesting remains required before 8.9 is observed.
+**Manual closure:** Battle 43 is source-closed at an editorial 9.0/10: three legal levels 31-33, three distinct items, four stable full-set references, a truthful thermal dialogue rewrite, intact shared reward routing, native smart-switching and HP awareness, author self-check, and no custom AI or non-Mega gimmick. Runtime playtesting remains required before 9.0 is observed.
 
 | # | Pokémon | Level | Item | Ability | Role | Moves |
 | ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Flaaffy | 31 (cap +1) | Light Clay | Static | protected attacker | Light Screen, Discharge, Power Gem, Protect |
-| 2 | Palpitoad | 32 (cap +2) | Assault Vest | Water Absorb | speed control | Muddy Water, Earth Power, Sludge Wave, Icy Wind |
-| 3 | Azumarill | 32 (cap +2) | Sitrus Berry | Huge Power | coverage attacker | Liquidation, Play Rough, Knock Off, Ice Punch |
-| 4 | Bibarel | 33 (cap +3) | Choice Scarf | Unaware | Choice-locked breaker | Return, Waterfall, Crunch, Superpower |
+| 1 | Jynx | 31 (cap +1) | Focus Sash | Dry Skin | coverage attacker | Freeze Dry, Psyshock, Aura Sphere, Taunt |
+| 2 | Magmar | 32 (cap +2) | Eviolite | Flame Body | coverage attacker | Flamethrower, Scorching Sands, Hidden Power, Will O Wisp |
+| 3 | Volcanion | 33 (cap +3) | Choice Scarf | Water Absorb | Choice-locked breaker | Steam Eruption, Flamethrower, Sludge Bomb, Earth Power |
+
+## 080. Johanna — Route 109 Seashore House
+
+**Optional · Double · Cap 30 · Extreme 92/100 · Uniqueness 83/100**
+
+**Theme:** Surf ally activation + active speed control
+
+Focus Sash Oblivious Feebas and Weakness Policy Steam Engine Carkol lead. Feebas's extremely weak Surf damages both foes while activating Carkol's Speed and offensive boosts; Icy Wind, Mirror Coat, and Protect remain useful if activation is denied. Carkol converts the boost through Heat Wave, Power Gem, Scorching Sands, or Protect. Eviolite Water Compaction Sandygast gives a surviving Feebas a second, defensive Surf interaction through Shore Up and three attacks. Life Orb Queenly Majesty Tsareena closes directly through Power Whip, High Jump Kick, Knock Off, and Trop Kick while denying priority only after it actually reaches the field. This is Verdant's first Steam Engine plus Weakness Policy activation and first Feebas opponent. It deliberately keeps Carkol and Sandygast unevolved at cap 30 and turns Johanna's line about hot battles making Pokémon tougher into two literal ally-activation routes. Sandygast last appeared thirty-eight encounters earlier in Billy's simple shoreline single; its Eviolite Water Compaction reserve job is a deliberate, materially different reuse. Dwayne's preceding direct single gives way to a real doubles combo; no weather, terrain, room, screen, hazard, trap, redirection, sleep, Mega, or second setup mode is present.
+
+**How it behaves:** Johanna uses guarded native doubles with smart-switching, partner-aware, HP-aware, combo-setup, and speed-control scoring. The checked-in reusable combo layer explicitly rewards Surf into Steam Engine or Water Compaction, while ordinary collateral scoring still rejects suicidal ally damage. Weakness Policy, Icy Wind, Mirror Coat, Eviolite, Shore Up, Queenly Majesty, Life Orb, and all attacks are existing mechanics. No trainer-specific state machine, forced first turn, Mega, weather, or non-Mega gimmick is added.
+
+**Why it is hard:** 4 fully authored Pokémon, average BST 365.0, average cap offset +2.0, ace offset +3, and 100% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Helene (20% species overlap). Its species appear across an average of 3.0 unrelated trainer families.
+
+**Counterplay:** Fake Out, priority, spread denial, Wide Guard, Taunt, Storm Drain, Water Absorb, Dry Skin, or immediate Electric or Grass pressure can stop Feebas or its Surf. Strong Water or Ground damage may knock out Carkol before it converts Weakness Policy; Haze, Clear Smog, Unaware, Trick Room, phazing, item removal, and focused special damage erase or reverse the boost. Sandygast remains vulnerable to Water, Grass, Ice, Ghost, and Dark pressure despite Eviolite, while Tsareena has common Fire, Ice, Flying, Poison, and Bug weaknesses and takes Life Orb or High Jump Kick risk. No backup setter recreates Steam Engine.
+
+**Strongest part:** A deliberately weak Feebas uses Surf to make Carkol explosively fast and strong, then can repurpose the same move to harden Sandygast; the mechanic literally fulfills Johanna's claim that hot battles toughen Pokémon.
+
+**Weakest link:** If Feebas is removed immediately, the team becomes four ordinary stage-appropriate attackers. That single fragile activator is the intended fair answer, and Tsareena supplies pressure rather than a hidden replacement engine.
+
+**Manual closure:** Battle 44 is source-closed at an editorial 9.2/10: four legal levels 31-33, two meaningful unevolved stages, four distinct items, one historic elite activation core, three full-set donors, guarded double routing, truthful native-width hints, reusable combo AI, shared reward preservation, and no custom state machine or non-Mega gimmick. Runtime playtesting remains required before 9.2 is observed.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Feebas | 31 (cap +1) | Focus Sash | Oblivious | speed control | Surf, Icy Wind, Mirror Coat, Protect |
+| 2 | Carkol | 32 (cap +2) | Weakness Policy | Steam Engine | protected attacker | Heat Wave, Power Gem, Scorching Sands, Protect |
+| 3 | Sandygast | 32 (cap +2) | Eviolite | Water Compaction | coverage attacker | Shore Up, Earth Power, Shadow Ball, Giga Drain |
+| 4 | Tsareena | 33 (cap +3) | Life Orb | Queenly Majesty | coverage attacker | Power Whip, High Jump Kick, Knock Off, Trop Kick |
+
+## 081. Simon — Route 109 Seashore House
+
+**Optional · Double · Cap 30 · Extreme 93/100 · Uniqueness 80/100**
+
+**Theme:** Tailwind + active speed control
+
+Mental Herb Aerilate Tropius and Life Orb Justified Keldeo lead the four-rider formation. Tropius may establish Tailwind, attack through Flying-type Return or Seed Bomb, or Protect; Keldeo applies immediate Hydro Pump and Secret Sword pressure, uses Icy Wind when Tailwind is denied, or Protects. Assault Vest Stamina Mudsdale supplies physical Ground, Steel, Rock, and Body Press coverage. Level-33 Choice Specs Shell Armor Lapras closes through Freeze-Dry, Hydro Pump, Thunderbolt, or Psychic, exposing one final lock rather than adding setup or sustain. This is Verdant's first all-mount formation and first Keldeo encounter. Tropius carries through the air, Mudsdale over land, and Lapras and Keldeo across water, turning Simon's old inner-tube line into an exact visual identity. It follows Johanna's ally-activation puzzle with a conventional but very strong Tailwind balance team: no ally-target move, weather, terrain, room, setup move, hazard, trap, redirection, recovery move, Mega, or custom AI is present.
+
+**How it behaves:** Simon uses guarded native doubles with smart-switching, partner-aware, HP-aware, and speed-control scoring. Tailwind, Mental Herb, Aerilate, Icy Wind, Life Orb, Assault Vest, Stamina, Body Press, Choice Specs, Shell Armor, Freeze-Dry, and Choice locking are existing mechanics. No custom selector, forced Tailwind, setup flag, weather, terrain, Mega, or non-Mega gimmick is added.
+
+**Why it is hard:** 4 fully authored Pokémon, average BST 531.2, average cap offset +2.0, ace offset +3, and 100% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Douglas (20% species overlap). Its species appear across an average of 6.2 unrelated trainer families.
+
+**Counterplay:** Fake Out, Taunt after Mental Herb is spent, opposing Tailwind, Trick Room, paralysis, Icy Wind, priority, or immediate Ice, Rock, Fire, Flying, or Poison pressure can deny or outlast Tropius's single speed window. Fairy, Psychic, Flying, Grass, and Electric pressure answer Keldeo with the relevant partner covered but not erased. Special Water, Grass, and Ice attacks bypass Mudsdale's Stamina plan; burn, Intimidate, item removal, and focused damage reduce its offense. Fighting, Rock, Electric, Grass, strong physical damage, Protect, immunity pivots, Trick, Disable, or exploiting Lapras's Choice lock answer the finish. No one field condition returns after Tropius falls.
+
+**Strongest part:** Every member visibly answers Simon's wish for a Pokémon that can carry him, and Keldeo provides the rare sea-rider payoff inside a coherent Tailwind formation rather than as isolated legendary stats.
+
+**Weakest link:** Tailwind balance is a familiar competitive structure. The literal four-mount identity, mixed physical and special reserves, one setter, and broad speed-reversal counterplay make that familiarity a clean final House exam rather than repetitive filler.
+
+**Manual closure:** Battle 45 is source-closed at an editorial 9.3/10: four legal levels 31-33, four distinct items and roles, four full-set donors, guarded native doubles, truthful transport dialogue, one Tailwind window, shared reward completion, author self-check, and no custom AI or non-Mega gimmick. Runtime playtesting remains required before 9.3 is observed.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Tropius | 31 (cap +1) | Mental Herb | Aerilate | speed control | Tailwind, Return, Seed Bomb, Protect |
+| 2 | Keldeo | 32 (cap +2) | Life Orb | Justified | speed control | Hydro Pump, Secret Sword, Icy Wind, Protect |
+| 3 | Mudsdale | 32 (cap +2) | Assault Vest | Stamina | coverage attacker | High Horsepower, Heavy Slam, Rock Slide, Body Press |
+| 4 | Lapras | 33 (cap +3) | Choice Specs | Shell Armor | Choice-locked breaker | Freeze Dry, Hydro Pump, Thunderbolt, Psychic |
+
+## 082. David — Route 109
+
+**Optional · Double · Cap 30 · Demanding 44/100 · Uniqueness 86/100**
+
+**Theme:** Sash Endeavor lure
+
+Crawdaunt and Palossand are the authored opening pair. The board plan is sash endeavor lure. The composition turns the surrounding water route and coastal terrain into the fight's identity instead of using a generic route-trainer core.
+
+**How it behaves:** The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe. Expect it to preserve sash endeavor lure rather than select six unrelated strong attacks.
+
+**Why it is hard:** 4 fully authored Pokémon, average BST 455.8, average cap offset -2.0, ace offset -2, and 50% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Debra (14% species overlap). Its species appear across an average of 3.2 unrelated trainer families.
+
+**Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Crawdaunt | 28 (cap -2) | None | Hyper Cutter | setup attacker | Liquidation, Crunch, Swords Dance, Aqua Jet |
+| 2 | Palossand | 28 (cap -2) | None | Water Compaction | coverage attacker | Earth Power, Shadow Ball, Giga Drain, Hypnosis |
+| 3 | Prinplup | 28 (cap -2) | Leftovers | Torrent | disruption and support | Hidden Power, Ice Beam, Stealth Rock, Yawn |
+| 4 | Piloswine | 28 (cap -2) | Focus Sash | Snow Cloak | coverage attacker | Earthquake, Endeavor, Icicle Crash, Stealth Rock |
+
+## 083. Alice — Route 109
+
+**Optional · Single · Cap 30 · Demanding 37/100 · Uniqueness 76/100**
+
+**Theme:** underused water mixture
+
+Corsola opens this deliberate singles fight. The roster is built as underused water mixture. The composition turns the surrounding water route and coastal terrain into the fight's identity instead of using a generic route-trainer core.
+
+**How it behaves:** The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe. This singles or low-stakes roster emphasizes coverage, status, and matchup pressure rather than a scripted multi-Pokémon combination.
+
+**Why it is hard:** 3 fully authored Pokémon, average BST 488.3, average cap offset -3.0, ace offset -3, and 0% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Jonah (25% species overlap). Its species appear across an average of 5.0 unrelated trainer families.
+
+**Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Corsola | 27 (cap -3) | None | Serene Grace | coverage attacker | Power Gem, Earth Power, Brine, Recover |
+| 2 | Cloyster | 27 (cap -3) | None | Skill Link | setup attacker | Icicle Spear, Rock Blast, Hydro Pump, Shell Smash |
+| 3 | Kangaskhan | 27 (cap -3) | None | Early Bird | coverage attacker | Surf, Crunch, Outrage, Mega Punch |
+
+## 084. Austina — Route 109
+
+**Optional · Double · Cap 30 · Hard 57/100 · Uniqueness 81/100**
+
+**Theme:** Tailwind + Water pressure + rain engine
+
+Gastrodon East Sea and Bibarel are the authored opening pair. The board plan is tailwind + water pressure + rain engine. The composition turns the surrounding water route and coastal terrain into the fight's identity instead of using a generic route-trainer core.
+
+**How it behaves:** The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe, Help Partner. Expect it to preserve tailwind, water pressure, rain engine rather than select six unrelated strong attacks.
+
+**Why it is hard:** 4 fully authored Pokémon, average BST 450.0, average cap offset -2.0, ace offset -2, and 50% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Lola (17% species overlap). Its species appear across an average of 4.8 unrelated trainer families.
+
+**Counterplay:** Contest the weather setter, preserve your speed-control answer, and use Protect or Wide Guard against the amplified spread turns.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Gastrodon East Sea | 28 (cap -2) | None | Storm Drain | disruption and support | Muddy Water, Earth Power, Rain Dance, Recover |
+| 2 | Bibarel | 28 (cap -2) | None | Simple | setup attacker | Aqua Jet, Quick Attack, Crunch, Swords Dance |
+| 3 | Cramorant | 28 (cap -2) | Life Orb | Gulp Missile | speed control | Hurricane, Ice Beam, Surf, Tailwind |
+| 4 | Sealeo | 28 (cap -2) | Leftovers | Thick Fat | disruption and support | Protect, Substitute, Surf, Toxic |
+
+## 085. Gwen — Route 109
+
+**Optional · Single · Cap 30 · Demanding 40/100 · Uniqueness 73/100**
+
+**Theme:** Water pressure
+
+Floatzel opens this deliberate singles fight. The roster is built as water pressure. The composition turns the surrounding water route and coastal terrain into the fight's identity instead of using a generic route-trainer core.
+
+**How it behaves:** The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe. Expect it to preserve water pressure rather than select six unrelated strong attacks.
+
+**Why it is hard:** 3 fully authored Pokémon, average BST 453.3, average cap offset -3.0, ace offset -3, and 0% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Kevin (25% species overlap). Its species appear across an average of 6.7 unrelated trainer families.
+
+**Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Floatzel | 27 (cap -3) | None | Swift Swim | coverage attacker | Hydro Pump, Crunch, Ice Fang, Aqua Jet |
+| 2 | Luvdisc | 27 (cap -3) | None | Soul Heart | disruption and support | Hydro Pump, Draining Kiss, Lovely Kiss, Charm |
+| 3 | Quagsire | 27 (cap -3) | None | Water Absorb | disruption and support | Earthquake, Aqua Tail, Toxic, Recover |
+
+## 086. Carter — Route 109
+
+**Optional · Double · Cap 30 · Demanding 42/100 · Uniqueness 77/100**
+
+**Theme:** underused water mixture
+
+Tentacruel and Lanturn are the authored opening pair. The board plan is underused water mixture. The composition turns the surrounding water route and coastal terrain into the fight's identity instead of using a generic route-trainer core.
+
+**How it behaves:** The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe. This singles or low-stakes roster emphasizes coverage, status, and matchup pressure rather than a scripted multi-Pokémon combination.
+
+**Why it is hard:** 4 fully authored Pokémon, average BST 448.8, average cap offset -2.0, ace offset -2, and 50% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Douglas (20% species overlap). Its species appear across an average of 6.0 unrelated trainer families.
+
+**Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Tentacruel | 28 (cap -2) | None | Clear Body | disruption and support | Sludge Wave, Hydro Pump, Acid Armor, Screech |
+| 2 | Lanturn | 28 (cap -2) | None | Volt Absorb | coverage attacker | Charge Beam, Signal Beam, Hydro Pump, Confuse Ray |
+| 3 | Togetic | 28 (cap -2) | Leftovers | Serene Grace | setup attacker | Fire Blast, Hyper Voice, Baton Pass, Nasty Plot |
+| 4 | Vanillish | 28 (cap -2) | Life Orb | Ice Body | coverage attacker | Ice Beam, Explosion, Autotomize, Hidden Power |
+
+## 087. Mel & Paul — Route 109
+
+**Optional · Double · Cap 30 · Hard 53/100 · Uniqueness 77/100**
+
+**Theme:** Bug pressure + Tailwind + residual control
+
+Dustox and Beautifly are the authored opening pair. The board plan is bug pressure + tailwind + residual control. The composition turns the surrounding water route and coastal terrain into the fight's identity instead of using a generic route-trainer core.
+
+**How it behaves:** The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe. Expect it to preserve bug pressure, tailwind, residual control rather than select six unrelated strong attacks.
+
+**Why it is hard:** 4 fully authored Pokémon, average BST 452.5, average cap offset -2.0, ace offset -2, and 50% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Kira & Dan (33% species overlap). Its species appear across an average of 2.5 unrelated trainer families.
+
+**Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Dustox | 28 (cap -2) | None | Shield Dust | setup attacker | Bug Buzz, Quiver Dance, Toxic, Protect |
+| 2 | Beautifly | 28 (cap -2) | None | Swarm | setup attacker | Hurricane, Giga Drain, Attract, Quiver Dance |
+| 3 | Volbeat | 28 (cap -2) | Leftovers | Swarm | speed control | Bug Buzz, Baton Pass, Substitute, Thunder Wave |
+| 4 | Illumise | 28 (cap -2) | Leftovers | Prankster | speed control | Protect, Encore, Tailwind, U Turn |
 
 ## 088. Elijah — Route 109
 
@@ -2287,466 +2287,7 @@ Landorus (Therian) and Breloom are the authored opening pair. The board plan is 
 | 5 | Gengar | 30 (cap +0) | Gengarite | Levitate | Mega ace | Shadow Ball, Hypnosis, Dream Eater, Nasty Plot |
 | 6 | Tapu Koko | 30 (cap +0) | Choice Specs | Electric Surge | speed control | Volt Switch, Dazzling Gleam, Electroweb, Grass Knot |
 
-## 092. May — Route 110
-
-**Required Branch · Double · Cap 30 · Extreme 97/100 · Uniqueness 41/100**
-
-**Theme:** active speed control
-
-Level-31 Eviolite Battle Armor Type: Null leads beside level-32 Choice Band Strong Jaw Dracovish. Tri Attack, Icy Wind, U-turn, and Protect control timing for Fishious Rend, Psychic Fangs, Crunch, or Ice Fang without fixing the opening. Slot three is the player's actual same-generation middle counter-starter at level 31 with Sitrus Berry, its elemental Pledge, reliable special STAB, Double-Edge, and Protect. Level-32 Weakness Policy Clear Body Metang uses Iron Head, Zen Headbutt, Ice Punch, and Protect. Level-32 Babiri Aroma Veil Alcremie can Decorate any physical or special partner while using Dazzling Gleam, Mystical Fire, or Protect. Level-33 Assault Vest Stalwart Duraludon closes through Flash Cannon, Dragon Pulse, Thunderbolt, or Body Press. The team uses one finite speed move and no weather, terrain, room, trap, redirection, setup move other than ally Decorate, Mega, or Primal. This is the first closed Type: Null, Dracovish, Metang, Alcremie, and Duraludon opponent appearance and the first required six-member rival double whose exact starter species follows all seven supported generations. The 21 middle starters deliberately recur from the earlier Rustboro rival as continuity, now twenty-six encounters later and only one-sixth of a substantially deeper team. May and Brendan have exact gameplay parity; no gender branch is secretly easier.
-
-**How it behaves:** All six records use foe-aware, smart-switching, partner-aware, HP-aware, and speed-control doubles scoring. The runtime species hook replaces only source slot two with the generation-correct middle starter while retaining the branch's legal universal moves and primary ability. Existing AI handles Icy Wind timing, Choice locks and switching, Fishious Rend power, Decorate ally-only targeting and useful-stat checks, Weakness Policy, Stalwart redirection bypass, Body Press defense scaling, Protect, and U-turn. No trainer-specific target read, forced opener, hidden stat adjustment, Mega, or Primal is added.
-
-**Why it is hard:** 6 fully authored Pokémon, average BST 482.3, average cap offset +1.83, ace offset +3, and 100% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Brendan (100% species overlap). Its species appear across an average of 3.3 unrelated trainer families.
-
-**Counterplay:** Fake Out, Taunt, priority, opposing speed control, Trick Room, or direct pressure can stop Type: Null's timing; Water Absorb, Storm Drain, Dry Skin, Protect, burn, Intimidate, Choice-lock exploitation, or faster offense answer Dracovish. Ordinary type coverage answers the visible dynamic starter. Knock Off, Haze, Clear Smog, Unaware, phazing, or avoiding a weak super-effective hit manage Metang. Steel, Poison, Taunt, Encore, or focus fire remove Alcremie. Ground, Fighting, strong special neutral damage, Snarl, Light Screen, item removal, or redirection-independent targeting answer Duraludon. No single counter solves all six, but every phase has several broad classes.
-
-**Strongest part:** The battle naturally changes phase—from speed-sensitive Fishious Rend, to the real counterpart and young pseudo-legendary, to flexible Decorate-backed mixed offense—without a scripted wave machine or making the player's starter choice the only puzzle.
-
-**Weakest link:** Water immunity plus immediate disruption can make Dracovish much less frightening, while focused Steel or Poison pressure can erase Alcremie and Duraludon has exploitable special bulk. Those are healthy broad answers that keep a required 9.7 rival learnable.
-
-**Manual closure:** Battle 54 is source-closed at editorial 9.7/10: six exact parity records, three elemental branches, a verified runtime hook for 21 generation-correct middle starters in source slot three, five fresh common species, six distinct items, one champion roster plus four full-set donors, mandatory trigger and native Itemfinder retry contracts, truthful native-width dialogue, supported one-slot progression, author self-check, and no transformation gimmick. Runtime playtesting remains required before the target is observed.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Type Null | 31 (cap +1) | Eviolite | Battle Armor | speed control | Tri Attack, Icy Wind, U Turn, Protect |
-| 2 | Dracovish | 32 (cap +2) | Choice Band | Strong Jaw | Choice-locked breaker | Fishious Rend, Psychic Fangs, Crunch, Ice Fang |
-| 3 | Combusken | 31 (cap +1) | Sitrus Berry | Blaze | protected attacker | Fire Pledge, Flamethrower, Double Edge, Protect |
-| 4 | Metang | 32 (cap +2) | Weakness Policy | Clear Body | protected attacker | Iron Head, Zen Headbutt, Ice Punch, Protect |
-| 5 | Alcremie | 32 (cap +2) | Babiri Berry | Aroma Veil | protected attacker | Decorate, Dazzling Gleam, Mystical Fire, Protect |
-| 6 | Duraludon | 33 (cap +3) | Assault Vest | Stalwart | coverage attacker | Flash Cannon, Dragon Pulse, Thunderbolt, Body Press |
-
-**Runtime slot 3 alternatives:** Charmeleon, Quilava, Combusken, Monferno, Pignite, Braixen, Torracat.
-
-## 093. May — Route 110
-
-**Required Branch · Double · Cap 30 · Extreme 97/100 · Uniqueness 41/100**
-
-**Theme:** active speed control
-
-Level-31 Eviolite Battle Armor Type: Null leads beside level-32 Choice Band Strong Jaw Dracovish. Tri Attack, Icy Wind, U-turn, and Protect control timing for Fishious Rend, Psychic Fangs, Crunch, or Ice Fang without fixing the opening. Slot three is the player's actual same-generation middle counter-starter at level 31 with Sitrus Berry, its elemental Pledge, reliable special STAB, Double-Edge, and Protect. Level-32 Weakness Policy Clear Body Metang uses Iron Head, Zen Headbutt, Ice Punch, and Protect. Level-32 Babiri Aroma Veil Alcremie can Decorate any physical or special partner while using Dazzling Gleam, Mystical Fire, or Protect. Level-33 Assault Vest Stalwart Duraludon closes through Flash Cannon, Dragon Pulse, Thunderbolt, or Body Press. The team uses one finite speed move and no weather, terrain, room, trap, redirection, setup move other than ally Decorate, Mega, or Primal. This is the first closed Type: Null, Dracovish, Metang, Alcremie, and Duraludon opponent appearance and the first required six-member rival double whose exact starter species follows all seven supported generations. The 21 middle starters deliberately recur from the earlier Rustboro rival as continuity, now twenty-six encounters later and only one-sixth of a substantially deeper team. May and Brendan have exact gameplay parity; no gender branch is secretly easier.
-
-**How it behaves:** All six records use foe-aware, smart-switching, partner-aware, HP-aware, and speed-control doubles scoring. The runtime species hook replaces only source slot two with the generation-correct middle starter while retaining the branch's legal universal moves and primary ability. Existing AI handles Icy Wind timing, Choice locks and switching, Fishious Rend power, Decorate ally-only targeting and useful-stat checks, Weakness Policy, Stalwart redirection bypass, Body Press defense scaling, Protect, and U-turn. No trainer-specific target read, forced opener, hidden stat adjustment, Mega, or Primal is added.
-
-**Why it is hard:** 6 fully authored Pokémon, average BST 482.3, average cap offset +1.83, ace offset +3, and 100% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Brendan (100% species overlap). Its species appear across an average of 3.3 unrelated trainer families.
-
-**Counterplay:** Fake Out, Taunt, priority, opposing speed control, Trick Room, or direct pressure can stop Type: Null's timing; Water Absorb, Storm Drain, Dry Skin, Protect, burn, Intimidate, Choice-lock exploitation, or faster offense answer Dracovish. Ordinary type coverage answers the visible dynamic starter. Knock Off, Haze, Clear Smog, Unaware, phazing, or avoiding a weak super-effective hit manage Metang. Steel, Poison, Taunt, Encore, or focus fire remove Alcremie. Ground, Fighting, strong special neutral damage, Snarl, Light Screen, item removal, or redirection-independent targeting answer Duraludon. No single counter solves all six, but every phase has several broad classes.
-
-**Strongest part:** The battle naturally changes phase—from speed-sensitive Fishious Rend, to the real counterpart and young pseudo-legendary, to flexible Decorate-backed mixed offense—without a scripted wave machine or making the player's starter choice the only puzzle.
-
-**Weakest link:** Water immunity plus immediate disruption can make Dracovish much less frightening, while focused Steel or Poison pressure can erase Alcremie and Duraludon has exploitable special bulk. Those are healthy broad answers that keep a required 9.7 rival learnable.
-
-**Manual closure:** Battle 54 is source-closed at editorial 9.7/10: six exact parity records, three elemental branches, a verified runtime hook for 21 generation-correct middle starters in source slot three, five fresh common species, six distinct items, one champion roster plus four full-set donors, mandatory trigger and native Itemfinder retry contracts, truthful native-width dialogue, supported one-slot progression, author self-check, and no transformation gimmick. Runtime playtesting remains required before the target is observed.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Type Null | 31 (cap +1) | Eviolite | Battle Armor | speed control | Tri Attack, Icy Wind, U Turn, Protect |
-| 2 | Dracovish | 32 (cap +2) | Choice Band | Strong Jaw | Choice-locked breaker | Fishious Rend, Psychic Fangs, Crunch, Ice Fang |
-| 3 | Marshtomp | 31 (cap +1) | Sitrus Berry | Torrent | protected attacker | Water Pledge, Scald, Double Edge, Protect |
-| 4 | Metang | 32 (cap +2) | Weakness Policy | Clear Body | protected attacker | Iron Head, Zen Headbutt, Ice Punch, Protect |
-| 5 | Alcremie | 32 (cap +2) | Babiri Berry | Aroma Veil | protected attacker | Decorate, Dazzling Gleam, Mystical Fire, Protect |
-| 6 | Duraludon | 33 (cap +3) | Assault Vest | Stalwart | coverage attacker | Flash Cannon, Dragon Pulse, Thunderbolt, Body Press |
-
-**Runtime slot 3 alternatives:** Wartortle, Croconaw, Marshtomp, Prinplup, Dewott, Frogadier, Brionne.
-
-## 094. May — Route 110
-
-**Required Branch · Double · Cap 30 · Extreme 97/100 · Uniqueness 41/100**
-
-**Theme:** active speed control
-
-Level-31 Eviolite Battle Armor Type: Null leads beside level-32 Choice Band Strong Jaw Dracovish. Tri Attack, Icy Wind, U-turn, and Protect control timing for Fishious Rend, Psychic Fangs, Crunch, or Ice Fang without fixing the opening. Slot three is the player's actual same-generation middle counter-starter at level 31 with Sitrus Berry, its elemental Pledge, reliable special STAB, Double-Edge, and Protect. Level-32 Weakness Policy Clear Body Metang uses Iron Head, Zen Headbutt, Ice Punch, and Protect. Level-32 Babiri Aroma Veil Alcremie can Decorate any physical or special partner while using Dazzling Gleam, Mystical Fire, or Protect. Level-33 Assault Vest Stalwart Duraludon closes through Flash Cannon, Dragon Pulse, Thunderbolt, or Body Press. The team uses one finite speed move and no weather, terrain, room, trap, redirection, setup move other than ally Decorate, Mega, or Primal. This is the first closed Type: Null, Dracovish, Metang, Alcremie, and Duraludon opponent appearance and the first required six-member rival double whose exact starter species follows all seven supported generations. The 21 middle starters deliberately recur from the earlier Rustboro rival as continuity, now twenty-six encounters later and only one-sixth of a substantially deeper team. May and Brendan have exact gameplay parity; no gender branch is secretly easier.
-
-**How it behaves:** All six records use foe-aware, smart-switching, partner-aware, HP-aware, and speed-control doubles scoring. The runtime species hook replaces only source slot two with the generation-correct middle starter while retaining the branch's legal universal moves and primary ability. Existing AI handles Icy Wind timing, Choice locks and switching, Fishious Rend power, Decorate ally-only targeting and useful-stat checks, Weakness Policy, Stalwart redirection bypass, Body Press defense scaling, Protect, and U-turn. No trainer-specific target read, forced opener, hidden stat adjustment, Mega, or Primal is added.
-
-**Why it is hard:** 6 fully authored Pokémon, average BST 482.3, average cap offset +1.83, ace offset +3, and 100% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Brendan (100% species overlap). Its species appear across an average of 3.3 unrelated trainer families.
-
-**Counterplay:** Fake Out, Taunt, priority, opposing speed control, Trick Room, or direct pressure can stop Type: Null's timing; Water Absorb, Storm Drain, Dry Skin, Protect, burn, Intimidate, Choice-lock exploitation, or faster offense answer Dracovish. Ordinary type coverage answers the visible dynamic starter. Knock Off, Haze, Clear Smog, Unaware, phazing, or avoiding a weak super-effective hit manage Metang. Steel, Poison, Taunt, Encore, or focus fire remove Alcremie. Ground, Fighting, strong special neutral damage, Snarl, Light Screen, item removal, or redirection-independent targeting answer Duraludon. No single counter solves all six, but every phase has several broad classes.
-
-**Strongest part:** The battle naturally changes phase—from speed-sensitive Fishious Rend, to the real counterpart and young pseudo-legendary, to flexible Decorate-backed mixed offense—without a scripted wave machine or making the player's starter choice the only puzzle.
-
-**Weakest link:** Water immunity plus immediate disruption can make Dracovish much less frightening, while focused Steel or Poison pressure can erase Alcremie and Duraludon has exploitable special bulk. Those are healthy broad answers that keep a required 9.7 rival learnable.
-
-**Manual closure:** Battle 54 is source-closed at editorial 9.7/10: six exact parity records, three elemental branches, a verified runtime hook for 21 generation-correct middle starters in source slot three, five fresh common species, six distinct items, one champion roster plus four full-set donors, mandatory trigger and native Itemfinder retry contracts, truthful native-width dialogue, supported one-slot progression, author self-check, and no transformation gimmick. Runtime playtesting remains required before the target is observed.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Type Null | 31 (cap +1) | Eviolite | Battle Armor | speed control | Tri Attack, Icy Wind, U Turn, Protect |
-| 2 | Dracovish | 32 (cap +2) | Choice Band | Strong Jaw | Choice-locked breaker | Fishious Rend, Psychic Fangs, Crunch, Ice Fang |
-| 3 | Grovyle | 31 (cap +1) | Sitrus Berry | Overgrow | protected attacker | Grass Pledge, Energy Ball, Double Edge, Protect |
-| 4 | Metang | 32 (cap +2) | Weakness Policy | Clear Body | protected attacker | Iron Head, Zen Headbutt, Ice Punch, Protect |
-| 5 | Alcremie | 32 (cap +2) | Babiri Berry | Aroma Veil | protected attacker | Decorate, Dazzling Gleam, Mystical Fire, Protect |
-| 6 | Duraludon | 33 (cap +3) | Assault Vest | Stalwart | coverage attacker | Flash Cannon, Dragon Pulse, Thunderbolt, Body Press |
-
-**Runtime slot 3 alternatives:** Ivysaur, Bayleef, Grovyle, Grotle, Servine, Quilladin, Dartrix.
-
-## 095. Brendan — Route 110
-
-**Required Branch · Double · Cap 30 · Extreme 97/100 · Uniqueness 41/100**
-
-**Theme:** active speed control
-
-Level-31 Eviolite Battle Armor Type: Null leads beside level-32 Choice Band Strong Jaw Dracovish. Tri Attack, Icy Wind, U-turn, and Protect control timing for Fishious Rend, Psychic Fangs, Crunch, or Ice Fang without fixing the opening. Slot three is the player's actual same-generation middle counter-starter at level 31 with Sitrus Berry, its elemental Pledge, reliable special STAB, Double-Edge, and Protect. Level-32 Weakness Policy Clear Body Metang uses Iron Head, Zen Headbutt, Ice Punch, and Protect. Level-32 Babiri Aroma Veil Alcremie can Decorate any physical or special partner while using Dazzling Gleam, Mystical Fire, or Protect. Level-33 Assault Vest Stalwart Duraludon closes through Flash Cannon, Dragon Pulse, Thunderbolt, or Body Press. The team uses one finite speed move and no weather, terrain, room, trap, redirection, setup move other than ally Decorate, Mega, or Primal. This is the first closed Type: Null, Dracovish, Metang, Alcremie, and Duraludon opponent appearance and the first required six-member rival double whose exact starter species follows all seven supported generations. The 21 middle starters deliberately recur from the earlier Rustboro rival as continuity, now twenty-six encounters later and only one-sixth of a substantially deeper team. May and Brendan have exact gameplay parity; no gender branch is secretly easier.
-
-**How it behaves:** All six records use foe-aware, smart-switching, partner-aware, HP-aware, and speed-control doubles scoring. The runtime species hook replaces only source slot two with the generation-correct middle starter while retaining the branch's legal universal moves and primary ability. Existing AI handles Icy Wind timing, Choice locks and switching, Fishious Rend power, Decorate ally-only targeting and useful-stat checks, Weakness Policy, Stalwart redirection bypass, Body Press defense scaling, Protect, and U-turn. No trainer-specific target read, forced opener, hidden stat adjustment, Mega, or Primal is added.
-
-**Why it is hard:** 6 fully authored Pokémon, average BST 482.3, average cap offset +1.83, ace offset +3, and 100% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: May (100% species overlap). Its species appear across an average of 3.3 unrelated trainer families.
-
-**Counterplay:** Fake Out, Taunt, priority, opposing speed control, Trick Room, or direct pressure can stop Type: Null's timing; Water Absorb, Storm Drain, Dry Skin, Protect, burn, Intimidate, Choice-lock exploitation, or faster offense answer Dracovish. Ordinary type coverage answers the visible dynamic starter. Knock Off, Haze, Clear Smog, Unaware, phazing, or avoiding a weak super-effective hit manage Metang. Steel, Poison, Taunt, Encore, or focus fire remove Alcremie. Ground, Fighting, strong special neutral damage, Snarl, Light Screen, item removal, or redirection-independent targeting answer Duraludon. No single counter solves all six, but every phase has several broad classes.
-
-**Strongest part:** The battle naturally changes phase—from speed-sensitive Fishious Rend, to the real counterpart and young pseudo-legendary, to flexible Decorate-backed mixed offense—without a scripted wave machine or making the player's starter choice the only puzzle.
-
-**Weakest link:** Water immunity plus immediate disruption can make Dracovish much less frightening, while focused Steel or Poison pressure can erase Alcremie and Duraludon has exploitable special bulk. Those are healthy broad answers that keep a required 9.7 rival learnable.
-
-**Manual closure:** Battle 54 is source-closed at editorial 9.7/10: six exact parity records, three elemental branches, a verified runtime hook for 21 generation-correct middle starters in source slot three, five fresh common species, six distinct items, one champion roster plus four full-set donors, mandatory trigger and native Itemfinder retry contracts, truthful native-width dialogue, supported one-slot progression, author self-check, and no transformation gimmick. Runtime playtesting remains required before the target is observed.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Type Null | 31 (cap +1) | Eviolite | Battle Armor | speed control | Tri Attack, Icy Wind, U Turn, Protect |
-| 2 | Dracovish | 32 (cap +2) | Choice Band | Strong Jaw | Choice-locked breaker | Fishious Rend, Psychic Fangs, Crunch, Ice Fang |
-| 3 | Combusken | 31 (cap +1) | Sitrus Berry | Blaze | protected attacker | Fire Pledge, Flamethrower, Double Edge, Protect |
-| 4 | Metang | 32 (cap +2) | Weakness Policy | Clear Body | protected attacker | Iron Head, Zen Headbutt, Ice Punch, Protect |
-| 5 | Alcremie | 32 (cap +2) | Babiri Berry | Aroma Veil | protected attacker | Decorate, Dazzling Gleam, Mystical Fire, Protect |
-| 6 | Duraludon | 33 (cap +3) | Assault Vest | Stalwart | coverage attacker | Flash Cannon, Dragon Pulse, Thunderbolt, Body Press |
-
-**Runtime slot 3 alternatives:** Charmeleon, Quilava, Combusken, Monferno, Pignite, Braixen, Torracat.
-
-## 096. Brendan — Route 110
-
-**Required Branch · Double · Cap 30 · Extreme 97/100 · Uniqueness 41/100**
-
-**Theme:** active speed control
-
-Level-31 Eviolite Battle Armor Type: Null leads beside level-32 Choice Band Strong Jaw Dracovish. Tri Attack, Icy Wind, U-turn, and Protect control timing for Fishious Rend, Psychic Fangs, Crunch, or Ice Fang without fixing the opening. Slot three is the player's actual same-generation middle counter-starter at level 31 with Sitrus Berry, its elemental Pledge, reliable special STAB, Double-Edge, and Protect. Level-32 Weakness Policy Clear Body Metang uses Iron Head, Zen Headbutt, Ice Punch, and Protect. Level-32 Babiri Aroma Veil Alcremie can Decorate any physical or special partner while using Dazzling Gleam, Mystical Fire, or Protect. Level-33 Assault Vest Stalwart Duraludon closes through Flash Cannon, Dragon Pulse, Thunderbolt, or Body Press. The team uses one finite speed move and no weather, terrain, room, trap, redirection, setup move other than ally Decorate, Mega, or Primal. This is the first closed Type: Null, Dracovish, Metang, Alcremie, and Duraludon opponent appearance and the first required six-member rival double whose exact starter species follows all seven supported generations. The 21 middle starters deliberately recur from the earlier Rustboro rival as continuity, now twenty-six encounters later and only one-sixth of a substantially deeper team. May and Brendan have exact gameplay parity; no gender branch is secretly easier.
-
-**How it behaves:** All six records use foe-aware, smart-switching, partner-aware, HP-aware, and speed-control doubles scoring. The runtime species hook replaces only source slot two with the generation-correct middle starter while retaining the branch's legal universal moves and primary ability. Existing AI handles Icy Wind timing, Choice locks and switching, Fishious Rend power, Decorate ally-only targeting and useful-stat checks, Weakness Policy, Stalwart redirection bypass, Body Press defense scaling, Protect, and U-turn. No trainer-specific target read, forced opener, hidden stat adjustment, Mega, or Primal is added.
-
-**Why it is hard:** 6 fully authored Pokémon, average BST 482.3, average cap offset +1.83, ace offset +3, and 100% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: May (100% species overlap). Its species appear across an average of 3.3 unrelated trainer families.
-
-**Counterplay:** Fake Out, Taunt, priority, opposing speed control, Trick Room, or direct pressure can stop Type: Null's timing; Water Absorb, Storm Drain, Dry Skin, Protect, burn, Intimidate, Choice-lock exploitation, or faster offense answer Dracovish. Ordinary type coverage answers the visible dynamic starter. Knock Off, Haze, Clear Smog, Unaware, phazing, or avoiding a weak super-effective hit manage Metang. Steel, Poison, Taunt, Encore, or focus fire remove Alcremie. Ground, Fighting, strong special neutral damage, Snarl, Light Screen, item removal, or redirection-independent targeting answer Duraludon. No single counter solves all six, but every phase has several broad classes.
-
-**Strongest part:** The battle naturally changes phase—from speed-sensitive Fishious Rend, to the real counterpart and young pseudo-legendary, to flexible Decorate-backed mixed offense—without a scripted wave machine or making the player's starter choice the only puzzle.
-
-**Weakest link:** Water immunity plus immediate disruption can make Dracovish much less frightening, while focused Steel or Poison pressure can erase Alcremie and Duraludon has exploitable special bulk. Those are healthy broad answers that keep a required 9.7 rival learnable.
-
-**Manual closure:** Battle 54 is source-closed at editorial 9.7/10: six exact parity records, three elemental branches, a verified runtime hook for 21 generation-correct middle starters in source slot three, five fresh common species, six distinct items, one champion roster plus four full-set donors, mandatory trigger and native Itemfinder retry contracts, truthful native-width dialogue, supported one-slot progression, author self-check, and no transformation gimmick. Runtime playtesting remains required before the target is observed.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Type Null | 31 (cap +1) | Eviolite | Battle Armor | speed control | Tri Attack, Icy Wind, U Turn, Protect |
-| 2 | Dracovish | 32 (cap +2) | Choice Band | Strong Jaw | Choice-locked breaker | Fishious Rend, Psychic Fangs, Crunch, Ice Fang |
-| 3 | Marshtomp | 31 (cap +1) | Sitrus Berry | Torrent | protected attacker | Water Pledge, Scald, Double Edge, Protect |
-| 4 | Metang | 32 (cap +2) | Weakness Policy | Clear Body | protected attacker | Iron Head, Zen Headbutt, Ice Punch, Protect |
-| 5 | Alcremie | 32 (cap +2) | Babiri Berry | Aroma Veil | protected attacker | Decorate, Dazzling Gleam, Mystical Fire, Protect |
-| 6 | Duraludon | 33 (cap +3) | Assault Vest | Stalwart | coverage attacker | Flash Cannon, Dragon Pulse, Thunderbolt, Body Press |
-
-**Runtime slot 3 alternatives:** Wartortle, Croconaw, Marshtomp, Prinplup, Dewott, Frogadier, Brionne.
-
-## 097. Brendan — Route 110
-
-**Required Branch · Double · Cap 30 · Extreme 97/100 · Uniqueness 41/100**
-
-**Theme:** active speed control
-
-Level-31 Eviolite Battle Armor Type: Null leads beside level-32 Choice Band Strong Jaw Dracovish. Tri Attack, Icy Wind, U-turn, and Protect control timing for Fishious Rend, Psychic Fangs, Crunch, or Ice Fang without fixing the opening. Slot three is the player's actual same-generation middle counter-starter at level 31 with Sitrus Berry, its elemental Pledge, reliable special STAB, Double-Edge, and Protect. Level-32 Weakness Policy Clear Body Metang uses Iron Head, Zen Headbutt, Ice Punch, and Protect. Level-32 Babiri Aroma Veil Alcremie can Decorate any physical or special partner while using Dazzling Gleam, Mystical Fire, or Protect. Level-33 Assault Vest Stalwart Duraludon closes through Flash Cannon, Dragon Pulse, Thunderbolt, or Body Press. The team uses one finite speed move and no weather, terrain, room, trap, redirection, setup move other than ally Decorate, Mega, or Primal. This is the first closed Type: Null, Dracovish, Metang, Alcremie, and Duraludon opponent appearance and the first required six-member rival double whose exact starter species follows all seven supported generations. The 21 middle starters deliberately recur from the earlier Rustboro rival as continuity, now twenty-six encounters later and only one-sixth of a substantially deeper team. May and Brendan have exact gameplay parity; no gender branch is secretly easier.
-
-**How it behaves:** All six records use foe-aware, smart-switching, partner-aware, HP-aware, and speed-control doubles scoring. The runtime species hook replaces only source slot two with the generation-correct middle starter while retaining the branch's legal universal moves and primary ability. Existing AI handles Icy Wind timing, Choice locks and switching, Fishious Rend power, Decorate ally-only targeting and useful-stat checks, Weakness Policy, Stalwart redirection bypass, Body Press defense scaling, Protect, and U-turn. No trainer-specific target read, forced opener, hidden stat adjustment, Mega, or Primal is added.
-
-**Why it is hard:** 6 fully authored Pokémon, average BST 482.3, average cap offset +1.83, ace offset +3, and 100% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: May (100% species overlap). Its species appear across an average of 3.3 unrelated trainer families.
-
-**Counterplay:** Fake Out, Taunt, priority, opposing speed control, Trick Room, or direct pressure can stop Type: Null's timing; Water Absorb, Storm Drain, Dry Skin, Protect, burn, Intimidate, Choice-lock exploitation, or faster offense answer Dracovish. Ordinary type coverage answers the visible dynamic starter. Knock Off, Haze, Clear Smog, Unaware, phazing, or avoiding a weak super-effective hit manage Metang. Steel, Poison, Taunt, Encore, or focus fire remove Alcremie. Ground, Fighting, strong special neutral damage, Snarl, Light Screen, item removal, or redirection-independent targeting answer Duraludon. No single counter solves all six, but every phase has several broad classes.
-
-**Strongest part:** The battle naturally changes phase—from speed-sensitive Fishious Rend, to the real counterpart and young pseudo-legendary, to flexible Decorate-backed mixed offense—without a scripted wave machine or making the player's starter choice the only puzzle.
-
-**Weakest link:** Water immunity plus immediate disruption can make Dracovish much less frightening, while focused Steel or Poison pressure can erase Alcremie and Duraludon has exploitable special bulk. Those are healthy broad answers that keep a required 9.7 rival learnable.
-
-**Manual closure:** Battle 54 is source-closed at editorial 9.7/10: six exact parity records, three elemental branches, a verified runtime hook for 21 generation-correct middle starters in source slot three, five fresh common species, six distinct items, one champion roster plus four full-set donors, mandatory trigger and native Itemfinder retry contracts, truthful native-width dialogue, supported one-slot progression, author self-check, and no transformation gimmick. Runtime playtesting remains required before the target is observed.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Type Null | 31 (cap +1) | Eviolite | Battle Armor | speed control | Tri Attack, Icy Wind, U Turn, Protect |
-| 2 | Dracovish | 32 (cap +2) | Choice Band | Strong Jaw | Choice-locked breaker | Fishious Rend, Psychic Fangs, Crunch, Ice Fang |
-| 3 | Grovyle | 31 (cap +1) | Sitrus Berry | Overgrow | protected attacker | Grass Pledge, Energy Ball, Double Edge, Protect |
-| 4 | Metang | 32 (cap +2) | Weakness Policy | Clear Body | protected attacker | Iron Head, Zen Headbutt, Ice Punch, Protect |
-| 5 | Alcremie | 32 (cap +2) | Babiri Berry | Aroma Veil | protected attacker | Decorate, Dazzling Gleam, Mystical Fire, Protect |
-| 6 | Duraludon | 33 (cap +3) | Assault Vest | Stalwart | coverage attacker | Flash Cannon, Dragon Pulse, Thunderbolt, Body Press |
-
-**Runtime slot 3 alternatives:** Ivysaur, Bayleef, Grovyle, Grotle, Servine, Quilladin, Dartrix.
-
-## 098. Edward — Route 110
-
-**Optional · Single · Cap 30 · Extreme 90/100 · Uniqueness 80/100**
-
-**Theme:** Psychic pressure
-
-Level-31 itemless Levitate Lunatone sets Magic Room and attacks or heals. Edward's level-32 Hypno, level-32 Magic Bounce Xatu, and split-only level-33 Munna remain itemless and use direct Psychic coverage, Disable, Future Sight, U-turn, and recovery. Alyssa leads level-31 itemless Immunity Gligar; in her split, level-32 Competitive Gothorita supplies Magic Room. Level-32 Aftermath Drifblim and split-only level-33 Motor Drive Emolga exploit itemless Acrobatics and pivoting. Player held-item effects are suppressed for five turns, but abilities, moves, and stats remain intact. No Protect, priority, active speed control, setup move, weather, terrain, Gravity, Mega, or Primal is used. This is the first closed Lunatone, Hypno, Xatu, Munna, Gligar, Gothorita, Drifblim, and Emolga opponent appearance and Verdant's first Magic Room equipment-denial lesson. The rejected Gravity draft was discarded because Battle 23 already owns the native-pair Gravity/Hustle architecture. Magic Room instead turns Verdant's unusually generous held-item access into one transparent counter-puzzle.
-
-**How it behaves:** Edward and Alyssa use foe-aware, smart-switching, HP-aware, and field-control scoring. Native Magic Room scoring already rewards the move when the user and partner are itemless while the opposing side holds items, prevents duplicate casting, and rejects recasting while active. Native Future Sight scoring rewards one pending delayed attack and suppresses duplicates. No custom selector, forced opener, combo profile, speed profile, Mega, or Primal is added.
-
-**Why it is hard:** 4 fully authored Pokémon, average BST 461.8, average cap offset +2.0, ace offset +3, and 0% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Brandi (20% species overlap). Its species appear across an average of 4.2 unrelated trainer families.
-
-**Counterplay:** Taunt, Encore, immediate Lunatone or Gothorita focus fire, Magic Room reversal, or simply surviving five turns restores items. Dark, Ghost, and Bug pressure Edward; Ice, Water, Rock, and strong neutral attacks pressure Alyssa by slot. Abilities, raw stats, recovery, hazards, status, screens, weather, terrain, and item-independent move combinations continue functioning. Future Sight is visible and can be timed; U-turn and Volt Switch can be punished with hazards or trapping.
-
-**Strongest part:** The player immediately understands why this battle feels different: a native field effect disables the powerful gear Verdant usually encourages, while every opponent visibly committed to fighting without items from the start.
-
-**Weakest link:** A fast Taunt or setter knockout can erase the headline on turn one. That is intentional broad counterplay, while eight optimized levels 31-33 and independent coverage preserve an 8.7-9.0 encounter afterward.
-
-**Manual closure:** Battle 56 is source-closed at editorial 9.0 jointly, 8.7 for Edward's single, and 8.8 for Alyssa's double: eight fresh stage-legal species at levels 31-33, exact asymmetric joint/split branches, zero held items and zero Protect, six full-set donors, native Magic Room and Future Sight AI, truthful dialogue, no reward collateral, author self-check, and no repeated Gravity or unsupported gimmick. Runtime testing remains required for all branches before targets are observed.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Lunatone | 31 (cap +1) | None | Levitate | disruption and support | Magic Room, Psychic, Power Gem, Moonlight |
-| 2 | Hypno | 32 (cap +2) | None | Insomnia | coverage attacker | Psychic, Focus Blast, Shadow Ball, Disable |
-| 3 | Xatu | 32 (cap +2) | None | Magic Bounce | coverage attacker | Future Sight, Air Slash, Heat Wave, U Turn |
-| 4 | Munna | 33 (cap +3) | None | Synchronize | coverage attacker | Moonblast, Energy Ball, Psychic, Moonlight |
-
-## 099. Jaclyn — Route 110
-
-**Optional · Single · Cap 30 · Extreme 88/100 · Uniqueness 87/100**
-
-**Theme:** Psychic pressure
-
-Level-32 Eviolite Magic Bounce Hattrem attacks through Psyshock, Mystical Fire, and Draining Kiss or sacrifices itself with Healing Wish. Level-31 Focus Sash Magic Guard Kadabra uses Psychic, Shadow Ball, Energy Ball, and Encore. Level-32 Colbur Levitate Chimecho uses Yawn, Psychic, Signal Beam, and Recover. Level-33 Kee Berry Simple Swoobat uses Calm Mind, Stored Power, Air Slash, and Roost; one Calm Mind visibly becomes two stages and one physical hit can double Kee Berry's Defense rise. No field, screen, weather, trap, priority, Mega, or Primal is used. This is the first closed Hattrem, Kadabra, Chimecho, and Swoobat opponent appearance and the first Simple Stored Power finale. Wonder Room was rejected because Battle 22 owns it, Wonder Guard was rejected as binary, and Ditto/Wobbuffet were rejected because they repeat earlier information and trapping lessons.
-
-**How it behaves:** Jaclyn uses foe-aware, smart-switching, HP-aware, and first-turn setup scoring. Native viability handles Magic Bounce, Encore, Yawn, Healing Wish, Sash, recovery, and Stored Power. The setup profile matters only when Swoobat enters because no earlier member owns a stat-setup move; it encourages but does not force Calm Mind. No custom selector or hidden read is added.
-
-**Why it is hard:** 4 fully authored Pokémon, average BST 428.8, average cap offset +2.0, ace offset +3, and 100% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Jared (14% species overlap). Its species appear across an average of 2.5 unrelated trainer families.
-
-**Counterplay:** Direct attacks bypass Magic Bounce; multihit or chip breaks Kadabra's Sash; Taunt, Encore, Haze, Clear Smog, Unaware, phazing, item removal, or immediate focus stop Swoobat. Dark, Bug, Ghost, Rock, Electric, and Ice offense remain common. Switching or status immunity answers Yawn, and physical pressure exploits the first three members.
-
-**Strongest part:** Four independent stage tricks escalate cleanly into one visible mathematical payoff—one boost becomes two—without requiring a field engine or binary immunity check.
-
-**Weakest link:** Immediate Rock, Electric, Ice, Ghost, or Dark pressure can delete Swoobat before setup. That is intentional broad counterplay, while the first three optimized checks preserve the 8.8 encounter.
-
-**Manual closure:** Battle 58 is source-closed at editorial 8.8/10: one optional four-member single at legal levels 31-33, four fresh species and items, two full-set Simple donors plus transparent legal source roles, truthful native-width dialogue, native setup AI, author self-check, and no repeated Wonder Room, trap, field, or unsupported gimmick. Runtime playtesting remains required before the target is observed.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Hattrem | 32 (cap +2) | Eviolite | Magic Bounce | coverage attacker | Psyshock, Mystical Fire, Draining Kiss, Healing Wish |
-| 2 | Kadabra | 31 (cap +1) | Focus Sash | Magic Guard | coverage attacker | Psychic, Shadow Ball, Energy Ball, Encore |
-| 3 | Chimecho | 32 (cap +2) | Colbur Berry | Levitate | disruption and support | Yawn, Psychic, Signal Beam, Recover |
-| 4 | Swoobat | 33 (cap +3) | Kee Berry | Simple | setup attacker | Calm Mind, Stored Power, Air Slash, Roost |
-
-## 100. Edwin — Route 110
-
-**Optional · Double · Cap 30 · Extreme 92/100 · Uniqueness 90/100**
-
-**Theme:** Beat Up + Justified
-
-The joint branch leads level-31 White Herb Justified Terrakion beside level-31 Wide Lens Houndoom. Houndoom can Beat Up Terrakion, while Heat Wave, Snarl, and Will-O-Wisp remain independent options. Edwin's split instead leads Terrakion beside level-31 Occa Prankster Cottonee with Beat Up, Helping Hand, Charm, and Giga Drain; level-32 Flying Gem Archen and level-33 Expert Belt Eelektrik then attack directly. Joseph's split leads Houndoom beside level-31 Eviolite Justified Growlithe with Flare Blitz, Close Combat, Crunch, and Morning Sun; level-29 Berry Juice Rattled Toxel provides Nuzzle, Endeavor, Metal Sound, and Tearful Look before level-33 Soft Sand Moxie Krokorok closes through Dig, Crunch, Rock Slide, and Ice Fang. No weather, terrain, room, screen, Tailwind, setup move, Mega, or Primal is used. This is the first closed Terrakion, Cottonee, Archen, Eelektrik, Houndoom, Growlithe, Toxel, and Krokorok opponent appearance and Verdant's definitive Beat Up plus Justified showcase. Unlike the recent every-member Round circuit, only the branch's opening pair owns the activation; the loaded reserves change axis immediately. The older Frost Breath, Guard Split, and Surf activation lessons use different recipients, costs, and counterplay.
-
-**How it behaves:** Both trainers use native foe-aware, smart-switching, partner-aware, HP-aware, and combo-setup doubles scoring. The existing combo profile adds a strong bonus only when Beat Up targets a live Justified partner; ordinary ally-safety scoring rejects lethal activation. White Herb, Prankster support, Flying Gem Acrobatics, Defeatist, Levitate, Rattled, Endeavor, Moxie, Dig, and all coverage are existing mechanics. No forced opener, custom target selector, speed profile, field profile, Mega, or Primal is added.
-
-**Why it is hard:** 4 fully authored Pokémon, average BST 416.5, average cap offset +1.75, ace offset +3, and 100% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: John & Jay (14% species overlap). Its species appear across an average of 2.5 unrelated trainer families.
-
-**Counterplay:** Fake Out, Taunt, Follow Me or Rage Powder, priority, immediate Houndoom or Cottonee focus fire, Protect on the intended recipient, Ghost interaction where applicable, burn, Intimidate after activation, Haze, Clear Smog, Unaware, phazing, or a fast recipient knockout all answer the headline. Rock, Ground, Water, Fighting, Fairy, Ice, and special pressure cover Terrakion or Growlithe by phase. Archen exposes Defeatist, Toxel is deliberately under the cap, Eelektrik has modest raw stats, and Krokorok's Dig telegraphs a turn. No single answer solves every reserve, but none requires a lock-and-key counter.
-
-**Strongest part:** One historic competitive activation is natively true in the joint branch and both split branches, yet only the opener is modular; the rest of each loaded team immediately becomes a different young-form offense test.
-
-**Weakest link:** If Houndoom or Cottonee is removed immediately, the fight loses its headline. That is intentional readable counterplay, while Terrakion, Growlithe, Archen, Eelektrik, Toxel, and Krokorok still leave a credible 8.8 split or 9.2 joint battle.
-
-**Manual closure:** Battle 55 is source-closed at editorial 9.2 jointly and 8.8 for either split: eight stage-legal levels 29-33, exact Edwin-A/Joseph-B prefix slicing, three truthful Beat Up activation leads, eight distinct items and species, two historic rosters plus three full-set donors, native combo AI, zero Protect and no broad speed field, Edwin-only Match Call ownership, author self-check, and no unsupported gimmick. Runtime testing remains required for all three branches before the targets are observed.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Terrakion | 31 (cap +1) | White Herb | Justified | rare centerpiece | Rock Slide, Close Combat, Iron Head, Taunt |
-| 2 | Cottonee | 31 (cap +1) | Occa Berry | Prankster | disruption and support | Beat Up, Helping Hand, Charm, Giga Drain |
-| 3 | Archen | 32 (cap +2) | Flying Gem | Defeatist | coverage attacker | Acrobatics, Rock Slide, Crunch, U Turn |
-| 4 | Eelektrik | 33 (cap +3) | Expert Belt | Levitate | coverage attacker | Thunderbolt, Giga Drain, Crunch, Aqua Tail |
-
-## 101. Dale — Route 110
-
-**Optional · Double · Cap 30 · Extreme 89/100 · Uniqueness 61/100**
-
-**Theme:** Water pressure
-
-Level-31 Sitrus Storm Drain Lumineon uses Soak, Scald, Air Slash, or Protect beside level-32 Expert Belt Water Absorb Arctovish with Freeze-Dry, Fishious Rend, Crunch, and Rock Slide. Level-32 Scope Lens Sniper Octillery can exploit Soak with Energy Ball before Focus Energy raises its critical pressure through Hydro Pump or Ice Beam. Level-33 Mystic Water Water Veil Floatzel closes through Waterfall, Aqua Jet, Ice Punch, or Crunch. No rain, speed field, trap, redirection, ally activation, Mega, or Primal is used. This is the first closed Lumineon, Arctovish, Octillery, and Floatzel opponent appearance and Verdant's first Soak target-painting lesson. Friendly Surf activation was rejected because Battles 38 and 44 already own related ally-Water conversion shapes.
-
-**How it behaves:** Dale uses foe-aware, smart-switching, partner-aware, HP-aware, and combo-setup doubles scoring. The reusable combo layer now rewards Soak when the partner owns Electric, Grass, or Freeze-Dry conversion and rewards the corresponding exploiting move when the partner selected Soak; it never fixes a target. Native logic rejects already-Water targets. Focus Energy, Sniper, Storm Drain, Water Absorb, and all coverage are existing mechanics.
-
-**Why it is hard:** 4 fully authored Pokémon, average BST 507.5, average cap offset +2.0, ace offset +3, and 100% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Charlie (50% species overlap). Its species appear across an average of 5.8 unrelated trainer families.
-
-**Counterplay:** Fake Out, Taunt, Encore, redirection, Substitute, Magic Bounce, immediate Lumineon focus fire, or Water-type targets deny Soak value. Lightning Rod, Volt Absorb, Grass resistance, special bulk, Snarl, Light Screen, burn, Intimidate, Wide Guard against Rock Slide, Haze or immediate Octillery pressure, and priority into Floatzel remain broad answers.
-
-**Strongest part:** One visible fishing cast marks exactly one target, the first reserve preserves that conversion, and the encounter then changes into concentration and direct cleanup rather than endlessly rebuilding Soak.
-
-**Weakest link:** Removing Lumineon immediately erases the headline. That is intentional readable counterplay, while three optimized level-32/33 attackers preserve an 8.9 encounter afterward.
-
-**Manual closure:** Battle 57 is source-closed at editorial 8.9/10: one optional four-member double at legal levels 31-33, four fresh species and items, one visible Soak conversion with reusable partner-aware AI, four full-set donors, truthful native-width dialogue, accepted one-slot behavior, author self-check, and no repeated Surf activation or unsupported gimmick. Runtime playtesting remains required before the target is observed.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Lumineon | 31 (cap +1) | Sitrus Berry | Storm Drain | protected attacker | Soak, Scald, Air Slash, Protect |
-| 2 | Arctovish | 32 (cap +2) | Expert Belt | Water Absorb | coverage attacker | Freeze Dry, Fishious Rend, Crunch, Rock Slide |
-| 3 | Octillery | 32 (cap +2) | Scope Lens | Sniper | coverage attacker | Focus Energy, Energy Ball, Hydro Pump, Ice Beam |
-| 4 | Floatzel | 33 (cap +3) | Mystic Water | Water Veil | coverage attacker | Waterfall, Aqua Jet, Ice Punch, Crunch |
-
-## 102. Jacob — Route 110
-
-**Optional · Double · Cap 30 · Extreme 90/100 · Uniqueness 82/100**
-
-**Theme:** residual control
-
-Level-30 Rocky Helmet Iron Barbs Ferroseed uses a 31-Attack, 0-Speed Brave spread with Leech Seed, Gyro Ball, Knock Off, and Protect. Level-31 Assault Vest Rough Skin Druddigon uses Dragon Claw, Fire Punch, Sucker Punch, and Iron Head. Level-32 Expert Belt Rough Skin Sharpedo uses Liquidation, Psychic Fangs, Ice Fang, and Protect. Level-33 Charti Flame Body Moltres uses Heat Wave, Air Slash, Roost, and Protect. No move targets an ally, and there is no weather, terrain, room, screen, speed field, setup pass, trap, Mega, or Primal. This is the first closed Ferroseed, Druddigon, Sharpedo, and Moltres appearance and the first dedicated contact-tax double. A random Cycling Road trainer owning Moltres supplies the requested rare-route surprise, while cap-even Ferroseed keeps the same encounter visibly grounded in the early evolution phase.
-
-**How it behaves:** Jacob uses foe-aware, partner-helping, HP-aware, and smart-switching doubles scoring. Native logic handles Leech Seed, Protect, Rough Skin, Iron Barbs, Rocky Helmet, Flame Body, Assault Vest, Roost, Charti Berry, Sucker Punch, spread Heat Wave, and ordinary type-aware switches. No special contact selector, forced switch, move, partner action, or target is added.
-
-**Why it is hard:** 4 fully authored Pokémon, average BST 467.5, average cap offset +1.5, ace offset +3, and 100% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Gilbert (20% species overlap). Its species appear across an average of 5.0 unrelated trainer families.
-
-**Counterplay:** Heat Wave, Flamethrower, Surf, Earthquake, Rock Slide, special coverage, projectiles, Protective Pads, Long Reach, Neutralizing Gas, Gastro Acid, Skill Swap, item removal, or other ability suppression bypasses or reduces contact tax. Magic Guard removes Rocky Helmet damage in this engine but not Rough Skin or Iron Barbs; Mold Breaker does not suppress these reactive abilities. Fire deletes Ferroseed; Ice, Fairy, or Dragon pressures Druddigon; Electric, Grass, Bug, Fighting, or priority removes Sharpedo; Rock, Water, Electric, or strong special attacks remove Moltres after Charti.
-
-**Strongest part:** The first hit teaches the rule immediately, every reserve preserves it differently, and an unexpected Moltres makes the final Cycling Road trainer memorable without hiding the answer.
-
-**Weakest link:** A prepared special Fire plus Rock core can solve the entire formation efficiently. That broad noncontact answer is intentional; Moltres level should be tuned before adding any artificial resistance.
-
-**Manual closure:** Battle 63 is source-closed at editorial 9.0/10: one guarded four-member double at legal levels 30-33, four fresh species including young Ferroseed and rare Moltres, a visible contact-only rule, three complete-set donors, exact southern patrol geometry, native-width strategy and refusal dialogue, native switching AI, author self-check, and no unsupported immunity claim. Runtime playtesting remains required before the target is observed.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Ferroseed | 30 (cap +0) | Rocky Helmet | Iron Barbs | protected attacker | Leech Seed, Gyro Ball, Knock Off, Protect |
-| 2 | Druddigon | 31 (cap +1) | Assault Vest | Rough Skin | coverage attacker | Dragon Claw, Fire Punch, Sucker Punch, Iron Head |
-| 3 | Sharpedo | 32 (cap +2) | Expert Belt | Rough Skin | protected attacker | Liquidation, Psychic Fangs, Ice Fang, Protect |
-| 4 | Moltres | 33 (cap +3) | Charti Berry | Flame Body | protected attacker | Heat Wave, Air Slash, Roost, Protect |
-
-## 103. Anthony — Route 110
-
-**Optional · Single · Cap 30 · Extreme 89/100 · Uniqueness 80/100**
-
-**Theme:** underused normal mixture
-
-Level-30 Sharp Beak Tangled Feet Doduo uses Brave Bird, Double-Edge, Jump Kick, and Steel Wing. Level-31 Magnet Sap Sipper Zebstrika uses Wild Charge, Overheat, Double-Edge, and Low Kick. Level-32 Sitrus Sheer Force Rampardos uses Head Smash, Superpower, Zen Headbutt, and Iron Head. Level-33 Wise Glasses Download Porygon-Z uses Hyper Beam, Tri Attack, Ice Beam, and Dark Pulse. Every member attacks immediately; there is no setup, Protect, priority, pivot, field, weather, trap, Choice lock, Mega, or teammate dependency. This is the first closed Doduo, Zebstrika, Rampardos, and Porygon-Z appearance and the first zero-setup no-brakes commitment ladder. It deliberately follows Jaclyn's staged setup single with pure immediate damage, mixed axes, and mandatory drawbacks rather than another enabler-recipient or field engine.
-
-**How it behaves:** Anthony retains an ordinary singles trainer battle with foe-aware viability and smart switching. Native recoil safety, crash behavior, damage and KO scoring, stat-drop handling, Download, berries, and Hyper Beam recharge execute the design. The AI is not forced to save Hyper Beam for a KO; an imperfect raw-damage commitment is an intentional player opening, not a hidden script. No custom selector is added.
-
-**Why it is hard:** 4 fully authored Pokémon, average BST 469.2, average cap offset +1.5, ace offset +3, and 100% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Katelyn (20% species overlap). Its species appear across an average of 4.8 unrelated trainer families.
-
-**Counterplay:** Protect, Ghost or type immunities, resistance pivots, recovery, recoil management, and forcing Jump Kick misses create immediate punish windows. Burn, Intimidate, Reflect, bulky Ground, Rock, Steel, or physical walls answer the first three; special bulk, Fighting pressure, Disable, Encore, or exploiting recharge answers Porygon-Z. The player can win through survival and timing instead of outracing every leg.
-
-**Strongest part:** Every dangerous hit creates its own broad answer window, and Porygon-Z flips the damage axis just when burn or a physical wall appears to solve the whole race.
-
-**Weakest link:** A sufficiently bulky Ghost, Ground, or physical-control core can compress the first three legs. Porygon-Z's special coverage and Download are retained specifically to prevent one defensive answer from becoming autopilot.
-
-**Manual closure:** Battle 59 is source-closed at editorial 8.9/10: one optional four-member single at legal levels 30-33, four fresh species, four distinct immediate commitments, three complete-set donors plus transparent legal source roles, exact non-pair geometry, native-width dialogue, ordinary native AI, author self-check, and no repeated field or setter-recipient module. Runtime playtesting remains required before the target is observed.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Doduo | 30 (cap +0) | Sharp Beak | Tangled Feet | coverage attacker | Brave Bird, Double Edge, Jump Kick, Steel Wing |
-| 2 | Zebstrika | 31 (cap +1) | Magnet | Sap Sipper | coverage attacker | Wild Charge, Overheat, Double Edge, Low Kick |
-| 3 | Rampardos | 32 (cap +2) | Sitrus Berry | Sheer Force | coverage attacker | Head Smash, Superpower, Zen Headbutt, Iron Head |
-| 4 | Porygon-Z | 33 (cap +3) | Wise Glasses | Download | coverage attacker | Hyper Beam, Tri Attack, Ice Beam, Dark Pulse |
-
-## 104. Benjamin — Route 110
-
-**Optional · Single · Cap 30 · Extreme 91/100 · Uniqueness 86/100**
-
-**Theme:** Earthquake immunity + Trick Room
-
-Level-30 Mental Herb Levitate Bronzor uses Trick Room, Stealth Rock, Gyro Ball, and Psychic. Level-31 Throat Spray Berserk Drampa uses Hyper Voice, Draco Meteor, Flamethrower, and Roost. Level-32 Choice Band Iron Fist Crabominable uses Close Combat, Ice Hammer, Thunder Punch, and Earthquake. Level-33 Air Balloon Beast Boost Stakataka uses Trick Room, Gyro Ball, Body Press, and Stone Edge. The lead and ace own the two clocks; neither target nor move is forced, and there is no weather, terrain, screen, teammate activation, pivot chain, Mega, or Primal. This is the first closed Bronzor, Drampa, Crabominable, and Stakataka appearance and the first dedicated cap-30 slow-lane single since the much earlier temporal lesson. It follows no-brakes burst and endurance with a literal clock-management puzzle, while a young Bronzor keeps the route's evolution phase visible before an Ultra Beast finish.
-
-**How it behaves:** Benjamin uses foe-aware, smart-switching, HP-aware, first-battle-turn setup, and contextual speed-control scoring. The battle-global setup flag modestly supports Bronzor's opening room or rocks; the stronger speed-control score favors Trick Room only when the active side is slower and room is absent. Stakataka can rebuild the clock later through the same visible-board rule. Native viability handles Mental Herb, Choice Band, recoil-free attacks, Throat Spray, Roost, Air Balloon, and Beast Boost. No opener or target is forced.
-
-**Why it is hard:** 4 fully authored Pokémon, average BST 468.2, average cap offset +1.5, ace offset +3, and 100% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Hitoshi (17% species overlap). Its species appear across an average of 3.8 unrelated trainer families.
-
-**Counterplay:** Taunt after Mental Herb, Encore, Trick Room reversal, Imprison, stalling five turns, priority, Protect, switching, and item removal all attack the clock. Fire, Dark, or Ghost pressures Bronzor; Fairy, Ice, Fighting, or Dragon pressures Drampa; burn, Intimidate, resist pivots, or Choice-lock scouting handles Crabominable; Fighting, Water, special attacks, or Balloon-pop plus Ground handles Stakataka.
-
-**Strongest part:** The clock is readable, finite, and rebuilt by a spectacular legal ace; every phase changes attacking axis without requiring teammate scripting.
-
-**Weakest link:** Room denial leaves Drampa and Crabominable slow, while Fighting pressure compresses the last three. Those broad answers are intentional; runtime tuning should lower Stakataka from +3 to +2 before diluting the legal sets.
-
-**Manual closure:** Battle 61 is source-closed at editorial 9.1/10: one optional four-member single at legal levels 30-33, four fresh species including young Bronzor and rare Stakataka, two finite clocks, three complete-set donors, exact Match Call ownership, native-width teaching dialogue, contextual native speed AI, author self-check, and explicit rejection of two source-illegal alternatives. Runtime playtesting remains required before the target is observed.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Bronzor | 30 (cap +0) | Mental Herb | Levitate | speed control | Trick Room, Stealth Rock, Gyro Ball, Psychic |
-| 2 | Drampa | 31 (cap +1) | Throat Spray | Berserk | coverage attacker | Hyper Voice, Draco Meteor, Flamethrower, Roost |
-| 3 | Crabominable | 32 (cap +2) | Choice Band | Iron Fist | Choice-locked breaker | Close Combat, Ice Hammer, Thunder Punch, Earthquake |
-| 4 | Stakataka | 33 (cap +3) | Air Balloon | Beast Boost | speed control | Trick Room, Gyro Ball, Body Press, Stone Edge |
-
-## 105. Jasmine — Route 110
-
-**Optional · Double · Cap 30 · Extreme 91/100 · Uniqueness 90/100**
-
-**Theme:** underused water mixture
-
-Level-31 Miracle Seed Overgrow Thwackey uses Grass Pledge, Knock Off, Wood Hammer, and Protect. Level-32 Wide Lens Libero Raboot uses Fire Pledge, Flare Blitz, Gunk Shot, and Sucker Punch. Level-32 Mystic Water Torrent Drizzile uses Water Pledge, Water Pulse, Mud Shot, and Protect. Level-33 Wacan Liquid Voice Brionne uses Water Pledge, Hyper Voice, Moonblast, and Helping Hand. Native Pledge scoring coordinates compatible partners without forcing a move or target; there is no custom selector, weather, terrain, room, trap, Mega, or Primal. This is the first fixed Thwackey, Raboot, and Drizzile opponent appearance and the first dedicated Pledge double. Brionne is a deliberate repeat only from the conditional B28/B54 rival possibility: its fixed Liquid Voice and second-Water role makes the relay branch-safe and will be a first sighting in most starter branches. The format breaks the four-single streak before Jacob's separate double.
-
-**How it behaves:** Jasmine uses foe-aware and partner-helping doubles scoring without smart switching, preserving the authored lead and reserve cadence. Native EFFECT_PLEDGE logic gives the first compatible offer +3 and a confirmed partner combination +7, checks sleep and freeze failure, respects immunities, and values a fresh four-turn side effect more than an already active one. HP-aware scoring remains available for ordinary survival choices; Helping Hand is native. No turn, partner, move, or target is forced.
-
-**Why it is hard:** 4 fully authored Pokémon, average BST 420.0, average cap offset +2.0, ace offset +3, and 100% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Tony (14% species overlap). Its species appear across an average of 1.2 unrelated trainer families.
-
-**Counterplay:** Fake Out, flinching, sleep, paralysis, redirection, Protect, priority, or immediate focus can interrupt one Pledge half. Flash Fire, Water Absorb, Storm Drain, Sap Sipper, type resists, and defensive switching can blunt the combined result. Removing both leads before reserves arrive prevents a second combination; Knock Off removes every modest item, and spread offense pressures four middle-form defenses.
-
-**Strongest part:** The player determines the next battlefield by knockout order, and a double knockout is rewarded with a visibly incompatible reserve pair instead of the AI rebuilding the module forever.
-
-**Weakest link:** Removing both fragile middle-form leads can erase the headline quickly. That is intentional high-skill counterplay; Brionne's Liquid Voice and Moonblast ensure the earned endgame remains an 8.5-plus battle rather than collapsing.
-
-**Manual closure:** Battle 62 is source-closed at editorial 9.1/10: one guarded four-member double at legal levels 31-33, a branch-sensitive native Pledge relay, three fresh fixed species plus one earned conditional repeat, four complete-set family donors, exact long-patrol geometry, native-width strategy and refusal dialogue, no unsupported Crocalor or Drizzile moves, author self-check, and no forced AI. Runtime playtesting remains required before the target is observed.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Thwackey | 31 (cap +1) | Miracle Seed | Overgrow | protected attacker | Grass Pledge, Knock Off, Wood Hammer, Protect |
-| 2 | Raboot | 32 (cap +2) | Wide Lens | Libero | coverage attacker | Fire Pledge, Flare Blitz, Gunk Shot, Sucker Punch |
-| 3 | Drizzile | 32 (cap +2) | Mystic Water | Torrent | protected attacker | Water Pledge, Water Pulse, Mud Shot, Protect |
-| 4 | Brionne | 33 (cap +3) | Wacan Berry | Liquid Voice | coverage attacker | Water Pledge, Hyper Voice, Moonblast, Helping Hand |
-
-## 106. Abigail — Route 110
-
-**Optional · Single · Cap 30 · Extreme 90/100 · Uniqueness 76/100**
-
-**Theme:** underused ground mixture
-
-Level-31 Rindo Storm Drain Gastrodon uses Scald, Earth Power, Ice Beam, and Recover. Level-32 Black Sludge Speed Boost Scolipede uses Megahorn, Poison Jab, Earthquake, and Protect. Level-32 Lum Flame Body Ponyta uses Flare Blitz, High Horsepower, Play Rough, and Morning Sun. Level-33 Chesto Thick Fat Snorlax uses Curse, Body Slam, Crunch, and Rest. The four members form one endurance question rather than four disconnected gimmicks; there is no hazard, screen, weather, terrain, room, trap, pivot chain, priority, Choice lock, Mega, or teammate dependency. This is the first closed Gastrodon, Scolipede, Ponyta, and Snorlax appearance and the first literal swim-cycle-run-recovery endurance race. It directly contrasts Anthony's self-spending damage with a team that repeatedly preserves itself, while avoiding the recent U-turn, Volt Switch, and setter-recipient density.
-
-**How it behaves:** Abigail uses foe-aware, smart-switching, and HP-aware singles scoring. Native viability handles Recover, Protect, Morning Sun, Rest, Curse, recoil, Speed Boost, berries, and status. First-turn setup scoring is deliberately absent because Snorlax enters last and the engine's first-turn flag is battle-global, not switch-in-local. No custom selector, forced recovery threshold, or hidden read is added.
-
-**Why it is hard:** 4 fully authored Pokémon, average BST 477.5, average cap offset +2.0, ace offset +3, and 100% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Kevin (20% species overlap). Its species appear across an average of 6.2 unrelated trainer families.
-
-**Counterplay:** Taunt, Encore, Heal Block, Disable, item removal, hazards, strong critical or super-effective burst, and recovery denial break the pace. Grass after Rindo answers Gastrodon; Ground, Rock, Flying, Psychic, Water, or special pressure answers the middle legs; Fighting, Haze, Clear Smog, Unaware, phazing, or Trick answers Snorlax. The player can preserve several different offensive routes instead of solving one hidden lock.
-
-**Strongest part:** The trainer's triathlon dialogue becomes a mechanically coherent endurance race, and each recovery form is finite or answerable rather than a hidden lock.
-
-**Weakest link:** Strong physical Ground pressure can line up Scolipede and Ponyta after Gastrodon falls. That compression is retained as healthy broad counterplay, while Rindo Gastrodon and special coverage stop it from being a one-click opener.
-
-**Manual closure:** Battle 60 is source-closed at editorial 9.0/10: one optional four-member single at legal levels 31-33, four fresh species, a coherent endurance question, five complete-set donors, exact independent geometry and Match Call ownership, native-width dialogue, native HP-aware AI, author self-check, and no repeated pivot or setter-recipient module. Runtime playtesting remains required before the target is observed.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Gastrodon | 31 (cap +1) | Rindo Berry | Storm Drain | coverage attacker | Scald, Earth Power, Ice Beam, Recover |
-| 2 | Scolipede | 32 (cap +2) | Black Sludge | Speed Boost | protected attacker | Megahorn, Poison Jab, Earthquake, Protect |
-| 3 | Ponyta | 32 (cap +2) | Lum Berry | Flame Body | coverage attacker | Flare Blitz, High Horsepower, Play Rough, Morning Sun |
-| 4 | Snorlax | 33 (cap +3) | Chesto Berry | Thick Fat | disruption and support | Curse, Body Slam, Crunch, Rest |
-
-## 107. Isabel — Route 110
+## 092. Isabel — Route 110
 
 **Optional · Double · Cap 30 · Extreme 90/100 · Uniqueness 87/100**
 
@@ -2775,36 +2316,7 @@ The natural joint branch leads Throat Spray Serene Grace Meloetta beside Leftove
 | 3 | Chatot | 32 (cap +2) | Focus Sash | Keen Eye | protected attacker | Round, Chatter, Heat Wave, Protect |
 | 4 | Gossifleur | 33 (cap +3) | Eviolite | Regenerator | protected attacker | Round, Giga Drain, Helping Hand, Protect |
 
-## 108. Timmy — Route 110
-
-**Optional · Single · Cap 30 · Extreme 87/100 · Uniqueness 88/100**
-
-**Theme:** underused ghost mixture
-
-Level-31 Focus Sash Run Away Roaming Gimmighoul opens with Shadow Ball, Hidden Power Fighting, Thief, or the roster's only Protect; once its Sash breaks, Thief can exploit the empty item slot. Level-32 Eviolite Aftermath Stunky uses Foul Play, Sucker Punch, Sludge Bomb, and Flamethrower as a mixed physical-punishment and contact check. Level-32 Shuca Lightning Rod Plusle attacks through Thunderbolt, Grass Knot, or Dazzling Gleam and can Encore a passive turn. Level-33 Choice Specs Levitate Rotom closes through Volt Switch, Shadow Ball, Hidden Power Ice, or Trick. Every exact species is a current Route 110 grass encounter. There is no team-wide engine, weather, terrain, room, screen, active speed control, setup move, Mega, or Primal. This is the first closed Roaming Gimmighoul, Stunky, and Plusle opponent appearance and the first exact-catch ecological sampler. Rotom deliberately repeats twenty-five encounters after one possible Rustboro rival branch; here it is the literal Route 110 wild ace and a Choice-locked singles closer rather than a Sitrus status pivot. The low-cohesion single is a deliberate palate cleanser after cutters, Arena Trap, and false-focus redirection, not a failed doubles module.
-
-**How it behaves:** Timmy uses native foe-aware, smart-switching, and HP-aware singles scoring. Focus Sash, Run Away, Hidden Power Fighting, Thief, Protect, Eviolite, Aftermath, Foul Play, Sucker Punch, Shuca Berry, Lightning Rod, Encore, Choice Specs, Levitate, Volt Switch, Hidden Power Ice, and Trick are existing mechanics. No partner flag, field flag, forced move, custom selector, speed flag, setup flag, Mega, or Primal is added.
-
-**Why it is hard:** 4 fully authored Pokémon, average BST 376.0, average cap offset +2.0, ace offset +3, and 100% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Brendan (14% species overlap). Its species appear across an average of 2.0 unrelated trainer families.
-
-**Counterplay:** Dark or Ghost pressure answers Gimmighoul and Rotom; Ground after Shuca pressures Plusle and Stunky while Rotom's Levitate prevents one Ground move from solving the whole sequence. Physical attacks exploit Plusle and Rotom, item removal strips every safety item, Taunt limits Encore, special walls blunt the two special closers, and Protect, Disable, Encore, Trick, or immunity pivots exploit Rotom's Choice lock. Stunky's Sucker Punch can be played around, Foul Play discourages careless physical setup, and Aftermath punishes contact without preventing noncontact damage; Gimmighoul's post-Sash Thief is weak enough to manage without hidden randomness.
-
-**Strongest part:** This is a genuine look-what-lives-here encounter: four exact local catches present four sharply different singles tests and quietly advertise rare teammates the player can obtain immediately.
-
-**Weakest link:** Team-wide cohesion is intentionally low and Gimmighoul is modest, so the encounter relies on four sequential checks and level advantage rather than a hard engine. That makes it 8.7 pacing relief, not a 9-plus set piece.
-
-**Manual closure:** Battle 53 is source-closed at editorial 8.7/10: one optional four-member single at legal levels 31-33, four exact Route 110 grass catches, four distinct items and matchup tests, three complete-set donors plus one documented no-donor local set, only one Protect, native-width exploration dialogue, an intentional distant Rotom repeat, author self-check, and no team-wide engine or unsupported gimmick. Runtime playtesting remains required before the target is observed.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Gimmighoul Roaming | 31 (cap +1) | Focus Sash | Run Away | protected attacker | Shadow Ball, Hidden Power, Thief, Protect |
-| 2 | Stunky | 32 (cap +2) | Eviolite | Aftermath | coverage attacker | Foul Play, Sucker Punch, Sludge Bomb, Flamethrower |
-| 3 | Plusle | 32 (cap +2) | Shuca Berry | Lightning Rod | coverage attacker | Thunderbolt, Grass Knot, Dazzling Gleam, Encore |
-| 4 | Rotom | 33 (cap +3) | Choice Specs | Levitate | Choice-locked breaker | Volt Switch, Shadow Ball, Hidden Power, Trick |
-
-## 109. Kaleb — Route 110
+## 093. Kaleb — Route 110
 
 **Optional · Double · Cap 30 · Extreme 90/100 · Uniqueness 82/100**
 
@@ -2833,7 +2345,263 @@ The natural joint branch leads Throat Spray Serene Grace Meloetta beside Leftove
 | 3 | Frogadier | 32 (cap +2) | Expert Belt | Protean | coverage attacker | Round, Water Pulse, Ice Beam, Dark Pulse |
 | 4 | Eldegoss | 33 (cap +3) | Rocky Helmet | Regenerator | protected attacker | Round, Giga Drain, Helping Hand, Protect |
 
-## 110. Joseph — Route 110
+## 094. Timmy — Route 110
+
+**Optional · Single · Cap 30 · Extreme 87/100 · Uniqueness 88/100**
+
+**Theme:** underused ghost mixture
+
+Level-31 Focus Sash Run Away Roaming Gimmighoul opens with Shadow Ball, Hidden Power Fighting, Thief, or the roster's only Protect; once its Sash breaks, Thief can exploit the empty item slot. Level-32 Eviolite Aftermath Stunky uses Foul Play, Sucker Punch, Sludge Bomb, and Flamethrower as a mixed physical-punishment and contact check. Level-32 Shuca Lightning Rod Plusle attacks through Thunderbolt, Grass Knot, or Dazzling Gleam and can Encore a passive turn. Level-33 Choice Specs Levitate Rotom closes through Volt Switch, Shadow Ball, Hidden Power Ice, or Trick. Every exact species is a current Route 110 grass encounter. There is no team-wide engine, weather, terrain, room, screen, active speed control, setup move, Mega, or Primal. This is the first closed Roaming Gimmighoul, Stunky, and Plusle opponent appearance and the first exact-catch ecological sampler. Rotom deliberately repeats twenty-five encounters after one possible Rustboro rival branch; here it is the literal Route 110 wild ace and a Choice-locked singles closer rather than a Sitrus status pivot. The low-cohesion single is a deliberate palate cleanser after cutters, Arena Trap, and false-focus redirection, not a failed doubles module.
+
+**How it behaves:** Timmy uses native foe-aware, smart-switching, and HP-aware singles scoring. Focus Sash, Run Away, Hidden Power Fighting, Thief, Protect, Eviolite, Aftermath, Foul Play, Sucker Punch, Shuca Berry, Lightning Rod, Encore, Choice Specs, Levitate, Volt Switch, Hidden Power Ice, and Trick are existing mechanics. No partner flag, field flag, forced move, custom selector, speed flag, setup flag, Mega, or Primal is added.
+
+**Why it is hard:** 4 fully authored Pokémon, average BST 376.0, average cap offset +2.0, ace offset +3, and 100% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Brendan (14% species overlap). Its species appear across an average of 2.0 unrelated trainer families.
+
+**Counterplay:** Dark or Ghost pressure answers Gimmighoul and Rotom; Ground after Shuca pressures Plusle and Stunky while Rotom's Levitate prevents one Ground move from solving the whole sequence. Physical attacks exploit Plusle and Rotom, item removal strips every safety item, Taunt limits Encore, special walls blunt the two special closers, and Protect, Disable, Encore, Trick, or immunity pivots exploit Rotom's Choice lock. Stunky's Sucker Punch can be played around, Foul Play discourages careless physical setup, and Aftermath punishes contact without preventing noncontact damage; Gimmighoul's post-Sash Thief is weak enough to manage without hidden randomness.
+
+**Strongest part:** This is a genuine look-what-lives-here encounter: four exact local catches present four sharply different singles tests and quietly advertise rare teammates the player can obtain immediately.
+
+**Weakest link:** Team-wide cohesion is intentionally low and Gimmighoul is modest, so the encounter relies on four sequential checks and level advantage rather than a hard engine. That makes it 8.7 pacing relief, not a 9-plus set piece.
+
+**Manual closure:** Battle 53 is source-closed at editorial 8.7/10: one optional four-member single at legal levels 31-33, four exact Route 110 grass catches, four distinct items and matchup tests, three complete-set donors plus one documented no-donor local set, only one Protect, native-width exploration dialogue, an intentional distant Rotom repeat, author self-check, and no team-wide engine or unsupported gimmick. Runtime playtesting remains required before the target is observed.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Gimmighoul Roaming | 31 (cap +1) | Focus Sash | Run Away | protected attacker | Shadow Ball, Hidden Power, Thief, Protect |
+| 2 | Stunky | 32 (cap +2) | Eviolite | Aftermath | coverage attacker | Foul Play, Sucker Punch, Sludge Bomb, Flamethrower |
+| 3 | Plusle | 32 (cap +2) | Shuca Berry | Lightning Rod | coverage attacker | Thunderbolt, Grass Knot, Dazzling Gleam, Encore |
+| 4 | Rotom | 33 (cap +3) | Choice Specs | Levitate | Choice-locked breaker | Volt Switch, Shadow Ball, Hidden Power, Trick |
+
+## 095. May — Route 110
+
+**Required Branch · Double · Cap 30 · Extreme 97/100 · Uniqueness 41/100**
+
+**Theme:** active speed control
+
+Level-31 Eviolite Battle Armor Type: Null leads beside level-32 Choice Band Strong Jaw Dracovish. Tri Attack, Icy Wind, U-turn, and Protect control timing for Fishious Rend, Psychic Fangs, Crunch, or Ice Fang without fixing the opening. Slot three is the player's actual same-generation middle counter-starter at level 31 with Sitrus Berry, its elemental Pledge, reliable special STAB, Double-Edge, and Protect. Level-32 Weakness Policy Clear Body Metang uses Iron Head, Zen Headbutt, Ice Punch, and Protect. Level-32 Babiri Aroma Veil Alcremie can Decorate any physical or special partner while using Dazzling Gleam, Mystical Fire, or Protect. Level-33 Assault Vest Stalwart Duraludon closes through Flash Cannon, Dragon Pulse, Thunderbolt, or Body Press. The team uses one finite speed move and no weather, terrain, room, trap, redirection, setup move other than ally Decorate, Mega, or Primal. This is the first closed Type: Null, Dracovish, Metang, Alcremie, and Duraludon opponent appearance and the first required six-member rival double whose exact starter species follows all seven supported generations. The 21 middle starters deliberately recur from the earlier Rustboro rival as continuity, now twenty-six encounters later and only one-sixth of a substantially deeper team. May and Brendan have exact gameplay parity; no gender branch is secretly easier.
+
+**How it behaves:** All six records use foe-aware, smart-switching, partner-aware, HP-aware, and speed-control doubles scoring. The runtime species hook replaces only source slot two with the generation-correct middle starter while retaining the branch's legal universal moves and primary ability. Existing AI handles Icy Wind timing, Choice locks and switching, Fishious Rend power, Decorate ally-only targeting and useful-stat checks, Weakness Policy, Stalwart redirection bypass, Body Press defense scaling, Protect, and U-turn. No trainer-specific target read, forced opener, hidden stat adjustment, Mega, or Primal is added.
+
+**Why it is hard:** 6 fully authored Pokémon, average BST 482.3, average cap offset +1.83, ace offset +3, and 100% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Brendan (100% species overlap). Its species appear across an average of 3.3 unrelated trainer families.
+
+**Counterplay:** Fake Out, Taunt, priority, opposing speed control, Trick Room, or direct pressure can stop Type: Null's timing; Water Absorb, Storm Drain, Dry Skin, Protect, burn, Intimidate, Choice-lock exploitation, or faster offense answer Dracovish. Ordinary type coverage answers the visible dynamic starter. Knock Off, Haze, Clear Smog, Unaware, phazing, or avoiding a weak super-effective hit manage Metang. Steel, Poison, Taunt, Encore, or focus fire remove Alcremie. Ground, Fighting, strong special neutral damage, Snarl, Light Screen, item removal, or redirection-independent targeting answer Duraludon. No single counter solves all six, but every phase has several broad classes.
+
+**Strongest part:** The battle naturally changes phase—from speed-sensitive Fishious Rend, to the real counterpart and young pseudo-legendary, to flexible Decorate-backed mixed offense—without a scripted wave machine or making the player's starter choice the only puzzle.
+
+**Weakest link:** Water immunity plus immediate disruption can make Dracovish much less frightening, while focused Steel or Poison pressure can erase Alcremie and Duraludon has exploitable special bulk. Those are healthy broad answers that keep a required 9.7 rival learnable.
+
+**Manual closure:** Battle 54 is source-closed at editorial 9.7/10: six exact parity records, three elemental branches, a verified runtime hook for 21 generation-correct middle starters in source slot three, five fresh common species, six distinct items, one champion roster plus four full-set donors, mandatory trigger and native Itemfinder retry contracts, truthful native-width dialogue, supported one-slot progression, author self-check, and no transformation gimmick. Runtime playtesting remains required before the target is observed.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Type Null | 31 (cap +1) | Eviolite | Battle Armor | speed control | Tri Attack, Icy Wind, U Turn, Protect |
+| 2 | Dracovish | 32 (cap +2) | Choice Band | Strong Jaw | Choice-locked breaker | Fishious Rend, Psychic Fangs, Crunch, Ice Fang |
+| 3 | Combusken | 31 (cap +1) | Sitrus Berry | Blaze | protected attacker | Fire Pledge, Flamethrower, Double Edge, Protect |
+| 4 | Metang | 32 (cap +2) | Weakness Policy | Clear Body | protected attacker | Iron Head, Zen Headbutt, Ice Punch, Protect |
+| 5 | Alcremie | 32 (cap +2) | Babiri Berry | Aroma Veil | protected attacker | Decorate, Dazzling Gleam, Mystical Fire, Protect |
+| 6 | Duraludon | 33 (cap +3) | Assault Vest | Stalwart | coverage attacker | Flash Cannon, Dragon Pulse, Thunderbolt, Body Press |
+
+**Runtime slot 3 alternatives:** Charmeleon, Quilava, Combusken, Monferno, Pignite, Braixen, Torracat.
+
+## 096. May — Route 110
+
+**Required Branch · Double · Cap 30 · Extreme 97/100 · Uniqueness 41/100**
+
+**Theme:** active speed control
+
+Level-31 Eviolite Battle Armor Type: Null leads beside level-32 Choice Band Strong Jaw Dracovish. Tri Attack, Icy Wind, U-turn, and Protect control timing for Fishious Rend, Psychic Fangs, Crunch, or Ice Fang without fixing the opening. Slot three is the player's actual same-generation middle counter-starter at level 31 with Sitrus Berry, its elemental Pledge, reliable special STAB, Double-Edge, and Protect. Level-32 Weakness Policy Clear Body Metang uses Iron Head, Zen Headbutt, Ice Punch, and Protect. Level-32 Babiri Aroma Veil Alcremie can Decorate any physical or special partner while using Dazzling Gleam, Mystical Fire, or Protect. Level-33 Assault Vest Stalwart Duraludon closes through Flash Cannon, Dragon Pulse, Thunderbolt, or Body Press. The team uses one finite speed move and no weather, terrain, room, trap, redirection, setup move other than ally Decorate, Mega, or Primal. This is the first closed Type: Null, Dracovish, Metang, Alcremie, and Duraludon opponent appearance and the first required six-member rival double whose exact starter species follows all seven supported generations. The 21 middle starters deliberately recur from the earlier Rustboro rival as continuity, now twenty-six encounters later and only one-sixth of a substantially deeper team. May and Brendan have exact gameplay parity; no gender branch is secretly easier.
+
+**How it behaves:** All six records use foe-aware, smart-switching, partner-aware, HP-aware, and speed-control doubles scoring. The runtime species hook replaces only source slot two with the generation-correct middle starter while retaining the branch's legal universal moves and primary ability. Existing AI handles Icy Wind timing, Choice locks and switching, Fishious Rend power, Decorate ally-only targeting and useful-stat checks, Weakness Policy, Stalwart redirection bypass, Body Press defense scaling, Protect, and U-turn. No trainer-specific target read, forced opener, hidden stat adjustment, Mega, or Primal is added.
+
+**Why it is hard:** 6 fully authored Pokémon, average BST 482.3, average cap offset +1.83, ace offset +3, and 100% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Brendan (100% species overlap). Its species appear across an average of 3.3 unrelated trainer families.
+
+**Counterplay:** Fake Out, Taunt, priority, opposing speed control, Trick Room, or direct pressure can stop Type: Null's timing; Water Absorb, Storm Drain, Dry Skin, Protect, burn, Intimidate, Choice-lock exploitation, or faster offense answer Dracovish. Ordinary type coverage answers the visible dynamic starter. Knock Off, Haze, Clear Smog, Unaware, phazing, or avoiding a weak super-effective hit manage Metang. Steel, Poison, Taunt, Encore, or focus fire remove Alcremie. Ground, Fighting, strong special neutral damage, Snarl, Light Screen, item removal, or redirection-independent targeting answer Duraludon. No single counter solves all six, but every phase has several broad classes.
+
+**Strongest part:** The battle naturally changes phase—from speed-sensitive Fishious Rend, to the real counterpart and young pseudo-legendary, to flexible Decorate-backed mixed offense—without a scripted wave machine or making the player's starter choice the only puzzle.
+
+**Weakest link:** Water immunity plus immediate disruption can make Dracovish much less frightening, while focused Steel or Poison pressure can erase Alcremie and Duraludon has exploitable special bulk. Those are healthy broad answers that keep a required 9.7 rival learnable.
+
+**Manual closure:** Battle 54 is source-closed at editorial 9.7/10: six exact parity records, three elemental branches, a verified runtime hook for 21 generation-correct middle starters in source slot three, five fresh common species, six distinct items, one champion roster plus four full-set donors, mandatory trigger and native Itemfinder retry contracts, truthful native-width dialogue, supported one-slot progression, author self-check, and no transformation gimmick. Runtime playtesting remains required before the target is observed.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Type Null | 31 (cap +1) | Eviolite | Battle Armor | speed control | Tri Attack, Icy Wind, U Turn, Protect |
+| 2 | Dracovish | 32 (cap +2) | Choice Band | Strong Jaw | Choice-locked breaker | Fishious Rend, Psychic Fangs, Crunch, Ice Fang |
+| 3 | Marshtomp | 31 (cap +1) | Sitrus Berry | Torrent | protected attacker | Water Pledge, Scald, Double Edge, Protect |
+| 4 | Metang | 32 (cap +2) | Weakness Policy | Clear Body | protected attacker | Iron Head, Zen Headbutt, Ice Punch, Protect |
+| 5 | Alcremie | 32 (cap +2) | Babiri Berry | Aroma Veil | protected attacker | Decorate, Dazzling Gleam, Mystical Fire, Protect |
+| 6 | Duraludon | 33 (cap +3) | Assault Vest | Stalwart | coverage attacker | Flash Cannon, Dragon Pulse, Thunderbolt, Body Press |
+
+**Runtime slot 3 alternatives:** Wartortle, Croconaw, Marshtomp, Prinplup, Dewott, Frogadier, Brionne.
+
+## 097. May — Route 110
+
+**Required Branch · Double · Cap 30 · Extreme 97/100 · Uniqueness 41/100**
+
+**Theme:** active speed control
+
+Level-31 Eviolite Battle Armor Type: Null leads beside level-32 Choice Band Strong Jaw Dracovish. Tri Attack, Icy Wind, U-turn, and Protect control timing for Fishious Rend, Psychic Fangs, Crunch, or Ice Fang without fixing the opening. Slot three is the player's actual same-generation middle counter-starter at level 31 with Sitrus Berry, its elemental Pledge, reliable special STAB, Double-Edge, and Protect. Level-32 Weakness Policy Clear Body Metang uses Iron Head, Zen Headbutt, Ice Punch, and Protect. Level-32 Babiri Aroma Veil Alcremie can Decorate any physical or special partner while using Dazzling Gleam, Mystical Fire, or Protect. Level-33 Assault Vest Stalwart Duraludon closes through Flash Cannon, Dragon Pulse, Thunderbolt, or Body Press. The team uses one finite speed move and no weather, terrain, room, trap, redirection, setup move other than ally Decorate, Mega, or Primal. This is the first closed Type: Null, Dracovish, Metang, Alcremie, and Duraludon opponent appearance and the first required six-member rival double whose exact starter species follows all seven supported generations. The 21 middle starters deliberately recur from the earlier Rustboro rival as continuity, now twenty-six encounters later and only one-sixth of a substantially deeper team. May and Brendan have exact gameplay parity; no gender branch is secretly easier.
+
+**How it behaves:** All six records use foe-aware, smart-switching, partner-aware, HP-aware, and speed-control doubles scoring. The runtime species hook replaces only source slot two with the generation-correct middle starter while retaining the branch's legal universal moves and primary ability. Existing AI handles Icy Wind timing, Choice locks and switching, Fishious Rend power, Decorate ally-only targeting and useful-stat checks, Weakness Policy, Stalwart redirection bypass, Body Press defense scaling, Protect, and U-turn. No trainer-specific target read, forced opener, hidden stat adjustment, Mega, or Primal is added.
+
+**Why it is hard:** 6 fully authored Pokémon, average BST 482.3, average cap offset +1.83, ace offset +3, and 100% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Brendan (100% species overlap). Its species appear across an average of 3.3 unrelated trainer families.
+
+**Counterplay:** Fake Out, Taunt, priority, opposing speed control, Trick Room, or direct pressure can stop Type: Null's timing; Water Absorb, Storm Drain, Dry Skin, Protect, burn, Intimidate, Choice-lock exploitation, or faster offense answer Dracovish. Ordinary type coverage answers the visible dynamic starter. Knock Off, Haze, Clear Smog, Unaware, phazing, or avoiding a weak super-effective hit manage Metang. Steel, Poison, Taunt, Encore, or focus fire remove Alcremie. Ground, Fighting, strong special neutral damage, Snarl, Light Screen, item removal, or redirection-independent targeting answer Duraludon. No single counter solves all six, but every phase has several broad classes.
+
+**Strongest part:** The battle naturally changes phase—from speed-sensitive Fishious Rend, to the real counterpart and young pseudo-legendary, to flexible Decorate-backed mixed offense—without a scripted wave machine or making the player's starter choice the only puzzle.
+
+**Weakest link:** Water immunity plus immediate disruption can make Dracovish much less frightening, while focused Steel or Poison pressure can erase Alcremie and Duraludon has exploitable special bulk. Those are healthy broad answers that keep a required 9.7 rival learnable.
+
+**Manual closure:** Battle 54 is source-closed at editorial 9.7/10: six exact parity records, three elemental branches, a verified runtime hook for 21 generation-correct middle starters in source slot three, five fresh common species, six distinct items, one champion roster plus four full-set donors, mandatory trigger and native Itemfinder retry contracts, truthful native-width dialogue, supported one-slot progression, author self-check, and no transformation gimmick. Runtime playtesting remains required before the target is observed.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Type Null | 31 (cap +1) | Eviolite | Battle Armor | speed control | Tri Attack, Icy Wind, U Turn, Protect |
+| 2 | Dracovish | 32 (cap +2) | Choice Band | Strong Jaw | Choice-locked breaker | Fishious Rend, Psychic Fangs, Crunch, Ice Fang |
+| 3 | Grovyle | 31 (cap +1) | Sitrus Berry | Overgrow | protected attacker | Grass Pledge, Energy Ball, Double Edge, Protect |
+| 4 | Metang | 32 (cap +2) | Weakness Policy | Clear Body | protected attacker | Iron Head, Zen Headbutt, Ice Punch, Protect |
+| 5 | Alcremie | 32 (cap +2) | Babiri Berry | Aroma Veil | protected attacker | Decorate, Dazzling Gleam, Mystical Fire, Protect |
+| 6 | Duraludon | 33 (cap +3) | Assault Vest | Stalwart | coverage attacker | Flash Cannon, Dragon Pulse, Thunderbolt, Body Press |
+
+**Runtime slot 3 alternatives:** Ivysaur, Bayleef, Grovyle, Grotle, Servine, Quilladin, Dartrix.
+
+## 098. Brendan — Route 110
+
+**Required Branch · Double · Cap 30 · Extreme 97/100 · Uniqueness 41/100**
+
+**Theme:** active speed control
+
+Level-31 Eviolite Battle Armor Type: Null leads beside level-32 Choice Band Strong Jaw Dracovish. Tri Attack, Icy Wind, U-turn, and Protect control timing for Fishious Rend, Psychic Fangs, Crunch, or Ice Fang without fixing the opening. Slot three is the player's actual same-generation middle counter-starter at level 31 with Sitrus Berry, its elemental Pledge, reliable special STAB, Double-Edge, and Protect. Level-32 Weakness Policy Clear Body Metang uses Iron Head, Zen Headbutt, Ice Punch, and Protect. Level-32 Babiri Aroma Veil Alcremie can Decorate any physical or special partner while using Dazzling Gleam, Mystical Fire, or Protect. Level-33 Assault Vest Stalwart Duraludon closes through Flash Cannon, Dragon Pulse, Thunderbolt, or Body Press. The team uses one finite speed move and no weather, terrain, room, trap, redirection, setup move other than ally Decorate, Mega, or Primal. This is the first closed Type: Null, Dracovish, Metang, Alcremie, and Duraludon opponent appearance and the first required six-member rival double whose exact starter species follows all seven supported generations. The 21 middle starters deliberately recur from the earlier Rustboro rival as continuity, now twenty-six encounters later and only one-sixth of a substantially deeper team. May and Brendan have exact gameplay parity; no gender branch is secretly easier.
+
+**How it behaves:** All six records use foe-aware, smart-switching, partner-aware, HP-aware, and speed-control doubles scoring. The runtime species hook replaces only source slot two with the generation-correct middle starter while retaining the branch's legal universal moves and primary ability. Existing AI handles Icy Wind timing, Choice locks and switching, Fishious Rend power, Decorate ally-only targeting and useful-stat checks, Weakness Policy, Stalwart redirection bypass, Body Press defense scaling, Protect, and U-turn. No trainer-specific target read, forced opener, hidden stat adjustment, Mega, or Primal is added.
+
+**Why it is hard:** 6 fully authored Pokémon, average BST 482.3, average cap offset +1.83, ace offset +3, and 100% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: May (100% species overlap). Its species appear across an average of 3.3 unrelated trainer families.
+
+**Counterplay:** Fake Out, Taunt, priority, opposing speed control, Trick Room, or direct pressure can stop Type: Null's timing; Water Absorb, Storm Drain, Dry Skin, Protect, burn, Intimidate, Choice-lock exploitation, or faster offense answer Dracovish. Ordinary type coverage answers the visible dynamic starter. Knock Off, Haze, Clear Smog, Unaware, phazing, or avoiding a weak super-effective hit manage Metang. Steel, Poison, Taunt, Encore, or focus fire remove Alcremie. Ground, Fighting, strong special neutral damage, Snarl, Light Screen, item removal, or redirection-independent targeting answer Duraludon. No single counter solves all six, but every phase has several broad classes.
+
+**Strongest part:** The battle naturally changes phase—from speed-sensitive Fishious Rend, to the real counterpart and young pseudo-legendary, to flexible Decorate-backed mixed offense—without a scripted wave machine or making the player's starter choice the only puzzle.
+
+**Weakest link:** Water immunity plus immediate disruption can make Dracovish much less frightening, while focused Steel or Poison pressure can erase Alcremie and Duraludon has exploitable special bulk. Those are healthy broad answers that keep a required 9.7 rival learnable.
+
+**Manual closure:** Battle 54 is source-closed at editorial 9.7/10: six exact parity records, three elemental branches, a verified runtime hook for 21 generation-correct middle starters in source slot three, five fresh common species, six distinct items, one champion roster plus four full-set donors, mandatory trigger and native Itemfinder retry contracts, truthful native-width dialogue, supported one-slot progression, author self-check, and no transformation gimmick. Runtime playtesting remains required before the target is observed.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Type Null | 31 (cap +1) | Eviolite | Battle Armor | speed control | Tri Attack, Icy Wind, U Turn, Protect |
+| 2 | Dracovish | 32 (cap +2) | Choice Band | Strong Jaw | Choice-locked breaker | Fishious Rend, Psychic Fangs, Crunch, Ice Fang |
+| 3 | Combusken | 31 (cap +1) | Sitrus Berry | Blaze | protected attacker | Fire Pledge, Flamethrower, Double Edge, Protect |
+| 4 | Metang | 32 (cap +2) | Weakness Policy | Clear Body | protected attacker | Iron Head, Zen Headbutt, Ice Punch, Protect |
+| 5 | Alcremie | 32 (cap +2) | Babiri Berry | Aroma Veil | protected attacker | Decorate, Dazzling Gleam, Mystical Fire, Protect |
+| 6 | Duraludon | 33 (cap +3) | Assault Vest | Stalwart | coverage attacker | Flash Cannon, Dragon Pulse, Thunderbolt, Body Press |
+
+**Runtime slot 3 alternatives:** Charmeleon, Quilava, Combusken, Monferno, Pignite, Braixen, Torracat.
+
+## 099. Brendan — Route 110
+
+**Required Branch · Double · Cap 30 · Extreme 97/100 · Uniqueness 41/100**
+
+**Theme:** active speed control
+
+Level-31 Eviolite Battle Armor Type: Null leads beside level-32 Choice Band Strong Jaw Dracovish. Tri Attack, Icy Wind, U-turn, and Protect control timing for Fishious Rend, Psychic Fangs, Crunch, or Ice Fang without fixing the opening. Slot three is the player's actual same-generation middle counter-starter at level 31 with Sitrus Berry, its elemental Pledge, reliable special STAB, Double-Edge, and Protect. Level-32 Weakness Policy Clear Body Metang uses Iron Head, Zen Headbutt, Ice Punch, and Protect. Level-32 Babiri Aroma Veil Alcremie can Decorate any physical or special partner while using Dazzling Gleam, Mystical Fire, or Protect. Level-33 Assault Vest Stalwart Duraludon closes through Flash Cannon, Dragon Pulse, Thunderbolt, or Body Press. The team uses one finite speed move and no weather, terrain, room, trap, redirection, setup move other than ally Decorate, Mega, or Primal. This is the first closed Type: Null, Dracovish, Metang, Alcremie, and Duraludon opponent appearance and the first required six-member rival double whose exact starter species follows all seven supported generations. The 21 middle starters deliberately recur from the earlier Rustboro rival as continuity, now twenty-six encounters later and only one-sixth of a substantially deeper team. May and Brendan have exact gameplay parity; no gender branch is secretly easier.
+
+**How it behaves:** All six records use foe-aware, smart-switching, partner-aware, HP-aware, and speed-control doubles scoring. The runtime species hook replaces only source slot two with the generation-correct middle starter while retaining the branch's legal universal moves and primary ability. Existing AI handles Icy Wind timing, Choice locks and switching, Fishious Rend power, Decorate ally-only targeting and useful-stat checks, Weakness Policy, Stalwart redirection bypass, Body Press defense scaling, Protect, and U-turn. No trainer-specific target read, forced opener, hidden stat adjustment, Mega, or Primal is added.
+
+**Why it is hard:** 6 fully authored Pokémon, average BST 482.3, average cap offset +1.83, ace offset +3, and 100% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: May (100% species overlap). Its species appear across an average of 3.3 unrelated trainer families.
+
+**Counterplay:** Fake Out, Taunt, priority, opposing speed control, Trick Room, or direct pressure can stop Type: Null's timing; Water Absorb, Storm Drain, Dry Skin, Protect, burn, Intimidate, Choice-lock exploitation, or faster offense answer Dracovish. Ordinary type coverage answers the visible dynamic starter. Knock Off, Haze, Clear Smog, Unaware, phazing, or avoiding a weak super-effective hit manage Metang. Steel, Poison, Taunt, Encore, or focus fire remove Alcremie. Ground, Fighting, strong special neutral damage, Snarl, Light Screen, item removal, or redirection-independent targeting answer Duraludon. No single counter solves all six, but every phase has several broad classes.
+
+**Strongest part:** The battle naturally changes phase—from speed-sensitive Fishious Rend, to the real counterpart and young pseudo-legendary, to flexible Decorate-backed mixed offense—without a scripted wave machine or making the player's starter choice the only puzzle.
+
+**Weakest link:** Water immunity plus immediate disruption can make Dracovish much less frightening, while focused Steel or Poison pressure can erase Alcremie and Duraludon has exploitable special bulk. Those are healthy broad answers that keep a required 9.7 rival learnable.
+
+**Manual closure:** Battle 54 is source-closed at editorial 9.7/10: six exact parity records, three elemental branches, a verified runtime hook for 21 generation-correct middle starters in source slot three, five fresh common species, six distinct items, one champion roster plus four full-set donors, mandatory trigger and native Itemfinder retry contracts, truthful native-width dialogue, supported one-slot progression, author self-check, and no transformation gimmick. Runtime playtesting remains required before the target is observed.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Type Null | 31 (cap +1) | Eviolite | Battle Armor | speed control | Tri Attack, Icy Wind, U Turn, Protect |
+| 2 | Dracovish | 32 (cap +2) | Choice Band | Strong Jaw | Choice-locked breaker | Fishious Rend, Psychic Fangs, Crunch, Ice Fang |
+| 3 | Marshtomp | 31 (cap +1) | Sitrus Berry | Torrent | protected attacker | Water Pledge, Scald, Double Edge, Protect |
+| 4 | Metang | 32 (cap +2) | Weakness Policy | Clear Body | protected attacker | Iron Head, Zen Headbutt, Ice Punch, Protect |
+| 5 | Alcremie | 32 (cap +2) | Babiri Berry | Aroma Veil | protected attacker | Decorate, Dazzling Gleam, Mystical Fire, Protect |
+| 6 | Duraludon | 33 (cap +3) | Assault Vest | Stalwart | coverage attacker | Flash Cannon, Dragon Pulse, Thunderbolt, Body Press |
+
+**Runtime slot 3 alternatives:** Wartortle, Croconaw, Marshtomp, Prinplup, Dewott, Frogadier, Brionne.
+
+## 100. Brendan — Route 110
+
+**Required Branch · Double · Cap 30 · Extreme 97/100 · Uniqueness 41/100**
+
+**Theme:** active speed control
+
+Level-31 Eviolite Battle Armor Type: Null leads beside level-32 Choice Band Strong Jaw Dracovish. Tri Attack, Icy Wind, U-turn, and Protect control timing for Fishious Rend, Psychic Fangs, Crunch, or Ice Fang without fixing the opening. Slot three is the player's actual same-generation middle counter-starter at level 31 with Sitrus Berry, its elemental Pledge, reliable special STAB, Double-Edge, and Protect. Level-32 Weakness Policy Clear Body Metang uses Iron Head, Zen Headbutt, Ice Punch, and Protect. Level-32 Babiri Aroma Veil Alcremie can Decorate any physical or special partner while using Dazzling Gleam, Mystical Fire, or Protect. Level-33 Assault Vest Stalwart Duraludon closes through Flash Cannon, Dragon Pulse, Thunderbolt, or Body Press. The team uses one finite speed move and no weather, terrain, room, trap, redirection, setup move other than ally Decorate, Mega, or Primal. This is the first closed Type: Null, Dracovish, Metang, Alcremie, and Duraludon opponent appearance and the first required six-member rival double whose exact starter species follows all seven supported generations. The 21 middle starters deliberately recur from the earlier Rustboro rival as continuity, now twenty-six encounters later and only one-sixth of a substantially deeper team. May and Brendan have exact gameplay parity; no gender branch is secretly easier.
+
+**How it behaves:** All six records use foe-aware, smart-switching, partner-aware, HP-aware, and speed-control doubles scoring. The runtime species hook replaces only source slot two with the generation-correct middle starter while retaining the branch's legal universal moves and primary ability. Existing AI handles Icy Wind timing, Choice locks and switching, Fishious Rend power, Decorate ally-only targeting and useful-stat checks, Weakness Policy, Stalwart redirection bypass, Body Press defense scaling, Protect, and U-turn. No trainer-specific target read, forced opener, hidden stat adjustment, Mega, or Primal is added.
+
+**Why it is hard:** 6 fully authored Pokémon, average BST 482.3, average cap offset +1.83, ace offset +3, and 100% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: May (100% species overlap). Its species appear across an average of 3.3 unrelated trainer families.
+
+**Counterplay:** Fake Out, Taunt, priority, opposing speed control, Trick Room, or direct pressure can stop Type: Null's timing; Water Absorb, Storm Drain, Dry Skin, Protect, burn, Intimidate, Choice-lock exploitation, or faster offense answer Dracovish. Ordinary type coverage answers the visible dynamic starter. Knock Off, Haze, Clear Smog, Unaware, phazing, or avoiding a weak super-effective hit manage Metang. Steel, Poison, Taunt, Encore, or focus fire remove Alcremie. Ground, Fighting, strong special neutral damage, Snarl, Light Screen, item removal, or redirection-independent targeting answer Duraludon. No single counter solves all six, but every phase has several broad classes.
+
+**Strongest part:** The battle naturally changes phase—from speed-sensitive Fishious Rend, to the real counterpart and young pseudo-legendary, to flexible Decorate-backed mixed offense—without a scripted wave machine or making the player's starter choice the only puzzle.
+
+**Weakest link:** Water immunity plus immediate disruption can make Dracovish much less frightening, while focused Steel or Poison pressure can erase Alcremie and Duraludon has exploitable special bulk. Those are healthy broad answers that keep a required 9.7 rival learnable.
+
+**Manual closure:** Battle 54 is source-closed at editorial 9.7/10: six exact parity records, three elemental branches, a verified runtime hook for 21 generation-correct middle starters in source slot three, five fresh common species, six distinct items, one champion roster plus four full-set donors, mandatory trigger and native Itemfinder retry contracts, truthful native-width dialogue, supported one-slot progression, author self-check, and no transformation gimmick. Runtime playtesting remains required before the target is observed.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Type Null | 31 (cap +1) | Eviolite | Battle Armor | speed control | Tri Attack, Icy Wind, U Turn, Protect |
+| 2 | Dracovish | 32 (cap +2) | Choice Band | Strong Jaw | Choice-locked breaker | Fishious Rend, Psychic Fangs, Crunch, Ice Fang |
+| 3 | Grovyle | 31 (cap +1) | Sitrus Berry | Overgrow | protected attacker | Grass Pledge, Energy Ball, Double Edge, Protect |
+| 4 | Metang | 32 (cap +2) | Weakness Policy | Clear Body | protected attacker | Iron Head, Zen Headbutt, Ice Punch, Protect |
+| 5 | Alcremie | 32 (cap +2) | Babiri Berry | Aroma Veil | protected attacker | Decorate, Dazzling Gleam, Mystical Fire, Protect |
+| 6 | Duraludon | 33 (cap +3) | Assault Vest | Stalwart | coverage attacker | Flash Cannon, Dragon Pulse, Thunderbolt, Body Press |
+
+**Runtime slot 3 alternatives:** Ivysaur, Bayleef, Grovyle, Grotle, Servine, Quilladin, Dartrix.
+
+## 101. Edwin — Route 110
+
+**Optional · Double · Cap 30 · Extreme 92/100 · Uniqueness 90/100**
+
+**Theme:** Beat Up + Justified
+
+The joint branch leads level-31 White Herb Justified Terrakion beside level-31 Wide Lens Houndoom. Houndoom can Beat Up Terrakion, while Heat Wave, Snarl, and Will-O-Wisp remain independent options. Edwin's split instead leads Terrakion beside level-31 Occa Prankster Cottonee with Beat Up, Helping Hand, Charm, and Giga Drain; level-32 Flying Gem Archen and level-33 Expert Belt Eelektrik then attack directly. Joseph's split leads Houndoom beside level-31 Eviolite Justified Growlithe with Flare Blitz, Close Combat, Crunch, and Morning Sun; level-29 Berry Juice Rattled Toxel provides Nuzzle, Endeavor, Metal Sound, and Tearful Look before level-33 Soft Sand Moxie Krokorok closes through Dig, Crunch, Rock Slide, and Ice Fang. No weather, terrain, room, screen, Tailwind, setup move, Mega, or Primal is used. This is the first closed Terrakion, Cottonee, Archen, Eelektrik, Houndoom, Growlithe, Toxel, and Krokorok opponent appearance and Verdant's definitive Beat Up plus Justified showcase. Unlike the recent every-member Round circuit, only the branch's opening pair owns the activation; the loaded reserves change axis immediately. The older Frost Breath, Guard Split, and Surf activation lessons use different recipients, costs, and counterplay.
+
+**How it behaves:** Both trainers use native foe-aware, smart-switching, partner-aware, HP-aware, and combo-setup doubles scoring. The existing combo profile adds a strong bonus only when Beat Up targets a live Justified partner; ordinary ally-safety scoring rejects lethal activation. White Herb, Prankster support, Flying Gem Acrobatics, Defeatist, Levitate, Rattled, Endeavor, Moxie, Dig, and all coverage are existing mechanics. No forced opener, custom target selector, speed profile, field profile, Mega, or Primal is added.
+
+**Why it is hard:** 4 fully authored Pokémon, average BST 416.5, average cap offset +1.75, ace offset +3, and 100% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: John & Jay (14% species overlap). Its species appear across an average of 2.5 unrelated trainer families.
+
+**Counterplay:** Fake Out, Taunt, Follow Me or Rage Powder, priority, immediate Houndoom or Cottonee focus fire, Protect on the intended recipient, Ghost interaction where applicable, burn, Intimidate after activation, Haze, Clear Smog, Unaware, phazing, or a fast recipient knockout all answer the headline. Rock, Ground, Water, Fighting, Fairy, Ice, and special pressure cover Terrakion or Growlithe by phase. Archen exposes Defeatist, Toxel is deliberately under the cap, Eelektrik has modest raw stats, and Krokorok's Dig telegraphs a turn. No single answer solves every reserve, but none requires a lock-and-key counter.
+
+**Strongest part:** One historic competitive activation is natively true in the joint branch and both split branches, yet only the opener is modular; the rest of each loaded team immediately becomes a different young-form offense test.
+
+**Weakest link:** If Houndoom or Cottonee is removed immediately, the fight loses its headline. That is intentional readable counterplay, while Terrakion, Growlithe, Archen, Eelektrik, Toxel, and Krokorok still leave a credible 8.8 split or 9.2 joint battle.
+
+**Manual closure:** Battle 55 is source-closed at editorial 9.2 jointly and 8.8 for either split: eight stage-legal levels 29-33, exact Edwin-A/Joseph-B prefix slicing, three truthful Beat Up activation leads, eight distinct items and species, two historic rosters plus three full-set donors, native combo AI, zero Protect and no broad speed field, Edwin-only Match Call ownership, author self-check, and no unsupported gimmick. Runtime testing remains required for all three branches before the targets are observed.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Terrakion | 31 (cap +1) | White Herb | Justified | rare centerpiece | Rock Slide, Close Combat, Iron Head, Taunt |
+| 2 | Cottonee | 31 (cap +1) | Occa Berry | Prankster | disruption and support | Beat Up, Helping Hand, Charm, Giga Drain |
+| 3 | Archen | 32 (cap +2) | Flying Gem | Defeatist | coverage attacker | Acrobatics, Rock Slide, Crunch, U Turn |
+| 4 | Eelektrik | 33 (cap +3) | Expert Belt | Levitate | coverage attacker | Thunderbolt, Giga Drain, Crunch, Aqua Tail |
+
+## 102. Joseph — Route 110
 
 **Optional · Double · Cap 30 · Extreme 92/100 · Uniqueness 87/100**
 
@@ -2862,7 +2630,36 @@ The joint branch leads level-31 White Herb Justified Terrakion beside level-31 W
 | 3 | Toxel | 29 (cap -1) | Berry Juice | Rattled | speed control | Nuzzle, Endeavor, Metal Sound, Tearful Look |
 | 4 | Krokorok | 33 (cap +3) | Soft Sand | Moxie | coverage attacker | Dig, Crunch, Rock Slide, Ice Fang |
 
-## 111. Alyssa — Route 110
+## 103. Edward — Route 110
+
+**Optional · Single · Cap 30 · Extreme 90/100 · Uniqueness 80/100**
+
+**Theme:** Psychic pressure
+
+Level-31 itemless Levitate Lunatone sets Magic Room and attacks or heals. Edward's level-32 Hypno, level-32 Magic Bounce Xatu, and split-only level-33 Munna remain itemless and use direct Psychic coverage, Disable, Future Sight, U-turn, and recovery. Alyssa leads level-31 itemless Immunity Gligar; in her split, level-32 Competitive Gothorita supplies Magic Room. Level-32 Aftermath Drifblim and split-only level-33 Motor Drive Emolga exploit itemless Acrobatics and pivoting. Player held-item effects are suppressed for five turns, but abilities, moves, and stats remain intact. No Protect, priority, active speed control, setup move, weather, terrain, Gravity, Mega, or Primal is used. This is the first closed Lunatone, Hypno, Xatu, Munna, Gligar, Gothorita, Drifblim, and Emolga opponent appearance and Verdant's first Magic Room equipment-denial lesson. The rejected Gravity draft was discarded because Battle 23 already owns the native-pair Gravity/Hustle architecture. Magic Room instead turns Verdant's unusually generous held-item access into one transparent counter-puzzle.
+
+**How it behaves:** Edward and Alyssa use foe-aware, smart-switching, HP-aware, and field-control scoring. Native Magic Room scoring already rewards the move when the user and partner are itemless while the opposing side holds items, prevents duplicate casting, and rejects recasting while active. Native Future Sight scoring rewards one pending delayed attack and suppresses duplicates. No custom selector, forced opener, combo profile, speed profile, Mega, or Primal is added.
+
+**Why it is hard:** 4 fully authored Pokémon, average BST 461.8, average cap offset +2.0, ace offset +3, and 0% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Brandi (20% species overlap). Its species appear across an average of 4.2 unrelated trainer families.
+
+**Counterplay:** Taunt, Encore, immediate Lunatone or Gothorita focus fire, Magic Room reversal, or simply surviving five turns restores items. Dark, Ghost, and Bug pressure Edward; Ice, Water, Rock, and strong neutral attacks pressure Alyssa by slot. Abilities, raw stats, recovery, hazards, status, screens, weather, terrain, and item-independent move combinations continue functioning. Future Sight is visible and can be timed; U-turn and Volt Switch can be punished with hazards or trapping.
+
+**Strongest part:** The player immediately understands why this battle feels different: a native field effect disables the powerful gear Verdant usually encourages, while every opponent visibly committed to fighting without items from the start.
+
+**Weakest link:** A fast Taunt or setter knockout can erase the headline on turn one. That is intentional broad counterplay, while eight optimized levels 31-33 and independent coverage preserve an 8.7-9.0 encounter afterward.
+
+**Manual closure:** Battle 56 is source-closed at editorial 9.0 jointly, 8.7 for Edward's single, and 8.8 for Alyssa's double: eight fresh stage-legal species at levels 31-33, exact asymmetric joint/split branches, zero held items and zero Protect, six full-set donors, native Magic Room and Future Sight AI, truthful dialogue, no reward collateral, author self-check, and no repeated Gravity or unsupported gimmick. Runtime testing remains required for all branches before targets are observed.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Lunatone | 31 (cap +1) | None | Levitate | disruption and support | Magic Room, Psychic, Power Gem, Moonlight |
+| 2 | Hypno | 32 (cap +2) | None | Insomnia | coverage attacker | Psychic, Focus Blast, Shadow Ball, Disable |
+| 3 | Xatu | 32 (cap +2) | None | Magic Bounce | coverage attacker | Future Sight, Air Slash, Heat Wave, U Turn |
+| 4 | Munna | 33 (cap +3) | None | Synchronize | coverage attacker | Moonblast, Energy Ball, Psychic, Moonlight |
+
+## 104. Alyssa — Route 110
 
 **Optional · Double · Cap 30 · Extreme 90/100 · Uniqueness 84/100**
 
@@ -2891,6 +2688,209 @@ Level-31 itemless Levitate Lunatone sets Magic Room and attacks or heals. Edward
 | 3 | Drifblim | 32 (cap +2) | None | Aftermath | disruption and support | Acrobatics, Shadow Ball, Will O Wisp, Strength Sap |
 | 4 | Emolga | 33 (cap +3) | None | Motor Drive | disruption and support | Acrobatics, Volt Switch, Encore, Taunt |
 
+## 105. Dale — Route 110
+
+**Optional · Double · Cap 30 · Extreme 89/100 · Uniqueness 61/100**
+
+**Theme:** Water pressure
+
+Level-31 Sitrus Storm Drain Lumineon uses Soak, Scald, Air Slash, or Protect beside level-32 Expert Belt Water Absorb Arctovish with Freeze-Dry, Fishious Rend, Crunch, and Rock Slide. Level-32 Scope Lens Sniper Octillery can exploit Soak with Energy Ball before Focus Energy raises its critical pressure through Hydro Pump or Ice Beam. Level-33 Mystic Water Water Veil Floatzel closes through Waterfall, Aqua Jet, Ice Punch, or Crunch. No rain, speed field, trap, redirection, ally activation, Mega, or Primal is used. This is the first closed Lumineon, Arctovish, Octillery, and Floatzel opponent appearance and Verdant's first Soak target-painting lesson. Friendly Surf activation was rejected because Battles 38 and 44 already own related ally-Water conversion shapes.
+
+**How it behaves:** Dale uses foe-aware, smart-switching, partner-aware, HP-aware, and combo-setup doubles scoring. The reusable combo layer now rewards Soak when the partner owns Electric, Grass, or Freeze-Dry conversion and rewards the corresponding exploiting move when the partner selected Soak; it never fixes a target. Native logic rejects already-Water targets. Focus Energy, Sniper, Storm Drain, Water Absorb, and all coverage are existing mechanics.
+
+**Why it is hard:** 4 fully authored Pokémon, average BST 507.5, average cap offset +2.0, ace offset +3, and 100% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Charlie (50% species overlap). Its species appear across an average of 5.8 unrelated trainer families.
+
+**Counterplay:** Fake Out, Taunt, Encore, redirection, Substitute, Magic Bounce, immediate Lumineon focus fire, or Water-type targets deny Soak value. Lightning Rod, Volt Absorb, Grass resistance, special bulk, Snarl, Light Screen, burn, Intimidate, Wide Guard against Rock Slide, Haze or immediate Octillery pressure, and priority into Floatzel remain broad answers.
+
+**Strongest part:** One visible fishing cast marks exactly one target, the first reserve preserves that conversion, and the encounter then changes into concentration and direct cleanup rather than endlessly rebuilding Soak.
+
+**Weakest link:** Removing Lumineon immediately erases the headline. That is intentional readable counterplay, while three optimized level-32/33 attackers preserve an 8.9 encounter afterward.
+
+**Manual closure:** Battle 57 is source-closed at editorial 8.9/10: one optional four-member double at legal levels 31-33, four fresh species and items, one visible Soak conversion with reusable partner-aware AI, four full-set donors, truthful native-width dialogue, accepted one-slot behavior, author self-check, and no repeated Surf activation or unsupported gimmick. Runtime playtesting remains required before the target is observed.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Lumineon | 31 (cap +1) | Sitrus Berry | Storm Drain | protected attacker | Soak, Scald, Air Slash, Protect |
+| 2 | Arctovish | 32 (cap +2) | Expert Belt | Water Absorb | coverage attacker | Freeze Dry, Fishious Rend, Crunch, Rock Slide |
+| 3 | Octillery | 32 (cap +2) | Scope Lens | Sniper | coverage attacker | Focus Energy, Energy Ball, Hydro Pump, Ice Beam |
+| 4 | Floatzel | 33 (cap +3) | Mystic Water | Water Veil | coverage attacker | Waterfall, Aqua Jet, Ice Punch, Crunch |
+
+## 106. Jaclyn — Route 110
+
+**Optional · Single · Cap 30 · Extreme 88/100 · Uniqueness 87/100**
+
+**Theme:** Psychic pressure
+
+Level-32 Eviolite Magic Bounce Hattrem attacks through Psyshock, Mystical Fire, and Draining Kiss or sacrifices itself with Healing Wish. Level-31 Focus Sash Magic Guard Kadabra uses Psychic, Shadow Ball, Energy Ball, and Encore. Level-32 Colbur Levitate Chimecho uses Yawn, Psychic, Signal Beam, and Recover. Level-33 Kee Berry Simple Swoobat uses Calm Mind, Stored Power, Air Slash, and Roost; one Calm Mind visibly becomes two stages and one physical hit can double Kee Berry's Defense rise. No field, screen, weather, trap, priority, Mega, or Primal is used. This is the first closed Hattrem, Kadabra, Chimecho, and Swoobat opponent appearance and the first Simple Stored Power finale. Wonder Room was rejected because Battle 22 owns it, Wonder Guard was rejected as binary, and Ditto/Wobbuffet were rejected because they repeat earlier information and trapping lessons.
+
+**How it behaves:** Jaclyn uses foe-aware, smart-switching, HP-aware, and first-turn setup scoring. Native viability handles Magic Bounce, Encore, Yawn, Healing Wish, Sash, recovery, and Stored Power. The setup profile matters only when Swoobat enters because no earlier member owns a stat-setup move; it encourages but does not force Calm Mind. No custom selector or hidden read is added.
+
+**Why it is hard:** 4 fully authored Pokémon, average BST 428.8, average cap offset +2.0, ace offset +3, and 100% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Jared (14% species overlap). Its species appear across an average of 2.5 unrelated trainer families.
+
+**Counterplay:** Direct attacks bypass Magic Bounce; multihit or chip breaks Kadabra's Sash; Taunt, Encore, Haze, Clear Smog, Unaware, phazing, item removal, or immediate focus stop Swoobat. Dark, Bug, Ghost, Rock, Electric, and Ice offense remain common. Switching or status immunity answers Yawn, and physical pressure exploits the first three members.
+
+**Strongest part:** Four independent stage tricks escalate cleanly into one visible mathematical payoff—one boost becomes two—without requiring a field engine or binary immunity check.
+
+**Weakest link:** Immediate Rock, Electric, Ice, Ghost, or Dark pressure can delete Swoobat before setup. That is intentional broad counterplay, while the first three optimized checks preserve the 8.8 encounter.
+
+**Manual closure:** Battle 58 is source-closed at editorial 8.8/10: one optional four-member single at legal levels 31-33, four fresh species and items, two full-set Simple donors plus transparent legal source roles, truthful native-width dialogue, native setup AI, author self-check, and no repeated Wonder Room, trap, field, or unsupported gimmick. Runtime playtesting remains required before the target is observed.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Hattrem | 32 (cap +2) | Eviolite | Magic Bounce | coverage attacker | Psyshock, Mystical Fire, Draining Kiss, Healing Wish |
+| 2 | Kadabra | 31 (cap +1) | Focus Sash | Magic Guard | coverage attacker | Psychic, Shadow Ball, Energy Ball, Encore |
+| 3 | Chimecho | 32 (cap +2) | Colbur Berry | Levitate | disruption and support | Yawn, Psychic, Signal Beam, Recover |
+| 4 | Swoobat | 33 (cap +3) | Kee Berry | Simple | setup attacker | Calm Mind, Stored Power, Air Slash, Roost |
+
+## 107. Anthony — Route 110
+
+**Optional · Single · Cap 30 · Extreme 89/100 · Uniqueness 80/100**
+
+**Theme:** underused normal mixture
+
+Level-30 Sharp Beak Tangled Feet Doduo uses Brave Bird, Double-Edge, Jump Kick, and Steel Wing. Level-31 Magnet Sap Sipper Zebstrika uses Wild Charge, Overheat, Double-Edge, and Low Kick. Level-32 Sitrus Sheer Force Rampardos uses Head Smash, Superpower, Zen Headbutt, and Iron Head. Level-33 Wise Glasses Download Porygon-Z uses Hyper Beam, Tri Attack, Ice Beam, and Dark Pulse. Every member attacks immediately; there is no setup, Protect, priority, pivot, field, weather, trap, Choice lock, Mega, or teammate dependency. This is the first closed Doduo, Zebstrika, Rampardos, and Porygon-Z appearance and the first zero-setup no-brakes commitment ladder. It deliberately follows Jaclyn's staged setup single with pure immediate damage, mixed axes, and mandatory drawbacks rather than another enabler-recipient or field engine.
+
+**How it behaves:** Anthony retains an ordinary singles trainer battle with foe-aware viability and smart switching. Native recoil safety, crash behavior, damage and KO scoring, stat-drop handling, Download, berries, and Hyper Beam recharge execute the design. The AI is not forced to save Hyper Beam for a KO; an imperfect raw-damage commitment is an intentional player opening, not a hidden script. No custom selector is added.
+
+**Why it is hard:** 4 fully authored Pokémon, average BST 469.2, average cap offset +1.5, ace offset +3, and 100% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Katelyn (20% species overlap). Its species appear across an average of 4.8 unrelated trainer families.
+
+**Counterplay:** Protect, Ghost or type immunities, resistance pivots, recovery, recoil management, and forcing Jump Kick misses create immediate punish windows. Burn, Intimidate, Reflect, bulky Ground, Rock, Steel, or physical walls answer the first three; special bulk, Fighting pressure, Disable, Encore, or exploiting recharge answers Porygon-Z. The player can win through survival and timing instead of outracing every leg.
+
+**Strongest part:** Every dangerous hit creates its own broad answer window, and Porygon-Z flips the damage axis just when burn or a physical wall appears to solve the whole race.
+
+**Weakest link:** A sufficiently bulky Ghost, Ground, or physical-control core can compress the first three legs. Porygon-Z's special coverage and Download are retained specifically to prevent one defensive answer from becoming autopilot.
+
+**Manual closure:** Battle 59 is source-closed at editorial 8.9/10: one optional four-member single at legal levels 30-33, four fresh species, four distinct immediate commitments, three complete-set donors plus transparent legal source roles, exact non-pair geometry, native-width dialogue, ordinary native AI, author self-check, and no repeated field or setter-recipient module. Runtime playtesting remains required before the target is observed.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Doduo | 30 (cap +0) | Sharp Beak | Tangled Feet | coverage attacker | Brave Bird, Double Edge, Jump Kick, Steel Wing |
+| 2 | Zebstrika | 31 (cap +1) | Magnet | Sap Sipper | coverage attacker | Wild Charge, Overheat, Double Edge, Low Kick |
+| 3 | Rampardos | 32 (cap +2) | Sitrus Berry | Sheer Force | coverage attacker | Head Smash, Superpower, Zen Headbutt, Iron Head |
+| 4 | Porygon-Z | 33 (cap +3) | Wise Glasses | Download | coverage attacker | Hyper Beam, Tri Attack, Ice Beam, Dark Pulse |
+
+## 108. Abigail — Route 110
+
+**Optional · Single · Cap 30 · Extreme 90/100 · Uniqueness 76/100**
+
+**Theme:** underused ground mixture
+
+Level-31 Rindo Storm Drain Gastrodon uses Scald, Earth Power, Ice Beam, and Recover. Level-32 Black Sludge Speed Boost Scolipede uses Megahorn, Poison Jab, Earthquake, and Protect. Level-32 Lum Flame Body Ponyta uses Flare Blitz, High Horsepower, Play Rough, and Morning Sun. Level-33 Chesto Thick Fat Snorlax uses Curse, Body Slam, Crunch, and Rest. The four members form one endurance question rather than four disconnected gimmicks; there is no hazard, screen, weather, terrain, room, trap, pivot chain, priority, Choice lock, Mega, or teammate dependency. This is the first closed Gastrodon, Scolipede, Ponyta, and Snorlax appearance and the first literal swim-cycle-run-recovery endurance race. It directly contrasts Anthony's self-spending damage with a team that repeatedly preserves itself, while avoiding the recent U-turn, Volt Switch, and setter-recipient density.
+
+**How it behaves:** Abigail uses foe-aware, smart-switching, and HP-aware singles scoring. Native viability handles Recover, Protect, Morning Sun, Rest, Curse, recoil, Speed Boost, berries, and status. First-turn setup scoring is deliberately absent because Snorlax enters last and the engine's first-turn flag is battle-global, not switch-in-local. No custom selector, forced recovery threshold, or hidden read is added.
+
+**Why it is hard:** 4 fully authored Pokémon, average BST 477.5, average cap offset +2.0, ace offset +3, and 100% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Kevin (20% species overlap). Its species appear across an average of 6.2 unrelated trainer families.
+
+**Counterplay:** Taunt, Encore, Heal Block, Disable, item removal, hazards, strong critical or super-effective burst, and recovery denial break the pace. Grass after Rindo answers Gastrodon; Ground, Rock, Flying, Psychic, Water, or special pressure answers the middle legs; Fighting, Haze, Clear Smog, Unaware, phazing, or Trick answers Snorlax. The player can preserve several different offensive routes instead of solving one hidden lock.
+
+**Strongest part:** The trainer's triathlon dialogue becomes a mechanically coherent endurance race, and each recovery form is finite or answerable rather than a hidden lock.
+
+**Weakest link:** Strong physical Ground pressure can line up Scolipede and Ponyta after Gastrodon falls. That compression is retained as healthy broad counterplay, while Rindo Gastrodon and special coverage stop it from being a one-click opener.
+
+**Manual closure:** Battle 60 is source-closed at editorial 9.0/10: one optional four-member single at legal levels 31-33, four fresh species, a coherent endurance question, five complete-set donors, exact independent geometry and Match Call ownership, native-width dialogue, native HP-aware AI, author self-check, and no repeated pivot or setter-recipient module. Runtime playtesting remains required before the target is observed.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Gastrodon | 31 (cap +1) | Rindo Berry | Storm Drain | coverage attacker | Scald, Earth Power, Ice Beam, Recover |
+| 2 | Scolipede | 32 (cap +2) | Black Sludge | Speed Boost | protected attacker | Megahorn, Poison Jab, Earthquake, Protect |
+| 3 | Ponyta | 32 (cap +2) | Lum Berry | Flame Body | coverage attacker | Flare Blitz, High Horsepower, Play Rough, Morning Sun |
+| 4 | Snorlax | 33 (cap +3) | Chesto Berry | Thick Fat | disruption and support | Curse, Body Slam, Crunch, Rest |
+
+## 109. Benjamin — Route 110
+
+**Optional · Single · Cap 30 · Extreme 91/100 · Uniqueness 86/100**
+
+**Theme:** Earthquake immunity + Trick Room
+
+Level-30 Mental Herb Levitate Bronzor uses Trick Room, Stealth Rock, Gyro Ball, and Psychic. Level-31 Throat Spray Berserk Drampa uses Hyper Voice, Draco Meteor, Flamethrower, and Roost. Level-32 Choice Band Iron Fist Crabominable uses Close Combat, Ice Hammer, Thunder Punch, and Earthquake. Level-33 Air Balloon Beast Boost Stakataka uses Trick Room, Gyro Ball, Body Press, and Stone Edge. The lead and ace own the two clocks; neither target nor move is forced, and there is no weather, terrain, screen, teammate activation, pivot chain, Mega, or Primal. This is the first closed Bronzor, Drampa, Crabominable, and Stakataka appearance and the first dedicated cap-30 slow-lane single since the much earlier temporal lesson. It follows no-brakes burst and endurance with a literal clock-management puzzle, while a young Bronzor keeps the route's evolution phase visible before an Ultra Beast finish.
+
+**How it behaves:** Benjamin uses foe-aware, smart-switching, HP-aware, first-battle-turn setup, and contextual speed-control scoring. The battle-global setup flag modestly supports Bronzor's opening room or rocks; the stronger speed-control score favors Trick Room only when the active side is slower and room is absent. Stakataka can rebuild the clock later through the same visible-board rule. Native viability handles Mental Herb, Choice Band, recoil-free attacks, Throat Spray, Roost, Air Balloon, and Beast Boost. No opener or target is forced.
+
+**Why it is hard:** 4 fully authored Pokémon, average BST 468.2, average cap offset +1.5, ace offset +3, and 100% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Hitoshi (17% species overlap). Its species appear across an average of 3.8 unrelated trainer families.
+
+**Counterplay:** Taunt after Mental Herb, Encore, Trick Room reversal, Imprison, stalling five turns, priority, Protect, switching, and item removal all attack the clock. Fire, Dark, or Ghost pressures Bronzor; Fairy, Ice, Fighting, or Dragon pressures Drampa; burn, Intimidate, resist pivots, or Choice-lock scouting handles Crabominable; Fighting, Water, special attacks, or Balloon-pop plus Ground handles Stakataka.
+
+**Strongest part:** The clock is readable, finite, and rebuilt by a spectacular legal ace; every phase changes attacking axis without requiring teammate scripting.
+
+**Weakest link:** Room denial leaves Drampa and Crabominable slow, while Fighting pressure compresses the last three. Those broad answers are intentional; runtime tuning should lower Stakataka from +3 to +2 before diluting the legal sets.
+
+**Manual closure:** Battle 61 is source-closed at editorial 9.1/10: one optional four-member single at legal levels 30-33, four fresh species including young Bronzor and rare Stakataka, two finite clocks, three complete-set donors, exact Match Call ownership, native-width teaching dialogue, contextual native speed AI, author self-check, and explicit rejection of two source-illegal alternatives. Runtime playtesting remains required before the target is observed.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Bronzor | 30 (cap +0) | Mental Herb | Levitate | speed control | Trick Room, Stealth Rock, Gyro Ball, Psychic |
+| 2 | Drampa | 31 (cap +1) | Throat Spray | Berserk | coverage attacker | Hyper Voice, Draco Meteor, Flamethrower, Roost |
+| 3 | Crabominable | 32 (cap +2) | Choice Band | Iron Fist | Choice-locked breaker | Close Combat, Ice Hammer, Thunder Punch, Earthquake |
+| 4 | Stakataka | 33 (cap +3) | Air Balloon | Beast Boost | speed control | Trick Room, Gyro Ball, Body Press, Stone Edge |
+
+## 110. Jasmine — Route 110
+
+**Optional · Double · Cap 30 · Extreme 91/100 · Uniqueness 90/100**
+
+**Theme:** underused water mixture
+
+Level-31 Miracle Seed Overgrow Thwackey uses Grass Pledge, Knock Off, Wood Hammer, and Protect. Level-32 Wide Lens Libero Raboot uses Fire Pledge, Flare Blitz, Gunk Shot, and Sucker Punch. Level-32 Mystic Water Torrent Drizzile uses Water Pledge, Water Pulse, Mud Shot, and Protect. Level-33 Wacan Liquid Voice Brionne uses Water Pledge, Hyper Voice, Moonblast, and Helping Hand. Native Pledge scoring coordinates compatible partners without forcing a move or target; there is no custom selector, weather, terrain, room, trap, Mega, or Primal. This is the first fixed Thwackey, Raboot, and Drizzile opponent appearance and the first dedicated Pledge double. Brionne is a deliberate repeat only from the conditional B28/B54 rival possibility: its fixed Liquid Voice and second-Water role makes the relay branch-safe and will be a first sighting in most starter branches. The format breaks the four-single streak before Jacob's separate double.
+
+**How it behaves:** Jasmine uses foe-aware and partner-helping doubles scoring without smart switching, preserving the authored lead and reserve cadence. Native EFFECT_PLEDGE logic gives the first compatible offer +3 and a confirmed partner combination +7, checks sleep and freeze failure, respects immunities, and values a fresh four-turn side effect more than an already active one. HP-aware scoring remains available for ordinary survival choices; Helping Hand is native. No turn, partner, move, or target is forced.
+
+**Why it is hard:** 4 fully authored Pokémon, average BST 420.0, average cap offset +2.0, ace offset +3, and 100% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Tony (14% species overlap). Its species appear across an average of 1.2 unrelated trainer families.
+
+**Counterplay:** Fake Out, flinching, sleep, paralysis, redirection, Protect, priority, or immediate focus can interrupt one Pledge half. Flash Fire, Water Absorb, Storm Drain, Sap Sipper, type resists, and defensive switching can blunt the combined result. Removing both leads before reserves arrive prevents a second combination; Knock Off removes every modest item, and spread offense pressures four middle-form defenses.
+
+**Strongest part:** The player determines the next battlefield by knockout order, and a double knockout is rewarded with a visibly incompatible reserve pair instead of the AI rebuilding the module forever.
+
+**Weakest link:** Removing both fragile middle-form leads can erase the headline quickly. That is intentional high-skill counterplay; Brionne's Liquid Voice and Moonblast ensure the earned endgame remains an 8.5-plus battle rather than collapsing.
+
+**Manual closure:** Battle 62 is source-closed at editorial 9.1/10: one guarded four-member double at legal levels 31-33, a branch-sensitive native Pledge relay, three fresh fixed species plus one earned conditional repeat, four complete-set family donors, exact long-patrol geometry, native-width strategy and refusal dialogue, no unsupported Crocalor or Drizzile moves, author self-check, and no forced AI. Runtime playtesting remains required before the target is observed.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Thwackey | 31 (cap +1) | Miracle Seed | Overgrow | protected attacker | Grass Pledge, Knock Off, Wood Hammer, Protect |
+| 2 | Raboot | 32 (cap +2) | Wide Lens | Libero | coverage attacker | Fire Pledge, Flare Blitz, Gunk Shot, Sucker Punch |
+| 3 | Drizzile | 32 (cap +2) | Mystic Water | Torrent | protected attacker | Water Pledge, Water Pulse, Mud Shot, Protect |
+| 4 | Brionne | 33 (cap +3) | Wacan Berry | Liquid Voice | coverage attacker | Water Pledge, Hyper Voice, Moonblast, Helping Hand |
+
+## 111. Jacob — Route 110
+
+**Optional · Double · Cap 30 · Extreme 90/100 · Uniqueness 82/100**
+
+**Theme:** residual control
+
+Level-30 Rocky Helmet Iron Barbs Ferroseed uses a 31-Attack, 0-Speed Brave spread with Leech Seed, Gyro Ball, Knock Off, and Protect. Level-31 Assault Vest Rough Skin Druddigon uses Dragon Claw, Fire Punch, Sucker Punch, and Iron Head. Level-32 Expert Belt Rough Skin Sharpedo uses Liquidation, Psychic Fangs, Ice Fang, and Protect. Level-33 Charti Flame Body Moltres uses Heat Wave, Air Slash, Roost, and Protect. No move targets an ally, and there is no weather, terrain, room, screen, speed field, setup pass, trap, Mega, or Primal. This is the first closed Ferroseed, Druddigon, Sharpedo, and Moltres appearance and the first dedicated contact-tax double. A random Cycling Road trainer owning Moltres supplies the requested rare-route surprise, while cap-even Ferroseed keeps the same encounter visibly grounded in the early evolution phase.
+
+**How it behaves:** Jacob uses foe-aware, partner-helping, HP-aware, and smart-switching doubles scoring. Native logic handles Leech Seed, Protect, Rough Skin, Iron Barbs, Rocky Helmet, Flame Body, Assault Vest, Roost, Charti Berry, Sucker Punch, spread Heat Wave, and ordinary type-aware switches. No special contact selector, forced switch, move, partner action, or target is added.
+
+**Why it is hard:** 4 fully authored Pokémon, average BST 467.5, average cap offset +1.5, ace offset +3, and 100% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Gilbert (20% species overlap). Its species appear across an average of 5.0 unrelated trainer families.
+
+**Counterplay:** Heat Wave, Flamethrower, Surf, Earthquake, Rock Slide, special coverage, projectiles, Protective Pads, Long Reach, Neutralizing Gas, Gastro Acid, Skill Swap, item removal, or other ability suppression bypasses or reduces contact tax. Magic Guard removes Rocky Helmet damage in this engine but not Rough Skin or Iron Barbs; Mold Breaker does not suppress these reactive abilities. Fire deletes Ferroseed; Ice, Fairy, or Dragon pressures Druddigon; Electric, Grass, Bug, Fighting, or priority removes Sharpedo; Rock, Water, Electric, or strong special attacks remove Moltres after Charti.
+
+**Strongest part:** The first hit teaches the rule immediately, every reserve preserves it differently, and an unexpected Moltres makes the final Cycling Road trainer memorable without hiding the answer.
+
+**Weakest link:** A prepared special Fire plus Rock core can solve the entire formation efficiently. That broad noncontact answer is intentional; Moltres level should be tuned before adding any artificial resistance.
+
+**Manual closure:** Battle 63 is source-closed at editorial 9.0/10: one guarded four-member double at legal levels 30-33, four fresh species including young Ferroseed and rare Moltres, a visible contact-only rule, three complete-set donors, exact southern patrol geometry, native-width strategy and refusal dialogue, native switching AI, author self-check, and no unsupported immunity claim. Runtime playtesting remains required before the target is observed.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Ferroseed | 30 (cap +0) | Rocky Helmet | Iron Barbs | protected attacker | Leech Seed, Gyro Ball, Knock Off, Protect |
+| 2 | Druddigon | 31 (cap +1) | Assault Vest | Rough Skin | coverage attacker | Dragon Claw, Fire Punch, Sucker Punch, Iron Head |
+| 3 | Sharpedo | 32 (cap +2) | Expert Belt | Rough Skin | protected attacker | Liquidation, Psychic Fangs, Ice Fang, Protect |
+| 4 | Moltres | 33 (cap +3) | Charti Berry | Flame Body | protected attacker | Heat Wave, Air Slash, Roost, Protect |
+
 ## 112. Wally — Mauville City
 
 **Required · Double · Cap 30 · Extreme 97/100 · Uniqueness 83/100**
@@ -2903,7 +2903,7 @@ Level-32 Focus Sash Pickpocket Weavile uses Triple Axel, Knock Off, Low Kick, an
 
 **Why it is hard:** 6 fully authored Pokémon, average BST 461.8, average cap offset +2.0, ace offset +4, and 100% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Wally (20% species overlap). Its species appear across an average of 6.5 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Wally (20% species overlap). Its species appear across an average of 6.3 unrelated trainer families.
 
 **Counterplay:** Rock Slide and competing speed control pressure the lead; Trick Room, paralysis, priority, Tailwind reversal, Protect, and defensive switching attack its tempo. Ground or Rock pressures Zapdos after Magnet is removed; Water, Grass, Ice, or priority removes Drilbur; Fire, Psychic, Flying, or Ice pressures Roselia; burn, Intimidate, physical walls, Grass, Electric, or Poison checks Azumarill; Flying, Ghost, Fairy, burn, redirection, or strong special attacks check Mega Gallade. Wide Guard can be baited with single-target moves.
 
@@ -2922,7 +2922,152 @@ Level-32 Focus Sash Pickpocket Weavile uses Triple Axel, Knock Off, Low Kick, an
 | 5 | Azumarill | 33 (cap +3) | Assault Vest | Huge Power | coverage attacker | Waterfall, Play Rough, Knock Off, Ice Punch |
 | 6 | Gallade | 34 (cap +4) | Galladite | Justified | Mega ace | Sacred Sword, Psycho Cut, Night Slash, Wide Guard |
 
-## 113. Wattson — Mauville City Gym
+## 113. Kirk — Mauville City Gym
+
+**Optional · Single · Cap 30 · Extreme 93/100 · Uniqueness 79/100**
+
+**Theme:** Ghost pressure + sound offense
+
+Vivian uses level-31 Focus Sash Soundproof Mr. Mime with Fake Out, Psychic, Dazzling Gleam, and Encore; level-32 Eviolite Soundproof Loudred with Hyper Voice, Flamethrower, Ice Beam, and Shadow Ball; level-33 Shuca Soundproof Bastiodon with Metal Burst, Flash Cannon, Rock Slide, and Protect; and split-only level-34 Flame Orb Flare Boost Pumpkaboo with Shadow Ball, Giga Drain, Mystical Fire, and Protect. Kirk uses level-32 Throat Spray Punk Rock Toxtricity with Boomburst, Overdrive, Sludge Bomb, and Protect; level-32 Wise Glasses Pixilate Mismagius with Hyper Voice, Power Gem, Mystical Fire, and Protect; level-33 Expert Belt Iron Fist Golett with Stomping Tantrum, Ice Punch, Drain Punch, and Shadow Punch; and split-only level-34 Life Orb Levitate Gengar with Shadow Ball, Sludge Bomb, Focus Blast, and Thunderbolt. No weather, terrain, room, setup pass, trap, Mega, or Primal is used. All eight exact species are new to the 64 closed encounters. This is the first branch-invariant Boomburst immunity board. B49's Round chorus was about action order and repeated singing sixteen battles earlier; B65 is about full-board ally immunity, has no Round, redirection, healing chorus, or shared roster, and is naturally owned by Kirk's guitarist setting.
+
+**How it behaves:** Both records use foe-aware, smart-switching, partner-helping, and HP-aware scoring while remaining singles in their trainer data. The field engine independently creates the joint double. The reusable friendly-fire scorer now recognizes Soundproof sound immunity and ordinary type immunity before estimating ally damage, so safe Boomburst is neither forced nor falsely penalized. Native logic handles Fake Out, Encore, Throat Spray, Punk Rock, Pixilate, Protect, Metal Burst, items, and matchup-aware switches.
+
+**Why it is hard:** 4 fully authored Pokémon, average BST 453.8, average cap offset +2.75, ace offset +4, and 100% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Tammy (20% species overlap). Its species appear across an average of 5.0 unrelated trainer families.
+
+**Counterplay:** Ground, priority, Fake Out, Taunt, Encore, Disable, focus fire, or item removal controls Toxtricity. Ghost typing, Soundproof, Wide Guard, Protect, Snarl, Light Screen, special walls, and recovery blunt Boomburst. Steel, Poison, Dark, Ghost, Fire, Ice, Water, Fighting, or Ground pressure applies by slot, while hazards and smart switching punish the split singles' fragile closers.
+
+**Strongest part:** One visible acoustic rule is mathematically true in every source slice and does not require a forced move, while the safe split singles ask different questions.
+
+**Weakest link:** A prepared Ghost, Soundproof user, Wide Guard, or strong Ground attack compresses Kirk's centerpiece. That broad answer is intentional; Toxtricity from +2 to +1 is the first runtime tuning knob.
+
+**Manual closure:** Battle 65 is source-closed at editorial 9.3/10: one native 3+3 joint double plus two safe four-member singles at legal levels 31-34, eight fresh species, one branch-invariant sound rule, five full-set donors, exact geometry and one-usable behavior, reusable Soundproof/type-immunity AI truth, native-width dialogue, author self-check, and no unsupported moves or forced AI. Runtime playtesting remains required before the target is observed.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Toxtricity | 32 (cap +2) | Throat Spray | Punk Rock | protected attacker | Boomburst, Overdrive, Sludge Bomb, Protect |
+| 2 | Mismagius | 32 (cap +2) | Wise Glasses | Pixilate | protected attacker | Hyper Voice, Power Gem, Mystical Fire, Protect |
+| 3 | Golett | 33 (cap +3) | Expert Belt | Iron Fist | coverage attacker | Stomping Tantrum, Ice Punch, Drain Punch, Shadow Punch |
+| 4 | Gengar | 34 (cap +4) | Life Orb | Levitate | coverage attacker | Shadow Ball, Sludge Bomb, Focus Blast, Thunderbolt |
+
+## 114. Vivian — Mauville City Gym
+
+**Optional · Single · Cap 30 · Extreme 93/100 · Uniqueness 85/100**
+
+**Theme:** underused fairy mixture
+
+Vivian uses level-31 Focus Sash Soundproof Mr. Mime with Fake Out, Psychic, Dazzling Gleam, and Encore; level-32 Eviolite Soundproof Loudred with Hyper Voice, Flamethrower, Ice Beam, and Shadow Ball; level-33 Shuca Soundproof Bastiodon with Metal Burst, Flash Cannon, Rock Slide, and Protect; and split-only level-34 Flame Orb Flare Boost Pumpkaboo with Shadow Ball, Giga Drain, Mystical Fire, and Protect. Kirk uses level-32 Throat Spray Punk Rock Toxtricity with Boomburst, Overdrive, Sludge Bomb, and Protect; level-32 Wise Glasses Pixilate Mismagius with Hyper Voice, Power Gem, Mystical Fire, and Protect; level-33 Expert Belt Iron Fist Golett with Stomping Tantrum, Ice Punch, Drain Punch, and Shadow Punch; and split-only level-34 Life Orb Levitate Gengar with Shadow Ball, Sludge Bomb, Focus Blast, and Thunderbolt. No weather, terrain, room, setup pass, trap, Mega, or Primal is used. All eight exact species are new to the 64 closed encounters. This is the first branch-invariant Boomburst immunity board. B49's Round chorus was about action order and repeated singing sixteen battles earlier; B65 is about full-board ally immunity, has no Round, redirection, healing chorus, or shared roster, and is naturally owned by Kirk's guitarist setting.
+
+**How it behaves:** Both records use foe-aware, smart-switching, partner-helping, and HP-aware scoring while remaining singles in their trainer data. The field engine independently creates the joint double. The reusable friendly-fire scorer now recognizes Soundproof sound immunity and ordinary type immunity before estimating ally damage, so safe Boomburst is neither forced nor falsely penalized. Native logic handles Fake Out, Encore, Throat Spray, Punk Rock, Pixilate, Protect, Metal Burst, items, and matchup-aware switches.
+
+**Why it is hard:** 4 fully authored Pokémon, average BST 422.5, average cap offset +2.5, ace offset +4, and 100% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Dusty (17% species overlap). Its species appear across an average of 2.8 unrelated trainer families.
+
+**Counterplay:** Ground, priority, Fake Out, Taunt, Encore, Disable, focus fire, or item removal controls Toxtricity. Ghost typing, Soundproof, Wide Guard, Protect, Snarl, Light Screen, special walls, and recovery blunt Boomburst. Steel, Poison, Dark, Ghost, Fire, Ice, Water, Fighting, or Ground pressure applies by slot, while hazards and smart switching punish the split singles' fragile closers.
+
+**Strongest part:** One visible acoustic rule is mathematically true in every source slice and does not require a forced move, while the safe split singles ask different questions.
+
+**Weakest link:** A prepared Ghost, Soundproof user, Wide Guard, or strong Ground attack compresses Kirk's centerpiece. That broad answer is intentional; Toxtricity from +2 to +1 is the first runtime tuning knob.
+
+**Manual closure:** Battle 65 is source-closed at editorial 9.3/10: one native 3+3 joint double plus two safe four-member singles at legal levels 31-34, eight fresh species, one branch-invariant sound rule, five full-set donors, exact geometry and one-usable behavior, reusable Soundproof/type-immunity AI truth, native-width dialogue, author self-check, and no unsupported moves or forced AI. Runtime playtesting remains required before the target is observed.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Mr Mime | 31 (cap +1) | Focus Sash | Soundproof | coverage attacker | Fake Out, Psychic, Dazzling Gleam, Encore |
+| 2 | Loudred | 32 (cap +2) | Eviolite | Soundproof | coverage attacker | Hyper Voice, Flamethrower, Ice Beam, Shadow Ball |
+| 3 | Bastiodon | 33 (cap +3) | Shuca Berry | Soundproof | protected attacker | Metal Burst, Flash Cannon, Rock Slide, Protect |
+| 4 | Pumpkaboo | 34 (cap +4) | Flame Orb | Flare Boost | protected attacker | Shadow Ball, Giga Drain, Mystical Fire, Protect |
+
+## 115. Ben — Mauville City Gym
+
+**Optional · Double · Cap 30 · Extreme 93/100 · Uniqueness 86/100**
+
+**Theme:** hazard stack
+
+Level-31 Shuca Toxic Debris Glimmet uses Stealth Rock, Sludge Wave, Power Gem, and Protect. Level-32 Red Card Sturdy Skarmory uses Spikes, Whirlwind, Body Press, and Roost. Level-33 Air Balloon Good as Gold Gholdengo uses Make It Rain, Shadow Ball, Thunderbolt, and Recover. Level-34 Assault Vest Beast Boost Guzzlord uses Dragon Tail, Knock Off, Heavy Slam, and Stomping Tantrum. The team has no speed field, trap ability, setup sweeper, weather, terrain, room, Mega, or Primal. Skarmory, Gholdengo, and Guzzlord are new to the 65 closed encounters. Glimmet returns from B16 after fifty battles: there it was a young Guard Split geology drill member; here its contact-triggered Toxic Debris is the literal switch-maze seed. Guzzlord is an unplaced Ultra Beast and Gholdengo is the first fixed endpoint showcase.
+
+**How it behaves:** Ben uses foe-aware, smart-switching, partner-helping, HP-aware, first-battle-turn setup, and combo scoring. Native logic avoids duplicate hazard layers and rewards first-turn hazards. A reusable combo rule gives moderate non-forcing value to Roar/Whirlwind/Dragon Tail only when opposing reserves and hazards exist, or when the partner visibly prepares hazards; hazard moves receive a small bonus when a partner can phaze. Good as Gold, Ghost removal immunity, Red Card, Toxic Debris, Sturdy, recovery, Assault Vest, and collateral remain native. No target, layer, phaze, switch, or reserve is forced.
+
+**Why it is hard:** 4 fully authored Pokémon, average BST 483.8, average cap offset +2.5, ace offset +4, and 100% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Coby (20% species overlap). Its species appear across an average of 2.8 unrelated trainer families.
+
+**Counterplay:** Taunt, Encore, Fake Out, Magic Bounce, immediate spread or special pressure, multihit Sturdy breaking, Knock Off, Trick, or Magic Room stops the lead maze. Poison types absorb Toxic Spikes; Flying and Steel types ignore them; Heavy-Duty Boots ignore entry damage. Remove or bypass Gholdengo, then use Defog, Rapid Spin, or Mortal Spin through the other target. Substitute, Protect, Fairy immunity to Dragon Tail, Suction Cups, Ingrain, or direct Guzzlord pressure blocks phazing. Fire and Electric punish Skarmory; Ground, Fire, Dark, or Ghost punish Gholdengo; Fairy deletes Guzzlord.
+
+**Strongest part:** Wattson's physical switch puzzle becomes the battle rule, and each reserve changes how the player must dismantle it rather than merely adding another hazard layer.
+
+**Weakest link:** Fast special offense can remove the passive leads before the maze exists. That is intentional fair counterplay; Guzzlord from +4 to +3 is the first runtime tuning knob.
+
+**Manual closure:** Battle 66 is source-closed at editorial 9.3/10: one guarded four-member double at legal levels 31-34, a source-backed hazard maze, three fresh species plus one fifty-battle repeat, one Ultra Beast and one Gen 9 endpoint, four full-team donors, exact puzzle-route reachability, reusable phazing AI, native-width dialogue, author self-check, and no unsupported Glimmet move. Runtime playtesting remains required before the target is observed.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Glimmet | 31 (cap +1) | Shuca Berry | Toxic Debris | protected attacker | Stealth Rock, Sludge Wave, Power Gem, Protect |
+| 2 | Skarmory | 32 (cap +2) | Red Card | Sturdy | disruption and support | Spikes, Whirlwind, Body Press, Roost |
+| 3 | Gholdengo | 33 (cap +3) | Air Balloon | Good As Gold | coverage attacker | Make It Rain, Shadow Ball, Thunderbolt, Recover |
+| 4 | Guzzlord | 34 (cap +4) | Assault Vest | Beast Boost | rare centerpiece | Dragon Tail, Knock Off, Heavy Slam, Stomping Tantrum |
+
+## 116. Shawn — Mauville City Gym
+
+**Optional · Single · Cap 30 · Extreme 92/100 · Uniqueness 84/100**
+
+**Theme:** underused normal mixture
+
+Shawn uses level-31 Sitrus Cheek Pouch Greedent with Stuff Cheeks, Body Press, Seed Bomb, and Protect; level-32 Petaya Cheek Pouch Dedenne with Parabolic Charge, Dazzling Gleam, Nuzzle, and Protect; level-33 Liechi Gluttony Simisage with Seed Bomb, Knock Off, Rock Slide, and Protect; and split-only level-34 Petaya Gluttony Swalot with Belch, Sludge Bomb, Giga Drain, and Ice Beam. Angelo's ability-slot-1 Symbiosis collection is level-31 Life Orb Eternal Flower Floette with Light of Ruin, Dazzling Gleam, Psychic, and Protect; level-32 Expert Belt Orange Florges with Moonblast, Psychic, Energy Ball, and Protect; level-33 Leftovers White Floette with Moonblast, Giga Drain, Energy Ball, and Protect; and split-only level-34 Wise Glasses Blue Florges with Calm Mind, Moonblast, Psychic, and Synthesis. No weather, terrain, room, redirection, trap, Mega, or Primal is used. Simisage, Swalot, and all four exact flower forms are new to the 66 closed encounters. Greedent returns from B40 after twenty-seven battles as proactive Stuff Cheeks item relay rather than direct hunger offense; Dedenne returns from B12 after fifty-five battles as Cheek Pouch threshold control rather than a display piece. Greedent and Dedenne have never appeared together, the rejected Greedent/Linoone pair avoids recreating B40's roster module, and Farigiraf remains reserved for Wattson's priority-denial boss identity.
+
+**How it behaves:** Both records use foe-aware, smart-switching, partner-helping, and HP-aware scoring while remaining singles in trainer data; Shawn additionally uses first-turn setup and combo scoring. A reusable non-forcing rule moderately rewards Stuff Cheeks only when Greedent still holds a Berry and a live Symbiosis partner holds a transferable item. Cheek Pouch, Gluttony, berry thresholds, and Symbiosis transfers are automatic engine events. The earlier Unburden draft was rejected because receiving the passed item explicitly clears Unburden in this engine.
+
+**Why it is hard:** 4 fully authored Pokémon, average BST 489.0, average cap offset +2.5, ace offset +4, and 100% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Jaiden (17% species overlap). Its species appear across an average of 3.2 unrelated trainer families.
+
+**Counterplay:** Unnerve, Knock Off, Trick, Corrosive Gas, Magic Room, Embargo, Taunt or Encore into Stuff Cheeks, burst focus, Heal Block, and donor focus disrupt item economy. Fighting pressures Greedent, Ground pressures Dedenne, Fire, Ice, Poison, Flying, Bug, Steel, or Fairy pressures Simisage, Psychic/Ground pressures Swalot, and Steel/Poison plus strong physical attacks pressure the flower collection. Protect and target-order play can deliberately delay the first consumption until the intended donor is gone.
+
+**Strongest part:** The mechanic survives arbitrary joint knockout order because every passed item is generally useful, while both split singles retain coherent berry and flower identities.
+
+**Weakest link:** Steel or Poison offense compresses Angelo's visually related split, and burst item control can erase the relay before it starts. Those are intentional broad answers; Simisage or the level-34 closers are the first tuning knobs.
+
+**Manual closure:** Battle 67 is source-closed at editorial 9.2/10: one native 3+3 item-relay double plus two safe four-member singles at legal levels 31-34, six fresh exact species/forms plus two earned repeats, one truthful Symbiosis/Cheek Pouch/Gluttony rule, four corpus donors, exact presentation-independent geometry, native-width dialogue, explicit rejection of false Unburden synergy, author self-check, and no forced transfer. Runtime playtesting remains required before the target is observed.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Greedent | 31 (cap +1) | Sitrus Berry | Cheek Pouch | protected attacker | Stuff Cheeks, Body Press, Seed Bomb, Protect |
+| 2 | Dedenne | 32 (cap +2) | Petaya Berry | Cheek Pouch | speed control | Parabolic Charge, Dazzling Gleam, Nuzzle, Protect |
+| 3 | Simisage | 33 (cap +3) | Liechi Berry | Gluttony | protected attacker | Seed Bomb, Knock Off, Rock Slide, Protect |
+| 4 | Swalot | 34 (cap +4) | Petaya Berry | Gluttony | coverage attacker | Belch, Sludge Bomb, Giga Drain, Ice Beam |
+
+## 117. Angelo — Mauville City Gym
+
+**Optional · Single · Cap 30 · Extreme 92/100 · Uniqueness 98/100**
+
+**Theme:** Fairy pressure
+
+Shawn uses level-31 Sitrus Cheek Pouch Greedent with Stuff Cheeks, Body Press, Seed Bomb, and Protect; level-32 Petaya Cheek Pouch Dedenne with Parabolic Charge, Dazzling Gleam, Nuzzle, and Protect; level-33 Liechi Gluttony Simisage with Seed Bomb, Knock Off, Rock Slide, and Protect; and split-only level-34 Petaya Gluttony Swalot with Belch, Sludge Bomb, Giga Drain, and Ice Beam. Angelo's ability-slot-1 Symbiosis collection is level-31 Life Orb Eternal Flower Floette with Light of Ruin, Dazzling Gleam, Psychic, and Protect; level-32 Expert Belt Orange Florges with Moonblast, Psychic, Energy Ball, and Protect; level-33 Leftovers White Floette with Moonblast, Giga Drain, Energy Ball, and Protect; and split-only level-34 Wise Glasses Blue Florges with Calm Mind, Moonblast, Psychic, and Synthesis. No weather, terrain, room, redirection, trap, Mega, or Primal is used. Simisage, Swalot, and all four exact flower forms are new to the 66 closed encounters. Greedent returns from B40 after twenty-seven battles as proactive Stuff Cheeks item relay rather than direct hunger offense; Dedenne returns from B12 after fifty-five battles as Cheek Pouch threshold control rather than a display piece. Greedent and Dedenne have never appeared together, the rejected Greedent/Linoone pair avoids recreating B40's roster module, and Farigiraf remains reserved for Wattson's priority-denial boss identity.
+
+**How it behaves:** Both records use foe-aware, smart-switching, partner-helping, and HP-aware scoring while remaining singles in trainer data; Shawn additionally uses first-turn setup and combo scoring. A reusable non-forcing rule moderately rewards Stuff Cheeks only when Greedent still holds a Berry and a live Symbiosis partner holds a transferable item. Cheek Pouch, Gluttony, berry thresholds, and Symbiosis transfers are automatic engine events. The earlier Unburden draft was rejected because receiving the passed item explicitly clears Unburden in this engine.
+
+**Why it is hard:** 4 fully authored Pokémon, average BST 506.5, average cap offset +2.5, ace offset +4, and 100% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: none (0% species overlap). Its species appear across an average of 1.0 unrelated trainer families.
+
+**Counterplay:** Unnerve, Knock Off, Trick, Corrosive Gas, Magic Room, Embargo, Taunt or Encore into Stuff Cheeks, burst focus, Heal Block, and donor focus disrupt item economy. Fighting pressures Greedent, Ground pressures Dedenne, Fire, Ice, Poison, Flying, Bug, Steel, or Fairy pressures Simisage, Psychic/Ground pressures Swalot, and Steel/Poison plus strong physical attacks pressure the flower collection. Protect and target-order play can deliberately delay the first consumption until the intended donor is gone.
+
+**Strongest part:** The mechanic survives arbitrary joint knockout order because every passed item is generally useful, while both split singles retain coherent berry and flower identities.
+
+**Weakest link:** Steel or Poison offense compresses Angelo's visually related split, and burst item control can erase the relay before it starts. Those are intentional broad answers; Simisage or the level-34 closers are the first tuning knobs.
+
+**Manual closure:** Battle 67 is source-closed at editorial 9.2/10: one native 3+3 item-relay double plus two safe four-member singles at legal levels 31-34, six fresh exact species/forms plus two earned repeats, one truthful Symbiosis/Cheek Pouch/Gluttony rule, four corpus donors, exact presentation-independent geometry, native-width dialogue, explicit rejection of false Unburden synergy, author self-check, and no forced transfer. Runtime playtesting remains required before the target is observed.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Floette Eternal Flower | 31 (cap +1) | Life Orb | Symbiosis | protected attacker | Light Of Ruin, Dazzling Gleam, Psychic, Protect |
+| 2 | Florges Orange Flower | 32 (cap +2) | Expert Belt | Symbiosis | protected attacker | Moonblast, Psychic, Energy Ball, Protect |
+| 3 | Floette White Flower | 33 (cap +3) | Leftovers | Symbiosis | protected attacker | Moonblast, Giga Drain, Energy Ball, Protect |
+| 4 | Florges Blue Flower | 34 (cap +4) | Wise Glasses | Symbiosis | setup attacker | Calm Mind, Moonblast, Psychic, Synthesis |
+
+## 118. Wattson — Mauville City Gym
 
 **Required · Double · Cap 30 · Extreme 100/100 · Uniqueness 91/100**
 
@@ -2952,151 +3097,6 @@ Level-32 Terrain Extender Electric Surge Tapu Koko uses Wild Charge, Nature's Ma
 | 4 | Farigiraf | 33 (cap +3) | Sitrus Berry | Armor Tail | speed control | Twin Beam, Icy Wind, Light Screen, Protect |
 | 5 | Porygon2 | 34 (cap +4) | Eviolite | Download | speed control | Trick Room, Tri Attack, Ice Beam, Recover |
 | 6 | Raichu | 35 (cap +5) | Raichunite Y | Static | Mega ace | Thunder, Focus Blast, Grass Knot, Protect |
-
-## 114. Kirk — Mauville City Gym
-
-**Optional · Single · Cap 30 · Extreme 93/100 · Uniqueness 79/100**
-
-**Theme:** Ghost pressure + sound offense
-
-Vivian uses level-31 Focus Sash Soundproof Mr. Mime with Fake Out, Psychic, Dazzling Gleam, and Encore; level-32 Eviolite Soundproof Loudred with Hyper Voice, Flamethrower, Ice Beam, and Shadow Ball; level-33 Shuca Soundproof Bastiodon with Metal Burst, Flash Cannon, Rock Slide, and Protect; and split-only level-34 Flame Orb Flare Boost Pumpkaboo with Shadow Ball, Giga Drain, Mystical Fire, and Protect. Kirk uses level-32 Throat Spray Punk Rock Toxtricity with Boomburst, Overdrive, Sludge Bomb, and Protect; level-32 Wise Glasses Pixilate Mismagius with Hyper Voice, Power Gem, Mystical Fire, and Protect; level-33 Expert Belt Iron Fist Golett with Stomping Tantrum, Ice Punch, Drain Punch, and Shadow Punch; and split-only level-34 Life Orb Levitate Gengar with Shadow Ball, Sludge Bomb, Focus Blast, and Thunderbolt. No weather, terrain, room, setup pass, trap, Mega, or Primal is used. All eight exact species are new to the 64 closed encounters. This is the first branch-invariant Boomburst immunity board. B49's Round chorus was about action order and repeated singing sixteen battles earlier; B65 is about full-board ally immunity, has no Round, redirection, healing chorus, or shared roster, and is naturally owned by Kirk's guitarist setting.
-
-**How it behaves:** Both records use foe-aware, smart-switching, partner-helping, and HP-aware scoring while remaining singles in their trainer data. The field engine independently creates the joint double. The reusable friendly-fire scorer now recognizes Soundproof sound immunity and ordinary type immunity before estimating ally damage, so safe Boomburst is neither forced nor falsely penalized. Native logic handles Fake Out, Encore, Throat Spray, Punk Rock, Pixilate, Protect, Metal Burst, items, and matchup-aware switches.
-
-**Why it is hard:** 4 fully authored Pokémon, average BST 453.8, average cap offset +2.75, ace offset +4, and 100% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Tammy (20% species overlap). Its species appear across an average of 5.0 unrelated trainer families.
-
-**Counterplay:** Ground, priority, Fake Out, Taunt, Encore, Disable, focus fire, or item removal controls Toxtricity. Ghost typing, Soundproof, Wide Guard, Protect, Snarl, Light Screen, special walls, and recovery blunt Boomburst. Steel, Poison, Dark, Ghost, Fire, Ice, Water, Fighting, or Ground pressure applies by slot, while hazards and smart switching punish the split singles' fragile closers.
-
-**Strongest part:** One visible acoustic rule is mathematically true in every source slice and does not require a forced move, while the safe split singles ask different questions.
-
-**Weakest link:** A prepared Ghost, Soundproof user, Wide Guard, or strong Ground attack compresses Kirk's centerpiece. That broad answer is intentional; Toxtricity from +2 to +1 is the first runtime tuning knob.
-
-**Manual closure:** Battle 65 is source-closed at editorial 9.3/10: one native 3+3 joint double plus two safe four-member singles at legal levels 31-34, eight fresh species, one branch-invariant sound rule, five full-set donors, exact geometry and one-usable behavior, reusable Soundproof/type-immunity AI truth, native-width dialogue, author self-check, and no unsupported moves or forced AI. Runtime playtesting remains required before the target is observed.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Toxtricity | 32 (cap +2) | Throat Spray | Punk Rock | protected attacker | Boomburst, Overdrive, Sludge Bomb, Protect |
-| 2 | Mismagius | 32 (cap +2) | Wise Glasses | Pixilate | protected attacker | Hyper Voice, Power Gem, Mystical Fire, Protect |
-| 3 | Golett | 33 (cap +3) | Expert Belt | Iron Fist | coverage attacker | Stomping Tantrum, Ice Punch, Drain Punch, Shadow Punch |
-| 4 | Gengar | 34 (cap +4) | Life Orb | Levitate | coverage attacker | Shadow Ball, Sludge Bomb, Focus Blast, Thunderbolt |
-
-## 115. Shawn — Mauville City Gym
-
-**Optional · Single · Cap 30 · Extreme 92/100 · Uniqueness 84/100**
-
-**Theme:** underused normal mixture
-
-Shawn uses level-31 Sitrus Cheek Pouch Greedent with Stuff Cheeks, Body Press, Seed Bomb, and Protect; level-32 Petaya Cheek Pouch Dedenne with Parabolic Charge, Dazzling Gleam, Nuzzle, and Protect; level-33 Liechi Gluttony Simisage with Seed Bomb, Knock Off, Rock Slide, and Protect; and split-only level-34 Petaya Gluttony Swalot with Belch, Sludge Bomb, Giga Drain, and Ice Beam. Angelo's ability-slot-1 Symbiosis collection is level-31 Life Orb Eternal Flower Floette with Light of Ruin, Dazzling Gleam, Psychic, and Protect; level-32 Expert Belt Orange Florges with Moonblast, Psychic, Energy Ball, and Protect; level-33 Leftovers White Floette with Moonblast, Giga Drain, Energy Ball, and Protect; and split-only level-34 Wise Glasses Blue Florges with Calm Mind, Moonblast, Psychic, and Synthesis. No weather, terrain, room, redirection, trap, Mega, or Primal is used. Simisage, Swalot, and all four exact flower forms are new to the 66 closed encounters. Greedent returns from B40 after twenty-seven battles as proactive Stuff Cheeks item relay rather than direct hunger offense; Dedenne returns from B12 after fifty-five battles as Cheek Pouch threshold control rather than a display piece. Greedent and Dedenne have never appeared together, the rejected Greedent/Linoone pair avoids recreating B40's roster module, and Farigiraf remains reserved for Wattson's priority-denial boss identity.
-
-**How it behaves:** Both records use foe-aware, smart-switching, partner-helping, and HP-aware scoring while remaining singles in trainer data; Shawn additionally uses first-turn setup and combo scoring. A reusable non-forcing rule moderately rewards Stuff Cheeks only when Greedent still holds a Berry and a live Symbiosis partner holds a transferable item. Cheek Pouch, Gluttony, berry thresholds, and Symbiosis transfers are automatic engine events. The earlier Unburden draft was rejected because receiving the passed item explicitly clears Unburden in this engine.
-
-**Why it is hard:** 4 fully authored Pokémon, average BST 489.0, average cap offset +2.5, ace offset +4, and 100% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Jaiden (17% species overlap). Its species appear across an average of 3.2 unrelated trainer families.
-
-**Counterplay:** Unnerve, Knock Off, Trick, Corrosive Gas, Magic Room, Embargo, Taunt or Encore into Stuff Cheeks, burst focus, Heal Block, and donor focus disrupt item economy. Fighting pressures Greedent, Ground pressures Dedenne, Fire, Ice, Poison, Flying, Bug, Steel, or Fairy pressures Simisage, Psychic/Ground pressures Swalot, and Steel/Poison plus strong physical attacks pressure the flower collection. Protect and target-order play can deliberately delay the first consumption until the intended donor is gone.
-
-**Strongest part:** The mechanic survives arbitrary joint knockout order because every passed item is generally useful, while both split singles retain coherent berry and flower identities.
-
-**Weakest link:** Steel or Poison offense compresses Angelo's visually related split, and burst item control can erase the relay before it starts. Those are intentional broad answers; Simisage or the level-34 closers are the first tuning knobs.
-
-**Manual closure:** Battle 67 is source-closed at editorial 9.2/10: one native 3+3 item-relay double plus two safe four-member singles at legal levels 31-34, six fresh exact species/forms plus two earned repeats, one truthful Symbiosis/Cheek Pouch/Gluttony rule, four corpus donors, exact presentation-independent geometry, native-width dialogue, explicit rejection of false Unburden synergy, author self-check, and no forced transfer. Runtime playtesting remains required before the target is observed.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Greedent | 31 (cap +1) | Sitrus Berry | Cheek Pouch | protected attacker | Stuff Cheeks, Body Press, Seed Bomb, Protect |
-| 2 | Dedenne | 32 (cap +2) | Petaya Berry | Cheek Pouch | speed control | Parabolic Charge, Dazzling Gleam, Nuzzle, Protect |
-| 3 | Simisage | 33 (cap +3) | Liechi Berry | Gluttony | protected attacker | Seed Bomb, Knock Off, Rock Slide, Protect |
-| 4 | Swalot | 34 (cap +4) | Petaya Berry | Gluttony | coverage attacker | Belch, Sludge Bomb, Giga Drain, Ice Beam |
-
-## 116. Ben — Mauville City Gym
-
-**Optional · Double · Cap 30 · Extreme 93/100 · Uniqueness 86/100**
-
-**Theme:** hazard stack
-
-Level-31 Shuca Toxic Debris Glimmet uses Stealth Rock, Sludge Wave, Power Gem, and Protect. Level-32 Red Card Sturdy Skarmory uses Spikes, Whirlwind, Body Press, and Roost. Level-33 Air Balloon Good as Gold Gholdengo uses Make It Rain, Shadow Ball, Thunderbolt, and Recover. Level-34 Assault Vest Beast Boost Guzzlord uses Dragon Tail, Knock Off, Heavy Slam, and Stomping Tantrum. The team has no speed field, trap ability, setup sweeper, weather, terrain, room, Mega, or Primal. Skarmory, Gholdengo, and Guzzlord are new to the 65 closed encounters. Glimmet returns from B16 after fifty battles: there it was a young Guard Split geology drill member; here its contact-triggered Toxic Debris is the literal switch-maze seed. Guzzlord is an unplaced Ultra Beast and Gholdengo is the first fixed endpoint showcase.
-
-**How it behaves:** Ben uses foe-aware, smart-switching, partner-helping, HP-aware, first-battle-turn setup, and combo scoring. Native logic avoids duplicate hazard layers and rewards first-turn hazards. A reusable combo rule gives moderate non-forcing value to Roar/Whirlwind/Dragon Tail only when opposing reserves and hazards exist, or when the partner visibly prepares hazards; hazard moves receive a small bonus when a partner can phaze. Good as Gold, Ghost removal immunity, Red Card, Toxic Debris, Sturdy, recovery, Assault Vest, and collateral remain native. No target, layer, phaze, switch, or reserve is forced.
-
-**Why it is hard:** 4 fully authored Pokémon, average BST 483.8, average cap offset +2.5, ace offset +4, and 100% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Coby (20% species overlap). Its species appear across an average of 2.8 unrelated trainer families.
-
-**Counterplay:** Taunt, Encore, Fake Out, Magic Bounce, immediate spread or special pressure, multihit Sturdy breaking, Knock Off, Trick, or Magic Room stops the lead maze. Poison types absorb Toxic Spikes; Flying and Steel types ignore them; Heavy-Duty Boots ignore entry damage. Remove or bypass Gholdengo, then use Defog, Rapid Spin, or Mortal Spin through the other target. Substitute, Protect, Fairy immunity to Dragon Tail, Suction Cups, Ingrain, or direct Guzzlord pressure blocks phazing. Fire and Electric punish Skarmory; Ground, Fire, Dark, or Ghost punish Gholdengo; Fairy deletes Guzzlord.
-
-**Strongest part:** Wattson's physical switch puzzle becomes the battle rule, and each reserve changes how the player must dismantle it rather than merely adding another hazard layer.
-
-**Weakest link:** Fast special offense can remove the passive leads before the maze exists. That is intentional fair counterplay; Guzzlord from +4 to +3 is the first runtime tuning knob.
-
-**Manual closure:** Battle 66 is source-closed at editorial 9.3/10: one guarded four-member double at legal levels 31-34, a source-backed hazard maze, three fresh species plus one fifty-battle repeat, one Ultra Beast and one Gen 9 endpoint, four full-team donors, exact puzzle-route reachability, reusable phazing AI, native-width dialogue, author self-check, and no unsupported Glimmet move. Runtime playtesting remains required before the target is observed.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Glimmet | 31 (cap +1) | Shuca Berry | Toxic Debris | protected attacker | Stealth Rock, Sludge Wave, Power Gem, Protect |
-| 2 | Skarmory | 32 (cap +2) | Red Card | Sturdy | disruption and support | Spikes, Whirlwind, Body Press, Roost |
-| 3 | Gholdengo | 33 (cap +3) | Air Balloon | Good As Gold | coverage attacker | Make It Rain, Shadow Ball, Thunderbolt, Recover |
-| 4 | Guzzlord | 34 (cap +4) | Assault Vest | Beast Boost | rare centerpiece | Dragon Tail, Knock Off, Heavy Slam, Stomping Tantrum |
-
-## 117. Vivian — Mauville City Gym
-
-**Optional · Single · Cap 30 · Extreme 93/100 · Uniqueness 85/100**
-
-**Theme:** underused fairy mixture
-
-Vivian uses level-31 Focus Sash Soundproof Mr. Mime with Fake Out, Psychic, Dazzling Gleam, and Encore; level-32 Eviolite Soundproof Loudred with Hyper Voice, Flamethrower, Ice Beam, and Shadow Ball; level-33 Shuca Soundproof Bastiodon with Metal Burst, Flash Cannon, Rock Slide, and Protect; and split-only level-34 Flame Orb Flare Boost Pumpkaboo with Shadow Ball, Giga Drain, Mystical Fire, and Protect. Kirk uses level-32 Throat Spray Punk Rock Toxtricity with Boomburst, Overdrive, Sludge Bomb, and Protect; level-32 Wise Glasses Pixilate Mismagius with Hyper Voice, Power Gem, Mystical Fire, and Protect; level-33 Expert Belt Iron Fist Golett with Stomping Tantrum, Ice Punch, Drain Punch, and Shadow Punch; and split-only level-34 Life Orb Levitate Gengar with Shadow Ball, Sludge Bomb, Focus Blast, and Thunderbolt. No weather, terrain, room, setup pass, trap, Mega, or Primal is used. All eight exact species are new to the 64 closed encounters. This is the first branch-invariant Boomburst immunity board. B49's Round chorus was about action order and repeated singing sixteen battles earlier; B65 is about full-board ally immunity, has no Round, redirection, healing chorus, or shared roster, and is naturally owned by Kirk's guitarist setting.
-
-**How it behaves:** Both records use foe-aware, smart-switching, partner-helping, and HP-aware scoring while remaining singles in their trainer data. The field engine independently creates the joint double. The reusable friendly-fire scorer now recognizes Soundproof sound immunity and ordinary type immunity before estimating ally damage, so safe Boomburst is neither forced nor falsely penalized. Native logic handles Fake Out, Encore, Throat Spray, Punk Rock, Pixilate, Protect, Metal Burst, items, and matchup-aware switches.
-
-**Why it is hard:** 4 fully authored Pokémon, average BST 422.5, average cap offset +2.5, ace offset +4, and 100% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Dusty (17% species overlap). Its species appear across an average of 2.8 unrelated trainer families.
-
-**Counterplay:** Ground, priority, Fake Out, Taunt, Encore, Disable, focus fire, or item removal controls Toxtricity. Ghost typing, Soundproof, Wide Guard, Protect, Snarl, Light Screen, special walls, and recovery blunt Boomburst. Steel, Poison, Dark, Ghost, Fire, Ice, Water, Fighting, or Ground pressure applies by slot, while hazards and smart switching punish the split singles' fragile closers.
-
-**Strongest part:** One visible acoustic rule is mathematically true in every source slice and does not require a forced move, while the safe split singles ask different questions.
-
-**Weakest link:** A prepared Ghost, Soundproof user, Wide Guard, or strong Ground attack compresses Kirk's centerpiece. That broad answer is intentional; Toxtricity from +2 to +1 is the first runtime tuning knob.
-
-**Manual closure:** Battle 65 is source-closed at editorial 9.3/10: one native 3+3 joint double plus two safe four-member singles at legal levels 31-34, eight fresh species, one branch-invariant sound rule, five full-set donors, exact geometry and one-usable behavior, reusable Soundproof/type-immunity AI truth, native-width dialogue, author self-check, and no unsupported moves or forced AI. Runtime playtesting remains required before the target is observed.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Mr Mime | 31 (cap +1) | Focus Sash | Soundproof | coverage attacker | Fake Out, Psychic, Dazzling Gleam, Encore |
-| 2 | Loudred | 32 (cap +2) | Eviolite | Soundproof | coverage attacker | Hyper Voice, Flamethrower, Ice Beam, Shadow Ball |
-| 3 | Bastiodon | 33 (cap +3) | Shuca Berry | Soundproof | protected attacker | Metal Burst, Flash Cannon, Rock Slide, Protect |
-| 4 | Pumpkaboo | 34 (cap +4) | Flame Orb | Flare Boost | protected attacker | Shadow Ball, Giga Drain, Mystical Fire, Protect |
-
-## 118. Angelo — Mauville City Gym
-
-**Optional · Single · Cap 30 · Extreme 92/100 · Uniqueness 98/100**
-
-**Theme:** Fairy pressure
-
-Shawn uses level-31 Sitrus Cheek Pouch Greedent with Stuff Cheeks, Body Press, Seed Bomb, and Protect; level-32 Petaya Cheek Pouch Dedenne with Parabolic Charge, Dazzling Gleam, Nuzzle, and Protect; level-33 Liechi Gluttony Simisage with Seed Bomb, Knock Off, Rock Slide, and Protect; and split-only level-34 Petaya Gluttony Swalot with Belch, Sludge Bomb, Giga Drain, and Ice Beam. Angelo's ability-slot-1 Symbiosis collection is level-31 Life Orb Eternal Flower Floette with Light of Ruin, Dazzling Gleam, Psychic, and Protect; level-32 Expert Belt Orange Florges with Moonblast, Psychic, Energy Ball, and Protect; level-33 Leftovers White Floette with Moonblast, Giga Drain, Energy Ball, and Protect; and split-only level-34 Wise Glasses Blue Florges with Calm Mind, Moonblast, Psychic, and Synthesis. No weather, terrain, room, redirection, trap, Mega, or Primal is used. Simisage, Swalot, and all four exact flower forms are new to the 66 closed encounters. Greedent returns from B40 after twenty-seven battles as proactive Stuff Cheeks item relay rather than direct hunger offense; Dedenne returns from B12 after fifty-five battles as Cheek Pouch threshold control rather than a display piece. Greedent and Dedenne have never appeared together, the rejected Greedent/Linoone pair avoids recreating B40's roster module, and Farigiraf remains reserved for Wattson's priority-denial boss identity.
-
-**How it behaves:** Both records use foe-aware, smart-switching, partner-helping, and HP-aware scoring while remaining singles in trainer data; Shawn additionally uses first-turn setup and combo scoring. A reusable non-forcing rule moderately rewards Stuff Cheeks only when Greedent still holds a Berry and a live Symbiosis partner holds a transferable item. Cheek Pouch, Gluttony, berry thresholds, and Symbiosis transfers are automatic engine events. The earlier Unburden draft was rejected because receiving the passed item explicitly clears Unburden in this engine.
-
-**Why it is hard:** 4 fully authored Pokémon, average BST 506.5, average cap offset +2.5, ace offset +4, and 100% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: none (0% species overlap). Its species appear across an average of 1.0 unrelated trainer families.
-
-**Counterplay:** Unnerve, Knock Off, Trick, Corrosive Gas, Magic Room, Embargo, Taunt or Encore into Stuff Cheeks, burst focus, Heal Block, and donor focus disrupt item economy. Fighting pressures Greedent, Ground pressures Dedenne, Fire, Ice, Poison, Flying, Bug, Steel, or Fairy pressures Simisage, Psychic/Ground pressures Swalot, and Steel/Poison plus strong physical attacks pressure the flower collection. Protect and target-order play can deliberately delay the first consumption until the intended donor is gone.
-
-**Strongest part:** The mechanic survives arbitrary joint knockout order because every passed item is generally useful, while both split singles retain coherent berry and flower identities.
-
-**Weakest link:** Steel or Poison offense compresses Angelo's visually related split, and burst item control can erase the relay before it starts. Those are intentional broad answers; Simisage or the level-34 closers are the first tuning knobs.
-
-**Manual closure:** Battle 67 is source-closed at editorial 9.2/10: one native 3+3 item-relay double plus two safe four-member singles at legal levels 31-34, six fresh exact species/forms plus two earned repeats, one truthful Symbiosis/Cheek Pouch/Gluttony rule, four corpus donors, exact presentation-independent geometry, native-width dialogue, explicit rejection of false Unburden synergy, author self-check, and no forced transfer. Runtime playtesting remains required before the target is observed.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Floette Eternal Flower | 31 (cap +1) | Life Orb | Symbiosis | protected attacker | Light Of Ruin, Dazzling Gleam, Psychic, Protect |
-| 2 | Florges Orange Flower | 32 (cap +2) | Expert Belt | Symbiosis | protected attacker | Moonblast, Psychic, Energy Ball, Protect |
-| 3 | Floette White Flower | 33 (cap +3) | Leftovers | Symbiosis | protected attacker | Moonblast, Giga Drain, Energy Ball, Protect |
-| 4 | Florges Blue Flower | 34 (cap +4) | Wise Glasses | Symbiosis | setup attacker | Calm Mind, Moonblast, Psychic, Synthesis |
 
 # Trick House puzzle 6
 
@@ -4683,7 +4683,7 @@ Hariyama and Medicham are the authored opening pair. The board plan is fighting 
 
 **Why it is hard:** 4 fully authored Pokémon, average BST 484.2, average cap offset -2.0, ace offset -2, and 100% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Brawly (43% species overlap). Its species appear across an average of 7.5 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Brawly (43% species overlap). Its species appear across an average of 7.8 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -5272,7 +5272,36 @@ Heatmor and Lampent are the authored opening pair. The board plan is fire pressu
 | 3 | Nidoqueen | 40 (cap +0) | Life Orb | Sheer Force | protected attacker | Earth Power, Fire Blast, Ice Beam, Protect |
 | 4 | Incineroar | 40 (cap +0) | Sitrus Berry | Intimidate | coverage attacker | Parting Shot, Fake Out, Flare Blitz, Rock Slide |
 
-## 215. Isaac — Route 117
+## 215. Anna & Meg — Route 117
+
+**Optional · Double · Cap 40 · Extreme 90/100 · Uniqueness 76/100**
+
+**Theme:** Beat Up + Stamina + ability inheritance relay
+
+Level-41 Roseli Receiver Passimian uses Beat Up, Close Combat, Knock Off, and Protect. Level-42 Leftovers Stamina Mudsdale uses High Horsepower, Body Press, Heavy Slam, and Rock Slide with an Impish physical-wall spread and no Protect that can conflict with allied Beat Up. Level-42 Black Sludge Power of Alchemy Alolan Muk uses Gunk Shot, Knock Off, Snarl, and Protect. Level-43 Expert Belt Pure Power Medicham uses Feint, Zen Headbutt, Drain Punch, and Ice Punch. There is no weather, terrain, room, Tailwind, screen, hazard, redirection, Mega, Primal, legendary, or battle-Bag item. Passimian, Alolan Muk, and Medicham are fresh exact species across Battles 1-68. Mudsdale returns twenty-four battles after B45's Tailwind riding-school attacker as a no-speed defensive Body Press recipient. Beat Up returns fourteen battles after B55's Justified Attack snowball, but here each hit raises Defense and powers Body Press before knockout order can unlock one or two conditional inheritance branches. Wally's immediate Sash Weavile and the rolling Assault Vest repetition are both removed.
+
+**How it behaves:** Anna and Meg retain foe-aware, partner-helping, and combo-setup doubles scoring. A reusable non-forcing rule rewards Beat Up targeting a living Stamina partner only when Defense can rise, the partner knows Body Press, and a conservative full-party, worst-critical damage bound cannot faint it; the same exact safety repair now protects existing Justified combos. Forced replacements remain the engine's native matchup-ranked choices rather than pretending party order is guaranteed. Receiver and Power of Alchemy are automatic engine events and copy only allowed current abilities; no sacrifice, switch, target, reserve, or ordinary move is forced.
+
+**Why it is hard:** 4 fully authored Pokémon, average BST 475.0, average cap offset +2.0, ace offset +3, and 100% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Helene (20% species overlap). Its species appear across an average of 6.5 unrelated trainer families.
+
+**Counterplay:** Fake Out, flinching, sleep, paralysis, Encore, Taunt into Protect, redirection or direct focus can deny Passimian's activation; Water, Grass, Ice, strong special moves, Haze, Clear Smog, Unaware, phazing, or critical hits answer Mudsdale. Burn, Intimidate, Reflect, Charm, physical walls, and contact punishment compress the whole damage axis. Ground and Psychic pressure Alolan Muk; Ghost, Flying, Fairy, and faster offense pressure Medicham. Targeting both leads together can force a simultaneous replacement and erase the inheritance handoff.
+
+**Strongest part:** The fixed opening is readable, but the aftermath is honestly adaptive: Mudsdale-first yields Receiver, native matchup selection chooses the first reserve, and an active Muk can create a second inheritance branch while simultaneous KOs skip the opening transfer.
+
+**Weakest link:** Fast special Water or Grass pressure can remove Mudsdale before the lesson becomes dangerous, and not every native reserve choice creates an inheritance phase. Those are intentional broad answers and honest engine variance; Medicham from +3 to +2 is the first runtime tuning knob if the adaptive endgame is too punishing.
+
+**Manual closure:** Battle 69 is source-closed at editorial 10/10 and target difficulty 9.0: one Badge-3-gated shared-avatar four-member double at legal levels 41-43, a readable Beat Up-Stamina-Body Press lead, truthful native matchup-selected reserves with conditional Receiver and Power of Alchemy branches, conservative full-party Beat Up safety, three fresh exact species plus one earned repeat, four distinct non-warning items, five corpus references, broad special and status counterplay, native-width dialogue, author self-check, and no reserved field mode, Mega, or legendary. Runtime playtesting remains required before the target is observed.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Passimian | 41 (cap +1) | Roseli Berry | Receiver | protected attacker | Beat Up, Close Combat, Knock Off, Protect |
+| 2 | Mudsdale | 42 (cap +2) | Leftovers | Stamina | coverage attacker | High Horsepower, Body Press, Heavy Slam, Rock Slide |
+| 3 | Muk (Alolan) | 42 (cap +2) | Black Sludge | Power Of Alchemy | protected attacker | Gunk Shot, Knock Off, Snarl, Protect |
+| 4 | Medicham | 43 (cap +3) | Expert Belt | Pure Power | coverage attacker | Feint, Zen Headbutt, Drain Punch, Ice Punch |
+
+## 216. Isaac — Route 117
 
 **Optional · Double · Cap 40 · Demanding 49/100 · Uniqueness 91/100**
 
@@ -5297,31 +5326,6 @@ Bonsly and Eevee are the authored opening pair. The board plan is tailwind. The 
 | 5 | Deino | 35 (cap -5) | None | Hustle | coverage attacker | Dark Pulse, Earth Power, Dragon Pulse, Slam |
 | 6 | Tangela | 35 (cap -5) | None | Chlorophyll | disruption and support | Sleep Powder, Wake Up Slap, Giga Drain, Amnesia |
 
-## 216. Lydia — Route 117
-
-**Optional · Double · Cap 40 · Demanding 47/100 · Uniqueness 88/100**
-
-**Theme:** Fake Out tempo + priority pressure
-
-Froakie and Elekid are the authored opening pair. The board plan is fake out tempo + priority pressure. The composition turns the route's grassland, roadside cover, and open speed lanes into the fight's identity instead of using a generic route-trainer core.
-
-**How it behaves:** The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe, Smart Switching. Expect it to preserve fake out tempo, priority pressure rather than select six unrelated strong attacks.
-
-**Why it is hard:** 6 fully authored Pokémon, average BST 310.7, average cap offset -5.0, ace offset -5, and 0% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Marcos (14% species overlap). Its species appear across an average of 1.8 unrelated trainer families.
-
-**Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Froakie | 35 (cap -5) | None | Torrent | disruption and support | Bubble Beam, Smack Down, Toxic Spikes, Camouflage |
-| 2 | Elekid | 35 (cap -5) | None | Static | coverage attacker | Thunder Punch, Fire Punch, Cross Chop, Ice Punch |
-| 3 | Magby | 35 (cap -5) | None | Flame Body | coverage attacker | Thunder Punch, Fire Punch, Cross Chop, Mach Punch |
-| 4 | Smoochum | 35 (cap -5) | None | Oblivious | setup attacker | Fake Out, Nasty Plot, Miracle Eye, Psyshock |
-| 5 | Happiny | 35 (cap -5) | None | Natural Cure | disruption and support | Seismic Toss, Aromatherapy, Counter, Soft Boiled |
-| 6 | Dratini | 35 (cap -5) | None | Shed Skin | coverage attacker | Extreme Speed, Aqua Jet, Iron Tail, Dragon Rush |
-
 ## 217. Dylan — Route 117
 
 **Optional · Double · Cap 40 · Demanding 46/100 · Uniqueness 82/100**
@@ -5334,7 +5338,7 @@ Yanma and Doduo are the authored opening pair. The board plan is flying pressure
 
 **Why it is hard:** 4 fully authored Pokémon, average BST 413.8, average cap offset -1.75, ace offset -1, and 50% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Coby (20% species overlap). Its species appear across an average of 3.2 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Coby (20% species overlap). Its species appear across an average of 3.5 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -5389,30 +5393,7 @@ Mothim opens this deliberate singles fight. The roster is built as underused bug
 | 1 | Mothim | 38 (cap -2) | None | Tinted Lens | setup attacker | Quiver Dance, Hidden Power, Silver Wind, Psybeam |
 | 2 | Wormadam Sandy Cloak | 38 (cap -2) | None | Anticipation | setup attacker | Quiver Dance, Psybeam, Hidden Power, Rock Blast |
 
-## 220. Anna & Meg — Route 117
-
-**Optional · Double · Cap 40 · Hard 52/100 · Uniqueness 81/100**
-
-**Theme:** underused normal mixture
-
-Minccino and Gurdurr are the authored opening pair. The board plan is underused normal mixture. The composition turns the route's grassland, roadside cover, and open speed lanes into the fight's identity instead of using a generic route-trainer core.
-
-**How it behaves:** The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe, Help Partner, Combo Setup. This singles or low-stakes roster emphasizes coverage, status, and matchup pressure rather than a scripted multi-Pokémon combination.
-
-**Why it is hard:** 4 fully authored Pokémon, average BST 428.8, average cap offset +0.0, ace offset +0, and 50% held-item coverage.
-
-**How unique it is:** Closest unrelated roster: Dawson (17% species overlap). Its species appear across an average of 4.8 unrelated trainer families.
-
-**Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
-
-| # | Pokémon | Level | Item | Ability | Role | Moves |
-| ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Minccino | 40 (cap +0) | None | Skill Link | disruption and support | Tail Slap, Helping Hand, Wake Up Slap, Sing |
-| 2 | Gurdurr | 40 (cap +0) | None | Guts | coverage attacker | Rock Slide, Wake Up Slap, Chip Away, Focus Energy |
-| 3 | Mudsdale | 40 (cap +0) | Assault Vest | Stamina | coverage attacker | High Horsepower, Rock Slide, Heavy Slam, Body Press |
-| 4 | Weavile | 40 (cap +0) | Focus Sash | Pressure | protected attacker | Beat Up, Fake Out, Triple Axel, Protect |
-
-## 221. Melina — Route 117
+## 220. Melina — Route 117
 
 **Optional · Single · Cap 40 · Demanding 35/100 · Uniqueness 79/100**
 
@@ -5433,7 +5414,7 @@ Ponyta opens this deliberate singles fight. The roster is built as underused fir
 | 1 | Ponyta | 38 (cap -2) | None | Reckless | coverage attacker | Blaze Kick, Jump Kick, Take Down, Inferno |
 | 2 | Sneasel | 38 (cap -2) | None | Inner Focus | coverage attacker | Feint Attack, Ice Shard, Hone Claws, Quick Attack |
 
-## 222. Brandi — Route 117
+## 221. Brandi — Route 117
 
 **Optional · Single · Cap 40 · Demanding 39/100 · Uniqueness 86/100**
 
@@ -5454,7 +5435,7 @@ Espurr opens this deliberate singles fight. The roster is built as fake out temp
 | 1 | Espurr | 38 (cap -2) | None | Keen Eye | coverage attacker | Psyshock, Disarming Voice, Fake Out, Light Screen |
 | 2 | Munna | 38 (cap -2) | None | Forewarn | setup attacker | Yawn, Nightmare, Calm Mind, Psybeam |
 
-## 223. Aisha — Route 117
+## 222. Aisha — Route 117
 
 **Optional · Single · Cap 40 · Demanding 41/100 · Uniqueness 66/100**
 
@@ -5473,6 +5454,31 @@ Lucario opens this deliberate singles fight. The roster is built as fighting mix
 | # | Pokémon | Level | Item | Ability | Role | Moves |
 | ---: | --- | --- | --- | --- | --- | --- |
 | 1 | Lucario | 40 (cap +0) | None | Steadfast | coverage attacker | Bullet Punch, Power Up Punch, Quick Attack, Screech |
+
+## 223. Lydia — Route 117
+
+**Optional · Double · Cap 40 · Demanding 47/100 · Uniqueness 88/100**
+
+**Theme:** Fake Out tempo + priority pressure
+
+Froakie and Elekid are the authored opening pair. The board plan is fake out tempo + priority pressure. The composition turns the route's grassland, roadside cover, and open speed lanes into the fight's identity instead of using a generic route-trainer core.
+
+**How it behaves:** The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe, Smart Switching. Expect it to preserve fake out tempo, priority pressure rather than select six unrelated strong attacks.
+
+**Why it is hard:** 6 fully authored Pokémon, average BST 310.7, average cap offset -5.0, ace offset -5, and 0% held-item coverage.
+
+**How unique it is:** Closest unrelated roster: Marcos (14% species overlap). Its species appear across an average of 1.8 unrelated trainer families.
+
+**Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
+
+| # | Pokémon | Level | Item | Ability | Role | Moves |
+| ---: | --- | --- | --- | --- | --- | --- |
+| 1 | Froakie | 35 (cap -5) | None | Torrent | disruption and support | Bubble Beam, Smack Down, Toxic Spikes, Camouflage |
+| 2 | Elekid | 35 (cap -5) | None | Static | coverage attacker | Thunder Punch, Fire Punch, Cross Chop, Ice Punch |
+| 3 | Magby | 35 (cap -5) | None | Flame Body | coverage attacker | Thunder Punch, Fire Punch, Cross Chop, Mach Punch |
+| 4 | Smoochum | 35 (cap -5) | None | Oblivious | setup attacker | Fake Out, Nasty Plot, Miracle Eye, Psyshock |
+| 5 | Happiny | 35 (cap -5) | None | Natural Cure | disruption and support | Seismic Toss, Aromatherapy, Counter, Soft Boiled |
+| 6 | Dratini | 35 (cap -5) | None | Shed Skin | coverage attacker | Extreme Speed, Aqua Jet, Iron Tail, Dragon Rush |
 
 # Balance Badge
 
@@ -5696,7 +5702,7 @@ Muk (Alolan) opens this deliberate singles fight. The roster is built as dark ra
 
 **Why it is hard:** 3 fully authored Pokémon, average BST 543.3, average cap offset -1.0, ace offset -1, and 33% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Grunt (40% species overlap). Its species appear across an average of 4.3 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Grunt (40% species overlap). Its species appear across an average of 4.7 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -5974,7 +5980,7 @@ Tentacruel opens this deliberate singles fight. The roster is built as water pre
 
 ## 246. Wade — Route 118
 
-**Optional · Double · Cap 55 · Demanding 48/100 · Uniqueness 79/100**
+**Optional · Double · Cap 55 · Demanding 48/100 · Uniqueness 80/100**
 
 **Theme:** Discharge immunity
 
@@ -5984,7 +5990,7 @@ Gyarados and Chinchou are the authored opening pair. The board plan is discharge
 
 **Why it is hard:** 4 fully authored Pokémon, average BST 423.0, average cap offset -1.0, ace offset -1, and 25% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Declan (20% species overlap). Its species appear across an average of 5.0 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Declan (20% species overlap). Its species appear across an average of 4.8 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -6721,7 +6727,7 @@ Mightyena and Golisopod are the authored opening pair. The board plan is tailwin
 
 **Why it is hard:** 4 fully authored Pokémon, average BST 475.2, average cap offset -2.0, ace offset -2, and 25% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Martin (40% species overlap). Its species appear across an average of 4.8 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Martin (40% species overlap). Its species appear across an average of 5.0 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -7248,7 +7254,7 @@ Medicham opens this deliberate singles fight. The roster is built as fighting pr
 
 **Why it is hard:** 3 fully authored Pokémon, average BST 473.3, average cap offset -2.0, ace offset -2, and 0% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Marlene (40% species overlap). Its species appear across an average of 7.3 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Marlene (40% species overlap). Its species appear across an average of 7.7 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -7293,7 +7299,7 @@ Lucario opens this deliberate singles fight. The roster is built as fighting pre
 
 **Why it is hard:** 3 fully authored Pokémon, average BST 503.3, average cap offset -3.0, ace offset -3, and 0% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Aisha (33% species overlap). Its species appear across an average of 5.7 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Aisha (33% species overlap). Its species appear across an average of 6.0 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -7437,7 +7443,7 @@ Musharna and Jynx are the authored opening pair. The board plan is psychic press
 
 ## 310. Helene — Route 115
 
-**Optional · Single · Cap 55 · Introductory 34/100 · Uniqueness 68/100**
+**Optional · Single · Cap 55 · Introductory 34/100 · Uniqueness 67/100**
 
 **Theme:** underused fighting mixture
 
@@ -7447,7 +7453,7 @@ Medicham opens this deliberate singles fight. The roster is built as underused f
 
 **Why it is hard:** 2 fully authored Pokémon, average BST 470.0, average cap offset -2.0, ace offset -2, and 0% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Callie (25% species overlap). Its species appear across an average of 9.0 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Callie (25% species overlap). Its species appear across an average of 9.5 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -7458,7 +7464,7 @@ Medicham opens this deliberate singles fight. The roster is built as underused f
 
 ## 311. Marlene — Route 115
 
-**Optional · Double · Cap 55 · Hard 54/100 · Uniqueness 68/100**
+**Optional · Double · Cap 55 · Hard 54/100 · Uniqueness 67/100**
 
 **Theme:** Earthquake immunity + Fake Out tempo + Tailwind
 
@@ -7468,7 +7474,7 @@ Medicham and Grumpig are the authored opening pair. The board plan is earthquake
 
 **Why it is hard:** 4 fully authored Pokémon, average BST 477.5, average cap offset -3.0, ace offset -3, and 50% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Callie (40% species overlap). Its species appear across an average of 7.2 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Callie (40% species overlap). Its species appear across an average of 7.5 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -8912,7 +8918,7 @@ Muk and Raticate (Alolan) are the authored opening pair. The board plan is poiso
 
 ## 375. Grunt — Mt Pyre Summit
 
-**Optional · Double · Cap 60 · Demanding 43/100 · Uniqueness 77/100**
+**Optional · Double · Cap 60 · Demanding 43/100 · Uniqueness 78/100**
 
 **Theme:** Water mixed offense
 
@@ -8922,7 +8928,7 @@ Bruxish and Weavile are the authored opening pair. The board plan is water mixed
 
 **Why it is hard:** 4 fully authored Pokémon, average BST 508.2, average cap offset -2.0, ace offset -2, and 25% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Dominik (20% species overlap). Its species appear across an average of 6.0 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Dominik (20% species overlap). Its species appear across an average of 5.8 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -9497,7 +9503,7 @@ Tentacruel and Dhelmise are the authored opening pair. The board plan is poison 
 
 ## 400. Grunt — Aqua Hideout B 2 F
 
-**Optional · Double · Cap 60 · Demanding 41/100 · Uniqueness 81/100**
+**Optional · Double · Cap 60 · Demanding 41/100 · Uniqueness 80/100**
 
 **Theme:** Poison mixed offense
 
@@ -9507,7 +9513,7 @@ Golbat and Clawitzer are the authored opening pair. The board plan is poison mix
 
 **Why it is hard:** 4 fully authored Pokémon, average BST 502.5, average cap offset -2.0, ace offset -2, and 0% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Roland (20% species overlap). Its species appear across an average of 4.0 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Roland (20% species overlap). Its species appear across an average of 4.2 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -10060,7 +10066,7 @@ Slowking and Alakazam are the authored opening pair. The board plan is psychic p
 
 ## 425. Virgil — Mossdeep City Gym
 
-**Optional · Double · Cap 60 · Brutal 67/100 · Uniqueness 52/100**
+**Optional · Double · Cap 60 · Brutal 67/100 · Uniqueness 51/100**
 
 **Theme:** Fake Out tempo + Trick Room + active speed control
 
@@ -10070,7 +10076,7 @@ Medicham and Bronzong are the authored opening pair. The board plan is fake out 
 
 **Why it is hard:** 4 fully authored Pokémon, average BST 475.0, average cap offset -2.0, ace offset -2, and 100% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: John & Jay (60% species overlap). Its species appear across an average of 7.8 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: John & Jay (60% species overlap). Its species appear across an average of 8.0 unrelated trainer families.
 
 **Counterplay:** Deny Trick Room with Taunt or immediate focus fire, then use Protect to exhaust its limited turns.
 
@@ -11967,7 +11973,7 @@ Amoonguss and Medicham are the authored opening pair. The board plan is redirect
 
 **Why it is hard:** 4 fully authored Pokémon, average BST 481.0, average cap offset -0.75, ace offset +0, and 100% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Helene (20% species overlap). Its species appear across an average of 6.2 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Helene (20% species overlap). Its species appear across an average of 6.5 unrelated trainer families.
 
 **Counterplay:** Use spread damage, Taunt, or a coordinated double target so redirection cannot buy a free setup turn.
 
@@ -12277,7 +12283,7 @@ Poliwrath and Raticate are the authored opening pair. The board plan is discharg
 
 ## 522. Reyna — Route 134
 
-**Optional · Double · Cap 70 · Demanding 37/100 · Uniqueness 87/100**
+**Optional · Double · Cap 70 · Demanding 37/100 · Uniqueness 86/100**
 
 **Theme:** underused fighting mixture
 
@@ -12287,7 +12293,7 @@ Bewear and Passimian are the authored opening pair. The board plan is underused 
 
 **Why it is hard:** 4 fully authored Pokémon, average BST 375.0, average cap offset -3.0, ace offset -3, and 50% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Cyndy (17% species overlap). Its species appear across an average of 2.0 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Cyndy (17% species overlap). Its species appear across an average of 2.2 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -12689,7 +12695,7 @@ Trevenant and Sudowoodo are the authored opening pair. The board plan is active 
 
 ## 539. Albert — Victory Road 1 F
 
-**Optional · Double · Cap 80 · Brutal 73/100 · Uniqueness 84/100**
+**Optional · Double · Cap 80 · Brutal 73/100 · Uniqueness 85/100**
 
 **Theme:** Dark pressure + Earthquake immunity
 
@@ -12699,7 +12705,7 @@ Rhyperior and Sigilyph are the authored opening pair. The board plan is dark pre
 
 **Why it is hard:** 6 fully authored Pokémon, average BST 503.3, average cap offset -0.5, ace offset +1, and 100% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Daisuke (17% species overlap). Its species appear across an average of 6.7 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Daisuke (17% species overlap). Its species appear across an average of 6.5 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -13182,7 +13188,7 @@ Persian (Alolan) opens this deliberate singles fight. The roster is built as fak
 
 **Why it is hard:** 3 fully authored Pokémon, average BST 487.3, average cap offset -2.0, ace offset -2, and 0% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Anna & Meg (17% species overlap). Its species appear across an average of 5.7 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Grunt (17% species overlap). Its species appear across an average of 5.3 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -14163,7 +14169,7 @@ Cobalion and Marshadow are the authored opening pair. The board plan is fake out
 
 ## 601. Brawly — Dewford Town Gym
 
-**Rematch · Double · Active cap at rematch time · Extreme 80/100 · Uniqueness 67/100**
+**Rematch · Double · Active cap at rematch time · Extreme 80/100 · Uniqueness 66/100**
 
 **Theme:** Fake Out tempo + Fighting pressure + priority pressure
 
@@ -14173,7 +14179,7 @@ Medicham and Scrafty are the authored opening pair. The board plan is fake out t
 
 **Why it is hard:** 6 fully authored Pokémon, average BST 491.3, average cap offset +0.33, ace offset +2, and 100% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: John & Jay (43% species overlap). Its species appear across an average of 6.8 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: John & Jay (43% species overlap). Its species appear across an average of 7.0 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -15403,7 +15409,7 @@ Dusclops and Rhyperior are the authored opening pair. The board plan is fake out
 
 **Why it is hard:** 4 fully authored Pokémon, average BST 476.0, average cap offset +0.75, ace offset +2, and 100% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Virgil (60% species overlap). Its species appear across an average of 8.2 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Virgil (60% species overlap). Its species appear across an average of 8.5 unrelated trainer families.
 
 **Counterplay:** Deny Trick Room with Taunt or immediate focus fire, then use Protect to exhaust its limited turns.
 
@@ -15416,7 +15422,7 @@ Dusclops and Rhyperior are the authored opening pair. The board plan is fake out
 
 ## 654. John & Jay — Meteor Falls 1 F 2 R
 
-**Rematch · Double · Active cap at rematch time · Extreme 81/100 · Uniqueness 68/100**
+**Rematch · Double · Active cap at rematch time · Extreme 81/100 · Uniqueness 69/100**
 
 **Theme:** Beat Up + Justified + Fighting pressure + spread + Wide Guard
 
@@ -15426,7 +15432,7 @@ Weavile and Terrakion are the authored opening pair. The board plan is beat up +
 
 **Why it is hard:** 4 fully authored Pokémon, average BST 543.8, average cap offset +0.75, ace offset +2, and 100% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Greta (43% species overlap). Its species appear across an average of 7.0 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Greta (43% species overlap). Its species appear across an average of 6.8 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -15439,7 +15445,7 @@ Weavile and Terrakion are the authored opening pair. The board plan is beat up +
 
 ## 655. John & Jay — Meteor Falls 1 F 2 R
 
-**Rematch · Double · Active cap at rematch time · Brutal 79/100 · Uniqueness 75/100**
+**Rematch · Double · Active cap at rematch time · Brutal 79/100 · Uniqueness 74/100**
 
 **Theme:** Fighting pressure
 
@@ -15449,7 +15455,7 @@ Hariyama and Medicham are the authored opening pair. The board plan is fighting 
 
 **Why it is hard:** 6 fully authored Pokémon, average BST 508.5, average cap offset +0.0, ace offset +0, and 100% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Brawly (33% species overlap). Its species appear across an average of 7.0 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Brawly (33% species overlap). Its species appear across an average of 7.2 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -15649,7 +15655,7 @@ Chesnaught and Pidgeot are the authored opening pair. The board plan is pivot co
 
 ## 664. Diana — Jagged Pass
 
-**Rematch · Double · Active cap at rematch time · Hard 59/100 · Uniqueness 83/100**
+**Rematch · Double · Active cap at rematch time · Hard 59/100 · Uniqueness 82/100**
 
 **Theme:** pivot control + status control
 
@@ -15659,7 +15665,7 @@ Chesnaught and Pidgeot are the authored opening pair. The board plan is pivot co
 
 **Why it is hard:** 6 fully authored Pokémon, average BST 515.7, average cap offset -3.0, ace offset -3, and 33% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Aidan (14% species overlap). Its species appear across an average of 4.7 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Aidan (14% species overlap). Its species appear across an average of 4.8 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -16969,7 +16975,7 @@ Samurott and Kommo O are the authored opening pair. The board plan is fake out t
 
 **Why it is hard:** 4 fully authored Pokémon, average BST 509.5, average cap offset -2.75, ace offset -2, and 0% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Brawly (25% species overlap). Its species appear across an average of 6.0 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Brawly (25% species overlap). Its species appear across an average of 6.2 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -16992,7 +16998,7 @@ Samurott and Kommo O are the authored opening pair. The board plan is fake out t
 
 **Why it is hard:** 4 fully authored Pokémon, average BST 509.5, average cap offset -2.75, ace offset -2, and 25% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Brawly (25% species overlap). Its species appear across an average of 6.0 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Brawly (25% species overlap). Its species appear across an average of 6.2 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -17015,7 +17021,7 @@ Samurott and Kommo O are the authored opening pair. The board plan is fake out t
 
 **Why it is hard:** 6 fully authored Pokémon, average BST 556.3, average cap offset -1.83, ace offset +0, and 100% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Brawly (20% species overlap). Its species appear across an average of 4.3 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Brawly (20% species overlap). Its species appear across an average of 4.5 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -17292,7 +17298,7 @@ Krookodile and Arbok are the authored opening pair. The board plan is dark press
 
 **Why it is hard:** 6 fully authored Pokémon, average BST 507.8, average cap offset -3.0, ace offset -3, and 33% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Garret (12% species overlap). Its species appear across an average of 5.2 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Garret (12% species overlap). Its species appear across an average of 5.0 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -17895,7 +17901,7 @@ Golisopod opens this deliberate singles fight. The roster is built as water rare
 
 ## 759. Ernest — Route 125
 
-**Rematch · Single · Active cap at rematch time · Hard 59/100 · Uniqueness 83/100**
+**Rematch · Single · Active cap at rematch time · Hard 59/100 · Uniqueness 82/100**
 
 **Theme:** Fighting pressure
 
@@ -17905,7 +17911,7 @@ Buzzwole opens this deliberate singles fight. The roster is built as fighting pr
 
 **Why it is hard:** 3 fully authored Pokémon, average BST 510.0, average cap offset +1.0, ace offset +2, and 100% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Helene (25% species overlap). Its species appear across an average of 6.7 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Helene (25% species overlap). Its species appear across an average of 7.0 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -19033,7 +19039,7 @@ Weavile and Urshifu are the authored opening pair. The board plan is beat up + j
 
 **Why it is hard:** 6 fully authored Pokémon, average BST 565.0, average cap offset +4.33, ace offset +5, and 100% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: John & Jay (43% species overlap). Its species appear across an average of 5.2 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: John & Jay (43% species overlap). Its species appear across an average of 5.0 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
