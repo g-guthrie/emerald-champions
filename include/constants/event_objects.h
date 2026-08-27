@@ -257,8 +257,11 @@
 #define OBJ_EVENT_GFX_DIANCIE                    253
 #define OBJ_EVENT_GFX_CHANSEY                    254
 #define OBJ_EVENT_GFX_CYNTHIA                    255
+#define OBJ_EVENT_GFX_DARKRAI                    256
+#define OBJ_EVENT_GFX_CRESSELIA                  257
+#define OBJ_EVENT_GFX_DIALGA                     258
 
-#define NUM_OBJ_EVENT_GFX                        256
+#define NUM_OBJ_EVENT_GFX                        259
 
 
 // These are dynamic object gfx ids.

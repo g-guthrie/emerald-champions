@@ -2221,6 +2221,18 @@ const struct SpriteFrameImage sPicTable_Celebi[] = {
     obj_frame_tiles(gObjectEventPic_Celebi),
 };
 
+const struct SpriteFrameImage sPicTable_Darkrai[] = {
+    {gObjectEventPic_Darkrai, 0x200},
+};
+
+const struct SpriteFrameImage sPicTable_Cresselia[] = {
+    {gObjectEventPic_Cresselia, 0x200},
+};
+
+const struct SpriteFrameImage sPicTable_Dialga[] = {
+    {gObjectEventPic_Dialga, 0x800},
+};
+
 const struct SpriteFrameImage sPicTable_Regirock[] = {
     obj_frame_tiles(gObjectEventPic_Regirock),
 };

@@ -468,6 +468,9 @@ const u8 gInitialMovementTypeFacingDirections[] = {
 #define OBJ_EVENT_PAL_TAG_HEATRAN                 0x1126
 #define OBJ_EVENT_PAL_TAG_REGIGIGAS               0x1127
 #define OBJ_EVENT_PAL_TAG_CYNTHIA                 0x1128
+#define OBJ_EVENT_PAL_TAG_DARKRAI                 0x1129
+#define OBJ_EVENT_PAL_TAG_CRESSELIA               0x112A
+#define OBJ_EVENT_PAL_TAG_DIALGA                  0x112B
 #define OBJ_EVENT_PAL_TAG_NONE                    0x11FF
 
 #include "data/object_events/object_event_graphics_info_pointers.h"
@@ -519,6 +522,9 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPaletteHeatran,            OBJ_EVENT_PAL_TAG_HEATRAN},
     {gObjectEventPaletteRegigigas,          OBJ_EVENT_PAL_TAG_REGIGIGAS},
     {gObjectEventPaletteCynthia,            OBJ_EVENT_PAL_TAG_CYNTHIA},
+    {gObjectEventPaletteDarkrai,            OBJ_EVENT_PAL_TAG_DARKRAI},
+    {gObjectEventPaletteCresselia,          OBJ_EVENT_PAL_TAG_CRESSELIA},
+    {gObjectEventPaletteDialga,             OBJ_EVENT_PAL_TAG_DIALGA},
     // FindObjectEventPaletteIndexByTag scans for this tag. A zero tag here
     // makes an unknown custom palette walk beyond the table indefinitely.
     {NULL,                                  OBJ_EVENT_PAL_TAG_NONE},

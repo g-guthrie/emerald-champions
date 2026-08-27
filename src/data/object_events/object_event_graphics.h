@@ -397,6 +397,9 @@ const u32 gObjectEventPic_Regigigas[] = INCBIN_U32("graphics/object_events/pics/
 const u32 gObjectEventPic_Carbink[] = INCBIN_U32("graphics/object_events/pics/pokemon/carbink.4bpp");
 const u32 gObjectEventPic_Diancie[] = INCBIN_U32("graphics/object_events/pics/pokemon/diancie.4bpp");
 const u32 gObjectEventPic_Chansey[] = INCBIN_U32("graphics/object_events/pics/pokemon/chansey.4bpp");
+const u32 gObjectEventPic_Darkrai[] = INCBIN_U32("graphics/object_events/pics/pokemon/darkrai_expansion.4bpp");
+const u32 gObjectEventPic_Cresselia[] = INCBIN_U32("graphics/object_events/pics/pokemon/cresselia_expansion.4bpp");
+const u32 gObjectEventPic_Dialga[] = INCBIN_U32("graphics/object_events/pics/pokemon/dialga_expansion.4bpp");
 // People
 const u32 gObjectEventPic_Cynthia[] = INCBIN_U32("graphics/object_events/pics/people/cynthia.4bpp");
 // New pals
@@ -405,3 +408,6 @@ const u16 gObjectEventPaletteJirachi[] = INCBIN_U16("graphics/object_events/pale
 const u16 gObjectEventPaletteHeatran[] = INCBIN_U16("graphics/object_events/palettes/heatran.gbapal");
 const u16 gObjectEventPaletteRegigigas[] = INCBIN_U16("graphics/object_events/palettes/regigigas.gbapal");
 const u16 gObjectEventPaletteCynthia[] = INCBIN_U16("graphics/object_events/palettes/cynthia.gbapal");
+const u16 gObjectEventPaletteDarkrai[] = INCBIN_U16("graphics/object_events/palettes/darkrai_expansion.gbapal");
+const u16 gObjectEventPaletteCresselia[] = INCBIN_U16("graphics/object_events/palettes/cresselia_expansion.gbapal");
+const u16 gObjectEventPaletteDialga[] = INCBIN_U16("graphics/object_events/palettes/dialga_expansion.gbapal");
