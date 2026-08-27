@@ -1,0 +1,2731 @@
+{
+  "batch_id": "early-routes-101-104-petalburg-v1",
+  "reviews": [
+    {
+      "ability": "ABILITY_SKILL_LINK",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Tail Slap is the primary damage plan and relies on Skill Link, not a held item."
+      ],
+      "doubles_rationale": "Fake Out buys immediate tempo, Skill Link makes Tail Slap reliable, and Knock Off removes opposing battle items before Aipom protects or pivots.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_TAIL_SLAP",
+        "MOVE_KNOCK_OFF",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "fast Fake Out pressure and Skill Link attacker",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_AIPOM",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_REGENERATOR",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Wish healing arrives on the following turn and therefore needs deliberate partner positioning."
+      ],
+      "doubles_rationale": "Wish and Heal Bell stabilize a partner across repeated hard battles, while Regenerator and Protect preserve Audino and Knock Off creates concrete tempo.",
+      "item_context": "Leftovers is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_WISH",
+        "MOVE_PROTECT",
+        "MOVE_HEAL_BELL",
+        "MOVE_KNOCK_OFF"
+      ],
+      "nature": "NATURE_IMPISH",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "bulky regenerative cleric",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_AUDINO",
+      "suggested_item": "ITEM_LEFTOVERS"
+    },
+    {
+      "ability": "ABILITY_HUGE_POWER",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Belly Drum costs half of current HP; Sitrus Berry is strongly recommended but not required to select or use the other moves."
+      ],
+      "doubles_rationale": "Huge Power turns one Belly Drum opening into lethal Aqua Jet pressure, while Knock Off punishes resists and Protect lets a partner create the setup turn.",
+      "item_context": "Sitrus Berry is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_BELLY_DRUM",
+        "MOVE_AQUA_JET",
+        "MOVE_KNOCK_OFF",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Huge Power Belly Drum cleaner",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_AZUMARILL",
+      "suggested_item": "ITEM_SITRUS_BERRY"
+    },
+    {
+      "ability": "ABILITY_HUGE_POWER",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Belly Drum costs half of current HP; Sitrus Berry makes the setup much safer but is not installed by the builder."
+      ],
+      "doubles_rationale": "Even unevolved, Huge Power plus Belly Drum gives Azurill a real win condition; Aqua Jet supplies priority and Play Rough prevents Water resists from blanking it.",
+      "item_context": "Sitrus Berry is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_BELLY_DRUM",
+        "MOVE_AQUA_JET",
+        "MOVE_PLAY_ROUGH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "early Huge Power priority sweeper",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_AZURILL",
+      "suggested_item": "ITEM_SITRUS_BERRY"
+    },
+    {
+      "ability": "ABILITY_BERSERK",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Beautifly needs partner-created tempo to establish Quiver Dance safely."
+      ],
+      "doubles_rationale": "Quiver Dance threatens a sweep, reliable dual STAB pressures distinct targets, Roost sustains the setup, and Berserk creates a second Special Attack spike after surviving heavy damage.",
+      "item_context": "Focus Sash is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_QUIVER_DANCE",
+        "MOVE_BUG_BUZZ",
+        "MOVE_AIR_SLASH",
+        "MOVE_ROOST"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Quiver Dance special sweeper",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_BEAUTIFLY",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_SWARM",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Beedrill is fragile; Focus Sash is advisory protection rather than a requirement."
+      ],
+      "doubles_rationale": "U-turn keeps momentum, Poison Jab and Drill Run give clean STAB-plus-coverage pressure, and Protect lets Beedrill survive speed-control turns or scout priority.",
+      "item_context": "Focus Sash is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_U_TURN",
+        "MOVE_POISON_JAB",
+        "MOVE_DRILL_RUN",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "fast physical pivot and cleaner",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_BEEDRILL",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_CHLOROPHYLL",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "The offensive mode requires Sunny Day or allied sun; before sun is active, Sleep Powder is the safe tempo move."
+      ],
+      "doubles_rationale": "Sunny Day activates Chlorophyll, makes Solar Beam immediate, and converts Weather Ball into Fire coverage, while Sleep Powder can buy the weather turn.",
+      "item_context": "Focus Sash is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_SUNNY_DAY",
+        "MOVE_SLEEP_POWDER",
+        "MOVE_SOLAR_BEAM",
+        "MOVE_WEATHER_BALL"
+      ],
+      "nature": "NATURE_MODEST",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "self-contained sun sleep attacker",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_BELLSPROUT",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_SIMPLE",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Sitrus Berry is optional sustain; the setup and attacks remain fully functional without it."
+      ],
+      "doubles_rationale": "Simple doubles the Swords Dance boost, Aqua Jet converts it into immediate priority, Waterfall supplies stronger STAB, and Protect creates a partner-assisted setup window.",
+      "item_context": "Sitrus Berry is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_SWORDS_DANCE",
+        "MOVE_WATERFALL",
+        "MOVE_AQUA_JET",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Simple setup priority sweeper",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_BIBAREL",
+      "suggested_item": "ITEM_SITRUS_BERRY"
+    },
+    {
+      "ability": "ABILITY_SIMPLE",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Bidoof still has low base stats and benefits heavily from partner redirection or speed control."
+      ],
+      "doubles_rationale": "Simple makes one Swords Dance meaningful even on Bidoof, Quick Attack provides priority, Crunch prevents Ghosts from walling it, and Protect buys setup support.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_SWORDS_DANCE",
+        "MOVE_QUICK_ATTACK",
+        "MOVE_CRUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "compact Simple setup cleaner",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_BIDOOF",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_LIGHTNING_ROD",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Lightning Rod also redirects allied single-target Electric moves, so partner targeting must be planned."
+      ],
+      "doubles_rationale": "Lightning Rod protects its partner from Electric moves and can boost Thunderbolt, while Thunder Wave and Volt Switch control tempo and Protect preserves the redirector.",
+      "item_context": "Focus Sash is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_THUNDERBOLT",
+        "MOVE_VOLT_SWITCH",
+        "MOVE_THUNDER_WAVE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Lightning Rod speed-control pivot",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_BLITZLE",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_STURDY",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Rock Slide can miss; Sturdy only functions from full HP."
+      ],
+      "doubles_rationale": "Sturdy guarantees a chance to act, Rock Slide threatens both foes, Stomping Tantrum covers Steel and Rock targets, and Sucker Punch supplies emergency priority.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_ROCK_SLIDE",
+        "MOVE_STOMPING_TANTRUM",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Sturdy physical disruptor",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_BONSLY",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_SWEET_VEIL",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "The set is partner-dependent by design; Bounsweet is not expected to carry damage."
+      ],
+      "doubles_rationale": "Sweet Veil blocks sleep for the side, Helping Hand amplifies a stronger partner, Charm suppresses physical attackers, and Giga Drain prevents total passivity.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_HELPING_HAND",
+        "MOVE_CHARM",
+        "MOVE_GIGA_DRAIN",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BOLD",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Sweet Veil partner support",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_BOUNSWEET",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_NATURAL_CURE",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Sleep Powder is inaccurate and should not be treated as guaranteed control."
+      ],
+      "doubles_rationale": "Sleep Powder creates immediate doubles tempo, dual STAB prevents passivity, Protect scouts focus fire, and Natural Cure lets Budew reset status by switching.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_SLEEP_POWDER",
+        "MOVE_GIGA_DRAIN",
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BOLD",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "sleep-and-chip support",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_BUDEW",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_LIMBER",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Damage is secondary; the set wins through turn order and move locking."
+      ],
+      "doubles_rationale": "Fake Out creates a free partner action, Encore punishes Protect or setup, Drain Punch gives sustainable chip, and Limber keeps Buneary available for speed-sensitive support.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_ENCORE",
+        "MOVE_DRAIN_PUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "fast Fake Out and Encore support",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_BUNEARY",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_HUGE_POWER",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Earthquake also hits a grounded ally, so it needs Protect, Flying, or Levitate support on the partner slot."
+      ],
+      "doubles_rationale": "Huge Power makes even unevolved Bunnelby threatening, Earthquake pressures both foes, Strength is reliable neutral damage, and Quick Attack cleans weakened targets.",
+      "item_context": "Life Orb is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_EARTHQUAKE",
+        "MOVE_STRENGTH",
+        "MOVE_QUICK_ATTACK",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Huge Power physical breaker",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_BUNNELBY",
+      "suggested_item": "ITEM_LIFE_ORB"
+    },
+    {
+      "ability": "ABILITY_SHED_SKIN",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Cascoon has no legal Protect in the local pool and depends on bulk or partner redirection to stay active."
+      ],
+      "doubles_rationale": "Electroweb and String Shot lower opposing speed while Bug Bite prevents total passivity; Iron Defense and Shed Skin let Cascoon survive long enough to repeat control.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_ELECTROWEB",
+        "MOVE_BUG_BITE",
+        "MOVE_IRON_DEFENSE",
+        "MOVE_STRING_SHOT"
+      ],
+      "nature": "NATURE_IMPISH",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "slow speed-control cocoon",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_CASCOON",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_SHIELD_DUST",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Caterpie's damage is intentionally secondary to speed control."
+      ],
+      "doubles_rationale": "Electroweb and String Shot immediately help a stronger partner move first, Bug Bite supplies chip and berry disruption, and Protect lets Caterpie preserve a second control turn.",
+      "item_context": "Focus Sash is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_ELECTROWEB",
+        "MOVE_BUG_BITE",
+        "MOVE_STRING_SHOT",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_IMPISH",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "minimal speed-control support",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_CATERPIE",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_BATTERY",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Battery only benefits the allied active Pokémon, so positioning matters."
+      ],
+      "doubles_rationale": "Battery passively boosts its partner's special damage, Electroweb controls both foes, Thunder Wave answers a single fast threat, and Volt Switch keeps that support cycling.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_ELECTROWEB",
+        "MOVE_THUNDER_WAVE",
+        "MOVE_VOLT_SWITCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BOLD",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Battery speed-control pivot",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_CHARJABUG",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_CHLOROPHYLL",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "The damage plan depends on sun being active, but Cherubi carries its own setter."
+      ],
+      "doubles_rationale": "Sunny Day activates Chlorophyll, makes Solar Beam immediate, and gives Weather Ball Fire coverage; Protect buys a turn while a partner also exploits sun.",
+      "item_context": "Focus Sash is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_SUNNY_DAY",
+        "MOVE_SOLAR_BEAM",
+        "MOVE_WEATHER_BALL",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "self-contained sun special attacker",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_CHERUBI",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_ADAPTABILITY",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "The set has no Protect; it needs partner disruption or redirection to find a safe Dragon Dance."
+      ],
+      "doubles_rationale": "Adaptability makes Crabhammer and Aqua Jet exceptionally punishing after Dragon Dance, while Knock Off removes bulky answers and opposing items.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_DRAGON_DANCE",
+        "MOVE_CRABHAMMER",
+        "MOVE_AQUA_JET",
+        "MOVE_KNOCK_OFF"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Adaptability Dragon Dance cleaner",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_CORPHISH",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_ADAPTABILITY",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "The set has no Protect and should set up behind partner-created tempo."
+      ],
+      "doubles_rationale": "Swords Dance plus Adaptability overwhelms conventional defensive answers, Aqua Jet fixes Crawdaunt's speed, and Knock Off punishes both switches and held-item cores.",
+      "item_context": "Life Orb is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_SWORDS_DANCE",
+        "MOVE_CRABHAMMER",
+        "MOVE_KNOCK_OFF",
+        "MOVE_AQUA_JET"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Adaptability Swords Dance wallbreaker",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_CRAWDAUNT",
+      "suggested_item": "ITEM_LIFE_ORB"
+    },
+    {
+      "ability": "ABILITY_DRY_SKIN",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Dry Skin increases Fire damage and only supplies healing when rain or Water targeting is present."
+      ],
+      "doubles_rationale": "Fake Out creates immediate tempo, Drain Punch sustains Croagunk, Sucker Punch supplies priority, and Dry Skin rewards pairing it beside rain or Water spread attacks.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_DRAIN_PUNCH",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Dry Skin Fake Out attacker",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_CROAGUNK",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_WATER_BUBBLE",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Icy Wind is selected for its speed drop, not its damage."
+      ],
+      "doubles_rationale": "Water Bubble makes Liquidation genuinely threatening, Leech Life adds sustain, Icy Wind controls both foes despite low Special Attack, and Protect preserves the slow tank.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_LIQUIDATION",
+        "MOVE_LEECH_LIFE",
+        "MOVE_ICY_WIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Water Bubble physical tank",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_DEWPIDER",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_CLEAR_BODY",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Dreepy is extremely frail and should be treated as support rather than a standalone attacker."
+      ],
+      "doubles_rationale": "Dreepy uses its speed for Thunder Wave and Helping Hand, Sucker Punch finishes weakened targets, and Clear Body prevents opposing stat drops from disrupting its tempo role.",
+      "item_context": "Focus Sash is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_THUNDER_WAVE",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_HELPING_HAND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "fast utility and priority chip",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_DREEPY",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_UNAWARE",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "The set requires time to establish Quiver Dance and benefits from partner disruption."
+      ],
+      "doubles_rationale": "Unaware prevents opposing setup from racing Dustox, Quiver Dance builds its own offense and special bulk, dual STAB avoids one-move passivity, and Roost sustains the endgame.",
+      "item_context": "Leftovers is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_QUIVER_DANCE",
+        "MOVE_BUG_BUZZ",
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_ROOST"
+      ],
+      "nature": "NATURE_BOLD",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "bulky Quiver Dance win condition",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_DUSTOX",
+      "suggested_item": "ITEM_LEFTOVERS"
+    },
+    {
+      "ability": "ABILITY_LIGHTNING_ROD",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Lightning Rod redirects allied single-target Electric moves as well as enemy moves."
+      ],
+      "doubles_rationale": "Lightning Rod protects a partner and can boost Thunderbolt, Electroweb controls both foes, Encore punishes passive turns, and Emolga's high local speed makes the package immediate.",
+      "item_context": "Focus Sash is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_THUNDERBOLT",
+        "MOVE_ELECTROWEB",
+        "MOVE_ENCORE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Lightning Rod fast control",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_EMOLGA",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_CHLOROPLAST",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Sleep Powder is inaccurate, but Solar Beam does not require sun because Chloroplast supplies the local effect."
+      ],
+      "doubles_rationale": "Chloroplast makes Solar Beam immediate without weather, Sleep Powder creates setup tempo, Psychic adds independent STAB, and Protect lets Exeggcute exploit partner pressure.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_SLEEP_POWDER",
+        "MOVE_SOLAR_BEAM",
+        "MOVE_PSYCHIC",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Chloroplast sleep attacker",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_EXEGGCUTE",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_WATER_VEIL",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Hydro Pump can miss; Water Veil prevents burn but does not otherwise increase damage."
+      ],
+      "doubles_rationale": "Icy Wind slows both opponents, Encore punishes Protect and setup, Hydro Pump gives real damage, and Protect keeps Finizen available for repeated control.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_HYDRO_PUMP",
+        "MOVE_ICY_WIND",
+        "MOVE_ENCORE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "fast special speed control",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_FINIZEN",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_REGENERATOR",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Rage Powder can be ignored by Grass types and by effects that bypass redirection."
+      ],
+      "doubles_rationale": "Spore and Rage Powder are premier doubles control tools, Protect scouts focus fire, Giga Drain prevents passivity, and Regenerator rewards repeated repositioning.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_SPORE",
+        "MOVE_RAGE_POWDER",
+        "MOVE_GIGA_DRAIN",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BOLD",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Regenerator redirection and sleep",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_FOONGUS",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_UNAWARE",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Without Protect, Fuecoco must use Slack Off and partner pressure carefully against double targets."
+      ],
+      "doubles_rationale": "Unaware checks opposing setup, Snarl weakens both special attackers, Yawn forces movement, Flamethrower prevents passivity, and Slack Off supports a long control game.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_FLAMETHROWER",
+        "MOVE_SNARL",
+        "MOVE_YAWN",
+        "MOVE_SLACK_OFF"
+      ],
+      "nature": "NATURE_CALM",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Unaware special-pressure support",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_FUECOCO",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_STORM_DRAIN",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Storm Drain also absorbs allied single-target Water moves, so partner targeting must be coordinated."
+      ],
+      "doubles_rationale": "Storm Drain redirects Water pressure away from its partner and boosts Special Attack, Earth Power and Ice Beam give broad coverage, and Recover plus Protect make it difficult to remove.",
+      "item_context": "Leftovers is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_EARTH_POWER",
+        "MOVE_ICE_BEAM",
+        "MOVE_RECOVER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CALM",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Storm Drain bulky special anchor",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_GASTRODON",
+      "suggested_item": "ITEM_LEFTOVERS"
+    },
+    {
+      "ability": "ABILITY_LIGHTNING_ROD",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Lightning Rod raises Special Attack, but this authored set values redirection over that boost."
+      ],
+      "doubles_rationale": "Lightning Rod protects Water-weak partners from Electric attacks, while Waterfall, Drill Run, and Knock Off create unusually broad physical pressure for an early catch.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_WATERFALL",
+        "MOVE_DRILL_RUN",
+        "MOVE_KNOCK_OFF",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Lightning Rod physical coverage",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_GOLDEEN",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_GOOEY",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Muddy Water can miss and its accuracy drop is not guaranteed."
+      ],
+      "doubles_rationale": "Gooey punishes contact with speed drops, Muddy Water pressures both foes and can lower accuracy, Dragon Pulse and Sludge Bomb give reliable single-target coverage, and Protect preserves the speed-control body.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_DRAGON_PULSE",
+        "MOVE_MUDDY_WATER",
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CALM",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Gooey bulky spread attacker",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_GOOMY",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_SHADOW_TAG",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Ghost opponents and effects that bypass trapping can still escape Shadow Tag."
+      ],
+      "doubles_rationale": "Shadow Tag denies ordinary switching, Thunder Wave controls the trapped threat, Helping Hand amplifies its partner, and Protect makes Gothita difficult to remove on the obvious double target.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_PSYCHIC",
+        "MOVE_THUNDER_WAVE",
+        "MOVE_HELPING_HAND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CALM",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Shadow Tag tempo controller",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_GOTHITA",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_COMPETITIVE",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Competitive only activates when an opponent lowers a stat; Nasty Plot remains the reliable setup path."
+      ],
+      "doubles_rationale": "Competitive punishes opposing stat drops, Nasty Plot supplies an independent win condition, Psychic and Thunderbolt offer broad coverage, and Protect lets Gothorita wait out partner control.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_NASTY_PLOT",
+        "MOVE_PSYCHIC",
+        "MOVE_THUNDERBOLT",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Competitive setup attacker",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_GOTHORITA",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_SWARM",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Relaxed nature intentionally favors a slower Volt Switch and physical bulk."
+      ],
+      "doubles_rationale": "Electroweb slows both foes, slow Volt Switch brings a teammate in safely, X-Scissor uses Grubbin's strong local Attack, and Protect preserves the pivot.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_ELECTROWEB",
+        "MOVE_VOLT_SWITCH",
+        "MOVE_X_SCISSOR",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_RELAXED",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "slow Electroweb pivot",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_GRUBBIN",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_INTIMIDATE",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "The set is control-oriented rather than a Dragon Dance sweeper."
+      ],
+      "doubles_rationale": "Intimidate immediately softens both physical attackers, Thunder Wave and Taunt disrupt opposing plans, Waterfall keeps offensive pressure, and Protect sustains repeated pivots.",
+      "item_context": "Sitrus Berry is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_WATERFALL",
+        "MOVE_THUNDER_WAVE",
+        "MOVE_TAUNT",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CAREFUL",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Intimidate disruptive pivot",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_GYARADOS",
+      "suggested_item": "ITEM_SITRUS_BERRY"
+    },
+    {
+      "ability": "ABILITY_MAGIC_BOUNCE",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "The local Hatenna move pool does not contain Trick Room; this set does not pretend otherwise."
+      ],
+      "doubles_rationale": "Magic Bounce punishes hostile status and hazards, dual attacks prevent passivity, Helping Hand boosts a stronger partner, and Protect keeps the reflector on the field.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_PSYCHIC",
+        "MOVE_DAZZLING_GLEAM",
+        "MOVE_HELPING_HAND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Magic Bounce special support",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_HATENNA",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_TINTED_LENS",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Hypnosis remains inaccurate even with Wide Lens and should not be treated as guaranteed."
+      ],
+      "doubles_rationale": "Hypnosis threatens immediate control, Reflect protects both allies from physical pressure, Roost sustains Hoothoot, and Tinted Lens keeps Air Slash useful into resists.",
+      "item_context": "Wide Lens is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_HYPNOSIS",
+        "MOVE_AIR_SLASH",
+        "MOVE_REFLECT",
+        "MOVE_ROOST"
+      ],
+      "nature": "NATURE_CALM",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "accurate sleep and screen support",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_HOOTHOOT",
+      "suggested_item": "ITEM_WIDE_LENS"
+    },
+    {
+      "ability": "ABILITY_PRANKSTER",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Dark-type foes may be immune to Prankster-targeted status under modern mechanics if the local engine implements that rule."
+      ],
+      "doubles_rationale": "Fake Out controls turn one, Prankster Thunder Wave supplies priority speed control, Foul Play punishes strong physical attackers without Attack investment, and Protect preserves the support slot.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_THUNDER_WAVE",
+        "MOVE_FOUL_PLAY",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CALM",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Prankster disruption",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_IMPIDIMP",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_PSYCHIC_SURGE",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Psychic Terrain also blocks the player's grounded priority moves, so team construction must account for it."
+      ],
+      "doubles_rationale": "Psychic Surge powers Expanding Force and blocks grounded priority, Helping Hand amplifies its partner, Dazzling Gleam supplies spread coverage, and Protect manages terrain turns.",
+      "item_context": "Focus Sash is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_EXPANDING_FORCE",
+        "MOVE_DAZZLING_GLEAM",
+        "MOVE_HELPING_HAND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Psychic Surge partner amplifier",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_INDEEDEE",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_SHED_SKIN",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Kakuna has no legal Protect in the local pool and is intentionally a low-damage control piece."
+      ],
+      "doubles_rationale": "Electroweb and String Shot help a partner move first, Skitter Smack lowers special pressure, Iron Defense patches physical bulk, and Shed Skin can clear disabling status.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_ELECTROWEB",
+        "MOVE_SKITTER_SMACK",
+        "MOVE_IRON_DEFENSE",
+        "MOVE_STRING_SHOT"
+      ],
+      "nature": "NATURE_IMPISH",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "defensive speed-control cocoon",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_KAKUNA",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_TELEPATHY",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Trick Room reverses normal speed order for both sides and requires a compatible partner."
+      ],
+      "doubles_rationale": "Telepathy lets Kirlia sit beside allied spread attacks, Trick Room changes the speed axis, Will-O-Wisp suppresses physical threats, and Protect helps manage room turns.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_TRICK_ROOM",
+        "MOVE_PSYCHIC",
+        "MOVE_WILL_O_WISP",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_QUIET",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Telepathy Trick Room support",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_KIRLIA",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_SHED_SKIN",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Endeavor is most reliable with Focus Sash, but the other three moves work without it."
+      ],
+      "doubles_rationale": "Struggle Bug lowers both foes' Special Attack, Mud-Slap pressures accuracy, Bug Buzz provides real STAB, and Endeavor creates comeback value after Kricketot is reduced low.",
+      "item_context": "Focus Sash is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_BUG_BUZZ",
+        "MOVE_STRUGGLE_BUG",
+        "MOVE_MUD_SLAP",
+        "MOVE_ENDEAVOR"
+      ],
+      "nature": "NATURE_MODEST",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "spread debuff utility",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_KRICKETOT",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_TECHNICIAN",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Focus Sash is optional insurance for the fragile lead role."
+      ],
+      "doubles_rationale": "Struggle Bug lowers both foes' Special Attack, Taunt stops setup and recovery, Technician strengthens Bug Bite while it disrupts berries, and Protect scouts opposing focus fire.",
+      "item_context": "Focus Sash is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_STRUGGLE_BUG",
+        "MOVE_TAUNT",
+        "MOVE_BUG_BITE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Technician disruption lead",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_KRICKETUNE",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_FLAME_BODY",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Flare Blitz recoil and Morning Sun's weather-sensitive healing require HP management."
+      ],
+      "doubles_rationale": "Flame Body and Will-O-Wisp punish physical contact, U-turn preserves momentum, Flare Blitz prevents passivity, and Morning Sun sustains repeated pivots.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_WILL_O_WISP",
+        "MOVE_FLARE_BLITZ",
+        "MOVE_U_TURN",
+        "MOVE_MORNING_SUN"
+      ],
+      "nature": "NATURE_IMPISH",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Flame Body defensive pivot",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_LARVESTA",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_AERILATE",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Double-Edge causes recoil; the set remains functional without an item."
+      ],
+      "doubles_rationale": "Tailwind accelerates the side, Aerilate converts Double-Edge into strong Flying STAB, Knock Off strips opposing items, and Protect preserves Tailwind turns.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_TAILWIND",
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_KNOCK_OFF",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Aerilate Tailwind support",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_LEDYBA",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_VITAL_SPIRIT",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Paralysis can fail against immune targets and Body Slam's secondary effect is not guaranteed."
+      ],
+      "doubles_rationale": "Vital Spirit prevents sleep, Thunder Wave gives deliberate speed control, Body Slam adds a second paralysis route, Play Rough covers Fighting and Dark targets, and Protect preserves the utility attacker.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_BODY_SLAM",
+        "MOVE_PLAY_ROUGH",
+        "MOVE_THUNDER_WAVE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "bulky paralysis attacker",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_LILLIPUP",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_MOXIE",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Both primary attacks cause recoil, so Litleo needs careful HP management."
+      ],
+      "doubles_rationale": "Flame Charge raises speed, Moxie converts a knockout into Attack momentum, Flare Blitz supplies finishing power, Wild Charge covers Water targets, and Protect creates setup positioning.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_FLARE_BLITZ",
+        "MOVE_FLAME_CHARGE",
+        "MOVE_WILD_CHARGE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Moxie physical snowball",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_LITLEO",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_SWIFT_SWIM",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "The speed and Water damage plan depends on rain, but Lotad carries its own setter."
+      ],
+      "doubles_rationale": "Rain Dance activates Swift Swim and strengthens Scald, Giga Drain covers Water targets and sustains Lotad, and Protect buys a weather turn.",
+      "item_context": "Damp Rock is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_RAIN_DANCE",
+        "MOVE_SCALD",
+        "MOVE_GIGA_DRAIN",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "self-contained rain attacker",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_LOTAD",
+      "suggested_item": "ITEM_DAMP_ROCK"
+    },
+    {
+      "ability": "ABILITY_SOUL_HEART",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Soul-Heart can trigger from any Pokémon fainting, but it does not guarantee Luvdisc scores the knockout."
+      ],
+      "doubles_rationale": "Luvdisc's locally buffed Special Attack and Speed make Icy Wind immediate control, Scald and Draining Kiss provide damage plus utility, and Soul-Heart snowballs any field knockout.",
+      "item_context": "Life Orb is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_ICY_WIND",
+        "MOVE_SCALD",
+        "MOVE_DRAINING_KISS",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Soul-Heart speed-control cleaner",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_LUVDISC",
+      "suggested_item": "ITEM_LIFE_ORB"
+    },
+    {
+      "ability": "ABILITY_INTIMIDATE",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Wild Charge causes recoil; the set values immediate pressure over longevity."
+      ],
+      "doubles_rationale": "Intimidate weakens both physical foes, Thunder Wave controls speed, Wild Charge and Crunch give clean coverage, and Protect enables repeated pivoting.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_WILD_CHARGE",
+        "MOVE_CRUNCH",
+        "MOVE_THUNDER_WAVE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Intimidate physical control",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_LUXIO",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_RATTLED",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Flail is strongest only at low HP and Bounce takes two turns; this is the best honest use of an intentionally weak species."
+      ],
+      "doubles_rationale": "Hydro Pump gives Magikarp a real immediate attack, Focus Sash can enable maximum-power Flail, Rattled may raise speed, and Bounce supplies a high-risk second damage line.",
+      "item_context": "Focus Sash is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_HYDRO_PUMP",
+        "MOVE_FLAIL",
+        "MOVE_BOUNCE",
+        "MOVE_TACKLE"
+      ],
+      "nature": "NATURE_NAIVE",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Focus Sash Flail emergency attacker",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_MAGIKARP",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_REGENERATOR",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "The set omits Protect to retain both Haze and recovery, so double-target turns require care."
+      ],
+      "doubles_rationale": "Scald threatens burns, Icy Wind controls both foes, Haze resets dangerous setup, Recover sustains the wall, and Regenerator rewards repositioning.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_SCALD",
+        "MOVE_ICY_WIND",
+        "MOVE_HAZE",
+        "MOVE_RECOVER"
+      ],
+      "nature": "NATURE_BOLD",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Regenerator speed-control wall",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_MAREANIE",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_INTIMIDATE",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Hydro Pump can miss; Focus Sash is optional insurance."
+      ],
+      "doubles_rationale": "Intimidate softens both physical attackers, Tailwind changes the speed axis, Masquerain's buffed Special Attack gives Bug Buzz and Hydro Pump real force, and Protect preserves control turns.",
+      "item_context": "Focus Sash is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_TAILWIND",
+        "MOVE_BUG_BUZZ",
+        "MOVE_HYDRO_PUMP",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Intimidate Tailwind attacker",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_MASQUERAIN",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_SHED_SKIN",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Metapod has no legal Protect and is intentionally a partner-enabling piece."
+      ],
+      "doubles_rationale": "Electroweb and String Shot slow the opposition, Bug Bite supplies chip and berry disruption, Iron Defense extends field time, and Shed Skin can clear status.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_ELECTROWEB",
+        "MOVE_BUG_BITE",
+        "MOVE_IRON_DEFENSE",
+        "MOVE_STRING_SHOT"
+      ],
+      "nature": "NATURE_IMPISH",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "defensive speed-control cocoon",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_METAPOD",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_LEVITATE",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Pain Split's value depends on relative current HP and is not conventional recovery."
+      ],
+      "doubles_rationale": "Levitate grants valuable Ground immunity, Taunt stops setup and recovery, Will-O-Wisp cripples physical attackers, Foul Play punishes high Attack, and Pain Split supplies irregular sustain.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_FOUL_PLAY",
+        "MOVE_WILL_O_WISP",
+        "MOVE_TAUNT",
+        "MOVE_PAIN_SPLIT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Levitate anti-setup utility",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_MISDREAVUS",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_EFFECT_SPORE",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Grass types and other sleep immunities can ignore Spore."
+      ],
+      "doubles_rationale": "Spore provides guaranteed-accuracy sleep where legal, Strength Sap weakens physical attackers while healing, Moonblast prevents passivity, and Protect preserves the slow support.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_SPORE",
+        "MOVE_STRENGTH_SAP",
+        "MOVE_MOONBLAST",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BOLD",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "slow Spore sustain support",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_MORELULL",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_PRANKSTER",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Priority support can be blocked by Dark-type immunity rules or Psychic Terrain where implemented."
+      ],
+      "doubles_rationale": "Prankster Tailwind and Taunt control the speed and setup axes before most attacks, Foul Play punishes physical sweepers, and Roost keeps Murkrow active across multiple turns.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_TAILWIND",
+        "MOVE_TAUNT",
+        "MOVE_FOUL_PLAY",
+        "MOVE_ROOST"
+      ],
+      "nature": "NATURE_CAREFUL",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Prankster Tailwind denial",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_MURKROW",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_PURIFYING_SALT",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Curse lowers Speed, which is advantageous only under Trick Room or when moving last is acceptable."
+      ],
+      "doubles_rationale": "Purifying Salt blocks status and reduces Ghost pressure, Rock Slide threatens both foes, Curse builds physical bulk and damage, and Recover plus Protect sustain the slow win condition.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_ROCK_SLIDE",
+        "MOVE_CURSE",
+        "MOVE_RECOVER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CAREFUL",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Purifying Salt bulky Rock setup",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_NACLI",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_CHLOROPHYLL",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Sleep Powder is inaccurate; Chlorophyll speed requires allied or opposing sun but the rest of the set does not."
+      ],
+      "doubles_rationale": "Sleep Powder creates tempo, Strength Sap simultaneously heals and lowers Attack, dual STAB prevents passivity, and Chlorophyll gives optional sun synergy.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_SLEEP_POWDER",
+        "MOVE_STRENGTH_SAP",
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_GIGA_DRAIN"
+      ],
+      "nature": "NATURE_BOLD",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "sleep and Strength Sap pivot",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_ODDISH",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_TORRENT",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Hydro Pump can miss and Panpour needs partner pressure to set Nasty Plot safely."
+      ],
+      "doubles_rationale": "Nasty Plot creates a real win condition, Hydro Pump and Ice Beam provide broad coverage, Torrent raises Water damage at low HP, and Protect helps secure the setup turn.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_NASTY_PLOT",
+        "MOVE_HYDRO_PUMP",
+        "MOVE_ICE_BEAM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Nasty Plot special attacker",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_PANPOUR",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_OVERGROW",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Low Sweep only affects its selected target rather than both foes."
+      ],
+      "doubles_rationale": "Seed Bomb is reliable STAB, Knock Off removes held items, Low Sweep adds speed control, and Protect keeps Pansage active until Overgrow can matter.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_SEED_BOMB",
+        "MOVE_KNOCK_OFF",
+        "MOVE_LOW_SWEEP",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "fast physical coverage",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_PANSAGE",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_BLAZE",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Heat Wave can miss and has reduced spread damage in doubles."
+      ],
+      "doubles_rationale": "Nasty Plot powers a spread Heat Wave, Will-O-Wisp checks physical attackers during setup, Protect buys partner-created tempo, and Blaze offers a low-HP damage finish.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_NASTY_PLOT",
+        "MOVE_HEAT_WAVE",
+        "MOVE_WILL_O_WISP",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Nasty Plot spread attacker",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_PANSEAR",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_DRY_SKIN",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Dry Skin increases Fire damage, making Fire matchups especially dangerous."
+      ],
+      "doubles_rationale": "Spore creates immediate control, Knock Off removes opposing items, Seed Bomb gives reliable STAB, Protect scouts Fire pressure, and Dry Skin rewards rain or allied Water attacks.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_SPORE",
+        "MOVE_KNOCK_OFF",
+        "MOVE_SEED_BOMB",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Dry Skin Spore utility",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_PARAS",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_ANALYTIC",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Hypnosis is inaccurate; Super Fang cannot directly finish a target."
+      ],
+      "doubles_rationale": "Super Fang halves bulky targets, Hypnosis can remove one foe, Body Slam adds reliable chip and paralysis odds, Protect preserves Patrat, and Analytic rewards its naturally late actions.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_SUPER_FANG",
+        "MOVE_HYPNOSIS",
+        "MOVE_BODY_SLAM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Super Fang sleep disruptor",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_PATRAT",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_DRIZZLE",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Rain also strengthens opposing Water attacks and weakens all Fire attacks; the set has no Protect."
+      ],
+      "doubles_rationale": "Drizzle immediately powers Weather Ball and perfects Hurricane, Tailwind accelerates the side, and Wide Guard protects both allies from opposing spread moves.",
+      "item_context": "Damp Rock is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_WEATHER_BALL",
+        "MOVE_HURRICANE",
+        "MOVE_TAILWIND",
+        "MOVE_WIDE_GUARD"
+      ],
+      "nature": "NATURE_CALM",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Drizzle Tailwind and spread defense",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_PELIPPER",
+      "suggested_item": "ITEM_DAMP_ROCK"
+    },
+    {
+      "ability": "ABILITY_NATURAL_CURE",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Trick Room affects both sides and requires a compatible partner."
+      ],
+      "doubles_rationale": "Trick Room turns Phantump's low Speed into an advantage, Will-O-Wisp suppresses physical attackers, Horn Leech sustains it, Protect manages room turns, and Natural Cure clears status on switch.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_TRICK_ROOM",
+        "MOVE_HORN_LEECH",
+        "MOVE_WILL_O_WISP",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BRAVE",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Trick Room burn support",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_PHANTUMP",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_LIGHTNING_ROD",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Volt Tackle causes heavy recoil and Pichu has no Protect in this four-move package."
+      ],
+      "doubles_rationale": "Lightning Rod protects its partner, Fake Out creates turn-one tempo, Encore punishes Protect or setup, Volt Switch repositions, and Volt Tackle supplies emergency damage.",
+      "item_context": "Focus Sash is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_VOLT_TACKLE",
+        "MOVE_VOLT_SWITCH",
+        "MOVE_ENCORE"
+      ],
+      "nature": "NATURE_HASTY",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Lightning Rod Fake Out tempo",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_PICHU",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_NO_GUARD",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "No Guard also makes attacks aimed at Pidgey unable to miss, increasing defensive risk."
+      ],
+      "doubles_rationale": "No Guard makes Hurricane reliable, Tailwind changes the speed axis, Roost sustains Pidgey, and Protect preserves control turns.",
+      "item_context": "Focus Sash is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_HURRICANE",
+        "MOVE_TAILWIND",
+        "MOVE_ROOST",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "No Guard Hurricane support",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_PIDGEY",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_SUPER_LUCK",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Pidove's damage is modest; its value is speed control and pivoting."
+      ],
+      "doubles_rationale": "Tailwind accelerates the side, U-turn preserves momentum, Super Luck improves Night Slash's critical-hit pressure, and Protect maintains positioning.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_TAILWIND",
+        "MOVE_U_TURN",
+        "MOVE_NIGHT_SLASH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Super Luck Tailwind pivot",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_PIDOVE",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_LIGHTNING_ROD",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Light Ball sharply improves damage but is advisory; Lightning Rod redirects allied single-target Electric moves."
+      ],
+      "doubles_rationale": "Lightning Rod protects a partner and can boost Thunderbolt, Fake Out controls turn one, Electroweb slows both foes, and Protect preserves Pikachu for repeated pressure.",
+      "item_context": "Light Ball is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_THUNDERBOLT",
+        "MOVE_ELECTROWEB",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Lightning Rod Fake Out attacker",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_PIKACHU",
+      "suggested_item": "ITEM_LIGHT_BALL"
+    },
+    {
+      "ability": "ABILITY_STURDY",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "The set is deliberately low-damage and Light Clay is advisory rather than required."
+      ],
+      "doubles_rationale": "Sturdy guarantees a screen opportunity from full HP, Reflect and Light Screen protect both allies, Rapid Spin clears hazards and supplies chip, and Protect extends screen turns.",
+      "item_context": "Light Clay is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_REFLECT",
+        "MOVE_LIGHT_SCREEN",
+        "MOVE_RAPID_SPIN",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_RELAXED",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Sturdy dual-screen support",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_PINECO",
+      "suggested_item": "ITEM_LIGHT_CLAY"
+    },
+    {
+      "ability": "ABILITY_DRIZZLE",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Rain empowers both sides' Water attacks and weakens both sides' Fire attacks."
+      ],
+      "doubles_rationale": "Drizzle immediately powers Weather Ball, Icy Wind slows both foes, Helping Hand boosts a partner, and Protect keeps the weather setter active.",
+      "item_context": "Damp Rock is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_WEATHER_BALL",
+        "MOVE_ICY_WIND",
+        "MOVE_HELPING_HAND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BOLD",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Drizzle speed-control support",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_POLITOED",
+      "suggested_item": "ITEM_DAMP_ROCK"
+    },
+    {
+      "ability": "ABILITY_SWIFT_SWIM",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Swift Swim needs rain and Hypnosis remains inaccurate even with Wide Lens."
+      ],
+      "doubles_rationale": "Rain turns Swift Swim into immediate speed, Icy Wind controls both foes even outside rain, Scald threatens burns, Hypnosis offers high-upside control, and Protect preserves Poliwag.",
+      "item_context": "Wide Lens is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_SCALD",
+        "MOVE_ICY_WIND",
+        "MOVE_HYPNOSIS",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Swift Swim sleep control",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_POLIWAG",
+      "suggested_item": "ITEM_WIDE_LENS"
+    },
+    {
+      "ability": "ABILITY_SWIFT_SWIM",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Icy Wind is selected for speed control rather than damage and Swift Swim needs rain."
+      ],
+      "doubles_rationale": "Swift Swim and Waterfall create rain pressure, Icy Wind controls both foes outside rain, Encore punishes Protect or setup, and Protect manages weather turns.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_WATERFALL",
+        "MOVE_ICY_WIND",
+        "MOVE_ENCORE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Swift Swim physical control",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_POLIWHIRL",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_SWIFT_SWIM",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Swift Swim requires rain; Rock Slide can miss."
+      ],
+      "doubles_rationale": "Rain activates Swift Swim and strengthens Waterfall, Close Combat supplies decisive Fighting pressure, Rock Slide pressures both foes, and Protect manages weather and partner turns.",
+      "item_context": "Life Orb is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_WATERFALL",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Swift Swim rain bruiser",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_POLIWRATH",
+      "suggested_item": "ITEM_LIFE_ORB"
+    },
+    {
+      "ability": "ABILITY_RATTLED",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Rattled activation depends on the opponent's effects and Sucker Punch can fail against status moves."
+      ],
+      "doubles_rationale": "Crunch and Play Rough give strong coverage, Sucker Punch supplies emergency priority, Rattled can turn common intimidation or Dark, Ghost, and Bug pressure into speed, and Protect scouts attacks.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_CRUNCH",
+        "MOVE_PLAY_ROUGH",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Rattled priority attacker",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_POOCHYENA",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_TELEPATHY",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Trick Room affects both teams and should be paired with slower allies."
+      ],
+      "doubles_rationale": "Telepathy allows allied spread attacks, Trick Room changes the speed axis, Helping Hand amplifies a partner, Psychic prevents passivity, and Protect manages room turns.",
+      "item_context": "Focus Sash is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_TRICK_ROOM",
+        "MOVE_PSYCHIC",
+        "MOVE_HELPING_HAND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_QUIET",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Telepathy Trick Room support",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_RALTS",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_LEVITATE",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Will-O-Wisp is inaccurate and Fire types cannot be burned."
+      ],
+      "doubles_rationale": "Electroweb slows both foes, Will-O-Wisp suppresses physical attackers, Volt Switch preserves momentum, Levitate grants Ground immunity, and Protect keeps Rotom cycling.",
+      "item_context": "Leftovers is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_ELECTROWEB",
+        "MOVE_WILL_O_WISP",
+        "MOVE_VOLT_SWITCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Levitate spread speed control",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_ROTOM",
+      "suggested_item": "ITEM_LEFTOVERS"
+    },
+    {
+      "ability": "ABILITY_LIGHTNING_ROD",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Lightning Rod boosts Special Attack, but this set selects it for redirection."
+      ],
+      "doubles_rationale": "Lightning Rod protects its partner from Electric attacks, Waterfall supplies STAB, Knock Off strips items, Drill Run covers Electric and Steel targets, and Protect preserves the redirector.",
+      "item_context": "Life Orb is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_WATERFALL",
+        "MOVE_KNOCK_OFF",
+        "MOVE_DRILL_RUN",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Lightning Rod physical attacker",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_SEAKING",
+      "suggested_item": "ITEM_LIFE_ORB"
+    },
+    {
+      "ability": "ABILITY_CHLOROPHYLL",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Explosion also hits the ally and must be paired with Protect, Ghost immunity, or deliberate sacrifice; Chlorophyll needs sun."
+      ],
+      "doubles_rationale": "Seed Bomb and Sucker Punch give reliable physical pressure, Explosion creates a deliberate trade, Protect lets a partner avoid that blast, and Chlorophyll adds optional sun speed.",
+      "item_context": "Focus Sash is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_SEED_BOMB",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_EXPLOSION",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "sun-compatible priority detonator",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_SEEDOT",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_FUR_COAT",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Follow Me is meaningful only in doubles and cannot redirect every move or spread attack."
+      ],
+      "doubles_rationale": "Fur Coat lets Sentret redirect physical attacks with Follow Me, Super Fang chunks bulky foes, Helping Hand boosts its partner, and Protect prevents predictable focus fire.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_FOLLOW_ME",
+        "MOVE_SUPER_FANG",
+        "MOVE_HELPING_HAND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CAREFUL",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Fur Coat redirection support",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_SENTRET",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_OVERCOAT",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Electroweb damage is secondary to its speed drop."
+      ],
+      "doubles_rationale": "Overcoat ignores powder and weather chip, Electroweb controls both foes, Light Screen supports the side, Seed Bomb prevents passivity, and Protect preserves the utility slot.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_ELECTROWEB",
+        "MOVE_SEED_BOMB",
+        "MOVE_LIGHT_SCREEN",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_IMPISH",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Overcoat speed-control support",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_SEWADDLE",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_SPEED_BOOST",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Earthquake also hits grounded allies and needs compatible partner positioning."
+      ],
+      "doubles_rationale": "Protect guarantees the first Speed Boost, Crunch supplies STAB, Ice Fang and Earthquake broaden coverage, and subsequent boosts turn Sharpedo into a lethal cleaner.",
+      "item_context": "Life Orb is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_CRUNCH",
+        "MOVE_ICE_FANG",
+        "MOVE_EARTHQUAKE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Speed Boost cleaner",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_SHARPEDO",
+      "suggested_item": "ITEM_LIFE_ORB"
+    },
+    {
+      "ability": "ABILITY_STORM_DRAIN",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Storm Drain redirects allied single-target Water moves as well as opposing ones."
+      ],
+      "doubles_rationale": "Storm Drain redirects Water attacks and boosts Special Attack, Scald threatens burns, Icy Wind controls both foes, and Recover plus Protect make Shellos difficult to remove.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_SCALD",
+        "MOVE_ICY_WIND",
+        "MOVE_RECOVER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CALM",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Storm Drain speed-control wall",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_SHELLOS",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_INTIMIDATE",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Wild Charge causes recoil and Thunder Wave fails against immune targets."
+      ],
+      "doubles_rationale": "Intimidate weakens both physical foes, Thunder Wave controls speed, Helping Hand amplifies a stronger partner, Wild Charge supplies real damage, and Protect keeps Shinx available to pivot.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_WILD_CHARGE",
+        "MOVE_HELPING_HAND",
+        "MOVE_THUNDER_WAVE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Intimidate paralysis support",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_SHINX",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_EFFECT_SPORE",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Grass types and other sleep immunities can ignore Spore."
+      ],
+      "doubles_rationale": "Spore creates immediate control, Drain Punch sustains Shroomish, Seed Bomb gives reliable STAB, Protect scouts focus fire, and Effect Spore punishes contact without requiring an Orb.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_SPORE",
+        "MOVE_DRAIN_PUNCH",
+        "MOVE_SEED_BOMB",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_IMPISH",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Effect Spore sleep bruiser",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_SHROOMISH",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_SHED_SKIN",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Silcoon has no legal Protect in the local pool and depends on partner support."
+      ],
+      "doubles_rationale": "Electroweb and String Shot lower opposing speed, Bug Bite supplies chip and berry disruption, Iron Defense extends field time, and Shed Skin can clear status.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_ELECTROWEB",
+        "MOVE_BUG_BITE",
+        "MOVE_IRON_DEFENSE",
+        "MOVE_STRING_SHOT"
+      ],
+      "nature": "NATURE_IMPISH",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "slow speed-control cocoon",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_SILCOON",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_STALL",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Stall forces Slakoth to move last within its priority bracket; this is intentional and not the Slow Start or Truant gimmick."
+      ],
+      "doubles_rationale": "The local Stall slot removes Truant's skipped turns at the cost of moving last, letting Slakoth spread paralysis or Yawn, heal with Slack Off, and use Protect every turn.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_BODY_SLAM",
+        "MOVE_YAWN",
+        "MOVE_SLACK_OFF",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BRAVE",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Stall delayed-control tank",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_SLAKOTH",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_REGENERATOR",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Trick Room affects both teams and must be paired with compatible speed tiers."
+      ],
+      "doubles_rationale": "Trick Room turns Slowbro's low Speed into an advantage, Scald threatens burns, Slack Off and Protect sustain the setter, and Regenerator rewards cycling after room expires.",
+      "item_context": "Leftovers is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_TRICK_ROOM",
+        "MOVE_SCALD",
+        "MOVE_SLACK_OFF",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_RELAXED",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Regenerator Trick Room anchor",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_SLOWBRO",
+      "suggested_item": "ITEM_LEFTOVERS"
+    },
+    {
+      "ability": "ABILITY_REGENERATOR",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Trick Room affects both teams; Yawn takes effect at the end of the following turn."
+      ],
+      "doubles_rationale": "Trick Room flips the speed axis, Yawn forces movement or sleep, Psychic prevents passivity, Protect manages room and Yawn turns, and Regenerator supports repeated setup attempts.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_TRICK_ROOM",
+        "MOVE_PSYCHIC",
+        "MOVE_YAWN",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_SASSY",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Regenerator Yawn room setter",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_SLOWPOKE",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_PROTEAN",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Protean changes typing when an attack is selected, which can alter incoming weaknesses."
+      ],
+      "doubles_rationale": "Protean converts three distinct attacks into flexible STAB and defensive typing, Sucker Punch adds priority, and Protect scouts which coverage line is safest.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_SEED_BOMB",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_PLAY_ROUGH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Protean coverage attacker",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_SPRIGATITO",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_SWIFT_SWIM",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Swift Swim requires rain, but the speed-control plan functions without it."
+      ],
+      "doubles_rationale": "Icy Wind slows both foes, Scald threatens burns, Bug Buzz supplies secondary STAB, Swift Swim rewards rain support, and Protect preserves the controller.",
+      "item_context": "Focus Sash is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_ICY_WIND",
+        "MOVE_SCALD",
+        "MOVE_BUG_BUZZ",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Swift Swim spread speed control",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_SURSKIT",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_OVERCOAT",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Electroweb is selected primarily for speed control."
+      ],
+      "doubles_rationale": "Overcoat ignores powder and weather chip, Electroweb slows both foes, dual special STAB supplies damage and recovery, and Protect preserves the bulky middle evolution.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_BUG_BUZZ",
+        "MOVE_GIGA_DRAIN",
+        "MOVE_ELECTROWEB",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Overcoat bulky special control",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_SWADLOON",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_SCRAPPY",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Brave Bird causes recoil; Focus Sash is advisory insurance."
+      ],
+      "doubles_rationale": "Scrappy lets Brave Bird pressure Ghost targets, Tailwind accelerates the side, U-turn preserves momentum, and Protect keeps the fragile speed setter alive.",
+      "item_context": "Focus Sash is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_BRAVE_BIRD",
+        "MOVE_U_TURN",
+        "MOVE_TAILWIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Scrappy Tailwind pivot",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_TAILLOW",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_LIQUID_OOZE",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Icy Wind damage is secondary to its speed drop."
+      ],
+      "doubles_rationale": "Tentacool's high local Special Defense lets it repeatedly use Icy Wind, Scald and Sludge Bomb apply meaningful secondary pressure, Protect preserves it, and Liquid Ooze punishes draining attacks.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_ICY_WIND",
+        "MOVE_SCALD",
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CALM",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "special wall and speed control",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_TENTACOOL",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_STATIC",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Toxel's exact local legal pool is unusually shallow; this is an honest support set rather than a false sweeper."
+      ],
+      "doubles_rationale": "Encore punishes Protect and setup, Static can paralyze contact attackers, Acid gives STAB and a defensive-drop chance, Secret Power supplies neutral chip, and Protect preserves the nuisance role.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_ACID",
+        "MOVE_ENCORE",
+        "MOVE_SECRET_POWER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Static Encore nuisance",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_TOXEL",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_GRASSY_SURGE",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Grassy Terrain heals grounded opponents too and weakens Earthquake damage."
+      ],
+      "doubles_rationale": "Grassy Surge supplies immediate terrain, powers priority Grassy Glide, sustains both sides while Horn Leech adds recovery, and Will-O-Wisp checks physical attackers.",
+      "item_context": "Leftovers is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_GRASSY_GLIDE",
+        "MOVE_HORN_LEECH",
+        "MOVE_WILL_O_WISP",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Grassy Surge priority bruiser",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_TREVENANT",
+      "suggested_item": "ITEM_LEFTOVERS"
+    },
+    {
+      "ability": "ABILITY_SPEED_BOOST",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Endeavor is most reliable with Focus Sash; Pin Missile has variable hit count."
+      ],
+      "doubles_rationale": "Protect secures a Speed Boost, dual STAB gives real pressure, and Endeavor creates comeback value after Focus Sash or heavy damage.",
+      "item_context": "Focus Sash is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_PROTECT",
+        "MOVE_PIN_MISSILE",
+        "MOVE_POISON_JAB",
+        "MOVE_ENDEAVOR"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Speed Boost utility attacker",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_VENIPEDE",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_COMPOUND_EYES",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Sleep Powder can still miss and fails into sleep-immune targets."
+      ],
+      "doubles_rationale": "Compound Eyes improves Sleep Powder, Struggle Bug lowers both foes' Special Attack, Sludge Bomb prevents passivity, and Protect preserves repeated control attempts.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_SLEEP_POWDER",
+        "MOVE_STRUGGLE_BUG",
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BOLD",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Compound Eyes sleep support",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_VENONAT",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_PRESSURE",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Water Spout loses power as Wailmer loses HP, so Protect and careful positioning preserve its main attack."
+      ],
+      "doubles_rationale": "Full-HP Water Spout pressures both foes, Hydro Pump retains power after chip, Ice Beam covers Grass and Dragon targets, and Protect helps preserve HP while scouting double targets.",
+      "item_context": "Mystic Water is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_WATER_SPOUT",
+        "MOVE_HYDRO_PUMP",
+        "MOVE_ICE_BEAM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Water Spout spread cannon",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_WAILMER",
+      "suggested_item": "ITEM_MYSTIC_WATER"
+    },
+    {
+      "ability": "ABILITY_SHIELD_DUST",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Weedle has no legal Protect in the exact local pool and is intentionally a low-damage support piece."
+      ],
+      "doubles_rationale": "Electroweb and String Shot help a stronger partner move first, Bug Bite supplies chip and berry disruption, Poison Sting adds a poison chance, and Shield Dust blocks secondary effects.",
+      "item_context": "Focus Sash is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_ELECTROWEB",
+        "MOVE_STRING_SHOT",
+        "MOVE_BUG_BITE",
+        "MOVE_POISON_STING"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "minimal dual speed-control support",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_WEEDLE",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_WIMP_OUT",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Wimp Out forces a switch below half HP and can disrupt the player's intended field position."
+      ],
+      "doubles_rationale": "Taunt stops setup, Struggle Bug lowers both foes' Special Attack, Aqua Jet finishes weakened targets, Protect scouts pressure, and Wimp Out can turn damage into a free pivot.",
+      "item_context": "Focus Sash is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_AQUA_JET",
+        "MOVE_STRUGGLE_BUG",
+        "MOVE_TAUNT",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "fast Wimp Out disruption",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_WIMPOD",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_KEEN_EYE",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Tailwind lasts only a few turns, so Wingull should establish it when its partner can immediately exploit the speed advantage."
+      ],
+      "doubles_rationale": "Tailwind immediately accelerates the side, Scald threatens burns, Air Slash supplies reliable Flying pressure, Protect preserves control turns, and Keen Eye prevents accuracy drops from disrupting that role.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_AIR_SLASH",
+        "MOVE_SCALD",
+        "MOVE_TAILWIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "fast Tailwind and burn support",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_WINGULL",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_POISON_POINT",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Wurmple has no legal Protect in the exact local pool and remains intentionally modest in power."
+      ],
+      "doubles_rationale": "Electroweb and String Shot slow the opposition, Bug Bite gives chip and berry disruption, Tackle supplies a fallback attack, and Poison Point can punish contact.",
+      "item_context": "Focus Sash is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_ELECTROWEB",
+        "MOVE_STRING_SHOT",
+        "MOVE_BUG_BITE",
+        "MOVE_TACKLE"
+      ],
+      "nature": "NATURE_IMPISH",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Poison Point speed-control larva",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_WURMPLE",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_SPEED_BOOST",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Speed Boost and Tailwind can be redundant after several turns, but Tailwind immediately helps the partner."
+      ],
+      "doubles_rationale": "Protect secures Speed Boost, Tailwind accelerates the whole side, and dual special STAB makes Yanma a genuine attacker rather than pure support.",
+      "item_context": "Focus Sash is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_AIR_SLASH",
+        "MOVE_BUG_BUZZ",
+        "MOVE_TAILWIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Speed Boost Tailwind attacker",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_YANMA",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_STAKEOUT",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Stakeout only boosts attacks into a target that switched that turn."
+      ],
+      "doubles_rationale": "Super Fang chunks bulky targets, Stakeout punishes switches, Crunch supplies reliable damage, U-turn preserves momentum, and Protect scouts opposing targeting.",
+      "item_context": "Eviolite is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_SUPER_FANG",
+        "MOVE_CRUNCH",
+        "MOVE_U_TURN",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Stakeout Super Fang pivot",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_YUNGOOS",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_GLUTTONY",
+      "dependency_notes": [
+        "The suggested held item is advisory; the native builder neither grants nor equips it.",
+        "Belly Drum costs half of current HP; Sitrus Berry is strongly recommended but remains advisory."
+      ],
+      "doubles_rationale": "Belly Drum creates an immediate win condition, Extreme Speed supplies exceptional priority, Seed Bomb hits common resists, Protect buys the setup turn, and Gluttony improves berry timing.",
+      "item_context": "Sitrus Berry is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
+      "moves": [
+        "MOVE_BELLY_DRUM",
+        "MOVE_EXTREME_SPEED",
+        "MOVE_SEED_BOMB",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "reviewed_by": "Emerald Champions early-route battle-set audit",
+      "role": "Gluttony Belly Drum priority cleaner",
+      "source_refs": [
+        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
+      ],
+      "species": "SPECIES_ZIGZAGOON",
+      "suggested_item": "ITEM_SITRUS_BERRY"
+    }
+  ],
+  "schema_version": 1
+}
