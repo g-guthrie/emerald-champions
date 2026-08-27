@@ -58,12 +58,12 @@ LAND_UPGRADES = {
     "MAP_GRANITE_CAVE_STEVENS_ROOM": {8: "SPECIES_DREEPY", 9: "SPECIES_LARVESTA"},
     "MAP_ROUTE110": {
         # Timmy's source-closed Route 110 battle explicitly uses four local
-        # catches, including Pincurchin and Stunky.  Rotom remains exclusive to
-        # its generator encounter in New Mauville.
-        8: "SPECIES_PINCURCHIN",
+        # catches. Pair both tail species across the 4% and 1% slots so neither
+        # becomes a separate low-rate grind. Rotom remains New Mauville-only.
+        8: "SPECIES_HELIOLISK",
         9: "SPECIES_TOXEL",
-        10: "SPECIES_PACHIRISU",
-        11: "SPECIES_STUNKY",
+        10: "SPECIES_HELIOLISK",
+        11: "SPECIES_TOXEL",
     },
     "MAP_ROUTE112": {8: "SPECIES_HAWLUCHA", 9: "SPECIES_KUBFU"},
     "MAP_FIERY_PATH": {8: "SPECIES_LARVESTA", 9: "SPECIES_CHARMANDER"},

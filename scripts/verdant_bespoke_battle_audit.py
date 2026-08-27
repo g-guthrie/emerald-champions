@@ -4582,7 +4582,7 @@ def main() -> None:
         {"level": 1, "species": "SPECIES_GIMMIGHOUL_ROAMING", "item": "ITEM_FOCUS_SASH", "ability_slot": 0, "spread": "SPREAD_HP_FIGHTING_TIMID", "moves": ["MOVE_SHADOW_BALL", "MOVE_HIDDEN_POWER", "MOVE_THIEF", "MOVE_PROTECT"]},
         {"level": 2, "species": "SPECIES_STUNKY", "item": "ITEM_EVIOLITE", "ability_slot": 1, "spread": "SPREAD_31_IV_HP_ATK_MIXED", "moves": ["MOVE_FOUL_PLAY", "MOVE_SUCKER_PUNCH", "MOVE_SLUDGE_BOMB", "MOVE_FLAMETHROWER"]},
         {"level": 2, "species": "SPECIES_PLUSLE", "item": "ITEM_SHUCA_BERRY", "ability_slot": 2, "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID", "moves": ["MOVE_THUNDERBOLT", "MOVE_GRASS_KNOT", "MOVE_DAZZLING_GLEAM", "MOVE_ENCORE"]},
-        {"level": 3, "species": "SPECIES_PINCURCHIN", "item": "ITEM_LIFE_ORB", "ability_slot": 2, "spread": "SPREAD_31_IV_HP_SPATK_QUIET", "moves": ["MOVE_RISING_VOLTAGE", "MOVE_SCALD", "MOVE_RECOVER", "MOVE_PROTECT"]},
+        {"level": 3, "species": "SPECIES_HELIOLISK", "item": "ITEM_LIFE_ORB", "ability_slot": 0, "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID", "moves": ["MOVE_THUNDERBOLT", "MOVE_HYPER_VOICE", "MOVE_GLARE", "MOVE_PROTECT"]},
     ]
     if timmy53["trainer_ids"] != ["TRAINER_TIMMY"] or party_builds("TRAINER_TIMMY", trainers_text, parties_text) != expected_timmy53:
         problems.append("Battle 53: Timmy's closure or source party differs")
@@ -4604,18 +4604,20 @@ def main() -> None:
         "SPECIES_GIMMIGHOUL_ROAMING": (0, "ABILITY_RUN_AWAY"),
         "SPECIES_STUNKY": (1, "ABILITY_AFTERMATH"),
         "SPECIES_PLUSLE": (2, "ABILITY_LIGHTNING_ROD"),
-        "SPECIES_PINCURCHIN": (2, "ABILITY_ELECTRIC_SURGE"),
+        "SPECIES_HELIOLISK": (0, "ABILITY_DRY_SKIN"),
     }
     for species, (slot, ability) in abilities53.items():
         slots = ability_slots.get(species, [])
         if len(slots) <= slot or slots[slot] != ability:
             problems.append(f"Battle 53: {species} slot {slot} is not {ability}: {slots}")
-    names53 = {"STUNKY": "Stunky", "PLUSLE": "Plusle", "PINCURCHIN": "Pincurchin"}
+    names53 = {"STUNKY": "Stunky", "PLUSLE": "Plusle", "HELIOLISK": "Heliolisk"}
     for build in expected_timmy53:
         species = build["species"].removeprefix("SPECIES_")
         for move in build["moves"]:
             if species == "GIMMIGHOUL_ROAMING":
                 legal = species_has_gen9_tm_move(gen9_tm_source, tm_indices, species, move)
+            elif species == "HELIOLISK" and move == "MOVE_GLARE":
+                legal = "MOVE_GLARE" in species_egg_body(egg_source, "HELIOPTILE")
             else:
                 legal = move_is_legal(species, names53[species], move, level_source, tmhm_source, tm_indices, tutor_source, indices, egg_source)
             if not legal:
@@ -4630,7 +4632,7 @@ def main() -> None:
     wild53 = json.loads(read("src/data/wild_encounters.json"))["wild_encounter_groups"][0]["encounters"]
     route110_wild = next(row for row in wild53 if row.get("map") == "MAP_ROUTE110")
     land_species53 = {row["species"] for row in route110_wild["land_mons"]["mons"]}
-    exact_local53 = {"SPECIES_GIMMIGHOUL_ROAMING", "SPECIES_STUNKY", "SPECIES_PLUSLE", "SPECIES_PINCURCHIN"}
+    exact_local53 = {"SPECIES_GIMMIGHOUL_ROAMING", "SPECIES_STUNKY", "SPECIES_PLUSLE", "SPECIES_HELIOLISK"}
     if not exact_local53 <= land_species53:
         problems.append(f"Battle 53: exact local-catch premise drifted; missing {sorted(exact_local53 - land_species53)}")
     route110_map = json.loads(read("data/maps/Route110/map.json"))
@@ -4646,7 +4648,7 @@ def main() -> None:
             problems.append(f"Battle 53: Timmy unexpectedly owns progression or reward token {forbidden}")
     route110_dialogue53 = read("data/text/trainers.inc")
     timmy_dialogue = route110_dialogue53.split("Route110_Text_TimmyIntro:", 1)[1].split("Route110_Text_AlyssaIntro:", 1)[0]
-    for cue in ("four in this grass", "each one battles", "need a plan", "Pincurchin", "that coin", "Keep looking"):
+    for cue in ("four in this grass", "each one battles", "need a plan", "Heliolisk", "Toxel", "Keep looking"):
         if cue not in timmy_dialogue:
             problems.append(f"Battle 53: dialogue misses {cue}")
     for line in re.findall(r'\.string "([^"]*)"', timmy_dialogue):
@@ -4656,6 +4658,7 @@ def main() -> None:
     donor_requirements53 = {
         "showdown:gen7randombattle:020": {"Skuntank"},
         "showdown:gen9randombattle:011": {"Plusle"},
+        "showdown:gen8randomdoublesbattle:029": {"Heliolisk"},
     }
     for reference_id, required_species in donor_requirements53.items():
         row = refs29.get(reference_id)
@@ -4665,8 +4668,8 @@ def main() -> None:
     repeats53 = battles_1_to_52 & {build["species"] for build in expected_timmy53}
     if repeats53:
         problems.append(f"Battle 53: exact-catch sampler repeats earlier species {sorted(repeats53)}")
-    if "first closed Pincurchin" not in timmy53.get("uniqueness", ""):
-        problems.append("Battle 53: Pincurchin's first-use disposition is missing")
+    if "first closed Heliolisk" not in timmy53.get("uniqueness", ""):
+        problems.append("Battle 53: Heliolisk's first-use disposition is missing")
 
     rival54 = designs["BATTLE_054_ROUTE_110_RIVAL"]
     rival54_ids = [

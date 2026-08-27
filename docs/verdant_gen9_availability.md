@@ -45,7 +45,8 @@ League showcases.
 
 The two 4-percent tail slots are weighting tools, not places to hide separate
 headline species. Route 104 now offers Mareanie and Wimpod at 12 percent each;
-Route 110 offers Pincurchin, Toxel, Pachirisu, and Stunky as its story pool; and
+Route 110 offers Heliolisk and Toxel at 5 percent each beside its common
+Pachirisu and Stunky; and
 Route 121 offers Zoroark and Sinistea at 12 percent each. Rotom is reserved for
 its New Mauville generator encounter, Spiritomb for its Odd Keystone encounter,
 Porygon remains a Mauville Game Corner prize, and Klefki remains on Route 113.

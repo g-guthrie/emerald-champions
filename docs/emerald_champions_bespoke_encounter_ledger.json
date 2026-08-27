@@ -36,7 +36,7 @@
   ],
   "resolved_collisions": [
     {"map": "MAP_ROUTE103", "method": "land_mons", "slot": 9, "removed": "SPECIES_ROTOM", "replacement": "SPECIES_YAMPER", "reason": "Young Electric route ecology; preserves Rotom's New Mauville generator reveal."},
-    {"map": "MAP_ROUTE110", "method": "land_mons", "slot": 8, "removed": "SPECIES_ROTOM", "replacement": "SPECIES_PINCURCHIN", "reason": "Distinctive single-stage Electric Terrain local ace; Timmy's exact-catch party and dialogue now use Pincurchin."},
+    {"map": "MAP_ROUTE110", "method": "land_mons", "slot": 8, "removed": "SPECIES_ROTOM", "replacement": "SPECIES_HELIOLISK", "reason": "Fast Dry Skin Electric/Normal ace; paired tail weighting gives Heliolisk a combined five-percent source and keeps Rotom exclusive."},
     {"map": "MAP_ROUTE118", "method": "land_mons", "slot": 4, "removed": "SPECIES_KECLEON", "replacement": "SPECIES_PASSIMIAN", "reason": "Single-stage competitive route species; preserves Kecleon's Devon Scope identity."},
     {"map": "MAP_ROUTE119", "method": "land_mons", "slot": 6, "removed": "SPECIES_KECLEON", "replacement": "SPECIES_CRAMORANT", "reason": "Rain-route single-stage species with a distinctive native form mechanic."},
     {"map": "MAP_ROUTE119", "method": "land_mons", "slot": 7, "removed": "SPECIES_KECLEON", "replacement": "SPECIES_CRAMORANT", "reason": "Consolidates Cramorant to ten percent without introducing another low-rate hunt."},

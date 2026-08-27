@@ -95,7 +95,7 @@ EXPECTED_LITERAL_SETWILD = {
 # levels remain untouched by this policy.
 RESOLVED_SLOTS = (
     ("MAP_ROUTE103", "land_mons", 9, "SPECIES_ROTOM", "SPECIES_YAMPER"),
-    ("MAP_ROUTE110", "land_mons", 8, "SPECIES_ROTOM", "SPECIES_PINCURCHIN"),
+    ("MAP_ROUTE110", "land_mons", 8, "SPECIES_ROTOM", "SPECIES_HELIOLISK"),
     ("MAP_ROUTE118", "land_mons", 4, "SPECIES_KECLEON", "SPECIES_PASSIMIAN"),
     ("MAP_ROUTE119", "land_mons", 6, "SPECIES_KECLEON", "SPECIES_CRAMORANT"),
     ("MAP_ROUTE119", "land_mons", 7, "SPECIES_KECLEON", "SPECIES_CRAMORANT"),
