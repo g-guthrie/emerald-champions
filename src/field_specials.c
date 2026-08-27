@@ -49,8 +49,10 @@
 #include "tv.h"
 #include "wallclock.h"
 #include "window.h"
+#include "verdant_battle_sets.h"
 #include "constants/battle_frontier.h"
 #include "constants/battle_tower.h"
+#include "constants/abilities.h"
 #include "constants/decorations.h"
 #include "constants/event_objects.h"
 #include "constants/event_object_movement.h"
@@ -70,6 +72,8 @@
 #include "constants/weather.h"
 #include "constants/metatile_labels.h"
 #include "palette.h"
+
+#include "data/pokemon/verdant_battle_sets.h"
 
 void TryGiveVerdantMegaKit(void)
 {
@@ -2567,7 +2571,7 @@ void ShowScrollableMultichoice(void)
             break;
         case SCROLL_MULTI_POKE_CENTER_TUTOR:
             task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
-            task->tNumItems = 6;
+            task->tNumItems = 7;
             task->tLeft = 20;
             task->tTop = 1;
             task->tWidth = 14;
@@ -2991,6 +2995,7 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_RateANickname,
         gText_MysteryGift,
         gText_ResetEvents,
+        gText_BuildBattleSet,
         gText_Exit
     },
     [SCROLL_MULTI_HIDDEN_POWER] = 
@@ -5079,6 +5084,64 @@ void SetPlayerGotFirstFans(void)
 u8 Script_TryGainNewFanFromCounter(void)
 {
     return TryGainNewFanFromCounter(gSpecialVar_0x8004);
+}
+
+// Applies the selected party member's complete preset only after every preset
+// field has been validated. Empty moves are permitted only as trailing slots
+// for species such as Ditto that do not have four distinct legal moves.
+void ApplySelectedMonBattleSet(void)
+{
+    struct Pokemon *mon;
+    const struct VerdantBattleSetPreset *preset;
+    u16 species;
+    u16 move;
+    u8 ppBonuses = 0;
+    u8 i;
+    u8 j;
+    bool8 sawEmptyMove = FALSE;
+
+    gSpecialVar_Result = FALSE;
+
+    if (gSpecialVar_0x8004 >= PARTY_SIZE)
+        return;
+
+    mon = &gPlayerParty[gSpecialVar_0x8004];
+    species = GetMonData(mon, MON_DATA_SPECIES2, NULL);
+    if (species == SPECIES_NONE || species == SPECIES_EGG || species >= NUM_SPECIES)
+        return;
+
+    preset = &gVerdantBattleSetPresets[species];
+    if (preset->nature >= NUM_NATURES
+     || preset->abilitySlot >= NUM_ABILITY_SLOTS
+     || gBaseStats[species].abilities[preset->abilitySlot] == ABILITY_NONE)
+        return;
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        move = preset->moves[i];
+        if (move == MOVE_NONE)
+        {
+            sawEmptyMove = TRUE;
+            continue;
+        }
+        if (sawEmptyMove || move >= MOVES_COUNT)
+            return;
+        for (j = 0; j < i; j++)
+        {
+            if (preset->moves[j] == move)
+                return;
+        }
+    }
+    if (preset->moves[0] == MOVE_NONE)
+        return;
+
+    SetMonData(mon, MON_DATA_PP_BONUSES, &ppBonuses);
+    for (i = 0; i < MAX_MON_MOVES; i++)
+        SetMonMoveSlot(mon, preset->moves[i], i);
+    SetMonData(mon, MON_DATA_NATURE, &preset->nature);
+    SetMonData(mon, MON_DATA_ABILITY_NUM, &preset->abilitySlot);
+    CalculateMonStats(mon);
+    gSpecialVar_Result = TRUE;
 }
 
 // Changes the selected Pokemon's nature.

@@ -540,6 +540,7 @@ gSpecials::
 	def_special CloseDeptStoreElevatorWindow
 	def_special TrySetBattleTowerLinkType
 	def_special ChangePokemonNature
+	def_special ApplySelectedMonBattleSet
 	def_special BufferChosenMonNature
 	def_special ChangeChosenMonIVs
 	def_special IncreaseChosenMonEVs

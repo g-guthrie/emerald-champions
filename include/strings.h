@@ -3453,6 +3453,7 @@ extern const u8 gText_LearnANewMove[];
 extern const u8 gText_RateANickname[];
 extern const u8 gText_TrainEXP[];
 extern const u8 gText_ResetEvents[];
+extern const u8 gText_BuildBattleSet[];
 
 // Mauville Game Corner prizes
 extern const u8 gText_GameCornerPorygon[];

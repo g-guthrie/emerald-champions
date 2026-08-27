@@ -2063,6 +2063,7 @@ const u8 gText_LearnANewMove[] = _("Learn a new move");
 const u8 gText_RateANickname[] = _("Rate a nickname");
 const u8 gText_TrainEXP[] = _("Train Exp.");
 const u8 gText_ResetEvents[] = _("Restore Events");
+const u8 gText_BuildBattleSet[] = _("Learn a moveset");
 
 // Game Corner Pokemon prizes
 // Rare Pokemon

@@ -1,0 +1,54 @@
+{
+  "batch_id": "core-exceptions-v1",
+  "reviews": [
+    {
+      "ability": "ABILITY_IMPOSTER",
+      "dependency_notes": [
+        "Choice Scarf is advisory and is not granted or equipped by the builder.",
+        "Transform is intentionally the only occupied move slot because filler attacks make Imposter Ditto worse and misrepresent its role."
+      ],
+      "doubles_rationale": "Imposter immediately copies an opposing threat, scouting its set and turning the opponent's strongest stat line against the field. Transform-only keeps the preset honest and leaves item choice to the player.",
+      "item_context": "Choice Scarf is the standard revenge-control option; Focus Sash is a slower alternative when speed control already exists.",
+      "moves": [
+        "MOVE_TRANSFORM"
+      ],
+      "nature": "NATURE_RELAXED",
+      "review_notes": "Authored exception: unused move slots are intentional.",
+      "reviewed_by": "Emerald Champions battle-set audit",
+      "role": "Imposter revenge copier and information scout",
+      "source_refs": [
+        "Smogon Ditto competitive analyses",
+        "Emerald Champions local Imposter ability slot and Transform learnset"
+      ],
+      "species": "SPECIES_DITTO",
+      "suggested_item": "ITEM_CHOICE_SCARF"
+    },
+    {
+      "ability": "ABILITY_MOODY",
+      "dependency_notes": [
+        "Focus Sash is advisory and is not granted or equipped by the builder.",
+        "All four moves are locally obtainable through Sketch even though ordinary tutor bitfields cannot encode indirect Sketch legality.",
+        "Follow Me, Wide Guard, and Fake Out are partner- and matchup-dependent doubles tools."
+      ],
+      "doubles_rationale": "Fast sleep pressure plus Fake Out creates immediate tempo, while Follow Me and Wide Guard let Smeargle protect either a setup partner or the whole side. Moody supplies a real long-turn payoff without pretending Smeargle is an attacker.",
+      "item_context": "Focus Sash is the default because Smeargle's bulk is poor; Mental Herb is a situational anti-Taunt alternative.",
+      "moves": [
+        "MOVE_SPORE",
+        "MOVE_FAKE_OUT",
+        "MOVE_FOLLOW_ME",
+        "MOVE_WIDE_GUARD"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Directly reviewed against local Sketch behavior and the doubles support role.",
+      "reviewed_by": "Emerald Champions battle-set audit",
+      "role": "Fast disruptive doubles support and redirection",
+      "source_refs": [
+        "Smogon doubles Smeargle support archetypes",
+        "Emerald Champions local Sketch and Moody implementations"
+      ],
+      "species": "SPECIES_SMEARGLE",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    }
+  ],
+  "schema_version": 1
+}

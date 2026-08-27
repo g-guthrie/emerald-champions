@@ -23,6 +23,11 @@ subprocess.run(
     check=True,
 )
 subprocess.run(
+    [sys.executable, str(ROOT / "scripts/verdant_battle_set_presets.py"), "--check"],
+    cwd=ROOT,
+    check=True,
+)
+subprocess.run(
     [sys.executable, str(ROOT / "scripts/verify_competitive_references.py")],
     cwd=ROOT,
     check=True,
@@ -248,6 +253,7 @@ battle_script_command_source = read("src/battle_script_commands.c")
 battle_util_source = read("src/battle_util.c")
 pc_tutor_source = read("data/scripts/pokemon_center_move_tutor.inc")
 pc_menu_block = field_specials_source.split("[SCROLL_MULTI_POKE_CENTER_TUTOR] =", 1)[1].split("},", 1)[0]
+battle_set_runtime = field_specials_source.split("void ApplySelectedMonBattleSet", 1)[1].split("// Changes the selected Pokemon's nature.", 1)[0]
 
 ported_gen8_move_animations = (
     "Move_ZIPPY_ZAP",
@@ -940,6 +946,25 @@ checks = {
         and "NUM_TECHNICAL_MACHINES + NUM_HIDDEN_MACHINES" in read("src/pokemon.c")
         and "TUTOR_MOVE_COUNT" in read("src/pokemon.c")
         and "moveLevel <= level" not in read("src/pokemon.c").split("GetMoveRelearnerMoves", 1)[1].split("GetLevelUpMovesBySpecies", 1)[0]
+    ),
+    "Pokécenter battle-set builder is native and transactional": (
+        'gText_BuildBattleSet[] = _("Learn a moveset")' in read("src/strings.c")
+        and "task->tNumItems = 7;" in field_specials_source.split("case SCROLL_MULTI_POKE_CENTER_TUTOR:", 1)[1].split("break;", 1)[0]
+        and re.search(r"gText_BuildBattleSet,\s*gText_Exit", pc_menu_block)
+        and "special ChoosePartyMon" in pc_tutor_source.split("PKMN_Center_BattleSet_ChooseMon::", 1)[1].split("PKMN_Center_BattleSet_CantBuildForEgg::", 1)[0]
+        and "compare VAR_0x8004, 255" in pc_tutor_source.split("PKMN_Center_BattleSet_ChooseMon::", 1)[1].split("PKMN_Center_BattleSet_CantBuildForEgg::", 1)[0]
+        and "special IsSelectedMonEgg" in pc_tutor_source.split("PKMN_Center_BattleSet_ChooseMon::", 1)[1].split("PKMN_Center_BattleSet_CantBuildForEgg::", 1)[0]
+        and "This replaces all four moves" in pc_tutor_source
+        and "special ApplySelectedMonBattleSet" in pc_tutor_source
+        and "MON_DATA_SPECIES2" in battle_set_runtime
+        and "MON_DATA_PP_BONUSES" in battle_set_runtime
+        and "for (i = 0; i < MAX_MON_MOVES; i++)\n        SetMonMoveSlot" in battle_set_runtime
+        and "MON_DATA_NATURE" in battle_set_runtime
+        and "MON_DATA_ABILITY_NUM" in battle_set_runtime
+        and "MON_DATA_HELD_ITEM" not in battle_set_runtime
+        and "_EV" not in battle_set_runtime
+        and battle_set_runtime.index("preset->nature >= NUM_NATURES") < battle_set_runtime.index("SetMonData(mon, MON_DATA_PP_BONUSES")
+        and battle_set_runtime.count("CalculateMonStats(mon);") == 1
     ),
     "world TM pickups replaced": "finditem ITEM_TM" not in read("data/scripts/item_ball_scripts.inc"),
     "gifted TMs replaced": "giveitem ITEM_TM" not in "\n".join(p.read_text() for p in (ROOT / "data").rglob("*.inc")),

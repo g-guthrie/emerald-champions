@@ -11,8 +11,40 @@ PKMN_Center_Move_Tutor::
 	case 2, PKMN_Center_NameRater_EventScript
 	case 3, PKMN_Center_EventScript_Mystery_Gift
 	case 4, PKMN_Center_EventScript_Event_Reset
-	case 5, PKMN_Center_Move_Tutor_General_Exit
+	case 5, PKMN_Center_BattleSet_ChooseMon
+	case 6, PKMN_Center_Move_Tutor_General_Exit
 	case MULTI_B_PRESSED, PKMN_Center_Move_Tutor_General_Exit
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Battle Set @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+PKMN_Center_BattleSet_ChooseMon::
+	msgbox PKMN_Center_BattleSet_Text_ChooseMon, MSGBOX_DEFAULT
+	special ChoosePartyMon
+	waitstate
+	compare VAR_0x8004, 255
+	goto_if_eq PKMN_Center_Move_Tutor_General_Exit
+	special IsSelectedMonEgg
+	compare VAR_RESULT, TRUE
+	goto_if_eq PKMN_Center_BattleSet_CantBuildForEgg
+	bufferpartymonnick 0, VAR_0x8004
+	msgbox PKMN_Center_BattleSet_Text_Confirm, MSGBOX_YESNO
+	compare VAR_RESULT, NO
+	goto_if_eq PKMN_Center_BattleSet_ChooseMon
+	special ApplySelectedMonBattleSet
+	compare VAR_RESULT, TRUE
+	goto_if_ne PKMN_Center_BattleSet_NoPreset
+	playfanfare MUS_LEVEL_UP
+	msgbox PKMN_Center_BattleSet_Text_Success, MSGBOX_DEFAULT
+	releaseall
+	end
+
+PKMN_Center_BattleSet_CantBuildForEgg::
+	msgbox PKMN_Center_BattleSet_Text_CantBuildForEgg, MSGBOX_DEFAULT
+	goto PKMN_Center_BattleSet_ChooseMon
+
+PKMN_Center_BattleSet_NoPreset::
+	msgbox PKMN_Center_BattleSet_Text_NoPreset, MSGBOX_DEFAULT
+	goto PKMN_Center_BattleSet_ChooseMon
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Move Reminder @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
@@ -491,6 +523,29 @@ PKMN_Center_Move_Tutor_Text_TeachAnotherMove:
 
 PKMN_Center_Move_Tutor_Text_SeeYou:
 	.string "See you later, then!$"
+
+PKMN_Center_BattleSet_Text_ChooseMon:
+	.string "Choose a Pokémon for a complete\n"
+	.string "battle set.$"
+
+PKMN_Center_BattleSet_Text_Confirm:
+	.string "Ready to build {STR_VAR_1}'s set.\p"
+	.string "This replaces all four moves,\n"
+	.string "the nature, and the ability.\p"
+	.string "Continue?$"
+
+PKMN_Center_BattleSet_Text_Success:
+	.string "All set! {STR_VAR_1} learned its\n"
+	.string "new battle moves.\p"
+	.string "I also matched its ability and\n"
+	.string "nature to the new set.$"
+
+PKMN_Center_BattleSet_Text_CantBuildForEgg:
+	.string "An Egg can't use a battle set.$"
+
+PKMN_Center_BattleSet_Text_NoPreset:
+	.string "I can't build a battle set for\n"
+	.string "that Pokémon.$"
 
 PKMN_Center_MoveReminder_Text_WantMeToTeachMove:
 	.string "Would you like me to teach one of your\n"
