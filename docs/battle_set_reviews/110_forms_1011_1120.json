@@ -1,0 +1,2053 @@
+{
+  "batch_id": "stable-forms-1011-1120-v1",
+  "reviews": [
+    {
+      "ability": "ABILITY_PRESSURE",
+      "dependency_notes": [
+        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Deoxys combines Pressure with Psycho Boost, Superpower, Ice Beam, Protect; every slot advances its mixed glass-cannon attacker role in doubles.",
+      "item_context": "ITEM_FOCUS_SASH supports the mixed glass-cannon attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_PSYCHO_BOOST",
+        "MOVE_SUPERPOWER",
+        "MOVE_ICE_BEAM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_NAIVE",
+      "review_notes": "Removed Z-Move, Substitute, and Giga Impact dependencies. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "mixed glass-cannon attacker",
+      "source_refs": [
+        "Smogon Gen 7 doublesou Deoxys-Attack set: Z-Move Attacker",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_DEOXYS_ATTACK"
+      ],
+      "species": "SPECIES_DEOXYS_ATTACK",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_PRESSURE",
+      "dependency_notes": [
+        "ITEM_LEFTOVERS is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Deoxys combines Pressure with Psychic, Thunder Wave, Recover, Protect; every slot advances its bulky speed-control wall role in doubles.",
+      "item_context": "ITEM_LEFTOVERS supports the bulky speed-control wall role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_PSYCHIC",
+        "MOVE_THUNDER_WAVE",
+        "MOVE_RECOVER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BOLD",
+      "review_notes": "Removed singles hazards and Toxic attrition. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "bulky speed-control wall",
+      "source_refs": [
+        "Smogon Gen 7 ubers Deoxys-Defense set: Spikes",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_DEOXYS_DEFENSE"
+      ],
+      "species": "SPECIES_DEOXYS_DEFENSE",
+      "suggested_item": "ITEM_LEFTOVERS"
+    },
+    {
+      "ability": "ABILITY_PRESSURE",
+      "dependency_notes": [
+        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Deoxys combines Pressure with Psycho Boost, Icy Wind, Taunt, Protect; every slot advances its fast anti-setup speed support role in doubles.",
+      "item_context": "ITEM_FOCUS_SASH supports the fast anti-setup speed support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_PSYCHO_BOOST",
+        "MOVE_ICY_WIND",
+        "MOVE_TAUNT",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Replaced dual screens with immediate Icy Wind and Protect. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "fast anti-setup speed support",
+      "source_refs": [
+        "Checked-in competitive corpus: showdown:gen7randomdoublesbattle:003",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_DEOXYS_SPEED"
+      ],
+      "species": "SPECIES_DEOXYS_SPEED",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_SHED_SKIN",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Burmy combines Shed Skin with Bug Buzz, Electroweb, Protect, Tackle; every slot advances its young electroweb support attacker role in doubles.",
+      "item_context": "ITEM_EVIOLITE supports the young electroweb support attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_BUG_BUZZ",
+        "MOVE_ELECTROWEB",
+        "MOVE_PROTECT",
+        "MOVE_TACKLE"
+      ],
+      "nature": "NATURE_MODEST",
+      "review_notes": "Retained the only coherent four-move local set after independent cloak review. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "young Electroweb support attacker",
+      "source_refs": [
+        "Smogon Gen 4-9 Burmy form analyses reviewed",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_BURMY_SANDY_CLOAK"
+      ],
+      "species": "SPECIES_BURMY_SANDY_CLOAK",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_SHED_SKIN",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Burmy combines Shed Skin with Bug Buzz, Electroweb, Protect, Tackle; every slot advances its young electroweb support attacker role in doubles.",
+      "item_context": "ITEM_EVIOLITE supports the young electroweb support attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_BUG_BUZZ",
+        "MOVE_ELECTROWEB",
+        "MOVE_PROTECT",
+        "MOVE_TACKLE"
+      ],
+      "nature": "NATURE_MODEST",
+      "review_notes": "Retained the only coherent four-move local set after independent cloak review. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "young Electroweb support attacker",
+      "source_refs": [
+        "Smogon Gen 4-9 Burmy form analyses reviewed",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_BURMY_TRASH_CLOAK"
+      ],
+      "species": "SPECIES_BURMY_TRASH_CLOAK",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_ANTICIPATION",
+      "dependency_notes": [
+        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Wormadam combines Anticipation with Bug Buzz, Earth Power, Electroweb, Protect; every slot advances its ground-cloak spread attacker role in doubles.",
+      "item_context": "ITEM_SITRUS_BERRY supports the ground-cloak spread attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_BUG_BUZZ",
+        "MOVE_EARTH_POWER",
+        "MOVE_ELECTROWEB",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "review_notes": "Replaced plant-cloak Giga Drain and Toxic with exact-form Ground STAB and speed control. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Ground-cloak spread attacker",
+      "source_refs": [
+        "Smogon Gen 5 nu Wormadam set: Wall",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_WORMADAM_SANDY_CLOAK"
+      ],
+      "species": "SPECIES_WORMADAM_SANDY_CLOAK",
+      "suggested_item": "ITEM_SITRUS_BERRY"
+    },
+    {
+      "ability": "ABILITY_ANTICIPATION",
+      "dependency_notes": [
+        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Wormadam combines Anticipation with Bug Buzz, Flash Cannon, Electroweb, Protect; every slot advances its steel-cloak spread attacker role in doubles.",
+      "item_context": "ITEM_SITRUS_BERRY supports the steel-cloak spread attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_BUG_BUZZ",
+        "MOVE_FLASH_CANNON",
+        "MOVE_ELECTROWEB",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "review_notes": "Replaced plant-cloak Giga Drain and Toxic with exact-form Steel STAB and speed control. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Steel-cloak spread attacker",
+      "source_refs": [
+        "Smogon Gen 5 nu Wormadam set: Wall",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_WORMADAM_TRASH_CLOAK"
+      ],
+      "species": "SPECIES_WORMADAM_TRASH_CLOAK",
+      "suggested_item": "ITEM_SITRUS_BERRY"
+    },
+    {
+      "ability": "ABILITY_STICKY_HOLD",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Shellos combines Sticky Hold with Scald, Icy Wind, Recover, Protect; every slot advances its bulky speed-control support role in doubles.",
+      "item_context": "ITEM_EVIOLITE supports the bulky speed-control support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_SCALD",
+        "MOVE_ICY_WIND",
+        "MOVE_RECOVER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CALM",
+      "review_notes": "Removed Toxic and added Protect after exact-form review. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "bulky speed-control support",
+      "source_refs": [
+        "Checked-in competitive corpus: showdown:gen4randomdoublesbattle:021",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_SHELLOS_EAST_SEA"
+      ],
+      "species": "SPECIES_SHELLOS_EAST_SEA",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_STORM_DRAIN",
+      "dependency_notes": [
+        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Gastrodon combines Storm Drain with Scald, Earth Power, Icy Wind, Protect; every slot advances its storm drain speed-control attacker role in doubles.",
+      "item_context": "ITEM_SITRUS_BERRY supports the storm drain speed-control attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_SCALD",
+        "MOVE_EARTH_POWER",
+        "MOVE_ICY_WIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CALM",
+      "review_notes": "Removed Toxic-Recover singles pacing for immediate doubles utility. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Storm Drain speed-control attacker",
+      "source_refs": [
+        "Smogon Gen 8 doublesou Gastrodon set: Bulky Storm Drain",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_GASTRODON_EAST_SEA"
+      ],
+      "species": "SPECIES_GASTRODON_EAST_SEA",
+      "suggested_item": "ITEM_SITRUS_BERRY"
+    },
+    {
+      "ability": "ABILITY_LEVITATE",
+      "dependency_notes": [
+        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Rotom combines Levitate with Electroweb, Thunderbolt, Will O Wisp, Protect; every slot advances its heat-form speed-control attacker role in doubles.",
+      "item_context": "ITEM_SITRUS_BERRY supports the heat-form speed-control attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_ELECTROWEB",
+        "MOVE_THUNDERBOLT",
+        "MOVE_WILL_O_WISP",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "The exact local form pool lacks Fire attacks, so this independently reviewed set uses its best legal doubles utility. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Heat-form speed-control attacker",
+      "source_refs": [
+        "Smogon Gen 4 doublesou Rotom-Heat set: Bulky Disruption",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_ROTOM_HEAT"
+      ],
+      "species": "SPECIES_ROTOM_HEAT",
+      "suggested_item": "ITEM_SITRUS_BERRY"
+    },
+    {
+      "ability": "ABILITY_LEVITATE",
+      "dependency_notes": [
+        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Rotom combines Levitate with Electroweb, Thunderbolt, Will O Wisp, Protect; every slot advances its wash-form speed-control attacker role in doubles.",
+      "item_context": "ITEM_SITRUS_BERRY supports the wash-form speed-control attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_ELECTROWEB",
+        "MOVE_THUNDERBOLT",
+        "MOVE_WILL_O_WISP",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "The exact local form pool lacks Water attacks, so this independently reviewed set uses its best legal doubles utility. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Wash-form speed-control attacker",
+      "source_refs": [
+        "Smogon Gen 4 doublesou Rotom-Wash set: Bulky Disruption",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_ROTOM_WASH"
+      ],
+      "species": "SPECIES_ROTOM_WASH",
+      "suggested_item": "ITEM_SITRUS_BERRY"
+    },
+    {
+      "ability": "ABILITY_LEVITATE",
+      "dependency_notes": [
+        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Rotom combines Levitate with Aurora Beam, Thunderbolt, Electroweb, Protect; every slot advances its frost-form speed-control attacker role in doubles.",
+      "item_context": "ITEM_SITRUS_BERRY supports the frost-form speed-control attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_AURORA_BEAM",
+        "MOVE_THUNDERBOLT",
+        "MOVE_ELECTROWEB",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Used Aurora Beam because the exact local form data lacks Blizzard, then added reliable speed control. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Frost-form speed-control attacker",
+      "source_refs": [
+        "Smogon Gen 4 doublesou Rotom-Frost set: Bulky Disruption",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_ROTOM_FROST"
+      ],
+      "species": "SPECIES_ROTOM_FROST",
+      "suggested_item": "ITEM_SITRUS_BERRY"
+    },
+    {
+      "ability": "ABILITY_MOTOR_DRIVE",
+      "dependency_notes": [
+        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Rotom combines Motor Drive with Electroweb, Thunderbolt, Will O Wisp, Protect; every slot advances its fan-form speed-control attacker role in doubles.",
+      "item_context": "ITEM_SITRUS_BERRY supports the fan-form speed-control attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_ELECTROWEB",
+        "MOVE_THUNDERBOLT",
+        "MOVE_WILL_O_WISP",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "The exact local form pool lacks Flying attacks, so this independently reviewed set uses its best legal doubles utility. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Fan-form speed-control attacker",
+      "source_refs": [
+        "Smogon Gen 4 doublesou Rotom-Fan set: Bulky Disruption",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_ROTOM_FAN"
+      ],
+      "species": "SPECIES_ROTOM_FAN",
+      "suggested_item": "ITEM_SITRUS_BERRY"
+    },
+    {
+      "ability": "ABILITY_LEVITATE",
+      "dependency_notes": [
+        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Rotom combines Levitate with Electroweb, Thunderbolt, Will O Wisp, Protect; every slot advances its mow-form speed-control attacker role in doubles.",
+      "item_context": "ITEM_SITRUS_BERRY supports the mow-form speed-control attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_ELECTROWEB",
+        "MOVE_THUNDERBOLT",
+        "MOVE_WILL_O_WISP",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "The exact local form pool lacks Grass attacks, so this independently reviewed set uses its best legal doubles utility. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Mow-form speed-control attacker",
+      "source_refs": [
+        "Smogon Gen 4 doublesou Rotom-Mow set: Bulky Disruption",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_ROTOM_MOW"
+      ],
+      "species": "SPECIES_ROTOM_MOW",
+      "suggested_item": "ITEM_SITRUS_BERRY"
+    },
+    {
+      "ability": "ABILITY_LEVITATE",
+      "dependency_notes": [
+        "ITEM_GRISEOUS_ORB is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Giratina combines Levitate with Shadow Claw, Shadow Sneak, Dragon Claw, Protect; every slot advances its origin physical attacker role in doubles.",
+      "item_context": "ITEM_GRISEOUS_ORB supports the origin physical attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_SHADOW_CLAW",
+        "MOVE_SHADOW_SNEAK",
+        "MOVE_DRAGON_CLAW",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Removed two-turn Shadow Force and mixed Draco Meteor. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Origin physical attacker",
+      "source_refs": [
+        "Smogon Gen 6 vgc2016 Giratina-Origin set: Bulky Attacker",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_GIRATINA_ORIGIN"
+      ],
+      "species": "SPECIES_GIRATINA_ORIGIN",
+      "suggested_item": "ITEM_GRISEOUS_ORB"
+    },
+    {
+      "ability": "ABILITY_SERENE_GRACE",
+      "dependency_notes": [
+        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Shaymin combines Serene Grace with Seed Flare, Air Slash, Tailwind, Protect; every slot advances its serene grace tailwind attacker role in doubles.",
+      "item_context": "ITEM_FOCUS_SASH supports the serene grace tailwind attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_SEED_FLARE",
+        "MOVE_AIR_SLASH",
+        "MOVE_TAILWIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Retained the complete direct doubles set. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Serene Grace Tailwind attacker",
+      "source_refs": [
+        "Smogon Gen 6 doublesou Shaymin-Sky set: Offensive",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_SHAYMIN_SKY"
+      ],
+      "species": "SPECIES_SHAYMIN_SKY",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_MULTITYPE",
+      "dependency_notes": [
+        "ITEM_FIST_PLATE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Arceus combines Multitype with Judgment, Dark Pulse, Recover, Protect; every slot advances its fighting multitype sustain attacker role in doubles.",
+      "item_context": "ITEM_FIST_PLATE supports the fighting multitype sustain attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_JUDGMENT",
+        "MOVE_DARK_PULSE",
+        "MOVE_RECOVER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Removed singles-only hazards, Refresh, or double setup and preserved the matching Plate. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Fighting Multitype sustain attacker",
+      "source_refs": [
+        "Checked-in competitive corpus: showdown:gen5randomdoublesbattle:009",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_ARCEUS_FIGHTING"
+      ],
+      "species": "SPECIES_ARCEUS_FIGHTING",
+      "suggested_item": "ITEM_FIST_PLATE"
+    },
+    {
+      "ability": "ABILITY_MULTITYPE",
+      "dependency_notes": [
+        "ITEM_SKY_PLATE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Arceus combines Multitype with Judgment, Ice Beam, Recover, Protect; every slot advances its flying multitype sustain attacker role in doubles.",
+      "item_context": "ITEM_SKY_PLATE supports the flying multitype sustain attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_JUDGMENT",
+        "MOVE_ICE_BEAM",
+        "MOVE_RECOVER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Removed singles-only hazards, Refresh, or double setup and preserved the matching Plate. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Flying Multitype sustain attacker",
+      "source_refs": [
+        "Smogon Gen 9 nationaldexubers Arceus-Flying set: Calm Mind",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_ARCEUS_FLYING"
+      ],
+      "species": "SPECIES_ARCEUS_FLYING",
+      "suggested_item": "ITEM_SKY_PLATE"
+    },
+    {
+      "ability": "ABILITY_MULTITYPE",
+      "dependency_notes": [
+        "ITEM_TOXIC_PLATE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Arceus combines Multitype with Judgment, Earth Power, Recover, Protect; every slot advances its poison multitype sustain attacker role in doubles.",
+      "item_context": "ITEM_TOXIC_PLATE supports the poison multitype sustain attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_JUDGMENT",
+        "MOVE_EARTH_POWER",
+        "MOVE_RECOVER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Removed singles-only hazards, Refresh, or double setup and preserved the matching Plate. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Poison Multitype sustain attacker",
+      "source_refs": [
+        "Checked-in competitive corpus: showdown:gen7randomdoublesbattle:015",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_ARCEUS_POISON"
+      ],
+      "species": "SPECIES_ARCEUS_POISON",
+      "suggested_item": "ITEM_TOXIC_PLATE"
+    },
+    {
+      "ability": "ABILITY_MULTITYPE",
+      "dependency_notes": [
+        "ITEM_EARTH_PLATE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability.",
+        "Earthquake can hit the ally, so pair it with immunity, Telepathy, or Protect."
+      ],
+      "doubles_rationale": "Arceus combines Multitype with Swords Dance, Earthquake, Stone Edge, Protect; every slot advances its ground multitype setup attacker role in doubles.",
+      "item_context": "ITEM_EARTH_PLATE supports the ground multitype setup attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_SWORDS_DANCE",
+        "MOVE_EARTHQUAKE",
+        "MOVE_STONE_EDGE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Removed Z-item context and added Protect. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Ground Multitype setup attacker",
+      "source_refs": [
+        "Smogon Gen 9 nationaldexubers Arceus-Ground set: Physical Setup Sweeper",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_ARCEUS_GROUND"
+      ],
+      "species": "SPECIES_ARCEUS_GROUND",
+      "suggested_item": "ITEM_EARTH_PLATE"
+    },
+    {
+      "ability": "ABILITY_MULTITYPE",
+      "dependency_notes": [
+        "ITEM_STONE_PLATE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Arceus combines Multitype with Judgment, Earth Power, Recover, Protect; every slot advances its rock multitype sustain attacker role in doubles.",
+      "item_context": "ITEM_STONE_PLATE supports the rock multitype sustain attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_JUDGMENT",
+        "MOVE_EARTH_POWER",
+        "MOVE_RECOVER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Removed singles-only hazards, Refresh, or double setup and preserved the matching Plate. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Rock Multitype sustain attacker",
+      "source_refs": [
+        "Smogon Gen 9 nationaldexubers Arceus-Rock set: Utility",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_ARCEUS_ROCK"
+      ],
+      "species": "SPECIES_ARCEUS_ROCK",
+      "suggested_item": "ITEM_STONE_PLATE"
+    },
+    {
+      "ability": "ABILITY_MULTITYPE",
+      "dependency_notes": [
+        "ITEM_INSECT_PLATE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Arceus combines Multitype with Judgment, Earth Power, Recover, Protect; every slot advances its bug multitype sustain attacker role in doubles.",
+      "item_context": "ITEM_INSECT_PLATE supports the bug multitype sustain attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_JUDGMENT",
+        "MOVE_EARTH_POWER",
+        "MOVE_RECOVER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Removed singles-only hazards, Refresh, or double setup and preserved the matching Plate. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Bug Multitype sustain attacker",
+      "source_refs": [
+        "Smogon Gen 9 ubersuu Arceus-Bug set: Utility",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_ARCEUS_BUG"
+      ],
+      "species": "SPECIES_ARCEUS_BUG",
+      "suggested_item": "ITEM_INSECT_PLATE"
+    },
+    {
+      "ability": "ABILITY_MULTITYPE",
+      "dependency_notes": [
+        "ITEM_SPOOKY_PLATE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Arceus combines Multitype with Judgment, Focus Blast, Recover, Protect; every slot advances its ghost multitype sustain attacker role in doubles.",
+      "item_context": "ITEM_SPOOKY_PLATE supports the ghost multitype sustain attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_JUDGMENT",
+        "MOVE_FOCUS_BLAST",
+        "MOVE_RECOVER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Removed singles-only hazards, Refresh, or double setup and preserved the matching Plate. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Ghost Multitype sustain attacker",
+      "source_refs": [
+        "Smogon Gen 9 ubers Arceus-Ghost set: Calm Mind + 3 Attacks",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_ARCEUS_GHOST"
+      ],
+      "species": "SPECIES_ARCEUS_GHOST",
+      "suggested_item": "ITEM_SPOOKY_PLATE"
+    },
+    {
+      "ability": "ABILITY_MULTITYPE",
+      "dependency_notes": [
+        "ITEM_IRON_PLATE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Arceus combines Multitype with Judgment, Earth Power, Recover, Protect; every slot advances its steel multitype sustain attacker role in doubles.",
+      "item_context": "ITEM_IRON_PLATE supports the steel multitype sustain attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_JUDGMENT",
+        "MOVE_EARTH_POWER",
+        "MOVE_RECOVER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Removed singles-only hazards, Refresh, or double setup and preserved the matching Plate. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Steel Multitype sustain attacker",
+      "source_refs": [
+        "Smogon Gen 9 ubers Arceus-Steel set: Calm Mind",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_ARCEUS_STEEL"
+      ],
+      "species": "SPECIES_ARCEUS_STEEL",
+      "suggested_item": "ITEM_IRON_PLATE"
+    },
+    {
+      "ability": "ABILITY_MULTITYPE",
+      "dependency_notes": [
+        "ITEM_FLAME_PLATE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Arceus combines Multitype with Judgment, Earth Power, Recover, Protect; every slot advances its fire multitype sustain attacker role in doubles.",
+      "item_context": "ITEM_FLAME_PLATE supports the fire multitype sustain attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_JUDGMENT",
+        "MOVE_EARTH_POWER",
+        "MOVE_RECOVER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Removed singles-only hazards, Refresh, or double setup and preserved the matching Plate. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Fire Multitype sustain attacker",
+      "source_refs": [
+        "Smogon Gen 7 ubers Arceus-Fire set: Offensive Calm Mind",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_ARCEUS_FIRE"
+      ],
+      "species": "SPECIES_ARCEUS_FIRE",
+      "suggested_item": "ITEM_FLAME_PLATE"
+    },
+    {
+      "ability": "ABILITY_MULTITYPE",
+      "dependency_notes": [
+        "ITEM_SPLASH_PLATE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Arceus combines Multitype with Judgment, Ice Beam, Recover, Protect; every slot advances its water multitype sustain attacker role in doubles.",
+      "item_context": "ITEM_SPLASH_PLATE supports the water multitype sustain attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_JUDGMENT",
+        "MOVE_ICE_BEAM",
+        "MOVE_RECOVER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Removed singles-only hazards, Refresh, or double setup and preserved the matching Plate. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Water Multitype sustain attacker",
+      "source_refs": [
+        "Smogon Gen 9 nationaldexubers Arceus-Water set: Offensive Calm Mind",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_ARCEUS_WATER"
+      ],
+      "species": "SPECIES_ARCEUS_WATER",
+      "suggested_item": "ITEM_SPLASH_PLATE"
+    },
+    {
+      "ability": "ABILITY_MULTITYPE",
+      "dependency_notes": [
+        "ITEM_MEADOW_PLATE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Arceus combines Multitype with Judgment, Earth Power, Recover, Protect; every slot advances its grass multitype sustain attacker role in doubles.",
+      "item_context": "ITEM_MEADOW_PLATE supports the grass multitype sustain attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_JUDGMENT",
+        "MOVE_EARTH_POWER",
+        "MOVE_RECOVER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Removed singles-only hazards, Refresh, or double setup and preserved the matching Plate. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Grass Multitype sustain attacker",
+      "source_refs": [
+        "Smogon Gen 9 ubers Arceus-Grass set: Calm Mind",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_ARCEUS_GRASS"
+      ],
+      "species": "SPECIES_ARCEUS_GRASS",
+      "suggested_item": "ITEM_MEADOW_PLATE"
+    },
+    {
+      "ability": "ABILITY_MULTITYPE",
+      "dependency_notes": [
+        "ITEM_ZAP_PLATE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Arceus combines Multitype with Judgment, Ice Beam, Recover, Protect; every slot advances its electric multitype sustain attacker role in doubles.",
+      "item_context": "ITEM_ZAP_PLATE supports the electric multitype sustain attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_JUDGMENT",
+        "MOVE_ICE_BEAM",
+        "MOVE_RECOVER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Removed singles-only hazards, Refresh, or double setup and preserved the matching Plate. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Electric Multitype sustain attacker",
+      "source_refs": [
+        "Smogon Gen 9 ubers Arceus-Electric set: Utility",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_ARCEUS_ELECTRIC"
+      ],
+      "species": "SPECIES_ARCEUS_ELECTRIC",
+      "suggested_item": "ITEM_ZAP_PLATE"
+    },
+    {
+      "ability": "ABILITY_MULTITYPE",
+      "dependency_notes": [
+        "ITEM_MIND_PLATE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Arceus combines Multitype with Judgment, Ice Beam, Recover, Protect; every slot advances its psychic multitype sustain attacker role in doubles.",
+      "item_context": "ITEM_MIND_PLATE supports the psychic multitype sustain attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_JUDGMENT",
+        "MOVE_ICE_BEAM",
+        "MOVE_RECOVER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Removed singles-only hazards, Refresh, or double setup and preserved the matching Plate. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Psychic Multitype sustain attacker",
+      "source_refs": [
+        "Smogon Gen 7 ubers Arceus-Psychic set: Wall",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_ARCEUS_PSYCHIC"
+      ],
+      "species": "SPECIES_ARCEUS_PSYCHIC",
+      "suggested_item": "ITEM_MIND_PLATE"
+    },
+    {
+      "ability": "ABILITY_MULTITYPE",
+      "dependency_notes": [
+        "ITEM_ICICLE_PLATE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Arceus combines Multitype with Judgment, Thunderbolt, Recover, Protect; every slot advances its ice multitype sustain attacker role in doubles.",
+      "item_context": "ITEM_ICICLE_PLATE supports the ice multitype sustain attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_JUDGMENT",
+        "MOVE_THUNDERBOLT",
+        "MOVE_RECOVER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Removed singles-only hazards, Refresh, or double setup and preserved the matching Plate. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Ice Multitype sustain attacker",
+      "source_refs": [
+        "Smogon Gen 9 ubersuu Arceus-Ice set: Calm Mind + 2 Attacks",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_ARCEUS_ICE"
+      ],
+      "species": "SPECIES_ARCEUS_ICE",
+      "suggested_item": "ITEM_ICICLE_PLATE"
+    },
+    {
+      "ability": "ABILITY_MULTITYPE",
+      "dependency_notes": [
+        "ITEM_DRACO_PLATE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Arceus combines Multitype with Judgment, Will O Wisp, Recover, Protect; every slot advances its dragon multitype sustain attacker role in doubles.",
+      "item_context": "ITEM_DRACO_PLATE supports the dragon multitype sustain attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_JUDGMENT",
+        "MOVE_WILL_O_WISP",
+        "MOVE_RECOVER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Removed singles-only hazards, Refresh, or double setup and preserved the matching Plate. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Dragon Multitype sustain attacker",
+      "source_refs": [
+        "Smogon Gen 7 ubers Arceus-Dragon set: Support",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_ARCEUS_DRAGON"
+      ],
+      "species": "SPECIES_ARCEUS_DRAGON",
+      "suggested_item": "ITEM_DRACO_PLATE"
+    },
+    {
+      "ability": "ABILITY_MULTITYPE",
+      "dependency_notes": [
+        "ITEM_DREAD_PLATE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Arceus combines Multitype with Judgment, Fire Blast, Recover, Protect; every slot advances its dark multitype sustain attacker role in doubles.",
+      "item_context": "ITEM_DREAD_PLATE supports the dark multitype sustain attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_JUDGMENT",
+        "MOVE_FIRE_BLAST",
+        "MOVE_RECOVER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Removed singles-only hazards, Refresh, or double setup and preserved the matching Plate. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Dark Multitype sustain attacker",
+      "source_refs": [
+        "Smogon Gen 9 ubersuu Arceus-Dark set: The Set",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_ARCEUS_DARK"
+      ],
+      "species": "SPECIES_ARCEUS_DARK",
+      "suggested_item": "ITEM_DREAD_PLATE"
+    },
+    {
+      "ability": "ABILITY_MULTITYPE",
+      "dependency_notes": [
+        "ITEM_PIXIE_PLATE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Arceus combines Multitype with Judgment, Earth Power, Recover, Protect; every slot advances its fairy multitype sustain attacker role in doubles.",
+      "item_context": "ITEM_PIXIE_PLATE supports the fairy multitype sustain attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_JUDGMENT",
+        "MOVE_EARTH_POWER",
+        "MOVE_RECOVER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Removed singles-only hazards, Refresh, or double setup and preserved the matching Plate. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Fairy Multitype sustain attacker",
+      "source_refs": [
+        "Smogon Gen 9 ubers Arceus-Fairy set: Iron Defense + Calm Mind",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_ARCEUS_FAIRY"
+      ],
+      "species": "SPECIES_ARCEUS_FAIRY",
+      "suggested_item": "ITEM_PIXIE_PLATE"
+    },
+    {
+      "ability": "ABILITY_ADAPTABILITY",
+      "dependency_notes": [
+        "ITEM_MYSTIC_WATER is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Basculin combines Adaptability with Protect, Aqua Jet, Flip Turn, Head Smash; every slot advances its adaptability priority pivot role in doubles.",
+      "item_context": "ITEM_MYSTIC_WATER supports the adaptability priority pivot role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_PROTECT",
+        "MOVE_AQUA_JET",
+        "MOVE_FLIP_TURN",
+        "MOVE_HEAD_SMASH"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Retained the complete exact-form random-doubles set. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Adaptability priority pivot",
+      "source_refs": [
+        "Checked-in competitive corpus: showdown:gen9randomdoublesbattle:021",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_BASCULIN_BLUE_STRIPED"
+      ],
+      "species": "SPECIES_BASCULIN_BLUE_STRIPED",
+      "suggested_item": "ITEM_MYSTIC_WATER"
+    },
+    {
+      "ability": "ABILITY_SAP_SIPPER",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Deerling combines Sap Sipper with Double Edge, Seed Bomb, Jump Kick, Protect; every slot advances its summer sap sipper attacker role in doubles.",
+      "item_context": "ITEM_EVIOLITE supports the summer sap sipper attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_SEED_BOMB",
+        "MOVE_JUMP_KICK",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Removed Substitute singles pacing after independent seasonal-form review. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Summer Sap Sipper attacker",
+      "source_refs": [
+        "Smogon Gen 7 lc Deerling set: Life Orb",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_DEERLING_SUMMER"
+      ],
+      "species": "SPECIES_DEERLING_SUMMER",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_SAP_SIPPER",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Deerling combines Sap Sipper with Double Edge, Seed Bomb, Jump Kick, Protect; every slot advances its autumn sap sipper attacker role in doubles.",
+      "item_context": "ITEM_EVIOLITE supports the autumn sap sipper attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_SEED_BOMB",
+        "MOVE_JUMP_KICK",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Removed Substitute singles pacing after independent seasonal-form review. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Autumn Sap Sipper attacker",
+      "source_refs": [
+        "Smogon Gen 7 lc Deerling set: Life Orb",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_DEERLING_AUTUMN"
+      ],
+      "species": "SPECIES_DEERLING_AUTUMN",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_SAP_SIPPER",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Deerling combines Sap Sipper with Double Edge, Seed Bomb, Jump Kick, Protect; every slot advances its winter sap sipper attacker role in doubles.",
+      "item_context": "ITEM_EVIOLITE supports the winter sap sipper attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_SEED_BOMB",
+        "MOVE_JUMP_KICK",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Removed Substitute singles pacing after independent seasonal-form review. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Winter Sap Sipper attacker",
+      "source_refs": [
+        "Smogon Gen 7 lc Deerling set: Life Orb",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_DEERLING_WINTER"
+      ],
+      "species": "SPECIES_DEERLING_WINTER",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_SAP_SIPPER",
+      "dependency_notes": [
+        "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Sawsbuck combines Sap Sipper with Horn Leech, Double Edge, Jump Kick, Protect; every slot advances its summer sap sipper attacker role in doubles.",
+      "item_context": "ITEM_LIFE_ORB supports the summer sap sipper attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_HORN_LEECH",
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_JUMP_KICK",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Selected the broadly useful Sap Sipper exact-form set. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Summer Sap Sipper attacker",
+      "source_refs": [
+        "Smogon Gen 5 vgc2011 Sawsbuck set: Sunny Day Sweeper",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_SAWSBUCK_SUMMER"
+      ],
+      "species": "SPECIES_SAWSBUCK_SUMMER",
+      "suggested_item": "ITEM_LIFE_ORB"
+    },
+    {
+      "ability": "ABILITY_SAP_SIPPER",
+      "dependency_notes": [
+        "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Sawsbuck combines Sap Sipper with Horn Leech, Double Edge, Jump Kick, Protect; every slot advances its autumn sap sipper attacker role in doubles.",
+      "item_context": "ITEM_LIFE_ORB supports the autumn sap sipper attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_HORN_LEECH",
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_JUMP_KICK",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Selected the broadly useful Sap Sipper exact-form set. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Autumn Sap Sipper attacker",
+      "source_refs": [
+        "Checked-in competitive corpus: showdown:gen9randomdoublesbattle:016",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_SAWSBUCK_AUTUMN"
+      ],
+      "species": "SPECIES_SAWSBUCK_AUTUMN",
+      "suggested_item": "ITEM_LIFE_ORB"
+    },
+    {
+      "ability": "ABILITY_SAP_SIPPER",
+      "dependency_notes": [
+        "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Sawsbuck combines Sap Sipper with Horn Leech, Double Edge, Jump Kick, Protect; every slot advances its winter sap sipper attacker role in doubles.",
+      "item_context": "ITEM_LIFE_ORB supports the winter sap sipper attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_HORN_LEECH",
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_JUMP_KICK",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Selected the broadly useful Sap Sipper exact-form set. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Winter Sap Sipper attacker",
+      "source_refs": [
+        "Smogon Gen 5 vgc2011 Sawsbuck set: Sunny Day Sweeper",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_SAWSBUCK_WINTER"
+      ],
+      "species": "SPECIES_SAWSBUCK_WINTER",
+      "suggested_item": "ITEM_LIFE_ORB"
+    },
+    {
+      "ability": "ABILITY_REGENERATOR",
+      "dependency_notes": [
+        "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Tornadus combines Regenerator with Hurricane, Taunt, Tailwind, Protect; every slot advances its regenerator tailwind attacker role in doubles.",
+      "item_context": "ITEM_LIFE_ORB supports the regenerator tailwind attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_HURRICANE",
+        "MOVE_TAUNT",
+        "MOVE_TAILWIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Removed unsupported Weather Ball dependence. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Regenerator Tailwind attacker",
+      "source_refs": [
+        "Smogon Gen 8 doublesou Tornadus set: Tailwind Support",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_TORNADUS_THERIAN"
+      ],
+      "species": "SPECIES_TORNADUS_THERIAN",
+      "suggested_item": "ITEM_LIFE_ORB"
+    },
+    {
+      "ability": "ABILITY_VOLT_ABSORB",
+      "dependency_notes": [
+        "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Thundurus combines Volt Absorb with Thunderbolt, Flash Cannon, Thunder Wave, Protect; every slot advances its thundurus exact-form source-backed set role in doubles.",
+      "item_context": "ITEM_LIFE_ORB supports the thundurus exact-form source-backed set role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_THUNDERBOLT",
+        "MOVE_FLASH_CANNON",
+        "MOVE_THUNDER_WAVE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Retained the strongest exact-form doubles-first scaffold after an independent form sanity check. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Thundurus exact-form source-backed set",
+      "source_refs": [
+        "Smogon Gen 6 doublesou Thundurus set: Special Attacker",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_THUNDURUS_THERIAN"
+      ],
+      "species": "SPECIES_THUNDURUS_THERIAN",
+      "suggested_item": "ITEM_LIFE_ORB"
+    },
+    {
+      "ability": "ABILITY_INTIMIDATE",
+      "dependency_notes": [
+        "ITEM_CHOICE_SCARF is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability.",
+        "Earthquake can hit the ally, so pair it with immunity, Telepathy, or Protect."
+      ],
+      "doubles_rationale": "Landorus combines Intimidate with Earthquake, Rock Slide, Superpower, Knock Off; every slot advances its landorus exact-form source-backed set role in doubles.",
+      "item_context": "ITEM_CHOICE_SCARF supports the landorus exact-form source-backed set role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_EARTHQUAKE",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_SUPERPOWER",
+        "MOVE_KNOCK_OFF"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Retained the strongest exact-form doubles-first scaffold after an independent form sanity check. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Landorus exact-form source-backed set",
+      "source_refs": [
+        "Smogon Gen 8 2v2doubles Landorus-Therian set: Choice Scarf",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_LANDORUS_THERIAN"
+      ],
+      "species": "SPECIES_LANDORUS_THERIAN",
+      "suggested_item": "ITEM_CHOICE_SCARF"
+    },
+    {
+      "ability": "ABILITY_TURBOBLAZE",
+      "dependency_notes": [
+        "ITEM_CHOICE_SCARF is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Kyurem combines Turboblaze with Blizzard, Ice Beam, Fusion Flare, Draco Meteor; every slot advances its kyurem exact-form source-backed set role in doubles.",
+      "item_context": "ITEM_CHOICE_SCARF supports the kyurem exact-form source-backed set role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_BLIZZARD",
+        "MOVE_ICE_BEAM",
+        "MOVE_FUSION_FLARE",
+        "MOVE_DRACO_METEOR"
+      ],
+      "nature": "NATURE_MODEST",
+      "review_notes": "Retained the strongest exact-form doubles-first scaffold after an independent form sanity check. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Kyurem exact-form source-backed set",
+      "source_refs": [
+        "Smogon Gen 6 vgc2016 Kyurem-White set: Choice Scarf",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_KYUREM_WHITE"
+      ],
+      "species": "SPECIES_KYUREM_WHITE",
+      "suggested_item": "ITEM_CHOICE_SCARF"
+    },
+    {
+      "ability": "ABILITY_TERAVOLT",
+      "dependency_notes": [
+        "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Kyurem combines Teravolt with Icicle Spear, Fusion Bolt, Dragon Dance, Protect; every slot advances its teravolt dragon dance attacker role in doubles.",
+      "item_context": "ITEM_LIFE_ORB supports the teravolt dragon dance attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_ICICLE_SPEAR",
+        "MOVE_FUSION_BOLT",
+        "MOVE_DRAGON_DANCE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Removed unavailable Clear Amulet and Loaded Dice item assumptions. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Teravolt Dragon Dance attacker",
+      "source_refs": [
+        "Smogon Gen 9 nationaldexdoubles Kyurem-Black set: Setup Attacker",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_KYUREM_BLACK"
+      ],
+      "species": "SPECIES_KYUREM_BLACK",
+      "suggested_item": "ITEM_LIFE_ORB"
+    },
+    {
+      "ability": "ABILITY_JUSTIFIED",
+      "alias_of": "SPECIES_KELDEO",
+      "dependency_notes": [
+        "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Keldeo combines Justified with Hydro Pump, Secret Sword, Quick Guard, Protect; every slot advances its keldeo source-backed doubles set role in doubles.",
+      "item_context": "ITEM_LIFE_ORB supports the keldeo source-backed doubles set role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_HYDRO_PUMP",
+        "MOVE_SECRET_SWORD",
+        "MOVE_QUICK_GUARD",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Alias proof passed against SPECIES_KELDEO: exact stats, typing, ability slots, legal pool, moves, nature, and ability are identical.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Keldeo source-backed doubles set",
+      "source_refs": [
+        "Smogon Gen 6 doublesou Keldeo set: All-Out Attacker",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_KELDEO"
+      ],
+      "species": "SPECIES_KELDEO_RESOLUTE",
+      "suggested_item": "ITEM_LIFE_ORB"
+    },
+    {
+      "ability": "ABILITY_DOWNLOAD",
+      "alias_of": "SPECIES_GENESECT",
+      "dependency_notes": [
+        "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Genesect combines Download with Bug Buzz, Iron Head, Ice Beam, Protect; every slot advances its genesect source-backed doubles set role in doubles.",
+      "item_context": "ITEM_LIFE_ORB supports the genesect source-backed doubles set role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_BUG_BUZZ",
+        "MOVE_IRON_HEAD",
+        "MOVE_ICE_BEAM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_NAIVE",
+      "review_notes": "Alias proof passed against SPECIES_GENESECT: exact stats, typing, ability slots, legal pool, moves, nature, and ability are identical.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Genesect source-backed doubles set",
+      "source_refs": [
+        "Smogon Gen 8 2v2doubles Genesect set: Mixed Attacker",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_GENESECT"
+      ],
+      "species": "SPECIES_GENESECT_DOUSE_DRIVE",
+      "suggested_item": "ITEM_LIFE_ORB"
+    },
+    {
+      "ability": "ABILITY_DOWNLOAD",
+      "alias_of": "SPECIES_GENESECT",
+      "dependency_notes": [
+        "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Genesect combines Download with Bug Buzz, Iron Head, Ice Beam, Protect; every slot advances its genesect source-backed doubles set role in doubles.",
+      "item_context": "ITEM_LIFE_ORB supports the genesect source-backed doubles set role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_BUG_BUZZ",
+        "MOVE_IRON_HEAD",
+        "MOVE_ICE_BEAM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_NAIVE",
+      "review_notes": "Alias proof passed against SPECIES_GENESECT: exact stats, typing, ability slots, legal pool, moves, nature, and ability are identical.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Genesect source-backed doubles set",
+      "source_refs": [
+        "Smogon Gen 8 2v2doubles Genesect set: Mixed Attacker",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_GENESECT"
+      ],
+      "species": "SPECIES_GENESECT_SHOCK_DRIVE",
+      "suggested_item": "ITEM_LIFE_ORB"
+    },
+    {
+      "ability": "ABILITY_DOWNLOAD",
+      "alias_of": "SPECIES_GENESECT",
+      "dependency_notes": [
+        "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Genesect combines Download with Bug Buzz, Iron Head, Ice Beam, Protect; every slot advances its genesect source-backed doubles set role in doubles.",
+      "item_context": "ITEM_LIFE_ORB supports the genesect source-backed doubles set role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_BUG_BUZZ",
+        "MOVE_IRON_HEAD",
+        "MOVE_ICE_BEAM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_NAIVE",
+      "review_notes": "Alias proof passed against SPECIES_GENESECT: exact stats, typing, ability slots, legal pool, moves, nature, and ability are identical.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Genesect source-backed doubles set",
+      "source_refs": [
+        "Smogon Gen 8 2v2doubles Genesect set: Mixed Attacker",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_GENESECT"
+      ],
+      "species": "SPECIES_GENESECT_BURN_DRIVE",
+      "suggested_item": "ITEM_LIFE_ORB"
+    },
+    {
+      "ability": "ABILITY_DOWNLOAD",
+      "alias_of": "SPECIES_GENESECT",
+      "dependency_notes": [
+        "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Genesect combines Download with Bug Buzz, Iron Head, Ice Beam, Protect; every slot advances its genesect source-backed doubles set role in doubles.",
+      "item_context": "ITEM_LIFE_ORB supports the genesect source-backed doubles set role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_BUG_BUZZ",
+        "MOVE_IRON_HEAD",
+        "MOVE_ICE_BEAM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_NAIVE",
+      "review_notes": "Alias proof passed against SPECIES_GENESECT: exact stats, typing, ability slots, legal pool, moves, nature, and ability are identical.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Genesect source-backed doubles set",
+      "source_refs": [
+        "Smogon Gen 8 2v2doubles Genesect set: Mixed Attacker",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_GENESECT"
+      ],
+      "species": "SPECIES_GENESECT_CHILL_DRIVE",
+      "suggested_item": "ITEM_LIFE_ORB"
+    },
+    {
+      "ability": "ABILITY_BATTLE_BOND",
+      "dependency_notes": [
+        "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Greninja combines Battle Bond with Hydro Pump, Dark Pulse, Ice Beam, Protect; every slot advances its battle bond special attacker role in doubles.",
+      "item_context": "ITEM_LIFE_ORB supports the battle bond special attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_HYDRO_PUMP",
+        "MOVE_DARK_PULSE",
+        "MOVE_ICE_BEAM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Restored Water STAB and removed mixed Low Kick. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Battle Bond special attacker",
+      "source_refs": [
+        "Smogon Gen 6 battlespotdoubles Greninja set: Mixed Attacker",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_GRENINJA_BATTLE_BOND"
+      ],
+      "species": "SPECIES_GRENINJA_BATTLE_BOND",
+      "suggested_item": "ITEM_LIFE_ORB"
+    },
+    {
+      "ability": "ABILITY_COMPOUND_EYES",
+      "dependency_notes": [
+        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Vivillon combines Compound Eyes with Tailwind, Sleep Powder, Hurricane, Protect; every slot advances its polar compound eyes support role in doubles.",
+      "item_context": "ITEM_FOCUS_SASH supports the polar compound eyes support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_TAILWIND",
+        "MOVE_SLEEP_POWDER",
+        "MOVE_HURRICANE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Authored the strongest reliable Tailwind-sleep set independently for this pattern. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Polar Compound Eyes support",
+      "source_refs": [
+        "Smogon Gen 9 vgc2025 Vivillon set: Support",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_VIVILLON_POLAR"
+      ],
+      "species": "SPECIES_VIVILLON_POLAR",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_COMPOUND_EYES",
+      "dependency_notes": [
+        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Vivillon combines Compound Eyes with Tailwind, Sleep Powder, Hurricane, Protect; every slot advances its tundra compound eyes support role in doubles.",
+      "item_context": "ITEM_FOCUS_SASH supports the tundra compound eyes support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_TAILWIND",
+        "MOVE_SLEEP_POWDER",
+        "MOVE_HURRICANE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Authored the strongest reliable Tailwind-sleep set independently for this pattern. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Tundra Compound Eyes support",
+      "source_refs": [
+        "Smogon Gen 9 vgc2025 Vivillon set: Support",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_VIVILLON_TUNDRA"
+      ],
+      "species": "SPECIES_VIVILLON_TUNDRA",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_COMPOUND_EYES",
+      "dependency_notes": [
+        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Vivillon combines Compound Eyes with Tailwind, Sleep Powder, Hurricane, Protect; every slot advances its continental compound eyes support role in doubles.",
+      "item_context": "ITEM_FOCUS_SASH supports the continental compound eyes support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_TAILWIND",
+        "MOVE_SLEEP_POWDER",
+        "MOVE_HURRICANE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Authored the strongest reliable Tailwind-sleep set independently for this pattern. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Continental Compound Eyes support",
+      "source_refs": [
+        "Smogon Gen 9 vgc2025 Vivillon set: Support",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_VIVILLON_CONTINENTAL"
+      ],
+      "species": "SPECIES_VIVILLON_CONTINENTAL",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_COMPOUND_EYES",
+      "dependency_notes": [
+        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Vivillon combines Compound Eyes with Tailwind, Sleep Powder, Hurricane, Protect; every slot advances its garden compound eyes support role in doubles.",
+      "item_context": "ITEM_FOCUS_SASH supports the garden compound eyes support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_TAILWIND",
+        "MOVE_SLEEP_POWDER",
+        "MOVE_HURRICANE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Authored the strongest reliable Tailwind-sleep set independently for this pattern. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Garden Compound Eyes support",
+      "source_refs": [
+        "Smogon Gen 9 vgc2025 Vivillon set: Support",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_VIVILLON_GARDEN"
+      ],
+      "species": "SPECIES_VIVILLON_GARDEN",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_COMPOUND_EYES",
+      "dependency_notes": [
+        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Vivillon combines Compound Eyes with Tailwind, Sleep Powder, Hurricane, Protect; every slot advances its elegant compound eyes support role in doubles.",
+      "item_context": "ITEM_FOCUS_SASH supports the elegant compound eyes support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_TAILWIND",
+        "MOVE_SLEEP_POWDER",
+        "MOVE_HURRICANE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Authored the strongest reliable Tailwind-sleep set independently for this pattern. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Elegant Compound Eyes support",
+      "source_refs": [
+        "Smogon Gen 9 vgc2025 Vivillon set: Support",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_VIVILLON_ELEGANT"
+      ],
+      "species": "SPECIES_VIVILLON_ELEGANT",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_COMPOUND_EYES",
+      "dependency_notes": [
+        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Vivillon combines Compound Eyes with Tailwind, Sleep Powder, Hurricane, Protect; every slot advances its meadow compound eyes support role in doubles.",
+      "item_context": "ITEM_FOCUS_SASH supports the meadow compound eyes support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_TAILWIND",
+        "MOVE_SLEEP_POWDER",
+        "MOVE_HURRICANE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Authored the strongest reliable Tailwind-sleep set independently for this pattern. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Meadow Compound Eyes support",
+      "source_refs": [
+        "Smogon Gen 9 vgc2025 Vivillon set: Support",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_VIVILLON_MEADOW"
+      ],
+      "species": "SPECIES_VIVILLON_MEADOW",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_COMPOUND_EYES",
+      "dependency_notes": [
+        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Vivillon combines Compound Eyes with Tailwind, Sleep Powder, Hurricane, Protect; every slot advances its modern compound eyes support role in doubles.",
+      "item_context": "ITEM_FOCUS_SASH supports the modern compound eyes support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_TAILWIND",
+        "MOVE_SLEEP_POWDER",
+        "MOVE_HURRICANE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Authored the strongest reliable Tailwind-sleep set independently for this pattern. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Modern Compound Eyes support",
+      "source_refs": [
+        "Smogon Gen 9 vgc2025 Vivillon set: Support",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_VIVILLON_MODERN"
+      ],
+      "species": "SPECIES_VIVILLON_MODERN",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_COMPOUND_EYES",
+      "dependency_notes": [
+        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Vivillon combines Compound Eyes with Tailwind, Sleep Powder, Hurricane, Protect; every slot advances its marine compound eyes support role in doubles.",
+      "item_context": "ITEM_FOCUS_SASH supports the marine compound eyes support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_TAILWIND",
+        "MOVE_SLEEP_POWDER",
+        "MOVE_HURRICANE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Authored the strongest reliable Tailwind-sleep set independently for this pattern. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Marine Compound Eyes support",
+      "source_refs": [
+        "Checked-in competitive corpus: showdown:gen9championsrandomdoublesbattle:002",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_VIVILLON_MARINE"
+      ],
+      "species": "SPECIES_VIVILLON_MARINE",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_COMPOUND_EYES",
+      "dependency_notes": [
+        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Vivillon combines Compound Eyes with Tailwind, Sleep Powder, Hurricane, Protect; every slot advances its archipelago compound eyes support role in doubles.",
+      "item_context": "ITEM_FOCUS_SASH supports the archipelago compound eyes support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_TAILWIND",
+        "MOVE_SLEEP_POWDER",
+        "MOVE_HURRICANE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Authored the strongest reliable Tailwind-sleep set independently for this pattern. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Archipelago Compound Eyes support",
+      "source_refs": [
+        "Smogon Gen 9 vgc2025 Vivillon set: Support",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_VIVILLON_ARCHIPELAGO"
+      ],
+      "species": "SPECIES_VIVILLON_ARCHIPELAGO",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_COMPOUND_EYES",
+      "dependency_notes": [
+        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Vivillon combines Compound Eyes with Tailwind, Sleep Powder, Hurricane, Protect; every slot advances its high plains compound eyes support role in doubles.",
+      "item_context": "ITEM_FOCUS_SASH supports the high plains compound eyes support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_TAILWIND",
+        "MOVE_SLEEP_POWDER",
+        "MOVE_HURRICANE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Authored the strongest reliable Tailwind-sleep set independently for this pattern. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "High Plains Compound Eyes support",
+      "source_refs": [
+        "Smogon Gen 9 vgc2025 Vivillon set: Support",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_VIVILLON_HIGH_PLAINS"
+      ],
+      "species": "SPECIES_VIVILLON_HIGH_PLAINS",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_COMPOUND_EYES",
+      "dependency_notes": [
+        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Vivillon combines Compound Eyes with Tailwind, Sleep Powder, Hurricane, Protect; every slot advances its sandstorm compound eyes support role in doubles.",
+      "item_context": "ITEM_FOCUS_SASH supports the sandstorm compound eyes support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_TAILWIND",
+        "MOVE_SLEEP_POWDER",
+        "MOVE_HURRICANE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Authored the strongest reliable Tailwind-sleep set independently for this pattern. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Sandstorm Compound Eyes support",
+      "source_refs": [
+        "Smogon Gen 9 vgc2025 Vivillon set: Support",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_VIVILLON_SANDSTORM"
+      ],
+      "species": "SPECIES_VIVILLON_SANDSTORM",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_COMPOUND_EYES",
+      "dependency_notes": [
+        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Vivillon combines Compound Eyes with Tailwind, Sleep Powder, Hurricane, Protect; every slot advances its river compound eyes support role in doubles.",
+      "item_context": "ITEM_FOCUS_SASH supports the river compound eyes support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_TAILWIND",
+        "MOVE_SLEEP_POWDER",
+        "MOVE_HURRICANE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Authored the strongest reliable Tailwind-sleep set independently for this pattern. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "River Compound Eyes support",
+      "source_refs": [
+        "Smogon Gen 9 vgc2025 Vivillon set: Support",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_VIVILLON_RIVER"
+      ],
+      "species": "SPECIES_VIVILLON_RIVER",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_COMPOUND_EYES",
+      "dependency_notes": [
+        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Vivillon combines Compound Eyes with Tailwind, Sleep Powder, Hurricane, Protect; every slot advances its monsoon compound eyes support role in doubles.",
+      "item_context": "ITEM_FOCUS_SASH supports the monsoon compound eyes support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_TAILWIND",
+        "MOVE_SLEEP_POWDER",
+        "MOVE_HURRICANE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Authored the strongest reliable Tailwind-sleep set independently for this pattern. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Monsoon Compound Eyes support",
+      "source_refs": [
+        "Smogon Gen 9 vgc2025 Vivillon set: Support",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_VIVILLON_MONSOON"
+      ],
+      "species": "SPECIES_VIVILLON_MONSOON",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_COMPOUND_EYES",
+      "dependency_notes": [
+        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Vivillon combines Compound Eyes with Tailwind, Sleep Powder, Hurricane, Protect; every slot advances its savanna compound eyes support role in doubles.",
+      "item_context": "ITEM_FOCUS_SASH supports the savanna compound eyes support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_TAILWIND",
+        "MOVE_SLEEP_POWDER",
+        "MOVE_HURRICANE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Authored the strongest reliable Tailwind-sleep set independently for this pattern. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Savanna Compound Eyes support",
+      "source_refs": [
+        "Smogon Gen 9 vgc2025 Vivillon set: Support",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_VIVILLON_SAVANNA"
+      ],
+      "species": "SPECIES_VIVILLON_SAVANNA",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_COMPOUND_EYES",
+      "dependency_notes": [
+        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Vivillon combines Compound Eyes with Tailwind, Sleep Powder, Hurricane, Protect; every slot advances its sun compound eyes support role in doubles.",
+      "item_context": "ITEM_FOCUS_SASH supports the sun compound eyes support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_TAILWIND",
+        "MOVE_SLEEP_POWDER",
+        "MOVE_HURRICANE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Authored the strongest reliable Tailwind-sleep set independently for this pattern. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Sun Compound Eyes support",
+      "source_refs": [
+        "Smogon Gen 9 vgc2025 Vivillon set: Support",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_VIVILLON_SUN"
+      ],
+      "species": "SPECIES_VIVILLON_SUN",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_COMPOUND_EYES",
+      "dependency_notes": [
+        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Vivillon combines Compound Eyes with Tailwind, Sleep Powder, Hurricane, Protect; every slot advances its ocean compound eyes support role in doubles.",
+      "item_context": "ITEM_FOCUS_SASH supports the ocean compound eyes support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_TAILWIND",
+        "MOVE_SLEEP_POWDER",
+        "MOVE_HURRICANE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Authored the strongest reliable Tailwind-sleep set independently for this pattern. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Ocean Compound Eyes support",
+      "source_refs": [
+        "Smogon Gen 9 vgc2025 Vivillon set: Support",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_VIVILLON_OCEAN"
+      ],
+      "species": "SPECIES_VIVILLON_OCEAN",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_COMPOUND_EYES",
+      "dependency_notes": [
+        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Vivillon combines Compound Eyes with Tailwind, Sleep Powder, Hurricane, Protect; every slot advances its jungle compound eyes support role in doubles.",
+      "item_context": "ITEM_FOCUS_SASH supports the jungle compound eyes support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_TAILWIND",
+        "MOVE_SLEEP_POWDER",
+        "MOVE_HURRICANE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Authored the strongest reliable Tailwind-sleep set independently for this pattern. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Jungle Compound Eyes support",
+      "source_refs": [
+        "Smogon Gen 9 vgc2025 Vivillon set: Support",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_VIVILLON_JUNGLE"
+      ],
+      "species": "SPECIES_VIVILLON_JUNGLE",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_COMPOUND_EYES",
+      "dependency_notes": [
+        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Vivillon combines Compound Eyes with Tailwind, Sleep Powder, Hurricane, Protect; every slot advances its fancy compound eyes support role in doubles.",
+      "item_context": "ITEM_FOCUS_SASH supports the fancy compound eyes support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_TAILWIND",
+        "MOVE_SLEEP_POWDER",
+        "MOVE_HURRICANE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Authored the strongest reliable Tailwind-sleep set independently for this pattern. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Fancy Compound Eyes support",
+      "source_refs": [
+        "Smogon Gen 9 vgc2025 Vivillon set: Support",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_VIVILLON_FANCY"
+      ],
+      "species": "SPECIES_VIVILLON_FANCY",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_COMPOUND_EYES",
+      "dependency_notes": [
+        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Vivillon combines Compound Eyes with Tailwind, Sleep Powder, Hurricane, Protect; every slot advances its poke ball compound eyes support role in doubles.",
+      "item_context": "ITEM_FOCUS_SASH supports the poke ball compound eyes support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_TAILWIND",
+        "MOVE_SLEEP_POWDER",
+        "MOVE_HURRICANE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Authored the strongest reliable Tailwind-sleep set independently for this pattern. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Poke Ball Compound Eyes support",
+      "source_refs": [
+        "Smogon Gen 9 vgc2025 Vivillon set: Support",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_VIVILLON_POKE_BALL"
+      ],
+      "species": "SPECIES_VIVILLON_POKE_BALL",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_FLOWER_VEIL",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Flab\u00e9b\u00e9 combines Flower Veil with Calm Mind, Moonblast, Synthesis, Protect; every slot advances its yellow flower setup support role in doubles.",
+      "item_context": "ITEM_EVIOLITE supports the yellow flower setup support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_CALM_MIND",
+        "MOVE_MOONBLAST",
+        "MOVE_SYNTHESIS",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BOLD",
+      "review_notes": "Added Protect after independent flower-form review. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Yellow Flower setup support",
+      "source_refs": [
+        "Smogon Gen 7 lc Flabe\u0301be\u0301 set: Calm Mind",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_FLABEBE_YELLOW_FLOWER"
+      ],
+      "species": "SPECIES_FLABEBE_YELLOW_FLOWER",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_FLOWER_VEIL",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Flab\u00e9b\u00e9 combines Flower Veil with Calm Mind, Moonblast, Synthesis, Protect; every slot advances its orange flower setup support role in doubles.",
+      "item_context": "ITEM_EVIOLITE supports the orange flower setup support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_CALM_MIND",
+        "MOVE_MOONBLAST",
+        "MOVE_SYNTHESIS",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BOLD",
+      "review_notes": "Added Protect after independent flower-form review. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Orange Flower setup support",
+      "source_refs": [
+        "Smogon Gen 7 lc Flabe\u0301be\u0301 set: Calm Mind",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_FLABEBE_ORANGE_FLOWER"
+      ],
+      "species": "SPECIES_FLABEBE_ORANGE_FLOWER",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_FLOWER_VEIL",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Flab\u00e9b\u00e9 combines Flower Veil with Calm Mind, Moonblast, Synthesis, Protect; every slot advances its blue flower setup support role in doubles.",
+      "item_context": "ITEM_EVIOLITE supports the blue flower setup support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_CALM_MIND",
+        "MOVE_MOONBLAST",
+        "MOVE_SYNTHESIS",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BOLD",
+      "review_notes": "Added Protect after independent flower-form review. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Blue Flower setup support",
+      "source_refs": [
+        "Smogon Gen 7 lc Flabe\u0301be\u0301 set: Calm Mind",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_FLABEBE_BLUE_FLOWER"
+      ],
+      "species": "SPECIES_FLABEBE_BLUE_FLOWER",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_FLOWER_VEIL",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Flab\u00e9b\u00e9 combines Flower Veil with Calm Mind, Moonblast, Synthesis, Protect; every slot advances its white flower setup support role in doubles.",
+      "item_context": "ITEM_EVIOLITE supports the white flower setup support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_CALM_MIND",
+        "MOVE_MOONBLAST",
+        "MOVE_SYNTHESIS",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BOLD",
+      "review_notes": "Added Protect after independent flower-form review. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "White Flower setup support",
+      "source_refs": [
+        "Smogon Gen 7 lc Flabe\u0301be\u0301 set: Calm Mind",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_FLABEBE_WHITE_FLOWER"
+      ],
+      "species": "SPECIES_FLABEBE_WHITE_FLOWER",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_FLOWER_VEIL",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Floette combines Flower Veil with Moonblast, Energy Ball, Psychic, Protect; every slot advances its yellow flower special attacker role in doubles.",
+      "item_context": "ITEM_EVIOLITE supports the yellow flower special attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_MOONBLAST",
+        "MOVE_ENERGY_BALL",
+        "MOVE_PSYCHIC",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "review_notes": "Retained the coherent exact-form four-attack scaffold with Protect. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Yellow Flower special attacker",
+      "source_refs": [
+        "Smogon Gen 4-9 Floette form analyses reviewed",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_FLOETTE_YELLOW_FLOWER"
+      ],
+      "species": "SPECIES_FLOETTE_YELLOW_FLOWER",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_FLOWER_VEIL",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Floette combines Flower Veil with Moonblast, Energy Ball, Psychic, Protect; every slot advances its orange flower special attacker role in doubles.",
+      "item_context": "ITEM_EVIOLITE supports the orange flower special attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_MOONBLAST",
+        "MOVE_ENERGY_BALL",
+        "MOVE_PSYCHIC",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "review_notes": "Retained the coherent exact-form four-attack scaffold with Protect. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Orange Flower special attacker",
+      "source_refs": [
+        "Smogon Gen 4-9 Floette form analyses reviewed",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_FLOETTE_ORANGE_FLOWER"
+      ],
+      "species": "SPECIES_FLOETTE_ORANGE_FLOWER",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_FLOWER_VEIL",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Floette combines Flower Veil with Moonblast, Energy Ball, Psychic, Protect; every slot advances its blue flower special attacker role in doubles.",
+      "item_context": "ITEM_EVIOLITE supports the blue flower special attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_MOONBLAST",
+        "MOVE_ENERGY_BALL",
+        "MOVE_PSYCHIC",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "review_notes": "Retained the coherent exact-form four-attack scaffold with Protect. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Blue Flower special attacker",
+      "source_refs": [
+        "Smogon Gen 4-9 Floette form analyses reviewed",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_FLOETTE_BLUE_FLOWER"
+      ],
+      "species": "SPECIES_FLOETTE_BLUE_FLOWER",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_FLOWER_VEIL",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Floette combines Flower Veil with Moonblast, Energy Ball, Psychic, Protect; every slot advances its white flower special attacker role in doubles.",
+      "item_context": "ITEM_EVIOLITE supports the white flower special attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_MOONBLAST",
+        "MOVE_ENERGY_BALL",
+        "MOVE_PSYCHIC",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "review_notes": "Retained the coherent exact-form four-attack scaffold with Protect. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "White Flower special attacker",
+      "source_refs": [
+        "Smogon Gen 4-9 Floette form analyses reviewed",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_FLOETTE_WHITE_FLOWER"
+      ],
+      "species": "SPECIES_FLOETTE_WHITE_FLOWER",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_FLOWER_VEIL",
+      "dependency_notes": [
+        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Floette combines Flower Veil with Light Of Ruin, Energy Ball, Psychic, Protect; every slot advances its eternal flower special attacker role in doubles.",
+      "item_context": "ITEM_SITRUS_BERRY supports the eternal flower special attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_LIGHT_OF_RUIN",
+        "MOVE_ENERGY_BALL",
+        "MOVE_PSYCHIC",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Retained its unique Light of Ruin identity with Protect. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Eternal Flower special attacker",
+      "source_refs": [
+        "Smogon Gen 4-9 Floette form analyses reviewed",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_FLOETTE_ETERNAL_FLOWER"
+      ],
+      "species": "SPECIES_FLOETTE_ETERNAL_FLOWER",
+      "suggested_item": "ITEM_SITRUS_BERRY"
+    },
+    {
+      "ability": "ABILITY_SYMBIOSIS",
+      "dependency_notes": [
+        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Florges combines Symbiosis with Dazzling Gleam, Wish, Aromatherapy, Protect; every slot advances its yellow flower partner support role in doubles.",
+      "item_context": "ITEM_SITRUS_BERRY supports the yellow flower partner support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_DAZZLING_GLEAM",
+        "MOVE_WISH",
+        "MOVE_AROMATHERAPY",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CALM",
+      "review_notes": "Added Protect and removed redundant Psychic coverage after independent form review. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Yellow Flower partner support",
+      "source_refs": [
+        "Checked-in competitive corpus: showdown:gen6randomdoublesbattle:003",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_FLORGES_YELLOW_FLOWER"
+      ],
+      "species": "SPECIES_FLORGES_YELLOW_FLOWER",
+      "suggested_item": "ITEM_SITRUS_BERRY"
+    },
+    {
+      "ability": "ABILITY_SYMBIOSIS",
+      "dependency_notes": [
+        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Florges combines Symbiosis with Dazzling Gleam, Wish, Aromatherapy, Protect; every slot advances its orange flower partner support role in doubles.",
+      "item_context": "ITEM_SITRUS_BERRY supports the orange flower partner support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_DAZZLING_GLEAM",
+        "MOVE_WISH",
+        "MOVE_AROMATHERAPY",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CALM",
+      "review_notes": "Added Protect and removed redundant Psychic coverage after independent form review. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Orange Flower partner support",
+      "source_refs": [
+        "Checked-in competitive corpus: showdown:gen6randomdoublesbattle:003",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_FLORGES_ORANGE_FLOWER"
+      ],
+      "species": "SPECIES_FLORGES_ORANGE_FLOWER",
+      "suggested_item": "ITEM_SITRUS_BERRY"
+    },
+    {
+      "ability": "ABILITY_SYMBIOSIS",
+      "dependency_notes": [
+        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Florges combines Symbiosis with Dazzling Gleam, Wish, Aromatherapy, Protect; every slot advances its blue flower partner support role in doubles.",
+      "item_context": "ITEM_SITRUS_BERRY supports the blue flower partner support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_DAZZLING_GLEAM",
+        "MOVE_WISH",
+        "MOVE_AROMATHERAPY",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CALM",
+      "review_notes": "Added Protect and removed redundant Psychic coverage after independent form review. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Blue Flower partner support",
+      "source_refs": [
+        "Checked-in competitive corpus: showdown:gen6randomdoublesbattle:003",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_FLORGES_BLUE_FLOWER"
+      ],
+      "species": "SPECIES_FLORGES_BLUE_FLOWER",
+      "suggested_item": "ITEM_SITRUS_BERRY"
+    },
+    {
+      "ability": "ABILITY_SYMBIOSIS",
+      "dependency_notes": [
+        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Florges combines Symbiosis with Dazzling Gleam, Wish, Aromatherapy, Protect; every slot advances its white flower partner support role in doubles.",
+      "item_context": "ITEM_SITRUS_BERRY supports the white flower partner support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_DAZZLING_GLEAM",
+        "MOVE_WISH",
+        "MOVE_AROMATHERAPY",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CALM",
+      "review_notes": "Added Protect and removed redundant Psychic coverage after independent form review. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "White Flower partner support",
+      "source_refs": [
+        "Checked-in competitive corpus: showdown:gen6randomdoublesbattle:003",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_FLORGES_WHITE_FLOWER"
+      ],
+      "species": "SPECIES_FLORGES_WHITE_FLOWER",
+      "suggested_item": "ITEM_SITRUS_BERRY"
+    },
+    {
+      "ability": "ABILITY_FUR_COAT",
+      "dependency_notes": [
+        "ITEM_LEFTOVERS is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Furfrou combines Fur Coat with Double Edge, Sucker Punch, U Turn, Protect; every slot advances its heart trim fur coat pivot role in doubles.",
+      "item_context": "ITEM_LEFTOVERS supports the heart trim fur coat pivot role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_U_TURN",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Removed Toxic and Giga Impact singles pacing after independent trim review. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Heart Trim Fur Coat pivot",
+      "source_refs": [
+        "Smogon Gen 7 pu Furfrou set: Offensive Pivot",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_FURFROU_HEART_TRIM"
+      ],
+      "species": "SPECIES_FURFROU_HEART_TRIM",
+      "suggested_item": "ITEM_LEFTOVERS"
+    },
+    {
+      "ability": "ABILITY_FUR_COAT",
+      "dependency_notes": [
+        "ITEM_LEFTOVERS is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Furfrou combines Fur Coat with Double Edge, Sucker Punch, U Turn, Protect; every slot advances its star trim fur coat pivot role in doubles.",
+      "item_context": "ITEM_LEFTOVERS supports the star trim fur coat pivot role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_U_TURN",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Removed Toxic and Giga Impact singles pacing after independent trim review. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "reviewed_by": "Emerald Champions authored stable-form doubles audit",
+      "role": "Star Trim Fur Coat pivot",
+      "source_refs": [
+        "Smogon Gen 7 pu Furfrou set: Offensive Pivot",
+        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_FURFROU_STAR_TRIM"
+      ],
+      "species": "SPECIES_FURFROU_STAR_TRIM",
+      "suggested_item": "ITEM_LEFTOVERS"
+    }
+  ],
+  "schema_version": 1
+}

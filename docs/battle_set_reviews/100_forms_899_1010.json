@@ -1,0 +1,1319 @@
+{
+  "schema_version": 1,
+  "batch_id": "stable-forms-899-1010-v1",
+  "reviews": [
+    {
+      "species": "SPECIES_RATTATA_ALOLAN",
+      "role": "Hustle Eviolite physical pivot",
+      "moves": [
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_U_TURN",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_HUSTLE",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "ITEM_EVIOLITE supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "source_refs": [
+        "Smogon Alolan Rattata LC wallbreaker roles adapted to doubles",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_RATTATA_ALOLAN"
+      ],
+      "doubles_rationale": "Hustle turns Double-Edge into real damage, Sucker Punch supplies priority, U-turn preserves tempo, and Protect keeps the fragile pivot usable.",
+      "dependency_notes": [
+        "Hustle lowers attack accuracy, so the set trades consistency for the form’s highest realistic damage ceiling.",
+        "The suggested item is advisory only and must be obtained and equipped separately."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Added Protect to make the published offensive shell doubles-ready."
+    },
+    {
+      "species": "SPECIES_RATICATE_ALOLAN",
+      "role": "Hustle Dark-Normal breaker",
+      "moves": [
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_KNOCK_OFF",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_HUSTLE",
+      "suggested_item": "ITEM_LIFE_ORB",
+      "item_context": "ITEM_LIFE_ORB supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "source_refs": [
+        "Smogon Alolan Raticate offensive analyses adapted to doubles",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_RATICATE_ALOLAN"
+      ],
+      "doubles_rationale": "Hustle and Life Orb create immediate dual-STAB pressure, Knock Off removes battle-defining items, Sucker Punch cleans, and Protect handles focus fire.",
+      "dependency_notes": [
+        "Hustle accuracy is an intentional risk; Knock Off remains the safer utility attack when a miss would be costly.",
+        "The suggested item is advisory only and must be obtained and equipped separately."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Preferred immediate doubles pressure over a slow singles Swords Dance turn."
+    },
+    {
+      "species": "SPECIES_RAICHU_ALOLAN",
+      "role": "Surge Surfer Fake Out attacker",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_THUNDERBOLT",
+        "MOVE_PSYCHIC",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_SURGE_SURFER",
+      "suggested_item": "ITEM_FOCUS_SASH",
+      "item_context": "ITEM_FOCUS_SASH supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "source_refs": [
+        "Smogon Gen 7 VGC 2017 Alolan Raichu Offensive Support",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_RAICHU_ALOLAN"
+      ],
+      "doubles_rationale": "Fake Out buys tempo, Thunderbolt and Psychic provide accurate dual STAB, and Protect preserves Raichu while Surge Surfer exploits allied Psychic Terrain.",
+      "dependency_notes": [
+        "Surge Surfer reaches its full Speed only in Electric Terrain, but Raichu is naturally fast and fully functional without it.",
+        "The suggested item is advisory only and must be obtained and equipped separately."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Accepted the direct VGC set after removing its obsolete Z-item option."
+    },
+    {
+      "species": "SPECIES_SANDSHREW_ALOLAN",
+      "role": "Eviolite Slush Rush snow attacker",
+      "moves": [
+        "MOVE_ICICLE_CRASH",
+        "MOVE_IRON_HEAD",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_SLUSH_RUSH",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "ITEM_EVIOLITE supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "source_refs": [
+        "Alolan Sandslash VGC Slush Rush role adapted to Alolan Sandshrew",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_SANDSHREW_ALOLAN"
+      ],
+      "doubles_rationale": "Slush Rush turns Sandshrew into a fast snow attacker, dual STAB covers focused targets, Rock Slide adds spread pressure, and Protect manages weather turns.",
+      "dependency_notes": [
+        "The Speed payoff requires snow, though the Eviolite attacker can still trade outside it.",
+        "The suggested item is advisory only and must be obtained and equipped separately."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Used only moves present in Sandshrew’s exact local pool."
+    },
+    {
+      "species": "SPECIES_SANDSLASH_ALOLAN",
+      "role": "Slush Rush snow sweeper",
+      "moves": [
+        "MOVE_IRON_HEAD",
+        "MOVE_ICICLE_CRASH",
+        "MOVE_EARTHQUAKE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_SLUSH_RUSH",
+      "suggested_item": "ITEM_LIFE_ORB",
+      "item_context": "ITEM_LIFE_ORB supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "source_refs": [
+        "Smogon Gen 7 VGC 2017 Alolan Sandslash Slush Rush",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_SANDSLASH_ALOLAN"
+      ],
+      "doubles_rationale": "Snow doubles Sandslash’s Speed, dual STAB applies reliable focused pressure, Earthquake threatens both foes, and Protect lets its partner reposition around spread damage.",
+      "dependency_notes": [
+        "Earthquake can hit the ally and Slush Rush requires snow, so the set rewards compatible team positioning.",
+        "The suggested item is advisory only and must be obtained and equipped separately."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Accepted the direct VGC attacker."
+    },
+    {
+      "species": "SPECIES_VULPIX_ALOLAN",
+      "role": "Eviolite Snow Warning veil setter",
+      "moves": [
+        "MOVE_AURORA_VEIL",
+        "MOVE_BLIZZARD",
+        "MOVE_FREEZE_DRY",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_SNOW_WARNING",
+      "suggested_item": "ITEM_LIGHT_CLAY",
+      "item_context": "ITEM_LIGHT_CLAY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "source_refs": [
+        "Alolan Ninetales VGC screen role adapted to Smogon LC Alolan Vulpix",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_VULPIX_ALOLAN"
+      ],
+      "doubles_rationale": "Snow Warning immediately enables Aurora Veil and accurate Blizzard, Freeze-Dry punishes Water-types, and Protect preserves the setter.",
+      "dependency_notes": [
+        "Opposing weather can disable Aurora Veil, but Vulpix creates the required snow itself on entry.",
+        "The suggested item is advisory only and must be obtained and equipped separately."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Authored as the first-stage version of the proven snow screen role."
+    },
+    {
+      "species": "SPECIES_NINETALES_ALOLAN",
+      "role": "Snow Warning Aurora Veil support",
+      "moves": [
+        "MOVE_BLIZZARD",
+        "MOVE_AURORA_VEIL",
+        "MOVE_ENCORE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_SNOW_WARNING",
+      "suggested_item": "ITEM_LIGHT_CLAY",
+      "item_context": "ITEM_LIGHT_CLAY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "source_refs": [
+        "Smogon Gen 8 Doubles OU Alolan Ninetales Hail Setter",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_NINETALES_ALOLAN"
+      ],
+      "doubles_rationale": "Snow Warning enables accurate spread Blizzard and Aurora Veil, Encore punishes passive turns, and Protect preserves weather and screen tempo.",
+      "dependency_notes": [
+        "Competing weather can remove snow before Aurora Veil, so turn order still matters.",
+        "The suggested item is advisory only and must be obtained and equipped separately."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Accepted the direct Smogon doubles support set."
+    },
+    {
+      "species": "SPECIES_DIGLETT_ALOLAN",
+      "role": "Focus Sash Tangling Hair attacker",
+      "moves": [
+        "MOVE_STOMPING_TANTRUM",
+        "MOVE_IRON_HEAD",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_TANGLING_HAIR",
+      "suggested_item": "ITEM_FOCUS_SASH",
+      "item_context": "ITEM_FOCUS_SASH supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "source_refs": [
+        "Alolan Dugtrio random-doubles roles adapted to Alolan Diglett",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_DIGLETT_ALOLAN"
+      ],
+      "doubles_rationale": "Focus Sash guarantees a chance to attack, dual STAB and Rock Slide cover focused and spread damage, and Tangling Hair punishes contact with Speed drops.",
+      "dependency_notes": [
+        "Diglett’s 10 base HP makes Focus Sash central to surviving almost any evolved attack.",
+        "The suggested item is advisory only and must be obtained and equipped separately."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Replaced partner-damaging Earthquake with legal focused Ground damage."
+    },
+    {
+      "species": "SPECIES_DUGTRIO_ALOLAN",
+      "role": "Fast Tangling Hair physical attacker",
+      "moves": [
+        "MOVE_IRON_HEAD",
+        "MOVE_STOMPING_TANTRUM",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_TANGLING_HAIR",
+      "suggested_item": "ITEM_LIFE_ORB",
+      "item_context": "ITEM_LIFE_ORB supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "source_refs": [
+        "Pokemon Showdown Gen 9 Random Doubles Alolan Dugtrio set 002",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_DUGTRIO_ALOLAN"
+      ],
+      "doubles_rationale": "Fast dual STAB pressures focused targets, Rock Slide threatens both foes, Protect preserves the frail attacker, and Tangling Hair punishes contact.",
+      "dependency_notes": [
+        "Life Orb is advisory; Dugtrio remains naturally fast but extremely vulnerable to priority.",
+        "The suggested item is advisory only and must be obtained and equipped separately."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Accepted the direct random-doubles set."
+    },
+    {
+      "species": "SPECIES_MEOWTH_ALOLAN",
+      "role": "Technician Fake Out utility pivot",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_FEINT",
+        "MOVE_U_TURN",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_TECHNICIAN",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "ITEM_EVIOLITE supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "source_refs": [
+        "Alolan Persian VGC utility adapted to Smogon LC Alolan Meowth",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_MEOWTH_ALOLAN"
+      ],
+      "doubles_rationale": "Technician strengthens Fake Out and Feint, U-turn preserves tempo, and Protect lets Meowth alternate disruption with safe positioning.",
+      "dependency_notes": [
+        "The set emphasizes tempo over raw Dark damage and needs an offensive partner to capitalize on its openings.",
+        "The suggested item is advisory only and must be obtained and equipped separately."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Authored from the evolved form’s proven doubles support identity."
+    },
+    {
+      "species": "SPECIES_PERSIAN_ALOLAN",
+      "role": "Fur Coat Fake Out Parting Shot pivot",
+      "moves": [
+        "MOVE_PARTING_SHOT",
+        "MOVE_FAKE_OUT",
+        "MOVE_FOUL_PLAY",
+        "MOVE_SNARL"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_FUR_COAT",
+      "suggested_item": "ITEM_SITRUS_BERRY",
+      "item_context": "ITEM_SITRUS_BERRY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "source_refs": [
+        "Smogon Gen 7 VGC 2017 Alolan Persian Parting Shot",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_PERSIAN_ALOLAN"
+      ],
+      "doubles_rationale": "Fake Out buys turns, Parting Shot and Snarl reduce both damage classes, Foul Play punishes physical attackers, and Fur Coat makes repeated pivots feasible.",
+      "dependency_notes": [
+        "Parting Shot needs a healthy switch-in, but the other three moves remain useful when Persian must stay in.",
+        "The suggested item is advisory only and must be obtained and equipped separately."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Accepted the canonical VGC support package without its removed Z-item dependency."
+    },
+    {
+      "species": "SPECIES_GEODUDE_ALOLAN",
+      "role": "Galvanize Eviolite spread attacker",
+      "moves": [
+        "MOVE_BODY_SLAM",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_WIDE_GUARD",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_GALVANIZE",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "ITEM_EVIOLITE supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "source_refs": [
+        "Alolan Golem doubles Galvanize roles adapted to Alolan Geodude",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_GEODUDE_ALOLAN"
+      ],
+      "doubles_rationale": "Galvanize Body Slam supplies strong Electric STAB, Rock Slide pressures both foes, Wide Guard blocks spread attacks, and Protect preserves Eviolite bulk.",
+      "dependency_notes": [
+        "Body Slam is transformed by Galvanize and does not retain Normal typing.",
+        "The suggested item is advisory only and must be obtained and equipped separately."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Rebuilt the singles hazard draft around the form’s defining local ability."
+    },
+    {
+      "species": "SPECIES_GRAVELER_ALOLAN",
+      "role": "Galvanize Eviolite bruiser",
+      "moves": [
+        "MOVE_BODY_SLAM",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_STOMPING_TANTRUM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_GALVANIZE",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "ITEM_EVIOLITE supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "source_refs": [
+        "Alolan Golem doubles Galvanize roles adapted to Alolan Graveler",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_GRAVELER_ALOLAN"
+      ],
+      "doubles_rationale": "Galvanize turns Body Slam into reliable Electric STAB, Rock Slide adds spread damage, and Stomping Tantrum plus Protect provide safe coverage and positioning.",
+      "dependency_notes": [
+        "The set is slow and appreciates Trick Room but does not require it to deal immediate damage.",
+        "The suggested item is advisory only and must be obtained and equipped separately."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Authored independently for Graveler’s excellent Eviolite physical bulk."
+    },
+    {
+      "species": "SPECIES_GOLEM_ALOLAN",
+      "role": "Galvanize dual-STAB breaker",
+      "moves": [
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_STOMPING_TANTRUM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_GALVANIZE",
+      "suggested_item": "ITEM_LIFE_ORB",
+      "item_context": "ITEM_LIFE_ORB supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "source_refs": [
+        "Pokemon Showdown Alolan Golem random-doubles attacker adapted to Galvanize",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_GOLEM_ALOLAN"
+      ],
+      "doubles_rationale": "Galvanize Double-Edge is a massive Electric attack, Rock Slide pressures both slots, Stomping Tantrum covers resists, and Protect manages recoil and targeting.",
+      "dependency_notes": [
+        "Double-Edge and Life Orb create heavy recoil, so the set is designed for decisive trades rather than longevity.",
+        "The suggested item is advisory only and must be obtained and equipped separately."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Selected the defining Galvanize line over the corpus’s weaker Magnet Pull set."
+    },
+    {
+      "species": "SPECIES_GRIMER_ALOLAN",
+      "role": "Eviolite Poison Touch item disruptor",
+      "moves": [
+        "MOVE_KNOCK_OFF",
+        "MOVE_POISON_JAB",
+        "MOVE_SHADOW_SNEAK",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_POISON_TOUCH",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "ITEM_EVIOLITE supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "source_refs": [
+        "Alolan Muk VGC bulky attacker adapted to Smogon LC Alolan Grimer",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_GRIMER_ALOLAN"
+      ],
+      "doubles_rationale": "Knock Off removes crucial items, Poison Touch Poison Jab applies status pressure, Shadow Sneak finishes weakened foes, and Protect preserves Eviolite bulk.",
+      "dependency_notes": [
+        "Poison Touch is probabilistic, but Knock Off provides guaranteed disruption.",
+        "The suggested item is advisory only and must be obtained and equipped separately."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Removed slow RestTalk so the first-stage set contributes immediately."
+    },
+    {
+      "species": "SPECIES_MUK_ALOLAN",
+      "role": "Gluttony Curse Trick Room tank",
+      "moves": [
+        "MOVE_KNOCK_OFF",
+        "MOVE_POISON_JAB",
+        "MOVE_CURSE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BRAVE",
+      "ability": "ABILITY_GLUTTONY",
+      "suggested_item": "ITEM_FIGY_BERRY",
+      "item_context": "ITEM_FIGY_BERRY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "source_refs": [
+        "Smogon Gen 7 VGC 2017 Alolan Muk Setup Attacker",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_MUK_ALOLAN"
+      ],
+      "doubles_rationale": "Curse increases Muk’s damage and bulk while lowering Speed for Trick Room, dual STAB disrupts items and Fairies, and Protect helps reach Gluttony recovery.",
+      "dependency_notes": [
+        "The early Figy Berry recovery requires the suggested Berry; Curse is strongest under Trick Room but not mandatory.",
+        "The suggested item is advisory only and must be obtained and equipped separately."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Accepted the direct VGC setup set."
+    },
+    {
+      "species": "SPECIES_EXEGGUTOR_ALOLAN",
+      "role": "Chloroplast Trick Room special breaker",
+      "moves": [
+        "MOVE_TRICK_ROOM",
+        "MOVE_DRACO_METEOR",
+        "MOVE_SOLAR_BEAM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_QUIET",
+      "ability": "ABILITY_CHLOROPLAST",
+      "suggested_item": "ITEM_LIFE_ORB",
+      "item_context": "ITEM_LIFE_ORB supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "source_refs": [
+        "Smogon Alolan Exeggutor Trick Room attacker adapted to Emerald Champions Chloroplast",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_EXEGGUTOR_ALOLAN"
+      ],
+      "doubles_rationale": "Chloroplast makes Solar Beam immediate regardless of weather, Trick Room reverses Exeggutor’s low Speed, Draco Meteor supplies burst damage, and Protect preserves room turns.",
+      "dependency_notes": [
+        "Draco Meteor lowers Special Attack, but instant Solar Beam remains available afterward.",
+        "The suggested item is advisory only and must be obtained and equipped separately."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Authored around the mod’s weather-independent Chloroplast mechanic."
+    },
+    {
+      "species": "SPECIES_MAROWAK_ALOLAN",
+      "role": "Lightning Rod Trick Room breaker",
+      "moves": [
+        "MOVE_FLARE_BLITZ",
+        "MOVE_SHADOW_BONE",
+        "MOVE_LOW_KICK",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BRAVE",
+      "ability": "ABILITY_LIGHTNING_ROD",
+      "suggested_item": "ITEM_THICK_CLUB",
+      "item_context": "ITEM_THICK_CLUB supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "source_refs": [
+        "Smogon Gen 7 VGC 2018 Alolan Marowak Offensive Lightning Rod",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_MAROWAK_ALOLAN"
+      ],
+      "doubles_rationale": "Thick Club makes dual STAB lethal under Trick Room, Low Kick covers Rock and Dark targets, Protect preserves room turns, and Lightning Rod shields its partner.",
+      "dependency_notes": [
+        "The full damage ceiling requires Thick Club, while Flare Blitz recoil limits repeated attacks.",
+        "The suggested item is advisory only and must be obtained and equipped separately."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Accepted the direct VGC set."
+    },
+    {
+      "species": "SPECIES_MEOWTH_GALARIAN",
+      "role": "Tough Claws Eviolite utility lead",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_IRON_HEAD",
+        "MOVE_U_TURN",
+        "MOVE_TAUNT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_TOUGH_CLAWS",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "ITEM_EVIOLITE supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "source_refs": [
+        "Perrserker doubles utility adapted to Smogon Galarian Meowth",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_MEOWTH_GALARIAN"
+      ],
+      "doubles_rationale": "Tough Claws strengthens Fake Out and Iron Head, Taunt stops setup, and U-turn preserves momentum after the opening disruption.",
+      "dependency_notes": [
+        "The set omits Protect to retain the full Fake Out, Taunt, attack, and pivot package.",
+        "The suggested item is advisory only and must be obtained and equipped separately."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Replaced singles Seed Bomb with native doubles tempo tools."
+    },
+    {
+      "species": "SPECIES_PONYTA_GALARIAN",
+      "role": "Pastel Veil Eviolite physical attacker",
+      "moves": [
+        "MOVE_PLAY_ROUGH",
+        "MOVE_ZEN_HEADBUTT",
+        "MOVE_HIGH_HORSEPOWER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_PASTEL_VEIL",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "ITEM_EVIOLITE supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "source_refs": [
+        "Smogon Galarian Ponyta offensive roles adapted to doubles",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_PONYTA_GALARIAN"
+      ],
+      "doubles_rationale": "Pastel Veil protects the side from poison, fast dual coverage threatens common targets, High Horsepower is partner-safe, and Protect preserves Eviolite positioning.",
+      "dependency_notes": [
+        "Play Rough and Zen Headbutt are imperfectly accurate, so High Horsepower is the reliable coverage line.",
+        "The suggested item is advisory only and must be obtained and equipped separately."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Reauthored the inaccurate special draft around Ponyta’s superior Attack."
+    },
+    {
+      "species": "SPECIES_RAPIDASH_GALARIAN",
+      "role": "Fast Pastel Veil physical attacker",
+      "moves": [
+        "MOVE_PLAY_ROUGH",
+        "MOVE_ZEN_HEADBUTT",
+        "MOVE_HIGH_HORSEPOWER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_PASTEL_VEIL",
+      "suggested_item": "ITEM_LIFE_ORB",
+      "item_context": "ITEM_LIFE_ORB supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "source_refs": [
+        "Smogon Galarian Rapidash offensive analysis adapted to doubles",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_RAPIDASH_GALARIAN"
+      ],
+      "doubles_rationale": "Fast dual STAB and High Horsepower provide broad focused coverage, Pastel Veil protects both allies from poison, and Protect maintains offensive positioning.",
+      "dependency_notes": [
+        "The attacks trade some accuracy for coverage, while Life Orb adds recoil.",
+        "The suggested item is advisory only and must be obtained and equipped separately."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Replaced singles Swords Dance and Morning Sun with immediate doubles pressure."
+    },
+    {
+      "species": "SPECIES_SLOWPOKE_GALARIAN",
+      "role": "Regenerator Eviolite Trick Room support",
+      "moves": [
+        "MOVE_TRICK_ROOM",
+        "MOVE_PSYCHIC",
+        "MOVE_YAWN",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_RELAXED",
+      "ability": "ABILITY_REGENERATOR",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "ITEM_EVIOLITE supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "source_refs": [
+        "Galarian Slowbro doubles roles adapted to Galarian Slowpoke’s exact pool",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_SLOWPOKE_GALARIAN"
+      ],
+      "doubles_rationale": "Trick Room exploits base 15 Speed, Yawn forces switches or sleep, Psychic prevents passivity, and Regenerator rewards later repositioning.",
+      "dependency_notes": [
+        "Yawn is delayed and can be blocked by terrain or immunity, but Trick Room remains independent value.",
+        "The suggested item is advisory only and must be obtained and equipped separately."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Used only moves actually present in the unevolved form’s local learnset."
+    },
+    {
+      "species": "SPECIES_SLOWBRO_GALARIAN",
+      "role": "Regenerator Trick Room support attacker",
+      "moves": [
+        "MOVE_HEAL_PULSE",
+        "MOVE_SHELL_SIDE_ARM",
+        "MOVE_PROTECT",
+        "MOVE_FIRE_BLAST"
+      ],
+      "nature": "NATURE_QUIET",
+      "ability": "ABILITY_REGENERATOR",
+      "suggested_item": "ITEM_SITRUS_BERRY",
+      "item_context": "ITEM_SITRUS_BERRY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "source_refs": [
+        "Pokemon Showdown Gen 8 Random Doubles Galarian Slowbro set 026",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_SLOWBRO_GALARIAN"
+      ],
+      "doubles_rationale": "Heal Pulse sustains an ally, Shell Side Arm adapts its damage category, Fire Blast covers Steel-types, and Protect plus Regenerator support repeated positioning.",
+      "dependency_notes": [
+        "Fire Blast is inaccurate, but Shell Side Arm supplies reliable STAB pressure.",
+        "The suggested item is advisory only and must be obtained and equipped separately."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Accepted the direct random-doubles support attacker."
+    },
+    {
+      "species": "SPECIES_FARFETCHD_GALARIAN",
+      "role": "Scrappy Eviolite physical utility attacker",
+      "moves": [
+        "MOVE_BRAVE_BIRD",
+        "MOVE_BRICK_BREAK",
+        "MOVE_KNOCK_OFF",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_SCRAPPY",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "ITEM_EVIOLITE supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "source_refs": [
+        "Smogon Galarian Farfetchd offensive roles adapted to doubles",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_FARFETCHD_GALARIAN"
+      ],
+      "doubles_rationale": "Scrappy Brick Break always connects and removes screens, Knock Off disrupts items, Brave Bird supplies burst coverage, and Protect preserves Eviolite bulk.",
+      "dependency_notes": [
+        "Brave Bird recoil limits repeated use, while Brick Break is modest but reliable STAB.",
+        "The suggested item is advisory only and must be obtained and equipped separately."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Replaced slow Swords Dance with immediate utility and coverage."
+    },
+    {
+      "species": "SPECIES_WEEZING_GALARIAN",
+      "role": "Neutralizing Gas disruption wall",
+      "moves": [
+        "MOVE_PROTECT",
+        "MOVE_TAUNT",
+        "MOVE_WILL_O_WISP",
+        "MOVE_STRANGE_STEAM"
+      ],
+      "nature": "NATURE_CALM",
+      "ability": "ABILITY_NEUTRALIZING_GAS",
+      "suggested_item": "ITEM_SAFETY_GOGGLES",
+      "item_context": "ITEM_SAFETY_GOGGLES supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "source_refs": [
+        "Smogon Gen 9 VGC 2025 Galarian Weezing Bulky Support",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_WEEZING_GALARIAN"
+      ],
+      "doubles_rationale": "Neutralizing Gas reshapes the board, Taunt and Will-O-Wisp deny setup and physical damage, Strange Steam prevents passivity, and Protect controls ability timing.",
+      "dependency_notes": [
+        "Neutralizing Gas suppresses allied abilities too, so partner selection and switching order are fundamental.",
+        "The suggested item is advisory only and must be obtained and equipped separately."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Accepted the direct current VGC support set."
+    },
+    {
+      "species": "SPECIES_MR_MIME_GALARIAN",
+      "role": "Vital Spirit Fake Out speed controller",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_ICY_WIND",
+        "MOVE_FREEZE_DRY",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_VITAL_SPIRIT",
+      "suggested_item": "ITEM_FOCUS_SASH",
+      "item_context": "ITEM_FOCUS_SASH supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "source_refs": [
+        "Mr Rime and Galarian Mr Mime doubles utility adapted from exact local data",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_MR_MIME_GALARIAN"
+      ],
+      "doubles_rationale": "Fake Out buys the opening turn, Icy Wind controls both foes, Freeze-Dry punishes Water-types, and Vital Spirit safely answers sleep users.",
+      "dependency_notes": [
+        "Focus Sash is advisory, but the utility package remains functional without it.",
+        "The suggested item is advisory only and must be obtained and equipped separately."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Preferred reliable anti-sleep utility over the situational Screen Cleaner default."
+    },
+    {
+      "species": "SPECIES_ARTICUNO_GALARIAN",
+      "role": "Competitive Tailwind special attacker",
+      "moves": [
+        "MOVE_FREEZING_GLARE",
+        "MOVE_HURRICANE",
+        "MOVE_TAILWIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_COMPETITIVE",
+      "suggested_item": "ITEM_LIFE_ORB",
+      "item_context": "ITEM_LIFE_ORB supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "source_refs": [
+        "Smogon Galarian Articuno offensive and Tailwind roles adapted to doubles",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_ARTICUNO_GALARIAN"
+      ],
+      "doubles_rationale": "Competitive punishes Intimidate and stat drops, dual STAB threatens focused targets, Tailwind supports the side, and Protect preserves the fast attacker.",
+      "dependency_notes": [
+        "Hurricane has imperfect accuracy outside rain, while Freezing Glare is the stable attack.",
+        "The suggested item is advisory only and must be obtained and equipped separately."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Converted the singles Calm Mind recovery draft into immediate doubles tempo."
+    },
+    {
+      "species": "SPECIES_ZAPDOS_GALARIAN",
+      "role": "Defiant fast physical attacker",
+      "moves": [
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_DRILL_PECK",
+        "MOVE_TAUNT",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_DEFIANT",
+      "suggested_item": "ITEM_LIFE_ORB",
+      "item_context": "ITEM_LIFE_ORB supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "source_refs": [
+        "Smogon Gen 8 2v2 Doubles Galarian Zapdos Fast Attacker adapted to local Flying STAB",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_ZAPDOS_GALARIAN"
+      ],
+      "doubles_rationale": "Defiant punishes Intimidate, Close Combat and Drill Peck supply accurate dual STAB, Taunt stops control, and Protect maintains pressure.",
+      "dependency_notes": [
+        "Close Combat lowers defenses, so Protect and switch timing matter after attacking.",
+        "The suggested item is advisory only and must be obtained and equipped separately."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Completed the direct Smogon doubles shell with the strongest locally legal Flying attack."
+    },
+    {
+      "species": "SPECIES_MOLTRES_GALARIAN",
+      "role": "Berserk Nasty Plot spread sweeper",
+      "moves": [
+        "MOVE_FIERY_WRATH",
+        "MOVE_AIR_SLASH",
+        "MOVE_NASTY_PLOT",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_BERSERK",
+      "suggested_item": "ITEM_SITRUS_BERRY",
+      "item_context": "ITEM_SITRUS_BERRY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "source_refs": [
+        "Smogon Gen 9 Doubles OU Galarian Moltres Nasty Plot",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_MOLTRES_GALARIAN"
+      ],
+      "doubles_rationale": "Nasty Plot and Berserk compound Special Attack, Fiery Wrath pressures both foes, Air Slash supplies second STAB, and Protect helps trigger Sitrus safely.",
+      "dependency_notes": [
+        "Setup needs a safe turn, but Fiery Wrath is useful spread damage immediately.",
+        "The suggested item is advisory only and must be obtained and equipped separately."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Accepted the direct modern Smogon doubles set."
+    },
+    {
+      "species": "SPECIES_SLOWKING_GALARIAN",
+      "role": "Regenerator Trick Room special attacker",
+      "moves": [
+        "MOVE_FIRE_BLAST",
+        "MOVE_PSYCHIC",
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_TRICK_ROOM"
+      ],
+      "nature": "NATURE_QUIET",
+      "ability": "ABILITY_REGENERATOR",
+      "suggested_item": "ITEM_LIFE_ORB",
+      "item_context": "ITEM_LIFE_ORB supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "source_refs": [
+        "Pokemon Showdown Gen 9 Random Doubles Galarian Slowking set 013",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_SLOWKING_GALARIAN"
+      ],
+      "doubles_rationale": "Slowking establishes Trick Room, then uses broad high-power coverage while Regenerator rewards pivoting once room or matchup conditions change.",
+      "dependency_notes": [
+        "The set omits Protect for full coverage, and Fire Blast remains inaccurate.",
+        "The suggested item is advisory only and must be obtained and equipped separately."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Accepted the direct random-doubles Trick Room attacker."
+    },
+    {
+      "species": "SPECIES_CORSOLA_GALARIAN",
+      "role": "Cursed Body Eviolite burn wall",
+      "moves": [
+        "MOVE_WILL_O_WISP",
+        "MOVE_STRENGTH_SAP",
+        "MOVE_NIGHT_SHADE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BOLD",
+      "ability": "ABILITY_CURSED_BODY",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "ITEM_EVIOLITE supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "source_refs": [
+        "Smogon Galarian Corsola defensive analysis adapted to doubles",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_CORSOLA_GALARIAN"
+      ],
+      "doubles_rationale": "Will-O-Wisp suppresses physical foes, Strength Sap heals while lowering Attack, Night Shade provides fixed damage, and Protect forces awkward targeting.",
+      "dependency_notes": [
+        "Cursed Body is probabilistic and Taunt can restrict the set, but Night Shade prevents complete passivity.",
+        "The suggested item is advisory only and must be obtained and equipped separately."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Removed singles hazards and Toxic for direct doubles control."
+    },
+    {
+      "species": "SPECIES_ZIGZAGOON_GALARIAN",
+      "role": "Eviolite item and stat-control pivot",
+      "moves": [
+        "MOVE_KNOCK_OFF",
+        "MOVE_PARTING_SHOT",
+        "MOVE_HELPING_HAND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CAREFUL",
+      "ability": "ABILITY_QUICK_FEET",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "ITEM_EVIOLITE supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "source_refs": [
+        "Galarian Linoone pivot roles adapted to Galarian Zigzagoon",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_ZIGZAGOON_GALARIAN"
+      ],
+      "doubles_rationale": "Knock Off removes key items, Parting Shot lowers both offenses, Helping Hand amplifies an ally, and Protect lets the small pivot choose safe exits.",
+      "dependency_notes": [
+        "Quick Feet only activates under status, but the moveset itself has no status or item dependency.",
+        "The suggested item is advisory only and must be obtained and equipped separately."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Authored a support role from the exact first-stage move pool."
+    },
+    {
+      "species": "SPECIES_LINOONE_GALARIAN",
+      "role": "Quick Feet status-activated pivot",
+      "moves": [
+        "MOVE_KNOCK_OFF",
+        "MOVE_FACADE",
+        "MOVE_PARTING_SHOT",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_QUICK_FEET",
+      "suggested_item": "ITEM_FLAME_ORB",
+      "item_context": "ITEM_FLAME_ORB supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "source_refs": [
+        "Smogon Galarian Linoone offensive pivot adapted to doubles",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_LINOONE_GALARIAN"
+      ],
+      "doubles_rationale": "Protect activates Flame Orb, Quick Feet then boosts Speed and Facade power, while Knock Off and Parting Shot disrupt items and damage.",
+      "dependency_notes": [
+        "The offensive payoff requires a status Orb, and burn chip limits how often Linoone can pivot.",
+        "The suggested item is advisory only and must be obtained and equipped separately."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Kept the draft’s coherent status-pivot concept and made its item dependency explicit."
+    },
+    {
+      "species": "SPECIES_DARUMAKA_GALARIAN",
+      "role": "Hustle Eviolite physical breaker",
+      "moves": [
+        "MOVE_ICE_PUNCH",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_SUPERPOWER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_HUSTLE",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "ITEM_EVIOLITE supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "source_refs": [
+        "Smogon Galarian Darumaka Hustle wallbreaker adapted to doubles",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_DARUMAKA_GALARIAN"
+      ],
+      "doubles_rationale": "Hustle makes Ice Punch, Rock Slide, and Superpower threatening despite the early stage, while Protect keeps the inaccurate breaker from being freely focused.",
+      "dependency_notes": [
+        "Hustle lowers attack accuracy, and Superpower reduces Attack and Defense after use.",
+        "The suggested item is advisory only and must be obtained and equipped separately."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Used the strongest locally legal Ice attack instead of unavailable Icicle Crash."
+    },
+    {
+      "species": "SPECIES_DARMANITAN_GALARIAN",
+      "role": "Gorilla Tactics Choice Scarf breaker",
+      "moves": [
+        "MOVE_ICICLE_CRASH",
+        "MOVE_SUPERPOWER",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_U_TURN"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_GORILLA_TACTICS",
+      "suggested_item": "ITEM_CHOICE_SCARF",
+      "item_context": "ITEM_CHOICE_SCARF supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "source_refs": [
+        "Smogon Galarian Darmanitan Choice Scarf roles adapted to doubles",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_DARMANITAN_GALARIAN"
+      ],
+      "doubles_rationale": "Gorilla Tactics and Choice Scarf create extreme immediate pressure, Rock Slide threatens both foes, and U-turn preserves momentum when the locked attack is unsafe.",
+      "dependency_notes": [
+        "Gorilla Tactics already locks the first selected move, so this set intentionally contains four attacks and no Protect.",
+        "The suggested item is advisory only and must be obtained and equipped separately."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Removed the incoherent Protect slot from the draft."
+    },
+    {
+      "species": "SPECIES_YAMASK_GALARIAN",
+      "role": "Wandering Spirit Trick Room support",
+      "moves": [
+        "MOVE_TRICK_ROOM",
+        "MOVE_WILL_O_WISP",
+        "MOVE_POLTERGEIST",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_SASSY",
+      "ability": "ABILITY_WANDERING_SPIRIT",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "ITEM_EVIOLITE supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "source_refs": [
+        "Runerigus doubles roles adapted to Galarian Yamask’s exact pool",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_YAMASK_GALARIAN"
+      ],
+      "doubles_rationale": "Trick Room exploits low Speed, Will-O-Wisp suppresses physical damage, Poltergeist prevents passivity, and Protect helps manipulate Wandering Spirit contact swaps.",
+      "dependency_notes": [
+        "Poltergeist requires the target to hold an item, but Will-O-Wisp and Trick Room remain independent.",
+        "The suggested item is advisory only and must be obtained and equipped separately."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Replaced singles hazards and Memento with a reusable doubles support package."
+    },
+    {
+      "species": "SPECIES_STUNFISK_GALARIAN",
+      "role": "Mimicry trapping control tank",
+      "moves": [
+        "MOVE_STOMPING_TANTRUM",
+        "MOVE_SNAP_TRAP",
+        "MOVE_YAWN",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CAREFUL",
+      "ability": "ABILITY_MIMICRY",
+      "suggested_item": "ITEM_LEFTOVERS",
+      "item_context": "ITEM_LEFTOVERS supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "source_refs": [
+        "Smogon Galarian Stunfisk trapping roles adapted to doubles",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_STUNFISK_GALARIAN"
+      ],
+      "doubles_rationale": "Snap Trap and Yawn force difficult stay-or-switch decisions, Stomping Tantrum supplies focused Ground damage, and Protect advances both residual plans.",
+      "dependency_notes": [
+        "Mimicry’s typing depends on active terrain, but none of the four moves requires terrain to function.",
+        "The suggested item is advisory only and must be obtained and equipped separately."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Removed singles hazards and partner-damaging Earthquake for a distinct doubles control role."
+    },
+    {
+      "species": "SPECIES_PIKACHU_COSPLAY",
+      "role": "Light Ball priority and speed-control attacker",
+      "moves": [
+        "MOVE_WILD_CHARGE",
+        "MOVE_EXTREME_SPEED",
+        "MOVE_NUZZLE",
+        "MOVE_CHARM"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_STATIC",
+      "suggested_item": "ITEM_LIGHT_BALL",
+      "item_context": "ITEM_LIGHT_BALL supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "source_refs": [
+        "Smogon Pikachu Light Ball doubles roles adapted to the exact costume-form move pool",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_PIKACHU_COSPLAY"
+      ],
+      "doubles_rationale": "Light Ball gives Wild Charge and Extreme Speed real damage, Nuzzle guarantees speed control, and Charm immediately weakens physical attackers.",
+      "dependency_notes": [
+        "The full damage ceiling requires Light Ball, and this restricted cosmetic pool has no Protect.",
+        "The suggested item is advisory only and must be obtained and equipped separately."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Authored independently because costume Pikachu has a smaller local legal pool than base Pikachu."
+    },
+    {
+      "species": "SPECIES_PIKACHU_ROCK_STAR",
+      "alias_of": "SPECIES_PIKACHU_COSPLAY",
+      "role": "Light Ball priority and speed-control attacker",
+      "moves": [
+        "MOVE_WILD_CHARGE",
+        "MOVE_EXTREME_SPEED",
+        "MOVE_NUZZLE",
+        "MOVE_CHARM"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_STATIC",
+      "suggested_item": "ITEM_LIGHT_BALL",
+      "item_context": "SPECIES_PIKACHU_ROCK_STAR has exactly the same local battle data and legal move pool as the reviewed Cosplay form; Light Ball remains advisory and is never auto-equipped.",
+      "source_refs": [
+        "Authored SPECIES_PIKACHU_COSPLAY review",
+        "Emerald Champions exact-form equivalence check for SPECIES_PIKACHU_ROCK_STAR"
+      ],
+      "doubles_rationale": "This cosmetic form is mechanically identical to the reviewed Cosplay form, so the same Light Ball damage, priority, Nuzzle speed control, and Charm package is optimal.",
+      "dependency_notes": [
+        "The full damage ceiling requires Light Ball, and this restricted cosmetic pool has no Protect.",
+        "Alias acceptance is gated on identical stats, types, abilities, full legal pool, moves, nature, and ability."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Exact cosmetic alias proven by the review loader."
+    },
+    {
+      "species": "SPECIES_PIKACHU_BELLE",
+      "alias_of": "SPECIES_PIKACHU_COSPLAY",
+      "role": "Light Ball priority and speed-control attacker",
+      "moves": [
+        "MOVE_WILD_CHARGE",
+        "MOVE_EXTREME_SPEED",
+        "MOVE_NUZZLE",
+        "MOVE_CHARM"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_STATIC",
+      "suggested_item": "ITEM_LIGHT_BALL",
+      "item_context": "SPECIES_PIKACHU_BELLE has exactly the same local battle data and legal move pool as the reviewed Cosplay form; Light Ball remains advisory and is never auto-equipped.",
+      "source_refs": [
+        "Authored SPECIES_PIKACHU_COSPLAY review",
+        "Emerald Champions exact-form equivalence check for SPECIES_PIKACHU_BELLE"
+      ],
+      "doubles_rationale": "This cosmetic form is mechanically identical to the reviewed Cosplay form, so the same Light Ball damage, priority, Nuzzle speed control, and Charm package is optimal.",
+      "dependency_notes": [
+        "The full damage ceiling requires Light Ball, and this restricted cosmetic pool has no Protect.",
+        "Alias acceptance is gated on identical stats, types, abilities, full legal pool, moves, nature, and ability."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Exact cosmetic alias proven by the review loader."
+    },
+    {
+      "species": "SPECIES_PIKACHU_POP_STAR",
+      "alias_of": "SPECIES_PIKACHU_COSPLAY",
+      "role": "Light Ball priority and speed-control attacker",
+      "moves": [
+        "MOVE_WILD_CHARGE",
+        "MOVE_EXTREME_SPEED",
+        "MOVE_NUZZLE",
+        "MOVE_CHARM"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_STATIC",
+      "suggested_item": "ITEM_LIGHT_BALL",
+      "item_context": "SPECIES_PIKACHU_POP_STAR has exactly the same local battle data and legal move pool as the reviewed Cosplay form; Light Ball remains advisory and is never auto-equipped.",
+      "source_refs": [
+        "Authored SPECIES_PIKACHU_COSPLAY review",
+        "Emerald Champions exact-form equivalence check for SPECIES_PIKACHU_POP_STAR"
+      ],
+      "doubles_rationale": "This cosmetic form is mechanically identical to the reviewed Cosplay form, so the same Light Ball damage, priority, Nuzzle speed control, and Charm package is optimal.",
+      "dependency_notes": [
+        "The full damage ceiling requires Light Ball, and this restricted cosmetic pool has no Protect.",
+        "Alias acceptance is gated on identical stats, types, abilities, full legal pool, moves, nature, and ability."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Exact cosmetic alias proven by the review loader."
+    },
+    {
+      "species": "SPECIES_PIKACHU_PH_D",
+      "alias_of": "SPECIES_PIKACHU_COSPLAY",
+      "role": "Light Ball priority and speed-control attacker",
+      "moves": [
+        "MOVE_WILD_CHARGE",
+        "MOVE_EXTREME_SPEED",
+        "MOVE_NUZZLE",
+        "MOVE_CHARM"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_STATIC",
+      "suggested_item": "ITEM_LIGHT_BALL",
+      "item_context": "SPECIES_PIKACHU_PH_D has exactly the same local battle data and legal move pool as the reviewed Cosplay form; Light Ball remains advisory and is never auto-equipped.",
+      "source_refs": [
+        "Authored SPECIES_PIKACHU_COSPLAY review",
+        "Emerald Champions exact-form equivalence check for SPECIES_PIKACHU_PH_D"
+      ],
+      "doubles_rationale": "This cosmetic form is mechanically identical to the reviewed Cosplay form, so the same Light Ball damage, priority, Nuzzle speed control, and Charm package is optimal.",
+      "dependency_notes": [
+        "The full damage ceiling requires Light Ball, and this restricted cosmetic pool has no Protect.",
+        "Alias acceptance is gated on identical stats, types, abilities, full legal pool, moves, nature, and ability."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Exact cosmetic alias proven by the review loader."
+    },
+    {
+      "species": "SPECIES_PIKACHU_LIBRE",
+      "alias_of": "SPECIES_PIKACHU_COSPLAY",
+      "role": "Light Ball priority and speed-control attacker",
+      "moves": [
+        "MOVE_WILD_CHARGE",
+        "MOVE_EXTREME_SPEED",
+        "MOVE_NUZZLE",
+        "MOVE_CHARM"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_STATIC",
+      "suggested_item": "ITEM_LIGHT_BALL",
+      "item_context": "SPECIES_PIKACHU_LIBRE has exactly the same local battle data and legal move pool as the reviewed Cosplay form; Light Ball remains advisory and is never auto-equipped.",
+      "source_refs": [
+        "Authored SPECIES_PIKACHU_COSPLAY review",
+        "Emerald Champions exact-form equivalence check for SPECIES_PIKACHU_LIBRE"
+      ],
+      "doubles_rationale": "This cosmetic form is mechanically identical to the reviewed Cosplay form, so the same Light Ball damage, priority, Nuzzle speed control, and Charm package is optimal.",
+      "dependency_notes": [
+        "The full damage ceiling requires Light Ball, and this restricted cosmetic pool has no Protect.",
+        "Alias acceptance is gated on identical stats, types, abilities, full legal pool, moves, nature, and ability."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Exact cosmetic alias proven by the review loader."
+    },
+    {
+      "species": "SPECIES_PIKACHU_ORIGINAL_CAP",
+      "alias_of": "SPECIES_PIKACHU_COSPLAY",
+      "role": "Light Ball priority and speed-control attacker",
+      "moves": [
+        "MOVE_WILD_CHARGE",
+        "MOVE_EXTREME_SPEED",
+        "MOVE_NUZZLE",
+        "MOVE_CHARM"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_STATIC",
+      "suggested_item": "ITEM_LIGHT_BALL",
+      "item_context": "SPECIES_PIKACHU_ORIGINAL_CAP has exactly the same local battle data and legal move pool as the reviewed Cosplay form; Light Ball remains advisory and is never auto-equipped.",
+      "source_refs": [
+        "Authored SPECIES_PIKACHU_COSPLAY review",
+        "Emerald Champions exact-form equivalence check for SPECIES_PIKACHU_ORIGINAL_CAP"
+      ],
+      "doubles_rationale": "This cosmetic form is mechanically identical to the reviewed Cosplay form, so the same Light Ball damage, priority, Nuzzle speed control, and Charm package is optimal.",
+      "dependency_notes": [
+        "The full damage ceiling requires Light Ball, and this restricted cosmetic pool has no Protect.",
+        "Alias acceptance is gated on identical stats, types, abilities, full legal pool, moves, nature, and ability."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Exact cosmetic alias proven by the review loader."
+    },
+    {
+      "species": "SPECIES_PIKACHU_HOENN_CAP",
+      "alias_of": "SPECIES_PIKACHU_COSPLAY",
+      "role": "Light Ball priority and speed-control attacker",
+      "moves": [
+        "MOVE_WILD_CHARGE",
+        "MOVE_EXTREME_SPEED",
+        "MOVE_NUZZLE",
+        "MOVE_CHARM"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_STATIC",
+      "suggested_item": "ITEM_LIGHT_BALL",
+      "item_context": "SPECIES_PIKACHU_HOENN_CAP has exactly the same local battle data and legal move pool as the reviewed Cosplay form; Light Ball remains advisory and is never auto-equipped.",
+      "source_refs": [
+        "Authored SPECIES_PIKACHU_COSPLAY review",
+        "Emerald Champions exact-form equivalence check for SPECIES_PIKACHU_HOENN_CAP"
+      ],
+      "doubles_rationale": "This cosmetic form is mechanically identical to the reviewed Cosplay form, so the same Light Ball damage, priority, Nuzzle speed control, and Charm package is optimal.",
+      "dependency_notes": [
+        "The full damage ceiling requires Light Ball, and this restricted cosmetic pool has no Protect.",
+        "Alias acceptance is gated on identical stats, types, abilities, full legal pool, moves, nature, and ability."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Exact cosmetic alias proven by the review loader."
+    },
+    {
+      "species": "SPECIES_PIKACHU_SINNOH_CAP",
+      "alias_of": "SPECIES_PIKACHU_COSPLAY",
+      "role": "Light Ball priority and speed-control attacker",
+      "moves": [
+        "MOVE_WILD_CHARGE",
+        "MOVE_EXTREME_SPEED",
+        "MOVE_NUZZLE",
+        "MOVE_CHARM"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_STATIC",
+      "suggested_item": "ITEM_LIGHT_BALL",
+      "item_context": "SPECIES_PIKACHU_SINNOH_CAP has exactly the same local battle data and legal move pool as the reviewed Cosplay form; Light Ball remains advisory and is never auto-equipped.",
+      "source_refs": [
+        "Authored SPECIES_PIKACHU_COSPLAY review",
+        "Emerald Champions exact-form equivalence check for SPECIES_PIKACHU_SINNOH_CAP"
+      ],
+      "doubles_rationale": "This cosmetic form is mechanically identical to the reviewed Cosplay form, so the same Light Ball damage, priority, Nuzzle speed control, and Charm package is optimal.",
+      "dependency_notes": [
+        "The full damage ceiling requires Light Ball, and this restricted cosmetic pool has no Protect.",
+        "Alias acceptance is gated on identical stats, types, abilities, full legal pool, moves, nature, and ability."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Exact cosmetic alias proven by the review loader."
+    },
+    {
+      "species": "SPECIES_PIKACHU_UNOVA_CAP",
+      "alias_of": "SPECIES_PIKACHU_COSPLAY",
+      "role": "Light Ball priority and speed-control attacker",
+      "moves": [
+        "MOVE_WILD_CHARGE",
+        "MOVE_EXTREME_SPEED",
+        "MOVE_NUZZLE",
+        "MOVE_CHARM"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_STATIC",
+      "suggested_item": "ITEM_LIGHT_BALL",
+      "item_context": "SPECIES_PIKACHU_UNOVA_CAP has exactly the same local battle data and legal move pool as the reviewed Cosplay form; Light Ball remains advisory and is never auto-equipped.",
+      "source_refs": [
+        "Authored SPECIES_PIKACHU_COSPLAY review",
+        "Emerald Champions exact-form equivalence check for SPECIES_PIKACHU_UNOVA_CAP"
+      ],
+      "doubles_rationale": "This cosmetic form is mechanically identical to the reviewed Cosplay form, so the same Light Ball damage, priority, Nuzzle speed control, and Charm package is optimal.",
+      "dependency_notes": [
+        "The full damage ceiling requires Light Ball, and this restricted cosmetic pool has no Protect.",
+        "Alias acceptance is gated on identical stats, types, abilities, full legal pool, moves, nature, and ability."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Exact cosmetic alias proven by the review loader."
+    },
+    {
+      "species": "SPECIES_PIKACHU_KALOS_CAP",
+      "alias_of": "SPECIES_PIKACHU_COSPLAY",
+      "role": "Light Ball priority and speed-control attacker",
+      "moves": [
+        "MOVE_WILD_CHARGE",
+        "MOVE_EXTREME_SPEED",
+        "MOVE_NUZZLE",
+        "MOVE_CHARM"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_STATIC",
+      "suggested_item": "ITEM_LIGHT_BALL",
+      "item_context": "SPECIES_PIKACHU_KALOS_CAP has exactly the same local battle data and legal move pool as the reviewed Cosplay form; Light Ball remains advisory and is never auto-equipped.",
+      "source_refs": [
+        "Authored SPECIES_PIKACHU_COSPLAY review",
+        "Emerald Champions exact-form equivalence check for SPECIES_PIKACHU_KALOS_CAP"
+      ],
+      "doubles_rationale": "This cosmetic form is mechanically identical to the reviewed Cosplay form, so the same Light Ball damage, priority, Nuzzle speed control, and Charm package is optimal.",
+      "dependency_notes": [
+        "The full damage ceiling requires Light Ball, and this restricted cosmetic pool has no Protect.",
+        "Alias acceptance is gated on identical stats, types, abilities, full legal pool, moves, nature, and ability."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Exact cosmetic alias proven by the review loader."
+    },
+    {
+      "species": "SPECIES_PIKACHU_ALOLA_CAP",
+      "alias_of": "SPECIES_PIKACHU_COSPLAY",
+      "role": "Light Ball priority and speed-control attacker",
+      "moves": [
+        "MOVE_WILD_CHARGE",
+        "MOVE_EXTREME_SPEED",
+        "MOVE_NUZZLE",
+        "MOVE_CHARM"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_STATIC",
+      "suggested_item": "ITEM_LIGHT_BALL",
+      "item_context": "SPECIES_PIKACHU_ALOLA_CAP has exactly the same local battle data and legal move pool as the reviewed Cosplay form; Light Ball remains advisory and is never auto-equipped.",
+      "source_refs": [
+        "Authored SPECIES_PIKACHU_COSPLAY review",
+        "Emerald Champions exact-form equivalence check for SPECIES_PIKACHU_ALOLA_CAP"
+      ],
+      "doubles_rationale": "This cosmetic form is mechanically identical to the reviewed Cosplay form, so the same Light Ball damage, priority, Nuzzle speed control, and Charm package is optimal.",
+      "dependency_notes": [
+        "The full damage ceiling requires Light Ball, and this restricted cosmetic pool has no Protect.",
+        "Alias acceptance is gated on identical stats, types, abilities, full legal pool, moves, nature, and ability."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Exact cosmetic alias proven by the review loader."
+    },
+    {
+      "species": "SPECIES_PIKACHU_PARTNER_CAP",
+      "alias_of": "SPECIES_PIKACHU_COSPLAY",
+      "role": "Light Ball priority and speed-control attacker",
+      "moves": [
+        "MOVE_WILD_CHARGE",
+        "MOVE_EXTREME_SPEED",
+        "MOVE_NUZZLE",
+        "MOVE_CHARM"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_STATIC",
+      "suggested_item": "ITEM_LIGHT_BALL",
+      "item_context": "SPECIES_PIKACHU_PARTNER_CAP has exactly the same local battle data and legal move pool as the reviewed Cosplay form; Light Ball remains advisory and is never auto-equipped.",
+      "source_refs": [
+        "Authored SPECIES_PIKACHU_COSPLAY review",
+        "Emerald Champions exact-form equivalence check for SPECIES_PIKACHU_PARTNER_CAP"
+      ],
+      "doubles_rationale": "This cosmetic form is mechanically identical to the reviewed Cosplay form, so the same Light Ball damage, priority, Nuzzle speed control, and Charm package is optimal.",
+      "dependency_notes": [
+        "The full damage ceiling requires Light Ball, and this restricted cosmetic pool has no Protect.",
+        "Alias acceptance is gated on identical stats, types, abilities, full legal pool, moves, nature, and ability."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Exact cosmetic alias proven by the review loader."
+    },
+    {
+      "species": "SPECIES_PIKACHU_WORLD_CAP",
+      "alias_of": "SPECIES_PIKACHU_COSPLAY",
+      "role": "Light Ball priority and speed-control attacker",
+      "moves": [
+        "MOVE_WILD_CHARGE",
+        "MOVE_EXTREME_SPEED",
+        "MOVE_NUZZLE",
+        "MOVE_CHARM"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_STATIC",
+      "suggested_item": "ITEM_LIGHT_BALL",
+      "item_context": "SPECIES_PIKACHU_WORLD_CAP has exactly the same local battle data and legal move pool as the reviewed Cosplay form; Light Ball remains advisory and is never auto-equipped.",
+      "source_refs": [
+        "Authored SPECIES_PIKACHU_COSPLAY review",
+        "Emerald Champions exact-form equivalence check for SPECIES_PIKACHU_WORLD_CAP"
+      ],
+      "doubles_rationale": "This cosmetic form is mechanically identical to the reviewed Cosplay form, so the same Light Ball damage, priority, Nuzzle speed control, and Charm package is optimal.",
+      "dependency_notes": [
+        "The full damage ceiling requires Light Ball, and this restricted cosmetic pool has no Protect.",
+        "Alias acceptance is gated on identical stats, types, abilities, full legal pool, moves, nature, and ability."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Exact cosmetic alias proven by the review loader."
+    },
+    {
+      "species": "SPECIES_PICHU_SPIKY_EARED",
+      "role": "Eviolite Nuzzle support",
+      "moves": [
+        "MOVE_NASTY_PLOT",
+        "MOVE_THUNDER_SHOCK",
+        "MOVE_NUZZLE",
+        "MOVE_CHARM"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_STATIC",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "ITEM_EVIOLITE supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "source_refs": [
+        "Smogon Pichu support roles adapted to the exact Spiky-eared move pool",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_PICHU_SPIKY_EARED"
+      ],
+      "doubles_rationale": "Nuzzle guarantees speed control, Charm lowers physical damage, and Nasty Plot gives Thunder Shock at least one scaling offensive line.",
+      "dependency_notes": [
+        "The form has only eight legal moves and no Protect, so the set is intentionally a fragile support piece.",
+        "The suggested item is advisory only and must be obtained and equipped separately."
+      ],
+      "reviewed_by": "Emerald Champions stable-forms doubles audit",
+      "review_notes": "Authored independently because its move pool is not equivalent to base Pichu."
+    }
+  ]
+}
