@@ -360,9 +360,7 @@
       "dest_warp_id": 0
     }
   ],
-  "coord_events": [
-
-  ],
+  "coord_events": [],
   "bg_events": [
     {
       "type": "sign",
@@ -393,7 +391,7 @@
       "x": 10,
       "y": 19,
       "elevation": 3,
-      "item": "ITEM_BRIGHT_POWDER",
+      "item": "ITEM_MOON_STONE",
       "flag": "FLAG_HIDDEN_ITEM_ROUTE_117_BRIGHT_POWDER"
     }
   ]

@@ -706,14 +706,14 @@ SlateportCity_EventScript_Greta::
 	msgbox SlateportCity_Text_GretaLetsBattle, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_GRETA_SLATEPORT, SlateportCity_Text_GretaDefeat
 SlateportCity_EventScript_GretaReward::
-	checkitemspace ITEM_THROAT_SPRAY, 1
+	checkitemspace ITEM_LEADERS_CREST, 1
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	checkitemspace ITEM_BOTTLE_CAP, 6
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox SlateportCity_Text_GretaHereHaveStuff, MSGBOX_AUTOCLOSE
-	giveitem ITEM_THROAT_SPRAY
+	giveitem ITEM_LEADERS_CREST
 	giveitem ITEM_BOTTLE_CAP, 6
 	setflag FLAG_DEFEATED_SLATEPORT_GRETA
 SlateportCity_EventScript_GretaDefeated::

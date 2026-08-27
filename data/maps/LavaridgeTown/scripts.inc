@@ -76,13 +76,9 @@ LavaridgeTown_EventScript_MayGiveGoGoggles:: @ 81EA5B5
 	checkitemspace ITEM_GO_GOGGLES, 1
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
-	checkitemspace ITEM_SAFETY_GOGGLES, 1
-	compare VAR_RESULT, FALSE
-	goto_if_eq Common_EventScript_ShowBagIsFull
 	giveitem ITEM_GO_GOGGLES
 	setflag FLAG_RECEIVED_GO_GOGGLES
 	msgbox LavaridgeTown_Text_MayExplainGoGoggles, MSGBOX_DEFAULT
-	giveitem ITEM_SAFETY_GOGGLES
 	msgbox LavaridgeTown_Text_MayGiveSafetyGogglesChallengeDad, MSGBOX_DEFAULT
 	goto LavaridgeTown_EventScript_RivalExit
 	end
@@ -92,13 +88,9 @@ LavaridgeTown_EventScript_BrendanGiveGoGoggles:: @ 81EA5DA
 	checkitemspace ITEM_GO_GOGGLES, 1
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
-	checkitemspace ITEM_SAFETY_GOGGLES, 1
-	compare VAR_RESULT, FALSE
-	goto_if_eq Common_EventScript_ShowBagIsFull
 	giveitem ITEM_GO_GOGGLES
 	setflag FLAG_RECEIVED_GO_GOGGLES
 	msgbox LavaridgeTown_Text_BrendanExplainGoGoggles, MSGBOX_DEFAULT
-	giveitem ITEM_SAFETY_GOGGLES
 	msgbox LavaridgeTown_Text_BrendanExplainSafetyGogglesChallengeDad, MSGBOX_DEFAULT
 	goto LavaridgeTown_EventScript_RivalExit
 	end
@@ -321,15 +313,10 @@ LavaridgeTown_Text_MayNiceBadgesTakeThis: @ 81EA7C0
 LavaridgeTown_Text_MayExplainGoGoggles: @ 81EA897
 	.string "May: With those Go-Goggles, you'll\n"
 	.string "have no trouble getting through the\l"
-	.string "desert near Route 111.\p"
-	.string "Oh, and you might want a pair of these\n"
-	.string "for your Pokémon.$"
+	.string "desert near Route 111.$"
 
 LavaridgeTown_Text_MayGiveSafetyGogglesChallengeDad:
-	.string "May: Safety Goggles are like Go-Goggles\n"
-	.string "for Pokémon - they'll protect them from\l"
-	.string "weather and Powder moves.\p"
-	.string "But, wow, {PLAYER}{KUN}…\n"
+	.string "May: Wow, {PLAYER}{KUN}…\n"
 	.string "Challenging Gyms…\p"
 	.string "You're trying hard because you don't\n"
 	.string "want to lose to me, I bet!\p"
@@ -348,15 +335,10 @@ LavaridgeTown_Text_BrendanNiceBadgesTakeThis: @ 81EA9A2
 LavaridgeTown_Text_BrendanExplainGoGoggles:
 	.string "Brendan: Keep those with you if you're\n"
 	.string "planning on going into that desert near\l"
-	.string "Route 111.\p"
-	.string "You should take a pair of these for\n"
-	.string "your Pokémon, too.$"
+	.string "Route 111.$"
 
 LavaridgeTown_Text_BrendanExplainSafetyGogglesChallengeDad:
-	.string "Brendan: If you let a Pokémon hold\n"
-	.string "those Safety Goggles, they won't be\l"
-	.string "hurt by the desert's sandstorm.\p"
-	.string "There should be some Pokémon that\n"
+	.string "Brendan: There should be Pokémon that\n"
 	.string "are exclusively desert-dwellers.\l"
 	.string "You might look around for those.\p"
 	.string "As for me…\n"

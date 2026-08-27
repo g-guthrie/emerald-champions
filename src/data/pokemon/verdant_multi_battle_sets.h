@@ -45,7 +45,7 @@ static const u8 sVerdantDefaultSetName_SHIFTRY[] = _("Special Attacker");
 static const u8 sVerdantDefaultSetName_GARDEVOIR[] = _("Special Attacker");
 static const u8 sVerdantDefaultSetName_HARIYAMA[] = _("Trick Room");
 static const u8 sVerdantDefaultSetName_SABLEYE[] = _("Support");
-static const u8 sVerdantDefaultSetName_AGGRON[] = _("Mega Physical Attacker");
+static const u8 sVerdantDefaultSetName_AGGRON[] = _("Physical Attacker");
 static const u8 sVerdantDefaultSetName_MEDICHAM[] = _("Attacker");
 static const u8 sVerdantDefaultSetName_MANECTRIC[] = _("Recommended");
 static const u8 sVerdantDefaultSetName_SHARPEDO[] = _("Recommended");
@@ -57,7 +57,7 @@ static const u8 sVerdantDefaultSetName_GLALIE[] = _("Attacker");
 static const u8 sVerdantDefaultSetName_METAGROSS[] = _("Physical Attacker");
 static const u8 sVerdantDefaultSetName_REGIROCK[] = _("Recommended");
 static const u8 sVerdantDefaultSetName_REGICE[] = _("Special Attacker");
-static const u8 sVerdantDefaultSetName_LATIAS[] = _("Mega Tailwind");
+static const u8 sVerdantDefaultSetName_LATIAS[] = _("Tailwind");
 static const u8 sVerdantDefaultSetName_LATIOS[] = _("Special Attacker");
 static const u8 sVerdantDefaultSetName_GROUDON[] = _("Recommended");
 static const u8 sVerdantDefaultSetName_RAYQUAZA[] = _("Recommended");
@@ -71,7 +71,7 @@ static const u8 sVerdantDefaultSetName_GARCHOMP[] = _("Spread Attacker");
 static const u8 sVerdantDefaultSetName_LUCARIO[] = _("Attacker");
 static const u8 sVerdantDefaultSetName_ABOMASNOW[] = _("Trick Room");
 static const u8 sVerdantDefaultSetName_ELECTIVIRE[] = _("Physical Attacker");
-static const u8 sVerdantDefaultSetName_MAGMORTAR[] = _("Mega Special Attacker");
+static const u8 sVerdantDefaultSetName_MAGMORTAR[] = _("Special Attacker");
 static const u8 sVerdantDefaultSetName_YANMEGA[] = _("Tailwind");
 static const u8 sVerdantDefaultSetName_GALLADE[] = _("Attacker");
 static const u8 sVerdantDefaultSetName_PROBOPASS[] = _("Special Attacker");
@@ -491,7 +491,8 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_SLUDGE_BOMB, MOVE_EARTH_POWER, MOVE_PROTECT, MOVE_GIGA_DRAIN},
             .nature = NATURE_MODEST,
             .abilitySlot = 1,
-            .item = ITEM_LIFE_ORB,
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_VENUSAURITE,
         },
     },
     {
@@ -501,7 +502,8 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_PROTECT, MOVE_DRAGON_CLAW, MOVE_DRAGON_DANCE, MOVE_FLARE_BLITZ},
             .nature = NATURE_JOLLY,
             .abilitySlot = 1,
-            .item = ITEM_LIFE_ORB,
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_CHARIZARDITE_X,
         },
     },
     {
@@ -512,6 +514,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_MODEST,
             .abilitySlot = 2,
             .item = ITEM_CHOICE_SCARF,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -522,6 +525,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_IMPISH,
             .abilitySlot = 0,
             .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -531,7 +535,8 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_FAKE_OUT, MOVE_PROTECT, MOVE_VOLT_SWITCH, MOVE_VOLT_TACKLE},
             .nature = NATURE_JOLLY,
             .abilitySlot = 2,
-            .item = ITEM_LIFE_ORB,
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_RAICHUNITE_X,
         },
     },
     {
@@ -542,16 +547,18 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_TIMID,
             .abilitySlot = 2,
             .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
-        .name = _("Mega Special Attacker"),
+        .name = _("Special Attacker"),
         .preset =
         {
             .moves = {MOVE_FOLLOW_ME, MOVE_MOONBLAST, MOVE_PROTECT, MOVE_DAZZLING_GLEAM},
             .nature = NATURE_CALM,
             .abilitySlot = 2,
             .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -562,6 +569,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_MODEST,
             .abilitySlot = 2,
             .item = ITEM_CHOICE_SCARF,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -572,6 +580,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_ADAMANT,
             .abilitySlot = 0,
             .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -582,6 +591,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_TIMID,
             .abilitySlot = 2,
             .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -592,6 +602,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_TIMID,
             .abilitySlot = 0,
             .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -602,6 +613,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_ADAMANT,
             .abilitySlot = 1,
             .item = ITEM_WEAKNESS_POLICY,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -612,6 +624,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_MODEST,
             .abilitySlot = 2,
             .item = ITEM_QUICK_CLAW,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -622,6 +635,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_JOLLY,
             .abilitySlot = 1,
             .item = ITEM_CHOICE_BAND,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -632,6 +646,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_TIMID,
             .abilitySlot = 1,
             .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -642,6 +657,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_BRAVE,
             .abilitySlot = 1,
             .item = ITEM_SILK_SCARF,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -652,6 +668,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_TIMID,
             .abilitySlot = 1,
             .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -662,6 +679,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_ADAMANT,
             .abilitySlot = 0,
             .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -671,7 +689,8 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_WATERFALL, MOVE_DRAGON_DANCE, MOVE_PROTECT, MOVE_CRUNCH},
             .nature = NATURE_ADAMANT,
             .abilitySlot = 0,
-            .item = ITEM_LIFE_ORB,
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_GYARADOSITE,
         },
     },
     {
@@ -681,7 +700,8 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_ROCK_SLIDE, MOVE_TAILWIND, MOVE_DUAL_WINGBEAT, MOVE_ICE_FANG},
             .nature = NATURE_JOLLY,
             .abilitySlot = 2,
-            .item = ITEM_SITRUS_BERRY,
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_AERODACTYLITE,
         },
     },
     {
@@ -692,6 +712,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_TIMID,
             .abilitySlot = 2,
             .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -702,6 +723,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_TIMID,
             .abilitySlot = 2,
             .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -711,7 +733,8 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_PROTECT, MOVE_DRAGON_PULSE, MOVE_TAILWIND, MOVE_HEAT_WAVE},
             .nature = NATURE_MODEST,
             .abilitySlot = 2,
-            .item = ITEM_SITRUS_BERRY,
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_DRAGONINITE,
         },
     },
     {
@@ -722,6 +745,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_TIMID,
             .abilitySlot = 2,
             .item = ITEM_LEFTOVERS,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -732,6 +756,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_TIMID,
             .abilitySlot = 0,
             .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -742,6 +767,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_TIMID,
             .abilitySlot = 0,
             .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -752,6 +778,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_MODEST,
             .abilitySlot = 0,
             .item = ITEM_CHARCOAL,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -762,6 +789,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_ADAMANT,
             .abilitySlot = 2,
             .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -772,6 +800,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_MODEST,
             .abilitySlot = 0,
             .item = ITEM_ASSAULT_VEST,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -782,6 +811,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_JOLLY,
             .abilitySlot = 2,
             .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -792,6 +822,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_QUIET,
             .abilitySlot = 2,
             .item = ITEM_COLBUR_BERRY,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -802,6 +833,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_CAREFUL,
             .abilitySlot = 2,
             .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -811,7 +843,8 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_BULLET_PUNCH, MOVE_PROTECT, MOVE_SWORDS_DANCE, MOVE_BUG_BITE},
             .nature = NATURE_ADAMANT,
             .abilitySlot = 1,
-            .item = ITEM_LIFE_ORB,
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_SCIZORITE,
         },
     },
     {
@@ -822,6 +855,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_IMPISH,
             .abilitySlot = 1,
             .item = ITEM_LEFTOVERS,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -832,6 +866,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_HASTY,
             .abilitySlot = 1,
             .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -842,6 +877,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_ADAMANT,
             .abilitySlot = 0,
             .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -852,6 +888,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_MODEST,
             .abilitySlot = 1,
             .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -862,6 +899,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_TIMID,
             .abilitySlot = 2,
             .item = ITEM_LEFTOVERS,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -872,6 +910,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_MODEST,
             .abilitySlot = 2,
             .item = ITEM_LEFTOVERS,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -882,6 +921,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_JOLLY,
             .abilitySlot = 0,
             .item = ITEM_CHOICE_SCARF,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -892,6 +932,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_QUIET,
             .abilitySlot = 0,
             .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -902,6 +943,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_TIMID,
             .abilitySlot = 1,
             .item = ITEM_WHITE_HERB,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -912,6 +954,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_TIMID,
             .abilitySlot = 2,
             .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -922,6 +965,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_IMPISH,
             .abilitySlot = 0,
             .item = ITEM_LEFTOVERS,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -932,6 +976,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_MODEST,
             .abilitySlot = 0,
             .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -942,6 +987,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_JOLLY,
             .abilitySlot = 0,
             .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -952,6 +998,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_MODEST,
             .abilitySlot = 2,
             .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -962,6 +1009,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_ADAMANT,
             .abilitySlot = 0,
             .item = ITEM_ASSAULT_VEST,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -971,17 +1019,19 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_PSYCH_UP, MOVE_FOUL_PLAY, MOVE_PAIN_SPLIT, MOVE_DARK_PULSE},
             .nature = NATURE_SASSY,
             .abilitySlot = 2,
-            .item = ITEM_SITRUS_BERRY,
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_SABLENITE,
         },
     },
     {
-        .name = _("Physical Attacker"),
+        .name = _("Physical Attacker II"),
         .preset =
         {
             .moves = {MOVE_HEAVY_SLAM, MOVE_BODY_PRESS, MOVE_ROCK_SLIDE, MOVE_ICE_PUNCH},
             .nature = NATURE_ADAMANT,
             .abilitySlot = 0,
             .item = ITEM_EXPERT_BELT,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -991,7 +1041,8 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_FAKE_OUT, MOVE_CLOSE_COMBAT, MOVE_POISON_JAB, MOVE_ROCK_SLIDE},
             .nature = NATURE_BRAVE,
             .abilitySlot = 0,
-            .item = ITEM_LIFE_ORB,
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_MEDICHAMITE,
         },
     },
     {
@@ -1002,6 +1053,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_MODEST,
             .abilitySlot = 1,
             .item = ITEM_CHOICE_SCARF,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1011,7 +1063,8 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_PROTECT, MOVE_CRUNCH, MOVE_LIQUIDATION, MOVE_ICE_FANG},
             .nature = NATURE_ADAMANT,
             .abilitySlot = 2,
-            .item = ITEM_LIFE_ORB,
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_SHARPEDONITE,
         },
     },
     {
@@ -1022,6 +1075,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_JOLLY,
             .abilitySlot = 0,
             .item = ITEM_YACHE_BERRY,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1031,7 +1085,8 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_HYPER_VOICE, MOVE_PROTECT, MOVE_TAILWIND, MOVE_ROOST},
             .nature = NATURE_MODEST,
             .abilitySlot = 2,
-            .item = ITEM_SITRUS_BERRY,
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_ALTARIANITE,
         },
     },
     {
@@ -1042,6 +1097,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_ADAMANT,
             .abilitySlot = 2,
             .item = ITEM_CHOICE_BAND,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1052,6 +1108,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_BRAVE,
             .abilitySlot = 2,
             .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1062,6 +1119,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_ADAMANT,
             .abilitySlot = 0,
             .item = ITEM_SILK_SCARF,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1072,6 +1130,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_ADAMANT,
             .abilitySlot = 0,
             .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1082,6 +1141,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_ADAMANT,
             .abilitySlot = 0,
             .item = ITEM_CHESTO_BERRY,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1092,6 +1152,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_MODEST,
             .abilitySlot = 0,
             .item = ITEM_BLUNDER_POLICY,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1102,6 +1163,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_TIMID,
             .abilitySlot = 0,
             .item = ITEM_SOUL_DEW,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1112,6 +1174,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_TIMID,
             .abilitySlot = 0,
             .item = ITEM_SOUL_DEW,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1122,6 +1185,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_JOLLY,
             .abilitySlot = 0,
             .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1132,6 +1196,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_JOLLY,
             .abilitySlot = 0,
             .item = ITEM_AGUAV_BERRY,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1142,6 +1207,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_TIMID,
             .abilitySlot = 0,
             .item = ITEM_CHOICE_SCARF,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1152,6 +1218,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_JOLLY,
             .abilitySlot = 0,
             .item = ITEM_CHOICE_SCARF,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1162,6 +1229,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_JOLLY,
             .abilitySlot = 2,
             .item = ITEM_CHOICE_BAND,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1172,6 +1240,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_MODEST,
             .abilitySlot = 1,
             .item = ITEM_LEFTOVERS,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1182,6 +1251,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_JOLLY,
             .abilitySlot = 1,
             .item = ITEM_CHOICE_SCARF,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1192,6 +1262,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_QUIET,
             .abilitySlot = 0,
             .item = ITEM_LEFTOVERS,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1201,7 +1272,8 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_PROTECT, MOVE_EARTH_POWER, MOVE_EARTHQUAKE, MOVE_DRAGON_CLAW},
             .nature = NATURE_MODEST,
             .abilitySlot = 2,
-            .item = ITEM_LIFE_ORB,
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_GARCHOMPITE,
         },
     },
     {
@@ -1212,6 +1284,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_JOLLY,
             .abilitySlot = 1,
             .item = ITEM_CHOICE_SCARF,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1222,6 +1295,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_MODEST,
             .abilitySlot = 0,
             .item = ITEM_EXPERT_BELT,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1232,6 +1306,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_JOLLY,
             .abilitySlot = 0,
             .item = ITEM_ASSAULT_VEST,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1242,6 +1317,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_MODEST,
             .abilitySlot = 0,
             .item = ITEM_CHOICE_SPECS,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1252,6 +1328,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_TIMID,
             .abilitySlot = 1,
             .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1261,7 +1338,8 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_PROTECT, MOVE_PSYCHO_CUT, MOVE_CLOSE_COMBAT, MOVE_SACRED_SWORD},
             .nature = NATURE_JOLLY,
             .abilitySlot = 2,
-            .item = ITEM_LIFE_ORB,
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_GALLADITE,
         },
     },
     {
@@ -1272,6 +1350,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_MODEST,
             .abilitySlot = 1,
             .item = ITEM_CHESTO_BERRY,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1282,6 +1361,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_ADAMANT,
             .abilitySlot = 2,
             .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1292,6 +1372,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_TIMID,
             .abilitySlot = 1,
             .item = ITEM_WIDE_LENS,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1302,6 +1383,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_TIMID,
             .abilitySlot = 0,
             .item = ITEM_CHOICE_SCARF,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1312,6 +1394,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_MODEST,
             .abilitySlot = 0,
             .item = ITEM_CHOICE_SPECS,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1322,6 +1405,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_TIMID,
             .abilitySlot = 0,
             .item = ITEM_CHOICE_SPECS,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1332,6 +1416,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_TIMID,
             .abilitySlot = 2,
             .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1342,6 +1427,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_JOLLY,
             .abilitySlot = 0,
             .item = ITEM_LEFTOVERS,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1352,6 +1438,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_TIMID,
             .abilitySlot = 0,
             .item = ITEM_LEFTOVERS,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1362,6 +1449,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_TIMID,
             .abilitySlot = 0,
             .item = ITEM_LEFTOVERS,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1372,6 +1460,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_QUIET,
             .abilitySlot = 0,
             .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1382,6 +1471,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_JOLLY,
             .abilitySlot = 2,
             .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1391,7 +1481,8 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_IRON_HEAD, MOVE_PROTECT, MOVE_ROCK_SLIDE, MOVE_HIGH_HORSEPOWER},
             .nature = NATURE_JOLLY,
             .abilitySlot = 0,
-            .item = ITEM_LIFE_ORB,
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_EXCADRITE,
         },
     },
     {
@@ -1401,7 +1492,8 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_DAZZLING_GLEAM, MOVE_SIMPLE_BEAM, MOVE_HYPER_VOICE, MOVE_FIRE_BLAST},
             .nature = NATURE_BOLD,
             .abilitySlot = 0,
-            .item = ITEM_SITRUS_BERRY,
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_AUDINITE,
         },
     },
     {
@@ -1412,6 +1504,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_JOLLY,
             .abilitySlot = 0,
             .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1422,6 +1515,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_JOLLY,
             .abilitySlot = 2,
             .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1432,6 +1526,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_JOLLY,
             .abilitySlot = 1,
             .item = ITEM_CHOICE_BAND,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1442,6 +1537,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_CAREFUL,
             .abilitySlot = 2,
             .item = ITEM_CHOPLE_BERRY,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1452,6 +1548,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_MODEST,
             .abilitySlot = 0,
             .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1462,6 +1559,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_JOLLY,
             .abilitySlot = 2,
             .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1472,6 +1570,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_MODEST,
             .abilitySlot = 2,
             .item = ITEM_ROCKY_HELMET,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1482,6 +1581,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_MILD,
             .abilitySlot = 0,
             .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1491,7 +1591,8 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_SHADOW_BALL, MOVE_HEAT_WAVE, MOVE_PROTECT, MOVE_TRICK_ROOM},
             .nature = NATURE_MODEST,
             .abilitySlot = 0,
-            .item = ITEM_SITRUS_BERRY,
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_CHANDELURITE,
         },
     },
     {
@@ -1502,6 +1603,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_JOLLY,
             .abilitySlot = 2,
             .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1512,6 +1614,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_IMPISH,
             .abilitySlot = 0,
             .item = ITEM_LEFTOVERS,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1522,6 +1625,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_JOLLY,
             .abilitySlot = 1,
             .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1532,6 +1636,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_BRAVE,
             .abilitySlot = 2,
             .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1542,6 +1647,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_ADAMANT,
             .abilitySlot = 1,
             .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1552,6 +1658,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_JOLLY,
             .abilitySlot = 0,
             .item = ITEM_LEFTOVERS,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1562,6 +1669,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_JOLLY,
             .abilitySlot = 0,
             .item = ITEM_CHOICE_BAND,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1572,6 +1680,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_TIMID,
             .abilitySlot = 2,
             .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1582,6 +1691,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_TIMID,
             .abilitySlot = 0,
             .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1592,6 +1702,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_CALM,
             .abilitySlot = 0,
             .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1602,6 +1713,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_RELAXED,
             .abilitySlot = 2,
             .item = ITEM_LEFTOVERS,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1612,6 +1724,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_QUIET,
             .abilitySlot = 0,
             .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1621,7 +1734,8 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_PROTECT, MOVE_DARK_PULSE, MOVE_ICE_BEAM, MOVE_BLIZZARD},
             .nature = NATURE_TIMID,
             .abilitySlot = 2,
-            .item = ITEM_LIFE_ORB,
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_GRENINJITE,
         },
     },
     {
@@ -1632,16 +1746,18 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_MODEST,
             .abilitySlot = 0,
             .item = ITEM_CHOICE_SCARF,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
-        .name = _("Mega Special Attacker"),
+        .name = _("Special Attacker"),
         .preset =
         {
             .moves = {MOVE_PROTECT, MOVE_EXPANDING_FORCE, MOVE_FAKE_OUT, MOVE_DARK_PULSE},
             .nature = NATURE_HASTY,
             .abilitySlot = 2,
             .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1652,6 +1768,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_BRAVE,
             .abilitySlot = 0,
             .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1662,6 +1779,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_MODEST,
             .abilitySlot = 2,
             .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1672,6 +1790,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_JOLLY,
             .abilitySlot = 1,
             .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1682,6 +1801,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_MODEST,
             .abilitySlot = 0,
             .item = ITEM_LEFTOVERS,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1692,6 +1812,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_RELAXED,
             .abilitySlot = 1,
             .item = ITEM_OCCA_BERRY,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1702,6 +1823,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_CALM,
             .abilitySlot = 0,
             .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1712,6 +1834,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_CALM,
             .abilitySlot = 0,
             .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1722,6 +1845,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_BRAVE,
             .abilitySlot = 0,
             .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1732,6 +1856,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_BRAVE,
             .abilitySlot = 0,
             .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1742,6 +1867,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_JOLLY,
             .abilitySlot = 1,
             .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1752,6 +1878,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_ADAMANT,
             .abilitySlot = 2,
             .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1762,6 +1889,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_CALM,
             .abilitySlot = 0,
             .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1772,16 +1900,18 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_JOLLY,
             .abilitySlot = 1,
             .item = ITEM_CHOICE_SCARF,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
-        .name = _("Mega Special Attacker"),
+        .name = _("Special Attacker"),
         .preset =
         {
             .moves = {MOVE_PROTECT, MOVE_HYPER_VOICE, MOVE_DRAGON_PULSE, MOVE_HEAT_WAVE},
             .nature = NATURE_QUIET,
             .abilitySlot = 0,
             .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1792,6 +1922,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_JOLLY,
             .abilitySlot = 0,
             .item = ITEM_WEAKNESS_POLICY,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1802,6 +1933,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_TIMID,
             .abilitySlot = 0,
             .item = ITEM_POWER_HERB,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1812,6 +1944,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_TIMID,
             .abilitySlot = 0,
             .item = ITEM_LEFTOVERS,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1822,6 +1955,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_TIMID,
             .abilitySlot = 0,
             .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1832,6 +1966,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_MODEST,
             .abilitySlot = 0,
             .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1842,6 +1977,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_CALM,
             .abilitySlot = 0,
             .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1852,6 +1988,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_ADAMANT,
             .abilitySlot = 0,
             .item = ITEM_LEFTOVERS,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1862,6 +1999,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_MODEST,
             .abilitySlot = 0,
             .item = ITEM_LEFTOVERS,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1872,6 +2010,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_MODEST,
             .abilitySlot = 0,
             .item = ITEM_ASSAULT_VEST,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1882,6 +2021,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_CALM,
             .abilitySlot = 0,
             .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1892,6 +2032,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_CALM,
             .abilitySlot = 0,
             .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1902,6 +2043,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_ADAMANT,
             .abilitySlot = 2,
             .item = ITEM_ASSAULT_VEST,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1912,6 +2054,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_JOLLY,
             .abilitySlot = 2,
             .item = ITEM_CHOICE_BAND,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1922,6 +2065,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_JOLLY,
             .abilitySlot = 0,
             .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1932,6 +2076,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_ADAMANT,
             .abilitySlot = 1,
             .item = ITEM_WHITE_HERB,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1942,6 +2087,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_TIMID,
             .abilitySlot = 0,
             .item = ITEM_CHOICE_SCARF,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1952,6 +2098,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_ADAMANT,
             .abilitySlot = 2,
             .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1962,6 +2109,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_ADAMANT,
             .abilitySlot = 0,
             .item = ITEM_CHOICE_BAND,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1972,6 +2120,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_TIMID,
             .abilitySlot = 2,
             .item = ITEM_CHOICE_SPECS,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1982,6 +2131,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_ADAMANT,
             .abilitySlot = 2,
             .item = ITEM_ASSAULT_VEST,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -1992,6 +2142,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_MODEST,
             .abilitySlot = 2,
             .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -2002,6 +2153,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_JOLLY,
             .abilitySlot = 0,
             .item = ITEM_LEFTOVERS,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -2012,6 +2164,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_TIMID,
             .abilitySlot = 0,
             .item = ITEM_LEFTOVERS,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -2022,6 +2175,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_TIMID,
             .abilitySlot = 0,
             .item = ITEM_LEFTOVERS,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -2032,6 +2186,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_MODEST,
             .abilitySlot = 2,
             .item = ITEM_ASSAULT_VEST,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -2042,6 +2197,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_TIMID,
             .abilitySlot = 0,
             .item = ITEM_CHOICE_SPECS,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -2052,6 +2208,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_TIMID,
             .abilitySlot = 0,
             .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -2062,6 +2219,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_ADAMANT,
             .abilitySlot = 0,
             .item = ITEM_LEFTOVERS,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -2071,7 +2229,8 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_POWER_GEM, MOVE_SLUDGE_BOMB, MOVE_SPIKY_SHIELD, MOVE_HYPER_BEAM},
             .nature = NATURE_TIMID,
             .abilitySlot = 0,
-            .item = ITEM_LIFE_ORB,
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_GLIMMORANITE,
         },
     },
     {
@@ -2082,6 +2241,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_JOLLY,
             .abilitySlot = 0,
             .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -2092,6 +2252,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_ADAMANT,
             .abilitySlot = 0,
             .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -2102,6 +2263,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_TIMID,
             .abilitySlot = 0,
             .item = ITEM_CHOICE_SPECS,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -2112,6 +2274,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_JOLLY,
             .abilitySlot = 0,
             .item = ITEM_BOOSTER_ENERGY,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -2122,6 +2285,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_JOLLY,
             .abilitySlot = 0,
             .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -2132,6 +2296,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_MODEST,
             .abilitySlot = 0,
             .item = ITEM_ASSAULT_VEST,
+            .requiredItem = ITEM_NONE,
         },
     },
     {
@@ -2142,6 +2307,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .nature = NATURE_MODEST,
             .abilitySlot = 0,
             .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
         },
     },
 };
@@ -2149,88 +2315,18 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
 const u16 gVerdantFreeBattleItems[] =
 {
     ITEM_BERRY_JUICE,
-    ITEM_CHERI_BERRY,
-    ITEM_CHESTO_BERRY,
-    ITEM_PECHA_BERRY,
-    ITEM_RAWST_BERRY,
-    ITEM_ASPEAR_BERRY,
-    ITEM_LEPPA_BERRY,
-    ITEM_ORAN_BERRY,
-    ITEM_PERSIM_BERRY,
-    ITEM_LUM_BERRY,
-    ITEM_SITRUS_BERRY,
-    ITEM_FIGY_BERRY,
-    ITEM_WIKI_BERRY,
-    ITEM_MAGO_BERRY,
-    ITEM_AGUAV_BERRY,
-    ITEM_IAPAPA_BERRY,
-    ITEM_RAZZ_BERRY,
-    ITEM_BLUK_BERRY,
-    ITEM_NANAB_BERRY,
-    ITEM_WEPEAR_BERRY,
-    ITEM_PINAP_BERRY,
-    ITEM_POMEG_BERRY,
-    ITEM_KELPSY_BERRY,
-    ITEM_QUALOT_BERRY,
-    ITEM_HONDEW_BERRY,
-    ITEM_GREPA_BERRY,
-    ITEM_TAMATO_BERRY,
-    ITEM_CORNN_BERRY,
-    ITEM_MAGOST_BERRY,
-    ITEM_RABUTA_BERRY,
-    ITEM_NOMEL_BERRY,
-    ITEM_SPELON_BERRY,
-    ITEM_PAMTRE_BERRY,
-    ITEM_WATMEL_BERRY,
-    ITEM_DURIN_BERRY,
-    ITEM_BELUE_BERRY,
-    ITEM_OCCA_BERRY,
-    ITEM_PASSHO_BERRY,
-    ITEM_WACAN_BERRY,
-    ITEM_RINDO_BERRY,
-    ITEM_YACHE_BERRY,
-    ITEM_CHOPLE_BERRY,
-    ITEM_KEBIA_BERRY,
-    ITEM_SHUCA_BERRY,
-    ITEM_COBA_BERRY,
-    ITEM_PAYAPA_BERRY,
-    ITEM_TANGA_BERRY,
-    ITEM_CHARTI_BERRY,
-    ITEM_KASIB_BERRY,
-    ITEM_HABAN_BERRY,
-    ITEM_COLBUR_BERRY,
-    ITEM_BABIRI_BERRY,
-    ITEM_CHILAN_BERRY,
-    ITEM_ROSELI_BERRY,
-    ITEM_LIECHI_BERRY,
-    ITEM_GANLON_BERRY,
-    ITEM_SALAC_BERRY,
-    ITEM_PETAYA_BERRY,
-    ITEM_APICOT_BERRY,
-    ITEM_LANSAT_BERRY,
-    ITEM_STARF_BERRY,
-    ITEM_MICLE_BERRY,
-    ITEM_CUSTAP_BERRY,
-    ITEM_JABOCA_BERRY,
-    ITEM_ROWAP_BERRY,
-    ITEM_KEE_BERRY,
-    ITEM_MARANGA_BERRY,
-    ITEM_ENIGMA_BERRY,
     ITEM_BRIGHT_POWDER,
     ITEM_WHITE_HERB,
     ITEM_QUICK_CLAW,
     ITEM_MENTAL_HERB,
     ITEM_CHOICE_BAND,
-    ITEM_KINGS_ROCK,
     ITEM_FOCUS_BAND,
     ITEM_SCOPE_LENS,
-    ITEM_METAL_COAT,
     ITEM_BLACK_GLASSES,
     ITEM_MYSTIC_WATER,
     ITEM_CHARCOAL,
     ITEM_SILK_SCARF,
     ITEM_LEFTOVERS,
-    ITEM_RAZOR_FANG,
     ITEM_POWER_HERB,
     ITEM_CHOICE_SCARF,
     ITEM_CHOICE_SPECS,
@@ -2279,7 +2375,6 @@ const u16 gVerdantFreeBattleItems[] =
     ITEM_ROOM_SERVICE,
     ITEM_UTILITY_UMBRELLA,
     ITEM_SOUL_DEW,
-    ITEM_DEEP_SEA_TOOTH,
     ITEM_THICK_CLUB,
     ITEM_LEEK,
     ITEM_LIGHT_BALL,

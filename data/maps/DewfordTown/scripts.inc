@@ -87,7 +87,7 @@ DewfordTown_EventScript_OldRodFisherman::
 	faceplayer
 	goto_if_set FLAG_DEWFORD_EVIOLITE, DewfordTown_EventScript_ReceivedEviolite
 	msgbox DewfordTown_Text_FishedUpEviolite
-	giveitem ITEM_SCOPE_LENS
+	giveitem ITEM_DRAGON_SCALE
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_BagIsFull
 	msgbox DewfordTown_Text_ReceivedEviolite, MSGBOX_DEFAULT

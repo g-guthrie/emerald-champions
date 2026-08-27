@@ -203,7 +203,7 @@ SlateportCity_BattleTentLobby_EventScript_TormentGiver:: @ 8208A3D
 	faceplayer
 	goto_if_set FLAG_RECEIVED_TM41, SlateportCity_BattleTentLobby_EventScript_ReceivedTorment
 	msgbox SlateportCity_BattleTentLobby_Text_CouldntFindMonForMe, MSGBOX_DEFAULT
-	giveitem ITEM_RED_CARD
+	giveitem ITEM_PRISM_SCALE
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM41
@@ -286,13 +286,9 @@ SlateportCity_BattleTentLobby_Text_CouldntFindMonForMe: @ 8208B4E
 	.string "So, like, total bummer, man!\p"
 	.string "Hey, like, you! Zip it, you know?\n"
 	.string "Just, you know, take this!$"
-
-SlateportCity_BattleTentLobby_Text_ExplainTorment: @ 8208C5C
-	.string "That's, like, a Red Card, you know?\p"
-	.string "If its holder gets hit, the attacker\n"
-	.string "gets dragged out of battle, see?\p"
-	.string "Hey, now, you listen here, like,\n"
-	.string "I'm not laying a torment on you!$"
+SlateportCity_BattleTentLobby_Text_ExplainTorment:
+	.string "A Prism Scale evolves Feebas when it\n"
+	.string "levels up while holding it.$"
 
 SlateportCity_BattleTentLobby_Text_IllTryUsingBugMons: @ 8208D27
 	.string "I don't really like Bug Pokémon,\n"

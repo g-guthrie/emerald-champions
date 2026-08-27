@@ -27,7 +27,7 @@ WILD_AVAILABILITY = {
     "MAP_ROUTE101": {"land_mons": {4: "SPECIES_SPRIGATITO"}},
     "MAP_ROUTE102": {"land_mons": {4: "SPECIES_NACLI"}},
     "MAP_ROUTE103": {"land_mons": {4: "SPECIES_FUECOCO"}},
-    "MAP_ROUTE104": {"fishing_mons": {1: "SPECIES_FINIZEN"}},
+    "MAP_ROUTE104": {"fishing_mons": {4: "SPECIES_FINIZEN"}},
     "MAP_RUSTBORO_CITY": {"land_mons": {4: "SPECIES_GIMMIGHOUL"}},
     "MAP_GRANITE_CAVE_1F": {"land_mons": {3: "SPECIES_GLIMMET"}},
     "MAP_ROUTE110": {"land_mons": {4: "SPECIES_GIMMIGHOUL_ROAMING"}},
@@ -76,7 +76,7 @@ WORLD_ITEM_AVAILABILITY = {
     "Route127_EventScript_ItemRareCandy": "ITEM_WELLSPRING_MASK",
     "Route132_EventScript_ItemRareCandy": "ITEM_TATSUGIRINITE",
     "GraniteCave_B2F_EventScript_ItemRareCandy": "ITEM_GIMMIGHOUL_COIN",
-    "MagmaHideout_1F_EventScript_ItemRareCandy": "ITEM_BOOSTER_ENERGY",
+    "MagmaHideout_1F_EventScript_ItemRareCandy": "ITEM_FOSSILIZED_DRAKE",
     "MagmaHideout_3F_3R_EventScript_ItemTM35Flamethrower": "ITEM_HEARTHFLAME_MASK",
 }
 

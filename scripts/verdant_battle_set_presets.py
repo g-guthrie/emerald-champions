@@ -189,6 +189,22 @@ def protected_set_items() -> set[str]:
         "ITEM_RUSTED_SWORD", "ITEM_RUSTED_SHIELD",
         "ITEM_WELLSPRING_MASK", "ITEM_HEARTHFLAME_MASK", "ITEM_CORNERSTONE_MASK",
     })
+    # Inclement Emerald deliberately turns held-trade evolutions into native
+    # level-up-with-item evolutions.  Those catalysts remain useful campaign
+    # rewards and must never be synthesized by the loadout service.
+    evolution_source = (
+        (ROOT / "src/data/pokemon/evolution.h").read_text()
+        + "\n"
+        + (ROOT / "src/data/pokemon/verdant_gen9_evolutions.h").read_text()
+    )
+    protected.update(
+        item
+        for item in re.findall(
+            r"\{\s*EVO_(?:TRADE_ITEM|ITEM_HOLD(?:_DAY|_NIGHT)?|ITEM(?:_MALE|_FEMALE)?),\s*(ITEM_[A-Z0-9_]+)",
+            evolution_source,
+        )
+        if item != "ITEM_NONE"
+    )
     return protected
 
 

@@ -11,7 +11,7 @@ Route114_FossilManiacsHouse_EventScript_FossilManiacsBrother:: @ 822AD3A
 	faceplayer
 	goto_if_set FLAG_RECEIVED_TM28, Route114_FossilManiacsHouse_EventScript_ReceivedDig
 	msgbox Route114_FossilManiacsHouse_Text_HaveThisToDigLikeMyBrother, MSGBOX_DEFAULT
-	giveitem ITEM_AIR_BALLOON
+	giveitem ITEM_SAIL_FOSSIL
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM28
@@ -30,17 +30,13 @@ Route114_FossilManiacsHouse_EventScript_RockDisplay:: @ 822AD73
 Route114_FossilManiacsHouse_EventScript_Bookshelf:: @ 822AD7C
 	msgbox Route114_FossilManiacsHouse_Text_CrammedWithBooks, MSGBOX_SIGN
 	end
-
-Route114_FossilManiacsHouse_Text_HaveThisToDigLikeMyBrother: @ 822AD85
-	.string "My big brother's the Fossil Maniac…\n"
-	.string "He dug this whole tunnel himself!\p"
-	.string "An Air Balloon can hold a Pokémon\n"
-	.string "above Ground-type attacks until hit.\p"
-	.string "Take this one for your journey!$"
+Route114_FossilManiacsHouse_Text_HaveThisToDigLikeMyBrother:
+	.string "My brother dug up this Sail Fossil.\p"
+	.string "Take it to Devon to restore its Pokémon!$"
 
 Route114_FossilManiacsHouse_Text_DigReturnsYouToEntrance: @ 822AE48
-	.string "An Air Balloon pops after its holder\n"
-	.string "is struck, so plan that turn well.$"
+	.string "That Sail Fossil can be restored into\n"
+	.string "a rare ancient Pokémon at Devon.$"
 
 Route114_FossilManiacsHouse_Text_RocksFillDisplayCase: @ 822AE92
 	.string "Rocks in peculiar shapes fill\n"

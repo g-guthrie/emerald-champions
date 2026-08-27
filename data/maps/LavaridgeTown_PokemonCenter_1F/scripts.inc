@@ -114,14 +114,10 @@ LavaridgeTown_PokemonCenter_1F_EventScript_LucyBattle::
 	msgbox LavaridgeTown_PokemonCenter_1F_Text_LucyBattle, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_LUCY_LAVARIDGE, LavaridgeTown_PokemonCenter_1F_Text_LucyDefeat
 LavaridgeTown_PokemonCenter_1F_EventScript_LucyReward::
-	checkitemspace ITEM_BLACK_SLUDGE, 1
-	compare VAR_RESULT, FALSE
-	goto_if_eq Common_EventScript_ShowBagIsFull
 	checkitemspace ITEM_BOTTLE_CAP, 3
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox LavaridgeTown_PokemonCenter_1F_Text_LucyGiveChoiceBand, MSGBOX_DEFAULT
-	giveitem ITEM_BLACK_SLUDGE
 	giveitem ITEM_BOTTLE_CAP, 3
 	setvar VAR_LAVARIDGE_LUCY_STATE, 2
 	msgbox LavaridgeTown_PokemonCenter_1F_Text_LucyGoodbye, MSGBOX_AUTOCLOSE

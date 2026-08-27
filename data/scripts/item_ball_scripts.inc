@@ -43,7 +43,7 @@ Route109_EventScript_ItemPPUp:: @ 8290D5A
 	end
 
 Route109_EventScript_ItemZoomLens:: @ 8290D67
-	finditem ITEM_ZOOM_LENS
+	finditem ITEM_FOSSILIZED_DINO
 	end
 
 Route110_EventScript_ItemRareCandy:: @ 8290D74
@@ -99,7 +99,7 @@ Route114_EventScript_ItemTM54Psyshock:: @ 8290E10
 	end
 
 Route114_EventScript_ItemProtectivePads:: @ 8290E1D
-	finditem ITEM_PROTECTIVE_PADS
+	finditem ITEM_METAL_COAT
 	end
 
 Route115_EventScript_ItemSuperPotion:: @ 8290E2A
@@ -159,7 +159,7 @@ Route118_EventScript_ItemHyperPotion:: @ 8290ED3
 	end
 
 Route119_EventScript_ItemToxicOrb:: @ 8290EE0
-	finditem ITEM_TOXIC_ORB
+	finditem ITEM_REAPER_CLOTH
 	end
 
 Route119_EventScript_ItemScizorite:: @ 8290EED
@@ -223,7 +223,7 @@ Route121_EventScript_ItemMachampite:: @ 8290FA3
 	end
 
 Route123_EventScript_ItemWideLens:: @ 8290FB0
-	finditem ITEM_WIDE_LENS
+	finditem ITEM_DAWN_STONE
 	end
 
 Route123_EventScript_ItemMeadowPlate:: @ 8290FBD
@@ -323,7 +323,7 @@ LilycoveCity_EventScript_ItemLightClay:: @ 82910E8
 	end
 
 MossdeepCity_EventScript_ItemMiloticite:: @ 82910F5
-	finditem ITEM_MILOTICITE
+	finditem ITEM_PRISM_SCALE
 	end
 
 PetalburgWoods_EventScript_ItemXAttack:: @ 8291102
@@ -419,7 +419,7 @@ NewMauville_Inside_EventScript_ItemElectirizer:: @ 8291220
 	end
 
 AbandonedShip_Rooms_1F_EventScript_ItemLopunnite:: @ 829122D
-	finditem ITEM_LOPUNNITE
+	finditem ITEM_OVAL_STONE
 	end
 
 AbandonedShip_Rooms_B1F_EventScript_ItemBigNugget:: @ 829123A
@@ -583,11 +583,11 @@ Route110_TrickHousePuzzle3_EventScript_ItemBigNugget:: @ 8291435
 	end
 
 Route110_TrickHousePuzzle3_EventScript_ItemExpertBelt:: @ 8291442
-	finditem ITEM_EXPERT_BELT
+	finditem ITEM_FOSSILIZED_DRAKE
 	end
 
 Route110_TrickHousePuzzle4_EventScript_ItemAssaultVest:: @ 829144F
-	finditem ITEM_BLUNDER_POLICY
+	finditem ITEM_FOSSILIZED_FISH
 	end
 
 Route110_TrickHousePuzzle6_EventScript_MewtwoniteX:: @ 829145C
@@ -607,7 +607,7 @@ VictoryRoad_1F_EventScript_ItemMaxElixir:: @ 8291483
 	end
 
 VictoryRoad_1F_EventScript_ItemMetagrossite:: @ 8291490
-	finditem ITEM_METAGROSSITE
+	finditem ITEM_GOLD_BOTTLE_CAP
 	end
 
 VictoryRoad_B1F_EventScript_ItemTM29:: @ 829149D
@@ -631,7 +631,7 @@ ArtisanCave_1F_EventScript_ItemCarbos:: @ 82914D1
 	end
 
 MagmaHideout_1F_EventScript_ItemRareCandy:: @ 82914DE
-	finditem ITEM_BOOSTER_ENERGY
+	finditem ITEM_FOSSILIZED_DRAKE
 	end
 
 MagmaHideout_2F_2R_EventScript_ItemMaxElixir:: @ 82914EB
@@ -727,7 +727,7 @@ Ember_Path_ItemCharizarditeY::
 	end
 
 Ashen_Woods_ItemFlame_Orb::
-	finditem ITEM_FLAME_ORB
+	finditem ITEM_SACHET
 	end
 
 Ashen_Woods_ItemU_Turn::
@@ -843,7 +843,7 @@ Mirage_Tower_4F_EventScript_Aerodactylite::
 	end
 
 TrickHouse5_EventScript_TerrainExtender::
-	finditem ITEM_TERRAIN_EXTENDER
+	finditem ITEM_FOSSILIZED_BIRD
 	end
 
 DewfordMeadow_EventScript_TM95Snarl::

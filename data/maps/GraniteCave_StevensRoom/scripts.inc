@@ -111,12 +111,12 @@ GraniteCave_StevensRoom_Text_ThankYouTakeThis: @ 822DDBD
 	.string "You went through all this trouble to\n"
 	.string "deliver that. I need to thank you.\p"
 	.string "Let me see…\n"
-	.string "I'll give you this Wide Lens.\p"
-	.string "It makes the holder's moves more\n"
-	.string "accurate.$"
+	.string "I'll give you this Metal Coat.\p"
+	.string "Some Pokémon evolve by leveling up\n"
+	.string "while holding it.$"
 
 GraniteCave_StevensRoom_Text_ReceivedRewards:
-	.string "{PLAYER} received a Wide Lens,\n"
+	.string "{PLAYER} received a Metal Coat,\n"
 	.string "a Mega Bracelet, and three\l"
 	.string "Mega Stones from Steven!$"
 

@@ -33,7 +33,7 @@ FortreeCity_House4_EventScript_WingullReturned:: @ 8217CD8
 	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox FortreeCity_House4_Text_WelcomeWingullTakeMentalHerb, MSGBOX_DEFAULT
-	giveitem ITEM_MENTAL_HERB
+	giveitem ITEM_SACHET
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_CHOICE_SCARF
@@ -78,16 +78,9 @@ FortreeCity_House4_Text_GoBirdPokemon: @ 8217DB9
 FortreeCity_House4_Text_AskedWingullToRunErrand: @ 8217DD2
 	.string "Heheh, I asked my Wingull to run\n"
 	.string "an errand for me.$"
-
-FortreeCity_House4_Text_WelcomeWingullTakeMentalHerb: @ 8217E05
-	.string "Good!\n"
-	.string "Welcome back, Wingull!\p"
-	.string "Huh? What is this?\n"
-	.string "What is it holding?\p"
-	.string "A Mental Herb?\n"
-	.string "It must have picked it up somewhere.\p"
-	.string "But I'm not a Trainer, so you can\n"
-	.string "have it.$"
+FortreeCity_House4_Text_WelcomeWingullTakeMentalHerb:
+	.string "Welcome back, Wingull! And thank you.\p"
+	.string "Please take this Sachet as my thanks.$"
 
 FortreeCity_House4_Text_FriendsFarAwayThanksToWingull: @ 8217EA8
 	.string "Thanks to my Wingull, I have friends\n"

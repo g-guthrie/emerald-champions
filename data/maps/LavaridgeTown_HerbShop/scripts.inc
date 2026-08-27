@@ -30,7 +30,7 @@ LavaridgeTown_HerbShop_EventScript_OldMan:: @ 81FE505
 	faceplayer
 	goto_if_set FLAG_RECEIVED_CHARCOAL, LavaridgeTown_HerbShop_EventScript_ExplainCharcoal
 	msgbox LavaridgeTown_HerbShop_Text_YouveComeToLookAtHerbalMedicine, MSGBOX_DEFAULT
-	giveitem ITEM_CHARCOAL
+	giveitem ITEM_FIRE_STONE
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_CHARCOAL
@@ -45,20 +45,12 @@ LavaridgeTown_HerbShop_EventScript_ExplainCharcoal:: @ 81FE534
 LavaridgeTown_HerbShop_Text_WelcomeToHerbShop: @ 81FE53E
 	.string "Welcome to the Herb Shop, home of\n"
 	.string "effective and inexpensive medicine!$"
-
-LavaridgeTown_HerbShop_Text_YouveComeToLookAtHerbalMedicine: @ 81FE584
-	.string "You've come to look at herbal medicine\n"
-	.string "in Lavaridge?\p"
-	.string "That's rather commendable.\p"
-	.string "I like you! Take this!$"
-
-LavaridgeTown_HerbShop_Text_ExplainCharcoal: @ 81FE5EB
-	.string "That Charcoal I gave you, it's used\n"
-	.string "for making herbal medicine.\p"
-	.string "It also does wonders when held by\n"
-	.string "a Pokémon.\p"
-	.string "It intensifies the power of Fire-type\n"
-	.string "moves.$"
+LavaridgeTown_HerbShop_Text_YouveComeToLookAtHerbalMedicine:
+	.string "You've come to look at herbal medicine?\p"
+	.string "Then take this Fire Stone, too.$"
+LavaridgeTown_HerbShop_Text_ExplainCharcoal:
+	.string "A Fire Stone evolves certain Pokémon.\n"
+	.string "Use it from your Bag when ready.$"
 
 LavaridgeTown_HerbShop_Text_HerbalMedicineWorksButMonWillDislike: @ 81FE685
 	.string "Herbal medicine works impressively well.\n"

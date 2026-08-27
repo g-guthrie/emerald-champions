@@ -231,7 +231,7 @@ VerdanturfTown_BattleTentLobby_EventScript_AttractGiver:: @ 8201A7B
 	faceplayer
 	goto_if_set FLAG_RECEIVED_TM45, VerdanturfTown_BattleTentLobby_EventScript_ReceivedAttract
 	msgbox VerdanturfTown_BattleTentLobby_Text_AttractionRunsDeep, MSGBOX_DEFAULT
-	giveitem ITEM_BRIGHT_POWDER
+	giveitem ITEM_SHINY_STONE
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM45

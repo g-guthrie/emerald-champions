@@ -50,16 +50,32 @@ PKMN_Center_BattleSet_Confirm::
 	copyvar VAR_0x8004, VAR_0x800A
 	bufferpartymonnick 0, VAR_0x8004
 	special BufferSelectedMonBattleSetName
+	compare VAR_RESULT, TRUE
+	goto_if_eq PKMN_Center_BattleSet_ConfirmMega
 	msgbox PKMN_Center_BattleSet_Text_Confirm, MSGBOX_YESNO
+	goto PKMN_Center_BattleSet_ConfirmResult
+
+PKMN_Center_BattleSet_ConfirmMega::
+	msgbox PKMN_Center_BattleSet_Text_ConfirmMega, MSGBOX_YESNO
+
+PKMN_Center_BattleSet_ConfirmResult::
 	compare VAR_RESULT, NO
 	goto_if_eq PKMN_Center_BattleSet_ChooseStyle
 	special ApplySelectedMonBattleSet
 	compare VAR_RESULT, BATTLE_SET_APPLY_SPECIAL_ITEM
 	goto_if_eq PKMN_Center_BattleSet_SpecialItemEquipped
+	compare VAR_RESULT, BATTLE_SET_APPLY_MEGA_SET
+	goto_if_eq PKMN_Center_BattleSet_MegaSuccess
 	compare VAR_RESULT, TRUE
 	goto_if_ne PKMN_Center_BattleSet_NoPreset
 	playfanfare MUS_LEVEL_UP
 	msgbox PKMN_Center_BattleSet_Text_Success, MSGBOX_DEFAULT
+	releaseall
+	end
+
+PKMN_Center_BattleSet_MegaSuccess::
+	playfanfare MUS_LEVEL_UP
+	msgbox PKMN_Center_BattleSet_Text_MegaSuccess, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -573,6 +589,21 @@ PKMN_Center_BattleSet_Text_Success:
 	.string "new battle moves.\p"
 	.string "I also matched its ability and\n"
 	.string "nature, and gave it {STR_VAR_3}.$"
+
+PKMN_Center_BattleSet_Text_ConfirmMega:
+	.string "Ready to give {STR_VAR_1} the\n"
+	.string "{STR_VAR_2} set.\p"
+	.string "This replaces all four moves,\n"
+	.string "the nature, ability, and held item.\p"
+	.string "It is built for {STR_VAR_3}.\n"
+	.string "I will not supply that Mega Stone.\p"
+	.string "Continue?$"
+
+PKMN_Center_BattleSet_Text_MegaSuccess:
+	.string "All set! {STR_VAR_1} learned its\n"
+	.string "new battle moves.\p"
+	.string "I matched its ability and nature.\n"
+	.string "Use this set with {STR_VAR_3}.$"
 
 PKMN_Center_BattleSet_Text_CantBuildForEgg:
 	.string "An Egg can't use a battle set.$"

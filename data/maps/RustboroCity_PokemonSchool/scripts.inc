@@ -83,7 +83,7 @@ RustboroCity_PokemonSchool_EventScript_Teacher:: @ 8213F95
 	compare VAR_FACING, DIR_WEST
 	call_if_eq RustboroCity_PokemonSchool_EventScript_TeacherCheckOnStudentsWest
 	msgbox RustboroCity_PokemonSchool_Text_StudentsWhoDontStudyGetQuickClaw, MSGBOX_DEFAULT
-	giveitem ITEM_QUICK_CLAW
+	giveitem ITEM_SUN_STONE
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	closemessage
@@ -245,22 +245,12 @@ RustboroCity_PokemonSchool_Text_ExplainFreeze: @ 82143B8
 	.string "completely helpless.\p"
 	.string "It will remain frozen after battle.\n"
 	.string "Thaw it out using an Ice Heal.$"
-
-RustboroCity_PokemonSchool_Text_StudentsWhoDontStudyGetQuickClaw: @ 8214433
-	.string "Students who don't study get a little\n"
-	.string "taste of my Quick Claw.\p"
-	.string "Whether or not you are a good student \n"
-	.string "will be evident from the way you use\l"
-	.string "this item.$"
-
-RustboroCity_PokemonSchool_Text_ExplainQuickClaw: @ 82144C8
-	.string "A Pokémon holding the Quick Claw will\n"
-	.string "occasionally speed up and get to move\l"
-	.string "before its opponent.\p"
-	.string "There are many other items that are\n"
-	.string "meant to be held by Pokémon.\p"
-	.string "Just those alone will give you many\n"
-	.string "topics to study!$"
+RustboroCity_PokemonSchool_Text_StudentsWhoDontStudyGetQuickClaw:
+	.string "A good student learns when to grow.\p"
+	.string "Take this Sun Stone and experiment!$"
+RustboroCity_PokemonSchool_Text_ExplainQuickClaw:
+	.string "A Sun Stone evolves certain Pokémon.\n"
+	.string "Use it from your Bag when ready.$"
 
 RustboroCity_PokemonSchool_Text_TradingRightNow: @ 821459F
 	.string "I'm trading Pokémon with my friend\n"

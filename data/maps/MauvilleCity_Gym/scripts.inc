@@ -128,7 +128,7 @@ MauvilleCity_Gym_EventScript_WattsonDefeated:: @ 820DF2B
 	end
 
 MauvilleCity_Gym_EventScript_GiveVoltSwitch2:: @ 820DF8D
-	giveitem ITEM_WISE_GLASSES
+	giveitem ITEM_ELECTIRIZER
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox MauvilleCity_Gym_Text_ExplainVoltSwitch, MSGBOX_DEFAULT
@@ -137,7 +137,7 @@ MauvilleCity_Gym_EventScript_GiveVoltSwitch2:: @ 820DF8D
 	end
 
 MauvilleCity_Gym_EventScript_GiveVoltSwitch:: @ 820DFB1
-	giveitem ITEM_WISE_GLASSES
+	giveitem ITEM_ELECTIRIZER
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_BagIsFull
 	msgbox MauvilleCity_Gym_Text_ExplainVoltSwitch, MSGBOX_DEFAULT
@@ -450,12 +450,9 @@ MauvilleCity_Gym_Text_ExplainDynamoBadgeTakeThis: @ 820E7AA
 MauvilleCity_Gym_Text_ExplainTakeThis:
 	.string "Hmm…\n"
 	.string "You should take this, too!$"
-
-MauvilleCity_Gym_Text_ExplainVoltSwitch: @ 820E844
-	.string "Wise Glasses strengthen special\n"
-	.string "moves without locking in one attack.\p"
-	.string "Use that freedom to keep your foe\n"
-	.string "guessing! Wahahahah!$"
+MauvilleCity_Gym_Text_ExplainVoltSwitch:
+	.string "The Electirizer evolves Electabuzz.\p"
+	.string "Level it while holding this item.$"
 
 MauvilleCity_Gym_Text_RegisteredWattson: @ 820E8B5
 	.string "Registered Gym Leader Wattson\n"

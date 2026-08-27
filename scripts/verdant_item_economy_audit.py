@@ -213,14 +213,14 @@ def collect_sources(unlocks: dict[str, int | None], by_map: dict[str, dict],
         ))
 
     bundle_sources = {
-        "ITEM_WIDE_LENS": ("GraniteCave_StevensRoom", "Steven reward bundle"),
+        "ITEM_METAL_COAT": ("GraniteCave_StevensRoom", "Steven reward bundle"),
         "ITEM_SCEPTILITE": ("GraniteCave_StevensRoom", "Steven reward bundle"),
         "ITEM_BLAZIKENITE": ("GraniteCave_StevensRoom", "Steven reward bundle"),
         "ITEM_SWAMPERTITE": ("GraniteCave_StevensRoom", "Steven reward bundle"),
         "ITEM_LATIOSITE": ("SouthernIsland_Interior", "atomic Lati Stone bundle"),
         "ITEM_LATIASITE": ("SouthernIsland_Interior", "atomic Lati Stone bundle"),
         "ITEM_HEAT_ROCK": ("Route119_WeatherInstitute_1F", "atomic weather-rock bundle"),
-        "ITEM_DAMP_ROCK": ("Route119_WeatherInstitute_1F", "atomic weather-rock bundle"),
+        "ITEM_WATER_STONE": ("Route119_WeatherInstitute_1F", "weather-research reward bundle"),
         "ITEM_ICY_ROCK": ("Route119_WeatherInstitute_1F", "atomic weather-rock bundle"),
         "ITEM_SMOOTH_ROCK": ("Route119_WeatherInstitute_1F", "atomic weather-rock bundle"),
     }
@@ -274,25 +274,25 @@ def collect_sources(unlocks: dict[str, int | None], by_map: dict[str, dict],
 
 
 BOSS_REWARDS = [
-    ("Roxanne", "Roxanne", "ITEM_EXPERT_BELT", "data/maps/RustboroCity_Gym/scripts.inc", "RustboroCity_Gym_EventScript_GiveRockTomb"),
-    ("Brawly", "Brawly", "ITEM_FLAME_ORB", "data/maps/DewfordTown_Gym/scripts.inc", "DewfordTown_Gym_EventScript_GiveBulkUp"),
-    ("Wattson", "Wattson", "ITEM_WISE_GLASSES", "data/maps/MauvilleCity_Gym/scripts.inc", "MauvilleCity_Gym_EventScript_GiveVoltSwitch"),
-    ("Flannery", "Flannery", "ITEM_EJECT_PACK", "data/maps/LavaridgeTown_Gym_1F/scripts.inc", "LavaridgeTown_Gym_1F_EventScript_GiveOverheat"),
-    ("Norman", "Norman", "ITEM_TOXIC_ORB", "data/maps/PetalburgCity_Gym/scripts.inc", "PetalburgCity_Gym_EventScript_GiveFacade"),
-    ("Winona", "Winona", "ITEM_ADRENALINE_ORB", "data/maps/FortreeCity_Gym/scripts.inc", "FortreeCity_Gym_EventScript_GiveRoost"),
-    ("Tate & Liza", "Tate&Liza", "ITEM_LIGHT_CLAY", "data/maps/MossdeepCity_Gym/scripts.inc", "MossdeepCity_Gym_EventScript_GiveCalmMind"),
-    ("Juan", "Juan", "ITEM_UTILITY_UMBRELLA", "data/maps/SootopolisCity_Gym_1F/scripts.inc", "SootopolisCity_Gym_1F_EventScript_GiveScald"),
+    ("Roxanne", "Roxanne", "ITEM_PROTECTOR", "data/maps/RustboroCity_Gym/scripts.inc", "RustboroCity_Gym_EventScript_GiveRockTomb"),
+    ("Brawly", "Brawly", "ITEM_RAZOR_CLAW", "data/maps/DewfordTown_Gym/scripts.inc", "DewfordTown_Gym_EventScript_GiveBulkUp"),
+    ("Wattson", "Wattson", "ITEM_ELECTIRIZER", "data/maps/MauvilleCity_Gym/scripts.inc", "MauvilleCity_Gym_EventScript_GiveVoltSwitch"),
+    ("Flannery", "Flannery", "ITEM_MAGMARIZER", "data/maps/LavaridgeTown_Gym_1F/scripts.inc", "LavaridgeTown_Gym_1F_EventScript_GiveOverheat"),
+    ("Norman", "Norman", "ITEM_LOPUNNITE", "data/maps/PetalburgCity_Gym/scripts.inc", "PetalburgCity_Gym_EventScript_GiveFacade"),
+    ("Winona", "Winona", "ITEM_ALTARIANITE", "data/maps/FortreeCity_Gym/scripts.inc", "FortreeCity_Gym_EventScript_GiveRoost"),
+    ("Tate & Liza", "Tate&Liza", "ITEM_METAGROSSITE", "data/maps/MossdeepCity_Gym/scripts.inc", "MossdeepCity_Gym_EventScript_GiveCalmMind"),
+    ("Juan", "Juan", "ITEM_MILOTICITE", "data/maps/SootopolisCity_Gym_1F/scripts.inc", "SootopolisCity_Gym_1F_EventScript_GiveScald"),
 ]
 
 KNOWN_DUPLICATE_FIXED_BOSS_REWARDS = set()
 
 PROPOSED_BOSS_DIRECTIONS = {
-    "Brawly": ("ITEM_FLAME_ORB", "keep"),
-    "Norman": ("ITEM_TOXIC_ORB", "keep"),
-    "Tate & Liza": ("ITEM_LIGHT_CLAY", "keep"),
-    "Flannery": ("ITEM_EJECT_PACK", "keep"),
-    "Winona": ("ITEM_ADRENALINE_ORB", "keep"),
-    "Juan": ("ITEM_UTILITY_UMBRELLA", "keep"),
+    "Brawly": ("ITEM_RAZOR_CLAW", "implemented"),
+    "Norman": ("ITEM_LOPUNNITE", "implemented"),
+    "Tate & Liza": ("ITEM_METAGROSSITE", "implemented"),
+    "Flannery": ("ITEM_MAGMARIZER", "implemented"),
+    "Winona": ("ITEM_ALTARIANITE", "implemented"),
+    "Juan": ("ITEM_MILOTICITE", "implemented"),
 }
 
 EXPECTED_EARLY_CANDY_LABELS = {
@@ -317,31 +317,31 @@ RETRY_CONTRACTS = [
     ("Gardevoirite", "data/maps/VerdanturfTown_WandasHouse/scripts.inc", "VerdanturfTown_WandasHouse_EventScript_WandaGardevoirite", ["compare VAR_RESULT, FALSE", "setflag FLAG_WANDA_GARDEVOIRITE"]),
     ("Altarianite", "data/maps/LilycoveCity/scripts.inc", "LilycoveCity_EventScript_YesAltaria", ["compare VAR_RESULT, FALSE", "setflag FLAG_ITEM_LILYCOVE_CITY_ALTARIANITE"]),
     ("Lati Stone bundle", "data/maps/SouthernIsland_Interior/scripts.inc", "SouthernIsland_Interior_EventScript_GiveLatiStones", ["special TryGiveVerdantLatiStoneBundle", "compare VAR_RESULT, FALSE", "setflag FLAG_RECEIVED_LATI_STONES"]),
-    ("Lucy bundle", "data/maps/LavaridgeTown_PokemonCenter_1F/scripts.inc", "LavaridgeTown_PokemonCenter_1F_EventScript_LucyReward", ["checkitemspace ITEM_BLACK_SLUDGE, 1", "checkitemspace ITEM_BOTTLE_CAP, 3", "setvar VAR_LAVARIDGE_LUCY_STATE, 2"]),
-    ("Spenser bundle", "data/maps/FortreeCity_Mart/scripts.inc", "FortreeCity_Mart_EventScript_SpenserReward", ["checkitemspace ITEM_TERRAIN_EXTENDER, 1", "checkitemspace ITEM_BOTTLE_CAP, 3"]),
-    ("Greta bundle", "data/maps/SlateportCity/scripts.inc", "SlateportCity_EventScript_GretaReward", ["checkitemspace ITEM_THROAT_SPRAY, 1", "checkitemspace ITEM_BOTTLE_CAP, 6", "setflag FLAG_DEFEATED_SLATEPORT_GRETA"]),
+    ("Lucy bundle", "data/maps/LavaridgeTown_PokemonCenter_1F/scripts.inc", "LavaridgeTown_PokemonCenter_1F_EventScript_LucyReward", ["checkitemspace ITEM_BOTTLE_CAP, 3", "giveitem ITEM_BOTTLE_CAP, 3", "setvar VAR_LAVARIDGE_LUCY_STATE, 2"]),
+    ("Spenser bundle", "data/maps/FortreeCity_Mart/scripts.inc", "FortreeCity_Mart_EventScript_SpenserReward", ["checkitemspace ITEM_PROTECTOR, 1", "checkitemspace ITEM_BOTTLE_CAP, 3"]),
+    ("Greta bundle", "data/maps/SlateportCity/scripts.inc", "SlateportCity_EventScript_GretaReward", ["checkitemspace ITEM_LEADERS_CREST, 1", "checkitemspace ITEM_BOTTLE_CAP, 6", "setflag FLAG_DEFEATED_SLATEPORT_GRETA"]),
     ("Weather Rock bundle", "data/maps/Route119_WeatherInstitute_1F/scripts.inc", "Route119_WeatherInstitute_1F_EventScript_LittleBoy", ["special TryGiveVerdantWeatherRockBundle", "compare VAR_RESULT, FALSE", "setflag FLAG_WEATHER_INSTITUTE_ROCKS"]),
     ("Float Stone", "data/maps/RustboroCity_Flat2_2F/scripts.inc", "RustboroCity_Flat2_2F_EventScript_GiveFloatStone", ["compare VAR_RESULT, FALSE", "setflag FLAG_ITEM_RUSTBORO_FLOAT_STONE"]),
     ("Silver Powder", "data/maps/VerdanturfTown_PokemonCenter_1F/scripts.inc", "VerdanturfTown_PokemonCenter_1F_EventScript_XscissorTM", ["compare VAR_RESULT, FALSE", "setflag FLAG_VERDANT_GIFT_X_SCISSOR"]),
-    ("May goggles", "data/maps/LavaridgeTown/scripts.inc", "LavaridgeTown_EventScript_MayGiveGoGoggles", ["checkitemspace ITEM_GO_GOGGLES, 1", "checkitemspace ITEM_SAFETY_GOGGLES, 1"]),
-    ("Brendan goggles", "data/maps/LavaridgeTown/scripts.inc", "LavaridgeTown_EventScript_BrendanGiveGoGoggles", ["checkitemspace ITEM_GO_GOGGLES, 1", "checkitemspace ITEM_SAFETY_GOGGLES, 1"]),
+    ("May goggles", "data/maps/LavaridgeTown/scripts.inc", "LavaridgeTown_EventScript_MayGiveGoGoggles", ["checkitemspace ITEM_GO_GOGGLES, 1", "giveitem ITEM_GO_GOGGLES"]),
+    ("Brendan goggles", "data/maps/LavaridgeTown/scripts.inc", "LavaridgeTown_EventScript_BrendanGiveGoGoggles", ["checkitemspace ITEM_GO_GOGGLES, 1", "giveitem ITEM_GO_GOGGLES"]),
 ]
 
 
 DIALOGUE_CONTRACTS = [
-    ("data/maps/RustboroCity_Mart/scripts.inc", "RustboroCity_Mart_Text_HaveTM98", "Zoom Lens", ["False Swipe"]),
-    ("data/maps/Route114_FossilManiacsHouse/scripts.inc", "Route114_FossilManiacsHouse_Text_DigReturnsYouToEntrance", "Air Balloon", ["returned to the entrance"]),
-    ("data/maps/FortreeCity_House2/scripts.inc", "FortreeCity_Text_HaveTM49", "Safety Goggles", ["Sleep Talk"]),
-    ("data/maps/FortreeCity_House2/scripts.inc", "FortreeCity_House2_Text_ExplainHiddenPower", "Wide Lens", ["Hidden Power is a move"]),
-    ("data/maps/DewfordTown_Hall/scripts.inc", "DewfordTown_Hall_Text_GiveYouSludgeBomb", "Black Sludge", ["Sludge Bomb"]),
-    ("data/maps/SSTidalRooms/scripts.inc", "SSTidalRooms_Text_ExplainSnatch", "Safety Goggles", ["Snatch steals"]),
-    ("data/maps/SlateportCity_PokemonFanClub/scripts.inc", "SlateportCity_PokemonFanClub_Text_HaveTM58", "Focus Band", ["Endure allows"]),
-    ("data/maps/PacifidlogTown_PokemonCenter_1F/scripts.inc", "PacifidlogTown_PokemonCenter_1F_Text_HaveExplosion", "Room Service", ["taught Pokémon", "use Explosion"]),
-    ("data/maps/LavaridgeTown_Gym_1F/scripts.inc", "LavaridgeTown_Gym_1F_Text_ExplainOverheat", "Eject Pack", ["Flame Orb"]),
-    ("data/maps/Route114/scripts.inc", "Route114_Text_ExplainRoar", "Shed Shell", ["Eject Pack"]),
+    ("data/maps/RustboroCity_Mart/scripts.inc", "RustboroCity_Mart_Text_HaveTM98", "Moon Stone", ["Zoom Lens", "False Swipe"]),
+    ("data/maps/Route114_FossilManiacsHouse/scripts.inc", "Route114_FossilManiacsHouse_Text_DigReturnsYouToEntrance", "Sail Fossil", ["Air Balloon"]),
+    ("data/maps/FortreeCity_House2/scripts.inc", "FortreeCity_Text_HaveTM49", "Ice Stone", ["Safety Goggles", "Sleep Talk"]),
+    ("data/maps/FortreeCity_House2/scripts.inc", "FortreeCity_House2_Text_ExplainHiddenPower", "Dubious Disc", ["Wide Lens", "Hidden Power is a move"]),
+    ("data/maps/DewfordTown_Hall/scripts.inc", "DewfordTown_Hall_Text_GiveYouSludgeBomb", "Deep Sea Scale", ["Black Sludge", "Sludge Bomb"]),
+    ("data/maps/SSTidalRooms/scripts.inc", "SSTidalRooms_Text_ExplainSnatch", "Reaper Cloth", ["Safety Goggles", "Snatch steals"]),
+    ("data/maps/SlateportCity_PokemonFanClub/scripts.inc", "SlateportCity_PokemonFanClub_Text_HaveTM58", "Deep Sea Tooth", ["Focus Band", "Endure allows"]),
+    ("data/maps/PacifidlogTown_PokemonCenter_1F/scripts.inc", "PacifidlogTown_PokemonCenter_1F_Text_HaveExplosion", "Up-Grade", ["Room Service", "use Explosion"]),
+    ("data/maps/LavaridgeTown_Gym_1F/scripts.inc", "LavaridgeTown_Gym_1F_Text_ExplainOverheat", "Magmarizer", ["Eject Pack", "Flame Orb"]),
+    ("data/maps/Route114/scripts.inc", "Route114_Text_ExplainRoar", "Dragon Scale", ["Shed Shell", "Eject Pack"]),
     ("data/maps/Route111_WinstrateFamilysHouse/scripts.inc", "Route111_WinstrateFamilysHouse_Text_LikeYouToHaveLifeOrb", "Destiny Knot", ["Toxic Orb"]),
-    ("data/maps/FortreeCity_Gym/scripts.inc", "FortreeCity_Gym_Text_ExplainRoost", "Adrenaline Orb", ["Safety Goggles"]),
-    ("data/maps/SootopolisCity_Gym_1F/scripts.inc", "SootopolisCity_Gym_1F_Text_ExplainScald", "Utility Umbrella", ["Weakness Policy"]),
+    ("data/maps/FortreeCity_Gym/scripts.inc", "FortreeCity_Gym_Text_ExplainRoost", "Altarianite", ["Shiny Stone", "Adrenaline Orb", "Safety Goggles"]),
+    ("data/maps/SootopolisCity_Gym_1F/scripts.inc", "SootopolisCity_Gym_1F_Text_ExplainScald", "Miloticite", ["Prism Scale", "Utility Umbrella", "Weakness Policy"]),
 ]
 
 
@@ -453,8 +453,6 @@ def build_ledger() -> tuple[dict, list[str]]:
         fixed_sources = [entry for entry in sources.get(item, []) if entry["fixed"]]
         known_fixed = [entry for entry in fixed_sources if entry["order"] is not None]
         first_fixed = min(known_fixed, key=lambda entry: entry["order"]) if known_fixed else (fixed_sources[0] if fixed_sources else None)
-        if item in unlocks and not fixed_sources:
-            problems.append(f"{item}: unlock-table item has no fixed acquisition or badge source")
         items.append({
             "item": item,
             **metadata.get(item, {}),
@@ -539,18 +537,37 @@ def build_ledger() -> tuple[dict, list[str]]:
             f"{sorted(EXPECTED_EARLY_CANDY_LABELS)}, observed {sorted(observed_candy_labels)}"
         )
     hidden_candy = [entry for entry in hidden if entry["item"] == "ITEM_RARE_CANDY"]
+    free_block = read("src/data/pokemon/verdant_multi_battle_sets.h").split(
+        "gVerdantFreeBattleItems[]", 1
+    )[1].split("};", 1)[0]
+    free_items = set(re.findall(r"ITEM_[A-Z0-9_]+", free_block)) - {"ITEM_NONE"}
+    redundant_fixed_sources = [
+        entry
+        for item in free_items
+        for entry in sources.get(item, [])
+        if entry["fixed"] and entry["kind"] not in {"badge_shop", "specialty_shop"}
+    ]
+    if redundant_fixed_sources:
+        problems.append(
+            "free competitive items remain as fixed rewards: "
+            + ", ".join(
+                f"{entry['item']}@{entry['map'] or entry['path']}"
+                for entry in redundant_fixed_sources
+            )
+        )
 
     ledger = {
         "meta": {
             "version": 3,
             "source": "current ROM source plus docs/verdant_battle_guide.json",
-            "competitiveItemPolicy": "Ordinary competitive held items are free and unlimited at every Pokemon Center. Legacy item gates remain inventoried only for the pending reward redesign; protected form and transformation items remain progression.",
+            "competitiveItemPolicy": "Ordinary non-Berry competitive held items are free and unlimited at every Pokemon Center. Berries, evolution catalysts, and protected form or transformation items remain progression. Fixed rewards never duplicate the free stock.",
             "itemCount": len(items),
             "unlockTableCount": len(unlocks),
             "knownDuplicateFixedBossRewardCount": len(duplicate_bosses),
             "retryContractCount": len(RETRY_CONTRACTS),
             "dialogueContractCount": len(DIALOGUE_CONTRACTS),
             "saveMigrationContractCount": 4,
+            "redundantFixedRewardCount": len(redundant_fixed_sources),
         },
         "bossRewards": boss_rows,
         "testedBossRewardDirections": proposals,
@@ -573,7 +590,7 @@ def markdown(ledger: dict) -> str:
         "",
         "This report is generated from current ROM source and the generated battle guide by",
         "`python3 scripts/verdant_item_economy_audit.py --write`.",
-        "Ordinary competitive held items are now free loadout infrastructure. Legacy gates below remain as a reward-redesign inventory, not current shop restrictions.",
+        "Ordinary non-Berry competitive held items are free loadout infrastructure. Berries and evolution/form catalysts remain progression, and no fixed reward duplicates the free stock.",
         "",
         "## Fixed boss rewards",
         "",
@@ -665,7 +682,8 @@ def main() -> None:
     print(f"PASS: {ledger['meta']['retryContractCount']} retry-safe reward contracts")
     print(f"PASS: {ledger['meta']['dialogueContractCount']} stale-dialogue contracts")
     print(f"PASS: {ledger['meta']['saveMigrationContractCount']} save-migration contract groups")
-    print(f"PASS: {ledger['meta']['unlockTableCount']} legacy held-item rewards remain inventoried for redesign")
+    print(f"PASS: {ledger['meta']['unlockTableCount']} retired discovery entries remain only for save compatibility")
+    print("PASS: fixed rewards contain zero free-vendor competitive items")
     if duplicates:
         print(f"REVIEW: fixed boss reward duplicates remain for {', '.join(duplicates)}")
     else:

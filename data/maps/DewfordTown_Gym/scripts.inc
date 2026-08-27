@@ -187,7 +187,7 @@ DewfordTown_Gym_EventScript_BrawlyDefeated:: @ 81FC7F7
 	end
 
 DewfordTown_Gym_EventScript_GiveBulkUp:: @ 81FC855
-	giveitem ITEM_FLAME_ORB
+	giveitem ITEM_RAZOR_CLAW
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_BagIsFull
 	msgbox DewfordTown_Gym_Text_ExplainBulkUp, MSGBOX_DEFAULT
@@ -195,7 +195,7 @@ DewfordTown_Gym_EventScript_GiveBulkUp:: @ 81FC855
 	return
 
 DewfordTown_Gym_EventScript_GiveBulkUp2: @ 81FC878
-	giveitem ITEM_FLAME_ORB
+	giveitem ITEM_RAZOR_CLAW
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox DewfordTown_Gym_Text_ExplainBulkUp, MSGBOX_DEFAULT
@@ -511,11 +511,9 @@ DewfordTown_Gym_Text_KnuckleBadgeInfoTakeThis: @ 81FD0A8
 	.string "If your Pokémon can learn Flash, it\n"
 	.string "can always use it outside of battle.\p"
 	.string "Take this battle item, too.$"
-
-DewfordTown_Gym_Text_ExplainBulkUp: @ 81FD181
-	.string "A Flame Orb burns its holder in battle.\p"
-	.string "That sounds rough, but some Pokémon can\n"
-	.string "turn that status into real power!$"
+DewfordTown_Gym_Text_ExplainBulkUp:
+	.string "A Razor Claw evolves Sneasel.\p"
+	.string "Level it at night while holding it.$"
 
 DewfordTown_Gym_Text_RegisteredBrawly: @ 81FD1E0
 	.string "Registered Gym Leader Brawly\n"

@@ -9,6 +9,7 @@ struct VerdantBattleSetPreset
 {
     u16 moves[MAX_MON_MOVES];
     u16 item;
+    u16 requiredItem;
     u8 nature;
     u8 abilitySlot;
 };
@@ -38,6 +39,7 @@ u8 ApplyVerdantRandomWildBattleSet(struct Pokemon *mon);
 u8 GetVerdantBattleSetCount(struct Pokemon *mon);
 const u8 *GetVerdantBattleSetName(struct Pokemon *mon, u8 choice);
 u16 GetVerdantBattleSetItem(struct Pokemon *mon, u8 choice);
+u16 GetVerdantBattleSetRequiredItem(struct Pokemon *mon, u8 choice);
 bool8 IsVerdantLegendarySpecies(u16 species);
 bool8 IsVerdantProtectedProgressionItem(u16 item);
 

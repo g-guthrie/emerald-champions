@@ -71,13 +71,13 @@ choice_errors = []
 for species, row in payload["ranges"].items():
     default = defaults[species]
     legal = dex.legal_moves(species)
-    signatures = {(frozenset(move for move in default["moves"] if move != "MOVE_NONE"), default["nature"], default["ability"], default["runtime_item"])}
+    signatures = {(frozenset(move for move in default["moves"] if move != "MOVE_NONE"), default["nature"], default["ability"], default["runtime_item"], "ITEM_NONE")}
     choices = payload["alternatives"][row["offset"]:row["offset"] + row["count"]]
     if not payload["default_names"].get(species):
         choice_errors.append(f"{species}: missing default label")
     for choice in choices:
         moves = [move for move in choice["moves"] if move != "MOVE_NONE"]
-        signature = (frozenset(moves), choice["nature"], choice["ability"], choice["runtime_item"])
+        signature = (frozenset(moves), choice["nature"], choice["ability"], choice["runtime_item"], choice["required_item"])
         valid = (
             1 <= len(moves) <= 4
             and len(moves) == len(set(moves))
@@ -85,6 +85,14 @@ for species, row in payload["ranges"].items():
             and choice["ability"] in dex.stats[species].abilities
             and dex.stats[species].abilities[choice["ability_slot"]] == choice["ability"]
             and choice["runtime_item"] not in presets.PROTECTED_SET_ITEMS
+            and (
+                choice["required_item"] == "ITEM_NONE"
+                or (
+                    choice["required_item"] in presets.PROTECTED_SET_ITEMS
+                    and choice["runtime_item"] == "ITEM_NONE"
+                    and choice["name"].startswith("Mega ")
+                )
+            )
             and signature not in signatures
             and len(choice["name"]) < 24
         )
@@ -137,20 +145,23 @@ check(
     and "Random() % count" in runtime,
 )
 check(
-    "the tutor applies a bounds-checked selected preset and replaces its ordinary held item",
+    "the tutor maps visible choices safely and replaces only ordinary held items",
     all(token in runtime for token in (
         "ApplyVerdantBattleSetChoice",
-        "choice > range->count",
+        "ResolveBattleSetChoice",
+        "visibleChoice++ == choice",
         "ApplyValidatedBattleSetPreset",
     ))
     and "SetMonData(mon, MON_DATA_HELD_ITEM, &preset->item)" in runtime
     and "BATTLE_SET_APPLY_SPECIAL_ITEM" in runtime,
 )
 check(
-    "all runtime competitive items are free and unlimited only at the existing Center vendor",
-    payload["free_item_count"] >= 130
+    "ordinary non-Berry runtime items are free only at the Center vendor",
+    payload["free_item_count"] >= 60
     and not (set(payload["free_items"]) & presets.PROTECTED_SET_ITEMS)
-    and all(required in payload["free_items"] for required in ("ITEM_EVIOLITE", "ITEM_FOCUS_SASH", "ITEM_LEFTOVERS", "ITEM_SITRUS_BERRY"))
+    and not any(item.endswith("_BERRY") for item in payload["free_items"])
+    and all(required in payload["free_items"] for required in ("ITEM_EVIOLITE", "ITEM_FOCUS_SASH", "ITEM_LEFTOVERS"))
+    and "ITEM_SITRUS_BERRY" not in payload["free_items"]
     and "CreateFreePokemartMenu(sUnlockedBattleItemMart)" in field
     and "gVerdantFreeBattleItems" in item
     and "sMartInfo.freeItems" in shop
@@ -159,6 +170,15 @@ check(
     and "martType == MART_TYPE_NORMAL && !sMartInfo.freeItems" in shop
     and "void CreatePokemartMenu" in shop
     and "sMartInfo.freeItems = FALSE;" in shop,
+)
+check(
+    "Mega presets stay hidden until the Bracelet and never create their stone",
+    any(choice["required_item"] != "ITEM_NONE" for choice in payload["alternatives"])
+    and "!FlagGet(FLAG_SYS_RECEIVED_KEYSTONE)" in runtime
+    and "preset->requiredItem" in runtime
+    and "BATTLE_SET_APPLY_MEGA_SET" in runtime
+    and "I will not supply that Mega Stone" in tutor
+    and "Use this set with {STR_VAR_3}" in tutor,
 )
 check(
     "the role picker uses the existing native scrolling menu and a maximum of three sets",

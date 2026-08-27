@@ -503,7 +503,7 @@ PetalburgCity_Gym_EventScript_NormanBattle::
 	end
 
 PetalburgCity_Gym_EventScript_GiveFacade:: @ 8204ED2
-	giveitem ITEM_TOXIC_ORB
+	giveitem ITEM_LOPUNNITE
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_BagIsFull
 	setflag FLAG_RECEIVED_TM42
@@ -1490,12 +1490,9 @@ PetalburgCity_Gym_Text_RegisteredExploud: @ 81FF517
 PetalburgCity_Gym_Text_TakeThis:
 	.string "This is my gift to you. {PLAYER}, I'm\n"
 	.string "sure you can use it correctly.$"
-
-PetalburgCity_Gym_Text_ExplainFacade: @ 8206254
-	.string "Dad: This Toxic Orb poisons its\n"
-	.string "holder.\p"
-	.string "Abilities like Guts and moves like\n"
-	.string "Facade turn that risk into an edge.$"
+PetalburgCity_Gym_Text_ExplainFacade:
+	.string "Dad: Lopunnite enables Mega power.\n"
+	.string "Let Lopunny hold it in battle.$"
 
 PetalburgCity_Gym_Text_DadHappyAndSad: @ 82062FB
 	.string "Dad: As the Gym Leader, I can't\n"

@@ -46,6 +46,17 @@ PHASE_NAMES = [
     "Champion / postgame — open-world cleanup and Battle Frontier",
 ]
 
+METHOD_GATES = {
+    "Land": (0, "No field move; available when the location itself is reachable"),
+    "Berry Tree": (0, "Interact with an eligible Berry tree when its location is reachable"),
+    "Old Rod": (0, "Old Rod from Mom in Littleroot during the opening"),
+    "Honey": (1, "Stone Badge (1); Honey enters ordinary medicine-Mart stock"),
+    "Rock Smash": (3, "Dynamo Badge (3) and HM06 Rock Smash"),
+    "Surf": (5, "Balance Badge (5) and HM03 Surf"),
+    "Good Rod": (5, "Balance Badge route access and the Good Rod gift on Route 118"),
+    "Super Rod": (6, "Feather Badge route access and the Super Rod gift in Mossdeep"),
+}
+
 
 def read(path: str | Path) -> str:
     return (ROOT / path).read_text()
@@ -225,6 +236,10 @@ def collect_wild(dex: battle_sets.LocalDex) -> tuple[list[dict], dict[str, list[
                     if start + len(weights) > len(info["mons"]):
                         continue
                     aggregated = aggregate_slots(info["mons"], start, weights)
+                    if label == "gBerryTreeWildMonHeaders" and method_name == "Land":
+                        method_name = "Berry Tree"
+                    gate_phase, gate_description = METHOD_GATES[method_name]
+                    availability_phase = PHASES[max(phase["phase_order"], gate_phase)]
                     pool_total = sum(row["chance_percent"] for row in aggregated)
                     pools.append({
                         "group": label,
@@ -235,9 +250,12 @@ def collect_wild(dex: battle_sets.LocalDex) -> tuple[list[dict], dict[str, list[
                     for row in aggregated:
                         species_name = species_display(row["species_id"])
                         output = {
-                            "phase_order": phase["phase_order"],
-                            "phase": phase["name"],
-                            "level_cap": phase["level_cap"],
+                            "phase_order": availability_phase["phase_order"],
+                            "phase": availability_phase["name"],
+                            "level_cap": availability_phase["level_cap"],
+                            "location_phase_order": phase["phase_order"],
+                            "method_gate_phase_order": gate_phase,
+                            "availability_gate": gate_description,
                             "group": label,
                             "location": location,
                             "map_id": map_token or encounter["base_label"],
@@ -255,9 +273,12 @@ def collect_wild(dex: battle_sets.LocalDex) -> tuple[list[dict], dict[str, list[
                         if catchable:
                             sources[row["species_id"]].append(output)
     feebas = {
-        "phase_order": 4,
-        "phase": PHASES[4]["name"],
-        "level_cap": PHASES[4]["level_cap"],
+        "phase_order": 5,
+        "phase": PHASES[5]["name"],
+        "level_cap": PHASES[5]["level_cap"],
+        "location_phase_order": 4,
+        "method_gate_phase_order": 5,
+        "availability_gate": "Balance Badge (5), Surf access to the Route 119 bridge, and any Rod",
         "group": "special_fishing",
         "location": "Route 119 under the bridge",
         "map_id": "MAP_ROUTE119",
@@ -555,7 +576,7 @@ def build_report() -> tuple[dict, str, dict]:
             "moves": "No automatic level-up move learning. The Pokémon Center teacher offers every locally legal level, Egg, TM/HM, and tutor move.",
             "leveling": "The reusable Leveler raises the whole eligible party to the current cap; Rare Candy raises up to ten levels while stopping at the cap or next level evolution.",
             "loadouts": f"{defaults['supported_count']} authored defaults plus {loadouts['alternative_count']} handbook-derived alternatives ({loadouts['set_count']} total). Ordinary wild Pokémon uniformly roll their actual one-to-three tutor sets and fight with the rolled moves, nature, ability, and held item.",
-            "items": f"{loadouts['free_item_count']} ordinary competitive held items and Berries are free and unlimited at the Pokémon Center vendor. Mega Stones, Primal Orbs, Plates, Drives, Memories, Ogerpon masks, Rusted items, and similar form/progression equipment remain protected.",
+            "items": f"{loadouts['free_item_count']} ordinary competitive held items are free and unlimited at the Pokémon Center vendor. Berries remain an exploration, harvesting, and planting economy. Mega Stones, evolution catalysts, Primal Orbs, Plates, Drives, Memories, Ogerpon masks, Rusted items, and similar form/progression equipment remain protected.",
         },
         "level_cap_phases": PHASES,
         "wild_encounters": wild_rows,
@@ -609,7 +630,7 @@ def build_report() -> tuple[dict, str, dict]:
         f"- Source state: commit `{source_commit}`; clean working tree at generation: **{source_clean}**.",
         f"- Random encounter coverage: **{len(main_maps)}** populated main overworld maps from **{main_configured_maps}** configured entries, plus **{len(catchable_species)}** distinct species/forms in catchable random pools.",
         f"- Loadout system: **{loadouts['set_count']}** total competitive sets. Wild Pokémon roll the exact one/two/three-set tutor count at 100%, 50/50, or approximately one-third each.",
-        f"- Item system: **{loadouts['free_item_count']}** ordinary competitive held items/Berries are free and unlimited; transformation and form-progression items remain protected.",
+        f"- Item system: **{loadouts['free_item_count']}** ordinary competitive held items are free and unlimited. Berries and evolution/transformation progression items are not vendor stock.",
         f"- Species/form appendix: **{len(species_rows)}** runtime IDs classified; **{len(unresolved)}** remain unresolved by the automated source scan and are explicitly listed rather than guessed.",
         f"- Probability validation: **{'PASS' if not pool_errors else 'FAIL'}** — every emitted method pool sums independently to 100%.",
         f"- Battle context: **{battle_meta['reachableBattleDefinitions']}** reachable definitions, including **{quality_meta['doubles']} doubles** and **{quality_meta['singles']} singles**; **{battle_meta['bespokeClosed']}** canonical encounters are currently source-closed bespoke redesigns.",
@@ -645,7 +666,8 @@ def build_report() -> tuple[dict, str, dict]:
         "## Random encounter methodology",
         "",
         "- `chance_percent` is the conditional chance of that species after the named method is active. Duplicate slots are aggregated.",
-        "- `encounter_rate` is the table’s raw encounter-rate field; it is not multiplied into `chance_percent` because step checks, terrain, abilities, Repel, and method invocation differ.",
+        "- `encounter_rate` is the table's raw encounter-rate field; it is not multiplied into `chance_percent` because step checks, terrain, abilities, Repel, and method invocation differ.",
+        "- The chapter shown for each row is the **earliest usable phase**, calculated as the later of location access and the method's actual field gate. Surf, Rock Smash, Good Rod, Super Rod, and Honey rows therefore no longer appear as opening access merely because their maps are early.",
         "- Land weights are 13/13/10/10/10/10/5/5/8/8/4/4. Surf and Rock Smash are 60/30/5/5. Old Rod is 60/40; Good Rod 60/20/20; Super Rod 40/30/15/10/5; Honey 50/15/15/10/5/5.",
         "- Route 119 under-bridge Feebas is a separate 100% special fishing override at levels 20–25.",
         "- Battle Pyramid and Battle Pike tables are reported as facility-only random battles, not normal overworld acquisition promises.",
@@ -660,8 +682,8 @@ def build_report() -> tuple[dict, str, dict]:
         md.append(f"### {phase['name']} (cap {phase['level_cap']})")
         md.append("")
         md.extend(markdown_table(
-            ["Location", "Method", "Raw rate", "Species", "Within-method %", "Levels"],
-            [[row["location"], row["method"], row["encounter_rate"] if row["encounter_rate"] is not None else "special", row["species"], row["chance_percent"], f"{row['min_level']}–{row['max_level']}"] for row in phase_rows],
+            ["Location", "Method", "Access requirement", "Raw rate", "Species", "Within-method %", "Levels"],
+            [[row["location"], row["method"], row["availability_gate"], row["encounter_rate"] if row["encounter_rate"] is not None else "special", row["species"], row["chance_percent"], f"{row['min_level']}–{row['max_level']}"] for row in phase_rows],
         ))
         md.append("")
     facility_rows = [row for row in wild_rows if row["facility_only"]]
@@ -702,7 +724,7 @@ def build_report() -> tuple[dict, str, dict]:
         "- Effective encounter odds can change through Repel, terrain, lead abilities, outbreaks, scripted overrides, and facility scaling. The base conditional tables remain the canonical distribution reported here.",
         "- Static/gift extraction combines explicit script commands with the checked-in bespoke acquisition ledger, starter tables, fossils, mystery gifts, Game Corner prizes, trades, and roamers. Variable-driven or future event systems may still require manual annotation.",
         "- Alternate and battle-only forms are often not separate acquisitions. The appendix separates them from permanent obtainable species rather than pretending every graphics/form ID is independently catchable.",
-        "- The existing ordinary held-item reward layer is intentionally pending redesign now that competitive items are free. Protected transformation/progression items remain meaningful.",
+        "- Ordinary held-item rewards are replaced as part of the cohesion pass now that competitive items are free. Berries, evolution catalysts, and protected transformation/form items remain meaningful progression.",
         "- The portable report intentionally uses exact tables rather than a summary chart: this artifact is optimized for complete lookup and language-model ingestion, and a chart would hide the map/method/species detail that is the point of the report.",
         "",
         "## Recommended next refinement",
@@ -761,7 +783,7 @@ def build_report() -> tuple[dict, str, dict]:
             }],
             "tables": [
                 {"id": "wild_table", "title": "Complete random encounter table", "subtitle": "Each percentage is conditional on its named method; methods are independent", "dataset": "wild_encounters", "sourceId": "wild_tables", "defaultSort": {"field": "phase_order", "direction": "asc"}, "columns": [
-                    {"field": "phase_order", "label": "Phase", "type": "number"}, {"field": "location", "label": "Location", "type": "text"}, {"field": "method", "label": "Method", "type": "text"}, {"field": "species", "label": "Species", "type": "text"}, {"field": "chance_percent", "label": "Within-method %", "type": "number"}, {"field": "min_level", "label": "Min Lv.", "type": "number"}, {"field": "max_level", "label": "Max Lv.", "type": "number"}, {"field": "encounter_rate", "label": "Raw rate", "type": "number"}, {"field": "group", "label": "Table group", "type": "text"},
+                    {"field": "phase_order", "label": "Earliest phase", "type": "number"}, {"field": "location", "label": "Location", "type": "text"}, {"field": "method", "label": "Method", "type": "text"}, {"field": "availability_gate", "label": "Access requirement", "type": "text"}, {"field": "species", "label": "Species", "type": "text"}, {"field": "chance_percent", "label": "Within-method %", "type": "number"}, {"field": "min_level", "label": "Min Lv.", "type": "number"}, {"field": "max_level", "label": "Max Lv.", "type": "number"}, {"field": "encounter_rate", "label": "Raw rate", "type": "number"}, {"field": "group", "label": "Table group", "type": "text"},
                 ]},
                 {"id": "nonrandom_table", "title": "Non-random acquisition systems", "subtitle": "Source-resolved static encounters, gifts, Eggs, starters, fossils, prizes, trades, and roamers", "dataset": "nonrandom_acquisitions", "sourceId": "acquisition_sources", "defaultSort": {"field": "category", "direction": "asc"}, "columns": [
                     {"field": "species", "label": "Species", "type": "text"}, {"field": "category", "label": "Acquisition type", "type": "text"}, {"field": "location", "label": "Location/system", "type": "text"}, {"field": "details", "label": "Details", "type": "text"}, {"field": "source_file", "label": "Source", "type": "text"},
@@ -777,8 +799,8 @@ def build_report() -> tuple[dict, str, dict]:
                 {"id": "summary_metrics", "type": "metric-strip", "cardIds": ["maps", "wild_species", "runtime_ids", "loadouts"]},
                 {"id": "classification_intro", "type": "markdown", "body": "## Availability is broad, while forms and unresolved rows require careful interpretation\n\nThe chart separates exact direct acquisition from permanent evolution chains, non-collectible form endpoints, and unresolved audit rows. A form endpoint is not a missing Pokémon; an unresolved row is a prompt for manual source review."},
                 {"id": "classification_chart", "type": "chart", "chartId": "acquisition_class_chart", "layout": "full"},
-                {"id": "scope", "type": "markdown", "body": "## Scope, definitions, and game systems\n\nChallenge Mode uses strict caps of 14, 20, 30, 40, 45, 55, 60, 70, 80, and 101. Level-up move prompts are disabled; the Center teacher exposes every legal move. Wild Pokémon roll complete competitive loadouts, and ordinary held items are free while transformation/progression items remain protected."},
-                {"id": "methodology", "type": "markdown", "body": "## Methodology\n\nSlot weights are aggregated by species independently for Land, Surf, Rock Smash, each Rod, Honey, Berry-tree, and facility pools. Direct acquisition scanning combines ROM scripts, the bespoke acquisition ledger, starter tables, fossils, mystery gifts, Game Corner prizes, trades, and roamers. Permanent evolution reachability is propagated from those direct sources."},
+                {"id": "scope", "type": "markdown", "body": "## Scope, definitions, and game systems\n\nChallenge Mode uses strict caps of 14, 20, 30, 40, 45, 55, 60, 70, 80, and 101. Level-up move prompts are disabled; the Center teacher exposes every legal move. Wild Pokémon roll complete competitive loadouts. Ordinary held items are free, while Berries and evolution/transformation progression items remain scarce."},
+                {"id": "methodology", "type": "markdown", "body": "## Methodology\n\nSlot weights are aggregated by species independently for Land, Surf, Rock Smash, each Rod, Honey, Berry-tree, and facility pools. Each row's earliest phase is the later of map access and its actual field-method gate. Direct acquisition scanning combines ROM scripts, the bespoke acquisition ledger, starter tables, fossils, mystery gifts, Game Corner prizes, trades, and roamers. Permanent evolution reachability is propagated from those direct sources."},
                 {"id": "wild_intro", "type": "markdown", "body": "## Complete random encounter flow\n\nRead each row as: conditional on this method producing a Pokémon, this species owns the stated percentage. The raw encounter-rate field is included separately and should not be multiplied or summed across methods without modeling the actual trigger system."},
                 {"id": "wild", "type": "table", "tableId": "wild_table", "layout": "full"},
                 {"id": "nonrandom_intro", "type": "markdown", "body": "## The remaining direct acquisitions come from authored systems\n\nStatic encounters, gifts, Eggs, starters, fossils, mystery gifts, prizes, trades, and roamers cover Pokémon that are deliberately kept out of anonymous random pools or offered through another progression system."},

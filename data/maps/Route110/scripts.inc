@@ -339,7 +339,7 @@ Route110_EventScript_ChallengeReactionBest:: @ 81EF6FD
 	msgbox Route110_Text_ChallengeReactionBest, MSGBOX_DEFAULT
 	goto_if_set FLAG_VERDANT_CYCLING_REWARD_ELECTRIC_SEED, Route110_EventScript_EndChallenge
 	msgbox Route110_Text_GiveTM93, MSGBOX_DEFAULT
-	giveitem ITEM_ELECTRIC_SEED
+	giveitem ITEM_BOTTLE_CAP
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_VERDANT_CYCLING_REWARD_ELECTRIC_SEED
@@ -350,7 +350,7 @@ Route110_EventScript_ChallengeReactionGood:: @ 81EF70B
 	msgbox Route110_Text_ChallengeReactionGood, MSGBOX_DEFAULT
 	goto_if_set FLAG_VERDANT_GIFT_FLAME_CHARGE, Route110_EventScript_EndChallenge
 	msgbox Route110_Text_GiveTM83, MSGBOX_DEFAULT
-	giveitem ITEM_QUICK_CLAW
+	giveitem ITEM_RARE_CANDY
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_VERDANT_GIFT_FLAME_CHARGE
@@ -918,19 +918,17 @@ Route110_Text_ChallengeReactionBest: @ 81F0431
 	.string "Your love of cycling comes from deep\n"
 	.string "within your heart.\l"
 	.string "You've shaken me to my very soul!$"
-
 Route110_Text_GiveTM93:
-	.string "Please, take this Electric Seed as a\n"
-	.string "reward for your cycling mastery!$"
+	.string "Outstanding! Take this valuable\n"
+	.string "Bottle Cap as your prize.$"
 
 Route110_Text_ChallengeReactionGood: @ 81F04A4
 	.string "Your technique is remarkable.\p"
 	.string "I suggest you speed up a bit while\n"
 	.string "still avoiding collisions.$"
-
 Route110_Text_GiveTM83:
-	.string "Here, take this Quick Claw to\n"
-	.string "commemorate your success.$"
+	.string "Well ridden! Take this Rare Candy to\n"
+	.string "prepare another teammate.$"
 
 Route110_Text_ChallengeReactionOk: @ 81F0500
 	.string "I would consider you a work in\n"

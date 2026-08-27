@@ -2465,9 +2465,9 @@ def main() -> None:
         problems.append("Battle 19: Smogon gen5nu sample 1 lost Regirock")
 
     reward_source = read("src/item.c")
-    if "{ITEM_EXPERT_BELT,      DISCOVERY_ONLY}" not in reward_source:
-        problems.append("Battle 19: Expert Belt is no longer discovery-unlocked")
-    for token in ("giveitem ITEM_EXPERT_BELT", "setflag FLAG_RECEIVED_TM39", "That Expert Belt strengthens moves"):
+    if "case ITEM_PROTECTOR:" not in read("src/data/pokemon/verdant_protected_set_items.h"):
+        problems.append("Battle 19: Protector is not preserved as evolution progression")
+    for token in ("giveitem ITEM_PROTECTOR", "setflag FLAG_RECEIVED_TM39", "Protector evolves Rhydon"):
         if token not in rustboro_gym:
             problems.append(f"Battle 19: Roxanne reward flow drifted: {token}")
 
@@ -4400,8 +4400,8 @@ def main() -> None:
     for token, block in (
         ("setvar VAR_TRICK_HOUSE_PUZZLE_1_STATE, 1", state_block),
         ("setvar VAR_TRICK_HOUSE_PUZZLE_1_STATE, 2", door_block),
-        ("giveitem ITEM_MENTAL_HERB", reward_block),
-        ("giveitem ITEM_MENTAL_HERB", retry_block),
+        ("giveitem ITEM_SACHET", reward_block),
+        ("giveitem ITEM_SACHET", retry_block),
         ("addvar VAR_TRICK_HOUSE_LEVEL, 1", end_scripts),
     ):
         if token not in block:
@@ -5743,9 +5743,9 @@ def main() -> None:
     level_cap68 = read("src/pokemon.c")
     if "static const u8 levelCapsStrict[] =   {14, 20, 30, 40" not in level_cap68:
         problems.append("Battle 68: strict Badge-3 cap no longer advances from 30 to 40")
-    for token in ("giveitem ITEM_WISE_GLASSES", "setflag FLAG_RECEIVED_TM72"):
+    for token in ("giveitem ITEM_ELECTIRIZER", "setflag FLAG_RECEIVED_TM72"):
         if gym_scripts65.count(token) < 2:
-            problems.append(f"Battle 68: retry-safe Wise Glasses flow lost {token}")
+            problems.append(f"Battle 68: retry-safe Electirizer flow lost {token}")
 
     wattson_dialogue68 = gym_scripts65.split("MauvilleCity_Gym_Text_WattsonIntro:", 1)[1].split("MauvilleCity_Gym_Text_WattsonChooseFormat:", 1)[0]
     for cue in ("Fast current, slow current", "Bring out your Mega", "Raichu and I are ready", "Only one Pokémon", "two healthy partners"):
@@ -6334,7 +6334,7 @@ def main() -> None:
     print("PASS: Battle 16 Josh Guard Split geology lab, legal young sets, one-use transfer AI, doubles guard, and native dialogue")
     print("PASS: Battle 17 Tommy Instruct repetition lesson, legal young sets, contextual partner AI, doubles guard, and native dialogue")
     print("PASS: Battle 18 Marc shifting-strata singles, legal young sets, deterministic hazard order, adaptive AI, and native dialogue")
-    print("PASS: Battle 19 Roxanne protected-confidence boss, six legal stages, Safeguard/Swagger AI, doubles guard, truthful hints, and Expert Belt reward")
+    print("PASS: Battle 19 Roxanne protected-confidence boss, six legal stages, Safeguard/Swagger AI, doubles guard, truthful hints, and Protector reward")
     print("PASS: Battle 20 Joey Frost Breath/Anger Point drill, legal young sets, survivable ally-target AI, doubles guard, and native dialogue")
     print("PASS: Battle 21 Jose Battery swarm, legal metamorphosis, safe foe-only speed control, doubles guard, and native dialogue")
     print("PASS: Battle 22 Karen Wonder Room exam, legal stages/sets, finite field AI, singles pacing, and native dialogue")

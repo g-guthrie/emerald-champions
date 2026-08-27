@@ -271,7 +271,7 @@ SlateportCity_PokemonFanClub_EventScript_EndureTM::
 	faceplayer
 	goto_if_set FLAG_VERDANT_GIFT_ENDURE, SlateportCity_PokemonFanClub_EventScript_ReceivedTM58
 	msgbox SlateportCity_PokemonFanClub_Text_GiveTM58, MSGBOX_DEFAULT
-	giveitem ITEM_FOCUS_BAND
+	giveitem ITEM_DEEP_SEA_TOOTH
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_VERDANT_GIFT_ENDURE
@@ -285,17 +285,13 @@ SlateportCity_PokemonFanClub_EventScript_ReceivedTM58::
 	msgbox SlateportCity_PokemonFanClub_Text_HaveTM58, MSGBOX_DEFAULT
 	release
 	end
-
 SlateportCity_PokemonFanClub_Text_GiveTM58:
-	.string "Check out my Azumarill! It's pretty\n"
-	.string "sturdy, right? Almost as sturdy as\l"
-	.string "a Roggenrola with Sturdy!\p"
-	.string "Your Pokémon may endure a knockout\n"
-	.string "if it holds this Focus Band!$"
+	.string "Your Pokémon look remarkably sturdy!\p"
+	.string "Take this Deep Sea Tooth!$"
 
 SlateportCity_PokemonFanClub_Text_HaveTM58:
-	.string "A Focus Band can sometimes let its\n"
-	.string "holder endure a knockout at one HP.$"
+	.string "The Deep Sea Tooth evolves Clamperl\n"
+	.string "when it levels up while holding it.$"
 
 SlateportCity_PokemonFanClub_Text_MeetChairman: @ 820A233
 	.string "Er-hem! I am the Chairman of the\n"

@@ -33,24 +33,27 @@ wild battles or waiting for basic competitive equipment.
 
 1. **Ordinary Poké Marts:** their original medicine, Ball, status-healing, and
    Repel progression, plus Rare Candy. No global battle-item suffix.
-2. **Pokémon Center battle vendor:** every ordinary competitive held item and
-   Berry is free and unlimited. It is loadout infrastructure, not an economy.
-3. **Exploration and story:** Mega Stones, Primal Orbs, form items, rare
-   Pokémon, Bottle Caps, valuable non-loadout consumables, and invitations.
+2. **Pokémon Center battle vendor:** ordinary non-Berry competitive held items
+   are free and unlimited. It is loadout infrastructure, not an economy.
+3. **Exploration and story:** Berries, evolution catalysts, Mega Stones,
+   Primal Orbs, form items, rare Pokémon, Bottle Caps, valuable non-loadout
+   consumables, and invitations.
 4. **Specialty shops:** their existing local identity, such as type boosters,
    weather rocks, evolution items, incense, and gems.
 
-Mega Stones, Primal Orbs, Plates, Drives, Memories, Ogerpon masks, Rusted
-weapons, and comparable form/progression items remain singular progression
-rewards and never enter the free stock or automated loadouts.
+Evolution catalysts, Mega Stones, Primal Orbs, Plates, Drives, Memories,
+Ogerpon masks, Rusted weapons, and comparable form/progression items remain
+progression rewards and never enter free stock. The tutor may identify a
+required Mega Stone but never creates it.
 
 ## Reward rules
 
 - A fixed boss reward must be its item's first guaranteed source, unless the
   script explicitly provides a different reward when the player already owns
   or has unlocked it.
-- Ordinary held-item rewards are no longer progression. Existing rewards need
-  a later incentive redesign; they do not delay this loadout-system change.
+- Former ordinary held-item rewards are finite evolution catalysts, fossils,
+  Bottle Caps, Berries, or other progression resources. They are never prizes
+  that the adjacent free vendor makes redundant.
 - A one-time gift, bundle, or defeated-trainer reward advances its flag or
   state only after the complete reward was delivered. A full Bag must leave a
   truthful retry path.
@@ -69,8 +72,8 @@ rewards and never enter the free stock or automated loadouts.
 
 - Every eligible ordinary random catch receives its authored doubles preset
   immediately before entering the party or PC: moves, PP, nature, and ability.
-  IVs, EVs, level, personality, shiny status, gender, Ball, held item,
-  friendship, and nickname remain individual.
+  IVs, EVs, level, personality, shiny status, gender, Ball, friendship, and
+  nickname remain individual; the selected set supplies its ordinary item.
 - Every ordinary wild Pokémon uniformly rolls one of its finalized one-to-three
   tutor sets before battle and fights with that complete moves/nature/ability/
   item loadout. The caught Pokémon retains the same roll; no capture-hostile
@@ -128,8 +131,8 @@ before implementation.
   subsequent progress.
 - Mega access precedes the first opposing Mega, but individual Mega Stones can
   still motivate exploration.
-- The Pokédex Current Area page is informational only. It does not unlock rods,
-  field moves, maps, or encounters.
+- Encounter reporting distinguishes map access from method access. Surf, Rock
+  Smash, rods, Honey, maps, and story flags retain their native gates.
 - The guide and executable ledgers are regenerated after every reward,
   encounter, or shop change.
 

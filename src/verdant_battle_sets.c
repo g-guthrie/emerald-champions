@@ -1,5 +1,6 @@
 #include "global.h"
 #include "data.h"
+#include "event_data.h"
 #include "item.h"
 #include "pokemon.h"
 #include "random.h"
@@ -7,6 +8,7 @@
 #include "verdant_battle_sets.h"
 #include "constants/abilities.h"
 #include "constants/field_specials.h"
+#include "constants/flags.h"
 #include "constants/moves.h"
 #include "constants/items.h"
 #include "constants/species.h"
@@ -16,19 +18,59 @@
 
 static const u8 sRecommendedBattleSetName[] = _("Recommended");
 
-static const struct VerdantBattleSetPreset *GetBattleSetPreset(struct Pokemon *mon, u8 choice)
+static bool8 ResolveBattleSetChoice(
+    struct Pokemon *mon,
+    u8 choice,
+    const struct VerdantBattleSetPreset **presetOut,
+    const u8 **nameOut)
 {
     u16 species = GetMonData(mon, MON_DATA_SPECIES2, NULL);
     const struct VerdantBattleSetRange *range;
+    const struct VerdantBattleSetPreset *preset;
+    const u8 *name;
+    u8 rawChoice;
+    u8 visibleChoice = 0;
 
     if (species == SPECIES_NONE || species == SPECIES_EGG || species >= NUM_SPECIES)
-        return NULL;
-    if (choice == 0)
-        return &gVerdantBattleSetPresets[species];
+        return FALSE;
     range = &gVerdantBattleSetRanges[species];
-    if (choice > range->count)
-        return NULL;
-    return &gVerdantBattleSetAlternatives[range->offset + choice - 1].preset;
+    for (rawChoice = 0; rawChoice <= range->count; rawChoice++)
+    {
+        if (rawChoice == 0)
+        {
+            preset = &gVerdantBattleSetPresets[species];
+            name = gVerdantDefaultBattleSetNames[species] != NULL
+                 ? gVerdantDefaultBattleSetNames[species]
+                 : sRecommendedBattleSetName;
+        }
+        else
+        {
+            const struct VerdantBattleSetChoice *alternative =
+                &gVerdantBattleSetAlternatives[range->offset + rawChoice - 1];
+
+            preset = &alternative->preset;
+            name = alternative->name;
+        }
+        if (preset->requiredItem != ITEM_NONE && !FlagGet(FLAG_SYS_RECEIVED_KEYSTONE))
+            continue;
+        if (visibleChoice++ == choice)
+        {
+            if (presetOut != NULL)
+                *presetOut = preset;
+            if (nameOut != NULL)
+                *nameOut = name;
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+static const struct VerdantBattleSetPreset *GetBattleSetPreset(struct Pokemon *mon, u8 choice)
+{
+    const struct VerdantBattleSetPreset *preset = NULL;
+
+    ResolveBattleSetChoice(mon, choice, &preset, NULL);
+    return preset;
 }
 
 static u8 ApplyValidatedBattleSetPreset(struct Pokemon *mon, const struct VerdantBattleSetPreset *preset, bool8 replaceSpecialItem)
@@ -49,11 +91,18 @@ static u8 ApplyValidatedBattleSetPreset(struct Pokemon *mon, const struct Verdan
      || preset->abilitySlot >= NUM_ABILITY_SLOTS
      || gBaseStats[species].abilities[preset->abilitySlot] == ABILITY_NONE)
         return BATTLE_SET_APPLY_FAILED;
-    if (IsVerdantProtectedProgressionItem(preset->item))
+    if (IsVerdantProtectedProgressionItem(preset->item)
+     || (preset->requiredItem != ITEM_NONE
+      && (preset->requiredItem < FIRST_MEGA_STONE_INDEX
+       || preset->requiredItem > LAST_MEGA_STONE_INDEX)))
+        return BATTLE_SET_APPLY_FAILED;
+    if (preset->requiredItem != ITEM_NONE && !FlagGet(FLAG_SYS_RECEIVED_KEYSTONE))
         return BATTLE_SET_APPLY_FAILED;
 
     currentItem = GetMonData(mon, MON_DATA_HELD_ITEM);
-    if (!replaceSpecialItem && IsVerdantProtectedProgressionItem(currentItem))
+    if (!replaceSpecialItem
+     && IsVerdantProtectedProgressionItem(currentItem)
+     && currentItem != preset->requiredItem)
     {
         CopyItemName(currentItem, gStringVar2);
         return BATTLE_SET_APPLY_SPECIAL_ITEM;
@@ -83,9 +132,12 @@ static u8 ApplyValidatedBattleSetPreset(struct Pokemon *mon, const struct Verdan
         SetMonMoveSlot(mon, preset->moves[i], i);
     SetMonData(mon, MON_DATA_NATURE, &preset->nature);
     SetMonData(mon, MON_DATA_ABILITY_NUM, &preset->abilitySlot);
-    SetMonData(mon, MON_DATA_HELD_ITEM, &preset->item);
+    if (currentItem != preset->requiredItem)
+        SetMonData(mon, MON_DATA_HELD_ITEM, &preset->item);
     CalculateMonStats(mon);
-    return BATTLE_SET_APPLY_SUCCESS;
+    return preset->requiredItem != ITEM_NONE
+         ? BATTLE_SET_APPLY_MEGA_SET
+         : BATTLE_SET_APPLY_SUCCESS;
 }
 
 bool8 ApplyVerdantBattleSetPreset(struct Pokemon *mon)
@@ -100,34 +152,47 @@ bool8 ApplyVerdantBattleSetPreset(struct Pokemon *mon)
 u8 GetVerdantBattleSetCount(struct Pokemon *mon)
 {
     u16 species = GetMonData(mon, MON_DATA_SPECIES2, NULL);
+    const struct VerdantBattleSetRange *range;
+    const struct VerdantBattleSetPreset *preset;
+    u8 rawChoice;
+    u8 count = 0;
 
     if (species == SPECIES_NONE || species == SPECIES_EGG || species >= NUM_SPECIES)
         return 0;
-    return 1 + gVerdantBattleSetRanges[species].count;
+    range = &gVerdantBattleSetRanges[species];
+    for (rawChoice = 0; rawChoice <= range->count; rawChoice++)
+    {
+        preset = rawChoice == 0
+               ? &gVerdantBattleSetPresets[species]
+               : &gVerdantBattleSetAlternatives[range->offset + rawChoice - 1].preset;
+        if (preset->requiredItem == ITEM_NONE || FlagGet(FLAG_SYS_RECEIVED_KEYSTONE))
+            count++;
+    }
+    return count;
 }
 
 const u8 *GetVerdantBattleSetName(struct Pokemon *mon, u8 choice)
 {
-    u16 species = GetMonData(mon, MON_DATA_SPECIES2, NULL);
-    const struct VerdantBattleSetRange *range;
+    const u8 *name = sRecommendedBattleSetName;
 
-    if (species == SPECIES_NONE || species == SPECIES_EGG || species >= NUM_SPECIES)
-        return sRecommendedBattleSetName;
-    range = &gVerdantBattleSetRanges[species];
-    if (choice == 0)
-        return gVerdantDefaultBattleSetNames[species] != NULL
-             ? gVerdantDefaultBattleSetNames[species]
-             : sRecommendedBattleSetName;
-    if (choice > range->count)
-        return sRecommendedBattleSetName;
-    return gVerdantBattleSetAlternatives[range->offset + choice - 1].name;
+    ResolveBattleSetChoice(mon, choice, NULL, &name);
+    return name;
 }
 
 u16 GetVerdantBattleSetItem(struct Pokemon *mon, u8 choice)
 {
     const struct VerdantBattleSetPreset *preset = GetBattleSetPreset(mon, choice);
 
-    return preset != NULL ? preset->item : ITEM_NONE;
+    if (preset == NULL)
+        return ITEM_NONE;
+    return preset->requiredItem != ITEM_NONE ? preset->requiredItem : preset->item;
+}
+
+u16 GetVerdantBattleSetRequiredItem(struct Pokemon *mon, u8 choice)
+{
+    const struct VerdantBattleSetPreset *preset = GetBattleSetPreset(mon, choice);
+
+    return preset != NULL ? preset->requiredItem : ITEM_NONE;
 }
 
 u8 ApplyVerdantBattleSetChoice(struct Pokemon *mon, u8 choice)

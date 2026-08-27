@@ -34,7 +34,7 @@ PacifidlogTown_PokemonCenter_1F_EventScript_ExplosionTM::
 	faceplayer
 	goto_if_set FLAG_VERDANT_GIFT_EXPLOSION, PacifidlogTown_PokemonCenter_1F_EventScript_HaveExplosion
 	msgbox PacifidlogTown_PokemonCenter_1F_Text_GiveExplosion, MSGBOX_DEFAULT
-	giveitem ITEM_ROOM_SERVICE
+	giveitem ITEM_UPGRADE
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_VERDANT_GIFT_EXPLOSION
@@ -65,18 +65,10 @@ PacifidlogTown_PokemonCenter_1F_Text_AncestorsLivedOnBoats: @ 820356F
 	.string "I understand that they lived that way\n"
 	.string "because they were searching for\l"
 	.string "something.$"
-
-PacifidlogTown_PokemonCenter_1F_Text_GiveExplosion: @ 82C7CFA
-	.string "I don't plan to stay out here in\n"
-	.string "the sticks forever.\p"
-	.string "Watch me! I'll get to the city\n"
-	.string "and become a huge hit.\p"
-	.string "Seriously, I'm going to cause\n"
-	.string "a huge Explosion of popularity!\p"
-	.string "Since you overheard that, I'll give\n"
-	.string "you this Room Service!$"
+PacifidlogTown_PokemonCenter_1F_Text_GiveExplosion:
+	.string "I'm going to cause an Explosion of\n"
+	.string "popularity! Take this Up-Grade!$"
 
 PacifidlogTown_PokemonCenter_1F_Text_HaveExplosion: @ 82C7E7A
-	.string "Room Service lowers its holder's\n"
-	.string "Speed when Trick Room begins.\p"
-	.string "Maybe slowing down isn't so bad.$"
+	.string "The Up-Grade evolves Porygon when it\n"
+	.string "levels up while holding it.$"

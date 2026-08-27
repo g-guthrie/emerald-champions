@@ -23,6 +23,11 @@ subprocess.run(
     check=True,
 )
 subprocess.run(
+    [sys.executable, str(ROOT / "scripts/emerald_champions_ordinary_availability.py")],
+    cwd=ROOT,
+    check=True,
+)
+subprocess.run(
     [sys.executable, str(ROOT / "scripts/emerald_champions_bespoke_wild_audit.py")],
     cwd=ROOT,
     check=True,
@@ -144,6 +149,16 @@ subprocess.run(
 )
 subprocess.run(
     [sys.executable, str(ROOT / "scripts/verdant_item_economy_audit.py"), "--check"],
+    cwd=ROOT,
+    check=True,
+)
+subprocess.run(
+    [sys.executable, str(ROOT / "scripts/emerald_champions_reward_rewrite.py")],
+    cwd=ROOT,
+    check=True,
+)
+subprocess.run(
+    [sys.executable, str(ROOT / "scripts/emerald_champions_availability_report.py"), "--check"],
     cwd=ROOT,
     check=True,
 )
@@ -464,26 +479,26 @@ checks = {
         and "to whatever" not in read("data/maps/FallarborTown_MoveRelearnersHouse/scripts.inc")
         and "IVs were adjusted" in read("data/maps/FallarborTown_MoveRelearnersHouse/scripts.inc")
     ),
-    "unreachable held items now have deterministic pickups": (
-        "giveitem ITEM_ADRENALINE_ORB" in read("data/maps/FortreeCity_Gym/scripts.inc")
-        and "finditem ITEM_BLUNDER_POLICY" in read("data/scripts/item_ball_scripts.inc")
-        and "giveitem ITEM_SHED_SHELL" in read("data/maps/Route114/scripts.inc")
-        and "giveitem ITEM_UTILITY_UMBRELLA" in read("data/maps/SootopolisCity_Gym_1F/scripts.inc")
+    "former held-item rewards now provide finite progression": (
+        "giveitem ITEM_ALTARIANITE" in read("data/maps/FortreeCity_Gym/scripts.inc")
+        and "finditem ITEM_FOSSILIZED_FISH" in read("data/scripts/item_ball_scripts.inc")
+        and "giveitem ITEM_DRAGON_SCALE" in read("data/maps/Route114/scripts.inc")
+        and "giveitem ITEM_MILOTICITE" in read("data/maps/SootopolisCity_Gym_1F/scripts.inc")
     ),
     "one-time held-item gifts survive a full Bag": all(
         one_time_gift_is_retryable(path, item)
         for path, item in (
-            ("data/maps/FallarborTown_Mart/scripts.inc", "ITEM_MUSCLE_BAND"),
-            ("data/maps/FortreeCity_House2/scripts.inc", "ITEM_SAFETY_GOGGLES"),
+            ("data/maps/FallarborTown_Mart/scripts.inc", "ITEM_SHINY_STONE"),
+            ("data/maps/FortreeCity_House2/scripts.inc", "ITEM_ICE_STONE"),
             ("data/maps/LavaridgeTown_House/scripts.inc", "ITEM_KINGS_ROCK"),
-            ("data/maps/LilycoveCity_DepartmentStoreRooftop/scripts.inc", "ITEM_PROTECTIVE_PADS"),
-            ("data/maps/MauvilleCity/scripts.inc", "ITEM_METRONOME"),
-            ("data/maps/MossdeepCity/scripts.inc", "ITEM_SNOWBALL"),
-            ("data/maps/PacifidlogTown_PokemonCenter_1F/scripts.inc", "ITEM_ROOM_SERVICE"),
-            ("data/maps/Route110/scripts.inc", "ITEM_QUICK_CLAW"),
-            ("data/maps/RustboroCity_Mart/scripts.inc", "ITEM_ZOOM_LENS"),
-            ("data/maps/SlateportCity_PokemonFanClub/scripts.inc", "ITEM_FOCUS_BAND"),
-            ("data/maps/VerdanturfTown_Mart/scripts.inc", "ITEM_WEAKNESS_POLICY"),
+            ("data/maps/LilycoveCity_DepartmentStoreRooftop/scripts.inc", "ITEM_METAL_ALLOY"),
+            ("data/maps/MauvilleCity/scripts.inc", "ITEM_DUBIOUS_DISC"),
+            ("data/maps/MossdeepCity/scripts.inc", "ITEM_ICE_STONE"),
+            ("data/maps/PacifidlogTown_PokemonCenter_1F/scripts.inc", "ITEM_UPGRADE"),
+            ("data/maps/Route110/scripts.inc", "ITEM_RARE_CANDY"),
+            ("data/maps/RustboroCity_Mart/scripts.inc", "ITEM_MOON_STONE"),
+            ("data/maps/SlateportCity_PokemonFanClub/scripts.inc", "ITEM_DEEP_SEA_TOOTH"),
+            ("data/maps/VerdanturfTown_Mart/scripts.inc", "ITEM_GIMMIGHOUL_COIN"),
         )
     ),
     "Mega kits are atomic retryable and migrated": (

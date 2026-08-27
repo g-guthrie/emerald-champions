@@ -6,7 +6,7 @@ DewfordTown_House2_EventScript_Man:: @ 81FE22E
 	faceplayer
 	goto_if_set FLAG_RECEIVED_SILK_SCARF, DewfordTown_House2_EventScript_ExplainSilkScarf
 	msgbox DewfordTown_House2_Text_WantYouToHaveSilkScarf, MSGBOX_DEFAULT
-	giveitem ITEM_SILK_SCARF
+	giveitem ITEM_REAPER_CLOTH
 	compare VAR_RESULT, FALSE
 	goto_if_eq DewfordTown_House2_EventScript_NoRoomForScarf
 	setflag FLAG_RECEIVED_SILK_SCARF
@@ -26,27 +26,18 @@ DewfordTown_House2_EventScript_ExplainSilkScarf:: @ 81FE267
 DewfordTown_House2_EventScript_Boy:: @ 81FE271
 	msgbox DewfordTown_House2_Text_BrawlySoCool, MSGBOX_NPC
 	end
-
-DewfordTown_House2_Text_WantYouToHaveSilkScarf: @ 81FE27A
-	.string "Gorge your eyes on this!\p"
-	.string "It's a Silk Scarf. It's right at the\n"
-	.string "cutting edge of fashion, yeah!\p"
-	.string "Oh, I can see your eyes twinkling!\n"
-	.string "You appreciate my dazzling style!\p"
-	.string "Oh, you're a delight!\n"
-	.string "Here you go. I want you to have it!$"
+DewfordTown_House2_Text_WantYouToHaveSilkScarf:
+	.string "This Reaper Cloth feels strange…\p"
+	.string "I think you should take it.$"
 
 DewfordTown_House2_Text_NoRoom: @ 81FE356
 	.string "Oh, you don't have room?\p"
 	.string "Now, listen tight, this SCARF is a must-\n"
 	.string "have! Why, I would sell all my items\l"
 	.string "in order to get it!$"
-
-DewfordTown_House2_Text_ExplainSilkScarf: @ 81FE3D1
-	.string "The Silk Scarf raises the power of\n"
-	.string "Normal-type moves.\p"
-	.string "It's a marvelous Scarf that will go\n"
-	.string "with almost all Pokémon!$"
+DewfordTown_House2_Text_ExplainSilkScarf:
+	.string "A Reaper Cloth evolves Dusclops when\n"
+	.string "it levels up while holding it.$"
 
 DewfordTown_House2_Text_BrawlySoCool: @ 81FE444
 	.string "Wow, you bothered to cross the sea\n"

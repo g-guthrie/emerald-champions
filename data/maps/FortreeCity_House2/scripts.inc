@@ -19,7 +19,7 @@ FortreeCity_House2_EventScript_HiddenPowerGiver:: @ 82177CB
 	switch VAR_RESULT
 	case 0, FortreeCity_House2_EventScript_WrongGuess
 	msgbox FortreeCity_House2_Text_YourHiddenPowerHasAwoken, MSGBOX_DEFAULT
-	giveitem ITEM_WIDE_LENS
+	giveitem ITEM_DUBIOUS_DISC
 	compare VAR_RESULT, 0
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM10
@@ -50,7 +50,7 @@ FortreeCity_House2_EventScript_SleepTalkTM::
 	compare VAR_RESULT, NO
 	goto_if_eq FortreeCity_House2_EventScript_SleepTalkDeclined
 	msgbox FortreeCity_Text_GiveTM49, MSGBOX_DEFAULT
-	giveitem ITEM_SAFETY_GOGGLES
+	giveitem ITEM_ICE_STONE
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_VERDANT_GIFT_SLEEP_TALK
@@ -72,24 +72,19 @@ FortreeCity_House2_EventScript_SleepTalkTaught::
 	msgbox FortreeCity_Text_HaveTM49, MSGBOX_DEFAULT
 	release
 	end
-
 FortreeCity_House2_Text_WantSleepTalk:
-	.string "Humph! My wife trusts Hidden Power.\p"
-	.string "I prefer a good nap, but powder and\n"
-	.string "rough weather can ruin one.\p"
-	.string "I have spare Safety Goggles.\n"
-	.string "Would you like them?$"
+	.string "I have a spare Ice Stone.\n"
+	.string "Would you like it?$"
 
 FortreeCity_House2_Text_SleepTalkDeclined:
 	.string "Fine, fine. Stay alert out there!$"
-
 FortreeCity_Text_GiveTM49:
 	.string "Ah, an appreciative child!\n"
-	.string "Please take these Safety Goggles.$"
+	.string "Please take this Ice Stone.$"
 
 FortreeCity_Text_HaveTM49:
-	.string "Safety Goggles block powder moves\n"
-	.string "and sandstorm or hail damage.$"
+	.string "An Ice Stone evolves certain Pokémon.\n"
+	.string "Use it from your Bag when ready.$"
 
 FortreeCity_House2_Text_HiddenPowersArousedByNature: @ 8217882
 	.string "People… Pokémon…\p"
@@ -114,16 +109,13 @@ FortreeCity_House2_Text_CorrectTryAgainWhichHand2: @ 82179C9
 	.string "We shall try again.\p"
 	.string "In which hand have I palmed the coin?\n"
 	.string "The right or left?$"
-
-FortreeCity_House2_Text_YourHiddenPowerHasAwoken: @ 8217A28
-	.string "Oh! Splendid!\n"
-	.string "Your insight has awoken!\p"
-	.string "Take this Wide Lens. It makes a\n"
-	.string "holder's moves more accurate.$"
+FortreeCity_House2_Text_YourHiddenPowerHasAwoken:
+	.string "Oh! Splendid! Your insight has awoken!\p"
+	.string "Take this Dubious Disc.$"
 
 FortreeCity_House2_Text_ExplainHiddenPower: @ 8217A91
-	.string "A Wide Lens improves the accuracy of\n"
-	.string "every move its holder uses.$"
+	.string "A Dubious Disc evolves Porygon2 when\n"
+	.string "it levels up while holding it.$"
 
 FortreeCity_House2_Text_YouGuessedWrong: @ 8217AC7
 	.string "No, too bad.\n"

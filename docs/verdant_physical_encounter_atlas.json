@@ -19979,7 +19979,7 @@
       "atlasOrdinal": 274
     },
     {
-      "groupId": "PHYSICAL_ROUTE119_WEATHERINSTITUTE_1F_0089",
+      "groupId": "PHYSICAL_ROUTE119_WEATHERINSTITUTE_1F_0090",
       "sequenceIndex": null,
       "sequenceStatus": null,
       "category": "single-scripted-trainer",
@@ -19999,13 +19999,13 @@
       "allyTrainerIds": [],
       "rematchIds": [],
       "invocationIds": [
-        "INV_ROUTE119_WEATHERINSTITUTE_1F_0089"
+        "INV_ROUTE119_WEATHERINSTITUTE_1F_0090"
       ],
       "sources": [
         {
           "map": "Route119_WeatherInstitute_1F",
           "file": "data/maps/Route119_WeatherInstitute_1F/scripts.inc",
-          "line": 89,
+          "line": 90,
           "label": "Route119_WeatherInstitute_1F_EventScript_Grunt1",
           "opcode": "trainerbattle_single",
           "battleType": null,
@@ -20034,14 +20034,14 @@
       ],
       "groupingEvidence": [
         {
-          "detail": "INV_ROUTE119_WEATHERINSTITUTE_1F_0089",
+          "detail": "INV_ROUTE119_WEATHERINSTITUTE_1F_0090",
           "proofType": "single-source-invocation"
         }
       ],
       "atlasOrdinal": 275
     },
     {
-      "groupId": "PHYSICAL_ROUTE119_WEATHERINSTITUTE_1F_0094",
+      "groupId": "PHYSICAL_ROUTE119_WEATHERINSTITUTE_1F_0095",
       "sequenceIndex": null,
       "sequenceStatus": null,
       "category": "single-scripted-trainer",
@@ -20061,13 +20061,13 @@
       "allyTrainerIds": [],
       "rematchIds": [],
       "invocationIds": [
-        "INV_ROUTE119_WEATHERINSTITUTE_1F_0094"
+        "INV_ROUTE119_WEATHERINSTITUTE_1F_0095"
       ],
       "sources": [
         {
           "map": "Route119_WeatherInstitute_1F",
           "file": "data/maps/Route119_WeatherInstitute_1F/scripts.inc",
-          "line": 94,
+          "line": 95,
           "label": "Route119_WeatherInstitute_1F_EventScript_Grunt4",
           "opcode": "trainerbattle_single",
           "battleType": null,
@@ -20096,7 +20096,7 @@
       ],
       "groupingEvidence": [
         {
-          "detail": "INV_ROUTE119_WEATHERINSTITUTE_1F_0094",
+          "detail": "INV_ROUTE119_WEATHERINSTITUTE_1F_0095",
           "proofType": "single-source-invocation"
         }
       ],
@@ -57415,12 +57415,12 @@
       ]
     },
     {
-      "invocationId": "INV_ROUTE119_WEATHERINSTITUTE_1F_0089",
+      "invocationId": "INV_ROUTE119_WEATHERINSTITUTE_1F_0090",
       "reachability": "proven",
       "source": {
         "map": "Route119_WeatherInstitute_1F",
         "file": "data/maps/Route119_WeatherInstitute_1F/scripts.inc",
-        "line": 89,
+        "line": 90,
         "label": "Route119_WeatherInstitute_1F_EventScript_Grunt1",
         "opcode": "trainerbattle_single",
         "battleType": null,
@@ -57452,12 +57452,12 @@
       ]
     },
     {
-      "invocationId": "INV_ROUTE119_WEATHERINSTITUTE_1F_0094",
+      "invocationId": "INV_ROUTE119_WEATHERINSTITUTE_1F_0095",
       "reachability": "proven",
       "source": {
         "map": "Route119_WeatherInstitute_1F",
         "file": "data/maps/Route119_WeatherInstitute_1F/scripts.inc",
-        "line": 94,
+        "line": 95,
         "label": "Route119_WeatherInstitute_1F_EventScript_Grunt4",
         "opcode": "trainerbattle_single",
         "battleType": null,

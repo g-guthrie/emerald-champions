@@ -289,7 +289,7 @@ Route104_EventScript_WhiteHerbFlorist:: @ 81ECFCD
 	faceplayer
 	goto_if_set FLAG_RECEIVED_WHITE_HERB, Route104_EventScript_ReceivedWhiteHerb
 	msgbox Route104_Text_DontNeedThisTakeIt, MSGBOX_DEFAULT
-	giveitem ITEM_WHITE_HERB
+	giveitem ITEM_LEAF_STONE
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_WHITE_HERB
@@ -1059,14 +1059,9 @@ Route104_Text_TMsAreOneTimeUse:
 	.string "Center can teach any legal move.\p"
 	.string "It is free and needs no Gym Badges.\n"
 	.string "So experiment with your team!$"
-
-Route104_Text_DontNeedThisTakeIt: @ 81ED96A
-	.string "This Flower Shop started selling\n"
-	.string "saplings recently.\p"
-	.string "It made me so happy, I went overboard\n"
-	.string "shopping.\p"
-	.string "I don't need this White Herb anymore.\n"
-	.string "Would you take it, please?$"
+Route104_Text_DontNeedThisTakeIt:
+	.string "I found this Leaf Stone among the\n"
+	.string "flowers. You should have it!$"
 
 Route104_Text_FlowerShopSellingSaplings: @ 81EDA0F
 	.string "This Flower Shop started selling\n"

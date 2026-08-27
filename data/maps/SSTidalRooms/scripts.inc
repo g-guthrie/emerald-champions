@@ -6,7 +6,7 @@ SSTidalRooms_EventScript_SnatchGiver:: @ 823C9F2
 	faceplayer
 	goto_if_set FLAG_RECEIVED_TM49, SSTidalRooms_EventScript_ExplainSnatch
 	msgbox SSTidalRooms_Text_NotSuspiciousTakeThis, MSGBOX_DEFAULT
-	giveitem ITEM_SAFETY_GOGGLES
+	giveitem ITEM_REAPER_CLOTH
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM49
@@ -161,13 +161,10 @@ SSTidalRooms_Text_NaomiPostBattle: @ 823D013
 	.string "charms, I must say…\p"
 	.string "But, I will admit there is an appealing\n"
 	.string "side to touring Hoenn by ferry.$"
-
-SSTidalRooms_Text_NotSuspiciousTakeThis: @ 823D098
-	.string "Uh… Hi! I'm not acting suspicious!\n"
-	.string "You can have these Safety Goggles!\p"
-	.string "I didn't snatch them from anyone.\n"
-	.string "Honestly! They're clean!$"
+SSTidalRooms_Text_NotSuspiciousTakeThis:
+	.string "Uh… Hi! I'm not acting suspicious!\p"
+	.string "You can have this Reaper Cloth!$"
 
 SSTidalRooms_Text_ExplainSnatch: @ 823D145
-	.string "Safety Goggles block powder moves\n"
-	.string "and sandstorm or hail damage.$"
+	.string "A Reaper Cloth evolves Dusclops when\n"
+	.string "it levels up while holding it.$"

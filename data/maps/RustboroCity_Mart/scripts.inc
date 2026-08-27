@@ -18,7 +18,7 @@ RustboroCity_Mart_EventScript_FalseSwipeTM::
 	faceplayer
 	goto_if_set FLAG_VERDANT_GIFT_FALSE_SWIPE, RustboroCity_Mart_EventScript_ReceivedTM98
 	msgbox RustboroCity_Mart_Text_ExcuseMeTrainer, MSGBOX_DEFAULT
-	giveitem ITEM_ZOOM_LENS
+	giveitem ITEM_MOON_STONE
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_VERDANT_GIFT_FALSE_SWIPE
@@ -30,19 +30,14 @@ RustboroCity_Mart_EventScript_ReceivedTM98::
 	msgbox RustboroCity_Mart_Text_HaveTM98, MSGBOX_DEFAULT
 	release
 	end
-
 RustboroCity_Mart_Text_ExcuseMeTrainer:
 	.string "Excuse me, Trainer!\p"
-	.string "Accuracy can decide a close battle.\p"
-	.string "A Zoom Lens helps a slower holder\n"
-	.string "land moves that might miss.\p"
-	.string "I'm offering one free today.\n"
+	.string "I'm offering one free Moon Stone today.\n"
 	.string "Put it to good use!$"
 
 RustboroCity_Mart_Text_HaveTM98:
-	.string "A Zoom Lens boosts accuracy when its\n"
-	.string "holder moves after the target.\p"
-	.string "Slow Pokémon can use it well!$"
+	.string "A Moon Stone evolves certain Pokémon.\n"
+	.string "Use it from your Bag when ready.$"
 
 RustboroCity_Mart_Text_BuyingHealsInCaseOfShroomish: @ 8214F8F
 	.string "I'm buying some Parlyz Heals and\n"

@@ -259,7 +259,7 @@ DewfordTown_Hall_EventScript_SludgeBombMan:: @ 81FD7DA
 	call Common_EventScript_BufferTrendyPhrase
 	goto_if_set FLAG_RECEIVED_TM36, DewfordTown_Hall_EventScript_ReceivedSludgeBomb
 	msgbox DewfordTown_Hall_Text_GiveYouSludgeBomb, MSGBOX_DEFAULT
-	giveitem ITEM_BLACK_SLUDGE
+	giveitem ITEM_DEEP_SEA_SCALE
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM36
@@ -518,12 +518,10 @@ DewfordTown_Hall_Text_WellBeTrendDuo: @ 81FE0F2
 	.string "Hahahah!$"
 
 DewfordTown_Hall_Text_GiveYouSludgeBomb: @ 81FE142
-	.string "Black Sludge is at the peak of\n"
-	.string "popularity for Poison Pokémon.\p"
-	.string "It restores a Poison-type holder but\n"
-	.string "hurts most other Pokémon.\p"
-	.string "Take this one and try it yourself!$"
-
-DewfordTown_Hall_Text_LoveSludgeBombButTrendInToo: @ 81FE1ED
-	.string "Black Sludge rewards Poison Pokémon,\n"
-	.string "but harms every other type.$"
+	.string "The Deep Sea Scale is at the peak of\n"
+	.string "popularity right now!\p"
+	.string "Let Clamperl hold it while leveling\n"
+	.string "to evolve into Gorebyss.$"
+DewfordTown_Hall_Text_LoveSludgeBombButTrendInToo:
+	.string "The Deep Sea Scale evolves Clamperl\n"
+	.string "into Gorebyss. That's the new trend!$"

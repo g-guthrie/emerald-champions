@@ -58,12 +58,12 @@ LAND_UPGRADES = {
     "MAP_GRANITE_CAVE_STEVENS_ROOM": {8: "SPECIES_DREEPY", 9: "SPECIES_LARVESTA"},
     "MAP_ROUTE110": {
         # Timmy's source-closed Route 110 battle explicitly uses four local
-        # catches. Pair both tail species across the 4% and 1% slots so neither
-        # becomes a separate low-rate grind. Rotom remains New Mauville-only.
+        # catches. The final tail slots now preserve two otherwise-missing
+        # ordinary families; Rotom remains New Mauville-only.
         8: "SPECIES_HELIOLISK",
         9: "SPECIES_TOXEL",
-        10: "SPECIES_HELIOLISK",
-        11: "SPECIES_TOXEL",
+        10: "SPECIES_MORPEKO",
+        11: "SPECIES_STUNKY",
     },
     "MAP_ROUTE112": {8: "SPECIES_HAWLUCHA", 9: "SPECIES_KUBFU"},
     "MAP_FIERY_PATH": {8: "SPECIES_LARVESTA", 9: "SPECIES_CHARMANDER"},

@@ -48,7 +48,7 @@ FortreeCity_Gym_EventScript_WinonaDefeated:: @ 82165FD
 	end
 
 FortreeCity_Gym_EventScript_GiveRoost2:: @ 8216646
-	giveitem ITEM_ADRENALINE_ORB
+	giveitem ITEM_ALTARIANITE
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	msgbox FortreeCity_Gym_Text_ExplainRoost, MSGBOX_DEFAULT
@@ -57,7 +57,7 @@ FortreeCity_Gym_EventScript_GiveRoost2:: @ 8216646
 	end
 
 FortreeCity_Gym_EventScript_GiveRoost:: @ 821666A
-	giveitem ITEM_ADRENALINE_ORB
+	giveitem ITEM_ALTARIANITE
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_BagIsFull
 	msgbox FortreeCity_Gym_Text_ExplainRoost, MSGBOX_DEFAULT
@@ -315,11 +315,9 @@ FortreeCity_Gym_Text_ExplainFeatherBadgeTakeThis: @ 8216F17
 	.string "trades, will obey your every command.\p"
 	.string "And this…\n"
 	.string "This is a gift from me.$"
-
-FortreeCity_Gym_Text_ExplainRoost: @ 8216FEC
-	.string "An Adrenaline Orb raises Speed\n"
-	.string "Speed when Intimidate lowers Attack.\p"
-	.string "Turn pressure into altitude!$"
+FortreeCity_Gym_Text_ExplainRoost:
+	.string "Altarianite lets Altaria Mega Evolve.\n"
+	.string "Let it hold the stone in battle.$"
 
 FortreeCity_Gym_Text_RegisteredWinona: @ 8217044
 	.string "Registered Gym Leader Winona\n"

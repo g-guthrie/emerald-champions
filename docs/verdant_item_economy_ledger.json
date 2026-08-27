@@ -2,20 +2,21 @@
   "meta": {
     "version": 3,
     "source": "current ROM source plus docs/verdant_battle_guide.json",
-    "competitiveItemPolicy": "Ordinary competitive held items are free and unlimited at every Pokemon Center. Legacy item gates remain inventoried only for the pending reward redesign; protected form and transformation items remain progression.",
+    "competitiveItemPolicy": "Ordinary non-Berry competitive held items are free and unlimited at every Pokemon Center. Berries, evolution catalysts, and protected form or transformation items remain progression. Fixed rewards never duplicate the free stock.",
     "itemCount": 190,
     "unlockTableCount": 55,
     "knownDuplicateFixedBossRewardCount": 0,
     "retryContractCount": 14,
     "dialogueContractCount": 13,
-    "saveMigrationContractCount": 4
+    "saveMigrationContractCount": 4,
+    "redundantFixedRewardCount": 0
   },
   "bossRewards": [
     {
       "boss": "Roxanne",
       "guideOrder": 30,
       "badgesBeforeBattle": 0,
-      "item": "ITEM_EXPERT_BELT",
+      "item": "ITEM_PROTECTOR",
       "source": {
         "path": "data/maps/RustboroCity_Gym/scripts.inc",
         "label": "RustboroCity_Gym_EventScript_GiveRockTomb"
@@ -27,7 +28,7 @@
       "boss": "Brawly",
       "guideOrder": 60,
       "badgesBeforeBattle": 1,
-      "item": "ITEM_FLAME_ORB",
+      "item": "ITEM_RAZOR_CLAW",
       "source": {
         "path": "data/maps/DewfordTown_Gym/scripts.inc",
         "label": "DewfordTown_Gym_EventScript_GiveBulkUp"
@@ -39,7 +40,7 @@
       "boss": "Wattson",
       "guideOrder": 118,
       "badgesBeforeBattle": 2,
-      "item": "ITEM_WISE_GLASSES",
+      "item": "ITEM_ELECTIRIZER",
       "source": {
         "path": "data/maps/MauvilleCity_Gym/scripts.inc",
         "label": "MauvilleCity_Gym_EventScript_GiveVoltSwitch"
@@ -51,7 +52,7 @@
       "boss": "Flannery",
       "guideOrder": 206,
       "badgesBeforeBattle": 3,
-      "item": "ITEM_EJECT_PACK",
+      "item": "ITEM_MAGMARIZER",
       "source": {
         "path": "data/maps/LavaridgeTown_Gym_1F/scripts.inc",
         "label": "LavaridgeTown_Gym_1F_EventScript_GiveOverheat"
@@ -63,7 +64,7 @@
       "boss": "Norman",
       "guideOrder": 224,
       "badgesBeforeBattle": 4,
-      "item": "ITEM_TOXIC_ORB",
+      "item": "ITEM_LOPUNNITE",
       "source": {
         "path": "data/maps/PetalburgCity_Gym/scripts.inc",
         "label": "PetalburgCity_Gym_EventScript_GiveFacade"
@@ -75,7 +76,7 @@
       "boss": "Winona",
       "guideOrder": 281,
       "badgesBeforeBattle": 5,
-      "item": "ITEM_ADRENALINE_ORB",
+      "item": "ITEM_ALTARIANITE",
       "source": {
         "path": "data/maps/FortreeCity_Gym/scripts.inc",
         "label": "FortreeCity_Gym_EventScript_GiveRoost"
@@ -87,7 +88,7 @@
       "boss": "Tate & Liza",
       "guideOrder": 423,
       "badgesBeforeBattle": 6,
-      "item": "ITEM_LIGHT_CLAY",
+      "item": "ITEM_METAGROSSITE",
       "source": {
         "path": "data/maps/MossdeepCity_Gym/scripts.inc",
         "label": "MossdeepCity_Gym_EventScript_GiveCalmMind"
@@ -99,7 +100,7 @@
       "boss": "Juan",
       "guideOrder": 475,
       "badgesBeforeBattle": 7,
-      "item": "ITEM_UTILITY_UMBRELLA",
+      "item": "ITEM_MILOTICITE",
       "source": {
         "path": "data/maps/SootopolisCity_Gym_1F/scripts.inc",
         "label": "SootopolisCity_Gym_1F_EventScript_GiveScald"
@@ -111,51 +112,51 @@
   "testedBossRewardDirections": [
     {
       "boss": "Brawly",
-      "item": "ITEM_FLAME_ORB",
-      "actionNeeded": "keep",
-      "inDiscoveryShop": true,
+      "item": "ITEM_RAZOR_CLAW",
+      "actionNeeded": "implemented",
+      "inDiscoveryShop": false,
       "earlierFixedSources": [],
       "readyWithoutRelocation": true
     },
     {
       "boss": "Norman",
-      "item": "ITEM_TOXIC_ORB",
-      "actionNeeded": "keep",
-      "inDiscoveryShop": true,
+      "item": "ITEM_LOPUNNITE",
+      "actionNeeded": "implemented",
+      "inDiscoveryShop": false,
       "earlierFixedSources": [],
-      "readyWithoutRelocation": true
+      "readyWithoutRelocation": false
     },
     {
       "boss": "Tate & Liza",
-      "item": "ITEM_LIGHT_CLAY",
-      "actionNeeded": "keep",
-      "inDiscoveryShop": true,
+      "item": "ITEM_METAGROSSITE",
+      "actionNeeded": "implemented",
+      "inDiscoveryShop": false,
       "earlierFixedSources": [],
-      "readyWithoutRelocation": true
+      "readyWithoutRelocation": false
     },
     {
       "boss": "Flannery",
-      "item": "ITEM_EJECT_PACK",
-      "actionNeeded": "keep",
-      "inDiscoveryShop": true,
+      "item": "ITEM_MAGMARIZER",
+      "actionNeeded": "implemented",
+      "inDiscoveryShop": false,
       "earlierFixedSources": [],
-      "readyWithoutRelocation": true
+      "readyWithoutRelocation": false
     },
     {
       "boss": "Winona",
-      "item": "ITEM_ADRENALINE_ORB",
-      "actionNeeded": "keep",
-      "inDiscoveryShop": true,
+      "item": "ITEM_ALTARIANITE",
+      "actionNeeded": "implemented",
+      "inDiscoveryShop": false,
       "earlierFixedSources": [],
-      "readyWithoutRelocation": true
+      "readyWithoutRelocation": false
     },
     {
       "boss": "Juan",
-      "item": "ITEM_UTILITY_UMBRELLA",
-      "actionNeeded": "keep",
-      "inDiscoveryShop": true,
+      "item": "ITEM_MILOTICITE",
+      "actionNeeded": "implemented",
+      "inDiscoveryShop": false,
       "earlierFixedSources": [],
-      "readyWithoutRelocation": true
+      "readyWithoutRelocation": false
     }
   ],
   "rareCandyExploration": {
@@ -628,44 +629,8 @@
       "pocket": "POCKET_BATTLE",
       "holdEffect": "HOLD_EFFECT_ADRENALINE_ORB",
       "minimumBadges": null,
-      "firstFixedSource": {
-        "kind": "fixed_gift",
-        "path": "data/maps/FortreeCity_Gym/scripts.inc",
-        "line": 51,
-        "label": "FortreeCity_Gym_EventScript_GiveRoost2",
-        "map": "FortreeCity_Gym",
-        "fixed": true,
-        "order": 281,
-        "badge": 5,
-        "cap": 55,
-        "note": ""
-      },
-      "sources": [
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/FortreeCity_Gym/scripts.inc",
-          "line": 51,
-          "label": "FortreeCity_Gym_EventScript_GiveRoost2",
-          "map": "FortreeCity_Gym",
-          "fixed": true,
-          "order": 281,
-          "badge": 5,
-          "cap": 55,
-          "note": ""
-        },
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/FortreeCity_Gym/scripts.inc",
-          "line": 60,
-          "label": "FortreeCity_Gym_EventScript_GiveRoost",
-          "map": "FortreeCity_Gym",
-          "fixed": true,
-          "order": 281,
-          "badge": 5,
-          "cap": 55,
-          "note": ""
-        }
-      ]
+      "firstFixedSource": null,
+      "sources": []
     },
     {
       "item": "ITEM_AERODACTYLITE",
@@ -743,30 +708,18 @@
       "holdEffect": "HOLD_EFFECT_AIR_BALLOON",
       "minimumBadges": 4,
       "firstFixedSource": {
-        "kind": "fixed_gift",
-        "path": "data/maps/Route114_FossilManiacsHouse/scripts.inc",
-        "line": 14,
-        "label": "Route114_FossilManiacsHouse_EventScript_FossilManiacsBrother",
-        "map": "Route114_FossilManiacsHouse",
+        "kind": "badge_shop",
+        "path": "src/item.c",
+        "line": null,
+        "label": "sBattleItemUnlocks",
+        "map": null,
         "fixed": true,
-        "order": 168,
-        "badge": 3,
-        "cap": 40,
-        "note": ""
+        "order": 207,
+        "badge": 4,
+        "cap": null,
+        "note": "available with 4 badge(s)"
       },
       "sources": [
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/Route114_FossilManiacsHouse/scripts.inc",
-          "line": 14,
-          "label": "Route114_FossilManiacsHouse_EventScript_FossilManiacsBrother",
-          "map": "Route114_FossilManiacsHouse",
-          "fixed": true,
-          "order": 168,
-          "badge": 3,
-          "cap": 40,
-          "note": ""
-        },
         {
           "kind": "badge_shop",
           "path": "src/item.c",
@@ -824,27 +777,39 @@
       "minimumBadges": "not_in_discovery_shop",
       "firstFixedSource": {
         "kind": "fixed_gift",
-        "path": "data/maps/LilycoveCity/scripts.inc",
-        "line": 449,
-        "label": "LilycoveCity_EventScript_YesAltaria",
-        "map": "LilycoveCity",
+        "path": "data/maps/FortreeCity_Gym/scripts.inc",
+        "line": 51,
+        "label": "FortreeCity_Gym_EventScript_GiveRoost2",
+        "map": "FortreeCity_Gym",
         "fixed": true,
-        "order": 378,
-        "badge": 6,
-        "cap": 60,
+        "order": 281,
+        "badge": 5,
+        "cap": 55,
         "note": ""
       },
       "sources": [
         {
           "kind": "fixed_gift",
-          "path": "data/maps/LilycoveCity/scripts.inc",
-          "line": 449,
-          "label": "LilycoveCity_EventScript_YesAltaria",
-          "map": "LilycoveCity",
+          "path": "data/maps/FortreeCity_Gym/scripts.inc",
+          "line": 51,
+          "label": "FortreeCity_Gym_EventScript_GiveRoost2",
+          "map": "FortreeCity_Gym",
           "fixed": true,
-          "order": 378,
-          "badge": 6,
-          "cap": 60,
+          "order": 281,
+          "badge": 5,
+          "cap": 55,
+          "note": ""
+        },
+        {
+          "kind": "fixed_gift",
+          "path": "data/maps/FortreeCity_Gym/scripts.inc",
+          "line": 60,
+          "label": "FortreeCity_Gym_EventScript_GiveRoost",
+          "map": "FortreeCity_Gym",
+          "fixed": true,
+          "order": 281,
+          "badge": 5,
+          "cap": 55,
           "note": ""
         }
       ]
@@ -1225,30 +1190,18 @@
       "holdEffect": "HOLD_EFFECT_DARK_POWER",
       "minimumBadges": "not_in_discovery_shop",
       "firstFixedSource": {
-        "kind": "hidden_item",
-        "path": "data/maps/Route116/map.json",
-        "line": null,
-        "label": null,
-        "map": "Route116",
+        "kind": "specialty_shop",
+        "path": "data/maps/SlateportCity/scripts.inc",
+        "line": 619,
+        "label": "SlateportCity_Pokemart_PowerTMs",
+        "map": "SlateportCity",
         "fixed": true,
-        "order": 31,
-        "badge": 1,
-        "cap": 20,
-        "note": "FLAG_HIDDEN_ITEM_ROUTE_116_BLACK_GLASSES"
+        "order": 91,
+        "badge": 2,
+        "cap": 30,
+        "note": ""
       },
       "sources": [
-        {
-          "kind": "hidden_item",
-          "path": "data/maps/Route116/map.json",
-          "line": null,
-          "label": null,
-          "map": "Route116",
-          "fixed": true,
-          "order": 31,
-          "badge": 1,
-          "cap": 20,
-          "note": "FLAG_HIDDEN_ITEM_ROUTE_116_BLACK_GLASSES"
-        },
         {
           "kind": "specialty_shop",
           "path": "data/maps/SlateportCity/scripts.inc",
@@ -1272,6 +1225,18 @@
           "badge": 6,
           "cap": 60,
           "note": ""
+        },
+        {
+          "kind": "random_wild_hold",
+          "path": "src/data/pokemon/base_stats.h",
+          "line": null,
+          "label": "SPECIES_SANDILE",
+          "map": "ROUTE111",
+          "fixed": false,
+          "order": null,
+          "badge": null,
+          "cap": null,
+          "note": "item2; land_mons"
         }
       ]
     },
@@ -1282,55 +1247,8 @@
       "pocket": "POCKET_BATTLE",
       "holdEffect": "HOLD_EFFECT_BLACK_SLUDGE",
       "minimumBadges": null,
-      "firstFixedSource": {
-        "kind": "fixed_gift",
-        "path": "data/maps/DewfordTown_Hall/scripts.inc",
-        "line": 262,
-        "label": "DewfordTown_Hall_EventScript_SludgeBombMan",
-        "map": "DewfordTown_Hall",
-        "fixed": true,
-        "order": 54,
-        "badge": 1,
-        "cap": 20,
-        "note": ""
-      },
+      "firstFixedSource": null,
       "sources": [
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/DewfordTown_Hall/scripts.inc",
-          "line": 262,
-          "label": "DewfordTown_Hall_EventScript_SludgeBombMan",
-          "map": "DewfordTown_Hall",
-          "fixed": true,
-          "order": 54,
-          "badge": 1,
-          "cap": 20,
-          "note": ""
-        },
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/LavaridgeTown_PokemonCenter_1F/scripts.inc",
-          "line": 124,
-          "label": "LavaridgeTown_PokemonCenter_1F_EventScript_LucyReward",
-          "map": "LavaridgeTown_PokemonCenter_1F",
-          "fixed": true,
-          "order": 205,
-          "badge": 3,
-          "cap": 40,
-          "note": ""
-        },
-        {
-          "kind": "hidden_item",
-          "path": "data/maps/Route123/map.json",
-          "line": null,
-          "label": null,
-          "map": "Route123",
-          "fixed": true,
-          "order": 319,
-          "badge": 5,
-          "cap": 55,
-          "note": "FLAG_HIDDEN_ITEM_ROUTE_123_BLACK_SLUDGE"
-        },
         {
           "kind": "random_wild_hold",
           "path": "src/data/pokemon/base_stats.h",
@@ -1612,32 +1530,8 @@
       "pocket": "POCKET_BATTLE",
       "holdEffect": "HOLD_EFFECT_BLUNDER_POLICY",
       "minimumBadges": null,
-      "firstFixedSource": {
-        "kind": "visible_pickup",
-        "path": "data/scripts/item_ball_scripts.inc",
-        "line": 589,
-        "label": "Route110_TrickHousePuzzle4_EventScript_ItemAssaultVest",
-        "map": "Route110_TrickHousePuzzle4",
-        "fixed": true,
-        "order": 70,
-        "badge": 5,
-        "cap": 55,
-        "note": "data/maps/Route110_TrickHousePuzzle4/map.json; FLAG_ITEM_TRICK_HOUSE_PUZZLE_4_ASSAULT_VEST"
-      },
-      "sources": [
-        {
-          "kind": "visible_pickup",
-          "path": "data/scripts/item_ball_scripts.inc",
-          "line": 589,
-          "label": "Route110_TrickHousePuzzle4_EventScript_ItemAssaultVest",
-          "map": "Route110_TrickHousePuzzle4",
-          "fixed": true,
-          "order": 70,
-          "badge": 5,
-          "cap": 55,
-          "note": "data/maps/Route110_TrickHousePuzzle4/map.json; FLAG_ITEM_TRICK_HOUSE_PUZZLE_4_ASSAULT_VEST"
-        }
-      ]
+      "firstFixedSource": null,
+      "sources": []
     },
     {
       "item": "ITEM_BRIGHT_POWDER",
@@ -1646,43 +1540,8 @@
       "pocket": "POCKET_BATTLE",
       "holdEffect": "HOLD_EFFECT_EVASION_UP",
       "minimumBadges": null,
-      "firstFixedSource": {
-        "kind": "fixed_gift",
-        "path": "data/maps/VerdanturfTown_BattleTentLobby/scripts.inc",
-        "line": 234,
-        "label": "VerdanturfTown_BattleTentLobby_EventScript_AttractGiver",
-        "map": "VerdanturfTown_BattleTentLobby",
-        "fixed": true,
-        "order": 215,
-        "badge": 3,
-        "cap": 40,
-        "note": ""
-      },
+      "firstFixedSource": null,
       "sources": [
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/VerdanturfTown_BattleTentLobby/scripts.inc",
-          "line": 234,
-          "label": "VerdanturfTown_BattleTentLobby_EventScript_AttractGiver",
-          "map": "VerdanturfTown_BattleTentLobby",
-          "fixed": true,
-          "order": 215,
-          "badge": 3,
-          "cap": 40,
-          "note": ""
-        },
-        {
-          "kind": "hidden_item",
-          "path": "data/maps/Route117/map.json",
-          "line": null,
-          "label": null,
-          "map": "Route117",
-          "fixed": true,
-          "order": 215,
-          "badge": 3,
-          "cap": 40,
-          "note": "FLAG_HIDDEN_ITEM_ROUTE_117_BRIGHT_POWDER"
-        },
         {
           "kind": "random_wild_hold",
           "path": "src/data/pokemon/base_stats.h",
@@ -2006,31 +1865,8 @@
       "pocket": "POCKET_BATTLE",
       "holdEffect": "HOLD_EFFECT_FIRE_POWER",
       "minimumBadges": "not_in_discovery_shop",
-      "firstFixedSource": {
-        "kind": "fixed_gift",
-        "path": "data/maps/LavaridgeTown_HerbShop/scripts.inc",
-        "line": 33,
-        "label": "LavaridgeTown_HerbShop_EventScript_OldMan",
-        "map": "LavaridgeTown_HerbShop",
-        "fixed": true,
-        "order": 205,
-        "badge": 3,
-        "cap": 40,
-        "note": ""
-      },
+      "firstFixedSource": null,
       "sources": [
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/LavaridgeTown_HerbShop/scripts.inc",
-          "line": 33,
-          "label": "LavaridgeTown_HerbShop_EventScript_OldMan",
-          "map": "LavaridgeTown_HerbShop",
-          "fixed": true,
-          "order": 205,
-          "badge": 3,
-          "cap": 40,
-          "note": ""
-        },
         {
           "kind": "random_wild_hold",
           "path": "src/data/pokemon/base_stats.h",
@@ -2643,30 +2479,18 @@
       "holdEffect": "HOLD_EFFECT_DAMP_ROCK",
       "minimumBadges": "not_in_discovery_shop",
       "firstFixedSource": {
-        "kind": "fixed_bundle",
-        "path": "src/item.c",
-        "line": null,
-        "label": null,
-        "map": "Route119_WeatherInstitute_1F",
+        "kind": "specialty_shop",
+        "path": "data/maps/LilycoveCity_DepartmentStore_4F/scripts.inc",
+        "line": 43,
+        "label": "LilycoveCity_DepartmentStore_4F_Pokemart_DefenseTMs",
+        "map": "LilycoveCity_DepartmentStore_4F",
         "fixed": true,
-        "order": 279,
-        "badge": 5,
-        "cap": 55,
-        "note": "atomic weather-rock bundle"
+        "order": 378,
+        "badge": 6,
+        "cap": 60,
+        "note": ""
       },
       "sources": [
-        {
-          "kind": "fixed_bundle",
-          "path": "src/item.c",
-          "line": null,
-          "label": null,
-          "map": "Route119_WeatherInstitute_1F",
-          "fixed": true,
-          "order": 279,
-          "badge": 5,
-          "cap": 55,
-          "note": "atomic weather-rock bundle"
-        },
         {
           "kind": "specialty_shop",
           "path": "data/maps/LilycoveCity_DepartmentStore_4F/scripts.inc",
@@ -3272,44 +3096,8 @@
       "pocket": "POCKET_BATTLE",
       "holdEffect": "HOLD_EFFECT_EJECT_PACK",
       "minimumBadges": null,
-      "firstFixedSource": {
-        "kind": "fixed_gift",
-        "path": "data/maps/LavaridgeTown_Gym_1F/scripts.inc",
-        "line": 96,
-        "label": "LavaridgeTown_Gym_1F_EventScript_GiveOverheat2",
-        "map": "LavaridgeTown_Gym_1F",
-        "fixed": true,
-        "order": 206,
-        "badge": 3,
-        "cap": 40,
-        "note": ""
-      },
-      "sources": [
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/LavaridgeTown_Gym_1F/scripts.inc",
-          "line": 96,
-          "label": "LavaridgeTown_Gym_1F_EventScript_GiveOverheat2",
-          "map": "LavaridgeTown_Gym_1F",
-          "fixed": true,
-          "order": 206,
-          "badge": 3,
-          "cap": 40,
-          "note": ""
-        },
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/LavaridgeTown_Gym_1F/scripts.inc",
-          "line": 105,
-          "label": "LavaridgeTown_Gym_1F_EventScript_GiveOverheat",
-          "map": "LavaridgeTown_Gym_1F",
-          "fixed": true,
-          "order": 206,
-          "badge": 3,
-          "cap": 40,
-          "note": ""
-        }
-      ]
+      "firstFixedSource": null,
+      "sources": []
     },
     {
       "item": "ITEM_ELECTRIC_GEM",
@@ -3353,16 +3141,16 @@
       "holdEffect": "HOLD_EFFECT_SEEDS",
       "minimumBadges": 5,
       "firstFixedSource": {
-        "kind": "fixed_gift",
-        "path": "data/maps/Route110/scripts.inc",
-        "line": 342,
-        "label": "Route110_EventScript_ChallengeReactionBest",
-        "map": "Route110",
+        "kind": "badge_shop",
+        "path": "src/item.c",
+        "line": null,
+        "label": "sBattleItemUnlocks",
+        "map": null,
         "fixed": true,
-        "order": 92,
-        "badge": 2,
-        "cap": 30,
-        "note": ""
+        "order": 225,
+        "badge": 5,
+        "cap": null,
+        "note": "available with 5 badge(s)"
       },
       "sources": [
         {
@@ -3376,18 +3164,6 @@
           "badge": 1,
           "cap": 20,
           "note": "available after the Stone Badge"
-        },
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/Route110/scripts.inc",
-          "line": 342,
-          "label": "Route110_EventScript_ChallengeReactionBest",
-          "map": "Route110",
-          "fixed": true,
-          "order": 92,
-          "badge": 2,
-          "cap": 30,
-          "note": ""
         },
         {
           "kind": "badge_shop",
@@ -3584,56 +3360,8 @@
       "pocket": "POCKET_BATTLE",
       "holdEffect": "HOLD_EFFECT_EXPERT_BELT",
       "minimumBadges": null,
-      "firstFixedSource": {
-        "kind": "fixed_gift",
-        "path": "data/maps/RustboroCity_Gym/scripts.inc",
-        "line": 31,
-        "label": "RustboroCity_Gym_EventScript_GiveRockTomb",
-        "map": "RustboroCity_Gym",
-        "fixed": true,
-        "order": 30,
-        "badge": 0,
-        "cap": 14,
-        "note": ""
-      },
-      "sources": [
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/RustboroCity_Gym/scripts.inc",
-          "line": 31,
-          "label": "RustboroCity_Gym_EventScript_GiveRockTomb",
-          "map": "RustboroCity_Gym",
-          "fixed": true,
-          "order": 30,
-          "badge": 0,
-          "cap": 14,
-          "note": ""
-        },
-        {
-          "kind": "visible_pickup",
-          "path": "data/scripts/item_ball_scripts.inc",
-          "line": 585,
-          "label": "Route110_TrickHousePuzzle3_EventScript_ItemExpertBelt",
-          "map": "Route110_TrickHousePuzzle3",
-          "fixed": true,
-          "order": 67,
-          "badge": 4,
-          "cap": 45,
-          "note": "data/maps/Route110_TrickHousePuzzle3/map.json; FLAG_ITEM_TRICK_HOUSE_PUZZLE_3_EXPERT_BELT"
-        },
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/FallarborTown_CozmosHouse/scripts.inc",
-          "line": 23,
-          "label": "FallarborTown_CozmosHouse_EventScript_PlayerHasMeteorite",
-          "map": "FallarborTown_CozmosHouse",
-          "fixed": true,
-          "order": 160,
-          "badge": 3,
-          "cap": 40,
-          "note": ""
-        }
-      ]
+      "firstFixedSource": null,
+      "sources": []
     },
     {
       "item": "ITEM_FAIRY_GEM",
@@ -3790,56 +3518,8 @@
       "pocket": "POCKET_BATTLE",
       "holdEffect": "HOLD_EFFECT_FLAME_ORB",
       "minimumBadges": null,
-      "firstFixedSource": {
-        "kind": "fixed_gift",
-        "path": "data/maps/DewfordTown_Gym/scripts.inc",
-        "line": 190,
-        "label": "DewfordTown_Gym_EventScript_GiveBulkUp",
-        "map": "DewfordTown_Gym",
-        "fixed": true,
-        "order": 60,
-        "badge": 1,
-        "cap": 20,
-        "note": ""
-      },
-      "sources": [
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/DewfordTown_Gym/scripts.inc",
-          "line": 190,
-          "label": "DewfordTown_Gym_EventScript_GiveBulkUp",
-          "map": "DewfordTown_Gym",
-          "fixed": true,
-          "order": 60,
-          "badge": 1,
-          "cap": 20,
-          "note": ""
-        },
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/DewfordTown_Gym/scripts.inc",
-          "line": 198,
-          "label": "DewfordTown_Gym_EventScript_GiveBulkUp2",
-          "map": "DewfordTown_Gym",
-          "fixed": true,
-          "order": 60,
-          "badge": 1,
-          "cap": 20,
-          "note": ""
-        },
-        {
-          "kind": "visible_pickup",
-          "path": "data/scripts/item_ball_scripts.inc",
-          "line": 729,
-          "label": "Ashen_Woods_ItemFlame_Orb",
-          "map": "AshenWoods",
-          "fixed": true,
-          "order": 232,
-          "badge": 4,
-          "cap": 45,
-          "note": "data/maps/AshenWoods/map.json; FLAG_ASHEN_WOODS_FLAME_ORB"
-        }
-      ]
+      "firstFixedSource": null,
+      "sources": []
     },
     {
       "item": "ITEM_FLOAT_STONE",
@@ -3984,43 +3664,8 @@
       "pocket": "POCKET_BATTLE",
       "holdEffect": "HOLD_EFFECT_FOCUS_BAND",
       "minimumBadges": null,
-      "firstFixedSource": {
-        "kind": "fixed_gift",
-        "path": "data/maps/SlateportCity_PokemonFanClub/scripts.inc",
-        "line": 274,
-        "label": "SlateportCity_PokemonFanClub_EventScript_EndureTM",
-        "map": "SlateportCity_PokemonFanClub",
-        "fixed": true,
-        "order": 89,
-        "badge": 2,
-        "cap": 30,
-        "note": ""
-      },
+      "firstFixedSource": null,
       "sources": [
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/SlateportCity_PokemonFanClub/scripts.inc",
-          "line": 274,
-          "label": "SlateportCity_PokemonFanClub_EventScript_EndureTM",
-          "map": "SlateportCity_PokemonFanClub",
-          "fixed": true,
-          "order": 89,
-          "badge": 2,
-          "cap": 30,
-          "note": ""
-        },
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/ShoalCave_LowTideLowerRoom/scripts.inc",
-          "line": 39,
-          "label": "ShoalCave_LowTideLowerRoom_EventScript_BlackBelt",
-          "map": "ShoalCave_LowTideLowerRoom",
-          "fixed": true,
-          "order": 390,
-          "badge": 6,
-          "cap": 60,
-          "note": ""
-        },
         {
           "kind": "random_wild_hold",
           "path": "src/data/pokemon/base_stats.h",
@@ -4350,18 +3995,6 @@
           "badge": 5,
           "cap": null,
           "note": "available with 5 badge(s)"
-        },
-        {
-          "kind": "random_wild_hold",
-          "path": "src/data/pokemon/base_stats.h",
-          "line": null,
-          "label": "SPECIES_BOUNSWEET",
-          "map": "PETALBURG_WOODS_2",
-          "fixed": false,
-          "order": null,
-          "badge": null,
-          "cap": null,
-          "note": "item2; land_mons"
         },
         {
           "kind": "random_wild_hold",
@@ -6310,6 +5943,18 @@
           "kind": "random_wild_hold",
           "path": "src/data/pokemon/base_stats.h",
           "line": null,
+          "label": "SPECIES_CUFANT",
+          "map": "SAFARI_ZONE_NORTH",
+          "fixed": false,
+          "order": null,
+          "badge": null,
+          "cap": null,
+          "note": "item2; land_mons"
+        },
+        {
+          "kind": "random_wild_hold",
+          "path": "src/data/pokemon/base_stats.h",
+          "line": null,
           "label": "SPECIES_SLOWPOKE",
           "map": "SHOAL_CAVE_LOW_TIDE_INNER_ROOM",
           "fixed": false,
@@ -6525,6 +6170,18 @@
           "badge": null,
           "cap": null,
           "note": "item2; land_mons"
+        },
+        {
+          "kind": "random_wild_hold",
+          "path": "src/data/pokemon/base_stats.h",
+          "line": null,
+          "label": "SPECIES_FARFETCHD_GALARIAN",
+          "map": "ROUTE117",
+          "fixed": false,
+          "order": null,
+          "badge": null,
+          "cap": null,
+          "note": "item1; land_mons"
         }
       ]
     },
@@ -6721,43 +6378,8 @@
       "pocket": "POCKET_BATTLE",
       "holdEffect": "HOLD_EFFECT_LIGHT_CLAY",
       "minimumBadges": null,
-      "firstFixedSource": {
-        "kind": "fixed_gift",
-        "path": "data/maps/MossdeepCity_Gym/scripts.inc",
-        "line": 111,
-        "label": "MossdeepCity_Gym_EventScript_GiveCalmMind2",
-        "map": "MossdeepCity_Gym",
-        "fixed": true,
-        "order": 423,
-        "badge": 6,
-        "cap": 60,
-        "note": ""
-      },
+      "firstFixedSource": null,
       "sources": [
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/MossdeepCity_Gym/scripts.inc",
-          "line": 111,
-          "label": "MossdeepCity_Gym_EventScript_GiveCalmMind2",
-          "map": "MossdeepCity_Gym",
-          "fixed": true,
-          "order": 423,
-          "badge": 6,
-          "cap": 60,
-          "note": ""
-        },
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/MossdeepCity_Gym/scripts.inc",
-          "line": 120,
-          "label": "MossdeepCity_Gym_EventScript_GiveCalmMind",
-          "map": "MossdeepCity_Gym",
-          "fixed": true,
-          "order": 423,
-          "badge": 6,
-          "cap": 60,
-          "note": ""
-        },
         {
           "kind": "random_wild_hold",
           "path": "src/data/pokemon/base_stats.h",
@@ -7308,29 +6930,29 @@
       "holdEffect": "HOLD_EFFECT_MEGA_STONE",
       "minimumBadges": "not_in_discovery_shop",
       "firstFixedSource": {
-        "kind": "visible_pickup",
-        "path": "data/scripts/item_ball_scripts.inc",
-        "line": 421,
-        "label": "AbandonedShip_Rooms_1F_EventScript_ItemLopunnite",
-        "map": "AbandonedShip_Rooms_1F",
+        "kind": "fixed_gift",
+        "path": "data/maps/PetalburgCity_Gym/scripts.inc",
+        "line": 506,
+        "label": "PetalburgCity_Gym_EventScript_GiveFacade",
+        "map": "PetalburgCity_Gym",
         "fixed": true,
-        "order": 314,
-        "badge": 5,
-        "cap": 55,
-        "note": "data/maps/AbandonedShip_Rooms_1F/map.json; FLAG_ITEM_ABANDONED_SHIP_ROOMS_1F_LOPUNNITE"
+        "order": 224,
+        "badge": 4,
+        "cap": 45,
+        "note": ""
       },
       "sources": [
         {
-          "kind": "visible_pickup",
-          "path": "data/scripts/item_ball_scripts.inc",
-          "line": 421,
-          "label": "AbandonedShip_Rooms_1F_EventScript_ItemLopunnite",
-          "map": "AbandonedShip_Rooms_1F",
+          "kind": "fixed_gift",
+          "path": "data/maps/PetalburgCity_Gym/scripts.inc",
+          "line": 506,
+          "label": "PetalburgCity_Gym_EventScript_GiveFacade",
+          "map": "PetalburgCity_Gym",
           "fixed": true,
-          "order": 314,
-          "badge": 5,
-          "cap": 55,
-          "note": "data/maps/AbandonedShip_Rooms_1F/map.json; FLAG_ITEM_ABANDONED_SHIP_ROOMS_1F_LOPUNNITE"
+          "order": 224,
+          "badge": 4,
+          "cap": 45,
+          "note": ""
         }
       ]
     },
@@ -7888,42 +7510,6 @@
           "note": "available after the Stone Badge"
         },
         {
-          "kind": "fixed_gift",
-          "path": "data/maps/Route110_TrickHouseEnd/scripts.inc",
-          "line": 65,
-          "label": "Route110_TrickHouseEnd_EventScript_CompletedPuzzle1",
-          "map": "Route110_TrickHouseEnd",
-          "fixed": true,
-          "order": 61,
-          "badge": 2,
-          "cap": 30,
-          "note": ""
-        },
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/Route110_TrickHouseEntrance/scripts.inc",
-          "line": 372,
-          "label": "Route110_TrickHouseEntrance_EventScript_GivePuzzle1Reward",
-          "map": "Route110_TrickHouseEntrance",
-          "fixed": true,
-          "order": 61,
-          "badge": 2,
-          "cap": 30,
-          "note": ""
-        },
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/FortreeCity_House4/scripts.inc",
-          "line": 36,
-          "label": "FortreeCity_House4_EventScript_WingullReturned",
-          "map": "FortreeCity_House4",
-          "fixed": true,
-          "order": 281,
-          "badge": 5,
-          "cap": 55,
-          "note": ""
-        },
-        {
           "kind": "random_wild_hold",
           "path": "src/data/pokemon/base_stats.h",
           "line": null,
@@ -8017,29 +7603,41 @@
       "holdEffect": "HOLD_EFFECT_MEGA_STONE",
       "minimumBadges": "not_in_discovery_shop",
       "firstFixedSource": {
-        "kind": "visible_pickup",
-        "path": "data/scripts/item_ball_scripts.inc",
-        "line": 609,
-        "label": "VictoryRoad_1F_EventScript_ItemMetagrossite",
-        "map": "VictoryRoad_1F",
+        "kind": "fixed_gift",
+        "path": "data/maps/MossdeepCity_Gym/scripts.inc",
+        "line": 111,
+        "label": "MossdeepCity_Gym_EventScript_GiveCalmMind2",
+        "map": "MossdeepCity_Gym",
         "fixed": true,
-        "order": 525,
-        "badge": 8,
-        "cap": 80,
-        "note": "data/maps/VictoryRoad_1F/map.json; FLAG_ITEM_VICTORY_ROAD_1F_METAGROSSITE"
+        "order": 423,
+        "badge": 6,
+        "cap": 60,
+        "note": ""
       },
       "sources": [
         {
-          "kind": "visible_pickup",
-          "path": "data/scripts/item_ball_scripts.inc",
-          "line": 609,
-          "label": "VictoryRoad_1F_EventScript_ItemMetagrossite",
-          "map": "VictoryRoad_1F",
+          "kind": "fixed_gift",
+          "path": "data/maps/MossdeepCity_Gym/scripts.inc",
+          "line": 111,
+          "label": "MossdeepCity_Gym_EventScript_GiveCalmMind2",
+          "map": "MossdeepCity_Gym",
           "fixed": true,
-          "order": 525,
-          "badge": 8,
-          "cap": 80,
-          "note": "data/maps/VictoryRoad_1F/map.json; FLAG_ITEM_VICTORY_ROAD_1F_METAGROSSITE"
+          "order": 423,
+          "badge": 6,
+          "cap": 60,
+          "note": ""
+        },
+        {
+          "kind": "fixed_gift",
+          "path": "data/maps/MossdeepCity_Gym/scripts.inc",
+          "line": 120,
+          "label": "MossdeepCity_Gym_EventScript_GiveCalmMind",
+          "map": "MossdeepCity_Gym",
+          "fixed": true,
+          "order": 423,
+          "badge": 6,
+          "cap": 60,
+          "note": ""
         }
       ]
     },
@@ -8051,18 +7649,30 @@
       "holdEffect": "HOLD_EFFECT_STEEL_POWER",
       "minimumBadges": "not_in_discovery_shop",
       "firstFixedSource": {
-        "kind": "specialty_shop",
-        "path": "data/maps/MauvilleCity_Mart/scripts.inc",
-        "line": 9,
-        "label": "MauvilleCity_Mart_Pokemart",
-        "map": "MauvilleCity_Mart",
+        "kind": "fixed_bundle",
+        "path": "src/item.c",
+        "line": null,
+        "label": null,
+        "map": "GraniteCave_StevensRoom",
         "fixed": true,
-        "order": 112,
-        "badge": 2,
-        "cap": 30,
-        "note": ""
+        "order": 53,
+        "badge": 1,
+        "cap": 20,
+        "note": "Steven reward bundle"
       },
       "sources": [
+        {
+          "kind": "fixed_bundle",
+          "path": "src/item.c",
+          "line": null,
+          "label": null,
+          "map": "GraniteCave_StevensRoom",
+          "fixed": true,
+          "order": 53,
+          "badge": 1,
+          "cap": 20,
+          "note": "Steven reward bundle"
+        },
         {
           "kind": "specialty_shop",
           "path": "data/maps/MauvilleCity_Mart/scripts.inc",
@@ -8076,23 +7686,23 @@
           "note": ""
         },
         {
-          "kind": "random_wild_hold",
-          "path": "src/data/pokemon/base_stats.h",
-          "line": null,
-          "label": "SPECIES_MAGNEMITE",
-          "map": "ROUTE110",
-          "fixed": false,
-          "order": null,
-          "badge": null,
-          "cap": null,
-          "note": "item2; land_mons"
+          "kind": "visible_pickup",
+          "path": "data/scripts/item_ball_scripts.inc",
+          "line": 101,
+          "label": "Route114_EventScript_ItemProtectivePads",
+          "map": "Route114",
+          "fixed": true,
+          "order": 168,
+          "badge": 3,
+          "cap": 40,
+          "note": "data/maps/Route114/map.json; FLAG_ITEM_ROUTE_114_PROTECTIVE_PADS"
         },
         {
           "kind": "random_wild_hold",
           "path": "src/data/pokemon/base_stats.h",
           "line": null,
-          "label": "SPECIES_SKARMORY",
-          "map": "ROUTE113",
+          "label": "SPECIES_MAGNEMITE",
+          "map": "ROUTE110",
           "fixed": false,
           "order": null,
           "badge": null,
@@ -8840,54 +8450,6 @@
           "badge": null,
           "cap": null,
           "note": "item2; land_mons"
-        },
-        {
-          "kind": "random_wild_hold",
-          "path": "src/data/pokemon/base_stats.h",
-          "line": null,
-          "label": "SPECIES_DITTO",
-          "map": "DESERT_UNDERPASS",
-          "fixed": false,
-          "order": null,
-          "badge": null,
-          "cap": null,
-          "note": "item2; land_mons"
-        },
-        {
-          "kind": "random_wild_hold",
-          "path": "src/data/pokemon/base_stats.h",
-          "line": null,
-          "label": "SPECIES_DITTO",
-          "map": "DESERT_UNDERPASS",
-          "fixed": false,
-          "order": null,
-          "badge": null,
-          "cap": null,
-          "note": "item2; land_mons"
-        },
-        {
-          "kind": "random_wild_hold",
-          "path": "src/data/pokemon/base_stats.h",
-          "line": null,
-          "label": "SPECIES_DITTO",
-          "map": "DESERT_UNDERPASS",
-          "fixed": false,
-          "order": null,
-          "badge": null,
-          "cap": null,
-          "note": "item2; land_mons"
-        },
-        {
-          "kind": "random_wild_hold",
-          "path": "src/data/pokemon/base_stats.h",
-          "line": null,
-          "label": "SPECIES_DITTO",
-          "map": "DESERT_UNDERPASS",
-          "fixed": false,
-          "order": null,
-          "badge": null,
-          "cap": null,
-          "note": "item2; land_mons"
         }
       ]
     },
@@ -8898,31 +8460,8 @@
       "pocket": "POCKET_BATTLE",
       "holdEffect": "HOLD_EFFECT_METRONOME",
       "minimumBadges": null,
-      "firstFixedSource": {
-        "kind": "fixed_gift",
-        "path": "data/maps/MauvilleCity/scripts.inc",
-        "line": 30,
-        "label": "MauvilleCity_EventScript_GyroBallTM",
-        "map": "MauvilleCity",
-        "fixed": true,
-        "order": 112,
-        "badge": 2,
-        "cap": 30,
-        "note": ""
-      },
+      "firstFixedSource": null,
       "sources": [
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/MauvilleCity/scripts.inc",
-          "line": 30,
-          "label": "MauvilleCity_EventScript_GyroBallTM",
-          "map": "MauvilleCity",
-          "fixed": true,
-          "order": 112,
-          "badge": 2,
-          "cap": 30,
-          "note": ""
-        },
         {
           "kind": "random_wild_hold",
           "path": "src/data/pokemon/base_stats.h",
@@ -9049,29 +8588,41 @@
       "holdEffect": "HOLD_EFFECT_MEGA_STONE",
       "minimumBadges": "not_in_discovery_shop",
       "firstFixedSource": {
-        "kind": "visible_pickup",
-        "path": "data/scripts/item_ball_scripts.inc",
-        "line": 325,
-        "label": "MossdeepCity_EventScript_ItemMiloticite",
-        "map": "MossdeepCity",
+        "kind": "fixed_gift",
+        "path": "data/maps/SootopolisCity_Gym_1F/scripts.inc",
+        "line": 130,
+        "label": "SootopolisCity_Gym_1F_EventScript_GiveScald",
+        "map": "SootopolisCity_Gym_1F",
         "fixed": true,
-        "order": 423,
-        "badge": 6,
-        "cap": 60,
-        "note": "data/maps/MossdeepCity/map.json; FLAG_ITEM_MOSSDEEP_CITY_MILOTICITE"
+        "order": 475,
+        "badge": 7,
+        "cap": 70,
+        "note": ""
       },
       "sources": [
         {
-          "kind": "visible_pickup",
-          "path": "data/scripts/item_ball_scripts.inc",
-          "line": 325,
-          "label": "MossdeepCity_EventScript_ItemMiloticite",
-          "map": "MossdeepCity",
+          "kind": "fixed_gift",
+          "path": "data/maps/SootopolisCity_Gym_1F/scripts.inc",
+          "line": 130,
+          "label": "SootopolisCity_Gym_1F_EventScript_GiveScald",
+          "map": "SootopolisCity_Gym_1F",
           "fixed": true,
-          "order": 423,
-          "badge": 6,
-          "cap": 60,
-          "note": "data/maps/MossdeepCity/map.json; FLAG_ITEM_MOSSDEEP_CITY_MILOTICITE"
+          "order": 475,
+          "badge": 7,
+          "cap": 70,
+          "note": ""
+        },
+        {
+          "kind": "fixed_gift",
+          "path": "data/maps/SootopolisCity_Gym_1F/scripts.inc",
+          "line": 138,
+          "label": "SootopolisCity_Gym_1F_EventScript_GiveScald2",
+          "map": "SootopolisCity_Gym_1F",
+          "fixed": true,
+          "order": 475,
+          "badge": 7,
+          "cap": 70,
+          "note": ""
         }
       ]
     },
@@ -9118,30 +8669,6 @@
           "badge": 0,
           "cap": 14,
           "note": ""
-        },
-        {
-          "kind": "random_wild_hold",
-          "path": "src/data/pokemon/base_stats.h",
-          "line": null,
-          "label": "SPECIES_MARACTUS",
-          "map": "ROUTE111",
-          "fixed": false,
-          "order": null,
-          "badge": null,
-          "cap": null,
-          "note": "item2; land_mons"
-        },
-        {
-          "kind": "random_wild_hold",
-          "path": "src/data/pokemon/base_stats.h",
-          "line": null,
-          "label": "SPECIES_MARACTUS",
-          "map": "ROUTE111",
-          "fixed": false,
-          "order": null,
-          "badge": null,
-          "cap": null,
-          "note": "item2; land_mons"
         },
         {
           "kind": "random_wild_hold",
@@ -9342,32 +8869,8 @@
       "pocket": "POCKET_BATTLE",
       "holdEffect": "HOLD_EFFECT_MUSCLE_BAND",
       "minimumBadges": null,
-      "firstFixedSource": {
-        "kind": "fixed_gift",
-        "path": "data/maps/FallarborTown_Mart/scripts.inc",
-        "line": 46,
-        "label": "FallarborTown_Mart_EventScript_DrainPunchTM",
-        "map": "FallarborTown_Mart",
-        "fixed": true,
-        "order": 160,
-        "badge": 3,
-        "cap": 40,
-        "note": ""
-      },
-      "sources": [
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/FallarborTown_Mart/scripts.inc",
-          "line": 46,
-          "label": "FallarborTown_Mart_EventScript_DrainPunchTM",
-          "map": "FallarborTown_Mart",
-          "fixed": true,
-          "order": 160,
-          "badge": 3,
-          "cap": 40,
-          "note": ""
-        }
-      ]
+      "firstFixedSource": null,
+      "sources": []
     },
     {
       "item": "ITEM_MYSTIC_WATER",
@@ -10382,30 +9885,6 @@
           "badge": 6,
           "cap": 60,
           "note": "data/maps/ShoalCave_LowTideIceRoom/map.json; FLAG_ITEM_SHOAL_CAVE_ICE_ROOM_NEVER_MELT_ICE"
-        },
-        {
-          "kind": "random_wild_hold",
-          "path": "src/data/pokemon/base_stats.h",
-          "line": null,
-          "label": "SPECIES_CRYOGONAL",
-          "map": "SHOAL_CAVE_LOW_TIDE_ICE_ROOM",
-          "fixed": false,
-          "order": null,
-          "badge": null,
-          "cap": null,
-          "note": "item2; land_mons"
-        },
-        {
-          "kind": "random_wild_hold",
-          "path": "src/data/pokemon/base_stats.h",
-          "line": null,
-          "label": "SPECIES_CRYOGONAL",
-          "map": "SHOAL_CAVE_LOW_TIDE_ICE_ROOM",
-          "fixed": false,
-          "order": null,
-          "badge": null,
-          "cap": null,
-          "note": "item2; land_mons"
         },
         {
           "kind": "random_wild_hold",
@@ -11676,44 +11155,8 @@
       "pocket": "POCKET_BATTLE",
       "holdEffect": "HOLD_EFFECT_PROTECTIVE_PADS",
       "minimumBadges": null,
-      "firstFixedSource": {
-        "kind": "visible_pickup",
-        "path": "data/scripts/item_ball_scripts.inc",
-        "line": 101,
-        "label": "Route114_EventScript_ItemProtectivePads",
-        "map": "Route114",
-        "fixed": true,
-        "order": 168,
-        "badge": 3,
-        "cap": 40,
-        "note": "data/maps/Route114/map.json; FLAG_ITEM_ROUTE_114_PROTECTIVE_PADS"
-      },
-      "sources": [
-        {
-          "kind": "visible_pickup",
-          "path": "data/scripts/item_ball_scripts.inc",
-          "line": 101,
-          "label": "Route114_EventScript_ItemProtectivePads",
-          "map": "Route114",
-          "fixed": true,
-          "order": 168,
-          "badge": 3,
-          "cap": 40,
-          "note": "data/maps/Route114/map.json; FLAG_ITEM_ROUTE_114_PROTECTIVE_PADS"
-        },
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/LilycoveCity_DepartmentStoreRooftop/scripts.inc",
-          "line": 207,
-          "label": "LilycoveCity_DepartmentStoreRooftop_EventScript_SubstituteTM",
-          "map": "LilycoveCity_DepartmentStoreRooftop",
-          "fixed": true,
-          "order": 378,
-          "badge": 6,
-          "cap": 60,
-          "note": ""
-        }
-      ]
+      "firstFixedSource": null,
+      "sources": []
     },
     {
       "item": "ITEM_PSYCHIC_GEM",
@@ -11922,43 +11365,8 @@
       "pocket": "POCKET_BATTLE",
       "holdEffect": "HOLD_EFFECT_QUICK_CLAW",
       "minimumBadges": null,
-      "firstFixedSource": {
-        "kind": "fixed_gift",
-        "path": "data/maps/RustboroCity_PokemonSchool/scripts.inc",
-        "line": 86,
-        "label": "RustboroCity_PokemonSchool_EventScript_Teacher",
-        "map": "RustboroCity_PokemonSchool",
-        "fixed": true,
-        "order": 27,
-        "badge": 0,
-        "cap": 14,
-        "note": ""
-      },
+      "firstFixedSource": null,
       "sources": [
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/RustboroCity_PokemonSchool/scripts.inc",
-          "line": 86,
-          "label": "RustboroCity_PokemonSchool_EventScript_Teacher",
-          "map": "RustboroCity_PokemonSchool",
-          "fixed": true,
-          "order": 27,
-          "badge": 0,
-          "cap": 14,
-          "note": ""
-        },
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/Route110/scripts.inc",
-          "line": 353,
-          "label": "Route110_EventScript_ChallengeReactionGood",
-          "map": "Route110",
-          "fixed": true,
-          "order": 92,
-          "badge": 2,
-          "cap": 30,
-          "note": ""
-        },
         {
           "kind": "random_wild_hold",
           "path": "src/data/pokemon/base_stats.h",
@@ -12149,54 +11557,6 @@
           "badge": null,
           "cap": null,
           "note": "item1; land_mons"
-        },
-        {
-          "kind": "random_wild_hold",
-          "path": "src/data/pokemon/base_stats.h",
-          "line": null,
-          "label": "SPECIES_DITTO",
-          "map": "DESERT_UNDERPASS",
-          "fixed": false,
-          "order": null,
-          "badge": null,
-          "cap": null,
-          "note": "item1; land_mons"
-        },
-        {
-          "kind": "random_wild_hold",
-          "path": "src/data/pokemon/base_stats.h",
-          "line": null,
-          "label": "SPECIES_DITTO",
-          "map": "DESERT_UNDERPASS",
-          "fixed": false,
-          "order": null,
-          "badge": null,
-          "cap": null,
-          "note": "item1; land_mons"
-        },
-        {
-          "kind": "random_wild_hold",
-          "path": "src/data/pokemon/base_stats.h",
-          "line": null,
-          "label": "SPECIES_DITTO",
-          "map": "DESERT_UNDERPASS",
-          "fixed": false,
-          "order": null,
-          "badge": null,
-          "cap": null,
-          "note": "item1; land_mons"
-        },
-        {
-          "kind": "random_wild_hold",
-          "path": "src/data/pokemon/base_stats.h",
-          "line": null,
-          "label": "SPECIES_DITTO",
-          "map": "DESERT_UNDERPASS",
-          "fixed": false,
-          "order": null,
-          "badge": null,
-          "cap": null,
-          "note": "item1; land_mons"
         }
       ]
     },
@@ -12276,18 +11636,42 @@
       "holdEffect": "HOLD_EFFECT_SCOPE_LENS",
       "minimumBadges": "not_in_discovery_shop",
       "firstFixedSource": {
-        "kind": "specialty_shop",
-        "path": "data/maps/FortreeCity_Mart/scripts.inc",
-        "line": 11,
-        "label": "FortreeCity_Mart_Pokemart",
-        "map": "FortreeCity_Mart",
+        "kind": "fixed_gift",
+        "path": "data/maps/DewfordTown_Gym/scripts.inc",
+        "line": 190,
+        "label": "DewfordTown_Gym_EventScript_GiveBulkUp",
+        "map": "DewfordTown_Gym",
         "fixed": true,
-        "order": 282,
-        "badge": 5,
-        "cap": 55,
+        "order": 60,
+        "badge": 1,
+        "cap": 20,
         "note": ""
       },
       "sources": [
+        {
+          "kind": "fixed_gift",
+          "path": "data/maps/DewfordTown_Gym/scripts.inc",
+          "line": 190,
+          "label": "DewfordTown_Gym_EventScript_GiveBulkUp",
+          "map": "DewfordTown_Gym",
+          "fixed": true,
+          "order": 60,
+          "badge": 1,
+          "cap": 20,
+          "note": ""
+        },
+        {
+          "kind": "fixed_gift",
+          "path": "data/maps/DewfordTown_Gym/scripts.inc",
+          "line": 198,
+          "label": "DewfordTown_Gym_EventScript_GiveBulkUp2",
+          "map": "DewfordTown_Gym",
+          "fixed": true,
+          "order": 60,
+          "badge": 1,
+          "cap": 20,
+          "note": ""
+        },
         {
           "kind": "specialty_shop",
           "path": "data/maps/FortreeCity_Mart/scripts.inc",
@@ -12298,6 +11682,18 @@
           "order": 282,
           "badge": 5,
           "cap": 55,
+          "note": ""
+        },
+        {
+          "kind": "fixed_gift",
+          "path": "data/maps/SootopolisCity_House1/scripts.inc",
+          "line": 9,
+          "label": "SootopolisCity_House1_EventScript_BrickBreakBlackBelt",
+          "map": "SootopolisCity_House1",
+          "fixed": true,
+          "order": 475,
+          "badge": 7,
+          "cap": 70,
           "note": ""
         },
         {
@@ -12459,18 +11855,6 @@
           "path": "src/data/pokemon/base_stats.h",
           "line": null,
           "label": "SPECIES_BRUXISH",
-          "map": "ROUTE109",
-          "fixed": false,
-          "order": null,
-          "badge": null,
-          "cap": null,
-          "note": "item2; fishing_mons"
-        },
-        {
-          "kind": "random_wild_hold",
-          "path": "src/data/pokemon/base_stats.h",
-          "line": null,
-          "label": "SPECIES_BRUXISH",
           "map": "LILYCOVE_CITY",
           "fixed": false,
           "order": null,
@@ -12547,18 +11931,6 @@
           "badge": 0,
           "cap": null,
           "note": "available with 0 badge(s)"
-        },
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/SlateportCity_BattleTentLobby/scripts.inc",
-          "line": 206,
-          "label": "SlateportCity_BattleTentLobby_EventScript_TormentGiver",
-          "map": "SlateportCity_BattleTentLobby",
-          "fixed": true,
-          "order": 89,
-          "badge": 2,
-          "cap": 30,
-          "note": ""
         }
       ]
     },
@@ -12671,80 +12043,8 @@
       "pocket": "POCKET_BATTLE",
       "holdEffect": "HOLD_EFFECT_ROOM_SERVICE",
       "minimumBadges": null,
-      "firstFixedSource": {
-        "kind": "fixed_gift",
-        "path": "data/maps/Route110_TrickHouseEnd/scripts.inc",
-        "line": 91,
-        "label": "Route110_TrickHouseEnd_EventScript_CompletedPuzzle3",
-        "map": "Route110_TrickHouseEnd",
-        "fixed": true,
-        "order": 61,
-        "badge": 2,
-        "cap": 30,
-        "note": ""
-      },
-      "sources": [
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/Route110_TrickHouseEnd/scripts.inc",
-          "line": 91,
-          "label": "Route110_TrickHouseEnd_EventScript_CompletedPuzzle3",
-          "map": "Route110_TrickHouseEnd",
-          "fixed": true,
-          "order": 61,
-          "badge": 2,
-          "cap": 30,
-          "note": ""
-        },
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/Route110_TrickHouseEnd/scripts.inc",
-          "line": 104,
-          "label": "Route110_TrickHouseEnd_EventScript_CompletedPuzzle4",
-          "map": "Route110_TrickHouseEnd",
-          "fixed": true,
-          "order": 61,
-          "badge": 2,
-          "cap": 30,
-          "note": ""
-        },
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/Route110_TrickHouseEntrance/scripts.inc",
-          "line": 392,
-          "label": "Route110_TrickHouseEntrance_EventScript_GivePuzzle3Reward",
-          "map": "Route110_TrickHouseEntrance",
-          "fixed": true,
-          "order": 61,
-          "badge": 2,
-          "cap": 30,
-          "note": ""
-        },
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/Route110_TrickHouseEntrance/scripts.inc",
-          "line": 402,
-          "label": "Route110_TrickHouseEntrance_EventScript_GivePuzzle4Reward",
-          "map": "Route110_TrickHouseEntrance",
-          "fixed": true,
-          "order": 61,
-          "badge": 2,
-          "cap": 30,
-          "note": ""
-        },
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/PacifidlogTown_PokemonCenter_1F/scripts.inc",
-          "line": 37,
-          "label": "PacifidlogTown_PokemonCenter_1F_EventScript_ExplosionTM",
-          "map": "PacifidlogTown_PokemonCenter_1F",
-          "fixed": true,
-          "order": null,
-          "badge": null,
-          "cap": null,
-          "note": ""
-        }
-      ]
+      "firstFixedSource": null,
+      "sources": []
     },
     {
       "item": "ITEM_SABLENITE",
@@ -12787,68 +12087,8 @@
       "pocket": "POCKET_BATTLE",
       "holdEffect": "HOLD_EFFECT_SAFETY_GOGGLES",
       "minimumBadges": null,
-      "firstFixedSource": {
-        "kind": "fixed_gift",
-        "path": "data/maps/LavaridgeTown/scripts.inc",
-        "line": 85,
-        "label": "LavaridgeTown_EventScript_MayGiveGoGoggles",
-        "map": "LavaridgeTown",
-        "fixed": true,
-        "order": 205,
-        "badge": 3,
-        "cap": 40,
-        "note": ""
-      },
-      "sources": [
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/LavaridgeTown/scripts.inc",
-          "line": 85,
-          "label": "LavaridgeTown_EventScript_MayGiveGoGoggles",
-          "map": "LavaridgeTown",
-          "fixed": true,
-          "order": 205,
-          "badge": 3,
-          "cap": 40,
-          "note": ""
-        },
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/LavaridgeTown/scripts.inc",
-          "line": 101,
-          "label": "LavaridgeTown_EventScript_BrendanGiveGoGoggles",
-          "map": "LavaridgeTown",
-          "fixed": true,
-          "order": 205,
-          "badge": 3,
-          "cap": 40,
-          "note": ""
-        },
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/FortreeCity_House2/scripts.inc",
-          "line": 53,
-          "label": "FortreeCity_House2_EventScript_SleepTalkTM",
-          "map": "FortreeCity_House2",
-          "fixed": true,
-          "order": 281,
-          "badge": 5,
-          "cap": 55,
-          "note": ""
-        },
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/SSTidalRooms/scripts.inc",
-          "line": 9,
-          "label": "SSTidalRooms_EventScript_SnatchGiver",
-          "map": "SSTidalRooms",
-          "fixed": true,
-          "order": 555,
-          "badge": 9,
-          "cap": 100,
-          "note": ""
-        }
-      ]
+      "firstFixedSource": null,
+      "sources": []
     },
     {
       "item": "ITEM_SALAMENCITE",
@@ -12959,56 +12199,8 @@
       "pocket": "POCKET_BATTLE",
       "holdEffect": "HOLD_EFFECT_SCOPE_LENS",
       "minimumBadges": null,
-      "firstFixedSource": {
-        "kind": "fixed_gift",
-        "path": "data/maps/RustboroCity_DevonCorp_3F/scripts.inc",
-        "line": 169,
-        "label": "RustboroCity_DevonCorp_3F_EventScript_GiveScopeLens",
-        "map": "RustboroCity_DevonCorp_3F",
-        "fixed": true,
-        "order": 27,
-        "badge": 0,
-        "cap": 14,
-        "note": ""
-      },
-      "sources": [
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/RustboroCity_DevonCorp_3F/scripts.inc",
-          "line": 169,
-          "label": "RustboroCity_DevonCorp_3F_EventScript_GiveScopeLens",
-          "map": "RustboroCity_DevonCorp_3F",
-          "fixed": true,
-          "order": 27,
-          "badge": 0,
-          "cap": 14,
-          "note": ""
-        },
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/DewfordTown/scripts.inc",
-          "line": 90,
-          "label": "DewfordTown_EventScript_OldRodFisherman",
-          "map": "DewfordTown",
-          "fixed": true,
-          "order": 54,
-          "badge": 1,
-          "cap": 20,
-          "note": ""
-        },
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/SootopolisCity_House1/scripts.inc",
-          "line": 9,
-          "label": "SootopolisCity_House1_EventScript_BrickBreakBlackBelt",
-          "map": "SootopolisCity_House1",
-          "fixed": true,
-          "order": 475,
-          "badge": 7,
-          "cap": 70,
-          "note": ""
-        }
-      ]
+      "firstFixedSource": null,
+      "sources": []
     },
     {
       "item": "ITEM_SHARPEDONITE",
@@ -13134,31 +12326,8 @@
       "pocket": "POCKET_BATTLE",
       "holdEffect": "HOLD_EFFECT_SHED_SHELL",
       "minimumBadges": null,
-      "firstFixedSource": {
-        "kind": "fixed_gift",
-        "path": "data/maps/Route114/scripts.inc",
-        "line": 54,
-        "label": "Route114_EventScript_RoarGentleman",
-        "map": "Route114",
-        "fixed": true,
-        "order": 168,
-        "badge": 3,
-        "cap": 40,
-        "note": ""
-      },
+      "firstFixedSource": null,
       "sources": [
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/Route114/scripts.inc",
-          "line": 54,
-          "label": "Route114_EventScript_RoarGentleman",
-          "map": "Route114",
-          "fixed": true,
-          "order": 168,
-          "badge": 3,
-          "cap": 40,
-          "note": ""
-        },
         {
           "kind": "random_wild_hold",
           "path": "src/data/pokemon/base_stats.h",
@@ -13176,18 +12345,6 @@
           "path": "src/data/pokemon/base_stats.h",
           "line": null,
           "label": "SPECIES_DUSTOX",
-          "map": "ROUTE101",
-          "fixed": false,
-          "order": null,
-          "badge": null,
-          "cap": null,
-          "note": "item2; honey_mons"
-        },
-        {
-          "kind": "random_wild_hold",
-          "path": "src/data/pokemon/base_stats.h",
-          "line": null,
-          "label": "SPECIES_BEAUTIFLY",
           "map": "ROUTE101",
           "fixed": false,
           "order": null,
@@ -13430,30 +12587,19 @@
       "pocket": "POCKET_BATTLE",
       "holdEffect": "HOLD_EFFECT_NORMAL_POWER",
       "minimumBadges": "not_in_discovery_shop",
-      "firstFixedSource": {
-        "kind": "fixed_gift",
-        "path": "data/maps/DewfordTown_House2/scripts.inc",
-        "line": 9,
-        "label": "DewfordTown_House2_EventScript_Man",
-        "map": "DewfordTown_House2",
-        "fixed": true,
-        "order": 54,
-        "badge": 1,
-        "cap": 20,
-        "note": ""
-      },
+      "firstFixedSource": null,
       "sources": [
         {
-          "kind": "fixed_gift",
-          "path": "data/maps/DewfordTown_House2/scripts.inc",
-          "line": 9,
-          "label": "DewfordTown_House2_EventScript_Man",
-          "map": "DewfordTown_House2",
-          "fixed": true,
-          "order": 54,
-          "badge": 1,
-          "cap": 20,
-          "note": ""
+          "kind": "random_wild_hold",
+          "path": "src/data/pokemon/base_stats.h",
+          "line": null,
+          "label": "SPECIES_TRUBBISH",
+          "map": "ROUTE110",
+          "fixed": false,
+          "order": null,
+          "badge": null,
+          "cap": null,
+          "note": "item2; land_mons"
         }
       ]
     },
@@ -14216,22 +13362,22 @@
           "note": "available with 2 badge(s)"
         },
         {
-          "kind": "fixed_gift",
-          "path": "data/maps/MossdeepCity/scripts.inc",
-          "line": 291,
-          "label": "MossdeepCity_EventScript_AvalancheTM",
-          "map": "MossdeepCity",
-          "fixed": true,
-          "order": 423,
-          "badge": 6,
-          "cap": 60,
-          "note": ""
+          "kind": "random_wild_hold",
+          "path": "src/data/pokemon/base_stats.h",
+          "line": null,
+          "label": "SPECIES_SNORUNT",
+          "map": "SHOAL_CAVE_LOW_TIDE_ICE_ROOM",
+          "fixed": false,
+          "order": null,
+          "badge": null,
+          "cap": null,
+          "note": "item2; land_mons"
         },
         {
           "kind": "random_wild_hold",
           "path": "src/data/pokemon/base_stats.h",
           "line": null,
-          "label": "SPECIES_SNORUNT",
+          "label": "SPECIES_SNOM",
           "map": "SHOAL_CAVE_LOW_TIDE_ICE_ROOM",
           "fixed": false,
           "order": null,
@@ -15519,44 +14665,8 @@
       "pocket": "POCKET_BATTLE",
       "holdEffect": "HOLD_EFFECT_TERRAIN_EXTENDER",
       "minimumBadges": null,
-      "firstFixedSource": {
-        "kind": "visible_pickup",
-        "path": "data/scripts/item_ball_scripts.inc",
-        "line": 845,
-        "label": "TrickHouse5_EventScript_TerrainExtender",
-        "map": "Route110_TrickHousePuzzle5",
-        "fixed": true,
-        "order": 61,
-        "badge": 2,
-        "cap": 30,
-        "note": "data/maps/Route110_TrickHousePuzzle5/map.json; FLAG_ITEM_TRICK_HOUSE_TERRAIN_EXTENDER"
-      },
-      "sources": [
-        {
-          "kind": "visible_pickup",
-          "path": "data/scripts/item_ball_scripts.inc",
-          "line": 845,
-          "label": "TrickHouse5_EventScript_TerrainExtender",
-          "map": "Route110_TrickHousePuzzle5",
-          "fixed": true,
-          "order": 61,
-          "badge": 2,
-          "cap": 30,
-          "note": "data/maps/Route110_TrickHousePuzzle5/map.json; FLAG_ITEM_TRICK_HOUSE_TERRAIN_EXTENDER"
-        },
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/FortreeCity_Mart/scripts.inc",
-          "line": 59,
-          "label": "FortreeCity_Mart_EventScript_SpenserReward",
-          "map": "FortreeCity_Mart",
-          "fixed": true,
-          "order": 282,
-          "badge": 5,
-          "cap": 55,
-          "note": ""
-        }
-      ]
+      "firstFixedSource": null,
+      "sources": []
     },
     {
       "item": "ITEM_THICK_CLUB",
@@ -15671,44 +14781,8 @@
       "pocket": "POCKET_BATTLE",
       "holdEffect": "HOLD_EFFECT_THROAT_SPRAY",
       "minimumBadges": null,
-      "firstFixedSource": {
-        "kind": "fixed_gift",
-        "path": "data/maps/SlateportCity/scripts.inc",
-        "line": 716,
-        "label": "SlateportCity_EventScript_GretaReward",
-        "map": "SlateportCity",
-        "fixed": true,
-        "order": 91,
-        "badge": 2,
-        "cap": 30,
-        "note": ""
-      },
-      "sources": [
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/SlateportCity/scripts.inc",
-          "line": 716,
-          "label": "SlateportCity_EventScript_GretaReward",
-          "map": "SlateportCity",
-          "fixed": true,
-          "order": 91,
-          "badge": 2,
-          "cap": 30,
-          "note": ""
-        },
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/MauvilleCity/scripts.inc",
-          "line": 477,
-          "label": "MauvilleCity_EventScript_CompletedNewMauville",
-          "map": "MauvilleCity",
-          "fixed": true,
-          "order": 112,
-          "badge": 2,
-          "cap": 30,
-          "note": ""
-        }
-      ]
+      "firstFixedSource": null,
+      "sources": []
     },
     {
       "item": "ITEM_TOXIC_ORB",
@@ -15717,44 +14791,8 @@
       "pocket": "POCKET_BATTLE",
       "holdEffect": "HOLD_EFFECT_TOXIC_ORB",
       "minimumBadges": null,
-      "firstFixedSource": {
-        "kind": "fixed_gift",
-        "path": "data/maps/PetalburgCity_Gym/scripts.inc",
-        "line": 506,
-        "label": "PetalburgCity_Gym_EventScript_GiveFacade",
-        "map": "PetalburgCity_Gym",
-        "fixed": true,
-        "order": 224,
-        "badge": 4,
-        "cap": 45,
-        "note": ""
-      },
-      "sources": [
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/PetalburgCity_Gym/scripts.inc",
-          "line": 506,
-          "label": "PetalburgCity_Gym_EventScript_GiveFacade",
-          "map": "PetalburgCity_Gym",
-          "fixed": true,
-          "order": 224,
-          "badge": 4,
-          "cap": 45,
-          "note": ""
-        },
-        {
-          "kind": "visible_pickup",
-          "path": "data/scripts/item_ball_scripts.inc",
-          "line": 161,
-          "label": "Route119_EventScript_ItemToxicOrb",
-          "map": "Route119",
-          "fixed": true,
-          "order": 252,
-          "badge": 5,
-          "cap": 55,
-          "note": "data/maps/Route119/map.json; FLAG_ITEM_ROUTE_119_TOXIC_ORB"
-        }
-      ]
+      "firstFixedSource": null,
+      "sources": []
     },
     {
       "item": "ITEM_TRAINING_BAND",
@@ -15889,44 +14927,8 @@
       "pocket": "POCKET_BATTLE",
       "holdEffect": "HOLD_EFFECT_UTILITY_UMBRELLA",
       "minimumBadges": null,
-      "firstFixedSource": {
-        "kind": "fixed_gift",
-        "path": "data/maps/SootopolisCity_Gym_1F/scripts.inc",
-        "line": 130,
-        "label": "SootopolisCity_Gym_1F_EventScript_GiveScald",
-        "map": "SootopolisCity_Gym_1F",
-        "fixed": true,
-        "order": 475,
-        "badge": 7,
-        "cap": 70,
-        "note": ""
-      },
-      "sources": [
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/SootopolisCity_Gym_1F/scripts.inc",
-          "line": 130,
-          "label": "SootopolisCity_Gym_1F_EventScript_GiveScald",
-          "map": "SootopolisCity_Gym_1F",
-          "fixed": true,
-          "order": 475,
-          "badge": 7,
-          "cap": 70,
-          "note": ""
-        },
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/SootopolisCity_Gym_1F/scripts.inc",
-          "line": 138,
-          "label": "SootopolisCity_Gym_1F_EventScript_GiveScald2",
-          "map": "SootopolisCity_Gym_1F",
-          "fixed": true,
-          "order": 475,
-          "badge": 7,
-          "cap": 70,
-          "note": ""
-        }
-      ]
+      "firstFixedSource": null,
+      "sources": []
     },
     {
       "item": "ITEM_VENUSAURITE",
@@ -16004,30 +15006,18 @@
       "holdEffect": "HOLD_EFFECT_WEAKNESS_POLICY",
       "minimumBadges": 6,
       "firstFixedSource": {
-        "kind": "fixed_gift",
-        "path": "data/maps/VerdanturfTown_Mart/scripts.inc",
-        "line": 44,
-        "label": "VerdanturfTown_Mart_EventScript_PaybackTM",
-        "map": "VerdanturfTown_Mart",
+        "kind": "badge_shop",
+        "path": "src/item.c",
+        "line": null,
+        "label": "sBattleItemUnlocks",
+        "map": null,
         "fixed": true,
-        "order": 215,
-        "badge": 3,
-        "cap": 40,
-        "note": ""
+        "order": 282,
+        "badge": 6,
+        "cap": null,
+        "note": "available with 6 badge(s)"
       },
       "sources": [
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/VerdanturfTown_Mart/scripts.inc",
-          "line": 44,
-          "label": "VerdanturfTown_Mart_EventScript_PaybackTM",
-          "map": "VerdanturfTown_Mart",
-          "fixed": true,
-          "order": 215,
-          "badge": 3,
-          "cap": 40,
-          "note": ""
-        },
         {
           "kind": "badge_shop",
           "path": "src/item.c",
@@ -16050,30 +15040,18 @@
       "holdEffect": "HOLD_EFFECT_RESTORE_STATS",
       "minimumBadges": 2,
       "firstFixedSource": {
-        "kind": "fixed_gift",
-        "path": "data/maps/Route104/scripts.inc",
-        "line": 292,
-        "label": "Route104_EventScript_WhiteHerbFlorist",
-        "map": "Route104",
+        "kind": "badge_shop",
+        "path": "src/item.c",
+        "line": null,
+        "label": "sBattleItemUnlocks",
+        "map": null,
         "fixed": true,
-        "order": 11,
-        "badge": 0,
-        "cap": 14,
-        "note": ""
+        "order": 61,
+        "badge": 2,
+        "cap": null,
+        "note": "available with 2 badge(s)"
       },
       "sources": [
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/Route104/scripts.inc",
-          "line": 292,
-          "label": "Route104_EventScript_WhiteHerbFlorist",
-          "map": "Route104",
-          "fixed": true,
-          "order": 11,
-          "badge": 0,
-          "cap": 14,
-          "note": ""
-        },
         {
           "kind": "random_cut_drop",
           "path": "data/scripts/field_move_scripts.inc",
@@ -16107,55 +15085,8 @@
       "pocket": "POCKET_BATTLE",
       "holdEffect": "HOLD_EFFECT_WIDE_LENS",
       "minimumBadges": null,
-      "firstFixedSource": {
-        "kind": "fixed_bundle",
-        "path": "src/item.c",
-        "line": null,
-        "label": null,
-        "map": "GraniteCave_StevensRoom",
-        "fixed": true,
-        "order": 53,
-        "badge": 1,
-        "cap": 20,
-        "note": "Steven reward bundle"
-      },
+      "firstFixedSource": null,
       "sources": [
-        {
-          "kind": "fixed_bundle",
-          "path": "src/item.c",
-          "line": null,
-          "label": null,
-          "map": "GraniteCave_StevensRoom",
-          "fixed": true,
-          "order": 53,
-          "badge": 1,
-          "cap": 20,
-          "note": "Steven reward bundle"
-        },
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/FortreeCity_House2/scripts.inc",
-          "line": 22,
-          "label": "FortreeCity_House2_EventScript_HiddenPowerGiver",
-          "map": "FortreeCity_House2",
-          "fixed": true,
-          "order": 281,
-          "badge": 5,
-          "cap": 55,
-          "note": ""
-        },
-        {
-          "kind": "visible_pickup",
-          "path": "data/scripts/item_ball_scripts.inc",
-          "line": 225,
-          "label": "Route123_EventScript_ItemWideLens",
-          "map": "Route123",
-          "fixed": true,
-          "order": 319,
-          "badge": 5,
-          "cap": 55,
-          "note": "data/maps/Route123/map.json; FLAG_ITEM_ROUTE_123_WIDE_LENS"
-        },
         {
           "kind": "random_wild_hold",
           "path": "src/data/pokemon/base_stats.h",
@@ -16321,44 +15252,8 @@
       "pocket": "POCKET_BATTLE",
       "holdEffect": "HOLD_EFFECT_WISE_GLASSES",
       "minimumBadges": null,
-      "firstFixedSource": {
-        "kind": "fixed_gift",
-        "path": "data/maps/MauvilleCity_Gym/scripts.inc",
-        "line": 131,
-        "label": "MauvilleCity_Gym_EventScript_GiveVoltSwitch2",
-        "map": "MauvilleCity_Gym",
-        "fixed": true,
-        "order": 118,
-        "badge": 2,
-        "cap": 30,
-        "note": ""
-      },
-      "sources": [
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/MauvilleCity_Gym/scripts.inc",
-          "line": 131,
-          "label": "MauvilleCity_Gym_EventScript_GiveVoltSwitch2",
-          "map": "MauvilleCity_Gym",
-          "fixed": true,
-          "order": 118,
-          "badge": 2,
-          "cap": 30,
-          "note": ""
-        },
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/MauvilleCity_Gym/scripts.inc",
-          "line": 140,
-          "label": "MauvilleCity_Gym_EventScript_GiveVoltSwitch",
-          "map": "MauvilleCity_Gym",
-          "fixed": true,
-          "order": 118,
-          "badge": 2,
-          "cap": 30,
-          "note": ""
-        }
-      ]
+      "firstFixedSource": null,
+      "sources": []
     },
     {
       "item": "ITEM_X_ACCURACY",
@@ -16883,44 +15778,8 @@
       "pocket": "POCKET_BATTLE",
       "holdEffect": "HOLD_EFFECT_ZOOM_LENS",
       "minimumBadges": null,
-      "firstFixedSource": {
-        "kind": "fixed_gift",
-        "path": "data/maps/RustboroCity_Mart/scripts.inc",
-        "line": 21,
-        "label": "RustboroCity_Mart_EventScript_FalseSwipeTM",
-        "map": "RustboroCity_Mart",
-        "fixed": true,
-        "order": 27,
-        "badge": 0,
-        "cap": 14,
-        "note": ""
-      },
-      "sources": [
-        {
-          "kind": "fixed_gift",
-          "path": "data/maps/RustboroCity_Mart/scripts.inc",
-          "line": 21,
-          "label": "RustboroCity_Mart_EventScript_FalseSwipeTM",
-          "map": "RustboroCity_Mart",
-          "fixed": true,
-          "order": 27,
-          "badge": 0,
-          "cap": 14,
-          "note": ""
-        },
-        {
-          "kind": "visible_pickup",
-          "path": "data/scripts/item_ball_scripts.inc",
-          "line": 45,
-          "label": "Route109_EventScript_ItemZoomLens",
-          "map": "Route109",
-          "fixed": true,
-          "order": 73,
-          "badge": 2,
-          "cap": 30,
-          "note": "data/maps/Route109/map.json; FLAG_ITEM_ROUTE_109_ZOOM_LENS"
-        }
-      ]
+      "firstFixedSource": null,
+      "sources": []
     }
   ]
 }

@@ -204,7 +204,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_SubstituteTM::
 	faceplayer
 	goto_if_set FLAG_VERDANT_GIFT_SUBSTITUTE, LilycoveCity_DepartmentStoreRooftop_EventScript_ReceivedTM90
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_GiveSubstitute, MSGBOX_DEFAULT
-	giveitem ITEM_PROTECTIVE_PADS
+	giveitem ITEM_METAL_ALLOY
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_VERDANT_GIFT_SUBSTITUTE
@@ -250,18 +250,9 @@ LilycoveCity_DepartmentStoreRooftop_Text_NotEnoughMoney: @ 82205F1
 
 LilycoveCity_DepartmentStoreRooftop_Text_DecidedAgainstBuyingDrink: @ 8220603
 	.string "Decided against buying a drink.$"
-
 LilycoveCity_DepartmentStoreRooftop_Text_GiveSubstitute:
-	.string "When I see the wide world from up\n"
-	.string "here on the roof…\p"
-	.string "I think about how nice it would be\n"
-	.string "if there were more than just one me\l"
-	.string "so I could enjoy all sorts of lives.\p"
-	.string "Of course it's not possible.\n"
-	.string "Giggle…\p"
-	.string "I know! Take these Protective Pads.\n"
-	.string "They shield their holder from effects\l"
-	.string "triggered by direct contact.$"
+	.string "I know! Take this Metal Alloy.\n"
+	.string "It evolves Duraludon while held.$"
 
 LilycoveCity_DepartmentStoreRooftop_Text_HaveTM90:
 	.string "We human beings should enjoy our\n"

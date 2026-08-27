@@ -8,11 +8,11 @@ The report distinguishes **within-method species probability** from an encounter
 
 ## Technical summary
 
-- Source state: commit `712da9a722a1f44833230af44c2d22a6d3804e49`; clean working tree at generation: **True**.
-- Random encounter coverage: **139** populated main overworld maps from **147** configured entries, plus **542** distinct species/forms in catchable random pools.
+- Source state: commit `712da9a722a1f44833230af44c2d22a6d3804e49`; clean working tree at generation: **False**.
+- Random encounter coverage: **139** populated main overworld maps from **147** configured entries, plus **576** distinct species/forms in catchable random pools.
 - Loadout system: **1309** total competitive sets. Wild Pokémon roll the exact one/two/three-set tutor count at 100%, 50/50, or approximately one-third each.
-- Item system: **136** ordinary competitive held items/Berries are free and unlimited; transformation and form-progression items remain protected.
-- Species/form appendix: **1269** runtime IDs classified; **150** remain unresolved by the automated source scan and are explicitly listed rather than guessed.
+- Item system: **65** ordinary competitive held items are free and unlimited. Berries and evolution/transformation progression items are not vendor stock.
+- Species/form appendix: **1269** runtime IDs classified; **93** remain unresolved by the automated source scan and are explicitly listed rather than guessed.
 - Probability validation: **PASS** — every emitted method pool sums independently to 100%.
 - Battle context: **810** reachable definitions, including **565 doubles** and **289 singles**; **72** canonical encounters are currently source-closed bespoke redesigns.
 
@@ -22,11 +22,11 @@ The classification totals separate exact direct sources and permanent evolution/
 
 | Acquisition classification | Runtime species/form IDs |
 |---|---|
-| Direct acquisition | 612 |
-| Evolution from obtainable Pokémon | 250 |
-| Unresolved by automated acquisition scan | 150 |
+| Direct acquisition | 646 |
+| Evolution from obtainable Pokémon | 280 |
 | Form / battle transformation; not separately acquired | 126 |
-| Alternate form from obtainable base | 111 |
+| Alternate form from obtainable base | 104 |
+| Unresolved by automated acquisition scan | 93 |
 | Breeding / obtainable evolution family | 20 |
 
 ## Game identity and why the encounter distribution exists
@@ -61,7 +61,8 @@ The phase labels in this report use the earliest trainer-guide evidence for a ma
 ## Random encounter methodology
 
 - `chance_percent` is the conditional chance of that species after the named method is active. Duplicate slots are aggregated.
-- `encounter_rate` is the table’s raw encounter-rate field; it is not multiplied into `chance_percent` because step checks, terrain, abilities, Repel, and method invocation differ.
+- `encounter_rate` is the table's raw encounter-rate field; it is not multiplied into `chance_percent` because step checks, terrain, abilities, Repel, and method invocation differ.
+- The chapter shown for each row is the **earliest usable phase**, calculated as the later of location access and the method's actual field gate. Surf, Rock Smash, Good Rod, Super Rod, and Honey rows therefore no longer appear as opening access merely because their maps are early.
 - Land weights are 13/13/10/10/10/10/5/5/8/8/4/4. Surf and Rock Smash are 60/30/5/5. Old Rod is 60/40; Good Rod 60/20/20; Super Rod 40/30/15/10/5; Honey 50/15/15/10/5/5.
 - Route 119 under-bridge Feebas is a separate 100% special fishing override at levels 20–25.
 - Battle Pyramid and Battle Pike tables are reported as facility-only random battles, not normal overworld acquisition promises.
@@ -70,1690 +71,1720 @@ The phase labels in this report use the earliest trainer-guide evidence for a ma
 
 ### Opening — before the Stone Badge (cap 14)
 
-| Location | Method | Raw rate | Species | Within-method % | Levels |
-|---|---|---|---|---|---|
-| Route 101 | Land | 20 | Wurmple | 20 | 2–3 |
-| Route 101 | Land | 20 | Poochyena | 13 | 2–2 |
-| Route 101 | Land | 20 | Zigzagoon | 13 | 2–2 |
-| Route 101 | Land | 20 | Sewaddle | 10 | 3–3 |
-| Route 101 | Land | 20 | Sprigatito | 10 | 3–3 |
-| Route 101 | Land | 20 | Bonsly | 9 | 3–3 |
-| Route 101 | Land | 20 | Lillipup | 9 | 3–3 |
-| Route 101 | Land | 20 | Dreepy | 8 | 2–2 |
-| Route 101 | Land | 20 | Larvesta | 8 | 2–2 |
-| Route 101 | Honey | 20 | Audino | 50 | 2–2 |
-| Route 101 | Honey | 20 | Beautifly | 20 | 2–3 |
-| Route 101 | Honey | 20 | Dustox | 20 | 2–3 |
-| Route 101 | Honey | 20 | Swadloon | 10 | 3–3 |
-| Route 102 | Land | 20 | Bidoof | 20 | 4–4 |
-| Route 102 | Land | 20 | Lotad | 13 | 3–3 |
-| Route 102 | Land | 20 | Seedot | 13 | 3–3 |
-| Route 102 | Land | 20 | Gothita | 10 | 4–4 |
-| Route 102 | Land | 20 | Nacli | 10 | 3–3 |
-| Route 102 | Land | 20 | Ralts | 9 | 3–4 |
-| Route 102 | Land | 20 | Surskit | 9 | 3–3 |
-| Route 102 | Land | 20 | Hatenna | 8 | 4–4 |
-| Route 102 | Land | 20 | Indeedee | 8 | 4–4 |
-| Route 102 | Surf | 4 | Surskit | 60 | 20–30 |
-| Route 102 | Surf | 4 | Azumarill | 30 | 10–20 |
-| Route 102 | Surf | 4 | Masquerain | 10 | 5–35 |
-| Route 102 | Old Rod | 30 | Corphish | 60 | 5–10 |
-| Route 102 | Old Rod | 30 | Goldeen | 40 | 5–10 |
-| Route 102 | Good Rod | 30 | Corphish | 60 | 10–30 |
-| Route 102 | Good Rod | 30 | Crawdaunt | 20 | 10–30 |
-| Route 102 | Good Rod | 30 | Seaking | 20 | 10–30 |
-| Route 102 | Super Rod | 30 | Crawdaunt | 70 | 20–45 |
-| Route 102 | Super Rod | 30 | Seaking | 30 | 30–35 |
-| Route 102 | Honey | 20 | Audino | 50 | 2–2 |
-| Route 102 | Honey | 20 | Gothorita | 20 | 2–3 |
-| Route 102 | Honey | 20 | Kirlia | 20 | 2–3 |
-| Route 102 | Honey | 20 | Bibarel | 10 | 3–3 |
-| Route 103 | Land | 20 | Shinx | 20 | 3–4 |
-| Route 103 | Land | 20 | Shellos | 13 | 3–3 |
-| Route 103 | Land | 20 | Wingull | 13 | 2–2 |
-| Route 103 | Land | 20 | Fuecoco | 10 | 2–2 |
-| Route 103 | Land | 20 | Kricketot | 10 | 3–3 |
-| Route 103 | Land | 20 | Blitzle | 9 | 4–4 |
-| Route 103 | Land | 20 | Grubbin | 9 | 2–3 |
-| Route 103 | Land | 20 | Toxel | 8 | 3–3 |
-| Route 103 | Land | 20 | Yamper | 8 | 3–3 |
-| Route 103 | Surf | 4 | Wingull | 60 | 5–35 |
-| Route 103 | Surf | 4 | Gastrodon | 30 | 10–30 |
-| Route 103 | Surf | 4 | Pelipper | 10 | 15–30 |
-| Route 103 | Rock Smash | 20 | Pineco | 60 | 10–15 |
-| Route 103 | Rock Smash | 20 | Hoothoot | 40 | 5–20 |
-| Route 103 | Old Rod | 30 | Magikarp | 60 | 5–10 |
-| Route 103 | Old Rod | 30 | Tentacool | 40 | 5–10 |
-| Route 103 | Good Rod | 30 | Tentacool | 60 | 10–30 |
-| Route 103 | Good Rod | 30 | Gyarados | 20 | 10–30 |
-| Route 103 | Good Rod | 30 | Wailmer | 20 | 10–30 |
-| Route 103 | Super Rod | 30 | Gyarados | 40 | 30–35 |
-| Route 103 | Super Rod | 30 | Sharpedo | 30 | 25–45 |
-| Route 103 | Super Rod | 30 | Wailmer | 30 | 30–35 |
-| Route 103 | Honey | 20 | Audino | 50 | 2–2 |
-| Route 103 | Honey | 20 | Charjabug | 20 | 2–3 |
-| Route 103 | Honey | 20 | Luxio | 20 | 2–3 |
-| Route 103 | Honey | 20 | Kricketune | 10 | 3–3 |
-| Route 104 | Land | 20 | Azurill | 13 | 5–7 |
-| Route 104 | Land | 20 | Taillow | 13 | 5–7 |
-| Route 104 | Land | 20 | Mareanie | 12 | 5–7 |
-| Route 104 | Land | 20 | Wimpod | 12 | 5–7 |
-| Route 104 | Land | 20 | Budew | 10 | 5–7 |
-| Route 104 | Land | 20 | Litleo | 10 | 5–7 |
-| Route 104 | Land | 20 | Pidove | 10 | 5–7 |
-| Route 104 | Land | 20 | Sentret | 10 | 5–7 |
-| Route 104 | Land | 20 | Bunnelby | 5 | 5–7 |
-| Route 104 | Land | 20 | Ledyba | 5 | 5–7 |
-| Route 104 | Surf | 4 | Wingull | 90 | 10–30 |
-| Route 104 | Surf | 4 | Pelipper | 10 | 25–30 |
-| Route 104 | Old Rod | 30 | Magikarp | 60 | 5–10 |
-| Route 104 | Old Rod | 30 | Finizen | 40 | 5–10 |
-| Route 104 | Good Rod | 30 | Luvdisc | 60 | 10–30 |
-| Route 104 | Good Rod | 30 | Magikarp | 40 | 10–30 |
-| Route 104 | Super Rod | 30 | Luvdisc | 70 | 25–35 |
-| Route 104 | Super Rod | 30 | Gyarados | 30 | 20–45 |
-| Route 104 | Honey | 20 | Audino | 50 | 2–2 |
-| Route 104 | Honey | 20 | Yungoos | 30 | 2–3 |
-| Route 104 | Honey | 20 | Patrat | 20 | 2–3 |
-| Petalburg Woods | Land | 20 | Shroomish | 13 | 6–8 |
-| Petalburg Woods | Land | 20 | Slakoth | 13 | 6–8 |
-| Petalburg Woods | Land | 20 | Buneary | 10 | 6–8 |
-| Petalburg Woods | Land | 20 | Paras | 10 | 6–8 |
-| Petalburg Woods | Land | 20 | Phantump | 10 | 6–8 |
-| Petalburg Woods | Land | 20 | Pichu | 10 | 6–8 |
-| Petalburg Woods | Land | 20 | Pidgey | 10 | 6–8 |
-| Petalburg Woods | Land | 20 | Foongus | 8 | 6–8 |
-| Petalburg Woods | Land | 20 | Impidimp | 8 | 6–8 |
-| Petalburg Woods | Land | 20 | Cascoon | 4 | 7–8 |
-| Petalburg Woods | Land | 20 | Silcoon | 4 | 7–8 |
-| Petalburg Woods | Rock Smash | 20 | Aipom | 60 | 10–15 |
-| Petalburg Woods | Rock Smash | 20 | Cherubi | 40 | 5–20 |
-| Petalburg Woods | Honey | 20 | Audino | 50 | 2–2 |
-| Petalburg Woods | Honey | 20 | Pidgey | 25 | 2–3 |
-| Petalburg Woods | Honey | 20 | Pikachu | 25 | 2–3 |
-| Petalburg Woods 2 | Land | 20 | Bounsweet | 17 | 12–14 |
-| Petalburg Woods 2 | Land | 20 | Morelull | 17 | 12–14 |
-| Petalburg Woods 2 | Land | 20 | Kakuna | 13 | 12–14 |
-| Petalburg Woods 2 | Land | 20 | Metapod | 13 | 12–14 |
-| Petalburg Woods 2 | Land | 20 | Panpour | 10 | 12–14 |
-| Petalburg Woods 2 | Land | 20 | Pansage | 10 | 12–14 |
-| Petalburg Woods 2 | Land | 20 | Pansear | 10 | 12–14 |
-| Petalburg Woods 2 | Land | 20 | Venipede | 10 | 12–14 |
-| Petalburg Woods 2 | Rock Smash | 20 | Exeggcute | 60 | 10–15 |
-| Petalburg Woods 2 | Rock Smash | 20 | Venonat | 40 | 5–20 |
-| Petalburg Woods 2 | Honey | 20 | Audino | 50 | 2–2 |
-| Petalburg Woods 2 | Honey | 20 | Caterpie | 25 | 2–3 |
-| Petalburg Woods 2 | Honey | 20 | Weedle | 25 | 2–3 |
-| Petalburg Woods 3 | Land | 20 | Dewpider | 17 | 13–15 |
-| Petalburg Woods 3 | Land | 20 | Emolga | 17 | 13–15 |
-| Petalburg Woods 3 | Land | 20 | Bellsprout | 13 | 13–15 |
-| Petalburg Woods 3 | Land | 20 | Oddish | 13 | 13–15 |
-| Petalburg Woods 3 | Land | 20 | Croagunk | 10 | 13–15 |
-| Petalburg Woods 3 | Land | 20 | Misdreavus | 10 | 13–15 |
-| Petalburg Woods 3 | Land | 20 | Murkrow | 10 | 13–15 |
-| Petalburg Woods 3 | Land | 20 | Yanma | 10 | 13–15 |
-| Petalburg Woods 3 | Surf | 4 | Poliwag | 60 | 10–30 |
-| Petalburg Woods 3 | Surf | 4 | Slowpoke | 30 | 15–25 |
-| Petalburg Woods 3 | Surf | 4 | Poliwhirl | 10 | 25–30 |
-| Petalburg Woods 3 | Rock Smash | 20 | Beedrill | 60 | 10–15 |
-| Petalburg Woods 3 | Rock Smash | 20 | Trevenant | 40 | 5–20 |
-| Petalburg Woods 3 | Old Rod | 30 | Poliwag | 60 | 13–18 |
-| Petalburg Woods 3 | Old Rod | 30 | Slowpoke | 40 | 13–18 |
-| Petalburg Woods 3 | Good Rod | 30 | Slowpoke | 60 | 10–30 |
-| Petalburg Woods 3 | Good Rod | 30 | Poliwag | 20 | 10–30 |
-| Petalburg Woods 3 | Good Rod | 30 | Poliwhirl | 20 | 10–30 |
-| Petalburg Woods 3 | Super Rod | 30 | Slowbro | 40 | 25–30 |
-| Petalburg Woods 3 | Super Rod | 30 | Poliwhirl | 30 | 30–35 |
-| Petalburg Woods 3 | Super Rod | 30 | Slowpoke | 15 | 20–25 |
-| Petalburg Woods 3 | Super Rod | 30 | Poliwrath | 10 | 35–40 |
-| Petalburg Woods 3 | Super Rod | 30 | Politoed | 5 | 40–45 |
-| Petalburg Woods 3 | Honey | 20 | Audino | 50 | 2–2 |
-| Petalburg Woods 3 | Honey | 20 | Emolga | 45 | 2–3 |
-| Petalburg Woods 3 | Honey | 20 | Goomy | 5 | 3–3 |
-| Rustboro City | Land | 20 | Cottonee | 20 | 9–11 |
-| Rustboro City | Land | 20 | Eevee | 17 | 9–11 |
-| Rustboro City | Land | 20 | Glameow | 17 | 9–11 |
-| Rustboro City | Land | 20 | Nidoran♀ | 13 | 9–11 |
-| Rustboro City | Land | 20 | Nidoran♂ | 13 | 9–11 |
-| Rustboro City | Land | 20 | Gimmighoul | 10 | 9–11 |
-| Rustboro City | Land | 20 | Petilil | 10 | 9–11 |
-| Rustboro City | Honey | 20 | Audino | 60 | 2–3 |
-| Rustboro City | Honey | 20 | Nidorina | 20 | 2–3 |
-| Rustboro City | Honey | 20 | Nidorino | 20 | 2–3 |
-| Berry tree encounter table 1: G Berry Stage Sprouted | Land | 10 | Sewaddle | 34 | 5–5 |
-| Berry tree encounter table 1: G Berry Stage Sprouted | Land | 10 | Scatterbug | 20 | 5–5 |
-| Berry tree encounter table 1: G Berry Stage Sprouted | Land | 10 | Wurmple | 20 | 5–5 |
-| Berry tree encounter table 1: G Berry Stage Sprouted | Land | 10 | Caterpie | 13 | 5–5 |
-| Berry tree encounter table 1: G Berry Stage Sprouted | Land | 10 | Weedle | 13 | 5–5 |
-| Berry tree encounter table 2: G Berry Stage Taller | Land | 10 | Spewpa | 34 | 5–5 |
-| Berry tree encounter table 2: G Berry Stage Taller | Land | 10 | Cascoon | 20 | 5–5 |
-| Berry tree encounter table 2: G Berry Stage Taller | Land | 10 | Silcoon | 20 | 5–5 |
-| Berry tree encounter table 2: G Berry Stage Taller | Land | 10 | Kakuna | 13 | 5–5 |
-| Berry tree encounter table 2: G Berry Stage Taller | Land | 10 | Metapod | 13 | 5–5 |
-| Berry tree encounter table 3: G Berry Stage Flowering | Land | 10 | Cherubi | 20 | 5–5 |
-| Berry tree encounter table 3: G Berry Stage Flowering | Land | 10 | Cutiefly | 20 | 5–5 |
-| Berry tree encounter table 3: G Berry Stage Flowering | Land | 10 | Illumise | 17 | 5–5 |
-| Berry tree encounter table 3: G Berry Stage Flowering | Land | 10 | Volbeat | 17 | 5–5 |
-| Berry tree encounter table 3: G Berry Stage Flowering | Land | 10 | Combee | 13 | 5–5 |
-| Berry tree encounter table 3: G Berry Stage Flowering | Land | 10 | Flabebe | 13 | 5–5 |
-| Berry tree encounter table 4: G Berry Stage Berries | Land | 10 | Munchlax | 24 | 5–5 |
-| Berry tree encounter table 4: G Berry Stage Berries | Land | 10 | Burmy | 23 | 5–5 |
-| Berry tree encounter table 4: G Berry Stage Berries | Land | 10 | Crabrawler | 23 | 5–5 |
-| Berry tree encounter table 4: G Berry Stage Berries | Land | 10 | Aipom | 15 | 5–5 |
-| Berry tree encounter table 4: G Berry Stage Berries | Land | 10 | Pikipek | 15 | 5–5 |
+| Location | Method | Access requirement | Raw rate | Species | Within-method % | Levels |
+|---|---|---|---|---|---|---|
+| Route 101 | Land | No field move; available when the location itself is reachable | 20 | Wurmple | 20 | 2–3 |
+| Route 101 | Land | No field move; available when the location itself is reachable | 20 | Poochyena | 13 | 2–2 |
+| Route 101 | Land | No field move; available when the location itself is reachable | 20 | Zigzagoon | 13 | 2–2 |
+| Route 101 | Land | No field move; available when the location itself is reachable | 20 | Sewaddle | 10 | 3–3 |
+| Route 101 | Land | No field move; available when the location itself is reachable | 20 | Sprigatito | 10 | 3–3 |
+| Route 101 | Land | No field move; available when the location itself is reachable | 20 | Bonsly | 9 | 3–3 |
+| Route 101 | Land | No field move; available when the location itself is reachable | 20 | Lillipup | 9 | 3–3 |
+| Route 101 | Land | No field move; available when the location itself is reachable | 20 | Dreepy | 8 | 2–2 |
+| Route 101 | Land | No field move; available when the location itself is reachable | 20 | Larvesta | 8 | 2–2 |
+| Route 102 | Land | No field move; available when the location itself is reachable | 20 | Bidoof | 20 | 4–4 |
+| Route 102 | Land | No field move; available when the location itself is reachable | 20 | Lotad | 13 | 3–3 |
+| Route 102 | Land | No field move; available when the location itself is reachable | 20 | Seedot | 13 | 3–3 |
+| Route 102 | Land | No field move; available when the location itself is reachable | 20 | Gothita | 10 | 4–4 |
+| Route 102 | Land | No field move; available when the location itself is reachable | 20 | Nacli | 10 | 3–3 |
+| Route 102 | Land | No field move; available when the location itself is reachable | 20 | Ralts | 9 | 3–4 |
+| Route 102 | Land | No field move; available when the location itself is reachable | 20 | Surskit | 9 | 3–3 |
+| Route 102 | Land | No field move; available when the location itself is reachable | 20 | Hatenna | 8 | 4–4 |
+| Route 102 | Land | No field move; available when the location itself is reachable | 20 | Indeedee | 8 | 4–4 |
+| Route 102 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Corphish | 60 | 5–10 |
+| Route 102 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Goldeen | 40 | 5–10 |
+| Route 103 | Land | No field move; available when the location itself is reachable | 20 | Shinx | 20 | 3–4 |
+| Route 103 | Land | No field move; available when the location itself is reachable | 20 | Shellos | 13 | 3–3 |
+| Route 103 | Land | No field move; available when the location itself is reachable | 20 | Wingull | 13 | 2–2 |
+| Route 103 | Land | No field move; available when the location itself is reachable | 20 | Fuecoco | 10 | 2–2 |
+| Route 103 | Land | No field move; available when the location itself is reachable | 20 | Kricketot | 10 | 3–3 |
+| Route 103 | Land | No field move; available when the location itself is reachable | 20 | Blitzle | 9 | 4–4 |
+| Route 103 | Land | No field move; available when the location itself is reachable | 20 | Grubbin | 9 | 2–3 |
+| Route 103 | Land | No field move; available when the location itself is reachable | 20 | Toxel | 8 | 3–3 |
+| Route 103 | Land | No field move; available when the location itself is reachable | 20 | Yamper | 8 | 3–3 |
+| Route 103 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Magikarp | 60 | 5–10 |
+| Route 103 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Tentacool | 40 | 5–10 |
+| Route 104 | Land | No field move; available when the location itself is reachable | 20 | Azurill | 13 | 5–7 |
+| Route 104 | Land | No field move; available when the location itself is reachable | 20 | Taillow | 13 | 5–7 |
+| Route 104 | Land | No field move; available when the location itself is reachable | 20 | Mareanie | 12 | 5–7 |
+| Route 104 | Land | No field move; available when the location itself is reachable | 20 | Wimpod | 12 | 5–7 |
+| Route 104 | Land | No field move; available when the location itself is reachable | 20 | Budew | 10 | 5–7 |
+| Route 104 | Land | No field move; available when the location itself is reachable | 20 | Litleo | 10 | 5–7 |
+| Route 104 | Land | No field move; available when the location itself is reachable | 20 | Pidove | 10 | 5–7 |
+| Route 104 | Land | No field move; available when the location itself is reachable | 20 | Sentret | 10 | 5–7 |
+| Route 104 | Land | No field move; available when the location itself is reachable | 20 | Bunnelby | 5 | 5–7 |
+| Route 104 | Land | No field move; available when the location itself is reachable | 20 | Ledyba | 5 | 5–7 |
+| Route 104 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Chewtle | 60 | 5–10 |
+| Route 104 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Sobble | 40 | 5–10 |
+| Petalburg Woods | Land | No field move; available when the location itself is reachable | 20 | Shroomish | 13 | 6–8 |
+| Petalburg Woods | Land | No field move; available when the location itself is reachable | 20 | Slakoth | 13 | 6–8 |
+| Petalburg Woods | Land | No field move; available when the location itself is reachable | 20 | Buneary | 10 | 6–8 |
+| Petalburg Woods | Land | No field move; available when the location itself is reachable | 20 | Paras | 10 | 6–8 |
+| Petalburg Woods | Land | No field move; available when the location itself is reachable | 20 | Phantump | 10 | 6–8 |
+| Petalburg Woods | Land | No field move; available when the location itself is reachable | 20 | Pidgey | 10 | 6–8 |
+| Petalburg Woods | Land | No field move; available when the location itself is reachable | 20 | Foongus | 8 | 6–8 |
+| Petalburg Woods | Land | No field move; available when the location itself is reachable | 20 | Impidimp | 8 | 6–8 |
+| Petalburg Woods | Land | No field move; available when the location itself is reachable | 20 | Pichu | 5 | 6–8 |
+| Petalburg Woods | Land | No field move; available when the location itself is reachable | 20 | Scyther | 5 | 8–8 |
+| Petalburg Woods | Land | No field move; available when the location itself is reachable | 20 | Cascoon | 4 | 7–8 |
+| Petalburg Woods | Land | No field move; available when the location itself is reachable | 20 | Silcoon | 4 | 7–8 |
+| Petalburg Woods 2 | Land | No field move; available when the location itself is reachable | 20 | Kakuna | 13 | 12–14 |
+| Petalburg Woods 2 | Land | No field move; available when the location itself is reachable | 20 | Metapod | 13 | 12–14 |
+| Petalburg Woods 2 | Land | No field move; available when the location itself is reachable | 20 | Panpour | 10 | 12–14 |
+| Petalburg Woods 2 | Land | No field move; available when the location itself is reachable | 20 | Pansage | 10 | 12–14 |
+| Petalburg Woods 2 | Land | No field move; available when the location itself is reachable | 20 | Pansear | 10 | 12–14 |
+| Petalburg Woods 2 | Land | No field move; available when the location itself is reachable | 20 | Venipede | 10 | 12–14 |
+| Petalburg Woods 2 | Land | No field move; available when the location itself is reachable | 20 | Bounsweet | 9 | 12–14 |
+| Petalburg Woods 2 | Land | No field move; available when the location itself is reachable | 20 | Morelull | 9 | 12–14 |
+| Petalburg Woods 2 | Land | No field move; available when the location itself is reachable | 20 | Applin | 8 | 12–14 |
+| Petalburg Woods 2 | Land | No field move; available when the location itself is reachable | 20 | Blipbug | 8 | 12–14 |
+| Petalburg Woods 3 | Land | No field move; available when the location itself is reachable | 20 | Dewpider | 17 | 13–15 |
+| Petalburg Woods 3 | Land | No field move; available when the location itself is reachable | 20 | Emolga | 17 | 13–15 |
+| Petalburg Woods 3 | Land | No field move; available when the location itself is reachable | 20 | Bellsprout | 13 | 13–15 |
+| Petalburg Woods 3 | Land | No field move; available when the location itself is reachable | 20 | Oddish | 13 | 13–15 |
+| Petalburg Woods 3 | Land | No field move; available when the location itself is reachable | 20 | Croagunk | 10 | 13–15 |
+| Petalburg Woods 3 | Land | No field move; available when the location itself is reachable | 20 | Misdreavus | 10 | 13–15 |
+| Petalburg Woods 3 | Land | No field move; available when the location itself is reachable | 20 | Murkrow | 10 | 13–15 |
+| Petalburg Woods 3 | Land | No field move; available when the location itself is reachable | 20 | Yanma | 10 | 13–15 |
+| Petalburg Woods 3 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Poliwag | 60 | 13–18 |
+| Petalburg Woods 3 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Slowpoke | 40 | 13–18 |
+| Rustboro City | Land | No field move; available when the location itself is reachable | 20 | Cottonee | 20 | 9–11 |
+| Rustboro City | Land | No field move; available when the location itself is reachable | 20 | Eevee | 17 | 9–11 |
+| Rustboro City | Land | No field move; available when the location itself is reachable | 20 | Glameow | 17 | 9–11 |
+| Rustboro City | Land | No field move; available when the location itself is reachable | 20 | Nidoran♀ | 13 | 9–11 |
+| Rustboro City | Land | No field move; available when the location itself is reachable | 20 | Nidoran♂ | 13 | 9–11 |
+| Rustboro City | Land | No field move; available when the location itself is reachable | 20 | Gimmighoul | 10 | 9–11 |
+| Rustboro City | Land | No field move; available when the location itself is reachable | 20 | Petilil | 10 | 9–11 |
+| Berry tree encounter table 1: G Berry Stage Sprouted | Berry Tree | Interact with an eligible Berry tree when its location is reachable | 10 | Sewaddle | 34 | 5–5 |
+| Berry tree encounter table 1: G Berry Stage Sprouted | Berry Tree | Interact with an eligible Berry tree when its location is reachable | 10 | Scatterbug | 20 | 5–5 |
+| Berry tree encounter table 1: G Berry Stage Sprouted | Berry Tree | Interact with an eligible Berry tree when its location is reachable | 10 | Wurmple | 20 | 5–5 |
+| Berry tree encounter table 1: G Berry Stage Sprouted | Berry Tree | Interact with an eligible Berry tree when its location is reachable | 10 | Caterpie | 13 | 5–5 |
+| Berry tree encounter table 1: G Berry Stage Sprouted | Berry Tree | Interact with an eligible Berry tree when its location is reachable | 10 | Weedle | 13 | 5–5 |
+| Berry tree encounter table 2: G Berry Stage Taller | Berry Tree | Interact with an eligible Berry tree when its location is reachable | 10 | Spewpa | 34 | 5–5 |
+| Berry tree encounter table 2: G Berry Stage Taller | Berry Tree | Interact with an eligible Berry tree when its location is reachable | 10 | Cascoon | 20 | 5–5 |
+| Berry tree encounter table 2: G Berry Stage Taller | Berry Tree | Interact with an eligible Berry tree when its location is reachable | 10 | Silcoon | 20 | 5–5 |
+| Berry tree encounter table 2: G Berry Stage Taller | Berry Tree | Interact with an eligible Berry tree when its location is reachable | 10 | Kakuna | 13 | 5–5 |
+| Berry tree encounter table 2: G Berry Stage Taller | Berry Tree | Interact with an eligible Berry tree when its location is reachable | 10 | Metapod | 13 | 5–5 |
+| Berry tree encounter table 3: G Berry Stage Flowering | Berry Tree | Interact with an eligible Berry tree when its location is reachable | 10 | Cherubi | 20 | 5–5 |
+| Berry tree encounter table 3: G Berry Stage Flowering | Berry Tree | Interact with an eligible Berry tree when its location is reachable | 10 | Cutiefly | 20 | 5–5 |
+| Berry tree encounter table 3: G Berry Stage Flowering | Berry Tree | Interact with an eligible Berry tree when its location is reachable | 10 | Illumise | 17 | 5–5 |
+| Berry tree encounter table 3: G Berry Stage Flowering | Berry Tree | Interact with an eligible Berry tree when its location is reachable | 10 | Volbeat | 17 | 5–5 |
+| Berry tree encounter table 3: G Berry Stage Flowering | Berry Tree | Interact with an eligible Berry tree when its location is reachable | 10 | Combee | 13 | 5–5 |
+| Berry tree encounter table 3: G Berry Stage Flowering | Berry Tree | Interact with an eligible Berry tree when its location is reachable | 10 | Flabebe | 13 | 5–5 |
+| Berry tree encounter table 4: G Berry Stage Berries | Berry Tree | Interact with an eligible Berry tree when its location is reachable | 10 | Munchlax | 24 | 5–5 |
+| Berry tree encounter table 4: G Berry Stage Berries | Berry Tree | Interact with an eligible Berry tree when its location is reachable | 10 | Burmy | 23 | 5–5 |
+| Berry tree encounter table 4: G Berry Stage Berries | Berry Tree | Interact with an eligible Berry tree when its location is reachable | 10 | Crabrawler | 23 | 5–5 |
+| Berry tree encounter table 4: G Berry Stage Berries | Berry Tree | Interact with an eligible Berry tree when its location is reachable | 10 | Aipom | 15 | 5–5 |
+| Berry tree encounter table 4: G Berry Stage Berries | Berry Tree | Interact with an eligible Berry tree when its location is reachable | 10 | Pikipek | 15 | 5–5 |
 
 ### Stone Badge — Rustboro to Dewford (cap 20)
 
-| Location | Method | Raw rate | Species | Within-method % | Levels |
-|---|---|---|---|---|---|
-| Route 105 | Land | 20 | Exeggutor | 34 | 3–5 |
-| Route 105 | Land | 20 | Crabrawler | 20 | 4–5 |
-| Route 105 | Land | 20 | Floatzel | 20 | 5–5 |
-| Route 105 | Land | 20 | Chatot | 13 | 4–4 |
-| Route 105 | Land | 20 | Malamar | 13 | 4–4 |
-| Route 105 | Surf | 4 | Tentacool | 60 | 5–35 |
-| Route 105 | Surf | 4 | Wingull | 30 | 10–30 |
-| Route 105 | Surf | 4 | Pelipper | 10 | 15–30 |
-| Route 105 | Old Rod | 30 | Clauncher | 60 | 5–10 |
-| Route 105 | Old Rod | 30 | Skrelp | 40 | 5–10 |
-| Route 105 | Good Rod | 30 | Skrelp | 60 | 10–30 |
-| Route 105 | Good Rod | 30 | Clauncher | 40 | 10–30 |
-| Route 105 | Super Rod | 30 | Clawitzer | 55 | 20–30 |
-| Route 105 | Super Rod | 30 | Dragalge | 45 | 30–45 |
-| Route 116 | Land | 20 | Nincada | 13 | 8–10 |
-| Route 116 | Land | 20 | Skiddo | 13 | 8–10 |
-| Route 116 | Land | 20 | Joltik | 10 | 8–10 |
-| Route 116 | Land | 20 | Mareep | 10 | 8–10 |
-| Route 116 | Land | 20 | Riolu | 10 | 8–10 |
-| Route 116 | Land | 20 | Starly | 10 | 8–10 |
-| Route 116 | Land | 20 | Houndour | 9 | 8–10 |
-| Route 116 | Land | 20 | Skitty | 9 | 8–10 |
-| Route 116 | Land | 20 | Dreepy | 8 | 8–10 |
-| Route 116 | Land | 20 | Rookidee | 8 | 8–10 |
-| Route 116 | Rock Smash | 20 | Spinarak | 60 | 10–15 |
-| Route 116 | Rock Smash | 20 | Fomantis | 40 | 5–20 |
-| Route 116 | Honey | 20 | Audino | 50 | 2–2 |
-| Route 116 | Honey | 20 | Pancham | 25 | 2–3 |
-| Route 116 | Honey | 20 | Purrloin | 25 | 2–3 |
-| Rusturf Tunnel | Land | 10 | Noibat | 13 | 8–10 |
-| Rusturf Tunnel | Land | 10 | Whismur | 13 | 8–10 |
-| Rusturf Tunnel | Land | 10 | Chingling | 10 | 8–10 |
-| Rusturf Tunnel | Land | 10 | Drilbur | 10 | 8–10 |
-| Rusturf Tunnel | Land | 10 | Dunsparce | 10 | 8–10 |
-| Rusturf Tunnel | Land | 10 | Teddiursa | 10 | 8–10 |
-| Rusturf Tunnel | Land | 10 | Larvitar | 9 | 8–10 |
-| Rusturf Tunnel | Land | 10 | Roggenrola | 9 | 8–10 |
-| Rusturf Tunnel | Land | 10 | Bagon | 8 | 8–10 |
-| Rusturf Tunnel | Land | 10 | Larvesta | 8 | 8–10 |
-| Granite Cave 1F | Land | 10 | Axew | 17 | 12–14 |
-| Granite Cave 1F | Land | 10 | Timburr | 17 | 12–14 |
-| Granite Cave 1F | Land | 10 | Geodude | 13 | 12–14 |
-| Granite Cave 1F | Land | 10 | Zubat | 13 | 12–14 |
-| Granite Cave 1F | Land | 10 | Abra | 10 | 12–14 |
-| Granite Cave 1F | Land | 10 | Aron | 10 | 12–14 |
-| Granite Cave 1F | Land | 10 | Glimmet | 10 | 12–14 |
-| Granite Cave 1F | Land | 10 | Makuhita | 10 | 12–14 |
-| Granite Cave B1F | Land | 10 | Aron | 20 | 13–15 |
-| Granite Cave B1F | Land | 10 | Bronzor | 17 | 13–15 |
-| Granite Cave B1F | Land | 10 | Cubone | 17 | 13–15 |
-| Granite Cave B1F | Land | 10 | Mawile | 13 | 13–15 |
-| Granite Cave B1F | Land | 10 | Sableye | 13 | 13–15 |
-| Granite Cave B1F | Land | 10 | Carbink | 10 | 13–15 |
-| Granite Cave B1F | Land | 10 | Onix | 10 | 13–15 |
-| Granite Cave B2F | Land | 10 | Aron | 20 | 13–15 |
-| Granite Cave B2F | Land | 10 | Bronzor | 17 | 13–15 |
-| Granite Cave B2F | Land | 10 | Cubone | 17 | 13–15 |
-| Granite Cave B2F | Land | 10 | Mawile | 13 | 13–15 |
-| Granite Cave B2F | Land | 10 | Sableye | 13 | 13–15 |
-| Granite Cave B2F | Land | 10 | Carbink | 10 | 13–15 |
-| Granite Cave B2F | Land | 10 | Onix | 10 | 13–15 |
-| Granite Cave B2F | Rock Smash | 20 | Nosepass | 70 | 22–25 |
-| Granite Cave B2F | Rock Smash | 20 | Dwebble | 30 | 22–25 |
-| Route 106 | Land | 20 | Exeggcute | 34 | 3–5 |
-| Route 106 | Land | 20 | Buizel | 20 | 5–5 |
-| Route 106 | Land | 20 | Crabrawler | 20 | 4–5 |
-| Route 106 | Land | 20 | Chatot | 13 | 4–4 |
-| Route 106 | Land | 20 | Inkay | 13 | 4–4 |
-| Route 106 | Surf | 4 | Tentacool | 60 | 5–35 |
-| Route 106 | Surf | 4 | Wingull | 30 | 10–30 |
-| Route 106 | Surf | 4 | Pelipper | 10 | 15–30 |
-| Route 106 | Rock Smash | 25 | Binacle | 60 | 25–30 |
-| Route 106 | Rock Smash | 25 | Wimpod | 30 | 20–25 |
-| Route 106 | Rock Smash | 25 | Dwebble | 10 | 30–35 |
-| Route 106 | Old Rod | 30 | Clauncher | 60 | 10–15 |
-| Route 106 | Old Rod | 30 | Skrelp | 40 | 10–15 |
-| Route 106 | Good Rod | 30 | Skrelp | 60 | 10–15 |
-| Route 106 | Good Rod | 30 | Clauncher | 40 | 10–30 |
-| Route 106 | Super Rod | 30 | Clawitzer | 55 | 20–30 |
-| Route 106 | Super Rod | 30 | Dragalge | 45 | 30–45 |
-| Granite Cave Stevens Room | Land | 10 | Makuhita | 20 | 13–15 |
-| Granite Cave Stevens Room | Land | 10 | Aron | 13 | 13–15 |
-| Granite Cave Stevens Room | Land | 10 | Zubat | 13 | 13–15 |
-| Granite Cave Stevens Room | Land | 10 | Abra | 10 | 13–15 |
-| Granite Cave Stevens Room | Land | 10 | Beldum | 10 | 13–15 |
-| Granite Cave Stevens Room | Land | 10 | Axew | 9 | 13–15 |
-| Granite Cave Stevens Room | Land | 10 | Timburr | 9 | 13–15 |
-| Granite Cave Stevens Room | Land | 10 | Dreepy | 8 | 13–15 |
-| Granite Cave Stevens Room | Land | 10 | Larvesta | 8 | 13–15 |
-| Dewford Town | Surf | 4 | Tentacool | 60 | 5–35 |
-| Dewford Town | Surf | 4 | Wingull | 30 | 10–30 |
-| Dewford Town | Surf | 4 | Frillish | 5 | 25–30 |
-| Dewford Town | Surf | 4 | Pelipper | 5 | 25–30 |
-| Dewford Town | Rock Smash | 25 | Binacle | 60 | 25–30 |
-| Dewford Town | Rock Smash | 25 | Wimpod | 30 | 20–25 |
-| Dewford Town | Rock Smash | 25 | Dwebble | 10 | 30–35 |
-| Dewford Town | Old Rod | 10 | Staryu | 60 | 10–15 |
-| Dewford Town | Old Rod | 10 | Shellder | 40 | 10–15 |
-| Dewford Town | Good Rod | 10 | Shellder | 60 | 10–15 |
-| Dewford Town | Good Rod | 10 | Finneon | 20 | 10–30 |
-| Dewford Town | Good Rod | 10 | Staryu | 20 | 10–30 |
-| Dewford Town | Super Rod | 10 | Staryu | 40 | 25–30 |
-| Dewford Town | Super Rod | 10 | Shellder | 30 | 30–35 |
-| Dewford Town | Super Rod | 10 | Lumineon | 15 | 20–25 |
-| Dewford Town | Super Rod | 10 | Starmie | 10 | 35–40 |
-| Dewford Town | Super Rod | 10 | Cloyster | 5 | 40–45 |
-| Dewford Meadow | Land | 10 | Butterfree | 29 | 41–43 |
-| Dewford Meadow | Land | 10 | Combee | 15 | 41–43 |
-| Dewford Meadow | Land | 10 | Cutiefly | 13 | 41–43 |
-| Dewford Meadow | Land | 10 | Oricorio | 13 | 41–43 |
-| Dewford Meadow | Land | 10 | Flabebe | 10 | 41–43 |
-| Dewford Meadow | Land | 10 | Flabebe Orange Flower | 10 | 41–43 |
-| Dewford Meadow | Land | 10 | Flabebe Yellow Flower | 10 | 41–43 |
-| Dewford Meadow | Honey | 20 | Audino | 50 | 2–2 |
-| Dewford Meadow | Honey | 20 | Spritzee | 25 | 2–3 |
-| Dewford Meadow | Honey | 20 | Swirlix | 25 | 2–3 |
-| Dewford Manor 1F | Land | 20 | Mime Jr. | 24 | 41–43 |
-| Dewford Manor 1F | Land | 20 | Litwick | 20 | 41–43 |
-| Dewford Manor 1F | Land | 20 | Hoothoot | 15 | 41–43 |
-| Dewford Manor 1F | Land | 20 | Rattata | 15 | 41–43 |
-| Dewford Manor 1F | Land | 20 | Gastly | 13 | 41–43 |
-| Dewford Manor 1F | Land | 20 | Solosis | 13 | 41–43 |
+| Location | Method | Access requirement | Raw rate | Species | Within-method % | Levels |
+|---|---|---|---|---|---|---|
+| Route 101 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Audino | 50 | 2–2 |
+| Route 101 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Dustox | 20 | 2–3 |
+| Route 101 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Beautifly | 15 | 2–2 |
+| Route 101 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Swadloon | 10 | 3–3 |
+| Route 101 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Skwovet | 5 | 3–3 |
+| Route 102 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Audino | 50 | 2–2 |
+| Route 102 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Gothorita | 20 | 2–3 |
+| Route 102 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Kirlia | 20 | 2–3 |
+| Route 102 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Bibarel | 10 | 3–3 |
+| Route 103 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Audino | 50 | 2–2 |
+| Route 103 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Charjabug | 20 | 2–3 |
+| Route 103 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Luxio | 20 | 2–3 |
+| Route 103 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Kricketune | 10 | 3–3 |
+| Route 104 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Audino | 50 | 2–2 |
+| Route 104 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Yungoos | 30 | 2–3 |
+| Route 104 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Patrat | 20 | 2–3 |
+| Route 105 | Land | No field move; available when the location itself is reachable | 20 | Exeggutor | 34 | 3–5 |
+| Route 105 | Land | No field move; available when the location itself is reachable | 20 | Crabrawler | 20 | 4–5 |
+| Route 105 | Land | No field move; available when the location itself is reachable | 20 | Floatzel | 20 | 5–5 |
+| Route 105 | Land | No field move; available when the location itself is reachable | 20 | Chatot | 13 | 4–4 |
+| Route 105 | Land | No field move; available when the location itself is reachable | 20 | Malamar | 13 | 4–4 |
+| Route 105 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Clauncher | 60 | 5–10 |
+| Route 105 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Skrelp | 40 | 5–10 |
+| Route 116 | Land | No field move; available when the location itself is reachable | 20 | Nincada | 13 | 8–10 |
+| Route 116 | Land | No field move; available when the location itself is reachable | 20 | Skiddo | 13 | 8–10 |
+| Route 116 | Land | No field move; available when the location itself is reachable | 20 | Joltik | 10 | 8–10 |
+| Route 116 | Land | No field move; available when the location itself is reachable | 20 | Mareep | 10 | 8–10 |
+| Route 116 | Land | No field move; available when the location itself is reachable | 20 | Riolu | 10 | 8–10 |
+| Route 116 | Land | No field move; available when the location itself is reachable | 20 | Starly | 10 | 8–10 |
+| Route 116 | Land | No field move; available when the location itself is reachable | 20 | Skitty | 9 | 8–10 |
+| Route 116 | Land | No field move; available when the location itself is reachable | 20 | Dreepy | 8 | 8–10 |
+| Route 116 | Land | No field move; available when the location itself is reachable | 20 | Rookidee | 8 | 8–10 |
+| Route 116 | Land | No field move; available when the location itself is reachable | 20 | Houndour | 5 | 8–10 |
+| Route 116 | Land | No field move; available when the location itself is reachable | 20 | Meowth Galarian | 4 | 8–10 |
+| Route 116 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Audino | 50 | 2–2 |
+| Route 116 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Pancham | 25 | 2–3 |
+| Route 116 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Purrloin | 20 | 2–3 |
+| Route 116 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Nickit | 5 | 3–3 |
+| Petalburg Woods | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Audino | 50 | 2–2 |
+| Petalburg Woods | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Pidgey | 25 | 2–3 |
+| Petalburg Woods | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Pikachu | 25 | 2–3 |
+| Petalburg Woods 2 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Audino | 50 | 2–2 |
+| Petalburg Woods 2 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Caterpie | 25 | 2–3 |
+| Petalburg Woods 2 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Weedle | 25 | 2–3 |
+| Petalburg Woods 3 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Audino | 50 | 2–2 |
+| Petalburg Woods 3 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Emolga | 45 | 2–3 |
+| Petalburg Woods 3 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Goomy | 5 | 3–3 |
+| Rusturf Tunnel | Land | No field move; available when the location itself is reachable | 10 | Noibat | 13 | 8–10 |
+| Rusturf Tunnel | Land | No field move; available when the location itself is reachable | 10 | Whismur | 13 | 8–10 |
+| Rusturf Tunnel | Land | No field move; available when the location itself is reachable | 10 | Chingling | 10 | 8–10 |
+| Rusturf Tunnel | Land | No field move; available when the location itself is reachable | 10 | Drilbur | 10 | 8–10 |
+| Rusturf Tunnel | Land | No field move; available when the location itself is reachable | 10 | Dunsparce | 10 | 8–10 |
+| Rusturf Tunnel | Land | No field move; available when the location itself is reachable | 10 | Teddiursa | 10 | 8–10 |
+| Rusturf Tunnel | Land | No field move; available when the location itself is reachable | 10 | Larvitar | 9 | 8–10 |
+| Rusturf Tunnel | Land | No field move; available when the location itself is reachable | 10 | Roggenrola | 9 | 8–10 |
+| Rusturf Tunnel | Land | No field move; available when the location itself is reachable | 10 | Bagon | 8 | 8–10 |
+| Rusturf Tunnel | Land | No field move; available when the location itself is reachable | 10 | Larvesta | 8 | 8–10 |
+| Granite Cave 1F | Land | No field move; available when the location itself is reachable | 10 | Axew | 17 | 12–14 |
+| Granite Cave 1F | Land | No field move; available when the location itself is reachable | 10 | Geodude | 13 | 12–14 |
+| Granite Cave 1F | Land | No field move; available when the location itself is reachable | 10 | Zubat | 13 | 12–14 |
+| Granite Cave 1F | Land | No field move; available when the location itself is reachable | 10 | Abra | 10 | 12–14 |
+| Granite Cave 1F | Land | No field move; available when the location itself is reachable | 10 | Aron | 10 | 12–14 |
+| Granite Cave 1F | Land | No field move; available when the location itself is reachable | 10 | Glimmet | 10 | 12–14 |
+| Granite Cave 1F | Land | No field move; available when the location itself is reachable | 10 | Makuhita | 10 | 12–14 |
+| Granite Cave 1F | Land | No field move; available when the location itself is reachable | 10 | Timburr | 9 | 12–14 |
+| Granite Cave 1F | Land | No field move; available when the location itself is reachable | 10 | Rolycoly | 8 | 12–14 |
+| Granite Cave B1F | Land | No field move; available when the location itself is reachable | 10 | Aron | 20 | 13–15 |
+| Granite Cave B1F | Land | No field move; available when the location itself is reachable | 10 | Bronzor | 17 | 13–15 |
+| Granite Cave B1F | Land | No field move; available when the location itself is reachable | 10 | Cubone | 17 | 13–15 |
+| Granite Cave B1F | Land | No field move; available when the location itself is reachable | 10 | Mawile | 13 | 13–15 |
+| Granite Cave B1F | Land | No field move; available when the location itself is reachable | 10 | Sableye | 13 | 13–15 |
+| Granite Cave B1F | Land | No field move; available when the location itself is reachable | 10 | Carbink | 10 | 13–15 |
+| Granite Cave B1F | Land | No field move; available when the location itself is reachable | 10 | Onix | 10 | 13–15 |
+| Granite Cave B2F | Land | No field move; available when the location itself is reachable | 10 | Aron | 20 | 13–15 |
+| Granite Cave B2F | Land | No field move; available when the location itself is reachable | 10 | Bronzor | 17 | 13–15 |
+| Granite Cave B2F | Land | No field move; available when the location itself is reachable | 10 | Cubone | 17 | 13–15 |
+| Granite Cave B2F | Land | No field move; available when the location itself is reachable | 10 | Mawile | 13 | 13–15 |
+| Granite Cave B2F | Land | No field move; available when the location itself is reachable | 10 | Sableye | 13 | 13–15 |
+| Granite Cave B2F | Land | No field move; available when the location itself is reachable | 10 | Carbink | 10 | 13–15 |
+| Granite Cave B2F | Land | No field move; available when the location itself is reachable | 10 | Onix | 10 | 13–15 |
+| Route 106 | Land | No field move; available when the location itself is reachable | 20 | Exeggcute | 34 | 3–5 |
+| Route 106 | Land | No field move; available when the location itself is reachable | 20 | Buizel | 20 | 5–5 |
+| Route 106 | Land | No field move; available when the location itself is reachable | 20 | Crabrawler | 20 | 4–5 |
+| Route 106 | Land | No field move; available when the location itself is reachable | 20 | Chatot | 13 | 4–4 |
+| Route 106 | Land | No field move; available when the location itself is reachable | 20 | Inkay | 13 | 4–4 |
+| Route 106 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Clauncher | 60 | 10–15 |
+| Route 106 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Skrelp | 40 | 10–15 |
+| Granite Cave Stevens Room | Land | No field move; available when the location itself is reachable | 10 | Makuhita | 20 | 13–15 |
+| Granite Cave Stevens Room | Land | No field move; available when the location itself is reachable | 10 | Aron | 13 | 13–15 |
+| Granite Cave Stevens Room | Land | No field move; available when the location itself is reachable | 10 | Zubat | 13 | 13–15 |
+| Granite Cave Stevens Room | Land | No field move; available when the location itself is reachable | 10 | Abra | 10 | 13–15 |
+| Granite Cave Stevens Room | Land | No field move; available when the location itself is reachable | 10 | Beldum | 10 | 13–15 |
+| Granite Cave Stevens Room | Land | No field move; available when the location itself is reachable | 10 | Axew | 9 | 13–15 |
+| Granite Cave Stevens Room | Land | No field move; available when the location itself is reachable | 10 | Timburr | 9 | 13–15 |
+| Granite Cave Stevens Room | Land | No field move; available when the location itself is reachable | 10 | Dreepy | 8 | 13–15 |
+| Granite Cave Stevens Room | Land | No field move; available when the location itself is reachable | 10 | Larvesta | 8 | 13–15 |
+| Dewford Town | Old Rod | Old Rod from Mom in Littleroot during the opening | 10 | Staryu | 60 | 10–15 |
+| Dewford Town | Old Rod | Old Rod from Mom in Littleroot during the opening | 10 | Shellder | 40 | 10–15 |
+| Dewford Meadow | Land | No field move; available when the location itself is reachable | 10 | Butterfree | 29 | 41–43 |
+| Dewford Meadow | Land | No field move; available when the location itself is reachable | 10 | Combee | 15 | 41–43 |
+| Dewford Meadow | Land | No field move; available when the location itself is reachable | 10 | Cutiefly | 13 | 41–43 |
+| Dewford Meadow | Land | No field move; available when the location itself is reachable | 10 | Oricorio | 13 | 41–43 |
+| Dewford Meadow | Land | No field move; available when the location itself is reachable | 10 | Flabebe | 10 | 41–43 |
+| Dewford Meadow | Land | No field move; available when the location itself is reachable | 10 | Flabebe Orange Flower | 10 | 41–43 |
+| Dewford Meadow | Land | No field move; available when the location itself is reachable | 10 | Flabebe Yellow Flower | 10 | 41–43 |
+| Dewford Meadow | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Audino | 50 | 2–2 |
+| Dewford Meadow | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Spritzee | 25 | 2–3 |
+| Dewford Meadow | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Swirlix | 25 | 2–3 |
+| Dewford Manor 1F | Land | No field move; available when the location itself is reachable | 20 | Mime Jr. | 24 | 41–43 |
+| Dewford Manor 1F | Land | No field move; available when the location itself is reachable | 20 | Litwick | 20 | 41–43 |
+| Dewford Manor 1F | Land | No field move; available when the location itself is reachable | 20 | Hoothoot | 15 | 41–43 |
+| Dewford Manor 1F | Land | No field move; available when the location itself is reachable | 20 | Rattata | 15 | 41–43 |
+| Dewford Manor 1F | Land | No field move; available when the location itself is reachable | 20 | Gastly | 13 | 41–43 |
+| Dewford Manor 1F | Land | No field move; available when the location itself is reachable | 20 | Solosis | 13 | 41–43 |
+| Rustboro City | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Audino | 60 | 2–3 |
+| Rustboro City | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Nidorina | 20 | 2–3 |
+| Rustboro City | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Nidorino | 20 | 2–3 |
 
 ### Knuckle Badge — Dewford to Slateport (cap 30)
 
-| Location | Method | Raw rate | Species | Within-method % | Levels |
-|---|---|---|---|---|---|
-| Route 110 | Land | 20 | Electrike | 13 | 12–12 |
-| Route 110 | Land | 20 | Gulpin | 13 | 12–12 |
-| Route 110 | Land | 20 | Heliolisk | 12 | 12–12 |
-| Route 110 | Land | 20 | Toxel | 12 | 12–13 |
-| Route 110 | Land | 20 | Gimmighoul Roaming | 10 | 13–13 |
-| Route 110 | Land | 20 | Magnemite | 10 | 13–13 |
-| Route 110 | Land | 20 | Minun | 10 | 13–13 |
-| Route 110 | Land | 20 | Plusle | 10 | 12–12 |
-| Route 110 | Land | 20 | Pachirisu | 5 | 13–13 |
-| Route 110 | Land | 20 | Stunky | 5 | 13–13 |
-| Route 110 | Surf | 4 | Shellos | 60 | 5–35 |
-| Route 110 | Surf | 4 | Gastrodon | 30 | 10–30 |
-| Route 110 | Surf | 4 | Pelipper | 10 | 15–30 |
-| Route 110 | Old Rod | 30 | Wailmer | 60 | 5–10 |
-| Route 110 | Old Rod | 30 | Chinchou | 40 | 5–10 |
-| Route 110 | Good Rod | 30 | Chinchou | 60 | 10–30 |
-| Route 110 | Good Rod | 30 | Wailmer | 40 | 10–30 |
-| Route 110 | Super Rod | 30 | Chinchou | 40 | 25–30 |
-| Route 110 | Super Rod | 30 | Wailmer | 30 | 30–35 |
-| Route 110 | Super Rod | 30 | Lanturn | 15 | 20–25 |
-| Route 110 | Super Rod | 30 | Wailord | 15 | 35–45 |
-| Route 110 | Honey | 20 | Audino | 50 | 2–2 |
-| Route 110 | Honey | 20 | Ekans | 30 | 2–3 |
-| Route 110 | Honey | 20 | Doduo | 20 | 2–3 |
-| Route 109 | Surf | 4 | Frillish | 60 | 5–35 |
-| Route 109 | Surf | 4 | Mantyke | 30 | 10–30 |
-| Route 109 | Surf | 4 | Pyukumuku | 10 | 15–30 |
-| Route 109 | Rock Smash | 255 | Sandygast | 70 | 14–16 |
-| Route 109 | Rock Smash | 255 | Pyukumuku | 30 | 14–16 |
-| Route 109 | Old Rod | 30 | Corsola | 60 | 5–10 |
-| Route 109 | Old Rod | 30 | Mareanie | 40 | 5–10 |
-| Route 109 | Good Rod | 30 | Corsola | 60 | 10–30 |
-| Route 109 | Good Rod | 30 | Bruxish | 20 | 10–30 |
-| Route 109 | Good Rod | 30 | Mareanie | 20 | 10–30 |
-| Route 109 | Super Rod | 30 | Bruxish | 55 | 25–45 |
-| Route 109 | Super Rod | 30 | Corsola | 30 | 30–35 |
-| Route 109 | Super Rod | 30 | Toxapex | 15 | 20–25 |
-| Slateport City | Surf | 4 | Tentacool | 60 | 5–35 |
-| Slateport City | Surf | 4 | Wingull | 30 | 10–30 |
-| Slateport City | Surf | 4 | Pelipper | 10 | 25–30 |
-| Slateport City | Old Rod | 10 | Horsea | 60 | 5–10 |
-| Slateport City | Old Rod | 10 | Frillish | 40 | 5–10 |
-| Slateport City | Good Rod | 10 | Horsea | 60 | 10–30 |
-| Slateport City | Good Rod | 10 | Alomomola | 20 | 10–30 |
-| Slateport City | Good Rod | 10 | Frillish | 20 | 10–30 |
-| Slateport City | Super Rod | 10 | Seadra | 40 | 25–30 |
-| Slateport City | Super Rod | 10 | Alomomola | 30 | 30–35 |
-| Slateport City | Super Rod | 10 | Jellicent | 25 | 20–40 |
-| Slateport City | Super Rod | 10 | Kingdra | 5 | 40–45 |
+| Location | Method | Access requirement | Raw rate | Species | Within-method % | Levels |
+|---|---|---|---|---|---|---|
+| Route 110 | Land | No field move; available when the location itself is reachable | 20 | Electrike | 13 | 12–12 |
+| Route 110 | Land | No field move; available when the location itself is reachable | 20 | Gulpin | 13 | 12–12 |
+| Route 110 | Land | No field move; available when the location itself is reachable | 20 | Gimmighoul Roaming | 10 | 13–13 |
+| Route 110 | Land | No field move; available when the location itself is reachable | 20 | Magnemite | 10 | 13–13 |
+| Route 110 | Land | No field move; available when the location itself is reachable | 20 | Minun | 10 | 13–13 |
+| Route 110 | Land | No field move; available when the location itself is reachable | 20 | Plusle | 10 | 12–12 |
+| Route 110 | Land | No field move; available when the location itself is reachable | 20 | Heliolisk | 8 | 12–12 |
+| Route 110 | Land | No field move; available when the location itself is reachable | 20 | Toxel | 8 | 12–12 |
+| Route 110 | Land | No field move; available when the location itself is reachable | 20 | Pachirisu | 5 | 13–13 |
+| Route 110 | Land | No field move; available when the location itself is reachable | 20 | Trubbish | 5 | 13–13 |
+| Route 110 | Land | No field move; available when the location itself is reachable | 20 | Morpeko | 4 | 12–12 |
+| Route 110 | Land | No field move; available when the location itself is reachable | 20 | Stunky | 4 | 13–13 |
+| Route 110 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Wailmer | 60 | 5–10 |
+| Route 110 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Chinchou | 40 | 5–10 |
+| Route 110 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Audino | 50 | 2–2 |
+| Route 110 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Doduo | 20 | 2–3 |
+| Route 110 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Ekans | 20 | 2–3 |
+| Route 110 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Zigzagoon Galarian | 10 | 3–3 |
+| Route 109 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Corsola | 60 | 5–10 |
+| Route 109 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Mareanie | 40 | 5–10 |
+| Slateport City | Old Rod | Old Rod from Mom in Littleroot during the opening | 10 | Horsea | 60 | 5–10 |
+| Slateport City | Old Rod | Old Rod from Mom in Littleroot during the opening | 10 | Frillish | 40 | 5–10 |
 
 ### Dynamo Badge — Mauville, ash country, and Mt. Chimney (cap 40)
 
-| Location | Method | Raw rate | Species | Within-method % | Levels |
-|---|---|---|---|---|---|
-| Route 111 | Land | 10 | Hippopotas | 17 | 20–22 |
-| Route 111 | Land | 10 | Maractus | 17 | 19–22 |
-| Route 111 | Land | 10 | Cacnea | 13 | 20–20 |
-| Route 111 | Land | 10 | Sandshrew | 13 | 20–20 |
-| Route 111 | Land | 10 | Baltoy | 10 | 19–19 |
-| Route 111 | Land | 10 | Gible | 10 | 19–19 |
-| Route 111 | Land | 10 | Great Tusk | 10 | 21–21 |
-| Route 111 | Land | 10 | Trapinch | 10 | 21–21 |
-| Route 111 | Surf | 4 | Marill | 60 | 20–30 |
-| Route 111 | Surf | 4 | Surskit | 30 | 10–20 |
-| Route 111 | Surf | 4 | Azumarill | 5 | 5–10 |
-| Route 111 | Surf | 4 | Masquerain | 5 | 30–35 |
-| Route 111 | Rock Smash | 20 | Geodude | 60 | 10–15 |
-| Route 111 | Rock Smash | 20 | Graveler | 30 | 5–10 |
-| Route 111 | Rock Smash | 20 | Shuckle | 10 | 15–20 |
-| Route 111 | Old Rod | 30 | Barboach | 60 | 5–10 |
-| Route 111 | Old Rod | 30 | Goldeen | 40 | 5–10 |
-| Route 111 | Good Rod | 30 | Goldeen | 60 | 10–30 |
-| Route 111 | Good Rod | 30 | Basculin | 40 | 10–30 |
-| Route 111 | Super Rod | 30 | Basculin | 70 | 25–35 |
-| Route 111 | Super Rod | 30 | Seaking | 30 | 20–45 |
-| Route 112 | Land | 20 | Machoke | 13 | 15–15 |
-| Route 112 | Land | 20 | Numel | 13 | 15–15 |
-| Route 112 | Land | 20 | Ponyta | 10 | 14–14 |
-| Route 112 | Land | 20 | Sawk | 10 | 14–14 |
-| Route 112 | Land | 20 | Throh | 10 | 16–16 |
-| Route 112 | Land | 20 | Tyrogue | 10 | 14–14 |
-| Route 112 | Land | 20 | Rufflet | 9 | 16–16 |
-| Route 112 | Land | 20 | Vullaby | 9 | 16–16 |
-| Route 112 | Land | 20 | Hawlucha | 8 | 16–16 |
-| Route 112 | Land | 20 | Kubfu | 8 | 16–16 |
-| Route 112 | Honey | 20 | Audino | 60 | 2–3 |
-| Route 112 | Honey | 20 | Sawk | 15 | 2–2 |
-| Route 112 | Honey | 20 | Throh | 15 | 2–2 |
-| Route 112 | Honey | 20 | Hitmonchan | 5 | 3–3 |
-| Route 112 | Honey | 20 | Hitmonlee | 5 | 3–3 |
-| Route 113 | Land | 20 | Mienfoo | 17 | 16–16 |
-| Route 113 | Land | 20 | Skarmory | 17 | 16–16 |
-| Route 113 | Land | 20 | Scraggy | 13 | 15–15 |
-| Route 113 | Land | 20 | Spinda | 13 | 15–15 |
-| Route 113 | Land | 20 | Bouffalant | 10 | 14–14 |
-| Route 113 | Land | 20 | Fletchinder | 10 | 14–14 |
-| Route 113 | Land | 20 | Klefki | 10 | 14–14 |
-| Route 113 | Land | 20 | Pawniard | 10 | 15–15 |
-| Route 113 | Honey | 20 | Spinda | 90 | 2–3 |
-| Route 113 | Honey | 20 | Mienshao | 5 | 3–3 |
-| Route 113 | Honey | 20 | Talonflame | 5 | 3–3 |
-| Route 114 | Land | 20 | Phanpy | 17 | 16–17 |
-| Route 114 | Land | 20 | Skorupi | 17 | 15–18 |
-| Route 114 | Land | 20 | Ducklett | 13 | 16–16 |
-| Route 114 | Land | 20 | Swablu | 13 | 16–16 |
-| Route 114 | Land | 20 | Lombre | 10 | 17–17 |
-| Route 114 | Land | 20 | Nuzleaf | 10 | 15–15 |
-| Route 114 | Land | 20 | Seviper | 10 | 16–16 |
-| Route 114 | Land | 20 | Zangoose | 10 | 15–15 |
-| Route 114 | Surf | 4 | Wooper | 60 | 20–30 |
-| Route 114 | Surf | 4 | Quagsire | 30 | 10–20 |
-| Route 114 | Surf | 4 | Masquerain | 10 | 5–35 |
-| Route 114 | Rock Smash | 20 | Geodude | 60 | 10–15 |
-| Route 114 | Rock Smash | 20 | Graveler | 30 | 5–10 |
-| Route 114 | Rock Smash | 20 | Shuckle | 10 | 15–20 |
-| Route 114 | Old Rod | 30 | Wishiwashi | 60 | 5–10 |
-| Route 114 | Old Rod | 30 | Barboach | 40 | 5–10 |
-| Route 114 | Good Rod | 30 | Barboach | 80 | 10–30 |
-| Route 114 | Good Rod | 30 | Wishiwashi | 20 | 10–30 |
-| Route 114 | Super Rod | 30 | Wishiwashi | 40 | 25–30 |
-| Route 114 | Super Rod | 30 | Seaking | 30 | 30–35 |
-| Route 114 | Super Rod | 30 | Whiscash | 30 | 20–45 |
-| Route 114 | Honey | 20 | Audino | 50 | 2–2 |
-| Route 114 | Honey | 20 | Donphan | 25 | 2–3 |
-| Route 114 | Honey | 20 | Quagsire | 25 | 2–3 |
-| Route 117 | Land | 20 | Deerling | 13 | 13–13 |
-| Route 117 | Land | 20 | Roselia | 13 | 13–13 |
-| Route 117 | Land | 20 | Farfetch'd | 10 | 13–13 |
-| Route 117 | Land | 20 | Illumise | 10 | 14–14 |
-| Route 117 | Land | 20 | Meowth | 10 | 13–13 |
-| Route 117 | Land | 20 | Volbeat | 10 | 14–14 |
-| Route 117 | Land | 20 | Marill | 9 | 13–13 |
-| Route 117 | Land | 20 | Minccino | 9 | 13–13 |
-| Route 117 | Land | 20 | Grookey | 8 | 14–14 |
-| Route 117 | Land | 20 | Scorbunny | 8 | 14–14 |
-| Route 117 | Surf | 4 | Marill | 60 | 20–30 |
-| Route 117 | Surf | 4 | Azumarill | 30 | 10–20 |
-| Route 117 | Surf | 4 | Seaking | 10 | 5–35 |
-| Route 117 | Rock Smash | 20 | Floette | 60 | 10–15 |
-| Route 117 | Rock Smash | 20 | Sunkern | 40 | 5–20 |
-| Route 117 | Old Rod | 30 | Goldeen | 60 | 5–10 |
-| Route 117 | Old Rod | 30 | Corphish | 40 | 5–10 |
-| Route 117 | Good Rod | 30 | Corphish | 60 | 10–30 |
-| Route 117 | Good Rod | 30 | Goldeen | 40 | 10–30 |
-| Route 117 | Super Rod | 30 | Seaking | 40 | 25–30 |
-| Route 117 | Super Rod | 30 | Corphish | 30 | 30–35 |
-| Route 117 | Super Rod | 30 | Crawdaunt | 30 | 20–45 |
-| Route 117 | Honey | 20 | Audino | 60 | 2–3 |
-| Route 117 | Honey | 20 | Karrablast | 20 | 2–3 |
-| Route 117 | Honey | 20 | Shelmet | 20 | 2–3 |
-| Fiery Path | Land | 10 | Diglett | 13 | 15–15 |
-| Fiery Path | Land | 10 | Slugma | 13 | 15–15 |
-| Fiery Path | Land | 10 | Grimer | 10 | 15–15 |
-| Fiery Path | Land | 10 | Koffing | 10 | 15–15 |
-| Fiery Path | Land | 10 | Magby | 10 | 15–15 |
-| Fiery Path | Land | 10 | Torkoal | 10 | 16–16 |
-| Fiery Path | Land | 10 | Durant | 9 | 14–16 |
-| Fiery Path | Land | 10 | Heatmor | 9 | 14–16 |
-| Fiery Path | Land | 10 | Charmander | 8 | 16–16 |
-| Fiery Path | Land | 10 | Larvesta | 8 | 14–14 |
-| Meteor Falls B1F 2R | Land | 10 | Bagon | 43 | 30–40 |
-| Meteor Falls B1F 2R | Land | 10 | Golbat | 20 | 25–39 |
-| Meteor Falls B1F 2R | Land | 10 | Solrock | 13 | 33–33 |
-| Meteor Falls B1F 2R | Land | 10 | Lunatone | 10 | 37–37 |
-| Meteor Falls B1F 2R | Land | 10 | Roaring Moon | 10 | 35–35 |
-| Meteor Falls B1F 2R | Land | 10 | Salamence | 4 | 38–38 |
-| Meteor Falls B1F 2R | Surf | 4 | Golbat | 60 | 5–35 |
-| Meteor Falls B1F 2R | Surf | 4 | Dratini | 30 | 30–35 |
-| Meteor Falls B1F 2R | Surf | 4 | Lunatone | 5 | 15–25 |
-| Meteor Falls B1F 2R | Surf | 4 | Solrock | 5 | 25–35 |
-| Meteor Falls B1F 2R | Old Rod | 30 | Barboach | 60 | 5–10 |
-| Meteor Falls B1F 2R | Old Rod | 30 | Dratini | 40 | 5–10 |
-| Meteor Falls B1F 2R | Good Rod | 30 | Dratini | 60 | 10–30 |
-| Meteor Falls B1F 2R | Good Rod | 30 | Barboach | 20 | 10–30 |
-| Meteor Falls B1F 2R | Good Rod | 30 | Dragonair | 20 | 10–30 |
-| Meteor Falls B1F 2R | Super Rod | 30 | Dratini | 40 | 25–30 |
-| Meteor Falls B1F 2R | Super Rod | 30 | Dragonair | 30 | 30–35 |
-| Meteor Falls B1F 2R | Super Rod | 30 | Whiscash | 25 | 20–40 |
-| Meteor Falls B1F 2R | Super Rod | 30 | Dragonite | 5 | 40–45 |
-| Jagged Pass | Land | 20 | Grumpig | 13 | 21–21 |
-| Jagged Pass | Land | 20 | Salandit | 13 | 21–21 |
-| Jagged Pass | Land | 20 | Fearow | 10 | 20–20 |
-| Jagged Pass | Land | 20 | Gligar | 10 | 20–20 |
-| Jagged Pass | Land | 20 | Mudbray | 10 | 20–20 |
-| Jagged Pass | Land | 20 | Primeape | 10 | 21–21 |
-| Jagged Pass | Land | 20 | Jangmo-o | 9 | 21–22 |
-| Jagged Pass | Land | 20 | Turtonator | 9 | 22–22 |
-| Jagged Pass | Land | 20 | Bagon | 8 | 22–22 |
-| Jagged Pass | Land | 20 | Deino | 8 | 22–22 |
-| Jagged Pass | Honey | 20 | Audino | 70 | 2–3 |
-| Jagged Pass | Honey | 20 | Hakamo-o | 25 | 2–3 |
-| Jagged Pass | Honey | 20 | Salazzle | 5 | 3–3 |
-| New Mauville Inside | Land | 10 | Magneton | 23 | 23–24 |
-| New Mauville Inside | Land | 10 | Electabuzz | 17 | 22–26 |
-| New Mauville Inside | Land | 10 | Togedemaru | 17 | 22–26 |
-| New Mauville Inside | Land | 10 | Klang | 13 | 24–24 |
-| New Mauville Inside | Land | 10 | Elekid | 10 | 25–25 |
-| New Mauville Inside | Land | 10 | Iron Hands | 10 | 23–23 |
-| New Mauville Inside | Land | 10 | Klink | 10 | 25–25 |
-| New Mauville Entrance | Land | 10 | Magneton | 23 | 23–24 |
-| New Mauville Entrance | Land | 10 | Electabuzz | 17 | 22–26 |
-| New Mauville Entrance | Land | 10 | Togedemaru | 17 | 22–26 |
-| New Mauville Entrance | Land | 10 | Klang | 13 | 24–24 |
-| New Mauville Entrance | Land | 10 | Electrode | 10 | 23–23 |
-| New Mauville Entrance | Land | 10 | Elekid | 10 | 25–25 |
-| New Mauville Entrance | Land | 10 | Klink | 10 | 25–25 |
-| Meteor Falls 1F 1R | Land | 10 | Minior | 20 | 15–18 |
-| Meteor Falls 1F 1R | Land | 10 | Druddigon | 17 | 14–20 |
-| Meteor Falls 1F 1R | Land | 10 | Ferroseed | 17 | 18–19 |
-| Meteor Falls 1F 1R | Land | 10 | Lunatone | 13 | 16–16 |
-| Meteor Falls 1F 1R | Land | 10 | Solrock | 13 | 17–17 |
-| Meteor Falls 1F 1R | Land | 10 | Clefairy | 10 | 14–14 |
-| Meteor Falls 1F 1R | Land | 10 | Deino | 10 | 16–16 |
-| Meteor Falls 1F 1R | Surf | 4 | Golbat | 60 | 5–35 |
-| Meteor Falls 1F 1R | Surf | 4 | Dratini | 30 | 30–35 |
-| Meteor Falls 1F 1R | Surf | 4 | Lunatone | 5 | 15–25 |
-| Meteor Falls 1F 1R | Surf | 4 | Solrock | 5 | 25–35 |
-| Meteor Falls 1F 1R | Old Rod | 30 | Barboach | 60 | 5–10 |
-| Meteor Falls 1F 1R | Old Rod | 30 | Dratini | 40 | 5–10 |
-| Meteor Falls 1F 1R | Good Rod | 30 | Dratini | 60 | 10–30 |
-| Meteor Falls 1F 1R | Good Rod | 30 | Barboach | 20 | 10–30 |
-| Meteor Falls 1F 1R | Good Rod | 30 | Dragonair | 20 | 10–30 |
-| Meteor Falls 1F 1R | Super Rod | 30 | Dratini | 40 | 25–30 |
-| Meteor Falls 1F 1R | Super Rod | 30 | Dragonair | 30 | 30–35 |
-| Meteor Falls 1F 1R | Super Rod | 30 | Whiscash | 25 | 20–40 |
-| Meteor Falls 1F 1R | Super Rod | 30 | Dragonite | 5 | 40–45 |
-| Meteor Falls 1F 2R | Land | 10 | Golbat | 20 | 15–18 |
-| Meteor Falls 1F 2R | Land | 10 | Druddigon | 17 | 14–20 |
-| Meteor Falls 1F 2R | Land | 10 | Ferrothorn | 17 | 18–19 |
-| Meteor Falls 1F 2R | Land | 10 | Lunatone | 13 | 16–16 |
-| Meteor Falls 1F 2R | Land | 10 | Solrock | 13 | 17–17 |
-| Meteor Falls 1F 2R | Land | 10 | Clefairy | 10 | 14–14 |
-| Meteor Falls 1F 2R | Land | 10 | Zweilous | 10 | 16–16 |
-| Meteor Falls 1F 2R | Surf | 4 | Golbat | 60 | 5–35 |
-| Meteor Falls 1F 2R | Surf | 4 | Dratini | 30 | 30–35 |
-| Meteor Falls 1F 2R | Surf | 4 | Lunatone | 5 | 15–25 |
-| Meteor Falls 1F 2R | Surf | 4 | Solrock | 5 | 25–35 |
-| Meteor Falls 1F 2R | Old Rod | 30 | Barboach | 60 | 5–10 |
-| Meteor Falls 1F 2R | Old Rod | 30 | Dratini | 40 | 5–10 |
-| Meteor Falls 1F 2R | Good Rod | 30 | Dratini | 60 | 10–30 |
-| Meteor Falls 1F 2R | Good Rod | 30 | Barboach | 20 | 10–30 |
-| Meteor Falls 1F 2R | Good Rod | 30 | Dragonair | 20 | 10–30 |
-| Meteor Falls 1F 2R | Super Rod | 30 | Dratini | 40 | 25–30 |
-| Meteor Falls 1F 2R | Super Rod | 30 | Dragonair | 30 | 30–35 |
-| Meteor Falls 1F 2R | Super Rod | 30 | Whiscash | 25 | 20–40 |
-| Meteor Falls 1F 2R | Super Rod | 30 | Dragonite | 5 | 40–45 |
-| Meteor Falls B1F 1R | Land | 10 | Druddigon | 17 | 14–20 |
-| Meteor Falls B1F 1R | Land | 10 | Ferrothorn | 17 | 18–19 |
-| Meteor Falls B1F 1R | Land | 10 | Lunatone | 13 | 16–16 |
-| Meteor Falls B1F 1R | Land | 10 | Solrock | 13 | 17–17 |
-| Meteor Falls B1F 1R | Land | 10 | Clefairy | 10 | 14–14 |
-| Meteor Falls B1F 1R | Land | 10 | Drampa | 10 | 18–18 |
-| Meteor Falls B1F 1R | Land | 10 | Golbat | 10 | 15–15 |
-| Meteor Falls B1F 1R | Land | 10 | Zweilous | 10 | 16–16 |
-| Meteor Falls B1F 1R | Surf | 4 | Golbat | 60 | 5–35 |
-| Meteor Falls B1F 1R | Surf | 4 | Dratini | 30 | 30–35 |
-| Meteor Falls B1F 1R | Surf | 4 | Lunatone | 5 | 15–25 |
-| Meteor Falls B1F 1R | Surf | 4 | Solrock | 5 | 25–35 |
-| Meteor Falls B1F 1R | Old Rod | 30 | Barboach | 60 | 5–10 |
-| Meteor Falls B1F 1R | Old Rod | 30 | Dratini | 40 | 5–10 |
-| Meteor Falls B1F 1R | Good Rod | 30 | Dratini | 60 | 10–30 |
-| Meteor Falls B1F 1R | Good Rod | 30 | Barboach | 20 | 10–30 |
-| Meteor Falls B1F 1R | Good Rod | 30 | Dragonair | 20 | 10–30 |
-| Meteor Falls B1F 1R | Super Rod | 30 | Dratini | 40 | 25–30 |
-| Meteor Falls B1F 1R | Super Rod | 30 | Dragonair | 30 | 30–35 |
-| Meteor Falls B1F 1R | Super Rod | 30 | Whiscash | 25 | 20–40 |
-| Meteor Falls B1F 1R | Super Rod | 30 | Dragonite | 5 | 40–45 |
-| Route 111 Ruins Exterior | Land | 10 | Rockruff | 20 | 20–20 |
-| Route 111 Ruins Exterior | Land | 10 | Meditite | 17 | 22–24 |
-| Route 111 Ruins Exterior | Land | 10 | Skiploom | 17 | 22–24 |
-| Route 111 Ruins Exterior | Land | 10 | Helioptile | 13 | 21–21 |
-| Route 111 Ruins Exterior | Land | 10 | Xatu | 13 | 21–21 |
-| Route 111 Ruins Exterior | Land | 10 | Girafarig | 10 | 20–20 |
-| Route 111 Ruins Exterior | Land | 10 | Hawlucha | 10 | 20–20 |
-| Route 111 Ruins Exterior | Honey | 20 | Jumpluff | 100 | 2–3 |
+| Location | Method | Access requirement | Raw rate | Species | Within-method % | Levels |
+|---|---|---|---|---|---|---|
+| Route 103 | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Pineco | 60 | 10–15 |
+| Route 103 | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Hoothoot | 40 | 5–20 |
+| Route 111 | Land | No field move; available when the location itself is reachable | 10 | Cacnea | 13 | 20–20 |
+| Route 111 | Land | No field move; available when the location itself is reachable | 10 | Sandshrew | 13 | 20–20 |
+| Route 111 | Land | No field move; available when the location itself is reachable | 10 | Baltoy | 10 | 19–19 |
+| Route 111 | Land | No field move; available when the location itself is reachable | 10 | Gible | 10 | 19–19 |
+| Route 111 | Land | No field move; available when the location itself is reachable | 10 | Great Tusk | 10 | 21–21 |
+| Route 111 | Land | No field move; available when the location itself is reachable | 10 | Trapinch | 10 | 21–21 |
+| Route 111 | Land | No field move; available when the location itself is reachable | 10 | Sandile | 8 | 21–21 |
+| Route 111 | Land | No field move; available when the location itself is reachable | 10 | Silicobra | 8 | 20–20 |
+| Route 111 | Land | No field move; available when the location itself is reachable | 10 | Hippopotas | 5 | 20–20 |
+| Route 111 | Land | No field move; available when the location itself is reachable | 10 | Maractus | 5 | 19–19 |
+| Route 111 | Land | No field move; available when the location itself is reachable | 10 | Stonjourner | 4 | 22–22 |
+| Route 111 | Land | No field move; available when the location itself is reachable | 10 | Yamask Galarian | 4 | 22–22 |
+| Route 111 | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Geodude | 60 | 10–15 |
+| Route 111 | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Graveler | 30 | 5–10 |
+| Route 111 | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Shuckle | 10 | 15–20 |
+| Route 111 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Barboach | 60 | 5–10 |
+| Route 111 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Goldeen | 40 | 5–10 |
+| Route 112 | Land | No field move; available when the location itself is reachable | 20 | Machoke | 13 | 15–15 |
+| Route 112 | Land | No field move; available when the location itself is reachable | 20 | Numel | 13 | 15–15 |
+| Route 112 | Land | No field move; available when the location itself is reachable | 20 | Ponyta | 10 | 14–14 |
+| Route 112 | Land | No field move; available when the location itself is reachable | 20 | Sawk | 10 | 14–14 |
+| Route 112 | Land | No field move; available when the location itself is reachable | 20 | Throh | 10 | 16–16 |
+| Route 112 | Land | No field move; available when the location itself is reachable | 20 | Tyrogue | 10 | 14–14 |
+| Route 112 | Land | No field move; available when the location itself is reachable | 20 | Rufflet | 9 | 16–16 |
+| Route 112 | Land | No field move; available when the location itself is reachable | 20 | Vullaby | 9 | 16–16 |
+| Route 112 | Land | No field move; available when the location itself is reachable | 20 | Hawlucha | 8 | 16–16 |
+| Route 112 | Land | No field move; available when the location itself is reachable | 20 | Kubfu | 8 | 16–16 |
+| Route 112 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Audino | 60 | 2–3 |
+| Route 112 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Sawk | 15 | 2–2 |
+| Route 112 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Throh | 15 | 2–2 |
+| Route 112 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Hitmonchan | 5 | 3–3 |
+| Route 112 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Hitmonlee | 5 | 3–3 |
+| Route 113 | Land | No field move; available when the location itself is reachable | 20 | Mienfoo | 17 | 16–16 |
+| Route 113 | Land | No field move; available when the location itself is reachable | 20 | Scraggy | 13 | 15–15 |
+| Route 113 | Land | No field move; available when the location itself is reachable | 20 | Skarmory | 13 | 16–16 |
+| Route 113 | Land | No field move; available when the location itself is reachable | 20 | Spinda | 13 | 15–15 |
+| Route 113 | Land | No field move; available when the location itself is reachable | 20 | Bouffalant | 10 | 14–14 |
+| Route 113 | Land | No field move; available when the location itself is reachable | 20 | Fletchinder | 10 | 14–14 |
+| Route 113 | Land | No field move; available when the location itself is reachable | 20 | Klefki | 10 | 14–14 |
+| Route 113 | Land | No field move; available when the location itself is reachable | 20 | Pawniard | 10 | 15–15 |
+| Route 113 | Land | No field move; available when the location itself is reachable | 20 | Falinks | 4 | 16–16 |
+| Route 113 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Spinda | 90 | 2–3 |
+| Route 113 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Mienshao | 5 | 3–3 |
+| Route 113 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Talonflame | 5 | 3–3 |
+| Route 114 | Land | No field move; available when the location itself is reachable | 20 | Phanpy | 17 | 16–17 |
+| Route 114 | Land | No field move; available when the location itself is reachable | 20 | Skorupi | 17 | 15–18 |
+| Route 114 | Land | No field move; available when the location itself is reachable | 20 | Ducklett | 13 | 16–16 |
+| Route 114 | Land | No field move; available when the location itself is reachable | 20 | Swablu | 13 | 16–16 |
+| Route 114 | Land | No field move; available when the location itself is reachable | 20 | Lombre | 10 | 17–17 |
+| Route 114 | Land | No field move; available when the location itself is reachable | 20 | Nuzleaf | 10 | 15–15 |
+| Route 114 | Land | No field move; available when the location itself is reachable | 20 | Seviper | 10 | 16–16 |
+| Route 114 | Land | No field move; available when the location itself is reachable | 20 | Zangoose | 10 | 15–15 |
+| Route 114 | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Geodude | 60 | 10–15 |
+| Route 114 | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Graveler | 30 | 5–10 |
+| Route 114 | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Shuckle | 10 | 15–20 |
+| Route 114 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Wishiwashi | 60 | 5–10 |
+| Route 114 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Barboach | 40 | 5–10 |
+| Route 114 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Audino | 50 | 2–2 |
+| Route 114 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Donphan | 25 | 2–3 |
+| Route 114 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Quagsire | 25 | 2–3 |
+| Route 116 | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Spinarak | 60 | 10–15 |
+| Route 116 | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Fomantis | 40 | 5–20 |
+| Route 117 | Land | No field move; available when the location itself is reachable | 20 | Deerling | 13 | 13–13 |
+| Route 117 | Land | No field move; available when the location itself is reachable | 20 | Roselia | 13 | 13–13 |
+| Route 117 | Land | No field move; available when the location itself is reachable | 20 | Farfetch'd | 10 | 13–13 |
+| Route 117 | Land | No field move; available when the location itself is reachable | 20 | Illumise | 10 | 14–14 |
+| Route 117 | Land | No field move; available when the location itself is reachable | 20 | Meowth | 10 | 13–13 |
+| Route 117 | Land | No field move; available when the location itself is reachable | 20 | Volbeat | 10 | 14–14 |
+| Route 117 | Land | No field move; available when the location itself is reachable | 20 | Grookey | 8 | 14–14 |
+| Route 117 | Land | No field move; available when the location itself is reachable | 20 | Scorbunny | 8 | 14–14 |
+| Route 117 | Land | No field move; available when the location itself is reachable | 20 | Farfetchd Galarian | 5 | 13–13 |
+| Route 117 | Land | No field move; available when the location itself is reachable | 20 | Minccino | 5 | 13–13 |
+| Route 117 | Land | No field move; available when the location itself is reachable | 20 | Gossifleur | 4 | 13–13 |
+| Route 117 | Land | No field move; available when the location itself is reachable | 20 | Wooloo | 4 | 13–13 |
+| Route 117 | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Floette | 60 | 10–15 |
+| Route 117 | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Sunkern | 40 | 5–20 |
+| Route 117 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Goldeen | 60 | 5–10 |
+| Route 117 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Corphish | 40 | 5–10 |
+| Route 117 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Audino | 60 | 2–3 |
+| Route 117 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Karrablast | 20 | 2–3 |
+| Route 117 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Shelmet | 20 | 2–3 |
+| Petalburg Woods | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Aipom | 60 | 10–15 |
+| Petalburg Woods | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Cherubi | 40 | 5–20 |
+| Petalburg Woods 2 | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Exeggcute | 60 | 10–15 |
+| Petalburg Woods 2 | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Venonat | 40 | 5–20 |
+| Petalburg Woods 3 | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Beedrill | 60 | 10–15 |
+| Petalburg Woods 3 | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Trevenant | 40 | 5–20 |
+| Granite Cave B2F | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Nosepass | 70 | 22–25 |
+| Granite Cave B2F | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Dwebble | 30 | 22–25 |
+| Fiery Path | Land | No field move; available when the location itself is reachable | 10 | Diglett | 13 | 15–15 |
+| Fiery Path | Land | No field move; available when the location itself is reachable | 10 | Slugma | 13 | 15–15 |
+| Fiery Path | Land | No field move; available when the location itself is reachable | 10 | Grimer | 10 | 15–15 |
+| Fiery Path | Land | No field move; available when the location itself is reachable | 10 | Koffing | 10 | 15–15 |
+| Fiery Path | Land | No field move; available when the location itself is reachable | 10 | Magby | 10 | 15–15 |
+| Fiery Path | Land | No field move; available when the location itself is reachable | 10 | Torkoal | 10 | 16–16 |
+| Fiery Path | Land | No field move; available when the location itself is reachable | 10 | Durant | 9 | 14–16 |
+| Fiery Path | Land | No field move; available when the location itself is reachable | 10 | Charmander | 8 | 16–16 |
+| Fiery Path | Land | No field move; available when the location itself is reachable | 10 | Larvesta | 8 | 14–14 |
+| Fiery Path | Land | No field move; available when the location itself is reachable | 10 | Heatmor | 5 | 16–16 |
+| Fiery Path | Land | No field move; available when the location itself is reachable | 10 | Sizzlipede | 4 | 14–14 |
+| Meteor Falls B1F 2R | Land | No field move; available when the location itself is reachable | 10 | Bagon | 43 | 30–40 |
+| Meteor Falls B1F 2R | Land | No field move; available when the location itself is reachable | 10 | Golbat | 20 | 25–39 |
+| Meteor Falls B1F 2R | Land | No field move; available when the location itself is reachable | 10 | Solrock | 13 | 33–33 |
+| Meteor Falls B1F 2R | Land | No field move; available when the location itself is reachable | 10 | Lunatone | 10 | 37–37 |
+| Meteor Falls B1F 2R | Land | No field move; available when the location itself is reachable | 10 | Roaring Moon | 10 | 35–35 |
+| Meteor Falls B1F 2R | Land | No field move; available when the location itself is reachable | 10 | Salamence | 4 | 38–38 |
+| Meteor Falls B1F 2R | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Barboach | 60 | 5–10 |
+| Meteor Falls B1F 2R | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Dratini | 40 | 5–10 |
+| Jagged Pass | Land | No field move; available when the location itself is reachable | 20 | Grumpig | 13 | 21–21 |
+| Jagged Pass | Land | No field move; available when the location itself is reachable | 20 | Salandit | 13 | 21–21 |
+| Jagged Pass | Land | No field move; available when the location itself is reachable | 20 | Fearow | 10 | 20–20 |
+| Jagged Pass | Land | No field move; available when the location itself is reachable | 20 | Gligar | 10 | 20–20 |
+| Jagged Pass | Land | No field move; available when the location itself is reachable | 20 | Mudbray | 10 | 20–20 |
+| Jagged Pass | Land | No field move; available when the location itself is reachable | 20 | Primeape | 10 | 21–21 |
+| Jagged Pass | Land | No field move; available when the location itself is reachable | 20 | Jangmo-o | 9 | 21–22 |
+| Jagged Pass | Land | No field move; available when the location itself is reachable | 20 | Turtonator | 9 | 22–22 |
+| Jagged Pass | Land | No field move; available when the location itself is reachable | 20 | Bagon | 8 | 22–22 |
+| Jagged Pass | Land | No field move; available when the location itself is reachable | 20 | Deino | 8 | 22–22 |
+| Jagged Pass | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Audino | 70 | 2–3 |
+| Jagged Pass | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Hakamo-o | 25 | 2–3 |
+| Jagged Pass | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Salazzle | 5 | 3–3 |
+| Route 106 | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 25 | Binacle | 60 | 25–30 |
+| Route 106 | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 25 | Wimpod | 30 | 20–25 |
+| Route 106 | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 25 | Dwebble | 10 | 30–35 |
+| Route 109 | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 255 | Sandygast | 65 | 14–16 |
+| Route 109 | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 255 | Pyukumuku | 30 | 14–16 |
+| Route 109 | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 255 | Pincurchin | 5 | 14–16 |
+| New Mauville Inside | Land | No field move; available when the location itself is reachable | 10 | Magneton | 23 | 23–24 |
+| New Mauville Inside | Land | No field move; available when the location itself is reachable | 10 | Electabuzz | 17 | 22–26 |
+| New Mauville Inside | Land | No field move; available when the location itself is reachable | 10 | Togedemaru | 17 | 22–26 |
+| New Mauville Inside | Land | No field move; available when the location itself is reachable | 10 | Klang | 13 | 24–24 |
+| New Mauville Inside | Land | No field move; available when the location itself is reachable | 10 | Elekid | 10 | 25–25 |
+| New Mauville Inside | Land | No field move; available when the location itself is reachable | 10 | Iron Hands | 10 | 23–23 |
+| New Mauville Inside | Land | No field move; available when the location itself is reachable | 10 | Klink | 10 | 25–25 |
+| New Mauville Entrance | Land | No field move; available when the location itself is reachable | 10 | Magneton | 23 | 23–24 |
+| New Mauville Entrance | Land | No field move; available when the location itself is reachable | 10 | Electabuzz | 17 | 22–26 |
+| New Mauville Entrance | Land | No field move; available when the location itself is reachable | 10 | Togedemaru | 17 | 22–26 |
+| New Mauville Entrance | Land | No field move; available when the location itself is reachable | 10 | Klang | 13 | 24–24 |
+| New Mauville Entrance | Land | No field move; available when the location itself is reachable | 10 | Electrode | 10 | 23–23 |
+| New Mauville Entrance | Land | No field move; available when the location itself is reachable | 10 | Elekid | 10 | 25–25 |
+| New Mauville Entrance | Land | No field move; available when the location itself is reachable | 10 | Klink | 10 | 25–25 |
+| Meteor Falls 1F 1R | Land | No field move; available when the location itself is reachable | 10 | Minior | 20 | 15–18 |
+| Meteor Falls 1F 1R | Land | No field move; available when the location itself is reachable | 10 | Druddigon | 17 | 14–20 |
+| Meteor Falls 1F 1R | Land | No field move; available when the location itself is reachable | 10 | Ferroseed | 17 | 18–19 |
+| Meteor Falls 1F 1R | Land | No field move; available when the location itself is reachable | 10 | Lunatone | 13 | 16–16 |
+| Meteor Falls 1F 1R | Land | No field move; available when the location itself is reachable | 10 | Solrock | 13 | 17–17 |
+| Meteor Falls 1F 1R | Land | No field move; available when the location itself is reachable | 10 | Clefairy | 10 | 14–14 |
+| Meteor Falls 1F 1R | Land | No field move; available when the location itself is reachable | 10 | Deino | 10 | 16–16 |
+| Meteor Falls 1F 1R | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Barboach | 60 | 5–10 |
+| Meteor Falls 1F 1R | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Dratini | 40 | 5–10 |
+| Meteor Falls 1F 2R | Land | No field move; available when the location itself is reachable | 10 | Golbat | 20 | 15–18 |
+| Meteor Falls 1F 2R | Land | No field move; available when the location itself is reachable | 10 | Druddigon | 17 | 14–20 |
+| Meteor Falls 1F 2R | Land | No field move; available when the location itself is reachable | 10 | Ferrothorn | 17 | 18–19 |
+| Meteor Falls 1F 2R | Land | No field move; available when the location itself is reachable | 10 | Lunatone | 13 | 16–16 |
+| Meteor Falls 1F 2R | Land | No field move; available when the location itself is reachable | 10 | Solrock | 13 | 17–17 |
+| Meteor Falls 1F 2R | Land | No field move; available when the location itself is reachable | 10 | Clefairy | 10 | 14–14 |
+| Meteor Falls 1F 2R | Land | No field move; available when the location itself is reachable | 10 | Zweilous | 10 | 16–16 |
+| Meteor Falls 1F 2R | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Barboach | 60 | 5–10 |
+| Meteor Falls 1F 2R | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Dratini | 40 | 5–10 |
+| Meteor Falls B1F 1R | Land | No field move; available when the location itself is reachable | 10 | Druddigon | 17 | 14–20 |
+| Meteor Falls B1F 1R | Land | No field move; available when the location itself is reachable | 10 | Ferrothorn | 17 | 18–19 |
+| Meteor Falls B1F 1R | Land | No field move; available when the location itself is reachable | 10 | Lunatone | 13 | 16–16 |
+| Meteor Falls B1F 1R | Land | No field move; available when the location itself is reachable | 10 | Solrock | 13 | 17–17 |
+| Meteor Falls B1F 1R | Land | No field move; available when the location itself is reachable | 10 | Clefairy | 10 | 14–14 |
+| Meteor Falls B1F 1R | Land | No field move; available when the location itself is reachable | 10 | Drampa | 10 | 18–18 |
+| Meteor Falls B1F 1R | Land | No field move; available when the location itself is reachable | 10 | Golbat | 10 | 15–15 |
+| Meteor Falls B1F 1R | Land | No field move; available when the location itself is reachable | 10 | Zweilous | 10 | 16–16 |
+| Meteor Falls B1F 1R | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Barboach | 60 | 5–10 |
+| Meteor Falls B1F 1R | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Dratini | 40 | 5–10 |
+| Dewford Town | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 25 | Binacle | 60 | 25–30 |
+| Dewford Town | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 25 | Wimpod | 30 | 20–25 |
+| Dewford Town | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 25 | Dwebble | 10 | 30–35 |
+| Route 111 Ruins Exterior | Land | No field move; available when the location itself is reachable | 10 | Rockruff | 20 | 20–20 |
+| Route 111 Ruins Exterior | Land | No field move; available when the location itself is reachable | 10 | Meditite | 17 | 22–24 |
+| Route 111 Ruins Exterior | Land | No field move; available when the location itself is reachable | 10 | Skiploom | 17 | 22–24 |
+| Route 111 Ruins Exterior | Land | No field move; available when the location itself is reachable | 10 | Helioptile | 13 | 21–21 |
+| Route 111 Ruins Exterior | Land | No field move; available when the location itself is reachable | 10 | Xatu | 13 | 21–21 |
+| Route 111 Ruins Exterior | Land | No field move; available when the location itself is reachable | 10 | Girafarig | 10 | 20–20 |
+| Route 111 Ruins Exterior | Land | No field move; available when the location itself is reachable | 10 | Hawlucha | 10 | 20–20 |
+| Route 111 Ruins Exterior | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Jumpluff | 100 | 2–3 |
 
 ### Heat Badge — Petalburg return and eastern routes (cap 45)
 
-| Location | Method | Raw rate | Species | Within-method % | Levels |
-|---|---|---|---|---|---|
-| Petalburg City | Surf | 1 | Marill | 60 | 20–30 |
-| Petalburg City | Surf | 1 | Azumarill | 30 | 10–20 |
-| Petalburg City | Surf | 1 | Masquerain | 10 | 5–35 |
-| Petalburg City | Old Rod | 10 | Goldeen | 60 | 5–10 |
-| Petalburg City | Old Rod | 10 | Corphish | 40 | 5–10 |
-| Petalburg City | Good Rod | 10 | Corphish | 60 | 10–30 |
-| Petalburg City | Good Rod | 10 | Goldeen | 40 | 10–30 |
-| Petalburg City | Super Rod | 10 | Corphish | 60 | 20–45 |
-| Petalburg City | Super Rod | 10 | Crawdaunt | 40 | 25–30 |
-| Ashen Woods | Land | 10 | Noctowl | 24 | 41–43 |
-| Ashen Woods | Land | 10 | Growlithe | 13 | 41–43 |
-| Ashen Woods | Land | 10 | Salandit | 13 | 41–43 |
-| Ashen Woods | Land | 10 | Camerupt | 10 | 41–43 |
-| Ashen Woods | Land | 10 | Chi Yu | 10 | 41–43 |
-| Ashen Woods | Land | 10 | Heracross | 10 | 41–43 |
-| Ashen Woods | Land | 10 | Pinsir | 10 | 41–43 |
-| Ashen Woods | Land | 10 | Trumbeak | 10 | 41–43 |
-| Ashen Woods | Honey | 20 | Audino | 90 | 2–3 |
-| Ashen Woods | Honey | 20 | Salazzle | 5 | 3–3 |
-| Ashen Woods | Honey | 20 | Toucannon | 5 | 3–3 |
-| Route 119 under the bridge | Any Rod under bridge | special | Feebas | 100 | 20–25 |
+| Location | Method | Access requirement | Raw rate | Species | Within-method % | Levels |
+|---|---|---|---|---|---|---|
+| Petalburg City | Old Rod | Old Rod from Mom in Littleroot during the opening | 10 | Goldeen | 60 | 5–10 |
+| Petalburg City | Old Rod | Old Rod from Mom in Littleroot during the opening | 10 | Corphish | 40 | 5–10 |
+| Ashen Woods | Land | No field move; available when the location itself is reachable | 10 | Noctowl | 24 | 41–43 |
+| Ashen Woods | Land | No field move; available when the location itself is reachable | 10 | Growlithe | 13 | 41–43 |
+| Ashen Woods | Land | No field move; available when the location itself is reachable | 10 | Salandit | 13 | 41–43 |
+| Ashen Woods | Land | No field move; available when the location itself is reachable | 10 | Camerupt | 10 | 41–43 |
+| Ashen Woods | Land | No field move; available when the location itself is reachable | 10 | Chi Yu | 10 | 41–43 |
+| Ashen Woods | Land | No field move; available when the location itself is reachable | 10 | Heracross | 10 | 41–43 |
+| Ashen Woods | Land | No field move; available when the location itself is reachable | 10 | Pinsir | 10 | 41–43 |
+| Ashen Woods | Land | No field move; available when the location itself is reachable | 10 | Trumbeak | 10 | 41–43 |
+| Ashen Woods | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Audino | 90 | 2–3 |
+| Ashen Woods | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Salazzle | 5 | 3–3 |
+| Ashen Woods | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Toucannon | 5 | 3–3 |
 
 ### Balance Badge — Fortree, Safari Zone, and Mt. Pyre (cap 55)
 
-| Location | Method | Raw rate | Species | Within-method % | Levels |
-|---|---|---|---|---|---|
-| Route 118 | Land | 20 | Linoone | 13 | 24–24 |
-| Route 118 | Land | 20 | Manectric | 13 | 24–24 |
-| Route 118 | Land | 20 | Lickitung | 10 | 26–26 |
-| Route 118 | Land | 20 | Liepard | 10 | 26–26 |
-| Route 118 | Land | 20 | Passimian | 10 | 26–26 |
-| Route 118 | Land | 20 | Raticate | 10 | 26–26 |
-| Route 118 | Land | 20 | Carnivine | 9 | 25–25 |
-| Route 118 | Land | 20 | Dedenne | 9 | 25–27 |
-| Route 118 | Land | 20 | Type: Null | 8 | 26–26 |
-| Route 118 | Land | 20 | Zorua | 8 | 26–26 |
-| Route 118 | Surf | 4 | Tentacool | 60 | 5–35 |
-| Route 118 | Surf | 4 | Dondozo | 30 | 10–30 |
-| Route 118 | Surf | 4 | Pelipper | 10 | 25–30 |
-| Route 118 | Rock Smash | 20 | Fearow | 60 | 10–15 |
-| Route 118 | Rock Smash | 20 | Venomoth | 40 | 5–20 |
-| Route 118 | Old Rod | 30 | Magikarp | 60 | 5–10 |
-| Route 118 | Old Rod | 30 | Carvanha | 40 | 5–10 |
-| Route 118 | Good Rod | 30 | Tatsugiri | 60 | 10–30 |
-| Route 118 | Good Rod | 30 | Tatsugiri Droopy | 20 | 10–30 |
-| Route 118 | Good Rod | 30 | Tatsugiri Stretchy | 20 | 10–30 |
-| Route 118 | Super Rod | 30 | Basculin | 70 | 30–35 |
-| Route 118 | Super Rod | 30 | Gyarados | 15 | 35–45 |
-| Route 118 | Super Rod | 30 | Sharpedo | 15 | 20–25 |
-| Route 118 | Honey | 20 | Audino | 60 | 2–3 |
-| Route 118 | Honey | 20 | Dedenne | 20 | 2–3 |
-| Route 118 | Honey | 20 | Lickilicky | 20 | 2–3 |
-| Mt Pyre 1F | Land | 10 | Litwick | 20 | 26–29 |
-| Mt Pyre 1F | Land | 10 | Misdreavus | 17 | 23–29 |
-| Mt Pyre 1F | Land | 10 | Murkrow | 17 | 22–24 |
-| Mt Pyre 1F | Land | 10 | Duskull | 13 | 28–28 |
-| Mt Pyre 1F | Land | 10 | Shuppet | 13 | 27–27 |
-| Mt Pyre 1F | Land | 10 | Golbat | 10 | 25–25 |
-| Mt Pyre 1F | Land | 10 | Haunter | 10 | 24–24 |
-| Safari Zone South | Land | 25 | Meowth Alolan | 20 | 25–27 |
-| Safari Zone South | Land | 25 | Persian Alolan | 17 | 25–27 |
-| Safari Zone South | Land | 25 | Raichu Alolan | 17 | 27–29 |
-| Safari Zone South | Land | 25 | Pikachu | 13 | 27–27 |
-| Safari Zone South | Land | 25 | Wobbuffet | 13 | 25–25 |
-| Safari Zone South | Land | 25 | Girafarig | 10 | 25–25 |
-| Safari Zone South | Land | 25 | Smeargle | 10 | 25–25 |
-| Abandoned Ship Rooms B1F | Surf | 4 | Frillish | 95 | 5–35 |
-| Abandoned Ship Rooms B1F | Surf | 4 | Jellicent | 5 | 5–35 |
-| Abandoned Ship Rooms B1F | Old Rod | 20 | Frillish | 60 | 5–10 |
-| Abandoned Ship Rooms B1F | Old Rod | 20 | Skrelp | 40 | 5–10 |
-| Abandoned Ship Rooms B1F | Good Rod | 20 | Skrelp | 60 | 10–30 |
-| Abandoned Ship Rooms B1F | Good Rod | 20 | Dhelmise | 20 | 10–30 |
-| Abandoned Ship Rooms B1F | Good Rod | 20 | Frillish | 20 | 10–30 |
-| Abandoned Ship Rooms B1F | Super Rod | 20 | Dragalge | 40 | 25–30 |
-| Abandoned Ship Rooms B1F | Super Rod | 20 | Dhelmise | 30 | 30–35 |
-| Abandoned Ship Rooms B1F | Super Rod | 20 | Jellicent | 30 | 20–35 |
-| Route 107 | Surf | 4 | Frillish | 60 | 5–35 |
-| Route 107 | Surf | 4 | Mantyke | 30 | 10–30 |
-| Route 107 | Surf | 4 | Wingull | 10 | 15–30 |
-| Route 107 | Old Rod | 30 | Remoraid | 60 | 5–10 |
-| Route 107 | Old Rod | 30 | Finneon | 40 | 5–10 |
-| Route 107 | Good Rod | 30 | Finneon | 60 | 10–30 |
-| Route 107 | Good Rod | 30 | Remoraid | 40 | 10–30 |
-| Route 107 | Super Rod | 30 | Lumineon | 40 | 25–30 |
-| Route 107 | Super Rod | 30 | Gyarados | 30 | 20–45 |
-| Route 107 | Super Rod | 30 | Octillery | 30 | 30–35 |
-| Route 108 | Surf | 4 | Frillish | 60 | 5–35 |
-| Route 108 | Surf | 4 | Mantyke | 30 | 10–30 |
-| Route 108 | Surf | 4 | Wingull | 10 | 15–30 |
-| Route 108 | Old Rod | 30 | Remoraid | 60 | 5–10 |
-| Route 108 | Old Rod | 30 | Finneon | 40 | 5–10 |
-| Route 108 | Good Rod | 30 | Finneon | 60 | 10–30 |
-| Route 108 | Good Rod | 30 | Remoraid | 40 | 10–30 |
-| Route 108 | Super Rod | 30 | Lumineon | 40 | 25–30 |
-| Route 108 | Super Rod | 30 | Gyarados | 30 | 20–45 |
-| Route 108 | Super Rod | 30 | Octillery | 30 | 30–35 |
-| Route 115 | Land | 20 | Tangela | 22 | 24–25 |
-| Route 115 | Land | 20 | Jigglypuff | 13 | 23–23 |
-| Route 115 | Land | 20 | Swellow | 13 | 23–23 |
-| Route 115 | Land | 20 | Munchlax | 12 | 24–26 |
-| Route 115 | Land | 20 | Dodrio | 10 | 24–24 |
-| Route 115 | Land | 20 | Duraludon | 10 | 25–25 |
-| Route 115 | Land | 20 | Lurantis | 10 | 24–25 |
-| Route 115 | Land | 20 | Spritzee | 10 | 25–25 |
-| Route 115 | Surf | 4 | Wishiwashi | 60 | 5–35 |
-| Route 115 | Surf | 4 | Wingull | 30 | 10–30 |
-| Route 115 | Surf | 4 | Tentacruel | 10 | 15–30 |
-| Route 115 | Old Rod | 30 | Wishiwashi | 60 | 5–10 |
-| Route 115 | Old Rod | 30 | Wailmer | 40 | 5–10 |
-| Route 115 | Good Rod | 30 | Wailmer | 60 | 10–30 |
-| Route 115 | Good Rod | 30 | Qwilfish | 20 | 10–30 |
-| Route 115 | Good Rod | 30 | Wishiwashi | 20 | 10–30 |
-| Route 115 | Super Rod | 30 | Qwilfish | 40 | 25–30 |
-| Route 115 | Super Rod | 30 | Wishiwashi | 30 | 30–35 |
-| Route 115 | Super Rod | 30 | Wailmer | 15 | 20–25 |
-| Route 115 | Super Rod | 30 | Wailord | 15 | 35–45 |
-| Route 115 | Honey | 20 | Audino | 90 | 2–3 |
-| Route 115 | Honey | 20 | Aromatisse | 5 | 3–3 |
-| Route 115 | Honey | 20 | Slurpuff | 5 | 3–3 |
-| Route 119 | Land | 15 | Goomy | 14 | 25–27 |
-| Route 119 | Land | 15 | Gumshoos | 13 | 25–25 |
-| Route 119 | Land | 15 | Tropius | 13 | 25–25 |
-| Route 119 | Land | 15 | Comfey | 10 | 26–26 |
-| Route 119 | Land | 15 | Cramorant | 10 | 24–27 |
-| Route 119 | Land | 15 | Oranguru | 10 | 25–25 |
-| Route 119 | Land | 15 | Raging Bolt | 10 | 27–27 |
-| Route 119 | Land | 15 | Dreepy | 8 | 25–25 |
-| Route 119 | Land | 15 | Larvesta | 8 | 26–26 |
-| Route 119 | Land | 15 | Amoonguss | 4 | 27–27 |
-| Route 119 | Surf | 4 | Gastrodon East Sea | 60 | 5–35 |
-| Route 119 | Surf | 4 | Floatzel | 30 | 10–30 |
-| Route 119 | Surf | 4 | Pelipper | 10 | 25–30 |
-| Route 119 | Old Rod | 30 | Carvanha | 60 | 5–10 |
-| Route 119 | Old Rod | 30 | Magikarp | 40 | 5–10 |
-| Route 119 | Good Rod | 30 | Carvanha | 60 | 10–30 |
-| Route 119 | Good Rod | 30 | Magikarp | 20 | 10–30 |
-| Route 119 | Good Rod | 30 | Sharpedo | 20 | 10–30 |
-| Route 119 | Super Rod | 30 | Carvanha | 40 | 25–30 |
-| Route 119 | Super Rod | 30 | Gyarados | 30 | 30–35 |
-| Route 119 | Super Rod | 30 | Sharpedo | 25 | 20–40 |
-| Route 119 | Super Rod | 30 | Milotic | 5 | 40–45 |
-| Route 119 | Honey | 20 | Audino | 60 | 2–3 |
-| Route 119 | Honey | 20 | Amoonguss | 20 | 2–3 |
-| Route 119 | Honey | 20 | Sliggoo | 20 | 2–3 |
-| Route 120 | Land | 20 | Absol | 13 | 25–25 |
-| Route 120 | Land | 20 | Watchog | 13 | 25–25 |
-| Route 120 | Land | 20 | Ogerpon | 10 | 25–25 |
-| Route 120 | Land | 20 | Pumpkaboo Large | 10 | 27–27 |
-| Route 120 | Land | 20 | Pumpkaboo Small | 10 | 26–26 |
-| Route 120 | Land | 20 | Tropius | 10 | 25–25 |
-| Route 120 | Land | 20 | Venomoth | 10 | 27–27 |
-| Route 120 | Land | 20 | Honedge | 8 | 27–27 |
-| Route 120 | Land | 20 | Mimikyu | 8 | 25–25 |
-| Route 120 | Land | 20 | Pumpkaboo | 4 | 25–25 |
-| Route 120 | Land | 20 | Pumpkaboo Super | 4 | 25–25 |
-| Route 120 | Surf | 4 | Azumarill | 60 | 20–30 |
-| Route 120 | Surf | 4 | Stunfisk | 30 | 10–20 |
-| Route 120 | Surf | 4 | Masquerain | 10 | 5–35 |
-| Route 120 | Rock Smash | 20 | Pinsir | 60 | 10–15 |
-| Route 120 | Rock Smash | 20 | Masquerain | 40 | 5–20 |
-| Route 120 | Old Rod | 30 | Barboach | 60 | 5–10 |
-| Route 120 | Old Rod | 30 | Magikarp | 40 | 5–10 |
-| Route 120 | Good Rod | 30 | Barboach | 60 | 10–30 |
-| Route 120 | Good Rod | 30 | Magikarp | 20 | 10–30 |
-| Route 120 | Good Rod | 30 | Stunfisk | 20 | 10–30 |
-| Route 120 | Super Rod | 30 | Whiscash | 40 | 25–30 |
-| Route 120 | Super Rod | 30 | Gyarados | 30 | 20–45 |
-| Route 120 | Super Rod | 30 | Stunfisk | 30 | 30–35 |
-| Route 120 | Honey | 20 | Audino | 90 | 2–3 |
-| Route 120 | Honey | 20 | Tangrowth | 5 | 3–3 |
-| Route 120 | Honey | 20 | Yanmega | 5 | 3–3 |
-| Route 122 | Surf | 4 | Pelipper | 60 | 5–35 |
-| Route 122 | Surf | 4 | Frillish | 30 | 10–30 |
-| Route 122 | Surf | 4 | Alomomola | 10 | 15–30 |
-| Route 122 | Old Rod | 30 | Magikarp | 60 | 5–10 |
-| Route 122 | Old Rod | 30 | Wailmer | 40 | 5–10 |
-| Route 122 | Good Rod | 30 | Wailmer | 60 | 10–30 |
-| Route 122 | Good Rod | 30 | Finneon | 40 | 10–30 |
-| Route 122 | Super Rod | 30 | Wailmer | 40 | 25–30 |
-| Route 122 | Super Rod | 30 | Gyarados | 30 | 30–35 |
-| Route 122 | Super Rod | 30 | Lumineon | 30 | 20–45 |
-| Route 123 | Land | 20 | Karrablast | 20 | 26–28 |
-| Route 123 | Land | 20 | Shelmet | 20 | 26–28 |
-| Route 123 | Land | 20 | Gloom | 17 | 25–28 |
-| Route 123 | Land | 20 | Stantler | 17 | 26–28 |
-| Route 123 | Land | 20 | Linoone | 13 | 26–26 |
-| Route 123 | Land | 20 | Mightyena | 13 | 26–26 |
-| Route 123 | Surf | 4 | Azumarill | 60 | 5–35 |
-| Route 123 | Surf | 4 | Surskit | 30 | 10–30 |
-| Route 123 | Surf | 4 | Masquerain | 10 | 15–30 |
-| Route 123 | Rock Smash | 20 | Noctowl | 60 | 10–15 |
-| Route 123 | Rock Smash | 20 | Exeggcute | 40 | 5–20 |
-| Route 123 | Old Rod | 30 | Goldeen | 60 | 5–10 |
-| Route 123 | Old Rod | 30 | Corphish | 40 | 5–10 |
-| Route 123 | Good Rod | 30 | Corphish | 60 | 10–30 |
-| Route 123 | Good Rod | 30 | Goldeen | 40 | 10–30 |
-| Route 123 | Super Rod | 30 | Corphish | 40 | 25–30 |
-| Route 123 | Super Rod | 30 | Crawdaunt | 30 | 30–35 |
-| Route 123 | Super Rod | 30 | Seaking | 30 | 20–45 |
-| Route 123 | Honey | 20 | Audino | 90 | 2–3 |
-| Route 123 | Honey | 20 | Accelgor | 5 | 3–3 |
-| Route 123 | Honey | 20 | Escavalier | 5 | 3–3 |
-| Mt Pyre Exterior | Land | 10 | Vulpix | 23 | 27–28 |
-| Mt Pyre Exterior | Land | 10 | Drifblim | 20 | 29–29 |
-| Mt Pyre Exterior | Land | 10 | Bronzong | 17 | 25–28 |
-| Mt Pyre Exterior | Land | 10 | Growlithe | 17 | 26–29 |
-| Mt Pyre Exterior | Land | 10 | Medicham | 13 | 27–27 |
-| Mt Pyre Exterior | Land | 10 | Beheeyem | 10 | 27–27 |
-| Mt Pyre Exterior | Honey | 20 | Audino | 70 | 2–3 |
-| Mt Pyre Exterior | Honey | 20 | Arcanine | 15 | 2–2 |
-| Mt Pyre Exterior | Honey | 20 | Ninetales | 15 | 2–2 |
-| Abandoned Ship Hidden Floor Corridors | Surf | 4 | Frillish | 95 | 5–35 |
-| Abandoned Ship Hidden Floor Corridors | Surf | 4 | Jellicent | 5 | 5–35 |
-| Abandoned Ship Hidden Floor Corridors | Old Rod | 20 | Frillish | 60 | 5–10 |
-| Abandoned Ship Hidden Floor Corridors | Old Rod | 20 | Skrelp | 40 | 5–10 |
-| Abandoned Ship Hidden Floor Corridors | Good Rod | 20 | Skrelp | 60 | 10–30 |
-| Abandoned Ship Hidden Floor Corridors | Good Rod | 20 | Dhelmise | 20 | 10–30 |
-| Abandoned Ship Hidden Floor Corridors | Good Rod | 20 | Frillish | 20 | 10–30 |
-| Abandoned Ship Hidden Floor Corridors | Super Rod | 20 | Dragalge | 40 | 25–30 |
-| Abandoned Ship Hidden Floor Corridors | Super Rod | 20 | Dhelmise | 30 | 30–35 |
-| Abandoned Ship Hidden Floor Corridors | Super Rod | 20 | Jellicent | 30 | 20–35 |
-| Safari Zone Southwest | Land | 25 | Palpitoad | 20 | 25–27 |
-| Safari Zone Southwest | Land | 25 | Arbok | 17 | 27–29 |
-| Safari Zone Southwest | Land | 25 | Sliggoo | 17 | 25–27 |
-| Safari Zone Southwest | Land | 25 | Karrablast | 13 | 25–25 |
-| Safari Zone Southwest | Land | 25 | Shelmet | 13 | 27–27 |
-| Safari Zone Southwest | Land | 25 | Seismitoad | 10 | 25–25 |
-| Safari Zone Southwest | Land | 25 | Toxicroak | 10 | 27–27 |
-| Safari Zone Southwest | Surf | 9 | Stunfisk | 60 | 20–30 |
-| Safari Zone Southwest | Surf | 9 | Sliggoo | 30 | 20–30 |
-| Safari Zone Southwest | Surf | 9 | Seismitoad | 10 | 30–35 |
-| Safari Zone Southwest | Old Rod | 35 | Magikarp | 60 | 5–10 |
-| Safari Zone Southwest | Old Rod | 35 | Goldeen | 40 | 5–10 |
-| Safari Zone Southwest | Good Rod | 35 | Goldeen | 60 | 10–30 |
-| Safari Zone Southwest | Good Rod | 35 | Seaking | 40 | 10–30 |
-| Safari Zone Southwest | Super Rod | 35 | Seaking | 100 | 25–40 |
-| Safari Zone North | Land | 25 | Donphan | 20 | 27–29 |
-| Safari Zone North | Land | 25 | Dugtrio Alolan | 17 | 27–29 |
-| Safari Zone North | Land | 25 | Kangaskhan | 17 | 29–31 |
-| Safari Zone North | Land | 25 | Gloom | 13 | 27–27 |
-| Safari Zone North | Land | 25 | Weepinbell | 13 | 27–27 |
-| Safari Zone North | Land | 25 | Heracross | 10 | 29–29 |
-| Safari Zone North | Land | 25 | Marowak Alolan | 10 | 29–29 |
-| Safari Zone North | Rock Smash | 25 | Graveler Alolan | 100 | 5–25 |
-| Safari Zone Northwest | Land | 25 | Rhyhorn | 20 | 29–29 |
-| Safari Zone Northwest | Land | 25 | Chansey | 17 | 27–29 |
-| Safari Zone Northwest | Land | 25 | Raticate Alolan | 17 | 29–31 |
-| Safari Zone Northwest | Land | 25 | Dodrio | 13 | 27–27 |
-| Safari Zone Northwest | Land | 25 | Xatu | 13 | 27–27 |
-| Safari Zone Northwest | Land | 25 | Pinsir | 10 | 29–29 |
-| Safari Zone Northwest | Land | 25 | Rhydon | 10 | 27–27 |
-| Safari Zone Northwest | Surf | 9 | Grimer Alolan | 90 | 20–30 |
-| Safari Zone Northwest | Surf | 9 | Muk Alolan | 10 | 30–35 |
-| Safari Zone Northwest | Old Rod | 35 | Grimer Alolan | 60 | 5–10 |
-| Safari Zone Northwest | Old Rod | 35 | Grimer | 40 | 5–10 |
-| Safari Zone Northwest | Good Rod | 35 | Grimer Alolan | 60 | 10–30 |
-| Safari Zone Northwest | Good Rod | 35 | Muk Alolan | 40 | 10–30 |
-| Safari Zone Northwest | Super Rod | 35 | Muk Alolan | 60 | 25–40 |
-| Safari Zone Northwest | Super Rod | 35 | Muk | 40 | 25–30 |
-| Safari Zone Southeast | Land | 25 | Ambipom | 20 | 33–36 |
-| Safari Zone Southeast | Land | 25 | Ariados | 20 | 34–35 |
-| Safari Zone Southeast | Land | 25 | Granbull | 17 | 35–39 |
-| Safari Zone Southeast | Land | 25 | Stantler | 17 | 34–40 |
-| Safari Zone Southeast | Land | 25 | Flaaffy | 13 | 34–34 |
-| Safari Zone Southeast | Land | 25 | Gligar | 13 | 33–33 |
-| Safari Zone Southeast | Surf | 9 | Wooper | 60 | 25–30 |
-| Safari Zone Southeast | Surf | 9 | Quagsire | 40 | 25–35 |
-| Safari Zone Southeast | Old Rod | 35 | Remoraid | 60 | 25–30 |
-| Safari Zone Southeast | Old Rod | 35 | Dratini | 40 | 25–30 |
-| Safari Zone Southeast | Good Rod | 35 | Dratini | 60 | 25–30 |
-| Safari Zone Southeast | Good Rod | 35 | Dragonair | 40 | 25–35 |
-| Safari Zone Southeast | Super Rod | 35 | Dratini | 65 | 25–35 |
-| Safari Zone Southeast | Super Rod | 35 | Dragonair | 30 | 25–30 |
-| Safari Zone Southeast | Super Rod | 35 | Dragonite | 5 | 35–40 |
-| Safari Zone Northeast | Land | 25 | Nidorina | 17 | 34–40 |
-| Safari Zone Northeast | Land | 25 | Nidorino | 17 | 35–39 |
-| Safari Zone Northeast | Land | 25 | Houndoom | 13 | 33–33 |
-| Safari Zone Northeast | Land | 25 | Pineco | 13 | 34–34 |
-| Safari Zone Northeast | Land | 25 | Forretress | 10 | 35–35 |
-| Safari Zone Northeast | Land | 25 | Ledian | 10 | 33–33 |
-| Safari Zone Northeast | Land | 25 | Miltank | 10 | 36–36 |
-| Safari Zone Northeast | Land | 25 | Tauros | 10 | 34–34 |
-| Safari Zone Northeast | Rock Smash | 25 | Shuckle | 100 | 20–35 |
+| Location | Method | Access requirement | Raw rate | Species | Within-method % | Levels |
+|---|---|---|---|---|---|---|
+| Route 102 | Surf | Balance Badge (5) and HM03 Surf | 4 | Surskit | 60 | 20–30 |
+| Route 102 | Surf | Balance Badge (5) and HM03 Surf | 4 | Azumarill | 30 | 10–20 |
+| Route 102 | Surf | Balance Badge (5) and HM03 Surf | 4 | Masquerain | 10 | 5–35 |
+| Route 102 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Corphish | 60 | 10–30 |
+| Route 102 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Crawdaunt | 20 | 10–30 |
+| Route 102 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Seaking | 20 | 10–30 |
+| Route 103 | Surf | Balance Badge (5) and HM03 Surf | 4 | Wingull | 60 | 5–35 |
+| Route 103 | Surf | Balance Badge (5) and HM03 Surf | 4 | Gastrodon | 30 | 10–30 |
+| Route 103 | Surf | Balance Badge (5) and HM03 Surf | 4 | Pelipper | 10 | 15–30 |
+| Route 103 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Tentacool | 60 | 10–30 |
+| Route 103 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Gyarados | 20 | 10–30 |
+| Route 103 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Wailmer | 20 | 10–30 |
+| Route 104 | Surf | Balance Badge (5) and HM03 Surf | 4 | Wingull | 90 | 10–30 |
+| Route 104 | Surf | Balance Badge (5) and HM03 Surf | 4 | Pelipper | 10 | 25–30 |
+| Route 104 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Luvdisc | 60 | 10–30 |
+| Route 104 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Finizen | 20 | 10–30 |
+| Route 104 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Magikarp | 20 | 10–30 |
+| Route 105 | Surf | Balance Badge (5) and HM03 Surf | 4 | Tentacool | 60 | 5–35 |
+| Route 105 | Surf | Balance Badge (5) and HM03 Surf | 4 | Wingull | 30 | 10–30 |
+| Route 105 | Surf | Balance Badge (5) and HM03 Surf | 4 | Pelipper | 10 | 15–30 |
+| Route 105 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Skrelp | 60 | 10–30 |
+| Route 105 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Clauncher | 40 | 10–30 |
+| Route 110 | Surf | Balance Badge (5) and HM03 Surf | 4 | Shellos | 60 | 5–35 |
+| Route 110 | Surf | Balance Badge (5) and HM03 Surf | 4 | Gastrodon | 30 | 10–30 |
+| Route 110 | Surf | Balance Badge (5) and HM03 Surf | 4 | Pelipper | 10 | 15–30 |
+| Route 110 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Chinchou | 60 | 10–30 |
+| Route 110 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Wailmer | 40 | 10–30 |
+| Route 111 | Surf | Balance Badge (5) and HM03 Surf | 4 | Marill | 60 | 20–30 |
+| Route 111 | Surf | Balance Badge (5) and HM03 Surf | 4 | Surskit | 30 | 10–20 |
+| Route 111 | Surf | Balance Badge (5) and HM03 Surf | 4 | Azumarill | 5 | 5–10 |
+| Route 111 | Surf | Balance Badge (5) and HM03 Surf | 4 | Masquerain | 5 | 30–35 |
+| Route 111 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Goldeen | 60 | 10–30 |
+| Route 111 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Basculin | 40 | 10–30 |
+| Route 114 | Surf | Balance Badge (5) and HM03 Surf | 4 | Wooper | 60 | 20–30 |
+| Route 114 | Surf | Balance Badge (5) and HM03 Surf | 4 | Quagsire | 30 | 10–20 |
+| Route 114 | Surf | Balance Badge (5) and HM03 Surf | 4 | Masquerain | 10 | 5–35 |
+| Route 114 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Barboach | 80 | 10–30 |
+| Route 114 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Wishiwashi | 20 | 10–30 |
+| Route 117 | Surf | Balance Badge (5) and HM03 Surf | 4 | Marill | 60 | 20–30 |
+| Route 117 | Surf | Balance Badge (5) and HM03 Surf | 4 | Azumarill | 30 | 10–20 |
+| Route 117 | Surf | Balance Badge (5) and HM03 Surf | 4 | Seaking | 10 | 5–35 |
+| Route 117 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Corphish | 60 | 10–30 |
+| Route 117 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Goldeen | 40 | 10–30 |
+| Route 118 | Land | No field move; available when the location itself is reachable | 20 | Linoone | 13 | 24–24 |
+| Route 118 | Land | No field move; available when the location itself is reachable | 20 | Manectric | 13 | 24–24 |
+| Route 118 | Land | No field move; available when the location itself is reachable | 20 | Lickitung | 10 | 26–26 |
+| Route 118 | Land | No field move; available when the location itself is reachable | 20 | Liepard | 10 | 26–26 |
+| Route 118 | Land | No field move; available when the location itself is reachable | 20 | Passimian | 10 | 26–26 |
+| Route 118 | Land | No field move; available when the location itself is reachable | 20 | Raticate | 10 | 26–26 |
+| Route 118 | Land | No field move; available when the location itself is reachable | 20 | Carnivine | 9 | 25–25 |
+| Route 118 | Land | No field move; available when the location itself is reachable | 20 | Dedenne | 9 | 25–27 |
+| Route 118 | Land | No field move; available when the location itself is reachable | 20 | Type: Null | 8 | 26–26 |
+| Route 118 | Land | No field move; available when the location itself is reachable | 20 | Zorua | 8 | 26–26 |
+| Route 118 | Surf | Balance Badge (5) and HM03 Surf | 4 | Tentacool | 60 | 5–35 |
+| Route 118 | Surf | Balance Badge (5) and HM03 Surf | 4 | Dondozo | 30 | 10–30 |
+| Route 118 | Surf | Balance Badge (5) and HM03 Surf | 4 | Pelipper | 10 | 25–30 |
+| Route 118 | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Fearow | 60 | 10–15 |
+| Route 118 | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Venomoth | 40 | 5–20 |
+| Route 118 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Magikarp | 60 | 5–10 |
+| Route 118 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Carvanha | 40 | 5–10 |
+| Route 118 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Tatsugiri | 60 | 10–30 |
+| Route 118 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Tatsugiri Droopy | 20 | 10–30 |
+| Route 118 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Tatsugiri Stretchy | 20 | 10–30 |
+| Route 118 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Audino | 60 | 2–3 |
+| Route 118 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Dedenne | 20 | 2–3 |
+| Route 118 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Lickilicky | 20 | 2–3 |
+| Petalburg Woods 3 | Surf | Balance Badge (5) and HM03 Surf | 4 | Poliwag | 60 | 10–30 |
+| Petalburg Woods 3 | Surf | Balance Badge (5) and HM03 Surf | 4 | Slowpoke | 30 | 15–25 |
+| Petalburg Woods 3 | Surf | Balance Badge (5) and HM03 Surf | 4 | Poliwhirl | 10 | 25–30 |
+| Petalburg Woods 3 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Slowpoke | 60 | 10–30 |
+| Petalburg Woods 3 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Poliwag | 20 | 10–30 |
+| Petalburg Woods 3 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Poliwhirl | 20 | 10–30 |
+| Mt Pyre 1F | Land | No field move; available when the location itself is reachable | 10 | Litwick | 20 | 26–29 |
+| Mt Pyre 1F | Land | No field move; available when the location itself is reachable | 10 | Misdreavus | 17 | 23–29 |
+| Mt Pyre 1F | Land | No field move; available when the location itself is reachable | 10 | Murkrow | 17 | 22–24 |
+| Mt Pyre 1F | Land | No field move; available when the location itself is reachable | 10 | Duskull | 13 | 28–28 |
+| Mt Pyre 1F | Land | No field move; available when the location itself is reachable | 10 | Shuppet | 13 | 27–27 |
+| Mt Pyre 1F | Land | No field move; available when the location itself is reachable | 10 | Golbat | 10 | 25–25 |
+| Mt Pyre 1F | Land | No field move; available when the location itself is reachable | 10 | Haunter | 10 | 24–24 |
+| Safari Zone South | Land | No field move; available when the location itself is reachable | 25 | Meowth Alolan | 20 | 25–27 |
+| Safari Zone South | Land | No field move; available when the location itself is reachable | 25 | Persian Alolan | 17 | 25–27 |
+| Safari Zone South | Land | No field move; available when the location itself is reachable | 25 | Raichu Alolan | 17 | 27–29 |
+| Safari Zone South | Land | No field move; available when the location itself is reachable | 25 | Pikachu | 13 | 27–27 |
+| Safari Zone South | Land | No field move; available when the location itself is reachable | 25 | Wobbuffet | 13 | 25–25 |
+| Safari Zone South | Land | No field move; available when the location itself is reachable | 25 | Girafarig | 10 | 25–25 |
+| Safari Zone South | Land | No field move; available when the location itself is reachable | 25 | Smeargle | 10 | 25–25 |
+| Abandoned Ship Rooms B1F | Surf | Balance Badge (5) and HM03 Surf | 4 | Frillish | 95 | 5–35 |
+| Abandoned Ship Rooms B1F | Surf | Balance Badge (5) and HM03 Surf | 4 | Jellicent | 5 | 5–35 |
+| Abandoned Ship Rooms B1F | Old Rod | Old Rod from Mom in Littleroot during the opening | 20 | Frillish | 60 | 5–10 |
+| Abandoned Ship Rooms B1F | Old Rod | Old Rod from Mom in Littleroot during the opening | 20 | Skrelp | 40 | 5–10 |
+| Abandoned Ship Rooms B1F | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 20 | Skrelp | 60 | 10–30 |
+| Abandoned Ship Rooms B1F | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 20 | Dhelmise | 20 | 10–30 |
+| Abandoned Ship Rooms B1F | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 20 | Frillish | 20 | 10–30 |
+| Meteor Falls B1F 2R | Surf | Balance Badge (5) and HM03 Surf | 4 | Golbat | 60 | 5–35 |
+| Meteor Falls B1F 2R | Surf | Balance Badge (5) and HM03 Surf | 4 | Dratini | 30 | 30–35 |
+| Meteor Falls B1F 2R | Surf | Balance Badge (5) and HM03 Surf | 4 | Lunatone | 5 | 15–25 |
+| Meteor Falls B1F 2R | Surf | Balance Badge (5) and HM03 Surf | 4 | Solrock | 5 | 25–35 |
+| Meteor Falls B1F 2R | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Dratini | 60 | 10–30 |
+| Meteor Falls B1F 2R | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Barboach | 20 | 10–30 |
+| Meteor Falls B1F 2R | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Dragonair | 20 | 10–30 |
+| Route 106 | Surf | Balance Badge (5) and HM03 Surf | 4 | Tentacool | 60 | 5–35 |
+| Route 106 | Surf | Balance Badge (5) and HM03 Surf | 4 | Wingull | 30 | 10–30 |
+| Route 106 | Surf | Balance Badge (5) and HM03 Surf | 4 | Pelipper | 10 | 15–30 |
+| Route 106 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Skrelp | 60 | 10–15 |
+| Route 106 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Clauncher | 40 | 10–30 |
+| Route 107 | Surf | Balance Badge (5) and HM03 Surf | 4 | Frillish | 60 | 5–35 |
+| Route 107 | Surf | Balance Badge (5) and HM03 Surf | 4 | Mantyke | 30 | 10–30 |
+| Route 107 | Surf | Balance Badge (5) and HM03 Surf | 4 | Wingull | 10 | 15–30 |
+| Route 107 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Remoraid | 60 | 5–10 |
+| Route 107 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Finneon | 40 | 5–10 |
+| Route 107 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Finneon | 60 | 10–30 |
+| Route 107 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Remoraid | 40 | 10–30 |
+| Route 108 | Surf | Balance Badge (5) and HM03 Surf | 4 | Frillish | 60 | 5–35 |
+| Route 108 | Surf | Balance Badge (5) and HM03 Surf | 4 | Mantyke | 30 | 10–30 |
+| Route 108 | Surf | Balance Badge (5) and HM03 Surf | 4 | Wingull | 10 | 15–30 |
+| Route 108 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Remoraid | 60 | 5–10 |
+| Route 108 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Finneon | 40 | 5–10 |
+| Route 108 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Finneon | 60 | 10–30 |
+| Route 108 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Remoraid | 40 | 10–30 |
+| Route 109 | Surf | Balance Badge (5) and HM03 Surf | 4 | Frillish | 60 | 5–35 |
+| Route 109 | Surf | Balance Badge (5) and HM03 Surf | 4 | Mantyke | 30 | 10–30 |
+| Route 109 | Surf | Balance Badge (5) and HM03 Surf | 4 | Pyukumuku | 10 | 15–30 |
+| Route 109 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Corsola | 60 | 10–30 |
+| Route 109 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Clobbopus | 20 | 10–30 |
+| Route 109 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Mareanie | 20 | 10–30 |
+| Route 115 | Land | No field move; available when the location itself is reachable | 20 | Tangela | 22 | 24–25 |
+| Route 115 | Land | No field move; available when the location itself is reachable | 20 | Jigglypuff | 13 | 23–23 |
+| Route 115 | Land | No field move; available when the location itself is reachable | 20 | Swellow | 13 | 23–23 |
+| Route 115 | Land | No field move; available when the location itself is reachable | 20 | Munchlax | 12 | 24–26 |
+| Route 115 | Land | No field move; available when the location itself is reachable | 20 | Dodrio | 10 | 24–24 |
+| Route 115 | Land | No field move; available when the location itself is reachable | 20 | Duraludon | 10 | 25–25 |
+| Route 115 | Land | No field move; available when the location itself is reachable | 20 | Lurantis | 10 | 24–25 |
+| Route 115 | Land | No field move; available when the location itself is reachable | 20 | Spritzee | 10 | 25–25 |
+| Route 115 | Surf | Balance Badge (5) and HM03 Surf | 4 | Wishiwashi | 60 | 5–35 |
+| Route 115 | Surf | Balance Badge (5) and HM03 Surf | 4 | Wingull | 30 | 10–30 |
+| Route 115 | Surf | Balance Badge (5) and HM03 Surf | 4 | Tentacruel | 10 | 15–30 |
+| Route 115 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Wishiwashi | 60 | 5–10 |
+| Route 115 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Wailmer | 40 | 5–10 |
+| Route 115 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Wailmer | 60 | 10–30 |
+| Route 115 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Qwilfish | 20 | 10–30 |
+| Route 115 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Wishiwashi | 20 | 10–30 |
+| Route 115 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Audino | 90 | 2–3 |
+| Route 115 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Aromatisse | 5 | 3–3 |
+| Route 115 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Slurpuff | 5 | 3–3 |
+| Route 119 | Land | No field move; available when the location itself is reachable | 15 | Goomy | 14 | 25–27 |
+| Route 119 | Land | No field move; available when the location itself is reachable | 15 | Gumshoos | 13 | 25–25 |
+| Route 119 | Land | No field move; available when the location itself is reachable | 15 | Tropius | 13 | 25–25 |
+| Route 119 | Land | No field move; available when the location itself is reachable | 15 | Comfey | 10 | 26–26 |
+| Route 119 | Land | No field move; available when the location itself is reachable | 15 | Cramorant | 10 | 24–27 |
+| Route 119 | Land | No field move; available when the location itself is reachable | 15 | Oranguru | 10 | 25–25 |
+| Route 119 | Land | No field move; available when the location itself is reachable | 15 | Raging Bolt | 10 | 27–27 |
+| Route 119 | Land | No field move; available when the location itself is reachable | 15 | Dreepy | 8 | 25–25 |
+| Route 119 | Land | No field move; available when the location itself is reachable | 15 | Larvesta | 8 | 26–26 |
+| Route 119 | Land | No field move; available when the location itself is reachable | 15 | Amoonguss | 4 | 27–27 |
+| Route 119 | Surf | Balance Badge (5) and HM03 Surf | 4 | Gastrodon East Sea | 60 | 5–35 |
+| Route 119 | Surf | Balance Badge (5) and HM03 Surf | 4 | Floatzel | 30 | 10–30 |
+| Route 119 | Surf | Balance Badge (5) and HM03 Surf | 4 | Pelipper | 10 | 25–30 |
+| Route 119 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Carvanha | 60 | 5–10 |
+| Route 119 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Magikarp | 40 | 5–10 |
+| Route 119 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Carvanha | 60 | 10–30 |
+| Route 119 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Magikarp | 20 | 10–30 |
+| Route 119 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Sharpedo | 20 | 10–30 |
+| Route 119 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Audino | 60 | 2–3 |
+| Route 119 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Amoonguss | 20 | 2–3 |
+| Route 119 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Sliggoo | 20 | 2–3 |
+| Route 120 | Land | No field move; available when the location itself is reachable | 20 | Absol | 13 | 25–25 |
+| Route 120 | Land | No field move; available when the location itself is reachable | 20 | Watchog | 13 | 25–25 |
+| Route 120 | Land | No field move; available when the location itself is reachable | 20 | Ogerpon | 10 | 25–25 |
+| Route 120 | Land | No field move; available when the location itself is reachable | 20 | Pumpkaboo Large | 10 | 27–27 |
+| Route 120 | Land | No field move; available when the location itself is reachable | 20 | Pumpkaboo Small | 10 | 26–26 |
+| Route 120 | Land | No field move; available when the location itself is reachable | 20 | Tropius | 10 | 25–25 |
+| Route 120 | Land | No field move; available when the location itself is reachable | 20 | Venomoth | 10 | 27–27 |
+| Route 120 | Land | No field move; available when the location itself is reachable | 20 | Honedge | 8 | 27–27 |
+| Route 120 | Land | No field move; available when the location itself is reachable | 20 | Mimikyu | 8 | 25–25 |
+| Route 120 | Land | No field move; available when the location itself is reachable | 20 | Pumpkaboo | 4 | 25–25 |
+| Route 120 | Land | No field move; available when the location itself is reachable | 20 | Pumpkaboo Super | 4 | 25–25 |
+| Route 120 | Surf | Balance Badge (5) and HM03 Surf | 4 | Azumarill | 60 | 20–30 |
+| Route 120 | Surf | Balance Badge (5) and HM03 Surf | 4 | Stunfisk | 30 | 10–20 |
+| Route 120 | Surf | Balance Badge (5) and HM03 Surf | 4 | Masquerain | 10 | 5–35 |
+| Route 120 | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Pinsir | 60 | 10–15 |
+| Route 120 | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Masquerain | 40 | 5–20 |
+| Route 120 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Barboach | 60 | 5–10 |
+| Route 120 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Magikarp | 40 | 5–10 |
+| Route 120 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Barboach | 60 | 10–30 |
+| Route 120 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Magikarp | 20 | 10–30 |
+| Route 120 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Stunfisk | 20 | 10–30 |
+| Route 120 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Audino | 90 | 2–3 |
+| Route 120 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Tangrowth | 5 | 3–3 |
+| Route 120 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Yanmega | 5 | 3–3 |
+| Route 122 | Surf | Balance Badge (5) and HM03 Surf | 4 | Pelipper | 60 | 5–35 |
+| Route 122 | Surf | Balance Badge (5) and HM03 Surf | 4 | Frillish | 30 | 10–30 |
+| Route 122 | Surf | Balance Badge (5) and HM03 Surf | 4 | Alomomola | 10 | 15–30 |
+| Route 122 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Magikarp | 60 | 5–10 |
+| Route 122 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Wailmer | 40 | 5–10 |
+| Route 122 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Wailmer | 60 | 10–30 |
+| Route 122 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Finneon | 40 | 10–30 |
+| Route 123 | Land | No field move; available when the location itself is reachable | 20 | Karrablast | 20 | 26–28 |
+| Route 123 | Land | No field move; available when the location itself is reachable | 20 | Shelmet | 20 | 26–28 |
+| Route 123 | Land | No field move; available when the location itself is reachable | 20 | Gloom | 17 | 25–28 |
+| Route 123 | Land | No field move; available when the location itself is reachable | 20 | Stantler | 17 | 26–28 |
+| Route 123 | Land | No field move; available when the location itself is reachable | 20 | Linoone | 13 | 26–26 |
+| Route 123 | Land | No field move; available when the location itself is reachable | 20 | Mightyena | 13 | 26–26 |
+| Route 123 | Surf | Balance Badge (5) and HM03 Surf | 4 | Azumarill | 60 | 5–35 |
+| Route 123 | Surf | Balance Badge (5) and HM03 Surf | 4 | Surskit | 30 | 10–30 |
+| Route 123 | Surf | Balance Badge (5) and HM03 Surf | 4 | Masquerain | 10 | 15–30 |
+| Route 123 | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Noctowl | 60 | 10–15 |
+| Route 123 | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Exeggcute | 40 | 5–20 |
+| Route 123 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Goldeen | 60 | 5–10 |
+| Route 123 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Corphish | 40 | 5–10 |
+| Route 123 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Corphish | 60 | 10–30 |
+| Route 123 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Goldeen | 40 | 10–30 |
+| Route 123 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Audino | 90 | 2–3 |
+| Route 123 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Accelgor | 5 | 3–3 |
+| Route 123 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Escavalier | 5 | 3–3 |
+| Mt Pyre Exterior | Land | No field move; available when the location itself is reachable | 10 | Vulpix | 23 | 27–28 |
+| Mt Pyre Exterior | Land | No field move; available when the location itself is reachable | 10 | Drifblim | 20 | 29–29 |
+| Mt Pyre Exterior | Land | No field move; available when the location itself is reachable | 10 | Bronzong | 17 | 25–28 |
+| Mt Pyre Exterior | Land | No field move; available when the location itself is reachable | 10 | Growlithe | 13 | 27–29 |
+| Mt Pyre Exterior | Land | No field move; available when the location itself is reachable | 10 | Medicham | 13 | 27–27 |
+| Mt Pyre Exterior | Land | No field move; available when the location itself is reachable | 10 | Beheeyem | 10 | 27–27 |
+| Mt Pyre Exterior | Land | No field move; available when the location itself is reachable | 10 | Corsola Galarian | 4 | 26–26 |
+| Mt Pyre Exterior | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Audino | 70 | 2–3 |
+| Mt Pyre Exterior | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Arcanine | 15 | 2–2 |
+| Mt Pyre Exterior | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Ninetales | 15 | 2–2 |
+| Abandoned Ship Hidden Floor Corridors | Surf | Balance Badge (5) and HM03 Surf | 4 | Frillish | 95 | 5–35 |
+| Abandoned Ship Hidden Floor Corridors | Surf | Balance Badge (5) and HM03 Surf | 4 | Jellicent | 5 | 5–35 |
+| Abandoned Ship Hidden Floor Corridors | Old Rod | Old Rod from Mom in Littleroot during the opening | 20 | Frillish | 60 | 5–10 |
+| Abandoned Ship Hidden Floor Corridors | Old Rod | Old Rod from Mom in Littleroot during the opening | 20 | Skrelp | 40 | 5–10 |
+| Abandoned Ship Hidden Floor Corridors | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 20 | Skrelp | 60 | 10–30 |
+| Abandoned Ship Hidden Floor Corridors | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 20 | Dhelmise | 20 | 10–30 |
+| Abandoned Ship Hidden Floor Corridors | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 20 | Frillish | 20 | 10–30 |
+| Safari Zone Southwest | Land | No field move; available when the location itself is reachable | 25 | Palpitoad | 20 | 25–27 |
+| Safari Zone Southwest | Land | No field move; available when the location itself is reachable | 25 | Arbok | 17 | 27–29 |
+| Safari Zone Southwest | Land | No field move; available when the location itself is reachable | 25 | Sliggoo | 17 | 25–27 |
+| Safari Zone Southwest | Land | No field move; available when the location itself is reachable | 25 | Karrablast | 13 | 25–25 |
+| Safari Zone Southwest | Land | No field move; available when the location itself is reachable | 25 | Shelmet | 13 | 27–27 |
+| Safari Zone Southwest | Land | No field move; available when the location itself is reachable | 25 | Seismitoad | 10 | 25–25 |
+| Safari Zone Southwest | Land | No field move; available when the location itself is reachable | 25 | Toxicroak | 10 | 27–27 |
+| Safari Zone Southwest | Surf | Balance Badge (5) and HM03 Surf | 9 | Stunfisk | 60 | 20–30 |
+| Safari Zone Southwest | Surf | Balance Badge (5) and HM03 Surf | 9 | Sliggoo | 30 | 20–30 |
+| Safari Zone Southwest | Surf | Balance Badge (5) and HM03 Surf | 9 | Seismitoad | 10 | 30–35 |
+| Safari Zone Southwest | Old Rod | Old Rod from Mom in Littleroot during the opening | 35 | Magikarp | 60 | 5–10 |
+| Safari Zone Southwest | Old Rod | Old Rod from Mom in Littleroot during the opening | 35 | Goldeen | 40 | 5–10 |
+| Safari Zone Southwest | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 35 | Goldeen | 60 | 10–30 |
+| Safari Zone Southwest | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 35 | Seaking | 40 | 10–30 |
+| Safari Zone North | Land | No field move; available when the location itself is reachable | 25 | Donphan | 20 | 27–29 |
+| Safari Zone North | Land | No field move; available when the location itself is reachable | 25 | Dugtrio Alolan | 17 | 27–29 |
+| Safari Zone North | Land | No field move; available when the location itself is reachable | 25 | Gloom | 13 | 27–27 |
+| Safari Zone North | Land | No field move; available when the location itself is reachable | 25 | Kangaskhan | 13 | 29–31 |
+| Safari Zone North | Land | No field move; available when the location itself is reachable | 25 | Weepinbell | 13 | 27–27 |
+| Safari Zone North | Land | No field move; available when the location itself is reachable | 25 | Heracross | 10 | 29–29 |
+| Safari Zone North | Land | No field move; available when the location itself is reachable | 25 | Marowak Alolan | 10 | 29–29 |
+| Safari Zone North | Land | No field move; available when the location itself is reachable | 25 | Cufant | 4 | 31–31 |
+| Safari Zone North | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 25 | Graveler Alolan | 100 | 5–25 |
+| Safari Zone Northwest | Land | No field move; available when the location itself is reachable | 25 | Rhyhorn | 20 | 29–29 |
+| Safari Zone Northwest | Land | No field move; available when the location itself is reachable | 25 | Chansey | 17 | 27–29 |
+| Safari Zone Northwest | Land | No field move; available when the location itself is reachable | 25 | Raticate Alolan | 17 | 29–31 |
+| Safari Zone Northwest | Land | No field move; available when the location itself is reachable | 25 | Dodrio | 13 | 27–27 |
+| Safari Zone Northwest | Land | No field move; available when the location itself is reachable | 25 | Xatu | 13 | 27–27 |
+| Safari Zone Northwest | Land | No field move; available when the location itself is reachable | 25 | Pinsir | 10 | 29–29 |
+| Safari Zone Northwest | Land | No field move; available when the location itself is reachable | 25 | Rhydon | 10 | 27–27 |
+| Safari Zone Northwest | Surf | Balance Badge (5) and HM03 Surf | 9 | Grimer Alolan | 90 | 20–30 |
+| Safari Zone Northwest | Surf | Balance Badge (5) and HM03 Surf | 9 | Muk Alolan | 10 | 30–35 |
+| Safari Zone Northwest | Old Rod | Old Rod from Mom in Littleroot during the opening | 35 | Grimer Alolan | 60 | 5–10 |
+| Safari Zone Northwest | Old Rod | Old Rod from Mom in Littleroot during the opening | 35 | Grimer | 40 | 5–10 |
+| Safari Zone Northwest | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 35 | Grimer Alolan | 60 | 10–30 |
+| Safari Zone Northwest | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 35 | Muk Alolan | 40 | 10–30 |
+| Meteor Falls 1F 1R | Surf | Balance Badge (5) and HM03 Surf | 4 | Golbat | 60 | 5–35 |
+| Meteor Falls 1F 1R | Surf | Balance Badge (5) and HM03 Surf | 4 | Dratini | 30 | 30–35 |
+| Meteor Falls 1F 1R | Surf | Balance Badge (5) and HM03 Surf | 4 | Lunatone | 5 | 15–25 |
+| Meteor Falls 1F 1R | Surf | Balance Badge (5) and HM03 Surf | 4 | Solrock | 5 | 25–35 |
+| Meteor Falls 1F 1R | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Dratini | 60 | 10–30 |
+| Meteor Falls 1F 1R | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Barboach | 20 | 10–30 |
+| Meteor Falls 1F 1R | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Dragonair | 20 | 10–30 |
+| Meteor Falls 1F 2R | Surf | Balance Badge (5) and HM03 Surf | 4 | Golbat | 60 | 5–35 |
+| Meteor Falls 1F 2R | Surf | Balance Badge (5) and HM03 Surf | 4 | Dratini | 30 | 30–35 |
+| Meteor Falls 1F 2R | Surf | Balance Badge (5) and HM03 Surf | 4 | Lunatone | 5 | 15–25 |
+| Meteor Falls 1F 2R | Surf | Balance Badge (5) and HM03 Surf | 4 | Solrock | 5 | 25–35 |
+| Meteor Falls 1F 2R | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Dratini | 60 | 10–30 |
+| Meteor Falls 1F 2R | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Barboach | 20 | 10–30 |
+| Meteor Falls 1F 2R | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Dragonair | 20 | 10–30 |
+| Meteor Falls B1F 1R | Surf | Balance Badge (5) and HM03 Surf | 4 | Golbat | 60 | 5–35 |
+| Meteor Falls B1F 1R | Surf | Balance Badge (5) and HM03 Surf | 4 | Dratini | 30 | 30–35 |
+| Meteor Falls B1F 1R | Surf | Balance Badge (5) and HM03 Surf | 4 | Lunatone | 5 | 15–25 |
+| Meteor Falls B1F 1R | Surf | Balance Badge (5) and HM03 Surf | 4 | Solrock | 5 | 25–35 |
+| Meteor Falls B1F 1R | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Dratini | 60 | 10–30 |
+| Meteor Falls B1F 1R | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Barboach | 20 | 10–30 |
+| Meteor Falls B1F 1R | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Dragonair | 20 | 10–30 |
+| Dewford Town | Surf | Balance Badge (5) and HM03 Surf | 4 | Tentacool | 60 | 5–35 |
+| Dewford Town | Surf | Balance Badge (5) and HM03 Surf | 4 | Wingull | 30 | 10–30 |
+| Dewford Town | Surf | Balance Badge (5) and HM03 Surf | 4 | Frillish | 5 | 25–30 |
+| Dewford Town | Surf | Balance Badge (5) and HM03 Surf | 4 | Pelipper | 5 | 25–30 |
+| Dewford Town | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 10 | Shellder | 60 | 10–15 |
+| Dewford Town | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 10 | Finneon | 20 | 10–30 |
+| Dewford Town | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 10 | Staryu | 20 | 10–30 |
+| Slateport City | Surf | Balance Badge (5) and HM03 Surf | 4 | Tentacool | 60 | 5–35 |
+| Slateport City | Surf | Balance Badge (5) and HM03 Surf | 4 | Wingull | 30 | 10–30 |
+| Slateport City | Surf | Balance Badge (5) and HM03 Surf | 4 | Pelipper | 10 | 25–30 |
+| Slateport City | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 10 | Horsea | 60 | 10–30 |
+| Slateport City | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 10 | Alomomola | 20 | 10–30 |
+| Slateport City | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 10 | Frillish | 20 | 10–30 |
+| Petalburg City | Surf | Balance Badge (5) and HM03 Surf | 1 | Marill | 60 | 20–30 |
+| Petalburg City | Surf | Balance Badge (5) and HM03 Surf | 1 | Azumarill | 30 | 10–20 |
+| Petalburg City | Surf | Balance Badge (5) and HM03 Surf | 1 | Masquerain | 10 | 5–35 |
+| Petalburg City | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 10 | Corphish | 60 | 10–30 |
+| Petalburg City | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 10 | Goldeen | 40 | 10–30 |
+| Safari Zone Southeast | Land | No field move; available when the location itself is reachable | 25 | Ambipom | 20 | 33–36 |
+| Safari Zone Southeast | Land | No field move; available when the location itself is reachable | 25 | Ariados | 20 | 34–35 |
+| Safari Zone Southeast | Land | No field move; available when the location itself is reachable | 25 | Granbull | 17 | 35–39 |
+| Safari Zone Southeast | Land | No field move; available when the location itself is reachable | 25 | Stantler | 17 | 34–40 |
+| Safari Zone Southeast | Land | No field move; available when the location itself is reachable | 25 | Flaaffy | 13 | 34–34 |
+| Safari Zone Southeast | Land | No field move; available when the location itself is reachable | 25 | Gligar | 13 | 33–33 |
+| Safari Zone Southeast | Surf | Balance Badge (5) and HM03 Surf | 9 | Wooper | 60 | 25–30 |
+| Safari Zone Southeast | Surf | Balance Badge (5) and HM03 Surf | 9 | Quagsire | 40 | 25–35 |
+| Safari Zone Southeast | Old Rod | Old Rod from Mom in Littleroot during the opening | 35 | Remoraid | 60 | 25–30 |
+| Safari Zone Southeast | Old Rod | Old Rod from Mom in Littleroot during the opening | 35 | Dratini | 40 | 25–30 |
+| Safari Zone Southeast | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 35 | Dratini | 60 | 25–30 |
+| Safari Zone Southeast | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 35 | Dragonair | 40 | 25–35 |
+| Safari Zone Northeast | Land | No field move; available when the location itself is reachable | 25 | Nidorina | 17 | 34–40 |
+| Safari Zone Northeast | Land | No field move; available when the location itself is reachable | 25 | Nidorino | 17 | 35–39 |
+| Safari Zone Northeast | Land | No field move; available when the location itself is reachable | 25 | Houndoom | 13 | 33–33 |
+| Safari Zone Northeast | Land | No field move; available when the location itself is reachable | 25 | Pineco | 13 | 34–34 |
+| Safari Zone Northeast | Land | No field move; available when the location itself is reachable | 25 | Forretress | 10 | 35–35 |
+| Safari Zone Northeast | Land | No field move; available when the location itself is reachable | 25 | Ledian | 10 | 33–33 |
+| Safari Zone Northeast | Land | No field move; available when the location itself is reachable | 25 | Miltank | 10 | 36–36 |
+| Safari Zone Northeast | Land | No field move; available when the location itself is reachable | 25 | Tauros | 10 | 34–34 |
+| Safari Zone Northeast | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 25 | Shuckle | 100 | 20–35 |
+| Route 119 under the bridge | Any Rod under bridge | Balance Badge (5), Surf access to the Route 119 bridge, and any Rod | special | Feebas | 100 | 20–25 |
 
 ### Feather Badge — Lilycove, ocean routes, and Mossdeep (cap 60)
 
-| Location | Method | Raw rate | Species | Within-method % | Levels |
-|---|---|---|---|---|---|
-| Route 124 | Surf | 4 | Jellicent | 60 | 5–35 |
-| Route 124 | Surf | 4 | Alomomola | 30 | 10–30 |
-| Route 124 | Surf | 4 | Milotic | 10 | 15–30 |
-| Route 124 | Old Rod | 30 | Magikarp | 60 | 5–10 |
-| Route 124 | Old Rod | 30 | Finneon | 40 | 5–10 |
-| Route 124 | Good Rod | 30 | Finneon | 60 | 10–30 |
-| Route 124 | Good Rod | 30 | Alomomola | 20 | 10–30 |
-| Route 124 | Good Rod | 30 | Frillish | 20 | 10–30 |
-| Route 124 | Super Rod | 30 | Lumineon | 40 | 30–35 |
-| Route 124 | Super Rod | 30 | Alomomola | 30 | 30–35 |
-| Route 124 | Super Rod | 30 | Kingdra | 15 | 25–30 |
-| Route 124 | Super Rod | 30 | Manaphy | 15 | 35–45 |
-| Route 121 | Land | 20 | Duskull | 13 | 26–26 |
-| Route 121 | Land | 20 | Shuppet | 13 | 26–26 |
-| Route 121 | Land | 20 | Sinistea | 12 | 25–27 |
-| Route 121 | Land | 20 | Zoroark | 12 | 26–28 |
-| Route 121 | Land | 20 | Elgyem | 10 | 28–28 |
-| Route 121 | Land | 20 | Furfrou | 10 | 28–28 |
-| Route 121 | Land | 20 | Hypno | 10 | 26–26 |
-| Route 121 | Land | 20 | Pangoro | 10 | 26–26 |
-| Route 121 | Land | 20 | Arbok | 5 | 28–28 |
-| Route 121 | Land | 20 | Komala | 5 | 28–28 |
-| Route 121 | Surf | 4 | Pelipper | 60 | 5–35 |
-| Route 121 | Surf | 4 | Frillish | 30 | 10–30 |
-| Route 121 | Surf | 4 | Alomomola | 10 | 15–30 |
-| Route 121 | Rock Smash | 20 | Arbok | 60 | 10–15 |
-| Route 121 | Rock Smash | 20 | Heracross | 40 | 5–20 |
-| Route 121 | Old Rod | 30 | Magikarp | 60 | 5–10 |
-| Route 121 | Old Rod | 30 | Wailmer | 40 | 5–10 |
-| Route 121 | Good Rod | 30 | Wailmer | 100 | 10–30 |
-| Route 121 | Super Rod | 30 | Wailmer | 40 | 25–30 |
-| Route 121 | Super Rod | 30 | Gyarados | 30 | 30–35 |
-| Route 121 | Super Rod | 30 | Lumineon | 30 | 20–45 |
-| Route 121 | Honey | 20 | Audino | 50 | 2–2 |
-| Route 121 | Honey | 20 | Banette | 25 | 2–3 |
-| Route 121 | Honey | 20 | Dusclops | 25 | 2–3 |
-| Mt Pyre 2F | Land | 10 | Litwick | 20 | 26–29 |
-| Mt Pyre 2F | Land | 10 | Misdreavus | 17 | 23–29 |
-| Mt Pyre 2F | Land | 10 | Murkrow | 17 | 22–24 |
-| Mt Pyre 2F | Land | 10 | Duskull | 13 | 28–28 |
-| Mt Pyre 2F | Land | 10 | Shuppet | 13 | 27–27 |
-| Mt Pyre 2F | Land | 10 | Golbat | 10 | 25–25 |
-| Mt Pyre 2F | Land | 10 | Haunter | 10 | 24–24 |
-| Mt Pyre 3F | Land | 10 | Litwick | 20 | 26–29 |
-| Mt Pyre 3F | Land | 10 | Misdreavus | 17 | 23–29 |
-| Mt Pyre 3F | Land | 10 | Murkrow | 17 | 22–24 |
-| Mt Pyre 3F | Land | 10 | Duskull | 13 | 28–28 |
-| Mt Pyre 3F | Land | 10 | Shuppet | 13 | 27–27 |
-| Mt Pyre 3F | Land | 10 | Golbat | 10 | 25–25 |
-| Mt Pyre 3F | Land | 10 | Haunter | 10 | 24–24 |
-| Mt Pyre 4F | Land | 10 | Misdreavus | 17 | 23–29 |
-| Mt Pyre 4F | Land | 10 | Murkrow | 17 | 22–24 |
-| Mt Pyre 4F | Land | 10 | Banette | 13 | 27–27 |
-| Mt Pyre 4F | Land | 10 | Dusclops | 13 | 28–28 |
-| Mt Pyre 4F | Land | 10 | Golbat | 10 | 24–24 |
-| Mt Pyre 4F | Land | 10 | Haunter | 10 | 29–29 |
-| Mt Pyre 4F | Land | 10 | Lampent | 10 | 26–26 |
-| Mt Pyre 4F | Land | 10 | Mimikyu | 10 | 25–25 |
-| Mt Pyre 5F | Land | 10 | Misdreavus | 17 | 23–29 |
-| Mt Pyre 5F | Land | 10 | Murkrow | 17 | 22–24 |
-| Mt Pyre 5F | Land | 10 | Banette | 13 | 27–27 |
-| Mt Pyre 5F | Land | 10 | Dusclops | 13 | 28–28 |
-| Mt Pyre 5F | Land | 10 | Golbat | 10 | 24–24 |
-| Mt Pyre 5F | Land | 10 | Haunter | 10 | 29–29 |
-| Mt Pyre 5F | Land | 10 | Lampent | 10 | 26–26 |
-| Mt Pyre 5F | Land | 10 | Mimikyu | 10 | 25–25 |
-| Mt Pyre 6F | Land | 10 | Misdreavus | 17 | 23–29 |
-| Mt Pyre 6F | Land | 10 | Murkrow | 17 | 22–24 |
-| Mt Pyre 6F | Land | 10 | Banette | 13 | 27–27 |
-| Mt Pyre 6F | Land | 10 | Dusclops | 13 | 28–28 |
-| Mt Pyre 6F | Land | 10 | Golbat | 10 | 24–24 |
-| Mt Pyre 6F | Land | 10 | Haunter | 10 | 29–29 |
-| Mt Pyre 6F | Land | 10 | Lampent | 10 | 26–26 |
-| Mt Pyre 6F | Land | 10 | Mimikyu | 10 | 25–25 |
-| Mt Pyre Summit | Land | 10 | Drifblim | 20 | 26–27 |
-| Mt Pyre Summit | Land | 10 | Medicham | 13 | 29–29 |
-| Mt Pyre Summit | Land | 10 | Vulpix | 13 | 28–28 |
-| Mt Pyre Summit | Land | 10 | Chimecho | 12 | 28–30 |
-| Mt Pyre Summit | Land | 10 | Growlithe | 12 | 26–28 |
-| Mt Pyre Summit | Land | 10 | Beheeyem | 10 | 24–28 |
-| Mt Pyre Summit | Land | 10 | Bronzong | 10 | 25–25 |
-| Mt Pyre Summit | Land | 10 | Flutter Mane | 10 | 30–30 |
-| Mt Pyre Summit | Honey | 20 | Audino | 70 | 2–3 |
-| Mt Pyre Summit | Honey | 20 | Bronzong | 15 | 2–2 |
-| Mt Pyre Summit | Honey | 20 | Chimecho | 15 | 2–2 |
-| Route 125 | Surf | 4 | Jellicent | 60 | 5–35 |
-| Route 125 | Surf | 4 | Alomomola | 30 | 10–30 |
-| Route 125 | Surf | 4 | Lapras | 10 | 15–30 |
-| Route 125 | Old Rod | 30 | Magikarp | 60 | 5–10 |
-| Route 125 | Old Rod | 30 | Finneon | 40 | 5–10 |
-| Route 125 | Good Rod | 30 | Finneon | 60 | 10–30 |
-| Route 125 | Good Rod | 30 | Alomomola | 20 | 10–30 |
-| Route 125 | Good Rod | 30 | Frillish | 20 | 10–30 |
-| Route 125 | Super Rod | 30 | Lumineon | 40 | 30–35 |
-| Route 125 | Super Rod | 30 | Alomomola | 30 | 30–35 |
-| Route 125 | Super Rod | 30 | Kingdra | 15 | 25–30 |
-| Route 125 | Super Rod | 30 | Suicune | 15 | 35–45 |
-| Route 126 | Surf | 4 | Jellicent | 60 | 5–35 |
-| Route 126 | Surf | 4 | Alomomola | 30 | 10–30 |
-| Route 126 | Surf | 4 | Primarina | 10 | 15–30 |
-| Route 126 | Old Rod | 30 | Magikarp | 60 | 5–10 |
-| Route 126 | Old Rod | 30 | Finneon | 40 | 5–10 |
-| Route 126 | Good Rod | 30 | Finneon | 60 | 10–30 |
-| Route 126 | Good Rod | 30 | Alomomola | 20 | 10–30 |
-| Route 126 | Good Rod | 30 | Frillish | 20 | 10–30 |
-| Route 126 | Super Rod | 30 | Lumineon | 40 | 30–35 |
-| Route 126 | Super Rod | 30 | Alomomola | 30 | 30–35 |
-| Route 126 | Super Rod | 30 | Kingdra | 15 | 25–30 |
-| Route 126 | Super Rod | 30 | Tapu Fini | 15 | 35–45 |
-| Route 127 | Surf | 4 | Jellicent | 60 | 5–35 |
-| Route 127 | Surf | 4 | Alomomola | 30 | 10–30 |
-| Route 127 | Surf | 4 | Golisopod | 10 | 15–30 |
-| Route 127 | Old Rod | 30 | Magikarp | 60 | 5–10 |
-| Route 127 | Old Rod | 30 | Finneon | 40 | 5–10 |
-| Route 127 | Good Rod | 30 | Finneon | 60 | 10–30 |
-| Route 127 | Good Rod | 30 | Alomomola | 20 | 10–30 |
-| Route 127 | Good Rod | 30 | Frillish | 20 | 10–30 |
-| Route 127 | Super Rod | 30 | Lumineon | 40 | 30–35 |
-| Route 127 | Super Rod | 30 | Alomomola | 30 | 30–35 |
-| Route 127 | Super Rod | 30 | Dhelmise | 15 | 25–30 |
-| Route 127 | Super Rod | 30 | Keldeo | 15 | 35–45 |
-| Route 128 | Surf | 4 | Jellicent | 60 | 5–35 |
-| Route 128 | Surf | 4 | Alomomola | 30 | 10–30 |
-| Route 128 | Surf | 4 | Kingdra | 10 | 15–30 |
-| Route 128 | Old Rod | 30 | Magikarp | 60 | 5–10 |
-| Route 128 | Old Rod | 30 | Luvdisc | 40 | 5–10 |
-| Route 128 | Good Rod | 30 | Luvdisc | 60 | 10–30 |
-| Route 128 | Good Rod | 30 | Corsola | 40 | 10–30 |
-| Route 128 | Super Rod | 30 | Luvdisc | 40 | 30–35 |
-| Route 128 | Super Rod | 30 | Corsola | 30 | 30–35 |
-| Route 128 | Super Rod | 30 | Dragalge | 15 | 30–35 |
-| Route 128 | Super Rod | 30 | Primarina | 15 | 35–45 |
-| Shoal Cave Low Tide Stairs Room | Land | 10 | Golbat | 20 | 28–28 |
-| Shoal Cave Low Tide Stairs Room | Land | 10 | Sealeo | 20 | 30–30 |
-| Shoal Cave Low Tide Stairs Room | Land | 10 | Delibird | 17 | 32–32 |
-| Shoal Cave Low Tide Stairs Room | Land | 10 | Dewgong | 17 | 32–32 |
-| Shoal Cave Low Tide Stairs Room | Land | 10 | Cubchoo | 13 | 26–26 |
-| Shoal Cave Low Tide Stairs Room | Land | 10 | Spheal | 13 | 26–26 |
-| Shoal Cave Low Tide Lower Room | Land | 10 | Golbat | 20 | 28–28 |
-| Shoal Cave Low Tide Lower Room | Land | 10 | Sealeo | 20 | 30–30 |
-| Shoal Cave Low Tide Lower Room | Land | 10 | Delibird | 17 | 32–32 |
-| Shoal Cave Low Tide Lower Room | Land | 10 | Dewgong | 17 | 32–32 |
-| Shoal Cave Low Tide Lower Room | Land | 10 | Cubchoo | 13 | 26–26 |
-| Shoal Cave Low Tide Lower Room | Land | 10 | Spheal | 13 | 26–26 |
-| Shoal Cave Low Tide Inner Room | Land | 10 | Golbat | 20 | 28–28 |
-| Shoal Cave Low Tide Inner Room | Land | 10 | Sealeo | 20 | 30–30 |
-| Shoal Cave Low Tide Inner Room | Land | 10 | Delibird | 17 | 32–32 |
-| Shoal Cave Low Tide Inner Room | Land | 10 | Dewgong | 17 | 32–32 |
-| Shoal Cave Low Tide Inner Room | Land | 10 | Cubchoo | 13 | 26–26 |
-| Shoal Cave Low Tide Inner Room | Land | 10 | Spheal | 13 | 26–26 |
-| Shoal Cave Low Tide Inner Room | Surf | 4 | Spheal | 60 | 5–35 |
-| Shoal Cave Low Tide Inner Room | Surf | 4 | Golbat | 30 | 5–35 |
-| Shoal Cave Low Tide Inner Room | Surf | 4 | Lapras | 10 | 25–30 |
-| Shoal Cave Low Tide Inner Room | Old Rod | 10 | Magikarp | 60 | 5–10 |
-| Shoal Cave Low Tide Inner Room | Old Rod | 10 | Tentacool | 40 | 5–10 |
-| Shoal Cave Low Tide Inner Room | Good Rod | 10 | Tentacool | 60 | 10–30 |
-| Shoal Cave Low Tide Inner Room | Good Rod | 10 | Slowpoke | 40 | 10–30 |
-| Shoal Cave Low Tide Inner Room | Super Rod | 10 | Tentacruel | 40 | 25–30 |
-| Shoal Cave Low Tide Inner Room | Super Rod | 10 | Slowbro | 30 | 20–45 |
-| Shoal Cave Low Tide Inner Room | Super Rod | 10 | Slowpoke | 30 | 30–35 |
-| Shoal Cave Low Tide Entrance Room | Land | 10 | Golbat | 20 | 28–28 |
-| Shoal Cave Low Tide Entrance Room | Land | 10 | Sealeo | 20 | 30–30 |
-| Shoal Cave Low Tide Entrance Room | Land | 10 | Delibird | 17 | 32–32 |
-| Shoal Cave Low Tide Entrance Room | Land | 10 | Dewgong | 17 | 32–32 |
-| Shoal Cave Low Tide Entrance Room | Land | 10 | Cubchoo | 13 | 26–26 |
-| Shoal Cave Low Tide Entrance Room | Land | 10 | Spheal | 13 | 26–26 |
-| Shoal Cave Low Tide Entrance Room | Surf | 4 | Spheal | 60 | 5–35 |
-| Shoal Cave Low Tide Entrance Room | Surf | 4 | Golbat | 30 | 5–35 |
-| Shoal Cave Low Tide Entrance Room | Surf | 4 | Lapras | 10 | 25–30 |
-| Shoal Cave Low Tide Entrance Room | Old Rod | 10 | Magikarp | 60 | 5–10 |
-| Shoal Cave Low Tide Entrance Room | Old Rod | 10 | Tentacool | 40 | 5–10 |
-| Shoal Cave Low Tide Entrance Room | Good Rod | 10 | Tentacool | 60 | 10–30 |
-| Shoal Cave Low Tide Entrance Room | Good Rod | 10 | Slowpoke | 40 | 10–30 |
-| Shoal Cave Low Tide Entrance Room | Super Rod | 10 | Tentacruel | 40 | 25–30 |
-| Shoal Cave Low Tide Entrance Room | Super Rod | 10 | Slowbro | 30 | 20–45 |
-| Shoal Cave Low Tide Entrance Room | Super Rod | 10 | Slowpoke | 30 | 30–35 |
-| Lilycove City | Surf | 4 | Floatzel | 60 | 5–35 |
-| Lilycove City | Surf | 4 | Pelipper | 30 | 10–30 |
-| Lilycove City | Surf | 4 | Bruxish | 10 | 15–30 |
-| Lilycove City | Rock Smash | 25 | Binacle | 60 | 25–30 |
-| Lilycove City | Rock Smash | 25 | Wimpod | 30 | 20–25 |
-| Lilycove City | Rock Smash | 25 | Dwebble | 10 | 30–35 |
-| Lilycove City | Old Rod | 10 | Magikarp | 60 | 5–10 |
-| Lilycove City | Old Rod | 10 | Finneon | 40 | 5–10 |
-| Lilycove City | Good Rod | 10 | Finneon | 60 | 10–30 |
-| Lilycove City | Good Rod | 10 | Bruxish | 20 | 10–30 |
-| Lilycove City | Good Rod | 10 | Staryu | 20 | 10–30 |
-| Lilycove City | Super Rod | 10 | Lumineon | 40 | 25–30 |
-| Lilycove City | Super Rod | 10 | Bruxish | 30 | 30–35 |
-| Lilycove City | Super Rod | 10 | Starmie | 30 | 25–45 |
-| Mossdeep City | Surf | 4 | Pelipper | 60 | 5–35 |
-| Mossdeep City | Surf | 4 | Floatzel | 30 | 10–30 |
-| Mossdeep City | Surf | 4 | Sharpedo | 10 | 15–30 |
-| Mossdeep City | Old Rod | 10 | Magikarp | 60 | 5–10 |
-| Mossdeep City | Old Rod | 10 | Finneon | 40 | 5–10 |
-| Mossdeep City | Good Rod | 10 | Finneon | 60 | 10–30 |
-| Mossdeep City | Good Rod | 10 | Sharpedo | 20 | 10–30 |
-| Mossdeep City | Good Rod | 10 | Wailmer | 20 | 10–30 |
-| Mossdeep City | Super Rod | 10 | Sharpedo | 40 | 30–35 |
-| Mossdeep City | Super Rod | 10 | Lumineon | 30 | 25–45 |
-| Mossdeep City | Super Rod | 10 | Wailmer | 30 | 30–35 |
-| Shoal Cave Low Tide Ice Room | Land | 10 | Beartic | 20 | 28–28 |
-| Shoal Cave Low Tide Ice Room | Land | 10 | Cryogonal | 17 | 32–32 |
-| Shoal Cave Low Tide Ice Room | Land | 10 | Jynx | 17 | 32–32 |
-| Shoal Cave Low Tide Ice Room | Land | 10 | Sealeo | 13 | 26–26 |
-| Shoal Cave Low Tide Ice Room | Land | 10 | Snorunt | 13 | 26–26 |
-| Shoal Cave Low Tide Ice Room | Land | 10 | Chien Pao | 10 | 30–30 |
-| Shoal Cave Low Tide Ice Room | Land | 10 | Iron Bundle | 10 | 30–30 |
-| Magma Hideout 1F | Land | 10 | Excadrill | 15 | 28–30 |
-| Magma Hideout 1F | Land | 10 | Boldore | 13 | 28–28 |
-| Magma Hideout 1F | Land | 10 | Graveler | 13 | 27–27 |
-| Magma Hideout 1F | Land | 10 | Magmortar | 12 | 31–33 |
-| Magma Hideout 1F | Land | 10 | Volcarona | 12 | 30–32 |
-| Magma Hideout 1F | Land | 10 | Gouging Fire | 10 | 29–29 |
-| Magma Hideout 1F | Land | 10 | Torkoal | 10 | 30–30 |
-| Magma Hideout 1F | Land | 10 | Weezing | 10 | 30–30 |
-| Magma Hideout 1F | Land | 10 | Turtonator | 5 | 30–30 |
-| Magma Hideout 2F 1R | Land | 10 | Excadrill | 15 | 28–30 |
-| Magma Hideout 2F 1R | Land | 10 | Turtonator | 15 | 29–30 |
-| Magma Hideout 2F 1R | Land | 10 | Boldore | 13 | 28–28 |
-| Magma Hideout 2F 1R | Land | 10 | Graveler | 13 | 27–27 |
-| Magma Hideout 2F 1R | Land | 10 | Magmortar | 12 | 31–33 |
-| Magma Hideout 2F 1R | Land | 10 | Volcarona | 12 | 30–32 |
-| Magma Hideout 2F 1R | Land | 10 | Torkoal | 10 | 30–30 |
-| Magma Hideout 2F 1R | Land | 10 | Weezing | 10 | 30–30 |
-| Magma Hideout 2F 2R | Land | 10 | Excadrill | 15 | 28–30 |
-| Magma Hideout 2F 2R | Land | 10 | Turtonator | 15 | 29–30 |
-| Magma Hideout 2F 2R | Land | 10 | Boldore | 13 | 28–28 |
-| Magma Hideout 2F 2R | Land | 10 | Graveler | 13 | 27–27 |
-| Magma Hideout 2F 2R | Land | 10 | Magmortar | 12 | 31–33 |
-| Magma Hideout 2F 2R | Land | 10 | Volcarona | 12 | 30–32 |
-| Magma Hideout 2F 2R | Land | 10 | Torkoal | 10 | 30–30 |
-| Magma Hideout 2F 2R | Land | 10 | Weezing | 10 | 30–30 |
-| Magma Hideout 3F 1R | Land | 10 | Excadrill | 15 | 28–30 |
-| Magma Hideout 3F 1R | Land | 10 | Turtonator | 15 | 29–30 |
-| Magma Hideout 3F 1R | Land | 10 | Boldore | 13 | 28–28 |
-| Magma Hideout 3F 1R | Land | 10 | Graveler | 13 | 27–27 |
-| Magma Hideout 3F 1R | Land | 10 | Magmortar | 12 | 31–33 |
-| Magma Hideout 3F 1R | Land | 10 | Volcarona | 12 | 30–32 |
-| Magma Hideout 3F 1R | Land | 10 | Torkoal | 10 | 30–30 |
-| Magma Hideout 3F 1R | Land | 10 | Weezing | 10 | 30–30 |
-| Magma Hideout 3F 2R | Land | 10 | Excadrill | 15 | 28–30 |
-| Magma Hideout 3F 2R | Land | 10 | Turtonator | 15 | 29–30 |
-| Magma Hideout 3F 2R | Land | 10 | Boldore | 13 | 28–28 |
-| Magma Hideout 3F 2R | Land | 10 | Graveler | 13 | 27–27 |
-| Magma Hideout 3F 2R | Land | 10 | Magmortar | 12 | 31–33 |
-| Magma Hideout 3F 2R | Land | 10 | Volcarona | 12 | 30–32 |
-| Magma Hideout 3F 2R | Land | 10 | Torkoal | 10 | 30–30 |
-| Magma Hideout 3F 2R | Land | 10 | Weezing | 10 | 30–30 |
-| Magma Hideout 4F | Land | 10 | Excadrill | 15 | 28–30 |
-| Magma Hideout 4F | Land | 10 | Turtonator | 15 | 29–30 |
-| Magma Hideout 4F | Land | 10 | Boldore | 13 | 28–28 |
-| Magma Hideout 4F | Land | 10 | Graveler | 13 | 27–27 |
-| Magma Hideout 4F | Land | 10 | Emboar | 12 | 31–33 |
-| Magma Hideout 4F | Land | 10 | Volcanion | 12 | 30–32 |
-| Magma Hideout 4F | Land | 10 | Torkoal | 10 | 30–30 |
-| Magma Hideout 4F | Land | 10 | Weezing | 10 | 30–30 |
-| Magma Hideout 3F 3R | Land | 10 | Excadrill | 15 | 28–30 |
-| Magma Hideout 3F 3R | Land | 10 | Turtonator | 15 | 29–30 |
-| Magma Hideout 3F 3R | Land | 10 | Boldore | 13 | 28–28 |
-| Magma Hideout 3F 3R | Land | 10 | Graveler | 13 | 27–27 |
-| Magma Hideout 3F 3R | Land | 10 | Magmortar | 12 | 31–33 |
-| Magma Hideout 3F 3R | Land | 10 | Volcarona | 12 | 30–32 |
-| Magma Hideout 3F 3R | Land | 10 | Torkoal | 10 | 30–30 |
-| Magma Hideout 3F 3R | Land | 10 | Weezing | 10 | 30–30 |
-| Magma Hideout 2F 3R | Land | 10 | Excadrill | 15 | 28–30 |
-| Magma Hideout 2F 3R | Land | 10 | Turtonator | 15 | 29–30 |
-| Magma Hideout 2F 3R | Land | 10 | Boldore | 13 | 28–28 |
-| Magma Hideout 2F 3R | Land | 10 | Graveler | 13 | 27–27 |
-| Magma Hideout 2F 3R | Land | 10 | Magmortar | 12 | 31–33 |
-| Magma Hideout 2F 3R | Land | 10 | Volcarona | 12 | 30–32 |
-| Magma Hideout 2F 3R | Land | 10 | Torkoal | 10 | 30–30 |
-| Magma Hideout 2F 3R | Land | 10 | Weezing | 10 | 30–30 |
+| Location | Method | Access requirement | Raw rate | Species | Within-method % | Levels |
+|---|---|---|---|---|---|---|
+| Route 102 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Crawdaunt | 70 | 20–45 |
+| Route 102 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Seaking | 30 | 30–35 |
+| Route 103 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Gyarados | 40 | 30–35 |
+| Route 103 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Sharpedo | 30 | 25–45 |
+| Route 103 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Wailmer | 30 | 30–35 |
+| Route 104 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Luvdisc | 70 | 25–35 |
+| Route 104 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Gyarados | 30 | 20–45 |
+| Route 105 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Clawitzer | 55 | 20–30 |
+| Route 105 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Dragalge | 45 | 30–45 |
+| Route 110 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Chinchou | 40 | 25–30 |
+| Route 110 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Wailmer | 30 | 30–35 |
+| Route 110 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Lanturn | 15 | 20–25 |
+| Route 110 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Wailord | 15 | 35–45 |
+| Route 111 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Basculin | 70 | 25–35 |
+| Route 111 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Seaking | 30 | 20–45 |
+| Route 114 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Wishiwashi | 40 | 25–30 |
+| Route 114 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Seaking | 30 | 30–35 |
+| Route 114 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Whiscash | 30 | 20–45 |
+| Route 117 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Seaking | 40 | 25–30 |
+| Route 117 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Corphish | 30 | 30–35 |
+| Route 117 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Crawdaunt | 30 | 20–45 |
+| Route 118 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Basculin | 40 | 30–35 |
+| Route 118 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Arrokuda | 30 | 30–35 |
+| Route 118 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Gyarados | 15 | 35–45 |
+| Route 118 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Sharpedo | 15 | 20–25 |
+| Route 124 | Surf | Balance Badge (5) and HM03 Surf | 4 | Jellicent | 60 | 5–35 |
+| Route 124 | Surf | Balance Badge (5) and HM03 Surf | 4 | Alomomola | 30 | 10–30 |
+| Route 124 | Surf | Balance Badge (5) and HM03 Surf | 4 | Milotic | 10 | 15–30 |
+| Route 124 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Magikarp | 60 | 5–10 |
+| Route 124 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Finneon | 40 | 5–10 |
+| Route 124 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Finneon | 60 | 10–30 |
+| Route 124 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Alomomola | 20 | 10–30 |
+| Route 124 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Frillish | 20 | 10–30 |
+| Route 124 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Lumineon | 40 | 30–35 |
+| Route 124 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Alomomola | 30 | 30–35 |
+| Route 124 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Kingdra | 15 | 25–30 |
+| Route 124 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Manaphy | 15 | 35–45 |
+| Petalburg Woods 3 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Slowbro | 40 | 25–30 |
+| Petalburg Woods 3 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Poliwhirl | 30 | 30–35 |
+| Petalburg Woods 3 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Slowpoke | 15 | 20–25 |
+| Petalburg Woods 3 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Poliwrath | 10 | 35–40 |
+| Petalburg Woods 3 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Politoed | 5 | 40–45 |
+| Abandoned Ship Rooms B1F | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 20 | Dragalge | 40 | 25–30 |
+| Abandoned Ship Rooms B1F | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 20 | Dhelmise | 30 | 30–35 |
+| Abandoned Ship Rooms B1F | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 20 | Jellicent | 30 | 20–35 |
+| Meteor Falls B1F 2R | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Dratini | 40 | 25–30 |
+| Meteor Falls B1F 2R | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Dragonair | 30 | 30–35 |
+| Meteor Falls B1F 2R | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Whiscash | 25 | 20–40 |
+| Meteor Falls B1F 2R | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Dragonite | 5 | 40–45 |
+| Route 106 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Clawitzer | 55 | 20–30 |
+| Route 106 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Dragalge | 45 | 30–45 |
+| Route 107 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Lumineon | 40 | 25–30 |
+| Route 107 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Gyarados | 30 | 20–45 |
+| Route 107 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Octillery | 30 | 30–35 |
+| Route 108 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Lumineon | 40 | 25–30 |
+| Route 108 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Gyarados | 30 | 20–45 |
+| Route 108 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Octillery | 30 | 30–35 |
+| Route 109 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Bruxish | 55 | 25–45 |
+| Route 109 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Corsola | 30 | 30–35 |
+| Route 109 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Toxapex | 15 | 20–25 |
+| Route 115 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Qwilfish | 40 | 25–30 |
+| Route 115 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Wishiwashi | 30 | 30–35 |
+| Route 115 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Wailmer | 15 | 20–25 |
+| Route 115 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Wailord | 15 | 35–45 |
+| Route 119 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Carvanha | 40 | 25–30 |
+| Route 119 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Gyarados | 30 | 30–35 |
+| Route 119 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Sharpedo | 25 | 20–40 |
+| Route 119 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Milotic | 5 | 40–45 |
+| Route 120 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Whiscash | 40 | 25–30 |
+| Route 120 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Gyarados | 30 | 20–45 |
+| Route 120 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Stunfisk | 30 | 30–35 |
+| Route 121 | Land | No field move; available when the location itself is reachable | 20 | Duskull | 13 | 26–26 |
+| Route 121 | Land | No field move; available when the location itself is reachable | 20 | Shuppet | 13 | 26–26 |
+| Route 121 | Land | No field move; available when the location itself is reachable | 20 | Sinistea | 12 | 25–27 |
+| Route 121 | Land | No field move; available when the location itself is reachable | 20 | Zoroark | 12 | 26–28 |
+| Route 121 | Land | No field move; available when the location itself is reachable | 20 | Elgyem | 10 | 28–28 |
+| Route 121 | Land | No field move; available when the location itself is reachable | 20 | Furfrou | 10 | 28–28 |
+| Route 121 | Land | No field move; available when the location itself is reachable | 20 | Hypno | 10 | 26–26 |
+| Route 121 | Land | No field move; available when the location itself is reachable | 20 | Pangoro | 10 | 26–26 |
+| Route 121 | Land | No field move; available when the location itself is reachable | 20 | Arbok | 5 | 28–28 |
+| Route 121 | Land | No field move; available when the location itself is reachable | 20 | Komala | 5 | 28–28 |
+| Route 121 | Surf | Balance Badge (5) and HM03 Surf | 4 | Pelipper | 60 | 5–35 |
+| Route 121 | Surf | Balance Badge (5) and HM03 Surf | 4 | Frillish | 30 | 10–30 |
+| Route 121 | Surf | Balance Badge (5) and HM03 Surf | 4 | Alomomola | 10 | 15–30 |
+| Route 121 | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Arbok | 60 | 10–15 |
+| Route 121 | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Heracross | 40 | 5–20 |
+| Route 121 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Magikarp | 60 | 5–10 |
+| Route 121 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Wailmer | 40 | 5–10 |
+| Route 121 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Wailmer | 100 | 10–30 |
+| Route 121 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Wailmer | 40 | 25–30 |
+| Route 121 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Gyarados | 30 | 30–35 |
+| Route 121 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Lumineon | 30 | 20–45 |
+| Route 121 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Audino | 50 | 2–2 |
+| Route 121 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Banette | 25 | 2–3 |
+| Route 121 | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Dusclops | 25 | 2–3 |
+| Route 122 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Wailmer | 40 | 25–30 |
+| Route 122 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Gyarados | 30 | 30–35 |
+| Route 122 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Lumineon | 30 | 20–45 |
+| Route 123 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Corphish | 40 | 25–30 |
+| Route 123 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Crawdaunt | 30 | 30–35 |
+| Route 123 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Seaking | 30 | 20–45 |
+| Mt Pyre 2F | Land | No field move; available when the location itself is reachable | 10 | Litwick | 20 | 26–29 |
+| Mt Pyre 2F | Land | No field move; available when the location itself is reachable | 10 | Misdreavus | 17 | 23–29 |
+| Mt Pyre 2F | Land | No field move; available when the location itself is reachable | 10 | Murkrow | 17 | 22–24 |
+| Mt Pyre 2F | Land | No field move; available when the location itself is reachable | 10 | Duskull | 13 | 28–28 |
+| Mt Pyre 2F | Land | No field move; available when the location itself is reachable | 10 | Shuppet | 13 | 27–27 |
+| Mt Pyre 2F | Land | No field move; available when the location itself is reachable | 10 | Golbat | 10 | 25–25 |
+| Mt Pyre 2F | Land | No field move; available when the location itself is reachable | 10 | Haunter | 10 | 24–24 |
+| Mt Pyre 3F | Land | No field move; available when the location itself is reachable | 10 | Litwick | 20 | 26–29 |
+| Mt Pyre 3F | Land | No field move; available when the location itself is reachable | 10 | Misdreavus | 17 | 23–29 |
+| Mt Pyre 3F | Land | No field move; available when the location itself is reachable | 10 | Murkrow | 17 | 22–24 |
+| Mt Pyre 3F | Land | No field move; available when the location itself is reachable | 10 | Duskull | 13 | 28–28 |
+| Mt Pyre 3F | Land | No field move; available when the location itself is reachable | 10 | Shuppet | 13 | 27–27 |
+| Mt Pyre 3F | Land | No field move; available when the location itself is reachable | 10 | Golbat | 10 | 25–25 |
+| Mt Pyre 3F | Land | No field move; available when the location itself is reachable | 10 | Haunter | 10 | 24–24 |
+| Mt Pyre 4F | Land | No field move; available when the location itself is reachable | 10 | Misdreavus | 17 | 23–29 |
+| Mt Pyre 4F | Land | No field move; available when the location itself is reachable | 10 | Murkrow | 17 | 22–24 |
+| Mt Pyre 4F | Land | No field move; available when the location itself is reachable | 10 | Banette | 13 | 27–27 |
+| Mt Pyre 4F | Land | No field move; available when the location itself is reachable | 10 | Dusclops | 13 | 28–28 |
+| Mt Pyre 4F | Land | No field move; available when the location itself is reachable | 10 | Golbat | 10 | 24–24 |
+| Mt Pyre 4F | Land | No field move; available when the location itself is reachable | 10 | Haunter | 10 | 29–29 |
+| Mt Pyre 4F | Land | No field move; available when the location itself is reachable | 10 | Lampent | 10 | 26–26 |
+| Mt Pyre 4F | Land | No field move; available when the location itself is reachable | 10 | Mimikyu | 10 | 25–25 |
+| Mt Pyre 5F | Land | No field move; available when the location itself is reachable | 10 | Misdreavus | 17 | 23–29 |
+| Mt Pyre 5F | Land | No field move; available when the location itself is reachable | 10 | Murkrow | 17 | 22–24 |
+| Mt Pyre 5F | Land | No field move; available when the location itself is reachable | 10 | Banette | 13 | 27–27 |
+| Mt Pyre 5F | Land | No field move; available when the location itself is reachable | 10 | Dusclops | 13 | 28–28 |
+| Mt Pyre 5F | Land | No field move; available when the location itself is reachable | 10 | Golbat | 10 | 24–24 |
+| Mt Pyre 5F | Land | No field move; available when the location itself is reachable | 10 | Haunter | 10 | 29–29 |
+| Mt Pyre 5F | Land | No field move; available when the location itself is reachable | 10 | Lampent | 10 | 26–26 |
+| Mt Pyre 5F | Land | No field move; available when the location itself is reachable | 10 | Mimikyu | 10 | 25–25 |
+| Mt Pyre 6F | Land | No field move; available when the location itself is reachable | 10 | Misdreavus | 17 | 23–29 |
+| Mt Pyre 6F | Land | No field move; available when the location itself is reachable | 10 | Murkrow | 17 | 22–24 |
+| Mt Pyre 6F | Land | No field move; available when the location itself is reachable | 10 | Banette | 13 | 27–27 |
+| Mt Pyre 6F | Land | No field move; available when the location itself is reachable | 10 | Dusclops | 13 | 28–28 |
+| Mt Pyre 6F | Land | No field move; available when the location itself is reachable | 10 | Golbat | 10 | 24–24 |
+| Mt Pyre 6F | Land | No field move; available when the location itself is reachable | 10 | Haunter | 10 | 29–29 |
+| Mt Pyre 6F | Land | No field move; available when the location itself is reachable | 10 | Lampent | 10 | 26–26 |
+| Mt Pyre 6F | Land | No field move; available when the location itself is reachable | 10 | Mimikyu | 10 | 25–25 |
+| Mt Pyre Summit | Land | No field move; available when the location itself is reachable | 10 | Drifblim | 20 | 26–27 |
+| Mt Pyre Summit | Land | No field move; available when the location itself is reachable | 10 | Medicham | 13 | 29–29 |
+| Mt Pyre Summit | Land | No field move; available when the location itself is reachable | 10 | Vulpix | 13 | 28–28 |
+| Mt Pyre Summit | Land | No field move; available when the location itself is reachable | 10 | Chimecho | 12 | 28–30 |
+| Mt Pyre Summit | Land | No field move; available when the location itself is reachable | 10 | Growlithe | 12 | 26–28 |
+| Mt Pyre Summit | Land | No field move; available when the location itself is reachable | 10 | Beheeyem | 10 | 24–28 |
+| Mt Pyre Summit | Land | No field move; available when the location itself is reachable | 10 | Bronzong | 10 | 25–25 |
+| Mt Pyre Summit | Land | No field move; available when the location itself is reachable | 10 | Flutter Mane | 10 | 30–30 |
+| Mt Pyre Summit | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Audino | 70 | 2–3 |
+| Mt Pyre Summit | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Bronzong | 15 | 2–2 |
+| Mt Pyre Summit | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Chimecho | 15 | 2–2 |
+| Route 125 | Surf | Balance Badge (5) and HM03 Surf | 4 | Jellicent | 60 | 5–35 |
+| Route 125 | Surf | Balance Badge (5) and HM03 Surf | 4 | Alomomola | 30 | 10–30 |
+| Route 125 | Surf | Balance Badge (5) and HM03 Surf | 4 | Lapras | 10 | 15–30 |
+| Route 125 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Magikarp | 60 | 5–10 |
+| Route 125 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Finneon | 40 | 5–10 |
+| Route 125 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Finneon | 60 | 10–30 |
+| Route 125 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Alomomola | 20 | 10–30 |
+| Route 125 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Frillish | 20 | 10–30 |
+| Route 125 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Lumineon | 40 | 30–35 |
+| Route 125 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Alomomola | 30 | 30–35 |
+| Route 125 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Kingdra | 15 | 25–30 |
+| Route 125 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Suicune | 15 | 35–45 |
+| Route 126 | Surf | Balance Badge (5) and HM03 Surf | 4 | Jellicent | 60 | 5–35 |
+| Route 126 | Surf | Balance Badge (5) and HM03 Surf | 4 | Alomomola | 30 | 10–30 |
+| Route 126 | Surf | Balance Badge (5) and HM03 Surf | 4 | Primarina | 10 | 15–30 |
+| Route 126 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Magikarp | 60 | 5–10 |
+| Route 126 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Finneon | 40 | 5–10 |
+| Route 126 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Finneon | 60 | 10–30 |
+| Route 126 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Alomomola | 20 | 10–30 |
+| Route 126 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Frillish | 20 | 10–30 |
+| Route 126 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Lumineon | 40 | 30–35 |
+| Route 126 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Alomomola | 30 | 30–35 |
+| Route 126 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Kingdra | 15 | 25–30 |
+| Route 126 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Tapu Fini | 15 | 35–45 |
+| Route 127 | Surf | Balance Badge (5) and HM03 Surf | 4 | Jellicent | 60 | 5–35 |
+| Route 127 | Surf | Balance Badge (5) and HM03 Surf | 4 | Alomomola | 30 | 10–30 |
+| Route 127 | Surf | Balance Badge (5) and HM03 Surf | 4 | Golisopod | 10 | 15–30 |
+| Route 127 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Magikarp | 60 | 5–10 |
+| Route 127 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Finneon | 40 | 5–10 |
+| Route 127 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Finneon | 60 | 10–30 |
+| Route 127 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Alomomola | 20 | 10–30 |
+| Route 127 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Frillish | 20 | 10–30 |
+| Route 127 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Lumineon | 40 | 30–35 |
+| Route 127 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Alomomola | 30 | 30–35 |
+| Route 127 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Dhelmise | 15 | 25–30 |
+| Route 127 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Keldeo | 15 | 35–45 |
+| Route 128 | Surf | Balance Badge (5) and HM03 Surf | 4 | Jellicent | 60 | 5–35 |
+| Route 128 | Surf | Balance Badge (5) and HM03 Surf | 4 | Alomomola | 30 | 10–30 |
+| Route 128 | Surf | Balance Badge (5) and HM03 Surf | 4 | Kingdra | 10 | 15–30 |
+| Route 128 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Magikarp | 60 | 5–10 |
+| Route 128 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Luvdisc | 40 | 5–10 |
+| Route 128 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Luvdisc | 60 | 10–30 |
+| Route 128 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Corsola | 40 | 10–30 |
+| Route 128 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Luvdisc | 40 | 30–35 |
+| Route 128 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Corsola | 30 | 30–35 |
+| Route 128 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Dragalge | 15 | 30–35 |
+| Route 128 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Primarina | 15 | 35–45 |
+| Abandoned Ship Hidden Floor Corridors | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 20 | Dragalge | 40 | 25–30 |
+| Abandoned Ship Hidden Floor Corridors | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 20 | Dhelmise | 30 | 30–35 |
+| Abandoned Ship Hidden Floor Corridors | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 20 | Jellicent | 30 | 20–35 |
+| Safari Zone Southwest | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 35 | Seaking | 100 | 25–40 |
+| Safari Zone Northwest | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 35 | Muk Alolan | 60 | 25–40 |
+| Safari Zone Northwest | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 35 | Muk | 40 | 25–30 |
+| Meteor Falls 1F 1R | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Dratini | 40 | 25–30 |
+| Meteor Falls 1F 1R | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Dragonair | 30 | 30–35 |
+| Meteor Falls 1F 1R | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Whiscash | 25 | 20–40 |
+| Meteor Falls 1F 1R | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Dragonite | 5 | 40–45 |
+| Meteor Falls 1F 2R | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Dratini | 40 | 25–30 |
+| Meteor Falls 1F 2R | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Dragonair | 30 | 30–35 |
+| Meteor Falls 1F 2R | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Whiscash | 25 | 20–40 |
+| Meteor Falls 1F 2R | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Dragonite | 5 | 40–45 |
+| Meteor Falls B1F 1R | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Dratini | 40 | 25–30 |
+| Meteor Falls B1F 1R | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Dragonair | 30 | 30–35 |
+| Meteor Falls B1F 1R | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Whiscash | 25 | 20–40 |
+| Meteor Falls B1F 1R | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Dragonite | 5 | 40–45 |
+| Shoal Cave Low Tide Stairs Room | Land | No field move; available when the location itself is reachable | 10 | Golbat | 20 | 28–28 |
+| Shoal Cave Low Tide Stairs Room | Land | No field move; available when the location itself is reachable | 10 | Sealeo | 20 | 30–30 |
+| Shoal Cave Low Tide Stairs Room | Land | No field move; available when the location itself is reachable | 10 | Delibird | 17 | 32–32 |
+| Shoal Cave Low Tide Stairs Room | Land | No field move; available when the location itself is reachable | 10 | Dewgong | 17 | 32–32 |
+| Shoal Cave Low Tide Stairs Room | Land | No field move; available when the location itself is reachable | 10 | Cubchoo | 13 | 26–26 |
+| Shoal Cave Low Tide Stairs Room | Land | No field move; available when the location itself is reachable | 10 | Spheal | 13 | 26–26 |
+| Shoal Cave Low Tide Lower Room | Land | No field move; available when the location itself is reachable | 10 | Golbat | 20 | 28–28 |
+| Shoal Cave Low Tide Lower Room | Land | No field move; available when the location itself is reachable | 10 | Sealeo | 20 | 30–30 |
+| Shoal Cave Low Tide Lower Room | Land | No field move; available when the location itself is reachable | 10 | Delibird | 17 | 32–32 |
+| Shoal Cave Low Tide Lower Room | Land | No field move; available when the location itself is reachable | 10 | Dewgong | 17 | 32–32 |
+| Shoal Cave Low Tide Lower Room | Land | No field move; available when the location itself is reachable | 10 | Cubchoo | 13 | 26–26 |
+| Shoal Cave Low Tide Lower Room | Land | No field move; available when the location itself is reachable | 10 | Spheal | 13 | 26–26 |
+| Shoal Cave Low Tide Inner Room | Land | No field move; available when the location itself is reachable | 10 | Golbat | 20 | 28–28 |
+| Shoal Cave Low Tide Inner Room | Land | No field move; available when the location itself is reachable | 10 | Sealeo | 20 | 30–30 |
+| Shoal Cave Low Tide Inner Room | Land | No field move; available when the location itself is reachable | 10 | Delibird | 17 | 32–32 |
+| Shoal Cave Low Tide Inner Room | Land | No field move; available when the location itself is reachable | 10 | Dewgong | 17 | 32–32 |
+| Shoal Cave Low Tide Inner Room | Land | No field move; available when the location itself is reachable | 10 | Cubchoo | 13 | 26–26 |
+| Shoal Cave Low Tide Inner Room | Land | No field move; available when the location itself is reachable | 10 | Spheal | 13 | 26–26 |
+| Shoal Cave Low Tide Inner Room | Surf | Balance Badge (5) and HM03 Surf | 4 | Spheal | 60 | 5–35 |
+| Shoal Cave Low Tide Inner Room | Surf | Balance Badge (5) and HM03 Surf | 4 | Golbat | 30 | 5–35 |
+| Shoal Cave Low Tide Inner Room | Surf | Balance Badge (5) and HM03 Surf | 4 | Lapras | 10 | 25–30 |
+| Shoal Cave Low Tide Inner Room | Old Rod | Old Rod from Mom in Littleroot during the opening | 10 | Magikarp | 60 | 5–10 |
+| Shoal Cave Low Tide Inner Room | Old Rod | Old Rod from Mom in Littleroot during the opening | 10 | Tentacool | 40 | 5–10 |
+| Shoal Cave Low Tide Inner Room | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 10 | Tentacool | 60 | 10–30 |
+| Shoal Cave Low Tide Inner Room | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 10 | Slowpoke | 40 | 10–30 |
+| Shoal Cave Low Tide Inner Room | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 10 | Tentacruel | 40 | 25–30 |
+| Shoal Cave Low Tide Inner Room | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 10 | Slowbro | 30 | 20–45 |
+| Shoal Cave Low Tide Inner Room | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 10 | Slowpoke | 30 | 30–35 |
+| Shoal Cave Low Tide Entrance Room | Land | No field move; available when the location itself is reachable | 10 | Golbat | 20 | 28–28 |
+| Shoal Cave Low Tide Entrance Room | Land | No field move; available when the location itself is reachable | 10 | Sealeo | 20 | 30–30 |
+| Shoal Cave Low Tide Entrance Room | Land | No field move; available when the location itself is reachable | 10 | Delibird | 17 | 32–32 |
+| Shoal Cave Low Tide Entrance Room | Land | No field move; available when the location itself is reachable | 10 | Dewgong | 17 | 32–32 |
+| Shoal Cave Low Tide Entrance Room | Land | No field move; available when the location itself is reachable | 10 | Cubchoo | 13 | 26–26 |
+| Shoal Cave Low Tide Entrance Room | Land | No field move; available when the location itself is reachable | 10 | Spheal | 13 | 26–26 |
+| Shoal Cave Low Tide Entrance Room | Surf | Balance Badge (5) and HM03 Surf | 4 | Spheal | 60 | 5–35 |
+| Shoal Cave Low Tide Entrance Room | Surf | Balance Badge (5) and HM03 Surf | 4 | Golbat | 30 | 5–35 |
+| Shoal Cave Low Tide Entrance Room | Surf | Balance Badge (5) and HM03 Surf | 4 | Lapras | 10 | 25–30 |
+| Shoal Cave Low Tide Entrance Room | Old Rod | Old Rod from Mom in Littleroot during the opening | 10 | Magikarp | 60 | 5–10 |
+| Shoal Cave Low Tide Entrance Room | Old Rod | Old Rod from Mom in Littleroot during the opening | 10 | Tentacool | 40 | 5–10 |
+| Shoal Cave Low Tide Entrance Room | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 10 | Tentacool | 60 | 10–30 |
+| Shoal Cave Low Tide Entrance Room | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 10 | Slowpoke | 40 | 10–30 |
+| Shoal Cave Low Tide Entrance Room | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 10 | Tentacruel | 40 | 25–30 |
+| Shoal Cave Low Tide Entrance Room | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 10 | Slowbro | 30 | 20–45 |
+| Shoal Cave Low Tide Entrance Room | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 10 | Slowpoke | 30 | 30–35 |
+| Lilycove City | Surf | Balance Badge (5) and HM03 Surf | 4 | Floatzel | 60 | 5–35 |
+| Lilycove City | Surf | Balance Badge (5) and HM03 Surf | 4 | Pelipper | 30 | 10–30 |
+| Lilycove City | Surf | Balance Badge (5) and HM03 Surf | 4 | Bruxish | 10 | 15–30 |
+| Lilycove City | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 25 | Binacle | 60 | 25–30 |
+| Lilycove City | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 25 | Wimpod | 30 | 20–25 |
+| Lilycove City | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 25 | Dwebble | 10 | 30–35 |
+| Lilycove City | Old Rod | Old Rod from Mom in Littleroot during the opening | 10 | Magikarp | 60 | 5–10 |
+| Lilycove City | Old Rod | Old Rod from Mom in Littleroot during the opening | 10 | Finneon | 40 | 5–10 |
+| Lilycove City | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 10 | Finneon | 60 | 10–30 |
+| Lilycove City | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 10 | Bruxish | 20 | 10–30 |
+| Lilycove City | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 10 | Staryu | 20 | 10–30 |
+| Lilycove City | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 10 | Lumineon | 40 | 25–30 |
+| Lilycove City | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 10 | Bruxish | 30 | 30–35 |
+| Lilycove City | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 10 | Starmie | 30 | 25–45 |
+| Dewford Town | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 10 | Staryu | 40 | 25–30 |
+| Dewford Town | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 10 | Shellder | 30 | 30–35 |
+| Dewford Town | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 10 | Lumineon | 15 | 20–25 |
+| Dewford Town | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 10 | Starmie | 10 | 35–40 |
+| Dewford Town | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 10 | Cloyster | 5 | 40–45 |
+| Slateport City | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 10 | Seadra | 40 | 25–30 |
+| Slateport City | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 10 | Alomomola | 30 | 30–35 |
+| Slateport City | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 10 | Jellicent | 25 | 20–40 |
+| Slateport City | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 10 | Kingdra | 5 | 40–45 |
+| Mossdeep City | Surf | Balance Badge (5) and HM03 Surf | 4 | Pelipper | 60 | 5–35 |
+| Mossdeep City | Surf | Balance Badge (5) and HM03 Surf | 4 | Floatzel | 30 | 10–30 |
+| Mossdeep City | Surf | Balance Badge (5) and HM03 Surf | 4 | Sharpedo | 10 | 15–30 |
+| Mossdeep City | Old Rod | Old Rod from Mom in Littleroot during the opening | 10 | Magikarp | 60 | 5–10 |
+| Mossdeep City | Old Rod | Old Rod from Mom in Littleroot during the opening | 10 | Finneon | 40 | 5–10 |
+| Mossdeep City | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 10 | Finneon | 60 | 10–30 |
+| Mossdeep City | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 10 | Sharpedo | 20 | 10–30 |
+| Mossdeep City | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 10 | Wailmer | 20 | 10–30 |
+| Mossdeep City | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 10 | Sharpedo | 40 | 30–35 |
+| Mossdeep City | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 10 | Lumineon | 30 | 25–45 |
+| Mossdeep City | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 10 | Wailmer | 30 | 30–35 |
+| Petalburg City | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 10 | Corphish | 60 | 20–45 |
+| Petalburg City | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 10 | Crawdaunt | 40 | 25–30 |
+| Shoal Cave Low Tide Ice Room | Land | No field move; available when the location itself is reachable | 10 | Beartic | 20 | 28–28 |
+| Shoal Cave Low Tide Ice Room | Land | No field move; available when the location itself is reachable | 10 | Jynx | 13 | 32–32 |
+| Shoal Cave Low Tide Ice Room | Land | No field move; available when the location itself is reachable | 10 | Sealeo | 13 | 26–26 |
+| Shoal Cave Low Tide Ice Room | Land | No field move; available when the location itself is reachable | 10 | Snorunt | 13 | 26–26 |
+| Shoal Cave Low Tide Ice Room | Land | No field move; available when the location itself is reachable | 10 | Chien Pao | 10 | 30–30 |
+| Shoal Cave Low Tide Ice Room | Land | No field move; available when the location itself is reachable | 10 | Iron Bundle | 10 | 30–30 |
+| Shoal Cave Low Tide Ice Room | Land | No field move; available when the location itself is reachable | 10 | Eiscue | 8 | 32–32 |
+| Shoal Cave Low Tide Ice Room | Land | No field move; available when the location itself is reachable | 10 | Cryogonal | 5 | 32–32 |
+| Shoal Cave Low Tide Ice Room | Land | No field move; available when the location itself is reachable | 10 | Mr Mime Galarian | 4 | 32–32 |
+| Shoal Cave Low Tide Ice Room | Land | No field move; available when the location itself is reachable | 10 | Snom | 4 | 32–32 |
+| Safari Zone Southeast | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 35 | Dratini | 65 | 25–35 |
+| Safari Zone Southeast | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 35 | Dragonair | 30 | 25–30 |
+| Safari Zone Southeast | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 35 | Dragonite | 5 | 35–40 |
+| Magma Hideout 1F | Land | No field move; available when the location itself is reachable | 10 | Excadrill | 15 | 28–30 |
+| Magma Hideout 1F | Land | No field move; available when the location itself is reachable | 10 | Boldore | 13 | 28–28 |
+| Magma Hideout 1F | Land | No field move; available when the location itself is reachable | 10 | Graveler | 13 | 27–27 |
+| Magma Hideout 1F | Land | No field move; available when the location itself is reachable | 10 | Magmortar | 12 | 31–33 |
+| Magma Hideout 1F | Land | No field move; available when the location itself is reachable | 10 | Volcarona | 12 | 30–32 |
+| Magma Hideout 1F | Land | No field move; available when the location itself is reachable | 10 | Gouging Fire | 10 | 29–29 |
+| Magma Hideout 1F | Land | No field move; available when the location itself is reachable | 10 | Torkoal | 10 | 30–30 |
+| Magma Hideout 1F | Land | No field move; available when the location itself is reachable | 10 | Weezing | 10 | 30–30 |
+| Magma Hideout 1F | Land | No field move; available when the location itself is reachable | 10 | Turtonator | 5 | 30–30 |
+| Magma Hideout 2F 1R | Land | No field move; available when the location itself is reachable | 10 | Excadrill | 15 | 28–30 |
+| Magma Hideout 2F 1R | Land | No field move; available when the location itself is reachable | 10 | Turtonator | 15 | 29–30 |
+| Magma Hideout 2F 1R | Land | No field move; available when the location itself is reachable | 10 | Boldore | 13 | 28–28 |
+| Magma Hideout 2F 1R | Land | No field move; available when the location itself is reachable | 10 | Graveler | 13 | 27–27 |
+| Magma Hideout 2F 1R | Land | No field move; available when the location itself is reachable | 10 | Magmortar | 12 | 31–33 |
+| Magma Hideout 2F 1R | Land | No field move; available when the location itself is reachable | 10 | Volcarona | 12 | 30–32 |
+| Magma Hideout 2F 1R | Land | No field move; available when the location itself is reachable | 10 | Torkoal | 10 | 30–30 |
+| Magma Hideout 2F 1R | Land | No field move; available when the location itself is reachable | 10 | Weezing | 10 | 30–30 |
+| Magma Hideout 2F 2R | Land | No field move; available when the location itself is reachable | 10 | Excadrill | 15 | 28–30 |
+| Magma Hideout 2F 2R | Land | No field move; available when the location itself is reachable | 10 | Turtonator | 15 | 29–30 |
+| Magma Hideout 2F 2R | Land | No field move; available when the location itself is reachable | 10 | Boldore | 13 | 28–28 |
+| Magma Hideout 2F 2R | Land | No field move; available when the location itself is reachable | 10 | Graveler | 13 | 27–27 |
+| Magma Hideout 2F 2R | Land | No field move; available when the location itself is reachable | 10 | Magmortar | 12 | 31–33 |
+| Magma Hideout 2F 2R | Land | No field move; available when the location itself is reachable | 10 | Volcarona | 12 | 30–32 |
+| Magma Hideout 2F 2R | Land | No field move; available when the location itself is reachable | 10 | Torkoal | 10 | 30–30 |
+| Magma Hideout 2F 2R | Land | No field move; available when the location itself is reachable | 10 | Weezing | 10 | 30–30 |
+| Magma Hideout 3F 1R | Land | No field move; available when the location itself is reachable | 10 | Excadrill | 15 | 28–30 |
+| Magma Hideout 3F 1R | Land | No field move; available when the location itself is reachable | 10 | Turtonator | 15 | 29–30 |
+| Magma Hideout 3F 1R | Land | No field move; available when the location itself is reachable | 10 | Boldore | 13 | 28–28 |
+| Magma Hideout 3F 1R | Land | No field move; available when the location itself is reachable | 10 | Graveler | 13 | 27–27 |
+| Magma Hideout 3F 1R | Land | No field move; available when the location itself is reachable | 10 | Magmortar | 12 | 31–33 |
+| Magma Hideout 3F 1R | Land | No field move; available when the location itself is reachable | 10 | Volcarona | 12 | 30–32 |
+| Magma Hideout 3F 1R | Land | No field move; available when the location itself is reachable | 10 | Torkoal | 10 | 30–30 |
+| Magma Hideout 3F 1R | Land | No field move; available when the location itself is reachable | 10 | Weezing | 10 | 30–30 |
+| Magma Hideout 3F 2R | Land | No field move; available when the location itself is reachable | 10 | Excadrill | 15 | 28–30 |
+| Magma Hideout 3F 2R | Land | No field move; available when the location itself is reachable | 10 | Turtonator | 15 | 29–30 |
+| Magma Hideout 3F 2R | Land | No field move; available when the location itself is reachable | 10 | Boldore | 13 | 28–28 |
+| Magma Hideout 3F 2R | Land | No field move; available when the location itself is reachable | 10 | Graveler | 13 | 27–27 |
+| Magma Hideout 3F 2R | Land | No field move; available when the location itself is reachable | 10 | Magmortar | 12 | 31–33 |
+| Magma Hideout 3F 2R | Land | No field move; available when the location itself is reachable | 10 | Volcarona | 12 | 30–32 |
+| Magma Hideout 3F 2R | Land | No field move; available when the location itself is reachable | 10 | Torkoal | 10 | 30–30 |
+| Magma Hideout 3F 2R | Land | No field move; available when the location itself is reachable | 10 | Weezing | 10 | 30–30 |
+| Magma Hideout 4F | Land | No field move; available when the location itself is reachable | 10 | Excadrill | 15 | 28–30 |
+| Magma Hideout 4F | Land | No field move; available when the location itself is reachable | 10 | Turtonator | 15 | 29–30 |
+| Magma Hideout 4F | Land | No field move; available when the location itself is reachable | 10 | Boldore | 13 | 28–28 |
+| Magma Hideout 4F | Land | No field move; available when the location itself is reachable | 10 | Graveler | 13 | 27–27 |
+| Magma Hideout 4F | Land | No field move; available when the location itself is reachable | 10 | Emboar | 12 | 31–33 |
+| Magma Hideout 4F | Land | No field move; available when the location itself is reachable | 10 | Volcanion | 12 | 30–32 |
+| Magma Hideout 4F | Land | No field move; available when the location itself is reachable | 10 | Torkoal | 10 | 30–30 |
+| Magma Hideout 4F | Land | No field move; available when the location itself is reachable | 10 | Weezing | 10 | 30–30 |
+| Magma Hideout 3F 3R | Land | No field move; available when the location itself is reachable | 10 | Excadrill | 15 | 28–30 |
+| Magma Hideout 3F 3R | Land | No field move; available when the location itself is reachable | 10 | Turtonator | 15 | 29–30 |
+| Magma Hideout 3F 3R | Land | No field move; available when the location itself is reachable | 10 | Boldore | 13 | 28–28 |
+| Magma Hideout 3F 3R | Land | No field move; available when the location itself is reachable | 10 | Graveler | 13 | 27–27 |
+| Magma Hideout 3F 3R | Land | No field move; available when the location itself is reachable | 10 | Magmortar | 12 | 31–33 |
+| Magma Hideout 3F 3R | Land | No field move; available when the location itself is reachable | 10 | Volcarona | 12 | 30–32 |
+| Magma Hideout 3F 3R | Land | No field move; available when the location itself is reachable | 10 | Torkoal | 10 | 30–30 |
+| Magma Hideout 3F 3R | Land | No field move; available when the location itself is reachable | 10 | Weezing | 10 | 30–30 |
+| Magma Hideout 2F 3R | Land | No field move; available when the location itself is reachable | 10 | Excadrill | 15 | 28–30 |
+| Magma Hideout 2F 3R | Land | No field move; available when the location itself is reachable | 10 | Turtonator | 15 | 29–30 |
+| Magma Hideout 2F 3R | Land | No field move; available when the location itself is reachable | 10 | Boldore | 13 | 28–28 |
+| Magma Hideout 2F 3R | Land | No field move; available when the location itself is reachable | 10 | Graveler | 13 | 27–27 |
+| Magma Hideout 2F 3R | Land | No field move; available when the location itself is reachable | 10 | Magmortar | 12 | 31–33 |
+| Magma Hideout 2F 3R | Land | No field move; available when the location itself is reachable | 10 | Volcarona | 12 | 30–32 |
+| Magma Hideout 2F 3R | Land | No field move; available when the location itself is reachable | 10 | Torkoal | 10 | 30–30 |
+| Magma Hideout 2F 3R | Land | No field move; available when the location itself is reachable | 10 | Weezing | 10 | 30–30 |
 
 ### Mind Badge — deep ocean, Sootopolis, and Cave of Origin (cap 70)
 
-| Location | Method | Raw rate | Species | Within-method % | Levels |
-|---|---|---|---|---|---|
-| Route 129 | Surf | 4 | Tentacruel | 60 | 5–35 |
-| Route 129 | Surf | 4 | Alomomola | 30 | 10–30 |
-| Route 129 | Surf | 4 | Wailord | 10 | 15–30 |
-| Route 129 | Old Rod | 30 | Magikarp | 60 | 5–10 |
-| Route 129 | Old Rod | 30 | Finneon | 40 | 5–10 |
-| Route 129 | Good Rod | 30 | Finneon | 60 | 10–30 |
-| Route 129 | Good Rod | 30 | Alomomola | 20 | 10–30 |
-| Route 129 | Good Rod | 30 | Tentacool | 20 | 10–30 |
-| Route 129 | Super Rod | 30 | Lumineon | 40 | 30–35 |
-| Route 129 | Super Rod | 30 | Alomomola | 30 | 30–35 |
-| Route 129 | Super Rod | 30 | Tentacruel | 30 | 25–45 |
-| Route 130 | Land | 20 | Wynaut | 100 | 5–50 |
-| Route 130 | Surf | 4 | Tentacruel | 60 | 5–35 |
-| Route 130 | Surf | 4 | Alomomola | 30 | 10–30 |
-| Route 130 | Surf | 4 | Wailord | 10 | 15–30 |
-| Route 130 | Old Rod | 30 | Magikarp | 60 | 5–10 |
-| Route 130 | Old Rod | 30 | Finneon | 40 | 5–10 |
-| Route 130 | Good Rod | 30 | Finneon | 60 | 10–30 |
-| Route 130 | Good Rod | 30 | Alomomola | 20 | 10–30 |
-| Route 130 | Good Rod | 30 | Tentacool | 20 | 10–30 |
-| Route 130 | Super Rod | 30 | Lumineon | 40 | 30–35 |
-| Route 130 | Super Rod | 30 | Alomomola | 30 | 30–35 |
-| Route 130 | Super Rod | 30 | Tentacruel | 30 | 25–45 |
-| Route 131 | Surf | 4 | Tentacruel | 60 | 5–35 |
-| Route 131 | Surf | 4 | Alomomola | 30 | 10–30 |
-| Route 131 | Surf | 4 | Wailord | 10 | 15–30 |
-| Route 131 | Old Rod | 30 | Magikarp | 60 | 5–10 |
-| Route 131 | Old Rod | 30 | Finneon | 40 | 5–10 |
-| Route 131 | Good Rod | 30 | Finneon | 60 | 10–30 |
-| Route 131 | Good Rod | 30 | Alomomola | 20 | 10–30 |
-| Route 131 | Good Rod | 30 | Tentacool | 20 | 10–30 |
-| Route 131 | Super Rod | 30 | Lumineon | 40 | 30–35 |
-| Route 131 | Super Rod | 30 | Alomomola | 30 | 30–35 |
-| Route 131 | Super Rod | 30 | Tentacruel | 30 | 25–45 |
-| Route 132 | Surf | 4 | Jellicent | 60 | 5–35 |
-| Route 132 | Surf | 4 | Pelipper | 30 | 10–30 |
-| Route 132 | Surf | 4 | Wailord | 10 | 15–30 |
-| Route 132 | Old Rod | 30 | Magikarp | 60 | 5–10 |
-| Route 132 | Old Rod | 30 | Tentacool | 40 | 5–10 |
-| Route 132 | Good Rod | 30 | Magikarp | 60 | 10–30 |
-| Route 132 | Good Rod | 30 | Horsea | 40 | 10–30 |
-| Route 132 | Super Rod | 30 | Horsea | 65 | 25–40 |
-| Route 132 | Super Rod | 30 | Seadra | 30 | 30–35 |
-| Route 132 | Super Rod | 30 | Kingdra | 5 | 40–45 |
-| Route 133 | Surf | 4 | Jellicent | 60 | 5–35 |
-| Route 133 | Surf | 4 | Pelipper | 30 | 10–30 |
-| Route 133 | Surf | 4 | Wailord | 10 | 15–30 |
-| Route 133 | Old Rod | 30 | Magikarp | 60 | 5–10 |
-| Route 133 | Old Rod | 30 | Tentacool | 40 | 5–10 |
-| Route 133 | Good Rod | 30 | Magikarp | 60 | 10–30 |
-| Route 133 | Good Rod | 30 | Horsea | 40 | 10–30 |
-| Route 133 | Super Rod | 30 | Horsea | 65 | 25–40 |
-| Route 133 | Super Rod | 30 | Seadra | 30 | 30–35 |
-| Route 133 | Super Rod | 30 | Kingdra | 5 | 40–45 |
-| Route 134 | Surf | 4 | Jellicent | 60 | 5–35 |
-| Route 134 | Surf | 4 | Pelipper | 30 | 10–30 |
-| Route 134 | Surf | 4 | Wailord | 10 | 15–30 |
-| Route 134 | Old Rod | 30 | Magikarp | 60 | 5–10 |
-| Route 134 | Old Rod | 30 | Tentacool | 40 | 5–10 |
-| Route 134 | Good Rod | 30 | Magikarp | 60 | 10–30 |
-| Route 134 | Good Rod | 30 | Horsea | 40 | 10–30 |
-| Route 134 | Super Rod | 30 | Horsea | 65 | 25–40 |
-| Route 134 | Super Rod | 30 | Seadra | 30 | 30–35 |
-| Route 134 | Super Rod | 30 | Kingdra | 5 | 40–45 |
-| Seafloor Cavern Room1 | Land | 4 | Golbat | 35 | 29–35 |
-| Seafloor Cavern Room1 | Land | 4 | Dragalge | 13 | 30–30 |
-| Seafloor Cavern Room1 | Land | 4 | Golisopod | 13 | 31–31 |
-| Seafloor Cavern Room1 | Land | 4 | Crobat | 12 | 35–36 |
-| Seafloor Cavern Room1 | Land | 4 | Greninja | 12 | 33–34 |
-| Seafloor Cavern Room1 | Land | 4 | Dhelmise | 10 | 28–28 |
-| Seafloor Cavern Room1 | Land | 4 | Malamar | 5 | 34–34 |
-| Seafloor Cavern Room2 | Land | 4 | Golbat | 35 | 29–35 |
-| Seafloor Cavern Room2 | Land | 4 | Dragalge | 13 | 30–30 |
-| Seafloor Cavern Room2 | Land | 4 | Golisopod | 13 | 31–31 |
-| Seafloor Cavern Room2 | Land | 4 | Crobat | 12 | 35–36 |
-| Seafloor Cavern Room2 | Land | 4 | Greninja | 12 | 33–34 |
-| Seafloor Cavern Room2 | Land | 4 | Dhelmise | 10 | 28–28 |
-| Seafloor Cavern Room2 | Land | 4 | Malamar | 5 | 34–34 |
-| Seafloor Cavern Room3 | Land | 4 | Golbat | 35 | 29–35 |
-| Seafloor Cavern Room3 | Land | 4 | Dragalge | 13 | 30–30 |
-| Seafloor Cavern Room3 | Land | 4 | Golisopod | 13 | 31–31 |
-| Seafloor Cavern Room3 | Land | 4 | Crobat | 12 | 35–36 |
-| Seafloor Cavern Room3 | Land | 4 | Greninja | 12 | 33–34 |
-| Seafloor Cavern Room3 | Land | 4 | Dhelmise | 10 | 28–28 |
-| Seafloor Cavern Room3 | Land | 4 | Malamar | 5 | 34–34 |
-| Seafloor Cavern Room4 | Land | 4 | Golbat | 35 | 29–35 |
-| Seafloor Cavern Room4 | Land | 4 | Dragalge | 13 | 30–30 |
-| Seafloor Cavern Room4 | Land | 4 | Golisopod | 13 | 31–31 |
-| Seafloor Cavern Room4 | Land | 4 | Crobat | 12 | 35–36 |
-| Seafloor Cavern Room4 | Land | 4 | Greninja | 12 | 33–34 |
-| Seafloor Cavern Room4 | Land | 4 | Dhelmise | 10 | 28–28 |
-| Seafloor Cavern Room4 | Land | 4 | Malamar | 5 | 34–34 |
-| Seafloor Cavern Room5 | Land | 4 | Golbat | 35 | 29–35 |
-| Seafloor Cavern Room5 | Land | 4 | Dragalge | 13 | 30–30 |
-| Seafloor Cavern Room5 | Land | 4 | Golisopod | 13 | 31–31 |
-| Seafloor Cavern Room5 | Land | 4 | Crobat | 12 | 35–36 |
-| Seafloor Cavern Room5 | Land | 4 | Greninja | 12 | 33–34 |
-| Seafloor Cavern Room5 | Land | 4 | Dhelmise | 10 | 28–28 |
-| Seafloor Cavern Room5 | Land | 4 | Malamar | 5 | 34–34 |
-| Seafloor Cavern Room6 | Land | 4 | Golbat | 35 | 29–35 |
-| Seafloor Cavern Room6 | Land | 4 | Dragalge | 13 | 30–30 |
-| Seafloor Cavern Room6 | Land | 4 | Golisopod | 13 | 31–31 |
-| Seafloor Cavern Room6 | Land | 4 | Crobat | 12 | 35–36 |
-| Seafloor Cavern Room6 | Land | 4 | Greninja | 12 | 33–34 |
-| Seafloor Cavern Room6 | Land | 4 | Dhelmise | 10 | 28–28 |
-| Seafloor Cavern Room6 | Land | 4 | Malamar | 5 | 34–34 |
-| Seafloor Cavern Room6 | Surf | 4 | Kingdra | 60 | 5–35 |
-| Seafloor Cavern Room6 | Surf | 4 | Milotic | 30 | 5–35 |
-| Seafloor Cavern Room6 | Surf | 4 | Lapras | 10 | 30–35 |
-| Seafloor Cavern Room6 | Old Rod | 10 | Magikarp | 60 | 5–10 |
-| Seafloor Cavern Room6 | Old Rod | 10 | Tentacool | 40 | 5–10 |
-| Seafloor Cavern Room6 | Good Rod | 10 | Tentacool | 60 | 10–30 |
-| Seafloor Cavern Room6 | Good Rod | 10 | Wailmer | 40 | 10–30 |
-| Seafloor Cavern Room6 | Super Rod | 10 | Wailmer | 85 | 20–35 |
-| Seafloor Cavern Room6 | Super Rod | 10 | Manaphy | 15 | 35–45 |
-| Seafloor Cavern Room7 | Land | 4 | Golbat | 35 | 29–35 |
-| Seafloor Cavern Room7 | Land | 4 | Dragalge | 13 | 30–30 |
-| Seafloor Cavern Room7 | Land | 4 | Golisopod | 13 | 31–31 |
-| Seafloor Cavern Room7 | Land | 4 | Crobat | 12 | 35–36 |
-| Seafloor Cavern Room7 | Land | 4 | Greninja | 12 | 33–34 |
-| Seafloor Cavern Room7 | Land | 4 | Dhelmise | 10 | 28–28 |
-| Seafloor Cavern Room7 | Land | 4 | Malamar | 5 | 34–34 |
-| Seafloor Cavern Room7 | Surf | 4 | Kingdra | 60 | 5–35 |
-| Seafloor Cavern Room7 | Surf | 4 | Milotic | 30 | 5–35 |
-| Seafloor Cavern Room7 | Surf | 4 | Lapras | 10 | 30–35 |
-| Seafloor Cavern Room7 | Old Rod | 10 | Magikarp | 60 | 5–10 |
-| Seafloor Cavern Room7 | Old Rod | 10 | Tentacool | 40 | 5–10 |
-| Seafloor Cavern Room7 | Good Rod | 10 | Tentacool | 60 | 10–30 |
-| Seafloor Cavern Room7 | Good Rod | 10 | Wailmer | 40 | 10–30 |
-| Seafloor Cavern Room7 | Super Rod | 10 | Wailmer | 85 | 20–35 |
-| Seafloor Cavern Room7 | Super Rod | 10 | Manaphy | 15 | 35–45 |
-| Seafloor Cavern Room8 | Land | 4 | Golbat | 35 | 29–35 |
-| Seafloor Cavern Room8 | Land | 4 | Dragalge | 13 | 30–30 |
-| Seafloor Cavern Room8 | Land | 4 | Golisopod | 13 | 31–31 |
-| Seafloor Cavern Room8 | Land | 4 | Crobat | 12 | 35–36 |
-| Seafloor Cavern Room8 | Land | 4 | Greninja | 12 | 33–34 |
-| Seafloor Cavern Room8 | Land | 4 | Dhelmise | 10 | 28–28 |
-| Seafloor Cavern Room8 | Land | 4 | Malamar | 5 | 34–34 |
-| Seafloor Cavern Entrance | Surf | 4 | Kingdra | 60 | 5–35 |
-| Seafloor Cavern Entrance | Surf | 4 | Milotic | 30 | 5–35 |
-| Seafloor Cavern Entrance | Surf | 4 | Lapras | 10 | 30–35 |
-| Seafloor Cavern Entrance | Old Rod | 10 | Magikarp | 60 | 5–10 |
-| Seafloor Cavern Entrance | Old Rod | 10 | Tentacool | 40 | 5–10 |
-| Seafloor Cavern Entrance | Good Rod | 10 | Tentacool | 60 | 10–30 |
-| Seafloor Cavern Entrance | Good Rod | 10 | Wailmer | 40 | 10–30 |
-| Seafloor Cavern Entrance | Super Rod | 10 | Wailmer | 85 | 20–35 |
-| Seafloor Cavern Entrance | Super Rod | 10 | Manaphy | 15 | 35–45 |
-| Cave Of Origin Entrance | Land | 4 | Noivern | 34 | 33–36 |
-| Cave Of Origin Entrance | Land | 4 | Boldore | 20 | 28–32 |
-| Cave Of Origin Entrance | Land | 4 | Carbink | 20 | 29–33 |
-| Cave Of Origin Entrance | Land | 4 | Mawile | 13 | 31–31 |
-| Cave Of Origin Entrance | Land | 4 | Sableye | 13 | 30–30 |
-| Cave Of Origin 1F | Land | 4 | Noivern | 34 | 33–36 |
-| Cave Of Origin 1F | Land | 4 | Carbink | 20 | 29–33 |
-| Cave Of Origin 1F | Land | 4 | Mawile | 13 | 31–31 |
-| Cave Of Origin 1F | Land | 4 | Sableye | 13 | 30–30 |
-| Cave Of Origin 1F | Land | 4 | Boldore | 10 | 32–32 |
-| Cave Of Origin 1F | Land | 4 | Walking Wake | 10 | 28–28 |
-| Cave Of Origin Unused Ruby Sapphire Map1 | Land | 4 | Carbink | 46 | 32–35 |
-| Cave Of Origin Unused Ruby Sapphire Map1 | Land | 4 | Boldore | 20 | 30–32 |
-| Cave Of Origin Unused Ruby Sapphire Map1 | Land | 4 | Golbat | 13 | 30–30 |
-| Cave Of Origin Unused Ruby Sapphire Map1 | Land | 4 | Sableye | 13 | 31–31 |
-| Cave Of Origin Unused Ruby Sapphire Map1 | Land | 4 | Gigalith | 8 | 33–36 |
-| Cave Of Origin Unused Ruby Sapphire Map2 | Land | 4 | Carbink | 46 | 32–35 |
-| Cave Of Origin Unused Ruby Sapphire Map2 | Land | 4 | Boldore | 20 | 30–32 |
-| Cave Of Origin Unused Ruby Sapphire Map2 | Land | 4 | Golbat | 13 | 30–30 |
-| Cave Of Origin Unused Ruby Sapphire Map2 | Land | 4 | Sableye | 13 | 31–31 |
-| Cave Of Origin Unused Ruby Sapphire Map2 | Land | 4 | Gigalith | 8 | 33–36 |
-| Cave Of Origin Unused Ruby Sapphire Map3 | Land | 4 | Carbink | 46 | 32–35 |
-| Cave Of Origin Unused Ruby Sapphire Map3 | Land | 4 | Boldore | 20 | 30–32 |
-| Cave Of Origin Unused Ruby Sapphire Map3 | Land | 4 | Golbat | 13 | 30–30 |
-| Cave Of Origin Unused Ruby Sapphire Map3 | Land | 4 | Sableye | 13 | 31–31 |
-| Cave Of Origin Unused Ruby Sapphire Map3 | Land | 4 | Gigalith | 8 | 33–36 |
-| Cave Of Origin Diancies Room | Land | 4 | Carbink | 100 | 30–36 |
-| Sootopolis City | Surf | 1 | Magikarp | 100 | 5–35 |
-| Sootopolis City | Old Rod | 10 | Magikarp | 60 | 5–10 |
-| Sootopolis City | Old Rod | 10 | Tentacool | 40 | 5–10 |
-| Sootopolis City | Good Rod | 10 | Magikarp | 100 | 10–30 |
-| Sootopolis City | Super Rod | 10 | Magikarp | 70 | 30–35 |
-| Sootopolis City | Super Rod | 10 | Gyarados | 30 | 5–45 |
+| Location | Method | Access requirement | Raw rate | Species | Within-method % | Levels |
+|---|---|---|---|---|---|---|
+| Route 129 | Surf | Balance Badge (5) and HM03 Surf | 4 | Tentacruel | 60 | 5–35 |
+| Route 129 | Surf | Balance Badge (5) and HM03 Surf | 4 | Alomomola | 30 | 10–30 |
+| Route 129 | Surf | Balance Badge (5) and HM03 Surf | 4 | Wailord | 10 | 15–30 |
+| Route 129 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Magikarp | 60 | 5–10 |
+| Route 129 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Finneon | 40 | 5–10 |
+| Route 129 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Finneon | 60 | 10–30 |
+| Route 129 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Alomomola | 20 | 10–30 |
+| Route 129 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Tentacool | 20 | 10–30 |
+| Route 129 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Lumineon | 40 | 30–35 |
+| Route 129 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Alomomola | 30 | 30–35 |
+| Route 129 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Tentacruel | 30 | 25–45 |
+| Route 130 | Land | No field move; available when the location itself is reachable | 20 | Wynaut | 100 | 5–50 |
+| Route 130 | Surf | Balance Badge (5) and HM03 Surf | 4 | Tentacruel | 60 | 5–35 |
+| Route 130 | Surf | Balance Badge (5) and HM03 Surf | 4 | Alomomola | 30 | 10–30 |
+| Route 130 | Surf | Balance Badge (5) and HM03 Surf | 4 | Wailord | 10 | 15–30 |
+| Route 130 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Magikarp | 60 | 5–10 |
+| Route 130 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Finneon | 40 | 5–10 |
+| Route 130 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Finneon | 60 | 10–30 |
+| Route 130 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Alomomola | 20 | 10–30 |
+| Route 130 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Tentacool | 20 | 10–30 |
+| Route 130 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Lumineon | 40 | 30–35 |
+| Route 130 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Alomomola | 30 | 30–35 |
+| Route 130 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Tentacruel | 30 | 25–45 |
+| Route 131 | Surf | Balance Badge (5) and HM03 Surf | 4 | Tentacruel | 60 | 5–35 |
+| Route 131 | Surf | Balance Badge (5) and HM03 Surf | 4 | Alomomola | 30 | 10–30 |
+| Route 131 | Surf | Balance Badge (5) and HM03 Surf | 4 | Wailord | 10 | 15–30 |
+| Route 131 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Magikarp | 60 | 5–10 |
+| Route 131 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Finneon | 40 | 5–10 |
+| Route 131 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Finneon | 60 | 10–30 |
+| Route 131 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Alomomola | 20 | 10–30 |
+| Route 131 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Tentacool | 20 | 10–30 |
+| Route 131 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Lumineon | 40 | 30–35 |
+| Route 131 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Alomomola | 30 | 30–35 |
+| Route 131 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Tentacruel | 30 | 25–45 |
+| Route 132 | Surf | Balance Badge (5) and HM03 Surf | 4 | Jellicent | 60 | 5–35 |
+| Route 132 | Surf | Balance Badge (5) and HM03 Surf | 4 | Pelipper | 30 | 10–30 |
+| Route 132 | Surf | Balance Badge (5) and HM03 Surf | 4 | Wailord | 10 | 15–30 |
+| Route 132 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Magikarp | 60 | 5–10 |
+| Route 132 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Tentacool | 40 | 5–10 |
+| Route 132 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Magikarp | 60 | 10–30 |
+| Route 132 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Horsea | 40 | 10–30 |
+| Route 132 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Horsea | 65 | 25–40 |
+| Route 132 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Seadra | 30 | 30–35 |
+| Route 132 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Kingdra | 5 | 40–45 |
+| Route 133 | Surf | Balance Badge (5) and HM03 Surf | 4 | Jellicent | 60 | 5–35 |
+| Route 133 | Surf | Balance Badge (5) and HM03 Surf | 4 | Pelipper | 30 | 10–30 |
+| Route 133 | Surf | Balance Badge (5) and HM03 Surf | 4 | Wailord | 10 | 15–30 |
+| Route 133 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Magikarp | 60 | 5–10 |
+| Route 133 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Tentacool | 40 | 5–10 |
+| Route 133 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Magikarp | 60 | 10–30 |
+| Route 133 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Horsea | 40 | 10–30 |
+| Route 133 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Horsea | 65 | 25–40 |
+| Route 133 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Seadra | 30 | 30–35 |
+| Route 133 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Kingdra | 5 | 40–45 |
+| Route 134 | Surf | Balance Badge (5) and HM03 Surf | 4 | Jellicent | 60 | 5–35 |
+| Route 134 | Surf | Balance Badge (5) and HM03 Surf | 4 | Pelipper | 30 | 10–30 |
+| Route 134 | Surf | Balance Badge (5) and HM03 Surf | 4 | Wailord | 10 | 15–30 |
+| Route 134 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Magikarp | 60 | 5–10 |
+| Route 134 | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Tentacool | 40 | 5–10 |
+| Route 134 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Magikarp | 60 | 10–30 |
+| Route 134 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Horsea | 40 | 10–30 |
+| Route 134 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Horsea | 65 | 25–40 |
+| Route 134 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Seadra | 30 | 30–35 |
+| Route 134 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Kingdra | 5 | 40–45 |
+| Seafloor Cavern Room1 | Land | No field move; available when the location itself is reachable | 4 | Golbat | 35 | 29–35 |
+| Seafloor Cavern Room1 | Land | No field move; available when the location itself is reachable | 4 | Dragalge | 13 | 30–30 |
+| Seafloor Cavern Room1 | Land | No field move; available when the location itself is reachable | 4 | Golisopod | 13 | 31–31 |
+| Seafloor Cavern Room1 | Land | No field move; available when the location itself is reachable | 4 | Crobat | 12 | 35–36 |
+| Seafloor Cavern Room1 | Land | No field move; available when the location itself is reachable | 4 | Greninja | 12 | 33–34 |
+| Seafloor Cavern Room1 | Land | No field move; available when the location itself is reachable | 4 | Dhelmise | 10 | 28–28 |
+| Seafloor Cavern Room1 | Land | No field move; available when the location itself is reachable | 4 | Malamar | 5 | 34–34 |
+| Seafloor Cavern Room2 | Land | No field move; available when the location itself is reachable | 4 | Golbat | 35 | 29–35 |
+| Seafloor Cavern Room2 | Land | No field move; available when the location itself is reachable | 4 | Dragalge | 13 | 30–30 |
+| Seafloor Cavern Room2 | Land | No field move; available when the location itself is reachable | 4 | Golisopod | 13 | 31–31 |
+| Seafloor Cavern Room2 | Land | No field move; available when the location itself is reachable | 4 | Crobat | 12 | 35–36 |
+| Seafloor Cavern Room2 | Land | No field move; available when the location itself is reachable | 4 | Greninja | 12 | 33–34 |
+| Seafloor Cavern Room2 | Land | No field move; available when the location itself is reachable | 4 | Dhelmise | 10 | 28–28 |
+| Seafloor Cavern Room2 | Land | No field move; available when the location itself is reachable | 4 | Malamar | 5 | 34–34 |
+| Seafloor Cavern Room3 | Land | No field move; available when the location itself is reachable | 4 | Golbat | 35 | 29–35 |
+| Seafloor Cavern Room3 | Land | No field move; available when the location itself is reachable | 4 | Dragalge | 13 | 30–30 |
+| Seafloor Cavern Room3 | Land | No field move; available when the location itself is reachable | 4 | Golisopod | 13 | 31–31 |
+| Seafloor Cavern Room3 | Land | No field move; available when the location itself is reachable | 4 | Crobat | 12 | 35–36 |
+| Seafloor Cavern Room3 | Land | No field move; available when the location itself is reachable | 4 | Greninja | 12 | 33–34 |
+| Seafloor Cavern Room3 | Land | No field move; available when the location itself is reachable | 4 | Dhelmise | 10 | 28–28 |
+| Seafloor Cavern Room3 | Land | No field move; available when the location itself is reachable | 4 | Malamar | 5 | 34–34 |
+| Seafloor Cavern Room4 | Land | No field move; available when the location itself is reachable | 4 | Golbat | 35 | 29–35 |
+| Seafloor Cavern Room4 | Land | No field move; available when the location itself is reachable | 4 | Dragalge | 13 | 30–30 |
+| Seafloor Cavern Room4 | Land | No field move; available when the location itself is reachable | 4 | Golisopod | 13 | 31–31 |
+| Seafloor Cavern Room4 | Land | No field move; available when the location itself is reachable | 4 | Crobat | 12 | 35–36 |
+| Seafloor Cavern Room4 | Land | No field move; available when the location itself is reachable | 4 | Greninja | 12 | 33–34 |
+| Seafloor Cavern Room4 | Land | No field move; available when the location itself is reachable | 4 | Dhelmise | 10 | 28–28 |
+| Seafloor Cavern Room4 | Land | No field move; available when the location itself is reachable | 4 | Malamar | 5 | 34–34 |
+| Seafloor Cavern Room5 | Land | No field move; available when the location itself is reachable | 4 | Golbat | 35 | 29–35 |
+| Seafloor Cavern Room5 | Land | No field move; available when the location itself is reachable | 4 | Dragalge | 13 | 30–30 |
+| Seafloor Cavern Room5 | Land | No field move; available when the location itself is reachable | 4 | Golisopod | 13 | 31–31 |
+| Seafloor Cavern Room5 | Land | No field move; available when the location itself is reachable | 4 | Crobat | 12 | 35–36 |
+| Seafloor Cavern Room5 | Land | No field move; available when the location itself is reachable | 4 | Greninja | 12 | 33–34 |
+| Seafloor Cavern Room5 | Land | No field move; available when the location itself is reachable | 4 | Dhelmise | 10 | 28–28 |
+| Seafloor Cavern Room5 | Land | No field move; available when the location itself is reachable | 4 | Malamar | 5 | 34–34 |
+| Seafloor Cavern Room6 | Land | No field move; available when the location itself is reachable | 4 | Golbat | 35 | 29–35 |
+| Seafloor Cavern Room6 | Land | No field move; available when the location itself is reachable | 4 | Dragalge | 13 | 30–30 |
+| Seafloor Cavern Room6 | Land | No field move; available when the location itself is reachable | 4 | Golisopod | 13 | 31–31 |
+| Seafloor Cavern Room6 | Land | No field move; available when the location itself is reachable | 4 | Crobat | 12 | 35–36 |
+| Seafloor Cavern Room6 | Land | No field move; available when the location itself is reachable | 4 | Greninja | 12 | 33–34 |
+| Seafloor Cavern Room6 | Land | No field move; available when the location itself is reachable | 4 | Dhelmise | 10 | 28–28 |
+| Seafloor Cavern Room6 | Land | No field move; available when the location itself is reachable | 4 | Malamar | 5 | 34–34 |
+| Seafloor Cavern Room6 | Surf | Balance Badge (5) and HM03 Surf | 4 | Kingdra | 60 | 5–35 |
+| Seafloor Cavern Room6 | Surf | Balance Badge (5) and HM03 Surf | 4 | Milotic | 30 | 5–35 |
+| Seafloor Cavern Room6 | Surf | Balance Badge (5) and HM03 Surf | 4 | Lapras | 10 | 30–35 |
+| Seafloor Cavern Room6 | Old Rod | Old Rod from Mom in Littleroot during the opening | 10 | Magikarp | 60 | 5–10 |
+| Seafloor Cavern Room6 | Old Rod | Old Rod from Mom in Littleroot during the opening | 10 | Tentacool | 40 | 5–10 |
+| Seafloor Cavern Room6 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 10 | Tentacool | 60 | 10–30 |
+| Seafloor Cavern Room6 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 10 | Wailmer | 40 | 10–30 |
+| Seafloor Cavern Room6 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 10 | Wailmer | 85 | 20–35 |
+| Seafloor Cavern Room6 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 10 | Manaphy | 15 | 35–45 |
+| Seafloor Cavern Room7 | Land | No field move; available when the location itself is reachable | 4 | Golbat | 35 | 29–35 |
+| Seafloor Cavern Room7 | Land | No field move; available when the location itself is reachable | 4 | Dragalge | 13 | 30–30 |
+| Seafloor Cavern Room7 | Land | No field move; available when the location itself is reachable | 4 | Golisopod | 13 | 31–31 |
+| Seafloor Cavern Room7 | Land | No field move; available when the location itself is reachable | 4 | Crobat | 12 | 35–36 |
+| Seafloor Cavern Room7 | Land | No field move; available when the location itself is reachable | 4 | Greninja | 12 | 33–34 |
+| Seafloor Cavern Room7 | Land | No field move; available when the location itself is reachable | 4 | Dhelmise | 10 | 28–28 |
+| Seafloor Cavern Room7 | Land | No field move; available when the location itself is reachable | 4 | Malamar | 5 | 34–34 |
+| Seafloor Cavern Room7 | Surf | Balance Badge (5) and HM03 Surf | 4 | Kingdra | 60 | 5–35 |
+| Seafloor Cavern Room7 | Surf | Balance Badge (5) and HM03 Surf | 4 | Milotic | 30 | 5–35 |
+| Seafloor Cavern Room7 | Surf | Balance Badge (5) and HM03 Surf | 4 | Lapras | 10 | 30–35 |
+| Seafloor Cavern Room7 | Old Rod | Old Rod from Mom in Littleroot during the opening | 10 | Magikarp | 60 | 5–10 |
+| Seafloor Cavern Room7 | Old Rod | Old Rod from Mom in Littleroot during the opening | 10 | Tentacool | 40 | 5–10 |
+| Seafloor Cavern Room7 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 10 | Tentacool | 60 | 10–30 |
+| Seafloor Cavern Room7 | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 10 | Wailmer | 40 | 10–30 |
+| Seafloor Cavern Room7 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 10 | Wailmer | 85 | 20–35 |
+| Seafloor Cavern Room7 | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 10 | Manaphy | 15 | 35–45 |
+| Seafloor Cavern Room8 | Land | No field move; available when the location itself is reachable | 4 | Golbat | 35 | 29–35 |
+| Seafloor Cavern Room8 | Land | No field move; available when the location itself is reachable | 4 | Dragalge | 13 | 30–30 |
+| Seafloor Cavern Room8 | Land | No field move; available when the location itself is reachable | 4 | Golisopod | 13 | 31–31 |
+| Seafloor Cavern Room8 | Land | No field move; available when the location itself is reachable | 4 | Crobat | 12 | 35–36 |
+| Seafloor Cavern Room8 | Land | No field move; available when the location itself is reachable | 4 | Greninja | 12 | 33–34 |
+| Seafloor Cavern Room8 | Land | No field move; available when the location itself is reachable | 4 | Dhelmise | 10 | 28–28 |
+| Seafloor Cavern Room8 | Land | No field move; available when the location itself is reachable | 4 | Malamar | 5 | 34–34 |
+| Seafloor Cavern Entrance | Surf | Balance Badge (5) and HM03 Surf | 4 | Kingdra | 60 | 5–35 |
+| Seafloor Cavern Entrance | Surf | Balance Badge (5) and HM03 Surf | 4 | Milotic | 30 | 5–35 |
+| Seafloor Cavern Entrance | Surf | Balance Badge (5) and HM03 Surf | 4 | Lapras | 10 | 30–35 |
+| Seafloor Cavern Entrance | Old Rod | Old Rod from Mom in Littleroot during the opening | 10 | Magikarp | 60 | 5–10 |
+| Seafloor Cavern Entrance | Old Rod | Old Rod from Mom in Littleroot during the opening | 10 | Tentacool | 40 | 5–10 |
+| Seafloor Cavern Entrance | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 10 | Tentacool | 60 | 10–30 |
+| Seafloor Cavern Entrance | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 10 | Wailmer | 40 | 10–30 |
+| Seafloor Cavern Entrance | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 10 | Wailmer | 85 | 20–35 |
+| Seafloor Cavern Entrance | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 10 | Manaphy | 15 | 35–45 |
+| Cave Of Origin Entrance | Land | No field move; available when the location itself is reachable | 4 | Noivern | 34 | 33–36 |
+| Cave Of Origin Entrance | Land | No field move; available when the location itself is reachable | 4 | Boldore | 20 | 28–32 |
+| Cave Of Origin Entrance | Land | No field move; available when the location itself is reachable | 4 | Carbink | 20 | 29–33 |
+| Cave Of Origin Entrance | Land | No field move; available when the location itself is reachable | 4 | Mawile | 13 | 31–31 |
+| Cave Of Origin Entrance | Land | No field move; available when the location itself is reachable | 4 | Sableye | 13 | 30–30 |
+| Cave Of Origin 1F | Land | No field move; available when the location itself is reachable | 4 | Noivern | 34 | 33–36 |
+| Cave Of Origin 1F | Land | No field move; available when the location itself is reachable | 4 | Carbink | 20 | 29–33 |
+| Cave Of Origin 1F | Land | No field move; available when the location itself is reachable | 4 | Mawile | 13 | 31–31 |
+| Cave Of Origin 1F | Land | No field move; available when the location itself is reachable | 4 | Sableye | 13 | 30–30 |
+| Cave Of Origin 1F | Land | No field move; available when the location itself is reachable | 4 | Boldore | 10 | 32–32 |
+| Cave Of Origin 1F | Land | No field move; available when the location itself is reachable | 4 | Walking Wake | 10 | 28–28 |
+| Cave Of Origin Unused Ruby Sapphire Map1 | Land | No field move; available when the location itself is reachable | 4 | Carbink | 46 | 32–35 |
+| Cave Of Origin Unused Ruby Sapphire Map1 | Land | No field move; available when the location itself is reachable | 4 | Boldore | 20 | 30–32 |
+| Cave Of Origin Unused Ruby Sapphire Map1 | Land | No field move; available when the location itself is reachable | 4 | Golbat | 13 | 30–30 |
+| Cave Of Origin Unused Ruby Sapphire Map1 | Land | No field move; available when the location itself is reachable | 4 | Sableye | 13 | 31–31 |
+| Cave Of Origin Unused Ruby Sapphire Map1 | Land | No field move; available when the location itself is reachable | 4 | Gigalith | 8 | 33–36 |
+| Cave Of Origin Unused Ruby Sapphire Map2 | Land | No field move; available when the location itself is reachable | 4 | Carbink | 46 | 32–35 |
+| Cave Of Origin Unused Ruby Sapphire Map2 | Land | No field move; available when the location itself is reachable | 4 | Boldore | 20 | 30–32 |
+| Cave Of Origin Unused Ruby Sapphire Map2 | Land | No field move; available when the location itself is reachable | 4 | Golbat | 13 | 30–30 |
+| Cave Of Origin Unused Ruby Sapphire Map2 | Land | No field move; available when the location itself is reachable | 4 | Sableye | 13 | 31–31 |
+| Cave Of Origin Unused Ruby Sapphire Map2 | Land | No field move; available when the location itself is reachable | 4 | Gigalith | 8 | 33–36 |
+| Cave Of Origin Unused Ruby Sapphire Map3 | Land | No field move; available when the location itself is reachable | 4 | Carbink | 46 | 32–35 |
+| Cave Of Origin Unused Ruby Sapphire Map3 | Land | No field move; available when the location itself is reachable | 4 | Boldore | 20 | 30–32 |
+| Cave Of Origin Unused Ruby Sapphire Map3 | Land | No field move; available when the location itself is reachable | 4 | Golbat | 13 | 30–30 |
+| Cave Of Origin Unused Ruby Sapphire Map3 | Land | No field move; available when the location itself is reachable | 4 | Sableye | 13 | 31–31 |
+| Cave Of Origin Unused Ruby Sapphire Map3 | Land | No field move; available when the location itself is reachable | 4 | Gigalith | 8 | 33–36 |
+| Cave Of Origin Diancies Room | Land | No field move; available when the location itself is reachable | 4 | Carbink | 100 | 30–36 |
+| Sootopolis City | Surf | Balance Badge (5) and HM03 Surf | 1 | Magikarp | 100 | 5–35 |
+| Sootopolis City | Old Rod | Old Rod from Mom in Littleroot during the opening | 10 | Magikarp | 60 | 5–10 |
+| Sootopolis City | Old Rod | Old Rod from Mom in Littleroot during the opening | 10 | Tentacool | 40 | 5–10 |
+| Sootopolis City | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 10 | Magikarp | 100 | 10–30 |
+| Sootopolis City | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 10 | Magikarp | 70 | 30–35 |
+| Sootopolis City | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 10 | Gyarados | 30 | 5–45 |
 
 ### Rain Badge — Sky Pillar, Victory Road, and the League approach (cap 80)
 
-| Location | Method | Raw rate | Species | Within-method % | Levels |
-|---|---|---|---|---|---|
-| Victory Road 1F | Land | 10 | Lairon | 13 | 40–40 |
-| Victory Road 1F | Land | 10 | Medicham | 13 | 40–40 |
-| Victory Road 1F | Land | 10 | Gabite | 10 | 38–38 |
-| Victory Road 1F | Land | 10 | Golbat | 10 | 40–40 |
-| Victory Road 1F | Land | 10 | Iron Valiant | 10 | 36–36 |
-| Victory Road 1F | Land | 10 | Noivern | 10 | 40–40 |
-| Victory Road 1F | Land | 10 | Pupitar | 10 | 36–36 |
-| Victory Road 1F | Land | 10 | Kommo-o | 8 | 36–36 |
-| Victory Road 1F | Land | 10 | Metagross | 8 | 36–36 |
-| Victory Road 1F | Land | 10 | Dragapult | 4 | 36–36 |
-| Victory Road 1F | Land | 10 | Volcarona | 4 | 36–36 |
-| Victory Road B1F | Land | 10 | Gurdurr | 15 | 40–42 |
-| Victory Road B1F | Land | 10 | Steelix | 15 | 40–42 |
-| Victory Road B1F | Land | 10 | Mawile | 13 | 40–40 |
-| Victory Road B1F | Land | 10 | Sableye | 13 | 40–40 |
-| Victory Road B1F | Land | 10 | Donphan | 10 | 38–38 |
-| Victory Road B1F | Land | 10 | Rhydon | 10 | 38–38 |
-| Victory Road B1F | Land | 10 | Aegislash | 8 | 42–42 |
-| Victory Road B1F | Land | 10 | Terrakion | 8 | 38–38 |
-| Victory Road B1F | Land | 10 | Kommo-o | 4 | 38–38 |
-| Victory Road B1F | Land | 10 | Metagross | 4 | 42–42 |
-| Victory Road B1F | Rock Smash | 20 | Graveler | 60 | 30–40 |
-| Victory Road B1F | Rock Smash | 20 | Shuckle | 30 | 30–40 |
-| Victory Road B1F | Rock Smash | 20 | Golem | 10 | 35–40 |
-| Victory Road B2F | Land | 10 | Carbink | 15 | 40–44 |
-| Victory Road B2F | Land | 10 | Zweilous | 15 | 40–44 |
-| Victory Road B2F | Land | 10 | Exploud | 13 | 40–40 |
-| Victory Road B2F | Land | 10 | Steelix | 13 | 40–40 |
-| Victory Road B2F | Land | 10 | Aggron | 10 | 42–42 |
-| Victory Road B2F | Land | 10 | Donphan | 10 | 42–42 |
-| Victory Road B2F | Land | 10 | Hydreigon | 8 | 42–42 |
-| Victory Road B2F | Land | 10 | Volcarona | 8 | 42–42 |
-| Victory Road B2F | Land | 10 | Aegislash | 4 | 44–44 |
-| Victory Road B2F | Land | 10 | Dragapult | 4 | 44–44 |
-| Victory Road B2F | Surf | 4 | Dewgong | 60 | 30–35 |
-| Victory Road B2F | Surf | 4 | Golbat | 30 | 25–30 |
-| Victory Road B2F | Surf | 4 | Lapras | 10 | 35–40 |
-| Victory Road B2F | Old Rod | 30 | Magikarp | 60 | 5–10 |
-| Victory Road B2F | Old Rod | 30 | Barboach | 40 | 5–10 |
-| Victory Road B2F | Good Rod | 30 | Barboach | 60 | 10–30 |
-| Victory Road B2F | Good Rod | 30 | Basculin | 40 | 10–30 |
-| Victory Road B2F | Super Rod | 30 | Basculin | 70 | 25–35 |
-| Victory Road B2F | Super Rod | 30 | Whiscash | 30 | 30–45 |
-| Ever Grande City | Surf | 4 | Pelipper | 60 | 5–35 |
-| Ever Grande City | Surf | 4 | Tentacruel | 30 | 10–30 |
-| Ever Grande City | Surf | 4 | Floatzel | 10 | 15–30 |
-| Ever Grande City | Old Rod | 10 | Luvdisc | 100 | 5–10 |
-| Ever Grande City | Good Rod | 10 | Luvdisc | 60 | 10–30 |
-| Ever Grande City | Good Rod | 10 | Corsola | 20 | 10–30 |
-| Ever Grande City | Good Rod | 10 | Mareanie | 20 | 10–30 |
-| Ever Grande City | Super Rod | 10 | Luvdisc | 40 | 30–35 |
-| Ever Grande City | Super Rod | 10 | Corsola | 30 | 30–35 |
-| Ever Grande City | Super Rod | 10 | Toxapex | 30 | 30–45 |
-| Sky Pillar 1F | Land | 10 | Claydol | 22 | 36–38 |
-| Sky Pillar 1F | Land | 10 | Golurk | 22 | 37–37 |
-| Sky Pillar 1F | Land | 10 | Banette | 15 | 35–38 |
-| Sky Pillar 1F | Land | 10 | Dusclops | 15 | 34–36 |
-| Sky Pillar 1F | Land | 10 | Mawile | 13 | 34–34 |
-| Sky Pillar 1F | Land | 10 | Sableye | 13 | 33–33 |
-| Sky Pillar 3F | Land | 10 | Claydol | 22 | 36–38 |
-| Sky Pillar 3F | Land | 10 | Golurk | 22 | 37–37 |
-| Sky Pillar 3F | Land | 10 | Banette | 15 | 35–38 |
-| Sky Pillar 3F | Land | 10 | Dusclops | 15 | 34–36 |
-| Sky Pillar 3F | Land | 10 | Mawile | 13 | 34–34 |
-| Sky Pillar 3F | Land | 10 | Sableye | 13 | 33–33 |
-| Sky Pillar 5F | Land | 10 | Claydol | 22 | 36–38 |
-| Sky Pillar 5F | Land | 10 | Golurk | 22 | 37–37 |
-| Sky Pillar 5F | Land | 10 | Mawile | 13 | 34–34 |
-| Sky Pillar 5F | Land | 10 | Sableye | 13 | 33–33 |
-| Sky Pillar 5F | Land | 10 | Altaria | 10 | 36–38 |
-| Sky Pillar 5F | Land | 10 | Banette | 10 | 35–35 |
-| Sky Pillar 5F | Land | 10 | Dusclops | 10 | 34–34 |
+| Location | Method | Access requirement | Raw rate | Species | Within-method % | Levels |
+|---|---|---|---|---|---|---|
+| Victory Road 1F | Land | No field move; available when the location itself is reachable | 10 | Lairon | 13 | 40–40 |
+| Victory Road 1F | Land | No field move; available when the location itself is reachable | 10 | Medicham | 13 | 40–40 |
+| Victory Road 1F | Land | No field move; available when the location itself is reachable | 10 | Gabite | 10 | 38–38 |
+| Victory Road 1F | Land | No field move; available when the location itself is reachable | 10 | Golbat | 10 | 40–40 |
+| Victory Road 1F | Land | No field move; available when the location itself is reachable | 10 | Iron Valiant | 10 | 36–36 |
+| Victory Road 1F | Land | No field move; available when the location itself is reachable | 10 | Noivern | 10 | 40–40 |
+| Victory Road 1F | Land | No field move; available when the location itself is reachable | 10 | Pupitar | 10 | 36–36 |
+| Victory Road 1F | Land | No field move; available when the location itself is reachable | 10 | Kommo-o | 8 | 36–36 |
+| Victory Road 1F | Land | No field move; available when the location itself is reachable | 10 | Metagross | 8 | 36–36 |
+| Victory Road 1F | Land | No field move; available when the location itself is reachable | 10 | Dragapult | 4 | 36–36 |
+| Victory Road 1F | Land | No field move; available when the location itself is reachable | 10 | Volcarona | 4 | 36–36 |
+| Victory Road B1F | Land | No field move; available when the location itself is reachable | 10 | Gurdurr | 15 | 40–42 |
+| Victory Road B1F | Land | No field move; available when the location itself is reachable | 10 | Steelix | 15 | 40–42 |
+| Victory Road B1F | Land | No field move; available when the location itself is reachable | 10 | Mawile | 13 | 40–40 |
+| Victory Road B1F | Land | No field move; available when the location itself is reachable | 10 | Sableye | 13 | 40–40 |
+| Victory Road B1F | Land | No field move; available when the location itself is reachable | 10 | Donphan | 10 | 38–38 |
+| Victory Road B1F | Land | No field move; available when the location itself is reachable | 10 | Rhydon | 10 | 38–38 |
+| Victory Road B1F | Land | No field move; available when the location itself is reachable | 10 | Aegislash | 8 | 42–42 |
+| Victory Road B1F | Land | No field move; available when the location itself is reachable | 10 | Terrakion | 8 | 38–38 |
+| Victory Road B1F | Land | No field move; available when the location itself is reachable | 10 | Kommo-o | 4 | 38–38 |
+| Victory Road B1F | Land | No field move; available when the location itself is reachable | 10 | Metagross | 4 | 42–42 |
+| Victory Road B1F | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Graveler | 60 | 30–40 |
+| Victory Road B1F | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Shuckle | 30 | 30–40 |
+| Victory Road B1F | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Golem | 10 | 35–40 |
+| Victory Road B2F | Land | No field move; available when the location itself is reachable | 10 | Carbink | 15 | 40–44 |
+| Victory Road B2F | Land | No field move; available when the location itself is reachable | 10 | Zweilous | 15 | 40–44 |
+| Victory Road B2F | Land | No field move; available when the location itself is reachable | 10 | Exploud | 13 | 40–40 |
+| Victory Road B2F | Land | No field move; available when the location itself is reachable | 10 | Steelix | 13 | 40–40 |
+| Victory Road B2F | Land | No field move; available when the location itself is reachable | 10 | Aggron | 10 | 42–42 |
+| Victory Road B2F | Land | No field move; available when the location itself is reachable | 10 | Donphan | 10 | 42–42 |
+| Victory Road B2F | Land | No field move; available when the location itself is reachable | 10 | Hydreigon | 8 | 42–42 |
+| Victory Road B2F | Land | No field move; available when the location itself is reachable | 10 | Volcarona | 8 | 42–42 |
+| Victory Road B2F | Land | No field move; available when the location itself is reachable | 10 | Aegislash | 4 | 44–44 |
+| Victory Road B2F | Land | No field move; available when the location itself is reachable | 10 | Dragapult | 4 | 44–44 |
+| Victory Road B2F | Surf | Balance Badge (5) and HM03 Surf | 4 | Dewgong | 60 | 30–35 |
+| Victory Road B2F | Surf | Balance Badge (5) and HM03 Surf | 4 | Golbat | 30 | 25–30 |
+| Victory Road B2F | Surf | Balance Badge (5) and HM03 Surf | 4 | Lapras | 10 | 35–40 |
+| Victory Road B2F | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Magikarp | 60 | 5–10 |
+| Victory Road B2F | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Barboach | 40 | 5–10 |
+| Victory Road B2F | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Barboach | 60 | 10–30 |
+| Victory Road B2F | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Basculin | 40 | 10–30 |
+| Victory Road B2F | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Basculin | 70 | 25–35 |
+| Victory Road B2F | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Whiscash | 30 | 30–45 |
+| Ever Grande City | Surf | Balance Badge (5) and HM03 Surf | 4 | Pelipper | 60 | 5–35 |
+| Ever Grande City | Surf | Balance Badge (5) and HM03 Surf | 4 | Tentacruel | 30 | 10–30 |
+| Ever Grande City | Surf | Balance Badge (5) and HM03 Surf | 4 | Floatzel | 10 | 15–30 |
+| Ever Grande City | Old Rod | Old Rod from Mom in Littleroot during the opening | 10 | Luvdisc | 100 | 5–10 |
+| Ever Grande City | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 10 | Luvdisc | 60 | 10–30 |
+| Ever Grande City | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 10 | Corsola | 20 | 10–30 |
+| Ever Grande City | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 10 | Mareanie | 20 | 10–30 |
+| Ever Grande City | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 10 | Luvdisc | 40 | 30–35 |
+| Ever Grande City | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 10 | Corsola | 30 | 30–35 |
+| Ever Grande City | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 10 | Toxapex | 30 | 30–45 |
+| Sky Pillar 1F | Land | No field move; available when the location itself is reachable | 10 | Claydol | 22 | 36–38 |
+| Sky Pillar 1F | Land | No field move; available when the location itself is reachable | 10 | Golurk | 22 | 37–37 |
+| Sky Pillar 1F | Land | No field move; available when the location itself is reachable | 10 | Banette | 15 | 35–38 |
+| Sky Pillar 1F | Land | No field move; available when the location itself is reachable | 10 | Dusclops | 15 | 34–36 |
+| Sky Pillar 1F | Land | No field move; available when the location itself is reachable | 10 | Mawile | 13 | 34–34 |
+| Sky Pillar 1F | Land | No field move; available when the location itself is reachable | 10 | Sableye | 13 | 33–33 |
+| Sky Pillar 3F | Land | No field move; available when the location itself is reachable | 10 | Claydol | 22 | 36–38 |
+| Sky Pillar 3F | Land | No field move; available when the location itself is reachable | 10 | Golurk | 22 | 37–37 |
+| Sky Pillar 3F | Land | No field move; available when the location itself is reachable | 10 | Banette | 15 | 35–38 |
+| Sky Pillar 3F | Land | No field move; available when the location itself is reachable | 10 | Dusclops | 15 | 34–36 |
+| Sky Pillar 3F | Land | No field move; available when the location itself is reachable | 10 | Mawile | 13 | 34–34 |
+| Sky Pillar 3F | Land | No field move; available when the location itself is reachable | 10 | Sableye | 13 | 33–33 |
+| Sky Pillar 5F | Land | No field move; available when the location itself is reachable | 10 | Claydol | 22 | 36–38 |
+| Sky Pillar 5F | Land | No field move; available when the location itself is reachable | 10 | Golurk | 22 | 37–37 |
+| Sky Pillar 5F | Land | No field move; available when the location itself is reachable | 10 | Mawile | 13 | 34–34 |
+| Sky Pillar 5F | Land | No field move; available when the location itself is reachable | 10 | Sableye | 13 | 33–33 |
+| Sky Pillar 5F | Land | No field move; available when the location itself is reachable | 10 | Altaria | 10 | 36–38 |
+| Sky Pillar 5F | Land | No field move; available when the location itself is reachable | 10 | Banette | 10 | 35–35 |
+| Sky Pillar 5F | Land | No field move; available when the location itself is reachable | 10 | Dusclops | 10 | 34–34 |
 
 ### Champion / postgame — open-world cleanup and Battle Frontier (cap 101)
 
-| Location | Method | Raw rate | Species | Within-method % | Levels |
-|---|---|---|---|---|---|
-| Underwater Route 126 | Land | 25 | Lumineon | 18 | 25–25 |
-| Underwater Route 126 | Land | 25 | Chinchou | 13 | 27–27 |
-| Underwater Route 126 | Land | 25 | Clamperl | 13 | 25–25 |
-| Underwater Route 126 | Land | 25 | Golisopod | 12 | 27–29 |
-| Underwater Route 126 | Land | 25 | Lanturn | 10 | 25–25 |
-| Underwater Route 126 | Land | 25 | Relicanth | 10 | 25–25 |
-| Underwater Route 126 | Land | 25 | Starmie | 10 | 27–27 |
-| Underwater Route 126 | Land | 25 | Gorebyss | 5 | 25–25 |
-| Underwater Route 126 | Land | 25 | Huntail | 5 | 27–27 |
-| Underwater Route 126 | Land | 25 | Kingdra | 4 | 27–27 |
-| Pacifidlog Town | Surf | 4 | Tentacruel | 60 | 5–35 |
-| Pacifidlog Town | Surf | 4 | Pelipper | 30 | 10–30 |
-| Pacifidlog Town | Surf | 4 | Sharpedo | 10 | 15–30 |
-| Pacifidlog Town | Old Rod | 10 | Magikarp | 60 | 5–10 |
-| Pacifidlog Town | Old Rod | 10 | Skrelp | 40 | 5–10 |
-| Pacifidlog Town | Good Rod | 10 | Skrelp | 60 | 10–30 |
-| Pacifidlog Town | Good Rod | 10 | Wailmer | 40 | 10–30 |
-| Pacifidlog Town | Super Rod | 10 | Dragalge | 40 | 30–35 |
-| Pacifidlog Town | Super Rod | 10 | Dhelmise | 30 | 25–45 |
-| Pacifidlog Town | Super Rod | 10 | Sharpedo | 30 | 30–35 |
-| Underwater Route 124 | Land | 25 | Lumineon | 18 | 25–25 |
-| Underwater Route 124 | Land | 25 | Chinchou | 13 | 27–27 |
-| Underwater Route 124 | Land | 25 | Clamperl | 13 | 25–25 |
-| Underwater Route 124 | Land | 25 | Golisopod | 12 | 27–29 |
-| Underwater Route 124 | Land | 25 | Lanturn | 10 | 25–25 |
-| Underwater Route 124 | Land | 25 | Relicanth | 10 | 25–25 |
-| Underwater Route 124 | Land | 25 | Starmie | 10 | 27–27 |
-| Underwater Route 124 | Land | 25 | Gorebyss | 5 | 25–25 |
-| Underwater Route 124 | Land | 25 | Huntail | 5 | 27–27 |
-| Underwater Route 124 | Land | 25 | Kingdra | 4 | 27–27 |
-| Mirage Tower 1F | Land | 10 | Bronzor | 20 | 20–20 |
-| Mirage Tower 1F | Land | 10 | Darumaka | 17 | 22–24 |
-| Mirage Tower 1F | Land | 10 | Yamask | 17 | 22–24 |
-| Mirage Tower 1F | Land | 10 | Sandshrew | 13 | 21–21 |
-| Mirage Tower 1F | Land | 10 | Trapinch | 13 | 21–21 |
-| Mirage Tower 1F | Land | 10 | Golett | 10 | 20–20 |
-| Mirage Tower 1F | Land | 10 | Sigilyph | 10 | 20–20 |
-| Mirage Tower 2F | Land | 10 | Bronzor | 20 | 20–20 |
-| Mirage Tower 2F | Land | 10 | Darumaka | 17 | 22–24 |
-| Mirage Tower 2F | Land | 10 | Yamask | 17 | 22–24 |
-| Mirage Tower 2F | Land | 10 | Sandshrew | 13 | 21–21 |
-| Mirage Tower 2F | Land | 10 | Trapinch | 13 | 21–21 |
-| Mirage Tower 2F | Land | 10 | Golett | 10 | 20–20 |
-| Mirage Tower 2F | Land | 10 | Sigilyph | 10 | 20–20 |
-| Mirage Tower 3F | Land | 10 | Bronzor | 20 | 20–20 |
-| Mirage Tower 3F | Land | 10 | Darumaka | 17 | 22–24 |
-| Mirage Tower 3F | Land | 10 | Yamask | 17 | 22–24 |
-| Mirage Tower 3F | Land | 10 | Sandshrew | 13 | 21–21 |
-| Mirage Tower 3F | Land | 10 | Trapinch | 13 | 21–21 |
-| Mirage Tower 3F | Land | 10 | Golett | 10 | 20–20 |
-| Mirage Tower 3F | Land | 10 | Sigilyph | 10 | 20–20 |
-| Mirage Tower 4F | Land | 10 | Bronzor | 20 | 20–20 |
-| Mirage Tower 4F | Land | 10 | Darumaka | 17 | 22–24 |
-| Mirage Tower 4F | Land | 10 | Yamask | 17 | 22–24 |
-| Mirage Tower 4F | Land | 10 | Sandshrew | 13 | 21–21 |
-| Mirage Tower 4F | Land | 10 | Trapinch | 13 | 21–21 |
-| Mirage Tower 4F | Land | 10 | Golett | 10 | 20–20 |
-| Mirage Tower 4F | Land | 10 | Sigilyph | 10 | 20–20 |
-| Mirage Tower B1F | Land | 10 | Bronzor | 20 | 20–20 |
-| Mirage Tower B1F | Land | 10 | Darumaka | 17 | 22–24 |
-| Mirage Tower B1F | Land | 10 | Yamask | 17 | 22–24 |
-| Mirage Tower B1F | Land | 10 | Sandshrew | 13 | 21–21 |
-| Mirage Tower B1F | Land | 10 | Trapinch | 13 | 21–21 |
-| Mirage Tower B1F | Land | 10 | Golett | 10 | 20–20 |
-| Mirage Tower B1F | Land | 10 | Sigilyph | 10 | 20–20 |
-| Desert Underpass | Land | 10 | Ditto | 90 | 35–45 |
-| Desert Underpass | Land | 10 | Ting Lu | 10 | 41–41 |
-| Artisan Cave B1F | Land | 10 | Smeargle | 100 | 40–50 |
-| Seaspray Cave | Land | 20 | Woobat | 22 | 10–12 |
-| Seaspray Cave | Land | 20 | Wooper | 20 | 10–12 |
-| Seaspray Cave | Land | 20 | Zubat | 20 | 10–12 |
-| Seaspray Cave | Land | 20 | Psyduck | 13 | 10–12 |
-| Seaspray Cave | Land | 20 | Tynamo | 13 | 10–12 |
-| Seaspray Cave | Land | 20 | Stunfisk | 12 | 10–12 |
-| Seaspray Cave | Surf | 4 | Quagsire | 60 | 20–30 |
-| Seaspray Cave | Surf | 4 | Eelektrik | 30 | 10–20 |
-| Seaspray Cave | Surf | 4 | Golbat | 10 | 5–35 |
-| Seaspray Cave | Rock Smash | 20 | Binacle | 60 | 10–15 |
-| Seaspray Cave | Rock Smash | 20 | Dwebble | 40 | 5–20 |
-| Seaspray Cave | Old Rod | 30 | Wishiwashi | 60 | 5–10 |
-| Seaspray Cave | Old Rod | 30 | Krabby | 40 | 5–10 |
-| Seaspray Cave | Good Rod | 30 | Krabby | 60 | 10–30 |
-| Seaspray Cave | Good Rod | 30 | Wishiwashi | 40 | 10–30 |
-| Seaspray Cave | Super Rod | 30 | Wishiwashi | 60 | 20–45 |
-| Seaspray Cave | Super Rod | 30 | Kingler | 40 | 30–40 |
-| Seaspray Cave B1F | Land | 20 | Spheal | 17 | 10–12 |
-| Seaspray Cave B1F | Land | 20 | Vanillite | 17 | 10–12 |
-| Seaspray Cave B1F | Land | 20 | Seel | 13 | 10–12 |
-| Seaspray Cave B1F | Land | 20 | Swinub | 13 | 10–12 |
-| Seaspray Cave B1F | Land | 20 | Bergmite | 10 | 10–12 |
-| Seaspray Cave B1F | Land | 20 | Smoochum | 10 | 10–12 |
-| Seaspray Cave B1F | Land | 20 | Sneasel | 10 | 10–12 |
-| Seaspray Cave B1F | Land | 20 | Snorunt | 10 | 10–12 |
-| Seaspray Cave B1F | Honey | 20 | Cubchoo | 50 | 2–2 |
-| Seaspray Cave B1F | Honey | 20 | Snover | 40 | 2–3 |
-| Seaspray Cave B1F | Honey | 20 | Cryogonal | 5 | 3–3 |
-| Seaspray Cave B1F | Honey | 20 | Delibird | 5 | 3–3 |
-| Ember Path | Land | 10 | Larvesta | 24 | 41–43 |
-| Ember Path | Land | 10 | Magcargo | 23 | 41–43 |
-| Ember Path | Land | 10 | Boldore | 20 | 41–43 |
-| Ember Path | Land | 10 | Magmar | 13 | 41–43 |
-| Ember Path | Land | 10 | Golbat | 10 | 41–43 |
-| Ember Path | Land | 10 | Grumpig | 10 | 41–43 |
-| Sandstrewn Ruins | Land | 10 | Claydol | 17 | 22–24 |
-| Sandstrewn Ruins | Land | 10 | Gabite | 17 | 22–24 |
-| Sandstrewn Ruins | Land | 10 | Bronzong | 13 | 21–21 |
-| Sandstrewn Ruins | Land | 10 | Yamask | 13 | 21–21 |
-| Sandstrewn Ruins | Land | 10 | Darumaka | 10 | 20–20 |
-| Sandstrewn Ruins | Land | 10 | Golett | 10 | 20–20 |
-| Sandstrewn Ruins | Land | 10 | Honedge | 10 | 20–20 |
-| Sandstrewn Ruins | Land | 10 | Sigilyph | 10 | 20–20 |
-| Sandstrewn Ruins | Surf | 4 | Relicanth | 100 | 5–35 |
-| Sandstrewn Ruins | Rock Smash | 20 | Baltoy | 60 | 20–30 |
-| Sandstrewn Ruins | Rock Smash | 20 | Onix | 30 | 10–20 |
-| Sandstrewn Ruins | Rock Smash | 20 | Steelix | 10 | 5–35 |
-| Sandstrewn Ruins | Old Rod | 30 | Relicanth | 100 | 5–10 |
-| Sandstrewn Ruins | Good Rod | 30 | Relicanth | 100 | 10–30 |
-| Sandstrewn Ruins | Super Rod | 30 | Relicanth | 100 | 20–45 |
-| Sandstrewn Ruins B1F | Land | 10 | Claydol | 17 | 22–24 |
-| Sandstrewn Ruins B1F | Land | 10 | Gabite | 17 | 22–24 |
-| Sandstrewn Ruins B1F | Land | 10 | Bronzong | 13 | 21–21 |
-| Sandstrewn Ruins B1F | Land | 10 | Yamask | 13 | 21–21 |
-| Sandstrewn Ruins B1F | Land | 10 | Darumaka | 10 | 20–20 |
-| Sandstrewn Ruins B1F | Land | 10 | Golett | 10 | 20–20 |
-| Sandstrewn Ruins B1F | Land | 10 | Honedge | 10 | 20–20 |
-| Sandstrewn Ruins B1F | Land | 10 | Sigilyph | 10 | 20–20 |
-| Sandstrewn Ruins B1F | Rock Smash | 20 | Baltoy | 60 | 20–30 |
-| Sandstrewn Ruins B1F | Rock Smash | 20 | Onix | 30 | 10–20 |
-| Sandstrewn Ruins B1F | Rock Smash | 20 | Steelix | 10 | 5–35 |
-| Sandstrewn Ruins 2F | Land | 10 | Claydol | 17 | 22–24 |
-| Sandstrewn Ruins 2F | Land | 10 | Gabite | 17 | 22–24 |
-| Sandstrewn Ruins 2F | Land | 10 | Bronzong | 13 | 21–21 |
-| Sandstrewn Ruins 2F | Land | 10 | Yamask | 13 | 21–21 |
-| Sandstrewn Ruins 2F | Land | 10 | Darumaka | 10 | 20–20 |
-| Sandstrewn Ruins 2F | Land | 10 | Golett | 10 | 20–20 |
-| Sandstrewn Ruins 2F | Land | 10 | Honedge | 10 | 20–20 |
-| Sandstrewn Ruins 2F | Land | 10 | Sigilyph | 10 | 20–20 |
-| Sandstrewn Ruins 2F | Rock Smash | 20 | Baltoy | 60 | 20–30 |
-| Sandstrewn Ruins 2F | Rock Smash | 20 | Onix | 30 | 10–20 |
-| Sandstrewn Ruins 2F | Rock Smash | 20 | Steelix | 10 | 5–35 |
-| Sandstrewn Ruins 3F | Land | 10 | Claydol | 17 | 22–24 |
-| Sandstrewn Ruins 3F | Land | 10 | Gabite | 17 | 22–24 |
-| Sandstrewn Ruins 3F | Land | 10 | Bronzong | 13 | 21–21 |
-| Sandstrewn Ruins 3F | Land | 10 | Yamask | 13 | 21–21 |
-| Sandstrewn Ruins 3F | Land | 10 | Darumaka | 10 | 20–20 |
-| Sandstrewn Ruins 3F | Land | 10 | Golett | 10 | 20–20 |
-| Sandstrewn Ruins 3F | Land | 10 | Honedge | 10 | 20–20 |
-| Sandstrewn Ruins 3F | Land | 10 | Sigilyph | 10 | 20–20 |
-| Sandstrewn Ruins 3F | Rock Smash | 20 | Baltoy | 60 | 20–30 |
-| Sandstrewn Ruins 3F | Rock Smash | 20 | Onix | 30 | 10–20 |
-| Sandstrewn Ruins 3F | Rock Smash | 20 | Steelix | 10 | 5–35 |
-| Verdanturf Meadow | Land | 20 | Floette White Flower | 20 | 41–43 |
-| Verdanturf Meadow | Land | 20 | Espurr | 13 | 41–43 |
-| Verdanturf Meadow | Land | 20 | Munna | 13 | 41–43 |
-| Verdanturf Meadow | Land | 20 | Flabebe Blue Flower | 12 | 41–43 |
-| Verdanturf Meadow | Land | 20 | Flabebe White Flower | 12 | 41–43 |
-| Verdanturf Meadow | Land | 20 | Ribombee | 10 | 41–43 |
-| Verdanturf Meadow | Land | 20 | Stufful | 10 | 41–43 |
-| Verdanturf Meadow | Land | 20 | Vivillon Poke Ball | 10 | 41–43 |
-| Verdanturf Meadow | Honey | 20 | Audino | 50 | 2–2 |
-| Verdanturf Meadow | Honey | 20 | Ribombee | 45 | 2–3 |
-| Verdanturf Meadow | Honey | 20 | Milcery | 5 | 3–3 |
-| Scorched Slab | Land | 20 | Golbat | 88 | 2–4 |
-| Scorched Slab | Land | 20 | Crobat | 12 | 3–4 |
-| Scorched Slab | Surf | 4 | Golbat | 95 | 5–35 |
-| Scorched Slab | Surf | 4 | Crobat | 5 | 25–30 |
-| Scorched Slab | Old Rod | 30 | Goldeen | 60 | 5–10 |
-| Scorched Slab | Old Rod | 30 | Barboach | 40 | 5–10 |
-| Scorched Slab | Good Rod | 30 | Barboach | 60 | 10–30 |
-| Scorched Slab | Good Rod | 30 | Goldeen | 20 | 10–30 |
-| Scorched Slab | Good Rod | 30 | Whiscash | 20 | 10–30 |
-| Scorched Slab | Super Rod | 30 | Barboach | 40 | 30–35 |
-| Scorched Slab | Super Rod | 30 | Seaking | 30 | 30–35 |
-| Scorched Slab | Super Rod | 30 | Whiscash | 30 | 25–45 |
-| Scorched Slab B1F | Land | 20 | Zweilous | 24 | 2–4 |
-| Scorched Slab B1F | Land | 20 | Boldore | 20 | 2–3 |
-| Scorched Slab B1F | Land | 20 | Dugtrio | 20 | 3–4 |
-| Scorched Slab B1F | Land | 20 | Golbat | 18 | 2–3 |
-| Scorched Slab B1F | Land | 20 | Gurdurr | 18 | 3–4 |
-| Scorched Slab B1F | Surf | 4 | Golbat | 95 | 5–35 |
-| Scorched Slab B1F | Surf | 4 | Crobat | 5 | 25–30 |
-| Scorched Slab B1F | Old Rod | 30 | Goldeen | 60 | 5–10 |
-| Scorched Slab B1F | Old Rod | 30 | Barboach | 40 | 5–10 |
-| Scorched Slab B1F | Good Rod | 30 | Barboach | 60 | 10–30 |
-| Scorched Slab B1F | Good Rod | 30 | Goldeen | 20 | 10–30 |
-| Scorched Slab B1F | Good Rod | 30 | Whiscash | 20 | 10–30 |
-| Scorched Slab B1F | Super Rod | 30 | Barboach | 40 | 30–35 |
-| Scorched Slab B1F | Super Rod | 30 | Seaking | 30 | 30–35 |
-| Scorched Slab B1F | Super Rod | 30 | Whiscash | 30 | 25–45 |
-| Scorched Slab B2F | Land | 20 | Boldore | 20 | 2–3 |
-| Scorched Slab B2F | Land | 20 | Dugtrio | 20 | 3–4 |
-| Scorched Slab B2F | Land | 20 | Magmar | 17 | 2–3 |
-| Scorched Slab B2F | Land | 20 | Turtonator | 17 | 3–4 |
-| Scorched Slab B2F | Land | 20 | Golbat | 13 | 2–2 |
-| Scorched Slab B2F | Land | 20 | Gurdurr | 13 | 3–3 |
-| Scorched Slab Heatrans Room | Land | 20 | Boldore | 20 | 2–3 |
-| Scorched Slab Heatrans Room | Land | 20 | Dugtrio | 20 | 3–4 |
-| Scorched Slab Heatrans Room | Land | 20 | Magmar | 17 | 2–3 |
-| Scorched Slab Heatrans Room | Land | 20 | Turtonator | 17 | 3–4 |
-| Scorched Slab Heatrans Room | Land | 20 | Golbat | 13 | 2–2 |
-| Scorched Slab Heatrans Room | Land | 20 | Magcargo | 13 | 3–3 |
-| Artisan Cave 1F | Land | 10 | Smeargle | 100 | 40–50 |
-| Altering Cave | Land | 20 | Eelektross | 24 | 2–4 |
-| Altering Cave | Land | 20 | Rhydon | 13 | 2–2 |
-| Altering Cave | Land | 20 | Swoobat | 13 | 3–3 |
-| Altering Cave | Land | 20 | Druddigon | 10 | 3–3 |
-| Altering Cave | Land | 20 | Gigalith | 10 | 3–4 |
-| Altering Cave | Land | 20 | Lucario | 10 | 4–4 |
-| Altering Cave | Land | 20 | Parasect | 10 | 2–2 |
-| Altering Cave | Land | 20 | Wobbuffet | 10 | 3–3 |
-| Altering Cave | Surf | 4 | Seaking | 60 | 5–35 |
-| Altering Cave | Surf | 4 | Gastrodon | 30 | 10–30 |
-| Altering Cave | Surf | 4 | Whiscash | 10 | 15–30 |
-| Altering Cave | Rock Smash | 20 | Steelix | 60 | 10–15 |
-| Altering Cave | Rock Smash | 20 | Shuckle | 30 | 5–10 |
-| Altering Cave | Rock Smash | 20 | Crustle | 10 | 15–20 |
-| Altering Cave | Old Rod | 30 | Magikarp | 60 | 5–10 |
-| Altering Cave | Old Rod | 30 | Barboach | 40 | 5–10 |
-| Altering Cave | Good Rod | 30 | Gyarados | 60 | 10–30 |
-| Altering Cave | Good Rod | 30 | Whiscash | 40 | 10–30 |
-| Altering Cave | Super Rod | 30 | Gyarados | 40 | 30–35 |
-| Altering Cave | Super Rod | 30 | Seaking | 30 | 25–45 |
-| Altering Cave | Super Rod | 30 | Whiscash | 30 | 30–35 |
-| Altering Cave | Honey | 20 | Blissey | 100 | 2–3 |
-| Altering Cave 1F | Land | 20 | Dugtrio | 24 | 2–4 |
-| Altering Cave 1F | Land | 20 | Noivern | 13 | 2–2 |
-| Altering Cave 1F | Land | 20 | Swoobat | 13 | 3–3 |
-| Altering Cave 1F | Land | 20 | Druddigon | 10 | 3–3 |
-| Altering Cave 1F | Land | 20 | Gigalith | 10 | 3–4 |
-| Altering Cave 1F | Land | 20 | Lucario | 10 | 4–4 |
-| Altering Cave 1F | Land | 20 | Shiinotic | 10 | 2–2 |
-| Altering Cave 1F | Land | 20 | Wobbuffet | 10 | 3–3 |
-| Altering Cave 1F | Rock Smash | 20 | Steelix | 60 | 10–15 |
-| Altering Cave 1F | Rock Smash | 20 | Shuckle | 30 | 5–10 |
-| Altering Cave 1F | Rock Smash | 20 | Crustle | 10 | 15–20 |
-| Altering Cave 1F | Honey | 20 | Blissey | 100 | 2–3 |
-| Altering Cave B1F | Land | 20 | Eelektross | 24 | 2–4 |
-| Altering Cave B1F | Land | 20 | Rhydon | 13 | 2–2 |
-| Altering Cave B1F | Land | 20 | Swoobat | 13 | 3–3 |
-| Altering Cave B1F | Land | 20 | Druddigon | 10 | 3–3 |
-| Altering Cave B1F | Land | 20 | Gigalith | 10 | 3–4 |
-| Altering Cave B1F | Land | 20 | Lucario | 10 | 4–4 |
-| Altering Cave B1F | Land | 20 | Parasect | 10 | 2–2 |
-| Altering Cave B1F | Land | 20 | Wobbuffet | 10 | 3–3 |
-| Altering Cave B1F | Surf | 4 | Seaking | 60 | 5–35 |
-| Altering Cave B1F | Surf | 4 | Gastrodon | 30 | 10–30 |
-| Altering Cave B1F | Surf | 4 | Whiscash | 10 | 15–30 |
-| Altering Cave B1F | Rock Smash | 20 | Steelix | 60 | 10–15 |
-| Altering Cave B1F | Rock Smash | 20 | Shuckle | 30 | 5–10 |
-| Altering Cave B1F | Rock Smash | 20 | Crustle | 10 | 15–20 |
-| Altering Cave B1F | Old Rod | 30 | Magikarp | 60 | 5–10 |
-| Altering Cave B1F | Old Rod | 30 | Barboach | 40 | 5–10 |
-| Altering Cave B1F | Good Rod | 30 | Gyarados | 60 | 10–30 |
-| Altering Cave B1F | Good Rod | 30 | Whiscash | 40 | 10–30 |
-| Altering Cave B1F | Super Rod | 30 | Gyarados | 40 | 30–35 |
-| Altering Cave B1F | Super Rod | 30 | Seaking | 30 | 25–45 |
-| Altering Cave B1F | Super Rod | 30 | Whiscash | 30 | 30–35 |
-| Altering Cave B1F | Honey | 20 | Blissey | 100 | 2–3 |
-| Altering Cave | Land | 7 | Mareep | 100 | 3–13 |
-| Altering Cave | Land | 7 | Pineco | 100 | 19–29 |
-| Altering Cave | Land | 7 | Houndour | 100 | 12–22 |
-| Altering Cave | Land | 7 | Teddiursa | 100 | 6–16 |
-| Altering Cave | Land | 7 | Aipom | 100 | 18–28 |
-| Altering Cave | Land | 7 | Shuckle | 100 | 18–28 |
-| Altering Cave | Land | 7 | Stantler | 100 | 18–28 |
-| Altering Cave | Land | 7 | Smeargle | 100 | 18–28 |
-| Meteor Falls Stevens Cave | Land | 10 | Crobat | 20 | 38–40 |
-| Meteor Falls Stevens Cave | Land | 10 | Metang | 20 | 33–35 |
-| Meteor Falls Stevens Cave | Land | 10 | Metagross | 14 | 33–40 |
-| Meteor Falls Stevens Cave | Land | 10 | Lunatone | 13 | 33–33 |
-| Meteor Falls Stevens Cave | Land | 10 | Solrock | 13 | 35–35 |
-| Meteor Falls Stevens Cave | Land | 10 | Druddigon | 10 | 35–39 |
-| Meteor Falls Stevens Cave | Land | 10 | Ferrothorn | 10 | 37–37 |
+| Location | Method | Access requirement | Raw rate | Species | Within-method % | Levels |
+|---|---|---|---|---|---|---|
+| Underwater Route 126 | Land | No field move; available when the location itself is reachable | 25 | Lumineon | 18 | 25–25 |
+| Underwater Route 126 | Land | No field move; available when the location itself is reachable | 25 | Chinchou | 13 | 27–27 |
+| Underwater Route 126 | Land | No field move; available when the location itself is reachable | 25 | Clamperl | 13 | 25–25 |
+| Underwater Route 126 | Land | No field move; available when the location itself is reachable | 25 | Golisopod | 12 | 27–29 |
+| Underwater Route 126 | Land | No field move; available when the location itself is reachable | 25 | Lanturn | 10 | 25–25 |
+| Underwater Route 126 | Land | No field move; available when the location itself is reachable | 25 | Relicanth | 10 | 25–25 |
+| Underwater Route 126 | Land | No field move; available when the location itself is reachable | 25 | Starmie | 10 | 27–27 |
+| Underwater Route 126 | Land | No field move; available when the location itself is reachable | 25 | Gorebyss | 5 | 25–25 |
+| Underwater Route 126 | Land | No field move; available when the location itself is reachable | 25 | Huntail | 5 | 27–27 |
+| Underwater Route 126 | Land | No field move; available when the location itself is reachable | 25 | Kingdra | 4 | 27–27 |
+| Pacifidlog Town | Surf | Balance Badge (5) and HM03 Surf | 4 | Tentacruel | 60 | 5–35 |
+| Pacifidlog Town | Surf | Balance Badge (5) and HM03 Surf | 4 | Pelipper | 30 | 10–30 |
+| Pacifidlog Town | Surf | Balance Badge (5) and HM03 Surf | 4 | Sharpedo | 10 | 15–30 |
+| Pacifidlog Town | Old Rod | Old Rod from Mom in Littleroot during the opening | 10 | Magikarp | 60 | 5–10 |
+| Pacifidlog Town | Old Rod | Old Rod from Mom in Littleroot during the opening | 10 | Skrelp | 40 | 5–10 |
+| Pacifidlog Town | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 10 | Skrelp | 60 | 10–30 |
+| Pacifidlog Town | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 10 | Wailmer | 40 | 10–30 |
+| Pacifidlog Town | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 10 | Dragalge | 40 | 30–35 |
+| Pacifidlog Town | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 10 | Dhelmise | 30 | 25–45 |
+| Pacifidlog Town | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 10 | Sharpedo | 30 | 30–35 |
+| Underwater Route 124 | Land | No field move; available when the location itself is reachable | 25 | Lumineon | 18 | 25–25 |
+| Underwater Route 124 | Land | No field move; available when the location itself is reachable | 25 | Chinchou | 13 | 27–27 |
+| Underwater Route 124 | Land | No field move; available when the location itself is reachable | 25 | Clamperl | 13 | 25–25 |
+| Underwater Route 124 | Land | No field move; available when the location itself is reachable | 25 | Golisopod | 12 | 27–29 |
+| Underwater Route 124 | Land | No field move; available when the location itself is reachable | 25 | Lanturn | 10 | 25–25 |
+| Underwater Route 124 | Land | No field move; available when the location itself is reachable | 25 | Relicanth | 10 | 25–25 |
+| Underwater Route 124 | Land | No field move; available when the location itself is reachable | 25 | Starmie | 10 | 27–27 |
+| Underwater Route 124 | Land | No field move; available when the location itself is reachable | 25 | Gorebyss | 5 | 25–25 |
+| Underwater Route 124 | Land | No field move; available when the location itself is reachable | 25 | Huntail | 5 | 27–27 |
+| Underwater Route 124 | Land | No field move; available when the location itself is reachable | 25 | Kingdra | 4 | 27–27 |
+| Mirage Tower 1F | Land | No field move; available when the location itself is reachable | 10 | Bronzor | 20 | 20–20 |
+| Mirage Tower 1F | Land | No field move; available when the location itself is reachable | 10 | Darumaka | 17 | 22–24 |
+| Mirage Tower 1F | Land | No field move; available when the location itself is reachable | 10 | Yamask | 17 | 22–24 |
+| Mirage Tower 1F | Land | No field move; available when the location itself is reachable | 10 | Sandshrew | 13 | 21–21 |
+| Mirage Tower 1F | Land | No field move; available when the location itself is reachable | 10 | Trapinch | 13 | 21–21 |
+| Mirage Tower 1F | Land | No field move; available when the location itself is reachable | 10 | Golett | 10 | 20–20 |
+| Mirage Tower 1F | Land | No field move; available when the location itself is reachable | 10 | Sigilyph | 10 | 20–20 |
+| Mirage Tower 2F | Land | No field move; available when the location itself is reachable | 10 | Bronzor | 20 | 20–20 |
+| Mirage Tower 2F | Land | No field move; available when the location itself is reachable | 10 | Darumaka | 17 | 22–24 |
+| Mirage Tower 2F | Land | No field move; available when the location itself is reachable | 10 | Yamask | 17 | 22–24 |
+| Mirage Tower 2F | Land | No field move; available when the location itself is reachable | 10 | Sandshrew | 13 | 21–21 |
+| Mirage Tower 2F | Land | No field move; available when the location itself is reachable | 10 | Trapinch | 13 | 21–21 |
+| Mirage Tower 2F | Land | No field move; available when the location itself is reachable | 10 | Golett | 10 | 20–20 |
+| Mirage Tower 2F | Land | No field move; available when the location itself is reachable | 10 | Sigilyph | 10 | 20–20 |
+| Mirage Tower 3F | Land | No field move; available when the location itself is reachable | 10 | Bronzor | 20 | 20–20 |
+| Mirage Tower 3F | Land | No field move; available when the location itself is reachable | 10 | Darumaka | 17 | 22–24 |
+| Mirage Tower 3F | Land | No field move; available when the location itself is reachable | 10 | Yamask | 17 | 22–24 |
+| Mirage Tower 3F | Land | No field move; available when the location itself is reachable | 10 | Sandshrew | 13 | 21–21 |
+| Mirage Tower 3F | Land | No field move; available when the location itself is reachable | 10 | Trapinch | 13 | 21–21 |
+| Mirage Tower 3F | Land | No field move; available when the location itself is reachable | 10 | Golett | 10 | 20–20 |
+| Mirage Tower 3F | Land | No field move; available when the location itself is reachable | 10 | Sigilyph | 10 | 20–20 |
+| Mirage Tower 4F | Land | No field move; available when the location itself is reachable | 10 | Bronzor | 20 | 20–20 |
+| Mirage Tower 4F | Land | No field move; available when the location itself is reachable | 10 | Darumaka | 17 | 22–24 |
+| Mirage Tower 4F | Land | No field move; available when the location itself is reachable | 10 | Yamask | 17 | 22–24 |
+| Mirage Tower 4F | Land | No field move; available when the location itself is reachable | 10 | Sandshrew | 13 | 21–21 |
+| Mirage Tower 4F | Land | No field move; available when the location itself is reachable | 10 | Trapinch | 13 | 21–21 |
+| Mirage Tower 4F | Land | No field move; available when the location itself is reachable | 10 | Golett | 10 | 20–20 |
+| Mirage Tower 4F | Land | No field move; available when the location itself is reachable | 10 | Sigilyph | 10 | 20–20 |
+| Mirage Tower B1F | Land | No field move; available when the location itself is reachable | 10 | Bronzor | 20 | 20–20 |
+| Mirage Tower B1F | Land | No field move; available when the location itself is reachable | 10 | Darumaka | 17 | 22–24 |
+| Mirage Tower B1F | Land | No field move; available when the location itself is reachable | 10 | Yamask | 17 | 22–24 |
+| Mirage Tower B1F | Land | No field move; available when the location itself is reachable | 10 | Sandshrew | 13 | 21–21 |
+| Mirage Tower B1F | Land | No field move; available when the location itself is reachable | 10 | Trapinch | 13 | 21–21 |
+| Mirage Tower B1F | Land | No field move; available when the location itself is reachable | 10 | Golett | 10 | 20–20 |
+| Mirage Tower B1F | Land | No field move; available when the location itself is reachable | 10 | Sigilyph | 10 | 20–20 |
+| Desert Underpass | Land | No field move; available when the location itself is reachable | 10 | Ditto | 66 | 35–42 |
+| Desert Underpass | Land | No field move; available when the location itself is reachable | 10 | Ting Lu | 10 | 41–41 |
+| Desert Underpass | Land | No field move; available when the location itself is reachable | 10 | Arctozolt | 8 | 43–43 |
+| Desert Underpass | Land | No field move; available when the location itself is reachable | 10 | Dracozolt | 8 | 38–38 |
+| Desert Underpass | Land | No field move; available when the location itself is reachable | 10 | Arctovish | 4 | 45–45 |
+| Desert Underpass | Land | No field move; available when the location itself is reachable | 10 | Dracovish | 4 | 44–44 |
+| Artisan Cave B1F | Land | No field move; available when the location itself is reachable | 10 | Smeargle | 100 | 40–50 |
+| Seaspray Cave | Land | No field move; available when the location itself is reachable | 20 | Woobat | 22 | 10–12 |
+| Seaspray Cave | Land | No field move; available when the location itself is reachable | 20 | Wooper | 20 | 10–12 |
+| Seaspray Cave | Land | No field move; available when the location itself is reachable | 20 | Zubat | 20 | 10–12 |
+| Seaspray Cave | Land | No field move; available when the location itself is reachable | 20 | Psyduck | 13 | 10–12 |
+| Seaspray Cave | Land | No field move; available when the location itself is reachable | 20 | Tynamo | 13 | 10–12 |
+| Seaspray Cave | Land | No field move; available when the location itself is reachable | 20 | Stunfisk | 12 | 10–12 |
+| Seaspray Cave | Surf | Balance Badge (5) and HM03 Surf | 4 | Quagsire | 60 | 20–30 |
+| Seaspray Cave | Surf | Balance Badge (5) and HM03 Surf | 4 | Eelektrik | 30 | 10–20 |
+| Seaspray Cave | Surf | Balance Badge (5) and HM03 Surf | 4 | Golbat | 10 | 5–35 |
+| Seaspray Cave | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Binacle | 60 | 10–15 |
+| Seaspray Cave | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Dwebble | 40 | 5–20 |
+| Seaspray Cave | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Wishiwashi | 60 | 5–10 |
+| Seaspray Cave | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Krabby | 40 | 5–10 |
+| Seaspray Cave | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Krabby | 60 | 10–30 |
+| Seaspray Cave | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Wishiwashi | 40 | 10–30 |
+| Seaspray Cave | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Wishiwashi | 60 | 20–45 |
+| Seaspray Cave | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Kingler | 40 | 30–40 |
+| Seaspray Cave B1F | Land | No field move; available when the location itself is reachable | 20 | Spheal | 17 | 10–12 |
+| Seaspray Cave B1F | Land | No field move; available when the location itself is reachable | 20 | Vanillite | 17 | 10–12 |
+| Seaspray Cave B1F | Land | No field move; available when the location itself is reachable | 20 | Seel | 13 | 10–12 |
+| Seaspray Cave B1F | Land | No field move; available when the location itself is reachable | 20 | Swinub | 13 | 10–12 |
+| Seaspray Cave B1F | Land | No field move; available when the location itself is reachable | 20 | Bergmite | 10 | 10–12 |
+| Seaspray Cave B1F | Land | No field move; available when the location itself is reachable | 20 | Smoochum | 10 | 10–12 |
+| Seaspray Cave B1F | Land | No field move; available when the location itself is reachable | 20 | Sneasel | 10 | 10–12 |
+| Seaspray Cave B1F | Land | No field move; available when the location itself is reachable | 20 | Snorunt | 10 | 10–12 |
+| Seaspray Cave B1F | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Cubchoo | 50 | 2–2 |
+| Seaspray Cave B1F | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Snover | 40 | 2–3 |
+| Seaspray Cave B1F | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Cryogonal | 5 | 3–3 |
+| Seaspray Cave B1F | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Delibird | 5 | 3–3 |
+| Ember Path | Land | No field move; available when the location itself is reachable | 10 | Larvesta | 24 | 41–43 |
+| Ember Path | Land | No field move; available when the location itself is reachable | 10 | Magcargo | 23 | 41–43 |
+| Ember Path | Land | No field move; available when the location itself is reachable | 10 | Boldore | 20 | 41–43 |
+| Ember Path | Land | No field move; available when the location itself is reachable | 10 | Magmar | 13 | 41–43 |
+| Ember Path | Land | No field move; available when the location itself is reachable | 10 | Golbat | 10 | 41–43 |
+| Ember Path | Land | No field move; available when the location itself is reachable | 10 | Grumpig | 10 | 41–43 |
+| Sandstrewn Ruins | Land | No field move; available when the location itself is reachable | 10 | Claydol | 17 | 22–24 |
+| Sandstrewn Ruins | Land | No field move; available when the location itself is reachable | 10 | Gabite | 17 | 22–24 |
+| Sandstrewn Ruins | Land | No field move; available when the location itself is reachable | 10 | Bronzong | 13 | 21–21 |
+| Sandstrewn Ruins | Land | No field move; available when the location itself is reachable | 10 | Yamask | 13 | 21–21 |
+| Sandstrewn Ruins | Land | No field move; available when the location itself is reachable | 10 | Darumaka | 10 | 20–20 |
+| Sandstrewn Ruins | Land | No field move; available when the location itself is reachable | 10 | Golett | 10 | 20–20 |
+| Sandstrewn Ruins | Land | No field move; available when the location itself is reachable | 10 | Honedge | 10 | 20–20 |
+| Sandstrewn Ruins | Land | No field move; available when the location itself is reachable | 10 | Sigilyph | 10 | 20–20 |
+| Sandstrewn Ruins | Surf | Balance Badge (5) and HM03 Surf | 4 | Relicanth | 100 | 5–35 |
+| Sandstrewn Ruins | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Baltoy | 60 | 20–30 |
+| Sandstrewn Ruins | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Onix | 30 | 10–20 |
+| Sandstrewn Ruins | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Steelix | 10 | 5–35 |
+| Sandstrewn Ruins | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Relicanth | 100 | 5–10 |
+| Sandstrewn Ruins | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Relicanth | 100 | 10–30 |
+| Sandstrewn Ruins | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Relicanth | 100 | 20–45 |
+| Sandstrewn Ruins B1F | Land | No field move; available when the location itself is reachable | 10 | Claydol | 17 | 22–24 |
+| Sandstrewn Ruins B1F | Land | No field move; available when the location itself is reachable | 10 | Gabite | 17 | 22–24 |
+| Sandstrewn Ruins B1F | Land | No field move; available when the location itself is reachable | 10 | Bronzong | 13 | 21–21 |
+| Sandstrewn Ruins B1F | Land | No field move; available when the location itself is reachable | 10 | Yamask | 13 | 21–21 |
+| Sandstrewn Ruins B1F | Land | No field move; available when the location itself is reachable | 10 | Darumaka | 10 | 20–20 |
+| Sandstrewn Ruins B1F | Land | No field move; available when the location itself is reachable | 10 | Golett | 10 | 20–20 |
+| Sandstrewn Ruins B1F | Land | No field move; available when the location itself is reachable | 10 | Honedge | 10 | 20–20 |
+| Sandstrewn Ruins B1F | Land | No field move; available when the location itself is reachable | 10 | Sigilyph | 10 | 20–20 |
+| Sandstrewn Ruins B1F | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Baltoy | 60 | 20–30 |
+| Sandstrewn Ruins B1F | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Onix | 30 | 10–20 |
+| Sandstrewn Ruins B1F | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Steelix | 10 | 5–35 |
+| Sandstrewn Ruins 2F | Land | No field move; available when the location itself is reachable | 10 | Claydol | 17 | 22–24 |
+| Sandstrewn Ruins 2F | Land | No field move; available when the location itself is reachable | 10 | Gabite | 17 | 22–24 |
+| Sandstrewn Ruins 2F | Land | No field move; available when the location itself is reachable | 10 | Bronzong | 13 | 21–21 |
+| Sandstrewn Ruins 2F | Land | No field move; available when the location itself is reachable | 10 | Yamask | 13 | 21–21 |
+| Sandstrewn Ruins 2F | Land | No field move; available when the location itself is reachable | 10 | Darumaka | 10 | 20–20 |
+| Sandstrewn Ruins 2F | Land | No field move; available when the location itself is reachable | 10 | Golett | 10 | 20–20 |
+| Sandstrewn Ruins 2F | Land | No field move; available when the location itself is reachable | 10 | Honedge | 10 | 20–20 |
+| Sandstrewn Ruins 2F | Land | No field move; available when the location itself is reachable | 10 | Sigilyph | 10 | 20–20 |
+| Sandstrewn Ruins 2F | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Baltoy | 60 | 20–30 |
+| Sandstrewn Ruins 2F | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Onix | 30 | 10–20 |
+| Sandstrewn Ruins 2F | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Steelix | 10 | 5–35 |
+| Sandstrewn Ruins 3F | Land | No field move; available when the location itself is reachable | 10 | Claydol | 17 | 22–24 |
+| Sandstrewn Ruins 3F | Land | No field move; available when the location itself is reachable | 10 | Gabite | 17 | 22–24 |
+| Sandstrewn Ruins 3F | Land | No field move; available when the location itself is reachable | 10 | Bronzong | 13 | 21–21 |
+| Sandstrewn Ruins 3F | Land | No field move; available when the location itself is reachable | 10 | Yamask | 13 | 21–21 |
+| Sandstrewn Ruins 3F | Land | No field move; available when the location itself is reachable | 10 | Darumaka | 10 | 20–20 |
+| Sandstrewn Ruins 3F | Land | No field move; available when the location itself is reachable | 10 | Golett | 10 | 20–20 |
+| Sandstrewn Ruins 3F | Land | No field move; available when the location itself is reachable | 10 | Honedge | 10 | 20–20 |
+| Sandstrewn Ruins 3F | Land | No field move; available when the location itself is reachable | 10 | Sigilyph | 10 | 20–20 |
+| Sandstrewn Ruins 3F | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Baltoy | 60 | 20–30 |
+| Sandstrewn Ruins 3F | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Onix | 30 | 10–20 |
+| Sandstrewn Ruins 3F | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Steelix | 10 | 5–35 |
+| Verdanturf Meadow | Land | No field move; available when the location itself is reachable | 20 | Floette White Flower | 20 | 41–43 |
+| Verdanturf Meadow | Land | No field move; available when the location itself is reachable | 20 | Espurr | 13 | 41–43 |
+| Verdanturf Meadow | Land | No field move; available when the location itself is reachable | 20 | Munna | 13 | 41–43 |
+| Verdanturf Meadow | Land | No field move; available when the location itself is reachable | 20 | Flabebe Blue Flower | 12 | 41–43 |
+| Verdanturf Meadow | Land | No field move; available when the location itself is reachable | 20 | Flabebe White Flower | 12 | 41–43 |
+| Verdanturf Meadow | Land | No field move; available when the location itself is reachable | 20 | Ribombee | 10 | 41–43 |
+| Verdanturf Meadow | Land | No field move; available when the location itself is reachable | 20 | Stufful | 10 | 41–43 |
+| Verdanturf Meadow | Land | No field move; available when the location itself is reachable | 20 | Vivillon Poke Ball | 10 | 41–43 |
+| Verdanturf Meadow | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Audino | 50 | 2–2 |
+| Verdanturf Meadow | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Ribombee | 45 | 2–3 |
+| Verdanturf Meadow | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Milcery | 5 | 3–3 |
+| Scorched Slab | Land | No field move; available when the location itself is reachable | 20 | Golbat | 88 | 2–4 |
+| Scorched Slab | Land | No field move; available when the location itself is reachable | 20 | Crobat | 12 | 3–4 |
+| Scorched Slab | Surf | Balance Badge (5) and HM03 Surf | 4 | Golbat | 95 | 5–35 |
+| Scorched Slab | Surf | Balance Badge (5) and HM03 Surf | 4 | Crobat | 5 | 25–30 |
+| Scorched Slab | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Goldeen | 60 | 5–10 |
+| Scorched Slab | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Barboach | 40 | 5–10 |
+| Scorched Slab | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Barboach | 60 | 10–30 |
+| Scorched Slab | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Goldeen | 20 | 10–30 |
+| Scorched Slab | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Whiscash | 20 | 10–30 |
+| Scorched Slab | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Barboach | 40 | 30–35 |
+| Scorched Slab | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Seaking | 30 | 30–35 |
+| Scorched Slab | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Whiscash | 30 | 25–45 |
+| Scorched Slab B1F | Land | No field move; available when the location itself is reachable | 20 | Zweilous | 24 | 2–4 |
+| Scorched Slab B1F | Land | No field move; available when the location itself is reachable | 20 | Boldore | 20 | 2–3 |
+| Scorched Slab B1F | Land | No field move; available when the location itself is reachable | 20 | Dugtrio | 20 | 3–4 |
+| Scorched Slab B1F | Land | No field move; available when the location itself is reachable | 20 | Golbat | 18 | 2–3 |
+| Scorched Slab B1F | Land | No field move; available when the location itself is reachable | 20 | Gurdurr | 18 | 3–4 |
+| Scorched Slab B1F | Surf | Balance Badge (5) and HM03 Surf | 4 | Golbat | 95 | 5–35 |
+| Scorched Slab B1F | Surf | Balance Badge (5) and HM03 Surf | 4 | Crobat | 5 | 25–30 |
+| Scorched Slab B1F | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Goldeen | 60 | 5–10 |
+| Scorched Slab B1F | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Barboach | 40 | 5–10 |
+| Scorched Slab B1F | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Barboach | 60 | 10–30 |
+| Scorched Slab B1F | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Goldeen | 20 | 10–30 |
+| Scorched Slab B1F | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Whiscash | 20 | 10–30 |
+| Scorched Slab B1F | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Barboach | 40 | 30–35 |
+| Scorched Slab B1F | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Seaking | 30 | 30–35 |
+| Scorched Slab B1F | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Whiscash | 30 | 25–45 |
+| Scorched Slab B2F | Land | No field move; available when the location itself is reachable | 20 | Boldore | 20 | 2–3 |
+| Scorched Slab B2F | Land | No field move; available when the location itself is reachable | 20 | Dugtrio | 20 | 3–4 |
+| Scorched Slab B2F | Land | No field move; available when the location itself is reachable | 20 | Magmar | 17 | 2–3 |
+| Scorched Slab B2F | Land | No field move; available when the location itself is reachable | 20 | Turtonator | 17 | 3–4 |
+| Scorched Slab B2F | Land | No field move; available when the location itself is reachable | 20 | Golbat | 13 | 2–2 |
+| Scorched Slab B2F | Land | No field move; available when the location itself is reachable | 20 | Gurdurr | 13 | 3–3 |
+| Scorched Slab Heatrans Room | Land | No field move; available when the location itself is reachable | 20 | Boldore | 20 | 2–3 |
+| Scorched Slab Heatrans Room | Land | No field move; available when the location itself is reachable | 20 | Dugtrio | 20 | 3–4 |
+| Scorched Slab Heatrans Room | Land | No field move; available when the location itself is reachable | 20 | Magmar | 17 | 2–3 |
+| Scorched Slab Heatrans Room | Land | No field move; available when the location itself is reachable | 20 | Turtonator | 17 | 3–4 |
+| Scorched Slab Heatrans Room | Land | No field move; available when the location itself is reachable | 20 | Golbat | 13 | 2–2 |
+| Scorched Slab Heatrans Room | Land | No field move; available when the location itself is reachable | 20 | Magcargo | 13 | 3–3 |
+| Artisan Cave 1F | Land | No field move; available when the location itself is reachable | 10 | Smeargle | 100 | 40–50 |
+| Altering Cave | Land | No field move; available when the location itself is reachable | 20 | Eelektross | 24 | 2–4 |
+| Altering Cave | Land | No field move; available when the location itself is reachable | 20 | Rhydon | 13 | 2–2 |
+| Altering Cave | Land | No field move; available when the location itself is reachable | 20 | Swoobat | 13 | 3–3 |
+| Altering Cave | Land | No field move; available when the location itself is reachable | 20 | Druddigon | 10 | 3–3 |
+| Altering Cave | Land | No field move; available when the location itself is reachable | 20 | Gigalith | 10 | 3–4 |
+| Altering Cave | Land | No field move; available when the location itself is reachable | 20 | Lucario | 10 | 4–4 |
+| Altering Cave | Land | No field move; available when the location itself is reachable | 20 | Parasect | 10 | 2–2 |
+| Altering Cave | Land | No field move; available when the location itself is reachable | 20 | Wobbuffet | 10 | 3–3 |
+| Altering Cave | Surf | Balance Badge (5) and HM03 Surf | 4 | Seaking | 60 | 5–35 |
+| Altering Cave | Surf | Balance Badge (5) and HM03 Surf | 4 | Gastrodon | 30 | 10–30 |
+| Altering Cave | Surf | Balance Badge (5) and HM03 Surf | 4 | Whiscash | 10 | 15–30 |
+| Altering Cave | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Steelix | 60 | 10–15 |
+| Altering Cave | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Shuckle | 30 | 5–10 |
+| Altering Cave | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Crustle | 10 | 15–20 |
+| Altering Cave | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Magikarp | 60 | 5–10 |
+| Altering Cave | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Barboach | 40 | 5–10 |
+| Altering Cave | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Gyarados | 60 | 10–30 |
+| Altering Cave | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Whiscash | 40 | 10–30 |
+| Altering Cave | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Gyarados | 40 | 30–35 |
+| Altering Cave | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Seaking | 30 | 25–45 |
+| Altering Cave | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Whiscash | 30 | 30–35 |
+| Altering Cave | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Blissey | 100 | 2–3 |
+| Altering Cave 1F | Land | No field move; available when the location itself is reachable | 20 | Dugtrio | 24 | 2–4 |
+| Altering Cave 1F | Land | No field move; available when the location itself is reachable | 20 | Noivern | 13 | 2–2 |
+| Altering Cave 1F | Land | No field move; available when the location itself is reachable | 20 | Swoobat | 13 | 3–3 |
+| Altering Cave 1F | Land | No field move; available when the location itself is reachable | 20 | Druddigon | 10 | 3–3 |
+| Altering Cave 1F | Land | No field move; available when the location itself is reachable | 20 | Gigalith | 10 | 3–4 |
+| Altering Cave 1F | Land | No field move; available when the location itself is reachable | 20 | Lucario | 10 | 4–4 |
+| Altering Cave 1F | Land | No field move; available when the location itself is reachable | 20 | Shiinotic | 10 | 2–2 |
+| Altering Cave 1F | Land | No field move; available when the location itself is reachable | 20 | Wobbuffet | 10 | 3–3 |
+| Altering Cave 1F | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Steelix | 60 | 10–15 |
+| Altering Cave 1F | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Shuckle | 30 | 5–10 |
+| Altering Cave 1F | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Crustle | 10 | 15–20 |
+| Altering Cave 1F | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Blissey | 100 | 2–3 |
+| Altering Cave B1F | Land | No field move; available when the location itself is reachable | 20 | Eelektross | 24 | 2–4 |
+| Altering Cave B1F | Land | No field move; available when the location itself is reachable | 20 | Rhydon | 13 | 2–2 |
+| Altering Cave B1F | Land | No field move; available when the location itself is reachable | 20 | Swoobat | 13 | 3–3 |
+| Altering Cave B1F | Land | No field move; available when the location itself is reachable | 20 | Druddigon | 10 | 3–3 |
+| Altering Cave B1F | Land | No field move; available when the location itself is reachable | 20 | Gigalith | 10 | 3–4 |
+| Altering Cave B1F | Land | No field move; available when the location itself is reachable | 20 | Lucario | 10 | 4–4 |
+| Altering Cave B1F | Land | No field move; available when the location itself is reachable | 20 | Parasect | 10 | 2–2 |
+| Altering Cave B1F | Land | No field move; available when the location itself is reachable | 20 | Wobbuffet | 10 | 3–3 |
+| Altering Cave B1F | Surf | Balance Badge (5) and HM03 Surf | 4 | Seaking | 60 | 5–35 |
+| Altering Cave B1F | Surf | Balance Badge (5) and HM03 Surf | 4 | Gastrodon | 30 | 10–30 |
+| Altering Cave B1F | Surf | Balance Badge (5) and HM03 Surf | 4 | Whiscash | 10 | 15–30 |
+| Altering Cave B1F | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Steelix | 60 | 10–15 |
+| Altering Cave B1F | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Shuckle | 30 | 5–10 |
+| Altering Cave B1F | Rock Smash | Dynamo Badge (3) and HM06 Rock Smash | 20 | Crustle | 10 | 15–20 |
+| Altering Cave B1F | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Magikarp | 60 | 5–10 |
+| Altering Cave B1F | Old Rod | Old Rod from Mom in Littleroot during the opening | 30 | Barboach | 40 | 5–10 |
+| Altering Cave B1F | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Gyarados | 60 | 10–30 |
+| Altering Cave B1F | Good Rod | Balance Badge route access and the Good Rod gift on Route 118 | 30 | Whiscash | 40 | 10–30 |
+| Altering Cave B1F | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Gyarados | 40 | 30–35 |
+| Altering Cave B1F | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Seaking | 30 | 25–45 |
+| Altering Cave B1F | Super Rod | Feather Badge route access and the Super Rod gift in Mossdeep | 30 | Whiscash | 30 | 30–35 |
+| Altering Cave B1F | Honey | Stone Badge (1); Honey enters ordinary medicine-Mart stock | 20 | Blissey | 100 | 2–3 |
+| Altering Cave | Land | No field move; available when the location itself is reachable | 7 | Unown | 100 | 3–13 |
+| Altering Cave | Land | No field move; available when the location itself is reachable | 7 | Pineco | 100 | 19–29 |
+| Altering Cave | Land | No field move; available when the location itself is reachable | 7 | Houndour | 100 | 12–22 |
+| Altering Cave | Land | No field move; available when the location itself is reachable | 7 | Teddiursa | 100 | 6–16 |
+| Altering Cave | Land | No field move; available when the location itself is reachable | 7 | Aipom | 100 | 18–28 |
+| Altering Cave | Land | No field move; available when the location itself is reachable | 7 | Shuckle | 100 | 18–28 |
+| Altering Cave | Land | No field move; available when the location itself is reachable | 7 | Stantler | 100 | 18–28 |
+| Altering Cave | Land | No field move; available when the location itself is reachable | 7 | Smeargle | 100 | 18–28 |
+| Meteor Falls Stevens Cave | Land | No field move; available when the location itself is reachable | 10 | Crobat | 20 | 38–40 |
+| Meteor Falls Stevens Cave | Land | No field move; available when the location itself is reachable | 10 | Metang | 20 | 33–35 |
+| Meteor Falls Stevens Cave | Land | No field move; available when the location itself is reachable | 10 | Metagross | 14 | 33–40 |
+| Meteor Falls Stevens Cave | Land | No field move; available when the location itself is reachable | 10 | Lunatone | 13 | 33–33 |
+| Meteor Falls Stevens Cave | Land | No field move; available when the location itself is reachable | 10 | Solrock | 13 | 35–35 |
+| Meteor Falls Stevens Cave | Land | No field move; available when the location itself is reachable | 10 | Druddigon | 10 | 35–39 |
+| Meteor Falls Stevens Cave | Land | No field move; available when the location itself is reachable | 10 | Ferrothorn | 10 | 37–37 |
 
 ## Facility-only random battle tables
 
@@ -1955,11 +1986,11 @@ This appendix covers every runtime species/form ID. `Direct acquisition` means t
 | 7 | Squirtle | SPECIES_SQUIRTLE | Direct acquisition | Starter choice: Littleroot opening (Selectable Kanto starter) \| Prize Pokémon: Mauville Game Corner (Coin-exchange Pokémon prize) | party-selectable species/form |
 | 8 | Wartortle | SPECIES_WARTORTLE | Evolution from obtainable Pokémon | Squirtle → Wartortle via Level (16) | party-selectable species/form |
 | 9 | Blastoise | SPECIES_BLASTOISE | Evolution from obtainable Pokémon | Squirtle → Wartortle via Level (16) ; Wartortle → Blastoise via Level (36) | party-selectable species/form |
-| 10 | Caterpie | SPECIES_CATERPIE | Direct acquisition | Random wild in 2 catchable method pool(s): Berry tree encounter table 1: G Berry Stage Sprouted / Land; Petalburg Woods 2 / Honey | party-selectable species/form |
-| 11 | Metapod | SPECIES_METAPOD | Direct acquisition | Random wild in 2 catchable method pool(s): Berry tree encounter table 2: G Berry Stage Taller / Land; Petalburg Woods 2 / Land | party-selectable species/form |
+| 10 | Caterpie | SPECIES_CATERPIE | Direct acquisition | Random wild in 2 catchable method pool(s): Berry tree encounter table 1: G Berry Stage Sprouted / Berry Tree; Petalburg Woods 2 / Honey | party-selectable species/form |
+| 11 | Metapod | SPECIES_METAPOD | Direct acquisition | Random wild in 2 catchable method pool(s): Berry tree encounter table 2: G Berry Stage Taller / Berry Tree; Petalburg Woods 2 / Land | party-selectable species/form |
 | 12 | Butterfree | SPECIES_BUTTERFREE | Direct acquisition | Random wild in 1 catchable method pool(s): Dewford Meadow / Land | party-selectable species/form |
-| 13 | Weedle | SPECIES_WEEDLE | Direct acquisition | Random wild in 2 catchable method pool(s): Berry tree encounter table 1: G Berry Stage Sprouted / Land; Petalburg Woods 2 / Honey | party-selectable species/form |
-| 14 | Kakuna | SPECIES_KAKUNA | Direct acquisition | Random wild in 2 catchable method pool(s): Berry tree encounter table 2: G Berry Stage Taller / Land; Petalburg Woods 2 / Land | party-selectable species/form |
+| 13 | Weedle | SPECIES_WEEDLE | Direct acquisition | Random wild in 2 catchable method pool(s): Berry tree encounter table 1: G Berry Stage Sprouted / Berry Tree; Petalburg Woods 2 / Honey | party-selectable species/form |
+| 14 | Kakuna | SPECIES_KAKUNA | Direct acquisition | Random wild in 2 catchable method pool(s): Berry tree encounter table 2: G Berry Stage Taller / Berry Tree; Petalburg Woods 2 / Land | party-selectable species/form |
 | 15 | Beedrill | SPECIES_BEEDRILL | Direct acquisition | Random wild in 1 catchable method pool(s): Petalburg Woods 3 / Rock Smash | party-selectable species/form |
 | 16 | Pidgey | SPECIES_PIDGEY | Direct acquisition | Random wild in 2 catchable method pool(s): Petalburg Woods / Honey; Petalburg Woods / Land | party-selectable species/form |
 | 17 | Pidgeotto | SPECIES_PIDGEOTTO | Evolution from obtainable Pokémon | Pidgey → Pidgeotto via Level (18) | party-selectable species/form |
@@ -2068,13 +2099,13 @@ This appendix covers every runtime species/form ID. `Direct acquisition` means t
 | 120 | Staryu | SPECIES_STARYU | Direct acquisition | Random wild in 4 catchable method pool(s): Dewford Town / Good Rod; Dewford Town / Old Rod; Dewford Town / Super Rod; Lilycove City / Good Rod | party-selectable species/form |
 | 121 | Starmie | SPECIES_STARMIE | Direct acquisition | Random wild in 4 catchable method pool(s): Dewford Town / Super Rod; Lilycove City / Super Rod; Underwater Route 124 / Land; Underwater Route 126 / Land | party-selectable species/form |
 | 122 | Mr. Mime | SPECIES_MR_MIME | Evolution from obtainable Pokémon | Mime Jr. → Mr. Mime via Level while knowing MOVE_MIMIC | party-selectable species/form |
-| 123 | Scyther | SPECIES_SCYTHER | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
+| 123 | Scyther | SPECIES_SCYTHER | Direct acquisition | Random wild in 1 catchable method pool(s): Petalburg Woods / Land | party-selectable species/form |
 | 124 | Jynx | SPECIES_JYNX | Direct acquisition | Random wild in 1 catchable method pool(s): Shoal Cave Low Tide Ice Room / Land | party-selectable species/form |
 | 125 | Electabuzz | SPECIES_ELECTABUZZ | Direct acquisition | Random wild in 2 catchable method pool(s): New Mauville Entrance / Land; New Mauville Inside / Land | party-selectable species/form |
 | 126 | Magmar | SPECIES_MAGMAR | Direct acquisition | Random wild in 3 catchable method pool(s): Ember Path / Land; Scorched Slab B2F / Land; Scorched Slab Heatrans Room / Land | party-selectable species/form |
 | 127 | Pinsir | SPECIES_PINSIR | Direct acquisition | Random wild in 3 catchable method pool(s): Ashen Woods / Land; Route 120 / Rock Smash; Safari Zone Northwest / Land | party-selectable species/form |
 | 128 | Tauros | SPECIES_TAUROS | Direct acquisition | Random wild in 1 catchable method pool(s): Safari Zone Northeast / Land | party-selectable species/form |
-| 129 | Magikarp | SPECIES_MAGIKARP | Direct acquisition | Random wild in 40 catchable method pool(s): Altering Cave / Old Rod; Altering Cave B1F / Old Rod; Lilycove City / Old Rod; Mossdeep City / Old Rod; Pacifidlog Town / Old Rod; Route 103 / Old Rod; Route 104 / Good Rod; Route 104 / Old Rod; Route 118 / Old Rod; Route 119 / Good Rod; Route 119 / Old Rod; Route 120 / Good Rod; Route 120 / Old Rod; Route 121 / Old Rod; Route 122 / Old Rod; Route 124 / Old Rod; Route 125 / Old Rod; Route 126 / Old Rod; Route 127 / Old Rod; Route 128 / Old Rod; Route 129 / Old Rod; Route 130 / Old Rod; Route 131 / Old Rod; Route 132 / Good Rod; Route 132 / Old Rod; Route 133 / Good Rod; Route 133 / Old Rod; Route 134 / Good Rod; Route 134 / Old Rod; Safari Zone Southwest / Old Rod; Seafloor Cavern Entrance / Old Rod; Seafloor Cavern Room6 / Old Rod; Seafloor Cavern Room7 / Old Rod; Shoal Cave Low Tide Entrance Room / Old Rod; Shoal Cave Low Tide Inner Room / Old Rod; Sootopolis City / Good Rod; Sootopolis City / Old Rod; Sootopolis City / Super Rod; Sootopolis City / Surf; Victory Road B2F / Old Rod | party-selectable species/form |
+| 129 | Magikarp | SPECIES_MAGIKARP | Direct acquisition | Random wild in 39 catchable method pool(s): Altering Cave / Old Rod; Altering Cave B1F / Old Rod; Lilycove City / Old Rod; Mossdeep City / Old Rod; Pacifidlog Town / Old Rod; Route 103 / Old Rod; Route 104 / Good Rod; Route 118 / Old Rod; Route 119 / Good Rod; Route 119 / Old Rod; Route 120 / Good Rod; Route 120 / Old Rod; Route 121 / Old Rod; Route 122 / Old Rod; Route 124 / Old Rod; Route 125 / Old Rod; Route 126 / Old Rod; Route 127 / Old Rod; Route 128 / Old Rod; Route 129 / Old Rod; Route 130 / Old Rod; Route 131 / Old Rod; Route 132 / Good Rod; Route 132 / Old Rod; Route 133 / Good Rod; Route 133 / Old Rod; Route 134 / Good Rod; Route 134 / Old Rod; Safari Zone Southwest / Old Rod; Seafloor Cavern Entrance / Old Rod; Seafloor Cavern Room6 / Old Rod; Seafloor Cavern Room7 / Old Rod; Shoal Cave Low Tide Entrance Room / Old Rod; Shoal Cave Low Tide Inner Room / Old Rod; Sootopolis City / Good Rod; Sootopolis City / Old Rod; Sootopolis City / Super Rod; Sootopolis City / Surf; Victory Road B2F / Old Rod | party-selectable species/form |
 | 130 | Gyarados | SPECIES_GYARADOS | Direct acquisition | Random wild in 15 catchable method pool(s): Altering Cave / Good Rod; Altering Cave / Super Rod; Altering Cave B1F / Good Rod; Altering Cave B1F / Super Rod; Route 103 / Good Rod; Route 103 / Super Rod; Route 104 / Super Rod; Route 107 / Super Rod; Route 108 / Super Rod; Route 118 / Super Rod; Route 119 / Super Rod; Route 120 / Super Rod; Route 121 / Super Rod; Route 122 / Super Rod; Sootopolis City / Super Rod | party-selectable species/form |
 | 131 | Lapras | SPECIES_LAPRAS | Direct acquisition | Random wild in 7 catchable method pool(s): Route 125 / Surf; Seafloor Cavern Entrance / Surf; Seafloor Cavern Room6 / Surf; Seafloor Cavern Room7 / Surf; Shoal Cave Low Tide Entrance Room / Surf; Shoal Cave Low Tide Inner Room / Surf; Victory Road B2F / Surf | party-selectable species/form |
 | 132 | Ditto | SPECIES_DITTO | Direct acquisition | Random wild in 1 catchable method pool(s): Desert Underpass / Land | party-selectable species/form |
@@ -2124,18 +2155,18 @@ This appendix covers every runtime species/form ID. `Direct acquisition` means t
 | 176 | Togetic | SPECIES_TOGETIC | Evolution from obtainable Pokémon | Togepi → Togetic via Friendship | party-selectable species/form |
 | 177 | Natu | SPECIES_NATU | Breeding / obtainable evolution family | The permanent evolution family is obtainable through Xatu; breed or traverse the applicable branch to obtain this stage. | party-selectable species/form |
 | 178 | Xatu | SPECIES_XATU | Direct acquisition | Random wild in 2 catchable method pool(s): Route 111 Ruins Exterior / Land; Safari Zone Northwest / Land | party-selectable species/form |
-| 179 | Mareep | SPECIES_MAREEP | Direct acquisition | Random wild in 2 catchable method pool(s): Altering Cave / Land; Route 116 / Land | party-selectable species/form |
+| 179 | Mareep | SPECIES_MAREEP | Direct acquisition | Random wild in 1 catchable method pool(s): Route 116 / Land | party-selectable species/form |
 | 180 | Flaaffy | SPECIES_FLAAFFY | Direct acquisition | Random wild in 1 catchable method pool(s): Safari Zone Southeast / Land | party-selectable species/form |
 | 181 | Ampharos | SPECIES_AMPHAROS | Evolution from obtainable Pokémon | Flaaffy → Ampharos via Level (30) | party-selectable species/form |
 | 182 | Bellossom | SPECIES_BELLOSSOM | Evolution from obtainable Pokémon | Gloom → Bellossom via Use/hold ITEM_SUN_STONE | party-selectable species/form |
-| 183 | Marill | SPECIES_MARILL | Direct acquisition | Random wild in 4 catchable method pool(s): Petalburg City / Surf; Route 111 / Surf; Route 117 / Land; Route 117 / Surf | party-selectable species/form |
+| 183 | Marill | SPECIES_MARILL | Direct acquisition | Random wild in 3 catchable method pool(s): Petalburg City / Surf; Route 111 / Surf; Route 117 / Surf | party-selectable species/form |
 | 184 | Azumarill | SPECIES_AZUMARILL | Direct acquisition | Random wild in 6 catchable method pool(s): Petalburg City / Surf; Route 102 / Surf; Route 111 / Surf; Route 117 / Surf; Route 120 / Surf; Route 123 / Surf | party-selectable species/form |
 | 185 | Sudowoodo | SPECIES_SUDOWOODO | Direct acquisition | Scripted/static encounter: Battle Frontier Outside East (Literal setwildbattle acquisition) | party-selectable species/form |
 | 186 | Politoed | SPECIES_POLITOED | Direct acquisition | Random wild in 1 catchable method pool(s): Petalburg Woods 3 / Super Rod | party-selectable species/form |
 | 187 | Hoppip | SPECIES_HOPPIP | Breeding / obtainable evolution family | The permanent evolution family is obtainable through Jumpluff; breed or traverse the applicable branch to obtain this stage. | party-selectable species/form |
 | 188 | Skiploom | SPECIES_SKIPLOOM | Direct acquisition | Random wild in 1 catchable method pool(s): Route 111 Ruins Exterior / Land | party-selectable species/form |
 | 189 | Jumpluff | SPECIES_JUMPLUFF | Direct acquisition | Random wild in 1 catchable method pool(s): Route 111 Ruins Exterior / Honey | party-selectable species/form |
-| 190 | Aipom | SPECIES_AIPOM | Direct acquisition | Random wild in 3 catchable method pool(s): Altering Cave / Land; Berry tree encounter table 4: G Berry Stage Berries / Land; Petalburg Woods / Rock Smash | party-selectable species/form |
+| 190 | Aipom | SPECIES_AIPOM | Direct acquisition | Random wild in 3 catchable method pool(s): Altering Cave / Land; Berry tree encounter table 4: G Berry Stage Berries / Berry Tree; Petalburg Woods / Rock Smash | party-selectable species/form |
 | 191 | Sunkern | SPECIES_SUNKERN | Direct acquisition | Random wild in 1 catchable method pool(s): Route 117 / Rock Smash | party-selectable species/form |
 | 192 | Sunflora | SPECIES_SUNFLORA | Evolution from obtainable Pokémon | Sunkern → Sunflora via Use/hold ITEM_SUN_STONE | party-selectable species/form |
 | 193 | Yanma | SPECIES_YANMA | Direct acquisition | Random wild in 1 catchable method pool(s): Petalburg Woods 3 / Land | party-selectable species/form |
@@ -2146,7 +2177,7 @@ This appendix covers every runtime species/form ID. `Direct acquisition` means t
 | 198 | Murkrow | SPECIES_MURKROW | Direct acquisition | Random wild in 7 catchable method pool(s): Mt Pyre 1F / Land; Mt Pyre 2F / Land; Mt Pyre 3F / Land; Mt Pyre 4F / Land; Mt Pyre 5F / Land; Mt Pyre 6F / Land; Petalburg Woods 3 / Land | party-selectable species/form |
 | 199 | Slowking | SPECIES_SLOWKING | Evolution from obtainable Pokémon | Slowpoke → Slowking via Trade Item (ITEM_KINGS_ROCK) | party-selectable species/form |
 | 200 | Misdreavus | SPECIES_MISDREAVUS | Direct acquisition | Random wild in 7 catchable method pool(s): Mt Pyre 1F / Land; Mt Pyre 2F / Land; Mt Pyre 3F / Land; Mt Pyre 4F / Land; Mt Pyre 5F / Land; Mt Pyre 6F / Land; Petalburg Woods 3 / Land | party-selectable species/form |
-| 201 | Unown | SPECIES_UNOWN | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
+| 201 | Unown | SPECIES_UNOWN | Direct acquisition | Random wild in 1 catchable method pool(s): Altering Cave / Land | party-selectable species/form |
 | 202 | Wobbuffet | SPECIES_WOBBUFFET | Direct acquisition | Random wild in 4 catchable method pool(s): Altering Cave / Land; Altering Cave 1F / Land; Altering Cave B1F / Land; Safari Zone South / Land | party-selectable species/form |
 | 203 | Girafarig | SPECIES_GIRAFARIG | Direct acquisition | Random wild in 2 catchable method pool(s): Route 111 Ruins Exterior / Land; Safari Zone South / Land | party-selectable species/form |
 | 204 | Pineco | SPECIES_PINECO | Direct acquisition | Random wild in 3 catchable method pool(s): Altering Cave / Land; Route 103 / Rock Smash; Safari Zone Northeast / Land | party-selectable species/form |
@@ -2157,7 +2188,7 @@ This appendix covers every runtime species/form ID. `Direct acquisition` means t
 | 209 | Snubbull | SPECIES_SNUBBULL | Breeding / obtainable evolution family | The permanent evolution family is obtainable through Granbull; breed or traverse the applicable branch to obtain this stage. | party-selectable species/form |
 | 210 | Granbull | SPECIES_GRANBULL | Direct acquisition | Random wild in 1 catchable method pool(s): Safari Zone Southeast / Land | party-selectable species/form |
 | 211 | Qwilfish | SPECIES_QWILFISH | Direct acquisition | Random wild in 2 catchable method pool(s): Route 115 / Good Rod; Route 115 / Super Rod | party-selectable species/form |
-| 212 | Scizor | SPECIES_SCIZOR | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
+| 212 | Scizor | SPECIES_SCIZOR | Evolution from obtainable Pokémon | Scyther → Scizor via Trade Item (ITEM_METAL_COAT) | party-selectable species/form |
 | 213 | Shuckle | SPECIES_SHUCKLE | Direct acquisition | Random wild in 8 catchable method pool(s): Altering Cave / Land; Altering Cave / Rock Smash; Altering Cave 1F / Rock Smash; Altering Cave B1F / Rock Smash; Route 111 / Rock Smash; Route 114 / Rock Smash; Safari Zone Northeast / Rock Smash; Victory Road B1F / Rock Smash | party-selectable species/form |
 | 214 | Heracross | SPECIES_HERACROSS | Direct acquisition | Random wild in 3 catchable method pool(s): Ashen Woods / Land; Route 121 / Rock Smash; Safari Zone North / Land | party-selectable species/form |
 | 215 | Sneasel | SPECIES_SNEASEL | Direct acquisition | Random wild in 1 catchable method pool(s): Seaspray Cave B1F / Land | party-selectable species/form |
@@ -2210,10 +2241,10 @@ This appendix covers every runtime species/form ID. `Direct acquisition` means t
 | 262 | Mightyena | SPECIES_MIGHTYENA | Direct acquisition | Random wild in 1 catchable method pool(s): Route 123 / Land | party-selectable species/form |
 | 263 | Zigzagoon | SPECIES_ZIGZAGOON | Direct acquisition | Random wild in 1 catchable method pool(s): Route 101 / Land | party-selectable species/form |
 | 264 | Linoone | SPECIES_LINOONE | Direct acquisition | Random wild in 2 catchable method pool(s): Route 118 / Land; Route 123 / Land | party-selectable species/form |
-| 265 | Wurmple | SPECIES_WURMPLE | Direct acquisition | Random wild in 2 catchable method pool(s): Berry tree encounter table 1: G Berry Stage Sprouted / Land; Route 101 / Land | party-selectable species/form |
-| 266 | Silcoon | SPECIES_SILCOON | Direct acquisition | Random wild in 2 catchable method pool(s): Berry tree encounter table 2: G Berry Stage Taller / Land; Petalburg Woods / Land | party-selectable species/form |
+| 265 | Wurmple | SPECIES_WURMPLE | Direct acquisition | Random wild in 2 catchable method pool(s): Berry tree encounter table 1: G Berry Stage Sprouted / Berry Tree; Route 101 / Land | party-selectable species/form |
+| 266 | Silcoon | SPECIES_SILCOON | Direct acquisition | Random wild in 2 catchable method pool(s): Berry tree encounter table 2: G Berry Stage Taller / Berry Tree; Petalburg Woods / Land | party-selectable species/form |
 | 267 | Beautifly | SPECIES_BEAUTIFLY | Direct acquisition | Random wild in 1 catchable method pool(s): Route 101 / Honey | party-selectable species/form |
-| 268 | Cascoon | SPECIES_CASCOON | Direct acquisition | Random wild in 2 catchable method pool(s): Berry tree encounter table 2: G Berry Stage Taller / Land; Petalburg Woods / Land | party-selectable species/form |
+| 268 | Cascoon | SPECIES_CASCOON | Direct acquisition | Random wild in 2 catchable method pool(s): Berry tree encounter table 2: G Berry Stage Taller / Berry Tree; Petalburg Woods / Land | party-selectable species/form |
 | 269 | Dustox | SPECIES_DUSTOX | Direct acquisition | Random wild in 1 catchable method pool(s): Route 101 / Honey | party-selectable species/form |
 | 270 | Lotad | SPECIES_LOTAD | Direct acquisition | Random wild in 1 catchable method pool(s): Route 102 / Land | party-selectable species/form |
 | 271 | Lombre | SPECIES_LOMBRE | Direct acquisition | Random wild in 1 catchable method pool(s): Route 114 / Land | party-selectable species/form |
@@ -2258,8 +2289,8 @@ This appendix covers every runtime species/form ID. `Direct acquisition` means t
 | 310 | Manectric | SPECIES_MANECTRIC | Direct acquisition | Random wild in 1 catchable method pool(s): Route 118 / Land | party-selectable species/form |
 | 311 | Plusle | SPECIES_PLUSLE | Direct acquisition | Random wild in 1 catchable method pool(s): Route 110 / Land | party-selectable species/form |
 | 312 | Minun | SPECIES_MINUN | Direct acquisition | Random wild in 1 catchable method pool(s): Route 110 / Land | party-selectable species/form |
-| 313 | Volbeat | SPECIES_VOLBEAT | Direct acquisition | Random wild in 2 catchable method pool(s): Berry tree encounter table 3: G Berry Stage Flowering / Land; Route 117 / Land | party-selectable species/form |
-| 314 | Illumise | SPECIES_ILLUMISE | Direct acquisition | Random wild in 2 catchable method pool(s): Berry tree encounter table 3: G Berry Stage Flowering / Land; Route 117 / Land | party-selectable species/form |
+| 313 | Volbeat | SPECIES_VOLBEAT | Direct acquisition | Random wild in 2 catchable method pool(s): Berry tree encounter table 3: G Berry Stage Flowering / Berry Tree; Route 117 / Land | party-selectable species/form |
+| 314 | Illumise | SPECIES_ILLUMISE | Direct acquisition | Random wild in 2 catchable method pool(s): Berry tree encounter table 3: G Berry Stage Flowering / Berry Tree; Route 117 / Land | party-selectable species/form |
 | 315 | Roselia | SPECIES_ROSELIA | Direct acquisition | Random wild in 1 catchable method pool(s): Route 117 / Land | party-selectable species/form |
 | 316 | Gulpin | SPECIES_GULPIN | Direct acquisition | Random wild in 1 catchable method pool(s): Route 110 / Land | party-selectable species/form |
 | 317 | Swalot | SPECIES_SWALOT | Evolution from obtainable Pokémon | Gulpin → Swalot via Level (26) | party-selectable species/form |
@@ -2357,15 +2388,15 @@ This appendix covers every runtime species/form ID. `Direct acquisition` means t
 | 409 | Rampardos | SPECIES_RAMPARDOS | Evolution from obtainable Pokémon | Cranidos → Rampardos via Level (30) | party-selectable species/form |
 | 410 | Shieldon | SPECIES_SHIELDON | Direct acquisition | Fossil restoration: Rustboro Devon Corporation (Restore ITEM_ARMOR_FOSSIL) | party-selectable species/form |
 | 411 | Bastiodon | SPECIES_BASTIODON | Evolution from obtainable Pokémon | Shieldon → Bastiodon via Level (30) | party-selectable species/form |
-| 412 | Burmy | SPECIES_BURMY | Direct acquisition | Random wild in 1 catchable method pool(s): Berry tree encounter table 4: G Berry Stage Berries / Land | party-selectable species/form |
+| 412 | Burmy | SPECIES_BURMY | Direct acquisition | Random wild in 1 catchable method pool(s): Berry tree encounter table 4: G Berry Stage Berries / Berry Tree | party-selectable species/form |
 | 413 | Wormadam | SPECIES_WORMADAM | Evolution from obtainable Pokémon | Burmy → Wormadam via Level Female (20) | party-selectable species/form |
 | 414 | Mothim | SPECIES_MOTHIM | Evolution from obtainable Pokémon | Burmy → Mothim via Level Male (20) | party-selectable species/form |
-| 415 | Combee | SPECIES_COMBEE | Direct acquisition | Random wild in 2 catchable method pool(s): Berry tree encounter table 3: G Berry Stage Flowering / Land; Dewford Meadow / Land | party-selectable species/form |
+| 415 | Combee | SPECIES_COMBEE | Direct acquisition | Random wild in 2 catchable method pool(s): Berry tree encounter table 3: G Berry Stage Flowering / Berry Tree; Dewford Meadow / Land | party-selectable species/form |
 | 416 | Vespiquen | SPECIES_VESPIQUEN | Evolution from obtainable Pokémon | Combee → Vespiquen via Level Female (21) | party-selectable species/form |
 | 417 | Pachirisu | SPECIES_PACHIRISU | Direct acquisition | Random wild in 1 catchable method pool(s): Route 110 / Land | party-selectable species/form |
 | 418 | Buizel | SPECIES_BUIZEL | Direct acquisition | Random wild in 1 catchable method pool(s): Route 106 / Land | party-selectable species/form |
 | 419 | Floatzel | SPECIES_FLOATZEL | Direct acquisition | Random wild in 5 catchable method pool(s): Ever Grande City / Surf; Lilycove City / Surf; Mossdeep City / Surf; Route 105 / Land; Route 119 / Surf | party-selectable species/form |
-| 420 | Cherubi | SPECIES_CHERUBI | Direct acquisition | Random wild in 2 catchable method pool(s): Berry tree encounter table 3: G Berry Stage Flowering / Land; Petalburg Woods / Rock Smash | party-selectable species/form |
+| 420 | Cherubi | SPECIES_CHERUBI | Direct acquisition | Random wild in 2 catchable method pool(s): Berry tree encounter table 3: G Berry Stage Flowering / Berry Tree; Petalburg Woods / Rock Smash | party-selectable species/form |
 | 421 | Cherrim | SPECIES_CHERRIM | Evolution from obtainable Pokémon | Cherubi → Cherrim via Level (25) | party-selectable species/form |
 | 422 | Shellos | SPECIES_SHELLOS | Direct acquisition | Random wild in 2 catchable method pool(s): Route 103 / Land; Route 110 / Surf | party-selectable species/form |
 | 423 | Gastrodon | SPECIES_GASTRODON | Direct acquisition | Random wild in 4 catchable method pool(s): Altering Cave / Surf; Altering Cave B1F / Surf; Route 103 / Surf; Route 110 / Surf | party-selectable species/form |
@@ -2391,7 +2422,7 @@ This appendix covers every runtime species/form ID. `Direct acquisition` means t
 | 443 | Gible | SPECIES_GIBLE | Direct acquisition | Random wild in 1 catchable method pool(s): Route 111 / Land | party-selectable species/form |
 | 444 | Gabite | SPECIES_GABITE | Direct acquisition | Random wild in 5 catchable method pool(s): Sandstrewn Ruins / Land; Sandstrewn Ruins 2F / Land; Sandstrewn Ruins 3F / Land; Sandstrewn Ruins B1F / Land; Victory Road 1F / Land | party-selectable species/form |
 | 445 | Garchomp | SPECIES_GARCHOMP | Evolution from obtainable Pokémon | Gabite → Garchomp via Level (48) | party-selectable species/form |
-| 446 | Munchlax | SPECIES_MUNCHLAX | Direct acquisition | Random wild in 2 catchable method pool(s): Berry tree encounter table 4: G Berry Stage Berries / Land; Route 115 / Land \| Prize Pokémon: Mauville Game Corner (Coin-exchange Pokémon prize) | party-selectable species/form |
+| 446 | Munchlax | SPECIES_MUNCHLAX | Direct acquisition | Random wild in 2 catchable method pool(s): Berry tree encounter table 4: G Berry Stage Berries / Berry Tree; Route 115 / Land \| Prize Pokémon: Mauville Game Corner (Coin-exchange Pokémon prize) | party-selectable species/form |
 | 447 | Riolu | SPECIES_RIOLU | Direct acquisition | Random wild in 1 catchable method pool(s): Route 116 / Land | party-selectable species/form |
 | 448 | Lucario | SPECIES_LUCARIO | Direct acquisition | Random wild in 3 catchable method pool(s): Altering Cave / Land; Altering Cave 1F / Land; Altering Cave B1F / Land | party-selectable species/form |
 | 449 | Hippopotas | SPECIES_HIPPOPOTAS | Direct acquisition | Random wild in 1 catchable method pool(s): Route 111 / Land | party-selectable species/form |
@@ -2485,7 +2516,7 @@ This appendix covers every runtime species/form ID. `Direct acquisition` means t
 | 537 | Seismitoad | SPECIES_SEISMITOAD | Direct acquisition | Random wild in 2 catchable method pool(s): Safari Zone Southwest / Land; Safari Zone Southwest / Surf | party-selectable species/form |
 | 538 | Throh | SPECIES_THROH | Direct acquisition | Random wild in 2 catchable method pool(s): Route 112 / Honey; Route 112 / Land | party-selectable species/form |
 | 539 | Sawk | SPECIES_SAWK | Direct acquisition | Random wild in 2 catchable method pool(s): Route 112 / Honey; Route 112 / Land | party-selectable species/form |
-| 540 | Sewaddle | SPECIES_SEWADDLE | Direct acquisition | Random wild in 2 catchable method pool(s): Berry tree encounter table 1: G Berry Stage Sprouted / Land; Route 101 / Land | party-selectable species/form |
+| 540 | Sewaddle | SPECIES_SEWADDLE | Direct acquisition | Random wild in 2 catchable method pool(s): Berry tree encounter table 1: G Berry Stage Sprouted / Berry Tree; Route 101 / Land | party-selectable species/form |
 | 541 | Swadloon | SPECIES_SWADLOON | Direct acquisition | Random wild in 1 catchable method pool(s): Route 101 / Honey | party-selectable species/form |
 | 542 | Leavanny | SPECIES_LEAVANNY | Evolution from obtainable Pokémon | Swadloon → Leavanny via Friendship | party-selectable species/form |
 | 543 | Venipede | SPECIES_VENIPEDE | Direct acquisition | Random wild in 1 catchable method pool(s): Petalburg Woods 2 / Land | party-selectable species/form |
@@ -2496,9 +2527,9 @@ This appendix covers every runtime species/form ID. `Direct acquisition` means t
 | 548 | Petilil | SPECIES_PETILIL | Direct acquisition | Random wild in 1 catchable method pool(s): Rustboro City / Land | party-selectable species/form |
 | 549 | Lilligant | SPECIES_LILLIGANT | Evolution from obtainable Pokémon | Petilil → Lilligant via Use/hold ITEM_SUN_STONE | party-selectable species/form |
 | 550 | Basculin | SPECIES_BASCULIN | Direct acquisition | Random wild in 5 catchable method pool(s): Route 111 / Good Rod; Route 111 / Super Rod; Route 118 / Super Rod; Victory Road B2F / Good Rod; Victory Road B2F / Super Rod | party-selectable species/form |
-| 551 | Sandile | SPECIES_SANDILE | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 552 | Krokorok | SPECIES_KROKOROK | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 553 | Krookodile | SPECIES_KROOKODILE | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
+| 551 | Sandile | SPECIES_SANDILE | Direct acquisition | Random wild in 1 catchable method pool(s): Route 111 / Land | party-selectable species/form |
+| 552 | Krokorok | SPECIES_KROKOROK | Evolution from obtainable Pokémon | Sandile → Krokorok via Level (29) | party-selectable species/form |
+| 553 | Krookodile | SPECIES_KROOKODILE | Evolution from obtainable Pokémon | Sandile → Krokorok via Level (29) ; Krokorok → Krookodile via Level (40) | party-selectable species/form |
 | 554 | Darumaka | SPECIES_DARUMAKA | Direct acquisition | Random wild in 9 catchable method pool(s): Mirage Tower 1F / Land; Mirage Tower 2F / Land; Mirage Tower 3F / Land; Mirage Tower 4F / Land; Mirage Tower B1F / Land; Sandstrewn Ruins / Land; Sandstrewn Ruins 2F / Land; Sandstrewn Ruins 3F / Land; Sandstrewn Ruins B1F / Land | party-selectable species/form |
 | 555 | Darmanitan | SPECIES_DARMANITAN | Evolution from obtainable Pokémon | Darumaka → Darmanitan via Level (35) | party-selectable species/form |
 | 556 | Maractus | SPECIES_MARACTUS | Direct acquisition | Random wild in 1 catchable method pool(s): Route 111 / Land | party-selectable species/form |
@@ -2513,8 +2544,8 @@ This appendix covers every runtime species/form ID. `Direct acquisition` means t
 | 565 | Carracosta | SPECIES_CARRACOSTA | Evolution from obtainable Pokémon | Tirtouga → Carracosta via Level (37) | party-selectable species/form |
 | 566 | Archen | SPECIES_ARCHEN | Direct acquisition | Fossil restoration: Rustboro Devon Corporation (Restore ITEM_PLUME_FOSSIL) | party-selectable species/form |
 | 567 | Archeops | SPECIES_ARCHEOPS | Evolution from obtainable Pokémon | Archen → Archeops via Level (37) | party-selectable species/form |
-| 568 | Trubbish | SPECIES_TRUBBISH | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 569 | Garbodor | SPECIES_GARBODOR | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
+| 568 | Trubbish | SPECIES_TRUBBISH | Direct acquisition | Random wild in 1 catchable method pool(s): Route 110 / Land | party-selectable species/form |
+| 569 | Garbodor | SPECIES_GARBODOR | Evolution from obtainable Pokémon | Trubbish → Garbodor via Level (36) | party-selectable species/form |
 | 570 | Zorua | SPECIES_ZORUA | Direct acquisition | Random wild in 1 catchable method pool(s): Route 118 / Land | party-selectable species/form |
 | 571 | Zoroark | SPECIES_ZOROARK | Direct acquisition | Random wild in 1 catchable method pool(s): Route 121 / Land | party-selectable species/form |
 | 572 | Minccino | SPECIES_MINCCINO | Direct acquisition | Random wild in 1 catchable method pool(s): Route 117 / Land | party-selectable species/form |
@@ -2609,12 +2640,12 @@ This appendix covers every runtime species/form ID. `Direct acquisition` means t
 | 661 | Fletchling | SPECIES_FLETCHLING | Breeding / obtainable evolution family | The permanent evolution family is obtainable through Fletchinder; breed or traverse the applicable branch to obtain this stage. | party-selectable species/form |
 | 662 | Fletchinder | SPECIES_FLETCHINDER | Direct acquisition | Random wild in 1 catchable method pool(s): Route 113 / Land | party-selectable species/form |
 | 663 | Talonflame | SPECIES_TALONFLAME | Direct acquisition | Random wild in 1 catchable method pool(s): Route 113 / Honey | party-selectable species/form |
-| 664 | Scatterbug | SPECIES_SCATTERBUG | Direct acquisition | Random wild in 1 catchable method pool(s): Berry tree encounter table 1: G Berry Stage Sprouted / Land | party-selectable species/form |
-| 665 | Spewpa | SPECIES_SPEWPA | Direct acquisition | Random wild in 1 catchable method pool(s): Berry tree encounter table 2: G Berry Stage Taller / Land | party-selectable species/form |
+| 664 | Scatterbug | SPECIES_SCATTERBUG | Direct acquisition | Random wild in 1 catchable method pool(s): Berry tree encounter table 1: G Berry Stage Sprouted / Berry Tree | party-selectable species/form |
+| 665 | Spewpa | SPECIES_SPEWPA | Direct acquisition | Random wild in 1 catchable method pool(s): Berry tree encounter table 2: G Berry Stage Taller / Berry Tree | party-selectable species/form |
 | 666 | Vivillon | SPECIES_VIVILLON | Evolution from obtainable Pokémon | Spewpa → Vivillon via Level (12) | party-selectable species/form |
 | 667 | Litleo | SPECIES_LITLEO | Direct acquisition | Random wild in 1 catchable method pool(s): Route 104 / Land | party-selectable species/form |
 | 668 | Pyroar | SPECIES_PYROAR | Evolution from obtainable Pokémon | Litleo → Pyroar via Level Male (35) | party-selectable species/form |
-| 669 | Flabebe | SPECIES_FLABEBE | Direct acquisition | Random wild in 2 catchable method pool(s): Berry tree encounter table 3: G Berry Stage Flowering / Land; Dewford Meadow / Land | party-selectable species/form |
+| 669 | Flabebe | SPECIES_FLABEBE | Direct acquisition | Random wild in 2 catchable method pool(s): Berry tree encounter table 3: G Berry Stage Flowering / Berry Tree; Dewford Meadow / Land | party-selectable species/form |
 | 670 | Floette | SPECIES_FLOETTE | Direct acquisition | Random wild in 1 catchable method pool(s): Route 117 / Rock Smash | party-selectable species/form |
 | 671 | Florges | SPECIES_FLORGES | Evolution from obtainable Pokémon | Floette → Florges via Use/hold ITEM_SHINY_STONE | party-selectable species/form |
 | 672 | Skiddo | SPECIES_SKIDDO | Direct acquisition | Random wild in 1 catchable method pool(s): Route 116 / Land | party-selectable species/form |
@@ -2676,7 +2707,7 @@ This appendix covers every runtime species/form ID. `Direct acquisition` means t
 | 728 | Popplio | SPECIES_POPPLIO | Direct acquisition | Starter choice: Littleroot opening (Selectable Alola starter) \| Prize Pokémon: Mauville Game Corner (Coin-exchange Pokémon prize) | party-selectable species/form |
 | 729 | Brionne | SPECIES_BRIONNE | Evolution from obtainable Pokémon | Popplio → Brionne via Level (16) | party-selectable species/form |
 | 730 | Primarina | SPECIES_PRIMARINA | Direct acquisition | Random wild in 2 catchable method pool(s): Route 126 / Surf; Route 128 / Super Rod | party-selectable species/form |
-| 731 | Pikipek | SPECIES_PIKIPEK | Direct acquisition | Random wild in 1 catchable method pool(s): Berry tree encounter table 4: G Berry Stage Berries / Land | party-selectable species/form |
+| 731 | Pikipek | SPECIES_PIKIPEK | Direct acquisition | Random wild in 1 catchable method pool(s): Berry tree encounter table 4: G Berry Stage Berries / Berry Tree | party-selectable species/form |
 | 732 | Trumbeak | SPECIES_TRUMBEAK | Direct acquisition | Random wild in 1 catchable method pool(s): Ashen Woods / Land | party-selectable species/form |
 | 733 | Toucannon | SPECIES_TOUCANNON | Direct acquisition | Random wild in 1 catchable method pool(s): Ashen Woods / Honey | party-selectable species/form |
 | 734 | Yungoos | SPECIES_YUNGOOS | Direct acquisition | Random wild in 1 catchable method pool(s): Route 104 / Honey | party-selectable species/form |
@@ -2684,10 +2715,10 @@ This appendix covers every runtime species/form ID. `Direct acquisition` means t
 | 736 | Grubbin | SPECIES_GRUBBIN | Direct acquisition | Random wild in 1 catchable method pool(s): Route 103 / Land | party-selectable species/form |
 | 737 | Charjabug | SPECIES_CHARJABUG | Direct acquisition | Random wild in 1 catchable method pool(s): Route 103 / Honey | party-selectable species/form |
 | 738 | Vikavolt | SPECIES_VIKAVOLT | Evolution from obtainable Pokémon | Charjabug → Vikavolt via Specific Mapsec (MAPSEC_NEW_MAUVILLE) | party-selectable species/form |
-| 739 | Crabrawler | SPECIES_CRABRAWLER | Direct acquisition | Random wild in 3 catchable method pool(s): Berry tree encounter table 4: G Berry Stage Berries / Land; Route 105 / Land; Route 106 / Land | party-selectable species/form |
+| 739 | Crabrawler | SPECIES_CRABRAWLER | Direct acquisition | Random wild in 3 catchable method pool(s): Berry tree encounter table 4: G Berry Stage Berries / Berry Tree; Route 105 / Land; Route 106 / Land | party-selectable species/form |
 | 740 | Crabominable | SPECIES_CRABOMINABLE | Evolution from obtainable Pokémon | Crabrawler → Crabominable via Use/hold ITEM_ICE_STONE | party-selectable species/form |
 | 741 | Oricorio | SPECIES_ORICORIO | Direct acquisition | Random wild in 1 catchable method pool(s): Dewford Meadow / Land | party-selectable species/form |
-| 742 | Cutiefly | SPECIES_CUTIEFLY | Direct acquisition | Random wild in 2 catchable method pool(s): Berry tree encounter table 3: G Berry Stage Flowering / Land; Dewford Meadow / Land | party-selectable species/form |
+| 742 | Cutiefly | SPECIES_CUTIEFLY | Direct acquisition | Random wild in 2 catchable method pool(s): Berry tree encounter table 3: G Berry Stage Flowering / Berry Tree; Dewford Meadow / Land | party-selectable species/form |
 | 743 | Ribombee | SPECIES_RIBOMBEE | Direct acquisition | Random wild in 2 catchable method pool(s): Verdanturf Meadow / Honey; Verdanturf Meadow / Land | party-selectable species/form |
 | 744 | Rockruff | SPECIES_ROCKRUFF | Direct acquisition | Random wild in 1 catchable method pool(s): Route 111 Ruins Exterior / Land | party-selectable species/form |
 | 745 | Lycanroc | SPECIES_LYCANROC | Evolution from obtainable Pokémon | Rockruff → Lycanroc via Level Day (25) | party-selectable species/form |
@@ -2724,7 +2755,7 @@ This appendix covers every runtime species/form ID. `Direct acquisition` means t
 | 776 | Turtonator | SPECIES_TURTONATOR | Direct acquisition | Random wild in 11 catchable method pool(s): Jagged Pass / Land; Magma Hideout 1F / Land; Magma Hideout 2F 1R / Land; Magma Hideout 2F 2R / Land; Magma Hideout 2F 3R / Land; Magma Hideout 3F 1R / Land; Magma Hideout 3F 2R / Land; Magma Hideout 3F 3R / Land; Magma Hideout 4F / Land; Scorched Slab B2F / Land; Scorched Slab Heatrans Room / Land | party-selectable species/form |
 | 777 | Togedemaru | SPECIES_TOGEDEMARU | Direct acquisition | Random wild in 2 catchable method pool(s): New Mauville Entrance / Land; New Mauville Inside / Land | party-selectable species/form |
 | 778 | Mimikyu | SPECIES_MIMIKYU | Direct acquisition | Random wild in 4 catchable method pool(s): Mt Pyre 4F / Land; Mt Pyre 5F / Land; Mt Pyre 6F / Land; Route 120 / Land | party-selectable species/form |
-| 779 | Bruxish | SPECIES_BRUXISH | Direct acquisition | Random wild in 5 catchable method pool(s): Lilycove City / Good Rod; Lilycove City / Super Rod; Lilycove City / Surf; Route 109 / Good Rod; Route 109 / Super Rod | party-selectable species/form |
+| 779 | Bruxish | SPECIES_BRUXISH | Direct acquisition | Random wild in 4 catchable method pool(s): Lilycove City / Good Rod; Lilycove City / Super Rod; Lilycove City / Surf; Route 109 / Super Rod | party-selectable species/form |
 | 780 | Drampa | SPECIES_DRAMPA | Direct acquisition | Random wild in 1 catchable method pool(s): Meteor Falls B1F 1R / Land | party-selectable species/form |
 | 781 | Dhelmise | SPECIES_DHELMISE | Direct acquisition | Random wild in 14 catchable method pool(s): Abandoned Ship Hidden Floor Corridors / Good Rod; Abandoned Ship Hidden Floor Corridors / Super Rod; Abandoned Ship Rooms B1F / Good Rod; Abandoned Ship Rooms B1F / Super Rod; Pacifidlog Town / Super Rod; Route 127 / Super Rod; Seafloor Cavern Room1 / Land; Seafloor Cavern Room2 / Land; Seafloor Cavern Room3 / Land; Seafloor Cavern Room4 / Land; Seafloor Cavern Room5 / Land; Seafloor Cavern Room6 / Land; Seafloor Cavern Room7 / Land; Seafloor Cavern Room8 / Land | party-selectable species/form |
 | 782 | Jangmo-o | SPECIES_JANGMO_O | Direct acquisition | Random wild in 1 catchable method pool(s): Jagged Pass / Land | party-selectable species/form |
@@ -2761,44 +2792,44 @@ This appendix covers every runtime species/form ID. `Direct acquisition` means t
 | 813 | Scorbunny | SPECIES_SCORBUNNY | Direct acquisition | Random wild in 1 catchable method pool(s): Route 117 / Land | party-selectable species/form |
 | 814 | Raboot | SPECIES_RABOOT | Evolution from obtainable Pokémon | Scorbunny → Raboot via Level (16) | party-selectable species/form |
 | 815 | Cinderace | SPECIES_CINDERACE | Evolution from obtainable Pokémon | Scorbunny → Raboot via Level (16) ; Raboot → Cinderace via Level (35) | party-selectable species/form |
-| 816 | Sobble | SPECIES_SOBBLE | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 817 | Drizzile | SPECIES_DRIZZILE | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 818 | Inteleon | SPECIES_INTELEON | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 819 | Skwovet | SPECIES_SKWOVET | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 820 | Greedent | SPECIES_GREEDENT | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
+| 816 | Sobble | SPECIES_SOBBLE | Direct acquisition | Random wild in 1 catchable method pool(s): Route 104 / Old Rod | party-selectable species/form |
+| 817 | Drizzile | SPECIES_DRIZZILE | Evolution from obtainable Pokémon | Sobble → Drizzile via Level (16) | party-selectable species/form |
+| 818 | Inteleon | SPECIES_INTELEON | Evolution from obtainable Pokémon | Sobble → Drizzile via Level (16) ; Drizzile → Inteleon via Level (35) | party-selectable species/form |
+| 819 | Skwovet | SPECIES_SKWOVET | Direct acquisition | Random wild in 1 catchable method pool(s): Route 101 / Honey | party-selectable species/form |
+| 820 | Greedent | SPECIES_GREEDENT | Evolution from obtainable Pokémon | Skwovet → Greedent via Level (24) | party-selectable species/form |
 | 821 | Rookidee | SPECIES_ROOKIDEE | Direct acquisition | Random wild in 1 catchable method pool(s): Route 116 / Land | party-selectable species/form |
 | 822 | Corvisquire | SPECIES_CORVISQUIRE | Evolution from obtainable Pokémon | Rookidee → Corvisquire via Level (18) | party-selectable species/form |
 | 823 | Corviknight | SPECIES_CORVIKNIGHT | Evolution from obtainable Pokémon | Rookidee → Corvisquire via Level (18) ; Corvisquire → Corviknight via Level (38) | party-selectable species/form |
-| 824 | Blipbug | SPECIES_BLIPBUG | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 825 | Dottler | SPECIES_DOTTLER | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 826 | Orbeetle | SPECIES_ORBEETLE | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 827 | Nickit | SPECIES_NICKIT | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 828 | Thievul | SPECIES_THIEVUL | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 829 | Gossifleur | SPECIES_GOSSIFLEUR | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 830 | Eldegoss | SPECIES_ELDEGOSS | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 831 | Wooloo | SPECIES_WOOLOO | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 832 | Dubwool | SPECIES_DUBWOOL | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 833 | Chewtle | SPECIES_CHEWTLE | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 834 | Drednaw | SPECIES_DREDNAW | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
+| 824 | Blipbug | SPECIES_BLIPBUG | Direct acquisition | Random wild in 1 catchable method pool(s): Petalburg Woods 2 / Land | party-selectable species/form |
+| 825 | Dottler | SPECIES_DOTTLER | Evolution from obtainable Pokémon | Blipbug → Dottler via Level (10) | party-selectable species/form |
+| 826 | Orbeetle | SPECIES_ORBEETLE | Evolution from obtainable Pokémon | Blipbug → Dottler via Level (10) ; Dottler → Orbeetle via Level (30) | party-selectable species/form |
+| 827 | Nickit | SPECIES_NICKIT | Direct acquisition | Random wild in 1 catchable method pool(s): Route 116 / Honey | party-selectable species/form |
+| 828 | Thievul | SPECIES_THIEVUL | Evolution from obtainable Pokémon | Nickit → Thievul via Level (18) | party-selectable species/form |
+| 829 | Gossifleur | SPECIES_GOSSIFLEUR | Direct acquisition | Random wild in 1 catchable method pool(s): Route 117 / Land | party-selectable species/form |
+| 830 | Eldegoss | SPECIES_ELDEGOSS | Evolution from obtainable Pokémon | Gossifleur → Eldegoss via Level (20) | party-selectable species/form |
+| 831 | Wooloo | SPECIES_WOOLOO | Direct acquisition | Random wild in 1 catchable method pool(s): Route 117 / Land | party-selectable species/form |
+| 832 | Dubwool | SPECIES_DUBWOOL | Evolution from obtainable Pokémon | Wooloo → Dubwool via Level (24) | party-selectable species/form |
+| 833 | Chewtle | SPECIES_CHEWTLE | Direct acquisition | Random wild in 1 catchable method pool(s): Route 104 / Old Rod | party-selectable species/form |
+| 834 | Drednaw | SPECIES_DREDNAW | Evolution from obtainable Pokémon | Chewtle → Drednaw via Level (22) | party-selectable species/form |
 | 835 | Yamper | SPECIES_YAMPER | Direct acquisition | Random wild in 1 catchable method pool(s): Route 103 / Land | party-selectable species/form |
 | 836 | Boltund | SPECIES_BOLTUND | Evolution from obtainable Pokémon | Yamper → Boltund via Level (25) | party-selectable species/form |
-| 837 | Rolycoly | SPECIES_ROLYCOLY | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 838 | Carkol | SPECIES_CARKOL | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 839 | Coalossal | SPECIES_COALOSSAL | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 840 | Applin | SPECIES_APPLIN | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 841 | Flapple | SPECIES_FLAPPLE | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 842 | Appletun | SPECIES_APPLETUN | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 843 | Silicobra | SPECIES_SILICOBRA | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 844 | Sandaconda | SPECIES_SANDACONDA | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
+| 837 | Rolycoly | SPECIES_ROLYCOLY | Direct acquisition | Random wild in 1 catchable method pool(s): Granite Cave 1F / Land | party-selectable species/form |
+| 838 | Carkol | SPECIES_CARKOL | Evolution from obtainable Pokémon | Rolycoly → Carkol via Level (18) | party-selectable species/form |
+| 839 | Coalossal | SPECIES_COALOSSAL | Evolution from obtainable Pokémon | Rolycoly → Carkol via Level (18) ; Carkol → Coalossal via Level (34) | party-selectable species/form |
+| 840 | Applin | SPECIES_APPLIN | Direct acquisition | Random wild in 1 catchable method pool(s): Petalburg Woods 2 / Land | party-selectable species/form |
+| 841 | Flapple | SPECIES_FLAPPLE | Evolution from obtainable Pokémon | Applin → Flapple via Use/hold ITEM_NONE | party-selectable species/form |
+| 842 | Appletun | SPECIES_APPLETUN | Evolution from obtainable Pokémon | Applin → Appletun via Use/hold ITEM_NONE | party-selectable species/form |
+| 843 | Silicobra | SPECIES_SILICOBRA | Direct acquisition | Random wild in 1 catchable method pool(s): Route 111 / Land | party-selectable species/form |
+| 844 | Sandaconda | SPECIES_SANDACONDA | Evolution from obtainable Pokémon | Silicobra → Sandaconda via Level (36) | party-selectable species/form |
 | 845 | Cramorant | SPECIES_CRAMORANT | Direct acquisition | Random wild in 1 catchable method pool(s): Route 119 / Land | party-selectable species/form |
-| 846 | Arrokuda | SPECIES_ARROKUDA | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 847 | Barraskewda | SPECIES_BARRASKEWDA | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
+| 846 | Arrokuda | SPECIES_ARROKUDA | Direct acquisition | Random wild in 1 catchable method pool(s): Route 118 / Super Rod | party-selectable species/form |
+| 847 | Barraskewda | SPECIES_BARRASKEWDA | Evolution from obtainable Pokémon | Arrokuda → Barraskewda via Level (26) | party-selectable species/form |
 | 848 | Toxel | SPECIES_TOXEL | Direct acquisition | Random wild in 2 catchable method pool(s): Route 103 / Land; Route 110 / Land | party-selectable species/form |
 | 849 | Toxtricity | SPECIES_TOXTRICITY | Evolution from obtainable Pokémon | Toxel → Toxtricity via Level (30) | party-selectable species/form |
-| 850 | Sizzlipede | SPECIES_SIZZLIPEDE | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 851 | Centiskorch | SPECIES_CENTISKORCH | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 852 | Clobbopus | SPECIES_CLOBBOPUS | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 853 | Grapploct | SPECIES_GRAPPLOCT | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
+| 850 | Sizzlipede | SPECIES_SIZZLIPEDE | Direct acquisition | Random wild in 1 catchable method pool(s): Fiery Path / Land | party-selectable species/form |
+| 851 | Centiskorch | SPECIES_CENTISKORCH | Evolution from obtainable Pokémon | Sizzlipede → Centiskorch via Level (28) | party-selectable species/form |
+| 852 | Clobbopus | SPECIES_CLOBBOPUS | Direct acquisition | Random wild in 1 catchable method pool(s): Route 109 / Good Rod | party-selectable species/form |
+| 853 | Grapploct | SPECIES_GRAPPLOCT | Evolution from obtainable Pokémon | Clobbopus → Grapploct via Level while knowing MOVE_TAUNT | party-selectable species/form |
 | 854 | Sinistea | SPECIES_SINISTEA | Direct acquisition | Random wild in 1 catchable method pool(s): Route 121 / Land | party-selectable species/form |
 | 855 | Polteageist | SPECIES_POLTEAGEIST | Evolution from obtainable Pokémon | Sinistea → Polteageist via Use/hold ITEM_NONE | party-selectable species/form |
 | 856 | Hatenna | SPECIES_HATENNA | Direct acquisition | Random wild in 1 catchable method pool(s): Route 102 / Land | party-selectable species/form |
@@ -2807,28 +2838,28 @@ This appendix covers every runtime species/form ID. `Direct acquisition` means t
 | 859 | Impidimp | SPECIES_IMPIDIMP | Direct acquisition | Random wild in 1 catchable method pool(s): Petalburg Woods / Land | party-selectable species/form |
 | 860 | Morgrem | SPECIES_MORGREM | Evolution from obtainable Pokémon | Impidimp → Morgrem via Level (32) | party-selectable species/form |
 | 861 | Grimmsnarl | SPECIES_GRIMMSNARL | Evolution from obtainable Pokémon | Impidimp → Morgrem via Level (32) ; Morgrem → Grimmsnarl via Level (42) | party-selectable species/form |
-| 862 | Obstagoon | SPECIES_OBSTAGOON | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 863 | Perrserker | SPECIES_PERRSERKER | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 864 | Cursola | SPECIES_CURSOLA | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 865 | Sirfetch'd | SPECIES_SIRFETCHD | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 866 | Mr Rime | SPECIES_MR_RIME | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 867 | Runerigus | SPECIES_RUNERIGUS | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
+| 862 | Obstagoon | SPECIES_OBSTAGOON | Evolution from obtainable Pokémon | Zigzagoon Galarian → Linoone Galarian via Level (20) ; Linoone Galarian → Obstagoon via Level Night (35) | party-selectable species/form |
+| 863 | Perrserker | SPECIES_PERRSERKER | Evolution from obtainable Pokémon | Meowth Galarian → Perrserker via Level (28) | party-selectable species/form |
+| 864 | Cursola | SPECIES_CURSOLA | Evolution from obtainable Pokémon | Corsola Galarian → Cursola via Level (38) | party-selectable species/form |
+| 865 | Sirfetch'd | SPECIES_SIRFETCHD | Evolution from obtainable Pokémon | Farfetchd Galarian → Sirfetch'd via Level (0) | party-selectable species/form |
+| 866 | Mr Rime | SPECIES_MR_RIME | Evolution from obtainable Pokémon | Mr Mime Galarian → Mr Rime via Level (42) | party-selectable species/form |
+| 867 | Runerigus | SPECIES_RUNERIGUS | Evolution from obtainable Pokémon | Yamask Galarian → Runerigus via Level (0) | party-selectable species/form |
 | 868 | Milcery | SPECIES_MILCERY | Direct acquisition | Random wild in 1 catchable method pool(s): Verdanturf Meadow / Honey | party-selectable species/form |
 | 869 | Alcremie | SPECIES_ALCREMIE | Evolution from obtainable Pokémon | Milcery → Alcremie via Use/hold 0 | party-selectable species/form |
-| 870 | Falinks | SPECIES_FALINKS | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 871 | Pincurchin | SPECIES_PINCURCHIN | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 872 | Snom | SPECIES_SNOM | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 873 | Frosmoth | SPECIES_FROSMOTH | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 874 | Stonjourner | SPECIES_STONJOURNER | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 875 | Eiscue | SPECIES_EISCUE | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
+| 870 | Falinks | SPECIES_FALINKS | Direct acquisition | Random wild in 1 catchable method pool(s): Route 113 / Land | party-selectable species/form |
+| 871 | Pincurchin | SPECIES_PINCURCHIN | Direct acquisition | Random wild in 1 catchable method pool(s): Route 109 / Rock Smash | party-selectable species/form |
+| 872 | Snom | SPECIES_SNOM | Direct acquisition | Random wild in 1 catchable method pool(s): Shoal Cave Low Tide Ice Room / Land | party-selectable species/form |
+| 873 | Frosmoth | SPECIES_FROSMOTH | Evolution from obtainable Pokémon | Snom → Frosmoth via Friendship Night | party-selectable species/form |
+| 874 | Stonjourner | SPECIES_STONJOURNER | Direct acquisition | Random wild in 1 catchable method pool(s): Route 111 / Land | party-selectable species/form |
+| 875 | Eiscue | SPECIES_EISCUE | Direct acquisition | Random wild in 1 catchable method pool(s): Shoal Cave Low Tide Ice Room / Land | party-selectable species/form |
 | 876 | Indeedee | SPECIES_INDEEDEE | Direct acquisition | Random wild in 1 catchable method pool(s): Route 102 / Land | party-selectable species/form |
-| 877 | Morpeko | SPECIES_MORPEKO | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 878 | Cufant | SPECIES_CUFANT | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 879 | Copperajah | SPECIES_COPPERAJAH | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 880 | Dracozolt | SPECIES_DRACOZOLT | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 881 | Arctozolt | SPECIES_ARCTOZOLT | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 882 | Dracovish | SPECIES_DRACOVISH | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 883 | Arctovish | SPECIES_ARCTOVISH | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
+| 877 | Morpeko | SPECIES_MORPEKO | Direct acquisition | Random wild in 1 catchable method pool(s): Route 110 / Land | party-selectable species/form |
+| 878 | Cufant | SPECIES_CUFANT | Direct acquisition | Random wild in 1 catchable method pool(s): Safari Zone North / Land | party-selectable species/form |
+| 879 | Copperajah | SPECIES_COPPERAJAH | Evolution from obtainable Pokémon | Cufant → Copperajah via Level (34) | party-selectable species/form |
+| 880 | Dracozolt | SPECIES_DRACOZOLT | Direct acquisition | Random wild in 1 catchable method pool(s): Desert Underpass / Land | party-selectable species/form |
+| 881 | Arctozolt | SPECIES_ARCTOZOLT | Direct acquisition | Random wild in 1 catchable method pool(s): Desert Underpass / Land | party-selectable species/form |
+| 882 | Dracovish | SPECIES_DRACOVISH | Direct acquisition | Random wild in 1 catchable method pool(s): Desert Underpass / Land | party-selectable species/form |
+| 883 | Arctovish | SPECIES_ARCTOVISH | Direct acquisition | Random wild in 1 catchable method pool(s): Desert Underpass / Land | party-selectable species/form |
 | 884 | Duraludon | SPECIES_DURALUDON | Direct acquisition | Random wild in 1 catchable method pool(s): Route 115 / Land | party-selectable species/form |
 | 885 | Dreepy | SPECIES_DREEPY | Direct acquisition | Random wild in 4 catchable method pool(s): Granite Cave Stevens Room / Land; Route 101 / Land; Route 116 / Land; Route 119 / Land | party-selectable species/form |
 | 886 | Drakloak | SPECIES_DRAKLOAK | Evolution from obtainable Pokémon | Dreepy → Drakloak via Level (50) | party-selectable species/form |
@@ -2912,24 +2943,24 @@ This appendix covers every runtime species/form ID. `Direct acquisition` means t
 | 964 | Muk Alolan | SPECIES_MUK_ALOLAN | Direct acquisition | Random wild in 3 catchable method pool(s): Safari Zone Northwest / Good Rod; Safari Zone Northwest / Super Rod; Safari Zone Northwest / Surf | party-selectable species/form |
 | 965 | Exeggutor Alolan | SPECIES_EXEGGUTOR_ALOLAN | Direct acquisition | Prize Pokémon: Mauville Game Corner (Coin-exchange Pokémon prize) | party-selectable species/form |
 | 966 | Marowak Alolan | SPECIES_MAROWAK_ALOLAN | Direct acquisition | Random wild in 1 catchable method pool(s): Safari Zone North / Land \| Prize Pokémon: Mauville Game Corner (Coin-exchange Pokémon prize) | party-selectable species/form |
-| 967 | Meowth Galarian | SPECIES_MEOWTH_GALARIAN | Alternate form from obtainable base | Obtain Meowth, then use the applicable form-change mechanic. | party-selectable species/form |
+| 967 | Meowth Galarian | SPECIES_MEOWTH_GALARIAN | Direct acquisition | Random wild in 1 catchable method pool(s): Route 116 / Land | party-selectable species/form |
 | 968 | Ponyta Galarian | SPECIES_PONYTA_GALARIAN | Alternate form from obtainable base | Obtain Ponyta, then use the applicable form-change mechanic. | party-selectable species/form |
 | 969 | Rapidash Galarian | SPECIES_RAPIDASH_GALARIAN | Alternate form from obtainable base | Obtain Rapidash, then use the applicable form-change mechanic. | party-selectable species/form |
 | 970 | Slowpoke Galarian | SPECIES_SLOWPOKE_GALARIAN | Alternate form from obtainable base | Obtain Slowpoke, then use the applicable form-change mechanic. | party-selectable species/form |
 | 971 | Slowbro Galarian | SPECIES_SLOWBRO_GALARIAN | Alternate form from obtainable base | Obtain Slowbro, then use the applicable form-change mechanic. | party-selectable species/form |
-| 972 | Farfetchd Galarian | SPECIES_FARFETCHD_GALARIAN | Alternate form from obtainable base | Obtain Farfetch'd, then use the applicable form-change mechanic. | party-selectable species/form |
+| 972 | Farfetchd Galarian | SPECIES_FARFETCHD_GALARIAN | Direct acquisition | Random wild in 1 catchable method pool(s): Route 117 / Land | party-selectable species/form |
 | 973 | Weezing Galarian | SPECIES_WEEZING_GALARIAN | Alternate form from obtainable base | Obtain Weezing, then use the applicable form-change mechanic. | party-selectable species/form |
-| 974 | Mr Mime Galarian | SPECIES_MR_MIME_GALARIAN | Alternate form from obtainable base | Obtain Mr. Mime, then use the applicable form-change mechanic. | party-selectable species/form |
+| 974 | Mr Mime Galarian | SPECIES_MR_MIME_GALARIAN | Direct acquisition | Random wild in 1 catchable method pool(s): Shoal Cave Low Tide Ice Room / Land | party-selectable species/form |
 | 975 | Articuno Galarian | SPECIES_ARTICUNO_GALARIAN | Alternate form from obtainable base | Obtain Articuno, then use the applicable form-change mechanic. | party-selectable species/form |
 | 976 | Zapdos Galarian | SPECIES_ZAPDOS_GALARIAN | Alternate form from obtainable base | Obtain Zapdos, then use the applicable form-change mechanic. | party-selectable species/form |
 | 977 | Moltres Galarian | SPECIES_MOLTRES_GALARIAN | Alternate form from obtainable base | Obtain Moltres, then use the applicable form-change mechanic. | party-selectable species/form |
 | 978 | Slowking Galarian | SPECIES_SLOWKING_GALARIAN | Alternate form from obtainable base | Obtain Slowking, then use the applicable form-change mechanic. | party-selectable species/form |
-| 979 | Corsola Galarian | SPECIES_CORSOLA_GALARIAN | Alternate form from obtainable base | Obtain Corsola, then use the applicable form-change mechanic. | party-selectable species/form |
-| 980 | Zigzagoon Galarian | SPECIES_ZIGZAGOON_GALARIAN | Alternate form from obtainable base | Obtain Zigzagoon, then use the applicable form-change mechanic. | party-selectable species/form |
-| 981 | Linoone Galarian | SPECIES_LINOONE_GALARIAN | Alternate form from obtainable base | Obtain Linoone, then use the applicable form-change mechanic. | party-selectable species/form |
+| 979 | Corsola Galarian | SPECIES_CORSOLA_GALARIAN | Direct acquisition | Random wild in 1 catchable method pool(s): Mt Pyre Exterior / Land | party-selectable species/form |
+| 980 | Zigzagoon Galarian | SPECIES_ZIGZAGOON_GALARIAN | Direct acquisition | Random wild in 1 catchable method pool(s): Route 110 / Honey | party-selectable species/form |
+| 981 | Linoone Galarian | SPECIES_LINOONE_GALARIAN | Evolution from obtainable Pokémon | Zigzagoon Galarian → Linoone Galarian via Level (20) | party-selectable species/form |
 | 982 | Darumaka Galarian | SPECIES_DARUMAKA_GALARIAN | Alternate form from obtainable base | Obtain Darumaka, then use the applicable form-change mechanic. | party-selectable species/form |
 | 983 | Darmanitan Galarian | SPECIES_DARMANITAN_GALARIAN | Alternate form from obtainable base | Obtain Darmanitan, then use the applicable form-change mechanic. | party-selectable species/form |
-| 984 | Yamask Galarian | SPECIES_YAMASK_GALARIAN | Alternate form from obtainable base | Obtain Yamask, then use the applicable form-change mechanic. | party-selectable species/form |
+| 984 | Yamask Galarian | SPECIES_YAMASK_GALARIAN | Direct acquisition | Random wild in 1 catchable method pool(s): Route 111 / Land | party-selectable species/form |
 | 985 | Stunfisk Galarian | SPECIES_STUNFISK_GALARIAN | Alternate form from obtainable base | Obtain Stunfisk, then use the applicable form-change mechanic. | party-selectable species/form |
 | 986 | Pikachu Cosplay | SPECIES_PIKACHU_COSPLAY | Alternate form from obtainable base | Obtain Pikachu, then use the applicable form-change mechanic. | party-selectable species/form |
 | 987 | Pikachu Rock Star | SPECIES_PIKACHU_ROCK_STAR | Alternate form from obtainable base | Obtain Pikachu, then use the applicable form-change mechanic. | party-selectable species/form |
@@ -3179,7 +3210,7 @@ This appendix covers every runtime species/form ID. `Direct acquisition` means t
 | 1232 | Nacli | SPECIES_NACLI | Direct acquisition | Random wild in 1 catchable method pool(s): Route 102 / Land | party-selectable species/form |
 | 1233 | Naclstack | SPECIES_NACLSTACK | Evolution from obtainable Pokémon | Nacli → Naclstack via Level (24) | party-selectable species/form |
 | 1234 | Garganacl | SPECIES_GARGANACL | Evolution from obtainable Pokémon | Nacli → Naclstack via Level (24) ; Naclstack → Garganacl via Level (38) | party-selectable species/form |
-| 1235 | Finizen | SPECIES_FINIZEN | Direct acquisition | Random wild in 1 catchable method pool(s): Route 104 / Old Rod | party-selectable species/form |
+| 1235 | Finizen | SPECIES_FINIZEN | Direct acquisition | Random wild in 1 catchable method pool(s): Route 104 / Good Rod | party-selectable species/form |
 | 1236 | Palafin | SPECIES_PALAFIN | Evolution from obtainable Pokémon | Finizen → Palafin via Level (38) | party-selectable species/form |
 | 1237 | Palafin Hero | SPECIES_PALAFIN_HERO | Form / battle transformation; not separately acquired | Derived from Palafin through its form, personality, held-item, ability, or battle mechanic. | automatic-or-battle-only-form |
 | 1238 | Dondozo | SPECIES_DONDOZO | Direct acquisition | Random wild in 1 catchable method pool(s): Route 118 / Surf | party-selectable species/form |
@@ -3222,7 +3253,7 @@ This appendix covers every runtime species/form ID. `Direct acquisition` means t
 - Effective encounter odds can change through Repel, terrain, lead abilities, outbreaks, scripted overrides, and facility scaling. The base conditional tables remain the canonical distribution reported here.
 - Static/gift extraction combines explicit script commands with the checked-in bespoke acquisition ledger, starter tables, fossils, mystery gifts, Game Corner prizes, trades, and roamers. Variable-driven or future event systems may still require manual annotation.
 - Alternate and battle-only forms are often not separate acquisitions. The appendix separates them from permanent obtainable species rather than pretending every graphics/form ID is independently catchable.
-- The existing ordinary held-item reward layer is intentionally pending redesign now that competitive items are free. Protected transformation/progression items remain meaningful.
+- Ordinary held-item rewards are replaced as part of the cohesion pass now that competitive items are free. Berries, evolution catalysts, and protected transformation/form items remain meaningful progression.
 - The portable report intentionally uses exact tables rather than a summary chart: this artifact is optimized for complete lookup and language-model ingestion, and a chart would hide the map/method/species detail that is the point of the report.
 
 ## Recommended next refinement

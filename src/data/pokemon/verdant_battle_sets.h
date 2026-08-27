@@ -1483,7 +1483,7 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
         .moves = {MOVE_BULLET_PUNCH, MOVE_BUG_BITE, MOVE_SWORDS_DANCE, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 1,
-        .item = ITEM_METAL_COAT,
+        .item = ITEM_LIFE_ORB,
     },
     [SPECIES_SHUCKLE] =
     {
@@ -2561,7 +2561,7 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
         .moves = {MOVE_SHELL_SMASH, MOVE_MUDDY_WATER, MOVE_ICE_BEAM, MOVE_PROTECT},
         .nature = NATURE_QUIET,
         .abilitySlot = 0,
-        .item = ITEM_DEEP_SEA_TOOTH,
+        .item = ITEM_LIFE_ORB,
     },
     [SPECIES_HUNTAIL] =
     {

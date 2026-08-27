@@ -28,7 +28,7 @@ RustboroCity_Gym_EventScript_RoxanneDefeated:: @ 8212F66
 	end
 
 RustboroCity_Gym_EventScript_GiveRockTomb:: @ 8212FA4
-	giveitem ITEM_EXPERT_BELT
+	giveitem ITEM_PROTECTOR
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM39
@@ -435,12 +435,9 @@ RustboroCity_Gym_Text_StoneBadgeInfoTakeThis: @ 8213816
 	.string "to use the HM move Cut outside\l"
 	.string "of battle.\p"
 	.string "Please take this with you, too.$"
-
-RustboroCity_Gym_Text_ExplainRockTomb: @ 82138B1
-	.string "That Expert Belt strengthens moves\n"
-	.string "when they strike a foe's weakness.\p"
-	.string "Use your knowledge of type matchups\n"
-	.string "to get the most from it!$"
+RustboroCity_Gym_Text_ExplainRockTomb:
+	.string "Protector evolves Rhydon when it\n"
+	.string "levels up while holding it.$"
 
 RustboroCity_Gym_Text_RoxannePostBattle: @ 82139A7
 	.string "Safeguard prevents confusion,\n"

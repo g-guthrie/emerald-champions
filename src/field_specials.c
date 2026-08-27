@@ -5137,12 +5137,17 @@ void GetSelectedMonBattleSetCount(void)
 
 void BufferSelectedMonBattleSetName(void)
 {
+    gSpecialVar_Result = FALSE;
     if (gSpecialVar_0x8004 >= PARTY_SIZE)
         StringCopy(gStringVar2, gText_Exit);
     else
     {
         StringCopy(gStringVar2, GetVerdantBattleSetName(&gPlayerParty[gSpecialVar_0x8004], gSpecialVar_0x8005));
         CopyItemName(GetVerdantBattleSetItem(&gPlayerParty[gSpecialVar_0x8004], gSpecialVar_0x8005), gStringVar3);
+        gSpecialVar_Result = GetVerdantBattleSetRequiredItem(
+            &gPlayerParty[gSpecialVar_0x8004],
+            gSpecialVar_0x8005
+        ) != ITEM_NONE;
     }
 }
 

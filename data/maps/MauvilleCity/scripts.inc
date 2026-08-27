@@ -27,7 +27,7 @@ MauvilleCity_EventScript_GyroBallTM::
 	faceplayer
 	goto_if_set FLAG_VERDANT_GIFT_GYRO_BALL, MauvilleCity_EventScript_ReceivedTM74
 	msgbox MauvilleCity_Text_GiveTM74, MSGBOX_DEFAULT
-	giveitem ITEM_METRONOME
+	giveitem ITEM_DUBIOUS_DISC
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_VERDANT_GIFT_GYRO_BALL
@@ -474,7 +474,7 @@ MauvilleCity_EventScript_BegunNewMauville:: @ 81DF77A
 
 MauvilleCity_EventScript_CompletedNewMauville:: @ 81DF784
 	msgbox MauvilleCity_Text_WattsonThanksTakeTM, MSGBOX_DEFAULT
-	giveitem ITEM_THROAT_SPRAY
+	giveitem ITEM_GIMMIGHOUL_COIN
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_GOT_TM24_FROM_WATTSON
@@ -642,15 +642,9 @@ MauvilleCity_Text_WattsonWontBeChallenge: @ 81E0154
 	.string "a short Surf away from Route 110.\p"
 	.string "That's it, then, you have my trust!\n"
 	.string "Wahahahaha!$"
-
-MauvilleCity_Text_WattsonThanksTakeTM: @ 81E020E
-	.string "Wattson: Wahahahaha!\p"
-	.string "I knew it, {PLAYER}{KUN}!\p"
-	.string "I made the right choice asking you!\p"
-	.string "This is my thanks--a Throat Spray!\p"
-	.string "A sound move can trigger a Sp. Atk\n"
-	.string "boost.\p"
-	.string "Go on, you've earned it!$"
+MauvilleCity_Text_WattsonThanksTakeTM:
+	.string "This is my thanks--a rare Coin!\p"
+	.string "It unlocks an unusual evolution.$"
 
 MauvilleCity_Text_WattsonYoungTakeCharge: @ 81E02AA
 	.string "Wattson: Wahahahaha!\p"
@@ -714,18 +708,9 @@ MauvilleCity_Text_ExplainTV: @ 81E056A
 
 MauvilleCity_Text_BeenCheckingOutTV: @ 81E0699
 	.string "Hi, have you been checking out TVs?$"
-
 MauvilleCity_Text_GiveTM74:
-	.string "Did you know that you can go from\n"
-	.string "here a long way in that direction\l"
-	.string "without changing direction?\p"
-	.string "I might even be able to roll\n"
-	.string "that way.\p"
-	.string "Do you think your Pokémon will\n"
-	.string "want to roll, too?\p"
-	.string "Here, let them try this Metronome\n"
-	.string "if you'd like.$"
-
+	.string "Here, let them try this Dubious Disc.\n"
+	.string "It evolves Porygon2 while held.$"
 MauvilleCity_Text_HaveTM74:
-	.string "A Metronome strengthens a move\n"
-	.string "when its holder repeats that move.$"
+	.string "A Dubious Disc evolves Porygon2 when\n"
+	.string "it levels up while holding it.$"

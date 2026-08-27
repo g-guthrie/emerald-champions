@@ -23,6 +23,15 @@ DEFAULTS = ROOT / "docs/verdant_battle_set_presets.json"
 MAX_SETS = 3
 MAX_NAME_CHARS = 23
 
+
+def mega_set_items() -> set[str]:
+    source = (ROOT / "include/constants/items.h").read_text()
+    block = source.split("// Mega Stones", 1)[1].split("// Unused", 1)[0]
+    return set(re.findall(r"^#define\s+(ITEM_[A-Z0-9_]+)\b", block, re.M))
+
+
+MEGA_SET_ITEMS = mega_set_items()
+
 MANUAL_DEFAULT_PROMOTIONS = [
     {
         "species": "SPECIES_AZUMARILL",
@@ -240,7 +249,13 @@ def build() -> dict:
     for species in dex.supported:
         default = defaults[species]
         default_moves = [move for move in default["moves"] if move != "MOVE_NONE"]
-        default_signature = (frozenset(default_moves), default["nature"], default["ability"], default["runtime_item"])
+        default_signature = (
+            frozenset(default_moves),
+            default["nature"],
+            default["ability"],
+            default["runtime_item"],
+            "ITEM_NONE",
+        )
         legal = dex.legal_moves(species)
         selectable = legal - presets.UNSAFE_AUTOBUILD_MOVES
         desired_alternatives = min(MAX_SETS, len(grouped_raw.get(species, []))) - 1
@@ -272,21 +287,30 @@ def build() -> dict:
             if published_item is None:
                 published_item = default["suggested_item"]
                 skipped["published item adapted to a local item"] += 1
-            runtime_item = presets.runtime_set_item(published_item, row["role"], moves)
-            signature = (frozenset(moves), nature, ability, runtime_item)
+            required_item = published_item if published_item in MEGA_SET_ITEMS else "ITEM_NONE"
+            runtime_item = (
+                "ITEM_NONE"
+                if required_item != "ITEM_NONE"
+                else presets.runtime_set_item(published_item, row["role"], moves)
+            )
+            name = compact_role(row["role"])
+            if name.startswith("Mega ") and required_item == "ITEM_NONE":
+                name = name.removeprefix("Mega ")
+            signature = (frozenset(moves), nature, ability, runtime_item, required_item)
             if signature in seen:
                 skipped["duplicates the current or another retained set"] += 1
                 continue
             seen.add(signature)
             candidates.append({
                 "species": species,
-                "name": compact_role(row["role"]),
+                "name": name,
                 "moves": moves + ["MOVE_NONE"] * (4 - len(moves)),
                 "nature": nature,
                 "ability": ability,
                 "ability_slot": ability_slot,
                 "suggested_item": published_item,
                 "runtime_item": runtime_item,
+                "required_item": required_item,
                 "handbook": row,
                 "ability_adapted": ability_lookup.get(ability_key) is None,
                 "item_adapted": resolve_item(row["item"]) is None or published_item in presets.PROTECTED_SET_ITEMS,
@@ -304,6 +328,11 @@ def build() -> dict:
         chosen: list[dict] = []
         review = default.get("authored_review") or {}
         default_label = compact_role(review.get("role", "Recommended"), default=True)
+        # The authored default always remains the usable non-Mega fallback.
+        # Explicit Mega handbook alternatives carry the actual required stone
+        # and are the only choices gated behind the Bracelet.
+        if default_label.startswith("Mega "):
+            default_label = default_label.removeprefix("Mega ")
         used_names: set[str] = {default_label}
         for candidate in candidates:
             base_name = candidate["name"]
@@ -359,7 +388,7 @@ def build() -> dict:
         for index, item in enumerate(re.findall(r"^#define\s+(ITEM_[A-Z0-9_]+)\b", item_source, re.M))
     }
     free_items = sorted(
-        (berries | legacy_battle_items | runtime_items) - presets.PROTECTED_SET_ITEMS - {"ITEM_NONE"},
+        (legacy_battle_items | runtime_items) - presets.PROTECTED_SET_ITEMS - berries - {"ITEM_NONE"},
         key=lambda item: (item_order.get(item, 1 << 30), item),
     )
     result["free_items"] = free_items
@@ -398,6 +427,7 @@ def render_header(payload: dict) -> str:
             f"            .nature = {row['nature']},",
             f"            .abilitySlot = {row['ability_slot']},",
             f"            .item = {row['runtime_item']},",
+            f"            .requiredItem = {row['required_item']},",
             "        },",
             "    },",
         ])

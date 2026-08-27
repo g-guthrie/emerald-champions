@@ -15568,7 +15568,7 @@
       "nature": "NATURE_ADAMANT",
       "rejected_candidate_count": 0,
       "review_status": "authored",
-      "runtime_item": "ITEM_METAL_COAT",
+      "runtime_item": "ITEM_LIFE_ORB",
       "source_context": {
         "battle_style": null,
         "dependency_notes": [
@@ -26295,7 +26295,7 @@
       "nature": "NATURE_QUIET",
       "rejected_candidate_count": 0,
       "review_status": "authored",
-      "runtime_item": "ITEM_DEEP_SEA_TOOTH",
+      "runtime_item": "ITEM_LIFE_ORB",
       "source_context": {
         "battle_style": null,
         "dependency_notes": [

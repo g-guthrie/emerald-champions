@@ -36,7 +36,8 @@ Route119_WeatherInstitute_1F_EventScript_LittleBoyGaveRocks:
 	end
 
 Route119_WeatherInstitute_1F_Text_ReceivedWeatherRocks:
-	.string "{PLAYER} received four weather rocks!$"
+	.string "{PLAYER} received three weather rocks\n"
+	.string "and a Water Stone!$"
 
 Route119_WeatherInstitute_1F_EventScript_LittleBoyTeamAquaHere:: @ 826FABE
 	msgbox Route119_WeatherInstitute_1F_Text_EveryoneWentUpstairs, MSGBOX_DEFAULT

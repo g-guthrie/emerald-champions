@@ -288,7 +288,7 @@ MossdeepCity_EventScript_AvalancheTM::
 	faceplayer
 	goto_if_set FLAG_VERDANT_GIFT_AVALANCHE, MossdeepCity_EventScript_ReceivedTM96
 	msgbox MossdeepCity_Text_AvalancheNonsense, MSGBOX_DEFAULT
-	giveitem ITEM_SNOWBALL
+	giveitem ITEM_ICE_STONE
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_VERDANT_GIFT_AVALANCHE
@@ -454,10 +454,9 @@ MossdeepCity_Text_SootopolisNewGymLeader: @ 81E5581
 	.string "Leader come in.\p"
 	.string "People tell me the new Leader once\n"
 	.string "mentored Wallace.$"
-
 MossdeepCity_Text_AvalancheNonsense:
-	.string "You Trainer?\p"
-	.string "Take Snowball!$"
+	.string "An Ice Stone? Now that's a useful\n"
+	.string "reward. Take it!$"
 
 MossdeepCity_Text_HaveTM96:
 	.string "… … … … … … … … … … … … … … … …\p"

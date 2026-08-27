@@ -51,7 +51,7 @@ Route114_EventScript_RoarGentleman:: @ 81F25D1
 	faceplayer
 	goto_if_set FLAG_RECEIVED_TM05, Route114_EventScript_ReceivedRoar
 	msgbox Route114_Text_AllMyMonDoesIsRoarTakeThis, MSGBOX_DEFAULT
-	giveitem ITEM_SHED_SHELL
+	giveitem ITEM_DRAGON_SCALE
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM05
@@ -184,16 +184,13 @@ Route114_EventScript_Kai:: @ 81F27F2
 	trainerbattle_single TRAINER_KAI, Route114_Text_KaiIntro, Route114_Text_KaiDefeat
 	msgbox Route114_Text_KaiPostBattle, MSGBOX_AUTOCLOSE
 	end
-
-Route114_Text_AllMyMonDoesIsRoarTakeThis: @ 81F2809
-	.string "All my Pokémon does is Roar…\n"
-	.string "No one dares to come near me…\p"
-	.string "Sigh… If you would, please take this\n"
-	.string "Shed Shell away…$"
+Route114_Text_AllMyMonDoesIsRoarTakeThis:
+	.string "All my Pokémon does is Roar…\p"
+	.string "Please take this Dragon Scale away.$"
 
 Route114_Text_ExplainRoar: @ 81F2872
-	.string "A Shed Shell lets its holder escape\n"
-	.string "from trapping moves and abilities.$"
+	.string "The Dragon Scale evolves Seadra when\n"
+	.string "it levels up while holding it.$"
 
 Route114_Text_Poochyena: @ 81F28A6
 	.string "Bow! Bowwow!$"

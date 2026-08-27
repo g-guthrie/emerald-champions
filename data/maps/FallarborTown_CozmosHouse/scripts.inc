@@ -20,7 +20,7 @@ FallarborTown_CozmosHouse_EventScript_PlayerHasMeteorite:: @ 8200F38
 	compare VAR_RESULT, NO
 	goto_if_eq FallarborTown_CozmosHouse_EventScript_DeclineGiveMeteorite
 	msgbox FallarborTown_CozmosHouse_Text_PleaseUseThisTM, MSGBOX_DEFAULT
-	giveitem ITEM_EXPERT_BELT
+	giveitem ITEM_DAWN_STONE
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_VERDANT_GIFT_RETURN
@@ -194,22 +194,12 @@ FallarborTown_CozmosHouse_Text_MeteoriteWillNeverBeMineNow: @ 8200FEE
 	.string "you can find Meteorites…\p"
 	.string "That Meteorite from Meteor Falls…\n"
 	.string "It's never going to be mine now…$"
-
-FallarborTown_CozmosHouse_Text_IsThatMeteoriteMayIHaveIt: @ 82010A2
-	.string "Oh!\n"
-	.string "Hah?\p"
-	.string "That item…\p"
-	.string "Could it be?\p"
-	.string "Is it the Meteorite that Team Magma\n"
-	.string "took from Meteor Falls?\p"
-	.string "Please, may I have it?\p"
-	.string "I'm not asking for it for free.\n"
-	.string "How about this Expert Belt\n"
-	.string "in exchange?$"
-
-FallarborTown_CozmosHouse_Text_PleaseUseThisTM: @ 8201159
-	.string "Prof. Cozmo: This Expert Belt shows\n"
-	.string "my gratitude. Please use it!$"
+FallarborTown_CozmosHouse_Text_IsThatMeteoriteMayIHaveIt:
+	.string "Is that the Meteorite? May I have it?\p"
+	.string "I'll trade you this Dawn Stone.$"
+FallarborTown_CozmosHouse_Text_PleaseUseThisTM:
+	.string "A Dawn Stone evolves some Pokémon.\n"
+	.string "Please put it to good use.$"
 
 FallarborTown_CozmosHouse_Text_ReallyGoingToHelpMyResearch: @ 82011A5
 	.string "Prof. Cozmo: Oh, I can't believe it.\n"
@@ -219,13 +209,9 @@ FallarborTown_CozmosHouse_Text_ReallyGoingToHelpMyResearch: @ 82011A5
 FallarborTown_CozmosHouse_Text_CrushedWithDisappointment: @ 8201212
 	.string "Prof. Cozmo: Oh, but…\n"
 	.string "I'm crushed with disappointment…$"
-
-FallarborTown_CozmosHouse_Text_MayIHaveMeteorite: @ 8201249
-	.string "Prof. Cozmo: Please, may I have that\n"
-	.string "Meteorite?\p"
-	.string "I'm not asking for it for free.\n"
-	.string "How about this Expert Belt\n"
-	.string "in exchange?$"
+FallarborTown_CozmosHouse_Text_MayIHaveMeteorite:
+	.string "May I have that Meteorite?\p"
+	.string "I'll trade you this Dawn Stone.$"
 
 FallarborTown_CozmosHouse_Text_CozmoWentToMeteorFalls: @ 82012BC
 	.string "Prof. Cozmo went off to Meteor Falls\n"

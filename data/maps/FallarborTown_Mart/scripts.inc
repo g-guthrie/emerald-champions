@@ -43,7 +43,7 @@ FallarborTown_Mart_EventScript_DrainPunchTM::
 	faceplayer
 	goto_if_set FLAG_VERDANT_GIFT_DRAIN_PUNCH, FallarborTown_Mart_EventScript_ReceivedTM60
 	msgbox FallarborTown_Mart_Text_FreeSample, MSGBOX_DEFAULT
-	giveitem ITEM_MUSCLE_BAND
+	giveitem ITEM_SHINY_STONE
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_VERDANT_GIFT_DRAIN_PUNCH
@@ -55,25 +55,12 @@ FallarborTown_Mart_EventScript_ReceivedTM60::
 	msgbox FallarborTown_Mart_Text_HaveTM60, MSGBOX_DEFAULT
 	release
 	end
-
 FallarborTown_Mart_Text_FreeSample:
-	.string "Hi there! How are you today?\p"
-	.string "Can I interest you in a free sample\n"
-	.string "of Devon Corporation's new cleaning\l"
-	.string "product, DRAIN PUNCH?\p"
-	.string "It's super effective against grime,\n"
-	.string "gunk and gunge!\p"
-	.string "… … … … … … … …\p"
-	.string "… … … … … … … …\p"
-	.string "… … … … … … … …\p"
-	.string "Hmm? You're on an adventure?\n"
-	.string "You don't need drain cleaner?\p"
-	.string "Well, how about this Muscle Band\n"
-	.string "instead?$"
-
+	.string "How about this Shiny Stone as a free\n"
+	.string "sample? It evolves certain Pokémon.$"
 FallarborTown_Mart_Text_HaveTM60:
-	.string "A Muscle Band strengthens physical\n"
-	.string "moves. Don't use it on drains!$"
+	.string "A Shiny Stone evolves some Pokémon.\n"
+	.string "Use it from your Bag when ready.$"
 
 FallarborTown_Mart_Text_DecidingSkittyEvolve: @ 81FFD19
 	.string "I'm having a hard time deciding if I\n"

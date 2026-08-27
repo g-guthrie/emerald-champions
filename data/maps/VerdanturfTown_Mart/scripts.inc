@@ -41,7 +41,7 @@ VerdanturfTown_Mart_EventScript_PaybackTM::
 	faceplayer
 	goto_if_set FLAG_VERDANT_GIFT_PAYBACK, VerdanturfTown_Mart_EventScript_ReceivedTM66
 	msgbox VerdanturfTown_Mart_Text_SlowPokemon, MSGBOX_DEFAULT
-	giveitem ITEM_WEAKNESS_POLICY
+	giveitem ITEM_GIMMIGHOUL_COIN
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_VERDANT_GIFT_PAYBACK
@@ -53,18 +53,12 @@ VerdanturfTown_Mart_EventScript_ReceivedTM66::
 	msgbox VerdanturfTown_Mart_Text_HaveTM66, MSGBOX_DEFAULT
 	release
 	end
-
 VerdanturfTown_Mart_Text_SlowPokemon:
-	.string "Do you think slow Pokémon get tired\n"
-	.string "of always taking the first hit?\p"
-	.string "They'd be itching for a little\n"
-	.string "payback!\p"
-	.string "If you've got a sturdy Pokémon, give\n"
-	.string "this Weakness Policy a try.$"
-
+	.string "Do slow Pokémon tire of waiting?\p"
+	.string "Try this Gimmighoul Coin instead!$"
 VerdanturfTown_Mart_Text_HaveTM66:
-	.string "A Weakness Policy sharply raises\n"
-	.string "both offenses after a hard hit.$"
+	.string "A Gimmighoul Coin unlocks one very\n"
+	.string "unusual evolution.$"
 
 VerdanturfTown_Mart_Text_XSpecialIsCrucial: @ 82025D5
 	.string "For any Pokémon match, X Special\n"

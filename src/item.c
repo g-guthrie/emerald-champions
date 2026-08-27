@@ -159,7 +159,7 @@ bool8 PlayerOwnsItemAnywhere(u16 itemId)
 
 static bool8 TryAddVerdantItemBundle(const u16 *itemIds, u8 count)
 {
-    bool8 added[5] = {FALSE};
+    bool8 added[10] = {FALSE};
     u8 i;
 
     if (count > ARRAY_COUNT(added))
@@ -231,7 +231,7 @@ bool8 TryAddVerdantStevenRewardBundle(void)
 {
     static const u16 sStevenRewardBundle[] =
     {
-        ITEM_WIDE_LENS,
+        ITEM_METAL_COAT,
         ITEM_MEGA_BRACELET,
         ITEM_SCEPTILITE,
         ITEM_BLAZIKENITE,
@@ -257,7 +257,7 @@ bool8 TryAddVerdantWeatherRockBundle(void)
     static const u16 sWeatherRockBundle[] =
     {
         ITEM_HEAT_ROCK,
-        ITEM_DAMP_ROCK,
+        ITEM_WATER_STONE,
         ITEM_ICY_ROCK,
         ITEM_SMOOTH_ROCK,
     };
@@ -267,15 +267,25 @@ bool8 TryAddVerdantWeatherRockBundle(void)
 
 bool8 TryAddEmeraldChampionsGymRewardMigration(void)
 {
-    u16 items[4];
+    u16 items[9];
     u8 count = 0;
 
+    if (FlagGet(FLAG_RECEIVED_TM39))
+        items[count++] = ITEM_PROTECTOR;
+    if (FlagGet(FLAG_RECEIVED_TM08))
+        items[count++] = ITEM_RAZOR_CLAW;
+    if (FlagGet(FLAG_RECEIVED_TM72))
+        items[count++] = ITEM_ELECTIRIZER;
     if (FlagGet(FLAG_RECEIVED_TM50))
-        items[count++] = ITEM_EJECT_PACK;
+        items[count++] = ITEM_MAGMARIZER;
+    if (FlagGet(FLAG_RECEIVED_TM42))
+        items[count++] = ITEM_LOPUNNITE;
     if (FlagGet(FLAG_RECEIVED_TM51))
-        items[count++] = ITEM_ADRENALINE_ORB;
+        items[count++] = ITEM_ALTARIANITE;
+    if (FlagGet(FLAG_RECEIVED_TM04))
+        items[count++] = ITEM_METAGROSSITE;
     if (FlagGet(FLAG_RECEIVED_TM03))
-        items[count++] = ITEM_UTILITY_UMBRELLA;
+        items[count++] = ITEM_MILOTICITE;
     if (FlagGet(FLAG_RECEIVED_LIFE_ORB))
         items[count++] = ITEM_DESTINY_KNOT;
 

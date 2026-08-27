@@ -166,7 +166,7 @@ RustboroCity_DevonCorp_3F_EventScript_MrStone:: @ 821256C
 
 RustboroCity_DevonCorp_3F_EventScript_GiveScopeLens:: @ 8212595
 	msgbox RustboroCity_DevonCorp_3F_Text_ThankYouForDeliveringLetter, MSGBOX_DEFAULT
-	giveitem ITEM_SCOPE_LENS
+	giveitem ITEM_UPGRADE
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_SCOPE_LENS
@@ -254,14 +254,9 @@ RustboroCity_DevonCorp_3F_Text_ThankYouForDeliveringLetter: @ 8212A29
 	.string "Thank you kindly!\p"
 	.string "This is my way of thanking you.\n"
 	.string "It should help you, a Trainer.$"
-
-RustboroCity_DevonCorp_3F_Text_ExplainScopeLens: @ 8212A9E
-	.string "Mr. Stone: A Pokémon holding that\n"
-	.string "Scope Lens will be more likely to land\l"
-	.string "a critical hit than usual.\p"
-	.string "If combined with the move Focus Energy,\n"
-	.string "the holder's attacks will always turn\l"
-	.string "critical!$"
+RustboroCity_DevonCorp_3F_Text_ExplainScopeLens:
+	.string "The Up-Grade evolves Porygon when it\n"
+	.string "levels up while holding it.$"
 
 RustboroCity_DevonCorp_3F_Text_NotFamiliarWithTrends: @ 8212B78
 	.string "Mr. Stone: Since my youth, I've immersed\n"

@@ -36,7 +36,7 @@ ShoalCave_LowTideLowerRoom_EventScript_BlackBelt:: @ 82371B2
 	faceplayer
 	goto_if_set FLAG_RECEIVED_FOCUS_BAND, ShoalCave_LowTideLowerRoom_EventScript_ReceivedFocusBand
 	msgbox ShoalCave_LowTideLowerRoom_Text_CanOvercomeColdWithFocus, MSGBOX_DEFAULT
-	giveitem ITEM_FOCUS_BAND
+	giveitem ITEM_DEEP_SEA_SCALE
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_FOCUS_BAND
@@ -47,13 +47,9 @@ ShoalCave_LowTideLowerRoom_EventScript_ReceivedFocusBand:: @ 82371E1
 	msgbox ShoalCave_LowTideLowerRoom_Text_EverythingStartsWithFocus, MSGBOX_DEFAULT
 	release
 	end
-
-ShoalCave_LowTideLowerRoom_Text_CanOvercomeColdWithFocus: @ 82371EB
-	.string "The penetrating cold around these\n"
-	.string "parts is an impediment to training.\p"
-	.string "But with focus, one can overcome!\p"
-	.string "With this Focus Band, buckle down and\n"
-	.string "withstand the cold!$"
+ShoalCave_LowTideLowerRoom_Text_CanOvercomeColdWithFocus:
+	.string "Your focus overcame the cold!\p"
+	.string "Take this Deep Sea Scale.$"
 
 ShoalCave_LowTideLowerRoom_Text_EverythingStartsWithFocus: @ 823728D
 	.string "Everything starts with focus!$"
