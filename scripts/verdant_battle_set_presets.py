@@ -938,6 +938,26 @@ def load_reviews(dex: LocalDex) -> tuple[dict[str, dict], list[dict]]:
                 raise ValueError(f"{species}: authored review has unavailable ability {ability}")
             if review["suggested_item"] not in item_tokens:
                 raise ValueError(f"{species}: unknown advisory item {review['suggested_item']}")
+            item = review["suggested_item"]
+            move_names = {token_compact(move, "MOVE_") for move in moves}
+            if item.endswith("_Z") or "Z_CRYSTAL" in item:
+                raise ValueError(f"{species}: authored review cannot depend on a Z item")
+            if item == "ITEM_ASSAULT_VEST" and any(
+                dex.move_info.get(move, {}).get("split") == "SPLIT_STATUS" for move in moves
+            ):
+                raise ValueError(f"{species}: Assault Vest review contains a status move")
+            if item in {"ITEM_CHOICE_BAND", "ITEM_CHOICE_SPECS", "ITEM_CHOICE_SCARF"} and move_names & (
+                PROTECT_MOVES | SETUP_MOVES | RECOVERY_MOVES
+            ):
+                raise ValueError(f"{species}: Choice-item review contains Protect, setup, or recovery")
+            if "sleeptalk" in move_names and "rest" not in move_names:
+                raise ValueError(f"{species}: Sleep Talk review has no Rest")
+            if "dreameater" in move_names and not move_names & {
+                "spore", "sleeppowder", "hypnosis", "lovelykiss", "darkvoid", "yawn"
+            }:
+                raise ValueError(f"{species}: Dream Eater review has no sleep enabler")
+            if "belch" in move_names and "BERRY" not in item:
+                raise ValueError(f"{species}: Belch review does not recommend a Berry")
             alias = review.get("alias_of")
             if alias:
                 if alias not in reviews:
