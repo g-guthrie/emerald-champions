@@ -1,0 +1,3078 @@
+{
+  "schema_version": 1,
+  "batch_id": "kanto-001-151-v1",
+  "reviews": [
+    {
+      "species": "SPECIES_BULBASAUR",
+      "role": "Chlorophyll sleep attacker",
+      "moves": [
+        "MOVE_GIGA_DRAIN",
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_SLEEP_POWDER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_CHLOROPHYLL",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 6 lc Bulbasaur Eviolite Growth, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Bulbasaur uses Chlorophyll as a Chlorophyll sleep attacker, with Giga Drain, Sludge Bomb, Sleep Powder, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Chlorophyll reaches its ceiling beside allied sun, but Sleep Powder and both STAB moves remain useful without it."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_IVYSAUR",
+      "role": "bulky Chlorophyll sleep attacker",
+      "moves": [
+        "MOVE_GIGA_DRAIN",
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_SLEEP_POWDER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_CHLOROPHYLL",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 9 nfe Ivysaur Defensive, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Ivysaur uses Chlorophyll as a bulky Chlorophyll sleep attacker, with Giga Drain, Sludge Bomb, Sleep Powder, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Eviolite and sun improve this role, but neither is required for the four moves to produce useful turns."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_VENUSAUR",
+      "role": "Chlorophyll sleep attacker",
+      "moves": [
+        "MOVE_GIGA_DRAIN",
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_SLEEP_POWDER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_CHLOROPHYLL",
+      "suggested_item": "ITEM_LIFE_ORB",
+      "item_context": "Life Orb is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 7 doublesou Venusaur Bulky Attacker and compatible doubles alternatives",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Venusaur uses Chlorophyll as a Chlorophyll sleep attacker, with Giga Drain, Sludge Bomb, Sleep Powder, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Chlorophyll needs allied sun for speed doubling; the dual STAB, sleep, and protection plan still functions outside sun."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_CHARMANDER",
+      "role": "Solar Power sun attacker",
+      "moves": [
+        "MOVE_HEAT_WAVE",
+        "MOVE_DRAGON_PULSE",
+        "MOVE_OVERHEAT",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_SOLAR_POWER",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 9 lc Charmander Sun Wallbreaker, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Charmander uses Solar Power as a Solar Power sun attacker, with Heat Wave, Dragon Pulse, Overheat, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Solar Power needs allied sun for its damage bonus, while the moves remain usable in neutral weather."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_CHARMELEON",
+      "role": "Solar Power spread attacker",
+      "moves": [
+        "MOVE_HEAT_WAVE",
+        "MOVE_DRAGON_PULSE",
+        "MOVE_OVERHEAT",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_SOLAR_POWER",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 8 nfe Charmeleon Choice Specs, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Charmeleon uses Solar Power as a Solar Power spread attacker, with Heat Wave, Dragon Pulse, Overheat, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Solar Power reaches maximum pressure in sun, but this is not a dead weather-only moveset."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_CHARIZARD",
+      "role": "fast Solar Power Tailwind attacker",
+      "moves": [
+        "MOVE_HEAT_WAVE",
+        "MOVE_AIR_SLASH",
+        "MOVE_TAILWIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_SOLAR_POWER",
+      "suggested_item": "ITEM_FOCUS_SASH",
+      "item_context": "Focus Sash is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 9 nationaldexdoubles Charizard Sun Attacker and compatible doubles alternatives",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Charizard uses Solar Power as a fast Solar Power Tailwind attacker, with Heat Wave, Air Slash, Tailwind, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Sun powers Solar Power and Heat Wave, but Tailwind, Air Slash, and Protect stay valuable without weather support."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_SQUIRTLE",
+      "role": "bulky Fake Out speed-control support",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_ICY_WIND",
+        "MOVE_SCALD",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BOLD",
+      "ability": "ABILITY_OVERCOAT",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 7 lc Squirtle Rapid Spin, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Squirtle uses Overcoat as a bulky Fake Out speed-control support, with Fake Out, Icy Wind, Scald, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Overcoat gives powder immunity, and the support plan does not require weather or a specific partner."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_WARTORTLE",
+      "role": "Eviolite Shell Smash attacker",
+      "moves": [
+        "MOVE_SHELL_SMASH",
+        "MOVE_MUDDY_WATER",
+        "MOVE_ICE_BEAM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_TORRENT",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 9 nfe Wartortle Shell Smash, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Wartortle uses Torrent as a Eviolite Shell Smash attacker, with Shell Smash, Muddy Water, Ice Beam, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Shell Smash needs a safe setup turn, but no held-item activation is required for the set to function."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_BLASTOISE",
+      "role": "Water Spout special attacker",
+      "moves": [
+        "MOVE_WATER_SPOUT",
+        "MOVE_AURA_SPHERE",
+        "MOVE_DARK_PULSE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_MEGA_LAUNCHER",
+      "suggested_item": "ITEM_SITRUS_BERRY",
+      "item_context": "Sitrus Berry is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 8 2v2doubles Blastoise Follow Me Support and compatible doubles alternatives",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Blastoise uses Mega Launcher as a Water Spout special attacker, with Water Spout, Aura Sphere, Dark Pulse, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Water Spout is strongest at high HP, while Mega Launcher keeps both pulse coverage moves threatening after chip damage."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_BUTTERFREE",
+      "role": "Compound Eyes sleep and redirection support",
+      "moves": [
+        "MOVE_SLEEP_POWDER",
+        "MOVE_RAGE_POWDER",
+        "MOVE_TAILWIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_COMPOUND_EYES",
+      "suggested_item": "ITEM_FOCUS_SASH",
+      "item_context": "Focus Sash is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Pokemon Showdown and Smogon competitive corpus for Butterfree, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Butterfree uses Compound Eyes as a Compound Eyes sleep and redirection support, with Sleep Powder, Rage Powder, Tailwind, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Focus Sash improves reliability but is advisory; accurate sleep, redirection, and speed control work without an item trigger."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_PIDGEOTTO",
+      "role": "No Guard Tailwind attacker",
+      "moves": [
+        "MOVE_HURRICANE",
+        "MOVE_HEAT_WAVE",
+        "MOVE_TAILWIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_NO_GUARD",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Pokemon Showdown and Smogon competitive corpus for Pidgeotto, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Pidgeotto uses No Guard as a No Guard Tailwind attacker, with Hurricane, Heat Wave, Tailwind, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "No Guard makes Hurricane reliable without rain, so this package is not weather dependent."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_PIDGEOT",
+      "role": "No Guard Tailwind attacker",
+      "moves": [
+        "MOVE_HURRICANE",
+        "MOVE_HEAT_WAVE",
+        "MOVE_TAILWIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_NO_GUARD",
+      "suggested_item": "ITEM_LIFE_ORB",
+      "item_context": "Life Orb is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 7 uu Pidgeot Special Attacker, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Pidgeot uses No Guard as a No Guard Tailwind attacker, with Hurricane, Heat Wave, Tailwind, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "No Guard removes Hurricane accuracy risk and the set needs no Mega Stone to operate."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_RATTATA",
+      "role": "Hustle priority attacker",
+      "moves": [
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_U_TURN",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_HUSTLE",
+      "suggested_item": "ITEM_LIFE_ORB",
+      "item_context": "Life Orb is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 7 lc Rattata Hustle Wallbreaker, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Rattata uses Hustle as a Hustle priority attacker, with Double Edge, Sucker Punch, U Turn, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Hustle adds an accuracy tradeoff, but the set is not dependent on burn status or a consumable item."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_RATICATE",
+      "role": "Guts Facade attacker",
+      "moves": [
+        "MOVE_FACADE",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_U_TURN",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_GUTS",
+      "suggested_item": "ITEM_FLAME_ORB",
+      "item_context": "Flame Orb is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 4 uu Raticate Guts, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Raticate uses Guts as a Guts Facade attacker, with Facade, Sucker Punch, U Turn, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Flame Orb is strongly recommended to activate Guts and Facade, although the builder never equips it automatically."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_SPEAROW",
+      "role": "fast Sniper physical attacker",
+      "moves": [
+        "MOVE_DRILL_PECK",
+        "MOVE_DRILL_RUN",
+        "MOVE_U_TURN",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_SNIPER",
+      "suggested_item": "ITEM_FOCUS_SASH",
+      "item_context": "Focus Sash is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 7 lc Spearow Life Orb Attacker, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Spearow uses Sniper as a fast Sniper physical attacker, with Drill Peck, Drill Run, U Turn, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Sniper is an upside rather than a required activation, and all four moves function without critical-hit support."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_FEAROW",
+      "role": "Intimidate physical pivot",
+      "moves": [
+        "MOVE_DRILL_PECK",
+        "MOVE_DRILL_RUN",
+        "MOVE_U_TURN",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_INTIMIDATE",
+      "suggested_item": "ITEM_LIFE_ORB",
+      "item_context": "Life Orb is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Pokemon Showdown and Smogon competitive corpus for Fearow, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Fearow uses Intimidate as a Intimidate physical pivot, with Drill Peck, Drill Run, U Turn, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Intimidate supplies immediate board value and the offensive pivot plan has no weather or item trigger."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_EKANS",
+      "role": "Intimidate Coil attacker",
+      "moves": [
+        "MOVE_COIL",
+        "MOVE_GUNK_SHOT",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CAREFUL",
+      "ability": "ABILITY_INTIMIDATE",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 7 lc Ekans Coil Sweeper, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Ekans uses Intimidate as a Intimidate Coil attacker, with Coil, Gunk Shot, Sucker Punch, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Coil needs a supported setup turn, while Intimidate and Sucker Punch keep Ekans useful before it sets up."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_ARBOK",
+      "role": "Intimidate Coil attacker",
+      "moves": [
+        "MOVE_COIL",
+        "MOVE_GUNK_SHOT",
+        "MOVE_STOMPING_TANTRUM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_INTIMIDATE",
+      "suggested_item": "ITEM_SITRUS_BERRY",
+      "item_context": "Sitrus Berry is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Pokemon Showdown and Smogon competitive corpus for Arbok, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Arbok uses Intimidate as a Intimidate Coil attacker, with Coil, Gunk Shot, Stomping Tantrum, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Coil improves Gunk Shot accuracy and power, but Intimidate gives the set immediate value on entry."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_RAICHU",
+      "role": "Lightning Rod Fake Out support",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_ENCORE",
+        "MOVE_THUNDERBOLT",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_LIGHTNING_ROD",
+      "suggested_item": "ITEM_FOCUS_SASH",
+      "item_context": "Focus Sash is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 6 battlespotdoubles Raichu Support and compatible doubles alternatives",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Raichu uses Lightning Rod as a Lightning Rod Fake Out support, with Fake Out, Encore, Thunderbolt, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Lightning Rod also redirects an ally's single-target Electric move, so partner targeting must be deliberate."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_SANDSHREW",
+      "role": "Sand Rush physical attacker",
+      "moves": [
+        "MOVE_EARTHQUAKE",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_KNOCK_OFF",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_SAND_RUSH",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 7 lc Sandshrew Bulky Support, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Sandshrew uses Sand Rush as a Sand Rush physical attacker, with Earthquake, Rock Slide, Knock Off, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Sand Rush needs allied sand for speed doubling, but spread damage and Knock Off remain useful without it."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_SANDSLASH",
+      "role": "Sand Rush spread attacker",
+      "moves": [
+        "MOVE_EARTHQUAKE",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_KNOCK_OFF",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_SAND_RUSH",
+      "suggested_item": "ITEM_LIFE_ORB",
+      "item_context": "Life Orb is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Pokemon Showdown and Smogon competitive corpus for Sandslash, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Sandslash uses Sand Rush as a Sand Rush spread attacker, with Earthquake, Rock Slide, Knock Off, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Allied sand supplies the speed mode, while the four-move package remains functional in neutral weather."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_NIDORAN_F",
+      "role": "Hustle Hone Claws attacker",
+      "moves": [
+        "MOVE_HONE_CLAWS",
+        "MOVE_POISON_JAB",
+        "MOVE_CRUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_HUSTLE",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Pokemon Showdown and Smogon competitive corpus for Nidoran\u2640, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Nidoran\u2640 uses Hustle as a Hustle Hone Claws attacker, with Hone Claws, Poison Jab, Crunch, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Hone Claws offsets Hustle accuracy but requires one supported setup turn."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_NIDORINA",
+      "role": "Hustle Hone Claws attacker",
+      "moves": [
+        "MOVE_HONE_CLAWS",
+        "MOVE_POISON_JAB",
+        "MOVE_CRUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_HUSTLE",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Pokemon Showdown and Smogon competitive corpus for Nidorina, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Nidorina uses Hustle as a Hustle Hone Claws attacker, with Hone Claws, Poison Jab, Crunch, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Hone Claws makes Hustle reliable, while Eviolite is recommended rather than required."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_NIDOQUEEN",
+      "role": "Sheer Force special attacker",
+      "moves": [
+        "MOVE_EARTH_POWER",
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_ICE_BEAM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_SHEER_FORCE",
+      "suggested_item": "ITEM_LIFE_ORB",
+      "item_context": "Life Orb is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Pokemon Showdown and Smogon competitive corpus for Nidoqueen, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Nidoqueen uses Sheer Force as a Sheer Force special attacker, with Earth Power, Sludge Bomb, Ice Beam, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Life Orb compounds Sheer Force but is advisory; the three-attack coverage is self-contained."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_NIDORAN_M",
+      "role": "Hustle physical attacker",
+      "moves": [
+        "MOVE_POISON_JAB",
+        "MOVE_DRILL_RUN",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_HUSTLE",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 7 lc Nidoran\u2642 Hone Claws, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Nidoran\u2642 uses Hustle as a Hustle physical attacker, with Poison Jab, Drill Run, Sucker Punch, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Hustle trades accuracy for early power, and Sucker Punch supplies a distinct priority line."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_NIDORINO",
+      "role": "Hustle priority attacker",
+      "moves": [
+        "MOVE_POISON_JAB",
+        "MOVE_DRILL_RUN",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_HUSTLE",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Pokemon Showdown and Smogon competitive corpus for Nidorino, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Nidorino uses Hustle as a Hustle priority attacker, with Poison Jab, Drill Run, Sucker Punch, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "The set accepts Hustle's accuracy tradeoff in exchange for immediate damage without a setup requirement."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_NIDOKING",
+      "role": "Sheer Force special attacker",
+      "moves": [
+        "MOVE_EARTH_POWER",
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_ICE_BEAM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_SHEER_FORCE",
+      "suggested_item": "ITEM_LIFE_ORB",
+      "item_context": "Life Orb is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 5 vgc2012 Nidoking Special Attacker and compatible doubles alternatives",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Nidoking uses Sheer Force as a Sheer Force special attacker, with Earth Power, Sludge Bomb, Ice Beam, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Life Orb is the ideal Sheer Force partner but is not needed for move legality or basic coverage."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_CLEFAIRY",
+      "role": "Friend Guard redirection support",
+      "moves": [
+        "MOVE_FOLLOW_ME",
+        "MOVE_ICY_WIND",
+        "MOVE_HEAL_PULSE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BOLD",
+      "ability": "ABILITY_FRIEND_GUARD",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 6 doublesou Clefairy Friend Guard Support and compatible doubles alternatives",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Clefairy uses Friend Guard as a Friend Guard redirection support, with Follow Me, Icy Wind, Heal Pulse, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Friend Guard and Eviolite maximize partner protection, though the builder equips neither an item nor a partner."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_CLEFABLE",
+      "role": "Unaware redirection support",
+      "moves": [
+        "MOVE_FOLLOW_ME",
+        "MOVE_MOONBLAST",
+        "MOVE_HELPING_HAND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CALM",
+      "ability": "ABILITY_UNAWARE",
+      "suggested_item": "ITEM_SITRUS_BERRY",
+      "item_context": "Sitrus Berry is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 6 doublesou Clefable Follow Me Support and compatible doubles alternatives",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Clefable uses Unaware as a Unaware redirection support, with Follow Me, Moonblast, Helping Hand, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Unaware prevents opposing setup from overwhelming the redirector, and no item trigger is built into the moves."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_VULPIX",
+      "role": "Drought disruption support",
+      "moves": [
+        "MOVE_HEAT_WAVE",
+        "MOVE_ENCORE",
+        "MOVE_WILL_O_WISP",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_DROUGHT",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 8 lc Vulpix Sun Setter, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Vulpix uses Drought as a Drought disruption support, with Heat Wave, Encore, Will O Wisp, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Drought strengthens Heat Wave on entry, while Encore and Will-O-Wisp make the set useful even if weather changes."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_NINETALES",
+      "role": "Drought fast support attacker",
+      "moves": [
+        "MOVE_HEAT_WAVE",
+        "MOVE_SOLAR_BEAM",
+        "MOVE_ENCORE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_DROUGHT",
+      "suggested_item": "ITEM_CHARCOAL",
+      "item_context": "Charcoal is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 5 vgc2012 Ninetales Sunny Day Attacker and compatible doubles alternatives",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Ninetales uses Drought as a Drought fast support attacker, with Heat Wave, Solar Beam, Encore, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Drought enables Solar Beam and powers Heat Wave, so opposing weather control can disrupt the offensive half of the set."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_JIGGLYPUFF",
+      "role": "Friend Guard partner support",
+      "moves": [
+        "MOVE_HELPING_HAND",
+        "MOVE_HEAL_PULSE",
+        "MOVE_ICY_WIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CALM",
+      "ability": "ABILITY_FRIEND_GUARD",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Pokemon Showdown and Smogon competitive corpus for Jigglypuff, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Jigglypuff uses Friend Guard as a Friend Guard partner support, with Helping Hand, Heal Pulse, Icy Wind, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Friend Guard provides passive value while Helping Hand, healing, and speed control actively support either ally."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_WIGGLYTUFF",
+      "role": "Competitive spread attacker",
+      "moves": [
+        "MOVE_HYPER_VOICE",
+        "MOVE_DAZZLING_GLEAM",
+        "MOVE_ICY_WIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_COMPETITIVE",
+      "suggested_item": "ITEM_THROAT_SPRAY",
+      "item_context": "Throat Spray is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Pokemon Showdown and Smogon competitive corpus for Wigglytuff, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Wigglytuff uses Competitive as a Competitive spread attacker, with Hyper Voice, Dazzling Gleam, Icy Wind, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Competitive punishes Intimidate and other stat drops, but the spread attacks remain useful without activation."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_ZUBAT",
+      "role": "fast Tailwind utility attacker",
+      "moves": [
+        "MOVE_BRAVE_BIRD",
+        "MOVE_TAILWIND",
+        "MOVE_QUICK_GUARD",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_INNER_FOCUS",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 7 lc Zubat Choice Scarf, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Zubat uses Inner Focus as a fast Tailwind utility attacker, with Brave Bird, Tailwind, Quick Guard, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Inner Focus helps establish Tailwind through flinch pressure, and Quick Guard is matchup dependent rather than item dependent."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_GOLBAT",
+      "role": "Eviolite Tailwind disruptor",
+      "moves": [
+        "MOVE_TAILWIND",
+        "MOVE_TAUNT",
+        "MOVE_SUPER_FANG",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_INNER_FOCUS",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 4 uu Golbat Stallbreaker, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Golbat uses Inner Focus as a Eviolite Tailwind disruptor, with Tailwind, Taunt, Super Fang, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Super Fang gives Golbat progress against bulky targets while Tailwind and Taunt control the pace."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_GLOOM",
+      "role": "Chlorophyll sleep attacker",
+      "moves": [
+        "MOVE_GIGA_DRAIN",
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_SLEEP_POWDER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_CHLOROPHYLL",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Pokemon Showdown and Smogon competitive corpus for Gloom, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Gloom uses Chlorophyll as a Chlorophyll sleep attacker, with Giga Drain, Sludge Bomb, Sleep Powder, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Chlorophyll appreciates sun, but sleep and dual STAB keep the set functional without it."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_VILEPLUME",
+      "role": "Effect Spore bulky sleep control",
+      "moves": [
+        "MOVE_SLEEP_POWDER",
+        "MOVE_STRENGTH_SAP",
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BOLD",
+      "ability": "ABILITY_EFFECT_SPORE",
+      "suggested_item": "ITEM_BLACK_SLUDGE",
+      "item_context": "Black Sludge is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Pokemon Showdown and Smogon competitive corpus for Vileplume, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Vileplume uses Effect Spore as a Effect Spore bulky sleep control, with Sleep Powder, Strength Sap, Sludge Bomb, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Effect Spore and Strength Sap punish physical contact while Sleep Powder supplies proactive control without a weather requirement."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_PARASECT",
+      "role": "Dry Skin rain redirection support",
+      "moves": [
+        "MOVE_SPORE",
+        "MOVE_RAGE_POWDER",
+        "MOVE_SEED_BOMB",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_SASSY",
+      "ability": "ABILITY_DRY_SKIN",
+      "suggested_item": "ITEM_LEFTOVERS",
+      "item_context": "Leftovers is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 5 vgc2012 Parasect Rain Support and compatible doubles alternatives",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Parasect uses Dry Skin as a Dry Skin rain redirection support, with Spore, Rage Powder, Seed Bomb, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Rain improves Dry Skin recovery, but accurate Spore and Rage Powder remain valuable without it."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_VENOMOTH",
+      "role": "Tinted Lens Quiver Dance attacker",
+      "moves": [
+        "MOVE_QUIVER_DANCE",
+        "MOVE_BUG_BUZZ",
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_TINTED_LENS",
+      "suggested_item": "ITEM_FOCUS_SASH",
+      "item_context": "Focus Sash is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Pokemon Showdown and Smogon competitive corpus for Venomoth, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Venomoth uses Tinted Lens as a Tinted Lens Quiver Dance attacker, with Quiver Dance, Bug Buzz, Sludge Bomb, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Quiver Dance needs one supported turn, while Tinted Lens minimizes the need to predict resistances."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_DIGLETT",
+      "role": "Arena Trap priority attacker",
+      "moves": [
+        "MOVE_EARTHQUAKE",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_ARENA_TRAP",
+      "suggested_item": "ITEM_FOCUS_SASH",
+      "item_context": "Focus Sash is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 8 lc Diglett Special Focus Sash, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Diglett uses Arena Trap as a Arena Trap priority attacker, with Earthquake, Rock Slide, Sucker Punch, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Arena Trap restricts grounded switches, and Focus Sash is recommended because Diglett has almost no natural bulk."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_DUGTRIO",
+      "role": "Arena Trap spread attacker",
+      "moves": [
+        "MOVE_EARTHQUAKE",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_ARENA_TRAP",
+      "suggested_item": "ITEM_FOCUS_SASH",
+      "item_context": "Focus Sash is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 5 vgc2012 Dugtrio Suicide Attacker and compatible doubles alternatives",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Dugtrio uses Arena Trap as a Arena Trap spread attacker, with Earthquake, Rock Slide, Sucker Punch, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Arena Trap converts Dugtrio's speed into positional pressure without requiring sand or a setup item."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_MEOWTH",
+      "role": "Technician Fake Out and Feint pivot",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_FEINT",
+        "MOVE_U_TURN",
+        "MOVE_PLAY_ROUGH"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_TECHNICIAN",
+      "suggested_item": "ITEM_FOCUS_SASH",
+      "item_context": "Focus Sash is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 9 lc Meowth Revenge Killer, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Meowth uses Technician as a Technician Fake Out and Feint pivot, with Fake Out, Feint, U Turn, and Play Rough forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Technician boosts both tempo attacks, and U-turn prevents the all-utility lead from becoming stranded."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_PERSIAN",
+      "role": "Technician Fake Out speed support",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_FEINT",
+        "MOVE_ICY_WIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_TECHNICIAN",
+      "suggested_item": "ITEM_FOCUS_SASH",
+      "item_context": "Focus Sash is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 5 vgc2012 Persian Unnerve Lead and compatible doubles alternatives",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Persian uses Technician as a Technician Fake Out speed support, with Fake Out, Feint, Icy Wind, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Fake Out and Feint manipulate opposing protection while Icy Wind provides repeatable team speed control."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_PSYDUCK",
+      "role": "Cloud Nine weather-control support",
+      "moves": [
+        "MOVE_SCALD",
+        "MOVE_ICY_WIND",
+        "MOVE_ENCORE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_CLOUD_NINE",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 7 lc Psyduck Choice Scarf, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Psyduck uses Cloud Nine as a Cloud Nine weather-control support, with Scald, Icy Wind, Encore, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Cloud Nine suppresses hostile weather plans and the support moves remain useful against weatherless teams."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_GOLDUCK",
+      "role": "Swift Swim rain attacker",
+      "moves": [
+        "MOVE_HYDRO_PUMP",
+        "MOVE_ICE_BEAM",
+        "MOVE_PSYCHIC",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_SWIFT_SWIM",
+      "suggested_item": "ITEM_LIFE_ORB",
+      "item_context": "Life Orb is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 7 vgc2017 Golduck Swift Swim Attacker and compatible doubles alternatives",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Golduck uses Swift Swim as a Swift Swim rain attacker, with Hydro Pump, Ice Beam, Psychic, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Swift Swim needs rain for its speed boost, but broad special coverage prevents a dead neutral-weather set."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_MANKEY",
+      "role": "Defiant physical pivot",
+      "moves": [
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_U_TURN",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_DEFIANT",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 9 lc Mankey Choice Scarf, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Mankey uses Defiant as a Defiant physical pivot, with Close Combat, U Turn, Rock Slide, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Defiant punishes Intimidate and other stat drops without needing an allied activation."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_PRIMEAPE",
+      "role": "Defiant Rage Fist attacker",
+      "moves": [
+        "MOVE_RAGE_FIST",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_DEFIANT",
+      "suggested_item": "ITEM_SITRUS_BERRY",
+      "item_context": "Sitrus Berry is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 7 letsgoou Primeape All-out Attacker, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Primeape uses Defiant as a Defiant Rage Fist attacker, with Rage Fist, Close Combat, Rock Slide, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Rage Fist scales after Primeape takes hits, while Close Combat gives immediate unconditional damage."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_GROWLITHE",
+      "role": "Intimidate burn and Snarl support",
+      "moves": [
+        "MOVE_FLARE_BLITZ",
+        "MOVE_WILL_O_WISP",
+        "MOVE_SNARL",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CAREFUL",
+      "ability": "ABILITY_INTIMIDATE",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 7 lc Growlithe Bulky Pivot, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Growlithe uses Intimidate as a Intimidate burn and Snarl support, with Flare Blitz, Will O Wisp, Snarl, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Intimidate and Snarl cover opposite attacking stats, and Will-O-Wisp adds focused physical suppression."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_ARCANINE",
+      "role": "Intimidate offensive support",
+      "moves": [
+        "MOVE_FLARE_BLITZ",
+        "MOVE_EXTREME_SPEED",
+        "MOVE_SNARL",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_INTIMIDATE",
+      "suggested_item": "ITEM_SITRUS_BERRY",
+      "item_context": "Sitrus Berry is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 6 battlespotdoubles Arcanine Choiced and compatible doubles alternatives",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Arcanine uses Intimidate as a Intimidate offensive support, with Flare Blitz, Extreme Speed, Snarl, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Intimidate and Snarl soften both damage classes while Flare Blitz and Extreme Speed preserve knockout pressure."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_ABRA",
+      "role": "Magic Guard fast special disruptor",
+      "moves": [
+        "MOVE_PSYCHIC",
+        "MOVE_DAZZLING_GLEAM",
+        "MOVE_ENCORE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_MAGIC_GUARD",
+      "suggested_item": "ITEM_FOCUS_SASH",
+      "item_context": "Focus Sash is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 8 lc Abra Shed Shell, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Abra uses Magic Guard as a Magic Guard fast special disruptor, with Psychic, Dazzling Gleam, Encore, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Encore punishes passive turns and Magic Guard prevents incidental damage from invalidating Abra's Focus Sash suggestion."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_KADABRA",
+      "role": "Magic Guard Encore attacker",
+      "moves": [
+        "MOVE_PSYCHIC",
+        "MOVE_DAZZLING_GLEAM",
+        "MOVE_ENCORE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_MAGIC_GUARD",
+      "suggested_item": "ITEM_FOCUS_SASH",
+      "item_context": "Focus Sash is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 7 nfe Kadabra Revenge Killer, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Kadabra uses Magic Guard as a Magic Guard Encore attacker, with Psychic, Dazzling Gleam, Encore, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Kadabra converts high Speed into Encore disruption while its two attacks cover common doubles targets."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_ALAKAZAM",
+      "role": "Magic Guard fast special attacker",
+      "moves": [
+        "MOVE_PSYCHIC",
+        "MOVE_DAZZLING_GLEAM",
+        "MOVE_ENCORE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_MAGIC_GUARD",
+      "suggested_item": "ITEM_FOCUS_SASH",
+      "item_context": "Focus Sash is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 5 vgc2012 Alakazam Standard and compatible doubles alternatives",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Alakazam uses Magic Guard as a Magic Guard fast special attacker, with Psychic, Dazzling Gleam, Encore, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Magic Guard preserves the fragile attacker from passive chip, and Encore prevents the set from being only raw damage."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_MACHOP",
+      "role": "No Guard Dynamic Punch attacker",
+      "moves": [
+        "MOVE_DYNAMIC_PUNCH",
+        "MOVE_KNOCK_OFF",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_NO_GUARD",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 7 lc Machop Choice Scarf, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Machop uses No Guard as a No Guard Dynamic Punch attacker, with Dynamic Punch, Knock Off, Rock Slide, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "No Guard makes Dynamic Punch reliable and also removes the accuracy safety of opposing moves aimed at Machop."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_MACHOKE",
+      "role": "No Guard confusion attacker",
+      "moves": [
+        "MOVE_DYNAMIC_PUNCH",
+        "MOVE_KNOCK_OFF",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_NO_GUARD",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Pokemon Showdown and Smogon competitive corpus for Machoke, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Machoke uses No Guard as a No Guard confusion attacker, with Dynamic Punch, Knock Off, Rock Slide, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "No Guard turns Dynamic Punch into guaranteed damage plus confusion, while the remaining slots cover positioning and spread pressure."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_MACHAMP",
+      "role": "No Guard Wide Guard tank",
+      "moves": [
+        "MOVE_DYNAMIC_PUNCH",
+        "MOVE_WIDE_GUARD",
+        "MOVE_STONE_EDGE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_NO_GUARD",
+      "suggested_item": "ITEM_SITRUS_BERRY",
+      "item_context": "Sitrus Berry is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 6 battlespotdoubles Machamp Dynamic Punch Tank and compatible doubles alternatives",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Machamp uses No Guard as a No Guard Wide Guard tank, with Dynamic Punch, Wide Guard, Stone Edge, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Wide Guard blocks opposing spread attacks while No Guard makes both attacking options reliable."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_WEEPINBELL",
+      "role": "Chlorophyll sleep attacker",
+      "moves": [
+        "MOVE_SLEEP_POWDER",
+        "MOVE_GIGA_DRAIN",
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_CHLOROPHYLL",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 9 nfe Weepinbell Utility, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Weepinbell uses Chlorophyll as a Chlorophyll sleep attacker, with Sleep Powder, Giga Drain, Sludge Bomb, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Sun enables Chlorophyll, while sleep and dual STAB remain useful if the weather plan is interrupted."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_VICTREEBEL",
+      "role": "Chlorophyll sleep attacker",
+      "moves": [
+        "MOVE_SLEEP_POWDER",
+        "MOVE_LEAF_STORM",
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_CHLOROPHYLL",
+      "suggested_item": "ITEM_LIFE_ORB",
+      "item_context": "Life Orb is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Pokemon Showdown and Smogon competitive corpus for Victreebel, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Victreebel uses Chlorophyll as a Chlorophyll sleep attacker, with Sleep Powder, Leaf Storm, Sludge Bomb, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Chlorophyll requires allied sun for speed, but Leaf Storm gives Victreebel an immediate high-power line in any weather."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_TENTACRUEL",
+      "role": "fast Acid Spray support attacker",
+      "moves": [
+        "MOVE_SCALD",
+        "MOVE_ACID_SPRAY",
+        "MOVE_ICY_WIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_CLEAR_BODY",
+      "suggested_item": "ITEM_BLACK_SLUDGE",
+      "item_context": "Black Sludge is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Pokemon Showdown and Smogon competitive corpus for Tentacruel, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Tentacruel uses Clear Body as a fast Acid Spray support attacker, with Scald, Acid Spray, Icy Wind, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Acid Spray enables its partner's special damage while Icy Wind controls both opponents' speed."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_GEODUDE",
+      "role": "Sturdy spread attacker",
+      "moves": [
+        "MOVE_EARTHQUAKE",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_STURDY",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Pokemon Showdown and Smogon competitive corpus for Geodude, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Geodude uses Sturdy as a Sturdy spread attacker, with Earthquake, Rock Slide, Sucker Punch, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Sturdy usually guarantees one action at full HP, but residual damage can break that safety before Geodude moves."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_GRAVELER",
+      "role": "Sturdy spread attacker",
+      "moves": [
+        "MOVE_EARTHQUAKE",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_STURDY",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 6 zu Graveler Suicide Lead, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Graveler uses Sturdy as a Sturdy spread attacker, with Earthquake, Rock Slide, Sucker Punch, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Sturdy gives the slow attacker a turn when unbroken, while Sucker Punch supplies an alternate speed line."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_GOLEM",
+      "role": "Sturdy Wide Guard attacker",
+      "moves": [
+        "MOVE_EARTHQUAKE",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_WIDE_GUARD",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_STURDY",
+      "suggested_item": "ITEM_WEAKNESS_POLICY",
+      "item_context": "Weakness Policy is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Pokemon Showdown and Smogon competitive corpus for Golem, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Golem uses Sturdy as a Sturdy Wide Guard attacker, with Earthquake, Rock Slide, Wide Guard, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Weakness Policy can exploit Sturdy but is optional; Wide Guard creates value without consuming an item."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_PONYTA",
+      "role": "Reckless physical attacker",
+      "moves": [
+        "MOVE_FLARE_BLITZ",
+        "MOVE_WILD_CHARGE",
+        "MOVE_HIGH_HORSEPOWER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_RECKLESS",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Pokemon Showdown and Smogon competitive corpus for Ponyta, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Ponyta uses Reckless as a Reckless physical attacker, with Flare Blitz, Wild Charge, High Horsepower, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Reckless powers both recoil attacks, so Ponyta needs careful HP management even without a Life Orb."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_RAPIDASH",
+      "role": "Reckless fast physical attacker",
+      "moves": [
+        "MOVE_FLARE_BLITZ",
+        "MOVE_WILD_CHARGE",
+        "MOVE_HIGH_HORSEPOWER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_RECKLESS",
+      "suggested_item": "ITEM_LIFE_ORB",
+      "item_context": "Life Orb is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 4 uu Rapidash Physical Attacker, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Rapidash uses Reckless as a Reckless fast physical attacker, with Flare Blitz, Wild Charge, High Horsepower, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Reckless and Life Orb maximize pressure but also make recoil management central to the set."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_MAGNEMITE",
+      "role": "Sturdy speed-control attacker",
+      "moves": [
+        "MOVE_THUNDERBOLT",
+        "MOVE_FLASH_CANNON",
+        "MOVE_ELECTROWEB",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_STURDY",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 8 lc Magnemite Trapper, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Magnemite uses Sturdy as a Sturdy speed-control attacker, with Thunderbolt, Flash Cannon, Electroweb, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Sturdy improves the chance to land Electroweb, while the set has no terrain or weather requirement."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_MAGNETON",
+      "role": "Sturdy Electroweb attacker",
+      "moves": [
+        "MOVE_THUNDERBOLT",
+        "MOVE_FLASH_CANNON",
+        "MOVE_ELECTROWEB",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_STURDY",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Pokemon Showdown and Smogon competitive corpus for Magneton, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Magneton uses Sturdy as a Sturdy Electroweb attacker, with Thunderbolt, Flash Cannon, Electroweb, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Eviolite and Sturdy reinforce the support role, but the offensive and speed-control moves work independently."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_FARFETCHD",
+      "role": "Defiant Feint attacker",
+      "moves": [
+        "MOVE_BRAVE_BIRD",
+        "MOVE_LEAF_BLADE",
+        "MOVE_FEINT",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_DEFIANT",
+      "suggested_item": "ITEM_SITRUS_BERRY",
+      "item_context": "Sitrus Berry is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Pokemon Showdown and Smogon competitive corpus for Farfetch'd, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Farfetch'd uses Defiant as a Defiant Feint attacker, with Brave Bird, Leaf Blade, Feint, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Defiant punishes Intimidate while Feint lets Farfetchd break an opponent's Protect for its partner."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_DODUO",
+      "role": "fast physical priority attacker",
+      "moves": [
+        "MOVE_BRAVE_BIRD",
+        "MOVE_KNOCK_OFF",
+        "MOVE_QUICK_ATTACK",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_EARLY_BIRD",
+      "suggested_item": "ITEM_FOCUS_SASH",
+      "item_context": "Focus Sash is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 9 lc Doduo Fast Attacker, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Doduo uses Early Bird as a fast physical priority attacker, with Brave Bird, Knock Off, Quick Attack, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Early Bird shortens sleep disruption and the three attacks cover pressure, items, and priority without setup."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_DODRIO",
+      "role": "Moxie physical cleaner",
+      "moves": [
+        "MOVE_BRAVE_BIRD",
+        "MOVE_KNOCK_OFF",
+        "MOVE_QUICK_ATTACK",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_MOXIE",
+      "suggested_item": "ITEM_LIFE_ORB",
+      "item_context": "Life Orb is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 5 vgc2012 Dodrio Physical Attacker and compatible doubles alternatives",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Dodrio uses Moxie as a Moxie physical cleaner, with Brave Bird, Knock Off, Quick Attack, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Moxie rewards clean knockouts but is not needed for Dodrio's immediate Brave Bird pressure."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_SEEL",
+      "role": "Fur Coat Fake Out support",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_ICY_WIND",
+        "MOVE_AQUA_JET",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_FUR_COAT",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 6 lc Seel Life Orb, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Seel uses Fur Coat as a Fur Coat Fake Out support, with Fake Out, Icy Wind, Aqua Jet, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Fur Coat makes Seel unusually resilient to physical double targets while its moves manipulate tempo."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_DEWGONG",
+      "role": "Fur Coat Fake Out speed control",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_FREEZE_DRY",
+        "MOVE_ICY_WIND",
+        "MOVE_ENCORE"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_FUR_COAT",
+      "suggested_item": "ITEM_SITRUS_BERRY",
+      "item_context": "Sitrus Berry is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Pokemon Showdown and Smogon competitive corpus for Dewgong, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Dewgong uses Fur Coat as a Fur Coat Fake Out speed control, with Fake Out, Freeze Dry, Icy Wind, and Encore forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Fake Out buys the first turn, and Encore plus Icy Wind continue controlling the board after that one-use pressure."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_GRIMER",
+      "role": "Poison Touch item disruptor",
+      "moves": [
+        "MOVE_GUNK_SHOT",
+        "MOVE_KNOCK_OFF",
+        "MOVE_SHADOW_SNEAK",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BRAVE",
+      "ability": "ABILITY_POISON_TOUCH",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 7 lc Grimer Tank, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Grimer uses Poison Touch as a Poison Touch item disruptor, with Gunk Shot, Knock Off, Shadow Sneak, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Poison Touch adds contact upside while Knock Off and Shadow Sneak provide utility beyond raw Poison damage."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_MUK",
+      "role": "Poison Touch priority tank",
+      "moves": [
+        "MOVE_GUNK_SHOT",
+        "MOVE_KNOCK_OFF",
+        "MOVE_SHADOW_SNEAK",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_POISON_TOUCH",
+      "suggested_item": "ITEM_BLACK_SLUDGE",
+      "item_context": "Black Sludge is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Pokemon Showdown and Smogon competitive corpus for Muk, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Muk uses Poison Touch as a Poison Touch priority tank, with Gunk Shot, Knock Off, Shadow Sneak, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Muk combines item removal and priority with strong Poison pressure, requiring no terrain or setup turn."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_SHELLDER",
+      "role": "Skill Link Shell Smash attacker",
+      "moves": [
+        "MOVE_SHELL_SMASH",
+        "MOVE_ICICLE_SPEAR",
+        "MOVE_ROCK_BLAST",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_SKILL_LINK",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 8 lc Shellder Shell Smash, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Shellder uses Skill Link as a Skill Link Shell Smash attacker, with Shell Smash, Icicle Spear, Rock Blast, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Shell Smash needs a protected opening, while Skill Link makes both multi-hit attacks deterministic afterward."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_CLOYSTER",
+      "role": "Skill Link Shell Smash attacker",
+      "moves": [
+        "MOVE_SHELL_SMASH",
+        "MOVE_ICICLE_SPEAR",
+        "MOVE_ROCK_BLAST",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_SKILL_LINK",
+      "suggested_item": "ITEM_FOCUS_SASH",
+      "item_context": "Focus Sash is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 5 vgc2012 Cloyster Shell Smash and compatible doubles alternatives",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Cloyster uses Skill Link as a Skill Link Shell Smash attacker, with Shell Smash, Icicle Spear, Rock Blast, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Focus Sash is the safest setup aid but is advisory; Skill Link and the attacks do not depend on it."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_GASTLY",
+      "role": "Levitate special disruptor",
+      "moves": [
+        "MOVE_SHADOW_BALL",
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_ICY_WIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_LEVITATE",
+      "suggested_item": "ITEM_FOCUS_SASH",
+      "item_context": "Focus Sash is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Pokemon Showdown and Smogon competitive corpus for Gastly, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Gastly uses Levitate as a Levitate special disruptor, with Shadow Ball, Sludge Bomb, Icy Wind, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Levitate gives Gastly a useful Ground immunity beside Earthquake partners, while Icy Wind controls opposing speed."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_HAUNTER",
+      "role": "Levitate fast special disruptor",
+      "moves": [
+        "MOVE_SHADOW_BALL",
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_WILL_O_WISP",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_LEVITATE",
+      "suggested_item": "ITEM_FOCUS_SASH",
+      "item_context": "Focus Sash is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Pokemon Showdown and Smogon competitive corpus for Haunter, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Haunter uses Levitate as a Levitate fast special disruptor, with Shadow Ball, Sludge Bomb, Will O Wisp, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Levitate supports Earthquake partners and Will-O-Wisp checks physical attackers without relying on a Choice item."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_GENGAR",
+      "role": "Levitate fast special disruptor",
+      "moves": [
+        "MOVE_SHADOW_BALL",
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_WILL_O_WISP",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_LEVITATE",
+      "suggested_item": "ITEM_FOCUS_SASH",
+      "item_context": "Focus Sash is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 6 battlespotdoubles Gengar Utility and compatible doubles alternatives",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Gengar uses Levitate as a Levitate fast special disruptor, with Shadow Ball, Sludge Bomb, Will O Wisp, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Will-O-Wisp expands Gengar beyond pure damage, while Levitate creates clean positioning beside allied Earthquake."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_ONIX",
+      "role": "Sturdy Wide Guard support",
+      "moves": [
+        "MOVE_ROCK_SLIDE",
+        "MOVE_EARTHQUAKE",
+        "MOVE_WIDE_GUARD",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_STURDY",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Pokemon Showdown and Smogon competitive corpus for Onix, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Onix uses Sturdy as a Sturdy Wide Guard support, with Rock Slide, Earthquake, Wide Guard, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Sturdy supports one reliable action and Wide Guard can erase an opponent's spread-move turn."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_DROWZEE",
+      "role": "Inner Focus Trick Room support",
+      "moves": [
+        "MOVE_TRICK_ROOM",
+        "MOVE_PSYCHIC",
+        "MOVE_HYPNOSIS",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_SASSY",
+      "ability": "ABILITY_INNER_FOCUS",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 5 lc Drowzee Choice Scarf, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Drowzee uses Inner Focus as a Inner Focus Trick Room support, with Trick Room, Psychic, Hypnosis, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Inner Focus helps Drowzee establish Trick Room through flinch pressure, while Hypnosis remains accuracy dependent."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_HYPNO",
+      "role": "Inner Focus Trick Room support",
+      "moves": [
+        "MOVE_TRICK_ROOM",
+        "MOVE_PSYCHIC",
+        "MOVE_HYPNOSIS",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_SASSY",
+      "ability": "ABILITY_INNER_FOCUS",
+      "suggested_item": "ITEM_SITRUS_BERRY",
+      "item_context": "Sitrus Berry is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 5 vgc2012 Hypno Trick Room Tank and compatible doubles alternatives",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Hypno uses Inner Focus as a Inner Focus Trick Room support, with Trick Room, Psychic, Hypnosis, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Trick Room reverses speed for slow partners and Inner Focus protects the setup from ordinary flinching."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_KRABBY",
+      "role": "Sheer Force physical attacker",
+      "moves": [
+        "MOVE_LIQUIDATION",
+        "MOVE_KNOCK_OFF",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_SHEER_FORCE",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 7 lc Krabby Choice Scarf, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Krabby uses Sheer Force as a Sheer Force physical attacker, with Liquidation, Knock Off, Rock Slide, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Sheer Force rewards the attacking coverage, while Knock Off remains valuable even when it does not receive the boost."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_KINGLER",
+      "role": "Sheer Force spread attacker",
+      "moves": [
+        "MOVE_CRABHAMMER",
+        "MOVE_KNOCK_OFF",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_SHEER_FORCE",
+      "suggested_item": "ITEM_LIFE_ORB",
+      "item_context": "Life Orb is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 5 vgc2012 Kingler Physical Attacker and compatible doubles alternatives",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Kingler uses Sheer Force as a Sheer Force spread attacker, with Crabhammer, Knock Off, Rock Slide, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Life Orb is the ideal Sheer Force partner but is not installed by the builder or required for the moves."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_VOLTORB",
+      "role": "fast dual-screen support",
+      "moves": [
+        "MOVE_REFLECT",
+        "MOVE_LIGHT_SCREEN",
+        "MOVE_VOLT_SWITCH",
+        "MOVE_TAUNT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_AFTERMATH",
+      "suggested_item": "ITEM_LIGHT_CLAY",
+      "item_context": "Light Clay is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 7 lc Voltorb Dual Screens, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Voltorb uses Aftermath as a fast dual-screen support, with Reflect, Light Screen, Volt Switch, and Taunt forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Light Clay extends both screens but is advisory; Volt Switch and Taunt keep Voltorb active without it."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_ELECTRODE",
+      "role": "Electric Surge fast disruptor",
+      "moves": [
+        "MOVE_THUNDERBOLT",
+        "MOVE_VOLT_SWITCH",
+        "MOVE_TAUNT",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_ELECTRIC_SURGE",
+      "suggested_item": "ITEM_FOCUS_SASH",
+      "item_context": "Focus Sash is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Pokemon Showdown and Smogon competitive corpus for Electrode, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Electrode uses Electric Surge as a Electric Surge fast disruptor, with Thunderbolt, Volt Switch, Taunt, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Electric Surge supplies immediate terrain pressure, while Volt Switch lets Electrode preserve that utility for later."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_EXEGGUTOR",
+      "role": "Harvest Trick Room sleep control",
+      "moves": [
+        "MOVE_TRICK_ROOM",
+        "MOVE_SLEEP_POWDER",
+        "MOVE_PSYCHIC",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_QUIET",
+      "ability": "ABILITY_HARVEST",
+      "suggested_item": "ITEM_SITRUS_BERRY",
+      "item_context": "Sitrus Berry is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Pokemon Showdown and Smogon competitive corpus for Exeggutor, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Exeggutor uses Harvest as a Harvest Trick Room sleep control, with Trick Room, Sleep Powder, Psychic, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Harvest is most valuable with the suggested Berry and in sun, but Trick Room and Sleep Powder do not require either."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_CUBONE",
+      "role": "Lightning Rod Thick Club attacker",
+      "moves": [
+        "MOVE_BONEMERANG",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_KNOCK_OFF",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BRAVE",
+      "ability": "ABILITY_LIGHTNING_ROD",
+      "suggested_item": "ITEM_THICK_CLUB",
+      "item_context": "Thick Club is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Pokemon Showdown and Smogon competitive corpus for Cubone, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Cubone uses Lightning Rod as a Lightning Rod Thick Club attacker, with Bonemerang, Rock Slide, Knock Off, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Thick Club supplies most of Cubone's damage and is strongly recommended, while Lightning Rod protects its partner from Electric moves."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_MAROWAK",
+      "role": "Lightning Rod Trick Room attacker",
+      "moves": [
+        "MOVE_BONEMERANG",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_FIRE_PUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BRAVE",
+      "ability": "ABILITY_LIGHTNING_ROD",
+      "suggested_item": "ITEM_THICK_CLUB",
+      "item_context": "Thick Club is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 5 vgc2012 Marowak Trick Room Attacker and compatible doubles alternatives",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Marowak uses Lightning Rod as a Lightning Rod Trick Room attacker, with Bonemerang, Rock Slide, Fire Punch, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Thick Club is the intended damage item, and Brave Speed makes Marowak best under allied Trick Room without making its attacks unusable outside it."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_HITMONLEE",
+      "role": "Unburden Close Combat cleaner",
+      "moves": [
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_FAKE_OUT",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_UNBURDEN",
+      "suggested_item": "ITEM_WHITE_HERB",
+      "item_context": "White Herb is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Pokemon Showdown and Smogon competitive corpus for Hitmonlee, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Hitmonlee uses Unburden as a Unburden Close Combat cleaner, with Close Combat, Fake Out, Rock Slide, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "White Herb can restore Close Combat drops and trigger Unburden, but the builder does not equip it automatically."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_HITMONCHAN",
+      "role": "Blitz Boxer priority puncher",
+      "moves": [
+        "MOVE_DRAIN_PUNCH",
+        "MOVE_ICE_PUNCH",
+        "MOVE_THUNDER_PUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_BLITZ_BOXER",
+      "suggested_item": "ITEM_LIFE_ORB",
+      "item_context": "Life Orb is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Pokemon Showdown and Smogon competitive corpus for Hitmonchan, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Hitmonchan uses Blitz Boxer as a Blitz Boxer priority puncher, with Drain Punch, Ice Punch, Thunder Punch, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Blitz Boxer is the local defining ability for punching pressure, and Drain Punch offsets some sustained combat damage."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_LICKITUNG",
+      "role": "Cloud Nine bulky disruption support",
+      "moves": [
+        "MOVE_BODY_SLAM",
+        "MOVE_KNOCK_OFF",
+        "MOVE_ICY_WIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CAREFUL",
+      "ability": "ABILITY_CLOUD_NINE",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 5 lc Lickitung RestTalk + Curse, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Lickitung uses Cloud Nine as a Cloud Nine bulky disruption support, with Body Slam, Knock Off, Icy Wind, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Cloud Nine suppresses hostile weather while paralysis chances, item removal, and speed drops create independent board value."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_KOFFING",
+      "role": "Neutralizing Gas ability control",
+      "moves": [
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_WILL_O_WISP",
+        "MOVE_TAUNT",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BOLD",
+      "ability": "ABILITY_NEUTRALIZING_GAS",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Pokemon Showdown and Smogon competitive corpus for Koffing, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Koffing uses Neutralizing Gas as a Neutralizing Gas ability control, with Sludge Bomb, Will O Wisp, Taunt, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Neutralizing Gas suppresses allied abilities too, so the player must choose Koffing's partner deliberately."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_WEEZING",
+      "role": "Neutralizing Gas ability control",
+      "moves": [
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_WILL_O_WISP",
+        "MOVE_TAUNT",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BOLD",
+      "ability": "ABILITY_NEUTRALIZING_GAS",
+      "suggested_item": "ITEM_BLACK_SLUDGE",
+      "item_context": "Black Sludge is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Pokemon Showdown and Smogon competitive corpus for Weezing, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Weezing uses Neutralizing Gas as a Neutralizing Gas ability control, with Sludge Bomb, Will O Wisp, Taunt, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Neutralizing Gas affects both teams, making partner selection the key dependency rather than a held item."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_RHYHORN",
+      "role": "Lightning Rod Trick Room attacker",
+      "moves": [
+        "MOVE_HIGH_HORSEPOWER",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_MEGAHORN",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BRAVE",
+      "ability": "ABILITY_LIGHTNING_ROD",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Pokemon Showdown and Smogon competitive corpus for Rhyhorn, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Rhyhorn uses Lightning Rod as a Lightning Rod Trick Room attacker, with High Horsepower, Rock Slide, Megahorn, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Lightning Rod protects its partner and Brave Speed targets Trick Room, though the attacks remain usable outside it."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_RHYDON",
+      "role": "Lightning Rod Eviolite attacker",
+      "moves": [
+        "MOVE_HIGH_HORSEPOWER",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_MEGAHORN",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BRAVE",
+      "ability": "ABILITY_LIGHTNING_ROD",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Pokemon Showdown and Smogon competitive corpus for Rhydon, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Rhydon uses Lightning Rod as a Lightning Rod Eviolite attacker, with High Horsepower, Rock Slide, Megahorn, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Eviolite and Trick Room are ideal support, but Lightning Rod creates immediate partner utility on every switch-in."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_CHANSEY",
+      "role": "Healer special wall support",
+      "moves": [
+        "MOVE_SEISMIC_TOSS",
+        "MOVE_HEAL_PULSE",
+        "MOVE_SOFT_BOILED",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BOLD",
+      "ability": "ABILITY_HEALER",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 8 doublesou Chansey Special Wall and compatible doubles alternatives",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Chansey uses Healer as a Healer special wall support, with Seismic Toss, Heal Pulse, Soft Boiled, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Eviolite is central to Chansey's expected bulk but is not granted; Healer and Heal Pulse are specifically valuable beside a partner."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_TANGELA",
+      "role": "Regenerator sleep redirection support",
+      "moves": [
+        "MOVE_RAGE_POWDER",
+        "MOVE_SLEEP_POWDER",
+        "MOVE_GIGA_DRAIN",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BOLD",
+      "ability": "ABILITY_REGENERATOR",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 8 nfe Tangela Physically Defensive, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Tangela uses Regenerator as a Regenerator sleep redirection support, with Rage Powder, Sleep Powder, Giga Drain, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Rage Powder and Sleep Powder compete for turns but give Tangela both reactive and proactive control, while Regenerator rewards repositioning."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_KANGASKHAN",
+      "role": "Scrappy Fake Out attacker",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_SCRAPPY",
+      "suggested_item": "ITEM_KANGASKHANITE",
+      "item_context": "Kangaskhanite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 9 nationaldexdoubles Kangaskhan Setup Attacker and compatible doubles alternatives",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Kangaskhan uses Scrappy as a Scrappy Fake Out attacker, with Fake Out, Double Edge, Sucker Punch, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Kangaskhanite is only a suggestion and the base Scrappy set remains coherent before or without Mega Evolution."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_HORSEA",
+      "role": "Swift Swim rain attacker",
+      "moves": [
+        "MOVE_HYDRO_PUMP",
+        "MOVE_ICE_BEAM",
+        "MOVE_ICY_WIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_SWIFT_SWIM",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 7 lc Horsea Rain Sweeper, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Horsea uses Swift Swim as a Swift Swim rain attacker, with Hydro Pump, Ice Beam, Icy Wind, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Swift Swim needs rain for speed doubling, while Icy Wind supplies speed control when rain is unavailable."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_SEADRA",
+      "role": "Sniper Focus Energy attacker",
+      "moves": [
+        "MOVE_FOCUS_ENERGY",
+        "MOVE_HYDRO_PUMP",
+        "MOVE_ICE_BEAM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_SNIPER",
+      "suggested_item": "ITEM_SCOPE_LENS",
+      "item_context": "Scope Lens is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Pokemon Showdown and Smogon competitive corpus for Seadra, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Seadra uses Sniper as a Sniper Focus Energy attacker, with Focus Energy, Hydro Pump, Ice Beam, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Scope Lens is strongly recommended for the Focus Energy plus Sniper plan but is never equipped by the builder."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_STARYU",
+      "role": "fast special coverage attacker",
+      "moves": [
+        "MOVE_HYDRO_PUMP",
+        "MOVE_THUNDERBOLT",
+        "MOVE_ICE_BEAM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_NATURAL_CURE",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 8 lc Staryu Offensive, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Staryu uses Natural Cure as a fast special coverage attacker, with Hydro Pump, Thunderbolt, Ice Beam, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Natural Cure rewards switching after status and the three-attack coverage requires no weather support."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_STARMIE",
+      "role": "fast special coverage attacker",
+      "moves": [
+        "MOVE_HYDRO_PUMP",
+        "MOVE_THUNDERBOLT",
+        "MOVE_ICE_BEAM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_NATURAL_CURE",
+      "suggested_item": "ITEM_LIFE_ORB",
+      "item_context": "Life Orb is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 5 vgc2012 Starmie Special Attacker and compatible doubles alternatives",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Starmie uses Natural Cure as a fast special coverage attacker, with Hydro Pump, Thunderbolt, Ice Beam, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Natural Cure keeps Starmie flexible across repeated battles, while its coverage is immediately functional."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_MR_MIME",
+      "role": "Filter Fake Out support",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_ICY_WIND",
+        "MOVE_HELPING_HAND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_FILTER",
+      "suggested_item": "ITEM_SITRUS_BERRY",
+      "item_context": "Sitrus Berry is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Pokemon Showdown and Smogon competitive corpus for Mr. Mime, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Mr. Mime uses Filter as a Filter Fake Out support, with Fake Out, Icy Wind, Helping Hand, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Filter improves survival against super-effective double targets while Fake Out and Icy Wind establish partner tempo."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_SCYTHER",
+      "role": "Technician Tailwind attacker",
+      "moves": [
+        "MOVE_BUG_BITE",
+        "MOVE_FEINT",
+        "MOVE_TAILWIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_TECHNICIAN",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Pokemon Showdown and Smogon competitive corpus for Scyther, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Scyther uses Technician as a Technician Tailwind attacker, with Bug Bite, Feint, Tailwind, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Technician boosts Bug Bite and Feint, while Tailwind gives Scyther teamwide value even into poor attacking matchups."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_JYNX",
+      "role": "Dry Skin Fake Out sleep support",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_LOVELY_KISS",
+        "MOVE_ICE_BEAM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_DRY_SKIN",
+      "suggested_item": "ITEM_FOCUS_SASH",
+      "item_context": "Focus Sash is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 5 vgc2012 Jynx Support and compatible doubles alternatives",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Jynx uses Dry Skin as a Dry Skin Fake Out sleep support, with Fake Out, Lovely Kiss, Ice Beam, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Lovely Kiss is accuracy dependent and Dry Skin improves the matchup beside rain or allied Water moves."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_ELECTABUZZ",
+      "role": "Vital Spirit speed support attacker",
+      "moves": [
+        "MOVE_THUNDERBOLT",
+        "MOVE_ELECTROWEB",
+        "MOVE_HELPING_HAND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_VITAL_SPIRIT",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 9 vgc2024 Electabuzz Trick Room Support and compatible doubles alternatives",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Electabuzz uses Vital Spirit as a Vital Spirit speed support attacker, with Thunderbolt, Electroweb, Helping Hand, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Vital Spirit blocks sleep while Electroweb and Helping Hand let Electabuzz enable either kind of partner."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_MAGMAR",
+      "role": "Flame Body burn support attacker",
+      "moves": [
+        "MOVE_HEAT_WAVE",
+        "MOVE_WILL_O_WISP",
+        "MOVE_HELPING_HAND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_FLAME_BODY",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 9 vgc2025 Magmar Bulky Redirector and compatible doubles alternatives",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Magmar uses Flame Body as a Flame Body burn support attacker, with Heat Wave, Will O Wisp, Helping Hand, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Flame Body and Will-O-Wisp punish physical attackers while Helping Hand preserves value into Fire-resistant boards."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_PINSIR",
+      "role": "Moxie physical cleaner",
+      "moves": [
+        "MOVE_X_SCISSOR",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_FEINT",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_MOXIE",
+      "suggested_item": "ITEM_LIFE_ORB",
+      "item_context": "Life Orb is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 6 vgc2014 Pinsir Mega Attacker and compatible doubles alternatives",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Pinsir uses Moxie as a Moxie physical cleaner, with X Scissor, Close Combat, Feint, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Moxie rewards a secured knockout and Feint removes Protect so either Pinsir or its partner can finish a target."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_TAUROS",
+      "role": "Intimidate fast physical attacker",
+      "moves": [
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_INTIMIDATE",
+      "suggested_item": "ITEM_LIFE_ORB",
+      "item_context": "Life Orb is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 5 uu Tauros Life Orb, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Tauros uses Intimidate as a Intimidate fast physical attacker, with Double Edge, Close Combat, Rock Slide, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Intimidate creates immediate defensive value while Tauros applies broad physical and spread pressure."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_LAPRAS",
+      "role": "Water Absorb bulky speed control",
+      "moves": [
+        "MOVE_FREEZE_DRY",
+        "MOVE_HYDRO_PUMP",
+        "MOVE_ICY_WIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_WATER_ABSORB",
+      "suggested_item": "ITEM_LEFTOVERS",
+      "item_context": "Leftovers is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 6 battlespotdoubles Lapras Rain, Rain, Go Away (Special Tank) and compatible doubles alternatives",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Lapras uses Water Absorb as a Water Absorb bulky speed control, with Freeze Dry, Hydro Pump, Icy Wind, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Leftovers supports Lapras across repeated speed-control and Protect turns without restricting its move choices."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_EEVEE",
+      "role": "Adaptability Helping Hand support",
+      "moves": [
+        "MOVE_HYPER_VOICE",
+        "MOVE_YAWN",
+        "MOVE_HELPING_HAND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CALM",
+      "ability": "ABILITY_ADAPTABILITY",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 7 battlespotsingles Eevee Extreme Evoboost, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Eevee uses Adaptability as a Adaptability Helping Hand support, with Hyper Voice, Yawn, Helping Hand, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "This set deliberately avoids the unavailable Extreme Evoboost gimmick and remains useful without an item activation."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_VAPOREON",
+      "role": "Water Absorb spread support attacker",
+      "moves": [
+        "MOVE_MUDDY_WATER",
+        "MOVE_ICE_BEAM",
+        "MOVE_HELPING_HAND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_WATER_ABSORB",
+      "suggested_item": "ITEM_LEFTOVERS",
+      "item_context": "Leftovers is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 5 vgc2012 Vaporeon Trick Room Tank and compatible doubles alternatives",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Vaporeon uses Water Absorb as a Water Absorb spread support attacker, with Muddy Water, Ice Beam, Helping Hand, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Water Absorb enables safe positioning beside allied Water targeting, while the set remains useful without that interaction."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_JOLTEON",
+      "role": "Volt Absorb speed-control attacker",
+      "moves": [
+        "MOVE_THUNDERBOLT",
+        "MOVE_VOLT_SWITCH",
+        "MOVE_THUNDER_WAVE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_VOLT_ABSORB",
+      "suggested_item": "ITEM_FOCUS_SASH",
+      "item_context": "Focus Sash is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 5 vgc2012 Jolteon Special Sweeper and compatible doubles alternatives",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Jolteon uses Volt Absorb as a Volt Absorb speed-control attacker, with Thunderbolt, Volt Switch, Thunder Wave, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Volt Absorb can exploit allied or opposing Electric moves but is not required for Jolteon's fast tempo plan."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_FLAREON",
+      "role": "Guts Facade attacker",
+      "moves": [
+        "MOVE_FLARE_BLITZ",
+        "MOVE_FACADE",
+        "MOVE_QUICK_ATTACK",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_GUTS",
+      "suggested_item": "ITEM_FLAME_ORB",
+      "item_context": "Flame Orb is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Pokemon Showdown and Smogon competitive corpus for Flareon, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Flareon uses Guts as a Guts Facade attacker, with Flare Blitz, Facade, Quick Attack, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Flame Orb is strongly recommended to activate Guts and Facade, and recoil makes Protect timing important."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_PORYGON",
+      "role": "Download Trick Room support attacker",
+      "moves": [
+        "MOVE_TRICK_ROOM",
+        "MOVE_TRI_ATTACK",
+        "MOVE_ICE_BEAM",
+        "MOVE_RECOVER"
+      ],
+      "nature": "NATURE_QUIET",
+      "ability": "ABILITY_DOWNLOAD",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 8 lc Porygon Defensive, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Porygon uses Download as a Download Trick Room support attacker, with Trick Room, Tri Attack, Ice Beam, and Recover forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Quiet Speed targets Trick Room and Download can boost either offense based on the opposing board."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_OMANYTE",
+      "role": "Swift Swim Shell Smash attacker",
+      "moves": [
+        "MOVE_SHELL_SMASH",
+        "MOVE_MUDDY_WATER",
+        "MOVE_ICE_BEAM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_SWIFT_SWIM",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 8 lc Omanyte Shell Smash Sweeper, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Omanyte uses Swift Swim as a Swift Swim Shell Smash attacker, with Shell Smash, Muddy Water, Ice Beam, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Rain and a supported setup turn maximize the set, but Muddy Water and Ice Beam remain usable without either."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_OMASTAR",
+      "role": "Swift Swim Shell Smash spread attacker",
+      "moves": [
+        "MOVE_SHELL_SMASH",
+        "MOVE_MUDDY_WATER",
+        "MOVE_ICE_BEAM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_SWIFT_SWIM",
+      "suggested_item": "ITEM_WHITE_HERB",
+      "item_context": "White Herb is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Pokemon Showdown and Smogon competitive corpus for Omastar, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Omastar uses Swift Swim as a Swift Swim Shell Smash spread attacker, with Shell Smash, Muddy Water, Ice Beam, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "White Herb offsets Shell Smash defense drops and rain doubles Speed, but neither is automatically supplied."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_KABUTO",
+      "role": "Swift Swim physical attacker",
+      "moves": [
+        "MOVE_WATERFALL",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_KNOCK_OFF",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_SWIFT_SWIM",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 8 lc Kabuto Support, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Kabuto uses Swift Swim as a Swift Swim physical attacker, with Waterfall, Rock Slide, Knock Off, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Swift Swim needs rain for speed, while its physical coverage and item removal remain functional without weather."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_KABUTOPS",
+      "role": "Swift Swim rain attacker",
+      "moves": [
+        "MOVE_WATERFALL",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_AQUA_JET",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_SWIFT_SWIM",
+      "suggested_item": "ITEM_LIFE_ORB",
+      "item_context": "Life Orb is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 5 vgc2012 Kabutops Swift Swim Attacker and compatible doubles alternatives",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Kabutops uses Swift Swim as a Swift Swim rain attacker, with Waterfall, Rock Slide, Aqua Jet, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Rain unlocks Swift Swim, while Aqua Jet provides an alternate priority line whenever weather control is lost."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_AERODACTYL",
+      "role": "fast Tailwind and Wide Guard support",
+      "moves": [
+        "MOVE_ROCK_SLIDE",
+        "MOVE_WIDE_GUARD",
+        "MOVE_TAILWIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_UNNERVE",
+      "suggested_item": "ITEM_FOCUS_SASH",
+      "item_context": "Focus Sash is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 6 battlespotdoubles Aerodactyl Offensive Support and compatible doubles alternatives",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Aerodactyl uses Unnerve as a fast Tailwind and Wide Guard support, with Rock Slide, Wide Guard, Tailwind, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Unnerve blocks opposing Berry use while Aerodactyl chooses between speed control, spread denial, and spread pressure."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_SNORLAX",
+      "role": "Thick Fat Curse win condition",
+      "moves": [
+        "MOVE_CURSE",
+        "MOVE_BODY_SLAM",
+        "MOVE_HIGH_HORSEPOWER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BRAVE",
+      "ability": "ABILITY_THICK_FAT",
+      "suggested_item": "ITEM_SITRUS_BERRY",
+      "item_context": "Sitrus Berry is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 7 vgc2018 Snorlax DrumLax and compatible doubles alternatives",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Snorlax uses Thick Fat as a Thick Fat Curse win condition, with Curse, Body Slam, High Horsepower, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "This version avoids a dead Recycle slot when no Berry is equipped; Curse still benefits from allied Trick Room or redirection."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_ARTICUNO",
+      "role": "Pressure Tailwind speed control",
+      "moves": [
+        "MOVE_FREEZE_DRY",
+        "MOVE_ICY_WIND",
+        "MOVE_TAILWIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_PRESSURE",
+      "suggested_item": "ITEM_SITRUS_BERRY",
+      "item_context": "Sitrus Berry is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 9 vgc2024 Articuno Choice Specs and compatible doubles alternatives",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Articuno uses Pressure as a Pressure Tailwind speed control, with Freeze Dry, Icy Wind, Tailwind, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "The set avoids inaccurate Blizzard and weather dependence while offering both immediate and persistent speed control."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_ZAPDOS",
+      "role": "Static offensive Tailwind support",
+      "moves": [
+        "MOVE_VOLT_SWITCH",
+        "MOVE_HURRICANE",
+        "MOVE_TAILWIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_STATIC",
+      "suggested_item": "ITEM_SITRUS_BERRY",
+      "item_context": "Sitrus Berry is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 8 doublesou Zapdos Offensive Tailwind and compatible doubles alternatives",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Zapdos uses Static as a Static offensive Tailwind support, with Volt Switch, Hurricane, Tailwind, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Hurricane remains accuracy dependent outside rain, while Volt Switch and Tailwind provide reliable alternative turns."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_MOLTRES",
+      "role": "Flame Body Tailwind spread attacker",
+      "moves": [
+        "MOVE_HEAT_WAVE",
+        "MOVE_TAILWIND",
+        "MOVE_WILL_O_WISP",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_FLAME_BODY",
+      "suggested_item": "ITEM_SITRUS_BERRY",
+      "item_context": "Sitrus Berry is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Pokemon Showdown and Smogon competitive corpus for Moltres, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Moltres uses Flame Body as a Flame Body Tailwind spread attacker, with Heat Wave, Tailwind, Will O Wisp, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Flame Body and Will-O-Wisp suppress physical pressure while Heat Wave and Tailwind influence both opposing slots."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_DRATINI",
+      "role": "Shed Skin Dragon Dance cleaner",
+      "moves": [
+        "MOVE_DRAGON_DANCE",
+        "MOVE_OUTRAGE",
+        "MOVE_EXTREME_SPEED",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_SHED_SKIN",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 7 lc Dratini Life Orb Mixed Attacker, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Dratini uses Shed Skin as a Shed Skin Dragon Dance cleaner, with Dragon Dance, Outrage, Extreme Speed, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Outrage has random targeting in doubles, so Extreme Speed is the controllable cleanup line after Dragon Dance."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_DRAGONAIR",
+      "role": "Shed Skin Dragon Dance cleaner",
+      "moves": [
+        "MOVE_DRAGON_DANCE",
+        "MOVE_OUTRAGE",
+        "MOVE_EXTREME_SPEED",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_SHED_SKIN",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 9 nfe Dragonair Dragon Dance, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Dragonair uses Shed Skin as a Shed Skin Dragon Dance cleaner, with Dragon Dance, Outrage, Extreme Speed, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Shed Skin can clear disruptive status, while Outrage targeting remains a calculated doubles risk."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_DRAGONITE",
+      "role": "Multiscale Dragon Dance priority cleaner",
+      "moves": [
+        "MOVE_DRAGON_DANCE",
+        "MOVE_DRAGON_CLAW",
+        "MOVE_EXTREME_SPEED",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_MULTISCALE",
+      "suggested_item": "ITEM_LIFE_ORB",
+      "item_context": "Life Orb is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 9 doublesou Dragonite Priority Attacker and compatible doubles alternatives",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Dragonite uses Multiscale as a Multiscale Dragon Dance priority cleaner, with Dragon Dance, Dragon Claw, Extreme Speed, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Multiscale helps create the setup turn, but chip damage can remove that safety before Dragonite acts."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_MEWTWO",
+      "role": "Unnerve fast special attacker",
+      "moves": [
+        "MOVE_PSYSTRIKE",
+        "MOVE_ICE_BEAM",
+        "MOVE_AURA_SPHERE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_UNNERVE",
+      "suggested_item": "ITEM_LIFE_ORB",
+      "item_context": "Life Orb is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Pokemon Showdown and Smogon competitive corpus for Mewtwo, adapted for doubles",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Mewtwo uses Unnerve as a Unnerve fast special attacker, with Psystrike, Ice Beam, Aura Sphere, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Unnerve blocks opposing Berries and the three attacks cover both defensive stats without a setup dependency."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    },
+    {
+      "species": "SPECIES_MEW",
+      "role": "Synchronize Tailwind control support",
+      "moves": [
+        "MOVE_PSYCHIC",
+        "MOVE_TAILWIND",
+        "MOVE_WILL_O_WISP",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_SYNCHRONIZE",
+      "suggested_item": "ITEM_SITRUS_BERRY",
+      "item_context": "Sitrus Berry is advisory only; the native builder does not grant or equip held items.",
+      "source_refs": [
+        "Smogon gen 9 doublesou Mew Support and compatible doubles alternatives",
+        "Emerald Champions exact local stats, ability slots, and complete legal move pool"
+      ],
+      "doubles_rationale": "Mew uses Synchronize as a Synchronize Tailwind control support, with Psychic, Tailwind, Will O Wisp, and Protect forming one coherent four-slot doubles plan.",
+      "dependency_notes": [
+        "Synchronize can punish status while Tailwind and Will-O-Wisp let Mew reshape speed and physical damage immediately."
+      ],
+      "reviewed_by": "Emerald Champions Kanto authored doubles audit",
+      "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
+    }
+  ]
+}
