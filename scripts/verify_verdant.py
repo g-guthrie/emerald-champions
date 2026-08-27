@@ -1169,7 +1169,20 @@ checks = {
             "header->honeyMonsInfo",
             "SPECIES_FEEBAS",
             "GetStringWidth(1, name, 0)",
+            "CollectRouteSignSpeciesChances",
+            "ConvertIntToDecimalStringN",
+            "sText_RouteSignSpeciesPercent",
+            "sText_RouteSignGrass",
+            "sText_RouteSignSurf",
+            "sText_RouteSignRockSmash",
+            "sText_RouteSignOldRod",
+            "sText_RouteSignGoodRod",
+            "sText_RouteSignSuperRod",
+            "sText_RouteSignHoney",
+            "sText_RouteSignUnderBridge",
         ))
+        and wild_encounter_source.count("dest = StringCopy(gStringVar4, sText_RouteSignSpeciesHeader);") == 1
+        and "dest = StringCopy(dest, sText_RouteSignSpeciesHeader)" not in wild_encounter_source
         and "Common_EventScript_ShowRouteSpecies::" in read("data/event_scripts.s")
         and sum(
             path.read_text().count("goto Common_EventScript_ShowRouteSpecies")

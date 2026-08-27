@@ -177,7 +177,19 @@ for required_token in (
     "GetCurrentMapWildMonHeaderId()",
     "GetStringWidth(1, name, 0)",
     "ROUTE_SIGN_MAX_LINE_WIDTH 200",
-    "ROUTE_SIGN_LINES_PER_PAGE 2",
+    "CollectRouteSignSpeciesChances",
+    "entries[j].chance += slotChances[i]",
+    "for (chance = 100; chance > 0; chance--)",
+    "ConvertIntToDecimalStringN",
+    "sText_RouteSignSpeciesPercent",
+    "sText_RouteSignGrass",
+    "sText_RouteSignSurf",
+    "sText_RouteSignRockSmash",
+    "sText_RouteSignOldRod",
+    "sText_RouteSignGoodRod",
+    "sText_RouteSignSuperRod",
+    "sText_RouteSignHoney",
+    "sText_RouteSignUnderBridge",
     "SPECIES_FEEBAS",
     "header->landMonsInfo",
     "header->waterMonsInfo",
@@ -187,6 +199,29 @@ for required_token in (
 ):
     if required_token not in wild_source:
         failures.append(f"route-sign formatter is missing {required_token}")
+
+for method, count in (
+    ("LAND_MONS", 12),
+    ("WATER_MONS", 4),
+    ("ROCK_SMASH_MONS", 4),
+    ("HONEY_MONS", 6),
+):
+    for slot in range(count):
+        if f"ENCOUNTER_CHANCE_{method}_SLOT_{slot}" not in wild_source:
+            failures.append(f"route-sign formatter is missing {method} slot {slot} probability")
+for rod, slots in (
+    ("OLD_ROD", range(0, 2)),
+    ("GOOD_ROD", range(2, 5)),
+    ("SUPER_ROD", range(5, 10)),
+):
+    for slot in slots:
+        if f"ENCOUNTER_CHANCE_FISHING_MONS_{rod}_SLOT_{slot}" not in wild_source:
+            failures.append(f"route-sign formatter is missing {rod} slot {slot} probability")
+
+if wild_source.count("dest = StringCopy(gStringVar4, sText_RouteSignSpeciesHeader);") != 1:
+    failures.append("global route-sign species header must be emitted exactly once")
+if "dest = StringCopy(dest, sText_RouteSignSpeciesHeader)" in wild_source:
+    failures.append("global route-sign species header repeats on continuation pages")
 
 if "def_special BufferCurrentMapRouteSignSpecies" not in read("data/specials.inc"):
     failures.append("route-sign formatter is not registered as a field special")
@@ -200,7 +235,7 @@ if failures:
 
 print(
     f"PASS: {route_sign_count} wayfinding signs on {len(SIGNS_BY_MAP)} physical route maps "
-    "show live, unique encounter species with native pagination"
+    "show live encounter species grouped by method and exact percentage"
 )
 print(
     "PASS: encounter coverage ranges from "
