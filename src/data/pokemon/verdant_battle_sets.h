@@ -3,115 +3,115 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
 {
     [SPECIES_BULBASAUR] =
     {
-        .moves = {MOVE_GROWTH, MOVE_SLEEP_POWDER, MOVE_GIGA_DRAIN, MOVE_SLUDGE_BOMB},
-        .nature = NATURE_TIMID,
+        .moves = {MOVE_GIGA_DRAIN, MOVE_SLUDGE_BOMB, MOVE_SLEEP_POWDER, MOVE_PROTECT},
+        .nature = NATURE_MODEST,
         .abilitySlot = 2,
     },
     [SPECIES_IVYSAUR] =
     {
-        .moves = {MOVE_KNOCK_OFF, MOVE_SLUDGE_BOMB, MOVE_GIGA_DRAIN, MOVE_SYNTHESIS},
-        .nature = NATURE_BOLD,
+        .moves = {MOVE_GIGA_DRAIN, MOVE_SLUDGE_BOMB, MOVE_SLEEP_POWDER, MOVE_PROTECT},
+        .nature = NATURE_MODEST,
         .abilitySlot = 2,
     },
     [SPECIES_VENUSAUR] =
     {
-        .moves = {MOVE_SLUDGE_BOMB, MOVE_GIGA_DRAIN, MOVE_LEECH_SEED, MOVE_PROTECT},
-        .nature = NATURE_BOLD,
+        .moves = {MOVE_GIGA_DRAIN, MOVE_SLUDGE_BOMB, MOVE_SLEEP_POWDER, MOVE_PROTECT},
+        .nature = NATURE_MODEST,
         .abilitySlot = 2,
     },
     [SPECIES_CHARMANDER] =
     {
-        .moves = {MOVE_WEATHER_BALL, MOVE_FIRE_BLAST, MOVE_OVERHEAT, MOVE_SLEEP_TALK},
+        .moves = {MOVE_HEAT_WAVE, MOVE_DRAGON_PULSE, MOVE_OVERHEAT, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 2,
     },
     [SPECIES_CHARMELEON] =
     {
-        .moves = {MOVE_OVERHEAT, MOVE_WEATHER_BALL, MOVE_FLAMETHROWER, MOVE_DRAGON_PULSE},
+        .moves = {MOVE_HEAT_WAVE, MOVE_DRAGON_PULSE, MOVE_OVERHEAT, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 2,
     },
     [SPECIES_CHARIZARD] =
     {
-        .moves = {MOVE_HEAT_WAVE, MOVE_SCORCHING_SANDS, MOVE_TAILWIND, MOVE_PROTECT},
+        .moves = {MOVE_HEAT_WAVE, MOVE_AIR_SLASH, MOVE_TAILWIND, MOVE_PROTECT},
         .nature = NATURE_TIMID,
-        .abilitySlot = 1,
+        .abilitySlot = 2,
     },
     [SPECIES_SQUIRTLE] =
     {
-        .moves = {MOVE_RAPID_SPIN, MOVE_FAKE_OUT, MOVE_WATERFALL, MOVE_AQUA_JET},
-        .nature = NATURE_IMPISH,
-        .abilitySlot = 0,
+        .moves = {MOVE_FAKE_OUT, MOVE_ICY_WIND, MOVE_SCALD, MOVE_PROTECT},
+        .nature = NATURE_BOLD,
+        .abilitySlot = 1,
     },
     [SPECIES_WARTORTLE] =
     {
-        .moves = {MOVE_SHELL_SMASH, MOVE_SURF, MOVE_ICE_BEAM, MOVE_SUBSTITUTE},
+        .moves = {MOVE_SHELL_SMASH, MOVE_MUDDY_WATER, MOVE_ICE_BEAM, MOVE_PROTECT},
         .nature = NATURE_MODEST,
         .abilitySlot = 0,
     },
     [SPECIES_BLASTOISE] =
     {
-        .moves = {MOVE_WATER_SPOUT, MOVE_AURA_SPHERE, MOVE_ICE_BEAM, MOVE_PROTECT},
-        .nature = NATURE_TIMID,
-        .abilitySlot = 2,
+        .moves = {MOVE_WATER_SPOUT, MOVE_AURA_SPHERE, MOVE_DARK_PULSE, MOVE_PROTECT},
+        .nature = NATURE_MODEST,
+        .abilitySlot = 1,
     },
     [SPECIES_CATERPIE] =
     {
-        .moves = {MOVE_ELECTROWEB, MOVE_BUG_BITE, MOVE_TACKLE, MOVE_PROTECT},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_ELECTROWEB, MOVE_BUG_BITE, MOVE_STRING_SHOT, MOVE_PROTECT},
+        .nature = NATURE_IMPISH,
         .abilitySlot = 0,
     },
     [SPECIES_METAPOD] =
     {
-        .moves = {MOVE_IRON_DEFENSE, MOVE_TACKLE, MOVE_BUG_BITE, MOVE_ELECTROWEB},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_ELECTROWEB, MOVE_BUG_BITE, MOVE_IRON_DEFENSE, MOVE_STRING_SHOT},
+        .nature = NATURE_IMPISH,
         .abilitySlot = 0,
     },
     [SPECIES_BUTTERFREE] =
     {
-        .moves = {MOVE_QUIVER_DANCE, MOVE_SUBSTITUTE, MOVE_PSYCHIC, MOVE_BUG_BUZZ},
+        .moves = {MOVE_SLEEP_POWDER, MOVE_RAGE_POWDER, MOVE_TAILWIND, MOVE_PROTECT},
         .nature = NATURE_TIMID,
-        .abilitySlot = 2,
+        .abilitySlot = 0,
     },
     [SPECIES_WEEDLE] =
     {
-        .moves = {MOVE_BUG_BITE, MOVE_POISON_STING, MOVE_STRING_SHOT, MOVE_ELECTROWEB},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_ELECTROWEB, MOVE_STRING_SHOT, MOVE_BUG_BITE, MOVE_POISON_STING},
+        .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_KAKUNA] =
     {
-        .moves = {MOVE_POISON_STING, MOVE_IRON_DEFENSE, MOVE_STRING_SHOT, MOVE_BUG_BITE},
+        .moves = {MOVE_ELECTROWEB, MOVE_SKITTER_SMACK, MOVE_IRON_DEFENSE, MOVE_STRING_SHOT},
         .nature = NATURE_IMPISH,
         .abilitySlot = 0,
     },
     [SPECIES_BEEDRILL] =
     {
-        .moves = {MOVE_U_TURN, MOVE_POISON_JAB, MOVE_DRILL_RUN, MOVE_ROOST},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_U_TURN, MOVE_POISON_JAB, MOVE_DRILL_RUN, MOVE_PROTECT},
+        .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_PIDGEY] =
     {
-        .moves = {MOVE_BRAVE_BIRD, MOVE_U_TURN, MOVE_FEINT_ATTACK, MOVE_STEEL_WING},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_HURRICANE, MOVE_TAILWIND, MOVE_ROOST, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_PIDGEOTTO] =
     {
-        .moves = {MOVE_BRAVE_BIRD, MOVE_HYPER_VOICE, MOVE_PROTECT, MOVE_TAILWIND},
+        .moves = {MOVE_HURRICANE, MOVE_HEAT_WAVE, MOVE_TAILWIND, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_PIDGEOT] =
     {
-        .moves = {MOVE_HURRICANE, MOVE_HEAT_WAVE, MOVE_U_TURN, MOVE_ROOST},
+        .moves = {MOVE_HURRICANE, MOVE_HEAT_WAVE, MOVE_TAILWIND, MOVE_PROTECT},
         .nature = NATURE_TIMID,
-        .abilitySlot = 2,
+        .abilitySlot = 0,
     },
     [SPECIES_RATTATA] =
     {
-        .moves = {MOVE_DOUBLE_EDGE, MOVE_FLAME_WHEEL, MOVE_SUCKER_PUNCH, MOVE_ZEN_HEADBUTT},
+        .moves = {MOVE_DOUBLE_EDGE, MOVE_SUCKER_PUNCH, MOVE_U_TURN, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 2,
     },
@@ -123,32 +123,32 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_SPEAROW] =
     {
-        .moves = {MOVE_DOUBLE_EDGE, MOVE_DRILL_PECK, MOVE_DRILL_RUN, MOVE_U_TURN},
+        .moves = {MOVE_DRILL_PECK, MOVE_DRILL_RUN, MOVE_U_TURN, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 2,
     },
     [SPECIES_FEAROW] =
     {
-        .moves = {MOVE_DRILL_PECK, MOVE_PURSUIT, MOVE_QUICK_ATTACK, MOVE_PROTECT},
+        .moves = {MOVE_DRILL_PECK, MOVE_DRILL_RUN, MOVE_U_TURN, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
-        .abilitySlot = 1,
+        .abilitySlot = 0,
     },
     [SPECIES_EKANS] =
     {
-        .moves = {MOVE_COIL, MOVE_GUNK_SHOT, MOVE_EARTHQUAKE, MOVE_SUCKER_PUNCH},
+        .moves = {MOVE_COIL, MOVE_GUNK_SHOT, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
         .nature = NATURE_CAREFUL,
         .abilitySlot = 0,
     },
     [SPECIES_ARBOK] =
     {
-        .moves = {MOVE_PROTECT, MOVE_GUNK_SHOT, MOVE_COIL, MOVE_STOMPING_TANTRUM},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_COIL, MOVE_GUNK_SHOT, MOVE_STOMPING_TANTRUM, MOVE_PROTECT},
+        .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_PIKACHU] =
     {
-        .moves = {MOVE_FAKE_OUT, MOVE_THUNDERBOLT, MOVE_GRASS_KNOT, MOVE_PROTECT},
-        .nature = NATURE_NAIVE,
+        .moves = {MOVE_FAKE_OUT, MOVE_THUNDERBOLT, MOVE_ELECTROWEB, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
         .abilitySlot = 2,
     },
     [SPECIES_RAICHU] =
@@ -159,49 +159,49 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_SANDSHREW] =
     {
-        .moves = {MOVE_RAPID_SPIN, MOVE_STEALTH_ROCK, MOVE_EARTHQUAKE, MOVE_KNOCK_OFF},
+        .moves = {MOVE_EARTHQUAKE, MOVE_ROCK_SLIDE, MOVE_KNOCK_OFF, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
     [SPECIES_SANDSLASH] =
     {
-        .moves = {MOVE_X_SCISSOR, MOVE_NIGHT_SLASH, MOVE_STEALTH_ROCK, MOVE_EARTHQUAKE},
+        .moves = {MOVE_EARTHQUAKE, MOVE_ROCK_SLIDE, MOVE_KNOCK_OFF, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
-        .abilitySlot = 0,
+        .abilitySlot = 2,
     },
     [SPECIES_NIDORAN_F] =
     {
-        .moves = {MOVE_POISON_JAB, MOVE_HONE_CLAWS, MOVE_TOXIC_SPIKES, MOVE_CRUNCH},
+        .moves = {MOVE_HONE_CLAWS, MOVE_POISON_JAB, MOVE_CRUNCH, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
     [SPECIES_NIDORINA] =
     {
-        .moves = {MOVE_TOXIC_SPIKES, MOVE_CRUNCH, MOVE_HONE_CLAWS, MOVE_DOUBLE_KICK},
+        .moves = {MOVE_HONE_CLAWS, MOVE_POISON_JAB, MOVE_CRUNCH, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
-        .abilitySlot = 0,
+        .abilitySlot = 2,
     },
     [SPECIES_NIDOQUEEN] =
     {
-        .moves = {MOVE_PROTECT, MOVE_STEALTH_ROCK, MOVE_SLUDGE_BOMB, MOVE_EARTH_POWER},
-        .nature = NATURE_TIMID,
+        .moves = {MOVE_EARTH_POWER, MOVE_SLUDGE_BOMB, MOVE_ICE_BEAM, MOVE_PROTECT},
+        .nature = NATURE_MODEST,
         .abilitySlot = 2,
     },
     [SPECIES_NIDORAN_M] =
     {
-        .moves = {MOVE_POISON_JAB, MOVE_DRILL_RUN, MOVE_SUCKER_PUNCH, MOVE_HONE_CLAWS},
+        .moves = {MOVE_POISON_JAB, MOVE_DRILL_RUN, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
     [SPECIES_NIDORINO] =
     {
-        .moves = {MOVE_HEAD_SMASH, MOVE_HONE_CLAWS, MOVE_SUCKER_PUNCH, MOVE_POISON_JAB},
+        .moves = {MOVE_POISON_JAB, MOVE_DRILL_RUN, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
-        .abilitySlot = 0,
+        .abilitySlot = 2,
     },
     [SPECIES_NIDOKING] =
     {
-        .moves = {MOVE_EARTH_POWER, MOVE_ICE_BEAM, MOVE_SLUDGE_BOMB, MOVE_PROTECT},
+        .moves = {MOVE_EARTH_POWER, MOVE_SLUDGE_BOMB, MOVE_ICE_BEAM, MOVE_PROTECT},
         .nature = NATURE_MODEST,
         .abilitySlot = 2,
     },
@@ -219,37 +219,37 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_VULPIX] =
     {
-        .moves = {MOVE_WEATHER_BALL, MOVE_OVERHEAT, MOVE_ENERGY_BALL, MOVE_HYPNOSIS},
+        .moves = {MOVE_HEAT_WAVE, MOVE_ENCORE, MOVE_WILL_O_WISP, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 2,
     },
     [SPECIES_NINETALES] =
     {
-        .moves = {MOVE_WEATHER_BALL, MOVE_HEAT_WAVE, MOVE_PROTECT, MOVE_SOLAR_BEAM},
+        .moves = {MOVE_HEAT_WAVE, MOVE_SOLAR_BEAM, MOVE_ENCORE, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 2,
     },
     [SPECIES_JIGGLYPUFF] =
     {
-        .moves = {MOVE_WISH, MOVE_HEAL_BELL, MOVE_PROTECT, MOVE_STEALTH_ROCK},
+        .moves = {MOVE_HELPING_HAND, MOVE_HEAL_PULSE, MOVE_ICY_WIND, MOVE_PROTECT},
         .nature = NATURE_CALM,
-        .abilitySlot = 0,
+        .abilitySlot = 2,
     },
     [SPECIES_WIGGLYTUFF] =
     {
-        .moves = {MOVE_HYPER_VOICE, MOVE_HEAL_PULSE, MOVE_THUNDER_WAVE, MOVE_DAZZLING_GLEAM},
+        .moves = {MOVE_HYPER_VOICE, MOVE_DAZZLING_GLEAM, MOVE_ICY_WIND, MOVE_PROTECT},
         .nature = NATURE_MODEST,
         .abilitySlot = 1,
     },
     [SPECIES_ZUBAT] =
     {
-        .moves = {MOVE_BRAVE_BIRD, MOVE_U_TURN, MOVE_DEFOG, MOVE_PURSUIT},
+        .moves = {MOVE_BRAVE_BIRD, MOVE_TAILWIND, MOVE_QUICK_GUARD, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_GOLBAT] =
     {
-        .moves = {MOVE_TAUNT, MOVE_BRAVE_BIRD, MOVE_ROOST, MOVE_U_TURN},
+        .moves = {MOVE_TAILWIND, MOVE_TAUNT, MOVE_SUPER_FANG, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
@@ -261,19 +261,19 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_GLOOM] =
     {
-        .moves = {MOVE_GIGA_DRAIN, MOVE_SYNTHESIS, MOVE_SLUDGE_BOMB, MOVE_MOONBLAST},
+        .moves = {MOVE_GIGA_DRAIN, MOVE_SLUDGE_BOMB, MOVE_SLEEP_POWDER, MOVE_PROTECT},
         .nature = NATURE_MODEST,
         .abilitySlot = 0,
     },
     [SPECIES_VILEPLUME] =
     {
-        .moves = {MOVE_STUN_SPORE, MOVE_ENERGY_BALL, MOVE_STRENGTH_SAP, MOVE_SLUDGE_BOMB},
-        .nature = NATURE_MODEST,
+        .moves = {MOVE_SLEEP_POWDER, MOVE_STRENGTH_SAP, MOVE_SLUDGE_BOMB, MOVE_PROTECT},
+        .nature = NATURE_BOLD,
         .abilitySlot = 2,
     },
     [SPECIES_PARAS] =
     {
-        .moves = {MOVE_SEED_BOMB, MOVE_SYNTHESIS, MOVE_SPORE, MOVE_STUN_SPORE},
+        .moves = {MOVE_SPORE, MOVE_KNOCK_OFF, MOVE_SEED_BOMB, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 1,
     },
@@ -285,121 +285,121 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_VENONAT] =
     {
-        .moves = {MOVE_SLEEP_POWDER, MOVE_MORNING_SUN, MOVE_SLUDGE_BOMB, MOVE_PSYCHIC},
+        .moves = {MOVE_SLEEP_POWDER, MOVE_STRUGGLE_BUG, MOVE_SLUDGE_BOMB, MOVE_PROTECT},
         .nature = NATURE_BOLD,
-        .abilitySlot = 1,
+        .abilitySlot = 0,
     },
     [SPECIES_VENOMOTH] =
     {
-        .moves = {MOVE_SLUDGE_BOMB, MOVE_BUG_BUZZ, MOVE_SLEEP_POWDER, MOVE_QUIVER_DANCE},
+        .moves = {MOVE_QUIVER_DANCE, MOVE_BUG_BUZZ, MOVE_SLUDGE_BOMB, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 1,
     },
     [SPECIES_DIGLETT] =
     {
-        .moves = {MOVE_EARTH_POWER, MOVE_SLUDGE_BOMB, MOVE_FINAL_GAMBIT, MOVE_PROTECT},
-        .nature = NATURE_TIMID,
+        .moves = {MOVE_EARTHQUAKE, MOVE_ROCK_SLIDE, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
+        .nature = NATURE_JOLLY,
         .abilitySlot = 1,
     },
     [SPECIES_DUGTRIO] =
     {
-        .moves = {MOVE_MEMENTO, MOVE_EARTHQUAKE, MOVE_REVERSAL, MOVE_PROTECT},
+        .moves = {MOVE_EARTHQUAKE, MOVE_ROCK_SLIDE, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 1,
     },
     [SPECIES_MEOWTH] =
     {
         .moves = {MOVE_FAKE_OUT, MOVE_FEINT, MOVE_U_TURN, MOVE_PLAY_ROUGH},
-        .nature = NATURE_ADAMANT,
+        .nature = NATURE_JOLLY,
         .abilitySlot = 1,
     },
     [SPECIES_PERSIAN] =
     {
-        .moves = {MOVE_FAKE_OUT, MOVE_NIGHT_SLASH, MOVE_PROTECT, MOVE_DAZZLING_GLEAM},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_FAKE_OUT, MOVE_FEINT, MOVE_ICY_WIND, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
         .abilitySlot = 1,
     },
     [SPECIES_PSYDUCK] =
     {
-        .moves = {MOVE_HYDRO_PUMP, MOVE_PSYCHIC, MOVE_ICE_BEAM, MOVE_SCALD},
+        .moves = {MOVE_SCALD, MOVE_ICY_WIND, MOVE_ENCORE, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 1,
     },
     [SPECIES_GOLDUCK] =
     {
-        .moves = {MOVE_HYDRO_PUMP, MOVE_SCALD, MOVE_ICE_BEAM, MOVE_PROTECT},
+        .moves = {MOVE_HYDRO_PUMP, MOVE_ICE_BEAM, MOVE_PSYCHIC, MOVE_PROTECT},
         .nature = NATURE_MODEST,
         .abilitySlot = 2,
     },
     [SPECIES_MANKEY] =
     {
-        .moves = {MOVE_CLOSE_COMBAT, MOVE_U_TURN, MOVE_EARTHQUAKE, MOVE_ASSURANCE},
+        .moves = {MOVE_CLOSE_COMBAT, MOVE_U_TURN, MOVE_ROCK_SLIDE, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
-        .abilitySlot = 0,
+        .abilitySlot = 2,
     },
     [SPECIES_PRIMEAPE] =
     {
-        .moves = {MOVE_LOW_KICK, MOVE_ICE_PUNCH, MOVE_EARTHQUAKE, MOVE_U_TURN},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_RAGE_FIST, MOVE_CLOSE_COMBAT, MOVE_ROCK_SLIDE, MOVE_PROTECT},
+        .nature = NATURE_JOLLY,
         .abilitySlot = 2,
     },
     [SPECIES_GROWLITHE] =
     {
-        .moves = {MOVE_WILL_O_WISP, MOVE_MORNING_SUN, MOVE_FLARE_BLITZ, MOVE_WILD_CHARGE},
-        .nature = NATURE_IMPISH,
+        .moves = {MOVE_FLARE_BLITZ, MOVE_WILL_O_WISP, MOVE_SNARL, MOVE_PROTECT},
+        .nature = NATURE_CAREFUL,
         .abilitySlot = 0,
     },
     [SPECIES_ARCANINE] =
     {
-        .moves = {MOVE_FLARE_BLITZ, MOVE_CLOSE_COMBAT, MOVE_EXTREME_SPEED, MOVE_WILD_CHARGE},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_FLARE_BLITZ, MOVE_EXTREME_SPEED, MOVE_SNARL, MOVE_PROTECT},
+        .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_POLIWAG] =
     {
-        .moves = {MOVE_BELLY_DRUM, MOVE_WATERFALL, MOVE_HYPNOSIS, MOVE_THIEF},
-        .nature = NATURE_JOLLY,
-        .abilitySlot = 0,
+        .moves = {MOVE_SCALD, MOVE_ICY_WIND, MOVE_HYPNOSIS, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
+        .abilitySlot = 2,
     },
     [SPECIES_POLIWHIRL] =
     {
-        .moves = {MOVE_WATERFALL, MOVE_STRENGTH, MOVE_BODY_SLAM, MOVE_PROTECT},
+        .moves = {MOVE_WATERFALL, MOVE_ICY_WIND, MOVE_ENCORE, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
-        .abilitySlot = 0,
+        .abilitySlot = 2,
     },
     [SPECIES_POLIWRATH] =
     {
-        .moves = {MOVE_WATERFALL, MOVE_BRICK_BREAK, MOVE_ICY_WIND, MOVE_HELPING_HAND},
-        .nature = NATURE_CAREFUL,
-        .abilitySlot = 0,
+        .moves = {MOVE_WATERFALL, MOVE_CLOSE_COMBAT, MOVE_ROCK_SLIDE, MOVE_PROTECT},
+        .nature = NATURE_ADAMANT,
+        .abilitySlot = 2,
     },
     [SPECIES_ABRA] =
     {
-        .moves = {MOVE_PSYCHIC, MOVE_DAZZLING_GLEAM, MOVE_FOCUS_PUNCH, MOVE_SUBSTITUTE},
-        .nature = NATURE_HASTY,
+        .moves = {MOVE_PSYCHIC, MOVE_DAZZLING_GLEAM, MOVE_ENCORE, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
         .abilitySlot = 2,
     },
     [SPECIES_KADABRA] =
     {
-        .moves = {MOVE_PSYCHIC, MOVE_COUNTER, MOVE_ENCORE, MOVE_DAZZLING_GLEAM},
+        .moves = {MOVE_PSYCHIC, MOVE_DAZZLING_GLEAM, MOVE_ENCORE, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 2,
     },
     [SPECIES_ALAKAZAM] =
     {
-        .moves = {MOVE_PSYCHIC, MOVE_SHADOW_BALL, MOVE_FOCUS_BLAST, MOVE_PROTECT},
+        .moves = {MOVE_PSYCHIC, MOVE_DAZZLING_GLEAM, MOVE_ENCORE, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 2,
     },
     [SPECIES_MACHOP] =
     {
-        .moves = {MOVE_DYNAMIC_PUNCH, MOVE_KNOCK_OFF, MOVE_POISON_JAB, MOVE_ROCK_SLIDE},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_DYNAMIC_PUNCH, MOVE_KNOCK_OFF, MOVE_ROCK_SLIDE, MOVE_PROTECT},
+        .nature = NATURE_ADAMANT,
         .abilitySlot = 1,
     },
     [SPECIES_MACHOKE] =
     {
-        .moves = {MOVE_ICE_PUNCH, MOVE_BULK_UP, MOVE_ROCK_SLIDE, MOVE_DYNAMIC_PUNCH},
+        .moves = {MOVE_DYNAMIC_PUNCH, MOVE_KNOCK_OFF, MOVE_ROCK_SLIDE, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 1,
     },
@@ -411,91 +411,91 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_BELLSPROUT] =
     {
-        .moves = {MOVE_SOLAR_BEAM, MOVE_SLUDGE_BOMB, MOVE_WEATHER_BALL, MOVE_SLEEP_POWDER},
+        .moves = {MOVE_SUNNY_DAY, MOVE_SLEEP_POWDER, MOVE_SOLAR_BEAM, MOVE_WEATHER_BALL},
         .nature = NATURE_MODEST,
         .abilitySlot = 0,
     },
     [SPECIES_WEEPINBELL] =
     {
-        .moves = {MOVE_SYNTHESIS, MOVE_KNOCK_OFF, MOVE_SLUDGE_BOMB, MOVE_GIGA_DRAIN},
-        .nature = NATURE_BOLD,
+        .moves = {MOVE_SLEEP_POWDER, MOVE_GIGA_DRAIN, MOVE_SLUDGE_BOMB, MOVE_PROTECT},
+        .nature = NATURE_MODEST,
         .abilitySlot = 0,
     },
     [SPECIES_VICTREEBEL] =
     {
-        .moves = {MOVE_KNOCK_OFF, MOVE_POWER_WHIP, MOVE_SLUDGE_BOMB, MOVE_PROTECT},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_SLEEP_POWDER, MOVE_LEAF_STORM, MOVE_SLUDGE_BOMB, MOVE_PROTECT},
+        .nature = NATURE_MODEST,
         .abilitySlot = 0,
     },
     [SPECIES_TENTACOOL] =
     {
-        .moves = {MOVE_RAPID_SPIN, MOVE_SCALD, MOVE_SLUDGE_BOMB, MOVE_KNOCK_OFF},
+        .moves = {MOVE_ICY_WIND, MOVE_SCALD, MOVE_SLUDGE_BOMB, MOVE_PROTECT},
         .nature = NATURE_CALM,
         .abilitySlot = 1,
     },
     [SPECIES_TENTACRUEL] =
     {
-        .moves = {MOVE_SLUDGE_BOMB, MOVE_KNOCK_OFF, MOVE_HYDRO_PUMP, MOVE_ICY_WIND},
+        .moves = {MOVE_SCALD, MOVE_ACID_SPRAY, MOVE_ICY_WIND, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_GEODUDE] =
     {
-        .moves = {MOVE_FIRE_PUNCH, MOVE_SUCKER_PUNCH, MOVE_STONE_EDGE, MOVE_STEALTH_ROCK},
+        .moves = {MOVE_EARTHQUAKE, MOVE_ROCK_SLIDE, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 1,
     },
     [SPECIES_GRAVELER] =
     {
-        .moves = {MOVE_STEALTH_ROCK, MOVE_STONE_EDGE, MOVE_EARTHQUAKE, MOVE_SUCKER_PUNCH},
+        .moves = {MOVE_EARTHQUAKE, MOVE_ROCK_SLIDE, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 1,
     },
     [SPECIES_GOLEM] =
     {
-        .moves = {MOVE_HAMMER_ARM, MOVE_SUCKER_PUNCH, MOVE_STEALTH_ROCK, MOVE_EARTHQUAKE},
+        .moves = {MOVE_EARTHQUAKE, MOVE_ROCK_SLIDE, MOVE_WIDE_GUARD, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 1,
     },
     [SPECIES_PONYTA] =
     {
-        .moves = {MOVE_FLAME_CHARGE, MOVE_HYPNOSIS, MOVE_WILD_CHARGE, MOVE_MORNING_SUN},
+        .moves = {MOVE_FLARE_BLITZ, MOVE_WILD_CHARGE, MOVE_HIGH_HORSEPOWER, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
-        .abilitySlot = 1,
+        .abilitySlot = 0,
     },
     [SPECIES_RAPIDASH] =
     {
-        .moves = {MOVE_FLARE_BLITZ, MOVE_HYPNOSIS, MOVE_MEGAHORN, MOVE_WILL_O_WISP},
+        .moves = {MOVE_FLARE_BLITZ, MOVE_WILD_CHARGE, MOVE_HIGH_HORSEPOWER, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
-        .abilitySlot = 1,
+        .abilitySlot = 0,
     },
     [SPECIES_SLOWPOKE] =
     {
-        .moves = {MOVE_ZEN_HEADBUTT, MOVE_SCALD, MOVE_TOXIC, MOVE_TRICK},
-        .nature = NATURE_IMPISH,
+        .moves = {MOVE_TRICK_ROOM, MOVE_PSYCHIC, MOVE_YAWN, MOVE_PROTECT},
+        .nature = NATURE_SASSY,
         .abilitySlot = 2,
     },
     [SPECIES_SLOWBRO] =
     {
-        .moves = {MOVE_TRICK_ROOM, MOVE_SCALD, MOVE_PSYCHIC, MOVE_PROTECT},
-        .nature = NATURE_QUIET,
+        .moves = {MOVE_TRICK_ROOM, MOVE_SCALD, MOVE_SLACK_OFF, MOVE_PROTECT},
+        .nature = NATURE_RELAXED,
         .abilitySlot = 2,
     },
     [SPECIES_MAGNEMITE] =
     {
-        .moves = {MOVE_SUBSTITUTE, MOVE_CHARGE_BEAM, MOVE_FLASH_CANNON, MOVE_REST},
-        .nature = NATURE_TIMID,
+        .moves = {MOVE_THUNDERBOLT, MOVE_FLASH_CANNON, MOVE_ELECTROWEB, MOVE_PROTECT},
+        .nature = NATURE_MODEST,
         .abilitySlot = 1,
     },
     [SPECIES_MAGNETON] =
     {
-        .moves = {MOVE_SUBSTITUTE, MOVE_THUNDER_WAVE, MOVE_MAGNET_RISE, MOVE_THUNDERBOLT},
-        .nature = NATURE_TIMID,
-        .abilitySlot = 0,
+        .moves = {MOVE_THUNDERBOLT, MOVE_FLASH_CANNON, MOVE_ELECTROWEB, MOVE_PROTECT},
+        .nature = NATURE_MODEST,
+        .abilitySlot = 1,
     },
     [SPECIES_FARFETCHD] =
     {
-        .moves = {MOVE_SWORDS_DANCE, MOVE_BRAVE_BIRD, MOVE_LEAF_BLADE, MOVE_PROTECT},
+        .moves = {MOVE_BRAVE_BIRD, MOVE_LEAF_BLADE, MOVE_FEINT, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 2,
     },
@@ -507,55 +507,55 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_DODRIO] =
     {
-        .moves = {MOVE_SWORDS_DANCE, MOVE_PROTECT, MOVE_KNOCK_OFF, MOVE_BRAVE_BIRD},
+        .moves = {MOVE_BRAVE_BIRD, MOVE_KNOCK_OFF, MOVE_QUICK_ATTACK, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
-        .abilitySlot = 2,
+        .abilitySlot = 0,
     },
     [SPECIES_SEEL] =
     {
-        .moves = {MOVE_FAKE_OUT, MOVE_AQUA_JET, MOVE_WATERFALL, MOVE_DRILL_RUN},
+        .moves = {MOVE_FAKE_OUT, MOVE_ICY_WIND, MOVE_AQUA_JET, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_DEWGONG] =
     {
-        .moves = {MOVE_HYDRO_PUMP, MOVE_FAKE_OUT, MOVE_ICY_WIND, MOVE_ENCORE},
+        .moves = {MOVE_FAKE_OUT, MOVE_FREEZE_DRY, MOVE_ICY_WIND, MOVE_ENCORE},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_GRIMER] =
     {
-        .moves = {MOVE_GUNK_SHOT, MOVE_FIRE_PUNCH, MOVE_GIGA_DRAIN, MOVE_THIEF},
+        .moves = {MOVE_GUNK_SHOT, MOVE_KNOCK_OFF, MOVE_SHADOW_SNEAK, MOVE_PROTECT},
         .nature = NATURE_BRAVE,
-        .abilitySlot = 1,
+        .abilitySlot = 2,
     },
     [SPECIES_MUK] =
     {
-        .moves = {MOVE_ICE_PUNCH, MOVE_SHADOW_SNEAK, MOVE_FIRE_PUNCH, MOVE_GUNK_SHOT},
+        .moves = {MOVE_GUNK_SHOT, MOVE_KNOCK_OFF, MOVE_SHADOW_SNEAK, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
     [SPECIES_SHELLDER] =
     {
-        .moves = {MOVE_SHELL_SMASH, MOVE_ICICLE_SPEAR, MOVE_ROCK_BLAST, MOVE_ICE_SHARD},
+        .moves = {MOVE_SHELL_SMASH, MOVE_ICICLE_SPEAR, MOVE_ROCK_BLAST, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 1,
     },
     [SPECIES_CLOYSTER] =
     {
         .moves = {MOVE_SHELL_SMASH, MOVE_ICICLE_SPEAR, MOVE_ROCK_BLAST, MOVE_PROTECT},
-        .nature = NATURE_LONELY,
+        .nature = NATURE_ADAMANT,
         .abilitySlot = 1,
     },
     [SPECIES_GASTLY] =
     {
-        .moves = {MOVE_HYPNOSIS, MOVE_TRICK, MOVE_SLUDGE_BOMB, MOVE_GIGA_DRAIN},
+        .moves = {MOVE_SHADOW_BALL, MOVE_SLUDGE_BOMB, MOVE_ICY_WIND, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_HAUNTER] =
     {
-        .moves = {MOVE_DISABLE, MOVE_SHADOW_BALL, MOVE_SUBSTITUTE, MOVE_TRICK},
+        .moves = {MOVE_SHADOW_BALL, MOVE_SLUDGE_BOMB, MOVE_WILL_O_WISP, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
@@ -567,31 +567,31 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_ONIX] =
     {
-        .moves = {MOVE_STONE_EDGE, MOVE_CURSE, MOVE_EARTHQUAKE, MOVE_DRAGON_TAIL},
+        .moves = {MOVE_ROCK_SLIDE, MOVE_EARTHQUAKE, MOVE_WIDE_GUARD, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 1,
     },
     [SPECIES_DROWZEE] =
     {
-        .moves = {MOVE_ZEN_HEADBUTT, MOVE_ICE_PUNCH, MOVE_THUNDER_PUNCH, MOVE_DRAIN_PUNCH},
-        .nature = NATURE_JOLLY,
-        .abilitySlot = 0,
+        .moves = {MOVE_TRICK_ROOM, MOVE_PSYCHIC, MOVE_HYPNOSIS, MOVE_PROTECT},
+        .nature = NATURE_SASSY,
+        .abilitySlot = 2,
     },
     [SPECIES_HYPNO] =
     {
-        .moves = {MOVE_TRICK_ROOM, MOVE_SAFEGUARD, MOVE_PSYCHIC, MOVE_PROTECT},
-        .nature = NATURE_RELAXED,
+        .moves = {MOVE_TRICK_ROOM, MOVE_PSYCHIC, MOVE_HYPNOSIS, MOVE_PROTECT},
+        .nature = NATURE_SASSY,
         .abilitySlot = 2,
     },
     [SPECIES_KRABBY] =
     {
-        .moves = {MOVE_LIQUIDATION, MOVE_SUPERPOWER, MOVE_KNOCK_OFF, MOVE_BODY_SLAM},
+        .moves = {MOVE_LIQUIDATION, MOVE_KNOCK_OFF, MOVE_ROCK_SLIDE, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
     [SPECIES_KINGLER] =
     {
-        .moves = {MOVE_CRABHAMMER, MOVE_X_SCISSOR, MOVE_ROCK_SLIDE, MOVE_PROTECT},
+        .moves = {MOVE_CRABHAMMER, MOVE_KNOCK_OFF, MOVE_ROCK_SLIDE, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
@@ -603,123 +603,123 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_ELECTRODE] =
     {
-        .moves = {MOVE_PROTECT, MOVE_THUNDERBOLT, MOVE_VOLT_SWITCH, MOVE_OVERHEAT},
-        .nature = NATURE_TIMID,
-        .abilitySlot = 0,
-    },
-    [SPECIES_EXEGGCUTE] =
-    {
-        .moves = {MOVE_SUBSTITUTE, MOVE_SLEEP_POWDER, MOVE_GIGA_DRAIN, MOVE_PSYCHIC},
+        .moves = {MOVE_THUNDERBOLT, MOVE_VOLT_SWITCH, MOVE_TAUNT, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 2,
     },
+    [SPECIES_EXEGGCUTE] =
+    {
+        .moves = {MOVE_SLEEP_POWDER, MOVE_SOLAR_BEAM, MOVE_PSYCHIC, MOVE_PROTECT},
+        .nature = NATURE_MODEST,
+        .abilitySlot = 1,
+    },
     [SPECIES_EXEGGUTOR] =
     {
-        .moves = {MOVE_GIGA_DRAIN, MOVE_PROTECT, MOVE_LEECH_SEED, MOVE_PSYCHIC},
-        .nature = NATURE_MODEST,
-        .abilitySlot = 0,
+        .moves = {MOVE_TRICK_ROOM, MOVE_SLEEP_POWDER, MOVE_PSYCHIC, MOVE_PROTECT},
+        .nature = NATURE_QUIET,
+        .abilitySlot = 2,
     },
     [SPECIES_CUBONE] =
     {
-        .moves = {MOVE_DOUBLE_EDGE, MOVE_EARTHQUAKE, MOVE_ROCK_SLIDE, MOVE_SUBSTITUTE},
-        .nature = NATURE_ADAMANT,
-        .abilitySlot = 0,
+        .moves = {MOVE_BONEMERANG, MOVE_ROCK_SLIDE, MOVE_KNOCK_OFF, MOVE_PROTECT},
+        .nature = NATURE_BRAVE,
+        .abilitySlot = 1,
     },
     [SPECIES_MAROWAK] =
     {
-        .moves = {MOVE_EARTHQUAKE, MOVE_ROCK_SLIDE, MOVE_BONEMERANG, MOVE_DETECT},
+        .moves = {MOVE_BONEMERANG, MOVE_ROCK_SLIDE, MOVE_FIRE_PUNCH, MOVE_PROTECT},
         .nature = NATURE_BRAVE,
         .abilitySlot = 1,
     },
     [SPECIES_HITMONLEE] =
     {
-        .moves = {MOVE_CLOSE_COMBAT, MOVE_PROTECT, MOVE_POISON_JAB, MOVE_KNOCK_OFF},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_CLOSE_COMBAT, MOVE_FAKE_OUT, MOVE_ROCK_SLIDE, MOVE_PROTECT},
+        .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
     [SPECIES_HITMONCHAN] =
     {
-        .moves = {MOVE_MACH_PUNCH, MOVE_DRAIN_PUNCH, MOVE_ICE_PUNCH, MOVE_FIRE_PUNCH},
-        .nature = NATURE_JOLLY,
-        .abilitySlot = 1,
+        .moves = {MOVE_DRAIN_PUNCH, MOVE_ICE_PUNCH, MOVE_THUNDER_PUNCH, MOVE_PROTECT},
+        .nature = NATURE_ADAMANT,
+        .abilitySlot = 2,
     },
     [SPECIES_LICKITUNG] =
     {
-        .moves = {MOVE_REST, MOVE_SLEEP_TALK, MOVE_CURSE, MOVE_DRAGON_TAIL},
+        .moves = {MOVE_BODY_SLAM, MOVE_KNOCK_OFF, MOVE_ICY_WIND, MOVE_PROTECT},
         .nature = NATURE_CAREFUL,
         .abilitySlot = 2,
     },
     [SPECIES_KOFFING] =
     {
-        .moves = {MOVE_PAIN_SPLIT, MOVE_FIRE_BLAST, MOVE_SLUDGE_BOMB, MOVE_THUNDERBOLT},
-        .nature = NATURE_MODEST,
-        .abilitySlot = 0,
+        .moves = {MOVE_SLUDGE_BOMB, MOVE_WILL_O_WISP, MOVE_TAUNT, MOVE_PROTECT},
+        .nature = NATURE_BOLD,
+        .abilitySlot = 1,
     },
     [SPECIES_WEEZING] =
     {
-        .moves = {MOVE_FIRE_BLAST, MOVE_SLUDGE_BOMB, MOVE_PAIN_SPLIT, MOVE_TOXIC_SPIKES},
-        .nature = NATURE_MODEST,
+        .moves = {MOVE_SLUDGE_BOMB, MOVE_WILL_O_WISP, MOVE_TAUNT, MOVE_PROTECT},
+        .nature = NATURE_BOLD,
         .abilitySlot = 1,
     },
     [SPECIES_RHYHORN] =
     {
-        .moves = {MOVE_EARTHQUAKE, MOVE_MEGAHORN, MOVE_STEALTH_ROCK, MOVE_AQUA_TAIL},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_HIGH_HORSEPOWER, MOVE_ROCK_SLIDE, MOVE_MEGAHORN, MOVE_PROTECT},
+        .nature = NATURE_BRAVE,
         .abilitySlot = 0,
     },
     [SPECIES_RHYDON] =
     {
-        .moves = {MOVE_STONE_EDGE, MOVE_AQUA_TAIL, MOVE_MEGAHORN, MOVE_STEALTH_ROCK},
-        .nature = NATURE_ADAMANT,
-        .abilitySlot = 1,
+        .moves = {MOVE_HIGH_HORSEPOWER, MOVE_ROCK_SLIDE, MOVE_MEGAHORN, MOVE_PROTECT},
+        .nature = NATURE_BRAVE,
+        .abilitySlot = 0,
     },
     [SPECIES_CHANSEY] =
     {
-        .moves = {MOVE_SEISMIC_TOSS, MOVE_TOXIC, MOVE_STEALTH_ROCK, MOVE_SOFT_BOILED},
+        .moves = {MOVE_SEISMIC_TOSS, MOVE_HEAL_PULSE, MOVE_SOFT_BOILED, MOVE_PROTECT},
         .nature = NATURE_BOLD,
-        .abilitySlot = 0,
+        .abilitySlot = 2,
     },
     [SPECIES_TANGELA] =
     {
-        .moves = {MOVE_GIGA_DRAIN, MOVE_KNOCK_OFF, MOVE_SLUDGE_BOMB, MOVE_SYNTHESIS},
+        .moves = {MOVE_RAGE_POWDER, MOVE_SLEEP_POWDER, MOVE_GIGA_DRAIN, MOVE_PROTECT},
         .nature = NATURE_BOLD,
         .abilitySlot = 2,
     },
     [SPECIES_KANGASKHAN] =
     {
-        .moves = {MOVE_FAKE_OUT, MOVE_SEISMIC_TOSS, MOVE_ICE_PUNCH, MOVE_ROCK_TOMB},
+        .moves = {MOVE_FAKE_OUT, MOVE_DOUBLE_EDGE, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 1,
     },
     [SPECIES_HORSEA] =
     {
-        .moves = {MOVE_HYDRO_PUMP, MOVE_ICE_BEAM, MOVE_RAIN_DANCE, MOVE_DRAGON_PULSE},
+        .moves = {MOVE_HYDRO_PUMP, MOVE_ICE_BEAM, MOVE_ICY_WIND, MOVE_PROTECT},
         .nature = NATURE_MODEST,
         .abilitySlot = 0,
     },
     [SPECIES_SEADRA] =
     {
-        .moves = {MOVE_AGILITY, MOVE_ICE_BEAM, MOVE_HYDRO_PUMP, MOVE_SUBSTITUTE},
-        .nature = NATURE_TIMID,
-        .abilitySlot = 0,
+        .moves = {MOVE_FOCUS_ENERGY, MOVE_HYDRO_PUMP, MOVE_ICE_BEAM, MOVE_PROTECT},
+        .nature = NATURE_MODEST,
+        .abilitySlot = 1,
     },
     [SPECIES_GOLDEEN] =
     {
-        .moves = {MOVE_WATERFALL, MOVE_DRILL_RUN, MOVE_KNOCK_OFF, MOVE_POISON_JAB},
+        .moves = {MOVE_WATERFALL, MOVE_DRILL_RUN, MOVE_KNOCK_OFF, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 2,
     },
     [SPECIES_SEAKING] =
     {
-        .moves = {MOVE_SCALD, MOVE_ICE_BEAM, MOVE_SOAK, MOVE_PROTECT},
-        .nature = NATURE_MODEST,
+        .moves = {MOVE_WATERFALL, MOVE_KNOCK_OFF, MOVE_DRILL_RUN, MOVE_PROTECT},
+        .nature = NATURE_JOLLY,
         .abilitySlot = 2,
     },
     [SPECIES_STARYU] =
     {
-        .moves = {MOVE_HYDRO_PUMP, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_RECOVER},
+        .moves = {MOVE_HYDRO_PUMP, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_PROTECT},
         .nature = NATURE_TIMID,
-        .abilitySlot = 2,
+        .abilitySlot = 1,
     },
     [SPECIES_STARMIE] =
     {
@@ -729,13 +729,13 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_MR_MIME] =
     {
-        .moves = {MOVE_THUNDERBOLT, MOVE_ICY_WIND, MOVE_PROTECT, MOVE_THUNDER_WAVE},
+        .moves = {MOVE_FAKE_OUT, MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_PROTECT},
         .nature = NATURE_TIMID,
-        .abilitySlot = 2,
+        .abilitySlot = 1,
     },
     [SPECIES_SCYTHER] =
     {
-        .moves = {MOVE_SWORDS_DANCE, MOVE_AERIAL_ACE, MOVE_BATON_PASS, MOVE_QUICK_ATTACK},
+        .moves = {MOVE_BUG_BITE, MOVE_FEINT, MOVE_TAILWIND, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 1,
     },
@@ -747,44 +747,44 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_ELECTABUZZ] =
     {
-        .moves = {MOVE_THUNDERBOLT, MOVE_VOLT_SWITCH, MOVE_PSYCHIC, MOVE_FOCUS_BLAST},
+        .moves = {MOVE_THUNDERBOLT, MOVE_ELECTROWEB, MOVE_HELPING_HAND, MOVE_PROTECT},
         .nature = NATURE_TIMID,
-        .abilitySlot = 0,
+        .abilitySlot = 2,
     },
     [SPECIES_MAGMAR] =
     {
-        .moves = {MOVE_OVERHEAT, MOVE_WILL_O_WISP, MOVE_PROTECT, MOVE_HYPER_BEAM},
-        .nature = NATURE_CALM,
-        .abilitySlot = 2,
+        .moves = {MOVE_HEAT_WAVE, MOVE_WILL_O_WISP, MOVE_HELPING_HAND, MOVE_PROTECT},
+        .nature = NATURE_MODEST,
+        .abilitySlot = 0,
     },
     [SPECIES_PINSIR] =
     {
-        .moves = {MOVE_SWORDS_DANCE, MOVE_FEINT, MOVE_PROTECT, MOVE_X_SCISSOR},
+        .moves = {MOVE_X_SCISSOR, MOVE_CLOSE_COMBAT, MOVE_FEINT, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
-        .abilitySlot = 1,
+        .abilitySlot = 2,
     },
     [SPECIES_TAUROS] =
     {
-        .moves = {MOVE_DOUBLE_EDGE, MOVE_EARTHQUAKE, MOVE_ROCK_SLIDE, MOVE_ZEN_HEADBUTT},
+        .moves = {MOVE_DOUBLE_EDGE, MOVE_CLOSE_COMBAT, MOVE_ROCK_SLIDE, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_MAGIKARP] =
     {
-        .moves = {MOVE_SPLASH, MOVE_FLAIL, MOVE_TACKLE, MOVE_BOUNCE},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_HYDRO_PUMP, MOVE_FLAIL, MOVE_BOUNCE, MOVE_TACKLE},
+        .nature = NATURE_NAIVE,
         .abilitySlot = 2,
     },
     [SPECIES_GYARADOS] =
     {
-        .moves = {MOVE_WATERFALL, MOVE_EARTHQUAKE, MOVE_DRAGON_DANCE, MOVE_PROTECT},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_WATERFALL, MOVE_THUNDER_WAVE, MOVE_TAUNT, MOVE_PROTECT},
+        .nature = NATURE_CAREFUL,
         .abilitySlot = 0,
     },
     [SPECIES_LAPRAS] =
     {
-        .moves = {MOVE_FREEZE_DRY, MOVE_HYDRO_PUMP, MOVE_ICE_SHARD, MOVE_SHEER_COLD},
-        .nature = NATURE_QUIET,
+        .moves = {MOVE_FREEZE_DRY, MOVE_HYDRO_PUMP, MOVE_ICY_WIND, MOVE_PROTECT},
+        .nature = NATURE_MODEST,
         .abilitySlot = 0,
     },
     [SPECIES_DITTO] =
@@ -795,51 +795,51 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_EEVEE] =
     {
-        .moves = {MOVE_LAST_RESORT, MOVE_BATON_PASS, MOVE_SUBSTITUTE, MOVE_STORED_POWER},
-        .nature = NATURE_TIMID,
-        .abilitySlot = 2,
+        .moves = {MOVE_HYPER_VOICE, MOVE_YAWN, MOVE_HELPING_HAND, MOVE_PROTECT},
+        .nature = NATURE_CALM,
+        .abilitySlot = 1,
     },
     [SPECIES_VAPOREON] =
     {
-        .moves = {MOVE_HYDRO_PUMP, MOVE_ICE_BEAM, MOVE_HELPING_HAND, MOVE_REST},
-        .nature = NATURE_QUIET,
-        .abilitySlot = 2,
+        .moves = {MOVE_MUDDY_WATER, MOVE_ICE_BEAM, MOVE_HELPING_HAND, MOVE_PROTECT},
+        .nature = NATURE_MODEST,
+        .abilitySlot = 0,
     },
     [SPECIES_JOLTEON] =
     {
-        .moves = {MOVE_THUNDERBOLT, MOVE_THUNDER_WAVE, MOVE_PROTECT, MOVE_HYPER_VOICE},
+        .moves = {MOVE_THUNDERBOLT, MOVE_VOLT_SWITCH, MOVE_THUNDER_WAVE, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_FLAREON] =
     {
-        .moves = {MOVE_SUPERPOWER, MOVE_FLARE_BLITZ, MOVE_WILL_O_WISP, MOVE_DETECT},
+        .moves = {MOVE_FLARE_BLITZ, MOVE_FACADE, MOVE_QUICK_ATTACK, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
-        .abilitySlot = 0,
+        .abilitySlot = 2,
     },
     [SPECIES_PORYGON] =
     {
-        .moves = {MOVE_TRI_ATTACK, MOVE_TELEPORT, MOVE_THUNDER_WAVE, MOVE_RECOVER},
-        .nature = NATURE_CALM,
-        .abilitySlot = 0,
+        .moves = {MOVE_TRICK_ROOM, MOVE_TRI_ATTACK, MOVE_ICE_BEAM, MOVE_RECOVER},
+        .nature = NATURE_QUIET,
+        .abilitySlot = 1,
     },
     [SPECIES_OMANYTE] =
     {
-        .moves = {MOVE_SHELL_SMASH, MOVE_HYDRO_PUMP, MOVE_ICE_BEAM, MOVE_EARTH_POWER},
+        .moves = {MOVE_SHELL_SMASH, MOVE_MUDDY_WATER, MOVE_ICE_BEAM, MOVE_PROTECT},
         .nature = NATURE_MODEST,
-        .abilitySlot = 1,
+        .abilitySlot = 0,
     },
     [SPECIES_OMASTAR] =
     {
-        .moves = {MOVE_EARTH_POWER, MOVE_MUDDY_WATER, MOVE_ICE_BEAM, MOVE_SHELL_SMASH},
+        .moves = {MOVE_SHELL_SMASH, MOVE_MUDDY_WATER, MOVE_ICE_BEAM, MOVE_PROTECT},
         .nature = NATURE_MODEST,
         .abilitySlot = 0,
     },
     [SPECIES_KABUTO] =
     {
-        .moves = {MOVE_RAPID_SPIN, MOVE_STEALTH_ROCK, MOVE_KNOCK_OFF, MOVE_ROCK_SLIDE},
-        .nature = NATURE_CAREFUL,
-        .abilitySlot = 2,
+        .moves = {MOVE_WATERFALL, MOVE_ROCK_SLIDE, MOVE_KNOCK_OFF, MOVE_PROTECT},
+        .nature = NATURE_ADAMANT,
+        .abilitySlot = 0,
     },
     [SPECIES_KABUTOPS] =
     {
@@ -855,15 +855,15 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_SNORLAX] =
     {
-        .moves = {MOVE_CURSE, MOVE_DOUBLE_EDGE, MOVE_HIGH_HORSEPOWER, MOVE_RECYCLE},
+        .moves = {MOVE_CURSE, MOVE_BODY_SLAM, MOVE_HIGH_HORSEPOWER, MOVE_PROTECT},
         .nature = NATURE_BRAVE,
-        .abilitySlot = 2,
+        .abilitySlot = 1,
     },
     [SPECIES_ARTICUNO] =
     {
-        .moves = {MOVE_BLIZZARD, MOVE_ICE_BEAM, MOVE_FREEZE_DRY, MOVE_SHEER_COLD},
-        .nature = NATURE_MODEST,
-        .abilitySlot = 2,
+        .moves = {MOVE_FREEZE_DRY, MOVE_ICY_WIND, MOVE_TAILWIND, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
+        .abilitySlot = 0,
     },
     [SPECIES_ZAPDOS] =
     {
@@ -873,159 +873,159 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_MOLTRES] =
     {
-        .moves = {MOVE_PROTECT, MOVE_TAILWIND, MOVE_BRAVE_BIRD, MOVE_FIRE_BLAST},
+        .moves = {MOVE_HEAT_WAVE, MOVE_TAILWIND, MOVE_WILL_O_WISP, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 2,
     },
     [SPECIES_DRATINI] =
     {
-        .moves = {MOVE_DRACO_METEOR, MOVE_EXTREME_SPEED, MOVE_IRON_TAIL, MOVE_FIRE_BLAST},
-        .nature = NATURE_RASH,
+        .moves = {MOVE_DRAGON_DANCE, MOVE_OUTRAGE, MOVE_EXTREME_SPEED, MOVE_PROTECT},
+        .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_DRAGONAIR] =
     {
-        .moves = {MOVE_DRAGON_DANCE, MOVE_EXTREME_SPEED, MOVE_OUTRAGE, MOVE_REST},
+        .moves = {MOVE_DRAGON_DANCE, MOVE_OUTRAGE, MOVE_EXTREME_SPEED, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_DRAGONITE] =
     {
-        .moves = {MOVE_EXTREME_SPEED, MOVE_DRAGON_CLAW, MOVE_IRON_HEAD, MOVE_FIRE_PUNCH},
+        .moves = {MOVE_DRAGON_DANCE, MOVE_DRAGON_CLAW, MOVE_EXTREME_SPEED, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
     [SPECIES_MEWTWO] =
     {
-        .moves = {MOVE_PSYSTRIKE, MOVE_FIRE_BLAST, MOVE_AURA_SPHERE, MOVE_PROTECT},
+        .moves = {MOVE_PSYSTRIKE, MOVE_ICE_BEAM, MOVE_AURA_SPHERE, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 2,
     },
     [SPECIES_MEW] =
     {
-        .moves = {MOVE_ICE_BEAM, MOVE_TAILWIND, MOVE_STEALTH_ROCK, MOVE_WILL_O_WISP},
+        .moves = {MOVE_PSYCHIC, MOVE_TAILWIND, MOVE_WILL_O_WISP, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_CHIKORITA] =
     {
-        .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_LEAF_STORM, MOVE_MAGIC_COAT},
+        .moves = {MOVE_HEAL_PULSE, MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_GIGA_DRAIN},
         .nature = NATURE_BOLD,
         .abilitySlot = 2,
     },
     [SPECIES_BAYLEEF] =
     {
-        .moves = {MOVE_TOXIC, MOVE_LEECH_SEED, MOVE_GRASS_WHISTLE, MOVE_LIGHT_SCREEN},
-        .nature = NATURE_TIMID,
-        .abilitySlot = 0,
+        .moves = {MOVE_HEAL_PULSE, MOVE_REFLECT, MOVE_GIGA_DRAIN, MOVE_PROTECT},
+        .nature = NATURE_BOLD,
+        .abilitySlot = 2,
     },
     [SPECIES_MEGANIUM] =
     {
-        .moves = {MOVE_LIGHT_SCREEN, MOVE_DRAGON_TAIL, MOVE_SYNTHESIS, MOVE_TOXIC},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_HEAL_PULSE, MOVE_LIGHT_SCREEN, MOVE_GIGA_DRAIN, MOVE_PROTECT},
+        .nature = NATURE_BOLD,
         .abilitySlot = 2,
     },
     [SPECIES_CYNDAQUIL] =
     {
-        .moves = {MOVE_ERUPTION, MOVE_FIRE_BLAST, MOVE_EXTRASENSORY, MOVE_PROTECT},
+        .moves = {MOVE_ERUPTION, MOVE_HEAT_WAVE, MOVE_EXTRASENSORY, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 2,
     },
     [SPECIES_QUILAVA] =
     {
-        .moves = {MOVE_ERUPTION, MOVE_OVERHEAT, MOVE_FLAMETHROWER, MOVE_EXTRASENSORY},
-        .nature = NATURE_MODEST,
+        .moves = {MOVE_ERUPTION, MOVE_HEAT_WAVE, MOVE_EXTRASENSORY, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
         .abilitySlot = 2,
     },
     [SPECIES_TYPHLOSION] =
     {
-        .moves = {MOVE_ERUPTION, MOVE_HEAT_WAVE, MOVE_SOLAR_BEAM, MOVE_PROTECT},
+        .moves = {MOVE_ERUPTION, MOVE_HEAT_WAVE, MOVE_FOCUS_BLAST, MOVE_PROTECT},
         .nature = NATURE_TIMID,
-        .abilitySlot = 1,
+        .abilitySlot = 0,
     },
     [SPECIES_TOTODILE] =
     {
-        .moves = {MOVE_DRAGON_DANCE, MOVE_WATERFALL, MOVE_ICE_PUNCH, MOVE_SUPERPOWER},
+        .moves = {MOVE_DRAGON_DANCE, MOVE_WATERFALL, MOVE_ICE_PUNCH, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
     [SPECIES_CROCONAW] =
     {
-        .moves = {MOVE_DRAGON_DANCE, MOVE_WATERFALL, MOVE_ICE_PUNCH, MOVE_SUBSTITUTE},
+        .moves = {MOVE_DRAGON_DANCE, MOVE_WATERFALL, MOVE_ICE_PUNCH, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
     [SPECIES_FERALIGATR] =
     {
-        .moves = {MOVE_SWORDS_DANCE, MOVE_AQUA_JET, MOVE_LIQUIDATION, MOVE_ICE_PUNCH},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_DRAGON_DANCE, MOVE_LIQUIDATION, MOVE_ICE_PUNCH, MOVE_PROTECT},
+        .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
     [SPECIES_SENTRET] =
     {
-        .moves = {MOVE_HYPER_VOICE, MOVE_FLAMETHROWER, MOVE_SHADOW_BALL, MOVE_TRICK},
-        .nature = NATURE_MODEST,
-        .abilitySlot = 2,
+        .moves = {MOVE_FOLLOW_ME, MOVE_SUPER_FANG, MOVE_HELPING_HAND, MOVE_PROTECT},
+        .nature = NATURE_CAREFUL,
+        .abilitySlot = 0,
     },
     [SPECIES_FURRET] =
     {
-        .moves = {MOVE_DOUBLE_EDGE, MOVE_HELPING_HAND, MOVE_PROTECT, MOVE_U_TURN},
+        .moves = {MOVE_DOUBLE_EDGE, MOVE_HELPING_HAND, MOVE_U_TURN, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
-        .abilitySlot = 2,
+        .abilitySlot = 0,
     },
     [SPECIES_HOOTHOOT] =
     {
-        .moves = {MOVE_HYPNOSIS, MOVE_ROOST, MOVE_AIR_SLASH, MOVE_REFLECT},
+        .moves = {MOVE_HYPNOSIS, MOVE_AIR_SLASH, MOVE_REFLECT, MOVE_ROOST},
         .nature = NATURE_CALM,
         .abilitySlot = 2,
     },
     [SPECIES_NOCTOWL] =
     {
-        .moves = {MOVE_PROTECT, MOVE_HYPER_VOICE, MOVE_HURRICANE, MOVE_TAILWIND},
+        .moves = {MOVE_HYPER_VOICE, MOVE_HURRICANE, MOVE_TAILWIND, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 2,
     },
     [SPECIES_LEDYBA] =
     {
-        .moves = {MOVE_SWORDS_DANCE, MOVE_ACROBATICS, MOVE_KNOCK_OFF, MOVE_DRAIN_PUNCH},
+        .moves = {MOVE_TAILWIND, MOVE_DOUBLE_EDGE, MOVE_KNOCK_OFF, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
-        .abilitySlot = 2,
+        .abilitySlot = 0,
     },
     [SPECIES_LEDIAN] =
     {
-        .moves = {MOVE_AGILITY, MOVE_SWORDS_DANCE, MOVE_BATON_PASS, MOVE_ENCORE},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_TAILWIND, MOVE_ENCORE, MOVE_LIGHT_SCREEN, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
         .abilitySlot = 1,
     },
     [SPECIES_SPINARAK] =
     {
-        .moves = {MOVE_TOXIC_SPIKES, MOVE_POISON_JAB, MOVE_X_SCISSOR, MOVE_TOXIC},
+        .moves = {MOVE_TOXIC, MOVE_STRING_SHOT, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_ARIADOS] =
     {
-        .moves = {MOVE_POISON_JAB, MOVE_MEGAHORN, MOVE_STICKY_WEB, MOVE_RAGE_POWDER},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_RAGE_POWDER, MOVE_STICKY_WEB, MOVE_POISON_JAB, MOVE_PROTECT},
+        .nature = NATURE_IMPISH,
         .abilitySlot = 1,
     },
     [SPECIES_CROBAT] =
     {
-        .moves = {MOVE_TAILWIND, MOVE_TAUNT, MOVE_BRAVE_BIRD, MOVE_SUPER_FANG},
+        .moves = {MOVE_TAILWIND, MOVE_TAUNT, MOVE_SUPER_FANG, MOVE_BRAVE_BIRD},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_CHINCHOU] =
     {
-        .moves = {MOVE_HYDRO_PUMP, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_VOLT_SWITCH},
-        .nature = NATURE_TIMID,
+        .moves = {MOVE_SCALD, MOVE_THUNDERBOLT, MOVE_ICY_WIND, MOVE_PROTECT},
+        .nature = NATURE_MODEST,
         .abilitySlot = 0,
     },
     [SPECIES_LANTURN] =
     {
-        .moves = {MOVE_THUNDER, MOVE_SURF, MOVE_BLIZZARD, MOVE_PROTECT},
+        .moves = {MOVE_SCALD, MOVE_THUNDERBOLT, MOVE_ICY_WIND, MOVE_PROTECT},
         .nature = NATURE_MODEST,
-        .abilitySlot = 2,
+        .abilitySlot = 0,
     },
     [SPECIES_PICHU] =
     {
@@ -1035,21 +1035,21 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_CLEFFA] =
     {
-        .moves = {MOVE_COUNTER, MOVE_ENDEAVOR, MOVE_THUNDER_WAVE, MOVE_ENCORE},
-        .nature = NATURE_HASTY,
-        .abilitySlot = 1,
+        .moves = {MOVE_HEAL_PULSE, MOVE_HELPING_HAND, MOVE_ICY_WIND, MOVE_PROTECT},
+        .nature = NATURE_BOLD,
+        .abilitySlot = 2,
     },
     [SPECIES_IGGLYBUFF] =
     {
-        .moves = {MOVE_WISH, MOVE_PROTECT, MOVE_HYPER_VOICE, MOVE_FIRE_BLAST},
-        .nature = NATURE_CALM,
-        .abilitySlot = 1,
+        .moves = {MOVE_HELPING_HAND, MOVE_HEAL_PULSE, MOVE_THUNDER_WAVE, MOVE_PROTECT},
+        .nature = NATURE_BOLD,
+        .abilitySlot = 2,
     },
     [SPECIES_TOGEPI] =
     {
-        .moves = {MOVE_DAZZLING_GLEAM, MOVE_FIRE_BLAST, MOVE_MORNING_SUN, MOVE_NASTY_PLOT},
+        .moves = {MOVE_FOLLOW_ME, MOVE_ENCORE, MOVE_THUNDER_WAVE, MOVE_PROTECT},
         .nature = NATURE_BOLD,
-        .abilitySlot = 1,
+        .abilitySlot = 2,
     },
     [SPECIES_TOGETIC] =
     {
@@ -1059,75 +1059,75 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_NATU] =
     {
-        .moves = {MOVE_PSYCHIC, MOVE_HEAT_WAVE, MOVE_SUCKER_PUNCH, MOVE_SHADOW_BALL},
-        .nature = NATURE_NAIVE,
+        .moves = {MOVE_TAILWIND, MOVE_PSYCHIC, MOVE_HEAT_WAVE, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
         .abilitySlot = 2,
     },
     [SPECIES_XATU] =
     {
-        .moves = {MOVE_AIR_SLASH, MOVE_HEAT_WAVE, MOVE_PSYCHIC, MOVE_ROOST},
+        .moves = {MOVE_TAILWIND, MOVE_PSYCHIC, MOVE_HEAT_WAVE, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 2,
     },
     [SPECIES_MAREEP] =
     {
-        .moves = {MOVE_LIGHT_SCREEN, MOVE_HEAL_BELL, MOVE_THUNDERBOLT, MOVE_POWER_GEM},
+        .moves = {MOVE_ELECTROWEB, MOVE_LIGHT_SCREEN, MOVE_THUNDERBOLT, MOVE_PROTECT},
         .nature = NATURE_BOLD,
         .abilitySlot = 0,
     },
     [SPECIES_FLAAFFY] =
     {
-        .moves = {MOVE_THUNDERBOLT, MOVE_POWER_GEM, MOVE_SIGNAL_BEAM, MOVE_PROTECT},
+        .moves = {MOVE_ELECTROWEB, MOVE_THUNDERBOLT, MOVE_VOLT_SWITCH, MOVE_PROTECT},
         .nature = NATURE_MODEST,
         .abilitySlot = 0,
     },
     [SPECIES_AMPHAROS] =
     {
-        .moves = {MOVE_THUNDERBOLT, MOVE_DRAGON_PULSE, MOVE_SUBSTITUTE, MOVE_PROTECT},
+        .moves = {MOVE_THUNDERBOLT, MOVE_DRAGON_PULSE, MOVE_ELECTROWEB, MOVE_PROTECT},
         .nature = NATURE_QUIET,
         .abilitySlot = 0,
     },
     [SPECIES_BELLOSSOM] =
     {
-        .moves = {MOVE_SUNNY_DAY, MOVE_SLEEP_POWDER, MOVE_MOONLIGHT, MOVE_SOLAR_BEAM},
-        .nature = NATURE_MODEST,
+        .moves = {MOVE_SUNNY_DAY, MOVE_SLEEP_POWDER, MOVE_GIGA_DRAIN, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_MARILL] =
     {
-        .moves = {MOVE_DOUBLE_EDGE, MOVE_TOXIC, MOVE_WATERFALL, MOVE_AQUA_JET},
+        .moves = {MOVE_WATERFALL, MOVE_PLAY_ROUGH, MOVE_AQUA_JET, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 1,
     },
     [SPECIES_AZUMARILL] =
     {
-        .moves = {MOVE_AQUA_JET, MOVE_KNOCK_OFF, MOVE_BELLY_DRUM, MOVE_PROTECT},
+        .moves = {MOVE_BELLY_DRUM, MOVE_AQUA_JET, MOVE_KNOCK_OFF, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 1,
     },
     [SPECIES_SUDOWOODO] =
     {
-        .moves = {MOVE_STEALTH_ROCK, MOVE_STONE_EDGE, MOVE_WOOD_HAMMER, MOVE_TOXIC},
-        .nature = NATURE_IMPISH,
+        .moves = {MOVE_ROCK_SLIDE, MOVE_WOOD_HAMMER, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
+        .nature = NATURE_BRAVE,
         .abilitySlot = 1,
     },
     [SPECIES_POLITOED] =
     {
-        .moves = {MOVE_WEATHER_BALL, MOVE_HELPING_HAND, MOVE_ENCORE, MOVE_PROTECT},
+        .moves = {MOVE_WEATHER_BALL, MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_PROTECT},
         .nature = NATURE_BOLD,
         .abilitySlot = 2,
     },
     [SPECIES_HOPPIP] =
     {
-        .moves = {MOVE_STRENGTH_SAP, MOVE_SLEEP_POWDER, MOVE_BULLET_SEED, MOVE_U_TURN},
-        .nature = NATURE_IMPISH,
-        .abilitySlot = 2,
+        .moves = {MOVE_SLEEP_POWDER, MOVE_RAGE_POWDER, MOVE_STRENGTH_SAP, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
+        .abilitySlot = 0,
     },
     [SPECIES_SKIPLOOM] =
     {
-        .moves = {MOVE_PROTECT, MOVE_SLEEP_POWDER, MOVE_SUBSTITUTE, MOVE_TOXIC},
-        .nature = NATURE_CAREFUL,
-        .abilitySlot = 1,
+        .moves = {MOVE_SLEEP_POWDER, MOVE_RAGE_POWDER, MOVE_STRENGTH_SAP, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
+        .abilitySlot = 0,
     },
     [SPECIES_JUMPLUFF] =
     {
@@ -1137,56 +1137,56 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_AIPOM] =
     {
-        .moves = {MOVE_FAKE_OUT, MOVE_FURY_SWIPES, MOVE_KNOCK_OFF, MOVE_BRICK_BREAK},
+        .moves = {MOVE_FAKE_OUT, MOVE_TAIL_SLAP, MOVE_KNOCK_OFF, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 2,
     },
     [SPECIES_SUNKERN] =
     {
-        .moves = {MOVE_LEAF_STORM, MOVE_EARTH_POWER, MOVE_PROTECT, MOVE_HELPING_HAND},
+        .moves = {MOVE_SUNNY_DAY, MOVE_LEAF_STORM, MOVE_EARTH_POWER, MOVE_PROTECT},
         .nature = NATURE_MODEST,
         .abilitySlot = 0,
     },
     [SPECIES_SUNFLORA] =
     {
-        .moves = {MOVE_EARTH_POWER, MOVE_PROTECT, MOVE_GIGA_DRAIN, MOVE_OVERHEAT},
+        .moves = {MOVE_GIGA_DRAIN, MOVE_EARTH_POWER, MOVE_OVERHEAT, MOVE_PROTECT},
         .nature = NATURE_MODEST,
-        .abilitySlot = 0,
+        .abilitySlot = 2,
     },
     [SPECIES_YANMA] =
     {
-        .moves = {MOVE_BUG_BUZZ, MOVE_AIR_SLASH, MOVE_PROTECT, MOVE_HYPNOSIS},
+        .moves = {MOVE_AIR_SLASH, MOVE_BUG_BUZZ, MOVE_TAILWIND, MOVE_PROTECT},
         .nature = NATURE_TIMID,
-        .abilitySlot = 1,
+        .abilitySlot = 0,
     },
     [SPECIES_WOOPER] =
     {
-        .moves = {MOVE_SCALD, MOVE_RECOVER, MOVE_EARTHQUAKE, MOVE_YAWN},
+        .moves = {MOVE_SCALD, MOVE_YAWN, MOVE_RECOVER, MOVE_PROTECT},
         .nature = NATURE_SASSY,
-        .abilitySlot = 1,
+        .abilitySlot = 2,
     },
     [SPECIES_QUAGSIRE] =
     {
-        .moves = {MOVE_EARTHQUAKE, MOVE_WATERFALL, MOVE_ROCK_SLIDE, MOVE_PROTECT},
+        .moves = {MOVE_HIGH_HORSEPOWER, MOVE_WATERFALL, MOVE_YAWN, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 1,
     },
     [SPECIES_ESPEON] =
     {
-        .moves = {MOVE_PSYSHOCK, MOVE_MORNING_SUN, MOVE_SUBSTITUTE, MOVE_WISH},
+        .moves = {MOVE_PSYCHIC, MOVE_DAZZLING_GLEAM, MOVE_HELPING_HAND, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 2,
     },
     [SPECIES_UMBREON] =
     {
-        .moves = {MOVE_FOUL_PLAY, MOVE_HELPING_HAND, MOVE_YAWN, MOVE_TAUNT},
+        .moves = {MOVE_FOUL_PLAY, MOVE_SNARL, MOVE_YAWN, MOVE_PROTECT},
         .nature = NATURE_BOLD,
         .abilitySlot = 2,
     },
     [SPECIES_MURKROW] =
     {
-        .moves = {MOVE_QUASH, MOVE_FEATHER_DANCE, MOVE_THUNDER_WAVE, MOVE_PROTECT},
-        .nature = NATURE_CALM,
+        .moves = {MOVE_TAILWIND, MOVE_TAUNT, MOVE_FOUL_PLAY, MOVE_ROOST},
+        .nature = NATURE_CAREFUL,
         .abilitySlot = 2,
     },
     [SPECIES_SLOWKING] =
@@ -1197,7 +1197,7 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_MISDREAVUS] =
     {
-        .moves = {MOVE_THUNDERBOLT, MOVE_SHADOW_BALL, MOVE_NASTY_PLOT, MOVE_MOONBLAST},
+        .moves = {MOVE_FOUL_PLAY, MOVE_WILL_O_WISP, MOVE_TAUNT, MOVE_PAIN_SPLIT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
@@ -1215,69 +1215,69 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_GIRAFARIG] =
     {
-        .moves = {MOVE_NASTY_PLOT, MOVE_PSYCHIC, MOVE_HYPER_VOICE, MOVE_THUNDERBOLT},
-        .nature = NATURE_TIMID,
-        .abilitySlot = 2,
+        .moves = {MOVE_PSYCHIC_FANGS, MOVE_CRUNCH, MOVE_THUNDER_WAVE, MOVE_PROTECT},
+        .nature = NATURE_JOLLY,
+        .abilitySlot = 0,
     },
     [SPECIES_PINECO] =
     {
-        .moves = {MOVE_STEALTH_ROCK, MOVE_SPIKES, MOVE_RAPID_SPIN, MOVE_EXPLOSION},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_RAPID_SPIN, MOVE_PROTECT},
+        .nature = NATURE_RELAXED,
         .abilitySlot = 0,
     },
     [SPECIES_FORRETRESS] =
     {
-        .moves = {MOVE_TOXIC, MOVE_VOLT_SWITCH, MOVE_GYRO_BALL, MOVE_PROTECT},
-        .nature = NATURE_IMPISH,
-        .abilitySlot = 0,
+        .moves = {MOVE_GYRO_BALL, MOVE_ROCK_SLIDE, MOVE_VOLT_SWITCH, MOVE_PROTECT},
+        .nature = NATURE_RELAXED,
+        .abilitySlot = 2,
     },
     [SPECIES_DUNSPARCE] =
     {
-        .moves = {MOVE_ROCK_SLIDE, MOVE_PROTECT, MOVE_GLARE, MOVE_HEADBUTT},
+        .moves = {MOVE_ROCK_SLIDE, MOVE_HEADBUTT, MOVE_GLARE, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_GLIGAR] =
     {
-        .moves = {MOVE_EARTHQUAKE, MOVE_ROOST, MOVE_STEALTH_ROCK, MOVE_STONE_EDGE},
+        .moves = {MOVE_EARTHQUAKE, MOVE_ROCK_SLIDE, MOVE_TAILWIND, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_STEELIX] =
     {
-        .moves = {MOVE_HEAVY_SLAM, MOVE_EXPLOSION, MOVE_ROCK_SLIDE, MOVE_EARTHQUAKE},
-        .nature = NATURE_ADAMANT,
-        .abilitySlot = 2,
+        .moves = {MOVE_HIGH_HORSEPOWER, MOVE_HEAVY_SLAM, MOVE_WIDE_GUARD, MOVE_PROTECT},
+        .nature = NATURE_BRAVE,
+        .abilitySlot = 1,
     },
     [SPECIES_SNUBBULL] =
     {
-        .moves = {MOVE_PLAY_ROUGH, MOVE_PSYCHIC_FANGS, MOVE_THUNDER_WAVE, MOVE_THIEF},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_PLAY_ROUGH, MOVE_SUPER_FANG, MOVE_THUNDER_WAVE, MOVE_PROTECT},
+        .nature = NATURE_IMPISH,
         .abilitySlot = 0,
     },
     [SPECIES_GRANBULL] =
     {
-        .moves = {MOVE_CLOSE_COMBAT, MOVE_STOMPING_TANTRUM, MOVE_PLAY_ROUGH, MOVE_SUPER_FANG},
+        .moves = {MOVE_PLAY_ROUGH, MOVE_CLOSE_COMBAT, MOVE_SUPER_FANG, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_QWILFISH] =
     {
-        .moves = {MOVE_WATERFALL, MOVE_POISON_JAB, MOVE_EXPLOSION, MOVE_PROTECT},
-        .nature = NATURE_ADAMANT,
-        .abilitySlot = 1,
+        .moves = {MOVE_LIQUIDATION, MOVE_POISON_JAB, MOVE_ICY_WIND, MOVE_PROTECT},
+        .nature = NATURE_JOLLY,
+        .abilitySlot = 2,
     },
     [SPECIES_SCIZOR] =
     {
         .moves = {MOVE_BULLET_PUNCH, MOVE_BUG_BITE, MOVE_SWORDS_DANCE, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
-        .abilitySlot = 2,
+        .abilitySlot = 1,
     },
     [SPECIES_SHUCKLE] =
     {
-        .moves = {MOVE_POWER_SPLIT, MOVE_ROCK_SLIDE, MOVE_HELPING_HAND, MOVE_REST},
-        .nature = NATURE_IMPISH,
-        .abilitySlot = 2,
+        .moves = {MOVE_POWER_SPLIT, MOVE_HELPING_HAND, MOVE_TOXIC, MOVE_PROTECT},
+        .nature = NATURE_CAREFUL,
+        .abilitySlot = 0,
     },
     [SPECIES_HERACROSS] =
     {
@@ -1287,13 +1287,13 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_SNEASEL] =
     {
-        .moves = {MOVE_LOW_KICK, MOVE_SWORDS_DANCE, MOVE_ICE_PUNCH, MOVE_FOUL_PLAY},
+        .moves = {MOVE_FAKE_OUT, MOVE_ICE_PUNCH, MOVE_KNOCK_OFF, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_TEDDIURSA] =
     {
-        .moves = {MOVE_FIRE_PUNCH, MOVE_CRUNCH, MOVE_FACADE, MOVE_CLOSE_COMBAT},
+        .moves = {MOVE_FACADE, MOVE_CLOSE_COMBAT, MOVE_CRUNCH, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 1,
     },
@@ -1305,7 +1305,7 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_SLUGMA] =
     {
-        .moves = {MOVE_LAVA_PLUME, MOVE_CLEAR_SMOG, MOVE_MEMENTO, MOVE_WILL_O_WISP},
+        .moves = {MOVE_HEAT_WAVE, MOVE_CLEAR_SMOG, MOVE_WILL_O_WISP, MOVE_PROTECT},
         .nature = NATURE_BOLD,
         .abilitySlot = 1,
     },
@@ -1313,95 +1313,95 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     {
         .moves = {MOVE_SHELL_SMASH, MOVE_HEAT_WAVE, MOVE_POWER_GEM, MOVE_PROTECT},
         .nature = NATURE_MODEST,
-        .abilitySlot = 2,
+        .abilitySlot = 1,
     },
     [SPECIES_SWINUB] =
     {
-        .moves = {MOVE_ICICLE_CRASH, MOVE_ENDEAVOR, MOVE_SUPERPOWER, MOVE_STEALTH_ROCK},
+        .moves = {MOVE_EARTHQUAKE, MOVE_ICICLE_CRASH, MOVE_ICE_SHARD, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
-        .abilitySlot = 1,
+        .abilitySlot = 2,
     },
     [SPECIES_PILOSWINE] =
     {
-        .moves = {MOVE_EARTHQUAKE, MOVE_ENDEAVOR, MOVE_ICICLE_CRASH, MOVE_STEALTH_ROCK},
+        .moves = {MOVE_HIGH_HORSEPOWER, MOVE_ICICLE_CRASH, MOVE_ICE_SHARD, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
-        .abilitySlot = 1,
+        .abilitySlot = 2,
     },
     [SPECIES_CORSOLA] =
     {
-        .moves = {MOVE_ICY_WIND, MOVE_RECOVER, MOVE_SCALD, MOVE_TOXIC},
-        .nature = NATURE_MODEST,
+        .moves = {MOVE_SCALD, MOVE_ICY_WIND, MOVE_RECOVER, MOVE_PROTECT},
+        .nature = NATURE_CALM,
         .abilitySlot = 2,
     },
     [SPECIES_REMORAID] =
     {
-        .moves = {MOVE_WATER_SPOUT, MOVE_HYDRO_PUMP, MOVE_FIRE_BLAST, MOVE_BULLET_SEED},
-        .nature = NATURE_NAIVE,
-        .abilitySlot = 0,
+        .moves = {MOVE_WATER_SPOUT, MOVE_ICE_BEAM, MOVE_FIRE_BLAST, MOVE_PROTECT},
+        .nature = NATURE_MODEST,
+        .abilitySlot = 2,
     },
     [SPECIES_OCTILLERY] =
     {
-        .moves = {MOVE_WATER_SPOUT, MOVE_ICE_BEAM, MOVE_SCALD, MOVE_PROTECT},
+        .moves = {MOVE_WATER_SPOUT, MOVE_ICE_BEAM, MOVE_ENERGY_BALL, MOVE_PROTECT},
         .nature = NATURE_QUIET,
-        .abilitySlot = 1,
+        .abilitySlot = 2,
     },
     [SPECIES_DELIBIRD] =
     {
-        .moves = {MOVE_FAKE_OUT, MOVE_BRAVE_BIRD, MOVE_ICE_PUNCH, MOVE_PROTECT},
+        .moves = {MOVE_FAKE_OUT, MOVE_DOUBLE_EDGE, MOVE_BRAVE_BIRD, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
-        .abilitySlot = 1,
+        .abilitySlot = 0,
     },
     [SPECIES_MANTINE] =
     {
-        .moves = {MOVE_SCALD, MOVE_HELPING_HAND, MOVE_ROOST, MOVE_HAZE},
-        .nature = NATURE_TIMID,
+        .moves = {MOVE_SCALD, MOVE_TAILWIND, MOVE_WIDE_GUARD, MOVE_ROOST},
+        .nature = NATURE_CALM,
         .abilitySlot = 1,
     },
     [SPECIES_SKARMORY] =
     {
-        .moves = {MOVE_WHIRLWIND, MOVE_ROOST, MOVE_STEALTH_ROCK, MOVE_BRAVE_BIRD},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_TAILWIND, MOVE_TAUNT, MOVE_BRAVE_BIRD, MOVE_ROOST},
+        .nature = NATURE_IMPISH,
         .abilitySlot = 1,
     },
     [SPECIES_HOUNDOUR] =
     {
-        .moves = {MOVE_FIRE_BLAST, MOVE_DARK_PULSE, MOVE_SUCKER_PUNCH, MOVE_FLAME_CHARGE},
+        .moves = {MOVE_HEAT_WAVE, MOVE_DARK_PULSE, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
         .nature = NATURE_NAIVE,
         .abilitySlot = 1,
     },
     [SPECIES_HOUNDOOM] =
     {
-        .moves = {MOVE_SUCKER_PUNCH, MOVE_FIRE_BLAST, MOVE_TAUNT, MOVE_PROTECT},
-        .nature = NATURE_NAIVE,
-        .abilitySlot = 2,
+        .moves = {MOVE_HEAT_WAVE, MOVE_DARK_PULSE, MOVE_NASTY_PLOT, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
+        .abilitySlot = 1,
     },
     [SPECIES_KINGDRA] =
     {
-        .moves = {MOVE_MUDDY_WATER, MOVE_HURRICANE, MOVE_DRACO_METEOR, MOVE_PROTECT},
+        .moves = {MOVE_MUDDY_WATER, MOVE_DRACO_METEOR, MOVE_ICE_BEAM, MOVE_PROTECT},
         .nature = NATURE_MODEST,
         .abilitySlot = 0,
     },
     [SPECIES_PHANPY] =
     {
-        .moves = {MOVE_STEALTH_ROCK, MOVE_EARTHQUAKE, MOVE_KNOCK_OFF, MOVE_ICE_SHARD},
-        .nature = NATURE_CAREFUL,
+        .moves = {MOVE_HIGH_HORSEPOWER, MOVE_ROCK_SLIDE, MOVE_ICE_SHARD, MOVE_PROTECT},
+        .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
     [SPECIES_DONPHAN] =
     {
-        .moves = {MOVE_KNOCK_OFF, MOVE_STONE_EDGE, MOVE_RAPID_SPIN, MOVE_HIGH_HORSEPOWER},
+        .moves = {MOVE_HIGH_HORSEPOWER, MOVE_ROCK_SLIDE, MOVE_ICE_SHARD, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_PORYGON2] =
     {
-        .moves = {MOVE_ICE_BEAM, MOVE_THUNDERBOLT, MOVE_TRICK_ROOM, MOVE_RECOVER},
+        .moves = {MOVE_TRICK_ROOM, MOVE_ICE_BEAM, MOVE_THUNDERBOLT, MOVE_RECOVER},
         .nature = NATURE_RELAXED,
         .abilitySlot = 1,
     },
     [SPECIES_STANTLER] =
     {
-        .moves = {MOVE_DOUBLE_EDGE, MOVE_SUCKER_PUNCH, MOVE_EARTHQUAKE, MOVE_TOXIC},
+        .moves = {MOVE_DOUBLE_EDGE, MOVE_EARTHQUAKE, MOVE_THUNDER_WAVE, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
@@ -1413,7 +1413,7 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_TYROGUE] =
     {
-        .moves = {MOVE_HIGH_JUMP_KICK, MOVE_FAKE_OUT, MOVE_MACH_PUNCH, MOVE_BULLET_PUNCH},
+        .moves = {MOVE_FAKE_OUT, MOVE_HIGH_JUMP_KICK, MOVE_MACH_PUNCH, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
@@ -1425,98 +1425,98 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_SMOOCHUM] =
     {
-        .moves = {MOVE_PSYCHIC, MOVE_GRASS_KNOT, MOVE_ICE_BEAM, MOVE_SHADOW_BALL},
-        .nature = NATURE_MODEST,
+        .moves = {MOVE_FAKE_OUT, MOVE_ICY_WIND, MOVE_PSYCHIC, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_ELEKID] =
     {
-        .moves = {MOVE_VOLT_SWITCH, MOVE_THUNDERBOLT, MOVE_PSYCHIC, MOVE_ICE_PUNCH},
-        .nature = NATURE_NAIVE,
+        .moves = {MOVE_ELECTROWEB, MOVE_THUNDERBOLT, MOVE_HELPING_HAND, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
         .abilitySlot = 2,
     },
     [SPECIES_MAGBY] =
     {
-        .moves = {MOVE_FLARE_BLITZ, MOVE_CROSS_CHOP, MOVE_MACH_PUNCH, MOVE_THUNDER_PUNCH},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_HEAT_WAVE, MOVE_CROSS_CHOP, MOVE_MACH_PUNCH, MOVE_PROTECT},
+        .nature = NATURE_NAIVE,
         .abilitySlot = 2,
     },
     [SPECIES_MILTANK] =
     {
-        .moves = {MOVE_PROTECT, MOVE_HELPING_HAND, MOVE_ROCK_SLIDE, MOVE_BODY_SLAM},
+        .moves = {MOVE_BODY_SLAM, MOVE_ROCK_SLIDE, MOVE_HELPING_HAND, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 2,
     },
     [SPECIES_BLISSEY] =
     {
-        .moves = {MOVE_TOXIC, MOVE_SOFT_BOILED, MOVE_SEISMIC_TOSS, MOVE_PROTECT},
+        .moves = {MOVE_HEAL_PULSE, MOVE_HELPING_HAND, MOVE_SEISMIC_TOSS, MOVE_PROTECT},
         .nature = NATURE_CALM,
-        .abilitySlot = 1,
+        .abilitySlot = 2,
     },
     [SPECIES_RAIKOU] =
     {
-        .moves = {MOVE_RAIN_DANCE, MOVE_THUNDER, MOVE_SHADOW_BALL, MOVE_PROTECT},
+        .moves = {MOVE_THUNDERBOLT, MOVE_SNARL, MOVE_REFLECT, MOVE_PROTECT},
         .nature = NATURE_TIMID,
-        .abilitySlot = 0,
+        .abilitySlot = 2,
     },
     [SPECIES_ENTEI] =
     {
-        .moves = {MOVE_SACRED_FIRE, MOVE_EXTREME_SPEED, MOVE_STOMPING_TANTRUM, MOVE_IRON_HEAD},
+        .moves = {MOVE_SACRED_FIRE, MOVE_EXTREME_SPEED, MOVE_SNARL, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
     [SPECIES_SUICUNE] =
     {
-        .moves = {MOVE_TAILWIND, MOVE_ICE_BEAM, MOVE_SNARL, MOVE_SCALD},
-        .nature = NATURE_MODEST,
-        .abilitySlot = 0,
+        .moves = {MOVE_TAILWIND, MOVE_SCALD, MOVE_SNARL, MOVE_PROTECT},
+        .nature = NATURE_BOLD,
+        .abilitySlot = 2,
     },
     [SPECIES_LARVITAR] =
     {
-        .moves = {MOVE_DRAGON_DANCE, MOVE_EARTHQUAKE, MOVE_ROCK_SLIDE, MOVE_SUPERPOWER},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_DRAGON_DANCE, MOVE_ROCK_SLIDE, MOVE_STOMPING_TANTRUM, MOVE_PROTECT},
+        .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_PUPITAR] =
     {
-        .moves = {MOVE_STONE_EDGE, MOVE_SUPERPOWER, MOVE_STOMPING_TANTRUM, MOVE_PROTECT},
+        .moves = {MOVE_DRAGON_DANCE, MOVE_ROCK_SLIDE, MOVE_STOMPING_TANTRUM, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_TYRANITAR] =
     {
-        .moves = {MOVE_STEALTH_ROCK, MOVE_STONE_EDGE, MOVE_CRUNCH, MOVE_DRAGON_TAIL},
+        .moves = {MOVE_ROCK_SLIDE, MOVE_CRUNCH, MOVE_HIGH_HORSEPOWER, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_LUGIA] =
     {
-        .moves = {MOVE_EARTH_POWER, MOVE_CALM_MIND, MOVE_RECOVER, MOVE_AEROBLAST},
+        .moves = {MOVE_AEROBLAST, MOVE_ICE_BEAM, MOVE_TAILWIND, MOVE_RECOVER},
         .nature = NATURE_TIMID,
         .abilitySlot = 2,
     },
     [SPECIES_HO_OH] =
     {
-        .moves = {MOVE_SACRED_FIRE, MOVE_BRAVE_BIRD, MOVE_EARTHQUAKE, MOVE_PROTECT},
+        .moves = {MOVE_SACRED_FIRE, MOVE_BRAVE_BIRD, MOVE_TAILWIND, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
     [SPECIES_CELEBI] =
     {
-        .moves = {MOVE_PROTECT, MOVE_EARTH_POWER, MOVE_RECOVER, MOVE_ENERGY_BALL},
+        .moves = {MOVE_PSYCHIC, MOVE_GIGA_DRAIN, MOVE_HELPING_HAND, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_TREECKO] =
     {
-        .moves = {MOVE_SWORDS_DANCE, MOVE_BULLET_SEED, MOVE_DRAIN_PUNCH, MOVE_ACROBATICS},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_SWORDS_DANCE, MOVE_BULLET_SEED, MOVE_ACROBATICS, MOVE_PROTECT},
+        .nature = NATURE_JOLLY,
         .abilitySlot = 1,
     },
     [SPECIES_GROVYLE] =
     {
-        .moves = {MOVE_SWORDS_DANCE, MOVE_LEAF_BLADE, MOVE_ACROBATICS, MOVE_DRAIN_PUNCH},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_SWORDS_DANCE, MOVE_LEAF_BLADE, MOVE_ACROBATICS, MOVE_PROTECT},
+        .nature = NATURE_JOLLY,
         .abilitySlot = 1,
     },
     [SPECIES_SCEPTILE] =
@@ -1527,8 +1527,8 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_TORCHIC] =
     {
-        .moves = {MOVE_AGILITY, MOVE_BATON_PASS, MOVE_FIRE_BLAST, MOVE_SUBSTITUTE},
-        .nature = NATURE_TIMID,
+        .moves = {MOVE_SWORDS_DANCE, MOVE_BATON_PASS, MOVE_FLARE_BLITZ, MOVE_PROTECT},
+        .nature = NATURE_JOLLY,
         .abilitySlot = 2,
     },
     [SPECIES_COMBUSKEN] =
@@ -1545,15 +1545,15 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_MUDKIP] =
     {
-        .moves = {MOVE_WATERFALL, MOVE_ICE_BEAM, MOVE_SUPERPOWER, MOVE_DOUBLE_EDGE},
-        .nature = NATURE_IMPISH,
-        .abilitySlot = 2,
+        .moves = {MOVE_WATERFALL, MOVE_ICY_WIND, MOVE_SUPERPOWER, MOVE_PROTECT},
+        .nature = NATURE_ADAMANT,
+        .abilitySlot = 0,
     },
     [SPECIES_MARSHTOMP] =
     {
-        .moves = {MOVE_STEALTH_ROCK, MOVE_EARTHQUAKE, MOVE_WATERFALL, MOVE_ICE_PUNCH},
+        .moves = {MOVE_EARTHQUAKE, MOVE_WATERFALL, MOVE_ICE_PUNCH, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
-        .abilitySlot = 2,
+        .abilitySlot = 0,
     },
     [SPECIES_SWAMPERT] =
     {
@@ -1563,7 +1563,7 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_POOCHYENA] =
     {
-        .moves = {MOVE_HOWL, MOVE_CRUNCH, MOVE_PLAY_ROUGH, MOVE_FIRE_FANG},
+        .moves = {MOVE_CRUNCH, MOVE_PLAY_ROUGH, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 2,
     },
@@ -1575,9 +1575,9 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_ZIGZAGOON] =
     {
-        .moves = {MOVE_SEED_BOMB, MOVE_SUBSTITUTE, MOVE_BELLY_DRUM, MOVE_EXTREME_SPEED},
+        .moves = {MOVE_BELLY_DRUM, MOVE_EXTREME_SPEED, MOVE_SEED_BOMB, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
-        .abilitySlot = 2,
+        .abilitySlot = 1,
     },
     [SPECIES_LINOONE] =
     {
@@ -1587,45 +1587,45 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_WURMPLE] =
     {
-        .moves = {MOVE_BUG_BITE, MOVE_TACKLE, MOVE_STRING_SHOT, MOVE_ELECTROWEB},
-        .nature = NATURE_ADAMANT,
-        .abilitySlot = 0,
+        .moves = {MOVE_ELECTROWEB, MOVE_STRING_SHOT, MOVE_BUG_BITE, MOVE_TACKLE},
+        .nature = NATURE_IMPISH,
+        .abilitySlot = 1,
     },
     [SPECIES_SILCOON] =
     {
-        .moves = {MOVE_BUG_BITE, MOVE_ELECTROWEB, MOVE_HARDEN, MOVE_IRON_DEFENSE},
+        .moves = {MOVE_ELECTROWEB, MOVE_BUG_BITE, MOVE_IRON_DEFENSE, MOVE_STRING_SHOT},
         .nature = NATURE_IMPISH,
         .abilitySlot = 0,
     },
     [SPECIES_BEAUTIFLY] =
     {
-        .moves = {MOVE_QUIVER_DANCE, MOVE_AIR_CUTTER, MOVE_GIGA_DRAIN, MOVE_BUG_BUZZ},
+        .moves = {MOVE_QUIVER_DANCE, MOVE_BUG_BUZZ, MOVE_AIR_SLASH, MOVE_ROOST},
         .nature = NATURE_TIMID,
-        .abilitySlot = 0,
+        .abilitySlot = 1,
     },
     [SPECIES_CASCOON] =
     {
-        .moves = {MOVE_POISON_STING, MOVE_ELECTROWEB, MOVE_BUG_BITE, MOVE_TACKLE},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_ELECTROWEB, MOVE_BUG_BITE, MOVE_IRON_DEFENSE, MOVE_STRING_SHOT},
+        .nature = NATURE_IMPISH,
         .abilitySlot = 0,
     },
     [SPECIES_DUSTOX] =
     {
-        .moves = {MOVE_BUG_BUZZ, MOVE_ROOST, MOVE_TOXIC, MOVE_SLUDGE_BOMB},
-        .nature = NATURE_MODEST,
-        .abilitySlot = 0,
+        .moves = {MOVE_QUIVER_DANCE, MOVE_BUG_BUZZ, MOVE_SLUDGE_BOMB, MOVE_ROOST},
+        .nature = NATURE_BOLD,
+        .abilitySlot = 1,
     },
     [SPECIES_LOTAD] =
     {
-        .moves = {MOVE_SURF, MOVE_GIGA_DRAIN, MOVE_ICE_BEAM, MOVE_RAIN_DANCE},
+        .moves = {MOVE_RAIN_DANCE, MOVE_SCALD, MOVE_GIGA_DRAIN, MOVE_PROTECT},
         .nature = NATURE_MODEST,
         .abilitySlot = 0,
     },
     [SPECIES_LOMBRE] =
     {
-        .moves = {MOVE_LEECH_SEED, MOVE_SUBSTITUTE, MOVE_GIGA_DRAIN, MOVE_SCALD},
+        .moves = {MOVE_FAKE_OUT, MOVE_GIGA_DRAIN, MOVE_SCALD, MOVE_PROTECT},
         .nature = NATURE_MODEST,
-        .abilitySlot = 1,
+        .abilitySlot = 0,
     },
     [SPECIES_LUDICOLO] =
     {
@@ -1635,13 +1635,13 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_SEEDOT] =
     {
-        .moves = {MOVE_GROWTH, MOVE_SOLAR_BEAM, MOVE_EXPLOSION, MOVE_SUNNY_DAY},
-        .nature = NATURE_NAIVE,
+        .moves = {MOVE_SEED_BOMB, MOVE_SUCKER_PUNCH, MOVE_EXPLOSION, MOVE_PROTECT},
+        .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_NUZLEAF] =
     {
-        .moves = {MOVE_FOUL_PLAY, MOVE_LEAF_BLADE, MOVE_STRENGTH, MOVE_PROTECT},
+        .moves = {MOVE_FAKE_OUT, MOVE_LEAF_BLADE, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
@@ -1653,9 +1653,9 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_TAILLOW] =
     {
-        .moves = {MOVE_BOOMBURST, MOVE_HEAT_WAVE, MOVE_U_TURN, MOVE_BRAVE_BIRD},
-        .nature = NATURE_NAIVE,
-        .abilitySlot = 0,
+        .moves = {MOVE_BRAVE_BIRD, MOVE_U_TURN, MOVE_TAILWIND, MOVE_PROTECT},
+        .nature = NATURE_JOLLY,
+        .abilitySlot = 2,
     },
     [SPECIES_SWELLOW] =
     {
@@ -1665,9 +1665,9 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_WINGULL] =
     {
-        .moves = {MOVE_SCALD, MOVE_HURRICANE, MOVE_KNOCK_OFF, MOVE_U_TURN},
+        .moves = {MOVE_AIR_SLASH, MOVE_SCALD, MOVE_TAILWIND, MOVE_PROTECT},
         .nature = NATURE_TIMID,
-        .abilitySlot = 2,
+        .abilitySlot = 0,
     },
     [SPECIES_PELIPPER] =
     {
@@ -1677,15 +1677,15 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_RALTS] =
     {
-        .moves = {MOVE_DESTINY_BOND, MOVE_WILL_O_WISP, MOVE_TRICK_ROOM, MOVE_HYPNOSIS},
+        .moves = {MOVE_TRICK_ROOM, MOVE_PSYCHIC, MOVE_HELPING_HAND, MOVE_PROTECT},
         .nature = NATURE_QUIET,
-        .abilitySlot = 1,
+        .abilitySlot = 2,
     },
     [SPECIES_KIRLIA] =
     {
-        .moves = {MOVE_TRICK_ROOM, MOVE_PSYCHIC, MOVE_DESTINY_BOND, MOVE_WILL_O_WISP},
+        .moves = {MOVE_TRICK_ROOM, MOVE_PSYCHIC, MOVE_WILL_O_WISP, MOVE_PROTECT},
         .nature = NATURE_QUIET,
-        .abilitySlot = 0,
+        .abilitySlot = 2,
     },
     [SPECIES_GARDEVOIR] =
     {
@@ -1695,21 +1695,21 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_SURSKIT] =
     {
-        .moves = {MOVE_STICKY_WEB, MOVE_SCALD, MOVE_ICY_WIND, MOVE_GIGA_DRAIN},
+        .moves = {MOVE_ICY_WIND, MOVE_SCALD, MOVE_BUG_BUZZ, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_MASQUERAIN] =
     {
-        .moves = {MOVE_HURRICANE, MOVE_QUIVER_DANCE, MOVE_HYDRO_PUMP, MOVE_BUG_BUZZ},
+        .moves = {MOVE_TAILWIND, MOVE_BUG_BUZZ, MOVE_HYDRO_PUMP, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_SHROOMISH] =
     {
-        .moves = {MOVE_SPORE, MOVE_STUN_SPORE, MOVE_TOXIC, MOVE_LEECH_SEED},
-        .nature = NATURE_JOLLY,
-        .abilitySlot = 1,
+        .moves = {MOVE_SPORE, MOVE_DRAIN_PUNCH, MOVE_SEED_BOMB, MOVE_PROTECT},
+        .nature = NATURE_IMPISH,
+        .abilitySlot = 0,
     },
     [SPECIES_BRELOOM] =
     {
@@ -1719,32 +1719,32 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_SLAKOTH] =
     {
-        .moves = {MOVE_PURSUIT, MOVE_ICE_PUNCH, MOVE_HAMMER_ARM, MOVE_BODY_SLAM},
-        .nature = NATURE_ADAMANT,
-        .abilitySlot = 0,
+        .moves = {MOVE_BODY_SLAM, MOVE_YAWN, MOVE_SLACK_OFF, MOVE_PROTECT},
+        .nature = NATURE_BRAVE,
+        .abilitySlot = 2,
     },
     [SPECIES_VIGOROTH] =
     {
-        .moves = {MOVE_ENCORE, MOVE_SUBSTITUTE, MOVE_FOCUS_PUNCH, MOVE_SUCKER_PUNCH},
+        .moves = {MOVE_ENCORE, MOVE_DOUBLE_EDGE, MOVE_LOW_KICK, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_SLAKING] =
     {
-        .moves = {MOVE_DOUBLE_EDGE, MOVE_EARTHQUAKE, MOVE_NIGHT_SLASH, MOVE_PURSUIT},
+        .moves = {MOVE_DOUBLE_EDGE, MOVE_EARTHQUAKE, MOVE_ROCK_SLIDE, MOVE_SUCKER_PUNCH},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_NINCADA] =
     {
-        .moves = {MOVE_X_SCISSOR, MOVE_AERIAL_ACE, MOVE_NIGHT_SLASH, MOVE_TOXIC},
+        .moves = {MOVE_X_SCISSOR, MOVE_AERIAL_ACE, MOVE_TOXIC, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_NINJASK] =
     {
-        .moves = {MOVE_X_SCISSOR, MOVE_AERIAL_ACE, MOVE_DIG, MOVE_PROTECT},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_X_SCISSOR, MOVE_AERIAL_ACE, MOVE_BATON_PASS, MOVE_PROTECT},
+        .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_SHEDINJA] =
@@ -1755,26 +1755,26 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_WHISMUR] =
     {
-        .moves = {MOVE_ICE_BEAM, MOVE_FIRE_BLAST, MOVE_HYPER_VOICE, MOVE_SHADOW_BALL},
+        .moves = {MOVE_HYPER_VOICE, MOVE_FIRE_BLAST, MOVE_ICE_BEAM, MOVE_PROTECT},
         .nature = NATURE_MODEST,
         .abilitySlot = 0,
     },
     [SPECIES_LOUDRED] =
     {
-        .moves = {MOVE_SHADOW_BALL, MOVE_HYPER_VOICE, MOVE_ICE_BEAM, MOVE_FIRE_BLAST},
+        .moves = {MOVE_HYPER_VOICE, MOVE_FIRE_BLAST, MOVE_ICE_BEAM, MOVE_PROTECT},
         .nature = NATURE_MODEST,
         .abilitySlot = 0,
     },
     [SPECIES_EXPLOUD] =
     {
-        .moves = {MOVE_HYPER_VOICE, MOVE_PROTECT, MOVE_FOCUS_BLAST, MOVE_BOOMBURST},
+        .moves = {MOVE_HYPER_VOICE, MOVE_FOCUS_BLAST, MOVE_FIRE_BLAST, MOVE_PROTECT},
         .nature = NATURE_MODEST,
         .abilitySlot = 2,
     },
     [SPECIES_MAKUHITA] =
     {
-        .moves = {MOVE_BELLY_DRUM, MOVE_CLOSE_COMBAT, MOVE_KNOCK_OFF, MOVE_BULLET_PUNCH},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_FAKE_OUT, MOVE_CLOSE_COMBAT, MOVE_KNOCK_OFF, MOVE_PROTECT},
+        .nature = NATURE_ADAMANT,
         .abilitySlot = 1,
     },
     [SPECIES_HARIYAMA] =
@@ -1785,25 +1785,25 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_AZURILL] =
     {
-        .moves = {MOVE_BELLY_DRUM, MOVE_FACADE, MOVE_AQUA_JET, MOVE_PROTECT},
+        .moves = {MOVE_BELLY_DRUM, MOVE_AQUA_JET, MOVE_PLAY_ROUGH, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 1,
     },
     [SPECIES_NOSEPASS] =
     {
-        .moves = {MOVE_STEALTH_ROCK, MOVE_ROCK_BLAST, MOVE_THUNDER_WAVE, MOVE_VOLT_SWITCH},
+        .moves = {MOVE_THUNDER_WAVE, MOVE_ROCK_SLIDE, MOVE_WIDE_GUARD, MOVE_PROTECT},
         .nature = NATURE_RELAXED,
         .abilitySlot = 0,
     },
     [SPECIES_SKITTY] =
     {
-        .moves = {MOVE_FAKE_OUT, MOVE_SUCKER_PUNCH, MOVE_DOUBLE_EDGE, MOVE_THUNDER_WAVE},
+        .moves = {MOVE_FAKE_OUT, MOVE_THUNDER_WAVE, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
-        .abilitySlot = 1,
+        .abilitySlot = 2,
     },
     [SPECIES_DELCATTY] =
     {
-        .moves = {MOVE_SUCKER_PUNCH, MOVE_FAKE_OUT, MOVE_THUNDER_WAVE, MOVE_PLAY_ROUGH},
+        .moves = {MOVE_FAKE_OUT, MOVE_THUNDER_WAVE, MOVE_PLAY_ROUGH, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 2,
     },
@@ -1821,25 +1821,25 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_ARON] =
     {
-        .moves = {MOVE_ENDEAVOR, MOVE_TOXIC, MOVE_SLEEP_TALK, MOVE_PROTECT},
+        .moves = {MOVE_ENDEAVOR, MOVE_ROCK_SLIDE, MOVE_TOXIC, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_LAIRON] =
     {
-        .moves = {MOVE_HEAD_SMASH, MOVE_HEAVY_SLAM, MOVE_SUPERPOWER, MOVE_STEALTH_ROCK},
+        .moves = {MOVE_HEAD_SMASH, MOVE_HEAVY_SLAM, MOVE_SUPERPOWER, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 1,
     },
     [SPECIES_AGGRON] =
     {
-        .moves = {MOVE_STEALTH_ROCK, MOVE_ICE_PUNCH, MOVE_AQUA_TAIL, MOVE_THUNDER_WAVE},
+        .moves = {MOVE_HEAVY_SLAM, MOVE_ROCK_SLIDE, MOVE_ICE_PUNCH, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_MEDITITE] =
     {
-        .moves = {MOVE_CLOSE_COMBAT, MOVE_ZEN_HEADBUTT, MOVE_ICE_PUNCH, MOVE_TRICK},
+        .moves = {MOVE_FAKE_OUT, MOVE_CLOSE_COMBAT, MOVE_ZEN_HEADBUTT, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
@@ -1851,7 +1851,7 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_ELECTRIKE] =
     {
-        .moves = {MOVE_VOLT_SWITCH, MOVE_THUNDERBOLT, MOVE_FLAMETHROWER, MOVE_SWITCHEROO},
+        .moves = {MOVE_THUNDER_WAVE, MOVE_THUNDERBOLT, MOVE_FLAMETHROWER, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 1,
     },
@@ -1863,19 +1863,19 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_PLUSLE] =
     {
-        .moves = {MOVE_BATON_PASS, MOVE_NASTY_PLOT, MOVE_THUNDERBOLT, MOVE_ENCORE},
+        .moves = {MOVE_ELECTROWEB, MOVE_HELPING_HAND, MOVE_ENCORE, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_MINUN] =
     {
-        .moves = {MOVE_PROTECT, MOVE_SUBSTITUTE, MOVE_THUNDERBOLT, MOVE_DAZZLING_GLEAM},
+        .moves = {MOVE_ELECTROWEB, MOVE_HELPING_HAND, MOVE_ENCORE, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_VOLBEAT] =
     {
-        .moves = {MOVE_RAIN_DANCE, MOVE_U_TURN, MOVE_THUNDER_WAVE, MOVE_ENCORE},
+        .moves = {MOVE_TAILWIND, MOVE_ENCORE, MOVE_THUNDER_WAVE, MOVE_PROTECT},
         .nature = NATURE_CAREFUL,
         .abilitySlot = 2,
     },
@@ -1887,20 +1887,20 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_ROSELIA] =
     {
-        .moves = {MOVE_SPIKES, MOVE_SLUDGE_BOMB, MOVE_GIGA_DRAIN, MOVE_SYNTHESIS},
-        .nature = NATURE_CALM,
+        .moves = {MOVE_SLEEP_POWDER, MOVE_GIGA_DRAIN, MOVE_SLUDGE_BOMB, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_GULPIN] =
     {
-        .moves = {MOVE_STOCKPILE, MOVE_PAIN_SPLIT, MOVE_ENCORE, MOVE_ICE_BEAM},
-        .nature = NATURE_MODEST,
+        .moves = {MOVE_ENCORE, MOVE_YAWN, MOVE_SLUDGE_BOMB, MOVE_PROTECT},
+        .nature = NATURE_BOLD,
         .abilitySlot = 0,
     },
     [SPECIES_SWALOT] =
     {
-        .moves = {MOVE_ICE_BEAM, MOVE_YAWN, MOVE_EARTHQUAKE, MOVE_PAIN_SPLIT},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_YAWN, MOVE_SLUDGE_BOMB, MOVE_ICE_BEAM, MOVE_PROTECT},
+        .nature = NATURE_BOLD,
         .abilitySlot = 1,
     },
     [SPECIES_CARVANHA] =
@@ -1911,26 +1911,26 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_SHARPEDO] =
     {
-        .moves = {MOVE_PROTECT, MOVE_ICE_FANG, MOVE_WATERFALL, MOVE_ZEN_HEADBUTT},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_CRUNCH, MOVE_ICE_FANG, MOVE_EARTHQUAKE, MOVE_PROTECT},
+        .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
     [SPECIES_WAILMER] =
     {
-        .moves = {MOVE_SCALD, MOVE_ROAR, MOVE_REST, MOVE_SLEEP_TALK},
-        .nature = NATURE_BOLD,
-        .abilitySlot = 1,
+        .moves = {MOVE_WATER_SPOUT, MOVE_HYDRO_PUMP, MOVE_ICE_BEAM, MOVE_PROTECT},
+        .nature = NATURE_MODEST,
+        .abilitySlot = 2,
     },
     [SPECIES_WAILORD] =
     {
-        .moves = {MOVE_WATER_SPOUT, MOVE_SURF, MOVE_ICE_BEAM, MOVE_PROTECT},
+        .moves = {MOVE_WATER_SPOUT, MOVE_HYDRO_PUMP, MOVE_ICE_BEAM, MOVE_PROTECT},
         .nature = NATURE_QUIET,
         .abilitySlot = 2,
     },
     [SPECIES_NUMEL] =
     {
-        .moves = {MOVE_REST, MOVE_STOCKPILE, MOVE_FLAME_CHARGE, MOVE_BODY_PRESS},
-        .nature = NATURE_IMPISH,
+        .moves = {MOVE_STOCKPILE, MOVE_BODY_PRESS, MOVE_HEAT_WAVE, MOVE_PROTECT},
+        .nature = NATURE_RELAXED,
         .abilitySlot = 1,
     },
     [SPECIES_CAMERUPT] =
@@ -1965,13 +1965,13 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_TRAPINCH] =
     {
-        .moves = {MOVE_EARTHQUAKE, MOVE_FEINT, MOVE_ROCK_SLIDE, MOVE_TOXIC},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_EARTHQUAKE, MOVE_ROCK_SLIDE, MOVE_FEINT, MOVE_PROTECT},
+        .nature = NATURE_BRAVE,
         .abilitySlot = 1,
     },
     [SPECIES_VIBRAVA] =
     {
-        .moves = {MOVE_ROOST, MOVE_SUPERPOWER, MOVE_U_TURN, MOVE_OUTRAGE},
+        .moves = {MOVE_EARTHQUAKE, MOVE_ROCK_SLIDE, MOVE_TAILWIND, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
@@ -1983,8 +1983,8 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_CACNEA] =
     {
-        .moves = {MOVE_SWORDS_DANCE, MOVE_SUCKER_PUNCH, MOVE_SEED_BOMB, MOVE_DRAIN_PUNCH},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_SWORDS_DANCE, MOVE_SUCKER_PUNCH, MOVE_SEED_BOMB, MOVE_PROTECT},
+        .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
     [SPECIES_CACTURNE] =
@@ -1995,8 +1995,8 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_SWABLU] =
     {
-        .moves = {MOVE_ROOST, MOVE_TOXIC, MOVE_HYPER_VOICE, MOVE_COTTON_GUARD},
-        .nature = NATURE_CAREFUL,
+        .moves = {MOVE_TAILWIND, MOVE_ROOST, MOVE_HYPER_VOICE, MOVE_PROTECT},
+        .nature = NATURE_CALM,
         .abilitySlot = 2,
     },
     [SPECIES_ALTARIA] =
@@ -2013,31 +2013,31 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_SEVIPER] =
     {
-        .moves = {MOVE_GLARE, MOVE_GIGA_DRAIN, MOVE_POISON_JAB, MOVE_FLAMETHROWER},
+        .moves = {MOVE_GLARE, MOVE_SLUDGE_BOMB, MOVE_FLAMETHROWER, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 2,
     },
     [SPECIES_LUNATONE] =
     {
-        .moves = {MOVE_TRICK_ROOM, MOVE_EXPLOSION, MOVE_STEALTH_ROCK, MOVE_PSYCHIC},
-        .nature = NATURE_BRAVE,
+        .moves = {MOVE_TRICK_ROOM, MOVE_PSYCHIC, MOVE_POWER_GEM, MOVE_PROTECT},
+        .nature = NATURE_QUIET,
         .abilitySlot = 0,
     },
     [SPECIES_SOLROCK] =
     {
-        .moves = {MOVE_TRICK_ROOM, MOVE_EXPLOSION, MOVE_STEALTH_ROCK, MOVE_STONE_EDGE},
+        .moves = {MOVE_TRICK_ROOM, MOVE_ROCK_SLIDE, MOVE_WILL_O_WISP, MOVE_PROTECT},
         .nature = NATURE_BRAVE,
         .abilitySlot = 0,
     },
     [SPECIES_BARBOACH] =
     {
-        .moves = {MOVE_DRAGON_DANCE, MOVE_EARTHQUAKE, MOVE_WATERFALL, MOVE_BOUNCE},
+        .moves = {MOVE_DRAGON_DANCE, MOVE_EARTHQUAKE, MOVE_WATERFALL, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_WHISCASH] =
     {
-        .moves = {MOVE_EARTHQUAKE, MOVE_DRAGON_DANCE, MOVE_WATERFALL, MOVE_ZEN_HEADBUTT},
+        .moves = {MOVE_DRAGON_DANCE, MOVE_EARTHQUAKE, MOVE_WATERFALL, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
@@ -2049,38 +2049,38 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_CRAWDAUNT] =
     {
-        .moves = {MOVE_CRUNCH, MOVE_CRABHAMMER, MOVE_SUPERPOWER, MOVE_PROTECT},
-        .nature = NATURE_BRAVE,
+        .moves = {MOVE_SWORDS_DANCE, MOVE_CRABHAMMER, MOVE_KNOCK_OFF, MOVE_AQUA_JET},
+        .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
     [SPECIES_BALTOY] =
     {
-        .moves = {MOVE_RAPID_SPIN, MOVE_STEALTH_ROCK, MOVE_EARTH_POWER, MOVE_PSYCHIC},
-        .nature = NATURE_BOLD,
+        .moves = {MOVE_TRICK_ROOM, MOVE_EARTH_POWER, MOVE_PSYCHIC, MOVE_PROTECT},
+        .nature = NATURE_QUIET,
         .abilitySlot = 0,
     },
     [SPECIES_CLAYDOL] =
     {
-        .moves = {MOVE_TOXIC, MOVE_PROTECT, MOVE_EARTH_POWER, MOVE_RAPID_SPIN},
-        .nature = NATURE_CALM,
+        .moves = {MOVE_TRICK_ROOM, MOVE_EARTH_POWER, MOVE_PSYCHIC, MOVE_PROTECT},
+        .nature = NATURE_QUIET,
         .abilitySlot = 0,
     },
     [SPECIES_LILEEP] =
     {
-        .moves = {MOVE_RECOVER, MOVE_GIGA_DRAIN, MOVE_STEALTH_ROCK, MOVE_ANCIENT_POWER},
-        .nature = NATURE_BOLD,
+        .moves = {MOVE_GIGA_DRAIN, MOVE_ANCIENT_POWER, MOVE_RECOVER, MOVE_PROTECT},
+        .nature = NATURE_CALM,
         .abilitySlot = 2,
     },
     [SPECIES_CRADILY] =
     {
-        .moves = {MOVE_EARTHQUAKE, MOVE_STOCKPILE, MOVE_SEED_BOMB, MOVE_CURSE},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_GIGA_DRAIN, MOVE_POWER_GEM, MOVE_RECOVER, MOVE_PROTECT},
+        .nature = NATURE_CALM,
         .abilitySlot = 2,
     },
     [SPECIES_ANORITH] =
     {
-        .moves = {MOVE_STEALTH_ROCK, MOVE_RAPID_SPIN, MOVE_KNOCK_OFF, MOVE_ROCK_BLAST},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_ROCK_SLIDE, MOVE_X_SCISSOR, MOVE_KNOCK_OFF, MOVE_PROTECT},
+        .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
     [SPECIES_ARMALDO] =
@@ -2091,9 +2091,9 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_FEEBAS] =
     {
-        .moves = {MOVE_WATERFALL, MOVE_ICE_BEAM, MOVE_PROTECT, MOVE_HYPNOSIS},
-        .nature = NATURE_CAREFUL,
-        .abilitySlot = 2,
+        .moves = {MOVE_SCALD, MOVE_ICY_WIND, MOVE_HYPNOSIS, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
+        .abilitySlot = 1,
     },
     [SPECIES_MILOTIC] =
     {
@@ -2103,14 +2103,14 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_CASTFORM] =
     {
-        .moves = {MOVE_ICE_BEAM, MOVE_THUNDER, MOVE_HYDRO_PUMP, MOVE_SOLAR_BEAM},
+        .moves = {MOVE_SUNNY_DAY, MOVE_WEATHER_BALL, MOVE_SOLAR_BEAM, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_KECLEON] =
     {
-        .moves = {MOVE_SUCKER_PUNCH, MOVE_FIRE_BLAST, MOVE_GRASS_KNOT, MOVE_KNOCK_OFF},
-        .nature = NATURE_MILD,
+        .moves = {MOVE_FAKE_OUT, MOVE_SHADOW_SNEAK, MOVE_DRAIN_PUNCH, MOVE_PROTECT},
+        .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
     [SPECIES_SHUPPET] =
@@ -2127,7 +2127,7 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_DUSKULL] =
     {
-        .moves = {MOVE_PAIN_SPLIT, MOVE_WILL_O_WISP, MOVE_SUBSTITUTE, MOVE_SHADOW_SNEAK},
+        .moves = {MOVE_TRICK_ROOM, MOVE_NIGHT_SHADE, MOVE_WILL_O_WISP, MOVE_PAIN_SPLIT},
         .nature = NATURE_RELAXED,
         .abilitySlot = 0,
     },
@@ -2139,9 +2139,9 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_TROPIUS] =
     {
-        .moves = {MOVE_TAILWIND, MOVE_EARTHQUAKE, MOVE_PROTECT, MOVE_POWER_WHIP},
+        .moves = {MOVE_DOUBLE_EDGE, MOVE_EARTHQUAKE, MOVE_TAILWIND, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
-        .abilitySlot = 0,
+        .abilitySlot = 1,
     },
     [SPECIES_CHIMECHO] =
     {
@@ -2163,43 +2163,43 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_SNORUNT] =
     {
-        .moves = {MOVE_DISABLE, MOVE_ICE_BEAM, MOVE_CRUNCH, MOVE_ICE_SHARD},
-        .nature = NATURE_NAIVE,
+        .moves = {MOVE_ICY_WIND, MOVE_DISABLE, MOVE_ICE_BEAM, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
         .abilitySlot = 1,
     },
     [SPECIES_GLALIE] =
     {
-        .moves = {MOVE_PROTECT, MOVE_ICY_WIND, MOVE_DISABLE, MOVE_FREEZE_DRY},
-        .nature = NATURE_TIMID,
+        .moves = {MOVE_DOUBLE_EDGE, MOVE_ICY_WIND, MOVE_DISABLE, MOVE_PROTECT},
+        .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_SPHEAL] =
     {
-        .moves = {MOVE_PROTECT, MOVE_SUBSTITUTE, MOVE_AQUA_RING, MOVE_SUPER_FANG},
+        .moves = {MOVE_ICY_WIND, MOVE_SUPER_FANG, MOVE_YAWN, MOVE_PROTECT},
         .nature = NATURE_BOLD,
-        .abilitySlot = 1,
+        .abilitySlot = 0,
     },
     [SPECIES_SEALEO] =
     {
-        .moves = {MOVE_PROTECT, MOVE_SUBSTITUTE, MOVE_SURF, MOVE_TOXIC},
-        .nature = NATURE_MODEST,
+        .moves = {MOVE_WATER_PULSE, MOVE_ICY_WIND, MOVE_YAWN, MOVE_PROTECT},
+        .nature = NATURE_CALM,
         .abilitySlot = 0,
     },
     [SPECIES_WALREIN] =
     {
-        .moves = {MOVE_PROTECT, MOVE_SUBSTITUTE, MOVE_TOXIC, MOVE_SURF},
-        .nature = NATURE_BOLD,
-        .abilitySlot = 1,
+        .moves = {MOVE_WATER_PULSE, MOVE_ICY_WIND, MOVE_SUPER_FANG, MOVE_PROTECT},
+        .nature = NATURE_CALM,
+        .abilitySlot = 0,
     },
     [SPECIES_CLAMPERL] =
     {
-        .moves = {MOVE_MUDDY_WATER, MOVE_ICE_BEAM, MOVE_PROTECT, MOVE_BODY_SLAM},
+        .moves = {MOVE_SHELL_SMASH, MOVE_MUDDY_WATER, MOVE_ICE_BEAM, MOVE_PROTECT},
         .nature = NATURE_QUIET,
         .abilitySlot = 0,
     },
     [SPECIES_HUNTAIL] =
     {
-        .moves = {MOVE_ICE_FANG, MOVE_BATON_PASS, MOVE_SHELL_SMASH, MOVE_WATERFALL},
+        .moves = {MOVE_SHELL_SMASH, MOVE_WATERFALL, MOVE_ICE_FANG, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 2,
     },
@@ -2213,54 +2213,54 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     {
         .moves = {MOVE_WATERFALL, MOVE_ROCK_SLIDE, MOVE_HEAD_SMASH, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
-        .abilitySlot = 2,
+        .abilitySlot = 1,
     },
     [SPECIES_LUVDISC] =
     {
-        .moves = {MOVE_ICY_WIND, MOVE_SCALD, MOVE_HEAL_PULSE, MOVE_TOXIC},
+        .moves = {MOVE_ICY_WIND, MOVE_SCALD, MOVE_DRAINING_KISS, MOVE_PROTECT},
         .nature = NATURE_TIMID,
-        .abilitySlot = 0,
+        .abilitySlot = 1,
     },
     [SPECIES_BAGON] =
     {
-        .moves = {MOVE_FIRE_FANG, MOVE_DRAGON_DANCE, MOVE_ROCK_SLIDE, MOVE_DRAGON_CLAW},
+        .moves = {MOVE_DRAGON_DANCE, MOVE_DRAGON_CLAW, MOVE_ROCK_SLIDE, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
     [SPECIES_SHELGON] =
     {
-        .moves = {MOVE_DRAGON_DANCE, MOVE_OUTRAGE, MOVE_BRICK_BREAK, MOVE_DRAGON_CLAW},
+        .moves = {MOVE_DRAGON_DANCE, MOVE_DRAGON_CLAW, MOVE_ROCK_SLIDE, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
-        .abilitySlot = 0,
+        .abilitySlot = 2,
     },
     [SPECIES_SALAMENCE] =
     {
-        .moves = {MOVE_DOUBLE_EDGE, MOVE_DRAGON_DANCE, MOVE_ROOST, MOVE_TAILWIND},
+        .moves = {MOVE_DOUBLE_EDGE, MOVE_DRAGON_DANCE, MOVE_EARTHQUAKE, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_BELDUM] =
     {
-        .moves = {MOVE_IRON_HEAD, MOVE_ZEN_HEADBUTT, MOVE_TAKE_DOWN, MOVE_IRON_DEFENSE},
+        .moves = {MOVE_IRON_HEAD, MOVE_ZEN_HEADBUTT, MOVE_IRON_DEFENSE, MOVE_TAKE_DOWN},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_METANG] =
     {
-        .moves = {MOVE_BULLET_PUNCH, MOVE_METEOR_MASH, MOVE_STEALTH_ROCK, MOVE_EARTHQUAKE},
+        .moves = {MOVE_METEOR_MASH, MOVE_ZEN_HEADBUTT, MOVE_BULLET_PUNCH, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_METAGROSS] =
     {
-        .moves = {MOVE_METEOR_MASH, MOVE_ICE_PUNCH, MOVE_STOMPING_TANTRUM, MOVE_STEALTH_ROCK},
+        .moves = {MOVE_METEOR_MASH, MOVE_ICE_PUNCH, MOVE_STOMPING_TANTRUM, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_REGIROCK] =
     {
-        .moves = {MOVE_BODY_PRESS, MOVE_REST, MOVE_CURSE, MOVE_ROCK_SLIDE},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_ROCK_SLIDE, MOVE_BODY_PRESS, MOVE_IRON_DEFENSE, MOVE_PROTECT},
+        .nature = NATURE_IMPISH,
         .abilitySlot = 2,
     },
     [SPECIES_REGICE] =
@@ -2271,13 +2271,13 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_REGISTEEL] =
     {
-        .moves = {MOVE_REST, MOVE_IRON_HEAD, MOVE_PROTECT, MOVE_THUNDER_WAVE},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_BODY_PRESS, MOVE_IRON_DEFENSE, MOVE_THUNDER_WAVE, MOVE_PROTECT},
+        .nature = NATURE_IMPISH,
         .abilitySlot = 0,
     },
     [SPECIES_LATIAS] =
     {
-        .moves = {MOVE_PSYSHOCK, MOVE_ICE_BEAM, MOVE_CALM_MIND, MOVE_ROOST},
+        .moves = {MOVE_PSYSHOCK, MOVE_ICE_BEAM, MOVE_TAILWIND, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
@@ -2307,26 +2307,26 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_JIRACHI] =
     {
-        .moves = {MOVE_U_TURN, MOVE_BODY_SLAM, MOVE_THUNDER_WAVE, MOVE_FLASH_CANNON},
+        .moves = {MOVE_IRON_HEAD, MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_DEOXYS] =
     {
-        .moves = {MOVE_PSYCHO_BOOST, MOVE_TAUNT, MOVE_PURSUIT, MOVE_ICE_BEAM},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_PSYCHO_BOOST, MOVE_ICE_BEAM, MOVE_TAUNT, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_TURTWIG] =
     {
-        .moves = {MOVE_STEALTH_ROCK, MOVE_SYNTHESIS, MOVE_BULLET_SEED, MOVE_SUPERPOWER},
+        .moves = {MOVE_SEED_BOMB, MOVE_LEECH_SEED, MOVE_SYNTHESIS, MOVE_PROTECT},
         .nature = NATURE_CAREFUL,
         .abilitySlot = 1,
     },
     [SPECIES_GROTLE] =
     {
-        .moves = {MOVE_SEED_BOMB, MOVE_SYNTHESIS, MOVE_STEALTH_ROCK, MOVE_LEECH_SEED},
-        .nature = NATURE_IMPISH,
+        .moves = {MOVE_SEED_BOMB, MOVE_LEECH_SEED, MOVE_SYNTHESIS, MOVE_PROTECT},
+        .nature = NATURE_CAREFUL,
         .abilitySlot = 1,
     },
     [SPECIES_TORTERRA] =
@@ -2337,56 +2337,56 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_CHIMCHAR] =
     {
-        .moves = {MOVE_STEALTH_ROCK, MOVE_TAUNT, MOVE_FAKE_OUT, MOVE_FIRE_BLAST},
-        .nature = NATURE_TIMID,
-        .abilitySlot = 2,
+        .moves = {MOVE_FAKE_OUT, MOVE_FIRE_PUNCH, MOVE_DRAIN_PUNCH, MOVE_PROTECT},
+        .nature = NATURE_JOLLY,
+        .abilitySlot = 1,
     },
     [SPECIES_MONFERNO] =
     {
-        .moves = {MOVE_VACUUM_WAVE, MOVE_STEALTH_ROCK, MOVE_OVERHEAT, MOVE_FAKE_OUT},
-        .nature = NATURE_TIMID,
-        .abilitySlot = 0,
+        .moves = {MOVE_FAKE_OUT, MOVE_FIRE_PUNCH, MOVE_DRAIN_PUNCH, MOVE_PROTECT},
+        .nature = NATURE_JOLLY,
+        .abilitySlot = 1,
     },
     [SPECIES_INFERNAPE] =
     {
         .moves = {MOVE_FAKE_OUT, MOVE_OVERHEAT, MOVE_CLOSE_COMBAT, MOVE_QUICK_GUARD},
         .nature = NATURE_NAIVE,
-        .abilitySlot = 2,
+        .abilitySlot = 1,
     },
     [SPECIES_PIPLUP] =
     {
-        .moves = {MOVE_STEALTH_ROCK, MOVE_DEFOG, MOVE_SCALD, MOVE_ICE_BEAM},
+        .moves = {MOVE_SCALD, MOVE_ICY_WIND, MOVE_YAWN, MOVE_PROTECT},
         .nature = NATURE_BOLD,
         .abilitySlot = 2,
     },
     [SPECIES_PRINPLUP] =
     {
-        .moves = {MOVE_DEFOG, MOVE_STEALTH_ROCK, MOVE_SCALD, MOVE_TOXIC},
+        .moves = {MOVE_SCALD, MOVE_ICE_BEAM, MOVE_ICY_WIND, MOVE_PROTECT},
         .nature = NATURE_BOLD,
         .abilitySlot = 2,
     },
     [SPECIES_EMPOLEON] =
     {
-        .moves = {MOVE_HYDRO_PUMP, MOVE_ICE_BEAM, MOVE_STEALTH_ROCK, MOVE_PROTECT},
+        .moves = {MOVE_HYDRO_PUMP, MOVE_FLASH_CANNON, MOVE_ICE_BEAM, MOVE_PROTECT},
         .nature = NATURE_MODEST,
         .abilitySlot = 2,
     },
     [SPECIES_STARLY] =
     {
-        .moves = {MOVE_BRAVE_BIRD, MOVE_DOUBLE_EDGE, MOVE_U_TURN, MOVE_HEAT_WAVE},
-        .nature = NATURE_NAIVE,
+        .moves = {MOVE_BRAVE_BIRD, MOVE_DOUBLE_EDGE, MOVE_U_TURN, MOVE_PROTECT},
+        .nature = NATURE_JOLLY,
         .abilitySlot = 2,
     },
     [SPECIES_STARAVIA] =
     {
-        .moves = {MOVE_BRAVE_BIRD, MOVE_DOUBLE_EDGE, MOVE_U_TURN, MOVE_PURSUIT},
+        .moves = {MOVE_BRAVE_BIRD, MOVE_U_TURN, MOVE_TAILWIND, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
-        .abilitySlot = 2,
+        .abilitySlot = 0,
     },
     [SPECIES_STARAPTOR] =
     {
-        .moves = {MOVE_FINAL_GAMBIT, MOVE_BRAVE_BIRD, MOVE_CLOSE_COMBAT, MOVE_U_TURN},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_BRAVE_BIRD, MOVE_CLOSE_COMBAT, MOVE_TAILWIND, MOVE_PROTECT},
+        .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_BIDOOF] =
@@ -2397,157 +2397,157 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_BIBAREL] =
     {
-        .moves = {MOVE_PROTECT, MOVE_REST, MOVE_WATERFALL, MOVE_QUICK_ATTACK},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_SWORDS_DANCE, MOVE_WATERFALL, MOVE_AQUA_JET, MOVE_PROTECT},
+        .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_KRICKETOT] =
     {
-        .moves = {MOVE_BUG_BUZZ, MOVE_ROUND, MOVE_GROWL, MOVE_MUD_SLAP},
+        .moves = {MOVE_BUG_BUZZ, MOVE_STRUGGLE_BUG, MOVE_MUD_SLAP, MOVE_ENDEAVOR},
         .nature = NATURE_MODEST,
         .abilitySlot = 0,
     },
     [SPECIES_KRICKETUNE] =
     {
-        .moves = {MOVE_KNOCK_OFF, MOVE_TAUNT, MOVE_STICKY_WEB, MOVE_PROTECT},
+        .moves = {MOVE_STRUGGLE_BUG, MOVE_TAUNT, MOVE_BUG_BITE, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
-        .abilitySlot = 0,
+        .abilitySlot = 2,
     },
     [SPECIES_SHINX] =
     {
-        .moves = {MOVE_VOLT_SWITCH, MOVE_WILD_CHARGE, MOVE_THIEF, MOVE_FIRE_FANG},
+        .moves = {MOVE_WILD_CHARGE, MOVE_HELPING_HAND, MOVE_THUNDER_WAVE, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 1,
     },
     [SPECIES_LUXIO] =
     {
-        .moves = {MOVE_WILD_CHARGE, MOVE_STRENGTH, MOVE_BODY_SLAM, MOVE_PROTECT},
+        .moves = {MOVE_WILD_CHARGE, MOVE_CRUNCH, MOVE_THUNDER_WAVE, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 1,
     },
     [SPECIES_LUXRAY] =
     {
-        .moves = {MOVE_WILD_CHARGE, MOVE_CRUNCH, MOVE_FACADE, MOVE_SUPERPOWER},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_WILD_CHARGE, MOVE_CRUNCH, MOVE_SNARL, MOVE_PROTECT},
+        .nature = NATURE_ADAMANT,
         .abilitySlot = 1,
     },
     [SPECIES_BUDEW] =
     {
-        .moves = {MOVE_SPIKES, MOVE_SLEEP_POWDER, MOVE_SYNTHESIS, MOVE_GIGA_DRAIN},
+        .moves = {MOVE_SLEEP_POWDER, MOVE_GIGA_DRAIN, MOVE_SLUDGE_BOMB, MOVE_PROTECT},
         .nature = NATURE_BOLD,
         .abilitySlot = 0,
     },
     [SPECIES_ROSERADE] =
     {
-        .moves = {MOVE_PROTECT, MOVE_SLEEP_POWDER, MOVE_LEAF_STORM, MOVE_SLUDGE_BOMB},
+        .moves = {MOVE_SLEEP_POWDER, MOVE_LEAF_STORM, MOVE_SLUDGE_BOMB, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_CRANIDOS] =
     {
-        .moves = {MOVE_ROCK_SLIDE, MOVE_ZEN_HEADBUTT, MOVE_FIRE_PUNCH, MOVE_EARTHQUAKE},
+        .moves = {MOVE_ROCK_SLIDE, MOVE_ZEN_HEADBUTT, MOVE_FIRE_PUNCH, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 2,
     },
     [SPECIES_RAMPARDOS] =
     {
-        .moves = {MOVE_ROCK_SLIDE, MOVE_FIRE_PUNCH, MOVE_STOMPING_TANTRUM, MOVE_HEAD_SMASH},
+        .moves = {MOVE_ROCK_SLIDE, MOVE_STOMPING_TANTRUM, MOVE_FIRE_PUNCH, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
     [SPECIES_SHIELDON] =
     {
-        .moves = {MOVE_METAL_BURST, MOVE_STEALTH_ROCK, MOVE_ROCK_BLAST, MOVE_ENDURE},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_METAL_BURST, MOVE_ROCK_SLIDE, MOVE_WIDE_GUARD, MOVE_PROTECT},
+        .nature = NATURE_SASSY,
         .abilitySlot = 0,
     },
     [SPECIES_BASTIODON] =
     {
-        .moves = {MOVE_TORMENT, MOVE_SUBSTITUTE, MOVE_PROTECT, MOVE_ROAR},
-        .nature = NATURE_IMPISH,
+        .moves = {MOVE_METAL_BURST, MOVE_ROCK_SLIDE, MOVE_WIDE_GUARD, MOVE_PROTECT},
+        .nature = NATURE_SASSY,
         .abilitySlot = 0,
     },
     [SPECIES_BURMY] =
     {
-        .moves = {MOVE_BUG_BUZZ, MOVE_ELECTROWEB, MOVE_PROTECT, MOVE_TACKLE},
+        .moves = {MOVE_BUG_BUZZ, MOVE_ELECTROWEB, MOVE_TACKLE, MOVE_PROTECT},
         .nature = NATURE_MODEST,
-        .abilitySlot = 0,
+        .abilitySlot = 2,
     },
     [SPECIES_WORMADAM] =
     {
-        .moves = {MOVE_PSYCHIC, MOVE_LEAF_STORM, MOVE_TOXIC, MOVE_BUG_BUZZ},
+        .moves = {MOVE_LEAF_STORM, MOVE_BUG_BUZZ, MOVE_PSYCHIC, MOVE_PROTECT},
         .nature = NATURE_MODEST,
-        .abilitySlot = 0,
+        .abilitySlot = 2,
     },
     [SPECIES_MOTHIM] =
     {
-        .moves = {MOVE_QUIVER_DANCE, MOVE_BUG_BUZZ, MOVE_AIR_SLASH, MOVE_SUBSTITUTE},
+        .moves = {MOVE_QUIVER_DANCE, MOVE_BUG_BUZZ, MOVE_AIR_SLASH, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 2,
     },
     [SPECIES_COMBEE] =
     {
-        .moves = {MOVE_BUG_BUZZ, MOVE_AIR_CUTTER, MOVE_TAILWIND, MOVE_SWAGGER},
-        .nature = NATURE_TIMID,
+        .moves = {MOVE_BUG_BITE, MOVE_DUAL_WINGBEAT, MOVE_TAILWIND, MOVE_ENDEAVOR},
+        .nature = NATURE_JOLLY,
         .abilitySlot = 2,
     },
     [SPECIES_VESPIQUEN] =
     {
-        .moves = {MOVE_TOXIC_SPIKES, MOVE_HURRICANE, MOVE_ROOST, MOVE_ATTACK_ORDER},
-        .nature = NATURE_JOLLY,
-        .abilitySlot = 2,
+        .moves = {MOVE_ATTACK_ORDER, MOVE_TAILWIND, MOVE_HEAL_ORDER, MOVE_PROTECT},
+        .nature = NATURE_CAREFUL,
+        .abilitySlot = 1,
     },
     [SPECIES_PACHIRISU] =
     {
-        .moves = {MOVE_LIGHT_SCREEN, MOVE_DISCHARGE, MOVE_SUPER_FANG, MOVE_TOXIC},
+        .moves = {MOVE_FOLLOW_ME, MOVE_NUZZLE, MOVE_SUPER_FANG, MOVE_PROTECT},
         .nature = NATURE_CALM,
-        .abilitySlot = 1,
+        .abilitySlot = 2,
     },
     [SPECIES_BUIZEL] =
     {
-        .moves = {MOVE_BRICK_BREAK, MOVE_ICE_PUNCH, MOVE_BULK_UP, MOVE_AQUA_JET},
+        .moves = {MOVE_WATERFALL, MOVE_ICE_PUNCH, MOVE_AQUA_JET, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
-        .abilitySlot = 2,
+        .abilitySlot = 0,
     },
     [SPECIES_FLOATZEL] =
     {
-        .moves = {MOVE_PROTECT, MOVE_LIQUIDATION, MOVE_AQUA_JET, MOVE_ICE_PUNCH},
+        .moves = {MOVE_LIQUIDATION, MOVE_ICE_PUNCH, MOVE_AQUA_JET, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
-        .abilitySlot = 2,
+        .abilitySlot = 0,
     },
     [SPECIES_CHERUBI] =
     {
-        .moves = {MOVE_SOLAR_BEAM, MOVE_WEATHER_BALL, MOVE_SUNNY_DAY, MOVE_HEALING_WISH},
+        .moves = {MOVE_SUNNY_DAY, MOVE_SOLAR_BEAM, MOVE_WEATHER_BALL, MOVE_PROTECT},
         .nature = NATURE_MODEST,
         .abilitySlot = 0,
     },
     [SPECIES_CHERRIM] =
     {
-        .moves = {MOVE_GIGA_DRAIN, MOVE_HELPING_HAND, MOVE_SUNNY_DAY, MOVE_WEATHER_BALL},
-        .nature = NATURE_TIMID,
+        .moves = {MOVE_SUNNY_DAY, MOVE_HELPING_HAND, MOVE_SEED_BOMB, MOVE_PROTECT},
+        .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_SHELLOS] =
     {
-        .moves = {MOVE_RECOVER, MOVE_SCALD, MOVE_CLEAR_SMOG, MOVE_TOXIC},
-        .nature = NATURE_MODEST,
+        .moves = {MOVE_SCALD, MOVE_ICY_WIND, MOVE_RECOVER, MOVE_PROTECT},
+        .nature = NATURE_CALM,
         .abilitySlot = 1,
     },
     [SPECIES_GASTRODON] =
     {
-        .moves = {MOVE_ICE_BEAM, MOVE_EARTH_POWER, MOVE_TOXIC, MOVE_RECOVER},
+        .moves = {MOVE_EARTH_POWER, MOVE_ICE_BEAM, MOVE_RECOVER, MOVE_PROTECT},
         .nature = NATURE_CALM,
         .abilitySlot = 1,
     },
     [SPECIES_AMBIPOM] =
     {
-        .moves = {MOVE_FAKE_OUT, MOVE_DOUBLE_HIT, MOVE_LOW_KICK, MOVE_ACROBATICS},
+        .moves = {MOVE_FAKE_OUT, MOVE_DOUBLE_HIT, MOVE_KNOCK_OFF, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
-        .abilitySlot = 2,
+        .abilitySlot = 0,
     },
     [SPECIES_DRIFLOON] =
     {
-        .moves = {MOVE_CALM_MIND, MOVE_SHADOW_BALL, MOVE_THUNDERBOLT, MOVE_WILL_O_WISP},
+        .moves = {MOVE_SHADOW_BALL, MOVE_TAILWIND, MOVE_WILL_O_WISP, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 1,
     },
@@ -2559,61 +2559,61 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_BUNEARY] =
     {
-        .moves = {MOVE_SWITCHEROO, MOVE_FAKE_OUT, MOVE_HEAL_BELL, MOVE_HEALING_WISH},
-        .nature = NATURE_JOLLY,
-        .abilitySlot = 1,
-    },
-    [SPECIES_LOPUNNY] =
-    {
-        .moves = {MOVE_FAKE_OUT, MOVE_CLOSE_COMBAT, MOVE_PROTECT, MOVE_THUNDER_WAVE},
+        .moves = {MOVE_FAKE_OUT, MOVE_ENCORE, MOVE_DRAIN_PUNCH, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 2,
     },
+    [SPECIES_LOPUNNY] =
+    {
+        .moves = {MOVE_FAKE_OUT, MOVE_CLOSE_COMBAT, MOVE_ENCORE, MOVE_PROTECT},
+        .nature = NATURE_JOLLY,
+        .abilitySlot = 1,
+    },
     [SPECIES_MISMAGIUS] =
     {
-        .moves = {MOVE_TAUNT, MOVE_PROTECT, MOVE_DAZZLING_GLEAM, MOVE_SHADOW_BALL},
+        .moves = {MOVE_HYPER_VOICE, MOVE_SHADOW_BALL, MOVE_TAUNT, MOVE_PROTECT},
         .nature = NATURE_TIMID,
-        .abilitySlot = 0,
+        .abilitySlot = 2,
     },
     [SPECIES_HONCHKROW] =
     {
         .moves = {MOVE_SUCKER_PUNCH, MOVE_BRAVE_BIRD, MOVE_SUPERPOWER, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
-        .abilitySlot = 0,
+        .abilitySlot = 2,
     },
     [SPECIES_GLAMEOW] =
     {
-        .moves = {MOVE_FOUL_PLAY, MOVE_FAKE_OUT, MOVE_QUICK_ATTACK, MOVE_U_TURN},
+        .moves = {MOVE_FAKE_OUT, MOVE_FAKE_TEARS, MOVE_U_TURN, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_PURUGLY] =
     {
-        .moves = {MOVE_FAKE_OUT, MOVE_SUNNY_DAY, MOVE_U_TURN, MOVE_TAUNT},
+        .moves = {MOVE_FAKE_OUT, MOVE_DOUBLE_EDGE, MOVE_U_TURN, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 2,
     },
     [SPECIES_CHINGLING] =
     {
-        .moves = {MOVE_PSYCHIC, MOVE_RECOVER, MOVE_GRASS_KNOT, MOVE_HYPNOSIS},
-        .nature = NATURE_BOLD,
+        .moves = {MOVE_TRICK_ROOM, MOVE_PSYCHIC, MOVE_HYPNOSIS, MOVE_PROTECT},
+        .nature = NATURE_SASSY,
         .abilitySlot = 0,
     },
     [SPECIES_STUNKY] =
     {
-        .moves = {MOVE_CRUNCH, MOVE_SUCKER_PUNCH, MOVE_PLAY_ROUGH, MOVE_FIRE_BLAST},
-        .nature = NATURE_HASTY,
+        .moves = {MOVE_CRUNCH, MOVE_SUCKER_PUNCH, MOVE_PLAY_ROUGH, MOVE_PROTECT},
+        .nature = NATURE_JOLLY,
         .abilitySlot = 1,
     },
     [SPECIES_SKUNTANK] =
     {
-        .moves = {MOVE_SUCKER_PUNCH, MOVE_EXPLOSION, MOVE_POISON_JAB, MOVE_CRUNCH},
+        .moves = {MOVE_SUCKER_PUNCH, MOVE_POISON_JAB, MOVE_TAUNT, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 1,
     },
     [SPECIES_BRONZOR] =
     {
-        .moves = {MOVE_STEALTH_ROCK, MOVE_RECYCLE, MOVE_PSYCHIC, MOVE_HEAVY_SLAM},
+        .moves = {MOVE_IMPRISON, MOVE_TRICK_ROOM, MOVE_PSYCHIC, MOVE_PROTECT},
         .nature = NATURE_RELAXED,
         .abilitySlot = 0,
     },
@@ -2621,47 +2621,47 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     {
         .moves = {MOVE_TRICK_ROOM, MOVE_GYRO_BALL, MOVE_HYPNOSIS, MOVE_PROTECT},
         .nature = NATURE_RELAXED,
-        .abilitySlot = 1,
+        .abilitySlot = 0,
     },
     [SPECIES_BONSLY] =
     {
-        .moves = {MOVE_STEALTH_ROCK, MOVE_ROCK_SLIDE, MOVE_STOMPING_TANTRUM, MOVE_SUCKER_PUNCH},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_ROCK_SLIDE, MOVE_STOMPING_TANTRUM, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
+        .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_MIME_JR] =
     {
-        .moves = {MOVE_NASTY_PLOT, MOVE_PSYCHIC, MOVE_THUNDERBOLT, MOVE_ENCORE},
+        .moves = {MOVE_FAKE_OUT, MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 1,
     },
     [SPECIES_HAPPINY] =
     {
-        .moves = {MOVE_THUNDER_WAVE, MOVE_HEAL_BELL, MOVE_LIGHT_SCREEN, MOVE_FLAMETHROWER},
+        .moves = {MOVE_HELPING_HAND, MOVE_ICY_WIND, MOVE_SOFT_BOILED, MOVE_PROTECT},
         .nature = NATURE_CALM,
         .abilitySlot = 2,
     },
     [SPECIES_CHATOT] =
     {
-        .moves = {MOVE_BOOMBURST, MOVE_NASTY_PLOT, MOVE_HYPER_VOICE, MOVE_HEAT_WAVE},
+        .moves = {MOVE_BOOMBURST, MOVE_HEAT_WAVE, MOVE_TAILWIND, MOVE_PROTECT},
         .nature = NATURE_TIMID,
-        .abilitySlot = 0,
+        .abilitySlot = 2,
     },
     [SPECIES_SPIRITOMB] =
     {
-        .moves = {MOVE_ICY_WIND, MOVE_PROTECT, MOVE_FOUL_PLAY, MOVE_SHADOW_SNEAK},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_FOUL_PLAY, MOVE_WILL_O_WISP, MOVE_ICY_WIND, MOVE_PROTECT},
+        .nature = NATURE_SASSY,
         .abilitySlot = 2,
     },
     [SPECIES_GIBLE] =
     {
-        .moves = {MOVE_STEALTH_ROCK, MOVE_DRACO_METEOR, MOVE_EARTH_POWER, MOVE_FIRE_BLAST},
-        .nature = NATURE_BOLD,
+        .moves = {MOVE_EARTHQUAKE, MOVE_DRAGON_CLAW, MOVE_ROCK_SLIDE, MOVE_PROTECT},
+        .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
     [SPECIES_GABITE] =
     {
-        .moves = {MOVE_STEALTH_ROCK, MOVE_EARTHQUAKE, MOVE_TOXIC, MOVE_ROAR},
+        .moves = {MOVE_EARTHQUAKE, MOVE_DRAGON_CLAW, MOVE_ROCK_SLIDE, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 2,
     },
@@ -2673,49 +2673,49 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_MUNCHLAX] =
     {
-        .moves = {MOVE_CURSE, MOVE_BODY_SLAM, MOVE_FIRE_PUNCH, MOVE_RECYCLE},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_CURSE, MOVE_BODY_SLAM, MOVE_STOMPING_TANTRUM, MOVE_PROTECT},
+        .nature = NATURE_BRAVE,
         .abilitySlot = 1,
     },
     [SPECIES_RIOLU] =
     {
-        .moves = {MOVE_ROAR, MOVE_DRAIN_PUNCH, MOVE_COPYCAT, MOVE_CRUNCH},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_COACHING, MOVE_COPYCAT, MOVE_QUICK_GUARD, MOVE_PROTECT},
+        .nature = NATURE_JOLLY,
         .abilitySlot = 2,
     },
     [SPECIES_LUCARIO] =
     {
-        .moves = {MOVE_CLOSE_COMBAT, MOVE_FLASH_CANNON, MOVE_SUBSTITUTE, MOVE_DETECT},
+        .moves = {MOVE_CLOSE_COMBAT, MOVE_FLASH_CANNON, MOVE_EXTREME_SPEED, MOVE_PROTECT},
         .nature = NATURE_NAIVE,
         .abilitySlot = 1,
     },
     [SPECIES_HIPPOPOTAS] =
     {
-        .moves = {MOVE_TOXIC, MOVE_ROAR, MOVE_SLACK_OFF, MOVE_PROTECT},
+        .moves = {MOVE_HIGH_HORSEPOWER, MOVE_YAWN, MOVE_SLACK_OFF, MOVE_PROTECT},
         .nature = NATURE_IMPISH,
         .abilitySlot = 0,
     },
     [SPECIES_HIPPOWDON] =
     {
-        .moves = {MOVE_EARTHQUAKE, MOVE_ICE_FANG, MOVE_CRUNCH, MOVE_PROTECT},
+        .moves = {MOVE_HIGH_HORSEPOWER, MOVE_ROCK_SLIDE, MOVE_YAWN, MOVE_PROTECT},
         .nature = NATURE_BRAVE,
         .abilitySlot = 0,
     },
     [SPECIES_SKORUPI] =
     {
-        .moves = {MOVE_POISON_JAB, MOVE_TOXIC_SPIKES, MOVE_PROTECT, MOVE_X_SCISSOR},
-        .nature = NATURE_ADAMANT,
-        .abilitySlot = 0,
+        .moves = {MOVE_CROSS_POISON, MOVE_NIGHT_SLASH, MOVE_ACUPRESSURE, MOVE_PROTECT},
+        .nature = NATURE_JOLLY,
+        .abilitySlot = 1,
     },
     [SPECIES_DRAPION] =
     {
-        .moves = {MOVE_AQUA_TAIL, MOVE_SWORDS_DANCE, MOVE_KNOCK_OFF, MOVE_POISON_JAB},
+        .moves = {MOVE_CROSS_POISON, MOVE_NIGHT_SLASH, MOVE_ACUPRESSURE, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 1,
     },
     [SPECIES_CROAGUNK] =
     {
-        .moves = {MOVE_DRAIN_PUNCH, MOVE_FAKE_OUT, MOVE_SUCKER_PUNCH, MOVE_VACUUM_WAVE},
+        .moves = {MOVE_FAKE_OUT, MOVE_DRAIN_PUNCH, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 1,
     },
@@ -2727,32 +2727,32 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_CARNIVINE] =
     {
-        .moves = {MOVE_SWORDS_DANCE, MOVE_POWER_WHIP, MOVE_SUBSTITUTE, MOVE_SLEEP_POWDER},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_SLEEP_POWDER, MOVE_POWER_WHIP, MOVE_KNOCK_OFF, MOVE_PROTECT},
+        .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_FINNEON] =
     {
-        .moves = {MOVE_RAIN_DANCE, MOVE_AQUA_TAIL, MOVE_ICE_BEAM, MOVE_U_TURN},
-        .nature = NATURE_NAIVE,
-        .abilitySlot = 0,
+        .moves = {MOVE_SCALD, MOVE_ICY_WIND, MOVE_TAILWIND, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
+        .abilitySlot = 1,
     },
     [SPECIES_LUMINEON] =
     {
-        .moves = {MOVE_U_TURN, MOVE_RAIN_DANCE, MOVE_ICE_BEAM, MOVE_SURF},
+        .moves = {MOVE_SCALD, MOVE_ICE_BEAM, MOVE_TAILWIND, MOVE_PROTECT},
         .nature = NATURE_TIMID,
-        .abilitySlot = 0,
+        .abilitySlot = 1,
     },
     [SPECIES_MANTYKE] =
     {
-        .moves = {MOVE_REST, MOVE_SLEEP_TALK, MOVE_SCALD, MOVE_AIR_SLASH},
+        .moves = {MOVE_SCALD, MOVE_ICY_WIND, MOVE_TAILWIND, MOVE_PROTECT},
         .nature = NATURE_CALM,
         .abilitySlot = 1,
     },
     [SPECIES_SNOVER] =
     {
-        .moves = {MOVE_SUBSTITUTE, MOVE_GIGA_DRAIN, MOVE_BLIZZARD, MOVE_ICE_SHARD},
-        .nature = NATURE_MODEST,
+        .moves = {MOVE_BLIZZARD, MOVE_GIGA_DRAIN, MOVE_ICE_SHARD, MOVE_PROTECT},
+        .nature = NATURE_QUIET,
         .abilitySlot = 0,
     },
     [SPECIES_ABOMASNOW] =
@@ -2769,62 +2769,62 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_MAGNEZONE] =
     {
-        .moves = {MOVE_THUNDERBOLT, MOVE_FLASH_CANNON, MOVE_SUBSTITUTE, MOVE_PROTECT},
+        .moves = {MOVE_THUNDERBOLT, MOVE_FLASH_CANNON, MOVE_ELECTROWEB, MOVE_PROTECT},
         .nature = NATURE_MODEST,
         .abilitySlot = 1,
     },
     [SPECIES_LICKILICKY] =
     {
-        .moves = {MOVE_EXPLOSION, MOVE_POWER_WHIP, MOVE_EARTHQUAKE, MOVE_PROTECT},
+        .moves = {MOVE_EXPLOSION, MOVE_POWER_WHIP, MOVE_STOMPING_TANTRUM, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
     [SPECIES_RHYPERIOR] =
     {
-        .moves = {MOVE_ROCK_SLIDE, MOVE_EARTHQUAKE, MOVE_ICE_PUNCH, MOVE_PROTECT},
+        .moves = {MOVE_ROCK_SLIDE, MOVE_HIGH_HORSEPOWER, MOVE_ICE_PUNCH, MOVE_PROTECT},
         .nature = NATURE_BRAVE,
         .abilitySlot = 1,
     },
     [SPECIES_TANGROWTH] =
     {
-        .moves = {MOVE_POWER_WHIP, MOVE_ROCK_SLIDE, MOVE_SLEEP_POWDER, MOVE_PROTECT},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_RAGE_POWDER, MOVE_SLEEP_POWDER, MOVE_GIGA_DRAIN, MOVE_PROTECT},
+        .nature = NATURE_BOLD,
         .abilitySlot = 2,
     },
     [SPECIES_ELECTIVIRE] =
     {
-        .moves = {MOVE_CROSS_CHOP, MOVE_FLAMETHROWER, MOVE_STOMPING_TANTRUM, MOVE_WILD_CHARGE},
+        .moves = {MOVE_WILD_CHARGE, MOVE_ICE_PUNCH, MOVE_CROSS_CHOP, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_MAGMORTAR] =
     {
-        .moves = {MOVE_THUNDERBOLT, MOVE_WILL_O_WISP, MOVE_TAUNT, MOVE_HEAT_WAVE},
-        .nature = NATURE_TIMID,
-        .abilitySlot = 0,
+        .moves = {MOVE_HEAT_WAVE, MOVE_AURA_SPHERE, MOVE_DARK_PULSE, MOVE_PROTECT},
+        .nature = NATURE_MODEST,
+        .abilitySlot = 1,
     },
     [SPECIES_TOGEKISS] =
     {
-        .moves = {MOVE_AIR_SLASH, MOVE_PROTECT, MOVE_TAILWIND, MOVE_FOLLOW_ME},
+        .moves = {MOVE_AIR_SLASH, MOVE_FOLLOW_ME, MOVE_TAILWIND, MOVE_PROTECT},
         .nature = NATURE_CALM,
         .abilitySlot = 1,
     },
     [SPECIES_YANMEGA] =
     {
-        .moves = {MOVE_BUG_BUZZ, MOVE_AIR_SLASH, MOVE_DETECT, MOVE_HYPER_BEAM},
+        .moves = {MOVE_BUG_BUZZ, MOVE_AIR_SLASH, MOVE_TAILWIND, MOVE_PROTECT},
         .nature = NATURE_MODEST,
         .abilitySlot = 0,
     },
     [SPECIES_LEAFEON] =
     {
-        .moves = {MOVE_HELPING_HAND, MOVE_KNOCK_OFF, MOVE_PROTECT, MOVE_LEAF_BLADE},
+        .moves = {MOVE_LEAF_BLADE, MOVE_KNOCK_OFF, MOVE_HELPING_HAND, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 2,
     },
     [SPECIES_GLACEON] =
     {
-        .moves = {MOVE_BLIZZARD, MOVE_SHADOW_BALL, MOVE_FAKE_TEARS, MOVE_PROTECT},
-        .nature = NATURE_QUIET,
+        .moves = {MOVE_BLIZZARD, MOVE_FREEZE_DRY, MOVE_SHADOW_BALL, MOVE_PROTECT},
+        .nature = NATURE_MODEST,
         .abilitySlot = 2,
     },
     [SPECIES_GLISCOR] =
@@ -2835,33 +2835,33 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_MAMOSWINE] =
     {
-        .moves = {MOVE_EARTHQUAKE, MOVE_ICICLE_SPEAR, MOVE_ICE_SHARD, MOVE_PROTECT},
+        .moves = {MOVE_EARTHQUAKE, MOVE_ICICLE_CRASH, MOVE_ICE_SHARD, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
     [SPECIES_PORYGON_Z] =
     {
-        .moves = {MOVE_HYPER_BEAM, MOVE_DARK_PULSE, MOVE_ICE_BEAM, MOVE_PROTECT},
+        .moves = {MOVE_TRI_ATTACK, MOVE_DARK_PULSE, MOVE_ICE_BEAM, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_GALLADE] =
     {
-        .moves = {MOVE_CLOSE_COMBAT, MOVE_ZEN_HEADBUTT, MOVE_WIDE_GUARD, MOVE_ICY_WIND},
+        .moves = {MOVE_CLOSE_COMBAT, MOVE_ZEN_HEADBUTT, MOVE_WIDE_GUARD, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
     [SPECIES_PROBOPASS] =
     {
-        .moves = {MOVE_PROTECT, MOVE_FLASH_CANNON, MOVE_POWER_GEM, MOVE_HYPER_BEAM},
+        .moves = {MOVE_POWER_GEM, MOVE_FLASH_CANNON, MOVE_WIDE_GUARD, MOVE_PROTECT},
         .nature = NATURE_MODEST,
         .abilitySlot = 0,
     },
     [SPECIES_DUSKNOIR] =
     {
-        .moves = {MOVE_WILL_O_WISP, MOVE_ICE_BEAM, MOVE_EARTHQUAKE, MOVE_SUBSTITUTE},
-        .nature = NATURE_JOLLY,
-        .abilitySlot = 0,
+        .moves = {MOVE_TRICK_ROOM, MOVE_WILL_O_WISP, MOVE_SHADOW_SNEAK, MOVE_PROTECT},
+        .nature = NATURE_SASSY,
+        .abilitySlot = 2,
     },
     [SPECIES_FROSLASS] =
     {
@@ -2871,7 +2871,7 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_ROTOM] =
     {
-        .moves = {MOVE_PROTECT, MOVE_ELECTROWEB, MOVE_WILL_O_WISP, MOVE_SHADOW_BALL},
+        .moves = {MOVE_ELECTROWEB, MOVE_WILL_O_WISP, MOVE_VOLT_SWITCH, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
@@ -2883,19 +2883,19 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_MESPRIT] =
     {
-        .moves = {MOVE_CALM_MIND, MOVE_ICE_BEAM, MOVE_PSYCHIC, MOVE_TRICK},
-        .nature = NATURE_TIMID,
+        .moves = {MOVE_TRICK_ROOM, MOVE_PSYCHIC, MOVE_HELPING_HAND, MOVE_PROTECT},
+        .nature = NATURE_SASSY,
         .abilitySlot = 0,
     },
     [SPECIES_AZELF] =
     {
-        .moves = {MOVE_PSYCHIC, MOVE_FIRE_BLAST, MOVE_GRASS_KNOT, MOVE_DETECT},
+        .moves = {MOVE_PSYCHIC, MOVE_FIRE_BLAST, MOVE_HELPING_HAND, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_DIALGA] =
     {
-        .moves = {MOVE_ROAR_OF_TIME, MOVE_FLASH_CANNON, MOVE_EARTH_POWER, MOVE_TRICK_ROOM},
+        .moves = {MOVE_DRACO_METEOR, MOVE_FLASH_CANNON, MOVE_TRICK_ROOM, MOVE_PROTECT},
         .nature = NATURE_MODEST,
         .abilitySlot = 2,
     },
@@ -2913,56 +2913,56 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_REGIGIGAS] =
     {
-        .moves = {MOVE_WIDE_GUARD, MOVE_THUNDER_WAVE, MOVE_ICY_WIND, MOVE_ROCK_SLIDE},
-        .nature = NATURE_CAREFUL,
-        .abilitySlot = 0,
+        .moves = {MOVE_CRUSH_GRIP, MOVE_HIGH_HORSEPOWER, MOVE_ICY_WIND, MOVE_WIDE_GUARD},
+        .nature = NATURE_ADAMANT,
+        .abilitySlot = 2,
     },
     [SPECIES_GIRATINA] =
     {
-        .moves = {MOVE_AURA_SPHERE, MOVE_SHADOW_BALL, MOVE_CALM_MIND, MOVE_PROTECT},
-        .nature = NATURE_TIMID,
-        .abilitySlot = 0,
+        .moves = {MOVE_DRACO_METEOR, MOVE_SHADOW_BALL, MOVE_WILL_O_WISP, MOVE_PROTECT},
+        .nature = NATURE_MODEST,
+        .abilitySlot = 2,
     },
     [SPECIES_CRESSELIA] =
     {
-        .moves = {MOVE_CALM_MIND, MOVE_PSYSHOCK, MOVE_MOONLIGHT, MOVE_ICE_BEAM},
-        .nature = NATURE_CALM,
+        .moves = {MOVE_TRICK_ROOM, MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_MOONLIGHT},
+        .nature = NATURE_SASSY,
         .abilitySlot = 0,
     },
     [SPECIES_PHIONE] =
     {
-        .moves = {MOVE_RAIN_DANCE, MOVE_WATERFALL, MOVE_U_TURN, MOVE_REST},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_RAIN_DANCE, MOVE_SCALD, MOVE_ICY_WIND, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_MANAPHY] =
     {
-        .moves = {MOVE_SCALD, MOVE_ICE_BEAM, MOVE_TAIL_GLOW, MOVE_PROTECT},
+        .moves = {MOVE_TAIL_GLOW, MOVE_SCALD, MOVE_ICE_BEAM, MOVE_PROTECT},
         .nature = NATURE_MODEST,
         .abilitySlot = 0,
     },
     [SPECIES_DARKRAI] =
     {
-        .moves = {MOVE_FOCUS_BLAST, MOVE_PROTECT, MOVE_SLUDGE_BOMB, MOVE_DARK_PULSE},
+        .moves = {MOVE_DARK_VOID, MOVE_DARK_PULSE, MOVE_ICY_WIND, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_SHAYMIN] =
     {
-        .moves = {MOVE_SEED_FLARE, MOVE_SUBSTITUTE, MOVE_LEECH_SEED, MOVE_AIR_SLASH},
+        .moves = {MOVE_SEED_FLARE, MOVE_EARTH_POWER, MOVE_TAILWIND, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_ARCEUS] =
     {
-        .moves = {MOVE_SWORDS_DANCE, MOVE_EXTREME_SPEED, MOVE_SHADOW_CLAW, MOVE_RECOVER},
+        .moves = {MOVE_SWORDS_DANCE, MOVE_EXTREME_SPEED, MOVE_SHADOW_CLAW, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_VICTINI] =
     {
-        .moves = {MOVE_V_CREATE, MOVE_EXPANDING_FORCE, MOVE_ENCORE, MOVE_PROTECT},
-        .nature = NATURE_NAIVE,
+        .moves = {MOVE_V_CREATE, MOVE_BOLT_STRIKE, MOVE_ENCORE, MOVE_PROTECT},
+        .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_SNIVY] =
@@ -2979,19 +2979,19 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_SERPERIOR] =
     {
-        .moves = {MOVE_LIGHT_SCREEN, MOVE_REFLECT, MOVE_GIGA_DRAIN, MOVE_GLARE},
+        .moves = {MOVE_LEAF_STORM, MOVE_GLARE, MOVE_LIGHT_SCREEN, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 2,
     },
     [SPECIES_TEPIG] =
     {
-        .moves = {MOVE_FLARE_BLITZ, MOVE_HEAD_SMASH, MOVE_SUCKER_PUNCH, MOVE_SUPERPOWER},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_FLARE_BLITZ, MOVE_HEAD_SMASH, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
+        .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
     [SPECIES_PIGNITE] =
     {
-        .moves = {MOVE_FLARE_BLITZ, MOVE_SUPERPOWER, MOVE_SUCKER_PUNCH, MOVE_TOXIC},
+        .moves = {MOVE_FLARE_BLITZ, MOVE_SUPERPOWER, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
@@ -3003,14 +3003,14 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_OSHAWOTT] =
     {
-        .moves = {MOVE_AQUA_JET, MOVE_WATERFALL, MOVE_X_SCISSOR, MOVE_SWORDS_DANCE},
+        .moves = {MOVE_SWORDS_DANCE, MOVE_WATERFALL, MOVE_AQUA_JET, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_DEWOTT] =
     {
-        .moves = {MOVE_HYDRO_PUMP, MOVE_SACRED_SWORD, MOVE_ICE_BEAM, MOVE_PROTECT},
-        .nature = NATURE_MODEST,
+        .moves = {MOVE_SWORDS_DANCE, MOVE_WATERFALL, MOVE_AQUA_JET, MOVE_PROTECT},
+        .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_SAMUROTT] =
@@ -3021,31 +3021,31 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_PATRAT] =
     {
-        .moves = {MOVE_SWORDS_DANCE, MOVE_BATON_PASS, MOVE_HYPNOSIS, MOVE_CRUNCH},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_SUPER_FANG, MOVE_HYPNOSIS, MOVE_BODY_SLAM, MOVE_PROTECT},
+        .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
     [SPECIES_WATCHOG] =
     {
-        .moves = {MOVE_CRUNCH, MOVE_DETECT, MOVE_STOMPING_TANTRUM, MOVE_DOUBLE_EDGE},
+        .moves = {MOVE_CRUNCH, MOVE_STOMPING_TANTRUM, MOVE_DOUBLE_EDGE, MOVE_DETECT},
         .nature = NATURE_JOLLY,
-        .abilitySlot = 2,
+        .abilitySlot = 0,
     },
     [SPECIES_LILLIPUP] =
     {
-        .moves = {MOVE_PLAY_ROUGH, MOVE_FIRE_FANG, MOVE_THUNDER_WAVE, MOVE_GIGA_IMPACT},
+        .moves = {MOVE_BODY_SLAM, MOVE_PLAY_ROUGH, MOVE_THUNDER_WAVE, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_HERDIER] =
     {
-        .moves = {MOVE_GIGA_IMPACT, MOVE_STRENGTH, MOVE_WILD_CHARGE, MOVE_PROTECT},
+        .moves = {MOVE_DOUBLE_EDGE, MOVE_WILD_CHARGE, MOVE_CRUNCH, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_STOUTLAND] =
     {
-        .moves = {MOVE_WILD_CHARGE, MOVE_CRUNCH, MOVE_PROTECT, MOVE_GIGA_IMPACT},
+        .moves = {MOVE_DOUBLE_EDGE, MOVE_WILD_CHARGE, MOVE_CRUNCH, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 1,
     },
@@ -3063,7 +3063,7 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_PANSAGE] =
     {
-        .moves = {MOVE_BULLET_SEED, MOVE_KNOCK_OFF, MOVE_LOW_SWEEP, MOVE_GUNK_SHOT},
+        .moves = {MOVE_SEED_BOMB, MOVE_KNOCK_OFF, MOVE_LOW_SWEEP, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 2,
     },
@@ -3071,12 +3071,12 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     {
         .moves = {MOVE_SEED_BOMB, MOVE_CRUNCH, MOVE_ROCK_SLIDE, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
-        .abilitySlot = 0,
+        .abilitySlot = 2,
     },
     [SPECIES_PANSEAR] =
     {
-        .moves = {MOVE_RECYCLE, MOVE_WILL_O_WISP, MOVE_SUBSTITUTE, MOVE_FLAME_CHARGE},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_NASTY_PLOT, MOVE_HEAT_WAVE, MOVE_WILL_O_WISP, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
         .abilitySlot = 2,
     },
     [SPECIES_SIMISEAR] =
@@ -3087,8 +3087,8 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_PANPOUR] =
     {
-        .moves = {MOVE_NASTY_PLOT, MOVE_HYDRO_PUMP, MOVE_ICE_BEAM, MOVE_KNOCK_OFF},
-        .nature = NATURE_MODEST,
+        .moves = {MOVE_NASTY_PLOT, MOVE_HYDRO_PUMP, MOVE_ICE_BEAM, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
         .abilitySlot = 2,
     },
     [SPECIES_SIMIPOUR] =
@@ -3099,7 +3099,7 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_MUNNA] =
     {
-        .moves = {MOVE_CALM_MIND, MOVE_STORED_POWER, MOVE_DAZZLING_GLEAM, MOVE_MOONLIGHT},
+        .moves = {MOVE_CALM_MIND, MOVE_STORED_POWER, MOVE_MOONLIGHT, MOVE_PROTECT},
         .nature = NATURE_BOLD,
         .abilitySlot = 1,
     },
@@ -3111,91 +3111,91 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_PIDOVE] =
     {
-        .moves = {MOVE_TAILWIND, MOVE_AERIAL_ACE, MOVE_U_TURN, MOVE_PROTECT},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_TAILWIND, MOVE_U_TURN, MOVE_NIGHT_SLASH, MOVE_PROTECT},
+        .nature = NATURE_JOLLY,
         .abilitySlot = 1,
     },
     [SPECIES_TRANQUILL] =
     {
-        .moves = {MOVE_U_TURN, MOVE_WISH, MOVE_DETECT, MOVE_SECRET_POWER},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_DUAL_WINGBEAT, MOVE_U_TURN, MOVE_TAILWIND, MOVE_PROTECT},
+        .nature = NATURE_JOLLY,
         .abilitySlot = 1,
     },
     [SPECIES_UNFEZANT] =
     {
-        .moves = {MOVE_NIGHT_SLASH, MOVE_U_TURN, MOVE_BRAVE_BIRD, MOVE_ROOST},
+        .moves = {MOVE_BRAVE_BIRD, MOVE_NIGHT_SLASH, MOVE_TAILWIND, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 1,
     },
     [SPECIES_BLITZLE] =
     {
-        .moves = {MOVE_WILD_CHARGE, MOVE_VOLT_SWITCH, MOVE_FLAME_CHARGE, MOVE_DOUBLE_EDGE},
-        .nature = NATURE_NAIVE,
-        .abilitySlot = 2,
+        .moves = {MOVE_THUNDERBOLT, MOVE_VOLT_SWITCH, MOVE_THUNDER_WAVE, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
+        .abilitySlot = 0,
     },
     [SPECIES_ZEBSTRIKA] =
     {
-        .moves = {MOVE_THUNDERBOLT, MOVE_OVERHEAT, MOVE_PROTECT, MOVE_GIGA_IMPACT},
+        .moves = {MOVE_THUNDERBOLT, MOVE_OVERHEAT, MOVE_VOLT_SWITCH, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_ROGGENROLA] =
     {
-        .moves = {MOVE_AUTOTOMIZE, MOVE_EXPLOSION, MOVE_STONE_EDGE, MOVE_EARTHQUAKE},
+        .moves = {MOVE_ROCK_SLIDE, MOVE_EARTHQUAKE, MOVE_EXPLOSION, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_BOLDORE] =
     {
-        .moves = {MOVE_POWER_GEM, MOVE_DAZZLING_GLEAM, MOVE_EARTH_POWER, MOVE_PROTECT},
-        .nature = NATURE_MODEST,
+        .moves = {MOVE_ROCK_SLIDE, MOVE_EARTHQUAKE, MOVE_HEAVY_SLAM, MOVE_PROTECT},
+        .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_GIGALITH] =
     {
-        .moves = {MOVE_ROCK_SLIDE, MOVE_HEAVY_SLAM, MOVE_STONE_EDGE, MOVE_PROTECT},
+        .moves = {MOVE_ROCK_SLIDE, MOVE_HEAVY_SLAM, MOVE_EARTHQUAKE, MOVE_PROTECT},
         .nature = NATURE_BRAVE,
         .abilitySlot = 1,
     },
     [SPECIES_WOOBAT] =
     {
-        .moves = {MOVE_CALM_MIND, MOVE_STORED_POWER, MOVE_HEAT_WAVE, MOVE_ROOST},
+        .moves = {MOVE_CALM_MIND, MOVE_STORED_POWER, MOVE_HEAT_WAVE, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 2,
     },
     [SPECIES_SWOOBAT] =
     {
-        .moves = {MOVE_PSYCHIC, MOVE_CALM_MIND, MOVE_AIR_SLASH, MOVE_HEAT_WAVE},
+        .moves = {MOVE_CALM_MIND, MOVE_STORED_POWER, MOVE_AIR_SLASH, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 2,
     },
     [SPECIES_DRILBUR] =
     {
-        .moves = {MOVE_STEALTH_ROCK, MOVE_EARTHQUAKE, MOVE_POISON_JAB, MOVE_RAPID_SPIN},
+        .moves = {MOVE_EARTHQUAKE, MOVE_METAL_CLAW, MOVE_ROCK_SLIDE, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
-        .abilitySlot = 2,
+        .abilitySlot = 0,
     },
     [SPECIES_EXCADRILL] =
     {
-        .moves = {MOVE_HIGH_HORSEPOWER, MOVE_IRON_HEAD, MOVE_EARTHQUAKE, MOVE_PROTECT},
+        .moves = {MOVE_HIGH_HORSEPOWER, MOVE_IRON_HEAD, MOVE_ROCK_SLIDE, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_AUDINO] =
     {
-        .moves = {MOVE_BODY_SLAM, MOVE_ENCORE, MOVE_HEAL_PULSE, MOVE_ICY_WIND},
-        .nature = NATURE_TIMID,
+        .moves = {MOVE_WISH, MOVE_PROTECT, MOVE_HEAL_BELL, MOVE_KNOCK_OFF},
+        .nature = NATURE_IMPISH,
         .abilitySlot = 1,
     },
     [SPECIES_TIMBURR] =
     {
-        .moves = {MOVE_DRAIN_PUNCH, MOVE_KNOCK_OFF, MOVE_MACH_PUNCH, MOVE_ICE_PUNCH},
+        .moves = {MOVE_DRAIN_PUNCH, MOVE_KNOCK_OFF, MOVE_MACH_PUNCH, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
     [SPECIES_GURDURR] =
     {
-        .moves = {MOVE_CLOSE_COMBAT, MOVE_KNOCK_OFF, MOVE_FACADE, MOVE_MACH_PUNCH},
+        .moves = {MOVE_CLOSE_COMBAT, MOVE_KNOCK_OFF, MOVE_MACH_PUNCH, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
@@ -3207,20 +3207,20 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_TYMPOLE] =
     {
-        .moves = {MOVE_RAIN_DANCE, MOVE_HYDRO_PUMP, MOVE_EARTH_POWER, MOVE_SLUDGE_BOMB},
+        .moves = {MOVE_RAIN_DANCE, MOVE_HYDRO_PUMP, MOVE_EARTH_POWER, MOVE_PROTECT},
         .nature = NATURE_MODEST,
         .abilitySlot = 2,
     },
     [SPECIES_PALPITOAD] =
     {
-        .moves = {MOVE_STEALTH_ROCK, MOVE_EARTH_POWER, MOVE_SCALD, MOVE_TOXIC},
+        .moves = {MOVE_EARTH_POWER, MOVE_SCALD, MOVE_ICY_WIND, MOVE_PROTECT},
         .nature = NATURE_BOLD,
         .abilitySlot = 2,
     },
     [SPECIES_SEISMITOAD] =
     {
-        .moves = {MOVE_SURF, MOVE_EARTHQUAKE, MOVE_GRASS_KNOT, MOVE_PROTECT},
-        .nature = NATURE_MILD,
+        .moves = {MOVE_MUDDY_WATER, MOVE_EARTH_POWER, MOVE_GRASS_KNOT, MOVE_PROTECT},
+        .nature = NATURE_MODEST,
         .abilitySlot = 2,
     },
     [SPECIES_THROH] =
@@ -3237,15 +3237,15 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_SEWADDLE] =
     {
-        .moves = {MOVE_STICKY_WEB, MOVE_ENERGY_BALL, MOVE_AIR_SLASH, MOVE_PROTECT},
-        .nature = NATURE_BOLD,
-        .abilitySlot = 1,
+        .moves = {MOVE_ELECTROWEB, MOVE_SEED_BOMB, MOVE_LIGHT_SCREEN, MOVE_PROTECT},
+        .nature = NATURE_IMPISH,
+        .abilitySlot = 2,
     },
     [SPECIES_SWADLOON] =
     {
-        .moves = {MOVE_BUG_BUZZ, MOVE_GIGA_DRAIN, MOVE_AIR_SLASH, MOVE_PROTECT},
+        .moves = {MOVE_BUG_BUZZ, MOVE_GIGA_DRAIN, MOVE_ELECTROWEB, MOVE_PROTECT},
         .nature = NATURE_MODEST,
-        .abilitySlot = 0,
+        .abilitySlot = 2,
     },
     [SPECIES_LEAVANNY] =
     {
@@ -3255,25 +3255,25 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_VENIPEDE] =
     {
-        .moves = {MOVE_SPIKES, MOVE_PIN_MISSILE, MOVE_PROTECT, MOVE_ENDEAVOR},
-        .nature = NATURE_CAREFUL,
+        .moves = {MOVE_PROTECT, MOVE_PIN_MISSILE, MOVE_POISON_JAB, MOVE_ENDEAVOR},
+        .nature = NATURE_JOLLY,
         .abilitySlot = 2,
     },
     [SPECIES_WHIRLIPEDE] =
     {
-        .moves = {MOVE_SPIKES, MOVE_TOXIC_SPIKES, MOVE_PROTECT, MOVE_ENDEAVOR},
+        .moves = {MOVE_TOXIC_SPIKES, MOVE_ENDEAVOR, MOVE_POISON_JAB, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 2,
     },
     [SPECIES_SCOLIPEDE] =
     {
-        .moves = {MOVE_SWORDS_DANCE, MOVE_MEGAHORN, MOVE_ROCK_SLIDE, MOVE_EARTHQUAKE},
+        .moves = {MOVE_SWORDS_DANCE, MOVE_MEGAHORN, MOVE_ROCK_SLIDE, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 1,
     },
     [SPECIES_COTTONEE] =
     {
-        .moves = {MOVE_GIGA_DRAIN, MOVE_DAZZLING_GLEAM, MOVE_STUN_SPORE, MOVE_MEMENTO},
+        .moves = {MOVE_TAILWIND, MOVE_ENCORE, MOVE_STUN_SPORE, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
@@ -3285,7 +3285,7 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_PETILIL] =
     {
-        .moves = {MOVE_GIGA_DRAIN, MOVE_SLEEP_POWDER, MOVE_HEALING_WISH, MOVE_STUN_SPORE},
+        .moves = {MOVE_SLEEP_POWDER, MOVE_AFTER_YOU, MOVE_GIGA_DRAIN, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
@@ -3309,7 +3309,7 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_KROKOROK] =
     {
-        .moves = {MOVE_STEALTH_ROCK, MOVE_EARTHQUAKE, MOVE_KNOCK_OFF, MOVE_TAUNT},
+        .moves = {MOVE_EARTHQUAKE, MOVE_KNOCK_OFF, MOVE_TAUNT, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
@@ -3333,13 +3333,13 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_MARACTUS] =
     {
-        .moves = {MOVE_SPIKES, MOVE_BULLET_SEED, MOVE_GRASS_KNOT, MOVE_SUCKER_PUNCH},
-        .nature = NATURE_NAUGHTY,
+        .moves = {MOVE_GIGA_DRAIN, MOVE_SUCKER_PUNCH, MOVE_AFTER_YOU, MOVE_PROTECT},
+        .nature = NATURE_NAIVE,
         .abilitySlot = 2,
     },
     [SPECIES_DWEBBLE] =
     {
-        .moves = {MOVE_SHELL_SMASH, MOVE_ROCK_BLAST, MOVE_EARTHQUAKE, MOVE_KNOCK_OFF},
+        .moves = {MOVE_SHELL_SMASH, MOVE_ROCK_BLAST, MOVE_KNOCK_OFF, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
@@ -3351,7 +3351,7 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_SCRAGGY] =
     {
-        .moves = {MOVE_DRAGON_DANCE, MOVE_HIGH_JUMP_KICK, MOVE_KNOCK_OFF, MOVE_ZEN_HEADBUTT},
+        .moves = {MOVE_DRAGON_DANCE, MOVE_HIGH_JUMP_KICK, MOVE_KNOCK_OFF, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
@@ -3363,13 +3363,13 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_SIGILYPH] =
     {
-        .moves = {MOVE_TAILWIND, MOVE_ICE_BEAM, MOVE_PSYCHIC, MOVE_SHADOW_BALL},
+        .moves = {MOVE_TAILWIND, MOVE_ICE_BEAM, MOVE_PSYCHIC, MOVE_PROTECT},
         .nature = NATURE_MODEST,
         .abilitySlot = 1,
     },
     [SPECIES_YAMASK] =
     {
-        .moves = {MOVE_WILL_O_WISP, MOVE_HEX, MOVE_KNOCK_OFF, MOVE_TOXIC_SPIKES},
+        .moves = {MOVE_TRICK_ROOM, MOVE_WILL_O_WISP, MOVE_NIGHT_SHADE, MOVE_PROTECT},
         .nature = NATURE_RELAXED,
         .abilitySlot = 0,
     },
@@ -3381,7 +3381,7 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_TIRTOUGA] =
     {
-        .moves = {MOVE_SHELL_SMASH, MOVE_WATERFALL, MOVE_STONE_EDGE, MOVE_ZEN_HEADBUTT},
+        .moves = {MOVE_SHELL_SMASH, MOVE_WATERFALL, MOVE_STONE_EDGE, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
@@ -3405,8 +3405,8 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_TRUBBISH] =
     {
-        .moves = {MOVE_SPIKES, MOVE_DRAIN_PUNCH, MOVE_EXPLOSION, MOVE_GIGA_DRAIN},
-        .nature = NATURE_NAIVE,
+        .moves = {MOVE_GUNK_SHOT, MOVE_DRAIN_PUNCH, MOVE_EXPLOSION, MOVE_PROTECT},
+        .nature = NATURE_ADAMANT,
         .abilitySlot = 1,
     },
     [SPECIES_GARBODOR] =
@@ -3435,19 +3435,19 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_CINCCINO] =
     {
-        .moves = {MOVE_TAIL_SLAP, MOVE_TRIPLE_AXEL, MOVE_KNOCK_OFF, MOVE_ROCK_BLAST},
+        .moves = {MOVE_TAIL_SLAP, MOVE_TRIPLE_AXEL, MOVE_ROCK_BLAST, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 2,
     },
     [SPECIES_GOTHITA] =
     {
-        .moves = {MOVE_PSYCHIC, MOVE_TRICK, MOVE_THUNDERBOLT, MOVE_ENERGY_BALL},
-        .nature = NATURE_MODEST,
+        .moves = {MOVE_PSYCHIC, MOVE_THUNDER_WAVE, MOVE_HELPING_HAND, MOVE_PROTECT},
+        .nature = NATURE_CALM,
         .abilitySlot = 2,
     },
     [SPECIES_GOTHORITA] =
     {
-        .moves = {MOVE_NASTY_PLOT, MOVE_PSYCHIC, MOVE_DARK_PULSE, MOVE_THUNDERBOLT},
+        .moves = {MOVE_NASTY_PLOT, MOVE_PSYCHIC, MOVE_THUNDERBOLT, MOVE_PROTECT},
         .nature = NATURE_MODEST,
         .abilitySlot = 1,
     },
@@ -3465,8 +3465,8 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_DUOSION] =
     {
-        .moves = {MOVE_ACID_ARMOR, MOVE_CALM_MIND, MOVE_STORED_POWER, MOVE_RECOVER},
-        .nature = NATURE_BOLD,
+        .moves = {MOVE_TRICK_ROOM, MOVE_PSYCHIC, MOVE_RECOVER, MOVE_PROTECT},
+        .nature = NATURE_QUIET,
         .abilitySlot = 1,
     },
     [SPECIES_REUNICLUS] =
@@ -3477,20 +3477,20 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_DUCKLETT] =
     {
-        .moves = {MOVE_HURRICANE, MOVE_SCALD, MOVE_DEFOG, MOVE_ROOST},
-        .nature = NATURE_BOLD,
+        .moves = {MOVE_TAILWIND, MOVE_SCALD, MOVE_HURRICANE, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
         .abilitySlot = 2,
     },
     [SPECIES_SWANNA] =
     {
-        .moves = {MOVE_TAILWIND, MOVE_SCALD, MOVE_ICE_BEAM, MOVE_AIR_SLASH},
+        .moves = {MOVE_TAILWIND, MOVE_SCALD, MOVE_ICE_BEAM, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 1,
     },
     [SPECIES_VANILLITE] =
     {
-        .moves = {MOVE_AUTOTOMIZE, MOVE_ICE_BEAM, MOVE_ICE_SHARD, MOVE_POWER_GEM},
-        .nature = NATURE_MILD,
+        .moves = {MOVE_ICE_BEAM, MOVE_ICY_WIND, MOVE_POWER_GEM, MOVE_PROTECT},
+        .nature = NATURE_MODEST,
         .abilitySlot = 0,
     },
     [SPECIES_VANILLISH] =
@@ -3501,13 +3501,13 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_VANILLUXE] =
     {
-        .moves = {MOVE_BLIZZARD, MOVE_FREEZE_DRY, MOVE_ICY_WIND, MOVE_SHEER_COLD},
+        .moves = {MOVE_BLIZZARD, MOVE_FREEZE_DRY, MOVE_ICY_WIND, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 1,
     },
     [SPECIES_DEERLING] =
     {
-        .moves = {MOVE_THUNDER_WAVE, MOVE_HEADBUTT, MOVE_BULLET_SEED, MOVE_SYNTHESIS},
+        .moves = {MOVE_HEADBUTT, MOVE_BULLET_SEED, MOVE_THUNDER_WAVE, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 2,
     },
@@ -3519,9 +3519,9 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_EMOLGA] =
     {
-        .moves = {MOVE_NUZZLE, MOVE_ACROBATICS, MOVE_PROTECT, MOVE_THUNDERBOLT},
-        .nature = NATURE_JOLLY,
-        .abilitySlot = 2,
+        .moves = {MOVE_THUNDERBOLT, MOVE_ELECTROWEB, MOVE_ENCORE, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
+        .abilitySlot = 1,
     },
     [SPECIES_KARRABLAST] =
     {
@@ -3538,7 +3538,7 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     [SPECIES_FOONGUS] =
     {
         .moves = {MOVE_SPORE, MOVE_RAGE_POWDER, MOVE_GIGA_DRAIN, MOVE_PROTECT},
-        .nature = NATURE_RELAXED,
+        .nature = NATURE_BOLD,
         .abilitySlot = 2,
     },
     [SPECIES_AMOONGUSS] =
@@ -3549,7 +3549,7 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_FRILLISH] =
     {
-        .moves = {MOVE_SCALD, MOVE_HEX, MOVE_WILL_O_WISP, MOVE_RECOVER},
+        .moves = {MOVE_SCALD, MOVE_HEX, MOVE_WILL_O_WISP, MOVE_PROTECT},
         .nature = NATURE_BOLD,
         .abilitySlot = 1,
     },
@@ -3567,7 +3567,7 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_JOLTIK] =
     {
-        .moves = {MOVE_VOLT_SWITCH, MOVE_THUNDERBOLT, MOVE_GIGA_DRAIN, MOVE_BUG_BUZZ},
+        .moves = {MOVE_VOLT_SWITCH, MOVE_THUNDERBOLT, MOVE_BUG_BUZZ, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 2,
     },
@@ -3579,8 +3579,8 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_FERROSEED] =
     {
-        .moves = {MOVE_GYRO_BALL, MOVE_SPIKES, MOVE_THUNDER_WAVE, MOVE_SEED_BOMB},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_GYRO_BALL, MOVE_LEECH_SEED, MOVE_THUNDER_WAVE, MOVE_PROTECT},
+        .nature = NATURE_RELAXED,
         .abilitySlot = 0,
     },
     [SPECIES_FERROTHORN] =
@@ -3597,13 +3597,13 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_KLANG] =
     {
-        .moves = {MOVE_REST, MOVE_SLEEP_TALK, MOVE_GEAR_GRIND, MOVE_SHIFT_GEAR},
-        .nature = NATURE_CAREFUL,
+        .moves = {MOVE_SHIFT_GEAR, MOVE_GEAR_GRIND, MOVE_WILD_CHARGE, MOVE_PROTECT},
+        .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
     [SPECIES_KLINKLANG] =
     {
-        .moves = {MOVE_SHIFT_GEAR, MOVE_WILD_CHARGE, MOVE_GEAR_GRIND, MOVE_GIGA_IMPACT},
+        .moves = {MOVE_SHIFT_GEAR, MOVE_GEAR_GRIND, MOVE_WILD_CHARGE, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 2,
     },
@@ -3615,19 +3615,19 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_EELEKTRIK] =
     {
-        .moves = {MOVE_DISCHARGE, MOVE_U_TURN, MOVE_KNOCK_OFF, MOVE_SUPER_FANG},
+        .moves = {MOVE_THUNDERBOLT, MOVE_KNOCK_OFF, MOVE_SUPER_FANG, MOVE_PROTECT},
         .nature = NATURE_SASSY,
         .abilitySlot = 0,
     },
     [SPECIES_EELEKTROSS] =
     {
-        .moves = {MOVE_WILD_CHARGE, MOVE_ACROBATICS, MOVE_ROCK_SLIDE, MOVE_CRUNCH},
+        .moves = {MOVE_WILD_CHARGE, MOVE_CRUNCH, MOVE_ROCK_SLIDE, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_ELGYEM] =
     {
-        .moves = {MOVE_TRICK_ROOM, MOVE_NASTY_PLOT, MOVE_PSYCHIC, MOVE_ENERGY_BALL},
+        .moves = {MOVE_TRICK_ROOM, MOVE_PSYCHIC, MOVE_ENERGY_BALL, MOVE_PROTECT},
         .nature = NATURE_QUIET,
         .abilitySlot = 1,
     },
@@ -3639,14 +3639,14 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_LITWICK] =
     {
-        .moves = {MOVE_MEMENTO, MOVE_TRICK_ROOM, MOVE_FIRE_BLAST, MOVE_WILL_O_WISP},
+        .moves = {MOVE_TRICK_ROOM, MOVE_HEAT_WAVE, MOVE_SHADOW_BALL, MOVE_PROTECT},
         .nature = NATURE_QUIET,
-        .abilitySlot = 1,
+        .abilitySlot = 0,
     },
     [SPECIES_LAMPENT] =
     {
-        .moves = {MOVE_TRICK, MOVE_FIRE_BLAST, MOVE_SHADOW_BALL, MOVE_ENERGY_BALL},
-        .nature = NATURE_TIMID,
+        .moves = {MOVE_TRICK_ROOM, MOVE_HEAT_WAVE, MOVE_SHADOW_BALL, MOVE_PROTECT},
+        .nature = NATURE_QUIET,
         .abilitySlot = 0,
     },
     [SPECIES_CHANDELURE] =
@@ -3657,13 +3657,13 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_AXEW] =
     {
-        .moves = {MOVE_SWORDS_DANCE, MOVE_DRAGON_CLAW, MOVE_AQUA_TAIL, MOVE_SUPERPOWER},
+        .moves = {MOVE_SWORDS_DANCE, MOVE_DRAGON_CLAW, MOVE_AQUA_TAIL, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 1,
     },
     [SPECIES_FRAXURE] =
     {
-        .moves = {MOVE_DRAGON_DANCE, MOVE_OUTRAGE, MOVE_SUPERPOWER, MOVE_AQUA_TAIL},
+        .moves = {MOVE_DRAGON_DANCE, MOVE_DRAGON_CLAW, MOVE_AQUA_TAIL, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 1,
     },
@@ -3675,8 +3675,8 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_CUBCHOO] =
     {
-        .moves = {MOVE_ICE_PUNCH, MOVE_SUPERPOWER, MOVE_PLAY_ROUGH, MOVE_SURF},
-        .nature = NATURE_NAIVE,
+        .moves = {MOVE_ICE_PUNCH, MOVE_SUPERPOWER, MOVE_PLAY_ROUGH, MOVE_PROTECT},
+        .nature = NATURE_ADAMANT,
         .abilitySlot = 1,
     },
     [SPECIES_BEARTIC] =
@@ -3687,13 +3687,13 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_CRYOGONAL] =
     {
-        .moves = {MOVE_FLASH_CANNON, MOVE_ICY_WIND, MOVE_RECOVER, MOVE_FREEZE_DRY},
+        .moves = {MOVE_FREEZE_DRY, MOVE_ICY_WIND, MOVE_RECOVER, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_SHELMET] =
     {
-        .moves = {MOVE_SPIKES, MOVE_INFESTATION, MOVE_TOXIC, MOVE_RECOVER},
+        .moves = {MOVE_INFESTATION, MOVE_TOXIC, MOVE_RECOVER, MOVE_PROTECT},
         .nature = NATURE_BOLD,
         .abilitySlot = 2,
     },
@@ -3705,13 +3705,13 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_STUNFISK] =
     {
-        .moves = {MOVE_STEALTH_ROCK, MOVE_DISCHARGE, MOVE_TOXIC, MOVE_PAIN_SPLIT},
+        .moves = {MOVE_DISCHARGE, MOVE_EARTH_POWER, MOVE_YAWN, MOVE_PROTECT},
         .nature = NATURE_CALM,
         .abilitySlot = 0,
     },
     [SPECIES_MIENFOO] =
     {
-        .moves = {MOVE_HIGH_JUMP_KICK, MOVE_KNOCK_OFF, MOVE_SWORDS_DANCE, MOVE_SUBSTITUTE},
+        .moves = {MOVE_FAKE_OUT, MOVE_HIGH_JUMP_KICK, MOVE_KNOCK_OFF, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 1,
     },
@@ -3729,20 +3729,20 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_GOLETT] =
     {
-        .moves = {MOVE_EARTHQUAKE, MOVE_STEALTH_ROCK, MOVE_ICE_PUNCH, MOVE_SHADOW_PUNCH},
+        .moves = {MOVE_EARTHQUAKE, MOVE_SHADOW_PUNCH, MOVE_ICE_PUNCH, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_GOLURK] =
     {
-        .moves = {MOVE_SHADOW_PUNCH, MOVE_EARTHQUAKE, MOVE_HAMMER_ARM, MOVE_ROCK_SLIDE},
+        .moves = {MOVE_SHADOW_PUNCH, MOVE_EARTHQUAKE, MOVE_HAMMER_ARM, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_PAWNIARD] =
     {
-        .moves = {MOVE_STEALTH_ROCK, MOVE_IRON_HEAD, MOVE_SUCKER_PUNCH, MOVE_THUNDER_WAVE},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_IRON_HEAD, MOVE_SUCKER_PUNCH, MOVE_THUNDER_WAVE, MOVE_PROTECT},
+        .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_BISHARP] =
@@ -3771,9 +3771,9 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_VULLABY] =
     {
-        .moves = {MOVE_BRAVE_BIRD, MOVE_KNOCK_OFF, MOVE_ROOST, MOVE_U_TURN},
-        .nature = NATURE_JOLLY,
-        .abilitySlot = 2,
+        .moves = {MOVE_FOUL_PLAY, MOVE_TAILWIND, MOVE_ROOST, MOVE_PROTECT},
+        .nature = NATURE_BOLD,
+        .abilitySlot = 1,
     },
     [SPECIES_MANDIBUZZ] =
     {
@@ -3795,13 +3795,13 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_DEINO] =
     {
-        .moves = {MOVE_FIRE_FANG, MOVE_SUPERPOWER, MOVE_DRAGON_TAIL, MOVE_OUTRAGE},
+        .moves = {MOVE_CRUNCH, MOVE_FIRE_FANG, MOVE_SUPERPOWER, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_ZWEILOUS] =
     {
-        .moves = {MOVE_CRUNCH, MOVE_BODY_SLAM, MOVE_ZEN_HEADBUTT, MOVE_SUBSTITUTE},
+        .moves = {MOVE_CRUNCH, MOVE_BODY_SLAM, MOVE_ZEN_HEADBUTT, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
@@ -3843,7 +3843,7 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_TORNADUS] =
     {
-        .moves = {MOVE_HURRICANE, MOVE_WEATHER_BALL, MOVE_TAILWIND, MOVE_PROTECT},
+        .moves = {MOVE_HURRICANE, MOVE_TAUNT, MOVE_TAILWIND, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
@@ -3885,8 +3885,8 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_MELOETTA] =
     {
-        .moves = {MOVE_HYPER_VOICE, MOVE_U_TURN, MOVE_CLOSE_COMBAT, MOVE_PSYCHIC},
-        .nature = NATURE_CALM,
+        .moves = {MOVE_HYPER_VOICE, MOVE_PSYCHIC, MOVE_HELPING_HAND, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_GENESECT] =
@@ -3897,13 +3897,13 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_CHESPIN] =
     {
-        .moves = {MOVE_BULLET_SEED, MOVE_ROCK_SLIDE, MOVE_SPIKES, MOVE_SYNTHESIS},
+        .moves = {MOVE_BULLET_SEED, MOVE_SUPER_FANG, MOVE_HELPING_HAND, MOVE_PROTECT},
         .nature = NATURE_IMPISH,
         .abilitySlot = 2,
     },
     [SPECIES_QUILLADIN] =
     {
-        .moves = {MOVE_SPIKES, MOVE_WOOD_HAMMER, MOVE_ROAR, MOVE_SYNTHESIS},
+        .moves = {MOVE_WOOD_HAMMER, MOVE_SUPER_FANG, MOVE_HELPING_HAND, MOVE_PROTECT},
         .nature = NATURE_IMPISH,
         .abilitySlot = 2,
     },
@@ -3915,21 +3915,21 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_FENNEKIN] =
     {
-        .moves = {MOVE_FIRE_BLAST, MOVE_SOLAR_BEAM, MOVE_PSYCHIC, MOVE_WILL_O_WISP},
+        .moves = {MOVE_HEAT_WAVE, MOVE_PSYCHIC, MOVE_WILL_O_WISP, MOVE_PROTECT},
         .nature = NATURE_TIMID,
-        .abilitySlot = 2,
+        .abilitySlot = 1,
     },
     [SPECIES_BRAIXEN] =
     {
-        .moves = {MOVE_FLAMETHROWER, MOVE_PSYCHIC, MOVE_SUBSTITUTE, MOVE_AURA_SPHERE},
+        .moves = {MOVE_HEAT_WAVE, MOVE_PSYCHIC, MOVE_WILL_O_WISP, MOVE_PROTECT},
         .nature = NATURE_TIMID,
-        .abilitySlot = 0,
+        .abilitySlot = 1,
     },
     [SPECIES_DELPHOX] =
     {
-        .moves = {MOVE_NASTY_PLOT, MOVE_PROTECT, MOVE_PSYCHIC, MOVE_FIRE_BLAST},
+        .moves = {MOVE_HEAT_WAVE, MOVE_PSYCHIC, MOVE_NASTY_PLOT, MOVE_PROTECT},
         .nature = NATURE_TIMID,
-        .abilitySlot = 0,
+        .abilitySlot = 1,
     },
     [SPECIES_FROAKIE] =
     {
@@ -3939,8 +3939,8 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_FROGADIER] =
     {
-        .moves = {MOVE_SPIKES, MOVE_SURF, MOVE_ICE_BEAM, MOVE_U_TURN},
-        .nature = NATURE_TIMID,
+        .moves = {MOVE_HYDRO_PUMP, MOVE_ICE_BEAM, MOVE_U_TURN, MOVE_PROTECT},
+        .nature = NATURE_NAIVE,
         .abilitySlot = 2,
     },
     [SPECIES_GRENINJA] =
@@ -3951,26 +3951,26 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_BUNNELBY] =
     {
-        .moves = {MOVE_STRENGTH, MOVE_EARTHQUAKE, MOVE_QUICK_ATTACK, MOVE_STONE_EDGE},
+        .moves = {MOVE_EARTHQUAKE, MOVE_STRENGTH, MOVE_QUICK_ATTACK, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
     [SPECIES_DIGGERSBY] =
     {
-        .moves = {MOVE_FOUL_PLAY, MOVE_U_TURN, MOVE_HIGH_HORSEPOWER, MOVE_BODY_SLAM},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_BODY_SLAM, MOVE_HIGH_HORSEPOWER, MOVE_QUICK_ATTACK, MOVE_PROTECT},
+        .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
     [SPECIES_FLETCHLING] =
     {
-        .moves = {MOVE_ACROBATICS, MOVE_SWORDS_DANCE, MOVE_U_TURN, MOVE_SUBSTITUTE},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_TAILWIND, MOVE_DUAL_WINGBEAT, MOVE_WILL_O_WISP, MOVE_PROTECT},
+        .nature = NATURE_JOLLY,
         .abilitySlot = 2,
     },
     [SPECIES_FLETCHINDER] =
     {
-        .moves = {MOVE_FLAMETHROWER, MOVE_ROOST, MOVE_TAUNT, MOVE_WILL_O_WISP},
-        .nature = NATURE_TIMID,
+        .moves = {MOVE_TAILWIND, MOVE_DUAL_WINGBEAT, MOVE_WILL_O_WISP, MOVE_PROTECT},
+        .nature = NATURE_JOLLY,
         .abilitySlot = 2,
     },
     [SPECIES_TALONFLAME] =
@@ -3981,13 +3981,13 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_SCATTERBUG] =
     {
-        .moves = {MOVE_SKITTER_SMACK, MOVE_TACKLE, MOVE_RAGE_POWDER, MOVE_STUN_SPORE},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_RAGE_POWDER, MOVE_STUN_SPORE, MOVE_STRING_SHOT, MOVE_TACKLE},
+        .nature = NATURE_BOLD,
         .abilitySlot = 2,
     },
     [SPECIES_SPEWPA] =
     {
-        .moves = {MOVE_SKITTER_SMACK, MOVE_ELECTROWEB, MOVE_PROTECT, MOVE_RAGE_POWDER},
+        .moves = {MOVE_RAGE_POWDER, MOVE_ELECTROWEB, MOVE_STUN_SPORE, MOVE_PROTECT},
         .nature = NATURE_BOLD,
         .abilitySlot = 2,
     },
@@ -4005,92 +4005,92 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_PYROAR] =
     {
-        .moves = {MOVE_HEAT_WAVE, MOVE_HYPER_VOICE, MOVE_FIRE_BLAST, MOVE_PROTECT},
+        .moves = {MOVE_HEAT_WAVE, MOVE_HYPER_VOICE, MOVE_WILL_O_WISP, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 1,
     },
     [SPECIES_FLABEBE] =
     {
-        .moves = {MOVE_CALM_MIND, MOVE_PSYCHIC, MOVE_MOONBLAST, MOVE_SYNTHESIS},
-        .nature = NATURE_BOLD,
-        .abilitySlot = 0,
+        .moves = {MOVE_MOONBLAST, MOVE_HELPING_HAND, MOVE_WISH, MOVE_PROTECT},
+        .nature = NATURE_CALM,
+        .abilitySlot = 2,
     },
     [SPECIES_FLOETTE] =
     {
-        .moves = {MOVE_MOONBLAST, MOVE_ENERGY_BALL, MOVE_PSYCHIC, MOVE_PROTECT},
-        .nature = NATURE_MODEST,
-        .abilitySlot = 0,
+        .moves = {MOVE_MOONBLAST, MOVE_HELPING_HAND, MOVE_WISH, MOVE_PROTECT},
+        .nature = NATURE_CALM,
+        .abilitySlot = 2,
     },
     [SPECIES_FLORGES] =
     {
-        .moves = {MOVE_DAZZLING_GLEAM, MOVE_WISH, MOVE_PSYCHIC, MOVE_AROMATHERAPY},
-        .nature = NATURE_TIMID,
-        .abilitySlot = 1,
+        .moves = {MOVE_DAZZLING_GLEAM, MOVE_HELPING_HAND, MOVE_WISH, MOVE_PROTECT},
+        .nature = NATURE_CALM,
+        .abilitySlot = 2,
     },
     [SPECIES_SKIDDO] =
     {
-        .moves = {MOVE_BULK_UP, MOVE_HORN_LEECH, MOVE_ROCK_SLIDE, MOVE_ZEN_HEADBUTT},
+        .moves = {MOVE_BULK_UP, MOVE_HORN_LEECH, MOVE_HIGH_HORSEPOWER, MOVE_PROTECT},
         .nature = NATURE_CAREFUL,
         .abilitySlot = 0,
     },
     [SPECIES_GOGOAT] =
     {
-        .moves = {MOVE_BULK_UP, MOVE_HORN_LEECH, MOVE_SUBSTITUTE, MOVE_EARTHQUAKE},
+        .moves = {MOVE_BULK_UP, MOVE_HORN_LEECH, MOVE_HIGH_HORSEPOWER, MOVE_PROTECT},
         .nature = NATURE_CAREFUL,
-        .abilitySlot = 0,
+        .abilitySlot = 2,
     },
     [SPECIES_PANCHAM] =
     {
-        .moves = {MOVE_DRAIN_PUNCH, MOVE_KNOCK_OFF, MOVE_ZEN_HEADBUTT, MOVE_SWORDS_DANCE},
+        .moves = {MOVE_DRAIN_PUNCH, MOVE_KNOCK_OFF, MOVE_PARTING_SHOT, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
     [SPECIES_PANGORO] =
     {
-        .moves = {MOVE_GUNK_SHOT, MOVE_HAMMER_ARM, MOVE_KNOCK_OFF, MOVE_PARTING_SHOT},
+        .moves = {MOVE_DRAIN_PUNCH, MOVE_KNOCK_OFF, MOVE_PARTING_SHOT, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_FURFROU] =
     {
-        .moves = {MOVE_U_TURN, MOVE_TOXIC, MOVE_SUCKER_PUNCH, MOVE_GIGA_IMPACT},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_HELPING_HAND, MOVE_THUNDER_WAVE, MOVE_SNARL, MOVE_PROTECT},
+        .nature = NATURE_CAREFUL,
         .abilitySlot = 0,
     },
     [SPECIES_ESPURR] =
     {
-        .moves = {MOVE_THUNDERBOLT, MOVE_PSYCHIC, MOVE_SUBSTITUTE, MOVE_PROTECT},
-        .nature = NATURE_TIMID,
+        .moves = {MOVE_FAKE_OUT, MOVE_THUNDER_WAVE, MOVE_HELPING_HAND, MOVE_PSYCHIC},
+        .nature = NATURE_BOLD,
         .abilitySlot = 1,
     },
     [SPECIES_MEOWSTIC] =
     {
-        .moves = {MOVE_SAFEGUARD, MOVE_SWAGGER, MOVE_THUNDER_WAVE, MOVE_PSYCHIC},
+        .moves = {MOVE_FAKE_OUT, MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_PSYCHIC},
         .nature = NATURE_BOLD,
         .abilitySlot = 2,
     },
     [SPECIES_HONEDGE] =
     {
-        .moves = {MOVE_SHADOW_SNEAK, MOVE_IRON_HEAD, MOVE_SACRED_SWORD, MOVE_PURSUIT},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_GYRO_BALL, MOVE_SHADOW_SNEAK, MOVE_SACRED_SWORD, MOVE_PROTECT},
+        .nature = NATURE_BRAVE,
         .abilitySlot = 0,
     },
     [SPECIES_DOUBLADE] =
     {
-        .moves = {MOVE_GYRO_BALL, MOVE_TOXIC, MOVE_SLEEP_TALK, MOVE_REST},
-        .nature = NATURE_SASSY,
+        .moves = {MOVE_GYRO_BALL, MOVE_SHADOW_SNEAK, MOVE_SACRED_SWORD, MOVE_PROTECT},
+        .nature = NATURE_BRAVE,
         .abilitySlot = 0,
     },
     [SPECIES_AEGISLASH] =
     {
-        .moves = {MOVE_SHADOW_BALL, MOVE_FLASH_CANNON, MOVE_SUBSTITUTE, MOVE_KINGS_SHIELD},
-        .nature = NATURE_MODEST,
+        .moves = {MOVE_SHADOW_BALL, MOVE_FLASH_CANNON, MOVE_WIDE_GUARD, MOVE_KINGS_SHIELD},
+        .nature = NATURE_QUIET,
         .abilitySlot = 0,
     },
     [SPECIES_SPRITZEE] =
     {
-        .moves = {MOVE_NASTY_PLOT, MOVE_MOONBLAST, MOVE_PSYCHIC, MOVE_TRICK_ROOM},
-        .nature = NATURE_QUIET,
+        .moves = {MOVE_TRICK_ROOM, MOVE_MOONBLAST, MOVE_HELPING_HAND, MOVE_PROTECT},
+        .nature = NATURE_RELAXED,
         .abilitySlot = 2,
     },
     [SPECIES_AROMATISSE] =
@@ -4101,44 +4101,44 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_SWIRLIX] =
     {
-        .moves = {MOVE_CALM_MIND, MOVE_DRAINING_KISS, MOVE_FLAMETHROWER, MOVE_THUNDERBOLT},
-        .nature = NATURE_MODEST,
-        .abilitySlot = 2,
+        .moves = {MOVE_DAZZLING_GLEAM, MOVE_HELPING_HAND, MOVE_FAKE_TEARS, MOVE_PROTECT},
+        .nature = NATURE_BOLD,
+        .abilitySlot = 0,
     },
     [SPECIES_SLURPUFF] =
     {
-        .moves = {MOVE_PLAY_ROUGH, MOVE_DRAIN_PUNCH, MOVE_BELLY_DRUM, MOVE_HYPER_BEAM},
+        .moves = {MOVE_BELLY_DRUM, MOVE_PLAY_ROUGH, MOVE_DRAIN_PUNCH, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 2,
     },
     [SPECIES_INKAY] =
     {
-        .moves = {MOVE_SUPERPOWER, MOVE_KNOCK_OFF, MOVE_PSYCHO_CUT, MOVE_SWITCHEROO},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_SUPERPOWER, MOVE_KNOCK_OFF, MOVE_ROCK_SLIDE, MOVE_PROTECT},
+        .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_MALAMAR] =
     {
-        .moves = {MOVE_PSYCHO_CUT, MOVE_KNOCK_OFF, MOVE_ROCK_SLIDE, MOVE_SUPERPOWER},
+        .moves = {MOVE_SUPERPOWER, MOVE_KNOCK_OFF, MOVE_ROCK_SLIDE, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_BINACLE] =
     {
-        .moves = {MOVE_SHELL_SMASH, MOVE_LIQUIDATION, MOVE_STONE_EDGE, MOVE_CROSS_CHOP},
+        .moves = {MOVE_SHELL_SMASH, MOVE_LIQUIDATION, MOVE_ROCK_SLIDE, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_BARBARACLE] =
     {
-        .moves = {MOVE_PROTECT, MOVE_ROCK_SLIDE, MOVE_LIQUIDATION, MOVE_SHELL_SMASH},
+        .moves = {MOVE_SHELL_SMASH, MOVE_LIQUIDATION, MOVE_ROCK_SLIDE, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_SKRELP] =
     {
-        .moves = {MOVE_SLUDGE_WAVE, MOVE_HYDRO_PUMP, MOVE_TOXIC_SPIKES, MOVE_THUNDERBOLT},
-        .nature = NATURE_MODEST,
+        .moves = {MOVE_SLUDGE_BOMB, MOVE_HYDRO_PUMP, MOVE_ICY_WIND, MOVE_PROTECT},
+        .nature = NATURE_QUIET,
         .abilitySlot = 2,
     },
     [SPECIES_DRAGALGE] =
@@ -4149,139 +4149,139 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_CLAUNCHER] =
     {
-        .moves = {MOVE_SCALD, MOVE_AQUA_JET, MOVE_ICE_BEAM, MOVE_U_TURN},
-        .nature = NATURE_RELAXED,
+        .moves = {MOVE_WATER_PULSE, MOVE_ICE_BEAM, MOVE_ICY_WIND, MOVE_PROTECT},
+        .nature = NATURE_MODEST,
         .abilitySlot = 0,
     },
     [SPECIES_CLAWITZER] =
     {
-        .moves = {MOVE_ICE_BEAM, MOVE_U_TURN, MOVE_DARK_PULSE, MOVE_MUDDY_WATER},
+        .moves = {MOVE_MUDDY_WATER, MOVE_AURA_SPHERE, MOVE_DARK_PULSE, MOVE_PROTECT},
         .nature = NATURE_MODEST,
         .abilitySlot = 0,
     },
     [SPECIES_HELIOPTILE] =
     {
-        .moves = {MOVE_THUNDERBOLT, MOVE_SURF, MOVE_GLARE, MOVE_U_TURN},
+        .moves = {MOVE_THUNDERBOLT, MOVE_ELECTROWEB, MOVE_GLARE, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_HELIOLISK] =
     {
-        .moves = {MOVE_PROTECT, MOVE_VOLT_SWITCH, MOVE_GLARE, MOVE_HYPER_VOICE},
+        .moves = {MOVE_THUNDERBOLT, MOVE_HYPER_VOICE, MOVE_GLARE, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_TYRUNT] =
     {
-        .moves = {MOVE_DRAGON_DANCE, MOVE_ROCK_BLAST, MOVE_PSYCHIC_FANGS, MOVE_CLOSE_COMBAT},
-        .nature = NATURE_JOLLY,
-        .abilitySlot = 2,
-    },
-    [SPECIES_TYRANTRUM] =
-    {
-        .moves = {MOVE_ICE_FANG, MOVE_ROCK_SLIDE, MOVE_DRAGON_CLAW, MOVE_FIRE_FANG},
+        .moves = {MOVE_DRAGON_DANCE, MOVE_ROCK_SLIDE, MOVE_PSYCHIC_FANGS, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
+    [SPECIES_TYRANTRUM] =
+    {
+        .moves = {MOVE_DRAGON_DANCE, MOVE_HEAD_SMASH, MOVE_HIGH_HORSEPOWER, MOVE_PROTECT},
+        .nature = NATURE_JOLLY,
+        .abilitySlot = 2,
+    },
     [SPECIES_AMAURA] =
     {
-        .moves = {MOVE_AURORA_VEIL, MOVE_BLIZZARD, MOVE_THUNDERBOLT, MOVE_EARTH_POWER},
-        .nature = NATURE_TIMID,
+        .moves = {MOVE_AURORA_VEIL, MOVE_BLIZZARD, MOVE_FREEZE_DRY, MOVE_PROTECT},
+        .nature = NATURE_MODEST,
         .abilitySlot = 2,
     },
     [SPECIES_AURORUS] =
     {
-        .moves = {MOVE_BLIZZARD, MOVE_FLASH_CANNON, MOVE_FREEZE_DRY, MOVE_ANCIENT_POWER},
+        .moves = {MOVE_AURORA_VEIL, MOVE_BLIZZARD, MOVE_FREEZE_DRY, MOVE_PROTECT},
         .nature = NATURE_MODEST,
         .abilitySlot = 2,
     },
     [SPECIES_SYLVEON] =
     {
-        .moves = {MOVE_HYPER_VOICE, MOVE_CALM_MIND, MOVE_SUBSTITUTE, MOVE_DETECT},
+        .moves = {MOVE_HYPER_VOICE, MOVE_HELPING_HAND, MOVE_PSYSHOCK, MOVE_PROTECT},
         .nature = NATURE_MODEST,
         .abilitySlot = 2,
     },
     [SPECIES_HAWLUCHA] =
     {
-        .moves = {MOVE_CLOSE_COMBAT, MOVE_PROTECT, MOVE_THROAT_CHOP, MOVE_BRAVE_BIRD},
+        .moves = {MOVE_CLOSE_COMBAT, MOVE_BRAVE_BIRD, MOVE_SWORDS_DANCE, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
-        .abilitySlot = 2,
+        .abilitySlot = 1,
     },
     [SPECIES_DEDENNE] =
     {
-        .moves = {MOVE_SUPER_FANG, MOVE_NUZZLE, MOVE_DAZZLING_GLEAM, MOVE_THUNDERBOLT},
-        .nature = NATURE_CALM,
+        .moves = {MOVE_NUZZLE, MOVE_SUPER_FANG, MOVE_HELPING_HAND, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
         .abilitySlot = 2,
     },
     [SPECIES_CARBINK] =
     {
-        .moves = {MOVE_TRICK_ROOM, MOVE_STEALTH_ROCK, MOVE_EXPLOSION, MOVE_MAGIC_COAT},
+        .moves = {MOVE_TRICK_ROOM, MOVE_BODY_PRESS, MOVE_DAZZLING_GLEAM, MOVE_PROTECT},
         .nature = NATURE_RELAXED,
         .abilitySlot = 2,
     },
     [SPECIES_GOOMY] =
     {
-        .moves = {MOVE_DRAGON_PULSE, MOVE_SLUDGE_WAVE, MOVE_REST, MOVE_SLEEP_TALK},
-        .nature = NATURE_BOLD,
-        .abilitySlot = 0,
+        .moves = {MOVE_DRAGON_PULSE, MOVE_MUDDY_WATER, MOVE_SLUDGE_BOMB, MOVE_PROTECT},
+        .nature = NATURE_CALM,
+        .abilitySlot = 2,
     },
     [SPECIES_SLIGGOO] =
     {
-        .moves = {MOVE_DRACO_METEOR, MOVE_SLUDGE_BOMB, MOVE_MUDDY_WATER, MOVE_THUNDERBOLT},
+        .moves = {MOVE_DRACO_METEOR, MOVE_MUDDY_WATER, MOVE_SLUDGE_BOMB, MOVE_PROTECT},
         .nature = NATURE_MODEST,
         .abilitySlot = 0,
     },
     [SPECIES_GOODRA] =
     {
-        .moves = {MOVE_DRAGON_PULSE, MOVE_SLUDGE_BOMB, MOVE_THUNDERBOLT, MOVE_FLAMETHROWER},
+        .moves = {MOVE_DRAGON_PULSE, MOVE_SLUDGE_BOMB, MOVE_FLAMETHROWER, MOVE_PROTECT},
         .nature = NATURE_MODEST,
         .abilitySlot = 0,
     },
     [SPECIES_KLEFKI] =
     {
-        .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_THUNDER_WAVE, MOVE_PLAY_ROUGH},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_THUNDER_WAVE, MOVE_FOUL_PLAY},
+        .nature = NATURE_CAREFUL,
         .abilitySlot = 0,
     },
     [SPECIES_PHANTUMP] =
     {
-        .moves = {MOVE_FORESTS_CURSE, MOVE_SHADOW_CLAW, MOVE_HORN_LEECH, MOVE_ROCK_SLIDE},
-        .nature = NATURE_JOLLY,
-        .abilitySlot = 2,
+        .moves = {MOVE_TRICK_ROOM, MOVE_HORN_LEECH, MOVE_WILL_O_WISP, MOVE_PROTECT},
+        .nature = NATURE_BRAVE,
+        .abilitySlot = 0,
     },
     [SPECIES_TREVENANT] =
     {
-        .moves = {MOVE_TRICK_ROOM, MOVE_PROTECT, MOVE_WOOD_HAMMER, MOVE_POLTERGEIST},
-        .nature = NATURE_BRAVE,
-        .abilitySlot = 1,
+        .moves = {MOVE_GRASSY_GLIDE, MOVE_HORN_LEECH, MOVE_WILL_O_WISP, MOVE_PROTECT},
+        .nature = NATURE_ADAMANT,
+        .abilitySlot = 2,
     },
     [SPECIES_PUMPKABOO] =
     {
-        .moves = {MOVE_ENERGY_BALL, MOVE_SHADOW_BALL, MOVE_FIRE_BLAST, MOVE_PROTECT},
-        .nature = NATURE_MODEST,
-        .abilitySlot = 1,
+        .moves = {MOVE_TRICK_ROOM, MOVE_WILL_O_WISP, MOVE_SHADOW_BALL, MOVE_PROTECT},
+        .nature = NATURE_QUIET,
+        .abilitySlot = 2,
     },
     [SPECIES_GOURGEIST] =
     {
-        .moves = {MOVE_TRICK_OR_TREAT, MOVE_SEED_BOMB, MOVE_PHANTOM_FORCE, MOVE_SHADOW_SNEAK},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_SHADOW_BALL, MOVE_ENERGY_BALL, MOVE_WILL_O_WISP, MOVE_PROTECT},
+        .nature = NATURE_MODEST,
         .abilitySlot = 1,
     },
     [SPECIES_BERGMITE] =
     {
-        .moves = {MOVE_RAPID_SPIN, MOVE_RECOVER, MOVE_AVALANCHE, MOVE_TOXIC},
-        .nature = NATURE_IMPISH,
+        .moves = {MOVE_AVALANCHE, MOVE_ICY_WIND, MOVE_RECOVER, MOVE_PROTECT},
+        .nature = NATURE_RELAXED,
         .abilitySlot = 2,
     },
     [SPECIES_AVALUGG] =
     {
-        .moves = {MOVE_AVALANCHE, MOVE_PROTECT, MOVE_HIGH_HORSEPOWER, MOVE_RECOVER},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_BODY_PRESS, MOVE_AVALANCHE, MOVE_WIDE_GUARD, MOVE_RECOVER},
+        .nature = NATURE_IMPISH,
         .abilitySlot = 2,
     },
     [SPECIES_NOIBAT] =
     {
-        .moves = {MOVE_DRACO_METEOR, MOVE_HURRICANE, MOVE_HEAT_WAVE, MOVE_TAILWIND},
+        .moves = {MOVE_TAILWIND, MOVE_SUPER_FANG, MOVE_TAUNT, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 1,
     },
@@ -4289,7 +4289,7 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     {
         .moves = {MOVE_DRACO_METEOR, MOVE_TAILWIND, MOVE_SUPER_FANG, MOVE_PROTECT},
         .nature = NATURE_TIMID,
-        .abilitySlot = 0,
+        .abilitySlot = 1,
     },
     [SPECIES_XERNEAS] =
     {
@@ -4299,13 +4299,13 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_YVELTAL] =
     {
-        .moves = {MOVE_FOUL_PLAY, MOVE_SNARL, MOVE_TAILWIND, MOVE_SUCKER_PUNCH},
+        .moves = {MOVE_OBLIVION_WING, MOVE_SNARL, MOVE_FOUL_PLAY, MOVE_SUCKER_PUNCH},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_ZYGARDE] =
     {
-        .moves = {MOVE_DRAGON_DANCE, MOVE_SCALE_SHOT, MOVE_PROTECT, MOVE_LANDS_WRATH},
+        .moves = {MOVE_DRAGON_DANCE, MOVE_SCALE_SHOT, MOVE_LANDS_WRATH, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
@@ -4317,8 +4317,8 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_HOOPA] =
     {
-        .moves = {MOVE_FOCUS_BLAST, MOVE_HYPERSPACE_HOLE, MOVE_SHADOW_BALL, MOVE_TRICK},
-        .nature = NATURE_TIMID,
+        .moves = {MOVE_TRICK_ROOM, MOVE_HYPERSPACE_HOLE, MOVE_SHADOW_BALL, MOVE_PROTECT},
+        .nature = NATURE_QUIET,
         .abilitySlot = 0,
     },
     [SPECIES_VOLCANION] =
@@ -4329,8 +4329,8 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_ROWLET] =
     {
-        .moves = {MOVE_SWORDS_DANCE, MOVE_BRAVE_BIRD, MOVE_LEAF_BLADE, MOVE_SUCKER_PUNCH},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_BRAVE_BIRD, MOVE_LEAF_BLADE, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
+        .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
     [SPECIES_DARTRIX] =
@@ -4341,182 +4341,182 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_DECIDUEYE] =
     {
-        .moves = {MOVE_SPIRIT_SHACKLE, MOVE_LEAF_STORM, MOVE_TAILWIND, MOVE_BRAVE_BIRD},
+        .moves = {MOVE_SPIRIT_SHACKLE, MOVE_LEAF_BLADE, MOVE_TAILWIND, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
-        .abilitySlot = 0,
+        .abilitySlot = 2,
     },
     [SPECIES_LITTEN] =
     {
-        .moves = {MOVE_U_TURN, MOVE_FLARE_BLITZ, MOVE_WILL_O_WISP, MOVE_FAKE_OUT},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_FAKE_OUT, MOVE_FLARE_BLITZ, MOVE_PARTING_SHOT, MOVE_WILL_O_WISP},
+        .nature = NATURE_CAREFUL,
         .abilitySlot = 2,
     },
     [SPECIES_TORRACAT] =
     {
-        .moves = {MOVE_FLARE_BLITZ, MOVE_CRUNCH, MOVE_SWORDS_DANCE, MOVE_TAUNT},
+        .moves = {MOVE_FAKE_OUT, MOVE_FLARE_BLITZ, MOVE_PARTING_SHOT, MOVE_TAUNT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 2,
     },
     [SPECIES_INCINEROAR] =
     {
         .moves = {MOVE_FAKE_OUT, MOVE_FLARE_BLITZ, MOVE_KNOCK_OFF, MOVE_PARTING_SHOT},
-        .nature = NATURE_IMPISH,
+        .nature = NATURE_CAREFUL,
         .abilitySlot = 2,
     },
     [SPECIES_POPPLIO] =
     {
-        .moves = {MOVE_HYDRO_PUMP, MOVE_HYPER_VOICE, MOVE_MOONBLAST, MOVE_PROTECT},
+        .moves = {MOVE_HYPER_VOICE, MOVE_MOONBLAST, MOVE_ICY_WIND, MOVE_PROTECT},
         .nature = NATURE_MODEST,
-        .abilitySlot = 0,
+        .abilitySlot = 2,
     },
     [SPECIES_BRIONNE] =
     {
-        .moves = {MOVE_HYDRO_PUMP, MOVE_HYPER_VOICE, MOVE_MOONBLAST, MOVE_PROTECT},
+        .moves = {MOVE_HYPER_VOICE, MOVE_MOONBLAST, MOVE_ICY_WIND, MOVE_PROTECT},
         .nature = NATURE_MODEST,
-        .abilitySlot = 0,
+        .abilitySlot = 2,
     },
     [SPECIES_PRIMARINA] =
     {
-        .moves = {MOVE_HYPER_VOICE, MOVE_MOONBLAST, MOVE_ENERGY_BALL, MOVE_PROTECT},
+        .moves = {MOVE_HYPER_VOICE, MOVE_MOONBLAST, MOVE_ICY_WIND, MOVE_PROTECT},
         .nature = NATURE_MODEST,
         .abilitySlot = 2,
     },
     [SPECIES_PIKIPEK] =
     {
-        .moves = {MOVE_BRAVE_BIRD, MOVE_BULLET_SEED, MOVE_BRICK_BREAK, MOVE_FLAME_CHARGE},
+        .moves = {MOVE_BRAVE_BIRD, MOVE_BULLET_SEED, MOVE_ROCK_BLAST, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 1,
     },
     [SPECIES_TRUMBEAK] =
     {
-        .moves = {MOVE_FURY_ATTACK, MOVE_BRAVE_BIRD, MOVE_GUNK_SHOT, MOVE_PROTECT},
+        .moves = {MOVE_BRAVE_BIRD, MOVE_BULLET_SEED, MOVE_ROCK_BLAST, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 1,
     },
     [SPECIES_TOUCANNON] =
     {
-        .moves = {MOVE_KNOCK_OFF, MOVE_TAILWIND, MOVE_BRAVE_BIRD, MOVE_PROTECT},
+        .moves = {MOVE_BEAK_BLAST, MOVE_BULLET_SEED, MOVE_ROCK_BLAST, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
-        .abilitySlot = 0,
+        .abilitySlot = 1,
     },
     [SPECIES_YUNGOOS] =
     {
-        .moves = {MOVE_EARTHQUAKE, MOVE_U_TURN, MOVE_PURSUIT, MOVE_BODY_SLAM},
+        .moves = {MOVE_SUPER_FANG, MOVE_CRUNCH, MOVE_U_TURN, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
-        .abilitySlot = 2,
+        .abilitySlot = 0,
     },
     [SPECIES_GUMSHOOS] =
     {
-        .moves = {MOVE_EARTHQUAKE, MOVE_U_TURN, MOVE_CRUNCH, MOVE_BODY_SLAM},
+        .moves = {MOVE_BODY_SLAM, MOVE_CRUNCH, MOVE_STOMPING_TANTRUM, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
     [SPECIES_GRUBBIN] =
     {
-        .moves = {MOVE_ELECTROWEB, MOVE_VOLT_SWITCH, MOVE_X_SCISSOR, MOVE_ACROBATICS},
+        .moves = {MOVE_ELECTROWEB, MOVE_VOLT_SWITCH, MOVE_X_SCISSOR, MOVE_PROTECT},
         .nature = NATURE_RELAXED,
         .abilitySlot = 0,
     },
     [SPECIES_CHARJABUG] =
     {
-        .moves = {MOVE_STICKY_WEB, MOVE_THUNDER_WAVE, MOVE_SKITTER_SMACK, MOVE_VOLT_SWITCH},
-        .nature = NATURE_IMPISH,
+        .moves = {MOVE_ELECTROWEB, MOVE_THUNDER_WAVE, MOVE_VOLT_SWITCH, MOVE_PROTECT},
+        .nature = NATURE_BOLD,
         .abilitySlot = 0,
     },
     [SPECIES_VIKAVOLT] =
     {
-        .moves = {MOVE_THUNDERBOLT, MOVE_BUG_BUZZ, MOVE_STRING_SHOT, MOVE_PROTECT},
+        .moves = {MOVE_THUNDERBOLT, MOVE_BUG_BUZZ, MOVE_ELECTROWEB, MOVE_PROTECT},
         .nature = NATURE_MODEST,
         .abilitySlot = 0,
     },
     [SPECIES_CRABRAWLER] =
     {
-        .moves = {MOVE_DRAIN_PUNCH, MOVE_ICE_PUNCH, MOVE_THUNDER_PUNCH, MOVE_BULK_UP},
+        .moves = {MOVE_DRAIN_PUNCH, MOVE_ICE_PUNCH, MOVE_MACH_PUNCH, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 1,
     },
     [SPECIES_CRABOMINABLE] =
     {
-        .moves = {MOVE_PROTECT, MOVE_ICE_HAMMER, MOVE_MACH_PUNCH, MOVE_DRAIN_PUNCH},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_ICE_HAMMER, MOVE_DRAIN_PUNCH, MOVE_MACH_PUNCH, MOVE_PROTECT},
+        .nature = NATURE_BRAVE,
         .abilitySlot = 1,
     },
     [SPECIES_ORICORIO] =
     {
-        .moves = {MOVE_HURRICANE, MOVE_PROTECT, MOVE_REVELATION_DANCE, MOVE_TAILWIND},
+        .moves = {MOVE_REVELATION_DANCE, MOVE_AIR_SLASH, MOVE_TAILWIND, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_CUTIEFLY] =
     {
-        .moves = {MOVE_STICKY_WEB, MOVE_STUN_SPORE, MOVE_U_TURN, MOVE_MOONBLAST},
+        .moves = {MOVE_TAILWIND, MOVE_MOONBLAST, MOVE_STUN_SPORE, MOVE_PROTECT},
         .nature = NATURE_TIMID,
-        .abilitySlot = 1,
+        .abilitySlot = 2,
     },
     [SPECIES_RIBOMBEE] =
     {
-        .moves = {MOVE_STICKY_WEB, MOVE_MOONBLAST, MOVE_STUN_SPORE, MOVE_TAILWIND},
+        .moves = {MOVE_POLLEN_PUFF, MOVE_MOONBLAST, MOVE_TAILWIND, MOVE_PROTECT},
         .nature = NATURE_TIMID,
-        .abilitySlot = 1,
+        .abilitySlot = 2,
     },
     [SPECIES_ROCKRUFF] =
     {
-        .moves = {MOVE_STONE_EDGE, MOVE_STOMPING_TANTRUM, MOVE_ZEN_HEADBUTT, MOVE_SUCKER_PUNCH},
+        .moves = {MOVE_ROCK_SLIDE, MOVE_PSYCHIC_FANGS, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 1,
     },
     [SPECIES_LYCANROC] =
     {
-        .moves = {MOVE_STEALTH_ROCK, MOVE_TAUNT, MOVE_ENDEAVOR, MOVE_ACCELEROCK},
+        .moves = {MOVE_ROCK_SLIDE, MOVE_DRILL_RUN, MOVE_CLOSE_COMBAT, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
-        .abilitySlot = 2,
+        .abilitySlot = 1,
     },
     [SPECIES_WISHIWASHI] =
     {
-        .moves = {MOVE_HELPING_HAND, MOVE_HYDRO_PUMP, MOVE_ICE_BEAM, MOVE_PROTECT},
+        .moves = {MOVE_MUDDY_WATER, MOVE_ICE_BEAM, MOVE_HELPING_HAND, MOVE_PROTECT},
         .nature = NATURE_MODEST,
         .abilitySlot = 0,
     },
     [SPECIES_MAREANIE] =
     {
-        .moves = {MOVE_ICE_BEAM, MOVE_MUD_SHOT, MOVE_SLUDGE_BOMB, MOVE_RECOVER},
+        .moves = {MOVE_SCALD, MOVE_ICY_WIND, MOVE_HAZE, MOVE_RECOVER},
         .nature = NATURE_BOLD,
         .abilitySlot = 2,
     },
     [SPECIES_TOXAPEX] =
     {
-        .moves = {MOVE_BANEFUL_BUNKER, MOVE_INFESTATION, MOVE_TOXIC, MOVE_WIDE_GUARD},
-        .nature = NATURE_MODEST,
+        .moves = {MOVE_SCALD, MOVE_HAZE, MOVE_RECOVER, MOVE_WIDE_GUARD},
+        .nature = NATURE_BOLD,
         .abilitySlot = 2,
     },
     [SPECIES_MUDBRAY] =
     {
-        .moves = {MOVE_STEALTH_ROCK, MOVE_EARTHQUAKE, MOVE_CLOSE_COMBAT, MOVE_HEAVY_SLAM},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_HIGH_HORSEPOWER, MOVE_ROCK_SLIDE, MOVE_HEAVY_SLAM, MOVE_PROTECT},
+        .nature = NATURE_BRAVE,
         .abilitySlot = 1,
     },
     [SPECIES_MUDSDALE] =
     {
-        .moves = {MOVE_HIGH_HORSEPOWER, MOVE_STEALTH_ROCK, MOVE_BODY_PRESS, MOVE_GIGA_IMPACT},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_HIGH_HORSEPOWER, MOVE_ROCK_SLIDE, MOVE_BODY_PRESS, MOVE_PROTECT},
+        .nature = NATURE_BRAVE,
         .abilitySlot = 1,
     },
     [SPECIES_DEWPIDER] =
     {
-        .moves = {MOVE_LIQUIDATION, MOVE_LEECH_LIFE, MOVE_PROTECT, MOVE_STICKY_WEB},
+        .moves = {MOVE_LIQUIDATION, MOVE_LEECH_LIFE, MOVE_ICY_WIND, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
-        .abilitySlot = 2,
+        .abilitySlot = 0,
     },
     [SPECIES_ARAQUANID] =
     {
-        .moves = {MOVE_LIQUIDATION, MOVE_BUG_BITE, MOVE_STICKY_WEB, MOVE_PROTECT},
+        .moves = {MOVE_LIQUIDATION, MOVE_LUNGE, MOVE_WIDE_GUARD, MOVE_PROTECT},
         .nature = NATURE_BRAVE,
-        .abilitySlot = 2,
+        .abilitySlot = 0,
     },
     [SPECIES_FOMANTIS] =
     {
-        .moves = {MOVE_LEAF_STORM, MOVE_DEFOG, MOVE_SYNTHESIS, MOVE_SUCKER_PUNCH},
-        .nature = NATURE_BOLD,
+        .moves = {MOVE_LEAF_STORM, MOVE_AROMATHERAPY, MOVE_SYNTHESIS, MOVE_PROTECT},
+        .nature = NATURE_MODEST,
         .abilitySlot = 2,
     },
     [SPECIES_LURANTIS] =
@@ -4527,62 +4527,62 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_MORELULL] =
     {
-        .moves = {MOVE_SPORE, MOVE_GIGA_DRAIN, MOVE_MOONBLAST, MOVE_SYNTHESIS},
+        .moves = {MOVE_SPORE, MOVE_STRENGTH_SAP, MOVE_MOONBLAST, MOVE_PROTECT},
         .nature = NATURE_BOLD,
         .abilitySlot = 1,
     },
     [SPECIES_SHIINOTIC] =
     {
-        .moves = {MOVE_STRENGTH_SAP, MOVE_SPORE, MOVE_MOONBLAST, MOVE_TOXIC},
+        .moves = {MOVE_SPORE, MOVE_STRENGTH_SAP, MOVE_MOONBLAST, MOVE_PROTECT},
         .nature = NATURE_BOLD,
         .abilitySlot = 1,
     },
     [SPECIES_SALANDIT] =
     {
-        .moves = {MOVE_FIRE_BLAST, MOVE_SLUDGE_WAVE, MOVE_PROTECT, MOVE_DRAGON_PULSE},
+        .moves = {MOVE_FAKE_OUT, MOVE_HEAT_WAVE, MOVE_SLUDGE_BOMB, MOVE_PROTECT},
         .nature = NATURE_TIMID,
-        .abilitySlot = 0,
+        .abilitySlot = 2,
     },
     [SPECIES_SALAZZLE] =
     {
-        .moves = {MOVE_FAKE_OUT, MOVE_FLAMETHROWER, MOVE_SLUDGE_BOMB, MOVE_PROTECT},
+        .moves = {MOVE_FAKE_OUT, MOVE_HEAT_WAVE, MOVE_SLUDGE_BOMB, MOVE_ENCORE},
         .nature = NATURE_TIMID,
         .abilitySlot = 2,
     },
     [SPECIES_STUFFUL] =
     {
-        .moves = {MOVE_SWORDS_DANCE, MOVE_BRICK_BREAK, MOVE_ICE_PUNCH, MOVE_MEGA_KICK},
+        .moves = {MOVE_BRICK_BREAK, MOVE_ICE_PUNCH, MOVE_WIDE_GUARD, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_BEWEAR] =
     {
-        .moves = {MOVE_ICE_PUNCH, MOVE_DRAIN_PUNCH, MOVE_PROTECT, MOVE_GIGA_IMPACT},
+        .moves = {MOVE_DRAIN_PUNCH, MOVE_ICE_PUNCH, MOVE_HIGH_HORSEPOWER, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_BOUNSWEET] =
     {
-        .moves = {MOVE_RAPID_SPIN, MOVE_SEED_BOMB, MOVE_SYNTHESIS, MOVE_PLAY_ROUGH},
-        .nature = NATURE_IMPISH,
-        .abilitySlot = 1,
+        .moves = {MOVE_HELPING_HAND, MOVE_CHARM, MOVE_GIGA_DRAIN, MOVE_PROTECT},
+        .nature = NATURE_BOLD,
+        .abilitySlot = 2,
     },
     [SPECIES_STEENEE] =
     {
-        .moves = {MOVE_LEAF_STORM, MOVE_DAZZLING_GLEAM, MOVE_PROTECT, MOVE_HELPING_HAND},
-        .nature = NATURE_MODEST,
-        .abilitySlot = 0,
+        .moves = {MOVE_SEED_BOMB, MOVE_HELPING_HAND, MOVE_LIGHT_SCREEN, MOVE_PROTECT},
+        .nature = NATURE_CAREFUL,
+        .abilitySlot = 2,
     },
     [SPECIES_TSAREENA] =
     {
-        .moves = {MOVE_POWER_WHIP, MOVE_U_TURN, MOVE_TRIPLE_AXEL, MOVE_HIGH_JUMP_KICK},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_POWER_WHIP, MOVE_HIGH_JUMP_KICK, MOVE_TRIPLE_AXEL, MOVE_PROTECT},
+        .nature = NATURE_JOLLY,
         .abilitySlot = 1,
     },
     [SPECIES_COMFEY] =
     {
-        .moves = {MOVE_CALM_MIND, MOVE_DRAINING_KISS, MOVE_STORED_POWER, MOVE_SYNTHESIS},
-        .nature = NATURE_MODEST,
+        .moves = {MOVE_FLORAL_HEALING, MOVE_DRAINING_KISS, MOVE_HELPING_HAND, MOVE_TRICK_ROOM},
+        .nature = NATURE_BOLD,
         .abilitySlot = 1,
     },
     [SPECIES_ORANGURU] =
@@ -4593,79 +4593,79 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_PASSIMIAN] =
     {
-        .moves = {MOVE_KNOCK_OFF, MOVE_U_TURN, MOVE_CLOSE_COMBAT, MOVE_GUNK_SHOT},
+        .moves = {MOVE_CLOSE_COMBAT, MOVE_KNOCK_OFF, MOVE_U_TURN, MOVE_ROCK_SLIDE},
         .nature = NATURE_JOLLY,
         .abilitySlot = 2,
     },
     [SPECIES_WIMPOD] =
     {
-        .moves = {MOVE_SPIKES, MOVE_TAUNT, MOVE_SCALD, MOVE_AQUA_JET},
-        .nature = NATURE_NAIVE,
+        .moves = {MOVE_AQUA_JET, MOVE_STRUGGLE_BUG, MOVE_TAUNT, MOVE_PROTECT},
+        .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_GOLISOPOD] =
     {
-        .moves = {MOVE_FIRST_IMPRESSION, MOVE_LIQUIDATION, MOVE_KNOCK_OFF, MOVE_SPIKES},
+        .moves = {MOVE_FIRST_IMPRESSION, MOVE_LIQUIDATION, MOVE_KNOCK_OFF, MOVE_WIDE_GUARD},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_SANDYGAST] =
     {
-        .moves = {MOVE_STEALTH_ROCK, MOVE_SCORCHING_SANDS, MOVE_SHADOW_BALL, MOVE_SHORE_UP},
+        .moves = {MOVE_SCORCHING_SANDS, MOVE_SHADOW_BALL, MOVE_SHORE_UP, MOVE_PROTECT},
         .nature = NATURE_BOLD,
         .abilitySlot = 0,
     },
     [SPECIES_PALOSSAND] =
     {
-        .moves = {MOVE_PROTECT, MOVE_EARTH_POWER, MOVE_SHADOW_BALL, MOVE_SHORE_UP},
-        .nature = NATURE_MODEST,
-        .abilitySlot = 0,
+        .moves = {MOVE_EARTH_POWER, MOVE_SHADOW_BALL, MOVE_SHORE_UP, MOVE_PROTECT},
+        .nature = NATURE_BOLD,
+        .abilitySlot = 1,
     },
     [SPECIES_PYUKUMUKU] =
     {
-        .moves = {MOVE_BLOCK, MOVE_RECOVER, MOVE_SPITE, MOVE_REST},
+        .moves = {MOVE_HELPING_HAND, MOVE_SOAK, MOVE_RECOVER, MOVE_PROTECT},
         .nature = NATURE_BOLD,
         .abilitySlot = 2,
     },
     [SPECIES_TYPE_NULL] =
     {
-        .moves = {MOVE_U_TURN, MOVE_TOXIC, MOVE_REST, MOVE_SLEEP_TALK},
-        .nature = NATURE_SASSY,
+        .moves = {MOVE_ICY_WIND, MOVE_THUNDER_WAVE, MOVE_U_TURN, MOVE_PROTECT},
+        .nature = NATURE_CAREFUL,
         .abilitySlot = 0,
     },
     [SPECIES_SILVALLY] =
     {
-        .moves = {MOVE_SWORDS_DANCE, MOVE_DOUBLE_EDGE, MOVE_PARTING_SHOT, MOVE_SHADOW_CLAW},
+        .moves = {MOVE_MULTI_ATTACK, MOVE_TAILWIND, MOVE_PARTING_SHOT, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_MINIOR] =
     {
-        .moves = {MOVE_SHELL_SMASH, MOVE_ACROBATICS, MOVE_EARTHQUAKE, MOVE_STONE_EDGE},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_SHELL_SMASH, MOVE_ROCK_SLIDE, MOVE_ACROBATICS, MOVE_PROTECT},
+        .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_KOMALA] =
     {
-        .moves = {MOVE_SWORDS_DANCE, MOVE_PROTECT, MOVE_SHADOW_CLAW, MOVE_BODY_SLAM},
+        .moves = {MOVE_SWORDS_DANCE, MOVE_BODY_SLAM, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_TURTONATOR] =
     {
-        .moves = {MOVE_SHELL_SMASH, MOVE_FIRE_BLAST, MOVE_DRACO_METEOR, MOVE_FLASH_CANNON},
+        .moves = {MOVE_SHELL_SMASH, MOVE_HEAT_WAVE, MOVE_DRAGON_PULSE, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_TOGEDEMARU] =
     {
-        .moves = {MOVE_FAKE_OUT, MOVE_ENDEAVOR, MOVE_ENCORE, MOVE_SPIKY_SHIELD},
-        .nature = NATURE_BRAVE,
+        .moves = {MOVE_FAKE_OUT, MOVE_NUZZLE, MOVE_ENDEAVOR, MOVE_SPIKY_SHIELD},
+        .nature = NATURE_JOLLY,
         .abilitySlot = 2,
     },
     [SPECIES_MIMIKYU] =
     {
-        .moves = {MOVE_SHADOW_SNEAK, MOVE_TRICK_ROOM, MOVE_WILL_O_WISP, MOVE_PLAY_ROUGH},
+        .moves = {MOVE_PLAY_ROUGH, MOVE_SHADOW_SNEAK, MOVE_WILL_O_WISP, MOVE_TRICK_ROOM},
         .nature = NATURE_IMPISH,
         .abilitySlot = 0,
     },
@@ -4677,7 +4677,7 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_DRAMPA] =
     {
-        .moves = {MOVE_GLARE, MOVE_ROOST, MOVE_DRACO_METEOR, MOVE_HYPER_VOICE},
+        .moves = {MOVE_HYPER_VOICE, MOVE_DRACO_METEOR, MOVE_GLARE, MOVE_PROTECT},
         .nature = NATURE_MODEST,
         .abilitySlot = 0,
     },
@@ -4689,26 +4689,26 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_JANGMO_O] =
     {
-        .moves = {MOVE_DRAGON_DANCE, MOVE_SUBSTITUTE, MOVE_OUTRAGE, MOVE_EARTHQUAKE},
-        .nature = NATURE_ADAMANT,
-        .abilitySlot = 0,
+        .moves = {MOVE_DRAGON_CLAW, MOVE_ROCK_SLIDE, MOVE_NOBLE_ROAR, MOVE_PROTECT},
+        .nature = NATURE_CAREFUL,
+        .abilitySlot = 2,
     },
     [SPECIES_HAKAMO_O] =
     {
-        .moves = {MOVE_SWORDS_DANCE, MOVE_SCALE_SHOT, MOVE_DRAIN_PUNCH, MOVE_SUBSTITUTE},
-        .nature = NATURE_JOLLY,
-        .abilitySlot = 0,
+        .moves = {MOVE_DRAIN_PUNCH, MOVE_DRAGON_CLAW, MOVE_COACHING, MOVE_PROTECT},
+        .nature = NATURE_CAREFUL,
+        .abilitySlot = 2,
     },
     [SPECIES_KOMMO_O] =
     {
         .moves = {MOVE_IRON_DEFENSE, MOVE_BODY_PRESS, MOVE_FLAMETHROWER, MOVE_PROTECT},
         .nature = NATURE_BOLD,
-        .abilitySlot = 0,
+        .abilitySlot = 2,
     },
     [SPECIES_TAPU_KOKO] =
     {
-        .moves = {MOVE_WILD_CHARGE, MOVE_BRAVE_BIRD, MOVE_IRON_HEAD, MOVE_U_TURN},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_THUNDERBOLT, MOVE_DAZZLING_GLEAM, MOVE_ELECTROWEB, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_TAPU_LELE] =
@@ -4719,49 +4719,49 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_TAPU_BULU] =
     {
-        .moves = {MOVE_WOOD_HAMMER, MOVE_SUPERPOWER, MOVE_SWORDS_DANCE, MOVE_PROTECT},
+        .moves = {MOVE_WOOD_HAMMER, MOVE_CLOSE_COMBAT, MOVE_ROCK_SLIDE, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_TAPU_FINI] =
     {
-        .moves = {MOVE_MUDDY_WATER, MOVE_DAZZLING_GLEAM, MOVE_MOONBLAST, MOVE_HYDRO_PUMP},
+        .moves = {MOVE_MUDDY_WATER, MOVE_MOONBLAST, MOVE_ICY_WIND, MOVE_PROTECT},
         .nature = NATURE_MODEST,
         .abilitySlot = 0,
     },
     [SPECIES_COSMOG] =
     {
         .moves = {MOVE_TELEPORT, MOVE_DOUBLE_EDGE, MOVE_MIMIC, MOVE_SPLASH},
-        .nature = NATURE_ADAMANT,
+        .nature = NATURE_RELAXED,
         .abilitySlot = 0,
     },
     [SPECIES_COSMOEM] =
     {
         .moves = {MOVE_COSMIC_POWER, MOVE_TELEPORT, MOVE_DOUBLE_EDGE, MOVE_MIMIC},
-        .nature = NATURE_ADAMANT,
+        .nature = NATURE_RELAXED,
         .abilitySlot = 0,
     },
     [SPECIES_SOLGALEO] =
     {
-        .moves = {MOVE_SUNSTEEL_STRIKE, MOVE_SUPERPOWER, MOVE_TRICK_ROOM, MOVE_PROTECT},
+        .moves = {MOVE_SUNSTEEL_STRIKE, MOVE_CLOSE_COMBAT, MOVE_KNOCK_OFF, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_LUNALA] =
     {
-        .moves = {MOVE_MOONGEIST_BEAM, MOVE_METEOR_BEAM, MOVE_TRICK_ROOM, MOVE_PROTECT},
+        .moves = {MOVE_MOONGEIST_BEAM, MOVE_MOONBLAST, MOVE_TRICK_ROOM, MOVE_WIDE_GUARD},
         .nature = NATURE_MODEST,
         .abilitySlot = 0,
     },
     [SPECIES_NIHILEGO] =
     {
-        .moves = {MOVE_SLUDGE_BOMB, MOVE_POWER_GEM, MOVE_STEALTH_ROCK, MOVE_PROTECT},
+        .moves = {MOVE_SLUDGE_BOMB, MOVE_POWER_GEM, MOVE_GRASS_KNOT, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_BUZZWOLE] =
     {
-        .moves = {MOVE_SUPERPOWER, MOVE_POISON_JAB, MOVE_ICE_PUNCH, MOVE_PROTECT},
+        .moves = {MOVE_CLOSE_COMBAT, MOVE_LUNGE, MOVE_ICE_PUNCH, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
@@ -4773,14 +4773,14 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_XURKITREE] =
     {
-        .moves = {MOVE_THUNDERBOLT, MOVE_ENERGY_BALL, MOVE_PROTECT, MOVE_HYPER_BEAM},
+        .moves = {MOVE_TAIL_GLOW, MOVE_THUNDERBOLT, MOVE_ENERGY_BALL, MOVE_PROTECT},
         .nature = NATURE_MODEST,
         .abilitySlot = 0,
     },
     [SPECIES_CELESTEELA] =
     {
-        .moves = {MOVE_HEAVY_SLAM, MOVE_SUBSTITUTE, MOVE_LEECH_SEED, MOVE_PROTECT},
-        .nature = NATURE_IMPISH,
+        .moves = {MOVE_HEAVY_SLAM, MOVE_FLAMETHROWER, MOVE_LEECH_SEED, MOVE_PROTECT},
+        .nature = NATURE_SASSY,
         .abilitySlot = 0,
     },
     [SPECIES_KARTANA] =
@@ -4791,20 +4791,20 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_GUZZLORD] =
     {
-        .moves = {MOVE_PROTECT, MOVE_KNOCK_OFF, MOVE_DRACO_METEOR, MOVE_FIRE_BLAST},
-        .nature = NATURE_MODEST,
+        .moves = {MOVE_KNOCK_OFF, MOVE_DRACO_METEOR, MOVE_HEAT_WAVE, MOVE_PROTECT},
+        .nature = NATURE_QUIET,
         .abilitySlot = 0,
     },
     [SPECIES_NECROZMA] =
     {
-        .moves = {MOVE_EXPANDING_FORCE, MOVE_METEOR_BEAM, MOVE_EARTH_POWER, MOVE_PROTECT},
+        .moves = {MOVE_PSYCHIC, MOVE_EARTH_POWER, MOVE_CALM_MIND, MOVE_PROTECT},
         .nature = NATURE_MODEST,
         .abilitySlot = 0,
     },
     [SPECIES_MAGEARNA] =
     {
-        .moves = {MOVE_FLEUR_CANNON, MOVE_FLASH_CANNON, MOVE_TRICK_ROOM, MOVE_DAZZLING_GLEAM},
-        .nature = NATURE_MODEST,
+        .moves = {MOVE_FLEUR_CANNON, MOVE_FLASH_CANNON, MOVE_TRICK_ROOM, MOVE_PROTECT},
+        .nature = NATURE_QUIET,
         .abilitySlot = 0,
     },
     [SPECIES_MARSHADOW] =
@@ -4815,38 +4815,38 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_POIPOLE] =
     {
-        .moves = {MOVE_GUNK_SHOT, MOVE_BUG_BUZZ, MOVE_DRAGON_PULSE, MOVE_PROTECT},
+        .moves = {MOVE_SLUDGE_BOMB, MOVE_DRAGON_PULSE, MOVE_HELPING_HAND, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_NAGANADEL] =
     {
-        .moves = {MOVE_DRACO_METEOR, MOVE_SLUDGE_BOMB, MOVE_FIRE_BLAST, MOVE_TAILWIND},
+        .moves = {MOVE_DRACO_METEOR, MOVE_SLUDGE_BOMB, MOVE_HEAT_WAVE, MOVE_TAILWIND},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_STAKATAKA] =
     {
-        .moves = {MOVE_GYRO_BALL, MOVE_STONE_EDGE, MOVE_TRICK_ROOM, MOVE_PROTECT},
-        .nature = NATURE_LONELY,
+        .moves = {MOVE_GYRO_BALL, MOVE_ROCK_SLIDE, MOVE_TRICK_ROOM, MOVE_WIDE_GUARD},
+        .nature = NATURE_SASSY,
         .abilitySlot = 0,
     },
     [SPECIES_BLACEPHALON] =
     {
-        .moves = {MOVE_HEAT_WAVE, MOVE_SHADOW_BALL, MOVE_SUBSTITUTE, MOVE_PROTECT},
+        .moves = {MOVE_HEAT_WAVE, MOVE_SHADOW_BALL, MOVE_WILL_O_WISP, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_ZERAORA] =
     {
-        .moves = {MOVE_FAKE_OUT, MOVE_VOLT_SWITCH, MOVE_SNARL, MOVE_CLOSE_COMBAT},
+        .moves = {MOVE_FAKE_OUT, MOVE_ELECTROWEB, MOVE_CLOSE_COMBAT, MOVE_VOLT_SWITCH},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_MELTAN] =
     {
-        .moves = {MOVE_ACID_ARMOR, MOVE_REST, MOVE_FLASH_CANNON, MOVE_THUNDERBOLT},
-        .nature = NATURE_BOLD,
+        .moves = {MOVE_GYRO_BALL, MOVE_THUNDER_WAVE, MOVE_ACID_ARMOR, MOVE_PROTECT},
+        .nature = NATURE_RELAXED,
         .abilitySlot = 0,
     },
     [SPECIES_MELMETAL] =
@@ -4857,13 +4857,13 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_GROOKEY] =
     {
-        .moves = {MOVE_WOOD_HAMMER, MOVE_GRASSY_GLIDE, MOVE_KNOCK_OFF, MOVE_U_TURN},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_GRASSY_GLIDE, MOVE_KNOCK_OFF, MOVE_U_TURN, MOVE_PROTECT},
+        .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
     [SPECIES_THWACKEY] =
     {
-        .moves = {MOVE_GRASSY_GLIDE, MOVE_KNOCK_OFF, MOVE_U_TURN, MOVE_WOOD_HAMMER},
+        .moves = {MOVE_GRASSY_GLIDE, MOVE_KNOCK_OFF, MOVE_U_TURN, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
@@ -4875,13 +4875,13 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_SCORBUNNY] =
     {
-        .moves = {MOVE_BLAZE_KICK, MOVE_GUNK_SHOT, MOVE_U_TURN, MOVE_HIGH_JUMP_KICK},
+        .moves = {MOVE_BLAZE_KICK, MOVE_HIGH_JUMP_KICK, MOVE_U_TURN, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 2,
     },
     [SPECIES_RABOOT] =
     {
-        .moves = {MOVE_FLARE_BLITZ, MOVE_HIGH_JUMP_KICK, MOVE_U_TURN, MOVE_SUCKER_PUNCH},
+        .moves = {MOVE_FLARE_BLITZ, MOVE_HIGH_JUMP_KICK, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 2,
     },
@@ -4893,253 +4893,253 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_SOBBLE] =
     {
-        .moves = {MOVE_WATER_PLEDGE, MOVE_SWIFT, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
+        .moves = {MOVE_FOCUS_ENERGY, MOVE_WATER_PLEDGE, MOVE_WATER_PULSE, MOVE_PROTECT},
         .nature = NATURE_TIMID,
-        .abilitySlot = 0,
+        .abilitySlot = 2,
     },
     [SPECIES_DRIZZILE] =
     {
-        .moves = {MOVE_WATER_PLEDGE, MOVE_SWIFT, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
+        .moves = {MOVE_FOCUS_ENERGY, MOVE_WATER_PLEDGE, MOVE_WATER_PULSE, MOVE_PROTECT},
         .nature = NATURE_TIMID,
-        .abilitySlot = 0,
+        .abilitySlot = 2,
     },
     [SPECIES_INTELEON] =
     {
-        .moves = {MOVE_SCALD, MOVE_HYDRO_PUMP, MOVE_ICE_BEAM, MOVE_PROTECT},
+        .moves = {MOVE_FOCUS_ENERGY, MOVE_SNIPE_SHOT, MOVE_ICE_BEAM, MOVE_PROTECT},
         .nature = NATURE_TIMID,
-        .abilitySlot = 0,
+        .abilitySlot = 2,
     },
     [SPECIES_SKWOVET] =
     {
-        .moves = {MOVE_BODY_SLAM, MOVE_SEED_BOMB, MOVE_PROTECT, MOVE_BELLY_DRUM},
+        .moves = {MOVE_BELLY_DRUM, MOVE_BODY_SLAM, MOVE_SEED_BOMB, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_GREEDENT] =
     {
-        .moves = {MOVE_GYRO_BALL, MOVE_SWORDS_DANCE, MOVE_BODY_SLAM, MOVE_STOMPING_TANTRUM},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_BELLY_DRUM, MOVE_BODY_SLAM, MOVE_STOMPING_TANTRUM, MOVE_PROTECT},
+        .nature = NATURE_BRAVE,
         .abilitySlot = 0,
     },
     [SPECIES_ROOKIDEE] =
     {
-        .moves = {MOVE_BRAVE_BIRD, MOVE_SECRET_POWER, MOVE_PROTECT, MOVE_TAILWIND},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_BRAVE_BIRD, MOVE_U_TURN, MOVE_TAILWIND, MOVE_PROTECT},
+        .nature = NATURE_JOLLY,
         .abilitySlot = 1,
     },
     [SPECIES_CORVISQUIRE] =
     {
-        .moves = {MOVE_BRAVE_BIRD, MOVE_SECRET_POWER, MOVE_U_TURN, MOVE_PROTECT},
+        .moves = {MOVE_BRAVE_BIRD, MOVE_U_TURN, MOVE_TAILWIND, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 1,
     },
     [SPECIES_CORVIKNIGHT] =
     {
-        .moves = {MOVE_PROTECT, MOVE_BRAVE_BIRD, MOVE_ROOST, MOVE_TAILWIND},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_BRAVE_BIRD, MOVE_TAILWIND, MOVE_ROOST, MOVE_PROTECT},
+        .nature = NATURE_CAREFUL,
         .abilitySlot = 2,
     },
     [SPECIES_BLIPBUG] =
     {
-        .moves = {MOVE_STRUGGLE_BUG, MOVE_RECOVER, MOVE_STICKY_WEB, MOVE_SUPERSONIC},
-        .nature = NATURE_MODEST,
-        .abilitySlot = 0,
+        .moves = {MOVE_STRUGGLE_BUG, MOVE_SUPERSONIC, MOVE_RECOVER, MOVE_STICKY_WEB},
+        .nature = NATURE_BOLD,
+        .abilitySlot = 1,
     },
     [SPECIES_DOTTLER] =
     {
-        .moves = {MOVE_BUG_BUZZ, MOVE_PSYCHIC, MOVE_PROTECT, MOVE_TRICK_ROOM},
+        .moves = {MOVE_TRICK_ROOM, MOVE_BUG_BUZZ, MOVE_PSYCHIC, MOVE_PROTECT},
         .nature = NATURE_QUIET,
-        .abilitySlot = 0,
+        .abilitySlot = 2,
     },
     [SPECIES_ORBEETLE] =
     {
-        .moves = {MOVE_STRUGGLE_BUG, MOVE_PSYCHIC, MOVE_LIGHT_SCREEN, MOVE_STICKY_WEB},
-        .nature = NATURE_TIMID,
-        .abilitySlot = 1,
+        .moves = {MOVE_TRICK_ROOM, MOVE_PSYCHIC, MOVE_HELPING_HAND, MOVE_PROTECT},
+        .nature = NATURE_CALM,
+        .abilitySlot = 2,
     },
     [SPECIES_NICKIT] =
     {
-        .moves = {MOVE_FOUL_PLAY, MOVE_SWIFT, MOVE_PROTECT, MOVE_NASTY_PLOT},
-        .nature = NATURE_MODEST,
-        .abilitySlot = 1,
+        .moves = {MOVE_FOUL_PLAY, MOVE_SNARL, MOVE_NASTY_PLOT, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
+        .abilitySlot = 2,
     },
     [SPECIES_THIEVUL] =
     {
-        .moves = {MOVE_DARK_PULSE, MOVE_GRASS_KNOT, MOVE_PSYCHIC, MOVE_U_TURN},
-        .nature = NATURE_MODEST,
+        .moves = {MOVE_DARK_PULSE, MOVE_PSYCHIC, MOVE_SNARL, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
         .abilitySlot = 2,
     },
     [SPECIES_GOSSIFLEUR] =
     {
-        .moves = {MOVE_LEAF_STORM, MOVE_HYPER_VOICE, MOVE_PROTECT, MOVE_SLEEP_POWDER},
-        .nature = NATURE_MODEST,
+        .moves = {MOVE_SLEEP_POWDER, MOVE_LEAF_STORM, MOVE_HELPING_HAND, MOVE_PROTECT},
+        .nature = NATURE_CALM,
         .abilitySlot = 1,
     },
     [SPECIES_ELDEGOSS] =
     {
-        .moves = {MOVE_PROTECT, MOVE_HELPING_HAND, MOVE_ENERGY_BALL, MOVE_HYPER_VOICE},
-        .nature = NATURE_MODEST,
+        .moves = {MOVE_SLEEP_POWDER, MOVE_ENERGY_BALL, MOVE_HELPING_HAND, MOVE_PROTECT},
+        .nature = NATURE_CALM,
         .abilitySlot = 1,
     },
     [SPECIES_WOOLOO] =
     {
-        .moves = {MOVE_HEADBUTT, MOVE_STRENGTH, MOVE_PROTECT, MOVE_THUNDER_WAVE},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_COTTON_GUARD, MOVE_HEADBUTT, MOVE_THUNDER_WAVE, MOVE_PROTECT},
+        .nature = NATURE_IMPISH,
         .abilitySlot = 0,
     },
     [SPECIES_DUBWOOL] =
     {
-        .moves = {MOVE_WILD_CHARGE, MOVE_SWORDS_DANCE, MOVE_DOUBLE_EDGE, MOVE_PROTECT},
-        .nature = NATURE_JOLLY,
-        .abilitySlot = 2,
+        .moves = {MOVE_COTTON_GUARD, MOVE_BODY_PRESS, MOVE_THUNDER_WAVE, MOVE_PROTECT},
+        .nature = NATURE_IMPISH,
+        .abilitySlot = 0,
     },
     [SPECIES_CHEWTLE] =
     {
-        .moves = {MOVE_ICE_FANG, MOVE_LIQUIDATION, MOVE_PROTECT, MOVE_TOXIC},
+        .moves = {MOVE_LIQUIDATION, MOVE_ICE_FANG, MOVE_JAW_LOCK, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_DREDNAW] =
     {
-        .moves = {MOVE_PROTECT, MOVE_LIQUIDATION, MOVE_ROCK_SLIDE, MOVE_SUPERPOWER},
-        .nature = NATURE_JOLLY,
-        .abilitySlot = 1,
+        .moves = {MOVE_LIQUIDATION, MOVE_ROCK_SLIDE, MOVE_HIGH_HORSEPOWER, MOVE_PROTECT},
+        .nature = NATURE_ADAMANT,
+        .abilitySlot = 2,
     },
     [SPECIES_YAMPER] =
     {
-        .moves = {MOVE_WILD_CHARGE, MOVE_PLAY_ROUGH, MOVE_PROTECT, MOVE_HELPING_HAND},
+        .moves = {MOVE_NUZZLE, MOVE_PLAY_ROUGH, MOVE_HELPING_HAND, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
     [SPECIES_BOLTUND] =
     {
-        .moves = {MOVE_THUNDER_FANG, MOVE_FIRE_FANG, MOVE_PSYCHIC_FANGS, MOVE_CRUNCH},
+        .moves = {MOVE_THUNDER_FANG, MOVE_FIRE_FANG, MOVE_PSYCHIC_FANGS, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_ROLYCOLY] =
     {
-        .moves = {MOVE_POWER_GEM, MOVE_IRON_HEAD, MOVE_PROTECT, MOVE_WILL_O_WISP},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_POWER_GEM, MOVE_WILL_O_WISP, MOVE_STEALTH_ROCK, MOVE_PROTECT},
+        .nature = NATURE_BOLD,
         .abilitySlot = 2,
     },
     [SPECIES_CARKOL] =
     {
-        .moves = {MOVE_BURN_UP, MOVE_STRENGTH, MOVE_PROTECT, MOVE_WILL_O_WISP},
-        .nature = NATURE_IMPISH,
-        .abilitySlot = 2,
+        .moves = {MOVE_HEAT_WAVE, MOVE_POWER_GEM, MOVE_WILL_O_WISP, MOVE_PROTECT},
+        .nature = NATURE_BOLD,
+        .abilitySlot = 0,
     },
     [SPECIES_COALOSSAL] =
     {
-        .moves = {MOVE_HEAT_WAVE, MOVE_METEOR_BEAM, MOVE_SOLAR_BEAM, MOVE_PROTECT},
+        .moves = {MOVE_HEAT_WAVE, MOVE_POWER_GEM, MOVE_SOLAR_BEAM, MOVE_PROTECT},
         .nature = NATURE_MODEST,
-        .abilitySlot = 2,
+        .abilitySlot = 0,
     },
     [SPECIES_APPLIN] =
     {
-        .moves = {MOVE_GRASSY_GLIDE, MOVE_SUCKER_PUNCH, MOVE_ATTRACT, MOVE_DEFENSE_CURL},
+        .moves = {MOVE_GRASSY_GLIDE, MOVE_SUCKER_PUNCH, MOVE_DEFENSE_CURL, MOVE_ATTRACT},
         .nature = NATURE_ADAMANT,
-        .abilitySlot = 0,
+        .abilitySlot = 2,
     },
     [SPECIES_FLAPPLE] =
     {
-        .moves = {MOVE_GRAV_APPLE, MOVE_OUTRAGE, MOVE_U_TURN, MOVE_SUCKER_PUNCH},
+        .moves = {MOVE_GRAV_APPLE, MOVE_DRAGON_RUSH, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 2,
     },
     [SPECIES_APPLETUN] =
     {
-        .moves = {MOVE_RECOVER, MOVE_DRACO_METEOR, MOVE_APPLE_ACID, MOVE_BODY_PRESS},
-        .nature = NATURE_BOLD,
+        .moves = {MOVE_APPLE_ACID, MOVE_DRACO_METEOR, MOVE_RECOVER, MOVE_PROTECT},
+        .nature = NATURE_MODEST,
         .abilitySlot = 2,
     },
     [SPECIES_SILICOBRA] =
     {
-        .moves = {MOVE_DRILL_RUN, MOVE_SUCKER_PUNCH, MOVE_PROTECT, MOVE_GLARE},
+        .moves = {MOVE_DRILL_RUN, MOVE_SUCKER_PUNCH, MOVE_GLARE, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_SANDACONDA] =
     {
-        .moves = {MOVE_EARTHQUAKE, MOVE_STONE_EDGE, MOVE_STEALTH_ROCK, MOVE_REST},
-        .nature = NATURE_IMPISH,
-        .abilitySlot = 1,
+        .moves = {MOVE_HIGH_HORSEPOWER, MOVE_ROCK_SLIDE, MOVE_GLARE, MOVE_PROTECT},
+        .nature = NATURE_ADAMANT,
+        .abilitySlot = 0,
     },
     [SPECIES_CRAMORANT] =
     {
-        .moves = {MOVE_HURRICANE, MOVE_ICE_BEAM, MOVE_SURF, MOVE_TAILWIND},
+        .moves = {MOVE_SURF, MOVE_HURRICANE, MOVE_TAILWIND, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_ARROKUDA] =
     {
-        .moves = {MOVE_LIQUIDATION, MOVE_CLOSE_COMBAT, MOVE_PROTECT, MOVE_TOXIC},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_LIQUIDATION, MOVE_CLOSE_COMBAT, MOVE_AQUA_JET, MOVE_PROTECT},
+        .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_BARRASKEWDA] =
     {
-        .moves = {MOVE_PROTECT, MOVE_CLOSE_COMBAT, MOVE_WATERFALL, MOVE_POISON_JAB},
+        .moves = {MOVE_WATERFALL, MOVE_CLOSE_COMBAT, MOVE_PSYCHIC_FANGS, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
-        .abilitySlot = 2,
+        .abilitySlot = 0,
     },
     [SPECIES_TOXEL] =
     {
-        .moves = {MOVE_ACID, MOVE_SECRET_POWER, MOVE_PROTECT, MOVE_ENCORE},
-        .nature = NATURE_TIMID,
-        .abilitySlot = 0,
+        .moves = {MOVE_ACID, MOVE_ENCORE, MOVE_SECRET_POWER, MOVE_PROTECT},
+        .nature = NATURE_MODEST,
+        .abilitySlot = 1,
     },
     [SPECIES_TOXTRICITY] =
     {
-        .moves = {MOVE_OVERDRIVE, MOVE_SLUDGE_BOMB, MOVE_VOLT_SWITCH, MOVE_PROTECT},
-        .nature = NATURE_TIMID,
+        .moves = {MOVE_OVERDRIVE, MOVE_SLUDGE_BOMB, MOVE_SNARL, MOVE_PROTECT},
+        .nature = NATURE_MODEST,
         .abilitySlot = 0,
     },
     [SPECIES_SIZZLIPEDE] =
     {
-        .moves = {MOVE_BURN_UP, MOVE_LEECH_LIFE, MOVE_POWER_WHIP, MOVE_PROTECT},
+        .moves = {MOVE_FIRE_LASH, MOVE_LEECH_LIFE, MOVE_POWER_WHIP, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
-        .abilitySlot = 0,
+        .abilitySlot = 1,
     },
     [SPECIES_CENTISKORCH] =
     {
-        .moves = {MOVE_FIRE_LASH, MOVE_POWER_WHIP, MOVE_KNOCK_OFF, MOVE_LEECH_LIFE},
+        .moves = {MOVE_FIRE_LASH, MOVE_LEECH_LIFE, MOVE_KNOCK_OFF, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
-        .abilitySlot = 2,
+        .abilitySlot = 1,
     },
     [SPECIES_CLOBBOPUS] =
     {
-        .moves = {MOVE_REVENGE, MOVE_STRENGTH, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
+        .moves = {MOVE_REVENGE, MOVE_ICE_PUNCH, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
     [SPECIES_GRAPPLOCT] =
     {
-        .moves = {MOVE_OCTOLOCK, MOVE_DRAIN_PUNCH, MOVE_ICE_PUNCH, MOVE_SUBSTITUTE},
+        .moves = {MOVE_OCTOLOCK, MOVE_DRAIN_PUNCH, MOVE_ICE_PUNCH, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
     [SPECIES_SINISTEA] =
     {
-        .moves = {MOVE_SHADOW_BALL, MOVE_PSYCHIC, MOVE_DARK_PULSE, MOVE_PROTECT},
-        .nature = NATURE_MODEST,
+        .moves = {MOVE_SHELL_SMASH, MOVE_SHADOW_BALL, MOVE_STORED_POWER, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_POLTEAGEIST] =
     {
-        .moves = {MOVE_PROTECT, MOVE_SHADOW_BALL, MOVE_SHELL_SMASH, MOVE_STORED_POWER},
+        .moves = {MOVE_SHELL_SMASH, MOVE_SHADOW_BALL, MOVE_STORED_POWER, MOVE_PROTECT},
         .nature = NATURE_TIMID,
-        .abilitySlot = 2,
+        .abilitySlot = 0,
     },
     [SPECIES_HATENNA] =
     {
-        .moves = {MOVE_PSYCHIC, MOVE_DAZZLING_GLEAM, MOVE_PROTECT, MOVE_HELPING_HAND},
+        .moves = {MOVE_PSYCHIC, MOVE_DAZZLING_GLEAM, MOVE_HELPING_HAND, MOVE_PROTECT},
         .nature = NATURE_MODEST,
         .abilitySlot = 2,
     },
     [SPECIES_HATTREM] =
     {
-        .moves = {MOVE_PSYCHIC, MOVE_GIGA_DRAIN, MOVE_REST, MOVE_SLEEP_TALK},
+        .moves = {MOVE_PSYCHIC, MOVE_GIGA_DRAIN, MOVE_HEALING_WISH, MOVE_PROTECT},
         .nature = NATURE_BOLD,
         .abilitySlot = 2,
     },
@@ -5151,43 +5151,43 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_IMPIDIMP] =
     {
-        .moves = {MOVE_THUNDER_WAVE, MOVE_DAZZLING_GLEAM, MOVE_FOUL_PLAY, MOVE_PROTECT},
-        .nature = NATURE_MODEST,
+        .moves = {MOVE_FAKE_OUT, MOVE_THUNDER_WAVE, MOVE_FOUL_PLAY, MOVE_PROTECT},
+        .nature = NATURE_CALM,
         .abilitySlot = 0,
     },
     [SPECIES_MORGREM] =
     {
-        .moves = {MOVE_LIGHT_SCREEN, MOVE_REFLECT, MOVE_THUNDER_WAVE, MOVE_DAZZLING_GLEAM},
-        .nature = NATURE_MODEST,
+        .moves = {MOVE_LIGHT_SCREEN, MOVE_REFLECT, MOVE_THUNDER_WAVE, MOVE_PROTECT},
+        .nature = NATURE_CAREFUL,
         .abilitySlot = 0,
     },
     [SPECIES_GRIMMSNARL] =
     {
-        .moves = {MOVE_TRICK, MOVE_REFLECT, MOVE_THUNDER_WAVE, MOVE_SPIRIT_BREAK},
-        .nature = NATURE_IMPISH,
+        .moves = {MOVE_LIGHT_SCREEN, MOVE_REFLECT, MOVE_THUNDER_WAVE, MOVE_SPIRIT_BREAK},
+        .nature = NATURE_CAREFUL,
         .abilitySlot = 0,
     },
     [SPECIES_OBSTAGOON] =
     {
-        .moves = {MOVE_OBSTRUCT, MOVE_FACADE, MOVE_CLOSE_COMBAT, MOVE_KNOCK_OFF},
+        .moves = {MOVE_FACADE, MOVE_KNOCK_OFF, MOVE_CLOSE_COMBAT, MOVE_OBSTRUCT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 1,
     },
     [SPECIES_PERRSERKER] =
     {
-        .moves = {MOVE_SWORDS_DANCE, MOVE_IRON_HEAD, MOVE_SEED_BOMB, MOVE_SUBSTITUTE},
+        .moves = {MOVE_FAKE_OUT, MOVE_IRON_HEAD, MOVE_CLOSE_COMBAT, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
     [SPECIES_CURSOLA] =
     {
-        .moves = {MOVE_SHADOW_BALL, MOVE_POWER_GEM, MOVE_EARTH_POWER, MOVE_HEX},
-        .nature = NATURE_MODEST,
-        .abilitySlot = 0,
+        .moves = {MOVE_SHADOW_BALL, MOVE_EARTH_POWER, MOVE_POWER_GEM, MOVE_PROTECT},
+        .nature = NATURE_QUIET,
+        .abilitySlot = 2,
     },
     [SPECIES_SIRFETCHD] =
     {
-        .moves = {MOVE_BRAVE_BIRD, MOVE_SWORDS_DANCE, MOVE_CLOSE_COMBAT, MOVE_KNOCK_OFF},
+        .moves = {MOVE_CLOSE_COMBAT, MOVE_BRAVE_BIRD, MOVE_KNOCK_OFF, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
@@ -5199,151 +5199,151 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_RUNERIGUS] =
     {
-        .moves = {MOVE_STEALTH_ROCK, MOVE_EARTHQUAKE, MOVE_WILL_O_WISP, MOVE_TOXIC_SPIKES},
-        .nature = NATURE_IMPISH,
+        .moves = {MOVE_TRICK_ROOM, MOVE_EARTHQUAKE, MOVE_WILL_O_WISP, MOVE_PROTECT},
+        .nature = NATURE_SASSY,
         .abilitySlot = 0,
     },
     [SPECIES_MILCERY] =
     {
-        .moves = {MOVE_DAZZLING_GLEAM, MOVE_SECRET_POWER, MOVE_PROTECT, MOVE_HELPING_HAND},
+        .moves = {MOVE_DAZZLING_GLEAM, MOVE_HELPING_HAND, MOVE_RECOVER, MOVE_PROTECT},
         .nature = NATURE_CALM,
-        .abilitySlot = 0,
+        .abilitySlot = 2,
     },
     [SPECIES_ALCREMIE] =
     {
-        .moves = {MOVE_MYSTICAL_FIRE, MOVE_RECOVER, MOVE_PROTECT, MOVE_DAZZLING_GLEAM},
-        .nature = NATURE_MODEST,
+        .moves = {MOVE_DECORATE, MOVE_DAZZLING_GLEAM, MOVE_MYSTICAL_FIRE, MOVE_PROTECT},
+        .nature = NATURE_CALM,
         .abilitySlot = 2,
     },
     [SPECIES_FALINKS] =
     {
-        .moves = {MOVE_POISON_JAB, MOVE_NO_RETREAT, MOVE_ROCK_SLIDE, MOVE_CLOSE_COMBAT},
+        .moves = {MOVE_NO_RETREAT, MOVE_CLOSE_COMBAT, MOVE_ROCK_SLIDE, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 2,
     },
     [SPECIES_PINCURCHIN] =
     {
-        .moves = {MOVE_RISING_VOLTAGE, MOVE_SPIKES, MOVE_RECOVER, MOVE_SCALD},
-        .nature = NATURE_BOLD,
+        .moves = {MOVE_RISING_VOLTAGE, MOVE_SCALD, MOVE_RECOVER, MOVE_PROTECT},
+        .nature = NATURE_QUIET,
         .abilitySlot = 2,
     },
     [SPECIES_SNOM] =
     {
-        .moves = {MOVE_BUG_BUZZ, MOVE_AURORA_BEAM, MOVE_PROTECT, MOVE_SUBSTITUTE},
+        .moves = {MOVE_BUG_BUZZ, MOVE_AURORA_BEAM, MOVE_ICY_WIND, MOVE_PROTECT},
         .nature = NATURE_MODEST,
-        .abilitySlot = 0,
+        .abilitySlot = 2,
     },
     [SPECIES_FROSMOTH] =
     {
-        .moves = {MOVE_QUIVER_DANCE, MOVE_ICE_BEAM, MOVE_GIGA_DRAIN, MOVE_BUG_BUZZ},
+        .moves = {MOVE_QUIVER_DANCE, MOVE_ICE_BEAM, MOVE_BUG_BUZZ, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 2,
     },
     [SPECIES_STONJOURNER] =
     {
-        .moves = {MOVE_BODY_PRESS, MOVE_STONE_EDGE, MOVE_ROCK_POLISH, MOVE_PROTECT},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_ROCK_SLIDE, MOVE_BODY_PRESS, MOVE_WIDE_GUARD, MOVE_PROTECT},
+        .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_EISCUE] =
     {
-        .moves = {MOVE_BELLY_DRUM, MOVE_SUBSTITUTE, MOVE_ICICLE_SPEAR, MOVE_ZEN_HEADBUTT},
+        .moves = {MOVE_BELLY_DRUM, MOVE_ICICLE_SPEAR, MOVE_ZEN_HEADBUTT, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_INDEEDEE] =
     {
-        .moves = {MOVE_EXPANDING_FORCE, MOVE_TRICK_ROOM, MOVE_PROTECT, MOVE_HELPING_HAND},
+        .moves = {MOVE_EXPANDING_FORCE, MOVE_DAZZLING_GLEAM, MOVE_HELPING_HAND, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 2,
     },
     [SPECIES_MORPEKO] =
     {
-        .moves = {MOVE_PROTECT, MOVE_AURA_WHEEL, MOVE_PARTING_SHOT, MOVE_FOUL_PLAY},
+        .moves = {MOVE_AURA_WHEEL, MOVE_PARTING_SHOT, MOVE_FOUL_PLAY, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_CUFANT] =
     {
-        .moves = {MOVE_IRON_HEAD, MOVE_SUPERPOWER, MOVE_POWER_WHIP, MOVE_PROTECT},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_IRON_HEAD, MOVE_PLAY_ROUGH, MOVE_HIGH_HORSEPOWER, MOVE_PROTECT},
+        .nature = NATURE_BRAVE,
         .abilitySlot = 0,
     },
     [SPECIES_COPPERAJAH] =
     {
-        .moves = {MOVE_HEAVY_SLAM, MOVE_POWER_WHIP, MOVE_EARTHQUAKE, MOVE_SUBSTITUTE},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_HEAVY_SLAM, MOVE_HIGH_HORSEPOWER, MOVE_POWER_WHIP, MOVE_PROTECT},
+        .nature = NATURE_BRAVE,
         .abilitySlot = 2,
     },
     [SPECIES_DRACOZOLT] =
     {
-        .moves = {MOVE_BOLT_BEAK, MOVE_DRACO_METEOR, MOVE_SUBSTITUTE, MOVE_PROTECT},
-        .nature = NATURE_NAUGHTY,
+        .moves = {MOVE_BOLT_BEAK, MOVE_DRAGON_CLAW, MOVE_HIGH_HORSEPOWER, MOVE_PROTECT},
+        .nature = NATURE_JOLLY,
         .abilitySlot = 2,
     },
     [SPECIES_ARCTOZOLT] =
     {
-        .moves = {MOVE_BLIZZARD, MOVE_PROTECT, MOVE_ICICLE_CRASH, MOVE_BOLT_BEAK},
+        .moves = {MOVE_BOLT_BEAK, MOVE_ICICLE_CRASH, MOVE_LOW_KICK, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
-        .abilitySlot = 0,
+        .abilitySlot = 2,
     },
     [SPECIES_DRACOVISH] =
     {
-        .moves = {MOVE_FISHIOUS_REND, MOVE_DRAGON_RUSH, MOVE_PSYCHIC_FANGS, MOVE_CRUNCH},
+        .moves = {MOVE_FISHIOUS_REND, MOVE_DRAGON_RUSH, MOVE_PSYCHIC_FANGS, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 1,
     },
     [SPECIES_ARCTOVISH] =
     {
-        .moves = {MOVE_FISHIOUS_REND, MOVE_FREEZE_DRY, MOVE_ICICLE_CRASH, MOVE_SUBSTITUTE},
+        .moves = {MOVE_FISHIOUS_REND, MOVE_ICICLE_CRASH, MOVE_FREEZE_DRY, MOVE_PROTECT},
         .nature = NATURE_NAIVE,
         .abilitySlot = 2,
     },
     [SPECIES_DURALUDON] =
     {
-        .moves = {MOVE_SNARL, MOVE_IRON_DEFENSE, MOVE_FLASH_CANNON, MOVE_BODY_PRESS},
+        .moves = {MOVE_DRACO_METEOR, MOVE_FLASH_CANNON, MOVE_SNARL, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 2,
     },
     [SPECIES_DREEPY] =
     {
-        .moves = {MOVE_DRACO_METEOR, MOVE_SUCKER_PUNCH, MOVE_PROTECT, MOVE_HELPING_HAND},
+        .moves = {MOVE_THUNDER_WAVE, MOVE_SUCKER_PUNCH, MOVE_HELPING_HAND, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_DRAKLOAK] =
     {
-        .moves = {MOVE_DRACO_METEOR, MOVE_HEX, MOVE_THUNDER_WAVE, MOVE_U_TURN},
+        .moves = {MOVE_DRACO_METEOR, MOVE_SHADOW_BALL, MOVE_THUNDER_WAVE, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 1,
     },
     [SPECIES_DRAGAPULT] =
     {
-        .moves = {MOVE_DRACO_METEOR, MOVE_SHADOW_BALL, MOVE_HYDRO_PUMP, MOVE_U_TURN},
+        .moves = {MOVE_DRACO_METEOR, MOVE_SHADOW_BALL, MOVE_WILL_O_WISP, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 1,
     },
     [SPECIES_ZACIAN] =
     {
-        .moves = {MOVE_PLAY_ROUGH, MOVE_PROTECT, MOVE_CLOSE_COMBAT, MOVE_SWORDS_DANCE},
+        .moves = {MOVE_PLAY_ROUGH, MOVE_CLOSE_COMBAT, MOVE_SWORDS_DANCE, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_ZAMAZENTA] =
     {
-        .moves = {MOVE_CLOSE_COMBAT, MOVE_CRUNCH, MOVE_PSYCHIC_FANGS, MOVE_WILD_CHARGE},
+        .moves = {MOVE_CLOSE_COMBAT, MOVE_WIDE_GUARD, MOVE_HOWL, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_ETERNATUS] =
     {
-        .moves = {MOVE_COSMIC_POWER, MOVE_DYNAMAX_CANNON, MOVE_FLAMETHROWER, MOVE_RECOVER},
+        .moves = {MOVE_DRAGON_PULSE, MOVE_SLUDGE_BOMB, MOVE_FLAMETHROWER, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_KUBFU] =
     {
-        .moves = {MOVE_CLOSE_COMBAT, MOVE_STRENGTH, MOVE_BODY_SLAM, MOVE_PROTECT},
+        .moves = {MOVE_CLOSE_COMBAT, MOVE_ICE_PUNCH, MOVE_U_TURN, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
@@ -5355,7 +5355,7 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_ZARUDE] =
     {
-        .moves = {MOVE_KNOCK_OFF, MOVE_PROTECT, MOVE_POWER_WHIP, MOVE_CLOSE_COMBAT},
+        .moves = {MOVE_POWER_WHIP, MOVE_KNOCK_OFF, MOVE_CLOSE_COMBAT, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
@@ -5367,37 +5367,37 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_REGIDRAGO] =
     {
-        .moves = {MOVE_DRAGON_ENERGY, MOVE_DRACO_METEOR, MOVE_FIRE_FANG, MOVE_PROTECT},
-        .nature = NATURE_NAIVE,
+        .moves = {MOVE_DRAGON_ENERGY, MOVE_DRACO_METEOR, MOVE_ANCIENT_POWER, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_GLASTRIER] =
     {
-        .moves = {MOVE_SWORDS_DANCE, MOVE_ICICLE_CRASH, MOVE_HIGH_HORSEPOWER, MOVE_CLOSE_COMBAT},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_ICICLE_CRASH, MOVE_HIGH_HORSEPOWER, MOVE_CLOSE_COMBAT, MOVE_PROTECT},
+        .nature = NATURE_BRAVE,
         .abilitySlot = 0,
     },
     [SPECIES_SPECTRIER] =
     {
-        .moves = {MOVE_SHADOW_BALL, MOVE_MUD_SHOT, MOVE_NASTY_PLOT, MOVE_PROTECT},
+        .moves = {MOVE_NASTY_PLOT, MOVE_SHADOW_BALL, MOVE_MUD_SHOT, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_CALYREX] =
     {
-        .moves = {MOVE_AGILITY, MOVE_CALM_MIND, MOVE_GIGA_DRAIN, MOVE_STORED_POWER},
-        .nature = NATURE_MODEST,
+        .moves = {MOVE_CALM_MIND, MOVE_PSYCHIC, MOVE_GIGA_DRAIN, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_RATTATA_ALOLAN] =
     {
-        .moves = {MOVE_DOUBLE_EDGE, MOVE_SUCKER_PUNCH, MOVE_U_TURN, MOVE_QUICK_ATTACK},
+        .moves = {MOVE_DOUBLE_EDGE, MOVE_SUCKER_PUNCH, MOVE_U_TURN, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 1,
     },
     [SPECIES_RATICATE_ALOLAN] =
     {
-        .moves = {MOVE_SWORDS_DANCE, MOVE_DOUBLE_EDGE, MOVE_KNOCK_OFF, MOVE_SUCKER_PUNCH},
+        .moves = {MOVE_DOUBLE_EDGE, MOVE_KNOCK_OFF, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 2,
     },
@@ -5409,8 +5409,8 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_SANDSHREW_ALOLAN] =
     {
-        .moves = {MOVE_TRIPLE_AXEL, MOVE_EARTHQUAKE, MOVE_RAPID_SPIN, MOVE_SWORDS_DANCE},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_ICICLE_CRASH, MOVE_IRON_HEAD, MOVE_ROCK_SLIDE, MOVE_PROTECT},
+        .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
     [SPECIES_SANDSLASH_ALOLAN] =
@@ -5421,32 +5421,32 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_VULPIX_ALOLAN] =
     {
-        .moves = {MOVE_FREEZE_DRY, MOVE_MOONBLAST, MOVE_PROTECT, MOVE_AURORA_VEIL},
-        .nature = NATURE_MODEST,
+        .moves = {MOVE_AURORA_VEIL, MOVE_BLIZZARD, MOVE_FREEZE_DRY, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
         .abilitySlot = 2,
     },
     [SPECIES_NINETALES_ALOLAN] =
     {
-        .moves = {MOVE_FREEZE_DRY, MOVE_ICY_WIND, MOVE_ENCORE, MOVE_AURORA_VEIL},
+        .moves = {MOVE_BLIZZARD, MOVE_AURORA_VEIL, MOVE_ENCORE, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 2,
     },
     [SPECIES_DIGLETT_ALOLAN] =
     {
-        .moves = {MOVE_IRON_HEAD, MOVE_EARTHQUAKE, MOVE_ROCK_SLIDE, MOVE_SUBSTITUTE},
+        .moves = {MOVE_STOMPING_TANTRUM, MOVE_IRON_HEAD, MOVE_ROCK_SLIDE, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
-        .abilitySlot = 2,
+        .abilitySlot = 1,
     },
     [SPECIES_DUGTRIO_ALOLAN] =
     {
-        .moves = {MOVE_PROTECT, MOVE_IRON_HEAD, MOVE_STOMPING_TANTRUM, MOVE_SUCKER_PUNCH},
+        .moves = {MOVE_IRON_HEAD, MOVE_STOMPING_TANTRUM, MOVE_ROCK_SLIDE, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 1,
     },
     [SPECIES_MEOWTH_ALOLAN] =
     {
-        .moves = {MOVE_FAKE_OUT, MOVE_FEINT, MOVE_U_TURN, MOVE_PLAY_ROUGH},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_FAKE_OUT, MOVE_FEINT, MOVE_U_TURN, MOVE_PROTECT},
+        .nature = NATURE_JOLLY,
         .abilitySlot = 1,
     },
     [SPECIES_PERSIAN_ALOLAN] =
@@ -5457,79 +5457,79 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_GEODUDE_ALOLAN] =
     {
-        .moves = {MOVE_FIRE_PUNCH, MOVE_SUCKER_PUNCH, MOVE_STONE_EDGE, MOVE_STEALTH_ROCK},
+        .moves = {MOVE_BODY_SLAM, MOVE_ROCK_SLIDE, MOVE_WIDE_GUARD, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
-        .abilitySlot = 1,
+        .abilitySlot = 2,
     },
     [SPECIES_GRAVELER_ALOLAN] =
     {
-        .moves = {MOVE_BODY_SLAM, MOVE_FIRE_PUNCH, MOVE_FOCUS_PUNCH, MOVE_VOLT_SWITCH},
+        .moves = {MOVE_BODY_SLAM, MOVE_ROCK_SLIDE, MOVE_STOMPING_TANTRUM, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
     [SPECIES_GOLEM_ALOLAN] =
     {
-        .moves = {MOVE_PROTECT, MOVE_ROCK_SLIDE, MOVE_STOMPING_TANTRUM, MOVE_STONE_EDGE},
+        .moves = {MOVE_DOUBLE_EDGE, MOVE_ROCK_SLIDE, MOVE_STOMPING_TANTRUM, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
-        .abilitySlot = 0,
+        .abilitySlot = 2,
     },
     [SPECIES_GRIMER_ALOLAN] =
     {
-        .moves = {MOVE_REST, MOVE_SLEEP_TALK, MOVE_KNOCK_OFF, MOVE_POISON_JAB},
+        .moves = {MOVE_KNOCK_OFF, MOVE_POISON_JAB, MOVE_SHADOW_SNEAK, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_MUK_ALOLAN] =
     {
-        .moves = {MOVE_KNOCK_OFF, MOVE_POISON_JAB, MOVE_IMPRISON, MOVE_PROTECT},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_KNOCK_OFF, MOVE_POISON_JAB, MOVE_CURSE, MOVE_PROTECT},
+        .nature = NATURE_BRAVE,
         .abilitySlot = 1,
     },
     [SPECIES_EXEGGUTOR_ALOLAN] =
     {
-        .moves = {MOVE_DRACO_METEOR, MOVE_LEAF_STORM, MOVE_FLAMETHROWER, MOVE_TELEPORT},
-        .nature = NATURE_MODEST,
-        .abilitySlot = 2,
+        .moves = {MOVE_TRICK_ROOM, MOVE_DRACO_METEOR, MOVE_SOLAR_BEAM, MOVE_PROTECT},
+        .nature = NATURE_QUIET,
+        .abilitySlot = 1,
     },
     [SPECIES_MAROWAK_ALOLAN] =
     {
         .moves = {MOVE_FLARE_BLITZ, MOVE_SHADOW_BONE, MOVE_LOW_KICK, MOVE_PROTECT},
-        .nature = NATURE_ADAMANT,
+        .nature = NATURE_BRAVE,
         .abilitySlot = 1,
     },
     [SPECIES_MEOWTH_GALARIAN] =
     {
-        .moves = {MOVE_FAKE_OUT, MOVE_SEED_BOMB, MOVE_U_TURN, MOVE_TAUNT},
+        .moves = {MOVE_FAKE_OUT, MOVE_IRON_HEAD, MOVE_U_TURN, MOVE_TAUNT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 1,
     },
     [SPECIES_PONYTA_GALARIAN] =
     {
-        .moves = {MOVE_MORNING_SUN, MOVE_PSYCHIC, MOVE_DAZZLING_GLEAM, MOVE_MYSTICAL_FIRE},
-        .nature = NATURE_TIMID,
+        .moves = {MOVE_PLAY_ROUGH, MOVE_ZEN_HEADBUTT, MOVE_HIGH_HORSEPOWER, MOVE_PROTECT},
+        .nature = NATURE_JOLLY,
         .abilitySlot = 1,
     },
     [SPECIES_RAPIDASH_GALARIAN] =
     {
-        .moves = {MOVE_SWORDS_DANCE, MOVE_PLAY_ROUGH, MOVE_HIGH_HORSEPOWER, MOVE_MORNING_SUN},
+        .moves = {MOVE_PLAY_ROUGH, MOVE_ZEN_HEADBUTT, MOVE_HIGH_HORSEPOWER, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 1,
     },
     [SPECIES_SLOWPOKE_GALARIAN] =
     {
-        .moves = {MOVE_ZEN_HEADBUTT, MOVE_SCALD, MOVE_TOXIC, MOVE_TRICK},
-        .nature = NATURE_IMPISH,
+        .moves = {MOVE_TRICK_ROOM, MOVE_PSYCHIC, MOVE_YAWN, MOVE_PROTECT},
+        .nature = NATURE_RELAXED,
         .abilitySlot = 2,
     },
     [SPECIES_SLOWBRO_GALARIAN] =
     {
         .moves = {MOVE_HEAL_PULSE, MOVE_SHELL_SIDE_ARM, MOVE_PROTECT, MOVE_FIRE_BLAST},
-        .nature = NATURE_MODEST,
+        .nature = NATURE_QUIET,
         .abilitySlot = 2,
     },
     [SPECIES_FARFETCHD_GALARIAN] =
     {
-        .moves = {MOVE_SWORDS_DANCE, MOVE_BRAVE_BIRD, MOVE_LEAF_BLADE, MOVE_PROTECT},
+        .moves = {MOVE_BRAVE_BIRD, MOVE_BRICK_BREAK, MOVE_KNOCK_OFF, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },
@@ -5541,19 +5541,19 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_MR_MIME_GALARIAN] =
     {
-        .moves = {MOVE_THUNDERBOLT, MOVE_ICY_WIND, MOVE_PROTECT, MOVE_THUNDER_WAVE},
+        .moves = {MOVE_FAKE_OUT, MOVE_ICY_WIND, MOVE_FREEZE_DRY, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_ARTICUNO_GALARIAN] =
     {
-        .moves = {MOVE_CALM_MIND, MOVE_FREEZING_GLARE, MOVE_HURRICANE, MOVE_RECOVER},
+        .moves = {MOVE_FREEZING_GLARE, MOVE_HURRICANE, MOVE_TAILWIND, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_ZAPDOS_GALARIAN] =
     {
-        .moves = {MOVE_CLOSE_COMBAT, MOVE_PROTECT, MOVE_TAUNT, MOVE_DRILL_PECK},
+        .moves = {MOVE_CLOSE_COMBAT, MOVE_DRILL_PECK, MOVE_TAUNT, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
@@ -5571,151 +5571,151 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_CORSOLA_GALARIAN] =
     {
-        .moves = {MOVE_POWER_GEM, MOVE_STEALTH_ROCK, MOVE_SCALD, MOVE_TOXIC},
-        .nature = NATURE_MODEST,
-        .abilitySlot = 0,
+        .moves = {MOVE_WILL_O_WISP, MOVE_STRENGTH_SAP, MOVE_NIGHT_SHADE, MOVE_PROTECT},
+        .nature = NATURE_BOLD,
+        .abilitySlot = 2,
     },
     [SPECIES_ZIGZAGOON_GALARIAN] =
     {
-        .moves = {MOVE_HYPER_VOICE, MOVE_SUCKER_PUNCH, MOVE_PROTECT, MOVE_HELPING_HAND},
-        .nature = NATURE_JOLLY,
-        .abilitySlot = 1,
+        .moves = {MOVE_KNOCK_OFF, MOVE_PARTING_SHOT, MOVE_HELPING_HAND, MOVE_PROTECT},
+        .nature = NATURE_CAREFUL,
+        .abilitySlot = 2,
     },
     [SPECIES_LINOONE_GALARIAN] =
     {
-        .moves = {MOVE_KNOCK_OFF, MOVE_FACADE, MOVE_PROTECT, MOVE_PARTING_SHOT},
+        .moves = {MOVE_KNOCK_OFF, MOVE_FACADE, MOVE_PARTING_SHOT, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 2,
     },
     [SPECIES_DARUMAKA_GALARIAN] =
     {
-        .moves = {MOVE_FLARE_BLITZ, MOVE_U_TURN, MOVE_SUPERPOWER, MOVE_ROCK_SLIDE},
+        .moves = {MOVE_ICE_PUNCH, MOVE_ROCK_SLIDE, MOVE_SUPERPOWER, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_DARMANITAN_GALARIAN] =
     {
-        .moves = {MOVE_FLARE_BLITZ, MOVE_SUPERPOWER, MOVE_ROCK_SLIDE, MOVE_PROTECT},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_ICICLE_CRASH, MOVE_SUPERPOWER, MOVE_ROCK_SLIDE, MOVE_U_TURN},
+        .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_YAMASK_GALARIAN] =
     {
-        .moves = {MOVE_TOXIC_SPIKES, MOVE_WILL_O_WISP, MOVE_HEX, MOVE_MEMENTO},
+        .moves = {MOVE_TRICK_ROOM, MOVE_WILL_O_WISP, MOVE_POLTERGEIST, MOVE_PROTECT},
         .nature = NATURE_SASSY,
         .abilitySlot = 0,
     },
     [SPECIES_STUNFISK_GALARIAN] =
     {
-        .moves = {MOVE_STEALTH_ROCK, MOVE_EARTHQUAKE, MOVE_SLUDGE_BOMB, MOVE_PROTECT},
+        .moves = {MOVE_STOMPING_TANTRUM, MOVE_SNAP_TRAP, MOVE_YAWN, MOVE_PROTECT},
         .nature = NATURE_CAREFUL,
         .abilitySlot = 0,
     },
     [SPECIES_PIKACHU_COSPLAY] =
     {
-        .moves = {MOVE_WILD_CHARGE, MOVE_EXTREME_SPEED, MOVE_THUNDER_WAVE, MOVE_CHARM},
+        .moves = {MOVE_WILD_CHARGE, MOVE_EXTREME_SPEED, MOVE_NUZZLE, MOVE_CHARM},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_PIKACHU_ROCK_STAR] =
     {
-        .moves = {MOVE_WILD_CHARGE, MOVE_EXTREME_SPEED, MOVE_THUNDER_WAVE, MOVE_CHARM},
+        .moves = {MOVE_WILD_CHARGE, MOVE_EXTREME_SPEED, MOVE_NUZZLE, MOVE_CHARM},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_PIKACHU_BELLE] =
     {
-        .moves = {MOVE_WILD_CHARGE, MOVE_EXTREME_SPEED, MOVE_THUNDER_WAVE, MOVE_CHARM},
+        .moves = {MOVE_WILD_CHARGE, MOVE_EXTREME_SPEED, MOVE_NUZZLE, MOVE_CHARM},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_PIKACHU_POP_STAR] =
     {
-        .moves = {MOVE_WILD_CHARGE, MOVE_EXTREME_SPEED, MOVE_THUNDER_WAVE, MOVE_CHARM},
+        .moves = {MOVE_WILD_CHARGE, MOVE_EXTREME_SPEED, MOVE_NUZZLE, MOVE_CHARM},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_PIKACHU_PH_D] =
     {
-        .moves = {MOVE_WILD_CHARGE, MOVE_EXTREME_SPEED, MOVE_THUNDER_WAVE, MOVE_CHARM},
+        .moves = {MOVE_WILD_CHARGE, MOVE_EXTREME_SPEED, MOVE_NUZZLE, MOVE_CHARM},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_PIKACHU_LIBRE] =
     {
-        .moves = {MOVE_WILD_CHARGE, MOVE_EXTREME_SPEED, MOVE_THUNDER_WAVE, MOVE_CHARM},
+        .moves = {MOVE_WILD_CHARGE, MOVE_EXTREME_SPEED, MOVE_NUZZLE, MOVE_CHARM},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_PIKACHU_ORIGINAL_CAP] =
     {
-        .moves = {MOVE_WILD_CHARGE, MOVE_EXTREME_SPEED, MOVE_THUNDER_WAVE, MOVE_CHARM},
+        .moves = {MOVE_WILD_CHARGE, MOVE_EXTREME_SPEED, MOVE_NUZZLE, MOVE_CHARM},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_PIKACHU_HOENN_CAP] =
     {
-        .moves = {MOVE_WILD_CHARGE, MOVE_EXTREME_SPEED, MOVE_THUNDER_WAVE, MOVE_CHARM},
+        .moves = {MOVE_WILD_CHARGE, MOVE_EXTREME_SPEED, MOVE_NUZZLE, MOVE_CHARM},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_PIKACHU_SINNOH_CAP] =
     {
-        .moves = {MOVE_WILD_CHARGE, MOVE_EXTREME_SPEED, MOVE_THUNDER_WAVE, MOVE_CHARM},
+        .moves = {MOVE_WILD_CHARGE, MOVE_EXTREME_SPEED, MOVE_NUZZLE, MOVE_CHARM},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_PIKACHU_UNOVA_CAP] =
     {
-        .moves = {MOVE_WILD_CHARGE, MOVE_EXTREME_SPEED, MOVE_THUNDER_WAVE, MOVE_CHARM},
+        .moves = {MOVE_WILD_CHARGE, MOVE_EXTREME_SPEED, MOVE_NUZZLE, MOVE_CHARM},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_PIKACHU_KALOS_CAP] =
     {
-        .moves = {MOVE_WILD_CHARGE, MOVE_EXTREME_SPEED, MOVE_THUNDER_WAVE, MOVE_CHARM},
+        .moves = {MOVE_WILD_CHARGE, MOVE_EXTREME_SPEED, MOVE_NUZZLE, MOVE_CHARM},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_PIKACHU_ALOLA_CAP] =
     {
-        .moves = {MOVE_WILD_CHARGE, MOVE_EXTREME_SPEED, MOVE_THUNDER_WAVE, MOVE_CHARM},
+        .moves = {MOVE_WILD_CHARGE, MOVE_EXTREME_SPEED, MOVE_NUZZLE, MOVE_CHARM},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_PIKACHU_PARTNER_CAP] =
     {
-        .moves = {MOVE_WILD_CHARGE, MOVE_EXTREME_SPEED, MOVE_THUNDER_WAVE, MOVE_CHARM},
+        .moves = {MOVE_WILD_CHARGE, MOVE_EXTREME_SPEED, MOVE_NUZZLE, MOVE_CHARM},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_PIKACHU_WORLD_CAP] =
     {
-        .moves = {MOVE_WILD_CHARGE, MOVE_EXTREME_SPEED, MOVE_THUNDER_WAVE, MOVE_CHARM},
+        .moves = {MOVE_WILD_CHARGE, MOVE_EXTREME_SPEED, MOVE_NUZZLE, MOVE_CHARM},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_PICHU_SPIKY_EARED] =
     {
-        .moves = {MOVE_THUNDER_SHOCK, MOVE_THUNDER_WAVE, MOVE_NASTY_PLOT, MOVE_CHARM},
+        .moves = {MOVE_NASTY_PLOT, MOVE_THUNDER_SHOCK, MOVE_NUZZLE, MOVE_CHARM},
         .nature = NATURE_MODEST,
         .abilitySlot = 0,
     },
     [SPECIES_DEOXYS_ATTACK] =
     {
-        .moves = {MOVE_PSYCHO_BOOST, MOVE_SUPERPOWER, MOVE_SUBSTITUTE, MOVE_GIGA_IMPACT},
+        .moves = {MOVE_PSYCHO_BOOST, MOVE_SUPERPOWER, MOVE_ICE_BEAM, MOVE_PROTECT},
         .nature = NATURE_NAIVE,
         .abilitySlot = 0,
     },
     [SPECIES_DEOXYS_DEFENSE] =
     {
-        .moves = {MOVE_SPIKES, MOVE_TAUNT, MOVE_RECOVER, MOVE_TOXIC},
+        .moves = {MOVE_PSYCHIC, MOVE_THUNDER_WAVE, MOVE_RECOVER, MOVE_PROTECT},
         .nature = NATURE_BOLD,
         .abilitySlot = 0,
     },
     [SPECIES_DEOXYS_SPEED] =
     {
-        .moves = {MOVE_LIGHT_SCREEN, MOVE_TAUNT, MOVE_REFLECT, MOVE_PSYCHO_BOOST},
+        .moves = {MOVE_PSYCHO_BOOST, MOVE_ICY_WIND, MOVE_TAUNT, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
@@ -5733,61 +5733,61 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_WORMADAM_SANDY_CLOAK] =
     {
-        .moves = {MOVE_TOXIC, MOVE_PROTECT, MOVE_GIGA_DRAIN, MOVE_SIGNAL_BEAM},
-        .nature = NATURE_CALM,
+        .moves = {MOVE_BUG_BUZZ, MOVE_EARTH_POWER, MOVE_ELECTROWEB, MOVE_PROTECT},
+        .nature = NATURE_MODEST,
         .abilitySlot = 0,
     },
     [SPECIES_WORMADAM_TRASH_CLOAK] =
     {
-        .moves = {MOVE_TOXIC, MOVE_PROTECT, MOVE_GIGA_DRAIN, MOVE_SIGNAL_BEAM},
-        .nature = NATURE_CALM,
+        .moves = {MOVE_BUG_BUZZ, MOVE_FLASH_CANNON, MOVE_ELECTROWEB, MOVE_PROTECT},
+        .nature = NATURE_MODEST,
         .abilitySlot = 0,
     },
     [SPECIES_SHELLOS_EAST_SEA] =
     {
-        .moves = {MOVE_RECOVER, MOVE_SCALD, MOVE_ICE_BEAM, MOVE_TOXIC},
-        .nature = NATURE_MODEST,
+        .moves = {MOVE_SCALD, MOVE_ICY_WIND, MOVE_RECOVER, MOVE_PROTECT},
+        .nature = NATURE_CALM,
         .abilitySlot = 0,
     },
     [SPECIES_GASTRODON_EAST_SEA] =
     {
-        .moves = {MOVE_ICE_BEAM, MOVE_EARTH_POWER, MOVE_TOXIC, MOVE_RECOVER},
+        .moves = {MOVE_SCALD, MOVE_EARTH_POWER, MOVE_ICY_WIND, MOVE_PROTECT},
         .nature = NATURE_CALM,
         .abilitySlot = 1,
     },
     [SPECIES_ROTOM_HEAT] =
     {
-        .moves = {MOVE_THUNDERBOLT, MOVE_SHADOW_BALL, MOVE_THUNDER_WAVE, MOVE_PROTECT},
-        .nature = NATURE_CALM,
+        .moves = {MOVE_OVERHEAT, MOVE_THUNDERBOLT, MOVE_WILL_O_WISP, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_ROTOM_WASH] =
     {
-        .moves = {MOVE_THUNDERBOLT, MOVE_SHADOW_BALL, MOVE_THUNDER_WAVE, MOVE_PROTECT},
-        .nature = NATURE_CALM,
+        .moves = {MOVE_HYDRO_PUMP, MOVE_THUNDERBOLT, MOVE_WILL_O_WISP, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_ROTOM_FROST] =
     {
-        .moves = {MOVE_THUNDERBOLT, MOVE_SHADOW_BALL, MOVE_THUNDER_WAVE, MOVE_PROTECT},
-        .nature = NATURE_CALM,
+        .moves = {MOVE_FREEZE_DRY, MOVE_THUNDERBOLT, MOVE_ELECTROWEB, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_ROTOM_FAN] =
     {
-        .moves = {MOVE_THUNDERBOLT, MOVE_SHADOW_BALL, MOVE_WILL_O_WISP, MOVE_PROTECT},
-        .nature = NATURE_CALM,
+        .moves = {MOVE_HURRICANE, MOVE_THUNDERBOLT, MOVE_ELECTROWEB, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_ROTOM_MOW] =
     {
-        .moves = {MOVE_THUNDERBOLT, MOVE_SHADOW_BALL, MOVE_THUNDER_WAVE, MOVE_PROTECT},
-        .nature = NATURE_CALM,
+        .moves = {MOVE_LEAF_STORM, MOVE_THUNDERBOLT, MOVE_WILL_O_WISP, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_GIRATINA_ORIGIN] =
     {
-        .moves = {MOVE_SHADOW_FORCE, MOVE_SHADOW_SNEAK, MOVE_DRACO_METEOR, MOVE_PROTECT},
+        .moves = {MOVE_SHADOW_CLAW, MOVE_SHADOW_SNEAK, MOVE_DRAGON_CLAW, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
@@ -5799,104 +5799,104 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_ARCEUS_FIGHTING] =
     {
-        .moves = {MOVE_JUDGMENT, MOVE_DARK_PULSE, MOVE_RECOVER, MOVE_CALM_MIND},
+        .moves = {MOVE_JUDGMENT, MOVE_DARK_PULSE, MOVE_RECOVER, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_ARCEUS_FLYING] =
     {
-        .moves = {MOVE_CALM_MIND, MOVE_JUDGMENT, MOVE_RECOVER, MOVE_REFRESH},
+        .moves = {MOVE_JUDGMENT, MOVE_ICE_BEAM, MOVE_RECOVER, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_ARCEUS_POISON] =
     {
-        .moves = {MOVE_RECOVER, MOVE_PROTECT, MOVE_CALM_MIND, MOVE_SLUDGE_BOMB},
+        .moves = {MOVE_JUDGMENT, MOVE_EARTH_POWER, MOVE_RECOVER, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_ARCEUS_GROUND] =
     {
-        .moves = {MOVE_SWORDS_DANCE, MOVE_EARTHQUAKE, MOVE_STONE_EDGE, MOVE_RECOVER},
+        .moves = {MOVE_SWORDS_DANCE, MOVE_EARTHQUAKE, MOVE_STONE_EDGE, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_ARCEUS_ROCK] =
     {
-        .moves = {MOVE_JUDGMENT, MOVE_WILL_O_WISP, MOVE_STEALTH_ROCK, MOVE_RECOVER},
+        .moves = {MOVE_JUDGMENT, MOVE_EARTH_POWER, MOVE_RECOVER, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_ARCEUS_BUG] =
     {
-        .moves = {MOVE_ICE_BEAM, MOVE_STEALTH_ROCK, MOVE_EARTH_POWER, MOVE_RECOVER},
+        .moves = {MOVE_JUDGMENT, MOVE_EARTH_POWER, MOVE_RECOVER, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_ARCEUS_GHOST] =
     {
-        .moves = {MOVE_CALM_MIND, MOVE_JUDGMENT, MOVE_FOCUS_BLAST, MOVE_POWER_GEM},
-        .nature = NATURE_MODEST,
+        .moves = {MOVE_JUDGMENT, MOVE_FOCUS_BLAST, MOVE_RECOVER, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_ARCEUS_STEEL] =
     {
-        .moves = {MOVE_JUDGMENT, MOVE_THUNDER, MOVE_CALM_MIND, MOVE_RECOVER},
+        .moves = {MOVE_JUDGMENT, MOVE_EARTH_POWER, MOVE_RECOVER, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_ARCEUS_FIRE] =
     {
-        .moves = {MOVE_CALM_MIND, MOVE_FIRE_BLAST, MOVE_THUNDER, MOVE_ICE_BEAM},
+        .moves = {MOVE_JUDGMENT, MOVE_EARTH_POWER, MOVE_RECOVER, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_ARCEUS_WATER] =
     {
-        .moves = {MOVE_CALM_MIND, MOVE_JUDGMENT, MOVE_EARTH_POWER, MOVE_RECOVER},
+        .moves = {MOVE_JUDGMENT, MOVE_ICE_BEAM, MOVE_RECOVER, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_ARCEUS_GRASS] =
     {
-        .moves = {MOVE_CALM_MIND, MOVE_JUDGMENT, MOVE_RECOVER, MOVE_EARTH_POWER},
+        .moves = {MOVE_JUDGMENT, MOVE_EARTH_POWER, MOVE_RECOVER, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_ARCEUS_ELECTRIC] =
     {
-        .moves = {MOVE_JUDGMENT, MOVE_WILL_O_WISP, MOVE_ICE_BEAM, MOVE_RECOVER},
-        .nature = NATURE_BOLD,
+        .moves = {MOVE_JUDGMENT, MOVE_ICE_BEAM, MOVE_RECOVER, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_ARCEUS_PSYCHIC] =
     {
-        .moves = {MOVE_JUDGMENT, MOVE_WILL_O_WISP, MOVE_RECOVER, MOVE_ICE_BEAM},
+        .moves = {MOVE_JUDGMENT, MOVE_ICE_BEAM, MOVE_RECOVER, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_ARCEUS_ICE] =
     {
-        .moves = {MOVE_CALM_MIND, MOVE_JUDGMENT, MOVE_RECOVER, MOVE_THUNDERBOLT},
+        .moves = {MOVE_JUDGMENT, MOVE_THUNDERBOLT, MOVE_RECOVER, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_ARCEUS_DRAGON] =
     {
-        .moves = {MOVE_DEFOG, MOVE_RECOVER, MOVE_JUDGMENT, MOVE_WILL_O_WISP},
+        .moves = {MOVE_JUDGMENT, MOVE_WILL_O_WISP, MOVE_RECOVER, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_ARCEUS_DARK] =
     {
-        .moves = {MOVE_CALM_MIND, MOVE_JUDGMENT, MOVE_FIRE_BLAST, MOVE_RECOVER},
+        .moves = {MOVE_JUDGMENT, MOVE_FIRE_BLAST, MOVE_RECOVER, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_ARCEUS_FAIRY] =
     {
-        .moves = {MOVE_IRON_DEFENSE, MOVE_CALM_MIND, MOVE_RECOVER, MOVE_JUDGMENT},
-        .nature = NATURE_BOLD,
+        .moves = {MOVE_JUDGMENT, MOVE_EARTH_POWER, MOVE_RECOVER, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_BASCULIN_BLUE_STRIPED] =
@@ -5907,19 +5907,19 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_DEERLING_SUMMER] =
     {
-        .moves = {MOVE_DOUBLE_EDGE, MOVE_SEED_BOMB, MOVE_JUMP_KICK, MOVE_SUBSTITUTE},
+        .moves = {MOVE_DOUBLE_EDGE, MOVE_SEED_BOMB, MOVE_JUMP_KICK, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 1,
     },
     [SPECIES_DEERLING_AUTUMN] =
     {
-        .moves = {MOVE_DOUBLE_EDGE, MOVE_SEED_BOMB, MOVE_JUMP_KICK, MOVE_SUBSTITUTE},
+        .moves = {MOVE_DOUBLE_EDGE, MOVE_SEED_BOMB, MOVE_JUMP_KICK, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 1,
     },
     [SPECIES_DEERLING_WINTER] =
     {
-        .moves = {MOVE_DOUBLE_EDGE, MOVE_SEED_BOMB, MOVE_JUMP_KICK, MOVE_SUBSTITUTE},
+        .moves = {MOVE_DOUBLE_EDGE, MOVE_SEED_BOMB, MOVE_JUMP_KICK, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 1,
     },
@@ -5927,23 +5927,23 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     {
         .moves = {MOVE_HORN_LEECH, MOVE_DOUBLE_EDGE, MOVE_JUMP_KICK, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
-        .abilitySlot = 2,
+        .abilitySlot = 1,
     },
     [SPECIES_SAWSBUCK_AUTUMN] =
     {
-        .moves = {MOVE_SWORDS_DANCE, MOVE_PROTECT, MOVE_DOUBLE_EDGE, MOVE_HORN_LEECH},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_HORN_LEECH, MOVE_DOUBLE_EDGE, MOVE_JUMP_KICK, MOVE_PROTECT},
+        .nature = NATURE_ADAMANT,
         .abilitySlot = 1,
     },
     [SPECIES_SAWSBUCK_WINTER] =
     {
         .moves = {MOVE_HORN_LEECH, MOVE_DOUBLE_EDGE, MOVE_JUMP_KICK, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
-        .abilitySlot = 2,
+        .abilitySlot = 1,
     },
     [SPECIES_TORNADUS_THERIAN] =
     {
-        .moves = {MOVE_HURRICANE, MOVE_WEATHER_BALL, MOVE_TAILWIND, MOVE_PROTECT},
+        .moves = {MOVE_HURRICANE, MOVE_TAUNT, MOVE_TAILWIND, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
@@ -6003,145 +6003,145 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_GRENINJA_BATTLE_BOND] =
     {
-        .moves = {MOVE_ICE_BEAM, MOVE_DARK_PULSE, MOVE_LOW_KICK, MOVE_PROTECT},
-        .nature = NATURE_NAIVE,
+        .moves = {MOVE_HYDRO_PUMP, MOVE_DARK_PULSE, MOVE_ICE_BEAM, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_VIVILLON_POLAR] =
     {
-        .moves = {MOVE_HURRICANE, MOVE_SLEEP_POWDER, MOVE_PROTECT, MOVE_BUG_BUZZ},
+        .moves = {MOVE_TAILWIND, MOVE_SLEEP_POWDER, MOVE_HURRICANE, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 1,
     },
     [SPECIES_VIVILLON_TUNDRA] =
     {
-        .moves = {MOVE_HURRICANE, MOVE_SLEEP_POWDER, MOVE_PROTECT, MOVE_BUG_BUZZ},
+        .moves = {MOVE_TAILWIND, MOVE_SLEEP_POWDER, MOVE_HURRICANE, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 1,
     },
     [SPECIES_VIVILLON_CONTINENTAL] =
     {
-        .moves = {MOVE_HURRICANE, MOVE_SLEEP_POWDER, MOVE_PROTECT, MOVE_BUG_BUZZ},
+        .moves = {MOVE_TAILWIND, MOVE_SLEEP_POWDER, MOVE_HURRICANE, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 1,
     },
     [SPECIES_VIVILLON_GARDEN] =
     {
-        .moves = {MOVE_HURRICANE, MOVE_SLEEP_POWDER, MOVE_PROTECT, MOVE_BUG_BUZZ},
+        .moves = {MOVE_TAILWIND, MOVE_SLEEP_POWDER, MOVE_HURRICANE, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 1,
     },
     [SPECIES_VIVILLON_ELEGANT] =
     {
-        .moves = {MOVE_HURRICANE, MOVE_SLEEP_POWDER, MOVE_PROTECT, MOVE_BUG_BUZZ},
+        .moves = {MOVE_TAILWIND, MOVE_SLEEP_POWDER, MOVE_HURRICANE, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 1,
     },
     [SPECIES_VIVILLON_MEADOW] =
     {
-        .moves = {MOVE_HURRICANE, MOVE_SLEEP_POWDER, MOVE_PROTECT, MOVE_BUG_BUZZ},
+        .moves = {MOVE_TAILWIND, MOVE_SLEEP_POWDER, MOVE_HURRICANE, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 1,
     },
     [SPECIES_VIVILLON_MODERN] =
     {
-        .moves = {MOVE_HURRICANE, MOVE_SLEEP_POWDER, MOVE_PROTECT, MOVE_BUG_BUZZ},
+        .moves = {MOVE_TAILWIND, MOVE_SLEEP_POWDER, MOVE_HURRICANE, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 1,
     },
     [SPECIES_VIVILLON_MARINE] =
     {
-        .moves = {MOVE_TAILWIND, MOVE_PROTECT, MOVE_SLEEP_POWDER, MOVE_HURRICANE},
+        .moves = {MOVE_TAILWIND, MOVE_SLEEP_POWDER, MOVE_HURRICANE, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 1,
     },
     [SPECIES_VIVILLON_ARCHIPELAGO] =
     {
-        .moves = {MOVE_HURRICANE, MOVE_SLEEP_POWDER, MOVE_PROTECT, MOVE_BUG_BUZZ},
+        .moves = {MOVE_TAILWIND, MOVE_SLEEP_POWDER, MOVE_HURRICANE, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 1,
     },
     [SPECIES_VIVILLON_HIGH_PLAINS] =
     {
-        .moves = {MOVE_HURRICANE, MOVE_SLEEP_POWDER, MOVE_PROTECT, MOVE_BUG_BUZZ},
+        .moves = {MOVE_TAILWIND, MOVE_SLEEP_POWDER, MOVE_HURRICANE, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 1,
     },
     [SPECIES_VIVILLON_SANDSTORM] =
     {
-        .moves = {MOVE_HURRICANE, MOVE_SLEEP_POWDER, MOVE_PROTECT, MOVE_BUG_BUZZ},
+        .moves = {MOVE_TAILWIND, MOVE_SLEEP_POWDER, MOVE_HURRICANE, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 1,
     },
     [SPECIES_VIVILLON_RIVER] =
     {
-        .moves = {MOVE_HURRICANE, MOVE_SLEEP_POWDER, MOVE_PROTECT, MOVE_BUG_BUZZ},
+        .moves = {MOVE_TAILWIND, MOVE_SLEEP_POWDER, MOVE_HURRICANE, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 1,
     },
     [SPECIES_VIVILLON_MONSOON] =
     {
-        .moves = {MOVE_HURRICANE, MOVE_SLEEP_POWDER, MOVE_PROTECT, MOVE_BUG_BUZZ},
+        .moves = {MOVE_TAILWIND, MOVE_SLEEP_POWDER, MOVE_HURRICANE, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 1,
     },
     [SPECIES_VIVILLON_SAVANNA] =
     {
-        .moves = {MOVE_HURRICANE, MOVE_SLEEP_POWDER, MOVE_PROTECT, MOVE_BUG_BUZZ},
+        .moves = {MOVE_TAILWIND, MOVE_SLEEP_POWDER, MOVE_HURRICANE, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 1,
     },
     [SPECIES_VIVILLON_SUN] =
     {
-        .moves = {MOVE_HURRICANE, MOVE_SLEEP_POWDER, MOVE_PROTECT, MOVE_BUG_BUZZ},
+        .moves = {MOVE_TAILWIND, MOVE_SLEEP_POWDER, MOVE_HURRICANE, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 1,
     },
     [SPECIES_VIVILLON_OCEAN] =
     {
-        .moves = {MOVE_HURRICANE, MOVE_SLEEP_POWDER, MOVE_PROTECT, MOVE_BUG_BUZZ},
+        .moves = {MOVE_TAILWIND, MOVE_SLEEP_POWDER, MOVE_HURRICANE, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 1,
     },
     [SPECIES_VIVILLON_JUNGLE] =
     {
-        .moves = {MOVE_HURRICANE, MOVE_SLEEP_POWDER, MOVE_PROTECT, MOVE_BUG_BUZZ},
+        .moves = {MOVE_TAILWIND, MOVE_SLEEP_POWDER, MOVE_HURRICANE, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 1,
     },
     [SPECIES_VIVILLON_FANCY] =
     {
-        .moves = {MOVE_HURRICANE, MOVE_SLEEP_POWDER, MOVE_PROTECT, MOVE_BUG_BUZZ},
+        .moves = {MOVE_TAILWIND, MOVE_SLEEP_POWDER, MOVE_HURRICANE, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 1,
     },
     [SPECIES_VIVILLON_POKE_BALL] =
     {
-        .moves = {MOVE_HURRICANE, MOVE_SLEEP_POWDER, MOVE_PROTECT, MOVE_BUG_BUZZ},
+        .moves = {MOVE_TAILWIND, MOVE_SLEEP_POWDER, MOVE_HURRICANE, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 1,
     },
     [SPECIES_FLABEBE_YELLOW_FLOWER] =
     {
-        .moves = {MOVE_CALM_MIND, MOVE_PSYCHIC, MOVE_MOONBLAST, MOVE_SYNTHESIS},
+        .moves = {MOVE_CALM_MIND, MOVE_MOONBLAST, MOVE_SYNTHESIS, MOVE_PROTECT},
         .nature = NATURE_BOLD,
         .abilitySlot = 0,
     },
     [SPECIES_FLABEBE_ORANGE_FLOWER] =
     {
-        .moves = {MOVE_CALM_MIND, MOVE_PSYCHIC, MOVE_MOONBLAST, MOVE_SYNTHESIS},
+        .moves = {MOVE_CALM_MIND, MOVE_MOONBLAST, MOVE_SYNTHESIS, MOVE_PROTECT},
         .nature = NATURE_BOLD,
         .abilitySlot = 0,
     },
     [SPECIES_FLABEBE_BLUE_FLOWER] =
     {
-        .moves = {MOVE_CALM_MIND, MOVE_PSYCHIC, MOVE_MOONBLAST, MOVE_SYNTHESIS},
+        .moves = {MOVE_CALM_MIND, MOVE_MOONBLAST, MOVE_SYNTHESIS, MOVE_PROTECT},
         .nature = NATURE_BOLD,
         .abilitySlot = 0,
     },
     [SPECIES_FLABEBE_WHITE_FLOWER] =
     {
-        .moves = {MOVE_CALM_MIND, MOVE_PSYCHIC, MOVE_MOONBLAST, MOVE_SYNTHESIS},
+        .moves = {MOVE_CALM_MIND, MOVE_MOONBLAST, MOVE_SYNTHESIS, MOVE_PROTECT},
         .nature = NATURE_BOLD,
         .abilitySlot = 0,
     },
@@ -6177,140 +6177,140 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_FLORGES_YELLOW_FLOWER] =
     {
-        .moves = {MOVE_DAZZLING_GLEAM, MOVE_WISH, MOVE_PSYCHIC, MOVE_AROMATHERAPY},
-        .nature = NATURE_TIMID,
+        .moves = {MOVE_DAZZLING_GLEAM, MOVE_WISH, MOVE_AROMATHERAPY, MOVE_PROTECT},
+        .nature = NATURE_CALM,
         .abilitySlot = 1,
     },
     [SPECIES_FLORGES_ORANGE_FLOWER] =
     {
-        .moves = {MOVE_DAZZLING_GLEAM, MOVE_WISH, MOVE_PSYCHIC, MOVE_AROMATHERAPY},
-        .nature = NATURE_TIMID,
+        .moves = {MOVE_DAZZLING_GLEAM, MOVE_WISH, MOVE_AROMATHERAPY, MOVE_PROTECT},
+        .nature = NATURE_CALM,
         .abilitySlot = 1,
     },
     [SPECIES_FLORGES_BLUE_FLOWER] =
     {
-        .moves = {MOVE_DAZZLING_GLEAM, MOVE_WISH, MOVE_PSYCHIC, MOVE_AROMATHERAPY},
-        .nature = NATURE_TIMID,
+        .moves = {MOVE_DAZZLING_GLEAM, MOVE_WISH, MOVE_AROMATHERAPY, MOVE_PROTECT},
+        .nature = NATURE_CALM,
         .abilitySlot = 1,
     },
     [SPECIES_FLORGES_WHITE_FLOWER] =
     {
-        .moves = {MOVE_DAZZLING_GLEAM, MOVE_WISH, MOVE_PSYCHIC, MOVE_AROMATHERAPY},
-        .nature = NATURE_TIMID,
+        .moves = {MOVE_DAZZLING_GLEAM, MOVE_WISH, MOVE_AROMATHERAPY, MOVE_PROTECT},
+        .nature = NATURE_CALM,
         .abilitySlot = 1,
     },
     [SPECIES_FURFROU_HEART_TRIM] =
     {
-        .moves = {MOVE_U_TURN, MOVE_TOXIC, MOVE_SUCKER_PUNCH, MOVE_GIGA_IMPACT},
+        .moves = {MOVE_DOUBLE_EDGE, MOVE_SUCKER_PUNCH, MOVE_U_TURN, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_FURFROU_STAR_TRIM] =
     {
-        .moves = {MOVE_U_TURN, MOVE_TOXIC, MOVE_SUCKER_PUNCH, MOVE_GIGA_IMPACT},
+        .moves = {MOVE_DOUBLE_EDGE, MOVE_SUCKER_PUNCH, MOVE_U_TURN, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_FURFROU_DIAMOND_TRIM] =
     {
-        .moves = {MOVE_U_TURN, MOVE_TOXIC, MOVE_SUCKER_PUNCH, MOVE_GIGA_IMPACT},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_HELPING_HAND, MOVE_THUNDER_WAVE, MOVE_SNARL, MOVE_PROTECT},
+        .nature = NATURE_CAREFUL,
         .abilitySlot = 0,
     },
     [SPECIES_FURFROU_DEBUTANTE_TRIM] =
     {
-        .moves = {MOVE_U_TURN, MOVE_TOXIC, MOVE_SUCKER_PUNCH, MOVE_GIGA_IMPACT},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_HELPING_HAND, MOVE_THUNDER_WAVE, MOVE_SNARL, MOVE_PROTECT},
+        .nature = NATURE_CAREFUL,
         .abilitySlot = 0,
     },
     [SPECIES_FURFROU_MATRON_TRIM] =
     {
-        .moves = {MOVE_U_TURN, MOVE_TOXIC, MOVE_SUCKER_PUNCH, MOVE_GIGA_IMPACT},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_HELPING_HAND, MOVE_THUNDER_WAVE, MOVE_SNARL, MOVE_PROTECT},
+        .nature = NATURE_CAREFUL,
         .abilitySlot = 0,
     },
     [SPECIES_FURFROU_DANDY_TRIM] =
     {
-        .moves = {MOVE_U_TURN, MOVE_TOXIC, MOVE_SUCKER_PUNCH, MOVE_GIGA_IMPACT},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_HELPING_HAND, MOVE_THUNDER_WAVE, MOVE_SNARL, MOVE_PROTECT},
+        .nature = NATURE_CAREFUL,
         .abilitySlot = 0,
     },
     [SPECIES_FURFROU_LA_REINE_TRIM] =
     {
-        .moves = {MOVE_U_TURN, MOVE_TOXIC, MOVE_SUCKER_PUNCH, MOVE_GIGA_IMPACT},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_HELPING_HAND, MOVE_THUNDER_WAVE, MOVE_SNARL, MOVE_PROTECT},
+        .nature = NATURE_CAREFUL,
         .abilitySlot = 0,
     },
     [SPECIES_FURFROU_KABUKI_TRIM] =
     {
-        .moves = {MOVE_U_TURN, MOVE_TOXIC, MOVE_SUCKER_PUNCH, MOVE_GIGA_IMPACT},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_HELPING_HAND, MOVE_THUNDER_WAVE, MOVE_SNARL, MOVE_PROTECT},
+        .nature = NATURE_CAREFUL,
         .abilitySlot = 0,
     },
     [SPECIES_FURFROU_PHARAOH_TRIM] =
     {
-        .moves = {MOVE_U_TURN, MOVE_TOXIC, MOVE_SUCKER_PUNCH, MOVE_GIGA_IMPACT},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_HELPING_HAND, MOVE_THUNDER_WAVE, MOVE_SNARL, MOVE_PROTECT},
+        .nature = NATURE_CAREFUL,
         .abilitySlot = 0,
     },
     [SPECIES_MEOWSTIC_FEMALE] =
     {
-        .moves = {MOVE_SAFEGUARD, MOVE_SWAGGER, MOVE_THUNDER_WAVE, MOVE_PSYCHIC},
-        .nature = NATURE_BOLD,
+        .moves = {MOVE_PSYCHIC, MOVE_SHADOW_BALL, MOVE_THUNDERBOLT, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
         .abilitySlot = 2,
     },
     [SPECIES_PUMPKABOO_SMALL] =
     {
-        .moves = {MOVE_TRICK_OR_TREAT, MOVE_SHADOW_BALL, MOVE_FIRE_BLAST, MOVE_GIGA_DRAIN},
-        .nature = NATURE_MODEST,
-        .abilitySlot = 1,
+        .moves = {MOVE_TRICK_ROOM, MOVE_WILL_O_WISP, MOVE_SHADOW_BALL, MOVE_PROTECT},
+        .nature = NATURE_QUIET,
+        .abilitySlot = 2,
     },
     [SPECIES_PUMPKABOO_LARGE] =
     {
-        .moves = {MOVE_ENERGY_BALL, MOVE_SHADOW_BALL, MOVE_FIRE_BLAST, MOVE_PROTECT},
-        .nature = NATURE_MODEST,
-        .abilitySlot = 1,
+        .moves = {MOVE_TRICK_ROOM, MOVE_WILL_O_WISP, MOVE_SHADOW_BALL, MOVE_PROTECT},
+        .nature = NATURE_QUIET,
+        .abilitySlot = 2,
     },
     [SPECIES_PUMPKABOO_SUPER] =
     {
-        .moves = {MOVE_GIGA_DRAIN, MOVE_SYNTHESIS, MOVE_WILL_O_WISP, MOVE_FIRE_BLAST},
-        .nature = NATURE_CALM,
-        .abilitySlot = 1,
+        .moves = {MOVE_TRICK_ROOM, MOVE_WILL_O_WISP, MOVE_SHADOW_BALL, MOVE_PROTECT},
+        .nature = NATURE_QUIET,
+        .abilitySlot = 2,
     },
     [SPECIES_GOURGEIST_SMALL] =
     {
-        .moves = {MOVE_PROTECT, MOVE_POWER_WHIP, MOVE_POLTERGEIST, MOVE_WILL_O_WISP},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_SHADOW_BALL, MOVE_ENERGY_BALL, MOVE_WILL_O_WISP, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
         .abilitySlot = 1,
     },
     [SPECIES_GOURGEIST_LARGE] =
     {
-        .moves = {MOVE_SEED_BOMB, MOVE_WILL_O_WISP, MOVE_PROTECT, MOVE_PHANTOM_FORCE},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_SHADOW_BALL, MOVE_ENERGY_BALL, MOVE_WILL_O_WISP, MOVE_PROTECT},
+        .nature = NATURE_MODEST,
         .abilitySlot = 1,
     },
     [SPECIES_GOURGEIST_SUPER] =
     {
-        .moves = {MOVE_SHADOW_SNEAK, MOVE_PROTECT, MOVE_POWER_WHIP, MOVE_POLTERGEIST},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_TRICK_ROOM, MOVE_SHADOW_BALL, MOVE_ENERGY_BALL, MOVE_PROTECT},
+        .nature = NATURE_QUIET,
         .abilitySlot = 1,
     },
     [SPECIES_ZYGARDE_10] =
     {
-        .moves = {MOVE_LANDS_WRATH, MOVE_DRAGON_PULSE, MOVE_CRUNCH, MOVE_GLARE},
+        .moves = {MOVE_LANDS_WRATH, MOVE_CRUNCH, MOVE_GLARE, MOVE_COIL},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_ZYGARDE_10_POWER_CONSTRUCT] =
     {
-        .moves = {MOVE_LANDS_WRATH, MOVE_DRAGON_PULSE, MOVE_CRUNCH, MOVE_GLARE},
+        .moves = {MOVE_LANDS_WRATH, MOVE_CRUNCH, MOVE_GLARE, MOVE_COIL},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_ZYGARDE_50_POWER_CONSTRUCT] =
     {
-        .moves = {MOVE_LANDS_WRATH, MOVE_DRAGON_PULSE, MOVE_CRUNCH, MOVE_GLARE},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_LANDS_WRATH, MOVE_CRUNCH, MOVE_GLARE, MOVE_COIL},
+        .nature = NATURE_CAREFUL,
         .abilitySlot = 0,
     },
     [SPECIES_HOOPA_UNBOUND] =
@@ -6321,25 +6321,25 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_ORICORIO_POM_POM] =
     {
-        .moves = {MOVE_HURRICANE, MOVE_PROTECT, MOVE_REVELATION_DANCE, MOVE_TAILWIND},
+        .moves = {MOVE_REVELATION_DANCE, MOVE_HURRICANE, MOVE_TAILWIND, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_ORICORIO_PAU] =
     {
-        .moves = {MOVE_PROTECT, MOVE_QUIVER_DANCE, MOVE_REVELATION_DANCE, MOVE_AIR_SLASH},
+        .moves = {MOVE_QUIVER_DANCE, MOVE_REVELATION_DANCE, MOVE_AIR_SLASH, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_ORICORIO_SENSU] =
     {
-        .moves = {MOVE_HURRICANE, MOVE_PROTECT, MOVE_REVELATION_DANCE, MOVE_TAILWIND},
+        .moves = {MOVE_REVELATION_DANCE, MOVE_HURRICANE, MOVE_TAILWIND, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_ROCKRUFF_OWN_TEMPO] =
     {
-        .moves = {MOVE_STONE_EDGE, MOVE_CRUNCH, MOVE_TACKLE, MOVE_STEALTH_ROCK},
+        .moves = {MOVE_ROCK_SLIDE, MOVE_CRUNCH, MOVE_HOWL, MOVE_SCARY_FACE},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
@@ -6351,97 +6351,97 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_LYCANROC_DUSK] =
     {
-        .moves = {MOVE_SWORDS_DANCE, MOVE_ACCELEROCK, MOVE_ROCK_SLIDE, MOVE_DRILL_RUN},
+        .moves = {MOVE_ACCELEROCK, MOVE_ROCK_SLIDE, MOVE_DRILL_RUN, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_SILVALLY_FIGHTING] =
     {
-        .moves = {MOVE_SWORDS_DANCE, MOVE_MULTI_ATTACK, MOVE_SHADOW_CLAW, MOVE_U_TURN},
+        .moves = {MOVE_SWORDS_DANCE, MOVE_MULTI_ATTACK, MOVE_ROCK_SLIDE, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_SILVALLY_FLYING] =
     {
-        .moves = {MOVE_SWORDS_DANCE, MOVE_MULTI_ATTACK, MOVE_FLAME_CHARGE, MOVE_SURF},
-        .nature = NATURE_NAIVE,
+        .moves = {MOVE_MULTI_ATTACK, MOVE_TAILWIND, MOVE_U_TURN, MOVE_PROTECT},
+        .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_SILVALLY_POISON] =
     {
-        .moves = {MOVE_MULTI_ATTACK, MOVE_SURF, MOVE_U_TURN, MOVE_DEFOG},
-        .nature = NATURE_CAREFUL,
+        .moves = {MOVE_MULTI_ATTACK, MOVE_ICY_WIND, MOVE_PARTING_SHOT, MOVE_PROTECT},
+        .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_SILVALLY_GROUND] =
     {
-        .moves = {MOVE_SWORDS_DANCE, MOVE_MULTI_ATTACK, MOVE_ROCK_SLIDE, MOVE_U_TURN},
+        .moves = {MOVE_SWORDS_DANCE, MOVE_MULTI_ATTACK, MOVE_ROCK_SLIDE, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_SILVALLY_ROCK] =
     {
-        .moves = {MOVE_SWORDS_DANCE, MOVE_MULTI_ATTACK, MOVE_ZEN_HEADBUTT, MOVE_FIRE_FANG},
+        .moves = {MOVE_MULTI_ATTACK, MOVE_ICY_WIND, MOVE_THUNDER_WAVE, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_SILVALLY_BUG] =
     {
-        .moves = {MOVE_MULTI_ATTACK, MOVE_PARTING_SHOT, MOVE_DEFOG, MOVE_FIRE_FANG},
+        .moves = {MOVE_MULTI_ATTACK, MOVE_U_TURN, MOVE_PARTING_SHOT, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_SILVALLY_GHOST] =
     {
-        .moves = {MOVE_SWORDS_DANCE, MOVE_MULTI_ATTACK, MOVE_FLAME_CHARGE, MOVE_EXPLOSION},
+        .moves = {MOVE_MULTI_ATTACK, MOVE_CRUNCH, MOVE_PARTING_SHOT, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_SILVALLY_STEEL] =
     {
-        .moves = {MOVE_DEFOG, MOVE_PARTING_SHOT, MOVE_TOXIC, MOVE_FLAMETHROWER},
-        .nature = NATURE_CALM,
+        .moves = {MOVE_MULTI_ATTACK, MOVE_ICY_WIND, MOVE_PARTING_SHOT, MOVE_PROTECT},
+        .nature = NATURE_CAREFUL,
         .abilitySlot = 0,
     },
     [SPECIES_SILVALLY_FIRE] =
     {
-        .moves = {MOVE_FLAMETHROWER, MOVE_SURF, MOVE_PARTING_SHOT, MOVE_THUNDERBOLT},
-        .nature = NATURE_TIMID,
+        .moves = {MOVE_MULTI_ATTACK, MOVE_SURF, MOVE_PARTING_SHOT, MOVE_PROTECT},
+        .nature = NATURE_NAIVE,
         .abilitySlot = 0,
     },
     [SPECIES_SILVALLY_WATER] =
     {
-        .moves = {MOVE_DEFOG, MOVE_SURF, MOVE_THUNDERBOLT, MOVE_PARTING_SHOT},
-        .nature = NATURE_BOLD,
+        .moves = {MOVE_MULTI_ATTACK, MOVE_ICE_BEAM, MOVE_PARTING_SHOT, MOVE_PROTECT},
+        .nature = NATURE_NAIVE,
         .abilitySlot = 0,
     },
     [SPECIES_SILVALLY_GRASS] =
     {
-        .moves = {MOVE_SWORDS_DANCE, MOVE_MULTI_ATTACK, MOVE_FLAME_CHARGE, MOVE_ROCK_SLIDE},
+        .moves = {MOVE_MULTI_ATTACK, MOVE_ROCK_SLIDE, MOVE_PARTING_SHOT, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_SILVALLY_ELECTRIC] =
     {
-        .moves = {MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_DEFOG, MOVE_PARTING_SHOT},
-        .nature = NATURE_TIMID,
+        .moves = {MOVE_MULTI_ATTACK, MOVE_ICE_BEAM, MOVE_THUNDER_WAVE, MOVE_PROTECT},
+        .nature = NATURE_NAIVE,
         .abilitySlot = 0,
     },
     [SPECIES_SILVALLY_PSYCHIC] =
     {
-        .moves = {MOVE_SWORDS_DANCE, MOVE_MULTI_ATTACK, MOVE_CRUNCH, MOVE_U_TURN},
+        .moves = {MOVE_MULTI_ATTACK, MOVE_CRUNCH, MOVE_THUNDER_WAVE, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_SILVALLY_ICE] =
     {
-        .moves = {MOVE_SWORDS_DANCE, MOVE_MULTI_ATTACK, MOVE_CRUNCH, MOVE_FIRE_FANG},
+        .moves = {MOVE_SWORDS_DANCE, MOVE_MULTI_ATTACK, MOVE_ROCK_SLIDE, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_SILVALLY_DRAGON] =
     {
-        .moves = {MOVE_SWORDS_DANCE, MOVE_DOUBLE_EDGE, MOVE_PARTING_SHOT, MOVE_SHADOW_CLAW},
+        .moves = {MOVE_SWORDS_DANCE, MOVE_MULTI_ATTACK, MOVE_FLAME_CHARGE, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
@@ -6453,50 +6453,50 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_SILVALLY_FAIRY] =
     {
-        .moves = {MOVE_SWORDS_DANCE, MOVE_MULTI_ATTACK, MOVE_CRUNCH, MOVE_FLAME_CHARGE},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_MULTI_ATTACK, MOVE_FLAMETHROWER, MOVE_PARTING_SHOT, MOVE_PROTECT},
+        .nature = NATURE_NAIVE,
         .abilitySlot = 0,
     },
     [SPECIES_MINIOR_METEOR_ORANGE] =
     {
-        .moves = {MOVE_HEAD_SMASH, MOVE_ACROBATICS, MOVE_SHELL_SMASH, MOVE_STEALTH_ROCK},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_SHELL_SMASH, MOVE_ROCK_SLIDE, MOVE_ACROBATICS, MOVE_HEAD_SMASH},
+        .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_MINIOR_METEOR_YELLOW] =
     {
-        .moves = {MOVE_HEAD_SMASH, MOVE_ACROBATICS, MOVE_SHELL_SMASH, MOVE_STEALTH_ROCK},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_SHELL_SMASH, MOVE_ROCK_SLIDE, MOVE_ACROBATICS, MOVE_HEAD_SMASH},
+        .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_MINIOR_METEOR_GREEN] =
     {
-        .moves = {MOVE_HEAD_SMASH, MOVE_ACROBATICS, MOVE_SHELL_SMASH, MOVE_STEALTH_ROCK},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_SHELL_SMASH, MOVE_ROCK_SLIDE, MOVE_ACROBATICS, MOVE_HEAD_SMASH},
+        .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_MINIOR_METEOR_BLUE] =
     {
-        .moves = {MOVE_HEAD_SMASH, MOVE_ACROBATICS, MOVE_SHELL_SMASH, MOVE_STEALTH_ROCK},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_SHELL_SMASH, MOVE_ROCK_SLIDE, MOVE_ACROBATICS, MOVE_HEAD_SMASH},
+        .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_MINIOR_METEOR_INDIGO] =
     {
-        .moves = {MOVE_HEAD_SMASH, MOVE_ACROBATICS, MOVE_SHELL_SMASH, MOVE_STEALTH_ROCK},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_SHELL_SMASH, MOVE_ROCK_SLIDE, MOVE_ACROBATICS, MOVE_HEAD_SMASH},
+        .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_MINIOR_METEOR_VIOLET] =
     {
-        .moves = {MOVE_HEAD_SMASH, MOVE_ACROBATICS, MOVE_SHELL_SMASH, MOVE_STEALTH_ROCK},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_SHELL_SMASH, MOVE_ROCK_SLIDE, MOVE_ACROBATICS, MOVE_HEAD_SMASH},
+        .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_NECROZMA_DUSK_MANE] =
     {
-        .moves = {MOVE_EXPANDING_FORCE, MOVE_METEOR_BEAM, MOVE_EARTH_POWER, MOVE_PROTECT},
-        .nature = NATURE_MODEST,
+        .moves = {MOVE_IRON_HEAD, MOVE_EARTHQUAKE, MOVE_TRICK_ROOM, MOVE_PROTECT},
+        .nature = NATURE_BRAVE,
         .abilitySlot = 0,
     },
     [SPECIES_NECROZMA_DAWN_WINGS] =
@@ -6507,74 +6507,74 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_MAGEARNA_ORIGINAL_COLOR] =
     {
-        .moves = {MOVE_FLEUR_CANNON, MOVE_FLASH_CANNON, MOVE_TRICK_ROOM, MOVE_DAZZLING_GLEAM},
-        .nature = NATURE_MODEST,
+        .moves = {MOVE_FLEUR_CANNON, MOVE_FLASH_CANNON, MOVE_TRICK_ROOM, MOVE_PROTECT},
+        .nature = NATURE_QUIET,
         .abilitySlot = 0,
     },
     [SPECIES_TOXTRICITY_LOW_KEY] =
     {
-        .moves = {MOVE_OVERDRIVE, MOVE_SLUDGE_BOMB, MOVE_VOLT_SWITCH, MOVE_PROTECT},
-        .nature = NATURE_TIMID,
+        .moves = {MOVE_OVERDRIVE, MOVE_SLUDGE_BOMB, MOVE_SNARL, MOVE_PROTECT},
+        .nature = NATURE_MODEST,
         .abilitySlot = 0,
     },
     [SPECIES_SINISTEA_ANTIQUE] =
     {
-        .moves = {MOVE_SHADOW_BALL, MOVE_GIGA_DRAIN, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
-        .nature = NATURE_MODEST,
+        .moves = {MOVE_NASTY_PLOT, MOVE_SHADOW_BALL, MOVE_GIGA_DRAIN, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_POLTEAGEIST_ANTIQUE] =
     {
-        .moves = {MOVE_SHADOW_BALL, MOVE_PROTECT, MOVE_SHELL_SMASH, MOVE_GIGA_DRAIN},
+        .moves = {MOVE_SHELL_SMASH, MOVE_SHADOW_BALL, MOVE_GIGA_DRAIN, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 2,
     },
     [SPECIES_ALCREMIE_RUBY_CREAM] =
     {
-        .moves = {MOVE_DAZZLING_GLEAM, MOVE_PROTECT, MOVE_HELPING_HAND, MOVE_DECORATE},
-        .nature = NATURE_MODEST,
+        .moves = {MOVE_DAZZLING_GLEAM, MOVE_DECORATE, MOVE_HELPING_HAND, MOVE_PROTECT},
+        .nature = NATURE_CALM,
         .abilitySlot = 2,
     },
     [SPECIES_ALCREMIE_MATCHA_CREAM] =
     {
-        .moves = {MOVE_RECOVER, MOVE_PROTECT, MOVE_DAZZLING_GLEAM, MOVE_HYPER_BEAM},
-        .nature = NATURE_MODEST,
+        .moves = {MOVE_DAZZLING_GLEAM, MOVE_DECORATE, MOVE_HELPING_HAND, MOVE_PROTECT},
+        .nature = NATURE_CALM,
         .abilitySlot = 2,
     },
     [SPECIES_ALCREMIE_MINT_CREAM] =
     {
-        .moves = {MOVE_RECOVER, MOVE_PROTECT, MOVE_DAZZLING_GLEAM, MOVE_HYPER_BEAM},
-        .nature = NATURE_MODEST,
+        .moves = {MOVE_DAZZLING_GLEAM, MOVE_DECORATE, MOVE_HELPING_HAND, MOVE_PROTECT},
+        .nature = NATURE_CALM,
         .abilitySlot = 2,
     },
     [SPECIES_ALCREMIE_LEMON_CREAM] =
     {
-        .moves = {MOVE_RECOVER, MOVE_PROTECT, MOVE_DAZZLING_GLEAM, MOVE_HYPER_BEAM},
-        .nature = NATURE_MODEST,
+        .moves = {MOVE_DAZZLING_GLEAM, MOVE_DECORATE, MOVE_HELPING_HAND, MOVE_PROTECT},
+        .nature = NATURE_CALM,
         .abilitySlot = 2,
     },
     [SPECIES_ALCREMIE_SALTED_CREAM] =
     {
-        .moves = {MOVE_RECOVER, MOVE_PROTECT, MOVE_DAZZLING_GLEAM, MOVE_HYPER_BEAM},
-        .nature = NATURE_MODEST,
+        .moves = {MOVE_DAZZLING_GLEAM, MOVE_DECORATE, MOVE_HELPING_HAND, MOVE_PROTECT},
+        .nature = NATURE_CALM,
         .abilitySlot = 2,
     },
     [SPECIES_ALCREMIE_RUBY_SWIRL] =
     {
-        .moves = {MOVE_RECOVER, MOVE_PROTECT, MOVE_DAZZLING_GLEAM, MOVE_HYPER_BEAM},
-        .nature = NATURE_MODEST,
+        .moves = {MOVE_DAZZLING_GLEAM, MOVE_DECORATE, MOVE_HELPING_HAND, MOVE_PROTECT},
+        .nature = NATURE_CALM,
         .abilitySlot = 2,
     },
     [SPECIES_ALCREMIE_CARAMEL_SWIRL] =
     {
-        .moves = {MOVE_RECOVER, MOVE_PROTECT, MOVE_DAZZLING_GLEAM, MOVE_HYPER_BEAM},
-        .nature = NATURE_MODEST,
+        .moves = {MOVE_DAZZLING_GLEAM, MOVE_DECORATE, MOVE_HELPING_HAND, MOVE_PROTECT},
+        .nature = NATURE_CALM,
         .abilitySlot = 2,
     },
     [SPECIES_ALCREMIE_RAINBOW_SWIRL] =
     {
-        .moves = {MOVE_RECOVER, MOVE_PROTECT, MOVE_DAZZLING_GLEAM, MOVE_HYPER_BEAM},
-        .nature = NATURE_MODEST,
+        .moves = {MOVE_DAZZLING_GLEAM, MOVE_DECORATE, MOVE_HELPING_HAND, MOVE_PROTECT},
+        .nature = NATURE_CALM,
         .abilitySlot = 2,
     },
     [SPECIES_INDEEDEE_FEMALE] =
@@ -6585,14 +6585,14 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_ZACIAN_CROWNED_SWORD] =
     {
-        .moves = {MOVE_SACRED_SWORD, MOVE_SUBSTITUTE, MOVE_PROTECT, MOVE_IRON_HEAD},
+        .moves = {MOVE_IRON_HEAD, MOVE_SACRED_SWORD, MOVE_SUBSTITUTE, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_ZAMAZENTA_CROWNED_SHIELD] =
     {
-        .moves = {MOVE_CLOSE_COMBAT, MOVE_IRON_HEAD, MOVE_CRUNCH, MOVE_HOWL},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_CLOSE_COMBAT, MOVE_IRON_HEAD, MOVE_WIDE_GUARD, MOVE_PROTECT},
+        .nature = NATURE_IMPISH,
         .abilitySlot = 0,
     },
     [SPECIES_URSHIFU_RAPID_STRIKE_STYLE] =
@@ -6603,49 +6603,49 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_ZARUDE_DADA] =
     {
-        .moves = {MOVE_POWER_WHIP, MOVE_U_TURN, MOVE_JUNGLE_HEALING, MOVE_BITE},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_POWER_WHIP, MOVE_U_TURN, MOVE_JUNGLE_HEALING, MOVE_HAMMER_ARM},
+        .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_CALYREX_ICE_RIDER] =
     {
-        .moves = {MOVE_GLACIAL_LANCE, MOVE_CLOSE_COMBAT, MOVE_PSYCHIC_FANGS, MOVE_PROTECT},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_TRICK_ROOM, MOVE_GLACIAL_LANCE, MOVE_CLOSE_COMBAT, MOVE_PROTECT},
+        .nature = NATURE_BRAVE,
         .abilitySlot = 0,
     },
     [SPECIES_CALYREX_SHADOW_RIDER] =
     {
-        .moves = {MOVE_AGILITY, MOVE_CALM_MIND, MOVE_GIGA_DRAIN, MOVE_ASTRAL_BARRAGE},
-        .nature = NATURE_MODEST,
+        .moves = {MOVE_ASTRAL_BARRAGE, MOVE_PSYCHIC, MOVE_NASTY_PLOT, MOVE_PROTECT},
+        .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_SPRIGATITO] =
     {
         .moves = {MOVE_SEED_BOMB, MOVE_SUCKER_PUNCH, MOVE_PLAY_ROUGH, MOVE_PROTECT},
-        .nature = NATURE_ADAMANT,
+        .nature = NATURE_JOLLY,
         .abilitySlot = 2,
     },
     [SPECIES_FLORAGATO] =
     {
-        .moves = {MOVE_LEAF_STORM, MOVE_SUCKER_PUNCH, MOVE_PLAY_ROUGH, MOVE_PROTECT},
+        .moves = {MOVE_SEED_BOMB, MOVE_SUCKER_PUNCH, MOVE_PLAY_ROUGH, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 2,
     },
     [SPECIES_MEOWSCARADA] =
     {
-        .moves = {MOVE_PROTECT, MOVE_KNOCK_OFF, MOVE_SUCKER_PUNCH, MOVE_FLOWER_TRICK},
+        .moves = {MOVE_FLOWER_TRICK, MOVE_KNOCK_OFF, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
-        .abilitySlot = 0,
+        .abilitySlot = 2,
     },
     [SPECIES_FUECOCO] =
     {
-        .moves = {MOVE_FLAMETHROWER, MOVE_SLACK_OFF, MOVE_ROAR, MOVE_HYPER_VOICE},
+        .moves = {MOVE_FLAMETHROWER, MOVE_SNARL, MOVE_YAWN, MOVE_SLACK_OFF},
         .nature = NATURE_CALM,
         .abilitySlot = 2,
     },
     [SPECIES_CROCALOR] =
     {
-        .moves = {MOVE_FLAMETHROWER, MOVE_WILL_O_WISP, MOVE_ROAR, MOVE_SLACK_OFF},
+        .moves = {MOVE_FLAMETHROWER, MOVE_WILL_O_WISP, MOVE_SLACK_OFF, MOVE_PROTECT},
         .nature = NATURE_CALM,
         .abilitySlot = 2,
     },
@@ -6657,61 +6657,61 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_NACLI] =
     {
-        .moves = {MOVE_STONE_EDGE, MOVE_ICE_PUNCH, MOVE_PROTECT, MOVE_RECOVER},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_ROCK_SLIDE, MOVE_CURSE, MOVE_RECOVER, MOVE_PROTECT},
+        .nature = NATURE_CAREFUL,
         .abilitySlot = 0,
     },
     [SPECIES_NACLSTACK] =
     {
-        .moves = {MOVE_STEALTH_ROCK, MOVE_SALT_CURE, MOVE_RECOVER, MOVE_CURSE},
-        .nature = NATURE_IMPISH,
+        .moves = {MOVE_SALT_CURE, MOVE_ROCK_SLIDE, MOVE_RECOVER, MOVE_PROTECT},
+        .nature = NATURE_CAREFUL,
         .abilitySlot = 0,
     },
     [SPECIES_GARGANACL] =
     {
-        .moves = {MOVE_STONE_EDGE, MOVE_IRON_DEFENSE, MOVE_RECOVER, MOVE_MEGAHORN},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_SALT_CURE, MOVE_WIDE_GUARD, MOVE_RECOVER, MOVE_PROTECT},
+        .nature = NATURE_CAREFUL,
         .abilitySlot = 0,
     },
     [SPECIES_FINIZEN] =
     {
-        .moves = {MOVE_SURF, MOVE_BOOMBURST, MOVE_ICE_BEAM, MOVE_PROTECT},
+        .moves = {MOVE_HYDRO_PUMP, MOVE_ICY_WIND, MOVE_ENCORE, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_PALAFIN] =
     {
-        .moves = {MOVE_JET_PUNCH, MOVE_WAVE_CRASH, MOVE_FLIP_TURN, MOVE_PROTECT},
+        .moves = {MOVE_BULK_UP, MOVE_JET_PUNCH, MOVE_WAVE_CRASH, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_DONDOZO] =
     {
-        .moves = {MOVE_YAWN, MOVE_WAVE_CRASH, MOVE_FISSURE, MOVE_PROTECT},
-        .nature = NATURE_RELAXED,
+        .moves = {MOVE_WAVE_CRASH, MOVE_HEAVY_SLAM, MOVE_YAWN, MOVE_PROTECT},
+        .nature = NATURE_CAREFUL,
         .abilitySlot = 1,
     },
     [SPECIES_TATSUGIRI] =
     {
-        .moves = {MOVE_MUDDY_WATER, MOVE_ICY_WIND, MOVE_DRAGON_PULSE, MOVE_PROTECT},
+        .moves = {MOVE_MUDDY_WATER, MOVE_DRAGON_PULSE, MOVE_ICY_WIND, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_TATSUGIRI_DROOPY] =
     {
-        .moves = {MOVE_MUDDY_WATER, MOVE_ICY_WIND, MOVE_DRAGON_PULSE, MOVE_PROTECT},
+        .moves = {MOVE_MUDDY_WATER, MOVE_DRAGON_PULSE, MOVE_ICY_WIND, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_TATSUGIRI_STRETCHY] =
     {
-        .moves = {MOVE_MUDDY_WATER, MOVE_ICY_WIND, MOVE_DRAGON_PULSE, MOVE_PROTECT},
+        .moves = {MOVE_MUDDY_WATER, MOVE_DRAGON_PULSE, MOVE_ICY_WIND, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_ANNIHILAPE] =
     {
-        .moves = {MOVE_FINAL_GAMBIT, MOVE_CLOSE_COMBAT, MOVE_RAGE_FIST, MOVE_TAUNT},
+        .moves = {MOVE_BULK_UP, MOVE_RAGE_FIST, MOVE_CLOSE_COMBAT, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 2,
     },
@@ -6729,13 +6729,13 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_GREAT_TUSK] =
     {
-        .moves = {MOVE_KNOCK_OFF, MOVE_PROTECT, MOVE_HEADLONG_RUSH, MOVE_CLOSE_COMBAT},
+        .moves = {MOVE_HEADLONG_RUSH, MOVE_CLOSE_COMBAT, MOVE_KNOCK_OFF, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_FLUTTER_MANE] =
     {
-        .moves = {MOVE_THUNDER_WAVE, MOVE_MOONBLAST, MOVE_ICY_WIND, MOVE_TAUNT},
+        .moves = {MOVE_MOONBLAST, MOVE_SHADOW_BALL, MOVE_ICY_WIND, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
@@ -6753,79 +6753,79 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_GLIMMET] =
     {
-        .moves = {MOVE_STEALTH_ROCK, MOVE_POWER_GEM, MOVE_SLUDGE_BOMB, MOVE_ICY_WIND},
+        .moves = {MOVE_STEALTH_ROCK, MOVE_SLUDGE_BOMB, MOVE_POWER_GEM, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_GLIMMORA] =
     {
-        .moves = {MOVE_STEALTH_ROCK, MOVE_SLUDGE_BOMB, MOVE_SPIKY_SHIELD, MOVE_POWER_GEM},
+        .moves = {MOVE_STEALTH_ROCK, MOVE_SLUDGE_BOMB, MOVE_POWER_GEM, MOVE_SPIKY_SHIELD},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_GIMMIGHOUL] =
     {
-        .moves = {MOVE_SHADOW_BALL, MOVE_ICY_WIND, MOVE_SECRET_POWER, MOVE_PROTECT},
+        .moves = {MOVE_SHADOW_BALL, MOVE_ICY_WIND, MOVE_LIGHT_SCREEN, MOVE_PROTECT},
         .nature = NATURE_MODEST,
         .abilitySlot = 0,
     },
     [SPECIES_GIMMIGHOUL_ROAMING] =
     {
-        .moves = {MOVE_SHADOW_BALL, MOVE_ICY_WIND, MOVE_SECRET_POWER, MOVE_PROTECT},
+        .moves = {MOVE_SHADOW_BALL, MOVE_ICY_WIND, MOVE_LIGHT_SCREEN, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_GHOLDENGO] =
     {
-        .moves = {MOVE_PROTECT, MOVE_NASTY_PLOT, MOVE_MAKE_IT_RAIN, MOVE_SHADOW_BALL},
+        .moves = {MOVE_NASTY_PLOT, MOVE_MAKE_IT_RAIN, MOVE_SHADOW_BALL, MOVE_PROTECT},
         .nature = NATURE_MODEST,
         .abilitySlot = 0,
     },
     [SPECIES_CHIEN_PAO] =
     {
-        .moves = {MOVE_ICICLE_CRASH, MOVE_SUCKER_PUNCH, MOVE_THROAT_CHOP, MOVE_PROTECT},
+        .moves = {MOVE_ICICLE_CRASH, MOVE_SUCKER_PUNCH, MOVE_SACRED_SWORD, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_TING_LU] =
     {
-        .moves = {MOVE_STOMPING_TANTRUM, MOVE_RUINATION, MOVE_SPIKES, MOVE_WHIRLWIND},
-        .nature = NATURE_ADAMANT,
+        .moves = {MOVE_RUINATION, MOVE_STOMPING_TANTRUM, MOVE_THROAT_CHOP, MOVE_PROTECT},
+        .nature = NATURE_CAREFUL,
         .abilitySlot = 0,
     },
     [SPECIES_CHI_YU] =
     {
-        .moves = {MOVE_DARK_PULSE, MOVE_FLAMETHROWER, MOVE_PROTECT, MOVE_HYPER_BEAM},
+        .moves = {MOVE_NASTY_PLOT, MOVE_DARK_PULSE, MOVE_FLAMETHROWER, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_ROARING_MOON] =
     {
-        .moves = {MOVE_JAW_LOCK, MOVE_ROOST, MOVE_TAUNT, MOVE_DRAGON_DANCE},
-        .nature = NATURE_IMPISH,
+        .moves = {MOVE_DRAGON_DANCE, MOVE_BREAKING_SWIPE, MOVE_THROAT_CHOP, MOVE_PROTECT},
+        .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_IRON_VALIANT] =
     {
-        .moves = {MOVE_SWORDS_DANCE, MOVE_CLOSE_COMBAT, MOVE_KNOCK_OFF, MOVE_SPIRIT_BREAK},
+        .moves = {MOVE_CLOSE_COMBAT, MOVE_SPIRIT_BREAK, MOVE_WIDE_GUARD, MOVE_PROTECT},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_WALKING_WAKE] =
     {
-        .moves = {MOVE_HYDRO_STEAM, MOVE_FLAMETHROWER, MOVE_PROTECT, MOVE_DRAGON_PULSE},
+        .moves = {MOVE_HYDRO_STEAM, MOVE_FLAMETHROWER, MOVE_DRAGON_PULSE, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
     [SPECIES_OGERPON] =
     {
         .moves = {MOVE_IVY_CUDGEL, MOVE_SUPERPOWER, MOVE_FOLLOW_ME, MOVE_SPIKY_SHIELD},
-        .nature = NATURE_ADAMANT,
+        .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_OGERPON_WELLSPRING] =
     {
-        .moves = {MOVE_IVY_CUDGEL, MOVE_WOOD_HAMMER, MOVE_FOLLOW_ME, MOVE_SPIKY_SHIELD},
+        .moves = {MOVE_IVY_CUDGEL, MOVE_HORN_LEECH, MOVE_FOLLOW_ME, MOVE_SPIKY_SHIELD},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
@@ -6837,19 +6837,19 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_OGERPON_CORNERSTONE] =
     {
-        .moves = {MOVE_IVY_CUDGEL, MOVE_POWER_WHIP, MOVE_FOLLOW_ME, MOVE_SPIKY_SHIELD},
+        .moves = {MOVE_IVY_CUDGEL, MOVE_HORN_LEECH, MOVE_FOLLOW_ME, MOVE_SPIKY_SHIELD},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_ARCHALUDON] =
     {
-        .moves = {MOVE_FLASH_CANNON, MOVE_DRAGON_PULSE, MOVE_BODY_PRESS, MOVE_ELECTRO_SHOT},
+        .moves = {MOVE_DRACO_METEOR, MOVE_FLASH_CANNON, MOVE_ELECTRO_SHOT, MOVE_BODY_PRESS},
         .nature = NATURE_MODEST,
-        .abilitySlot = 1,
+        .abilitySlot = 0,
     },
     [SPECIES_GOUGING_FIRE] =
     {
-        .moves = {MOVE_FLARE_BLITZ, MOVE_HOWL, MOVE_BURNING_BULWARK, MOVE_DRAGON_CLAW},
+        .moves = {MOVE_FLARE_BLITZ, MOVE_DRAGON_CLAW, MOVE_HOWL, MOVE_BURNING_BULWARK},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
