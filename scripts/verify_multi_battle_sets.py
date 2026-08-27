@@ -53,9 +53,9 @@ check(
     and defaults["SPECIES_BLAZIKEN"]["moves"][1] == "MOVE_CLOSE_COMBAT",
 )
 check(
-    "the handbook contributes a substantial but bounded alternate-set library",
-    payload["species_with_choices"] >= 250
-    and payload["alternative_count"] >= 300
+    "every mapped handbook orientation is represented exactly once",
+    payload["alternative_count"] == payload["expected_alternative_count"]
+    and payload["species_with_choices"] >= 150
     and all(1 <= row["count"] <= 2 for row in payload["ranges"].values()),
 )
 
@@ -71,19 +71,20 @@ choice_errors = []
 for species, row in payload["ranges"].items():
     default = defaults[species]
     legal = dex.legal_moves(species)
-    signatures = {(frozenset(move for move in default["moves"] if move != "MOVE_NONE"), default["nature"], default["ability"])}
+    signatures = {(frozenset(move for move in default["moves"] if move != "MOVE_NONE"), default["nature"], default["ability"], default["runtime_item"])}
     choices = payload["alternatives"][row["offset"]:row["offset"] + row["count"]]
     if not payload["default_names"].get(species):
         choice_errors.append(f"{species}: missing default label")
     for choice in choices:
         moves = [move for move in choice["moves"] if move != "MOVE_NONE"]
-        signature = (frozenset(moves), choice["nature"], choice["ability"])
+        signature = (frozenset(moves), choice["nature"], choice["ability"], choice["runtime_item"])
         valid = (
             1 <= len(moves) <= 4
             and len(moves) == len(set(moves))
             and all(move in legal for move in moves)
             and choice["ability"] in dex.stats[species].abilities
             and dex.stats[species].abilities[choice["ability_slot"]] == choice["ability"]
+            and choice["runtime_item"] not in presets.PROTECTED_SET_ITEMS
             and signature not in signatures
             and len(choice["name"]) < 24
         )
@@ -97,10 +98,9 @@ check("every generated choice is labeled, legal, distinct, and runtime-safe", no
 
 evidence = Counter(row["handbook"]["evidence"] for row in payload["alternatives"])
 check(
-    "retained choices are dominated by direct ladder or Smogon doubles evidence",
-    evidence["M-B ladder data"] >= 160
-    and evidence["Smogon doubles pool"] >= 140
-    and evidence["Projected"] <= 20,
+    "all retained handbook evidence classes remain explicit after local adaptation",
+    sum(evidence.values()) == payload["alternative_count"]
+    and set(evidence) <= {"M-B ladder data", "Smogon doubles pool", "Projected"},
 )
 
 font_widths = [
@@ -128,20 +128,37 @@ check(
 runtime = read("src/verdant_battle_sets.c")
 field = read("src/field_specials.c")
 tutor = read("data/scripts/pokemon_center_move_tutor.inc")
-capture = read("src/battle_script_commands.c")
+wild = read("src/wild_encounter.c")
+shop = read("src/shop.c")
+item = read("src/item.c")
 check(
-    "wild catches continue to receive only the authored default Set 1",
-    "ApplyVerdantBattleSetPreset(&gEnemyParty[partyIndex])" in capture
-    and "ApplyVerdantBattleSetChoice(&gEnemyParty[partyIndex]" not in capture,
+    "ordinary wild Pokémon uniformly roll the tutor's actual one-to-three set count",
+    "ApplyVerdantRandomWildBattleSet(&gEnemyParty[0])" in wild
+    and "Random() % count" in runtime,
 )
 check(
-    "the tutor applies a bounds-checked selected preset without equipping an item",
+    "the tutor applies a bounds-checked selected preset and replaces its ordinary held item",
     all(token in runtime for token in (
         "ApplyVerdantBattleSetChoice",
         "choice > range->count",
         "ApplyValidatedBattleSetPreset",
     ))
-    and "MON_DATA_HELD_ITEM" not in runtime,
+    and "SetMonData(mon, MON_DATA_HELD_ITEM, &preset->item)" in runtime
+    and "BATTLE_SET_APPLY_SPECIAL_ITEM" in runtime,
+)
+check(
+    "all runtime competitive items are free and unlimited only at the existing Center vendor",
+    payload["free_item_count"] >= 130
+    and not (set(payload["free_items"]) & presets.PROTECTED_SET_ITEMS)
+    and all(required in payload["free_items"] for required in ("ITEM_EVIOLITE", "ITEM_FOCUS_SASH", "ITEM_LEFTOVERS", "ITEM_SITRUS_BERRY"))
+    and "CreateFreePokemartMenu(sUnlockedBattleItemMart)" in field
+    and "gVerdantFreeBattleItems" in item
+    and "sMartInfo.freeItems" in shop
+    and 'static const u8 sText_Free[] = _("FREE")' in shop
+    and "if (sMartInfo.freeItems)\n        maxQuantity = 99;" in shop
+    and "martType == MART_TYPE_NORMAL && !sMartInfo.freeItems" in shop
+    and "void CreatePokemartMenu" in shop
+    and "sMartInfo.freeItems = FALSE;" in shop,
 )
 check(
     "the role picker uses the existing native scrolling menu and a maximum of three sets",

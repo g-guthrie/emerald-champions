@@ -495,11 +495,10 @@ checks = {
         and "FLAG_VERDANT_MIGRATED_MEGA_KIT" in save_source
         and "PlayerOwnsItemAnywhere(migration->item)" in save_source
     ),
-    "item discovery includes the Bag PC party Day Care and storage boxes": (
+    "persistent item ownership checks still include Bag PC party Day Care and storage boxes": (
         "CheckBagHasItem(itemId, 1) || CheckPCHasItem(itemId, 1)" in item_source
         and "gSaveBlock1Ptr->daycare.mons[i].mon" in item_source
         and "GetBoxMonDataAt(boxId, boxPosition, MON_DATA_HELD_ITEM)" in item_source
-        and "CheckPCHasItem(sBattleItemUnlocks[i].itemId, 1)" in item_source
     ),
     "all replaced world pickups have old-save migrations": all(
         f"{{{pickup_flag}, {item}, {migration_flag}}}" in save_source
@@ -614,14 +613,14 @@ checks = {
             "BattleScript_WeakArmorSpeedAnim:", 1
         )[1].split("BattleScript_WeakArmorActivatesEnd:", 1)[0]
     ),
-    "wild item exchanges cannot duplicate permanent items on capture": (
+    "wild loadout items restore before a captured Pokémon is transferred": (
         "u16 originalEnemyItems[PARTY_SIZE]" in read("include/battle.h")
         and "gBattleStruct->originalEnemyItems[i] = GetMonData(&gEnemyParty[i]"
         in read("src/battle_main.c")
         and "if (currentItem != originalItem)" in battle_script_command_source.split(
             "static void Cmd_givecaughtmon(void)", 2
         )[2].split("static void Cmd_trysetcaughtmondexflags", 1)[0]
-        and "SetMonData(&gEnemyParty[partyIndex], MON_DATA_HELD_ITEM, &noItem)"
+        and "SetMonData(&gEnemyParty[partyIndex], MON_DATA_HELD_ITEM, &originalItem)"
         in battle_script_command_source
     ),
     "status immunity checks the actual Minior battler": (
@@ -1009,7 +1008,8 @@ checks = {
         and "for (i = 0; i < MAX_MON_MOVES; i++)\n        SetMonMoveSlot" in battle_set_runtime
         and "MON_DATA_NATURE" in battle_set_runtime
         and "MON_DATA_ABILITY_NUM" in battle_set_runtime
-        and "MON_DATA_HELD_ITEM" not in battle_set_runtime
+        and "MON_DATA_HELD_ITEM" in battle_set_runtime
+        and "BATTLE_SET_APPLY_SPECIAL_ITEM" in battle_set_runtime
         and "_EV" not in battle_set_runtime
         and battle_set_runtime.index("preset->nature >= NUM_NATURES") < battle_set_runtime.index("SetMonData(mon, MON_DATA_PP_BONUSES")
         and battle_set_runtime.count("CalculateMonStats(mon);") == 1
@@ -1054,19 +1054,20 @@ checks = {
     "world TM pickups replaced": "finditem ITEM_TM" not in read("data/scripts/item_ball_scripts.inc"),
     "gifted TMs replaced": "giveitem ITEM_TM" not in "\n".join(p.read_text() for p in (ROOT / "data").rglob("*.inc")),
     "dead ability items removed from marts": "ITEM_ABILITY_CAPSULE" not in read("data/scripts/general_mart.inc") and "ITEM_ABILITY_PATCH" not in read("data/scripts/general_mart.inc"),
-    "battle items permanently unlock": "BuildUnlockedBattleItemList" in read("src/item.c"),
-    "Rare Candy remains in medicine Marts and ten core items move to Center battle vendors": (
+    "competitive held items are free and unlimited at Center vendors": (
+        "gVerdantFreeBattleItems" in read("src/item.c")
+        and "CreateFreePokemartMenu(sUnlockedBattleItemMart)" in field_specials_source
+        and "sMartInfo.freeItems" in read("src/shop.c")
+        and 'static const u8 sText_Free[] = _("FREE")' in read("src/shop.c")
+        and "ITEM_WELLSPRING_MASK" not in read("src/data/pokemon/verdant_multi_battle_sets.h").split("gVerdantFreeBattleItems[]", 1)[1]
+    ),
+    "Rare Candy remains in medicine Marts while Center loadout items stay separate": (
         "BuildPokemartItemsWithCoreStock" not in read("src/shop.c")
         and general_mart_stock.count("ITEM_RARE_CANDY") == 9
-        and all(re.search(rf"\{{{item},\s+0\}}", battle_item_unlocks) for item in starter_battle_items)
         and all_map_json.count('"script": "PokemonCenter_BattleItemMart_Script"') == 16
         and all_map_json.count('"script": "General_Pokemart_Script"') == 0
         and '[ITEM_RARE_CANDY]' in read("src/data/items.h")
         and '.price = 1000' in read("src/data/items.h").split('[ITEM_RARE_CANDY]', 1)[1].split('},', 1)[0]
-        and all(
-            ".price = 1000" in read("src/data/items.h").split(f"[{item}]", 1)[1].split("},", 1)[0]
-            for item in starter_battle_items
-        )
     ),
     "Poké Mart item names cannot overrun the Cancel row": (
         "u8 (*sItemNames)[ITEM_NAME_LENGTH]" in read("src/shop.c")
@@ -1183,9 +1184,7 @@ checks = {
             "header->honeyMonsInfo",
             "SPECIES_FEEBAS",
             "GetStringWidth(1, name, 0)",
-            "CollectRouteSignSpeciesChances",
-            "ConvertIntToDecimalStringN",
-            "sText_RouteSignSpeciesPercent",
+            "CollectRouteSignSpecies",
             "sText_RouteSignGrass",
             "sText_RouteSignSurf",
             "sText_RouteSignRockSmash",
@@ -1195,6 +1194,8 @@ checks = {
             "sText_RouteSignHoney",
             "sText_RouteSignUnderBridge",
         ))
+        and "sText_RouteSignSpeciesPercent" not in wild_encounter_source
+        and "entries[i].chance" not in wild_encounter_source
         and wild_encounter_source.count("dest = StringCopy(gStringVar4, sText_RouteSignSpeciesHeader);") == 1
         and "dest = StringCopy(dest, sText_RouteSignSpeciesHeader)" not in wild_encounter_source
         and "Common_EventScript_ShowRouteSpecies::" in read("data/event_scripts.s")

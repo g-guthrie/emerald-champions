@@ -2,809 +2,488 @@
 static const u8 sVerdantDefaultSetName_VENUSAUR[] = _("Attacker");
 static const u8 sVerdantDefaultSetName_CHARIZARD[] = _("Tailwind");
 static const u8 sVerdantDefaultSetName_BLASTOISE[] = _("Special Attacker");
-static const u8 sVerdantDefaultSetName_BEEDRILL[] = _("Physical Attacker");
-static const u8 sVerdantDefaultSetName_ARBOK[] = _("Attacker");
-static const u8 sVerdantDefaultSetName_PIKACHU[] = _("Attacker");
 static const u8 sVerdantDefaultSetName_RAICHU[] = _("Support");
-static const u8 sVerdantDefaultSetName_CLEFAIRY[] = _("Support");
 static const u8 sVerdantDefaultSetName_CLEFABLE[] = _("Support");
 static const u8 sVerdantDefaultSetName_NINETALES[] = _("Support");
-static const u8 sVerdantDefaultSetName_WIGGLYTUFF[] = _("Spread Attacker");
-static const u8 sVerdantDefaultSetName_VENOMOTH[] = _("Attacker");
-static const u8 sVerdantDefaultSetName_DUGTRIO[] = _("Spread Attacker");
-static const u8 sVerdantDefaultSetName_PERSIAN[] = _("Support");
 static const u8 sVerdantDefaultSetName_ARCANINE[] = _("Support");
 static const u8 sVerdantDefaultSetName_ALAKAZAM[] = _("Special Attacker");
 static const u8 sVerdantDefaultSetName_VICTREEBEL[] = _("Attacker");
-static const u8 sVerdantDefaultSetName_TENTACRUEL[] = _("Support");
 static const u8 sVerdantDefaultSetName_GOLEM[] = _("Attacker");
 static const u8 sVerdantDefaultSetName_SLOWBRO[] = _("Trick Room");
-static const u8 sVerdantDefaultSetName_DEWGONG[] = _("Recommended");
-static const u8 sVerdantDefaultSetName_CLOYSTER[] = _("Attacker");
+static const u8 sVerdantDefaultSetName_DODRIO[] = _("Physical Attacker");
 static const u8 sVerdantDefaultSetName_GENGAR[] = _("Special Attacker");
-static const u8 sVerdantDefaultSetName_EXEGGUTOR[] = _("Trick Room");
-static const u8 sVerdantDefaultSetName_HITMONLEE[] = _("Recommended");
 static const u8 sVerdantDefaultSetName_KANGASKHAN[] = _("Attacker");
 static const u8 sVerdantDefaultSetName_STARMIE[] = _("Special Attacker");
-static const u8 sVerdantDefaultSetName_SCYTHER[] = _("Tailwind");
-static const u8 sVerdantDefaultSetName_PINSIR[] = _("Physical Attacker");
+static const u8 sVerdantDefaultSetName_TAUROS[] = _("Physical Attacker");
 static const u8 sVerdantDefaultSetName_GYARADOS[] = _("Recommended");
-static const u8 sVerdantDefaultSetName_VAPOREON[] = _("Support");
-static const u8 sVerdantDefaultSetName_JOLTEON[] = _("Attacker");
-static const u8 sVerdantDefaultSetName_FLAREON[] = _("Attacker");
 static const u8 sVerdantDefaultSetName_AERODACTYL[] = _("Support");
-static const u8 sVerdantDefaultSetName_SNORLAX[] = _("Recommended");
-static const u8 sVerdantDefaultSetName_ARTICUNO[] = _("Tailwind");
 static const u8 sVerdantDefaultSetName_ZAPDOS[] = _("Tailwind");
 static const u8 sVerdantDefaultSetName_MOLTRES[] = _("Tailwind");
 static const u8 sVerdantDefaultSetName_DRAGONITE[] = _("Recommended");
 static const u8 sVerdantDefaultSetName_MEWTWO[] = _("Special Attacker");
-static const u8 sVerdantDefaultSetName_MEGANIUM[] = _("Special Attacker");
+static const u8 sVerdantDefaultSetName_MEW[] = _("Support");
+static const u8 sVerdantDefaultSetName_TYPHLOSION[] = _("Spread Attacker");
 static const u8 sVerdantDefaultSetName_FERALIGATR[] = _("Recommended");
-static const u8 sVerdantDefaultSetName_FURRET[] = _("Recommended");
-static const u8 sVerdantDefaultSetName_NOCTOWL[] = _("Tailwind");
-static const u8 sVerdantDefaultSetName_AMPHAROS[] = _("Special Attacker");
-static const u8 sVerdantDefaultSetName_BELLOSSOM[] = _("Support");
-static const u8 sVerdantDefaultSetName_POLITOED[] = _("Support");
-static const u8 sVerdantDefaultSetName_SUNFLORA[] = _("Special Attacker");
-static const u8 sVerdantDefaultSetName_ESPEON[] = _("Support");
-static const u8 sVerdantDefaultSetName_UMBREON[] = _("Support");
-static const u8 sVerdantDefaultSetName_MURKROW[] = _("Tailwind");
+static const u8 sVerdantDefaultSetName_LANTURN[] = _("Recommended");
+static const u8 sVerdantDefaultSetName_JUMPLUFF[] = _("Redirection");
+static const u8 sVerdantDefaultSetName_SLOWKING[] = _("Trick Room");
 static const u8 sVerdantDefaultSetName_STEELIX[] = _("Trick Room");
-static const u8 sVerdantDefaultSetName_GRANBULL[] = _("Recommended");
-static const u8 sVerdantDefaultSetName_HERACROSS[] = _("Physical Attacker");
-static const u8 sVerdantDefaultSetName_MAGCARGO[] = _("Spread Attacker");
+static const u8 sVerdantDefaultSetName_SCIZOR[] = _("Recommended");
 static const u8 sVerdantDefaultSetName_SKARMORY[] = _("Physical Wall");
 static const u8 sVerdantDefaultSetName_HOUNDOOM[] = _("Spread Attacker");
 static const u8 sVerdantDefaultSetName_KINGDRA[] = _("Attacker");
-static const u8 sVerdantDefaultSetName_DONPHAN[] = _("Physical Attacker");
 static const u8 sVerdantDefaultSetName_PORYGON2[] = _("Trick Room");
-static const u8 sVerdantDefaultSetName_HITMONTOP[] = _("Support");
-static const u8 sVerdantDefaultSetName_BLISSEY[] = _("Support");
-static const u8 sVerdantDefaultSetName_ENTEI[] = _("Attacker");
+static const u8 sVerdantDefaultSetName_RAIKOU[] = _("Special Attacker");
 static const u8 sVerdantDefaultSetName_SUICUNE[] = _("Support");
-static const u8 sVerdantDefaultSetName_LUGIA[] = _("Tailwind");
-static const u8 sVerdantDefaultSetName_HO_OH[] = _("Tailwind");
+static const u8 sVerdantDefaultSetName_TYRANITAR[] = _("Physical Attacker");
 static const u8 sVerdantDefaultSetName_CELEBI[] = _("Support");
 static const u8 sVerdantDefaultSetName_SCEPTILE[] = _("Special Attacker");
 static const u8 sVerdantDefaultSetName_BLAZIKEN[] = _("Physical Attacker");
-static const u8 sVerdantDefaultSetName_MIGHTYENA[] = _("Attacker");
+static const u8 sVerdantDefaultSetName_SWAMPERT[] = _("Attacker");
 static const u8 sVerdantDefaultSetName_LUDICOLO[] = _("Attacker");
 static const u8 sVerdantDefaultSetName_SHIFTRY[] = _("Special Attacker");
-static const u8 sVerdantDefaultSetName_PELIPPER[] = _("Tailwind");
 static const u8 sVerdantDefaultSetName_GARDEVOIR[] = _("Special Attacker");
-static const u8 sVerdantDefaultSetName_MASQUERAIN[] = _("Tailwind");
 static const u8 sVerdantDefaultSetName_HARIYAMA[] = _("Trick Room");
 static const u8 sVerdantDefaultSetName_SABLEYE[] = _("Support");
-static const u8 sVerdantDefaultSetName_MAWILE[] = _("Mega Attacker");
 static const u8 sVerdantDefaultSetName_AGGRON[] = _("Mega Physical Attacker");
 static const u8 sVerdantDefaultSetName_MEDICHAM[] = _("Attacker");
 static const u8 sVerdantDefaultSetName_MANECTRIC[] = _("Recommended");
-static const u8 sVerdantDefaultSetName_VOLBEAT[] = _("Support");
-static const u8 sVerdantDefaultSetName_ILLUMISE[] = _("Support");
 static const u8 sVerdantDefaultSetName_SHARPEDO[] = _("Recommended");
-static const u8 sVerdantDefaultSetName_CAMERUPT[] = _("Trick Room");
-static const u8 sVerdantDefaultSetName_TORKOAL[] = _("Attacker");
 static const u8 sVerdantDefaultSetName_FLYGON[] = _("Tailwind");
 static const u8 sVerdantDefaultSetName_ALTARIA[] = _("Special Attacker");
-static const u8 sVerdantDefaultSetName_ZANGOOSE[] = _("Attacker");
-static const u8 sVerdantDefaultSetName_SEVIPER[] = _("Special Attacker");
 static const u8 sVerdantDefaultSetName_CRAWDAUNT[] = _("Wallbreaker");
-static const u8 sVerdantDefaultSetName_CASTFORM[] = _("Attacker");
-static const u8 sVerdantDefaultSetName_BANETTE[] = _("Attacker");
 static const u8 sVerdantDefaultSetName_ABSOL[] = _("Attacker");
 static const u8 sVerdantDefaultSetName_GLALIE[] = _("Attacker");
-static const u8 sVerdantDefaultSetName_LUVDISC[] = _("Recommended");
-static const u8 sVerdantDefaultSetName_SALAMENCE[] = _("Mega Attacker");
+static const u8 sVerdantDefaultSetName_METAGROSS[] = _("Physical Attacker");
 static const u8 sVerdantDefaultSetName_REGIROCK[] = _("Recommended");
 static const u8 sVerdantDefaultSetName_REGICE[] = _("Special Attacker");
-static const u8 sVerdantDefaultSetName_REGISTEEL[] = _("Recommended");
 static const u8 sVerdantDefaultSetName_LATIAS[] = _("Mega Tailwind");
 static const u8 sVerdantDefaultSetName_LATIOS[] = _("Special Attacker");
-static const u8 sVerdantDefaultSetName_KYOGRE[] = _("Recommended");
 static const u8 sVerdantDefaultSetName_GROUDON[] = _("Recommended");
 static const u8 sVerdantDefaultSetName_RAYQUAZA[] = _("Recommended");
 static const u8 sVerdantDefaultSetName_JIRACHI[] = _("Support");
-static const u8 sVerdantDefaultSetName_INFERNAPE[] = _("Attacker");
 static const u8 sVerdantDefaultSetName_STARAPTOR[] = _("Tailwind");
-static const u8 sVerdantDefaultSetName_LUXRAY[] = _("Physical Attacker");
-static const u8 sVerdantDefaultSetName_ROSERADE[] = _("Special Attacker");
-static const u8 sVerdantDefaultSetName_RAMPARDOS[] = _("Physical Wall");
+static const u8 sVerdantDefaultSetName_FLOATZEL[] = _("Attacker");
 static const u8 sVerdantDefaultSetName_GASTRODON[] = _("Special Attacker");
-static const u8 sVerdantDefaultSetName_AMBIPOM[] = _("Attacker");
-static const u8 sVerdantDefaultSetName_DRIFBLIM[] = _("Tailwind");
 static const u8 sVerdantDefaultSetName_LOPUNNY[] = _("Recommended");
-static const u8 sVerdantDefaultSetName_MISMAGIUS[] = _("Special Attacker");
-static const u8 sVerdantDefaultSetName_HONCHKROW[] = _("Recommended");
 static const u8 sVerdantDefaultSetName_BRONZONG[] = _("Trick Room");
+static const u8 sVerdantDefaultSetName_GARCHOMP[] = _("Spread Attacker");
 static const u8 sVerdantDefaultSetName_LUCARIO[] = _("Attacker");
-static const u8 sVerdantDefaultSetName_HIPPOWDON[] = _("Trick Room");
 static const u8 sVerdantDefaultSetName_ABOMASNOW[] = _("Trick Room");
-static const u8 sVerdantDefaultSetName_WEAVILE[] = _("Physical Attacker");
-static const u8 sVerdantDefaultSetName_MAGNEZONE[] = _("Attacker");
 static const u8 sVerdantDefaultSetName_ELECTIVIRE[] = _("Physical Attacker");
 static const u8 sVerdantDefaultSetName_MAGMORTAR[] = _("Mega Special Attacker");
 static const u8 sVerdantDefaultSetName_YANMEGA[] = _("Tailwind");
-static const u8 sVerdantDefaultSetName_LEAFEON[] = _("Attacker");
-static const u8 sVerdantDefaultSetName_GLISCOR[] = _("Tailwind");
-static const u8 sVerdantDefaultSetName_MAMOSWINE[] = _("Spread Attacker");
-static const u8 sVerdantDefaultSetName_PORYGON_Z[] = _("Special Attacker");
 static const u8 sVerdantDefaultSetName_GALLADE[] = _("Attacker");
+static const u8 sVerdantDefaultSetName_PROBOPASS[] = _("Special Attacker");
+static const u8 sVerdantDefaultSetName_DUSKNOIR[] = _("Support");
 static const u8 sVerdantDefaultSetName_FROSLASS[] = _("Recommended");
+static const u8 sVerdantDefaultSetName_ROTOM[] = _("Spread Attacker");
 static const u8 sVerdantDefaultSetName_MESPRIT[] = _("Support");
 static const u8 sVerdantDefaultSetName_AZELF[] = _("Special Attacker");
 static const u8 sVerdantDefaultSetName_PALKIA[] = _("Special Attacker");
+static const u8 sVerdantDefaultSetName_REGIGIGAS[] = _("Attacker");
 static const u8 sVerdantDefaultSetName_GIRATINA[] = _("Special Attacker");
 static const u8 sVerdantDefaultSetName_MANAPHY[] = _("Attacker");
-static const u8 sVerdantDefaultSetName_DARKRAI[] = _("Attacker");
-static const u8 sVerdantDefaultSetName_SHAYMIN[] = _("Special Attacker");
 static const u8 sVerdantDefaultSetName_VICTINI[] = _("Physical Attacker");
-static const u8 sVerdantDefaultSetName_SERPERIOR[] = _("Attacker");
-static const u8 sVerdantDefaultSetName_EMBOAR[] = _("Recommended");
-static const u8 sVerdantDefaultSetName_WATCHOG[] = _("Physical Attacker");
-static const u8 sVerdantDefaultSetName_LIEPARD[] = _("Recommended");
-static const u8 sVerdantDefaultSetName_MUSHARNA[] = _("Recommended");
+static const u8 sVerdantDefaultSetName_ZEBSTRIKA[] = _("Special Attacker");
 static const u8 sVerdantDefaultSetName_EXCADRILL[] = _("Physical Attacker");
-static const u8 sVerdantDefaultSetName_CONKELDURR[] = _("Recommended");
-static const u8 sVerdantDefaultSetName_WHIMSICOTT[] = _("Recommended");
-static const u8 sVerdantDefaultSetName_KROOKODILE[] = _("Recommended");
+static const u8 sVerdantDefaultSetName_AUDINO[] = _("Recommended");
+static const u8 sVerdantDefaultSetName_LEAVANNY[] = _("Recommended");
+static const u8 sVerdantDefaultSetName_SCOLIPEDE[] = _("Attacker");
+static const u8 sVerdantDefaultSetName_BASCULIN[] = _("Recommended");
 static const u8 sVerdantDefaultSetName_SCRAFTY[] = _("Recommended");
-static const u8 sVerdantDefaultSetName_COFAGRIGUS[] = _("Recommended");
-static const u8 sVerdantDefaultSetName_GARBODOR[] = _("Recommended");
 static const u8 sVerdantDefaultSetName_ZOROARK[] = _("Recommended");
-static const u8 sVerdantDefaultSetName_CINCCINO[] = _("Attacker");
-static const u8 sVerdantDefaultSetName_REUNICLUS[] = _("Recommended");
 static const u8 sVerdantDefaultSetName_SWANNA[] = _("Special Attacker");
-static const u8 sVerdantDefaultSetName_VANILLUXE[] = _("Attacker");
-static const u8 sVerdantDefaultSetName_SAWSBUCK[] = _("Recommended");
-static const u8 sVerdantDefaultSetName_EMOLGA[] = _("Recommended");
-static const u8 sVerdantDefaultSetName_ALOMOMOLA[] = _("Recommended");
-static const u8 sVerdantDefaultSetName_GALVANTULA[] = _("Recommended");
+static const u8 sVerdantDefaultSetName_AMOONGUSS[] = _("Recommended");
 static const u8 sVerdantDefaultSetName_EELEKTROSS[] = _("Physical Attacker");
 static const u8 sVerdantDefaultSetName_CHANDELURE[] = _("Recommended");
-static const u8 sVerdantDefaultSetName_BEARTIC[] = _("Recommended");
-static const u8 sVerdantDefaultSetName_CRYOGONAL[] = _("Bulky Support");
+static const u8 sVerdantDefaultSetName_HAXORUS[] = _("Recommended");
 static const u8 sVerdantDefaultSetName_STUNFISK[] = _("Attacker");
 static const u8 sVerdantDefaultSetName_MIENSHAO[] = _("Recommended");
-static const u8 sVerdantDefaultSetName_BRAVIARY[] = _("Recommended");
+static const u8 sVerdantDefaultSetName_GOLURK[] = _("Physical Attacker");
 static const u8 sVerdantDefaultSetName_MANDIBUZZ[] = _("Tailwind");
-static const u8 sVerdantDefaultSetName_VOLCARONA[] = _("Recommended");
+static const u8 sVerdantDefaultSetName_COBALION[] = _("Recommended");
 static const u8 sVerdantDefaultSetName_TERRAKION[] = _("Recommended");
-static const u8 sVerdantDefaultSetName_VIRIZION[] = _("Recommended");
-static const u8 sVerdantDefaultSetName_RESHIRAM[] = _("Recommended");
-static const u8 sVerdantDefaultSetName_ZEKROM[] = _("Recommended");
-static const u8 sVerdantDefaultSetName_MELOETTA[] = _("Support");
+static const u8 sVerdantDefaultSetName_THUNDURUS[] = _("Recommended");
+static const u8 sVerdantDefaultSetName_KYUREM[] = _("Recommended");
 static const u8 sVerdantDefaultSetName_GENESECT[] = _("Recommended");
+static const u8 sVerdantDefaultSetName_CHESNAUGHT[] = _("Recommended");
 static const u8 sVerdantDefaultSetName_DELPHOX[] = _("Setup Sweeper");
 static const u8 sVerdantDefaultSetName_GRENINJA[] = _("Attacker");
-static const u8 sVerdantDefaultSetName_DIGGERSBY[] = _("Recommended");
-static const u8 sVerdantDefaultSetName_TALONFLAME[] = _("Tailwind");
-static const u8 sVerdantDefaultSetName_PYROAR[] = _("Special Attacker");
-static const u8 sVerdantDefaultSetName_GOGOAT[] = _("Bulky Setup");
-static const u8 sVerdantDefaultSetName_PANGORO[] = _("Recommended");
-static const u8 sVerdantDefaultSetName_FURFROU[] = _("Recommended");
+static const u8 sVerdantDefaultSetName_FLOETTE[] = _("Support");
 static const u8 sVerdantDefaultSetName_MEOWSTIC[] = _("Recommended");
-static const u8 sVerdantDefaultSetName_SLURPUFF[] = _("Recommended");
 static const u8 sVerdantDefaultSetName_MALAMAR[] = _("Recommended");
 static const u8 sVerdantDefaultSetName_DRAGALGE[] = _("Wallbreaker");
-static const u8 sVerdantDefaultSetName_CLAWITZER[] = _("Mega Recommended");
-static const u8 sVerdantDefaultSetName_HELIOLISK[] = _("Special Attacker");
-static const u8 sVerdantDefaultSetName_TYRANTRUM[] = _("Recommended");
-static const u8 sVerdantDefaultSetName_AURORUS[] = _("Spread Attacker");
-static const u8 sVerdantDefaultSetName_SYLVEON[] = _("Support");
 static const u8 sVerdantDefaultSetName_HAWLUCHA[] = _("Attacker");
-static const u8 sVerdantDefaultSetName_DEDENNE[] = _("Support");
-static const u8 sVerdantDefaultSetName_CARBINK[] = _("Trick Room");
-static const u8 sVerdantDefaultSetName_KLEFKI[] = _("Recommended");
+static const u8 sVerdantDefaultSetName_GOODRA[] = _("Special Attacker");
 static const u8 sVerdantDefaultSetName_GOURGEIST[] = _("Special Attacker");
-static const u8 sVerdantDefaultSetName_NOIVERN[] = _("Tailwind");
 static const u8 sVerdantDefaultSetName_XERNEAS[] = _("Recommended");
 static const u8 sVerdantDefaultSetName_YVELTAL[] = _("Recommended");
 static const u8 sVerdantDefaultSetName_DIANCIE[] = _("Trick Room");
-static const u8 sVerdantDefaultSetName_HOOPA[] = _("Special Wall");
-static const u8 sVerdantDefaultSetName_VOLCANION[] = _("Special Attacker");
-static const u8 sVerdantDefaultSetName_INCINEROAR[] = _("Recommended");
-static const u8 sVerdantDefaultSetName_TOUCANNON[] = _("Attacker");
-static const u8 sVerdantDefaultSetName_VIKAVOLT[] = _("Special Attacker");
 static const u8 sVerdantDefaultSetName_CRABOMINABLE[] = _("Trick Room");
-static const u8 sVerdantDefaultSetName_ORICORIO[] = _("Tailwind");
-static const u8 sVerdantDefaultSetName_RIBOMBEE[] = _("Tailwind");
 static const u8 sVerdantDefaultSetName_LYCANROC[] = _("Attacker");
-static const u8 sVerdantDefaultSetName_TOXAPEX[] = _("Setup Sweeper");
-static const u8 sVerdantDefaultSetName_MUDSDALE[] = _("Trick Room");
-static const u8 sVerdantDefaultSetName_ARAQUANID[] = _("Spread Attacker");
-static const u8 sVerdantDefaultSetName_TSAREENA[] = _("Fast Attacker");
-static const u8 sVerdantDefaultSetName_COMFEY[] = _("Recommended");
-static const u8 sVerdantDefaultSetName_ORANGURU[] = _("Trick Room");
-static const u8 sVerdantDefaultSetName_PALOSSAND[] = _("Bulky Support");
+static const u8 sVerdantDefaultSetName_LURANTIS[] = _("Trick Room");
 static const u8 sVerdantDefaultSetName_SILVALLY[] = _("Tailwind");
-static const u8 sVerdantDefaultSetName_KOMALA[] = _("Setup Sweeper");
-static const u8 sVerdantDefaultSetName_MIMIKYU[] = _("Trick Room");
+static const u8 sVerdantDefaultSetName_BRUXISH[] = _("Setup Sweeper");
+static const u8 sVerdantDefaultSetName_DRAMPA[] = _("Spread Attacker");
 static const u8 sVerdantDefaultSetName_SOLGALEO[] = _("Physical Attacker");
 static const u8 sVerdantDefaultSetName_LUNALA[] = _("Trick Room");
 static const u8 sVerdantDefaultSetName_PHEROMOSA[] = _("Recommended");
+static const u8 sVerdantDefaultSetName_CELESTEELA[] = _("Bulky Support");
 static const u8 sVerdantDefaultSetName_GUZZLORD[] = _("Trick Room");
+static const u8 sVerdantDefaultSetName_NECROZMA[] = _("Attacker");
 static const u8 sVerdantDefaultSetName_MAGEARNA[] = _("Trick Room");
 static const u8 sVerdantDefaultSetName_NAGANADEL[] = _("Tailwind");
 static const u8 sVerdantDefaultSetName_ZERAORA[] = _("Recommended");
 static const u8 sVerdantDefaultSetName_RILLABOOM[] = _("Recommended");
 static const u8 sVerdantDefaultSetName_CINDERACE[] = _("Physical Attacker");
-static const u8 sVerdantDefaultSetName_CORVIKNIGHT[] = _("Tailwind");
-static const u8 sVerdantDefaultSetName_COALOSSAL[] = _("Attacker");
-static const u8 sVerdantDefaultSetName_APPLETUN[] = _("Special Attacker");
-static const u8 sVerdantDefaultSetName_SANDACONDA[] = _("Attacker");
-static const u8 sVerdantDefaultSetName_CRAMORANT[] = _("Tailwind");
-static const u8 sVerdantDefaultSetName_BARRASKEWDA[] = _("Physical Wall");
+static const u8 sVerdantDefaultSetName_DREDNAW[] = _("Spread Attacker");
 static const u8 sVerdantDefaultSetName_TOXTRICITY[] = _("Spread Attacker");
-static const u8 sVerdantDefaultSetName_POLTEAGEIST[] = _("Attacker");
-static const u8 sVerdantDefaultSetName_HATTERENE[] = _("Trick Room");
-static const u8 sVerdantDefaultSetName_RUNERIGUS[] = _("Trick Room");
-static const u8 sVerdantDefaultSetName_ALCREMIE[] = _("Support");
-static const u8 sVerdantDefaultSetName_FROSMOTH[] = _("Attacker");
+static const u8 sVerdantDefaultSetName_FALINKS[] = _("Attacker");
+static const u8 sVerdantDefaultSetName_STONJOURNER[] = _("Attacker");
 static const u8 sVerdantDefaultSetName_INDEEDEE[] = _("Recommended");
-static const u8 sVerdantDefaultSetName_MORPEKO[] = _("Recommended");
 static const u8 sVerdantDefaultSetName_COPPERAJAH[] = _("Wallbreaker");
 static const u8 sVerdantDefaultSetName_DURALUDON[] = _("Special Attacker");
-static const u8 sVerdantDefaultSetName_DRAGAPULT[] = _("Special Attacker");
-static const u8 sVerdantDefaultSetName_ZACIAN[] = _("Setup Sweeper");
+static const u8 sVerdantDefaultSetName_ZAMAZENTA[] = _("Support");
 static const u8 sVerdantDefaultSetName_ETERNATUS[] = _("Special Attacker");
-static const u8 sVerdantDefaultSetName_URSHIFU[] = _("Wallbreaker");
-static const u8 sVerdantDefaultSetName_REGIELEKI[] = _("Attacker");
-static const u8 sVerdantDefaultSetName_CALYREX[] = _("Attacker");
-static const u8 sVerdantDefaultSetName_MEOWSCARADA[] = _("Recommended");
-static const u8 sVerdantDefaultSetName_SKELEDIRGE[] = _("Special Attacker");
-static const u8 sVerdantDefaultSetName_GARGANACL[] = _("Bulky Support");
-static const u8 sVerdantDefaultSetName_PALAFIN[] = _("Recommended");
-static const u8 sVerdantDefaultSetName_KINGAMBIT[] = _("Setup Sweeper");
+static const u8 sVerdantDefaultSetName_TATSUGIRI[] = _("Special Attacker");
 static const u8 sVerdantDefaultSetName_FLUTTER_MANE[] = _("Special Attacker");
-static const u8 sVerdantDefaultSetName_GHOLDENGO[] = _("Spread Attacker");
+static const u8 sVerdantDefaultSetName_IRON_BUNDLE[] = _("Special Attacker");
+static const u8 sVerdantDefaultSetName_IRON_HANDS[] = _("Recommended");
+static const u8 sVerdantDefaultSetName_GLIMMORA[] = _("Recommended");
+static const u8 sVerdantDefaultSetName_CHIEN_PAO[] = _("Physical Attacker");
 static const u8 sVerdantDefaultSetName_TING_LU[] = _("Special Attacker");
-static const u8 sVerdantDefaultSetName_IRON_VALIANT[] = _("Physical Attacker");
-static const u8 sVerdantDefaultSetName_ARCHALUDON[] = _("Recommended");
+static const u8 sVerdantDefaultSetName_CHI_YU[] = _("Special Attacker");
+static const u8 sVerdantDefaultSetName_ROARING_MOON[] = _("Physical Attacker");
+static const u8 sVerdantDefaultSetName_OGERPON[] = _("Recommended");
+static const u8 sVerdantDefaultSetName_RAGING_BOLT[] = _("Special Attacker");
 
 const u8 *const gVerdantDefaultBattleSetNames[NUM_SPECIES] =
 {
     [SPECIES_VENUSAUR] = sVerdantDefaultSetName_VENUSAUR,
     [SPECIES_CHARIZARD] = sVerdantDefaultSetName_CHARIZARD,
     [SPECIES_BLASTOISE] = sVerdantDefaultSetName_BLASTOISE,
-    [SPECIES_BEEDRILL] = sVerdantDefaultSetName_BEEDRILL,
-    [SPECIES_ARBOK] = sVerdantDefaultSetName_ARBOK,
-    [SPECIES_PIKACHU] = sVerdantDefaultSetName_PIKACHU,
     [SPECIES_RAICHU] = sVerdantDefaultSetName_RAICHU,
-    [SPECIES_CLEFAIRY] = sVerdantDefaultSetName_CLEFAIRY,
     [SPECIES_CLEFABLE] = sVerdantDefaultSetName_CLEFABLE,
     [SPECIES_NINETALES] = sVerdantDefaultSetName_NINETALES,
-    [SPECIES_WIGGLYTUFF] = sVerdantDefaultSetName_WIGGLYTUFF,
-    [SPECIES_VENOMOTH] = sVerdantDefaultSetName_VENOMOTH,
-    [SPECIES_DUGTRIO] = sVerdantDefaultSetName_DUGTRIO,
-    [SPECIES_PERSIAN] = sVerdantDefaultSetName_PERSIAN,
     [SPECIES_ARCANINE] = sVerdantDefaultSetName_ARCANINE,
     [SPECIES_ALAKAZAM] = sVerdantDefaultSetName_ALAKAZAM,
     [SPECIES_VICTREEBEL] = sVerdantDefaultSetName_VICTREEBEL,
-    [SPECIES_TENTACRUEL] = sVerdantDefaultSetName_TENTACRUEL,
     [SPECIES_GOLEM] = sVerdantDefaultSetName_GOLEM,
     [SPECIES_SLOWBRO] = sVerdantDefaultSetName_SLOWBRO,
-    [SPECIES_DEWGONG] = sVerdantDefaultSetName_DEWGONG,
-    [SPECIES_CLOYSTER] = sVerdantDefaultSetName_CLOYSTER,
+    [SPECIES_DODRIO] = sVerdantDefaultSetName_DODRIO,
     [SPECIES_GENGAR] = sVerdantDefaultSetName_GENGAR,
-    [SPECIES_EXEGGUTOR] = sVerdantDefaultSetName_EXEGGUTOR,
-    [SPECIES_HITMONLEE] = sVerdantDefaultSetName_HITMONLEE,
     [SPECIES_KANGASKHAN] = sVerdantDefaultSetName_KANGASKHAN,
     [SPECIES_STARMIE] = sVerdantDefaultSetName_STARMIE,
-    [SPECIES_SCYTHER] = sVerdantDefaultSetName_SCYTHER,
-    [SPECIES_PINSIR] = sVerdantDefaultSetName_PINSIR,
+    [SPECIES_TAUROS] = sVerdantDefaultSetName_TAUROS,
     [SPECIES_GYARADOS] = sVerdantDefaultSetName_GYARADOS,
-    [SPECIES_VAPOREON] = sVerdantDefaultSetName_VAPOREON,
-    [SPECIES_JOLTEON] = sVerdantDefaultSetName_JOLTEON,
-    [SPECIES_FLAREON] = sVerdantDefaultSetName_FLAREON,
     [SPECIES_AERODACTYL] = sVerdantDefaultSetName_AERODACTYL,
-    [SPECIES_SNORLAX] = sVerdantDefaultSetName_SNORLAX,
-    [SPECIES_ARTICUNO] = sVerdantDefaultSetName_ARTICUNO,
     [SPECIES_ZAPDOS] = sVerdantDefaultSetName_ZAPDOS,
     [SPECIES_MOLTRES] = sVerdantDefaultSetName_MOLTRES,
     [SPECIES_DRAGONITE] = sVerdantDefaultSetName_DRAGONITE,
     [SPECIES_MEWTWO] = sVerdantDefaultSetName_MEWTWO,
-    [SPECIES_MEGANIUM] = sVerdantDefaultSetName_MEGANIUM,
+    [SPECIES_MEW] = sVerdantDefaultSetName_MEW,
+    [SPECIES_TYPHLOSION] = sVerdantDefaultSetName_TYPHLOSION,
     [SPECIES_FERALIGATR] = sVerdantDefaultSetName_FERALIGATR,
-    [SPECIES_FURRET] = sVerdantDefaultSetName_FURRET,
-    [SPECIES_NOCTOWL] = sVerdantDefaultSetName_NOCTOWL,
-    [SPECIES_AMPHAROS] = sVerdantDefaultSetName_AMPHAROS,
-    [SPECIES_BELLOSSOM] = sVerdantDefaultSetName_BELLOSSOM,
-    [SPECIES_POLITOED] = sVerdantDefaultSetName_POLITOED,
-    [SPECIES_SUNFLORA] = sVerdantDefaultSetName_SUNFLORA,
-    [SPECIES_ESPEON] = sVerdantDefaultSetName_ESPEON,
-    [SPECIES_UMBREON] = sVerdantDefaultSetName_UMBREON,
-    [SPECIES_MURKROW] = sVerdantDefaultSetName_MURKROW,
+    [SPECIES_LANTURN] = sVerdantDefaultSetName_LANTURN,
+    [SPECIES_JUMPLUFF] = sVerdantDefaultSetName_JUMPLUFF,
+    [SPECIES_SLOWKING] = sVerdantDefaultSetName_SLOWKING,
     [SPECIES_STEELIX] = sVerdantDefaultSetName_STEELIX,
-    [SPECIES_GRANBULL] = sVerdantDefaultSetName_GRANBULL,
-    [SPECIES_HERACROSS] = sVerdantDefaultSetName_HERACROSS,
-    [SPECIES_MAGCARGO] = sVerdantDefaultSetName_MAGCARGO,
+    [SPECIES_SCIZOR] = sVerdantDefaultSetName_SCIZOR,
     [SPECIES_SKARMORY] = sVerdantDefaultSetName_SKARMORY,
     [SPECIES_HOUNDOOM] = sVerdantDefaultSetName_HOUNDOOM,
     [SPECIES_KINGDRA] = sVerdantDefaultSetName_KINGDRA,
-    [SPECIES_DONPHAN] = sVerdantDefaultSetName_DONPHAN,
     [SPECIES_PORYGON2] = sVerdantDefaultSetName_PORYGON2,
-    [SPECIES_HITMONTOP] = sVerdantDefaultSetName_HITMONTOP,
-    [SPECIES_BLISSEY] = sVerdantDefaultSetName_BLISSEY,
-    [SPECIES_ENTEI] = sVerdantDefaultSetName_ENTEI,
+    [SPECIES_RAIKOU] = sVerdantDefaultSetName_RAIKOU,
     [SPECIES_SUICUNE] = sVerdantDefaultSetName_SUICUNE,
-    [SPECIES_LUGIA] = sVerdantDefaultSetName_LUGIA,
-    [SPECIES_HO_OH] = sVerdantDefaultSetName_HO_OH,
+    [SPECIES_TYRANITAR] = sVerdantDefaultSetName_TYRANITAR,
     [SPECIES_CELEBI] = sVerdantDefaultSetName_CELEBI,
     [SPECIES_SCEPTILE] = sVerdantDefaultSetName_SCEPTILE,
     [SPECIES_BLAZIKEN] = sVerdantDefaultSetName_BLAZIKEN,
-    [SPECIES_MIGHTYENA] = sVerdantDefaultSetName_MIGHTYENA,
+    [SPECIES_SWAMPERT] = sVerdantDefaultSetName_SWAMPERT,
     [SPECIES_LUDICOLO] = sVerdantDefaultSetName_LUDICOLO,
     [SPECIES_SHIFTRY] = sVerdantDefaultSetName_SHIFTRY,
-    [SPECIES_PELIPPER] = sVerdantDefaultSetName_PELIPPER,
     [SPECIES_GARDEVOIR] = sVerdantDefaultSetName_GARDEVOIR,
-    [SPECIES_MASQUERAIN] = sVerdantDefaultSetName_MASQUERAIN,
     [SPECIES_HARIYAMA] = sVerdantDefaultSetName_HARIYAMA,
     [SPECIES_SABLEYE] = sVerdantDefaultSetName_SABLEYE,
-    [SPECIES_MAWILE] = sVerdantDefaultSetName_MAWILE,
     [SPECIES_AGGRON] = sVerdantDefaultSetName_AGGRON,
     [SPECIES_MEDICHAM] = sVerdantDefaultSetName_MEDICHAM,
     [SPECIES_MANECTRIC] = sVerdantDefaultSetName_MANECTRIC,
-    [SPECIES_VOLBEAT] = sVerdantDefaultSetName_VOLBEAT,
-    [SPECIES_ILLUMISE] = sVerdantDefaultSetName_ILLUMISE,
     [SPECIES_SHARPEDO] = sVerdantDefaultSetName_SHARPEDO,
-    [SPECIES_CAMERUPT] = sVerdantDefaultSetName_CAMERUPT,
-    [SPECIES_TORKOAL] = sVerdantDefaultSetName_TORKOAL,
     [SPECIES_FLYGON] = sVerdantDefaultSetName_FLYGON,
     [SPECIES_ALTARIA] = sVerdantDefaultSetName_ALTARIA,
-    [SPECIES_ZANGOOSE] = sVerdantDefaultSetName_ZANGOOSE,
-    [SPECIES_SEVIPER] = sVerdantDefaultSetName_SEVIPER,
     [SPECIES_CRAWDAUNT] = sVerdantDefaultSetName_CRAWDAUNT,
-    [SPECIES_CASTFORM] = sVerdantDefaultSetName_CASTFORM,
-    [SPECIES_BANETTE] = sVerdantDefaultSetName_BANETTE,
     [SPECIES_ABSOL] = sVerdantDefaultSetName_ABSOL,
     [SPECIES_GLALIE] = sVerdantDefaultSetName_GLALIE,
-    [SPECIES_LUVDISC] = sVerdantDefaultSetName_LUVDISC,
-    [SPECIES_SALAMENCE] = sVerdantDefaultSetName_SALAMENCE,
+    [SPECIES_METAGROSS] = sVerdantDefaultSetName_METAGROSS,
     [SPECIES_REGIROCK] = sVerdantDefaultSetName_REGIROCK,
     [SPECIES_REGICE] = sVerdantDefaultSetName_REGICE,
-    [SPECIES_REGISTEEL] = sVerdantDefaultSetName_REGISTEEL,
     [SPECIES_LATIAS] = sVerdantDefaultSetName_LATIAS,
     [SPECIES_LATIOS] = sVerdantDefaultSetName_LATIOS,
-    [SPECIES_KYOGRE] = sVerdantDefaultSetName_KYOGRE,
     [SPECIES_GROUDON] = sVerdantDefaultSetName_GROUDON,
     [SPECIES_RAYQUAZA] = sVerdantDefaultSetName_RAYQUAZA,
     [SPECIES_JIRACHI] = sVerdantDefaultSetName_JIRACHI,
-    [SPECIES_INFERNAPE] = sVerdantDefaultSetName_INFERNAPE,
     [SPECIES_STARAPTOR] = sVerdantDefaultSetName_STARAPTOR,
-    [SPECIES_LUXRAY] = sVerdantDefaultSetName_LUXRAY,
-    [SPECIES_ROSERADE] = sVerdantDefaultSetName_ROSERADE,
-    [SPECIES_RAMPARDOS] = sVerdantDefaultSetName_RAMPARDOS,
+    [SPECIES_FLOATZEL] = sVerdantDefaultSetName_FLOATZEL,
     [SPECIES_GASTRODON] = sVerdantDefaultSetName_GASTRODON,
-    [SPECIES_AMBIPOM] = sVerdantDefaultSetName_AMBIPOM,
-    [SPECIES_DRIFBLIM] = sVerdantDefaultSetName_DRIFBLIM,
     [SPECIES_LOPUNNY] = sVerdantDefaultSetName_LOPUNNY,
-    [SPECIES_MISMAGIUS] = sVerdantDefaultSetName_MISMAGIUS,
-    [SPECIES_HONCHKROW] = sVerdantDefaultSetName_HONCHKROW,
     [SPECIES_BRONZONG] = sVerdantDefaultSetName_BRONZONG,
+    [SPECIES_GARCHOMP] = sVerdantDefaultSetName_GARCHOMP,
     [SPECIES_LUCARIO] = sVerdantDefaultSetName_LUCARIO,
-    [SPECIES_HIPPOWDON] = sVerdantDefaultSetName_HIPPOWDON,
     [SPECIES_ABOMASNOW] = sVerdantDefaultSetName_ABOMASNOW,
-    [SPECIES_WEAVILE] = sVerdantDefaultSetName_WEAVILE,
-    [SPECIES_MAGNEZONE] = sVerdantDefaultSetName_MAGNEZONE,
     [SPECIES_ELECTIVIRE] = sVerdantDefaultSetName_ELECTIVIRE,
     [SPECIES_MAGMORTAR] = sVerdantDefaultSetName_MAGMORTAR,
     [SPECIES_YANMEGA] = sVerdantDefaultSetName_YANMEGA,
-    [SPECIES_LEAFEON] = sVerdantDefaultSetName_LEAFEON,
-    [SPECIES_GLISCOR] = sVerdantDefaultSetName_GLISCOR,
-    [SPECIES_MAMOSWINE] = sVerdantDefaultSetName_MAMOSWINE,
-    [SPECIES_PORYGON_Z] = sVerdantDefaultSetName_PORYGON_Z,
     [SPECIES_GALLADE] = sVerdantDefaultSetName_GALLADE,
+    [SPECIES_PROBOPASS] = sVerdantDefaultSetName_PROBOPASS,
+    [SPECIES_DUSKNOIR] = sVerdantDefaultSetName_DUSKNOIR,
     [SPECIES_FROSLASS] = sVerdantDefaultSetName_FROSLASS,
+    [SPECIES_ROTOM] = sVerdantDefaultSetName_ROTOM,
     [SPECIES_MESPRIT] = sVerdantDefaultSetName_MESPRIT,
     [SPECIES_AZELF] = sVerdantDefaultSetName_AZELF,
     [SPECIES_PALKIA] = sVerdantDefaultSetName_PALKIA,
+    [SPECIES_REGIGIGAS] = sVerdantDefaultSetName_REGIGIGAS,
     [SPECIES_GIRATINA] = sVerdantDefaultSetName_GIRATINA,
     [SPECIES_MANAPHY] = sVerdantDefaultSetName_MANAPHY,
-    [SPECIES_DARKRAI] = sVerdantDefaultSetName_DARKRAI,
-    [SPECIES_SHAYMIN] = sVerdantDefaultSetName_SHAYMIN,
     [SPECIES_VICTINI] = sVerdantDefaultSetName_VICTINI,
-    [SPECIES_SERPERIOR] = sVerdantDefaultSetName_SERPERIOR,
-    [SPECIES_EMBOAR] = sVerdantDefaultSetName_EMBOAR,
-    [SPECIES_WATCHOG] = sVerdantDefaultSetName_WATCHOG,
-    [SPECIES_LIEPARD] = sVerdantDefaultSetName_LIEPARD,
-    [SPECIES_MUSHARNA] = sVerdantDefaultSetName_MUSHARNA,
+    [SPECIES_ZEBSTRIKA] = sVerdantDefaultSetName_ZEBSTRIKA,
     [SPECIES_EXCADRILL] = sVerdantDefaultSetName_EXCADRILL,
-    [SPECIES_CONKELDURR] = sVerdantDefaultSetName_CONKELDURR,
-    [SPECIES_WHIMSICOTT] = sVerdantDefaultSetName_WHIMSICOTT,
-    [SPECIES_KROOKODILE] = sVerdantDefaultSetName_KROOKODILE,
+    [SPECIES_AUDINO] = sVerdantDefaultSetName_AUDINO,
+    [SPECIES_LEAVANNY] = sVerdantDefaultSetName_LEAVANNY,
+    [SPECIES_SCOLIPEDE] = sVerdantDefaultSetName_SCOLIPEDE,
+    [SPECIES_BASCULIN] = sVerdantDefaultSetName_BASCULIN,
     [SPECIES_SCRAFTY] = sVerdantDefaultSetName_SCRAFTY,
-    [SPECIES_COFAGRIGUS] = sVerdantDefaultSetName_COFAGRIGUS,
-    [SPECIES_GARBODOR] = sVerdantDefaultSetName_GARBODOR,
     [SPECIES_ZOROARK] = sVerdantDefaultSetName_ZOROARK,
-    [SPECIES_CINCCINO] = sVerdantDefaultSetName_CINCCINO,
-    [SPECIES_REUNICLUS] = sVerdantDefaultSetName_REUNICLUS,
     [SPECIES_SWANNA] = sVerdantDefaultSetName_SWANNA,
-    [SPECIES_VANILLUXE] = sVerdantDefaultSetName_VANILLUXE,
-    [SPECIES_SAWSBUCK] = sVerdantDefaultSetName_SAWSBUCK,
-    [SPECIES_EMOLGA] = sVerdantDefaultSetName_EMOLGA,
-    [SPECIES_ALOMOMOLA] = sVerdantDefaultSetName_ALOMOMOLA,
-    [SPECIES_GALVANTULA] = sVerdantDefaultSetName_GALVANTULA,
+    [SPECIES_AMOONGUSS] = sVerdantDefaultSetName_AMOONGUSS,
     [SPECIES_EELEKTROSS] = sVerdantDefaultSetName_EELEKTROSS,
     [SPECIES_CHANDELURE] = sVerdantDefaultSetName_CHANDELURE,
-    [SPECIES_BEARTIC] = sVerdantDefaultSetName_BEARTIC,
-    [SPECIES_CRYOGONAL] = sVerdantDefaultSetName_CRYOGONAL,
+    [SPECIES_HAXORUS] = sVerdantDefaultSetName_HAXORUS,
     [SPECIES_STUNFISK] = sVerdantDefaultSetName_STUNFISK,
     [SPECIES_MIENSHAO] = sVerdantDefaultSetName_MIENSHAO,
-    [SPECIES_BRAVIARY] = sVerdantDefaultSetName_BRAVIARY,
+    [SPECIES_GOLURK] = sVerdantDefaultSetName_GOLURK,
     [SPECIES_MANDIBUZZ] = sVerdantDefaultSetName_MANDIBUZZ,
-    [SPECIES_VOLCARONA] = sVerdantDefaultSetName_VOLCARONA,
+    [SPECIES_COBALION] = sVerdantDefaultSetName_COBALION,
     [SPECIES_TERRAKION] = sVerdantDefaultSetName_TERRAKION,
-    [SPECIES_VIRIZION] = sVerdantDefaultSetName_VIRIZION,
-    [SPECIES_RESHIRAM] = sVerdantDefaultSetName_RESHIRAM,
-    [SPECIES_ZEKROM] = sVerdantDefaultSetName_ZEKROM,
-    [SPECIES_MELOETTA] = sVerdantDefaultSetName_MELOETTA,
+    [SPECIES_THUNDURUS] = sVerdantDefaultSetName_THUNDURUS,
+    [SPECIES_KYUREM] = sVerdantDefaultSetName_KYUREM,
     [SPECIES_GENESECT] = sVerdantDefaultSetName_GENESECT,
+    [SPECIES_CHESNAUGHT] = sVerdantDefaultSetName_CHESNAUGHT,
     [SPECIES_DELPHOX] = sVerdantDefaultSetName_DELPHOX,
     [SPECIES_GRENINJA] = sVerdantDefaultSetName_GRENINJA,
-    [SPECIES_DIGGERSBY] = sVerdantDefaultSetName_DIGGERSBY,
-    [SPECIES_TALONFLAME] = sVerdantDefaultSetName_TALONFLAME,
-    [SPECIES_PYROAR] = sVerdantDefaultSetName_PYROAR,
-    [SPECIES_GOGOAT] = sVerdantDefaultSetName_GOGOAT,
-    [SPECIES_PANGORO] = sVerdantDefaultSetName_PANGORO,
-    [SPECIES_FURFROU] = sVerdantDefaultSetName_FURFROU,
+    [SPECIES_FLOETTE] = sVerdantDefaultSetName_FLOETTE,
     [SPECIES_MEOWSTIC] = sVerdantDefaultSetName_MEOWSTIC,
-    [SPECIES_SLURPUFF] = sVerdantDefaultSetName_SLURPUFF,
     [SPECIES_MALAMAR] = sVerdantDefaultSetName_MALAMAR,
     [SPECIES_DRAGALGE] = sVerdantDefaultSetName_DRAGALGE,
-    [SPECIES_CLAWITZER] = sVerdantDefaultSetName_CLAWITZER,
-    [SPECIES_HELIOLISK] = sVerdantDefaultSetName_HELIOLISK,
-    [SPECIES_TYRANTRUM] = sVerdantDefaultSetName_TYRANTRUM,
-    [SPECIES_AURORUS] = sVerdantDefaultSetName_AURORUS,
-    [SPECIES_SYLVEON] = sVerdantDefaultSetName_SYLVEON,
     [SPECIES_HAWLUCHA] = sVerdantDefaultSetName_HAWLUCHA,
-    [SPECIES_DEDENNE] = sVerdantDefaultSetName_DEDENNE,
-    [SPECIES_CARBINK] = sVerdantDefaultSetName_CARBINK,
-    [SPECIES_KLEFKI] = sVerdantDefaultSetName_KLEFKI,
+    [SPECIES_GOODRA] = sVerdantDefaultSetName_GOODRA,
     [SPECIES_GOURGEIST] = sVerdantDefaultSetName_GOURGEIST,
-    [SPECIES_NOIVERN] = sVerdantDefaultSetName_NOIVERN,
     [SPECIES_XERNEAS] = sVerdantDefaultSetName_XERNEAS,
     [SPECIES_YVELTAL] = sVerdantDefaultSetName_YVELTAL,
     [SPECIES_DIANCIE] = sVerdantDefaultSetName_DIANCIE,
-    [SPECIES_HOOPA] = sVerdantDefaultSetName_HOOPA,
-    [SPECIES_VOLCANION] = sVerdantDefaultSetName_VOLCANION,
-    [SPECIES_INCINEROAR] = sVerdantDefaultSetName_INCINEROAR,
-    [SPECIES_TOUCANNON] = sVerdantDefaultSetName_TOUCANNON,
-    [SPECIES_VIKAVOLT] = sVerdantDefaultSetName_VIKAVOLT,
     [SPECIES_CRABOMINABLE] = sVerdantDefaultSetName_CRABOMINABLE,
-    [SPECIES_ORICORIO] = sVerdantDefaultSetName_ORICORIO,
-    [SPECIES_RIBOMBEE] = sVerdantDefaultSetName_RIBOMBEE,
     [SPECIES_LYCANROC] = sVerdantDefaultSetName_LYCANROC,
-    [SPECIES_TOXAPEX] = sVerdantDefaultSetName_TOXAPEX,
-    [SPECIES_MUDSDALE] = sVerdantDefaultSetName_MUDSDALE,
-    [SPECIES_ARAQUANID] = sVerdantDefaultSetName_ARAQUANID,
-    [SPECIES_TSAREENA] = sVerdantDefaultSetName_TSAREENA,
-    [SPECIES_COMFEY] = sVerdantDefaultSetName_COMFEY,
-    [SPECIES_ORANGURU] = sVerdantDefaultSetName_ORANGURU,
-    [SPECIES_PALOSSAND] = sVerdantDefaultSetName_PALOSSAND,
+    [SPECIES_LURANTIS] = sVerdantDefaultSetName_LURANTIS,
     [SPECIES_SILVALLY] = sVerdantDefaultSetName_SILVALLY,
-    [SPECIES_KOMALA] = sVerdantDefaultSetName_KOMALA,
-    [SPECIES_MIMIKYU] = sVerdantDefaultSetName_MIMIKYU,
+    [SPECIES_BRUXISH] = sVerdantDefaultSetName_BRUXISH,
+    [SPECIES_DRAMPA] = sVerdantDefaultSetName_DRAMPA,
     [SPECIES_SOLGALEO] = sVerdantDefaultSetName_SOLGALEO,
     [SPECIES_LUNALA] = sVerdantDefaultSetName_LUNALA,
     [SPECIES_PHEROMOSA] = sVerdantDefaultSetName_PHEROMOSA,
+    [SPECIES_CELESTEELA] = sVerdantDefaultSetName_CELESTEELA,
     [SPECIES_GUZZLORD] = sVerdantDefaultSetName_GUZZLORD,
+    [SPECIES_NECROZMA] = sVerdantDefaultSetName_NECROZMA,
     [SPECIES_MAGEARNA] = sVerdantDefaultSetName_MAGEARNA,
     [SPECIES_NAGANADEL] = sVerdantDefaultSetName_NAGANADEL,
     [SPECIES_ZERAORA] = sVerdantDefaultSetName_ZERAORA,
     [SPECIES_RILLABOOM] = sVerdantDefaultSetName_RILLABOOM,
     [SPECIES_CINDERACE] = sVerdantDefaultSetName_CINDERACE,
-    [SPECIES_CORVIKNIGHT] = sVerdantDefaultSetName_CORVIKNIGHT,
-    [SPECIES_COALOSSAL] = sVerdantDefaultSetName_COALOSSAL,
-    [SPECIES_APPLETUN] = sVerdantDefaultSetName_APPLETUN,
-    [SPECIES_SANDACONDA] = sVerdantDefaultSetName_SANDACONDA,
-    [SPECIES_CRAMORANT] = sVerdantDefaultSetName_CRAMORANT,
-    [SPECIES_BARRASKEWDA] = sVerdantDefaultSetName_BARRASKEWDA,
+    [SPECIES_DREDNAW] = sVerdantDefaultSetName_DREDNAW,
     [SPECIES_TOXTRICITY] = sVerdantDefaultSetName_TOXTRICITY,
-    [SPECIES_POLTEAGEIST] = sVerdantDefaultSetName_POLTEAGEIST,
-    [SPECIES_HATTERENE] = sVerdantDefaultSetName_HATTERENE,
-    [SPECIES_RUNERIGUS] = sVerdantDefaultSetName_RUNERIGUS,
-    [SPECIES_ALCREMIE] = sVerdantDefaultSetName_ALCREMIE,
-    [SPECIES_FROSMOTH] = sVerdantDefaultSetName_FROSMOTH,
+    [SPECIES_FALINKS] = sVerdantDefaultSetName_FALINKS,
+    [SPECIES_STONJOURNER] = sVerdantDefaultSetName_STONJOURNER,
     [SPECIES_INDEEDEE] = sVerdantDefaultSetName_INDEEDEE,
-    [SPECIES_MORPEKO] = sVerdantDefaultSetName_MORPEKO,
     [SPECIES_COPPERAJAH] = sVerdantDefaultSetName_COPPERAJAH,
     [SPECIES_DURALUDON] = sVerdantDefaultSetName_DURALUDON,
-    [SPECIES_DRAGAPULT] = sVerdantDefaultSetName_DRAGAPULT,
-    [SPECIES_ZACIAN] = sVerdantDefaultSetName_ZACIAN,
+    [SPECIES_ZAMAZENTA] = sVerdantDefaultSetName_ZAMAZENTA,
     [SPECIES_ETERNATUS] = sVerdantDefaultSetName_ETERNATUS,
-    [SPECIES_URSHIFU] = sVerdantDefaultSetName_URSHIFU,
-    [SPECIES_REGIELEKI] = sVerdantDefaultSetName_REGIELEKI,
-    [SPECIES_CALYREX] = sVerdantDefaultSetName_CALYREX,
-    [SPECIES_MEOWSCARADA] = sVerdantDefaultSetName_MEOWSCARADA,
-    [SPECIES_SKELEDIRGE] = sVerdantDefaultSetName_SKELEDIRGE,
-    [SPECIES_GARGANACL] = sVerdantDefaultSetName_GARGANACL,
-    [SPECIES_PALAFIN] = sVerdantDefaultSetName_PALAFIN,
-    [SPECIES_KINGAMBIT] = sVerdantDefaultSetName_KINGAMBIT,
+    [SPECIES_TATSUGIRI] = sVerdantDefaultSetName_TATSUGIRI,
     [SPECIES_FLUTTER_MANE] = sVerdantDefaultSetName_FLUTTER_MANE,
-    [SPECIES_GHOLDENGO] = sVerdantDefaultSetName_GHOLDENGO,
+    [SPECIES_IRON_BUNDLE] = sVerdantDefaultSetName_IRON_BUNDLE,
+    [SPECIES_IRON_HANDS] = sVerdantDefaultSetName_IRON_HANDS,
+    [SPECIES_GLIMMORA] = sVerdantDefaultSetName_GLIMMORA,
+    [SPECIES_CHIEN_PAO] = sVerdantDefaultSetName_CHIEN_PAO,
     [SPECIES_TING_LU] = sVerdantDefaultSetName_TING_LU,
-    [SPECIES_IRON_VALIANT] = sVerdantDefaultSetName_IRON_VALIANT,
-    [SPECIES_ARCHALUDON] = sVerdantDefaultSetName_ARCHALUDON,
+    [SPECIES_CHI_YU] = sVerdantDefaultSetName_CHI_YU,
+    [SPECIES_ROARING_MOON] = sVerdantDefaultSetName_ROARING_MOON,
+    [SPECIES_OGERPON] = sVerdantDefaultSetName_OGERPON,
+    [SPECIES_RAGING_BOLT] = sVerdantDefaultSetName_RAGING_BOLT,
 };
 
 const struct VerdantBattleSetRange gVerdantBattleSetRanges[NUM_SPECIES] =
 {
-    [SPECIES_VENUSAUR] = {0, 2},
-    [SPECIES_CHARIZARD] = {2, 2},
-    [SPECIES_BLASTOISE] = {4, 2},
-    [SPECIES_BEEDRILL] = {6, 1},
-    [SPECIES_ARBOK] = {7, 1},
-    [SPECIES_PIKACHU] = {8, 1},
-    [SPECIES_RAICHU] = {9, 2},
-    [SPECIES_CLEFAIRY] = {11, 1},
-    [SPECIES_CLEFABLE] = {12, 1},
-    [SPECIES_NINETALES] = {13, 1},
-    [SPECIES_WIGGLYTUFF] = {14, 1},
-    [SPECIES_VENOMOTH] = {15, 1},
-    [SPECIES_DUGTRIO] = {16, 1},
-    [SPECIES_PERSIAN] = {17, 1},
-    [SPECIES_ARCANINE] = {18, 1},
-    [SPECIES_ALAKAZAM] = {19, 1},
-    [SPECIES_VICTREEBEL] = {20, 2},
-    [SPECIES_TENTACRUEL] = {22, 1},
-    [SPECIES_GOLEM] = {23, 2},
-    [SPECIES_SLOWBRO] = {25, 1},
-    [SPECIES_DEWGONG] = {26, 1},
-    [SPECIES_CLOYSTER] = {27, 1},
-    [SPECIES_GENGAR] = {28, 2},
-    [SPECIES_EXEGGUTOR] = {30, 1},
-    [SPECIES_HITMONLEE] = {31, 1},
-    [SPECIES_KANGASKHAN] = {32, 1},
-    [SPECIES_STARMIE] = {33, 1},
-    [SPECIES_SCYTHER] = {34, 1},
-    [SPECIES_PINSIR] = {35, 1},
-    [SPECIES_GYARADOS] = {36, 1},
-    [SPECIES_VAPOREON] = {37, 1},
-    [SPECIES_JOLTEON] = {38, 1},
-    [SPECIES_FLAREON] = {39, 1},
-    [SPECIES_AERODACTYL] = {40, 1},
-    [SPECIES_SNORLAX] = {41, 1},
-    [SPECIES_ARTICUNO] = {42, 1},
-    [SPECIES_ZAPDOS] = {43, 2},
-    [SPECIES_MOLTRES] = {45, 2},
-    [SPECIES_DRAGONITE] = {47, 1},
-    [SPECIES_MEWTWO] = {48, 1},
-    [SPECIES_MEGANIUM] = {49, 1},
-    [SPECIES_FERALIGATR] = {50, 2},
-    [SPECIES_FURRET] = {52, 1},
-    [SPECIES_NOCTOWL] = {53, 1},
-    [SPECIES_AMPHAROS] = {54, 1},
-    [SPECIES_BELLOSSOM] = {55, 1},
-    [SPECIES_POLITOED] = {56, 1},
-    [SPECIES_SUNFLORA] = {57, 1},
-    [SPECIES_ESPEON] = {58, 1},
-    [SPECIES_UMBREON] = {59, 1},
-    [SPECIES_MURKROW] = {60, 1},
-    [SPECIES_STEELIX] = {61, 1},
-    [SPECIES_GRANBULL] = {62, 1},
-    [SPECIES_HERACROSS] = {63, 1},
-    [SPECIES_MAGCARGO] = {64, 1},
-    [SPECIES_SKARMORY] = {65, 2},
-    [SPECIES_HOUNDOOM] = {67, 2},
-    [SPECIES_KINGDRA] = {69, 1},
-    [SPECIES_DONPHAN] = {70, 1},
-    [SPECIES_PORYGON2] = {71, 2},
-    [SPECIES_HITMONTOP] = {73, 1},
-    [SPECIES_BLISSEY] = {74, 1},
-    [SPECIES_ENTEI] = {75, 1},
-    [SPECIES_SUICUNE] = {76, 2},
-    [SPECIES_LUGIA] = {78, 1},
-    [SPECIES_HO_OH] = {79, 1},
-    [SPECIES_CELEBI] = {80, 2},
-    [SPECIES_SCEPTILE] = {82, 2},
-    [SPECIES_BLAZIKEN] = {84, 2},
-    [SPECIES_MIGHTYENA] = {86, 1},
-    [SPECIES_LUDICOLO] = {87, 1},
-    [SPECIES_SHIFTRY] = {88, 2},
-    [SPECIES_PELIPPER] = {90, 1},
-    [SPECIES_GARDEVOIR] = {91, 1},
-    [SPECIES_MASQUERAIN] = {92, 1},
-    [SPECIES_HARIYAMA] = {93, 1},
-    [SPECIES_SABLEYE] = {94, 1},
-    [SPECIES_MAWILE] = {95, 1},
-    [SPECIES_AGGRON] = {96, 2},
-    [SPECIES_MEDICHAM] = {98, 1},
-    [SPECIES_MANECTRIC] = {99, 2},
-    [SPECIES_VOLBEAT] = {101, 1},
-    [SPECIES_ILLUMISE] = {102, 1},
-    [SPECIES_SHARPEDO] = {103, 2},
-    [SPECIES_CAMERUPT] = {105, 1},
-    [SPECIES_TORKOAL] = {106, 1},
-    [SPECIES_FLYGON] = {107, 1},
-    [SPECIES_ALTARIA] = {108, 1},
-    [SPECIES_ZANGOOSE] = {109, 1},
-    [SPECIES_SEVIPER] = {110, 1},
-    [SPECIES_CRAWDAUNT] = {111, 2},
-    [SPECIES_CASTFORM] = {113, 1},
-    [SPECIES_BANETTE] = {114, 1},
-    [SPECIES_ABSOL] = {115, 2},
-    [SPECIES_GLALIE] = {117, 2},
-    [SPECIES_LUVDISC] = {119, 1},
-    [SPECIES_SALAMENCE] = {120, 1},
-    [SPECIES_REGIROCK] = {121, 2},
-    [SPECIES_REGICE] = {123, 2},
-    [SPECIES_REGISTEEL] = {125, 1},
-    [SPECIES_LATIAS] = {126, 1},
-    [SPECIES_LATIOS] = {127, 1},
-    [SPECIES_KYOGRE] = {128, 1},
-    [SPECIES_GROUDON] = {129, 2},
-    [SPECIES_RAYQUAZA] = {131, 2},
-    [SPECIES_JIRACHI] = {133, 1},
-    [SPECIES_INFERNAPE] = {134, 1},
-    [SPECIES_STARAPTOR] = {135, 2},
-    [SPECIES_LUXRAY] = {137, 1},
-    [SPECIES_ROSERADE] = {138, 1},
-    [SPECIES_RAMPARDOS] = {139, 1},
-    [SPECIES_GASTRODON] = {140, 1},
-    [SPECIES_AMBIPOM] = {141, 1},
-    [SPECIES_DRIFBLIM] = {142, 1},
-    [SPECIES_LOPUNNY] = {143, 1},
-    [SPECIES_MISMAGIUS] = {144, 1},
-    [SPECIES_HONCHKROW] = {145, 1},
-    [SPECIES_BRONZONG] = {146, 1},
-    [SPECIES_LUCARIO] = {147, 2},
-    [SPECIES_HIPPOWDON] = {149, 1},
-    [SPECIES_ABOMASNOW] = {150, 2},
-    [SPECIES_WEAVILE] = {152, 1},
-    [SPECIES_MAGNEZONE] = {153, 1},
-    [SPECIES_ELECTIVIRE] = {154, 1},
-    [SPECIES_MAGMORTAR] = {155, 1},
-    [SPECIES_YANMEGA] = {156, 2},
-    [SPECIES_LEAFEON] = {158, 1},
-    [SPECIES_GLISCOR] = {159, 1},
-    [SPECIES_MAMOSWINE] = {160, 1},
-    [SPECIES_PORYGON_Z] = {161, 1},
-    [SPECIES_GALLADE] = {162, 2},
-    [SPECIES_FROSLASS] = {164, 2},
-    [SPECIES_MESPRIT] = {166, 2},
-    [SPECIES_AZELF] = {168, 2},
-    [SPECIES_PALKIA] = {170, 2},
-    [SPECIES_GIRATINA] = {172, 1},
-    [SPECIES_MANAPHY] = {173, 2},
-    [SPECIES_DARKRAI] = {175, 1},
-    [SPECIES_SHAYMIN] = {176, 1},
-    [SPECIES_VICTINI] = {177, 2},
-    [SPECIES_SERPERIOR] = {179, 1},
-    [SPECIES_EMBOAR] = {180, 1},
-    [SPECIES_WATCHOG] = {181, 1},
-    [SPECIES_LIEPARD] = {182, 1},
-    [SPECIES_MUSHARNA] = {183, 1},
-    [SPECIES_EXCADRILL] = {184, 1},
-    [SPECIES_CONKELDURR] = {185, 1},
-    [SPECIES_WHIMSICOTT] = {186, 1},
-    [SPECIES_KROOKODILE] = {187, 1},
-    [SPECIES_SCRAFTY] = {188, 2},
-    [SPECIES_COFAGRIGUS] = {190, 1},
-    [SPECIES_GARBODOR] = {191, 1},
-    [SPECIES_ZOROARK] = {192, 1},
-    [SPECIES_CINCCINO] = {193, 1},
-    [SPECIES_REUNICLUS] = {194, 1},
-    [SPECIES_SWANNA] = {195, 1},
-    [SPECIES_VANILLUXE] = {196, 1},
-    [SPECIES_SAWSBUCK] = {197, 1},
-    [SPECIES_EMOLGA] = {198, 1},
-    [SPECIES_ALOMOMOLA] = {199, 1},
-    [SPECIES_GALVANTULA] = {200, 1},
-    [SPECIES_EELEKTROSS] = {201, 2},
-    [SPECIES_CHANDELURE] = {203, 1},
-    [SPECIES_BEARTIC] = {204, 1},
-    [SPECIES_CRYOGONAL] = {205, 1},
-    [SPECIES_STUNFISK] = {206, 1},
-    [SPECIES_MIENSHAO] = {207, 1},
-    [SPECIES_BRAVIARY] = {208, 1},
-    [SPECIES_MANDIBUZZ] = {209, 2},
-    [SPECIES_VOLCARONA] = {211, 1},
-    [SPECIES_TERRAKION] = {212, 1},
-    [SPECIES_VIRIZION] = {213, 1},
-    [SPECIES_RESHIRAM] = {214, 1},
-    [SPECIES_ZEKROM] = {215, 1},
-    [SPECIES_MELOETTA] = {216, 1},
-    [SPECIES_GENESECT] = {217, 1},
-    [SPECIES_DELPHOX] = {218, 2},
-    [SPECIES_GRENINJA] = {220, 2},
-    [SPECIES_DIGGERSBY] = {222, 1},
-    [SPECIES_TALONFLAME] = {223, 1},
-    [SPECIES_PYROAR] = {224, 1},
-    [SPECIES_GOGOAT] = {225, 1},
-    [SPECIES_PANGORO] = {226, 1},
-    [SPECIES_FURFROU] = {227, 1},
-    [SPECIES_MEOWSTIC] = {228, 2},
-    [SPECIES_SLURPUFF] = {230, 1},
-    [SPECIES_MALAMAR] = {231, 2},
-    [SPECIES_DRAGALGE] = {233, 2},
-    [SPECIES_CLAWITZER] = {235, 1},
-    [SPECIES_HELIOLISK] = {236, 1},
-    [SPECIES_TYRANTRUM] = {237, 1},
-    [SPECIES_AURORUS] = {238, 1},
-    [SPECIES_SYLVEON] = {239, 1},
-    [SPECIES_HAWLUCHA] = {240, 2},
-    [SPECIES_DEDENNE] = {242, 1},
-    [SPECIES_CARBINK] = {243, 1},
-    [SPECIES_KLEFKI] = {244, 1},
-    [SPECIES_GOURGEIST] = {245, 1},
-    [SPECIES_NOIVERN] = {246, 1},
-    [SPECIES_XERNEAS] = {247, 2},
-    [SPECIES_YVELTAL] = {249, 2},
-    [SPECIES_DIANCIE] = {251, 2},
-    [SPECIES_HOOPA] = {253, 1},
-    [SPECIES_VOLCANION] = {254, 1},
-    [SPECIES_INCINEROAR] = {255, 1},
-    [SPECIES_TOUCANNON] = {256, 1},
-    [SPECIES_VIKAVOLT] = {257, 1},
-    [SPECIES_CRABOMINABLE] = {258, 1},
-    [SPECIES_ORICORIO] = {259, 1},
-    [SPECIES_RIBOMBEE] = {260, 1},
-    [SPECIES_LYCANROC] = {261, 2},
-    [SPECIES_TOXAPEX] = {263, 1},
-    [SPECIES_MUDSDALE] = {264, 1},
-    [SPECIES_ARAQUANID] = {265, 1},
-    [SPECIES_TSAREENA] = {266, 1},
-    [SPECIES_COMFEY] = {267, 1},
-    [SPECIES_ORANGURU] = {268, 1},
-    [SPECIES_PALOSSAND] = {269, 1},
-    [SPECIES_SILVALLY] = {270, 2},
-    [SPECIES_KOMALA] = {272, 1},
-    [SPECIES_MIMIKYU] = {273, 1},
-    [SPECIES_SOLGALEO] = {274, 2},
-    [SPECIES_LUNALA] = {276, 2},
-    [SPECIES_PHEROMOSA] = {278, 2},
-    [SPECIES_GUZZLORD] = {280, 2},
-    [SPECIES_MAGEARNA] = {282, 1},
-    [SPECIES_NAGANADEL] = {283, 2},
-    [SPECIES_ZERAORA] = {285, 1},
-    [SPECIES_RILLABOOM] = {286, 2},
-    [SPECIES_CINDERACE] = {288, 2},
-    [SPECIES_CORVIKNIGHT] = {290, 1},
-    [SPECIES_COALOSSAL] = {291, 1},
-    [SPECIES_APPLETUN] = {292, 1},
-    [SPECIES_SANDACONDA] = {293, 1},
-    [SPECIES_CRAMORANT] = {294, 1},
-    [SPECIES_BARRASKEWDA] = {295, 1},
-    [SPECIES_TOXTRICITY] = {296, 1},
-    [SPECIES_POLTEAGEIST] = {297, 1},
-    [SPECIES_HATTERENE] = {298, 1},
-    [SPECIES_RUNERIGUS] = {299, 1},
-    [SPECIES_ALCREMIE] = {300, 1},
-    [SPECIES_FROSMOTH] = {301, 1},
-    [SPECIES_INDEEDEE] = {302, 2},
-    [SPECIES_MORPEKO] = {304, 1},
-    [SPECIES_COPPERAJAH] = {305, 2},
-    [SPECIES_DURALUDON] = {307, 2},
-    [SPECIES_DRAGAPULT] = {309, 1},
-    [SPECIES_ZACIAN] = {310, 1},
-    [SPECIES_ETERNATUS] = {311, 2},
-    [SPECIES_URSHIFU] = {313, 1},
-    [SPECIES_REGIELEKI] = {314, 1},
-    [SPECIES_CALYREX] = {315, 1},
-    [SPECIES_MEOWSCARADA] = {316, 1},
-    [SPECIES_SKELEDIRGE] = {317, 1},
-    [SPECIES_GARGANACL] = {318, 1},
-    [SPECIES_PALAFIN] = {319, 1},
-    [SPECIES_KINGAMBIT] = {320, 1},
-    [SPECIES_FLUTTER_MANE] = {321, 2},
-    [SPECIES_GHOLDENGO] = {323, 1},
-    [SPECIES_TING_LU] = {324, 2},
-    [SPECIES_IRON_VALIANT] = {326, 1},
-    [SPECIES_ARCHALUDON] = {327, 1},
+    [SPECIES_VENUSAUR] = {0, 1},
+    [SPECIES_CHARIZARD] = {1, 2},
+    [SPECIES_BLASTOISE] = {3, 1},
+    [SPECIES_RAICHU] = {4, 2},
+    [SPECIES_CLEFABLE] = {6, 1},
+    [SPECIES_NINETALES] = {7, 1},
+    [SPECIES_ARCANINE] = {8, 1},
+    [SPECIES_ALAKAZAM] = {9, 1},
+    [SPECIES_VICTREEBEL] = {10, 1},
+    [SPECIES_GOLEM] = {11, 1},
+    [SPECIES_SLOWBRO] = {12, 1},
+    [SPECIES_DODRIO] = {13, 1},
+    [SPECIES_GENGAR] = {14, 1},
+    [SPECIES_KANGASKHAN] = {15, 1},
+    [SPECIES_STARMIE] = {16, 1},
+    [SPECIES_TAUROS] = {17, 1},
+    [SPECIES_GYARADOS] = {18, 1},
+    [SPECIES_AERODACTYL] = {19, 1},
+    [SPECIES_ZAPDOS] = {20, 1},
+    [SPECIES_MOLTRES] = {21, 1},
+    [SPECIES_DRAGONITE] = {22, 1},
+    [SPECIES_MEWTWO] = {23, 1},
+    [SPECIES_MEW] = {24, 2},
+    [SPECIES_TYPHLOSION] = {26, 1},
+    [SPECIES_FERALIGATR] = {27, 1},
+    [SPECIES_LANTURN] = {28, 1},
+    [SPECIES_JUMPLUFF] = {29, 1},
+    [SPECIES_SLOWKING] = {30, 1},
+    [SPECIES_STEELIX] = {31, 1},
+    [SPECIES_SCIZOR] = {32, 1},
+    [SPECIES_SKARMORY] = {33, 1},
+    [SPECIES_HOUNDOOM] = {34, 1},
+    [SPECIES_KINGDRA] = {35, 1},
+    [SPECIES_PORYGON2] = {36, 1},
+    [SPECIES_RAIKOU] = {37, 1},
+    [SPECIES_SUICUNE] = {38, 1},
+    [SPECIES_TYRANITAR] = {39, 1},
+    [SPECIES_CELEBI] = {40, 1},
+    [SPECIES_SCEPTILE] = {41, 1},
+    [SPECIES_BLAZIKEN] = {42, 1},
+    [SPECIES_SWAMPERT] = {43, 1},
+    [SPECIES_LUDICOLO] = {44, 1},
+    [SPECIES_SHIFTRY] = {45, 1},
+    [SPECIES_GARDEVOIR] = {46, 1},
+    [SPECIES_HARIYAMA] = {47, 1},
+    [SPECIES_SABLEYE] = {48, 1},
+    [SPECIES_AGGRON] = {49, 1},
+    [SPECIES_MEDICHAM] = {50, 1},
+    [SPECIES_MANECTRIC] = {51, 1},
+    [SPECIES_SHARPEDO] = {52, 1},
+    [SPECIES_FLYGON] = {53, 1},
+    [SPECIES_ALTARIA] = {54, 1},
+    [SPECIES_CRAWDAUNT] = {55, 1},
+    [SPECIES_ABSOL] = {56, 1},
+    [SPECIES_GLALIE] = {57, 1},
+    [SPECIES_METAGROSS] = {58, 1},
+    [SPECIES_REGIROCK] = {59, 1},
+    [SPECIES_REGICE] = {60, 1},
+    [SPECIES_LATIAS] = {61, 1},
+    [SPECIES_LATIOS] = {62, 1},
+    [SPECIES_GROUDON] = {63, 1},
+    [SPECIES_RAYQUAZA] = {64, 1},
+    [SPECIES_JIRACHI] = {65, 1},
+    [SPECIES_STARAPTOR] = {66, 1},
+    [SPECIES_FLOATZEL] = {67, 1},
+    [SPECIES_GASTRODON] = {68, 1},
+    [SPECIES_LOPUNNY] = {69, 1},
+    [SPECIES_BRONZONG] = {70, 1},
+    [SPECIES_GARCHOMP] = {71, 1},
+    [SPECIES_LUCARIO] = {72, 1},
+    [SPECIES_ABOMASNOW] = {73, 1},
+    [SPECIES_ELECTIVIRE] = {74, 1},
+    [SPECIES_MAGMORTAR] = {75, 1},
+    [SPECIES_YANMEGA] = {76, 1},
+    [SPECIES_GALLADE] = {77, 1},
+    [SPECIES_PROBOPASS] = {78, 1},
+    [SPECIES_DUSKNOIR] = {79, 1},
+    [SPECIES_FROSLASS] = {80, 1},
+    [SPECIES_ROTOM] = {81, 1},
+    [SPECIES_MESPRIT] = {82, 1},
+    [SPECIES_AZELF] = {83, 1},
+    [SPECIES_PALKIA] = {84, 1},
+    [SPECIES_REGIGIGAS] = {85, 1},
+    [SPECIES_GIRATINA] = {86, 1},
+    [SPECIES_MANAPHY] = {87, 1},
+    [SPECIES_VICTINI] = {88, 1},
+    [SPECIES_ZEBSTRIKA] = {89, 1},
+    [SPECIES_EXCADRILL] = {90, 1},
+    [SPECIES_AUDINO] = {91, 1},
+    [SPECIES_LEAVANNY] = {92, 1},
+    [SPECIES_SCOLIPEDE] = {93, 1},
+    [SPECIES_BASCULIN] = {94, 1},
+    [SPECIES_SCRAFTY] = {95, 1},
+    [SPECIES_ZOROARK] = {96, 1},
+    [SPECIES_SWANNA] = {97, 1},
+    [SPECIES_AMOONGUSS] = {98, 1},
+    [SPECIES_EELEKTROSS] = {99, 1},
+    [SPECIES_CHANDELURE] = {100, 1},
+    [SPECIES_HAXORUS] = {101, 1},
+    [SPECIES_STUNFISK] = {102, 1},
+    [SPECIES_MIENSHAO] = {103, 1},
+    [SPECIES_GOLURK] = {104, 1},
+    [SPECIES_MANDIBUZZ] = {105, 1},
+    [SPECIES_COBALION] = {106, 1},
+    [SPECIES_TERRAKION] = {107, 1},
+    [SPECIES_THUNDURUS] = {108, 1},
+    [SPECIES_KYUREM] = {109, 1},
+    [SPECIES_GENESECT] = {110, 1},
+    [SPECIES_CHESNAUGHT] = {111, 1},
+    [SPECIES_DELPHOX] = {112, 1},
+    [SPECIES_GRENINJA] = {113, 1},
+    [SPECIES_FLOETTE] = {114, 1},
+    [SPECIES_MEOWSTIC] = {115, 1},
+    [SPECIES_MALAMAR] = {116, 1},
+    [SPECIES_DRAGALGE] = {117, 1},
+    [SPECIES_HAWLUCHA] = {118, 1},
+    [SPECIES_GOODRA] = {119, 1},
+    [SPECIES_GOURGEIST] = {120, 1},
+    [SPECIES_XERNEAS] = {121, 1},
+    [SPECIES_YVELTAL] = {122, 1},
+    [SPECIES_DIANCIE] = {123, 1},
+    [SPECIES_CRABOMINABLE] = {124, 1},
+    [SPECIES_LYCANROC] = {125, 1},
+    [SPECIES_LURANTIS] = {126, 1},
+    [SPECIES_SILVALLY] = {127, 1},
+    [SPECIES_BRUXISH] = {128, 1},
+    [SPECIES_DRAMPA] = {129, 1},
+    [SPECIES_SOLGALEO] = {130, 1},
+    [SPECIES_LUNALA] = {131, 2},
+    [SPECIES_PHEROMOSA] = {133, 1},
+    [SPECIES_CELESTEELA] = {134, 1},
+    [SPECIES_GUZZLORD] = {135, 1},
+    [SPECIES_NECROZMA] = {136, 2},
+    [SPECIES_MAGEARNA] = {138, 1},
+    [SPECIES_NAGANADEL] = {139, 1},
+    [SPECIES_ZERAORA] = {140, 1},
+    [SPECIES_RILLABOOM] = {141, 1},
+    [SPECIES_CINDERACE] = {142, 2},
+    [SPECIES_DREDNAW] = {144, 1},
+    [SPECIES_TOXTRICITY] = {145, 1},
+    [SPECIES_FALINKS] = {146, 1},
+    [SPECIES_STONJOURNER] = {147, 1},
+    [SPECIES_INDEEDEE] = {148, 1},
+    [SPECIES_COPPERAJAH] = {149, 1},
+    [SPECIES_DURALUDON] = {150, 1},
+    [SPECIES_ZAMAZENTA] = {151, 1},
+    [SPECIES_ETERNATUS] = {152, 2},
+    [SPECIES_TATSUGIRI] = {154, 1},
+    [SPECIES_FLUTTER_MANE] = {155, 1},
+    [SPECIES_IRON_BUNDLE] = {156, 1},
+    [SPECIES_IRON_HANDS] = {157, 1},
+    [SPECIES_GLIMMORA] = {158, 1},
+    [SPECIES_CHIEN_PAO] = {159, 1},
+    [SPECIES_TING_LU] = {160, 1},
+    [SPECIES_CHI_YU] = {161, 1},
+    [SPECIES_ROARING_MOON] = {162, 1},
+    [SPECIES_OGERPON] = {163, 1},
+    [SPECIES_RAGING_BOLT] = {164, 2},
 };
 
 const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
 {
-    {
-        .name = _("Special Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_SLUDGE_BOMB, MOVE_PROTECT, MOVE_EARTH_POWER, MOVE_SLEEP_POWDER},
-            .nature = NATURE_MODEST,
-            .abilitySlot = 2,
-        },
-    },
     {
         .name = _("Mega Special Attacker"),
         .preset =
@@ -812,6 +491,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_SLUDGE_BOMB, MOVE_EARTH_POWER, MOVE_PROTECT, MOVE_GIGA_DRAIN},
             .nature = NATURE_MODEST,
             .abilitySlot = 1,
+            .item = ITEM_LIFE_ORB,
         },
     },
     {
@@ -821,6 +501,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_PROTECT, MOVE_DRAGON_CLAW, MOVE_DRAGON_DANCE, MOVE_FLARE_BLITZ},
             .nature = NATURE_JOLLY,
             .abilitySlot = 1,
+            .item = ITEM_LIFE_ORB,
         },
     },
     {
@@ -830,6 +511,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_HEAT_WAVE, MOVE_SOLAR_BEAM, MOVE_WEATHER_BALL, MOVE_OVERHEAT},
             .nature = NATURE_MODEST,
             .abilitySlot = 2,
+            .item = ITEM_CHOICE_SCARF,
         },
     },
     {
@@ -839,42 +521,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_FAKE_OUT, MOVE_FLIP_TURN, MOVE_YAWN, MOVE_PROTECT},
             .nature = NATURE_IMPISH,
             .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Mega Setup Sweeper"),
-        .preset =
-        {
-            .moves = {MOVE_WATER_SPOUT, MOVE_DARK_PULSE, MOVE_PROTECT, MOVE_SHELL_SMASH},
-            .nature = NATURE_MODEST,
-            .abilitySlot = 1,
-        },
-    },
-    {
-        .name = _("Mega Physical Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_POISON_JAB, MOVE_PROTECT, MOVE_U_TURN, MOVE_DRILL_RUN},
-            .nature = NATURE_ADAMANT,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Setup Sweeper"),
-        .preset =
-        {
-            .moves = {MOVE_GUNK_SHOT, MOVE_PROTECT, MOVE_GLARE, MOVE_COIL},
-            .nature = NATURE_JOLLY,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Physical Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_FAKE_OUT, MOVE_PROTECT, MOVE_VOLT_SWITCH, MOVE_VOLT_TACKLE},
-            .nature = NATURE_TIMID,
-            .abilitySlot = 2,
+            .item = ITEM_SITRUS_BERRY,
         },
     },
     {
@@ -884,6 +531,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_FAKE_OUT, MOVE_PROTECT, MOVE_VOLT_SWITCH, MOVE_VOLT_TACKLE},
             .nature = NATURE_JOLLY,
             .abilitySlot = 2,
+            .item = ITEM_LIFE_ORB,
         },
     },
     {
@@ -893,15 +541,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_FAKE_OUT, MOVE_VOLT_SWITCH, MOVE_NUZZLE, MOVE_PROTECT},
             .nature = NATURE_TIMID,
             .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Support II"),
-        .preset =
-        {
-            .moves = {MOVE_HELPING_HAND, MOVE_MOONBLAST, MOVE_HEAL_PULSE, MOVE_FOLLOW_ME},
-            .nature = NATURE_BOLD,
-            .abilitySlot = 2,
+            .item = ITEM_FOCUS_SASH,
         },
     },
     {
@@ -911,6 +551,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_FOLLOW_ME, MOVE_MOONBLAST, MOVE_PROTECT, MOVE_DAZZLING_GLEAM},
             .nature = NATURE_CALM,
             .abilitySlot = 2,
+            .item = ITEM_SITRUS_BERRY,
         },
     },
     {
@@ -920,42 +561,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_HEAT_WAVE, MOVE_SOLAR_BEAM, MOVE_OVERHEAT, MOVE_WEATHER_BALL},
             .nature = NATURE_MODEST,
             .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Support"),
-        .preset =
-        {
-            .moves = {MOVE_THUNDER_WAVE, MOVE_DAZZLING_GLEAM, MOVE_FIRE_BLAST, MOVE_HELPING_HAND},
-            .nature = NATURE_CALM,
-            .abilitySlot = 1,
-        },
-    },
-    {
-        .name = _("Setup Sweeper"),
-        .preset =
-        {
-            .moves = {MOVE_BUG_BUZZ, MOVE_QUIVER_DANCE, MOVE_SLUDGE_BOMB, MOVE_SLEEP_POWDER},
-            .nature = NATURE_TIMID,
-            .abilitySlot = 1,
-        },
-    },
-    {
-        .name = _("Offensive"),
-        .preset =
-        {
-            .moves = {MOVE_PROTECT, MOVE_ROCK_SLIDE, MOVE_STOMPING_TANTRUM, MOVE_SUCKER_PUNCH},
-            .nature = NATURE_JOLLY,
-            .abilitySlot = 1,
-        },
-    },
-    {
-        .name = _("Support II"),
-        .preset =
-        {
-            .moves = {MOVE_DOUBLE_EDGE, MOVE_FAKE_OUT, MOVE_TAUNT, MOVE_ICY_WIND},
-            .nature = NATURE_CAREFUL,
-            .abilitySlot = 1,
+            .item = ITEM_CHOICE_SCARF,
         },
     },
     {
@@ -965,24 +571,17 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_PROTECT, MOVE_EXTREME_SPEED, MOVE_FLARE_BLITZ, MOVE_WILL_O_WISP},
             .nature = NATURE_ADAMANT,
             .abilitySlot = 0,
+            .item = ITEM_SITRUS_BERRY,
         },
     },
     {
-        .name = _("Mega Special Attacker"),
+        .name = _("Special Attacker II"),
         .preset =
         {
-            .moves = {MOVE_PROTECT, MOVE_EXPANDING_FORCE, MOVE_FOCUS_BLAST, MOVE_DAZZLING_GLEAM},
+            .moves = {MOVE_PSYCHIC, MOVE_PROTECT, MOVE_ENCORE, MOVE_HYPER_BEAM},
             .nature = NATURE_TIMID,
             .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Mega Special Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_STRENGTH_SAP, MOVE_SUCKER_PUNCH, MOVE_SLUDGE_BOMB, MOVE_GIGA_DRAIN},
-            .nature = NATURE_RASH,
-            .abilitySlot = 0,
+            .item = ITEM_FOCUS_SASH,
         },
     },
     {
@@ -992,24 +591,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_SLEEP_POWDER, MOVE_PROTECT, MOVE_SLUDGE_BOMB, MOVE_ENCORE},
             .nature = NATURE_TIMID,
             .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Support II"),
-        .preset =
-        {
-            .moves = {MOVE_MUDDY_WATER, MOVE_ICY_WIND, MOVE_SLUDGE_BOMB, MOVE_ACID_SPRAY},
-            .nature = NATURE_BOLD,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Wallbreaker"),
-        .preset =
-        {
-            .moves = {MOVE_HIGH_HORSEPOWER, MOVE_ROCK_SLIDE, MOVE_STONE_EDGE, MOVE_FIRE_PUNCH},
-            .nature = NATURE_ADAMANT,
-            .abilitySlot = 1,
+            .item = ITEM_FOCUS_SASH,
         },
     },
     {
@@ -1019,33 +601,27 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_ROCK_POLISH, MOVE_PROTECT, MOVE_ROCK_SLIDE, MOVE_HIGH_HORSEPOWER},
             .nature = NATURE_ADAMANT,
             .abilitySlot = 1,
+            .item = ITEM_WEAKNESS_POLICY,
         },
     },
     {
-        .name = _("Mega Trick Room"),
+        .name = _("Trick Room II"),
         .preset =
         {
-            .moves = {MOVE_BODY_PRESS, MOVE_SLACK_OFF, MOVE_PSYCHIC, MOVE_TRICK_ROOM},
-            .nature = NATURE_RELAXED,
+            .moves = {MOVE_TRICK_ROOM, MOVE_PROTECT, MOVE_FUTURE_SIGHT, MOVE_HYDRO_PUMP},
+            .nature = NATURE_MODEST,
             .abilitySlot = 2,
+            .item = ITEM_QUICK_CLAW,
         },
     },
     {
-        .name = _("Support"),
+        .name = _("Wallbreaker"),
         .preset =
         {
-            .moves = {MOVE_ICY_WIND, MOVE_FAKE_OUT, MOVE_ENCORE, MOVE_HYDRO_PUMP},
-            .nature = NATURE_BOLD,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Setup Sweeper"),
-        .preset =
-        {
-            .moves = {MOVE_SHELL_SMASH, MOVE_HYDRO_PUMP, MOVE_ROCK_BLAST, MOVE_ICICLE_SPEAR},
-            .nature = NATURE_ADAMANT,
+            .moves = {MOVE_DOUBLE_EDGE, MOVE_QUICK_ATTACK, MOVE_BRAVE_BIRD, MOVE_PROTECT},
+            .nature = NATURE_JOLLY,
             .abilitySlot = 1,
+            .item = ITEM_CHOICE_BAND,
         },
     },
     {
@@ -1055,42 +631,17 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_SHADOW_BALL, MOVE_SLUDGE_BOMB, MOVE_ICY_WIND, MOVE_TRICK_ROOM},
             .nature = NATURE_TIMID,
             .abilitySlot = 1,
+            .item = ITEM_FOCUS_SASH,
         },
     },
     {
-        .name = _("Mega Special Attacker"),
+        .name = _("Physical Attacker"),
         .preset =
         {
-            .moves = {MOVE_PROTECT, MOVE_SHADOW_BALL, MOVE_PERISH_SONG, MOVE_SLUDGE_BOMB},
-            .nature = NATURE_TIMID,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Wallbreaker"),
-        .preset =
-        {
-            .moves = {MOVE_PSYCHIC, MOVE_TRICK_ROOM, MOVE_PROTECT, MOVE_ENERGY_BALL},
-            .nature = NATURE_QUIET,
-            .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Offensive"),
-        .preset =
-        {
-            .moves = {MOVE_CLOSE_COMBAT, MOVE_POISON_JAB, MOVE_KNOCK_OFF, MOVE_PROTECT},
-            .nature = NATURE_ADAMANT,
-            .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Mega Physical Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_FAKE_OUT, MOVE_DOUBLE_EDGE, MOVE_SUCKER_PUNCH, MOVE_BRICK_BREAK},
+            .moves = {MOVE_FAKE_OUT, MOVE_DOUBLE_EDGE, MOVE_ICE_PUNCH, MOVE_PROTECT},
             .nature = NATURE_BRAVE,
             .abilitySlot = 1,
+            .item = ITEM_SILK_SCARF,
         },
     },
     {
@@ -1100,24 +651,17 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_PROTECT, MOVE_ICE_BEAM, MOVE_PSYCHIC, MOVE_THUNDERBOLT},
             .nature = NATURE_TIMID,
             .abilitySlot = 1,
+            .item = ITEM_LIFE_ORB,
         },
     },
     {
-        .name = _("Bulky Setup"),
+        .name = _("Physical Attacker II"),
         .preset =
         {
-            .moves = {MOVE_TAILWIND, MOVE_DUAL_WINGBEAT, MOVE_BUG_BITE, MOVE_PROTECT},
-            .nature = NATURE_JOLLY,
-            .abilitySlot = 1,
-        },
-    },
-    {
-        .name = _("Mega Physical Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_BODY_SLAM, MOVE_FEINT, MOVE_STORM_THROW, MOVE_GIGA_IMPACT},
-            .nature = NATURE_JOLLY,
-            .abilitySlot = 2,
+            .moves = {MOVE_CLOSE_COMBAT, MOVE_PROTECT, MOVE_ROCK_SLIDE, MOVE_GIGA_IMPACT},
+            .nature = NATURE_ADAMANT,
+            .abilitySlot = 0,
+            .item = ITEM_LIFE_ORB,
         },
     },
     {
@@ -1127,33 +671,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_WATERFALL, MOVE_DRAGON_DANCE, MOVE_PROTECT, MOVE_CRUNCH},
             .nature = NATURE_ADAMANT,
             .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Special Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_YAWN, MOVE_ICE_BEAM, MOVE_DETECT, MOVE_SCALD},
-            .nature = NATURE_RELAXED,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Special Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_PROTECT, MOVE_RISING_VOLTAGE, MOVE_WEATHER_BALL, MOVE_VOLT_SWITCH},
-            .nature = NATURE_TIMID,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Physical Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_FLARE_BLITZ, MOVE_SUPERPOWER, MOVE_PROTECT, MOVE_QUICK_ATTACK},
-            .nature = NATURE_BRAVE,
-            .abilitySlot = 0,
+            .item = ITEM_LIFE_ORB,
         },
     },
     {
@@ -1163,33 +681,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_ROCK_SLIDE, MOVE_TAILWIND, MOVE_DUAL_WINGBEAT, MOVE_ICE_FANG},
             .nature = NATURE_JOLLY,
             .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Physical Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_PROTECT, MOVE_YAWN, MOVE_FISSURE, MOVE_HIGH_HORSEPOWER},
-            .nature = NATURE_RELAXED,
-            .abilitySlot = 1,
-        },
-    },
-    {
-        .name = _("Support"),
-        .preset =
-        {
-            .moves = {MOVE_PROTECT, MOVE_BRAVE_BIRD, MOVE_ICE_BEAM, MOVE_ICY_WIND},
-            .nature = NATURE_BOLD,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Support"),
-        .preset =
-        {
-            .moves = {MOVE_HURRICANE, MOVE_THUNDERBOLT, MOVE_TAILWIND, MOVE_ROOST},
-            .nature = NATURE_CALM,
-            .abilitySlot = 2,
+            .item = ITEM_SITRUS_BERRY,
         },
     },
     {
@@ -1199,15 +691,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_THUNDERBOLT, MOVE_HURRICANE, MOVE_TAILWIND, MOVE_HEAT_WAVE},
             .nature = NATURE_TIMID,
             .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Support"),
-        .preset =
-        {
-            .moves = {MOVE_PROTECT, MOVE_FIRE_BLAST, MOVE_TAILWIND, MOVE_BRAVE_BIRD},
-            .nature = NATURE_CALM,
-            .abilitySlot = 2,
+            .item = ITEM_LIFE_ORB,
         },
     },
     {
@@ -1217,6 +701,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_BRAVE_BIRD, MOVE_SCORCHING_SANDS, MOVE_TAILWIND, MOVE_HEAT_WAVE},
             .nature = NATURE_TIMID,
             .abilitySlot = 2,
+            .item = ITEM_SITRUS_BERRY,
         },
     },
     {
@@ -1226,6 +711,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_PROTECT, MOVE_DRAGON_PULSE, MOVE_TAILWIND, MOVE_HEAT_WAVE},
             .nature = NATURE_MODEST,
             .abilitySlot = 2,
+            .item = ITEM_SITRUS_BERRY,
         },
     },
     {
@@ -1235,24 +721,37 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_AURA_SPHERE, MOVE_RECOVER, MOVE_PSYSTRIKE, MOVE_NASTY_PLOT},
             .nature = NATURE_TIMID,
             .abilitySlot = 2,
+            .item = ITEM_LEFTOVERS,
         },
     },
     {
-        .name = _("Mega Special Attacker"),
+        .name = _("Setup Sweeper"),
         .preset =
         {
-            .moves = {MOVE_SOLAR_BEAM, MOVE_WEATHER_BALL, MOVE_DAZZLING_GLEAM, MOVE_PROTECT},
+            .moves = {MOVE_PSYCHIC, MOVE_NASTY_PLOT, MOVE_FIRE_BLAST, MOVE_BRAVE_BIRD},
+            .nature = NATURE_TIMID,
+            .abilitySlot = 0,
+            .item = ITEM_LIFE_ORB,
+        },
+    },
+    {
+        .name = _("Bulky Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_TRANSFORM, MOVE_COACHING, MOVE_PSYCHIC, MOVE_BRAVE_BIRD},
+            .nature = NATURE_TIMID,
+            .abilitySlot = 0,
+            .item = ITEM_SITRUS_BERRY,
+        },
+    },
+    {
+        .name = _("Special Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_ERUPTION, MOVE_PROTECT, MOVE_SCORCHING_SANDS, MOVE_HYPER_BEAM},
             .nature = NATURE_MODEST,
-            .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Mega Physical Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_PROTECT, MOVE_LIQUIDATION, MOVE_DOUBLE_EDGE, MOVE_AQUA_JET},
-            .nature = NATURE_BRAVE,
-            .abilitySlot = 2,
+            .abilitySlot = 0,
+            .item = ITEM_CHARCOAL,
         },
     },
     {
@@ -1262,87 +761,37 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_LIQUIDATION, MOVE_ICE_PUNCH, MOVE_AQUA_JET, MOVE_ROCK_SLIDE},
             .nature = NATURE_ADAMANT,
             .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Support"),
-        .preset =
-        {
-            .moves = {MOVE_BODY_SLAM, MOVE_KNOCK_OFF, MOVE_FOLLOW_ME, MOVE_HELPING_HAND},
-            .nature = NATURE_CAREFUL,
-            .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Offensive"),
-        .preset =
-        {
-            .moves = {MOVE_PROTECT, MOVE_HURRICANE, MOVE_HYPER_VOICE, MOVE_TAILWIND},
-            .nature = NATURE_MODEST,
-            .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Mega Special Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_DRAGON_PULSE, MOVE_PROTECT, MOVE_THUNDERBOLT, MOVE_POWER_GEM},
-            .nature = NATURE_QUIET,
-            .abilitySlot = 1,
-        },
-    },
-    {
-        .name = _("Bulky Setup"),
-        .preset =
-        {
-            .moves = {MOVE_GIGA_DRAIN, MOVE_PROTECT, MOVE_STRENGTH_SAP, MOVE_QUIVER_DANCE},
-            .nature = NATURE_MODEST,
-            .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Special Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_PROTECT, MOVE_WEATHER_BALL, MOVE_PERISH_SONG, MOVE_ENCORE},
-            .nature = NATURE_CALM,
-            .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Offensive"),
-        .preset =
-        {
-            .moves = {MOVE_EARTH_POWER, MOVE_LEAF_STORM, MOVE_PROTECT, MOVE_SLUDGE_BOMB},
-            .nature = NATURE_MODEST,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Special Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_POWER_GEM, MOVE_PSYCHIC, MOVE_DETECT, MOVE_EXPANDING_FORCE},
-            .nature = NATURE_TIMID,
-            .abilitySlot = 2,
+            .item = ITEM_LIFE_ORB,
         },
     },
     {
         .name = _("Bulky Attacker"),
         .preset =
         {
-            .moves = {MOVE_FOUL_PLAY, MOVE_SNARL, MOVE_YAWN, MOVE_MOONLIGHT},
-            .nature = NATURE_BOLD,
-            .abilitySlot = 2,
+            .moves = {MOVE_VOLT_SWITCH, MOVE_SCALD, MOVE_ICE_BEAM, MOVE_PROTECT},
+            .nature = NATURE_MODEST,
+            .abilitySlot = 0,
+            .item = ITEM_ASSAULT_VEST,
         },
     },
     {
-        .name = _("Support"),
+        .name = _("Bulky Attacker"),
         .preset =
         {
-            .moves = {MOVE_TAILWIND, MOVE_TAUNT, MOVE_BRAVE_BIRD, MOVE_PROTECT},
-            .nature = NATURE_CAREFUL,
+            .moves = {MOVE_ENCORE, MOVE_SLEEP_POWDER, MOVE_ACROBATICS, MOVE_LEAF_STORM},
+            .nature = NATURE_JOLLY,
             .abilitySlot = 2,
+            .item = ITEM_SITRUS_BERRY,
+        },
+    },
+    {
+        .name = _("Trick Room II"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_SCALD, MOVE_PSYCHIC, MOVE_HYPER_BEAM},
+            .nature = NATURE_QUIET,
+            .abilitySlot = 2,
+            .item = ITEM_COLBUR_BERRY,
         },
     },
     {
@@ -1352,42 +801,17 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_WIDE_GUARD, MOVE_BODY_PRESS, MOVE_HEAVY_SLAM, MOVE_ROCK_SLIDE},
             .nature = NATURE_CAREFUL,
             .abilitySlot = 2,
+            .item = ITEM_LIFE_ORB,
         },
     },
     {
-        .name = _("Bulky Attacker"),
+        .name = _("Mega Setup Sweeper"),
         .preset =
         {
-            .moves = {MOVE_CLOSE_COMBAT, MOVE_STOMPING_TANTRUM, MOVE_PLAY_ROUGH, MOVE_SUPER_FANG},
-            .nature = NATURE_ADAMANT,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Mega Physical Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_CLOSE_COMBAT, MOVE_ROCK_BLAST, MOVE_PROTECT, MOVE_PIN_MISSILE},
+            .moves = {MOVE_BULLET_PUNCH, MOVE_PROTECT, MOVE_SWORDS_DANCE, MOVE_BUG_BITE},
             .nature = NATURE_ADAMANT,
             .abilitySlot = 1,
-        },
-    },
-    {
-        .name = _("Setup Sweeper"),
-        .preset =
-        {
-            .moves = {MOVE_HEAT_WAVE, MOVE_SHELL_SMASH, MOVE_PROTECT, MOVE_POWER_GEM},
-            .nature = NATURE_MODEST,
-            .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Mega Physical Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_BRAVE_BIRD, MOVE_IRON_HEAD, MOVE_PROTECT, MOVE_ROCK_TOMB},
-            .nature = NATURE_ADAMANT,
-            .abilitySlot = 1,
+            .item = ITEM_LIFE_ORB,
         },
     },
     {
@@ -1397,6 +821,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_BODY_PRESS, MOVE_ROOST, MOVE_TAILWIND, MOVE_IRON_DEFENSE},
             .nature = NATURE_IMPISH,
             .abilitySlot = 1,
+            .item = ITEM_LEFTOVERS,
         },
     },
     {
@@ -1406,33 +831,17 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_HEAT_WAVE, MOVE_PROTECT, MOVE_SUCKER_PUNCH, MOVE_SNARL},
             .nature = NATURE_HASTY,
             .abilitySlot = 1,
+            .item = ITEM_FOCUS_SASH,
         },
     },
     {
-        .name = _("Mega Special Attacker"),
+        .name = _("Setup Sweeper"),
         .preset =
         {
-            .moves = {MOVE_HEAT_WAVE, MOVE_DARK_PULSE, MOVE_PROTECT, MOVE_OVERHEAT},
-            .nature = NATURE_TIMID,
-            .abilitySlot = 1,
-        },
-    },
-    {
-        .name = _("Offensive"),
-        .preset =
-        {
-            .moves = {MOVE_RAIN_DANCE, MOVE_PROTECT, MOVE_DRACO_METEOR, MOVE_MUDDY_WATER},
-            .nature = NATURE_MODEST,
+            .moves = {MOVE_PROTECT, MOVE_DRACO_METEOR, MOVE_RAIN_DANCE, MOVE_HYDRO_PUMP},
+            .nature = NATURE_ADAMANT,
             .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Support"),
-        .preset =
-        {
-            .moves = {MOVE_KNOCK_OFF, MOVE_ICE_SHARD, MOVE_RAPID_SPIN, MOVE_HIGH_HORSEPOWER},
-            .nature = NATURE_CAREFUL,
-            .abilitySlot = 0,
+            .item = ITEM_LIFE_ORB,
         },
     },
     {
@@ -1442,42 +851,17 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_THUNDERBOLT, MOVE_ICY_WIND, MOVE_TRI_ATTACK, MOVE_RECOVER},
             .nature = NATURE_MODEST,
             .abilitySlot = 1,
+            .item = ITEM_EVIOLITE,
         },
     },
     {
-        .name = _("Support"),
+        .name = _("Bulky Setup"),
         .preset =
         {
-            .moves = {MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_RECOVER, MOVE_TRICK_ROOM},
-            .nature = NATURE_QUIET,
-            .abilitySlot = 1,
-        },
-    },
-    {
-        .name = _("Support II"),
-        .preset =
-        {
-            .moves = {MOVE_WIDE_GUARD, MOVE_COACHING, MOVE_CLOSE_COMBAT, MOVE_FAKE_OUT},
-            .nature = NATURE_IMPISH,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Support II"),
-        .preset =
-        {
-            .moves = {MOVE_SOFT_BOILED, MOVE_HYPER_VOICE, MOVE_THUNDER_WAVE, MOVE_HELPING_HAND},
-            .nature = NATURE_BOLD,
+            .moves = {MOVE_THUNDERBOLT, MOVE_CALM_MIND, MOVE_PROTECT, MOVE_HYPER_BEAM},
+            .nature = NATURE_TIMID,
             .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Choice Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_STOMPING_TANTRUM, MOVE_SACRED_FIRE, MOVE_FLARE_BLITZ, MOVE_EXTREME_SPEED},
-            .nature = NATURE_JOLLY,
-            .abilitySlot = 2,
+            .item = ITEM_LEFTOVERS,
         },
     },
     {
@@ -1487,60 +871,27 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_ICE_BEAM, MOVE_SCALD, MOVE_CALM_MIND, MOVE_PROTECT},
             .nature = NATURE_MODEST,
             .abilitySlot = 2,
+            .item = ITEM_LEFTOVERS,
         },
     },
     {
-        .name = _("Support II"),
+        .name = _("Choice Attacker"),
         .preset =
         {
-            .moves = {MOVE_TAILWIND, MOVE_SCALD, MOVE_ICE_BEAM, MOVE_PROTECT},
-            .nature = NATURE_CALM,
-            .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Bulky Setup"),
-        .preset =
-        {
-            .moves = {MOVE_CALM_MIND, MOVE_AEROBLAST, MOVE_RECOVER, MOVE_EARTH_POWER},
-            .nature = NATURE_TIMID,
-            .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Support"),
-        .preset =
-        {
-            .moves = {MOVE_SACRED_FIRE, MOVE_PROTECT, MOVE_TAILWIND, MOVE_BRAVE_BIRD},
-            .nature = NATURE_IMPISH,
-            .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Support II"),
-        .preset =
-        {
-            .moves = {MOVE_LEAF_BLADE, MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_PROTECT},
-            .nature = NATURE_BRAVE,
+            .moves = {MOVE_ROCK_SLIDE, MOVE_LOW_KICK, MOVE_ICE_PUNCH, MOVE_PROTECT},
+            .nature = NATURE_JOLLY,
             .abilitySlot = 0,
+            .item = ITEM_CHOICE_SCARF,
         },
     },
     {
-        .name = _("Support III"),
+        .name = _("Support II"),
         .preset =
         {
             .moves = {MOVE_LEAF_STORM, MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_PROTECT},
             .nature = NATURE_QUIET,
             .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Mega Special Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_DRAGON_PULSE, MOVE_EARTH_POWER, MOVE_PROTECT, MOVE_ENERGY_BALL},
-            .nature = NATURE_TIMID,
-            .abilitySlot = 0,
+            .item = ITEM_SITRUS_BERRY,
         },
     },
     {
@@ -1550,6 +901,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_LEAF_STORM, MOVE_QUICK_GUARD, MOVE_EARTH_POWER, MOVE_ROCK_TOMB},
             .nature = NATURE_TIMID,
             .abilitySlot = 1,
+            .item = ITEM_WHITE_HERB,
         },
     },
     {
@@ -1559,42 +911,27 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_PROTECT, MOVE_COACHING, MOVE_AURA_SPHERE, MOVE_HEAT_WAVE},
             .nature = NATURE_TIMID,
             .abilitySlot = 2,
+            .item = ITEM_FOCUS_SASH,
         },
     },
     {
-        .name = _("Mega Physical Attacker"),
+        .name = _("Physical Attacker"),
         .preset =
         {
-            .moves = {MOVE_CLOSE_COMBAT, MOVE_FLARE_BLITZ, MOVE_ROCK_SLIDE, MOVE_DETECT},
-            .nature = NATURE_ADAMANT,
-            .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Setup Sweeper"),
-        .preset =
-        {
-            .moves = {MOVE_CRUNCH, MOVE_SUCKER_PUNCH, MOVE_HOWL, MOVE_PLAY_ROUGH},
-            .nature = NATURE_ADAMANT,
+            .moves = {MOVE_PROTECT, MOVE_WIDE_GUARD, MOVE_HIGH_HORSEPOWER, MOVE_LIQUIDATION},
+            .nature = NATURE_IMPISH,
             .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Support"),
-        .preset =
-        {
-            .moves = {MOVE_LEAF_STORM, MOVE_HYDRO_PUMP, MOVE_FAKE_OUT, MOVE_ICY_WIND},
-            .nature = NATURE_BOLD,
-            .abilitySlot = 0,
+            .item = ITEM_LEFTOVERS,
         },
     },
     {
         .name = _("Offensive"),
         .preset =
         {
-            .moves = {MOVE_TAILWIND, MOVE_PROTECT, MOVE_LEAF_BLADE, MOVE_KNOCK_OFF},
-            .nature = NATURE_ADAMANT,
+            .moves = {MOVE_ENERGY_BALL, MOVE_PROTECT, MOVE_RAIN_DANCE, MOVE_HYDRO_PUMP},
+            .nature = NATURE_MODEST,
             .abilitySlot = 0,
+            .item = ITEM_LIFE_ORB,
         },
     },
     {
@@ -1604,33 +941,17 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_LEAF_BLADE, MOVE_TAILWIND, MOVE_KNOCK_OFF, MOVE_FAKE_OUT},
             .nature = NATURE_JOLLY,
             .abilitySlot = 0,
+            .item = ITEM_FOCUS_SASH,
         },
     },
     {
-        .name = _("Tailwind II"),
+        .name = _("Special Attacker II"),
         .preset =
         {
-            .moves = {MOVE_HURRICANE, MOVE_WEATHER_BALL, MOVE_TAILWIND, MOVE_WIDE_GUARD},
+            .moves = {MOVE_DAZZLING_GLEAM, MOVE_PROTECT, MOVE_ENCORE, MOVE_FUTURE_SIGHT},
             .nature = NATURE_MODEST,
-            .abilitySlot = 1,
-        },
-    },
-    {
-        .name = _("Mega Trick Room"),
-        .preset =
-        {
-            .moves = {MOVE_HYPER_VOICE, MOVE_PROTECT, MOVE_PSYCHIC, MOVE_TRICK_ROOM},
-            .nature = NATURE_MODEST,
-            .abilitySlot = 1,
-        },
-    },
-    {
-        .name = _("Support"),
-        .preset =
-        {
-            .moves = {MOVE_BUG_BUZZ, MOVE_PROTECT, MOVE_TAILWIND, MOVE_HURRICANE},
-            .nature = NATURE_BOLD,
-            .abilitySlot = 0,
+            .abilitySlot = 2,
+            .item = ITEM_FOCUS_SASH,
         },
     },
     {
@@ -1640,6 +961,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_HEAVY_SLAM, MOVE_FAKE_OUT, MOVE_BULLET_PUNCH, MOVE_CLOSE_COMBAT},
             .nature = NATURE_ADAMANT,
             .abilitySlot = 0,
+            .item = ITEM_ASSAULT_VEST,
         },
     },
     {
@@ -1649,24 +971,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_PSYCH_UP, MOVE_FOUL_PLAY, MOVE_PAIN_SPLIT, MOVE_DARK_PULSE},
             .nature = NATURE_SASSY,
             .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Mega Physical Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_PLAY_ROUGH, MOVE_SUCKER_PUNCH, MOVE_PROTECT, MOVE_IRON_HEAD},
-            .nature = NATURE_BRAVE,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Mega Setup Sweeper"),
-        .preset =
-        {
-            .moves = {MOVE_BODY_PRESS, MOVE_PROTECT, MOVE_HEAVY_SLAM, MOVE_IRON_DEFENSE},
-            .nature = NATURE_CAREFUL,
-            .abilitySlot = 0,
+            .item = ITEM_SITRUS_BERRY,
         },
     },
     {
@@ -1676,6 +981,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_HEAVY_SLAM, MOVE_BODY_PRESS, MOVE_ROCK_SLIDE, MOVE_ICE_PUNCH},
             .nature = NATURE_ADAMANT,
             .abilitySlot = 0,
+            .item = ITEM_EXPERT_BELT,
         },
     },
     {
@@ -1685,6 +991,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_FAKE_OUT, MOVE_CLOSE_COMBAT, MOVE_POISON_JAB, MOVE_ROCK_SLIDE},
             .nature = NATURE_BRAVE,
             .abilitySlot = 0,
+            .item = ITEM_LIFE_ORB,
         },
     },
     {
@@ -1694,42 +1001,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_VOLT_SWITCH, MOVE_FLAMETHROWER, MOVE_DISCHARGE, MOVE_RISING_VOLTAGE},
             .nature = NATURE_MODEST,
             .abilitySlot = 1,
-        },
-    },
-    {
-        .name = _("Mega Special Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_PROTECT, MOVE_VOLT_SWITCH, MOVE_THUNDERBOLT, MOVE_EERIE_IMPULSE},
-            .nature = NATURE_TIMID,
-            .abilitySlot = 1,
-        },
-    },
-    {
-        .name = _("Support II"),
-        .preset =
-        {
-            .moves = {MOVE_THUNDER_WAVE, MOVE_ENCORE, MOVE_TAILWIND, MOVE_LUNGE},
-            .nature = NATURE_CAREFUL,
-            .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Support II"),
-        .preset =
-        {
-            .moves = {MOVE_STRUGGLE_BUG, MOVE_THUNDER_WAVE, MOVE_ENCORE, MOVE_TAILWIND},
-            .nature = NATURE_CALM,
-            .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Physical Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_PROTECT, MOVE_CRUNCH, MOVE_CLOSE_COMBAT, MOVE_PSYCHIC_FANGS},
-            .nature = NATURE_ADAMANT,
-            .abilitySlot = 2,
+            .item = ITEM_CHOICE_SCARF,
         },
     },
     {
@@ -1739,24 +1011,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_PROTECT, MOVE_CRUNCH, MOVE_LIQUIDATION, MOVE_ICE_FANG},
             .nature = NATURE_ADAMANT,
             .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Mega Special Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_EARTH_POWER, MOVE_PROTECT, MOVE_HEAT_WAVE, MOVE_ANCIENT_POWER},
-            .nature = NATURE_QUIET,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Special Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_PROTECT, MOVE_ERUPTION, MOVE_WEATHER_BALL, MOVE_HEAT_WAVE},
-            .nature = NATURE_QUIET,
-            .abilitySlot = 1,
+            .item = ITEM_LIFE_ORB,
         },
     },
     {
@@ -1766,6 +1021,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_PROTECT, MOVE_SCALE_SHOT, MOVE_TAILWIND, MOVE_EARTH_POWER},
             .nature = NATURE_JOLLY,
             .abilitySlot = 0,
+            .item = ITEM_YACHE_BERRY,
         },
     },
     {
@@ -1775,33 +1031,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_HYPER_VOICE, MOVE_PROTECT, MOVE_TAILWIND, MOVE_ROOST},
             .nature = NATURE_MODEST,
             .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Offensive"),
-        .preset =
-        {
-            .moves = {MOVE_FEINT, MOVE_FACADE, MOVE_PROTECT, MOVE_KNOCK_OFF},
-            .nature = NATURE_JOLLY,
-            .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Offensive"),
-        .preset =
-        {
-            .moves = {MOVE_GUNK_SHOT, MOVE_FLAMETHROWER, MOVE_PROTECT, MOVE_KNOCK_OFF},
-            .nature = NATURE_ADAMANT,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Wallbreaker II"),
-        .preset =
-        {
-            .moves = {MOVE_CRABHAMMER, MOVE_AQUA_JET, MOVE_PROTECT, MOVE_KNOCK_OFF},
-            .nature = NATURE_ADAMANT,
-            .abilitySlot = 2,
+            .item = ITEM_SITRUS_BERRY,
         },
     },
     {
@@ -1811,33 +1041,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_KNOCK_OFF, MOVE_AQUA_JET, MOVE_CRABHAMMER, MOVE_CLOSE_COMBAT},
             .nature = NATURE_ADAMANT,
             .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Special Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_WEATHER_BALL, MOVE_PROTECT, MOVE_THUNDER, MOVE_ICE_BEAM},
-            .nature = NATURE_MODEST,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Mega Trick Room"),
-        .preset =
-        {
-            .moves = {MOVE_POLTERGEIST, MOVE_DESTINY_BOND, MOVE_SHADOW_SNEAK, MOVE_TRICK_ROOM},
-            .nature = NATURE_ADAMANT,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Mega Physical Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_SUCKER_PUNCH, MOVE_CLOSE_COMBAT, MOVE_KNOCK_OFF, MOVE_PROTECT},
-            .nature = NATURE_JOLLY,
-            .abilitySlot = 2,
+            .item = ITEM_CHOICE_BAND,
         },
     },
     {
@@ -1847,6 +1051,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_SUCKER_PUNCH, MOVE_PROTECT, MOVE_KNOCK_OFF, MOVE_CLOSE_COMBAT},
             .nature = NATURE_BRAVE,
             .abilitySlot = 2,
+            .item = ITEM_LIFE_ORB,
         },
     },
     {
@@ -1856,33 +1061,17 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_SHEER_COLD, MOVE_EXPLOSION, MOVE_TAUNT, MOVE_LIGHT_SCREEN},
             .nature = NATURE_ADAMANT,
             .abilitySlot = 0,
+            .item = ITEM_SILK_SCARF,
         },
     },
     {
-        .name = _("Mega Physical Attacker"),
+        .name = _("Physical Attacker II"),
         .preset =
         {
-            .moves = {MOVE_PROTECT, MOVE_EXPLOSION, MOVE_ICE_SHARD, MOVE_BODY_SLAM},
-            .nature = NATURE_JOLLY,
+            .moves = {MOVE_PROTECT, MOVE_BULLET_PUNCH, MOVE_METEOR_MASH, MOVE_ZEN_HEADBUTT},
+            .nature = NATURE_ADAMANT,
             .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Support"),
-        .preset =
-        {
-            .moves = {MOVE_ICY_WIND, MOVE_ENDEAVOR, MOVE_CHARM, MOVE_HYDRO_PUMP},
-            .nature = NATURE_CALM,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Fast Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_TAILWIND, MOVE_FIRE_BLAST, MOVE_DRACO_METEOR, MOVE_DUAL_WINGBEAT},
-            .nature = NATURE_TIMID,
-            .abilitySlot = 0,
+            .item = ITEM_LIFE_ORB,
         },
     },
     {
@@ -1892,15 +1081,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_REST, MOVE_STONE_EDGE, MOVE_IRON_DEFENSE, MOVE_BODY_PRESS},
             .nature = NATURE_ADAMANT,
             .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Bulky Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_ROCK_SLIDE, MOVE_BODY_PRESS, MOVE_IRON_DEFENSE, MOVE_THUNDER_WAVE},
-            .nature = NATURE_ADAMANT,
-            .abilitySlot = 0,
+            .item = ITEM_CHESTO_BERRY,
         },
     },
     {
@@ -1910,24 +1091,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_PROTECT, MOVE_ICY_WIND, MOVE_BLIZZARD, MOVE_THUNDERBOLT},
             .nature = NATURE_MODEST,
             .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Support"),
-        .preset =
-        {
-            .moves = {MOVE_ICY_WIND, MOVE_ICE_BEAM, MOVE_PROTECT, MOVE_THUNDERBOLT},
-            .nature = NATURE_BOLD,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Bulky Setup"),
-        .preset =
-        {
-            .moves = {MOVE_IRON_DEFENSE, MOVE_BODY_PRESS, MOVE_THUNDER_WAVE, MOVE_IRON_HEAD},
-            .nature = NATURE_ADAMANT,
-            .abilitySlot = 0,
+            .item = ITEM_BLUNDER_POLICY,
         },
     },
     {
@@ -1937,6 +1101,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_RECOVER, MOVE_PROTECT, MOVE_DRACO_METEOR, MOVE_MIST_BALL},
             .nature = NATURE_TIMID,
             .abilitySlot = 0,
+            .item = ITEM_SOUL_DEW,
         },
     },
     {
@@ -1946,24 +1111,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_PROTECT, MOVE_TAILWIND, MOVE_DRACO_METEOR, MOVE_LUSTER_PURGE},
             .nature = NATURE_TIMID,
             .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Choice Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_THUNDER, MOVE_WATER_SPOUT, MOVE_ICE_BEAM, MOVE_ORIGIN_PULSE},
-            .nature = NATURE_TIMID,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Bulky Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_STONE_EDGE, MOVE_PRECIPICE_BLADES, MOVE_HEAT_CRASH, MOVE_PROTECT},
-            .nature = NATURE_JOLLY,
-            .abilitySlot = 0,
+            .item = ITEM_SOUL_DEW,
         },
     },
     {
@@ -1973,15 +1121,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_HEAT_CRASH, MOVE_PROTECT, MOVE_SWORDS_DANCE, MOVE_PRECIPICE_BLADES},
             .nature = NATURE_JOLLY,
             .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Offensive"),
-        .preset =
-        {
-            .moves = {MOVE_PROTECT, MOVE_DRACO_METEOR, MOVE_FIRE_BLAST, MOVE_DRAGON_ASCENT},
-            .nature = NATURE_TIMID,
-            .abilitySlot = 0,
+            .item = ITEM_SITRUS_BERRY,
         },
     },
     {
@@ -1991,6 +1131,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_DRAGON_ASCENT, MOVE_EARTHQUAKE, MOVE_EXTREME_SPEED, MOVE_DRAGON_DANCE},
             .nature = NATURE_JOLLY,
             .abilitySlot = 0,
+            .item = ITEM_AGUAV_BERRY,
         },
     },
     {
@@ -2000,15 +1141,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_IRON_HEAD, MOVE_THUNDERBOLT, MOVE_TRICK, MOVE_PSYCHIC},
             .nature = NATURE_TIMID,
             .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Support"),
-        .preset =
-        {
-            .moves = {MOVE_FAKE_OUT, MOVE_COACHING, MOVE_CLOSE_COMBAT, MOVE_AURA_SPHERE},
-            .nature = NATURE_TIMID,
-            .abilitySlot = 0,
+            .item = ITEM_CHOICE_SCARF,
         },
     },
     {
@@ -2018,42 +1151,17 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_FINAL_GAMBIT, MOVE_BRAVE_BIRD, MOVE_CLOSE_COMBAT, MOVE_U_TURN},
             .nature = NATURE_JOLLY,
             .abilitySlot = 0,
+            .item = ITEM_CHOICE_SCARF,
         },
     },
     {
-        .name = _("Mega Physical Attacker"),
+        .name = _("Wallbreaker"),
         .preset =
         {
-            .moves = {MOVE_CLOSE_COMBAT, MOVE_PROTECT, MOVE_BRAVE_BIRD, MOVE_ROOST},
+            .moves = {MOVE_AQUA_JET, MOVE_CLOSE_COMBAT, MOVE_GIGA_IMPACT, MOVE_PROTECT},
             .nature = NATURE_JOLLY,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Physical Attacker II"),
-        .preset =
-        {
-            .moves = {MOVE_WILD_CHARGE, MOVE_PROTECT, MOVE_VOLT_SWITCH, MOVE_SUPERPOWER},
-            .nature = NATURE_ADAMANT,
-            .abilitySlot = 1,
-        },
-    },
-    {
-        .name = _("Special Attacker II"),
-        .preset =
-        {
-            .moves = {MOVE_SLUDGE_BOMB, MOVE_GIGA_DRAIN, MOVE_PROTECT, MOVE_WEATHER_BALL},
-            .nature = NATURE_TIMID,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Physical Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_ROCK_SLIDE, MOVE_PROTECT, MOVE_HAMMER_ARM, MOVE_ICE_BEAM},
-            .nature = NATURE_BRAVE,
             .abilitySlot = 2,
+            .item = ITEM_CHOICE_BAND,
         },
     },
     {
@@ -2063,24 +1171,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_YAWN, MOVE_RECOVER, MOVE_EARTH_POWER, MOVE_ICE_BEAM},
             .nature = NATURE_MODEST,
             .abilitySlot = 1,
-        },
-    },
-    {
-        .name = _("Fast Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_DOUBLE_EDGE, MOVE_FAKE_OUT, MOVE_PROTECT, MOVE_KNOCK_OFF},
-            .nature = NATURE_JOLLY,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Support"),
-        .preset =
-        {
-            .moves = {MOVE_STRENGTH_SAP, MOVE_WILL_O_WISP, MOVE_TAILWIND, MOVE_SHADOW_BALL},
-            .nature = NATURE_CALM,
-            .abilitySlot = 1,
+            .item = ITEM_LEFTOVERS,
         },
     },
     {
@@ -2090,33 +1181,27 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_FAKE_OUT, MOVE_CLOSE_COMBAT, MOVE_TRIPLE_AXEL, MOVE_GIGA_IMPACT},
             .nature = NATURE_JOLLY,
             .abilitySlot = 1,
+            .item = ITEM_CHOICE_SCARF,
         },
     },
     {
-        .name = _("Wallbreaker"),
+        .name = _("Bulky Setup"),
         .preset =
         {
-            .moves = {MOVE_TRICK, MOVE_DAZZLING_GLEAM, MOVE_SHADOW_BALL, MOVE_THUNDERBOLT},
-            .nature = NATURE_TIMID,
+            .moves = {MOVE_IRON_DEFENSE, MOVE_BODY_PRESS, MOVE_TRICK_ROOM, MOVE_FUTURE_SIGHT},
+            .nature = NATURE_QUIET,
             .abilitySlot = 0,
+            .item = ITEM_LEFTOVERS,
         },
     },
     {
-        .name = _("Offensive"),
+        .name = _("Mega Special Attacker"),
         .preset =
         {
-            .moves = {MOVE_BRAVE_BIRD, MOVE_HEAT_WAVE, MOVE_PROTECT, MOVE_SUCKER_PUNCH},
-            .nature = NATURE_ADAMANT,
+            .moves = {MOVE_PROTECT, MOVE_EARTH_POWER, MOVE_EARTHQUAKE, MOVE_DRAGON_CLAW},
+            .nature = NATURE_MODEST,
             .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Bulky Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_IRON_HEAD, MOVE_IRON_DEFENSE, MOVE_BODY_PRESS, MOVE_TRICK_ROOM},
-            .nature = NATURE_BRAVE,
-            .abilitySlot = 0,
+            .item = ITEM_LIFE_ORB,
         },
     },
     {
@@ -2126,33 +1211,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_CLOSE_COMBAT, MOVE_METEOR_MASH, MOVE_FINAL_GAMBIT, MOVE_BULLET_PUNCH},
             .nature = NATURE_JOLLY,
             .abilitySlot = 1,
-        },
-    },
-    {
-        .name = _("Mega Physical Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_PROTECT, MOVE_CLOSE_COMBAT, MOVE_METEOR_MASH, MOVE_BULLET_PUNCH},
-            .nature = NATURE_JOLLY,
-            .abilitySlot = 1,
-        },
-    },
-    {
-        .name = _("Physical Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_YAWN, MOVE_HIGH_HORSEPOWER, MOVE_PROTECT, MOVE_SLACK_OFF},
-            .nature = NATURE_IMPISH,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Mega Special Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_BLIZZARD, MOVE_EARTH_POWER, MOVE_PROTECT, MOVE_ENERGY_BALL},
-            .nature = NATURE_QUIET,
-            .abilitySlot = 0,
+            .item = ITEM_CHOICE_SCARF,
         },
     },
     {
@@ -2162,33 +1221,17 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_BLIZZARD, MOVE_PROTECT, MOVE_EARTH_POWER, MOVE_AURORA_VEIL},
             .nature = NATURE_MODEST,
             .abilitySlot = 0,
+            .item = ITEM_EXPERT_BELT,
         },
     },
     {
-        .name = _("Physical Attacker II"),
+        .name = _("Bulky Attacker"),
         .preset =
         {
-            .moves = {MOVE_FAKE_OUT, MOVE_KNOCK_OFF, MOVE_TRIPLE_AXEL, MOVE_LOW_KICK},
-            .nature = NATURE_JOLLY,
-            .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Support"),
-        .preset =
-        {
-            .moves = {MOVE_VOLT_SWITCH, MOVE_THUNDERBOLT, MOVE_ELECTROWEB, MOVE_FLASH_CANNON},
-            .nature = NATURE_CALM,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Fast Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_PROTECT, MOVE_ICE_PUNCH, MOVE_FLAMETHROWER, MOVE_WILD_CHARGE},
+            .moves = {MOVE_ELECTROWEB, MOVE_ICE_PUNCH, MOVE_WILD_CHARGE, MOVE_PROTECT},
             .nature = NATURE_JOLLY,
             .abilitySlot = 0,
+            .item = ITEM_ASSAULT_VEST,
         },
     },
     {
@@ -2198,15 +1241,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_THUNDERBOLT, MOVE_FIRE_BLAST, MOVE_FOCUS_BLAST, MOVE_HEAT_WAVE},
             .nature = NATURE_MODEST,
             .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Wallbreaker"),
-        .preset =
-        {
-            .moves = {MOVE_BUG_BUZZ, MOVE_U_TURN, MOVE_AIR_SLASH, MOVE_STRUGGLE_BUG},
-            .nature = NATURE_TIMID,
-            .abilitySlot = 1,
+            .item = ITEM_CHOICE_SPECS,
         },
     },
     {
@@ -2216,51 +1251,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_BUG_BUZZ, MOVE_AIR_SLASH, MOVE_PROTECT, MOVE_TAILWIND},
             .nature = NATURE_TIMID,
             .abilitySlot = 1,
-        },
-    },
-    {
-        .name = _("Physical Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_SOLAR_BLADE, MOVE_KNOCK_OFF, MOVE_LEAF_BLADE, MOVE_DETECT},
-            .nature = NATURE_ADAMANT,
-            .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Tailwind II"),
-        .preset =
-        {
-            .moves = {MOVE_TAILWIND, MOVE_PROTECT, MOVE_DUAL_WINGBEAT, MOVE_EARTHQUAKE},
-            .nature = NATURE_JOLLY,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Physical Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_ICE_SHARD, MOVE_PROTECT, MOVE_HIGH_HORSEPOWER, MOVE_ICICLE_CRASH},
-            .nature = NATURE_JOLLY,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Wallbreaker"),
-        .preset =
-        {
-            .moves = {MOVE_TRI_ATTACK, MOVE_TRICK, MOVE_SHADOW_BALL, MOVE_SWIFT},
-            .nature = NATURE_TIMID,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Physical Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_SACRED_SWORD, MOVE_PSYCHO_CUT, MOVE_LEAF_BLADE, MOVE_PROTECT},
-            .nature = NATURE_BRAVE,
-            .abilitySlot = 2,
+            .item = ITEM_FOCUS_SASH,
         },
     },
     {
@@ -2270,6 +1261,27 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_PROTECT, MOVE_PSYCHO_CUT, MOVE_CLOSE_COMBAT, MOVE_SACRED_SWORD},
             .nature = NATURE_JOLLY,
             .abilitySlot = 2,
+            .item = ITEM_LIFE_ORB,
+        },
+    },
+    {
+        .name = _("Bulky Setup"),
+        .preset =
+        {
+            .moves = {MOVE_IRON_DEFENSE, MOVE_FLASH_CANNON, MOVE_REST, MOVE_POWER_GEM},
+            .nature = NATURE_MODEST,
+            .abilitySlot = 1,
+            .item = ITEM_CHESTO_BERRY,
+        },
+    },
+    {
+        .name = _("Wallbreaker"),
+        .preset =
+        {
+            .moves = {MOVE_POLTERGEIST, MOVE_SHADOW_SNEAK, MOVE_WILL_O_WISP, MOVE_SHADOW_PUNCH},
+            .nature = NATURE_ADAMANT,
+            .abilitySlot = 2,
+            .item = ITEM_LIFE_ORB,
         },
     },
     {
@@ -2279,24 +1291,17 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_FROST_BREATH, MOVE_ICY_WIND, MOVE_DESTINY_BOND, MOVE_PROTECT},
             .nature = NATURE_TIMID,
             .abilitySlot = 1,
+            .item = ITEM_WIDE_LENS,
         },
     },
     {
-        .name = _("Mega Special Attacker"),
+        .name = _("Choice Attacker"),
         .preset =
         {
-            .moves = {MOVE_BLIZZARD, MOVE_PROTECT, MOVE_SHADOW_BALL, MOVE_AURORA_VEIL},
+            .moves = {MOVE_VOLT_SWITCH, MOVE_THUNDERBOLT, MOVE_DISCHARGE, MOVE_PROTECT},
             .nature = NATURE_TIMID,
             .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Setup Sweeper"),
-        .preset =
-        {
-            .moves = {MOVE_DAZZLING_GLEAM, MOVE_THUNDERBOLT, MOVE_NASTY_PLOT, MOVE_PSYCHIC},
-            .nature = NATURE_MODEST,
-            .abilitySlot = 0,
+            .item = ITEM_CHOICE_SCARF,
         },
     },
     {
@@ -2306,15 +1311,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_ICE_BEAM, MOVE_U_TURN, MOVE_PSYCHIC, MOVE_THUNDERBOLT},
             .nature = NATURE_MODEST,
             .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Offensive"),
-        .preset =
-        {
-            .moves = {MOVE_THUNDERBOLT, MOVE_PROTECT, MOVE_DAZZLING_GLEAM, MOVE_PSYCHIC},
-            .nature = NATURE_TIMID,
-            .abilitySlot = 0,
+            .item = ITEM_CHOICE_SPECS,
         },
     },
     {
@@ -2324,15 +1321,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_FIRE_BLAST, MOVE_DAZZLING_GLEAM, MOVE_PSYCHIC, MOVE_U_TURN},
             .nature = NATURE_TIMID,
             .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Wallbreaker"),
-        .preset =
-        {
-            .moves = {MOVE_DRACO_METEOR, MOVE_FIRE_BLAST, MOVE_SPACIAL_REND, MOVE_HYDRO_PUMP},
-            .nature = NATURE_TIMID,
-            .abilitySlot = 2,
+            .item = ITEM_CHOICE_SPECS,
         },
     },
     {
@@ -2342,6 +1331,17 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_HYDRO_PUMP, MOVE_SPACIAL_REND, MOVE_THUNDER_WAVE, MOVE_FIRE_BLAST},
             .nature = NATURE_TIMID,
             .abilitySlot = 2,
+            .item = ITEM_LIFE_ORB,
+        },
+    },
+    {
+        .name = _("Bulky Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SUBSTITUTE, MOVE_KNOCK_OFF, MOVE_BODY_SLAM, MOVE_SUPERPOWER},
+            .nature = NATURE_JOLLY,
+            .abilitySlot = 0,
+            .item = ITEM_LEFTOVERS,
         },
     },
     {
@@ -2351,42 +1351,17 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_PROTECT, MOVE_SHADOW_BALL, MOVE_CALM_MIND, MOVE_AURA_SPHERE},
             .nature = NATURE_TIMID,
             .abilitySlot = 0,
+            .item = ITEM_LEFTOVERS,
         },
     },
     {
         .name = _("Bulky Setup"),
         .preset =
         {
-            .moves = {MOVE_TAIL_GLOW, MOVE_HYDRO_PUMP, MOVE_ICE_BEAM, MOVE_ENERGY_BALL},
-            .nature = NATURE_TIMID,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Bulky Setup II"),
-        .preset =
-        {
             .moves = {MOVE_ICE_BEAM, MOVE_SCALD, MOVE_TAIL_GLOW, MOVE_PROTECT},
             .nature = NATURE_TIMID,
             .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Offensive"),
-        .preset =
-        {
-            .moves = {MOVE_SUBSTITUTE, MOVE_DARK_PULSE, MOVE_SLUDGE_BOMB, MOVE_PROTECT},
-            .nature = NATURE_TIMID,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Bulky Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_PROTECT, MOVE_SYNTHESIS, MOVE_SEED_FLARE, MOVE_EARTH_POWER},
-            .nature = NATURE_TIMID,
-            .abilitySlot = 0,
+            .item = ITEM_LEFTOVERS,
         },
     },
     {
@@ -2396,60 +1371,17 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_SEARING_SHOT, MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_PROTECT},
             .nature = NATURE_QUIET,
             .abilitySlot = 0,
+            .item = ITEM_SITRUS_BERRY,
         },
     },
     {
-        .name = _("Support II"),
+        .name = _("Fast Attacker"),
         .preset =
         {
-            .moves = {MOVE_V_CREATE, MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_PROTECT},
-            .nature = NATURE_BRAVE,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Special Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_LEAF_STORM, MOVE_GLARE, MOVE_PROTECT, MOVE_SYNTHESIS},
-            .nature = NATURE_TIMID,
-            .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Mega Physical Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_PROTECT, MOVE_CLOSE_COMBAT, MOVE_FLARE_BLITZ, MOVE_HELPING_HAND},
-            .nature = NATURE_ADAMANT,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Physical Attacker II"),
-        .preset =
-        {
-            .moves = {MOVE_HYPNOSIS, MOVE_DETECT, MOVE_GUNK_SHOT, MOVE_LOW_KICK},
-            .nature = NATURE_ADAMANT,
-            .abilitySlot = 1,
-        },
-    },
-    {
-        .name = _("Support"),
-        .preset =
-        {
-            .moves = {MOVE_FAKE_OUT, MOVE_ENCORE, MOVE_FAKE_TEARS, MOVE_KNOCK_OFF},
+            .moves = {MOVE_OVERHEAT, MOVE_PROTECT, MOVE_WILD_CHARGE, MOVE_GIGA_IMPACT},
             .nature = NATURE_JOLLY,
             .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Trick Room"),
-        .preset =
-        {
-            .moves = {MOVE_TRICK_ROOM, MOVE_PSYCHIC, MOVE_HELPING_HAND, MOVE_PROTECT},
-            .nature = NATURE_SASSY,
-            .abilitySlot = 0,
+            .item = ITEM_LIFE_ORB,
         },
     },
     {
@@ -2459,42 +1391,47 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_IRON_HEAD, MOVE_PROTECT, MOVE_ROCK_SLIDE, MOVE_HIGH_HORSEPOWER},
             .nature = NATURE_JOLLY,
             .abilitySlot = 0,
+            .item = ITEM_LIFE_ORB,
+        },
+    },
+    {
+        .name = _("Mega Trick Room"),
+        .preset =
+        {
+            .moves = {MOVE_DAZZLING_GLEAM, MOVE_SIMPLE_BEAM, MOVE_HYPER_VOICE, MOVE_FIRE_BLAST},
+            .nature = NATURE_BOLD,
+            .abilitySlot = 0,
+            .item = ITEM_SITRUS_BERRY,
+        },
+    },
+    {
+        .name = _("Offensive"),
+        .preset =
+        {
+            .moves = {MOVE_PROTECT, MOVE_STICKY_WEB, MOVE_LEAF_BLADE, MOVE_X_SCISSOR},
+            .nature = NATURE_JOLLY,
+            .abilitySlot = 0,
+            .item = ITEM_LIFE_ORB,
         },
     },
     {
         .name = _("Physical Attacker"),
         .preset =
         {
-            .moves = {MOVE_MACH_PUNCH, MOVE_DRAIN_PUNCH, MOVE_ICE_PUNCH, MOVE_KNOCK_OFF},
-            .nature = NATURE_BRAVE,
+            .moves = {MOVE_PROTECT, MOVE_MEGAHORN, MOVE_POISON_JAB, MOVE_SUPERPOWER},
+            .nature = NATURE_JOLLY,
             .abilitySlot = 2,
+            .item = ITEM_FOCUS_SASH,
         },
     },
     {
-        .name = _("Tailwind"),
+        .name = _("Wallbreaker"),
         .preset =
         {
-            .moves = {MOVE_TAILWIND, MOVE_MOONBLAST, MOVE_ENCORE, MOVE_PROTECT},
-            .nature = NATURE_TIMID,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Choice Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_KNOCK_OFF, MOVE_EARTHQUAKE, MOVE_HIGH_HORSEPOWER, MOVE_ROCK_SLIDE},
-            .nature = NATURE_ADAMANT,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Mega Physical Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_FAKE_OUT, MOVE_KNOCK_OFF, MOVE_DRAIN_PUNCH, MOVE_CLOSE_COMBAT},
-            .nature = NATURE_BRAVE,
-            .abilitySlot = 2,
+            .moves = {MOVE_FLIP_TURN, MOVE_PSYCHIC_FANGS, MOVE_AQUA_JET, MOVE_PROTECT},
+            .nature = NATURE_JOLLY,
+            .abilitySlot = 1,
+            .item = ITEM_CHOICE_BAND,
         },
     },
     {
@@ -2504,24 +1441,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_FAKE_OUT, MOVE_KNOCK_OFF, MOVE_CLOSE_COMBAT, MOVE_DETECT},
             .nature = NATURE_CAREFUL,
             .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Trick Room"),
-        .preset =
-        {
-            .moves = {MOVE_TRICK_ROOM, MOVE_BODY_PRESS, MOVE_SHADOW_BALL, MOVE_IRON_DEFENSE},
-            .nature = NATURE_RELAXED,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Physical Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_PROTECT, MOVE_GUNK_SHOT, MOVE_DRAIN_PUNCH, MOVE_STOMPING_TANTRUM},
-            .nature = NATURE_ADAMANT,
-            .abilitySlot = 2,
+            .item = ITEM_CHOPLE_BERRY,
         },
     },
     {
@@ -2531,24 +1451,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_PROTECT, MOVE_NIGHT_DAZE, MOVE_SUNNY_DAY, MOVE_ENCORE},
             .nature = NATURE_MODEST,
             .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Offensive"),
-        .preset =
-        {
-            .moves = {MOVE_PROTECT, MOVE_TAIL_SLAP, MOVE_TRIPLE_AXEL, MOVE_BULLET_SEED},
-            .nature = NATURE_JOLLY,
-            .abilitySlot = 1,
-        },
-    },
-    {
-        .name = _("Trick Room"),
-        .preset =
-        {
-            .moves = {MOVE_TRICK_ROOM, MOVE_PSYCHIC, MOVE_PROTECT, MOVE_ENERGY_BALL},
-            .nature = NATURE_QUIET,
-            .abilitySlot = 1,
+            .item = ITEM_LIFE_ORB,
         },
     },
     {
@@ -2558,60 +1461,17 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_PROTECT, MOVE_HYDRO_PUMP, MOVE_BRAVE_BIRD, MOVE_TAILWIND},
             .nature = NATURE_JOLLY,
             .abilitySlot = 2,
+            .item = ITEM_LIFE_ORB,
         },
     },
     {
-        .name = _("Special Attacker"),
+        .name = _("Bulky Attacker"),
         .preset =
         {
-            .moves = {MOVE_BLIZZARD, MOVE_FREEZE_DRY, MOVE_PROTECT, MOVE_ICE_SHARD},
-            .nature = NATURE_QUIET,
-            .abilitySlot = 1,
-        },
-    },
-    {
-        .name = _("Setup Sweeper"),
-        .preset =
-        {
-            .moves = {MOVE_DOUBLE_EDGE, MOVE_HORN_LEECH, MOVE_SWORDS_DANCE, MOVE_PROTECT},
-            .nature = NATURE_JOLLY,
-            .abilitySlot = 1,
-        },
-    },
-    {
-        .name = _("Support"),
-        .preset =
-        {
-            .moves = {MOVE_NUZZLE, MOVE_ELECTROWEB, MOVE_SPEED_SWAP, MOVE_HELPING_HAND},
-            .nature = NATURE_TIMID,
-            .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Support"),
-        .preset =
-        {
-            .moves = {MOVE_ICY_WIND, MOVE_WIDE_GUARD, MOVE_SCALD, MOVE_HELPING_HAND},
-            .nature = NATURE_CALM,
-            .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Support"),
-        .preset =
-        {
-            .moves = {MOVE_STICKY_WEB, MOVE_THUNDER, MOVE_VOLT_SWITCH, MOVE_BUG_BUZZ},
-            .nature = NATURE_CALM,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Mega Special Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_PROTECT, MOVE_THUNDERBOLT, MOVE_GIGA_DRAIN, MOVE_FLAMETHROWER},
+            .moves = {MOVE_SPORE, MOVE_SLUDGE_BOMB, MOVE_RAGE_POWDER, MOVE_ENERGY_BALL},
             .nature = NATURE_MODEST,
-            .abilitySlot = 0,
+            .abilitySlot = 2,
+            .item = ITEM_ROCKY_HELMET,
         },
     },
     {
@@ -2621,6 +1481,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_PROTECT, MOVE_FLAMETHROWER, MOVE_VOLT_SWITCH, MOVE_THUNDERBOLT},
             .nature = NATURE_MILD,
             .abilitySlot = 0,
+            .item = ITEM_LIFE_ORB,
         },
     },
     {
@@ -2630,33 +1491,27 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_SHADOW_BALL, MOVE_HEAT_WAVE, MOVE_PROTECT, MOVE_TRICK_ROOM},
             .nature = NATURE_MODEST,
             .abilitySlot = 0,
+            .item = ITEM_SITRUS_BERRY,
+        },
+    },
+    {
+        .name = _("Setup Sweeper"),
+        .preset =
+        {
+            .moves = {MOVE_CLOSE_COMBAT, MOVE_SWORDS_DANCE, MOVE_SCALE_SHOT, MOVE_GIGA_IMPACT},
+            .nature = NATURE_JOLLY,
+            .abilitySlot = 2,
+            .item = ITEM_LIFE_ORB,
         },
     },
     {
         .name = _("Physical Attacker"),
         .preset =
         {
-            .moves = {MOVE_ICICLE_CRASH, MOVE_CLOSE_COMBAT, MOVE_PROTECT, MOVE_ROCK_SLIDE},
-            .nature = NATURE_ADAMANT,
-            .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Support"),
-        .preset =
-        {
-            .moves = {MOVE_ICY_WIND, MOVE_FLASH_CANNON, MOVE_RECOVER, MOVE_FREEZE_DRY},
-            .nature = NATURE_BOLD,
+            .moves = {MOVE_PROTECT, MOVE_YAWN, MOVE_FISSURE, MOVE_THUNDERBOLT},
+            .nature = NATURE_IMPISH,
             .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Special Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_EARTH_POWER, MOVE_PROTECT, MOVE_THUNDERBOLT, MOVE_SLUDGE_BOMB},
-            .nature = NATURE_QUIET,
-            .abilitySlot = 0,
+            .item = ITEM_LEFTOVERS,
         },
     },
     {
@@ -2666,15 +1521,17 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_FAKE_OUT, MOVE_CLOSE_COMBAT, MOVE_KNOCK_OFF, MOVE_U_TURN},
             .nature = NATURE_JOLLY,
             .abilitySlot = 1,
+            .item = ITEM_FOCUS_SASH,
         },
     },
     {
-        .name = _("Offensive"),
+        .name = _("Physical Attacker II"),
         .preset =
         {
-            .moves = {MOVE_PROTECT, MOVE_TAILWIND, MOVE_BRAVE_BIRD, MOVE_CLOSE_COMBAT},
-            .nature = NATURE_ADAMANT,
+            .moves = {MOVE_PROTECT, MOVE_POLTERGEIST, MOVE_STONE_EDGE, MOVE_SHADOW_PUNCH},
+            .nature = NATURE_BRAVE,
             .abilitySlot = 2,
+            .item = ITEM_LIFE_ORB,
         },
     },
     {
@@ -2684,78 +1541,67 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_TAILWIND, MOVE_KNOCK_OFF, MOVE_BRAVE_BIRD, MOVE_ROOST},
             .nature = NATURE_ADAMANT,
             .abilitySlot = 1,
+            .item = ITEM_SITRUS_BERRY,
         },
     },
     {
-        .name = _("Support"),
+        .name = _("Bulky Setup"),
         .preset =
         {
-            .moves = {MOVE_SNARL, MOVE_TAILWIND, MOVE_ROOST, MOVE_FOUL_PLAY},
-            .nature = NATURE_CALM,
-            .abilitySlot = 1,
-        },
-    },
-    {
-        .name = _("Special Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_PROTECT, MOVE_RAGE_POWDER, MOVE_HEAT_WAVE, MOVE_STRUGGLE_BUG},
-            .nature = NATURE_MODEST,
+            .moves = {MOVE_IRON_DEFENSE, MOVE_PROTECT, MOVE_CLOSE_COMBAT, MOVE_FLASH_CANNON},
+            .nature = NATURE_JOLLY,
             .abilitySlot = 0,
+            .item = ITEM_LEFTOVERS,
+        },
+    },
+    {
+        .name = _("Wallbreaker"),
+        .preset =
+        {
+            .moves = {MOVE_CLOSE_COMBAT, MOVE_ROCK_SLIDE, MOVE_STONE_EDGE, MOVE_PROTECT},
+            .nature = NATURE_JOLLY,
+            .abilitySlot = 0,
+            .item = ITEM_CHOICE_BAND,
         },
     },
     {
         .name = _("Offensive"),
         .preset =
         {
-            .moves = {MOVE_ROCK_SLIDE, MOVE_STONE_EDGE, MOVE_PROTECT, MOVE_CLOSE_COMBAT},
-            .nature = NATURE_JOLLY,
+            .moves = {MOVE_GRASS_KNOT, MOVE_PROTECT, MOVE_THUNDER_WAVE, MOVE_THUNDERBOLT},
+            .nature = NATURE_TIMID,
+            .abilitySlot = 2,
+            .item = ITEM_SITRUS_BERRY,
+        },
+    },
+    {
+        .name = _("Fast Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_DRACO_METEOR, MOVE_PROTECT, MOVE_GLACIATE, MOVE_HYPER_VOICE},
+            .nature = NATURE_TIMID,
             .abilitySlot = 0,
+            .item = ITEM_LIFE_ORB,
         },
     },
     {
         .name = _("Support"),
         .preset =
         {
-            .moves = {MOVE_CLOSE_COMBAT, MOVE_LEAF_STORM, MOVE_COACHING, MOVE_STONE_EDGE},
-            .nature = NATURE_IMPISH,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Wallbreaker"),
-        .preset =
-        {
-            .moves = {MOVE_DRACO_METEOR, MOVE_TAILWIND, MOVE_BLUE_FLARE, MOVE_HEAT_WAVE},
-            .nature = NATURE_TIMID,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Wallbreaker"),
-        .preset =
-        {
-            .moves = {MOVE_PROTECT, MOVE_DRAGON_CLAW, MOVE_DRAGON_DANCE, MOVE_BOLT_STRIKE},
-            .nature = NATURE_JOLLY,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Wallbreaker"),
-        .preset =
-        {
-            .moves = {MOVE_PSYCHIC, MOVE_CALM_MIND, MOVE_FOCUS_BLAST, MOVE_HYPER_VOICE},
-            .nature = NATURE_TIMID,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Support"),
-        .preset =
-        {
-            .moves = {MOVE_IRON_HEAD, MOVE_ELECTROWEB, MOVE_THUNDER_WAVE, MOVE_PROTECT},
+            .moves = {MOVE_ELECTROWEB, MOVE_THUNDER_WAVE, MOVE_PROTECT, MOVE_BUG_BUZZ},
             .nature = NATURE_CALM,
             .abilitySlot = 0,
+            .item = ITEM_SITRUS_BERRY,
+        },
+    },
+    {
+        .name = _("Physical Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_SPIKY_SHIELD, MOVE_BODY_PRESS, MOVE_WOOD_HAMMER, MOVE_GIGA_IMPACT},
+            .nature = NATURE_RELAXED,
+            .abilitySlot = 2,
+            .item = ITEM_LEFTOVERS,
         },
     },
     {
@@ -2765,24 +1611,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_HEAT_WAVE, MOVE_PROTECT, MOVE_PSYCHIC, MOVE_TRICK_ROOM},
             .nature = NATURE_QUIET,
             .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Mega Setup Sweeper"),
-        .preset =
-        {
-            .moves = {MOVE_HEAT_WAVE, MOVE_PROTECT, MOVE_NASTY_PLOT, MOVE_PSYCHIC},
-            .nature = NATURE_MODEST,
-            .abilitySlot = 1,
-        },
-    },
-    {
-        .name = _("Special Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_DARK_PULSE, MOVE_ICE_BEAM, MOVE_PROTECT, MOVE_HYDRO_PUMP},
-            .nature = NATURE_TIMID,
-            .abilitySlot = 2,
+            .item = ITEM_FOCUS_SASH,
         },
     },
     {
@@ -2792,69 +1621,17 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_PROTECT, MOVE_DARK_PULSE, MOVE_ICE_BEAM, MOVE_BLIZZARD},
             .nature = NATURE_TIMID,
             .abilitySlot = 2,
+            .item = ITEM_LIFE_ORB,
         },
     },
     {
-        .name = _("Physical Attacker"),
+        .name = _("Choice Attacker"),
         .preset =
         {
-            .moves = {MOVE_HIGH_HORSEPOWER, MOVE_EARTHQUAKE, MOVE_PROTECT, MOVE_ROCK_SLIDE},
-            .nature = NATURE_JOLLY,
-            .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Tailwind II"),
-        .preset =
-        {
-            .moves = {MOVE_TAILWIND, MOVE_PROTECT, MOVE_FLARE_BLITZ, MOVE_DUAL_WINGBEAT},
-            .nature = NATURE_JOLLY,
-            .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Mega Special Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_HEAT_WAVE, MOVE_PROTECT, MOVE_OVERHEAT, MOVE_SOLAR_BEAM},
-            .nature = NATURE_TIMID,
-            .abilitySlot = 1,
-        },
-    },
-    {
-        .name = _("Bulky Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_HORN_LEECH, MOVE_LEAF_STORM, MOVE_DOUBLE_EDGE, MOVE_HIGH_HORSEPOWER},
-            .nature = NATURE_ADAMANT,
+            .moves = {MOVE_MOONBLAST, MOVE_DAZZLING_GLEAM, MOVE_ENERGY_BALL, MOVE_PROTECT},
+            .nature = NATURE_MODEST,
             .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Physical Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_PROTECT, MOVE_CLOSE_COMBAT, MOVE_ROCK_SLIDE, MOVE_POISON_JAB},
-            .nature = NATURE_BRAVE,
-            .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Support"),
-        .preset =
-        {
-            .moves = {MOVE_COTTON_GUARD, MOVE_THUNDER_WAVE, MOVE_SNARL, MOVE_PROTECT},
-            .nature = NATURE_IMPISH,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Bulky Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_FAKE_OUT, MOVE_PSYCHIC_TERRAIN, MOVE_EXPANDING_FORCE, MOVE_SKILL_SWAP},
-            .nature = NATURE_IMPISH,
-            .abilitySlot = 2,
+            .item = ITEM_CHOICE_SCARF,
         },
     },
     {
@@ -2864,24 +1641,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_PROTECT, MOVE_EXPANDING_FORCE, MOVE_FAKE_OUT, MOVE_DARK_PULSE},
             .nature = NATURE_HASTY,
             .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Special Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_PROTECT, MOVE_COTTON_GUARD, MOVE_DAZZLING_GLEAM, MOVE_AFTER_YOU},
-            .nature = NATURE_MODEST,
-            .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Mega Trick Room"),
-        .preset =
-        {
-            .moves = {MOVE_SUPERPOWER, MOVE_PROTECT, MOVE_KNOCK_OFF, MOVE_TRICK_ROOM},
-            .nature = NATURE_ADAMANT,
-            .abilitySlot = 0,
+            .item = ITEM_LIGHT_CLAY,
         },
     },
     {
@@ -2891,15 +1651,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_SUPERPOWER, MOVE_KNOCK_OFF, MOVE_TRICK_ROOM, MOVE_PROTECT},
             .nature = NATURE_BRAVE,
             .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Mega Special Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_PROTECT, MOVE_SLUDGE_BOMB, MOVE_DRACO_METEOR, MOVE_FLIP_TURN},
-            .nature = NATURE_MODEST,
-            .abilitySlot = 2,
+            .item = ITEM_SITRUS_BERRY,
         },
     },
     {
@@ -2909,51 +1661,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_PROTECT, MOVE_SLUDGE_BOMB, MOVE_DRACO_METEOR, MOVE_FOCUS_BLAST},
             .nature = NATURE_MODEST,
             .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Special Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_WATER_PULSE, MOVE_AURA_SPHERE, MOVE_DARK_PULSE, MOVE_PROTECT},
-            .nature = NATURE_TIMID,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Special Attacker II"),
-        .preset =
-        {
-            .moves = {MOVE_THUNDERBOLT, MOVE_PROTECT, MOVE_HYPER_VOICE, MOVE_GRASS_KNOT},
-            .nature = NATURE_TIMID,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Choice Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_ROCK_SLIDE, MOVE_ICE_FANG, MOVE_CRUNCH, MOVE_PSYCHIC_FANGS},
-            .nature = NATURE_JOLLY,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Special Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_ANCIENT_POWER, MOVE_PROTECT, MOVE_FREEZE_DRY, MOVE_BLIZZARD},
-            .nature = NATURE_QUIET,
-            .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Special Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_HYPER_VOICE, MOVE_QUICK_ATTACK, MOVE_HYPER_BEAM, MOVE_DETECT},
-            .nature = NATURE_MODEST,
-            .abilitySlot = 2,
+            .item = ITEM_LIFE_ORB,
         },
     },
     {
@@ -2963,42 +1671,17 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_COACHING, MOVE_BRAVE_BIRD, MOVE_ENCORE, MOVE_QUICK_GUARD},
             .nature = NATURE_JOLLY,
             .abilitySlot = 1,
+            .item = ITEM_FOCUS_SASH,
         },
     },
     {
-        .name = _("Mega Physical Attacker"),
+        .name = _("Special Attacker II"),
         .preset =
         {
-            .moves = {MOVE_ENTRAINMENT, MOVE_DETECT, MOVE_PROTECT, MOVE_BRAVE_BIRD},
-            .nature = NATURE_JOLLY,
-            .abilitySlot = 1,
-        },
-    },
-    {
-        .name = _("Special Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_DAZZLING_GLEAM, MOVE_THUNDERBOLT, MOVE_ENTRAINMENT, MOVE_PROTECT},
-            .nature = NATURE_TIMID,
-            .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Bulky Setup"),
-        .preset =
-        {
-            .moves = {MOVE_IRON_DEFENSE, MOVE_BODY_PRESS, MOVE_MOONBLAST, MOVE_TRICK_ROOM},
-            .nature = NATURE_QUIET,
+            .moves = {MOVE_DRACO_METEOR, MOVE_FLAMETHROWER, MOVE_DRAGON_TAIL, MOVE_PROTECT},
+            .nature = NATURE_MODEST,
             .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Setup Sweeper"),
-        .preset =
-        {
-            .moves = {MOVE_DRAINING_KISS, MOVE_PSYCH_UP, MOVE_CALM_MIND, MOVE_SUBSTITUTE},
-            .nature = NATURE_BOLD,
-            .abilitySlot = 0,
+            .item = ITEM_LEFTOVERS,
         },
     },
     {
@@ -3008,51 +1691,27 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_TRICK_ROOM, MOVE_TRICK_OR_TREAT, MOVE_POLTERGEIST, MOVE_DESTINY_BOND},
             .nature = NATURE_RELAXED,
             .abilitySlot = 1,
-        },
-    },
-    {
-        .name = _("Tailwind II"),
-        .preset =
-        {
-            .moves = {MOVE_TAILWIND, MOVE_DRACO_METEOR, MOVE_HURRICANE, MOVE_PROTECT},
-            .nature = NATURE_MODEST,
-            .abilitySlot = 0,
+            .item = ITEM_OCCA_BERRY,
         },
     },
     {
         .name = _("Support"),
-        .preset =
-        {
-            .moves = {MOVE_PLAY_ROUGH, MOVE_HEAL_PULSE, MOVE_THUNDER_WAVE, MOVE_PROTECT},
-            .nature = NATURE_CAREFUL,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Support II"),
         .preset =
         {
             .moves = {MOVE_DAZZLING_GLEAM, MOVE_HEAL_PULSE, MOVE_THUNDER_WAVE, MOVE_PROTECT},
             .nature = NATURE_CALM,
             .abilitySlot = 0,
+            .item = ITEM_SITRUS_BERRY,
         },
     },
     {
         .name = _("Support"),
         .preset =
         {
-            .moves = {MOVE_SKY_ATTACK, MOVE_TAILWIND, MOVE_SNARL, MOVE_PROTECT},
-            .nature = NATURE_CALM,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Support II"),
-        .preset =
-        {
             .moves = {MOVE_DARK_PULSE, MOVE_TAILWIND, MOVE_SNARL, MOVE_PROTECT},
             .nature = NATURE_CALM,
             .abilitySlot = 0,
+            .item = ITEM_SITRUS_BERRY,
         },
     },
     {
@@ -3062,60 +1721,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_BODY_PRESS, MOVE_TRICK_ROOM, MOVE_MOONBLAST, MOVE_DIAMOND_STORM},
             .nature = NATURE_BRAVE,
             .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Bulky Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_BODY_PRESS, MOVE_TRICK_ROOM, MOVE_DIAMOND_STORM, MOVE_PROTECT},
-            .nature = NATURE_BRAVE,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Fast Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_FOCUS_BLAST, MOVE_HYPERSPACE_HOLE, MOVE_SHADOW_BALL, MOVE_TRICK},
-            .nature = NATURE_TIMID,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Bulky Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_HEAT_WAVE, MOVE_STEAM_ERUPTION, MOVE_EARTH_POWER, MOVE_PROTECT},
-            .nature = NATURE_MODEST,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Support"),
-        .preset =
-        {
-            .moves = {MOVE_FAKE_OUT, MOVE_PARTING_SHOT, MOVE_FLARE_BLITZ, MOVE_THROAT_CHOP},
-            .nature = NATURE_IMPISH,
-            .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Tailwind"),
-        .preset =
-        {
-            .moves = {MOVE_BULLET_SEED, MOVE_ROCK_BLAST, MOVE_TAILWIND, MOVE_BEAK_BLAST},
-            .nature = NATURE_JOLLY,
-            .abilitySlot = 1,
-        },
-    },
-    {
-        .name = _("Bulky Setup"),
-        .preset =
-        {
-            .moves = {MOVE_BUG_BUZZ, MOVE_PROTECT, MOVE_THUNDERBOLT, MOVE_STICKY_WEB},
-            .nature = NATURE_MODEST,
-            .abilitySlot = 0,
+            .item = ITEM_SITRUS_BERRY,
         },
     },
     {
@@ -3125,150 +1731,57 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_ICE_HAMMER, MOVE_PROTECT, MOVE_CLOSE_COMBAT, MOVE_ROCK_SLIDE},
             .nature = NATURE_BRAVE,
             .abilitySlot = 0,
+            .item = ITEM_LIFE_ORB,
+        },
+    },
+    {
+        .name = _("Physical Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_CLOSE_COMBAT, MOVE_ROCK_SLIDE, MOVE_PROTECT, MOVE_PSYCHIC_FANGS},
+            .nature = NATURE_JOLLY,
+            .abilitySlot = 1,
+            .item = ITEM_FOCUS_SASH,
         },
     },
     {
         .name = _("Bulky Setup"),
         .preset =
         {
-            .moves = {MOVE_HURRICANE, MOVE_PROTECT, MOVE_TAILWIND, MOVE_REVELATION_DANCE},
-            .nature = NATURE_TIMID,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Fast Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_TAILWIND, MOVE_MOONBLAST, MOVE_POLLEN_PUFF, MOVE_PROTECT},
-            .nature = NATURE_TIMID,
-            .abilitySlot = 1,
-        },
-    },
-    {
-        .name = _("Physical Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_ACCELEROCK, MOVE_CLOSE_COMBAT, MOVE_PROTECT, MOVE_ROCK_SLIDE},
+            .moves = {MOVE_PROTECT, MOVE_LEAF_BLADE, MOVE_SUPERPOWER, MOVE_GIGA_IMPACT},
             .nature = NATURE_ADAMANT,
-            .abilitySlot = 1,
-        },
-    },
-    {
-        .name = _("Physical Attacker II"),
-        .preset =
-        {
-            .moves = {MOVE_CLOSE_COMBAT, MOVE_ROCK_SLIDE, MOVE_PROTECT, MOVE_PSYCHIC_FANGS},
-            .nature = NATURE_JOLLY,
-            .abilitySlot = 1,
-        },
-    },
-    {
-        .name = _("Special Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_TOXIC, MOVE_INFESTATION, MOVE_BANEFUL_BUNKER, MOVE_WIDE_GUARD},
-            .nature = NATURE_BOLD,
             .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Setup Sweeper"),
-        .preset =
-        {
-            .moves = {MOVE_PROTECT, MOVE_HEAVY_SLAM, MOVE_EARTHQUAKE, MOVE_CURSE},
-            .nature = NATURE_BRAVE,
-            .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Physical Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_LIQUIDATION, MOVE_WIDE_GUARD, MOVE_PROTECT, MOVE_LEECH_LIFE},
-            .nature = NATURE_BRAVE,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Physical Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_TRIPLE_AXEL, MOVE_PROTECT, MOVE_POWER_WHIP, MOVE_LOW_KICK},
-            .nature = NATURE_JOLLY,
-            .abilitySlot = 1,
+            .item = ITEM_SITRUS_BERRY,
         },
     },
     {
         .name = _("Support"),
-        .preset =
-        {
-            .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_FLORAL_HEALING, MOVE_DRAINING_KISS},
-            .nature = NATURE_BOLD,
-            .abilitySlot = 1,
-        },
-    },
-    {
-        .name = _("Trick Room II"),
-        .preset =
-        {
-            .moves = {MOVE_INSTRUCT, MOVE_TRICK_ROOM, MOVE_PSYCHIC, MOVE_PROTECT},
-            .nature = NATURE_RELAXED,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Support"),
-        .preset =
-        {
-            .moves = {MOVE_PROTECT, MOVE_SHADOW_BALL, MOVE_EARTH_POWER, MOVE_SHORE_UP},
-            .nature = NATURE_CALM,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Support"),
-        .preset =
-        {
-            .moves = {MOVE_LAST_RESORT, MOVE_TAILWIND, MOVE_ICY_WIND, MOVE_PROTECT},
-            .nature = NATURE_CALM,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Support II"),
         .preset =
         {
             .moves = {MOVE_HYPER_VOICE, MOVE_TAILWIND, MOVE_ICY_WIND, MOVE_PROTECT},
             .nature = NATURE_CALM,
             .abilitySlot = 0,
+            .item = ITEM_SITRUS_BERRY,
         },
     },
     {
-        .name = _("Bulky Attacker"),
+        .name = _("Choice Attacker"),
         .preset =
         {
-            .moves = {MOVE_DOUBLE_EDGE, MOVE_SUPERPOWER, MOVE_WOOD_HAMMER, MOVE_SUCKER_PUNCH},
-            .nature = NATURE_ADAMANT,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Trick Room II"),
-        .preset =
-        {
-            .moves = {MOVE_PLAY_ROUGH, MOVE_SHADOW_SNEAK, MOVE_TRICK_ROOM, MOVE_PHANTOM_FORCE},
-            .nature = NATURE_ADAMANT,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Bulky Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_KNOCK_OFF, MOVE_FLARE_BLITZ, MOVE_SUNSTEEL_STRIKE, MOVE_PSYCHIC_FANGS},
+            .moves = {MOVE_CRUNCH, MOVE_PSYCHIC_FANGS, MOVE_LIQUIDATION, MOVE_PROTECT},
             .nature = NATURE_JOLLY,
+            .abilitySlot = 1,
+            .item = ITEM_CHOICE_SCARF,
+        },
+    },
+    {
+        .name = _("Mega Special Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_PROTECT, MOVE_HYPER_VOICE, MOVE_DRAGON_PULSE, MOVE_HEAT_WAVE},
+            .nature = NATURE_QUIET,
             .abilitySlot = 0,
+            .item = ITEM_SITRUS_BERRY,
         },
     },
     {
@@ -3278,15 +1791,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_PROTECT, MOVE_CLOSE_COMBAT, MOVE_SUNSTEEL_STRIKE, MOVE_FLAME_CHARGE},
             .nature = NATURE_JOLLY,
             .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Support"),
-        .preset =
-        {
-            .moves = {MOVE_ICY_WIND, MOVE_MOONLIGHT, MOVE_WIDE_GUARD, MOVE_MOONGEIST_BEAM},
-            .nature = NATURE_BOLD,
-            .abilitySlot = 0,
+            .item = ITEM_WEAKNESS_POLICY,
         },
     },
     {
@@ -3296,6 +1801,17 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_METEOR_BEAM, MOVE_MOONBLAST, MOVE_MOONGEIST_BEAM, MOVE_PROTECT},
             .nature = NATURE_TIMID,
             .abilitySlot = 0,
+            .item = ITEM_POWER_HERB,
+        },
+    },
+    {
+        .name = _("Bulky Setup"),
+        .preset =
+        {
+            .moves = {MOVE_MOONBLAST, MOVE_CALM_MIND, MOVE_MOONGEIST_BEAM, MOVE_PROTECT},
+            .nature = NATURE_TIMID,
+            .abilitySlot = 0,
+            .item = ITEM_LEFTOVERS,
         },
     },
     {
@@ -3305,33 +1821,47 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_QUIVER_DANCE, MOVE_BUG_BUZZ, MOVE_FOCUS_BLAST, MOVE_PROTECT},
             .nature = NATURE_TIMID,
             .abilitySlot = 0,
+            .item = ITEM_LIFE_ORB,
         },
     },
     {
-        .name = _("Setup Sweeper II"),
+        .name = _("Setup Sweeper"),
         .preset =
         {
-            .moves = {MOVE_QUIVER_DANCE, MOVE_CLOSE_COMBAT, MOVE_HIGH_JUMP_KICK, MOVE_PROTECT},
-            .nature = NATURE_JOLLY,
+            .moves = {MOVE_IRON_DEFENSE, MOVE_FLASH_CANNON, MOVE_PROTECT, MOVE_LEAF_STORM},
+            .nature = NATURE_MODEST,
             .abilitySlot = 0,
+            .item = ITEM_LIFE_ORB,
         },
     },
     {
         .name = _("Support"),
         .preset =
         {
-            .moves = {MOVE_OUTRAGE, MOVE_WIDE_GUARD, MOVE_SNARL, MOVE_PROTECT},
-            .nature = NATURE_CALM,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Support II"),
-        .preset =
-        {
             .moves = {MOVE_DRACO_METEOR, MOVE_WIDE_GUARD, MOVE_SNARL, MOVE_PROTECT},
             .nature = NATURE_CALM,
             .abilitySlot = 0,
+            .item = ITEM_SITRUS_BERRY,
+        },
+    },
+    {
+        .name = _("Setup Sweeper"),
+        .preset =
+        {
+            .moves = {MOVE_BRICK_BREAK, MOVE_KNOCK_OFF, MOVE_DRAGON_DANCE, MOVE_PRISMATIC_LASER},
+            .nature = NATURE_ADAMANT,
+            .abilitySlot = 0,
+            .item = ITEM_LEFTOVERS,
+        },
+    },
+    {
+        .name = _("Bulky Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_PROTECT, MOVE_EARTH_POWER, MOVE_PRISMATIC_LASER},
+            .nature = NATURE_MODEST,
+            .abilitySlot = 0,
+            .item = ITEM_LEFTOVERS,
         },
     },
     {
@@ -3341,15 +1871,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_DAZZLING_GLEAM, MOVE_FLEUR_CANNON, MOVE_FLASH_CANNON, MOVE_AURA_SPHERE},
             .nature = NATURE_MODEST,
             .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Setup Sweeper"),
-        .preset =
-        {
-            .moves = {MOVE_NASTY_PLOT, MOVE_DRACO_METEOR, MOVE_SLUDGE_WAVE, MOVE_PROTECT},
-            .nature = NATURE_TIMID,
-            .abilitySlot = 0,
+            .item = ITEM_ASSAULT_VEST,
         },
     },
     {
@@ -3359,6 +1881,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_DRACO_METEOR, MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_PROTECT},
             .nature = NATURE_CALM,
             .abilitySlot = 0,
+            .item = ITEM_SITRUS_BERRY,
         },
     },
     {
@@ -3368,6 +1891,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_DISCHARGE, MOVE_FAKE_OUT, MOVE_QUICK_GUARD, MOVE_PROTECT},
             .nature = NATURE_CALM,
             .abilitySlot = 0,
+            .item = ITEM_SITRUS_BERRY,
         },
     },
     {
@@ -3377,24 +1901,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_FAKE_OUT, MOVE_HIGH_HORSEPOWER, MOVE_WOOD_HAMMER, MOVE_GRASSY_GLIDE},
             .nature = NATURE_ADAMANT,
             .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Support"),
-        .preset =
-        {
-            .moves = {MOVE_FAKE_OUT, MOVE_WOOD_HAMMER, MOVE_GRASSY_GLIDE, MOVE_U_TURN},
-            .nature = NATURE_CAREFUL,
-            .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Offensive"),
-        .preset =
-        {
-            .moves = {MOVE_U_TURN, MOVE_HIGH_JUMP_KICK, MOVE_PROTECT, MOVE_PYRO_BALL},
-            .nature = NATURE_JOLLY,
-            .abilitySlot = 0,
+            .item = ITEM_ASSAULT_VEST,
         },
     },
     {
@@ -3404,60 +1911,27 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_U_TURN, MOVE_PYRO_BALL, MOVE_GUNK_SHOT, MOVE_HIGH_JUMP_KICK},
             .nature = NATURE_JOLLY,
             .abilitySlot = 2,
+            .item = ITEM_CHOICE_BAND,
         },
     },
     {
-        .name = _("Tailwind II"),
+        .name = _("Offensive"),
         .preset =
         {
-            .moves = {MOVE_BRAVE_BIRD, MOVE_TAILWIND, MOVE_IRON_HEAD, MOVE_PROTECT},
-            .nature = NATURE_ADAMANT,
-            .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Bulky Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_FIRE_BLAST, MOVE_INCINERATE, MOVE_STEALTH_ROCK, MOVE_STONE_EDGE},
-            .nature = NATURE_MODEST,
-            .abilitySlot = 1,
-        },
-    },
-    {
-        .name = _("Special Attacker II"),
-        .preset =
-        {
-            .moves = {MOVE_APPLE_ACID, MOVE_PROTECT, MOVE_LEECH_SEED, MOVE_DRAGON_PULSE},
-            .nature = NATURE_CALM,
-            .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Setup Sweeper"),
-        .preset =
-        {
-            .moves = {MOVE_BODY_PRESS, MOVE_MINIMIZE, MOVE_PROTECT, MOVE_IRON_DEFENSE},
-            .nature = NATURE_CAREFUL,
+            .moves = {MOVE_U_TURN, MOVE_HIGH_JUMP_KICK, MOVE_PROTECT, MOVE_PYRO_BALL},
+            .nature = NATURE_JOLLY,
             .abilitySlot = 0,
+            .item = ITEM_SITRUS_BERRY,
         },
     },
     {
         .name = _("Bulky Setup"),
         .preset =
         {
-            .moves = {MOVE_TAILWIND, MOVE_SURF, MOVE_PROTECT, MOVE_BRAVE_BIRD},
+            .moves = {MOVE_ROCK_SLIDE, MOVE_LIQUIDATION, MOVE_PROTECT, MOVE_CRUNCH},
             .nature = NATURE_ADAMANT,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Wallbreaker"),
-        .preset =
-        {
-            .moves = {MOVE_POISON_JAB, MOVE_WATERFALL, MOVE_PROTECT, MOVE_CLOSE_COMBAT},
-            .nature = NATURE_JOLLY,
-            .abilitySlot = 2,
+            .abilitySlot = 1,
+            .item = ITEM_WHITE_HERB,
         },
     },
     {
@@ -3467,51 +1941,27 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_OVERDRIVE, MOVE_SLUDGE_BOMB, MOVE_VOLT_SWITCH, MOVE_SNARL},
             .nature = NATURE_TIMID,
             .abilitySlot = 0,
+            .item = ITEM_CHOICE_SCARF,
         },
     },
     {
-        .name = _("Setup Sweeper"),
+        .name = _("Physical Attacker"),
         .preset =
         {
-            .moves = {MOVE_SHADOW_BALL, MOVE_SHELL_SMASH, MOVE_PROTECT, MOVE_BATON_PASS},
-            .nature = NATURE_TIMID,
+            .moves = {MOVE_CLOSE_COMBAT, MOVE_NO_RETREAT, MOVE_PROTECT, MOVE_FIRST_IMPRESSION},
+            .nature = NATURE_ADAMANT,
+            .abilitySlot = 2,
+            .item = ITEM_FOCUS_SASH,
+        },
+    },
+    {
+        .name = _("Choice Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_HEAT_CRASH, MOVE_STONE_EDGE, MOVE_ROCK_SLIDE, MOVE_PROTECT},
+            .nature = NATURE_ADAMANT,
             .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Trick Room II"),
-        .preset =
-        {
-            .moves = {MOVE_DAZZLING_GLEAM, MOVE_TRICK_ROOM, MOVE_PROTECT, MOVE_PSYCHIC},
-            .nature = NATURE_QUIET,
-            .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Trick Room II"),
-        .preset =
-        {
-            .moves = {MOVE_TRICK_ROOM, MOVE_BODY_PRESS, MOVE_WILL_O_WISP, MOVE_POLTERGEIST},
-            .nature = NATURE_RELAXED,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Special Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_DECORATE, MOVE_DAZZLING_GLEAM, MOVE_ENCORE, MOVE_PROTECT},
-            .nature = NATURE_MODEST,
-            .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Setup Sweeper"),
-        .preset =
-        {
-            .moves = {MOVE_PROTECT, MOVE_BUG_BUZZ, MOVE_QUIVER_DANCE, MOVE_ICE_BEAM},
-            .nature = NATURE_MODEST,
-            .abilitySlot = 2,
+            .item = ITEM_CHOICE_BAND,
         },
     },
     {
@@ -3521,33 +1971,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_HYPER_VOICE, MOVE_EXPANDING_FORCE, MOVE_PSYSHOCK, MOVE_TRICK},
             .nature = NATURE_TIMID,
             .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Offensive"),
-        .preset =
-        {
-            .moves = {MOVE_EXPANDING_FORCE, MOVE_HYPER_VOICE, MOVE_SHADOW_BALL, MOVE_PROTECT},
-            .nature = NATURE_TIMID,
-            .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Support"),
-        .preset =
-        {
-            .moves = {MOVE_AURA_WHEEL, MOVE_FAKE_OUT, MOVE_PARTING_SHOT, MOVE_TAUNT},
-            .nature = NATURE_JOLLY,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Offensive"),
-        .preset =
-        {
-            .moves = {MOVE_IRON_HEAD, MOVE_PROTECT, MOVE_PLAY_ROUGH, MOVE_ROCK_SLIDE},
-            .nature = NATURE_ADAMANT,
-            .abilitySlot = 0,
+            .item = ITEM_CHOICE_SPECS,
         },
     },
     {
@@ -3557,15 +1981,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_HEAVY_SLAM, MOVE_STONE_EDGE, MOVE_HEAT_CRASH, MOVE_HIGH_HORSEPOWER},
             .nature = NATURE_ADAMANT,
             .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Bulky Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_IRON_DEFENSE, MOVE_FLASH_CANNON, MOVE_BODY_PRESS, MOVE_DRACO_METEOR},
-            .nature = NATURE_MODEST,
-            .abilitySlot = 2,
+            .item = ITEM_ASSAULT_VEST,
         },
     },
     {
@@ -3575,24 +1991,17 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_IRON_DEFENSE, MOVE_PROTECT, MOVE_FLASH_CANNON, MOVE_BODY_PRESS},
             .nature = NATURE_MODEST,
             .abilitySlot = 2,
+            .item = ITEM_EVIOLITE,
         },
     },
     {
-        .name = _("Bulky Attacker"),
+        .name = _("Bulky Setup"),
         .preset =
         {
-            .moves = {MOVE_PROTECT, MOVE_WILL_O_WISP, MOVE_DRACO_METEOR, MOVE_DRAGON_DARTS},
-            .nature = NATURE_TIMID,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Setup Sweeper II"),
-        .preset =
-        {
-            .moves = {MOVE_PLAY_ROUGH, MOVE_CLOSE_COMBAT, MOVE_PSYCHIC_FANGS, MOVE_SWORDS_DANCE},
+            .moves = {MOVE_IRON_DEFENSE, MOVE_PROTECT, MOVE_CRUNCH, MOVE_CLOSE_COMBAT},
             .nature = NATURE_JOLLY,
             .abilitySlot = 0,
+            .item = ITEM_LEFTOVERS,
         },
     },
     {
@@ -3602,6 +2011,7 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_TOXIC_SPIKES, MOVE_DYNAMAX_CANNON, MOVE_RECOVER, MOVE_SLUDGE_BOMB},
             .nature = NATURE_TIMID,
             .abilitySlot = 0,
+            .item = ITEM_LEFTOVERS,
         },
     },
     {
@@ -3611,87 +2021,17 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_RECOVER, MOVE_COSMIC_POWER, MOVE_FLAMETHROWER, MOVE_DYNAMAX_CANNON},
             .nature = NATURE_TIMID,
             .abilitySlot = 0,
+            .item = ITEM_LEFTOVERS,
         },
     },
     {
-        .name = _("Wallbreaker II"),
+        .name = _("Bulky Attacker"),
         .preset =
         {
-            .moves = {MOVE_WICKED_BLOW, MOVE_SUCKER_PUNCH, MOVE_CLOSE_COMBAT, MOVE_POISON_JAB},
-            .nature = NATURE_JOLLY,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Fast Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_VOLT_SWITCH, MOVE_ELECTROWEB, MOVE_THUNDERBOLT, MOVE_PROTECT},
-            .nature = NATURE_TIMID,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Support"),
-        .preset =
-        {
-            .moves = {MOVE_ENCORE, MOVE_LEECH_SEED, MOVE_GIGA_DRAIN, MOVE_PSYCHIC},
-            .nature = NATURE_CALM,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Physical Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_FLOWER_TRICK, MOVE_KNOCK_OFF, MOVE_PROTECT, MOVE_SUCKER_PUNCH},
-            .nature = NATURE_ADAMANT,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Special Attacker II"),
-        .preset =
-        {
-            .moves = {MOVE_TORCH_SONG, MOVE_SHADOW_BALL, MOVE_SLACK_OFF, MOVE_PROTECT},
-            .nature = NATURE_CALM,
+            .moves = {MOVE_MUDDY_WATER, MOVE_RAPID_SPIN, MOVE_ICY_WIND, MOVE_PROTECT},
+            .nature = NATURE_MODEST,
             .abilitySlot = 2,
-        },
-    },
-    {
-        .name = _("Physical Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_SALT_CURE, MOVE_RECOVER, MOVE_PROTECT, MOVE_WIDE_GUARD},
-            .nature = NATURE_RELAXED,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Physical Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_JET_PUNCH, MOVE_WAVE_CRASH, MOVE_PROTECT, MOVE_FLIP_TURN},
-            .nature = NATURE_JOLLY,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Physical Attacker"),
-        .preset =
-        {
-            .moves = {MOVE_SUCKER_PUNCH, MOVE_KOWTOW_CLEAVE, MOVE_IRON_HEAD, MOVE_PROTECT},
-            .nature = NATURE_ADAMANT,
-            .abilitySlot = 0,
-        },
-    },
-    {
-        .name = _("Offensive"),
-        .preset =
-        {
-            .moves = {MOVE_MOONBLAST, MOVE_DAZZLING_GLEAM, MOVE_SHADOW_BALL, MOVE_PROTECT},
-            .nature = NATURE_TIMID,
-            .abilitySlot = 0,
+            .item = ITEM_ASSAULT_VEST,
         },
     },
     {
@@ -3701,24 +2041,47 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_SHADOW_BALL, MOVE_MOONBLAST, MOVE_DAZZLING_GLEAM, MOVE_ICY_WIND},
             .nature = NATURE_TIMID,
             .abilitySlot = 0,
+            .item = ITEM_CHOICE_SPECS,
         },
     },
     {
-        .name = _("Setup Sweeper"),
+        .name = _("Fast Attacker"),
         .preset =
         {
-            .moves = {MOVE_MAKE_IT_RAIN, MOVE_SHADOW_BALL, MOVE_PROTECT, MOVE_NASTY_PLOT},
+            .moves = {MOVE_HYDRO_PUMP, MOVE_FREEZE_DRY, MOVE_PROTECT, MOVE_HYPER_BEAM},
             .nature = NATURE_TIMID,
             .abilitySlot = 0,
+            .item = ITEM_FOCUS_SASH,
         },
     },
     {
-        .name = _("Support"),
+        .name = _("Bulky Setup"),
         .preset =
         {
-            .moves = {MOVE_THROAT_CHOP, MOVE_SPIKES, MOVE_STOMPING_TANTRUM, MOVE_WHIRLWIND},
-            .nature = NATURE_CAREFUL,
+            .moves = {MOVE_SWORDS_DANCE, MOVE_THUNDER_PUNCH, MOVE_PROTECT, MOVE_CLOSE_COMBAT},
+            .nature = NATURE_ADAMANT,
             .abilitySlot = 0,
+            .item = ITEM_LEFTOVERS,
+        },
+    },
+    {
+        .name = _("Mega Special Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_POWER_GEM, MOVE_SLUDGE_BOMB, MOVE_SPIKY_SHIELD, MOVE_HYPER_BEAM},
+            .nature = NATURE_TIMID,
+            .abilitySlot = 0,
+            .item = ITEM_LIFE_ORB,
+        },
+    },
+    {
+        .name = _("Wallbreaker"),
+        .preset =
+        {
+            .moves = {MOVE_SACRED_SWORD, MOVE_PROTECT, MOVE_SUCKER_PUNCH, MOVE_ICICLE_CRASH},
+            .nature = NATURE_JOLLY,
+            .abilitySlot = 0,
+            .item = ITEM_LIFE_ORB,
         },
     },
     {
@@ -3728,24 +2091,198 @@ const struct VerdantBattleSetChoice gVerdantBattleSetAlternatives[] =
             .moves = {MOVE_STOMPING_TANTRUM, MOVE_RUINATION, MOVE_PROTECT, MOVE_THROAT_CHOP},
             .nature = NATURE_ADAMANT,
             .abilitySlot = 0,
+            .item = ITEM_SITRUS_BERRY,
         },
     },
     {
-        .name = _("Offensive"),
+        .name = _("Choice Attacker"),
         .preset =
         {
-            .moves = {MOVE_KNOCK_OFF, MOVE_MOONBLAST, MOVE_PROTECT, MOVE_CLOSE_COMBAT},
+            .moves = {MOVE_DARK_PULSE, MOVE_OVERHEAT, MOVE_HYPER_BEAM, MOVE_PROTECT},
+            .nature = NATURE_TIMID,
+            .abilitySlot = 0,
+            .item = ITEM_CHOICE_SPECS,
+        },
+    },
+    {
+        .name = _("Fast Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_BREAKING_SWIPE, MOVE_JAW_LOCK, MOVE_ROCK_SLIDE, MOVE_PROTECT},
             .nature = NATURE_JOLLY,
             .abilitySlot = 0,
+            .item = ITEM_BOOSTER_ENERGY,
         },
     },
     {
-        .name = _("Special Attacker"),
+        .name = _("Wallbreaker"),
         .preset =
         {
-            .moves = {MOVE_ELECTRO_SHOT, MOVE_PROTECT, MOVE_FLASH_CANNON, MOVE_DRAGON_PULSE},
-            .nature = NATURE_MODEST,
+            .moves = {MOVE_SUPERPOWER, MOVE_IVY_CUDGEL, MOVE_SPIKY_SHIELD, MOVE_THROAT_CHOP},
+            .nature = NATURE_JOLLY,
             .abilitySlot = 0,
+            .item = ITEM_LIFE_ORB,
         },
     },
+    {
+        .name = _("Bulky Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_THUNDERCLAP, MOVE_THUNDERBOLT, MOVE_DRAGON_PULSE, MOVE_PROTECT},
+            .nature = NATURE_MODEST,
+            .abilitySlot = 0,
+            .item = ITEM_ASSAULT_VEST,
+        },
+    },
+    {
+        .name = _("Wallbreaker"),
+        .preset =
+        {
+            .moves = {MOVE_THUNDERCLAP, MOVE_THUNDERBOLT, MOVE_PROTECT, MOVE_DRAGON_PULSE},
+            .nature = NATURE_MODEST,
+            .abilitySlot = 0,
+            .item = ITEM_LIFE_ORB,
+        },
+    },
+};
+
+const u16 gVerdantFreeBattleItems[] =
+{
+    ITEM_BERRY_JUICE,
+    ITEM_CHERI_BERRY,
+    ITEM_CHESTO_BERRY,
+    ITEM_PECHA_BERRY,
+    ITEM_RAWST_BERRY,
+    ITEM_ASPEAR_BERRY,
+    ITEM_LEPPA_BERRY,
+    ITEM_ORAN_BERRY,
+    ITEM_PERSIM_BERRY,
+    ITEM_LUM_BERRY,
+    ITEM_SITRUS_BERRY,
+    ITEM_FIGY_BERRY,
+    ITEM_WIKI_BERRY,
+    ITEM_MAGO_BERRY,
+    ITEM_AGUAV_BERRY,
+    ITEM_IAPAPA_BERRY,
+    ITEM_RAZZ_BERRY,
+    ITEM_BLUK_BERRY,
+    ITEM_NANAB_BERRY,
+    ITEM_WEPEAR_BERRY,
+    ITEM_PINAP_BERRY,
+    ITEM_POMEG_BERRY,
+    ITEM_KELPSY_BERRY,
+    ITEM_QUALOT_BERRY,
+    ITEM_HONDEW_BERRY,
+    ITEM_GREPA_BERRY,
+    ITEM_TAMATO_BERRY,
+    ITEM_CORNN_BERRY,
+    ITEM_MAGOST_BERRY,
+    ITEM_RABUTA_BERRY,
+    ITEM_NOMEL_BERRY,
+    ITEM_SPELON_BERRY,
+    ITEM_PAMTRE_BERRY,
+    ITEM_WATMEL_BERRY,
+    ITEM_DURIN_BERRY,
+    ITEM_BELUE_BERRY,
+    ITEM_OCCA_BERRY,
+    ITEM_PASSHO_BERRY,
+    ITEM_WACAN_BERRY,
+    ITEM_RINDO_BERRY,
+    ITEM_YACHE_BERRY,
+    ITEM_CHOPLE_BERRY,
+    ITEM_KEBIA_BERRY,
+    ITEM_SHUCA_BERRY,
+    ITEM_COBA_BERRY,
+    ITEM_PAYAPA_BERRY,
+    ITEM_TANGA_BERRY,
+    ITEM_CHARTI_BERRY,
+    ITEM_KASIB_BERRY,
+    ITEM_HABAN_BERRY,
+    ITEM_COLBUR_BERRY,
+    ITEM_BABIRI_BERRY,
+    ITEM_CHILAN_BERRY,
+    ITEM_ROSELI_BERRY,
+    ITEM_LIECHI_BERRY,
+    ITEM_GANLON_BERRY,
+    ITEM_SALAC_BERRY,
+    ITEM_PETAYA_BERRY,
+    ITEM_APICOT_BERRY,
+    ITEM_LANSAT_BERRY,
+    ITEM_STARF_BERRY,
+    ITEM_MICLE_BERRY,
+    ITEM_CUSTAP_BERRY,
+    ITEM_JABOCA_BERRY,
+    ITEM_ROWAP_BERRY,
+    ITEM_KEE_BERRY,
+    ITEM_MARANGA_BERRY,
+    ITEM_ENIGMA_BERRY,
+    ITEM_BRIGHT_POWDER,
+    ITEM_WHITE_HERB,
+    ITEM_QUICK_CLAW,
+    ITEM_MENTAL_HERB,
+    ITEM_CHOICE_BAND,
+    ITEM_KINGS_ROCK,
+    ITEM_FOCUS_BAND,
+    ITEM_SCOPE_LENS,
+    ITEM_METAL_COAT,
+    ITEM_BLACK_GLASSES,
+    ITEM_MYSTIC_WATER,
+    ITEM_CHARCOAL,
+    ITEM_SILK_SCARF,
+    ITEM_LEFTOVERS,
+    ITEM_RAZOR_FANG,
+    ITEM_POWER_HERB,
+    ITEM_CHOICE_SCARF,
+    ITEM_CHOICE_SPECS,
+    ITEM_FOCUS_SASH,
+    ITEM_WIDE_LENS,
+    ITEM_ZOOM_LENS,
+    ITEM_METRONOME,
+    ITEM_MUSCLE_BAND,
+    ITEM_WISE_GLASSES,
+    ITEM_EXPERT_BELT,
+    ITEM_LIGHT_CLAY,
+    ITEM_DAMP_ROCK,
+    ITEM_LIFE_ORB,
+    ITEM_TOXIC_ORB,
+    ITEM_FLAME_ORB,
+    ITEM_BLACK_SLUDGE,
+    ITEM_SHED_SHELL,
+    ITEM_EVIOLITE,
+    ITEM_ROCKY_HELMET,
+    ITEM_AIR_BALLOON,
+    ITEM_RED_CARD,
+    ITEM_EJECT_BUTTON,
+    ITEM_ABSORB_BULB,
+    ITEM_CELL_BATTERY,
+    ITEM_LUMINOUS_MOSS,
+    ITEM_SNOWBALL,
+    ITEM_WEAKNESS_POLICY,
+    ITEM_ASSAULT_VEST,
+    ITEM_SAFETY_GOGGLES,
+    ITEM_ADRENALINE_ORB,
+    ITEM_TERRAIN_EXTENDER,
+    ITEM_PROTECTIVE_PADS,
+    ITEM_ELECTRIC_SEED,
+    ITEM_PSYCHIC_SEED,
+    ITEM_MISTY_SEED,
+    ITEM_GRASSY_SEED,
+    ITEM_BUG_GEM,
+    ITEM_FIGHTING_GEM,
+    ITEM_FLYING_GEM,
+    ITEM_NORMAL_GEM,
+    ITEM_ROCK_GEM,
+    ITEM_THROAT_SPRAY,
+    ITEM_EJECT_PACK,
+    ITEM_HEAVY_DUTY_BOOTS,
+    ITEM_BLUNDER_POLICY,
+    ITEM_ROOM_SERVICE,
+    ITEM_UTILITY_UMBRELLA,
+    ITEM_SOUL_DEW,
+    ITEM_DEEP_SEA_TOOTH,
+    ITEM_THICK_CLUB,
+    ITEM_LEEK,
+    ITEM_LIGHT_BALL,
+    ITEM_BOOSTER_ENERGY,
+    ITEM_NONE,
 };

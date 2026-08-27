@@ -14,15 +14,15 @@
       "nature": "NATURE_CAREFUL",
       "ability": "ABILITY_FUR_COAT",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "ITEM_SITRUS_BERRY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Furfrou defensive utility roles adapted to doubles",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_FURFROU_DIAMOND_TRIM"
       ],
       "doubles_rationale": "Fur Coat makes Furfrou difficult to remove physically while Helping Hand, Thunder Wave, and Snarl improve partner damage and team survivability.",
       "dependency_notes": [
-        "Snarl is the only direct damage, so Taunt restricts the set without making it completely inert.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Snarl is the only direct damage, so Taunt restricts the set without making it completely inert."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Authored independently because trim-form local learnsets differ from untrimmed Furfrou."
@@ -40,13 +40,14 @@
       "nature": "NATURE_CAREFUL",
       "ability": "ABILITY_FUR_COAT",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "This cosmetic form has exact local battle-data equivalence to the reviewed base form.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Authored SPECIES_FURFROU_DIAMOND_TRIM review",
         "Emerald Champions exact-form equivalence check for SPECIES_FURFROU_DEBUTANTE_TRIM"
       ],
       "doubles_rationale": "SPECIES_FURFROU_DEBUTANTE_TRIM is mechanically identical to SPECIES_FURFROU_DIAMOND_TRIM in this engine, so the same authored doubles package is retained exactly.",
       "dependency_notes": [
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements.",
         "Snarl is the only direct damage, so Taunt restricts the set without making it completely inert.",
         "Alias acceptance is gated on identical stats, types, ability slots, full legal move pool, moves, nature, and ability."
       ],
@@ -66,13 +67,14 @@
       "nature": "NATURE_CAREFUL",
       "ability": "ABILITY_FUR_COAT",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "This cosmetic form has exact local battle-data equivalence to the reviewed base form.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Authored SPECIES_FURFROU_DIAMOND_TRIM review",
         "Emerald Champions exact-form equivalence check for SPECIES_FURFROU_MATRON_TRIM"
       ],
       "doubles_rationale": "SPECIES_FURFROU_MATRON_TRIM is mechanically identical to SPECIES_FURFROU_DIAMOND_TRIM in this engine, so the same authored doubles package is retained exactly.",
       "dependency_notes": [
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements.",
         "Snarl is the only direct damage, so Taunt restricts the set without making it completely inert.",
         "Alias acceptance is gated on identical stats, types, ability slots, full legal move pool, moves, nature, and ability."
       ],
@@ -92,13 +94,14 @@
       "nature": "NATURE_CAREFUL",
       "ability": "ABILITY_FUR_COAT",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "This cosmetic form has exact local battle-data equivalence to the reviewed base form.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Authored SPECIES_FURFROU_DIAMOND_TRIM review",
         "Emerald Champions exact-form equivalence check for SPECIES_FURFROU_DANDY_TRIM"
       ],
       "doubles_rationale": "SPECIES_FURFROU_DANDY_TRIM is mechanically identical to SPECIES_FURFROU_DIAMOND_TRIM in this engine, so the same authored doubles package is retained exactly.",
       "dependency_notes": [
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements.",
         "Snarl is the only direct damage, so Taunt restricts the set without making it completely inert.",
         "Alias acceptance is gated on identical stats, types, ability slots, full legal move pool, moves, nature, and ability."
       ],
@@ -118,13 +121,14 @@
       "nature": "NATURE_CAREFUL",
       "ability": "ABILITY_FUR_COAT",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "This cosmetic form has exact local battle-data equivalence to the reviewed base form.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Authored SPECIES_FURFROU_DIAMOND_TRIM review",
         "Emerald Champions exact-form equivalence check for SPECIES_FURFROU_LA_REINE_TRIM"
       ],
       "doubles_rationale": "SPECIES_FURFROU_LA_REINE_TRIM is mechanically identical to SPECIES_FURFROU_DIAMOND_TRIM in this engine, so the same authored doubles package is retained exactly.",
       "dependency_notes": [
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements.",
         "Snarl is the only direct damage, so Taunt restricts the set without making it completely inert.",
         "Alias acceptance is gated on identical stats, types, ability slots, full legal move pool, moves, nature, and ability."
       ],
@@ -144,13 +148,14 @@
       "nature": "NATURE_CAREFUL",
       "ability": "ABILITY_FUR_COAT",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "This cosmetic form has exact local battle-data equivalence to the reviewed base form.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Authored SPECIES_FURFROU_DIAMOND_TRIM review",
         "Emerald Champions exact-form equivalence check for SPECIES_FURFROU_KABUKI_TRIM"
       ],
       "doubles_rationale": "SPECIES_FURFROU_KABUKI_TRIM is mechanically identical to SPECIES_FURFROU_DIAMOND_TRIM in this engine, so the same authored doubles package is retained exactly.",
       "dependency_notes": [
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements.",
         "Snarl is the only direct damage, so Taunt restricts the set without making it completely inert.",
         "Alias acceptance is gated on identical stats, types, ability slots, full legal move pool, moves, nature, and ability."
       ],
@@ -170,13 +175,14 @@
       "nature": "NATURE_CAREFUL",
       "ability": "ABILITY_FUR_COAT",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "This cosmetic form has exact local battle-data equivalence to the reviewed base form.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Authored SPECIES_FURFROU_DIAMOND_TRIM review",
         "Emerald Champions exact-form equivalence check for SPECIES_FURFROU_PHARAOH_TRIM"
       ],
       "doubles_rationale": "SPECIES_FURFROU_PHARAOH_TRIM is mechanically identical to SPECIES_FURFROU_DIAMOND_TRIM in this engine, so the same authored doubles package is retained exactly.",
       "dependency_notes": [
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements.",
         "Snarl is the only direct damage, so Taunt restricts the set without making it completely inert.",
         "Alias acceptance is gated on identical stats, types, ability slots, full legal move pool, moves, nature, and ability."
       ],
@@ -195,15 +201,15 @@
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_COMPETITIVE",
       "suggested_item": "ITEM_LIFE_ORB",
-      "item_context": "ITEM_LIFE_ORB supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon female Meowstic offensive roles adapted to Emerald Champions stats",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_MEOWSTIC_FEMALE"
       ],
       "doubles_rationale": "Competitive punishes Intimidate and stat drops, three accurate attacks exploit 123 Special Attack, and Protect preserves the fast attacker.",
       "dependency_notes": [
-        "The set has no spread attack, but its broad focused coverage is independent of terrain or a particular partner.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements.",
+        "The set has no spread attack, but its broad focused coverage is independent of terrain or a particular partner."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Authored separately from male Meowstic’s Prankster support role."
@@ -220,15 +226,15 @@
       "nature": "NATURE_QUIET",
       "ability": "ABILITY_INSOMNIA",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "ITEM_EVIOLITE supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Pumpkaboo defensive roles adapted to doubles",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_PUMPKABOO_SMALL"
       ],
       "doubles_rationale": "Trick Room exploits Pumpkaboo’s low Speed, Will-O-Wisp suppresses physical attackers, Shadow Ball prevents passivity, and Insomnia blocks sleep disruption.",
       "dependency_notes": [
-        "Will-O-Wisp can miss, but Trick Room and Shadow Ball provide independent value.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Will-O-Wisp can miss, but Trick Room and Shadow Ball provide independent value."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Authored from the exact size-form pool rather than assuming base-form inheritance."
@@ -246,13 +252,14 @@
       "nature": "NATURE_QUIET",
       "ability": "ABILITY_INSOMNIA",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "This cosmetic form has exact local battle-data equivalence to the reviewed base form.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Authored SPECIES_PUMPKABOO_SMALL review",
         "Emerald Champions exact-form equivalence check for SPECIES_PUMPKABOO_LARGE"
       ],
       "doubles_rationale": "SPECIES_PUMPKABOO_LARGE is mechanically identical to SPECIES_PUMPKABOO_SMALL in this engine, so the same authored doubles package is retained exactly.",
       "dependency_notes": [
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements.",
         "Will-O-Wisp can miss, but Trick Room and Shadow Ball provide independent value.",
         "Alias acceptance is gated on identical stats, types, ability slots, full legal move pool, moves, nature, and ability."
       ],
@@ -272,13 +279,14 @@
       "nature": "NATURE_QUIET",
       "ability": "ABILITY_INSOMNIA",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "This cosmetic form has exact local battle-data equivalence to the reviewed base form.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Authored SPECIES_PUMPKABOO_SMALL review",
         "Emerald Champions exact-form equivalence check for SPECIES_PUMPKABOO_SUPER"
       ],
       "doubles_rationale": "SPECIES_PUMPKABOO_SUPER is mechanically identical to SPECIES_PUMPKABOO_SMALL in this engine, so the same authored doubles package is retained exactly.",
       "dependency_notes": [
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements.",
         "Will-O-Wisp can miss, but Trick Room and Shadow Ball provide independent value.",
         "Alias acceptance is gated on identical stats, types, ability slots, full legal move pool, moves, nature, and ability."
       ],
@@ -297,15 +305,15 @@
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_FLARE_BOOST",
       "suggested_item": "ITEM_FLAME_ORB",
-      "item_context": "ITEM_FLAME_ORB supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_FLAME_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown Gourgeist-Small doubles role adapted to Emerald Champions special stats",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_GOURGEIST_SMALL"
       ],
       "doubles_rationale": "Protect activates Flame Orb, Flare Boost powers dual special STAB, and Will-O-Wisp checks physical targets while the small form exploits base 99 Speed.",
       "dependency_notes": [
-        "Flare Boost requires Flame Orb and burn chip limits the attacker’s lifespan.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_FLAME_ORB automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Flare Boost requires Flame Orb and burn chip limits the attacker’s lifespan."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Reauthored around the mod’s special-stat and ability changes."
@@ -322,15 +330,15 @@
       "nature": "NATURE_MODEST",
       "ability": "ABILITY_FLARE_BOOST",
       "suggested_item": "ITEM_FLAME_ORB",
-      "item_context": "ITEM_FLAME_ORB supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_FLAME_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown Gourgeist-Large doubles role adapted to Emerald Champions special stats",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_GOURGEIST_LARGE"
       ],
       "doubles_rationale": "Flare Boost creates strong dual STAB, Will-O-Wisp compounds Large Gourgeist’s physical bulk, and Protect secures Orb activation.",
       "dependency_notes": [
-        "Flame Orb is required for the damage boost and steadily chips the user.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_FLAME_ORB automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Flame Orb is required for the damage boost and steadily chips the user."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Authored independently for the large form’s slower, bulkier local stat line."
@@ -347,15 +355,15 @@
       "nature": "NATURE_QUIET",
       "ability": "ABILITY_FLARE_BOOST",
       "suggested_item": "ITEM_FLAME_ORB",
-      "item_context": "ITEM_FLAME_ORB supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_FLAME_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown Gourgeist-Super Trick Room roles adapted to Emerald Champions",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_GOURGEIST_SUPER"
       ],
       "doubles_rationale": "Super Gourgeist sets Trick Room, activates Flare Boost through Protect, and then attacks with strong dual STAB from its 100 Special Attack.",
       "dependency_notes": [
-        "The damage boost requires Flame Orb, while Trick Room can conflict with naturally fast allies.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_FLAME_ORB automatically, and the Pokémon Center vendor supplies free replacements.",
+        "The damage boost requires Flame Orb, while Trick Room can conflict with naturally fast allies."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Authored independently for the slowest and bulkiest size form."
@@ -372,15 +380,15 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_AURA_BREAK",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "ITEM_SITRUS_BERRY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Zygarde-10 offensive roles adapted to the exact 16-move local pool",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_ZYGARDE_10"
       ],
       "doubles_rationale": "Land’s Wrath gives partner-safe spread Ground damage, Glare controls Speed, Coil improves damage and bulk, and Crunch covers Psychic and Ghost targets.",
       "dependency_notes": [
-        "This form’s local pool has no Protect, so it relies on natural Speed and Glare for positioning.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements.",
+        "This form’s local pool has no Protect, so it relies on natural Speed and Glare for positioning."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Used the strongest coherent four moves from the exact restricted form pool."
@@ -397,13 +405,14 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_POWER_CONSTRUCT",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "ITEM_SITRUS_BERRY helps the 10% form cross the Power Construct threshold; the battle-set builder never grants or equips it.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Zygarde Power Construct Coil roles adapted to the local 10% form",
         "Emerald Champions exact local legality, stats, and Power Construct ability for SPECIES_ZYGARDE_10_POWER_CONSTRUCT"
       ],
       "doubles_rationale": "Power Construct gives the fast 10% form a real late-turn transformation payoff while Land’s Wrath, Glare, Coil, and Crunch provide spread pressure, speed control, setup, and coverage.",
       "dependency_notes": [
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements.",
         "This form’s local pool has no Protect, so it relies on natural Speed and Glare for positioning.",
         "Power Construct activates only after its HP falls to the native threshold."
       ],
@@ -422,15 +431,15 @@
       "nature": "NATURE_CAREFUL",
       "ability": "ABILITY_POWER_CONSTRUCT",
       "suggested_item": "ITEM_LEFTOVERS",
-      "item_context": "ITEM_LEFTOVERS supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_LEFTOVERS is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Power Construct Zygarde bulky setup roles adapted to the exact local pool",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_ZYGARDE_50_POWER_CONSTRUCT"
       ],
       "doubles_rationale": "Coil and Glare create a durable control plan, Land’s Wrath pressures both foes without hitting the ally, and Power Construct rewards surviving below half health.",
       "dependency_notes": [
-        "The local form pool lacks Protect and modern Thousand Arrows, so recovery and transformation timing require careful support.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_LEFTOVERS automatically, and the Pokémon Center vendor supplies free replacements.",
+        "The local form pool lacks Protect and modern Thousand Arrows, so recovery and transformation timing require careful support."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Authored independently because its ability and defensive stats differ materially from Zygarde-10."
@@ -447,15 +456,15 @@
       "nature": "NATURE_BRAVE",
       "ability": "ABILITY_MAGICIAN",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "ITEM_SITRUS_BERRY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Gen 7 Doubles OU Hoopa-Unbound Offensive Trick Room",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_HOOPA_UNBOUND"
       ],
       "doubles_rationale": "Hoopa sets Trick Room, then uses enormous mixed offenses with defense-bypassing signature attacks while Protect covers its poor physical bulk.",
       "dependency_notes": [
-        "Trick Room can hinder fast teammates, but both attacks are immediately threatening without setup.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Trick Room can hinder fast teammates, but both attacks are immediately threatening without setup."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Accepted the direct Smogon doubles set."
@@ -472,15 +481,15 @@
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_DANCER",
       "suggested_item": "ITEM_FOCUS_SASH",
-      "item_context": "ITEM_FOCUS_SASH supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Oricorio doubles support roles adapted to Pom-Pom typing",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_ORICORIO_POM_POM"
       ],
       "doubles_rationale": "Electric Revelation Dance and Hurricane supply dual STAB, Tailwind controls Speed, Protect preserves the setter, and Dancer can copy allied dance setup.",
       "dependency_notes": [
-        "Hurricane is inaccurate outside rain, while Revelation Dance is the reliable attack.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Hurricane is inaccurate outside rain, while Revelation Dance is the reliable attack."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Authored independently for Pom-Pom’s Electric typing."
@@ -497,15 +506,15 @@
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_DANCER",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "ITEM_SITRUS_BERRY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown Oricorio-Pau random-doubles Quiver Dance set",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_ORICORIO_PAU"
       ],
       "doubles_rationale": "Quiver Dance boosts offense and bulk, Psychic Revelation Dance and Air Slash give dual STAB, and Protect preserves the setup.",
       "dependency_notes": [
-        "The set wants a safe setup turn, though both attacks function immediately.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements.",
+        "The set wants a safe setup turn, though both attacks function immediately."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Accepted the direct random-doubles role."
@@ -522,15 +531,15 @@
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_DANCER",
       "suggested_item": "ITEM_FOCUS_SASH",
-      "item_context": "ITEM_FOCUS_SASH supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Oricorio doubles support roles adapted to Sensu typing",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_ORICORIO_SENSU"
       ],
       "doubles_rationale": "Ghost Revelation Dance and Hurricane supply dual STAB, Tailwind controls Speed, and Protect preserves Dancer opportunities.",
       "dependency_notes": [
-        "Hurricane is inaccurate outside rain, but Revelation Dance remains stable focused damage.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Hurricane is inaccurate outside rain, but Revelation Dance remains stable focused damage."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Authored independently for Sensu’s Ghost typing."
@@ -547,15 +556,15 @@
       "nature": "NATURE_ADAMANT",
       "ability": "ABILITY_OWN_TEMPO",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "ITEM_EVIOLITE supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Rockruff LC attacker adapted to the exact Own Tempo pool",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_ROCKRUFF_OWN_TEMPO"
       ],
       "doubles_rationale": "Rock Slide supplies spread STAB, Crunch adds coverage, Howl builds damage, and Scary Face controls a dangerous target’s Speed.",
       "dependency_notes": [
-        "The exact 15-move form pool has no Protect, so it must create safety through pressure and speed control.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements.",
+        "The exact 15-move form pool has no Protect, so it must create safety through pressure and speed control."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Removed singles hazards and used the best available doubles actions."
@@ -572,15 +581,15 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_NO_GUARD",
       "suggested_item": "ITEM_LIFE_ORB",
-      "item_context": "ITEM_LIFE_ORB supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown Champions Random Doubles Lycanroc-Midnight set 002",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_LYCANROC_MIDNIGHT"
       ],
       "doubles_rationale": "No Guard makes Rock Slide and Stone Edge perfectly accurate, Close Combat covers Rock resists, and Protect keeps the moderately fast breaker flexible.",
       "dependency_notes": [
-        "No Guard also makes opposing attacks unable to miss Lycanroc.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements.",
+        "No Guard also makes opposing attacks unable to miss Lycanroc."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Completed the direct random-doubles three-attack shell with Protect."
@@ -597,15 +606,15 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_TOUGH_CLAWS",
       "suggested_item": "ITEM_LIFE_ORB",
-      "item_context": "ITEM_LIFE_ORB supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown Gen 8 Random Doubles Lycanroc-Dusk adapted with Protect",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_LYCANROC_DUSK"
       ],
       "doubles_rationale": "Tough Claws boosts priority Accelerock and Drill Run, Rock Slide pressures both foes, and Protect preserves the fast attacker.",
       "dependency_notes": [
-        "Drill Run is imperfectly accurate, but Accelerock and Rock Slide provide dependable tempo.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Drill Run is imperfectly accurate, but Accelerock and Rock Slide provide dependable tempo."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Preferred immediate three-attack pressure over a fragile Swords Dance turn."
@@ -622,15 +631,14 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_RKS_SYSTEM",
       "suggested_item": "ITEM_FIGHTING_MEMORY",
-      "item_context": "ITEM_FIGHTING_MEMORY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_FIGHTING_MEMORY remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_FIGHTING_MEMORY manually after earning it.",
       "source_refs": [
         "Smogon Silvally type-form roles adapted to doubles and exact local data",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_SILVALLY_FIGHTING"
       ],
       "doubles_rationale": "Swords Dance turns Fighting Multi-Attack into a win condition while Rock Slide pressures both foes.",
       "dependency_notes": [
-        "The corresponding Memory is required to preserve this form and type Multi-Attack correctly; the builder does not grant or equip it.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "ITEM_FIGHTING_MEMORY is protected progression; the automatic runtime item is ITEM_LIFE_ORB."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Authored independently because typing changes matchup, STAB, and role despite a shared legal pool."
@@ -647,15 +655,14 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_RKS_SYSTEM",
       "suggested_item": "ITEM_FLYING_MEMORY",
-      "item_context": "ITEM_FLYING_MEMORY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_FLYING_MEMORY remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_SITRUS_BERRY; equip ITEM_FLYING_MEMORY manually after earning it.",
       "source_refs": [
         "Smogon Silvally type-form roles adapted to doubles and exact local data",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_SILVALLY_FLYING"
       ],
       "doubles_rationale": "Flying Multi-Attack provides focused STAB, Tailwind controls Speed, and U-turn preserves momentum.",
       "dependency_notes": [
-        "The corresponding Memory is required to preserve this form and type Multi-Attack correctly; the builder does not grant or equip it.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "ITEM_FLYING_MEMORY is protected progression; the automatic runtime item is ITEM_SITRUS_BERRY."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Authored independently because typing changes matchup, STAB, and role despite a shared legal pool."
@@ -672,15 +679,14 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_RKS_SYSTEM",
       "suggested_item": "ITEM_POISON_MEMORY",
-      "item_context": "ITEM_POISON_MEMORY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_POISON_MEMORY remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_POISON_MEMORY manually after earning it.",
       "source_refs": [
         "Smogon Silvally type-form roles adapted to doubles and exact local data",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_SILVALLY_POISON"
       ],
       "doubles_rationale": "Poison Multi-Attack checks Fairies while Icy Wind and Parting Shot control both Speed and damage.",
       "dependency_notes": [
-        "The corresponding Memory is required to preserve this form and type Multi-Attack correctly; the builder does not grant or equip it.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "ITEM_POISON_MEMORY is protected progression; the automatic runtime item is ITEM_LIFE_ORB."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Authored independently because typing changes matchup, STAB, and role despite a shared legal pool."
@@ -697,15 +703,14 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_RKS_SYSTEM",
       "suggested_item": "ITEM_GROUND_MEMORY",
-      "item_context": "ITEM_GROUND_MEMORY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_GROUND_MEMORY remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_GROUND_MEMORY manually after earning it.",
       "source_refs": [
         "Smogon Silvally type-form roles adapted to doubles and exact local data",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_SILVALLY_GROUND"
       ],
       "doubles_rationale": "Ground Multi-Attack avoids allied Earthquake damage, Swords Dance raises pressure, and Rock Slide adds spread coverage.",
       "dependency_notes": [
-        "The corresponding Memory is required to preserve this form and type Multi-Attack correctly; the builder does not grant or equip it.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "ITEM_GROUND_MEMORY is protected progression; the automatic runtime item is ITEM_LIFE_ORB."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Authored independently because typing changes matchup, STAB, and role despite a shared legal pool."
@@ -722,15 +727,14 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_RKS_SYSTEM",
       "suggested_item": "ITEM_ROCK_MEMORY",
-      "item_context": "ITEM_ROCK_MEMORY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_ROCK_MEMORY remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_ROCK_MEMORY manually after earning it.",
       "source_refs": [
         "Smogon Silvally type-form roles adapted to doubles and exact local data",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_SILVALLY_ROCK"
       ],
       "doubles_rationale": "Rock Multi-Attack provides accurate STAB while Icy Wind and Thunder Wave give flexible Speed control.",
       "dependency_notes": [
-        "The corresponding Memory is required to preserve this form and type Multi-Attack correctly; the builder does not grant or equip it.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "ITEM_ROCK_MEMORY is protected progression; the automatic runtime item is ITEM_LIFE_ORB."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Authored independently because typing changes matchup, STAB, and role despite a shared legal pool."
@@ -747,15 +751,14 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_RKS_SYSTEM",
       "suggested_item": "ITEM_BUG_MEMORY",
-      "item_context": "ITEM_BUG_MEMORY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_BUG_MEMORY remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_BUG_MEMORY manually after earning it.",
       "source_refs": [
         "Smogon Silvally type-form roles adapted to doubles and exact local data",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_SILVALLY_BUG"
       ],
       "doubles_rationale": "Bug Multi-Attack supplies strong STAB while U-turn and Parting Shot give offensive and defensive exits.",
       "dependency_notes": [
-        "The corresponding Memory is required to preserve this form and type Multi-Attack correctly; the builder does not grant or equip it.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "ITEM_BUG_MEMORY is protected progression; the automatic runtime item is ITEM_LIFE_ORB."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Authored independently because typing changes matchup, STAB, and role despite a shared legal pool."
@@ -772,15 +775,14 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_RKS_SYSTEM",
       "suggested_item": "ITEM_GHOST_MEMORY",
-      "item_context": "ITEM_GHOST_MEMORY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_GHOST_MEMORY remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_GHOST_MEMORY manually after earning it.",
       "source_refs": [
         "Smogon Silvally type-form roles adapted to doubles and exact local data",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_SILVALLY_GHOST"
       ],
       "doubles_rationale": "Ghost Multi-Attack pressures common support Pokemon, Crunch covers opposing Ghosts, and Parting Shot creates safe switches.",
       "dependency_notes": [
-        "The corresponding Memory is required to preserve this form and type Multi-Attack correctly; the builder does not grant or equip it.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "ITEM_GHOST_MEMORY is protected progression; the automatic runtime item is ITEM_LIFE_ORB."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Authored independently because typing changes matchup, STAB, and role despite a shared legal pool."
@@ -797,15 +799,14 @@
       "nature": "NATURE_CAREFUL",
       "ability": "ABILITY_RKS_SYSTEM",
       "suggested_item": "ITEM_STEEL_MEMORY",
-      "item_context": "ITEM_STEEL_MEMORY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_STEEL_MEMORY remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_STEEL_MEMORY manually after earning it.",
       "source_refs": [
         "Smogon Silvally type-form roles adapted to doubles and exact local data",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_SILVALLY_STEEL"
       ],
       "doubles_rationale": "Steel typing and Multi-Attack check Fairies while Icy Wind and Parting Shot support the whole side.",
       "dependency_notes": [
-        "The corresponding Memory is required to preserve this form and type Multi-Attack correctly; the builder does not grant or equip it.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "ITEM_STEEL_MEMORY is protected progression; the automatic runtime item is ITEM_LIFE_ORB."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Authored independently because typing changes matchup, STAB, and role despite a shared legal pool."
@@ -822,15 +823,14 @@
       "nature": "NATURE_NAIVE",
       "ability": "ABILITY_RKS_SYSTEM",
       "suggested_item": "ITEM_FIRE_MEMORY",
-      "item_context": "ITEM_FIRE_MEMORY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_FIRE_MEMORY remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_FIRE_MEMORY manually after earning it.",
       "source_refs": [
         "Smogon Silvally type-form roles adapted to doubles and exact local data",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_SILVALLY_FIRE"
       ],
       "doubles_rationale": "Fire Multi-Attack breaks Steel and Grass targets, Surf covers Rock and Ground foes, and Parting Shot preserves tempo.",
       "dependency_notes": [
-        "The corresponding Memory is required to preserve this form and type Multi-Attack correctly; the builder does not grant or equip it.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "ITEM_FIRE_MEMORY is protected progression; the automatic runtime item is ITEM_LIFE_ORB."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Authored independently because typing changes matchup, STAB, and role despite a shared legal pool."
@@ -847,15 +847,14 @@
       "nature": "NATURE_NAIVE",
       "ability": "ABILITY_RKS_SYSTEM",
       "suggested_item": "ITEM_WATER_MEMORY",
-      "item_context": "ITEM_WATER_MEMORY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_WATER_MEMORY remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_WATER_MEMORY manually after earning it.",
       "source_refs": [
         "Smogon Silvally type-form roles adapted to doubles and exact local data",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_SILVALLY_WATER"
       ],
       "doubles_rationale": "Water Multi-Attack is reliable STAB, Ice Beam covers Grass and Dragon targets, and Parting Shot resets unfavorable boards.",
       "dependency_notes": [
-        "The corresponding Memory is required to preserve this form and type Multi-Attack correctly; the builder does not grant or equip it.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "ITEM_WATER_MEMORY is protected progression; the automatic runtime item is ITEM_LIFE_ORB."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Authored independently because typing changes matchup, STAB, and role despite a shared legal pool."
@@ -872,15 +871,14 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_RKS_SYSTEM",
       "suggested_item": "ITEM_GRASS_MEMORY",
-      "item_context": "ITEM_GRASS_MEMORY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_GRASS_MEMORY remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_GRASS_MEMORY manually after earning it.",
       "source_refs": [
         "Smogon Silvally type-form roles adapted to doubles and exact local data",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_SILVALLY_GRASS"
       ],
       "doubles_rationale": "Grass Multi-Attack pressures Water and Ground foes, Rock Slide covers Flying and Fire targets, and Parting Shot supports switching.",
       "dependency_notes": [
-        "The corresponding Memory is required to preserve this form and type Multi-Attack correctly; the builder does not grant or equip it.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "ITEM_GRASS_MEMORY is protected progression; the automatic runtime item is ITEM_LIFE_ORB."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Authored independently because typing changes matchup, STAB, and role despite a shared legal pool."
@@ -897,15 +895,14 @@
       "nature": "NATURE_NAIVE",
       "ability": "ABILITY_RKS_SYSTEM",
       "suggested_item": "ITEM_ELECTRIC_MEMORY",
-      "item_context": "ITEM_ELECTRIC_MEMORY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_ELECTRIC_MEMORY remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_ELECTRIC_MEMORY manually after earning it.",
       "source_refs": [
         "Smogon Silvally type-form roles adapted to doubles and exact local data",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_SILVALLY_ELECTRIC"
       ],
       "doubles_rationale": "Electric Multi-Attack and Ice Beam form broad coverage while Thunder Wave controls targets too fast to break immediately.",
       "dependency_notes": [
-        "The corresponding Memory is required to preserve this form and type Multi-Attack correctly; the builder does not grant or equip it.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "ITEM_ELECTRIC_MEMORY is protected progression; the automatic runtime item is ITEM_LIFE_ORB."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Authored independently because typing changes matchup, STAB, and role despite a shared legal pool."
@@ -922,15 +919,14 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_RKS_SYSTEM",
       "suggested_item": "ITEM_PSYCHIC_MEMORY",
-      "item_context": "ITEM_PSYCHIC_MEMORY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_PSYCHIC_MEMORY remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_PSYCHIC_MEMORY manually after earning it.",
       "source_refs": [
         "Smogon Silvally type-form roles adapted to doubles and exact local data",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_SILVALLY_PSYCHIC"
       ],
       "doubles_rationale": "Psychic Multi-Attack supplies strong focused STAB, Crunch covers Psychic and Ghost foes, and Thunder Wave controls Speed.",
       "dependency_notes": [
-        "The corresponding Memory is required to preserve this form and type Multi-Attack correctly; the builder does not grant or equip it.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "ITEM_PSYCHIC_MEMORY is protected progression; the automatic runtime item is ITEM_LIFE_ORB."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Authored independently because typing changes matchup, STAB, and role despite a shared legal pool."
@@ -947,15 +943,14 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_RKS_SYSTEM",
       "suggested_item": "ITEM_ICE_MEMORY",
-      "item_context": "ITEM_ICE_MEMORY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_ICE_MEMORY remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_ICE_MEMORY manually after earning it.",
       "source_refs": [
         "Smogon Silvally type-form roles adapted to doubles and exact local data",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_SILVALLY_ICE"
       ],
       "doubles_rationale": "Ice Multi-Attack threatens Dragons, Swords Dance creates a sweep, and Rock Slide checks Fire and Ice targets while hitting both foes.",
       "dependency_notes": [
-        "The corresponding Memory is required to preserve this form and type Multi-Attack correctly; the builder does not grant or equip it.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "ITEM_ICE_MEMORY is protected progression; the automatic runtime item is ITEM_LIFE_ORB."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Authored independently because typing changes matchup, STAB, and role despite a shared legal pool."
@@ -972,15 +967,14 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_RKS_SYSTEM",
       "suggested_item": "ITEM_DRAGON_MEMORY",
-      "item_context": "ITEM_DRAGON_MEMORY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_DRAGON_MEMORY remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_DRAGON_MEMORY manually after earning it.",
       "source_refs": [
         "Smogon Silvally type-form roles adapted to doubles and exact local data",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_SILVALLY_DRAGON"
       ],
       "doubles_rationale": "Dragon Multi-Attack and Swords Dance create focused pressure while Flame Charge improves Speed and covers Steel targets.",
       "dependency_notes": [
-        "The corresponding Memory is required to preserve this form and type Multi-Attack correctly; the builder does not grant or equip it.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "ITEM_DRAGON_MEMORY is protected progression; the automatic runtime item is ITEM_LIFE_ORB."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Authored independently because typing changes matchup, STAB, and role despite a shared legal pool."
@@ -997,15 +991,14 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_RKS_SYSTEM",
       "suggested_item": "ITEM_DARK_MEMORY",
-      "item_context": "ITEM_DARK_MEMORY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_DARK_MEMORY remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_DARK_MEMORY manually after earning it.",
       "source_refs": [
         "Smogon Silvally type-form roles adapted to doubles and exact local data",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_SILVALLY_DARK"
       ],
       "doubles_rationale": "Dark Multi-Attack prevents passivity while Snarl, Thunder Wave, and Parting Shot control special damage, Speed, and positioning.",
       "dependency_notes": [
-        "The corresponding Memory is required to preserve this form and type Multi-Attack correctly; the builder does not grant or equip it.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "ITEM_DARK_MEMORY is protected progression; the automatic runtime item is ITEM_LIFE_ORB."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Authored independently because typing changes matchup, STAB, and role despite a shared legal pool."
@@ -1022,15 +1015,14 @@
       "nature": "NATURE_NAIVE",
       "ability": "ABILITY_RKS_SYSTEM",
       "suggested_item": "ITEM_FAIRY_MEMORY",
-      "item_context": "ITEM_FAIRY_MEMORY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_FAIRY_MEMORY remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_FAIRY_MEMORY manually after earning it.",
       "source_refs": [
         "Smogon Silvally type-form roles adapted to doubles and exact local data",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_SILVALLY_FAIRY"
       ],
       "doubles_rationale": "Fairy Multi-Attack checks Dragons and Dark foes, Flamethrower covers Steel targets, and Parting Shot maintains board control.",
       "dependency_notes": [
-        "The corresponding Memory is required to preserve this form and type Multi-Attack correctly; the builder does not grant or equip it.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "ITEM_FAIRY_MEMORY is protected progression; the automatic runtime item is ITEM_LIFE_ORB."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Authored independently because typing changes matchup, STAB, and role despite a shared legal pool."
@@ -1047,15 +1039,15 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_SHIELDS_DOWN",
       "suggested_item": "ITEM_WHITE_HERB",
-      "item_context": "ITEM_WHITE_HERB supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_WHITE_HERB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Minior Shell Smash adapted to the exact meteor-color pool",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_MINIOR_METEOR_ORANGE"
       ],
       "doubles_rationale": "Shell Smash creates a sweep, White Herb consumption powers Acrobatics, Rock Slide pressures both foes, and Head Smash supplies a focused knockout option.",
       "dependency_notes": [
-        "The form’s restricted pool has no Protect, and Head Smash recoil makes it a deliberate finishing move.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_WHITE_HERB automatically, and the Pokémon Center vendor supplies free replacements.",
+        "The form’s restricted pool has no Protect, and Head Smash recoil makes it a deliberate finishing move."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Authored independently because meteor-color slots lack much of base Minior’s local pool."
@@ -1073,13 +1065,14 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_SHIELDS_DOWN",
       "suggested_item": "ITEM_WHITE_HERB",
-      "item_context": "This cosmetic form has exact local battle-data equivalence to the reviewed base form.",
+      "item_context": "ITEM_WHITE_HERB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Authored SPECIES_MINIOR_METEOR_ORANGE review",
         "Emerald Champions exact-form equivalence check for SPECIES_MINIOR_METEOR_YELLOW"
       ],
       "doubles_rationale": "SPECIES_MINIOR_METEOR_YELLOW is mechanically identical to SPECIES_MINIOR_METEOR_ORANGE in this engine, so the same authored doubles package is retained exactly.",
       "dependency_notes": [
+        "The set service equips ITEM_WHITE_HERB automatically, and the Pokémon Center vendor supplies free replacements.",
         "The form’s restricted pool has no Protect, and Head Smash recoil makes it a deliberate finishing move.",
         "Alias acceptance is gated on identical stats, types, ability slots, full legal move pool, moves, nature, and ability."
       ],
@@ -1099,13 +1092,14 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_SHIELDS_DOWN",
       "suggested_item": "ITEM_WHITE_HERB",
-      "item_context": "This cosmetic form has exact local battle-data equivalence to the reviewed base form.",
+      "item_context": "ITEM_WHITE_HERB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Authored SPECIES_MINIOR_METEOR_ORANGE review",
         "Emerald Champions exact-form equivalence check for SPECIES_MINIOR_METEOR_GREEN"
       ],
       "doubles_rationale": "SPECIES_MINIOR_METEOR_GREEN is mechanically identical to SPECIES_MINIOR_METEOR_ORANGE in this engine, so the same authored doubles package is retained exactly.",
       "dependency_notes": [
+        "The set service equips ITEM_WHITE_HERB automatically, and the Pokémon Center vendor supplies free replacements.",
         "The form’s restricted pool has no Protect, and Head Smash recoil makes it a deliberate finishing move.",
         "Alias acceptance is gated on identical stats, types, ability slots, full legal move pool, moves, nature, and ability."
       ],
@@ -1125,13 +1119,14 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_SHIELDS_DOWN",
       "suggested_item": "ITEM_WHITE_HERB",
-      "item_context": "This cosmetic form has exact local battle-data equivalence to the reviewed base form.",
+      "item_context": "ITEM_WHITE_HERB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Authored SPECIES_MINIOR_METEOR_ORANGE review",
         "Emerald Champions exact-form equivalence check for SPECIES_MINIOR_METEOR_BLUE"
       ],
       "doubles_rationale": "SPECIES_MINIOR_METEOR_BLUE is mechanically identical to SPECIES_MINIOR_METEOR_ORANGE in this engine, so the same authored doubles package is retained exactly.",
       "dependency_notes": [
+        "The set service equips ITEM_WHITE_HERB automatically, and the Pokémon Center vendor supplies free replacements.",
         "The form’s restricted pool has no Protect, and Head Smash recoil makes it a deliberate finishing move.",
         "Alias acceptance is gated on identical stats, types, ability slots, full legal move pool, moves, nature, and ability."
       ],
@@ -1151,13 +1146,14 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_SHIELDS_DOWN",
       "suggested_item": "ITEM_WHITE_HERB",
-      "item_context": "This cosmetic form has exact local battle-data equivalence to the reviewed base form.",
+      "item_context": "ITEM_WHITE_HERB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Authored SPECIES_MINIOR_METEOR_ORANGE review",
         "Emerald Champions exact-form equivalence check for SPECIES_MINIOR_METEOR_INDIGO"
       ],
       "doubles_rationale": "SPECIES_MINIOR_METEOR_INDIGO is mechanically identical to SPECIES_MINIOR_METEOR_ORANGE in this engine, so the same authored doubles package is retained exactly.",
       "dependency_notes": [
+        "The set service equips ITEM_WHITE_HERB automatically, and the Pokémon Center vendor supplies free replacements.",
         "The form’s restricted pool has no Protect, and Head Smash recoil makes it a deliberate finishing move.",
         "Alias acceptance is gated on identical stats, types, ability slots, full legal move pool, moves, nature, and ability."
       ],
@@ -1177,13 +1173,14 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_SHIELDS_DOWN",
       "suggested_item": "ITEM_WHITE_HERB",
-      "item_context": "This cosmetic form has exact local battle-data equivalence to the reviewed base form.",
+      "item_context": "ITEM_WHITE_HERB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Authored SPECIES_MINIOR_METEOR_ORANGE review",
         "Emerald Champions exact-form equivalence check for SPECIES_MINIOR_METEOR_VIOLET"
       ],
       "doubles_rationale": "SPECIES_MINIOR_METEOR_VIOLET is mechanically identical to SPECIES_MINIOR_METEOR_ORANGE in this engine, so the same authored doubles package is retained exactly.",
       "dependency_notes": [
+        "The set service equips ITEM_WHITE_HERB automatically, and the Pokémon Center vendor supplies free replacements.",
         "The form’s restricted pool has no Protect, and Head Smash recoil makes it a deliberate finishing move.",
         "Alias acceptance is gated on identical stats, types, ability slots, full legal move pool, moves, nature, and ability."
       ],
@@ -1202,15 +1199,15 @@
       "nature": "NATURE_BRAVE",
       "ability": "ABILITY_PRISM_ARMOR",
       "suggested_item": "ITEM_WEAKNESS_POLICY",
-      "item_context": "ITEM_WEAKNESS_POLICY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_WEAKNESS_POLICY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Gen 8 Battle Stadium Doubles Necrozma-Dusk-Mane Offensive Trick Room",
         "Emerald Champions canonical Dusk Mane Sunsteel Strike form-exclusive legality"
       ],
       "doubles_rationale": "Dusk Mane sets Trick Room, attacks from 157 Attack with ability-ignoring Sunsteel Strike and spread Earthquake, and uses Prism Armor plus Protect to create Weakness Policy opportunities.",
       "dependency_notes": [
-        "Earthquake can hit the ally, so pair it with immunity, Telepathy, or Protect.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_WEAKNESS_POLICY automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Earthquake can hit the ally, so pair it with immunity, Telepathy, or Protect."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Completed the direct Smogon Trick Room shell with Dusk Mane’s canonical signature move."
@@ -1227,15 +1224,15 @@
       "nature": "NATURE_MODEST",
       "ability": "ABILITY_PRISM_ARMOR",
       "suggested_item": "ITEM_POWER_HERB",
-      "item_context": "ITEM_POWER_HERB supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_POWER_HERB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Necrozma-Dawn-Wings doubles roles",
         "Emerald Champions canonical Dawn Wings Moongeist Beam form-exclusive legality"
       ],
       "doubles_rationale": "Power Herb Meteor Beam boosts Special Attack, Moongeist Beam supplies ability-ignoring Ghost STAB, Earth Power covers Steel targets, and Protect maintains positioning.",
       "dependency_notes": [
-        "Power Herb must be equipped manually for immediate Meteor Beam; without it the move takes a charge turn.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_POWER_HERB automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Power Herb must be equipped manually for immediate Meteor Beam; without it the move takes a charge turn."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Restored Dawn Wings’ canonical signature move and removed Psychic Terrain dependence."
@@ -1253,13 +1250,14 @@
       "nature": "NATURE_QUIET",
       "ability": "ABILITY_SOUL_HEART",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "Original Color Magearna is exactly equivalent to the previously reviewed base Magearna; Sitrus Berry remains advisory and is never auto-equipped.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Authored SPECIES_MAGEARNA review",
         "Emerald Champions exact-form equivalence check for SPECIES_MAGEARNA_ORIGINAL_COLOR"
       ],
       "doubles_rationale": "Original Color Magearna is mechanically identical to reviewed Magearna, so the same Soul-Heart Trick Room and dual-STAB package is retained.",
       "dependency_notes": [
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements.",
         "Quiet supports Trick Room but Speed IVs are unchanged.",
         "Alias acceptance is gated on identical stats, types, abilities, full legal pool, moves, nature, and ability."
       ],
@@ -1278,15 +1276,15 @@
       "nature": "NATURE_MODEST",
       "ability": "ABILITY_PUNK_ROCK",
       "suggested_item": "ITEM_THROAT_SPRAY",
-      "item_context": "ITEM_THROAT_SPRAY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_THROAT_SPRAY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Toxtricity doubles Punk Rock roles adapted to Low Key form",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_TOXTRICITY_LOW_KEY"
       ],
       "doubles_rationale": "Punk Rock boosts spread Overdrive and Snarl, Sludge Bomb covers Fairies, and Protect preserves the attacker while Throat Spray can increase damage.",
       "dependency_notes": [
-        "Overdrive and Snarl also hit sound-sensitive interactions, while Throat Spray is optional rather than auto-equipped.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_THROAT_SPRAY automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Overdrive and Snarl also hit sound-sensitive interactions, while Throat Spray is optional rather than auto-equipped."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Authored independently for the Low Key form’s local stats and pool."
@@ -1303,15 +1301,15 @@
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_WEAK_ARMOR",
       "suggested_item": "ITEM_FOCUS_SASH",
-      "item_context": "ITEM_FOCUS_SASH supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Sinistea setup roles adapted to the exact Antique pool",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_SINISTEA_ANTIQUE"
       ],
       "doubles_rationale": "Nasty Plot turns the small form into a threat, Shadow Ball and Giga Drain provide damage and sustain, and Protect preserves Focus Sash positioning.",
       "dependency_notes": [
-        "Weak Armor can raise Speed after a physical hit, but Sinistea is too frail to rely on surviving one without Focus Sash.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Weak Armor can raise Speed after a physical hit, but Sinistea is too frail to rely on surviving one without Focus Sash."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Authored independently because the Antique slot has distinct local stats and a restricted pool."
@@ -1328,15 +1326,15 @@
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_CURSED_BODY",
       "suggested_item": "ITEM_WHITE_HERB",
-      "item_context": "ITEM_WHITE_HERB supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_WHITE_HERB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown Gen 9 Random Doubles Antique Polteageist Shell Smash",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_POLTEAGEIST_ANTIQUE"
       ],
       "doubles_rationale": "White Herb offsets Shell Smash drops, Shadow Ball supplies powerful STAB, Giga Drain adds coverage and healing, and Protect preserves the setup.",
       "dependency_notes": [
-        "The sweep needs one safe setup turn, while Cursed Body is useful but probabilistic.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_WHITE_HERB automatically, and the Pokémon Center vendor supplies free replacements.",
+        "The sweep needs one safe setup turn, while Cursed Body is useful but probabilistic."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Completed the direct random-doubles shell with its best legal coverage."
@@ -1353,15 +1351,15 @@
       "nature": "NATURE_CALM",
       "ability": "ABILITY_AROMA_VEIL",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "ITEM_SITRUS_BERRY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown Gen 9 Random Doubles Alcremie set 017",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_ALCREMIE_RUBY_CREAM"
       ],
       "doubles_rationale": "Aroma Veil protects support actions from Taunt, Decorate creates explosive allied setup, Dazzling Gleam adds spread damage, and Protect preserves Alcremie.",
       "dependency_notes": [
-        "Decorate and Helping Hand need an offensive partner, but Dazzling Gleam prevents total passivity.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Decorate and Helping Hand need an offensive partner, but Dazzling Gleam prevents total passivity."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Accepted the direct random-doubles support set."
@@ -1379,13 +1377,14 @@
       "nature": "NATURE_CALM",
       "ability": "ABILITY_AROMA_VEIL",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "This cosmetic form has exact local battle-data equivalence to the reviewed base form.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Authored SPECIES_ALCREMIE_RUBY_CREAM review",
         "Emerald Champions exact-form equivalence check for SPECIES_ALCREMIE_MATCHA_CREAM"
       ],
       "doubles_rationale": "SPECIES_ALCREMIE_MATCHA_CREAM is mechanically identical to SPECIES_ALCREMIE_RUBY_CREAM in this engine, so the same authored doubles package is retained exactly.",
       "dependency_notes": [
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements.",
         "Decorate and Helping Hand need an offensive partner, but Dazzling Gleam prevents total passivity.",
         "Alias acceptance is gated on identical stats, types, ability slots, full legal move pool, moves, nature, and ability."
       ],
@@ -1405,13 +1404,14 @@
       "nature": "NATURE_CALM",
       "ability": "ABILITY_AROMA_VEIL",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "This cosmetic form has exact local battle-data equivalence to the reviewed base form.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Authored SPECIES_ALCREMIE_RUBY_CREAM review",
         "Emerald Champions exact-form equivalence check for SPECIES_ALCREMIE_MINT_CREAM"
       ],
       "doubles_rationale": "SPECIES_ALCREMIE_MINT_CREAM is mechanically identical to SPECIES_ALCREMIE_RUBY_CREAM in this engine, so the same authored doubles package is retained exactly.",
       "dependency_notes": [
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements.",
         "Decorate and Helping Hand need an offensive partner, but Dazzling Gleam prevents total passivity.",
         "Alias acceptance is gated on identical stats, types, ability slots, full legal move pool, moves, nature, and ability."
       ],
@@ -1431,13 +1431,14 @@
       "nature": "NATURE_CALM",
       "ability": "ABILITY_AROMA_VEIL",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "This cosmetic form has exact local battle-data equivalence to the reviewed base form.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Authored SPECIES_ALCREMIE_RUBY_CREAM review",
         "Emerald Champions exact-form equivalence check for SPECIES_ALCREMIE_LEMON_CREAM"
       ],
       "doubles_rationale": "SPECIES_ALCREMIE_LEMON_CREAM is mechanically identical to SPECIES_ALCREMIE_RUBY_CREAM in this engine, so the same authored doubles package is retained exactly.",
       "dependency_notes": [
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements.",
         "Decorate and Helping Hand need an offensive partner, but Dazzling Gleam prevents total passivity.",
         "Alias acceptance is gated on identical stats, types, ability slots, full legal move pool, moves, nature, and ability."
       ],
@@ -1457,13 +1458,14 @@
       "nature": "NATURE_CALM",
       "ability": "ABILITY_AROMA_VEIL",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "This cosmetic form has exact local battle-data equivalence to the reviewed base form.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Authored SPECIES_ALCREMIE_RUBY_CREAM review",
         "Emerald Champions exact-form equivalence check for SPECIES_ALCREMIE_SALTED_CREAM"
       ],
       "doubles_rationale": "SPECIES_ALCREMIE_SALTED_CREAM is mechanically identical to SPECIES_ALCREMIE_RUBY_CREAM in this engine, so the same authored doubles package is retained exactly.",
       "dependency_notes": [
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements.",
         "Decorate and Helping Hand need an offensive partner, but Dazzling Gleam prevents total passivity.",
         "Alias acceptance is gated on identical stats, types, ability slots, full legal move pool, moves, nature, and ability."
       ],
@@ -1483,13 +1485,14 @@
       "nature": "NATURE_CALM",
       "ability": "ABILITY_AROMA_VEIL",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "This cosmetic form has exact local battle-data equivalence to the reviewed base form.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Authored SPECIES_ALCREMIE_RUBY_CREAM review",
         "Emerald Champions exact-form equivalence check for SPECIES_ALCREMIE_RUBY_SWIRL"
       ],
       "doubles_rationale": "SPECIES_ALCREMIE_RUBY_SWIRL is mechanically identical to SPECIES_ALCREMIE_RUBY_CREAM in this engine, so the same authored doubles package is retained exactly.",
       "dependency_notes": [
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements.",
         "Decorate and Helping Hand need an offensive partner, but Dazzling Gleam prevents total passivity.",
         "Alias acceptance is gated on identical stats, types, ability slots, full legal move pool, moves, nature, and ability."
       ],
@@ -1509,13 +1512,14 @@
       "nature": "NATURE_CALM",
       "ability": "ABILITY_AROMA_VEIL",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "This cosmetic form has exact local battle-data equivalence to the reviewed base form.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Authored SPECIES_ALCREMIE_RUBY_CREAM review",
         "Emerald Champions exact-form equivalence check for SPECIES_ALCREMIE_CARAMEL_SWIRL"
       ],
       "doubles_rationale": "SPECIES_ALCREMIE_CARAMEL_SWIRL is mechanically identical to SPECIES_ALCREMIE_RUBY_CREAM in this engine, so the same authored doubles package is retained exactly.",
       "dependency_notes": [
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements.",
         "Decorate and Helping Hand need an offensive partner, but Dazzling Gleam prevents total passivity.",
         "Alias acceptance is gated on identical stats, types, ability slots, full legal move pool, moves, nature, and ability."
       ],
@@ -1535,13 +1539,14 @@
       "nature": "NATURE_CALM",
       "ability": "ABILITY_AROMA_VEIL",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "This cosmetic form has exact local battle-data equivalence to the reviewed base form.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Authored SPECIES_ALCREMIE_RUBY_CREAM review",
         "Emerald Champions exact-form equivalence check for SPECIES_ALCREMIE_RAINBOW_SWIRL"
       ],
       "doubles_rationale": "SPECIES_ALCREMIE_RAINBOW_SWIRL is mechanically identical to SPECIES_ALCREMIE_RUBY_CREAM in this engine, so the same authored doubles package is retained exactly.",
       "dependency_notes": [
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements.",
         "Decorate and Helping Hand need an offensive partner, but Dazzling Gleam prevents total passivity.",
         "Alias acceptance is gated on identical stats, types, ability slots, full legal move pool, moves, nature, and ability."
       ],
@@ -1560,15 +1565,15 @@
       "nature": "NATURE_BOLD",
       "ability": "ABILITY_PSYCHIC_SURGE",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "ITEM_SITRUS_BERRY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Gen 9 National Dex Doubles Indeedee-F Terrain Setter",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_INDEEDEE_FEMALE"
       ],
       "doubles_rationale": "Psychic Surge blocks priority and powers Expanding Force, Follow Me protects an ally, Helping Hand amplifies damage, and Protect preserves redirection timing.",
       "dependency_notes": [
-        "Psychic Terrain also blocks allied grounded priority, so team construction must account for it.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Psychic Terrain also blocks allied grounded priority, so team construction must account for it."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Accepted the direct modern Smogon doubles set."
@@ -1585,15 +1590,15 @@
       "nature": "NATURE_ADAMANT",
       "ability": "ABILITY_INTREPID_SWORD",
       "suggested_item": "ITEM_RUSTED_SWORD",
-      "item_context": "ITEM_RUSTED_SWORD supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_RUSTED_SWORD remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_RUSTED_SWORD manually after earning it.",
       "source_refs": [
         "Smogon Gen 8 Battle Stadium Doubles Zacian-Crowned Offensive",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_ZACIAN_CROWNED_SWORD"
       ],
       "doubles_rationale": "Intrepid Sword creates immediate pressure, Behemoth Blade supplies Crowned Steel STAB, Sacred Sword ignores defensive boosts, and Substitute plus Protect punish passive turns.",
       "dependency_notes": [
-        "Rusted Sword is required to maintain Crowned form and must be equipped manually.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "ITEM_RUSTED_SWORD is protected progression; the automatic runtime item is ITEM_LIFE_ORB.",
+        "Rusted Sword is required to maintain Crowned form and must be equipped manually."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Accepted the direct restricted-doubles offensive set and restored Behemoth Blade explicitly."
@@ -1610,15 +1615,15 @@
       "nature": "NATURE_IMPISH",
       "ability": "ABILITY_DAUNTLESS_SHIELD",
       "suggested_item": "ITEM_RUSTED_SHIELD",
-      "item_context": "ITEM_RUSTED_SHIELD supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_RUSTED_SHIELD remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_RUSTED_SHIELD manually after earning it.",
       "source_refs": [
         "Smogon Gen 9 VGC Crowned Zamazenta Bulky Attacker adapted to exact local attacks",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_ZAMAZENTA_CROWNED_SHIELD"
       ],
       "doubles_rationale": "Dauntless Shield supports repeated positioning, Behemoth Bash and Close Combat provide dual STAB, Wide Guard blocks spread attacks, and Protect manages focus fire.",
       "dependency_notes": [
-        "Rusted Shield is required to maintain Crowned form; Close Combat temporarily reduces the defenses this role values.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "ITEM_RUSTED_SHIELD is protected progression; the automatic runtime item is ITEM_LIFE_ORB.",
+        "Rusted Shield is required to maintain Crowned form; Close Combat temporarily reduces the defenses this role values."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Completed the direct VGC Wide Guard shell with Behemoth Bash restored explicitly."
@@ -1635,15 +1640,15 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_UNSEEN_FIST",
       "suggested_item": "ITEM_MYSTIC_WATER",
-      "item_context": "ITEM_MYSTIC_WATER supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_MYSTIC_WATER is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Gen 8 Doubles OU Urshifu-Rapid-Strike Offensive",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_URSHIFU_RAPID_STRIKE_STYLE"
       ],
       "doubles_rationale": "Surging Strikes bypasses Defense boosts through critical hits, Close Combat covers Water resists, Aqua Jet supplies priority, and Unseen Fist punishes Protect.",
       "dependency_notes": [
-        "Close Combat lowers defenses, while Mystic Water is optional and never auto-equipped.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_MYSTIC_WATER automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Close Combat lowers defenses, while Mystic Water is optional and never auto-equipped."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Accepted the direct Smogon doubles consensus set."
@@ -1660,15 +1665,15 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_LEAF_GUARD",
       "suggested_item": "ITEM_LIFE_ORB",
-      "item_context": "ITEM_LIFE_ORB supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Zarude offensive and Jungle Healing roles adapted to Dada’s exact pool",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_ZARUDE_DADA"
       ],
       "doubles_rationale": "Power Whip supplies strong STAB, U-turn maintains tempo, Jungle Healing restores both allies’ status and health, and Hammer Arm covers Steel and Dark targets.",
       "dependency_notes": [
-        "The restricted Dada pool has no Protect or strong Dark STAB, and Hammer Arm lowers Speed.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements.",
+        "The restricted Dada pool has no Protect or strong Dark STAB, and Hammer Arm lowers Speed."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Authored independently because Dada has distinct local stats and only seventeen legal moves."
@@ -1685,15 +1690,14 @@
       "nature": "NATURE_BRAVE",
       "ability": "ABILITY_AS_ONE_ICE_RIDER",
       "suggested_item": "ITEM_WEAKNESS_POLICY",
-      "item_context": "ITEM_WEAKNESS_POLICY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_WEAKNESS_POLICY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon restricted-doubles Calyrex-Ice Trick Room roles adapted to exact local data",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_CALYREX_ICE_RIDER"
       ],
       "doubles_rationale": "Calyrex sets Trick Room for itself, Glacial Lance pressures both foes, Close Combat covers Ice resists, and As One snowballs Attack after knockouts.",
       "dependency_notes": [
-        "Weakness Policy is advisory, while Close Combat defense drops can make subsequent targeting dangerous.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_WEAKNESS_POLICY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Built the canonical restricted-doubles game plan from exact local moves."
@@ -1710,15 +1714,15 @@
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_AS_ONE_SHADOW_RIDER",
       "suggested_item": "ITEM_LIFE_ORB",
-      "item_context": "ITEM_LIFE_ORB supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon restricted-doubles Calyrex-Shadow offensive roles adapted to exact local data",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_CALYREX_SHADOW_RIDER"
       ],
       "doubles_rationale": "Astral Barrage pressures both foes, Psychic supplies reliable focused STAB, Nasty Plot creates an overwhelming sweep, and As One compounds Special Attack after knockouts.",
       "dependency_notes": [
-        "Nasty Plot needs a safe turn, but Calyrex is immediately threatening without setup.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Nasty Plot needs a safe turn, but Calyrex is immediately threatening without setup."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
       "review_notes": "Replaced the incoherent Agility and Calm Mind draft with the standard fast spread-attacker plan."

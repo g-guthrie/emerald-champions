@@ -54,6 +54,8 @@ PKMN_Center_BattleSet_Confirm::
 	compare VAR_RESULT, NO
 	goto_if_eq PKMN_Center_BattleSet_ChooseStyle
 	special ApplySelectedMonBattleSet
+	compare VAR_RESULT, BATTLE_SET_APPLY_SPECIAL_ITEM
+	goto_if_eq PKMN_Center_BattleSet_SpecialItemEquipped
 	compare VAR_RESULT, TRUE
 	goto_if_ne PKMN_Center_BattleSet_NoPreset
 	playfanfare MUS_LEVEL_UP
@@ -67,6 +69,10 @@ PKMN_Center_BattleSet_CantBuildForEgg::
 
 PKMN_Center_BattleSet_NoPreset::
 	msgbox PKMN_Center_BattleSet_Text_NoPreset, MSGBOX_DEFAULT
+	goto PKMN_Center_BattleSet_ChooseMon
+
+PKMN_Center_BattleSet_SpecialItemEquipped::
+	msgbox PKMN_Center_BattleSet_Text_SpecialItemEquipped, MSGBOX_DEFAULT
 	goto PKMN_Center_BattleSet_ChooseMon
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Move Reminder @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -558,14 +564,15 @@ PKMN_Center_BattleSet_Text_Confirm:
 	.string "Ready to give {STR_VAR_1} the\n"
 	.string "{STR_VAR_2} set.\p"
 	.string "This replaces all four moves,\n"
-	.string "the nature, and the ability.\p"
+	.string "the nature, ability, and held item.\p"
+	.string "It will hold {STR_VAR_3}.\p"
 	.string "Continue?$"
 
 PKMN_Center_BattleSet_Text_Success:
 	.string "All set! {STR_VAR_1} learned its\n"
 	.string "new battle moves.\p"
 	.string "I also matched its ability and\n"
-	.string "nature to the new set.$"
+	.string "nature, and gave it {STR_VAR_3}.$"
 
 PKMN_Center_BattleSet_Text_CantBuildForEgg:
 	.string "An Egg can't use a battle set.$"
@@ -573,6 +580,11 @@ PKMN_Center_BattleSet_Text_CantBuildForEgg:
 PKMN_Center_BattleSet_Text_NoPreset:
 	.string "I can't build a battle set for\n"
 	.string "that Pokémon.$"
+
+PKMN_Center_BattleSet_Text_SpecialItemEquipped:
+	.string "I won't discard the {STR_VAR_2}.\p"
+	.string "Remove that special item first, then\n"
+	.string "come back when you're ready.$"
 
 PKMN_Center_MoveReminder_Text_WantMeToTeachMove:
 	.string "Would you like me to teach one of your\n"

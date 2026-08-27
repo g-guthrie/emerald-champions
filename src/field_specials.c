@@ -109,7 +109,7 @@ static EWRAM_DATA u8 sBattlePointsWindowId = 0;
 static EWRAM_DATA u8 sFrontierExchangeCorner_ItemIconWindowId = 0;
 static EWRAM_DATA u8 sPCBoxToSendMon = 0;
 static EWRAM_DATA u32 sBattleTowerMultiBattleTypeFlags = 0;
-static EWRAM_DATA u16 sUnlockedBattleItemMart[64] = {0};
+static EWRAM_DATA u16 sUnlockedBattleItemMart[192] = {0};
 
 struct ListMenuTemplate gScrollableMultichoice_ListMenuTemplate;
 
@@ -130,7 +130,7 @@ void GiveAllTMs(void)
 void OpenUnlockedBattleItemMart(void)
 {
     BuildUnlockedBattleItemList(sUnlockedBattleItemMart, ARRAY_COUNT(sUnlockedBattleItemMart));
-    CreatePokemartMenu(sUnlockedBattleItemMart);
+    CreateFreePokemartMenu(sUnlockedBattleItemMart);
     ScriptContext1_Stop();
 }
 
@@ -5140,7 +5140,10 @@ void BufferSelectedMonBattleSetName(void)
     if (gSpecialVar_0x8004 >= PARTY_SIZE)
         StringCopy(gStringVar2, gText_Exit);
     else
+    {
         StringCopy(gStringVar2, GetVerdantBattleSetName(&gPlayerParty[gSpecialVar_0x8004], gSpecialVar_0x8005));
+        CopyItemName(GetVerdantBattleSetItem(&gPlayerParty[gSpecialVar_0x8004], gSpecialVar_0x8005), gStringVar3);
+    }
 }
 
 // Changes the selected Pokemon's nature.

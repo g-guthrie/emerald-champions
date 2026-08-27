@@ -18,6 +18,7 @@
 #include "battle_debug.h"
 #include "battle_pike.h"
 #include "battle_pyramid.h"
+#include "verdant_battle_sets.h"
 #include "string_util.h"
 #include "text.h"
 #include "constants/abilities.h"
@@ -51,80 +52,14 @@ const struct WildPokemon gWildFeebasRoute119Data = {20, 25, SPECIES_FEEBAS};
 #define ROUTE_SIGN_MAX_METHOD_SPECIES LAND_WILD_COUNT
 #define ROUTE_SIGN_MAX_LINE_WIDTH 200
 
-struct RouteSignSpeciesChance
+struct RouteSignSpecies
 {
     u16 species;
-    u8 chance;
-};
-
-static const u8 sRouteSignLandChances[LAND_WILD_COUNT] =
-{
-    ENCOUNTER_CHANCE_LAND_MONS_SLOT_0,
-    ENCOUNTER_CHANCE_LAND_MONS_SLOT_1 - ENCOUNTER_CHANCE_LAND_MONS_SLOT_0,
-    ENCOUNTER_CHANCE_LAND_MONS_SLOT_2 - ENCOUNTER_CHANCE_LAND_MONS_SLOT_1,
-    ENCOUNTER_CHANCE_LAND_MONS_SLOT_3 - ENCOUNTER_CHANCE_LAND_MONS_SLOT_2,
-    ENCOUNTER_CHANCE_LAND_MONS_SLOT_4 - ENCOUNTER_CHANCE_LAND_MONS_SLOT_3,
-    ENCOUNTER_CHANCE_LAND_MONS_SLOT_5 - ENCOUNTER_CHANCE_LAND_MONS_SLOT_4,
-    ENCOUNTER_CHANCE_LAND_MONS_SLOT_6 - ENCOUNTER_CHANCE_LAND_MONS_SLOT_5,
-    ENCOUNTER_CHANCE_LAND_MONS_SLOT_7 - ENCOUNTER_CHANCE_LAND_MONS_SLOT_6,
-    ENCOUNTER_CHANCE_LAND_MONS_SLOT_8 - ENCOUNTER_CHANCE_LAND_MONS_SLOT_7,
-    ENCOUNTER_CHANCE_LAND_MONS_SLOT_9 - ENCOUNTER_CHANCE_LAND_MONS_SLOT_8,
-    ENCOUNTER_CHANCE_LAND_MONS_SLOT_10 - ENCOUNTER_CHANCE_LAND_MONS_SLOT_9,
-    ENCOUNTER_CHANCE_LAND_MONS_SLOT_11 - ENCOUNTER_CHANCE_LAND_MONS_SLOT_10,
-};
-
-static const u8 sRouteSignWaterChances[WATER_WILD_COUNT] =
-{
-    ENCOUNTER_CHANCE_WATER_MONS_SLOT_0,
-    ENCOUNTER_CHANCE_WATER_MONS_SLOT_1 - ENCOUNTER_CHANCE_WATER_MONS_SLOT_0,
-    ENCOUNTER_CHANCE_WATER_MONS_SLOT_2 - ENCOUNTER_CHANCE_WATER_MONS_SLOT_1,
-    ENCOUNTER_CHANCE_WATER_MONS_SLOT_3 - ENCOUNTER_CHANCE_WATER_MONS_SLOT_2,
-};
-
-static const u8 sRouteSignRockSmashChances[ROCK_WILD_COUNT] =
-{
-    ENCOUNTER_CHANCE_ROCK_SMASH_MONS_SLOT_0,
-    ENCOUNTER_CHANCE_ROCK_SMASH_MONS_SLOT_1 - ENCOUNTER_CHANCE_ROCK_SMASH_MONS_SLOT_0,
-    ENCOUNTER_CHANCE_ROCK_SMASH_MONS_SLOT_2 - ENCOUNTER_CHANCE_ROCK_SMASH_MONS_SLOT_1,
-    ENCOUNTER_CHANCE_ROCK_SMASH_MONS_SLOT_3 - ENCOUNTER_CHANCE_ROCK_SMASH_MONS_SLOT_2,
-};
-
-static const u8 sRouteSignOldRodChances[] =
-{
-    ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_0,
-    ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_1 - ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_0,
-};
-
-static const u8 sRouteSignGoodRodChances[] =
-{
-    ENCOUNTER_CHANCE_FISHING_MONS_GOOD_ROD_SLOT_2,
-    ENCOUNTER_CHANCE_FISHING_MONS_GOOD_ROD_SLOT_3 - ENCOUNTER_CHANCE_FISHING_MONS_GOOD_ROD_SLOT_2,
-    ENCOUNTER_CHANCE_FISHING_MONS_GOOD_ROD_SLOT_4 - ENCOUNTER_CHANCE_FISHING_MONS_GOOD_ROD_SLOT_3,
-};
-
-static const u8 sRouteSignSuperRodChances[] =
-{
-    ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_5,
-    ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_6 - ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_5,
-    ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_7 - ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_6,
-    ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_8 - ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_7,
-    ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_9 - ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_8,
-};
-
-static const u8 sRouteSignHoneyChances[HONEY_WILD_COUNT] =
-{
-    ENCOUNTER_CHANCE_HONEY_MONS_SLOT_0,
-    ENCOUNTER_CHANCE_HONEY_MONS_SLOT_1 - ENCOUNTER_CHANCE_HONEY_MONS_SLOT_0,
-    ENCOUNTER_CHANCE_HONEY_MONS_SLOT_2 - ENCOUNTER_CHANCE_HONEY_MONS_SLOT_1,
-    ENCOUNTER_CHANCE_HONEY_MONS_SLOT_3 - ENCOUNTER_CHANCE_HONEY_MONS_SLOT_2,
-    ENCOUNTER_CHANCE_HONEY_MONS_SLOT_4 - ENCOUNTER_CHANCE_HONEY_MONS_SLOT_3,
-    ENCOUNTER_CHANCE_HONEY_MONS_SLOT_5 - ENCOUNTER_CHANCE_HONEY_MONS_SLOT_4,
 };
 
 static const u8 sText_RouteSignSpeciesHeader[] = _("Pokémon found here:");
 static const u8 sText_RouteSignSpeciesSeparator[] = _(", ");
 static const u8 sText_RouteSignSpeciesComma[] = _(",");
-static const u8 sText_RouteSignSpeciesPercent[] = _("% ");
 static const u8 sText_RouteSignSpeciesNewLine[] = _("\n");
 static const u8 sText_RouteSignSpeciesLineBreak[] = _("\l");
 static const u8 sText_RouteSignSpeciesPageBreak[] = _("\p");
@@ -138,12 +73,11 @@ static const u8 sText_RouteSignSuperRod[] = _("Super Rod: ");
 static const u8 sText_RouteSignHoney[] = _("Honey: ");
 static const u8 sText_RouteSignUnderBridge[] = _("Under bridge: ");
 
-static u8 CollectRouteSignSpeciesChances(
-    struct RouteSignSpeciesChance *entries,
+static u8 CollectRouteSignSpecies(
+    struct RouteSignSpecies *entries,
     const struct WildPokemonInfo *info,
     u8 firstSlot,
-    u8 slotCount,
-    const u8 *slotChances)
+    u8 slotCount)
 {
     u8 count = 0;
     u8 i, j;
@@ -160,15 +94,11 @@ static u8 CollectRouteSignSpeciesChances(
         for (j = 0; j < count; j++)
         {
             if (entries[j].species == species)
-            {
-                entries[j].chance += slotChances[i];
                 break;
-            }
         }
         if (j == count && count < ROUTE_SIGN_MAX_METHOD_SPECIES)
         {
             entries[count].species = species;
-            entries[count].chance = slotChances[i];
             count++;
         }
     }
@@ -178,80 +108,48 @@ static u8 CollectRouteSignSpeciesChances(
 static u8 *AppendRouteSignMethod(
     u8 *dest,
     const u8 *methodName,
-    const struct RouteSignSpeciesChance *entries,
+    const struct RouteSignSpecies *entries,
     u8 count,
     bool8 *hasMethod)
 {
-    s16 chance;
-    bool8 firstGroup = TRUE;
+    u8 i;
+    bool8 firstName = TRUE;
+    u16 lineWidth;
 
-    for (chance = 100; chance > 0; chance--)
+    if (count == 0)
+        return dest;
+    dest = StringCopy(dest, *hasMethod ? sText_RouteSignSpeciesPageBreak : sText_RouteSignSpeciesNewLine);
+    dest = StringCopy(dest, methodName);
+    lineWidth = GetStringWidth(1, methodName, 0);
+    for (i = 0; i < count; i++)
     {
-        u8 prefix[32];
-        u8 *prefixEnd = prefix;
-        u8 i;
-        bool8 firstName = TRUE;
-        bool8 hasChance = FALSE;
-        u16 lineWidth;
+        const u8 *name = gSpeciesNames[entries[i].species];
+        u16 nameWidth = GetStringWidth(1, name, 0);
+        u16 separatorWidth = firstName ? 0 : GetStringWidth(1, sText_RouteSignSpeciesSeparator, 0);
 
-        for (i = 0; i < count; i++)
-            if (entries[i].chance == chance)
-                hasChance = TRUE;
-        if (!hasChance)
-            continue;
-
-        if (firstGroup)
+        if (!firstName && lineWidth + separatorWidth + nameWidth > ROUTE_SIGN_MAX_LINE_WIDTH)
         {
-            dest = StringCopy(dest, *hasMethod ? sText_RouteSignSpeciesPageBreak : sText_RouteSignSpeciesNewLine);
-            prefixEnd = StringCopy(prefixEnd, methodName);
-        }
-        else
-        {
+            dest = StringCopy(dest, sText_RouteSignSpeciesComma);
             dest = StringCopy(dest, sText_RouteSignSpeciesLineBreak);
+            lineWidth = 0;
+            firstName = TRUE;
         }
-        prefixEnd = ConvertIntToDecimalStringN(prefixEnd, chance, STR_CONV_MODE_LEFT_ALIGN, 3);
-        StringCopy(prefixEnd, sText_RouteSignSpeciesPercent);
-        dest = StringCopy(dest, prefix);
-        lineWidth = GetStringWidth(1, prefix, 0);
-
-        for (i = 0; i < count; i++)
+        if (!firstName)
         {
-            const u8 *name;
-            u16 nameWidth;
-            u16 separatorWidth;
-
-            if (entries[i].chance != chance)
-                continue;
-            name = gSpeciesNames[entries[i].species];
-            nameWidth = GetStringWidth(1, name, 0);
-            separatorWidth = firstName ? 0 : GetStringWidth(1, sText_RouteSignSpeciesSeparator, 0);
-            if (!firstName && lineWidth + separatorWidth + nameWidth > ROUTE_SIGN_MAX_LINE_WIDTH)
-            {
-                dest = StringCopy(dest, sText_RouteSignSpeciesComma);
-                dest = StringCopy(dest, sText_RouteSignSpeciesLineBreak);
-                lineWidth = 0;
-                firstName = TRUE;
-            }
-            if (!firstName)
-            {
-                dest = StringCopy(dest, sText_RouteSignSpeciesSeparator);
-                lineWidth += separatorWidth;
-            }
-            dest = StringCopy(dest, name);
-            lineWidth += nameWidth;
-            firstName = FALSE;
+            dest = StringCopy(dest, sText_RouteSignSpeciesSeparator);
+            lineWidth += separatorWidth;
         }
-        firstGroup = FALSE;
+        dest = StringCopy(dest, name);
+        lineWidth += nameWidth;
+        firstName = FALSE;
     }
-
-    if (!firstGroup)
-        *hasMethod = TRUE;
+    *hasMethod = TRUE;
     return dest;
 }
 
 void BufferCurrentMapRouteSignSpecies(void)
 {
-    struct RouteSignSpeciesChance entries[ROUTE_SIGN_MAX_METHOD_SPECIES];
+    struct RouteSignSpecies entries[ROUTE_SIGN_MAX_METHOD_SPECIES];
     u16 headerId = GetCurrentMapWildMonHeaderId();
     bool8 hasMethod = FALSE;
     u8 *dest;
@@ -262,19 +160,19 @@ void BufferCurrentMapRouteSignSpecies(void)
         const struct WildPokemonHeader *header = &gWildMonHeaders[headerId];
         u8 count;
 
-        count = CollectRouteSignSpeciesChances(entries, header->landMonsInfo, 0, LAND_WILD_COUNT, sRouteSignLandChances);
+        count = CollectRouteSignSpecies(entries, header->landMonsInfo, 0, LAND_WILD_COUNT);
         dest = AppendRouteSignMethod(dest, sText_RouteSignGrass, entries, count, &hasMethod);
-        count = CollectRouteSignSpeciesChances(entries, header->waterMonsInfo, 0, WATER_WILD_COUNT, sRouteSignWaterChances);
+        count = CollectRouteSignSpecies(entries, header->waterMonsInfo, 0, WATER_WILD_COUNT);
         dest = AppendRouteSignMethod(dest, sText_RouteSignSurf, entries, count, &hasMethod);
-        count = CollectRouteSignSpeciesChances(entries, header->rockSmashMonsInfo, 0, ROCK_WILD_COUNT, sRouteSignRockSmashChances);
+        count = CollectRouteSignSpecies(entries, header->rockSmashMonsInfo, 0, ROCK_WILD_COUNT);
         dest = AppendRouteSignMethod(dest, sText_RouteSignRockSmash, entries, count, &hasMethod);
-        count = CollectRouteSignSpeciesChances(entries, header->fishingMonsInfo, 0, ARRAY_COUNT(sRouteSignOldRodChances), sRouteSignOldRodChances);
+        count = CollectRouteSignSpecies(entries, header->fishingMonsInfo, 0, 2);
         dest = AppendRouteSignMethod(dest, sText_RouteSignOldRod, entries, count, &hasMethod);
-        count = CollectRouteSignSpeciesChances(entries, header->fishingMonsInfo, 2, ARRAY_COUNT(sRouteSignGoodRodChances), sRouteSignGoodRodChances);
+        count = CollectRouteSignSpecies(entries, header->fishingMonsInfo, 2, 3);
         dest = AppendRouteSignMethod(dest, sText_RouteSignGoodRod, entries, count, &hasMethod);
-        count = CollectRouteSignSpeciesChances(entries, header->fishingMonsInfo, 5, ARRAY_COUNT(sRouteSignSuperRodChances), sRouteSignSuperRodChances);
+        count = CollectRouteSignSpecies(entries, header->fishingMonsInfo, 5, 5);
         dest = AppendRouteSignMethod(dest, sText_RouteSignSuperRod, entries, count, &hasMethod);
-        count = CollectRouteSignSpeciesChances(entries, header->honeyMonsInfo, 0, HONEY_WILD_COUNT, sRouteSignHoneyChances);
+        count = CollectRouteSignSpecies(entries, header->honeyMonsInfo, 0, HONEY_WILD_COUNT);
         dest = AppendRouteSignMethod(dest, sText_RouteSignHoney, entries, count, &hasMethod);
     }
 
@@ -282,7 +180,6 @@ void BufferCurrentMapRouteSignSpecies(void)
      && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE119))
     {
         entries[0].species = SPECIES_FEEBAS;
-        entries[0].chance = 100;
         dest = AppendRouteSignMethod(dest, sText_RouteSignUnderBridge, entries, 1, &hasMethod);
     }
 
@@ -624,10 +521,14 @@ static void CreateWildMon(u16 species, u8 level)
             gender = MON_FEMALE;
 
         CreateMonWithGenderNatureLetter(&gEnemyParty[0], species, level, 32, gender, PickWildMonNature(), 0);
-        return;
+    }
+    else
+    {
+        CreateMonWithNature(&gEnemyParty[0], species, level, 32, PickWildMonNature());
     }
 
-    CreateMonWithNature(&gEnemyParty[0], species, level, 32, PickWildMonNature());
+    if (!InBattlePike() && !InBattlePyramid() && !IsVerdantLegendarySpecies(species))
+        ApplyVerdantRandomWildBattleSet(&gEnemyParty[0]);
 }
 
 enum
@@ -740,14 +641,10 @@ static u16 GenerateFishingWildMon(const struct WildPokemonInfo *wildMonInfo, u8 
 
 static bool8 SetUpMassOutbreakEncounter(u8 flags)
 {
-    u16 i;
-
     if (flags & WILD_CHECK_REPEL && !IsWildLevelAllowedByRepel(gSaveBlock1Ptr->outbreakPokemonLevel))
         return FALSE;
 
     CreateWildMon(gSaveBlock1Ptr->outbreakPokemonSpecies, gSaveBlock1Ptr->outbreakPokemonLevel);
-    for (i = 0; i < 4; i++)
-        SetMonMoveSlot(&gEnemyParty[0], gSaveBlock1Ptr->outbreakPokemonMoves[i], i);
 
     return TRUE;
 }

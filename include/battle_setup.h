@@ -17,7 +17,6 @@ extern const struct RematchTrainer gRematchTable[REMATCH_TABLE_ENTRIES];
 extern u16 gTrainerBattleOpponent_A;
 extern u16 gTrainerBattleOpponent_B;
 extern u16 gPartnerTrainerId;
-extern bool8 gIsScriptedWildEncounter;
 
 void BattleSetup_StartWildBattle(void);
 void BattleSetup_StartDoubleWildBattle(void);

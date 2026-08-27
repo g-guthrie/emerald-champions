@@ -14,14 +14,14 @@
       "nature": "NATURE_CAREFUL",
       "ability": "ABILITY_SOLID_ROCK",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 7 lc Turtwig Defensive Stealth Rock, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Turtwig uses Solid Rock as a Solid Rock seed-stall tank, with Seed Bomb, Leech Seed, Synthesis, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -38,14 +38,14 @@
       "nature": "NATURE_CAREFUL",
       "ability": "ABILITY_SOLID_ROCK",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 4 zu Grotle Defensive, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Grotle uses Solid Rock as a Solid Rock seed-stall tank, with Seed Bomb, Leech Seed, Synthesis, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -62,13 +62,14 @@
       "nature": "NATURE_BRAVE",
       "ability": "ABILITY_SOLID_ROCK",
       "suggested_item": "ITEM_LIFE_ORB",
-      "item_context": "Life Orb is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 5 vgc2012 Torterra Trick Room Attacker and compatible doubles alternatives",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Torterra uses Solid Rock as a Solid Rock Trick Room spread attacker, with Wood Hammer, Earthquake, Rock Slide, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements.",
         "Brave Speed is designed for allied Trick Room, though every attack remains usable outside it."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
@@ -86,14 +87,14 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_IRON_FIST",
       "suggested_item": "ITEM_FOCUS_SASH",
-      "item_context": "Focus Sash is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 6 lc Chimchar Lead, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Chimchar uses Iron Fist as a Iron Fist Fake Out attacker, with Fake Out, Fire Punch, Drain Punch, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -110,14 +111,14 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_IRON_FIST",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown and Smogon competitive corpus for Monferno, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Monferno uses Iron Fist as a Iron Fist Fake Out attacker, with Fake Out, Fire Punch, Drain Punch, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -134,14 +135,14 @@
       "nature": "NATURE_NAIVE",
       "ability": "ABILITY_BLAZE",
       "suggested_item": "ITEM_FOCUS_SASH",
-      "item_context": "Focus Sash is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 6 battlespotdoubles Infernape Support and compatible doubles alternatives",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Infernape uses Blaze to strengthen Overheat at low HP while Fake Out, Close Combat, and Quick Guard supply immediate mixed pressure and team protection.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -158,14 +159,14 @@
       "nature": "NATURE_BOLD",
       "ability": "ABILITY_COMPETITIVE",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 7 lc Piplup Utility, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Piplup uses Competitive as a Competitive speed-control support, with Scald, Icy Wind, Yawn, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -182,14 +183,14 @@
       "nature": "NATURE_BOLD",
       "ability": "ABILITY_COMPETITIVE",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 6 nu Prinplup Support, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Prinplup uses Competitive as a Competitive bulky speed-control attacker, with Scald, Ice Beam, Icy Wind, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -206,14 +207,14 @@
       "nature": "NATURE_MODEST",
       "ability": "ABILITY_COMPETITIVE",
       "suggested_item": "ITEM_SHUCA_BERRY",
-      "item_context": "Shuca Berry is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_SHUCA_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 4 doublesou Empoleon Bulky Special Attacker and compatible doubles alternatives",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Empoleon uses Competitive as a Competitive special attacker, with Hydro Pump, Flash Cannon, Ice Beam, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_SHUCA_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -230,14 +231,14 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_RECKLESS",
       "suggested_item": "ITEM_FOCUS_SASH",
-      "item_context": "Focus Sash is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 7 lc Starly Choice Scarf, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Starly uses Reckless as a Reckless physical pivot, with Brave Bird, Double Edge, U Turn, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -254,14 +255,14 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_INTIMIDATE",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 7 nfe Staravia Choice Scarf, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Staravia uses Intimidate as a Intimidate Tailwind pivot, with Brave Bird, U Turn, Tailwind, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -278,14 +279,14 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_INTIMIDATE",
       "suggested_item": "ITEM_LIFE_ORB",
-      "item_context": "Life Orb is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 6 battlespotdoubles Staraptor KAMIKAZE (Final Gambit Attacker) and compatible doubles alternatives",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Staraptor uses Intimidate as a Intimidate Tailwind attacker, with Brave Bird, Close Combat, Tailwind, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -302,14 +303,14 @@
       "nature": "NATURE_ADAMANT",
       "ability": "ABILITY_INTIMIDATE",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "Sitrus Berry is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown and Smogon competitive corpus for Luxray, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Luxray uses Intimidate as a Intimidate physical and Snarl control, with Wild Charge, Crunch, Snarl, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -326,14 +327,14 @@
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_NATURAL_CURE",
       "suggested_item": "ITEM_FOCUS_SASH",
-      "item_context": "Focus Sash is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 6 vgc2014 Roserade Special Attacker and compatible doubles alternatives",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Roserade uses Natural Cure as a fast sleep special attacker, with Sleep Powder, Leaf Storm, Sludge Bomb, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -350,14 +351,14 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_SHEER_FORCE",
       "suggested_item": "ITEM_FOCUS_SASH",
-      "item_context": "Focus Sash is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 9 lc Cranidos Choice Scarf, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Cranidos uses Sheer Force as a Sheer Force spread attacker, with Rock Slide, Zen Headbutt, Fire Punch, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -374,14 +375,14 @@
       "nature": "NATURE_ADAMANT",
       "ability": "ABILITY_SHEER_FORCE",
       "suggested_item": "ITEM_LIFE_ORB",
-      "item_context": "Life Orb is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown and Smogon competitive corpus for Rampardos, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Rampardos uses Sheer Force as a Sheer Force physical wallbreaker, with Rock Slide, Stomping Tantrum, Fire Punch, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -398,14 +399,14 @@
       "nature": "NATURE_SASSY",
       "ability": "ABILITY_STURDY",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 7 lc Shieldon SturdyJuice, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Shieldon uses Sturdy as a Sturdy Metal Burst and Wide Guard support, with Metal Burst, Rock Slide, Wide Guard, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -422,14 +423,14 @@
       "nature": "NATURE_SASSY",
       "ability": "ABILITY_STURDY",
       "suggested_item": "ITEM_LEFTOVERS",
-      "item_context": "Leftovers is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_LEFTOVERS is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 4 uu Bastiodon Torment, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Bastiodon uses Sturdy as a Sturdy Wide Guard tank, with Metal Burst, Rock Slide, Wide Guard, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_LEFTOVERS automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -446,14 +447,14 @@
       "nature": "NATURE_MODEST",
       "ability": "ABILITY_OVERCOAT",
       "suggested_item": "ITEM_FOCUS_SASH",
-      "item_context": "Focus Sash is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown and Smogon competitive corpus for Burmy, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Burmy uses Overcoat as a Overcoat Electroweb support, with Bug Buzz, Electroweb, Tackle, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -470,14 +471,14 @@
       "nature": "NATURE_MODEST",
       "ability": "ABILITY_OVERCOAT",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "Sitrus Berry is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown and Smogon competitive corpus for Wormadam, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Wormadam uses Overcoat as a Overcoat special coverage attacker, with Leaf Storm, Bug Buzz, Psychic, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -494,14 +495,14 @@
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_TINTED_LENS",
       "suggested_item": "ITEM_FOCUS_SASH",
-      "item_context": "Focus Sash is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 5 ru Mothim Quiver Dance, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Mothim uses Tinted Lens as a Tinted Lens Quiver Dance attacker, with Quiver Dance, Bug Buzz, Air Slash, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -518,13 +519,14 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_HUSTLE",
       "suggested_item": "ITEM_FOCUS_SASH",
-      "item_context": "Focus Sash is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown and Smogon competitive corpus for Combee, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Combee uses Hustle as a Hustle Tailwind Endeavor lead, with Bug Bite, Dual Wingbeat, Tailwind, and Endeavor forming one coherent four-slot doubles plan.",
       "dependency_notes": [
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements.",
         "Combee lacks Protect locally; Focus Sash is strongly recommended to support Tailwind or Endeavor."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
@@ -542,14 +544,14 @@
       "nature": "NATURE_CAREFUL",
       "ability": "ABILITY_INTIMIDATE",
       "suggested_item": "ITEM_LEFTOVERS",
-      "item_context": "Leftovers is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_LEFTOVERS is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown and Smogon competitive corpus for Vespiquen, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Vespiquen uses Intimidate as a Intimidate Tailwind sustain attacker, with Attack Order, Tailwind, Heal Order, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_LEFTOVERS automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -566,14 +568,14 @@
       "nature": "NATURE_CALM",
       "ability": "ABILITY_VOLT_ABSORB",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "Sitrus Berry is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 4 uu Pachirisu Support, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Pachirisu uses Volt Absorb as a Volt Absorb redirection support, with Follow Me, Nuzzle, Super Fang, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -590,13 +592,14 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_SWIFT_SWIM",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown and Smogon competitive corpus for Buizel, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Buizel uses Swift Swim as a Swift Swim priority attacker, with Waterfall, Ice Punch, Aqua Jet, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements.",
         "Swift Swim needs rain for speed doubling, but Aqua Jet keeps a priority line when weather is lost."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
@@ -614,13 +617,14 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_SWIFT_SWIM",
       "suggested_item": "ITEM_LIFE_ORB",
-      "item_context": "Life Orb is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown and Smogon competitive corpus for Floatzel, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Floatzel uses Swift Swim as a Swift Swim priority attacker, with Liquidation, Ice Punch, Aqua Jet, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements.",
         "Swift Swim needs rain for speed doubling, but Aqua Jet keeps a priority line when weather is lost."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
@@ -638,13 +642,14 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_FLOWER_GIFT",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "Sitrus Berry is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown and Smogon competitive corpus for Cherrim, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Cherrim uses Flower Gift as a Flower Gift sun partner support, with Sunny Day, Helping Hand, Seed Bomb, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements.",
         "Flower Gift requires sun, which Cherrim can establish itself with Sunny Day."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
@@ -662,14 +667,14 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_TECHNICIAN",
       "suggested_item": "ITEM_LIFE_ORB",
-      "item_context": "Life Orb is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 5 vgc2012 Ambipom Lead and compatible doubles alternatives",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Ambipom uses Technician as a Technician Fake Out attacker, with Fake Out, Double Hit, Knock Off, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -686,13 +691,14 @@
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_UNBURDEN",
       "suggested_item": "ITEM_PSYCHIC_SEED",
-      "item_context": "Psychic Seed is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_PSYCHIC_SEED is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 9 lc Drifloon Setup Sweeper, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Drifloon uses Unburden as a Unburden Tailwind burn support, with Shadow Ball, Tailwind, Will O Wisp, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
+        "The set service equips ITEM_PSYCHIC_SEED automatically, and the Pokémon Center vendor supplies free replacements.",
         "Unburden requires consumption of the suggested Seed or another item; Tailwind still controls speed without activation."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
@@ -710,13 +716,14 @@
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_UNBURDEN",
       "suggested_item": "ITEM_PSYCHIC_SEED",
-      "item_context": "Psychic Seed is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_PSYCHIC_SEED is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 7 vgc2017 Drifblim Tailwind Disruptor and compatible doubles alternatives",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Drifblim uses Unburden as a Unburden Tailwind disruptor, with Shadow Ball, Tailwind, Will O Wisp, and Disable forming one coherent four-slot doubles plan.",
       "dependency_notes": [
+        "The set service equips ITEM_PSYCHIC_SEED automatically, and the Pokémon Center vendor supplies free replacements.",
         "Unburden requires consumption of the suggested Seed or another item; Tailwind still controls speed without activation."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
@@ -734,14 +741,14 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_SCRAPPY",
       "suggested_item": "ITEM_LOPUNNITE",
-      "item_context": "Lopunnite is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_LOPUNNITE remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_LOPUNNITE manually after earning it.",
       "source_refs": [
         "Smogon gen 7 vgc2019 Lopunny Offensive and compatible doubles alternatives",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Lopunny uses Scrappy as a Scrappy Fake Out disruptor, with Fake Out, Close Combat, Encore, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "Lopunnite is advisory; Scrappy keeps the base-form set coherent before or without Mega Evolution."
+        "ITEM_LOPUNNITE is protected progression; the automatic runtime item is ITEM_LIFE_ORB."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -758,14 +765,14 @@
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_PIXILATE",
       "suggested_item": "ITEM_LIFE_ORB",
-      "item_context": "Life Orb is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown and Smogon competitive corpus for Mismagius, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Mismagius uses Pixilate as a Pixilate spread special attacker, with Hyper Voice, Shadow Ball, Taunt, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -782,14 +789,14 @@
       "nature": "NATURE_ADAMANT",
       "ability": "ABILITY_MOXIE",
       "suggested_item": "ITEM_LIFE_ORB",
-      "item_context": "Life Orb is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 5 vgc2012 Honchkrow Physical and compatible doubles alternatives",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Honchkrow uses Moxie as a Moxie priority cleaner, with Sucker Punch, Brave Bird, Superpower, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -806,14 +813,14 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_LIMBER",
       "suggested_item": "ITEM_FOCUS_SASH",
-      "item_context": "Focus Sash is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown and Smogon competitive corpus for Glameow, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Glameow uses Limber as a fast Fake Out and Fake Tears pivot, with Fake Out, Fake Tears, U Turn, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -830,14 +837,14 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_DEFIANT",
       "suggested_item": "ITEM_LIFE_ORB",
-      "item_context": "Life Orb is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 4 uu Purugly Weather Support, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Purugly uses Defiant as a Defiant Fake Out pivot, with Fake Out, Double Edge, U Turn, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -854,14 +861,14 @@
       "nature": "NATURE_SASSY",
       "ability": "ABILITY_LEVITATE",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 7 lc Chingling Defensive, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Chingling uses Levitate as a Levitate Trick Room sleep support, with Trick Room, Psychic, Hypnosis, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -878,14 +885,14 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_AFTERMATH",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 8 lc Stunky Wallbreaker, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Stunky uses Aftermath as a Aftermath priority attacker, with Crunch, Sucker Punch, Play Rough, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -902,14 +909,14 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_AFTERMATH",
       "suggested_item": "ITEM_LIFE_ORB",
-      "item_context": "Life Orb is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 4 uu Skuntank Wallbreaker, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Skuntank uses Aftermath as a Aftermath priority disruptor, with Sucker Punch, Poison Jab, Taunt, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -926,14 +933,14 @@
       "nature": "NATURE_RELAXED",
       "ability": "ABILITY_LEVITATE",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 7 lc Bronzor Stealth Rock Setter, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Bronzor uses Levitate as a Levitate Imprison Trick Room control, with Imprison, Trick Room, Psychic, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -950,14 +957,14 @@
       "nature": "NATURE_RELAXED",
       "ability": "ABILITY_LEVITATE",
       "suggested_item": "ITEM_MENTAL_HERB",
-      "item_context": "Mental Herb is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_MENTAL_HERB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 7 doublesou Bronzong Trick Room and compatible doubles alternatives",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Bronzong uses Levitate as a Levitate Trick Room support, with Trick Room, Gyro Ball, Hypnosis, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_MENTAL_HERB automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -974,14 +981,14 @@
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_FILTER",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 4 lc Mime Jr. Nasty Plot, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Mime Jr. uses Filter as a Filter Fake Out support, with Fake Out, Icy Wind, Helping Hand, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -998,14 +1005,14 @@
       "nature": "NATURE_CALM",
       "ability": "ABILITY_FRIEND_GUARD",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 5 lc Happiny Support, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Happiny uses Friend Guard as a Friend Guard partner support, with Helping Hand, Icy Wind, Soft Boiled, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -1022,13 +1029,14 @@
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_BIG_PECKS",
       "suggested_item": "ITEM_FOCUS_SASH",
-      "item_context": "Focus Sash is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown and Smogon competitive corpus for Chatot, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Chatot uses Big Pecks as a fast Boomburst Tailwind attacker, with Boomburst, Heat Wave, Tailwind, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements.",
         "Boomburst also hits most allies, so pair Chatot with Protect, a Ghost type, Soundproof, or Telepathy."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
@@ -1046,14 +1054,14 @@
       "nature": "NATURE_SASSY",
       "ability": "ABILITY_INFILTRATOR",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "Sitrus Berry is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown and Smogon competitive corpus for Spiritomb, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Spiritomb uses Infiltrator as a Infiltrator burn and speed control, with Foul Play, Will O Wisp, Icy Wind, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -1070,14 +1078,14 @@
       "nature": "NATURE_ADAMANT",
       "ability": "ABILITY_ROUGH_SKIN",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 7 lc Gible Stealth Rock, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Gible uses Rough Skin as a Rough Skin spread attacker, with Earthquake, Dragon Claw, Rock Slide, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -1094,14 +1102,14 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_ROUGH_SKIN",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 8 nfe Gabite Stealth Rock, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Gabite uses Rough Skin as a Rough Skin spread attacker, with Earthquake, Dragon Claw, Rock Slide, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -1118,14 +1126,14 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_ROUGH_SKIN",
       "suggested_item": "ITEM_LIFE_ORB",
-      "item_context": "Life Orb is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 6 battlespotdoubles Garchomp Physical Attacker and compatible doubles alternatives",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Garchomp uses Rough Skin as a Rough Skin fast spread attacker, with Dragon Claw, Earthquake, Rock Slide, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -1142,13 +1150,14 @@
       "nature": "NATURE_BRAVE",
       "ability": "ABILITY_THICK_FAT",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 8 lc Munchlax Defensive, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Munchlax uses Thick Fat as a Thick Fat Curse win condition, with Curse, Body Slam, Stomping Tantrum, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements.",
         "Brave Speed and Curse are strongest under allied Trick Room, but the set has no dead item-dependent move."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
@@ -1166,14 +1175,14 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_PRANKSTER",
       "suggested_item": "ITEM_FOCUS_SASH",
-      "item_context": "Focus Sash is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown and Smogon competitive corpus for Riolu, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Riolu uses Prankster as a Prankster Coaching support, with Coaching, Copycat, Quick Guard, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -1190,14 +1199,14 @@
       "nature": "NATURE_NAIVE",
       "ability": "ABILITY_INNER_FOCUS",
       "suggested_item": "ITEM_LUCARIONITE",
-      "item_context": "Lucarionite is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_LUCARIONITE remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_LUCARIONITE manually after earning it.",
       "source_refs": [
         "Smogon gen 6 battlespotdoubles Lucario Mixed Mega Attacker and compatible doubles alternatives",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Lucario uses Inner Focus as a Inner Focus mixed attacker, with Close Combat, Flash Cannon, Extreme Speed, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "Lucarionite is advisory; Inner Focus keeps the base-form set functional before or without Mega Evolution."
+        "ITEM_LUCARIONITE is protected progression; the automatic runtime item is ITEM_LIFE_ORB."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -1214,14 +1223,14 @@
       "nature": "NATURE_IMPISH",
       "ability": "ABILITY_SAND_STREAM",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown and Smogon competitive corpus for Hippopotas, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Hippopotas uses Sand Stream as a Sand Stream Yawn support, with High Horsepower, Yawn, Slack Off, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -1238,13 +1247,14 @@
       "nature": "NATURE_BRAVE",
       "ability": "ABILITY_SAND_STREAM",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "Sitrus Berry is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 5 vgc2012 Hippowdon Physical Tank and compatible doubles alternatives",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Hippowdon uses Sand Stream as a Sand Stream Trick Room attacker, with High Horsepower, Rock Slide, Yawn, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements.",
         "Brave Speed targets Trick Room, while Yawn creates value in either speed mode."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
@@ -1262,14 +1272,14 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_SNIPER",
       "suggested_item": "ITEM_SCOPE_LENS",
-      "item_context": "Scope Lens is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_SCOPE_LENS is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown and Smogon competitive corpus for Skorupi, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Skorupi uses Sniper as a Sniper Acupressure attacker, with Cross Poison, Night Slash, Acupressure, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "Scope Lens strengthens the Sniper plan but is advisory; Acupressure can also support a partner."
+        "The set service equips ITEM_SCOPE_LENS automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -1286,14 +1296,14 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_SNIPER",
       "suggested_item": "ITEM_SCOPE_LENS",
-      "item_context": "Scope Lens is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_SCOPE_LENS is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown and Smogon competitive corpus for Drapion, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Drapion uses Sniper as a Sniper Acupressure attacker, with Cross Poison, Night Slash, Acupressure, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "Scope Lens strengthens the Sniper plan but is advisory; Acupressure can also support a partner."
+        "The set service equips ITEM_SCOPE_LENS automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -1310,13 +1320,14 @@
       "nature": "NATURE_ADAMANT",
       "ability": "ABILITY_DRY_SKIN",
       "suggested_item": "ITEM_FOCUS_SASH",
-      "item_context": "Focus Sash is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 5 vgc2012 Toxicroak Fake Out Lead and compatible doubles alternatives",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Toxicroak uses Dry Skin as a Dry Skin Fake Out rain attacker, with Fake Out, Drain Punch, Sucker Punch, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements.",
         "Rain improves Dry Skin recovery, while Fake Out and priority work without weather support."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
@@ -1334,14 +1345,14 @@
       "nature": "NATURE_ADAMANT",
       "ability": "ABILITY_LEVITATE",
       "suggested_item": "ITEM_LIFE_ORB",
-      "item_context": "Life Orb is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 4 uu Carnivine Swords Dance, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Carnivine uses Levitate as a Levitate sleep physical attacker, with Sleep Powder, Power Whip, Knock Off, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -1358,14 +1369,14 @@
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_STORM_DRAIN",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 5 lc Finneon Rain Dance, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Finneon uses Storm Drain as a Storm Drain speed-control attacker, with Scald, Icy Wind, Tailwind, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -1382,14 +1393,14 @@
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_STORM_DRAIN",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "Sitrus Berry is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown and Smogon competitive corpus for Lumineon, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Lumineon uses Storm Drain as a Storm Drain Tailwind attacker, with Scald, Ice Beam, Tailwind, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -1406,14 +1417,14 @@
       "nature": "NATURE_CALM",
       "ability": "ABILITY_WATER_ABSORB",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 6 lc Mantyke RestTalk, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Mantyke uses Water Absorb as a Water Absorb Tailwind support, with Scald, Icy Wind, Tailwind, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -1430,14 +1441,14 @@
       "nature": "NATURE_QUIET",
       "ability": "ABILITY_SNOW_WARNING",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "Eviolite is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown and Smogon competitive corpus for Snover, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Snover uses Snow Warning as a Snow Warning Blizzard attacker, with Blizzard, Giga Drain, Ice Shard, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -1454,14 +1465,14 @@
       "nature": "NATURE_QUIET",
       "ability": "ABILITY_SNOW_WARNING",
       "suggested_item": "ITEM_ABOMASITE",
-      "item_context": "Abomasite is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_ABOMASITE remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_SITRUS_BERRY; equip ITEM_ABOMASITE manually after earning it.",
       "source_refs": [
         "Smogon gen 7 doublesou Abomasnow Trick Room Attacker and compatible doubles alternatives",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Abomasnow uses Snow Warning as a Snow Warning Trick Room attacker, with Blizzard, Giga Drain, Ice Shard, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "Abomasite is advisory; Snow Warning makes Blizzard reliable in base form."
+        "ITEM_ABOMASITE is protected progression; the automatic runtime item is ITEM_SITRUS_BERRY."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -1478,14 +1489,14 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_PRESSURE",
       "suggested_item": "ITEM_LIFE_ORB",
-      "item_context": "Life Orb is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 8 2v2doubles Weavile Offensive Life Orb and compatible doubles alternatives",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Weavile uses Pressure as a fast Fake Out physical attacker, with Fake Out, Knock Off, Icicle Crash, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -1502,14 +1513,14 @@
       "nature": "NATURE_MODEST",
       "ability": "ABILITY_STURDY",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "Sitrus Berry is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 7 vgc2017 Magnezone Choice Specs and compatible doubles alternatives",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Magnezone uses Sturdy as a Sturdy Electroweb attacker, with Thunderbolt, Flash Cannon, Electroweb, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -1526,13 +1537,14 @@
       "nature": "NATURE_ADAMANT",
       "ability": "ABILITY_CLOUD_NINE",
       "suggested_item": "ITEM_NORMAL_GEM",
-      "item_context": "Normal Gem is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_NORMAL_GEM is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 5 vgc2012 Lickilicky Cloud Nine and compatible doubles alternatives",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Lickilicky uses Cloud Nine as a Cloud Nine Explosion attacker, with Explosion, Power Whip, Stomping Tantrum, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
+        "The set service equips ITEM_NORMAL_GEM automatically, and the Pokémon Center vendor supplies free replacements.",
         "Explosion requires an ally that protects, resists via Ghost typing, or otherwise avoids friendly damage."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
@@ -1550,13 +1562,14 @@
       "nature": "NATURE_BRAVE",
       "ability": "ABILITY_SOLID_ROCK",
       "suggested_item": "ITEM_WEAKNESS_POLICY",
-      "item_context": "Weakness Policy is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_WEAKNESS_POLICY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 6 battlespotdoubles Rhyperior Bulky Attacker and compatible doubles alternatives",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Rhyperior uses Solid Rock as a Solid Rock Trick Room attacker, with Rock Slide, High Horsepower, Ice Punch, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
+        "The set service equips ITEM_WEAKNESS_POLICY automatically, and the Pokémon Center vendor supplies free replacements.",
         "Weakness Policy and allied Trick Room maximize the set but are not automatically supplied."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
@@ -1574,14 +1587,14 @@
       "nature": "NATURE_BOLD",
       "ability": "ABILITY_REGENERATOR",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "Sitrus Berry is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 5 vgc2012 Tangrowth Sun Support and compatible doubles alternatives",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Tangrowth uses Regenerator as a Regenerator sleep redirection support, with Rage Powder, Sleep Powder, Giga Drain, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -1598,13 +1611,14 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_MOTOR_DRIVE",
       "suggested_item": "ITEM_LIFE_ORB",
-      "item_context": "Life Orb is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown and Smogon competitive corpus for Electivire, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Electivire uses Motor Drive as a Motor Drive physical coverage attacker, with Wild Charge, Ice Punch, Cross Chop, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements.",
         "Motor Drive can be activated by allied Electric targeting, but the attacks remain useful without that boost."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
@@ -1622,14 +1636,14 @@
       "nature": "NATURE_MODEST",
       "ability": "ABILITY_MEGA_LAUNCHER",
       "suggested_item": "ITEM_LIFE_ORB",
-      "item_context": "Life Orb is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown and Smogon competitive corpus for Magmortar, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Magmortar uses Mega Launcher as a Mega Launcher special coverage attacker, with Heat Wave, Aura Sphere, Dark Pulse, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -1646,14 +1660,14 @@
       "nature": "NATURE_CALM",
       "ability": "ABILITY_SERENE_GRACE",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "Sitrus Berry is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 8 2v2doubles Togekiss Defensive Follow Me and compatible doubles alternatives",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Togekiss uses Serene Grace as a Serene Grace redirection and Tailwind support, with Air Slash, Follow Me, Tailwind, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -1670,14 +1684,14 @@
       "nature": "NATURE_MODEST",
       "ability": "ABILITY_SPEED_BOOST",
       "suggested_item": "ITEM_LIFE_ORB",
-      "item_context": "Life Orb is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 5 vgc2012 Yanmega Special Attacker and compatible doubles alternatives",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Yanmega uses Speed Boost as a Speed Boost Tailwind attacker, with Bug Buzz, Air Slash, Tailwind, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -1694,13 +1708,14 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_CHLOROPHYLL",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "Sitrus Berry is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown and Smogon competitive corpus for Leafeon, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Leafeon uses Chlorophyll as a Chlorophyll Helping Hand attacker, with Leaf Blade, Knock Off, Helping Hand, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements.",
         "Chlorophyll needs sun for speed doubling, while Helping Hand and Knock Off stay useful outside sun."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
@@ -1718,13 +1733,14 @@
       "nature": "NATURE_MODEST",
       "ability": "ABILITY_SLUSH_RUSH",
       "suggested_item": "ITEM_LIFE_ORB",
-      "item_context": "Life Orb is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 5 vgc2012 Glaceon Trick Room Hail and compatible doubles alternatives",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Glaceon uses Slush Rush as a Slush Rush Blizzard attacker, with Blizzard, Freeze Dry, Shadow Ball, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements.",
         "Snow activates Slush Rush and perfect Blizzard accuracy, so allied Snow Warning is strongly preferred."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
@@ -1742,13 +1758,14 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_POISON_HEAL",
       "suggested_item": "ITEM_TOXIC_ORB",
-      "item_context": "Toxic Orb is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_TOXIC_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 5 vgc2012 Gliscor Physical Tank and compatible doubles alternatives",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Gliscor uses Poison Heal as a Poison Heal Tailwind spread attacker, with Earthquake, Rock Slide, Tailwind, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
+        "The set service equips ITEM_TOXIC_ORB automatically, and the Pokémon Center vendor supplies free replacements.",
         "Toxic Orb is required to activate Poison Heal and is never equipped by the builder."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
@@ -1766,14 +1783,14 @@
       "nature": "NATURE_ADAMANT",
       "ability": "ABILITY_THICK_FAT",
       "suggested_item": "ITEM_LIFE_ORB",
-      "item_context": "Life Orb is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 6 battlespotdoubles Mamoswine Offensive and compatible doubles alternatives",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Mamoswine uses Thick Fat as a Thick Fat priority spread attacker, with Earthquake, Icicle Crash, Ice Shard, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -1790,14 +1807,14 @@
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_ADAPTABILITY",
       "suggested_item": "ITEM_LIFE_ORB",
-      "item_context": "Life Orb is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 5 vgc2012 Porygon-Z Offensive and compatible doubles alternatives",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Porygon-Z uses Adaptability as a Adaptability special attacker, with Tri Attack, Dark Pulse, Ice Beam, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -1814,14 +1831,14 @@
       "nature": "NATURE_ADAMANT",
       "ability": "ABILITY_JUSTIFIED",
       "suggested_item": "ITEM_FOCUS_SASH",
-      "item_context": "Focus Sash is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 6 battlespotdoubles Gallade Supporting Attacker and compatible doubles alternatives",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Gallade uses Justified as a Justified Wide Guard attacker, with Close Combat, Zen Headbutt, Wide Guard, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -1838,14 +1855,14 @@
       "nature": "NATURE_MODEST",
       "ability": "ABILITY_STURDY",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "Sitrus Berry is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown and Smogon competitive corpus for Probopass, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Probopass uses Sturdy as a Sturdy Wide Guard special attacker, with Power Gem, Flash Cannon, Wide Guard, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -1862,14 +1879,14 @@
       "nature": "NATURE_SASSY",
       "ability": "ABILITY_FRISK",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "Sitrus Berry is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 5 vgc2012 Dusknoir Trick Room and compatible doubles alternatives",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Dusknoir uses Frisk as a Frisk Trick Room burn support, with Trick Room, Will O Wisp, Shadow Sneak, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -1886,13 +1903,14 @@
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_SNOW_CLOAK",
       "suggested_item": "ITEM_FOCUS_SASH",
-      "item_context": "Focus Sash is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 5 vgc2012 Froslass Hail Sweeper and compatible doubles alternatives",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Froslass uses Snow Cloak as a Snow Cloak Blizzard disruptor, with Blizzard, Shadow Ball, Taunt, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements.",
         "Snow improves Blizzard accuracy and Snow Cloak, though Shadow Ball and Taunt function in neutral weather."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
@@ -1910,14 +1928,14 @@
       "nature": "NATURE_CALM",
       "ability": "ABILITY_LEVITATE",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "Sitrus Berry is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 5 vgc2012 Uxie Imprison and compatible doubles alternatives",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Uxie uses Levitate as a Levitate Imprison Trick Room control, with Imprison, Trick Room, Psychic, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -1934,14 +1952,14 @@
       "nature": "NATURE_SASSY",
       "ability": "ABILITY_LEVITATE",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "Sitrus Berry is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown and Smogon competitive corpus for Mesprit, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Mesprit uses Levitate as a Levitate Trick Room partner support, with Trick Room, Psychic, Helping Hand, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -1958,14 +1976,14 @@
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_LEVITATE",
       "suggested_item": "ITEM_FOCUS_SASH",
-      "item_context": "Focus Sash is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 5 vgc2012 Azelf Special Attacker and compatible doubles alternatives",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Azelf uses Levitate as a fast Levitate special attacker, with Psychic, Fire Blast, Helping Hand, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -1982,13 +2000,14 @@
       "nature": "NATURE_MODEST",
       "ability": "ABILITY_TELEPATHY",
       "suggested_item": "ITEM_LIFE_ORB",
-      "item_context": "Life Orb is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 8 vgc2022 Dialga Offensive and compatible doubles alternatives",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Dialga uses Telepathy as a Telepathy Trick Room special attacker, with Draco Meteor, Flash Cannon, Trick Room, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements.",
         "A slower ally benefits most from Trick Room, while Telepathy permits allied spread attacks."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
@@ -2006,14 +2025,14 @@
       "nature": "NATURE_MODEST",
       "ability": "ABILITY_TELEPATHY",
       "suggested_item": "ITEM_LIFE_ORB",
-      "item_context": "Life Orb is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 8 vgc2021 Palkia Offensive and compatible doubles alternatives",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Palkia uses Telepathy as a Telepathy special attacker, with Hydro Pump, Spacial Rend, Earth Power, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -2030,14 +2049,14 @@
       "nature": "NATURE_MODEST",
       "ability": "ABILITY_FLASH_FIRE",
       "suggested_item": "ITEM_CHARCOAL",
-      "item_context": "Charcoal is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_CHARCOAL is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 9 nationaldexdoubles Heatran Offensive and compatible doubles alternatives",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Heatran uses Flash Fire as a Flash Fire spread attacker, with Heat Wave, Earth Power, Flash Cannon, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_CHARCOAL automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -2054,13 +2073,14 @@
       "nature": "NATURE_ADAMANT",
       "ability": "ABILITY_CLEAR_BODY",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "Sitrus Berry is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 5 vgc2012 Regigigas Supporter and compatible doubles alternatives",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Regigigas uses Clear Body as a Clear Body Wide Guard attacker, with Crush Grip, High Horsepower, Icy Wind, and Wide Guard forming one coherent four-slot doubles plan.",
       "dependency_notes": [
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements.",
         "Regigigas lacks Protect in the local legal pool; Clear Body is the local non-Slow-Start option and needs no activation."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
@@ -2078,14 +2098,14 @@
       "nature": "NATURE_MODEST",
       "ability": "ABILITY_TELEPATHY",
       "suggested_item": "ITEM_LEFTOVERS",
-      "item_context": "Leftovers is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_LEFTOVERS is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown and Smogon competitive corpus for Giratina, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Giratina uses Telepathy as a Telepathy bulky special control, with Draco Meteor, Shadow Ball, Will O Wisp, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_LEFTOVERS automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -2102,14 +2122,14 @@
       "nature": "NATURE_SASSY",
       "ability": "ABILITY_LEVITATE",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "Sitrus Berry is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 9 doublesou Cresselia Trick Room and compatible doubles alternatives",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Cresselia uses Levitate as a Levitate Trick Room speed control, with Trick Room, Icy Wind, Helping Hand, and Moonlight forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -2126,13 +2146,14 @@
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_HYDRATION",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "Sitrus Berry is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 4 uu Phione Rain Dance Support, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Phione uses Hydration as a Hydration self-contained rain support, with Rain Dance, Scald, Icy Wind, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements.",
         "Rain Dance activates Hydration and powers Scald without requiring a dedicated weather partner."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
@@ -2150,13 +2171,14 @@
       "nature": "NATURE_MODEST",
       "ability": "ABILITY_HYDRATION",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "Sitrus Berry is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 6 doublesou Manaphy Tail Glow and compatible doubles alternatives",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Manaphy uses Hydration as a Hydration Tail Glow attacker, with Tail Glow, Scald, Ice Beam, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements.",
         "Hydration appreciates allied rain, but Tail Glow and the attacks work in neutral weather."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
@@ -2174,13 +2196,14 @@
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_BAD_DREAMS",
       "suggested_item": "ITEM_FOCUS_SASH",
-      "item_context": "Focus Sash is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown and Smogon competitive corpus for Darkrai, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Darkrai uses Bad Dreams as a Bad Dreams sleep attacker, with Dark Void, Dark Pulse, Icy Wind, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements.",
         "Dark Void accuracy is imperfect, but it directly activates Bad Dreams and Icy Wind provides a reliable alternate turn."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
@@ -2198,14 +2221,14 @@
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_NATURAL_CURE",
       "suggested_item": "ITEM_LIFE_ORB",
-      "item_context": "Life Orb is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 8 bdspou Shaymin SubSeed, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Shaymin uses Natural Cure as a Natural Cure Tailwind special attacker, with Seed Flare, Earth Power, Tailwind, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
-        "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
       "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks."
@@ -2222,13 +2245,14 @@
       "nature": "NATURE_ADAMANT",
       "ability": "ABILITY_MULTITYPE",
       "suggested_item": "ITEM_SILK_SCARF",
-      "item_context": "Silk Scarf is advisory only; the native builder does not grant or equip held items.",
+      "item_context": "ITEM_SILK_SCARF is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon gen 9 ubers Arceus Swords Dance Extreme Killer, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
       "doubles_rationale": "Arceus uses Multitype as a Multitype Extreme Speed setup cleaner, with Swords Dance, Extreme Speed, Shadow Claw, and Protect forming one coherent four-slot doubles plan.",
       "dependency_notes": [
+        "The set service equips ITEM_SILK_SCARF automatically, and the Pokémon Center vendor supplies free replacements.",
         "Without a Plate the suggested Silk Scarf keeps Arceus Normal type and strengthens its Extreme Speed plan."
       ],
       "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",

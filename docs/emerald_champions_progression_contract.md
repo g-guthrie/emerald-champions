@@ -23,8 +23,8 @@ different system later in the story.
   never grant or equip their advisory held item.
 - Native ability selection exposes that species' legal abilities without an
   Ability Capsule or Ability Patch tax.
-- Every Pokémon Center battle vendor sells the ten foundational competitive
-  held items from the beginning for $1,000 each.
+- Every Pokémon Center battle vendor supplies the complete non-progression
+  competitive held-item pool for free, in any requested quantity.
 
 The intended challenge is solving battles with a broad tool kit, not repeating
 wild battles or waiting for basic competitive equipment.
@@ -33,23 +33,24 @@ wild battles or waiting for basic competitive equipment.
 
 1. **Ordinary Poké Marts:** their original medicine, Ball, status-healing, and
    Repel progression, plus Rare Candy. No global battle-item suffix.
-2. **Pokémon Center battle vendor:** the ten day-zero foundational items, then
-   unlimited copies of non-core battle items after their first discovery.
-3. **Exploration and story:** first discoveries, Mega Stones, rare Pokémon,
-   Bottle Caps, valuable consumables, and postgame invitations.
+2. **Pokémon Center battle vendor:** every ordinary competitive held item and
+   Berry is free and unlimited. It is loadout infrastructure, not an economy.
+3. **Exploration and story:** Mega Stones, Primal Orbs, form items, rare
+   Pokémon, Bottle Caps, valuable non-loadout consumables, and invitations.
 4. **Specialty shops:** their existing local identity, such as type boosters,
    weather rocks, evolution items, incense, and gems.
 
-Finding a non-core held item is valuable because it permanently expands the
-battle vendor. Mega Stones remain singular exploration rewards and never enter
-the general unlimited stock.
+Mega Stones, Primal Orbs, Plates, Drives, Memories, Ogerpon masks, Rusted
+weapons, and comparable form/progression items remain singular progression
+rewards and never enter the free stock or automated loadouts.
 
 ## Reward rules
 
 - A fixed boss reward must be its item's first guaranteed source, unless the
   script explicitly provides a different reward when the player already owns
   or has unlocked it.
-- The ten day-zero core items are never campaign prizes.
+- Ordinary held-item rewards are no longer progression. Existing rewards need
+  a later incentive redesign; they do not delay this loadout-system change.
 - A one-time gift, bundle, or defeated-trainer reward advances its flag or
   state only after the complete reward was delivered. A full Bag must leave a
   truthful retry path.
@@ -58,8 +59,8 @@ the general unlimited stock.
 - A late, gated item ball cannot contain one ordinary $1,000 Rare Candy merely
   because its former TM was removed. Candy remains appropriate only as early
   convenience or as part of a meaningful quantity.
-- Duplicate held-item sources are acceptable only as documented catch-up
-  routes. They do not count as a boss prize or high-gate exploration reward.
+- Free competitive held items never count as a boss prize or high-gate
+  exploration reward.
 - Bottle Caps remain meaningful because they feed the bounded IV service.
   Ability-changing items do not remain as rewards because ability selection is
   already free and native.
@@ -70,13 +71,16 @@ the general unlimited stock.
   immediately before entering the party or PC: moves, PP, nature, and ability.
   IVs, EVs, level, personality, shiny status, gender, Ball, held item,
   friendship, and nickname remain individual.
-- Ordinary captures always use Set 1. Alternate sets are an explicit player
-  choice at the Pokémon Center and are never silently applied on evolution.
+- Every ordinary wild Pokémon uniformly rolls one of its finalized one-to-three
+  tutor sets before battle and fights with that complete moves/nature/ability/
+  item loadout. The caught Pokémon retains the same roll; no capture-hostile
+  move is filtered. Evolutions never silently select a different set.
 - Scripted, static, roaming, Frontier, Legendary, and Mythical captures retain
   their authored data. Existing owned Pokémon and later evolutions are never
   silently overwritten.
-- Every ordinary encounter source shown in the Pokédex uses the exact base
-  runtime odds after duplicate slots are aggregated.
+- Route signs list every ordinary encounter species grouped by encounter
+  method. They intentionally omit percentages because the independent method
+  pools do not form one meaningful 100-percent total.
 - A unique or required species is never confined to one 4% or 5% source.
 - Ordinary-wild legendary species use a catch rate of at least 45. Catch-rate-3
   battles are reserved for deliberate static encounters.

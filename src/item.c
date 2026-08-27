@@ -12,6 +12,7 @@
 #include "item_use.h"
 #include "pokemon.h"
 #include "pokemon_storage_system.h"
+#include "verdant_battle_sets.h"
 #include "battle_pyramid.h"
 #include "battle_pyramid_bag.h"
 #include "constants/items.h"
@@ -104,17 +105,6 @@ static u16 GetBattleItemUnlockFlag(u16 index)
     if (index == 54)
         return FLAG_VERDANT_BATTLE_ITEM_UTILITY_UMBRELLA;
     return FLAG_UNUSED_0x900 + index - 50;
-}
-
-static u8 GetBadgeCount(void)
-{
-    u8 i;
-    u8 count = 0;
-
-    for (i = 0; i < NUM_BADGES; i++)
-        if (FlagGet(FLAG_BADGE01_GET + i))
-            count++;
-    return count;
 }
 
 static void UnlockBattleItem(u16 itemId)
@@ -340,44 +330,11 @@ bool8 TryAddEmeraldChampionsItemBallMigration(void)
 
 u16 BuildUnlockedBattleItemList(u16 *items, u16 capacity)
 {
-    u16 i;
+    u16 item;
     u16 count = 0;
-    u8 partyIndex;
-    u8 boxId;
-    u8 boxPosition;
-    u8 badgeCount = GetBadgeCount();
 
-    for (partyIndex = 0; partyIndex < PARTY_SIZE; partyIndex++)
-    {
-        if (GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPECIES) != SPECIES_NONE)
-            UnlockBattleItem(GetMonData(&gPlayerParty[partyIndex], MON_DATA_HELD_ITEM));
-    }
-    for (partyIndex = 0; partyIndex < DAYCARE_MON_COUNT; partyIndex++)
-    {
-        if (GetBoxMonData(&gSaveBlock1Ptr->daycare.mons[partyIndex].mon, MON_DATA_SPECIES) != SPECIES_NONE)
-            UnlockBattleItem(GetBoxMonData(&gSaveBlock1Ptr->daycare.mons[partyIndex].mon, MON_DATA_HELD_ITEM));
-    }
-    for (boxId = 0; boxId < TOTAL_BOXES_COUNT; boxId++)
-    {
-        for (boxPosition = 0; boxPosition < IN_BOX_COUNT; boxPosition++)
-        {
-            if (GetBoxMonDataAt(boxId, boxPosition, MON_DATA_SPECIES) != SPECIES_NONE)
-                UnlockBattleItem(GetBoxMonDataAt(boxId, boxPosition, MON_DATA_HELD_ITEM));
-        }
-    }
-
-    for (i = 0; i < ARRAY_COUNT(sBattleItemUnlocks); i++)
-    {
-        if (CheckBagHasItem(sBattleItemUnlocks[i].itemId, 1)
-         || CheckPCHasItem(sBattleItemUnlocks[i].itemId, 1))
-            FlagSet(GetBattleItemUnlockFlag(i));
-
-        if ((FlagGet(GetBattleItemUnlockFlag(i))
-          || (sBattleItemUnlocks[i].minimumBadges != DISCOVERY_ONLY
-           && badgeCount >= sBattleItemUnlocks[i].minimumBadges))
-         && count + 1 < capacity)
-            items[count++] = sBattleItemUnlocks[i].itemId;
-    }
+    for (item = 0; gVerdantFreeBattleItems[item] != ITEM_NONE && count + 1 < capacity; item++)
+        items[count++] = gVerdantFreeBattleItems[item];
     items[count] = ITEM_NONE;
     return count;
 }

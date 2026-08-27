@@ -4,11 +4,11 @@
     {
       "ability": "ABILITY_TRIAGE",
       "dependency_notes": [
-        "Light Clay extends the screens but is not required for Heal Pulse or Giga Drain to function.",
-        "ITEM_LIGHT_CLAY is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_LIGHT_CLAY automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Light Clay extends the screens but is not required for Heal Pulse or Giga Drain to function."
       ],
       "doubles_rationale": "Triage turns Heal Pulse into immediate partner rescue while dual screens improve both allies and Giga Drain prevents total passivity.",
-      "item_context": "ITEM_LIGHT_CLAY is the recommended held item for the priority-healing dual-screen support role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_LIGHT_CLAY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_HEAL_PULSE",
         "MOVE_REFLECT",
@@ -29,11 +29,11 @@
     {
       "ability": "ABILITY_TRIAGE",
       "dependency_notes": [
-        "Eviolite materially improves Bayleef durability but all four moves remain usable without it.",
-        "ITEM_EVIOLITE is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Eviolite materially improves Bayleef durability but all four moves remain usable without it."
       ],
       "doubles_rationale": "Priority Heal Pulse and Reflect let Bayleef stabilize a partner, while Giga Drain and Protect keep it active through long doubles turns.",
-      "item_context": "ITEM_EVIOLITE is the recommended held item for the bulky priority healer and physical damage buffer role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_HEAL_PULSE",
         "MOVE_REFLECT",
@@ -54,11 +54,10 @@
     {
       "ability": "ABILITY_TRIAGE",
       "dependency_notes": [
-        "Sitrus Berry is advisory bulk insurance; Triage and every selected move work itemlessly.",
-        "ITEM_SITRUS_BERRY is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Meganium uses its custom Triage to heal partners before attacks, then supplies Light Screen, recovery damage, and safe Protect positioning.",
-      "item_context": "ITEM_SITRUS_BERRY is the recommended held item for the priority sustain and special-screen anchor role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_HEAL_PULSE",
         "MOVE_LIGHT_SCREEN",
@@ -79,11 +78,10 @@
     {
       "ability": "ABILITY_FLASH_FIRE",
       "dependency_notes": [
-        "Focus Sash is advisory and does not guarantee full-power Eruption after chip; speed control from a partner improves the role.",
-        "ITEM_FOCUS_SASH is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Eruption punishes from full HP, Heat Wave remains useful after chip, Extrasensory covers common resistors, and Protect preserves HP and positioning.",
-      "item_context": "ITEM_FOCUS_SASH is the recommended held item for the fast eruption spread attacker role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_ERUPTION",
         "MOVE_HEAT_WAVE",
@@ -104,11 +102,10 @@
     {
       "ability": "ABILITY_FLASH_FIRE",
       "dependency_notes": [
-        "Eviolite is advisory bulk support; Quilava appreciates but does not require external speed control.",
-        "ITEM_EVIOLITE is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Eruption and Heat Wave provide high-HP burst and reliable spread fallback, with Extrasensory coverage and Protect to preserve Eruption power.",
-      "item_context": "ITEM_EVIOLITE is the recommended held item for the eruption spread attacker with flexible fire pressure role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_ERUPTION",
         "MOVE_HEAT_WAVE",
@@ -129,11 +126,10 @@
     {
       "ability": "ABILITY_BLAZE",
       "dependency_notes": [
-        "Charcoal is advisory; Tailwind or other speed control improves Eruption but is not required for the lower-HP Heat Wave mode.",
-        "ITEM_CHARCOAL is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_CHARCOAL automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Eruption offers an explosive full-HP opener, Heat Wave remains dependable after damage, Focus Blast hits Rock targets, and Protect preserves board position.",
-      "item_context": "ITEM_CHARCOAL is the recommended held item for the fast spread fire attacker role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_CHARCOAL is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_ERUPTION",
         "MOVE_HEAT_WAVE",
@@ -154,11 +150,10 @@
     {
       "ability": "ABILITY_SHEER_FORCE",
       "dependency_notes": [
-        "Eviolite is advisory; redirection or Fake Out support makes Dragon Dance safer but is not mandatory.",
-        "ITEM_EVIOLITE is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Dragon Dance turns Totodile into a real early-game closer; Sheer Force strengthens Waterfall and Ice Punch while Protect creates setup and partner-support windows.",
-      "item_context": "ITEM_EVIOLITE is the recommended held item for the young physical setup attacker role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_DRAGON_DANCE",
         "MOVE_WATERFALL",
@@ -179,11 +174,11 @@
     {
       "ability": "ABILITY_SHEER_FORCE",
       "dependency_notes": [
-        "Eviolite and partner disruption improve setup reliability but the two attacks remain immediately usable.",
-        "ITEM_EVIOLITE is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Eviolite and partner disruption improve setup reliability but the two attacks remain immediately usable."
       ],
       "doubles_rationale": "Eviolite-supported bulk makes Dragon Dance plausible, Sheer Force improves both attacks, and Protect lets Croconaw wait out pressure or partner speed control.",
-      "item_context": "ITEM_EVIOLITE is the recommended held item for the bulky dragon dance attacker role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_DRAGON_DANCE",
         "MOVE_WATERFALL",
@@ -204,11 +199,10 @@
     {
       "ability": "ABILITY_SHEER_FORCE",
       "dependency_notes": [
-        "Life Orb is advisory and synergizes with Sheer Force; setup is safer beside redirection, Fake Out, or screens.",
-        "ITEM_LIFE_ORB is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Dragon Dance fixes Feraligatr speed, Sheer Force powers both coverage attacks, and Protect gives it the positioning tool expected of a doubles sweeper.",
-      "item_context": "ITEM_LIFE_ORB is the recommended held item for the sheer force dragon dance sweeper role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_DRAGON_DANCE",
         "MOVE_LIQUIDATION",
@@ -229,11 +223,10 @@
     {
       "ability": "ABILITY_FUR_COAT",
       "dependency_notes": [
-        "Sitrus Berry is advisory sustain; Double-Edge recoil still requires judgment.",
-        "ITEM_SITRUS_BERRY is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Fur Coat gives Furret a genuine switch-in niche; Helping Hand amplifies allies, U-turn preserves tempo, Double-Edge prevents passivity, and Protect controls targeting.",
-      "item_context": "ITEM_SITRUS_BERRY is the recommended held item for the fur coat pivot and partner enabler role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_DOUBLE_EDGE",
         "MOVE_HELPING_HAND",
@@ -254,11 +247,10 @@
     {
       "ability": "ABILITY_TINTED_LENS",
       "dependency_notes": [
-        "Life Orb is advisory; Hurricane remains accuracy-sensitive outside rain.",
-        "ITEM_LIFE_ORB is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Tinted Lens makes Noctowl difficult to wall, Hyper Voice supplies reliable spread pressure, Hurricane offers stronger Flying STAB, and Tailwind plus Protect add doubles utility.",
-      "item_context": "ITEM_LIFE_ORB is the recommended held item for the tinted lens tailwind spread attacker role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_HYPER_VOICE",
         "MOVE_HURRICANE",
@@ -279,11 +271,11 @@
     {
       "ability": "ABILITY_EARLY_BIRD",
       "dependency_notes": [
-        "Light Clay extends Light Screen only; Focus Sash is an alternative against physical burst.",
-        "ITEM_LIGHT_CLAY is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_LIGHT_CLAY automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Light Clay extends Light Screen only; Focus Sash is an alternative against physical burst."
       ],
       "doubles_rationale": "Ledian uses its locally improved speed and special bulk to establish Tailwind or Light Screen, punish passive moves with Encore, and protect itself while allies capitalize.",
-      "item_context": "ITEM_LIGHT_CLAY is the recommended held item for the fast screen and tempo support role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_LIGHT_CLAY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_TAILWIND",
         "MOVE_ENCORE",
@@ -304,11 +296,10 @@
     {
       "ability": "ABILITY_MERCILESS",
       "dependency_notes": [
-        "Focus Sash is advisory but strongly recommended because Spinarak has very low bulk; Toxic is matchup-dependent.",
-        "ITEM_FOCUS_SASH is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "String Shot supplies immediate spread speed control, Toxic activates Merciless pressure, Sucker Punch prevents total passivity, and Protect preserves the Sash or stalls poison.",
-      "item_context": "ITEM_FOCUS_SASH is the recommended held item for the focus sash disruption and poison pressure role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_TOXIC",
         "MOVE_STRING_SHOT",
@@ -329,11 +320,10 @@
     {
       "ability": "ABILITY_INSOMNIA",
       "dependency_notes": [
-        "Sitrus Berry is advisory; Sticky Web is more valuable in longer trainer battles than short two-Pokemon fights.",
-        "ITEM_SITRUS_BERRY is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Rage Powder protects a partner, Sticky Web taxes incoming foes, Poison Jab gives meaningful damage, and Protect lets Ariados alternate redirection turns safely.",
-      "item_context": "ITEM_SITRUS_BERRY is the recommended held item for the redirection and speed-control support role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_RAGE_POWDER",
         "MOVE_STICKY_WEB",
@@ -354,11 +344,10 @@
     {
       "ability": "ABILITY_INNER_FOCUS",
       "dependency_notes": [
-        "Safety Goggles is advisory protection from powder and weather; the support-dense set intentionally forgoes Protect.",
-        "ITEM_SAFETY_GOGGLES is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_SAFETY_GOGGLES automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Inner Focus guarantees reliable action through Fake Out, Tailwind controls speed, Taunt blocks setup, Super Fang chunks bulky targets, and Brave Bird closes weakened foes.",
-      "item_context": "ITEM_SAFETY_GOGGLES is the recommended held item for the elite fast tailwind and anti-setup utility role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_SAFETY_GOGGLES is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_TAILWIND",
         "MOVE_TAUNT",
@@ -379,11 +368,10 @@
     {
       "ability": "ABILITY_VOLT_ABSORB",
       "dependency_notes": [
-        "Eviolite is advisory; Discharge partners can deliberately trigger Volt Absorb if desired.",
-        "ITEM_EVIOLITE is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Volt Absorb creates safe switch opportunities, Icy Wind controls both foes, dual STAB applies pressure, and Protect supports positioning.",
-      "item_context": "ITEM_EVIOLITE is the recommended held item for the bulky speed-control pivot role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_SCALD",
         "MOVE_THUNDERBOLT",
@@ -404,11 +392,10 @@
     {
       "ability": "ABILITY_VOLT_ABSORB",
       "dependency_notes": [
-        "Sitrus Berry is advisory; Water Absorb is a valid alternate on Surf-heavy teams but is not the broad default.",
-        "ITEM_SITRUS_BERRY is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Volt Absorb gives Lanturn a valuable electric immunity, Icy Wind supplies speed control, and accurate dual STAB plus Protect functions in any weather.",
-      "item_context": "ITEM_SITRUS_BERRY is the recommended held item for the bulky icy wind pivot and electric immunity role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_SCALD",
         "MOVE_THUNDERBOLT",
@@ -429,11 +416,10 @@
     {
       "ability": "ABILITY_FRIEND_GUARD",
       "dependency_notes": [
-        "Eviolite is advisory but important to Cleffa durability; Taunt can shut down the fully supportive moveset.",
-        "ITEM_EVIOLITE is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Friend Guard reduces partner damage while Heal Pulse restores an ally, Helping Hand accelerates KOs, Icy Wind controls both foes speed, and Protect preserves Cleffa.",
-      "item_context": "ITEM_EVIOLITE is the recommended held item for the friend guard sustain support role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_HEAL_PULSE",
         "MOVE_HELPING_HAND",
@@ -454,11 +440,10 @@
     {
       "ability": "ABILITY_FRIEND_GUARD",
       "dependency_notes": [
-        "Eviolite is advisory but strongly improves survival; the set is vulnerable to Taunt.",
-        "ITEM_EVIOLITE is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Friend Guard passively protects the ally while Helping Hand, Heal Pulse, and Thunder Wave cover damage, sustain, and speed; Protect keeps that aura active longer.",
-      "item_context": "ITEM_EVIOLITE is the recommended held item for the friend guard partner sustain support role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_HELPING_HAND",
         "MOVE_HEAL_PULSE",
@@ -479,11 +464,10 @@
     {
       "ability": "ABILITY_SUPER_LUCK",
       "dependency_notes": [
-        "Eviolite is advisory and materially improves redirection durability; Super Luck has no required external trigger.",
-        "ITEM_EVIOLITE is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Follow Me buys safe turns for partners, Encore punishes Protect or setup, Thunder Wave changes speed order, and Protect keeps Togepi from being freely removed.",
-      "item_context": "ITEM_EVIOLITE is the recommended held item for the redirection and disruption support role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_FOLLOW_ME",
         "MOVE_ENCORE",
@@ -504,11 +488,10 @@
     {
       "ability": "ABILITY_SERENE_GRACE",
       "dependency_notes": [
-        "Eviolite is advisory but central to maximum bulk; the support-dense set intentionally omits Protect.",
-        "ITEM_EVIOLITE is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Follow Me redirects pressure, Thunder Wave supplies speed control, Roost sustains the role, and Dazzling Gleam prevents Taunt from making Togetic inert.",
-      "item_context": "ITEM_EVIOLITE is the recommended held item for the bulky redirection and speed support role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_FOLLOW_ME",
         "MOVE_THUNDER_WAVE",
@@ -529,11 +512,10 @@
     {
       "ability": "ABILITY_MAGIC_BOUNCE",
       "dependency_notes": [
-        "Focus Sash is advisory because Natu remains frail even with good positioning.",
-        "ITEM_FOCUS_SASH is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Magic Bounce deters status and hazards, Tailwind supports the team, Heat Wave pressures both foes, Psychic supplies STAB, and Protect preserves Natu.",
-      "item_context": "ITEM_FOCUS_SASH is the recommended held item for the magic bounce tailwind attacker role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_TAILWIND",
         "MOVE_PSYCHIC",
@@ -554,11 +536,10 @@
     {
       "ability": "ABILITY_MAGIC_BOUNCE",
       "dependency_notes": [
-        "Sitrus Berry is advisory sustain; Heat Wave accuracy remains imperfect.",
-        "ITEM_SITRUS_BERRY is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Magic Bounce blocks disruptive status, Tailwind changes speed, Heat Wave supplies spread coverage, Psychic offers accurate STAB, and Protect manages focus fire.",
-      "item_context": "ITEM_SITRUS_BERRY is the recommended held item for the magic bounce tailwind utility attacker role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_TAILWIND",
         "MOVE_PSYCHIC",
@@ -579,11 +560,10 @@
     {
       "ability": "ABILITY_STATIC",
       "dependency_notes": [
-        "Eviolite is advisory; without it Mareep should rely more heavily on positioning.",
-        "ITEM_EVIOLITE is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Electroweb slows both foes, Light Screen buffers the team, Thunderbolt prevents passivity, Static punishes contact, and Protect extends Mareep board presence.",
-      "item_context": "ITEM_EVIOLITE is the recommended held item for the eviolite screen and speed-control support role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_ELECTROWEB",
         "MOVE_LIGHT_SCREEN",
@@ -604,11 +584,10 @@
     {
       "ability": "ABILITY_STATIC",
       "dependency_notes": [
-        "Eviolite is advisory but makes the middle evolution substantially sturdier.",
-        "ITEM_EVIOLITE is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Electroweb supplies spread speed control, Thunderbolt provides reliable damage, Volt Switch repositions, and Protect keeps Flaaffy available.",
-      "item_context": "ITEM_EVIOLITE is the recommended held item for the bulky electroweb pivot role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_ELECTROWEB",
         "MOVE_THUNDERBOLT",
@@ -629,11 +608,10 @@
     {
       "ability": "ABILITY_STATIC",
       "dependency_notes": [
-        "Ampharosite is advisory and the base-form set remains coherent without Mega Evolution.",
-        "ITEM_AMPHAROSITE is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "ITEM_AMPHAROSITE is protected progression; the automatic runtime item is ITEM_SITRUS_BERRY."
       ],
       "doubles_rationale": "Ampharos combines accurate dual coverage with Electroweb speed control and Protect; low speed also lets it function naturally under Trick Room.",
-      "item_context": "ITEM_AMPHAROSITE is the recommended held item for the slow bulky special attacker and speed controller role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_AMPHAROSITE remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_SITRUS_BERRY; equip ITEM_AMPHAROSITE manually after earning it.",
       "moves": [
         "MOVE_THUNDERBOLT",
         "MOVE_DRAGON_PULSE",
@@ -654,11 +632,10 @@
     {
       "ability": "ABILITY_CHLOROPHYLL",
       "dependency_notes": [
-        "Focus Sash is advisory; Sleep Powder remains accuracy-dependent and sun should not be set into an opposing Fire attacker casually.",
-        "ITEM_FOCUS_SASH is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Bellossom sets its own sun to activate Chlorophyll, then uses fast Sleep Powder, Giga Drain, and Protect without requiring a dedicated weather partner.",
-      "item_context": "ITEM_FOCUS_SASH is the recommended held item for the self-contained sun sleep support role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_SUNNY_DAY",
         "MOVE_SLEEP_POWDER",
@@ -679,11 +656,10 @@
     {
       "ability": "ABILITY_HUGE_POWER",
       "dependency_notes": [
-        "Eviolite is advisory; Marill still needs care around burns and Intimidate.",
-        "ITEM_EVIOLITE is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Huge Power makes Marill threatening despite its stage, Aqua Jet supplies priority, dual STAB covers common targets, and Protect handles opposing focus fire.",
-      "item_context": "ITEM_EVIOLITE is the recommended held item for the huge power priority attacker role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_WATERFALL",
         "MOVE_PLAY_ROUGH",
@@ -704,11 +680,10 @@
     {
       "ability": "ABILITY_ROCK_HEAD",
       "dependency_notes": [
-        "Sitrus Berry is advisory; Sucker Punch remains prediction-dependent.",
-        "ITEM_SITRUS_BERRY is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Rock Head erases Wood Hammer recoil, Rock Slide supplies spread pressure, Sucker Punch patches low speed, and Protect fits either normal or Trick Room play.",
-      "item_context": "ITEM_SITRUS_BERRY is the recommended held item for the rock head bruiser with priority role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_ROCK_SLIDE",
         "MOVE_WOOD_HAMMER",
@@ -729,11 +704,10 @@
     {
       "ability": "ABILITY_CHLOROPHYLL",
       "dependency_notes": [
-        "Focus Sash is advisory; Sleep Powder is inaccurate and Chlorophyll requires sun to activate.",
-        "ITEM_FOCUS_SASH is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Sleep Powder disrupts a foe, Rage Powder protects a partner, Strength Sap extends Hoppip life, and Protect preserves it; Chlorophyll adds a strong optional sun mode.",
-      "item_context": "ITEM_FOCUS_SASH is the recommended held item for the fast sleep and redirection support role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_SLEEP_POWDER",
         "MOVE_RAGE_POWDER",
@@ -754,11 +728,10 @@
     {
       "ability": "ABILITY_CHLOROPHYLL",
       "dependency_notes": [
-        "Eviolite is advisory; Sleep Powder accuracy and optional sun support remain the main dependencies.",
-        "ITEM_EVIOLITE is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Skiploom combines sleep disruption, redirection, attack reduction through Strength Sap, and Protect; Chlorophyll lets the same set become fast in sun.",
-      "item_context": "ITEM_EVIOLITE is the recommended held item for the bulky sleep and redirection support role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_SLEEP_POWDER",
         "MOVE_RAGE_POWDER",
@@ -779,11 +752,10 @@
     {
       "ability": "ABILITY_CHLOROPHYLL",
       "dependency_notes": [
-        "Focus Sash is advisory; Sleep Powder and the speed bonus are not guaranteed outside favorable weather.",
-        "ITEM_FOCUS_SASH is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Jumpluff can redirect attacks, disable a foe with sleep, punish Protect or setup with Encore, and protect itself; sun turns it into elite-speed support.",
-      "item_context": "ITEM_FOCUS_SASH is the recommended held item for the chlorophyll redirection and disruption role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_SLEEP_POWDER",
         "MOVE_RAGE_POWDER",
@@ -804,11 +776,10 @@
     {
       "ability": "ABILITY_CHLOROPHYLL",
       "dependency_notes": [
-        "Focus Sash is advisory but strongly recommended; Sunkern remains extremely frail and Leaf Storm drops Sp. Atk.",
-        "ITEM_FOCUS_SASH is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Sunny Day activates Chlorophyll, Leaf Storm provides real burst, Earth Power covers Fire and Steel, and Protect preserves Sunkern for a second action.",
-      "item_context": "ITEM_FOCUS_SASH is the recommended held item for the self-set sun special attacker role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_SUNNY_DAY",
         "MOVE_LEAF_STORM",
@@ -829,11 +800,10 @@
     {
       "ability": "ABILITY_DROUGHT",
       "dependency_notes": [
-        "Life Orb is advisory; Drought also strengthens opposing Fire attacks and Overheat forces damage-stat management.",
-        "ITEM_LIFE_ORB is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Drought supplies immediate team weather, Overheat gains sun power, Giga Drain sustains, Earth Power covers Fire and Steel, and Protect controls positioning.",
-      "item_context": "ITEM_LIFE_ORB is the recommended held item for the drought special breaker role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_GIGA_DRAIN",
         "MOVE_EARTH_POWER",
@@ -854,11 +824,10 @@
     {
       "ability": "ABILITY_UNAWARE",
       "dependency_notes": [
-        "Eviolite is advisory; Grass attacks remain a severe weakness.",
-        "ITEM_EVIOLITE is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Unaware lets Wooper ignore setup, Scald threatens burns, Yawn forces movement, Recover sustains, and Protect advances Yawn turns safely.",
-      "item_context": "ITEM_EVIOLITE is the recommended held item for the unaware yawn control wall role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_SCALD",
         "MOVE_YAWN",
@@ -879,11 +848,10 @@
     {
       "ability": "ABILITY_WATER_ABSORB",
       "dependency_notes": [
-        "Sitrus Berry is advisory; Water Absorb is strongest beside Surf or into Water-heavy matchups.",
-        "ITEM_SITRUS_BERRY is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Water Absorb creates switch and Surf-partner value, High Horsepower avoids ally damage, Waterfall supplies STAB, Yawn forces movement, and Protect advances the clock.",
-      "item_context": "ITEM_SITRUS_BERRY is the recommended held item for the water-immune physical control tank role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_HIGH_HORSEPOWER",
         "MOVE_WATERFALL",
@@ -904,11 +872,10 @@
     {
       "ability": "ABILITY_MAGIC_BOUNCE",
       "dependency_notes": [
-        "Life Orb is advisory; Espeon is frail and values redirection or speed advantage.",
-        "ITEM_LIFE_ORB is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Magic Bounce deters disruption, Psychic and Dazzling Gleam supply single-target and spread pressure, Helping Hand amplifies an ally, and Protect preserves tempo.",
-      "item_context": "ITEM_LIFE_ORB is the recommended held item for the magic bounce special support attacker role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_PSYCHIC",
         "MOVE_DAZZLING_GLEAM",
@@ -929,11 +896,10 @@
     {
       "ability": "ABILITY_INNER_FOCUS",
       "dependency_notes": [
-        "Safety Goggles is advisory; Yawn is less effective against teams immune to sleep or unwilling to switch.",
-        "ITEM_SAFETY_GOGGLES is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_SAFETY_GOGGLES automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Inner Focus ensures action through Fake Out, Foul Play punishes physical attackers, Snarl reduces spread special damage, Yawn forces switches, and Protect advances Yawn turns.",
-      "item_context": "ITEM_SAFETY_GOGGLES is the recommended held item for the bulky disruption and damage-control support role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_SAFETY_GOGGLES is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_FOUL_PLAY",
         "MOVE_SNARL",
@@ -954,11 +920,10 @@
     {
       "ability": "ABILITY_REGENERATOR",
       "dependency_notes": [
-        "Mental Herb is advisory anti-Taunt insurance; Trick Room can disadvantage naturally fast partners.",
-        "ITEM_MENTAL_HERB is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_MENTAL_HERB automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Slowking reliably establishes Trick Room, threatens burns and Psychic damage, protects through partner turns, and uses Regenerator to reset after switching.",
-      "item_context": "ITEM_MENTAL_HERB is the recommended held item for the regenerator trick room setter role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_MENTAL_HERB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_TRICK_ROOM",
         "MOVE_SCALD",
@@ -979,11 +944,10 @@
     {
       "ability": "ABILITY_LEVITATE",
       "dependency_notes": [
-        "Choice Specs is advisory; Hidden Power's type and power follow the caught Unown's existing IVs because the builder does not alter IVs.",
-        "ITEM_CHOICE_SPECS is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_CHOICE_SPECS automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Unown has an inherently tiny local learnset; Hidden Power is still its strongest immediate attack at any IV spread, while Stored Power is the only secondary legal option.",
-      "item_context": "ITEM_CHOICE_SPECS is the recommended held item for the minimal special attacker role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_CHOICE_SPECS is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_HIDDEN_POWER",
         "MOVE_STORED_POWER"
@@ -1002,11 +966,10 @@
     {
       "ability": "ABILITY_SHADOW_TAG",
       "dependency_notes": [
-        "Sitrus Berry is advisory; Counter and Mirror Coat require correct damage-axis reads and spread moves reduce their reliability.",
-        "ITEM_SITRUS_BERRY is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Shadow Tag prevents easy escape, Counter and Mirror Coat punish either damage axis, Encore locks passive choices, and Charm reduces physical pressure.",
-      "item_context": "ITEM_SITRUS_BERRY is the recommended held item for the shadow tag counter-control support role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_MIRROR_COAT",
         "MOVE_COUNTER",
@@ -1027,11 +990,10 @@
     {
       "ability": "ABILITY_STRONG_JAW",
       "dependency_notes": [
-        "Life Orb is advisory; Intimidate and burns reduce the physical mode.",
-        "ITEM_LIFE_ORB is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Strong Jaw boosts both attacks, Psychic Fangs removes screens, Crunch offers coverage, Thunder Wave controls speed, and Protect handles focus fire.",
-      "item_context": "ITEM_LIFE_ORB is the recommended held item for the strong jaw physical utility attacker role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_PSYCHIC_FANGS",
         "MOVE_CRUNCH",
@@ -1052,11 +1014,10 @@
     {
       "ability": "ABILITY_OVERCOAT",
       "dependency_notes": [
-        "Sitrus Berry is advisory; Volt Switch damage is secondary to positioning.",
-        "ITEM_SITRUS_BERRY is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Overcoat blocks powder, Gyro Ball exploits low speed, Rock Slide supplies spread coverage, Volt Switch repositions, and Protect prevents free focus fire.",
-      "item_context": "ITEM_SITRUS_BERRY is the recommended held item for the slow defensive pivot role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_GYRO_BALL",
         "MOVE_ROCK_SLIDE",
@@ -1077,11 +1038,10 @@
     {
       "ability": "ABILITY_SERENE_GRACE",
       "dependency_notes": [
-        "Sitrus Berry is advisory; the plan is chance-sensitive and should not be mistaken for guaranteed control.",
-        "ITEM_SITRUS_BERRY is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Glare establishes speed control and Serene Grace raises flinch pressure from Headbutt and Rock Slide, while Protect keeps Dunsparce in position.",
-      "item_context": "ITEM_SITRUS_BERRY is the recommended held item for the serene grace paralysis-flinch controller role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_ROCK_SLIDE",
         "MOVE_HEADBUTT",
@@ -1102,11 +1062,10 @@
     {
       "ability": "ABILITY_HYPER_CUTTER",
       "dependency_notes": [
-        "Eviolite is advisory; Earthquake requires a Flying, Levitate, Telepathy, or Protecting partner and Rock Slide remains inaccurate.",
-        "ITEM_EVIOLITE is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Hyper Cutter protects damage from Intimidate, Earthquake and Rock Slide add spread pressure, Tailwind supports the side, and Protect preserves Gligar.",
-      "item_context": "ITEM_EVIOLITE is the recommended held item for the eviolite tailwind ground attacker role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_EARTHQUAKE",
         "MOVE_ROCK_SLIDE",
@@ -1127,11 +1086,10 @@
     {
       "ability": "ABILITY_STURDY",
       "dependency_notes": [
-        "Steelixite is advisory; the base form keeps the same move plan and Sturdy before any Mega Evolution.",
-        "ITEM_STEELIXITE is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "ITEM_STEELIXITE is protected progression; the automatic runtime item is ITEM_SITRUS_BERRY."
       ],
       "doubles_rationale": "High Horsepower avoids ally damage, Heavy Slam exploits Steelix weight, Wide Guard blocks spread attacks, Protect controls targeting, and Sturdy guarantees a chance to act from full HP.",
-      "item_context": "ITEM_STEELIXITE is the recommended held item for the trick room tank with wide guard role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_STEELIXITE remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_SITRUS_BERRY; equip ITEM_STEELIXITE manually after earning it.",
       "moves": [
         "MOVE_HIGH_HORSEPOWER",
         "MOVE_HEAVY_SLAM",
@@ -1152,11 +1110,10 @@
     {
       "ability": "ABILITY_INTIMIDATE",
       "dependency_notes": [
-        "Eviolite is advisory; Snubbull remains slow and appreciates careful switching.",
-        "ITEM_EVIOLITE is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Intimidate immediately reduces physical damage, Thunder Wave controls speed, Super Fang chunks bulky targets, Play Rough prevents passivity, and Protect preserves the debuff cycle.",
-      "item_context": "ITEM_EVIOLITE is the recommended held item for the intimidate paralysis support role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_PLAY_ROUGH",
         "MOVE_SUPER_FANG",
@@ -1177,11 +1134,10 @@
     {
       "ability": "ABILITY_INTIMIDATE",
       "dependency_notes": [
-        "Sitrus Berry is advisory; Close Combat lowers defenses and should be timed carefully.",
-        "ITEM_SITRUS_BERRY is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Intimidate creates breathing room, Super Fang chunks bulky targets regardless of stats, dual attacks threaten KOs, and Protect gives Granbull safe positioning.",
-      "item_context": "ITEM_SITRUS_BERRY is the recommended held item for the intimidate bruiser and super fang breaker role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_PLAY_ROUGH",
         "MOVE_CLOSE_COMBAT",
@@ -1202,11 +1158,10 @@
     {
       "ability": "ABILITY_INTIMIDATE",
       "dependency_notes": [
-        "Sitrus Berry is advisory; Icy Wind is utility rather than damage on this physical set.",
-        "ITEM_SITRUS_BERRY is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Intimidate supplies immediate defensive value, Icy Wind controls both foes, Liquidation and Poison Jab provide reliable STAB, and Protect supports repeated positioning.",
-      "item_context": "ITEM_SITRUS_BERRY is the recommended held item for the intimidate speed-control attacker role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_LIQUIDATION",
         "MOVE_POISON_JAB",
@@ -1227,11 +1182,10 @@
     {
       "ability": "ABILITY_TECHNICIAN",
       "dependency_notes": [
-        "Metal Coat is advisory; Scizor values redirection or Fake Out support when setting Swords Dance.",
-        "ITEM_METAL_COAT is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_METAL_COAT automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Technician boosts both STAB attacks, Bullet Punch supplies elite priority, Swords Dance creates a win condition, and Protect enables setup and partner support turns.",
-      "item_context": "ITEM_METAL_COAT is the recommended held item for the technician swords dance cleaner role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_METAL_COAT is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_BULLET_PUNCH",
         "MOVE_BUG_BITE",
@@ -1252,11 +1206,10 @@
     {
       "ability": "ABILITY_STURDY",
       "dependency_notes": [
-        "Mental Herb is advisory anti-Taunt insurance; Power Split and Helping Hand are inherently partner- and matchup-dependent.",
-        "ITEM_MENTAL_HERB is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_MENTAL_HERB automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Sturdy helps Shuckle survive, Power Split suppresses physical or special attackers, Helping Hand keeps offensive relevance, Toxic creates a clock, and Protect advances it.",
-      "item_context": "ITEM_MENTAL_HERB is the recommended held item for the sturdy power split control support role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_MENTAL_HERB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_POWER_SPLIT",
         "MOVE_HELPING_HAND",
@@ -1277,11 +1230,10 @@
     {
       "ability": "ABILITY_GUTS",
       "dependency_notes": [
-        "Flame Orb is advisory but required to self-activate Guts; opposing status can activate it without the item.",
-        "ITEM_FLAME_ORB is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_FLAME_ORB automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Guts creates enormous damage, dual STAB and Rock Slide cover the field, and Protect safely activates Flame Orb before committing to attacks.",
-      "item_context": "ITEM_FLAME_ORB is the recommended held item for the guts physical breaker role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_FLAME_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_MEGAHORN",
         "MOVE_CLOSE_COMBAT",
@@ -1302,11 +1254,10 @@
     {
       "ability": "ABILITY_INNER_FOCUS",
       "dependency_notes": [
-        "Focus Sash is advisory and strongly improves reliability; damage remains vulnerable to Intimidate and burns.",
-        "ITEM_FOCUS_SASH is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Inner Focus keeps Sneasel operational through Fake Out, its own Fake Out wins tempo, Knock Off removes items, Ice Punch supplies STAB, and Protect preserves the frail attacker.",
-      "item_context": "ITEM_FOCUS_SASH is the recommended held item for the fast fake out and knock off attacker role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_FAKE_OUT",
         "MOVE_ICE_PUNCH",
@@ -1327,11 +1278,10 @@
     {
       "ability": "ABILITY_QUICK_FEET",
       "dependency_notes": [
-        "Toxic Orb is advisory but required for self-activation; without status the set remains usable at much lower power and speed.",
-        "ITEM_TOXIC_ORB is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_TOXIC_ORB automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Quick Feet plus Toxic Orb fixes Teddiursa speed, Facade becomes powerful STAB, coverage prevents easy walls, and Protect safely activates the status turn.",
-      "item_context": "ITEM_TOXIC_ORB is the recommended held item for the quick feet status attacker role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_TOXIC_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_FACADE",
         "MOVE_CLOSE_COMBAT",
@@ -1352,11 +1302,10 @@
     {
       "ability": "ABILITY_GUTS",
       "dependency_notes": [
-        "Flame Orb is advisory but required for self-activation; Trick Room support is optional but strongly improves speed order.",
-        "ITEM_FLAME_ORB is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_FLAME_ORB automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Brave Ursaring thrives under Trick Room, Guts-boosted Facade breaks neutral targets, coverage handles resists, and Protect activates Flame Orb safely.",
-      "item_context": "ITEM_FLAME_ORB is the recommended held item for the guts trick room breaker role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_FLAME_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_FACADE",
         "MOVE_CLOSE_COMBAT",
@@ -1377,11 +1326,10 @@
     {
       "ability": "ABILITY_FLAME_BODY",
       "dependency_notes": [
-        "Eviolite is advisory and important to survival; both Heat Wave and Will-O-Wisp can miss.",
-        "ITEM_EVIOLITE is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Heat Wave supplies spread damage, Clear Smog resets setup, Will-O-Wisp controls physical attackers, Flame Body punishes contact, and Protect extends Slugma life.",
-      "item_context": "ITEM_EVIOLITE is the recommended held item for the eviolite burn and setup-control support role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_HEAT_WAVE",
         "MOVE_CLEAR_SMOG",
@@ -1402,11 +1350,10 @@
     {
       "ability": "ABILITY_SIMPLE",
       "dependency_notes": [
-        "White Herb is advisory and offsets one set of defense drops; redirection or Fake Out support makes setup much safer.",
-        "ITEM_WHITE_HERB is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_WHITE_HERB automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Simple doubles Shell Smash boosts, Heat Wave pressures both foes, Power Gem covers Fire resists, and Protect enables setup positioning.",
-      "item_context": "ITEM_WHITE_HERB is the recommended held item for the simple shell smash spread sweeper role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_WHITE_HERB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_SHELL_SMASH",
         "MOVE_HEAT_WAVE",
@@ -1427,11 +1374,10 @@
     {
       "ability": "ABILITY_THICK_FAT",
       "dependency_notes": [
-        "Eviolite is advisory; Earthquake requires a Ground-immune or Protecting partner and Icicle Crash accuracy is imperfect.",
-        "ITEM_EVIOLITE is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Thick Fat improves defensive matchups, Earthquake supplies spread Ground pressure, Ice STAB includes both power and priority, and Protect preserves Swinub.",
-      "item_context": "ITEM_EVIOLITE is the recommended held item for the eviolite priority attacker role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_EARTHQUAKE",
         "MOVE_ICICLE_CRASH",
@@ -1452,11 +1398,10 @@
     {
       "ability": "ABILITY_THICK_FAT",
       "dependency_notes": [
-        "Eviolite is advisory but central to maximum bulk; Icicle Crash can miss.",
-        "ITEM_EVIOLITE is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Thick Fat and Eviolite provide real bulk, High Horsepower is partner-safe Ground STAB, Ice Shard offers priority, and Protect handles pressure.",
-      "item_context": "ITEM_EVIOLITE is the recommended held item for the bulky eviolite ground-ice attacker role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_HIGH_HORSEPOWER",
         "MOVE_ICICLE_CRASH",
@@ -1477,11 +1422,10 @@
     {
       "ability": "ABILITY_REGENERATOR",
       "dependency_notes": [
-        "Sitrus Berry is advisory; Corsola still has exploitable common weaknesses.",
-        "ITEM_SITRUS_BERRY is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Scald threatens burns, Icy Wind controls both foes, Recover and Protect sustain board presence, and Regenerator rewards repositioning.",
-      "item_context": "ITEM_SITRUS_BERRY is the recommended held item for the regenerator icy wind sustain support role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_SCALD",
         "MOVE_ICY_WIND",
@@ -1502,11 +1446,10 @@
     {
       "ability": "ABILITY_MOODY",
       "dependency_notes": [
-        "Eviolite is advisory; Moody is random and Water Spout weakens after damage.",
-        "ITEM_EVIOLITE is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Water Spout rewards preserved HP, Ice Beam and Fire Blast cover Water resists, Moody can create a late-turn advantage, and Protect both preserves HP and gains a boost turn.",
-      "item_context": "ITEM_EVIOLITE is the recommended held item for the moody water spout attacker role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_WATER_SPOUT",
         "MOVE_ICE_BEAM",
@@ -1527,11 +1470,10 @@
     {
       "ability": "ABILITY_MOODY",
       "dependency_notes": [
-        "Life Orb is advisory and reduces Water Spout power through recoil; Sitrus Berry is a safer alternate.",
-        "ITEM_LIFE_ORB is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Quiet speed fits Trick Room, Water Spout offers burst, coverage hits Water and Grass matchups, Moody rewards protected turns, and Protect preserves HP.",
-      "item_context": "ITEM_LIFE_ORB is the recommended held item for the slow moody coverage attacker role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_WATER_SPOUT",
         "MOVE_ICE_BEAM",
@@ -1552,11 +1494,10 @@
     {
       "ability": "ABILITY_REFRIGERATE",
       "dependency_notes": [
-        "Focus Sash is advisory; both major attacks inflict recoil and Delibird remains frail.",
-        "ITEM_FOCUS_SASH is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Refrigerate makes Fake Out and Double-Edge boosted Ice attacks, Brave Bird supplies Flying STAB, and Protect preserves Delibird after winning tempo.",
-      "item_context": "ITEM_FOCUS_SASH is the recommended held item for the refrigerate fake out attacker role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_FAKE_OUT",
         "MOVE_DOUBLE_EDGE",
@@ -1577,11 +1518,10 @@
     {
       "ability": "ABILITY_WATER_ABSORB",
       "dependency_notes": [
-        "Sitrus Berry is advisory; Wide Guard depends on predicting spread moves and the support-dense set omits Protect.",
-        "ITEM_SITRUS_BERRY is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Tailwind controls speed, Wide Guard blocks spread attacks, Scald threatens burns, Roost sustains, and Water Absorb creates useful switch or Surf-partner lines.",
-      "item_context": "ITEM_SITRUS_BERRY is the recommended held item for the wide guard tailwind support role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_SCALD",
         "MOVE_TAILWIND",
@@ -1602,11 +1542,10 @@
     {
       "ability": "ABILITY_STURDY",
       "dependency_notes": [
-        "Sitrus Berry is advisory; Brave Bird recoil can break Sturdy after it has been restored.",
-        "ITEM_SITRUS_BERRY is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Sturdy helps guarantee action, Tailwind supports the team, Taunt stops setup, Brave Bird prevents passivity, and Roost sustains Skarmory physical wall role.",
-      "item_context": "ITEM_SITRUS_BERRY is the recommended held item for the sturdy tailwind physical wall role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_TAILWIND",
         "MOVE_TAUNT",
@@ -1627,11 +1566,10 @@
     {
       "ability": "ABILITY_FLASH_FIRE",
       "dependency_notes": [
-        "Focus Sash is advisory; mixed offense accepts reduced special bulk and remains vulnerable to spread attacks.",
-        "ITEM_FOCUS_SASH is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Flash Fire creates switch opportunities, Heat Wave pressures both foes, Dark Pulse and Sucker Punch provide reliable and priority Dark damage, and Protect preserves Houndour.",
-      "item_context": "ITEM_FOCUS_SASH is the recommended held item for the fast mixed spread attacker role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_HEAT_WAVE",
         "MOVE_DARK_PULSE",
@@ -1652,11 +1590,10 @@
     {
       "ability": "ABILITY_FLASH_FIRE",
       "dependency_notes": [
-        "Houndoominite is advisory; the base form uses the same plan and Nasty Plot is safest with partner disruption.",
-        "ITEM_HOUNDOOMINITE is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "ITEM_HOUNDOOMINITE is protected progression; the automatic runtime item is ITEM_LIFE_ORB."
       ],
       "doubles_rationale": "Flash Fire offers a safe entry and damage boost, Nasty Plot creates a win condition, dual STAB threatens single and spread targets, and Protect enables setup.",
-      "item_context": "ITEM_HOUNDOOMINITE is the recommended held item for the nasty plot spread attacker role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_HOUNDOOMINITE remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_HOUNDOOMINITE manually after earning it.",
       "moves": [
         "MOVE_HEAT_WAVE",
         "MOVE_DARK_PULSE",
@@ -1677,11 +1614,10 @@
     {
       "ability": "ABILITY_SWIFT_SWIM",
       "dependency_notes": [
-        "Life Orb is advisory; Swift Swim requires rain, but every selected attack remains usable without it.",
-        "ITEM_LIFE_ORB is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Muddy Water supplies spread rain damage, Draco Meteor delivers burst, Ice Beam gives accurate coverage, and Protect preserves Kingdra while Swift Swim partners establish rain.",
-      "item_context": "ITEM_LIFE_ORB is the recommended held item for the swift swim rain attacker role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_MUDDY_WATER",
         "MOVE_DRACO_METEOR",
@@ -1702,11 +1638,10 @@
     {
       "ability": "ABILITY_SAND_VEIL",
       "dependency_notes": [
-        "Eviolite is advisory; Sand Veil only activates in sand and is not assumed by the moveset.",
-        "ITEM_EVIOLITE is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "High Horsepower avoids ally damage, Rock Slide provides spread pressure, Ice Shard supplies priority, and Protect keeps Phanpy available.",
-      "item_context": "ITEM_EVIOLITE is the recommended held item for the eviolite ground attacker with priority role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_HIGH_HORSEPOWER",
         "MOVE_ROCK_SLIDE",
@@ -1727,11 +1662,10 @@
     {
       "ability": "ABILITY_STURDY",
       "dependency_notes": [
-        "Sitrus Berry is advisory; Rock Slide can miss and Sturdy requires full HP.",
-        "ITEM_SITRUS_BERRY is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Sturdy helps Donphan survive burst, High Horsepower is partner-safe Ground STAB, Rock Slide adds spread pressure, Ice Shard adds priority, and Protect preserves Sturdy lines.",
-      "item_context": "ITEM_SITRUS_BERRY is the recommended held item for the sturdy partner-safe physical attacker role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_HIGH_HORSEPOWER",
         "MOVE_ROCK_SLIDE",
@@ -1752,11 +1686,10 @@
     {
       "ability": "ABILITY_DOWNLOAD",
       "dependency_notes": [
-        "Eviolite is advisory but central to maximum bulk; Trick Room can hinder naturally fast allies.",
-        "ITEM_EVIOLITE is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Porygon2 combines reliable Trick Room, broad BoltBeam coverage, Recover, and Download to remain useful against many team styles.",
-      "item_context": "ITEM_EVIOLITE is the recommended held item for the download trick room setter role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_TRICK_ROOM",
         "MOVE_ICE_BEAM",
@@ -1777,11 +1710,10 @@
     {
       "ability": "ABILITY_INTIMIDATE",
       "dependency_notes": [
-        "Sitrus Berry is advisory; Earthquake requires a Ground-immune or Protecting partner and Double-Edge recoil must be managed.",
-        "ITEM_SITRUS_BERRY is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Intimidate reduces physical pressure, Thunder Wave controls speed, Double-Edge supplies power, Earthquake adds spread coverage, and Protect enables repeated positioning.",
-      "item_context": "ITEM_SITRUS_BERRY is the recommended held item for the intimidate paralysis attacker role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_DOUBLE_EDGE",
         "MOVE_EARTHQUAKE",
@@ -1802,11 +1734,10 @@
     {
       "ability": "ABILITY_GUTS",
       "dependency_notes": [
-        "Flame Orb is advisory but required for self-activation; High Jump Kick carries severe miss and Protect risk.",
-        "ITEM_FLAME_ORB is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_FLAME_ORB automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Fake Out creates immediate tempo, Guts powers Fighting attacks, Mach Punch gives priority after the first turn, and Protect safely activates Flame Orb.",
-      "item_context": "ITEM_FLAME_ORB is the recommended held item for the guts fake out priority attacker role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_FLAME_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_FAKE_OUT",
         "MOVE_HIGH_JUMP_KICK",
@@ -1827,11 +1758,10 @@
     {
       "ability": "ABILITY_INTIMIDATE",
       "dependency_notes": [
-        "Sitrus Berry is advisory; Wide Guard and Helping Hand are board-state dependent, and the support-dense set intentionally omits Protect.",
-        "ITEM_SITRUS_BERRY is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Intimidate and Fake Out reduce immediate pressure, Wide Guard blocks spread attacks, Helping Hand enables partner KOs, and Close Combat keeps Hitmontop threatening.",
-      "item_context": "ITEM_SITRUS_BERRY is the recommended held item for the intimidate fake out and wide guard support role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_FAKE_OUT",
         "MOVE_CLOSE_COMBAT",
@@ -1852,11 +1782,10 @@
     {
       "ability": "ABILITY_OBLIVIOUS",
       "dependency_notes": [
-        "Focus Sash is advisory and spread damage can bypass the Sash plan.",
-        "ITEM_FOCUS_SASH is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Fake Out wins tempo, Icy Wind controls both foes speed, Psychic supplies reliable damage, Oblivious blocks Taunt, and Protect preserves the frail support attacker.",
-      "item_context": "ITEM_FOCUS_SASH is the recommended held item for the fast fake out and icy wind support attacker role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_FAKE_OUT",
         "MOVE_ICY_WIND",
@@ -1877,11 +1806,10 @@
     {
       "ability": "ABILITY_VITAL_SPIRIT",
       "dependency_notes": [
-        "Focus Sash is advisory; Elekid remains frail and cannot rely on taking neutral attacks.",
-        "ITEM_FOCUS_SASH is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Electroweb controls both foes, Thunderbolt supplies reliable STAB, Helping Hand enables a partner, Vital Spirit blocks sleep, and Protect preserves Elekid.",
-      "item_context": "ITEM_FOCUS_SASH is the recommended held item for the fast electroweb partner support role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_ELECTROWEB",
         "MOVE_THUNDERBOLT",
@@ -1902,11 +1830,10 @@
     {
       "ability": "ABILITY_VITAL_SPIRIT",
       "dependency_notes": [
-        "Focus Sash is advisory; Cross Chop is inaccurate and the mixed nature sacrifices special bulk.",
-        "ITEM_FOCUS_SASH is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Heat Wave supplies spread STAB, Cross Chop covers Rock targets, Mach Punch gives priority, Vital Spirit blocks sleep, and Protect manages the frail attacker.",
-      "item_context": "ITEM_FOCUS_SASH is the recommended held item for the mixed fire priority attacker role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_HEAT_WAVE",
         "MOVE_CROSS_CHOP",
@@ -1927,11 +1854,10 @@
     {
       "ability": "ABILITY_SAP_SIPPER",
       "dependency_notes": [
-        "Sitrus Berry is advisory; Sap Sipper can be intentionally triggered only by compatible partner moves.",
-        "ITEM_SITRUS_BERRY is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Sap Sipper creates a Grass immunity and potential Attack boost, Body Slam spreads paralysis chance, Rock Slide pressures both foes, Helping Hand supports allies, and Protect controls targeting.",
-      "item_context": "ITEM_SITRUS_BERRY is the recommended held item for the sap sipper helping hand bruiser role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_BODY_SLAM",
         "MOVE_ROCK_SLIDE",
@@ -1952,11 +1878,10 @@
     {
       "ability": "ABILITY_HEALER",
       "dependency_notes": [
-        "Sitrus Berry is advisory; Blissey extreme physical fragility still requires positioning.",
-        "ITEM_SITRUS_BERRY is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Healer can clear partner status, Heal Pulse restores an ally, Helping Hand enables damage, Seismic Toss prevents total passivity, and Protect preserves Blissey.",
-      "item_context": "ITEM_SITRUS_BERRY is the recommended held item for the healer partner sustain support role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_HEAL_PULSE",
         "MOVE_HELPING_HAND",
@@ -1977,11 +1902,10 @@
     {
       "ability": "ABILITY_INNER_FOCUS",
       "dependency_notes": [
-        "Life Orb is advisory; screens and Snarl may be redundant when the partner already supplies damage control.",
-        "ITEM_LIFE_ORB is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Inner Focus guarantees action through Fake Out, Thunderbolt applies pressure, Snarl reduces both foes special damage, Reflect covers physical damage, and Protect preserves Raikou.",
-      "item_context": "ITEM_LIFE_ORB is the recommended held item for the fast special damage-control attacker role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_THUNDERBOLT",
         "MOVE_SNARL",
@@ -2002,11 +1926,10 @@
     {
       "ability": "ABILITY_INNER_FOCUS",
       "dependency_notes": [
-        "Safety Goggles is advisory; Snarl damage is secondary on the physical nature.",
-        "ITEM_SAFETY_GOGGLES is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_SAFETY_GOGGLES automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Inner Focus prevents Fake Out and Intimidate disruption, Sacred Fire threatens burns, Extreme Speed supplies priority, Snarl controls special damage, and Protect handles focus fire.",
-      "item_context": "ITEM_SAFETY_GOGGLES is the recommended held item for the inner focus sacred fire attacker role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_SAFETY_GOGGLES is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_SACRED_FIRE",
         "MOVE_EXTREME_SPEED",
@@ -2027,11 +1950,10 @@
     {
       "ability": "ABILITY_INNER_FOCUS",
       "dependency_notes": [
-        "Sitrus Berry is advisory; Tailwind must be timed around its limited duration.",
-        "ITEM_SITRUS_BERRY is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Inner Focus helps Tailwind go up through Fake Out, Scald and Snarl control physical and special damage, and Protect preserves Suicune.",
-      "item_context": "ITEM_SITRUS_BERRY is the recommended held item for the bulky tailwind and snarl support role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_TAILWIND",
         "MOVE_SCALD",
@@ -2052,11 +1974,10 @@
     {
       "ability": "ABILITY_GUTS",
       "dependency_notes": [
-        "Flame Orb is advisory but required for self-activation; without it Guts only responds to opposing status.",
-        "ITEM_FLAME_ORB is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_FLAME_ORB automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Dragon Dance develops speed and damage, Rock Slide offers spread pressure, Stomping Tantrum avoids ally damage, and Protect safely activates Guts.",
-      "item_context": "ITEM_FLAME_ORB is the recommended held item for the young guts dragon dance attacker role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_FLAME_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_DRAGON_DANCE",
         "MOVE_ROCK_SLIDE",
@@ -2077,11 +1998,10 @@
     {
       "ability": "ABILITY_SHED_SKIN",
       "dependency_notes": [
-        "Eviolite is advisory; Shed Skin activation is random and Dragon Dance benefits from partner disruption.",
-        "ITEM_EVIOLITE is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Shed Skin can clear disruptive status, Dragon Dance creates a win condition, partner-safe Ground coverage and spread Rock damage apply pressure, and Protect enables setup.",
-      "item_context": "ITEM_EVIOLITE is the recommended held item for the shed skin dragon dance attacker role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_DRAGON_DANCE",
         "MOVE_ROCK_SLIDE",
@@ -2102,11 +2022,10 @@
     {
       "ability": "ABILITY_SAND_STREAM",
       "dependency_notes": [
-        "Sitrus Berry is advisory; sand chips non-immune allies and Rock Slide can miss.",
-        "ITEM_SITRUS_BERRY is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Sand Stream adds residual pressure and special bulk, Rock Slide threatens both foes, Crunch and High Horsepower cover key targets, and Protect handles partner and weather turns.",
-      "item_context": "ITEM_SITRUS_BERRY is the recommended held item for the sand stream physical anchor role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_ROCK_SLIDE",
         "MOVE_CRUNCH",
@@ -2127,11 +2046,10 @@
     {
       "ability": "ABILITY_MULTISCALE",
       "dependency_notes": [
-        "Leftovers is advisory; the support-dense set omits Protect and Multiscale requires full HP.",
-        "ITEM_LEFTOVERS is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_LEFTOVERS automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Multiscale helps Lugia establish Tailwind, Aeroblast and Ice Beam prevent passivity, and Recover can restore the HP needed to reactivate Multiscale.",
-      "item_context": "ITEM_LEFTOVERS is the recommended held item for the multiscale tailwind sustain anchor role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_LEFTOVERS is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_AEROBLAST",
         "MOVE_ICE_BEAM",
@@ -2152,11 +2070,10 @@
     {
       "ability": "ABILITY_REGENERATOR",
       "dependency_notes": [
-        "Leftovers is advisory; Brave Bird recoil and Stealth Rock can erode the Regenerator cycle.",
-        "ITEM_LEFTOVERS is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_LEFTOVERS automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Sacred Fire threatens burns, Brave Bird delivers power, Tailwind supports the side, Protect manages focus fire, and Regenerator rewards repositioning.",
-      "item_context": "ITEM_LEFTOVERS is the recommended held item for the regenerator tailwind attacker role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_LEFTOVERS is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_SACRED_FIRE",
         "MOVE_BRAVE_BIRD",
@@ -2177,11 +2094,10 @@
     {
       "ability": "ABILITY_NATURAL_CURE",
       "dependency_notes": [
-        "Sitrus Berry is advisory; the set has limited direct coverage into Steel types.",
-        "ITEM_SITRUS_BERRY is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Natural Cure makes switching safe, dual STAB applies reliable pressure, Helping Hand boosts a partner, and Protect preserves Celebi through targeted turns.",
-      "item_context": "ITEM_SITRUS_BERRY is the recommended held item for the natural cure partner-support attacker role; it must be obtained and equipped separately.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_PSYCHIC",
         "MOVE_GIGA_DRAIN",

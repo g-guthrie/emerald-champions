@@ -542,8 +542,9 @@ def build_ledger() -> tuple[dict, list[str]]:
 
     ledger = {
         "meta": {
-            "version": 2,
+            "version": 3,
             "source": "current ROM source plus docs/verdant_battle_guide.json",
+            "competitiveItemPolicy": "Ordinary competitive held items are free and unlimited at every Pokemon Center. Legacy item gates remain inventoried only for the pending reward redesign; protected form and transformation items remain progression.",
             "itemCount": len(items),
             "unlockTableCount": len(unlocks),
             "knownDuplicateFixedBossRewardCount": len(duplicate_bosses),
@@ -572,6 +573,7 @@ def markdown(ledger: dict) -> str:
         "",
         "This report is generated from current ROM source and the generated battle guide by",
         "`python3 scripts/verdant_item_economy_audit.py --write`.",
+        "Ordinary competitive held items are now free loadout infrastructure. Legacy gates below remain as a reward-redesign inventory, not current shop restrictions.",
         "",
         "## Fixed boss rewards",
         "",
@@ -622,7 +624,7 @@ def markdown(ledger: dict) -> str:
         "",
         "## First fixed acquisition",
         "",
-        "| Item | Shop gate | First fixed source |",
+        "| Item | Legacy gate | First fixed source |",
         "|---|---:|---|",
     ])
     for row in ledger["items"]:
@@ -663,7 +665,7 @@ def main() -> None:
     print(f"PASS: {ledger['meta']['retryContractCount']} retry-safe reward contracts")
     print(f"PASS: {ledger['meta']['dialogueContractCount']} stale-dialogue contracts")
     print(f"PASS: {ledger['meta']['saveMigrationContractCount']} save-migration contract groups")
-    print(f"PASS: {ledger['meta']['unlockTableCount']} discovery-shop items have fixed acquisition records")
+    print(f"PASS: {ledger['meta']['unlockTableCount']} legacy held-item rewards remain inventoried for redesign")
     if duplicates:
         print(f"REVIEW: fixed boss reward duplicates remain for {', '.join(duplicates)}")
     else:

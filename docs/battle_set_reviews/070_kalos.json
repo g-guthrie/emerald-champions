@@ -14,15 +14,15 @@
       "nature": "NATURE_IMPISH",
       "ability": "ABILITY_BULLETPROOF",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "ITEM_EVIOLITE supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Gen 9 LC Chespin Defensive Spikes analysis adapted to doubles",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_CHESPIN"
       ],
       "doubles_rationale": "Super Fang creates reliable progress, Helping Hand amplifies its partner, Bullet Seed prevents passivity, and Protect preserves its Eviolite bulk.",
       "dependency_notes": [
-        "Bulletproof is independently useful, while Super Fang and Helping Hand do not require a particular partner.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Bulletproof is independently useful, while Super Fang and Helping Hand do not require a particular partner."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Replaced singles hazards with immediate doubles utility."
@@ -39,15 +39,15 @@
       "nature": "NATURE_IMPISH",
       "ability": "ABILITY_BULLETPROOF",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "ITEM_EVIOLITE supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Gen 9 NFE Quilladin Wall analysis adapted to doubles",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_QUILLADIN"
       ],
       "doubles_rationale": "Wood Hammer gives real STAB pressure while Super Fang and Helping Hand let Quilladin contribute into targets it cannot break directly.",
       "dependency_notes": [
-        "Wood Hammer recoil is the only attrition cost; no field condition or specific ally is required.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Wood Hammer recoil is the only attrition cost; no field condition or specific ally is required."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Used Quilladin’s higher bulk for a sturdier version of the Chespin support role."
@@ -64,15 +64,15 @@
       "nature": "NATURE_IMPISH",
       "ability": "ABILITY_BULLETPROOF",
       "suggested_item": "ITEM_LEFTOVERS",
-      "item_context": "ITEM_LEFTOVERS supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_LEFTOVERS is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown Gen 9 Random Doubles Chesnaught set 027",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_CHESNAUGHT"
       ],
       "doubles_rationale": "Iron Defense powers Body Press, Leech Seed creates long-game progress, and Spiky Shield protects setup while punishing contact.",
       "dependency_notes": [
-        "The set is self-contained, though special attackers can bypass the Defense-based plan.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_LEFTOVERS automatically, and the Pokémon Center vendor supplies free replacements.",
+        "The set is self-contained, though special attackers can bypass the Defense-based plan."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Accepted the coherent direct random-doubles set."
@@ -89,15 +89,15 @@
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_PYROMANCY",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "ITEM_EVIOLITE supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Gen 7 LC Fennekin analysis adapted to Emerald Champions Pyromancy",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_FENNEKIN"
       ],
       "doubles_rationale": "Pyromancy makes spread Heat Wave unusually threatening, Psychic supplies coverage, and Will-O-Wisp plus Protect give a frail first stage useful positioning tools.",
       "dependency_notes": [
-        "Heat Wave has imperfect accuracy, but the set does not require sun or a consumable item.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Heat Wave has imperfect accuracy, but the set does not require sun or a consumable item."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Authored around the local burn-enhancing ability rather than the source’s removed Power Herb line."
@@ -114,15 +114,15 @@
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_PYROMANCY",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "ITEM_EVIOLITE supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Gen 9 NFE Braixen analysis adapted to Emerald Champions Pyromancy",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_BRAIXEN"
       ],
       "doubles_rationale": "Heat Wave pressures both foes and frequently burns through Pyromancy, while Psychic, Will-O-Wisp, and Protect cover focused damage, control, and survival.",
       "dependency_notes": [
-        "The set is fully functional without weather and does not rely on an item activation.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements.",
+        "The set is fully functional without weather and does not rely on an item activation."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Converted the singles Calm Mind concept into immediate doubles pressure."
@@ -139,15 +139,15 @@
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_PYROMANCY",
       "suggested_item": "ITEM_LIFE_ORB",
-      "item_context": "ITEM_LIFE_ORB supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown Gen 9 Random Doubles Delphox set 019 adapted to local Pyromancy",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_DELPHOX"
       ],
       "doubles_rationale": "Nasty Plot threatens a sweep, Pyromancy Heat Wave pressures and burns both slots, and Psychic plus Protect keep the offense reliable.",
       "dependency_notes": [
-        "Nasty Plot needs a safe turn, but both attacks are useful before setup.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Nasty Plot needs a safe turn, but both attacks are useful before setup."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Kept the published doubles shell and upgraded it for the local ability."
@@ -164,15 +164,15 @@
       "nature": "NATURE_NAIVE",
       "ability": "ABILITY_PROTEAN",
       "suggested_item": "ITEM_LIFE_ORB",
-      "item_context": "ITEM_LIFE_ORB supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Gen 7 LC Froakie Life Orb analysis adapted to doubles",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_FROAKIE"
       ],
       "doubles_rationale": "Protean gives every attack meaningful STAB, U-turn preserves tempo, and Protect keeps the frail attacker from being freely double-targeted.",
       "dependency_notes": [
-        "Hydro Pump is inaccurate, but Ice Beam and U-turn provide dependable alternatives.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Hydro Pump is inaccurate, but Ice Beam and U-turn provide dependable alternatives."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "The direct LC attacker needed only Protect to become doubles-ready."
@@ -189,15 +189,15 @@
       "nature": "NATURE_NAIVE",
       "ability": "ABILITY_PROTEAN",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "ITEM_EVIOLITE supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Gen 9 NFE Frogadier Spikes Pivot adapted to doubles",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_FROGADIER"
       ],
       "doubles_rationale": "Hydro Pump and Ice Beam exploit Protean for immediate coverage, U-turn exits bad boards, and Protect supports partner positioning.",
       "dependency_notes": [
-        "U-turn is physical but is selected for tempo rather than damage.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements.",
+        "U-turn is physical but is selected for tempo rather than damage."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Removed singles hazards for a self-contained doubles pivot."
@@ -214,15 +214,15 @@
       "nature": "NATURE_NAIVE",
       "ability": "ABILITY_PROTEAN",
       "suggested_item": "ITEM_LIFE_ORB",
-      "item_context": "ITEM_LIFE_ORB supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Gen 6 Battle Spot Doubles Greninja Mixed Attacker",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_GRENINJA"
       ],
       "doubles_rationale": "Protean turns Ice Beam, Dark Pulse, and Low Kick into strong coverage while Protect handles Fake Out and coordinated targeting.",
       "dependency_notes": [
-        "Low Kick varies with target weight, but the two special attacks remain stable damage options.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Low Kick varies with target weight, but the two special attacks remain stable damage options."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Accepted the direct Smogon doubles set."
@@ -239,15 +239,14 @@
       "nature": "NATURE_ADAMANT",
       "ability": "ABILITY_HUGE_POWER",
       "suggested_item": "ITEM_LIFE_ORB",
-      "item_context": "ITEM_LIFE_ORB supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown random-doubles Diggersby roles adapted away from Choice lock",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_DIGGERSBY"
       ],
       "doubles_rationale": "Huge Power turns dual STAB into immediate knockout pressure, Quick Attack supplies priority, and Protect keeps Diggersby flexible in doubles.",
       "dependency_notes": [
-        "Life Orb is advisory only; all four moves remain coherent without it.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Preferred a standalone breaker over the corpus’s Choice-dependent Foul Play set."
@@ -264,15 +263,15 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_GALE_WINGS",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "ITEM_EVIOLITE supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Gen 7 LC Fletchling Bulky Sweeper adapted to doubles",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_FLETCHLING"
       ],
       "doubles_rationale": "Priority Tailwind establishes speed control, Dual Wingbeat prevents passivity, and Will-O-Wisp plus Protect let Fletchling create value despite low stats.",
       "dependency_notes": [
-        "Gale Wings is strongest from full health, so careful positioning still matters.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Gale Wings is strongest from full health, so careful positioning still matters."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Converted the singles setup set into a doubles speed-control lead."
@@ -289,15 +288,15 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_GALE_WINGS",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "ITEM_EVIOLITE supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Gen 8 NFE Fletchinder Defensive Support adapted to doubles",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_FLETCHINDER"
       ],
       "doubles_rationale": "Priority Tailwind and Flying damage establish tempo while Will-O-Wisp checks physical pressure and Protect preserves Gale Wings.",
       "dependency_notes": [
-        "Dual Wingbeat is modest damage, but the set’s primary job is reliable speed control.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Dual Wingbeat is modest damage, but the set’s primary job is reliable speed control."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Authored as the durable middle-stage Tailwind option."
@@ -314,15 +313,15 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_GALE_WINGS",
       "suggested_item": "ITEM_LIFE_ORB",
-      "item_context": "ITEM_LIFE_ORB supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Gen 8 2v2 Doubles Talonflame Tailwind Support",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_TALONFLAME"
       ],
       "doubles_rationale": "Priority Tailwind controls the board, dual recoil STAB threatens immediate knockouts, and Protect preserves Talonflame for a second tempo turn.",
       "dependency_notes": [
-        "Recoil can remove Gale Wings, but both attacks remain fast through Talonflame’s natural Speed.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Recoil can remove Gale Wings, but both attacks remain fast through Talonflame’s natural Speed."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Accepted the direct Smogon doubles set."
@@ -339,15 +338,15 @@
       "nature": "NATURE_BOLD",
       "ability": "ABILITY_FRIEND_GUARD",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "ITEM_EVIOLITE supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Vivillon-line VGC redirection roles adapted to Scatterbug’s exact local pool",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_SCATTERBUG"
       ],
       "doubles_rationale": "Friend Guard and Rage Powder protect the partner, while Stun Spore and String Shot provide two forms of speed control from an otherwise weak stage.",
       "dependency_notes": [
-        "Scatterbug lacks Protect locally, so it is intentionally a disposable support piece rather than a durable win condition.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Scatterbug lacks Protect locally, so it is intentionally a disposable support piece rather than a durable win condition."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Authored from the exact tiny local pool instead of inventing evolved moves."
@@ -364,15 +363,15 @@
       "nature": "NATURE_BOLD",
       "ability": "ABILITY_FRIEND_GUARD",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "ITEM_EVIOLITE supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Vivillon-line VGC support roles adapted to Spewpa’s exact local pool",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_SPEWPA"
       ],
       "doubles_rationale": "Friend Guard plus Rage Powder shields an ally, Electroweb controls both foes, and Protect lets Spewpa survive predicted focus fire.",
       "dependency_notes": [
-        "Stun Spore is inaccurate but gives a stronger single-target speed penalty than Electroweb.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Stun Spore is inaccurate but gives a stronger single-target speed penalty than Electroweb."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Used every meaningful doubles tool in Spewpa’s limited learnset."
@@ -389,15 +388,15 @@
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_COMPOUND_EYES",
       "suggested_item": "ITEM_FOCUS_SASH",
-      "item_context": "ITEM_FOCUS_SASH supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Gen 9 VGC 2025 Vivillon Support",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_VIVILLON"
       ],
       "doubles_rationale": "Compound Eyes makes Sleep Powder and Hurricane credible, Rage Powder creates partner turns, and Protect preserves Focus Sash positioning.",
       "dependency_notes": [
-        "Hurricane is less accurate outside rain, but Compound Eyes keeps it usable.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Hurricane is less accurate outside rain, but Compound Eyes keeps it usable."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Accepted the direct current VGC support set."
@@ -414,15 +413,15 @@
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_COMPETITIVE",
       "suggested_item": "ITEM_LIFE_ORB",
-      "item_context": "ITEM_LIFE_ORB supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown Champions Random Doubles Pyroar set 021 adapted to local Competitive",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_PYROAR"
       ],
       "doubles_rationale": "Competitive punishes Intimidate and stat drops, dual spread STAB applies immediate pressure, and Will-O-Wisp plus Protect cover physical checks and positioning.",
       "dependency_notes": [
-        "Heat Wave has imperfect accuracy, but Hyper Voice is a reliable spread alternative.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Heat Wave has imperfect accuracy, but Hyper Voice is a reliable spread alternative."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Kept the corpus’s spread shell while selecting the stronger local ability."
@@ -439,15 +438,15 @@
       "nature": "NATURE_CALM",
       "ability": "ABILITY_HEALER",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "ITEM_EVIOLITE supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Gen 7 LC Flabebe Calm Mind analysis adapted to doubles support",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_FLABEBE"
       ],
       "doubles_rationale": "Helping Hand boosts an ally, Wish sustains the side, Moonblast prevents passivity, and Healer can clear a partner’s status.",
       "dependency_notes": [
-        "Wish healing is delayed, so Protect is included to make the timing dependable.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Wish healing is delayed, so Protect is included to make the timing dependable."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Shifted from slow singles setup to direct partner support."
@@ -464,15 +463,15 @@
       "nature": "NATURE_CALM",
       "ability": "ABILITY_HEALER",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "ITEM_EVIOLITE supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Florges doubles support precedent adapted to Floette’s exact local data",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_FLOETTE"
       ],
       "doubles_rationale": "Floette combines accurate Fairy damage with Helping Hand and Wish support, while Protect lets its Eviolite bulk convert into additional turns.",
       "dependency_notes": [
-        "Healer is probabilistic, but the moveset is useful even when it does not trigger.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Healer is probabilistic, but the moveset is useful even when it does not trigger."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Authored independently for Floette’s stronger special bulk."
@@ -489,15 +488,15 @@
       "nature": "NATURE_CALM",
       "ability": "ABILITY_MISTY_SURGE",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "ITEM_SITRUS_BERRY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown Gen 6 Random Doubles Florges support adapted to local Misty Surge",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_FLORGES"
       ],
       "doubles_rationale": "Misty Surge protects grounded allies from status, Dazzling Gleam applies spread pressure, and Helping Hand plus Wish support both immediate and long games.",
       "dependency_notes": [
-        "Misty Terrain also blocks allied grounded status plans, so team selection still matters.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Misty Terrain also blocks allied grounded status plans, so team selection still matters."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Upgraded the published support shell with the strongest local doubles ability."
@@ -514,15 +513,15 @@
       "nature": "NATURE_CAREFUL",
       "ability": "ABILITY_SAP_SIPPER",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "ITEM_EVIOLITE supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Gen 7 LC Skiddo Bulk Up adapted to doubles",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_SKIDDO"
       ],
       "doubles_rationale": "Sap Sipper creates a switch-in, Bulk Up and Horn Leech build a durable win condition, and High Horsepower avoids damaging its partner.",
       "dependency_notes": [
-        "The set wants one safe setup turn but can attack immediately when pressure is high.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements.",
+        "The set wants one safe setup turn but can attack immediately when pressure is high."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Replaced broad singles coverage with partner-safe Ground damage and Protect."
@@ -539,15 +538,15 @@
       "nature": "NATURE_CAREFUL",
       "ability": "ABILITY_GRASSY_SURGE",
       "suggested_item": "ITEM_LEFTOVERS",
-      "item_context": "ITEM_LEFTOVERS supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_LEFTOVERS is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Gen 6 NU Gogoat Bulk Up adapted to Emerald Champions Grassy Surge",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_GOGOAT"
       ],
       "doubles_rationale": "Grassy Surge adds team recovery and boosts Horn Leech, while Bulk Up, High Horsepower, and Protect create a self-contained bulky offense plan.",
       "dependency_notes": [
-        "Terrain benefits grounded opponents too, but Gogoat immediately exploits it with boosted STAB.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_LEFTOVERS automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Terrain benefits grounded opponents too, but Gogoat immediately exploits it with boosted STAB."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Selected the local terrain ability over the source’s narrower Sap Sipper role."
@@ -564,15 +563,15 @@
       "nature": "NATURE_ADAMANT",
       "ability": "ABILITY_SCRAPPY",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "ITEM_EVIOLITE supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Gen 8 LC Pancham Wallbreaker adapted to doubles",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_PANCHAM"
       ],
       "doubles_rationale": "Scrappy Drain Punch always connects, Knock Off removes defining items, Parting Shot resets pressure, and Protect preserves Pancham for another pivot.",
       "dependency_notes": [
-        "Parting Shot requires a healthy switch-in, but both attacks remain broadly useful.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Parting Shot requires a healthy switch-in, but both attacks remain broadly useful."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Replaced singles Swords Dance with doubles-native item and stat control."
@@ -589,15 +588,15 @@
       "nature": "NATURE_ADAMANT",
       "ability": "ABILITY_IRON_FIST",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "ITEM_SITRUS_BERRY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown Gen 7 Random Doubles Pangoro set 029 adapted for sustain",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_PANGORO"
       ],
       "doubles_rationale": "Iron Fist Drain Punch provides damage and recovery, Knock Off disrupts items, and Parting Shot plus Protect create repeatable board control.",
       "dependency_notes": [
-        "Parting Shot depends on a switch target, but the set never becomes passive without one.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Parting Shot depends on a switch target, but the set never becomes passive without one."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Changed Hammer Arm to sustainable Drain Punch and added Protect."
@@ -614,15 +613,15 @@
       "nature": "NATURE_CAREFUL",
       "ability": "ABILITY_FUR_COAT",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "ITEM_SITRUS_BERRY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Furfrou defensive utility roles adapted to doubles",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_FURFROU"
       ],
       "doubles_rationale": "Fur Coat makes Furfrou difficult to remove physically while Helping Hand, Thunder Wave, and Snarl improve both partner damage and team survivability.",
       "dependency_notes": [
-        "Snarl is the only direct damage, so Taunt can constrain the set without making it completely inert.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Snarl is the only direct damage, so Taunt can constrain the set without making it completely inert."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Removed singles Toxic and Giga Impact for immediate doubles support."
@@ -639,15 +638,15 @@
       "nature": "NATURE_BOLD",
       "ability": "ABILITY_INFILTRATOR",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "ITEM_EVIOLITE supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Meowstic VGC support precedent adapted to Espurr’s exact local abilities",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_ESPURR"
       ],
       "doubles_rationale": "Fake Out buys the opening turn, Thunder Wave controls Speed, Helping Hand amplifies an ally, and Psychic prevents total Taunt shutdown.",
       "dependency_notes": [
-        "Espurr lacks Prankster locally, so its natural Speed and Fake Out timing matter.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Espurr lacks Prankster locally, so its natural Speed and Fake Out timing matter."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Authored from the evolved line’s proven support package without inventing Prankster."
@@ -664,15 +663,15 @@
       "nature": "NATURE_BOLD",
       "ability": "ABILITY_PRANKSTER",
       "suggested_item": "ITEM_LIGHT_CLAY",
-      "item_context": "ITEM_LIGHT_CLAY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_LIGHT_CLAY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown Gen 7 Random Doubles Meowstic set 010",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_MEOWSTIC"
       ],
       "doubles_rationale": "Fake Out creates the setup turn, Prankster screens protect the entire side, and Psychic prevents Meowstic from becoming passive.",
       "dependency_notes": [
-        "Dark-type foes ignore Prankster-targeted effects, but the screens target Meowstic’s own side.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_LIGHT_CLAY automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Dark-type foes ignore Prankster-targeted effects, but the screens target Meowstic’s own side."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Accepted the proven dual-screen random-doubles role."
@@ -689,15 +688,15 @@
       "nature": "NATURE_BRAVE",
       "ability": "ABILITY_NO_GUARD",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "ITEM_EVIOLITE supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon LC Honedge offensive analysis adapted to doubles",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_HONEDGE"
       ],
       "doubles_rationale": "Minimum-Speed Gyro Ball and Sacred Sword provide focused damage, Shadow Sneak cleans, and Protect lets a partner establish Trick Room safely.",
       "dependency_notes": [
-        "The set appreciates Trick Room but still carries priority when room is absent.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements.",
+        "The set appreciates Trick Room but still carries priority when room is absent."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Converted Pursuit-based singles coverage into doubles positioning."
@@ -714,15 +713,15 @@
       "nature": "NATURE_BRAVE",
       "ability": "ABILITY_NO_GUARD",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "ITEM_EVIOLITE supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon NFE Doublade roles adapted to doubles",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_DOUBLADE"
       ],
       "doubles_rationale": "Exceptional Eviolite Defense supports focused trading, Gyro Ball exploits low Speed, and Shadow Sneak plus Sacred Sword cover priority and Steel-resistant targets.",
       "dependency_notes": [
-        "Trick Room support raises its ceiling but is not mandatory because Shadow Sneak supplies priority.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Trick Room support raises its ceiling but is not mandatory because Shadow Sneak supplies priority."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Removed RestTalk and Toxic in favor of immediate battle-puzzle value."
@@ -739,15 +738,15 @@
       "nature": "NATURE_QUIET",
       "ability": "ABILITY_STANCE_CHANGE",
       "suggested_item": "ITEM_LEFTOVERS",
-      "item_context": "ITEM_LEFTOVERS supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_LEFTOVERS is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Gen 7 Battle Spot Doubles Aegislash Bulky Attacker",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_AEGISLASH"
       ],
       "doubles_rationale": "Dual special STAB exploits Blade Forme, while Wide Guard and King’s Shield force difficult targeting decisions and return Aegislash to safety.",
       "dependency_notes": [
-        "Wide Guard is matchup-dependent, but King’s Shield and both attacks remain universally useful.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_LEFTOVERS automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Wide Guard is matchup-dependent, but King’s Shield and both attacks remain universally useful."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Accepted the canonical Smogon doubles tank set."
@@ -764,15 +763,15 @@
       "nature": "NATURE_RELAXED",
       "ability": "ABILITY_AROMA_VEIL",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "ITEM_EVIOLITE supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon LC Spritzee support and Aromatisse doubles precedent",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_SPRITZEE"
       ],
       "doubles_rationale": "Aroma Veil protects the setup from Taunt, Trick Room flips Speed, and Moonblast, Helping Hand, and Protect cover damage, amplification, and survival.",
       "dependency_notes": [
-        "Trick Room can hinder fast partners, so the player still must choose the correct board.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Trick Room can hinder fast partners, so the player still must choose the correct board."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Authored as a compact first-stage version of the proven Aromatisse role."
@@ -789,15 +788,15 @@
       "nature": "NATURE_RELAXED",
       "ability": "ABILITY_AROMA_VEIL",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "ITEM_SITRUS_BERRY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Gen 6 Battle Spot Doubles Aromatisse Trick Room Setter",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_AROMATISSE"
       ],
       "doubles_rationale": "Aroma Veil protects Trick Room from Taunt, Helping Hand accelerates slow partners, and Moonblast plus Protect keep Aromatisse useful after setup.",
       "dependency_notes": [
-        "The set is intentionally slow and should not be selected beside a purely fast offense.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements.",
+        "The set is intentionally slow and should not be selected beside a purely fast offense."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Accepted the direct Smogon doubles set."
@@ -814,15 +813,15 @@
       "nature": "NATURE_BOLD",
       "ability": "ABILITY_SWEET_VEIL",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "ITEM_EVIOLITE supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon LC Swirlix roles adapted to doubles support",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_SWIRLIX"
       ],
       "doubles_rationale": "Sweet Veil protects the side from sleep, Fake Tears enables special partners, and Helping Hand plus Dazzling Gleam create immediate offensive value.",
       "dependency_notes": [
-        "Fake Tears needs a special attacking partner to reach its ceiling, but Dazzling Gleam remains independent spread damage.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Fake Tears needs a special attacking partner to reach its ceiling, but Dazzling Gleam remains independent spread damage."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Avoided consumable-dependent Unburden on the defensive first-stage default."
@@ -839,15 +838,15 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_UNBURDEN",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "ITEM_SITRUS_BERRY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown Gen 7 Random Doubles Slurpuff set 019",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_SLURPUFF"
       ],
       "doubles_rationale": "Belly Drum plus Sitrus activates Unburden and maximizes Attack, after which dual coverage and Protect create a dangerous but interactable sweep.",
       "dependency_notes": [
-        "The exact sweep requires a consumable Berry and a safe setup turn; without it the attacks remain legal but much weaker.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements.",
+        "The exact sweep requires a consumable Berry and a safe setup turn; without it the attacks remain legal but much weaker."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Completed the published three-move shell with essential Protect."
@@ -864,15 +863,15 @@
       "nature": "NATURE_ADAMANT",
       "ability": "ABILITY_CONTRARY",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "ITEM_EVIOLITE supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon LC Inkay Contrary roles adapted to doubles",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_INKAY"
       ],
       "doubles_rationale": "Contrary turns Superpower into repeated Attack and Defense boosts, Knock Off disrupts items, Rock Slide pressures both foes, and Protect preserves accumulated boosts.",
       "dependency_notes": [
-        "The first Superpower must connect to begin snowballing, but the other attacks provide immediate options.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements.",
+        "The first Superpower must connect to begin snowballing, but the other attacks provide immediate options."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Removed Choice Switcheroo so the preset works before an item is equipped."
@@ -889,15 +888,15 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_CONTRARY",
       "suggested_item": "ITEM_LIFE_ORB",
-      "item_context": "ITEM_LIFE_ORB supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown Gen 6 Random Doubles Malamar set 010 adapted with Protect",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_MALAMAR"
       ],
       "doubles_rationale": "Superpower grows stronger and bulkier through Contrary, Knock Off removes key items, Rock Slide adds spread pressure, and Protect preserves boosts.",
       "dependency_notes": [
-        "Intimidate activates Contrary positively, but strong Fairy attacks remain a direct answer.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Intimidate activates Contrary positively, but strong Fairy attacks remain a direct answer."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Replaced redundant Psycho Cut with Protect for a cleaner doubles win condition."
@@ -914,15 +913,15 @@
       "nature": "NATURE_ADAMANT",
       "ability": "ABILITY_TOUGH_CLAWS",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "ITEM_EVIOLITE supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon LC Binacle Shell Smash adapted to doubles",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_BINACLE"
       ],
       "doubles_rationale": "Shell Smash creates a genuine sweep, Tough Claws boosts Liquidation, Rock Slide threatens both foes, and Protect buys partner-enabled setup turns.",
       "dependency_notes": [
-        "Eviolite does not restore Shell Smash drops, so timing the setup remains important.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Eviolite does not restore Shell Smash drops, so timing the setup remains important."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Used accurate dual STAB and Protect instead of risky singles coverage."
@@ -939,15 +938,15 @@
       "nature": "NATURE_ADAMANT",
       "ability": "ABILITY_TOUGH_CLAWS",
       "suggested_item": "ITEM_WHITE_HERB",
-      "item_context": "ITEM_WHITE_HERB supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_WHITE_HERB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown Gen 9 Champions Random Doubles Barbaracle set 030",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_BARBARACLE"
       ],
       "doubles_rationale": "White Herb offsets Shell Smash’s defensive drops, Tough Claws boosts Liquidation, and Rock Slide plus Protect make the sweep doubles-ready.",
       "dependency_notes": [
-        "The full setup line needs White Herb and one safe turn, but the dual STAB is immediately useful.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_WHITE_HERB automatically, and the Pokémon Center vendor supplies free replacements.",
+        "The full setup line needs White Herb and one safe turn, but the dual STAB is immediately useful."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Accepted the repeated direct random-doubles consensus set."
@@ -964,15 +963,15 @@
       "nature": "NATURE_QUIET",
       "ability": "ABILITY_ADAPTABILITY",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "ITEM_EVIOLITE supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Dragalge doubles roles adapted to Smogon LC Skrelp data",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_SKRELP"
       ],
       "doubles_rationale": "Adaptability Sludge Bomb provides focused damage, Hydro Pump covers Steel and Ground targets, Icy Wind controls Speed outside Trick Room, and Protect preserves the Eviolite attacker.",
       "dependency_notes": [
-        "Hydro Pump and Icy Wind have imperfect accuracy, but Sludge Bomb is the reliable damage line.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Hydro Pump and Icy Wind have imperfect accuracy, but Sludge Bomb is the reliable damage line."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Authored a self-contained doubles set from the evolved line’s Trick Room role."
@@ -989,15 +988,15 @@
       "nature": "NATURE_QUIET",
       "ability": "ABILITY_ADAPTABILITY",
       "suggested_item": "ITEM_LIFE_ORB",
-      "item_context": "ITEM_LIFE_ORB supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Gen 6 Battle Spot Doubles Dragalge Trick Room Attacker",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_DRAGALGE"
       ],
       "doubles_rationale": "Adaptability makes both STAB attacks punishing, Focus Blast covers Steel-types, and Protect lets a partner establish Trick Room or redirect pressure.",
       "dependency_notes": [
-        "Draco Meteor lowers Special Attack and Focus Blast is inaccurate, so target selection matters.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Draco Meteor lowers Special Attack and Focus Blast is inaccurate, so target selection matters."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Accepted the direct Smogon doubles set."
@@ -1014,15 +1013,15 @@
       "nature": "NATURE_MODEST",
       "ability": "ABILITY_MEGA_LAUNCHER",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "ITEM_EVIOLITE supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Clawitzer random-doubles roles adapted to Clauncher’s exact local pool",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_CLAUNCHER"
       ],
       "doubles_rationale": "Mega Launcher strengthens Water Pulse, Ice Beam adds coverage, Icy Wind controls both foes, and Protect keeps the slow Eviolite attacker safe.",
       "dependency_notes": [
-        "Water Pulse is focused rather than spread damage, but it is reliable and ability-boosted.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Water Pulse is focused rather than spread damage, but it is reliable and ability-boosted."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Replaced weak mixed pivoting with a coherent special support attacker."
@@ -1039,15 +1038,15 @@
       "nature": "NATURE_MODEST",
       "ability": "ABILITY_MEGA_LAUNCHER",
       "suggested_item": "ITEM_LIFE_ORB",
-      "item_context": "ITEM_LIFE_ORB supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown Gen 6 and Gen 8 Random Doubles Clawitzer sets",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_CLAWITZER"
       ],
       "doubles_rationale": "Muddy Water supplies spread pressure while Mega Launcher-boosted Aura Sphere and Dark Pulse provide accurate focused coverage; Protect preserves the slow breaker.",
       "dependency_notes": [
-        "Muddy Water is imperfectly accurate, but both pulse coverage moves are reliable.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Muddy Water is imperfectly accurate, but both pulse coverage moves are reliable."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Combined the strongest direct random-doubles elements without Choice lock."
@@ -1064,15 +1063,15 @@
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_DRY_SKIN",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "ITEM_EVIOLITE supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon LC Helioptile offensive utility adapted to doubles",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_HELIOPTILE"
       ],
       "doubles_rationale": "Electroweb and Glare offer spread and permanent Speed control, Thunderbolt supplies focused damage, and Dry Skin grants valuable rain synergy.",
       "dependency_notes": [
-        "Rain improves Dry Skin but is not required for the speed-control role.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Rain improves Dry Skin but is not required for the speed-control role."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Removed singles pivot assumptions for a dependable doubles controller."
@@ -1089,15 +1088,15 @@
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_DRY_SKIN",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "ITEM_SITRUS_BERRY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown Gen 8 Random Doubles Heliolisk set 029 adapted for focused STAB",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_HELIOLISK"
       ],
       "doubles_rationale": "Thunderbolt and Hyper Voice cover focused and spread damage, Glare cripples fast threats, and Protect exploits Dry Skin recovery opportunities.",
       "dependency_notes": [
-        "Dry Skin adds a Fire weakness in sun, so weather matchups still matter.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Dry Skin adds a Fire weakness in sun, so weather matchups still matter."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Changed Volt Switch to stronger focused STAB for the default standalone set."
@@ -1114,15 +1113,15 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_STRONG_JAW",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "ITEM_EVIOLITE supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon LC Tyrunt Dragon Dance adapted to doubles",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_TYRUNT"
       ],
       "doubles_rationale": "Dragon Dance fixes Tyrunt’s Speed, Rock Slide threatens both foes, Strong Jaw boosts Psychic Fangs, and Protect creates setup and positioning turns.",
       "dependency_notes": [
-        "One setup turn is needed to outspeed most evolved threats, but Rock Slide is useful immediately.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements.",
+        "One setup turn is needed to outspeed most evolved threats, but Rock Slide is useful immediately."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Selected partner-safe spread STAB over singles Close Combat coverage."
@@ -1139,15 +1138,15 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_ROCK_HEAD",
       "suggested_item": "ITEM_LIFE_ORB",
-      "item_context": "ITEM_LIFE_ORB supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown Gen 6 Random Doubles Tyrantrum setup roles adapted to Rock Head",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_TYRANTRUM"
       ],
       "doubles_rationale": "Rock Head removes Head Smash recoil, Dragon Dance creates sweep potential, High Horsepower offers partner-safe coverage, and Protect preserves the setup.",
       "dependency_notes": [
-        "Head Smash is inaccurate, but its recoil-free power is the set’s defining payoff.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Head Smash is inaccurate, but its recoil-free power is the set’s defining payoff."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Used the stronger local Rock Head line instead of the corpus’s weaker fang coverage."
@@ -1164,15 +1163,15 @@
       "nature": "NATURE_MODEST",
       "ability": "ABILITY_SNOW_WARNING",
       "suggested_item": "ITEM_LIGHT_CLAY",
-      "item_context": "ITEM_LIGHT_CLAY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_LIGHT_CLAY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon LC Amaura Snow Warning roles adapted to doubles",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_AMAURA"
       ],
       "doubles_rationale": "Snow Warning activates Aurora Veil and accurate Blizzard, Freeze-Dry covers Water-types, and Protect preserves the fragile setter.",
       "dependency_notes": [
-        "Aurora Veil depends on snow, which Amaura creates automatically on entry.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_LIGHT_CLAY automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Aurora Veil depends on snow, which Amaura creates automatically on entry."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Built the obvious local weather package and removed unrelated coverage."
@@ -1189,15 +1188,15 @@
       "nature": "NATURE_MODEST",
       "ability": "ABILITY_SNOW_WARNING",
       "suggested_item": "ITEM_LIGHT_CLAY",
-      "item_context": "ITEM_LIGHT_CLAY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_LIGHT_CLAY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown Gen 6 Random Doubles Aurorus sets adapted to veil support",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_AURORUS"
       ],
       "doubles_rationale": "Automatic snow enables Aurora Veil and accurate spread Blizzard, while Freeze-Dry punishes Water switch-ins and Protect maintains weather turns.",
       "dependency_notes": [
-        "The set’s veil plan can be disrupted by opposing weather, though its attacks remain functional.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_LIGHT_CLAY automatically, and the Pokémon Center vendor supplies free replacements.",
+        "The set’s veil plan can be disrupted by opposing weather, though its attacks remain functional."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Combined the direct random-doubles attacker with Aurorus’s strongest local support option."
@@ -1214,15 +1213,15 @@
       "nature": "NATURE_MODEST",
       "ability": "ABILITY_PIXILATE",
       "suggested_item": "ITEM_THROAT_SPRAY",
-      "item_context": "ITEM_THROAT_SPRAY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_THROAT_SPRAY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon VGC and Battle Spot Doubles Sylveon special attacker analyses",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_SYLVEON"
       ],
       "doubles_rationale": "Pixilate Hyper Voice is reliable spread damage, Helping Hand boosts a partner when Sylveon is checked, and Psyshock plus Protect cover focused damage and positioning.",
       "dependency_notes": [
-        "Throat Spray improves the first Hyper Voice but is not necessary for the moveset to function.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_THROAT_SPRAY automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Throat Spray improves the first Hyper Voice but is not necessary for the moveset to function."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Selected the broadly useful VGC attacker over a slow Substitute setup line."
@@ -1239,15 +1238,15 @@
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_UNBURDEN",
       "suggested_item": "ITEM_WHITE_HERB",
-      "item_context": "ITEM_WHITE_HERB supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_WHITE_HERB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown Gen 8 Random Doubles Hawlucha set 018",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_HAWLUCHA"
       ],
       "doubles_rationale": "Close Combat consumes White Herb to trigger Unburden, Brave Bird supplies second STAB, and Swords Dance plus Protect create a flexible sweep path.",
       "dependency_notes": [
-        "The exact Speed activation requires White Herb consumption; without it Hawlucha still has excellent natural Speed.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_WHITE_HERB automatically, and the Pokémon Center vendor supplies free replacements.",
+        "The exact Speed activation requires White Herb consumption; without it Hawlucha still has excellent natural Speed."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Accepted the coherent direct random-doubles Unburden mechanism."
@@ -1264,15 +1263,15 @@
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_CHEEK_POUCH",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "ITEM_SITRUS_BERRY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown Gen 9 Random Doubles Dedenne set 006 adapted to full support",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_DEDENNE"
       ],
       "doubles_rationale": "Nuzzle guarantees speed control, Super Fang chunks bulky targets, Helping Hand amplifies the partner, and Protect buys Cheek Pouch recovery turns.",
       "dependency_notes": [
-        "Cheek Pouch needs a consumed Berry for its bonus recovery, but every move works without it.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Cheek Pouch needs a consumed Berry for its bonus recovery, but every move works without it."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Focused the direct random-doubles concept into four universal support actions."
@@ -1289,15 +1288,15 @@
       "nature": "NATURE_RELAXED",
       "ability": "ABILITY_STURDY",
       "suggested_item": "ITEM_MENTAL_HERB",
-      "item_context": "ITEM_MENTAL_HERB supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_MENTAL_HERB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Carbink Trick Room lead roles adapted to exact local doubles tools",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_CARBINK"
       ],
       "doubles_rationale": "Sturdy and Mental Herb make Trick Room difficult to deny, Body Press exploits Carbink’s Defense, and Dazzling Gleam plus Protect keep it active afterward.",
       "dependency_notes": [
-        "Multi-hit attacks or double targeting can break through Sturdy before setup.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_MENTAL_HERB automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Multi-hit attacks or double targeting can break through Sturdy before setup."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Removed singles hazards and Explosion for reusable battle-puzzle value."
@@ -1314,15 +1313,15 @@
       "nature": "NATURE_MODEST",
       "ability": "ABILITY_SAP_SIPPER",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "ITEM_EVIOLITE supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon NFE Sliggoo special tank adapted to doubles",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_SLIGGOO"
       ],
       "doubles_rationale": "Excellent Eviolite special bulk supports strong Draco Meteor, spread Muddy Water, Sludge Bomb coverage, and Protect.",
       "dependency_notes": [
-        "Draco Meteor lowers Special Attack, so Muddy Water and Sludge Bomb should be used before it when sustained pressure matters.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Draco Meteor lowers Special Attack, so Muddy Water and Sludge Bomb should be used before it when sustained pressure matters."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Authored as an immediate tank rather than a weather-dependent Rest set."
@@ -1339,15 +1338,15 @@
       "nature": "NATURE_MODEST",
       "ability": "ABILITY_POISON_HEAL",
       "suggested_item": "ITEM_TOXIC_ORB",
-      "item_context": "ITEM_TOXIC_ORB supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_TOXIC_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Gen 7 VGC Goodra Special Tank adapted to Emerald Champions Poison Heal",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_GOODRA"
       ],
       "doubles_rationale": "Poison Heal and Protect provide exceptional staying power while Dragon Pulse, Sludge Bomb, and Flamethrower give accurate, broad special coverage.",
       "dependency_notes": [
-        "The recovery and status immunity require Toxic Orb activation, but the three attacks remain strong without it.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_TOXIC_ORB automatically, and the Pokémon Center vendor supplies free replacements.",
+        "The recovery and status immunity require Toxic Orb activation, but the three attacks remain strong without it."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Replaced Assault Vest with the superior locally authored Poison Heal sustain line."
@@ -1364,15 +1363,15 @@
       "nature": "NATURE_CAREFUL",
       "ability": "ABILITY_PRANKSTER",
       "suggested_item": "ITEM_LIGHT_CLAY",
-      "item_context": "ITEM_LIGHT_CLAY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_LIGHT_CLAY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown Gen 8 and Champions Random Doubles Klefki screen sets",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_KLEFKI"
       ],
       "doubles_rationale": "Prankster establishes screens and Speed control before most attacks, while Foul Play prevents physical setup users from treating Klefki as passive.",
       "dependency_notes": [
-        "Dark foes ignore targeted Prankster Thunder Wave, but both screens still function normally.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_LIGHT_CLAY automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Dark foes ignore targeted Prankster Thunder Wave, but both screens still function normally."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Completed the direct screen consensus with locally legal Foul Play."
@@ -1389,15 +1388,15 @@
       "nature": "NATURE_QUIET",
       "ability": "ABILITY_INSOMNIA",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "ITEM_EVIOLITE supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Pumpkaboo defensive roles adapted to local doubles data",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_PUMPKABOO"
       ],
       "doubles_rationale": "Trick Room uses Pumpkaboo’s low Speed, Will-O-Wisp suppresses physical damage, Shadow Ball prevents passivity, and Insomnia blocks sleep disruption.",
       "dependency_notes": [
-        "Will-O-Wisp can miss, but Trick Room and Shadow Ball provide independent value.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Will-O-Wisp can miss, but Trick Room and Shadow Ball provide independent value."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Avoided Flare Boost because a first-stage support set cannot safely depend on self-burn."
@@ -1414,15 +1413,15 @@
       "nature": "NATURE_MODEST",
       "ability": "ABILITY_FLARE_BOOST",
       "suggested_item": "ITEM_FLAME_ORB",
-      "item_context": "ITEM_FLAME_ORB supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_FLAME_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Gourgeist utility roles adapted to Emerald Champions special stats and Flare Boost",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_GOURGEIST"
       ],
       "doubles_rationale": "Flame Orb activates Flare Boost for powerful dual STAB, Will-O-Wisp checks physical threats, and Protect secures activation while scouting doubles pressure.",
       "dependency_notes": [
-        "The damage boost requires Flame Orb, and self-burn steadily chips Gourgeist.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_FLAME_ORB automatically, and the Pokémon Center vendor supplies free replacements.",
+        "The damage boost requires Flame Orb, and self-burn steadily chips Gourgeist."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Reauthored around the mod’s 90 Special Attack and unique Flare Boost access."
@@ -1439,15 +1438,15 @@
       "nature": "NATURE_RELAXED",
       "ability": "ABILITY_STURDY",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "ITEM_EVIOLITE supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Gen 7 LC Bergmite Bulky Spinner adapted to doubles",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_BERGMITE"
       ],
       "doubles_rationale": "Sturdy and Eviolite buy an action, Icy Wind controls both foes, Avalanche punishes attacks, and Recover plus Protect extend the support cycle.",
       "dependency_notes": [
-        "Avalanche is strongest after Bergmite is hit, but Icy Wind is always useful speed control.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Avalanche is strongest after Bergmite is hit, but Icy Wind is always useful speed control."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Replaced singles Rapid Spin and Toxic with direct doubles impact."
@@ -1464,15 +1463,15 @@
       "nature": "NATURE_IMPISH",
       "ability": "ABILITY_STURDY",
       "suggested_item": "ITEM_LEFTOVERS",
-      "item_context": "ITEM_LEFTOVERS supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_LEFTOVERS is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown random-doubles Avalugg tank sets adapted to local Wide Guard",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_AVALUGG"
       ],
       "doubles_rationale": "Body Press exploits 184 Defense, Wide Guard blocks spread attacks, Avalanche punishes focus fire, and Recover makes Avalugg a persistent board piece.",
       "dependency_notes": [
-        "The set omits Protect because Wide Guard and Recover supply more distinctive doubles value.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_LEFTOVERS automatically, and the Pokémon Center vendor supplies free replacements.",
+        "The set omits Protect because Wide Guard and Recover supply more distinctive doubles value."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Improved the direct tank shell with its strongest local doubles move."
@@ -1489,15 +1488,15 @@
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_INFILTRATOR",
       "suggested_item": "ITEM_FOCUS_SASH",
-      "item_context": "ITEM_FOCUS_SASH supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Gen 7 LC Noibat offensive utility adapted to doubles",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_NOIBAT"
       ],
       "doubles_rationale": "Tailwind controls Speed, Super Fang creates reliable damage regardless of stats, Taunt stops setup, and Protect preserves Focus Sash positioning.",
       "dependency_notes": [
-        "Noibat has no conventional attack here, so opposing Ghost-types can ignore Super Fang.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Noibat has no conventional attack here, so opposing Ghost-types can ignore Super Fang."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Converted weak Life Orb attacks into a genuinely useful doubles lead."
@@ -1514,15 +1513,15 @@
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_INFILTRATOR",
       "suggested_item": "ITEM_FOCUS_SASH",
-      "item_context": "ITEM_FOCUS_SASH supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Gen 6 VGC 2014 Noivern Utility Dragon",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_NOIVERN"
       ],
       "doubles_rationale": "Noivern combines immediate Draco Meteor pressure with Tailwind, Super Fang, and Protect, while Infiltrator bypasses opposing screens and substitutes.",
       "dependency_notes": [
-        "Draco Meteor reduces Special Attack, but Noivern’s support moves remain unaffected afterward.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Draco Meteor reduces Special Attack, but Noivern’s support moves remain unaffected afterward."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Accepted the direct VGC utility set with the strongest local general ability."
@@ -1539,15 +1538,15 @@
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_FAIRY_AURA",
       "suggested_item": "ITEM_POWER_HERB",
-      "item_context": "ITEM_POWER_HERB supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_POWER_HERB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Gen 7 VGC 2019 Xerneas Geomancy",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_XERNEAS"
       ],
       "doubles_rationale": "Power Herb Geomancy creates an immediate special sweep, Fairy Aura boosts focused and spread STAB, and Protect lets partners manage opposing Steel and Poison threats.",
       "dependency_notes": [
-        "The one-turn setup requires Power Herb; without it Geomancy takes two turns and is much easier to punish.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_POWER_HERB automatically, and the Pokémon Center vendor supplies free replacements.",
+        "The one-turn setup requires Power Herb; without it Geomancy takes two turns and is much easier to punish."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Accepted the definitive VGC Xerneas set."
@@ -1564,15 +1563,15 @@
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_DARK_AURA",
       "suggested_item": "ITEM_ASSAULT_VEST",
-      "item_context": "ITEM_ASSAULT_VEST supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_ASSAULT_VEST is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Gen 8 Battle Stadium Doubles Yveltal Assault Vest",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_YVELTAL"
       ],
       "doubles_rationale": "Oblivion Wing sustains Yveltal, Snarl weakens both foes, Foul Play punishes physical attackers, and Dark Aura Sucker Punch supplies priority.",
       "dependency_notes": [
-        "Timid lowers Sucker Punch damage, but Foul Play uses the target’s Attack and the set primarily values speed and special pressure.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_ASSAULT_VEST automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Timid lowers Sucker Punch damage, but Foul Play uses the target’s Attack and the set primarily values speed and special pressure."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Accepted the direct Smogon Assault Vest support attacker."
@@ -1589,15 +1588,15 @@
       "nature": "NATURE_ADAMANT",
       "ability": "ABILITY_AURA_BREAK",
       "suggested_item": "ITEM_HABAN_BERRY",
-      "item_context": "ITEM_HABAN_BERRY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_HABAN_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Gen 8 2v2 Doubles Zygarde Dragon Dance adapted to local Ground move availability",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_ZYGARDE"
       ],
       "doubles_rationale": "Dragon Dance and Scale Shot build Speed and damage, Land’s Wrath supplies partner-safe spread Ground STAB, and Protect preserves boosts.",
       "dependency_notes": [
-        "Scale Shot can lower Defense and Land’s Wrath is weaker than modern Thousand Arrows, which this ROM does not expose to Zygarde.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_HABAN_BERRY automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Scale Shot can lower Defense and Land’s Wrath is weaker than modern Thousand Arrows, which this ROM does not expose to Zygarde."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Replaced the unavailable source move with the strongest coherent local spread Ground option."
@@ -1614,15 +1613,14 @@
       "nature": "NATURE_SASSY",
       "ability": "ABILITY_CLEAR_BODY",
       "suggested_item": "ITEM_SAFETY_GOGGLES",
-      "item_context": "ITEM_SAFETY_GOGGLES supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_SAFETY_GOGGLES is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Gen 9 National Dex Doubles Diancie Trick Room Setter",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_DIANCIE"
       ],
       "doubles_rationale": "Diamond Storm can raise already exceptional Defense, Body Press converts that bulk into damage, and Trick Room plus Protect control the board.",
       "dependency_notes": [
-        "Safety Goggles is advisory protection from powder; the set’s core mechanics need no item activation.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_SAFETY_GOGGLES automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Accepted the direct modern Smogon doubles set."
@@ -1639,15 +1637,15 @@
       "nature": "NATURE_QUIET",
       "ability": "ABILITY_MAGICIAN",
       "suggested_item": "ITEM_LIFE_ORB",
-      "item_context": "ITEM_LIFE_ORB supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Pokemon Showdown Gen 9 Random Doubles Hoopa attacker adapted away from Choice lock",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_HOOPA"
       ],
       "doubles_rationale": "Hoopa sets Trick Room for itself and allies, then uses enormous Special Attack with focused dual STAB while Protect manages its poor physical bulk.",
       "dependency_notes": [
-        "Trick Room can conflict with fast teammates, but both attacks are immediately threatening without it.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Trick Room can conflict with fast teammates, but both attacks are immediately threatening without it."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Removed Choice-dependent Trick so the preset is coherent before an item is equipped."
@@ -1664,15 +1662,15 @@
       "nature": "NATURE_MODEST",
       "ability": "ABILITY_WATER_ABSORB",
       "suggested_item": "ITEM_LEFTOVERS",
-      "item_context": "ITEM_LEFTOVERS supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
+      "item_context": "ITEM_LEFTOVERS is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "source_refs": [
         "Smogon Gen 9 Doubles OU Volcanion Leftovers",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_VOLCANION"
       ],
       "doubles_rationale": "Steam Eruption and Heat Wave threaten burns and spread damage, while Substitute plus Protect exploit Volcanion’s bulk and Water immunity.",
       "dependency_notes": [
-        "Substitute costs health and works best with Leftovers, but both STAB attacks remain excellent independently.",
-        "The suggested item is advisory only and must be obtained and equipped separately."
+        "The set service equips ITEM_LEFTOVERS automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Substitute costs health and works best with Leftovers, but both STAB attacks remain excellent independently."
       ],
       "reviewed_by": "Emerald Champions Kalos doubles audit",
       "review_notes": "Accepted the direct modern Smogon Doubles OU set."

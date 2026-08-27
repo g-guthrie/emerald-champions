@@ -92,6 +92,9 @@ static void Task_HandleShopMenuBuy(u8 taskId);
 static void Task_HandleShopMenuSell(u8 taskId);
 static void BuyMenuPrintItemDescriptionAndShowItemIcon(s32 item, bool8 onInit, struct ListMenu *list);
 static void BuyMenuPrintPriceInList(u8 windowId, u32 itemId, u8 y);
+static u32 GetShopItemPrice(u16 itemId);
+
+static const u8 sText_Free[] = _("FREE");
 
 static const struct YesNoFuncTable sShopPurchaseYesNoFuncs =
 {
@@ -280,7 +283,7 @@ static u8 CreateShopMenu(u8 martType)
     ScriptContext2_Enable();
     sMartInfo.martType = martType;
 
-    if (martType == MART_TYPE_NORMAL)
+    if (martType == MART_TYPE_NORMAL && !sMartInfo.freeItems)
     {
         struct WindowTemplate winTemplate;
         winTemplate = sShopMenuWindowTemplates[0];
@@ -575,6 +578,13 @@ static void BuyMenuPrintItemDescriptionAndShowItemIcon(s32 item, bool8 onInit, s
     BuyMenuPrint(2, description, 3, 1, 0, 0);
 }
 
+static u32 GetShopItemPrice(u16 itemId)
+{
+    if (sMartInfo.freeItems)
+        return 0;
+    return ItemId_GetPrice(itemId) >> GetPriceReduction(POKENEWS_SLATEPORT);
+}
+
 static void BuyMenuPrintPriceInList(u8 windowId, u32 itemId, u8 y)
 {
     u8 x;
@@ -583,7 +593,11 @@ static void BuyMenuPrintPriceInList(u8 windowId, u32 itemId, u8 y)
     {
         if (sMartInfo.martType == MART_TYPE_NORMAL)
         {
-            if ((ItemId_GetPocket(itemId) == POCKET_TM_HM) && (CheckBagHasItem(itemId, 1) == TRUE))
+            if (sMartInfo.freeItems)
+            {
+                StringCopy(gStringVar4, sText_Free);
+            }
+            else if ((ItemId_GetPocket(itemId) == POCKET_TM_HM) && (CheckBagHasItem(itemId, 1) == TRUE))
             {
                 StringCopy(gStringVar1, gText_ShopPurchasedTMPrice);
                 StringExpandPlaceholders(gStringVar4, gText_StrVar1);
@@ -965,7 +979,7 @@ static void Task_BuyMenu(u8 taskId)
 
             if (sMartInfo.martType == MART_TYPE_NORMAL)
             {
-                sShopData->totalCost = (ItemId_GetPrice(itemId) >> GetPriceReduction(POKENEWS_SLATEPORT));
+                sShopData->totalCost = GetShopItemPrice(itemId);
             }
             else
             {
@@ -1042,7 +1056,10 @@ static void Task_BuyHowManyDialogueInit(u8 taskId)
     BuyMenuPrintItemQuantityAndPrice(taskId);
     ScheduleBgCopyTilemapToVram(0);
 
-    maxQuantity = GetMoney(&gSaveBlock1Ptr->money) / sShopData->totalCost;
+    if (sMartInfo.freeItems)
+        maxQuantity = 99;
+    else
+        maxQuantity = GetMoney(&gSaveBlock1Ptr->money) / sShopData->totalCost;
 
     if (maxQuantity > 99)
     {
@@ -1062,7 +1079,7 @@ static void Task_BuyHowManyDialogueHandleInput(u8 taskId)
 
     if (AdjustQuantityAccordingToDPadInput(&tItemCount, sShopData->maxQuantity) == TRUE)
     {
-        sShopData->totalCost = (ItemId_GetPrice(tItemId) >> GetPriceReduction(POKENEWS_SLATEPORT)) * tItemCount;
+        sShopData->totalCost = GetShopItemPrice(tItemId) * tItemCount;
         BuyMenuPrintItemQuantityAndPrice(taskId);
     }
     else
@@ -1267,6 +1284,16 @@ static void RecordItemPurchase(u8 taskId)
 
 void CreatePokemartMenu(const u16 *itemsForSale)
 {
+    sMartInfo.freeItems = FALSE;
+    CreateShopMenu(MART_TYPE_NORMAL);
+    SetShopItemsForSale(itemsForSale);
+    ClearItemPurchases();
+    SetShopMenuCallback(EnableBothScriptContexts);
+}
+
+void CreateFreePokemartMenu(const u16 *itemsForSale)
+{
+    sMartInfo.freeItems = TRUE;
     CreateShopMenu(MART_TYPE_NORMAL);
     SetShopItemsForSale(itemsForSale);
     ClearItemPurchases();
@@ -1275,6 +1302,7 @@ void CreatePokemartMenu(const u16 *itemsForSale)
 
 void CreateDecorationShop1Menu(const u16 *itemsForSale)
 {
+    sMartInfo.freeItems = FALSE;
     CreateShopMenu(MART_TYPE_DECOR);
     SetShopItemsForSale(itemsForSale);
     SetShopMenuCallback(EnableBothScriptContexts);
@@ -1282,6 +1310,7 @@ void CreateDecorationShop1Menu(const u16 *itemsForSale)
 
 void CreateDecorationShop2Menu(const u16 *itemsForSale)
 {
+    sMartInfo.freeItems = FALSE;
     CreateShopMenu(MART_TYPE_DECOR2);
     SetShopItemsForSale(itemsForSale);
     SetShopMenuCallback(EnableBothScriptContexts);

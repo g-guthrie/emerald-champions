@@ -4,10 +4,10 @@
     {
       "ability": "ABILITY_PRESSURE",
       "dependency_notes": [
-        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Deoxys combines Pressure with Psycho Boost, Superpower, Ice Beam, Protect; every slot advances its mixed glass-cannon attacker role in doubles.",
-      "item_context": "ITEM_FOCUS_SASH supports the mixed glass-cannon attacker role but is never granted by the tutor.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_PSYCHO_BOOST",
         "MOVE_SUPERPOWER",
@@ -28,10 +28,10 @@
     {
       "ability": "ABILITY_PRESSURE",
       "dependency_notes": [
-        "ITEM_LEFTOVERS is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_LEFTOVERS automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Deoxys combines Pressure with Psychic, Thunder Wave, Recover, Protect; every slot advances its bulky speed-control wall role in doubles.",
-      "item_context": "ITEM_LEFTOVERS supports the bulky speed-control wall role but is never granted by the tutor.",
+      "item_context": "ITEM_LEFTOVERS is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_PSYCHIC",
         "MOVE_THUNDER_WAVE",
@@ -52,10 +52,10 @@
     {
       "ability": "ABILITY_PRESSURE",
       "dependency_notes": [
-        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Deoxys combines Pressure with Psycho Boost, Icy Wind, Taunt, Protect; every slot advances its fast anti-setup speed support role in doubles.",
-      "item_context": "ITEM_FOCUS_SASH supports the fast anti-setup speed support role but is never granted by the tutor.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_PSYCHO_BOOST",
         "MOVE_ICY_WIND",
@@ -76,10 +76,10 @@
     {
       "ability": "ABILITY_SHED_SKIN",
       "dependency_notes": [
-        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Burmy combines Shed Skin with Bug Buzz, Electroweb, Protect, Tackle; every slot advances its young electroweb support attacker role in doubles.",
-      "item_context": "ITEM_EVIOLITE supports the young electroweb support attacker role but is never granted by the tutor.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_BUG_BUZZ",
         "MOVE_ELECTROWEB",
@@ -100,10 +100,10 @@
     {
       "ability": "ABILITY_SHED_SKIN",
       "dependency_notes": [
-        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Burmy combines Shed Skin with Bug Buzz, Electroweb, Protect, Tackle; every slot advances its young electroweb support attacker role in doubles.",
-      "item_context": "ITEM_EVIOLITE supports the young electroweb support attacker role but is never granted by the tutor.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_BUG_BUZZ",
         "MOVE_ELECTROWEB",
@@ -124,10 +124,10 @@
     {
       "ability": "ABILITY_ANTICIPATION",
       "dependency_notes": [
-        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Wormadam combines Anticipation with Bug Buzz, Earth Power, Electroweb, Protect; every slot advances its ground-cloak spread attacker role in doubles.",
-      "item_context": "ITEM_SITRUS_BERRY supports the ground-cloak spread attacker role but is never granted by the tutor.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_BUG_BUZZ",
         "MOVE_EARTH_POWER",
@@ -148,10 +148,10 @@
     {
       "ability": "ABILITY_ANTICIPATION",
       "dependency_notes": [
-        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Wormadam combines Anticipation with Bug Buzz, Flash Cannon, Electroweb, Protect; every slot advances its steel-cloak spread attacker role in doubles.",
-      "item_context": "ITEM_SITRUS_BERRY supports the steel-cloak spread attacker role but is never granted by the tutor.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_BUG_BUZZ",
         "MOVE_FLASH_CANNON",
@@ -172,10 +172,10 @@
     {
       "ability": "ABILITY_STICKY_HOLD",
       "dependency_notes": [
-        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Shellos combines Sticky Hold with Scald, Icy Wind, Recover, Protect; every slot advances its bulky speed-control support role in doubles.",
-      "item_context": "ITEM_EVIOLITE supports the bulky speed-control support role but is never granted by the tutor.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_SCALD",
         "MOVE_ICY_WIND",
@@ -196,10 +196,10 @@
     {
       "ability": "ABILITY_STORM_DRAIN",
       "dependency_notes": [
-        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Gastrodon combines Storm Drain with Scald, Earth Power, Icy Wind, Protect; every slot advances its storm drain speed-control attacker role in doubles.",
-      "item_context": "ITEM_SITRUS_BERRY supports the storm drain speed-control attacker role but is never granted by the tutor.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_SCALD",
         "MOVE_EARTH_POWER",
@@ -220,10 +220,10 @@
     {
       "ability": "ABILITY_LEVITATE",
       "dependency_notes": [
-        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; Overheat sharply lowers Special Attack, so plan to switch or use it as a finishing burst."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Levitate gives Heat Rotom clean positioning, Overheat supplies its defining Fire burst, Thunderbolt is reliable Electric STAB, Will-O-Wisp checks physical attackers, and Protect preserves it through double targets.",
-      "item_context": "ITEM_SITRUS_BERRY gives the bulky appliance attacker another useful turn but is never granted by the tutor.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_OVERHEAT",
         "MOVE_THUNDERBOLT",
@@ -244,10 +244,10 @@
     {
       "ability": "ABILITY_LEVITATE",
       "dependency_notes": [
-        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; Hydro Pump has imperfect accuracy but is not the set's only useful action."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Levitate and excellent defensive typing let Wash Rotom stay on the field, Hydro Pump and Thunderbolt give complementary STAB pressure, Will-O-Wisp suppresses physical attackers, and Protect manages focused fire.",
-      "item_context": "ITEM_SITRUS_BERRY reinforces Wash Rotom's bulky attacker role but is never granted by the tutor.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_HYDRO_PUMP",
         "MOVE_THUNDERBOLT",
@@ -268,10 +268,10 @@
     {
       "ability": "ABILITY_LEVITATE",
       "dependency_notes": [
-        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; Freeze-Dry is the local appliance move and needs no snow support."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Freeze-Dry gives Frost Rotom accurate Ice pressure that also punishes Water types, Thunderbolt supplies strong Electric STAB, Electroweb controls both opponents' speed, and Protect preserves positioning.",
-      "item_context": "ITEM_SITRUS_BERRY supports Frost Rotom while it alternates damage, speed control, and Protect but is never granted by the tutor.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_FREEZE_DRY",
         "MOVE_THUNDERBOLT",
@@ -292,10 +292,10 @@
     {
       "ability": "ABILITY_MOTOR_DRIVE",
       "dependency_notes": [
-        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; Hurricane becomes fully accurate in rain but remains usable with risk outside it."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Motor Drive turns Electric targeting into a Speed boost instead of wasting an ability on redundant Ground immunity, while Hurricane and Thunderbolt pressure distinct targets, Electroweb controls both foes, and Protect scouts concentrated attacks.",
-      "item_context": "ITEM_SITRUS_BERRY supports Fan Rotom's repeated attacking and speed-control turns but is never granted by the tutor.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_HURRICANE",
         "MOVE_THUNDERBOLT",
@@ -316,10 +316,10 @@
     {
       "ability": "ABILITY_LEVITATE",
       "dependency_notes": [
-        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; Leaf Storm sharply lowers Special Attack, so plan to switch or use it as a finishing burst."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Levitate gives Mow Rotom safe positioning, Leaf Storm deletes Water- and Ground-type targets, Thunderbolt supplies reliable Electric STAB, Will-O-Wisp punishes physical pressure, and Protect manages double targets.",
-      "item_context": "ITEM_SITRUS_BERRY supports Mow Rotom's bulky offensive utility but is never granted by the tutor.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_LEAF_STORM",
         "MOVE_THUNDERBOLT",
@@ -340,10 +340,10 @@
     {
       "ability": "ABILITY_LEVITATE",
       "dependency_notes": [
-        "ITEM_GRISEOUS_ORB is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "ITEM_GRISEOUS_ORB is protected progression; the automatic runtime item is ITEM_LIFE_ORB."
       ],
       "doubles_rationale": "Giratina combines Levitate with Shadow Claw, Shadow Sneak, Dragon Claw, Protect; every slot advances its origin physical attacker role in doubles.",
-      "item_context": "ITEM_GRISEOUS_ORB supports the origin physical attacker role but is never granted by the tutor.",
+      "item_context": "ITEM_GRISEOUS_ORB remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_GRISEOUS_ORB manually after earning it.",
       "moves": [
         "MOVE_SHADOW_CLAW",
         "MOVE_SHADOW_SNEAK",
@@ -364,10 +364,10 @@
     {
       "ability": "ABILITY_SERENE_GRACE",
       "dependency_notes": [
-        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Shaymin combines Serene Grace with Seed Flare, Air Slash, Tailwind, Protect; every slot advances its serene grace tailwind attacker role in doubles.",
-      "item_context": "ITEM_FOCUS_SASH supports the serene grace tailwind attacker role but is never granted by the tutor.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_SEED_FLARE",
         "MOVE_AIR_SLASH",
@@ -388,10 +388,10 @@
     {
       "ability": "ABILITY_MULTITYPE",
       "dependency_notes": [
-        "ITEM_FIST_PLATE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "ITEM_FIST_PLATE is protected progression; the automatic runtime item is ITEM_LIFE_ORB."
       ],
       "doubles_rationale": "Arceus combines Multitype with Judgment, Dark Pulse, Recover, Protect; every slot advances its fighting multitype sustain attacker role in doubles.",
-      "item_context": "ITEM_FIST_PLATE supports the fighting multitype sustain attacker role but is never granted by the tutor.",
+      "item_context": "ITEM_FIST_PLATE remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_FIST_PLATE manually after earning it.",
       "moves": [
         "MOVE_JUDGMENT",
         "MOVE_DARK_PULSE",
@@ -412,10 +412,10 @@
     {
       "ability": "ABILITY_MULTITYPE",
       "dependency_notes": [
-        "ITEM_SKY_PLATE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "ITEM_SKY_PLATE is protected progression; the automatic runtime item is ITEM_LIFE_ORB."
       ],
       "doubles_rationale": "Arceus combines Multitype with Judgment, Ice Beam, Recover, Protect; every slot advances its flying multitype sustain attacker role in doubles.",
-      "item_context": "ITEM_SKY_PLATE supports the flying multitype sustain attacker role but is never granted by the tutor.",
+      "item_context": "ITEM_SKY_PLATE remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_SKY_PLATE manually after earning it.",
       "moves": [
         "MOVE_JUDGMENT",
         "MOVE_ICE_BEAM",
@@ -436,10 +436,10 @@
     {
       "ability": "ABILITY_MULTITYPE",
       "dependency_notes": [
-        "ITEM_TOXIC_PLATE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "ITEM_TOXIC_PLATE is protected progression; the automatic runtime item is ITEM_LIFE_ORB."
       ],
       "doubles_rationale": "Arceus combines Multitype with Judgment, Earth Power, Recover, Protect; every slot advances its poison multitype sustain attacker role in doubles.",
-      "item_context": "ITEM_TOXIC_PLATE supports the poison multitype sustain attacker role but is never granted by the tutor.",
+      "item_context": "ITEM_TOXIC_PLATE remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_TOXIC_PLATE manually after earning it.",
       "moves": [
         "MOVE_JUDGMENT",
         "MOVE_EARTH_POWER",
@@ -460,11 +460,11 @@
     {
       "ability": "ABILITY_MULTITYPE",
       "dependency_notes": [
-        "ITEM_EARTH_PLATE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability.",
+        "ITEM_EARTH_PLATE is protected progression; the automatic runtime item is ITEM_LIFE_ORB.",
         "Earthquake can hit the ally, so pair it with immunity, Telepathy, or Protect."
       ],
       "doubles_rationale": "Arceus combines Multitype with Swords Dance, Earthquake, Stone Edge, Protect; every slot advances its ground multitype setup attacker role in doubles.",
-      "item_context": "ITEM_EARTH_PLATE supports the ground multitype setup attacker role but is never granted by the tutor.",
+      "item_context": "ITEM_EARTH_PLATE remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_EARTH_PLATE manually after earning it.",
       "moves": [
         "MOVE_SWORDS_DANCE",
         "MOVE_EARTHQUAKE",
@@ -485,10 +485,10 @@
     {
       "ability": "ABILITY_MULTITYPE",
       "dependency_notes": [
-        "ITEM_STONE_PLATE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "ITEM_STONE_PLATE is protected progression; the automatic runtime item is ITEM_LIFE_ORB."
       ],
       "doubles_rationale": "Arceus combines Multitype with Judgment, Earth Power, Recover, Protect; every slot advances its rock multitype sustain attacker role in doubles.",
-      "item_context": "ITEM_STONE_PLATE supports the rock multitype sustain attacker role but is never granted by the tutor.",
+      "item_context": "ITEM_STONE_PLATE remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_STONE_PLATE manually after earning it.",
       "moves": [
         "MOVE_JUDGMENT",
         "MOVE_EARTH_POWER",
@@ -509,10 +509,10 @@
     {
       "ability": "ABILITY_MULTITYPE",
       "dependency_notes": [
-        "ITEM_INSECT_PLATE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "ITEM_INSECT_PLATE is protected progression; the automatic runtime item is ITEM_LIFE_ORB."
       ],
       "doubles_rationale": "Arceus combines Multitype with Judgment, Earth Power, Recover, Protect; every slot advances its bug multitype sustain attacker role in doubles.",
-      "item_context": "ITEM_INSECT_PLATE supports the bug multitype sustain attacker role but is never granted by the tutor.",
+      "item_context": "ITEM_INSECT_PLATE remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_INSECT_PLATE manually after earning it.",
       "moves": [
         "MOVE_JUDGMENT",
         "MOVE_EARTH_POWER",
@@ -533,10 +533,10 @@
     {
       "ability": "ABILITY_MULTITYPE",
       "dependency_notes": [
-        "ITEM_SPOOKY_PLATE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "ITEM_SPOOKY_PLATE is protected progression; the automatic runtime item is ITEM_LIFE_ORB."
       ],
       "doubles_rationale": "Arceus combines Multitype with Judgment, Focus Blast, Recover, Protect; every slot advances its ghost multitype sustain attacker role in doubles.",
-      "item_context": "ITEM_SPOOKY_PLATE supports the ghost multitype sustain attacker role but is never granted by the tutor.",
+      "item_context": "ITEM_SPOOKY_PLATE remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_SPOOKY_PLATE manually after earning it.",
       "moves": [
         "MOVE_JUDGMENT",
         "MOVE_FOCUS_BLAST",
@@ -557,10 +557,10 @@
     {
       "ability": "ABILITY_MULTITYPE",
       "dependency_notes": [
-        "ITEM_IRON_PLATE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "ITEM_IRON_PLATE is protected progression; the automatic runtime item is ITEM_LIFE_ORB."
       ],
       "doubles_rationale": "Arceus combines Multitype with Judgment, Earth Power, Recover, Protect; every slot advances its steel multitype sustain attacker role in doubles.",
-      "item_context": "ITEM_IRON_PLATE supports the steel multitype sustain attacker role but is never granted by the tutor.",
+      "item_context": "ITEM_IRON_PLATE remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_IRON_PLATE manually after earning it.",
       "moves": [
         "MOVE_JUDGMENT",
         "MOVE_EARTH_POWER",
@@ -581,10 +581,10 @@
     {
       "ability": "ABILITY_MULTITYPE",
       "dependency_notes": [
-        "ITEM_FLAME_PLATE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "ITEM_FLAME_PLATE is protected progression; the automatic runtime item is ITEM_LIFE_ORB."
       ],
       "doubles_rationale": "Arceus combines Multitype with Judgment, Earth Power, Recover, Protect; every slot advances its fire multitype sustain attacker role in doubles.",
-      "item_context": "ITEM_FLAME_PLATE supports the fire multitype sustain attacker role but is never granted by the tutor.",
+      "item_context": "ITEM_FLAME_PLATE remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_FLAME_PLATE manually after earning it.",
       "moves": [
         "MOVE_JUDGMENT",
         "MOVE_EARTH_POWER",
@@ -605,10 +605,10 @@
     {
       "ability": "ABILITY_MULTITYPE",
       "dependency_notes": [
-        "ITEM_SPLASH_PLATE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "ITEM_SPLASH_PLATE is protected progression; the automatic runtime item is ITEM_LIFE_ORB."
       ],
       "doubles_rationale": "Arceus combines Multitype with Judgment, Ice Beam, Recover, Protect; every slot advances its water multitype sustain attacker role in doubles.",
-      "item_context": "ITEM_SPLASH_PLATE supports the water multitype sustain attacker role but is never granted by the tutor.",
+      "item_context": "ITEM_SPLASH_PLATE remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_SPLASH_PLATE manually after earning it.",
       "moves": [
         "MOVE_JUDGMENT",
         "MOVE_ICE_BEAM",
@@ -629,10 +629,10 @@
     {
       "ability": "ABILITY_MULTITYPE",
       "dependency_notes": [
-        "ITEM_MEADOW_PLATE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "ITEM_MEADOW_PLATE is protected progression; the automatic runtime item is ITEM_LIFE_ORB."
       ],
       "doubles_rationale": "Arceus combines Multitype with Judgment, Earth Power, Recover, Protect; every slot advances its grass multitype sustain attacker role in doubles.",
-      "item_context": "ITEM_MEADOW_PLATE supports the grass multitype sustain attacker role but is never granted by the tutor.",
+      "item_context": "ITEM_MEADOW_PLATE remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_MEADOW_PLATE manually after earning it.",
       "moves": [
         "MOVE_JUDGMENT",
         "MOVE_EARTH_POWER",
@@ -653,10 +653,10 @@
     {
       "ability": "ABILITY_MULTITYPE",
       "dependency_notes": [
-        "ITEM_ZAP_PLATE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "ITEM_ZAP_PLATE is protected progression; the automatic runtime item is ITEM_LIFE_ORB."
       ],
       "doubles_rationale": "Arceus combines Multitype with Judgment, Ice Beam, Recover, Protect; every slot advances its electric multitype sustain attacker role in doubles.",
-      "item_context": "ITEM_ZAP_PLATE supports the electric multitype sustain attacker role but is never granted by the tutor.",
+      "item_context": "ITEM_ZAP_PLATE remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_ZAP_PLATE manually after earning it.",
       "moves": [
         "MOVE_JUDGMENT",
         "MOVE_ICE_BEAM",
@@ -677,10 +677,10 @@
     {
       "ability": "ABILITY_MULTITYPE",
       "dependency_notes": [
-        "ITEM_MIND_PLATE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "ITEM_MIND_PLATE is protected progression; the automatic runtime item is ITEM_LIFE_ORB."
       ],
       "doubles_rationale": "Arceus combines Multitype with Judgment, Ice Beam, Recover, Protect; every slot advances its psychic multitype sustain attacker role in doubles.",
-      "item_context": "ITEM_MIND_PLATE supports the psychic multitype sustain attacker role but is never granted by the tutor.",
+      "item_context": "ITEM_MIND_PLATE remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_MIND_PLATE manually after earning it.",
       "moves": [
         "MOVE_JUDGMENT",
         "MOVE_ICE_BEAM",
@@ -701,10 +701,10 @@
     {
       "ability": "ABILITY_MULTITYPE",
       "dependency_notes": [
-        "ITEM_ICICLE_PLATE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "ITEM_ICICLE_PLATE is protected progression; the automatic runtime item is ITEM_LIFE_ORB."
       ],
       "doubles_rationale": "Arceus combines Multitype with Judgment, Thunderbolt, Recover, Protect; every slot advances its ice multitype sustain attacker role in doubles.",
-      "item_context": "ITEM_ICICLE_PLATE supports the ice multitype sustain attacker role but is never granted by the tutor.",
+      "item_context": "ITEM_ICICLE_PLATE remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_ICICLE_PLATE manually after earning it.",
       "moves": [
         "MOVE_JUDGMENT",
         "MOVE_THUNDERBOLT",
@@ -725,10 +725,10 @@
     {
       "ability": "ABILITY_MULTITYPE",
       "dependency_notes": [
-        "ITEM_DRACO_PLATE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "ITEM_DRACO_PLATE is protected progression; the automatic runtime item is ITEM_LIFE_ORB."
       ],
       "doubles_rationale": "Arceus combines Multitype with Judgment, Will O Wisp, Recover, Protect; every slot advances its dragon multitype sustain attacker role in doubles.",
-      "item_context": "ITEM_DRACO_PLATE supports the dragon multitype sustain attacker role but is never granted by the tutor.",
+      "item_context": "ITEM_DRACO_PLATE remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_DRACO_PLATE manually after earning it.",
       "moves": [
         "MOVE_JUDGMENT",
         "MOVE_WILL_O_WISP",
@@ -749,10 +749,10 @@
     {
       "ability": "ABILITY_MULTITYPE",
       "dependency_notes": [
-        "ITEM_DREAD_PLATE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "ITEM_DREAD_PLATE is protected progression; the automatic runtime item is ITEM_LIFE_ORB."
       ],
       "doubles_rationale": "Arceus combines Multitype with Judgment, Fire Blast, Recover, Protect; every slot advances its dark multitype sustain attacker role in doubles.",
-      "item_context": "ITEM_DREAD_PLATE supports the dark multitype sustain attacker role but is never granted by the tutor.",
+      "item_context": "ITEM_DREAD_PLATE remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_DREAD_PLATE manually after earning it.",
       "moves": [
         "MOVE_JUDGMENT",
         "MOVE_FIRE_BLAST",
@@ -773,10 +773,10 @@
     {
       "ability": "ABILITY_MULTITYPE",
       "dependency_notes": [
-        "ITEM_PIXIE_PLATE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "ITEM_PIXIE_PLATE is protected progression; the automatic runtime item is ITEM_LIFE_ORB."
       ],
       "doubles_rationale": "Arceus combines Multitype with Judgment, Earth Power, Recover, Protect; every slot advances its fairy multitype sustain attacker role in doubles.",
-      "item_context": "ITEM_PIXIE_PLATE supports the fairy multitype sustain attacker role but is never granted by the tutor.",
+      "item_context": "ITEM_PIXIE_PLATE remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_PIXIE_PLATE manually after earning it.",
       "moves": [
         "MOVE_JUDGMENT",
         "MOVE_EARTH_POWER",
@@ -797,10 +797,10 @@
     {
       "ability": "ABILITY_ADAPTABILITY",
       "dependency_notes": [
-        "ITEM_MYSTIC_WATER is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_MYSTIC_WATER automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Basculin combines Adaptability with Protect, Aqua Jet, Flip Turn, Head Smash; every slot advances its adaptability priority pivot role in doubles.",
-      "item_context": "ITEM_MYSTIC_WATER supports the adaptability priority pivot role but is never granted by the tutor.",
+      "item_context": "ITEM_MYSTIC_WATER is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_PROTECT",
         "MOVE_AQUA_JET",
@@ -821,10 +821,10 @@
     {
       "ability": "ABILITY_SAP_SIPPER",
       "dependency_notes": [
-        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Deerling combines Sap Sipper with Double Edge, Seed Bomb, Jump Kick, Protect; every slot advances its summer sap sipper attacker role in doubles.",
-      "item_context": "ITEM_EVIOLITE supports the summer sap sipper attacker role but is never granted by the tutor.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_DOUBLE_EDGE",
         "MOVE_SEED_BOMB",
@@ -845,10 +845,10 @@
     {
       "ability": "ABILITY_SAP_SIPPER",
       "dependency_notes": [
-        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Deerling combines Sap Sipper with Double Edge, Seed Bomb, Jump Kick, Protect; every slot advances its autumn sap sipper attacker role in doubles.",
-      "item_context": "ITEM_EVIOLITE supports the autumn sap sipper attacker role but is never granted by the tutor.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_DOUBLE_EDGE",
         "MOVE_SEED_BOMB",
@@ -869,10 +869,10 @@
     {
       "ability": "ABILITY_SAP_SIPPER",
       "dependency_notes": [
-        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Deerling combines Sap Sipper with Double Edge, Seed Bomb, Jump Kick, Protect; every slot advances its winter sap sipper attacker role in doubles.",
-      "item_context": "ITEM_EVIOLITE supports the winter sap sipper attacker role but is never granted by the tutor.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_DOUBLE_EDGE",
         "MOVE_SEED_BOMB",
@@ -893,10 +893,10 @@
     {
       "ability": "ABILITY_SAP_SIPPER",
       "dependency_notes": [
-        "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Sawsbuck combines Sap Sipper with Horn Leech, Double Edge, Jump Kick, Protect; every slot advances its summer sap sipper attacker role in doubles.",
-      "item_context": "ITEM_LIFE_ORB supports the summer sap sipper attacker role but is never granted by the tutor.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_HORN_LEECH",
         "MOVE_DOUBLE_EDGE",
@@ -917,10 +917,10 @@
     {
       "ability": "ABILITY_SAP_SIPPER",
       "dependency_notes": [
-        "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Sawsbuck combines Sap Sipper with Horn Leech, Double Edge, Jump Kick, Protect; every slot advances its autumn sap sipper attacker role in doubles.",
-      "item_context": "ITEM_LIFE_ORB supports the autumn sap sipper attacker role but is never granted by the tutor.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_HORN_LEECH",
         "MOVE_DOUBLE_EDGE",
@@ -941,10 +941,10 @@
     {
       "ability": "ABILITY_SAP_SIPPER",
       "dependency_notes": [
-        "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Sawsbuck combines Sap Sipper with Horn Leech, Double Edge, Jump Kick, Protect; every slot advances its winter sap sipper attacker role in doubles.",
-      "item_context": "ITEM_LIFE_ORB supports the winter sap sipper attacker role but is never granted by the tutor.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_HORN_LEECH",
         "MOVE_DOUBLE_EDGE",
@@ -965,10 +965,10 @@
     {
       "ability": "ABILITY_REGENERATOR",
       "dependency_notes": [
-        "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Tornadus combines Regenerator with Hurricane, Taunt, Tailwind, Protect; every slot advances its regenerator tailwind attacker role in doubles.",
-      "item_context": "ITEM_LIFE_ORB supports the regenerator tailwind attacker role but is never granted by the tutor.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_HURRICANE",
         "MOVE_TAUNT",
@@ -989,10 +989,10 @@
     {
       "ability": "ABILITY_VOLT_ABSORB",
       "dependency_notes": [
-        "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Thundurus combines Volt Absorb with Thunderbolt, Flash Cannon, Thunder Wave, Protect; every slot advances its thundurus exact-form source-backed set role in doubles.",
-      "item_context": "ITEM_LIFE_ORB supports the thundurus exact-form source-backed set role but is never granted by the tutor.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_THUNDERBOLT",
         "MOVE_FLASH_CANNON",
@@ -1013,11 +1013,11 @@
     {
       "ability": "ABILITY_INTIMIDATE",
       "dependency_notes": [
-        "ITEM_CHOICE_SCARF is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability.",
+        "The set service equips ITEM_CHOICE_SCARF automatically, and the Pokémon Center vendor supplies free replacements.",
         "Earthquake can hit the ally, so pair it with immunity, Telepathy, or Protect."
       ],
       "doubles_rationale": "Landorus combines Intimidate with Earthquake, Rock Slide, Superpower, Knock Off; every slot advances its landorus exact-form source-backed set role in doubles.",
-      "item_context": "ITEM_CHOICE_SCARF supports the landorus exact-form source-backed set role but is never granted by the tutor.",
+      "item_context": "ITEM_CHOICE_SCARF is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_EARTHQUAKE",
         "MOVE_ROCK_SLIDE",
@@ -1038,10 +1038,10 @@
     {
       "ability": "ABILITY_TURBOBLAZE",
       "dependency_notes": [
-        "ITEM_CHOICE_SCARF is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_CHOICE_SCARF automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Kyurem combines Turboblaze with Blizzard, Ice Beam, Fusion Flare, Draco Meteor; every slot advances its kyurem exact-form source-backed set role in doubles.",
-      "item_context": "ITEM_CHOICE_SCARF supports the kyurem exact-form source-backed set role but is never granted by the tutor.",
+      "item_context": "ITEM_CHOICE_SCARF is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_BLIZZARD",
         "MOVE_ICE_BEAM",
@@ -1062,10 +1062,10 @@
     {
       "ability": "ABILITY_TERAVOLT",
       "dependency_notes": [
-        "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Kyurem combines Teravolt with Icicle Spear, Fusion Bolt, Dragon Dance, Protect; every slot advances its teravolt dragon dance attacker role in doubles.",
-      "item_context": "ITEM_LIFE_ORB supports the teravolt dragon dance attacker role but is never granted by the tutor.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_ICICLE_SPEAR",
         "MOVE_FUSION_BOLT",
@@ -1087,10 +1087,10 @@
       "ability": "ABILITY_JUSTIFIED",
       "alias_of": "SPECIES_KELDEO",
       "dependency_notes": [
-        "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Keldeo combines Justified with Hydro Pump, Secret Sword, Quick Guard, Protect; every slot advances its keldeo source-backed doubles set role in doubles.",
-      "item_context": "ITEM_LIFE_ORB supports the keldeo source-backed doubles set role but is never granted by the tutor.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_HYDRO_PUMP",
         "MOVE_SECRET_SWORD",
@@ -1111,10 +1111,11 @@
     {
       "ability": "ABILITY_DOWNLOAD",
       "dependency_notes": [
+        "ITEM_DOUSE_DRIVE is protected progression; the automatic runtime item is ITEM_LIFE_ORB.",
         "Douse Drive must be equipped manually to maintain this form and make Techno Blast Water type; the tutor changes only moves, nature, and ability."
       ],
       "doubles_rationale": "Download supplies immediate offense while Douse Drive Techno Blast adds Water coverage beside Bug Buzz, Iron Head, and Protect.",
-      "item_context": "ITEM_DOUSE_DRIVE is required to maintain Douse Drive form and set Techno Blast’s type; it is never granted by the tutor.",
+      "item_context": "ITEM_DOUSE_DRIVE remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_DOUSE_DRIVE manually after earning it.",
       "moves": [
         "MOVE_BUG_BUZZ",
         "MOVE_IRON_HEAD",
@@ -1135,10 +1136,11 @@
     {
       "ability": "ABILITY_DOWNLOAD",
       "dependency_notes": [
+        "ITEM_SHOCK_DRIVE is protected progression; the automatic runtime item is ITEM_LIFE_ORB.",
         "Shock Drive must be equipped manually to maintain this form and make Techno Blast Electric type; the tutor changes only moves, nature, and ability."
       ],
       "doubles_rationale": "Download supplies immediate offense while Shock Drive Techno Blast adds Electric coverage beside Bug Buzz, Iron Head, and Protect.",
-      "item_context": "ITEM_SHOCK_DRIVE is required to maintain Shock Drive form and set Techno Blast’s type; it is never granted by the tutor.",
+      "item_context": "ITEM_SHOCK_DRIVE remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_SHOCK_DRIVE manually after earning it.",
       "moves": [
         "MOVE_BUG_BUZZ",
         "MOVE_IRON_HEAD",
@@ -1159,10 +1161,11 @@
     {
       "ability": "ABILITY_DOWNLOAD",
       "dependency_notes": [
+        "ITEM_BURN_DRIVE is protected progression; the automatic runtime item is ITEM_LIFE_ORB.",
         "Burn Drive must be equipped manually to maintain this form and make Techno Blast Fire type; the tutor changes only moves, nature, and ability."
       ],
       "doubles_rationale": "Download supplies immediate offense while Burn Drive Techno Blast adds Fire coverage beside Bug Buzz, Iron Head, and Protect.",
-      "item_context": "ITEM_BURN_DRIVE is required to maintain Burn Drive form and set Techno Blast’s type; it is never granted by the tutor.",
+      "item_context": "ITEM_BURN_DRIVE remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_BURN_DRIVE manually after earning it.",
       "moves": [
         "MOVE_BUG_BUZZ",
         "MOVE_IRON_HEAD",
@@ -1183,10 +1186,11 @@
     {
       "ability": "ABILITY_DOWNLOAD",
       "dependency_notes": [
+        "ITEM_CHILL_DRIVE is protected progression; the automatic runtime item is ITEM_LIFE_ORB.",
         "Chill Drive must be equipped manually to maintain this form and make Techno Blast Ice type; the tutor changes only moves, nature, and ability."
       ],
       "doubles_rationale": "Download supplies immediate offense while Chill Drive Techno Blast adds Ice coverage beside Bug Buzz, Iron Head, and Protect.",
-      "item_context": "ITEM_CHILL_DRIVE is required to maintain Chill Drive form and set Techno Blast’s type; it is never granted by the tutor.",
+      "item_context": "ITEM_CHILL_DRIVE remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_CHILL_DRIVE manually after earning it.",
       "moves": [
         "MOVE_BUG_BUZZ",
         "MOVE_IRON_HEAD",
@@ -1207,10 +1211,10 @@
     {
       "ability": "ABILITY_BATTLE_BOND",
       "dependency_notes": [
-        "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Hydro Pump and Dark Pulse provide immediate STAB pressure, while Water Shuriken becomes fixed three-hit priority after Battle Bond creates Ash-Greninja and Protect preserves positioning.",
-      "item_context": "ITEM_LIFE_ORB supports the battle bond special attacker role but is never granted by the tutor.",
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_HYDRO_PUMP",
         "MOVE_DARK_PULSE",
@@ -1231,10 +1235,10 @@
     {
       "ability": "ABILITY_COMPOUND_EYES",
       "dependency_notes": [
-        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Vivillon combines Compound Eyes with Tailwind, Sleep Powder, Hurricane, Protect; every slot advances its polar compound eyes support role in doubles.",
-      "item_context": "ITEM_FOCUS_SASH supports the polar compound eyes support role but is never granted by the tutor.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_TAILWIND",
         "MOVE_SLEEP_POWDER",
@@ -1255,10 +1259,10 @@
     {
       "ability": "ABILITY_COMPOUND_EYES",
       "dependency_notes": [
-        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Vivillon combines Compound Eyes with Tailwind, Sleep Powder, Hurricane, Protect; every slot advances its tundra compound eyes support role in doubles.",
-      "item_context": "ITEM_FOCUS_SASH supports the tundra compound eyes support role but is never granted by the tutor.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_TAILWIND",
         "MOVE_SLEEP_POWDER",
@@ -1279,10 +1283,10 @@
     {
       "ability": "ABILITY_COMPOUND_EYES",
       "dependency_notes": [
-        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Vivillon combines Compound Eyes with Tailwind, Sleep Powder, Hurricane, Protect; every slot advances its continental compound eyes support role in doubles.",
-      "item_context": "ITEM_FOCUS_SASH supports the continental compound eyes support role but is never granted by the tutor.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_TAILWIND",
         "MOVE_SLEEP_POWDER",
@@ -1303,10 +1307,10 @@
     {
       "ability": "ABILITY_COMPOUND_EYES",
       "dependency_notes": [
-        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Vivillon combines Compound Eyes with Tailwind, Sleep Powder, Hurricane, Protect; every slot advances its garden compound eyes support role in doubles.",
-      "item_context": "ITEM_FOCUS_SASH supports the garden compound eyes support role but is never granted by the tutor.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_TAILWIND",
         "MOVE_SLEEP_POWDER",
@@ -1327,10 +1331,10 @@
     {
       "ability": "ABILITY_COMPOUND_EYES",
       "dependency_notes": [
-        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Vivillon combines Compound Eyes with Tailwind, Sleep Powder, Hurricane, Protect; every slot advances its elegant compound eyes support role in doubles.",
-      "item_context": "ITEM_FOCUS_SASH supports the elegant compound eyes support role but is never granted by the tutor.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_TAILWIND",
         "MOVE_SLEEP_POWDER",
@@ -1351,10 +1355,10 @@
     {
       "ability": "ABILITY_COMPOUND_EYES",
       "dependency_notes": [
-        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Vivillon combines Compound Eyes with Tailwind, Sleep Powder, Hurricane, Protect; every slot advances its meadow compound eyes support role in doubles.",
-      "item_context": "ITEM_FOCUS_SASH supports the meadow compound eyes support role but is never granted by the tutor.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_TAILWIND",
         "MOVE_SLEEP_POWDER",
@@ -1375,10 +1379,10 @@
     {
       "ability": "ABILITY_COMPOUND_EYES",
       "dependency_notes": [
-        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Vivillon combines Compound Eyes with Tailwind, Sleep Powder, Hurricane, Protect; every slot advances its modern compound eyes support role in doubles.",
-      "item_context": "ITEM_FOCUS_SASH supports the modern compound eyes support role but is never granted by the tutor.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_TAILWIND",
         "MOVE_SLEEP_POWDER",
@@ -1399,10 +1403,10 @@
     {
       "ability": "ABILITY_COMPOUND_EYES",
       "dependency_notes": [
-        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Vivillon combines Compound Eyes with Tailwind, Sleep Powder, Hurricane, Protect; every slot advances its marine compound eyes support role in doubles.",
-      "item_context": "ITEM_FOCUS_SASH supports the marine compound eyes support role but is never granted by the tutor.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_TAILWIND",
         "MOVE_SLEEP_POWDER",
@@ -1423,10 +1427,10 @@
     {
       "ability": "ABILITY_COMPOUND_EYES",
       "dependency_notes": [
-        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Vivillon combines Compound Eyes with Tailwind, Sleep Powder, Hurricane, Protect; every slot advances its archipelago compound eyes support role in doubles.",
-      "item_context": "ITEM_FOCUS_SASH supports the archipelago compound eyes support role but is never granted by the tutor.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_TAILWIND",
         "MOVE_SLEEP_POWDER",
@@ -1447,10 +1451,10 @@
     {
       "ability": "ABILITY_COMPOUND_EYES",
       "dependency_notes": [
-        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Vivillon combines Compound Eyes with Tailwind, Sleep Powder, Hurricane, Protect; every slot advances its high plains compound eyes support role in doubles.",
-      "item_context": "ITEM_FOCUS_SASH supports the high plains compound eyes support role but is never granted by the tutor.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_TAILWIND",
         "MOVE_SLEEP_POWDER",
@@ -1471,10 +1475,10 @@
     {
       "ability": "ABILITY_COMPOUND_EYES",
       "dependency_notes": [
-        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Vivillon combines Compound Eyes with Tailwind, Sleep Powder, Hurricane, Protect; every slot advances its sandstorm compound eyes support role in doubles.",
-      "item_context": "ITEM_FOCUS_SASH supports the sandstorm compound eyes support role but is never granted by the tutor.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_TAILWIND",
         "MOVE_SLEEP_POWDER",
@@ -1495,10 +1499,10 @@
     {
       "ability": "ABILITY_COMPOUND_EYES",
       "dependency_notes": [
-        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Vivillon combines Compound Eyes with Tailwind, Sleep Powder, Hurricane, Protect; every slot advances its river compound eyes support role in doubles.",
-      "item_context": "ITEM_FOCUS_SASH supports the river compound eyes support role but is never granted by the tutor.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_TAILWIND",
         "MOVE_SLEEP_POWDER",
@@ -1519,10 +1523,10 @@
     {
       "ability": "ABILITY_COMPOUND_EYES",
       "dependency_notes": [
-        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Vivillon combines Compound Eyes with Tailwind, Sleep Powder, Hurricane, Protect; every slot advances its monsoon compound eyes support role in doubles.",
-      "item_context": "ITEM_FOCUS_SASH supports the monsoon compound eyes support role but is never granted by the tutor.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_TAILWIND",
         "MOVE_SLEEP_POWDER",
@@ -1543,10 +1547,10 @@
     {
       "ability": "ABILITY_COMPOUND_EYES",
       "dependency_notes": [
-        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Vivillon combines Compound Eyes with Tailwind, Sleep Powder, Hurricane, Protect; every slot advances its savanna compound eyes support role in doubles.",
-      "item_context": "ITEM_FOCUS_SASH supports the savanna compound eyes support role but is never granted by the tutor.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_TAILWIND",
         "MOVE_SLEEP_POWDER",
@@ -1567,10 +1571,10 @@
     {
       "ability": "ABILITY_COMPOUND_EYES",
       "dependency_notes": [
-        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Vivillon combines Compound Eyes with Tailwind, Sleep Powder, Hurricane, Protect; every slot advances its sun compound eyes support role in doubles.",
-      "item_context": "ITEM_FOCUS_SASH supports the sun compound eyes support role but is never granted by the tutor.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_TAILWIND",
         "MOVE_SLEEP_POWDER",
@@ -1591,10 +1595,10 @@
     {
       "ability": "ABILITY_COMPOUND_EYES",
       "dependency_notes": [
-        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Vivillon combines Compound Eyes with Tailwind, Sleep Powder, Hurricane, Protect; every slot advances its ocean compound eyes support role in doubles.",
-      "item_context": "ITEM_FOCUS_SASH supports the ocean compound eyes support role but is never granted by the tutor.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_TAILWIND",
         "MOVE_SLEEP_POWDER",
@@ -1615,10 +1619,10 @@
     {
       "ability": "ABILITY_COMPOUND_EYES",
       "dependency_notes": [
-        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Vivillon combines Compound Eyes with Tailwind, Sleep Powder, Hurricane, Protect; every slot advances its jungle compound eyes support role in doubles.",
-      "item_context": "ITEM_FOCUS_SASH supports the jungle compound eyes support role but is never granted by the tutor.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_TAILWIND",
         "MOVE_SLEEP_POWDER",
@@ -1639,10 +1643,10 @@
     {
       "ability": "ABILITY_COMPOUND_EYES",
       "dependency_notes": [
-        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Vivillon combines Compound Eyes with Tailwind, Sleep Powder, Hurricane, Protect; every slot advances its fancy compound eyes support role in doubles.",
-      "item_context": "ITEM_FOCUS_SASH supports the fancy compound eyes support role but is never granted by the tutor.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_TAILWIND",
         "MOVE_SLEEP_POWDER",
@@ -1663,10 +1667,10 @@
     {
       "ability": "ABILITY_COMPOUND_EYES",
       "dependency_notes": [
-        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Vivillon combines Compound Eyes with Tailwind, Sleep Powder, Hurricane, Protect; every slot advances its poke ball compound eyes support role in doubles.",
-      "item_context": "ITEM_FOCUS_SASH supports the poke ball compound eyes support role but is never granted by the tutor.",
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_TAILWIND",
         "MOVE_SLEEP_POWDER",
@@ -1687,10 +1691,10 @@
     {
       "ability": "ABILITY_FLOWER_VEIL",
       "dependency_notes": [
-        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
-      "doubles_rationale": "Flab\u00e9b\u00e9 combines Flower Veil with Calm Mind, Moonblast, Synthesis, Protect; every slot advances its yellow flower setup support role in doubles.",
-      "item_context": "ITEM_EVIOLITE supports the yellow flower setup support role but is never granted by the tutor.",
+      "doubles_rationale": "Flabébé combines Flower Veil with Calm Mind, Moonblast, Synthesis, Protect; every slot advances its yellow flower setup support role in doubles.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_CALM_MIND",
         "MOVE_MOONBLAST",
@@ -1702,7 +1706,7 @@
       "reviewed_by": "Emerald Champions authored stable-form doubles audit",
       "role": "Yellow Flower setup support",
       "source_refs": [
-        "Smogon Gen 7 lc Flabe\u0301be\u0301 set: Calm Mind",
+        "Smogon Gen 7 lc Flabébé set: Calm Mind",
         "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_FLABEBE_YELLOW_FLOWER"
       ],
       "species": "SPECIES_FLABEBE_YELLOW_FLOWER",
@@ -1711,10 +1715,10 @@
     {
       "ability": "ABILITY_FLOWER_VEIL",
       "dependency_notes": [
-        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
-      "doubles_rationale": "Flab\u00e9b\u00e9 combines Flower Veil with Calm Mind, Moonblast, Synthesis, Protect; every slot advances its orange flower setup support role in doubles.",
-      "item_context": "ITEM_EVIOLITE supports the orange flower setup support role but is never granted by the tutor.",
+      "doubles_rationale": "Flabébé combines Flower Veil with Calm Mind, Moonblast, Synthesis, Protect; every slot advances its orange flower setup support role in doubles.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_CALM_MIND",
         "MOVE_MOONBLAST",
@@ -1726,7 +1730,7 @@
       "reviewed_by": "Emerald Champions authored stable-form doubles audit",
       "role": "Orange Flower setup support",
       "source_refs": [
-        "Smogon Gen 7 lc Flabe\u0301be\u0301 set: Calm Mind",
+        "Smogon Gen 7 lc Flabébé set: Calm Mind",
         "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_FLABEBE_ORANGE_FLOWER"
       ],
       "species": "SPECIES_FLABEBE_ORANGE_FLOWER",
@@ -1735,10 +1739,10 @@
     {
       "ability": "ABILITY_FLOWER_VEIL",
       "dependency_notes": [
-        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
-      "doubles_rationale": "Flab\u00e9b\u00e9 combines Flower Veil with Calm Mind, Moonblast, Synthesis, Protect; every slot advances its blue flower setup support role in doubles.",
-      "item_context": "ITEM_EVIOLITE supports the blue flower setup support role but is never granted by the tutor.",
+      "doubles_rationale": "Flabébé combines Flower Veil with Calm Mind, Moonblast, Synthesis, Protect; every slot advances its blue flower setup support role in doubles.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_CALM_MIND",
         "MOVE_MOONBLAST",
@@ -1750,7 +1754,7 @@
       "reviewed_by": "Emerald Champions authored stable-form doubles audit",
       "role": "Blue Flower setup support",
       "source_refs": [
-        "Smogon Gen 7 lc Flabe\u0301be\u0301 set: Calm Mind",
+        "Smogon Gen 7 lc Flabébé set: Calm Mind",
         "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_FLABEBE_BLUE_FLOWER"
       ],
       "species": "SPECIES_FLABEBE_BLUE_FLOWER",
@@ -1759,10 +1763,10 @@
     {
       "ability": "ABILITY_FLOWER_VEIL",
       "dependency_notes": [
-        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
-      "doubles_rationale": "Flab\u00e9b\u00e9 combines Flower Veil with Calm Mind, Moonblast, Synthesis, Protect; every slot advances its white flower setup support role in doubles.",
-      "item_context": "ITEM_EVIOLITE supports the white flower setup support role but is never granted by the tutor.",
+      "doubles_rationale": "Flabébé combines Flower Veil with Calm Mind, Moonblast, Synthesis, Protect; every slot advances its white flower setup support role in doubles.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_CALM_MIND",
         "MOVE_MOONBLAST",
@@ -1774,7 +1778,7 @@
       "reviewed_by": "Emerald Champions authored stable-form doubles audit",
       "role": "White Flower setup support",
       "source_refs": [
-        "Smogon Gen 7 lc Flabe\u0301be\u0301 set: Calm Mind",
+        "Smogon Gen 7 lc Flabébé set: Calm Mind",
         "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_FLABEBE_WHITE_FLOWER"
       ],
       "species": "SPECIES_FLABEBE_WHITE_FLOWER",
@@ -1783,10 +1787,10 @@
     {
       "ability": "ABILITY_FLOWER_VEIL",
       "dependency_notes": [
-        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Floette combines Flower Veil with Moonblast, Energy Ball, Psychic, Protect; every slot advances its yellow flower special attacker role in doubles.",
-      "item_context": "ITEM_EVIOLITE supports the yellow flower special attacker role but is never granted by the tutor.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_MOONBLAST",
         "MOVE_ENERGY_BALL",
@@ -1807,10 +1811,10 @@
     {
       "ability": "ABILITY_FLOWER_VEIL",
       "dependency_notes": [
-        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Floette combines Flower Veil with Moonblast, Energy Ball, Psychic, Protect; every slot advances its orange flower special attacker role in doubles.",
-      "item_context": "ITEM_EVIOLITE supports the orange flower special attacker role but is never granted by the tutor.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_MOONBLAST",
         "MOVE_ENERGY_BALL",
@@ -1831,10 +1835,10 @@
     {
       "ability": "ABILITY_FLOWER_VEIL",
       "dependency_notes": [
-        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Floette combines Flower Veil with Moonblast, Energy Ball, Psychic, Protect; every slot advances its blue flower special attacker role in doubles.",
-      "item_context": "ITEM_EVIOLITE supports the blue flower special attacker role but is never granted by the tutor.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_MOONBLAST",
         "MOVE_ENERGY_BALL",
@@ -1855,10 +1859,10 @@
     {
       "ability": "ABILITY_FLOWER_VEIL",
       "dependency_notes": [
-        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Floette combines Flower Veil with Moonblast, Energy Ball, Psychic, Protect; every slot advances its white flower special attacker role in doubles.",
-      "item_context": "ITEM_EVIOLITE supports the white flower special attacker role but is never granted by the tutor.",
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_MOONBLAST",
         "MOVE_ENERGY_BALL",
@@ -1879,10 +1883,10 @@
     {
       "ability": "ABILITY_FLOWER_VEIL",
       "dependency_notes": [
-        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Floette combines Flower Veil with Light Of Ruin, Energy Ball, Psychic, Protect; every slot advances its eternal flower special attacker role in doubles.",
-      "item_context": "ITEM_SITRUS_BERRY supports the eternal flower special attacker role but is never granted by the tutor.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_LIGHT_OF_RUIN",
         "MOVE_ENERGY_BALL",
@@ -1903,10 +1907,10 @@
     {
       "ability": "ABILITY_SYMBIOSIS",
       "dependency_notes": [
-        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Florges combines Symbiosis with Dazzling Gleam, Wish, Aromatherapy, Protect; every slot advances its yellow flower partner support role in doubles.",
-      "item_context": "ITEM_SITRUS_BERRY supports the yellow flower partner support role but is never granted by the tutor.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_DAZZLING_GLEAM",
         "MOVE_WISH",
@@ -1927,10 +1931,10 @@
     {
       "ability": "ABILITY_SYMBIOSIS",
       "dependency_notes": [
-        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Florges combines Symbiosis with Dazzling Gleam, Wish, Aromatherapy, Protect; every slot advances its orange flower partner support role in doubles.",
-      "item_context": "ITEM_SITRUS_BERRY supports the orange flower partner support role but is never granted by the tutor.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_DAZZLING_GLEAM",
         "MOVE_WISH",
@@ -1951,10 +1955,10 @@
     {
       "ability": "ABILITY_SYMBIOSIS",
       "dependency_notes": [
-        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Florges combines Symbiosis with Dazzling Gleam, Wish, Aromatherapy, Protect; every slot advances its blue flower partner support role in doubles.",
-      "item_context": "ITEM_SITRUS_BERRY supports the blue flower partner support role but is never granted by the tutor.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_DAZZLING_GLEAM",
         "MOVE_WISH",
@@ -1975,10 +1979,10 @@
     {
       "ability": "ABILITY_SYMBIOSIS",
       "dependency_notes": [
-        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Florges combines Symbiosis with Dazzling Gleam, Wish, Aromatherapy, Protect; every slot advances its white flower partner support role in doubles.",
-      "item_context": "ITEM_SITRUS_BERRY supports the white flower partner support role but is never granted by the tutor.",
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_DAZZLING_GLEAM",
         "MOVE_WISH",
@@ -1999,10 +2003,10 @@
     {
       "ability": "ABILITY_FUR_COAT",
       "dependency_notes": [
-        "ITEM_LEFTOVERS is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_LEFTOVERS automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Furfrou combines Fur Coat with Double Edge, Sucker Punch, U Turn, Protect; every slot advances its heart trim fur coat pivot role in doubles.",
-      "item_context": "ITEM_LEFTOVERS supports the heart trim fur coat pivot role but is never granted by the tutor.",
+      "item_context": "ITEM_LEFTOVERS is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_DOUBLE_EDGE",
         "MOVE_SUCKER_PUNCH",
@@ -2023,10 +2027,10 @@
     {
       "ability": "ABILITY_FUR_COAT",
       "dependency_notes": [
-        "ITEM_LEFTOVERS is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "The set service equips ITEM_LEFTOVERS automatically, and the Pokémon Center vendor supplies free replacements."
       ],
       "doubles_rationale": "Furfrou combines Fur Coat with Double Edge, Sucker Punch, U Turn, Protect; every slot advances its star trim fur coat pivot role in doubles.",
-      "item_context": "ITEM_LEFTOVERS supports the star trim fur coat pivot role but is never granted by the tutor.",
+      "item_context": "ITEM_LEFTOVERS is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
       "moves": [
         "MOVE_DOUBLE_EDGE",
         "MOVE_SUCKER_PUNCH",

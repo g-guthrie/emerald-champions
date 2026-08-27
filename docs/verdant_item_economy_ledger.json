@@ -1,7 +1,8 @@
 {
   "meta": {
-    "version": 2,
+    "version": 3,
     "source": "current ROM source plus docs/verdant_battle_guide.json",
+    "competitiveItemPolicy": "Ordinary competitive held items are free and unlimited at every Pokemon Center. Legacy item gates remain inventoried only for the pending reward redesign; protected form and transformation items remain progression.",
     "itemCount": 190,
     "unlockTableCount": 55,
     "knownDuplicateFixedBossRewardCount": 0,

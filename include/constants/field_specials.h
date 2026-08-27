@@ -58,6 +58,10 @@
 #define SCROLL_MULTI_HIDDEN_POWER                         28
 #define SCROLL_MULTI_BATTLE_SET_STYLE                     29
 
+#define BATTLE_SET_APPLY_FAILED          0
+#define BATTLE_SET_APPLY_SUCCESS         1
+#define BATTLE_SET_APPLY_SPECIAL_ITEM    2
+
 #define MAX_SCROLL_MULTI_ON_SCREEN 6
 #define MAX_SCROLL_MULTI_LENGTH 21
 

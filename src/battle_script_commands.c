@@ -15076,21 +15076,11 @@ static void Cmd_givecaughtmon(void)
     u16 currentItem = GetMonData(&gEnemyParty[partyIndex], MON_DATA_HELD_ITEM);
     u16 originalItem = gBattleStruct->originalEnemyItems[partyIndex];
 
-    // A temporary Trick/Switcheroo/Bestow exchange must not become a second
-    // permanent copy when battle-end loadout restoration returns the player's
-    // original item. Untouched native wild items remain on the caught mon.
+    // Competitive held items are non-scarce loadout data. A consumed, knocked,
+    // or temporarily exchanged item is restored before the caught Pokémon is
+    // transferred so it keeps the exact loadout it used in the encounter.
     if (currentItem != originalItem)
-    {
-        u16 noItem = ITEM_NONE;
-        SetMonData(&gEnemyParty[partyIndex], MON_DATA_HELD_ITEM, &noItem);
-    }
-
-    // Ordinary random catches arrive battle-ready. Scripted, roaming,
-    // Frontier, and legendary/mythical captures retain their authored data.
-    if (!gIsScriptedWildEncounter
-     && !(gBattleTypeFlags & (BATTLE_TYPE_ROAMER | BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_PIKE | BATTLE_TYPE_PYRAMID))
-     && !IsVerdantLegendarySpecies(GetMonData(&gEnemyParty[partyIndex], MON_DATA_SPECIES2)))
-        ApplyVerdantBattleSetPreset(&gEnemyParty[partyIndex]);
+        SetMonData(&gEnemyParty[partyIndex], MON_DATA_HELD_ITEM, &originalItem);
 
     if (GiveMonToPlayer(&gEnemyParty[partyIndex]) != MON_GIVEN_TO_PARTY)
     {

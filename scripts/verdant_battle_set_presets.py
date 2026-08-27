@@ -178,6 +178,34 @@ ABILITY_MOVE_SYNERGY = {
 UNSAFE_AUTOBUILD_MOVES = {"MOVE_RETURN", "MOVE_FRUSTRATION", "MOVE_HIDDEN_POWER"}
 
 
+def protected_set_items() -> set[str]:
+    source = (ROOT / "include/constants/items.h").read_text()
+    mega_block = source.split("// Mega Stones", 1)[1].split("// Unused", 1)[0]
+    protected = set(re.findall(r"^#define\s+(ITEM_[A-Z0-9_]+)\b", mega_block, re.M))
+    all_items = set(re.findall(r"^#define\s+(ITEM_[A-Z0-9_]+)\b", source, re.M))
+    protected.update(item for item in all_items if item.endswith(("_PLATE", "_DRIVE", "_MEMORY")))
+    protected.update({
+        "ITEM_ADAMANT_ORB", "ITEM_LUSTROUS_ORB", "ITEM_GRISEOUS_ORB",
+        "ITEM_RUSTED_SWORD", "ITEM_RUSTED_SHIELD",
+        "ITEM_WELLSPRING_MASK", "ITEM_HEARTHFLAME_MASK", "ITEM_CORNERSTONE_MASK",
+    })
+    return protected
+
+
+PROTECTED_SET_ITEMS = protected_set_items()
+
+
+def runtime_set_item(item: str | None, role: str, moves: list[str]) -> str:
+    item = item if isinstance(item, str) and item.startswith("ITEM_") else "ITEM_NONE"
+    if item not in PROTECTED_SET_ITEMS:
+        return item
+    role_name = compact(role)
+    support_words = ("support", "wall", "bulky", "redirection", "trickroom", "tailwind", "screen")
+    if any(word in role_name for word in support_words):
+        return "ITEM_SITRUS_BERRY"
+    return "ITEM_LIFE_ORB" if any(move != "MOVE_NONE" for move in moves) else "ITEM_SITRUS_BERRY"
+
+
 def read(path: Path) -> str:
     return path.read_text()
 
@@ -1156,6 +1184,12 @@ def build_presets(
             "moves": padded_moves, "move_count": len(moves), "legal_move_count": len(legal),
             "autobuild_move_count": len(selectable),
             "nature": nature, "ability": ability, "ability_slot": ability_slot,
+            "suggested_item": review["suggested_item"] if review else (chosen.get("item") or "ITEM_NONE"),
+            "runtime_item": runtime_set_item(
+                review["suggested_item"] if review else chosen.get("item"),
+                review["role"] if review else "",
+                padded_moves,
+            ),
             "source_kind": chosen["kind"], "source_locator": chosen["locator"],
             "source_context": {
                 "published_moves": chosen.get("published_moves"),
@@ -1185,6 +1219,7 @@ def render_header(presets: Iterable[dict]) -> str:
             "        .moves = {" + ", ".join(preset["moves"]) + "},",
             f"        .nature = {preset['nature']},",
             f"        .abilitySlot = {preset['ability_slot']},",
+            f"        .item = {preset['runtime_item']},",
             "    },",
         ])
     lines.extend(["};", ""])
@@ -1392,6 +1427,15 @@ def validate_manifest() -> list[str]:
             problems.append(f"{species}: invalid ability slot {slot}")
         elif preset.get("ability") != dex.stats[species].abilities[slot]:
             problems.append(f"{species}: ability token and slot disagree")
+        suggested_item = preset.get("suggested_item")
+        runtime_item = preset.get("runtime_item")
+        review_role = (preset.get("authored_review") or {}).get("role", "")
+        if not isinstance(suggested_item, str) or not suggested_item.startswith("ITEM_"):
+            problems.append(f"{species}: missing suggested item")
+        elif runtime_item != runtime_set_item(suggested_item, review_role, preset.get("moves", [])):
+            problems.append(f"{species}: runtime item policy is stale")
+        elif runtime_item in PROTECTED_SET_ITEMS:
+            problems.append(f"{species}: protected progression item leaked into runtime loadout")
         review = reviews.get(species)
         if review:
             if preset.get("review_status") != "authored" or preset.get("authored_review") != review:

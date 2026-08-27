@@ -10,8 +10,8 @@ General_Pokemart_Script:: @ Compatibility alias for old maps and scripts.
 	end
 
 PokemonCenter_BattleItemMart_Text_Welcome:
-	.string "I stock held items for serious\n"
-	.string "team building. What do you need?$"
+	.string "Competitive held items are free here.\p"
+	.string "Take as many as your teams need!$"
 
 	.align 2
 PokeMart_No_Badges::

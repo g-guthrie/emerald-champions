@@ -28,6 +28,7 @@ struct MartInfo
     /*0xC*/ u16 itemCount;
     /*0xE*/ u8 windowId;
     /*0xF*/ u8 martType;
+    bool8 freeItems;
 };
 
 struct ShopData
@@ -45,6 +46,7 @@ struct ShopData
 };
 
 void CreatePokemartMenu(const u16 *);
+void CreateFreePokemartMenu(const u16 *);
 void CreateDecorationShop1Menu(const u16 *);
 void CreateDecorationShop2Menu(const u16 *);
 void CB2_ExitSellMenu(void);

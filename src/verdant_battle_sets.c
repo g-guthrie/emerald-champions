@@ -1,9 +1,14 @@
 #include "global.h"
 #include "data.h"
+#include "item.h"
 #include "pokemon.h"
+#include "random.h"
+#include "string_util.h"
 #include "verdant_battle_sets.h"
 #include "constants/abilities.h"
+#include "constants/field_specials.h"
 #include "constants/moves.h"
+#include "constants/items.h"
 #include "constants/species.h"
 
 #include "data/pokemon/verdant_battle_sets.h"
@@ -11,9 +16,25 @@
 
 static const u8 sRecommendedBattleSetName[] = _("Recommended");
 
-static bool8 ApplyValidatedBattleSetPreset(struct Pokemon *mon, const struct VerdantBattleSetPreset *preset)
+static const struct VerdantBattleSetPreset *GetBattleSetPreset(struct Pokemon *mon, u8 choice)
+{
+    u16 species = GetMonData(mon, MON_DATA_SPECIES2, NULL);
+    const struct VerdantBattleSetRange *range;
+
+    if (species == SPECIES_NONE || species == SPECIES_EGG || species >= NUM_SPECIES)
+        return NULL;
+    if (choice == 0)
+        return &gVerdantBattleSetPresets[species];
+    range = &gVerdantBattleSetRanges[species];
+    if (choice > range->count)
+        return NULL;
+    return &gVerdantBattleSetAlternatives[range->offset + choice - 1].preset;
+}
+
+static u8 ApplyValidatedBattleSetPreset(struct Pokemon *mon, const struct VerdantBattleSetPreset *preset, bool8 replaceSpecialItem)
 {
     u16 species;
+    u16 currentItem;
     u16 move;
     u8 ppBonuses = 0;
     u8 i;
@@ -22,12 +43,21 @@ static bool8 ApplyValidatedBattleSetPreset(struct Pokemon *mon, const struct Ver
 
     species = GetMonData(mon, MON_DATA_SPECIES2, NULL);
     if (species == SPECIES_NONE || species == SPECIES_EGG || species >= NUM_SPECIES)
-        return FALSE;
+        return BATTLE_SET_APPLY_FAILED;
 
     if (preset->nature >= NUM_NATURES
      || preset->abilitySlot >= NUM_ABILITY_SLOTS
      || gBaseStats[species].abilities[preset->abilitySlot] == ABILITY_NONE)
-        return FALSE;
+        return BATTLE_SET_APPLY_FAILED;
+    if (IsVerdantProtectedProgressionItem(preset->item))
+        return BATTLE_SET_APPLY_FAILED;
+
+    currentItem = GetMonData(mon, MON_DATA_HELD_ITEM);
+    if (!replaceSpecialItem && IsVerdantProtectedProgressionItem(currentItem))
+    {
+        CopyItemName(currentItem, gStringVar2);
+        return BATTLE_SET_APPLY_SPECIAL_ITEM;
+    }
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -38,23 +68,24 @@ static bool8 ApplyValidatedBattleSetPreset(struct Pokemon *mon, const struct Ver
             continue;
         }
         if (sawEmptyMove || move >= MOVES_COUNT)
-            return FALSE;
+            return BATTLE_SET_APPLY_FAILED;
         for (j = 0; j < i; j++)
         {
             if (preset->moves[j] == move)
-                return FALSE;
+                return BATTLE_SET_APPLY_FAILED;
         }
     }
     if (preset->moves[0] == MOVE_NONE)
-        return FALSE;
+        return BATTLE_SET_APPLY_FAILED;
 
     SetMonData(mon, MON_DATA_PP_BONUSES, &ppBonuses);
     for (i = 0; i < MAX_MON_MOVES; i++)
         SetMonMoveSlot(mon, preset->moves[i], i);
     SetMonData(mon, MON_DATA_NATURE, &preset->nature);
     SetMonData(mon, MON_DATA_ABILITY_NUM, &preset->abilitySlot);
+    SetMonData(mon, MON_DATA_HELD_ITEM, &preset->item);
     CalculateMonStats(mon);
-    return TRUE;
+    return BATTLE_SET_APPLY_SUCCESS;
 }
 
 bool8 ApplyVerdantBattleSetPreset(struct Pokemon *mon)
@@ -63,7 +94,7 @@ bool8 ApplyVerdantBattleSetPreset(struct Pokemon *mon)
 
     if (species == SPECIES_NONE || species == SPECIES_EGG || species >= NUM_SPECIES)
         return FALSE;
-    return ApplyValidatedBattleSetPreset(mon, &gVerdantBattleSetPresets[species]);
+    return ApplyValidatedBattleSetPreset(mon, &gVerdantBattleSetPresets[species], FALSE) == BATTLE_SET_APPLY_SUCCESS;
 }
 
 u8 GetVerdantBattleSetCount(struct Pokemon *mon)
@@ -92,19 +123,33 @@ const u8 *GetVerdantBattleSetName(struct Pokemon *mon, u8 choice)
     return gVerdantBattleSetAlternatives[range->offset + choice - 1].name;
 }
 
-bool8 ApplyVerdantBattleSetChoice(struct Pokemon *mon, u8 choice)
+u16 GetVerdantBattleSetItem(struct Pokemon *mon, u8 choice)
 {
-    u16 species = GetMonData(mon, MON_DATA_SPECIES2, NULL);
-    const struct VerdantBattleSetRange *range;
+    const struct VerdantBattleSetPreset *preset = GetBattleSetPreset(mon, choice);
 
-    if (species == SPECIES_NONE || species == SPECIES_EGG || species >= NUM_SPECIES)
-        return FALSE;
-    if (choice == 0)
-        return ApplyValidatedBattleSetPreset(mon, &gVerdantBattleSetPresets[species]);
-    range = &gVerdantBattleSetRanges[species];
-    if (choice > range->count)
-        return FALSE;
-    return ApplyValidatedBattleSetPreset(mon, &gVerdantBattleSetAlternatives[range->offset + choice - 1].preset);
+    return preset != NULL ? preset->item : ITEM_NONE;
+}
+
+u8 ApplyVerdantBattleSetChoice(struct Pokemon *mon, u8 choice)
+{
+    const struct VerdantBattleSetPreset *preset = GetBattleSetPreset(mon, choice);
+
+    if (preset == NULL)
+        return BATTLE_SET_APPLY_FAILED;
+    return ApplyValidatedBattleSetPreset(mon, preset, FALSE);
+}
+
+u8 ApplyVerdantRandomWildBattleSet(struct Pokemon *mon)
+{
+    u8 count = GetVerdantBattleSetCount(mon);
+    const struct VerdantBattleSetPreset *preset;
+
+    if (count == 0)
+        return BATTLE_SET_APPLY_FAILED;
+    preset = GetBattleSetPreset(mon, Random() % count);
+    if (preset == NULL)
+        return BATTLE_SET_APPLY_FAILED;
+    return ApplyValidatedBattleSetPreset(mon, preset, TRUE);
 }
 
 bool8 IsVerdantLegendarySpecies(u16 species)
@@ -112,6 +157,19 @@ bool8 IsVerdantLegendarySpecies(u16 species)
     switch (species)
     {
 #include "data/pokemon/verdant_legendary_species.h"
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
+bool8 IsVerdantProtectedProgressionItem(u16 item)
+{
+    if (item >= FIRST_MEGA_STONE_INDEX && item <= LAST_MEGA_STONE_INDEX)
+        return TRUE;
+    switch (item)
+    {
+#include "data/pokemon/verdant_protected_set_items.h"
         return TRUE;
     default:
         return FALSE;

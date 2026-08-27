@@ -2,6 +2,7 @@
 
 This report is generated from current ROM source and the generated battle guide by
 `python3 scripts/verdant_item_economy_audit.py --write`.
+Ordinary competitive held items are now free loadout infrastructure. Legacy gates below remain as a reward-redesign inventory, not current shop restrictions.
 
 ## Fixed boss rewards
 
@@ -50,7 +51,7 @@ This report is generated from current ROM source and the generated battle guide 
 
 ## First fixed acquisition
 
-| Item | Shop gate | First fixed source |
+| Item | Legacy gate | First fixed source |
 |---|---:|---|
 | ITEM_ABOMASITE | not_in_discovery_shop | Seaspray_Cave_B1F / visible_pickup |
 | ITEM_ABSOLITE | not_in_discovery_shop | SafariZone_North / visible_pickup |

@@ -5,126 +5,233 @@
     {
       "species": "SPECIES_FLORAGATO",
       "role": "Fast Eviolite Protean attacker",
-      "moves": ["MOVE_SEED_BOMB", "MOVE_SUCKER_PUNCH", "MOVE_PLAY_ROUGH", "MOVE_PROTECT"],
+      "moves": [
+        "MOVE_SEED_BOMB",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_PLAY_ROUGH",
+        "MOVE_PROTECT"
+      ],
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_PROTEAN",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "Eviolite turns Floragato's respectable middle-stage bulk into usable doubles staying power; the moves remain functional without it.",
-      "source_refs": ["Emerald Champions exact Floragato stats and legal pool", "Smogon Meowscarada and Little Cup Sprigatito offensive roles"],
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
+      "source_refs": [
+        "Emerald Champions exact Floragato stats and legal pool",
+        "Smogon Meowscarada and Little Cup Sprigatito offensive roles"
+      ],
       "doubles_rationale": "Seed Bomb is reliable physical STAB, Sucker Punch supplies valuable priority, and Play Rough gives Protean meaningful coverage instead of a redundant Grass attack. Protect preserves Floragato through opposing double targets.",
-      "dependency_notes": ["Protean changes type from the first selected attack in this engine and rewards deliberate move ordering.", "No weather, terrain, consumable, or partner is required."],
+      "dependency_notes": [
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Protean changes type from the first selected attack in this engine and rewards deliberate move ordering.",
+        "No weather, terrain, consumable, or partner is required."
+      ],
       "reviewed_by": "Emerald Champions authored doubles audit",
       "review_notes": "Individually authored for the locally curated middle-stage stat line."
     },
     {
       "species": "SPECIES_MEOWSCARADA",
       "role": "Fast Protean disruption and priority cleaner",
-      "moves": ["MOVE_FLOWER_TRICK", "MOVE_KNOCK_OFF", "MOVE_SUCKER_PUNCH", "MOVE_PROTECT"],
+      "moves": [
+        "MOVE_FLOWER_TRICK",
+        "MOVE_KNOCK_OFF",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_PROTECT"
+      ],
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_PROTEAN",
       "suggested_item": "ITEM_FOCUS_SASH",
-      "item_context": "Focus Sash guarantees at least one high-value action from Meowscarada's frail frame; Life Orb is the aggressive alternative.",
-      "source_refs": ["Pokemon Showdown Gen 9 random doubles Meowscarada", "Smogon doubles Meowscarada offensive utility"],
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
+      "source_refs": [
+        "Pokemon Showdown Gen 9 random doubles Meowscarada",
+        "Smogon doubles Meowscarada offensive utility"
+      ],
       "doubles_rationale": "Flower Trick gives dependable Grass pressure, Knock Off removes the items that define hard battles, and Sucker Punch converts Meowscarada's speed and attack into endgame priority. Protect keeps it from being erased by a coordinated board.",
-      "dependency_notes": ["Sucker Punch requires an attacking target but is not the set's only damage line.", "The set does not depend on Terastallization or a Choice item."],
+      "dependency_notes": [
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Sucker Punch requires an attacking target but is not the set's only damage line.",
+        "The set does not depend on Terastallization or a Choice item."
+      ],
       "reviewed_by": "Emerald Champions authored doubles audit",
       "review_notes": "Protean is preferred over Overgrow because the local engine rewards its coverage and defensive type changes."
     },
     {
       "species": "SPECIES_CROCALOR",
       "role": "Eviolite Unaware burn wall",
-      "moves": ["MOVE_FLAMETHROWER", "MOVE_WILL_O_WISP", "MOVE_SLACK_OFF", "MOVE_PROTECT"],
+      "moves": [
+        "MOVE_FLAMETHROWER",
+        "MOVE_WILL_O_WISP",
+        "MOVE_SLACK_OFF",
+        "MOVE_PROTECT"
+      ],
       "nature": "NATURE_CALM",
       "ability": "ABILITY_UNAWARE",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "Eviolite is the defining middle-stage item and complements Crocalor's locally strong physical defense.",
-      "source_refs": ["Smogon Gen 9 NFE specially defensive Crocalor", "Emerald Champions exact Crocalor legal pool"],
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
+      "source_refs": [
+        "Smogon Gen 9 NFE specially defensive Crocalor",
+        "Emerald Champions exact Crocalor legal pool"
+      ],
       "doubles_rationale": "Unaware stops setup snowballs, Will-O-Wisp suppresses physical attackers, and Slack Off lets Crocalor remain a long-term answer. Flamethrower avoids passive Taunt failure while Protect handles concentrated doubles pressure.",
-      "dependency_notes": ["Will-O-Wisp is accuracy-dependent but the set remains useful when it misses.", "No sun support is assumed."],
+      "dependency_notes": [
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Will-O-Wisp is accuracy-dependent but the set remains useful when it misses.",
+        "No sun support is assumed."
+      ],
       "reviewed_by": "Emerald Champions authored doubles audit",
       "review_notes": "Roar was removed from the singles source because Protect is more consistently valuable in doubles."
     },
     {
       "species": "SPECIES_SKELEDIRGE",
       "role": "Unaware bulky special win condition",
-      "moves": ["MOVE_TORCH_SONG", "MOVE_HEX", "MOVE_WILL_O_WISP", "MOVE_SLACK_OFF"],
+      "moves": [
+        "MOVE_TORCH_SONG",
+        "MOVE_HEX",
+        "MOVE_WILL_O_WISP",
+        "MOVE_SLACK_OFF"
+      ],
       "nature": "NATURE_BOLD",
       "ability": "ABILITY_UNAWARE",
       "suggested_item": "ITEM_LEFTOVERS",
-      "item_context": "Leftovers supports repeated Torch Song and Slack Off turns; Rocky Helmet is a viable physical-punish alternative.",
-      "source_refs": ["Smogon Gen 9 Skeledirge physical wall", "Emerald Champions Torch Song and Hex implementations"],
+      "item_context": "ITEM_LEFTOVERS is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
+      "source_refs": [
+        "Smogon Gen 9 Skeledirge physical wall",
+        "Emerald Champions Torch Song and Hex implementations"
+      ],
       "doubles_rationale": "Torch Song creates its own special-pressure win condition, Will-O-Wisp checks physical boards, and Hex immediately cashes in on the burn. Unaware plus Slack Off prevents opposing setup from racing that plan.",
-      "dependency_notes": ["Hex is strongest after Will-O-Wisp or allied status but Torch Song remains unconditional STAB.", "The four-slot role deliberately favors sustained board control over Protect."],
+      "dependency_notes": [
+        "The set service equips ITEM_LEFTOVERS automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Hex is strongest after Will-O-Wisp or allied status but Torch Song remains unconditional STAB.",
+        "The four-slot role deliberately favors sustained board control over Protect."
+      ],
       "reviewed_by": "Emerald Champions authored doubles audit",
       "review_notes": "A coherent burn-and-Hex package was retained instead of unrelated coverage."
     },
     {
       "species": "SPECIES_NACLSTACK",
       "role": "Eviolite Salt Cure attrition tank",
-      "moves": ["MOVE_SALT_CURE", "MOVE_ROCK_SLIDE", "MOVE_RECOVER", "MOVE_PROTECT"],
+      "moves": [
+        "MOVE_SALT_CURE",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_RECOVER",
+        "MOVE_PROTECT"
+      ],
       "nature": "NATURE_CAREFUL",
       "ability": "ABILITY_PURIFYING_SALT",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "Eviolite amplifies both defenses and is the clear default for an unevolved Naclstack.",
-      "source_refs": ["Smogon Gen 9 NFE Naclstack", "Emerald Champions exact Salt Cure legal data"],
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
+      "source_refs": [
+        "Smogon Gen 9 NFE Naclstack",
+        "Emerald Champions exact Salt Cure legal data"
+      ],
       "doubles_rationale": "Salt Cure creates lasting pressure without setup, Rock Slide threatens both opponents, and Recover plus Protect force meaningful targeting decisions. Purifying Salt makes the plan resistant to status disruption.",
-      "dependency_notes": ["Rock Slide trades accuracy for spread pressure.", "The set is self-contained and does not assume sand or Trick Room."],
+      "dependency_notes": [
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Rock Slide trades accuracy for spread pressure.",
+        "The set is self-contained and does not assume sand or Trick Room."
+      ],
       "reviewed_by": "Emerald Champions authored doubles audit",
       "review_notes": "Stealth Rock was replaced because repeated trainer doubles reward immediate spread pressure more than singles entry hazards."
     },
     {
       "species": "SPECIES_GARGANACL",
       "role": "Purifying Salt control wall and spread guard",
-      "moves": ["MOVE_SALT_CURE", "MOVE_WIDE_GUARD", "MOVE_RECOVER", "MOVE_PROTECT"],
+      "moves": [
+        "MOVE_SALT_CURE",
+        "MOVE_WIDE_GUARD",
+        "MOVE_RECOVER",
+        "MOVE_PROTECT"
+      ],
       "nature": "NATURE_CAREFUL",
       "ability": "ABILITY_PURIFYING_SALT",
       "suggested_item": "ITEM_LEFTOVERS",
-      "item_context": "Leftovers compounds Garganacl's excellent natural bulk and Recover; Rocky Helmet is an alternative into contact-heavy encounters.",
-      "source_refs": ["Smogon doubles Garganacl defensive roles", "Emerald Champions local Wide Guard and Salt Cure legality"],
+      "item_context": "ITEM_LEFTOVERS is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
+      "source_refs": [
+        "Smogon doubles Garganacl defensive roles",
+        "Emerald Champions local Wide Guard and Salt Cure legality"
+      ],
       "doubles_rationale": "Salt Cure supplies unavoidable progress while Wide Guard can erase an opponent's spread turn. Separate Recover and Protect options make Garganacl difficult to focus down without turning it into a passive four-status set.",
-      "dependency_notes": ["Wide Guard is matchup-dependent but Salt Cure always advances the board.", "Body Press is not in this build's player-facing Garganacl legal pool and was intentionally not invented."],
+      "dependency_notes": [
+        "The set service equips ITEM_LEFTOVERS automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Wide Guard is matchup-dependent but Salt Cure always advances the board.",
+        "Body Press is not in this build's player-facing Garganacl legal pool and was intentionally not invented."
+      ],
       "reviewed_by": "Emerald Champions authored doubles audit",
       "review_notes": "Authored around the exact local learnset rather than copying an unavailable modern Body Press set."
     },
     {
       "species": "SPECIES_PALAFIN",
       "role": "Zero to Hero bulky priority sweeper",
-      "moves": ["MOVE_BULK_UP", "MOVE_JET_PUNCH", "MOVE_WAVE_CRASH", "MOVE_PROTECT"],
+      "moves": [
+        "MOVE_BULK_UP",
+        "MOVE_JET_PUNCH",
+        "MOVE_WAVE_CRASH",
+        "MOVE_PROTECT"
+      ],
       "nature": "NATURE_ADAMANT",
       "ability": "ABILITY_ZERO_TO_HERO",
       "suggested_item": "ITEM_LEFTOVERS",
-      "item_context": "Leftovers supports Bulk Up and repeated Protect turns; Mystic Water or Choice Band can trade longevity for immediate power.",
-      "source_refs": ["Smogon Gen 9 Doubles OU Palafin Bulk Up", "Pokemon Showdown Gen 9 random doubles Palafin"],
+      "item_context": "ITEM_LEFTOVERS is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
+      "source_refs": [
+        "Smogon Gen 9 Doubles OU Palafin Bulk Up",
+        "Pokemon Showdown Gen 9 random doubles Palafin"
+      ],
       "doubles_rationale": "After the required switch, Bulk Up converts Hero Form's enormous stats into a durable endgame, Jet Punch controls speed, and Wave Crash supplies the knockout button. Protect lets the player time transformation support and opposing double targets.",
-      "dependency_notes": ["Zero to Hero requires Palafin to leave the field once; the preset cannot remove that intentional species mechanic.", "Unlike the Choice source, this version never strands Protect behind move lock."],
+      "dependency_notes": [
+        "The set service equips ITEM_LEFTOVERS automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Zero to Hero requires Palafin to leave the field once; the preset cannot remove that intentional species mechanic.",
+        "Unlike the Choice source, this version never strands Protect behind move lock."
+      ],
       "reviewed_by": "Emerald Champions authored doubles audit",
       "review_notes": "Bulk Up was chosen over Choice Band to remain coherent without automatically equipping an item."
     },
     {
       "species": "SPECIES_DONDOZO",
       "role": "Taunt-proof Yawn pressure tank",
-      "moves": ["MOVE_WAVE_CRASH", "MOVE_HEAVY_SLAM", "MOVE_YAWN", "MOVE_PROTECT"],
+      "moves": [
+        "MOVE_WAVE_CRASH",
+        "MOVE_HEAVY_SLAM",
+        "MOVE_YAWN",
+        "MOVE_PROTECT"
+      ],
       "nature": "NATURE_CAREFUL",
       "ability": "ABILITY_OBLIVIOUS",
       "suggested_item": "ITEM_LEFTOVERS",
-      "item_context": "Leftovers is the broad standalone item; the set also functions as the field half of a Commander pairing.",
-      "source_refs": ["Smogon VGC 2024 supportive Dondozo", "Emerald Champions local Oblivious behavior"],
+      "item_context": "ITEM_LEFTOVERS is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
+      "source_refs": [
+        "Smogon VGC 2024 supportive Dondozo",
+        "Emerald Champions local Oblivious behavior"
+      ],
       "doubles_rationale": "Yawn forces switches or sleep, Wave Crash prevents passivity, and Heavy Slam targets Fairy-types that pressure Tatsugiri structures. Oblivious protects the support plan from Taunt and Intimidate while Protect buys the Yawn turn.",
-      "dependency_notes": ["Commander Tatsugiri makes Dondozo stronger but is not required for this support set to function.", "Wave Crash recoil is offset by Dondozo's enormous HP and the advisory recovery item."],
+      "dependency_notes": [
+        "The set service equips ITEM_LEFTOVERS automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Commander Tatsugiri makes Dondozo stronger but is not required for this support set to function."
+      ],
       "reviewed_by": "Emerald Champions authored doubles audit",
       "review_notes": "A standalone VGC support mode was preferred over an Order Up set that only works beside Tatsugiri."
     },
     {
       "species": "SPECIES_TATSUGIRI",
       "role": "Commander enabler and fast special speed control",
-      "moves": ["MOVE_MUDDY_WATER", "MOVE_DRAGON_PULSE", "MOVE_ICY_WIND", "MOVE_PROTECT"],
+      "moves": [
+        "MOVE_MUDDY_WATER",
+        "MOVE_DRAGON_PULSE",
+        "MOVE_ICY_WIND",
+        "MOVE_PROTECT"
+      ],
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_COMMANDER",
       "suggested_item": "ITEM_FOCUS_SASH",
-      "item_context": "Focus Sash gives Tatsugiri a useful independent turn when Dondozo is absent; Choice Scarf is the aggressive speed-control option.",
-      "source_refs": ["Smogon VGC 2024-2025 Commander Tatsugiri", "Emerald Champions exact Commander and move implementations"],
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
+      "source_refs": [
+        "Smogon VGC 2024-2025 Commander Tatsugiri",
+        "Emerald Champions exact Commander and move implementations"
+      ],
       "doubles_rationale": "Commander preserves Tatsugiri's signature Dondozo ceiling, while Muddy Water and Icy Wind still influence both opposing slots when it acts normally. Dragon Pulse is reliable focused damage and Protect keeps the set coherent without a Choice lock.",
-      "dependency_notes": ["Commander reaches its full payoff only beside Dondozo.", "Muddy Water has imperfect accuracy but supplies spread pressure and an accuracy-drop upside."],
+      "dependency_notes": [
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Commander reaches its full payoff only beside Dondozo.",
+        "Muddy Water has imperfect accuracy but supplies spread pressure and an accuracy-drop upside."
+      ],
       "reviewed_by": "Emerald Champions authored doubles audit",
       "review_notes": "The four moves remain useful outside the signature partnership."
     },
@@ -132,14 +239,26 @@
       "species": "SPECIES_TATSUGIRI_DROOPY",
       "alias_of": "SPECIES_TATSUGIRI",
       "role": "Commander enabler and fast special speed control",
-      "moves": ["MOVE_MUDDY_WATER", "MOVE_DRAGON_PULSE", "MOVE_ICY_WIND", "MOVE_PROTECT"],
+      "moves": [
+        "MOVE_MUDDY_WATER",
+        "MOVE_DRAGON_PULSE",
+        "MOVE_ICY_WIND",
+        "MOVE_PROTECT"
+      ],
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_COMMANDER",
       "suggested_item": "ITEM_FOCUS_SASH",
-      "item_context": "This cosmetic form has the exact same local battle data as the reviewed base Tatsugiri and uses the same Focus Sash default.",
-      "source_refs": ["Authored SPECIES_TATSUGIRI review", "Emerald Champions exact-form equivalence check"],
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
+      "source_refs": [
+        "Authored SPECIES_TATSUGIRI review",
+        "Emerald Champions exact-form equivalence check"
+      ],
       "doubles_rationale": "The Droopy form is mechanically identical in this engine, so the same Commander, spread pressure, speed control, and Protect package is optimal.",
-      "dependency_notes": ["Commander reaches its full payoff only beside Dondozo.", "Alias acceptance is gated on identical stats, abilities, typing, and full legal move pool."],
+      "dependency_notes": [
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Commander reaches its full payoff only beside Dondozo.",
+        "Alias acceptance is gated on identical stats, abilities, typing, and full legal move pool."
+      ],
       "reviewed_by": "Emerald Champions authored doubles audit",
       "review_notes": "Exact cosmetic alias; no mechanical assumption is hidden."
     },
@@ -147,364 +266,677 @@
       "species": "SPECIES_TATSUGIRI_STRETCHY",
       "alias_of": "SPECIES_TATSUGIRI",
       "role": "Commander enabler and fast special speed control",
-      "moves": ["MOVE_MUDDY_WATER", "MOVE_DRAGON_PULSE", "MOVE_ICY_WIND", "MOVE_PROTECT"],
+      "moves": [
+        "MOVE_MUDDY_WATER",
+        "MOVE_DRAGON_PULSE",
+        "MOVE_ICY_WIND",
+        "MOVE_PROTECT"
+      ],
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_COMMANDER",
       "suggested_item": "ITEM_FOCUS_SASH",
-      "item_context": "This cosmetic form has the exact same local battle data as the reviewed base Tatsugiri and uses the same Focus Sash default.",
-      "source_refs": ["Authored SPECIES_TATSUGIRI review", "Emerald Champions exact-form equivalence check"],
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
+      "source_refs": [
+        "Authored SPECIES_TATSUGIRI review",
+        "Emerald Champions exact-form equivalence check"
+      ],
       "doubles_rationale": "The Stretchy form is mechanically identical in this engine, so the same Commander, spread pressure, speed control, and Protect package is optimal.",
-      "dependency_notes": ["Commander reaches its full payoff only beside Dondozo.", "Alias acceptance is gated on identical stats, abilities, typing, and full legal move pool."],
+      "dependency_notes": [
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Commander reaches its full payoff only beside Dondozo.",
+        "Alias acceptance is gated on identical stats, abilities, typing, and full legal move pool."
+      ],
       "reviewed_by": "Emerald Champions authored doubles audit",
       "review_notes": "Exact cosmetic alias; no mechanical assumption is hidden."
     },
     {
       "species": "SPECIES_ANNIHILAPE",
       "role": "Defiant Bulk Up Rage Fist win condition",
-      "moves": ["MOVE_BULK_UP", "MOVE_RAGE_FIST", "MOVE_CLOSE_COMBAT", "MOVE_PROTECT"],
+      "moves": [
+        "MOVE_BULK_UP",
+        "MOVE_RAGE_FIST",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_PROTECT"
+      ],
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_DEFIANT",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "Sitrus Berry provides the safest setup cushion; Leftovers is stronger in slower positioning teams.",
-      "source_refs": ["Smogon VGC 2025 fast setup Annihilape", "Emerald Champions exact Rage Fist legal pool"],
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
+      "source_refs": [
+        "Smogon VGC 2025 fast setup Annihilape",
+        "Emerald Champions exact Rage Fist legal pool"
+      ],
       "doubles_rationale": "Defiant punishes Intimidate and stat drops, Bulk Up creates a real endgame, and Rage Fist grows as opponents try to chip the bulky ape. Close Combat prevents Dark- and Steel-types from walling the plan while Protect preserves accumulated Rage Fist value.",
-      "dependency_notes": ["Rage Fist becomes stronger after taking hits but remains legal damage before then.", "No Final Gambit or Choice Scarf dependency is baked into the default."],
+      "dependency_notes": [
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Rage Fist becomes stronger after taking hits but remains legal damage before then.",
+        "No Final Gambit or Choice Scarf dependency is baked into the default."
+      ],
       "reviewed_by": "Emerald Champions authored doubles audit",
       "review_notes": "The sustainable setup archetype was selected over the disposable Final Gambit source."
     },
     {
       "species": "SPECIES_FARIGIRAF",
       "role": "Armor Tail Trick Room attacker",
-      "moves": ["MOVE_TRICK_ROOM", "MOVE_PSYCHIC", "MOVE_HYPER_VOICE", "MOVE_PROTECT"],
+      "moves": [
+        "MOVE_TRICK_ROOM",
+        "MOVE_PSYCHIC",
+        "MOVE_HYPER_VOICE",
+        "MOVE_PROTECT"
+      ],
       "nature": "NATURE_QUIET",
       "ability": "ABILITY_ARMOR_TAIL",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "Sitrus Berry improves Trick Room setup odds; Throat Spray is an offensive Hyper Voice alternative.",
-      "source_refs": ["Smogon Doubles OU Trick Room Farigiraf", "Smogon VGC Farigiraf"],
+      "item_context": "ITEM_SITRUS_BERRY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
+      "source_refs": [
+        "Smogon Doubles OU Trick Room Farigiraf",
+        "Smogon VGC Farigiraf"
+      ],
       "doubles_rationale": "Armor Tail blocks opposing priority while Farigiraf reverses speed with Trick Room. Psychic supplies focused STAB, Hyper Voice pressures both opponents, and Protect gives it a safe mode after room is established.",
-      "dependency_notes": ["Quiet intentionally lowers Speed for Trick Room.", "Hyper Voice is valuable without Throat Spray, so the set is not item-dead."],
+      "dependency_notes": [
+        "The set service equips ITEM_SITRUS_BERRY automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Quiet intentionally lowers Speed for Trick Room.",
+        "Hyper Voice is valuable without Throat Spray, so the set is not item-dead."
+      ],
       "reviewed_by": "Emerald Champions authored doubles audit",
       "review_notes": "Direct doubles set retained with locally legal moves."
     },
     {
       "species": "SPECIES_KINGAMBIT",
       "role": "Defiant priority setup closer",
-      "moves": ["MOVE_SWORDS_DANCE", "MOVE_KOWTOW_CLEAVE", "MOVE_SUCKER_PUNCH", "MOVE_PROTECT"],
+      "moves": [
+        "MOVE_SWORDS_DANCE",
+        "MOVE_KOWTOW_CLEAVE",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_PROTECT"
+      ],
       "nature": "NATURE_ADAMANT",
       "ability": "ABILITY_DEFIANT",
       "suggested_item": "ITEM_BLACK_GLASSES",
-      "item_context": "Black Glasses boosts both Dark attacks without move lock; Leftovers is a bulkier alternative.",
-      "source_refs": ["Smogon Doubles OU Kingambit Swords Dance", "Smogon VGC 2024-2025 offensive Kingambit"],
+      "item_context": "ITEM_BLACK_GLASSES is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
+      "source_refs": [
+        "Smogon Doubles OU Kingambit Swords Dance",
+        "Smogon VGC 2024-2025 offensive Kingambit"
+      ],
       "doubles_rationale": "Defiant makes common Intimidate and stat-drop control dangerous, Swords Dance establishes the win condition, Kowtow Cleave is reliable damage, and Sucker Punch supplies lethal priority. Protect prevents opponents from simply doubling the slow threat.",
-      "dependency_notes": ["Sucker Punch requires an attacking target, but Kowtow Cleave is the unconditional line.", "Supreme Overlord is stronger only after allies faint; Defiant is the more immediate general-purpose doubles ability."],
+      "dependency_notes": [
+        "The set service equips ITEM_BLACK_GLASSES automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Sucker Punch requires an attacking target, but Kowtow Cleave is the unconditional line.",
+        "Supreme Overlord is stronger only after allies faint; Defiant is the more immediate general-purpose doubles ability."
+      ],
       "reviewed_by": "Emerald Champions authored doubles audit",
       "review_notes": "Direct doubles archetype adapted without Tera assumptions."
     },
     {
       "species": "SPECIES_GREAT_TUSK",
       "role": "Fast physical breaker and item disruptor",
-      "moves": ["MOVE_HEADLONG_RUSH", "MOVE_CLOSE_COMBAT", "MOVE_KNOCK_OFF", "MOVE_PROTECT"],
+      "moves": [
+        "MOVE_HEADLONG_RUSH",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_KNOCK_OFF",
+        "MOVE_PROTECT"
+      ],
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_PROTOSYNTHESIS",
       "suggested_item": "ITEM_FOCUS_SASH",
-      "item_context": "Focus Sash guarantees a breaking turn despite Great Tusk's low special defense; Life Orb is the maximum-damage option.",
-      "source_refs": ["Pokemon Showdown Gen 9 random doubles Great Tusk", "Smogon doubles Great Tusk offense"],
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
+      "source_refs": [
+        "Pokemon Showdown Gen 9 random doubles Great Tusk",
+        "Smogon doubles Great Tusk offense"
+      ],
       "doubles_rationale": "Dual 120-power STABs threaten immediate knockouts, Knock Off removes defensive and speed-control items, and Jolly preserves Great Tusk's important mid-speed advantage. Protect is essential after its defenses fall from attacking.",
-      "dependency_notes": ["Headlong Rush and Close Combat lower defenses, so sequencing with Protect matters.", "Protosynthesis can receive sun or Booster Energy but the attacks do not require either."],
+      "dependency_notes": [
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Headlong Rush and Close Combat lower defenses, so sequencing with Protect matters.",
+        "Protosynthesis can receive sun or Booster Energy but the attacks do not require either."
+      ],
       "reviewed_by": "Emerald Champions authored doubles audit",
       "review_notes": "Direct random-doubles chassis retained."
     },
     {
       "species": "SPECIES_FLUTTER_MANE",
       "role": "Ultra-fast special attacker and speed control",
-      "moves": ["MOVE_MOONBLAST", "MOVE_SHADOW_BALL", "MOVE_ICY_WIND", "MOVE_PROTECT"],
+      "moves": [
+        "MOVE_MOONBLAST",
+        "MOVE_SHADOW_BALL",
+        "MOVE_ICY_WIND",
+        "MOVE_PROTECT"
+      ],
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_PROTOSYNTHESIS",
       "suggested_item": "ITEM_FOCUS_SASH",
-      "item_context": "Focus Sash is the most broadly useful answer to Flutter Mane's paper physical defense; Life Orb or Choice Specs can maximize damage.",
-      "source_refs": ["Smogon VGC 2024 speed-support Flutter Mane", "Smogon National Dex Doubles Flutter Mane"],
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
+      "source_refs": [
+        "Smogon VGC 2024 speed-support Flutter Mane",
+        "Smogon National Dex Doubles Flutter Mane"
+      ],
       "doubles_rationale": "Moonblast and Shadow Ball provide excellent focused dual STAB, Icy Wind turns its natural Speed into team-wide control, and Protect preserves a fragile but oppressive board piece. The set functions without weather or an activation item.",
-      "dependency_notes": ["Protosynthesis is a bonus under sun rather than a requirement.", "No Terastallization field or Choice lock is assumed."],
+      "dependency_notes": [
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Protosynthesis is a bonus under sun rather than a requirement.",
+        "No Terastallization field or Choice lock is assumed."
+      ],
       "reviewed_by": "Emerald Champions authored doubles audit",
       "review_notes": "The VGC support-attacker blend was selected over a Tera-dependent all-out source."
     },
     {
       "species": "SPECIES_IRON_BUNDLE",
       "role": "Fast special attacker and Icy Wind controller",
-      "moves": ["MOVE_HYDRO_PUMP", "MOVE_FREEZE_DRY", "MOVE_ICY_WIND", "MOVE_PROTECT"],
+      "moves": [
+        "MOVE_HYDRO_PUMP",
+        "MOVE_FREEZE_DRY",
+        "MOVE_ICY_WIND",
+        "MOVE_PROTECT"
+      ],
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_QUARK_DRIVE",
       "suggested_item": "ITEM_FOCUS_SASH",
-      "item_context": "Focus Sash protects Iron Bundle from its weak special bulk; Booster Energy is a faster or stronger alternative depending on local stat resolution.",
-      "source_refs": ["Smogon Doubles OU Iron Bundle fast sweeper", "Smogon VGC 2024 Iron Bundle"],
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
+      "source_refs": [
+        "Smogon Doubles OU Iron Bundle fast sweeper",
+        "Smogon VGC 2024 Iron Bundle"
+      ],
       "doubles_rationale": "Freeze-Dry uniquely punishes Water-types, Hydro Pump supplies the high-power second STAB, and Icy Wind controls both opponents. Timid plus Protect makes Iron Bundle a consistent tempo piece instead of a one-turn glass cannon.",
-      "dependency_notes": ["Hydro Pump is inaccurate but Freeze-Dry and Icy Wind provide reliable alternate actions.", "Quark Drive is helpful but Electric Terrain is not required."],
+      "dependency_notes": [
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Hydro Pump is inaccurate but Freeze-Dry and Icy Wind provide reliable alternate actions.",
+        "Quark Drive is helpful but Electric Terrain is not required."
+      ],
       "reviewed_by": "Emerald Champions authored doubles audit",
       "review_notes": "Direct doubles set retained exactly where locally legal."
     },
     {
       "species": "SPECIES_IRON_HANDS",
       "role": "Assault Vest Fake Out tank and breaker",
-      "moves": ["MOVE_FAKE_OUT", "MOVE_CLOSE_COMBAT", "MOVE_WILD_CHARGE", "MOVE_ICE_PUNCH"],
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_WILD_CHARGE",
+        "MOVE_ICE_PUNCH"
+      ],
       "nature": "NATURE_ADAMANT",
       "ability": "ABILITY_QUARK_DRIVE",
       "suggested_item": "ITEM_ASSAULT_VEST",
-      "item_context": "Assault Vest is fully coherent with four attacks and patches Iron Hands's lower special defense.",
-      "source_refs": ["Smogon National Dex Doubles Fake Out Iron Hands", "Smogon VGC Assault Vest Iron Hands archetype"],
+      "item_context": "ITEM_ASSAULT_VEST is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
+      "source_refs": [
+        "Smogon National Dex Doubles Fake Out Iron Hands",
+        "Smogon VGC Assault Vest Iron Hands archetype"
+      ],
       "doubles_rationale": "Fake Out immediately buys partner tempo, dual STAB supplies enormous pressure, and Ice Punch covers Ground-, Grass-, and Dragon-types that resist or threaten the core. Its HP and Assault Vest let it trade repeatedly instead of relying on setup.",
-      "dependency_notes": ["Wild Charge recoil is meaningful but Iron Hands has the HP to absorb it.", "The preset deliberately contains no Protect or status move that Assault Vest would disable."],
+      "dependency_notes": [
+        "The set service equips ITEM_ASSAULT_VEST automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Wild Charge recoil is meaningful but Iron Hands has the HP to absorb it.",
+        "The preset deliberately contains no Protect or status move that Assault Vest would disable."
+      ],
       "reviewed_by": "Emerald Champions authored doubles audit",
       "review_notes": "Exact local pool lacks Drain Punch, so Close Combat is the honest Fighting STAB."
     },
     {
       "species": "SPECIES_GLIMMET",
       "role": "Eviolite Toxic Debris hazard attacker",
-      "moves": ["MOVE_STEALTH_ROCK", "MOVE_SLUDGE_BOMB", "MOVE_POWER_GEM", "MOVE_PROTECT"],
+      "moves": [
+        "MOVE_STEALTH_ROCK",
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_POWER_GEM",
+        "MOVE_PROTECT"
+      ],
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_TOXIC_DEBRIS",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "Eviolite gives the frail first stage a realistic chance to set hazards or attack more than once.",
-      "source_refs": ["Smogon Gen 9 Little Cup Glimmet hazard setter", "Emerald Champions Toxic Debris implementation"],
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
+      "source_refs": [
+        "Smogon Gen 9 Little Cup Glimmet hazard setter",
+        "Emerald Champions Toxic Debris implementation"
+      ],
       "doubles_rationale": "Toxic Debris punishes physical focus, Stealth Rock creates campaign switch pressure, and dual special STAB prevents Glimmet from becoming dead weight. Protect can deliberately invite a partner action or scout which slot intends to trigger it.",
-      "dependency_notes": ["Entry hazards are less central in doubles but remain valuable against the game's authored switching AI.", "No Focus Sash is assumed for basic move functionality."],
+      "dependency_notes": [
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Entry hazards are less central in doubles but remain valuable against the game's authored switching AI.",
+        "No Focus Sash is assumed for basic move functionality."
+      ],
       "reviewed_by": "Emerald Champions authored doubles audit",
       "review_notes": "Individually retained as a hazard-learning early form, not copied from Glimmora."
     },
     {
       "species": "SPECIES_GLIMMORA",
       "role": "Focus Sash Toxic Debris pressure lead",
-      "moves": ["MOVE_STEALTH_ROCK", "MOVE_SLUDGE_BOMB", "MOVE_POWER_GEM", "MOVE_SPIKY_SHIELD"],
+      "moves": [
+        "MOVE_STEALTH_ROCK",
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_POWER_GEM",
+        "MOVE_SPIKY_SHIELD"
+      ],
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_TOXIC_DEBRIS",
       "suggested_item": "ITEM_FOCUS_SASH",
-      "item_context": "Focus Sash reliably converts Glimmora's lead turn into hazards or damage and synergizes with Toxic Debris punishment.",
-      "source_refs": ["Smogon Doubles OU Focus Sash Glimmora", "Pokemon Showdown Champions random doubles Glimmora"],
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
+      "source_refs": [
+        "Smogon Doubles OU Focus Sash Glimmora",
+        "Pokemon Showdown Champions random doubles Glimmora"
+      ],
       "doubles_rationale": "Glimmora threatens immediate dual-STAB damage while its ability and Stealth Rock punish the opponent for focusing or switching around it. Spiky Shield provides native doubles scouting and contact punishment without requiring the unavailable Meteor Beam line.",
-      "dependency_notes": ["The local player learnset does not expose a complete Meteor Beam set, so no Power Herb dependency is faked.", "Hazards gain value from Emerald Champions's improved switching AI."],
+      "dependency_notes": [
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements.",
+        "The local player learnset does not expose a complete Meteor Beam set, so no Power Herb dependency is faked.",
+        "Hazards gain value from Emerald Champions's improved switching AI."
+      ],
       "reviewed_by": "Emerald Champions authored doubles audit",
       "review_notes": "Source Meteor Beam variants were rejected because the locally retained set was incomplete."
     },
     {
       "species": "SPECIES_GIMMIGHOUL",
       "role": "Eviolite slow special support",
-      "moves": ["MOVE_SHADOW_BALL", "MOVE_ICY_WIND", "MOVE_LIGHT_SCREEN", "MOVE_PROTECT"],
+      "moves": [
+        "MOVE_SHADOW_BALL",
+        "MOVE_ICY_WIND",
+        "MOVE_LIGHT_SCREEN",
+        "MOVE_PROTECT"
+      ],
       "nature": "NATURE_MODEST",
       "ability": "ABILITY_RATTLED",
       "suggested_item": "ITEM_EVIOLITE",
-      "item_context": "Eviolite is essential to making Chest Form's low HP and unevolved defenses usable, but every selected move works independently.",
-      "source_refs": ["Emerald Champions exact Gimmighoul stats and legal pool", "Doubles screen and Icy Wind support principles"],
+      "item_context": "ITEM_EVIOLITE is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
+      "source_refs": [
+        "Emerald Champions exact Gimmighoul stats and legal pool",
+        "Doubles screen and Icy Wind support principles"
+      ],
       "doubles_rationale": "Shadow Ball uses its only meaningful attacking stat, Icy Wind gives an otherwise very slow Pokémon immediate team value, and Light Screen protects both allies. Protect preserves the small support piece while a partner capitalizes on the speed drop.",
-      "dependency_notes": ["Rattled is situational and is the only locally available ability.", "This is a local authored fallback because public doubles sources do not meaningfully cover unevolved Gimmighoul."],
+      "dependency_notes": [
+        "The set service equips ITEM_EVIOLITE automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Rattled is situational and is the only locally available ability.",
+        "This is a local authored fallback because public doubles sources do not meaningfully cover unevolved Gimmighoul."
+      ],
       "reviewed_by": "Emerald Champions authored doubles audit",
       "review_notes": "Physical Secret Power was removed from the draft as stat-incoherent."
     },
     {
       "species": "SPECIES_GIMMIGHOUL_ROAMING",
       "role": "Fast frail special speed support",
-      "moves": ["MOVE_SHADOW_BALL", "MOVE_ICY_WIND", "MOVE_LIGHT_SCREEN", "MOVE_PROTECT"],
+      "moves": [
+        "MOVE_SHADOW_BALL",
+        "MOVE_ICY_WIND",
+        "MOVE_LIGHT_SCREEN",
+        "MOVE_PROTECT"
+      ],
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_RUN_AWAY",
       "suggested_item": "ITEM_FOCUS_SASH",
-      "item_context": "Focus Sash is the only reliable way for the frail Roaming Form to survive a strong hit and deliver speed or screen support.",
-      "source_refs": ["Emerald Champions exact Roaming Form stat line and legal pool", "Doubles Icy Wind support principles"],
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
+      "source_refs": [
+        "Emerald Champions exact Roaming Form stat line and legal pool",
+        "Doubles Icy Wind support principles"
+      ],
       "doubles_rationale": "Unlike Chest Form, Roaming Form uses Timid and base 80 Speed to deploy Icy Wind or Light Screen before taking damage. Shadow Ball prevents Taunt from blanking it, and Protect preserves the Sash-supported tempo piece.",
-      "dependency_notes": ["Run Away has no trainer-battle payoff but is the form's only local ability.", "No unsupported Good as Gold inheritance from Gholdengo is assumed."],
+      "dependency_notes": [
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Run Away has no trainer-battle payoff but is the form's only local ability.",
+        "No unsupported Good as Gold inheritance from Gholdengo is assumed."
+      ],
       "reviewed_by": "Emerald Champions authored doubles audit",
       "review_notes": "Authored independently because its defenses and Speed differ materially from Chest Form."
     },
     {
       "species": "SPECIES_GHOLDENGO",
       "role": "Good as Gold Nasty Plot spread sweeper",
-      "moves": ["MOVE_NASTY_PLOT", "MOVE_MAKE_IT_RAIN", "MOVE_SHADOW_BALL", "MOVE_PROTECT"],
+      "moves": [
+        "MOVE_NASTY_PLOT",
+        "MOVE_MAKE_IT_RAIN",
+        "MOVE_SHADOW_BALL",
+        "MOVE_PROTECT"
+      ],
       "nature": "NATURE_MODEST",
       "ability": "ABILITY_GOOD_AS_GOLD",
       "suggested_item": "ITEM_LEFTOVERS",
-      "item_context": "Leftovers supports setup and repeated Protect turns; Life Orb is the immediate-damage alternative.",
-      "source_refs": ["Smogon Doubles OU Nasty Plot Gholdengo", "Emerald Champions Make It Rain and Good as Gold implementations"],
+      "item_context": "ITEM_LEFTOVERS is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
+      "source_refs": [
+        "Smogon Doubles OU Nasty Plot Gholdengo",
+        "Emerald Champions Make It Rain and Good as Gold implementations"
+      ],
       "doubles_rationale": "Good as Gold blocks common disruption, Nasty Plot threatens a decisive sweep, Make It Rain pressures both opponents, and Shadow Ball supplies focused secondary STAB. Protect buys setup positioning and preserves the boosted attacker.",
-      "dependency_notes": ["Make It Rain lowers Special Attack, so Nasty Plot and switching decisions matter.", "The set requires neither Terastallization nor a Choice item."],
+      "dependency_notes": [
+        "The set service equips ITEM_LEFTOVERS automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Make It Rain lowers Special Attack, so Nasty Plot and switching decisions matter.",
+        "The set requires neither Terastallization nor a Choice item."
+      ],
       "reviewed_by": "Emerald Champions authored doubles audit",
       "review_notes": "Direct doubles archetype retained."
     },
     {
       "species": "SPECIES_CHIEN_PAO",
       "role": "Sword of Ruin fast physical attacker",
-      "moves": ["MOVE_ICICLE_CRASH", "MOVE_SUCKER_PUNCH", "MOVE_SACRED_SWORD", "MOVE_PROTECT"],
+      "moves": [
+        "MOVE_ICICLE_CRASH",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_SACRED_SWORD",
+        "MOVE_PROTECT"
+      ],
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_SWORD_OF_RUIN",
       "suggested_item": "ITEM_FOCUS_SASH",
-      "item_context": "Focus Sash is the standard way to guarantee value from Chien-Pao's excellent offense and weak defensive typing.",
-      "source_refs": ["Smogon Doubles OU Focus Sash Chien-Pao", "Smogon VGC Chien-Pao attacker"],
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
+      "source_refs": [
+        "Smogon Doubles OU Focus Sash Chien-Pao",
+        "Smogon VGC Chien-Pao attacker"
+      ],
       "doubles_rationale": "Sword of Ruin amplifies both Chien-Pao and its physical partner, Icicle Crash and Sacred Sword cover a wide field, and Sucker Punch controls faster threats. Protect lets the player preserve the global physical-defense pressure.",
-      "dependency_notes": ["Sucker Punch is prediction-sensitive but two unconditional attacks remain.", "All Z-item options from National Dex source context were rejected."],
+      "dependency_notes": [
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Sucker Punch is prediction-sensitive but two unconditional attacks remain.",
+        "All Z-item options from National Dex source context were rejected."
+      ],
       "reviewed_by": "Emerald Champions authored doubles audit",
       "review_notes": "The clean Focus Sash version was selected over obsolete Z-source alternatives."
     },
     {
       "species": "SPECIES_TING_LU",
       "role": "Vessel of Ruin special-pressure tank",
-      "moves": ["MOVE_RUINATION", "MOVE_STOMPING_TANTRUM", "MOVE_THROAT_CHOP", "MOVE_PROTECT"],
+      "moves": [
+        "MOVE_RUINATION",
+        "MOVE_STOMPING_TANTRUM",
+        "MOVE_THROAT_CHOP",
+        "MOVE_PROTECT"
+      ],
       "nature": "NATURE_CAREFUL",
       "ability": "ABILITY_VESSEL_OF_RUIN",
       "suggested_item": "ITEM_LEFTOVERS",
-      "item_context": "Leftovers is the most general tank item and remains coherent with Protect; Rocky Helmet is a physical-punish alternative.",
-      "source_refs": ["Smogon VGC 2024 Ting-Lu support", "Smogon Doubles OU Ting-Lu"],
+      "item_context": "ITEM_LEFTOVERS is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
+      "source_refs": [
+        "Smogon VGC 2024 Ting-Lu support",
+        "Smogon Doubles OU Ting-Lu"
+      ],
       "doubles_rationale": "Vessel of Ruin protects the whole side from special damage, Ruination chunks even overleveled bosses, and two physical attacks prevent Taunt from making Ting-Lu passive. Protect compounds its global defensive value.",
-      "dependency_notes": ["Ruination deals proportional rather than conventional damage and is especially valuable into bulky targets.", "Assault Vest source variants were not copied because this reviewed set uses Protect."],
+      "dependency_notes": [
+        "The set service equips ITEM_LEFTOVERS automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Ruination deals proportional rather than conventional damage and is especially valuable into bulky targets.",
+        "Assault Vest source variants were not copied because this reviewed set uses Protect."
+      ],
       "reviewed_by": "Emerald Champions authored doubles audit",
       "review_notes": "Careful standalone support set selected over singles hazard stacking."
     },
     {
       "species": "SPECIES_CHI_YU",
       "role": "Beads of Ruin special setup breaker",
-      "moves": ["MOVE_NASTY_PLOT", "MOVE_DARK_PULSE", "MOVE_FLAMETHROWER", "MOVE_PROTECT"],
+      "moves": [
+        "MOVE_NASTY_PLOT",
+        "MOVE_DARK_PULSE",
+        "MOVE_FLAMETHROWER",
+        "MOVE_PROTECT"
+      ],
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_BEADS_OF_RUIN",
       "suggested_item": "ITEM_LIFE_ORB",
-      "item_context": "Life Orb converts Chi-Yu's board-wide special-defense reduction into immediate knockouts without move lock.",
-      "source_refs": ["Smogon Doubles OU Chi-Yu all-out attacker", "Emerald Champions exact Chi-Yu legal pool"],
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
+      "source_refs": [
+        "Smogon Doubles OU Chi-Yu all-out attacker",
+        "Emerald Champions exact Chi-Yu legal pool"
+      ],
       "doubles_rationale": "Beads of Ruin raises the output of Chi-Yu and its special partner, Nasty Plot creates an independent win condition, and dual STAB supplies reliable focused damage. Protect keeps the frail enabler on the board.",
-      "dependency_notes": ["The local learnset lacks Heat Wave, so Flamethrower is the honest reliable Fire STAB.", "Choice and Tera assumptions from source sets were removed."],
+      "dependency_notes": [
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements.",
+        "The local learnset lacks Heat Wave, so Flamethrower is the honest reliable Fire STAB.",
+        "Choice and Tera assumptions from source sets were removed."
+      ],
       "reviewed_by": "Emerald Champions authored doubles audit",
       "review_notes": "Nasty Plot was chosen instead of filler Hyper Beam in the draft."
     },
     {
       "species": "SPECIES_ROARING_MOON",
       "role": "Dragon Dance physical sweeper with spread mitigation",
-      "moves": ["MOVE_DRAGON_DANCE", "MOVE_BREAKING_SWIPE", "MOVE_THROAT_CHOP", "MOVE_PROTECT"],
+      "moves": [
+        "MOVE_DRAGON_DANCE",
+        "MOVE_BREAKING_SWIPE",
+        "MOVE_THROAT_CHOP",
+        "MOVE_PROTECT"
+      ],
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_PROTOSYNTHESIS",
       "suggested_item": "ITEM_BOOSTER_ENERGY",
-      "item_context": "Booster Energy supplies the source archetype's immediate Protosynthesis activation; Lum Berry is a status-safe alternative.",
-      "source_refs": ["Smogon Doubles OU bulky Roaring Moon", "Smogon VGC Roaring Moon offensive support", "Emerald Champions exact local move pool"],
+      "item_context": "ITEM_BOOSTER_ENERGY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
+      "source_refs": [
+        "Smogon Doubles OU bulky Roaring Moon",
+        "Smogon VGC Roaring Moon offensive support",
+        "Emerald Champions exact local move pool"
+      ],
       "doubles_rationale": "Dragon Dance creates the sweeping threat, Breaking Swipe pressures both opponents while reducing physical damage, and Throat Chop is reliable Dark STAB. Protect allows a safe partner-supported setup turn.",
-      "dependency_notes": ["The local curated learnset does not include Tailwind or Acrobatics, so the public Booster-Energy support set was rebuilt honestly.", "Protosynthesis may also activate under sun."],
+      "dependency_notes": [
+        "The set service equips ITEM_BOOSTER_ENERGY automatically, and the Pokémon Center vendor supplies free replacements.",
+        "The local curated learnset does not include Tailwind or Acrobatics, so the public Booster-Energy support set was rebuilt honestly.",
+        "Protosynthesis may also activate under sun."
+      ],
       "reviewed_by": "Emerald Champions authored doubles audit",
       "review_notes": "Individually adapted rather than retaining the unrelated singles Jaw Lock trap."
     },
     {
       "species": "SPECIES_IRON_VALIANT",
       "role": "Fast mixed-field physical attacker and Wide Guard support",
-      "moves": ["MOVE_CLOSE_COMBAT", "MOVE_SPIRIT_BREAK", "MOVE_WIDE_GUARD", "MOVE_PROTECT"],
+      "moves": [
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_SPIRIT_BREAK",
+        "MOVE_WIDE_GUARD",
+        "MOVE_PROTECT"
+      ],
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_QUARK_DRIVE",
       "suggested_item": "ITEM_FOCUS_SASH",
-      "item_context": "Focus Sash guarantees at least one offensive or Wide Guard turn from Iron Valiant's poor special bulk.",
-      "source_refs": ["Smogon VGC 2024 disruptive Iron Valiant", "Emerald Champions exact Wide Guard legal pool"],
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
+      "source_refs": [
+        "Smogon VGC 2024 disruptive Iron Valiant",
+        "Emerald Champions exact Wide Guard legal pool"
+      ],
       "doubles_rationale": "Dual physical STAB hits hard without setup, Spirit Break also lowers opposing special output, and Wide Guard can invalidate spread-focused boss turns. Protect gives a second defensive timing tool rather than forcing a singles Swords Dance race.",
-      "dependency_notes": ["Wide Guard is matchup-dependent but both attacks remain unconditional.", "No Booster Energy, Electric Terrain, or Terastallization is required."],
+      "dependency_notes": [
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Wide Guard is matchup-dependent but both attacks remain unconditional.",
+        "No Booster Energy, Electric Terrain, or Terastallization is required."
+      ],
       "reviewed_by": "Emerald Champions authored doubles audit",
       "review_notes": "The direct doubles support identity was completed with locally legal Fighting STAB and Protect."
     },
     {
       "species": "SPECIES_WALKING_WAKE",
       "role": "Fast sun-compatible special attacker",
-      "moves": ["MOVE_HYDRO_STEAM", "MOVE_FLAMETHROWER", "MOVE_DRAGON_PULSE", "MOVE_PROTECT"],
+      "moves": [
+        "MOVE_HYDRO_STEAM",
+        "MOVE_FLAMETHROWER",
+        "MOVE_DRAGON_PULSE",
+        "MOVE_PROTECT"
+      ],
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_PROTOSYNTHESIS",
       "suggested_item": "ITEM_LIFE_ORB",
-      "item_context": "Life Orb raises all three attacks without locking the coverage; Choice Specs is the maximum-output alternative.",
-      "source_refs": ["Smogon Doubles OU Walking Wake sun attacker", "Smogon VGC 2024 Walking Wake"],
+      "item_context": "ITEM_LIFE_ORB is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
+      "source_refs": [
+        "Smogon Doubles OU Walking Wake sun attacker",
+        "Smogon VGC 2024 Walking Wake"
+      ],
       "doubles_rationale": "Hydro Steam uniquely remains threatening in sun, Flamethrower punishes Grass and Steel answers, and Dragon Pulse is reliable focused STAB. Timid Protect makes Walking Wake useful both on and off dedicated sun teams.",
-      "dependency_notes": ["Sun activates Protosynthesis and Hydro Steam's bonus but is not required for the moves to function.", "The set contains no Tera Blast or Choice-only support move."],
+      "dependency_notes": [
+        "The set service equips ITEM_LIFE_ORB automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Sun activates Protosynthesis and Hydro Steam's bonus but is not required for the moves to function.",
+        "The set contains no Tera Blast or Choice-only support move."
+      ],
       "reviewed_by": "Emerald Champions authored doubles audit",
       "review_notes": "Direct doubles sun identity retained with a fourth locally legal attack."
     },
     {
       "species": "SPECIES_OGERPON",
       "role": "Fast Defiant offensive redirector",
-      "moves": ["MOVE_IVY_CUDGEL", "MOVE_SUPERPOWER", "MOVE_FOLLOW_ME", "MOVE_SPIKY_SHIELD"],
+      "moves": [
+        "MOVE_IVY_CUDGEL",
+        "MOVE_SUPERPOWER",
+        "MOVE_FOLLOW_ME",
+        "MOVE_SPIKY_SHIELD"
+      ],
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_DEFIANT",
       "suggested_item": "ITEM_FOCUS_SASH",
-      "item_context": "Focus Sash is a broadly available substitute for modern Teal Mask item context and guarantees a redirection or attack turn.",
-      "source_refs": ["Smogon VGC 2024 offensive redirector Ogerpon", "Emerald Champions exact Defiant base-form implementation"],
+      "item_context": "ITEM_FOCUS_SASH is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
+      "source_refs": [
+        "Smogon VGC 2024 offensive redirector Ogerpon",
+        "Emerald Champions exact Defiant base-form implementation"
+      ],
       "doubles_rationale": "Ivy Cudgel and Superpower make Ogerpon a real attacker, Follow Me can rescue a partner, and Spiky Shield protects while punishing contact. Defiant turns Intimidate into offensive momentum.",
-      "dependency_notes": ["Follow Me is partner-dependent by design but the two attacks preserve standalone value.", "No Terastallization mask transformation is assumed."],
+      "dependency_notes": [
+        "The set service equips ITEM_FOCUS_SASH automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Follow Me is partner-dependent by design but the two attacks preserve standalone value.",
+        "No Terastallization mask transformation is assumed."
+      ],
       "reviewed_by": "Emerald Champions authored doubles audit",
       "review_notes": "Base form reviewed independently from the three typed masks."
     },
     {
       "species": "SPECIES_OGERPON_WELLSPRING",
       "role": "Water Absorb offensive redirector",
-      "moves": ["MOVE_IVY_CUDGEL", "MOVE_HORN_LEECH", "MOVE_FOLLOW_ME", "MOVE_SPIKY_SHIELD"],
+      "moves": [
+        "MOVE_IVY_CUDGEL",
+        "MOVE_HORN_LEECH",
+        "MOVE_FOLLOW_ME",
+        "MOVE_SPIKY_SHIELD"
+      ],
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_WATER_ABSORB",
       "suggested_item": "ITEM_WELLSPRING_MASK",
-      "item_context": "Wellspring Mask is the form-defining held item; the builder records but never grants or equips it.",
-      "source_refs": ["Smogon Doubles OU Ogerpon-Wellspring utility attacker", "Smogon VGC Ogerpon-Wellspring redirector"],
+      "item_context": "ITEM_WELLSPRING_MASK remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_WELLSPRING_MASK manually after earning it.",
+      "source_refs": [
+        "Smogon Doubles OU Ogerpon-Wellspring utility attacker",
+        "Smogon VGC Ogerpon-Wellspring redirector"
+      ],
       "doubles_rationale": "Water Ivy Cudgel plus Horn Leech gives strong dual STAB and sustain, Follow Me redirects attacks that Water Absorb can sometimes nullify, and Spiky Shield protects the high-value support attacker.",
-      "dependency_notes": ["The form and mask are campaign progression objects; the moveset service does not create the mask.", "No Terastallization is used."],
+      "dependency_notes": [
+        "ITEM_WELLSPRING_MASK is protected progression; the automatic runtime item is ITEM_LIFE_ORB.",
+        "The form and mask are campaign progression objects; the moveset service does not create the mask.",
+        "No Terastallization is used."
+      ],
       "reviewed_by": "Emerald Champions authored doubles audit",
       "review_notes": "Horn Leech was chosen over recoil-heavy Grass options for redirection longevity."
     },
     {
       "species": "SPECIES_OGERPON_HEARTHFLAME",
       "role": "Mold Breaker offensive redirector",
-      "moves": ["MOVE_IVY_CUDGEL", "MOVE_WOOD_HAMMER", "MOVE_FOLLOW_ME", "MOVE_SPIKY_SHIELD"],
+      "moves": [
+        "MOVE_IVY_CUDGEL",
+        "MOVE_WOOD_HAMMER",
+        "MOVE_FOLLOW_ME",
+        "MOVE_SPIKY_SHIELD"
+      ],
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_MOLD_BREAKER",
       "suggested_item": "ITEM_HEARTHFLAME_MASK",
-      "item_context": "Hearthflame Mask is the form-defining held item and is advisory only in this service.",
-      "source_refs": ["Smogon National Dex Doubles Ogerpon-Hearthflame", "Smogon VGC 2025 offensive redirector"],
+      "item_context": "ITEM_HEARTHFLAME_MASK remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_HEARTHFLAME_MASK manually after earning it.",
+      "source_refs": [
+        "Smogon National Dex Doubles Ogerpon-Hearthflame",
+        "Smogon VGC 2025 offensive redirector"
+      ],
       "doubles_rationale": "Fire Ivy Cudgel and Wood Hammer deliver exceptional dual-STAB pressure through Mold Breaker, while Follow Me and Spiky Shield create the same flexible offense-support tension that defines competitive Ogerpon.",
-      "dependency_notes": ["Wood Hammer recoil competes with redirection longevity and should be used as the knockout line.", "No Terastallization is used or required."],
+      "dependency_notes": [
+        "ITEM_HEARTHFLAME_MASK is protected progression; the automatic runtime item is ITEM_LIFE_ORB.",
+        "Wood Hammer recoil competes with redirection longevity and should be used as the knockout line.",
+        "No Terastallization is used or required."
+      ],
       "reviewed_by": "Emerald Champions authored doubles audit",
       "review_notes": "Direct doubles archetype retained."
     },
     {
       "species": "SPECIES_OGERPON_CORNERSTONE",
       "role": "Sturdy offensive redirector",
-      "moves": ["MOVE_IVY_CUDGEL", "MOVE_HORN_LEECH", "MOVE_FOLLOW_ME", "MOVE_SPIKY_SHIELD"],
+      "moves": [
+        "MOVE_IVY_CUDGEL",
+        "MOVE_HORN_LEECH",
+        "MOVE_FOLLOW_ME",
+        "MOVE_SPIKY_SHIELD"
+      ],
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_STURDY",
       "suggested_item": "ITEM_CORNERSTONE_MASK",
-      "item_context": "Cornerstone Mask is the form-defining held item and remains a campaign acquisition rather than a tutor grant.",
-      "source_refs": ["Smogon Doubles OU Ogerpon-Cornerstone attacker", "Smogon VGC Ogerpon-Cornerstone redirection support"],
+      "item_context": "ITEM_CORNERSTONE_MASK remains protected progression and is never generated by a battle set. The automatic loadout equips ITEM_LIFE_ORB; equip ITEM_CORNERSTONE_MASK manually after earning it.",
+      "source_refs": [
+        "Smogon Doubles OU Ogerpon-Cornerstone attacker",
+        "Smogon VGC Ogerpon-Cornerstone redirection support"
+      ],
       "doubles_rationale": "Rock Ivy Cudgel and Horn Leech provide complementary damage and recovery, Sturdy guarantees a healthy form survives one hit, and Follow Me turns that survival into partner protection. Spiky Shield preserves Sturdy when spread pressure is expected.",
-      "dependency_notes": ["Sturdy requires full HP and can be broken by prior chip or multi-hit attacks.", "No Terastallization is used."],
+      "dependency_notes": [
+        "ITEM_CORNERSTONE_MASK is protected progression; the automatic runtime item is ITEM_LIFE_ORB.",
+        "Sturdy requires full HP and can be broken by prior chip or multi-hit attacks.",
+        "No Terastallization is used."
+      ],
       "reviewed_by": "Emerald Champions authored doubles audit",
       "review_notes": "Horn Leech chosen to restore Sturdy opportunities where possible."
     },
     {
       "species": "SPECIES_ARCHALUDON",
       "role": "Stamina Assault Vest rain artillery",
-      "moves": ["MOVE_DRACO_METEOR", "MOVE_FLASH_CANNON", "MOVE_ELECTRO_SHOT", "MOVE_BODY_PRESS"],
+      "moves": [
+        "MOVE_DRACO_METEOR",
+        "MOVE_FLASH_CANNON",
+        "MOVE_ELECTRO_SHOT",
+        "MOVE_BODY_PRESS"
+      ],
       "nature": "NATURE_MODEST",
       "ability": "ABILITY_STAMINA",
       "suggested_item": "ITEM_ASSAULT_VEST",
-      "item_context": "Assault Vest is coherent with four attacks and patches Archaludon's special defense while Stamina grows physical defense.",
-      "source_refs": ["Smogon VGC 2024 Archaludon rain sweeper", "Smogon National Dex Doubles Assault Vest Archaludon"],
+      "item_context": "ITEM_ASSAULT_VEST is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
+      "source_refs": [
+        "Smogon VGC 2024 Archaludon rain sweeper",
+        "Smogon National Dex Doubles Assault Vest Archaludon"
+      ],
       "doubles_rationale": "Stamina converts contact into Body Press power, dual special STAB pressures the board, and Electro Shot supplies the signature rain payoff. Assault Vest produces one of competitive doubles' most durable mixed-pressure attackers.",
-      "dependency_notes": ["Electro Shot takes two turns outside rain; pair with rain or deliberately charge it on a protected board.", "The preset intentionally has no Protect because Assault Vest would disable it."],
+      "dependency_notes": [
+        "The set service equips ITEM_ASSAULT_VEST automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Electro Shot takes two turns outside rain; pair with rain or deliberately charge it on a protected board.",
+        "The preset intentionally has no Protect because Assault Vest would disable it."
+      ],
       "reviewed_by": "Emerald Champions authored doubles audit",
       "review_notes": "Stamina was selected over the draft's Sturdy because it is the core of the established doubles role."
     },
     {
       "species": "SPECIES_GOUGING_FIRE",
       "role": "Howl physical support attacker",
-      "moves": ["MOVE_FLARE_BLITZ", "MOVE_DRAGON_CLAW", "MOVE_HOWL", "MOVE_BURNING_BULWARK"],
+      "moves": [
+        "MOVE_FLARE_BLITZ",
+        "MOVE_DRAGON_CLAW",
+        "MOVE_HOWL",
+        "MOVE_BURNING_BULWARK"
+      ],
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_PROTOSYNTHESIS",
       "suggested_item": "ITEM_BOOSTER_ENERGY",
-      "item_context": "Booster Energy supplies immediate Protosynthesis value; Leftovers is the durable support alternative.",
-      "source_refs": ["Smogon Doubles OU Gouging Fire physical support", "Smogon VGC 2024 Gouging Fire"],
+      "item_context": "ITEM_BOOSTER_ENERGY is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
+      "source_refs": [
+        "Smogon Doubles OU Gouging Fire physical support",
+        "Smogon VGC 2024 Gouging Fire"
+      ],
       "doubles_rationale": "Howl boosts Gouging Fire and its physical partner, dual STAB prevents passivity, and Burning Bulwark both protects and punishes contact. Its bulk makes repeated support turns plausible rather than gimmicky.",
-      "dependency_notes": ["Flare Blitz recoil is the cost of immediate Fire pressure.", "Sun strengthens the role but Booster Energy or raw stats keep it functional without weather."],
+      "dependency_notes": [
+        "The set service equips ITEM_BOOSTER_ENERGY automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Flare Blitz recoil is the cost of immediate Fire pressure.",
+        "Sun strengthens the role but Booster Energy or raw stats keep it functional without weather."
+      ],
       "reviewed_by": "Emerald Champions authored doubles audit",
       "review_notes": "Dragon Claw fills the locally missing Breaking Swipe slot with honest focused STAB."
     },
     {
       "species": "SPECIES_RAGING_BOLT",
       "role": "Calm Mind bulky priority special sweeper",
-      "moves": ["MOVE_THUNDERCLAP", "MOVE_DRAGON_PULSE", "MOVE_CALM_MIND", "MOVE_PROTECT"],
+      "moves": [
+        "MOVE_THUNDERCLAP",
+        "MOVE_DRAGON_PULSE",
+        "MOVE_CALM_MIND",
+        "MOVE_PROTECT"
+      ],
       "nature": "NATURE_MODEST",
       "ability": "ABILITY_PROTOSYNTHESIS",
       "suggested_item": "ITEM_LEFTOVERS",
-      "item_context": "Leftovers is the established Calm Mind item and works without weather; Booster Energy is the faster immediate alternative.",
-      "source_refs": ["Smogon Doubles OU Raging Bolt Calm Mind", "Smogon National Dex Doubles Raging Bolt"],
+      "item_context": "ITEM_LEFTOVERS is equipped automatically as part of this loadout. Switching sets replaces the previous ordinary competitive held item.",
+      "source_refs": [
+        "Smogon Doubles OU Raging Bolt Calm Mind",
+        "Smogon National Dex Doubles Raging Bolt"
+      ],
       "doubles_rationale": "Calm Mind leverages exceptional bulk and Special Attack, Thunderclap supplies rare special priority, and Dragon Pulse is reliable focused coverage. Protect makes the setup plan resilient to opposing double targets.",
-      "dependency_notes": ["Thunderclap, like Sucker Punch, requires an attacking target; Dragon Pulse is always available.", "Protosynthesis is optional rather than mandatory."],
+      "dependency_notes": [
+        "The set service equips ITEM_LEFTOVERS automatically, and the Pokémon Center vendor supplies free replacements.",
+        "Thunderclap, like Sucker Punch, requires an attacking target; Dragon Pulse is always available.",
+        "Protosynthesis is optional rather than mandatory."
+      ],
       "reviewed_by": "Emerald Champions authored doubles audit",
       "review_notes": "Direct doubles setup archetype retained."
     }

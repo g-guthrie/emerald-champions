@@ -177,11 +177,7 @@ for required_token in (
     "GetCurrentMapWildMonHeaderId()",
     "GetStringWidth(1, name, 0)",
     "ROUTE_SIGN_MAX_LINE_WIDTH 200",
-    "CollectRouteSignSpeciesChances",
-    "entries[j].chance += slotChances[i]",
-    "for (chance = 100; chance > 0; chance--)",
-    "ConvertIntToDecimalStringN",
-    "sText_RouteSignSpeciesPercent",
+    "CollectRouteSignSpecies",
     "sText_RouteSignGrass",
     "sText_RouteSignSurf",
     "sText_RouteSignRockSmash",
@@ -200,23 +196,9 @@ for required_token in (
     if required_token not in wild_source:
         failures.append(f"route-sign formatter is missing {required_token}")
 
-for method, count in (
-    ("LAND_MONS", 12),
-    ("WATER_MONS", 4),
-    ("ROCK_SMASH_MONS", 4),
-    ("HONEY_MONS", 6),
-):
-    for slot in range(count):
-        if f"ENCOUNTER_CHANCE_{method}_SLOT_{slot}" not in wild_source:
-            failures.append(f"route-sign formatter is missing {method} slot {slot} probability")
-for rod, slots in (
-    ("OLD_ROD", range(0, 2)),
-    ("GOOD_ROD", range(2, 5)),
-    ("SUPER_ROD", range(5, 10)),
-):
-    for slot in slots:
-        if f"ENCOUNTER_CHANCE_FISHING_MONS_{rod}_SLOT_{slot}" not in wild_source:
-            failures.append(f"route-sign formatter is missing {rod} slot {slot} probability")
+for forbidden in ("sText_RouteSignSpeciesPercent", "ConvertIntToDecimalStringN(prefixEnd", "entries[i].chance"):
+    if forbidden in wild_source:
+        failures.append(f"route signs still render encounter percentages: {forbidden}")
 
 if wild_source.count("dest = StringCopy(gStringVar4, sText_RouteSignSpeciesHeader);") != 1:
     failures.append("global route-sign species header must be emitted exactly once")
@@ -235,7 +217,7 @@ if failures:
 
 print(
     f"PASS: {route_sign_count} wayfinding signs on {len(SIGNS_BY_MAP)} physical route maps "
-    "show live encounter species grouped by method and exact percentage"
+    "show live encounter species grouped by method without percentages"
 )
 print(
     "PASS: encounter coverage ranges from "
