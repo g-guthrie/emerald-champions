@@ -949,6 +949,16 @@ checks = {
         and "GetEggMovesSpecies" in read("src/pokemon.c")
         and "NUM_TECHNICAL_MACHINES + NUM_HIDDEN_MACHINES" in read("src/pokemon.c")
         and "TUTOR_MOVE_COUNT" in read("src/pokemon.c")
+        and all(
+            token in read("src/pokemon.c").split("GetMoveRelearnerMoves", 1)[1].split("GetLevelUpMovesBySpecies", 1)[0]
+            for token in (
+                "SPECIES_ROTOM_HEAT", "MOVE_OVERHEAT",
+                "SPECIES_ROTOM_WASH", "MOVE_HYDRO_PUMP",
+                "SPECIES_ROTOM_FROST", "MOVE_FREEZE_DRY",
+                "SPECIES_ROTOM_FAN", "MOVE_HURRICANE",
+                "SPECIES_ROTOM_MOW", "MOVE_LEAF_STORM",
+            )
+        )
         and "moveLevel <= level" not in read("src/pokemon.c").split("GetMoveRelearnerMoves", 1)[1].split("GetLevelUpMovesBySpecies", 1)[0]
     ),
     "Pokécenter battle-set builder is native and transactional": (

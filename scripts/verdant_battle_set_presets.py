@@ -41,6 +41,17 @@ INDEX = ROOT / "docs/competitive_team_index.jsonl"
 REVIEW_DIR = ROOT / "docs/battle_set_reviews"
 GENERATOR_VERSION = 1
 
+# Rotom's appliance script teaches one move as part of the form change.  Those
+# moves are runtime-legal even though the ordinary level/TM/tutor bitfields do
+# not contain them for the appliance species.
+FORM_SPECIFIC_LEGAL_MOVES = {
+    "SPECIES_ROTOM_HEAT": {"MOVE_OVERHEAT"},
+    "SPECIES_ROTOM_WASH": {"MOVE_HYDRO_PUMP"},
+    "SPECIES_ROTOM_FROST": {"MOVE_FREEZE_DRY"},
+    "SPECIES_ROTOM_FAN": {"MOVE_HURRICANE"},
+    "SPECIES_ROTOM_MOW": {"MOVE_LEAF_STORM"},
+}
+
 NATURES = {
     "hardy", "lonely", "brave", "adamant", "naughty", "bold", "docile",
     "relaxed", "impish", "lax", "timid", "hasty", "serious", "jolly",
@@ -495,6 +506,7 @@ class LocalDex:
             moves.add("MOVE_VOLT_TACKLE")
         if root == "SPECIES_BAGON":
             moves.add("MOVE_WISH")
+        moves.update(FORM_SPECIFIC_LEGAL_MOVES.get(species, set()))
         # The ordinary tutor bitfields cannot express Sketch's indirect
         # legality.  These hand-selected support moves are all obtainable by
         # using the locally implemented Sketch in battle.

@@ -220,23 +220,23 @@
     {
       "ability": "ABILITY_LEVITATE",
       "dependency_notes": [
-        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; Overheat sharply lowers Special Attack, so plan to switch or use it as a finishing burst."
       ],
-      "doubles_rationale": "Rotom combines Levitate with Electroweb, Thunderbolt, Will O Wisp, Protect; every slot advances its heat-form speed-control attacker role in doubles.",
-      "item_context": "ITEM_SITRUS_BERRY supports the heat-form speed-control attacker role but is never granted by the tutor.",
+      "doubles_rationale": "Levitate gives Heat Rotom clean positioning, Overheat supplies its defining Fire burst, Thunderbolt is reliable Electric STAB, Will-O-Wisp checks physical attackers, and Protect preserves it through double targets.",
+      "item_context": "ITEM_SITRUS_BERRY gives the bulky appliance attacker another useful turn but is never granted by the tutor.",
       "moves": [
-        "MOVE_ELECTROWEB",
+        "MOVE_OVERHEAT",
         "MOVE_THUNDERBOLT",
         "MOVE_WILL_O_WISP",
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_TIMID",
-      "review_notes": "The exact local form pool lacks Fire attacks, so this independently reviewed set uses its best legal doubles utility. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "review_notes": "Overheat is taught by the appliance form-change runtime even though ordinary tutor bitfields omit it; the complete set was checked against that exact exception.",
       "reviewed_by": "Emerald Champions authored stable-form doubles audit",
-      "role": "Heat-form speed-control attacker",
+      "role": "Heat-form bulky special attacker and burn control",
       "source_refs": [
-        "Smogon Gen 4 doublesou Rotom-Heat set: Bulky Disruption",
-        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_ROTOM_HEAT"
+        "Smogon doubles Rotom-Heat bulky attacker and Will-O-Wisp sets",
+        "Emerald Champions RotomFormToMove runtime mapping: SPECIES_ROTOM_HEAT teaches MOVE_OVERHEAT"
       ],
       "species": "SPECIES_ROTOM_HEAT",
       "suggested_item": "ITEM_SITRUS_BERRY"
@@ -244,23 +244,23 @@
     {
       "ability": "ABILITY_LEVITATE",
       "dependency_notes": [
-        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; Hydro Pump has imperfect accuracy but is not the set's only useful action."
       ],
-      "doubles_rationale": "Rotom combines Levitate with Electroweb, Thunderbolt, Will O Wisp, Protect; every slot advances its wash-form speed-control attacker role in doubles.",
-      "item_context": "ITEM_SITRUS_BERRY supports the wash-form speed-control attacker role but is never granted by the tutor.",
+      "doubles_rationale": "Levitate and excellent defensive typing let Wash Rotom stay on the field, Hydro Pump and Thunderbolt give complementary STAB pressure, Will-O-Wisp suppresses physical attackers, and Protect manages focused fire.",
+      "item_context": "ITEM_SITRUS_BERRY reinforces Wash Rotom's bulky attacker role but is never granted by the tutor.",
       "moves": [
-        "MOVE_ELECTROWEB",
+        "MOVE_HYDRO_PUMP",
         "MOVE_THUNDERBOLT",
         "MOVE_WILL_O_WISP",
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_TIMID",
-      "review_notes": "The exact local form pool lacks Water attacks, so this independently reviewed set uses its best legal doubles utility. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "review_notes": "Hydro Pump is taught by the appliance form-change runtime even though ordinary tutor bitfields omit it; the complete set was checked against that exact exception.",
       "reviewed_by": "Emerald Champions authored stable-form doubles audit",
-      "role": "Wash-form speed-control attacker",
+      "role": "Wash-form bulky special attacker and burn control",
       "source_refs": [
-        "Smogon Gen 4 doublesou Rotom-Wash set: Bulky Disruption",
-        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_ROTOM_WASH"
+        "Smogon doubles Rotom-Wash bulky attacker and Will-O-Wisp sets",
+        "Emerald Champions RotomFormToMove runtime mapping: SPECIES_ROTOM_WASH teaches MOVE_HYDRO_PUMP"
       ],
       "species": "SPECIES_ROTOM_WASH",
       "suggested_item": "ITEM_SITRUS_BERRY"
@@ -268,23 +268,23 @@
     {
       "ability": "ABILITY_LEVITATE",
       "dependency_notes": [
-        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; Freeze-Dry is the local appliance move and needs no snow support."
       ],
-      "doubles_rationale": "Rotom combines Levitate with Aurora Beam, Thunderbolt, Electroweb, Protect; every slot advances its frost-form speed-control attacker role in doubles.",
-      "item_context": "ITEM_SITRUS_BERRY supports the frost-form speed-control attacker role but is never granted by the tutor.",
+      "doubles_rationale": "Freeze-Dry gives Frost Rotom accurate Ice pressure that also punishes Water types, Thunderbolt supplies strong Electric STAB, Electroweb controls both opponents' speed, and Protect preserves positioning.",
+      "item_context": "ITEM_SITRUS_BERRY supports Frost Rotom while it alternates damage, speed control, and Protect but is never granted by the tutor.",
       "moves": [
-        "MOVE_AURORA_BEAM",
+        "MOVE_FREEZE_DRY",
         "MOVE_THUNDERBOLT",
         "MOVE_ELECTROWEB",
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_TIMID",
-      "review_notes": "Used Aurora Beam because the exact local form data lacks Blizzard, then added reliable speed control. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "review_notes": "Freeze-Dry is taught by the appliance form-change runtime even though ordinary tutor bitfields omit it; the complete set was checked against that exact exception.",
       "reviewed_by": "Emerald Champions authored stable-form doubles audit",
-      "role": "Frost-form speed-control attacker",
+      "role": "Frost-form coverage and speed-control attacker",
       "source_refs": [
-        "Smogon Gen 4 doublesou Rotom-Frost set: Bulky Disruption",
-        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_ROTOM_FROST"
+        "Smogon doubles Rotom-Frost special attacker sets adapted to the local Freeze-Dry appliance move",
+        "Emerald Champions RotomFormToMove runtime mapping: SPECIES_ROTOM_FROST teaches MOVE_FREEZE_DRY"
       ],
       "species": "SPECIES_ROTOM_FROST",
       "suggested_item": "ITEM_SITRUS_BERRY"
@@ -292,23 +292,23 @@
     {
       "ability": "ABILITY_MOTOR_DRIVE",
       "dependency_notes": [
-        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; Hurricane becomes fully accurate in rain but remains usable with risk outside it."
       ],
-      "doubles_rationale": "Rotom combines Motor Drive with Electroweb, Thunderbolt, Will O Wisp, Protect; every slot advances its fan-form speed-control attacker role in doubles.",
-      "item_context": "ITEM_SITRUS_BERRY supports the fan-form speed-control attacker role but is never granted by the tutor.",
+      "doubles_rationale": "Motor Drive turns Electric targeting into a Speed boost instead of wasting an ability on redundant Ground immunity, while Hurricane and Thunderbolt pressure distinct targets, Electroweb controls both foes, and Protect scouts concentrated attacks.",
+      "item_context": "ITEM_SITRUS_BERRY supports Fan Rotom's repeated attacking and speed-control turns but is never granted by the tutor.",
       "moves": [
-        "MOVE_ELECTROWEB",
+        "MOVE_HURRICANE",
         "MOVE_THUNDERBOLT",
-        "MOVE_WILL_O_WISP",
+        "MOVE_ELECTROWEB",
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_TIMID",
-      "review_notes": "The exact local form pool lacks Flying attacks, so this independently reviewed set uses its best legal doubles utility. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "review_notes": "Hurricane is taught by the appliance form-change runtime even though ordinary tutor bitfields omit it; the complete set was checked against that exact exception.",
       "reviewed_by": "Emerald Champions authored stable-form doubles audit",
-      "role": "Fan-form speed-control attacker",
+      "role": "Fan-form dual-STAB speed-control attacker",
       "source_refs": [
-        "Smogon Gen 4 doublesou Rotom-Fan set: Bulky Disruption",
-        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_ROTOM_FAN"
+        "Smogon doubles Rotom-Fan special attacker sets adapted to the local Hurricane appliance move",
+        "Emerald Champions RotomFormToMove runtime mapping: SPECIES_ROTOM_FAN teaches MOVE_HURRICANE"
       ],
       "species": "SPECIES_ROTOM_FAN",
       "suggested_item": "ITEM_SITRUS_BERRY"
@@ -316,23 +316,23 @@
     {
       "ability": "ABILITY_LEVITATE",
       "dependency_notes": [
-        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; Leaf Storm sharply lowers Special Attack, so plan to switch or use it as a finishing burst."
       ],
-      "doubles_rationale": "Rotom combines Levitate with Electroweb, Thunderbolt, Will O Wisp, Protect; every slot advances its mow-form speed-control attacker role in doubles.",
-      "item_context": "ITEM_SITRUS_BERRY supports the mow-form speed-control attacker role but is never granted by the tutor.",
+      "doubles_rationale": "Levitate gives Mow Rotom safe positioning, Leaf Storm deletes Water- and Ground-type targets, Thunderbolt supplies reliable Electric STAB, Will-O-Wisp punishes physical pressure, and Protect manages double targets.",
+      "item_context": "ITEM_SITRUS_BERRY supports Mow Rotom's bulky offensive utility but is never granted by the tutor.",
       "moves": [
-        "MOVE_ELECTROWEB",
+        "MOVE_LEAF_STORM",
         "MOVE_THUNDERBOLT",
         "MOVE_WILL_O_WISP",
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_TIMID",
-      "review_notes": "The exact local form pool lacks Grass attacks, so this independently reviewed set uses its best legal doubles utility. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "review_notes": "Leaf Storm is taught by the appliance form-change runtime even though ordinary tutor bitfields omit it; the complete set was checked against that exact exception.",
       "reviewed_by": "Emerald Champions authored stable-form doubles audit",
-      "role": "Mow-form speed-control attacker",
+      "role": "Mow-form bulky special attacker and burn control",
       "source_refs": [
-        "Smogon Gen 4 doublesou Rotom-Mow set: Bulky Disruption",
-        "Emerald Champions exact local form stats, typing, abilities, and legal moves for SPECIES_ROTOM_MOW"
+        "Smogon doubles Rotom-Mow bulky attacker and Will-O-Wisp sets",
+        "Emerald Champions RotomFormToMove runtime mapping: SPECIES_ROTOM_MOW teaches MOVE_LEAF_STORM"
       ],
       "species": "SPECIES_ROTOM_MOW",
       "suggested_item": "ITEM_SITRUS_BERRY"

@@ -7355,6 +7355,28 @@ u16 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
     if (eggSpecies == SPECIES_BAGON)
         AddMoveIfLegalAndNew(MOVE_WISH, learnedMoves, moves, &numMoves);
 
+    // Rotom's appliance interaction teaches a form-exclusive move directly.
+    // Keep those script-legal moves in the all-legal Pokemon Center teacher as
+    // well, even though the ordinary learnset bitfields do not list them.
+    switch (species)
+    {
+    case SPECIES_ROTOM_HEAT:
+        AddMoveIfLegalAndNew(MOVE_OVERHEAT, learnedMoves, moves, &numMoves);
+        break;
+    case SPECIES_ROTOM_WASH:
+        AddMoveIfLegalAndNew(MOVE_HYDRO_PUMP, learnedMoves, moves, &numMoves);
+        break;
+    case SPECIES_ROTOM_FROST:
+        AddMoveIfLegalAndNew(MOVE_FREEZE_DRY, learnedMoves, moves, &numMoves);
+        break;
+    case SPECIES_ROTOM_FAN:
+        AddMoveIfLegalAndNew(MOVE_HURRICANE, learnedMoves, moves, &numMoves);
+        break;
+    case SPECIES_ROTOM_MOW:
+        AddMoveIfLegalAndNew(MOVE_LEAF_STORM, learnedMoves, moves, &numMoves);
+        break;
+    }
+
     return numMoves;
 }
 
