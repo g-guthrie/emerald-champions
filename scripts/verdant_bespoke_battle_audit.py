@@ -6184,6 +6184,119 @@ def main() -> None:
     if repeats71 != {"SPECIES_WISHIWASHI"}:
         problems.append(f"Battle 71: intended earned Wishiwashi repeat changed: {sorted(repeats71)}")
 
+    maria72 = designs["BATTLE_072_ROUTE_117_MARIA"]
+    expected_maria72 = [
+        {"level": 2, "species": "SPECIES_ZERAORA", "item": "ITEM_CHOICE_BAND", "ability_slot": 0, "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY", "moves": ["MOVE_WILD_CHARGE", "MOVE_CLOSE_COMBAT", "MOVE_KNOCK_OFF", "MOVE_VOLT_SWITCH"]},
+        {"level": 1, "species": "SPECIES_FROSLASS", "item": "ITEM_FOCUS_SASH", "ability_slot": 1, "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID", "moves": ["MOVE_ICE_BEAM", "MOVE_SHADOW_BALL", "MOVE_WILL_O_WISP", "MOVE_DESTINY_BOND"]},
+        {"level": 2, "species": "SPECIES_SALAZZLE", "item": "ITEM_LIFE_ORB", "ability_slot": 0, "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID", "moves": ["MOVE_FLAMETHROWER", "MOVE_SLUDGE_BOMB", "MOVE_NASTY_PLOT", "MOVE_ENCORE"]},
+        {"level": 3, "species": "SPECIES_LYCANROC_DUSK", "item": "ITEM_EXPERT_BELT", "ability_slot": 0, "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY", "moves": ["MOVE_ACCELEROCK", "MOVE_STONE_EDGE", "MOVE_CLOSE_COMBAT", "MOVE_SWORDS_DANCE"]},
+    ]
+    if maria72.get("trainer_ids") != ["TRAINER_MARIA_1"] or party_builds("TRAINER_MARIA_1", trainers_text, parties_text) != expected_maria72:
+        problems.append("Battle 72: Maria source party differs from the final-split sprint")
+    if maria72.get("strict_cap") != 40 or maria72.get("evolution_stage_fit", {}).get("status") != "pass" or maria72.get("manual_quality") != 10 or maria72.get("manual_difficulty") != 8.8:
+        problems.append("Battle 72: cap, stage, quality, or difficulty closure drifted")
+    branch72 = maria72.get("branch_contract", {})
+    if branch72.get("format") != "single" or branch72.get("source_slots") != [0, 1, 2, 3] or branch72.get("fixed_opener") != "SPECIES_ZERAORA" or branch72.get("reserve_source_order") != ["SPECIES_FROSLASS", "SPECIES_SALAZZLE", "SPECIES_LYCANROC_DUSK"] or "matchup-ranked" not in branch72.get("replacement_contract", ""):
+        problems.append("Battle 72: fixed opener, adaptive reserve, or single-format contract drifted")
+
+    maria_block72 = trainer_blocks["TRAINER_MARIA_1"].group(0)
+    for token in (".doubleBattle = FALSE", "AI_FLAG_SMART_SWITCHING", "AI_FLAG_HP_AWARE"):
+        if token not in maria_block72:
+            problems.append(f"Battle 72: Maria missing {token}")
+    for token in ("AI_FLAG_HELP_PARTNER", "AI_FLAG_COMBO_SETUP", "AI_FLAG_SPEED_CONTROL", "AI_FLAG_FIELD_CONTROL", "AI_FLAG_PERISH_TRAP", "AI_FLAG_SETUP_FIRST_TURN"):
+        if token in maria_block72:
+            problems.append(f"Battle 72: unrelated authored profile leaked into Maria: {token}")
+    for trainer_id in ("TRAINER_MARIA_2", "TRAINER_MARIA_3", "TRAINER_MARIA_4"):
+        if ".doubleBattle = FALSE" not in trainer_blocks[trainer_id].group(0):
+            problems.append(f"Battle 72: rematch record is not an intentional single: {trainer_id}")
+
+    abilities72 = {
+        "SPECIES_ZERAORA": (0, "ABILITY_VOLT_ABSORB"),
+        "SPECIES_FROSLASS": (1, "ABILITY_CURSED_BODY"),
+        "SPECIES_SALAZZLE": (0, "ABILITY_CORROSION"),
+        "SPECIES_LYCANROC_DUSK": (0, "ABILITY_TOUGH_CLAWS"),
+    }
+    names72 = {"ZERAORA": "Zeraora", "FROSLASS": "Froslass", "SALAZZLE": "Salazzle", "LYCANROC_DUSK": "LycanrocDusk"}
+    for species, (slot, ability) in abilities72.items():
+        slots = ability_slots.get(species, [])
+        if len(slots) <= slot or slots[slot] != ability:
+            problems.append(f"Battle 72: {species} slot {slot} is not {ability}: {slots}")
+    for build in expected_maria72:
+        species = build["species"].removeprefix("SPECIES_")
+        for move in build["moves"]:
+            if not move_is_legal(species, names72[species], move, level_source, tmhm_source, tm_indices, tutor_source, indices, egg_source):
+                problems.append(f"Battle 72: {species} cannot legally learn {move}")
+
+    evolution72 = read("src/data/pokemon/evolution.h")
+    for token in (
+        "EVO_ITEM_FEMALE, ITEM_DAWN_STONE, SPECIES_FROSLASS",
+        "EVO_LEVEL_FEMALE, 33, SPECIES_SALAZZLE",
+        "EVO_LEVEL_DUSK, 25, SPECIES_LYCANROC_DUSK",
+    ):
+        if token not in evolution72:
+            problems.append(f"Battle 72: mature-stage proof lost {token}")
+
+    route117_map72 = json.loads(read("data/maps/Route117/map.json"))
+    maria_object72 = next(row for row in route117_map72["object_events"] if row.get("script") == "Route117_EventScript_Maria")
+    if (maria_object72.get("x"), maria_object72.get("y"), maria_object72.get("movement_type"), maria_object72.get("movement_range_x"), maria_object72.get("movement_range_y"), maria_object72.get("trainer_sight_or_berry_tree_id")) != (26, 13, "MOVEMENT_TYPE_WALK_SEQUENCE_UP_LEFT_RIGHT_DOWN", 2, 2, "5"):
+        problems.append("Battle 72: Maria wandering geometry drifted")
+    route117_scripts72 = read("data/maps/Route117/scripts.inc")
+    for token in (
+        "goto_if_unset FLAG_BADGE03_GET, Route117_EventScript_MariaStillTraining",
+        "trainerbattle_single TRAINER_MARIA_1, Route117_Text_MariaIntro, Route117_Text_MariaDefeat, Route117_EventScript_RegisterMaria",
+        "trainerbattle_rematch TRAINER_MARIA_1, Route117_Text_MariaRematchIntro, Route117_Text_MariaRematchDefeat",
+        "register_matchcall TRAINER_MARIA_1",
+    ):
+        if token not in route117_scripts72:
+            problems.append(f"Battle 72: single or Match Call routing lost {token}")
+    maria_script72 = route117_scripts72.split("Route117_EventScript_Maria::", 1)[1].split("Route117_EventScript_Derek::", 1)[0]
+    if "trainerbattle_double TRAINER_MARIA_1" in maria_script72 or "trainerbattle_rematch_double TRAINER_MARIA_1" in maria_script72:
+        problems.append("Battle 72: a double-battle Maria opcode leaked into the format break")
+    if "[REMATCH_MARIA] = REMATCH(TRAINER_MARIA_1, TRAINER_MARIA_2, TRAINER_MARIA_3, TRAINER_MARIA_4, ROUTE117)" not in read("src/battle_setup.c"):
+        problems.append("Battle 72: Maria Match Call family drifted")
+
+    dialogue_source72 = read("data/text/trainers.inc")
+    dialogue72 = dialogue_source72.split("Route117_Text_MariaIntro:", 1)[1].split("Route117_Text_DerekIntro:", 1)[0]
+    for cue in ("Speed above all", "final sprint", "Every sprinter", "Four sprints", "Dynamo Badge"):
+        if cue not in dialogue72:
+            problems.append(f"Battle 72: dialogue misses {cue}")
+    for line in re.findall(r'\.string "([^"]*)"', dialogue72):
+        visible = line.replace("\\n", "").replace("\\l", "").replace("\\p", "").replace("$", "")
+        if len(visible) > 36:
+            problems.append(f"Battle 72: dialogue line is too long: {visible}")
+
+    ai72 = read("src/battle_ai_main.c")
+    destiny_bond_block72 = ai72.split("case EFFECT_DESTINY_BOND:", 1)[1].split("case EFFECT_FALSE_SWIPE:", 1)[0]
+    if "gBattleMons[battlerAtk].status2 & STATUS2_DESTINY_BOND" not in destiny_bond_block72:
+        problems.append("Battle 72: Destiny Bond consecutive-use AI does not inspect its user")
+    if "gBattleMons[battlerDef].status2 & STATUS2_DESTINY_BOND" in destiny_bond_block72:
+        problems.append("Battle 72: Destiny Bond consecutive-use AI still inspects its target")
+
+    formats72 = json.loads(read("docs/verdant_doubles_manifest.json")).get("formats", {})
+    manifest72 = formats72.get("TRAINER_MARIA_1", {})
+    if manifest72.get("format") != "single" or manifest72.get("archetype") != "Final-split sprint" or manifest72.get("difficulty") != 62 or manifest72.get("level_offset") != 2 or manifest72.get("partner_interaction"):
+        problems.append("Battle 72: first-fight format manifest summary is stale")
+    if any(formats72.get(trainer_id, {}).get("format") != "single" for trainer_id in ("TRAINER_MARIA_2", "TRAINER_MARIA_3", "TRAINER_MARIA_4")):
+        problems.append("Battle 72: one or more rematch format manifests are not single")
+    donor_requirements72 = {
+        "showdown:gen7randombattle:013": {"Zeraora"},
+        "smogon:gen7uu:002": {"Froslass"},
+        "smogon:gen8uu:012": {"Froslass", "Lycanroc-Dusk"},
+        "smogon:gen8uu:018": {"Salazzle"},
+        "showdown:gen8randombattle:028": {"Lycanroc-Dusk"},
+    }
+    for reference_id, required_species in donor_requirements72.items():
+        row = refs29.get(reference_id)
+        if row is None or row.get("completeness") != "full-sets" or not required_species <= set(row.get("roster", [])):
+            problems.append(f"Battle 72: sprint donor drifted {reference_id}")
+    buenos_aires72 = refs29.get("vgc:special-event-buenos-aires-2017")
+    if buenos_aires72 is None or buenos_aires72.get("placement") != 1 or "salazzle" not in {species.lower() for species in buenos_aires72.get("roster", [])}:
+        problems.append("Battle 72: Buenos Aires champion Salazzle reference drifted")
+    battles_1_to_71 = battles_1_to_70 | {build["species"] for build in expected_dylan71}
+    repeats72 = battles_1_to_71 & {build["species"] for build in expected_maria72}
+    if repeats72:
+        problems.append(f"Battle 72: exact sprint species unexpectedly repeat: {sorted(repeats72)}")
+
     # Cross-encounter species reuse is an editorial signal, not a correctness
     # failure. Keep the existing exact comparisons so deliberate repeats stay
     # visible, but never force a replacement merely to preserve a zero-repeat
@@ -6272,6 +6385,7 @@ def main() -> None:
     print("PASS: Battle 69 Badge-gated Beat Up-Stamina adaptive inheritance, legal four, full-party-safe AI, donors, and dialogue")
     print("PASS: Battle 70 Badge-gated Day Care class, five young specialists, Mega Kangaskhan guardian, adaptive reserves, donors, and dialogue")
     print("PASS: Battle 71 Badge-gated After You relay, Schooling cannon, Unburden and Pheromosa reserves, even rematches, donors, and dialogue")
+    print("PASS: Battle 72 Badge-gated final-split single, Zeraora opener, Sash, setup and priority legs, donors, and dialogue")
     print(f"PASS: all {len(designs)} closed encounters record their truthful legacy-983 or current-1005 corpus fit decision")
 
 

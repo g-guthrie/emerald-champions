@@ -8,8 +8,8 @@
     "qualityAudit": {
       "trainer_records": 854,
       "trainer_pokemon": 3422,
-      "doubles": 567,
-      "singles": 287,
+      "doubles": 565,
+      "singles": 289,
       "median_quality_score": 63,
       "blocking_issues": 0,
       "major_issues": 5,
@@ -21,7 +21,7 @@
       "repeated_rematch_compositions": 0,
       "uncovered_multi_trainer_locations": 1
     },
-    "bespokeClosed": 71
+    "bespokeClosed": 72
   },
   "entries": [
     {
@@ -13344,7 +13344,7 @@
       "difficultyBand": "Demanding",
       "difficultyExplanation": "4 fully authored Pok\u00e9mon, average BST 454.5, average cap offset -2.0, ace offset -2, and 50% held-item coverage.",
       "uniquenessScore": 78,
-      "uniquenessExplanation": "Closest unrelated roster: Winona (25% species overlap). Its species appear across an average of 4.2 unrelated trainer families.",
+      "uniquenessExplanation": "Closest unrelated roster: Winona (25% species overlap). Its species appear across an average of 4.0 unrelated trainer families.",
       "synergyTags": [
         "Flying pressure"
       ],
@@ -21190,8 +21190,8 @@
       "difficultyScore": 73,
       "difficultyBand": "Brutal",
       "difficultyExplanation": "4 fully authored Pok\u00e9mon, average BST 521.2, average cap offset -0.5, ace offset +1, and 100% held-item coverage.",
-      "uniquenessScore": 69,
-      "uniquenessExplanation": "Closest unrelated roster: Haley (33% species overlap). Its species appear across an average of 6.5 unrelated trainer families.",
+      "uniquenessScore": 68,
+      "uniquenessExplanation": "Closest unrelated roster: Haley (33% species overlap). Its species appear across an average of 6.8 unrelated trainer families.",
       "synergyTags": [
         "Earthquake immunity",
         "active speed control",
@@ -21599,8 +21599,8 @@
       "difficultyScore": 52,
       "difficultyBand": "Hard",
       "difficultyExplanation": "4 fully authored Pok\u00e9mon, average BST 496.0, average cap offset -3.0, ace offset -3, and 50% held-item coverage.",
-      "uniquenessScore": 83,
-      "uniquenessExplanation": "Closest unrelated roster: Abigail (14% species overlap). Its species appear across an average of 4.8 unrelated trainer families.",
+      "uniquenessScore": 82,
+      "uniquenessExplanation": "Closest unrelated roster: Abigail (14% species overlap). Its species appear across an average of 5.0 unrelated trainer families.",
       "synergyTags": [
         "Fake Out tempo"
       ],
@@ -28747,8 +28747,8 @@
       "difficultyScore": 39,
       "difficultyBand": "Demanding",
       "difficultyExplanation": "3 fully authored Pok\u00e9mon, average BST 416.7, average cap offset -2.0, ace offset -2, and 0% held-item coverage.",
-      "uniquenessScore": 83,
-      "uniquenessExplanation": "Closest unrelated roster: Cyndy (20% species overlap). Its species appear across an average of 3.0 unrelated trainer families.",
+      "uniquenessScore": 84,
+      "uniquenessExplanation": "Closest unrelated roster: Cyndy (20% species overlap). Its species appear across an average of 2.7 unrelated trainer families.",
       "synergyTags": [],
       "ai": [
         "Check Bad Move",
@@ -30007,8 +30007,8 @@
       "difficultyScore": 64,
       "difficultyBand": "Hard",
       "difficultyExplanation": "4 fully authored Pok\u00e9mon, average BST 508.5, average cap offset -1.0, ace offset -1, and 100% held-item coverage.",
-      "uniquenessScore": 77,
-      "uniquenessExplanation": "Closest unrelated roster: Callie (17% species overlap). Its species appear across an average of 7.0 unrelated trainer families.",
+      "uniquenessScore": 76,
+      "uniquenessExplanation": "Closest unrelated roster: Callie (17% species overlap). Its species appear across an average of 7.2 unrelated trainer families.",
       "synergyTags": [
         "Frost Breath + Anger Point",
         "active speed control"
@@ -30619,7 +30619,7 @@
         "map": "Route117",
         "command": "trainerbattle_double",
         "role": "opponent",
-        "line": 146,
+        "line": 151,
         "file": "data/maps/Route117/scripts.inc"
       },
       "badge": 3,
@@ -31184,9 +31184,11 @@
     },
     {
       "trainerId": "TRAINER_MARIA_1",
-      "encounterId": null,
+      "encounterId": "BATTLE_072_ROUTE_117_MARIA",
       "sequenceIndex": 72,
-      "encounterAlternatives": [],
+      "encounterAlternatives": [
+        "TRAINER_MARIA_1"
+      ],
       "runtimePartyAlternatives": null,
       "name": "Maria",
       "trainerClass": "Triathlete",
@@ -31200,107 +31202,170 @@
         "map": "Route117",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 118,
+        "line": 119,
         "file": "data/maps/Route117/scripts.inc"
       },
       "badge": 3,
       "levelCap": 40,
-      "format": "double",
+      "format": "single",
       "partySize": 4,
-      "theme": "Flying pressure",
-      "plan": "Tranquill and Hawlucha are the authored opening pair. The board plan is flying pressure. The composition turns the route's grassland, roadside cover, and open speed lanes into the fight's identity instead of using a generic route-trainer core.",
-      "behavior": "The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe. Expect it to preserve flying pressure rather than select six unrelated strong attacks.",
-      "counterplay": "Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.",
-      "designStatus": "not individually closed",
-      "manualQuality": null,
-      "corpusReview": null,
-      "competitiveReferences": [],
-      "authorSelfCheck": null,
-      "closure": "",
-      "difficultyScore": 43,
-      "difficultyBand": "Demanding",
-      "difficultyExplanation": "4 fully authored Pok\u00e9mon, average BST 417.0, average cap offset -2.0, ace offset -2, and 25% held-item coverage.",
-      "uniquenessScore": 83,
-      "uniquenessExplanation": "Closest unrelated roster: Carolina (17% species overlap). Its species appear across an average of 4.0 unrelated trainer families.",
-      "synergyTags": [
-        "Flying pressure"
+      "theme": "Electric rare-showcase balance",
+      "plan": "Level-42 Choice Band Volt Absorb Zeraora uses Wild Charge, Close Combat, Knock Off, and Volt Switch. Level-41 Focus Sash Cursed Body Froslass uses Ice Beam, Shadow Ball, Will-O-Wisp, and Destiny Bond. Level-42 Life Orb Corrosion Salazzle uses Flamethrower, Sludge Bomb, Nasty Plot, and Encore. Level-43 Expert Belt Tough Claws Dusk Lycanroc uses Accelerock, Stone Edge, Close Combat, and Swords Dance. There is no weather, terrain, room, Tailwind, screen, hazard, redirection, ally hit, inheritance, Mega, Primal, or battle-Bag item. Zeraora, Froslass, Salazzle, and Dusk Lycanroc are all fresh exact species across Battles 1-71. Zeraora is the first mythical fast-pivot showcase and creates a future player-obtainability debt rather than pretending opponent use makes it catchable. The battle deliberately breaks a three-double Route 117 streak and uses four changing singles questions instead of another persistent doubles subsystem.",
+      "behavior": "Maria uses ordinary foe-aware, smart-switching, and HP-aware singles scoring. Choice locks, Volt Switch, Knock Off, Sash, Cursed Body, Will-O-Wisp, Destiny Bond, Encore, Nasty Plot, Swords Dance, Accelerock, recoil, and type coverage are existing mechanics. Setup-first-turn is deliberately absent so setup and Destiny Bond remain board-dependent. Zeraora is the only fixed opener; no reserve, switch, move, target, or sacrifice is scripted and no trainer-specific C branch is added.",
+      "counterplay": "Ground types or abilities can exploit locked Wild Charge and Volt Switch; Protect, Disable, Encore, Trick, item removal, and prediction punish Choice Band. Hazards, weather chip, priority, multi-hit moves, and faster Scarf users break Froslass's Sash or avoid Destiny Bond. Haze, Clear Smog, Unaware, phazing, Taunt, paralysis, and revenge pressure answer Nasty Plot or Swords Dance. Bulky Water, Ground, Rock, Steel, Fighting, Ghost, and Psychic answers divide by slot, while Trick Room reverses the entire pace.",
+      "designStatus": "closed",
+      "manualQuality": 10,
+      "corpusReview": {
+        "reference_pool_size": 1005,
+        "full_team_candidates": [
+          {
+            "reference_id": "showdown:gen7randombattle:013",
+            "decision": "Zeraora speed, Volt Absorb, and Knock Off identity selected; full team rejected",
+            "reason": "The reproducible donor validates Zeraora's fast physical disruption. Its canonical Plasma Fists is explicitly unavailable in this local legal data, so Maria uses legal Wild Charge plus Band Close Combat, Knock Off, and Volt Switch."
+          },
+          {
+            "reference_id": "smogon:gen7uu:002",
+            "decision": "Focus Sash Cursed Body Destiny Bond Froslass selected; full team rejected",
+            "reason": "The published sample validates the exact Sash, ability, and Destiny Bond trade identity. Ice Beam, Shadow Ball, and Will-O-Wisp replace hazards and Icy Wind so Maria does not repeat another hazard or speed-control module."
+          },
+          {
+            "reference_id": "smogon:gen8uu:012",
+            "decision": "Froslass burn and Lycanroc priority/setup roles selected; full team rejected",
+            "reason": "One published team supplies Focus Sash Will-O-Wisp Froslass and Swords Dance, Accelerock, Close Combat Lycanroc-Dusk, proving two distinct sprint legs without dictating the other slots."
+          },
+          {
+            "reference_id": "smogon:gen8uu:018",
+            "decision": "exact Salazzle move set selected; full team rejected",
+            "reason": "The published Salazzle uses Encore, Flamethrower, Nasty Plot, and Sludge Bomb exactly. Life Orb replaces Boots because this encounter has no hazard engine and needs immediate cap-40 pressure."
+          },
+          {
+            "reference_id": "showdown:gen8randombattle:028",
+            "decision": "exact Lycanroc-Dusk moves selected; full team rejected",
+            "reason": "The reproducible single validates Close Combat, Swords Dance, Stone Edge, and Accelerock exactly. Expert Belt replaces Life Orb so Salazzle alone owns recoil pressure."
+          },
+          {
+            "reference_id": "vgc:special-event-buenos-aires-2017",
+            "decision": "Salazzle event legitimacy noted from roster-only evidence",
+            "reason": "The verified event winner confirms Salazzle as a tournament-worthy rare pick; no exact moves or item are attributed to the roster-only record."
+          }
+        ],
+        "decision": "All 1,005 indexed references were reviewed. No complete roster fit Maria, so five complete donors and one event winner support four different kinds of speed while the exact mixed gauntlet is transparently hand-authored."
+      },
+      "competitiveReferences": [
+        {
+          "reference_id": "showdown:gen7randombattle:013",
+          "adaptation": "Zeraora keeps Volt Absorb and Knock Off; illegal local Plasma Fists becomes legal Wild Charge, while Choice Band Close Combat and Volt Switch create a dangerous but readable lock."
+        },
+        {
+          "reference_id": "smogon:gen7uu:002",
+          "adaptation": "Froslass keeps Focus Sash, Cursed Body, and Destiny Bond, trading hazards for direct Ice, Ghost, and burn pressure."
+        },
+        {
+          "reference_id": "smogon:gen8uu:012",
+          "adaptation": "Froslass keeps Will-O-Wisp and Lycanroc-Dusk keeps the Swords Dance, Accelerock, Close Combat structure."
+        },
+        {
+          "reference_id": "smogon:gen8uu:018",
+          "adaptation": "Salazzle retains the exact Encore, Flamethrower, Nasty Plot, and Sludge Bomb set with Life Orb."
+        },
+        {
+          "reference_id": "showdown:gen8randombattle:028",
+          "adaptation": "Lycanroc-Dusk retains its exact four moves and changes Life Orb to Expert Belt."
+        },
+        {
+          "reference_id": "vgc:special-event-buenos-aires-2017",
+          "adaptation": "The winning roster supports Salazzle's competitive legitimacy without being used as a set donor."
+        }
       ],
+      "authorSelfCheck": {
+        "strongest_part": "Four fast Pok\u00e9mon ask four different questions without requiring another custom subsystem, and an ordinary route trainer gets a memorable mythical opener exactly in the rare-everywhere spirit of the game.",
+        "weakest_link": "Sturdy Ground and Water balance compresses the roster, especially after identifying Zeraora's lock. That broad answer is intentional; Dusk Lycanroc from +3 to +2 is the first runtime tuning knob if the adaptive finish is too punishing."
+      },
+      "closure": "Battle 72 is source-closed at editorial 10/10 and target difficulty 8.8: one Badge-3-gated four-member intentional single at legal levels 41-43, four fresh exact species, a Zeraora mythical opener, four distinct speed questions, four non-repeating items, six truthful corpus references, native adaptive replacements, broad Ground, Water, priority, Trick Room, lock, Sash, and setup counterplay, native-width dialogue, explicit rematch and obtainability debt, author self-check, and no repeated doubles field engine. Runtime playtesting remains required before the target is observed.",
+      "difficultyScore": 88,
+      "difficultyBand": "Extreme",
+      "difficultyExplanation": "4 fully authored Pok\u00e9mon, average BST 521.8, average cap offset +2.0, ace offset +3, and 100% held-item coverage.",
+      "uniquenessScore": 83,
+      "uniquenessExplanation": "Closest unrelated roster: Jonas (20% species overlap). Its species appear across an average of 4.5 unrelated trainer families.",
+      "synergyTags": [],
       "ai": [
         "Check Bad Move",
         "Try To Faint",
         "Check Viability",
-        "Check Foe"
+        "Check Foe",
+        "Smart Switching",
+        "Hp Aware"
       ],
       "party": [
         {
           "slot": 1,
-          "speciesId": "SPECIES_TRANQUILL",
-          "species": "Tranquill",
-          "levelOffset": -2,
-          "effectiveLevel": 38,
-          "itemId": "ITEM_NONE",
-          "item": "None",
-          "ability": "Big Pecks",
-          "spread": "15 Iv 0 Ev",
+          "speciesId": "SPECIES_ZERAORA",
+          "species": "Zeraora",
+          "levelOffset": 2,
+          "effectiveLevel": 42,
+          "itemId": "ITEM_CHOICE_BAND",
+          "item": "Choice Band",
+          "ability": "Volt Absorb",
+          "spread": "31 Iv Atk Speed Jolly",
           "moves": [
-            "Quick Attack",
-            "Air Slash",
-            "Roost",
-            "Detect"
+            "Wild Charge",
+            "Close Combat",
+            "Knock Off",
+            "Volt Switch"
           ],
-          "role": "protected attacker"
+          "role": "Choice-locked breaker"
         },
         {
           "slot": 2,
-          "speciesId": "SPECIES_HAWLUCHA",
-          "species": "Hawlucha",
-          "levelOffset": -2,
-          "effectiveLevel": 38,
-          "itemId": "ITEM_NONE",
-          "item": "None",
-          "ability": "Mold Breaker",
-          "spread": "15 Iv 0 Ev",
+          "speciesId": "SPECIES_FROSLASS",
+          "species": "Froslass",
+          "levelOffset": 1,
+          "effectiveLevel": 41,
+          "itemId": "ITEM_FOCUS_SASH",
+          "item": "Focus Sash",
+          "ability": "Cursed Body",
+          "spread": "31 Iv Spatk Speed Timid",
           "moves": [
-            "Bounce",
-            "Submission",
-            "Feather Dance",
-            "Hone Claws"
+            "Ice Beam",
+            "Shadow Ball",
+            "Will O Wisp",
+            "Destiny Bond"
           ],
           "role": "disruption and support"
         },
         {
           "slot": 3,
-          "speciesId": "SPECIES_YANMA",
-          "species": "Yanma",
-          "levelOffset": -2,
-          "effectiveLevel": 38,
-          "itemId": "ITEM_LEFTOVERS",
-          "item": "Leftovers",
-          "ability": "Speed Boost",
+          "speciesId": "SPECIES_SALAZZLE",
+          "species": "Salazzle",
+          "levelOffset": 2,
+          "effectiveLevel": 42,
+          "itemId": "ITEM_LIFE_ORB",
+          "item": "Life Orb",
+          "ability": "Corrosion",
           "spread": "31 Iv Spatk Speed Timid",
           "moves": [
-            "Protect",
-            "Hidden Power",
-            "Air Slash",
-            "U Turn"
+            "Flamethrower",
+            "Sludge Bomb",
+            "Nasty Plot",
+            "Encore"
           ],
-          "role": "protected attacker"
+          "role": "setup attacker"
         },
         {
           "slot": 4,
-          "speciesId": "SPECIES_HAKAMO_O",
-          "species": "Hakamo O",
-          "levelOffset": -2,
-          "effectiveLevel": 38,
-          "itemId": "ITEM_NONE",
-          "item": "None",
-          "ability": "Bulletproof",
-          "spread": "31 Iv 0 Ev",
+          "speciesId": "SPECIES_LYCANROC_DUSK",
+          "species": "Lycanroc Dusk",
+          "levelOffset": 3,
+          "effectiveLevel": 43,
+          "itemId": "ITEM_EXPERT_BELT",
+          "item": "Expert Belt",
+          "ability": "Tough Claws",
+          "spread": "31 Iv Atk Speed Jolly",
           "moves": [
+            "Accelerock",
+            "Stone Edge",
             "Close Combat",
-            "Outrage",
-            "Dragon Dance",
-            "Noble Roar"
+            "Swords Dance"
           ],
           "role": "setup attacker"
         }
@@ -31325,7 +31390,7 @@
         "map": "Route117",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 140,
+        "line": 145,
         "file": "data/maps/Route117/scripts.inc"
       },
       "badge": 3,
@@ -31412,7 +31477,7 @@
         "map": "Route117",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 191,
+        "line": 196,
         "file": "data/maps/Route117/scripts.inc"
       },
       "badge": 3,
@@ -31499,7 +31564,7 @@
         "map": "Route117",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 196,
+        "line": 201,
         "file": "data/maps/Route117/scripts.inc"
       },
       "badge": 3,
@@ -31589,7 +31654,7 @@
         "map": "Route117",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 201,
+        "line": 206,
         "file": "data/maps/Route117/scripts.inc"
       },
       "badge": 3,
@@ -41680,8 +41745,8 @@
       "difficultyScore": 39,
       "difficultyBand": "Demanding",
       "difficultyExplanation": "3 fully authored Pok\u00e9mon, average BST 482.7, average cap offset -2.67, ace offset -2, and 0% held-item coverage.",
-      "uniquenessScore": 82,
-      "uniquenessExplanation": "Closest unrelated roster: Atsushi (20% species overlap). Its species appear across an average of 3.3 unrelated trainer families.",
+      "uniquenessScore": 83,
+      "uniquenessExplanation": "Closest unrelated roster: Atsushi (20% species overlap). Its species appear across an average of 3.0 unrelated trainer families.",
       "synergyTags": [
         "Fighting pressure"
       ],
@@ -44452,8 +44517,8 @@
       "difficultyScore": 43,
       "difficultyBand": "Demanding",
       "difficultyExplanation": "2 fully authored Pok\u00e9mon, average BST 490.0, average cap offset -1.0, ace offset -1, and 0% held-item coverage.",
-      "uniquenessScore": 65,
-      "uniquenessExplanation": "Closest unrelated roster: Lung (33% species overlap). Its species appear across an average of 8.5 unrelated trainer families.",
+      "uniquenessScore": 64,
+      "uniquenessExplanation": "Closest unrelated roster: Lung (33% species overlap). Its species appear across an average of 9.0 unrelated trainer families.",
       "synergyTags": [],
       "ai": [
         "Check Bad Move",
@@ -48005,8 +48070,8 @@
       "difficultyScore": 50,
       "difficultyBand": "Hard",
       "difficultyExplanation": "6 fully authored Pok\u00e9mon, average BST 515.0, average cap offset -4.0, ace offset -4, and 0% held-item coverage.",
-      "uniquenessScore": 81,
-      "uniquenessExplanation": "Closest unrelated roster: Barry (14% species overlap). Its species appear across an average of 5.7 unrelated trainer families.",
+      "uniquenessScore": 80,
+      "uniquenessExplanation": "Closest unrelated roster: Barry (14% species overlap). Its species appear across an average of 5.8 unrelated trainer families.",
       "synergyTags": [
         "Earthquake immunity"
       ],
@@ -50534,7 +50599,7 @@
       "difficultyBand": "Extreme",
       "difficultyExplanation": "6 fully authored Pok\u00e9mon, average BST 550.3, average cap offset +1.0, ace offset +2, and 100% held-item coverage.",
       "uniquenessScore": 66,
-      "uniquenessExplanation": "Closest unrelated roster: Maxie (50% species overlap). Its species appear across an average of 6.5 unrelated trainer families.",
+      "uniquenessExplanation": "Closest unrelated roster: Maxie (50% species overlap). Its species appear across an average of 6.7 unrelated trainer families.",
       "synergyTags": [
         "sleep pressure",
         "sun engine"
@@ -51148,8 +51213,8 @@
       "difficultyScore": 54,
       "difficultyBand": "Hard",
       "difficultyExplanation": "4 fully authored Pok\u00e9mon, average BST 491.5, average cap offset -1.0, ace offset -1, and 25% held-item coverage.",
-      "uniquenessScore": 77,
-      "uniquenessExplanation": "Closest unrelated roster: Hope (25% species overlap). Its species appear across an average of 6.8 unrelated trainer families.",
+      "uniquenessScore": 76,
+      "uniquenessExplanation": "Closest unrelated roster: Hope (25% species overlap). Its species appear across an average of 7.0 unrelated trainer families.",
       "synergyTags": [
         "Tailwind"
       ],
@@ -60991,8 +61056,8 @@
       "difficultyScore": 47,
       "difficultyBand": "Demanding",
       "difficultyExplanation": "4 fully authored Pok\u00e9mon, average BST 494.8, average cap offset -1.0, ace offset -1, and 25% held-item coverage.",
-      "uniquenessScore": 79,
-      "uniquenessExplanation": "Closest unrelated roster: Jonas (20% species overlap). Its species appear across an average of 5.0 unrelated trainer families.",
+      "uniquenessScore": 78,
+      "uniquenessExplanation": "Closest unrelated roster: Jonas (20% species overlap). Its species appear across an average of 5.2 unrelated trainer families.",
       "synergyTags": [
         "sleep pressure"
       ],
@@ -64976,7 +65041,7 @@
       "difficultyBand": "Brutal",
       "difficultyExplanation": "6 fully authored Pok\u00e9mon, average BST 524.0, average cap offset -0.5, ace offset +1, and 100% held-item coverage.",
       "uniquenessScore": 83,
-      "uniquenessExplanation": "Closest unrelated roster: Brent (17% species overlap). Its species appear across an average of 5.8 unrelated trainer families.",
+      "uniquenessExplanation": "Closest unrelated roster: Brent (17% species overlap). Its species appear across an average of 6.0 unrelated trainer families.",
       "synergyTags": [
         "Tailwind",
         "status control"
@@ -70800,7 +70865,7 @@
       "difficultyBand": "Brutal",
       "difficultyExplanation": "6 fully authored Pok\u00e9mon, average BST 507.5, average cap offset -0.5, ace offset +1, and 100% held-item coverage.",
       "uniquenessScore": 81,
-      "uniquenessExplanation": "Closest unrelated roster: Grunt (25% species overlap). Its species appear across an average of 6.0 unrelated trainer families.",
+      "uniquenessExplanation": "Closest unrelated roster: Grunt (25% species overlap). Its species appear across an average of 6.2 unrelated trainer families.",
       "synergyTags": [
         "Earthquake immunity",
         "Tailwind",
@@ -71554,7 +71619,7 @@
       "difficultyBand": "Extreme",
       "difficultyExplanation": "6 fully authored Pok\u00e9mon, average BST 558.2, average cap offset +0.5, ace offset +2, and 100% held-item coverage.",
       "uniquenessScore": 95,
-      "uniquenessExplanation": "Closest unrelated roster: Tucker (20% species overlap). Its species appear across an average of 3.5 unrelated trainer families.",
+      "uniquenessExplanation": "Closest unrelated roster: Tucker (20% species overlap). Its species appear across an average of 3.7 unrelated trainer families.",
       "synergyTags": [
         "Ice pressure",
         "Tailwind",
@@ -73681,8 +73746,8 @@
       "difficultyScore": 37,
       "difficultyBand": "Demanding",
       "difficultyExplanation": "3 fully authored Pok\u00e9mon, average BST 473.3, average cap offset -2.0, ace offset -2, and 0% held-item coverage.",
-      "uniquenessScore": 74,
-      "uniquenessExplanation": "Closest unrelated roster: Helene (25% species overlap). Its species appear across an average of 6.3 unrelated trainer families.",
+      "uniquenessScore": 73,
+      "uniquenessExplanation": "Closest unrelated roster: Helene (25% species overlap). Its species appear across an average of 6.7 unrelated trainer families.",
       "synergyTags": [],
       "ai": [
         "Check Bad Move",
@@ -90945,7 +91010,7 @@
         "map": "Route117",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 118,
+        "line": 119,
         "file": "data/maps/Route117/scripts.inc"
       },
       "badge": null,
@@ -91050,7 +91115,7 @@
         "map": "Route117",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 118,
+        "line": 119,
         "file": "data/maps/Route117/scripts.inc"
       },
       "badge": null,
@@ -91155,15 +91220,15 @@
         "map": "Route117",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 118,
+        "line": 119,
         "file": "data/maps/Route117/scripts.inc"
       },
       "badge": null,
       "levelCap": null,
-      "format": "double",
+      "format": "single",
       "partySize": 4,
       "theme": "Flying rare-showcase balance",
-      "plan": "Unfezant and Hawlucha are the authored opening pair. The board plan is flying rare-showcase balance. The composition turns the route's grassland, roadside cover, and open speed lanes into the fight's identity instead of using a generic route-trainer core. Hawlucha carries the team's one Mega slot.",
+      "plan": "Unfezant opens this deliberate singles fight. The roster is built as flying rare-showcase balance. The composition turns the route's grassland, roadside cover, and open speed lanes into the fight's identity instead of using a generic route-trainer core. Hawlucha carries the team's one Mega slot.",
       "behavior": "The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe. This singles or low-stakes roster emphasizes coverage, status, and matchup pressure rather than a scripted multi-Pok\u00e9mon combination.",
       "counterplay": "Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.",
       "designStatus": "not individually closed",
@@ -91278,7 +91343,7 @@
         "map": "Route117",
         "command": "trainerbattle_double",
         "role": "opponent",
-        "line": 146,
+        "line": 151,
         "file": "data/maps/Route117/scripts.inc"
       },
       "badge": null,
@@ -91403,7 +91468,7 @@
         "map": "Route117",
         "command": "trainerbattle_double",
         "role": "opponent",
-        "line": 146,
+        "line": 151,
         "file": "data/maps/Route117/scripts.inc"
       },
       "badge": null,
@@ -91528,7 +91593,7 @@
         "map": "Route117",
         "command": "trainerbattle_double",
         "role": "opponent",
-        "line": 146,
+        "line": 151,
         "file": "data/maps/Route117/scripts.inc"
       },
       "badge": null,
@@ -95885,7 +95950,7 @@
       "difficultyBand": "Hard",
       "difficultyExplanation": "4 fully authored Pok\u00e9mon, average BST 485.0, average cap offset +0.0, ace offset +0, and 0% held-item coverage.",
       "uniquenessScore": 76,
-      "uniquenessExplanation": "Closest unrelated roster: Mel & Paul (33% species overlap). Its species appear across an average of 2.8 unrelated trainer families.",
+      "uniquenessExplanation": "Closest unrelated roster: Mel & Paul (33% species overlap). Its species appear across an average of 3.0 unrelated trainer families.",
       "synergyTags": [
         "status control"
       ],
@@ -96010,7 +96075,7 @@
       "difficultyBand": "Hard",
       "difficultyExplanation": "4 fully authored Pok\u00e9mon, average BST 485.0, average cap offset +0.0, ace offset +0, and 0% held-item coverage.",
       "uniquenessScore": 76,
-      "uniquenessExplanation": "Closest unrelated roster: Mel & Paul (33% species overlap). Its species appear across an average of 2.8 unrelated trainer families.",
+      "uniquenessExplanation": "Closest unrelated roster: Mel & Paul (33% species overlap). Its species appear across an average of 3.0 unrelated trainer families.",
       "synergyTags": [
         "status control"
       ],
@@ -104116,8 +104181,8 @@
       "difficultyScore": 90,
       "difficultyBand": "Extreme",
       "difficultyExplanation": "6 fully authored Pok\u00e9mon, average BST 545.0, average cap offset +1.33, ace offset +2, and 100% held-item coverage.",
-      "uniquenessScore": 85,
-      "uniquenessExplanation": "Closest unrelated roster: Kira & Dan (25% species overlap). Its species appear across an average of 4.3 unrelated trainer families.",
+      "uniquenessScore": 84,
+      "uniquenessExplanation": "Closest unrelated roster: Kira & Dan (25% species overlap). Its species appear across an average of 4.5 unrelated trainer families.",
       "synergyTags": [
         "Ice pressure",
         "residual control",
@@ -104770,8 +104835,8 @@
       "difficultyScore": 89,
       "difficultyBand": "Extreme",
       "difficultyExplanation": "6 fully authored Pok\u00e9mon, average BST 545.0, average cap offset +1.33, ace offset +2, and 100% held-item coverage.",
-      "uniquenessScore": 85,
-      "uniquenessExplanation": "Closest unrelated roster: Kira & Dan (25% species overlap). Its species appear across an average of 4.3 unrelated trainer families.",
+      "uniquenessScore": 84,
+      "uniquenessExplanation": "Closest unrelated roster: Kira & Dan (25% species overlap). Its species appear across an average of 4.5 unrelated trainer families.",
       "synergyTags": [
         "Ice pressure",
         "residual control",
@@ -105099,7 +105164,7 @@
       "difficultyBand": "Extreme",
       "difficultyExplanation": "6 fully authored Pok\u00e9mon, average BST 516.5, average cap offset +1.33, ace offset +2, and 100% held-item coverage.",
       "uniquenessScore": 81,
-      "uniquenessExplanation": "Closest unrelated roster: Kira & Dan (25% species overlap). Its species appear across an average of 4.7 unrelated trainer families.",
+      "uniquenessExplanation": "Closest unrelated roster: Kira & Dan (25% species overlap). Its species appear across an average of 4.8 unrelated trainer families.",
       "synergyTags": [
         "Ice pressure",
         "residual control",
@@ -107229,7 +107294,7 @@
       "difficultyBand": "Hard",
       "difficultyExplanation": "6 fully authored Pok\u00e9mon, average BST 511.8, average cap offset +4.33, ace offset +5, and 100% held-item coverage.",
       "uniquenessScore": 70,
-      "uniquenessExplanation": "Closest unrelated roster: Lucy (33% species overlap). Its species appear across an average of 7.7 unrelated trainer families.",
+      "uniquenessExplanation": "Closest unrelated roster: Lucy (33% species overlap). Its species appear across an average of 7.8 unrelated trainer families.",
       "synergyTags": [
         "Earthquake immunity",
         "Fake Out tempo",

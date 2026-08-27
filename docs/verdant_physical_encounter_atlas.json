@@ -5746,16 +5746,16 @@
         "REMATCH_ANNA_AND_MEG"
       ],
       "invocationIds": [
-        "INV_ROUTE117_0146",
-        "INV_ROUTE117_0161",
-        "INV_ROUTE117_0167",
-        "INV_ROUTE117_0182"
+        "INV_ROUTE117_0151",
+        "INV_ROUTE117_0166",
+        "INV_ROUTE117_0172",
+        "INV_ROUTE117_0187"
       ],
       "sources": [
         {
           "map": "Route117",
           "file": "data/maps/Route117/scripts.inc",
-          "line": 146,
+          "line": 151,
           "label": "Route117_EventScript_Anna",
           "opcode": "trainerbattle_double",
           "battleType": null,
@@ -5770,7 +5770,7 @@
         {
           "map": "Route117",
           "file": "data/maps/Route117/scripts.inc",
-          "line": 161,
+          "line": 166,
           "label": "Route117_EventScript_RematchAnna",
           "opcode": "trainerbattle_rematch_double",
           "battleType": null,
@@ -5784,7 +5784,7 @@
         {
           "map": "Route117",
           "file": "data/maps/Route117/scripts.inc",
-          "line": 167,
+          "line": 172,
           "label": "Route117_EventScript_Meg",
           "opcode": "trainerbattle_double",
           "battleType": null,
@@ -5799,7 +5799,7 @@
         {
           "map": "Route117",
           "file": "data/maps/Route117/scripts.inc",
-          "line": 182,
+          "line": 187,
           "label": "Route117_EventScript_RematchMeg",
           "opcode": "trainerbattle_rematch_double",
           "battleType": null,
@@ -6046,9 +6046,9 @@
     {
       "groupId": "BATTLE_072_ROUTE_117_MARIA",
       "sequenceIndex": 72,
-      "sequenceStatus": "next",
+      "sequenceStatus": "closed",
       "category": "canonical-sequence",
-      "campaignCategory": "optional moving solo double",
+      "campaignCategory": "optional moving single",
       "primaryChapter": "Heat Badge",
       "chapterRank": 40,
       "levelCap": 40,
@@ -6070,14 +6070,14 @@
         "REMATCH_MARIA"
       ],
       "invocationIds": [
-        "INV_ROUTE117_0118",
-        "INV_ROUTE117_0135"
+        "INV_ROUTE117_0119",
+        "INV_ROUTE117_0136"
       ],
       "sources": [
         {
           "map": "Route117",
           "file": "data/maps/Route117/scripts.inc",
-          "line": 118,
+          "line": 119,
           "label": "Route117_EventScript_Maria",
           "opcode": "trainerbattle_single",
           "battleType": null,
@@ -6091,7 +6091,7 @@
         {
           "map": "Route117",
           "file": "data/maps/Route117/scripts.inc",
-          "line": 135,
+          "line": 136,
           "label": "Route117_EventScript_RematchMaria",
           "opcode": "trainerbattle_rematch",
           "battleType": null,
@@ -6137,7 +6137,7 @@
     {
       "groupId": "BATTLE_073_ROUTE_117_DEREK",
       "sequenceIndex": 73,
-      "sequenceStatus": "queued",
+      "sequenceStatus": "next",
       "category": "canonical-sequence",
       "campaignCategory": "optional single",
       "primaryChapter": "Heat Badge",
@@ -6155,13 +6155,13 @@
       "allyTrainerIds": [],
       "rematchIds": [],
       "invocationIds": [
-        "INV_ROUTE117_0140"
+        "INV_ROUTE117_0145"
       ],
       "sources": [
         {
           "map": "Route117",
           "file": "data/maps/Route117/scripts.inc",
-          "line": 140,
+          "line": 145,
           "label": "Route117_EventScript_Derek",
           "opcode": "trainerbattle_single",
           "battleType": null,
@@ -6221,15 +6221,15 @@
       "allyTrainerIds": [],
       "rematchIds": [],
       "invocationIds": [
-        "INV_ROUTE117_0191",
         "INV_ROUTE117_0196",
-        "INV_ROUTE117_0201"
+        "INV_ROUTE117_0201",
+        "INV_ROUTE117_0206"
       ],
       "sources": [
         {
           "map": "Route117",
           "file": "data/maps/Route117/scripts.inc",
-          "line": 191,
+          "line": 196,
           "label": "Route117_EventScript_Melina",
           "opcode": "trainerbattle_single",
           "battleType": null,
@@ -6242,7 +6242,7 @@
         {
           "map": "Route117",
           "file": "data/maps/Route117/scripts.inc",
-          "line": 196,
+          "line": 201,
           "label": "Route117_EventScript_Brandi",
           "opcode": "trainerbattle_single",
           "battleType": null,
@@ -6255,7 +6255,7 @@
         {
           "map": "Route117",
           "file": "data/maps/Route117/scripts.inc",
-          "line": 201,
+          "line": 206,
           "label": "Route117_EventScript_Aisha",
           "opcode": "trainerbattle_single",
           "battleType": null,
@@ -55698,12 +55698,12 @@
       ]
     },
     {
-      "invocationId": "INV_ROUTE117_0118",
+      "invocationId": "INV_ROUTE117_0119",
       "reachability": "proven",
       "source": {
         "map": "Route117",
         "file": "data/maps/Route117/scripts.inc",
-        "line": 118,
+        "line": 119,
         "label": "Route117_EventScript_Maria",
         "opcode": "trainerbattle_single",
         "battleType": null,
@@ -55736,12 +55736,12 @@
       ]
     },
     {
-      "invocationId": "INV_ROUTE117_0135",
+      "invocationId": "INV_ROUTE117_0136",
       "reachability": "proven",
       "source": {
         "map": "Route117",
         "file": "data/maps/Route117/scripts.inc",
-        "line": 135,
+        "line": 136,
         "label": "Route117_EventScript_RematchMaria",
         "opcode": "trainerbattle_rematch",
         "battleType": null,
@@ -55773,12 +55773,12 @@
       ]
     },
     {
-      "invocationId": "INV_ROUTE117_0140",
+      "invocationId": "INV_ROUTE117_0145",
       "reachability": "proven",
       "source": {
         "map": "Route117",
         "file": "data/maps/Route117/scripts.inc",
-        "line": 140,
+        "line": 145,
         "label": "Route117_EventScript_Derek",
         "opcode": "trainerbattle_single",
         "battleType": null,
@@ -55810,12 +55810,12 @@
       ]
     },
     {
-      "invocationId": "INV_ROUTE117_0146",
+      "invocationId": "INV_ROUTE117_0151",
       "reachability": "proven",
       "source": {
         "map": "Route117",
         "file": "data/maps/Route117/scripts.inc",
-        "line": 146,
+        "line": 151,
         "label": "Route117_EventScript_Anna",
         "opcode": "trainerbattle_double",
         "battleType": null,
@@ -55849,12 +55849,12 @@
       ]
     },
     {
-      "invocationId": "INV_ROUTE117_0161",
+      "invocationId": "INV_ROUTE117_0166",
       "reachability": "proven",
       "source": {
         "map": "Route117",
         "file": "data/maps/Route117/scripts.inc",
-        "line": 161,
+        "line": 166,
         "label": "Route117_EventScript_RematchAnna",
         "opcode": "trainerbattle_rematch_double",
         "battleType": null,
@@ -55887,12 +55887,12 @@
       ]
     },
     {
-      "invocationId": "INV_ROUTE117_0167",
+      "invocationId": "INV_ROUTE117_0172",
       "reachability": "proven",
       "source": {
         "map": "Route117",
         "file": "data/maps/Route117/scripts.inc",
-        "line": 167,
+        "line": 172,
         "label": "Route117_EventScript_Meg",
         "opcode": "trainerbattle_double",
         "battleType": null,
@@ -55926,12 +55926,12 @@
       ]
     },
     {
-      "invocationId": "INV_ROUTE117_0182",
+      "invocationId": "INV_ROUTE117_0187",
       "reachability": "proven",
       "source": {
         "map": "Route117",
         "file": "data/maps/Route117/scripts.inc",
-        "line": 182,
+        "line": 187,
         "label": "Route117_EventScript_RematchMeg",
         "opcode": "trainerbattle_rematch_double",
         "battleType": null,
@@ -55964,12 +55964,12 @@
       ]
     },
     {
-      "invocationId": "INV_ROUTE117_0191",
+      "invocationId": "INV_ROUTE117_0196",
       "reachability": "proven",
       "source": {
         "map": "Route117",
         "file": "data/maps/Route117/scripts.inc",
-        "line": 191,
+        "line": 196,
         "label": "Route117_EventScript_Melina",
         "opcode": "trainerbattle_single",
         "battleType": null,
@@ -56001,12 +56001,12 @@
       ]
     },
     {
-      "invocationId": "INV_ROUTE117_0196",
+      "invocationId": "INV_ROUTE117_0201",
       "reachability": "proven",
       "source": {
         "map": "Route117",
         "file": "data/maps/Route117/scripts.inc",
-        "line": 196,
+        "line": 201,
         "label": "Route117_EventScript_Brandi",
         "opcode": "trainerbattle_single",
         "battleType": null,
@@ -56038,12 +56038,12 @@
       ]
     },
     {
-      "invocationId": "INV_ROUTE117_0201",
+      "invocationId": "INV_ROUTE117_0206",
       "reachability": "proven",
       "source": {
         "map": "Route117",
         "file": "data/maps/Route117/scripts.inc",
-        "line": 201,
+        "line": 206,
         "label": "Route117_EventScript_Aisha",
         "opcode": "trainerbattle_single",
         "battleType": null,

@@ -49,6 +49,7 @@ STRATEGY_CUES = {
     "Route117_Text_MegIntro": "If Muk joins us",
     "Route117_Text_IsaacIntro": "guardian joins the class",
     "Route117_Text_DylanIntro": "partner sets the pace",
+    "Route117_Text_MariaIntro": "Speed above all",
     "Route121_Text_KateIntro": "shut down every Ability",
     "Route121_Text_JoyIntro": "raw power",
     "Route133_Text_LindaIntro": "current turns, then snow",

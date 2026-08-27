@@ -7156,36 +7156,38 @@ static const struct TrainerMonItemCustomMoves sParty_Dylan4[] = {
 };
 
 static const struct TrainerMonItemCustomMoves sParty_Maria1[] = {
-
-{
-    .lvl = -2,
-    .species = SPECIES_TRANQUILL,
-    .spread = SPREAD_15_IV_0_EV,    
-    .moves = MOVE_QUICK_ATTACK, MOVE_AIR_SLASH, MOVE_ROOST, MOVE_DETECT
-    },
-{
-    .lvl = -2,
-    .species = SPECIES_HAWLUCHA,
-    .ability = 2, // Mold Breaker
-    .spread = SPREAD_15_IV_0_EV,    
-    .moves = MOVE_BOUNCE, MOVE_SUBMISSION, MOVE_FEATHER_DANCE, MOVE_HONE_CLAWS
-    },
     {
-    .lvl = -2,
-    .species = SPECIES_YANMA,
-    .heldItem = ITEM_LEFTOVERS,
+    .lvl = 2,
+    .species = SPECIES_ZERAORA,
+    .heldItem = ITEM_CHOICE_BAND,
+    .ability = 0,
+    .spread = SPREAD_31_IV_ATK_SPEED_JOLLY,
+    .moves = MOVE_WILD_CHARGE, MOVE_CLOSE_COMBAT, MOVE_KNOCK_OFF, MOVE_VOLT_SWITCH
+    } /* Verdant polish: TRAINER_MARIA_1 */,
+    {
+    .lvl = 1,
+    .species = SPECIES_FROSLASS,
+    .heldItem = ITEM_FOCUS_SASH,
+    .ability = 1,
+    .spread = SPREAD_31_IV_SPATK_SPEED_TIMID,
+    .moves = MOVE_ICE_BEAM, MOVE_SHADOW_BALL, MOVE_WILL_O_WISP, MOVE_DESTINY_BOND
+    } /* Verdant polish: TRAINER_MARIA_1 */,
+    {
+    .lvl = 2,
+    .species = SPECIES_SALAZZLE,
+    .heldItem = ITEM_LIFE_ORB,
     .ability = 0,
     .spread = SPREAD_31_IV_SPATK_SPEED_TIMID,
-    .moves = MOVE_PROTECT, MOVE_HIDDEN_POWER, MOVE_AIR_SLASH, MOVE_U_TURN
-    } /* Verdant custom: Route 117 — Verdant custom: Route 117 / Balanced disruption */,
+    .moves = MOVE_FLAMETHROWER, MOVE_SLUDGE_BOMB, MOVE_NASTY_PLOT, MOVE_ENCORE
+    } /* Verdant polish: TRAINER_MARIA_1 */,
     {
-    .lvl = -2,
-    .species = SPECIES_HAKAMO_O,
-    .heldItem = ITEM_NONE,
+    .lvl = 3,
+    .species = SPECIES_LYCANROC_DUSK,
+    .heldItem = ITEM_EXPERT_BELT,
     .ability = 0,
-    .spread = SPREAD_31_IV_0_EV,
-    .moves = MOVE_CLOSE_COMBAT, MOVE_OUTRAGE, MOVE_DRAGON_DANCE, MOVE_NOBLE_ROAR
-    } /* Verdant custom: Route 117 — Verdant custom: Route 117 / Balanced disruption */
+    .spread = SPREAD_31_IV_ATK_SPEED_JOLLY,
+    .moves = MOVE_ACCELEROCK, MOVE_STONE_EDGE, MOVE_CLOSE_COMBAT, MOVE_SWORDS_DANCE
+    } /* Verdant polish: TRAINER_MARIA_1 */
 };
 
 static const struct TrainerMonItemCustomMoves sParty_Maria2[] = {

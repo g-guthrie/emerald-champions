@@ -4482,6 +4482,78 @@
         "weakest_link": "Trick Room, priority, Water immunity, Wide Guard plus Hydro Pump scouting, and shared Flying/Psychic/Fairy pressure are broad answers. Those seams are intentional; Pheromosa from +3 to +2 is the first runtime tuning knob if the adaptive finish is too punishing."
       },
       "closure": "Battle 71 is source-closed at editorial 10/10 and target difficulty 9.1: one Badge-3-gated four-member Triathlete double at legal levels 41-43, a truthful After You-Wishiwashi order puzzle, one earned fifty-six-encounter repeat, three fresh exact species, the first Pheromosa showcase, four distinct items, four corpus references, adaptive self-contained reserves, broad priority, Trick Room, Water, and type counterplay, native-width dialogue, an even rematch-format repair with explicit future roster debt, author self-check, and no adjacent Mega or repeated field engine. Runtime playtesting remains required before the target is observed."
+    },
+    "BATTLE_072_ROUTE_117_MARIA": {
+      "guide_order": 72,
+      "trainer_ids": ["TRAINER_MARIA_1"],
+      "status": "closed",
+      "campaign_point": "Optional wandering female Triathlete on the canonical post-Wattson Route 117 clear; Maria moves through a two-by-two area and now waits for Badge 3 before offering an intentional four-member single",
+      "strict_cap": 40,
+      "branch_contract": {
+        "format": "single",
+        "source_slots": [0, 1, 2, 3],
+        "fixed_opener": "SPECIES_ZERAORA",
+        "reserve_source_order": ["SPECIES_FROSLASS", "SPECIES_SALAZZLE", "SPECIES_LYCANROC_DUSK"],
+        "target_difficulty": 8.8,
+        "replacement_contract": "Zeraora is the only fixed slot; every forced or voluntary replacement remains the engine's native matchup-ranked choice rather than a promised source-order sequence",
+        "rematch_contract": "Maria's records 2-4 remain single-format and later team-design debt; no two-Pokémon guard, placeholder party member, or double-battle rewrite is introduced"
+      },
+      "evolution_stage_fit": {
+        "campaign_phase": "cap-40 mature-route singles sprint after three consecutive Route 117 doubles",
+        "effective_levels": "41-43",
+        "eligible_ratio": "4/4",
+        "mega_access": true,
+        "status": "pass",
+        "reason": "Zeraora is single-stage, female Snorunt can reach Froslass by Dawn Stone, female Salandit evolves into Salazzle at 33, and Rockruff reaches Dusk Lycanroc at 25 through this engine's dusk branch. Mega access exists but is deliberately unused."
+      },
+      "manual_quality": 10,
+      "manual_difficulty": 8.8,
+      "observed_difficulty": null,
+      "difficulty_status": "editorial target; runtime playtest pending",
+      "corpus_review": {
+        "reference_pool_size": 1005,
+        "full_team_candidates": [
+          {"reference_id": "showdown:gen7randombattle:013", "decision": "Zeraora speed, Volt Absorb, and Knock Off identity selected; full team rejected", "reason": "The reproducible donor validates Zeraora's fast physical disruption. Its canonical Plasma Fists is explicitly unavailable in this local legal data, so Maria uses legal Wild Charge plus Band Close Combat, Knock Off, and Volt Switch."},
+          {"reference_id": "smogon:gen7uu:002", "decision": "Focus Sash Cursed Body Destiny Bond Froslass selected; full team rejected", "reason": "The published sample validates the exact Sash, ability, and Destiny Bond trade identity. Ice Beam, Shadow Ball, and Will-O-Wisp replace hazards and Icy Wind so Maria does not repeat another hazard or speed-control module."},
+          {"reference_id": "smogon:gen8uu:012", "decision": "Froslass burn and Lycanroc priority/setup roles selected; full team rejected", "reason": "One published team supplies Focus Sash Will-O-Wisp Froslass and Swords Dance, Accelerock, Close Combat Lycanroc-Dusk, proving two distinct sprint legs without dictating the other slots."},
+          {"reference_id": "smogon:gen8uu:018", "decision": "exact Salazzle move set selected; full team rejected", "reason": "The published Salazzle uses Encore, Flamethrower, Nasty Plot, and Sludge Bomb exactly. Life Orb replaces Boots because this encounter has no hazard engine and needs immediate cap-40 pressure."},
+          {"reference_id": "showdown:gen8randombattle:028", "decision": "exact Lycanroc-Dusk moves selected; full team rejected", "reason": "The reproducible single validates Close Combat, Swords Dance, Stone Edge, and Accelerock exactly. Expert Belt replaces Life Orb so Salazzle alone owns recoil pressure."},
+          {"reference_id": "vgc:special-event-buenos-aires-2017", "decision": "Salazzle event legitimacy noted from roster-only evidence", "reason": "The verified event winner confirms Salazzle as a tournament-worthy rare pick; no exact moves or item are attributed to the roster-only record."}
+        ],
+        "decision": "All 1,005 indexed references were reviewed. No complete roster fit Maria, so five complete donors and one event winner support four different kinds of speed while the exact mixed gauntlet is transparently hand-authored."
+      },
+      "competitive_references": [
+        {"reference_id": "showdown:gen7randombattle:013", "adaptation": "Zeraora keeps Volt Absorb and Knock Off; illegal local Plasma Fists becomes legal Wild Charge, while Choice Band Close Combat and Volt Switch create a dangerous but readable lock."},
+        {"reference_id": "smogon:gen7uu:002", "adaptation": "Froslass keeps Focus Sash, Cursed Body, and Destiny Bond, trading hazards for direct Ice, Ghost, and burn pressure."},
+        {"reference_id": "smogon:gen8uu:012", "adaptation": "Froslass keeps Will-O-Wisp and Lycanroc-Dusk keeps the Swords Dance, Accelerock, Close Combat structure."},
+        {"reference_id": "smogon:gen8uu:018", "adaptation": "Salazzle retains the exact Encore, Flamethrower, Nasty Plot, and Sludge Bomb set with Life Orb."},
+        {"reference_id": "showdown:gen8randombattle:028", "adaptation": "Lycanroc-Dusk retains its exact four moves and changes Life Orb to Expert Belt."},
+        {"reference_id": "vgc:special-event-buenos-aires-2017", "adaptation": "The winning roster supports Salazzle's competitive legitimacy without being used as a set donor."}
+      ],
+      "ordering": {
+        "fixed_opener": "SPECIES_ZERAORA",
+        "source_order": ["SPECIES_ZERAORA", "SPECIES_FROSLASS", "SPECIES_SALAZZLE", "SPECIES_LYCANROC_DUSK"],
+        "reason": "Choice Band Zeraora always opens and asks for an immediate immunity, lock, or pivot read. The remaining source order is documentation only: native smart switching may deploy Sash Destiny Bond Froslass, Life Orb Encore setup Salazzle, or priority Swords Dance Lycanroc-Dusk according to the actual matchup. Each reserve is independently coherent."
+      },
+      "primary_player_question": "Can the player answer four different kinds of speed—Choice-locked pivoting, a Sash trade, special setup plus Encore, and physical priority setup—without one Ground or Water answer solving the entire sprint?",
+      "team_intent": "Level-42 Choice Band Volt Absorb Zeraora uses Wild Charge, Close Combat, Knock Off, and Volt Switch. Level-41 Focus Sash Cursed Body Froslass uses Ice Beam, Shadow Ball, Will-O-Wisp, and Destiny Bond. Level-42 Life Orb Corrosion Salazzle uses Flamethrower, Sludge Bomb, Nasty Plot, and Encore. Level-43 Expert Belt Tough Claws Dusk Lycanroc uses Accelerock, Stone Edge, Close Combat, and Swords Dance. There is no weather, terrain, room, Tailwind, screen, hazard, redirection, ally hit, inheritance, Mega, Primal, or battle-Bag item.",
+      "intentional_weakness": "All four members are offense-first and have no recovery or defensive field. Zeraora is choice-locked, takes Wild Charge recoil, and exposes Ground immunity pivots; Froslass depends on an unbroken Sash and is vulnerable to priority; Salazzle and Froslass are physically frail; Lycanroc-Dusk is vulnerable before setup and shares Ground pressure with Salazzle and Zeraora. Bulky Ground and Water balance compresses several slots even though Ice Beam, burn, Grass-neutral Poison/Fire pressure, Knock Off, and Close Combat prevent one automatic answer.",
+      "intended_counterplay": "Ground types or abilities can exploit locked Wild Charge and Volt Switch; Protect, Disable, Encore, Trick, item removal, and prediction punish Choice Band. Hazards, weather chip, priority, multi-hit moves, and faster Scarf users break Froslass's Sash or avoid Destiny Bond. Haze, Clear Smog, Unaware, phazing, Taunt, paralysis, and revenge pressure answer Nasty Plot or Swords Dance. Bulky Water, Ground, Rock, Steel, Fighting, Ghost, and Psychic answers divide by slot, while Trick Room reverses the entire pace.",
+      "first_loss_lesson": "Raw Speed was not one puzzle. Read Zeraora's lock, preserve a safe Sash or Destiny Bond answer, deny the setup reserve that actually enters, and keep a priority or Trick Room plan for Lycanroc rather than trying to outspeed all four.",
+      "bespoke_ai": "Maria uses ordinary foe-aware, smart-switching, and HP-aware singles scoring. Choice locks, Volt Switch, Knock Off, Sash, Cursed Body, Will-O-Wisp, Destiny Bond, Encore, Nasty Plot, Swords Dance, Accelerock, recoil, and type coverage are existing mechanics. Setup-first-turn is deliberately absent so setup and Destiny Bond remain board-dependent. Zeraora is the only fixed opener; no reserve, switch, move, target, or sacrifice is scripted and no trainer-specific C branch is added.",
+      "uniqueness": "Zeraora, Froslass, Salazzle, and Dusk Lycanroc are all fresh exact species across Battles 1-71. Zeraora is the first mythical fast-pivot showcase and creates a future player-obtainability debt rather than pretending opponent use makes it catchable. The battle deliberately breaks a three-double Route 117 streak and uses four changing singles questions instead of another persistent doubles subsystem.",
+      "story_logic": "Maria is one moving Running Triathlete, so a final-split singles sprint fits her solitary map trigger and native script. Badge 3 gating makes levels 41-43 truthful despite early Route 117 access. Her first battle and records 2-4 are all explicitly single-format; later rematch rosters remain separate design debt rather than being silently converted here.",
+      "reward_logic": "Battle 72 grants EXP, ordinary prize money, and Maria's existing Match Call registration only. It gives no item, heal, or story flag. Zeraora's eventual player-obtainability route is preserved as separate campaign work rather than falsely paid out here.",
+      "campaign_reservations": {
+        "spends": ["the first Zeraora and mythical fast-pivot showcase", "the campaign's definitive four-leg singles speed exam", "the first fixed Froslass, Salazzle, and Dusk Lycanroc opponent roles"],
+        "preserves": ["Zeraora for a later fair player-obtainability encounter or reward", "Neutralizing Gas burden release for a later doubles trainer", "persistent speed fields for other bosses", "every Mega and Primal"],
+        "repeat_rule": "Later fast singles may use one lock, Sash trade, setup lane, or priority closer, but no later first fight should repeat all four legs or the exact Zeraora opener."
+      },
+      "author_self_check": {
+        "strongest_part": "Four fast Pokémon ask four different questions without requiring another custom subsystem, and an ordinary route trainer gets a memorable mythical opener exactly in the rare-everywhere spirit of the game.",
+        "weakest_link": "Sturdy Ground and Water balance compresses the roster, especially after identifying Zeraora's lock. That broad answer is intentional; Dusk Lycanroc from +3 to +2 is the first runtime tuning knob if the adaptive finish is too punishing."
+      },
+      "closure": "Battle 72 is source-closed at editorial 10/10 and target difficulty 8.8: one Badge-3-gated four-member intentional single at legal levels 41-43, four fresh exact species, a Zeraora mythical opener, four distinct speed questions, four non-repeating items, six truthful corpus references, native adaptive replacements, broad Ground, Water, priority, Trick Room, lock, Sash, and setup counterplay, native-width dialogue, explicit rematch and obtainability debt, author self-check, and no repeated doubles field engine. Runtime playtesting remains required before the target is observed."
     }
   }
 }

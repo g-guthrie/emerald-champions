@@ -9,23 +9,23 @@
     "final_coverage": "Requires an explicitly complete canonical sequence and actual use of every required legendary family and Mega mechanism."
   },
   "source_identity": {
-    "docs/verdant_battle_sequence.json": "096abdd49e146a0e67aa23424f23b734c1ce6712021bec5282524c8ac4cbbc67",
-    "docs/verdant_bespoke_battle_designs.json": "2d9c6af73ffc3cec887b9aa2f314718c52b70636eee94691766627d01a3e13de",
+    "docs/verdant_battle_sequence.json": "a98cc065cc93ffc2d78d21ea86cfb394612b208012f915a8e79e1689468ccb7b",
+    "docs/verdant_bespoke_battle_designs.json": "4e94a134607151c7b504c68c3ff7d882a8613a91e8cf317b3f5a1921ef751da9",
     "docs/verdant_historic_team_reservations.json": "b6d485c178a02919a1c5709776d813d98bd416d0c7384616d2dc0376e4ab30ae",
     "docs/verdant_marquee_battle_designs.json": "ffa1c35cf391bc4dbed8aa708b7a2d4d7cd7c9eb02f00385b898c5fa902f1870",
-    "src/data/trainers.h": "92729f33c86d50bfe7bd32a15c49092797f6dc63105e1e2045743b49ed3fab42",
-    "src/data/trainer_parties.h": "b0057160cf25f9da1564751ba4cce6d632fbe693a4cd7d20184d2b16e9673cb1",
+    "src/data/trainers.h": "30a43dc3077b57b0be2fa1b5a7bac4eedc421a17db77a4a257173642c2a66b64",
+    "src/data/trainer_parties.h": "8a74f66091f94762bf6d53bf26b07c6070ca2d5d412871c665e4b0de71b2114c",
     "src/starter_choose.c": "7cc07796e9226a479d1b7da66ef17555e8a8e6de50516434720559d902b1b7d8"
   },
   "summary": {
     "sequence_entries": 76,
-    "closed_encounters": 71,
-    "used_species": 338,
+    "closed_encounters": 72,
+    "used_species": 342,
     "duplicated_species": 35,
     "legendary_families": {
-      "used": 22,
+      "used": 23,
       "reserved": 10,
-      "unplaced": 64
+      "unplaced": 63
     },
     "mega_showcases": {
       "used": 5,
@@ -2112,6 +2112,22 @@
       ]
     },
     {
+      "species": "SPECIES_FROSLASS",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 72,
+          "encounter_id": "BATTLE_072_ROUTE_117_MARIA",
+          "trainer_ids": [
+            "TRAINER_MARIA_1"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_FURFROU_DEBUTANTE_TRIM",
       "appearance_count": 1,
       "appearances": [
@@ -3234,6 +3250,22 @@
           "encounter_id": "BATTLE_015_ROUTE_104_IVAN",
           "trainer_ids": [
             "TRAINER_IVAN"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_LYCANROC_DUSK",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 72,
+          "encounter_id": "BATTLE_072_ROUTE_117_MARIA",
+          "trainer_ids": [
+            "TRAINER_MARIA_1"
           ],
           "basis": [
             "trainer-party"
@@ -4820,6 +4852,22 @@
       ]
     },
     {
+      "species": "SPECIES_SALAZZLE",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 72,
+          "encounter_id": "BATTLE_072_ROUTE_117_MARIA",
+          "trainer_ids": [
+            "TRAINER_MARIA_1"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_SANDSHREW_ALOLAN",
       "appearance_count": 1,
       "appearances": [
@@ -6193,6 +6241,22 @@
       ]
     },
     {
+      "species": "SPECIES_ZERAORA",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 72,
+          "encounter_id": "BATTLE_072_ROUTE_117_MARIA",
+          "trainer_ids": [
+            "TRAINER_MARIA_1"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_ZIGZAGOON",
       "appearance_count": 1,
       "appearances": [
@@ -7200,9 +7264,13 @@
     },
     {
       "family_id": "ZERAORA",
-      "status": "unplaced",
-      "used_species": [],
-      "used_encounter_ids": [],
+      "status": "used",
+      "used_species": [
+        "SPECIES_ZERAORA"
+      ],
+      "used_encounter_ids": [
+        "BATTLE_072_ROUTE_117_MARIA"
+      ],
       "reservations": []
     },
     {

@@ -2,8 +2,8 @@
   "summary": {
     "trainer_records": 854,
     "trainer_pokemon": 3422,
-    "doubles": 567,
-    "singles": 287,
+    "doubles": 565,
+    "singles": 289,
     "median_quality_score": 63,
     "blocking_issues": 0,
     "major_issues": 5,
@@ -49682,137 +49682,134 @@
       "trainer_id": "TRAINER_MARIA_1",
       "name": "Maria",
       "location": "Route 117",
-      "format": "double",
-      "manifest_difficulty": 34,
+      "format": "single",
+      "manifest_difficulty": 62,
       "party_name": "sParty_Maria1",
       "party_size": 4,
-      "avg_level_offset": -2.0,
-      "max_level_offset": -2,
-      "item_coverage": 0.25,
+      "avg_level_offset": 2.0,
+      "max_level_offset": 3,
+      "item_coverage": 1.0,
       "complete_moveset_coverage": 1.0,
-      "avg_bst": 417.0,
-      "rare_count": 0,
+      "avg_bst": 521.8,
+      "rare_count": 1,
       "mega_count": 0,
-      "speed_control_count": 3,
-      "protect_count": 2,
+      "speed_control_count": 1,
+      "protect_count": 0,
       "defensive_tempo_count": 2,
       "spread_count": 0,
-      "synergy_tags": [
-        "Flying pressure"
-      ],
-      "quality_score": 50,
+      "synergy_tags": [],
+      "quality_score": 68,
       "issues": [],
       "mons": [
         {
-          "species": "SPECIES_TRANQUILL",
-          "level_offset": -2,
-          "item": "ITEM_NONE",
+          "species": "SPECIES_ZERAORA",
+          "level_offset": 2,
+          "item": "ITEM_CHOICE_BAND",
           "ability_slot": 0,
-          "ability": "ABILITY_BIG_PECKS",
-          "spread": "SPREAD_15_IV_0_EV",
+          "ability": "ABILITY_VOLT_ABSORB",
+          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
           "moves": [
-            "MOVE_QUICK_ATTACK",
-            "MOVE_AIR_SLASH",
-            "MOVE_ROOST",
-            "MOVE_DETECT"
+            "MOVE_WILD_CHARGE",
+            "MOVE_CLOSE_COMBAT",
+            "MOVE_KNOCK_OFF",
+            "MOVE_VOLT_SWITCH"
           ],
-          "bst": 358,
-          "speed": 65,
+          "bst": 600,
+          "speed": 143,
           "types": [
-            "TYPE_NORMAL",
-            "TYPE_FLYING"
+            "TYPE_ELECTRIC",
+            "TYPE_ELECTRIC"
           ],
           "attack_moves": [
-            "MOVE_QUICK_ATTACK",
-            "MOVE_AIR_SLASH"
+            "MOVE_WILD_CHARGE",
+            "MOVE_CLOSE_COMBAT",
+            "MOVE_KNOCK_OFF",
+            "MOVE_VOLT_SWITCH"
           ],
-          "status_moves": [
-            "MOVE_ROOST",
-            "MOVE_DETECT"
-          ]
+          "status_moves": []
         },
         {
-          "species": "SPECIES_HAWLUCHA",
-          "level_offset": -2,
-          "item": "ITEM_NONE",
-          "ability_slot": 2,
-          "ability": "ABILITY_MOLD_BREAKER",
-          "spread": "SPREAD_15_IV_0_EV",
-          "moves": [
-            "MOVE_BOUNCE",
-            "MOVE_SUBMISSION",
-            "MOVE_FEATHER_DANCE",
-            "MOVE_HONE_CLAWS"
-          ],
-          "bst": 500,
-          "speed": 118,
-          "types": [
-            "TYPE_FIGHTING",
-            "TYPE_FLYING"
-          ],
-          "attack_moves": [
-            "MOVE_BOUNCE",
-            "MOVE_SUBMISSION"
-          ],
-          "status_moves": [
-            "MOVE_FEATHER_DANCE",
-            "MOVE_HONE_CLAWS"
-          ]
-        },
-        {
-          "species": "SPECIES_YANMA",
-          "level_offset": -2,
-          "item": "ITEM_LEFTOVERS",
-          "ability_slot": 0,
-          "ability": "ABILITY_SPEED_BOOST",
+          "species": "SPECIES_FROSLASS",
+          "level_offset": 1,
+          "item": "ITEM_FOCUS_SASH",
+          "ability_slot": 1,
+          "ability": "ABILITY_CURSED_BODY",
           "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
           "moves": [
-            "MOVE_PROTECT",
-            "MOVE_HIDDEN_POWER",
-            "MOVE_AIR_SLASH",
-            "MOVE_U_TURN"
+            "MOVE_ICE_BEAM",
+            "MOVE_SHADOW_BALL",
+            "MOVE_WILL_O_WISP",
+            "MOVE_DESTINY_BOND"
           ],
-          "bst": 390,
-          "speed": 95,
+          "bst": 500,
+          "speed": 110,
           "types": [
-            "TYPE_BUG",
-            "TYPE_FLYING"
+            "TYPE_ICE",
+            "TYPE_GHOST"
           ],
           "attack_moves": [
-            "MOVE_HIDDEN_POWER",
-            "MOVE_AIR_SLASH",
-            "MOVE_U_TURN"
+            "MOVE_ICE_BEAM",
+            "MOVE_SHADOW_BALL"
           ],
           "status_moves": [
-            "MOVE_PROTECT"
+            "MOVE_WILL_O_WISP",
+            "MOVE_DESTINY_BOND"
           ]
         },
         {
-          "species": "SPECIES_HAKAMO_O",
-          "level_offset": -2,
-          "item": "ITEM_NONE",
+          "species": "SPECIES_SALAZZLE",
+          "level_offset": 2,
+          "item": "ITEM_LIFE_ORB",
           "ability_slot": 0,
-          "ability": "ABILITY_BULLETPROOF",
-          "spread": "SPREAD_31_IV_0_EV",
+          "ability": "ABILITY_CORROSION",
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
           "moves": [
-            "MOVE_CLOSE_COMBAT",
-            "MOVE_OUTRAGE",
-            "MOVE_DRAGON_DANCE",
-            "MOVE_NOBLE_ROAR"
+            "MOVE_FLAMETHROWER",
+            "MOVE_SLUDGE_BOMB",
+            "MOVE_NASTY_PLOT",
+            "MOVE_ENCORE"
           ],
-          "bst": 420,
-          "speed": 65,
+          "bst": 480,
+          "speed": 117,
           "types": [
-            "TYPE_DRAGON",
-            "TYPE_FIGHTING"
+            "TYPE_POISON",
+            "TYPE_FIRE"
           ],
           "attack_moves": [
-            "MOVE_CLOSE_COMBAT",
-            "MOVE_OUTRAGE"
+            "MOVE_FLAMETHROWER",
+            "MOVE_SLUDGE_BOMB"
           ],
           "status_moves": [
-            "MOVE_DRAGON_DANCE",
-            "MOVE_NOBLE_ROAR"
+            "MOVE_NASTY_PLOT",
+            "MOVE_ENCORE"
+          ]
+        },
+        {
+          "species": "SPECIES_LYCANROC_DUSK",
+          "level_offset": 3,
+          "item": "ITEM_EXPERT_BELT",
+          "ability_slot": 0,
+          "ability": "ABILITY_TOUGH_CLAWS",
+          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+          "moves": [
+            "MOVE_ACCELEROCK",
+            "MOVE_STONE_EDGE",
+            "MOVE_CLOSE_COMBAT",
+            "MOVE_SWORDS_DANCE"
+          ],
+          "bst": 507,
+          "speed": 110,
+          "types": [
+            "TYPE_ROCK",
+            "TYPE_ROCK"
+          ],
+          "attack_moves": [
+            "MOVE_ACCELEROCK",
+            "MOVE_STONE_EDGE",
+            "MOVE_CLOSE_COMBAT"
+          ],
+          "status_moves": [
+            "MOVE_SWORDS_DANCE"
           ]
         }
       ]
@@ -50039,7 +50036,7 @@
       "trainer_id": "TRAINER_MARIA_4",
       "name": "Maria",
       "location": "Route 117",
-      "format": "double",
+      "format": "single",
       "manifest_difficulty": 43,
       "party_name": "sParty_Maria4",
       "party_size": 4,

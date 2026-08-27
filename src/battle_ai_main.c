@@ -1848,7 +1848,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                 score -= 10;
             break;
         case EFFECT_DESTINY_BOND:
-            if (gBattleMons[battlerDef].status2 & STATUS2_DESTINY_BOND)
+            if (gBattleMons[battlerAtk].status2 & STATUS2_DESTINY_BOND)
                 score -= 10;
             break;
         case EFFECT_FALSE_SWIPE:

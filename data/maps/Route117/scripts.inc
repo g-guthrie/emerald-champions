@@ -115,6 +115,7 @@ Route117_EventScript_DylanStillTraining::
 	end
 
 Route117_EventScript_Maria:: @ 81F3AF6
+	goto_if_unset FLAG_BADGE03_GET, Route117_EventScript_MariaStillTraining
 	trainerbattle_single TRAINER_MARIA_1, Route117_Text_MariaIntro, Route117_Text_MariaDefeat, Route117_EventScript_RegisterMaria
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
@@ -134,6 +135,10 @@ Route117_EventScript_RegisterMaria:: @ 81F3B22
 Route117_EventScript_RematchMaria:: @ 81F3B41
 	trainerbattle_rematch TRAINER_MARIA_1, Route117_Text_MariaRematchIntro, Route117_Text_MariaRematchDefeat
 	msgbox Route117_Text_MariaPostRematch, MSGBOX_AUTOCLOSE
+	end
+
+Route117_EventScript_MariaStillTraining::
+	msgbox Route117_Text_MariaStillTraining, MSGBOX_AUTOCLOSE
 	end
 
 Route117_EventScript_Derek:: @ 81F3B58

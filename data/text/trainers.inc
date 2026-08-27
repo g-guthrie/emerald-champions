@@ -2523,35 +2523,34 @@ Route117_Text_DylanStillTraining:
 	.string "Come back after the Dynamo Badge!$"
 
 Route117_Text_MariaIntro: @ 829C955
-	.string "I do my triathlon training with Pokémon,\n"
-	.string "so I'm pretty confident about my speed.$"
+	.string "Speed above all!\n"
+	.string "Can you survive my final sprint?$"
 
 Route117_Text_MariaDefeat: @ 829C9A6
-	.string "I need to get more practices in,\n"
-	.string "I guess.$"
+	.string "You broke my pace!$"
 
 Route117_Text_MariaPostBattle: @ 829C9D0
-	.string "Training is meaningful only if you\n"
-	.string "keep it up regularly.\p"
-	.string "Okay! I'll resume my training!\n"
-	.string "Tomorrow!$"
+	.string "Every sprinter attacks differently.\p"
+	.string "One pace cannot beat them all!$"
 
 Route117_Text_MariaRegister: @ 829CA32
-	.string "You appear to be training properly…\n"
-	.string "If you'd like, I'll battle you later!$"
+	.string "You adapted at every turn!\n"
+	.string "Let's race again.$"
 
 Route117_Text_MariaRematchIntro: @ 829CA7C
-	.string "Are you keeping up with your training?\n"
-	.string "I sure am!\l"
-	.string "Let me show you the evidence!$"
+	.string "Four sprints, four new answers!\n"
+	.string "Are you ready?$"
 
 Route117_Text_MariaRematchDefeat: @ 829CACC
-	.string "I need to get more practices in,\n"
-	.string "I guess.$"
+	.string "You changed pace again!$"
 
 Route117_Text_MariaPostRematch: @ 829CAF6
-	.string "I'll resume training tomorrow.\n"
-	.string "Let's battle again sometime!$"
+	.string "Raw speed is never enough.\n"
+	.string "I need a smarter finish!$"
+
+Route117_Text_MariaStillTraining:
+	.string "My sprint is not ready.\n"
+	.string "Return with the Dynamo Badge!$"
 
 Route117_Text_DerekIntro: @ 829CB32
 	.string "Once a Bug Catcher!\n"

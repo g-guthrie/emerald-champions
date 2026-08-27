@@ -704,18 +704,18 @@
       "index": 72,
       "encounter_id": "BATTLE_072_ROUTE_117_MARIA",
       "location": "Route117",
-      "category": "optional moving solo double",
-      "status": "next",
+      "category": "optional moving single",
+      "status": "closed",
       "strict_cap": 40,
       "trainer_ids": ["TRAINER_MARIA_1"],
-      "access_note": "Maria wanders around (26,13) in a two-by-two range with five-tile sight. Her four-member trainer record is double while the current first-fight and rematch opcodes are single; source closure must add the explicit two-usable-Pokémon path while preserving her Match Call registration."
+      "access_note": "Maria wanders around (26,13) in a two-by-two range with five-tile sight. She now truthfully waits for the Dynamo Badge and remains an intentional four-member single as a format break after three consecutive Route 117 doubles. All four Match Call records are single-format; tiers 2-4 remain separately indexed team-design debt."
     },
     {
       "index": 73,
       "encounter_id": "BATTLE_073_ROUTE_117_DEREK",
       "location": "Route117",
       "category": "optional single",
-      "status": "queued",
+      "status": "next",
       "strict_cap": 40,
       "trainer_ids": ["TRAINER_DEREK"],
       "access_note": "Fixed at (17,12), facing up with four-tile sight. Derek is a normal independent single with no callback, direct reward, Match Call registration, or rematch. Derek and the upper-meadow cluster are reversible in open terrain; the lower-lane sweep is the canonical tie-break."

@@ -3266,12 +3266,12 @@
       "location": "Ever Grande City Drakes Room"
     },
     "TRAINER_MARIA_1": {
-      "format": "double",
+      "format": "single",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 34,
+      "archetype": "Final-split sprint",
+      "difficulty": 62,
       "partner_interaction": false,
-      "level_offset": -2,
+      "level_offset": 2,
       "location": "Route 117"
     },
     "TRAINER_MARIA_2": {
@@ -3293,7 +3293,7 @@
       "location": "Route 117"
     },
     "TRAINER_MARIA_4": {
-      "format": "double",
+      "format": "single",
       "target_size": 4,
       "archetype": "Balanced disruption",
       "difficulty": 43,

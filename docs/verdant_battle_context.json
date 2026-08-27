@@ -8,88 +8,72 @@
     "tuning_preference": "Preserve sound strategy; tune opponent levels relative to the fixed cap first."
   },
   "selection": {
-    "index": 72,
-    "encounter_id": "BATTLE_072_ROUTE_117_MARIA",
+    "index": 73,
+    "encounter_id": "BATTLE_073_ROUTE_117_DEREK",
     "location": "Route117",
-    "category": "optional moving solo double",
+    "category": "optional single",
     "status": "next",
     "trainer_ids": [
-      "TRAINER_MARIA_1"
+      "TRAINER_DEREK"
     ],
-    "access_note": "Maria wanders around (26,13) in a two-by-two range with five-tile sight. Her four-member trainer record is double while the current first-fight and rematch opcodes are single; source closure must add the explicit two-usable-Pok\u00e9mon path while preserving her Match Call registration.",
+    "access_note": "Fixed at (17,12), facing up with four-tile sight. Derek is a normal independent single with no callback, direct reward, Match Call registration, or rematch. Derek and the upper-meadow cluster are reversible in open terrain; the lower-lane sweep is the canonical tie-break.",
     "strict_cap": 40,
     "strict_cap_source": "canonical-sequence-stage",
     "campaign_point": null,
     "soft_reservation": null,
     "marquee_blueprint": null,
     "source_facts": {
-      "format": "double",
+      "format": "single",
       "source_record_formats": [
-        "double"
+        "single"
       ],
       "source_variant_count": 1,
-      "representative_party_size": 4,
-      "average_party_size": 4.0,
+      "representative_party_size": 2,
+      "average_party_size": 2.0,
       "species": [
-        "SPECIES_HAKAMO_O",
-        "SPECIES_HAWLUCHA",
-        "SPECIES_TRANQUILL",
-        "SPECIES_YANMA"
+        "SPECIES_MOTHIM",
+        "SPECIES_WORMADAM_SANDY_CLOAK"
       ],
-      "items": [
-        "ITEM_LEFTOVERS"
-      ],
+      "items": [],
       "moves": [
-        "MOVE_AIR_SLASH",
-        "MOVE_BOUNCE",
-        "MOVE_CLOSE_COMBAT",
-        "MOVE_DETECT",
-        "MOVE_DRAGON_DANCE",
-        "MOVE_FEATHER_DANCE",
         "MOVE_HIDDEN_POWER",
-        "MOVE_HONE_CLAWS",
-        "MOVE_NOBLE_ROAR",
-        "MOVE_OUTRAGE",
-        "MOVE_PROTECT",
-        "MOVE_QUICK_ATTACK",
-        "MOVE_ROOST",
-        "MOVE_SUBMISSION",
-        "MOVE_U_TURN"
+        "MOVE_PSYBEAM",
+        "MOVE_QUIVER_DANCE",
+        "MOVE_ROCK_BLAST",
+        "MOVE_SILVER_WIND"
       ],
-      "synergy_tags": [
-        "Flying pressure"
-      ],
+      "synergy_tags": [],
       "level_offsets": [
         -2
       ],
       "average_level_offset": -2.0,
       "max_level_offset": -2,
       "densities": {
-        "protect": 0.5,
+        "protect": 0.0,
         "fake_out": 0.0,
-        "setup": 0.25,
-        "speed_control_or_priority": 0.5,
-        "premium_item": 0.25
+        "setup": 1.0,
+        "speed_control_or_priority": 0.0,
+        "premium_item": 0.0
       }
     }
   },
   "ledger": {
     "path": "docs/verdant_battle_experience_ledger.json",
     "present": true,
-    "records": 71,
+    "records": 72,
     "rolling_fallback_records": []
   },
   "rolling_window": {
     "requested_size": 10,
     "actual_size": 10,
     "encounter_range": [
-      62,
-      71
+      63,
+      72
     ],
     "tempo_counts": {
       "Ally-safe Punk Rock spread in the 3+3 joint, Vivian's disruptive/bulky coverage single, or Kirk's direct Ghost-backed special single.": 1,
-      "Branch-sensitive Grass-Fire lead into player-selected Rainbow, Swamp, Sea of Fire continuation, or no-combo Water endgame.": 1,
       "Fast item-removal and Tailwind lead, target-order-sensitive young Ground reserve, returning mixed partners, then source-last signature Mega balance closer.": 1,
+      "Four changing fast singles legs\u2014lock and pivot, Sash trade, special setup, physical priority\u2014without a persistent field or custom AI subsystem.": 1,
       "One guaranteed Terrain/Tailwind opening followed by native resistance-and-base-damage reserve selection, reciprocal speed modes, priority denial, and a dynamically deployed story Mega.": 1,
       "One order-changing slow-cannon lead followed by native adaptive special Unburden or physical Beast Boost speed, with no persistent field mode.": 1,
       "One visible ally-targeting activation, Defense-powered physical pressure, then conditional inheritance or immediate reserve offense selected by the native matchup logic rather than a speed field.": 1,
@@ -99,26 +83,31 @@
       "Two-body contact toll, frail Rough Skin reserve, then rare special Flame Body spread finish with no speed or field mode.": 1
     },
     "format_counts": {
-      "double": 8,
-      "native-pair double": 2
+      "double": 7,
+      "native-pair double": 2,
+      "single": 1
     },
     "novelty_tag_counts": {
-      "guarded-double": 7,
+      "guarded-double": 6,
       "adaptive-reserve-selection": 3,
+      "no-mega": 3,
+      "no-weather": 3,
       "route-double": 3,
-      "cycling-double": 2,
       "gym-native-pair": 2,
       "joint-3-plus-3": 2,
+      "moving-triathlete": 2,
       "no-legendary": 2,
-      "no-mega": 2,
+      "no-room": 2,
       "no-speed-field": 2,
       "no-speed-mode": 2,
-      "no-weather": 2,
+      "no-terrain": 2,
       "safe-one-usable": 2,
       "split-four-singles": 2,
       "ability-inheritance-relay": 1,
       "abra-sash": 1,
+      "accelerock": 1,
       "accelgor": 1,
+      "adaptive-replacement": 1,
       "after-you": 1,
       "alolan-muk": 1,
       "armor-tail": 1,
@@ -129,13 +118,17 @@
       "boomburst": 1,
       "bug-gem-unburden": 1,
       "cheek-pouch": 1,
+      "choice-band-lock": 1,
       "contact-tax": 1,
+      "cycling-double": 1,
       "day-care-class": 1,
       "declinable-retry": 1,
+      "destiny-bond": 1,
       "dragon-tail": 1,
       "dual-speed-mode": 1,
       "electric-terrain": 1,
       "emolga": 1,
+      "encore-setup": 1,
       "eternal-floette": 1,
       "explicit-two-mon-guard": 1,
       "five-young-plus-guardian": 1,
@@ -144,7 +137,10 @@
       "flower-collection": 1,
       "follow-me": 1,
       "foongus-redirection": 1,
+      "format-break": 1,
+      "four-leg-sprint": 1,
       "four-of-six-electric": 1,
+      "froslass-sash": 1,
       "ghost-immunity": 1,
       "gluttony": 1,
       "gluttony-figy": 1,
@@ -155,36 +151,29 @@
       "iron-barbs": 1,
       "iron-hands": 1,
       "knockout-order": 1,
-      "libero-raboot": 1,
       "lightning-rod-ally-activation": 1,
-      "liquid-voice-brionne": 1,
+      "lycanroc-dusk": 1,
       "mega-gallade": 1,
       "mega-kangaskhan": 1,
       "mega-raichu-y": 1,
-      "middle-starters": 1,
       "moltres": 1,
       "move-order-relay": 1,
-      "moving-triathlete": 1,
       "munchlax": 1,
-      "no-forced-ai": 1,
+      "mythical-showcase": 1,
       "no-guard": 1,
-      "no-room": 1,
       "no-scripted-heal": 1,
       "no-single-engine": 1,
       "no-tailwind": 1,
-      "no-terrain": 1,
       "noncontact-counterplay": 1,
       "normal-gengar": 1,
       "parental-bond": 1,
       "passimian": 1,
       "pheromosa": 1,
-      "player-chosen-branch": 1,
-      "pledge-relay": 1,
       "power-of-alchemy": 1,
+      "priority-closer": 1,
       "published-balance-chassis": 1,
       "punk-rock-toxtricity": 1,
       "pure-power-medicham": 1,
-      "rainbow": 1,
       "receiver": 1,
       "reciprocal-mega": 1,
       "red-card-skarmory": 1,
@@ -196,14 +185,14 @@
       "reusable-spread-ai": 1,
       "rocky-helmet": 1,
       "rough-skin": 1,
+      "route-single": 1,
+      "salazzle": 1,
       "schooling-wishiwashi": 1,
-      "sea-of-fire": 1,
       "second-item-relay": 1,
       "sharpedo": 1,
       "soundproof-prefix": 1,
       "staryu-analytic": 1,
       "stuff-cheeks": 1,
-      "swamp": 1,
       "switch-puzzle": 1,
       "symbiosis": 1,
       "tailwind": 1,
@@ -215,6 +204,7 @@
       "trick-room": 1,
       "ultra-beast-showcase": 1,
       "unburden-rejected": 1,
+      "volt-switch": 1,
       "wally-continuity": 1,
       "weavile-zapdos-lead": 1,
       "white-herb": 1,
@@ -222,141 +212,10 @@
       "world-champion-spine": 1,
       "young-drilbur": 1,
       "young-ferroseed": 1,
-      "zapdos": 1
+      "zapdos": 1,
+      "zeraora": 1
     },
     "entries": [
-      {
-        "index": 62,
-        "encounter_id": "BATTLE_062_ROUTE_110_CYCLING_JASMINE",
-        "identity": {
-          "location": "Route110",
-          "category": "optional guarded cycling double",
-          "format": "double",
-          "strict_cap": 30,
-          "memory_hook": "Grass and Fire Pledge open the relay; the lead the player removes decides whether Drizzile creates Rainbow or Swamp, while a double knockout earns an incompatible Water reserve pair."
-        },
-        "primary_player_question": "Can the player choose the knockout order that creates the least dangerous Pledge course, then exploit the earned Water-plus-Water endgame before Liquid Voice recovers momentum?",
-        "tempo": "Branch-sensitive Grass-Fire lead into player-selected Rainbow, Swamp, Sea of Fire continuation, or no-combo Water endgame.",
-        "pressure_sources": [
-          "Grass plus Fire Pledge",
-          "150-power combination attack",
-          "four-turn Sea of Fire",
-          "Fire plus Water Rainbow",
-          "Grass plus Water Swamp",
-          "Libero Raboot",
-          "Liquid Voice Brionne",
-          "Helping Hand",
-          "levels 31-33 middle forms"
-        ],
-        "intentional_opening": "Native Pledge scoring encourages a compatible offer and confirmed pair but never fixes the move, target, or knockout order; Thwackey and Raboot remain free to attack directly or Protect.",
-        "intentional_weakness": "All four are item-light middle forms, each combo spends both actions on one target, and removing both original leads strands Drizzile plus Brionne as incompatible Water pledges.",
-        "first_loss_lesson": "The first knockout chooses the next field. Remove one lead deliberately or remove both together; do not treat Thwackey and Raboot as equivalent targets.",
-        "revealed_information": [
-          "Jasmine is now a guarded double",
-          "Grass plus Fire creates Sea of Fire",
-          "Fire plus Water creates Rainbow",
-          "Grass plus Water creates Swamp",
-          "two Water pledges do not combine",
-          "Brionne has Liquid Voice",
-          "Jasmine has no reward or rematch"
-        ],
-        "counterplay_classes": [
-          "Fake Out, flinch, sleep, paralysis, redirection, or focus fire",
-          "Protect, priority, defensive switching, or spread offense",
-          "Flash Fire, Water Absorb, Storm Drain, Sap Sipper, or type resistance",
-          "removing both leads before reserves arrive",
-          "Knock Off",
-          "Fire, Water, Grass, Flying, Poison, Rock, Ground, or Electric pressure by slot"
-        ],
-        "target_difficulty": 9.1,
-        "difficulty_rationale": "Two compatible middle-form leads at +1/+2 can create a 150-power strike and four-turn field, while player-controlled knockout order, no Eviolite, modest items, one-target action economy, and an earnable no-combo reserve board make the guarded double learnable.",
-        "tuning_knob": "Tune Brionne from +3 to +2 first, then Raboot; preserve the lead order and all four knockout-order outcomes.",
-        "playtest_status": "static-pass-runtime-unplayed",
-        "novelty_tags": [
-          "cycling-double",
-          "guarded-double",
-          "pledge-relay",
-          "player-chosen-branch",
-          "sea-of-fire",
-          "rainbow",
-          "swamp",
-          "middle-starters",
-          "libero-raboot",
-          "liquid-voice-brionne",
-          "no-forced-ai"
-        ],
-        "historic_reference_ids": [
-          "smogon:gen9ou:003",
-          "smogon:gen9ou:010",
-          "showdown:gen9randomdoublesbattle:003",
-          "showdown:gen8randomdoublesbattle:003"
-        ],
-        "corpus_search": {
-          "status": "complete-current-review",
-          "pool_size": 1005,
-          "selection": "Four full-set final-evolution donors support the live-legal middle-form roles; no complete indexed team supplies this three-result Pledge relay."
-        },
-        "author_self_check": {
-          "strongest_part": "Player target order\u2014not a hidden script\u2014selects the next battlefield, and a double knockout is visibly rewarded.",
-          "weakest_link": "Removing both fragile leads erases the headline; that is intentional high-skill counterplay, with Liquid Voice preserving the earned endgame."
-        },
-        "record_source": "v2-ledger",
-        "location": "Route110",
-        "category": "optional guarded cycling double",
-        "strict_cap": 30,
-        "source_facts": {
-          "format": "double",
-          "source_record_formats": [
-            "double"
-          ],
-          "source_variant_count": 1,
-          "representative_party_size": 4,
-          "average_party_size": 4.0,
-          "species": [
-            "SPECIES_BRIONNE",
-            "SPECIES_DRIZZILE",
-            "SPECIES_RABOOT",
-            "SPECIES_THWACKEY"
-          ],
-          "items": [
-            "ITEM_MIRACLE_SEED",
-            "ITEM_MYSTIC_WATER",
-            "ITEM_WACAN_BERRY",
-            "ITEM_WIDE_LENS"
-          ],
-          "moves": [
-            "MOVE_FIRE_PLEDGE",
-            "MOVE_FLARE_BLITZ",
-            "MOVE_GRASS_PLEDGE",
-            "MOVE_GUNK_SHOT",
-            "MOVE_HELPING_HAND",
-            "MOVE_HYPER_VOICE",
-            "MOVE_KNOCK_OFF",
-            "MOVE_MOONBLAST",
-            "MOVE_MUD_SHOT",
-            "MOVE_PROTECT",
-            "MOVE_SUCKER_PUNCH",
-            "MOVE_WATER_PLEDGE",
-            "MOVE_WATER_PULSE",
-            "MOVE_WOOD_HAMMER"
-          ],
-          "synergy_tags": [],
-          "level_offsets": [
-            1,
-            2,
-            3
-          ],
-          "average_level_offset": 2.0,
-          "max_level_offset": 3,
-          "densities": {
-            "protect": 0.5,
-            "fake_out": 0.0,
-            "setup": 0.0,
-            "speed_control_or_priority": 1.0,
-            "premium_item": 0.0
-          }
-        }
-      },
       {
         "index": 63,
         "encounter_id": "BATTLE_063_ROUTE_110_CYCLING_JACOB",
@@ -1702,68 +1561,175 @@
             "premium_item": 0.25
           }
         }
+      },
+      {
+        "index": 72,
+        "encounter_id": "BATTLE_072_ROUTE_117_MARIA",
+        "identity": {
+          "location": "Route117",
+          "category": "optional moving Triathlete single",
+          "format": "single",
+          "strict_cap": 40,
+          "memory_hook": "Mythical Choice Band Zeraora opens a four-leg sprint, followed by a Sash Destiny Bond trade, special Encore setup, or physical priority setup chosen by native matchup logic."
+        },
+        "primary_player_question": "Can the player answer Choice-locked pivoting, a Sash trade, special setup plus Encore, and physical priority setup without one Ground or Water answer solving the entire sprint?",
+        "tempo": "Four changing fast singles legs\u2014lock and pivot, Sash trade, special setup, physical priority\u2014without a persistent field or custom AI subsystem.",
+        "pressure_sources": [
+          "level-42 Choice Band Volt Absorb Zeraora",
+          "Wild Charge recoil, Close Combat, Knock Off, and Volt Switch",
+          "level-41 Focus Sash Cursed Body Froslass",
+          "Ice Beam, Shadow Ball, Will-O-Wisp, and Destiny Bond",
+          "level-42 Life Orb Corrosion Salazzle",
+          "Flamethrower, Sludge Bomb, Nasty Plot, and Encore",
+          "level-43 Expert Belt Tough Claws Dusk Lycanroc",
+          "Accelerock, Stone Edge, Close Combat, and Swords Dance"
+        ],
+        "intentional_opening": "Zeraora is the only fixed slot. Choice Band makes its first attack or pivot readable after revelation, while Wild Charge recoil and Ground immunity create immediate counterplay. Every later replacement remains native matchup-ranked.",
+        "intentional_weakness": "All four are offense-first with no recovery or defensive field. Zeraora is choice-locked and takes recoil; Froslass depends on Sash and loses to priority or chip; Froslass and Salazzle are physically frail; Lycanroc is vulnerable before setup; three members expose Ground pressure and sturdy Water balance compresses the finish.",
+        "first_loss_lesson": "Raw Speed was not one puzzle. Read Zeraora's lock, preserve a Sash or Destiny Bond answer, deny the setup reserve that actually enters, and keep priority or Trick Room for Lycanroc rather than trying to outspeed all four.",
+        "revealed_information": [
+          "Badge 3 is required",
+          "Maria is an intentional single after three Route 117 doubles",
+          "Zeraora is the fixed mythical opener",
+          "local Zeraora uses legal Wild Charge rather than unavailable Plasma Fists",
+          "forced reserves use native matchup ranking",
+          "Froslass carries Sash, burn, and Destiny Bond",
+          "Salazzle has the exact published Encore setup set",
+          "Dusk Lycanroc has priority and Swords Dance",
+          "all four Match Call records are single-format",
+          "Zeraora remains separate player-obtainability debt"
+        ],
+        "counterplay_classes": [
+          "Ground immunity or resistance, Protect, Disable, Encore, Trick, item removal, and lock prediction into Zeraora",
+          "hazards, weather chip, priority, multi-hit moves, Scarf pressure, and Destiny Bond avoidance into Froslass",
+          "Haze, Clear Smog, Unaware, phazing, Taunt, paralysis, and revenge pressure into either setup lane",
+          "bulky Water, Ground, Rock, Steel, Fighting, Ghost, or Psychic answers by slot",
+          "Trick Room or speed reversal across the whole roster"
+        ],
+        "target_difficulty": 8.8,
+        "difficulty_rationale": "Four optimized legal levels 41-43, full distinct items, a mythical Band opener, Sash Destiny Bond, exact published Encore setup, and Tough Claws priority setup make a serious adaptation-heavy route single. No healing, broad Ground and Water pressure, Choice exploitation, Sash chip, setup denial, and Trick Room keep it below the adjacent doubles and bosses.",
+        "tuning_knob": "Tune Dusk Lycanroc from +3 to +2 first, then Zeraora from +2 to +1; preserve the four-leg identity and mythical opener.",
+        "playtest_status": "static-pass-runtime-unplayed",
+        "novelty_tags": [
+          "route-single",
+          "moving-triathlete",
+          "format-break",
+          "four-leg-sprint",
+          "zeraora",
+          "mythical-showcase",
+          "choice-band-lock",
+          "volt-switch",
+          "froslass-sash",
+          "destiny-bond",
+          "salazzle",
+          "encore-setup",
+          "lycanroc-dusk",
+          "accelerock",
+          "priority-closer",
+          "adaptive-replacement",
+          "no-mega",
+          "no-weather",
+          "no-terrain",
+          "no-room"
+        ],
+        "historic_reference_ids": [
+          "showdown:gen7randombattle:013",
+          "smogon:gen7uu:002",
+          "smogon:gen8uu:012",
+          "smogon:gen8uu:018",
+          "showdown:gen8randombattle:028",
+          "vgc:special-event-buenos-aires-2017"
+        ],
+        "corpus_search": {
+          "status": "complete-current-review",
+          "pool_size": 1005,
+          "selection": "Five complete donors support the four exact roles and one verified event winner supports Salazzle's legitimacy. The mixed four-leg sprint is transparently hand-authored, and unavailable local Plasma Fists is explicitly rejected for legal Wild Charge."
+        },
+        "author_self_check": {
+          "strongest_part": "Four fast Pok\u00e9mon ask four different questions without another subsystem, and an ordinary route trainer receives a memorable mythical opener in the rare-everywhere spirit of the game.",
+          "weakest_link": "Sturdy Ground and Water balance compresses the roster after identifying Zeraora's lock. That broad answer is intentional; Dusk Lycanroc level is the first tuning knob."
+        },
+        "record_source": "v2-ledger",
+        "location": "Route117",
+        "category": "optional moving single",
+        "strict_cap": 40,
+        "source_facts": {
+          "format": "single",
+          "source_record_formats": [
+            "single"
+          ],
+          "source_variant_count": 1,
+          "representative_party_size": 4,
+          "average_party_size": 4.0,
+          "species": [
+            "SPECIES_FROSLASS",
+            "SPECIES_LYCANROC_DUSK",
+            "SPECIES_SALAZZLE",
+            "SPECIES_ZERAORA"
+          ],
+          "items": [
+            "ITEM_CHOICE_BAND",
+            "ITEM_EXPERT_BELT",
+            "ITEM_FOCUS_SASH",
+            "ITEM_LIFE_ORB"
+          ],
+          "moves": [
+            "MOVE_ACCELEROCK",
+            "MOVE_CLOSE_COMBAT",
+            "MOVE_DESTINY_BOND",
+            "MOVE_ENCORE",
+            "MOVE_FLAMETHROWER",
+            "MOVE_ICE_BEAM",
+            "MOVE_KNOCK_OFF",
+            "MOVE_NASTY_PLOT",
+            "MOVE_SHADOW_BALL",
+            "MOVE_SLUDGE_BOMB",
+            "MOVE_STONE_EDGE",
+            "MOVE_SWORDS_DANCE",
+            "MOVE_VOLT_SWITCH",
+            "MOVE_WILD_CHARGE",
+            "MOVE_WILL_O_WISP"
+          ],
+          "synergy_tags": [],
+          "level_offsets": [
+            1,
+            2,
+            3
+          ],
+          "average_level_offset": 2.0,
+          "max_level_offset": 3,
+          "densities": {
+            "protect": 0.0,
+            "fake_out": 0.0,
+            "setup": 0.5,
+            "speed_control_or_priority": 0.25,
+            "premium_item": 1.0
+          }
+        }
       }
     ]
   },
   "hard_errors": [],
   "advisory_warnings": [
     {
-      "code": "FORMAT_STREAK",
-      "scope": "rolling-window",
-      "encounter_ids": [
-        "BATTLE_068_MAUVILLE_GYM_WATTSON",
-        "BATTLE_069_ROUTE_117_ANNA_AND_MEG",
-        "BATTLE_070_ROUTE_117_ISAAC",
-        "BATTLE_071_ROUTE_117_DYLAN"
-      ],
-      "message": "The last four encounters share one battle format.",
-      "evidence": {
-        "format": "double",
-        "streak": 4
-      },
-      "overridden": false,
-      "override_reason": null
-    },
-    {
       "code": "NOVELTY_TAG_REPEAT",
       "scope": "rolling-window",
       "encounter_ids": [
-        "BATTLE_062_ROUTE_110_CYCLING_JASMINE",
         "BATTLE_063_ROUTE_110_CYCLING_JACOB",
         "BATTLE_066_MAUVILLE_GYM_BEN",
         "BATTLE_068_MAUVILLE_GYM_WATTSON",
         "BATTLE_069_ROUTE_117_ANNA_AND_MEG",
         "BATTLE_070_ROUTE_117_ISAAC",
-        "BATTLE_071_ROUTE_117_DYLAN"
+        "BATTLE_071_ROUTE_117_DYLAN",
+        "BATTLE_072_ROUTE_117_MARIA"
       ],
       "message": "One or more mechanics recur in at least three rolling encounters.",
       "evidence": {
         "adaptive-reserve-selection": 3,
-        "guarded-double": 7,
+        "guarded-double": 6,
+        "no-mega": 3,
+        "no-weather": 3,
         "route-double": 3
-      },
-      "overridden": false,
-      "override_reason": null
-    },
-    {
-      "code": "PROTECT_DENSITY",
-      "scope": "rolling-window",
-      "encounter_ids": [
-        "BATTLE_062_ROUTE_110_CYCLING_JASMINE",
-        "BATTLE_063_ROUTE_110_CYCLING_JACOB",
-        "BATTLE_064_MAUVILLE_WALLY",
-        "BATTLE_065_MAUVILLE_GYM_VIVIAN_KIRK",
-        "BATTLE_066_MAUVILLE_GYM_BEN",
-        "BATTLE_067_MAUVILLE_GYM_SHAWN_ANGELO",
-        "BATTLE_068_MAUVILLE_GYM_WATTSON",
-        "BATTLE_069_ROUTE_117_ANNA_AND_MEG",
-        "BATTLE_070_ROUTE_117_ISAAC",
-        "BATTLE_071_ROUTE_117_DYLAN"
-      ],
-      "message": "Rolling protect density is high enough to merit an editorial look, not an automatic change.",
-      "evidence": {
-        "density": 0.457,
-        "threshold": 0.45
       },
       "overridden": false,
       "override_reason": null
@@ -1772,7 +1738,6 @@
       "code": "SPEED_CONTROL_DENSITY",
       "scope": "rolling-window",
       "encounter_ids": [
-        "BATTLE_062_ROUTE_110_CYCLING_JASMINE",
         "BATTLE_063_ROUTE_110_CYCLING_JACOB",
         "BATTLE_064_MAUVILLE_WALLY",
         "BATTLE_065_MAUVILLE_GYM_VIVIAN_KIRK",
@@ -1781,11 +1746,12 @@
         "BATTLE_068_MAUVILLE_GYM_WATTSON",
         "BATTLE_069_ROUTE_117_ANNA_AND_MEG",
         "BATTLE_070_ROUTE_117_ISAAC",
-        "BATTLE_071_ROUTE_117_DYLAN"
+        "BATTLE_071_ROUTE_117_DYLAN",
+        "BATTLE_072_ROUTE_117_MARIA"
       ],
       "message": "Rolling speed control or priority density is high enough to merit an editorial look, not an automatic change.",
       "evidence": {
-        "density": 0.75,
+        "density": 0.685,
         "threshold": 0.55
       },
       "overridden": false,
@@ -1802,14 +1768,16 @@
         "BATTLE_067_MAUVILLE_GYM_SHAWN_ANGELO",
         "BATTLE_068_MAUVILLE_GYM_WATTSON",
         "BATTLE_069_ROUTE_117_ANNA_AND_MEG",
-        "BATTLE_070_ROUTE_117_ISAAC"
+        "BATTLE_070_ROUTE_117_ISAAC",
+        "BATTLE_072_ROUTE_117_MARIA"
       ],
       "message": "A premium item appears across at least four rolling encounters.",
       "evidence": {
         "Assault Vest": 4,
         "Eviolite": 4,
-        "Expert Belt": 4,
-        "Focus Sash": 4
+        "Expert Belt": 5,
+        "Focus Sash": 5,
+        "Life Orb": 4
       },
       "overridden": false,
       "override_reason": null
@@ -1825,16 +1793,20 @@
         "BATTLE_068_MAUVILLE_GYM_WATTSON",
         "BATTLE_069_ROUTE_117_ANNA_AND_MEG",
         "BATTLE_070_ROUTE_117_ISAAC",
-        "BATTLE_071_ROUTE_117_DYLAN"
+        "BATTLE_071_ROUTE_117_DYLAN",
+        "BATTLE_072_ROUTE_117_MARIA"
       ],
       "message": "A non-generic move appears across at least four rolling encounters.",
       "evidence": {
+        "Close Combat": 4,
         "Dazzling Gleam": 4,
+        "Encore": 4,
         "Giga Drain": 4,
-        "Ice Beam": 5,
+        "Ice Beam": 6,
         "Ice Punch": 4,
         "Rock Slide": 4,
-        "Sludge Bomb": 4,
+        "Shadow Ball": 4,
+        "Sludge Bomb": 5,
         "Thunderbolt": 5
       },
       "overridden": false,
