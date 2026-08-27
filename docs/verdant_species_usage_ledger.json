@@ -10,11 +10,11 @@
   },
   "source_identity": {
     "docs/verdant_battle_sequence.json": "a98cc065cc93ffc2d78d21ea86cfb394612b208012f915a8e79e1689468ccb7b",
-    "docs/verdant_bespoke_battle_designs.json": "4e94a134607151c7b504c68c3ff7d882a8613a91e8cf317b3f5a1921ef751da9",
+    "docs/verdant_bespoke_battle_designs.json": "cbc72147dd8d9255b8166beed60153ceedbdbd73d4e0523c62f28bd4b470c28b",
     "docs/verdant_historic_team_reservations.json": "b6d485c178a02919a1c5709776d813d98bd416d0c7384616d2dc0376e4ab30ae",
     "docs/verdant_marquee_battle_designs.json": "ffa1c35cf391bc4dbed8aa708b7a2d4d7cd7c9eb02f00385b898c5fa902f1870",
     "src/data/trainers.h": "30a43dc3077b57b0be2fa1b5a7bac4eedc421a17db77a4a257173642c2a66b64",
-    "src/data/trainer_parties.h": "8a74f66091f94762bf6d53bf26b07c6070ca2d5d412871c665e4b0de71b2114c",
+    "src/data/trainer_parties.h": "6195d4a74cce98caee9e3a31af3bf1f64081a269e01b767183427a71b80381e4",
     "src/starter_choose.c": "7cc07796e9226a479d1b7da66ef17555e8a8e6de50516434720559d902b1b7d8"
   },
   "summary": {
@@ -4236,7 +4236,7 @@
     },
     {
       "species": "SPECIES_PINCURCHIN",
-      "appearance_count": 1,
+      "appearance_count": 2,
       "appearances": [
         {
           "battle_index": 26,
@@ -4244,6 +4244,16 @@
           "trainer_ids": [
             "TRAINER_JANICE",
             "TRAINER_JERRY_1"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 53,
+          "encounter_id": "BATTLE_053_ROUTE_110_TIMMY",
+          "trainer_ids": [
+            "TRAINER_TIMMY"
           ],
           "basis": [
             "trainer-party"
@@ -4751,7 +4761,7 @@
     },
     {
       "species": "SPECIES_ROTOM",
-      "appearance_count": 2,
+      "appearance_count": 1,
       "appearances": [
         {
           "battle_index": 28,
@@ -4763,16 +4773,6 @@
             "TRAINER_BRENDAN_RUSTBORO_TREECKO",
             "TRAINER_BRENDAN_RUSTBORO_TORCHIC",
             "TRAINER_BRENDAN_RUSTBORO_MUDKIP"
-          ],
-          "basis": [
-            "trainer-party"
-          ]
-        },
-        {
-          "battle_index": 53,
-          "encounter_id": "BATTLE_053_ROUTE_110_TIMMY",
-          "trainer_ids": [
-            "TRAINER_TIMMY"
           ],
           "basis": [
             "trainer-party"
@@ -6509,6 +6509,14 @@
       ]
     },
     {
+      "species": "SPECIES_PINCURCHIN",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_026_ROUTE_116_JANICE_JERRY",
+        "BATTLE_053_ROUTE_110_TIMMY"
+      ]
+    },
+    {
       "species": "SPECIES_PRINPLUP",
       "appearance_count": 2,
       "encounter_ids": [
@@ -6538,14 +6546,6 @@
       "encounter_ids": [
         "BATTLE_048_SLATEPORT_MUSEUM_ARCHIE",
         "BATTLE_068_MAUVILLE_GYM_WATTSON"
-      ]
-    },
-    {
-      "species": "SPECIES_ROTOM",
-      "appearance_count": 2,
-      "encounter_ids": [
-        "BATTLE_028_RUSTBORO_RIVAL",
-        "BATTLE_053_ROUTE_110_TIMMY"
       ]
     },
     {
