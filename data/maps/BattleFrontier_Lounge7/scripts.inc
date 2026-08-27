@@ -445,8 +445,7 @@ PokemonCenterMoveTutor_Text_AquaTailDesc::
 PokemonCenterMoveTutor_Text_PowerGemDesc::
 	.string "Attacks with a ray\n"
 	.string "of light that\n"
-	.string "sparkles like gems.$"
-
+	.string "glints like gems.$"
 PokemonCenterMoveTutor_Text_BounceDesc::
 	.string "Bounces up, then\n"
 	.string "down next turn.\n"
@@ -550,9 +549,8 @@ PokemonCenterMoveTutor_Text_HeatWaveDesc::
 
 PokemonCenterMoveTutor_Text_LiquidationDesc::
 	.string "Slams the target\n"
-	.string "with a water blast.\n"
-	.string "May lower Defense.$"
-
+	.string "with water. May\n"
+	.string "lower Defense.$"
 PokemonCenterMoveTutor_Text_BatonPassDesc::
 	.string "Switches out the\n"
 	.string "user while keeping\n"
@@ -601,13 +599,11 @@ PokemonCenterMoveTutor_Text_ElectricTerrainDesc::
 PokemonCenterMoveTutor_Text_MistyTerrainDesc::
 	.string "Covers the field\n"
 	.string "in mist. Prevents\n"
-	.string "status conditions.$"
-
+	.string "status problems.$"
 PokemonCenterMoveTutor_Text_PsychicTerrainDesc::
-	.string "Protects Pokémon\n"
-	.string "on the ground from\n"
+	.string "Guards grounded\n"
+	.string "Pokémon from\n"
 	.string "priority moves.$"
-
 PokemonCenterMoveTutor_Text_PowerUpPunchDesc::
 	.string "A hard punch that\n"
 	.string "raises the user's\n"

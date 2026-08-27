@@ -16,6 +16,7 @@ General_Mart_Script::
 	release
 	end
 
+	.align 2
 PokeMart_Poke_Center_No_Badges::
 	.2byte ITEM_POTION
 	.2byte ITEM_ANTIDOTE

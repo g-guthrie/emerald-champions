@@ -168,6 +168,11 @@ subprocess.run(
     check=True,
 )
 subprocess.run(
+    [sys.executable, str(ROOT / "scripts/verify_pokemon_center_tutor_ui.py")],
+    cwd=ROOT,
+    check=True,
+)
+subprocess.run(
     [sys.executable, str(ROOT / "scripts/emerald_champions_availability_report.py"), "--check"],
     cwd=ROOT,
     check=True,

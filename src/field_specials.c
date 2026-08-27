@@ -2592,7 +2592,8 @@ void ShowScrollableMultichoice(void)
                 task->tNumItems = GetVerdantBattleSetCount(&gPlayerParty[gSpecialVar_0x800A]) + 1;
             else
                 task->tNumItems = 1;
-            task->tMaxItemsOnScreen = task->tNumItems;
+            // The 8-tile-tall window fits exactly 4 rows; scroll beyond that.
+            task->tMaxItemsOnScreen = min(task->tNumItems, 4);
             task->tLeft = 10;
             task->tTop = 1;
             task->tWidth = 20;
