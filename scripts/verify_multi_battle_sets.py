@@ -185,7 +185,10 @@ check(
     "case SCROLL_MULTI_BATTLE_SET_STYLE:" in field
     and "task->tNumItems = GetVerdantBattleSetCount" in field
     and "text = GetVerdantBattleSetName" in field
-    and "task->tMaxItemsOnScreen = task->tNumItems" in field,
+    and (
+        "task->tMaxItemsOnScreen = task->tNumItems" in field
+        or "task->tMaxItemsOnScreen = min(task->tNumItems, 4)" in field
+    ),
 )
 check(
     "the script preserves the chosen party slot, set index, confirmation, and cancellation paths",

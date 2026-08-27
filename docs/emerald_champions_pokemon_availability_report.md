@@ -8,7 +8,7 @@ The report distinguishes **within-method species probability** from an encounter
 
 ## Technical summary
 
-- Source state: commit `d38f0f470f1fd2a5924dc48894f804b1ad631c4f`; clean working tree at generation: **False**.
+- Source state: commit `88805ebfccf2d14da1e55837bd605abb3e47e100`; clean working tree at generation: **False**.
 - Random encounter coverage: **139** populated main overworld maps from **147** configured entries, plus **576** distinct species/forms in catchable random pools.
 - Loadout system: **1309** total competitive sets. Wild Pokémon roll the exact one/two/three-set tutor count at 100%, 50/50, or approximately one-third each.
 - Item system: **65** ordinary competitive held items are free and unlimited. Berries and evolution/transformation progression items are not vendor stock.

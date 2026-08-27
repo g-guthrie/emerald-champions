@@ -1,14 +1,14 @@
 {
   "meta": {
     "title": "Emerald Champions — Complete Pokémon Encounter and Acquisition Report",
-    "generated_at": "2026-08-27T21:07:50Z",
-    "source_commit": "d38f0f470f1fd2a5924dc48894f804b1ad631c4f",
+    "generated_at": "2026-08-27T21:12:56Z",
+    "source_commit": "88805ebfccf2d14da1e55837bd605abb3e47e100",
     "source_clean": false,
     "scope": "All current random encounter tables plus source-resolved non-random acquisition paths and every runtime species/form ID."
   },
   "game_context": {
     "identity": "Emerald Champions is an extremely hard, doubles-focused competitive Pokémon campaign built on Emerald/Inclement Emerald foundations.",
-    "difficulty": "Challenge Mode, mandatory Set battle style, strict caps, most authored battles intended to require adaptation, and bosses designed as near-maximum difficulty puzzles.",
+    "difficulty": "Challenge Mode, mandatory Set battle style, and strict caps remain permanent. The native live Difficulty option changes only opposing trainer levels: Hard uses authored levels, Medium subtracts two, and Easy subtracts four. Teams, evolution stages, moves, items, abilities, natures, EVs, AI, formats, and player caps remain identical.",
     "opening": "The player selects from 21 Generation 1–7 starters. The first Route 103 rival uses the same-region type-counter starter at level 15 against the opening cap of 14.",
     "battle_inventory": "The current guide resolves 810 reachable battle definitions: 565 doubles and 289 intentional singles. The first 72 canonical encounters have source-closed bespoke redesigns; the remaining campaign is still part of the continuing battle-authoring program.",
     "level_caps": [
@@ -24,6 +24,7 @@
       101
     ],
     "moves": "No automatic level-up move learning. The Pokémon Center teacher offers every locally legal level, Egg, TM/HM, and tutor move.",
+    "text_speed": "Text is permanently extra-fast: zero delay between glyphs and scrolling twice as fast as the former Fast setting. The former Text Speed option bits now store live trainer-level difficulty without changing the save layout.",
     "leveling": "The reusable Leveler raises the whole eligible party to the current cap; Rare Candy raises up to ten levels while stopping at the cap or next level evolution.",
     "loadouts": "1143 authored defaults plus 166 handbook-derived alternatives (1309 total). Ordinary wild Pokémon uniformly roll their actual one-to-three tutor sets and fight with the rolled moves, nature, ability, and held item.",
     "items": "65 ordinary competitive held items are free and unlimited at the Pokémon Center vendor. Berries remain an exploration, harvesting, and planting economy. Mega Stones, evolution catalysts, Primal Orbs, Plates, Drives, Memories, Ogerpon masks, Rusted items, and similar form/progression equipment remain protected.",

@@ -163,6 +163,11 @@ subprocess.run(
     check=True,
 )
 subprocess.run(
+    [sys.executable, str(ROOT / "scripts/verify_live_trainer_difficulty.py")],
+    cwd=ROOT,
+    check=True,
+)
+subprocess.run(
     [sys.executable, str(ROOT / "scripts/emerald_champions_availability_report.py"), "--check"],
     cwd=ROOT,
     check=True,

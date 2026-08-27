@@ -615,11 +615,12 @@ def build_report() -> tuple[dict, str, dict]:
         },
         "game_context": {
             "identity": "Emerald Champions is an extremely hard, doubles-focused competitive Pokémon campaign built on Emerald/Inclement Emerald foundations.",
-            "difficulty": "Challenge Mode, mandatory Set battle style, strict caps, most authored battles intended to require adaptation, and bosses designed as near-maximum difficulty puzzles.",
+            "difficulty": "Challenge Mode, mandatory Set battle style, and strict caps remain permanent. The native live Difficulty option changes only opposing trainer levels: Hard uses authored levels, Medium subtracts two, and Easy subtracts four. Teams, evolution stages, moves, items, abilities, natures, EVs, AI, formats, and player caps remain identical.",
             "opening": "The player selects from 21 Generation 1–7 starters. The first Route 103 rival uses the same-region type-counter starter at level 15 against the opening cap of 14.",
             "battle_inventory": f"The current guide resolves {battle_meta['reachableBattleDefinitions']} reachable battle definitions: {quality_meta['doubles']} doubles and {quality_meta['singles']} intentional singles. The first {battle_meta['bespokeClosed']} canonical encounters have source-closed bespoke redesigns; the remaining campaign is still part of the continuing battle-authoring program.",
             "level_caps": LEVEL_CAPS,
             "moves": "No automatic level-up move learning. The Pokémon Center teacher offers every locally legal level, Egg, TM/HM, and tutor move.",
+            "text_speed": "Text is permanently extra-fast: zero delay between glyphs and scrolling twice as fast as the former Fast setting. The former Text Speed option bits now store live trainer-level difficulty without changing the save layout.",
             "leveling": "The reusable Leveler raises the whole eligible party to the current cap; Rare Candy raises up to ten levels while stopping at the cap or next level evolution.",
             "loadouts": f"{defaults['supported_count']} authored defaults plus {loadouts['alternative_count']} handbook-derived alternatives ({loadouts['set_count']} total). Ordinary wild Pokémon uniformly roll their actual one-to-three tutor sets and fight with the rolled moves, nature, ability, and held item.",
             "items": f"{loadouts['free_item_count']} ordinary competitive held items are free and unlimited at the Pokémon Center vendor. Berries remain an exploration, harvesting, and planting economy. Mega Stones, evolution catalysts, Primal Orbs, Plates, Drives, Memories, Ogerpon masks, Rusted items, and similar form/progression equipment remain protected.",

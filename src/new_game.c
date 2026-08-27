@@ -93,7 +93,7 @@ static void InitPlayerTrainerId(void)
 // L=A isnt set here for some reason.
 static void SetDefaultOptions(void)
 {
-    gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_FAST;
+    gSaveBlock2Ptr->optionsTextSpeed = TRAINER_LEVEL_DIFFICULTY_HARD;
     gSaveBlock2Ptr->optionsWindowFrameType = 0;
     gSaveBlock2Ptr->optionsSound = OPTIONS_SOUND_STEREO;
     gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SET;
@@ -172,6 +172,7 @@ void NewGameInitData(void)
     InitEventData();
     FlagSet(FLAG_EMERALD_CHAMPIONS_MIGRATED_GYM_REWARDS);
     FlagSet(FLAG_EMERALD_CHAMPIONS_MIGRATED_ITEM_BALLS);
+    FlagSet(FLAG_EMERALD_CHAMPIONS_DIFFICULTY_MIGRATED);
     ClearTVShowData();
     ResetGabbyAndTy();
     ClearSecretBases();

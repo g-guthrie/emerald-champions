@@ -107,6 +107,13 @@
 #define OPTIONS_TEXT_SPEED_SLOW 0
 #define OPTIONS_TEXT_SPEED_MID 1
 #define OPTIONS_TEXT_SPEED_FAST 2
+#define OPTIONS_TEXT_SPEED_EXTRA_FAST 3
+
+// Stored in the former text-speed option bits. This affects only opposing
+// trainer levels; Challenge Mode, strict caps, AI, sets, items, and EVs stay on.
+#define TRAINER_LEVEL_DIFFICULTY_HARD   0
+#define TRAINER_LEVEL_DIFFICULTY_MEDIUM 1
+#define TRAINER_LEVEL_DIFFICULTY_EASY   2
 
 #define OPTIONS_SOUND_MONO 0
 #define OPTIONS_SOUND_STEREO 1

@@ -113,6 +113,14 @@ void MigrateVerdantGen9WorldItems(void)
     if (!FlagGet(FLAG_EMERALD_CHAMPIONS_MIGRATED_ITEM_BALLS)
      && TryAddEmeraldChampionsItemBallMigration())
         FlagSet(FLAG_EMERALD_CHAMPIONS_MIGRATED_ITEM_BALLS);
+
+    // Existing saves used this field for text speed and would otherwise load
+    // the old Fast value (2) as Easy. Migrate once to the authored Hard mode.
+    if (!FlagGet(FLAG_EMERALD_CHAMPIONS_DIFFICULTY_MIGRATED))
+    {
+        gSaveBlock2Ptr->optionsTextSpeed = TRAINER_LEVEL_DIFFICULTY_HARD;
+        FlagSet(FLAG_EMERALD_CHAMPIONS_DIFFICULTY_MIGRATED);
+    }
 }
 
 // Divide save blocks into individual chunks to be written to flash sectors

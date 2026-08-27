@@ -84,6 +84,7 @@ static void CB2_HandleStartMultiBattle(void);
 static void CB2_HandleStartBattle(void);
 static void TryCorrectShedinjaLanguage(struct Pokemon *mon);
 static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 firstTrainer);
+static void ApplyLiveTrainerLevelDifficulty(void);
 static bool8 IsRoute103RivalTrainer(u16 trainerNum);
 static bool8 IsRustboroRivalTrainer(u16 trainerNum);
 static bool8 IsRoute110RivalTrainer(u16 trainerNum);
@@ -666,6 +667,8 @@ static void CB2_InitBattleInternal(void)
         CreateNPCTrainerParty(&gEnemyParty[0], gTrainerBattleOpponent_A, TRUE);
         if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS && !BATTLE_TWO_VS_ONE_OPPONENT)
             CreateNPCTrainerParty(&gEnemyParty[3], gTrainerBattleOpponent_B, FALSE);
+        if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+            ApplyLiveTrainerLevelDifficulty();
         SetWildMonHeldItem();
     }
 
@@ -2091,6 +2094,44 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
     }
 
     return gTrainers[trainerNum].partySize;
+}
+
+static void ApplyLiveTrainerLevelDifficulty(void)
+{
+    u8 reduction;
+    u8 i;
+
+    switch (gSaveBlock2Ptr->optionsTextSpeed)
+    {
+    case TRAINER_LEVEL_DIFFICULTY_MEDIUM:
+        reduction = 2;
+        break;
+    case TRAINER_LEVEL_DIFFICULTY_EASY:
+        reduction = 4;
+        break;
+    case TRAINER_LEVEL_DIFFICULTY_HARD:
+    default:
+        return;
+    }
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        u16 species = GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2, NULL);
+        u16 maxHp;
+        u8 level;
+        u32 exp;
+
+        if (species == SPECIES_NONE || species == SPECIES_EGG)
+            continue;
+        level = GetMonData(&gEnemyParty[i], MON_DATA_LEVEL, NULL);
+        level = level > reduction ? level - reduction : 1;
+        exp = gExperienceTables[gBaseStats[species].growthRate][level];
+        SetMonData(&gEnemyParty[i], MON_DATA_EXP, &exp);
+        SetMonData(&gEnemyParty[i], MON_DATA_LEVEL, &level);
+        CalculateMonStats(&gEnemyParty[i]);
+        maxHp = GetMonData(&gEnemyParty[i], MON_DATA_MAX_HP, NULL);
+        SetMonData(&gEnemyParty[i], MON_DATA_HP, &maxHp);
+    }
 }
 
 static bool8 IsRoute103RivalTrainer(u16 trainerNum)
