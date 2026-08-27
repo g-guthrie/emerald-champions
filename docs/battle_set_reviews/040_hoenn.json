@@ -1,0 +1,2710 @@
+{
+  "batch_id": "hoenn-national-dex-252-386-v1",
+  "reviews": [
+    {
+      "ability": "ABILITY_UNBURDEN",
+      "dependency_notes": [
+        "ITEM_GRASSY_SEED is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability.",
+        "Setup is safer beside Fake Out, redirection, screens, or other partner disruption."
+      ],
+      "doubles_rationale": "Treecko uses Unburden with Swords Dance, Bullet Seed, Acrobatics, Protect; the four slots form a coherent unburden setup attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_GRASSY_SEED supports the unburden setup attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_SWORDS_DANCE",
+        "MOVE_BULLET_SEED",
+        "MOVE_ACROBATICS",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Added Protect so the Grassy Seed and setup plan can be positioned safely. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Unburden setup attacker",
+      "source_refs": [
+        "Smogon Gen 8 lc Treecko set: Sweeper",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_TREECKO"
+      ],
+      "species": "SPECIES_TREECKO",
+      "suggested_item": "ITEM_GRASSY_SEED"
+    },
+    {
+      "ability": "ABILITY_UNBURDEN",
+      "dependency_notes": [
+        "ITEM_GRASSY_SEED is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability.",
+        "Setup is safer beside Fake Out, redirection, screens, or other partner disruption."
+      ],
+      "doubles_rationale": "Grovyle uses Unburden with Swords Dance, Leaf Blade, Acrobatics, Protect; the four slots form a coherent unburden setup attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_GRASSY_SEED supports the unburden setup attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_SWORDS_DANCE",
+        "MOVE_LEAF_BLADE",
+        "MOVE_ACROBATICS",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Added Protect and removed excess coverage from the singles adaptation. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Unburden setup attacker",
+      "source_refs": [
+        "Smogon Gen 9 nfe Grovyle set: Grassy Terrain",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_GROVYLE"
+      ],
+      "species": "SPECIES_GROVYLE",
+      "suggested_item": "ITEM_GRASSY_SEED"
+    },
+    {
+      "ability": "ABILITY_OVERGROW",
+      "dependency_notes": [
+        "ITEM_SCEPTILITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Sceptile uses Overgrow with Leaf Storm, Dragon Pulse, Quick Guard, Detect; the four slots form a coherent sceptile special attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_SCEPTILITE supports the sceptile special attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_LEAF_STORM",
+        "MOVE_DRAGON_PULSE",
+        "MOVE_QUICK_GUARD",
+        "MOVE_DETECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "review_notes": "Retained the strongest locally compatible doubles-first scaffold after one species-level sanity check. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Sceptile Special Attacker",
+      "source_refs": [
+        "Smogon Gen 6 battlespotdoubles Sceptile set: Special Attacker",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_SCEPTILE"
+      ],
+      "species": "SPECIES_SCEPTILE",
+      "suggested_item": "ITEM_SCEPTILITE"
+    },
+    {
+      "ability": "ABILITY_SPEED_BOOST",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability.",
+        "Setup is safer beside Fake Out, redirection, screens, or other partner disruption."
+      ],
+      "doubles_rationale": "Torchic uses Speed Boost with Swords Dance, Baton Pass, Flare Blitz, Protect; the four slots form a coherent speed boost setup passer pattern with immediate doubles value.",
+      "item_context": "ITEM_EVIOLITE supports the speed boost setup passer role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_SWORDS_DANCE",
+        "MOVE_BATON_PASS",
+        "MOVE_FLARE_BLITZ",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Removed redundant Agility and gave Speed Boost a protected Baton Pass plan. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Speed Boost setup passer",
+      "source_refs": [
+        "Smogon Gen 5 lc Torchic set: Baton Pass",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_TORCHIC"
+      ],
+      "species": "SPECIES_TORCHIC",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_SPEED_BOOST",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability.",
+        "Setup is safer beside Fake Out, redirection, screens, or other partner disruption."
+      ],
+      "doubles_rationale": "Combusken uses Speed Boost with Swords Dance, Protect, Flare Blitz, Brick Break; the four slots form a coherent combusken swords dance pattern with immediate doubles value.",
+      "item_context": "ITEM_EVIOLITE supports the combusken swords dance role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_SWORDS_DANCE",
+        "MOVE_PROTECT",
+        "MOVE_FLARE_BLITZ",
+        "MOVE_BRICK_BREAK"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Retained the strongest locally compatible doubles-first scaffold after one species-level sanity check. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Combusken Swords Dance",
+      "source_refs": [
+        "Smogon Gen 8 nfe Combusken set: Swords Dance",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_COMBUSKEN"
+      ],
+      "species": "SPECIES_COMBUSKEN",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_SPEED_BOOST",
+      "dependency_notes": [
+        "ITEM_BLAZIKENITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Blaziken uses Speed Boost with Flare Blitz, Low Kick, Rock Slide, Protect; the four slots form a coherent blaziken physical attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_BLAZIKENITE supports the blaziken physical attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_FLARE_BLITZ",
+        "MOVE_LOW_KICK",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Retained the strongest locally compatible doubles-first scaffold after one species-level sanity check. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Blaziken Physical Attacker",
+      "source_refs": [
+        "Smogon Gen 6 battlespotdoubles Blaziken set: Physical Attacker",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_BLAZIKEN"
+      ],
+      "species": "SPECIES_BLAZIKEN",
+      "suggested_item": "ITEM_BLAZIKENITE"
+    },
+    {
+      "ability": "ABILITY_TORRENT",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Mudkip uses Torrent with Waterfall, Icy Wind, Superpower, Protect; the four slots form a coherent bulky speed-control attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_EVIOLITE supports the bulky speed-control attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_WATERFALL",
+        "MOVE_ICY_WIND",
+        "MOVE_SUPERPOWER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Removed the mixed nature and weather dependency and added doubles speed control plus protection. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Bulky speed-control attacker",
+      "source_refs": [
+        "Smogon Gen 7 lc Mudkip set: Bulky Attacker",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_MUDKIP"
+      ],
+      "species": "SPECIES_MUDKIP",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_TORRENT",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability.",
+        "The spread move can hit the ally, so pair it with immunity, Telepathy, or Protect."
+      ],
+      "doubles_rationale": "Marshtomp uses Torrent with Earthquake, Waterfall, Ice Punch, Protect; the four slots form a coherent bulky dual-stab attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_EVIOLITE supports the bulky dual-stab attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_EARTHQUAKE",
+        "MOVE_WATERFALL",
+        "MOVE_ICE_PUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Removed hazards and added Protect while keeping its strongest legal Ground coverage. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Bulky dual-STAB attacker",
+      "source_refs": [
+        "Smogon Gen 9 nfe Marshtomp set: Offensive Stealth Rock",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_MARSHTOMP"
+      ],
+      "species": "SPECIES_MARSHTOMP",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_DAMP",
+      "dependency_notes": [
+        "ITEM_SWAMPERTITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability.",
+        "The spread move can hit the ally, so pair it with immunity, Telepathy, or Protect."
+      ],
+      "doubles_rationale": "Swampert uses Damp with Waterfall, Earthquake, Superpower, Protect; the four slots form a coherent swampert rain attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_SWAMPERTITE supports the swampert rain attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_WATERFALL",
+        "MOVE_EARTHQUAKE",
+        "MOVE_SUPERPOWER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Retained the strongest locally compatible doubles-first scaffold after one species-level sanity check. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Swampert Rain Attacker",
+      "source_refs": [
+        "Smogon Gen 7 doublesou Swampert set: Rain Attacker",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_SWAMPERT"
+      ],
+      "species": "SPECIES_SWAMPERT",
+      "suggested_item": "ITEM_SWAMPERTITE"
+    },
+    {
+      "ability": "ABILITY_INTIMIDATE",
+      "dependency_notes": [
+        "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Mightyena uses Intimidate with Sucker Punch, Play Rough, Crunch, Howl; the four slots form a coherent mightyena direct doubles attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_LIFE_ORB supports the mightyena direct doubles attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_PLAY_ROUGH",
+        "MOVE_CRUNCH",
+        "MOVE_HOWL"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Retained the strongest locally compatible doubles-first scaffold after one species-level sanity check. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Mightyena direct doubles attacker",
+      "source_refs": [
+        "Checked-in competitive corpus: showdown:gen9randomdoublesbattle:011",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_MIGHTYENA"
+      ],
+      "species": "SPECIES_MIGHTYENA",
+      "suggested_item": "ITEM_LIFE_ORB"
+    },
+    {
+      "ability": "ABILITY_GLUTTONY",
+      "dependency_notes": [
+        "ITEM_WIKI_BERRY is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability.",
+        "Setup is safer beside Fake Out, redirection, screens, or other partner disruption."
+      ],
+      "doubles_rationale": "Linoone uses Gluttony with Throat Chop, Protect, Extreme Speed, Belly Drum; the four slots form a coherent linoone direct doubles attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_WIKI_BERRY supports the linoone direct doubles attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_THROAT_CHOP",
+        "MOVE_PROTECT",
+        "MOVE_EXTREME_SPEED",
+        "MOVE_BELLY_DRUM"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Retained the strongest locally compatible doubles-first scaffold after one species-level sanity check. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Linoone direct doubles attacker",
+      "source_refs": [
+        "Checked-in competitive corpus: showdown:gen8randomdoublesbattle:021",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_LINOONE"
+      ],
+      "species": "SPECIES_LINOONE",
+      "suggested_item": "ITEM_WIKI_BERRY"
+    },
+    {
+      "ability": "ABILITY_SWIFT_SWIM",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability.",
+        "The weather-linked ability is optional upside; the selected moves remain usable when that weather is absent."
+      ],
+      "doubles_rationale": "Lombre uses Swift Swim with Fake Out, Giga Drain, Scald, Protect; the four slots form a coherent rain fake out attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_EVIOLITE supports the rain fake out attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_GIGA_DRAIN",
+        "MOVE_SCALD",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "review_notes": "Replaced singles Leech Seed and Substitute with immediate doubles tempo. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Rain Fake Out attacker",
+      "source_refs": [
+        "Checked-in competitive corpus: showdown:gen4randombattle:024",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_LOMBRE"
+      ],
+      "species": "SPECIES_LOMBRE",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_SWIFT_SWIM",
+      "dependency_notes": [
+        "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability.",
+        "The weather-linked ability is optional upside; the selected moves remain usable when that weather is absent."
+      ],
+      "doubles_rationale": "Ludicolo uses Swift Swim with Hydro Pump, Energy Ball, Ice Beam, Protect; the four slots form a coherent ludicolo rain attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_LIFE_ORB supports the ludicolo rain attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_HYDRO_PUMP",
+        "MOVE_ENERGY_BALL",
+        "MOVE_ICE_BEAM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "review_notes": "Retained the strongest locally compatible doubles-first scaffold after one species-level sanity check. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Ludicolo Rain Attacker",
+      "source_refs": [
+        "Smogon Gen 7 doublesou Ludicolo set: Rain Attacker",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_LUDICOLO"
+      ],
+      "species": "SPECIES_LUDICOLO",
+      "suggested_item": "ITEM_LIFE_ORB"
+    },
+    {
+      "ability": "ABILITY_CHLOROPHYLL",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability.",
+        "The weather-linked ability is optional upside; the selected moves remain usable when that weather is absent."
+      ],
+      "doubles_rationale": "Nuzleaf uses Chlorophyll with Fake Out, Leaf Blade, Sucker Punch, Protect; the four slots form a coherent sun fake out attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_EVIOLITE supports the sun fake out attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_LEAF_BLADE",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Replaced the deterministic fallback with priority, dual pressure, and Protect. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Sun Fake Out attacker",
+      "source_refs": [
+        "Smogon Gen 4-9 Nuzleaf analyses reviewed; no complete direct doubles scaffold was locally compatible",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_NUZLEAF"
+      ],
+      "species": "SPECIES_NUZLEAF",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_CHLOROPHYLL",
+      "dependency_notes": [
+        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability.",
+        "The weather-linked ability is optional upside; the selected moves remain usable when that weather is absent."
+      ],
+      "doubles_rationale": "Shiftry uses Chlorophyll with Fake Out, Leaf Storm, Dark Pulse, Protect; the four slots form a coherent shiftry special attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_FOCUS_SASH supports the shiftry special attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_LEAF_STORM",
+        "MOVE_DARK_PULSE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "review_notes": "Retained the strongest locally compatible doubles-first scaffold after one species-level sanity check. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Shiftry Special Attacker",
+      "source_refs": [
+        "Smogon Gen 5 vgc2012 Shiftry set: Special Attacker",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_SHIFTRY"
+      ],
+      "species": "SPECIES_SHIFTRY",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_GUTS",
+      "dependency_notes": [
+        "ITEM_FLAME_ORB is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability.",
+        "The status ability needs the advisory orb or opponent-inflicted status to self-activate."
+      ],
+      "doubles_rationale": "Swellow uses Guts with Protect, Quick Attack, Facade, Brave Bird; the four slots form a coherent swellow direct doubles attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_FLAME_ORB supports the swellow direct doubles attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_PROTECT",
+        "MOVE_QUICK_ATTACK",
+        "MOVE_FACADE",
+        "MOVE_BRAVE_BIRD"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Retained the strongest locally compatible doubles-first scaffold after one species-level sanity check. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Swellow direct doubles attacker",
+      "source_refs": [
+        "Checked-in competitive corpus: showdown:gen7randomdoublesbattle:025",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_SWELLOW"
+      ],
+      "species": "SPECIES_SWELLOW",
+      "suggested_item": "ITEM_FLAME_ORB"
+    },
+    {
+      "ability": "ABILITY_TRACE",
+      "dependency_notes": [
+        "ITEM_GARDEVOIRITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability.",
+        "Setup is safer beside Fake Out, redirection, screens, or other partner disruption."
+      ],
+      "doubles_rationale": "Gardevoir uses Trace with Hyper Voice, Psyshock, Calm Mind, Protect; the four slots form a coherent gardevoir special attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_GARDEVOIRITE supports the gardevoir special attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_HYPER_VOICE",
+        "MOVE_PSYSHOCK",
+        "MOVE_CALM_MIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "review_notes": "Retained the strongest locally compatible doubles-first scaffold after one species-level sanity check. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Gardevoir Special Attacker",
+      "source_refs": [
+        "Smogon Gen 9 nationaldexdoubles Gardevoir set: Special Attacker",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_GARDEVOIR"
+      ],
+      "species": "SPECIES_GARDEVOIR",
+      "suggested_item": "ITEM_GARDEVOIRITE"
+    },
+    {
+      "ability": "ABILITY_TECHNICIAN",
+      "dependency_notes": [
+        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Breloom uses Technician with Spore, Mach Punch, Bullet Seed, Protect; the four slots form a coherent breloom offensive spore pattern with immediate doubles value.",
+      "item_context": "ITEM_FOCUS_SASH supports the breloom offensive spore role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_SPORE",
+        "MOVE_MACH_PUNCH",
+        "MOVE_BULLET_SEED",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Retained the strongest locally compatible doubles-first scaffold after one species-level sanity check. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Breloom Offensive Spore",
+      "source_refs": [
+        "Smogon Gen 6 battlespotdoubles Breloom set: Offensive Spore",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_BRELOOM"
+      ],
+      "species": "SPECIES_BRELOOM",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_VITAL_SPIRIT",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Vigoroth uses Vital Spirit with Encore, Double Edge, Low Kick, Protect; the four slots form a coherent encore utility attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_EVIOLITE supports the encore utility attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_ENCORE",
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_LOW_KICK",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Removed the Substitute-Focus Punch singles dependency. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Encore utility attacker",
+      "source_refs": [
+        "Smogon Gen 4 uu Vigoroth set: Encore + Substitute",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_VIGOROTH"
+      ],
+      "species": "SPECIES_VIGOROTH",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_TRUANT",
+      "dependency_notes": [
+        "ITEM_CHOICE_SCARF is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability.",
+        "The spread move can hit the ally, so pair it with immunity, Telepathy, or Protect."
+      ],
+      "doubles_rationale": "Slaking uses Truant with Double Edge, Earthquake, Rock Slide, Sucker Punch; the four slots form a coherent choice scarf truant breaker pattern with immediate doubles value.",
+      "item_context": "ITEM_CHOICE_SCARF supports the choice scarf truant breaker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_EARTHQUAKE",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_SUCKER_PUNCH"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Removed weak Pursuit and Night Slash while preserving a four-attack set that never wastes an active Truant turn. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Choice Scarf Truant breaker",
+      "source_refs": [
+        "Smogon Gen 5 zu Slaking set: Choice Scarf",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_SLAKING"
+      ],
+      "species": "SPECIES_SLAKING",
+      "suggested_item": "ITEM_CHOICE_SCARF"
+    },
+    {
+      "ability": "ABILITY_COMPOUND_EYES",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Nincada uses Compound Eyes with X Scissor, Aerial Ace, Toxic, Protect; the four slots form a coherent young utility attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_EVIOLITE supports the young utility attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_X_SCISSOR",
+        "MOVE_AERIAL_ACE",
+        "MOVE_TOXIC",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Added Protect and kept only attacks that are immediately functional. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Young utility attacker",
+      "source_refs": [
+        "Checked-in competitive corpus: showdown:gen5randomdoublesbattle:023",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_NINCADA"
+      ],
+      "species": "SPECIES_NINCADA",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_SPEED_BOOST",
+      "dependency_notes": [
+        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Ninjask uses Speed Boost with X Scissor, Aerial Ace, Baton Pass, Protect; the four slots form a coherent speed boost passer pattern with immediate doubles value.",
+      "item_context": "ITEM_FOCUS_SASH supports the speed boost passer role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_X_SCISSOR",
+        "MOVE_AERIAL_ACE",
+        "MOVE_BATON_PASS",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Removed two-turn Dig and made Speed Boost passing the clear doubles role. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Speed Boost passer",
+      "source_refs": [
+        "Smogon Gen 5 vgc2012 Ninjask set: Physical Attacker",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_NINJASK"
+      ],
+      "species": "SPECIES_NINJASK",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_WONDER_GUARD",
+      "dependency_notes": [
+        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Shedinja uses Wonder Guard with X Scissor, Shadow Sneak, Protect, Sunny Day; the four slots form a coherent shedinja physical attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_FOCUS_SASH supports the shedinja physical attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_X_SCISSOR",
+        "MOVE_SHADOW_SNEAK",
+        "MOVE_PROTECT",
+        "MOVE_SUNNY_DAY"
+      ],
+      "nature": "NATURE_LONELY",
+      "review_notes": "Retained the strongest locally compatible doubles-first scaffold after one species-level sanity check. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Shedinja Physical Attacker",
+      "source_refs": [
+        "Smogon Gen 5 vgc2012 Shedinja set: Physical Attacker",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_SHEDINJA"
+      ],
+      "species": "SPECIES_SHEDINJA",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_SOUNDPROOF",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Whismur uses Soundproof with Hyper Voice, Fire Blast, Ice Beam, Protect; the four slots form a coherent spread special attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_EVIOLITE supports the spread special attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_HYPER_VOICE",
+        "MOVE_FIRE_BLAST",
+        "MOVE_ICE_BEAM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "review_notes": "Added Protect and removed redundant four-attack Choice locking. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Spread special attacker",
+      "source_refs": [
+        "Checked-in competitive corpus: showdown:gen5randomdoublesbattle:006",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_WHISMUR"
+      ],
+      "species": "SPECIES_WHISMUR",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_SOUNDPROOF",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Loudred uses Soundproof with Hyper Voice, Fire Blast, Ice Beam, Protect; the four slots form a coherent spread special attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_EVIOLITE supports the spread special attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_HYPER_VOICE",
+        "MOVE_FIRE_BLAST",
+        "MOVE_ICE_BEAM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "review_notes": "Added Protect and removed redundant four-attack Choice locking. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Spread special attacker",
+      "source_refs": [
+        "Checked-in competitive corpus: showdown:gen4randomdoublesbattle:028",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_LOUDRED"
+      ],
+      "species": "SPECIES_LOUDRED",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_SCRAPPY",
+      "dependency_notes": [
+        "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Exploud uses Scrappy with Hyper Voice, Focus Blast, Fire Blast, Protect; the four slots form a coherent scrappy spread attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_LIFE_ORB supports the scrappy spread attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_HYPER_VOICE",
+        "MOVE_FOCUS_BLAST",
+        "MOVE_FIRE_BLAST",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "review_notes": "Removed redundant Boomburst friendly-fire pressure from the default set. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Scrappy spread attacker",
+      "source_refs": [
+        "Checked-in competitive corpus: showdown:gen7randomdoublesbattle:030",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_EXPLOUD"
+      ],
+      "species": "SPECIES_EXPLOUD",
+      "suggested_item": "ITEM_LIFE_ORB"
+    },
+    {
+      "ability": "ABILITY_GUTS",
+      "dependency_notes": [
+        "ITEM_FLAME_ORB is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability.",
+        "The status ability needs the advisory orb or opponent-inflicted status to self-activate."
+      ],
+      "doubles_rationale": "Makuhita uses Guts with Fake Out, Close Combat, Knock Off, Protect; the four slots form a coherent guts fake out attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_FLAME_ORB supports the guts fake out attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_KNOCK_OFF",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Removed Belly Drum and added a safe Guts activation turn. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Guts Fake Out attacker",
+      "source_refs": [
+        "Smogon Gen 7 lc Makuhita set: Belly Drum",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_MAKUHITA"
+      ],
+      "species": "SPECIES_MAKUHITA",
+      "suggested_item": "ITEM_FLAME_ORB"
+    },
+    {
+      "ability": "ABILITY_GUTS",
+      "dependency_notes": [
+        "ITEM_ASSAULT_VEST is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability.",
+        "The status ability needs the advisory orb or opponent-inflicted status to self-activate."
+      ],
+      "doubles_rationale": "Hariyama uses Guts with Fake Out, Close Combat, Knock Off, Ice Punch; the four slots form a coherent hariyama trick room attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_ASSAULT_VEST supports the hariyama trick room attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_KNOCK_OFF",
+        "MOVE_ICE_PUNCH"
+      ],
+      "nature": "NATURE_BRAVE",
+      "review_notes": "Retained the strongest locally compatible doubles-first scaffold after one species-level sanity check. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Hariyama Trick Room Attacker",
+      "source_refs": [
+        "Smogon Gen 6 battlespotdoubles Hariyama set: Trick Room Attacker",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_HARIYAMA"
+      ],
+      "species": "SPECIES_HARIYAMA",
+      "suggested_item": "ITEM_ASSAULT_VEST"
+    },
+    {
+      "ability": "ABILITY_STURDY",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Nosepass uses Sturdy with Thunder Wave, Rock Slide, Wide Guard, Protect; the four slots form a coherent sturdy wide guard support pattern with immediate doubles value.",
+      "item_context": "ITEM_EVIOLITE supports the sturdy wide guard support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_THUNDER_WAVE",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_WIDE_GUARD",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_RELAXED",
+      "review_notes": "Removed singles hazards for immediate speed and spread-move control. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Sturdy Wide Guard support",
+      "source_refs": [
+        "Smogon Gen 7 lc Nosepass set: SturdyJuice Utility",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_NOSEPASS"
+      ],
+      "species": "SPECIES_NOSEPASS",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_WONDER_SKIN",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Skitty uses Wonder Skin with Fake Out, Thunder Wave, Sucker Punch, Protect; the four slots form a coherent fake out speed support pattern with immediate doubles value.",
+      "item_context": "ITEM_EVIOLITE supports the fake out speed support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_THUNDER_WAVE",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Added Protect and avoided Normalize making Sucker Punch unable to hit Ghost targets. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Fake Out speed support",
+      "source_refs": [
+        "Smogon Gen 7 lc Skitty set: Skitty",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_SKITTY"
+      ],
+      "species": "SPECIES_SKITTY",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_WONDER_SKIN",
+      "dependency_notes": [
+        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Delcatty uses Wonder Skin with Fake Out, Thunder Wave, Play Rough, Protect; the four slots form a coherent fake out disruption support pattern with immediate doubles value.",
+      "item_context": "ITEM_SITRUS_BERRY supports the fake out disruption support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_THUNDER_WAVE",
+        "MOVE_PLAY_ROUGH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Added Protect and removed redundant priority. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Fake Out disruption support",
+      "source_refs": [
+        "Checked-in competitive corpus: showdown:gen6randomdoublesbattle:019",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_DELCATTY"
+      ],
+      "species": "SPECIES_DELCATTY",
+      "suggested_item": "ITEM_SITRUS_BERRY"
+    },
+    {
+      "ability": "ABILITY_PRANKSTER",
+      "dependency_notes": [
+        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Sableye uses Prankster with Fake Out, Quash, Encore, Night Shade; the four slots form a coherent sableye prankster support pattern with immediate doubles value.",
+      "item_context": "ITEM_SITRUS_BERRY supports the sableye prankster support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_QUASH",
+        "MOVE_ENCORE",
+        "MOVE_NIGHT_SHADE"
+      ],
+      "nature": "NATURE_CAREFUL",
+      "review_notes": "Retained the strongest locally compatible doubles-first scaffold after one species-level sanity check. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Sableye Prankster Support",
+      "source_refs": [
+        "Smogon Gen 8 2v2doubles Sableye set: Prankster Support",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_SABLEYE"
+      ],
+      "species": "SPECIES_SABLEYE",
+      "suggested_item": "ITEM_SITRUS_BERRY"
+    },
+    {
+      "ability": "ABILITY_INTIMIDATE",
+      "dependency_notes": [
+        "ITEM_MAWILITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Mawile uses Intimidate with Play Rough, Sucker Punch, Iron Head, Protect; the four slots form a coherent mawile mega attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_MAWILITE supports the mawile mega attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_PLAY_ROUGH",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_IRON_HEAD",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Retained the strongest locally compatible doubles-first scaffold after one species-level sanity check. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Mawile Mega Attacker",
+      "source_refs": [
+        "Smogon Gen 6 battlespotdoubles Mawile set: Mega Attacker",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_MAWILE"
+      ],
+      "species": "SPECIES_MAWILE",
+      "suggested_item": "ITEM_MAWILITE"
+    },
+    {
+      "ability": "ABILITY_STURDY",
+      "dependency_notes": [
+        "ITEM_BERRY_JUICE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Aron uses Sturdy with Endeavor, Rock Slide, Toxic, Protect; the four slots form a coherent sturdy endeavor control pattern with immediate doubles value.",
+      "item_context": "ITEM_BERRY_JUICE supports the sturdy endeavor control role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_ENDEAVOR",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_TOXIC",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Removed unusable Sleep Talk without Rest. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Sturdy Endeavor control",
+      "source_refs": [
+        "Smogon Gen 5 vgc2012 Aron set: Level 1 Sturdy",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_ARON"
+      ],
+      "species": "SPECIES_ARON",
+      "suggested_item": "ITEM_BERRY_JUICE"
+    },
+    {
+      "ability": "ABILITY_ROCK_HEAD",
+      "dependency_notes": [
+        "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Lairon uses Rock Head with Head Smash, Heavy Slam, Superpower, Protect; the four slots form a coherent rock head physical breaker pattern with immediate doubles value.",
+      "item_context": "ITEM_LIFE_ORB supports the rock head physical breaker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_HEAD_SMASH",
+        "MOVE_HEAVY_SLAM",
+        "MOVE_SUPERPOWER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Removed singles hazards and Choice locking while preserving recoil synergy. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Rock Head physical breaker",
+      "source_refs": [
+        "Smogon Gen 8 nfe Lairon set: Choice Band",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_LAIRON"
+      ],
+      "species": "SPECIES_LAIRON",
+      "suggested_item": "ITEM_LIFE_ORB"
+    },
+    {
+      "ability": "ABILITY_STURDY",
+      "dependency_notes": [
+        "ITEM_AGGRONITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Aggron uses Sturdy with Heavy Slam, Rock Slide, Ice Punch, Protect; the four slots form a coherent mega-capable physical tank pattern with immediate doubles value.",
+      "item_context": "ITEM_AGGRONITE supports the mega-capable physical tank role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_HEAVY_SLAM",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_ICE_PUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Removed hazards and Thunder Wave for a clean doubles damage pattern. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Mega-capable physical tank",
+      "source_refs": [
+        "Checked-in competitive corpus: showdown:gen5randomdoublesbattle:015",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_AGGRON"
+      ],
+      "species": "SPECIES_AGGRON",
+      "suggested_item": "ITEM_AGGRONITE"
+    },
+    {
+      "ability": "ABILITY_PURE_POWER",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Meditite uses Pure Power with Fake Out, Close Combat, Zen Headbutt, Protect; the four slots form a coherent pure power fake out attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_EVIOLITE supports the pure power fake out attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_ZEN_HEADBUTT",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Removed Choice plus Trick dependence. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Pure Power Fake Out attacker",
+      "source_refs": [
+        "Smogon Gen 9 nfe Meditite set: Choice Item",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_MEDITITE"
+      ],
+      "species": "SPECIES_MEDITITE",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_PURE_POWER",
+      "dependency_notes": [
+        "ITEM_MEDICHAMITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Medicham uses Pure Power with Fake Out, High Jump Kick, Zen Headbutt, Bullet Punch; the four slots form a coherent medicham all-out attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_MEDICHAMITE supports the medicham all-out attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_HIGH_JUMP_KICK",
+        "MOVE_ZEN_HEADBUTT",
+        "MOVE_BULLET_PUNCH"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Retained the strongest locally compatible doubles-first scaffold after one species-level sanity check. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Medicham All-out Attacker",
+      "source_refs": [
+        "Smogon Gen 7 vgc2019 Medicham set: All-out Attacker",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_MEDICHAM"
+      ],
+      "species": "SPECIES_MEDICHAM",
+      "suggested_item": "ITEM_MEDICHAMITE"
+    },
+    {
+      "ability": "ABILITY_LIGHTNING_ROD",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Electrike uses Lightning Rod with Thunder Wave, Thunderbolt, Flamethrower, Protect; the four slots form a coherent lightning rod paralysis attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_EVIOLITE supports the lightning rod paralysis attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_THUNDER_WAVE",
+        "MOVE_THUNDERBOLT",
+        "MOVE_FLAMETHROWER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Removed Choice plus Switcheroo dependence. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Lightning Rod paralysis attacker",
+      "source_refs": [
+        "Smogon Gen 7 lc Electrike set: Choice Scarf",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_ELECTRIKE"
+      ],
+      "species": "SPECIES_ELECTRIKE",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_LIGHTNING_ROD",
+      "dependency_notes": [
+        "ITEM_MANECTITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Manectric uses Lightning Rod with Volt Switch, Snarl, Overheat, Protect; the four slots form a coherent manectric offensive pivot pattern with immediate doubles value.",
+      "item_context": "ITEM_MANECTITE supports the manectric offensive pivot role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_VOLT_SWITCH",
+        "MOVE_SNARL",
+        "MOVE_OVERHEAT",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Retained the strongest locally compatible doubles-first scaffold after one species-level sanity check. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Manectric Offensive Pivot",
+      "source_refs": [
+        "Smogon Gen 7 doublesou Manectric set: Offensive Pivot",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_MANECTRIC"
+      ],
+      "species": "SPECIES_MANECTRIC",
+      "suggested_item": "ITEM_MANECTITE"
+    },
+    {
+      "ability": "ABILITY_PLUS",
+      "dependency_notes": [
+        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Plusle uses Plus with Electroweb, Helping Hand, Encore, Protect; the four slots form a coherent fast partner support pattern with immediate doubles value.",
+      "item_context": "ITEM_FOCUS_SASH supports the fast partner support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_ELECTROWEB",
+        "MOVE_HELPING_HAND",
+        "MOVE_ENCORE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Removed Nasty Plot Baton Pass and made every slot immediately useful in doubles. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Fast partner support",
+      "source_refs": [
+        "Smogon Gen 4 uu Plusle set: Baton Pass",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_PLUSLE"
+      ],
+      "species": "SPECIES_PLUSLE",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_MINUS",
+      "dependency_notes": [
+        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Minun uses Minus with Electroweb, Helping Hand, Encore, Protect; the four slots form a coherent fast partner support pattern with immediate doubles value.",
+      "item_context": "ITEM_FOCUS_SASH supports the fast partner support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_ELECTROWEB",
+        "MOVE_HELPING_HAND",
+        "MOVE_ENCORE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Removed slow Substitute play for immediate doubles control. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Fast partner support",
+      "source_refs": [
+        "Checked-in competitive corpus: showdown:gen6randomdoublesbattle:005",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_MINUN"
+      ],
+      "species": "SPECIES_MINUN",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_PRANKSTER",
+      "dependency_notes": [
+        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Volbeat uses Prankster with Tailwind, Encore, Thunder Wave, Protect; the four slots form a coherent prankster speed support pattern with immediate doubles value.",
+      "item_context": "ITEM_SITRUS_BERRY supports the prankster speed support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_TAILWIND",
+        "MOVE_ENCORE",
+        "MOVE_THUNDER_WAVE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CAREFUL",
+      "review_notes": "Removed rain-only commitment while retaining priority utility. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Prankster speed support",
+      "source_refs": [
+        "Smogon Gen 8 bdspou Volbeat set: Rain Setter",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_VOLBEAT"
+      ],
+      "species": "SPECIES_VOLBEAT",
+      "suggested_item": "ITEM_SITRUS_BERRY"
+    },
+    {
+      "ability": "ABILITY_PRANKSTER",
+      "dependency_notes": [
+        "ITEM_LEFTOVERS is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Illumise uses Prankster with Protect, Encore, Tailwind, U Turn; the four slots form a coherent illumise doubles support pattern with immediate doubles value.",
+      "item_context": "ITEM_LEFTOVERS supports the illumise doubles support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_PROTECT",
+        "MOVE_ENCORE",
+        "MOVE_TAILWIND",
+        "MOVE_U_TURN"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Retained the strongest locally compatible doubles-first scaffold after one species-level sanity check. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Illumise doubles support",
+      "source_refs": [
+        "Checked-in competitive corpus: showdown:gen6randomdoublesbattle:011",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_ILLUMISE"
+      ],
+      "species": "SPECIES_ILLUMISE",
+      "suggested_item": "ITEM_LEFTOVERS"
+    },
+    {
+      "ability": "ABILITY_NATURAL_CURE",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Roselia uses Natural Cure with Sleep Powder, Giga Drain, Sludge Bomb, Protect; the four slots form a coherent sleep support attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_EVIOLITE supports the sleep support attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_SLEEP_POWDER",
+        "MOVE_GIGA_DRAIN",
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Removed singles hazards and added Protect. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Sleep support attacker",
+      "source_refs": [
+        "Smogon Gen 8 nfe Roselia set: Specially Defensive",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_ROSELIA"
+      ],
+      "species": "SPECIES_ROSELIA",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_LIQUID_OOZE",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Gulpin uses Liquid Ooze with Encore, Yawn, Sludge Bomb, Protect; the four slots form a coherent yawn and encore support pattern with immediate doubles value.",
+      "item_context": "ITEM_EVIOLITE supports the yawn and encore support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_ENCORE",
+        "MOVE_YAWN",
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BOLD",
+      "review_notes": "Removed Stockpile-Pain Split singles attrition. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Yawn and Encore support",
+      "source_refs": [
+        "Smogon Gen 5 lc Gulpin set: Stockpile",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_GULPIN"
+      ],
+      "species": "SPECIES_GULPIN",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_STICKY_HOLD",
+      "dependency_notes": [
+        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Swalot uses Sticky Hold with Yawn, Sludge Bomb, Ice Beam, Protect; the four slots form a coherent bulky yawn attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_SITRUS_BERRY supports the bulky yawn attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_YAWN",
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_ICE_BEAM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BOLD",
+      "review_notes": "Removed mixed Earthquake and Pain Split for partner-safe control. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Bulky Yawn attacker",
+      "source_refs": [
+        "Checked-in competitive corpus: showdown:gen4randomdoublesbattle:028",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_SWALOT"
+      ],
+      "species": "SPECIES_SWALOT",
+      "suggested_item": "ITEM_SITRUS_BERRY"
+    },
+    {
+      "ability": "ABILITY_SPEED_BOOST",
+      "dependency_notes": [
+        "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Carvanha uses Speed Boost with Protect, Hydro Pump, Dark Pulse, Ice Beam; the four slots form a coherent carvanha special attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_LIFE_ORB supports the carvanha special attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_PROTECT",
+        "MOVE_HYDRO_PUMP",
+        "MOVE_DARK_PULSE",
+        "MOVE_ICE_BEAM"
+      ],
+      "nature": "NATURE_MODEST",
+      "review_notes": "Retained the strongest locally compatible doubles-first scaffold after one species-level sanity check. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Carvanha Special Attacker",
+      "source_refs": [
+        "Smogon Gen 8 lc Carvanha set: Special Attacker",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_CARVANHA"
+      ],
+      "species": "SPECIES_CARVANHA",
+      "suggested_item": "ITEM_LIFE_ORB"
+    },
+    {
+      "ability": "ABILITY_DRIZZLE",
+      "dependency_notes": [
+        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Wailord uses Drizzle with Water Spout, Hydro Pump, Ice Beam, Protect; the four slots form a coherent drizzle water spout attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_SITRUS_BERRY supports the drizzle water spout attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_WATER_SPOUT",
+        "MOVE_HYDRO_PUMP",
+        "MOVE_ICE_BEAM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_QUIET",
+      "review_notes": "Removed Surf friendly fire while preserving the direct VGC role. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Drizzle Water Spout attacker",
+      "source_refs": [
+        "Smogon Gen 5 vgc2012 Wailord set: Trick Room Attacker",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_WAILORD"
+      ],
+      "species": "SPECIES_WAILORD",
+      "suggested_item": "ITEM_SITRUS_BERRY"
+    },
+    {
+      "ability": "ABILITY_SIMPLE",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Numel uses Simple with Stockpile, Body Press, Heat Wave, Protect; the four slots form a coherent simple stockpile tank pattern with immediate doubles value.",
+      "item_context": "ITEM_EVIOLITE supports the simple stockpile tank role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_STOCKPILE",
+        "MOVE_BODY_PRESS",
+        "MOVE_HEAT_WAVE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_RELAXED",
+      "review_notes": "Removed Rest without Sleep Talk and made Simple the coherent payoff. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Simple Stockpile tank",
+      "source_refs": [
+        "Smogon Gen 9 lc Numel set: Stockpile + Body Press",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_NUMEL"
+      ],
+      "species": "SPECIES_NUMEL",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_SOLID_ROCK",
+      "dependency_notes": [
+        "ITEM_CAMERUPTITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Camerupt uses Solid Rock with Heat Wave, Earth Power, Substitute, Protect; the four slots form a coherent camerupt trick room attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_CAMERUPTITE supports the camerupt trick room attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_HEAT_WAVE",
+        "MOVE_EARTH_POWER",
+        "MOVE_SUBSTITUTE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_QUIET",
+      "review_notes": "Retained the strongest locally compatible doubles-first scaffold after one species-level sanity check. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Camerupt Trick Room Attacker",
+      "source_refs": [
+        "Smogon Gen 7 doublesou Camerupt set: Trick Room Attacker",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_CAMERUPT"
+      ],
+      "species": "SPECIES_CAMERUPT",
+      "suggested_item": "ITEM_CAMERUPTITE"
+    },
+    {
+      "ability": "ABILITY_DROUGHT",
+      "dependency_notes": [
+        "ITEM_CHARCOAL is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Torkoal uses Drought with Eruption, Heat Wave, Earth Power, Protect; the four slots form a coherent torkoal tr attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_CHARCOAL supports the torkoal tr attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_ERUPTION",
+        "MOVE_HEAT_WAVE",
+        "MOVE_EARTH_POWER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_QUIET",
+      "review_notes": "Retained the strongest locally compatible doubles-first scaffold after one species-level sanity check. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Torkoal TR Attacker",
+      "source_refs": [
+        "Smogon Gen 9 doublesou Torkoal set: TR Attacker",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_TORKOAL"
+      ],
+      "species": "SPECIES_TORKOAL",
+      "suggested_item": "ITEM_CHARCOAL"
+    },
+    {
+      "ability": "ABILITY_THICK_FAT",
+      "dependency_notes": [
+        "ITEM_LIGHT_CLAY is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Spoink uses Thick Fat with Reflect, Light Screen, Psychic, Thunder Wave; the four slots form a coherent spoink dual screens pattern with immediate doubles value.",
+      "item_context": "ITEM_LIGHT_CLAY supports the spoink dual screens role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_REFLECT",
+        "MOVE_LIGHT_SCREEN",
+        "MOVE_PSYCHIC",
+        "MOVE_THUNDER_WAVE"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Retained the strongest locally compatible doubles-first scaffold after one species-level sanity check. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Spoink Dual Screens",
+      "source_refs": [
+        "Smogon Gen 5 lc Spoink set: Dual Screens",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_SPOINK"
+      ],
+      "species": "SPECIES_SPOINK",
+      "suggested_item": "ITEM_LIGHT_CLAY"
+    },
+    {
+      "ability": "ABILITY_THICK_FAT",
+      "dependency_notes": [
+        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Grumpig uses Thick Fat with Thunder Wave, Protect, Psychic, Taunt; the four slots form a coherent grumpig doubles support pattern with immediate doubles value.",
+      "item_context": "ITEM_SITRUS_BERRY supports the grumpig doubles support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_THUNDER_WAVE",
+        "MOVE_PROTECT",
+        "MOVE_PSYCHIC",
+        "MOVE_TAUNT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Retained the strongest locally compatible doubles-first scaffold after one species-level sanity check. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Grumpig doubles support",
+      "source_refs": [
+        "Checked-in competitive corpus: showdown:gen7randomdoublesbattle:015",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_GRUMPIG"
+      ],
+      "species": "SPECIES_GRUMPIG",
+      "suggested_item": "ITEM_SITRUS_BERRY"
+    },
+    {
+      "ability": "ABILITY_CONTRARY",
+      "dependency_notes": [
+        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Spinda uses Contrary with Superpower, Sucker Punch, Trick Room, Hyper Voice; the four slots form a coherent spinda direct doubles attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_SITRUS_BERRY supports the spinda direct doubles attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_SUPERPOWER",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_TRICK_ROOM",
+        "MOVE_HYPER_VOICE"
+      ],
+      "nature": "NATURE_BRAVE",
+      "review_notes": "Retained the strongest locally compatible doubles-first scaffold after one species-level sanity check. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Spinda direct doubles attacker",
+      "source_refs": [
+        "Checked-in competitive corpus: showdown:gen7randomdoublesbattle:018",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_SPINDA"
+      ],
+      "species": "SPECIES_SPINDA",
+      "suggested_item": "ITEM_SITRUS_BERRY"
+    },
+    {
+      "ability": "ABILITY_ARENA_TRAP",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability.",
+        "The spread move can hit the ally, so pair it with immunity, Telepathy, or Protect."
+      ],
+      "doubles_rationale": "Trapinch uses Arena Trap with Earthquake, Rock Slide, Feint, Protect; the four slots form a coherent arena trap physical attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_EVIOLITE supports the arena trap physical attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_EARTHQUAKE",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_FEINT",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BRAVE",
+      "review_notes": "Removed Toxic and added Protect to the young doubles trapper. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Arena Trap physical attacker",
+      "source_refs": [
+        "Smogon Gen 6 lc Trapinch set: Trapper",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_TRAPINCH"
+      ],
+      "species": "SPECIES_TRAPINCH",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_LEVITATE",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability.",
+        "The spread move can hit the ally, so pair it with immunity, Telepathy, or Protect."
+      ],
+      "doubles_rationale": "Vibrava uses Levitate with Earthquake, Rock Slide, Tailwind, Protect; the four slots form a coherent tailwind spread attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_EVIOLITE supports the tailwind spread attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_EARTHQUAKE",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_TAILWIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Replaced singles pivot and Outrage locking with a clear doubles set. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Tailwind spread attacker",
+      "source_refs": [
+        "Checked-in competitive corpus: showdown:gen5randomdoublesbattle:021",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_VIBRAVA"
+      ],
+      "species": "SPECIES_VIBRAVA",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_TINTED_LENS",
+      "dependency_notes": [
+        "ITEM_YACHE_BERRY is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability.",
+        "The spread move can hit the ally, so pair it with immunity, Telepathy, or Protect."
+      ],
+      "doubles_rationale": "Flygon uses Tinted Lens with Dragon Claw, Earthquake, Tailwind, Protect; the four slots form a coherent flygon tailwind attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_YACHE_BERRY supports the flygon tailwind attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_DRAGON_CLAW",
+        "MOVE_EARTHQUAKE",
+        "MOVE_TAILWIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Retained the strongest locally compatible doubles-first scaffold after one species-level sanity check. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Flygon Tailwind Attacker",
+      "source_refs": [
+        "Smogon Gen 5 vgc2012 Flygon set: Tailwind Attacker",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_FLYGON"
+      ],
+      "species": "SPECIES_FLYGON",
+      "suggested_item": "ITEM_YACHE_BERRY"
+    },
+    {
+      "ability": "ABILITY_WATER_ABSORB",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability.",
+        "Setup is safer beside Fake Out, redirection, screens, or other partner disruption."
+      ],
+      "doubles_rationale": "Cacnea uses Water Absorb with Swords Dance, Sucker Punch, Seed Bomb, Protect; the four slots form a coherent swords dance priority attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_EVIOLITE supports the swords dance priority attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_SWORDS_DANCE",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_SEED_BOMB",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Added Protect and removed redundant coverage. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Swords Dance priority attacker",
+      "source_refs": [
+        "Smogon Gen 7 lc Cacnea set: Swords Dance",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_CACNEA"
+      ],
+      "species": "SPECIES_CACNEA",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_WATER_ABSORB",
+      "dependency_notes": [
+        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Cacturne uses Water Absorb with Sucker Punch, Seed Bomb, Low Kick, Protect; the four slots form a coherent cacturne sucker punch pattern with immediate doubles value.",
+      "item_context": "ITEM_FOCUS_SASH supports the cacturne sucker punch role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_SEED_BOMB",
+        "MOVE_LOW_KICK",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Retained the strongest locally compatible doubles-first scaffold after one species-level sanity check. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Cacturne Sucker Punch",
+      "source_refs": [
+        "Smogon Gen 5 vgc2012 Cacturne set: Sucker Punch",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_CACTURNE"
+      ],
+      "species": "SPECIES_CACTURNE",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_CLOUD_NINE",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Swablu uses Cloud Nine with Tailwind, Roost, Hyper Voice, Protect; the four slots form a coherent cloud nine tailwind support pattern with immediate doubles value.",
+      "item_context": "ITEM_EVIOLITE supports the cloud nine tailwind support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_TAILWIND",
+        "MOVE_ROOST",
+        "MOVE_HYPER_VOICE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CALM",
+      "review_notes": "Corrected the Special Attack-lowering nature and removed Toxic stall. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Cloud Nine Tailwind support",
+      "source_refs": [
+        "Smogon Gen 5 lc Swablu set: Weather Guard",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_SWABLU"
+      ],
+      "species": "SPECIES_SWABLU",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_CLOUD_NINE",
+      "dependency_notes": [
+        "ITEM_ALTARIANITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Altaria uses Cloud Nine with Hyper Voice, Fire Blast, Tailwind, Protect; the four slots form a coherent altaria special attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_ALTARIANITE supports the altaria special attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_HYPER_VOICE",
+        "MOVE_FIRE_BLAST",
+        "MOVE_TAILWIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "review_notes": "Retained the strongest locally compatible doubles-first scaffold after one species-level sanity check. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Altaria Special Attacker",
+      "source_refs": [
+        "Smogon Gen 6 battlespotdoubles Altaria set: Special Attacker",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_ALTARIA"
+      ],
+      "species": "SPECIES_ALTARIA",
+      "suggested_item": "ITEM_ALTARIANITE"
+    },
+    {
+      "ability": "ABILITY_TOXIC_BOOST",
+      "dependency_notes": [
+        "ITEM_TOXIC_ORB is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability.",
+        "The status ability needs the advisory orb or opponent-inflicted status to self-activate."
+      ],
+      "doubles_rationale": "Zangoose uses Toxic Boost with Knock Off, Protect, Facade, Close Combat; the four slots form a coherent zangoose direct doubles attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_TOXIC_ORB supports the zangoose direct doubles attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_KNOCK_OFF",
+        "MOVE_PROTECT",
+        "MOVE_FACADE",
+        "MOVE_CLOSE_COMBAT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Retained the strongest locally compatible doubles-first scaffold after one species-level sanity check. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Zangoose direct doubles attacker",
+      "source_refs": [
+        "Checked-in competitive corpus: showdown:gen9randomdoublesbattle:026",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_ZANGOOSE"
+      ],
+      "species": "SPECIES_ZANGOOSE",
+      "suggested_item": "ITEM_TOXIC_ORB"
+    },
+    {
+      "ability": "ABILITY_INFILTRATOR",
+      "dependency_notes": [
+        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Seviper uses Infiltrator with Glare, Sludge Bomb, Flamethrower, Protect; the four slots form a coherent glare special attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_SITRUS_BERRY supports the glare special attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_GLARE",
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_FLAMETHROWER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Removed incoherent physical Poison Jab and added Protect. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Glare special attacker",
+      "source_refs": [
+        "Checked-in competitive corpus: showdown:gen7randomdoublesbattle:019",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_SEVIPER"
+      ],
+      "species": "SPECIES_SEVIPER",
+      "suggested_item": "ITEM_SITRUS_BERRY"
+    },
+    {
+      "ability": "ABILITY_LEVITATE",
+      "dependency_notes": [
+        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Lunatone uses Levitate with Trick Room, Psychic, Power Gem, Protect; the four slots form a coherent trick room special attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_SITRUS_BERRY supports the trick room special attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_TRICK_ROOM",
+        "MOVE_PSYCHIC",
+        "MOVE_POWER_GEM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_QUIET",
+      "review_notes": "Removed hazards and Explosion from the singles scaffold. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Trick Room special attacker",
+      "source_refs": [
+        "Smogon Gen 4 uu Lunatone set: Trick Room",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_LUNATONE"
+      ],
+      "species": "SPECIES_LUNATONE",
+      "suggested_item": "ITEM_SITRUS_BERRY"
+    },
+    {
+      "ability": "ABILITY_LEVITATE",
+      "dependency_notes": [
+        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Solrock uses Levitate with Trick Room, Rock Slide, Will O Wisp, Protect; the four slots form a coherent trick room burn support pattern with immediate doubles value.",
+      "item_context": "ITEM_SITRUS_BERRY supports the trick room burn support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_TRICK_ROOM",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_WILL_O_WISP",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BRAVE",
+      "review_notes": "Removed hazards and Explosion from the singles scaffold. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Trick Room burn support",
+      "source_refs": [
+        "Smogon Gen 4 uu Solrock set: Trick Room",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_SOLROCK"
+      ],
+      "species": "SPECIES_SOLROCK",
+      "suggested_item": "ITEM_SITRUS_BERRY"
+    },
+    {
+      "ability": "ABILITY_OBLIVIOUS",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability.",
+        "The spread move can hit the ally, so pair it with immunity, Telepathy, or Protect.",
+        "Setup is safer beside Fake Out, redirection, screens, or other partner disruption."
+      ],
+      "doubles_rationale": "Barboach uses Oblivious with Dragon Dance, Earthquake, Waterfall, Protect; the four slots form a coherent dragon dance dual-stab attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_EVIOLITE supports the dragon dance dual-stab attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_DRAGON_DANCE",
+        "MOVE_EARTHQUAKE",
+        "MOVE_WATERFALL",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Removed Z-Bounce dependence and added Protect. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Dragon Dance dual-STAB attacker",
+      "source_refs": [
+        "Smogon Gen 7 lc Barboach set: Dragon Dance",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_BARBOACH"
+      ],
+      "species": "SPECIES_BARBOACH",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_HYDRATION",
+      "dependency_notes": [
+        "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability.",
+        "The spread move can hit the ally, so pair it with immunity, Telepathy, or Protect.",
+        "Setup is safer beside Fake Out, redirection, screens, or other partner disruption."
+      ],
+      "doubles_rationale": "Whiscash uses Hydration with Dragon Dance, Earthquake, Waterfall, Protect; the four slots form a coherent dragon dance dual-stab attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_LIFE_ORB supports the dragon dance dual-stab attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_DRAGON_DANCE",
+        "MOVE_EARTHQUAKE",
+        "MOVE_WATERFALL",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Added Protect and removed redundant coverage. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Dragon Dance dual-STAB attacker",
+      "source_refs": [
+        "Checked-in competitive corpus: showdown:gen6randomdoublesbattle:029",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_WHISCASH"
+      ],
+      "species": "SPECIES_WHISCASH",
+      "suggested_item": "ITEM_LIFE_ORB"
+    },
+    {
+      "ability": "ABILITY_LEVITATE",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Baltoy uses Levitate with Trick Room, Earth Power, Psychic, Protect; the four slots form a coherent trick room special attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_EVIOLITE supports the trick room special attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_TRICK_ROOM",
+        "MOVE_EARTH_POWER",
+        "MOVE_PSYCHIC",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_QUIET",
+      "review_notes": "Removed singles hazards and Rapid Spin. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Trick Room special attacker",
+      "source_refs": [
+        "Smogon Gen 7 lc Baltoy set: Rapid Spin",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_BALTOY"
+      ],
+      "species": "SPECIES_BALTOY",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_LEVITATE",
+      "dependency_notes": [
+        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Claydol uses Levitate with Trick Room, Earth Power, Psychic, Protect; the four slots form a coherent trick room special attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_SITRUS_BERRY supports the trick room special attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_TRICK_ROOM",
+        "MOVE_EARTH_POWER",
+        "MOVE_PSYCHIC",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_QUIET",
+      "review_notes": "Removed Toxic and Rapid Spin for immediate doubles impact. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Trick Room special attacker",
+      "source_refs": [
+        "Checked-in competitive corpus: showdown:gen7randomdoublesbattle:021",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_CLAYDOL"
+      ],
+      "species": "SPECIES_CLAYDOL",
+      "suggested_item": "ITEM_SITRUS_BERRY"
+    },
+    {
+      "ability": "ABILITY_STORM_DRAIN",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Lileep uses Storm Drain with Giga Drain, Ancient Power, Recover, Protect; the four slots form a coherent storm drain sustain attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_EVIOLITE supports the storm drain sustain attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_GIGA_DRAIN",
+        "MOVE_ANCIENT_POWER",
+        "MOVE_RECOVER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CALM",
+      "review_notes": "Removed singles hazards and retained self-contained sustain. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Storm Drain sustain attacker",
+      "source_refs": [
+        "Smogon Gen 7 lc Lileep set: Tank",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_LILEEP"
+      ],
+      "species": "SPECIES_LILEEP",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_STORM_DRAIN",
+      "dependency_notes": [
+        "ITEM_LEFTOVERS is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Cradily uses Storm Drain with Giga Drain, Power Gem, Recover, Protect; the four slots form a coherent storm drain sustain attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_LEFTOVERS supports the storm drain sustain attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_GIGA_DRAIN",
+        "MOVE_POWER_GEM",
+        "MOVE_RECOVER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CALM",
+      "review_notes": "Removed dual setup and Earthquake friendly fire. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Storm Drain sustain attacker",
+      "source_refs": [
+        "Checked-in competitive corpus: showdown:gen5randomdoublesbattle:008",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_CRADILY"
+      ],
+      "species": "SPECIES_CRADILY",
+      "suggested_item": "ITEM_LEFTOVERS"
+    },
+    {
+      "ability": "ABILITY_SWIFT_SWIM",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability.",
+        "The weather-linked ability is optional upside; the selected moves remain usable when that weather is absent."
+      ],
+      "doubles_rationale": "Anorith uses Swift Swim with Rock Slide, X Scissor, Knock Off, Protect; the four slots form a coherent swift swim physical attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_EVIOLITE supports the swift swim physical attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_ROCK_SLIDE",
+        "MOVE_X_SCISSOR",
+        "MOVE_KNOCK_OFF",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Removed singles hazards and Rapid Spin. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Swift Swim physical attacker",
+      "source_refs": [
+        "Smogon Gen 7 lc Anorith set: Utility",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_ANORITH"
+      ],
+      "species": "SPECIES_ANORITH",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_SWIFT_SWIM",
+      "dependency_notes": [
+        "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability.",
+        "The spread move can hit the ally, so pair it with immunity, Telepathy, or Protect.",
+        "The weather-linked ability is optional upside; the selected moves remain usable when that weather is absent."
+      ],
+      "doubles_rationale": "Armaldo uses Swift Swim with X Scissor, Rock Slide, Earthquake, Protect; the four slots form a coherent armaldo trick room attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_LIFE_ORB supports the armaldo trick room attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_X_SCISSOR",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_EARTHQUAKE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BRAVE",
+      "review_notes": "Retained the strongest locally compatible doubles-first scaffold after one species-level sanity check. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Armaldo Trick Room Attacker",
+      "source_refs": [
+        "Smogon Gen 5 vgc2012 Armaldo set: Trick Room Attacker",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_ARMALDO"
+      ],
+      "species": "SPECIES_ARMALDO",
+      "suggested_item": "ITEM_LIFE_ORB"
+    },
+    {
+      "ability": "ABILITY_OBLIVIOUS",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Feebas uses Oblivious with Scald, Icy Wind, Hypnosis, Protect; the four slots form a coherent icy wind disruption support pattern with immediate doubles value.",
+      "item_context": "ITEM_EVIOLITE supports the icy wind disruption support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_SCALD",
+        "MOVE_ICY_WIND",
+        "MOVE_HYPNOSIS",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Replaced the deterministic mixed fallback with speed control, Taunt immunity, and Protect. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Icy Wind disruption support",
+      "source_refs": [
+        "Smogon Gen 4-9 Feebas analyses reviewed; no complete direct doubles scaffold was locally compatible",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_FEEBAS"
+      ],
+      "species": "SPECIES_FEEBAS",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_COMPETITIVE",
+      "dependency_notes": [
+        "ITEM_MARANGA_BERRY is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Milotic uses Competitive with Scald, Icy Wind, Recover, Protect; the four slots form a coherent competitive speed-control wall pattern with immediate doubles value.",
+      "item_context": "ITEM_MARANGA_BERRY supports the competitive speed-control wall role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_SCALD",
+        "MOVE_ICY_WIND",
+        "MOVE_RECOVER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BOLD",
+      "review_notes": "Retained the direct Smogon doubles set but removed its terrain-seed item dependency. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Competitive speed-control wall",
+      "source_refs": [
+        "Smogon Gen 7 doublesou Milotic set: Defensive",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_MILOTIC"
+      ],
+      "species": "SPECIES_MILOTIC",
+      "suggested_item": "ITEM_MARANGA_BERRY"
+    },
+    {
+      "ability": "ABILITY_FORECAST",
+      "dependency_notes": [
+        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Castform uses Forecast with Sunny Day, Weather Ball, Solar Beam, Protect; the four slots form a coherent self-contained sun attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_FOCUS_SASH supports the self-contained sun attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_SUNNY_DAY",
+        "MOVE_WEATHER_BALL",
+        "MOVE_SOLAR_BEAM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Removed Choice locking and made its weather dependencies self-contained. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Self-contained sun attacker",
+      "source_refs": [
+        "Checked-in competitive corpus: showdown:gen4randomdoublesbattle:003",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_CASTFORM"
+      ],
+      "species": "SPECIES_CASTFORM",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_PROTEAN",
+      "dependency_notes": [
+        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Kecleon uses Protean with Fake Out, Shadow Sneak, Drain Punch, Protect; the four slots form a coherent protean fake out attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_SITRUS_BERRY supports the protean fake out attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_SHADOW_SNEAK",
+        "MOVE_DRAIN_PUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Removed mixed singles coverage and added doubles tempo. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Protean Fake Out attacker",
+      "source_refs": [
+        "Smogon Gen 6 nu Kecleon set: Mixed Wallbreaker",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_KECLEON"
+      ],
+      "species": "SPECIES_KECLEON",
+      "suggested_item": "ITEM_SITRUS_BERRY"
+    },
+    {
+      "ability": "ABILITY_FRISK",
+      "dependency_notes": [
+        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Shuppet uses Frisk with Trick Room, Knock Off, Shadow Sneak, Destiny Bond; the four slots form a coherent shuppet trick room utility pattern with immediate doubles value.",
+      "item_context": "ITEM_FOCUS_SASH supports the shuppet trick room utility role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_TRICK_ROOM",
+        "MOVE_KNOCK_OFF",
+        "MOVE_SHADOW_SNEAK",
+        "MOVE_DESTINY_BOND"
+      ],
+      "nature": "NATURE_BRAVE",
+      "review_notes": "Retained the strongest locally compatible doubles-first scaffold after one species-level sanity check. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Shuppet Trick Room Utility",
+      "source_refs": [
+        "Smogon Gen 7 lc Shuppet set: Trick Room Utility",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_SHUPPET"
+      ],
+      "species": "SPECIES_SHUPPET",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    },
+    {
+      "ability": "ABILITY_INSOMNIA",
+      "dependency_notes": [
+        "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Banette uses Insomnia with Gunk Shot, Protect, Shadow Sneak, Poltergeist; the four slots form a coherent banette direct doubles attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_LIFE_ORB supports the banette direct doubles attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_GUNK_SHOT",
+        "MOVE_PROTECT",
+        "MOVE_SHADOW_SNEAK",
+        "MOVE_POLTERGEIST"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Retained the strongest locally compatible doubles-first scaffold after one species-level sanity check. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Banette direct doubles attacker",
+      "source_refs": [
+        "Checked-in competitive corpus: showdown:gen9championsrandomdoublesbattle:022",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_BANETTE"
+      ],
+      "species": "SPECIES_BANETTE",
+      "suggested_item": "ITEM_LIFE_ORB"
+    },
+    {
+      "ability": "ABILITY_LEVITATE",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Duskull uses Levitate with Trick Room, Night Shade, Will O Wisp, Pain Split; the four slots form a coherent trick room burn support pattern with immediate doubles value.",
+      "item_context": "ITEM_EVIOLITE supports the trick room burn support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_TRICK_ROOM",
+        "MOVE_NIGHT_SHADE",
+        "MOVE_WILL_O_WISP",
+        "MOVE_PAIN_SPLIT"
+      ],
+      "nature": "NATURE_RELAXED",
+      "review_notes": "Removed Substitute and weak priority for a complete doubles control role. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Trick Room burn support",
+      "source_refs": [
+        "Smogon Gen 7 lc Duskull set: Bulky Utility",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_DUSKULL"
+      ],
+      "species": "SPECIES_DUSKULL",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_FRISK",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Dusclops uses Frisk with Night Shade, Trick Room, Pain Split, Will O Wisp; the four slots form a coherent dusclops supportive trick room pattern with immediate doubles value.",
+      "item_context": "ITEM_EVIOLITE supports the dusclops supportive trick room role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_NIGHT_SHADE",
+        "MOVE_TRICK_ROOM",
+        "MOVE_PAIN_SPLIT",
+        "MOVE_WILL_O_WISP"
+      ],
+      "nature": "NATURE_RELAXED",
+      "review_notes": "Retained the strongest locally compatible doubles-first scaffold after one species-level sanity check. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Dusclops Supportive Trick Room",
+      "source_refs": [
+        "Smogon Gen 8 vgc2020 Dusclops set: Supportive Trick Room",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_DUSCLOPS"
+      ],
+      "species": "SPECIES_DUSCLOPS",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_AERILATE",
+      "dependency_notes": [
+        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability.",
+        "The spread move can hit the ally, so pair it with immunity, Telepathy, or Protect."
+      ],
+      "doubles_rationale": "Tropius uses Aerilate with Double Edge, Earthquake, Tailwind, Protect; the four slots form a coherent aerilate tailwind attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_SITRUS_BERRY supports the aerilate tailwind attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_EARTHQUAKE",
+        "MOVE_TAILWIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Removed the unsupported Chlorophyll assumption and made Aerilate directly power its Flying STAB. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Aerilate Tailwind attacker",
+      "source_refs": [
+        "Checked-in competitive corpus: showdown:gen6randomdoublesbattle:029",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_TROPIUS"
+      ],
+      "species": "SPECIES_TROPIUS",
+      "suggested_item": "ITEM_SITRUS_BERRY"
+    },
+    {
+      "ability": "ABILITY_LEVITATE",
+      "dependency_notes": [
+        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Chimecho uses Levitate with Protect, Psychic, Helping Hand, Recover; the four slots form a coherent chimecho doubles support pattern with immediate doubles value.",
+      "item_context": "ITEM_SITRUS_BERRY supports the chimecho doubles support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_PROTECT",
+        "MOVE_PSYCHIC",
+        "MOVE_HELPING_HAND",
+        "MOVE_RECOVER"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Retained the strongest locally compatible doubles-first scaffold after one species-level sanity check. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Chimecho doubles support",
+      "source_refs": [
+        "Checked-in competitive corpus: showdown:gen7randomdoublesbattle:004",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_CHIMECHO"
+      ],
+      "species": "SPECIES_CHIMECHO",
+      "suggested_item": "ITEM_SITRUS_BERRY"
+    },
+    {
+      "ability": "ABILITY_JUSTIFIED",
+      "dependency_notes": [
+        "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Absol uses Justified with Play Rough, Detect, Sucker Punch, Knock Off; the four slots form a coherent absol direct doubles attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_LIFE_ORB supports the absol direct doubles attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_PLAY_ROUGH",
+        "MOVE_DETECT",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_KNOCK_OFF"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Retained the strongest locally compatible doubles-first scaffold after one species-level sanity check. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Absol direct doubles attacker",
+      "source_refs": [
+        "Checked-in competitive corpus: showdown:gen9championsrandomdoublesbattle:019",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_ABSOL"
+      ],
+      "species": "SPECIES_ABSOL",
+      "suggested_item": "ITEM_LIFE_ORB"
+    },
+    {
+      "ability": "ABILITY_SHADOW_TAG",
+      "dependency_notes": [
+        "ITEM_BERRY_JUICE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Wynaut uses Shadow Tag with Counter, Mirror Coat, Encore, Safeguard; the four slots form a coherent wynaut trapper pattern with immediate doubles value.",
+      "item_context": "ITEM_BERRY_JUICE supports the wynaut trapper role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_COUNTER",
+        "MOVE_MIRROR_COAT",
+        "MOVE_ENCORE",
+        "MOVE_SAFEGUARD"
+      ],
+      "nature": "NATURE_BOLD",
+      "review_notes": "Retained the strongest locally compatible doubles-first scaffold after one species-level sanity check. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Wynaut Trapper",
+      "source_refs": [
+        "Smogon Gen 7 lc Wynaut set: Trapper",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_WYNAUT"
+      ],
+      "species": "SPECIES_WYNAUT",
+      "suggested_item": "ITEM_BERRY_JUICE"
+    },
+    {
+      "ability": "ABILITY_ICE_BODY",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability.",
+        "The weather-linked ability is optional upside; the selected moves remain usable when that weather is absent."
+      ],
+      "doubles_rationale": "Snorunt uses Ice Body with Icy Wind, Disable, Ice Beam, Protect; the four slots form a coherent icy wind disable support pattern with immediate doubles value.",
+      "item_context": "ITEM_EVIOLITE supports the icy wind disable support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_ICY_WIND",
+        "MOVE_DISABLE",
+        "MOVE_ICE_BEAM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Added spread speed control and Protect. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Icy Wind Disable support",
+      "source_refs": [
+        "Smogon Gen 5 lc Snorunt set: Disable",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_SNORUNT"
+      ],
+      "species": "SPECIES_SNORUNT",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_REFRIGERATE",
+      "dependency_notes": [
+        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Glalie uses Refrigerate with Double Edge, Icy Wind, Disable, Protect; the four slots form a coherent refrigerate speed-control attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_SITRUS_BERRY supports the refrigerate speed-control attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_ICY_WIND",
+        "MOVE_DISABLE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Added a Normal move so Refrigerate has an actual payoff. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Refrigerate speed-control attacker",
+      "source_refs": [
+        "Checked-in competitive corpus: showdown:gen9randomdoublesbattle:017",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_GLALIE"
+      ],
+      "species": "SPECIES_GLALIE",
+      "suggested_item": "ITEM_SITRUS_BERRY"
+    },
+    {
+      "ability": "ABILITY_THICK_FAT",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Spheal uses Thick Fat with Icy Wind, Super Fang, Yawn, Protect; the four slots form a coherent bulky speed and yawn support pattern with immediate doubles value.",
+      "item_context": "ITEM_EVIOLITE supports the bulky speed and yawn support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_ICY_WIND",
+        "MOVE_SUPER_FANG",
+        "MOVE_YAWN",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BOLD",
+      "review_notes": "Removed weather-dependent Substitute and Aqua Ring stall. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Bulky speed and Yawn support",
+      "source_refs": [
+        "Smogon Gen 5 lc Spheal set: Stall",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_SPHEAL"
+      ],
+      "species": "SPECIES_SPHEAL",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_THICK_FAT",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Sealeo uses Thick Fat with Water Pulse, Icy Wind, Yawn, Protect; the four slots form a coherent bulky icy wind support pattern with immediate doubles value.",
+      "item_context": "ITEM_EVIOLITE supports the bulky icy wind support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_WATER_PULSE",
+        "MOVE_ICY_WIND",
+        "MOVE_YAWN",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CALM",
+      "review_notes": "Removed Surf friendly fire and Substitute-Toxic stall. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Bulky Icy Wind support",
+      "source_refs": [
+        "Checked-in competitive corpus: showdown:gen4randomdoublesbattle:024",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_SEALEO"
+      ],
+      "species": "SPECIES_SEALEO",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_THICK_FAT",
+      "dependency_notes": [
+        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Walrein uses Thick Fat with Water Pulse, Icy Wind, Super Fang, Protect; the four slots form a coherent bulky speed-control attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_SITRUS_BERRY supports the bulky speed-control attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_WATER_PULSE",
+        "MOVE_ICY_WIND",
+        "MOVE_SUPER_FANG",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CALM",
+      "review_notes": "Removed weather-dependent Substitute-Toxic stall. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Bulky speed-control attacker",
+      "source_refs": [
+        "Smogon Gen 4 ou Walrein set: Stallrein (Toxic Stall)",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_WALREIN"
+      ],
+      "species": "SPECIES_WALREIN",
+      "suggested_item": "ITEM_SITRUS_BERRY"
+    },
+    {
+      "ability": "ABILITY_SHELL_ARMOR",
+      "dependency_notes": [
+        "ITEM_DEEP_SEA_TOOTH is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability.",
+        "Setup is safer beside Fake Out, redirection, screens, or other partner disruption."
+      ],
+      "doubles_rationale": "Clamperl uses Shell Armor with Shell Smash, Muddy Water, Ice Beam, Protect; the four slots form a coherent shell smash spread attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_DEEP_SEA_TOOTH supports the shell smash spread attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_SHELL_SMASH",
+        "MOVE_MUDDY_WATER",
+        "MOVE_ICE_BEAM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_QUIET",
+      "review_notes": "Removed physical filler and gave the Deep Sea Tooth attacker a coherent setup plan. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Shell Smash spread attacker",
+      "source_refs": [
+        "Smogon Gen 4 doublesou Clamperl set: Rain Sweeper",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_CLAMPERL"
+      ],
+      "species": "SPECIES_CLAMPERL",
+      "suggested_item": "ITEM_DEEP_SEA_TOOTH"
+    },
+    {
+      "ability": "ABILITY_WATER_VEIL",
+      "dependency_notes": [
+        "ITEM_WHITE_HERB is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability.",
+        "Setup is safer beside Fake Out, redirection, screens, or other partner disruption."
+      ],
+      "doubles_rationale": "Huntail uses Water Veil with Shell Smash, Waterfall, Ice Fang, Protect; the four slots form a coherent shell smash physical attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_WHITE_HERB supports the shell smash physical attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_SHELL_SMASH",
+        "MOVE_WATERFALL",
+        "MOVE_ICE_FANG",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Removed Baton Pass and made Huntail a self-contained doubles threat. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Shell Smash physical attacker",
+      "source_refs": [
+        "Checked-in competitive corpus: showdown:gen6randomdoublesbattle:023",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_HUNTAIL"
+      ],
+      "species": "SPECIES_HUNTAIL",
+      "suggested_item": "ITEM_WHITE_HERB"
+    },
+    {
+      "ability": "ABILITY_SWIFT_SWIM",
+      "dependency_notes": [
+        "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability.",
+        "The weather-linked ability is optional upside; the selected moves remain usable when that weather is absent.",
+        "Setup is safer beside Fake Out, redirection, screens, or other partner disruption."
+      ],
+      "doubles_rationale": "Gorebyss uses Swift Swim with Muddy Water, Ice Beam, Shell Smash, Protect; the four slots form a coherent gorebyss shell smash pattern with immediate doubles value.",
+      "item_context": "ITEM_LIFE_ORB supports the gorebyss shell smash role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_MUDDY_WATER",
+        "MOVE_ICE_BEAM",
+        "MOVE_SHELL_SMASH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "review_notes": "Retained the strongest locally compatible doubles-first scaffold after one species-level sanity check. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Gorebyss Shell Smash",
+      "source_refs": [
+        "Smogon Gen 5 vgc2012 Gorebyss set: Shell Smash",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_GOREBYSS"
+      ],
+      "species": "SPECIES_GOREBYSS",
+      "suggested_item": "ITEM_LIFE_ORB"
+    },
+    {
+      "ability": "ABILITY_ROCK_HEAD",
+      "dependency_notes": [
+        "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Relicanth uses Rock Head with Waterfall, Rock Slide, Head Smash, Protect; the four slots form a coherent rock head physical attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_LIFE_ORB supports the rock head physical attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_WATERFALL",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_HEAD_SMASH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Corrected the ability so Head Smash has no recoil. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Rock Head physical attacker",
+      "source_refs": [
+        "Smogon Gen 5 vgc2012 Relicanth set: Swift Swim Attacker",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_RELICANTH"
+      ],
+      "species": "SPECIES_RELICANTH",
+      "suggested_item": "ITEM_LIFE_ORB"
+    },
+    {
+      "ability": "ABILITY_SHEER_FORCE",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability.",
+        "Setup is safer beside Fake Out, redirection, screens, or other partner disruption."
+      ],
+      "doubles_rationale": "Bagon uses Sheer Force with Dragon Dance, Dragon Claw, Rock Slide, Protect; the four slots form a coherent dragon dance young attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_EVIOLITE supports the dragon dance young attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_DRAGON_DANCE",
+        "MOVE_DRAGON_CLAW",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Added Protect and removed excess coverage. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Dragon Dance young attacker",
+      "source_refs": [
+        "Checked-in competitive corpus: showdown:gen5randomdoublesbattle:011",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_BAGON"
+      ],
+      "species": "SPECIES_BAGON",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_OVERCOAT",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability.",
+        "Setup is safer beside Fake Out, redirection, screens, or other partner disruption."
+      ],
+      "doubles_rationale": "Shelgon uses Overcoat with Dragon Dance, Dragon Claw, Rock Slide, Protect; the four slots form a coherent dragon dance bulky attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_EVIOLITE supports the dragon dance bulky attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_DRAGON_DANCE",
+        "MOVE_DRAGON_CLAW",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Removed Outrage locking and a Rock Head ability with no recoil move. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Dragon Dance bulky attacker",
+      "source_refs": [
+        "Smogon Gen 4 uu Shelgon set: Dragon Dance",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_SHELGON"
+      ],
+      "species": "SPECIES_SHELGON",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_INTIMIDATE",
+      "dependency_notes": [
+        "ITEM_SALAMENCITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability.",
+        "The spread move can hit the ally, so pair it with immunity, Telepathy, or Protect.",
+        "Setup is safer beside Fake Out, redirection, screens, or other partner disruption."
+      ],
+      "doubles_rationale": "Salamence uses Intimidate with Double Edge, Dragon Dance, Earthquake, Protect; the four slots form a coherent mega-capable dragon dance attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_SALAMENCITE supports the mega-capable dragon dance attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_DRAGON_DANCE",
+        "MOVE_EARTHQUAKE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Removed conflicting Tailwind and Roost so the Mega setup plan has one focus. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Mega-capable Dragon Dance attacker",
+      "source_refs": [
+        "Smogon Gen 9 nationaldexdoubles Salamence set: Physical Attacker",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_SALAMENCE"
+      ],
+      "species": "SPECIES_SALAMENCE",
+      "suggested_item": "ITEM_SALAMENCITE"
+    },
+    {
+      "ability": "ABILITY_CLEAR_BODY",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Beldum uses Clear Body with Iron Head, Zen Headbutt, Iron Defense, Take Down; the four slots form a coherent clear body young attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_EVIOLITE supports the clear body young attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_IRON_HEAD",
+        "MOVE_ZEN_HEADBUTT",
+        "MOVE_IRON_DEFENSE",
+        "MOVE_TAKE_DOWN"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Beldum exact local pool has no Protect, so the fourth slot is its only remaining legal attack. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Clear Body young attacker",
+      "source_refs": [
+        "Smogon Gen 4 lc Beldum set: Physical Attacker",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_BELDUM"
+      ],
+      "species": "SPECIES_BELDUM",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_CLEAR_BODY",
+      "dependency_notes": [
+        "ITEM_EVIOLITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Metang uses Clear Body with Meteor Mash, Zen Headbutt, Bullet Punch, Protect; the four slots form a coherent clear body priority attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_EVIOLITE supports the clear body priority attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_METEOR_MASH",
+        "MOVE_ZEN_HEADBUTT",
+        "MOVE_BULLET_PUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Removed singles hazards and Earthquake friendly fire. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Clear Body priority attacker",
+      "source_refs": [
+        "Checked-in competitive corpus: showdown:gen4randomdoublesbattle:012",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_METANG"
+      ],
+      "species": "SPECIES_METANG",
+      "suggested_item": "ITEM_EVIOLITE"
+    },
+    {
+      "ability": "ABILITY_CLEAR_BODY",
+      "dependency_notes": [
+        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Metagross uses Clear Body with Meteor Mash, Ice Punch, Stomping Tantrum, Protect; the four slots form a coherent clear body physical attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_SITRUS_BERRY supports the clear body physical attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_METEOR_MASH",
+        "MOVE_ICE_PUNCH",
+        "MOVE_STOMPING_TANTRUM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Removed singles hazards and added Protect. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Clear Body physical attacker",
+      "source_refs": [
+        "Smogon Gen 8 doublesou Metagross set: Tank",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_METAGROSS"
+      ],
+      "species": "SPECIES_METAGROSS",
+      "suggested_item": "ITEM_SITRUS_BERRY"
+    },
+    {
+      "ability": "ABILITY_STURDY",
+      "dependency_notes": [
+        "ITEM_LEFTOVERS is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Regirock uses Sturdy with Rock Slide, Body Press, Iron Defense, Protect; the four slots form a coherent iron defense body press tank pattern with immediate doubles value.",
+      "item_context": "ITEM_LEFTOVERS supports the iron defense body press tank role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_ROCK_SLIDE",
+        "MOVE_BODY_PRESS",
+        "MOVE_IRON_DEFENSE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_IMPISH",
+      "review_notes": "Removed Rest-Chesto dependence and gave setup a direct payoff. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Iron Defense Body Press tank",
+      "source_refs": [
+        "Checked-in competitive corpus: showdown:gen8randomdoublesbattle:001",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_REGIROCK"
+      ],
+      "species": "SPECIES_REGIROCK",
+      "suggested_item": "ITEM_LEFTOVERS"
+    },
+    {
+      "ability": "ABILITY_CLEAR_BODY",
+      "dependency_notes": [
+        "ITEM_CHOPLE_BERRY is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Regice uses Clear Body with Ice Beam, Thunderbolt, Thunder Wave, Protect; the four slots form a coherent regice special tank pattern with immediate doubles value.",
+      "item_context": "ITEM_CHOPLE_BERRY supports the regice special tank role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_ICE_BEAM",
+        "MOVE_THUNDERBOLT",
+        "MOVE_THUNDER_WAVE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "review_notes": "Retained the strongest locally compatible doubles-first scaffold after one species-level sanity check. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Regice Special Tank",
+      "source_refs": [
+        "Smogon Gen 5 vgc2012 Regice set: Special Tank",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_REGICE"
+      ],
+      "species": "SPECIES_REGICE",
+      "suggested_item": "ITEM_CHOPLE_BERRY"
+    },
+    {
+      "ability": "ABILITY_CLEAR_BODY",
+      "dependency_notes": [
+        "ITEM_LEFTOVERS is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Registeel uses Clear Body with Body Press, Iron Defense, Thunder Wave, Protect; the four slots form a coherent iron defense paralysis tank pattern with immediate doubles value.",
+      "item_context": "ITEM_LEFTOVERS supports the iron defense paralysis tank role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_BODY_PRESS",
+        "MOVE_IRON_DEFENSE",
+        "MOVE_THUNDER_WAVE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_IMPISH",
+      "review_notes": "Removed Rest-Chesto dependence and weak unboosted Iron Head. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Iron Defense paralysis tank",
+      "source_refs": [
+        "Checked-in competitive corpus: showdown:gen6randomdoublesbattle:023",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_REGISTEEL"
+      ],
+      "species": "SPECIES_REGISTEEL",
+      "suggested_item": "ITEM_LEFTOVERS"
+    },
+    {
+      "ability": "ABILITY_LEVITATE",
+      "dependency_notes": [
+        "ITEM_LATIASITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Latias uses Levitate with Psyshock, Ice Beam, Tailwind, Protect; the four slots form a coherent mega-capable tailwind attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_LATIASITE supports the mega-capable tailwind attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_PSYSHOCK",
+        "MOVE_ICE_BEAM",
+        "MOVE_TAILWIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Removed slow Calm Mind-Roost singles pacing. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Mega-capable Tailwind attacker",
+      "source_refs": [
+        "Smogon Gen 7 doublesou Latias set: Calm Mind Sweeper",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_LATIAS"
+      ],
+      "species": "SPECIES_LATIAS",
+      "suggested_item": "ITEM_LATIASITE"
+    },
+    {
+      "ability": "ABILITY_LEVITATE",
+      "dependency_notes": [
+        "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Latios uses Levitate with Draco Meteor, Psyshock, Tailwind, Protect; the four slots form a coherent latios special attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_LIFE_ORB supports the latios special attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_DRACO_METEOR",
+        "MOVE_PSYSHOCK",
+        "MOVE_TAILWIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Retained the strongest locally compatible doubles-first scaffold after one species-level sanity check. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Latios Special Attacker",
+      "source_refs": [
+        "Smogon Gen 6 doublesou Latios set: Special Attacker",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_LATIOS"
+      ],
+      "species": "SPECIES_LATIOS",
+      "suggested_item": "ITEM_LIFE_ORB"
+    },
+    {
+      "ability": "ABILITY_DRIZZLE",
+      "dependency_notes": [
+        "ITEM_MYSTIC_WATER is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Kyogre uses Drizzle with Water Spout, Origin Pulse, Thunder, Protect; the four slots form a coherent kyogre offensive pattern with immediate doubles value.",
+      "item_context": "ITEM_MYSTIC_WATER supports the kyogre offensive role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_WATER_SPOUT",
+        "MOVE_ORIGIN_PULSE",
+        "MOVE_THUNDER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Retained the strongest locally compatible doubles-first scaffold after one species-level sanity check. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Kyogre Offensive",
+      "source_refs": [
+        "Smogon Gen 8 battlestadiumdoubles Kyogre set: Offensive",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_KYOGRE"
+      ],
+      "species": "SPECIES_KYOGRE",
+      "suggested_item": "ITEM_MYSTIC_WATER"
+    },
+    {
+      "ability": "ABILITY_DROUGHT",
+      "dependency_notes": [
+        "ITEM_WHITE_HERB is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability.",
+        "Setup is safer beside Fake Out, redirection, screens, or other partner disruption."
+      ],
+      "doubles_rationale": "Groudon uses Drought with Precipice Blades, Stone Edge, Swords Dance, Protect; the four slots form a coherent groudon swords dance pattern with immediate doubles value.",
+      "item_context": "ITEM_WHITE_HERB supports the groudon swords dance role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_PRECIPICE_BLADES",
+        "MOVE_STONE_EDGE",
+        "MOVE_SWORDS_DANCE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "review_notes": "Retained the strongest locally compatible doubles-first scaffold after one species-level sanity check. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Groudon Swords Dance",
+      "source_refs": [
+        "Smogon Gen 8 battlestadiumdoubles Groudon set: Swords Dance",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_GROUDON"
+      ],
+      "species": "SPECIES_GROUDON",
+      "suggested_item": "ITEM_WHITE_HERB"
+    },
+    {
+      "ability": "ABILITY_AIR_LOCK",
+      "dependency_notes": [
+        "ITEM_AGUAV_BERRY is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability.",
+        "Setup is safer beside Fake Out, redirection, screens, or other partner disruption."
+      ],
+      "doubles_rationale": "Rayquaza uses Air Lock with Dragon Ascent, Swords Dance, Protect, Extreme Speed; the four slots form a coherent rayquaza swords dance pattern with immediate doubles value.",
+      "item_context": "ITEM_AGUAV_BERRY supports the rayquaza swords dance role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_DRAGON_ASCENT",
+        "MOVE_SWORDS_DANCE",
+        "MOVE_PROTECT",
+        "MOVE_EXTREME_SPEED"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Retained the strongest locally compatible doubles-first scaffold after one species-level sanity check. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Rayquaza Swords Dance",
+      "source_refs": [
+        "Smogon Gen 7 vgc2019 Rayquaza set: Swords Dance",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_RAYQUAZA"
+      ],
+      "species": "SPECIES_RAYQUAZA",
+      "suggested_item": "ITEM_AGUAV_BERRY"
+    },
+    {
+      "ability": "ABILITY_SERENE_GRACE",
+      "dependency_notes": [
+        "ITEM_SITRUS_BERRY is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Jirachi uses Serene Grace with Iron Head, Icy Wind, Helping Hand, Protect; the four slots form a coherent serene grace speed support pattern with immediate doubles value.",
+      "item_context": "ITEM_SITRUS_BERRY supports the serene grace speed support role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_IRON_HEAD",
+        "MOVE_ICY_WIND",
+        "MOVE_HELPING_HAND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "review_notes": "Removed redundant double paralysis and added partner support plus Protect. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Serene Grace speed support",
+      "source_refs": [
+        "Checked-in competitive corpus: showdown:gen5randomdoublesbattle:021",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_JIRACHI"
+      ],
+      "species": "SPECIES_JIRACHI",
+      "suggested_item": "ITEM_SITRUS_BERRY"
+    },
+    {
+      "ability": "ABILITY_PRESSURE",
+      "dependency_notes": [
+        "ITEM_FOCUS_SASH is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+      ],
+      "doubles_rationale": "Deoxys uses Pressure with Psycho Boost, Ice Beam, Taunt, Protect; the four slots form a coherent fast taunt attacker pattern with immediate doubles value.",
+      "item_context": "ITEM_FOCUS_SASH supports the fast taunt attacker role but is never granted by the tutor.",
+      "moves": [
+        "MOVE_PSYCHO_BOOST",
+        "MOVE_ICE_BEAM",
+        "MOVE_TAUNT",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "review_notes": "Corrected the physical nature and removed low-value Pursuit. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
+      "role": "Fast Taunt attacker",
+      "source_refs": [
+        "Smogon Gen 7 ubers Deoxys set: Marshadow Lure",
+        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_DEOXYS"
+      ],
+      "species": "SPECIES_DEOXYS",
+      "suggested_item": "ITEM_FOCUS_SASH"
+    }
+  ],
+  "schema_version": 1
+}
