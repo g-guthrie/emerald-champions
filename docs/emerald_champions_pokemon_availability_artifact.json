@@ -5,7 +5,7 @@
     "surface": "report",
     "title": "Emerald Champions — Complete Pokémon Encounter and Acquisition Report",
     "description": "Complete source-derived Emerald Champions wild encounter and Pokémon acquisition report, optimized for language-model ingestion.",
-    "generatedAt": "2026-08-27T17:12:06Z",
+    "generatedAt": "2026-08-27T18:57:10Z",
     "cards": [],
     "charts": [
       {
@@ -85,7 +85,7 @@
       {
         "id": "technical_summary",
         "type": "markdown",
-        "body": "## Technical summary\n\n- Source state: commit `712da9a722a1f44833230af44c2d22a6d3804e49`; clean working tree at generation: **False**.\n- Random encounter coverage: **139** populated main overworld maps from **147** configured entries, plus **576** distinct species/forms in catchable random pools.\n- Loadout system: **1309** total competitive sets. Wild Pokémon roll the exact one/two/three-set tutor count at 100%, 50/50, or approximately one-third each.\n- Item system: **65** ordinary competitive held items are free and unlimited. Berries and evolution/transformation progression items are not vendor stock.\n- Species/form appendix: **1269** runtime IDs classified; **93** remain unresolved by the automated source scan and are explicitly listed rather than guessed.\n- Probability validation: **PASS** — every emitted method pool sums independently to 100%.\n- Battle context: **810** reachable definitions, including **565 doubles** and **289 singles**; **72** canonical encounters are currently source-closed bespoke redesigns."
+        "body": "## Technical summary\n\n- Source state: commit `0b2bc96c7d6480187f70f5b83a705c081780983e`; clean working tree at generation: **True**.\n- Random encounter coverage: **139** populated main overworld maps from **147** configured entries, plus **576** distinct species/forms in catchable random pools.\n- Loadout system: **1309** total competitive sets. Wild Pokémon roll the exact one/two/three-set tutor count at 100%, 50/50, or approximately one-third each.\n- Item system: **65** ordinary competitive held items are free and unlimited. Berries and evolution/transformation progression items are not vendor stock.\n- Species/form appendix: **1269** runtime IDs classified; **93** remain unresolved by the automated source scan and are explicitly listed rather than guessed.\n- Probability validation: **PASS** — every emitted method pool sums independently to 100%.\n- Battle context: **810** reachable definitions, including **565 doubles** and **289 singles**; **72** canonical encounters are currently source-closed bespoke redesigns."
       },
       {
         "id": "acquisition_classification_summary",
@@ -152,7 +152,7 @@
   },
   "snapshot": {
     "version": 1,
-    "generatedAt": "2026-08-27T17:12:06Z",
+    "generatedAt": "2026-08-27T18:57:10Z",
     "status": "ready",
     "datasets": {
       "acquisition_summary": [

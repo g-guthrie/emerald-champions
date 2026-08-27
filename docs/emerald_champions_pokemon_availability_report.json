@@ -1,9 +1,9 @@
 {
   "meta": {
     "title": "Emerald Champions — Complete Pokémon Encounter and Acquisition Report",
-    "generated_at": "2026-08-27T17:12:06Z",
-    "source_commit": "712da9a722a1f44833230af44c2d22a6d3804e49",
-    "source_clean": false,
+    "generated_at": "2026-08-27T18:57:10Z",
+    "source_commit": "0b2bc96c7d6480187f70f5b83a705c081780983e",
+    "source_clean": true,
     "scope": "All current random encounter tables plus source-resolved non-random acquisition paths and every runtime species/form ID."
   },
   "game_context": {
