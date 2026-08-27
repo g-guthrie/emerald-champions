@@ -57,9 +57,105 @@ RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist:: @ 82118DA
 	faceplayer
 	compare VAR_FOSSIL_RESURRECTION_STATE, 1
 	call_if_eq RustboroCity_DevonCorp_2F_EventScript_SetFossilReady
-	msgbox RustboroCity_DevonCorp_2F_Text_DeviceToVisualizePokemonDreams, MSGBOX_DEFAULT
+	msgbox RustboroCity_DevonCorp_2F_Text_LegendarySignResearcherIntro, MSGBOX_DEFAULT
+RustboroCity_DevonCorp_2F_EventScript_CheckLegendarySign:
+	special TryDiscoverEligibleLegendarySign
+	compare VAR_RESULT, 0
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_NoLegendarySignYet
+	compare VAR_RESULT, 1
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_LegendarySignClue
+	compare VAR_RESULT, 2
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_LegendarySignAwakened
+	special TryGiveArceusLegendarySignMasteryReward
+	compare VAR_RESULT, 1
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_ArceusRewardParty
+	compare VAR_RESULT, 2
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_ArceusRewardPC
+	compare VAR_RESULT, 3
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_ArceusRewardNoRoom
+	compare VAR_RESULT, 4
+	goto_if_eq RustboroCity_DevonCorp_2F_EventScript_ArceusRewardComplete
+	msgbox RustboroCity_DevonCorp_2F_Text_AllLegendarySignsRecorded, MSGBOX_DEFAULT
 	release
 	end
+
+RustboroCity_DevonCorp_2F_EventScript_ArceusRewardParty:
+	msgbox RustboroCity_DevonCorp_2F_Text_ArceusRewardParty, MSGBOX_DEFAULT
+	release
+	end
+
+RustboroCity_DevonCorp_2F_EventScript_ArceusRewardPC:
+	msgbox RustboroCity_DevonCorp_2F_Text_ArceusRewardPC, MSGBOX_DEFAULT
+	release
+	end
+
+RustboroCity_DevonCorp_2F_EventScript_ArceusRewardNoRoom:
+	msgbox RustboroCity_DevonCorp_2F_Text_ArceusRewardNoRoom, MSGBOX_DEFAULT
+	release
+	end
+
+RustboroCity_DevonCorp_2F_EventScript_ArceusRewardComplete:
+	msgbox RustboroCity_DevonCorp_2F_Text_ArceusRewardComplete, MSGBOX_DEFAULT
+	release
+	end
+
+RustboroCity_DevonCorp_2F_EventScript_LegendarySignAwakened:
+	msgbox RustboroCity_DevonCorp_2F_Text_LegendarySignAwakened, MSGBOX_DEFAULT
+	goto RustboroCity_DevonCorp_2F_EventScript_CheckLegendarySign
+
+RustboroCity_DevonCorp_2F_EventScript_LegendarySignClue:
+	msgbox RustboroCity_DevonCorp_2F_Text_LegendarySignClue, MSGBOX_DEFAULT
+	release
+	end
+
+RustboroCity_DevonCorp_2F_EventScript_NoLegendarySignYet:
+	msgbox RustboroCity_DevonCorp_2F_Text_NoLegendarySignYet, MSGBOX_DEFAULT
+	release
+	end
+
+RustboroCity_DevonCorp_2F_Text_LegendarySignResearcherIntro:
+	.string "My dream visualizer detected marks\n"
+	.string "I call LEGENDARY SIGNS.\p"
+	.string "They awaken when the right Pokémon\n"
+	.string "returns here with an accomplished Trainer.$"
+
+RustboroCity_DevonCorp_2F_Text_LegendarySignAwakened:
+	.string "{STR_VAR_1} resonates with my data!\p"
+	.string "A Legendary Sign has awakened.\n"
+	.string "{STR_VAR_2} may now appear at\n"
+	.string "{STR_VAR_3}.$"
+
+RustboroCity_DevonCorp_2F_Text_LegendarySignClue:
+	.string "My next readable Sign points toward\n"
+	.string "{STR_VAR_2} at {STR_VAR_3}.\p"
+	.string "Bring me {STR_VAR_1} to awaken it.$"
+
+RustboroCity_DevonCorp_2F_Text_NoLegendarySignYet:
+	.string "The next Sign is still beyond the\n"
+	.string "progress of your Gym challenge.$"
+
+RustboroCity_DevonCorp_2F_Text_AllLegendarySignsRecorded:
+	.string "Every wild Legendary Sign is awake.\p"
+	.string "Capture each one, including the three\n"
+	.string "seen by Mt. Pyre's storyteller.$"
+
+RustboroCity_DevonCorp_2F_Text_ArceusRewardParty:
+	.string "Every Legendary Sign is complete!\p"
+	.string "Their combined light calls ARCEUS,\n"
+	.string "who has joined your party.$"
+
+RustboroCity_DevonCorp_2F_Text_ArceusRewardPC:
+	.string "Every Legendary Sign is complete!\p"
+	.string "Their combined light calls ARCEUS,\n"
+	.string "who was sent to your PC.$"
+
+RustboroCity_DevonCorp_2F_Text_ArceusRewardNoRoom:
+	.string "Every Sign is complete, but ARCEUS\n"
+	.string "has nowhere to go. Make PC space.$"
+
+RustboroCity_DevonCorp_2F_Text_ArceusRewardComplete:
+	.string "You completed every Legendary Sign.\n"
+	.string "Even ARCEUS answered your call.$"
 
 RustboroCity_DevonCorp_2F_EventScript_FossilScientist:: @ 82118F1
 	lock

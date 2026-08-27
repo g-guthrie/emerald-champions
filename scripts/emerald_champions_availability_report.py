@@ -353,6 +353,51 @@ def collect_nonrandom(dex: battle_sets.LocalDex) -> tuple[list[dict], dict[str, 
     for species in re.findall(r"setvar\s+VAR_TEMP_1,\s*(SPECIES_[A-Z0-9_]+)", game_corner):
         add_source(rows, seen, species, "Prize Pokémon", "Mauville Game Corner", "Coin-exchange Pokémon prize", "data/maps/MauvilleCity_GameCorner/scripts.inc")
 
+    legendary_signs = read("src/data/pokemon/legendary_signs.h")
+    for target, map_id, area, chance, badges, offset, requirement, flag in re.findall(
+        r"WILD_SIGN\([^,]+,\s*([A-Z0-9_]+),\s*([A-Z0-9_]+),\s*"
+        r"LEGENDARY_AREA_([A-Z]+),\s*(\d+),\s*(\d+),\s*(-?\d+),\s*"
+        r"([A-Z0-9_]+),\s*([^\)]+)\)",
+        legendary_signs,
+    ):
+        species = f"SPECIES_{target}"
+        details = (
+            f"Legendary Sign: {chance}% within {area.title()} encounters after {badges} Badge(s); "
+            f"bring SPECIES_{requirement}; requires {flag.strip()}; cap offset {int(offset):+d}"
+        )
+        add_source(
+            rows,
+            seen,
+            species,
+            "Conditional Legendary Sign",
+            humanize(f"MAP_{map_id}"),
+            details,
+            "src/data/pokemon/legendary_signs.h",
+        )
+
+    legendary_source_labels = {
+        "BREEDING": ("Special breeding", "Hoenn Day Care", "Breed Manaphy with Ditto"),
+        "GAME_CORNER": ("Prize Pokémon", "Mauville Game Corner", "Coin-exchange Pokémon prize"),
+        "CIRCUIT": ("Champions Circuit milestone", "Battle Frontier Battle Tower", "Awarded every five consecutive Circuit wins"),
+        "MASTERY": ("Mastery reward", "Legendary Sign / Champions Circuit mastery", "Complete the corresponding endgame mastery track"),
+    }
+    for target, source in re.findall(
+        r"OTHER_SIGN\([^,]+,\s*([A-Z0-9_]+),\s*LEGENDARY_SOURCE_([A-Z_]+)\)",
+        legendary_signs,
+    ):
+        if source not in legendary_source_labels:
+            continue
+        category, location, details = legendary_source_labels[source]
+        add_source(
+            rows,
+            seen,
+            f"SPECIES_{target}",
+            category,
+            location,
+            details,
+            "src/data/pokemon/legendary_signs.h",
+        )
+
     field = read("src/field_specials.c")
     fossil_body = field.split("void FossilToSpecies", 1)[1].split("void CheckLeadMon", 1)[0]
     for item, species in re.findall(r"case\s+(ITEM_[A-Z0-9_]+):\s*species\s*=\s*(SPECIES_[A-Z0-9_]+)", fossil_body):
@@ -488,7 +533,8 @@ def species_availability(
                 current = parent
             acquisition_class = "Evolution from obtainable Pokémon"
             path = " ; ".join(reversed(chain))
-        elif exclusion in {"battle-transformation-endpoint", "automatic-or-battle-only-form", "unown-personality-graphic-slot"}:
+        elif (exclusion in {"battle-transformation-endpoint", "automatic-or-battle-only-form", "unown-personality-graphic-slot"}
+              or "_POWER_CONSTRUCT" in species):
             base = base_form_candidate(species, all_species)
             acquisition_class = "Form / battle transformation; not separately acquired"
             path = f"Derived from {species_display(base) if base else 'its base species'} through its form, personality, held-item, ability, or battle mechanic."
@@ -577,6 +623,8 @@ def build_report() -> tuple[dict, str, dict]:
             "leveling": "The reusable Leveler raises the whole eligible party to the current cap; Rare Candy raises up to ten levels while stopping at the cap or next level evolution.",
             "loadouts": f"{defaults['supported_count']} authored defaults plus {loadouts['alternative_count']} handbook-derived alternatives ({loadouts['set_count']} total). Ordinary wild Pokémon uniformly roll their actual one-to-three tutor sets and fight with the rolled moves, nature, ability, and held item.",
             "items": f"{loadouts['free_item_count']} ordinary competitive held items are free and unlimited at the Pokémon Center vendor. Berries remain an exploration, harvesting, and planting economy. Mega Stones, evolution catalysts, Primal Orbs, Plates, Drives, Memories, Ogerpon masks, Rusted items, and similar form/progression equipment remain protected.",
+            "legendary_signs": "Twenty-eight conditional wild Legendary Signs are awakened by the Devon researcher when badge/story and party-species requirements are met. Darkrai, Cresselia, and Dialga form a linked native overworld quest; Phione is bred from Manaphy and Ditto; Genesect and Poipole are Game Corner prizes.",
+            "champions_circuit": "The postgame Champions Circuit is a repeatable six-on-six doubles ladder using the 1,309-set competitive corpus. Player levels normalize to 80, opponent levels ramp one slot per win, ordinary held items restore after battle, seventeen rare Pokémon arrive at five-win milestones, and Eternatus is the 90-win mastery reward.",
         },
         "level_cap_phases": PHASES,
         "wild_encounters": wild_rows,
@@ -613,6 +661,9 @@ def build_report() -> tuple[dict, str, dict]:
             "src/data/trade.h",
             "docs/verdant_battle_set_presets.json",
             "docs/verdant_multi_battle_sets.json",
+            "src/data/pokemon/legendary_signs.h",
+            "src/legendary_signs.c",
+            "src/champions_circuit.c",
         ],
     }
 

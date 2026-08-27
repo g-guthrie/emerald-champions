@@ -458,6 +458,143 @@ BattleFrontier_BattleTowerLobby_EventScript_FeelingsMan:: @ 823EEE7
 	release
 	end
 
+BattleFrontier_BattleTowerLobby_EventScript_ChampionsCircuit::
+	lock
+	faceplayer
+	goto_if_unset FLAG_SYS_GAME_CLEAR, BattleFrontier_BattleTowerLobby_EventScript_CircuitLocked
+	msgbox BattleFrontier_BattleTowerLobby_Text_CircuitWelcome, MSGBOX_DEFAULT
+	special ChampionsCircuitCanEnter
+	compare VAR_RESULT, FALSE
+	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_CircuitNeedsParty
+	msgbox BattleFrontier_BattleTowerLobby_Text_CircuitEnter, MSGBOX_YESNO
+	compare VAR_RESULT, NO
+	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_CircuitCancel
+	special ChampionsCircuitBegin
+
+BattleFrontier_BattleTowerLobby_EventScript_CircuitNext:
+	special ChampionsCircuitGenerateOpponent
+	compare VAR_RESULT, PARTY_SIZE
+	goto_if_ne BattleFrontier_BattleTowerLobby_EventScript_CircuitGenerationFailed
+	msgbox BattleFrontier_BattleTowerLobby_Text_CircuitOpponent, MSGBOX_DEFAULT
+	closemessage
+	special BattleSetup_StartChampionsCircuitBattle
+	waitstate
+	special ChampionsCircuitHandleBattleResult
+	compare VAR_RESULT, FALSE
+	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_CircuitLost
+	special ChampionsCircuitTryGiveReward
+	compare VAR_RESULT, 1
+	call_if_eq BattleFrontier_BattleTowerLobby_EventScript_CircuitRewardParty
+	compare VAR_RESULT, 2
+	call_if_eq BattleFrontier_BattleTowerLobby_EventScript_CircuitRewardPC
+	compare VAR_RESULT, 3
+	call_if_eq BattleFrontier_BattleTowerLobby_EventScript_CircuitRewardNoRoom
+	msgbox BattleFrontier_BattleTowerLobby_Text_CircuitWon, MSGBOX_YESNO
+	compare VAR_RESULT, YES
+	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_CircuitNext
+	special ChampionsCircuitEnd
+	msgbox BattleFrontier_BattleTowerLobby_Text_CircuitRetire, MSGBOX_DEFAULT
+	release
+	end
+
+BattleFrontier_BattleTowerLobby_EventScript_CircuitRewardParty:
+	msgbox BattleFrontier_BattleTowerLobby_Text_CircuitRewardParty, MSGBOX_DEFAULT
+	return
+
+BattleFrontier_BattleTowerLobby_EventScript_CircuitRewardPC:
+	msgbox BattleFrontier_BattleTowerLobby_Text_CircuitRewardPC, MSGBOX_DEFAULT
+	return
+
+BattleFrontier_BattleTowerLobby_EventScript_CircuitRewardNoRoom:
+	msgbox BattleFrontier_BattleTowerLobby_Text_CircuitRewardNoRoom, MSGBOX_DEFAULT
+	return
+
+BattleFrontier_BattleTowerLobby_EventScript_CircuitLocked:
+	msgbox BattleFrontier_BattleTowerLobby_Text_CircuitLocked, MSGBOX_DEFAULT
+	release
+	end
+
+BattleFrontier_BattleTowerLobby_EventScript_CircuitNeedsParty:
+	msgbox BattleFrontier_BattleTowerLobby_Text_CircuitNeedsParty, MSGBOX_DEFAULT
+	release
+	end
+
+BattleFrontier_BattleTowerLobby_EventScript_CircuitCancel:
+	msgbox BattleFrontier_BattleTowerLobby_Text_CircuitCancel, MSGBOX_DEFAULT
+	release
+	end
+
+BattleFrontier_BattleTowerLobby_EventScript_CircuitLost:
+	msgbox BattleFrontier_BattleTowerLobby_Text_CircuitLost, MSGBOX_DEFAULT
+	release
+	end
+
+BattleFrontier_BattleTowerLobby_EventScript_CircuitGenerationFailed:
+	special ChampionsCircuitEnd
+	msgbox BattleFrontier_BattleTowerLobby_Text_CircuitGenerationFailed, MSGBOX_DEFAULT
+	release
+	end
+
+BattleFrontier_BattleTowerLobby_Text_CircuitWelcome:
+	.string "This is the CHAMPIONS CIRCUIT.\p"
+	.string "Every match is a full-team Double\n"
+	.string "Battle built from competitive sets.\p"
+	.string "Your team is restored and set to Lv. 80.\n"
+	.string "The opposition grows after each win.$"
+
+BattleFrontier_BattleTowerLobby_Text_CircuitEnter:
+	.string "Bring six healthy Pokémon. Items are\n"
+	.string "restored after every match.\p"
+	.string "Begin a new Circuit run?$"
+
+BattleFrontier_BattleTowerLobby_Text_CircuitOpponent:
+	.string "Match {STR_VAR_2}: your opponent has\n"
+	.string "prepared {STR_VAR_1}.\p"
+	.string "The next battle begins now!$"
+
+BattleFrontier_BattleTowerLobby_Text_CircuitWon:
+	.string "Victory! Your team has been fully\n"
+	.string "restored. Continue the run?$"
+
+BattleFrontier_BattleTowerLobby_Text_CircuitRewardParty:
+	.string "Circuit milestone reached!\p"
+	.string "{STR_VAR_1} joined your party.$"
+
+BattleFrontier_BattleTowerLobby_Text_CircuitRewardPC:
+	.string "Circuit milestone reached!\p"
+	.string "{STR_VAR_1} was sent to the PC.$"
+
+BattleFrontier_BattleTowerLobby_Text_CircuitRewardNoRoom:
+	.string "A Circuit reward is waiting, but both\n"
+	.string "your party and PC are full.\p"
+	.string "Make room before your next victory.$"
+
+BattleFrontier_BattleTowerLobby_Text_CircuitLocked:
+	.string "This desk hosts a challenge beyond\n"
+	.string "the Pokémon League.\p"
+	.string "Return after becoming Champion.$"
+
+BattleFrontier_BattleTowerLobby_Text_CircuitNeedsParty:
+	.string "The Circuit requires six healthy\n"
+	.string "Pokémon and no Eggs.$"
+
+BattleFrontier_BattleTowerLobby_Text_CircuitCancel:
+	.string "Prepare any six you like. The Circuit\n"
+	.string "will be waiting.$"
+
+BattleFrontier_BattleTowerLobby_Text_CircuitLost:
+	.string "Your run ends here. Your original\n"
+	.string "team and levels have been restored.$"
+
+BattleFrontier_BattleTowerLobby_Text_CircuitRetire:
+	.string "A wise Champion knows when to stop.\p"
+	.string "Your original team and levels have\n"
+	.string "been restored.$"
+
+BattleFrontier_BattleTowerLobby_Text_CircuitGenerationFailed:
+	.string "The next opponent could not be\n"
+	.string "prepared. Your team was restored.$"
+
 BattleFrontier_BattleTowerLobby_EventScript_FeelingsBattleNow:: @ 823EF32
 	msgbox BattleFrontier_BattleTowerLobby_Text_FeelWhatWhenYouBegin, MSGBOX_DEFAULT
 	setvar VAR_0x8004, EASY_CHAT_TYPE_BATTLE_START

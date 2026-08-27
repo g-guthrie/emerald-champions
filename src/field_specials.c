@@ -2527,7 +2527,7 @@ void ShowScrollableMultichoice(void)
             break;
         case SCROLL_MULTI_GAMECORNER_POKEMON:
             task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
-            task->tNumItems = 12;
+            task->tNumItems = 15;
             task->tLeft = 19;
             task->tTop = 1;
             task->tWidth = 12;
@@ -2939,6 +2939,8 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_GameCornerRaichu,
         gText_GameCornerMarowak,
         gText_GameCornerExeggutor,
+        gText_GameCornerGenesect,
+        gText_GameCornerPoipole,
         gText_Exit
     },
     [SCROLL_MULTI_GAMECORNER_GRASS_STARTERS] =

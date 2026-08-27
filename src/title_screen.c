@@ -11,8 +11,6 @@
 #include "m4a.h"
 #include "main.h"
 #include "main_menu.h"
-#include "new_game.h"
-#include "overworld.h"
 #include "palette.h"
 #include "reset_rtc_screen.h"
 #include "berry_fix_program.h"
@@ -24,10 +22,7 @@
 #include "trig.h"
 #include "graphics.h"
 #include "constants/rgb.h"
-#include "constants/flags.h"
-#include "constants/maps.h"
 #include "constants/songs.h"
-#include "constants/vars.h"
 
 #define VERSION_BANNER_RIGHT_TILEOFFSET 64
 #define VERSION_BANNER_LEFT_X 98
@@ -56,7 +51,6 @@ static void CB2_GoToSoundCheckScreen(void);
 static void CB2_GoToBerryFixScreen(void);
 static void CB2_GoToCopyrightScreen(void);
 static void UpdateLegendaryMarkingColor(u8);
-static bool8 TryStartLegendaryScenePreview(void);
 
 static void SpriteCB_VersionBannerLeft(struct Sprite *sprite);
 static void SpriteCB_VersionBannerRight(struct Sprite *sprite);
@@ -529,41 +523,6 @@ static void VBlankCB(void)
 #define tCounter data[0]
 #define tSkipToNext data[1]
 
-// Visual-prototype branch only. The headless runner writes scene 1, 2, or 3
-// after title initialization to create a disposable direct-to-map preview.
-static bool8 TryStartLegendaryScenePreview(void)
-{
-    u8 scene = gSpecialVar_0x800B;
-
-    if (scene == 0)
-        return FALSE;
-
-    gSpecialVar_0x800B = 0;
-    NewGameInitData();
-    FlagSet(FLAG_ADVENTURE_STARTED);
-    FlagSet(FLAG_SYS_POKEMON_GET);
-    if (scene == 1)
-    {
-        FlagSet(FLAG_HIDE_MT_PYRE_SUMMIT_ARCHIE);
-        FlagSet(FLAG_HIDE_MT_PYRE_SUMMIT_MAXIE);
-        FlagSet(FLAG_HIDE_MT_PYRE_SUMMIT_TEAM_AQUA);
-        VarSet(VAR_MT_PYRE_STATE, 4);
-        SetWarpDestination(MAP_GROUP(MT_PYRE_SUMMIT), MAP_NUM(MT_PYRE_SUMMIT), -1, 23, 12);
-    }
-    else if (scene == 2)
-    {
-        FlagSet(FLAG_ITEM_METEOR_FALLS_B1F_2R_TM_02);
-        SetWarpDestination(MAP_GROUP(METEOR_FALLS_B1F_2R), MAP_NUM(METEOR_FALLS_B1F_2R), -1, 5, 8);
-    }
-    else
-    {
-        SetWarpDestination(MAP_GROUP(METEOR_FALLS_B1F_1R), MAP_NUM(METEOR_FALLS_B1F_1R), -1, 12, 22);
-    }
-    WarpIntoMap();
-    SetMainCallback2(CB2_LoadMap);
-    return TRUE;
-}
-
 void CB2_InitTitleScreen(void)
 {
     switch (gMain.state)
@@ -671,8 +630,6 @@ void CB2_InitTitleScreen(void)
 
 static void MainCB2(void)
 {
-    if (TryStartLegendaryScenePreview())
-        return;
     RunTasks();
     AnimateSprites();
     BuildOamBuffer();

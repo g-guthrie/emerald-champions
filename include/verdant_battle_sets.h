@@ -42,5 +42,9 @@ u16 GetVerdantBattleSetItem(struct Pokemon *mon, u8 choice);
 u16 GetVerdantBattleSetRequiredItem(struct Pokemon *mon, u8 choice);
 bool8 IsVerdantLegendarySpecies(u16 species);
 bool8 IsVerdantProtectedProgressionItem(u16 item);
+u8 GetVerdantBattleSetRawCount(u16 species);
+const struct VerdantBattleSetPreset *GetVerdantBattleSetRawPreset(u16 species, u8 rawChoice);
+u8 ApplyVerdantOpponentBattleSet(struct Pokemon *mon, u8 rawChoice);
+u8 ApplyVerdantGiftBattleSet(struct Pokemon *mon, u8 rawChoice);
 
 #endif // GUARD_VERDANT_BATTLE_SETS_H

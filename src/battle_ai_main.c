@@ -4,6 +4,7 @@
 #include "battle_anim.h"
 #include "battle_ai_util.h"
 #include "battle_ai_main.h"
+#include "champions_circuit.h"
 #include "battle_factory.h"
 #include "battle_setup.h"
 #include "data.h"
@@ -130,7 +131,24 @@ void BattleAI_SetupItems(void)
 
 void BattleAI_SetupFlags(void)
 {
-    if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
+    if (IsChampionsCircuitBattle())
+    {
+        AI_THINKING_STRUCT->aiFlags = AI_FLAG_CHECK_BAD_MOVE
+                                    | AI_FLAG_TRY_TO_FAINT
+                                    | AI_FLAG_CHECK_VIABILITY
+                                    | AI_FLAG_SETUP_FIRST_TURN
+                                    | AI_FLAG_RISKY
+                                    | AI_FLAG_HP_AWARE
+                                    | AI_FLAG_WILL_SUICIDE
+                                    | AI_FLAG_HELP_PARTNER
+                                    | AI_FLAG_SMART_SWITCHING
+                                    | AI_FLAG_CHECK_FOE
+                                    | AI_FLAG_PERISH_TRAP
+                                    | AI_FLAG_COMBO_SETUP
+                                    | AI_FLAG_SPEED_CONTROL
+                                    | AI_FLAG_FIELD_CONTROL;
+    }
+    else if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
         AI_THINKING_STRUCT->aiFlags = GetAiScriptsInRecordedBattle();
     else if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
         AI_THINKING_STRUCT->aiFlags = AI_FLAG_SAFARI;

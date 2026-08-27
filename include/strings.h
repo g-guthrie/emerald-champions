@@ -3469,6 +3469,8 @@ extern const u8 gText_GameCornerGeodude[];
 extern const u8 gText_GameCornerRaichu[];
 extern const u8 gText_GameCornerMarowak[];
 extern const u8 gText_GameCornerExeggutor[];
+extern const u8 gText_GameCornerGenesect[];
+extern const u8 gText_GameCornerPoipole[];
 
 extern const u8 gText_GameCornerBulbasaur[];
 extern const u8 gText_GameCornerChikorita[];

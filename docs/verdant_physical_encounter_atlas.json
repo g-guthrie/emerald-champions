@@ -25792,7 +25792,7 @@
       "atlasOrdinal": 362
     },
     {
-      "groupId": "PHYSICAL_MTPYRE_SUMMIT_0453",
+      "groupId": "PHYSICAL_MTPYRE_SUMMIT_0599",
       "sequenceIndex": null,
       "sequenceStatus": null,
       "category": "single-scripted-trainer",
@@ -25812,13 +25812,13 @@
       "allyTrainerIds": [],
       "rematchIds": [],
       "invocationIds": [
-        "INV_MTPYRE_SUMMIT_0453"
+        "INV_MTPYRE_SUMMIT_0599"
       ],
       "sources": [
         {
           "map": "MtPyre_Summit",
           "file": "data/maps/MtPyre_Summit/scripts.inc",
-          "line": 453,
+          "line": 599,
           "label": "MtPyre_Summit_EventScript_Grunt1",
           "opcode": "trainerbattle_single",
           "battleType": null,
@@ -25847,14 +25847,14 @@
       ],
       "groupingEvidence": [
         {
-          "detail": "INV_MTPYRE_SUMMIT_0453",
+          "detail": "INV_MTPYRE_SUMMIT_0599",
           "proofType": "single-source-invocation"
         }
       ],
       "atlasOrdinal": 363
     },
     {
-      "groupId": "PHYSICAL_MTPYRE_SUMMIT_0458",
+      "groupId": "PHYSICAL_MTPYRE_SUMMIT_0604",
       "sequenceIndex": null,
       "sequenceStatus": null,
       "category": "single-scripted-trainer",
@@ -25874,13 +25874,13 @@
       "allyTrainerIds": [],
       "rematchIds": [],
       "invocationIds": [
-        "INV_MTPYRE_SUMMIT_0458"
+        "INV_MTPYRE_SUMMIT_0604"
       ],
       "sources": [
         {
           "map": "MtPyre_Summit",
           "file": "data/maps/MtPyre_Summit/scripts.inc",
-          "line": 458,
+          "line": 604,
           "label": "MtPyre_Summit_EventScript_Grunt2",
           "opcode": "trainerbattle_single",
           "battleType": null,
@@ -25909,14 +25909,14 @@
       ],
       "groupingEvidence": [
         {
-          "detail": "INV_MTPYRE_SUMMIT_0458",
+          "detail": "INV_MTPYRE_SUMMIT_0604",
           "proofType": "single-source-invocation"
         }
       ],
       "atlasOrdinal": 364
     },
     {
-      "groupId": "PHYSICAL_MTPYRE_SUMMIT_0463",
+      "groupId": "PHYSICAL_MTPYRE_SUMMIT_0609",
       "sequenceIndex": null,
       "sequenceStatus": null,
       "category": "single-scripted-trainer",
@@ -25936,13 +25936,13 @@
       "allyTrainerIds": [],
       "rematchIds": [],
       "invocationIds": [
-        "INV_MTPYRE_SUMMIT_0463"
+        "INV_MTPYRE_SUMMIT_0609"
       ],
       "sources": [
         {
           "map": "MtPyre_Summit",
           "file": "data/maps/MtPyre_Summit/scripts.inc",
-          "line": 463,
+          "line": 609,
           "label": "MtPyre_Summit_EventScript_Grunt3",
           "opcode": "trainerbattle_single",
           "battleType": null,
@@ -25971,14 +25971,14 @@
       ],
       "groupingEvidence": [
         {
-          "detail": "INV_MTPYRE_SUMMIT_0463",
+          "detail": "INV_MTPYRE_SUMMIT_0609",
           "proofType": "single-source-invocation"
         }
       ],
       "atlasOrdinal": 365
     },
     {
-      "groupId": "PHYSICAL_MTPYRE_SUMMIT_0468",
+      "groupId": "PHYSICAL_MTPYRE_SUMMIT_0614",
       "sequenceIndex": null,
       "sequenceStatus": null,
       "category": "single-scripted-trainer",
@@ -25998,13 +25998,13 @@
       "allyTrainerIds": [],
       "rematchIds": [],
       "invocationIds": [
-        "INV_MTPYRE_SUMMIT_0468"
+        "INV_MTPYRE_SUMMIT_0614"
       ],
       "sources": [
         {
           "map": "MtPyre_Summit",
           "file": "data/maps/MtPyre_Summit/scripts.inc",
-          "line": 468,
+          "line": 614,
           "label": "MtPyre_Summit_EventScript_Grunt4",
           "opcode": "trainerbattle_single",
           "battleType": null,
@@ -26033,14 +26033,14 @@
       ],
       "groupingEvidence": [
         {
-          "detail": "INV_MTPYRE_SUMMIT_0468",
+          "detail": "INV_MTPYRE_SUMMIT_0614",
           "proofType": "single-source-invocation"
         }
       ],
       "atlasOrdinal": 366
     },
     {
-      "groupId": "PHYSICAL_MTPYRE_SUMMIT_0473",
+      "groupId": "PHYSICAL_MTPYRE_SUMMIT_0619",
       "sequenceIndex": null,
       "sequenceStatus": null,
       "category": "single-scripted-trainer",
@@ -26060,13 +26060,13 @@
       "allyTrainerIds": [],
       "rematchIds": [],
       "invocationIds": [
-        "INV_MTPYRE_SUMMIT_0473"
+        "INV_MTPYRE_SUMMIT_0619"
       ],
       "sources": [
         {
           "map": "MtPyre_Summit",
           "file": "data/maps/MtPyre_Summit/scripts.inc",
-          "line": 473,
+          "line": 619,
           "label": "MtPyre_Summit_EventScript_Matt",
           "opcode": "trainerbattle_single",
           "battleType": null,
@@ -26095,7 +26095,7 @@
       ],
       "groupingEvidence": [
         {
-          "detail": "INV_MTPYRE_SUMMIT_0473",
+          "detail": "INV_MTPYRE_SUMMIT_0619",
           "proofType": "single-source-invocation"
         }
       ],
@@ -46130,12 +46130,12 @@
       ]
     },
     {
-      "invocationId": "INV_MTPYRE_SUMMIT_0453",
+      "invocationId": "INV_MTPYRE_SUMMIT_0599",
       "reachability": "proven",
       "source": {
         "map": "MtPyre_Summit",
         "file": "data/maps/MtPyre_Summit/scripts.inc",
-        "line": 453,
+        "line": 599,
         "label": "MtPyre_Summit_EventScript_Grunt1",
         "opcode": "trainerbattle_single",
         "battleType": null,
@@ -46167,12 +46167,12 @@
       ]
     },
     {
-      "invocationId": "INV_MTPYRE_SUMMIT_0458",
+      "invocationId": "INV_MTPYRE_SUMMIT_0604",
       "reachability": "proven",
       "source": {
         "map": "MtPyre_Summit",
         "file": "data/maps/MtPyre_Summit/scripts.inc",
-        "line": 458,
+        "line": 604,
         "label": "MtPyre_Summit_EventScript_Grunt2",
         "opcode": "trainerbattle_single",
         "battleType": null,
@@ -46204,12 +46204,12 @@
       ]
     },
     {
-      "invocationId": "INV_MTPYRE_SUMMIT_0463",
+      "invocationId": "INV_MTPYRE_SUMMIT_0609",
       "reachability": "proven",
       "source": {
         "map": "MtPyre_Summit",
         "file": "data/maps/MtPyre_Summit/scripts.inc",
-        "line": 463,
+        "line": 609,
         "label": "MtPyre_Summit_EventScript_Grunt3",
         "opcode": "trainerbattle_single",
         "battleType": null,
@@ -46241,12 +46241,12 @@
       ]
     },
     {
-      "invocationId": "INV_MTPYRE_SUMMIT_0468",
+      "invocationId": "INV_MTPYRE_SUMMIT_0614",
       "reachability": "proven",
       "source": {
         "map": "MtPyre_Summit",
         "file": "data/maps/MtPyre_Summit/scripts.inc",
-        "line": 468,
+        "line": 614,
         "label": "MtPyre_Summit_EventScript_Grunt4",
         "opcode": "trainerbattle_single",
         "battleType": null,
@@ -46278,12 +46278,12 @@
       ]
     },
     {
-      "invocationId": "INV_MTPYRE_SUMMIT_0473",
+      "invocationId": "INV_MTPYRE_SUMMIT_0619",
       "reachability": "proven",
       "source": {
         "map": "MtPyre_Summit",
         "file": "data/maps/MtPyre_Summit/scripts.inc",
-        "line": 473,
+        "line": 619,
         "label": "MtPyre_Summit_EventScript_Matt",
         "opcode": "trainerbattle_single",
         "battleType": null,

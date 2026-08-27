@@ -14,6 +14,8 @@ MauvilleCity_GameCorner_MapScripts:: @ 820FBB8
 	.set RAICHU_COINS,  	4500
 	.set MAROWAK_COINS,  	4500
 	.set EXEGGUTOR_COINS,  	4500
+	.set GENESECT_COINS,  	7500
+	.set POIPOLE_COINS,  	6500
 	.set STARTER_COINS, 	2500
 	.set DOLL_COINS,  		1000
 
@@ -290,7 +292,9 @@ MauvilleCity_GameCorner_EventScript_ChoosePokemonPrize::
 	case 9, MauvilleCity_GameCorner_EventScript_Raichu
 	case 10, MauvilleCity_GameCorner_EventScript_Marowak
 	case 11, MauvilleCity_GameCorner_EventScript_Exeggutor
-	case 12, MauvilleCity_GameCorner_EventScript_CancelPokemonSelect
+	case 12, MauvilleCity_GameCorner_EventScript_Genesect
+	case 13, MauvilleCity_GameCorner_EventScript_Poipole
+	case 14, MauvilleCity_GameCorner_EventScript_CancelPokemonSelect
 	goto MauvilleCity_GameCorner_EventScript_CancelPokemonSelect
 	end
 
@@ -352,6 +356,16 @@ MauvilleCity_GameCorner_EventScript_Marowak::
 MauvilleCity_GameCorner_EventScript_Exeggutor::
 	setvar VAR_TEMP_1, SPECIES_EXEGGUTOR_ALOLAN
 	setvar VAR_0x8006, EXEGGUTOR_COINS
+	goto MauvilleCity_GameCorner_EventScript_ConfirmPokemonPrize
+
+MauvilleCity_GameCorner_EventScript_Genesect::
+	setvar VAR_TEMP_1, SPECIES_GENESECT
+	setvar VAR_0x8006, GENESECT_COINS
+	goto MauvilleCity_GameCorner_EventScript_ConfirmPokemonPrize
+
+MauvilleCity_GameCorner_EventScript_Poipole::
+	setvar VAR_TEMP_1, SPECIES_POIPOLE
+	setvar VAR_0x8006, POIPOLE_COINS
 	goto MauvilleCity_GameCorner_EventScript_ConfirmPokemonPrize
 	
 MauvilleCity_GameCorner_EventScript_ConfirmPokemonPrize::
@@ -1049,4 +1063,3 @@ MauvilleCity_GameCorner_Text_HeresSomeSlotsInfo: @ 8210B04
 MauvilleCity_GameCorner_Text_CantPlayWithNoCoinCase: @ 8210C2E
 	.string "You can't play if you don't have\n"
 	.string "a Coin Case.$"
-

@@ -562,6 +562,20 @@ gSpecials::
 	def_special TryGiveVerdantStevenRewardBundle
 	def_special TryGiveVerdantLatiStoneBundle
 	def_special TryGiveVerdantWeatherRockBundle
+	def_special TryUnlockSelectedLegendarySign
+	def_special GetSelectedLegendarySignState
+	def_special ShouldShowSelectedLegendarySignObject
+	def_special GetSelectedLegendarySignLevel
+	def_special TryUnlockDarkraiLegendarySign
+	def_special TryDiscoverEligibleLegendarySign
+	def_special TryGiveArceusLegendarySignMasteryReward
+	def_special ChampionsCircuitCanEnter
+	def_special ChampionsCircuitBegin
+	def_special ChampionsCircuitGenerateOpponent
+	def_special BattleSetup_StartChampionsCircuitBattle
+	def_special ChampionsCircuitHandleBattleResult
+	def_special ChampionsCircuitTryGiveReward
+	def_special ChampionsCircuitEnd
 	def_special AreChosenMonEVsMaxedOut
 	def_special Bag_ChooseItem
 	def_special Bag_ChoosePokeBall

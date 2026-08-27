@@ -76,6 +76,7 @@ static void CB2_GiveStarter(void);
 static void CB2_StartFirstBattle(void);
 static void CB2_EndFirstBattle(void);
 static void CB2_EndTrainerBattle(void);
+static void CB2_EndChampionsCircuitBattle(void);
 static bool32 IsPlayerDefeated(u32 battleOutcome);
 static u16 GetRematchTrainerId(u16 trainerId);
 static void RegisterTrainerInMatchCall(void);
@@ -1370,6 +1371,27 @@ void BattleSetup_StartTrainerBattle(void)
         DoTrainerBattle();
 
     ScriptContext1_Stop();
+}
+
+void BattleSetup_StartChampionsCircuitBattle(void)
+{
+    ScriptContext2_Enable();
+    gFacilityTrainers = gBattleFrontierTrainers;
+    gTrainerBattleOpponent_A = Random() % FRONTIER_TRAINERS_COUNT;
+    gTrainerBattleOpponent_B = 0;
+    gBattleTypeFlags = BATTLE_TYPE_TRAINER
+                     | BATTLE_TYPE_DOUBLE
+                     | BATTLE_TYPE_BATTLE_TOWER;
+    gMain.savedCallback = CB2_EndChampionsCircuitBattle;
+    CreateBattleStartTask(B_TRANSITION_GRID_SQUARES, 0);
+    IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
+    IncrementGameStat(GAME_STAT_TRAINER_BATTLES);
+    ScriptContext1_Stop();
+}
+
+static void CB2_EndChampionsCircuitBattle(void)
+{
+    SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
 static void CB2_EndTrainerBattle(void)

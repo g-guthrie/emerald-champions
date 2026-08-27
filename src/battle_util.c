@@ -1,5 +1,6 @@
 #include "global.h"
 #include "battle.h"
+#include "champions_circuit.h"
 #include "battle_anim.h"
 #include "battle_arena.h"
 #include "battle_pyramid.h"
@@ -10592,7 +10593,7 @@ void RestorePlayerHeldItemsAfterBattle(void)
             }
         }
 
-        if (currentItem != ITEM_NONE && !cameFromPlayerParty)
+        if (currentItem != ITEM_NONE && !cameFromPlayerParty && !IsChampionsCircuitBattle())
             AddBagItem(currentItem, 1);
         SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &originalItem);
         TryUpdateMonFormForHeldItem(&gPlayerParty[i]);

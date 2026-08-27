@@ -31,6 +31,7 @@
 #include "scanline_effect.h"
 #include "field_weather.h"
 #include "international_string_util.h"
+#include "legendary_signs.h"
 #include "naming_screen.h"
 #include "pokemon_storage_system.h"
 #include "field_screen_effect.h"
@@ -372,6 +373,7 @@ static void AddHatchedMonToParty(u8 id)
     GetSpeciesName(name, pokeNum);
     SetMonData(mon, MON_DATA_NICKNAME, name);
 
+    MarkLegendarySignCaughtBySpecies(pokeNum);
     pokeNum = SpeciesToNationalPokedexNum(pokeNum);
     GetSetPokedexFlag(pokeNum, FLAG_SET_SEEN);
     GetSetPokedexFlag(pokeNum, FLAG_SET_CAUGHT);

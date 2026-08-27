@@ -19,6 +19,7 @@
 #include "battle_pike.h"
 #include "battle_pyramid.h"
 #include "verdant_battle_sets.h"
+#include "legendary_signs.h"
 #include "string_util.h"
 #include "text.h"
 #include "constants/abilities.h"
@@ -548,6 +549,15 @@ bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, u8 area, u8 
     u8 wildMonIndex = 0;
     u8 level;
     u16 species;
+
+    // An awakened Legendary Sign augments the native encounter table until
+    // that one specimen is caught. It intentionally bypasses Repel and lead
+    // ability filtering so a successful sign roll is never silently erased.
+    if (TryGetLegendarySignWildOverride(area, &species, &level))
+    {
+        CreateWildMon(species, level);
+        return TRUE;
+    }
 
     switch (area)
     {

@@ -2080,6 +2080,8 @@ const u8 gText_GameCornerGeodude[] = 	_("Geodude{CLEAR_TO 0x48}2000 Coins");
 const u8 gText_GameCornerRaichu[] = 	_("Raichu{CLEAR_TO 0x48}4500 Coins");
 const u8 gText_GameCornerMarowak[] = 	_("Marowak{CLEAR_TO 0x48}4500 Coins");
 const u8 gText_GameCornerExeggutor[] = 	_("Exeggutor{CLEAR_TO 0x48}4500 Coins");
+const u8 gText_GameCornerGenesect[] = 	_("Genesect{CLEAR_TO 0x48}7500 Coins");
+const u8 gText_GameCornerPoipole[] = 	_("Poipole{CLEAR_TO 0x48}6500 Coins");
 // Grass Starters
 const u8 gText_GameCornerBulbasaur[] = 	_("Bulbasaur{CLEAR_TO 0x48}2500 Coins");
 const u8 gText_GameCornerChikorita[] = 	_("Chikorita{CLEAR_TO 0x48}2500 Coins");

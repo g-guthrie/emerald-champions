@@ -240,3 +240,71 @@ bool8 IsVerdantProtectedProgressionItem(u16 item)
         return FALSE;
     }
 }
+
+u8 GetVerdantBattleSetRawCount(u16 species)
+{
+    if (species == SPECIES_NONE || species == SPECIES_EGG || species >= NUM_SPECIES)
+        return 0;
+    if (gVerdantBattleSetPresets[species].moves[0] == MOVE_NONE)
+        return 0;
+    return gVerdantBattleSetRanges[species].count + 1;
+}
+
+const struct VerdantBattleSetPreset *GetVerdantBattleSetRawPreset(u16 species, u8 rawChoice)
+{
+    const struct VerdantBattleSetRange *range;
+
+    if (GetVerdantBattleSetRawCount(species) == 0)
+        return NULL;
+    range = &gVerdantBattleSetRanges[species];
+    if (rawChoice == 0)
+        return &gVerdantBattleSetPresets[species];
+    if (rawChoice > range->count)
+        return NULL;
+    return &gVerdantBattleSetAlternatives[range->offset + rawChoice - 1].preset;
+}
+
+u8 ApplyVerdantOpponentBattleSet(struct Pokemon *mon, u8 rawChoice)
+{
+    u16 species = GetMonData(mon, MON_DATA_SPECIES2, NULL);
+    const struct VerdantBattleSetPreset *preset = GetVerdantBattleSetRawPreset(species, rawChoice);
+    u16 item;
+    u8 ppBonuses = 0;
+    u8 i;
+
+    if (preset == NULL
+     || preset->nature >= NUM_NATURES
+     || preset->abilitySlot >= NUM_ABILITY_SLOTS
+     || gBaseStats[species].abilities[preset->abilitySlot] == ABILITY_NONE)
+        return BATTLE_SET_APPLY_FAILED;
+
+    SetMonData(mon, MON_DATA_PP_BONUSES, &ppBonuses);
+    for (i = 0; i < MAX_MON_MOVES; i++)
+        SetMonMoveSlot(mon, preset->moves[i], i);
+    SetMonData(mon, MON_DATA_NATURE, &preset->nature);
+    SetMonData(mon, MON_DATA_ABILITY_NUM, &preset->abilitySlot);
+    item = preset->requiredItem != ITEM_NONE ? preset->requiredItem : preset->item;
+    SetMonData(mon, MON_DATA_HELD_ITEM, &item);
+    TryUpdateMonFormForHeldItem(mon);
+    CalculateMonStats(mon);
+    return preset->requiredItem != ITEM_NONE
+         ? BATTLE_SET_APPLY_MEGA_SET
+         : BATTLE_SET_APPLY_SUCCESS;
+}
+
+u8 ApplyVerdantGiftBattleSet(struct Pokemon *mon, u8 rawChoice)
+{
+    u8 result = ApplyVerdantOpponentBattleSet(mon, rawChoice);
+    u16 item;
+
+    if (result == BATTLE_SET_APPLY_FAILED)
+        return result;
+    item = GetMonData(mon, MON_DATA_HELD_ITEM, NULL);
+    if (IsVerdantProtectedProgressionItem(item))
+    {
+        item = ITEM_NONE;
+        SetMonData(mon, MON_DATA_HELD_ITEM, &item);
+        TryUpdateMonFormForHeldItem(mon);
+    }
+    return result;
+}

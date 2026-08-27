@@ -1,5 +1,6 @@
 #include "global.h"
 #include "battle.h"
+#include "champions_circuit.h"
 #include "battle_anim.h"
 #include "battle_ai_main.h"
 #include "battle_ai_util.h"
@@ -5384,7 +5385,8 @@ static void HandleEndTurn_FinishBattle(void)
         sub_8186444();
         BeginFastPaletteFade(3);
         FadeOutMapMusic(5);
-        if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK
+        if (IsChampionsCircuitBattle()
+         || !(gBattleTypeFlags & (BATTLE_TYPE_LINK
                                 | BATTLE_TYPE_RECORDED_LINK
                                 | BATTLE_TYPE_FIRST_BATTLE
                                 | BATTLE_TYPE_SAFARI

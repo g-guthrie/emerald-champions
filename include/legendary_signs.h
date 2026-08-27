@@ -1,0 +1,113 @@
+#ifndef GUARD_LEGENDARY_SIGNS_H
+#define GUARD_LEGENDARY_SIGNS_H
+
+#include "global.h"
+
+enum LegendarySignId
+{
+    LEGENDARY_SIGN_ARCEUS,
+    LEGENDARY_SIGN_AZELF,
+    LEGENDARY_SIGN_BLACEPHALON,
+    LEGENDARY_SIGN_BUZZWOLE,
+    LEGENDARY_SIGN_CALYREX,
+    LEGENDARY_SIGN_CELEBI,
+    LEGENDARY_SIGN_CELESTEELA,
+    LEGENDARY_SIGN_COBALION,
+    LEGENDARY_SIGN_CRESSELIA,
+    LEGENDARY_SIGN_DARKRAI,
+    LEGENDARY_SIGN_DIALGA,
+    LEGENDARY_SIGN_ENTEI,
+    LEGENDARY_SIGN_ETERNATUS,
+    LEGENDARY_SIGN_GENESECT,
+    LEGENDARY_SIGN_GIRATINA,
+    LEGENDARY_SIGN_GLASTRIER,
+    LEGENDARY_SIGN_GUZZLORD,
+    LEGENDARY_SIGN_HOOPA,
+    LEGENDARY_SIGN_KARTANA,
+    LEGENDARY_SIGN_KYUREM,
+    LEGENDARY_SIGN_LANDORUS,
+    LEGENDARY_SIGN_MARSHADOW,
+    LEGENDARY_SIGN_MESPRIT,
+    LEGENDARY_SIGN_NECROZMA,
+    LEGENDARY_SIGN_NIHILEGO,
+    LEGENDARY_SIGN_PALKIA,
+    LEGENDARY_SIGN_PHEROMOSA,
+    LEGENDARY_SIGN_PHIONE,
+    LEGENDARY_SIGN_POIPOLE,
+    LEGENDARY_SIGN_RAIKOU,
+    LEGENDARY_SIGN_REGIDRAGO,
+    LEGENDARY_SIGN_REGIELEKI,
+    LEGENDARY_SIGN_RESHIRAM,
+    LEGENDARY_SIGN_SHAYMIN,
+    LEGENDARY_SIGN_SPECTRIER,
+    LEGENDARY_SIGN_STAKATAKA,
+    LEGENDARY_SIGN_TAPU_BULU,
+    LEGENDARY_SIGN_TAPU_KOKO,
+    LEGENDARY_SIGN_TAPU_LELE,
+    LEGENDARY_SIGN_THUNDURUS,
+    LEGENDARY_SIGN_TORNADUS,
+    LEGENDARY_SIGN_UXIE,
+    LEGENDARY_SIGN_VICTINI,
+    LEGENDARY_SIGN_VIRIZION,
+    LEGENDARY_SIGN_XERNEAS,
+    LEGENDARY_SIGN_XURKITREE,
+    LEGENDARY_SIGN_YVELTAL,
+    LEGENDARY_SIGN_ZACIAN,
+    LEGENDARY_SIGN_ZAMAZENTA,
+    LEGENDARY_SIGN_ZARUDE,
+    LEGENDARY_SIGN_ZEKROM,
+    LEGENDARY_SIGN_ZERAORA,
+    LEGENDARY_SIGN_ZYGARDE,
+    LEGENDARY_SIGN_COUNT,
+};
+
+enum LegendarySignSource
+{
+    LEGENDARY_SOURCE_CONDITIONAL_WILD,
+    LEGENDARY_SOURCE_VISIBLE,
+    LEGENDARY_SOURCE_BREEDING,
+    LEGENDARY_SOURCE_GAME_CORNER,
+    LEGENDARY_SOURCE_CIRCUIT,
+    LEGENDARY_SOURCE_MASTERY,
+};
+
+enum LegendarySignArea
+{
+    LEGENDARY_AREA_LAND,
+    LEGENDARY_AREA_WATER,
+    LEGENDARY_AREA_ROCKS,
+    LEGENDARY_AREA_FISHING,
+    LEGENDARY_AREA_HONEY,
+};
+
+struct LegendarySignDefinition
+{
+    u16 species;
+    u16 mapId;
+    u16 requiredSpecies;
+    u16 requiredFlag;
+    u8 source;
+    u8 area;
+    u8 chance;
+    u8 minimumBadges;
+    s8 levelOffset;
+};
+
+extern const struct LegendarySignDefinition gLegendarySignDefinitions[LEGENDARY_SIGN_COUNT];
+
+bool8 IsLegendarySignUnlocked(u8 signId);
+bool8 IsLegendarySignCaught(u8 signId);
+void UnlockLegendarySign(u8 signId);
+void MarkLegendarySignCaughtBySpecies(u16 species);
+u8 GetLegendarySignIdBySpecies(u16 species);
+bool8 TryGetLegendarySignWildOverride(u8 area, u16 *species, u8 *level);
+bool8 PlayerPartyHasSpeciesFamily(u16 species);
+void TryUnlockSelectedLegendarySign(void);
+u16 GetSelectedLegendarySignState(void);
+u16 ShouldShowSelectedLegendarySignObject(void);
+u16 GetSelectedLegendarySignLevel(void);
+void TryUnlockDarkraiLegendarySign(void);
+void TryDiscoverEligibleLegendarySign(void);
+void TryGiveArceusLegendarySignMasteryReward(void);
+
+#endif // GUARD_LEGENDARY_SIGNS_H

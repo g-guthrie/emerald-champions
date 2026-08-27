@@ -158,6 +158,11 @@ subprocess.run(
     check=True,
 )
 subprocess.run(
+    [sys.executable, str(ROOT / "scripts/verify_legendary_signs_and_circuit.py")],
+    cwd=ROOT,
+    check=True,
+)
+subprocess.run(
     [sys.executable, str(ROOT / "scripts/emerald_champions_availability_report.py"), "--check"],
     cwd=ROOT,
     check=True,
@@ -288,6 +293,9 @@ battle_util_source = read("src/battle_util.c")
 pc_tutor_source = read("data/scripts/pokemon_center_move_tutor.inc")
 pc_menu_block = field_specials_source.split("[SCROLL_MULTI_POKE_CENTER_TUTOR] =", 1)[1].split("},", 1)[0]
 battle_set_runtime = read("src/verdant_battle_sets.c")
+battle_set_player_transaction = battle_set_runtime.split(
+    "static u8 ApplyValidatedBattleSetPreset", 1
+)[1].split("bool8 ApplyVerdantBattleSetPreset", 1)[0]
 battle_set_generator_source = read("scripts/verdant_battle_set_presets.py")
 base_stats_source = read("src/data/pokemon/base_stats.h")
 form_reviews_100 = read("docs/battle_set_reviews/100_forms_899_1010.json")
@@ -1018,16 +1026,16 @@ checks = {
         and "This replaces all four moves" in pc_tutor_source
         and "special ApplySelectedMonBattleSet" in pc_tutor_source
         and "ApplyVerdantBattleSetChoice(mon, gSpecialVar_0x8005)" in field_specials_source
-        and "MON_DATA_SPECIES2" in battle_set_runtime
-        and "MON_DATA_PP_BONUSES" in battle_set_runtime
-        and "for (i = 0; i < MAX_MON_MOVES; i++)\n        SetMonMoveSlot" in battle_set_runtime
-        and "MON_DATA_NATURE" in battle_set_runtime
-        and "MON_DATA_ABILITY_NUM" in battle_set_runtime
-        and "MON_DATA_HELD_ITEM" in battle_set_runtime
-        and "BATTLE_SET_APPLY_SPECIAL_ITEM" in battle_set_runtime
-        and "_EV" not in battle_set_runtime
-        and battle_set_runtime.index("preset->nature >= NUM_NATURES") < battle_set_runtime.index("SetMonData(mon, MON_DATA_PP_BONUSES")
-        and battle_set_runtime.count("CalculateMonStats(mon);") == 1
+        and "MON_DATA_SPECIES2" in battle_set_player_transaction
+        and "MON_DATA_PP_BONUSES" in battle_set_player_transaction
+        and "for (i = 0; i < MAX_MON_MOVES; i++)\n        SetMonMoveSlot" in battle_set_player_transaction
+        and "MON_DATA_NATURE" in battle_set_player_transaction
+        and "MON_DATA_ABILITY_NUM" in battle_set_player_transaction
+        and "MON_DATA_HELD_ITEM" in battle_set_player_transaction
+        and "BATTLE_SET_APPLY_SPECIAL_ITEM" in battle_set_player_transaction
+        and "_EV" not in battle_set_player_transaction
+        and battle_set_player_transaction.index("preset->nature >= NUM_NATURES") < battle_set_player_transaction.index("SetMonData(mon, MON_DATA_PP_BONUSES")
+        and battle_set_player_transaction.count("CalculateMonStats(mon);") == 1
     ),
     "authored battle sets preserve form-exclusive mechanics": (
         all(

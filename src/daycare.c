@@ -1110,6 +1110,17 @@ static u16 DetermineEggSpeciesAndParentSlots(struct DayCare *daycare, u8 *parent
         }
     }
 
+    // Manaphy is the one Mythical that produces a distinct species when
+    // paired with Ditto. Keep this in the native Day-Care loop rather than
+    // creating a gift or bespoke map encounter for Phione.
+    if ((species[0] == SPECIES_MANAPHY && species[1] == SPECIES_DITTO)
+     || (species[1] == SPECIES_MANAPHY && species[0] == SPECIES_DITTO))
+    {
+        parentSlots[0] = species[0] == SPECIES_MANAPHY ? 0 : 1;
+        parentSlots[1] = parentSlots[0] ^ 1;
+        return SPECIES_PHIONE;
+    }
+
     eggSpecies = GetEggSpecies(species[parentSlots[0]]);
     if (eggSpecies == SPECIES_NIDORAN_F && daycare->offspringPersonality & EGG_GENDER_MALE)
         eggSpecies = SPECIES_NIDORAN_M;
@@ -1371,6 +1382,14 @@ static u8 GetDaycareCompatibilityScore(struct DayCare *daycare)
         genders[i] = GetGenderFromSpeciesAndPersonality(species[i], personality);
         eggGroups[i][0] = gBaseStats[species[i]].eggGroup1;
         eggGroups[i][1] = gBaseStats[species[i]].eggGroup2;
+    }
+
+    if ((species[0] == SPECIES_MANAPHY && species[1] == SPECIES_DITTO)
+     || (species[1] == SPECIES_MANAPHY && species[0] == SPECIES_DITTO))
+    {
+        if (trainerIds[0] == trainerIds[1])
+            return PARENTS_LOW_COMPATIBILITY;
+        return PARENTS_MED_COMPATIBILITY;
     }
 
     // check unbreedable egg group

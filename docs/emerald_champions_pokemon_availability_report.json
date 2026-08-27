@@ -1,9 +1,9 @@
 {
   "meta": {
     "title": "Emerald Champions — Complete Pokémon Encounter and Acquisition Report",
-    "generated_at": "2026-08-27T18:57:10Z",
-    "source_commit": "0b2bc96c7d6480187f70f5b83a705c081780983e",
-    "source_clean": true,
+    "generated_at": "2026-08-27T20:15:53Z",
+    "source_commit": "55059b06b4fa04d30ada5a22d7cc3d693979bc6e",
+    "source_clean": false,
     "scope": "All current random encounter tables plus source-resolved non-random acquisition paths and every runtime species/form ID."
   },
   "game_context": {
@@ -26,7 +26,9 @@
     "moves": "No automatic level-up move learning. The Pokémon Center teacher offers every locally legal level, Egg, TM/HM, and tutor move.",
     "leveling": "The reusable Leveler raises the whole eligible party to the current cap; Rare Candy raises up to ten levels while stopping at the cap or next level evolution.",
     "loadouts": "1143 authored defaults plus 166 handbook-derived alternatives (1309 total). Ordinary wild Pokémon uniformly roll their actual one-to-three tutor sets and fight with the rolled moves, nature, ability, and held item.",
-    "items": "65 ordinary competitive held items are free and unlimited at the Pokémon Center vendor. Berries remain an exploration, harvesting, and planting economy. Mega Stones, evolution catalysts, Primal Orbs, Plates, Drives, Memories, Ogerpon masks, Rusted items, and similar form/progression equipment remain protected."
+    "items": "65 ordinary competitive held items are free and unlimited at the Pokémon Center vendor. Berries remain an exploration, harvesting, and planting economy. Mega Stones, evolution catalysts, Primal Orbs, Plates, Drives, Memories, Ogerpon masks, Rusted items, and similar form/progression equipment remain protected.",
+    "legendary_signs": "Twenty-eight conditional wild Legendary Signs are awakened by the Devon researcher when badge/story and party-species requirements are met. Darkrai, Cresselia, and Dialga form a linked native overworld quest; Phione is bred from Manaphy and Ditto; Genesect and Poipole are Game Corner prizes.",
+    "champions_circuit": "The postgame Champions Circuit is a repeatable six-on-six doubles ladder using the 1,309-set competitive corpus. Player levels normalize to 80, opponent levels ramp one slot per win, ordinary held items restore after battle, seventeen rare Pokémon arrive at five-win milestones, and Eternatus is the 90-win mastery reward."
   },
   "level_cap_phases": [
     {
@@ -34450,6 +34452,366 @@
       "species": "Groudon"
     },
     {
+      "species_id": "SPECIES_BLACEPHALON",
+      "category": "Champions Circuit milestone",
+      "location": "Battle Frontier Battle Tower",
+      "details": "Awarded every five consecutive Circuit wins",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Blacephalon"
+    },
+    {
+      "species_id": "SPECIES_BUZZWOLE",
+      "category": "Champions Circuit milestone",
+      "location": "Battle Frontier Battle Tower",
+      "details": "Awarded every five consecutive Circuit wins",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Buzzwole"
+    },
+    {
+      "species_id": "SPECIES_CALYREX",
+      "category": "Champions Circuit milestone",
+      "location": "Battle Frontier Battle Tower",
+      "details": "Awarded every five consecutive Circuit wins",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Calyrex"
+    },
+    {
+      "species_id": "SPECIES_CELESTEELA",
+      "category": "Champions Circuit milestone",
+      "location": "Battle Frontier Battle Tower",
+      "details": "Awarded every five consecutive Circuit wins",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Celesteela"
+    },
+    {
+      "species_id": "SPECIES_GLASTRIER",
+      "category": "Champions Circuit milestone",
+      "location": "Battle Frontier Battle Tower",
+      "details": "Awarded every five consecutive Circuit wins",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Glastrier"
+    },
+    {
+      "species_id": "SPECIES_GUZZLORD",
+      "category": "Champions Circuit milestone",
+      "location": "Battle Frontier Battle Tower",
+      "details": "Awarded every five consecutive Circuit wins",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Guzzlord"
+    },
+    {
+      "species_id": "SPECIES_KARTANA",
+      "category": "Champions Circuit milestone",
+      "location": "Battle Frontier Battle Tower",
+      "details": "Awarded every five consecutive Circuit wins",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Kartana"
+    },
+    {
+      "species_id": "SPECIES_MARSHADOW",
+      "category": "Champions Circuit milestone",
+      "location": "Battle Frontier Battle Tower",
+      "details": "Awarded every five consecutive Circuit wins",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Marshadow"
+    },
+    {
+      "species_id": "SPECIES_NECROZMA",
+      "category": "Champions Circuit milestone",
+      "location": "Battle Frontier Battle Tower",
+      "details": "Awarded every five consecutive Circuit wins",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Necrozma"
+    },
+    {
+      "species_id": "SPECIES_NIHILEGO",
+      "category": "Champions Circuit milestone",
+      "location": "Battle Frontier Battle Tower",
+      "details": "Awarded every five consecutive Circuit wins",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Nihilego"
+    },
+    {
+      "species_id": "SPECIES_PHEROMOSA",
+      "category": "Champions Circuit milestone",
+      "location": "Battle Frontier Battle Tower",
+      "details": "Awarded every five consecutive Circuit wins",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Pheromosa"
+    },
+    {
+      "species_id": "SPECIES_SPECTRIER",
+      "category": "Champions Circuit milestone",
+      "location": "Battle Frontier Battle Tower",
+      "details": "Awarded every five consecutive Circuit wins",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Spectrier"
+    },
+    {
+      "species_id": "SPECIES_STAKATAKA",
+      "category": "Champions Circuit milestone",
+      "location": "Battle Frontier Battle Tower",
+      "details": "Awarded every five consecutive Circuit wins",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Stakataka"
+    },
+    {
+      "species_id": "SPECIES_XURKITREE",
+      "category": "Champions Circuit milestone",
+      "location": "Battle Frontier Battle Tower",
+      "details": "Awarded every five consecutive Circuit wins",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Xurkitree"
+    },
+    {
+      "species_id": "SPECIES_ZACIAN",
+      "category": "Champions Circuit milestone",
+      "location": "Battle Frontier Battle Tower",
+      "details": "Awarded every five consecutive Circuit wins",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Zacian"
+    },
+    {
+      "species_id": "SPECIES_ZAMAZENTA",
+      "category": "Champions Circuit milestone",
+      "location": "Battle Frontier Battle Tower",
+      "details": "Awarded every five consecutive Circuit wins",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Zamazenta"
+    },
+    {
+      "species_id": "SPECIES_ZARUDE",
+      "category": "Champions Circuit milestone",
+      "location": "Battle Frontier Battle Tower",
+      "details": "Awarded every five consecutive Circuit wins",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Zarude"
+    },
+    {
+      "species_id": "SPECIES_ZYGARDE",
+      "category": "Conditional Legendary Sign",
+      "location": "Desert Underpass",
+      "details": "Legendary Sign: 8% within Land encounters after 8 Badge(s); bring SPECIES_LANDORUS; requires FLAG_SYS_GAME_CLEAR; cap offset +3",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Zygarde"
+    },
+    {
+      "species_id": "SPECIES_ENTEI",
+      "category": "Conditional Legendary Sign",
+      "location": "Fiery Path",
+      "details": "Legendary Sign: 10% within Land encounters after 3 Badge(s); bring SPECIES_TORKOAL; requires FLAG_BADGE03_GET; cap offset +1",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Entei"
+    },
+    {
+      "species_id": "SPECIES_COBALION",
+      "category": "Conditional Legendary Sign",
+      "location": "Granite Cave B2F",
+      "details": "Legendary Sign: 10% within Land encounters after 1 Badge(s); bring SPECIES_LUCARIO; requires FLAG_BADGE01_GET; cap offset +1",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Cobalion"
+    },
+    {
+      "species_id": "SPECIES_REGIDRAGO",
+      "category": "Conditional Legendary Sign",
+      "location": "Meteor Falls 1F 2R",
+      "details": "Legendary Sign: 8% within Land encounters after 6 Badge(s); bring SPECIES_REGIROCK; requires FLAG_BADGE06_GET; cap offset +2",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Regidrago"
+    },
+    {
+      "species_id": "SPECIES_UXIE",
+      "category": "Conditional Legendary Sign",
+      "location": "Meteor Falls B1F 1R",
+      "details": "Legendary Sign: 10% within Land encounters after 5 Badge(s); bring SPECIES_ALAKAZAM; requires FLAG_BADGE05_GET; cap offset +1",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Uxie"
+    },
+    {
+      "species_id": "SPECIES_HOOPA",
+      "category": "Conditional Legendary Sign",
+      "location": "Mirage Tower 4F",
+      "details": "Legendary Sign: 10% within Land encounters after 4 Badge(s); bring SPECIES_UNOWN; requires FLAG_BADGE04_GET; cap offset +1",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Hoopa"
+    },
+    {
+      "species_id": "SPECIES_GIRATINA",
+      "category": "Conditional Legendary Sign",
+      "location": "Mt Pyre 6F",
+      "details": "Legendary Sign: 8% within Land encounters after 8 Badge(s); bring SPECIES_DUSKNOIR; requires FLAG_SYS_GAME_CLEAR; cap offset +3",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Giratina"
+    },
+    {
+      "species_id": "SPECIES_TAPU_LELE",
+      "category": "Conditional Legendary Sign",
+      "location": "Mt Pyre Exterior",
+      "details": "Legendary Sign: 8% within Land encounters after 6 Badge(s); bring SPECIES_GARDEVOIR; requires FLAG_BADGE06_GET; cap offset +1",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Tapu Lele"
+    },
+    {
+      "species_id": "SPECIES_YVELTAL",
+      "category": "Conditional Legendary Sign",
+      "location": "Mt Pyre Exterior",
+      "details": "Legendary Sign: 8% within Land encounters after 8 Badge(s); bring SPECIES_ABSOL; requires FLAG_SYS_GAME_CLEAR; cap offset +3",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Yveltal"
+    },
+    {
+      "species_id": "SPECIES_REGIELEKI",
+      "category": "Conditional Legendary Sign",
+      "location": "New Mauville Inside",
+      "details": "Legendary Sign: 8% within Land encounters after 5 Badge(s); bring SPECIES_REGISTEEL; requires FLAG_BADGE05_GET; cap offset +2",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Regieleki"
+    },
+    {
+      "species_id": "SPECIES_ZEKROM",
+      "category": "Conditional Legendary Sign",
+      "location": "New Mauville Inside",
+      "details": "Legendary Sign: 8% within Land encounters after 8 Badge(s); bring SPECIES_DIALGA; requires FLAG_SYS_GAME_CLEAR; cap offset +3",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Zekrom"
+    },
+    {
+      "species_id": "SPECIES_ZERAORA",
+      "category": "Conditional Legendary Sign",
+      "location": "New Mauville Inside",
+      "details": "Legendary Sign: 10% within Land encounters after 5 Badge(s); bring SPECIES_MANECTRIC; requires FLAG_BADGE05_GET; cap offset +1",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Zeraora"
+    },
+    {
+      "species_id": "SPECIES_CELEBI",
+      "category": "Conditional Legendary Sign",
+      "location": "Petalburg Woods",
+      "details": "Legendary Sign: 10% within Land encounters after 4 Badge(s); bring SPECIES_BLISSEY; requires FLAG_BADGE04_GET; cap offset +0",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Celebi"
+    },
+    {
+      "species_id": "SPECIES_VIRIZION",
+      "category": "Conditional Legendary Sign",
+      "location": "Petalburg Woods 2",
+      "details": "Legendary Sign: 10% within Land encounters after 2 Badge(s); bring SPECIES_BRELOOM; requires FLAG_BADGE02_GET; cap offset +1",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Virizion"
+    },
+    {
+      "species_id": "SPECIES_RAIKOU",
+      "category": "Conditional Legendary Sign",
+      "location": "Route 110",
+      "details": "Legendary Sign: 10% within Land encounters after 3 Badge(s); bring SPECIES_MANECTRIC; requires FLAG_BADGE03_GET; cap offset +1",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Raikou"
+    },
+    {
+      "species_id": "SPECIES_TAPU_KOKO",
+      "category": "Conditional Legendary Sign",
+      "location": "Route 110",
+      "details": "Legendary Sign: 8% within Land encounters after 5 Badge(s); bring SPECIES_RAICHU; requires FLAG_BADGE05_GET; cap offset +1",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Tapu Koko"
+    },
+    {
+      "species_id": "SPECIES_LANDORUS",
+      "category": "Conditional Legendary Sign",
+      "location": "Route 111",
+      "details": "Legendary Sign: 10% within Land encounters after 5 Badge(s); bring SPECIES_CASTFORM; requires FLAG_BADGE05_GET; cap offset +1",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Landorus"
+    },
+    {
+      "species_id": "SPECIES_SHAYMIN",
+      "category": "Conditional Legendary Sign",
+      "location": "Route 117",
+      "details": "Legendary Sign: 10% within Land encounters after 4 Badge(s); bring SPECIES_ROSERADE; requires FLAG_BADGE04_GET; cap offset +0",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Shaymin"
+    },
+    {
+      "species_id": "SPECIES_THUNDURUS",
+      "category": "Conditional Legendary Sign",
+      "location": "Route 119",
+      "details": "Legendary Sign: 10% within Water encounters after 5 Badge(s); bring SPECIES_CASTFORM; requires FLAG_BADGE05_GET; cap offset +1",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Thundurus"
+    },
+    {
+      "species_id": "SPECIES_TORNADUS",
+      "category": "Conditional Legendary Sign",
+      "location": "Route 119",
+      "details": "Legendary Sign: 10% within Land encounters after 5 Badge(s); bring SPECIES_CASTFORM; requires FLAG_BADGE05_GET; cap offset +1",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Tornadus"
+    },
+    {
+      "species_id": "SPECIES_MESPRIT",
+      "category": "Conditional Legendary Sign",
+      "location": "Route 120",
+      "details": "Legendary Sign: 10% within Water encounters after 5 Badge(s); bring SPECIES_GARDEVOIR; requires FLAG_BADGE05_GET; cap offset +1",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Mesprit"
+    },
+    {
+      "species_id": "SPECIES_TAPU_BULU",
+      "category": "Conditional Legendary Sign",
+      "location": "Safari Zone North",
+      "details": "Legendary Sign: 10% within Land encounters after 6 Badge(s); bring SPECIES_TAUROS; requires FLAG_BADGE06_GET; cap offset +1",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Tapu Bulu"
+    },
+    {
+      "species_id": "SPECIES_XERNEAS",
+      "category": "Conditional Legendary Sign",
+      "location": "Safari Zone North",
+      "details": "Legendary Sign: 8% within Land encounters after 8 Badge(s); bring SPECIES_XATU; requires FLAG_SYS_GAME_CLEAR; cap offset +3",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Xerneas"
+    },
+    {
+      "species_id": "SPECIES_RESHIRAM",
+      "category": "Conditional Legendary Sign",
+      "location": "Scorched Slab B2F",
+      "details": "Legendary Sign: 8% within Land encounters after 8 Badge(s); bring SPECIES_DIALGA; requires FLAG_SYS_GAME_CLEAR; cap offset +3",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Reshiram"
+    },
+    {
+      "species_id": "SPECIES_PALKIA",
+      "category": "Conditional Legendary Sign",
+      "location": "Seafloor Cavern Room6",
+      "details": "Legendary Sign: 8% within Water encounters after 8 Badge(s); bring SPECIES_KINGDRA; requires FLAG_SYS_GAME_CLEAR; cap offset +3",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Palkia"
+    },
+    {
+      "species_id": "SPECIES_AZELF",
+      "category": "Conditional Legendary Sign",
+      "location": "Shoal Cave Low Tide Ice Room",
+      "details": "Legendary Sign: 10% within Land encounters after 6 Badge(s); bring SPECIES_SNORUNT; requires FLAG_BADGE06_GET; cap offset +1",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Azelf"
+    },
+    {
+      "species_id": "SPECIES_KYUREM",
+      "category": "Conditional Legendary Sign",
+      "location": "Shoal Cave Low Tide Ice Room",
+      "details": "Legendary Sign: 8% within Land encounters after 8 Badge(s); bring SPECIES_RESHIRAM; requires FLAG_SYS_GAME_CLEAR; cap offset +3",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Kyurem"
+    },
+    {
+      "species_id": "SPECIES_VICTINI",
+      "category": "Conditional Legendary Sign",
+      "location": "Victory Road 1F",
+      "details": "Legendary Sign: 8% within Land encounters after 8 Badge(s); bring SPECIES_LUCARIO; requires FLAG_BADGE08_GET; cap offset +2",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Victini"
+    },
+    {
       "species_id": "SPECIES_AERODACTYL",
       "category": "Fossil restoration",
       "location": "Rustboro Devon Corporation",
@@ -34584,6 +34946,22 @@
       "details": "Trade for SPECIES_CROAGUNK; received at level 21",
       "source_file": "src/data/trade.h",
       "species": "Tropius"
+    },
+    {
+      "species_id": "SPECIES_ARCEUS",
+      "category": "Mastery reward",
+      "location": "Legendary Sign / Champions Circuit mastery",
+      "details": "Complete the corresponding endgame mastery track",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Arceus"
+    },
+    {
+      "species_id": "SPECIES_ETERNATUS",
+      "category": "Mastery reward",
+      "location": "Legendary Sign / Champions Circuit mastery",
+      "details": "Complete the corresponding endgame mastery track",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Eternatus"
     },
     {
       "species_id": "SPECIES_CHIKORITA",
@@ -34746,6 +35124,14 @@
       "species": "Froakie"
     },
     {
+      "species_id": "SPECIES_GENESECT",
+      "category": "Prize Pokémon",
+      "location": "Mauville Game Corner",
+      "details": "Coin-exchange Pokémon prize",
+      "source_file": "data/maps/MauvilleCity_GameCorner/scripts.inc",
+      "species": "Genesect"
+    },
+    {
       "species_id": "SPECIES_GEODUDE_ALOLAN",
       "category": "Prize Pokémon",
       "location": "Mauville Game Corner",
@@ -34816,6 +35202,14 @@
       "details": "Coin-exchange Pokémon prize",
       "source_file": "data/maps/MauvilleCity_GameCorner/scripts.inc",
       "species": "Piplup"
+    },
+    {
+      "species_id": "SPECIES_POIPOLE",
+      "category": "Prize Pokémon",
+      "location": "Mauville Game Corner",
+      "details": "Coin-exchange Pokémon prize",
+      "source_file": "data/maps/MauvilleCity_GameCorner/scripts.inc",
+      "species": "Poipole"
     },
     {
       "species_id": "SPECIES_POPPLIO",
@@ -35034,12 +35428,36 @@
       "species": "Kyogre"
     },
     {
+      "species_id": "SPECIES_DIALGA",
+      "category": "Scripted/static encounter",
+      "location": "Meteor Falls B1F 1R",
+      "details": "Literal setwildbattle acquisition",
+      "source_file": "data/maps/MeteorFalls_B1F_1R/scripts.inc",
+      "species": "Dialga"
+    },
+    {
+      "species_id": "SPECIES_CRESSELIA",
+      "category": "Scripted/static encounter",
+      "location": "Meteor Falls B1F 2R",
+      "details": "Literal setwildbattle acquisition",
+      "source_file": "data/maps/MeteorFalls_B1F_2R/scripts.inc",
+      "species": "Cresselia"
+    },
+    {
       "species_id": "SPECIES_JIRACHI",
       "category": "Scripted/static encounter",
       "location": "Meteor Falls Jirachis Room",
       "details": "Literal setwildbattle acquisition",
       "source_file": "data/maps/MeteorFalls_JirachisRoom/scripts.inc",
       "species": "Jirachi"
+    },
+    {
+      "species_id": "SPECIES_DARKRAI",
+      "category": "Scripted/static encounter",
+      "location": "Mt Pyre Summit",
+      "details": "Literal setwildbattle acquisition",
+      "source_file": "data/maps/MtPyre_Summit/scripts.inc",
+      "species": "Darkrai"
     },
     {
       "species_id": "SPECIES_ELECTRODE",
@@ -35112,6 +35530,14 @@
       "details": "Literal setwildbattle acquisition",
       "source_file": "data/maps/TerraCave_End/scripts.inc",
       "species": "Groudon"
+    },
+    {
+      "species_id": "SPECIES_PHIONE",
+      "category": "Special breeding",
+      "location": "Hoenn Day Care",
+      "details": "Breed Manaphy with Ditto",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Phione"
     },
     {
       "species_id": "SPECIES_BULBASAUR",
@@ -37707,20 +38133,20 @@
       "species_number": 243,
       "species_id": "SPECIES_RAIKOU",
       "species": "Raikou",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Conditional Legendary Sign: Route 110 (Legendary Sign: 10% within Land encounters after 3 Badge(s); bring SPECIES_MANECTRIC; requires FLAG_BADGE03_GET; cap offset +1)",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 244,
       "species_id": "SPECIES_ENTEI",
       "species": "Entei",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Conditional Legendary Sign: Fiery Path (Legendary Sign: 10% within Land encounters after 3 Badge(s); bring SPECIES_TORKOAL; requires FLAG_BADGE03_GET; cap offset +1)",
       "runtime_status": "party-selectable species/form"
     },
     {
@@ -37787,10 +38213,10 @@
       "species_number": 251,
       "species_id": "SPECIES_CELEBI",
       "species": "Celebi",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Conditional Legendary Sign: Petalburg Woods (Legendary Sign: 10% within Land encounters after 4 Badge(s); bring SPECIES_BLISSEY; requires FLAG_BADGE04_GET; cap offset +0)",
       "runtime_status": "party-selectable species/form"
     },
     {
@@ -40077,50 +40503,50 @@
       "species_number": 480,
       "species_id": "SPECIES_UXIE",
       "species": "Uxie",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Conditional Legendary Sign: Meteor Falls B1F 1R (Legendary Sign: 10% within Land encounters after 5 Badge(s); bring SPECIES_ALAKAZAM; requires FLAG_BADGE05_GET; cap offset +1)",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 481,
       "species_id": "SPECIES_MESPRIT",
       "species": "Mesprit",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Conditional Legendary Sign: Route 120 (Legendary Sign: 10% within Water encounters after 5 Badge(s); bring SPECIES_GARDEVOIR; requires FLAG_BADGE05_GET; cap offset +1)",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 482,
       "species_id": "SPECIES_AZELF",
       "species": "Azelf",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Conditional Legendary Sign: Shoal Cave Low Tide Ice Room (Legendary Sign: 10% within Land encounters after 6 Badge(s); bring SPECIES_SNORUNT; requires FLAG_BADGE06_GET; cap offset +1)",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 483,
       "species_id": "SPECIES_DIALGA",
       "species": "Dialga",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Scripted/static encounter: Meteor Falls B1F 1R (Literal setwildbattle acquisition)",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 484,
       "species_id": "SPECIES_PALKIA",
       "species": "Palkia",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Conditional Legendary Sign: Seafloor Cavern Room6 (Legendary Sign: 8% within Water encounters after 8 Badge(s); bring SPECIES_KINGDRA; requires FLAG_SYS_GAME_CLEAR; cap offset +3)",
       "runtime_status": "party-selectable species/form"
     },
     {
@@ -40147,30 +40573,30 @@
       "species_number": 487,
       "species_id": "SPECIES_GIRATINA",
       "species": "Giratina",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Conditional Legendary Sign: Mt Pyre 6F (Legendary Sign: 8% within Land encounters after 8 Badge(s); bring SPECIES_DUSKNOIR; requires FLAG_SYS_GAME_CLEAR; cap offset +3)",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 488,
       "species_id": "SPECIES_CRESSELIA",
       "species": "Cresselia",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Scripted/static encounter: Meteor Falls B1F 2R (Literal setwildbattle acquisition)",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 489,
       "species_id": "SPECIES_PHIONE",
       "species": "Phione",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Special breeding: Hoenn Day Care (Breed Manaphy with Ditto)",
       "runtime_status": "party-selectable species/form"
     },
     {
@@ -40187,40 +40613,40 @@
       "species_number": 491,
       "species_id": "SPECIES_DARKRAI",
       "species": "Darkrai",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Scripted/static encounter: Mt Pyre Summit (Literal setwildbattle acquisition)",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 492,
       "species_id": "SPECIES_SHAYMIN",
       "species": "Shaymin",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Conditional Legendary Sign: Route 117 (Legendary Sign: 10% within Land encounters after 4 Badge(s); bring SPECIES_ROSERADE; requires FLAG_BADGE04_GET; cap offset +0)",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 493,
       "species_id": "SPECIES_ARCEUS",
       "species": "Arceus",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Mastery reward: Legendary Sign / Champions Circuit mastery (Complete the corresponding endgame mastery track)",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 494,
       "species_id": "SPECIES_VICTINI",
       "species": "Victini",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Conditional Legendary Sign: Victory Road 1F (Legendary Sign: 8% within Land encounters after 8 Badge(s); bring SPECIES_LUCARIO; requires FLAG_BADGE08_GET; cap offset +2)",
       "runtime_status": "party-selectable species/form"
     },
     {
@@ -41657,10 +42083,10 @@
       "species_number": 638,
       "species_id": "SPECIES_COBALION",
       "species": "Cobalion",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Conditional Legendary Sign: Granite Cave B2F (Legendary Sign: 10% within Land encounters after 1 Badge(s); bring SPECIES_LUCARIO; requires FLAG_BADGE01_GET; cap offset +1)",
       "runtime_status": "party-selectable species/form"
     },
     {
@@ -41677,70 +42103,70 @@
       "species_number": 640,
       "species_id": "SPECIES_VIRIZION",
       "species": "Virizion",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Conditional Legendary Sign: Petalburg Woods 2 (Legendary Sign: 10% within Land encounters after 2 Badge(s); bring SPECIES_BRELOOM; requires FLAG_BADGE02_GET; cap offset +1)",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 641,
       "species_id": "SPECIES_TORNADUS",
       "species": "Tornadus",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Conditional Legendary Sign: Route 119 (Legendary Sign: 10% within Land encounters after 5 Badge(s); bring SPECIES_CASTFORM; requires FLAG_BADGE05_GET; cap offset +1)",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 642,
       "species_id": "SPECIES_THUNDURUS",
       "species": "Thundurus",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Conditional Legendary Sign: Route 119 (Legendary Sign: 10% within Water encounters after 5 Badge(s); bring SPECIES_CASTFORM; requires FLAG_BADGE05_GET; cap offset +1)",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 643,
       "species_id": "SPECIES_RESHIRAM",
       "species": "Reshiram",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Conditional Legendary Sign: Scorched Slab B2F (Legendary Sign: 8% within Land encounters after 8 Badge(s); bring SPECIES_DIALGA; requires FLAG_SYS_GAME_CLEAR; cap offset +3)",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 644,
       "species_id": "SPECIES_ZEKROM",
       "species": "Zekrom",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Conditional Legendary Sign: New Mauville Inside (Legendary Sign: 8% within Land encounters after 8 Badge(s); bring SPECIES_DIALGA; requires FLAG_SYS_GAME_CLEAR; cap offset +3)",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 645,
       "species_id": "SPECIES_LANDORUS",
       "species": "Landorus",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Conditional Legendary Sign: Route 111 (Legendary Sign: 10% within Land encounters after 5 Badge(s); bring SPECIES_CASTFORM; requires FLAG_BADGE05_GET; cap offset +1)",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 646,
       "species_id": "SPECIES_KYUREM",
       "species": "Kyurem",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Conditional Legendary Sign: Shoal Cave Low Tide Ice Room (Legendary Sign: 8% within Land encounters after 8 Badge(s); bring SPECIES_RESHIRAM; requires FLAG_SYS_GAME_CLEAR; cap offset +3)",
       "runtime_status": "party-selectable species/form"
     },
     {
@@ -41767,10 +42193,10 @@
       "species_number": 649,
       "species_id": "SPECIES_GENESECT",
       "species": "Genesect",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Prize Pokémon: Mauville Game Corner (Coin-exchange Pokémon prize)",
       "runtime_status": "party-selectable species/form"
     },
     {
@@ -42437,30 +42863,30 @@
       "species_number": 716,
       "species_id": "SPECIES_XERNEAS",
       "species": "Xerneas",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Conditional Legendary Sign: Safari Zone North (Legendary Sign: 8% within Land encounters after 8 Badge(s); bring SPECIES_XATU; requires FLAG_SYS_GAME_CLEAR; cap offset +3)",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 717,
       "species_id": "SPECIES_YVELTAL",
       "species": "Yveltal",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Conditional Legendary Sign: Mt Pyre Exterior (Legendary Sign: 8% within Land encounters after 8 Badge(s); bring SPECIES_ABSOL; requires FLAG_SYS_GAME_CLEAR; cap offset +3)",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 718,
       "species_id": "SPECIES_ZYGARDE",
       "species": "Zygarde",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Conditional Legendary Sign: Desert Underpass (Legendary Sign: 8% within Land encounters after 8 Badge(s); bring SPECIES_LANDORUS; requires FLAG_SYS_GAME_CLEAR; cap offset +3)",
       "runtime_status": "party-selectable species/form"
     },
     {
@@ -42477,10 +42903,10 @@
       "species_number": 720,
       "species_id": "SPECIES_HOOPA",
       "species": "Hoopa",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Conditional Legendary Sign: Mirage Tower 4F (Legendary Sign: 10% within Land encounters after 4 Badge(s); bring SPECIES_UNOWN; requires FLAG_BADGE04_GET; cap offset +1)",
       "runtime_status": "party-selectable species/form"
     },
     {
@@ -43127,30 +43553,30 @@
       "species_number": 785,
       "species_id": "SPECIES_TAPU_KOKO",
       "species": "Tapu Koko",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Conditional Legendary Sign: Route 110 (Legendary Sign: 8% within Land encounters after 5 Badge(s); bring SPECIES_RAICHU; requires FLAG_BADGE05_GET; cap offset +1)",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 786,
       "species_id": "SPECIES_TAPU_LELE",
       "species": "Tapu Lele",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Conditional Legendary Sign: Mt Pyre Exterior (Legendary Sign: 8% within Land encounters after 6 Badge(s); bring SPECIES_GARDEVOIR; requires FLAG_BADGE06_GET; cap offset +1)",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 787,
       "species_id": "SPECIES_TAPU_BULU",
       "species": "Tapu Bulu",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Conditional Legendary Sign: Safari Zone North (Legendary Sign: 10% within Land encounters after 6 Badge(s); bring SPECIES_TAUROS; requires FLAG_BADGE06_GET; cap offset +1)",
       "runtime_status": "party-selectable species/form"
     },
     {
@@ -43207,80 +43633,80 @@
       "species_number": 793,
       "species_id": "SPECIES_NIHILEGO",
       "species": "Nihilego",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Champions Circuit milestone: Battle Frontier Battle Tower (Awarded every five consecutive Circuit wins)",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 794,
       "species_id": "SPECIES_BUZZWOLE",
       "species": "Buzzwole",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Champions Circuit milestone: Battle Frontier Battle Tower (Awarded every five consecutive Circuit wins)",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 795,
       "species_id": "SPECIES_PHEROMOSA",
       "species": "Pheromosa",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Champions Circuit milestone: Battle Frontier Battle Tower (Awarded every five consecutive Circuit wins)",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 796,
       "species_id": "SPECIES_XURKITREE",
       "species": "Xurkitree",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Champions Circuit milestone: Battle Frontier Battle Tower (Awarded every five consecutive Circuit wins)",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 797,
       "species_id": "SPECIES_CELESTEELA",
       "species": "Celesteela",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Champions Circuit milestone: Battle Frontier Battle Tower (Awarded every five consecutive Circuit wins)",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 798,
       "species_id": "SPECIES_KARTANA",
       "species": "Kartana",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Champions Circuit milestone: Battle Frontier Battle Tower (Awarded every five consecutive Circuit wins)",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 799,
       "species_id": "SPECIES_GUZZLORD",
       "species": "Guzzlord",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Champions Circuit milestone: Battle Frontier Battle Tower (Awarded every five consecutive Circuit wins)",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 800,
       "species_id": "SPECIES_NECROZMA",
       "species": "Necrozma",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Champions Circuit milestone: Battle Frontier Battle Tower (Awarded every five consecutive Circuit wins)",
       "runtime_status": "party-selectable species/form"
     },
     {
@@ -43297,60 +43723,60 @@
       "species_number": 802,
       "species_id": "SPECIES_MARSHADOW",
       "species": "Marshadow",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Champions Circuit milestone: Battle Frontier Battle Tower (Awarded every five consecutive Circuit wins)",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 803,
       "species_id": "SPECIES_POIPOLE",
       "species": "Poipole",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Prize Pokémon: Mauville Game Corner (Coin-exchange Pokémon prize)",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 804,
       "species_id": "SPECIES_NAGANADEL",
       "species": "Naganadel",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Evolution from obtainable Pokémon",
       "wild_pool_count": 0,
       "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "acquisition_path": "Poipole → Naganadel via Level while knowing MOVE_DRAGON_PULSE",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 805,
       "species_id": "SPECIES_STAKATAKA",
       "species": "Stakataka",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Champions Circuit milestone: Battle Frontier Battle Tower (Awarded every five consecutive Circuit wins)",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 806,
       "species_id": "SPECIES_BLACEPHALON",
       "species": "Blacephalon",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Champions Circuit milestone: Battle Frontier Battle Tower (Awarded every five consecutive Circuit wins)",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 807,
       "species_id": "SPECIES_ZERAORA",
       "species": "Zeraora",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Conditional Legendary Sign: New Mauville Inside (Legendary Sign: 10% within Land encounters after 5 Badge(s); bring SPECIES_MANECTRIC; requires FLAG_BADGE05_GET; cap offset +1)",
       "runtime_status": "party-selectable species/form"
     },
     {
@@ -44157,30 +44583,30 @@
       "species_number": 888,
       "species_id": "SPECIES_ZACIAN",
       "species": "Zacian",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Champions Circuit milestone: Battle Frontier Battle Tower (Awarded every five consecutive Circuit wins)",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 889,
       "species_id": "SPECIES_ZAMAZENTA",
       "species": "Zamazenta",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Champions Circuit milestone: Battle Frontier Battle Tower (Awarded every five consecutive Circuit wins)",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 890,
       "species_id": "SPECIES_ETERNATUS",
       "species": "Eternatus",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Mastery reward: Legendary Sign / Champions Circuit mastery (Complete the corresponding endgame mastery track)",
       "runtime_status": "party-selectable species/form"
     },
     {
@@ -44207,60 +44633,60 @@
       "species_number": 893,
       "species_id": "SPECIES_ZARUDE",
       "species": "Zarude",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Champions Circuit milestone: Battle Frontier Battle Tower (Awarded every five consecutive Circuit wins)",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 894,
       "species_id": "SPECIES_REGIELEKI",
       "species": "Regieleki",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Conditional Legendary Sign: New Mauville Inside (Legendary Sign: 8% within Land encounters after 5 Badge(s); bring SPECIES_REGISTEEL; requires FLAG_BADGE05_GET; cap offset +2)",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 895,
       "species_id": "SPECIES_REGIDRAGO",
       "species": "Regidrago",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Conditional Legendary Sign: Meteor Falls 1F 2R (Legendary Sign: 8% within Land encounters after 6 Badge(s); bring SPECIES_REGIROCK; requires FLAG_BADGE06_GET; cap offset +2)",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 896,
       "species_id": "SPECIES_GLASTRIER",
       "species": "Glastrier",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Champions Circuit milestone: Battle Frontier Battle Tower (Awarded every five consecutive Circuit wins)",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 897,
       "species_id": "SPECIES_SPECTRIER",
       "species": "Spectrier",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Champions Circuit milestone: Battle Frontier Battle Tower (Awarded every five consecutive Circuit wins)",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 898,
       "species_id": "SPECIES_CALYREX",
       "species": "Calyrex",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
-      "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "nonrandom_source_count": 1,
+      "acquisition_path": "Champions Circuit milestone: Battle Frontier Battle Tower (Awarded every five consecutive Circuit wins)",
       "runtime_status": "party-selectable species/form"
     },
     {
@@ -45737,190 +46163,190 @@
       "species_number": 1046,
       "species_id": "SPECIES_GIRATINA_ORIGIN",
       "species": "Giratina Origin",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Alternate form from obtainable base",
       "wild_pool_count": 0,
       "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "acquisition_path": "Obtain Giratina, then use the applicable form-change mechanic.",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 1047,
       "species_id": "SPECIES_SHAYMIN_SKY",
       "species": "Shaymin Sky",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Alternate form from obtainable base",
       "wild_pool_count": 0,
       "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "acquisition_path": "Obtain Shaymin, then use the applicable form-change mechanic.",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 1048,
       "species_id": "SPECIES_ARCEUS_FIGHTING",
       "species": "Arceus Fighting",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Alternate form from obtainable base",
       "wild_pool_count": 0,
       "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "acquisition_path": "Obtain Arceus, then use the applicable form-change mechanic.",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 1049,
       "species_id": "SPECIES_ARCEUS_FLYING",
       "species": "Arceus Flying",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Alternate form from obtainable base",
       "wild_pool_count": 0,
       "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "acquisition_path": "Obtain Arceus, then use the applicable form-change mechanic.",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 1050,
       "species_id": "SPECIES_ARCEUS_POISON",
       "species": "Arceus Poison",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Alternate form from obtainable base",
       "wild_pool_count": 0,
       "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "acquisition_path": "Obtain Arceus, then use the applicable form-change mechanic.",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 1051,
       "species_id": "SPECIES_ARCEUS_GROUND",
       "species": "Arceus Ground",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Alternate form from obtainable base",
       "wild_pool_count": 0,
       "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "acquisition_path": "Obtain Arceus, then use the applicable form-change mechanic.",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 1052,
       "species_id": "SPECIES_ARCEUS_ROCK",
       "species": "Arceus Rock",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Alternate form from obtainable base",
       "wild_pool_count": 0,
       "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "acquisition_path": "Obtain Arceus, then use the applicable form-change mechanic.",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 1053,
       "species_id": "SPECIES_ARCEUS_BUG",
       "species": "Arceus Bug",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Alternate form from obtainable base",
       "wild_pool_count": 0,
       "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "acquisition_path": "Obtain Arceus, then use the applicable form-change mechanic.",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 1054,
       "species_id": "SPECIES_ARCEUS_GHOST",
       "species": "Arceus Ghost",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Alternate form from obtainable base",
       "wild_pool_count": 0,
       "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "acquisition_path": "Obtain Arceus, then use the applicable form-change mechanic.",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 1055,
       "species_id": "SPECIES_ARCEUS_STEEL",
       "species": "Arceus Steel",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Alternate form from obtainable base",
       "wild_pool_count": 0,
       "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "acquisition_path": "Obtain Arceus, then use the applicable form-change mechanic.",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 1056,
       "species_id": "SPECIES_ARCEUS_FIRE",
       "species": "Arceus Fire",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Alternate form from obtainable base",
       "wild_pool_count": 0,
       "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "acquisition_path": "Obtain Arceus, then use the applicable form-change mechanic.",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 1057,
       "species_id": "SPECIES_ARCEUS_WATER",
       "species": "Arceus Water",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Alternate form from obtainable base",
       "wild_pool_count": 0,
       "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "acquisition_path": "Obtain Arceus, then use the applicable form-change mechanic.",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 1058,
       "species_id": "SPECIES_ARCEUS_GRASS",
       "species": "Arceus Grass",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Alternate form from obtainable base",
       "wild_pool_count": 0,
       "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "acquisition_path": "Obtain Arceus, then use the applicable form-change mechanic.",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 1059,
       "species_id": "SPECIES_ARCEUS_ELECTRIC",
       "species": "Arceus Electric",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Alternate form from obtainable base",
       "wild_pool_count": 0,
       "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "acquisition_path": "Obtain Arceus, then use the applicable form-change mechanic.",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 1060,
       "species_id": "SPECIES_ARCEUS_PSYCHIC",
       "species": "Arceus Psychic",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Alternate form from obtainable base",
       "wild_pool_count": 0,
       "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "acquisition_path": "Obtain Arceus, then use the applicable form-change mechanic.",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 1061,
       "species_id": "SPECIES_ARCEUS_ICE",
       "species": "Arceus Ice",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Alternate form from obtainable base",
       "wild_pool_count": 0,
       "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "acquisition_path": "Obtain Arceus, then use the applicable form-change mechanic.",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 1062,
       "species_id": "SPECIES_ARCEUS_DRAGON",
       "species": "Arceus Dragon",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Alternate form from obtainable base",
       "wild_pool_count": 0,
       "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "acquisition_path": "Obtain Arceus, then use the applicable form-change mechanic.",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 1063,
       "species_id": "SPECIES_ARCEUS_DARK",
       "species": "Arceus Dark",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Alternate form from obtainable base",
       "wild_pool_count": 0,
       "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "acquisition_path": "Obtain Arceus, then use the applicable form-change mechanic.",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 1064,
       "species_id": "SPECIES_ARCEUS_FAIRY",
       "species": "Arceus Fairy",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Alternate form from obtainable base",
       "wild_pool_count": 0,
       "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "acquisition_path": "Obtain Arceus, then use the applicable form-change mechanic.",
       "runtime_status": "party-selectable species/form"
     },
     {
@@ -46017,50 +46443,50 @@
       "species_number": 1074,
       "species_id": "SPECIES_TORNADUS_THERIAN",
       "species": "Tornadus Therian",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Alternate form from obtainable base",
       "wild_pool_count": 0,
       "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "acquisition_path": "Obtain Tornadus, then use the applicable form-change mechanic.",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 1075,
       "species_id": "SPECIES_THUNDURUS_THERIAN",
       "species": "Thundurus Therian",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Alternate form from obtainable base",
       "wild_pool_count": 0,
       "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "acquisition_path": "Obtain Thundurus, then use the applicable form-change mechanic.",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 1076,
       "species_id": "SPECIES_LANDORUS_THERIAN",
       "species": "Landorus Therian",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Alternate form from obtainable base",
       "wild_pool_count": 0,
       "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "acquisition_path": "Obtain Landorus, then use the applicable form-change mechanic.",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 1077,
       "species_id": "SPECIES_KYUREM_WHITE",
       "species": "Kyurem White",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Alternate form from obtainable base",
       "wild_pool_count": 0,
       "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "acquisition_path": "Obtain Kyurem, then use the applicable form-change mechanic.",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 1078,
       "species_id": "SPECIES_KYUREM_BLACK",
       "species": "Kyurem Black",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Alternate form from obtainable base",
       "wild_pool_count": 0,
       "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "acquisition_path": "Obtain Kyurem, then use the applicable form-change mechanic.",
       "runtime_status": "party-selectable species/form"
     },
     {
@@ -46087,40 +46513,40 @@
       "species_number": 1081,
       "species_id": "SPECIES_GENESECT_DOUSE_DRIVE",
       "species": "Genesect Douse Drive",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Alternate form from obtainable base",
       "wild_pool_count": 0,
       "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "acquisition_path": "Obtain Genesect, then use the applicable form-change mechanic.",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 1082,
       "species_id": "SPECIES_GENESECT_SHOCK_DRIVE",
       "species": "Genesect Shock Drive",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Alternate form from obtainable base",
       "wild_pool_count": 0,
       "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "acquisition_path": "Obtain Genesect, then use the applicable form-change mechanic.",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 1083,
       "species_id": "SPECIES_GENESECT_BURN_DRIVE",
       "species": "Genesect Burn Drive",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Alternate form from obtainable base",
       "wild_pool_count": 0,
       "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "acquisition_path": "Obtain Genesect, then use the applicable form-change mechanic.",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 1084,
       "species_id": "SPECIES_GENESECT_CHILL_DRIVE",
       "species": "Genesect Chill Drive",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Alternate form from obtainable base",
       "wild_pool_count": 0,
       "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "acquisition_path": "Obtain Genesect, then use the applicable form-change mechanic.",
       "runtime_status": "party-selectable species/form"
     },
     {
@@ -46647,30 +47073,30 @@
       "species_number": 1137,
       "species_id": "SPECIES_ZYGARDE_10",
       "species": "Zygarde 10",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Alternate form from obtainable base",
       "wild_pool_count": 0,
       "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "acquisition_path": "Obtain Zygarde, then use the applicable form-change mechanic.",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 1138,
       "species_id": "SPECIES_ZYGARDE_10_POWER_CONSTRUCT",
       "species": "Zygarde 10 Power Construct",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Form / battle transformation; not separately acquired",
       "wild_pool_count": 0,
       "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "acquisition_path": "Derived from Zygarde 10 through its form, personality, held-item, ability, or battle mechanic.",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 1139,
       "species_id": "SPECIES_ZYGARDE_50_POWER_CONSTRUCT",
       "species": "Zygarde 50 Power Construct",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Form / battle transformation; not separately acquired",
       "wild_pool_count": 0,
       "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "acquisition_path": "Derived from Zygarde through its form, personality, held-item, ability, or battle mechanic.",
       "runtime_status": "party-selectable species/form"
     },
     {
@@ -46687,10 +47113,10 @@
       "species_number": 1141,
       "species_id": "SPECIES_HOOPA_UNBOUND",
       "species": "Hoopa Unbound",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Alternate form from obtainable base",
       "wild_pool_count": 0,
       "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "acquisition_path": "Obtain Hoopa, then use the applicable form-change mechanic.",
       "runtime_status": "party-selectable species/form"
     },
     {
@@ -47077,20 +47503,20 @@
       "species_number": 1180,
       "species_id": "SPECIES_NECROZMA_DUSK_MANE",
       "species": "Necrozma Dusk Mane",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Alternate form from obtainable base",
       "wild_pool_count": 0,
       "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "acquisition_path": "Obtain Necrozma, then use the applicable form-change mechanic.",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 1181,
       "species_id": "SPECIES_NECROZMA_DAWN_WINGS",
       "species": "Necrozma Dawn Wings",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Alternate form from obtainable base",
       "wild_pool_count": 0,
       "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "acquisition_path": "Obtain Necrozma, then use the applicable form-change mechanic.",
       "runtime_status": "party-selectable species/form"
     },
     {
@@ -47277,20 +47703,20 @@
       "species_number": 1200,
       "species_id": "SPECIES_ZACIAN_CROWNED_SWORD",
       "species": "Zacian Crowned Sword",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Alternate form from obtainable base",
       "wild_pool_count": 0,
       "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "acquisition_path": "Obtain Zacian, then use the applicable form-change mechanic.",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 1201,
       "species_id": "SPECIES_ZAMAZENTA_CROWNED_SHIELD",
       "species": "Zamazenta Crowned Shield",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Alternate form from obtainable base",
       "wild_pool_count": 0,
       "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "acquisition_path": "Obtain Zamazenta, then use the applicable form-change mechanic.",
       "runtime_status": "party-selectable species/form"
     },
     {
@@ -47317,30 +47743,30 @@
       "species_number": 1204,
       "species_id": "SPECIES_ZARUDE_DADA",
       "species": "Zarude Dada",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Alternate form from obtainable base",
       "wild_pool_count": 0,
       "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "acquisition_path": "Obtain Zarude, then use the applicable form-change mechanic.",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 1205,
       "species_id": "SPECIES_CALYREX_ICE_RIDER",
       "species": "Calyrex Ice Rider",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Alternate form from obtainable base",
       "wild_pool_count": 0,
       "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "acquisition_path": "Obtain Calyrex, then use the applicable form-change mechanic.",
       "runtime_status": "party-selectable species/form"
     },
     {
       "species_number": 1206,
       "species_id": "SPECIES_CALYREX_SHADOW_RIDER",
       "species": "Calyrex Shadow Rider",
-      "acquisition_class": "Unresolved by automated acquisition scan",
+      "acquisition_class": "Alternate form from obtainable base",
       "wild_pool_count": 0,
       "nonrandom_source_count": 0,
-      "acquisition_path": "No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources.",
+      "acquisition_path": "Obtain Calyrex, then use the applicable form-change mechanic.",
       "runtime_status": "party-selectable species/form"
     },
     {
@@ -47979,9 +48405,9 @@
     "main_configured_maps": 147,
     "all_random_table_rows": 1707,
     "catchable_random_species": 576,
-    "nonrandom_source_rows": 131,
+    "nonrandom_source_rows": 184,
     "runtime_species_form_rows": 1269,
-    "unresolved_rows": 93,
+    "unresolved_rows": 0,
     "pool_total_errors": 0,
     "loadout_set_count": 1309,
     "free_competitive_item_count": 65
@@ -47989,380 +48415,7 @@
   "validation": {
     "all_method_pools_sum_to_100": true,
     "pool_errors": [],
-    "unresolved_species": [
-      {
-        "species_id": "SPECIES_RAIKOU",
-        "species": "Raikou"
-      },
-      {
-        "species_id": "SPECIES_ENTEI",
-        "species": "Entei"
-      },
-      {
-        "species_id": "SPECIES_CELEBI",
-        "species": "Celebi"
-      },
-      {
-        "species_id": "SPECIES_UXIE",
-        "species": "Uxie"
-      },
-      {
-        "species_id": "SPECIES_MESPRIT",
-        "species": "Mesprit"
-      },
-      {
-        "species_id": "SPECIES_AZELF",
-        "species": "Azelf"
-      },
-      {
-        "species_id": "SPECIES_DIALGA",
-        "species": "Dialga"
-      },
-      {
-        "species_id": "SPECIES_PALKIA",
-        "species": "Palkia"
-      },
-      {
-        "species_id": "SPECIES_GIRATINA",
-        "species": "Giratina"
-      },
-      {
-        "species_id": "SPECIES_CRESSELIA",
-        "species": "Cresselia"
-      },
-      {
-        "species_id": "SPECIES_PHIONE",
-        "species": "Phione"
-      },
-      {
-        "species_id": "SPECIES_DARKRAI",
-        "species": "Darkrai"
-      },
-      {
-        "species_id": "SPECIES_SHAYMIN",
-        "species": "Shaymin"
-      },
-      {
-        "species_id": "SPECIES_ARCEUS",
-        "species": "Arceus"
-      },
-      {
-        "species_id": "SPECIES_VICTINI",
-        "species": "Victini"
-      },
-      {
-        "species_id": "SPECIES_COBALION",
-        "species": "Cobalion"
-      },
-      {
-        "species_id": "SPECIES_VIRIZION",
-        "species": "Virizion"
-      },
-      {
-        "species_id": "SPECIES_TORNADUS",
-        "species": "Tornadus"
-      },
-      {
-        "species_id": "SPECIES_THUNDURUS",
-        "species": "Thundurus"
-      },
-      {
-        "species_id": "SPECIES_RESHIRAM",
-        "species": "Reshiram"
-      },
-      {
-        "species_id": "SPECIES_ZEKROM",
-        "species": "Zekrom"
-      },
-      {
-        "species_id": "SPECIES_LANDORUS",
-        "species": "Landorus"
-      },
-      {
-        "species_id": "SPECIES_KYUREM",
-        "species": "Kyurem"
-      },
-      {
-        "species_id": "SPECIES_GENESECT",
-        "species": "Genesect"
-      },
-      {
-        "species_id": "SPECIES_XERNEAS",
-        "species": "Xerneas"
-      },
-      {
-        "species_id": "SPECIES_YVELTAL",
-        "species": "Yveltal"
-      },
-      {
-        "species_id": "SPECIES_ZYGARDE",
-        "species": "Zygarde"
-      },
-      {
-        "species_id": "SPECIES_HOOPA",
-        "species": "Hoopa"
-      },
-      {
-        "species_id": "SPECIES_TAPU_KOKO",
-        "species": "Tapu Koko"
-      },
-      {
-        "species_id": "SPECIES_TAPU_LELE",
-        "species": "Tapu Lele"
-      },
-      {
-        "species_id": "SPECIES_TAPU_BULU",
-        "species": "Tapu Bulu"
-      },
-      {
-        "species_id": "SPECIES_NIHILEGO",
-        "species": "Nihilego"
-      },
-      {
-        "species_id": "SPECIES_BUZZWOLE",
-        "species": "Buzzwole"
-      },
-      {
-        "species_id": "SPECIES_PHEROMOSA",
-        "species": "Pheromosa"
-      },
-      {
-        "species_id": "SPECIES_XURKITREE",
-        "species": "Xurkitree"
-      },
-      {
-        "species_id": "SPECIES_CELESTEELA",
-        "species": "Celesteela"
-      },
-      {
-        "species_id": "SPECIES_KARTANA",
-        "species": "Kartana"
-      },
-      {
-        "species_id": "SPECIES_GUZZLORD",
-        "species": "Guzzlord"
-      },
-      {
-        "species_id": "SPECIES_NECROZMA",
-        "species": "Necrozma"
-      },
-      {
-        "species_id": "SPECIES_MARSHADOW",
-        "species": "Marshadow"
-      },
-      {
-        "species_id": "SPECIES_POIPOLE",
-        "species": "Poipole"
-      },
-      {
-        "species_id": "SPECIES_NAGANADEL",
-        "species": "Naganadel"
-      },
-      {
-        "species_id": "SPECIES_STAKATAKA",
-        "species": "Stakataka"
-      },
-      {
-        "species_id": "SPECIES_BLACEPHALON",
-        "species": "Blacephalon"
-      },
-      {
-        "species_id": "SPECIES_ZERAORA",
-        "species": "Zeraora"
-      },
-      {
-        "species_id": "SPECIES_ZACIAN",
-        "species": "Zacian"
-      },
-      {
-        "species_id": "SPECIES_ZAMAZENTA",
-        "species": "Zamazenta"
-      },
-      {
-        "species_id": "SPECIES_ETERNATUS",
-        "species": "Eternatus"
-      },
-      {
-        "species_id": "SPECIES_ZARUDE",
-        "species": "Zarude"
-      },
-      {
-        "species_id": "SPECIES_REGIELEKI",
-        "species": "Regieleki"
-      },
-      {
-        "species_id": "SPECIES_REGIDRAGO",
-        "species": "Regidrago"
-      },
-      {
-        "species_id": "SPECIES_GLASTRIER",
-        "species": "Glastrier"
-      },
-      {
-        "species_id": "SPECIES_SPECTRIER",
-        "species": "Spectrier"
-      },
-      {
-        "species_id": "SPECIES_CALYREX",
-        "species": "Calyrex"
-      },
-      {
-        "species_id": "SPECIES_GIRATINA_ORIGIN",
-        "species": "Giratina Origin"
-      },
-      {
-        "species_id": "SPECIES_SHAYMIN_SKY",
-        "species": "Shaymin Sky"
-      },
-      {
-        "species_id": "SPECIES_ARCEUS_FIGHTING",
-        "species": "Arceus Fighting"
-      },
-      {
-        "species_id": "SPECIES_ARCEUS_FLYING",
-        "species": "Arceus Flying"
-      },
-      {
-        "species_id": "SPECIES_ARCEUS_POISON",
-        "species": "Arceus Poison"
-      },
-      {
-        "species_id": "SPECIES_ARCEUS_GROUND",
-        "species": "Arceus Ground"
-      },
-      {
-        "species_id": "SPECIES_ARCEUS_ROCK",
-        "species": "Arceus Rock"
-      },
-      {
-        "species_id": "SPECIES_ARCEUS_BUG",
-        "species": "Arceus Bug"
-      },
-      {
-        "species_id": "SPECIES_ARCEUS_GHOST",
-        "species": "Arceus Ghost"
-      },
-      {
-        "species_id": "SPECIES_ARCEUS_STEEL",
-        "species": "Arceus Steel"
-      },
-      {
-        "species_id": "SPECIES_ARCEUS_FIRE",
-        "species": "Arceus Fire"
-      },
-      {
-        "species_id": "SPECIES_ARCEUS_WATER",
-        "species": "Arceus Water"
-      },
-      {
-        "species_id": "SPECIES_ARCEUS_GRASS",
-        "species": "Arceus Grass"
-      },
-      {
-        "species_id": "SPECIES_ARCEUS_ELECTRIC",
-        "species": "Arceus Electric"
-      },
-      {
-        "species_id": "SPECIES_ARCEUS_PSYCHIC",
-        "species": "Arceus Psychic"
-      },
-      {
-        "species_id": "SPECIES_ARCEUS_ICE",
-        "species": "Arceus Ice"
-      },
-      {
-        "species_id": "SPECIES_ARCEUS_DRAGON",
-        "species": "Arceus Dragon"
-      },
-      {
-        "species_id": "SPECIES_ARCEUS_DARK",
-        "species": "Arceus Dark"
-      },
-      {
-        "species_id": "SPECIES_ARCEUS_FAIRY",
-        "species": "Arceus Fairy"
-      },
-      {
-        "species_id": "SPECIES_TORNADUS_THERIAN",
-        "species": "Tornadus Therian"
-      },
-      {
-        "species_id": "SPECIES_THUNDURUS_THERIAN",
-        "species": "Thundurus Therian"
-      },
-      {
-        "species_id": "SPECIES_LANDORUS_THERIAN",
-        "species": "Landorus Therian"
-      },
-      {
-        "species_id": "SPECIES_KYUREM_WHITE",
-        "species": "Kyurem White"
-      },
-      {
-        "species_id": "SPECIES_KYUREM_BLACK",
-        "species": "Kyurem Black"
-      },
-      {
-        "species_id": "SPECIES_GENESECT_DOUSE_DRIVE",
-        "species": "Genesect Douse Drive"
-      },
-      {
-        "species_id": "SPECIES_GENESECT_SHOCK_DRIVE",
-        "species": "Genesect Shock Drive"
-      },
-      {
-        "species_id": "SPECIES_GENESECT_BURN_DRIVE",
-        "species": "Genesect Burn Drive"
-      },
-      {
-        "species_id": "SPECIES_GENESECT_CHILL_DRIVE",
-        "species": "Genesect Chill Drive"
-      },
-      {
-        "species_id": "SPECIES_ZYGARDE_10",
-        "species": "Zygarde 10"
-      },
-      {
-        "species_id": "SPECIES_ZYGARDE_10_POWER_CONSTRUCT",
-        "species": "Zygarde 10 Power Construct"
-      },
-      {
-        "species_id": "SPECIES_ZYGARDE_50_POWER_CONSTRUCT",
-        "species": "Zygarde 50 Power Construct"
-      },
-      {
-        "species_id": "SPECIES_HOOPA_UNBOUND",
-        "species": "Hoopa Unbound"
-      },
-      {
-        "species_id": "SPECIES_NECROZMA_DUSK_MANE",
-        "species": "Necrozma Dusk Mane"
-      },
-      {
-        "species_id": "SPECIES_NECROZMA_DAWN_WINGS",
-        "species": "Necrozma Dawn Wings"
-      },
-      {
-        "species_id": "SPECIES_ZACIAN_CROWNED_SWORD",
-        "species": "Zacian Crowned Sword"
-      },
-      {
-        "species_id": "SPECIES_ZAMAZENTA_CROWNED_SHIELD",
-        "species": "Zamazenta Crowned Shield"
-      },
-      {
-        "species_id": "SPECIES_ZARUDE_DADA",
-        "species": "Zarude Dada"
-      },
-      {
-        "species_id": "SPECIES_CALYREX_ICE_RIDER",
-        "species": "Calyrex Ice Rider"
-      },
-      {
-        "species_id": "SPECIES_CALYREX_SHADOW_RIDER",
-        "species": "Calyrex Shadow Rider"
-      }
-    ],
+    "unresolved_species": [],
     "probability_definition": "chance_percent is conditional on the named encounter method selecting a species. Encounter methods are independent and must never be summed together."
   },
   "sources": [
@@ -48377,6 +48430,9 @@
     "src/field_specials.c",
     "src/data/trade.h",
     "docs/verdant_battle_set_presets.json",
-    "docs/verdant_multi_battle_sets.json"
+    "docs/verdant_multi_battle_sets.json",
+    "src/data/pokemon/legendary_signs.h",
+    "src/legendary_signs.c",
+    "src/champions_circuit.c"
   ]
 }

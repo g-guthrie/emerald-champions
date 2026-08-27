@@ -226,6 +226,8 @@ SECTIONS {
         src/hof_pc.o(.text);
         src/field_specials.o(.text);
         src/verdant_battle_sets.o(.text);
+        src/legendary_signs.o(.text);
+        src/champions_circuit.o(.text);
         src/battle_records.o(.text);
         src/pokedex_area_screen.o(.text);
         src/evolution_scene.o(.text);
@@ -598,6 +600,8 @@ SECTIONS {
         src/time_events.o(.rodata);
         src/field_specials.o(.rodata);
         src/verdant_battle_sets.o(.rodata);
+        src/legendary_signs.o(.rodata);
+        src/champions_circuit.o(.rodata);
         src/battle_records.o(.rodata);
         src/pokedex_area_screen.o(.rodata);
         src/evolution_scene.o(.rodata);

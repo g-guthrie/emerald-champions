@@ -60,6 +60,7 @@
 #include "constants/party_menu.h"
 #include "battle_util.h"
 #include "verdant_battle_sets.h"
+#include "legendary_signs.h"
 
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
@@ -15073,6 +15074,7 @@ static void Cmd_handleballthrow(void)
 static void Cmd_givecaughtmon(void)
 {
     u8 partyIndex = gBattlerPartyIndexes[GetCatchingBattler()];
+    u16 caughtSpecies = GetMonData(&gEnemyParty[partyIndex], MON_DATA_SPECIES, NULL);
     u16 currentItem = GetMonData(&gEnemyParty[partyIndex], MON_DATA_HELD_ITEM);
     u16 originalItem = gBattleStruct->originalEnemyItems[partyIndex];
 
@@ -15081,6 +15083,8 @@ static void Cmd_givecaughtmon(void)
     // transferred so it keeps the exact loadout it used in the encounter.
     if (currentItem != originalItem)
         SetMonData(&gEnemyParty[partyIndex], MON_DATA_HELD_ITEM, &originalItem);
+
+    MarkLegendarySignCaughtBySpecies(caughtSpecies);
 
     if (GiveMonToPlayer(&gEnemyParty[partyIndex]) != MON_GIVEN_TO_PARTY)
     {

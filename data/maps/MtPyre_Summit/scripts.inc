@@ -6,9 +6,14 @@
 .set LOCALID_GRUNT_4, 7
 .set LOCALID_MAXIE, 8
 .set LOCALID_MATT, 10
+.set LOCALID_DARKRAI, 11
+.set LEGENDARY_SIGN_CRESSELIA_ID, 8
+.set LEGENDARY_SIGN_DARKRAI_ID, 9
+.set LEGENDARY_SIGN_DIALGA_ID, 10
 
 MtPyre_Summit_MapScripts:: @ 8231FF7
 	map_script MAP_SCRIPT_ON_TRANSITION, MtPyre_Summit_OnTransition
+	map_script MAP_SCRIPT_ON_RESUME, Common_EventScript_RemoveOverworldAfterBattle
 	.byte 0
 
 MtPyre_Summit_OnTransition: @ 8231FFD
@@ -150,6 +155,7 @@ MtPyre_Summit_EventScript_OldMan:: @ 823213C
 	call_if_eq MtPyre_Summit_EventScript_OldManTale
 	compare VAR_RESULT, NO
 	call_if_eq MtPyre_Summit_EventScript_DeclineOldManTale
+	call MtPyre_Summit_EventScript_LegendarySign
 	release
 	end
 
@@ -159,6 +165,7 @@ MtPyre_Summit_EventScript_OldManAfterRayquaza:: @ 8232167
 	call_if_eq MtPyre_Summit_EventScript_OldManNewTale
 	compare VAR_RESULT, NO
 	call_if_eq MtPyre_Summit_EventScript_DeclineOldManTale
+	call MtPyre_Summit_EventScript_LegendarySign
 	release
 	end
 
@@ -173,6 +180,145 @@ MtPyre_Summit_EventScript_DeclineOldManTale:: @ 8232190
 MtPyre_Summit_EventScript_OldManNewTale:: @ 8232199
 	msgbox MtPyre_Summit_Text_HoennTrioTale, MSGBOX_DEFAULT
 	return
+
+MtPyre_Summit_EventScript_LegendarySign::
+	goto_if_unset FLAG_RECEIVED_RED_OR_BLUE_ORB, MtPyre_Summit_EventScript_LegendarySignReturn
+	special TryUnlockDarkraiLegendarySign
+	compare VAR_RESULT, 0
+	goto_if_eq MtPyre_Summit_EventScript_DarkraiNeedsTrainers
+	compare VAR_RESULT, 1
+	goto_if_eq MtPyre_Summit_EventScript_DarkraiNeedsMusharna
+	compare VAR_RESULT, 2
+	goto_if_eq MtPyre_Summit_EventScript_DarkraiAwakened
+	compare VAR_RESULT, 3
+	goto_if_eq MtPyre_Summit_EventScript_DarkraiAwaits
+	@ Once Darkrai is caught, the same storyteller advances the linked dream
+	@ quest without adding a new map, menu, or one-use NPC.
+	setvar VAR_0x8004, LEGENDARY_SIGN_CRESSELIA_ID
+	special TryUnlockSelectedLegendarySign
+	compare VAR_RESULT, 2
+	goto_if_eq MtPyre_Summit_EventScript_CresseliaAwakened
+	compare VAR_RESULT, 4
+	goto_if_eq MtPyre_Summit_EventScript_TryDialgaSign
+	msgbox MtPyre_Summit_Text_CresseliaAwaits, MSGBOX_DEFAULT
+	return
+
+MtPyre_Summit_EventScript_TryDialgaSign:
+	goto_if_unset FLAG_SYS_GAME_CLEAR, MtPyre_Summit_EventScript_TimeSignDormant
+	setvar VAR_0x8004, LEGENDARY_SIGN_DIALGA_ID
+	special TryUnlockSelectedLegendarySign
+	compare VAR_RESULT, 2
+	goto_if_eq MtPyre_Summit_EventScript_DialgaAwakened
+	compare VAR_RESULT, 4
+	goto_if_eq MtPyre_Summit_EventScript_DreamChainComplete
+	msgbox MtPyre_Summit_Text_DialgaAwaits, MSGBOX_DEFAULT
+	return
+
+MtPyre_Summit_EventScript_DarkraiNeedsTrainers:
+	msgbox MtPyre_Summit_Text_DarkraiNeedsTrainers, MSGBOX_DEFAULT
+	return
+
+MtPyre_Summit_EventScript_DarkraiNeedsMusharna:
+	msgbox MtPyre_Summit_Text_DarkraiNeedsMusharna, MSGBOX_DEFAULT
+	return
+
+MtPyre_Summit_EventScript_DarkraiAwakened:
+	addobject LOCALID_DARKRAI
+	msgbox MtPyre_Summit_Text_DarkraiAwakened, MSGBOX_DEFAULT
+	return
+
+MtPyre_Summit_EventScript_DarkraiAwaits:
+	msgbox MtPyre_Summit_Text_DarkraiAwaits, MSGBOX_DEFAULT
+	return
+
+MtPyre_Summit_EventScript_CresseliaAwakened:
+	msgbox MtPyre_Summit_Text_CresseliaAwakened, MSGBOX_DEFAULT
+	return
+
+MtPyre_Summit_EventScript_TimeSignDormant:
+	msgbox MtPyre_Summit_Text_TimeSignDormant, MSGBOX_DEFAULT
+	return
+
+MtPyre_Summit_EventScript_DialgaAwakened:
+	msgbox MtPyre_Summit_Text_DialgaAwakened, MSGBOX_DEFAULT
+	return
+
+MtPyre_Summit_EventScript_DreamChainComplete:
+	msgbox MtPyre_Summit_Text_DreamChainComplete, MSGBOX_DEFAULT
+MtPyre_Summit_EventScript_LegendarySignReturn:
+	return
+
+MtPyre_Summit_EventScript_Darkrai::
+	lock
+	faceplayer
+	waitse
+	playmoncry SPECIES_DARKRAI, 2
+	delay 40
+	waitmoncry
+	setvar VAR_0x8004, LEGENDARY_SIGN_DARKRAI_ID
+	specialvar VAR_RESULT, GetSelectedLegendarySignLevel
+	copyvar VAR_0x800A, VAR_RESULT
+	setwildbattle SPECIES_DARKRAI, VAR_0x800A, ITEM_NONE
+	setflag FLAG_SYS_CTRL_OBJ_DELETE
+	special BattleSetup_StartLegendaryBattle
+	waitstate
+	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+	specialvar VAR_RESULT, GetBattleOutcome
+	compare VAR_RESULT, B_OUTCOME_CAUGHT
+	goto_if_eq MtPyre_Summit_EventScript_DarkraiCaught
+	setvar VAR_0x8004, SPECIES_DARKRAI
+	goto Common_EventScript_LegendaryFlewAway
+
+MtPyre_Summit_EventScript_DarkraiCaught:
+	release
+	end
+
+MtPyre_Summit_Text_DarkraiNeedsTrainers:
+	.string "A Legendary Sign stains this peak.\p"
+	.string "Face every Trainer within Mt. Pyre,\n"
+	.string "then return with MUSHARNA.$"
+
+MtPyre_Summit_Text_DarkraiNeedsMusharna:
+	.string "Every spirit here acknowledges you.\p"
+	.string "But the Sign answers only a dream.\n"
+	.string "Return with MUSHARNA.$"
+
+MtPyre_Summit_Text_DarkraiAwakened:
+	.string "The Legendary Sign has awakened!\p"
+	.string "A shadow now waits at the summit.$"
+
+MtPyre_Summit_Text_DarkraiAwaits:
+	.string "The awakened shadow still waits\n"
+	.string "at the summit.$"
+
+MtPyre_Summit_Text_CresseliaAwakened:
+	.string "DARKRAI's capture completes one\n"
+	.string "half of the dream.\p"
+	.string "A second Legendary Sign shines in\n"
+	.string "the deepest chamber of Meteor Falls.$"
+
+MtPyre_Summit_Text_CresseliaAwaits:
+	.string "The lunar Sign still shines in the\n"
+	.string "deepest chamber of Meteor Falls.$"
+
+MtPyre_Summit_Text_TimeSignDormant:
+	.string "Dream and nightmare are now bound.\p"
+	.string "A final Sign sleeps until you are\n"
+	.string "recognized as Champion.$"
+
+MtPyre_Summit_Text_DialgaAwakened:
+	.string "The final Legendary Sign rings\n"
+	.string "through Meteor Falls.\p"
+	.string "Seek the chamber where time stands\n"
+	.string "alone.$"
+
+MtPyre_Summit_Text_DialgaAwaits:
+	.string "The Sign of time still waits in the\n"
+	.string "hidden depths of Meteor Falls.$"
+
+MtPyre_Summit_Text_DreamChainComplete:
+	.string "Nightmare, dream, and time have all\n"
+	.string "answered you. Their legend is yours.$"
 
 MtPyre_Summit_EventScript_OldLady:: @ 82321A2
 	lock

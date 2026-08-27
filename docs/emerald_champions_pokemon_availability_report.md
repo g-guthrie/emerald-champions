@@ -8,11 +8,11 @@ The report distinguishes **within-method species probability** from an encounter
 
 ## Technical summary
 
-- Source state: commit `0b2bc96c7d6480187f70f5b83a705c081780983e`; clean working tree at generation: **True**.
+- Source state: commit `55059b06b4fa04d30ada5a22d7cc3d693979bc6e`; clean working tree at generation: **False**.
 - Random encounter coverage: **139** populated main overworld maps from **147** configured entries, plus **576** distinct species/forms in catchable random pools.
 - Loadout system: **1309** total competitive sets. Wild Pokémon roll the exact one/two/three-set tutor count at 100%, 50/50, or approximately one-third each.
 - Item system: **65** ordinary competitive held items are free and unlimited. Berries and evolution/transformation progression items are not vendor stock.
-- Species/form appendix: **1269** runtime IDs classified; **93** remain unresolved by the automated source scan and are explicitly listed rather than guessed.
+- Species/form appendix: **1269** runtime IDs classified; **0** remain unresolved by the automated source scan and are explicitly listed rather than guessed.
 - Probability validation: **PASS** — every emitted method pool sums independently to 100%.
 - Battle context: **810** reachable definitions, including **565 doubles** and **289 singles**; **72** canonical encounters are currently source-closed bespoke redesigns.
 
@@ -22,11 +22,10 @@ The classification totals separate exact direct sources and permanent evolution/
 
 | Acquisition classification | Runtime species/form IDs |
 |---|---|
-| Direct acquisition | 646 |
-| Evolution from obtainable Pokémon | 280 |
-| Form / battle transformation; not separately acquired | 126 |
-| Alternate form from obtainable base | 104 |
-| Unresolved by automated acquisition scan | 93 |
+| Direct acquisition | 699 |
+| Evolution from obtainable Pokémon | 281 |
+| Alternate form from obtainable base | 141 |
+| Form / battle transformation; not separately acquired | 128 |
 | Breeding / obtainable evolution family | 20 |
 
 ## Game identity and why the encounter distribution exists
@@ -1866,6 +1865,51 @@ The following table covers source-resolved scripted/static battles, gifts, Eggs,
 | Latias | Authored static acquisition | Southern Island Interior | latias | data/maps/SouthernIsland_Interior/scripts.inc |
 | Latios | Authored static acquisition | Southern Island Interior | latios | data/maps/SouthernIsland_Interior/scripts.inc |
 | Groudon | Authored static acquisition | Terra Cave End | groudon | data/maps/TerraCave_End/scripts.inc |
+| Blacephalon | Champions Circuit milestone | Battle Frontier Battle Tower | Awarded every five consecutive Circuit wins | src/data/pokemon/legendary_signs.h |
+| Buzzwole | Champions Circuit milestone | Battle Frontier Battle Tower | Awarded every five consecutive Circuit wins | src/data/pokemon/legendary_signs.h |
+| Calyrex | Champions Circuit milestone | Battle Frontier Battle Tower | Awarded every five consecutive Circuit wins | src/data/pokemon/legendary_signs.h |
+| Celesteela | Champions Circuit milestone | Battle Frontier Battle Tower | Awarded every five consecutive Circuit wins | src/data/pokemon/legendary_signs.h |
+| Glastrier | Champions Circuit milestone | Battle Frontier Battle Tower | Awarded every five consecutive Circuit wins | src/data/pokemon/legendary_signs.h |
+| Guzzlord | Champions Circuit milestone | Battle Frontier Battle Tower | Awarded every five consecutive Circuit wins | src/data/pokemon/legendary_signs.h |
+| Kartana | Champions Circuit milestone | Battle Frontier Battle Tower | Awarded every five consecutive Circuit wins | src/data/pokemon/legendary_signs.h |
+| Marshadow | Champions Circuit milestone | Battle Frontier Battle Tower | Awarded every five consecutive Circuit wins | src/data/pokemon/legendary_signs.h |
+| Necrozma | Champions Circuit milestone | Battle Frontier Battle Tower | Awarded every five consecutive Circuit wins | src/data/pokemon/legendary_signs.h |
+| Nihilego | Champions Circuit milestone | Battle Frontier Battle Tower | Awarded every five consecutive Circuit wins | src/data/pokemon/legendary_signs.h |
+| Pheromosa | Champions Circuit milestone | Battle Frontier Battle Tower | Awarded every five consecutive Circuit wins | src/data/pokemon/legendary_signs.h |
+| Spectrier | Champions Circuit milestone | Battle Frontier Battle Tower | Awarded every five consecutive Circuit wins | src/data/pokemon/legendary_signs.h |
+| Stakataka | Champions Circuit milestone | Battle Frontier Battle Tower | Awarded every five consecutive Circuit wins | src/data/pokemon/legendary_signs.h |
+| Xurkitree | Champions Circuit milestone | Battle Frontier Battle Tower | Awarded every five consecutive Circuit wins | src/data/pokemon/legendary_signs.h |
+| Zacian | Champions Circuit milestone | Battle Frontier Battle Tower | Awarded every five consecutive Circuit wins | src/data/pokemon/legendary_signs.h |
+| Zamazenta | Champions Circuit milestone | Battle Frontier Battle Tower | Awarded every five consecutive Circuit wins | src/data/pokemon/legendary_signs.h |
+| Zarude | Champions Circuit milestone | Battle Frontier Battle Tower | Awarded every five consecutive Circuit wins | src/data/pokemon/legendary_signs.h |
+| Zygarde | Conditional Legendary Sign | Desert Underpass | Legendary Sign: 8% within Land encounters after 8 Badge(s); bring SPECIES_LANDORUS; requires FLAG_SYS_GAME_CLEAR; cap offset +3 | src/data/pokemon/legendary_signs.h |
+| Entei | Conditional Legendary Sign | Fiery Path | Legendary Sign: 10% within Land encounters after 3 Badge(s); bring SPECIES_TORKOAL; requires FLAG_BADGE03_GET; cap offset +1 | src/data/pokemon/legendary_signs.h |
+| Cobalion | Conditional Legendary Sign | Granite Cave B2F | Legendary Sign: 10% within Land encounters after 1 Badge(s); bring SPECIES_LUCARIO; requires FLAG_BADGE01_GET; cap offset +1 | src/data/pokemon/legendary_signs.h |
+| Regidrago | Conditional Legendary Sign | Meteor Falls 1F 2R | Legendary Sign: 8% within Land encounters after 6 Badge(s); bring SPECIES_REGIROCK; requires FLAG_BADGE06_GET; cap offset +2 | src/data/pokemon/legendary_signs.h |
+| Uxie | Conditional Legendary Sign | Meteor Falls B1F 1R | Legendary Sign: 10% within Land encounters after 5 Badge(s); bring SPECIES_ALAKAZAM; requires FLAG_BADGE05_GET; cap offset +1 | src/data/pokemon/legendary_signs.h |
+| Hoopa | Conditional Legendary Sign | Mirage Tower 4F | Legendary Sign: 10% within Land encounters after 4 Badge(s); bring SPECIES_UNOWN; requires FLAG_BADGE04_GET; cap offset +1 | src/data/pokemon/legendary_signs.h |
+| Giratina | Conditional Legendary Sign | Mt Pyre 6F | Legendary Sign: 8% within Land encounters after 8 Badge(s); bring SPECIES_DUSKNOIR; requires FLAG_SYS_GAME_CLEAR; cap offset +3 | src/data/pokemon/legendary_signs.h |
+| Tapu Lele | Conditional Legendary Sign | Mt Pyre Exterior | Legendary Sign: 8% within Land encounters after 6 Badge(s); bring SPECIES_GARDEVOIR; requires FLAG_BADGE06_GET; cap offset +1 | src/data/pokemon/legendary_signs.h |
+| Yveltal | Conditional Legendary Sign | Mt Pyre Exterior | Legendary Sign: 8% within Land encounters after 8 Badge(s); bring SPECIES_ABSOL; requires FLAG_SYS_GAME_CLEAR; cap offset +3 | src/data/pokemon/legendary_signs.h |
+| Regieleki | Conditional Legendary Sign | New Mauville Inside | Legendary Sign: 8% within Land encounters after 5 Badge(s); bring SPECIES_REGISTEEL; requires FLAG_BADGE05_GET; cap offset +2 | src/data/pokemon/legendary_signs.h |
+| Zekrom | Conditional Legendary Sign | New Mauville Inside | Legendary Sign: 8% within Land encounters after 8 Badge(s); bring SPECIES_DIALGA; requires FLAG_SYS_GAME_CLEAR; cap offset +3 | src/data/pokemon/legendary_signs.h |
+| Zeraora | Conditional Legendary Sign | New Mauville Inside | Legendary Sign: 10% within Land encounters after 5 Badge(s); bring SPECIES_MANECTRIC; requires FLAG_BADGE05_GET; cap offset +1 | src/data/pokemon/legendary_signs.h |
+| Celebi | Conditional Legendary Sign | Petalburg Woods | Legendary Sign: 10% within Land encounters after 4 Badge(s); bring SPECIES_BLISSEY; requires FLAG_BADGE04_GET; cap offset +0 | src/data/pokemon/legendary_signs.h |
+| Virizion | Conditional Legendary Sign | Petalburg Woods 2 | Legendary Sign: 10% within Land encounters after 2 Badge(s); bring SPECIES_BRELOOM; requires FLAG_BADGE02_GET; cap offset +1 | src/data/pokemon/legendary_signs.h |
+| Raikou | Conditional Legendary Sign | Route 110 | Legendary Sign: 10% within Land encounters after 3 Badge(s); bring SPECIES_MANECTRIC; requires FLAG_BADGE03_GET; cap offset +1 | src/data/pokemon/legendary_signs.h |
+| Tapu Koko | Conditional Legendary Sign | Route 110 | Legendary Sign: 8% within Land encounters after 5 Badge(s); bring SPECIES_RAICHU; requires FLAG_BADGE05_GET; cap offset +1 | src/data/pokemon/legendary_signs.h |
+| Landorus | Conditional Legendary Sign | Route 111 | Legendary Sign: 10% within Land encounters after 5 Badge(s); bring SPECIES_CASTFORM; requires FLAG_BADGE05_GET; cap offset +1 | src/data/pokemon/legendary_signs.h |
+| Shaymin | Conditional Legendary Sign | Route 117 | Legendary Sign: 10% within Land encounters after 4 Badge(s); bring SPECIES_ROSERADE; requires FLAG_BADGE04_GET; cap offset +0 | src/data/pokemon/legendary_signs.h |
+| Thundurus | Conditional Legendary Sign | Route 119 | Legendary Sign: 10% within Water encounters after 5 Badge(s); bring SPECIES_CASTFORM; requires FLAG_BADGE05_GET; cap offset +1 | src/data/pokemon/legendary_signs.h |
+| Tornadus | Conditional Legendary Sign | Route 119 | Legendary Sign: 10% within Land encounters after 5 Badge(s); bring SPECIES_CASTFORM; requires FLAG_BADGE05_GET; cap offset +1 | src/data/pokemon/legendary_signs.h |
+| Mesprit | Conditional Legendary Sign | Route 120 | Legendary Sign: 10% within Water encounters after 5 Badge(s); bring SPECIES_GARDEVOIR; requires FLAG_BADGE05_GET; cap offset +1 | src/data/pokemon/legendary_signs.h |
+| Tapu Bulu | Conditional Legendary Sign | Safari Zone North | Legendary Sign: 10% within Land encounters after 6 Badge(s); bring SPECIES_TAUROS; requires FLAG_BADGE06_GET; cap offset +1 | src/data/pokemon/legendary_signs.h |
+| Xerneas | Conditional Legendary Sign | Safari Zone North | Legendary Sign: 8% within Land encounters after 8 Badge(s); bring SPECIES_XATU; requires FLAG_SYS_GAME_CLEAR; cap offset +3 | src/data/pokemon/legendary_signs.h |
+| Reshiram | Conditional Legendary Sign | Scorched Slab B2F | Legendary Sign: 8% within Land encounters after 8 Badge(s); bring SPECIES_DIALGA; requires FLAG_SYS_GAME_CLEAR; cap offset +3 | src/data/pokemon/legendary_signs.h |
+| Palkia | Conditional Legendary Sign | Seafloor Cavern Room6 | Legendary Sign: 8% within Water encounters after 8 Badge(s); bring SPECIES_KINGDRA; requires FLAG_SYS_GAME_CLEAR; cap offset +3 | src/data/pokemon/legendary_signs.h |
+| Azelf | Conditional Legendary Sign | Shoal Cave Low Tide Ice Room | Legendary Sign: 10% within Land encounters after 6 Badge(s); bring SPECIES_SNORUNT; requires FLAG_BADGE06_GET; cap offset +1 | src/data/pokemon/legendary_signs.h |
+| Kyurem | Conditional Legendary Sign | Shoal Cave Low Tide Ice Room | Legendary Sign: 8% within Land encounters after 8 Badge(s); bring SPECIES_RESHIRAM; requires FLAG_SYS_GAME_CLEAR; cap offset +3 | src/data/pokemon/legendary_signs.h |
+| Victini | Conditional Legendary Sign | Victory Road 1F | Legendary Sign: 8% within Land encounters after 8 Badge(s); bring SPECIES_LUCARIO; requires FLAG_BADGE08_GET; cap offset +2 | src/data/pokemon/legendary_signs.h |
 | Aerodactyl | Fossil restoration | Rustboro Devon Corporation | Restore ITEM_OLD_AMBER | src/field_specials.c |
 | Amaura | Fossil restoration | Rustboro Devon Corporation | Restore ITEM_SAIL_FOSSIL | src/field_specials.c |
 | Anorith | Fossil restoration | Rustboro Devon Corporation | Restore ITEM_CLAW_FOSSIL | src/field_specials.c |
@@ -1883,6 +1927,8 @@ The following table covers source-resolved scripted/static battles, gifts, Eggs,
 | Karrablast | In-game trade | NPC trade | Trade for SPECIES_SHELMET; received at level 50 | src/data/trade.h |
 | Pawniard | In-game trade | NPC trade | Trade for SPECIES_GOTHITA; received at level 15 | src/data/trade.h |
 | Tropius | In-game trade | NPC trade | Trade for SPECIES_CROAGUNK; received at level 21 | src/data/trade.h |
+| Arceus | Mastery reward | Legendary Sign / Champions Circuit mastery | Complete the corresponding endgame mastery track | src/data/pokemon/legendary_signs.h |
+| Eternatus | Mastery reward | Legendary Sign / Champions Circuit mastery | Complete the corresponding endgame mastery track | src/data/pokemon/legendary_signs.h |
 | Chikorita | NPC or story gift | Littleroot Town Professor Birchs Lab | Literal givemon acquisition | data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc |
 | Cosmog | NPC or story gift | Littleroot Town Professor Birchs Lab | Literal givemon acquisition | data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc |
 | Cyndaquil | NPC or story gift | Littleroot Town Professor Birchs Lab | Literal givemon acquisition | data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc |
@@ -1903,6 +1949,7 @@ The following table covers source-resolved scripted/static battles, gifts, Eggs,
 | Exeggutor Alolan | Prize Pokémon | Mauville Game Corner | Coin-exchange Pokémon prize | data/maps/MauvilleCity_GameCorner/scripts.inc |
 | Fennekin | Prize Pokémon | Mauville Game Corner | Coin-exchange Pokémon prize | data/maps/MauvilleCity_GameCorner/scripts.inc |
 | Froakie | Prize Pokémon | Mauville Game Corner | Coin-exchange Pokémon prize | data/maps/MauvilleCity_GameCorner/scripts.inc |
+| Genesect | Prize Pokémon | Mauville Game Corner | Coin-exchange Pokémon prize | data/maps/MauvilleCity_GameCorner/scripts.inc |
 | Geodude Alolan | Prize Pokémon | Mauville Game Corner | Coin-exchange Pokémon prize | data/maps/MauvilleCity_GameCorner/scripts.inc |
 | Grimer Alolan | Prize Pokémon | Mauville Game Corner | Coin-exchange Pokémon prize | data/maps/MauvilleCity_GameCorner/scripts.inc |
 | Litten | Prize Pokémon | Mauville Game Corner | Coin-exchange Pokémon prize | data/maps/MauvilleCity_GameCorner/scripts.inc |
@@ -1912,6 +1959,7 @@ The following table covers source-resolved scripted/static battles, gifts, Eggs,
 | Munchlax | Prize Pokémon | Mauville Game Corner | Coin-exchange Pokémon prize | data/maps/MauvilleCity_GameCorner/scripts.inc |
 | Oshawott | Prize Pokémon | Mauville Game Corner | Coin-exchange Pokémon prize | data/maps/MauvilleCity_GameCorner/scripts.inc |
 | Piplup | Prize Pokémon | Mauville Game Corner | Coin-exchange Pokémon prize | data/maps/MauvilleCity_GameCorner/scripts.inc |
+| Poipole | Prize Pokémon | Mauville Game Corner | Coin-exchange Pokémon prize | data/maps/MauvilleCity_GameCorner/scripts.inc |
 | Popplio | Prize Pokémon | Mauville Game Corner | Coin-exchange Pokémon prize | data/maps/MauvilleCity_GameCorner/scripts.inc |
 | Porygon | Prize Pokémon | Mauville Game Corner | Coin-exchange Pokémon prize | data/maps/MauvilleCity_GameCorner/scripts.inc |
 | Raichu Alolan | Prize Pokémon | Mauville Game Corner | Coin-exchange Pokémon prize | data/maps/MauvilleCity_GameCorner/scripts.inc |
@@ -1939,7 +1987,10 @@ The following table covers source-resolved scripted/static battles, gifts, Eggs,
 | Kecleon | Scripted/static encounter | Global event system | Literal setwildbattle acquisition | data/scripts/kecleon.inc |
 | Regice | Scripted/static encounter | Island Cave | Literal setwildbattle acquisition | data/maps/IslandCave/scripts.inc |
 | Kyogre | Scripted/static encounter | Marine Cave End | Literal setwildbattle acquisition | data/maps/MarineCave_End/scripts.inc |
+| Dialga | Scripted/static encounter | Meteor Falls B1F 1R | Literal setwildbattle acquisition | data/maps/MeteorFalls_B1F_1R/scripts.inc |
+| Cresselia | Scripted/static encounter | Meteor Falls B1F 2R | Literal setwildbattle acquisition | data/maps/MeteorFalls_B1F_2R/scripts.inc |
 | Jirachi | Scripted/static encounter | Meteor Falls Jirachis Room | Literal setwildbattle acquisition | data/maps/MeteorFalls_JirachisRoom/scripts.inc |
+| Darkrai | Scripted/static encounter | Mt Pyre Summit | Literal setwildbattle acquisition | data/maps/MtPyre_Summit/scripts.inc |
 | Electrode | Scripted/static encounter | New Mauville Inside | Literal setwildbattle acquisition | data/maps/NewMauville_Inside/scripts.inc |
 | Rotom | Scripted/static encounter | New Mauville Inside | Literal setwildbattle acquisition | data/maps/NewMauville_Inside/scripts.inc |
 | Zapdos | Scripted/static encounter | New Mauville Inside | Literal setwildbattle acquisition | data/maps/NewMauville_Inside/scripts.inc |
@@ -1949,6 +2000,7 @@ The following table covers source-resolved scripted/static battles, gifts, Eggs,
 | Articuno | Scripted/static encounter | Shoal Cave Low Tide Ice Room | Literal setwildbattle acquisition | data/maps/ShoalCave_LowTideIceRoom/scripts.inc |
 | Rayquaza | Scripted/static encounter | Sky Pillar Top | Literal setwildbattle acquisition | data/maps/SkyPillar_Top/scripts.inc |
 | Groudon | Scripted/static encounter | Terra Cave End | Literal setwildbattle acquisition | data/maps/TerraCave_End/scripts.inc |
+| Phione | Special breeding | Hoenn Day Care | Breed Manaphy with Ditto | src/data/pokemon/legendary_signs.h |
 | Bulbasaur | Starter choice | Littleroot opening | Selectable Kanto starter | src/starter_choose.c |
 | Charmander | Starter choice | Littleroot opening | Selectable Kanto starter | src/starter_choose.c |
 | Chespin | Starter choice | Littleroot opening | Selectable Kalos starter | src/starter_choose.c |
@@ -2219,15 +2271,15 @@ This appendix covers every runtime species/form ID. `Direct acquisition` means t
 | 240 | Magby | SPECIES_MAGBY | Direct acquisition | Random wild in 1 catchable method pool(s): Fiery Path / Land | party-selectable species/form |
 | 241 | Miltank | SPECIES_MILTANK | Direct acquisition | Random wild in 1 catchable method pool(s): Safari Zone Northeast / Land | party-selectable species/form |
 | 242 | Blissey | SPECIES_BLISSEY | Direct acquisition | Random wild in 3 catchable method pool(s): Altering Cave / Honey; Altering Cave 1F / Honey; Altering Cave B1F / Honey | party-selectable species/form |
-| 243 | Raikou | SPECIES_RAIKOU | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 244 | Entei | SPECIES_ENTEI | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
+| 243 | Raikou | SPECIES_RAIKOU | Direct acquisition | Conditional Legendary Sign: Route 110 (Legendary Sign: 10% within Land encounters after 3 Badge(s); bring SPECIES_MANECTRIC; requires FLAG_BADGE03_GET; cap offset +1) | party-selectable species/form |
+| 244 | Entei | SPECIES_ENTEI | Direct acquisition | Conditional Legendary Sign: Fiery Path (Legendary Sign: 10% within Land encounters after 3 Badge(s); bring SPECIES_TORKOAL; requires FLAG_BADGE03_GET; cap offset +1) | party-selectable species/form |
 | 245 | Suicune | SPECIES_SUICUNE | Direct acquisition | Random wild in 1 catchable method pool(s): Route 125 / Super Rod | party-selectable species/form |
 | 246 | Larvitar | SPECIES_LARVITAR | Direct acquisition | Random wild in 1 catchable method pool(s): Rusturf Tunnel / Land | party-selectable species/form |
 | 247 | Pupitar | SPECIES_PUPITAR | Direct acquisition | Random wild in 1 catchable method pool(s): Victory Road 1F / Land | party-selectable species/form |
 | 248 | Tyranitar | SPECIES_TYRANITAR | Evolution from obtainable Pokémon | Pupitar → Tyranitar via Level (55) | party-selectable species/form |
 | 249 | Lugia | SPECIES_LUGIA | Direct acquisition | Authored static acquisition: Navel Rock Bottom (lugia) | party-selectable species/form |
 | 250 | Ho-Oh | SPECIES_HO_OH | Direct acquisition | Authored static acquisition: Navel Rock Top (ho_oh) | party-selectable species/form |
-| 251 | Celebi | SPECIES_CELEBI | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
+| 251 | Celebi | SPECIES_CELEBI | Direct acquisition | Conditional Legendary Sign: Petalburg Woods (Legendary Sign: 10% within Land encounters after 4 Badge(s); bring SPECIES_BLISSEY; requires FLAG_BADGE04_GET; cap offset +0) | party-selectable species/form |
 | 252 | Treecko | SPECIES_TREECKO | Direct acquisition | Starter choice: Littleroot opening (Selectable Hoenn starter) \| Prize Pokémon: Mauville Game Corner (Coin-exchange Pokémon prize) | party-selectable species/form |
 | 253 | Grovyle | SPECIES_GROVYLE | Evolution from obtainable Pokémon | Treecko → Grovyle via Level (16) | party-selectable species/form |
 | 254 | Sceptile | SPECIES_SCEPTILE | Evolution from obtainable Pokémon | Treecko → Grovyle via Level (16) ; Grovyle → Sceptile via Level (36) | party-selectable species/form |
@@ -2456,21 +2508,21 @@ This appendix covers every runtime species/form ID. `Direct acquisition` means t
 | 477 | Dusknoir | SPECIES_DUSKNOIR | Evolution from obtainable Pokémon | Dusclops → Dusknoir via Trade Item (ITEM_REAPER_CLOTH) | party-selectable species/form |
 | 478 | Froslass | SPECIES_FROSLASS | Evolution from obtainable Pokémon | Snorunt → Froslass via Use/hold ITEM_DAWN_STONE | party-selectable species/form |
 | 479 | Rotom | SPECIES_ROTOM | Direct acquisition | Scripted/static encounter: New Mauville Inside (Literal setwildbattle acquisition) \| Authored static acquisition: New Mauville Inside (rotom) | party-selectable species/form |
-| 480 | Uxie | SPECIES_UXIE | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 481 | Mesprit | SPECIES_MESPRIT | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 482 | Azelf | SPECIES_AZELF | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 483 | Dialga | SPECIES_DIALGA | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 484 | Palkia | SPECIES_PALKIA | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
+| 480 | Uxie | SPECIES_UXIE | Direct acquisition | Conditional Legendary Sign: Meteor Falls B1F 1R (Legendary Sign: 10% within Land encounters after 5 Badge(s); bring SPECIES_ALAKAZAM; requires FLAG_BADGE05_GET; cap offset +1) | party-selectable species/form |
+| 481 | Mesprit | SPECIES_MESPRIT | Direct acquisition | Conditional Legendary Sign: Route 120 (Legendary Sign: 10% within Water encounters after 5 Badge(s); bring SPECIES_GARDEVOIR; requires FLAG_BADGE05_GET; cap offset +1) | party-selectable species/form |
+| 482 | Azelf | SPECIES_AZELF | Direct acquisition | Conditional Legendary Sign: Shoal Cave Low Tide Ice Room (Legendary Sign: 10% within Land encounters after 6 Badge(s); bring SPECIES_SNORUNT; requires FLAG_BADGE06_GET; cap offset +1) | party-selectable species/form |
+| 483 | Dialga | SPECIES_DIALGA | Direct acquisition | Scripted/static encounter: Meteor Falls B1F 1R (Literal setwildbattle acquisition) | party-selectable species/form |
+| 484 | Palkia | SPECIES_PALKIA | Direct acquisition | Conditional Legendary Sign: Seafloor Cavern Room6 (Legendary Sign: 8% within Water encounters after 8 Badge(s); bring SPECIES_KINGDRA; requires FLAG_SYS_GAME_CLEAR; cap offset +3) | party-selectable species/form |
 | 485 | Heatran | SPECIES_HEATRAN | Direct acquisition | Scripted/static encounter: Scorched Slab Heatrans Room (Literal setwildbattle acquisition) \| Authored static acquisition: Scorched Slab Heatrans Room (heatran) | party-selectable species/form |
 | 486 | Regigigas | SPECIES_REGIGIGAS | Direct acquisition | Scripted/static encounter: Sealed Chamber Inner Room (Literal setwildbattle acquisition) \| Authored static acquisition: Sealed Chamber Inner Room (regigigas) | party-selectable species/form |
-| 487 | Giratina | SPECIES_GIRATINA | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 488 | Cresselia | SPECIES_CRESSELIA | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 489 | Phione | SPECIES_PHIONE | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
+| 487 | Giratina | SPECIES_GIRATINA | Direct acquisition | Conditional Legendary Sign: Mt Pyre 6F (Legendary Sign: 8% within Land encounters after 8 Badge(s); bring SPECIES_DUSKNOIR; requires FLAG_SYS_GAME_CLEAR; cap offset +3) | party-selectable species/form |
+| 488 | Cresselia | SPECIES_CRESSELIA | Direct acquisition | Scripted/static encounter: Meteor Falls B1F 2R (Literal setwildbattle acquisition) | party-selectable species/form |
+| 489 | Phione | SPECIES_PHIONE | Direct acquisition | Special breeding: Hoenn Day Care (Breed Manaphy with Ditto) | party-selectable species/form |
 | 490 | Manaphy | SPECIES_MANAPHY | Direct acquisition | Random wild in 4 catchable method pool(s): Route 124 / Super Rod; Seafloor Cavern Entrance / Super Rod; Seafloor Cavern Room6 / Super Rod; Seafloor Cavern Room7 / Super Rod | party-selectable species/form |
-| 491 | Darkrai | SPECIES_DARKRAI | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 492 | Shaymin | SPECIES_SHAYMIN | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 493 | Arceus | SPECIES_ARCEUS | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 494 | Victini | SPECIES_VICTINI | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
+| 491 | Darkrai | SPECIES_DARKRAI | Direct acquisition | Scripted/static encounter: Mt Pyre Summit (Literal setwildbattle acquisition) | party-selectable species/form |
+| 492 | Shaymin | SPECIES_SHAYMIN | Direct acquisition | Conditional Legendary Sign: Route 117 (Legendary Sign: 10% within Land encounters after 4 Badge(s); bring SPECIES_ROSERADE; requires FLAG_BADGE04_GET; cap offset +0) | party-selectable species/form |
+| 493 | Arceus | SPECIES_ARCEUS | Direct acquisition | Mastery reward: Legendary Sign / Champions Circuit mastery (Complete the corresponding endgame mastery track) | party-selectable species/form |
+| 494 | Victini | SPECIES_VICTINI | Direct acquisition | Conditional Legendary Sign: Victory Road 1F (Legendary Sign: 8% within Land encounters after 8 Badge(s); bring SPECIES_LUCARIO; requires FLAG_BADGE08_GET; cap offset +2) | party-selectable species/form |
 | 495 | Snivy | SPECIES_SNIVY | Direct acquisition | Starter choice: Littleroot opening (Selectable Unova starter) \| Prize Pokémon: Mauville Game Corner (Coin-exchange Pokémon prize) | party-selectable species/form |
 | 496 | Servine | SPECIES_SERVINE | Evolution from obtainable Pokémon | Snivy → Servine via Level (16) | party-selectable species/form |
 | 497 | Serperior | SPECIES_SERPERIOR | Evolution from obtainable Pokémon | Snivy → Servine via Level (16) ; Servine → Serperior via Level (36) | party-selectable species/form |
@@ -2614,18 +2666,18 @@ This appendix covers every runtime species/form ID. `Direct acquisition` means t
 | 635 | Hydreigon | SPECIES_HYDREIGON | Direct acquisition | Random wild in 1 catchable method pool(s): Victory Road B2F / Land | party-selectable species/form |
 | 636 | Larvesta | SPECIES_LARVESTA | Direct acquisition | Random wild in 6 catchable method pool(s): Ember Path / Land; Fiery Path / Land; Granite Cave Stevens Room / Land; Route 101 / Land; Route 119 / Land; Rusturf Tunnel / Land | party-selectable species/form |
 | 637 | Volcarona | SPECIES_VOLCARONA | Direct acquisition | Random wild in 9 catchable method pool(s): Magma Hideout 1F / Land; Magma Hideout 2F 1R / Land; Magma Hideout 2F 2R / Land; Magma Hideout 2F 3R / Land; Magma Hideout 3F 1R / Land; Magma Hideout 3F 2R / Land; Magma Hideout 3F 3R / Land; Victory Road 1F / Land; Victory Road B2F / Land | party-selectable species/form |
-| 638 | Cobalion | SPECIES_COBALION | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
+| 638 | Cobalion | SPECIES_COBALION | Direct acquisition | Conditional Legendary Sign: Granite Cave B2F (Legendary Sign: 10% within Land encounters after 1 Badge(s); bring SPECIES_LUCARIO; requires FLAG_BADGE01_GET; cap offset +1) | party-selectable species/form |
 | 639 | Terrakion | SPECIES_TERRAKION | Direct acquisition | Random wild in 1 catchable method pool(s): Victory Road B1F / Land | party-selectable species/form |
-| 640 | Virizion | SPECIES_VIRIZION | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 641 | Tornadus | SPECIES_TORNADUS | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 642 | Thundurus | SPECIES_THUNDURUS | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 643 | Reshiram | SPECIES_RESHIRAM | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 644 | Zekrom | SPECIES_ZEKROM | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 645 | Landorus | SPECIES_LANDORUS | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 646 | Kyurem | SPECIES_KYUREM | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
+| 640 | Virizion | SPECIES_VIRIZION | Direct acquisition | Conditional Legendary Sign: Petalburg Woods 2 (Legendary Sign: 10% within Land encounters after 2 Badge(s); bring SPECIES_BRELOOM; requires FLAG_BADGE02_GET; cap offset +1) | party-selectable species/form |
+| 641 | Tornadus | SPECIES_TORNADUS | Direct acquisition | Conditional Legendary Sign: Route 119 (Legendary Sign: 10% within Land encounters after 5 Badge(s); bring SPECIES_CASTFORM; requires FLAG_BADGE05_GET; cap offset +1) | party-selectable species/form |
+| 642 | Thundurus | SPECIES_THUNDURUS | Direct acquisition | Conditional Legendary Sign: Route 119 (Legendary Sign: 10% within Water encounters after 5 Badge(s); bring SPECIES_CASTFORM; requires FLAG_BADGE05_GET; cap offset +1) | party-selectable species/form |
+| 643 | Reshiram | SPECIES_RESHIRAM | Direct acquisition | Conditional Legendary Sign: Scorched Slab B2F (Legendary Sign: 8% within Land encounters after 8 Badge(s); bring SPECIES_DIALGA; requires FLAG_SYS_GAME_CLEAR; cap offset +3) | party-selectable species/form |
+| 644 | Zekrom | SPECIES_ZEKROM | Direct acquisition | Conditional Legendary Sign: New Mauville Inside (Legendary Sign: 8% within Land encounters after 8 Badge(s); bring SPECIES_DIALGA; requires FLAG_SYS_GAME_CLEAR; cap offset +3) | party-selectable species/form |
+| 645 | Landorus | SPECIES_LANDORUS | Direct acquisition | Conditional Legendary Sign: Route 111 (Legendary Sign: 10% within Land encounters after 5 Badge(s); bring SPECIES_CASTFORM; requires FLAG_BADGE05_GET; cap offset +1) | party-selectable species/form |
+| 646 | Kyurem | SPECIES_KYUREM | Direct acquisition | Conditional Legendary Sign: Shoal Cave Low Tide Ice Room (Legendary Sign: 8% within Land encounters after 8 Badge(s); bring SPECIES_RESHIRAM; requires FLAG_SYS_GAME_CLEAR; cap offset +3) | party-selectable species/form |
 | 647 | Keldeo | SPECIES_KELDEO | Direct acquisition | Random wild in 1 catchable method pool(s): Route 127 / Super Rod | party-selectable species/form |
 | 648 | Meloetta | SPECIES_MELOETTA | Direct acquisition | Pokémon Center mystery gift: Pokémon Centers (Requires FLAG_BADGE05_GET; arrives holding ITEM_RELIC_STATUE) | party-selectable species/form |
-| 649 | Genesect | SPECIES_GENESECT | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
+| 649 | Genesect | SPECIES_GENESECT | Direct acquisition | Prize Pokémon: Mauville Game Corner (Coin-exchange Pokémon prize) | party-selectable species/form |
 | 650 | Chespin | SPECIES_CHESPIN | Direct acquisition | Starter choice: Littleroot opening (Selectable Kalos starter) \| Prize Pokémon: Mauville Game Corner (Coin-exchange Pokémon prize) | party-selectable species/form |
 | 651 | Quilladin | SPECIES_QUILLADIN | Evolution from obtainable Pokémon | Chespin → Quilladin via Level (16) | party-selectable species/form |
 | 652 | Chesnaught | SPECIES_CHESNAUGHT | Evolution from obtainable Pokémon | Chespin → Quilladin via Level (16) ; Quilladin → Chesnaught via Level (36) | party-selectable species/form |
@@ -2692,11 +2744,11 @@ This appendix covers every runtime species/form ID. `Direct acquisition` means t
 | 713 | Avalugg | SPECIES_AVALUGG | Evolution from obtainable Pokémon | Bergmite → Avalugg via Level (37) | party-selectable species/form |
 | 714 | Noibat | SPECIES_NOIBAT | Direct acquisition | Random wild in 1 catchable method pool(s): Rusturf Tunnel / Land | party-selectable species/form |
 | 715 | Noivern | SPECIES_NOIVERN | Direct acquisition | Random wild in 4 catchable method pool(s): Altering Cave 1F / Land; Cave Of Origin 1F / Land; Cave Of Origin Entrance / Land; Victory Road 1F / Land | party-selectable species/form |
-| 716 | Xerneas | SPECIES_XERNEAS | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 717 | Yveltal | SPECIES_YVELTAL | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 718 | Zygarde | SPECIES_ZYGARDE | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
+| 716 | Xerneas | SPECIES_XERNEAS | Direct acquisition | Conditional Legendary Sign: Safari Zone North (Legendary Sign: 8% within Land encounters after 8 Badge(s); bring SPECIES_XATU; requires FLAG_SYS_GAME_CLEAR; cap offset +3) | party-selectable species/form |
+| 717 | Yveltal | SPECIES_YVELTAL | Direct acquisition | Conditional Legendary Sign: Mt Pyre Exterior (Legendary Sign: 8% within Land encounters after 8 Badge(s); bring SPECIES_ABSOL; requires FLAG_SYS_GAME_CLEAR; cap offset +3) | party-selectable species/form |
+| 718 | Zygarde | SPECIES_ZYGARDE | Direct acquisition | Conditional Legendary Sign: Desert Underpass (Legendary Sign: 8% within Land encounters after 8 Badge(s); bring SPECIES_LANDORUS; requires FLAG_SYS_GAME_CLEAR; cap offset +3) | party-selectable species/form |
 | 719 | Diancie | SPECIES_DIANCIE | Direct acquisition | Scripted/static encounter: Cave Of Origin Diancies Room (Literal setwildbattle acquisition) \| Authored static acquisition: Cave Of Origin Diancies Room (diancie) | party-selectable species/form |
-| 720 | Hoopa | SPECIES_HOOPA | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
+| 720 | Hoopa | SPECIES_HOOPA | Direct acquisition | Conditional Legendary Sign: Mirage Tower 4F (Legendary Sign: 10% within Land encounters after 4 Badge(s); bring SPECIES_UNOWN; requires FLAG_BADGE04_GET; cap offset +1) | party-selectable species/form |
 | 721 | Volcanion | SPECIES_VOLCANION | Direct acquisition | Random wild in 1 catchable method pool(s): Magma Hideout 4F / Land | party-selectable species/form |
 | 722 | Rowlet | SPECIES_ROWLET | Direct acquisition | Starter choice: Littleroot opening (Selectable Alola starter) \| Prize Pokémon: Mauville Game Corner (Coin-exchange Pokémon prize) | party-selectable species/form |
 | 723 | Dartrix | SPECIES_DARTRIX | Evolution from obtainable Pokémon | Rowlet → Dartrix via Level (16) | party-selectable species/form |
@@ -2761,29 +2813,29 @@ This appendix covers every runtime species/form ID. `Direct acquisition` means t
 | 782 | Jangmo-o | SPECIES_JANGMO_O | Direct acquisition | Random wild in 1 catchable method pool(s): Jagged Pass / Land | party-selectable species/form |
 | 783 | Hakamo-o | SPECIES_HAKAMO_O | Direct acquisition | Random wild in 1 catchable method pool(s): Jagged Pass / Honey | party-selectable species/form |
 | 784 | Kommo-o | SPECIES_KOMMO_O | Direct acquisition | Random wild in 2 catchable method pool(s): Victory Road 1F / Land; Victory Road B1F / Land | party-selectable species/form |
-| 785 | Tapu Koko | SPECIES_TAPU_KOKO | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 786 | Tapu Lele | SPECIES_TAPU_LELE | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 787 | Tapu Bulu | SPECIES_TAPU_BULU | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
+| 785 | Tapu Koko | SPECIES_TAPU_KOKO | Direct acquisition | Conditional Legendary Sign: Route 110 (Legendary Sign: 8% within Land encounters after 5 Badge(s); bring SPECIES_RAICHU; requires FLAG_BADGE05_GET; cap offset +1) | party-selectable species/form |
+| 786 | Tapu Lele | SPECIES_TAPU_LELE | Direct acquisition | Conditional Legendary Sign: Mt Pyre Exterior (Legendary Sign: 8% within Land encounters after 6 Badge(s); bring SPECIES_GARDEVOIR; requires FLAG_BADGE06_GET; cap offset +1) | party-selectable species/form |
+| 787 | Tapu Bulu | SPECIES_TAPU_BULU | Direct acquisition | Conditional Legendary Sign: Safari Zone North (Legendary Sign: 10% within Land encounters after 6 Badge(s); bring SPECIES_TAUROS; requires FLAG_BADGE06_GET; cap offset +1) | party-selectable species/form |
 | 788 | Tapu Fini | SPECIES_TAPU_FINI | Direct acquisition | Random wild in 1 catchable method pool(s): Route 126 / Super Rod | party-selectable species/form |
 | 789 | Cosmog | SPECIES_COSMOG | Direct acquisition | NPC or story gift: Littleroot Town Professor Birchs Lab (Literal givemon acquisition) \| Authored gift/restoration: Littleroot Town Professor Birchs Lab (cosmog) | party-selectable species/form |
 | 790 | Cosmoem | SPECIES_COSMOEM | Evolution from obtainable Pokémon | Cosmog → Cosmoem via Level (43) | party-selectable species/form |
 | 791 | Solgaleo | SPECIES_SOLGALEO | Evolution from obtainable Pokémon | Cosmog → Cosmoem via Level (43) ; Cosmoem → Solgaleo via Level Day (53) | party-selectable species/form |
 | 792 | Lunala | SPECIES_LUNALA | Evolution from obtainable Pokémon | Cosmog → Cosmoem via Level (43) ; Cosmoem → Lunala via Level Night (53) | party-selectable species/form |
-| 793 | Nihilego | SPECIES_NIHILEGO | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 794 | Buzzwole | SPECIES_BUZZWOLE | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 795 | Pheromosa | SPECIES_PHEROMOSA | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 796 | Xurkitree | SPECIES_XURKITREE | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 797 | Celesteela | SPECIES_CELESTEELA | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 798 | Kartana | SPECIES_KARTANA | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 799 | Guzzlord | SPECIES_GUZZLORD | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 800 | Necrozma | SPECIES_NECROZMA | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
+| 793 | Nihilego | SPECIES_NIHILEGO | Direct acquisition | Champions Circuit milestone: Battle Frontier Battle Tower (Awarded every five consecutive Circuit wins) | party-selectable species/form |
+| 794 | Buzzwole | SPECIES_BUZZWOLE | Direct acquisition | Champions Circuit milestone: Battle Frontier Battle Tower (Awarded every five consecutive Circuit wins) | party-selectable species/form |
+| 795 | Pheromosa | SPECIES_PHEROMOSA | Direct acquisition | Champions Circuit milestone: Battle Frontier Battle Tower (Awarded every five consecutive Circuit wins) | party-selectable species/form |
+| 796 | Xurkitree | SPECIES_XURKITREE | Direct acquisition | Champions Circuit milestone: Battle Frontier Battle Tower (Awarded every five consecutive Circuit wins) | party-selectable species/form |
+| 797 | Celesteela | SPECIES_CELESTEELA | Direct acquisition | Champions Circuit milestone: Battle Frontier Battle Tower (Awarded every five consecutive Circuit wins) | party-selectable species/form |
+| 798 | Kartana | SPECIES_KARTANA | Direct acquisition | Champions Circuit milestone: Battle Frontier Battle Tower (Awarded every five consecutive Circuit wins) | party-selectable species/form |
+| 799 | Guzzlord | SPECIES_GUZZLORD | Direct acquisition | Champions Circuit milestone: Battle Frontier Battle Tower (Awarded every five consecutive Circuit wins) | party-selectable species/form |
+| 800 | Necrozma | SPECIES_NECROZMA | Direct acquisition | Champions Circuit milestone: Battle Frontier Battle Tower (Awarded every five consecutive Circuit wins) | party-selectable species/form |
 | 801 | Magearna | SPECIES_MAGEARNA | Direct acquisition | Pokémon Center mystery gift: Pokémon Centers (Requires FLAG_SYS_GAME_CLEAR; arrives holding ITEM_MASTER_BALL) | party-selectable species/form |
-| 802 | Marshadow | SPECIES_MARSHADOW | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 803 | Poipole | SPECIES_POIPOLE | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 804 | Naganadel | SPECIES_NAGANADEL | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 805 | Stakataka | SPECIES_STAKATAKA | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 806 | Blacephalon | SPECIES_BLACEPHALON | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 807 | Zeraora | SPECIES_ZERAORA | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
+| 802 | Marshadow | SPECIES_MARSHADOW | Direct acquisition | Champions Circuit milestone: Battle Frontier Battle Tower (Awarded every five consecutive Circuit wins) | party-selectable species/form |
+| 803 | Poipole | SPECIES_POIPOLE | Direct acquisition | Prize Pokémon: Mauville Game Corner (Coin-exchange Pokémon prize) | party-selectable species/form |
+| 804 | Naganadel | SPECIES_NAGANADEL | Evolution from obtainable Pokémon | Poipole → Naganadel via Level while knowing MOVE_DRAGON_PULSE | party-selectable species/form |
+| 805 | Stakataka | SPECIES_STAKATAKA | Direct acquisition | Champions Circuit milestone: Battle Frontier Battle Tower (Awarded every five consecutive Circuit wins) | party-selectable species/form |
+| 806 | Blacephalon | SPECIES_BLACEPHALON | Direct acquisition | Champions Circuit milestone: Battle Frontier Battle Tower (Awarded every five consecutive Circuit wins) | party-selectable species/form |
+| 807 | Zeraora | SPECIES_ZERAORA | Direct acquisition | Conditional Legendary Sign: New Mauville Inside (Legendary Sign: 10% within Land encounters after 5 Badge(s); bring SPECIES_MANECTRIC; requires FLAG_BADGE05_GET; cap offset +1) | party-selectable species/form |
 | 808 | Meltan | SPECIES_MELTAN | Direct acquisition | NPC or story gift: Mossdeep City Stevens House (Literal givemon acquisition) \| Authored gift/restoration: Mossdeep City Stevens House (meltan) | party-selectable species/form |
 | 809 | Melmetal | SPECIES_MELMETAL | Evolution from obtainable Pokémon | Meltan → Melmetal via Use/hold ITEM_METAL_COAT | party-selectable species/form |
 | 810 | Grookey | SPECIES_GROOKEY | Direct acquisition | Random wild in 1 catchable method pool(s): Route 117 / Land | party-selectable species/form |
@@ -2864,17 +2916,17 @@ This appendix covers every runtime species/form ID. `Direct acquisition` means t
 | 885 | Dreepy | SPECIES_DREEPY | Direct acquisition | Random wild in 4 catchable method pool(s): Granite Cave Stevens Room / Land; Route 101 / Land; Route 116 / Land; Route 119 / Land | party-selectable species/form |
 | 886 | Drakloak | SPECIES_DRAKLOAK | Evolution from obtainable Pokémon | Dreepy → Drakloak via Level (50) | party-selectable species/form |
 | 887 | Dragapult | SPECIES_DRAGAPULT | Direct acquisition | Random wild in 2 catchable method pool(s): Victory Road 1F / Land; Victory Road B2F / Land | party-selectable species/form |
-| 888 | Zacian | SPECIES_ZACIAN | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 889 | Zamazenta | SPECIES_ZAMAZENTA | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 890 | Eternatus | SPECIES_ETERNATUS | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
+| 888 | Zacian | SPECIES_ZACIAN | Direct acquisition | Champions Circuit milestone: Battle Frontier Battle Tower (Awarded every five consecutive Circuit wins) | party-selectable species/form |
+| 889 | Zamazenta | SPECIES_ZAMAZENTA | Direct acquisition | Champions Circuit milestone: Battle Frontier Battle Tower (Awarded every five consecutive Circuit wins) | party-selectable species/form |
+| 890 | Eternatus | SPECIES_ETERNATUS | Direct acquisition | Mastery reward: Legendary Sign / Champions Circuit mastery (Complete the corresponding endgame mastery track) | party-selectable species/form |
 | 891 | Kubfu | SPECIES_KUBFU | Direct acquisition | Random wild in 1 catchable method pool(s): Route 112 / Land | party-selectable species/form |
 | 892 | Urshifu | SPECIES_URSHIFU | Evolution from obtainable Pokémon | Kubfu → Urshifu via Level (0) | party-selectable species/form |
-| 893 | Zarude | SPECIES_ZARUDE | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 894 | Regieleki | SPECIES_REGIELEKI | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 895 | Regidrago | SPECIES_REGIDRAGO | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 896 | Glastrier | SPECIES_GLASTRIER | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 897 | Spectrier | SPECIES_SPECTRIER | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 898 | Calyrex | SPECIES_CALYREX | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
+| 893 | Zarude | SPECIES_ZARUDE | Direct acquisition | Champions Circuit milestone: Battle Frontier Battle Tower (Awarded every five consecutive Circuit wins) | party-selectable species/form |
+| 894 | Regieleki | SPECIES_REGIELEKI | Direct acquisition | Conditional Legendary Sign: New Mauville Inside (Legendary Sign: 8% within Land encounters after 5 Badge(s); bring SPECIES_REGISTEEL; requires FLAG_BADGE05_GET; cap offset +2) | party-selectable species/form |
+| 895 | Regidrago | SPECIES_REGIDRAGO | Direct acquisition | Conditional Legendary Sign: Meteor Falls 1F 2R (Legendary Sign: 8% within Land encounters after 6 Badge(s); bring SPECIES_REGIROCK; requires FLAG_BADGE06_GET; cap offset +2) | party-selectable species/form |
+| 896 | Glastrier | SPECIES_GLASTRIER | Direct acquisition | Champions Circuit milestone: Battle Frontier Battle Tower (Awarded every five consecutive Circuit wins) | party-selectable species/form |
+| 897 | Spectrier | SPECIES_SPECTRIER | Direct acquisition | Champions Circuit milestone: Battle Frontier Battle Tower (Awarded every five consecutive Circuit wins) | party-selectable species/form |
+| 898 | Calyrex | SPECIES_CALYREX | Direct acquisition | Champions Circuit milestone: Battle Frontier Battle Tower (Awarded every five consecutive Circuit wins) | party-selectable species/form |
 | 899 | Venusaur Mega | SPECIES_VENUSAUR_MEGA | Form / battle transformation; not separately acquired | Derived from Venusaur through its form, personality, held-item, ability, or battle mechanic. | battle-transformation-endpoint |
 | 900 | Charizard Mega X | SPECIES_CHARIZARD_MEGA_X | Form / battle transformation; not separately acquired | Derived from Charizard through its form, personality, held-item, ability, or battle mechanic. | battle-transformation-endpoint |
 | 901 | Charizard Mega Y | SPECIES_CHARIZARD_MEGA_Y | Form / battle transformation; not separately acquired | Derived from Charizard through its form, personality, held-item, ability, or battle mechanic. | battle-transformation-endpoint |
@@ -3022,25 +3074,25 @@ This appendix covers every runtime species/form ID. `Direct acquisition` means t
 | 1043 | Rotom Frost | SPECIES_ROTOM_FROST | Alternate form from obtainable base | Obtain Rotom, then use the applicable form-change mechanic. | party-selectable species/form |
 | 1044 | Rotom Fan | SPECIES_ROTOM_FAN | Alternate form from obtainable base | Obtain Rotom, then use the applicable form-change mechanic. | party-selectable species/form |
 | 1045 | Rotom Mow | SPECIES_ROTOM_MOW | Alternate form from obtainable base | Obtain Rotom, then use the applicable form-change mechanic. | party-selectable species/form |
-| 1046 | Giratina Origin | SPECIES_GIRATINA_ORIGIN | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 1047 | Shaymin Sky | SPECIES_SHAYMIN_SKY | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 1048 | Arceus Fighting | SPECIES_ARCEUS_FIGHTING | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 1049 | Arceus Flying | SPECIES_ARCEUS_FLYING | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 1050 | Arceus Poison | SPECIES_ARCEUS_POISON | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 1051 | Arceus Ground | SPECIES_ARCEUS_GROUND | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 1052 | Arceus Rock | SPECIES_ARCEUS_ROCK | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 1053 | Arceus Bug | SPECIES_ARCEUS_BUG | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 1054 | Arceus Ghost | SPECIES_ARCEUS_GHOST | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 1055 | Arceus Steel | SPECIES_ARCEUS_STEEL | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 1056 | Arceus Fire | SPECIES_ARCEUS_FIRE | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 1057 | Arceus Water | SPECIES_ARCEUS_WATER | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 1058 | Arceus Grass | SPECIES_ARCEUS_GRASS | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 1059 | Arceus Electric | SPECIES_ARCEUS_ELECTRIC | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 1060 | Arceus Psychic | SPECIES_ARCEUS_PSYCHIC | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 1061 | Arceus Ice | SPECIES_ARCEUS_ICE | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 1062 | Arceus Dragon | SPECIES_ARCEUS_DRAGON | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 1063 | Arceus Dark | SPECIES_ARCEUS_DARK | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 1064 | Arceus Fairy | SPECIES_ARCEUS_FAIRY | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
+| 1046 | Giratina Origin | SPECIES_GIRATINA_ORIGIN | Alternate form from obtainable base | Obtain Giratina, then use the applicable form-change mechanic. | party-selectable species/form |
+| 1047 | Shaymin Sky | SPECIES_SHAYMIN_SKY | Alternate form from obtainable base | Obtain Shaymin, then use the applicable form-change mechanic. | party-selectable species/form |
+| 1048 | Arceus Fighting | SPECIES_ARCEUS_FIGHTING | Alternate form from obtainable base | Obtain Arceus, then use the applicable form-change mechanic. | party-selectable species/form |
+| 1049 | Arceus Flying | SPECIES_ARCEUS_FLYING | Alternate form from obtainable base | Obtain Arceus, then use the applicable form-change mechanic. | party-selectable species/form |
+| 1050 | Arceus Poison | SPECIES_ARCEUS_POISON | Alternate form from obtainable base | Obtain Arceus, then use the applicable form-change mechanic. | party-selectable species/form |
+| 1051 | Arceus Ground | SPECIES_ARCEUS_GROUND | Alternate form from obtainable base | Obtain Arceus, then use the applicable form-change mechanic. | party-selectable species/form |
+| 1052 | Arceus Rock | SPECIES_ARCEUS_ROCK | Alternate form from obtainable base | Obtain Arceus, then use the applicable form-change mechanic. | party-selectable species/form |
+| 1053 | Arceus Bug | SPECIES_ARCEUS_BUG | Alternate form from obtainable base | Obtain Arceus, then use the applicable form-change mechanic. | party-selectable species/form |
+| 1054 | Arceus Ghost | SPECIES_ARCEUS_GHOST | Alternate form from obtainable base | Obtain Arceus, then use the applicable form-change mechanic. | party-selectable species/form |
+| 1055 | Arceus Steel | SPECIES_ARCEUS_STEEL | Alternate form from obtainable base | Obtain Arceus, then use the applicable form-change mechanic. | party-selectable species/form |
+| 1056 | Arceus Fire | SPECIES_ARCEUS_FIRE | Alternate form from obtainable base | Obtain Arceus, then use the applicable form-change mechanic. | party-selectable species/form |
+| 1057 | Arceus Water | SPECIES_ARCEUS_WATER | Alternate form from obtainable base | Obtain Arceus, then use the applicable form-change mechanic. | party-selectable species/form |
+| 1058 | Arceus Grass | SPECIES_ARCEUS_GRASS | Alternate form from obtainable base | Obtain Arceus, then use the applicable form-change mechanic. | party-selectable species/form |
+| 1059 | Arceus Electric | SPECIES_ARCEUS_ELECTRIC | Alternate form from obtainable base | Obtain Arceus, then use the applicable form-change mechanic. | party-selectable species/form |
+| 1060 | Arceus Psychic | SPECIES_ARCEUS_PSYCHIC | Alternate form from obtainable base | Obtain Arceus, then use the applicable form-change mechanic. | party-selectable species/form |
+| 1061 | Arceus Ice | SPECIES_ARCEUS_ICE | Alternate form from obtainable base | Obtain Arceus, then use the applicable form-change mechanic. | party-selectable species/form |
+| 1062 | Arceus Dragon | SPECIES_ARCEUS_DRAGON | Alternate form from obtainable base | Obtain Arceus, then use the applicable form-change mechanic. | party-selectable species/form |
+| 1063 | Arceus Dark | SPECIES_ARCEUS_DARK | Alternate form from obtainable base | Obtain Arceus, then use the applicable form-change mechanic. | party-selectable species/form |
+| 1064 | Arceus Fairy | SPECIES_ARCEUS_FAIRY | Alternate form from obtainable base | Obtain Arceus, then use the applicable form-change mechanic. | party-selectable species/form |
 | 1065 | Basculin Blue Striped | SPECIES_BASCULIN_BLUE_STRIPED | Alternate form from obtainable base | Obtain Basculin, then use the applicable form-change mechanic. | party-selectable species/form |
 | 1066 | Darmanitan Zen Mode | SPECIES_DARMANITAN_ZEN_MODE | Form / battle transformation; not separately acquired | Derived from Darmanitan through its form, personality, held-item, ability, or battle mechanic. | automatic-or-battle-only-form |
 | 1067 | Darmanitan Zen Mode Galarian | SPECIES_DARMANITAN_ZEN_MODE_GALARIAN | Form / battle transformation; not separately acquired | Derived from Darmanitan Zen Mode through its form, personality, held-item, ability, or battle mechanic. | automatic-or-battle-only-form |
@@ -3050,17 +3102,17 @@ This appendix covers every runtime species/form ID. `Direct acquisition` means t
 | 1071 | Sawsbuck Summer | SPECIES_SAWSBUCK_SUMMER | Alternate form from obtainable base | Obtain Sawsbuck, then use the applicable form-change mechanic. | party-selectable species/form |
 | 1072 | Sawsbuck Autumn | SPECIES_SAWSBUCK_AUTUMN | Alternate form from obtainable base | Obtain Sawsbuck, then use the applicable form-change mechanic. | party-selectable species/form |
 | 1073 | Sawsbuck Winter | SPECIES_SAWSBUCK_WINTER | Alternate form from obtainable base | Obtain Sawsbuck, then use the applicable form-change mechanic. | party-selectable species/form |
-| 1074 | Tornadus Therian | SPECIES_TORNADUS_THERIAN | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 1075 | Thundurus Therian | SPECIES_THUNDURUS_THERIAN | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 1076 | Landorus Therian | SPECIES_LANDORUS_THERIAN | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 1077 | Kyurem White | SPECIES_KYUREM_WHITE | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 1078 | Kyurem Black | SPECIES_KYUREM_BLACK | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
+| 1074 | Tornadus Therian | SPECIES_TORNADUS_THERIAN | Alternate form from obtainable base | Obtain Tornadus, then use the applicable form-change mechanic. | party-selectable species/form |
+| 1075 | Thundurus Therian | SPECIES_THUNDURUS_THERIAN | Alternate form from obtainable base | Obtain Thundurus, then use the applicable form-change mechanic. | party-selectable species/form |
+| 1076 | Landorus Therian | SPECIES_LANDORUS_THERIAN | Alternate form from obtainable base | Obtain Landorus, then use the applicable form-change mechanic. | party-selectable species/form |
+| 1077 | Kyurem White | SPECIES_KYUREM_WHITE | Alternate form from obtainable base | Obtain Kyurem, then use the applicable form-change mechanic. | party-selectable species/form |
+| 1078 | Kyurem Black | SPECIES_KYUREM_BLACK | Alternate form from obtainable base | Obtain Kyurem, then use the applicable form-change mechanic. | party-selectable species/form |
 | 1079 | Keldeo Resolute | SPECIES_KELDEO_RESOLUTE | Alternate form from obtainable base | Obtain Keldeo, then use the applicable form-change mechanic. | party-selectable species/form |
 | 1080 | Meloetta Pirouette | SPECIES_MELOETTA_PIROUETTE | Form / battle transformation; not separately acquired | Derived from Meloetta through its form, personality, held-item, ability, or battle mechanic. | automatic-or-battle-only-form |
-| 1081 | Genesect Douse Drive | SPECIES_GENESECT_DOUSE_DRIVE | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 1082 | Genesect Shock Drive | SPECIES_GENESECT_SHOCK_DRIVE | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 1083 | Genesect Burn Drive | SPECIES_GENESECT_BURN_DRIVE | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 1084 | Genesect Chill Drive | SPECIES_GENESECT_CHILL_DRIVE | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
+| 1081 | Genesect Douse Drive | SPECIES_GENESECT_DOUSE_DRIVE | Alternate form from obtainable base | Obtain Genesect, then use the applicable form-change mechanic. | party-selectable species/form |
+| 1082 | Genesect Shock Drive | SPECIES_GENESECT_SHOCK_DRIVE | Alternate form from obtainable base | Obtain Genesect, then use the applicable form-change mechanic. | party-selectable species/form |
+| 1083 | Genesect Burn Drive | SPECIES_GENESECT_BURN_DRIVE | Alternate form from obtainable base | Obtain Genesect, then use the applicable form-change mechanic. | party-selectable species/form |
+| 1084 | Genesect Chill Drive | SPECIES_GENESECT_CHILL_DRIVE | Alternate form from obtainable base | Obtain Genesect, then use the applicable form-change mechanic. | party-selectable species/form |
 | 1085 | Greninja Battle Bond | SPECIES_GRENINJA_BATTLE_BOND | Direct acquisition | Pokémon Center mystery gift: Pokémon Centers (Requires FLAG_BADGE04_GET; arrives holding ITEM_COMET_SHARD) | party-selectable species/form |
 | 1086 | Greninja Ash | SPECIES_GRENINJA_ASH | Form / battle transformation; not separately acquired | Derived from Greninja through its form, personality, held-item, ability, or battle mechanic. | automatic-or-battle-only-form |
 | 1087 | Vivillon Polar | SPECIES_VIVILLON_POLAR | Alternate form from obtainable base | Obtain Vivillon, then use the applicable form-change mechanic. | party-selectable species/form |
@@ -3113,11 +3165,11 @@ This appendix covers every runtime species/form ID. `Direct acquisition` means t
 | 1134 | Gourgeist Large | SPECIES_GOURGEIST_LARGE | Evolution from obtainable Pokémon | Pumpkaboo Large → Gourgeist Large via Use/hold ITEM_DUSK_STONE | party-selectable species/form |
 | 1135 | Gourgeist Super | SPECIES_GOURGEIST_SUPER | Evolution from obtainable Pokémon | Pumpkaboo Super → Gourgeist Super via Use/hold ITEM_DUSK_STONE | party-selectable species/form |
 | 1136 | Xerneas Active | SPECIES_XERNEAS_ACTIVE | Form / battle transformation; not separately acquired | Derived from Xerneas through its form, personality, held-item, ability, or battle mechanic. | automatic-or-battle-only-form |
-| 1137 | Zygarde 10 | SPECIES_ZYGARDE_10 | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 1138 | Zygarde 10 Power Construct | SPECIES_ZYGARDE_10_POWER_CONSTRUCT | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 1139 | Zygarde 50 Power Construct | SPECIES_ZYGARDE_50_POWER_CONSTRUCT | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
+| 1137 | Zygarde 10 | SPECIES_ZYGARDE_10 | Alternate form from obtainable base | Obtain Zygarde, then use the applicable form-change mechanic. | party-selectable species/form |
+| 1138 | Zygarde 10 Power Construct | SPECIES_ZYGARDE_10_POWER_CONSTRUCT | Form / battle transformation; not separately acquired | Derived from Zygarde 10 through its form, personality, held-item, ability, or battle mechanic. | party-selectable species/form |
+| 1139 | Zygarde 50 Power Construct | SPECIES_ZYGARDE_50_POWER_CONSTRUCT | Form / battle transformation; not separately acquired | Derived from Zygarde through its form, personality, held-item, ability, or battle mechanic. | party-selectable species/form |
 | 1140 | Zygarde Complete | SPECIES_ZYGARDE_COMPLETE | Form / battle transformation; not separately acquired | Derived from Zygarde through its form, personality, held-item, ability, or battle mechanic. | automatic-or-battle-only-form |
-| 1141 | Hoopa Unbound | SPECIES_HOOPA_UNBOUND | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
+| 1141 | Hoopa Unbound | SPECIES_HOOPA_UNBOUND | Alternate form from obtainable base | Obtain Hoopa, then use the applicable form-change mechanic. | party-selectable species/form |
 | 1142 | Oricorio Pom Pom | SPECIES_ORICORIO_POM_POM | Alternate form from obtainable base | Obtain Oricorio, then use the applicable form-change mechanic. | party-selectable species/form |
 | 1143 | Oricorio Pau | SPECIES_ORICORIO_PAU | Alternate form from obtainable base | Obtain Oricorio, then use the applicable form-change mechanic. | party-selectable species/form |
 | 1144 | Oricorio Sensu | SPECIES_ORICORIO_SENSU | Alternate form from obtainable base | Obtain Oricorio, then use the applicable form-change mechanic. | party-selectable species/form |
@@ -3156,8 +3208,8 @@ This appendix covers every runtime species/form ID. `Direct acquisition` means t
 | 1177 | Minior Core Indigo | SPECIES_MINIOR_CORE_INDIGO | Form / battle transformation; not separately acquired | Derived from Minior through its form, personality, held-item, ability, or battle mechanic. | automatic-or-battle-only-form |
 | 1178 | Minior Core Violet | SPECIES_MINIOR_CORE_VIOLET | Form / battle transformation; not separately acquired | Derived from Minior through its form, personality, held-item, ability, or battle mechanic. | automatic-or-battle-only-form |
 | 1179 | Mimikyu Busted | SPECIES_MIMIKYU_BUSTED | Form / battle transformation; not separately acquired | Derived from Mimikyu through its form, personality, held-item, ability, or battle mechanic. | automatic-or-battle-only-form |
-| 1180 | Necrozma Dusk Mane | SPECIES_NECROZMA_DUSK_MANE | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 1181 | Necrozma Dawn Wings | SPECIES_NECROZMA_DAWN_WINGS | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
+| 1180 | Necrozma Dusk Mane | SPECIES_NECROZMA_DUSK_MANE | Alternate form from obtainable base | Obtain Necrozma, then use the applicable form-change mechanic. | party-selectable species/form |
+| 1181 | Necrozma Dawn Wings | SPECIES_NECROZMA_DAWN_WINGS | Alternate form from obtainable base | Obtain Necrozma, then use the applicable form-change mechanic. | party-selectable species/form |
 | 1182 | Necrozma Ultra | SPECIES_NECROZMA_ULTRA | Form / battle transformation; not separately acquired | Derived from Necrozma through its form, personality, held-item, ability, or battle mechanic. | automatic-or-battle-only-form |
 | 1183 | Magearna Original Color | SPECIES_MAGEARNA_ORIGINAL_COLOR | Alternate form from obtainable base | Obtain Magearna, then use the applicable form-change mechanic. | party-selectable species/form |
 | 1184 | Cramorant Gulping | SPECIES_CRAMORANT_GULPING | Form / battle transformation; not separately acquired | Derived from Cramorant through its form, personality, held-item, ability, or battle mechanic. | automatic-or-battle-only-form |
@@ -3176,13 +3228,13 @@ This appendix covers every runtime species/form ID. `Direct acquisition` means t
 | 1197 | Eiscue Noice Face | SPECIES_EISCUE_NOICE_FACE | Form / battle transformation; not separately acquired | Derived from Eiscue through its form, personality, held-item, ability, or battle mechanic. | automatic-or-battle-only-form |
 | 1198 | Indeedee Female | SPECIES_INDEEDEE_FEMALE | Alternate form from obtainable base | Obtain Indeedee, then use the applicable form-change mechanic. | party-selectable species/form |
 | 1199 | Morpeko Hangry | SPECIES_MORPEKO_HANGRY | Form / battle transformation; not separately acquired | Derived from Morpeko through its form, personality, held-item, ability, or battle mechanic. | automatic-or-battle-only-form |
-| 1200 | Zacian Crowned Sword | SPECIES_ZACIAN_CROWNED_SWORD | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 1201 | Zamazenta Crowned Shield | SPECIES_ZAMAZENTA_CROWNED_SHIELD | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
+| 1200 | Zacian Crowned Sword | SPECIES_ZACIAN_CROWNED_SWORD | Alternate form from obtainable base | Obtain Zacian, then use the applicable form-change mechanic. | party-selectable species/form |
+| 1201 | Zamazenta Crowned Shield | SPECIES_ZAMAZENTA_CROWNED_SHIELD | Alternate form from obtainable base | Obtain Zamazenta, then use the applicable form-change mechanic. | party-selectable species/form |
 | 1202 | Eternatus Eternamax | SPECIES_ETERNATUS_ETERNAMAX | Form / battle transformation; not separately acquired | Derived from Eternatus through its form, personality, held-item, ability, or battle mechanic. | automatic-or-battle-only-form |
 | 1203 | Urshifu Rapid Strike Style | SPECIES_URSHIFU_RAPID_STRIKE_STYLE | Evolution from obtainable Pokémon | Kubfu → Urshifu Rapid Strike Style via Level (0) | party-selectable species/form |
-| 1204 | Zarude Dada | SPECIES_ZARUDE_DADA | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 1205 | Calyrex Ice Rider | SPECIES_CALYREX_ICE_RIDER | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
-| 1206 | Calyrex Shadow Rider | SPECIES_CALYREX_SHADOW_RIDER | Unresolved by automated acquisition scan | No direct random, scripted, gift, trade, fossil, or permanent-evolution path was resolved from the audited sources. | party-selectable species/form |
+| 1204 | Zarude Dada | SPECIES_ZARUDE_DADA | Alternate form from obtainable base | Obtain Zarude, then use the applicable form-change mechanic. | party-selectable species/form |
+| 1205 | Calyrex Ice Rider | SPECIES_CALYREX_ICE_RIDER | Alternate form from obtainable base | Obtain Calyrex, then use the applicable form-change mechanic. | party-selectable species/form |
+| 1206 | Calyrex Shadow Rider | SPECIES_CALYREX_SHADOW_RIDER | Alternate form from obtainable base | Obtain Calyrex, then use the applicable form-change mechanic. | party-selectable species/form |
 | 1207 | Milotic Mega | SPECIES_MILOTIC_MEGA | Form / battle transformation; not separately acquired | Derived from Milotic through its form, personality, held-item, ability, or battle mechanic. | battle-transformation-endpoint |
 | 1208 | Butterfree Mega | SPECIES_BUTTERFREE_MEGA | Form / battle transformation; not separately acquired | Derived from Butterfree through its form, personality, held-item, ability, or battle mechanic. | battle-transformation-endpoint |
 | 1209 | Machamp Mega | SPECIES_MACHAMP_MEGA | Form / battle transformation; not separately acquired | Derived from Machamp through its form, personality, held-item, ability, or battle mechanic. | battle-transformation-endpoint |

@@ -1299,9 +1299,9 @@
 #define FLAG_ALTERING_CAVE_MASTER_BALL_2                            0x4EA
 #define FLAG_DEFEATED_LEAF                                          0x4EB
 #define FLAG_LENT_NURSE_SURF                                       0x4EC
-#define FLAG_UNUSED_0x4ED                                           0x4ED // Unused Flag
-#define FLAG_UNUSED_0x4EE                                           0x4EE // Unused Flag
-#define FLAG_UNUSED_0x4EF                                           0x4EF // Unused Flag
+#define FLAG_HIDE_LEGENDARY_SIGN_DARKRAI                            0x4ED
+#define FLAG_HIDE_LEGENDARY_SIGN_CRESSELIA                          0x4EE
+#define FLAG_HIDE_LEGENDARY_SIGN_DIALGA                             0x4EF
 
 #define FLAG_DEFEATED_RUSTBORO_GYM                                  0x4F0
 #define FLAG_DEFEATED_DEWFORD_GYM                                   0x4F1

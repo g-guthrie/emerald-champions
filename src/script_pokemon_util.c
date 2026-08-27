@@ -8,6 +8,7 @@
 #include "event_data.h"
 #include "international_string_util.h"
 #include "link.h"
+#include "legendary_signs.h"
 #include "link_rfu.h"
 #include "main.h"
 #include "menu.h"
@@ -78,6 +79,7 @@ u8 ScriptGiveMon(u16 species, u8 level, u16 item, u32 unused1, u32 unused2, u8 u
     case 1:
         GetSetPokedexFlag(nationalDexNum, FLAG_SET_SEEN);
         GetSetPokedexFlag(nationalDexNum, FLAG_SET_CAUGHT);
+        MarkLegendarySignCaughtBySpecies(species);
         break;
     }
     return sentToPc;
