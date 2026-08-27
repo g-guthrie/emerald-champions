@@ -7355,9 +7355,9 @@ u16 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
     if (eggSpecies == SPECIES_BAGON)
         AddMoveIfLegalAndNew(MOVE_WISH, learnedMoves, moves, &numMoves);
 
-    // Rotom's appliance interaction teaches a form-exclusive move directly.
-    // Keep those script-legal moves in the all-legal Pokemon Center teacher as
-    // well, even though the ordinary learnset bitfields do not list them.
+    // Stable form-exclusive moves are not represented by the shared ordinary
+    // level/TM/tutor bitfields. Keep the all-legal Pokemon Center teacher in
+    // sync with the native form identities and Rotom appliance script.
     switch (species)
     {
     case SPECIES_ROTOM_HEAT:
@@ -7374,6 +7374,33 @@ u16 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
         break;
     case SPECIES_ROTOM_MOW:
         AddMoveIfLegalAndNew(MOVE_LEAF_STORM, learnedMoves, moves, &numMoves);
+        break;
+    case SPECIES_PIKACHU_ROCK_STAR:
+        AddMoveIfLegalAndNew(MOVE_METEOR_MASH, learnedMoves, moves, &numMoves);
+        break;
+    case SPECIES_PIKACHU_BELLE:
+        AddMoveIfLegalAndNew(MOVE_ICICLE_CRASH, learnedMoves, moves, &numMoves);
+        break;
+    case SPECIES_PIKACHU_POP_STAR:
+        AddMoveIfLegalAndNew(MOVE_DRAINING_KISS, learnedMoves, moves, &numMoves);
+        break;
+    case SPECIES_PIKACHU_PH_D:
+        AddMoveIfLegalAndNew(MOVE_ELECTRIC_TERRAIN, learnedMoves, moves, &numMoves);
+        break;
+    case SPECIES_PIKACHU_LIBRE:
+        AddMoveIfLegalAndNew(MOVE_FLYING_PRESS, learnedMoves, moves, &numMoves);
+        break;
+    case SPECIES_NECROZMA_DUSK_MANE:
+        AddMoveIfLegalAndNew(MOVE_SUNSTEEL_STRIKE, learnedMoves, moves, &numMoves);
+        break;
+    case SPECIES_NECROZMA_DAWN_WINGS:
+        AddMoveIfLegalAndNew(MOVE_MOONGEIST_BEAM, learnedMoves, moves, &numMoves);
+        break;
+    case SPECIES_ZACIAN_CROWNED_SWORD:
+        AddMoveIfLegalAndNew(MOVE_BEHEMOTH_BLADE, learnedMoves, moves, &numMoves);
+        break;
+    case SPECIES_ZAMAZENTA_CROWNED_SHIELD:
+        AddMoveIfLegalAndNew(MOVE_BEHEMOTH_BASH, learnedMoves, moves, &numMoves);
         break;
     }
 

@@ -1110,119 +1110,115 @@
     },
     {
       "ability": "ABILITY_DOWNLOAD",
-      "alias_of": "SPECIES_GENESECT",
       "dependency_notes": [
-        "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "Douse Drive must be equipped manually to maintain this form and make Techno Blast Water type; the tutor changes only moves, nature, and ability."
       ],
-      "doubles_rationale": "Genesect combines Download with Bug Buzz, Iron Head, Ice Beam, Protect; every slot advances its genesect source-backed doubles set role in doubles.",
-      "item_context": "ITEM_LIFE_ORB supports the genesect source-backed doubles set role but is never granted by the tutor.",
+      "doubles_rationale": "Download supplies immediate offense while Douse Drive Techno Blast adds Water coverage beside Bug Buzz, Iron Head, and Protect.",
+      "item_context": "ITEM_DOUSE_DRIVE is required to maintain Douse Drive form and set Techno Blast’s type; it is never granted by the tutor.",
       "moves": [
         "MOVE_BUG_BUZZ",
         "MOVE_IRON_HEAD",
-        "MOVE_ICE_BEAM",
+        "MOVE_TECHNO_BLAST",
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_NAIVE",
-      "review_notes": "Alias proof passed against SPECIES_GENESECT: exact stats, typing, ability slots, legal pool, moves, nature, and ability are identical.",
+      "review_notes": "Authored independently because the held Drive is both the form lock and Techno Blast type source.",
       "reviewed_by": "Emerald Champions authored stable-form doubles audit",
-      "role": "Genesect source-backed doubles set",
+      "role": "Douse Drive Techno Blast attacker",
       "source_refs": [
-        "Smogon Gen 8 2v2doubles Genesect set: Mixed Attacker",
-        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_GENESECT"
+        "Smogon Genesect Techno Blast coverage sets",
+        "Emerald Champions Genesect FORM_ITEM_HOLD Douse Drive contract and exact legal pool"
       ],
       "species": "SPECIES_GENESECT_DOUSE_DRIVE",
-      "suggested_item": "ITEM_LIFE_ORB"
+      "suggested_item": "ITEM_DOUSE_DRIVE"
     },
     {
       "ability": "ABILITY_DOWNLOAD",
-      "alias_of": "SPECIES_GENESECT",
       "dependency_notes": [
-        "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "Shock Drive must be equipped manually to maintain this form and make Techno Blast Electric type; the tutor changes only moves, nature, and ability."
       ],
-      "doubles_rationale": "Genesect combines Download with Bug Buzz, Iron Head, Ice Beam, Protect; every slot advances its genesect source-backed doubles set role in doubles.",
-      "item_context": "ITEM_LIFE_ORB supports the genesect source-backed doubles set role but is never granted by the tutor.",
+      "doubles_rationale": "Download supplies immediate offense while Shock Drive Techno Blast adds Electric coverage beside Bug Buzz, Iron Head, and Protect.",
+      "item_context": "ITEM_SHOCK_DRIVE is required to maintain Shock Drive form and set Techno Blast’s type; it is never granted by the tutor.",
       "moves": [
         "MOVE_BUG_BUZZ",
         "MOVE_IRON_HEAD",
-        "MOVE_ICE_BEAM",
+        "MOVE_TECHNO_BLAST",
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_NAIVE",
-      "review_notes": "Alias proof passed against SPECIES_GENESECT: exact stats, typing, ability slots, legal pool, moves, nature, and ability are identical.",
+      "review_notes": "Authored independently because the held Drive is both the form lock and Techno Blast type source.",
       "reviewed_by": "Emerald Champions authored stable-form doubles audit",
-      "role": "Genesect source-backed doubles set",
+      "role": "Shock Drive Techno Blast attacker",
       "source_refs": [
-        "Smogon Gen 8 2v2doubles Genesect set: Mixed Attacker",
-        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_GENESECT"
+        "Smogon Genesect Techno Blast coverage sets",
+        "Emerald Champions Genesect FORM_ITEM_HOLD Shock Drive contract and exact legal pool"
       ],
       "species": "SPECIES_GENESECT_SHOCK_DRIVE",
-      "suggested_item": "ITEM_LIFE_ORB"
+      "suggested_item": "ITEM_SHOCK_DRIVE"
     },
     {
       "ability": "ABILITY_DOWNLOAD",
-      "alias_of": "SPECIES_GENESECT",
       "dependency_notes": [
-        "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "Burn Drive must be equipped manually to maintain this form and make Techno Blast Fire type; the tutor changes only moves, nature, and ability."
       ],
-      "doubles_rationale": "Genesect combines Download with Bug Buzz, Iron Head, Ice Beam, Protect; every slot advances its genesect source-backed doubles set role in doubles.",
-      "item_context": "ITEM_LIFE_ORB supports the genesect source-backed doubles set role but is never granted by the tutor.",
+      "doubles_rationale": "Download supplies immediate offense while Burn Drive Techno Blast adds Fire coverage beside Bug Buzz, Iron Head, and Protect.",
+      "item_context": "ITEM_BURN_DRIVE is required to maintain Burn Drive form and set Techno Blast’s type; it is never granted by the tutor.",
       "moves": [
         "MOVE_BUG_BUZZ",
         "MOVE_IRON_HEAD",
-        "MOVE_ICE_BEAM",
+        "MOVE_TECHNO_BLAST",
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_NAIVE",
-      "review_notes": "Alias proof passed against SPECIES_GENESECT: exact stats, typing, ability slots, legal pool, moves, nature, and ability are identical.",
+      "review_notes": "Authored independently because the held Drive is both the form lock and Techno Blast type source.",
       "reviewed_by": "Emerald Champions authored stable-form doubles audit",
-      "role": "Genesect source-backed doubles set",
+      "role": "Burn Drive Techno Blast attacker",
       "source_refs": [
-        "Smogon Gen 8 2v2doubles Genesect set: Mixed Attacker",
-        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_GENESECT"
+        "Smogon Genesect Techno Blast coverage sets",
+        "Emerald Champions Genesect FORM_ITEM_HOLD Burn Drive contract and exact legal pool"
       ],
       "species": "SPECIES_GENESECT_BURN_DRIVE",
-      "suggested_item": "ITEM_LIFE_ORB"
+      "suggested_item": "ITEM_BURN_DRIVE"
     },
     {
       "ability": "ABILITY_DOWNLOAD",
-      "alias_of": "SPECIES_GENESECT",
       "dependency_notes": [
-        "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+        "Chill Drive must be equipped manually to maintain this form and make Techno Blast Ice type; the tutor changes only moves, nature, and ability."
       ],
-      "doubles_rationale": "Genesect combines Download with Bug Buzz, Iron Head, Ice Beam, Protect; every slot advances its genesect source-backed doubles set role in doubles.",
-      "item_context": "ITEM_LIFE_ORB supports the genesect source-backed doubles set role but is never granted by the tutor.",
+      "doubles_rationale": "Download supplies immediate offense while Chill Drive Techno Blast adds Ice coverage beside Bug Buzz, Iron Head, and Protect.",
+      "item_context": "ITEM_CHILL_DRIVE is required to maintain Chill Drive form and set Techno Blast’s type; it is never granted by the tutor.",
       "moves": [
         "MOVE_BUG_BUZZ",
         "MOVE_IRON_HEAD",
-        "MOVE_ICE_BEAM",
+        "MOVE_TECHNO_BLAST",
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_NAIVE",
-      "review_notes": "Alias proof passed against SPECIES_GENESECT: exact stats, typing, ability slots, legal pool, moves, nature, and ability are identical.",
+      "review_notes": "Authored independently because the held Drive is both the form lock and Techno Blast type source.",
       "reviewed_by": "Emerald Champions authored stable-form doubles audit",
-      "role": "Genesect source-backed doubles set",
+      "role": "Chill Drive Techno Blast attacker",
       "source_refs": [
-        "Smogon Gen 8 2v2doubles Genesect set: Mixed Attacker",
-        "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_GENESECT"
+        "Smogon Genesect Techno Blast coverage sets",
+        "Emerald Champions Genesect FORM_ITEM_HOLD Chill Drive contract and exact legal pool"
       ],
       "species": "SPECIES_GENESECT_CHILL_DRIVE",
-      "suggested_item": "ITEM_LIFE_ORB"
+      "suggested_item": "ITEM_CHILL_DRIVE"
     },
     {
       "ability": "ABILITY_BATTLE_BOND",
       "dependency_notes": [
         "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
       ],
-      "doubles_rationale": "Greninja combines Battle Bond with Hydro Pump, Dark Pulse, Ice Beam, Protect; every slot advances its battle bond special attacker role in doubles.",
+      "doubles_rationale": "Hydro Pump and Dark Pulse provide immediate STAB pressure, while Water Shuriken becomes fixed three-hit priority after Battle Bond creates Ash-Greninja and Protect preserves positioning.",
       "item_context": "ITEM_LIFE_ORB supports the battle bond special attacker role but is never granted by the tutor.",
       "moves": [
         "MOVE_HYDRO_PUMP",
         "MOVE_DARK_PULSE",
-        "MOVE_ICE_BEAM",
+        "MOVE_WATER_SHURIKEN",
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_TIMID",
-      "review_notes": "Restored Water STAB and removed mixed Low Kick. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+      "review_notes": "Restored Battle Bond’s explicit Water Shuriken payoff and retained a fully special Timid set.",
       "reviewed_by": "Emerald Champions authored stable-form doubles audit",
       "role": "Battle Bond special attacker",
       "source_refs": [

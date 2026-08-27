@@ -14205,18 +14205,19 @@
       "authored_review": {
         "ability": "ABILITY_LEVITATE",
         "dependency_notes": [
-          "Choice Specs is advisory; Unown cannot be given a normal four-move competitive set because its exact local legal pool is intentionally restricted.",
+          "Choice Specs is advisory; Hidden Power's type and power follow the caught Unown's existing IVs because the builder does not alter IVs.",
           "ITEM_CHOICE_SPECS is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
         ],
-        "doubles_rationale": "Unown has an inherently tiny local learnset; Stored Power is the only safe non-IV-dependent attack the builder can install and is therefore the honest preset.",
+        "doubles_rationale": "Unown has an inherently tiny local learnset; Hidden Power is still its strongest immediate attack at any IV spread, while Stored Power is the only secondary legal option.",
         "item_context": "ITEM_CHOICE_SPECS is the recommended held item for the minimal special attacker role; it must be obtained and equipped separately.",
         "moves": [
+          "MOVE_HIDDEN_POWER",
           "MOVE_STORED_POWER"
         ],
         "nature": "NATURE_MODEST",
         "review_batch": "johto-national-dex-152-251-v1",
         "review_file": "docs/battle_set_reviews/030_johto.json",
-        "review_notes": "Authored exception: avoided illegal Hidden Power manipulation and retained the only locally legal safe move. Exact local legality, ability availability, nature-role fit, and four-slot doubles coherence were checked by hand.",
+        "review_notes": "Authored exception: Hidden Power is allowed only for Unown because it is the species' canonical and strongest immediate legal attack; no IV manipulation is performed.",
         "reviewed_by": "Emerald Champions authored Johto doubles audit",
         "role": "Minimal special attacker",
         "source_refs": [
@@ -14229,10 +14230,10 @@
       "autobuild_move_count": 1,
       "display_name": "Unown",
       "legal_move_count": 2,
-      "move_count": 1,
+      "move_count": 2,
       "moves": [
+        "MOVE_HIDDEN_POWER",
         "MOVE_STORED_POWER",
-        "MOVE_NONE",
         "MOVE_NONE",
         "MOVE_NONE"
       ],
@@ -14242,7 +14243,7 @@
       "source_context": {
         "battle_style": null,
         "dependency_notes": [
-          "Choice Specs is advisory; Unown cannot be given a normal four-move competitive set because its exact local legal pool is intentionally restricted.",
+          "Choice Specs is advisory; Hidden Power's type and power follow the caught Unown's existing IVs because the builder does not alter IVs.",
           "ITEM_CHOICE_SPECS is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
         ],
         "published_item": "ITEM_CHOICE_SPECS",
@@ -27223,17 +27224,17 @@
       "species_id": 391
     },
     {
-      "ability": "ABILITY_IRON_FIST",
-      "ability_slot": 1,
+      "ability": "ABILITY_BLAZE",
+      "ability_slot": 0,
       "adaptations": [
         "nature selected deterministically from the retained local role"
       ],
       "authored_review": {
-        "ability": "ABILITY_IRON_FIST",
+        "ability": "ABILITY_BLAZE",
         "dependency_notes": [
           "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
         ],
-        "doubles_rationale": "Infernape uses Iron Fist as a mixed Fake Out and Quick Guard attacker, with Fake Out, Overheat, Close Combat, and Quick Guard forming one coherent four-slot doubles plan.",
+        "doubles_rationale": "Infernape uses Blaze to strengthen Overheat at low HP while Fake Out, Close Combat, and Quick Guard supply immediate mixed pressure and team protection.",
         "item_context": "Focus Sash is advisory only; the native builder does not grant or equip held items.",
         "moves": [
           "MOVE_FAKE_OUT",
@@ -27246,7 +27247,7 @@
         "review_file": "docs/battle_set_reviews/050_sinnoh.json",
         "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks.",
         "reviewed_by": "Emerald Champions Sinnoh authored doubles audit",
-        "role": "mixed Fake Out and Quick Guard attacker",
+        "role": "Blaze mixed Fake Out and Quick Guard attacker",
         "source_refs": [
           "Smogon gen 6 battlespotdoubles Infernape Support and compatible doubles alternatives",
           "Emerald Champions exact local stats, ability slots, and complete legal move pool"
@@ -58544,17 +58545,17 @@
       "species_id": 852
     },
     {
-      "ability": "ABILITY_TECHNICIAN",
-      "ability_slot": 2,
+      "ability": "ABILITY_LIMBER",
+      "ability_slot": 0,
       "adaptations": [
         "nature selected deterministically from the retained local role"
       ],
       "authored_review": {
-        "ability": "ABILITY_TECHNICIAN",
+        "ability": "ABILITY_LIMBER",
         "dependency_notes": [
           "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
         ],
-        "doubles_rationale": "Grapploct uses Technician as a Technician Octolock attacker, with Octolock, Drain Punch, Ice Punch, and Protect forming one coherent four-slot doubles plan.",
+        "doubles_rationale": "Limber prevents paralysis from undermining Grapploct while Octolock, Drain Punch, Ice Punch, and Protect form a coherent trapping and sustain plan.",
         "item_context": "Leftovers is advisory only; the native builder does not grant or equip held items.",
         "moves": [
           "MOVE_OCTOLOCK",
@@ -58567,7 +58568,7 @@
         "review_file": "docs/battle_set_reviews/085_galar.json",
         "review_notes": "Individually checked for source credibility, exact local legality, doubles turn value, coherent ability and nature, and the absence of retired battle gimmicks.",
         "reviewed_by": "Emerald Champions Galar authored doubles audit",
-        "role": "Technician Octolock attacker",
+        "role": "Limber Octolock attacker",
         "source_refs": [
           "Smogon gen 8 zu Grapploct Octolock, adapted for doubles",
           "Emerald Champions exact local stats, ability slots, and complete legal move pool"
@@ -64263,41 +64264,40 @@
       ],
       "authored_review": {
         "ability": "ABILITY_STATIC",
-        "alias_of": "SPECIES_PIKACHU_COSPLAY",
         "dependency_notes": [
           "The full damage ceiling requires Light Ball, and this restricted cosmetic pool has no Protect.",
-          "Alias acceptance is gated on identical stats, types, abilities, full legal pool, moves, nature, and ability."
+          "Meteor Mash is exposed as the canonical Rock Star form-exclusive move."
         ],
-        "doubles_rationale": "This cosmetic form is mechanically identical to the reviewed Cosplay form, so the same Light Ball damage, priority, Nuzzle speed control, and Charm package is optimal.",
-        "item_context": "SPECIES_PIKACHU_ROCK_STAR has exactly the same local battle data and legal move pool as the reviewed Cosplay form; Light Ball remains advisory and is never auto-equipped.",
+        "doubles_rationale": "Wild Charge and Extreme Speed provide Light Ball damage and priority, Nuzzle controls Speed, and Rock Star’s Meteor Mash adds its defining Steel coverage.",
+        "item_context": "Light Ball supports Rock Star Pikachu’s mixed priority and coverage role but is never granted by the tutor.",
         "moves": [
           "MOVE_WILD_CHARGE",
           "MOVE_EXTREME_SPEED",
           "MOVE_NUZZLE",
-          "MOVE_CHARM"
+          "MOVE_METEOR_MASH"
         ],
         "nature": "NATURE_JOLLY",
         "review_batch": "stable-forms-899-1010-v1",
         "review_file": "docs/battle_set_reviews/100_forms_899_1010.json",
-        "review_notes": "Exact cosmetic alias proven by the review loader.",
+        "review_notes": "Authored independently after restoring the costume’s canonical signature move.",
         "reviewed_by": "Emerald Champions stable-forms doubles audit",
-        "role": "Light Ball priority and speed-control attacker",
+        "role": "Rock Star Light Ball attacker",
         "source_refs": [
-          "Authored SPECIES_PIKACHU_COSPLAY review",
-          "Emerald Champions exact-form equivalence check for SPECIES_PIKACHU_ROCK_STAR"
+          "Canonical Cosplay Pikachu Rock Star Meteor Mash move",
+          "Emerald Champions form-exclusive legality for SPECIES_PIKACHU_ROCK_STAR"
         ],
         "species": "SPECIES_PIKACHU_ROCK_STAR",
         "suggested_item": "ITEM_LIGHT_BALL"
       },
-      "autobuild_move_count": 23,
+      "autobuild_move_count": 24,
       "display_name": "Pikachu",
-      "legal_move_count": 23,
+      "legal_move_count": 24,
       "move_count": 4,
       "moves": [
         "MOVE_WILD_CHARGE",
         "MOVE_EXTREME_SPEED",
         "MOVE_NUZZLE",
-        "MOVE_CHARM"
+        "MOVE_METEOR_MASH"
       ],
       "nature": "NATURE_JOLLY",
       "rejected_candidate_count": 0,
@@ -64306,7 +64306,7 @@
         "battle_style": null,
         "dependency_notes": [
           "The full damage ceiling requires Light Ball, and this restricted cosmetic pool has no Protect.",
-          "Alias acceptance is gated on identical stats, types, abilities, full legal pool, moves, nature, and ability."
+          "Meteor Mash is exposed as the canonical Rock Star form-exclusive move."
         ],
         "published_item": "ITEM_LIGHT_BALL",
         "published_moves": null,
@@ -64318,8 +64318,8 @@
         "batch_id": "stable-forms-899-1010-v1",
         "file": "docs/battle_set_reviews/100_forms_899_1010.json",
         "source_refs": [
-          "Authored SPECIES_PIKACHU_COSPLAY review",
-          "Emerald Champions exact-form equivalence check for SPECIES_PIKACHU_ROCK_STAR"
+          "Canonical Cosplay Pikachu Rock Star Meteor Mash move",
+          "Emerald Champions form-exclusive legality for SPECIES_PIKACHU_ROCK_STAR"
         ]
       },
       "species": "SPECIES_PIKACHU_ROCK_STAR",
@@ -64333,41 +64333,40 @@
       ],
       "authored_review": {
         "ability": "ABILITY_STATIC",
-        "alias_of": "SPECIES_PIKACHU_COSPLAY",
         "dependency_notes": [
           "The full damage ceiling requires Light Ball, and this restricted cosmetic pool has no Protect.",
-          "Alias acceptance is gated on identical stats, types, abilities, full legal pool, moves, nature, and ability."
+          "Icicle Crash is exposed as the canonical Belle form-exclusive move."
         ],
-        "doubles_rationale": "This cosmetic form is mechanically identical to the reviewed Cosplay form, so the same Light Ball damage, priority, Nuzzle speed control, and Charm package is optimal.",
-        "item_context": "SPECIES_PIKACHU_BELLE has exactly the same local battle data and legal move pool as the reviewed Cosplay form; Light Ball remains advisory and is never auto-equipped.",
+        "doubles_rationale": "Wild Charge and Extreme Speed provide Light Ball damage and priority, Nuzzle controls Speed, and Belle’s Icicle Crash adds its defining Ice coverage.",
+        "item_context": "Light Ball supports Belle Pikachu’s priority and Ice-coverage role but is never granted by the tutor.",
         "moves": [
           "MOVE_WILD_CHARGE",
           "MOVE_EXTREME_SPEED",
           "MOVE_NUZZLE",
-          "MOVE_CHARM"
+          "MOVE_ICICLE_CRASH"
         ],
         "nature": "NATURE_JOLLY",
         "review_batch": "stable-forms-899-1010-v1",
         "review_file": "docs/battle_set_reviews/100_forms_899_1010.json",
-        "review_notes": "Exact cosmetic alias proven by the review loader.",
+        "review_notes": "Authored independently after restoring the costume’s canonical signature move.",
         "reviewed_by": "Emerald Champions stable-forms doubles audit",
-        "role": "Light Ball priority and speed-control attacker",
+        "role": "Belle Light Ball attacker",
         "source_refs": [
-          "Authored SPECIES_PIKACHU_COSPLAY review",
-          "Emerald Champions exact-form equivalence check for SPECIES_PIKACHU_BELLE"
+          "Canonical Cosplay Pikachu Belle Icicle Crash move",
+          "Emerald Champions form-exclusive legality for SPECIES_PIKACHU_BELLE"
         ],
         "species": "SPECIES_PIKACHU_BELLE",
         "suggested_item": "ITEM_LIGHT_BALL"
       },
-      "autobuild_move_count": 23,
+      "autobuild_move_count": 24,
       "display_name": "Pikachu",
-      "legal_move_count": 23,
+      "legal_move_count": 24,
       "move_count": 4,
       "moves": [
         "MOVE_WILD_CHARGE",
         "MOVE_EXTREME_SPEED",
         "MOVE_NUZZLE",
-        "MOVE_CHARM"
+        "MOVE_ICICLE_CRASH"
       ],
       "nature": "NATURE_JOLLY",
       "rejected_candidate_count": 0,
@@ -64376,7 +64375,7 @@
         "battle_style": null,
         "dependency_notes": [
           "The full damage ceiling requires Light Ball, and this restricted cosmetic pool has no Protect.",
-          "Alias acceptance is gated on identical stats, types, abilities, full legal pool, moves, nature, and ability."
+          "Icicle Crash is exposed as the canonical Belle form-exclusive move."
         ],
         "published_item": "ITEM_LIGHT_BALL",
         "published_moves": null,
@@ -64388,8 +64387,8 @@
         "batch_id": "stable-forms-899-1010-v1",
         "file": "docs/battle_set_reviews/100_forms_899_1010.json",
         "source_refs": [
-          "Authored SPECIES_PIKACHU_COSPLAY review",
-          "Emerald Champions exact-form equivalence check for SPECIES_PIKACHU_BELLE"
+          "Canonical Cosplay Pikachu Belle Icicle Crash move",
+          "Emerald Champions form-exclusive legality for SPECIES_PIKACHU_BELLE"
         ]
       },
       "species": "SPECIES_PIKACHU_BELLE",
@@ -64403,50 +64402,49 @@
       ],
       "authored_review": {
         "ability": "ABILITY_STATIC",
-        "alias_of": "SPECIES_PIKACHU_COSPLAY",
         "dependency_notes": [
           "The full damage ceiling requires Light Ball, and this restricted cosmetic pool has no Protect.",
-          "Alias acceptance is gated on identical stats, types, abilities, full legal pool, moves, nature, and ability."
+          "Draining Kiss is exposed as the canonical Pop Star form-exclusive move."
         ],
-        "doubles_rationale": "This cosmetic form is mechanically identical to the reviewed Cosplay form, so the same Light Ball damage, priority, Nuzzle speed control, and Charm package is optimal.",
-        "item_context": "SPECIES_PIKACHU_POP_STAR has exactly the same local battle data and legal move pool as the reviewed Cosplay form; Light Ball remains advisory and is never auto-equipped.",
+        "doubles_rationale": "Naive preserves Wild Charge, Extreme Speed, and Pop Star’s special Draining Kiss, while Nuzzle supplies reliable speed control.",
+        "item_context": "Light Ball supports Pop Star Pikachu’s mixed priority and sustain role but is never granted by the tutor.",
         "moves": [
           "MOVE_WILD_CHARGE",
           "MOVE_EXTREME_SPEED",
           "MOVE_NUZZLE",
-          "MOVE_CHARM"
+          "MOVE_DRAINING_KISS"
         ],
-        "nature": "NATURE_JOLLY",
+        "nature": "NATURE_NAIVE",
         "review_batch": "stable-forms-899-1010-v1",
         "review_file": "docs/battle_set_reviews/100_forms_899_1010.json",
-        "review_notes": "Exact cosmetic alias proven by the review loader.",
+        "review_notes": "Authored independently after restoring the costume’s canonical signature move.",
         "reviewed_by": "Emerald Champions stable-forms doubles audit",
-        "role": "Light Ball priority and speed-control attacker",
+        "role": "Pop Star mixed Light Ball attacker",
         "source_refs": [
-          "Authored SPECIES_PIKACHU_COSPLAY review",
-          "Emerald Champions exact-form equivalence check for SPECIES_PIKACHU_POP_STAR"
+          "Canonical Cosplay Pikachu Pop Star Draining Kiss move",
+          "Emerald Champions form-exclusive legality for SPECIES_PIKACHU_POP_STAR"
         ],
         "species": "SPECIES_PIKACHU_POP_STAR",
         "suggested_item": "ITEM_LIGHT_BALL"
       },
-      "autobuild_move_count": 23,
+      "autobuild_move_count": 24,
       "display_name": "Pikachu",
-      "legal_move_count": 23,
+      "legal_move_count": 24,
       "move_count": 4,
       "moves": [
         "MOVE_WILD_CHARGE",
         "MOVE_EXTREME_SPEED",
         "MOVE_NUZZLE",
-        "MOVE_CHARM"
+        "MOVE_DRAINING_KISS"
       ],
-      "nature": "NATURE_JOLLY",
+      "nature": "NATURE_NAIVE",
       "rejected_candidate_count": 0,
       "review_status": "authored",
       "source_context": {
         "battle_style": null,
         "dependency_notes": [
           "The full damage ceiling requires Light Ball, and this restricted cosmetic pool has no Protect.",
-          "Alias acceptance is gated on identical stats, types, abilities, full legal pool, moves, nature, and ability."
+          "Draining Kiss is exposed as the canonical Pop Star form-exclusive move."
         ],
         "published_item": "ITEM_LIGHT_BALL",
         "published_moves": null,
@@ -64458,8 +64456,8 @@
         "batch_id": "stable-forms-899-1010-v1",
         "file": "docs/battle_set_reviews/100_forms_899_1010.json",
         "source_refs": [
-          "Authored SPECIES_PIKACHU_COSPLAY review",
-          "Emerald Champions exact-form equivalence check for SPECIES_PIKACHU_POP_STAR"
+          "Canonical Cosplay Pikachu Pop Star Draining Kiss move",
+          "Emerald Champions form-exclusive legality for SPECIES_PIKACHU_POP_STAR"
         ]
       },
       "species": "SPECIES_PIKACHU_POP_STAR",
@@ -64473,41 +64471,40 @@
       ],
       "authored_review": {
         "ability": "ABILITY_STATIC",
-        "alias_of": "SPECIES_PIKACHU_COSPLAY",
         "dependency_notes": [
           "The full damage ceiling requires Light Ball, and this restricted cosmetic pool has no Protect.",
-          "Alias acceptance is gated on identical stats, types, abilities, full legal pool, moves, nature, and ability."
+          "Electric Terrain is exposed as the canonical Ph.D. form-exclusive move and also affects both teams."
         ],
-        "doubles_rationale": "This cosmetic form is mechanically identical to the reviewed Cosplay form, so the same Light Ball damage, priority, Nuzzle speed control, and Charm package is optimal.",
-        "item_context": "SPECIES_PIKACHU_PH_D has exactly the same local battle data and legal move pool as the reviewed Cosplay form; Light Ball remains advisory and is never auto-equipped.",
+        "doubles_rationale": "Electric Terrain strengthens Wild Charge and blocks grounded sleep, Extreme Speed adds priority, and Nuzzle controls Speed.",
+        "item_context": "Light Ball supports Ph.D. Pikachu’s priority damage after it establishes Electric Terrain but is never granted by the tutor.",
         "moves": [
           "MOVE_WILD_CHARGE",
           "MOVE_EXTREME_SPEED",
           "MOVE_NUZZLE",
-          "MOVE_CHARM"
+          "MOVE_ELECTRIC_TERRAIN"
         ],
         "nature": "NATURE_JOLLY",
         "review_batch": "stable-forms-899-1010-v1",
         "review_file": "docs/battle_set_reviews/100_forms_899_1010.json",
-        "review_notes": "Exact cosmetic alias proven by the review loader.",
+        "review_notes": "Authored independently after restoring the costume’s canonical signature move.",
         "reviewed_by": "Emerald Champions stable-forms doubles audit",
-        "role": "Light Ball priority and speed-control attacker",
+        "role": "Ph.D. Electric Terrain attacker",
         "source_refs": [
-          "Authored SPECIES_PIKACHU_COSPLAY review",
-          "Emerald Champions exact-form equivalence check for SPECIES_PIKACHU_PH_D"
+          "Canonical Cosplay Pikachu Ph.D. Electric Terrain move",
+          "Emerald Champions form-exclusive legality for SPECIES_PIKACHU_PH_D"
         ],
         "species": "SPECIES_PIKACHU_PH_D",
         "suggested_item": "ITEM_LIGHT_BALL"
       },
-      "autobuild_move_count": 23,
+      "autobuild_move_count": 24,
       "display_name": "Pikachu",
-      "legal_move_count": 23,
+      "legal_move_count": 24,
       "move_count": 4,
       "moves": [
         "MOVE_WILD_CHARGE",
         "MOVE_EXTREME_SPEED",
         "MOVE_NUZZLE",
-        "MOVE_CHARM"
+        "MOVE_ELECTRIC_TERRAIN"
       ],
       "nature": "NATURE_JOLLY",
       "rejected_candidate_count": 0,
@@ -64516,7 +64513,7 @@
         "battle_style": null,
         "dependency_notes": [
           "The full damage ceiling requires Light Ball, and this restricted cosmetic pool has no Protect.",
-          "Alias acceptance is gated on identical stats, types, abilities, full legal pool, moves, nature, and ability."
+          "Electric Terrain is exposed as the canonical Ph.D. form-exclusive move and also affects both teams."
         ],
         "published_item": "ITEM_LIGHT_BALL",
         "published_moves": null,
@@ -64528,8 +64525,8 @@
         "batch_id": "stable-forms-899-1010-v1",
         "file": "docs/battle_set_reviews/100_forms_899_1010.json",
         "source_refs": [
-          "Authored SPECIES_PIKACHU_COSPLAY review",
-          "Emerald Champions exact-form equivalence check for SPECIES_PIKACHU_PH_D"
+          "Canonical Cosplay Pikachu Ph.D. Electric Terrain move",
+          "Emerald Champions form-exclusive legality for SPECIES_PIKACHU_PH_D"
         ]
       },
       "species": "SPECIES_PIKACHU_PH_D",
@@ -64543,41 +64540,40 @@
       ],
       "authored_review": {
         "ability": "ABILITY_STATIC",
-        "alias_of": "SPECIES_PIKACHU_COSPLAY",
         "dependency_notes": [
           "The full damage ceiling requires Light Ball, and this restricted cosmetic pool has no Protect.",
-          "Alias acceptance is gated on identical stats, types, abilities, full legal pool, moves, nature, and ability."
+          "Flying Press is exposed as the canonical Libre form-exclusive move."
         ],
-        "doubles_rationale": "This cosmetic form is mechanically identical to the reviewed Cosplay form, so the same Light Ball damage, priority, Nuzzle speed control, and Charm package is optimal.",
-        "item_context": "SPECIES_PIKACHU_LIBRE has exactly the same local battle data and legal move pool as the reviewed Cosplay form; Light Ball remains advisory and is never auto-equipped.",
+        "doubles_rationale": "Wild Charge and Extreme Speed provide Light Ball damage and priority, Nuzzle controls Speed, and Libre’s Flying Press adds its defining dual-type coverage.",
+        "item_context": "Light Ball supports Libre Pikachu’s priority and Fighting/Flying coverage role but is never granted by the tutor.",
         "moves": [
           "MOVE_WILD_CHARGE",
           "MOVE_EXTREME_SPEED",
           "MOVE_NUZZLE",
-          "MOVE_CHARM"
+          "MOVE_FLYING_PRESS"
         ],
         "nature": "NATURE_JOLLY",
         "review_batch": "stable-forms-899-1010-v1",
         "review_file": "docs/battle_set_reviews/100_forms_899_1010.json",
-        "review_notes": "Exact cosmetic alias proven by the review loader.",
+        "review_notes": "Authored independently after restoring the costume’s canonical signature move.",
         "reviewed_by": "Emerald Champions stable-forms doubles audit",
-        "role": "Light Ball priority and speed-control attacker",
+        "role": "Libre Light Ball attacker",
         "source_refs": [
-          "Authored SPECIES_PIKACHU_COSPLAY review",
-          "Emerald Champions exact-form equivalence check for SPECIES_PIKACHU_LIBRE"
+          "Canonical Cosplay Pikachu Libre Flying Press move",
+          "Emerald Champions form-exclusive legality for SPECIES_PIKACHU_LIBRE"
         ],
         "species": "SPECIES_PIKACHU_LIBRE",
         "suggested_item": "ITEM_LIGHT_BALL"
       },
-      "autobuild_move_count": 23,
+      "autobuild_move_count": 24,
       "display_name": "Pikachu",
-      "legal_move_count": 23,
+      "legal_move_count": 24,
       "move_count": 4,
       "moves": [
         "MOVE_WILD_CHARGE",
         "MOVE_EXTREME_SPEED",
         "MOVE_NUZZLE",
-        "MOVE_CHARM"
+        "MOVE_FLYING_PRESS"
       ],
       "nature": "NATURE_JOLLY",
       "rejected_candidate_count": 0,
@@ -64586,7 +64582,7 @@
         "battle_style": null,
         "dependency_notes": [
           "The full damage ceiling requires Light Ball, and this restricted cosmetic pool has no Protect.",
-          "Alias acceptance is gated on identical stats, types, abilities, full legal pool, moves, nature, and ability."
+          "Flying Press is exposed as the canonical Libre form-exclusive move."
         ],
         "published_item": "ITEM_LIGHT_BALL",
         "published_moves": null,
@@ -64598,8 +64594,8 @@
         "batch_id": "stable-forms-899-1010-v1",
         "file": "docs/battle_set_reviews/100_forms_899_1010.json",
         "source_refs": [
-          "Authored SPECIES_PIKACHU_COSPLAY review",
-          "Emerald Champions exact-form equivalence check for SPECIES_PIKACHU_LIBRE"
+          "Canonical Cosplay Pikachu Libre Flying Press move",
+          "Emerald Champions form-exclusive legality for SPECIES_PIKACHU_LIBRE"
         ]
       },
       "species": "SPECIES_PIKACHU_LIBRE",
@@ -68329,30 +68325,29 @@
       ],
       "authored_review": {
         "ability": "ABILITY_DOWNLOAD",
-        "alias_of": "SPECIES_GENESECT",
         "dependency_notes": [
-          "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+          "Douse Drive must be equipped manually to maintain this form and make Techno Blast Water type; the tutor changes only moves, nature, and ability."
         ],
-        "doubles_rationale": "Genesect combines Download with Bug Buzz, Iron Head, Ice Beam, Protect; every slot advances its genesect source-backed doubles set role in doubles.",
-        "item_context": "ITEM_LIFE_ORB supports the genesect source-backed doubles set role but is never granted by the tutor.",
+        "doubles_rationale": "Download supplies immediate offense while Douse Drive Techno Blast adds Water coverage beside Bug Buzz, Iron Head, and Protect.",
+        "item_context": "ITEM_DOUSE_DRIVE is required to maintain Douse Drive form and set Techno Blast’s type; it is never granted by the tutor.",
         "moves": [
           "MOVE_BUG_BUZZ",
           "MOVE_IRON_HEAD",
-          "MOVE_ICE_BEAM",
+          "MOVE_TECHNO_BLAST",
           "MOVE_PROTECT"
         ],
         "nature": "NATURE_NAIVE",
         "review_batch": "stable-forms-1011-1120-v1",
         "review_file": "docs/battle_set_reviews/110_forms_1011_1120.json",
-        "review_notes": "Alias proof passed against SPECIES_GENESECT: exact stats, typing, ability slots, legal pool, moves, nature, and ability are identical.",
+        "review_notes": "Authored independently because the held Drive is both the form lock and Techno Blast type source.",
         "reviewed_by": "Emerald Champions authored stable-form doubles audit",
-        "role": "Genesect source-backed doubles set",
+        "role": "Douse Drive Techno Blast attacker",
         "source_refs": [
-          "Smogon Gen 8 2v2doubles Genesect set: Mixed Attacker",
-          "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_GENESECT"
+          "Smogon Genesect Techno Blast coverage sets",
+          "Emerald Champions Genesect FORM_ITEM_HOLD Douse Drive contract and exact legal pool"
         ],
         "species": "SPECIES_GENESECT_DOUSE_DRIVE",
-        "suggested_item": "ITEM_LIFE_ORB"
+        "suggested_item": "ITEM_DOUSE_DRIVE"
       },
       "autobuild_move_count": 76,
       "display_name": "Genesect",
@@ -68361,7 +68356,7 @@
       "moves": [
         "MOVE_BUG_BUZZ",
         "MOVE_IRON_HEAD",
-        "MOVE_ICE_BEAM",
+        "MOVE_TECHNO_BLAST",
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_NAIVE",
@@ -68370,9 +68365,9 @@
       "source_context": {
         "battle_style": null,
         "dependency_notes": [
-          "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+          "Douse Drive must be equipped manually to maintain this form and make Techno Blast Water type; the tutor changes only moves, nature, and ability."
         ],
-        "published_item": "ITEM_LIFE_ORB",
+        "published_item": "ITEM_DOUSE_DRIVE",
         "published_moves": null,
         "scaffold_class": null,
         "source_direct": null
@@ -68382,8 +68377,8 @@
         "batch_id": "stable-forms-1011-1120-v1",
         "file": "docs/battle_set_reviews/110_forms_1011_1120.json",
         "source_refs": [
-          "Smogon Gen 8 2v2doubles Genesect set: Mixed Attacker",
-          "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_GENESECT"
+          "Smogon Genesect Techno Blast coverage sets",
+          "Emerald Champions Genesect FORM_ITEM_HOLD Douse Drive contract and exact legal pool"
         ]
       },
       "species": "SPECIES_GENESECT_DOUSE_DRIVE",
@@ -68397,30 +68392,29 @@
       ],
       "authored_review": {
         "ability": "ABILITY_DOWNLOAD",
-        "alias_of": "SPECIES_GENESECT",
         "dependency_notes": [
-          "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+          "Shock Drive must be equipped manually to maintain this form and make Techno Blast Electric type; the tutor changes only moves, nature, and ability."
         ],
-        "doubles_rationale": "Genesect combines Download with Bug Buzz, Iron Head, Ice Beam, Protect; every slot advances its genesect source-backed doubles set role in doubles.",
-        "item_context": "ITEM_LIFE_ORB supports the genesect source-backed doubles set role but is never granted by the tutor.",
+        "doubles_rationale": "Download supplies immediate offense while Shock Drive Techno Blast adds Electric coverage beside Bug Buzz, Iron Head, and Protect.",
+        "item_context": "ITEM_SHOCK_DRIVE is required to maintain Shock Drive form and set Techno Blast’s type; it is never granted by the tutor.",
         "moves": [
           "MOVE_BUG_BUZZ",
           "MOVE_IRON_HEAD",
-          "MOVE_ICE_BEAM",
+          "MOVE_TECHNO_BLAST",
           "MOVE_PROTECT"
         ],
         "nature": "NATURE_NAIVE",
         "review_batch": "stable-forms-1011-1120-v1",
         "review_file": "docs/battle_set_reviews/110_forms_1011_1120.json",
-        "review_notes": "Alias proof passed against SPECIES_GENESECT: exact stats, typing, ability slots, legal pool, moves, nature, and ability are identical.",
+        "review_notes": "Authored independently because the held Drive is both the form lock and Techno Blast type source.",
         "reviewed_by": "Emerald Champions authored stable-form doubles audit",
-        "role": "Genesect source-backed doubles set",
+        "role": "Shock Drive Techno Blast attacker",
         "source_refs": [
-          "Smogon Gen 8 2v2doubles Genesect set: Mixed Attacker",
-          "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_GENESECT"
+          "Smogon Genesect Techno Blast coverage sets",
+          "Emerald Champions Genesect FORM_ITEM_HOLD Shock Drive contract and exact legal pool"
         ],
         "species": "SPECIES_GENESECT_SHOCK_DRIVE",
-        "suggested_item": "ITEM_LIFE_ORB"
+        "suggested_item": "ITEM_SHOCK_DRIVE"
       },
       "autobuild_move_count": 76,
       "display_name": "Genesect",
@@ -68429,7 +68423,7 @@
       "moves": [
         "MOVE_BUG_BUZZ",
         "MOVE_IRON_HEAD",
-        "MOVE_ICE_BEAM",
+        "MOVE_TECHNO_BLAST",
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_NAIVE",
@@ -68438,9 +68432,9 @@
       "source_context": {
         "battle_style": null,
         "dependency_notes": [
-          "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+          "Shock Drive must be equipped manually to maintain this form and make Techno Blast Electric type; the tutor changes only moves, nature, and ability."
         ],
-        "published_item": "ITEM_LIFE_ORB",
+        "published_item": "ITEM_SHOCK_DRIVE",
         "published_moves": null,
         "scaffold_class": null,
         "source_direct": null
@@ -68450,8 +68444,8 @@
         "batch_id": "stable-forms-1011-1120-v1",
         "file": "docs/battle_set_reviews/110_forms_1011_1120.json",
         "source_refs": [
-          "Smogon Gen 8 2v2doubles Genesect set: Mixed Attacker",
-          "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_GENESECT"
+          "Smogon Genesect Techno Blast coverage sets",
+          "Emerald Champions Genesect FORM_ITEM_HOLD Shock Drive contract and exact legal pool"
         ]
       },
       "species": "SPECIES_GENESECT_SHOCK_DRIVE",
@@ -68465,30 +68459,29 @@
       ],
       "authored_review": {
         "ability": "ABILITY_DOWNLOAD",
-        "alias_of": "SPECIES_GENESECT",
         "dependency_notes": [
-          "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+          "Burn Drive must be equipped manually to maintain this form and make Techno Blast Fire type; the tutor changes only moves, nature, and ability."
         ],
-        "doubles_rationale": "Genesect combines Download with Bug Buzz, Iron Head, Ice Beam, Protect; every slot advances its genesect source-backed doubles set role in doubles.",
-        "item_context": "ITEM_LIFE_ORB supports the genesect source-backed doubles set role but is never granted by the tutor.",
+        "doubles_rationale": "Download supplies immediate offense while Burn Drive Techno Blast adds Fire coverage beside Bug Buzz, Iron Head, and Protect.",
+        "item_context": "ITEM_BURN_DRIVE is required to maintain Burn Drive form and set Techno Blast’s type; it is never granted by the tutor.",
         "moves": [
           "MOVE_BUG_BUZZ",
           "MOVE_IRON_HEAD",
-          "MOVE_ICE_BEAM",
+          "MOVE_TECHNO_BLAST",
           "MOVE_PROTECT"
         ],
         "nature": "NATURE_NAIVE",
         "review_batch": "stable-forms-1011-1120-v1",
         "review_file": "docs/battle_set_reviews/110_forms_1011_1120.json",
-        "review_notes": "Alias proof passed against SPECIES_GENESECT: exact stats, typing, ability slots, legal pool, moves, nature, and ability are identical.",
+        "review_notes": "Authored independently because the held Drive is both the form lock and Techno Blast type source.",
         "reviewed_by": "Emerald Champions authored stable-form doubles audit",
-        "role": "Genesect source-backed doubles set",
+        "role": "Burn Drive Techno Blast attacker",
         "source_refs": [
-          "Smogon Gen 8 2v2doubles Genesect set: Mixed Attacker",
-          "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_GENESECT"
+          "Smogon Genesect Techno Blast coverage sets",
+          "Emerald Champions Genesect FORM_ITEM_HOLD Burn Drive contract and exact legal pool"
         ],
         "species": "SPECIES_GENESECT_BURN_DRIVE",
-        "suggested_item": "ITEM_LIFE_ORB"
+        "suggested_item": "ITEM_BURN_DRIVE"
       },
       "autobuild_move_count": 76,
       "display_name": "Genesect",
@@ -68497,7 +68490,7 @@
       "moves": [
         "MOVE_BUG_BUZZ",
         "MOVE_IRON_HEAD",
-        "MOVE_ICE_BEAM",
+        "MOVE_TECHNO_BLAST",
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_NAIVE",
@@ -68506,9 +68499,9 @@
       "source_context": {
         "battle_style": null,
         "dependency_notes": [
-          "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+          "Burn Drive must be equipped manually to maintain this form and make Techno Blast Fire type; the tutor changes only moves, nature, and ability."
         ],
-        "published_item": "ITEM_LIFE_ORB",
+        "published_item": "ITEM_BURN_DRIVE",
         "published_moves": null,
         "scaffold_class": null,
         "source_direct": null
@@ -68518,8 +68511,8 @@
         "batch_id": "stable-forms-1011-1120-v1",
         "file": "docs/battle_set_reviews/110_forms_1011_1120.json",
         "source_refs": [
-          "Smogon Gen 8 2v2doubles Genesect set: Mixed Attacker",
-          "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_GENESECT"
+          "Smogon Genesect Techno Blast coverage sets",
+          "Emerald Champions Genesect FORM_ITEM_HOLD Burn Drive contract and exact legal pool"
         ]
       },
       "species": "SPECIES_GENESECT_BURN_DRIVE",
@@ -68533,30 +68526,29 @@
       ],
       "authored_review": {
         "ability": "ABILITY_DOWNLOAD",
-        "alias_of": "SPECIES_GENESECT",
         "dependency_notes": [
-          "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+          "Chill Drive must be equipped manually to maintain this form and make Techno Blast Ice type; the tutor changes only moves, nature, and ability."
         ],
-        "doubles_rationale": "Genesect combines Download with Bug Buzz, Iron Head, Ice Beam, Protect; every slot advances its genesect source-backed doubles set role in doubles.",
-        "item_context": "ITEM_LIFE_ORB supports the genesect source-backed doubles set role but is never granted by the tutor.",
+        "doubles_rationale": "Download supplies immediate offense while Chill Drive Techno Blast adds Ice coverage beside Bug Buzz, Iron Head, and Protect.",
+        "item_context": "ITEM_CHILL_DRIVE is required to maintain Chill Drive form and set Techno Blast’s type; it is never granted by the tutor.",
         "moves": [
           "MOVE_BUG_BUZZ",
           "MOVE_IRON_HEAD",
-          "MOVE_ICE_BEAM",
+          "MOVE_TECHNO_BLAST",
           "MOVE_PROTECT"
         ],
         "nature": "NATURE_NAIVE",
         "review_batch": "stable-forms-1011-1120-v1",
         "review_file": "docs/battle_set_reviews/110_forms_1011_1120.json",
-        "review_notes": "Alias proof passed against SPECIES_GENESECT: exact stats, typing, ability slots, legal pool, moves, nature, and ability are identical.",
+        "review_notes": "Authored independently because the held Drive is both the form lock and Techno Blast type source.",
         "reviewed_by": "Emerald Champions authored stable-form doubles audit",
-        "role": "Genesect source-backed doubles set",
+        "role": "Chill Drive Techno Blast attacker",
         "source_refs": [
-          "Smogon Gen 8 2v2doubles Genesect set: Mixed Attacker",
-          "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_GENESECT"
+          "Smogon Genesect Techno Blast coverage sets",
+          "Emerald Champions Genesect FORM_ITEM_HOLD Chill Drive contract and exact legal pool"
         ],
         "species": "SPECIES_GENESECT_CHILL_DRIVE",
-        "suggested_item": "ITEM_LIFE_ORB"
+        "suggested_item": "ITEM_CHILL_DRIVE"
       },
       "autobuild_move_count": 76,
       "display_name": "Genesect",
@@ -68565,7 +68557,7 @@
       "moves": [
         "MOVE_BUG_BUZZ",
         "MOVE_IRON_HEAD",
-        "MOVE_ICE_BEAM",
+        "MOVE_TECHNO_BLAST",
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_NAIVE",
@@ -68574,9 +68566,9 @@
       "source_context": {
         "battle_style": null,
         "dependency_notes": [
-          "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
+          "Chill Drive must be equipped manually to maintain this form and make Techno Blast Ice type; the tutor changes only moves, nature, and ability."
         ],
-        "published_item": "ITEM_LIFE_ORB",
+        "published_item": "ITEM_CHILL_DRIVE",
         "published_moves": null,
         "scaffold_class": null,
         "source_direct": null
@@ -68586,8 +68578,8 @@
         "batch_id": "stable-forms-1011-1120-v1",
         "file": "docs/battle_set_reviews/110_forms_1011_1120.json",
         "source_refs": [
-          "Smogon Gen 8 2v2doubles Genesect set: Mixed Attacker",
-          "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_GENESECT"
+          "Smogon Genesect Techno Blast coverage sets",
+          "Emerald Champions Genesect FORM_ITEM_HOLD Chill Drive contract and exact legal pool"
         ]
       },
       "species": "SPECIES_GENESECT_CHILL_DRIVE",
@@ -68604,18 +68596,18 @@
         "dependency_notes": [
           "ITEM_LIFE_ORB is advisory and must be obtained and equipped separately; the tutor changes only moves, nature, and ability."
         ],
-        "doubles_rationale": "Greninja combines Battle Bond with Hydro Pump, Dark Pulse, Ice Beam, Protect; every slot advances its battle bond special attacker role in doubles.",
+        "doubles_rationale": "Hydro Pump and Dark Pulse provide immediate STAB pressure, while Water Shuriken becomes fixed three-hit priority after Battle Bond creates Ash-Greninja and Protect preserves positioning.",
         "item_context": "ITEM_LIFE_ORB supports the battle bond special attacker role but is never granted by the tutor.",
         "moves": [
           "MOVE_HYDRO_PUMP",
           "MOVE_DARK_PULSE",
-          "MOVE_ICE_BEAM",
+          "MOVE_WATER_SHURIKEN",
           "MOVE_PROTECT"
         ],
         "nature": "NATURE_TIMID",
         "review_batch": "stable-forms-1011-1120-v1",
         "review_file": "docs/battle_set_reviews/110_forms_1011_1120.json",
-        "review_notes": "Restored Water STAB and removed mixed Low Kick. Exact-form legality, stats, typing, ability, nature, and item context were checked.",
+        "review_notes": "Restored Battle Bond’s explicit Water Shuriken payoff and retained a fully special Timid set.",
         "reviewed_by": "Emerald Champions authored stable-form doubles audit",
         "role": "Battle Bond special attacker",
         "source_refs": [
@@ -68632,7 +68624,7 @@
       "moves": [
         "MOVE_HYDRO_PUMP",
         "MOVE_DARK_PULSE",
-        "MOVE_ICE_BEAM",
+        "MOVE_WATER_SHURIKEN",
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_TIMID",
@@ -71982,20 +71974,19 @@
       "species_id": 1137
     },
     {
-      "ability": "ABILITY_AURA_BREAK",
+      "ability": "ABILITY_POWER_CONSTRUCT",
       "ability_slot": 0,
       "adaptations": [
         "nature selected deterministically from the retained local role"
       ],
       "authored_review": {
-        "ability": "ABILITY_AURA_BREAK",
-        "alias_of": "SPECIES_ZYGARDE_10",
+        "ability": "ABILITY_POWER_CONSTRUCT",
         "dependency_notes": [
           "This form’s local pool has no Protect, so it relies on natural Speed and Glare for positioning.",
-          "Alias acceptance is gated on identical stats, types, ability slots, full legal move pool, moves, nature, and ability."
+          "Power Construct activates only after its HP falls to the native threshold."
         ],
-        "doubles_rationale": "SPECIES_ZYGARDE_10_POWER_CONSTRUCT is mechanically identical to SPECIES_ZYGARDE_10 in this engine, so the same authored doubles package is retained exactly.",
-        "item_context": "The engine currently gives this slot the exact stats, typing, Aura Break slots, and legal pool of reviewed Zygarde-10; the alias records that measurable behavior.",
+        "doubles_rationale": "Power Construct gives the fast 10% form a real late-turn transformation payoff while Land’s Wrath, Glare, Coil, and Crunch provide spread pressure, speed control, setup, and coverage.",
+        "item_context": "ITEM_SITRUS_BERRY helps the 10% form cross the Power Construct threshold; the battle-set builder never grants or equips it.",
         "moves": [
           "MOVE_LANDS_WRATH",
           "MOVE_CRUNCH",
@@ -72005,12 +71996,12 @@
         "nature": "NATURE_JOLLY",
         "review_batch": "stable-forms-1121-1225-v1",
         "review_file": "docs/battle_set_reviews/120_forms_1121_1225.json",
-        "review_notes": "Exact cosmetic alias proven by the review loader.",
+        "review_notes": "Authored independently after correcting the form’s ability slots from Aura Break to Power Construct.",
         "reviewed_by": "Emerald Champions stable-forms doubles audit",
-        "role": "Fast Glare and Coil spread attacker",
+        "role": "Power Construct fast Coil attacker",
         "source_refs": [
-          "Authored SPECIES_ZYGARDE_10 review",
-          "Emerald Champions exact-form equivalence check for SPECIES_ZYGARDE_10_POWER_CONSTRUCT"
+          "Smogon Zygarde Power Construct Coil roles adapted to the local 10% form",
+          "Emerald Champions exact local legality, stats, and Power Construct ability for SPECIES_ZYGARDE_10_POWER_CONSTRUCT"
         ],
         "species": "SPECIES_ZYGARDE_10_POWER_CONSTRUCT",
         "suggested_item": "ITEM_SITRUS_BERRY"
@@ -72032,7 +72023,7 @@
         "battle_style": null,
         "dependency_notes": [
           "This form’s local pool has no Protect, so it relies on natural Speed and Glare for positioning.",
-          "Alias acceptance is gated on identical stats, types, ability slots, full legal move pool, moves, nature, and ability."
+          "Power Construct activates only after its HP falls to the native threshold."
         ],
         "published_item": "ITEM_SITRUS_BERRY",
         "published_moves": null,
@@ -72044,8 +72035,8 @@
         "batch_id": "stable-forms-1121-1225-v1",
         "file": "docs/battle_set_reviews/120_forms_1121_1225.json",
         "source_refs": [
-          "Authored SPECIES_ZYGARDE_10 review",
-          "Emerald Champions exact-form equivalence check for SPECIES_ZYGARDE_10_POWER_CONSTRUCT"
+          "Smogon Zygarde Power Construct Coil roles adapted to the local 10% form",
+          "Emerald Champions exact local legality, stats, and Power Construct ability for SPECIES_ZYGARDE_10_POWER_CONSTRUCT"
         ]
       },
       "species": "SPECIES_ZYGARDE_10_POWER_CONSTRUCT",
@@ -74204,13 +74195,13 @@
       "authored_review": {
         "ability": "ABILITY_PRISM_ARMOR",
         "dependency_notes": [
-          "Earthquake can hit the ally, and this form’s local pool does not expose Sunsteel Strike.",
+          "Earthquake can hit the ally, so pair it with immunity, Telepathy, or Protect.",
           "The suggested item is advisory only and must be obtained and equipped separately."
         ],
-        "doubles_rationale": "Dusk Mane sets Trick Room, attacks from 157 Attack with Steel STAB and spread Earthquake, and Prism Armor plus Protect create Weakness Policy opportunities.",
+        "doubles_rationale": "Dusk Mane sets Trick Room, attacks from 157 Attack with ability-ignoring Sunsteel Strike and spread Earthquake, and uses Prism Armor plus Protect to create Weakness Policy opportunities.",
         "item_context": "ITEM_WEAKNESS_POLICY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
         "moves": [
-          "MOVE_IRON_HEAD",
+          "MOVE_SUNSTEEL_STRIKE",
           "MOVE_EARTHQUAKE",
           "MOVE_TRICK_ROOM",
           "MOVE_PROTECT"
@@ -74218,22 +74209,22 @@
         "nature": "NATURE_BRAVE",
         "review_batch": "stable-forms-1121-1225-v1",
         "review_file": "docs/battle_set_reviews/120_forms_1121_1225.json",
-        "review_notes": "Completed the direct Smogon Trick Room shell with the strongest legal local Steel attack.",
+        "review_notes": "Completed the direct Smogon Trick Room shell with Dusk Mane’s canonical signature move.",
         "reviewed_by": "Emerald Champions stable-forms doubles audit",
         "role": "Prism Armor Trick Room physical attacker",
         "source_refs": [
-          "Smogon Gen 8 Battle Stadium Doubles Necrozma-Dusk-Mane Offensive Trick Room adapted to local signature availability",
-          "Emerald Champions exact local legality, stats, and abilities for SPECIES_NECROZMA_DUSK_MANE"
+          "Smogon Gen 8 Battle Stadium Doubles Necrozma-Dusk-Mane Offensive Trick Room",
+          "Emerald Champions canonical Dusk Mane Sunsteel Strike form-exclusive legality"
         ],
         "species": "SPECIES_NECROZMA_DUSK_MANE",
         "suggested_item": "ITEM_WEAKNESS_POLICY"
       },
-      "autobuild_move_count": 78,
+      "autobuild_move_count": 79,
       "display_name": "Necrozma",
-      "legal_move_count": 81,
+      "legal_move_count": 82,
       "move_count": 4,
       "moves": [
-        "MOVE_IRON_HEAD",
+        "MOVE_SUNSTEEL_STRIKE",
         "MOVE_EARTHQUAKE",
         "MOVE_TRICK_ROOM",
         "MOVE_PROTECT"
@@ -74244,7 +74235,7 @@
       "source_context": {
         "battle_style": null,
         "dependency_notes": [
-          "Earthquake can hit the ally, and this form’s local pool does not expose Sunsteel Strike.",
+          "Earthquake can hit the ally, so pair it with immunity, Telepathy, or Protect.",
           "The suggested item is advisory only and must be obtained and equipped separately."
         ],
         "published_item": "ITEM_WEAKNESS_POLICY",
@@ -74257,8 +74248,8 @@
         "batch_id": "stable-forms-1121-1225-v1",
         "file": "docs/battle_set_reviews/120_forms_1121_1225.json",
         "source_refs": [
-          "Smogon Gen 8 Battle Stadium Doubles Necrozma-Dusk-Mane Offensive Trick Room adapted to local signature availability",
-          "Emerald Champions exact local legality, stats, and abilities for SPECIES_NECROZMA_DUSK_MANE"
+          "Smogon Gen 8 Battle Stadium Doubles Necrozma-Dusk-Mane Offensive Trick Room",
+          "Emerald Champions canonical Dusk Mane Sunsteel Strike form-exclusive legality"
         ]
       },
       "species": "SPECIES_NECROZMA_DUSK_MANE",
@@ -74273,13 +74264,13 @@
       "authored_review": {
         "ability": "ABILITY_PRISM_ARMOR",
         "dependency_notes": [
-          "Expanding Force reaches spread power only in Psychic Terrain, and the local pool lacks Moongeist Beam.",
+          "Power Herb must be equipped manually for immediate Meteor Beam; without it the move takes a charge turn.",
           "The suggested item is advisory only and must be obtained and equipped separately."
         ],
-        "doubles_rationale": "Power Herb Meteor Beam boosts Special Attack, Expanding Force exploits Psychic Terrain, Earth Power covers Steel targets, and Protect maintains positioning.",
+        "doubles_rationale": "Power Herb Meteor Beam boosts Special Attack, Moongeist Beam supplies ability-ignoring Ghost STAB, Earth Power covers Steel targets, and Protect maintains positioning.",
         "item_context": "ITEM_POWER_HERB supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
         "moves": [
-          "MOVE_EXPANDING_FORCE",
+          "MOVE_MOONGEIST_BEAM",
           "MOVE_METEOR_BEAM",
           "MOVE_EARTH_POWER",
           "MOVE_PROTECT"
@@ -74287,22 +74278,22 @@
         "nature": "NATURE_MODEST",
         "review_batch": "stable-forms-1121-1225-v1",
         "review_file": "docs/battle_set_reviews/120_forms_1121_1225.json",
-        "review_notes": "Used the best coherent special set available in the exact local form pool.",
+        "review_notes": "Restored Dawn Wings’ canonical signature move and removed Psychic Terrain dependence.",
         "reviewed_by": "Emerald Champions stable-forms doubles audit",
         "role": "Power Herb special setup attacker",
         "source_refs": [
-          "Smogon Necrozma-Dawn-Wings doubles roles adapted to exact local signature availability",
-          "Emerald Champions exact local legality, stats, and abilities for SPECIES_NECROZMA_DAWN_WINGS"
+          "Smogon Necrozma-Dawn-Wings doubles roles",
+          "Emerald Champions canonical Dawn Wings Moongeist Beam form-exclusive legality"
         ],
         "species": "SPECIES_NECROZMA_DAWN_WINGS",
         "suggested_item": "ITEM_POWER_HERB"
       },
-      "autobuild_move_count": 78,
+      "autobuild_move_count": 79,
       "display_name": "Necrozma",
-      "legal_move_count": 81,
+      "legal_move_count": 82,
       "move_count": 4,
       "moves": [
-        "MOVE_EXPANDING_FORCE",
+        "MOVE_MOONGEIST_BEAM",
         "MOVE_METEOR_BEAM",
         "MOVE_EARTH_POWER",
         "MOVE_PROTECT"
@@ -74313,7 +74304,7 @@
       "source_context": {
         "battle_style": null,
         "dependency_notes": [
-          "Expanding Force reaches spread power only in Psychic Terrain, and the local pool lacks Moongeist Beam.",
+          "Power Herb must be equipped manually for immediate Meteor Beam; without it the move takes a charge turn.",
           "The suggested item is advisory only and must be obtained and equipped separately."
         ],
         "published_item": "ITEM_POWER_HERB",
@@ -74326,8 +74317,8 @@
         "batch_id": "stable-forms-1121-1225-v1",
         "file": "docs/battle_set_reviews/120_forms_1121_1225.json",
         "source_refs": [
-          "Smogon Necrozma-Dawn-Wings doubles roles adapted to exact local signature availability",
-          "Emerald Champions exact local legality, stats, and abilities for SPECIES_NECROZMA_DAWN_WINGS"
+          "Smogon Necrozma-Dawn-Wings doubles roles",
+          "Emerald Champions canonical Dawn Wings Moongeist Beam form-exclusive legality"
         ]
       },
       "species": "SPECIES_NECROZMA_DAWN_WINGS",
@@ -75247,13 +75238,13 @@
       "authored_review": {
         "ability": "ABILITY_INTREPID_SWORD",
         "dependency_notes": [
-          "Rusted Sword is required to maintain Crowned form and the engine’s transformed Steel attack behavior.",
+          "Rusted Sword is required to maintain Crowned form and must be equipped manually.",
           "The suggested item is advisory only and must be obtained and equipped separately."
         ],
-        "doubles_rationale": "Intrepid Sword creates immediate pressure, Crowned Iron Head supplies Steel STAB, Sacred Sword ignores defensive boosts, and Substitute plus Protect punish passive turns.",
+        "doubles_rationale": "Intrepid Sword creates immediate pressure, Behemoth Blade supplies Crowned Steel STAB, Sacred Sword ignores defensive boosts, and Substitute plus Protect punish passive turns.",
         "item_context": "ITEM_RUSTED_SWORD supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
         "moves": [
-          "MOVE_IRON_HEAD",
+          "MOVE_BEHEMOTH_BLADE",
           "MOVE_SACRED_SWORD",
           "MOVE_SUBSTITUTE",
           "MOVE_PROTECT"
@@ -75261,7 +75252,7 @@
         "nature": "NATURE_ADAMANT",
         "review_batch": "stable-forms-1121-1225-v1",
         "review_file": "docs/battle_set_reviews/120_forms_1121_1225.json",
-        "review_notes": "Accepted the direct restricted-doubles offensive set and restored its local Steel move.",
+        "review_notes": "Accepted the direct restricted-doubles offensive set and restored Behemoth Blade explicitly.",
         "reviewed_by": "Emerald Champions stable-forms doubles audit",
         "role": "Intrepid Sword fast physical attacker",
         "source_refs": [
@@ -75271,12 +75262,12 @@
         "species": "SPECIES_ZACIAN_CROWNED_SWORD",
         "suggested_item": "ITEM_RUSTED_SWORD"
       },
-      "autobuild_move_count": 52,
+      "autobuild_move_count": 53,
       "display_name": "Zacian",
-      "legal_move_count": 55,
+      "legal_move_count": 56,
       "move_count": 4,
       "moves": [
-        "MOVE_IRON_HEAD",
+        "MOVE_BEHEMOTH_BLADE",
         "MOVE_SACRED_SWORD",
         "MOVE_SUBSTITUTE",
         "MOVE_PROTECT"
@@ -75287,7 +75278,7 @@
       "source_context": {
         "battle_style": null,
         "dependency_notes": [
-          "Rusted Sword is required to maintain Crowned form and the engine’s transformed Steel attack behavior.",
+          "Rusted Sword is required to maintain Crowned form and must be equipped manually.",
           "The suggested item is advisory only and must be obtained and equipped separately."
         ],
         "published_item": "ITEM_RUSTED_SWORD",
@@ -75319,18 +75310,18 @@
           "Rusted Shield is required to maintain Crowned form; Close Combat temporarily reduces the defenses this role values.",
           "The suggested item is advisory only and must be obtained and equipped separately."
         ],
-        "doubles_rationale": "Dauntless Shield supports repeated positioning, dual STAB prevents passivity, Wide Guard blocks spread attacks, and Protect manages focus fire.",
+        "doubles_rationale": "Dauntless Shield supports repeated positioning, Behemoth Bash and Close Combat provide dual STAB, Wide Guard blocks spread attacks, and Protect manages focus fire.",
         "item_context": "ITEM_RUSTED_SHIELD supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
         "moves": [
           "MOVE_CLOSE_COMBAT",
-          "MOVE_IRON_HEAD",
+          "MOVE_BEHEMOTH_BASH",
           "MOVE_WIDE_GUARD",
           "MOVE_PROTECT"
         ],
         "nature": "NATURE_IMPISH",
         "review_batch": "stable-forms-1121-1225-v1",
         "review_file": "docs/battle_set_reviews/120_forms_1121_1225.json",
-        "review_notes": "Completed the direct VGC Wide Guard shell with its strongest legal dual STAB.",
+        "review_notes": "Completed the direct VGC Wide Guard shell with Behemoth Bash restored explicitly.",
         "reviewed_by": "Emerald Champions stable-forms doubles audit",
         "role": "Dauntless Shield Wide Guard tank",
         "source_refs": [
@@ -75340,13 +75331,13 @@
         "species": "SPECIES_ZAMAZENTA_CROWNED_SHIELD",
         "suggested_item": "ITEM_RUSTED_SHIELD"
       },
-      "autobuild_move_count": 69,
+      "autobuild_move_count": 70,
       "display_name": "Zamazenta",
-      "legal_move_count": 72,
+      "legal_move_count": 73,
       "move_count": 4,
       "moves": [
         "MOVE_CLOSE_COMBAT",
-        "MOVE_IRON_HEAD",
+        "MOVE_BEHEMOTH_BASH",
         "MOVE_WIDE_GUARD",
         "MOVE_PROTECT"
       ],
@@ -78438,7 +78429,7 @@
     {
       "batch_id": "johto-national-dex-152-251-v1",
       "path": "docs/battle_set_reviews/030_johto.json",
-      "sha256": "d3cb6d99be199cee1e92c8cc9e58a919520cb3f4191ea45ecb8d8cf362825b3d"
+      "sha256": "34cf4d1e299432981a29b03bcb35346dd6464776c82c14f58f83a0c36f3374ce"
     },
     {
       "batch_id": "hoenn-national-dex-252-386-v1",
@@ -78448,7 +78439,7 @@
     {
       "batch_id": "sinnoh-387-493-v1",
       "path": "docs/battle_set_reviews/050_sinnoh.json",
-      "sha256": "6f2c4930541029e0e9bb5541a47fee55e1944b7740f1816d5134fd0d26a21d0f"
+      "sha256": "c2b25ee02e44a044c0f9aeab3b5722c6924b3baea857f27115b79920c6d5578d"
     },
     {
       "batch_id": "unova-national-dex-494-649-v1",
@@ -78468,7 +78459,7 @@
     {
       "batch_id": "galar-810-898-v1",
       "path": "docs/battle_set_reviews/085_galar.json",
-      "sha256": "3b19f6e21ab9ae21608abf2b2f992c43103c265aae26db9a87d0e463325b6a6f"
+      "sha256": "677d830803cc21b3bd5eb4126029d7daac4d6cd5a6c93eb0cd08ca9cd4a26ab2"
     },
     {
       "batch_id": "curated-gen9-v1",
@@ -78478,17 +78469,17 @@
     {
       "batch_id": "stable-forms-899-1010-v1",
       "path": "docs/battle_set_reviews/100_forms_899_1010.json",
-      "sha256": "7b458455b6c755eca0fdfaab935f5a5cb291ba3ee6eb78acacd4eabf25d95f6d"
+      "sha256": "fd74cd9904770ade76af992aeb4fa4579a11010dde7377600552b5a71f630370"
     },
     {
       "batch_id": "stable-forms-1011-1120-v1",
       "path": "docs/battle_set_reviews/110_forms_1011_1120.json",
-      "sha256": "70a7edcfed180c24d658882b54d9c67932155f2fed70f5575d5d691438cf2714"
+      "sha256": "5cbe902cc5d0f64316456f07e8a6bbad72bc043f3e8510fa2e1f74bd305c3d92"
     },
     {
       "batch_id": "stable-forms-1121-1225-v1",
       "path": "docs/battle_set_reviews/120_forms_1121_1225.json",
-      "sha256": "6c0290043a0088b404d70d8fb58f0406dde08c1ba2244ae68e8aacb33268be75"
+      "sha256": "971c3eb8d110c4b30453aa53ba962c20d836a72c3cdae4488e53b5ff4565e90a"
     }
   ],
   "scaffold_class_counts": {},

@@ -18,14 +18,16 @@ MIN_ORDINARY_WILD_LEGEND_CATCH_RATE = 45
 
 # These legacy legendary and mythical species remain in ordinary random wild
 # tables.  Match the curated Gen 9 access policy: finding a team-building tool
-# should not be followed by a catch-rate-3 ball grind.  Darkrai and Marshadow
-# are deliberately absent from ordinary wild tables so their League uses stay
-# protected; dedicated postgame access can retain their native catch rates.
+# should not be followed by a catch-rate-3 ball grind.  Volcanion replaces the
+# old Magma Hideout Heatran slots: Heatran's Scorched Slab event is now its sole
+# acquisition identity.  Darkrai and Marshadow are deliberately absent from
+# ordinary wild tables so their League uses stay protected; dedicated postgame
+# access can retain their native catch rates.
 ORDINARY_WILD_LEGENDS = (
     "SPECIES_KUBFU",
     "SPECIES_TYPE_NULL",
     "SPECIES_SUICUNE",
-    "SPECIES_HEATRAN",
+    "SPECIES_VOLCANION",
     "SPECIES_MANAPHY",
     "SPECIES_TERRAKION",
     "SPECIES_KELDEO",
@@ -43,7 +45,7 @@ WITHHELD_ORDINARY_WILD_SPECIES = {
 LAND_UPGRADES = {
     "MAP_ROUTE101": {8: "SPECIES_DREEPY", 9: "SPECIES_LARVESTA"},
     "MAP_ROUTE102": {8: "SPECIES_HATENNA", 9: "SPECIES_INDEEDEE"},
-    "MAP_ROUTE103": {8: "SPECIES_TOXEL", 9: "SPECIES_ROTOM"},
+    "MAP_ROUTE103": {8: "SPECIES_TOXEL", 9: "SPECIES_YAMPER"},
     "MAP_ROUTE104": {
         8: "SPECIES_MAREANIE",
         9: "SPECIES_WIMPOD",
@@ -56,9 +58,9 @@ LAND_UPGRADES = {
     "MAP_GRANITE_CAVE_STEVENS_ROOM": {8: "SPECIES_DREEPY", 9: "SPECIES_LARVESTA"},
     "MAP_ROUTE110": {
         # Timmy's source-closed Route 110 battle explicitly uses four local
-        # catches, including Rotom and Stunky.  Preserve all four tail slots;
-        # Porygon and Klefki remain available from Mauville and Route 113.
-        8: "SPECIES_ROTOM",
+        # catches, including Pincurchin and Stunky.  Rotom remains exclusive to
+        # its generator encounter in New Mauville.
+        8: "SPECIES_PINCURCHIN",
         9: "SPECIES_TOXEL",
         10: "SPECIES_PACHIRISU",
         11: "SPECIES_STUNKY",
@@ -67,14 +69,19 @@ LAND_UPGRADES = {
     "MAP_FIERY_PATH": {8: "SPECIES_LARVESTA", 9: "SPECIES_CHARMANDER"},
     "MAP_JAGGED_PASS": {8: "SPECIES_BAGON", 9: "SPECIES_DEINO"},
     "MAP_ROUTE117": {8: "SPECIES_GROOKEY", 9: "SPECIES_SCORBUNNY"},
-    "MAP_ROUTE118": {8: "SPECIES_TYPE_NULL", 9: "SPECIES_ZORUA"},
-    "MAP_ROUTE119": {8: "SPECIES_DREEPY", 9: "SPECIES_LARVESTA"},
+    "MAP_ROUTE118": {4: "SPECIES_PASSIMIAN", 8: "SPECIES_TYPE_NULL", 9: "SPECIES_ZORUA"},
+    "MAP_ROUTE119": {
+        6: "SPECIES_CRAMORANT",
+        7: "SPECIES_CRAMORANT",
+        8: "SPECIES_DREEPY",
+        9: "SPECIES_LARVESTA",
+    },
     "MAP_ROUTE120": {8: "SPECIES_MIMIKYU", 9: "SPECIES_HONEDGE"},
     "MAP_ROUTE121": {
         8: "SPECIES_ZOROARK",
-        9: "SPECIES_SPIRITOMB",
+        9: "SPECIES_SINISTEA",
         10: "SPECIES_ZOROARK",
-        11: "SPECIES_SPIRITOMB",
+        11: "SPECIES_SINISTEA",
     },
     # Steven's Cave is postgame-only.  Roaring Moon moves to the Waterfall
     # section of Meteor Falls so the curated family is usable before the
@@ -117,9 +124,9 @@ MAGMA_RARE_SLOTS = {
 }
 
 MAGMA_4F_RARE_SLOTS = {
-    8: "SPECIES_HEATRAN",
+    8: "SPECIES_VOLCANION",
     9: "SPECIES_EMBOAR",
-    10: "SPECIES_HEATRAN",
+    10: "SPECIES_VOLCANION",
     11: "SPECIES_EMBOAR",
 }
 
@@ -171,6 +178,11 @@ EARLY_WOODS_HONEY = {
 # Cascoon and Silcoon are already evolved from Wurmple and cannot exist below
 # level 7 in Verdant's own evolution table.
 EARLY_WOODS_LAND_MINIMUMS = {10: 7, 11: 7}
+
+# The Day Care's guaranteed first Egg is Togepi's authored acquisition moment.
+# Milcery keeps Verdanturf Meadow's honey table fairy-themed without bypassing
+# that Egg or its friendship evolution.
+VERDANTURF_MEADOW_HONEY = {5: "SPECIES_MILCERY"}
 
 
 def all_encounters(data: dict) -> list[dict]:
@@ -230,6 +242,9 @@ def expected_changes(data: dict) -> list[tuple[str, str, int, str]]:
     output = []
     for encounter in all_encounters(data):
         map_id = encounter["map"]
+        if map_id == "MAP_VERDANTURF_MEADOW":
+            for index, species in VERDANTURF_MEADOW_HONEY.items():
+                output.append((map_id, "honey_mons", index, species))
         if map_id == "MAP_PETALBURG_WOODS":
             for index, species in EARLY_WOODS_HONEY.items():
                 output.append((map_id, "honey_mons", index, species))
@@ -262,6 +277,7 @@ def apply() -> None:
     data = json.loads(ENCOUNTERS.read_text())
     by_map = {encounter["map"]: encounter for encounter in all_encounters(data)}
     changed_slots = set_slots(by_map["MAP_PETALBURG_WOODS"], "honey_mons", EARLY_WOODS_HONEY)
+    changed_slots += set_slots(by_map["MAP_VERDANTURF_MEADOW"], "honey_mons", VERDANTURF_MEADOW_HONEY)
     for index, minimum in EARLY_WOODS_LAND_MINIMUMS.items():
         mon = by_map["MAP_PETALBURG_WOODS"]["land_mons"]["mons"][index]
         if mon["min_level"] != minimum:

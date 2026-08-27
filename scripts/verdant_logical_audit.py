@@ -97,7 +97,7 @@ all_ordinary_wild_species = {
     for mon in entry.get(method, {}).get("mons", [])
 }
 ordinary_wild_legend_species = {
-    "SPECIES_KUBFU", "SPECIES_TYPE_NULL", "SPECIES_SUICUNE", "SPECIES_HEATRAN",
+    "SPECIES_KUBFU", "SPECIES_TYPE_NULL", "SPECIES_SUICUNE", "SPECIES_VOLCANION",
     "SPECIES_MANAPHY", "SPECIES_TERRAKION", "SPECIES_KELDEO", "SPECIES_TAPU_FINI",
 }
 withheld_ordinary_wild_species = {"SPECIES_DARKRAI", "SPECIES_MARSHADOW"}
@@ -117,7 +117,7 @@ def species_catch_rate(species: str) -> int | None:
 early_showcases = {
     "MAP_ROUTE101": {"SPECIES_DREEPY", "SPECIES_LARVESTA"},
     "MAP_ROUTE102": {"SPECIES_HATENNA", "SPECIES_INDEEDEE"},
-    "MAP_ROUTE103": {"SPECIES_TOXEL", "SPECIES_ROTOM"},
+    "MAP_ROUTE103": {"SPECIES_TOXEL", "SPECIES_YAMPER"},
     "MAP_PETALBURG_WOODS": {"SPECIES_IMPIDIMP", "SPECIES_FOONGUS"},
     "MAP_ROUTE116": {"SPECIES_ROOKIDEE", "SPECIES_DREEPY"},
     "MAP_RUSTURF_TUNNEL": {"SPECIES_LARVESTA", "SPECIES_BAGON"},

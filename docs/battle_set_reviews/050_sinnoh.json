@@ -124,7 +124,7 @@
     },
     {
       "species": "SPECIES_INFERNAPE",
-      "role": "mixed Fake Out and Quick Guard attacker",
+      "role": "Blaze mixed Fake Out and Quick Guard attacker",
       "moves": [
         "MOVE_FAKE_OUT",
         "MOVE_OVERHEAT",
@@ -132,14 +132,14 @@
         "MOVE_QUICK_GUARD"
       ],
       "nature": "NATURE_NAIVE",
-      "ability": "ABILITY_IRON_FIST",
+      "ability": "ABILITY_BLAZE",
       "suggested_item": "ITEM_FOCUS_SASH",
       "item_context": "Focus Sash is advisory only; the native builder does not grant or equip held items.",
       "source_refs": [
         "Smogon gen 6 battlespotdoubles Infernape Support and compatible doubles alternatives",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
-      "doubles_rationale": "Infernape uses Iron Fist as a mixed Fake Out and Quick Guard attacker, with Fake Out, Overheat, Close Combat, and Quick Guard forming one coherent four-slot doubles plan.",
+      "doubles_rationale": "Infernape uses Blaze to strengthen Overheat at low HP while Fake Out, Close Combat, and Quick Guard supply immediate mixed pressure and team protection.",
       "dependency_notes": [
         "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
       ],

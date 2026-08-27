@@ -427,7 +427,7 @@
               {
                 "min_level": 3,
                 "max_level": 3,
-                "species": "SPECIES_ROTOM"
+                "species": "SPECIES_YAMPER"
               },
               {
                 "min_level": 2,
@@ -964,7 +964,7 @@
               {
                 "min_level": 12,
                 "max_level": 12,
-                "species": "SPECIES_ROTOM"
+                "species": "SPECIES_PINCURCHIN"
               },
               {
                 "min_level": 12,
@@ -2057,7 +2057,7 @@
               {
                 "min_level": 26,
                 "max_level": 26,
-                "species": "SPECIES_KECLEON"
+                "species": "SPECIES_PASSIMIAN"
               },
               {
                 "min_level": 26,
@@ -4514,12 +4514,12 @@
               {
                 "min_level": 27,
                 "max_level": 27,
-                "species": "SPECIES_KECLEON"
+                "species": "SPECIES_CRAMORANT"
               },
               {
                 "min_level": 24,
                 "max_level": 24,
-                "species": "SPECIES_KECLEON"
+                "species": "SPECIES_CRAMORANT"
               },
               {
                 "min_level": 25,
@@ -4922,7 +4922,7 @@
               {
                 "min_level": 27,
                 "max_level": 27,
-                "species": "SPECIES_SPIRITOMB"
+                "species": "SPECIES_SINISTEA"
               },
               {
                 "min_level": 28,
@@ -4932,7 +4932,7 @@
               {
                 "min_level": 25,
                 "max_level": 25,
-                "species": "SPECIES_SPIRITOMB"
+                "species": "SPECIES_SINISTEA"
               }
             ]
           },
@@ -11482,7 +11482,7 @@
               {
                 "min_level": 30,
                 "max_level": 30,
-                "species": "SPECIES_HEATRAN"
+                "species": "SPECIES_VOLCANION"
               },
               {
                 "min_level": 31,
@@ -11492,7 +11492,7 @@
               {
                 "min_level": 32,
                 "max_level": 32,
-                "species": "SPECIES_HEATRAN"
+                "species": "SPECIES_VOLCANION"
               },
               {
                 "min_level": 33,
@@ -13406,7 +13406,7 @@
               {
                 "min_level": 3,
                 "max_level": 3,
-                "species": "SPECIES_TOGETIC"
+                "species": "SPECIES_MILCERY"
               }
             ]
           }

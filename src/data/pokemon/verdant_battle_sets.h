@@ -1203,7 +1203,7 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_UNOWN] =
     {
-        .moves = {MOVE_STORED_POWER, MOVE_NONE, MOVE_NONE, MOVE_NONE},
+        .moves = {MOVE_HIDDEN_POWER, MOVE_STORED_POWER, MOVE_NONE, MOVE_NONE},
         .nature = NATURE_MODEST,
         .abilitySlot = 0,
     },
@@ -2351,7 +2351,7 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     {
         .moves = {MOVE_FAKE_OUT, MOVE_OVERHEAT, MOVE_CLOSE_COMBAT, MOVE_QUICK_GUARD},
         .nature = NATURE_NAIVE,
-        .abilitySlot = 1,
+        .abilitySlot = 0,
     },
     [SPECIES_PIPLUP] =
     {
@@ -5117,7 +5117,7 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     {
         .moves = {MOVE_OCTOLOCK, MOVE_DRAIN_PUNCH, MOVE_ICE_PUNCH, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
-        .abilitySlot = 2,
+        .abilitySlot = 0,
     },
     [SPECIES_SINISTEA] =
     {
@@ -5619,31 +5619,31 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_PIKACHU_ROCK_STAR] =
     {
-        .moves = {MOVE_WILD_CHARGE, MOVE_EXTREME_SPEED, MOVE_NUZZLE, MOVE_CHARM},
+        .moves = {MOVE_WILD_CHARGE, MOVE_EXTREME_SPEED, MOVE_NUZZLE, MOVE_METEOR_MASH},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_PIKACHU_BELLE] =
     {
-        .moves = {MOVE_WILD_CHARGE, MOVE_EXTREME_SPEED, MOVE_NUZZLE, MOVE_CHARM},
+        .moves = {MOVE_WILD_CHARGE, MOVE_EXTREME_SPEED, MOVE_NUZZLE, MOVE_ICICLE_CRASH},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_PIKACHU_POP_STAR] =
     {
-        .moves = {MOVE_WILD_CHARGE, MOVE_EXTREME_SPEED, MOVE_NUZZLE, MOVE_CHARM},
-        .nature = NATURE_JOLLY,
+        .moves = {MOVE_WILD_CHARGE, MOVE_EXTREME_SPEED, MOVE_NUZZLE, MOVE_DRAINING_KISS},
+        .nature = NATURE_NAIVE,
         .abilitySlot = 0,
     },
     [SPECIES_PIKACHU_PH_D] =
     {
-        .moves = {MOVE_WILD_CHARGE, MOVE_EXTREME_SPEED, MOVE_NUZZLE, MOVE_CHARM},
+        .moves = {MOVE_WILD_CHARGE, MOVE_EXTREME_SPEED, MOVE_NUZZLE, MOVE_ELECTRIC_TERRAIN},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
     [SPECIES_PIKACHU_LIBRE] =
     {
-        .moves = {MOVE_WILD_CHARGE, MOVE_EXTREME_SPEED, MOVE_NUZZLE, MOVE_CHARM},
+        .moves = {MOVE_WILD_CHARGE, MOVE_EXTREME_SPEED, MOVE_NUZZLE, MOVE_FLYING_PRESS},
         .nature = NATURE_JOLLY,
         .abilitySlot = 0,
     },
@@ -5979,31 +5979,31 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_GENESECT_DOUSE_DRIVE] =
     {
-        .moves = {MOVE_BUG_BUZZ, MOVE_IRON_HEAD, MOVE_ICE_BEAM, MOVE_PROTECT},
+        .moves = {MOVE_BUG_BUZZ, MOVE_IRON_HEAD, MOVE_TECHNO_BLAST, MOVE_PROTECT},
         .nature = NATURE_NAIVE,
         .abilitySlot = 0,
     },
     [SPECIES_GENESECT_SHOCK_DRIVE] =
     {
-        .moves = {MOVE_BUG_BUZZ, MOVE_IRON_HEAD, MOVE_ICE_BEAM, MOVE_PROTECT},
+        .moves = {MOVE_BUG_BUZZ, MOVE_IRON_HEAD, MOVE_TECHNO_BLAST, MOVE_PROTECT},
         .nature = NATURE_NAIVE,
         .abilitySlot = 0,
     },
     [SPECIES_GENESECT_BURN_DRIVE] =
     {
-        .moves = {MOVE_BUG_BUZZ, MOVE_IRON_HEAD, MOVE_ICE_BEAM, MOVE_PROTECT},
+        .moves = {MOVE_BUG_BUZZ, MOVE_IRON_HEAD, MOVE_TECHNO_BLAST, MOVE_PROTECT},
         .nature = NATURE_NAIVE,
         .abilitySlot = 0,
     },
     [SPECIES_GENESECT_CHILL_DRIVE] =
     {
-        .moves = {MOVE_BUG_BUZZ, MOVE_IRON_HEAD, MOVE_ICE_BEAM, MOVE_PROTECT},
+        .moves = {MOVE_BUG_BUZZ, MOVE_IRON_HEAD, MOVE_TECHNO_BLAST, MOVE_PROTECT},
         .nature = NATURE_NAIVE,
         .abilitySlot = 0,
     },
     [SPECIES_GRENINJA_BATTLE_BOND] =
     {
-        .moves = {MOVE_HYDRO_PUMP, MOVE_DARK_PULSE, MOVE_ICE_BEAM, MOVE_PROTECT},
+        .moves = {MOVE_HYDRO_PUMP, MOVE_DARK_PULSE, MOVE_WATER_SHURIKEN, MOVE_PROTECT},
         .nature = NATURE_TIMID,
         .abilitySlot = 0,
     },
@@ -6495,13 +6495,13 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_NECROZMA_DUSK_MANE] =
     {
-        .moves = {MOVE_IRON_HEAD, MOVE_EARTHQUAKE, MOVE_TRICK_ROOM, MOVE_PROTECT},
+        .moves = {MOVE_SUNSTEEL_STRIKE, MOVE_EARTHQUAKE, MOVE_TRICK_ROOM, MOVE_PROTECT},
         .nature = NATURE_BRAVE,
         .abilitySlot = 0,
     },
     [SPECIES_NECROZMA_DAWN_WINGS] =
     {
-        .moves = {MOVE_EXPANDING_FORCE, MOVE_METEOR_BEAM, MOVE_EARTH_POWER, MOVE_PROTECT},
+        .moves = {MOVE_MOONGEIST_BEAM, MOVE_METEOR_BEAM, MOVE_EARTH_POWER, MOVE_PROTECT},
         .nature = NATURE_MODEST,
         .abilitySlot = 0,
     },
@@ -6585,13 +6585,13 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_ZACIAN_CROWNED_SWORD] =
     {
-        .moves = {MOVE_IRON_HEAD, MOVE_SACRED_SWORD, MOVE_SUBSTITUTE, MOVE_PROTECT},
+        .moves = {MOVE_BEHEMOTH_BLADE, MOVE_SACRED_SWORD, MOVE_SUBSTITUTE, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 0,
     },
     [SPECIES_ZAMAZENTA_CROWNED_SHIELD] =
     {
-        .moves = {MOVE_CLOSE_COMBAT, MOVE_IRON_HEAD, MOVE_WIDE_GUARD, MOVE_PROTECT},
+        .moves = {MOVE_CLOSE_COMBAT, MOVE_BEHEMOTH_BASH, MOVE_WIDE_GUARD, MOVE_PROTECT},
         .nature = NATURE_IMPISH,
         .abilitySlot = 0,
     },

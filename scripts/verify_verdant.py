@@ -23,6 +23,11 @@ subprocess.run(
     check=True,
 )
 subprocess.run(
+    [sys.executable, str(ROOT / "scripts/emerald_champions_bespoke_wild_audit.py")],
+    cwd=ROOT,
+    check=True,
+)
+subprocess.run(
     [sys.executable, str(ROOT / "scripts/verdant_battle_set_presets.py"), "--check"],
     cwd=ROOT,
     check=True,
@@ -258,6 +263,11 @@ battle_util_source = read("src/battle_util.c")
 pc_tutor_source = read("data/scripts/pokemon_center_move_tutor.inc")
 pc_menu_block = field_specials_source.split("[SCROLL_MULTI_POKE_CENTER_TUTOR] =", 1)[1].split("},", 1)[0]
 battle_set_runtime = field_specials_source.split("void ApplySelectedMonBattleSet", 1)[1].split("// Changes the selected Pokemon's nature.", 1)[0]
+battle_set_generator_source = read("scripts/verdant_battle_set_presets.py")
+base_stats_source = read("src/data/pokemon/base_stats.h")
+form_reviews_100 = read("docs/battle_set_reviews/100_forms_899_1010.json")
+form_reviews_110 = read("docs/battle_set_reviews/110_forms_1011_1120.json")
+form_reviews_120 = read("docs/battle_set_reviews/120_forms_1121_1225.json")
 
 ported_gen8_move_animations = (
     "Move_ZIPPY_ZAP",
@@ -428,10 +438,11 @@ checks = {
         and pc_held_message_max_width <= 18 * 8
     ),
     "Pokemon Center exposes one all-legal move teacher": (
-        "task->tNumItems = 6;" in read("src/field_specials.c")
+        "task->tNumItems = 7;" in read("src/field_specials.c")
         and "gText_LearnANewMove" not in pc_menu_block
         and "case 0, PKMN_Center_Move_Tutor_MoveTutorIntro" in pc_tutor_source
-        and "case 5, PKMN_Center_Move_Tutor_General_Exit" in pc_tutor_source
+        and "case 5, PKMN_Center_BattleSet_ChooseMon" in pc_tutor_source
+        and "case 6, PKMN_Center_Move_Tutor_General_Exit" in pc_tutor_source
     ),
     "Day Care UI does not promise disabled level gains": (
         "level = GetLevelFromBoxMonExp(&daycare->mons[i].mon);" in read("src/daycare.c")
@@ -957,6 +968,15 @@ checks = {
                 "SPECIES_ROTOM_FROST", "MOVE_FREEZE_DRY",
                 "SPECIES_ROTOM_FAN", "MOVE_HURRICANE",
                 "SPECIES_ROTOM_MOW", "MOVE_LEAF_STORM",
+                "SPECIES_PIKACHU_ROCK_STAR", "MOVE_METEOR_MASH",
+                "SPECIES_PIKACHU_BELLE", "MOVE_ICICLE_CRASH",
+                "SPECIES_PIKACHU_POP_STAR", "MOVE_DRAINING_KISS",
+                "SPECIES_PIKACHU_PH_D", "MOVE_ELECTRIC_TERRAIN",
+                "SPECIES_PIKACHU_LIBRE", "MOVE_FLYING_PRESS",
+                "SPECIES_NECROZMA_DUSK_MANE", "MOVE_SUNSTEEL_STRIKE",
+                "SPECIES_NECROZMA_DAWN_WINGS", "MOVE_MOONGEIST_BEAM",
+                "SPECIES_ZACIAN_CROWNED_SWORD", "MOVE_BEHEMOTH_BLADE",
+                "SPECIES_ZAMAZENTA_CROWNED_SHIELD", "MOVE_BEHEMOTH_BASH",
             )
         )
         and "moveLevel <= level" not in read("src/pokemon.c").split("GetMoveRelearnerMoves", 1)[1].split("GetLevelUpMovesBySpecies", 1)[0]
@@ -979,6 +999,43 @@ checks = {
         and "_EV" not in battle_set_runtime
         and battle_set_runtime.index("preset->nature >= NUM_NATURES") < battle_set_runtime.index("SetMonData(mon, MON_DATA_PP_BONUSES")
         and battle_set_runtime.count("CalculateMonStats(mon);") == 1
+    ),
+    "authored battle sets preserve form-exclusive mechanics": (
+        all(
+            species in battle_set_generator_source and move in battle_set_generator_source
+            for species, move in (
+                ("SPECIES_PIKACHU_ROCK_STAR", "MOVE_METEOR_MASH"),
+                ("SPECIES_PIKACHU_BELLE", "MOVE_ICICLE_CRASH"),
+                ("SPECIES_PIKACHU_POP_STAR", "MOVE_DRAINING_KISS"),
+                ("SPECIES_PIKACHU_PH_D", "MOVE_ELECTRIC_TERRAIN"),
+                ("SPECIES_PIKACHU_LIBRE", "MOVE_FLYING_PRESS"),
+                ("SPECIES_NECROZMA_DUSK_MANE", "MOVE_SUNSTEEL_STRIKE"),
+                ("SPECIES_NECROZMA_DAWN_WINGS", "MOVE_MOONGEIST_BEAM"),
+                ("SPECIES_ZACIAN_CROWNED_SWORD", "MOVE_BEHEMOTH_BLADE"),
+                ("SPECIES_ZAMAZENTA_CROWNED_SHIELD", "MOVE_BEHEMOTH_BASH"),
+            )
+        )
+        and all(move in form_reviews_100 for move in (
+            "MOVE_METEOR_MASH", "MOVE_ICICLE_CRASH", "MOVE_DRAINING_KISS",
+            "MOVE_ELECTRIC_TERRAIN", "MOVE_FLYING_PRESS",
+        ))
+        and all(token in form_reviews_110 for token in (
+            "ITEM_DOUSE_DRIVE", "ITEM_SHOCK_DRIVE", "ITEM_BURN_DRIVE", "ITEM_CHILL_DRIVE",
+            "MOVE_TECHNO_BLAST", "MOVE_WATER_SHURIKEN",
+        ))
+        and '"alias_of": "SPECIES_GENESECT"' not in form_reviews_110
+        and all(move in form_reviews_120 for move in (
+            "MOVE_SUNSTEEL_STRIKE", "MOVE_MOONGEIST_BEAM",
+            "MOVE_BEHEMOTH_BLADE", "MOVE_BEHEMOTH_BASH",
+        ))
+        and "[SPECIES_ZYGARDE_10_POWER_CONSTRUCT]" in base_stats_source
+        and "ABILITY_POWER_CONSTRUCT" in base_stats_source.split(
+            "[SPECIES_ZYGARDE_10_POWER_CONSTRUCT]", 1
+        )[1].split("},", 1)[0]
+        and '"species": "SPECIES_ZYGARDE_10_POWER_CONSTRUCT"' in form_reviews_120
+        and '"ability": "ABILITY_POWER_CONSTRUCT"' in form_reviews_120.split(
+            '"species": "SPECIES_ZYGARDE_10_POWER_CONSTRUCT"', 1
+        )[1].split("},", 1)[0]
     ),
     "world TM pickups replaced": "finditem ITEM_TM" not in read("data/scripts/item_ball_scripts.inc"),
     "gifted TMs replaced": "giveitem ITEM_TM" not in "\n".join(p.read_text() for p in (ROOT / "data").rglob("*.inc")),

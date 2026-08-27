@@ -3458,7 +3458,7 @@
       "branch_contract": {
         "format": "single",
         "source_slots": [0, 1, 2, 3],
-        "intended_order": ["SPECIES_GIMMIGHOUL_ROAMING", "SPECIES_STUNKY", "SPECIES_PLUSLE", "SPECIES_ROTOM"],
+        "intended_order": ["SPECIES_GIMMIGHOUL_ROAMING", "SPECIES_STUNKY", "SPECIES_PLUSLE", "SPECIES_PINCURCHIN"],
         "target_difficulty": 8.7,
         "reachability": "optional horizontal sight detour"
       },
@@ -3468,7 +3468,7 @@
         "eligible_ratio": "4/4",
         "mega_access": true,
         "status": "pass",
-        "reason": "Roaming Gimmighoul has an optional coin-item evolution and remains a legal young form; Stunky correctly remains unevolved until level 34; Plusle and Rotom are single-stage. Every exact species is present in Route 110 grass, with no Mega or Primal."
+        "reason": "Roaming Gimmighoul has an optional coin-item evolution and remains a legal young form; Stunky correctly remains unevolved until level 34; Plusle and Pincurchin are single-stage. Every exact species is present in Route 110 grass, with no Mega or Primal."
       },
       "manual_quality": 10,
       "manual_difficulty": 8.7,
@@ -3478,9 +3478,9 @@
         "reference_pool_size": 1005,
         "full_team_candidates": [
           {
-            "reference_id": "showdown:gen6randombattle:007",
-            "decision": "Exact Choice Specs Rotom commitment set selected; full team rejected",
-            "reason": "Volt Switch, Shadow Ball, Hidden Power Ice, and Trick supply the exact exploitable source-last ace without importing the donor's unrelated six."
+            "reference_id": "source:smogon-gen8-nationaldexru-pincurchin",
+            "decision": "Smogon Electric Terrain setter adapted into the exact local ace",
+            "reason": "Electric Surge, Rising Voltage, Scald, Recover, and Protect create a self-contained terrain tank; Life Orb raises its cap-30 singles pressure."
           },
           {
             "reference_id": "showdown:gen7randombattle:020",
@@ -3493,12 +3493,12 @@
             "reason": "The donor validates fast Lightning Rod special pressure. Shuca Berry, Thunderbolt, Grass Knot, Dazzling Gleam, and Encore create one independent local matchup test without setup."
           }
         ],
-        "decision": "No complete indexed team fits four exact Route 110 catches and Timmy's intentionally inexperienced singles story. Three full-set donors support Rotom, the Stunky family role, and Plusle; Roaming Gimmighoul has no indexed full set and is honestly hand-authored from its current legal learnset."
+        "decision": "No complete indexed team fits four exact Route 110 catches and Timmy's intentionally inexperienced singles story. Two full-set donors support the Stunky family role and Plusle, Smogon's Gen 8 National Dex RU terrain setter supports Pincurchin, and Roaming Gimmighoul is honestly hand-authored from its current legal learnset."
       },
       "competitive_references": [
         {
-          "reference_id": "showdown:gen6randombattle:007",
-          "adaptation": "Choice Specs Levitate Rotom uses Volt Switch, Shadow Ball, Hidden Power Ice, and Trick as an exact committed singles closer."
+          "reference_id": "source:smogon-gen8-nationaldexru-pincurchin",
+          "adaptation": "Quiet Electric Surge Pincurchin uses Rising Voltage, Scald, Recover, and Protect from the locally audited terrain-setter role; Life Orb increases immediate singles pressure."
         },
         {
           "reference_id": "showdown:gen7randombattle:020",
@@ -3515,28 +3515,28 @@
       ],
       "ordering": {
         "intended_lead": ["SPECIES_GIMMIGHOUL_ROAMING"],
-        "source_order": ["SPECIES_GIMMIGHOUL_ROAMING", "SPECIES_STUNKY", "SPECIES_PLUSLE", "SPECIES_ROTOM"],
-        "reason": "The rare but modest Focus Sash Gimmighoul gets one fair opening action, Eviolite Stunky changes to mixed item and contact punishment, Shuca Lightning Rod Plusle is the fast coverage check, and Choice Specs Rotom is the strongest but exploitable local ace."
+        "source_order": ["SPECIES_GIMMIGHOUL_ROAMING", "SPECIES_STUNKY", "SPECIES_PLUSLE", "SPECIES_PINCURCHIN"],
+        "reason": "The rare but modest Focus Sash Gimmighoul gets one fair opening action, Eviolite Stunky changes to mixed item and contact punishment, Shuca Lightning Rod Plusle is the fast coverage check, and Life Orb Electric Surge Pincurchin is the slow terrain-powered local ace."
       },
-      "primary_player_question": "Can the player navigate four unrelated just-caught matchup tests—a Sash rare opener, Eviolite and Aftermath mixed disruptor, Shuca coverage sprinter, and Choice-locked Levitate ace—without assuming one Ground answer sweeps the route's Electric-heavy ecology?",
-      "team_intent": "Level-31 Focus Sash Run Away Roaming Gimmighoul opens with Shadow Ball, Hidden Power Fighting, Thief, or the roster's only Protect; once its Sash breaks, Thief can exploit the empty item slot. Level-32 Eviolite Aftermath Stunky uses Foul Play, Sucker Punch, Sludge Bomb, and Flamethrower as a mixed physical-punishment and contact check. Level-32 Shuca Lightning Rod Plusle attacks through Thunderbolt, Grass Knot, or Dazzling Gleam and can Encore a passive turn. Level-33 Choice Specs Levitate Rotom closes through Volt Switch, Shadow Ball, Hidden Power Ice, or Trick. Every exact species is a current Route 110 grass encounter. There is no team-wide engine, weather, terrain, room, screen, active speed control, setup move, Mega, or Primal.",
-      "intentional_weakness": "The four catches deliberately lack a shared engine. Gimmighoul is modest after Sash, Stunky is still unevolved, Plusle and Rotom are physically frail, and Choice Specs exposes a final commitment the player can scout and exploit.",
-      "intended_counterplay": "Dark or Ghost pressure answers Gimmighoul and Rotom; Ground after Shuca pressures Plusle and Stunky while Rotom's Levitate prevents one Ground move from solving the whole sequence. Physical attacks exploit Plusle and Rotom, item removal strips every safety item, Taunt limits Encore, special walls blunt the two special closers, and Protect, Disable, Encore, Trick, or immunity pivots exploit Rotom's Choice lock. Stunky's Sucker Punch can be played around, Foul Play discourages careless physical setup, and Aftermath punishes contact without preventing noncontact damage; Gimmighoul's post-Sash Thief is weak enough to manage without hidden randomness.",
-      "first_loss_lesson": "These are four separate matchup checks, not one engine to switch off. Break Gimmighoul's Sash cleanly, avoid careless physical setup or contact into Stunky, spend Shuca before Ground commitment, then identify and exploit Rotom's locked move.",
-      "bespoke_ai": "Timmy uses native foe-aware, smart-switching, and HP-aware singles scoring. Focus Sash, Run Away, Hidden Power Fighting, Thief, Protect, Eviolite, Aftermath, Foul Play, Sucker Punch, Shuca Berry, Lightning Rod, Encore, Choice Specs, Levitate, Volt Switch, Hidden Power Ice, and Trick are existing mechanics. No partner flag, field flag, forced move, custom selector, speed flag, setup flag, Mega, or Primal is added.",
-      "uniqueness": "This is the first closed Roaming Gimmighoul, Stunky, and Plusle opponent appearance and the first exact-catch ecological sampler. Rotom deliberately repeats twenty-five encounters after one possible Rustboro rival branch; here it is the literal Route 110 wild ace and a Choice-locked singles closer rather than a Sitrus status pivot. The low-cohesion single is a deliberate palate cleanser after cutters, Arena Trap, and false-focus redirection, not a failed doubles module.",
-      "story_logic": "Timmy says he just caught cool Pokemon in the grass. All four exact source species—Roaming Gimmighoul, Stunky, Plusle, and Rotom—appear in Route 110's live land table, so the rewritten dialogue is literal and also hints that the player can catch them. His horizontal three-tile sight remains optional, and neither his trainer flag nor party gates the required rival scene.",
+      "primary_player_question": "Can the player navigate four unrelated just-caught matchup tests—a Sash rare opener, Eviolite and Aftermath mixed disruptor, Shuca coverage sprinter, and slow Life Orb terrain tank—without assuming one Ground answer sweeps the route's Electric-heavy ecology?",
+      "team_intent": "Level-31 Focus Sash Run Away Roaming Gimmighoul opens with Shadow Ball, Hidden Power Fighting, Thief, or Protect; once its Sash breaks, Thief can exploit the empty item slot. Level-32 Eviolite Aftermath Stunky uses Foul Play, Sucker Punch, Sludge Bomb, and Flamethrower as a mixed physical-punishment and contact check. Level-32 Shuca Lightning Rod Plusle attacks through Thunderbolt, Grass Knot, or Dazzling Gleam and can Encore a passive turn. Level-33 Life Orb Electric Surge Pincurchin closes through terrain-doubled Rising Voltage, Scald, Recover, or Protect. Every exact species is a current Route 110 grass encounter. There is no team-wide weather, room, screen, setup move, Mega, or Primal.",
+      "intentional_weakness": "The four catches deliberately lack one continuous engine. Gimmighoul is modest after Sash, Stunky is still unevolved, Plusle is physically frail, and Pincurchin is extremely slow and takes Life Orb recoil. Ground types and terrain replacement can blunt its strongest line.",
+      "intended_counterplay": "Dark or Ghost pressure answers Gimmighoul; Ground after Shuca pressures Plusle, Stunky, and Pincurchin. Physical attacks exploit Plusle, item removal strips every safety item, Taunt limits Encore and Pincurchin's recovery, and changing or suppressing Electric Terrain halves Rising Voltage's base power before removing the terrain boost. Stunky's Sucker Punch can be played around, Foul Play discourages careless physical setup, and Aftermath punishes contact without preventing noncontact damage; Gimmighoul's post-Sash Thief is weak enough to manage without hidden randomness.",
+      "first_loss_lesson": "These are four separate matchup checks, not one engine to switch off. Break Gimmighoul's Sash cleanly, avoid careless physical setup or contact into Stunky, spend Shuca before Ground commitment, then deny Pincurchin's Electric Terrain or stop its Recover loop.",
+      "bespoke_ai": "Timmy uses native foe-aware, smart-switching, and HP-aware singles scoring. Focus Sash, Run Away, Hidden Power Fighting, Thief, Protect, Eviolite, Aftermath, Foul Play, Sucker Punch, Shuca Berry, Lightning Rod, Encore, Life Orb, Electric Surge, Rising Voltage, Scald, and Recover are existing mechanics. No partner flag, forced move, custom selector, speed flag, setup flag, Mega, or Primal is added.",
+      "uniqueness": "This is the first closed Pincurchin opponent appearance, alongside the first closed Roaming Gimmighoul, Stunky, and Plusle appearances, and the first exact-catch ecological sampler. Pincurchin's self-starting Electric Terrain and Rising Voltage make the source-last ace mechanically distinct without borrowing Rotom from its New Mauville generator event. The low-cohesion single is a deliberate palate cleanser after cutters, Arena Trap, and false-focus redirection, not a failed doubles module.",
+      "story_logic": "Timmy says he just caught cool Pokemon in the grass. All four exact source species—Roaming Gimmighoul, Stunky, Plusle, and Pincurchin—appear in Route 110's live land table, so the rewritten dialogue is literal and also hints that the player can catch them. His horizontal three-tile sight remains optional, and neither his trainer flag nor party gates the required rival scene.",
       "reward_logic": "Timmy grants only EXP and prize money. He has no callback, Match Call, scripted item, state change, or heal. Defeating him is unrelated to Puzzle 1, the Route 110 rival, and the Itemfinder reward.",
       "campaign_reservations": {
-        "spends": ["the first exact Roaming Gimmighoul opponent", "the first exact Route 110 catch sampler", "a distant Rotom repeat as a literal local ace"],
+        "spends": ["the first exact Roaming Gimmighoul opponent", "the first exact Route 110 catch sampler", "the first Pincurchin opponent as a literal local ace"],
         "preserves": ["Gholdengo's fully evolved coin identity", "Plus/Minus doubles circuitry", "Toxtricity and Manectric for later Electric specialists", "Primal Reversion for Groudon and Kyogre bosses"],
-        "repeat_rule": "Later Route 110 trainers do not automatically reuse these catches; Rotom must not recur again without a new form or materially different doctrine."
+        "repeat_rule": "Later Route 110 trainers do not automatically reuse these catches; Pincurchin must not recur again without a materially different doctrine."
       },
       "author_self_check": {
         "strongest_part": "This is a genuine look-what-lives-here encounter: four exact local catches present four sharply different singles tests and quietly advertise rare teammates the player can obtain immediately.",
         "weakest_link": "Team-wide cohesion is intentionally low and Gimmighoul is modest, so the encounter relies on four sequential checks and level advantage rather than a hard engine. That makes it 8.7 pacing relief, not a 9-plus set piece."
       },
-      "closure": "Battle 53 is source-closed at editorial 8.7/10: one optional four-member single at legal levels 31-33, four exact Route 110 grass catches, four distinct items and matchup tests, three complete-set donors plus one documented no-donor local set, only one Protect, native-width exploration dialogue, an intentional distant Rotom repeat, author self-check, and no team-wide engine or unsupported gimmick. Runtime playtesting remains required before the target is observed."
+      "closure": "Battle 53 is source-closed at editorial 8.7/10: one optional four-member single at legal levels 31-33, four exact Route 110 grass catches, four distinct items and matchup tests, two complete-set donors plus one Smogon role adaptation and one documented no-donor local set, two Protect users, native-width exploration dialogue, no repeated exact species, author self-check, and no unsupported gimmick. Runtime playtesting remains required before the target is observed."
     },
     "BATTLE_054_ROUTE_110_RIVAL": {
       "guide_order": 54,

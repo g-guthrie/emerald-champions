@@ -4582,7 +4582,7 @@ def main() -> None:
         {"level": 1, "species": "SPECIES_GIMMIGHOUL_ROAMING", "item": "ITEM_FOCUS_SASH", "ability_slot": 0, "spread": "SPREAD_HP_FIGHTING_TIMID", "moves": ["MOVE_SHADOW_BALL", "MOVE_HIDDEN_POWER", "MOVE_THIEF", "MOVE_PROTECT"]},
         {"level": 2, "species": "SPECIES_STUNKY", "item": "ITEM_EVIOLITE", "ability_slot": 1, "spread": "SPREAD_31_IV_HP_ATK_MIXED", "moves": ["MOVE_FOUL_PLAY", "MOVE_SUCKER_PUNCH", "MOVE_SLUDGE_BOMB", "MOVE_FLAMETHROWER"]},
         {"level": 2, "species": "SPECIES_PLUSLE", "item": "ITEM_SHUCA_BERRY", "ability_slot": 2, "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID", "moves": ["MOVE_THUNDERBOLT", "MOVE_GRASS_KNOT", "MOVE_DAZZLING_GLEAM", "MOVE_ENCORE"]},
-        {"level": 3, "species": "SPECIES_ROTOM", "item": "ITEM_CHOICE_SPECS", "ability_slot": 0, "spread": "SPREAD_HP_ICE_TIMID", "moves": ["MOVE_VOLT_SWITCH", "MOVE_SHADOW_BALL", "MOVE_HIDDEN_POWER", "MOVE_TRICK"]},
+        {"level": 3, "species": "SPECIES_PINCURCHIN", "item": "ITEM_LIFE_ORB", "ability_slot": 2, "spread": "SPREAD_31_IV_HP_SPATK_QUIET", "moves": ["MOVE_RISING_VOLTAGE", "MOVE_SCALD", "MOVE_RECOVER", "MOVE_PROTECT"]},
     ]
     if timmy53["trainer_ids"] != ["TRAINER_TIMMY"] or party_builds("TRAINER_TIMMY", trainers_text, parties_text) != expected_timmy53:
         problems.append("Battle 53: Timmy's closure or source party differs")
@@ -4604,13 +4604,13 @@ def main() -> None:
         "SPECIES_GIMMIGHOUL_ROAMING": (0, "ABILITY_RUN_AWAY"),
         "SPECIES_STUNKY": (1, "ABILITY_AFTERMATH"),
         "SPECIES_PLUSLE": (2, "ABILITY_LIGHTNING_ROD"),
-        "SPECIES_ROTOM": (0, "ABILITY_LEVITATE"),
+        "SPECIES_PINCURCHIN": (2, "ABILITY_ELECTRIC_SURGE"),
     }
     for species, (slot, ability) in abilities53.items():
         slots = ability_slots.get(species, [])
         if len(slots) <= slot or slots[slot] != ability:
             problems.append(f"Battle 53: {species} slot {slot} is not {ability}: {slots}")
-    names53 = {"STUNKY": "Stunky", "PLUSLE": "Plusle", "ROTOM": "Rotom"}
+    names53 = {"STUNKY": "Stunky", "PLUSLE": "Plusle", "PINCURCHIN": "Pincurchin"}
     for build in expected_timmy53:
         species = build["species"].removeprefix("SPECIES_")
         for move in build["moves"]:
@@ -4630,7 +4630,7 @@ def main() -> None:
     wild53 = json.loads(read("src/data/wild_encounters.json"))["wild_encounter_groups"][0]["encounters"]
     route110_wild = next(row for row in wild53 if row.get("map") == "MAP_ROUTE110")
     land_species53 = {row["species"] for row in route110_wild["land_mons"]["mons"]}
-    exact_local53 = {"SPECIES_GIMMIGHOUL_ROAMING", "SPECIES_STUNKY", "SPECIES_PLUSLE", "SPECIES_ROTOM"}
+    exact_local53 = {"SPECIES_GIMMIGHOUL_ROAMING", "SPECIES_STUNKY", "SPECIES_PLUSLE", "SPECIES_PINCURCHIN"}
     if not exact_local53 <= land_species53:
         problems.append(f"Battle 53: exact local-catch premise drifted; missing {sorted(exact_local53 - land_species53)}")
     route110_map = json.loads(read("data/maps/Route110/map.json"))
@@ -4646,7 +4646,7 @@ def main() -> None:
             problems.append(f"Battle 53: Timmy unexpectedly owns progression or reward token {forbidden}")
     route110_dialogue53 = read("data/text/trainers.inc")
     timmy_dialogue = route110_dialogue53.split("Route110_Text_TimmyIntro:", 1)[1].split("Route110_Text_AlyssaIntro:", 1)[0]
-    for cue in ("four in this grass", "each one battles", "need a plan", "roaming coin", "Keep looking"):
+    for cue in ("four in this grass", "each one battles", "need a plan", "Pincurchin", "that coin", "Keep looking"):
         if cue not in timmy_dialogue:
             problems.append(f"Battle 53: dialogue misses {cue}")
     for line in re.findall(r'\.string "([^"]*)"', timmy_dialogue):
@@ -4654,7 +4654,6 @@ def main() -> None:
         if len(visible) > 36:
             problems.append(f"Battle 53: dialogue line is too long: {visible}")
     donor_requirements53 = {
-        "showdown:gen6randombattle:007": {"Rotom"},
         "showdown:gen7randombattle:020": {"Skuntank"},
         "showdown:gen9randombattle:011": {"Plusle"},
     }
@@ -4664,10 +4663,10 @@ def main() -> None:
             problems.append(f"Battle 53: competitive donor drifted {reference_id}")
     battles_1_to_52 = battles_1_to_51 | {build["species"] for build in expected_robin52}
     repeats53 = battles_1_to_52 & {build["species"] for build in expected_timmy53}
-    if repeats53 != {"SPECIES_ROTOM"}:
-        problems.append(f"Battle 53: expected only deliberate Rotom reuse, found {sorted(repeats53)}")
-    if "twenty-five encounters" not in timmy53.get("uniqueness", ""):
-        problems.append("Battle 53: deliberate Rotom reuse lacks a written disposition")
+    if repeats53:
+        problems.append(f"Battle 53: exact-catch sampler repeats earlier species {sorted(repeats53)}")
+    if "first closed Pincurchin" not in timmy53.get("uniqueness", ""):
+        problems.append("Battle 53: Pincurchin's first-use disposition is missing")
 
     rival54 = designs["BATTLE_054_ROUTE_110_RIVAL"]
     rival54_ids = [

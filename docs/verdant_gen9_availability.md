@@ -45,9 +45,10 @@ League showcases.
 
 The two 4-percent tail slots are weighting tools, not places to hide separate
 headline species. Route 104 now offers Mareanie and Wimpod at 12 percent each;
-Route 110 preserves its Rotom, Toxel, Pachirisu, and Stunky story pool; and
-Route 121 offers Zoroark and Spiritomb at 12 percent each. Porygon remains a
-Mauville Game Corner prize, while Klefki remains available on Route 113.
+Route 110 offers Pincurchin, Toxel, Pachirisu, and Stunky as its story pool; and
+Route 121 offers Zoroark and Sinistea at 12 percent each. Rotom is reserved for
+its New Mauville generator encounter, Spiritomb for its Odd Keystone encounter,
+Porygon remains a Mauville Game Corner prize, and Klefki remains on Route 113.
 
 The late-ocean identities are likewise direct: Route 124 has 15-percent
 Manaphy, Route 125 has 15-percent Suicune, Route 126 has 15-percent Tapu Fini,
@@ -56,7 +57,8 @@ paired 5-percent Surf slots form one 10-percent source per route rather than
 two separate hunts.
 
 Magma Hideout consolidates Volcarona and Magmortar at 12 percent through the
-approach rooms, then reserves 12-percent Heatran and Emboar for 4F. Seafloor
+approach rooms, then reserves 12-percent Volcanion and Emboar for 4F. Heatran
+remains exclusive to its Scorched Slab encounter. Seafloor
 Cavern removes repeated Tapu Fini, Suicune, and Keldeo rolls: its paired tail
 slots make Greninja and Crobat 12-percent land encounters, Lapras a 10-percent
 Surf encounter, and Manaphy a 15-percent Super Rod encounter.

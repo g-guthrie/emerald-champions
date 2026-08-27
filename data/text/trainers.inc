@@ -1242,7 +1242,7 @@ Route110_Text_TimmyDefeated: @ 8298559
 	.string "Cool catches still need a plan…$"
 
 Route110_Text_TimmyPostBattle: @ 8298579
-	.string "Rotom and the roaming coin are rare.\n"
+	.string "Pincurchin and that coin are rare.\n"
 	.string "Keep looking in this grass!$"
 
 Route110_Text_AlyssaIntro: @ 82985AB

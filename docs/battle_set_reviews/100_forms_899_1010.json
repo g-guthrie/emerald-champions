@@ -954,133 +954,128 @@
     },
     {
       "species": "SPECIES_PIKACHU_ROCK_STAR",
-      "alias_of": "SPECIES_PIKACHU_COSPLAY",
-      "role": "Light Ball priority and speed-control attacker",
+      "role": "Rock Star Light Ball attacker",
       "moves": [
         "MOVE_WILD_CHARGE",
         "MOVE_EXTREME_SPEED",
         "MOVE_NUZZLE",
-        "MOVE_CHARM"
+        "MOVE_METEOR_MASH"
       ],
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_STATIC",
       "suggested_item": "ITEM_LIGHT_BALL",
-      "item_context": "SPECIES_PIKACHU_ROCK_STAR has exactly the same local battle data and legal move pool as the reviewed Cosplay form; Light Ball remains advisory and is never auto-equipped.",
+      "item_context": "Light Ball supports Rock Star Pikachu’s mixed priority and coverage role but is never granted by the tutor.",
       "source_refs": [
-        "Authored SPECIES_PIKACHU_COSPLAY review",
-        "Emerald Champions exact-form equivalence check for SPECIES_PIKACHU_ROCK_STAR"
+        "Canonical Cosplay Pikachu Rock Star Meteor Mash move",
+        "Emerald Champions form-exclusive legality for SPECIES_PIKACHU_ROCK_STAR"
       ],
-      "doubles_rationale": "This cosmetic form is mechanically identical to the reviewed Cosplay form, so the same Light Ball damage, priority, Nuzzle speed control, and Charm package is optimal.",
+      "doubles_rationale": "Wild Charge and Extreme Speed provide Light Ball damage and priority, Nuzzle controls Speed, and Rock Star’s Meteor Mash adds its defining Steel coverage.",
       "dependency_notes": [
         "The full damage ceiling requires Light Ball, and this restricted cosmetic pool has no Protect.",
-        "Alias acceptance is gated on identical stats, types, abilities, full legal pool, moves, nature, and ability."
+        "Meteor Mash is exposed as the canonical Rock Star form-exclusive move."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
-      "review_notes": "Exact cosmetic alias proven by the review loader."
+      "review_notes": "Authored independently after restoring the costume’s canonical signature move."
     },
     {
       "species": "SPECIES_PIKACHU_BELLE",
-      "alias_of": "SPECIES_PIKACHU_COSPLAY",
-      "role": "Light Ball priority and speed-control attacker",
+      "role": "Belle Light Ball attacker",
       "moves": [
         "MOVE_WILD_CHARGE",
         "MOVE_EXTREME_SPEED",
         "MOVE_NUZZLE",
-        "MOVE_CHARM"
+        "MOVE_ICICLE_CRASH"
       ],
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_STATIC",
       "suggested_item": "ITEM_LIGHT_BALL",
-      "item_context": "SPECIES_PIKACHU_BELLE has exactly the same local battle data and legal move pool as the reviewed Cosplay form; Light Ball remains advisory and is never auto-equipped.",
+      "item_context": "Light Ball supports Belle Pikachu’s priority and Ice-coverage role but is never granted by the tutor.",
       "source_refs": [
-        "Authored SPECIES_PIKACHU_COSPLAY review",
-        "Emerald Champions exact-form equivalence check for SPECIES_PIKACHU_BELLE"
+        "Canonical Cosplay Pikachu Belle Icicle Crash move",
+        "Emerald Champions form-exclusive legality for SPECIES_PIKACHU_BELLE"
       ],
-      "doubles_rationale": "This cosmetic form is mechanically identical to the reviewed Cosplay form, so the same Light Ball damage, priority, Nuzzle speed control, and Charm package is optimal.",
+      "doubles_rationale": "Wild Charge and Extreme Speed provide Light Ball damage and priority, Nuzzle controls Speed, and Belle’s Icicle Crash adds its defining Ice coverage.",
       "dependency_notes": [
         "The full damage ceiling requires Light Ball, and this restricted cosmetic pool has no Protect.",
-        "Alias acceptance is gated on identical stats, types, abilities, full legal pool, moves, nature, and ability."
+        "Icicle Crash is exposed as the canonical Belle form-exclusive move."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
-      "review_notes": "Exact cosmetic alias proven by the review loader."
+      "review_notes": "Authored independently after restoring the costume’s canonical signature move."
     },
     {
       "species": "SPECIES_PIKACHU_POP_STAR",
-      "alias_of": "SPECIES_PIKACHU_COSPLAY",
-      "role": "Light Ball priority and speed-control attacker",
+      "role": "Pop Star mixed Light Ball attacker",
       "moves": [
         "MOVE_WILD_CHARGE",
         "MOVE_EXTREME_SPEED",
         "MOVE_NUZZLE",
-        "MOVE_CHARM"
+        "MOVE_DRAINING_KISS"
       ],
-      "nature": "NATURE_JOLLY",
+      "nature": "NATURE_NAIVE",
       "ability": "ABILITY_STATIC",
       "suggested_item": "ITEM_LIGHT_BALL",
-      "item_context": "SPECIES_PIKACHU_POP_STAR has exactly the same local battle data and legal move pool as the reviewed Cosplay form; Light Ball remains advisory and is never auto-equipped.",
+      "item_context": "Light Ball supports Pop Star Pikachu’s mixed priority and sustain role but is never granted by the tutor.",
       "source_refs": [
-        "Authored SPECIES_PIKACHU_COSPLAY review",
-        "Emerald Champions exact-form equivalence check for SPECIES_PIKACHU_POP_STAR"
+        "Canonical Cosplay Pikachu Pop Star Draining Kiss move",
+        "Emerald Champions form-exclusive legality for SPECIES_PIKACHU_POP_STAR"
       ],
-      "doubles_rationale": "This cosmetic form is mechanically identical to the reviewed Cosplay form, so the same Light Ball damage, priority, Nuzzle speed control, and Charm package is optimal.",
+      "doubles_rationale": "Naive preserves Wild Charge, Extreme Speed, and Pop Star’s special Draining Kiss, while Nuzzle supplies reliable speed control.",
       "dependency_notes": [
         "The full damage ceiling requires Light Ball, and this restricted cosmetic pool has no Protect.",
-        "Alias acceptance is gated on identical stats, types, abilities, full legal pool, moves, nature, and ability."
+        "Draining Kiss is exposed as the canonical Pop Star form-exclusive move."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
-      "review_notes": "Exact cosmetic alias proven by the review loader."
+      "review_notes": "Authored independently after restoring the costume’s canonical signature move."
     },
     {
       "species": "SPECIES_PIKACHU_PH_D",
-      "alias_of": "SPECIES_PIKACHU_COSPLAY",
-      "role": "Light Ball priority and speed-control attacker",
+      "role": "Ph.D. Electric Terrain attacker",
       "moves": [
         "MOVE_WILD_CHARGE",
         "MOVE_EXTREME_SPEED",
         "MOVE_NUZZLE",
-        "MOVE_CHARM"
+        "MOVE_ELECTRIC_TERRAIN"
       ],
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_STATIC",
       "suggested_item": "ITEM_LIGHT_BALL",
-      "item_context": "SPECIES_PIKACHU_PH_D has exactly the same local battle data and legal move pool as the reviewed Cosplay form; Light Ball remains advisory and is never auto-equipped.",
+      "item_context": "Light Ball supports Ph.D. Pikachu’s priority damage after it establishes Electric Terrain but is never granted by the tutor.",
       "source_refs": [
-        "Authored SPECIES_PIKACHU_COSPLAY review",
-        "Emerald Champions exact-form equivalence check for SPECIES_PIKACHU_PH_D"
+        "Canonical Cosplay Pikachu Ph.D. Electric Terrain move",
+        "Emerald Champions form-exclusive legality for SPECIES_PIKACHU_PH_D"
       ],
-      "doubles_rationale": "This cosmetic form is mechanically identical to the reviewed Cosplay form, so the same Light Ball damage, priority, Nuzzle speed control, and Charm package is optimal.",
+      "doubles_rationale": "Electric Terrain strengthens Wild Charge and blocks grounded sleep, Extreme Speed adds priority, and Nuzzle controls Speed.",
       "dependency_notes": [
         "The full damage ceiling requires Light Ball, and this restricted cosmetic pool has no Protect.",
-        "Alias acceptance is gated on identical stats, types, abilities, full legal pool, moves, nature, and ability."
+        "Electric Terrain is exposed as the canonical Ph.D. form-exclusive move and also affects both teams."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
-      "review_notes": "Exact cosmetic alias proven by the review loader."
+      "review_notes": "Authored independently after restoring the costume’s canonical signature move."
     },
     {
       "species": "SPECIES_PIKACHU_LIBRE",
-      "alias_of": "SPECIES_PIKACHU_COSPLAY",
-      "role": "Light Ball priority and speed-control attacker",
+      "role": "Libre Light Ball attacker",
       "moves": [
         "MOVE_WILD_CHARGE",
         "MOVE_EXTREME_SPEED",
         "MOVE_NUZZLE",
-        "MOVE_CHARM"
+        "MOVE_FLYING_PRESS"
       ],
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_STATIC",
       "suggested_item": "ITEM_LIGHT_BALL",
-      "item_context": "SPECIES_PIKACHU_LIBRE has exactly the same local battle data and legal move pool as the reviewed Cosplay form; Light Ball remains advisory and is never auto-equipped.",
+      "item_context": "Light Ball supports Libre Pikachu’s priority and Fighting/Flying coverage role but is never granted by the tutor.",
       "source_refs": [
-        "Authored SPECIES_PIKACHU_COSPLAY review",
-        "Emerald Champions exact-form equivalence check for SPECIES_PIKACHU_LIBRE"
+        "Canonical Cosplay Pikachu Libre Flying Press move",
+        "Emerald Champions form-exclusive legality for SPECIES_PIKACHU_LIBRE"
       ],
-      "doubles_rationale": "This cosmetic form is mechanically identical to the reviewed Cosplay form, so the same Light Ball damage, priority, Nuzzle speed control, and Charm package is optimal.",
+      "doubles_rationale": "Wild Charge and Extreme Speed provide Light Ball damage and priority, Nuzzle controls Speed, and Libre’s Flying Press adds its defining dual-type coverage.",
       "dependency_notes": [
         "The full damage ceiling requires Light Ball, and this restricted cosmetic pool has no Protect.",
-        "Alias acceptance is gated on identical stats, types, abilities, full legal pool, moves, nature, and ability."
+        "Flying Press is exposed as the canonical Libre form-exclusive move."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
-      "review_notes": "Exact cosmetic alias proven by the review loader."
+      "review_notes": "Authored independently after restoring the costume’s canonical signature move."
     },
     {
       "species": "SPECIES_PIKACHU_ORIGINAL_CAP",

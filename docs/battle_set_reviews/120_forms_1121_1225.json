@@ -387,8 +387,7 @@
     },
     {
       "species": "SPECIES_ZYGARDE_10_POWER_CONSTRUCT",
-      "alias_of": "SPECIES_ZYGARDE_10",
-      "role": "Fast Glare and Coil spread attacker",
+      "role": "Power Construct fast Coil attacker",
       "moves": [
         "MOVE_LANDS_WRATH",
         "MOVE_CRUNCH",
@@ -396,20 +395,20 @@
         "MOVE_COIL"
       ],
       "nature": "NATURE_JOLLY",
-      "ability": "ABILITY_AURA_BREAK",
+      "ability": "ABILITY_POWER_CONSTRUCT",
       "suggested_item": "ITEM_SITRUS_BERRY",
-      "item_context": "The engine currently gives this slot the exact stats, typing, Aura Break slots, and legal pool of reviewed Zygarde-10; the alias records that measurable behavior.",
+      "item_context": "ITEM_SITRUS_BERRY helps the 10% form cross the Power Construct threshold; the battle-set builder never grants or equips it.",
       "source_refs": [
-        "Authored SPECIES_ZYGARDE_10 review",
-        "Emerald Champions exact-form equivalence check for SPECIES_ZYGARDE_10_POWER_CONSTRUCT"
+        "Smogon Zygarde Power Construct Coil roles adapted to the local 10% form",
+        "Emerald Champions exact local legality, stats, and Power Construct ability for SPECIES_ZYGARDE_10_POWER_CONSTRUCT"
       ],
-      "doubles_rationale": "SPECIES_ZYGARDE_10_POWER_CONSTRUCT is mechanically identical to SPECIES_ZYGARDE_10 in this engine, so the same authored doubles package is retained exactly.",
+      "doubles_rationale": "Power Construct gives the fast 10% form a real late-turn transformation payoff while Land’s Wrath, Glare, Coil, and Crunch provide spread pressure, speed control, setup, and coverage.",
       "dependency_notes": [
         "This form’s local pool has no Protect, so it relies on natural Speed and Glare for positioning.",
-        "Alias acceptance is gated on identical stats, types, ability slots, full legal move pool, moves, nature, and ability."
+        "Power Construct activates only after its HP falls to the native threshold."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
-      "review_notes": "Exact cosmetic alias proven by the review loader."
+      "review_notes": "Authored independently after correcting the form’s ability slots from Aura Break to Power Construct."
     },
     {
       "species": "SPECIES_ZYGARDE_50_POWER_CONSTRUCT",
@@ -1195,7 +1194,7 @@
       "species": "SPECIES_NECROZMA_DUSK_MANE",
       "role": "Prism Armor Trick Room physical attacker",
       "moves": [
-        "MOVE_IRON_HEAD",
+        "MOVE_SUNSTEEL_STRIKE",
         "MOVE_EARTHQUAKE",
         "MOVE_TRICK_ROOM",
         "MOVE_PROTECT"
@@ -1205,22 +1204,22 @@
       "suggested_item": "ITEM_WEAKNESS_POLICY",
       "item_context": "ITEM_WEAKNESS_POLICY supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
       "source_refs": [
-        "Smogon Gen 8 Battle Stadium Doubles Necrozma-Dusk-Mane Offensive Trick Room adapted to local signature availability",
-        "Emerald Champions exact local legality, stats, and abilities for SPECIES_NECROZMA_DUSK_MANE"
+        "Smogon Gen 8 Battle Stadium Doubles Necrozma-Dusk-Mane Offensive Trick Room",
+        "Emerald Champions canonical Dusk Mane Sunsteel Strike form-exclusive legality"
       ],
-      "doubles_rationale": "Dusk Mane sets Trick Room, attacks from 157 Attack with Steel STAB and spread Earthquake, and Prism Armor plus Protect create Weakness Policy opportunities.",
+      "doubles_rationale": "Dusk Mane sets Trick Room, attacks from 157 Attack with ability-ignoring Sunsteel Strike and spread Earthquake, and uses Prism Armor plus Protect to create Weakness Policy opportunities.",
       "dependency_notes": [
-        "Earthquake can hit the ally, and this form’s local pool does not expose Sunsteel Strike.",
+        "Earthquake can hit the ally, so pair it with immunity, Telepathy, or Protect.",
         "The suggested item is advisory only and must be obtained and equipped separately."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
-      "review_notes": "Completed the direct Smogon Trick Room shell with the strongest legal local Steel attack."
+      "review_notes": "Completed the direct Smogon Trick Room shell with Dusk Mane’s canonical signature move."
     },
     {
       "species": "SPECIES_NECROZMA_DAWN_WINGS",
       "role": "Power Herb special setup attacker",
       "moves": [
-        "MOVE_EXPANDING_FORCE",
+        "MOVE_MOONGEIST_BEAM",
         "MOVE_METEOR_BEAM",
         "MOVE_EARTH_POWER",
         "MOVE_PROTECT"
@@ -1230,16 +1229,16 @@
       "suggested_item": "ITEM_POWER_HERB",
       "item_context": "ITEM_POWER_HERB supports this role; the battle-set builder never grants or equips it, and the authored moves remain usable without automatic item assignment.",
       "source_refs": [
-        "Smogon Necrozma-Dawn-Wings doubles roles adapted to exact local signature availability",
-        "Emerald Champions exact local legality, stats, and abilities for SPECIES_NECROZMA_DAWN_WINGS"
+        "Smogon Necrozma-Dawn-Wings doubles roles",
+        "Emerald Champions canonical Dawn Wings Moongeist Beam form-exclusive legality"
       ],
-      "doubles_rationale": "Power Herb Meteor Beam boosts Special Attack, Expanding Force exploits Psychic Terrain, Earth Power covers Steel targets, and Protect maintains positioning.",
+      "doubles_rationale": "Power Herb Meteor Beam boosts Special Attack, Moongeist Beam supplies ability-ignoring Ghost STAB, Earth Power covers Steel targets, and Protect maintains positioning.",
       "dependency_notes": [
-        "Expanding Force reaches spread power only in Psychic Terrain, and the local pool lacks Moongeist Beam.",
+        "Power Herb must be equipped manually for immediate Meteor Beam; without it the move takes a charge turn.",
         "The suggested item is advisory only and must be obtained and equipped separately."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
-      "review_notes": "Used the best coherent special set available in the exact local form pool."
+      "review_notes": "Restored Dawn Wings’ canonical signature move and removed Psychic Terrain dependence."
     },
     {
       "species": "SPECIES_MAGEARNA_ORIGINAL_COLOR",
@@ -1578,7 +1577,7 @@
       "species": "SPECIES_ZACIAN_CROWNED_SWORD",
       "role": "Intrepid Sword fast physical attacker",
       "moves": [
-        "MOVE_IRON_HEAD",
+        "MOVE_BEHEMOTH_BLADE",
         "MOVE_SACRED_SWORD",
         "MOVE_SUBSTITUTE",
         "MOVE_PROTECT"
@@ -1591,20 +1590,20 @@
         "Smogon Gen 8 Battle Stadium Doubles Zacian-Crowned Offensive",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_ZACIAN_CROWNED_SWORD"
       ],
-      "doubles_rationale": "Intrepid Sword creates immediate pressure, Crowned Iron Head supplies Steel STAB, Sacred Sword ignores defensive boosts, and Substitute plus Protect punish passive turns.",
+      "doubles_rationale": "Intrepid Sword creates immediate pressure, Behemoth Blade supplies Crowned Steel STAB, Sacred Sword ignores defensive boosts, and Substitute plus Protect punish passive turns.",
       "dependency_notes": [
-        "Rusted Sword is required to maintain Crowned form and the engine’s transformed Steel attack behavior.",
+        "Rusted Sword is required to maintain Crowned form and must be equipped manually.",
         "The suggested item is advisory only and must be obtained and equipped separately."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
-      "review_notes": "Accepted the direct restricted-doubles offensive set and restored its local Steel move."
+      "review_notes": "Accepted the direct restricted-doubles offensive set and restored Behemoth Blade explicitly."
     },
     {
       "species": "SPECIES_ZAMAZENTA_CROWNED_SHIELD",
       "role": "Dauntless Shield Wide Guard tank",
       "moves": [
         "MOVE_CLOSE_COMBAT",
-        "MOVE_IRON_HEAD",
+        "MOVE_BEHEMOTH_BASH",
         "MOVE_WIDE_GUARD",
         "MOVE_PROTECT"
       ],
@@ -1616,13 +1615,13 @@
         "Smogon Gen 9 VGC Crowned Zamazenta Bulky Attacker adapted to exact local attacks",
         "Emerald Champions exact local legality, stats, and abilities for SPECIES_ZAMAZENTA_CROWNED_SHIELD"
       ],
-      "doubles_rationale": "Dauntless Shield supports repeated positioning, dual STAB prevents passivity, Wide Guard blocks spread attacks, and Protect manages focus fire.",
+      "doubles_rationale": "Dauntless Shield supports repeated positioning, Behemoth Bash and Close Combat provide dual STAB, Wide Guard blocks spread attacks, and Protect manages focus fire.",
       "dependency_notes": [
         "Rusted Shield is required to maintain Crowned form; Close Combat temporarily reduces the defenses this role values.",
         "The suggested item is advisory only and must be obtained and equipped separately."
       ],
       "reviewed_by": "Emerald Champions stable-forms doubles audit",
-      "review_notes": "Completed the direct VGC Wide Guard shell with its strongest legal dual STAB."
+      "review_notes": "Completed the direct VGC Wide Guard shell with Behemoth Bash restored explicitly."
     },
     {
       "species": "SPECIES_URSHIFU_RAPID_STRIKE_STYLE",

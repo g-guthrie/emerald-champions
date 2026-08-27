@@ -41,15 +41,26 @@ INDEX = ROOT / "docs/competitive_team_index.jsonl"
 REVIEW_DIR = ROOT / "docs/battle_set_reviews"
 GENERATOR_VERSION = 1
 
-# Rotom's appliance script teaches one move as part of the form change.  Those
-# moves are runtime-legal even though the ordinary level/TM/tutor bitfields do
-# not contain them for the appliance species.
+# Some stable forms receive a canonical form-exclusive move outside the
+# ordinary level/TM/tutor bitfields. Rotom gets its appliance move from the
+# form-change script; costume and fused/crowned forms have the same native
+# form identity but share a base-species level-up pointer. Keep one explicit
+# legality map in sync with the all-legal Pokemon Center teacher below.
 FORM_SPECIFIC_LEGAL_MOVES = {
     "SPECIES_ROTOM_HEAT": {"MOVE_OVERHEAT"},
     "SPECIES_ROTOM_WASH": {"MOVE_HYDRO_PUMP"},
     "SPECIES_ROTOM_FROST": {"MOVE_FREEZE_DRY"},
     "SPECIES_ROTOM_FAN": {"MOVE_HURRICANE"},
     "SPECIES_ROTOM_MOW": {"MOVE_LEAF_STORM"},
+    "SPECIES_PIKACHU_ROCK_STAR": {"MOVE_METEOR_MASH"},
+    "SPECIES_PIKACHU_BELLE": {"MOVE_ICICLE_CRASH"},
+    "SPECIES_PIKACHU_POP_STAR": {"MOVE_DRAINING_KISS"},
+    "SPECIES_PIKACHU_PH_D": {"MOVE_ELECTRIC_TERRAIN"},
+    "SPECIES_PIKACHU_LIBRE": {"MOVE_FLYING_PRESS"},
+    "SPECIES_NECROZMA_DUSK_MANE": {"MOVE_SUNSTEEL_STRIKE"},
+    "SPECIES_NECROZMA_DAWN_WINGS": {"MOVE_MOONGEIST_BEAM"},
+    "SPECIES_ZACIAN_CROWNED_SWORD": {"MOVE_BEHEMOTH_BLADE"},
+    "SPECIES_ZAMAZENTA_CROWNED_SHIELD": {"MOVE_BEHEMOTH_BASH"},
 }
 
 NATURES = {

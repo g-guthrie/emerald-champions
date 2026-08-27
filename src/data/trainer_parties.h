@@ -4921,11 +4921,11 @@ static const struct TrainerMonItemCustomMoves sParty_Timmy[] = {
     },
     {
         .lvl = 3,
-        .species = SPECIES_ROTOM,
-        .heldItem = ITEM_CHOICE_SPECS,
-        .ability = 0,
-        .spread = SPREAD_HP_ICE_TIMID,
-        .moves = MOVE_VOLT_SWITCH, MOVE_SHADOW_BALL, MOVE_HIDDEN_POWER, MOVE_TRICK
+        .species = SPECIES_PINCURCHIN,
+        .heldItem = ITEM_LIFE_ORB,
+        .ability = 2,
+        .spread = SPREAD_31_IV_HP_SPATK_QUIET,
+        .moves = MOVE_RISING_VOLTAGE, MOVE_SCALD, MOVE_RECOVER, MOVE_PROTECT
     }
 };
 

@@ -1012,7 +1012,7 @@
     },
     {
       "species": "SPECIES_GRAPPLOCT",
-      "role": "Technician Octolock attacker",
+      "role": "Limber Octolock attacker",
       "moves": [
         "MOVE_OCTOLOCK",
         "MOVE_DRAIN_PUNCH",
@@ -1020,14 +1020,14 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_ADAMANT",
-      "ability": "ABILITY_TECHNICIAN",
+      "ability": "ABILITY_LIMBER",
       "suggested_item": "ITEM_LEFTOVERS",
       "item_context": "Leftovers is advisory only; the native builder does not grant or equip held items.",
       "source_refs": [
         "Smogon gen 8 zu Grapploct Octolock, adapted for doubles",
         "Emerald Champions exact local stats, ability slots, and complete legal move pool"
       ],
-      "doubles_rationale": "Grapploct uses Technician as a Technician Octolock attacker, with Octolock, Drain Punch, Ice Punch, and Protect forming one coherent four-slot doubles plan.",
+      "doubles_rationale": "Limber prevents paralysis from undermining Grapploct while Octolock, Drain Punch, Ice Punch, and Protect form a coherent trapping and sustain plan.",
       "dependency_notes": [
         "The suggested held item is advisory; the native builder neither grants nor equips it, and no move becomes unusable without it."
       ],
