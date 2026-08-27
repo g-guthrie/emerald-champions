@@ -8,7 +8,7 @@ The report distinguishes **within-method species probability** from an encounter
 
 ## Technical summary
 
-- Source state: commit `55059b06b4fa04d30ada5a22d7cc3d693979bc6e`; clean working tree at generation: **False**.
+- Source state: commit `d38f0f470f1fd2a5924dc48894f804b1ad631c4f`; clean working tree at generation: **False**.
 - Random encounter coverage: **139** populated main overworld maps from **147** configured entries, plus **576** distinct species/forms in catchable random pools.
 - Loadout system: **1309** total competitive sets. Wild Pokémon roll the exact one/two/three-set tutor count at 100%, 50/50, or approximately one-third each.
 - Item system: **65** ordinary competitive held items are free and unlimited. Berries and evolution/transformation progression items are not vendor stock.
@@ -1887,7 +1887,6 @@ The following table covers source-resolved scripted/static battles, gifts, Eggs,
 | Cobalion | Conditional Legendary Sign | Granite Cave B2F | Legendary Sign: 10% within Land encounters after 1 Badge(s); bring SPECIES_LUCARIO; requires FLAG_BADGE01_GET; cap offset +1 | src/data/pokemon/legendary_signs.h |
 | Regidrago | Conditional Legendary Sign | Meteor Falls 1F 2R | Legendary Sign: 8% within Land encounters after 6 Badge(s); bring SPECIES_REGIROCK; requires FLAG_BADGE06_GET; cap offset +2 | src/data/pokemon/legendary_signs.h |
 | Uxie | Conditional Legendary Sign | Meteor Falls B1F 1R | Legendary Sign: 10% within Land encounters after 5 Badge(s); bring SPECIES_ALAKAZAM; requires FLAG_BADGE05_GET; cap offset +1 | src/data/pokemon/legendary_signs.h |
-| Hoopa | Conditional Legendary Sign | Mirage Tower 4F | Legendary Sign: 10% within Land encounters after 4 Badge(s); bring SPECIES_UNOWN; requires FLAG_BADGE04_GET; cap offset +1 | src/data/pokemon/legendary_signs.h |
 | Giratina | Conditional Legendary Sign | Mt Pyre 6F | Legendary Sign: 8% within Land encounters after 8 Badge(s); bring SPECIES_DUSKNOIR; requires FLAG_SYS_GAME_CLEAR; cap offset +3 | src/data/pokemon/legendary_signs.h |
 | Tapu Lele | Conditional Legendary Sign | Mt Pyre Exterior | Legendary Sign: 8% within Land encounters after 6 Badge(s); bring SPECIES_GARDEVOIR; requires FLAG_BADGE06_GET; cap offset +1 | src/data/pokemon/legendary_signs.h |
 | Yveltal | Conditional Legendary Sign | Mt Pyre Exterior | Legendary Sign: 8% within Land encounters after 8 Badge(s); bring SPECIES_ABSOL; requires FLAG_SYS_GAME_CLEAR; cap offset +3 | src/data/pokemon/legendary_signs.h |
@@ -1898,6 +1897,7 @@ The following table covers source-resolved scripted/static battles, gifts, Eggs,
 | Virizion | Conditional Legendary Sign | Petalburg Woods 2 | Legendary Sign: 10% within Land encounters after 2 Badge(s); bring SPECIES_BRELOOM; requires FLAG_BADGE02_GET; cap offset +1 | src/data/pokemon/legendary_signs.h |
 | Raikou | Conditional Legendary Sign | Route 110 | Legendary Sign: 10% within Land encounters after 3 Badge(s); bring SPECIES_MANECTRIC; requires FLAG_BADGE03_GET; cap offset +1 | src/data/pokemon/legendary_signs.h |
 | Tapu Koko | Conditional Legendary Sign | Route 110 | Legendary Sign: 8% within Land encounters after 5 Badge(s); bring SPECIES_RAICHU; requires FLAG_BADGE05_GET; cap offset +1 | src/data/pokemon/legendary_signs.h |
+| Hoopa | Conditional Legendary Sign | Route 111 | Legendary Sign: 10% within Land encounters after 4 Badge(s); bring SPECIES_UNOWN; requires FLAG_BADGE04_GET; cap offset +1 | src/data/pokemon/legendary_signs.h |
 | Landorus | Conditional Legendary Sign | Route 111 | Legendary Sign: 10% within Land encounters after 5 Badge(s); bring SPECIES_CASTFORM; requires FLAG_BADGE05_GET; cap offset +1 | src/data/pokemon/legendary_signs.h |
 | Shaymin | Conditional Legendary Sign | Route 117 | Legendary Sign: 10% within Land encounters after 4 Badge(s); bring SPECIES_ROSERADE; requires FLAG_BADGE04_GET; cap offset +0 | src/data/pokemon/legendary_signs.h |
 | Thundurus | Conditional Legendary Sign | Route 119 | Legendary Sign: 10% within Water encounters after 5 Badge(s); bring SPECIES_CASTFORM; requires FLAG_BADGE05_GET; cap offset +1 | src/data/pokemon/legendary_signs.h |
@@ -2748,7 +2748,7 @@ This appendix covers every runtime species/form ID. `Direct acquisition` means t
 | 717 | Yveltal | SPECIES_YVELTAL | Direct acquisition | Conditional Legendary Sign: Mt Pyre Exterior (Legendary Sign: 8% within Land encounters after 8 Badge(s); bring SPECIES_ABSOL; requires FLAG_SYS_GAME_CLEAR; cap offset +3) | party-selectable species/form |
 | 718 | Zygarde | SPECIES_ZYGARDE | Direct acquisition | Conditional Legendary Sign: Desert Underpass (Legendary Sign: 8% within Land encounters after 8 Badge(s); bring SPECIES_LANDORUS; requires FLAG_SYS_GAME_CLEAR; cap offset +3) | party-selectable species/form |
 | 719 | Diancie | SPECIES_DIANCIE | Direct acquisition | Scripted/static encounter: Cave Of Origin Diancies Room (Literal setwildbattle acquisition) \| Authored static acquisition: Cave Of Origin Diancies Room (diancie) | party-selectable species/form |
-| 720 | Hoopa | SPECIES_HOOPA | Direct acquisition | Conditional Legendary Sign: Mirage Tower 4F (Legendary Sign: 10% within Land encounters after 4 Badge(s); bring SPECIES_UNOWN; requires FLAG_BADGE04_GET; cap offset +1) | party-selectable species/form |
+| 720 | Hoopa | SPECIES_HOOPA | Direct acquisition | Conditional Legendary Sign: Route 111 (Legendary Sign: 10% within Land encounters after 4 Badge(s); bring SPECIES_UNOWN; requires FLAG_BADGE04_GET; cap offset +1) | party-selectable species/form |
 | 721 | Volcanion | SPECIES_VOLCANION | Direct acquisition | Random wild in 1 catchable method pool(s): Magma Hideout 4F / Land | party-selectable species/form |
 | 722 | Rowlet | SPECIES_ROWLET | Direct acquisition | Starter choice: Littleroot opening (Selectable Alola starter) \| Prize Pokémon: Mauville Game Corner (Coin-exchange Pokémon prize) | party-selectable species/form |
 | 723 | Dartrix | SPECIES_DARTRIX | Evolution from obtainable Pokémon | Rowlet → Dartrix via Level (16) | party-selectable species/form |

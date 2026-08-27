@@ -421,8 +421,6 @@ void ChampionsCircuitHandleBattleResult(void)
         u16 total = VarGet(VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS);
 
         gSaveBlock2Ptr->frontier.towerNumWins = wins;
-        if (wins > gSaveBlock2Ptr->frontier.towerSinglesStreak)
-            gSaveBlock2Ptr->frontier.towerSinglesStreak = wins;
         if (total != 0xFFFF)
             VarSet(VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS, total + 1);
         HealPlayerParty();

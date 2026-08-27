@@ -1,8 +1,8 @@
 {
   "meta": {
     "title": "Emerald Champions — Complete Pokémon Encounter and Acquisition Report",
-    "generated_at": "2026-08-27T20:15:53Z",
-    "source_commit": "55059b06b4fa04d30ada5a22d7cc3d693979bc6e",
+    "generated_at": "2026-08-27T21:07:50Z",
+    "source_commit": "d38f0f470f1fd2a5924dc48894f804b1ad631c4f",
     "source_clean": false,
     "scope": "All current random encounter tables plus source-resolved non-random acquisition paths and every runtime species/form ID."
   },
@@ -34628,14 +34628,6 @@
       "species": "Uxie"
     },
     {
-      "species_id": "SPECIES_HOOPA",
-      "category": "Conditional Legendary Sign",
-      "location": "Mirage Tower 4F",
-      "details": "Legendary Sign: 10% within Land encounters after 4 Badge(s); bring SPECIES_UNOWN; requires FLAG_BADGE04_GET; cap offset +1",
-      "source_file": "src/data/pokemon/legendary_signs.h",
-      "species": "Hoopa"
-    },
-    {
       "species_id": "SPECIES_GIRATINA",
       "category": "Conditional Legendary Sign",
       "location": "Mt Pyre 6F",
@@ -34714,6 +34706,14 @@
       "details": "Legendary Sign: 8% within Land encounters after 5 Badge(s); bring SPECIES_RAICHU; requires FLAG_BADGE05_GET; cap offset +1",
       "source_file": "src/data/pokemon/legendary_signs.h",
       "species": "Tapu Koko"
+    },
+    {
+      "species_id": "SPECIES_HOOPA",
+      "category": "Conditional Legendary Sign",
+      "location": "Route 111",
+      "details": "Legendary Sign: 10% within Land encounters after 4 Badge(s); bring SPECIES_UNOWN; requires FLAG_BADGE04_GET; cap offset +1",
+      "source_file": "src/data/pokemon/legendary_signs.h",
+      "species": "Hoopa"
     },
     {
       "species_id": "SPECIES_LANDORUS",
@@ -42906,7 +42906,7 @@
       "acquisition_class": "Direct acquisition",
       "wild_pool_count": 0,
       "nonrandom_source_count": 1,
-      "acquisition_path": "Conditional Legendary Sign: Mirage Tower 4F (Legendary Sign: 10% within Land encounters after 4 Badge(s); bring SPECIES_UNOWN; requires FLAG_BADGE04_GET; cap offset +1)",
+      "acquisition_path": "Conditional Legendary Sign: Route 111 (Legendary Sign: 10% within Land encounters after 4 Badge(s); bring SPECIES_UNOWN; requires FLAG_BADGE04_GET; cap offset +1)",
       "runtime_status": "party-selectable species/form"
     },
     {

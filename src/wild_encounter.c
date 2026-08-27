@@ -322,34 +322,26 @@ static u8 ChooseWildMonIndex_Fishing(u8 rod)
 // Used to scale wild Pokemon levels
 static u8 GetMedianLevelOfPlayerParty(void)
 {
-    u8 i, j, temp, medianLevel, medianIndex = 0;
-    u8 playerPartyCount = CalculatePlayerBattlerPartyCount();
+    u8 i, j, temp;
+    u8 playerPartyCount = 0;
     u8 partyLevels[PARTY_SIZE] = {0};
 
-    // Don't calculate anything if party size is 1
-    if (playerPartyCount == 1)
+    // Compact only real Pokémon into the level array. Eggs and empty slots
+    // must never influence wild scaling, even if an Egg occupies slot zero.
+    for (i = 0; i < PARTY_SIZE; i++)
     {
-        medianLevel = GetMonData(&gPlayerParty[0], MON_DATA_LEVEL, NULL);
-        return medianLevel;
-    }
+        u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL);
 
-    // Store player levels in partyLevels array
-    for (i = 0 ; i < PARTY_SIZE; i++)
-    {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL) != SPECIES_EGG)
-        {
-            partyLevels[i] = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL, NULL);
-        }
-        else
-        {
-            partyLevels[i] = 1; 
-        }
+        if (species != SPECIES_NONE && species != SPECIES_EGG)
+            partyLevels[playerPartyCount++] = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL, NULL);
     }
+    if (playerPartyCount == 0)
+        return 1;
 
     // Sort player levels in ascending order
-    for (i = 0 ; i < PARTY_SIZE ; i++)
+    for (i = 0; i < playerPartyCount; i++)
     {
-        for (j = 0 ; j < (PARTY_SIZE - 1) ; j++)
+        for (j = 0; j + 1 < playerPartyCount; j++)
         {
             if (partyLevels[j] > partyLevels[j + 1])
             {
@@ -359,22 +351,7 @@ static u8 GetMedianLevelOfPlayerParty(void)
             }
         }
     }
-/* 
-    Get median level of Pokemon that aren't eggs. Examples:
-
-    partyLevels = [1, 1, 1, 40, 40, 50]
-    playerPartyCount = 3, want index 4
-    playerPartyCount/2 + (PARTY_SIZE - playerPartyCount) = 1 + (6 - 3) = 4
-
-    partyLevels = [1,  1, 40, 40, 42, 50]
-    playerPartyCount = 4, want index 4
-    playerPartyCount/2 + (PARTY_SIZE - playerPartyCount) = 2 + (6 - 4) = 4
-*/
-    medianIndex = (playerPartyCount / 2) + (PARTY_SIZE - playerPartyCount);
-
-    medianLevel = partyLevels[medianIndex];
-    
-    return medianLevel;
+    return partyLevels[playerPartyCount / 2];
 }
 
 static u8 ChooseWildMonLevel(void)

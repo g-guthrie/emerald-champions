@@ -24,7 +24,7 @@ static const u8 sSignLocationPetalburgWoods[] = _("Petalburg Woods");
 static const u8 sSignLocationGraniteB2F[] = _("Granite Cave B2F");
 static const u8 sSignLocationFieryPath[] = _("Fiery Path");
 static const u8 sSignLocationMtPyre6F[] = _("Mt. Pyre's sixth floor");
-static const u8 sSignLocationMirageTower[] = _("Mirage Tower's summit");
+static const u8 sSignLocationRoute111Desert[] = _("Route 111's desert");
 static const u8 sSignLocationRoute111[] = _("Route 111");
 static const u8 sSignLocationRoute120[] = _("Route 120's water");
 static const u8 sSignLocationSeafloorRoom6[] = _("Seafloor Cavern Room 6");
@@ -59,7 +59,7 @@ static const u8 *GetLegendarySignLocationName(u8 signId)
     case LEGENDARY_SIGN_GIRATINA:
         return sSignLocationMtPyre6F;
     case LEGENDARY_SIGN_HOOPA:
-        return sSignLocationMirageTower;
+        return sSignLocationRoute111Desert;
     case LEGENDARY_SIGN_LANDORUS:
         return sSignLocationRoute111;
     case LEGENDARY_SIGN_MESPRIT:

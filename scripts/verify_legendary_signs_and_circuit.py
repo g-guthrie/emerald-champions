@@ -96,6 +96,10 @@ def main() -> None:
             "Genesect Game Corner prize is missing")
     require("SPECIES_POIPOLE" in read("data/maps/MauvilleCity_GameCorner/scripts.inc"),
             "Poipole Game Corner prize is missing")
+    require("MarkLegendarySignCaughtBySpecies(species)" in read("src/script_pokemon_util.c"),
+            "successful gift Pokémon do not close their Legendary Sign acquisition")
+    require("MIRAGE_TOWER_4F" not in definitions,
+            "a Legendary Sign still depends on collapsible Mirage Tower 4F")
 
     for flag in (
         "FLAG_HIDE_LEGENDARY_SIGN_DARKRAI",
@@ -120,6 +124,8 @@ def main() -> None:
     )
     for token in circuit_requirements:
         require(token in circuit, f"Circuit invariant missing: {token}")
+    require("towerSinglesStreak" not in circuit,
+            "Champions Circuit must not write the Battle Tower singles scratch field")
 
     corpus = json.loads(read("docs/verdant_multi_battle_sets.json"))
     require(corpus["set_count"] == 1309, f"expected 1309 legal sets, found {corpus['set_count']}")
