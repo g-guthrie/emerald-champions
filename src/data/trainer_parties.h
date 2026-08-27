@@ -7040,35 +7040,38 @@ static const struct TrainerMonItemCustomMoves sParty_Dalton4[] = {
 
 
 static const struct TrainerMonItemCustomMoves sParty_Dylan1[] = {
-
-{
-    .lvl = -1,
-    .species = SPECIES_YANMA,
-    .spread = SPREAD_25_IV_0_EV,    
-    .moves = MOVE_SIGNAL_BEAM, MOVE_AIR_CUTTER, MOVE_ANCIENT_POWER, MOVE_UPROAR
-    },
-{
-    .lvl = -2,
-    .species = SPECIES_DODUO,
-    .spread = SPREAD_25_IV_0_EV,    
-    .moves = MOVE_QUICK_ATTACK, MOVE_DOUBLE_HIT, MOVE_PLUCK, MOVE_ACUPRESSURE
-    },
     {
-    .lvl = -2,
-    .species = SPECIES_PASSIMIAN,
-    .heldItem = ITEM_CHOICE_SCARF,
-    .ability = 2,
+    .lvl = 3,
+    .species = SPECIES_LOPUNNY,
+    .heldItem = ITEM_PAYAPA_BERRY,
+    .ability = 1,
     .spread = SPREAD_31_IV_ATK_SPEED_JOLLY,
-    .moves = MOVE_KNOCK_OFF, MOVE_U_TURN, MOVE_CLOSE_COMBAT, MOVE_GUNK_SHOT
-    } /* Verdant custom: Route 117 — Verdant custom: Route 117 / Balanced disruption */,
+    .moves = MOVE_AFTER_YOU, MOVE_RETURN, MOVE_CLOSE_COMBAT, MOVE_PROTECT
+    } /* Verdant polish: TRAINER_DYLAN_1 */,
     {
-    .lvl = -2,
-    .species = SPECIES_SKARMORY,
-    .heldItem = ITEM_LEFTOVERS,
+    .lvl = 2,
+    .species = SPECIES_WISHIWASHI,
+    .heldItem = ITEM_SITRUS_BERRY,
     .ability = 0,
-    .spread = SPREAD_31_IV_HP_ATK_ADAMANT,
-    .moves = MOVE_STEALTH_ROCK, MOVE_BRAVE_BIRD, MOVE_ROOST, MOVE_SPIKES
-    } /* Verdant custom: Route 117 — Verdant custom: Route 117 / Balanced disruption */
+    .spread = SPREAD_31_IV_HP_SPATK_MODEST,
+    .moves = MOVE_HYDRO_PUMP, MOVE_MUDDY_WATER, MOVE_ICE_BEAM, MOVE_U_TURN
+    } /* Verdant polish: TRAINER_DYLAN_1 */,
+    {
+    .lvl = 1,
+    .species = SPECIES_ACCELGOR,
+    .heldItem = ITEM_BUG_GEM,
+    .ability = 2,
+    .spread = SPREAD_31_IV_SPATK_SPEED_TIMID,
+    .moves = MOVE_BUG_BUZZ, MOVE_SLUDGE_BOMB, MOVE_ENERGY_BALL, MOVE_WATER_SHURIKEN
+    } /* Verdant polish: TRAINER_DYLAN_1 */,
+    {
+    .lvl = 3,
+    .species = SPECIES_PHEROMOSA,
+    .heldItem = ITEM_WHITE_HERB,
+    .ability = 0,
+    .spread = SPREAD_31_IV_ATK_SPEED_ADAMANT,
+    .moves = MOVE_CLOSE_COMBAT, MOVE_TRIPLE_AXEL, MOVE_LUNGE, MOVE_PROTECT
+    } /* Verdant polish: TRAINER_DYLAN_1 */
 };
 
 static const struct TrainerMonItemCustomMoves sParty_Dylan2[] = {
@@ -7089,7 +7092,13 @@ static const struct TrainerMonItemCustomMoves sParty_Dylan2[] = {
     .species = SPECIES_DUGTRIO,
     .spread = SPREAD_31_IV_80_EV,    
     .moves = MOVE_EARTHQUAKE, MOVE_SUCKER_PUNCH, MOVE_SLASH, MOVE_ROCK_SLIDE
-    }    
+    },
+    {
+    .lvl = -2,
+    .species = SPECIES_ELECTRODE,
+    .spread = SPREAD_31_IV_80_EV,
+    .moves = MOVE_THUNDERBOLT, MOVE_VOLT_SWITCH, MOVE_SIGNAL_BEAM, MOVE_HIDDEN_POWER
+    }
 };
 
 static const struct TrainerMonItemCustomMoves sParty_Dylan3[] = {

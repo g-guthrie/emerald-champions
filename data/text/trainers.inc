@@ -2489,33 +2489,38 @@ Route117_Text_LydiaPostRematch: @ 829C75A
 	.string "of {POKEBLOCK}S, depending on their nature.$"
 
 Route117_Text_DylanIntro: @ 829C7A5
-	.string "I'm in the middle of a triathlon, but,\n"
-	.string "whatever, let's have a battle!$"
+	.string "I'm deep into my triathlon!\n"
+	.string "My partner sets the pace. Keep up!$"
 
 Route117_Text_DylanDefeat: @ 829C7EB
-	.string "I ran out of energy!$"
+	.string "You broke my rhythm!$"
 
 Route117_Text_DylanPostBattle: @ 829C800
-	.string "I may have blown it…\p"
-	.string "I might have dropped to last during\n"
-	.string "that battle…$"
+	.string "Raw Speed isn't everything.\n"
+	.string "Changing the order changed the race!$"
 
 Route117_Text_DylanRegister: @ 829C846
-	.string "Pokémon have to be strong, too?\n"
-	.string "I'd like you to train me!$"
+	.string "Your timing was better than mine.\n"
+	.string "Let me challenge that pace again!$"
 
 Route117_Text_DylanRematchIntro: @ 829C880
-	.string "I'm smack in the middle of a triathlon,\n"
-	.string "but I'm comfortably ahead.\l"
-	.string "Let's make this a quick battle!$"
+	.string "My relay is faster this time!\n"
+	.string "Try to break my rhythm again!$"
 
 Route117_Text_DylanRematchDefeat: @ 829C8E3
-	.string "I ran out of energy again!$"
+	.string "You changed the order again!$"
 
 Route117_Text_DylanPostRematch: @ 829C8FE
-	.string "I was tops in swimming and cycling,\n"
-	.string "but I'm not quite that confident with\l"
-	.string "Pokémon yet.$"
+	.string "A fast team still needs timing.\n"
+	.string "That's what makes a relay work!$"
+
+Route117_Text_DylanNotEnoughMons:
+	.string "This is a Double Battle.\n"
+	.string "Bring two Pokémon ready to run!$"
+
+Route117_Text_DylanStillTraining:
+	.string "I'm still training this relay.\n"
+	.string "Come back after the Dynamo Badge!$"
 
 Route117_Text_MariaIntro: @ 829C955
 	.string "I do my triathlon training with Pokémon,\n"

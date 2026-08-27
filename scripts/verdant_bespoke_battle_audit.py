@@ -6060,6 +6060,130 @@ def main() -> None:
     if repeats70:
         problems.append(f"Battle 70: exact class species unexpectedly repeat: {sorted(repeats70)}")
 
+    dylan71 = designs["BATTLE_071_ROUTE_117_DYLAN"]
+    expected_dylan71 = [
+        {"level": 3, "species": "SPECIES_LOPUNNY", "item": "ITEM_PAYAPA_BERRY", "ability_slot": 1, "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY", "moves": ["MOVE_AFTER_YOU", "MOVE_RETURN", "MOVE_CLOSE_COMBAT", "MOVE_PROTECT"]},
+        {"level": 2, "species": "SPECIES_WISHIWASHI", "item": "ITEM_SITRUS_BERRY", "ability_slot": 0, "spread": "SPREAD_31_IV_HP_SPATK_MODEST", "moves": ["MOVE_HYDRO_PUMP", "MOVE_MUDDY_WATER", "MOVE_ICE_BEAM", "MOVE_U_TURN"]},
+        {"level": 1, "species": "SPECIES_ACCELGOR", "item": "ITEM_BUG_GEM", "ability_slot": 2, "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID", "moves": ["MOVE_BUG_BUZZ", "MOVE_SLUDGE_BOMB", "MOVE_ENERGY_BALL", "MOVE_WATER_SHURIKEN"]},
+        {"level": 3, "species": "SPECIES_PHEROMOSA", "item": "ITEM_WHITE_HERB", "ability_slot": 0, "spread": "SPREAD_31_IV_ATK_SPEED_ADAMANT", "moves": ["MOVE_CLOSE_COMBAT", "MOVE_TRIPLE_AXEL", "MOVE_LUNGE", "MOVE_PROTECT"]},
+    ]
+    if dylan71.get("trainer_ids") != ["TRAINER_DYLAN_1"] or party_builds("TRAINER_DYLAN_1", trainers_text, parties_text) != expected_dylan71:
+        problems.append("Battle 71: Dylan source party differs from the four-member relay")
+    if dylan71.get("strict_cap") != 40 or dylan71.get("evolution_stage_fit", {}).get("status") != "pass" or dylan71.get("manual_quality") != 10 or dylan71.get("manual_difficulty") != 9.1:
+        problems.append("Battle 71: cap, stage, quality, or difficulty closure drifted")
+    branch71 = dylan71.get("branch_contract", {})
+    if branch71.get("format") != "double" or branch71.get("source_slots") != [0, 1, 2, 3] or branch71.get("intended_lead") != ["SPECIES_LOPUNNY", "SPECIES_WISHIWASHI"] or branch71.get("reserve_source_order") != ["SPECIES_ACCELGOR", "SPECIES_PHEROMOSA"] or "matchup-ranked" not in branch71.get("replacement_contract", ""):
+        problems.append("Battle 71: fixed lead, adaptive reserve, or four-slot contract drifted")
+
+    dylan_block71 = trainer_blocks["TRAINER_DYLAN_1"].group(0)
+    for token in (".doubleBattle = TRUE", "AI_FLAG_SMART_SWITCHING", "AI_FLAG_HP_AWARE", "AI_FLAG_COMBO_SETUP", "AI_FLAG_SPEED_CONTROL"):
+        if token not in dylan_block71:
+            problems.append(f"Battle 71: Dylan missing {token}")
+    for token in ("AI_FLAG_HELP_PARTNER", "AI_FLAG_FIELD_CONTROL", "AI_FLAG_PERISH_TRAP", "AI_FLAG_SETUP_FIRST_TURN"):
+        if token in dylan_block71:
+            problems.append(f"Battle 71: unrelated authored profile leaked into Dylan: {token}")
+    dylan2_block71 = trainer_blocks["TRAINER_DYLAN_2"].group(0)
+    if ".doubleBattle = TRUE" not in dylan2_block71 or len(party_builds("TRAINER_DYLAN_2", trainers_text, parties_text)) != 4:
+        problems.append("Battle 71: tier-2 rematch is not an even four-member double")
+
+    abilities71 = {
+        "SPECIES_LOPUNNY": (1, "ABILITY_SCRAPPY"),
+        "SPECIES_WISHIWASHI": (0, "ABILITY_SCHOOLING"),
+        "SPECIES_ACCELGOR": (2, "ABILITY_UNBURDEN"),
+        "SPECIES_PHEROMOSA": (0, "ABILITY_BEAST_BOOST"),
+    }
+    names71 = {"LOPUNNY": "Lopunny", "WISHIWASHI": "Wishiwashi", "ACCELGOR": "Accelgor", "PHEROMOSA": "Pheromosa"}
+    for species, (slot, ability) in abilities71.items():
+        slots = ability_slots.get(species, [])
+        if len(slots) <= slot or slots[slot] != ability:
+            problems.append(f"Battle 71: {species} slot {slot} is not {ability}: {slots}")
+    for build in expected_dylan71:
+        species = build["species"].removeprefix("SPECIES_")
+        for move in build["moves"]:
+            if not move_is_legal(species, names71[species], move, level_source, tmhm_source, tm_indices, tutor_source, indices, egg_source):
+                problems.append(f"Battle 71: {species} cannot legally learn {move}")
+
+    evolution71 = read("src/data/pokemon/evolution.h")
+    for token in (
+        "[SPECIES_BUNEARY]", "EVO_FRIENDSHIP, 0, SPECIES_LOPUNNY",
+        "[SPECIES_SHELMET]", "EVO_SPECIFIC_MON_IN_PARTY, SPECIES_KARRABLAST, SPECIES_ACCELGOR",
+    ):
+        if token not in evolution71:
+            problems.append(f"Battle 71: mature-stage proof lost {token}")
+
+    route117_map71 = json.loads(read("data/maps/Route117/map.json"))
+    dylan_object71 = next(row for row in route117_map71["object_events"] if row.get("script") == "Route117_EventScript_Dylan")
+    if (dylan_object71.get("x"), dylan_object71.get("y"), dylan_object71.get("movement_type"), dylan_object71.get("movement_range_x"), dylan_object71.get("trainer_sight_or_berry_tree_id")) != (38, 16, "MOVEMENT_TYPE_WALK_RIGHT_AND_LEFT", 8, "4"):
+        problems.append("Battle 71: Dylan patrol geometry drifted")
+    route117_scripts71 = read("data/maps/Route117/scripts.inc")
+    for token in (
+        "goto_if_unset FLAG_BADGE03_GET, Route117_EventScript_DylanStillTraining",
+        "trainerbattle_double TRAINER_DYLAN_1, Route117_Text_DylanIntro, Route117_Text_DylanDefeat, Route117_Text_DylanNotEnoughMons, Route117_EventScript_RegisterDylan",
+        "trainerbattle_rematch_double TRAINER_DYLAN_1, Route117_Text_DylanRematchIntro, Route117_Text_DylanRematchDefeat, Route117_Text_DylanNotEnoughMons",
+        "register_matchcall TRAINER_DYLAN_1",
+    ):
+        if token not in route117_scripts71:
+            problems.append(f"Battle 71: guarded double or Match Call routing lost {token}")
+    dylan_script71 = route117_scripts71.split("Route117_EventScript_Dylan::", 1)[1].split("Route117_EventScript_Maria::", 1)[0]
+    if "trainerbattle_single TRAINER_DYLAN_1" in dylan_script71 or "trainerbattle_rematch TRAINER_DYLAN_1" in dylan_script71:
+        problems.append("Battle 71: a single-battle Dylan opcode survived")
+    if "[REMATCH_DYLAN] = REMATCH(TRAINER_DYLAN_1, TRAINER_DYLAN_2, TRAINER_DYLAN_3, TRAINER_DYLAN_4, ROUTE117)" not in read("src/battle_setup.c"):
+        problems.append("Battle 71: Dylan Match Call family drifted")
+
+    dialogue_source71 = read("data/text/trainers.inc")
+    dialogue71 = dialogue_source71.split("Route117_Text_DylanIntro:", 1)[1].split("Route117_Text_MariaIntro:", 1)[0]
+    for cue in ("partner sets the pace", "Changing the order", "relay is faster", "Double Battle", "Dynamo Badge"):
+        if cue not in dialogue71:
+            problems.append(f"Battle 71: dialogue misses {cue}")
+    for line in re.findall(r'\.string "([^"]*)"', dialogue71):
+        visible = line.replace("\\n", "").replace("\\l", "").replace("\\p", "").replace("$", "")
+        if len(visible) > 36:
+            problems.append(f"Battle 71: dialogue line is too long: {visible}")
+
+    ai71 = read("src/battle_ai_main.c")
+    for token in (
+        "effect == EFFECT_AFTER_YOU",
+        "!(gFieldStatuses & STATUS_FIELD_TRICK_ROOM)",
+        "GetWhoStrikesFirst(battlerAtk, battlerDef, TRUE) == 0",
+        "HasDamagingMove(battlerDef)",
+        "GetMovePriority(battlerDef, AI_DATA->partnerMove) == 0",
+        "score += 35",
+    ):
+        if token not in ai71:
+            problems.append(f"Battle 71: reusable non-forcing After You AI lost {token}")
+    battle_scripts71 = read("data/battle_scripts_1.s")
+    for token in ("BattleScript_EffectAfterYou:", "tryafteryou BattleScript_ButItFailed", "BattleScript_EffectSpeedSwap:", "swapstatstages STAT_SPEED"):
+        if token not in battle_scripts71:
+            problems.append(f"Battle 71: order mechanic or rejected Speed Swap proof lost {token}")
+    after_you_command71 = read("src/battle_script_commands.c")
+    if "GetBattlerTurnOrderNum(gBattlerTarget) == GetBattlerTurnOrderNum(gBattlerAttacker) + 1" not in after_you_command71:
+        problems.append("Battle 71: After You adjacency guard is reversed or missing")
+    if "GetBattlerTurnOrderNum(gBattlerAttacker) == GetBattlerTurnOrderNum(gBattlerTarget) + 1" in after_you_command71:
+        problems.append("Battle 71: reversed After You adjacency guard survived")
+
+    formats71 = json.loads(read("docs/verdant_doubles_manifest.json")).get("formats", {})
+    manifest71 = formats71.get("TRAINER_DYLAN_1", {})
+    if manifest71.get("archetype") != "After You relay order" or manifest71.get("difficulty") != 65 or manifest71.get("level_offset") != 2 or not manifest71.get("partner_interaction"):
+        problems.append("Battle 71: first-fight format manifest summary is stale")
+    if formats71.get("TRAINER_DYLAN_2", {}).get("format") != "double" or formats71.get("TRAINER_DYLAN_2", {}).get("target_size") != 4:
+        problems.append("Battle 71: tier-2 rematch format manifest is stale")
+    donor_requirements71 = {
+        "showdown:gen9championsrandomdoublesbattle:007": {"Lopunny"},
+        "showdown:gen7randomdoublesbattle:014": {"Wishiwashi"},
+        "showdown:gen6randomdoublesbattle:009": {"Accelgor"},
+    }
+    for reference_id, required_species in donor_requirements71.items():
+        row = refs29.get(reference_id)
+        if row is None or row.get("completeness") != "full-sets" or not required_species <= set(row.get("roster", [])):
+            problems.append(f"Battle 71: relay donor drifted {reference_id}")
+    madison71 = refs29.get("vgc:regional-madison-wi-2017")
+    if madison71 is None or madison71.get("placement") != 1 or "pheromosa" not in {species.lower() for species in madison71.get("roster", [])}:
+        problems.append("Battle 71: Madison champion Pheromosa reference drifted")
+    battles_1_to_70 = battles_1_to_69 | {build["species"] for build in expected_isaac70}
+    repeats71 = battles_1_to_70 & {build["species"] for build in expected_dylan71}
+    if repeats71 != {"SPECIES_WISHIWASHI"}:
+        problems.append(f"Battle 71: intended earned Wishiwashi repeat changed: {sorted(repeats71)}")
+
     # Cross-encounter species reuse is an editorial signal, not a correctness
     # failure. Keep the existing exact comparisons so deliberate repeats stay
     # visible, but never force a replacement merely to preserve a zero-repeat
@@ -6147,6 +6271,7 @@ def main() -> None:
     print("PASS: Battle 68 guarded Wattson World Champion circuit, six legal sets, reciprocal Mega Raichu Y, exact badge flow, and Trick Room-aware AI")
     print("PASS: Battle 69 Badge-gated Beat Up-Stamina adaptive inheritance, legal four, full-party-safe AI, donors, and dialogue")
     print("PASS: Battle 70 Badge-gated Day Care class, five young specialists, Mega Kangaskhan guardian, adaptive reserves, donors, and dialogue")
+    print("PASS: Battle 71 Badge-gated After You relay, Schooling cannon, Unburden and Pheromosa reserves, even rematches, donors, and dialogue")
     print(f"PASS: all {len(designs)} closed encounters record their truthful legacy-983 or current-1005 corpus fit decision")
 
 

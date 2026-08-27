@@ -1,9 +1,9 @@
 {
   "summary": {
     "trainer_records": 854,
-    "trainer_pokemon": 3421,
-    "doubles": 566,
-    "singles": 288,
+    "trainer_pokemon": 3422,
+    "doubles": 567,
+    "singles": 287,
     "median_quality_score": 63,
     "blocking_issues": 0,
     "major_issues": 5,
@@ -48945,135 +48945,134 @@
       "name": "Dylan",
       "location": "Route 117",
       "format": "double",
-      "manifest_difficulty": 34,
+      "manifest_difficulty": 65,
       "party_name": "sParty_Dylan1",
       "party_size": 4,
-      "avg_level_offset": -1.75,
-      "max_level_offset": -1,
-      "item_coverage": 0.5,
+      "avg_level_offset": 2.25,
+      "max_level_offset": 3,
+      "item_coverage": 1.0,
       "complete_moveset_coverage": 1.0,
-      "avg_bst": 413.8,
-      "rare_count": 0,
+      "avg_bst": 435.0,
+      "rare_count": 2,
       "mega_count": 0,
-      "speed_control_count": 1,
-      "protect_count": 0,
-      "defensive_tempo_count": 0,
+      "speed_control_count": 3,
+      "protect_count": 1,
+      "defensive_tempo_count": 2,
       "spread_count": 1,
       "synergy_tags": [
-        "Flying pressure",
-        "hazard stack"
+        "Schooling HP threshold"
       ],
-      "quality_score": 55,
+      "quality_score": 75,
       "issues": [],
       "mons": [
         {
-          "species": "SPECIES_YANMA",
-          "level_offset": -1,
-          "item": "ITEM_NONE",
-          "ability_slot": 0,
-          "ability": "ABILITY_SPEED_BOOST",
-          "spread": "SPREAD_25_IV_0_EV",
-          "moves": [
-            "MOVE_SIGNAL_BEAM",
-            "MOVE_AIR_CUTTER",
-            "MOVE_ANCIENT_POWER",
-            "MOVE_UPROAR"
-          ],
-          "bst": 390,
-          "speed": 95,
-          "types": [
-            "TYPE_BUG",
-            "TYPE_FLYING"
-          ],
-          "attack_moves": [
-            "MOVE_SIGNAL_BEAM",
-            "MOVE_AIR_CUTTER",
-            "MOVE_ANCIENT_POWER",
-            "MOVE_UPROAR"
-          ],
-          "status_moves": []
-        },
-        {
-          "species": "SPECIES_DODUO",
-          "level_offset": -2,
-          "item": "ITEM_NONE",
-          "ability_slot": 0,
-          "ability": "ABILITY_RUN_AWAY",
-          "spread": "SPREAD_25_IV_0_EV",
-          "moves": [
-            "MOVE_QUICK_ATTACK",
-            "MOVE_DOUBLE_HIT",
-            "MOVE_PLUCK",
-            "MOVE_ACUPRESSURE"
-          ],
-          "bst": 310,
-          "speed": 75,
-          "types": [
-            "TYPE_NORMAL",
-            "TYPE_FLYING"
-          ],
-          "attack_moves": [
-            "MOVE_QUICK_ATTACK",
-            "MOVE_DOUBLE_HIT",
-            "MOVE_PLUCK"
-          ],
-          "status_moves": [
-            "MOVE_ACUPRESSURE"
-          ]
-        },
-        {
-          "species": "SPECIES_PASSIMIAN",
-          "level_offset": -2,
-          "item": "ITEM_CHOICE_SCARF",
-          "ability_slot": 2,
-          "ability": "ABILITY_DEFIANT",
+          "species": "SPECIES_LOPUNNY",
+          "level_offset": 3,
+          "item": "ITEM_PAYAPA_BERRY",
+          "ability_slot": 1,
+          "ability": "ABILITY_SCRAPPY",
           "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
           "moves": [
-            "MOVE_KNOCK_OFF",
-            "MOVE_U_TURN",
+            "MOVE_AFTER_YOU",
+            "MOVE_RETURN",
             "MOVE_CLOSE_COMBAT",
-            "MOVE_GUNK_SHOT"
+            "MOVE_PROTECT"
           ],
-          "bst": 490,
-          "speed": 80,
+          "bst": 500,
+          "speed": 105,
           "types": [
-            "TYPE_FIGHTING",
+            "TYPE_NORMAL",
             "TYPE_FIGHTING"
           ],
           "attack_moves": [
-            "MOVE_KNOCK_OFF",
-            "MOVE_U_TURN",
-            "MOVE_CLOSE_COMBAT",
-            "MOVE_GUNK_SHOT"
+            "MOVE_RETURN",
+            "MOVE_CLOSE_COMBAT"
+          ],
+          "status_moves": [
+            "MOVE_AFTER_YOU",
+            "MOVE_PROTECT"
+          ]
+        },
+        {
+          "species": "SPECIES_WISHIWASHI",
+          "level_offset": 2,
+          "item": "ITEM_SITRUS_BERRY",
+          "ability_slot": 0,
+          "ability": "ABILITY_SCHOOLING",
+          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+          "moves": [
+            "MOVE_HYDRO_PUMP",
+            "MOVE_MUDDY_WATER",
+            "MOVE_ICE_BEAM",
+            "MOVE_U_TURN"
+          ],
+          "bst": 175,
+          "speed": 40,
+          "types": [
+            "TYPE_WATER",
+            "TYPE_WATER"
+          ],
+          "attack_moves": [
+            "MOVE_HYDRO_PUMP",
+            "MOVE_MUDDY_WATER",
+            "MOVE_ICE_BEAM",
+            "MOVE_U_TURN"
           ],
           "status_moves": []
         },
         {
-          "species": "SPECIES_SKARMORY",
-          "level_offset": -2,
-          "item": "ITEM_LEFTOVERS",
-          "ability_slot": 0,
-          "ability": "ABILITY_KEEN_EYE",
-          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+          "species": "SPECIES_ACCELGOR",
+          "level_offset": 1,
+          "item": "ITEM_BUG_GEM",
+          "ability_slot": 2,
+          "ability": "ABILITY_UNBURDEN",
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
           "moves": [
-            "MOVE_STEALTH_ROCK",
-            "MOVE_BRAVE_BIRD",
-            "MOVE_ROOST",
-            "MOVE_SPIKES"
+            "MOVE_BUG_BUZZ",
+            "MOVE_SLUDGE_BOMB",
+            "MOVE_ENERGY_BALL",
+            "MOVE_WATER_SHURIKEN"
           ],
-          "bst": 465,
-          "speed": 70,
+          "bst": 495,
+          "speed": 145,
           "types": [
-            "TYPE_STEEL",
-            "TYPE_FLYING"
+            "TYPE_BUG",
+            "TYPE_BUG"
           ],
           "attack_moves": [
-            "MOVE_BRAVE_BIRD"
+            "MOVE_BUG_BUZZ",
+            "MOVE_SLUDGE_BOMB",
+            "MOVE_ENERGY_BALL",
+            "MOVE_WATER_SHURIKEN"
+          ],
+          "status_moves": []
+        },
+        {
+          "species": "SPECIES_PHEROMOSA",
+          "level_offset": 3,
+          "item": "ITEM_WHITE_HERB",
+          "ability_slot": 0,
+          "ability": "ABILITY_BEAST_BOOST",
+          "spread": "SPREAD_31_IV_ATK_SPEED_ADAMANT",
+          "moves": [
+            "MOVE_CLOSE_COMBAT",
+            "MOVE_TRIPLE_AXEL",
+            "MOVE_LUNGE",
+            "MOVE_PROTECT"
+          ],
+          "bst": 570,
+          "speed": 151,
+          "types": [
+            "TYPE_BUG",
+            "TYPE_FIGHTING"
+          ],
+          "attack_moves": [
+            "MOVE_CLOSE_COMBAT",
+            "MOVE_TRIPLE_AXEL",
+            "MOVE_LUNGE"
           ],
           "status_moves": [
-            "MOVE_STEALTH_ROCK",
-            "MOVE_ROOST",
-            "MOVE_SPIKES"
+            "MOVE_PROTECT"
           ]
         }
       ]
@@ -49082,15 +49081,15 @@
       "trainer_id": "TRAINER_DYLAN_2",
       "name": "Dylan",
       "location": "Route 117",
-      "format": "single",
+      "format": "double",
       "manifest_difficulty": 37,
       "party_name": "sParty_Dylan2",
-      "party_size": 3,
+      "party_size": 4,
       "avg_level_offset": -2.0,
       "max_level_offset": -2,
       "item_coverage": 0.0,
       "complete_moveset_coverage": 1.0,
-      "avg_bst": 480.0,
+      "avg_bst": 482.5,
       "rare_count": 0,
       "mega_count": 0,
       "speed_control_count": 1,
@@ -49100,7 +49099,7 @@
       "synergy_tags": [
         "Earthquake immunity"
       ],
-      "quality_score": 48,
+      "quality_score": 51,
       "issues": [],
       "mons": [
         {
@@ -49182,6 +49181,33 @@
             "MOVE_SUCKER_PUNCH",
             "MOVE_SLASH",
             "MOVE_ROCK_SLIDE"
+          ],
+          "status_moves": []
+        },
+        {
+          "species": "SPECIES_ELECTRODE",
+          "level_offset": -2,
+          "item": "ITEM_NONE",
+          "ability_slot": 0,
+          "ability": "ABILITY_SOUNDPROOF",
+          "spread": "SPREAD_31_IV_80_EV",
+          "moves": [
+            "MOVE_THUNDERBOLT",
+            "MOVE_VOLT_SWITCH",
+            "MOVE_SIGNAL_BEAM",
+            "MOVE_HIDDEN_POWER"
+          ],
+          "bst": 490,
+          "speed": 150,
+          "types": [
+            "TYPE_ELECTRIC",
+            "TYPE_ELECTRIC"
+          ],
+          "attack_moves": [
+            "MOVE_THUNDERBOLT",
+            "MOVE_VOLT_SWITCH",
+            "MOVE_SIGNAL_BEAM",
+            "MOVE_HIDDEN_POWER"
           ],
           "status_moves": []
         }

@@ -393,7 +393,7 @@ Flying Gem Dancer Oricorio and Eviolite Mold Breaker Axew open the recital. Axew
 
 ## 017. Ivan — Route 104
 
-**Optional · Single · Cap 14 · Extreme 89/100 · Uniqueness 84/100**
+**Optional · Single · Cap 14 · Extreme 89/100 · Uniqueness 83/100**
 
 **Theme:** Sash Endeavor lure + Schooling HP threshold + Water pressure
 
@@ -403,7 +403,7 @@ Ivan is a single-battle pacing break built as lure, sinker, hook, and school. Fo
 
 **Why it is hard:** 4 fully authored Pokémon, average BST 341.5, average cap offset +3.25, ace offset +6, and 100% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Cory (20% species overlap). Its species appear across an average of 4.2 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Cory (20% species overlap). Its species appear across an average of 4.5 unrelated trainer families.
 
 **Counterplay:** Priority, Ghost immunity, Taunt, multihit attacks, or preserving a low-HP target answer the Sash-Endeavor lure. Water, Grass, Ice, strong special damage, noncontact attacks, and recovery answer Stunfisk; Ground, Psychic, Electric, and strong physical damage answer Tentacool despite Eviolite. Wishiwashi can be burned, intimidated, walled on either attacking side, hit with fixed damage or priority, or deliberately pushed below its visible one-quarter Schooling threshold. Smart switching means one Electric or Grass move is useful but never an automatic sweep; no exact catch, starter, or turn sequence is required.
 
@@ -1682,7 +1682,7 @@ Meowstic Female and Gogoat are the authored opening pair. The board plan is acti
 
 **Why it is hard:** 4 fully authored Pokémon, average BST 504.8, average cap offset -3.0, ace offset -3, and 100% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Barry (20% species overlap). Its species appear across an average of 4.5 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Barry (20% species overlap). Its species appear across an average of 4.8 unrelated trainer families.
 
 **Counterplay:** Contest the weather setter, preserve your speed-control answer, and use Protect or Wide Guard against the amplified spread turns.
 
@@ -1941,7 +1941,7 @@ Damp Rock Hydration Phione opens the rain ring through Rain Dance, Scald, Ice Be
 
 **Why it is hard:** 3 fully authored Pokémon, average BST 498.3, average cap offset +2.0, ace offset +3, and 100% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Kim & Iris (17% species overlap). Its species appear across an average of 2.7 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Dylan (17% species overlap). Its species appear across an average of 3.0 unrelated trainer families.
 
 **Counterplay:** Taunt, weather replacement, Cloud Nine, Air Lock, strong Grass or Electric attacks, and denying Rest limit Phione. Ground immunity, Lightning Rod, Volt Absorb, Protect, item removal, and Choice-lock scouting answer Electrode. Fighting, Steel, Rock, Fire, priority, physical pressure, and exploiting Cryogonal's low Defense answer the finish. Rain has one setter and a finite timer.
 
@@ -2181,7 +2181,7 @@ Dustox and Beautifly are the authored opening pair. The board plan is bug pressu
 
 ## 088. Elijah — Route 109
 
-**Optional · Double · Cap 30 · Demanding 45/100 · Uniqueness 77/100**
+**Optional · Double · Cap 30 · Demanding 45/100 · Uniqueness 78/100**
 
 **Theme:** Flying pressure
 
@@ -2191,7 +2191,7 @@ Skarmory and Honchkrow are the authored opening pair. The board plan is flying p
 
 **Why it is hard:** 4 fully authored Pokémon, average BST 454.5, average cap offset -2.0, ace offset -2, and 50% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Winona (25% species overlap). Its species appear across an average of 4.5 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Winona (25% species overlap). Its species appear across an average of 4.2 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -2758,7 +2758,7 @@ Level-30 Sharp Beak Tangled Feet Doduo uses Brave Bird, Double-Edge, Jump Kick, 
 
 **Why it is hard:** 4 fully authored Pokémon, average BST 469.2, average cap offset +1.5, ace offset +3, and 100% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Katelyn (20% species overlap). Its species appear across an average of 4.8 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Katelyn (20% species overlap). Its species appear across an average of 4.5 unrelated trainer families.
 
 **Counterplay:** Protect, Ghost or type immunities, resistance pivots, recovery, recoil management, and forcing Jump Kick misses create immediate punish windows. Burn, Intimidate, Reflect, bulky Ground, Rock, Steel, or physical walls answer the first three; special bulk, Fighting pressure, Disable, Encore, or exploiting recharge answers Porygon-Z. The player can win through survival and timing instead of outracing every leg.
 
@@ -2982,7 +2982,7 @@ Vivian uses level-31 Focus Sash Soundproof Mr. Mime with Fake Out, Psychic, Dazz
 
 ## 115. Ben — Mauville City Gym
 
-**Optional · Double · Cap 30 · Extreme 93/100 · Uniqueness 86/100**
+**Optional · Double · Cap 30 · Extreme 93/100 · Uniqueness 87/100**
 
 **Theme:** hazard stack
 
@@ -2992,7 +2992,7 @@ Level-31 Shuca Toxic Debris Glimmet uses Stealth Rock, Sludge Wave, Power Gem, a
 
 **Why it is hard:** 4 fully authored Pokémon, average BST 483.8, average cap offset +2.5, ace offset +4, and 100% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Coby (20% species overlap). Its species appear across an average of 2.8 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Coby (20% species overlap). Its species appear across an average of 2.5 unrelated trainer families.
 
 **Counterplay:** Taunt, Encore, Fake Out, Magic Bounce, immediate spread or special pressure, multihit Sturdy breaking, Knock Off, Trick, or Magic Room stops the lead maze. Poison types absorb Toxic Spikes; Flying and Steel types ignore them; Heavy-Duty Boots ignore entry damage. Remove or bypass Gholdengo, then use Defog, Rapid Spin, or Mortal Spin through the other target. Substitute, Protect, Fairy immunity to Dragon Tail, Suction Cups, Ingrain, or direct Guzzlord pressure blocks phazing. Fire and Electric punish Skarmory; Ground, Fire, Dark, or Ghost punish Gholdengo; Fairy deletes Guzzlord.
 
@@ -4051,7 +4051,7 @@ Numel opens this deliberate singles fight. The roster is built as sun engine. Th
 
 ## 161. Lao — Route 113
 
-**Optional · Single · Cap 40 · Demanding 40/100 · Uniqueness 80/100**
+**Optional · Single · Cap 40 · Demanding 40/100 · Uniqueness 79/100**
 
 **Theme:** underused bug mixture
 
@@ -4061,7 +4061,7 @@ Accelgor opens this deliberate singles fight. The roster is built as underused b
 
 **Why it is hard:** 3 fully authored Pokémon, average BST 455.0, average cap offset -3.0, ace offset -3, and 0% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Camden (20% species overlap). Its species appear across an average of 4.7 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Camden (20% species overlap). Its species appear across an average of 5.0 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -4139,7 +4139,7 @@ Sudowoodo opens this deliberate singles fight. The roster is built as underused 
 
 ## 165. Coby — Route 113
 
-**Optional · Single · Cap 40 · Introductory 32/100 · Uniqueness 77/100**
+**Optional · Single · Cap 40 · Introductory 32/100 · Uniqueness 78/100**
 
 **Theme:** underused flying mixture
 
@@ -4149,7 +4149,7 @@ Skarmory opens this deliberate singles fight. The roster is built as underused f
 
 **Why it is hard:** 2 fully authored Pokémon, average BST 495.0, average cap offset -3.0, ace offset -3, and 0% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Perry (25% species overlap). Its species appear across an average of 4.5 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Perry (25% species overlap). Its species appear across an average of 4.0 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -4361,7 +4361,7 @@ Gyarados opens this deliberate singles fight. The roster is built as underused w
 
 ## 175. Nolan — Route 114
 
-**Optional · Double · Cap 40 · Demanding 39/100 · Uniqueness 82/100**
+**Optional · Double · Cap 40 · Demanding 39/100 · Uniqueness 81/100**
 
 **Theme:** Schooling HP threshold
 
@@ -4371,7 +4371,7 @@ Wishiwashi and Seaking are the authored opening pair. The board plan is schoolin
 
 **Why it is hard:** 4 fully authored Pokémon, average BST 340.0, average cap offset -3.0, ace offset -3, and 50% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Pete (20% species overlap). Its species appear across an average of 5.2 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Pete (20% species overlap). Its species appear across an average of 5.5 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -4870,7 +4870,7 @@ Numel and Dugtrio are the authored opening pair. The board plan is ground pressu
 
 **Why it is hard:** 4 fully authored Pokémon, average BST 398.8, average cap offset -2.25, ace offset -2, and 50% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Dylan (17% species overlap). Its species appear across an average of 2.8 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Madeline (17% species overlap). Its species appear across an average of 2.8 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -5169,7 +5169,7 @@ Lopunny and Infernape are the authored opening pair. The board plan is frost bre
 
 **Why it is hard:** 4 fully authored Pokémon, average BST 508.5, average cap offset -1.0, ace offset -1, and 100% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Callie (17% species overlap). Its species appear across an average of 6.8 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Callie (17% species overlap). Its species appear across an average of 7.0 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -5284,7 +5284,7 @@ Level-41 Roseli Receiver Passimian uses Beat Up, Close Combat, Knock Off, and Pr
 
 **Why it is hard:** 4 fully authored Pokémon, average BST 475.0, average cap offset +2.0, ace offset +3, and 100% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Helene (20% species overlap). Its species appear across an average of 6.5 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Helene (20% species overlap). Its species appear across an average of 6.2 unrelated trainer families.
 
 **Counterplay:** Fake Out, flinching, sleep, paralysis, Encore, Taunt into Protect, redirection or direct focus can deny Passimian's activation; Water, Grass, Ice, strong special moves, Haze, Clear Smog, Unaware, phazing, or critical hits answer Mudsdale. Burn, Intimidate, Reflect, Charm, physical walls, and contact punishment compress the whole damage axis. Ground and Psychic pressure Alolan Muk; Ghost, Flying, Fairy, and faster offense pressure Medicham. Targeting both leads together can force a simultaneous replacement and erase the inheritance handoff.
 
@@ -5334,30 +5334,36 @@ Level-42 Figy Gluttony Munchlax uses Belly Drum, Body Slam, Fire Punch, and Prot
 
 ## 217. Dylan — Route 117
 
-**Optional · Double · Cap 40 · Demanding 46/100 · Uniqueness 82/100**
+**Optional · Double · Cap 40 · Extreme 91/100 · Uniqueness 76/100**
 
-**Theme:** Flying pressure + hazard stack
+**Theme:** Schooling HP threshold
 
-Yanma and Doduo are the authored opening pair. The board plan is flying pressure + hazard stack. The composition turns the route's grassland, roadside cover, and open speed lanes into the fight's identity instead of using a generic route-trainer core.
+Level-43 Payapa Scrappy regular Lopunny uses After You, Return, Close Combat, and Protect. Level-42 Sitrus Schooling Wishiwashi uses Hydro Pump, Muddy Water, Ice Beam, and U-turn. Level-41 Bug Gem Unburden Accelgor uses Bug Buzz, Sludge Bomb, Energy Ball, and Water Shuriken. Level-43 White Herb Beast Boost Pheromosa uses Close Combat, Triple Axel, Lunge, and Protect. There is no weather, terrain, Tailwind, room, screen, hazard, sleep, redirection, Belly Drum, inheritance, Mega, Primal, or battle-Bag item. Lopunny, Accelgor, and Pheromosa are fresh exact species across Battles 1-70. Wishiwashi returns fifty-six encounters after B15's level-20 Schooling-threshold fishing single; here it is a slow special doubles cannon pulled forward by a teammate. This is the first After You order puzzle, first Bug Gem-to-Unburden sprint, first Pheromosa and Ultra Beast speed showcase, and a deliberate no-Mega pace change after Isaac.
 
-**How it behaves:** The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe. Expect it to preserve flying pressure, hazard stack rather than select six unrelated strong attacks.
+**How it behaves:** Dylan uses foe-aware, smart-switching, HP-aware, combo, and speed-control scoring. A reusable non-forcing After You rule offsets the generic ally-target penalty only when Trick Room is absent, the user moves before its living partner, that partner is slower than at least one living foe and has damaging pressure, and any already-selected partner move is damaging with ordinary priority. Native AI still chooses another move when those facts fail. Schooling, Sitrus, Wide Guard counterplay, Bug Gem, Unburden, White Herb, Beast Boost, U-turn, priority, and replacement ranking are existing mechanics; no target, move, switch, sacrifice, or reserve is forced. Speed Swap was explicitly rejected because this engine swaps only Speed stages rather than raw Speed stats.
 
-**Why it is hard:** 4 fully authored Pokémon, average BST 413.8, average cap offset -1.75, ace offset -1, and 50% held-item coverage.
+**Why it is hard:** 4 fully authored Pokémon, average BST 435.0, average cap offset +2.25, ace offset +3, and 100% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Coby (20% species overlap). Its species appear across an average of 3.5 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Athena (33% species overlap). Its species appear across an average of 6.0 unrelated trainer families.
 
-**Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
+**Counterplay:** Fake Out, flinching, paralysis, sleep, Taunt, priority, Trick Room, or simply outspeeding Lopunny can deny After You. Wide Guard checks Muddy Water but not Hydro Pump; Water Absorb, Storm Drain, Dry Skin, Electric, Grass, and focused damage can collapse Schooling. Flying, Psychic, Fairy, burn, Intimidate, Protect, and physical walls answer Lopunny or Pheromosa. Priority, Rock, Fire, Flying, chip, and denying Bug Gem activation answer Accelgor. Protect scouting and deliberate focus remain broad answers because neither reserve is guaranteed first.
+
+**Strongest part:** A Running Triathlete makes one of the game's slowest threatening forms look like the sprinter, then hands the race to two radically different glass-cannon reserves without using another field mode or Mega.
+
+**Weakest link:** Trick Room, priority, Water immunity, Wide Guard plus Hydro Pump scouting, and shared Flying/Psychic/Fairy pressure are broad answers. Those seams are intentional; Pheromosa from +3 to +2 is the first runtime tuning knob if the adaptive finish is too punishing.
+
+**Manual closure:** Battle 71 is source-closed at editorial 10/10 and target difficulty 9.1: one Badge-3-gated four-member Triathlete double at legal levels 41-43, a truthful After You-Wishiwashi order puzzle, one earned fifty-six-encounter repeat, three fresh exact species, the first Pheromosa showcase, four distinct items, four corpus references, adaptive self-contained reserves, broad priority, Trick Room, Water, and type counterplay, native-width dialogue, an even rematch-format repair with explicit future roster debt, author self-check, and no adjacent Mega or repeated field engine. Runtime playtesting remains required before the target is observed.
 
 | # | Pokémon | Level | Item | Ability | Role | Moves |
 | ---: | --- | --- | --- | --- | --- | --- |
-| 1 | Yanma | 39 (cap -1) | None | Speed Boost | coverage attacker | Signal Beam, Air Cutter, Ancient Power, Uproar |
-| 2 | Doduo | 38 (cap -2) | None | Run Away | coverage attacker | Quick Attack, Double Hit, Pluck, Acupressure |
-| 3 | Passimian | 38 (cap -2) | Choice Scarf | Defiant | Choice-locked breaker | Knock Off, U Turn, Close Combat, Gunk Shot |
-| 4 | Skarmory | 38 (cap -2) | Leftovers | Keen Eye | disruption and support | Stealth Rock, Brave Bird, Roost, Spikes |
+| 1 | Lopunny | 43 (cap +3) | Payapa Berry | Scrappy | speed control | After You, Return, Close Combat, Protect |
+| 2 | Wishiwashi | 42 (cap +2) | Sitrus Berry | Schooling | rare centerpiece | Hydro Pump, Muddy Water, Ice Beam, U Turn |
+| 3 | Accelgor | 41 (cap +1) | Bug Gem | Unburden | coverage attacker | Bug Buzz, Sludge Bomb, Energy Ball, Water Shuriken |
+| 4 | Pheromosa | 43 (cap +3) | White Herb | Beast Boost | protected attacker | Close Combat, Triple Axel, Lunge, Protect |
 
 ## 218. Maria — Route 117
 
-**Optional · Double · Cap 40 · Demanding 43/100 · Uniqueness 82/100**
+**Optional · Double · Cap 40 · Demanding 43/100 · Uniqueness 83/100**
 
 **Theme:** Flying pressure
 
@@ -5367,7 +5373,7 @@ Tranquill and Hawlucha are the authored opening pair. The board plan is flying p
 
 **Why it is hard:** 4 fully authored Pokémon, average BST 417.0, average cap offset -2.0, ace offset -2, and 25% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Carolina (17% species overlap). Its species appear across an average of 4.2 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Carolina (17% species overlap). Its species appear across an average of 4.0 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -5525,7 +5531,7 @@ Swellow and Lopunny are the authored opening pair. The board plan is normal pres
 
 **Why it is hard:** 4 fully authored Pokémon, average BST 497.5, average cap offset +0.25, ace offset +1, and 100% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Kayley (20% species overlap). Its species appear across an average of 5.2 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Kayley (20% species overlap). Its species appear across an average of 5.5 unrelated trainer families.
 
 **Counterplay:** Contest the weather setter, preserve your speed-control answer, and use Protect or Wide Guard against the amplified spread turns.
 
@@ -5899,7 +5905,7 @@ Sawk opens this deliberate singles fight. The roster is built as underused fight
 
 ## 242. Pete — Route 103
 
-**Optional · Single · Cap 55 · Introductory 33/100 · Uniqueness 71/100**
+**Optional · Single · Cap 55 · Introductory 33/100 · Uniqueness 70/100**
 
 **Theme:** Schooling HP threshold
 
@@ -5909,7 +5915,7 @@ Blastoise opens this deliberate singles fight. The roster is built as schooling 
 
 **Why it is hard:** 2 fully authored Pokémon, average BST 352.5, average cap offset -2.0, ace offset -2, and 0% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Rodney (33% species overlap). Its species appear across an average of 7.0 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Rodney (33% species overlap). Its species appear across an average of 7.5 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -6107,7 +6113,7 @@ Magikarp and Feebas are the authored opening pair. The board plan is earthquake 
 
 **Why it is hard:** 6 fully authored Pokémon, average BST 345.5, average cap offset +1.0, ace offset +2, and 100% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Rodney (33% species overlap). Its species appear across an average of 5.8 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Rodney (33% species overlap). Its species appear across an average of 6.0 unrelated trainer families.
 
 **Counterplay:** Contest the weather setter, preserve your speed-control answer, and use Protect or Wide Guard against the amplified spread turns.
 
@@ -6526,7 +6532,7 @@ Accelgor and Weezing are the authored opening pair. The board plan is protected 
 
 **Why it is hard:** 4 fully authored Pokémon, average BST 498.8, average cap offset -2.0, ace offset -2, and 50% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Lao (40% species overlap). Its species appear across an average of 5.8 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Lao (40% species overlap). Its species appear across an average of 6.0 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -7250,7 +7256,7 @@ Vikavolt opens this deliberate singles fight. The roster is built as bug mixed o
 
 ## 301. Callie — Route 120
 
-**Optional · Single · Cap 55 · Demanding 39/100 · Uniqueness 63/100**
+**Optional · Single · Cap 55 · Demanding 39/100 · Uniqueness 62/100**
 
 **Theme:** Fighting pressure
 
@@ -7260,7 +7266,7 @@ Medicham opens this deliberate singles fight. The roster is built as fighting pr
 
 **Why it is hard:** 3 fully authored Pokémon, average BST 473.3, average cap offset -2.0, ace offset -2, and 0% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Marlene (40% species overlap). Its species appear across an average of 7.7 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Marlene (40% species overlap). Its species appear across an average of 8.0 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -7305,7 +7311,7 @@ Lucario opens this deliberate singles fight. The roster is built as fighting pre
 
 **Why it is hard:** 3 fully authored Pokémon, average BST 503.3, average cap offset -3.0, ace offset -3, and 0% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Aisha (33% species overlap). Its species appear across an average of 6.0 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Aisha (33% species overlap). Its species appear across an average of 5.7 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -7470,7 +7476,7 @@ Medicham opens this deliberate singles fight. The roster is built as underused f
 
 ## 311. Marlene — Route 115
 
-**Optional · Double · Cap 55 · Hard 54/100 · Uniqueness 67/100**
+**Optional · Double · Cap 55 · Hard 54/100 · Uniqueness 66/100**
 
 **Theme:** Earthquake immunity + Fake Out tempo + Tailwind
 
@@ -7480,7 +7486,7 @@ Medicham and Grumpig are the authored opening pair. The board plan is earthquake
 
 **Why it is hard:** 4 fully authored Pokémon, average BST 477.5, average cap offset -3.0, ace offset -3, and 50% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Callie (40% species overlap). Its species appear across an average of 7.5 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Callie (40% species overlap). Its species appear across an average of 7.8 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -9542,7 +9548,7 @@ Toxicroak and Toxapex are the authored opening pair. The board plan is schooling
 
 **Why it is hard:** 4 fully authored Pokémon, average BST 412.5, average cap offset -1.0, ace offset -1, and 50% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Jonah (20% species overlap). Its species appear across an average of 5.8 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Jonah (20% species overlap). Its species appear across an average of 6.0 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -9854,7 +9860,7 @@ Poliwrath opens this deliberate singles fight. The roster is built as schooling 
 
 **Why it is hard:** 3 fully authored Pokémon, average BST 398.3, average cap offset -3.0, ace offset -3, and 0% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Cory (25% species overlap). Its species appear across an average of 8.0 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Cory (25% species overlap). Its species appear across an average of 8.3 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -10635,7 +10641,7 @@ Pidgeot opens this deliberate singles fight. The roster is built as sun engine. 
 
 ## 450. Athena — Route 127
 
-**Optional · Double · Cap 60 · Hard 54/100 · Uniqueness 82/100**
+**Optional · Double · Cap 60 · Hard 54/100 · Uniqueness 74/100**
 
 **Theme:** Fighting rare-showcase balance
 
@@ -10645,7 +10651,7 @@ Infernape and Accelgor are the authored opening pair. The board plan is fighting
 
 **Why it is hard:** 4 fully authored Pokémon, average BST 524.2, average cap offset -2.0, ace offset -2, and 100% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Isobel (20% species overlap). Its species appear across an average of 4.8 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Dylan (33% species overlap). Its species appear across an average of 5.2 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -10760,7 +10766,7 @@ Heatmor and Meganium are the authored opening pair. The board plan is earthquake
 
 **Why it is hard:** 6 fully authored Pokémon, average BST 533.2, average cap offset -0.5, ace offset +1, and 100% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Charlie (14% species overlap). Its species appear across an average of 6.3 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Charlie (14% species overlap). Its species appear across an average of 6.5 unrelated trainer families.
 
 **Counterplay:** Contest the weather setter, preserve your speed-control answer, and use Protect or Wide Guard against the amplified spread turns.
 
@@ -11372,7 +11378,7 @@ Carracosta opens this deliberate singles fight. The roster is built as schooling
 
 **Why it is hard:** 3 fully authored Pokémon, average BST 388.0, average cap offset -1.0, ace offset -1, and 100% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Leonard (25% species overlap). Its species appear across an average of 7.0 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Leonard (25% species overlap). Its species appear across an average of 7.3 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -11583,7 +11589,7 @@ Diggersby and Empoleon are the authored opening pair. The board plan is water pr
 
 ## 491. Rodney — Route 130
 
-**Optional · Single · Cap 70 · Demanding 39/100 · Uniqueness 65/100**
+**Optional · Single · Cap 70 · Demanding 39/100 · Uniqueness 64/100**
 
 **Theme:** Earthquake immunity + Schooling HP threshold
 
@@ -11593,7 +11599,7 @@ Gyarados opens this deliberate singles fight. The roster is built as earthquake 
 
 **Why it is hard:** 2 fully authored Pokémon, average BST 357.5, average cap offset -2.0, ace offset -2, and 0% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Declan (33% species overlap). Its species appear across an average of 10.0 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Declan (33% species overlap). Its species appear across an average of 10.5 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -12289,7 +12295,7 @@ Poliwrath and Raticate are the authored opening pair. The board plan is discharg
 
 ## 522. Reyna — Route 134
 
-**Optional · Double · Cap 70 · Demanding 37/100 · Uniqueness 86/100**
+**Optional · Double · Cap 70 · Demanding 37/100 · Uniqueness 87/100**
 
 **Theme:** underused fighting mixture
 
@@ -12299,7 +12305,7 @@ Bewear and Passimian are the authored opening pair. The board plan is underused 
 
 **Why it is hard:** 4 fully authored Pokémon, average BST 375.0, average cap offset -3.0, ace offset -3, and 50% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Cyndy (17% species overlap). Its species appear across an average of 2.2 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Cyndy (17% species overlap). Its species appear across an average of 2.0 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -12999,7 +13005,7 @@ Wailord and Zapdos are the authored opening pair. The board plan is water pressu
 
 ## 551. Steven — Meteor Falls Stevens Cave
 
-**Optional · Double · Cap 100 · Extreme 92/100 · Uniqueness 76/100**
+**Optional · Double · Cap 100 · Extreme 92/100 · Uniqueness 77/100**
 
 **Theme:** Earthquake immunity + Steel pressure + Tailwind
 
@@ -13009,7 +13015,7 @@ Skarmory and Aerodactyl are the authored opening pair. The board plan is earthqu
 
 **Why it is hard:** 6 fully authored Pokémon, average BST 549.2, average cap offset +3.33, ace offset +5, and 100% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Steven (43% species overlap). Its species appear across an average of 5.0 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Steven (43% species overlap). Its species appear across an average of 4.8 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -13604,7 +13610,7 @@ Bibarel and Pidgeot are the authored opening pair. The board plan is tailwind. T
 
 ## 577. Cindy — Route 104
 
-**Rematch · Double · Active cap at rematch time · Hard 59/100 · Uniqueness 85/100**
+**Rematch · Double · Active cap at rematch time · Hard 59/100 · Uniqueness 84/100**
 
 **Theme:** active speed control + residual control
 
@@ -13614,7 +13620,7 @@ Lopunny and Furret are the authored opening pair. The board plan is active speed
 
 **Why it is hard:** 4 fully authored Pokémon, average BST 487.2, average cap offset -2.0, ace offset -2, and 100% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Cale (17% species overlap). Its species appear across an average of 3.0 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Cale (17% species overlap). Its species appear across an average of 3.2 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -13637,7 +13643,7 @@ Lopunny opens this deliberate singles fight. The roster is built as underused no
 
 **Why it is hard:** 3 fully authored Pokémon, average BST 473.7, average cap offset -2.0, ace offset -2, and 100% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Callie (20% species overlap). Its species appear across an average of 5.3 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Callie (20% species overlap). Its species appear across an average of 5.7 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -13659,7 +13665,7 @@ Lopunny and Furret are the authored opening pair. The board plan is normal press
 
 **Why it is hard:** 4 fully authored Pokémon, average BST 490.2, average cap offset -2.0, ace offset -2, and 100% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Callie (17% species overlap). Its species appear across an average of 4.2 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Callie (17% species overlap). Its species appear across an average of 4.5 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -14729,7 +14735,7 @@ Electrode and Galvantula are the authored opening pair. The board plan is electr
 
 **Why it is hard:** 6 fully authored Pokémon, average BST 502.0, average cap offset +0.33, ace offset +2, and 100% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Allison (14% species overlap). Its species appear across an average of 5.0 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Allison (14% species overlap). Its species appear across an average of 5.2 unrelated trainer families.
 
 **Counterplay:** Contest the weather setter, preserve your speed-control answer, and use Protect or Wide Guard against the amplified spread turns.
 
@@ -14754,7 +14760,7 @@ Electrode and Rotom Frost are the authored opening pair. The board plan is elect
 
 **Why it is hard:** 6 fully authored Pokémon, average BST 501.7, average cap offset +0.33, ace offset +2, and 100% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Carolina (12% species overlap). Its species appear across an average of 5.0 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Carolina (12% species overlap). Its species appear across an average of 5.2 unrelated trainer families.
 
 **Counterplay:** Contest the weather setter, preserve your speed-control answer, and use Protect or Wide Guard against the amplified spread turns.
 
@@ -15130,7 +15136,7 @@ Camerupt and Tropius are the authored opening pair. The board plan is residual c
 
 ## 641. Lao — Route 113
 
-**Rematch · Single · Active cap at rematch time · Demanding 41/100 · Uniqueness 58/100**
+**Rematch · Single · Active cap at rematch time · Demanding 41/100 · Uniqueness 57/100**
 
 **Theme:** Bug mixed offense
 
@@ -15140,7 +15146,7 @@ Accelgor opens this deliberate singles fight. The roster is built as bug mixed o
 
 **Why it is hard:** 3 fully authored Pokémon, average BST 508.3, average cap offset -3.0, ace offset -3, and 0% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Keigo (50% species overlap). Its species appear across an average of 7.3 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Keigo (50% species overlap). Its species appear across an average of 7.7 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -15162,7 +15168,7 @@ Accelgor and Greninja are the authored opening pair. The board plan is dark rare
 
 **Why it is hard:** 4 fully authored Pokémon, average BST 511.2, average cap offset -3.0, ace offset -3, and 25% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Keigo (40% species overlap). Its species appear across an average of 6.8 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Keigo (40% species overlap). Its species appear across an average of 7.0 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -15185,7 +15191,7 @@ Accelgor and Greninja are the authored opening pair. The board plan is dark pres
 
 **Why it is hard:** 6 fully authored Pokémon, average BST 508.5, average cap offset -2.0, ace offset -2, and 33% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Keigo (29% species overlap). Its species appear across an average of 6.0 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Keigo (29% species overlap). Its species appear across an average of 6.2 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -16113,17 +16119,17 @@ Greninja and Electivire are the authored opening pair. The board plan is fake ou
 
 ## 682. Dylan — Route 117
 
-**Rematch · Single · Active cap at rematch time · Demanding 43/100 · Uniqueness 76/100**
+**Rematch · Double · Active cap at rematch time · Demanding 45/100 · Uniqueness 80/100**
 
 **Theme:** Earthquake immunity
 
-Yanmega opens this deliberate singles fight. The roster is built as earthquake immunity. The composition turns the route's grassland, roadside cover, and open speed lanes into the fight's identity instead of using a generic route-trainer core.
+Yanmega and Dodrio are the authored opening pair. The board plan is earthquake immunity. The composition turns the route's grassland, roadside cover, and open speed lanes into the fight's identity instead of using a generic route-trainer core.
 
 **How it behaves:** The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe. Expect it to preserve earthquake immunity rather than select six unrelated strong attacks.
 
-**Why it is hard:** 3 fully authored Pokémon, average BST 480.0, average cap offset -2.0, ace offset -2, and 0% held-item coverage.
+**Why it is hard:** 4 fully authored Pokémon, average BST 482.5, average cap offset -2.0, ace offset -2, and 0% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Isaiah (25% species overlap). Its species appear across an average of 5.0 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Isaiah (20% species overlap). Its species appear across an average of 4.8 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -16132,6 +16138,7 @@ Yanmega opens this deliberate singles fight. The roster is built as earthquake i
 | 1 | Yanmega | active cap -2 | None | Speed Boost | coverage attacker | Bug Buzz, Air Slash, Ancient Power, Uproar |
 | 2 | Dodrio | active cap -2 | None | Moxie | setup attacker | Drill Peck, Double Hit, Jump Kick, Swords Dance |
 | 3 | Dugtrio | active cap -2 | None | Sand Veil | coverage attacker | Earthquake, Sucker Punch, Slash, Rock Slide |
+| 4 | Electrode | active cap -2 | None | Soundproof | coverage attacker | Thunderbolt, Volt Switch, Signal Beam, Hidden Power |
 
 ## 683. Dylan — Route 117
 
@@ -16652,7 +16659,7 @@ Landorus and Shaymin Sky are the authored opening pair. The board plan is earthq
 
 ## 705. Winona — Fortree City Gym
 
-**Rematch · Double · Active cap at rematch time · Extreme 80/100 · Uniqueness 75/100**
+**Rematch · Double · Active cap at rematch time · Extreme 80/100 · Uniqueness 76/100**
 
 **Theme:** Earthquake immunity + Flying pressure + hazard stack
 
@@ -16662,7 +16669,7 @@ Skarmory and Dragonite are the authored opening pair. The board plan is earthqua
 
 **Why it is hard:** 6 fully authored Pokémon, average BST 525.0, average cap offset +0.33, ace offset +2, and 100% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Elijah (25% species overlap). Its species appear across an average of 7.5 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Elijah (25% species overlap). Its species appear across an average of 7.3 unrelated trainer families.
 
 **Counterplay:** Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.
 
@@ -17052,7 +17059,7 @@ Volbeat and Illumise are the authored opening pair. The board plan is bug pressu
 
 **Why it is hard:** 4 fully authored Pokémon, average BST 477.5, average cap offset +0.0, ace offset +0, and 50% held-item coverage.
 
-**How unique it is:** Closest unrelated roster: Mel & Paul (33% species overlap). Its species appear across an average of 2.8 unrelated trainer families.
+**How unique it is:** Closest unrelated roster: Mel & Paul (33% species overlap). Its species appear across an average of 3.0 unrelated trainer families.
 
 **Counterplay:** Use spread damage, Taunt, or a coordinated double target so redirection cannot buy a free setup turn.
 

@@ -9,23 +9,23 @@
     "final_coverage": "Requires an explicitly complete canonical sequence and actual use of every required legendary family and Mega mechanism."
   },
   "source_identity": {
-    "docs/verdant_battle_sequence.json": "53a560accb6fc028427c810604ef82df12be3e8b069ce2326f4da225d930e569",
-    "docs/verdant_bespoke_battle_designs.json": "3d3bfca43047502b416d7e6cac591ae2f8a2afdc5ade01122d27eb6c0d455684",
+    "docs/verdant_battle_sequence.json": "096abdd49e146a0e67aa23424f23b734c1ce6712021bec5282524c8ac4cbbc67",
+    "docs/verdant_bespoke_battle_designs.json": "2d9c6af73ffc3cec887b9aa2f314718c52b70636eee94691766627d01a3e13de",
     "docs/verdant_historic_team_reservations.json": "b6d485c178a02919a1c5709776d813d98bd416d0c7384616d2dc0376e4ab30ae",
     "docs/verdant_marquee_battle_designs.json": "ffa1c35cf391bc4dbed8aa708b7a2d4d7cd7c9eb02f00385b898c5fa902f1870",
-    "src/data/trainers.h": "610ccfbd8b390bfbb60d5010a4e28c9f8594b53cbed535e2f567cd910d6248ad",
-    "src/data/trainer_parties.h": "01b733e466462cf6514a4640652c39c5bb2f239bfbf90d85e40d411e674c54c0",
+    "src/data/trainers.h": "92729f33c86d50bfe7bd32a15c49092797f6dc63105e1e2045743b49ed3fab42",
+    "src/data/trainer_parties.h": "b0057160cf25f9da1564751ba4cce6d632fbe693a4cd7d20184d2b16e9673cb1",
     "src/starter_choose.c": "7cc07796e9226a479d1b7da66ef17555e8a8e6de50516434720559d902b1b7d8"
   },
   "summary": {
     "sequence_entries": 76,
-    "closed_encounters": 70,
-    "used_species": 335,
-    "duplicated_species": 34,
+    "closed_encounters": 71,
+    "used_species": 338,
+    "duplicated_species": 35,
     "legendary_families": {
-      "used": 21,
+      "used": 22,
       "reserved": 10,
-      "unplaced": 65
+      "unplaced": 64
     },
     "mega_showcases": {
       "used": 5,
@@ -43,6 +43,22 @@
           "encounter_id": "BATTLE_070_ROUTE_117_ISAAC",
           "trainer_ids": [
             "TRAINER_ISAAC_1"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_ACCELGOR",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 71,
+          "encounter_id": "BATTLE_071_ROUTE_117_DYLAN",
+          "trainer_ids": [
+            "TRAINER_DYLAN_1"
           ],
           "basis": [
             "trainer-party"
@@ -3128,6 +3144,22 @@
       ]
     },
     {
+      "species": "SPECIES_LOPUNNY",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 71,
+          "encounter_id": "BATTLE_071_ROUTE_117_DYLAN",
+          "trainer_ids": [
+            "TRAINER_DYLAN_1"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_LOUDRED",
       "appearance_count": 1,
       "appearances": [
@@ -4079,6 +4111,22 @@
           "encounter_id": "BATTLE_037_ROUTE_109_HUEY",
           "trainer_ids": [
             "TRAINER_HUEY"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_PHEROMOSA",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 71,
+          "encounter_id": "BATTLE_071_ROUTE_117_DYLAN",
+          "trainer_ids": [
+            "TRAINER_DYLAN_1"
           ],
           "basis": [
             "trainer-party"
@@ -6022,13 +6070,23 @@
     },
     {
       "species": "SPECIES_WISHIWASHI",
-      "appearance_count": 1,
+      "appearance_count": 2,
       "appearances": [
         {
           "battle_index": 15,
           "encounter_id": "BATTLE_015_ROUTE_104_IVAN",
           "trainer_ids": [
             "TRAINER_IVAN"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 71,
+          "encounter_id": "BATTLE_071_ROUTE_117_DYLAN",
+          "trainer_ids": [
+            "TRAINER_DYLAN_1"
           ],
           "basis": [
             "trainer-party"
@@ -6456,6 +6514,14 @@
       "encounter_ids": [
         "BATTLE_028_RUSTBORO_RIVAL",
         "BATTLE_054_ROUTE_110_RIVAL"
+      ]
+    },
+    {
+      "species": "SPECIES_WISHIWASHI",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_015_ROUTE_104_IVAN",
+        "BATTLE_071_ROUTE_117_DYLAN"
       ]
     }
   ],
@@ -7024,9 +7090,13 @@
     },
     {
       "family_id": "PHEROMOSA",
-      "status": "unplaced",
-      "used_species": [],
-      "used_encounter_ids": [],
+      "status": "used",
+      "used_species": [
+        "SPECIES_PHEROMOSA"
+      ],
+      "used_encounter_ids": [
+        "BATTLE_071_ROUTE_117_DYLAN"
+      ],
       "reservations": []
     },
     {

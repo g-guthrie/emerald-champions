@@ -88,7 +88,8 @@ Route117_EventScript_RematchLydia:: @ 81F3A7D
 	end
 
 Route117_EventScript_Dylan:: @ 81F3A94
-	trainerbattle_single TRAINER_DYLAN_1, Route117_Text_DylanIntro, Route117_Text_DylanDefeat, Route117_EventScript_RegisterDylan
+	goto_if_unset FLAG_BADGE03_GET, Route117_EventScript_DylanStillTraining
+	trainerbattle_double TRAINER_DYLAN_1, Route117_Text_DylanIntro, Route117_Text_DylanDefeat, Route117_Text_DylanNotEnoughMons, Route117_EventScript_RegisterDylan
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route117_EventScript_RematchDylan
@@ -105,8 +106,12 @@ Route117_EventScript_RegisterDylan:: @ 81F3AC0
 	end
 
 Route117_EventScript_RematchDylan:: @ 81F3ADF
-	trainerbattle_rematch TRAINER_DYLAN_1, Route117_Text_DylanRematchIntro, Route117_Text_DylanRematchDefeat
+	trainerbattle_rematch_double TRAINER_DYLAN_1, Route117_Text_DylanRematchIntro, Route117_Text_DylanRematchDefeat, Route117_Text_DylanNotEnoughMons
 	msgbox Route117_Text_DylanPostRematch, MSGBOX_AUTOCLOSE
+	end
+
+Route117_EventScript_DylanStillTraining::
+	msgbox Route117_Text_DylanStillTraining, MSGBOX_AUTOCLOSE
 	end
 
 Route117_EventScript_Maria:: @ 81F3AF6

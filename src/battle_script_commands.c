@@ -9908,7 +9908,7 @@ static void Cmd_various(void)
         break;
     case VARIOUS_AFTER_YOU:
         if (GetBattlerTurnOrderNum(gBattlerAttacker) > GetBattlerTurnOrderNum(gBattlerTarget)
-            || GetBattlerTurnOrderNum(gBattlerAttacker) == GetBattlerTurnOrderNum(gBattlerTarget) + 1)
+            || GetBattlerTurnOrderNum(gBattlerTarget) == GetBattlerTurnOrderNum(gBattlerAttacker) + 1)
         {
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
         }

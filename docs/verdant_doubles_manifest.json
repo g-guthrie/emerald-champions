@@ -3223,15 +3223,15 @@
     "TRAINER_DYLAN_1": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 34,
-      "partner_interaction": false,
-      "level_offset": -2,
+      "archetype": "After You relay order",
+      "difficulty": 65,
+      "partner_interaction": true,
+      "level_offset": 2,
       "location": "Route 117"
     },
     "TRAINER_DYLAN_2": {
-      "format": "single",
-      "target_size": 3,
+      "format": "double",
+      "target_size": 4,
       "archetype": "Balanced disruption",
       "difficulty": 37,
       "partner_interaction": false,

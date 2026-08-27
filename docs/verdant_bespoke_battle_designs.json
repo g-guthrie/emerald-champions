@@ -4413,6 +4413,75 @@
         "weakest_link": "Spread pressure, Fake Out, or enough redirected damage can break Togepi's first-turn protection, while Taunt denies repeats; native reserve selection also means Mega Kangaskhan is not guaranteed to appear immediately. The remaining five still cover redirection, physical priority, and two special lanes; Kangaskhan from +4 to +3 is the first runtime tuning knob if the adaptive second half is too punishing."
       },
       "closure": "Battle 70 is source-closed at editorial 10/10 and target difficulty 9.2: one Badge-3-gated six-member Breeder double at legal levels 41-44, five intentional young competitive specialists, one fresh Mega Kangaskhan guardian, a real Follow Me plus Gluttony Belly Drum lead, truthful auto-Mega and native adaptive reserve behavior, six distinct items, five corpus references including the 2015 World Champion spine, broad spread, disruption, and type counterplay, native-width dialogue, explicit future-rematch debt, author self-check, and no repeated field or speed engine. Runtime playtesting remains required before the target is observed."
+    },
+    "BATTLE_071_ROUTE_117_DYLAN": {
+      "guide_order": 71,
+      "trainer_ids": ["TRAINER_DYLAN_1"],
+      "status": "closed",
+      "campaign_point": "Optional moving Triathlete on the canonical post-Wattson Route 117 clear; Dylan patrols an eight-tile lane and now waits for Badge 3 before loading one guarded four-member double",
+      "strict_cap": 40,
+      "branch_contract": {
+        "format": "double",
+        "source_slots": [0, 1, 2, 3],
+        "intended_lead": ["SPECIES_LOPUNNY", "SPECIES_WISHIWASHI"],
+        "reserve_source_order": ["SPECIES_ACCELGOR", "SPECIES_PHEROMOSA"],
+        "target_difficulty": 9.1,
+        "one_usable_policy": "guarded refusal through explicit first-fight and rematch double not-enough-Pokémon paths",
+        "replacement_contract": "the opening pair is fixed, while Accelgor and Pheromosa remain native matchup-ranked reserves rather than a promised entrance order",
+        "rematch_contract": "Dylan's records 2-4 remain later team-design debt; record 2 gains only a distinct fourth placeholder needed to make every reachable rematch tier an even native double"
+      },
+      "evolution_stage_fit": {
+        "campaign_phase": "cap-40 mature Route 117 speed exam immediately after the intentionally young Day Care class",
+        "effective_levels": "41-43",
+        "eligible_ratio": "4/4",
+        "mega_access": true,
+        "status": "pass",
+        "reason": "Buneary can reach Lopunny through friendship well before level 43, Shelmet can become Accelgor through the native trade evolution path, and Wishiwashi plus Pheromosa are single-stage species. Mega access exists, but Lopunnite is deliberately absent so Isaac's Mega Kangaskhan is not followed by another Mega rabbit."
+      },
+      "manual_quality": 10,
+      "manual_difficulty": 9.1,
+      "observed_difficulty": null,
+      "difficulty_status": "editorial target; runtime playtest pending",
+      "corpus_review": {
+        "reference_pool_size": 1005,
+        "full_team_candidates": [
+          {"reference_id": "showdown:gen9championsrandomdoublesbattle:007", "decision": "regular Lopunny utility shell selected; full team rejected", "reason": "The reproducible Champions-format team validates regular Lopunny's Close Combat utility. Its U-turn is explicitly rejected because this engine's current Lopunny legal data does not grant it; adjacent-repeat Fake Out and Thunder Wave are replaced by legal After You, Return, and Protect."},
+          {"reference_id": "showdown:gen7randomdoublesbattle:014", "decision": "Sitrus Schooling Wishiwashi special pressure selected; full team rejected", "reason": "The exact donor validates Sitrus Berry, Hydro Pump, Ice Beam, and Wishiwashi's bulky School-form doubles role. Muddy Water adds visible spread pressure and U-turn gives the slow runner a legal exit."},
+          {"reference_id": "showdown:gen6randomdoublesbattle:009", "decision": "Accelgor speed and special utility selected; full team rejected", "reason": "The donor validates Accelgor as extreme-speed special utility. Emerald Champions uses legal Bug Buzz, Sludge Bomb, Energy Ball, and Water Shuriken with a consumable Bug Gem so Unburden creates a second race phase."},
+          {"reference_id": "vgc:regional-madison-wi-2017", "decision": "champion Pheromosa role selected from roster-only evidence", "reason": "The verified regional-winning roster establishes Pheromosa as a legitimate offensive tournament piece. Its exact White Herb physical set is transparently authored from native legal moves rather than falsely attributed to the roster-only source."}
+        ],
+        "decision": "All 1,005 indexed references were reviewed. No complete roster fit Dylan's moving Triathlete identity, so three full-set donors and one verified event winner supply distinct roles while the After You-Wishiwashi relay is openly hand-authored around the map trainer."
+      },
+      "competitive_references": [
+        {"reference_id": "showdown:gen9championsrandomdoublesbattle:007", "adaptation": "Regular Lopunny keeps Close Combat, trades repeated Fake Out and Thunder Wave for After You and Return, uses legal Protect instead of the donor's unavailable U-turn, and carries Payapa rather than becoming another Mega."},
+        {"reference_id": "showdown:gen7randomdoublesbattle:014", "adaptation": "Wishiwashi keeps Sitrus Schooling, Hydro Pump, and Ice Beam; Muddy Water and U-turn make the pulled-forward action useful against Wide Guard or a bad board."},
+        {"reference_id": "showdown:gen6randomdoublesbattle:009", "adaptation": "Accelgor keeps the donor's fast special identity, using four legal attacks and Bug Gem-to-Unburden instead of copying Yawn or another support engine."},
+        {"reference_id": "vgc:regional-madison-wi-2017", "adaptation": "The winning roster supports Pheromosa's rare offensive showcase; White Herb Close Combat, Triple Axel, Lunge, and Protect are explicitly hand-authored."}
+      ],
+      "ordering": {
+        "intended_lead": ["SPECIES_LOPUNNY", "SPECIES_WISHIWASHI"],
+        "source_order": ["SPECIES_LOPUNNY", "SPECIES_WISHIWASHI", "SPECIES_ACCELGOR", "SPECIES_PHEROMOSA"],
+        "reason": "Fast Lopunny can use After You on its living slow partner so School-form Wishiwashi acts immediately next; Hydro Pump prevents Wide Guard from blanking the entire lesson, Muddy Water supplies spread pressure, Ice Beam covers Grass and Dragon answers, and U-turn can abandon a bad board. Forced replacements remain native matchup-ranked. Accelgor is a self-contained Bug Gem-to-Unburden special sprint, while White Herb Pheromosa is a self-contained physical Beast Boost finish."
+      },
+      "primary_player_question": "Can the player stop or exploit Lopunny's order change before a base-30-Speed School form attacks immediately, then contain two fragile speed finishers without relying on the same answer twice?",
+      "team_intent": "Level-43 Payapa Scrappy regular Lopunny uses After You, Return, Close Combat, and Protect. Level-42 Sitrus Schooling Wishiwashi uses Hydro Pump, Muddy Water, Ice Beam, and U-turn. Level-41 Bug Gem Unburden Accelgor uses Bug Buzz, Sludge Bomb, Energy Ball, and Water Shuriken. Level-43 White Herb Beast Boost Pheromosa uses Close Combat, Triple Axel, Lunge, and Protect. There is no weather, terrain, Tailwind, room, screen, hazard, sleep, redirection, Belly Drum, inheritance, Mega, Primal, or battle-Bag item.",
+      "intentional_weakness": "After You fails under Trick Room, fails if Lopunny is stopped or moves after Wishiwashi, and does nothing when the partner has already acted. Lopunny and Pheromosa share Flying, Psychic, and Fairy pressure in this rebalanced ruleset; Wishiwashi collapses below one-quarter HP and is answerable by Water immunity, Electric, Grass, Wide Guard, and special walls; Accelgor and Pheromosa are extremely frail and vulnerable to priority. Lopunny can Protect but cannot heal, while Wishiwashi alone can U-turn away from pressure.",
+      "intended_counterplay": "Fake Out, flinching, paralysis, sleep, Taunt, priority, Trick Room, or simply outspeeding Lopunny can deny After You. Wide Guard checks Muddy Water but not Hydro Pump; Water Absorb, Storm Drain, Dry Skin, Electric, Grass, and focused damage can collapse Schooling. Flying, Psychic, Fairy, burn, Intimidate, Protect, and physical walls answer Lopunny or Pheromosa. Priority, Rock, Fire, Flying, chip, and denying Bug Gem activation answer Accelgor. Protect scouting and deliberate focus remain broad answers because neither reserve is guaranteed first.",
+      "first_loss_lesson": "The apparent slow slot was the sprinter: After You, not raw Speed, moved Wishiwashi next. Stop Lopunny, reverse the order with Trick Room or priority, or punish the Water action; after the first knockout, read the actual adaptive reserve instead of memorizing source order.",
+      "bespoke_ai": "Dylan uses foe-aware, smart-switching, HP-aware, combo, and speed-control scoring. A reusable non-forcing After You rule offsets the generic ally-target penalty only when Trick Room is absent, the user moves before its living partner, that partner is slower than at least one living foe and has damaging pressure, and any already-selected partner move is damaging with ordinary priority. Native AI still chooses another move when those facts fail. Schooling, Sitrus, Wide Guard counterplay, Bug Gem, Unburden, White Herb, Beast Boost, U-turn, priority, and replacement ranking are existing mechanics; no target, move, switch, sacrifice, or reserve is forced. Speed Swap was explicitly rejected because this engine swaps only Speed stages rather than raw Speed stats.",
+      "uniqueness": "Lopunny, Accelgor, and Pheromosa are fresh exact species across Battles 1-70. Wishiwashi returns fifty-six encounters after B15's level-20 Schooling-threshold fishing single; here it is a slow special doubles cannon pulled forward by a teammate. This is the first After You order puzzle, first Bug Gem-to-Unburden sprint, first Pheromosa and Ultra Beast speed showcase, and a deliberate no-Mega pace change after Isaac.",
+      "story_logic": "Dylan's Running Triathlete sprite, horizontal patrol, and existing Match Call interests all center on pace. Badge 3 gating makes his fixed cap-40 levels truthful even though Route 117 is open earlier. His first battle and every reachable rematch opcode now use guarded doubles; record 2 receives only a distinct fourth placeholder, while records 2-4 remain explicit future team-design debt rather than being misrepresented as finished relay evolutions.",
+      "reward_logic": "Battle 71 grants EXP, ordinary prize money, and Dylan's existing Match Call registration only. It gives no item, heal, or story flag. The registration remains functional, while later rematch team quality is separately unresolved and not counted as a completed reward arc.",
+      "campaign_reservations": {
+        "spends": ["the campaign's definitive After You move-order relay", "the first fixed regular Lopunny and Accelgor roles", "the first Pheromosa and Ultra Beast speed showcase"],
+        "preserves": ["Mega Lopunny for a later opponent rather than consecutive Route 117 Megas", "Tailwind, Trick Room, and weather speed identities for other trainers", "Wishiwashi's future use only when a genuinely different threshold or form payoff earns another repeat", "the rest of the Ultra Beasts and every Primal"],
+        "repeat_rule": "Later order-control teams may use Quash, priority, or a field mode, but no later first fight should repeat regular Lopunny pulling School-form Wishiwashi forward before Unburden and Beast Boost speed reserves."
+      },
+      "author_self_check": {
+        "strongest_part": "A Running Triathlete makes one of the game's slowest threatening forms look like the sprinter, then hands the race to two radically different glass-cannon reserves without using another field mode or Mega.",
+        "weakest_link": "Trick Room, priority, Water immunity, Wide Guard plus Hydro Pump scouting, and shared Flying/Psychic/Fairy pressure are broad answers. Those seams are intentional; Pheromosa from +3 to +2 is the first runtime tuning knob if the adaptive finish is too punishing."
+      },
+      "closure": "Battle 71 is source-closed at editorial 10/10 and target difficulty 9.1: one Badge-3-gated four-member Triathlete double at legal levels 41-43, a truthful After You-Wishiwashi order puzzle, one earned fifty-six-encounter repeat, three fresh exact species, the first Pheromosa showcase, four distinct items, four corpus references, adaptive self-contained reserves, broad priority, Trick Room, Water, and type counterplay, native-width dialogue, an even rematch-format repair with explicit future roster debt, author self-check, and no adjacent Mega or repeated field engine. Runtime playtesting remains required before the target is observed."
     }
   }
 }

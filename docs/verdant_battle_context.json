@@ -8,15 +8,15 @@
     "tuning_preference": "Preserve sound strategy; tune opponent levels relative to the fixed cap first."
   },
   "selection": {
-    "index": 71,
-    "encounter_id": "BATTLE_071_ROUTE_117_DYLAN",
+    "index": 72,
+    "encounter_id": "BATTLE_072_ROUTE_117_MARIA",
     "location": "Route117",
     "category": "optional moving solo double",
     "status": "next",
     "trainer_ids": [
-      "TRAINER_DYLAN_1"
+      "TRAINER_MARIA_1"
     ],
-    "access_note": "Horizontal patrol from (38,16) with range eight and four-tile sight. His four-member trainer record is double while the current first-fight and rematch opcodes are single, so source closure must add a usable-party guard and preserve Dylan's independent Match Call chain.",
+    "access_note": "Maria wanders around (26,13) in a two-by-two range with five-tile sight. Her four-member trainer record is double while the current first-fight and rematch opcodes are single; source closure must add the explicit two-usable-Pok\u00e9mon path while preserving her Match Call registration.",
     "strict_cap": 40,
     "strict_cap_source": "canonical-sequence-stage",
     "campaign_point": null,
@@ -31,98 +31,95 @@
       "representative_party_size": 4,
       "average_party_size": 4.0,
       "species": [
-        "SPECIES_DODUO",
-        "SPECIES_PASSIMIAN",
-        "SPECIES_SKARMORY",
+        "SPECIES_HAKAMO_O",
+        "SPECIES_HAWLUCHA",
+        "SPECIES_TRANQUILL",
         "SPECIES_YANMA"
       ],
       "items": [
-        "ITEM_CHOICE_SCARF",
         "ITEM_LEFTOVERS"
       ],
       "moves": [
-        "MOVE_ACUPRESSURE",
-        "MOVE_AIR_CUTTER",
-        "MOVE_ANCIENT_POWER",
-        "MOVE_BRAVE_BIRD",
+        "MOVE_AIR_SLASH",
+        "MOVE_BOUNCE",
         "MOVE_CLOSE_COMBAT",
-        "MOVE_DOUBLE_HIT",
-        "MOVE_GUNK_SHOT",
-        "MOVE_KNOCK_OFF",
-        "MOVE_PLUCK",
+        "MOVE_DETECT",
+        "MOVE_DRAGON_DANCE",
+        "MOVE_FEATHER_DANCE",
+        "MOVE_HIDDEN_POWER",
+        "MOVE_HONE_CLAWS",
+        "MOVE_NOBLE_ROAR",
+        "MOVE_OUTRAGE",
+        "MOVE_PROTECT",
         "MOVE_QUICK_ATTACK",
         "MOVE_ROOST",
-        "MOVE_SIGNAL_BEAM",
-        "MOVE_SPIKES",
-        "MOVE_STEALTH_ROCK",
-        "MOVE_UPROAR",
+        "MOVE_SUBMISSION",
         "MOVE_U_TURN"
       ],
       "synergy_tags": [
-        "Flying pressure",
-        "hazard stack"
+        "Flying pressure"
       ],
       "level_offsets": [
-        -2,
-        -1
+        -2
       ],
-      "average_level_offset": -1.75,
-      "max_level_offset": -1,
+      "average_level_offset": -2.0,
+      "max_level_offset": -2,
       "densities": {
-        "protect": 0.0,
+        "protect": 0.5,
         "fake_out": 0.0,
-        "setup": 0.0,
-        "speed_control_or_priority": 0.25,
-        "premium_item": 0.5
+        "setup": 0.25,
+        "speed_control_or_priority": 0.5,
+        "premium_item": 0.25
       }
     }
   },
   "ledger": {
     "path": "docs/verdant_battle_experience_ledger.json",
     "present": true,
-    "records": 70,
+    "records": 71,
     "rolling_fallback_records": []
   },
   "rolling_window": {
     "requested_size": 10,
     "actual_size": 10,
     "encounter_range": [
-      61,
-      70
+      62,
+      71
     ],
     "tempo_counts": {
       "Ally-safe Punk Rock spread in the 3+3 joint, Vivian's disruptive/bulky coverage single, or Kirk's direct Ghost-backed special single.": 1,
       "Branch-sensitive Grass-Fire lead into player-selected Rainbow, Swamp, Sea of Fire continuation, or no-combo Water endgame.": 1,
       "Fast item-removal and Tailwind lead, target-order-sensitive young Ground reserve, returning mixed partners, then source-last signature Mega balance closer.": 1,
       "One guaranteed Terrain/Tailwind opening followed by native resistance-and-base-damage reserve selection, reciprocal speed modes, priority denial, and a dynamically deployed story Mega.": 1,
+      "One order-changing slow-cannon lead followed by native adaptive special Unburden or physical Beast Boost speed, with no persistent field mode.": 1,
       "One visible ally-targeting activation, Defense-powered physical pressure, then conditional inheritance or immediate reserve offense selected by the native matchup logic rather than a speed field.": 1,
       "Proactive Stuff Cheeks opening, reactive berry thresholds, cross-trainer second-item transfers, and two independent item-economy singles.": 1,
       "Slow protected setup lead, then adaptive physical priority, redirection and sleep, or fragile special pressure without weather, terrain, room, Tailwind, screens, or hazards.": 1,
       "Two passive-but-dangerous trap leads, Good as Gold removal tax, then rare bulky phazing cashout with no speed field.": 1,
-      "Two-body contact toll, frail Rough Skin reserve, then rare special Flame Body spread finish with no speed or field mode.": 1,
-      "Young room-and-rock lead, special Throat Spray pressure, Choice Band slow breaker, and rare Beast Boost clock reset.": 1
+      "Two-body contact toll, frail Rough Skin reserve, then rare special Flame Body spread finish with no speed or field mode.": 1
     },
     "format_counts": {
-      "double": 7,
-      "native-pair double": 2,
-      "single": 1
+      "double": 8,
+      "native-pair double": 2
     },
     "novelty_tag_counts": {
-      "guarded-double": 6,
-      "adaptive-reserve-selection": 2,
+      "guarded-double": 7,
+      "adaptive-reserve-selection": 3,
+      "route-double": 3,
       "cycling-double": 2,
       "gym-native-pair": 2,
       "joint-3-plus-3": 2,
       "no-legendary": 2,
+      "no-mega": 2,
       "no-speed-field": 2,
       "no-speed-mode": 2,
-      "route-double": 2,
+      "no-weather": 2,
       "safe-one-usable": 2,
       "split-four-singles": 2,
-      "trick-room": 2,
       "ability-inheritance-relay": 1,
       "abra-sash": 1,
-      "air-balloon": 1,
+      "accelgor": 1,
+      "after-you": 1,
       "alolan-muk": 1,
       "armor-tail": 1,
       "beast-boost": 1,
@@ -130,10 +127,9 @@
       "belly-drum": 1,
       "body-press-conversion": 1,
       "boomburst": 1,
+      "bug-gem-unburden": 1,
       "cheek-pouch": 1,
-      "choice-band-crabominable": 1,
       "contact-tax": 1,
-      "cycling-single": 1,
       "day-care-class": 1,
       "declinable-retry": 1,
       "dragon-tail": 1,
@@ -162,23 +158,26 @@
       "libero-raboot": 1,
       "lightning-rod-ally-activation": 1,
       "liquid-voice-brionne": 1,
-      "match-call-owner": 1,
       "mega-gallade": 1,
       "mega-kangaskhan": 1,
       "mega-raichu-y": 1,
       "middle-starters": 1,
       "moltres": 1,
+      "move-order-relay": 1,
+      "moving-triathlete": 1,
       "munchlax": 1,
       "no-forced-ai": 1,
       "no-guard": 1,
-      "no-mega": 1,
+      "no-room": 1,
       "no-scripted-heal": 1,
       "no-single-engine": 1,
-      "no-weather": 1,
+      "no-tailwind": 1,
+      "no-terrain": 1,
       "noncontact-counterplay": 1,
       "normal-gengar": 1,
       "parental-bond": 1,
       "passimian": 1,
+      "pheromosa": 1,
       "player-chosen-branch": 1,
       "pledge-relay": 1,
       "power-of-alchemy": 1,
@@ -189,6 +188,7 @@
       "receiver": 1,
       "reciprocal-mega": 1,
       "red-card-skarmory": 1,
+      "regular-lopunny": 1,
       "removal-tax": 1,
       "required-gym-boss": 1,
       "required-rival-double": 1,
@@ -196,12 +196,11 @@
       "reusable-spread-ai": 1,
       "rocky-helmet": 1,
       "rough-skin": 1,
+      "schooling-wishiwashi": 1,
       "sea-of-fire": 1,
       "second-item-relay": 1,
       "sharpedo": 1,
-      "slow-lane": 1,
       "soundproof-prefix": 1,
-      "stakataka": 1,
       "staryu-analytic": 1,
       "stuff-cheeks": 1,
       "swamp": 1,
@@ -211,158 +210,21 @@
       "tapu-koko": 1,
       "target-order-ground-geometry": 1,
       "target-ten": 1,
-      "throat-spray-drampa": 1,
       "togepi": 1,
       "toxic-debris-glimmet": 1,
-      "two-clock": 1,
+      "trick-room": 1,
+      "ultra-beast-showcase": 1,
       "unburden-rejected": 1,
       "wally-continuity": 1,
       "weavile-zapdos-lead": 1,
+      "white-herb": 1,
       "wide-guard": 1,
       "world-champion-spine": 1,
-      "young-bronzor": 1,
       "young-drilbur": 1,
       "young-ferroseed": 1,
       "zapdos": 1
     },
     "entries": [
-      {
-        "index": 61,
-        "encounter_id": "BATTLE_061_ROUTE_110_CYCLING_BENJAMIN",
-        "identity": {
-          "location": "Route110",
-          "category": "optional cycling single",
-          "format": "single",
-          "strict_cap": 30,
-          "memory_hook": "Mental Herb Bronzor opens a five-turn slow lane, Drampa and Choice Band Crabominable spend it, and Air Balloon Stakataka can flip the clock again at the finish."
-        },
-        "primary_player_question": "Can the player deny, reverse, or count out two finite Trick Room clocks while exploiting the young lead, Choice lock, shared Fighting pressure, and one-hit Balloon seam?",
-        "tempo": "Young room-and-rock lead, special Throat Spray pressure, Choice Band slow breaker, and rare Beast Boost clock reset.",
-        "pressure_sources": [
-          "Mental Herb Trick Room Bronzor",
-          "Stealth Rock",
-          "Throat Spray Berserk Drampa",
-          "Hyper Voice and Draco Meteor",
-          "Choice Band Crabominable",
-          "Ice Hammer and Close Combat",
-          "Air Balloon Stakataka",
-          "Gyro Ball and Body Press",
-          "second Trick Room"
-        ],
-        "intentional_opening": "Contextual speed AI strongly prefers Trick Room only when the active side is slower and room is absent; setup scoring modestly supports the cap-even lead without forcing its move.",
-        "intentional_weakness": "Room lasts five turns, Bronzor forgoes Eviolite and damage, Crabominable exposes a Choice lock, Fighting pressure spans the mature attackers, and Stakataka loses Ground immunity after one hit.",
-        "first_loss_lesson": "Count five turns instead of racing raw Speed, scout Crabominable's lock, and preserve one Fighting or Ground answer for Stakataka's second clock.",
-        "revealed_information": [
-          "Bronzor remains young at level 30",
-          "Mental Herb blocks one Taunt",
-          "Trick Room lasts five turns",
-          "Crabominable is Choice Band locked",
-          "Stakataka has Air Balloon and Beast Boost",
-          "Benjamin alone registers Match Call",
-          "course rewards are independent"
-        ],
-        "counterplay_classes": [
-          "Taunt after Mental Herb, Encore, Imprison, or Trick Room reversal",
-          "stalling five turns with Protect, switches, recovery, or priority",
-          "Fire, Dark, or Ghost into Bronzor",
-          "Fighting, Fairy, Ice, Dragon, Water, or special pressure by phase",
-          "burn or Intimidate",
-          "Choice-lock scouting and resistance pivots",
-          "item removal",
-          "Balloon pop plus Ground"
-        ],
-        "target_difficulty": 9.1,
-        "difficulty_rationale": "Two contextual clocks and three optimized slow attackers at legal levels 31-33 create a severe but readable reversal, while cap-even unevolved Bronzor, finite turns, Choice lock, shared Fighting weakness, and Balloon removal keep it answerable.",
-        "tuning_knob": "Tune Stakataka from +3 to +2 first; preserve both clocks, the legal young lead, and each attacker's exact role.",
-        "playtest_status": "static-pass-runtime-unplayed",
-        "novelty_tags": [
-          "cycling-single",
-          "slow-lane",
-          "trick-room",
-          "two-clock",
-          "young-bronzor",
-          "throat-spray-drampa",
-          "choice-band-crabominable",
-          "stakataka",
-          "air-balloon",
-          "beast-boost",
-          "match-call-owner"
-        ],
-        "historic_reference_ids": [
-          "showdown:gen9championsrandomdoublesbattle:006",
-          "showdown:gen9randombattle:010",
-          "showdown:gen7randombattle:019"
-        ],
-        "corpus_search": {
-          "status": "complete-current-review",
-          "pool_size": 1005,
-          "selection": "Three full-set donors support the mature slow attackers; Bronzor is transparently source-authored after rejecting source-illegal Farigiraf and stage-illegal Bronzong alternatives."
-        },
-        "author_self_check": {
-          "strongest_part": "A readable finite clock culminates in a rare legal Ultra Beast reset while all four exact species remain fresh.",
-          "weakest_link": "Room denial and Fighting pressure compress the mature half; that broad answer is intentional, with Stakataka level as the first runtime tuning knob."
-        },
-        "record_source": "v2-ledger",
-        "location": "Route110",
-        "category": "optional cycling single",
-        "strict_cap": 30,
-        "source_facts": {
-          "format": "single",
-          "source_record_formats": [
-            "single"
-          ],
-          "source_variant_count": 1,
-          "representative_party_size": 4,
-          "average_party_size": 4.0,
-          "species": [
-            "SPECIES_BRONZOR",
-            "SPECIES_CRABOMINABLE",
-            "SPECIES_DRAMPA",
-            "SPECIES_STAKATAKA"
-          ],
-          "items": [
-            "ITEM_AIR_BALLOON",
-            "ITEM_CHOICE_BAND",
-            "ITEM_MENTAL_HERB",
-            "ITEM_THROAT_SPRAY"
-          ],
-          "moves": [
-            "MOVE_BODY_PRESS",
-            "MOVE_CLOSE_COMBAT",
-            "MOVE_DRACO_METEOR",
-            "MOVE_EARTHQUAKE",
-            "MOVE_FLAMETHROWER",
-            "MOVE_GYRO_BALL",
-            "MOVE_HYPER_VOICE",
-            "MOVE_ICE_HAMMER",
-            "MOVE_PSYCHIC",
-            "MOVE_ROOST",
-            "MOVE_STEALTH_ROCK",
-            "MOVE_STONE_EDGE",
-            "MOVE_THUNDER_PUNCH",
-            "MOVE_TRICK_ROOM"
-          ],
-          "synergy_tags": [
-            "Earthquake immunity",
-            "Trick Room"
-          ],
-          "level_offsets": [
-            0,
-            1,
-            2,
-            3
-          ],
-          "average_level_offset": 1.5,
-          "max_level_offset": 3,
-          "densities": {
-            "protect": 0.0,
-            "fake_out": 0.0,
-            "setup": 0.0,
-            "speed_control_or_priority": 0.5,
-            "premium_item": 0.5
-          }
-        }
-      },
       {
         "index": 62,
         "encounter_id": "BATTLE_062_ROUTE_110_CYCLING_JASMINE",
@@ -1695,11 +1557,173 @@
             "premium_item": 0.5
           }
         }
+      },
+      {
+        "index": 71,
+        "encounter_id": "BATTLE_071_ROUTE_117_DYLAN",
+        "identity": {
+          "location": "Route117",
+          "category": "optional guarded moving Triathlete double",
+          "format": "double",
+          "strict_cap": 40,
+          "memory_hook": "Regular Lopunny changes the race order so slow School-form Wishiwashi attacks next, then Bug Gem Unburden Accelgor or rare White Herb Pheromosa turns the relay into a glass-cannon sprint."
+        },
+        "primary_player_question": "Can the player stop or exploit After You before one of the game's slowest threatening forms attacks immediately, then contain two fragile speed finishers without relying on the same answer twice?",
+        "tempo": "One order-changing slow-cannon lead followed by native adaptive special Unburden or physical Beast Boost speed, with no persistent field mode.",
+        "pressure_sources": [
+          "level-43 Payapa Scrappy regular Lopunny",
+          "After You, Return, Close Combat, and Protect",
+          "level-42 Sitrus Schooling Wishiwashi",
+          "Hydro Pump, Muddy Water, Ice Beam, and U-turn",
+          "level-41 Bug Gem Unburden Accelgor",
+          "Bug Buzz, Sludge Bomb, Energy Ball, and Water Shuriken",
+          "level-43 White Herb Beast Boost Pheromosa",
+          "Close Combat, Triple Axel, Lunge, and Protect"
+        ],
+        "intentional_opening": "Lopunny and Wishiwashi are the fixed lead. Generic combo scoring values ally-targeted After You only when Trick Room is absent, Lopunny acts first, Wishiwashi is slower than a living foe and has damaging pressure, and any known selected move has ordinary priority. The bonus offsets the generic ally penalty but forces no move or target.",
+        "intentional_weakness": "After You fails when Lopunny is stopped, moves too late, or faces Trick Room. Lopunny and Pheromosa share Flying, Psychic, and Fairy pressure; Wishiwashi collapses below one-quarter HP; Accelgor and Pheromosa are extremely frail and vulnerable to priority; Lopunny can Protect but the team has no healing beyond one Sitrus Berry.",
+        "first_loss_lesson": "The apparent slow slot was the sprinter: After You changed the order. Stop Lopunny, reverse the race with Trick Room or priority, or punish the Water action; after a knockout, identify the actual adaptive reserve rather than memorizing source order.",
+        "revealed_information": [
+          "Badge 3 is required",
+          "Dylan is a guarded native double",
+          "Lopunny and Wishiwashi are the fixed lead",
+          "After You changes the current turn rather than raw Speed stats",
+          "Speed Swap was rejected because this engine swaps only stages",
+          "Wishiwashi has spread and single-target Water pressure",
+          "forced reserves use native matchup ranking",
+          "Accelgor consumes Bug Gem to activate Unburden",
+          "Pheromosa is the first Ultra Beast speed showcase",
+          "Lopunny deliberately does not Mega Evolve",
+          "Match Call record 2 has an even fourth placeholder but later rosters remain unresolved"
+        ],
+        "counterplay_classes": [
+          "Fake Out, flinching, paralysis, sleep, Taunt, priority, faster pressure, or Trick Room into Lopunny",
+          "Wide Guard for Muddy Water plus separate Hydro Pump scouting",
+          "Water Absorb, Storm Drain, Dry Skin, Electric, Grass, and focused threshold damage into Wishiwashi",
+          "Flying, Psychic, Fairy, burn, Intimidate, Protect, and physical walls into Lopunny or Pheromosa",
+          "priority, Rock, Fire, Flying, chip, and item denial into Accelgor",
+          "Protect scouting and deliberate focus against either adaptive reserve"
+        ],
+        "target_difficulty": 9.1,
+        "difficulty_rationale": "Four optimized legal levels 41-43, real move-order manipulation, School-form bulk, spread and single-target Water pressure, consumable Unburden, rare Beast Boost cleanup, full items, and adaptive reserves make a severe optional route battle. Trick Room, priority, Water immunity, Wide Guard plus Hydro Pump reads, shared type seams, and two glass cannons keep it below a boss ten.",
+        "tuning_knob": "Tune Pheromosa from +3 to +2 first, then Lopunny from +3 to +2; preserve the After You-Wishiwashi lead and no-Mega identity.",
+        "playtest_status": "static-pass-runtime-unplayed",
+        "novelty_tags": [
+          "route-double",
+          "guarded-double",
+          "moving-triathlete",
+          "after-you",
+          "move-order-relay",
+          "regular-lopunny",
+          "schooling-wishiwashi",
+          "bug-gem-unburden",
+          "accelgor",
+          "pheromosa",
+          "ultra-beast-showcase",
+          "white-herb",
+          "beast-boost",
+          "adaptive-reserve-selection",
+          "no-mega",
+          "no-weather",
+          "no-terrain",
+          "no-room",
+          "no-tailwind"
+        ],
+        "historic_reference_ids": [
+          "showdown:gen9championsrandomdoublesbattle:007",
+          "showdown:gen7randomdoublesbattle:014",
+          "showdown:gen6randomdoublesbattle:009",
+          "vgc:regional-madison-wi-2017"
+        ],
+        "corpus_search": {
+          "status": "complete-current-review",
+          "pool_size": 1005,
+          "selection": "Three complete reproducible donors support Lopunny, Wishiwashi, and Accelgor roles; one verified regional-winning roster supports Pheromosa's tournament legitimacy. The After You relay and exact White Herb set are transparently hand-authored for Dylan."
+        },
+        "author_self_check": {
+          "strongest_part": "A Running Triathlete makes one of the game's slowest threatening forms look like the sprinter, then passes the race to two distinct glass-cannon reserves without another field mode or Mega.",
+          "weakest_link": "Trick Room, priority, Water immunity, Wide Guard plus Hydro Pump scouting, and shared Flying, Psychic, and Fairy pressure are broad answers. Those seams are intentional; Pheromosa level is the first tuning knob."
+        },
+        "record_source": "v2-ledger",
+        "location": "Route117",
+        "category": "optional moving solo double",
+        "strict_cap": 40,
+        "source_facts": {
+          "format": "double",
+          "source_record_formats": [
+            "double"
+          ],
+          "source_variant_count": 1,
+          "representative_party_size": 4,
+          "average_party_size": 4.0,
+          "species": [
+            "SPECIES_ACCELGOR",
+            "SPECIES_LOPUNNY",
+            "SPECIES_PHEROMOSA",
+            "SPECIES_WISHIWASHI"
+          ],
+          "items": [
+            "ITEM_BUG_GEM",
+            "ITEM_PAYAPA_BERRY",
+            "ITEM_SITRUS_BERRY",
+            "ITEM_WHITE_HERB"
+          ],
+          "moves": [
+            "MOVE_AFTER_YOU",
+            "MOVE_BUG_BUZZ",
+            "MOVE_CLOSE_COMBAT",
+            "MOVE_ENERGY_BALL",
+            "MOVE_HYDRO_PUMP",
+            "MOVE_ICE_BEAM",
+            "MOVE_LUNGE",
+            "MOVE_MUDDY_WATER",
+            "MOVE_PROTECT",
+            "MOVE_RETURN",
+            "MOVE_SLUDGE_BOMB",
+            "MOVE_TRIPLE_AXEL",
+            "MOVE_U_TURN",
+            "MOVE_WATER_SHURIKEN"
+          ],
+          "synergy_tags": [
+            "Schooling HP threshold"
+          ],
+          "level_offsets": [
+            1,
+            2,
+            3
+          ],
+          "average_level_offset": 2.25,
+          "max_level_offset": 3,
+          "densities": {
+            "protect": 0.5,
+            "fake_out": 0.0,
+            "setup": 0.0,
+            "speed_control_or_priority": 0.75,
+            "premium_item": 0.25
+          }
+        }
       }
     ]
   },
   "hard_errors": [],
   "advisory_warnings": [
+    {
+      "code": "FORMAT_STREAK",
+      "scope": "rolling-window",
+      "encounter_ids": [
+        "BATTLE_068_MAUVILLE_GYM_WATTSON",
+        "BATTLE_069_ROUTE_117_ANNA_AND_MEG",
+        "BATTLE_070_ROUTE_117_ISAAC",
+        "BATTLE_071_ROUTE_117_DYLAN"
+      ],
+      "message": "The last four encounters share one battle format.",
+      "evidence": {
+        "format": "double",
+        "streak": 4
+      },
+      "overridden": false,
+      "override_reason": null
+    },
     {
       "code": "NOVELTY_TAG_REPEAT",
       "scope": "rolling-window",
@@ -1709,20 +1733,22 @@
         "BATTLE_066_MAUVILLE_GYM_BEN",
         "BATTLE_068_MAUVILLE_GYM_WATTSON",
         "BATTLE_069_ROUTE_117_ANNA_AND_MEG",
-        "BATTLE_070_ROUTE_117_ISAAC"
+        "BATTLE_070_ROUTE_117_ISAAC",
+        "BATTLE_071_ROUTE_117_DYLAN"
       ],
       "message": "One or more mechanics recur in at least three rolling encounters.",
       "evidence": {
-        "guarded-double": 6
+        "adaptive-reserve-selection": 3,
+        "guarded-double": 7,
+        "route-double": 3
       },
       "overridden": false,
       "override_reason": null
     },
     {
-      "code": "SPEED_CONTROL_DENSITY",
+      "code": "PROTECT_DENSITY",
       "scope": "rolling-window",
       "encounter_ids": [
-        "BATTLE_061_ROUTE_110_CYCLING_BENJAMIN",
         "BATTLE_062_ROUTE_110_CYCLING_JASMINE",
         "BATTLE_063_ROUTE_110_CYCLING_JACOB",
         "BATTLE_064_MAUVILLE_WALLY",
@@ -1731,11 +1757,35 @@
         "BATTLE_067_MAUVILLE_GYM_SHAWN_ANGELO",
         "BATTLE_068_MAUVILLE_GYM_WATTSON",
         "BATTLE_069_ROUTE_117_ANNA_AND_MEG",
-        "BATTLE_070_ROUTE_117_ISAAC"
+        "BATTLE_070_ROUTE_117_ISAAC",
+        "BATTLE_071_ROUTE_117_DYLAN"
+      ],
+      "message": "Rolling protect density is high enough to merit an editorial look, not an automatic change.",
+      "evidence": {
+        "density": 0.457,
+        "threshold": 0.45
+      },
+      "overridden": false,
+      "override_reason": null
+    },
+    {
+      "code": "SPEED_CONTROL_DENSITY",
+      "scope": "rolling-window",
+      "encounter_ids": [
+        "BATTLE_062_ROUTE_110_CYCLING_JASMINE",
+        "BATTLE_063_ROUTE_110_CYCLING_JACOB",
+        "BATTLE_064_MAUVILLE_WALLY",
+        "BATTLE_065_MAUVILLE_GYM_VIVIAN_KIRK",
+        "BATTLE_066_MAUVILLE_GYM_BEN",
+        "BATTLE_067_MAUVILLE_GYM_SHAWN_ANGELO",
+        "BATTLE_068_MAUVILLE_GYM_WATTSON",
+        "BATTLE_069_ROUTE_117_ANNA_AND_MEG",
+        "BATTLE_070_ROUTE_117_ISAAC",
+        "BATTLE_071_ROUTE_117_DYLAN"
       ],
       "message": "Rolling speed control or priority density is high enough to merit an editorial look, not an automatic change.",
       "evidence": {
-        "density": 0.728,
+        "density": 0.75,
         "threshold": 0.55
       },
       "overridden": false,
@@ -1768,26 +1818,23 @@
       "code": "SIGNATURE_MOVE_REPEAT",
       "scope": "rolling-window",
       "encounter_ids": [
-        "BATTLE_061_ROUTE_110_CYCLING_BENJAMIN",
-        "BATTLE_063_ROUTE_110_CYCLING_JACOB",
         "BATTLE_064_MAUVILLE_WALLY",
         "BATTLE_065_MAUVILLE_GYM_VIVIAN_KIRK",
         "BATTLE_066_MAUVILLE_GYM_BEN",
         "BATTLE_067_MAUVILLE_GYM_SHAWN_ANGELO",
         "BATTLE_068_MAUVILLE_GYM_WATTSON",
         "BATTLE_069_ROUTE_117_ANNA_AND_MEG",
-        "BATTLE_070_ROUTE_117_ISAAC"
+        "BATTLE_070_ROUTE_117_ISAAC",
+        "BATTLE_071_ROUTE_117_DYLAN"
       ],
       "message": "A non-generic move appears across at least four rolling encounters.",
       "evidence": {
-        "Body Press": 4,
         "Dazzling Gleam": 4,
         "Giga Drain": 4,
-        "Ice Beam": 4,
+        "Ice Beam": 5,
         "Ice Punch": 4,
-        "Psychic": 4,
         "Rock Slide": 4,
-        "Roost": 4,
+        "Sludge Bomb": 4,
         "Thunderbolt": 5
       },
       "overridden": false,

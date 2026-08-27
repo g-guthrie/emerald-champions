@@ -135,6 +135,60 @@
         ]
       }
     ],
+    "TRAINER_DYLAN_1": [
+      {
+        "level": 3,
+        "species": "SPECIES_LOPUNNY",
+        "item": "ITEM_PAYAPA_BERRY",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+        "moves": [
+          "MOVE_AFTER_YOU",
+          "MOVE_RETURN",
+          "MOVE_CLOSE_COMBAT",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_WISHIWASHI",
+        "item": "ITEM_SITRUS_BERRY",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_HYDRO_PUMP",
+          "MOVE_MUDDY_WATER",
+          "MOVE_ICE_BEAM",
+          "MOVE_U_TURN"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_ACCELGOR",
+        "item": "ITEM_BUG_GEM",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_BUG_BUZZ",
+          "MOVE_SLUDGE_BOMB",
+          "MOVE_ENERGY_BALL",
+          "MOVE_WATER_SHURIKEN"
+        ]
+      },
+      {
+        "level": 3,
+        "species": "SPECIES_PHEROMOSA",
+        "item": "ITEM_WHITE_HERB",
+        "ability_slot": 0,
+        "spread": "SPREAD_31_IV_ATK_SPEED_ADAMANT",
+        "moves": [
+          "MOVE_CLOSE_COMBAT",
+          "MOVE_TRIPLE_AXEL",
+          "MOVE_LUNGE",
+          "MOVE_PROTECT"
+        ]
+      }
+    ],
     "TRAINER_LYLE": [
       {
         "level": 3,

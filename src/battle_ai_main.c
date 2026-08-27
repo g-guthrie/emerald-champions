@@ -3310,6 +3310,19 @@ static s16 AI_ComboSetup(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
           && BattlerStatCanRise(battlerDef, partnerAbility, STAT_DEF)
           && !CanBeatUpFaintTarget(battlerAtk, battlerDef, AI_THINKING_STRUCT->movesetIndex))
         score += 15;
+    else if (effect == EFFECT_AFTER_YOU
+          && !(gFieldStatuses & STATUS_FIELD_TRICK_ROOM)
+          && !IsBattlerIncapacitated(battlerDef, partnerAbility)
+          && GetWhoStrikesFirst(battlerAtk, battlerDef, TRUE) == 0
+          && HasDamagingMove(battlerDef)
+          && ((IsBattlerAlive(FOE(battlerDef))
+            && GetWhoStrikesFirst(battlerDef, FOE(battlerDef), TRUE) == 1)
+           || (IsBattlerAlive(BATTLE_PARTNER(FOE(battlerDef)))
+            && GetWhoStrikesFirst(battlerDef, BATTLE_PARTNER(FOE(battlerDef)), TRUE) == 1))
+          && (AI_DATA->partnerMove == MOVE_NONE
+           || (!IS_MOVE_STATUS(AI_DATA->partnerMove)
+            && GetMovePriority(battlerDef, AI_DATA->partnerMove) == 0)))
+        score += 35;
     else if (effect == EFFECT_ALWAYS_CRIT
           && partnerAbility == ABILITY_ANGER_POINT
           && BattlerStatCanRise(battlerDef, partnerAbility, STAT_ATK)
