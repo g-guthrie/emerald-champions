@@ -2428,33 +2428,39 @@ Route116_Text_JohnsonPostBattle: @ 829C418
 	.string "bring us back down.$"
 
 Route117_Text_IsaacIntro: @ 829C43F
-	.string "Listen, could I get you to battle\n"
-	.string "the Pokémon I'm raising?$"
+	.string "My little ones are learning fast!\n"
+	.string "Their guardian joins the class, too!$"
 
 Route117_Text_IsaacDefeat: @ 829C47A
-	.string "You've raised yours superbly…$"
+	.string "Even my best lesson wasn't enough!$"
 
 Route117_Text_IsaacPostBattle: @ 829C498
-	.string "Pokémon isn't all about power.\p"
-	.string "Polishing a unique aspect of one's\n"
-	.string "character is another way of enjoying\l"
-	.string "Pokémon.$"
+	.string "Young Pokémon can fill expert roles.\p"
+	.string "Items and teamwork let them stand\n"
+	.string "beside a fully grown guardian.$"
 
 Route117_Text_IsaacRegister: @ 829C508
-	.string "I'm going to redouble my training.\n"
-	.string "Would you come look in on us?$"
+	.string "I'll keep raising this class.\n"
+	.string "Will you check on us again?$"
 
 Route117_Text_IsaacRematchIntro: @ 829C549
-	.string "The Pokémon I've been raising are\n"
-	.string "looking good, just like before.$"
+	.string "Each class teaches something new!\n"
+	.string "Let's see what this group can do!$"
 
 Route117_Text_IsaacRematchDefeat: @ 829C58B
-	.string "You know how to raise them properly.\n"
-	.string "You might have Day Care skills…$"
+	.string "Your team keeps growing faster!$"
 
 Route117_Text_IsaacPostRematch: @ 829C5D0
-	.string "Your Pokémon are growing good!\n"
-	.string "You should enter them in Contests.$"
+	.string "Raising Pokémon never really ends.\n"
+	.string "Every rematch teaches us something.$"
+
+Route117_Text_IsaacNotEnoughMons:
+	.string "This is a Double Battle.\n"
+	.string "Bring two Pokémon ready to learn!$"
+
+Route117_Text_IsaacStillTraining:
+	.string "We're still practicing.\n"
+	.string "Come back after the Dynamo Badge!$"
 
 Route117_Text_LydiaIntro: @ 829C612
 	.string "Please, allow me to evaluate if you\n"

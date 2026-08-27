@@ -55,6 +55,86 @@
         ]
       }
     ],
+    "TRAINER_ISAAC_1": [
+      {
+        "level": 2,
+        "species": "SPECIES_MUNCHLAX",
+        "item": "ITEM_FIGY_BERRY",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_ATK_BRAVE",
+        "moves": [
+          "MOVE_BELLY_DRUM",
+          "MOVE_BODY_SLAM",
+          "MOVE_FIRE_PUNCH",
+          "MOVE_PROTECT"
+        ]
+      },
+      {
+        "level": 1,
+        "species": "SPECIES_TOGEPI",
+        "item": "ITEM_EVIOLITE",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_HP_DEF_BOLD",
+        "moves": [
+          "MOVE_FOLLOW_ME",
+          "MOVE_YAWN",
+          "MOVE_ENCORE",
+          "MOVE_ANCIENT_POWER"
+        ]
+      },
+      {
+        "level": 4,
+        "species": "SPECIES_KANGASKHAN",
+        "item": "ITEM_KANGASKHANITE",
+        "ability_slot": 1,
+        "spread": "SPREAD_31_IV_ATK_SPEED_ADAMANT",
+        "moves": [
+          "MOVE_FAKE_OUT",
+          "MOVE_RETURN",
+          "MOVE_POWER_UP_PUNCH",
+          "MOVE_SUCKER_PUNCH"
+        ]
+      },
+      {
+        "level": 2,
+        "species": "SPECIES_FOONGUS",
+        "item": "ITEM_COBA_BERRY",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_DEF_BOLD",
+        "moves": [
+          "MOVE_RAGE_POWDER",
+          "MOVE_SPORE",
+          "MOVE_CLEAR_SMOG",
+          "MOVE_GIGA_DRAIN"
+        ]
+      },
+      {
+        "level": 3,
+        "species": "SPECIES_ABRA",
+        "item": "ITEM_FOCUS_SASH",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": [
+          "MOVE_PSYCHIC",
+          "MOVE_DAZZLING_GLEAM",
+          "MOVE_SHADOW_BALL",
+          "MOVE_ENCORE"
+        ]
+      },
+      {
+        "level": 3,
+        "species": "SPECIES_STARYU",
+        "item": "ITEM_LIFE_ORB",
+        "ability_slot": 2,
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": [
+          "MOVE_HYDRO_PUMP",
+          "MOVE_ICE_BEAM",
+          "MOVE_THUNDERBOLT",
+          "MOVE_RECOVER"
+        ]
+      }
+    ],
     "TRAINER_LYLE": [
       {
         "level": 3,

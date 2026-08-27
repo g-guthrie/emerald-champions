@@ -8,15 +8,15 @@
     "tuning_preference": "Preserve sound strategy; tune opponent levels relative to the fixed cap first."
   },
   "selection": {
-    "index": 70,
-    "encounter_id": "BATTLE_070_ROUTE_117_ISAAC",
+    "index": 71,
+    "encounter_id": "BATTLE_071_ROUTE_117_DYLAN",
     "location": "Route117",
-    "category": "optional solo double",
+    "category": "optional moving solo double",
     "status": "next",
     "trainer_ids": [
-      "TRAINER_ISAAC_1"
+      "TRAINER_DYLAN_1"
     ],
-    "access_note": "Fixed lower-lane trainer at (33,11), alternating up/right with four-tile sight. His six-member trainer record is double while the current first-fight and rematch opcodes are single, so source closure must add an explicit two-usable-Pok\u00e9mon guard without changing Isaac's Match Call ownership. Isaac and Dylan are reversible in open terrain; Isaac is the canonical lower-lane-first tie-break.",
+    "access_note": "Horizontal patrol from (38,16) with range eight and four-tile sight. His four-member trainer record is double while the current first-fight and rematch opcodes are single, so source closure must add a usable-party guard and preserve Dylan's independent Match Call chain.",
     "strict_cap": 40,
     "strict_cap_source": "canonical-sequence-stage",
     "campaign_point": null,
@@ -28,72 +28,67 @@
         "double"
       ],
       "source_variant_count": 1,
-      "representative_party_size": 6,
-      "average_party_size": 6.0,
+      "representative_party_size": 4,
+      "average_party_size": 4.0,
       "species": [
-        "SPECIES_BONSLY",
-        "SPECIES_DEINO",
-        "SPECIES_EEVEE",
-        "SPECIES_LITWICK",
-        "SPECIES_MANTYKE",
-        "SPECIES_TANGELA"
+        "SPECIES_DODUO",
+        "SPECIES_PASSIMIAN",
+        "SPECIES_SKARMORY",
+        "SPECIES_YANMA"
       ],
-      "items": [],
+      "items": [
+        "ITEM_CHOICE_SCARF",
+        "ITEM_LEFTOVERS"
+      ],
       "moves": [
-        "MOVE_ACID_ARMOR",
-        "MOVE_AMNESIA",
-        "MOVE_BATON_PASS",
-        "MOVE_CONFUSE_RAY",
-        "MOVE_CURSE",
-        "MOVE_DARK_PULSE",
-        "MOVE_DRAGON_PULSE",
-        "MOVE_EARTH_POWER",
-        "MOVE_FEINT_ATTACK",
-        "MOVE_FLAME_BURST",
-        "MOVE_GIGA_DRAIN",
-        "MOVE_HYDRO_PUMP",
-        "MOVE_HYPER_VOICE",
-        "MOVE_LOW_KICK",
-        "MOVE_PAIN_SPLIT",
-        "MOVE_ROCK_SLIDE",
-        "MOVE_SHADOW_BALL",
+        "MOVE_ACUPRESSURE",
+        "MOVE_AIR_CUTTER",
+        "MOVE_ANCIENT_POWER",
+        "MOVE_BRAVE_BIRD",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_DOUBLE_HIT",
+        "MOVE_GUNK_SHOT",
+        "MOVE_KNOCK_OFF",
+        "MOVE_PLUCK",
+        "MOVE_QUICK_ATTACK",
+        "MOVE_ROOST",
         "MOVE_SIGNAL_BEAM",
-        "MOVE_SLAM",
-        "MOVE_SLEEP_POWDER",
-        "MOVE_TAILWIND",
-        "MOVE_WAKE_UP_SLAP",
-        "MOVE_WISH",
-        "MOVE_YAWN"
+        "MOVE_SPIKES",
+        "MOVE_STEALTH_ROCK",
+        "MOVE_UPROAR",
+        "MOVE_U_TURN"
       ],
       "synergy_tags": [
-        "Tailwind"
+        "Flying pressure",
+        "hazard stack"
       ],
       "level_offsets": [
-        -5
+        -2,
+        -1
       ],
-      "average_level_offset": -5.0,
-      "max_level_offset": -5,
+      "average_level_offset": -1.75,
+      "max_level_offset": -1,
       "densities": {
         "protect": 0.0,
         "fake_out": 0.0,
         "setup": 0.0,
-        "speed_control_or_priority": 0.167,
-        "premium_item": 0.0
+        "speed_control_or_priority": 0.25,
+        "premium_item": 0.5
       }
     }
   },
   "ledger": {
     "path": "docs/verdant_battle_experience_ledger.json",
     "present": true,
-    "records": 69,
+    "records": 70,
     "rolling_fallback_records": []
   },
   "rolling_window": {
     "requested_size": 10,
     "actual_size": 10,
     "encounter_range": [
-      60,
-      69
+      61,
+      70
     ],
     "tempo_counts": {
       "Ally-safe Punk Rock spread in the 3+3 joint, Vivian's disruptive/bulky coverage single, or Kirk's direct Ghost-backed special single.": 1,
@@ -102,40 +97,44 @@
       "One guaranteed Terrain/Tailwind opening followed by native resistance-and-base-damage reserve selection, reciprocal speed modes, priority denial, and a dynamically deployed story Mega.": 1,
       "One visible ally-targeting activation, Defense-powered physical pressure, then conditional inheritance or immediate reserve offense selected by the native matchup logic rather than a speed field.": 1,
       "Proactive Stuff Cheeks opening, reactive berry thresholds, cross-trainer second-item transfers, and two independent item-economy singles.": 1,
-      "Recovering swim, passively accelerating cycle, recoil-and-recovery run, and one Curse plus Chesto Rest finish-line wall.": 1,
+      "Slow protected setup lead, then adaptive physical priority, redirection and sleep, or fragile special pressure without weather, terrain, room, Tailwind, screens, or hazards.": 1,
       "Two passive-but-dangerous trap leads, Good as Gold removal tax, then rare bulky phazing cashout with no speed field.": 1,
       "Two-body contact toll, frail Rough Skin reserve, then rare special Flame Body spread finish with no speed or field mode.": 1,
       "Young room-and-rock lead, special Throat Spray pressure, Choice Band slow breaker, and rare Beast Boost clock reset.": 1
     },
     "format_counts": {
-      "double": 6,
+      "double": 7,
       "native-pair double": 2,
-      "single": 2
+      "single": 1
     },
     "novelty_tag_counts": {
-      "guarded-double": 5,
+      "guarded-double": 6,
+      "adaptive-reserve-selection": 2,
       "cycling-double": 2,
-      "cycling-single": 2,
       "gym-native-pair": 2,
       "joint-3-plus-3": 2,
-      "match-call-owner": 2,
+      "no-legendary": 2,
+      "no-speed-field": 2,
       "no-speed-mode": 2,
+      "route-double": 2,
       "safe-one-usable": 2,
       "split-four-singles": 2,
       "trick-room": 2,
       "ability-inheritance-relay": 1,
-      "adaptive-reserve-selection": 1,
+      "abra-sash": 1,
       "air-balloon": 1,
       "alolan-muk": 1,
       "armor-tail": 1,
       "beast-boost": 1,
       "beat-up-stamina": 1,
+      "belly-drum": 1,
       "body-press-conversion": 1,
       "boomburst": 1,
       "cheek-pouch": 1,
-      "chesto-rest-snorlax": 1,
       "choice-band-crabominable": 1,
       "contact-tax": 1,
+      "cycling-single": 1,
+      "day-care-class": 1,
       "declinable-retry": 1,
       "dragon-tail": 1,
       "dual-speed-mode": 1,
@@ -143,13 +142,16 @@
       "emolga": 1,
       "eternal-floette": 1,
       "explicit-two-mon-guard": 1,
+      "five-young-plus-guardian": 1,
       "flame-body": 1,
       "flare-boost-pumpkaboo": 1,
       "flower-collection": 1,
+      "follow-me": 1,
+      "foongus-redirection": 1,
       "four-of-six-electric": 1,
-      "gastrodon": 1,
       "ghost-immunity": 1,
       "gluttony": 1,
+      "gluttony-figy": 1,
       "good-as-gold-gholdengo": 1,
       "guzzlord": 1,
       "gym-double": 1,
@@ -160,19 +162,22 @@
       "libero-raboot": 1,
       "lightning-rod-ally-activation": 1,
       "liquid-voice-brionne": 1,
+      "match-call-owner": 1,
       "mega-gallade": 1,
+      "mega-kangaskhan": 1,
       "mega-raichu-y": 1,
       "middle-starters": 1,
       "moltres": 1,
+      "munchlax": 1,
       "no-forced-ai": 1,
       "no-guard": 1,
-      "no-legendary": 1,
       "no-mega": 1,
       "no-scripted-heal": 1,
       "no-single-engine": 1,
-      "no-speed-field": 1,
+      "no-weather": 1,
       "noncontact-counterplay": 1,
       "normal-gengar": 1,
+      "parental-bond": 1,
       "passimian": 1,
       "player-chosen-branch": 1,
       "pledge-relay": 1,
@@ -183,7 +188,6 @@
       "rainbow": 1,
       "receiver": 1,
       "reciprocal-mega": 1,
-      "recovery-denial": 1,
       "red-card-skarmory": 1,
       "removal-tax": 1,
       "required-gym-boss": 1,
@@ -192,18 +196,15 @@
       "reusable-spread-ai": 1,
       "rocky-helmet": 1,
       "rough-skin": 1,
-      "route-double": 1,
       "sea-of-fire": 1,
       "second-item-relay": 1,
       "sharpedo": 1,
       "slow-lane": 1,
       "soundproof-prefix": 1,
-      "source-proven-non-pair": 1,
-      "speed-boost-scolipede": 1,
       "stakataka": 1,
+      "staryu-analytic": 1,
       "stuff-cheeks": 1,
       "swamp": 1,
-      "swim-cycle-run-recover": 1,
       "switch-puzzle": 1,
       "symbiosis": 1,
       "tailwind": 1,
@@ -211,8 +212,8 @@
       "target-order-ground-geometry": 1,
       "target-ten": 1,
       "throat-spray-drampa": 1,
+      "togepi": 1,
       "toxic-debris-glimmet": 1,
-      "triathlon-endurance": 1,
       "two-clock": 1,
       "unburden-rejected": 1,
       "wally-continuity": 1,
@@ -222,144 +223,9 @@
       "young-bronzor": 1,
       "young-drilbur": 1,
       "young-ferroseed": 1,
-      "young-ponyta": 1,
       "zapdos": 1
     },
     "entries": [
-      {
-        "index": 60,
-        "encounter_id": "BATTLE_060_ROUTE_110_CYCLING_ABIGAIL",
-        "identity": {
-          "location": "Route110",
-          "category": "optional cycling single",
-          "format": "single",
-          "strict_cap": 30,
-          "memory_hook": "Abigail turns her triathlon into four endurance legs: Gastrodon swims, Scolipede cycles, Ponyta runs, and Chesto Rest Snorlax takes one final second wind."
-        },
-        "primary_player_question": "Can the player pace finite burst and disruption across four durable legs without letting four different forms of preservation create another full lap?",
-        "tempo": "Recovering swim, passively accelerating cycle, recoil-and-recovery run, and one Curse plus Chesto Rest finish-line wall.",
-        "pressure_sources": [
-          "Rindo Storm Drain Gastrodon",
-          "Scald and Recover",
-          "Black Sludge Speed Boost Scolipede",
-          "Protect acceleration",
-          "Lum Flame Body Ponyta",
-          "Flare Blitz and Morning Sun",
-          "Chesto Thick Fat Snorlax",
-          "Curse and Rest"
-        ],
-        "intentional_opening": "Gastrodon attacks or recovers through ordinary native scoring; no first move, setup turn, switch, or recovery threshold is forced.",
-        "intentional_weakness": "Rindo stops only one Grass hit, Scolipede and Ponyta share Ground pressure, Ponyta remains unevolved, Snorlax exposes Fighting and anti-setup answers, and none of the four passes progress to another.",
-        "first_loss_lesson": "Do not spend every high-damage answer on Gastrodon. Deny the active recovery turn and preserve Ground or Fighting pressure for the middle and final stretches.",
-        "revealed_information": [
-          "Abigail and Anthony cannot form a native pair",
-          "Gastrodon has Rindo Berry",
-          "Scolipede accelerates through Speed Boost",
-          "Ponyta deliberately remains unevolved",
-          "Snorlax has exactly one Chesto Rest",
-          "Abigail alone registers Match Call",
-          "course rewards are independent"
-        ],
-        "counterplay_classes": [
-          "Taunt, Encore, Heal Block, or Disable",
-          "item removal, Trick, or hazards",
-          "Grass after Rindo",
-          "Ground, Rock, Flying, Psychic, Water, or special pressure into the middle legs",
-          "Fighting pressure",
-          "Haze, Clear Smog, Unaware, or phazing",
-          "strong critical or super-effective burst"
-        ],
-        "target_difficulty": 9.0,
-        "difficulty_rationale": "Four optimized legal levels 31-33 repeatedly ask the player to deny preservation, while one-use berries, young Ponyta, shared Ground pressure, and broad recovery denial keep the long optional single answerable.",
-        "tuning_knob": "Tune Snorlax from +3 to +2 first, then Gastrodon; preserve the four-leg order and distinct recovery economy.",
-        "playtest_status": "static-pass-runtime-unplayed",
-        "novelty_tags": [
-          "cycling-single",
-          "triathlon-endurance",
-          "swim-cycle-run-recover",
-          "gastrodon",
-          "speed-boost-scolipede",
-          "young-ponyta",
-          "chesto-rest-snorlax",
-          "recovery-denial",
-          "match-call-owner",
-          "source-proven-non-pair"
-        ],
-        "historic_reference_ids": [
-          "smogon:gen8nu:007",
-          "showdown:gen8randomdoublesbattle:015",
-          "showdown:gen4randomdoublesbattle:015",
-          "showdown:gen4randombattle:019",
-          "showdown:gen9championsrandomdoublesbattle:002"
-        ],
-        "corpus_search": {
-          "status": "complete-current-review",
-          "pool_size": 1005,
-          "selection": "Five full-set donors support four route-specific endurance roles; no complete indexed roster fits the literal cap-30 triathlon."
-        },
-        "author_self_check": {
-          "strongest_part": "The native triathlon dialogue becomes one coherent pacing battle rather than four gimmicks, and each preservation tool has broad denial.",
-          "weakest_link": "Strong physical Ground pressure can line up the two middle legs; that compression is intentionally preserved as healthy counterplay."
-        },
-        "record_source": "v2-ledger",
-        "location": "Route110",
-        "category": "optional cycling single",
-        "strict_cap": 30,
-        "source_facts": {
-          "format": "single",
-          "source_record_formats": [
-            "single"
-          ],
-          "source_variant_count": 1,
-          "representative_party_size": 4,
-          "average_party_size": 4.0,
-          "species": [
-            "SPECIES_GASTRODON",
-            "SPECIES_PONYTA",
-            "SPECIES_SCOLIPEDE",
-            "SPECIES_SNORLAX"
-          ],
-          "items": [
-            "ITEM_BLACK_SLUDGE",
-            "ITEM_CHESTO_BERRY",
-            "ITEM_LUM_BERRY",
-            "ITEM_RINDO_BERRY"
-          ],
-          "moves": [
-            "MOVE_BODY_SLAM",
-            "MOVE_CRUNCH",
-            "MOVE_CURSE",
-            "MOVE_EARTHQUAKE",
-            "MOVE_EARTH_POWER",
-            "MOVE_FLARE_BLITZ",
-            "MOVE_HIGH_HORSEPOWER",
-            "MOVE_ICE_BEAM",
-            "MOVE_MEGAHORN",
-            "MOVE_MORNING_SUN",
-            "MOVE_PLAY_ROUGH",
-            "MOVE_POISON_JAB",
-            "MOVE_PROTECT",
-            "MOVE_RECOVER",
-            "MOVE_REST",
-            "MOVE_SCALD"
-          ],
-          "synergy_tags": [],
-          "level_offsets": [
-            1,
-            2,
-            3
-          ],
-          "average_level_offset": 2.0,
-          "max_level_offset": 3,
-          "densities": {
-            "protect": 0.25,
-            "fake_out": 0.0,
-            "setup": 0.0,
-            "speed_control_or_priority": 0.25,
-            "premium_item": 0.0
-          }
-        }
-      },
       {
         "index": 61,
         "encounter_id": "BATTLE_061_ROUTE_110_CYCLING_BENJAMIN",
@@ -1667,6 +1533,168 @@
             "premium_item": 0.5
           }
         }
+      },
+      {
+        "index": 70,
+        "encounter_id": "BATTLE_070_ROUTE_117_ISAAC",
+        "identity": {
+          "location": "Route117",
+          "category": "optional guarded Breeder double",
+          "format": "double",
+          "strict_cap": 40,
+          "memory_hook": "Five competitive young pupils open with Follow Me plus Gluttony Belly Drum, while one adult Mega Kangaskhan guardian and native matchup-selected reserves turn the Day Care lesson into a full six-member exam."
+        },
+        "primary_player_question": "Can the player deny or contain Munchlax's Belly Drum through Togepi's active redirection, then correctly reclassify the board when native matchup logic selects a guardian, second redirector, or special attacker?",
+        "tempo": "Slow protected setup lead, then adaptive physical priority, redirection and sleep, or fragile special pressure without weather, terrain, room, Tailwind, screens, or hazards.",
+        "pressure_sources": [
+          "level-42 Gluttony Figy Munchlax",
+          "Belly Drum and Body Slam",
+          "level-41 Eviolite Serene Grace Togepi",
+          "Follow Me, Yawn, Encore, and Ancient Power",
+          "level-44 Parental Bond Mega Kangaskhan guardian",
+          "Fake Out, Return, Power-Up Punch, and Sucker Punch",
+          "Coba Regenerator Foongus redirection and Spore",
+          "Sash Magic Guard Abra special coverage",
+          "Life Orb Analytic Staryu special coverage and Recover"
+        ],
+        "intentional_opening": "Munchlax and Togepi are the only fixed pair. Existing viability may choose Belly Drum only from a safe state; partner-aware AI moderately values Follow Me whenever Munchlax selects or carries the setup, and reciprocal combo scoring values Drum only when neither foe shows a lethal redirection bypass. No opening move or target is forced.",
+        "intentional_weakness": "There is no speed control. Spread attacks bypass both redirectors; Munchlax and Kangaskhan share Fighting pressure; Togepi has low base HP and no recovery despite Eviolite; Foongus is answerable through powder immunity, spread damage, Taunt, Flying, and Psychic; Kangaskhan has no Protect; Abra depends on an unbroken Sash; Staryu is frail and takes Life Orb recoil.",
+        "first_loss_lesson": "The tiny lead has expert jobs. Break Follow Me with spread pressure or disruption, survive and clear Belly Drum, then read the reserve that actually enters instead of assuming source order: each guardian, redirection, and special-offense branch demands a different target.",
+        "revealed_information": [
+          "Badge 3 is required",
+          "Isaac is a guarded native double",
+          "Munchlax and Togepi are the fixed lead",
+          "five exact members are intentionally unevolved",
+          "Kangaskhan is the adult guardian and only Mega",
+          "Kangaskhan automatically Mega Evolves before its first selected move",
+          "forced reserves use native matchup ranking",
+          "Foongus supplies Rage Powder, Spore, and Clear Smog",
+          "Abra and Staryu prevent physical debuffs from solving all six",
+          "Match Call records 2-4 remain unresolved legacy cohorts"
+        ],
+        "counterplay_classes": [
+          "spread damage through Follow Me; Fake Out, flinching, priority damage, or enough redirected focus into Togepi; later-turn Taunt",
+          "Fighting focus, Encore, Haze, Clear Smog, Unaware, phazing, burn, Intimidate, Charm, Reflect, or immediate special damage into Munchlax",
+          "Grass typing, Overcoat, Safety Goggles, terrain, Taunt, Flying, or Psychic into Foongus",
+          "Ghost positioning, Fighting, burn, Intimidate, Protect, and priority management into Mega Kangaskhan",
+          "chip or priority into Abra's Sash",
+          "Electric, Grass, recovery denial, and faster pressure into Staryu",
+          "Knock Off, Trick, or item denial across the young specialists"
+        ],
+        "target_difficulty": 9.2,
+        "difficulty_rationale": "Six optimized legal Pok\u00e9mon at levels 41-44, a supported Belly Drum lead, one fresh Mega guardian, redirection plus sleep, mixed damage lanes, full items, and native adaptive replacements make a brutal optional route battle. No speed field, visibly frail pupils, broad disruption, shared Fighting pressure, powder answers, Sash chip, and exposed type seams keep it below boss ten.",
+        "tuning_knob": "Tune Kangaskhan from +4 to +3 first, then Abra and Staryu from +3 to +2; preserve the five-young-plus-guardian identity, fixed lead, and native reserve selection.",
+        "playtest_status": "static-pass-runtime-unplayed",
+        "novelty_tags": [
+          "route-double",
+          "guarded-double",
+          "day-care-class",
+          "five-young-plus-guardian",
+          "munchlax",
+          "togepi",
+          "follow-me",
+          "belly-drum",
+          "gluttony-figy",
+          "mega-kangaskhan",
+          "parental-bond",
+          "foongus-redirection",
+          "abra-sash",
+          "staryu-analytic",
+          "adaptive-reserve-selection",
+          "no-speed-field",
+          "no-weather",
+          "no-legendary"
+        ],
+        "historic_reference_ids": [
+          "showdown:gen7randomdoublesbattle:021",
+          "showdown:gen9championsrandomdoublesbattle:003",
+          "vgc:worlds-2015",
+          "smogon:gen4uu:001",
+          "smogon:gen5nu:004"
+        ],
+        "corpus_search": {
+          "status": "complete-current-review",
+          "pool_size": 1005,
+          "selection": "Mega Kangaskhan's exact role is supported by two full-set doubles donors, two published lower-tier samples, and the 2015 World Champion Kangaskhan plus Amoonguss spine. The five exact young pupils are transparently hand-authored because the corpus contains no complete baby-form team matching Route 117's Day Care context."
+        },
+        "author_self_check": {
+          "strongest_part": "The location earns a roster that would feel artificial elsewhere: Togepi creates a real Follow Me-Belly Drum puzzle, five young-form roles preserve the early-middle evolution phase, and a World Champion Mega guardian keeps the adaptive second half dangerous.",
+          "weakest_link": "Spread pressure, Fake Out, or enough redirected damage can break Togepi's first turn, while Taunt denies repeats; native replacement also does not guarantee immediate Kangaskhan. The other five still cover redirection, physical priority, and two special lanes; Kangaskhan level is the first tuning knob."
+        },
+        "record_source": "v2-ledger",
+        "location": "Route117",
+        "category": "optional solo double",
+        "strict_cap": 40,
+        "source_facts": {
+          "format": "double",
+          "source_record_formats": [
+            "double"
+          ],
+          "source_variant_count": 1,
+          "representative_party_size": 6,
+          "average_party_size": 6.0,
+          "species": [
+            "SPECIES_ABRA",
+            "SPECIES_FOONGUS",
+            "SPECIES_KANGASKHAN",
+            "SPECIES_MUNCHLAX",
+            "SPECIES_STARYU",
+            "SPECIES_TOGEPI"
+          ],
+          "items": [
+            "ITEM_COBA_BERRY",
+            "ITEM_EVIOLITE",
+            "ITEM_FIGY_BERRY",
+            "ITEM_FOCUS_SASH",
+            "ITEM_KANGASKHANITE",
+            "ITEM_LIFE_ORB"
+          ],
+          "moves": [
+            "MOVE_ANCIENT_POWER",
+            "MOVE_BELLY_DRUM",
+            "MOVE_BODY_SLAM",
+            "MOVE_CLEAR_SMOG",
+            "MOVE_DAZZLING_GLEAM",
+            "MOVE_ENCORE",
+            "MOVE_FAKE_OUT",
+            "MOVE_FIRE_PUNCH",
+            "MOVE_FOLLOW_ME",
+            "MOVE_GIGA_DRAIN",
+            "MOVE_HYDRO_PUMP",
+            "MOVE_ICE_BEAM",
+            "MOVE_POWER_UP_PUNCH",
+            "MOVE_PROTECT",
+            "MOVE_PSYCHIC",
+            "MOVE_RAGE_POWDER",
+            "MOVE_RECOVER",
+            "MOVE_RETURN",
+            "MOVE_SHADOW_BALL",
+            "MOVE_SPORE",
+            "MOVE_SUCKER_PUNCH",
+            "MOVE_THUNDERBOLT",
+            "MOVE_YAWN"
+          ],
+          "synergy_tags": [
+            "Fake Out tempo",
+            "redirection setup",
+            "status control"
+          ],
+          "level_offsets": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "average_level_offset": 2.5,
+          "max_level_offset": 4,
+          "densities": {
+            "protect": 0.167,
+            "fake_out": 0.167,
+            "setup": 0.167,
+            "speed_control_or_priority": 0.667,
+            "premium_item": 0.5
+          }
+        }
       }
     ]
   },
@@ -1680,11 +1708,12 @@
         "BATTLE_063_ROUTE_110_CYCLING_JACOB",
         "BATTLE_066_MAUVILLE_GYM_BEN",
         "BATTLE_068_MAUVILLE_GYM_WATTSON",
-        "BATTLE_069_ROUTE_117_ANNA_AND_MEG"
+        "BATTLE_069_ROUTE_117_ANNA_AND_MEG",
+        "BATTLE_070_ROUTE_117_ISAAC"
       ],
       "message": "One or more mechanics recur in at least three rolling encounters.",
       "evidence": {
-        "guarded-double": 5
+        "guarded-double": 6
       },
       "overridden": false,
       "override_reason": null
@@ -1693,7 +1722,6 @@
       "code": "SPEED_CONTROL_DENSITY",
       "scope": "rolling-window",
       "encounter_ids": [
-        "BATTLE_060_ROUTE_110_CYCLING_ABIGAIL",
         "BATTLE_061_ROUTE_110_CYCLING_BENJAMIN",
         "BATTLE_062_ROUTE_110_CYCLING_JASMINE",
         "BATTLE_063_ROUTE_110_CYCLING_JACOB",
@@ -1702,11 +1730,12 @@
         "BATTLE_066_MAUVILLE_GYM_BEN",
         "BATTLE_067_MAUVILLE_GYM_SHAWN_ANGELO",
         "BATTLE_068_MAUVILLE_GYM_WATTSON",
-        "BATTLE_069_ROUTE_117_ANNA_AND_MEG"
+        "BATTLE_069_ROUTE_117_ANNA_AND_MEG",
+        "BATTLE_070_ROUTE_117_ISAAC"
       ],
       "message": "Rolling speed control or priority density is high enough to merit an editorial look, not an automatic change.",
       "evidence": {
-        "density": 0.693,
+        "density": 0.728,
         "threshold": 0.55
       },
       "overridden": false,
@@ -1722,12 +1751,15 @@
         "BATTLE_066_MAUVILLE_GYM_BEN",
         "BATTLE_067_MAUVILLE_GYM_SHAWN_ANGELO",
         "BATTLE_068_MAUVILLE_GYM_WATTSON",
-        "BATTLE_069_ROUTE_117_ANNA_AND_MEG"
+        "BATTLE_069_ROUTE_117_ANNA_AND_MEG",
+        "BATTLE_070_ROUTE_117_ISAAC"
       ],
       "message": "A premium item appears across at least four rolling encounters.",
       "evidence": {
         "Assault Vest": 4,
-        "Expert Belt": 4
+        "Eviolite": 4,
+        "Expert Belt": 4,
+        "Focus Sash": 4
       },
       "overridden": false,
       "override_reason": null
@@ -1736,7 +1768,6 @@
       "code": "SIGNATURE_MOVE_REPEAT",
       "scope": "rolling-window",
       "encounter_ids": [
-        "BATTLE_060_ROUTE_110_CYCLING_ABIGAIL",
         "BATTLE_061_ROUTE_110_CYCLING_BENJAMIN",
         "BATTLE_063_ROUTE_110_CYCLING_JACOB",
         "BATTLE_064_MAUVILLE_WALLY",
@@ -1744,16 +1775,20 @@
         "BATTLE_066_MAUVILLE_GYM_BEN",
         "BATTLE_067_MAUVILLE_GYM_SHAWN_ANGELO",
         "BATTLE_068_MAUVILLE_GYM_WATTSON",
-        "BATTLE_069_ROUTE_117_ANNA_AND_MEG"
+        "BATTLE_069_ROUTE_117_ANNA_AND_MEG",
+        "BATTLE_070_ROUTE_117_ISAAC"
       ],
       "message": "A non-generic move appears across at least four rolling encounters.",
       "evidence": {
         "Body Press": 4,
+        "Dazzling Gleam": 4,
+        "Giga Drain": 4,
         "Ice Beam": 4,
         "Ice Punch": 4,
+        "Psychic": 4,
         "Rock Slide": 4,
         "Roost": 4,
-        "Thunderbolt": 4
+        "Thunderbolt": 5
       },
       "overridden": false,
       "override_reason": null

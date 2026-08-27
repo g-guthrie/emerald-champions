@@ -3158,6 +3158,44 @@ static s16 AI_PerishTrap(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     return score;
 }
 
+static bool32 CanFoeBypassFollowMeAndFaint(u8 foe, u8 setupMon, u8 redirector)
+{
+    u16 *moves;
+    u16 foeAbility;
+    s32 redirectPriority;
+    u32 i;
+
+    if (!IsBattlerAlive(foe))
+        return FALSE;
+
+    moves = GetMovesArray(foe);
+    foeAbility = AI_GetAbility(foe);
+    redirectPriority = GetMovePriority(redirector, MOVE_FOLLOW_ME);
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        u16 move = moves[i];
+        u32 target;
+        s32 movePriority;
+
+        if (move == MOVE_NONE || IS_MOVE_STATUS(move)
+         || AI_CalcDamage(move, foe, setupMon) < gBattleMons[setupMon].hp)
+            continue;
+
+        target = gBattleMoves[move].target;
+        movePriority = GetMovePriority(foe, move);
+        if (target & (MOVE_TARGET_RANDOM | MOVE_TARGET_BOTH | MOVE_TARGET_FOES_AND_ALLY)
+         || gBattleMoves[move].effect == EFFECT_SNIPE_SHOT
+         || foeAbility == ABILITY_PROPELLER_TAIL
+         || foeAbility == ABILITY_STALWART
+         || movePriority > redirectPriority
+         || (movePriority == redirectPriority
+          && GetBattlerTotalSpeedStat(foe) >= GetBattlerTotalSpeedStat(redirector)))
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
 // Trainer profile: strongly prefer the ally activations the authored lead was
 // built around instead of falling back to a merely safe neutral attack.
 static s16 AI_ComboSetup(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
@@ -3199,6 +3237,19 @@ static s16 AI_ComboSetup(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
       && GetPocketByItemId(gBattleMons[battlerAtk].item) == POCKET_BERRIES
       && gBattleMons[BATTLE_PARTNER(battlerAtk)].item != ITEM_NONE)
         score += 8;
+
+    // Follow Me can turn a slow Belly Drum into a real doubles setup line.
+    // Reward the setup side as well as the redirector, but retain the native
+    // answer when either foe has a lethal spread, redirection-ignoring, or
+    // faster equal-or-higher-priority attack.
+    if (effect == EFFECT_BELLY_DRUM
+      && IsBattlerAlive(BATTLE_PARTNER(battlerAtk))
+      && HasMove(BATTLE_PARTNER(battlerAtk), MOVE_FOLLOW_ME)
+      && !CanFoeBypassFollowMeAndFaint(FOE(battlerAtk), battlerAtk, BATTLE_PARTNER(battlerAtk))
+      && !CanFoeBypassFollowMeAndFaint(BATTLE_PARTNER(FOE(battlerAtk)), battlerAtk, BATTLE_PARTNER(battlerAtk)))
+    {
+        score += AI_DATA->partnerMove == MOVE_FOLLOW_ME ? 10 : 4;
+    }
 
     // Hazard teams cash their layers through phazing. Reward that real board
     // state, or a partner visibly preparing it, without fixing a target.

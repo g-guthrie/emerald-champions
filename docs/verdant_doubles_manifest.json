@@ -4789,10 +4789,10 @@
     "TRAINER_ISAAC_1": {
       "format": "double",
       "target_size": 6,
-      "archetype": "Tailwind offense",
-      "difficulty": 53,
-      "partner_interaction": false,
-      "level_offset": -5,
+      "archetype": "Little Cup plus guardian",
+      "difficulty": 66,
+      "partner_interaction": true,
+      "level_offset": 3,
       "location": "Route 117"
     },
     "TRAINER_DAVIS": {

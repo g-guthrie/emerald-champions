@@ -39,7 +39,8 @@ Route117_EventScript_DayCareSign:: @ 81F39C7
 	end
 
 Route117_EventScript_Isaac:: @ 81F39D0
-	trainerbattle_single TRAINER_ISAAC_1, Route117_Text_IsaacIntro, Route117_Text_IsaacDefeat, Route117_EventScript_RegisterIsaac
+	goto_if_unset FLAG_BADGE03_GET, Route117_EventScript_IsaacStillTraining
+	trainerbattle_double TRAINER_ISAAC_1, Route117_Text_IsaacIntro, Route117_Text_IsaacDefeat, Route117_Text_IsaacNotEnoughMons, Route117_EventScript_RegisterIsaac
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route117_EventScript_RematchIsaac
@@ -56,8 +57,12 @@ Route117_EventScript_RegisterIsaac:: @ 81F39FC
 	end
 
 Route117_EventScript_RematchIsaac:: @ 81F3A1B
-	trainerbattle_rematch TRAINER_ISAAC_1, Route117_Text_IsaacRematchIntro, Route117_Text_IsaacRematchDefeat
+	trainerbattle_rematch_double TRAINER_ISAAC_1, Route117_Text_IsaacRematchIntro, Route117_Text_IsaacRematchDefeat, Route117_Text_IsaacNotEnoughMons
 	msgbox Route117_Text_IsaacPostRematch, MSGBOX_AUTOCLOSE
+	end
+
+Route117_EventScript_IsaacStillTraining::
+	msgbox Route117_Text_IsaacStillTraining, MSGBOX_AUTOCLOSE
 	end
 
 Route117_EventScript_Lydia:: @ 81F3A32

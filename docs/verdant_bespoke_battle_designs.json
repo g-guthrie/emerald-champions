@@ -4342,6 +4342,77 @@
         "weakest_link": "Fast special Water or Grass pressure can remove Mudsdale before the lesson becomes dangerous, and not every native reserve choice creates an inheritance phase. Those are intentional broad answers and honest engine variance; Medicham from +3 to +2 is the first runtime tuning knob if the adaptive endgame is too punishing."
       },
       "closure": "Battle 69 is source-closed at editorial 10/10 and target difficulty 9.0: one Badge-3-gated shared-avatar four-member double at legal levels 41-43, a readable Beat Up-Stamina-Body Press lead, truthful native matchup-selected reserves with conditional Receiver and Power of Alchemy branches, conservative full-party Beat Up safety, three fresh exact species plus one earned repeat, four distinct non-warning items, five corpus references, broad special and status counterplay, native-width dialogue, author self-check, and no reserved field mode, Mega, or legendary. Runtime playtesting remains required before the target is observed."
+    },
+    "BATTLE_070_ROUTE_117_ISAAC": {
+      "guide_order": 70,
+      "trainer_ids": ["TRAINER_ISAAC_1"],
+      "status": "closed",
+      "campaign_point": "Optional Route 117 Breeder beside the Day Care during the canonical post-Wattson cap-40 clear; Isaac now waits for Badge 3 before offering one guarded six-member double and retains his independent Match Call chain",
+      "strict_cap": 40,
+      "branch_contract": {
+        "format": "double",
+        "source_slots": [0, 1, 2, 3, 4, 5],
+        "intended_lead": ["SPECIES_MUNCHLAX", "SPECIES_TOGEPI"],
+        "reserve_source_order": ["SPECIES_KANGASKHAN", "SPECIES_FOONGUS", "SPECIES_ABRA", "SPECIES_STARYU"],
+        "target_difficulty": 9.2,
+        "one_usable_policy": "guarded refusal through explicit first-fight and rematch double not-enough-Pokémon paths",
+        "replacement_contract": "the opening pair is fixed, while every forced reserve remains the engine's native matchup-ranked choice rather than a promised source-order entrance",
+        "rematch_contract": "Isaac's records 2-4 remain separately unresolved progression stages reached through the existing Match Call ownership chain"
+      },
+      "evolution_stage_fit": {
+        "campaign_phase": "cap-40 mature-route interlude that deliberately preserves five visibly unevolved competitive pupils beside one adult Mega guardian",
+        "effective_levels": "41-44",
+        "eligible_ratio": "6/6",
+        "mega_access": true,
+        "status": "pass",
+        "reason": "Munchlax, Togepi, Foongus, Abra, and Staryu are intentionally held before their friendship, level, or stone evolutions to showcase real young-form roles. Kangaskhan is the single-stage adult guardian and can legally Mega Evolve with Kangaskhanite after the player's already-established Bracelet access."
+      },
+      "manual_quality": 10,
+      "manual_difficulty": 9.2,
+      "observed_difficulty": null,
+      "difficulty_status": "editorial target; runtime playtest pending",
+      "corpus_review": {
+        "reference_pool_size": 1005,
+        "full_team_candidates": [
+          {"reference_id": "showdown:gen7randomdoublesbattle:021", "decision": "Mega Kangaskhan Return and Sucker Punch shell selected; full team rejected", "reason": "The reproducible doubles set validates exact Mega Kangaskhan, Return, Sucker Punch, and Kangaskhanite. Isaac trades Drain Punch and Protect for Fake Out and Power-Up Punch so the guardian can create immediate or compounding pressure."},
+          {"reference_id": "showdown:gen9championsrandomdoublesbattle:003", "decision": "Kangaskhan Fake Out identity selected; full team rejected", "reason": "The Champions-format donor validates Kangaskhan's Fake Out role without importing its Last Resort lock or unrelated field pieces. This engine auto-Mega Evolves the opponent before its first selected move, so legal base Scrappy never supplies an operational turn."},
+          {"reference_id": "vgc:worlds-2015", "decision": "World Champion Mega Kangaskhan plus Amoonguss spine adapted; roster-only team rejected", "reason": "The verified champion roster supplies the iconic guardian plus redirection relationship. Foongus deliberately de-evolves Amoonguss so the Day Care class remains visually young while preserving Rage Powder and Spore counterplay."},
+          {"reference_id": "smogon:gen4uu:001", "decision": "Kangaskhan Normal and Dark pressure selected; full team rejected", "reason": "The published sample validates Fake Out and Sucker Punch as a durable Kangaskhan identity across singles and doubles generations."},
+          {"reference_id": "smogon:gen5nu:004", "decision": "Kangaskhan priority role cross-checked; full team rejected", "reason": "A second published sample confirms the guardian's Fake Out, strong Normal attack, and Sucker Punch pressure without dictating Isaac's five bespoke young pupils."}
+        ],
+        "decision": "All 1,005 indexed references were reviewed. The corpus strongly supports the Mega Kangaskhan guardian and its redirection partner, but contains no complete team built from these five baby or unevolved exact species; their Follow Me-protected Belly Drum, redirection, fragile special offense, and item roles are transparently hand-authored for the Route 117 Day Care context."
+      },
+      "competitive_references": [
+        {"reference_id": "showdown:gen7randomdoublesbattle:021", "adaptation": "Kangaskhan keeps Kangaskhanite, Return, and Sucker Punch; Fake Out and Power-Up Punch make the guardian self-contained beside any native reserve pairing."},
+        {"reference_id": "showdown:gen9championsrandomdoublesbattle:003", "adaptation": "Fake Out supplies immediate tempo after the engine automatically changes Kangaskhan from legal base Scrappy to Parental Bond Mega before its first move."},
+        {"reference_id": "vgc:worlds-2015", "adaptation": "The World Champion Mega Kangaskhan plus Amoonguss relationship becomes Kangaskhan plus young Foongus without copying the rest of the roster."},
+        {"reference_id": "smogon:gen4uu:001", "adaptation": "Fake Out, Normal pressure, and Sucker Punch reinforce the guardian's broadly proven role."},
+        {"reference_id": "smogon:gen5nu:004", "adaptation": "The second published Kangaskhan sample confirms priority and immediate damage as the right fallback when setup is denied."}
+      ],
+      "ordering": {
+        "intended_lead": ["SPECIES_MUNCHLAX", "SPECIES_TOGEPI"],
+        "source_order": ["SPECIES_MUNCHLAX", "SPECIES_TOGEPI", "SPECIES_KANGASKHAN", "SPECIES_FOONGUS", "SPECIES_ABRA", "SPECIES_STARYU"],
+        "reason": "Munchlax and Togepi are the only guaranteed pair: Gluttony Figy Belly Drum creates a visible win condition while Eviolite Follow Me actively redirects single-target attacks; Yawn, Encore, and Serene Grace Ancient Power keep Togepi useful when setup is denied. Forced replacements remain native matchup-ranked. Every reserve is independently coherent: Mega Kangaskhan supplies physical priority, Foongus redirects or clears boosts, Abra is Sash-backed fast special pressure, and Staryu is slower Analytic coverage with recovery."
+      },
+      "primary_player_question": "Can the player deny or contain Munchlax's Belly Drum through active Follow Me redirection, then correctly reclassify the board when native matchup logic selects a guardian, second redirector, or special attacker?",
+      "team_intent": "Level-42 Figy Gluttony Munchlax uses Belly Drum, Body Slam, Fire Punch, and Protect. Level-41 Eviolite Serene Grace Togepi uses Follow Me, Yawn, Encore, and Ancient Power. Level-44 base-Scrappy Kangaskhan holds Kangaskhanite, automatically Mega Evolves before its first selected move, and uses Fake Out, Return, Power-Up Punch, and Sucker Punch with Parental Bond. Level-42 Coba Regenerator Foongus uses Rage Powder, Spore, Clear Smog, and Giga Drain. Level-43 Sash Magic Guard Abra uses Psychic, Dazzling Gleam, Shadow Ball, and Encore. Level-43 Life Orb Analytic Staryu uses Hydro Pump, Ice Beam, Thunderbolt, and Recover. There is no weather, terrain, room, Tailwind, screen, hazard, trap, ally attack, legendary, Primal, or battle-Bag item.",
+      "intentional_weakness": "The fight has no speed control. Spread attacks bypass both redirectors and can damage Munchlax during Follow Me; Togepi has low base HP and no recovery despite Eviolite; Munchlax can be Taunted, Encored, phased, burned, Intimidated, cleared, or focused after redirection falls. Foongus remains vulnerable to Grass types, powder immunity, Safety Goggles, spread damage, Taunt, and strong Flying or Psychic hits. Kangaskhan lacks Protect and shares Fighting pressure with Munchlax. Abra's Sash is vulnerable to chip and priority, while Staryu is frail and pays Life Orb recoil.",
+      "intended_counterplay": "Spread attacks bypass Follow Me; Fake Out, flinching, priority damage, or enough redirected double-target pressure can remove Togepi before the turn is safe, while Taunt denies later redirection. Fighting pressure, Encore, Haze, Clear Smog, Unaware, phazing, burn, Intimidate, Charm, Reflect, or focused special damage can then stop Munchlax. Grass types, Overcoat, Safety Goggles, terrain, Taunt, Flying, and Psychic answer Foongus. Once Kangaskhan acts it is already Parental Bond Mega, so Ghost types blank Fake Out and Return while Sucker Punch remains live; Fighting, burn, Intimidate, and Protect punish it. Priority or chip breaks Abra's Sash, while Electric, Grass, recovery denial, and faster pressure answer Staryu. Item removal weakens every young specialist.",
+      "first_loss_lesson": "The tiny lead is not cosmetic: Togepi's Follow Me buys Munchlax a real Belly Drum window. Bring spread pressure, disable the redirector, or survive and clear the boost; then stop assuming the third source slot must enter because the engine chooses reserves by matchup.",
+      "bespoke_ai": "Isaac uses foe-aware, smart-switching, partner-helping, HP-aware, and reusable combo scoring. Existing viability rejects unsafe Belly Drum states; the partner-helping layer raises Follow Me when Munchlax selects or merely carries Belly Drum, and the setup side receives a moderate reciprocal bonus only when neither foe has a lethal spread, redirection-ignoring, or faster equal-or-higher-priority bypass. Native scoring also values Yawn, Encore, Rage Powder, Spore, Clear Smog, priority, recovery, and coverage, while opponent selection simulates Mega Kangaskhan's Parental Bond stats before choosing its move. Forced replacements remain native matchup-ranked; no move, target, switch, sacrifice, or reserve is scripted, and the new protection test is generic rather than trainer-specific.",
+      "uniqueness": "All six exact species are fresh across Battles 1-69. Munchlax deliberately echoes Snorlax's family ten battles after B60, but replaces a Chesto-Rest endurance finish with a young Gluttony Belly Drum opener. This is the first five-young-plus-one-guardian roster, the first fixed Togepi, Foongus, Abra, Staryu, Munchlax, and Kangaskhan use, and the first campaign Mega Kangaskhan showcase. It is also a pace break after Pledge, contact tax, balance, sound, hazards, Symbiosis, Electric dual-speed, and ability inheritance battles because it uses no field or speed mode.",
+      "story_logic": "Isaac is a Pokémon Breeder standing beside Route 117's Day Care, so a class of unevolved pupils and one adult guardian is native to his location and dialogue. Badge 3 gating makes the cap-40 levels truthful even though Route 117 is physically open earlier. His first fight and all Match Call rematches now use guarded doubles. Records 2-4 still contain unrelated legacy cohorts and are explicitly queued for their own continuity decision rather than being misreported as these pupils' growth.",
+      "reward_logic": "Battle 70 grants EXP, ordinary prize money, and Isaac's existing Match Call registration only. It adds no item, heal, story flag, or progression bypass. The registration remains useful, but later rematch teams are separate unresolved encounters and are not counted as a finished reward arc here.",
+      "campaign_reservations": {
+        "spends": ["the first campaign Mega Kangaskhan showcase", "the definitive Route 117 young-pupil plus adult-guardian class", "the first fixed Munchlax, Togepi, Foongus, Abra, and Staryu opponent roles"],
+        "preserves": ["Amoonguss for a later fully evolved tournament roster", "Little Cup as a possible late optional ruleset rather than another immediate trainer module", "Tailwind and Flying or hazard identities for Dylan and later Route 117 trainers", "every legendary and Primal slot"],
+        "repeat_rule": "Later breeders may show evolution progress, but no later first fight should repeat five unevolved specialists, Follow Me Belly Drum support, and an adult Mega guardian together. Isaac's records 2-4 are explicitly unresolved until their later dossiers either evolve this class or truthfully establish a different cohort."
+      },
+      "author_self_check": {
+        "strongest_part": "The Day Care location earns a roster that would feel artificial anywhere else: five genuinely useful young Pokémon make the early-middle evolution phase memorable, while an iconic World Champion Mega guardian keeps the six-member double dangerous after the opening puzzle is solved.",
+        "weakest_link": "Spread pressure, Fake Out, or enough redirected damage can break Togepi's first-turn protection, while Taunt denies repeats; native reserve selection also means Mega Kangaskhan is not guaranteed to appear immediately. The remaining five still cover redirection, physical priority, and two special lanes; Kangaskhan from +4 to +3 is the first runtime tuning knob if the adaptive second half is too punishing."
+      },
+      "closure": "Battle 70 is source-closed at editorial 10/10 and target difficulty 9.2: one Badge-3-gated six-member Breeder double at legal levels 41-44, five intentional young competitive specialists, one fresh Mega Kangaskhan guardian, a real Follow Me plus Gluttony Belly Drum lead, truthful auto-Mega and native adaptive reserve behavior, six distinct items, five corpus references including the 2015 World Champion spine, broad spread, disruption, and type counterplay, native-width dialogue, explicit future-rematch debt, author self-check, and no repeated field or speed engine. Runtime playtesting remains required before the target is observed."
     }
   }
 }

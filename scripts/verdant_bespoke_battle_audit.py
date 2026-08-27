@@ -5939,6 +5939,127 @@ def main() -> None:
     if repeats69 != {"SPECIES_MUDSDALE"}:
         problems.append(f"Battle 69: intended earned Mudsdale repeat changed: {sorted(repeats69)}")
 
+    isaac70 = designs["BATTLE_070_ROUTE_117_ISAAC"]
+    expected_isaac70 = [
+        {"level": 2, "species": "SPECIES_MUNCHLAX", "item": "ITEM_FIGY_BERRY", "ability_slot": 2, "spread": "SPREAD_31_IV_HP_ATK_BRAVE", "moves": ["MOVE_BELLY_DRUM", "MOVE_BODY_SLAM", "MOVE_FIRE_PUNCH", "MOVE_PROTECT"]},
+        {"level": 1, "species": "SPECIES_TOGEPI", "item": "ITEM_EVIOLITE", "ability_slot": 1, "spread": "SPREAD_31_IV_HP_DEF_BOLD", "moves": ["MOVE_FOLLOW_ME", "MOVE_YAWN", "MOVE_ENCORE", "MOVE_ANCIENT_POWER"]},
+        {"level": 4, "species": "SPECIES_KANGASKHAN", "item": "ITEM_KANGASKHANITE", "ability_slot": 1, "spread": "SPREAD_31_IV_ATK_SPEED_ADAMANT", "moves": ["MOVE_FAKE_OUT", "MOVE_RETURN", "MOVE_POWER_UP_PUNCH", "MOVE_SUCKER_PUNCH"]},
+        {"level": 2, "species": "SPECIES_FOONGUS", "item": "ITEM_COBA_BERRY", "ability_slot": 2, "spread": "SPREAD_31_IV_HP_DEF_BOLD", "moves": ["MOVE_RAGE_POWDER", "MOVE_SPORE", "MOVE_CLEAR_SMOG", "MOVE_GIGA_DRAIN"]},
+        {"level": 3, "species": "SPECIES_ABRA", "item": "ITEM_FOCUS_SASH", "ability_slot": 2, "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID", "moves": ["MOVE_PSYCHIC", "MOVE_DAZZLING_GLEAM", "MOVE_SHADOW_BALL", "MOVE_ENCORE"]},
+        {"level": 3, "species": "SPECIES_STARYU", "item": "ITEM_LIFE_ORB", "ability_slot": 2, "spread": "SPREAD_31_IV_HP_SPATK_MODEST", "moves": ["MOVE_HYDRO_PUMP", "MOVE_ICE_BEAM", "MOVE_THUNDERBOLT", "MOVE_RECOVER"]},
+    ]
+    if isaac70.get("trainer_ids") != ["TRAINER_ISAAC_1"] or party_builds("TRAINER_ISAAC_1", trainers_text, parties_text) != expected_isaac70:
+        problems.append("Battle 70: Isaac source party differs from the six-member class")
+    if isaac70.get("strict_cap") != 40 or isaac70.get("evolution_stage_fit", {}).get("status") != "pass" or isaac70.get("manual_quality") != 10 or isaac70.get("manual_difficulty") != 9.2:
+        problems.append("Battle 70: cap, stage, quality, or difficulty closure drifted")
+    branch70 = isaac70.get("branch_contract", {})
+    if branch70.get("format") != "double" or branch70.get("source_slots") != [0, 1, 2, 3, 4, 5] or branch70.get("intended_lead") != ["SPECIES_MUNCHLAX", "SPECIES_TOGEPI"] or branch70.get("reserve_source_order") != ["SPECIES_KANGASKHAN", "SPECIES_FOONGUS", "SPECIES_ABRA", "SPECIES_STARYU"] or "matchup-ranked" not in branch70.get("replacement_contract", ""):
+        problems.append("Battle 70: fixed lead, adaptive reserve, or six-slot contract drifted")
+
+    isaac_block70 = trainer_blocks["TRAINER_ISAAC_1"].group(0)
+    for token in (".doubleBattle = TRUE", "AI_FLAG_SMART_SWITCHING", "AI_FLAG_HELP_PARTNER", "AI_FLAG_HP_AWARE", "AI_FLAG_COMBO_SETUP"):
+        if token not in isaac_block70:
+            problems.append(f"Battle 70: Isaac missing {token}")
+    for token in ("AI_FLAG_SPEED_CONTROL", "AI_FLAG_FIELD_CONTROL", "AI_FLAG_PERISH_TRAP"):
+        if token in isaac_block70:
+            problems.append(f"Battle 70: unrelated authored profile leaked into Isaac: {token}")
+
+    abilities70 = {
+        "SPECIES_MUNCHLAX": (2, "ABILITY_GLUTTONY"),
+        "SPECIES_TOGEPI": (1, "ABILITY_SERENE_GRACE"),
+        "SPECIES_KANGASKHAN": (1, "ABILITY_SCRAPPY"),
+        "SPECIES_FOONGUS": (2, "ABILITY_REGENERATOR"),
+        "SPECIES_ABRA": (2, "ABILITY_MAGIC_GUARD"),
+        "SPECIES_STARYU": (2, "ABILITY_ANALYTIC"),
+    }
+    names70 = {"MUNCHLAX": "Munchlax", "TOGEPI": "Togepi", "KANGASKHAN": "Kangaskhan", "FOONGUS": "Foongus", "ABRA": "Abra", "STARYU": "Staryu"}
+    for species, (slot, ability) in abilities70.items():
+        slots = ability_slots.get(species, [])
+        if len(slots) <= slot or slots[slot] != ability:
+            problems.append(f"Battle 70: {species} slot {slot} is not {ability}: {slots}")
+    for build in expected_isaac70:
+        species = build["species"].removeprefix("SPECIES_")
+        for move in build["moves"]:
+            if not move_is_legal(species, names70[species], move, level_source, tmhm_source, tm_indices, tutor_source, indices, egg_source):
+                problems.append(f"Battle 70: {species} cannot legally learn {move}")
+
+    evolution70 = read("src/data/pokemon/evolution.h")
+    for token in (
+        "[SPECIES_ABRA]", "EVO_LEVEL, 16, SPECIES_KADABRA",
+        "[SPECIES_STARYU]", "EVO_ITEM, ITEM_WATER_STONE, SPECIES_STARMIE",
+        "[SPECIES_TOGEPI]", "EVO_FRIENDSHIP, 0, SPECIES_TOGETIC",
+        "[SPECIES_MUNCHLAX]", "EVO_FRIENDSHIP, 0, SPECIES_SNORLAX",
+        "[SPECIES_FOONGUS]", "EVO_LEVEL, 39, SPECIES_AMOONGUSS",
+        "[SPECIES_KANGASKHAN]", "EVO_MEGA_EVOLUTION, ITEM_KANGASKHANITE, SPECIES_KANGASKHAN_MEGA",
+    ):
+        if token not in evolution70:
+            problems.append(f"Battle 70: young-form or Mega progression proof lost {token}")
+
+    route117_map70 = json.loads(read("data/maps/Route117/map.json"))
+    isaac_object70 = next(row for row in route117_map70["object_events"] if row.get("script") == "Route117_EventScript_Isaac")
+    if (isaac_object70.get("x"), isaac_object70.get("y"), isaac_object70.get("movement_type"), isaac_object70.get("trainer_sight_or_berry_tree_id")) != (33, 11, "MOVEMENT_TYPE_FACE_UP_AND_RIGHT", "4"):
+        problems.append("Battle 70: Isaac lower-lane geometry drifted")
+    route117_scripts70 = read("data/maps/Route117/scripts.inc")
+    for token in (
+        "goto_if_unset FLAG_BADGE03_GET, Route117_EventScript_IsaacStillTraining",
+        "trainerbattle_double TRAINER_ISAAC_1, Route117_Text_IsaacIntro, Route117_Text_IsaacDefeat, Route117_Text_IsaacNotEnoughMons, Route117_EventScript_RegisterIsaac",
+        "trainerbattle_rematch_double TRAINER_ISAAC_1, Route117_Text_IsaacRematchIntro, Route117_Text_IsaacRematchDefeat, Route117_Text_IsaacNotEnoughMons",
+        "register_matchcall TRAINER_ISAAC_1",
+    ):
+        if token not in route117_scripts70:
+            problems.append(f"Battle 70: guarded double or Match Call routing lost {token}")
+    isaac_script70 = route117_scripts70.split("Route117_EventScript_Isaac::", 1)[1].split("Route117_EventScript_Lydia::", 1)[0]
+    if "trainerbattle_single TRAINER_ISAAC_1" in isaac_script70 or "trainerbattle_rematch TRAINER_ISAAC_1" in isaac_script70:
+        problems.append("Battle 70: a single-battle Isaac opcode survived")
+
+    dialogue_source70 = read("data/text/trainers.inc")
+    dialogue70 = dialogue_source70.split("Route117_Text_IsaacIntro:", 1)[1].split("Route117_Text_LydiaIntro:", 1)[0]
+    for cue in ("little ones are learning", "guardian joins the class", "Young Pokémon can fill expert roles", "Double Battle", "Dynamo Badge"):
+        if cue not in dialogue70:
+            problems.append(f"Battle 70: dialogue misses {cue}")
+    for line in re.findall(r'\.string "([^"]*)"', dialogue70):
+        visible = line.replace("\\n", "").replace("\\l", "").replace("\\p", "").replace("$", "")
+        if len(visible) > 36:
+            problems.append(f"Battle 70: dialogue line is too long: {visible}")
+
+    ai70 = read("src/battle_ai_main.c")
+    for token in (
+        "case EFFECT_BELLY_DRUM:",
+        "GetHealthPercentage(battlerAtk) <= 60",
+        "effect == EFFECT_FOLLOW_ME && (partnerChoosingSetup || PartnerHasSetupMove(partner))",
+        "CanFoeBypassFollowMeAndFaint",
+        "MOVE_TARGET_RANDOM | MOVE_TARGET_BOTH | MOVE_TARGET_FOES_AND_ALLY",
+        "AI_DATA->partnerMove == MOVE_FOLLOW_ME ? 10 : 4",
+        "move != MOVE_RAGE_POWDER || IsAffectedByPowder",
+    ):
+        if token not in ai70:
+            problems.append(f"Battle 70: native setup, support, or redirection AI lost {token}")
+    mega_ai70 = read("src/battle_controller_opponent.c")
+    for token in ("TrySimulateMegaEvolutionForAI", "GetMegaEvolutionSpecies", "gBattleMons[gActiveBattler].species = megaSpecies", "if (CanMegaEvolve(gActiveBattler))", "RET_MEGA_EVOLUTION"):
+        if token not in mega_ai70:
+            problems.append(f"Battle 70: Mega-aware opponent selection lost {token}")
+
+    manifest70 = json.loads(read("docs/verdant_doubles_manifest.json")).get("formats", {}).get("TRAINER_ISAAC_1", {})
+    if manifest70.get("archetype") != "Little Cup plus guardian" or manifest70.get("difficulty") != 66 or manifest70.get("level_offset") != 3 or not manifest70.get("partner_interaction"):
+        problems.append("Battle 70: format manifest summary is stale")
+    donor_requirements70 = {
+        "showdown:gen7randomdoublesbattle:021": {"Kangaskhan"},
+        "showdown:gen9championsrandomdoublesbattle:003": {"Kangaskhan"},
+        "smogon:gen4uu:001": {"Kangaskhan"},
+        "smogon:gen5nu:004": {"Kangaskhan"},
+    }
+    for reference_id, required_species in donor_requirements70.items():
+        row = refs29.get(reference_id)
+        if row is None or row.get("completeness") != "full-sets" or not required_species <= set(row.get("roster", [])):
+            problems.append(f"Battle 70: Kangaskhan donor drifted {reference_id}")
+    worlds2015_70 = refs29.get("vgc:worlds-2015")
+    if worlds2015_70 is None or worlds2015_70.get("placement") != 1 or not {"kangaskhan-mega", "amoonguss"} <= {species.lower() for species in worlds2015_70.get("roster", [])}:
+        problems.append("Battle 70: 2015 World Champion guardian/redirection reference drifted")
+    battles_1_to_69 = battles_1_to_68 | {build["species"] for build in expected_anna_meg69}
+    repeats70 = battles_1_to_69 & {build["species"] for build in expected_isaac70}
+    if repeats70:
+        problems.append(f"Battle 70: exact class species unexpectedly repeat: {sorted(repeats70)}")
+
     # Cross-encounter species reuse is an editorial signal, not a correctness
     # failure. Keep the existing exact comparisons so deliberate repeats stay
     # visible, but never force a replacement merely to preserve a zero-repeat
@@ -6025,6 +6146,7 @@ def main() -> None:
     print("PASS: Battle 67 truthful Symbiosis item relay, safe split singles, legal berry consumers/forms, reusable AI, donors, and dialogue")
     print("PASS: Battle 68 guarded Wattson World Champion circuit, six legal sets, reciprocal Mega Raichu Y, exact badge flow, and Trick Room-aware AI")
     print("PASS: Battle 69 Badge-gated Beat Up-Stamina adaptive inheritance, legal four, full-party-safe AI, donors, and dialogue")
+    print("PASS: Battle 70 Badge-gated Day Care class, five young specialists, Mega Kangaskhan guardian, adaptive reserves, donors, and dialogue")
     print(f"PASS: all {len(designs)} closed encounters record their truthful legacy-983 or current-1005 corpus fit decision")
 
 

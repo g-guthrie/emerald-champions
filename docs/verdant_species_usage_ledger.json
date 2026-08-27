@@ -9,18 +9,18 @@
     "final_coverage": "Requires an explicitly complete canonical sequence and actual use of every required legendary family and Mega mechanism."
   },
   "source_identity": {
-    "docs/verdant_battle_sequence.json": "de383b9fe77e8c8c24f5026d52bff245944723d1e0d60e7a2fc78e7be6362d41",
-    "docs/verdant_bespoke_battle_designs.json": "62af80b14a14079a74b3c63b4d9c2c3fd19c060aff88095333c8962052dc8c6e",
+    "docs/verdant_battle_sequence.json": "53a560accb6fc028427c810604ef82df12be3e8b069ce2326f4da225d930e569",
+    "docs/verdant_bespoke_battle_designs.json": "3d3bfca43047502b416d7e6cac591ae2f8a2afdc5ade01122d27eb6c0d455684",
     "docs/verdant_historic_team_reservations.json": "b6d485c178a02919a1c5709776d813d98bd416d0c7384616d2dc0376e4ab30ae",
     "docs/verdant_marquee_battle_designs.json": "ffa1c35cf391bc4dbed8aa708b7a2d4d7cd7c9eb02f00385b898c5fa902f1870",
-    "src/data/trainers.h": "35c2ee74fdbaf358ed92a45ef3635f4d062d35b0fb436d986c087ebac6933c17",
-    "src/data/trainer_parties.h": "527b04b4f04291a679a4354baea794d2657ea77dc39d5763c97febc1a6c92773",
+    "src/data/trainers.h": "610ccfbd8b390bfbb60d5010a4e28c9f8594b53cbed535e2f567cd910d6248ad",
+    "src/data/trainer_parties.h": "01b733e466462cf6514a4640652c39c5bb2f239bfbf90d85e40d411e674c54c0",
     "src/starter_choose.c": "7cc07796e9226a479d1b7da66ef17555e8a8e6de50516434720559d902b1b7d8"
   },
   "summary": {
     "sequence_entries": 76,
-    "closed_encounters": 69,
-    "used_species": 329,
+    "closed_encounters": 70,
+    "used_species": 335,
     "duplicated_species": 34,
     "legendary_families": {
       "used": 21,
@@ -28,12 +28,28 @@
       "unplaced": 65
     },
     "mega_showcases": {
-      "used": 4,
+      "used": 5,
       "reserved": 5,
-      "unplaced": 61
+      "unplaced": 60
     }
   },
   "species": [
+    {
+      "species": "SPECIES_ABRA",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 70,
+          "encounter_id": "BATTLE_070_ROUTE_117_ISAAC",
+          "trainer_ids": [
+            "TRAINER_ISAAC_1"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
     {
       "species": "SPECIES_AERODACTYL",
       "appearance_count": 1,
@@ -1980,6 +1996,22 @@
       ]
     },
     {
+      "species": "SPECIES_FOONGUS",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 70,
+          "encounter_id": "BATTLE_070_ROUTE_117_ISAAC",
+          "trainer_ids": [
+            "TRAINER_ISAAC_1"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_FRILLISH",
       "appearance_count": 1,
       "appearances": [
@@ -2792,6 +2824,22 @@
           "encounter_id": "BATTLE_058_ROUTE_110_JACLYN",
           "trainer_ids": [
             "TRAINER_JACLYN"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_KANGASKHAN",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 70,
+          "encounter_id": "BATTLE_070_ROUTE_117_ISAAC",
+          "trainer_ids": [
+            "TRAINER_ISAAC_1"
           ],
           "basis": [
             "trainer-party"
@@ -3721,6 +3769,22 @@
           "encounter_id": "BATTLE_069_ROUTE_117_ANNA_AND_MEG",
           "trainer_ids": [
             "TRAINER_ANNA_AND_MEG_1"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_MUNCHLAX",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 70,
+          "encounter_id": "BATTLE_070_ROUTE_117_ISAAC",
+          "trainer_ids": [
+            "TRAINER_ISAAC_1"
           ],
           "basis": [
             "trainer-party"
@@ -5253,6 +5317,22 @@
       ]
     },
     {
+      "species": "SPECIES_STARYU",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 70,
+          "encounter_id": "BATTLE_070_ROUTE_117_ISAAC",
+          "trainer_ids": [
+            "TRAINER_ISAAC_1"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_STONJOURNER",
       "appearance_count": 1,
       "appearances": [
@@ -5575,6 +5655,22 @@
           "trainer_ids": [
             "TRAINER_JANICE",
             "TRAINER_JERRY_1"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_TOGEPI",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 70,
+          "encounter_id": "BATTLE_070_ROUTE_117_ISAAC",
+          "trainer_ids": [
+            "TRAINER_ISAAC_1"
           ],
           "basis": [
             "trainer-party"
@@ -7558,8 +7654,10 @@
       "mechanism": "item",
       "requirement": "ITEM_KANGASKHANITE",
       "mega_species": "SPECIES_KANGASKHAN_MEGA",
-      "status": "unplaced",
-      "used_encounter_ids": [],
+      "status": "used",
+      "used_encounter_ids": [
+        "BATTLE_070_ROUTE_117_ISAAC"
+      ],
       "reservations": []
     },
     {

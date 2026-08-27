@@ -685,17 +685,17 @@
       "encounter_id": "BATTLE_070_ROUTE_117_ISAAC",
       "location": "Route117",
       "category": "optional solo double",
-      "status": "next",
+      "status": "closed",
       "strict_cap": 40,
       "trainer_ids": ["TRAINER_ISAAC_1"],
-      "access_note": "Fixed lower-lane trainer at (33,11), alternating up/right with four-tile sight. His six-member trainer record is double while the current first-fight and rematch opcodes are single, so source closure must add an explicit two-usable-Pokémon guard without changing Isaac's Match Call ownership. Isaac and Dylan are reversible in open terrain; Isaac is the canonical lower-lane-first tie-break."
+      "access_note": "Fixed lower-lane trainer at (33,11), alternating up/right with four-tile sight. Isaac now truthfully waits for the Dynamo Badge, then both his first fight and Match Call rematches use guarded native doubles without changing his ownership chain. Isaac and Dylan remain reversible in open terrain; Isaac is the canonical lower-lane-first tie-break."
     },
     {
       "index": 71,
       "encounter_id": "BATTLE_071_ROUTE_117_DYLAN",
       "location": "Route117",
       "category": "optional moving solo double",
-      "status": "queued",
+      "status": "next",
       "strict_cap": 40,
       "trainer_ids": ["TRAINER_DYLAN_1"],
       "access_note": "Horizontal patrol from (38,16) with range eight and four-tile sight. His four-member trainer record is double while the current first-fight and rematch opcodes are single, so source closure must add a usable-party guard and preserve Dylan's independent Match Call chain."

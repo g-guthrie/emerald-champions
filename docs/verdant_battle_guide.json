@@ -21,7 +21,7 @@
       "repeated_rematch_compositions": 0,
       "uncovered_multi_trainer_locations": 1
     },
-    "bespokeClosed": 69
+    "bespokeClosed": 70
   },
   "entries": [
     {
@@ -2309,7 +2309,7 @@
       "difficultyBand": "Extreme",
       "difficultyExplanation": "4 fully authored Pok\u00e9mon, average BST 318.2, average cap offset +2.0, ace offset +3, and 100% held-item coverage.",
       "uniquenessScore": 89,
-      "uniquenessExplanation": "Closest unrelated roster: Grunt (14% species overlap). Its species appear across an average of 1.8 unrelated trainer families.",
+      "uniquenessExplanation": "Closest unrelated roster: Grunt (14% species overlap). Its species appear across an average of 1.5 unrelated trainer families.",
       "synergyTags": [
         "status control"
       ],
@@ -5087,7 +5087,7 @@
       "difficultyBand": "Extreme",
       "difficultyExplanation": "6 fully authored Pok\u00e9mon, average BST 412.7, average cap offset +3.83, ace offset +5, and 100% held-item coverage.",
       "uniquenessScore": 94,
-      "uniquenessExplanation": "Closest unrelated roster: Grunt (11% species overlap). Its species appear across an average of 1.5 unrelated trainer families.",
+      "uniquenessExplanation": "Closest unrelated roster: Grunt (11% species overlap). Its species appear across an average of 1.3 unrelated trainer families.",
       "synergyTags": [
         "Rock pressure",
         "Safeguard + Swagger"
@@ -5655,7 +5655,7 @@
       "difficultyBand": "Extreme",
       "difficultyExplanation": "4 fully authored Pok\u00e9mon, average BST 383.8, average cap offset +2.0, ace offset +3, and 100% held-item coverage.",
       "uniquenessScore": 86,
-      "uniquenessExplanation": "Closest unrelated roster: Jessica (17% species overlap). Its species appear across an average of 2.5 unrelated trainer families.",
+      "uniquenessExplanation": "Closest unrelated roster: Jessica (17% species overlap). Its species appear across an average of 2.2 unrelated trainer families.",
       "synergyTags": [
         "Earthquake immunity"
       ],
@@ -10224,8 +10224,8 @@
       "difficultyScore": 33,
       "difficultyBand": "Introductory",
       "difficultyExplanation": "3 fully authored Pok\u00e9mon, average BST 351.3, average cap offset -3.0, ace offset -3, and 0% held-item coverage.",
-      "uniquenessScore": 85,
-      "uniquenessExplanation": "Closest unrelated roster: Tara (20% species overlap). Its species appear across an average of 2.0 unrelated trainer families.",
+      "uniquenessScore": 84,
+      "uniquenessExplanation": "Closest unrelated roster: Tara (20% species overlap). Its species appear across an average of 2.3 unrelated trainer families.",
       "synergyTags": [],
       "ai": [
         "Check Bad Move",
@@ -12752,7 +12752,7 @@
       "difficultyBand": "Demanding",
       "difficultyExplanation": "3 fully authored Pok\u00e9mon, average BST 488.3, average cap offset -3.0, ace offset -3, and 0% held-item coverage.",
       "uniquenessScore": 76,
-      "uniquenessExplanation": "Closest unrelated roster: Jonah (25% species overlap). Its species appear across an average of 5.0 unrelated trainer families.",
+      "uniquenessExplanation": "Closest unrelated roster: Jonah (25% species overlap). Its species appear across an average of 5.3 unrelated trainer families.",
       "synergyTags": [],
       "ai": [
         "Check Bad Move",
@@ -30619,7 +30619,7 @@
         "map": "Route117",
         "command": "trainerbattle_double",
         "role": "opponent",
-        "line": 136,
+        "line": 141,
         "file": "data/maps/Route117/scripts.inc"
       },
       "badge": 3,
@@ -30785,9 +30785,11 @@
     },
     {
       "trainerId": "TRAINER_ISAAC_1",
-      "encounterId": null,
+      "encounterId": "BATTLE_070_ROUTE_117_ISAAC",
       "sequenceIndex": 70,
-      "encounterAlternatives": [],
+      "encounterAlternatives": [
+        "TRAINER_ISAAC_1"
+      ],
       "runtimePartyAlternatives": null,
       "name": "Isaac",
       "trainerClass": "Pkmn Breeder",
@@ -30799,148 +30801,207 @@
       "sourceMap": "Route117",
       "source": {
         "map": "Route117",
-        "command": "trainerbattle_single",
+        "command": "trainerbattle_double",
         "role": "opponent",
-        "line": 42,
+        "line": 43,
         "file": "data/maps/Route117/scripts.inc"
       },
       "badge": 3,
       "levelCap": 40,
       "format": "double",
       "partySize": 6,
-      "theme": "Tailwind",
-      "plan": "Bonsly and Eevee are the authored opening pair. The board plan is tailwind. The composition turns the route's grassland, roadside cover, and open speed lanes into the fight's identity instead of using a generic route-trainer core.",
-      "behavior": "The AI uses Check Bad Move, Try To Faint, Check Viability, Check Foe, Smart Switching. Expect it to preserve tailwind rather than select six unrelated strong attacks.",
-      "counterplay": "Win the speed exchange, identify the highest-leverage support slot, and avoid trading your answer into the team's ace too early.",
-      "designStatus": "not individually closed",
-      "manualQuality": null,
-      "corpusReview": null,
-      "competitiveReferences": [],
-      "authorSelfCheck": null,
-      "closure": "",
-      "difficultyScore": 49,
-      "difficultyBand": "Demanding",
-      "difficultyExplanation": "6 fully authored Pok\u00e9mon, average BST 328.3, average cap offset -5.0, ace offset -5, and 0% held-item coverage.",
-      "uniquenessScore": 91,
-      "uniquenessExplanation": "Closest unrelated roster: Haley (11% species overlap). Its species appear across an average of 1.5 unrelated trainer families.",
+      "theme": "Fake Out tempo + redirection setup + status control",
+      "plan": "Level-42 Figy Gluttony Munchlax uses Belly Drum, Body Slam, Fire Punch, and Protect. Level-41 Eviolite Serene Grace Togepi uses Follow Me, Yawn, Encore, and Ancient Power. Level-44 base-Scrappy Kangaskhan holds Kangaskhanite, automatically Mega Evolves before its first selected move, and uses Fake Out, Return, Power-Up Punch, and Sucker Punch with Parental Bond. Level-42 Coba Regenerator Foongus uses Rage Powder, Spore, Clear Smog, and Giga Drain. Level-43 Sash Magic Guard Abra uses Psychic, Dazzling Gleam, Shadow Ball, and Encore. Level-43 Life Orb Analytic Staryu uses Hydro Pump, Ice Beam, Thunderbolt, and Recover. There is no weather, terrain, room, Tailwind, screen, hazard, trap, ally attack, legendary, Primal, or battle-Bag item. All six exact species are fresh across Battles 1-69. Munchlax deliberately echoes Snorlax's family ten battles after B60, but replaces a Chesto-Rest endurance finish with a young Gluttony Belly Drum opener. This is the first five-young-plus-one-guardian roster, the first fixed Togepi, Foongus, Abra, Staryu, Munchlax, and Kangaskhan use, and the first campaign Mega Kangaskhan showcase. It is also a pace break after Pledge, contact tax, balance, sound, hazards, Symbiosis, Electric dual-speed, and ability inheritance battles because it uses no field or speed mode.",
+      "behavior": "Isaac uses foe-aware, smart-switching, partner-helping, HP-aware, and reusable combo scoring. Existing viability rejects unsafe Belly Drum states; the partner-helping layer raises Follow Me when Munchlax selects or merely carries Belly Drum, and the setup side receives a moderate reciprocal bonus only when neither foe has a lethal spread, redirection-ignoring, or faster equal-or-higher-priority bypass. Native scoring also values Yawn, Encore, Rage Powder, Spore, Clear Smog, priority, recovery, and coverage, while opponent selection simulates Mega Kangaskhan's Parental Bond stats before choosing its move. Forced replacements remain native matchup-ranked; no move, target, switch, sacrifice, or reserve is scripted, and the new protection test is generic rather than trainer-specific.",
+      "counterplay": "Spread attacks bypass Follow Me; Fake Out, flinching, priority damage, or enough redirected double-target pressure can remove Togepi before the turn is safe, while Taunt denies later redirection. Fighting pressure, Encore, Haze, Clear Smog, Unaware, phazing, burn, Intimidate, Charm, Reflect, or focused special damage can then stop Munchlax. Grass types, Overcoat, Safety Goggles, terrain, Taunt, Flying, and Psychic answer Foongus. Once Kangaskhan acts it is already Parental Bond Mega, so Ghost types blank Fake Out and Return while Sucker Punch remains live; Fighting, burn, Intimidate, and Protect punish it. Priority or chip breaks Abra's Sash, while Electric, Grass, recovery denial, and faster pressure answer Staryu. Item removal weakens every young specialist.",
+      "designStatus": "closed",
+      "manualQuality": 10,
+      "corpusReview": {
+        "reference_pool_size": 1005,
+        "full_team_candidates": [
+          {
+            "reference_id": "showdown:gen7randomdoublesbattle:021",
+            "decision": "Mega Kangaskhan Return and Sucker Punch shell selected; full team rejected",
+            "reason": "The reproducible doubles set validates exact Mega Kangaskhan, Return, Sucker Punch, and Kangaskhanite. Isaac trades Drain Punch and Protect for Fake Out and Power-Up Punch so the guardian can create immediate or compounding pressure."
+          },
+          {
+            "reference_id": "showdown:gen9championsrandomdoublesbattle:003",
+            "decision": "Kangaskhan Fake Out identity selected; full team rejected",
+            "reason": "The Champions-format donor validates Kangaskhan's Fake Out role without importing its Last Resort lock or unrelated field pieces. This engine auto-Mega Evolves the opponent before its first selected move, so legal base Scrappy never supplies an operational turn."
+          },
+          {
+            "reference_id": "vgc:worlds-2015",
+            "decision": "World Champion Mega Kangaskhan plus Amoonguss spine adapted; roster-only team rejected",
+            "reason": "The verified champion roster supplies the iconic guardian plus redirection relationship. Foongus deliberately de-evolves Amoonguss so the Day Care class remains visually young while preserving Rage Powder and Spore counterplay."
+          },
+          {
+            "reference_id": "smogon:gen4uu:001",
+            "decision": "Kangaskhan Normal and Dark pressure selected; full team rejected",
+            "reason": "The published sample validates Fake Out and Sucker Punch as a durable Kangaskhan identity across singles and doubles generations."
+          },
+          {
+            "reference_id": "smogon:gen5nu:004",
+            "decision": "Kangaskhan priority role cross-checked; full team rejected",
+            "reason": "A second published sample confirms the guardian's Fake Out, strong Normal attack, and Sucker Punch pressure without dictating Isaac's five bespoke young pupils."
+          }
+        ],
+        "decision": "All 1,005 indexed references were reviewed. The corpus strongly supports the Mega Kangaskhan guardian and its redirection partner, but contains no complete team built from these five baby or unevolved exact species; their Follow Me-protected Belly Drum, redirection, fragile special offense, and item roles are transparently hand-authored for the Route 117 Day Care context."
+      },
+      "competitiveReferences": [
+        {
+          "reference_id": "showdown:gen7randomdoublesbattle:021",
+          "adaptation": "Kangaskhan keeps Kangaskhanite, Return, and Sucker Punch; Fake Out and Power-Up Punch make the guardian self-contained beside any native reserve pairing."
+        },
+        {
+          "reference_id": "showdown:gen9championsrandomdoublesbattle:003",
+          "adaptation": "Fake Out supplies immediate tempo after the engine automatically changes Kangaskhan from legal base Scrappy to Parental Bond Mega before its first move."
+        },
+        {
+          "reference_id": "vgc:worlds-2015",
+          "adaptation": "The World Champion Mega Kangaskhan plus Amoonguss relationship becomes Kangaskhan plus young Foongus without copying the rest of the roster."
+        },
+        {
+          "reference_id": "smogon:gen4uu:001",
+          "adaptation": "Fake Out, Normal pressure, and Sucker Punch reinforce the guardian's broadly proven role."
+        },
+        {
+          "reference_id": "smogon:gen5nu:004",
+          "adaptation": "The second published Kangaskhan sample confirms priority and immediate damage as the right fallback when setup is denied."
+        }
+      ],
+      "authorSelfCheck": {
+        "strongest_part": "The Day Care location earns a roster that would feel artificial anywhere else: five genuinely useful young Pok\u00e9mon make the early-middle evolution phase memorable, while an iconic World Champion Mega guardian keeps the six-member double dangerous after the opening puzzle is solved.",
+        "weakest_link": "Spread pressure, Fake Out, or enough redirected damage can break Togepi's first-turn protection, while Taunt denies repeats; native reserve selection also means Mega Kangaskhan is not guaranteed to appear immediately. The remaining five still cover redirection, physical priority, and two special lanes; Kangaskhan from +4 to +3 is the first runtime tuning knob if the adaptive second half is too punishing."
+      },
+      "closure": "Battle 70 is source-closed at editorial 10/10 and target difficulty 9.2: one Badge-3-gated six-member Breeder double at legal levels 41-44, five intentional young competitive specialists, one fresh Mega Kangaskhan guardian, a real Follow Me plus Gluttony Belly Drum lead, truthful auto-Mega and native adaptive reserve behavior, six distinct items, five corpus references including the 2015 World Champion spine, broad spread, disruption, and type counterplay, native-width dialogue, explicit future-rematch debt, author self-check, and no repeated field or speed engine. Runtime playtesting remains required before the target is observed.",
+      "difficultyScore": 92,
+      "difficultyBand": "Extreme",
+      "difficultyExplanation": "6 fully authored Pok\u00e9mon, average BST 344.8, average cap offset +2.5, ace offset +4, and 100% held-item coverage.",
+      "uniquenessScore": 93,
+      "uniquenessExplanation": "Closest unrelated roster: Alice (12% species overlap). Its species appear across an average of 1.8 unrelated trainer families.",
       "synergyTags": [
-        "Tailwind"
+        "Fake Out tempo",
+        "redirection setup",
+        "status control"
       ],
       "ai": [
         "Check Bad Move",
         "Try To Faint",
         "Check Viability",
         "Check Foe",
-        "Smart Switching"
+        "Smart Switching",
+        "Help Partner",
+        "Hp Aware",
+        "Combo Setup"
       ],
       "party": [
         {
           "slot": 1,
-          "speciesId": "SPECIES_BONSLY",
-          "species": "Bonsly",
-          "levelOffset": -5,
-          "effectiveLevel": 35,
-          "itemId": "ITEM_NONE",
-          "item": "None",
-          "ability": "Sturdy",
-          "spread": "31 Iv 0 Ev",
+          "speciesId": "SPECIES_MUNCHLAX",
+          "species": "Munchlax",
+          "levelOffset": 2,
+          "effectiveLevel": 42,
+          "itemId": "ITEM_FIGY_BERRY",
+          "item": "Figy Berry",
+          "ability": "Gluttony",
+          "spread": "31 Iv Hp Atk Brave",
           "moves": [
-            "Rock Slide",
-            "Curse",
-            "Feint Attack",
-            "Low Kick"
+            "Belly Drum",
+            "Body Slam",
+            "Fire Punch",
+            "Protect"
           ],
-          "role": "coverage attacker"
+          "role": "setup attacker"
         },
         {
           "slot": 2,
-          "speciesId": "SPECIES_EEVEE",
-          "species": "Eevee",
-          "levelOffset": -5,
-          "effectiveLevel": 35,
-          "itemId": "ITEM_NONE",
-          "item": "None",
-          "ability": "Run Away",
-          "spread": "31 Iv 0 Ev",
+          "speciesId": "SPECIES_TOGEPI",
+          "species": "Togepi",
+          "levelOffset": 1,
+          "effectiveLevel": 41,
+          "itemId": "ITEM_EVIOLITE",
+          "item": "Eviolite",
+          "ability": "Serene Grace",
+          "spread": "31 Iv Hp Def Bold",
           "moves": [
-            "Baton Pass",
+            "Follow Me",
             "Yawn",
-            "Wish",
-            "Hyper Voice"
+            "Encore",
+            "Ancient Power"
           ],
-          "role": "disruption and support"
+          "role": "redirection support"
         },
         {
           "slot": 3,
-          "speciesId": "SPECIES_LITWICK",
-          "species": "Litwick",
-          "levelOffset": -5,
-          "effectiveLevel": 35,
-          "itemId": "ITEM_NONE",
-          "item": "None",
-          "ability": "Flash Fire",
-          "spread": "31 Iv 0 Ev",
+          "speciesId": "SPECIES_KANGASKHAN",
+          "species": "Kangaskhan",
+          "levelOffset": 4,
+          "effectiveLevel": 44,
+          "itemId": "ITEM_KANGASKHANITE",
+          "item": "Kangaskhanite",
+          "ability": "Scrappy",
+          "spread": "31 Iv Atk Speed Adamant",
           "moves": [
-            "Flame Burst",
-            "Shadow Ball",
-            "Acid Armor",
-            "Pain Split"
+            "Fake Out",
+            "Return",
+            "Power Up Punch",
+            "Sucker Punch"
           ],
-          "role": "disruption and support"
+          "role": "Mega ace"
         },
         {
           "slot": 4,
-          "speciesId": "SPECIES_MANTYKE",
-          "species": "Mantyke",
-          "levelOffset": -5,
-          "effectiveLevel": 35,
-          "itemId": "ITEM_NONE",
-          "item": "None",
-          "ability": "Swift Swim",
-          "spread": "31 Iv 0 Ev",
+          "speciesId": "SPECIES_FOONGUS",
+          "species": "Foongus",
+          "levelOffset": 2,
+          "effectiveLevel": 42,
+          "itemId": "ITEM_COBA_BERRY",
+          "item": "Coba Berry",
+          "ability": "Regenerator",
+          "spread": "31 Iv Hp Def Bold",
           "moves": [
-            "Signal Beam",
-            "Tailwind",
-            "Hydro Pump",
-            "Confuse Ray"
+            "Rage Powder",
+            "Spore",
+            "Clear Smog",
+            "Giga Drain"
           ],
-          "role": "speed control"
+          "role": "redirection support"
         },
         {
           "slot": 5,
-          "speciesId": "SPECIES_DEINO",
-          "species": "Deino",
-          "levelOffset": -5,
-          "effectiveLevel": 35,
-          "itemId": "ITEM_NONE",
-          "item": "None",
-          "ability": "Hustle",
-          "spread": "31 Iv 0 Ev",
+          "speciesId": "SPECIES_ABRA",
+          "species": "Abra",
+          "levelOffset": 3,
+          "effectiveLevel": 43,
+          "itemId": "ITEM_FOCUS_SASH",
+          "item": "Focus Sash",
+          "ability": "Magic Guard",
+          "spread": "31 Iv Spatk Speed Timid",
           "moves": [
-            "Dark Pulse",
-            "Earth Power",
-            "Dragon Pulse",
-            "Slam"
+            "Psychic",
+            "Dazzling Gleam",
+            "Shadow Ball",
+            "Encore"
           ],
           "role": "coverage attacker"
         },
         {
           "slot": 6,
-          "speciesId": "SPECIES_TANGELA",
-          "species": "Tangela",
-          "levelOffset": -5,
-          "effectiveLevel": 35,
-          "itemId": "ITEM_NONE",
-          "item": "None",
-          "ability": "Chlorophyll",
-          "spread": "31 Iv 0 Ev",
+          "speciesId": "SPECIES_STARYU",
+          "species": "Staryu",
+          "levelOffset": 3,
+          "effectiveLevel": 43,
+          "itemId": "ITEM_LIFE_ORB",
+          "item": "Life Orb",
+          "ability": "Analytic",
+          "spread": "31 Iv Hp Spatk Modest",
           "moves": [
-            "Sleep Powder",
-            "Wake Up Slap",
-            "Giga Drain",
-            "Amnesia"
+            "Hydro Pump",
+            "Ice Beam",
+            "Thunderbolt",
+            "Recover"
           ],
-          "role": "disruption and support"
+          "role": "coverage attacker"
         }
       ],
       "order": 216
@@ -30963,7 +31024,7 @@
         "map": "Route117",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 86,
+        "line": 91,
         "file": "data/maps/Route117/scripts.inc"
       },
       "badge": 3,
@@ -31089,7 +31150,7 @@
         "map": "Route117",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 108,
+        "line": 113,
         "file": "data/maps/Route117/scripts.inc"
       },
       "badge": 3,
@@ -31214,7 +31275,7 @@
         "map": "Route117",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 130,
+        "line": 135,
         "file": "data/maps/Route117/scripts.inc"
       },
       "badge": 3,
@@ -31301,7 +31362,7 @@
         "map": "Route117",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 181,
+        "line": 186,
         "file": "data/maps/Route117/scripts.inc"
       },
       "badge": 3,
@@ -31388,7 +31449,7 @@
         "map": "Route117",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 186,
+        "line": 191,
         "file": "data/maps/Route117/scripts.inc"
       },
       "badge": 3,
@@ -31478,7 +31539,7 @@
         "map": "Route117",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 191,
+        "line": 196,
         "file": "data/maps/Route117/scripts.inc"
       },
       "badge": 3,
@@ -31547,7 +31608,7 @@
         "map": "Route117",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 64,
+        "line": 69,
         "file": "data/maps/Route117/scripts.inc"
       },
       "badge": 3,
@@ -31730,8 +31791,8 @@
       "difficultyScore": 85,
       "difficultyBand": "Extreme",
       "difficultyExplanation": "6 fully authored Pok\u00e9mon, average BST 556.7, average cap offset +0.67, ace offset +2, and 100% held-item coverage.",
-      "uniquenessScore": 83,
-      "uniquenessExplanation": "Closest unrelated roster: Kate & Joy (25% species overlap). Its species appear across an average of 5.3 unrelated trainer families.",
+      "uniquenessScore": 82,
+      "uniquenessExplanation": "Closest unrelated roster: Kate & Joy (25% species overlap). Its species appear across an average of 5.5 unrelated trainer families.",
       "synergyTags": [
         "Earthquake immunity",
         "Fake Out tempo",
@@ -55380,7 +55441,7 @@
       "difficultyBand": "Demanding",
       "difficultyExplanation": "3 fully authored Pok\u00e9mon, average BST 508.3, average cap offset -3.0, ace offset -3, and 0% held-item coverage.",
       "uniquenessScore": 70,
-      "uniquenessExplanation": "Closest unrelated roster: Daisuke (33% species overlap). Its species appear across an average of 5.7 unrelated trainer families.",
+      "uniquenessExplanation": "Closest unrelated roster: Daisuke (33% species overlap). Its species appear across an average of 6.0 unrelated trainer families.",
       "synergyTags": [
         "priority pressure"
       ],
@@ -73675,8 +73736,8 @@
       "difficultyScore": 83,
       "difficultyBand": "Extreme",
       "difficultyExplanation": "6 fully authored Pok\u00e9mon, average BST 541.7, average cap offset +5.33, ace offset +7, and 100% held-item coverage.",
-      "uniquenessScore": 82,
-      "uniquenessExplanation": "Closest unrelated roster: Cristin (25% species overlap). Its species appear across an average of 5.8 unrelated trainer families.",
+      "uniquenessScore": 81,
+      "uniquenessExplanation": "Closest unrelated roster: Cristin (25% species overlap). Its species appear across an average of 6.0 unrelated trainer families.",
       "synergyTags": [
         "Earthquake immunity"
       ],
@@ -88845,7 +88906,7 @@
       "difficultyBand": "Extreme",
       "difficultyExplanation": "6 fully authored Pok\u00e9mon, average BST 602.5, average cap offset +0.33, ace offset +2, and 100% held-item coverage.",
       "uniquenessScore": 89,
-      "uniquenessExplanation": "Closest unrelated roster: Kate & Joy (25% species overlap). Its species appear across an average of 5.2 unrelated trainer families.",
+      "uniquenessExplanation": "Closest unrelated roster: Kate & Joy (25% species overlap). Its species appear across an average of 5.3 unrelated trainer families.",
       "synergyTags": [
         "Earthquake immunity",
         "Normal pressure"
@@ -89008,7 +89069,7 @@
       "difficultyBand": "Extreme",
       "difficultyExplanation": "6 fully authored Pok\u00e9mon, average BST 554.2, average cap offset +0.33, ace offset +2, and 100% held-item coverage.",
       "uniquenessScore": 86,
-      "uniquenessExplanation": "Closest unrelated roster: Haley (20% species overlap). Its species appear across an average of 4.8 unrelated trainer families.",
+      "uniquenessExplanation": "Closest unrelated roster: Haley (20% species overlap). Its species appear across an average of 5.0 unrelated trainer families.",
       "synergyTags": [
         "Earthquake immunity",
         "Fake Out tempo",
@@ -89174,7 +89235,7 @@
       "difficultyBand": "Brutal",
       "difficultyExplanation": "6 fully authored Pok\u00e9mon, average BST 515.0, average cap offset +0.33, ace offset +2, and 100% held-item coverage.",
       "uniquenessScore": 85,
-      "uniquenessExplanation": "Closest unrelated roster: Jack (14% species overlap). Its species appear across an average of 5.5 unrelated trainer families.",
+      "uniquenessExplanation": "Closest unrelated roster: Jack (14% species overlap). Its species appear across an average of 5.7 unrelated trainer families.",
       "synergyTags": [
         "Earthquake immunity",
         "Normal pressure"
@@ -89337,7 +89398,7 @@
       "difficultyBand": "Extreme",
       "difficultyExplanation": "6 fully authored Pok\u00e9mon, average BST 524.2, average cap offset +0.33, ace offset +2, and 100% held-item coverage.",
       "uniquenessScore": 79,
-      "uniquenessExplanation": "Closest unrelated roster: Haley (25% species overlap). Its species appear across an average of 5.7 unrelated trainer families.",
+      "uniquenessExplanation": "Closest unrelated roster: Haley (25% species overlap). Its species appear across an average of 5.8 unrelated trainer families.",
       "synergyTags": [
         "Earthquake immunity",
         "Fake Out tempo",
@@ -89480,9 +89541,9 @@
       "sourceMap": "Route117",
       "source": {
         "map": "Route117",
-        "command": "trainerbattle_single",
+        "command": "trainerbattle_double",
         "role": "opponent",
-        "line": 42,
+        "line": 43,
         "file": "data/maps/Route117/scripts.inc"
       },
       "badge": null,
@@ -89642,9 +89703,9 @@
       "sourceMap": "Route117",
       "source": {
         "map": "Route117",
-        "command": "trainerbattle_single",
+        "command": "trainerbattle_double",
         "role": "opponent",
-        "line": 42,
+        "line": 43,
         "file": "data/maps/Route117/scripts.inc"
       },
       "badge": null,
@@ -89804,9 +89865,9 @@
       "sourceMap": "Route117",
       "source": {
         "map": "Route117",
-        "command": "trainerbattle_single",
+        "command": "trainerbattle_double",
         "role": "opponent",
-        "line": 42,
+        "line": 43,
         "file": "data/maps/Route117/scripts.inc"
       },
       "badge": null,
@@ -89968,7 +90029,7 @@
         "map": "Route117",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 64,
+        "line": 69,
         "file": "data/maps/Route117/scripts.inc"
       },
       "badge": null,
@@ -90132,7 +90193,7 @@
         "map": "Route117",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 64,
+        "line": 69,
         "file": "data/maps/Route117/scripts.inc"
       },
       "badge": null,
@@ -90296,7 +90357,7 @@
         "map": "Route117",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 64,
+        "line": 69,
         "file": "data/maps/Route117/scripts.inc"
       },
       "badge": null,
@@ -90459,7 +90520,7 @@
         "map": "Route117",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 86,
+        "line": 91,
         "file": "data/maps/Route117/scripts.inc"
       },
       "badge": null,
@@ -90566,7 +90627,7 @@
         "map": "Route117",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 86,
+        "line": 91,
         "file": "data/maps/Route117/scripts.inc"
       },
       "badge": null,
@@ -90691,7 +90752,7 @@
         "map": "Route117",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 86,
+        "line": 91,
         "file": "data/maps/Route117/scripts.inc"
       },
       "badge": null,
@@ -90816,7 +90877,7 @@
         "map": "Route117",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 108,
+        "line": 113,
         "file": "data/maps/Route117/scripts.inc"
       },
       "badge": null,
@@ -90921,7 +90982,7 @@
         "map": "Route117",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 108,
+        "line": 113,
         "file": "data/maps/Route117/scripts.inc"
       },
       "badge": null,
@@ -91026,7 +91087,7 @@
         "map": "Route117",
         "command": "trainerbattle_single",
         "role": "opponent",
-        "line": 108,
+        "line": 113,
         "file": "data/maps/Route117/scripts.inc"
       },
       "badge": null,
@@ -91149,7 +91210,7 @@
         "map": "Route117",
         "command": "trainerbattle_double",
         "role": "opponent",
-        "line": 136,
+        "line": 141,
         "file": "data/maps/Route117/scripts.inc"
       },
       "badge": null,
@@ -91274,7 +91335,7 @@
         "map": "Route117",
         "command": "trainerbattle_double",
         "role": "opponent",
-        "line": 136,
+        "line": 141,
         "file": "data/maps/Route117/scripts.inc"
       },
       "badge": null,
@@ -91399,7 +91460,7 @@
         "map": "Route117",
         "command": "trainerbattle_double",
         "role": "opponent",
-        "line": 136,
+        "line": 141,
         "file": "data/maps/Route117/scripts.inc"
       },
       "badge": null,
@@ -100546,8 +100607,8 @@
       "difficultyScore": 48,
       "difficultyBand": "Demanding",
       "difficultyExplanation": "4 fully authored Pok\u00e9mon, average BST 500.0, average cap offset -2.0, ace offset -2, and 0% held-item coverage.",
-      "uniquenessScore": 76,
-      "uniquenessExplanation": "Closest unrelated roster: Daisuke (25% species overlap). Its species appear across an average of 5.2 unrelated trainer families.",
+      "uniquenessScore": 75,
+      "uniquenessExplanation": "Closest unrelated roster: Daisuke (25% species overlap). Its species appear across an average of 5.5 unrelated trainer families.",
       "synergyTags": [
         "priority pressure"
       ],

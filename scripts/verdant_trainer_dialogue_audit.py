@@ -47,6 +47,7 @@ STRATEGY_CUES = {
     "Route114_Text_LennyIntro": "sandstorm carries thunder",
     "Route117_Text_AnnaIntro": "strengthens our footing",
     "Route117_Text_MegIntro": "If Muk joins us",
+    "Route117_Text_IsaacIntro": "guardian joins the class",
     "Route121_Text_KateIntro": "shut down every Ability",
     "Route121_Text_JoyIntro": "raw power",
     "Route133_Text_LindaIntro": "current turns, then snow",

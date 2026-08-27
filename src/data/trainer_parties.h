@@ -7424,41 +7424,53 @@ static const struct TrainerMonItemCustomMoves sParty_AnnaAndMeg4[] = {
 
 static const struct TrainerMonItemCustomMoves sParty_Isaac1[] = {
     {
-    .lvl = -5,
-    .species = SPECIES_BONSLY,
-    .spread = SPREAD_31_IV_0_EV,    
-    .moves = MOVE_ROCK_SLIDE, MOVE_CURSE, MOVE_FEINT_ATTACK, MOVE_LOW_KICK
-    },
+    .lvl = 2,
+    .species = SPECIES_MUNCHLAX,
+    .heldItem = ITEM_FIGY_BERRY,
+    .ability = 2,
+    .spread = SPREAD_31_IV_HP_ATK_BRAVE,
+    .moves = MOVE_BELLY_DRUM, MOVE_BODY_SLAM, MOVE_FIRE_PUNCH, MOVE_PROTECT
+    } /* Verdant polish: TRAINER_ISAAC_1 */,
     {
-    .lvl = -5,
-    .species = SPECIES_EEVEE,
-    .spread = SPREAD_31_IV_0_EV,    
-    .moves = MOVE_BATON_PASS, MOVE_YAWN, MOVE_WISH, MOVE_HYPER_VOICE
-    },
+    .lvl = 1,
+    .species = SPECIES_TOGEPI,
+    .heldItem = ITEM_EVIOLITE,
+    .ability = 1,
+    .spread = SPREAD_31_IV_HP_DEF_BOLD,
+    .moves = MOVE_FOLLOW_ME, MOVE_YAWN, MOVE_ENCORE, MOVE_ANCIENT_POWER
+    } /* Verdant polish: TRAINER_ISAAC_1 */,
     {
-    .lvl = -5,
-    .species = SPECIES_LITWICK,
-    .spread = SPREAD_31_IV_0_EV,    
-    .moves = MOVE_FLAME_BURST, MOVE_SHADOW_BALL, MOVE_ACID_ARMOR, MOVE_PAIN_SPLIT
-    },
+    .lvl = 4,
+    .species = SPECIES_KANGASKHAN,
+    .heldItem = ITEM_KANGASKHANITE,
+    .ability = 1,
+    .spread = SPREAD_31_IV_ATK_SPEED_ADAMANT,
+    .moves = MOVE_FAKE_OUT, MOVE_RETURN, MOVE_POWER_UP_PUNCH, MOVE_SUCKER_PUNCH
+    } /* Verdant polish: TRAINER_ISAAC_1 */,
     {
-    .lvl = -5,
-    .species = SPECIES_MANTYKE,
-    .spread = SPREAD_31_IV_0_EV,    
-    .moves = MOVE_SIGNAL_BEAM, MOVE_TAILWIND, MOVE_HYDRO_PUMP, MOVE_CONFUSE_RAY
-    },
+    .lvl = 2,
+    .species = SPECIES_FOONGUS,
+    .heldItem = ITEM_COBA_BERRY,
+    .ability = 2,
+    .spread = SPREAD_31_IV_HP_DEF_BOLD,
+    .moves = MOVE_RAGE_POWDER, MOVE_SPORE, MOVE_CLEAR_SMOG, MOVE_GIGA_DRAIN
+    } /* Verdant polish: TRAINER_ISAAC_1 */,
     {
-    .lvl = -5,
-    .species = SPECIES_DEINO,
-    .spread = SPREAD_31_IV_0_EV,    
-    .moves = MOVE_DARK_PULSE, MOVE_EARTH_POWER, MOVE_DRAGON_PULSE, MOVE_SLAM
-    },
+    .lvl = 3,
+    .species = SPECIES_ABRA,
+    .heldItem = ITEM_FOCUS_SASH,
+    .ability = 2,
+    .spread = SPREAD_31_IV_SPATK_SPEED_TIMID,
+    .moves = MOVE_PSYCHIC, MOVE_DAZZLING_GLEAM, MOVE_SHADOW_BALL, MOVE_ENCORE
+    } /* Verdant polish: TRAINER_ISAAC_1 */,
     {
-    .lvl = -5,
-    .species = SPECIES_TANGELA,
-    .spread = SPREAD_31_IV_0_EV,    
-    .moves = MOVE_SLEEP_POWDER, MOVE_WAKE_UP_SLAP, MOVE_GIGA_DRAIN, MOVE_AMNESIA
-    }
+    .lvl = 3,
+    .species = SPECIES_STARYU,
+    .heldItem = ITEM_LIFE_ORB,
+    .ability = 2,
+    .spread = SPREAD_31_IV_HP_SPATK_MODEST,
+    .moves = MOVE_HYDRO_PUMP, MOVE_ICE_BEAM, MOVE_THUNDERBOLT, MOVE_RECOVER
+    } /* Verdant polish: TRAINER_ISAAC_1 */
 };
 
 static const struct TrainerMonItemCustomMoves sParty_Isaac2[] = {
