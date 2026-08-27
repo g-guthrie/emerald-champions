@@ -1,0 +1,2006 @@
+{
+  "schema_version": 1,
+  "batch_id": "alola-national-dex-722-809-v1",
+  "reviews": [
+    {
+      "species": "SPECIES_ROWLET",
+      "role": "Tinted Lens physical attacker",
+      "moves": [
+        "MOVE_BRAVE_BIRD",
+        "MOVE_LEAF_BLADE",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_TINTED_LENS",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "ITEM_EVIOLITE supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 7 LC Rowlet Swords Dance analysis",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_ROWLET"
+      ],
+      "doubles_rationale": "Tinted Lens dual STAB is hard to wall, Sucker Punch adds priority, and Protect supplies doubles positioning.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Sucker Punch requires the target to attack."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Dropped setup for immediate, item-independent pressure."
+    },
+    {
+      "species": "SPECIES_DARTRIX",
+      "role": "Bulky Tinted Lens attacker",
+      "moves": [
+        "MOVE_BRAVE_BIRD",
+        "MOVE_LEAF_BLADE",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_TINTED_LENS",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "ITEM_EVIOLITE supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Rowlet-line Smogon analyses plus local Dartrix audit",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_DARTRIX"
+      ],
+      "doubles_rationale": "Eviolite bulk and Tinted Lens let Dartrix trade consistently while Sucker Punch covers its low Speed.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Sucker Punch is prediction-dependent."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Authored independently for Dartrix's higher bulk."
+    },
+    {
+      "species": "SPECIES_DECIDUEYE",
+      "role": "Fast trapper and Tailwind setter",
+      "moves": [
+        "MOVE_SPIRIT_SHACKLE",
+        "MOVE_LEAF_BLADE",
+        "MOVE_TAILWIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_TINTED_LENS",
+      "suggested_item": "ITEM_SITRUS_BERRY",
+      "item_context": "ITEM_SITRUS_BERRY supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Pokémon Showdown Gen 9 Random Doubles Decidueye set 023",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_DECIDUEYE"
+      ],
+      "doubles_rationale": "Spirit Shackle controls switching, Tailwind supports the side, and local 107 Attack/110 Speed make physical Tinted Lens pressure coherent.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Tailwind is most valuable with an offensive partner ready."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Removed the draft's incoherent mixed attacks."
+    },
+    {
+      "species": "SPECIES_LITTEN",
+      "role": "Intimidate disruption pivot",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_FLARE_BLITZ",
+        "MOVE_PARTING_SHOT",
+        "MOVE_WILL_O_WISP"
+      ],
+      "nature": "NATURE_CAREFUL",
+      "ability": "ABILITY_INTIMIDATE",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "ITEM_EVIOLITE supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 7 LC Litten Intimidate Pivot analysis",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_LITTEN"
+      ],
+      "doubles_rationale": "Fake Out buys tempo while Intimidate, Will-O-Wisp, and Parting Shot suppress damage and recycle board control.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Flare Blitz recoil limits repeated pivots."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Kept the proven support loop instead of adding setup."
+    },
+    {
+      "species": "SPECIES_TORRACAT",
+      "role": "Fast Intimidate pivot",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_FLARE_BLITZ",
+        "MOVE_PARTING_SHOT",
+        "MOVE_TAUNT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_INTIMIDATE",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "ITEM_EVIOLITE supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 8 NFE Torracat analysis plus VGC Incineroar precedent",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_TORRACAT"
+      ],
+      "doubles_rationale": "Fake Out, Taunt, and Parting Shot exploit local base 90 Speed while Flare Blitz prevents passivity.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "The set intentionally omits Protect to preserve the full pivot package."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Replaced singles Swords Dance with doubles-native disruption."
+    },
+    {
+      "species": "SPECIES_INCINEROAR",
+      "role": "Premier Intimidate Fake Out pivot",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_FLARE_BLITZ",
+        "MOVE_KNOCK_OFF",
+        "MOVE_PARTING_SHOT"
+      ],
+      "nature": "NATURE_CAREFUL",
+      "ability": "ABILITY_INTIMIDATE",
+      "suggested_item": "ITEM_SITRUS_BERRY",
+      "item_context": "ITEM_SITRUS_BERRY supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 9 National Dex Doubles Fake Out Support and VGC analyses",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_INCINEROAR"
+      ],
+      "doubles_rationale": "The canonical Fake Out, Knock Off, Parting Shot, and Intimidate loop creates tempo while Flare Blitz prevents free turns.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Parting Shot needs a healthy switch-in."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Accepted the cross-generation doubles consensus set."
+    },
+    {
+      "species": "SPECIES_POPPLIO",
+      "role": "Liquid Voice spread attacker",
+      "moves": [
+        "MOVE_HYPER_VOICE",
+        "MOVE_MOONBLAST",
+        "MOVE_ICY_WIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_LIQUID_VOICE",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "ITEM_EVIOLITE supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Primarina VGC Liquid Voice precedent adapted to Popplio",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_POPPLIO"
+      ],
+      "doubles_rationale": "Liquid Voice Hyper Voice pressures both foes, Icy Wind controls Speed, and Moonblast gives focused damage.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Liquid Voice is essential to make Hyper Voice Water STAB."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Replaced inaccurate Hydro Pump with reliable spread pressure."
+    },
+    {
+      "species": "SPECIES_BRIONNE",
+      "role": "Bulky Liquid Voice controller",
+      "moves": [
+        "MOVE_HYPER_VOICE",
+        "MOVE_MOONBLAST",
+        "MOVE_ICY_WIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_LIQUID_VOICE",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "ITEM_EVIOLITE supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Primarina VGC Liquid Voice precedent adapted to Brionne",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_BRIONNE"
+      ],
+      "doubles_rationale": "Accurate spread Water damage plus Icy Wind lets Brionne support its partner while using its local 91 Special Attack.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Icy Wind is selected for control rather than raw damage."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Authored around Brionne's Eviolite bulk."
+    },
+    {
+      "species": "SPECIES_PRIMARINA",
+      "role": "Liquid Voice spread breaker",
+      "moves": [
+        "MOVE_HYPER_VOICE",
+        "MOVE_MOONBLAST",
+        "MOVE_ICY_WIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_LIQUID_VOICE",
+      "suggested_item": "ITEM_THROAT_SPRAY",
+      "item_context": "ITEM_THROAT_SPRAY supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 8 VGC 2020 Primarina Offensive analysis",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_PRIMARINA"
+      ],
+      "doubles_rationale": "Hyper Voice and Moonblast provide reliable damage while Icy Wind adds universally useful doubles speed control.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Throat Spray is optional and activates after Hyper Voice."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Replaced narrow Energy Ball coverage with Icy Wind."
+    },
+    {
+      "species": "SPECIES_PIKIPEK",
+      "role": "Skill Link multi-hit attacker",
+      "moves": [
+        "MOVE_BRAVE_BIRD",
+        "MOVE_BULLET_SEED",
+        "MOVE_ROCK_BLAST",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_SKILL_LINK",
+      "suggested_item": "ITEM_FOCUS_SASH",
+      "item_context": "ITEM_FOCUS_SASH supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 7 LC Pikipek Life Orb analysis",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_PIKIPEK"
+      ],
+      "doubles_rationale": "Skill Link makes Bullet Seed and Rock Blast reliable five-hit coverage while Brave Bird supplies strong STAB.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Focus Sash requires full HP and Brave Bird recoil can consume it."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Removed weaker Brick Break and Flame Charge."
+    },
+    {
+      "species": "SPECIES_TRUMBEAK",
+      "role": "Eviolite Skill Link attacker",
+      "moves": [
+        "MOVE_BRAVE_BIRD",
+        "MOVE_BULLET_SEED",
+        "MOVE_ROCK_BLAST",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_SKILL_LINK",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "ITEM_EVIOLITE supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Pikipek LC and Toucannon doubles Skill Link precedent",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_TRUMBEAK"
+      ],
+      "doubles_rationale": "Brave Bird plus two guaranteed five-hit moves gives immediate coverage and anti-Sash utility.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Brave Bird recoil reduces Eviolite longevity."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Rejected inferior Fury Attack neutral coverage."
+    },
+    {
+      "species": "SPECIES_TOUCANNON",
+      "role": "Bulky Beak Blast Skill Link attacker",
+      "moves": [
+        "MOVE_BEAK_BLAST",
+        "MOVE_BULLET_SEED",
+        "MOVE_ROCK_BLAST",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_SKILL_LINK",
+      "suggested_item": "ITEM_SITRUS_BERRY",
+      "item_context": "ITEM_SITRUS_BERRY supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Pokémon Showdown Gen 7 Random Doubles Toucannon set 019",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_TOUCANNON"
+      ],
+      "doubles_rationale": "Beak Blast punishes contact while Skill Link guarantees maximum Bullet Seed and Rock Blast hits.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Beak Blast moves late and can be disrupted before firing."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Kept the distinctive direct doubles set."
+    },
+    {
+      "species": "SPECIES_GUMSHOOS",
+      "role": "Adaptability wallbreaker",
+      "moves": [
+        "MOVE_BODY_SLAM",
+        "MOVE_CRUNCH",
+        "MOVE_STOMPING_TANTRUM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_ADAPTABILITY",
+      "suggested_item": "ITEM_LIFE_ORB",
+      "item_context": "ITEM_LIFE_ORB supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 7 PU Gumshoos Choice Band analysis, doubles-adapted",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_GUMSHOOS"
+      ],
+      "doubles_rationale": "Adaptability Body Slam is strong reliable STAB and Crunch plus Stomping Tantrum cover its immunities and resists.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Gumshoos benefits heavily from external speed control."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Avoided Choice dependence and ally-damaging Earthquake."
+    },
+    {
+      "species": "SPECIES_VIKAVOLT",
+      "role": "Special attacker and Electroweb controller",
+      "moves": [
+        "MOVE_THUNDERBOLT",
+        "MOVE_BUG_BUZZ",
+        "MOVE_ELECTROWEB",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_LEVITATE",
+      "suggested_item": "ITEM_SITRUS_BERRY",
+      "item_context": "ITEM_SITRUS_BERRY supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 7 VGC 2017 Vikavolt analyses",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_VIKAVOLT"
+      ],
+      "doubles_rationale": "Base 145 Special Attack supplies focused damage while Electroweb slows both foes and Levitate eases partner Earthquake use.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Electroweb is chosen for control instead of maximum damage."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Modest is justified by the local base 109 Speed buff."
+    },
+    {
+      "species": "SPECIES_CRABRAWLER",
+      "role": "Iron Fist priority attacker",
+      "moves": [
+        "MOVE_DRAIN_PUNCH",
+        "MOVE_ICE_PUNCH",
+        "MOVE_MACH_PUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_IRON_FIST",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "ITEM_EVIOLITE supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 9 LC Crabrawler analysis plus Crabominable doubles precedent",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_CRABRAWLER"
+      ],
+      "doubles_rationale": "Iron Fist boosts sustain, coverage, and priority so Crabrawler contributes immediately without a setup turn.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Mach Punch is strongest after a partner has softened targets."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Removed Bulk Up for reliability on a fragile pre-evolution."
+    },
+    {
+      "species": "SPECIES_CRABOMINABLE",
+      "role": "Trick Room Iron Fist bruiser",
+      "moves": [
+        "MOVE_ICE_HAMMER",
+        "MOVE_DRAIN_PUNCH",
+        "MOVE_MACH_PUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BRAVE",
+      "ability": "ABILITY_IRON_FIST",
+      "suggested_item": "ITEM_LIFE_ORB",
+      "item_context": "ITEM_LIFE_ORB supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Pokémon Showdown Emerald Champions Random Doubles Crabominable set 008",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_CRABOMINABLE"
+      ],
+      "doubles_rationale": "Two powerful Iron Fist STAB attacks, priority, and Protect make a complete Trick Room attacker.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Brave helps Trick Room but the builder does not set a zero Speed IV."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Accepted the direct local doubles core."
+    },
+    {
+      "species": "SPECIES_ORICORIO",
+      "role": "Dancer Tailwind attacker",
+      "moves": [
+        "MOVE_REVELATION_DANCE",
+        "MOVE_AIR_SLASH",
+        "MOVE_TAILWIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_DANCER",
+      "suggested_item": "ITEM_SITRUS_BERRY",
+      "item_context": "ITEM_SITRUS_BERRY supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Pokémon Showdown Gen 9 Random Doubles Oricorio sets 010 and 022",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_ORICORIO"
+      ],
+      "doubles_rationale": "Reliable dual STAB and Tailwind work on every team while Dancer adds a high ceiling with dance-using partners.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Dancer partner synergy is optional, not required."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Replaced weather-sensitive Hurricane with Air Slash."
+    },
+    {
+      "species": "SPECIES_CUTIEFLY",
+      "role": "Sweet Veil Tailwind lead",
+      "moves": [
+        "MOVE_TAILWIND",
+        "MOVE_MOONBLAST",
+        "MOVE_STUN_SPORE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_SWEET_VEIL",
+      "suggested_item": "ITEM_FOCUS_SASH",
+      "item_context": "ITEM_FOCUS_SASH supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 9 NFE Cutiefly Sticky Web Lead analysis, doubles-adapted",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_CUTIEFLY"
+      ],
+      "doubles_rationale": "Tailwind gives immediate sidewide Speed while Sweet Veil blocks sleep and Stun Spore extends control.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Stun Spore is inaccurate and Focus Sash requires full HP."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Replaced singles Sticky Web with immediate doubles control."
+    },
+    {
+      "species": "SPECIES_RIBOMBEE",
+      "role": "Fast Sweet Veil Tailwind healer",
+      "moves": [
+        "MOVE_POLLEN_PUFF",
+        "MOVE_MOONBLAST",
+        "MOVE_TAILWIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_SWEET_VEIL",
+      "suggested_item": "ITEM_FOCUS_SASH",
+      "item_context": "ITEM_FOCUS_SASH supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 9 Ribombee analyses plus doubles Pollen Puff precedent",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_RIBOMBEE"
+      ],
+      "doubles_rationale": "Pollen Puff can heal an ally or attack, Tailwind controls Speed, and Sweet Veil protects both partners from sleep.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Pollen Puff's target must be chosen according to whether healing or damage matters."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Rebuilt the singles hazard draft into a native doubles support set."
+    },
+    {
+      "species": "SPECIES_ROCKRUFF",
+      "role": "Rock Slide priority attacker",
+      "moves": [
+        "MOVE_ROCK_SLIDE",
+        "MOVE_PSYCHIC_FANGS",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_VITAL_SPIRIT",
+      "suggested_item": "ITEM_FOCUS_SASH",
+      "item_context": "ITEM_FOCUS_SASH supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 7 LC Rockruff All-out Attacker analysis",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_ROCKRUFF"
+      ],
+      "doubles_rationale": "Rock Slide pressures both foes, Psychic Fangs breaks screens, and Sucker Punch covers Rockruff's middling Speed.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Rock Slide accuracy and Sucker Punch prediction add variance."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Selected spread pressure over single-target Stone Edge."
+    },
+    {
+      "species": "SPECIES_LYCANROC",
+      "role": "Fast Sand Rush Rock/Ground attacker",
+      "moves": [
+        "MOVE_ROCK_SLIDE",
+        "MOVE_DRILL_RUN",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_SAND_RUSH",
+      "suggested_item": "ITEM_LIFE_ORB",
+      "item_context": "ITEM_LIFE_ORB supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 9 Lycanroc analyses plus local Rock/Ground audit",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_LYCANROC"
+      ],
+      "doubles_rationale": "Rock Slide and partner-safe Drill Run exploit both local STAB types, with Close Combat breaking Steel targets.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Sand Rush is inactive without sand, though all four moves remain functional."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Rebuilt around the custom local typing instead of singles hazards."
+    },
+    {
+      "species": "SPECIES_WISHIWASHI",
+      "role": "Schooling spread special attacker",
+      "moves": [
+        "MOVE_MUDDY_WATER",
+        "MOVE_ICE_BEAM",
+        "MOVE_HELPING_HAND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_SCHOOLING",
+      "suggested_item": "ITEM_SITRUS_BERRY",
+      "item_context": "ITEM_SITRUS_BERRY supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Pokémon Showdown Gen 7 Random Doubles Wishiwashi set 014",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_WISHIWASHI"
+      ],
+      "doubles_rationale": "Muddy Water pressures both foes in School Form while Helping Hand remains useful after Wishiwashi falls below its Schooling threshold.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Schooling loses combat value below its HP threshold."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Removed Hidden Power and replaced Hydro Pump with spread damage."
+    },
+    {
+      "species": "SPECIES_TOXAPEX",
+      "role": "Regenerator anti-setup spread guard",
+      "moves": [
+        "MOVE_SCALD",
+        "MOVE_HAZE",
+        "MOVE_RECOVER",
+        "MOVE_WIDE_GUARD"
+      ],
+      "nature": "NATURE_BOLD",
+      "ability": "ABILITY_REGENERATOR",
+      "suggested_item": "ITEM_BLACK_SLUDGE",
+      "item_context": "ITEM_BLACK_SLUDGE supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon/VGC Toxapex support principles plus Emerald Champions Wolfe-corpus Wide Guard reference",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_TOXAPEX"
+      ],
+      "doubles_rationale": "Scald threatens burns, Haze resets setup, Recover sustains, and Wide Guard blocks the spread attacks central to hard doubles.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Wide Guard is not a general Protect substitute."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Replaced slow Infestation/Toxic attrition with immediate board control."
+    },
+    {
+      "species": "SPECIES_MUDBRAY",
+      "role": "Eviolite Stamina bruiser",
+      "moves": [
+        "MOVE_HIGH_HORSEPOWER",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_HEAVY_SLAM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BRAVE",
+      "ability": "ABILITY_STAMINA",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "ITEM_EVIOLITE supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 8 LC Mudbray analysis, doubles-adapted",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_MUDBRAY"
+      ],
+      "doubles_rationale": "Partner-safe Ground STAB, spread Rock damage, Fairy coverage, and Stamina create a durable Trick Room attacker.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Brave helps Trick Room but Speed IVs are unchanged."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Removed hazards and ally-damaging Earthquake."
+    },
+    {
+      "species": "SPECIES_MUDSDALE",
+      "role": "Stamina Trick Room tank",
+      "moves": [
+        "MOVE_HIGH_HORSEPOWER",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_BODY_PRESS",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BRAVE",
+      "ability": "ABILITY_STAMINA",
+      "suggested_item": "ITEM_SITRUS_BERRY",
+      "item_context": "ITEM_SITRUS_BERRY supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Pokémon Showdown Emerald Champions Random Doubles Mudsdale sets 006 and 008",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_MUDSDALE"
+      ],
+      "doubles_rationale": "Stamina progressively powers Body Press while High Horsepower and Rock Slide provide partner-safe focused and spread pressure.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Body Press improves after Stamina boosts."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Completed the direct local shell and removed Stealth Rock."
+    },
+    {
+      "species": "SPECIES_ARAQUANID",
+      "role": "Water Bubble attacker and spread guard",
+      "moves": [
+        "MOVE_LIQUIDATION",
+        "MOVE_LUNGE",
+        "MOVE_WIDE_GUARD",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BRAVE",
+      "ability": "ABILITY_WATER_BUBBLE",
+      "suggested_item": "ITEM_SITRUS_BERRY",
+      "item_context": "ITEM_SITRUS_BERRY supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 7 VGC and Doubles OU Araquanid analyses",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_ARAQUANID"
+      ],
+      "doubles_rationale": "Water Bubble Liquidation supplies huge focused damage while Lunge debuffs Attack and Wide Guard protects both allies.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Wide Guard is matchup-specific."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Upgraded Bug Bite to Lunge within the proven VGC shell."
+    },
+    {
+      "species": "SPECIES_FOMANTIS",
+      "role": "Contrary special sustain",
+      "moves": [
+        "MOVE_LEAF_STORM",
+        "MOVE_AROMATHERAPY",
+        "MOVE_SYNTHESIS",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_CONTRARY",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "ITEM_EVIOLITE supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 7 LC Fomantis Defensive analysis, doubles-adapted",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_FOMANTIS"
+      ],
+      "doubles_rationale": "Contrary turns Leaf Storm into a snowball while Aromatherapy, Synthesis, and Protect give team support and longevity.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Synthesis recovery is weather-sensitive."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Removed mixed offense for a coherent Contrary role."
+    },
+    {
+      "species": "SPECIES_LURANTIS",
+      "role": "Contrary Trick Room snowball attacker",
+      "moves": [
+        "MOVE_LEAF_BLADE",
+        "MOVE_SUPERPOWER",
+        "MOVE_KNOCK_OFF",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BRAVE",
+      "ability": "ABILITY_CONTRARY",
+      "suggested_item": "ITEM_SITRUS_BERRY",
+      "item_context": "ITEM_SITRUS_BERRY supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 8 Doubles OU Lurantis Trick Room Attacker analysis",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_LURANTIS"
+      ],
+      "doubles_rationale": "Contrary makes Superpower boost Attack and Defense while Leaf Blade and Knock Off provide reliable damage and utility.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Brave supports Trick Room but Speed IVs are unchanged."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Accepted the direct doubles set after local legality review."
+    },
+    {
+      "species": "SPECIES_SHIINOTIC",
+      "role": "Bulky Spore controller",
+      "moves": [
+        "MOVE_SPORE",
+        "MOVE_STRENGTH_SAP",
+        "MOVE_MOONBLAST",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BOLD",
+      "ability": "ABILITY_EFFECT_SPORE",
+      "suggested_item": "ITEM_SITRUS_BERRY",
+      "item_context": "ITEM_SITRUS_BERRY supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 8 ZU Shiinotic Physical Wall analysis, doubles-adapted",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_SHIINOTIC"
+      ],
+      "doubles_rationale": "Spore, Strength Sap, and Moonblast combine immediate control, sustain, and real offensive presence.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Grass and sleep-immune targets invalidate Spore."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Removed redundant Toxic from the draft."
+    },
+    {
+      "species": "SPECIES_SALANDIT",
+      "role": "Fake Out special support",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_HEAT_WAVE",
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_OBLIVIOUS",
+      "suggested_item": "ITEM_FOCUS_SASH",
+      "item_context": "ITEM_FOCUS_SASH supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 9 LC Salandit analysis plus Salazzle VGC precedent",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_SALANDIT"
+      ],
+      "doubles_rationale": "Fake Out creates tempo, Heat Wave hits both foes, and Oblivious prevents Taunt from stopping the support turn.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Focus Sash requires full HP."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Chose Oblivious because the set does not use Toxic."
+    },
+    {
+      "species": "SPECIES_SALAZZLE",
+      "role": "Fast Fake Out Encore disruptor",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_HEAT_WAVE",
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_ENCORE"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_OBLIVIOUS",
+      "suggested_item": "ITEM_FOCUS_SASH",
+      "item_context": "ITEM_FOCUS_SASH supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 7 VGC 2017 Salazzle Offensive Support analysis",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_SALAZZLE"
+      ],
+      "doubles_rationale": "Fast Fake Out and Encore punish passive turns while dual STAB keeps Salazzle dangerous.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "The set intentionally omits Protect and Focus Sash requires full HP."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Selected the most disruptive direct doubles variant."
+    },
+    {
+      "species": "SPECIES_STUFFUL",
+      "role": "Fluffy physical guard",
+      "moves": [
+        "MOVE_BRICK_BREAK",
+        "MOVE_ICE_PUNCH",
+        "MOVE_WIDE_GUARD",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_FLUFFY",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "ITEM_EVIOLITE supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 7 LC Stufful analysis, doubles-adapted",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_STUFFUL"
+      ],
+      "doubles_rationale": "Brick Break removes screens, Wide Guard protects both allies, and Fluffy plus Eviolite supports repeated utility.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Fluffy increases Fire damage taken."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Removed setup and inaccurate Mega Kick."
+    },
+    {
+      "species": "SPECIES_BEWEAR",
+      "role": "Fluffy physical bruiser",
+      "moves": [
+        "MOVE_DRAIN_PUNCH",
+        "MOVE_ICE_PUNCH",
+        "MOVE_HIGH_HORSEPOWER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_FLUFFY",
+      "suggested_item": "ITEM_LIFE_ORB",
+      "item_context": "ITEM_LIFE_ORB supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Pokémon Showdown Gen 8 Random Doubles Bewear set 003, locally completed",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_BEWEAR"
+      ],
+      "doubles_rationale": "Drain Punch sustains while Ice Punch and High Horsepower offer strong partner-safe coverage.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Fluffy doubles Fire damage."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Replaced locally illegal Darkest Lariat and Giga Impact."
+    },
+    {
+      "species": "SPECIES_STEENEE",
+      "role": "Sweet Veil screen support",
+      "moves": [
+        "MOVE_SEED_BOMB",
+        "MOVE_HELPING_HAND",
+        "MOVE_LIGHT_SCREEN",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CAREFUL",
+      "ability": "ABILITY_SWEET_VEIL",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "ITEM_EVIOLITE supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Bounsweet-line Smogon support analyses plus local Steenee audit",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_STEENEE"
+      ],
+      "doubles_rationale": "Sweet Veil blocks sleep, Light Screen protects the side, and Helping Hand amplifies partner damage.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Helping Hand requires an attacking partner."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Rebuilt the mixed special draft around support."
+    },
+    {
+      "species": "SPECIES_TSAREENA",
+      "role": "Queenly Majesty fast attacker",
+      "moves": [
+        "MOVE_POWER_WHIP",
+        "MOVE_HIGH_JUMP_KICK",
+        "MOVE_TRIPLE_AXEL",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_QUEENLY_MAJESTY",
+      "suggested_item": "ITEM_LIFE_ORB",
+      "item_context": "ITEM_LIFE_ORB supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 8 Doubles OU Tsareena Pivot analysis, local typing-adapted",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_TSAREENA"
+      ],
+      "doubles_rationale": "Queenly Majesty protects both allies from priority while local Grass/Fighting STAB and Triple Axel give broad pressure.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "High Jump Kick can crash and Triple Axel has repeated accuracy checks."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Rebuilt for local 120 Attack, 108 Speed, and Fighting typing."
+    },
+    {
+      "species": "SPECIES_COMFEY",
+      "role": "Triage priority healer",
+      "moves": [
+        "MOVE_FLORAL_HEALING",
+        "MOVE_DRAINING_KISS",
+        "MOVE_HELPING_HAND",
+        "MOVE_TRICK_ROOM"
+      ],
+      "nature": "NATURE_BOLD",
+      "ability": "ABILITY_TRIAGE",
+      "suggested_item": "ITEM_SITRUS_BERRY",
+      "item_context": "ITEM_SITRUS_BERRY supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Comfey support analyses plus VGC Triage precedent",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_COMFEY"
+      ],
+      "doubles_rationale": "Triage gives priority to Floral Healing and Draining Kiss, Helping Hand boosts the partner, and Trick Room can establish or reverse speed control.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Floral Healing and Helping Hand require a useful partner target."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Rejected the singles Calm Mind shell for direct doubles support."
+    },
+    {
+      "species": "SPECIES_ORANGURU",
+      "role": "Inner Focus Trick Room instructor",
+      "moves": [
+        "MOVE_TRICK_ROOM",
+        "MOVE_PSYCHIC",
+        "MOVE_INSTRUCT",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_SASSY",
+      "ability": "ABILITY_INNER_FOCUS",
+      "suggested_item": "ITEM_MENTAL_HERB",
+      "item_context": "ITEM_MENTAL_HERB supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 7 VGC 2017 Oranguru Trick Room analysis",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_ORANGURU"
+      ],
+      "doubles_rationale": "Inner Focus helps secure Trick Room, Instruct repeats a partner's strongest action, and Protect preserves Oranguru for later speed resets.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Instruct requires a compatible partner action and Sassy does not set zero Speed IVs."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Accepted the proven VGC set."
+    },
+    {
+      "species": "SPECIES_PASSIMIAN",
+      "role": "Defiant Choice-style pivot",
+      "moves": [
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_KNOCK_OFF",
+        "MOVE_U_TURN",
+        "MOVE_ROCK_SLIDE"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_DEFIANT",
+      "suggested_item": "ITEM_CHOICE_SCARF",
+      "item_context": "ITEM_CHOICE_SCARF supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Pokémon Showdown Emerald Champions Random Doubles Passimian set 008",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_PASSIMIAN"
+      ],
+      "doubles_rationale": "Defiant punishes opposing stat drops while Close Combat, Knock Off, U-turn, and spread Rock Slide maintain pressure and tempo.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Choice Scarf would lock moves, but the four attacks work without it."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Replaced Gunk Shot with broader spread utility."
+    },
+    {
+      "species": "SPECIES_GOLISOPOD",
+      "role": "Emergency Exit priority attacker",
+      "moves": [
+        "MOVE_FIRST_IMPRESSION",
+        "MOVE_LIQUIDATION",
+        "MOVE_KNOCK_OFF",
+        "MOVE_WIDE_GUARD"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_EMERGENCY_EXIT",
+      "suggested_item": "ITEM_SITRUS_BERRY",
+      "item_context": "ITEM_SITRUS_BERRY supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 8 Golisopod analysis plus doubles Wide Guard precedent",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_GOLISOPOD"
+      ],
+      "doubles_rationale": "First Impression creates immediate pressure, Emergency Exit can reset it, and Wide Guard protects the side from spread attacks.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Emergency Exit can force an unwanted switch at half HP."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Replaced singles Spikes with doubles-native Wide Guard."
+    },
+    {
+      "species": "SPECIES_SANDYGAST",
+      "role": "Eviolite Water Compaction wall",
+      "moves": [
+        "MOVE_SCORCHING_SANDS",
+        "MOVE_SHADOW_BALL",
+        "MOVE_SHORE_UP",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BOLD",
+      "ability": "ABILITY_WATER_COMPACTION",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "ITEM_EVIOLITE supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 8 LC Sandygast Defensive analysis",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_SANDYGAST"
+      ],
+      "doubles_rationale": "Reliable dual STAB, burn pressure, recovery, and Protect let Sandygast exploit Water Compaction without becoming passive.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Water Compaction raises Defense but does not prevent Water damage."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Removed singles Stealth Rock."
+    },
+    {
+      "species": "SPECIES_PALOSSAND",
+      "role": "Self-sufficient Sand Stream wall",
+      "moves": [
+        "MOVE_EARTH_POWER",
+        "MOVE_SHADOW_BALL",
+        "MOVE_SHORE_UP",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BOLD",
+      "ability": "ABILITY_SAND_STREAM",
+      "suggested_item": "ITEM_LEFTOVERS",
+      "item_context": "ITEM_LEFTOVERS supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Pokémon Showdown Gen 7 Random Doubles Palossand set 022 plus local Sand Stream audit",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_PALOSSAND"
+      ],
+      "doubles_rationale": "Sand Stream improves Shore Up and adds chip while dual STAB and Protect make Palossand self-contained.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Sand can damage non-immune partners."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Selected the locally added Sand Stream over Water Compaction for autonomous value."
+    },
+    {
+      "species": "SPECIES_PYUKUMUKU",
+      "role": "Unaware Helping Hand wall",
+      "moves": [
+        "MOVE_HELPING_HAND",
+        "MOVE_SOAK",
+        "MOVE_RECOVER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BOLD",
+      "ability": "ABILITY_UNAWARE",
+      "suggested_item": "ITEM_LEFTOVERS",
+      "item_context": "ITEM_LEFTOVERS supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 7 Pyukumuku Unaware Wall analysis, doubles-adapted",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_PYUKUMUKU"
+      ],
+      "doubles_rationale": "Unaware checks setup, Helping Hand gives immediate partner value, Soak enables unusual targeting, and Recover plus Protect sustain it.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "The set has no direct attack and needs a partner to convert support into damage."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Replaced the singles trapping loop with active doubles utility."
+    },
+    {
+      "species": "SPECIES_TYPE_NULL",
+      "role": "Eviolite speed-control pivot",
+      "moves": [
+        "MOVE_ICY_WIND",
+        "MOVE_THUNDER_WAVE",
+        "MOVE_U_TURN",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CAREFUL",
+      "ability": "ABILITY_BATTLE_ARMOR",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "ITEM_EVIOLITE supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 8 ZU Type: Null Defensive Pivot analysis, doubles-adapted",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_TYPE_NULL"
+      ],
+      "doubles_rationale": "Exceptional Eviolite bulk supports repeated Icy Wind and Thunder Wave control while U-turn maintains positioning.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Ground and Electric immunities can block Thunder Wave depending on local rules."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Removed singles RestTalk for immediate team tempo."
+    },
+    {
+      "species": "SPECIES_SILVALLY",
+      "role": "Tailwind Parting Shot pivot",
+      "moves": [
+        "MOVE_MULTI_ATTACK",
+        "MOVE_TAILWIND",
+        "MOVE_PARTING_SHOT",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_RKS_SYSTEM",
+      "suggested_item": "ITEM_SITRUS_BERRY",
+      "item_context": "ITEM_SITRUS_BERRY supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Silvally analyses plus local doubles audit",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_SILVALLY"
+      ],
+      "doubles_rationale": "Multi-Attack remains functional as Normal STAB without a Memory, while Tailwind and Parting Shot support every partner.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Multi-Attack's type changes only if the player equips a compatible Memory."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Avoided assuming a specific Memory item."
+    },
+    {
+      "species": "SPECIES_MINIOR",
+      "role": "White Herb Shell Smash sweeper",
+      "moves": [
+        "MOVE_SHELL_SMASH",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_ACROBATICS",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_SHIELDS_DOWN",
+      "suggested_item": "ITEM_WHITE_HERB",
+      "item_context": "ITEM_WHITE_HERB supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 9 Minior Shell Smash analysis, doubles-adapted",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_MINIOR"
+      ],
+      "doubles_rationale": "Shell Smash creates immediate sweeping pressure, Rock Slide hits both foes, and Acrobatics becomes stronger after White Herb is consumed.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "White Herb enables the cleanest setup and Acrobatics sequence but is not installed."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Removed ally-damaging Earthquake from the default."
+    },
+    {
+      "species": "SPECIES_KOMALA",
+      "role": "Comatose setup attacker",
+      "moves": [
+        "MOVE_SWORDS_DANCE",
+        "MOVE_BODY_SLAM",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_COMATOSE",
+      "suggested_item": "ITEM_SITRUS_BERRY",
+      "item_context": "ITEM_SITRUS_BERRY supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Pokémon Showdown Gen 7 Random Doubles Komala set 001, happiness-safe adaptation",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_KOMALA"
+      ],
+      "doubles_rationale": "Comatose blocks ordinary status disruption, Swords Dance creates a win condition, and Sucker Punch covers Komala's moderate Speed.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Sucker Punch requires an attacking target."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Replaced unsafe Return with reliable Body Slam."
+    },
+    {
+      "species": "SPECIES_TURTONATOR",
+      "role": "White Herb Shell Smash attacker",
+      "moves": [
+        "MOVE_SHELL_SMASH",
+        "MOVE_HEAT_WAVE",
+        "MOVE_DRAGON_PULSE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_SHELL_ARMOR",
+      "suggested_item": "ITEM_WHITE_HERB",
+      "item_context": "ITEM_WHITE_HERB supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 8 Turtonator Shell Smash analysis, doubles-adapted",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_TURTONATOR"
+      ],
+      "doubles_rationale": "Shell Smash raises offensive tempo, Heat Wave provides spread STAB, Dragon Pulse is reliable focused coverage, and Shell Armor prevents critical hits through setup.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "White Herb is strongly preferred after Shell Smash but is not installed."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Replaced single-target Fire Blast and Draco Meteor with reliable doubles attacks."
+    },
+    {
+      "species": "SPECIES_TOGEDEMARU",
+      "role": "Sturdy Fake Out Endeavor disruptor",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_NUZZLE",
+        "MOVE_ENDEAVOR",
+        "MOVE_SPIKY_SHIELD"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_STURDY",
+      "suggested_item": "ITEM_BERRY_JUICE",
+      "item_context": "ITEM_BERRY_JUICE supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 7 Doubles OU Togedemaru Endeavor Support analysis",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_TOGEDEMARU"
+      ],
+      "doubles_rationale": "Fake Out buys tempo, Nuzzle gives guaranteed paralysis, Sturdy enables Endeavor, and Spiky Shield protects while punishing contact.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Sturdy requires full HP for the Endeavor line."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Adapted the level-one concept into a normal-level Jolly campaign set."
+    },
+    {
+      "species": "SPECIES_MIMIKYU",
+      "role": "Disguise Trick Room disruptor",
+      "moves": [
+        "MOVE_PLAY_ROUGH",
+        "MOVE_SHADOW_SNEAK",
+        "MOVE_WILL_O_WISP",
+        "MOVE_TRICK_ROOM"
+      ],
+      "nature": "NATURE_IMPISH",
+      "ability": "ABILITY_DISGUISE",
+      "suggested_item": "ITEM_MENTAL_HERB",
+      "item_context": "ITEM_MENTAL_HERB supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 8 VGC 2021 Mimikyu Trick Room analysis",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_MIMIKYU"
+      ],
+      "doubles_rationale": "Disguise helps guarantee Trick Room, Will-O-Wisp cuts physical damage, and dual attacks prevent passivity.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "The set intentionally omits Protect because Disguise supplies the opening safety turn."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Accepted the proven VGC support structure."
+    },
+    {
+      "species": "SPECIES_BRUXISH",
+      "role": "Strong Jaw setup attacker",
+      "moves": [
+        "MOVE_PSYCHIC_FANGS",
+        "MOVE_AQUA_JET",
+        "MOVE_SWORDS_DANCE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_STRONG_JAW",
+      "suggested_item": "ITEM_SITRUS_BERRY",
+      "item_context": "ITEM_SITRUS_BERRY supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Pokémon Showdown Gen 7 Random Doubles Bruxish set 026",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_BRUXISH"
+      ],
+      "doubles_rationale": "Strong Jaw Psychic Fangs breaks screens, Swords Dance raises pressure, Aqua Jet supplies priority, and Protect enables setup positioning.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Aqua Jet is not boosted by Strong Jaw."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Accepted the direct doubles set."
+    },
+    {
+      "species": "SPECIES_DRAMPA",
+      "role": "Berserk Glare spread attacker",
+      "moves": [
+        "MOVE_HYPER_VOICE",
+        "MOVE_DRACO_METEOR",
+        "MOVE_GLARE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_BERSERK",
+      "suggested_item": "ITEM_SITRUS_BERRY",
+      "item_context": "ITEM_SITRUS_BERRY supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Pokémon Showdown Emerald Champions Random Doubles Drampa set 024",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_DRAMPA"
+      ],
+      "doubles_rationale": "Hyper Voice pressures both foes, Glare supplies accurate paralysis, and Berserk punishes attempts to chip Drampa below half HP.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Draco Meteor lowers Special Attack and should be timed as a finisher."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Replaced Roost with Protect for safer doubles positioning."
+    },
+    {
+      "species": "SPECIES_DHELMISE",
+      "role": "Steelworker Trick Room attacker",
+      "moves": [
+        "MOVE_HEAVY_SLAM",
+        "MOVE_POWER_WHIP",
+        "MOVE_SHADOW_CLAW",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BRAVE",
+      "ability": "ABILITY_STEELWORKER",
+      "suggested_item": "ITEM_LIFE_ORB",
+      "item_context": "ITEM_LIFE_ORB supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 7 VGC 2017 Dhelmise Offensive analysis",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_DHELMISE"
+      ],
+      "doubles_rationale": "Steelworker effectively supplies a third STAB, giving Dhelmise three powerful focused attacks under Trick Room.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Brave improves Trick Room use but does not set zero Speed IVs."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Accepted the direct VGC set."
+    },
+    {
+      "species": "SPECIES_JANGMO_O",
+      "role": "Eviolite anti-powder controller",
+      "moves": [
+        "MOVE_DRAGON_CLAW",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_NOBLE_ROAR",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CAREFUL",
+      "ability": "ABILITY_OVERCOAT",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "ITEM_EVIOLITE supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 9 LC Jangmo-o Anti-Foongus analysis, doubles-adapted",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_JANGMO_O"
+      ],
+      "doubles_rationale": "Overcoat blocks powder, Noble Roar suppresses both offenses on one foe, and Rock Slide adds spread pressure.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Noble Roar targets only one foe."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Removed setup that was too slow for the pre-evolution."
+    },
+    {
+      "species": "SPECIES_HAKAMO_O",
+      "role": "Eviolite Coaching support",
+      "moves": [
+        "MOVE_DRAIN_PUNCH",
+        "MOVE_DRAGON_CLAW",
+        "MOVE_COACHING",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CAREFUL",
+      "ability": "ABILITY_OVERCOAT",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "ITEM_EVIOLITE supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 9 NFE Hakamo-o analysis plus doubles Coaching precedent",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_HAKAMO_O"
+      ],
+      "doubles_rationale": "Coaching boosts an allied physical attacker while Drain Punch sustains Hakamo-o and Overcoat blocks powder disruption.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Coaching requires a physical partner to realize full value."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Replaced singles double setup with immediate ally support."
+    },
+    {
+      "species": "SPECIES_KOMMO_O",
+      "role": "Overcoat Iron Defense win condition",
+      "moves": [
+        "MOVE_IRON_DEFENSE",
+        "MOVE_BODY_PRESS",
+        "MOVE_FLAMETHROWER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BOLD",
+      "ability": "ABILITY_OVERCOAT",
+      "suggested_item": "ITEM_LEFTOVERS",
+      "item_context": "ITEM_LEFTOVERS supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 9 Doubles OU and VGC Kommo-o Iron Defense analyses",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_KOMMO_O"
+      ],
+      "doubles_rationale": "Iron Defense powers Body Press and physical bulk, Flamethrower hits Ghost-resistant Steel targets, and Overcoat blocks powder.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Body Press needs an Iron Defense turn to reach maximum pressure."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Accepted the direct modern doubles set without Tera assumptions."
+    },
+    {
+      "species": "SPECIES_TAPU_KOKO",
+      "role": "Electric Terrain speed controller",
+      "moves": [
+        "MOVE_THUNDERBOLT",
+        "MOVE_DAZZLING_GLEAM",
+        "MOVE_ELECTROWEB",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_ELECTRIC_SURGE",
+      "suggested_item": "ITEM_LIFE_ORB",
+      "item_context": "ITEM_LIFE_ORB supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 7-8 Doubles OU and VGC Tapu Koko analyses",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_TAPU_KOKO"
+      ],
+      "doubles_rationale": "Electric Surge strengthens Thunderbolt and blocks sleep while Electroweb and Dazzling Gleam pressure both foes.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Electric Terrain also affects the opponent and grounded partners."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Combined published offense with native doubles speed control."
+    },
+    {
+      "species": "SPECIES_TAPU_LELE",
+      "role": "Psychic Terrain Taunt attacker",
+      "moves": [
+        "MOVE_PSYCHIC",
+        "MOVE_MOONBLAST",
+        "MOVE_TAUNT",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_PSYCHIC_SURGE",
+      "suggested_item": "ITEM_LIFE_ORB",
+      "item_context": "ITEM_LIFE_ORB supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 8 Doubles OU Tapu Lele Bulky Taunt analysis",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_TAPU_LELE"
+      ],
+      "doubles_rationale": "Psychic Terrain powers Psychic and blocks priority while fast Taunt and Moonblast control common answers.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Psychic Terrain blocks allied priority moves too."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Accepted the direct doubles set."
+    },
+    {
+      "species": "SPECIES_TAPU_BULU",
+      "role": "Grassy Terrain physical breaker",
+      "moves": [
+        "MOVE_WOOD_HAMMER",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_GRASSY_SURGE",
+      "suggested_item": "ITEM_SITRUS_BERRY",
+      "item_context": "ITEM_SITRUS_BERRY supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 7 Doubles OU and VGC Tapu Bulu analyses",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_TAPU_BULU"
+      ],
+      "doubles_rationale": "Grassy Surge powers Wood Hammer and heals the side while Close Combat and Rock Slide cover common resists.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Wood Hammer recoil must be managed despite terrain recovery."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Used local Close Combat and spread Rock Slide for immediate coverage."
+    },
+    {
+      "species": "SPECIES_TAPU_FINI",
+      "role": "Misty Terrain bulky speed controller",
+      "moves": [
+        "MOVE_MUDDY_WATER",
+        "MOVE_MOONBLAST",
+        "MOVE_ICY_WIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_MISTY_SURGE",
+      "suggested_item": "ITEM_SITRUS_BERRY",
+      "item_context": "ITEM_SITRUS_BERRY supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 7-9 Doubles OU and VGC Tapu Fini analyses",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_TAPU_FINI"
+      ],
+      "doubles_rationale": "Muddy Water pressures both foes, Icy Wind controls Speed, and Misty Terrain protects grounded allies from status.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Misty Terrain also prevents allied status strategies on grounded targets."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Selected immediate utility over item-locked Choice Specs or slow Calm Mind."
+    },
+    {
+      "species": "SPECIES_COSMOG",
+      "role": "Minimal legal pivot",
+      "moves": [
+        "MOVE_TELEPORT",
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_MIMIC",
+        "MOVE_SPLASH"
+      ],
+      "nature": "NATURE_RELAXED",
+      "ability": "ABILITY_UNAWARE",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "ITEM_EVIOLITE supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Emerald Champions local Cosmog move-pool audit",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_COSMOG"
+      ],
+      "doubles_rationale": "Teleport is Cosmog's only meaningful positioning move and Double-Edge is its only deterministic damage option.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Cosmog inherently lacks four competitively useful legal moves."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Installed the complete four-move legal pool because Cosmog has no better alternatives; Teleport remains the real role."
+    },
+    {
+      "species": "SPECIES_COSMOEM",
+      "role": "Minimal Sturdy setup pivot",
+      "moves": [
+        "MOVE_COSMIC_POWER",
+        "MOVE_TELEPORT",
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_MIMIC"
+      ],
+      "nature": "NATURE_RELAXED",
+      "ability": "ABILITY_STURDY",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "ITEM_EVIOLITE supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Emerald Champions local Cosmoem move-pool audit",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_COSMOEM"
+      ],
+      "doubles_rationale": "Sturdy can guarantee Cosmic Power or a slow Teleport, which are the only coherent actions in its extremely narrow legal pool.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Cosmoem inherently lacks four competitively useful legal moves."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Filled the remaining legal slots with Double-Edge and Mimic; Splash is the only omitted option."
+    },
+    {
+      "species": "SPECIES_SOLGALEO",
+      "role": "Full Metal Body physical breaker",
+      "moves": [
+        "MOVE_SUNSTEEL_STRIKE",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_KNOCK_OFF",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_FULL_METAL_BODY",
+      "suggested_item": "ITEM_LIFE_ORB",
+      "item_context": "ITEM_LIFE_ORB supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 7 VGC 2019 Solgaleo and Showdown Random Doubles analyses",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_SOLGALEO"
+      ],
+      "doubles_rationale": "Full Metal Body blocks stat drops while three high-value attacks and Protect create a self-contained legendary breaker.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Close Combat lowers defenses."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Removed item-locked four-attack and mandatory Trick Room assumptions."
+    },
+    {
+      "species": "SPECIES_LUNALA",
+      "role": "Shadow Shield Trick Room spread guard",
+      "moves": [
+        "MOVE_MOONGEIST_BEAM",
+        "MOVE_MOONBLAST",
+        "MOVE_TRICK_ROOM",
+        "MOVE_WIDE_GUARD"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_SHADOW_SHIELD",
+      "suggested_item": "ITEM_MENTAL_HERB",
+      "item_context": "ITEM_MENTAL_HERB supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Wolfe Glick Worlds 2025 Lunala corpus set plus Smogon VGC Lunala analyses",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_LUNALA"
+      ],
+      "doubles_rationale": "Shadow Shield helps secure Trick Room, Wide Guard protects both allies, and two reliable attacks preserve pressure.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "The set omits Protect to keep both Trick Room and Wide Guard."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Selected the championship support shell without unavailable Covert Cloak."
+    },
+    {
+      "species": "SPECIES_NIHILEGO",
+      "role": "Fast Beast Boost special attacker",
+      "moves": [
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_POWER_GEM",
+        "MOVE_GRASS_KNOT",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_BEAST_BOOST",
+      "suggested_item": "ITEM_FOCUS_SASH",
+      "item_context": "ITEM_FOCUS_SASH supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 7 VGC Nihilego Fast Offensive analysis",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_NIHILEGO"
+      ],
+      "doubles_rationale": "Reliable dual STAB plus Grass Knot gives broad immediate coverage and Beast Boost can snowball knockouts.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Focus Sash requires full HP."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Removed locally unavailable Meteor Beam and IV-dependent Hidden Power."
+    },
+    {
+      "species": "SPECIES_BUZZWOLE",
+      "role": "Beast Boost physical tank breaker",
+      "moves": [
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_LUNGE",
+        "MOVE_ICE_PUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_BEAST_BOOST",
+      "suggested_item": "ITEM_LIFE_ORB",
+      "item_context": "ITEM_LIFE_ORB supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 7 VGC Buzzwole analysis, modernized with local moves",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_BUZZWOLE"
+      ],
+      "doubles_rationale": "Close Combat and Lunge provide strong STAB, Lunge cuts Attack, and Ice Punch covers Flying and Dragon targets.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Close Combat lowers defenses."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Replaced Superpower with the locally legal no-Attack-drop alternative."
+    },
+    {
+      "species": "SPECIES_PHEROMOSA",
+      "role": "Mixed Beast Boost glass cannon",
+      "moves": [
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_LUNGE",
+        "MOVE_ICE_BEAM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_NAIVE",
+      "ability": "ABILITY_BEAST_BOOST",
+      "suggested_item": "ITEM_FOCUS_SASH",
+      "item_context": "ITEM_FOCUS_SASH supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 8 2v2 Doubles Pheromosa Mixed Life Orb analysis",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_PHEROMOSA"
+      ],
+      "doubles_rationale": "Matching 137 offenses let Pheromosa use strong physical STAB and Ice Beam while base 151 Speed creates immediate pressure.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Focus Sash requires full HP and Naive preserves both offenses."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Accepted the direct doubles set."
+    },
+    {
+      "species": "SPECIES_XURKITREE",
+      "role": "Tail Glow Beast Boost sweeper",
+      "moves": [
+        "MOVE_TAIL_GLOW",
+        "MOVE_THUNDERBOLT",
+        "MOVE_ENERGY_BALL",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_BEAST_BOOST",
+      "suggested_item": "ITEM_FOCUS_SASH",
+      "item_context": "ITEM_FOCUS_SASH supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 7 VGC Xurkitree Special Attacker analysis plus local Tail Glow audit",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_XURKITREE"
+      ],
+      "doubles_rationale": "Tail Glow turns base 173 Special Attack into a decisive win condition while Thunderbolt and Energy Ball retain coverage.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Setup is vulnerable to double targeting and Focus Sash requires full HP."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Used locally legal Tail Glow instead of unavailable Hidden Power."
+    },
+    {
+      "species": "SPECIES_CELESTEELA",
+      "role": "Leech Seed mixed wall",
+      "moves": [
+        "MOVE_HEAVY_SLAM",
+        "MOVE_FLAMETHROWER",
+        "MOVE_LEECH_SEED",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_SASSY",
+      "ability": "ABILITY_BEAST_BOOST",
+      "suggested_item": "ITEM_LEFTOVERS",
+      "item_context": "ITEM_LEFTOVERS supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 7-9 Doubles OU and VGC Celesteela utility analyses",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_CELESTEELA"
+      ],
+      "doubles_rationale": "Heavy Slam and Flamethrower prevent passivity while Leech Seed plus Protect exploits Celesteela's balanced bulk.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Leech Seed fails against Grass targets."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Selected the most item-independent direct doubles utility shell."
+    },
+    {
+      "species": "SPECIES_KARTANA",
+      "role": "Fast Beast Boost Tailwind attacker",
+      "moves": [
+        "MOVE_LEAF_BLADE",
+        "MOVE_SACRED_SWORD",
+        "MOVE_TAILWIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_BEAST_BOOST",
+      "suggested_item": "ITEM_FOCUS_SASH",
+      "item_context": "ITEM_FOCUS_SASH supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 7 Doubles OU Kartana Bulky Attacker analysis",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_KARTANA"
+      ],
+      "doubles_rationale": "Leaf Blade and Sacred Sword threaten knockouts while Tailwind supports the side and Beast Boost snowballs Attack.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Focus Sash requires full HP."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Accepted the direct doubles set and avoided Dynamax coverage."
+    },
+    {
+      "species": "SPECIES_GUZZLORD",
+      "role": "Mixed Trick Room-compatible breaker",
+      "moves": [
+        "MOVE_KNOCK_OFF",
+        "MOVE_DRACO_METEOR",
+        "MOVE_HEAT_WAVE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_QUIET",
+      "ability": "ABILITY_BEAST_BOOST",
+      "suggested_item": "ITEM_SITRUS_BERRY",
+      "item_context": "ITEM_SITRUS_BERRY supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Pokémon Showdown Gen 7 Random Doubles Guzzlord set 017, spread-adapted",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_GUZZLORD"
+      ],
+      "doubles_rationale": "Knock Off removes items, Draco Meteor supplies focused power, and Heat Wave pressures both foes from Guzzlord's balanced offenses.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Draco Meteor lowers Special Attack and Quiet does not set zero Speed IVs."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Replaced Fire Blast with spread Heat Wave and preserved mixed offenses."
+    },
+    {
+      "species": "SPECIES_NECROZMA",
+      "role": "Prism Armor Calm Mind attacker",
+      "moves": [
+        "MOVE_PSYCHIC",
+        "MOVE_EARTH_POWER",
+        "MOVE_CALM_MIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_PRISM_ARMOR",
+      "suggested_item": "ITEM_LEFTOVERS",
+      "item_context": "ITEM_LEFTOVERS supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 7-8 Doubles OU Necrozma analyses, item-independent adaptation",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_NECROZMA"
+      ],
+      "doubles_rationale": "Prism Armor creates setup chances, Calm Mind raises offense and special bulk, and Psychic plus Earth Power gives reliable coverage.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "The set needs a safe Calm Mind turn to reach its ceiling."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Removed Power Herb Meteor Beam and terrain dependence."
+    },
+    {
+      "species": "SPECIES_MAGEARNA",
+      "role": "Soul-Heart Trick Room attacker",
+      "moves": [
+        "MOVE_FLEUR_CANNON",
+        "MOVE_FLASH_CANNON",
+        "MOVE_TRICK_ROOM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_QUIET",
+      "ability": "ABILITY_SOUL_HEART",
+      "suggested_item": "ITEM_SITRUS_BERRY",
+      "item_context": "ITEM_SITRUS_BERRY supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 8 Battle Stadium Doubles Magearna Offensive Trick Room analysis",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_MAGEARNA"
+      ],
+      "doubles_rationale": "Magearna sets Trick Room, uses dual STAB immediately, and Soul-Heart can snowball from any knockout on the field.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Quiet supports Trick Room but Speed IVs are unchanged."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Kept Protect and dual STAB rather than redundant spread Fairy coverage."
+    },
+    {
+      "species": "SPECIES_MARSHADOW",
+      "role": "Technician anti-setup attacker",
+      "moves": [
+        "MOVE_SPECTRAL_THIEF",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_SHADOW_SNEAK",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_TECHNICIAN",
+      "suggested_item": "ITEM_LIFE_ORB",
+      "item_context": "ITEM_LIFE_ORB supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 9 National Dex Doubles Marshadow Physical Attacker analysis",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_MARSHADOW"
+      ],
+      "doubles_rationale": "Spectral Thief steals boosts, Close Combat breaks bulky targets, and Technician Shadow Sneak supplies strong priority.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Close Combat lowers defenses."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Accepted the direct doubles consensus set."
+    },
+    {
+      "species": "SPECIES_POIPOLE",
+      "role": "Eviolite Beast Boost helper",
+      "moves": [
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_DRAGON_PULSE",
+        "MOVE_HELPING_HAND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_BEAST_BOOST",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "ITEM_EVIOLITE supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Naganadel doubles precedent plus local Poipole move-pool audit",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_POIPOLE"
+      ],
+      "doubles_rationale": "Dual focused attacks prevent passivity while Helping Hand lets Poipole amplify a stronger partner.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Helping Hand requires an attacking partner."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Replaced physical Gunk Shot and off-role Bug Buzz."
+    },
+    {
+      "species": "SPECIES_NAGANADEL",
+      "role": "Fast Beast Boost Tailwind attacker",
+      "moves": [
+        "MOVE_DRACO_METEOR",
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_HEAT_WAVE",
+        "MOVE_TAILWIND"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_BEAST_BOOST",
+      "suggested_item": "ITEM_LIFE_ORB",
+      "item_context": "ITEM_LIFE_ORB supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 8 Doubles OU Naganadel Fast Tailwind analysis",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_NAGANADEL"
+      ],
+      "doubles_rationale": "Fast Tailwind supports the side while dual STAB and spread Heat Wave provide immediate offensive pressure.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "The set intentionally omits Protect and Draco Meteor lowers Special Attack."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Replaced Fire Blast with spread Heat Wave."
+    },
+    {
+      "species": "SPECIES_STAKATAKA",
+      "role": "Trick Room setter and spread guard",
+      "moves": [
+        "MOVE_GYRO_BALL",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_TRICK_ROOM",
+        "MOVE_WIDE_GUARD"
+      ],
+      "nature": "NATURE_SASSY",
+      "ability": "ABILITY_BEAST_BOOST",
+      "suggested_item": "ITEM_SITRUS_BERRY",
+      "item_context": "ITEM_SITRUS_BERRY supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 7 VGC Stakataka Trick Room Support analysis",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_STAKATAKA"
+      ],
+      "doubles_rationale": "Very low Speed powers Gyro Ball, Trick Room reverses tempo, Rock Slide hits both foes, and Wide Guard protects the side.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "The set omits Protect and the builder does not set zero Speed IVs."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Preferred the VGC support shell over fragile Lonely offense."
+    },
+    {
+      "species": "SPECIES_BLACEPHALON",
+      "role": "Fast Beast Boost spread attacker",
+      "moves": [
+        "MOVE_HEAT_WAVE",
+        "MOVE_SHADOW_BALL",
+        "MOVE_WILL_O_WISP",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_BEAST_BOOST",
+      "suggested_item": "ITEM_LIFE_ORB",
+      "item_context": "ITEM_LIFE_ORB supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 7 VGC Blacephalon Special Attacker analysis plus Random Doubles support set",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_BLACEPHALON"
+      ],
+      "doubles_rationale": "Heat Wave pressures both foes, Shadow Ball supplies focused STAB, and Will-O-Wisp punishes physical answers.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Will-O-Wisp can miss and Life Orb recoil is optional."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Used an item-independent support slot instead of Hidden Power or Substitute."
+    },
+    {
+      "species": "SPECIES_ZERAORA",
+      "role": "Fast Fake Out Electroweb pivot",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_ELECTROWEB",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_VOLT_SWITCH"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_VOLT_ABSORB",
+      "suggested_item": "ITEM_ASSAULT_VEST",
+      "item_context": "ITEM_ASSAULT_VEST supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 9 National Dex Doubles Zeraora Fake Out Support analysis",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_ZERAORA"
+      ],
+      "doubles_rationale": "Fake Out and Electroweb control tempo, Close Combat threatens Steel targets, and Volt Switch preserves momentum.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "The set intentionally omits Protect; Assault Vest would lock it to attacks but is not installed."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Adapted around local absence of Plasma Fists."
+    },
+    {
+      "species": "SPECIES_MELTAN",
+      "role": "Eviolite Magnet Pull support",
+      "moves": [
+        "MOVE_GYRO_BALL",
+        "MOVE_THUNDER_WAVE",
+        "MOVE_ACID_ARMOR",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_RELAXED",
+      "ability": "ABILITY_MAGNET_PULL",
+      "suggested_item": "ITEM_EVIOLITE",
+      "item_context": "ITEM_EVIOLITE supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 8 ZU Meltan Magnet Pull analysis, doubles-adapted",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_MELTAN"
+      ],
+      "doubles_rationale": "Magnet Pull can hold Steel foes, Thunder Wave controls Speed, and Relaxed Gyro Ball gives Meltan a real attack while Acid Armor improves staying power.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Magnet Pull matters only against Steel targets."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Replaced weak special attacks and Rest with immediate support."
+    },
+    {
+      "species": "SPECIES_MELMETAL",
+      "role": "Iron Fist Trick Room breaker",
+      "moves": [
+        "MOVE_DOUBLE_IRON_BASH",
+        "MOVE_HIGH_HORSEPOWER",
+        "MOVE_THUNDER_PUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_IRON_FIST",
+      "suggested_item": "ITEM_WEAKNESS_POLICY",
+      "item_context": "ITEM_WEAKNESS_POLICY supports this role but the authored moveset remains usable without an equipped item.",
+      "source_refs": [
+        "Smogon Gen 8 Battle Stadium Doubles Melmetal Offensive analysis",
+        "Emerald Champions exact local legality, stats, and abilities for SPECIES_MELMETAL"
+      ],
+      "doubles_rationale": "Iron Fist Double Iron Bash is the central nuke, with partner-safe Ground coverage, boosted Thunder Punch, and Protect.",
+      "dependency_notes": [
+        "The suggested item is advisory only; the builder does not grant or equip it.",
+        "Weakness Policy activation is optional and opponent-dependent."
+      ],
+      "reviewed_by": "Emerald Champions Alola doubles audit",
+      "review_notes": "Accepted the direct doubles set."
+    }
+  ]
+}
