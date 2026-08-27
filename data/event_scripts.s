@@ -671,6 +671,11 @@ Common_EventScript_ShowPokemonCenterSign:: @ 8271E73
 	msgbox gText_PokemonCenterSign, MSGBOX_SIGN
 	end
 
+Common_EventScript_ShowRouteSpecies::
+	special BufferCurrentMapRouteSignSpecies
+	msgbox gStringVar4, MSGBOX_SIGN
+	end
+
 Common_ShowEasyChatScreen:: @ 8271E7C
 	fadescreen FADE_TO_BLACK
 	special ShowEasyChatScreen

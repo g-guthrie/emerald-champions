@@ -34,11 +34,11 @@ Route113_EventScript_NinjaBoy:: @ 81F2193
 
 Route113_EventScript_RouteSign111:: @ 81F219C
 	msgbox Route113_Text_RouteSign111, MSGBOX_SIGN
-	end
+	goto Common_EventScript_ShowRouteSpecies
 
 Route113_EventScript_RouteSignFallarbor:: @ 81F21A5
 	msgbox Route113_Text_RouteSignFallarbor, MSGBOX_SIGN
-	end
+	goto Common_EventScript_ShowRouteSpecies
 
 Route113_EventScript_GlassWorkshopSign:: @ 81F21AE
 	msgbox Route113_Text_GlassWorkshopSign, MSGBOX_SIGN
@@ -167,4 +167,3 @@ Route113_Text_TrainerTipsRegisterKeyItems: @ 81F2471
 Route113_Text_GlassWorkshopSign: @ 81F24F8
 	.string "Glass Workshop\n"
 	.string "“Turning Volcanic Ash into Glass Items”$"
-

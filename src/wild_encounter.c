@@ -1,5 +1,6 @@
 #include "global.h"
 #include "wild_encounter.h"
+#include "data.h"
 #include "pokemon.h"
 #include "metatile_behavior.h"
 #include "fieldmap.h"
@@ -17,6 +18,8 @@
 #include "battle_debug.h"
 #include "battle_pike.h"
 #include "battle_pyramid.h"
+#include "string_util.h"
+#include "text.h"
 #include "constants/abilities.h"
 #include "constants/battle_config.h"
 #include "constants/game_stat.h"
@@ -45,107 +48,107 @@ EWRAM_DATA bool8 gIsSurfingEncounter = 0;
 //Special Feebas-related data.
 const struct WildPokemon gWildFeebasRoute119Data = {20, 25, SPECIES_FEEBAS};
 
-u8 GetWildEncounterSlotChance(u8 slotType, u8 slot)
-{
-    static const u8 sLandThresholds[LAND_WILD_COUNT] =
-    {
-        ENCOUNTER_CHANCE_LAND_MONS_SLOT_0,
-        ENCOUNTER_CHANCE_LAND_MONS_SLOT_1,
-        ENCOUNTER_CHANCE_LAND_MONS_SLOT_2,
-        ENCOUNTER_CHANCE_LAND_MONS_SLOT_3,
-        ENCOUNTER_CHANCE_LAND_MONS_SLOT_4,
-        ENCOUNTER_CHANCE_LAND_MONS_SLOT_5,
-        ENCOUNTER_CHANCE_LAND_MONS_SLOT_6,
-        ENCOUNTER_CHANCE_LAND_MONS_SLOT_7,
-        ENCOUNTER_CHANCE_LAND_MONS_SLOT_8,
-        ENCOUNTER_CHANCE_LAND_MONS_SLOT_9,
-        ENCOUNTER_CHANCE_LAND_MONS_SLOT_10,
-        ENCOUNTER_CHANCE_LAND_MONS_SLOT_11,
-    };
-    static const u8 sWaterThresholds[WATER_WILD_COUNT] =
-    {
-        ENCOUNTER_CHANCE_WATER_MONS_SLOT_0,
-        ENCOUNTER_CHANCE_WATER_MONS_SLOT_1,
-        ENCOUNTER_CHANCE_WATER_MONS_SLOT_2,
-        ENCOUNTER_CHANCE_WATER_MONS_SLOT_3,
-    };
-    static const u8 sRockSmashThresholds[ROCK_WILD_COUNT] =
-    {
-        ENCOUNTER_CHANCE_ROCK_SMASH_MONS_SLOT_0,
-        ENCOUNTER_CHANCE_ROCK_SMASH_MONS_SLOT_1,
-        ENCOUNTER_CHANCE_ROCK_SMASH_MONS_SLOT_2,
-        ENCOUNTER_CHANCE_ROCK_SMASH_MONS_SLOT_3,
-    };
-    static const u8 sOldRodThresholds[2] =
-    {
-        ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_0,
-        ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_1,
-    };
-    static const u8 sGoodRodThresholds[3] =
-    {
-        ENCOUNTER_CHANCE_FISHING_MONS_GOOD_ROD_SLOT_2,
-        ENCOUNTER_CHANCE_FISHING_MONS_GOOD_ROD_SLOT_3,
-        ENCOUNTER_CHANCE_FISHING_MONS_GOOD_ROD_SLOT_4,
-    };
-    static const u8 sSuperRodThresholds[5] =
-    {
-        ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_5,
-        ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_6,
-        ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_7,
-        ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_8,
-        ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_9,
-    };
-    static const u8 sHoneyThresholds[HONEY_WILD_COUNT] =
-    {
-        ENCOUNTER_CHANCE_HONEY_MONS_SLOT_0,
-        ENCOUNTER_CHANCE_HONEY_MONS_SLOT_1,
-        ENCOUNTER_CHANCE_HONEY_MONS_SLOT_2,
-        ENCOUNTER_CHANCE_HONEY_MONS_SLOT_3,
-        ENCOUNTER_CHANCE_HONEY_MONS_SLOT_4,
-        ENCOUNTER_CHANCE_HONEY_MONS_SLOT_5,
-    };
-    const u8 *thresholds;
-    u8 count;
+#define ROUTE_SIGN_MAX_SPECIES (LAND_WILD_COUNT + WATER_WILD_COUNT + ROCK_WILD_COUNT + FISH_WILD_COUNT + HONEY_WILD_COUNT + 1)
+#define ROUTE_SIGN_MAX_LINE_WIDTH 200
+#define ROUTE_SIGN_LINES_PER_PAGE 2
 
-    switch (slotType)
+static const u8 sText_RouteSignSpeciesHeader[] = _("Pokémon found here:\n");
+static const u8 sText_RouteSignSpeciesSeparator[] = _(", ");
+static const u8 sText_RouteSignSpeciesLineBreak[] = _("\l");
+static const u8 sText_RouteSignSpeciesPageBreak[] = _("\p");
+static const u8 sText_RouteSignNoSpecies[] = _("No wild Pokémon are found here.");
+
+static void AddRouteSignSpecies(u16 *species, u8 *count, u16 candidate)
+{
+    u8 i;
+
+    if (candidate == SPECIES_NONE || candidate >= NUM_SPECIES)
+        return;
+    for (i = 0; i < *count; i++)
     {
-    case WILD_SLOT_LAND:
-        thresholds = sLandThresholds;
-        count = ARRAY_COUNT(sLandThresholds);
-        break;
-    case WILD_SLOT_WATER:
-        thresholds = sWaterThresholds;
-        count = ARRAY_COUNT(sWaterThresholds);
-        break;
-    case WILD_SLOT_ROCK_SMASH:
-        thresholds = sRockSmashThresholds;
-        count = ARRAY_COUNT(sRockSmashThresholds);
-        break;
-    case WILD_SLOT_OLD_ROD:
-        thresholds = sOldRodThresholds;
-        count = ARRAY_COUNT(sOldRodThresholds);
-        break;
-    case WILD_SLOT_GOOD_ROD:
-        thresholds = sGoodRodThresholds;
-        count = ARRAY_COUNT(sGoodRodThresholds);
-        break;
-    case WILD_SLOT_SUPER_ROD:
-        thresholds = sSuperRodThresholds;
-        count = ARRAY_COUNT(sSuperRodThresholds);
-        break;
-    case WILD_SLOT_HONEY:
-        thresholds = sHoneyThresholds;
-        count = ARRAY_COUNT(sHoneyThresholds);
-        break;
-    default:
-        return 0;
+        if (species[i] == candidate)
+            return;
+    }
+    if (*count < ROUTE_SIGN_MAX_SPECIES)
+        species[(*count)++] = candidate;
+}
+
+static void AddRouteSignSpeciesFromInfo(
+    u16 *species,
+    u8 *count,
+    const struct WildPokemonInfo *info,
+    u8 slotCount)
+{
+    u8 i;
+
+    if (info == NULL)
+        return;
+    for (i = 0; i < slotCount; i++)
+        AddRouteSignSpecies(species, count, info->wildPokemon[i].species);
+}
+
+void BufferCurrentMapRouteSignSpecies(void)
+{
+    u16 species[ROUTE_SIGN_MAX_SPECIES];
+    u16 headerId = GetCurrentMapWildMonHeaderId();
+    u8 count = 0;
+    u8 i;
+    u8 line = 0;
+    u16 lineWidth = 0;
+    u16 separatorWidth = GetStringWidth(1, sText_RouteSignSpeciesSeparator, 0);
+    u8 *dest;
+
+    if (headerId != 0xFFFF)
+    {
+        const struct WildPokemonHeader *header = &gWildMonHeaders[headerId];
+
+        AddRouteSignSpeciesFromInfo(species, &count, header->landMonsInfo, LAND_WILD_COUNT);
+        AddRouteSignSpeciesFromInfo(species, &count, header->waterMonsInfo, WATER_WILD_COUNT);
+        AddRouteSignSpeciesFromInfo(species, &count, header->rockSmashMonsInfo, ROCK_WILD_COUNT);
+        AddRouteSignSpeciesFromInfo(species, &count, header->fishingMonsInfo, FISH_WILD_COUNT);
+        AddRouteSignSpeciesFromInfo(species, &count, header->honeyMonsInfo, HONEY_WILD_COUNT);
     }
 
-    if (slot >= count)
-        return 0;
-    if (slot == 0)
-        return thresholds[0];
-    return thresholds[slot] - thresholds[slot - 1];
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE119)
+     && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE119))
+        AddRouteSignSpecies(species, &count, SPECIES_FEEBAS);
+
+    if (count == 0)
+    {
+        StringCopy(gStringVar4, sText_RouteSignNoSpecies);
+        return;
+    }
+
+    dest = StringCopy(gStringVar4, sText_RouteSignSpeciesHeader);
+    for (i = 0; i < count; i++)
+    {
+        const u8 *name = gSpeciesNames[species[i]];
+        u16 nameWidth = GetStringWidth(1, name, 0);
+        u16 additionalWidth = nameWidth + (lineWidth == 0 ? 0 : separatorWidth);
+
+        if (lineWidth != 0 && lineWidth + additionalWidth > ROUTE_SIGN_MAX_LINE_WIDTH)
+        {
+            if (++line == ROUTE_SIGN_LINES_PER_PAGE)
+            {
+                dest = StringCopy(dest, sText_RouteSignSpeciesPageBreak);
+                dest = StringCopy(dest, sText_RouteSignSpeciesHeader);
+                line = 0;
+            }
+            else
+            {
+                dest = StringCopy(dest, sText_RouteSignSpeciesLineBreak);
+            }
+            lineWidth = 0;
+        }
+
+        if (lineWidth != 0)
+        {
+            dest = StringCopy(dest, sText_RouteSignSpeciesSeparator);
+            lineWidth += separatorWidth;
+        }
+        dest = StringCopy(dest, name);
+        lineWidth += nameWidth;
+    }
 }
 
 // code

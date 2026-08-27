@@ -43,7 +43,7 @@ Route121_EventScript_Woman:: @ 81F5DFD
 
 Route121_EventScript_MtPyrePierSign:: @ 81F5E06
 	msgbox Route121_Text_MtPyrePierSign, MSGBOX_SIGN
-	end
+	goto Common_EventScript_ShowRouteSpecies
 
 Route121_EventScript_SafariZoneSign:: @ 81F5E0F
 	msgbox Route121_Text_SafariZoneSign, MSGBOX_SIGN

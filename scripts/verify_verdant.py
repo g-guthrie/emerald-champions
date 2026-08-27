@@ -137,6 +137,11 @@ subprocess.run(
     cwd=ROOT,
     check=True,
 )
+subprocess.run(
+    [sys.executable, str(ROOT / "scripts/emerald_champions_route_sign_audit.py")],
+    cwd=ROOT,
+    check=True,
+)
 
 
 def read(path: str) -> str:
@@ -229,7 +234,6 @@ wild_table_lengths_match = all(
 )
 start_menu_source = read("src/start_menu.c")
 pokedex_source = read("src/pokedex.c")
-area_dex_source = read("src/area_dex.c")
 wild_encounter_source = read("src/wild_encounter.c")
 normal_start_menu = start_menu_source.split("static void BuildNormalStartMenu(void)", 2)[2].split(
     "static void BuildSafariZoneStartMenu(void)", 1
@@ -1075,99 +1079,39 @@ checks = {
     "disabled trainer entries leave no stray active commas": (
         re.search(r"^\s*},?\s+\*/,\s*$", read("src/data/trainer_parties.h"), re.M) is None
     ),
-    "Current Area data provider is registered in the legacy linker": (
-        "src/area_dex.o(.text);" in read("ld_script.txt")
-        and "src/area_dex.o(.rodata);" in read("ld_script.txt")
-        and '.include "src/area_dex.o"' in read("sym_ewram.txt")
-    ),
-    "Current Area is a native Pokedex page rather than a Start-menu application": (
-        "MENU_ACTION_AREA_DEX" not in start_menu_source
-        and "StartMenuAreaDexCallback" not in start_menu_source
-        and "CB2_InitAreaDex" not in start_menu_source + area_dex_source + pokedex_source
-        and "if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)" in normal_start_menu
+    "Area Dex UI is fully removed and native Pokedex behavior is restored": (
+        not (ROOT / "include/area_dex.h").exists()
+        and not (ROOT / "src/area_dex.c").exists()
+        and "src/area_dex.o" not in read("ld_script.txt") + read("sym_ewram.txt")
+        and all(token not in start_menu_source + pokedex_source for token in (
+            "MENU_ACTION_AREA_DEX",
+            "CB2_InitAreaDex",
+            "PAGE_CURRENT_AREA",
+            "Task_LoadCurrentAreaPage",
+        ))
+        and "case 0: //BACK TO LIST" in pokedex_source
         and "AddStartMenuAction(MENU_ACTION_EXIT);" in normal_start_menu
-        and "PAGE_CURRENT_AREA" in pokedex_source
-        and 'sText_CurrentArea[] = _("CURRENT AREA")' in pokedex_source
-        and "case 0: //CURRENT AREA" in pokedex_source
-        and "gTasks[taskId].func = Task_LoadCurrentAreaPage;" in pokedex_source
-        and '_("AREA DEX")' not in start_menu_source + area_dex_source + pokedex_source
     ),
-    "Current Area provider covers native encounter methods without owning UI state": (
-        all(
-            token in area_dex_source
-            for token in (
-                "AreaDex_BuildCurrentMapMethods",
-                "AreaDex_CollectEntries",
-                "WILD_SLOT_LAND",
-                "WILD_SLOT_WATER",
-                "WILD_SLOT_OLD_ROD",
-                "WILD_SLOT_GOOD_ROD",
-                "WILD_SLOT_SUPER_ROD",
-                "WILD_SLOT_ROCK_SMASH",
-                "WILD_SLOT_HONEY",
-                "SPECIES_FEEBAS",
-                "GetCurrentMapWildMonHeaderId()",
-                "headerId != 0xFFFF",
-            )
-        )
-        and all(token not in area_dex_source for token in ("MainCB2", "VBlankCB", "InitWindows", "CreateTask", "SetMainCallback2"))
-        and "TryGetAbilityInfluencedWildMonIndex(wildMonInfo->wildPokemon, WATER_WILD_COUNT" in wild_encounter_source
+    "route signs derive species from every physical encounter method": (
+        "BufferCurrentMapRouteSignSpecies" in wild_encounter_source
+        and all(token in wild_encounter_source for token in (
+            "header->landMonsInfo",
+            "header->waterMonsInfo",
+            "header->rockSmashMonsInfo",
+            "header->fishingMonsInfo",
+            "header->honeyMonsInfo",
+            "SPECIES_FEEBAS",
+            "GetStringWidth(1, name, 0)",
+        ))
+        and "Common_EventScript_ShowRouteSpecies::" in read("data/event_scripts.s")
+        and sum(
+            path.read_text().count("goto Common_EventScript_ShowRouteSpecies")
+            for path in (ROOT / "data/maps").glob("Route*/scripts.inc")
+        ) == 32
+    ),
+    "wild type-attraction logic respects each encounter table length": (
+        "TryGetAbilityInfluencedWildMonIndex(wildMonInfo->wildPokemon, WATER_WILD_COUNT" in wild_encounter_source
         and "TryGetRandomWildMonIndexByType(wildMon, type, numMon, monIndex)" in wild_encounter_source
-    ),
-    "Current Area percentages derive from the generated runtime thresholds": (
-        "return thresholds[slot] - thresholds[slot - 1];" in wild_encounter_source
-        and all(
-            f"ENCOUNTER_CHANCE_LAND_MONS_SLOT_{slot}" in wild_encounter_source
-            for slot in range(wild_slot_counts["land_mons"])
-        )
-        and all(
-            f"ENCOUNTER_CHANCE_WATER_MONS_SLOT_{slot}" in wild_encounter_source
-            for slot in range(wild_slot_counts["water_mons"])
-        )
-        and all(
-            f"ENCOUNTER_CHANCE_ROCK_SMASH_MONS_SLOT_{slot}" in wild_encounter_source
-            for slot in range(wild_slot_counts["rock_smash_mons"])
-        )
-        and all(
-            f"ENCOUNTER_CHANCE_HONEY_MONS_SLOT_{slot}" in wild_encounter_source
-            for slot in range(wild_slot_counts["honey_mons"])
-        )
-        and all(
-            token in wild_encounter_source
-            for token in (
-                "ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_0",
-                "ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_SLOT_1",
-                "ENCOUNTER_CHANCE_FISHING_MONS_GOOD_ROD_SLOT_2",
-                "ENCOUNTER_CHANCE_FISHING_MONS_GOOD_ROD_SLOT_3",
-                "ENCOUNTER_CHANCE_FISHING_MONS_GOOD_ROD_SLOT_4",
-                "ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_5",
-                "ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_6",
-                "ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_7",
-                "ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_8",
-                "ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_SLOT_9",
-            )
-        )
-        and "static const u8 sLandChances" not in wild_encounter_source
-    ),
-    "Current Area uses the native Pokedex page lifecycle and bounded text rows": (
-        all(
-            token in pokedex_source
-            for token in (
-                "#define CURRENT_AREA_PAGE_SIZE 5",
-                "InitBgsFromTemplates(0, sInfoScreen_BgTemplate",
-                "InitWindows(sInfoScreen_WindowTemplates)",
-                "LoadTilesetTilemapHGSS(EVO_SCREEN)",
-                "BlitBitmapToWindow(WIN_INFO, sCaughtBall_Gfx",
-                "GetStringWidth(7, text, 0)",
-                "FreeInfoScreenWindowAndBgBuffers();",
-                "gTasks[taskId].func = Task_OpenPokedexMainPage;",
-                "JOY_NEW(DPAD_LEFT)",
-                "JOY_NEW(DPAD_RIGHT)",
-                "JOY_NEW(DPAD_UP | DPAD_DOWN)",
-            )
-        )
-        and "struct AreaDexMethod areaDexMethods[AREA_DEX_MAX_METHODS]" in pokedex_source
-        and "struct AreaDexEntry areaDexEntries[AREA_DEX_MAX_ENTRIES]" in pokedex_source
     ),
 }
 

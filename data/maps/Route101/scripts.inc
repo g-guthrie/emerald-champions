@@ -216,7 +216,7 @@ Route101_EventScript_Boy:: @ 81EBE04
 
 Route101_EventScript_RouteSign:: @ 81EBE0D
 	msgbox Route101_Text_RouteSign, MSGBOX_SIGN
-	end
+	goto Common_EventScript_ShowRouteSpecies
 
 Route101_EventScript_BirchsBag:: @ 81EBE16
 	lock
@@ -302,4 +302,3 @@ Route101_Text_WildPokemonInTallGrass: @ 81EC04A
 Route101_Text_RouteSign: @ 81EC0C8
 	.string "Route 101\n"
 	.string "{UP_ARROW} Oldale Town$"
-

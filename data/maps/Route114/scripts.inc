@@ -76,7 +76,7 @@ Route114_EventScript_Poochyena:: @ 81F2612
 
 Route114_EventScript_MeteorFallsSign:: @ 81F2625
 	msgbox Route114_Text_MeteorFallsSign, MSGBOX_SIGN
-	end
+	goto Common_EventScript_ShowRouteSpecies
 
 Route114_EventScript_FossilManiacsHouseSign:: @ 81F262E
 	msgbox Route114_Text_FossilManiacsHouseSign, MSGBOX_SIGN

@@ -126,11 +126,11 @@ Route116_Movement_DevonEmployeeExitEast: @ 81F2D4C
 
 Route116_EventScript_RouteSignRustboro:: @ 81F2D57
 	msgbox Route116_Text_RouteSignRustboro, MSGBOX_SIGN
-	end
+	goto Common_EventScript_ShowRouteSpecies
 
 Route116_EventScript_RusturfTunnelSign:: @ 81F2D60
 	msgbox Route116_Text_RusturfTunnelSign, MSGBOX_SIGN
-	end
+	goto Common_EventScript_ShowRouteSpecies
 
 Route116_EventScript_TunnelersRestHouseSign:: @ 81F2D69
 	msgbox Route116_Text_TunnelersRestHouse, MSGBOX_SIGN

@@ -1,5 +1,4 @@
 #include "global.h"
-#include "area_dex.h"
 #include "battle_main.h"
 #ifdef BATTLE_ENGINE
 #include "battle_util.h"
@@ -27,7 +26,9 @@
 #include "pokedex_cry_screen.h"
 #include "pokemon_icon.h"
 #include "pokemon_summary_screen.h"
+#ifdef POKEMON_EXPANSION
 #include "region_map.h"
+#endif
 #include "scanline_effect.h"
 #include "shop.h"
 #include "sound.h"
@@ -55,8 +56,7 @@ enum
     PAGE_UNK,
     PAGE_AREA,
     PAGE_CRY,
-    PAGE_CURRENT_AREA,
-    PAGE_SIZE,
+    PAGE_SIZE
 };
 
 enum
@@ -238,12 +238,6 @@ struct PokedexView
     s16 menuY;     //Menu Y position (inverted because we use REG_BG0VOFS for this)
     u8 unkArr2[8]; // Cleared, never read
     u8 unkArr3[8]; // Cleared, never read
-    struct AreaDexMethod areaDexMethods[AREA_DEX_MAX_METHODS];
-    struct AreaDexEntry areaDexEntries[AREA_DEX_MAX_ENTRIES];
-    u8 areaDexMethodCount;
-    u8 areaDexMethodIndex;
-    u8 areaDexPage;
-    u8 areaDexEntryCount;
 };
 
 // this file's functions
@@ -252,11 +246,6 @@ static void Task_OpenPokedexMainPage(u8);
 static void Task_HandlePokedexInput(u8);
 static void Task_WaitForScroll(u8);
 static void Task_HandlePokedexStartMenuInput(u8);
-static void Task_LoadCurrentAreaPage(u8);
-static void Task_HandleCurrentAreaInput(u8);
-static void Task_ExitCurrentAreaPage(u8);
-static void RenderCurrentAreaPage(void);
-static void PrintPokedexStartMenuText(void);
 static void Task_OpenInfoScreenAfterMonMovement(u8);
 static void Task_WaitForExitInfoScreen(u8);
 static void Task_WaitForExitSearch(u8);
@@ -1076,12 +1065,8 @@ static const struct BgTemplate sPokedex_BgTemplate[] =
     }
 };
 
-#define WIN_DEX_LIST 0
-#define WIN_DEX_START_MENU 1
-
 static const struct WindowTemplate sPokemonList_WindowTemplate[] =
 {
-    [WIN_DEX_LIST] =
     {
         .bg = 2,
         .tilemapLeft = 0,
@@ -1091,50 +1076,11 @@ static const struct WindowTemplate sPokemonList_WindowTemplate[] =
         .paletteNum = 0,
         .baseBlock = 1,
     },
-    [WIN_DEX_START_MENU] =
-    {
-        .bg = 0,
-        .tilemapLeft = 17,
-        .tilemapTop = 10,
-        .width = 12,
-        .height = 8,
-        .paletteNum = 0,
-        .baseBlock = 0x100,
-    },
     DUMMY_WIN_TEMPLATE
 };
 
 static const u8 sCaughtBall_Gfx[] = INCBIN_U8("graphics/pokedex/caught_ball.4bpp");
 static const u8 sText_TenDashes[] = _("----------");
-static const u8 sText_CurrentArea[] = _("CURRENT AREA");
-static const u8 sText_ListTop[] = _("LIST TOP");
-static const u8 sText_ListBottom[] = _("LIST BOTTOM");
-static const u8 sText_ClosePokedex[] = _("CLOSE POKEDEX");
-static const u8 sText_AreaDexNoWild[] = _("No wild Pokémon found here.");
-static const u8 sText_AreaDexPercent[] = _("%");
-static const u8 sText_AreaDexPageSeparator[] = _("  ");
-static const u8 sText_AreaDexSlash[] = _("/");
-static const u8 sText_AreaDexHelp[] = _("{L_BUTTON}{R_BUTTON} METHOD  {DPAD_UPDOWN} PAGE  {B_BUTTON} BACK");
-static const u8 sText_AreaDexGrass[] = _("GRASS");
-static const u8 sText_AreaDexSurf[] = _("SURF");
-static const u8 sText_AreaDexOldRod[] = _("OLD ROD");
-static const u8 sText_AreaDexGoodRod[] = _("GOOD ROD");
-static const u8 sText_AreaDexSuperRod[] = _("SUPER ROD");
-static const u8 sText_AreaDexRockSmash[] = _("ROCK SMASH");
-static const u8 sText_AreaDexHoney[] = _("HONEY");
-static const u8 sText_AreaDexSpecial[] = _("UNDER BRIDGE");
-
-static const u8 *const sAreaDexMethodNames[AREA_DEX_MAX_METHODS] =
-{
-    [AREA_DEX_METHOD_GRASS] = sText_AreaDexGrass,
-    [AREA_DEX_METHOD_SURF] = sText_AreaDexSurf,
-    [AREA_DEX_METHOD_OLD_ROD] = sText_AreaDexOldRod,
-    [AREA_DEX_METHOD_GOOD_ROD] = sText_AreaDexGoodRod,
-    [AREA_DEX_METHOD_SUPER_ROD] = sText_AreaDexSuperRod,
-    [AREA_DEX_METHOD_ROCK_SMASH] = sText_AreaDexRockSmash,
-    [AREA_DEX_METHOD_HONEY] = sText_AreaDexHoney,
-    [AREA_DEX_METHOD_SPECIAL] = sText_AreaDexSpecial,
-};
 
 ALIGNED(4) static const u8 gExpandedPlaceholder_PokedexDescription[] = _("");
 
@@ -2068,16 +2014,10 @@ static void Task_HandlePokedexStartMenuInput(u8 taskId)
         {
             switch (sPokedexView->menuCursorPos)
             {
-            case 0: //CURRENT AREA
+            case 0: //BACK TO LIST
             default:
-                BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
-                sPokedexView->menuIsOpen = FALSE;
-                ClearMonSprites();
-                FreeWindowAndBgBuffers();
-                gMain.state = 0;
-                gTasks[taskId].func = Task_LoadCurrentAreaPage;
-                PlaySE(SE_PC_LOGIN);
-                return;
+                gMain.newKeys |= START_BUTTON;  //Exit menu
+                break;
             case 1: //LIST TOP
                 sPokedexView->selectedPokemon = 0;
                 sPokedexView->pokeBallRotation = POKEBALL_ROTATION_TOP;
@@ -2392,30 +2332,6 @@ static void Task_ClosePokedexFromSearchResultsStartMenu(u8 taskId)
 
 #undef tTaskId
 
-static void PrintPokedexStartMenuText(void)
-{
-    static const u8 sMenuTextColors[] =
-    {
-        TEXT_COLOR_WHITE,
-        TEXT_COLOR_DARK_GRAY,
-        TEXT_COLOR_LIGHT_GRAY,
-    };
-    static const u8 *const sMenuTexts[] =
-    {
-        sText_CurrentArea,
-        sText_ListTop,
-        sText_ListBottom,
-        sText_ClosePokedex,
-    };
-    u8 i;
-
-    FillWindowPixelBuffer(WIN_DEX_START_MENU, PIXEL_FILL(TEXT_COLOR_WHITE));
-    for (i = 0; i < ARRAY_COUNT(sMenuTexts); i++)
-        AddTextPrinterParameterized4(WIN_DEX_START_MENU, 7, 8, i * 16, 0, 0, sMenuTextColors, TEXT_SPEED_FF, sMenuTexts[i]);
-    PutWindowTilemap(WIN_DEX_START_MENU);
-    CopyWindowToVram(WIN_DEX_START_MENU, 3);
-}
-
 // For loading main pokedex page or pokedex search results
 static bool8 LoadPokedexListPage(u8 page)
 {
@@ -2453,10 +2369,8 @@ static bool8 LoadPokedexListPage(u8 page)
         LoadPokedexBgPalette(sPokedexView->isSearchResults);
         InitWindows(sPokemonList_WindowTemplate);
         DeactivateAllTextPrinters();
-        PutWindowTilemap(WIN_DEX_LIST);
-        CopyWindowToVram(WIN_DEX_LIST, 3);
-        if (page == PAGE_MAIN)
-            PrintPokedexStartMenuText();
+        PutWindowTilemap(0);
+        CopyWindowToVram(0, 3);
         gMain.state = 1;
         break;
     case 1:
@@ -3797,252 +3711,6 @@ static void FreeInfoScreenWindowAndBgBuffers(void)
     tilemapBuffer = GetBgTilemapBuffer(3);
     if (tilemapBuffer)
         Free(tilemapBuffer);
-}
-
-#define CURRENT_AREA_PAGE_SIZE 5
-#define CURRENT_AREA_VISIBLE_WIDTH 240
-#define CURRENT_AREA_LEFT 16
-#define CURRENT_AREA_NAME_LEFT 32
-#define CURRENT_AREA_RIGHT 224
-
-static const u8 sCurrentAreaTextColors[] =
-{
-    TEXT_COLOR_TRANSPARENT,
-    TEXT_DYNAMIC_COLOR_6,
-    TEXT_COLOR_LIGHT_GRAY,
-};
-
-static void PrintCurrentAreaCentered(u8 fontId, const u8 *text, u8 y)
-{
-    u16 width = GetStringWidth(fontId, text, 0);
-    u8 x = width < CURRENT_AREA_VISIBLE_WIDTH ? (CURRENT_AREA_VISIBLE_WIDTH - width) / 2 : 0;
-
-    AddTextPrinterParameterized4(WIN_INFO, fontId, x, y, 0, 0, sCurrentAreaTextColors, TEXT_SPEED_FF, text);
-}
-
-static void CollectCurrentAreaEntries(void)
-{
-    sPokedexView->areaDexEntryCount = 0;
-    if (sPokedexView->areaDexMethodCount != 0)
-    {
-        sPokedexView->areaDexEntryCount = AreaDex_CollectEntries(
-            &sPokedexView->areaDexMethods[sPokedexView->areaDexMethodIndex],
-            sPokedexView->areaDexEntries,
-            ARRAY_COUNT(sPokedexView->areaDexEntries));
-    }
-}
-
-static u8 GetCurrentAreaPageCount(void)
-{
-    if (sPokedexView->areaDexEntryCount == 0)
-        return 1;
-    return (sPokedexView->areaDexEntryCount + CURRENT_AREA_PAGE_SIZE - 1) / CURRENT_AREA_PAGE_SIZE;
-}
-
-static void RenderCurrentAreaPage(void)
-{
-    u8 i;
-    u8 firstEntry;
-    u8 pageCount;
-    u8 text[32];
-    u16 width;
-
-    FillWindowPixelBuffer(WIN_INFO, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
-
-    AddTextPrinterParameterized4(WIN_INFO, 0, 12, 21, 0, 0, sCurrentAreaTextColors, TEXT_SPEED_FF, sText_CurrentArea);
-    GetMapName(gStringVar1, gMapHeader.regionMapSectionId, 0);
-    width = GetStringWidth(0, gStringVar1, 0);
-    AddTextPrinterParameterized4(
-        WIN_INFO,
-        0,
-        width < CURRENT_AREA_RIGHT ? CURRENT_AREA_RIGHT - width : 0,
-        21,
-        0,
-        0,
-        sCurrentAreaTextColors,
-        TEXT_SPEED_FF,
-        gStringVar1);
-
-    if (sPokedexView->areaDexMethodCount == 0)
-    {
-        PrintCurrentAreaCentered(1, sText_AreaDexNoWild, 82);
-    }
-    else
-    {
-        const struct AreaDexMethod *method = &sPokedexView->areaDexMethods[sPokedexView->areaDexMethodIndex];
-
-        pageCount = GetCurrentAreaPageCount();
-        if (sPokedexView->areaDexPage >= pageCount)
-            sPokedexView->areaDexPage = 0;
-
-        StringCopy(text, sAreaDexMethodNames[method->id]);
-        if (pageCount > 1)
-        {
-            StringAppend(text, sText_AreaDexPageSeparator);
-            ConvertIntToDecimalStringN(text + StringLength(text), sPokedexView->areaDexPage + 1, STR_CONV_MODE_LEFT_ALIGN, 1);
-            StringAppend(text, sText_AreaDexSlash);
-            ConvertIntToDecimalStringN(text + StringLength(text), pageCount, STR_CONV_MODE_LEFT_ALIGN, 1);
-        }
-        PrintCurrentAreaCentered(0, text, 46);
-
-        firstEntry = sPokedexView->areaDexPage * CURRENT_AREA_PAGE_SIZE;
-        for (i = 0; i < CURRENT_AREA_PAGE_SIZE && firstEntry + i < sPokedexView->areaDexEntryCount; i++)
-        {
-            const struct AreaDexEntry *entry = &sPokedexView->areaDexEntries[firstEntry + i];
-            u8 y = 62 + i * 16;
-            bool8 caught = GetSetPokedexFlag(SpeciesToNationalPokedexNum(entry->species), FLAG_GET_CAUGHT);
-
-            if (caught)
-                BlitBitmapToWindow(WIN_INFO, sCaughtBall_Gfx, CURRENT_AREA_LEFT, y, 8, 16);
-            AddTextPrinterParameterized4(
-                WIN_INFO,
-                7,
-                CURRENT_AREA_NAME_LEFT,
-                y,
-                0,
-                0,
-                sCurrentAreaTextColors,
-                TEXT_SPEED_FF,
-                gSpeciesNames[entry->species]);
-
-            ConvertIntToDecimalStringN(text, entry->chance, STR_CONV_MODE_LEFT_ALIGN, 3);
-            StringAppend(text, sText_AreaDexPercent);
-            width = GetStringWidth(7, text, 0);
-            AddTextPrinterParameterized4(
-                WIN_INFO,
-                7,
-                width < CURRENT_AREA_RIGHT ? CURRENT_AREA_RIGHT - width : 0,
-                y,
-                0,
-                0,
-                sCurrentAreaTextColors,
-                TEXT_SPEED_FF,
-                text);
-        }
-    }
-
-    PrintCurrentAreaCentered(0, sText_AreaDexHelp, 148);
-    CopyWindowToVram(WIN_INFO, 3);
-}
-
-static void Task_LoadCurrentAreaPage(u8 taskId)
-{
-    switch (gMain.state)
-    {
-    case 0:
-    default:
-        if (!gPaletteFade.active)
-        {
-            SetVBlankCallback(NULL);
-            sPokedexView->currentPage = PAGE_CURRENT_AREA;
-            ResetOtherVideoRegisters(0);
-            ResetBgsAndClearDma3BusyFlags(0);
-            InitBgsFromTemplates(0, sInfoScreen_BgTemplate, ARRAY_COUNT(sInfoScreen_BgTemplate));
-            SetBgTilemapBuffer(3, AllocZeroed(BG_SCREEN_SIZE));
-            SetBgTilemapBuffer(2, AllocZeroed(BG_SCREEN_SIZE));
-            SetBgTilemapBuffer(1, AllocZeroed(BG_SCREEN_SIZE));
-            SetBgTilemapBuffer(0, AllocZeroed(BG_SCREEN_SIZE));
-            InitWindows(sInfoScreen_WindowTemplates);
-            DeactivateAllTextPrinters();
-            gMain.state = 1;
-        }
-        break;
-    case 1:
-        ResetSpriteData();
-        FreeAllSpritePalettes();
-        LoadTilesetTilemapHGSS(EVO_SCREEN);
-        PutWindowTilemap(WIN_INFO);
-        LoadPokedexBgPalette(FALSE);
-        sPokedexView->areaDexMethodCount = AreaDex_BuildCurrentMapMethods(
-            sPokedexView->areaDexMethods,
-            ARRAY_COUNT(sPokedexView->areaDexMethods));
-        sPokedexView->areaDexMethodIndex = 0;
-        sPokedexView->areaDexPage = 0;
-        CollectCurrentAreaEntries();
-        RenderCurrentAreaPage();
-        CopyBgTilemapBufferToVram(0);
-        CopyBgTilemapBufferToVram(1);
-        CopyBgTilemapBufferToVram(2);
-        CopyBgTilemapBufferToVram(3);
-        gMain.state++;
-        break;
-    case 2:
-        SetGpuReg(REG_OFFSET_BLDCNT, 0);
-        SetGpuReg(REG_OFFSET_BLDALPHA, 0);
-        SetGpuReg(REG_OFFSET_BLDY, 0);
-        SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0);
-        HideBg(0);
-        HideBg(1);
-        ShowBg(2);
-        ShowBg(3);
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
-        SetVBlankCallback(VBlankCB_Pokedex);
-        gMain.state++;
-        break;
-    case 3:
-        if (!gPaletteFade.active)
-        {
-            gMain.state = 0;
-            gTasks[taskId].func = Task_HandleCurrentAreaInput;
-        }
-        break;
-    }
-}
-
-static void Task_HandleCurrentAreaInput(u8 taskId)
-{
-    u8 pageCount;
-
-    if (JOY_NEW(B_BUTTON))
-    {
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
-        gTasks[taskId].func = Task_ExitCurrentAreaPage;
-        PlaySE(SE_PC_OFF);
-    }
-    else if (sPokedexView->areaDexMethodCount != 0
-          && (JOY_NEW(DPAD_LEFT) || JOY_NEW(L_BUTTON)))
-    {
-        sPokedexView->areaDexMethodIndex =
-            (sPokedexView->areaDexMethodIndex + sPokedexView->areaDexMethodCount - 1)
-            % sPokedexView->areaDexMethodCount;
-        sPokedexView->areaDexPage = 0;
-        CollectCurrentAreaEntries();
-        RenderCurrentAreaPage();
-        PlaySE(SE_DEX_PAGE);
-    }
-    else if (sPokedexView->areaDexMethodCount != 0
-          && (JOY_NEW(DPAD_RIGHT) || JOY_NEW(R_BUTTON)))
-    {
-        sPokedexView->areaDexMethodIndex =
-            (sPokedexView->areaDexMethodIndex + 1) % sPokedexView->areaDexMethodCount;
-        sPokedexView->areaDexPage = 0;
-        CollectCurrentAreaEntries();
-        RenderCurrentAreaPage();
-        PlaySE(SE_DEX_PAGE);
-    }
-    else if (sPokedexView->areaDexMethodCount != 0 && JOY_NEW(DPAD_UP | DPAD_DOWN))
-    {
-        pageCount = GetCurrentAreaPageCount();
-        if (pageCount > 1)
-        {
-            if (JOY_NEW(DPAD_UP))
-                sPokedexView->areaDexPage = (sPokedexView->areaDexPage + pageCount - 1) % pageCount;
-            else
-                sPokedexView->areaDexPage = (sPokedexView->areaDexPage + 1) % pageCount;
-            RenderCurrentAreaPage();
-            PlaySE(SE_DEX_PAGE);
-        }
-    }
-}
-
-static void Task_ExitCurrentAreaPage(u8 taskId)
-{
-    if (!gPaletteFade.active)
-    {
-        FreeInfoScreenWindowAndBgBuffers();
-        gMain.state = 0;
-        gTasks[taskId].func = Task_OpenPokedexMainPage;
-    }
 }
 
 static void Task_HandleInfoScreenInput(u8 taskId)

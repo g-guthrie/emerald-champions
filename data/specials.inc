@@ -157,6 +157,7 @@ gSpecials::
 	def_special MauvilleGymSetDefaultBarriers
 	def_special MauvilleGymPressSwitch
 	def_special ShowFieldMessageStringVar4
+	def_special BufferCurrentMapRouteSignSpecies
 	def_special DrawWholeMapView
 	def_special StorePlayerCoordsInVars
 	def_special MauvilleGymDeactivatePuzzle

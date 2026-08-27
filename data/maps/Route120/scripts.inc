@@ -289,11 +289,11 @@ Route120_EventScript_BridgeKecleon:: @ 81F57BC
 
 Route120_EventScript_RouteSignFortree:: @ 81F57C5
 	msgbox Route120_Text_RouteSignFortree, MSGBOX_SIGN
-	end
+	goto Common_EventScript_ShowRouteSpecies
 
 Route120_EventScript_RouteSign121:: @ 81F57CE
 	msgbox Route120_Text_RouteSign121, MSGBOX_SIGN
-	end
+	goto Common_EventScript_ShowRouteSpecies
 
 Route120_EventScript_Colin:: @ 81F57D7
 	trainerbattle_single TRAINER_COLIN, Route120_Text_ColinIntro, Route120_Text_ColinDefeat

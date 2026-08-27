@@ -64,11 +64,11 @@ Route118_EventScript_Girl:: @ 81F3E73
 
 Route118_EventScript_RouteSignMauville:: @ 81F3E7C
 	msgbox Route118_Text_RouteSignMauville, MSGBOX_SIGN
-	end
+	goto Common_EventScript_ShowRouteSpecies
 
 Route118_EventScript_RouteSign119:: @ 81F3E85
 	msgbox Route118_Text_RouteSign119, MSGBOX_SIGN
-	end
+	goto Common_EventScript_ShowRouteSpecies
 
 Route118_EventScript_StevenTrigger0:: @ 81F3E8E
 	lockall

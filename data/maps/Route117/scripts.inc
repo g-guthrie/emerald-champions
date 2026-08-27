@@ -28,11 +28,11 @@ Route117_EventScript_Girl:: @ 81F39AC
 
 Route117_EventScript_RouteSignVerdanturf:: @ 81F39B5
 	msgbox Route117_Text_RouteSignVerdanturf, MSGBOX_SIGN
-	end
+	goto Common_EventScript_ShowRouteSpecies
 
 Route117_EventScript_RouteSignMauville:: @ 81F39BE
 	msgbox Route117_Text_RouteSignMauville, MSGBOX_SIGN
-	end
+	goto Common_EventScript_ShowRouteSpecies
 
 Route117_EventScript_DayCareSign:: @ 81F39C7
 	msgbox Route117_Text_DayCareSign, MSGBOX_SIGN

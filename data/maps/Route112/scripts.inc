@@ -65,15 +65,15 @@ Route112_EventScript_ChanseyBlob::
 
 Route112_EventScript_MtChimneyCableCarSign:: @ 81F1E46
 	msgbox Route112_Text_MtChimneyCableCarSign, MSGBOX_SIGN
-	end
+	goto Common_EventScript_ShowRouteSpecies
 
 Route112_EventScript_MtChimneySign:: @ 81F1E4F
 	msgbox Route112_Text_MtChimneySign, MSGBOX_SIGN
-	end
+	goto Common_EventScript_ShowRouteSpecies
 
 Route112_EventScript_RouteSignLavaridge:: @ 81F1E58
 	msgbox Route112_Text_RouteSignLavaridge, MSGBOX_SIGN
-	end
+	goto Common_EventScript_ShowRouteSpecies
 
 Route112_EventScript_Hiker:: @ 81F1E61
 	msgbox Route112_Text_NotEasyToGetBackToLavaridge, MSGBOX_NPC
@@ -173,4 +173,3 @@ Route112_Text_MtChimneySign: @ 81F20ED
 Route112_Text_RouteSignLavaridge: @ 81F2138
 	.string "Route 112\n"
 	.string "{LEFT_ARROW} Lavaridge Town$"
-

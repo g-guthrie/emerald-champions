@@ -30,11 +30,11 @@ Route115_EventScript_Woman:: @ 81F2973
 
 Route115_EventScript_RouteSignRustboro:: @ 81F297C
 	msgbox Route115_Text_RouteSignRustboro, MSGBOX_SIGN
-	end
+	goto Common_EventScript_ShowRouteSpecies
 
 Route115_EventScript_MeteorFallsSign:: @ 81F2985
 	msgbox Route115_Text_MeteorFallsSign, MSGBOX_SIGN
-	end
+	goto Common_EventScript_ShowRouteSpecies
 
 Route115_EventScript_Timothy:: @ 81F298E
 	trainerbattle_single TRAINER_TIMOTHY_1, Route115_Text_TimothyIntro, Route115_Text_TimothyDefeat, Route115_EventScript_RegisterTimothy
@@ -150,4 +150,3 @@ Route115_Text_RouteSignRustboro: @ 81F2BC9
 Route115_Text_MeteorFallsSign: @ 81F2BE3
 	.string "Meteor Falls\n"
 	.string "FALLARBOR TOWN THROUGH HERE$"
-

@@ -7,11 +7,11 @@ Route102_EventScript_LittleBoy:: @ 81EC0E1
 
 Route102_EventScript_RouteSignOldale:: @ 81EC0EA
 	msgbox Route102_Text_RouteSignOldale, MSGBOX_SIGN
-	end
+	goto Common_EventScript_ShowRouteSpecies
 
 Route102_EventScript_RouteSignPetalburg:: @ 81EC0F3
 	msgbox Route102_Text_RouteSignPetalburg, MSGBOX_SIGN
-	end
+	goto Common_EventScript_ShowRouteSpecies
 
 Route102_EventScript_Boy:: @ 81EC0FC
 	msgbox Route102_Text_CatchWholeBunchOfPokemon, MSGBOX_NPC

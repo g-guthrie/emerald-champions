@@ -7,17 +7,6 @@
 #define FISH_WILD_COUNT     10
 #define HONEY_WILD_COUNT    6
 
-enum WildEncounterSlotType
-{
-    WILD_SLOT_LAND,
-    WILD_SLOT_WATER,
-    WILD_SLOT_ROCK_SMASH,
-    WILD_SLOT_OLD_ROD,
-    WILD_SLOT_GOOD_ROD,
-    WILD_SLOT_SUPER_ROD,
-    WILD_SLOT_HONEY,
-};
-
 struct WildPokemon
 {
     u8 minLevel;
@@ -62,6 +51,6 @@ bool8 UpdateRepelCounter(void);
 bool8 TryDoDoubleWildBattle(void);
 void HoneyWildEncounter(void);
 u16 GetCurrentMapWildMonHeaderId(void);
-u8 GetWildEncounterSlotChance(u8 slotType, u8 slot);
+void BufferCurrentMapRouteSignSpecies(void);
 
 #endif // GUARD_WILD_ENCOUNTER_H

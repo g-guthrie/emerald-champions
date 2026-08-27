@@ -335,7 +335,7 @@ Route119_EventScript_CyclingTriathleteM:: @ 81F476B
 
 Route119_EventScript_RouteSignFortree:: @ 81F4774
 	msgbox Route119_Text_RouteSignFortree, MSGBOX_SIGN
-	end
+	goto Common_EventScript_ShowRouteSpecies
 
 Route119_EventScript_WeatherInstituteSign:: @ 81F477D
 	msgbox Route119_Text_WeatherInstitute, MSGBOX_SIGN

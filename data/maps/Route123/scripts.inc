@@ -34,11 +34,11 @@ Route123_EventScript_ReceivedGigaDrain:: @ 81F61A0
 
 Route123_EventScript_RouteSign:: @ 81F61AA
 	msgbox Route123_Text_RouteSign, MSGBOX_SIGN
-	end
+	goto Common_EventScript_ShowRouteSpecies
 
 Route123_EventScript_RouteSignMtPyre:: @ 81F61B3
 	msgbox Route123_Text_RouteSignMtPyre, MSGBOX_SIGN
-	end
+	goto Common_EventScript_ShowRouteSpecies
 
 Route123_EventScript_BerryMastersHouseSign:: @ 81F61BC
 	msgbox Route123_Text_BerryMastersHouse, MSGBOX_SIGN

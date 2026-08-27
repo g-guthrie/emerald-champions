@@ -315,11 +315,11 @@ Route104_EventScript_BrineysCottageSign:: @ 81ED018
 
 Route104_EventScript_RouteSignPetalburg:: @ 81ED021
 	msgbox Route104_Text_RouteSignPetalburg, MSGBOX_SIGN
-	end
+	goto Common_EventScript_ShowRouteSpecies
 
 Route104_EventScript_RouteSignRustboro:: @ 81ED02A
 	msgbox Route104_Text_RouteSignRustboro, MSGBOX_SIGN
-	end
+	goto Common_EventScript_ShowRouteSpecies
 
 Route104_EventScript_FlowerShopSign:: @ 81ED033
 	msgbox Route104_Text_PrettyPetalFlowShop, MSGBOX_SIGN
