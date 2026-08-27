@@ -33,6 +33,11 @@ subprocess.run(
     check=True,
 )
 subprocess.run(
+    [sys.executable, str(ROOT / "scripts/verify_capture_ready_wilds.py")],
+    cwd=ROOT,
+    check=True,
+)
+subprocess.run(
     [sys.executable, str(ROOT / "scripts/verify_competitive_references.py")],
     cwd=ROOT,
     check=True,
@@ -262,7 +267,7 @@ battle_script_command_source = read("src/battle_script_commands.c")
 battle_util_source = read("src/battle_util.c")
 pc_tutor_source = read("data/scripts/pokemon_center_move_tutor.inc")
 pc_menu_block = field_specials_source.split("[SCROLL_MULTI_POKE_CENTER_TUTOR] =", 1)[1].split("},", 1)[0]
-battle_set_runtime = field_specials_source.split("void ApplySelectedMonBattleSet", 1)[1].split("// Changes the selected Pokemon's nature.", 1)[0]
+battle_set_runtime = read("src/verdant_battle_sets.c")
 battle_set_generator_source = read("scripts/verdant_battle_set_presets.py")
 base_stats_source = read("src/data/pokemon/base_stats.h")
 form_reviews_100 = read("docs/battle_set_reviews/100_forms_899_1010.json")
@@ -944,7 +949,10 @@ checks = {
     "egg moves no longer require shared egg groups": "DoMonsShareEggGroup" not in read("src/daycare.c"),
     "cap EV gains recalculate stats": read("src/battle_script_commands.c").count("CalculateMonStats(&gPlayerParty[gBattleStruct->expGetterMonId])") >= 2,
     "EV service charges actual gain": "gSpecialVar_0x8009 = actualIncrement * 100" in read("src/field_specials.c"),
-    "rare candy handles chained evolutions": "CB2_ContinueRareCandyEvolution" in read("src/party_menu.c"),
+    "rare candy preserves an intermediate-form tutor window": (
+        "GetRareCandyTargetLevel" in read("src/party_menu.c")
+        and "One Rare Candy stops after one evolution" in read("src/party_menu.c")
+    ),
     "Battle Style selector removed": "MENUITEM_BATTLE_STYLE" not in read("src/option_menu.c"),
     "normal Birch intro has no hack-author interstitial": (
         "gText_Pie_" not in read("src/main_menu.c")
@@ -990,6 +998,7 @@ checks = {
         and "special IsSelectedMonEgg" in pc_tutor_source.split("PKMN_Center_BattleSet_ChooseMon::", 1)[1].split("PKMN_Center_BattleSet_CantBuildForEgg::", 1)[0]
         and "This replaces all four moves" in pc_tutor_source
         and "special ApplySelectedMonBattleSet" in pc_tutor_source
+        and "ApplyVerdantBattleSetPreset(mon)" in field_specials_source
         and "MON_DATA_SPECIES2" in battle_set_runtime
         and "MON_DATA_PP_BONUSES" in battle_set_runtime
         and "for (i = 0; i < MAX_MON_MOVES; i++)\n        SetMonMoveSlot" in battle_set_runtime

@@ -88,6 +88,7 @@ EWRAM_DATA static u16 sTrainerBattleMode = 0;
 EWRAM_DATA u16 gTrainerBattleOpponent_A = 0;
 EWRAM_DATA u16 gTrainerBattleOpponent_B = 0;
 EWRAM_DATA u16 gPartnerTrainerId = 0;
+EWRAM_DATA bool8 gIsScriptedWildEncounter = FALSE;
 EWRAM_DATA static u16 sTrainerObjectEventLocalId = 0;
 EWRAM_DATA static u8 *sTrainerAIntroSpeech = NULL;
 EWRAM_DATA static u8 *sTrainerBIntroSpeech = NULL;
@@ -405,6 +406,7 @@ static void DoStandardWildBattle(bool32 isDouble)
     sub_808BCF4();
     gMain.savedCallback = CB2_EndWildBattle;
     gBattleTypeFlags = 0;
+    gIsScriptedWildEncounter = FALSE;
     if (isDouble)
         gBattleTypeFlags |= BATTLE_TYPE_DOUBLE;
     if (InBattlePyramid())
@@ -426,6 +428,7 @@ void BattleSetup_StartRoamerBattle(void)
     sub_808BCF4();
     gMain.savedCallback = CB2_EndWildBattle;
     gBattleTypeFlags = BATTLE_TYPE_ROAMER;
+    gIsScriptedWildEncounter = TRUE;
     CreateBattleStartTask(GetWildBattleTransition(), 0);
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
@@ -440,6 +443,7 @@ static void DoSafariBattle(void)
     sub_808BCF4();
     gMain.savedCallback = CB2_EndSafariBattle;
     gBattleTypeFlags = BATTLE_TYPE_SAFARI;
+    gIsScriptedWildEncounter = FALSE;
     CreateBattleStartTask(GetWildBattleTransition(), 0);
 }
 
@@ -450,6 +454,7 @@ static void DoBattlePikeWildBattle(void)
     sub_808BCF4();
     gMain.savedCallback = CB2_EndWildBattle;
     gBattleTypeFlags = BATTLE_TYPE_PIKE;
+    gIsScriptedWildEncounter = TRUE;
     CreateBattleStartTask(GetWildBattleTransition(), 0);
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
@@ -484,6 +489,7 @@ void StartWallyTutorialBattle(void)
     ScriptContext2_Enable();
     gMain.savedCallback = CB2_ReturnToFieldContinueScriptPlayMapMusic;
     gBattleTypeFlags = BATTLE_TYPE_WALLY_TUTORIAL;
+    gIsScriptedWildEncounter = TRUE;
     CreateBattleStartTask(B_TRANSITION_SLICE, 0);
 }
 
@@ -492,6 +498,7 @@ void BattleSetup_StartScriptedWildBattle(void)
     ScriptContext2_Enable();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
     gBattleTypeFlags = 0;
+    gIsScriptedWildEncounter = TRUE;
     CreateBattleStartTask(GetWildBattleTransition(), 0);
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
@@ -504,6 +511,7 @@ void BattleSetup_StartScriptedDoubleWildBattle(void)
     ScriptContext2_Enable();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
     gBattleTypeFlags = BATTLE_TYPE_DOUBLE;
+    gIsScriptedWildEncounter = TRUE;
     CreateBattleStartTask(GetWildBattleTransition(), 0);
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
@@ -516,6 +524,7 @@ void BattleSetup_StartLatiBattle(void)
     ScriptContext2_Enable();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
     gBattleTypeFlags = BATTLE_TYPE_LEGENDARY;
+    gIsScriptedWildEncounter = TRUE;
     CreateBattleStartTask(GetWildBattleTransition(), 0);
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
@@ -529,6 +538,7 @@ void BattleSetup_StartLegendaryBattle(void)
     ScriptContext2_Enable();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
     gBattleTypeFlags = BATTLE_TYPE_LEGENDARY;
+    gIsScriptedWildEncounter = TRUE;
 
     musicId = GetBattleBGM();
 
@@ -571,6 +581,7 @@ void StartGroudonKyogreBattle(void)
     ScriptContext2_Enable();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
     gBattleTypeFlags = BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_KYOGRE_GROUDON;
+    gIsScriptedWildEncounter = TRUE;
 
     if (gGameVersion == VERSION_RUBY)
         CreateBattleStartTask(B_TRANSITION_SHARDS, MUS_VS_KYOGRE_GROUDON); // Groudon
@@ -591,6 +602,7 @@ void StartRegiBattle(void)
     ScriptContext2_Enable();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
     gBattleTypeFlags = BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_REGI;
+    gIsScriptedWildEncounter = TRUE;
 
     species = GetMonData(&gEnemyParty[0], MON_DATA_SPECIES);
     switch (species)

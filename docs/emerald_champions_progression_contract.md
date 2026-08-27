@@ -7,8 +7,13 @@ different system later in the story.
 ## Player power is front-loaded on purpose
 
 - Strict level caps define progression; experience grinding does not.
-- Rare Candy costs $1,000, raises a Pokémon by up to ten levels, and is present
-  in every ordinary medicine Mart tier.
+- The reusable Leveler is given beside the Poké Vial and raises every eligible
+  party member directly to the current strict cap.
+- Rare Candy costs $1,000, raises a Pokémon by up to ten levels, stops at the
+  cap or the next crossed level-evolution threshold, and is present in every
+  ordinary medicine Mart tier.
+- Leveling never changes moves automatically. Level-up and evolution learnsets
+  remain legality sources for the Pokémon Center teacher.
 - The Pokémon Center teacher offers every move that the selected species can
   legally learn from level-up, Egg, TM/HM, or tutor data. It does not bypass
   species legality.
@@ -57,6 +62,13 @@ the general unlimited stock.
 
 ## Wild-encounter rules
 
+- Every eligible ordinary random catch receives its authored doubles preset
+  immediately before entering the party or PC: moves, PP, nature, and ability.
+  IVs, EVs, level, personality, shiny status, gender, Ball, held item,
+  friendship, and nickname remain individual.
+- Scripted, static, roaming, Frontier, Legendary, and Mythical captures retain
+  their authored data. Existing owned Pokémon and later evolutions are never
+  silently overwritten.
 - Every ordinary encounter source shown in the Pokédex uses the exact base
   runtime odds after duplicate slots are aggregated.
 - A unique or required species is never confined to one 4% or 5% source.

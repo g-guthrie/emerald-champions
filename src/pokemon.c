@@ -75,7 +75,6 @@ static bool8 ShouldSkipFriendshipChange(void);
 static void ShuffleStatArray(u8* statArray);
 
 // EWRAM vars
-EWRAM_DATA static u8 sLearningMoveTableID = 0;
 EWRAM_DATA static u16 sRelearnableMovesBuffer[MOVES_COUNT] = {0};
 EWRAM_DATA u8 gPlayerPartyCount = 0;
 EWRAM_DATA u8 gEnemyPartyCount = 0;
@@ -4069,86 +4068,19 @@ void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon)
 
 u16 MonTryLearningNewMove(struct Pokemon *mon, bool8 firstMove)
 {
-    u32 retVal = MOVE_NONE;
-    u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
-    u8 level = GetMonData(mon, MON_DATA_LEVEL, NULL);
-
-    // since you can learn more than one move per level
-    // the game needs to know whether you decided to
-    // learn it or keep the old set to avoid asking
-    // you to learn the same move over and over again
-    if (firstMove)
-    {
-        sLearningMoveTableID = 0;
-
-        while (gLevelUpLearnsets[species][sLearningMoveTableID].level != level)
-        {
-            sLearningMoveTableID++;
-            if (gLevelUpLearnsets[species][sLearningMoveTableID].move == LEVEL_UP_END)
-                return MOVE_NONE;
-        }
-    }
-
-    if (gLevelUpLearnsets[species][sLearningMoveTableID].level == level)
-    {
-        gMoveToLearn = gLevelUpLearnsets[species][sLearningMoveTableID].move;
-        sLearningMoveTableID++;
-        retVal = GiveMoveToMon(mon, gMoveToLearn);
-    }
-
-    return retVal;
+    // Emerald Champions keeps level-up learnsets as tutor legality data, but
+    // never interrupts leveling to alter a player's chosen battle set.
+    return MOVE_NONE;
 }
 
 u16 MonTryLearningNewMoveInRange(struct Pokemon *mon, bool8 firstMove, u8 startLevel)
 {
-    u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
-    u8 level = GetMonData(mon, MON_DATA_LEVEL, NULL);
-
-    if (firstMove)
-    {
-        sLearningMoveTableID = 0;
-        while (gLevelUpLearnsets[species][sLearningMoveTableID].move != LEVEL_UP_END
-            && gLevelUpLearnsets[species][sLearningMoveTableID].level <= startLevel)
-            sLearningMoveTableID++;
-    }
-
-    if (gLevelUpLearnsets[species][sLearningMoveTableID].move != LEVEL_UP_END
-        && gLevelUpLearnsets[species][sLearningMoveTableID].level <= level)
-    {
-        gMoveToLearn = gLevelUpLearnsets[species][sLearningMoveTableID].move;
-        sLearningMoveTableID++;
-        return GiveMoveToMon(mon, gMoveToLearn);
-    }
-
     return MOVE_NONE;
 }
 
 u16 MonTryLearningNewEvolutionMove(struct Pokemon *mon, bool8 firstMove)
 {
-    u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
-    u8 level = GetMonData(mon, MON_DATA_LEVEL, NULL);
-
-    // since you can learn more than one move per level
-    // the game needs to know whether you decided to
-    // learn it or keep the old set to avoid asking
-    // you to learn the same move over and over again
-    if (firstMove)
-    {
-        sLearningMoveTableID = 0;
-    }
-    while(gLevelUpLearnsets[species][sLearningMoveTableID].move != LEVEL_UP_END)
-    {
-        u16 moveLevel;
-        moveLevel = (gLevelUpLearnsets[species][sLearningMoveTableID].level);
-        while (moveLevel == 0 || moveLevel == level)
-        {
-            gMoveToLearn = (gLevelUpLearnsets[species][sLearningMoveTableID].move);
-            sLearningMoveTableID++;
-            return GiveMoveToMon(mon, gMoveToLearn);
-        }
-        sLearningMoveTableID++;
-    }
-    return 0;
+    return MOVE_NONE;
 }
 
 void DeleteFirstMoveAndGiveMoveToMon(struct Pokemon *mon, u16 move)

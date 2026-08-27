@@ -83,9 +83,9 @@ check(
     "if (!isLeveler)\n            RemoveBagItem(gSpecialVar_ItemId, 1);" in party,
 )
 check(
-    "crossed level-up moves and chained evolutions remain interactive",
+    "the Leveler skips move prompts but preserves chained evolutions",
     all(token in party for token in (
-        "MonTryLearningNewMoveInRange",
+        "RemoveLevelUpStatsWindow();\n        PartyMenuTryEvolution(taskId);",
         "gCB2_AfterEvolution = CB2_ContinueLevelerEvolution",
         "BeginEvolutionScene(mon, targetSpecies, TRUE, gPartyMenu.slotId)",
         "SetMainCallback2(CB2_ShowPartyMenuForLeveler)",

@@ -93,5 +93,5 @@ gText_LevelerForExistingTrainer::
 gText_ExplainLeveler::
     .string "Use the Leveler at any time to raise\n"
     .string "your whole party to the current cap.\p"
-    .string "It never runs out, and normal move\n"
-    .string "learning and evolution still occur.$"
+    .string "It never runs out. Evolutions still\n"
+    .string "happen normally as levels rise.$"

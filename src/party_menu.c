@@ -74,6 +74,7 @@
 #include "constants/maps.h"
 #include "constants/moves.h"
 #include "constants/party_menu.h"
+#include "constants/pokemon.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "data/pokemon/form_species_tables.h"
@@ -166,7 +167,6 @@ static EWRAM_DATA struct Pokemon sPartyOrderBuffer[PARTY_SIZE] = {0};
 EWRAM_DATA u8 gSelectedOrderFromParty[MAX_FRONTIER_PARTY_SIZE] = {0};
 static EWRAM_DATA u16 sPartyMenuItemId = 0;
 static EWRAM_DATA u16 sUnused = 0;
-static EWRAM_DATA u8 sRareCandyStartLevel = 0;
 static EWRAM_DATA u16 sRareCandyEvolutionSpecies = SPECIES_NONE;
 static EWRAM_DATA u8 sLevelerNextSlot = 0;
 static EWRAM_DATA MainCallback sLevelerExitCallback = NULL;
@@ -368,6 +368,7 @@ static void CB2_ContinueLevelerEvolution(void);
 static void CB2_ShowPartyMenuForLeveler(void);
 static void Task_SetLevelerCB(u8 taskId);
 static void Task_ContinueLevelerAfterText(u8 taskId);
+static u8 GetRareCandyTargetLevel(struct Pokemon *mon, u8 level);
 static void DisplayMonNeedsToReplaceMove(u8);
 static void DisplayMonLearnedMove(u8, u16);
 static void UseSacredAsh(u8);
@@ -5416,10 +5417,9 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
 
     if (level != MAX_LEVEL && (level < GetLevelCap()))
     {
-        sRareCandyStartLevel = level;
         BufferMonStatsToTaskData(mon, arrayPtr);
         cannotUseEffect = ExecuteTableBasedItemEffect_(gPartyMenu.slotId, isLeveler ? ITEM_RARE_CANDY : *itemPtr, 0);
-        targetLevel = min(level + 10, GetLevelCap());
+        targetLevel = GetRareCandyTargetLevel(mon, level);
         if (isLeveler)
             targetLevel = GetLevelCap();
         targetLevel = min(targetLevel, MAX_LEVEL);
@@ -5457,6 +5457,52 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
         ScheduleBgCopyTilemapToVram(2);
         gTasks[taskId].func = Task_DisplayLevelUpStatsPg1;
     }
+}
+
+static bool8 IsLevelThresholdEvolution(u16 method)
+{
+    switch (method)
+    {
+    case EVO_LEVEL:
+    case EVO_LEVEL_ATK_GT_DEF:
+    case EVO_LEVEL_ATK_EQ_DEF:
+    case EVO_LEVEL_ATK_LT_DEF:
+    case EVO_LEVEL_SILCOON:
+    case EVO_LEVEL_CASCOON:
+    case EVO_LEVEL_NINJASK:
+    case EVO_LEVEL_SHEDINJA:
+    case EVO_LEVEL_FEMALE:
+    case EVO_LEVEL_MALE:
+    case EVO_LEVEL_NIGHT:
+    case EVO_LEVEL_DAY:
+    case EVO_LEVEL_DUSK:
+    case EVO_LEVEL_RAIN:
+    case EVO_LEVEL_DARK_TYPE_MON_IN_PARTY:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
+static u8 GetRareCandyTargetLevel(struct Pokemon *mon, u8 level)
+{
+    u16 species = GetMonData(mon, MON_DATA_SPECIES);
+    u8 targetLevel = min(level + 10, GetLevelCap());
+    u8 i;
+
+    // A Rare Candy is the deliberate intermediate-form tool. Stop at the
+    // first crossed level threshold so the player can visit the tutor before
+    // choosing to continue the evolution line.
+    for (i = 0; i < EVOS_PER_MON; i++)
+    {
+        const struct Evolution *evolution = &gEvolutionTable[species][i];
+        if (IsLevelThresholdEvolution(evolution->method)
+         && evolution->param > level
+         && evolution->param < targetLevel)
+            targetLevel = evolution->param;
+    }
+
+    return targetLevel;
 }
 
 static void UpdateMonDisplayInfoAfterRareCandy(u8 slot, struct Pokemon *mon)
@@ -5513,34 +5559,16 @@ static void DisplayLevelUpStatsPg2(u8 taskId)
 
 static void Task_TryLearnNewMoves(u8 taskId)
 {
-    u16 learnMove;
-
     if (WaitFanfare(0) && ((JOY_NEW(A_BUTTON)) || (JOY_NEW(B_BUTTON))))
     {
         RemoveLevelUpStatsWindow();
-        learnMove = MonTryLearningNewMoveInRange(&gPlayerParty[gPartyMenu.slotId], TRUE, sRareCandyStartLevel);
-        gPartyMenu.learnMoveState = 1;
-        switch (learnMove)
-        {
-        case 0: // No moves to learn
-            PartyMenuTryEvolution(taskId);
-            break;
-        case MON_HAS_MAX_MOVES:
-            DisplayMonNeedsToReplaceMove(taskId);
-            break;
-        case MON_ALREADY_KNOWS_MOVE:
-            gTasks[taskId].func = Task_TryLearningNextMove;
-            break;
-        default:
-            DisplayMonLearnedMove(taskId, learnMove);
-            break;
-        }
+        PartyMenuTryEvolution(taskId);
     }
 }
 
 static void Task_TryLearningNextMove(u8 taskId)
 {
-    u16 result = MonTryLearningNewMoveInRange(&gPlayerParty[gPartyMenu.slotId], FALSE, sRareCandyStartLevel);
+    u16 result = MonTryLearningNewMoveInRange(&gPlayerParty[gPartyMenu.slotId], FALSE, 0);
 
     switch (result)
     {
@@ -5636,24 +5664,8 @@ static void Task_ContinueLevelerAfterText(u8 taskId)
 
 static void CB2_ContinueRareCandyEvolution(void)
 {
-    struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
-    u16 currentSpecies = GetMonData(mon, MON_DATA_SPECIES);
-
-    // If the player canceled, stop instead of immediately asking again.
-    if (currentSpecies != sRareCandyEvolutionSpecies)
-    {
-        u16 targetSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_NORMAL, ITEM_NONE, SPECIES_NONE);
-
-        // A ten-level jump can cross more than one evolution threshold.
-        if (targetSpecies != SPECIES_NONE)
-        {
-            sRareCandyEvolutionSpecies = currentSpecies;
-            gCB2_AfterEvolution = CB2_ContinueRareCandyEvolution;
-            BeginEvolutionScene(mon, targetSpecies, TRUE, gPartyMenu.slotId);
-            return;
-        }
-    }
-
+    // One Rare Candy stops after one evolution, leaving a clean tutor window
+    // for intermediate forms before another deliberate level jump.
     sRareCandyEvolutionSpecies = SPECIES_NONE;
     if (CheckBagHasItem(ITEM_RARE_CANDY, 1))
         CB2_ReturnToPartyMenuUsingRareCandy();

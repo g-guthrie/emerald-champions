@@ -73,8 +73,6 @@
 #include "constants/metatile_labels.h"
 #include "palette.h"
 
-#include "data/pokemon/verdant_battle_sets.h"
-
 void TryGiveVerdantMegaKit(void)
 {
     gSpecialVar_Result = TryAddVerdantMegaKit();
@@ -5092,13 +5090,7 @@ u8 Script_TryGainNewFanFromCounter(void)
 void ApplySelectedMonBattleSet(void)
 {
     struct Pokemon *mon;
-    const struct VerdantBattleSetPreset *preset;
     u16 species;
-    u16 move;
-    u8 ppBonuses = 0;
-    u8 i;
-    u8 j;
-    bool8 sawEmptyMove = FALSE;
 
     gSpecialVar_Result = FALSE;
 
@@ -5110,38 +5102,7 @@ void ApplySelectedMonBattleSet(void)
     if (species == SPECIES_NONE || species == SPECIES_EGG || species >= NUM_SPECIES)
         return;
 
-    preset = &gVerdantBattleSetPresets[species];
-    if (preset->nature >= NUM_NATURES
-     || preset->abilitySlot >= NUM_ABILITY_SLOTS
-     || gBaseStats[species].abilities[preset->abilitySlot] == ABILITY_NONE)
-        return;
-
-    for (i = 0; i < MAX_MON_MOVES; i++)
-    {
-        move = preset->moves[i];
-        if (move == MOVE_NONE)
-        {
-            sawEmptyMove = TRUE;
-            continue;
-        }
-        if (sawEmptyMove || move >= MOVES_COUNT)
-            return;
-        for (j = 0; j < i; j++)
-        {
-            if (preset->moves[j] == move)
-                return;
-        }
-    }
-    if (preset->moves[0] == MOVE_NONE)
-        return;
-
-    SetMonData(mon, MON_DATA_PP_BONUSES, &ppBonuses);
-    for (i = 0; i < MAX_MON_MOVES; i++)
-        SetMonMoveSlot(mon, preset->moves[i], i);
-    SetMonData(mon, MON_DATA_NATURE, &preset->nature);
-    SetMonData(mon, MON_DATA_ABILITY_NUM, &preset->abilitySlot);
-    CalculateMonStats(mon);
-    gSpecialVar_Result = TRUE;
+    gSpecialVar_Result = ApplyVerdantBattleSetPreset(mon);
 }
 
 // Changes the selected Pokemon's nature.

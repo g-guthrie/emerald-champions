@@ -59,6 +59,7 @@
 #include "data.h"
 #include "constants/party_menu.h"
 #include "battle_util.h"
+#include "verdant_battle_sets.h"
 
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
@@ -15083,6 +15084,13 @@ static void Cmd_givecaughtmon(void)
         u16 noItem = ITEM_NONE;
         SetMonData(&gEnemyParty[partyIndex], MON_DATA_HELD_ITEM, &noItem);
     }
+
+    // Ordinary random catches arrive battle-ready. Scripted, roaming,
+    // Frontier, and legendary/mythical captures retain their authored data.
+    if (!gIsScriptedWildEncounter
+     && !(gBattleTypeFlags & (BATTLE_TYPE_ROAMER | BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_PIKE | BATTLE_TYPE_PYRAMID))
+     && !IsVerdantLegendarySpecies(GetMonData(&gEnemyParty[partyIndex], MON_DATA_SPECIES2)))
+        ApplyVerdantBattleSetPreset(&gEnemyParty[partyIndex]);
 
     if (GiveMonToPlayer(&gEnemyParty[partyIndex]) != MON_GIVEN_TO_PARTY)
     {

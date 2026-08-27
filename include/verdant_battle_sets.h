@@ -13,5 +13,7 @@ struct VerdantBattleSetPreset
 };
 
 extern const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES];
+bool8 ApplyVerdantBattleSetPreset(struct Pokemon *mon);
+bool8 IsVerdantLegendarySpecies(u16 species);
 
 #endif // GUARD_VERDANT_BATTLE_SETS_H
