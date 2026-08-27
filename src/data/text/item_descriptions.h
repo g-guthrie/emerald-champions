@@ -461,6 +461,11 @@ static const u8 sPokeVialDesc[] = _(
     "that fully restores\n"
     "all Pokémon.");
 
+static const u8 sLevelerDesc[] = _(
+    "Raises all party\n"
+    "Pokémon to the\n"
+    "current level cap.");
+
 static const u8 sEscapeRopeDesc[] = _(
     "Use to escape\n"
     "instantly from a\n"

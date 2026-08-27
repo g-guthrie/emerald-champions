@@ -168,6 +168,8 @@ static EWRAM_DATA u16 sPartyMenuItemId = 0;
 static EWRAM_DATA u16 sUnused = 0;
 static EWRAM_DATA u8 sRareCandyStartLevel = 0;
 static EWRAM_DATA u16 sRareCandyEvolutionSpecies = SPECIES_NONE;
+static EWRAM_DATA u8 sLevelerNextSlot = 0;
+static EWRAM_DATA MainCallback sLevelerExitCallback = NULL;
 EWRAM_DATA u8 gBattlePartyCurrentOrder[PARTY_SIZE / 2] = {0}; // bits 0-3 are the current pos of Slot 1, 4-7 are Slot 2, and so on
 
 // IWRAM common
@@ -362,6 +364,10 @@ static void DisplayLevelUpStatsPg2(u8);
 static void Task_TryLearnNewMoves(u8);
 static void PartyMenuTryEvolution(u8);
 static void CB2_ContinueRareCandyEvolution(void);
+static void CB2_ContinueLevelerEvolution(void);
+static void CB2_ShowPartyMenuForLeveler(void);
+static void Task_SetLevelerCB(u8 taskId);
+static void Task_ContinueLevelerAfterText(u8 taskId);
 static void DisplayMonNeedsToReplaceMove(u8);
 static void DisplayMonLearnedMove(u8, u16);
 static void UseSacredAsh(u8);
@@ -5406,13 +5412,16 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
     u8 level = GetMonData(mon, MON_DATA_LEVEL);
     u8 targetLevel;
     u32 targetExp;
+    bool8 isLeveler = (*itemPtr == ITEM_LEVELER);
 
     if (level != MAX_LEVEL && (level < GetLevelCap()))
     {
         sRareCandyStartLevel = level;
         BufferMonStatsToTaskData(mon, arrayPtr);
-        cannotUseEffect = ExecuteTableBasedItemEffect_(gPartyMenu.slotId, *itemPtr, 0);
+        cannotUseEffect = ExecuteTableBasedItemEffect_(gPartyMenu.slotId, isLeveler ? ITEM_RARE_CANDY : *itemPtr, 0);
         targetLevel = min(level + 10, GetLevelCap());
+        if (isLeveler)
+            targetLevel = GetLevelCap();
         targetLevel = min(targetLevel, MAX_LEVEL);
         if (targetLevel > level + 1)
         {
@@ -5439,7 +5448,8 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
         gPartyMenuUseExitCallback = TRUE;
         PlayFanfareByFanfareNum(FANFARE_LEVEL_UP);
         UpdateMonDisplayInfoAfterRareCandy(gPartyMenu.slotId, mon);
-        RemoveBagItem(gSpecialVar_ItemId, 1);
+        if (!isLeveler)
+            RemoveBagItem(gSpecialVar_ItemId, 1);
         GetMonNickname(mon, gStringVar1);
         ConvertIntToDecimalStringN(gStringVar2, GetMonData(mon, MON_DATA_LEVEL), STR_CONV_MODE_LEFT_ALIGN, 3);
         StringExpandPlaceholders(gStringVar4, gText_PkmnElevatedToLvVar2);
@@ -5554,6 +5564,76 @@ static void CB2_ReturnToPartyMenuUsingRareCandy(void)
     SetMainCallback2(CB2_ShowPartyMenuForItemUse);
 }
 
+static u8 FindNextLevelerSlot(void)
+{
+    u8 slot;
+    u8 levelCap = GetLevelCap();
+
+    for (slot = sLevelerNextSlot; slot < gPlayerPartyCount; slot++)
+    {
+        if (GetMonData(&gPlayerParty[slot], MON_DATA_SPECIES) != SPECIES_NONE
+         && !GetMonData(&gPlayerParty[slot], MON_DATA_IS_EGG)
+         && GetMonData(&gPlayerParty[slot], MON_DATA_LEVEL) < levelCap)
+            return slot;
+    }
+
+    return PARTY_SIZE;
+}
+
+void StartLevelerPartySequence(MainCallback exitCallback)
+{
+    sLevelerNextSlot = 0;
+    sLevelerExitCallback = exitCallback;
+    SetMainCallback2(CB2_ShowPartyMenuForLeveler);
+}
+
+static void CB2_ShowPartyMenuForLeveler(void)
+{
+    u8 slot = FindNextLevelerSlot();
+
+    if (slot == PARTY_SIZE)
+    {
+        SetMainCallback2(sLevelerExitCallback);
+        return;
+    }
+
+    gPartyMenu.slotId = slot;
+    sLevelerNextSlot = slot + 1;
+    InitPartyMenu(PARTY_MENU_TYPE_FIELD, PARTY_LAYOUT_SINGLE, PARTY_ACTION_USE_ITEM, TRUE,
+                  PARTY_MSG_NONE, Task_SetLevelerCB, sLevelerExitCallback);
+}
+
+static void Task_SetLevelerCB(u8 taskId)
+{
+    if (!gPaletteFade.active)
+        ItemUseCB_RareCandy(taskId, Task_ClosePartyMenuAfterText);
+}
+
+static void Task_ContinueLevelerAfterText(u8 taskId)
+{
+    u8 oldSlot;
+    u8 newSlot;
+
+    if (IsPartyMenuTextPrinterActive())
+        return;
+
+    newSlot = FindNextLevelerSlot();
+    if (newSlot == PARTY_SIZE)
+    {
+        gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+        return;
+    }
+
+    ClearStdWindowAndFrameToTransparent(6, FALSE);
+    ClearWindowTilemap(6);
+    oldSlot = gPartyMenu.slotId;
+    AnimatePartySlot(oldSlot, 0);
+    gPartyMenu.slotId = newSlot;
+    sLevelerNextSlot = newSlot + 1;
+    AnimatePartySlot(newSlot, 1);
+    ItemUseCB_RareCandy(taskId, Task_ClosePartyMenuAfterText);
+}
+
 static void CB2_ContinueRareCandyEvolution(void)
 {
     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
@@ -5581,6 +5661,28 @@ static void CB2_ContinueRareCandyEvolution(void)
         SetMainCallback2(gPartyMenu.exitCallback);
 }
 
+static void CB2_ContinueLevelerEvolution(void)
+{
+    struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
+    u16 currentSpecies = GetMonData(mon, MON_DATA_SPECIES);
+
+    if (currentSpecies != sRareCandyEvolutionSpecies)
+    {
+        u16 targetSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_NORMAL, ITEM_NONE, SPECIES_NONE);
+
+        if (targetSpecies != SPECIES_NONE)
+        {
+            sRareCandyEvolutionSpecies = currentSpecies;
+            gCB2_AfterEvolution = CB2_ContinueLevelerEvolution;
+            BeginEvolutionScene(mon, targetSpecies, TRUE, gPartyMenu.slotId);
+            return;
+        }
+    }
+
+    sRareCandyEvolutionSpecies = SPECIES_NONE;
+    SetMainCallback2(CB2_ShowPartyMenuForLeveler);
+}
+
 static void PartyMenuTryEvolution(u8 taskId)
 {
     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
@@ -5589,7 +5691,12 @@ static void PartyMenuTryEvolution(u8 taskId)
     if (targetSpecies != SPECIES_NONE)
     {
         FreePartyPointers();
-        if (gSpecialVar_ItemId == ITEM_RARE_CANDY && gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD)
+        if (gSpecialVar_ItemId == ITEM_LEVELER && gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD)
+        {
+            sRareCandyEvolutionSpecies = GetMonData(mon, MON_DATA_SPECIES);
+            gCB2_AfterEvolution = CB2_ContinueLevelerEvolution;
+        }
+        else if (gSpecialVar_ItemId == ITEM_RARE_CANDY && gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD)
         {
             sRareCandyEvolutionSpecies = GetMonData(mon, MON_DATA_SPECIES);
             gCB2_AfterEvolution = CB2_ContinueRareCandyEvolution;
@@ -5601,7 +5708,9 @@ static void PartyMenuTryEvolution(u8 taskId)
     }
     else
     {
-        if (gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD && CheckBagHasItem(gSpecialVar_ItemId, 1))
+        if (gSpecialVar_ItemId == ITEM_LEVELER && gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD)
+            gTasks[taskId].func = Task_ContinueLevelerAfterText;
+        else if (gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD && CheckBagHasItem(gSpecialVar_ItemId, 1))
             gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
         else
             gTasks[taskId].func = Task_ClosePartyMenuAfterText;

@@ -10,6 +10,10 @@ Common_EventScript_PkmnCenterNurse::
     goto_if_eq Common_EventScript_ShowBagIsFull
     setvar VAR_POKE_VIAL_MAX_CHARGES, 1
     setvar VAR_POKE_VIAL_CHARGES, 1
+    msgbox gText_AndAlsoGivingLeveler, MSGBOX_DEFAULT
+    giveitem ITEM_LEVELER, 1
+    compare VAR_RESULT, FALSE
+    goto_if_eq Common_EventScript_ShowBagIsFull
     msgbox gText_ExplainPokeVial, MSGBOX_YESNO
     compare VAR_RESULT, YES
     goto_if_eq EventScript_PkmnCenterNurse_HealPkmn
@@ -18,6 +22,16 @@ Common_EventScript_PkmnCenterNurse::
     end
 
 EventScript_PkmnCenterNurseHasVial::
+    checkitem ITEM_LEVELER, 1
+    compare VAR_RESULT, 1
+    goto_if_eq EventScript_PkmnCenterNurseHasVialAndLeveler
+    msgbox gText_LevelerForExistingTrainer, MSGBOX_DEFAULT
+    giveitem ITEM_LEVELER, 1
+    compare VAR_RESULT, FALSE
+    goto_if_eq Common_EventScript_ShowBagIsFull
+    msgbox gText_ExplainLeveler, MSGBOX_DEFAULT
+
+EventScript_PkmnCenterNurseHasVialAndLeveler::
     setvar VAR_0x8004, 0
     specialvar VAR_RESULT, CountPlayerTrainerStars
     compare VAR_RESULT, 4

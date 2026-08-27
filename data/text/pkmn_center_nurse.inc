@@ -58,19 +58,40 @@ gText_AreYouARookieTrainer::
     .string "This is your first time here,\n"
     .string "isn't it?\p"
     .string "It's your lucky day!\p"
-    .string "We're currently giving out free\n"
-    .string "Poké Vials to all rookie Trainers.\p"
-    .string "Here, take one!$"
+    .string "We're giving all rookie Trainers a\n"
+    .string "Poké Vial and a Leveler.\p"
+    .string "First, take this Poké Vial!$"
+
+gText_AndAlsoGivingLeveler::
+    .string "And we're also giving you the\n"
+    .string "Leveler.\p"
+    .string "Here you go!$"
 
 gText_ExplainPokeVial:: 
     .string "That Poké Vial contains very potent\n"
     .string "medicine.\p"
     .string "It's strong enough to heal your entire\n"
-    .string "party, but you can't use it in battles,\l"
-    .string "and there's only enough to use it once.\p"
+    .string "party.\p"
+    .string "You can't use it in battle.\n"
+    .string "It only holds one dose at a time.\p"
     .string "But here's the good part: every time\n"
     .string "you heal up at a Pokémon Center, we'll\l"
     .string "refill it for free.\p"
     .string "It's like a portable Pokémon Center!\p"
+    .string "The Leveler raises every Pokémon in\n"
+    .string "your party to the current level cap.\p"
+    .string "It never runs out, so use it whenever\n"
+    .string "you want to prepare a new team.\p"
     .string "Now, would you like to rest your\n"
     .string "Pokémon?$"
+
+gText_LevelerForExistingTrainer::
+    .string "There's one more tool we now give to\n"
+    .string "every Trainer: the Leveler.\p"
+    .string "Please take yours!$"
+
+gText_ExplainLeveler::
+    .string "Use the Leveler at any time to raise\n"
+    .string "your whole party to the current cap.\p"
+    .string "It never runs out, and normal move\n"
+    .string "learning and evolution still occur.$"

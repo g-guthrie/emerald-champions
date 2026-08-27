@@ -71,6 +71,8 @@ static void UseTMHM(u8 taskId);
 static void Task_StartUseRepel(u8 taskId);
 static void Task_UseRepel(u8 taskId);
 static void ItemUseOnFieldCB_PokeVial(u8 taskId);
+static void CB2_OpenLevelerFromBag(void);
+static void Task_OpenRegisteredLeveler(u8 taskId);
 static void Task_CloseCantUseKeyItemMessage(u8 taskId);
 static void SetDistanceOfClosestHiddenItem(u8 taskId, s16 x, s16 y);
 static void CB2_OpenPokeblockFromBag(void);
@@ -981,6 +983,59 @@ static void ItemUseOnFieldCB_PokeVial(u8 taskId)
     HealPlayerParty();
     VarSet(VAR_POKE_VIAL_CHARGES, VarGet(VAR_POKE_VIAL_CHARGES) - 1);
     DisplayItemMessageOnField(taskId, gText_UsedPokeVial, Task_CloseCantUseKeyItemMessage);
+}
+
+static bool8 CanLevelPartyToCap(void)
+{
+    u8 i;
+    u8 levelCap = GetLevelCap();
+
+    for (i = 0; i < gPlayerPartyCount; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE
+         && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG)
+         && GetMonData(&gPlayerParty[i], MON_DATA_LEVEL) < levelCap)
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
+void ItemUseOutOfBattle_Leveler(u8 taskId)
+{
+    if (!CanLevelPartyToCap())
+    {
+        if (!gTasks[taskId].tUsingRegisteredKeyItem)
+            DisplayItemMessage(taskId, 1, gText_LevelerNoEffect, CloseItemMessage);
+        else
+            DisplayItemMessageOnField(taskId, gText_LevelerNoEffect, Task_CloseCantUseKeyItemMessage);
+    }
+    else if (!gTasks[taskId].tUsingRegisteredKeyItem)
+    {
+        gBagMenu->newScreenCallback = CB2_OpenLevelerFromBag;
+        Task_FadeAndCloseBagMenu(taskId);
+    }
+    else
+    {
+        gFieldCallback = FieldCB_ReturnToFieldNoScript;
+        FadeScreen(FADE_TO_BLACK, 0);
+        gTasks[taskId].func = Task_OpenRegisteredLeveler;
+    }
+}
+
+static void CB2_OpenLevelerFromBag(void)
+{
+    StartLevelerPartySequence(CB2_ReturnToBagMenuPocket);
+}
+
+static void Task_OpenRegisteredLeveler(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        CleanupOverworldWindowsAndTilemaps();
+        StartLevelerPartySequence(CB2_ReturnToField);
+        DestroyTask(taskId);
+    }
 }
 
 void ItemUseOutOfBattle_Honey(u8 taskId)

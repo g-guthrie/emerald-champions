@@ -1273,6 +1273,19 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_PokeVial,
     },
 
+    [ITEM_LEVELER] =
+    {
+        .name = _("Leveler"),
+        .itemId = ITEM_LEVELER,
+        .price = 0,
+        .holdEffectParam = 0,
+        .description = sLevelerDesc,
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_Leveler,
+    },
+
 
     [ITEM_ESCAPE_ROPE] =
     {
