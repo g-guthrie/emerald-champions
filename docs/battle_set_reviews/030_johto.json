@@ -979,16 +979,17 @@
     {
       "ability": "ABILITY_LEVITATE",
       "dependency_notes": [
-        "Choice Specs is advisory; Unown cannot be given a normal four-move competitive set because its exact local legal pool is intentionally restricted.",
+        "Choice Specs is advisory; Hidden Power's type and power follow the caught Unown's existing IVs because the builder does not alter IVs.",
         "ITEM_CHOICE_SPECS is advisory: Build Battle Set changes moves, nature, and ability but never grants or equips an item."
       ],
-      "doubles_rationale": "Unown has an inherently tiny local learnset; Stored Power is the only safe non-IV-dependent attack the builder can install and is therefore the honest preset.",
+      "doubles_rationale": "Unown has an inherently tiny local learnset; Hidden Power is still its strongest immediate attack at any IV spread, while Stored Power is the only secondary legal option.",
       "item_context": "ITEM_CHOICE_SPECS is the recommended held item for the minimal special attacker role; it must be obtained and equipped separately.",
       "moves": [
+        "MOVE_HIDDEN_POWER",
         "MOVE_STORED_POWER"
       ],
       "nature": "NATURE_MODEST",
-      "review_notes": "Authored exception: avoided illegal Hidden Power manipulation and retained the only locally legal safe move. Exact local legality, ability availability, nature-role fit, and four-slot doubles coherence were checked by hand.",
+      "review_notes": "Authored exception: Hidden Power is allowed only for Unown because it is the species' canonical and strongest immediate legal attack; no IV manipulation is performed.",
       "reviewed_by": "Emerald Champions authored Johto doubles audit",
       "role": "Minimal special attacker",
       "source_refs": [

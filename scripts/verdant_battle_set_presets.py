@@ -940,7 +940,9 @@ def load_reviews(dex: LocalDex) -> tuple[dict[str, dict], list[dict]]:
                 raise ValueError(f"{species}: authored moves must contain 1-4 distinct entries")
             if any(move not in legal for move in moves):
                 raise ValueError(f"{species}: authored review contains a locally illegal move")
-            if any(move in UNSAFE_AUTOBUILD_MOVES for move in moves):
+            if any(move in UNSAFE_AUTOBUILD_MOVES for move in moves) and not (
+                species == "SPECIES_UNOWN" and set(moves) & UNSAFE_AUTOBUILD_MOVES == {"MOVE_HIDDEN_POWER"}
+            ):
                 raise ValueError(f"{species}: authored review cannot install an IV/happiness-sensitive move")
             nature = review["nature"]
             if not isinstance(nature, str) or compact(nature.removeprefix("NATURE_")) not in NATURES:
