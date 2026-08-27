@@ -128,22 +128,23 @@
     {
       "ability": "ABILITY_SPEED_BOOST",
       "dependency_notes": [
-        "ITEM_BLAZIKENITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+        "ITEM_BLAZIKENITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability.",
+        "Close Combat is reliable against every target weight but lowers both defenses after use."
       ],
-      "doubles_rationale": "Blaziken uses Speed Boost with Flare Blitz, Low Kick, Rock Slide, Protect; the four slots form a coherent blaziken physical attacker pattern with immediate doubles value.",
+      "doubles_rationale": "Protect secures the first Speed Boost, Flare Blitz and Close Combat provide reliable high-power dual STAB, and Rock Slide pressures both opponents without depending on target weight.",
       "item_context": "ITEM_BLAZIKENITE supports the blaziken physical attacker role but is never granted by the tutor.",
       "moves": [
         "MOVE_FLARE_BLITZ",
-        "MOVE_LOW_KICK",
+        "MOVE_CLOSE_COMBAT",
         "MOVE_ROCK_SLIDE",
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_ADAMANT",
-      "review_notes": "Retained the strongest locally compatible doubles-first scaffold after one species-level sanity check. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+      "review_notes": "Updated from the supplied Champions M-B doubles handbook after exact local legality and role comparison; reliable Close Combat replaces weight-dependent Low Kick.",
       "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
       "role": "Blaziken Physical Attacker",
       "source_refs": [
-        "Smogon Gen 6 battlespotdoubles Blaziken set: Physical Attacker",
+        "Pokémon Champions all-species doubles handbook: Blaziken M-B ladder Mega Physical Attacker set",
         "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_BLAZIKEN"
       ],
       "species": "SPECIES_BLAZIKEN",

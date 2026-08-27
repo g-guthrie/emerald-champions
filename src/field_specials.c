@@ -2587,6 +2587,19 @@ void ShowScrollableMultichoice(void)
             task->tKeepOpenAfterSelect = FALSE;
             task->tTaskId = taskId;
             break;
+        case SCROLL_MULTI_BATTLE_SET_STYLE:
+            if (gSpecialVar_0x800A < PARTY_SIZE)
+                task->tNumItems = GetVerdantBattleSetCount(&gPlayerParty[gSpecialVar_0x800A]) + 1;
+            else
+                task->tNumItems = 1;
+            task->tMaxItemsOnScreen = task->tNumItems;
+            task->tLeft = 10;
+            task->tTop = 1;
+            task->tWidth = 20;
+            task->tHeight = 8;
+            task->tKeepOpenAfterSelect = FALSE;
+            task->tTaskId = taskId;
+            break;
         default:
             gSpecialVar_Result = MULTI_B_PRESSED;
             DestroyTask(taskId);
@@ -3036,7 +3049,16 @@ static void Task_ShowScrollableMultichoice(u8 taskId)
 
     for (width = 0, i = 0; i < task->tNumItems; i++)
     {
-        const u8 *text = sScrollableMultichoiceOptions[gSpecialVar_0x8004][i];
+        const u8 *text;
+        if (gSpecialVar_0x8004 == SCROLL_MULTI_BATTLE_SET_STYLE)
+        {
+            if (i == task->tNumItems - 1 || gSpecialVar_0x800A >= PARTY_SIZE)
+                text = gText_Exit;
+            else
+                text = GetVerdantBattleSetName(&gPlayerParty[gSpecialVar_0x800A], i);
+        }
+        else
+            text = sScrollableMultichoiceOptions[gSpecialVar_0x8004][i];
         sScrollableMultichoice_ListMenuItem[i].name = text;
         sScrollableMultichoice_ListMenuItem[i].id = i;
         width = DisplayTextAndGetWidth(text, width);
@@ -5102,7 +5124,23 @@ void ApplySelectedMonBattleSet(void)
     if (species == SPECIES_NONE || species == SPECIES_EGG || species >= NUM_SPECIES)
         return;
 
-    gSpecialVar_Result = ApplyVerdantBattleSetPreset(mon);
+    gSpecialVar_Result = ApplyVerdantBattleSetChoice(mon, gSpecialVar_0x8005);
+}
+
+void GetSelectedMonBattleSetCount(void)
+{
+    if (gSpecialVar_0x800A >= PARTY_SIZE)
+        gSpecialVar_Result = 0;
+    else
+        gSpecialVar_Result = GetVerdantBattleSetCount(&gPlayerParty[gSpecialVar_0x800A]);
+}
+
+void BufferSelectedMonBattleSetName(void)
+{
+    if (gSpecialVar_0x8004 >= PARTY_SIZE)
+        StringCopy(gStringVar2, gText_Exit);
+    else
+        StringCopy(gStringVar2, GetVerdantBattleSetName(&gPlayerParty[gSpecialVar_0x8004], gSpecialVar_0x8005));
 }
 
 // Changes the selected Pokemon's nature.

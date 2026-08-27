@@ -13034,22 +13034,22 @@
           "The suggested held item is advisory; the native builder neither grants nor equips it.",
           "Belly Drum costs half of current HP; Sitrus Berry is strongly recommended but not required to select or use the other moves."
         ],
-        "doubles_rationale": "Huge Power turns one Belly Drum opening into lethal Aqua Jet pressure, while Knock Off punishes resists and Protect lets a partner create the setup turn.",
+        "doubles_rationale": "Huge Power turns one Belly Drum opening into lethal Aqua Jet pressure, while Play Rough supplies powerful second STAB so Water resists cannot blank the cleaner and Protect lets a partner create the setup turn.",
         "item_context": "Sitrus Berry is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
         "moves": [
           "MOVE_BELLY_DRUM",
           "MOVE_AQUA_JET",
-          "MOVE_KNOCK_OFF",
+          "MOVE_PLAY_ROUGH",
           "MOVE_PROTECT"
         ],
         "nature": "NATURE_ADAMANT",
         "review_batch": "early-routes-101-104-petalburg-v1",
         "review_file": "docs/battle_set_reviews/010_early_routes.json",
-        "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+        "review_notes": "Updated from the supplied Champions M-B doubles handbook after exact local legality and role comparison; Play Rough is the stronger self-contained default while Knock Off remains tutor-accessible.",
         "reviewed_by": "Emerald Champions early-route battle-set audit",
         "role": "Huge Power Belly Drum cleaner",
         "source_refs": [
-          "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+          "Pokémon Champions all-species doubles handbook: Azumarill M-B ladder Belly Drum set",
           "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
         ],
         "species": "SPECIES_AZUMARILL",
@@ -13062,7 +13062,7 @@
       "moves": [
         "MOVE_BELLY_DRUM",
         "MOVE_AQUA_JET",
-        "MOVE_KNOCK_OFF",
+        "MOVE_PLAY_ROUGH",
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_ADAMANT",
@@ -13084,7 +13084,7 @@
         "batch_id": "early-routes-101-104-petalburg-v1",
         "file": "docs/battle_set_reviews/010_early_routes.json",
         "source_refs": [
-          "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+          "Pokémon Champions all-species doubles handbook: Azumarill M-B ladder Belly Drum set",
           "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
         ]
       },
@@ -18067,24 +18067,25 @@
       "authored_review": {
         "ability": "ABILITY_SPEED_BOOST",
         "dependency_notes": [
-          "ITEM_BLAZIKENITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+          "ITEM_BLAZIKENITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability.",
+          "Close Combat is reliable against every target weight but lowers both defenses after use."
         ],
-        "doubles_rationale": "Blaziken uses Speed Boost with Flare Blitz, Low Kick, Rock Slide, Protect; the four slots form a coherent blaziken physical attacker pattern with immediate doubles value.",
+        "doubles_rationale": "Protect secures the first Speed Boost, Flare Blitz and Close Combat provide reliable high-power dual STAB, and Rock Slide pressures both opponents without depending on target weight.",
         "item_context": "ITEM_BLAZIKENITE supports the blaziken physical attacker role but is never granted by the tutor.",
         "moves": [
           "MOVE_FLARE_BLITZ",
-          "MOVE_LOW_KICK",
+          "MOVE_CLOSE_COMBAT",
           "MOVE_ROCK_SLIDE",
           "MOVE_PROTECT"
         ],
         "nature": "NATURE_ADAMANT",
         "review_batch": "hoenn-national-dex-252-386-v1",
         "review_file": "docs/battle_set_reviews/040_hoenn.json",
-        "review_notes": "Retained the strongest locally compatible doubles-first scaffold after one species-level sanity check. Local legality, ability fit, nature, item context, and doubles positioning were checked.",
+        "review_notes": "Updated from the supplied Champions M-B doubles handbook after exact local legality and role comparison; reliable Close Combat replaces weight-dependent Low Kick.",
         "reviewed_by": "Emerald Champions authored Hoenn doubles audit",
         "role": "Blaziken Physical Attacker",
         "source_refs": [
-          "Smogon Gen 6 battlespotdoubles Blaziken set: Physical Attacker",
+          "Pokémon Champions all-species doubles handbook: Blaziken M-B ladder Mega Physical Attacker set",
           "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_BLAZIKEN"
         ],
         "species": "SPECIES_BLAZIKEN",
@@ -18096,7 +18097,7 @@
       "move_count": 4,
       "moves": [
         "MOVE_FLARE_BLITZ",
-        "MOVE_LOW_KICK",
+        "MOVE_CLOSE_COMBAT",
         "MOVE_ROCK_SLIDE",
         "MOVE_PROTECT"
       ],
@@ -18106,7 +18107,8 @@
       "source_context": {
         "battle_style": null,
         "dependency_notes": [
-          "ITEM_BLAZIKENITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability."
+          "ITEM_BLAZIKENITE is advisory and must be obtained and equipped separately; Build Battle Set changes only moves, nature, and ability.",
+          "Close Combat is reliable against every target weight but lowers both defenses after use."
         ],
         "published_item": "ITEM_BLAZIKENITE",
         "published_moves": null,
@@ -18118,7 +18120,7 @@
         "batch_id": "hoenn-national-dex-252-386-v1",
         "file": "docs/battle_set_reviews/040_hoenn.json",
         "source_refs": [
-          "Smogon Gen 6 battlespotdoubles Blaziken set: Physical Attacker",
+          "Pokémon Champions all-species doubles handbook: Blaziken M-B ladder Mega Physical Attacker set",
           "Emerald Champions exact local stats, abilities, and legal moves for SPECIES_BLAZIKEN"
         ]
       },
@@ -78419,7 +78421,7 @@
     {
       "batch_id": "early-routes-101-104-petalburg-v1",
       "path": "docs/battle_set_reviews/010_early_routes.json",
-      "sha256": "2c406aad22c05f4f9a5654d1192357d142f4840016ff91042fd657f63d1eb1b5"
+      "sha256": "3c2959a8e3b47b5baeca7aa449a5bed20333f7e09a3ec66c63173f864d5e5466"
     },
     {
       "batch_id": "kanto-001-151-v1",
@@ -78434,7 +78436,7 @@
     {
       "batch_id": "hoenn-national-dex-252-386-v1",
       "path": "docs/battle_set_reviews/040_hoenn.json",
-      "sha256": "ef430329de1f481fc597abee366a4d9c0b391c233b86b567ae59532aa3042666"
+      "sha256": "d316ad744662f2cb069ba5ed85e4b47d77b444571fd6fdb6f7cc7ced31d622b1"
     },
     {
       "batch_id": "sinnoh-387-493-v1",

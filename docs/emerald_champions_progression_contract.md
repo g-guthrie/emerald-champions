@@ -17,6 +17,10 @@ different system later in the story.
 - The Pokémon Center teacher offers every move that the selected species can
   legally learn from level-up, Egg, TM/HM, or tutor data. It does not bypass
   species legality.
+- The battle-set service keeps one individually authored Set 1 for every
+  selectable species/form and offers up to two additional role-labeled,
+  locally legal doubles sets when validated alternatives exist. Set choices
+  never grant or equip their advisory held item.
 - Native ability selection exposes that species' legal abilities without an
   Ability Capsule or Ability Patch tax.
 - Every Pokémon Center battle vendor sells the ten foundational competitive
@@ -66,6 +70,8 @@ the general unlimited stock.
   immediately before entering the party or PC: moves, PP, nature, and ability.
   IVs, EVs, level, personality, shiny status, gender, Ball, held item,
   friendship, and nickname remain individual.
+- Ordinary captures always use Set 1. Alternate sets are an explicit player
+  choice at the Pokémon Center and are never silently applied on evolution.
 - Scripted, static, roaming, Frontier, Legendary, and Mythical captures retain
   their authored data. Existing owned Pokémon and later evolutions are never
   silently overwritten.

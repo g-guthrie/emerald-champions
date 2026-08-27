@@ -57,20 +57,20 @@
         "The suggested held item is advisory; the native builder neither grants nor equips it.",
         "Belly Drum costs half of current HP; Sitrus Berry is strongly recommended but not required to select or use the other moves."
       ],
-      "doubles_rationale": "Huge Power turns one Belly Drum opening into lethal Aqua Jet pressure, while Knock Off punishes resists and Protect lets a partner create the setup turn.",
+      "doubles_rationale": "Huge Power turns one Belly Drum opening into lethal Aqua Jet pressure, while Play Rough supplies powerful second STAB so Water resists cannot blank the cleaner and Protect lets a partner create the setup turn.",
       "item_context": "Sitrus Berry is the suggested fit, but the authored four-move plan can be selected and used without the builder equipping it.",
       "moves": [
         "MOVE_BELLY_DRUM",
         "MOVE_AQUA_JET",
-        "MOVE_KNOCK_OFF",
+        "MOVE_PLAY_ROUGH",
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_ADAMANT",
-      "review_notes": "Individually authored after exact local legality, item-dependence, retired-gimmick, and doubles-role checks.",
+      "review_notes": "Updated from the supplied Champions M-B doubles handbook after exact local legality and role comparison; Play Rough is the stronger self-contained default while Knock Off remains tutor-accessible.",
       "reviewed_by": "Emerald Champions early-route battle-set audit",
       "role": "Huge Power Belly Drum cleaner",
       "source_refs": [
-        "Emerald Champions generated Smogon and Pokémon Showdown scaffold consulted where available",
+        "Pokémon Champions all-species doubles handbook: Azumarill M-B ladder Belly Drum set",
         "Emerald Champions authored early-route doubles review against exact local stats, ability slots, and all-legal move pool"
       ],
       "species": "SPECIES_AZUMARILL",

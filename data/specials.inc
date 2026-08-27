@@ -542,6 +542,8 @@ gSpecials::
 	def_special TrySetBattleTowerLinkType
 	def_special ChangePokemonNature
 	def_special ApplySelectedMonBattleSet
+	def_special GetSelectedMonBattleSetCount
+	def_special BufferSelectedMonBattleSetName
 	def_special BufferChosenMonNature
 	def_special ChangeChosenMonIVs
 	def_special IncreaseChosenMonEVs

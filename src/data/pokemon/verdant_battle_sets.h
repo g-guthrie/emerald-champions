@@ -1101,7 +1101,7 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_AZUMARILL] =
     {
-        .moves = {MOVE_BELLY_DRUM, MOVE_AQUA_JET, MOVE_KNOCK_OFF, MOVE_PROTECT},
+        .moves = {MOVE_BELLY_DRUM, MOVE_AQUA_JET, MOVE_PLAY_ROUGH, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 1,
     },
@@ -1539,7 +1539,7 @@ const struct VerdantBattleSetPreset gVerdantBattleSetPresets[NUM_SPECIES] =
     },
     [SPECIES_BLAZIKEN] =
     {
-        .moves = {MOVE_FLARE_BLITZ, MOVE_LOW_KICK, MOVE_ROCK_SLIDE, MOVE_PROTECT},
+        .moves = {MOVE_FLARE_BLITZ, MOVE_CLOSE_COMBAT, MOVE_ROCK_SLIDE, MOVE_PROTECT},
         .nature = NATURE_ADAMANT,
         .abilitySlot = 2,
     },

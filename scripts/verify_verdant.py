@@ -38,6 +38,11 @@ subprocess.run(
     check=True,
 )
 subprocess.run(
+    [sys.executable, str(ROOT / "scripts/verify_multi_battle_sets.py")],
+    cwd=ROOT,
+    check=True,
+)
+subprocess.run(
     [sys.executable, str(ROOT / "scripts/verify_competitive_references.py")],
     cwd=ROOT,
     check=True,
@@ -998,7 +1003,7 @@ checks = {
         and "special IsSelectedMonEgg" in pc_tutor_source.split("PKMN_Center_BattleSet_ChooseMon::", 1)[1].split("PKMN_Center_BattleSet_CantBuildForEgg::", 1)[0]
         and "This replaces all four moves" in pc_tutor_source
         and "special ApplySelectedMonBattleSet" in pc_tutor_source
-        and "ApplyVerdantBattleSetPreset(mon)" in field_specials_source
+        and "ApplyVerdantBattleSetChoice(mon, gSpecialVar_0x8005)" in field_specials_source
         and "MON_DATA_SPECIES2" in battle_set_runtime
         and "MON_DATA_PP_BONUSES" in battle_set_runtime
         and "for (i = 0; i < MAX_MON_MOVES; i++)\n        SetMonMoveSlot" in battle_set_runtime

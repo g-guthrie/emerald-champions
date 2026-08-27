@@ -26,10 +26,33 @@ PKMN_Center_BattleSet_ChooseMon::
 	special IsSelectedMonEgg
 	compare VAR_RESULT, TRUE
 	goto_if_eq PKMN_Center_BattleSet_CantBuildForEgg
+	copyvar VAR_0x800A, VAR_0x8004
+	special GetSelectedMonBattleSetCount
+	compare VAR_RESULT, 1
+	goto_if_eq PKMN_Center_BattleSet_UseDefault
+
+PKMN_Center_BattleSet_ChooseStyle::
+	msgbox PKMN_Center_BattleSet_Text_ChooseStyle, MSGBOX_DEFAULT
+	setvar VAR_0x8004, SCROLL_MULTI_BATTLE_SET_STYLE
+	special ShowScrollableMultichoice
+	waitstate
+	copyvar VAR_0x8006, VAR_RESULT
+	special GetSelectedMonBattleSetCount
+	compare VAR_0x8006, VAR_RESULT
+	goto_if_ge PKMN_Center_BattleSet_ChooseMon
+	copyvar VAR_0x8005, VAR_0x8006
+	goto PKMN_Center_BattleSet_Confirm
+
+PKMN_Center_BattleSet_UseDefault::
+	setvar VAR_0x8005, 0
+
+PKMN_Center_BattleSet_Confirm::
+	copyvar VAR_0x8004, VAR_0x800A
 	bufferpartymonnick 0, VAR_0x8004
+	special BufferSelectedMonBattleSetName
 	msgbox PKMN_Center_BattleSet_Text_Confirm, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if_eq PKMN_Center_BattleSet_ChooseMon
+	goto_if_eq PKMN_Center_BattleSet_ChooseStyle
 	special ApplySelectedMonBattleSet
 	compare VAR_RESULT, TRUE
 	goto_if_ne PKMN_Center_BattleSet_NoPreset
@@ -528,8 +551,12 @@ PKMN_Center_BattleSet_Text_ChooseMon:
 	.string "Choose a Pokémon for a complete\n"
 	.string "battle set.$"
 
+PKMN_Center_BattleSet_Text_ChooseStyle:
+	.string "Which battle style should I teach?$"
+
 PKMN_Center_BattleSet_Text_Confirm:
-	.string "Ready to build {STR_VAR_1}'s set.\p"
+	.string "Ready to give {STR_VAR_1} the\n"
+	.string "{STR_VAR_2} set.\p"
 	.string "This replaces all four moves,\n"
 	.string "the nature, and the ability.\p"
 	.string "Continue?$"
