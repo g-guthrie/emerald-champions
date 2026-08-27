@@ -68,6 +68,11 @@ subprocess.run(
     check=True,
 )
 subprocess.run(
+    [sys.executable, str(ROOT / "scripts/verdant_physical_encounter_atlas.py"), "--check"],
+    cwd=ROOT,
+    check=True,
+)
+subprocess.run(
     [sys.executable, str(ROOT / "scripts/verdant_species_usage_ledger.py"), "--check"],
     cwd=ROOT,
     check=True,
