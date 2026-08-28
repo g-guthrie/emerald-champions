@@ -3,6 +3,7 @@
   "name": "SkyPillar_Outside",
   "layout": "LAYOUT_SKY_PILLAR_OUTSIDE",
   "music": "MUS_MT_CHIMNEY",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_SKY_PILLAR",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -12,9 +13,10 @@
   "allow_running": true,
   "show_map_name": true,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": 0,
+  "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_SKY_PILLAR_WALLACE",
       "graphics_id": "OBJ_EVENT_GFX_WALLACE",
       "x": 13,
       "y": 7,
@@ -34,27 +36,16 @@
       "y": 13,
       "elevation": 3,
       "dest_map": "MAP_SKY_PILLAR_ENTRANCE",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 14,
       "y": 5,
       "elevation": 0,
       "dest_map": "MAP_SKY_PILLAR_1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
-  "coord_events": [
-
-  ],
-  "bg_events": [
-    {
-      "type": "hidden_item",
-      "x": 21,
-      "y": 8,
-      "elevation": 3,
-      "item": "ITEM_SKY_PLATE",
-      "flag": "FLAG_HIDDEN_ITEM_SKY_PILLAR_SKY_PLATE"
-    }
-  ]
+  "coord_events": [],
+  "bg_events": []
 }

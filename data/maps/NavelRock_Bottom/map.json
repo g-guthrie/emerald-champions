@@ -2,7 +2,8 @@
   "id": "MAP_NAVEL_ROCK_BOTTOM",
   "name": "NavelRock_Bottom",
   "layout": "LAYOUT_NAVEL_ROCK_BOTTOM",
-  "music": "HG_SEQ_GS_D_CHIKATSUURO",
+  "music": "MUS_RG_SEVII_CAVE",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_NAVEL_ROCK",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -12,9 +13,10 @@
   "allow_running": true,
   "show_map_name": true,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": 0,
+  "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_NAVEL_ROCK_LUGIA",
       "graphics_id": "OBJ_EVENT_GFX_LUGIA",
       "x": 11,
       "y": 13,
@@ -34,13 +36,9 @@
       "y": 19,
       "elevation": 0,
       "dest_map": "MAP_NAVEL_ROCK_DOWN11",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
-  "coord_events": [
-
-  ],
-  "bg_events": [
-
-  ]
+  "coord_events": [],
+  "bg_events": []
 }

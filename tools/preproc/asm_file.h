@@ -31,27 +31,43 @@ enum class Directive
     Include,
     String,
     Braille,
+    Enum,
+    Macro,
     Unknown
+};
+
+struct Label
+{
+    std::string symbol;
+    enum Type { none, global, local } type;
+
+    Label() : symbol(""), type(none) {}
+    Label(const Label&) = default;
+    Label(std::string symbol_, Type type_) : symbol(symbol_), type(type_) {}
+    explicit operator bool() { return !symbol.empty() && type != none; }
 };
 
 class AsmFile
 {
 public:
-    AsmFile(std::string filename);
+    AsmFile(std::string filename, bool isStdin, bool doEnum);
     AsmFile(AsmFile&& other);
     AsmFile(const AsmFile&) = delete;
     ~AsmFile();
     Directive GetDirective();
-    std::string GetGlobalLabel();
+    Label GetLabel();
+    std::string PeekSection();
     std::string ReadPath();
     int ReadString(unsigned char* s);
     int ReadBraille(unsigned char* s);
     bool IsAtEnd();
     void OutputLine();
     void OutputLocation();
+    bool ParseEnum();
 
 private:
     char* m_buffer;
+    bool m_doEnum;
     long m_pos;
     long m_size;
     long m_lineNum;
@@ -67,6 +83,12 @@ private:
     void ReportDiagnostic(const char* type, const char* format, std::va_list args);
     void RaiseError(const char* format, ...);
     void RaiseWarning(const char* format, ...);
+    void VerifyStringLength(int length);
+    int SkipWhitespaceAndEol();
+    int FindLastLineNumber(std::string& filename);
+    int ParseLineSkipInEnum(void);
+    std::string ReadIdentifier();
+    long ReadInteger(std::string filename, long line);
 };
 
 #endif // ASM_FILE_H

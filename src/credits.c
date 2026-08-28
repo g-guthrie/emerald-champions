@@ -24,6 +24,8 @@
 #include "event_data.h"
 #include "random.h"
 
+#if !IS_FRLG
+
 #define COLOR_DARK_GREEN RGB(7, 11, 6)
 #define COLOR_LIGHT_GREEN RGB(13, 20, 12)
 
@@ -64,12 +66,12 @@ enum {
 
 struct CreditsData
 {
-    u16 monToShow[NUM_MON_SLIDES]; // List of Pokemon species ids that will show during the credits
+    u16 monToShow[NUM_MON_SLIDES]; // List of Pokémon species ids that will show during the credits
     u16 imgCounter; //how many mon images have been shown
     u16 nextImgPos; //if the next image spawns left/center/right
     u16 currShownMon; //index into monToShow
-    u16 numMonToShow; //number of pokemon to show, always NUM_MON_SLIDES after determine function
-    u16 caughtMonIds[NATIONAL_DEX_COUNT]; //temporary location to hold a condensed array of all caught pokemon
+    u16 numMonToShow; //number of Pokémon to show, always NUM_MON_SLIDES after determine function
+    u16 caughtMonIds[NATIONAL_DEX_COUNT]; //temporary location to hold a condensed array of all caught Pokémon
     u16 numCaughtMon; //count of filled spaces in caughtMonIds
     u16 unused[7];
 };
@@ -81,14 +83,12 @@ struct CreditsEntry
     const u8 *text;
 };
 
-static EWRAM_DATA s16 sUnkVar = 0; // Never read, only set to 0
 static EWRAM_DATA u16 sSavedTaskId = 0;
 EWRAM_DATA bool8 gHasHallOfFameRecords = 0;
-static EWRAM_DATA bool8 sUsedSpeedUp = 0; // Never read
 static EWRAM_DATA struct CreditsData *sCreditsData = {0};
 
-static const u16 sCredits_Pal[] = INCBIN_U16("graphics/credits/credits.gbapal");
-static const u32 sCreditsCopyrightEnd_Gfx[] = INCBIN_U32("graphics/credits/the_end_copyright.4bpp.lz");
+static const u16 sCredits_Pal[] = INCGFX_U16("graphics/credits/credits.pal", ".gbapal");
+static const u32 sCreditsCopyrightEnd_Gfx[] = INCGFX_U32("graphics/credits/the_end_copyright.png", ".4bpp.smol");
 
 static void SpriteCB_CreditsMonBg(struct Sprite *);
 static void Task_WaitPaletteFade(u8);
@@ -184,7 +184,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 9,
-        .width = 30,
+        .width = DISPLAY_TILE_WIDTH,
         .height = 12,
         .paletteNum = 8,
         .baseBlock = 1
@@ -272,22 +272,12 @@ static const union AnimCmd *const sAnims_Rival[] =
     sAnim_Rival_Still,
 };
 
-#define MONBG_OFFSET (MON_PIC_SIZE * 3)
-static const struct SpriteSheet sSpriteSheet_MonBg[] = {
-    { gDecompressionBuffer, MONBG_OFFSET, TAG_MON_BG },
-    {},
-};
-static const struct SpritePalette sSpritePalette_MonBg[] = {
-    { (const u16 *)&gDecompressionBuffer[MONBG_OFFSET], TAG_MON_BG },
-    {},
-};
-
 static const struct OamData sOamData_MonBg =
 {
     .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
@@ -330,8 +320,6 @@ static const struct SpriteTemplate sSpriteTemplate_CreditsMonBg =
     .paletteTag = TAG_MON_BG,
     .oam = &sOamData_MonBg,
     .anims = sAnims_MonBg,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_CreditsMonBg,
 };
 
@@ -355,7 +343,6 @@ static void CB2_Credits(void)
         VBlankCB_Credits();
         RunTasks();
         AnimateSprites();
-        sUsedSpeedUp = TRUE;
     }
     BuildOamBuffer();
     UpdatePaletteFade();
@@ -366,11 +353,11 @@ static void InitCreditsBgsAndWindows(void)
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, sBackgroundTemplates, ARRAY_COUNT(sBackgroundTemplates));
     SetBgTilemapBuffer(0, AllocZeroed(BG_SCREEN_SIZE));
-    LoadPalette(sCredits_Pal, 0x80, 64);
+    LoadPalette(sCredits_Pal, BG_PLTT_ID(8), 2 * PLTT_SIZE_4BPP);
     InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
     PutWindowTilemap(0);
-    CopyWindowToVram(0, 3);
+    CopyWindowToVram(0, COPYWIN_FULL);
     ShowBg(0);
 }
 
@@ -401,8 +388,8 @@ static void PrintCreditsText(const u8 *string, u8 y, bool8 isTitle)
         color[2] = TEXT_COLOR_DARK_GRAY;
     }
 
-    x = GetStringCenterAlignXOffsetWithLetterSpacing(1, string, DISPLAY_WIDTH, 1);
-    AddTextPrinterParameterized4(0, 1, x, y, 1, 0, color, -1, string);
+    x = GetStringCenterAlignXOffsetWithLetterSpacing(FONT_NORMAL, string, DISPLAY_WIDTH, 1);
+    AddTextPrinterParameterized4(0, FONT_NORMAL, x, y, 1, 0, color, TEXT_SKIP_DRAW, string);
 }
 
 #define tMainTaskId data[1]
@@ -448,7 +435,6 @@ void CB2_StartCreditsSequence(void)
     SetVBlankCallback(VBlankCB_Credits);
     m4aSongNumStart(MUS_CREDITS);
     SetMainCallback2(CB2_Credits);
-    sUsedSpeedUp = FALSE;
     sCreditsData = AllocZeroed(sizeof(struct CreditsData));
 
     DeterminePokemonToShow();
@@ -480,7 +466,6 @@ static void Task_CreditsMain(u8 taskId)
         return;
     }
 
-    sUnkVar = 0;
     mode = gTasks[taskId].tNextMode;
 
     if (gTasks[taskId].tNextMode == MODE_BIKE_SCENE)
@@ -534,6 +519,8 @@ static void Task_ReadyShowMons(u8 taskId)
     }
 }
 
+#define MONBG_OFFSET (MON_PIC_SIZE * 3)
+
 static void Task_LoadShowMons(u8 taskId)
 {
     switch (gMain.state)
@@ -541,32 +528,37 @@ static void Task_LoadShowMons(u8 taskId)
     default:
     case 0:
     {
-        u16 i;
+        s32 i;
         u16 *temp;
+        u8 *buffer = Alloc(MONBG_OFFSET + PLTT_SIZEOF(16));
+        struct SpriteSheet bgSheet = { buffer, MONBG_OFFSET, TAG_MON_BG };
+        struct SpritePalette bgPalette = { (u16 *) &buffer[MONBG_OFFSET], TAG_MON_BG };
 
         ResetSpriteData();
         ResetAllPicSprites();
         FreeAllSpritePalettes();
         gReservedSpritePaletteCount = 8;
-        LZ77UnCompVram(gBirchHelpGfx, (void *)VRAM);
-        LZ77UnCompVram(gBirchGrassTilemap, (void *)(BG_SCREEN_ADDR(7)));
-        LoadPalette(gBirchBagGrassPal[0] + 1, 1, 31 * 2);
+        DecompressDataWithHeaderVram(gBirchBagGrass_Gfx, (void *)VRAM);
+        DecompressDataWithHeaderVram(gBirchGrassTilemap, (void *)(BG_SCREEN_ADDR(7)));
+        LoadPalette(gBirchBagGrass_Pal + 1, BG_PLTT_ID(0) + 1, PLTT_SIZEOF(2 * 16 - 1));
 
         for (i = 0; i < MON_PIC_SIZE; i++)
-            gDecompressionBuffer[i] = 0x11;
-        for (i = 0; i < MON_PIC_SIZE; i++)
-            (gDecompressionBuffer + MON_PIC_SIZE)[i] = 0x22;
-        for (i = 0; i < MON_PIC_SIZE; i++)
-            (gDecompressionBuffer + MON_PIC_SIZE * 2)[i] = 0x33;
+        {
+            buffer[i] = 0x11;
+            (buffer + MON_PIC_SIZE)[i] = 0x22;
+            (buffer + MON_PIC_SIZE * 2)[i] = 0x33;
+        }
 
-        temp = (u16 *)(&gDecompressionBuffer[MONBG_OFFSET]);
+        temp = (u16 *)(&buffer[MONBG_OFFSET]);
         temp[0] = RGB_BLACK;
         temp[1] = RGB(31, 31, 20); // light yellow
         temp[2] = RGB(31, 20, 20); // light red
         temp[3] = RGB(20, 20, 31); // light blue
 
-        LoadSpriteSheet(sSpriteSheet_MonBg);
-        LoadSpritePalette(sSpritePalette_MonBg);
+        LoadSpriteSheet(&bgSheet);
+        LoadSpritePalette(&bgPalette);
+
+        Free(buffer);
 
         gMain.state++;
         break;
@@ -625,7 +617,7 @@ static void Task_CreditsTheEnd3(u8 taskId)
 {
     ResetGpuAndVram();
     ResetPaletteFade();
-    LoadTheEndScreen(0, 0x3800, 0);
+    LoadTheEndScreen(0, 0x3800, BG_PLTT_ID(0));
     ResetSpriteData();
     FreeAllSpritePalettes();
     BeginNormalPaletteFade(PALETTES_ALL, 8, 16, 0, RGB_BLACK);
@@ -740,7 +732,6 @@ static void Task_UpdatePage(u8 taskId)
             gTasks[taskId].tState = 1;
             gTasks[taskId].tDelay = 72;
             gTasks[gTasks[taskId].tMainTaskId].tPrintedPage = FALSE;
-            sUnkVar = 0;
         }
         return;
     case 1:
@@ -760,9 +751,9 @@ static void Task_UpdatePage(u8 taskId)
                 for (i = 0; i < ENTRIES_PER_PAGE; i++)
                     PrintCreditsText(
                         sCreditsEntryPointerTable[gTasks[taskId].tCurrentPage][i]->text,
-                         5 + i * 16, 
+                         5 + i * 16,
                          sCreditsEntryPointerTable[gTasks[taskId].tCurrentPage][i]->isTitle);
-                CopyWindowToVram(0, 2);
+                CopyWindowToVram(0, COPYWIN_GFX);
 
                 gTasks[taskId].tCurrentPage++;
                 gTasks[taskId].tState++;
@@ -812,7 +803,7 @@ static void Task_UpdatePage(u8 taskId)
         {
             // Still more Credits pages to show, return to state 2 to print
             FillWindowPixelBuffer(0, PIXEL_FILL(0));
-            CopyWindowToVram(0, 2);
+            CopyWindowToVram(0, COPYWIN_GFX);
             gTasks[taskId].tState = 2;
         }
         return;
@@ -912,9 +903,9 @@ static void Task_ShowMons(u8 taskId)
     case 2:
         if (sCreditsData->imgCounter == NUM_MON_SLIDES || gTasks[gTasks[taskId].tMainTaskId].func != Task_CreditsMain)
             break;
-        spriteId = CreateCreditsMonSprite(sCreditsData->monToShow[sCreditsData->currShownMon], 
-                                    sMonSpritePos[sCreditsData->nextImgPos][0], 
-                                    sMonSpritePos[sCreditsData->nextImgPos][1], 
+        spriteId = CreateCreditsMonSprite(sCreditsData->monToShow[sCreditsData->currShownMon],
+                                    sMonSpritePos[sCreditsData->nextImgPos][0],
+                                    sMonSpritePos[sCreditsData->nextImgPos][1],
                                     sCreditsData->nextImgPos);
         if (sCreditsData->currShownMon < sCreditsData->numMonToShow - 1)
         {
@@ -1286,18 +1277,18 @@ static void ResetCreditsTasks(u8 taskId)
     gIntroCredits_MovingSceneryState = INTROCRED_SCENERY_DESTROY;
 }
 
-static void LoadTheEndScreen(u16 arg0, u16 arg1, u16 palOffset)
+static void LoadTheEndScreen(u16 tileOffsetLoad, u16 tileOffsetWrite, u16 palOffset)
 {
     u16 baseTile;
     u16 i;
 
-    LZ77UnCompVram(sCreditsCopyrightEnd_Gfx, (void *)(VRAM + arg0));
+    DecompressDataWithHeaderVram(sCreditsCopyrightEnd_Gfx, (void *)(VRAM + tileOffsetLoad));
     LoadPalette(gIntroCopyright_Pal, palOffset, sizeof(gIntroCopyright_Pal));
 
     baseTile = (palOffset / 16) << 12;
 
     for (i = 0; i < 32 * 32; i++)
-        ((u16 *) (VRAM + arg1))[i] = baseTile + 1;
+        ((u16 *) (VRAM + tileOffsetWrite))[i] = baseTile + 1;
 }
 
 static u16 GetLetterMapTile(u8 baseTiles)
@@ -1371,7 +1362,7 @@ static void SpriteCB_Player(struct Sprite *sprite)
         break;
     case 4:
         StartSpriteAnimIfDifferent(sprite, 0);
-        if (sprite->x > 120)
+        if (sprite->x > DISPLAY_WIDTH / 2)
             sprite->x--;
         break;
     case 5:
@@ -1533,7 +1524,7 @@ static u8 CreateCreditsMonSprite(u16 nationalDexNum, s16 x, s16 y, u16 position)
 
 static void SpriteCB_CreditsMonBg(struct Sprite *sprite)
 {
-    if (gSprites[sprite->sMonSpriteId].data[0] == 10 
+    if (gSprites[sprite->sMonSpriteId].data[0] == 10
      || gIntroCredits_MovingSceneryState != INTROCRED_SCENERY_NORMAL)
     {
         DestroySprite(sprite);
@@ -1551,15 +1542,14 @@ static void SpriteCB_CreditsMonBg(struct Sprite *sprite)
 
 static void DeterminePokemonToShow(void)
 {
-    u16 starter = SpeciesToNationalPokedexNum(
-        GetStarterPokemonForGeneration(VarGet(VAR_STARTER_MON), VarGet(VAR_STARTER_GEN)));
+    enum NationalDexOrder starter = SpeciesToNationalPokedexNum(GetStarterPokemon(VarGet(VAR_STARTER_MON)));
     u16 page;
     u16 dexNum;
     u16 j;
-    
-    // Go through the Pokedex, and anything that has gotten caught we put into our massive array.
-    // This basically packs all of the caught pokemon into the front of the array
-    for (dexNum = 1, j = 0; dexNum <= NATIONAL_DEX_COUNT; dexNum++)
+
+    // Go through the Pokédex, and anything that has gotten caught we put into our massive array.
+    // This basically packs all of the caught Pokémon into the front of the array
+    for (dexNum = 1, j = 0; dexNum < NATIONAL_DEX_COUNT; dexNum++)
     {
         if (GetSetPokedexFlag(dexNum, FLAG_GET_CAUGHT))
         {
@@ -1572,21 +1562,21 @@ static void DeterminePokemonToShow(void)
     for (dexNum = j; dexNum < NATIONAL_DEX_COUNT; dexNum++)
         sCreditsData->caughtMonIds[dexNum] = NATIONAL_DEX_NONE;
 
-    // Cap the number of pokemon we care about to NUM_MON_SLIDES, the max we show in the credits scene (-1 for the starter)
+    // Cap the number of Pokémon we care about to NUM_MON_SLIDES, the max we show in the credits scene (-1 for the starter)
     sCreditsData->numCaughtMon = j;
     if (sCreditsData->numCaughtMon < NUM_MON_SLIDES)
         sCreditsData->numMonToShow = j;
     else
         sCreditsData->numMonToShow = NUM_MON_SLIDES;
 
-    // Loop through our list of caught pokemon and select randomly from it to fill the images to show
+    // Loop through our list of caught Pokémon and select randomly from it to fill the images to show
     j = 0;
     do
     {
         // Select a random mon, insert into array
         page = Random() % sCreditsData->numCaughtMon;
         sCreditsData->monToShow[j] = sCreditsData->caughtMonIds[page];
-        
+
         // Remove the select mon from the array, and condense array entries
         j++;
         sCreditsData->caughtMonIds[page] = 0;
@@ -1600,34 +1590,26 @@ static void DeterminePokemonToShow(void)
     }
     while (sCreditsData->numCaughtMon != 0 && j < NUM_MON_SLIDES);
 
-    // If we don't have enough pokemon in the dex to fill everything, copy the selected mon into the end of the array, so it loops
+    // If we don't have enough Pokémon in the dex to fill everything, copy the selected mon into the end of the array, so it loops
     if (sCreditsData->numMonToShow < NUM_MON_SLIDES)
     {
-        if (sCreditsData->numMonToShow == 0)
+        for (j = sCreditsData->numMonToShow, page = 0; j < NUM_MON_SLIDES; j++)
         {
-            for (j = 0; j < NUM_MON_SLIDES; j++)
-                sCreditsData->monToShow[j] = starter;
-        }
-        else
-        {
-            for (j = sCreditsData->numMonToShow, page = 0; j < NUM_MON_SLIDES; j++)
-            {
-                sCreditsData->monToShow[j] = sCreditsData->monToShow[page];
+            sCreditsData->monToShow[j] = sCreditsData->monToShow[page];
 
-                page++;
-                if (page == sCreditsData->numMonToShow)
-                    page = 0;
-            }
+            page++;
+            if (page == sCreditsData->numMonToShow)
+                page = 0;
         }
-        // Ensure the last pokemon is our starter
+        // Ensure the last Pokémon is our starter
         sCreditsData->monToShow[NUM_MON_SLIDES - 1] = starter;
     }
     else
     {
         // Check to see if our starter has already appeared in this list, break if it has
-        for (dexNum = 0; dexNum < NUM_MON_SLIDES && sCreditsData->monToShow[dexNum] != starter; dexNum++);
+        for (dexNum = 0; sCreditsData->monToShow[dexNum] != starter && dexNum < NUM_MON_SLIDES; dexNum++);
 
-        // If it has, swap it with the last pokemon, to ensure our starter is the last image
+        // If it has, swap it with the last Pokémon, to ensure our starter is the last image
         if (dexNum < sCreditsData->numMonToShow - 1)
         {
             sCreditsData->monToShow[dexNum] = sCreditsData->monToShow[NUM_MON_SLIDES-1];
@@ -1635,9 +1617,11 @@ static void DeterminePokemonToShow(void)
         }
         else
         {
-            // Ensure the last pokemon is our starter
+            // Ensure the last Pokémon is our starter
             sCreditsData->monToShow[NUM_MON_SLIDES - 1] = starter;
         }
     }
     sCreditsData->numMonToShow = NUM_MON_SLIDES;
 }
+
+#endif // !IS_FRLG

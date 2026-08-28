@@ -3,6 +3,7 @@
   "name": "FieryPath",
   "layout": "LAYOUT_FIERY_PATH",
   "music": "MUS_PETALBURG_WOODS",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_FIERY_PATH",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -12,10 +13,10 @@
   "allow_running": true,
   "show_map_name": true,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": 0,
+  "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 8,
       "y": 3,
       "elevation": 3,
@@ -23,9 +24,9 @@
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "FieryPath_EventScript_ItemTM06",
-      "flag": "FLAG_ITEM_FIERY_PATH_TM06"
+      "trainer_sight_or_berry_tree_id": "ITEM_HOUNDOOMINITE",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ITEM_FIERY_PATH_TM_TOXIC"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
@@ -106,17 +107,17 @@
       "flag": "FLAG_TEMP_16"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 7,
       "y": 32,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "FieryPath_EventScript_ItemCharizarditeX",
-      "flag": "FLAG_ITEM_FIERY_PATH_CHARIZARDITE_X"
+      "trainer_sight_or_berry_tree_id": "ITEM_FIRE_STONE",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ITEM_FIERY_PATH_FIRE_STONE"
     }
   ],
   "warp_events": [
@@ -125,20 +126,16 @@
       "y": 36,
       "elevation": 3,
       "dest_map": "MAP_ROUTE112",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     },
     {
       "x": 26,
       "y": 4,
       "elevation": 3,
       "dest_map": "MAP_ROUTE112",
-      "dest_warp_id": 5
+      "dest_warp_id": "5"
     }
   ],
-  "coord_events": [
-
-  ],
-  "bg_events": [
-
-  ]
+  "coord_events": [],
+  "bg_events": []
 }

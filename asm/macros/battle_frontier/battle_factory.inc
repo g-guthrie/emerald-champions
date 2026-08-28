@@ -50,13 +50,13 @@
 	special CallBattleFactoryFunction
 	.endm
 
-	@ Update gEnemyParty with the next set of rental mons
+	@ Update opponent party with the next set of rental mons
 	.macro factory_setopponentmons
 	setvar VAR_0x8004, BATTLE_FACTORY_FUNC_SET_OPPONENT_MONS
 	special CallBattleFactoryFunction
 	.endm
 
-	@ Populate gPlayerParty and gEnemyParty with the rental mons. Only needed when resuming a challenge, otherwise only factory_setopponentmons and factory_rentmons/factory_swapmons are needed
+	@ Populate player and opponent party with the rental mons. Only needed when resuming a challenge, otherwise only factory_setopponentmons and factory_rentmons/factory_swapmons are needed
 	.macro factory_setparties arg:req
 	setvar VAR_0x8004, BATTLE_FACTORY_FUNC_SET_PARTIES
 	setvar VAR_0x8005, \arg
@@ -88,7 +88,7 @@
 	.endm
 
 	@ Return the FACTORY_STYLE_* dependent on what types of moves the opponents team has, or FACTORY_NUM_STYLES if multiple styles tie for the same amount of moves
-	.macro factory_getopponentstyle 
+	.macro factory_getopponentstyle
 	setvar VAR_0x8004, BATTLE_FACTORY_FUNC_GET_OPPONENT_STYLE
 	special CallBattleFactoryFunction
 	.endm

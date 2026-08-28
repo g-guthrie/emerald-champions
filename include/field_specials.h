@@ -1,12 +1,14 @@
 #ifndef GUARD_FIELD_SPECIALS_H
 #define GUARD_FIELD_SPECIALS_H
 
+#include "constants/species.h"
+
 extern bool8 gBikeCyclingChallenge;
 extern u8 gBikeCollisions;
-extern const u8 *const gNatureNamePointers[];
+extern u16 gScrollableMultichoice_ScrollOffset;
 
 u8 GetLeadMonIndex(void);
-u8 IsDestinationBoxFull(void);
+bool8 IsDestinationBoxFull(void);
 u16 GetPCBoxToSendMon(void);
 bool8 InMultiPartnerRoom(void);
 void UpdateTrainerFansAfterLinkBattle(void);
@@ -19,7 +21,7 @@ bool32 ShouldDoScottBattleFrontierCall(void);
 bool32 ShouldDoRoxanneCall(void);
 bool32 ShouldDoRivalRayquazaCall(void);
 bool32 CountSSTidalStep(u16 delta);
-u8 GetSSTidalLocation(s8 *mapGroup, s8 *mapNum, s16 *x, s16 *y);
+enum SSTidalLocation GetSSTidalLocation(s8 *mapGroup, s8 *mapNum, s16 *x, s16 *y);
 void ShowScrollableMultichoice(void);
 void FrontierGamblerSetWonOrLost(bool8 won);
 u8 TryGainNewFanFromCounter(u8 incrementId);
@@ -32,6 +34,11 @@ bool8 UsedPokemonCenterWarp(void);
 void ResetFanClub(void);
 bool8 ShouldShowBoxWasFullMessage(void);
 void SetPCBoxToSendMon(u8 boxId);
-void ResetDailyHiddenItemFlags(void);
+void PreparePartyForSkyBattle(void);
+void GetObjectPosition(u16*, u16*, u32, u32);
+bool32 CheckObjectAtXY(u32, u32);
+bool32 CheckPartyHasSpecies(enum Species);
+bool8 CutMoveRuinValleyCheck(void);
+void CutMoveOpenDottedHoleDoor(void);
 
 #endif // GUARD_FIELD_SPECIALS_H

@@ -56,10 +56,8 @@ static void GenerateInitialRentalMons(void);
  *
  */
 
-// IWRAM bss
-static u16 sRandMonSetId;
+static u16 sRandMonId;
 
-// const rom data
 void static (*const sVerdanturfTentFuncs[])(void) =
 {
     [VERDANTURF_TENT_FUNC_INIT]               = InitVerdanturfTentChallenge,
@@ -72,7 +70,7 @@ void static (*const sVerdanturfTentFuncs[])(void) =
     [VERDANTURF_TENT_FUNC_GIVE_PRIZE]         = GiveVerdanturfTentPrize
 };
 
-static const u16 sVerdanturfTentRewards[] = {ITEM_BOTTLE_CAP};
+static const u16 sVerdanturfTentRewards[] = {ITEM_NEST_BALL};
 
 void static (*const sFallarborTentFuncs[])(void) =
 {
@@ -85,7 +83,7 @@ void static (*const sFallarborTentFuncs[])(void) =
     [FALLARBOR_TENT_FUNC_GET_OPPONENT_NAME] = BufferFallarborTentTrainerName
 };
 
-static const u16 sFallarborTentRewards[] = {ITEM_BOTTLE_CAP};
+static const u16 sFallarborTentRewards[] = {ITEM_HYPER_POTION};
 
 void static (*const sSlateportTentFuncs[])(void) =
 {
@@ -101,16 +99,11 @@ void static (*const sSlateportTentFuncs[])(void) =
     [SLATEPORT_TENT_FUNC_GENERATE_RENTAL_MONS]   = GenerateInitialRentalMons
 };
 
-static const u16 sSlateportTentRewards[] = {ITEM_BOTTLE_CAP};
+static const u16 sSlateportTentRewards[] = {ITEM_FULL_HEAL};
 
 // code
 void CallVerdanturfTentFunction(void)
 {
-    if (gSpecialVar_0x8004 >= ARRAY_COUNT(sVerdanturfTentFuncs))
-    {
-        gSpecialVar_Result = FALSE;
-        return;
-    }
     sVerdanturfTentFuncs[gSpecialVar_0x8004]();
 }
 
@@ -119,7 +112,7 @@ static void InitVerdanturfTentChallenge(void)
     gSaveBlock2Ptr->frontier.challengeStatus = 0;
     gSaveBlock2Ptr->frontier.curChallengeBattleNum = 0;
     gSaveBlock2Ptr->frontier.challengePaused = FALSE;
-    SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
+    SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, WARP_ID_NONE);
 }
 
 static void GetVerdanturfTentPrize(void)
@@ -134,21 +127,21 @@ static void SetVerdanturfTentPrize(void)
 
 static void SetVerdanturfTentTrainerGfx(void)
 {
-    gTrainerBattleOpponent_A = (u32)((Random() % 255) * 5) / 64;
-    SetBattleFacilityTrainerGfxId(gTrainerBattleOpponent_A, 0);
+    TRAINER_BATTLE_PARAM.opponentA = (u32)((Random() % 255) * 5) / 64;
+    SetBattleFacilityTrainerGfxId(TRAINER_BATTLE_PARAM.opponentA, 0);
 }
 
 static void BufferVerdanturfTentTrainerIntro(void)
 {
-    if (gTrainerBattleOpponent_A < FRONTIER_TRAINERS_COUNT)
-        FrontierSpeechToString(gFacilityTrainers[gTrainerBattleOpponent_A].speechBefore);
+    if (TRAINER_BATTLE_PARAM.opponentA < FRONTIER_TRAINERS_COUNT)
+        FrontierSpeechToString(gFacilityTrainers[TRAINER_BATTLE_PARAM.opponentA].speechBefore);
 }
 
 static void SaveVerdanturfTentChallenge(void)
 {
     ClearEnemyPartyAfterChallenge();
     gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
-    VarSet(VAR_TEMP_0, 0);
+    VarSet(VAR_TEMP_CHALLENGE_STATUS, 0);
     gSaveBlock2Ptr->frontier.challengePaused = TRUE;
     SaveGameFrontier();
 }
@@ -160,7 +153,7 @@ static void SetRandomVerdanturfTentPrize(void)
 
 static void GiveVerdanturfTentPrize(void)
 {
-    if (AddBagItem(gSaveBlock2Ptr->frontier.verdanturfTentPrize, 3) == TRUE)
+    if (AddBagItem(gSaveBlock2Ptr->frontier.verdanturfTentPrize, 1) == TRUE)
     {
         CopyItemName(gSaveBlock2Ptr->frontier.verdanturfTentPrize, gStringVar1);
         gSaveBlock2Ptr->frontier.verdanturfTentPrize = ITEM_NONE;
@@ -174,11 +167,6 @@ static void GiveVerdanturfTentPrize(void)
 
 void CallFallarborTentFunction(void)
 {
-    if (gSpecialVar_0x8004 >= ARRAY_COUNT(sFallarborTentFuncs))
-    {
-        gSpecialVar_Result = FALSE;
-        return;
-    }
     sFallarborTentFuncs[gSpecialVar_0x8004]();
 }
 
@@ -187,7 +175,7 @@ static void InitFallarborTentChallenge(void)
     gSaveBlock2Ptr->frontier.challengeStatus = 0;
     gSaveBlock2Ptr->frontier.curChallengeBattleNum = 0;
     gSaveBlock2Ptr->frontier.challengePaused = FALSE;
-    SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
+    SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, WARP_ID_NONE);
 }
 
 static void GetFallarborTentPrize(void)
@@ -204,7 +192,7 @@ static void SaveFallarborTentChallenge(void)
 {
     ClearEnemyPartyAfterChallenge();
     gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
-    VarSet(VAR_TEMP_0, 0);
+    VarSet(VAR_TEMP_CHALLENGE_STATUS, 0);
     gSaveBlock2Ptr->frontier.challengePaused = TRUE;
     SaveGameFrontier();
 }
@@ -216,7 +204,7 @@ static void SetRandomFallarborTentPrize(void)
 
 static void GiveFallarborTentPrize(void)
 {
-    if (AddBagItem(gSaveBlock2Ptr->frontier.fallarborTentPrize, 3) == TRUE)
+    if (AddBagItem(gSaveBlock2Ptr->frontier.fallarborTentPrize, 1) == TRUE)
     {
         CopyItemName(gSaveBlock2Ptr->frontier.fallarborTentPrize, gStringVar1);
         gSaveBlock2Ptr->frontier.fallarborTentPrize = ITEM_NONE;
@@ -230,16 +218,11 @@ static void GiveFallarborTentPrize(void)
 
 static void BufferFallarborTentTrainerName(void)
 {
-    GetFrontierTrainerName(gStringVar1, gTrainerBattleOpponent_A);
+    GetFrontierTrainerName(gStringVar1, TRAINER_BATTLE_PARAM.opponentA);
 }
 
 void CallSlateportTentFunction(void)
 {
-    if (gSpecialVar_0x8004 >= ARRAY_COUNT(sSlateportTentFuncs))
-    {
-        gSpecialVar_Result = FALSE;
-        return;
-    }
     sSlateportTentFuncs[gSpecialVar_0x8004]();
 }
 
@@ -248,7 +231,7 @@ static void InitSlateportTentChallenge(void)
     gSaveBlock2Ptr->frontier.challengeStatus = 0;
     gSaveBlock2Ptr->frontier.curChallengeBattleNum = 0;
     gSaveBlock2Ptr->frontier.challengePaused = FALSE;
-    SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
+    SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, WARP_ID_NONE);
 }
 
 static void GetSlateportTentPrize(void)
@@ -265,7 +248,7 @@ static void SaveSlateportTentChallenge(void)
 {
     ClearEnemyPartyAfterChallenge();
     gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
-    VarSet(VAR_TEMP_0, 0);
+    VarSet(VAR_TEMP_CHALLENGE_STATUS, 0);
     gSaveBlock2Ptr->frontier.challengePaused = TRUE;
     SaveGameFrontier();
 }
@@ -277,7 +260,7 @@ static void SetRandomSlateportTentPrize(void)
 
 static void GiveSlateportTentPrize(void)
 {
-    if (AddBagItem(gSaveBlock2Ptr->frontier.slateportTentPrize, 3) == TRUE)
+    if (AddBagItem(gSaveBlock2Ptr->frontier.slateportTentPrize, 1) == TRUE)
     {
         CopyItemName(gSaveBlock2Ptr->frontier.slateportTentPrize, gStringVar1);
         gSaveBlock2Ptr->frontier.slateportTentPrize = ITEM_NONE;
@@ -311,10 +294,10 @@ static void GenerateInitialRentalMons(void)
     s32 i, j;
     u8 firstMonId;
     u16 monSetId;
-    u16 currSpecies;
-    u16 species[PARTY_SIZE];
+    enum Species currSpecies;
+    enum Species species[PARTY_SIZE];
     u16 monIds[PARTY_SIZE];
-    u16 heldItems[PARTY_SIZE];
+    enum Item heldItems[PARTY_SIZE];
 
     firstMonId = 0;
     gFacilityTrainers = gSlateportBattleTentTrainers;
@@ -329,11 +312,10 @@ static void GenerateInitialRentalMons(void)
     i = 0;
     while (i != PARTY_SIZE)
     {
-        // Cannot have two pokemon of the same species.
+        // Cannot have two Pokémon of the same species.
         monSetId = Random() % NUM_SLATEPORT_TENT_MONS;
         for (j = firstMonId; j < firstMonId + i; j++)
         {
-            u16 monId = monIds[j];
             if (monIds[j] == monSetId)
                 break;
             if (species[j] == gFacilityTrainerMons[monSetId].species)
@@ -350,7 +332,7 @@ static void GenerateInitialRentalMons(void)
         // Cannot have two same held items.
         for (j = firstMonId; j < i + firstMonId; j++)
         {
-            if (heldItems[j] != 0 && heldItems[j] == gBattleFrontierHeldItems[gFacilityTrainerMons[monSetId].itemTableId])
+            if (heldItems[j] != 0 && heldItems[j] == gFacilityTrainerMons[monSetId].heldItem)
             {
                 if (gFacilityTrainerMons[monSetId].species == currSpecies)
                     currSpecies = SPECIES_NONE;
@@ -362,7 +344,7 @@ static void GenerateInitialRentalMons(void)
 
         gSaveBlock2Ptr->frontier.rentalMons[i].monId = monSetId;
         species[i] = gFacilityTrainerMons[monSetId].species;
-        heldItems[i] = gBattleFrontierHeldItems[gFacilityTrainerMons[monSetId].itemTableId];
+        heldItems[i] = gFacilityTrainerMons[monSetId].heldItem;
         monIds[i] = monSetId;
         i++;
     }
@@ -373,9 +355,9 @@ static void GenerateOpponentMons(void)
     u16 trainerId;
     s32 i, j, k;
     const u16 *monSet;
-    u16 species[FRONTIER_PARTY_SIZE];
-    u16 heldItems[FRONTIER_PARTY_SIZE];
-    s32 monId = 0;
+    enum Species species[FRONTIER_PARTY_SIZE];
+    enum Item heldItems[FRONTIER_PARTY_SIZE];
+    s32 numMons = 0;
 
     gFacilityTrainers = gSlateportBattleTentTrainers;
     gFacilityTrainerMons = gSlateportBattleTentMons;
@@ -384,6 +366,7 @@ static void GenerateOpponentMons(void)
     {
         do
         {
+            // Choose a random trainer, ensuring no repeats in this challenge
             trainerId = Random() % NUM_BATTLE_TENT_TRAINERS;
             for (i = 0; i < gSaveBlock2Ptr->frontier.curChallengeBattleNum; i++)
             {
@@ -392,50 +375,55 @@ static void GenerateOpponentMons(void)
             }
         } while (i != gSaveBlock2Ptr->frontier.curChallengeBattleNum);
 
-        gTrainerBattleOpponent_A = trainerId;
-        monSet = gFacilityTrainers[gTrainerBattleOpponent_A].monSet;
-        while (monSet[monId] != 0xFFFF)
-            monId++;
-        if (monId > 8)
+        TRAINER_BATTLE_PARAM.opponentA = trainerId;
+        monSet = gFacilityTrainers[TRAINER_BATTLE_PARAM.opponentA].monSet;
+        while (monSet[numMons] != 0xFFFF)
+            numMons++;
+        if (numMons > 8)
             break;
-        monId = 0;
+        numMons = 0;
     }
 
-    if (gSaveBlock2Ptr->frontier.curChallengeBattleNum < 2)
-        gSaveBlock2Ptr->frontier.trainerIds[gSaveBlock2Ptr->frontier.curChallengeBattleNum] = gTrainerBattleOpponent_A;
+    if (gSaveBlock2Ptr->frontier.curChallengeBattleNum < TENT_STAGES_PER_CHALLENGE - 1)
+        gSaveBlock2Ptr->frontier.trainerIds[gSaveBlock2Ptr->frontier.curChallengeBattleNum] = TRAINER_BATTLE_PARAM.opponentA;
 
-    monSet = gFacilityTrainers[gTrainerBattleOpponent_A].monSet;
+    monSet = gFacilityTrainers[TRAINER_BATTLE_PARAM.opponentA].monSet;
     i = 0;
     while (i != FRONTIER_PARTY_SIZE)
     {
-        sRandMonSetId = monSet[Random() % monId];
-        for (j = 0; j < 6; j++)
+        sRandMonId = monSet[Random() % numMons];
+
+        // Ensure none of the opponent's Pokémon are the same as the potential rental Pokémon for the player
+        for (j = 0; j < (int)ARRAY_COUNT(gSaveBlock2Ptr->frontier.rentalMons); j++)
         {
-            if (gFacilityTrainerMons[sRandMonSetId].species == gFacilityTrainerMons[gSaveBlock2Ptr->frontier.rentalMons[j].monId].species)
+            if (gFacilityTrainerMons[sRandMonId].species == gFacilityTrainerMons[gSaveBlock2Ptr->frontier.rentalMons[j].monId].species)
                 break;
         }
-        if (j != 6)
+        if (j != (int)ARRAY_COUNT(gSaveBlock2Ptr->frontier.rentalMons))
             continue;
 
+        // Ensure this species hasn't already been chosen for the opponent
         for (k = 0; k < i; k++)
         {
-            if (species[k] == gFacilityTrainerMons[sRandMonSetId].species)
+            if (species[k] == gFacilityTrainerMons[sRandMonId].species)
                 break;
         }
         if (k != i)
             continue;
 
+        // Ensure held items don't repeat on the opponent's team
         for (k = 0; k < i; k++)
         {
-            if (heldItems[k] != 0 && heldItems[k] == gBattleFrontierHeldItems[gFacilityTrainerMons[sRandMonSetId].itemTableId])
+            if (heldItems[k] != ITEM_NONE && heldItems[k] == gFacilityTrainerMons[sRandMonId].heldItem)
                 break;
         }
         if (k != i)
             continue;
 
-        species[i] = gFacilityTrainerMons[sRandMonSetId].species;
-        heldItems[i] = gBattleFrontierHeldItems[gFacilityTrainerMons[sRandMonSetId].itemTableId];
-        gFrontierTempParty[i] = sRandMonSetId;
+        // Successful selection
+        species[i] = gFacilityTrainerMons[sRandMonId].species;
+        heldItems[i] = gFacilityTrainerMons[sRandMonId].heldItem;
+        gFrontierTempParty[i] = sRandMonId;
         i++;
     }
 }

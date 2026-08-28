@@ -14,46 +14,95 @@ static void Task_DrawEscalator(u8 taskId);
 #define ESCALATOR_STAGES     3
 #define LAST_ESCALATOR_STAGE (ESCALATOR_STAGES - 1)
 
-static const u16 sEscalatorMetatiles_1F_0[ESCALATOR_STAGES] = {
+static const s16 sEscalatorMetatiles_1F_0[ESCALATOR_STAGES] = {
     METATILE_PokemonCenter_Escalator1F_Tile0_Frame2,
     METATILE_PokemonCenter_Escalator1F_Tile0_Frame1,
     METATILE_PokemonCenter_Escalator1F_Tile0_Frame0
 };
 
-static const u16 sEscalatorMetatiles_1F_1[ESCALATOR_STAGES] = {
+static const s16 sEscalatorMetatiles_1F_1[ESCALATOR_STAGES] = {
     METATILE_PokemonCenter_Escalator1F_Tile1_Frame2,
     METATILE_PokemonCenter_Escalator1F_Tile1_Frame1,
     METATILE_PokemonCenter_Escalator1F_Tile1_Frame0
 };
 
-static const u16 sEscalatorMetatiles_1F_2[ESCALATOR_STAGES] = {
+static const s16 sEscalatorMetatiles_1F_2[ESCALATOR_STAGES] = {
     METATILE_PokemonCenter_Escalator1F_Tile2_Frame2,
     METATILE_PokemonCenter_Escalator1F_Tile2_Frame1,
     METATILE_PokemonCenter_Escalator1F_Tile2_Frame0
 };
 
-static const u16 sEscalatorMetatiles_1F_3[ESCALATOR_STAGES] = {
+static const s16 sEscalatorMetatiles_1F_3[ESCALATOR_STAGES] = {
     METATILE_PokemonCenter_Escalator1F_Tile3_Frame2,
     METATILE_PokemonCenter_Escalator1F_Tile3_Frame1,
     METATILE_PokemonCenter_Escalator1F_Tile3_Frame0
 };
 
-static const u16 sEscalatorMetatiles_2F_0[ESCALATOR_STAGES] = {
+static const s16 sEscalatorMetatiles_2F_0[ESCALATOR_STAGES] = {
     METATILE_PokemonCenter_Escalator2F_Tile0_Frame0,
     METATILE_PokemonCenter_Escalator2F_Tile0_Frame1,
     METATILE_PokemonCenter_Escalator2F_Tile0_Frame2
 };
 
-static const u16 sEscalatorMetatiles_2F_1[ESCALATOR_STAGES] = {
+static const s16 sEscalatorMetatiles_2F_1[ESCALATOR_STAGES] = {
     METATILE_PokemonCenter_Escalator2F_Tile1_Frame0,
     METATILE_PokemonCenter_Escalator2F_Tile1_Frame1,
     METATILE_PokemonCenter_Escalator2F_Tile1_Frame2
 };
 
-static const u16 sEscalatorMetatiles_2F_2[ESCALATOR_STAGES] = {
+static const s16 sEscalatorMetatiles_2F_2[ESCALATOR_STAGES] = {
     METATILE_PokemonCenter_Escalator2F_Tile2_Frame0,
     METATILE_PokemonCenter_Escalator2F_Tile2_Frame1,
     METATILE_PokemonCenter_Escalator2F_Tile2_Frame2
+};
+
+static const s16 sEscalatorMetatilesFrlg_BottomNextRail[ESCALATOR_STAGES] = 
+{
+    METATILE_PokemonCenterFrlg_Escalator_BottomNextRail_Transition2, 
+    METATILE_PokemonCenterFrlg_Escalator_BottomNextRail_Transition1, 
+    METATILE_PokemonCenterFrlg_Escalator_BottomNextRail_Normal
+};
+
+static const s16 sEscalatorMetatilesFrlg_BottomRail[ESCALATOR_STAGES] = 
+{
+    METATILE_PokemonCenterFrlg_Escalator_BottomRail_Transition2, 
+    METATILE_PokemonCenterFrlg_Escalator_BottomRail_Transition1, 
+    METATILE_PokemonCenterFrlg_Escalator_BottomRail_Normal
+};
+
+static const s16 sEscalatorMetatilesFrlg_BottomNext[ESCALATOR_STAGES] = 
+{
+    METATILE_PokemonCenterFrlg_Escalator_BottomNext_Transition2, 
+    METATILE_PokemonCenterFrlg_Escalator_BottomNext_Transition1, 
+    METATILE_PokemonCenterFrlg_Escalator_BottomNext_Normal
+};
+
+static const s16 sEscalatorMetatilesFrlg_Bottom[ESCALATOR_STAGES] = 
+{
+    METATILE_PokemonCenterFrlg_Escalator_Bottom_Transition2, 
+    METATILE_PokemonCenterFrlg_Escalator_Bottom_Transition1, 
+    METATILE_PokemonCenterFrlg_Escalator_Bottom_Normal
+};
+
+static const s16 sEscalatorMetatilesFrlg_TopNext[ESCALATOR_STAGES] = 
+{
+    METATILE_PokemonCenterFrlg_Escalator_TopNext_Normal, 
+    METATILE_PokemonCenterFrlg_Escalator_TopNext_Transition1, 
+    METATILE_PokemonCenterFrlg_Escalator_TopNext_Transition2
+};
+
+static const s16 sEscalatorMetatilesFrlg_Top[ESCALATOR_STAGES] = 
+{
+    METATILE_PokemonCenterFrlg_Escalator_Top_Normal, 
+    METATILE_PokemonCenterFrlg_Escalator_Top_Transition1, 
+    METATILE_PokemonCenterFrlg_Escalator_Top_Transition2
+};
+
+static const s16 sEscalatorMetatilesFrlg_TopNextRail[ESCALATOR_STAGES] = 
+{
+    METATILE_PokemonCenterFrlg_Escalator_TopNextRail_Normal, 
+    METATILE_PokemonCenterFrlg_Escalator_TopNextRail_Transition1, 
+    METATILE_PokemonCenterFrlg_Escalator_TopNextRail_Transition2
 };
 
 #define tState            data[0]
@@ -71,7 +120,7 @@ static void SetEscalatorMetatile(u8 taskId, const s16 *metatileIds, u16 metatile
     s16 i;
     s16 j;
 
-    // Check all the escalator sections and only progress the selected one to the next stage    
+    // Check all the escalator sections and only progress the selected one to the next stage
     if (!gTasks[taskId].tGoingUp)
     {
         for (i = 0; i < 3; i++)
@@ -119,27 +168,27 @@ static void Task_DrawEscalator(u8 taskId)
     // Set tile for each section of the escalator in sequence for current transition stage
     switch (tState)
     {
-        case 0:
-            SetEscalatorMetatile(taskId, sEscalatorMetatiles_1F_0, 0);
-            break;
-        case 1:
-            SetEscalatorMetatile(taskId, sEscalatorMetatiles_1F_1, 0);
-            break;
-        case 2:
-            SetEscalatorMetatile(taskId, sEscalatorMetatiles_1F_2, METATILE_COLLISION_MASK);
-            break;
-        case 3:
-            SetEscalatorMetatile(taskId, sEscalatorMetatiles_1F_3, 0);
-            break;
-        case 4:
-            SetEscalatorMetatile(taskId, sEscalatorMetatiles_2F_0, METATILE_COLLISION_MASK);
-            break;
-        case 5:
-            SetEscalatorMetatile(taskId, sEscalatorMetatiles_2F_1, 0);
-            break;
-        case 6:
-            SetEscalatorMetatile(taskId, sEscalatorMetatiles_2F_2, 0);
-            break;
+    case 0:
+        SetEscalatorMetatile(taskId, gMapHeader.mapLayout->isFrlg ? sEscalatorMetatilesFrlg_BottomNextRail : sEscalatorMetatiles_1F_0, 0);
+        break;
+    case 1:
+        SetEscalatorMetatile(taskId, gMapHeader.mapLayout->isFrlg ? sEscalatorMetatilesFrlg_BottomRail : sEscalatorMetatiles_1F_1, 0);
+        break;
+    case 2:
+        SetEscalatorMetatile(taskId, gMapHeader.mapLayout->isFrlg ? sEscalatorMetatilesFrlg_BottomNext : sEscalatorMetatiles_1F_2, MAPGRID_IMPASSABLE);
+        break;
+    case 3:
+        SetEscalatorMetatile(taskId, gMapHeader.mapLayout->isFrlg ? sEscalatorMetatilesFrlg_Bottom : sEscalatorMetatiles_1F_3, 0);
+        break;
+    case 4:
+        SetEscalatorMetatile(taskId, gMapHeader.mapLayout->isFrlg ? sEscalatorMetatilesFrlg_TopNext : sEscalatorMetatiles_2F_0, MAPGRID_IMPASSABLE);
+        break;
+    case 5:
+        SetEscalatorMetatile(taskId, gMapHeader.mapLayout->isFrlg ? sEscalatorMetatilesFrlg_Top : sEscalatorMetatiles_2F_1, 0);
+        break;
+    case 6:
+        SetEscalatorMetatile(taskId, gMapHeader.mapLayout->isFrlg ? sEscalatorMetatilesFrlg_TopNextRail : sEscalatorMetatiles_2F_2, 0);
+        break;
     }
 
     tState = (tState + 1) & 7;
@@ -162,8 +211,7 @@ static u8 CreateEscalatorTask(bool16 goingUp)
     tState = 0;
     tTransitionStage = 0;
     tGoingUp = goingUp;
-    if (taskId < NUM_TASKS)
-        Task_DrawEscalator(taskId);
+    Task_DrawEscalator(taskId);
     return taskId;
 }
 
@@ -179,7 +227,7 @@ void StopEscalator(void)
 
 bool8 IsEscalatorMoving(void)
 {
-    if (gTasks[sEscalatorAnim_TaskId].tDrawingEscalator == FALSE 
+    if (gTasks[sEscalatorAnim_TaskId].tDrawingEscalator == FALSE
      && gTasks[sEscalatorAnim_TaskId].tTransitionStage == LAST_ESCALATOR_STAGE)
         return FALSE;
     else

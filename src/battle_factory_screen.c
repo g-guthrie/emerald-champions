@@ -28,20 +28,24 @@
 #include "strings.h"
 #include "graphics.h"
 #include "constants/battle_frontier.h"
+#include "constants/battle_tent.h"
 #include "constants/songs.h"
 #include "constants/rgb.h"
 
-// Select_ refers to the first Pokemon selection screen where you choose your initial 3 rental Pokemon.
-// Swap_   refers to the subsequent selection screens where you can swap a Pokemon with one from the beaten trainer
+// Select_ refers to the first Pokémon selection screen where you choose your initial 3 rental Pokémon.
+// Swap_   refers to the subsequent selection screens where you can swap a Pokémon with one from the beaten trainer
 
 // Note that, generally, "Action" will refer to the immediate actions that can be taken on each screen,
-// i.e. selecting a pokemon or selecting the Cancel button
+// i.e. selecting a Pokémon or selecting the Cancel button
 // The "Options menu" will refer to the popup menu that shows when some actions have been selected
 
-#define SWAP_PLAYER_SCREEN 0  // The screen where the player selects which of their pokemon to swap away
-#define SWAP_ENEMY_SCREEN  1  // The screen where the player selects which new pokemon from the defeated party to swap for
+#define SWAP_PLAYER_SCREEN 0  // The screen where the player selects which of their Pokémon to swap away
+#define SWAP_ENEMY_SCREEN  1  // The screen where the player selects which new Pokémon from the defeated party to swap for
 
 #define SELECTABLE_MONS_COUNT 6
+
+#define PALNUM_FADE_TEXT 14
+#define PALNUM_TEXT      15
 
 enum {
     PALTAG_BALL_GRAY = 100,
@@ -85,7 +89,7 @@ struct FactorySelectableMon
 {
     u16 monId;
     u16 ballSpriteId;
-    u8 selectedId; // 0 - not selected, 1 - first pokemon, 2 - second pokemon, 3 - third pokemon
+    u8 selectedId; // 0 - not selected, 1 - first Pokémon, 2 - second Pokémon, 3 - third Pokémon
     struct Pokemon monData;
 };
 
@@ -121,7 +125,7 @@ struct FactorySelectScreen
 struct SwapScreenAction
 {
     u8 id;
-    void (*func)(u8 taskId);
+    TaskFunc func;
 };
 
 struct FactorySwapScreen
@@ -249,27 +253,27 @@ static EWRAM_DATA u8 *sSwapMenuTilemapBuffer = NULL;
 static EWRAM_DATA u8 *sSwapMonPicBgTilemapBuffer = NULL;
 
 static struct FactorySelectScreen *sFactorySelectScreen;
-static void (*sSwap_CurrentOptionFunc)(u8 taskId);
+static TaskFunc sSwap_CurrentOptionFunc;
 static struct FactorySwapScreen *sFactorySwapScreen;
 
-u8 (*gFactorySelect_CurrentOptionFunc)(void);
+COMMON_DATA u8 (*gFactorySelect_CurrentOptionFunc)(void) = NULL;
 
-static const u16 sPokeballGray_Pal[]         = INCBIN_U16("graphics/battle_frontier/factory_screen/pokeball_gray.gbapal");
-static const u16 sPokeballSelected_Pal[]     = INCBIN_U16("graphics/battle_frontier/factory_screen/pokeball_selected.gbapal");
-static const u16 sInterface_Pal[]            = INCBIN_U16("graphics/battle_frontier/factory_screen/interface.gbapal"); // Arrow, menu/action highlights, action box, etc
-static const u8 sPokeball_Gfx[]              = INCBIN_U8( "graphics/battle_frontier/factory_screen/pokeball.4bpp"); // Unused, gPokeballSelection_Gfx used instead
-static const u8 sArrow_Gfx[]                 = INCBIN_U8( "graphics/battle_frontier/factory_screen/arrow.4bpp");
-static const u8 sMenuHighlightLeft_Gfx[]     = INCBIN_U8( "graphics/battle_frontier/factory_screen/menu_highlight_left.4bpp");
-static const u8 sMenuHighlightRight_Gfx[]    = INCBIN_U8( "graphics/battle_frontier/factory_screen/menu_highlight_right.4bpp");
-static const u8 sActionBoxLeft_Gfx[]         = INCBIN_U8( "graphics/battle_frontier/factory_screen/action_box_left.4bpp");
-static const u8 sActionBoxRight_Gfx[]        = INCBIN_U8( "graphics/battle_frontier/factory_screen/action_box_right.4bpp");
-static const u8 sActionHighlightLeft_Gfx[]   = INCBIN_U8( "graphics/battle_frontier/factory_screen/action_highlight_left.4bpp");
-static const u8 sActionHighlightMiddle_Gfx[] = INCBIN_U8( "graphics/battle_frontier/factory_screen/action_highlight_middle.4bpp");
-static const u8 sActionHighlightRight_Gfx[]  = INCBIN_U8( "graphics/battle_frontier/factory_screen/action_highlight_right.4bpp");
-static const u8 sMonPicBgAnim_Gfx[]          = INCBIN_U8( "graphics/battle_frontier/factory_screen/mon_pic_bg_anim.4bpp");
+static const u16 sPokeballGray_Pal[]         = INCGFX_U16("graphics/battle_frontier/factory_screen/pokeball_gray.pal", ".gbapal");
+static const u16 sPokeballSelected_Pal[]     = INCGFX_U16("graphics/battle_frontier/factory_screen/pokeball_selected.pal", ".gbapal");
+static const u16 sInterface_Pal[]            = INCGFX_U16("graphics/battle_frontier/factory_screen/interface.pal", ".gbapal"); // Arrow, menu/action highlights, action box, etc
+static const u8 sPokeball_Gfx[]              = INCGFX_U8("graphics/battle_frontier/factory_screen/pokeball.png", ".4bpp"); // Unused, gPokeballSelection_Gfx used instead
+static const u8 sArrow_Gfx[]                 = INCGFX_U8("graphics/battle_frontier/factory_screen/arrow.png", ".4bpp");
+static const u8 sMenuHighlightLeft_Gfx[]     = INCGFX_U8("graphics/battle_frontier/factory_screen/menu_highlight_left.png", ".4bpp");
+static const u8 sMenuHighlightRight_Gfx[]    = INCGFX_U8("graphics/battle_frontier/factory_screen/menu_highlight_right.png", ".4bpp");
+static const u8 sActionBoxLeft_Gfx[]         = INCGFX_U8("graphics/battle_frontier/factory_screen/action_box_left.png", ".4bpp");
+static const u8 sActionBoxRight_Gfx[]        = INCGFX_U8("graphics/battle_frontier/factory_screen/action_box_right.png", ".4bpp");
+static const u8 sActionHighlightLeft_Gfx[]   = INCGFX_U8("graphics/battle_frontier/factory_screen/action_highlight_left.png", ".4bpp");
+static const u8 sActionHighlightMiddle_Gfx[] = INCGFX_U8("graphics/battle_frontier/factory_screen/action_highlight_middle.png", ".4bpp");
+static const u8 sActionHighlightRight_Gfx[]  = INCGFX_U8("graphics/battle_frontier/factory_screen/action_highlight_right.png", ".4bpp");
+static const u8 sMonPicBgAnim_Gfx[]          = INCGFX_U8("graphics/battle_frontier/factory_screen/mon_pic_bg_anim.png", ".4bpp");
 static const u8 sMonPicBg_Tilemap[]          = INCBIN_U8( "graphics/battle_frontier/factory_screen/mon_pic_bg.bin");
-static const u8 sMonPicBg_Gfx[]              = INCBIN_U8( "graphics/battle_frontier/factory_screen/mon_pic_bg.4bpp");
-static const u16 sMonPicBg_Pal[]             = INCBIN_U16("graphics/battle_frontier/factory_screen/mon_pic_bg.gbapal");
+static const u16 sMonPicBg_Gfx[]             = INCGFX_U16("graphics/battle_frontier/factory_screen/mon_pic_bg.png", ".4bpp");
+static const u16 sMonPicBg_Pal[]             = INCGFX_U16("graphics/battle_frontier/factory_screen/mon_pic_bg.png", ".gbapal");
 
 static const struct SpriteSheet sSelect_SpriteSheets[] =
 {
@@ -295,7 +299,7 @@ static const struct SpritePalette sSelect_SpritePalettes[] =
     {},
 };
 
-u8 static (* const sSelect_MenuOptionFuncs[])(void) =
+u8 static (*const sSelect_MenuOptionFuncs[])(void) =
 {
     Select_OptionSummary,
     Select_OptionRentDeselect,
@@ -350,7 +354,7 @@ static const struct WindowTemplate sSelect_WindowTemplates[] =
         .tilemapTop = 2,
         .width = 12,
         .height = 2,
-        .paletteNum = 15,
+        .paletteNum = PALNUM_TEXT,
         .baseBlock = 0x0001,
     },
     [SELECT_WIN_SPECIES] = {
@@ -359,7 +363,7 @@ static const struct WindowTemplate sSelect_WindowTemplates[] =
         .tilemapTop = 2,
         .width = 11,
         .height = 2,
-        .paletteNum = 14,
+        .paletteNum = PALNUM_FADE_TEXT,
         .baseBlock = 0x0019,
     },
     [SELECT_WIN_INFO] = {
@@ -368,7 +372,7 @@ static const struct WindowTemplate sSelect_WindowTemplates[] =
         .tilemapTop = 15,
         .width = 20,
         .height = 3,
-        .paletteNum = 15,
+        .paletteNum = PALNUM_TEXT,
         .baseBlock = 0x002f,
     },
     [SELECT_WIN_OPTIONS] = {
@@ -377,7 +381,7 @@ static const struct WindowTemplate sSelect_WindowTemplates[] =
         .tilemapTop = 14,
         .width = 8,
         .height = 6,
-        .paletteNum = 15,
+        .paletteNum = PALNUM_TEXT,
         .baseBlock = 0x006b,
     },
     [SELECT_WIN_YES_NO] = {
@@ -386,7 +390,7 @@ static const struct WindowTemplate sSelect_WindowTemplates[] =
         .tilemapTop = 14,
         .width = 8,
         .height = 4,
-        .paletteNum = 15,
+        .paletteNum = PALNUM_TEXT,
         .baseBlock = 0x009b,
     },
     [SELECT_WIN_MON_CATEGORY] = {
@@ -395,13 +399,13 @@ static const struct WindowTemplate sSelect_WindowTemplates[] =
         .tilemapTop = 0,
         .width = 15,
         .height = 2,
-        .paletteNum = 15,
+        .paletteNum = PALNUM_TEXT,
         .baseBlock = 0x00bb,
     },
     DUMMY_WIN_TEMPLATE,
 };
 
-static const u16 sSelectText_Pal[] = INCBIN_U16("graphics/battle_frontier/factory_screen/text.gbapal");
+static const u16 sSelectText_Pal[] = INCGFX_U16("graphics/battle_frontier/factory_screen/text.pal", ".gbapal");
 static const u8 sMenuOptionTextColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_TRANSPARENT};
 static const u8 sSpeciesNameTextColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_RED, TEXT_COLOR_TRANSPARENT};
 
@@ -410,7 +414,7 @@ static const struct OamData sOam_Select_Pokeball =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
     .x = 0,
@@ -427,7 +431,7 @@ static const struct OamData sOam_Select_Arrow =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
     .x = 0,
@@ -444,7 +448,7 @@ static const struct OamData sOam_Select_MenuHighlight =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x16),
     .x = 0,
@@ -461,7 +465,7 @@ static const struct OamData sOam_Select_MonPicBgAnim =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_BLEND,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
@@ -513,17 +517,17 @@ static const union AnimCmd sAnim_Select_Pokeball_Moving[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd * const sAnims_Select_Interface[] =
+static const union AnimCmd *const sAnims_Select_Interface[] =
 {
     sAnim_Select_Interface,
 };
 
-static const union AnimCmd * const sAnims_Select_MonPicBgAnim[] =
+static const union AnimCmd *const sAnims_Select_MonPicBgAnim[] =
 {
     sAnim_Select_MonPicBgAnim,
 };
 
-static const union AnimCmd * const sAnims_Select_Pokeball[] =
+static const union AnimCmd *const sAnims_Select_Pokeball[] =
 {
     sAnim_Select_Pokeball_Still,
     sAnim_Select_Pokeball_Moving,
@@ -565,7 +569,7 @@ static const union AffineAnimCmd sAffineAnim_Select_MonPicBg_Open[] =
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd * const sAffineAnims_Select_MonPicBgAnim[] =
+static const union AffineAnimCmd *const sAffineAnims_Select_MonPicBgAnim[] =
 {
     sAffineAnim_Select_MonPicBg_Opening,
     sAffineAnim_Select_MonPicBg_Closing,
@@ -578,8 +582,6 @@ static const struct SpriteTemplate sSpriteTemplate_Select_Pokeball =
     .paletteTag = PALTAG_BALL_GRAY,
     .oam = &sOam_Select_Pokeball,
     .anims = sAnims_Select_Pokeball,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_Pokeball
 };
 
@@ -589,9 +591,6 @@ static const struct SpriteTemplate sSpriteTemplate_Select_Arrow =
     .paletteTag = PALTAG_INTERFACE,
     .oam = &sOam_Select_Arrow,
     .anims = sAnims_Select_Interface,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy
 };
 
 static const struct SpriteTemplate sSpriteTemplate_Select_MenuHighlightLeft =
@@ -600,9 +599,6 @@ static const struct SpriteTemplate sSpriteTemplate_Select_MenuHighlightLeft =
     .paletteTag = PALTAG_INTERFACE,
     .oam = &sOam_Select_MenuHighlight,
     .anims = sAnims_Select_Interface,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy
 };
 
 static const struct SpriteTemplate sSpriteTemplate_Select_MenuHighlightRight =
@@ -611,9 +607,6 @@ static const struct SpriteTemplate sSpriteTemplate_Select_MenuHighlightRight =
     .paletteTag = PALTAG_INTERFACE,
     .oam = &sOam_Select_MenuHighlight,
     .anims = sAnims_Select_Interface,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy
 };
 
 static const struct SpriteTemplate sSpriteTemplate_Select_MonPicBgAnim =
@@ -622,9 +615,7 @@ static const struct SpriteTemplate sSpriteTemplate_Select_MonPicBgAnim =
     .paletteTag = PALTAG_MON_PIC_BG,
     .oam = &sOam_Select_MonPicBgAnim,
     .anims = sAnims_Select_MonPicBgAnim,
-    .images = NULL,
     .affineAnims = sAffineAnims_Select_MonPicBgAnim,
-    .callback = SpriteCallbackDummy
 };
 
 static const struct SpriteSheet sSwap_SpriteSheets[] =
@@ -634,7 +625,11 @@ static const struct SpriteSheet sSwap_SpriteSheets[] =
     {sMenuHighlightRight_Gfx,    sizeof(sMenuHighlightRight_Gfx),    GFXTAG_MENU_HIGHLIGHT_RIGHT},
     {sActionBoxLeft_Gfx,         sizeof(sActionBoxLeft_Gfx),         GFXTAG_ACTION_BOX_LEFT},
     {sActionBoxRight_Gfx,        sizeof(sActionBoxRight_Gfx),        GFXTAG_ACTION_BOX_RIGHT},
+#ifdef BUGFIX
     {sActionHighlightLeft_Gfx,   sizeof(sActionHighlightLeft_Gfx),   GFXTAG_ACTION_HIGHLIGHT_LEFT},
+#else
+    {sActionHighlightLeft_Gfx,   8 * TILE_SIZE_4BPP, /* Incorrect size */ GFXTAG_ACTION_HIGHLIGHT_LEFT},
+#endif
     {sActionHighlightMiddle_Gfx, sizeof(sActionHighlightMiddle_Gfx), GFXTAG_ACTION_HIGHLIGHT_MIDDLE},
     {sActionHighlightRight_Gfx,  sizeof(sActionHighlightRight_Gfx),  GFXTAG_ACTION_HIGHLIGHT_RIGHT},
     {sMonPicBgAnim_Gfx,          sizeof(sMonPicBgAnim_Gfx),          GFXTAG_MON_PIC_BG_ANIM},
@@ -661,7 +656,7 @@ static const struct OamData sOam_Swap_Pokeball =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
     .x = 0,
@@ -678,7 +673,7 @@ static const struct OamData sOam_Swap_Arrow =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
     .x = 0,
@@ -695,7 +690,7 @@ static const struct OamData sOam_Swap_MenuHighlight =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x16),
     .x = 0,
@@ -712,7 +707,7 @@ static const struct OamData sOam_Swap_MonPicBgAnim =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_DOUBLE,
     .objMode = ST_OAM_OBJ_BLEND,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(64x64),
     .x = 0,
@@ -764,17 +759,17 @@ static const union AnimCmd sAnim_Swap_Pokeball_Moving[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd * const sAnims_Swap_Interface[] =
+static const union AnimCmd *const sAnims_Swap_Interface[] =
 {
     sAnim_Swap_Interface,
 };
 
-static const union AnimCmd * const sAnims_Swap_MonPicBgAnim[] =
+static const union AnimCmd *const sAnims_Swap_MonPicBgAnim[] =
 {
     sAnim_Swap_MonPicBgAnim,
 };
 
-static const union AnimCmd * const sAnims_Swap_Pokeball[] =
+static const union AnimCmd *const sAnims_Swap_Pokeball[] =
 {
     sAnim_Swap_Pokeball_Still,
     sAnim_Swap_Pokeball_Moving,
@@ -816,7 +811,7 @@ static const union AffineAnimCmd sAffineAnim_Swap_MonPicBg_Open[] =
     AFFINEANIMCMD_END,
 };
 
-static const union AffineAnimCmd * const sAffineAnims_Swap_MonPicBgAnim[] =
+static const union AffineAnimCmd *const sAffineAnims_Swap_MonPicBgAnim[] =
 {
     sAffineAnim_Swap_MonPicBg_Opening,
     sAffineAnim_Swap_MonPicBg_Closing,
@@ -829,8 +824,6 @@ static const struct SpriteTemplate sSpriteTemplate_Swap_Pokeball =
     .paletteTag = PALTAG_BALL_GRAY,
     .oam = &sOam_Swap_Pokeball,
     .anims = sAnims_Swap_Pokeball,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_Pokeball
 };
 
@@ -840,9 +833,6 @@ static const struct SpriteTemplate sSpriteTemplate_Swap_Arrow =
     .paletteTag = PALTAG_INTERFACE,
     .oam = &sOam_Swap_Arrow,
     .anims = sAnims_Swap_Interface,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy
 };
 
 static const struct SpriteTemplate sSpriteTemplate_Swap_MenuHighlightLeft =
@@ -851,9 +841,6 @@ static const struct SpriteTemplate sSpriteTemplate_Swap_MenuHighlightLeft =
     .paletteTag = PALTAG_INTERFACE,
     .oam = &sOam_Swap_MenuHighlight,
     .anims = sAnims_Swap_Interface,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy
 };
 
 static const struct SpriteTemplate sSpriteTemplate_Swap_MenuHighlightRight =
@@ -862,9 +849,6 @@ static const struct SpriteTemplate sSpriteTemplate_Swap_MenuHighlightRight =
     .paletteTag = PALTAG_INTERFACE,
     .oam = &sOam_Swap_MenuHighlight,
     .anims = sAnims_Swap_Interface,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy
 };
 
 static const struct SpriteTemplate sSpriteTemplate_Swap_MonPicBgAnim =
@@ -873,12 +857,10 @@ static const struct SpriteTemplate sSpriteTemplate_Swap_MonPicBgAnim =
     .paletteTag = PALTAG_MON_PIC_BG,
     .oam = &sOam_Swap_MonPicBgAnim,
     .anims = sAnims_Swap_MonPicBgAnim,
-    .images = NULL,
     .affineAnims = sAffineAnims_Swap_MonPicBgAnim,
-    .callback = SpriteCallbackDummy
 };
 
-void static (* const sSwap_MenuOptionFuncs[])(u8 taskId) =
+static const TaskFunc sSwap_MenuOptionFuncs[] =
 {
     Swap_OptionSummary,
     Swap_OptionSwap,
@@ -945,7 +927,7 @@ static const struct WindowTemplate sSwap_WindowTemplates[] =
         .tilemapTop = 2,
         .width = 12,
         .height = 2,
-        .paletteNum = 15,
+        .paletteNum = PALNUM_TEXT,
         .baseBlock = 0x0001,
     },
     [SWAP_WIN_SPECIES] = {
@@ -954,7 +936,7 @@ static const struct WindowTemplate sSwap_WindowTemplates[] =
         .tilemapTop = 2,
         .width = 11,
         .height = 2,
-        .paletteNum = 14,
+        .paletteNum = PALNUM_FADE_TEXT,
         .baseBlock = 0x0019,
     },
     [SWAP_WIN_INFO] = {
@@ -963,7 +945,7 @@ static const struct WindowTemplate sSwap_WindowTemplates[] =
         .tilemapTop = 15,
         .width = 20,
         .height = 3,
-        .paletteNum = 15,
+        .paletteNum = PALNUM_TEXT,
         .baseBlock = 0x002f,
     },
     [SWAP_WIN_OPTIONS] = {
@@ -972,7 +954,7 @@ static const struct WindowTemplate sSwap_WindowTemplates[] =
         .tilemapTop = 14,
         .width = 9,
         .height = 6,
-        .paletteNum = 15,
+        .paletteNum = PALNUM_TEXT,
         .baseBlock = 0x006b,
     },
     [SWAP_WIN_YES_NO] = {
@@ -981,7 +963,7 @@ static const struct WindowTemplate sSwap_WindowTemplates[] =
         .tilemapTop = 14,
         .width = 8,
         .height = 4,
-        .paletteNum = 15,
+        .paletteNum = PALNUM_TEXT,
         .baseBlock = 0x00a1,
     },
     [SWAP_WIN_ACTION_FADE] = {
@@ -990,7 +972,7 @@ static const struct WindowTemplate sSwap_WindowTemplates[] =
         .tilemapTop = 15,
         .width = 9,
         .height = 5,
-        .paletteNum = 14,
+        .paletteNum = PALNUM_FADE_TEXT,
         .baseBlock = 0x006b,
     },
     [SWAP_WIN_UNUSED] = {
@@ -999,7 +981,7 @@ static const struct WindowTemplate sSwap_WindowTemplates[] =
         .tilemapTop = 2,
         .width = 4,
         .height = 2,
-        .paletteNum = 14,
+        .paletteNum = PALNUM_FADE_TEXT,
         .baseBlock = 0x00c1,
     },
     [SWAP_WIN_SPECIES_AT_FADE] = {
@@ -1008,7 +990,7 @@ static const struct WindowTemplate sSwap_WindowTemplates[] =
         .tilemapTop = 2,
         .width = 11,
         .height = 2,
-        .paletteNum = 15,
+        .paletteNum = PALNUM_TEXT,
         .baseBlock = 0x00c9,
     },
     [SWAP_WIN_MON_CATEGORY] = {
@@ -1017,13 +999,13 @@ static const struct WindowTemplate sSwap_WindowTemplates[] =
         .tilemapTop = 0,
         .width = 15,
         .height = 2,
-        .paletteNum = 15,
+        .paletteNum = PALNUM_TEXT,
         .baseBlock = 0x00df,
     },
     DUMMY_WIN_TEMPLATE,
 };
 
-static const u16 sSwapText_Pal[] = INCBIN_U16("graphics/battle_frontier/factory_screen/text.gbapal"); // Identical to sSelectText_Pal
+static const u16 sSwapText_Pal[] = INCGFX_U16("graphics/battle_frontier/factory_screen/text.pal", ".gbapal"); // Identical to sSelectText_Pal
 static const u8 sSwapMenuOptionsTextColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_TRANSPARENT};
 static const u8 sSwapSpeciesNameTextColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_RED, TEXT_COLOR_TRANSPARENT};
 
@@ -1052,7 +1034,7 @@ static void SpriteCB_Pokeball(struct Sprite *sprite)
 {
     if (sprite->oam.paletteNum == IndexOfSpritePaletteTag(PALTAG_BALL_SELECTED))
     {
-        // Pokeball selected, do rocking animation
+        // Poké Ball selected, do rocking animation
         if (sprite->animEnded)
         {
             if (sprite->data[0] != 0)
@@ -1076,7 +1058,7 @@ static void SpriteCB_Pokeball(struct Sprite *sprite)
     }
     else
     {
-        // Pokeball not selected, remain still
+        // Poké Ball not selected, remain still
         StartSpriteAnimIfDifferent(sprite, 0);
     }
 }
@@ -1131,8 +1113,7 @@ static void CB2_InitSelectScreen(void)
     switch (gMain.state)
     {
     case 0:
-        if (sFactorySelectMons != NULL)
-            FREE_AND_SET_NULL(sFactorySelectMons);
+        TRY_FREE_AND_SET_NULL(sFactorySelectMons);
         SetHBlankCallback(NULL);
         SetVBlankCallback(NULL);
         CpuFill32(0, (void *)VRAM, VRAM_SIZE);
@@ -1143,16 +1124,20 @@ static void CB2_InitSelectScreen(void)
         gMain.state++;
         break;
     case 1:
-        sSelectMenuTilesetBuffer = Alloc(0x440);
+        sSelectMenuTilesetBuffer = Alloc(sizeof(gFrontierFactoryMenu_Gfx));
+#ifdef BUGFIX
         sSelectMonPicBgTilesetBuffer = AllocZeroed(sizeof(sMonPicBg_Gfx));
+#else
+        sSelectMonPicBgTilesetBuffer = AllocZeroed(sizeof(gFrontierFactoryMenu_Gfx)); // Incorrect size
+#endif
         sSelectMenuTilemapBuffer = Alloc(BG_SCREEN_SIZE);
         sSelectMonPicBgTilemapBuffer = AllocZeroed(BG_SCREEN_SIZE);
-        ChangeBgX(0, 0, 0);
-        ChangeBgY(0, 0, 0);
-        ChangeBgX(1, 0, 0);
-        ChangeBgY(1, 0, 0);
-        ChangeBgX(3, 0, 0);
-        ChangeBgY(3, 0, 0);
+        ChangeBgX(0, 0, BG_COORD_SET);
+        ChangeBgY(0, 0, BG_COORD_SET);
+        ChangeBgX(1, 0, BG_COORD_SET);
+        ChangeBgY(1, 0, BG_COORD_SET);
+        ChangeBgX(3, 0, BG_COORD_SET);
+        ChangeBgY(3, 0, BG_COORD_SET);
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
         SetGpuReg(REG_OFFSET_BLDALPHA, 0);
         SetGpuReg(REG_OFFSET_BLDY, 0);
@@ -1170,18 +1155,22 @@ static void CB2_InitSelectScreen(void)
         ResetSpriteData();
         ResetTasks();
         FreeAllSpritePalettes();
-        CpuCopy16(gFrontierFactorySelectMenu_Gfx, sSelectMenuTilesetBuffer, 0x440);
+        CpuCopy16(gFrontierFactoryMenu_Gfx, sSelectMenuTilesetBuffer, sizeof(gFrontierFactoryMenu_Gfx));
         CpuCopy16(sMonPicBg_Gfx, sSelectMonPicBgTilesetBuffer, sizeof(sMonPicBg_Gfx));
-        LoadBgTiles(1, sSelectMenuTilesetBuffer, 0x440, 0);
+        LoadBgTiles(1, sSelectMenuTilesetBuffer, sizeof(gFrontierFactoryMenu_Gfx), 0);
         LoadBgTiles(3, sSelectMonPicBgTilesetBuffer, sizeof(sMonPicBg_Gfx), 0);
-        CpuCopy16(gFrontierFactorySelectMenu_Tilemap, sSelectMenuTilemapBuffer, BG_SCREEN_SIZE);
+        CpuCopy16(gFrontierFactoryMenu_Tilemap, sSelectMenuTilemapBuffer, BG_SCREEN_SIZE);
         LoadBgTilemap(1, sSelectMenuTilemapBuffer, BG_SCREEN_SIZE, 0);
-        LoadPalette(gFrontierFactorySelectMenu_Pal, 0, 0x40);
-        LoadPalette(sSelectText_Pal, 0xF0, 8);
-        LoadPalette(sSelectText_Pal, 0xE0, 10);
+        LoadPalette(gFrontierFactoryMenu_Pal, 0, 2 * PLTT_SIZE_4BPP);
+        LoadPalette(sSelectText_Pal, BG_PLTT_ID(PALNUM_TEXT), PLTT_SIZEOF(4));
+        LoadPalette(sSelectText_Pal, BG_PLTT_ID(PALNUM_FADE_TEXT), PLTT_SIZEOF(5));
+#ifdef UBFIX
         if (sFactorySelectScreen && sFactorySelectScreen->fromSummaryScreen)
-            gPlttBufferUnfaded[228] = sFactorySelectScreen->speciesNameColorBackup;
-        LoadPalette(sMonPicBg_Pal, 0x20, 4);
+#else
+        if (sFactorySelectScreen->fromSummaryScreen == TRUE)
+#endif
+            gPlttBufferUnfaded[BG_PLTT_ID(PALNUM_FADE_TEXT) + 4] = sFactorySelectScreen->speciesNameColorBackup;
+        LoadPalette(sMonPicBg_Pal, BG_PLTT_ID(2), PLTT_SIZEOF(2));
         gMain.state++;
         break;
     case 3:
@@ -1201,7 +1190,11 @@ static void CB2_InitSelectScreen(void)
         SetVBlankCallback(VBlankCB_SelectScreen);
         BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_OBJ_1D_MAP);
+#ifdef UBFIX
         if (sFactorySelectScreen && sFactorySelectScreen->fromSummaryScreen)
+#else
+        if (sFactorySelectScreen->fromSummaryScreen == TRUE)
+#endif
         {
             Select_SetWinRegs(88, 152, 32, 96);
             ShowBg(3);
@@ -1215,7 +1208,11 @@ static void CB2_InitSelectScreen(void)
         gMain.state++;
         break;
     case 5:
+#ifdef UBFIX
         if (sFactorySelectScreen && sFactorySelectScreen->fromSummaryScreen)
+#else
+        if (sFactorySelectScreen->fromSummaryScreen == TRUE)
+#endif
             sFactorySelectScreen->cursorPos = gLastViewedMonIndex;
         Select_InitMonsData();
         Select_InitAllSprites();
@@ -1392,7 +1389,7 @@ static void Select_HandleMonSelectionChange(void)
     if (sFactorySelectScreen->mons[cursorPos].selectedId) // Deselect a mon.
     {
         paletteNum = IndexOfSpritePaletteTag(PALTAG_BALL_GRAY);
-        if (sFactorySelectScreen->selectingMonsState == FRONTIER_PARTY_SIZE 
+        if (sFactorySelectScreen->selectingMonsState == FRONTIER_PARTY_SIZE
          && sFactorySelectScreen->mons[cursorPos].selectedId == 1)
         {
             for (i = 0; i < SELECTABLE_MONS_COUNT; i++)
@@ -1438,7 +1435,7 @@ static void Select_Task_OpenSummaryScreen(u8 taskId)
     switch (gTasks[taskId].tState)
     {
     case STATE_SUMMARY_FADE:
-        gPlttBufferUnfaded[228] = gPlttBufferFaded[228];
+        gPlttBufferUnfaded[BG_PLTT_ID(PALNUM_FADE_TEXT) + 4] = gPlttBufferFaded[BG_PLTT_ID(PALNUM_FADE_TEXT) + 4];
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].tState = STATE_SUMMARY_CLEAN;
         break;
@@ -1457,7 +1454,7 @@ static void Select_Task_OpenSummaryScreen(u8 taskId)
         }
         break;
     case STATE_SUMMARY_SHOW:
-        sFactorySelectScreen->speciesNameColorBackup = gPlttBufferUnfaded[228];
+        sFactorySelectScreen->speciesNameColorBackup = gPlttBufferUnfaded[BG_PLTT_ID(PALNUM_FADE_TEXT) + 4];
         DestroyTask(taskId);
         sFactorySelectScreen->fromSummaryScreen = TRUE;
         currMonId = sFactorySelectScreen->cursorPos;
@@ -1487,7 +1484,6 @@ static void Select_Task_Exit(u8 taskId)
             DestroyTask(sFactorySelectScreen->fadeSpeciesNameTaskId);
             Select_DestroyAllSprites();
             FREE_AND_SET_NULL(sSelectMenuTilesetBuffer);
-            FREE_AND_SET_NULL(sSelectMonPicBgTilesetBuffer);
             FREE_AND_SET_NULL(sSelectMenuTilemapBuffer);
             FREE_AND_SET_NULL(sSelectMonPicBgTilemapBuffer);
             FREE_AND_SET_NULL(sFactorySelectScreen);
@@ -1499,7 +1495,7 @@ static void Select_Task_Exit(u8 taskId)
     }
 }
 
-// Handles the Yes/No prompt when confirming the 3 selected rental pokemon
+// Handles the Yes/No prompt when confirming the 3 selected rental Pokémon
 static void Select_Task_HandleYesNo(u8 taskId)
 {
     if (sFactorySelectScreen->monPicAnimating == TRUE)
@@ -1521,14 +1517,14 @@ static void Select_Task_HandleYesNo(u8 taskId)
             PlaySE(SE_SELECT);
             if (sFactorySelectScreen->yesNoCursorPos == 0)
             {
-                // Selected Yes, confirmed selected pokemon
+                // Selected Yes, confirmed selected Pokémon
                 Select_HideChosenMons();
                 gTasks[taskId].tState = 0;
                 gTasks[taskId].func = Select_Task_Exit;
             }
             else
             {
-                // Selected No, continue choosing pokemon
+                // Selected No, continue choosing Pokémon
                 Select_ErasePopupMenu(SELECT_WIN_YES_NO);
                 Select_DeclineChosenMons();
                 sFactorySelectScreen->fadeSpeciesNameActive = TRUE;
@@ -1538,7 +1534,7 @@ static void Select_Task_HandleYesNo(u8 taskId)
         }
         else if (JOY_NEW(B_BUTTON))
         {
-            // Pressed B, Continue choosing pokemon
+            // Pressed B, Continue choosing Pokémon
             PlaySE(SE_SELECT);
             Select_ErasePopupMenu(SELECT_WIN_YES_NO);
             Select_DeclineChosenMons();
@@ -1560,7 +1556,7 @@ static void Select_Task_HandleYesNo(u8 taskId)
     }
 }
 
-// Handles the popup menu that shows when a pokemon is selected
+// Handles the popup menu that shows when a Pokémon is selected
 static void Select_Task_HandleMenu(u8 taskId)
 {
     switch (gTasks[taskId].tState)
@@ -1631,8 +1627,8 @@ static void Select_Task_HandleMenu(u8 taskId)
         {
             if (sFactorySelectScreen->fromSummaryScreen == TRUE)
             {
-                gPlttBufferFaded[228] = sFactorySelectScreen->speciesNameColorBackup;
-                gPlttBufferUnfaded[228] = gPlttBufferUnfaded[244];
+                gPlttBufferFaded[BG_PLTT_ID(PALNUM_FADE_TEXT) + 4] = sFactorySelectScreen->speciesNameColorBackup;
+                gPlttBufferUnfaded[BG_PLTT_ID(PALNUM_FADE_TEXT) + 4] = gPlttBufferUnfaded[BG_PLTT_ID(PALNUM_TEXT) + 4];
             }
             sFactorySelectScreen->fromSummaryScreen = FALSE;
             gTasks[taskId].tState = STATE_MENU_HANDLE_INPUT;
@@ -1713,77 +1709,54 @@ static void Select_Task_HandleChooseMons(u8 taskId)
 
 static void CreateFrontierFactorySelectableMons(u8 firstMonId)
 {
-    u8 i, j = 0;
+    u8 i = 0;
     u8 ivs = 0;
     u8 level = 0;
-    u8 friendship = 0;
     u32 otId = 0;
     u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
-    u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
-    u16 challengeNum = gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode] / 7;
+    enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    u8 challengeNum = gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode] / FRONTIER_STAGES_PER_CHALLENGE;
     u8 rentalRank = 0;
 
     gFacilityTrainerMons = gBattleFrontierMons;
     if (gSaveBlock2Ptr->frontier.lvlMode != FRONTIER_LVL_50)
-        level = 100;
+        level = FRONTIER_MAX_LEVEL_OPEN;
     else
-        level = 50;
+        level = FRONTIER_MAX_LEVEL_50;
 
     rentalRank = GetNumPastRentalsRank(battleMode, lvlMode);
-    otId = T1_READ_32(gSaveBlock2Ptr->playerTrainerId);
+    otId = READ_OTID_FROM_SAVE;
 
     for (i = 0; i < SELECTABLE_MONS_COUNT; i++)
     {
         u16 monId = gSaveBlock2Ptr->frontier.rentalMons[i].monId;
         sFactorySelectScreen->mons[i + firstMonId].monId = monId;
         if (i < rentalRank)
-            ivs = GetFactoryMonFixedIV(challengeNum + 1, 0);
+            ivs = GetFactoryMonFixedIV(challengeNum + 1, FALSE);
         else
-            ivs = GetFactoryMonFixedIV(challengeNum, 0);
-        CreateMonWithEVSpreadNatureOTID(&sFactorySelectScreen->mons[i + firstMonId].monData,
-                                             gFacilityTrainerMons[monId].species,
-                                             level,
-                                             gFacilityTrainerMons[monId].nature,
-                                             ivs,
-                                             gFacilityTrainerMons[monId].evSpread,
-                                             otId);
-        friendship = 0;
-        for (j = 0; j < MAX_MON_MOVES; j++)
-            SetMonMoveAvoidReturn(&sFactorySelectScreen->mons[i + firstMonId].monData, gFacilityTrainerMons[monId].moves[j], j);
-        SetMonData(&sFactorySelectScreen->mons[i + firstMonId].monData, MON_DATA_FRIENDSHIP, &friendship);
-        SetMonData(&sFactorySelectScreen->mons[i + firstMonId].monData, MON_DATA_HELD_ITEM, &gBattleFrontierHeldItems[gFacilityTrainerMons[monId].itemTableId]);
-        TryUpdateMonFormForHeldItem(&sFactorySelectScreen->mons[i + firstMonId].monData);
+            ivs = GetFactoryMonFixedIV(challengeNum, FALSE);
+
+        CreateFacilityMon(&gFacilityTrainerMons[monId],
+                level, ivs, otId, FLAG_FRONTIER_MON_FACTORY,
+                &sFactorySelectScreen->mons[i + firstMonId].monData);
     }
 }
 
 static void CreateSlateportTentSelectableMons(u8 firstMonId)
 {
-    u8 i, j;
+    u8 i;
     u8 ivs = 0;
-    u8 level = 30;
-    u8 friendship = 0;
+    u8 level = TENT_MIN_LEVEL;
     u32 otId = 0;
 
     gFacilityTrainerMons = gSlateportBattleTentMons;
-    otId = T1_READ_32(gSaveBlock2Ptr->playerTrainerId);
+    otId = READ_OTID_FROM_SAVE;
 
     for (i = 0; i < SELECTABLE_MONS_COUNT; i++)
     {
         u16 monId = gSaveBlock2Ptr->frontier.rentalMons[i].monId;
         sFactorySelectScreen->mons[i + firstMonId].monId = monId;
-        CreateMonWithEVSpreadNatureOTID(&sFactorySelectScreen->mons[i + firstMonId].monData,
-                                             gFacilityTrainerMons[monId].species,
-                                             level,
-                                             gFacilityTrainerMons[monId].nature,
-                                             ivs,
-                                             gFacilityTrainerMons[monId].evSpread,
-                                             otId);
-        friendship = 0;
-        for (j = 0; j < MAX_MON_MOVES; j++)
-            SetMonMoveAvoidReturn(&sFactorySelectScreen->mons[i + firstMonId].monData, gFacilityTrainerMons[monId].moves[j], j);
-        SetMonData(&sFactorySelectScreen->mons[i + firstMonId].monData, MON_DATA_FRIENDSHIP, &friendship);
-        SetMonData(&sFactorySelectScreen->mons[i + firstMonId].monData, MON_DATA_HELD_ITEM, &gBattleFrontierHeldItems[gFacilityTrainerMons[monId].itemTableId]);
-        TryUpdateMonFormForHeldItem(&sFactorySelectScreen->mons[i + firstMonId].monData);
+        CreateFacilityMon(&gFacilityTrainerMons[monId], level, ivs, otId, 0, &sFactorySelectScreen->mons[i + firstMonId].monData);
     }
 }
 
@@ -1797,11 +1770,11 @@ static void Select_CopyMonsToPlayerParty(void)
         {
             if (sFactorySelectScreen->mons[j].selectedId == i + 1)
             {
-                gPlayerParty[i] = sFactorySelectScreen->mons[j].monData;
+                gParties[B_TRAINER_PLAYER][i] = sFactorySelectScreen->mons[j].monData;
                 gSaveBlock2Ptr->frontier.rentalMons[i].monId = sFactorySelectScreen->mons[j].monId;
-                gSaveBlock2Ptr->frontier.rentalMons[i].personality = GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY, NULL);
-                gSaveBlock2Ptr->frontier.rentalMons[i].abilityNum = GetBoxMonData(&gPlayerParty[i].box, MON_DATA_ABILITY_NUM, NULL);
-                gSaveBlock2Ptr->frontier.rentalMons[i].ivs = GetBoxMonData(&gPlayerParty[i].box, MON_DATA_ATK_IV, NULL);
+                gSaveBlock2Ptr->frontier.rentalMons[i].personality = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_PERSONALITY);
+                gSaveBlock2Ptr->frontier.rentalMons[i].abilityNum = GetBoxMonData(&gParties[B_TRAINER_PLAYER][i].box, MON_DATA_ABILITY_NUM);
+                gSaveBlock2Ptr->frontier.rentalMons[i].ivs = GetBoxMonData(&gParties[B_TRAINER_PLAYER][i].box, MON_DATA_ATK_IV);
                 break;
             }
         }
@@ -1845,29 +1818,29 @@ static void Select_ErasePopupMenu(u8 windowId)
     gSprites[sFactorySelectScreen->menuCursor1SpriteId].invisible = TRUE;
     gSprites[sFactorySelectScreen->menuCursor2SpriteId].invisible = TRUE;
     FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
-    CopyWindowToVram(windowId, 2);
+    CopyWindowToVram(windowId, COPYWIN_GFX);
     ClearWindowTilemap(windowId);
 }
 
 static void Select_PrintRentalPkmnString(void)
 {
     FillWindowPixelBuffer(SELECT_WIN_TITLE, PIXEL_FILL(0));
-    AddTextPrinterParameterized(SELECT_WIN_TITLE, 1, gText_RentalPkmn2, 2, 1, 0, NULL);
-    CopyWindowToVram(SELECT_WIN_TITLE, 3);
+    AddTextPrinterParameterized(SELECT_WIN_TITLE, FONT_NORMAL, gText_RentalPkmn2, 2, 1, 0, NULL);
+    CopyWindowToVram(SELECT_WIN_TITLE, COPYWIN_FULL);
 }
 
 static void Select_PrintMonSpecies(void)
 {
-    u16 species;
+    enum Species species;
     u8 x;
     u8 monId = sFactorySelectScreen->cursorPos;
 
     FillWindowPixelBuffer(SELECT_WIN_SPECIES, PIXEL_FILL(0));
-    species = GetMonData(&sFactorySelectScreen->mons[monId].monData, MON_DATA_SPECIES, NULL);
-    StringCopy(gStringVar4, gSpeciesNames[species]);
-    x = GetStringRightAlignXOffset(1, gStringVar4, 86);
-    AddTextPrinterParameterized3(SELECT_WIN_SPECIES, 1, x, 1, sSpeciesNameTextColors, 0, gStringVar4);
-    CopyWindowToVram(SELECT_WIN_SPECIES, 2);
+    species = GetMonData(&sFactorySelectScreen->mons[monId].monData, MON_DATA_SPECIES);
+    StringCopy(gStringVar4, GetSpeciesName(species));
+    x = GetStringRightAlignXOffset(FONT_NORMAL, gStringVar4, 86);
+    AddTextPrinterParameterized3(SELECT_WIN_SPECIES, FONT_NORMAL, x, 1, sSpeciesNameTextColors, 0, gStringVar4);
+    CopyWindowToVram(SELECT_WIN_SPECIES, COPYWIN_GFX);
 }
 
 static void Select_PrintSelectMonString(void)
@@ -1884,15 +1857,15 @@ static void Select_PrintSelectMonString(void)
     else
         str = gText_TheseThreePkmnOkay;
 
-    AddTextPrinterParameterized(SELECT_WIN_INFO, 1, str, 2, 5, 0, NULL);
-    CopyWindowToVram(SELECT_WIN_INFO, 2);
+    AddTextPrinterParameterized(SELECT_WIN_INFO, FONT_NORMAL, str, 2, 5, 0, NULL);
+    CopyWindowToVram(SELECT_WIN_INFO, COPYWIN_GFX);
 }
 
 static void Select_PrintCantSelectSameMon(void)
 {
     FillWindowPixelBuffer(SELECT_WIN_INFO, PIXEL_FILL(0));
-    AddTextPrinterParameterized(SELECT_WIN_INFO, 1, gText_CantSelectSamePkmn, 2, 5, 0, NULL);
-    CopyWindowToVram(SELECT_WIN_INFO, 2);
+    AddTextPrinterParameterized(SELECT_WIN_INFO, FONT_NORMAL, gText_CantSelectSamePkmn, 2, 5, 0, NULL);
+    CopyWindowToVram(SELECT_WIN_INFO, COPYWIN_GFX);
 }
 
 static void Select_PrintMenuOptions(void)
@@ -1901,23 +1874,23 @@ static void Select_PrintMenuOptions(void)
 
     PutWindowTilemap(SELECT_WIN_OPTIONS);
     FillWindowPixelBuffer(SELECT_WIN_OPTIONS, PIXEL_FILL(0));
-    AddTextPrinterParameterized3(SELECT_WIN_OPTIONS, 1, 7, 1, sMenuOptionTextColors, 0, gText_Summary);
+    AddTextPrinterParameterized3(SELECT_WIN_OPTIONS, FONT_NORMAL, 7, 1, sMenuOptionTextColors, 0, gText_Summary);
     if (selectedId != 0)
-        AddTextPrinterParameterized3(SELECT_WIN_OPTIONS, 1, 7, 17, sMenuOptionTextColors, 0, gText_Deselect);
+        AddTextPrinterParameterized3(SELECT_WIN_OPTIONS, FONT_NORMAL, 7, 17, sMenuOptionTextColors, 0, gText_Deselect);
     else
-        AddTextPrinterParameterized3(SELECT_WIN_OPTIONS, 1, 7, 17, sMenuOptionTextColors, 0, gText_Rent);
+        AddTextPrinterParameterized3(SELECT_WIN_OPTIONS, FONT_NORMAL, 7, 17, sMenuOptionTextColors, 0, gText_Rent);
 
-    AddTextPrinterParameterized3(SELECT_WIN_OPTIONS, 1, 7, 33, sMenuOptionTextColors, 0, gText_Others2);
-    CopyWindowToVram(SELECT_WIN_OPTIONS, 3);
+    AddTextPrinterParameterized3(SELECT_WIN_OPTIONS, FONT_NORMAL, 7, 33, sMenuOptionTextColors, 0, gText_Others2);
+    CopyWindowToVram(SELECT_WIN_OPTIONS, COPYWIN_FULL);
 }
 
 static void Select_PrintYesNoOptions(void)
 {
     PutWindowTilemap(SELECT_WIN_YES_NO);
     FillWindowPixelBuffer(SELECT_WIN_YES_NO, PIXEL_FILL(0));
-    AddTextPrinterParameterized3(SELECT_WIN_YES_NO, 1, 7, 1, sMenuOptionTextColors, 0, gText_Yes2);
-    AddTextPrinterParameterized3(SELECT_WIN_YES_NO, 1, 7, 17, sMenuOptionTextColors, 0, gText_No2);
-    CopyWindowToVram(SELECT_WIN_YES_NO, 3);
+    AddTextPrinterParameterized3(SELECT_WIN_YES_NO, FONT_NORMAL, 7, 1, sMenuOptionTextColors, 0, gText_Yes2);
+    AddTextPrinterParameterized3(SELECT_WIN_YES_NO, FONT_NORMAL, 7, 17, sMenuOptionTextColors, 0, gText_No2);
+    CopyWindowToVram(SELECT_WIN_YES_NO, COPYWIN_FULL);
 }
 
 static u8 Select_RunMenuOptionFunc(void)
@@ -1975,7 +1948,7 @@ static u8 Select_OptionOthers(void)
 
 static void Select_PrintMonCategory(void)
 {
-    u16 species;
+    enum Species species;
     u8 text[30];
     u8 x;
     u8 monId = sFactorySelectScreen->cursorPos;
@@ -1983,11 +1956,11 @@ static void Select_PrintMonCategory(void)
     {
         PutWindowTilemap(SELECT_WIN_MON_CATEGORY);
         FillWindowPixelBuffer(SELECT_WIN_MON_CATEGORY, PIXEL_FILL(0));
-        species = GetMonData(&sFactorySelectScreen->mons[monId].monData, MON_DATA_SPECIES, NULL);
-        CopyMonCategoryText(SpeciesToNationalPokedexNum(species), text);
-        x = GetStringRightAlignXOffset(1, text, 0x76);
-        AddTextPrinterParameterized(SELECT_WIN_MON_CATEGORY, 1, text, x, 1, 0, NULL);
-        CopyWindowToVram(SELECT_WIN_MON_CATEGORY, 2);
+        species = GetMonData(&sFactorySelectScreen->mons[monId].monData, MON_DATA_SPECIES);
+        CopyMonCategoryText(species, text);
+        x = GetStringRightAlignXOffset(FONT_NORMAL, text, 118);
+        AddTextPrinterParameterized(SELECT_WIN_MON_CATEGORY, FONT_NORMAL, text, x, 1, 0, NULL);
+        CopyWindowToVram(SELECT_WIN_MON_CATEGORY, COPYWIN_GFX);
     }
 }
 
@@ -1995,11 +1968,11 @@ static void Select_CreateMonSprite(void)
 {
     u8 monId = sFactorySelectScreen->cursorPos;
     struct Pokemon *mon = &sFactorySelectScreen->mons[monId].monData;
-    u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
-    u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
-    u32 otId = GetMonData(mon, MON_DATA_OT_ID, NULL);
+    enum Species species = GetMonData(mon, MON_DATA_SPECIES);
+    u32 personality = GetMonData(mon, MON_DATA_PERSONALITY);
+    bool8 isShiny = GetMonData(mon, MON_DATA_IS_SHINY);
 
-    sFactorySelectScreen->monPics[1].monSpriteId = CreateMonPicSprite(species, otId, personality, TRUE, 88, 32, 15, 0xFFFF);
+    sFactorySelectScreen->monPics[1].monSpriteId = CreateMonPicSprite(species, isShiny, personality, TRUE, 88, 32, 15, TAG_NONE);
     gSprites[sFactorySelectScreen->monPics[1].monSpriteId].centerToCornerVecX = 0;
     gSprites[sFactorySelectScreen->monPics[1].monSpriteId].centerToCornerVecY = 0;
 
@@ -2014,18 +1987,19 @@ static void Select_SetMonPicAnimating(bool8 animating)
 static void Select_ReshowMonSprite(void)
 {
     struct Pokemon *mon;
-    u16 species;
-    u32 personality, otId;
+    enum Species species;
+    u32 personality;
+    bool8 isShiny;
 
     sFactorySelectScreen->monPics[1].bgSpriteId = CreateSprite(&sSpriteTemplate_Select_MonPicBgAnim, 120, 64, 1);
     StartSpriteAffineAnim(&gSprites[sFactorySelectScreen->monPics[1].bgSpriteId], 2);
 
     mon = &sFactorySelectScreen->mons[sFactorySelectScreen->cursorPos].monData;
-    species = GetMonData(mon, MON_DATA_SPECIES, NULL);
-    personality = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
-    otId = GetMonData(mon, MON_DATA_OT_ID, NULL);
+    species = GetMonData(mon, MON_DATA_SPECIES);
+    personality = GetMonData(mon, MON_DATA_PERSONALITY);
+    isShiny = GetMonData(mon, MON_DATA_IS_SHINY);
 
-    sFactorySelectScreen->monPics[1].monSpriteId = CreateMonPicSprite(species, otId, personality, TRUE, 88, 32, 15, 0xFFFF);
+    sFactorySelectScreen->monPics[1].monSpriteId = CreateMonPicSprite(species, isShiny, personality, TRUE, 88, 32, 15, TAG_NONE);
     gSprites[sFactorySelectScreen->monPics[1].monSpriteId].centerToCornerVecX = 0;
     gSprites[sFactorySelectScreen->monPics[1].monSpriteId].centerToCornerVecY = 0;
 
@@ -2043,11 +2017,11 @@ static void Select_CreateChosenMonsSprites(void)
             if (sFactorySelectScreen->mons[j].selectedId == i + 1)
             {
                 struct Pokemon *mon = &sFactorySelectScreen->mons[j].monData;
-                u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
-                u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
-                u32 otId = GetMonData(mon, MON_DATA_OT_ID, NULL);
+                enum Species species = GetMonData(mon, MON_DATA_SPECIES);
+                u32 personality = GetMonData(mon, MON_DATA_PERSONALITY);
+                bool8 isShiny = GetMonData(mon, MON_DATA_IS_SHINY);
 
-                sFactorySelectScreen->monPics[i].monSpriteId = CreateMonPicSprite(species, otId, personality, TRUE, (i * 72) + 16, 32, i + 13, 0xFFFF);
+                sFactorySelectScreen->monPics[i].monSpriteId = CreateMonPicSprite(species, isShiny, personality, TRUE, (i * 72) + 16, 32, i + 13, TAG_NONE);
                 gSprites[sFactorySelectScreen->monPics[i].monSpriteId].centerToCornerVecX = 0;
                 gSprites[sFactorySelectScreen->monPics[i].monSpriteId].centerToCornerVecY = 0;
                 break;
@@ -2098,7 +2072,11 @@ static void SpriteCB_CloseChosenMonPics(struct Sprite *sprite)
 
 // Task data for Select_Task_OpenChosenMonPics, Select_Task_CloseChosenMonPics, Task_CloseMonPic, and Task_OpenMonPic
 #define tWinLeft      data[3]
+#ifndef UBFIX
+#define tWinRight     data[24] // UB: Typo? Likely meant data[4], 24 is out of bounds
+#else
 #define tWinRight     data[4]
+#endif
 #define tWinTop       data[5]
 #define tWinBottom    data[8]
 #define tSpriteId     data[6] // TODO: Clarify, what sprite
@@ -2231,7 +2209,7 @@ static void Select_SetWinRegs(s16 mWin0H, s16 nWin0H, s16 mWin0V, s16 nWin0V)
 static bool32 Select_AreSpeciesValid(u16 monId)
 {
     u8 i, j;
-    u32 species = gFacilityTrainerMons[monId].species;
+    enum Species species = gFacilityTrainerMons[monId].species;
     u8 selectState = sFactorySelectScreen->selectingMonsState;
 
     for (i = 1; i < selectState; i++)
@@ -2278,7 +2256,7 @@ static void Select_Task_FadeSpeciesName(u8 taskId)
                     else
                         sFactorySelectScreen->fadeSpeciesNameCoeff++;
                 }
-                BlendPalettes(0x4000, sFactorySelectScreen->fadeSpeciesNameCoeff, 0);
+                BlendPalettes(1 << PALNUM_FADE_TEXT, sFactorySelectScreen->fadeSpeciesNameCoeff, 0);
                 if (sFactorySelectScreen->fadeSpeciesNameCoeff > 5)
                 {
                     sFactorySelectScreen->fadeSpeciesNameFadeOut = FALSE;
@@ -2327,13 +2305,13 @@ static void CopySwappedMonData(void)
 {
     u8 friendship;
 
-    gPlayerParty[sFactorySwapScreen->playerMonId] = gEnemyParty[sFactorySwapScreen->enemyMonId];
+    gParties[B_TRAINER_PLAYER][sFactorySwapScreen->playerMonId] = gParties[B_TRAINER_OPPONENT_A][sFactorySwapScreen->enemyMonId];
     friendship = 0;
-    SetMonData(&gPlayerParty[sFactorySwapScreen->playerMonId], MON_DATA_FRIENDSHIP, &friendship);
+    SetMonData(&gParties[B_TRAINER_PLAYER][sFactorySwapScreen->playerMonId], MON_DATA_FRIENDSHIP, &friendship);
     gSaveBlock2Ptr->frontier.rentalMons[sFactorySwapScreen->playerMonId].monId = gSaveBlock2Ptr->frontier.rentalMons[sFactorySwapScreen->enemyMonId + FRONTIER_PARTY_SIZE].monId;
     gSaveBlock2Ptr->frontier.rentalMons[sFactorySwapScreen->playerMonId].ivs = gSaveBlock2Ptr->frontier.rentalMons[sFactorySwapScreen->enemyMonId + FRONTIER_PARTY_SIZE].ivs;
-    gSaveBlock2Ptr->frontier.rentalMons[sFactorySwapScreen->playerMonId].personality = GetMonData(&gEnemyParty[sFactorySwapScreen->enemyMonId], MON_DATA_PERSONALITY, NULL);
-    gSaveBlock2Ptr->frontier.rentalMons[sFactorySwapScreen->playerMonId].abilityNum = GetBoxMonData(&gEnemyParty[sFactorySwapScreen->enemyMonId].box, MON_DATA_ABILITY_NUM, NULL);
+    gSaveBlock2Ptr->frontier.rentalMons[sFactorySwapScreen->playerMonId].personality = GetMonData(&gParties[B_TRAINER_OPPONENT_A][sFactorySwapScreen->enemyMonId], MON_DATA_PERSONALITY);
+    gSaveBlock2Ptr->frontier.rentalMons[sFactorySwapScreen->playerMonId].abilityNum = GetBoxMonData(&gParties[B_TRAINER_OPPONENT_A][sFactorySwapScreen->enemyMonId].box, MON_DATA_ABILITY_NUM);
 }
 
 // Main swap states
@@ -2376,8 +2354,8 @@ static void Swap_Task_OpenSummaryScreen(u8 taskId)
     case STATE_SUMMARY_SHOW:
         DestroyTask(taskId);
         sFactorySwapScreen->fromSummaryScreen = TRUE;
-        sFactorySwapScreen->speciesNameColorBackup = gPlttBufferUnfaded[244];
-        ShowPokemonSummaryScreen(SUMMARY_MODE_NORMAL, gPlayerParty, sFactorySwapScreen->cursorPos, FRONTIER_PARTY_SIZE - 1, CB2_InitSwapScreen);
+        sFactorySwapScreen->speciesNameColorBackup = gPlttBufferUnfaded[BG_PLTT_ID(PALNUM_TEXT) + 4];
+        ShowPokemonSummaryScreen(SUMMARY_MODE_NORMAL, gParties[B_TRAINER_PLAYER], sFactorySwapScreen->cursorPos, FRONTIER_PARTY_SIZE - 1, CB2_InitSwapScreen);
         break;
     }
 }
@@ -2391,7 +2369,7 @@ static void Swap_Task_Exit(u8 taskId)
     {
     case 0:
         // Set return value for script
-        // TRUE if player kept their current pokemon
+        // TRUE if player kept their current Pokémon
         if (sFactorySwapScreen->monSwapped == TRUE)
         {
             gTasks[taskId].tState++;
@@ -2461,7 +2439,7 @@ static void Swap_Task_HandleYesNo(u8 taskId)
                 gTasks[taskId].tSaidYes = TRUE;
                 hiPtr = gTasks[taskId].tFollowUpTaskPtrHi;
                 loPtr = gTasks[taskId].tFollowUpTaskPtrLo;
-                gTasks[taskId].func = (void*)((hiPtr << 16) | loPtr);
+                gTasks[taskId].func = (void *)((hiPtr << 16) | loPtr);
             }
             else
             {
@@ -2470,7 +2448,7 @@ static void Swap_Task_HandleYesNo(u8 taskId)
                 Swap_ErasePopupMenu(SWAP_WIN_YES_NO);
                 hiPtr = gTasks[taskId].tFollowUpTaskPtrHi;
                 loPtr = gTasks[taskId].tFollowUpTaskPtrLo;
-                gTasks[taskId].func = (void*)((hiPtr << 16) | loPtr);
+                gTasks[taskId].func = (void *)((hiPtr << 16) | loPtr);
             }
         }
         else if (JOY_NEW(B_BUTTON))
@@ -2480,7 +2458,7 @@ static void Swap_Task_HandleYesNo(u8 taskId)
             Swap_ErasePopupMenu(SWAP_WIN_YES_NO);
             hiPtr = gTasks[taskId].tFollowUpTaskPtrHi;
             loPtr = gTasks[taskId].tFollowUpTaskPtrLo;
-            gTasks[taskId].func = (void*)((hiPtr << 16) | loPtr);
+            gTasks[taskId].func = (void *)((hiPtr << 16) | loPtr);
         }
         else if (JOY_REPEAT(DPAD_UP))
         {
@@ -2496,7 +2474,7 @@ static void Swap_Task_HandleYesNo(u8 taskId)
     }
 }
 
-static void Swap_HandleQuitSwappingResposne(u8 taskId)
+static void Swap_HandleQuitSwappingResponse(u8 taskId)
 {
     if (gTasks[taskId].tSaidYes == TRUE)
     {
@@ -2520,8 +2498,8 @@ static void Swap_AskQuitSwapping(u8 taskId)
         Swap_PrintOnInfoWindow(gText_QuitSwapping);
         sFactorySwapScreen->monSwapped = FALSE;
         gTasks[taskId].tState = STATE_YESNO_SHOW;
-        gTasks[taskId].tFollowUpTaskPtrHi = (u32)(Swap_HandleQuitSwappingResposne) >> 16;
-        gTasks[taskId].tFollowUpTaskPtrLo = (u32)(Swap_HandleQuitSwappingResposne);
+        gTasks[taskId].tFollowUpTaskPtrHi = (u32)(Swap_HandleQuitSwappingResponse) >> 16;
+        gTasks[taskId].tFollowUpTaskPtrLo = (u32)(Swap_HandleQuitSwappingResponse);
         gTasks[taskId].func = Swap_Task_HandleYesNo;
     }
 }
@@ -2606,7 +2584,7 @@ static void Swap_Task_HandleMenu(u8 taskId)
     }
 }
 
-// Handles input on the two main swap screens (choosing a current pokeon to get rid of, and choosing a new pokemon to receive)
+// Handles input on the two main swap screens (choosing a current pokeon to get rid of, and choosing a new Pokémon to receive)
 static void Swap_Task_HandleChooseMons(u8 taskId)
 {
     switch (gTasks[taskId].tState)
@@ -2621,7 +2599,7 @@ static void Swap_Task_HandleChooseMons(u8 taskId)
     case STATE_CHOOSE_MONS_HANDLE_INPUT:
         if (JOY_NEW(A_BUTTON))
         {
-            // Run whatever action is currently selected (a pokeball, the Cancel button, etc.)
+            // Run whatever action is currently selected (a Poké Ball, the Cancel button, etc.)
             PlaySE(SE_SELECT);
             sFactorySwapScreen->fadeSpeciesNameActive = FALSE;
             Swap_PrintMonSpeciesAtFade();
@@ -2697,7 +2675,7 @@ static void Swap_Task_FadeSpeciesName(u8 taskId)
                     else
                         sFactorySwapScreen->fadeSpeciesNameCoeff++;
                 }
-                BlendPalettes(0x4000, sFactorySwapScreen->fadeSpeciesNameCoeff, 0);
+                BlendPalettes(1 << PALNUM_FADE_TEXT, sFactorySwapScreen->fadeSpeciesNameCoeff, 0);
                 if (sFactorySwapScreen->fadeSpeciesNameCoeff > 5)
                 {
                     sFactorySwapScreen->fadeSpeciesNameFadeOut = FALSE;
@@ -2736,7 +2714,7 @@ static void Swap_Task_FadeOutSpeciesName(u8 taskId)
         gTasks[taskId].tState++;
         break;
     case 1:
-        LoadPalette(&gPlttBufferUnfaded[0xF0], 0xE0, 0xA);
+        LoadPalette(&gPlttBufferUnfaded[BG_PLTT_ID(PALNUM_TEXT)], BG_PLTT_ID(PALNUM_FADE_TEXT), PLTT_SIZEOF(5));
         gTasks[taskId].tState++;
         break;
     case 2:
@@ -2749,10 +2727,10 @@ static void Swap_Task_FadeOutSpeciesName(u8 taskId)
         if (sFactorySwapScreen->fadeSpeciesNameCoeffDelay > 3)
         {
             sFactorySwapScreen->fadeSpeciesNameCoeffDelay = 0;
-            gPlttBufferUnfaded[244] = gPlttBufferFaded[228];
+            gPlttBufferUnfaded[BG_PLTT_ID(PALNUM_TEXT) + 4] = gPlttBufferFaded[BG_PLTT_ID(PALNUM_FADE_TEXT) + 4];
             sFactorySwapScreen->fadeSpeciesNameCoeff++;
         }
-        BlendPalettes(0x4000, sFactorySwapScreen->fadeSpeciesNameCoeff, 0);
+        BlendPalettes(1 << PALNUM_FADE_TEXT, sFactorySwapScreen->fadeSpeciesNameCoeff, 0);
         break;
     }
 }
@@ -2769,9 +2747,10 @@ static void Swap_Task_SlideCycleBalls(u8 taskId)
     switch (gTasks[taskId].tState)
     {
     case 0:
-        gTasks[taskId].tBallCycled(0) = FALSE;
-        gTasks[taskId].tBallCycled(1) = FALSE;
-        gTasks[taskId].tBallCycled(2) = FALSE;
+        for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
+        {
+            gTasks[taskId].tBallCycled(i) = FALSE;
+        }
         gTasks[taskId].tState = 1;
         break;
     case 1:
@@ -2982,7 +2961,7 @@ static void Swap_Task_ScreenInfoTransitionOut(u8 taskId)
     switch (gTasks[taskId].tState)
     {
     case 0:
-        LoadPalette(sSwapText_Pal, 0xE0, sizeof(sSwapText_Pal));
+        LoadPalette(sSwapText_Pal, BG_PLTT_ID(PALNUM_FADE_TEXT), sizeof(sSwapText_Pal));
         Swap_PrintActionStrings();
         PutWindowTilemap(SWAP_WIN_ACTION_FADE);
         gTasks[taskId].tState++;
@@ -2992,14 +2971,14 @@ static void Swap_Task_ScreenInfoTransitionOut(u8 taskId)
         gTasks[taskId].tState++;
         break;
     case 2:
-        BeginNormalPaletteFade(0x4000, 0, 0, 16, sPokeballGray_Pal[37]);
+        BeginNormalPaletteFade(1 << PALNUM_FADE_TEXT, 0, 0, 16, sPokeballGray_Pal[37]);
         gTasks[taskId].tState++;
         break;
     case 3:
         if (!gPaletteFade.active)
         {
             FillWindowPixelBuffer(SWAP_WIN_ACTION_FADE, PIXEL_FILL(0));
-            CopyWindowToVram(SWAP_WIN_ACTION_FADE, 2);
+            CopyWindowToVram(SWAP_WIN_ACTION_FADE, COPYWIN_GFX);
             if (sFactorySwapScreen->inEnemyScreen == TRUE)
             {
                 // Start "Pkmn for Swap" button slide offscreen
@@ -3044,7 +3023,7 @@ static void Swap_Task_ScreenInfoTransitionOut(u8 taskId)
         }
         break;
     case 5:
-        if (gTasks[taskId].tSlideFinishedPkmn == TRUE 
+        if (gTasks[taskId].tSlideFinishedPkmn == TRUE
          && gTasks[taskId].tSlideFinishedCancel == TRUE)
         {
             gTasks[taskId].tState = gTasks[taskId].tFollowUpTaskState;
@@ -3110,17 +3089,17 @@ static void Swap_Task_ScreenInfoTransitionIn(u8 taskId)
         }
         break;
     case 2:
-        if (gTasks[taskId].tSlideFinishedPkmn == TRUE 
+        if (gTasks[taskId].tSlideFinishedPkmn == TRUE
          && gTasks[taskId].tSlideFinishedCancel == TRUE)
         {
-            gPlttBufferFaded[226] = sPokeballGray_Pal[37];
+            gPlttBufferFaded[BG_PLTT_ID(PALNUM_FADE_TEXT) + 2] = sPokeballGray_Pal[37];
             Swap_PrintActionStrings();
             PutWindowTilemap(SWAP_WIN_ACTION_FADE);
             gTasks[taskId].tState++;
         }
         break;
     case 3:
-        BeginNormalPaletteFade(0x4000, 0, 16, 0, sPokeballGray_Pal[37]);
+        BeginNormalPaletteFade(1 << PALNUM_FADE_TEXT, 0, 16, 0, sPokeballGray_Pal[37]);
         gTasks[taskId].tState++;
         break;
     case 4:
@@ -3137,7 +3116,7 @@ static void Swap_Task_ScreenInfoTransitionIn(u8 taskId)
         break;
     case 6:
         FillWindowPixelBuffer(SWAP_WIN_ACTION_FADE, PIXEL_FILL(0));
-        CopyWindowToVram(SWAP_WIN_ACTION_FADE, 2);
+        CopyWindowToVram(SWAP_WIN_ACTION_FADE, COPYWIN_GFX);
         gTasks[taskId].tState++;
         break;
     case 7:
@@ -3192,7 +3171,7 @@ static void Swap_Task_SwitchPartyScreen(u8 taskId)
         gTasks[taskId].tState++;
         break;
     case 3:
-        if (!FuncIsActiveTask(Swap_Task_SlideCycleBalls) 
+        if (!FuncIsActiveTask(Swap_Task_SlideCycleBalls)
          && gTasks[sFactorySwapScreen->fadeSpeciesNameTaskId].tFadeOutFinished == TRUE)
         {
             Swap_EraseSpeciesWindow();
@@ -3263,18 +3242,22 @@ static void CB2_InitSwapScreen(void)
         gMain.state++;
         break;
     case 1:
-        sSwapMenuTilesetBuffer = Alloc(0x440);
+        sSwapMenuTilesetBuffer = Alloc(sizeof(gFrontierFactoryMenu_Gfx));
+#ifdef BUGFIX
         sSwapMonPicBgTilesetBuffer = AllocZeroed(sizeof(sMonPicBg_Gfx));
+#else
+        sSwapMonPicBgTilesetBuffer = AllocZeroed(sizeof(gFrontierFactoryMenu_Gfx)); // Incorrect size
+#endif
         sSwapMenuTilemapBuffer = Alloc(BG_SCREEN_SIZE);
         sSwapMonPicBgTilemapBuffer = AllocZeroed(BG_SCREEN_SIZE);
-        ChangeBgX(0, 0, 0);
-        ChangeBgY(0, 0, 0);
-        ChangeBgX(1, 0, 0);
-        ChangeBgY(1, 0, 0);
-        ChangeBgX(2, 0, 0);
-        ChangeBgY(2, 0, 0);
-        ChangeBgX(3, 0, 0);
-        ChangeBgY(3, 0, 0);
+        ChangeBgX(0, 0, BG_COORD_SET);
+        ChangeBgY(0, 0, BG_COORD_SET);
+        ChangeBgX(1, 0, BG_COORD_SET);
+        ChangeBgY(1, 0, BG_COORD_SET);
+        ChangeBgX(2, 0, BG_COORD_SET);
+        ChangeBgY(2, 0, BG_COORD_SET);
+        ChangeBgX(3, 0, BG_COORD_SET);
+        ChangeBgY(3, 0, BG_COORD_SET);
         SetGpuReg(REG_OFFSET_BLDY, 0);
         SetGpuReg(REG_OFFSET_MOSAIC, 0);
         SetGpuReg(REG_OFFSET_WIN0H, 0);
@@ -3291,16 +3274,16 @@ static void CB2_InitSwapScreen(void)
         ResetTasks();
         FreeAllSpritePalettes();
         ResetAllPicSprites();
-        CpuCopy16(gFrontierFactorySelectMenu_Gfx, sSwapMenuTilesetBuffer, 0x440);
+        CpuCopy16(gFrontierFactoryMenu_Gfx, sSwapMenuTilesetBuffer, sizeof(gFrontierFactoryMenu_Gfx));
         CpuCopy16(sMonPicBg_Gfx, sSwapMonPicBgTilesetBuffer, sizeof(sMonPicBg_Gfx));
-        LoadBgTiles(1, sSwapMenuTilesetBuffer, 0x440, 0);
+        LoadBgTiles(1, sSwapMenuTilesetBuffer, sizeof(gFrontierFactoryMenu_Gfx), 0);
         LoadBgTiles(3, sSwapMonPicBgTilesetBuffer, sizeof(sMonPicBg_Gfx), 0);
-        CpuCopy16(gFrontierFactorySelectMenu_Tilemap, sSwapMenuTilemapBuffer, BG_SCREEN_SIZE);
+        CpuCopy16(gFrontierFactoryMenu_Tilemap, sSwapMenuTilemapBuffer, BG_SCREEN_SIZE);
         LoadBgTilemap(1, sSwapMenuTilemapBuffer, BG_SCREEN_SIZE, 0);
-        LoadPalette(gFrontierFactorySelectMenu_Pal, 0, 0x40);
-        LoadPalette(sSwapText_Pal, 0xF0, sizeof(sSwapText_Pal));
-        LoadPalette(sSwapText_Pal, 0xE0, sizeof(sSwapText_Pal));
-        LoadPalette(sMonPicBg_Pal, 0x20, 4);
+        LoadPalette(gFrontierFactoryMenu_Pal, 0, 2 * PLTT_SIZE_4BPP);
+        LoadPalette(sSwapText_Pal, BG_PLTT_ID(PALNUM_TEXT), sizeof(sSwapText_Pal));
+        LoadPalette(sSwapText_Pal, BG_PLTT_ID(PALNUM_FADE_TEXT), sizeof(sSwapText_Pal));
+        LoadPalette(sMonPicBg_Pal, BG_PLTT_ID(2), PLTT_SIZEOF(2));
         gMain.state++;
         break;
     case 3:
@@ -3317,7 +3300,11 @@ static void CB2_InitSwapScreen(void)
         gMain.state++;
         break;
     case 5:
+#ifdef UBFIX
         if (sFactorySwapScreen && sFactorySwapScreen->fromSummaryScreen)
+#else
+        if (sFactorySwapScreen->fromSummaryScreen == TRUE)
+#endif
             sFactorySwapScreen->cursorPos = gLastViewedMonIndex;
         gMain.state++;
         break;
@@ -3521,7 +3508,7 @@ static void Swap_HandleActionCursorChange(u8 cursorId)
 {
     if (cursorId < FRONTIER_PARTY_SIZE)
     {
-        // Cursor is on one of the pokemon
+        // Cursor is on one of the Pokémon
         gSprites[sFactorySwapScreen->cursorSpriteId].invisible = FALSE;
         Swap_HideActionButtonHighlights();
         gSprites[sFactorySwapScreen->cursorSpriteId].x = gSprites[sFactorySwapScreen->ballSpriteIds[cursorId]].x;
@@ -3662,7 +3649,7 @@ static void Swap_HideActionButtonHighlights(void)
     {
         // Hide button highlight on "Pkmn for Swap"
         gSprites[sFactorySwapScreen->pkmnForSwapButtonSpriteIds[1][i]].invisible = TRUE;
-        
+
         // Hide button highlight on Cancel
         if (i < ARRAY_COUNT(sFactorySwapScreen->cancelButtonSpriteIds[0]))
             gSprites[sFactorySwapScreen->cancelButtonSpriteIds[1][i]].invisible = TRUE;
@@ -3707,7 +3694,7 @@ static void Swap_ErasePopupMenu(u8 windowId)
     gSprites[sFactorySwapScreen->menuCursor1SpriteId].invisible = TRUE;
     gSprites[sFactorySwapScreen->menuCursor2SpriteId].invisible = TRUE;
     FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
-    CopyWindowToVram(windowId, 2);
+    CopyWindowToVram(windowId, COPYWIN_GFX);
     ClearWindowTilemap(windowId);
 }
 
@@ -3715,14 +3702,14 @@ static void Swap_EraseSpeciesWindow(void)
 {
     PutWindowTilemap(SWAP_WIN_SPECIES);
     FillWindowPixelBuffer(SWAP_WIN_SPECIES, PIXEL_FILL(0));
-    CopyWindowToVram(SWAP_WIN_SPECIES, 2);
+    CopyWindowToVram(SWAP_WIN_SPECIES, COPYWIN_GFX);
 }
 
 static void Swap_EraseSpeciesAtFadeWindow(void)
 {
     PutWindowTilemap(SWAP_WIN_SPECIES_AT_FADE);
     FillWindowPixelBuffer(SWAP_WIN_SPECIES_AT_FADE, PIXEL_FILL(0));
-    CopyWindowToVram(SWAP_WIN_SPECIES_AT_FADE, 2);
+    CopyWindowToVram(SWAP_WIN_SPECIES_AT_FADE, COPYWIN_GFX);
 }
 
 static void Swap_EraseActionFadeWindow(void)
@@ -3730,70 +3717,70 @@ static void Swap_EraseActionFadeWindow(void)
     Swap_EraseSpeciesWindow();
     PutWindowTilemap(SWAP_WIN_ACTION_FADE);
     FillWindowPixelBuffer(SWAP_WIN_ACTION_FADE, PIXEL_FILL(0));
-    CopyWindowToVram(SWAP_WIN_ACTION_FADE, 2);
+    CopyWindowToVram(SWAP_WIN_ACTION_FADE, COPYWIN_GFX);
 }
 
 static void Swap_PrintPkmnSwap(void)
 {
     FillWindowPixelBuffer(SWAP_WIN_TITLE, PIXEL_FILL(1));
-    AddTextPrinterParameterized(SWAP_WIN_TITLE, 1, gText_PkmnSwap, 2, 1, 0, NULL);
-    CopyWindowToVram(SWAP_WIN_TITLE, 3);
+    AddTextPrinterParameterized(SWAP_WIN_TITLE, FONT_NORMAL, gText_PkmnSwap, 2, 1, 0, NULL);
+    CopyWindowToVram(SWAP_WIN_TITLE, COPYWIN_FULL);
 }
 
 static void Swap_PrintMonSpecies(void)
 {
-    u16 species;
+    enum Species species;
     u8 x;
 
     FillWindowPixelBuffer(SWAP_WIN_SPECIES, PIXEL_FILL(0));
     if (sFactorySwapScreen->cursorPos >= FRONTIER_PARTY_SIZE)
     {
-        CopyWindowToVram(SWAP_WIN_SPECIES, 2);
+        CopyWindowToVram(SWAP_WIN_SPECIES, COPYWIN_GFX);
     }
     else
     {
         u8 monId = sFactorySwapScreen->cursorPos;
         if (!sFactorySwapScreen->inEnemyScreen)
-            species = GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES, NULL);
+            species = GetMonData(&gParties[B_TRAINER_PLAYER][monId], MON_DATA_SPECIES);
         else
-            species = GetMonData(&gEnemyParty[monId], MON_DATA_SPECIES, NULL);
-        StringCopy(gStringVar4, gSpeciesNames[species]);
-        x = GetStringRightAlignXOffset(1, gStringVar4, 86);
-        AddTextPrinterParameterized3(SWAP_WIN_SPECIES, 1, x, 1, sSwapSpeciesNameTextColors, 0, gStringVar4);
-        CopyWindowToVram(SWAP_WIN_SPECIES, 3);
+            species = GetMonData(&gParties[B_TRAINER_OPPONENT_A][monId], MON_DATA_SPECIES);
+        StringCopy(gStringVar4, GetSpeciesName(species));
+        x = GetStringRightAlignXOffset(FONT_NORMAL, gStringVar4, 86);
+        AddTextPrinterParameterized3(SWAP_WIN_SPECIES, FONT_NORMAL, x, 1, sSwapSpeciesNameTextColors, 0, gStringVar4);
+        CopyWindowToVram(SWAP_WIN_SPECIES, COPYWIN_FULL);
     }
 }
 
 static void Swap_PrintOnInfoWindow(const u8 *str)
 {
     FillWindowPixelBuffer(SWAP_WIN_INFO, PIXEL_FILL(0));
-    AddTextPrinterParameterized(SWAP_WIN_INFO, 1, str, 2, 5, 0, NULL);
-    CopyWindowToVram(SWAP_WIN_INFO, 2);
+    AddTextPrinterParameterized(SWAP_WIN_INFO, FONT_NORMAL, str, 2, 5, 0, NULL);
+    CopyWindowToVram(SWAP_WIN_INFO, COPYWIN_GFX);
 }
 
 static void Swap_PrintMenuOptions(void)
 {
     PutWindowTilemap(SWAP_WIN_OPTIONS);
     FillWindowPixelBuffer(SWAP_WIN_OPTIONS, PIXEL_FILL(0));
-    AddTextPrinterParameterized3(SWAP_WIN_OPTIONS, 1, 15,  1, sSwapMenuOptionsTextColors, 0, gText_Summary2);
-    AddTextPrinterParameterized3(SWAP_WIN_OPTIONS, 1, 15, 17, sSwapMenuOptionsTextColors, 0, gText_Swap);
-    AddTextPrinterParameterized3(SWAP_WIN_OPTIONS, 1, 15, 33, sSwapMenuOptionsTextColors, 0, gText_Rechoose);
-    CopyWindowToVram(SWAP_WIN_OPTIONS, 3);
+    AddTextPrinterParameterized3(SWAP_WIN_OPTIONS, FONT_NORMAL, 15,  1, sSwapMenuOptionsTextColors, 0, gText_Summary2);
+    AddTextPrinterParameterized3(SWAP_WIN_OPTIONS, FONT_NORMAL, 15, 17, sSwapMenuOptionsTextColors, 0, gText_Swap);
+    AddTextPrinterParameterized3(SWAP_WIN_OPTIONS, FONT_NORMAL, 15, 33, sSwapMenuOptionsTextColors, 0, gText_Rechoose);
+    CopyWindowToVram(SWAP_WIN_OPTIONS, COPYWIN_FULL);
 }
 
 static void Swap_PrintYesNoOptions(void)
 {
     PutWindowTilemap(SWAP_WIN_YES_NO);
     FillWindowPixelBuffer(SWAP_WIN_YES_NO, PIXEL_FILL(0));
-    AddTextPrinterParameterized3(SWAP_WIN_YES_NO, 1, 7, 1,  sSwapMenuOptionsTextColors, 0, gText_Yes3);
-    AddTextPrinterParameterized3(SWAP_WIN_YES_NO, 1, 7, 17, sSwapMenuOptionsTextColors, 0, gText_No3);
-    CopyWindowToVram(SWAP_WIN_YES_NO, 3);
+    AddTextPrinterParameterized3(SWAP_WIN_YES_NO, FONT_NORMAL, 7, 1,  sSwapMenuOptionsTextColors, 0, gText_Yes3);
+    AddTextPrinterParameterized3(SWAP_WIN_YES_NO, FONT_NORMAL, 7, 17, sSwapMenuOptionsTextColors, 0, gText_No3);
+    CopyWindowToVram(SWAP_WIN_YES_NO, COPYWIN_FULL);
 }
 
 static void Swap_PrintActionString(const u8 *str, u32 y, u32 windowId)
 {
-    s32 x = GetStringRightAlignXOffset(0, str, 0x46);
-    AddTextPrinterParameterized3(windowId, 0, x, y, sSwapMenuOptionsTextColors, 0, str);
+    s32 x = GetStringRightAlignXOffset(FONT_SMALL, str, 70);
+    AddTextPrinterParameterized3(windowId, FONT_SMALL, x, y, sSwapMenuOptionsTextColors, 0, str);
 }
 
 static void Swap_PrintActionStrings(void)
@@ -3807,7 +3794,7 @@ static void Swap_PrintActionStrings(void)
         Swap_PrintActionString(gText_Cancel3, 24, SWAP_WIN_ACTION_FADE);
         break;
     }
-    CopyWindowToVram(SWAP_WIN_ACTION_FADE, 3);
+    CopyWindowToVram(SWAP_WIN_ACTION_FADE, COPYWIN_FULL);
 }
 
 static void Swap_PrintActionStrings2(void)
@@ -3821,7 +3808,7 @@ static void Swap_PrintActionStrings2(void)
         Swap_PrintActionString(gText_Cancel3, 32, SWAP_WIN_OPTIONS);
         break;
     }
-    CopyWindowToVram(SWAP_WIN_OPTIONS, 3);
+    CopyWindowToVram(SWAP_WIN_OPTIONS, COPYWIN_FULL);
 }
 
 static void Swap_PrintOneActionString(u8 which)
@@ -3836,73 +3823,73 @@ static void Swap_PrintOneActionString(u8 which)
         Swap_PrintActionString(gText_Cancel3, 32, SWAP_WIN_OPTIONS);
         break;
     }
-    CopyWindowToVram(SWAP_WIN_OPTIONS, 3);
+    CopyWindowToVram(SWAP_WIN_OPTIONS, COPYWIN_FULL);
 }
 
 // For printing the species name once its selected. Keep the current fade but don't keep fading in and out
 static void Swap_PrintMonSpeciesAtFade(void)
 {
-    u16 species;
+    enum Species species;
     u8 x;
     u16 pal[5];
 
     CpuCopy16(sSwapText_Pal, pal, 8);
     if (!sFactorySwapScreen->fromSummaryScreen)
-        pal[4] = gPlttBufferFaded[228];
+        pal[4] = gPlttBufferFaded[BG_PLTT_ID(PALNUM_FADE_TEXT) + 4];
     else
         pal[4] = sFactorySwapScreen->speciesNameColorBackup;
-    LoadPalette(pal, 0xF0, sizeof(sSwapText_Pal));
+    LoadPalette(pal, BG_PLTT_ID(PALNUM_TEXT), sizeof(sSwapText_Pal));
 
     PutWindowTilemap(SWAP_WIN_SPECIES_AT_FADE);
     FillWindowPixelBuffer(SWAP_WIN_SPECIES_AT_FADE, PIXEL_FILL(0));
     if (sFactorySwapScreen->cursorPos >= FRONTIER_PARTY_SIZE)
     {
-        CopyWindowToVram(SWAP_WIN_SPECIES_AT_FADE, 3);
+        CopyWindowToVram(SWAP_WIN_SPECIES_AT_FADE, COPYWIN_FULL);
     }
     else
     {
         u8 monId = sFactorySwapScreen->cursorPos;
         if (!sFactorySwapScreen->inEnemyScreen)
-            species = GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES, NULL);
+            species = GetMonData(&gParties[B_TRAINER_PLAYER][monId], MON_DATA_SPECIES);
         else
-            species = GetMonData(&gEnemyParty[monId], MON_DATA_SPECIES, NULL);
-        StringCopy(gStringVar4, gSpeciesNames[species]);
-        x = GetStringRightAlignXOffset(1, gStringVar4, 86);
-        AddTextPrinterParameterized3(SWAP_WIN_SPECIES_AT_FADE, 1, x, 1, sSwapSpeciesNameTextColors, 0, gStringVar4);
-        CopyWindowToVram(SWAP_WIN_SPECIES_AT_FADE, 3);
+            species = GetMonData(&gParties[B_TRAINER_OPPONENT_A][monId], MON_DATA_SPECIES);
+        StringCopy(gStringVar4, GetSpeciesName(species));
+        x = GetStringRightAlignXOffset(FONT_NORMAL, gStringVar4, 86);
+        AddTextPrinterParameterized3(SWAP_WIN_SPECIES_AT_FADE, FONT_NORMAL, x, 1, sSwapSpeciesNameTextColors, 0, gStringVar4);
+        CopyWindowToVram(SWAP_WIN_SPECIES_AT_FADE, COPYWIN_FULL);
     }
 }
 
 // Reprints the species name over the faded one after a transition
 static void Swap_PrintMonSpeciesForTransition(void)
 {
-    u16 species;
+    enum Species species;
     u8 x;
 
-    LoadPalette(sSwapText_Pal, 0xE0, sizeof(sSwapText_Pal));
-    CpuCopy16(&gPlttBufferUnfaded[240], &gPlttBufferFaded[224], 10);
+    LoadPalette(sSwapText_Pal, BG_PLTT_ID(PALNUM_FADE_TEXT), sizeof(sSwapText_Pal));
+    CpuCopy16(&gPlttBufferUnfaded[BG_PLTT_ID(PALNUM_TEXT)], &gPlttBufferFaded[BG_PLTT_ID(PALNUM_FADE_TEXT)], PLTT_SIZEOF(5));
 
     if (sFactorySwapScreen->cursorPos >= FRONTIER_PARTY_SIZE)
     {
-        CopyWindowToVram(SWAP_WIN_SPECIES, 2);
+        CopyWindowToVram(SWAP_WIN_SPECIES, COPYWIN_GFX);
     }
     else
     {
         u8 monId = sFactorySwapScreen->cursorPos;
         if (!sFactorySwapScreen->inEnemyScreen)
-            species = GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES, NULL);
+            species = GetMonData(&gParties[B_TRAINER_PLAYER][monId], MON_DATA_SPECIES);
         else
-            species = GetMonData(&gEnemyParty[monId], MON_DATA_SPECIES, NULL);
-        StringCopy(gStringVar4, gSpeciesNames[species]);
-        x = GetStringRightAlignXOffset(1, gStringVar4, 86);
-        AddTextPrinterParameterized3(SWAP_WIN_SPECIES, 1, x, 1, sSwapSpeciesNameTextColors, 0, gStringVar4);
-        CopyWindowToVram(SWAP_WIN_SPECIES, 3);
+            species = GetMonData(&gParties[B_TRAINER_OPPONENT_A][monId], MON_DATA_SPECIES);
+        StringCopy(gStringVar4, GetSpeciesName(species));
+        x = GetStringRightAlignXOffset(FONT_NORMAL, gStringVar4, 86);
+        AddTextPrinterParameterized3(SWAP_WIN_SPECIES, FONT_NORMAL, x, 1, sSwapSpeciesNameTextColors, 0, gStringVar4);
+        CopyWindowToVram(SWAP_WIN_SPECIES, COPYWIN_FULL);
     }
 }
 
 static void Swap_PrintMonCategory(void)
 {
-    u16 species;
+    enum Species species;
     u8 text[30];
     u8 x;
     u8 monId = sFactorySwapScreen->cursorPos;
@@ -3910,19 +3897,19 @@ static void Swap_PrintMonCategory(void)
     FillWindowPixelBuffer(SWAP_WIN_MON_CATEGORY, PIXEL_FILL(0));
     if (monId >= FRONTIER_PARTY_SIZE)
     {
-        CopyWindowToVram(SWAP_WIN_MON_CATEGORY, 2);
+        CopyWindowToVram(SWAP_WIN_MON_CATEGORY, COPYWIN_GFX);
     }
     else
     {
         PutWindowTilemap(SWAP_WIN_MON_CATEGORY);
         if (!sFactorySwapScreen->inEnemyScreen)
-            species = GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES, NULL);
+            species = GetMonData(&gParties[B_TRAINER_PLAYER][monId], MON_DATA_SPECIES);
         else
-            species = GetMonData(&gEnemyParty[monId], MON_DATA_SPECIES, NULL);
-        CopyMonCategoryText(SpeciesToNationalPokedexNum(species), text);
-        x = GetStringRightAlignXOffset(1, text, 0x76);
-        AddTextPrinterParameterized(SWAP_WIN_MON_CATEGORY, 1, text, x, 1, 0, NULL);
-        CopyWindowToVram(SWAP_WIN_MON_CATEGORY, 2);
+            species = GetMonData(&gParties[B_TRAINER_OPPONENT_A][monId], MON_DATA_SPECIES);
+        CopyMonCategoryText(species, text);
+        x = GetStringRightAlignXOffset(FONT_NORMAL, text, 118);
+        AddTextPrinterParameterized(SWAP_WIN_MON_CATEGORY, FONT_NORMAL, text, x, 1, 0, NULL);
+        CopyWindowToVram(SWAP_WIN_MON_CATEGORY, COPYWIN_GFX);
     }
 }
 
@@ -4043,18 +4030,19 @@ static void OpenMonPic(u8 *spriteId, bool8 *animating, bool8 swapScreen)
 static void Swap_ShowSummaryMonSprite(void)
 {
     struct Pokemon *mon;
-    u16 species;
-    u32 personality, otId;
+    enum Species species;
+    u32 personality;
+    bool8 isShiny;
 
     sFactorySwapScreen->monPic.bgSpriteId = CreateSprite(&sSpriteTemplate_Swap_MonPicBgAnim, 120, 64, 1);
     StartSpriteAffineAnim(&gSprites[sFactorySwapScreen->monPic.bgSpriteId], 2);
 
-    mon = &gPlayerParty[sFactorySwapScreen->cursorPos];
-    species = GetMonData(mon, MON_DATA_SPECIES, NULL);
-    personality = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
-    otId = GetMonData(mon, MON_DATA_OT_ID, NULL);
+    mon = &gParties[B_TRAINER_PLAYER][sFactorySwapScreen->cursorPos];
+    species = GetMonData(mon, MON_DATA_SPECIES);
+    personality = GetMonData(mon, MON_DATA_PERSONALITY);
+    isShiny = GetMonData(mon, MON_DATA_IS_SHINY);
 
-    sFactorySwapScreen->monPic.monSpriteId = CreateMonPicSprite(species, otId, personality, TRUE, 88, 32, 15, 0xFFFF);
+    sFactorySwapScreen->monPic.monSpriteId = CreateMonPicSprite(species, isShiny, personality, TRUE, 88, 32, 15, TAG_NONE);
     gSprites[sFactorySwapScreen->monPic.monSpriteId].centerToCornerVecX = 0;
     gSprites[sFactorySwapScreen->monPic.monSpriteId].centerToCornerVecY = 0;
 
@@ -4105,7 +4093,7 @@ static void Swap_TaskCantHaveSameMons(u8 taskId)
         if (sFactorySwapScreen->monPicAnimating != TRUE)
         {
             FillWindowPixelBuffer(SWAP_WIN_ACTION_FADE, PIXEL_FILL(0));
-            CopyWindowToVram(SWAP_WIN_ACTION_FADE, 2);
+            CopyWindowToVram(SWAP_WIN_ACTION_FADE, COPYWIN_GFX);
             gTasks[taskId].tState++;
         }
         break;
@@ -4126,11 +4114,11 @@ static void Swap_TaskCantHaveSameMons(u8 taskId)
 static bool8 Swap_AlreadyHasSameSpecies(u8 monId)
 {
     u8 i;
-    u16 species = GetMonData(&gEnemyParty[monId], MON_DATA_SPECIES, NULL);
+    enum Species species = GetMonData(&gParties[B_TRAINER_OPPONENT_A][monId], MON_DATA_SPECIES);
 
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
-        if (i != sFactorySwapScreen->playerMonId && (u16)(GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL)) == species)
+        if (i != sFactorySwapScreen->playerMonId && (u16)(GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES)) == species)
             return TRUE;
     }
     return FALSE;
@@ -4200,11 +4188,12 @@ static void Task_OpenMonPic(u8 taskId)
             return;
         break;
     default:
+        DestroyTask(taskId);
+        // Accessing data of destroyed task. Task data isn't reset until a new task needs that task id.
         if (gTasks[taskId].tIsSwapScreen == TRUE)
             Swap_CreateMonSprite();
         else
             Select_CreateMonSprite();
-        DestroyTask(taskId);
         return;
     }
     task->tState++;
@@ -4257,19 +4246,20 @@ static void Task_CloseMonPic(u8 taskId)
 static void Swap_CreateMonSprite(void)
 {
     struct Pokemon *mon;
-    u16 species;
-    u32 personality, otId;
+    enum Species species;
+    u32 personality;
+    bool32 isShiny;
 
     if (!sFactorySwapScreen->inEnemyScreen)
-        mon = &gPlayerParty[sFactorySwapScreen->cursorPos];
+        mon = &gParties[B_TRAINER_PLAYER][sFactorySwapScreen->cursorPos];
     else
-        mon = &gEnemyParty[sFactorySwapScreen->cursorPos];
+        mon = &gParties[B_TRAINER_OPPONENT_A][sFactorySwapScreen->cursorPos];
 
-    species = GetMonData(mon, MON_DATA_SPECIES, NULL);
-    personality = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
-    otId = GetMonData(mon, MON_DATA_OT_ID, NULL);
+    species = GetMonData(mon, MON_DATA_SPECIES);
+    personality = GetMonData(mon, MON_DATA_PERSONALITY);
+    isShiny = GetMonData(mon, MON_DATA_IS_SHINY);
 
-    sFactorySwapScreen->monPic.monSpriteId = CreateMonPicSprite(species, otId, personality, TRUE, 88, 32, 15, 0xFFFF);
+    sFactorySwapScreen->monPic.monSpriteId = CreateMonPicSprite(species, isShiny, personality, TRUE, 88, 32, 15, TAG_NONE);
     gSprites[sFactorySwapScreen->monPic.monSpriteId].centerToCornerVecX = 0;
     gSprites[sFactorySwapScreen->monPic.monSpriteId].centerToCornerVecY = 0;
 

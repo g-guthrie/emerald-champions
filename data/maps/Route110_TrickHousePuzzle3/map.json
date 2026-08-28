@@ -3,6 +3,7 @@
   "name": "Route110_TrickHousePuzzle3",
   "layout": "LAYOUT_ROUTE110_TRICK_HOUSE_PUZZLE3",
   "music": "MUS_TRICK_HOUSE",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_ROUTE_110",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -62,9 +63,9 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route110_TrickHousePuzzle3_EventScript_ItemExpertBelt",
-      "flag": "FLAG_ITEM_TRICK_HOUSE_PUZZLE_3_EXPERT_BELT"
+      "trainer_sight_or_berry_tree_id": "ITEM_WOOD_MAIL",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ITEM_TRICK_HOUSE_PUZZLE_3_WOOD_MAIL"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -75,9 +76,9 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route110_TrickHousePuzzle3_EventScript_ItemBigNugget",
-      "flag": "FLAG_ITEM_TRICK_HOUSE_PUZZLE_3_BIG_NUGGET"
+      "trainer_sight_or_berry_tree_id": "ITEM_SHADOW_MAIL",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ITEM_TRICK_HOUSE_PUZZLE_3_SHADOW_MAIL"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
@@ -112,21 +113,21 @@
       "y": 21,
       "elevation": 3,
       "dest_map": "MAP_ROUTE110_TRICK_HOUSE_ENTRANCE",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 1,
       "y": 21,
       "elevation": 3,
       "dest_map": "MAP_ROUTE110_TRICK_HOUSE_ENTRANCE",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 13,
       "y": 1,
       "elevation": 3,
       "dest_map": "MAP_ROUTE110_TRICK_HOUSE_END",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [

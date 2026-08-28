@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Replace now-free held-item rewards with finite progression rewards."""
+"""Replace redundant TM rewards with finite campaign progression rewards."""
 
 from __future__ import annotations
 
@@ -17,149 +17,137 @@ ROOT = Path(__file__).resolve().parents[1]
 class Reward:
     path: str
     label: str
-    old_item: str
-    new_item: str
+    item: str
 
 
 REWARDS = (
-    Reward("data/maps/Route104/scripts.inc", "Route104_EventScript_WhiteHerbFlorist", "ITEM_WHITE_HERB", "ITEM_LEAF_STONE"),
-    Reward("data/maps/RustboroCity_Gym/scripts.inc", "RustboroCity_Gym_EventScript_GiveRockTomb", "ITEM_EXPERT_BELT", "ITEM_PROTECTOR"),
-    Reward("data/maps/RustboroCity_PokemonSchool/scripts.inc", "RustboroCity_PokemonSchool_EventScript_Teacher", "ITEM_QUICK_CLAW", "ITEM_SUN_STONE"),
-    Reward("data/maps/RustboroCity_DevonCorp_3F/scripts.inc", "RustboroCity_DevonCorp_3F_EventScript_GiveScopeLens", "ITEM_SCOPE_LENS", "ITEM_UPGRADE"),
-    Reward("data/maps/RustboroCity_Mart/scripts.inc", "RustboroCity_Mart_EventScript_FalseSwipeTM", "ITEM_ZOOM_LENS", "ITEM_MOON_STONE"),
-    Reward("data/maps/DewfordTown_Hall/scripts.inc", "DewfordTown_Hall_EventScript_SludgeBombMan", "ITEM_BLACK_SLUDGE", "ITEM_DEEP_SEA_SCALE"),
-    Reward("data/maps/DewfordTown_Gym/scripts.inc", "DewfordTown_Gym_EventScript_GiveBulkUp", "ITEM_FLAME_ORB", "ITEM_RAZOR_CLAW"),
-    Reward("data/maps/DewfordTown_Gym/scripts.inc", "DewfordTown_Gym_EventScript_GiveBulkUp2", "ITEM_FLAME_ORB", "ITEM_RAZOR_CLAW"),
-    Reward("data/maps/DewfordTown/scripts.inc", "DewfordTown_EventScript_OldRodFisherman", "ITEM_SCOPE_LENS", "ITEM_DRAGON_SCALE"),
-    Reward("data/maps/DewfordTown_House2/scripts.inc", "DewfordTown_House2_EventScript_Man", "ITEM_SILK_SCARF", "ITEM_REAPER_CLOTH"),
-    Reward("data/maps/Route110_TrickHouseEnd/scripts.inc", "Route110_TrickHouseEnd_EventScript_CompletedPuzzle1", "ITEM_MENTAL_HERB", "ITEM_SACHET"),
-    Reward("data/maps/Route110_TrickHouseEntrance/scripts.inc", "Route110_TrickHouseEntrance_EventScript_GivePuzzle1Reward", "ITEM_MENTAL_HERB", "ITEM_SACHET"),
-    Reward("data/maps/Route110_TrickHouseEnd/scripts.inc", "Route110_TrickHouseEnd_EventScript_CompletedPuzzle3", "ITEM_ROOM_SERVICE", "ITEM_WHIPPED_DREAM"),
-    Reward("data/maps/Route110_TrickHouseEntrance/scripts.inc", "Route110_TrickHouseEntrance_EventScript_GivePuzzle3Reward", "ITEM_ROOM_SERVICE", "ITEM_WHIPPED_DREAM"),
-    Reward("data/maps/Route110_TrickHouseEnd/scripts.inc", "Route110_TrickHouseEnd_EventScript_CompletedPuzzle4", "ITEM_ROOM_SERVICE", "ITEM_METAL_ALLOY"),
-    Reward("data/maps/Route110_TrickHouseEntrance/scripts.inc", "Route110_TrickHouseEntrance_EventScript_GivePuzzle4Reward", "ITEM_ROOM_SERVICE", "ITEM_METAL_ALLOY"),
-    Reward("data/scripts/item_ball_scripts.inc", "TrickHouse5_EventScript_TerrainExtender", "ITEM_TERRAIN_EXTENDER", "ITEM_FOSSILIZED_BIRD"),
-    Reward("data/scripts/item_ball_scripts.inc", "Route110_TrickHousePuzzle3_EventScript_ItemExpertBelt", "ITEM_EXPERT_BELT", "ITEM_FOSSILIZED_DRAKE"),
-    Reward("data/scripts/item_ball_scripts.inc", "Route110_TrickHousePuzzle4_EventScript_ItemAssaultVest", "ITEM_BLUNDER_POLICY", "ITEM_FOSSILIZED_FISH"),
-    Reward("data/scripts/item_ball_scripts.inc", "Route109_EventScript_ItemZoomLens", "ITEM_ZOOM_LENS", "ITEM_FOSSILIZED_DINO"),
-    Reward("data/maps/SlateportCity_PokemonFanClub/scripts.inc", "SlateportCity_PokemonFanClub_EventScript_EndureTM", "ITEM_FOCUS_BAND", "ITEM_DEEP_SEA_TOOTH"),
-    Reward("data/maps/SlateportCity_BattleTentLobby/scripts.inc", "SlateportCity_BattleTentLobby_EventScript_TormentGiver", "ITEM_RED_CARD", "ITEM_PRISM_SCALE"),
-    Reward("data/maps/SlateportCity/scripts.inc", "SlateportCity_EventScript_GretaReward", "ITEM_THROAT_SPRAY", "ITEM_LEADERS_CREST"),
-    Reward("data/maps/Route110/scripts.inc", "Route110_EventScript_ChallengeReactionBest", "ITEM_ELECTRIC_SEED", "ITEM_BOTTLE_CAP"),
-    Reward("data/maps/Route110/scripts.inc", "Route110_EventScript_ChallengeReactionGood", "ITEM_QUICK_CLAW", "ITEM_RARE_CANDY"),
-    Reward("data/maps/MauvilleCity/scripts.inc", "MauvilleCity_EventScript_GyroBallTM", "ITEM_METRONOME", "ITEM_DUBIOUS_DISC"),
-    Reward("data/maps/MauvilleCity/scripts.inc", "MauvilleCity_EventScript_CompletedNewMauville", "ITEM_THROAT_SPRAY", "ITEM_GIMMIGHOUL_COIN"),
-    Reward("data/maps/MauvilleCity_Gym/scripts.inc", "MauvilleCity_Gym_EventScript_GiveVoltSwitch", "ITEM_WISE_GLASSES", "ITEM_ELECTIRIZER"),
-    Reward("data/maps/MauvilleCity_Gym/scripts.inc", "MauvilleCity_Gym_EventScript_GiveVoltSwitch2", "ITEM_WISE_GLASSES", "ITEM_ELECTIRIZER"),
-    Reward("data/maps/FallarborTown_CozmosHouse/scripts.inc", "FallarborTown_CozmosHouse_EventScript_PlayerHasMeteorite", "ITEM_EXPERT_BELT", "ITEM_DAWN_STONE"),
-    Reward("data/maps/FallarborTown_Mart/scripts.inc", "FallarborTown_Mart_EventScript_DrainPunchTM", "ITEM_MUSCLE_BAND", "ITEM_SHINY_STONE"),
-    Reward("data/maps/Route114_FossilManiacsHouse/scripts.inc", "Route114_FossilManiacsHouse_EventScript_FossilManiacsBrother", "ITEM_AIR_BALLOON", "ITEM_SAIL_FOSSIL"),
-    Reward("data/scripts/item_ball_scripts.inc", "Route114_EventScript_ItemProtectivePads", "ITEM_PROTECTIVE_PADS", "ITEM_METAL_COAT"),
-    Reward("data/maps/Route114/scripts.inc", "Route114_EventScript_RoarGentleman", "ITEM_SHED_SHELL", "ITEM_DRAGON_SCALE"),
-    Reward("data/maps/LavaridgeTown_HerbShop/scripts.inc", "LavaridgeTown_HerbShop_EventScript_OldMan", "ITEM_CHARCOAL", "ITEM_FIRE_STONE"),
-    Reward("data/maps/LavaridgeTown_Gym_1F/scripts.inc", "LavaridgeTown_Gym_1F_EventScript_GiveOverheat", "ITEM_EJECT_PACK", "ITEM_MAGMARIZER"),
-    Reward("data/maps/LavaridgeTown_Gym_1F/scripts.inc", "LavaridgeTown_Gym_1F_EventScript_GiveOverheat2", "ITEM_EJECT_PACK", "ITEM_MAGMARIZER"),
-    Reward("data/maps/VerdanturfTown_BattleTentLobby/scripts.inc", "VerdanturfTown_BattleTentLobby_EventScript_AttractGiver", "ITEM_BRIGHT_POWDER", "ITEM_SHINY_STONE"),
-    Reward("data/maps/VerdanturfTown_Mart/scripts.inc", "VerdanturfTown_Mart_EventScript_PaybackTM", "ITEM_WEAKNESS_POLICY", "ITEM_GIMMIGHOUL_COIN"),
-    Reward("data/maps/PetalburgCity_Gym/scripts.inc", "PetalburgCity_Gym_EventScript_GiveFacade", "ITEM_OVAL_STONE", "ITEM_LOPUNNITE"),
-    Reward("data/scripts/item_ball_scripts.inc", "Ashen_Woods_ItemFlame_Orb", "ITEM_FLAME_ORB", "ITEM_SACHET"),
-    Reward("data/scripts/item_ball_scripts.inc", "Route119_EventScript_ItemToxicOrb", "ITEM_TOXIC_ORB", "ITEM_REAPER_CLOTH"),
-    Reward("data/maps/FortreeCity_Gym/scripts.inc", "FortreeCity_Gym_EventScript_GiveRoost", "ITEM_SHINY_STONE", "ITEM_ALTARIANITE"),
-    Reward("data/maps/FortreeCity_Gym/scripts.inc", "FortreeCity_Gym_EventScript_GiveRoost2", "ITEM_SHINY_STONE", "ITEM_ALTARIANITE"),
-    Reward("data/maps/FortreeCity_House4/scripts.inc", "FortreeCity_House4_EventScript_WingullReturned", "ITEM_MENTAL_HERB", "ITEM_SACHET"),
-    Reward("data/maps/FortreeCity_House2/scripts.inc", "FortreeCity_House2_EventScript_SleepTalkTM", "ITEM_SAFETY_GOGGLES", "ITEM_ICE_STONE"),
-    Reward("data/maps/FortreeCity_House2/scripts.inc", "FortreeCity_House2_EventScript_HiddenPowerGiver", "ITEM_WIDE_LENS", "ITEM_DUBIOUS_DISC"),
-    Reward("data/maps/FortreeCity_Mart/scripts.inc", "FortreeCity_Mart_EventScript_SpenserReward", "ITEM_TERRAIN_EXTENDER", "ITEM_PROTECTOR"),
-    Reward("data/scripts/item_ball_scripts.inc", "Route123_EventScript_ItemWideLens", "ITEM_WIDE_LENS", "ITEM_DAWN_STONE"),
-    Reward("data/maps/LilycoveCity_DepartmentStoreRooftop/scripts.inc", "LilycoveCity_DepartmentStoreRooftop_EventScript_SubstituteTM", "ITEM_PROTECTIVE_PADS", "ITEM_METAL_ALLOY"),
-    Reward("data/scripts/item_ball_scripts.inc", "MagmaHideout_1F_EventScript_ItemRareCandy", "ITEM_BOOSTER_ENERGY", "ITEM_FOSSILIZED_DRAKE"),
-    Reward("data/maps/ShoalCave_LowTideLowerRoom/scripts.inc", "ShoalCave_LowTideLowerRoom_EventScript_BlackBelt", "ITEM_FOCUS_BAND", "ITEM_DEEP_SEA_SCALE"),
-    Reward("data/maps/MossdeepCity_Gym/scripts.inc", "MossdeepCity_Gym_EventScript_GiveCalmMind", "ITEM_DAWN_STONE", "ITEM_METAGROSSITE"),
-    Reward("data/maps/MossdeepCity_Gym/scripts.inc", "MossdeepCity_Gym_EventScript_GiveCalmMind2", "ITEM_DAWN_STONE", "ITEM_METAGROSSITE"),
-    Reward("data/maps/MossdeepCity/scripts.inc", "MossdeepCity_EventScript_AvalancheTM", "ITEM_SNOWBALL", "ITEM_ICE_STONE"),
-    Reward("data/maps/SootopolisCity_House1/scripts.inc", "SootopolisCity_House1_EventScript_BrickBreakBlackBelt", "ITEM_SCOPE_LENS", "ITEM_RAZOR_CLAW"),
-    Reward("data/maps/SootopolisCity_Gym_1F/scripts.inc", "SootopolisCity_Gym_1F_EventScript_GiveScald", "ITEM_PRISM_SCALE", "ITEM_MILOTICITE"),
-    Reward("data/maps/SootopolisCity_Gym_1F/scripts.inc", "SootopolisCity_Gym_1F_EventScript_GiveScald2", "ITEM_PRISM_SCALE", "ITEM_MILOTICITE"),
-    Reward("data/maps/SSTidalRooms/scripts.inc", "SSTidalRooms_EventScript_SnatchGiver", "ITEM_SAFETY_GOGGLES", "ITEM_REAPER_CLOTH"),
-    Reward("data/maps/PacifidlogTown_PokemonCenter_1F/scripts.inc", "PacifidlogTown_PokemonCenter_1F_EventScript_ExplosionTM", "ITEM_ROOM_SERVICE", "ITEM_UPGRADE"),
-    Reward("data/scripts/item_ball_scripts.inc", "AbandonedShip_Rooms_1F_EventScript_ItemLopunnite", "ITEM_LOPUNNITE", "ITEM_OVAL_STONE"),
-    Reward("data/scripts/item_ball_scripts.inc", "MossdeepCity_EventScript_ItemMiloticite", "ITEM_MILOTICITE", "ITEM_PRISM_SCALE"),
-    Reward("data/scripts/item_ball_scripts.inc", "VictoryRoad_1F_EventScript_ItemMetagrossite", "ITEM_METAGROSSITE", "ITEM_GOLD_BOTTLE_CAP"),
-    Reward("data/maps/LilycoveCity/scripts.inc", "LilycoveCity_EventScript_YesAltaria", "ITEM_ALTARIANITE", "ITEM_BOTTLE_CAP"),
+    Reward("data/scripts/secret_power_tm.inc", "Route111_EventScript_GiveSecretPower", "ITEM_RARE_CANDY"),
+    Reward("data/maps/RustboroCity_Gym/scripts.inc", "RustboroCity_Gym_EventScript_GiveRockTomb", "ITEM_AERODACTYLITE"),
+    Reward("data/maps/DewfordTown_Gym/scripts.inc", "DewfordTown_Gym_EventScript_GiveBulkUp", "ITEM_LUCARIONITE"),
+    Reward("data/maps/DewfordTown_Gym/scripts.inc", "DewfordTown_Gym_EventScript_GiveBulkUp2", "ITEM_LUCARIONITE"),
+    Reward("data/maps/GraniteCave_StevensRoom/scripts.inc", "GraniteCave_StevensRoom_EventScript_Steven", "ITEM_MEGA_RING"),
+    Reward("data/maps/MauvilleCity_Gym/scripts.inc", "MauvilleCity_Gym_EventScript_GiveShockWave", "ITEM_MANECTITE"),
+    Reward("data/maps/MauvilleCity_Gym/scripts.inc", "MauvilleCity_Gym_EventScript_GiveShockWave2", "ITEM_MANECTITE"),
+    Reward("data/maps/LavaridgeTown_Gym_1F/scripts.inc", "LavaridgeTown_Gym_1F_EventScript_GiveOverheat", "ITEM_CAMERUPTITE"),
+    Reward("data/maps/LavaridgeTown_Gym_1F/scripts.inc", "LavaridgeTown_Gym_1F_EventScript_GiveOverheat2", "ITEM_CAMERUPTITE"),
+    Reward("data/maps/PetalburgCity_Gym/scripts.inc", "PetalburgCity_Gym_EventScript_GiveFacade", "ITEM_LOPUNNITE"),
+    Reward("data/maps/FortreeCity_Gym/scripts.inc", "FortreeCity_Gym_EventScript_GiveAerialAce", "ITEM_ALTARIANITE"),
+    Reward("data/maps/FortreeCity_Gym/scripts.inc", "FortreeCity_Gym_EventScript_GiveAerialAce2", "ITEM_ALTARIANITE"),
+    Reward("data/maps/MossdeepCity_Gym/scripts.inc", "MossdeepCity_Gym_EventScript_GiveCalmMind", "ITEM_METAGROSSITE"),
+    Reward("data/maps/MossdeepCity_Gym/scripts.inc", "MossdeepCity_Gym_EventScript_GiveCalmMind2", "ITEM_METAGROSSITE"),
+    Reward("data/maps/SootopolisCity_Gym_1F/scripts.inc", "SootopolisCity_Gym_1F_EventScript_GiveWaterPulse", "ITEM_GYARADOSITE"),
+    Reward("data/maps/SootopolisCity_Gym_1F/scripts.inc", "SootopolisCity_Gym_1F_EventScript_GiveWaterPulse2", "ITEM_GYARADOSITE"),
+    Reward("data/maps/Route114_FossilManiacsHouse/scripts.inc", "Route114_FossilManiacsHouse_EventScript_FossilManiacsBrother", "ITEM_METAL_COAT"),
+    Reward("data/maps/SlateportCity_BattleTentLobby/scripts.inc", "SlateportCity_BattleTentLobby_EventScript_TormentGiver", "ITEM_PRISM_SCALE"),
+    Reward("data/maps/SlateportCity_OceanicMuseum_1F/scripts.inc", "SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGrunt", "ITEM_DEEP_SEA_TOOTH"),
+    Reward("data/maps/FortreeCity_House2/scripts.inc", "FortreeCity_House2_EventScript_HiddenPowerGiver", "ITEM_DUBIOUS_DISC"),
+    Reward("data/maps/VerdanturfTown_BattleTentLobby/scripts.inc", "VerdanturfTown_BattleTentLobby_EventScript_AttractGiver", "ITEM_SHINY_STONE"),
+    Reward("data/maps/Route104/scripts.inc", "Route104_EventScript_Boy2", "ITEM_LEAF_STONE"),
+    Reward("data/maps/FallarborTown_CozmosHouse/scripts.inc", "FallarborTown_CozmosHouse_EventScript_PlayerHasMeteorite", "ITEM_DAWN_STONE"),
+    Reward("data/maps/PacifidlogTown_House2/scripts.inc", "PacifidlogTown_House2_EventScript_GiveReturn", "ITEM_SUN_STONE"),
+    Reward("data/maps/PacifidlogTown_House2/scripts.inc", "PacifidlogTown_House2_EventScript_GiveFrustration", "ITEM_MOON_STONE"),
+    Reward("data/maps/DewfordTown_Hall/scripts.inc", "DewfordTown_Hall_EventScript_SludgeBombMan", "ITEM_DEEP_SEA_SCALE"),
+    Reward("data/maps/Route110_TrickHouseEnd/scripts.inc", "Route110_TrickHouseEnd_EventScript_CompletedPuzzle5", "ITEM_METAL_ALLOY"),
+    Reward("data/maps/Route110_TrickHouseEntrance/scripts.inc", "Route110_TrickHouseEntrance_EventScript_GivePuzzle5Reward", "ITEM_METAL_ALLOY"),
+    Reward("data/maps/SSTidalRooms/scripts.inc", "SSTidalRooms_EventScript_SnatchGiver", "ITEM_REAPER_CLOTH"),
+    Reward("data/maps/Route114/scripts.inc", "Route114_EventScript_RoarGentleman", "ITEM_DRAGON_SCALE"),
+    Reward("data/maps/SootopolisCity_House1/scripts.inc", "SootopolisCity_House1_EventScript_BrickBreakBlackBelt", "ITEM_RAZOR_CLAW"),
+    Reward("data/maps/Route123/scripts.inc", "Route123_EventScript_GigaDrainGirl", "ITEM_SWEET_APPLE"),
+    Reward("data/maps/LilycoveCity_House2/scripts.inc", "LilycoveCity_House2_EventScript_FatMan", "ITEM_MOON_STONE"),
+    Reward("data/maps/MauvilleCity/scripts.inc", "MauvilleCity_EventScript_CompletedNewMauville", "ITEM_ELECTIRIZER"),
+    Reward("data/maps/Route104/scripts.inc", "Route104_EventScript_WhiteHerbFlorist", "ITEM_LEAF_STONE"),
+    Reward("data/maps/FortreeCity_House4/scripts.inc", "FortreeCity_House4_EventScript_WingullReturned", "ITEM_SACHET"),
+    Reward("data/maps/LavaridgeTown_HerbShop/scripts.inc", "LavaridgeTown_HerbShop_EventScript_OldMan", "ITEM_FIRE_STONE"),
+    Reward("data/maps/PetalburgWoods/scripts.inc", "PetalburgWoods_EventScript_Girl", "ITEM_TART_APPLE"),
+    Reward("data/maps/RustboroCity_PokemonSchool/scripts.inc", "RustboroCity_PokemonSchool_EventScript_Teacher", "ITEM_SUN_STONE"),
+    Reward("data/maps/Route110_TrickHouseEnd/scripts.inc", "Route110_TrickHouseEnd_EventScript_CompletedPuzzle3", "ITEM_WHIPPED_DREAM"),
+    Reward("data/maps/Route110_TrickHouseEntrance/scripts.inc", "Route110_TrickHouseEntrance_EventScript_GivePuzzle3Reward", "ITEM_WHIPPED_DREAM"),
+    Reward("data/maps/Route110_TrickHouseEnd/scripts.inc", "Route110_TrickHouseEnd_EventScript_CompletedPuzzle6", "ITEM_PROTECTOR"),
+    Reward("data/maps/Route110_TrickHouseEntrance/scripts.inc", "Route110_TrickHouseEntrance_EventScript_GivePuzzle6Reward", "ITEM_PROTECTOR"),
+    Reward("data/maps/ShoalCave_LowTideEntranceRoom/scripts.inc", "ShoalCave_LowTideEntranceRoom_EventScript_ShellBellExpert", "ITEM_LINKING_CORD"),
+    Reward("data/maps/Route109/scripts.inc", "Route109_EventScript_SoftSandGirl", "ITEM_WATER_STONE"),
+    Reward("data/maps/ShoalCave_LowTideLowerRoom/scripts.inc", "ShoalCave_LowTideLowerRoom_EventScript_BlackBelt", "ITEM_DEEP_SEA_SCALE"),
+    Reward("data/maps/DewfordTown_House2/scripts.inc", "DewfordTown_House2_EventScript_Man", "ITEM_REAPER_CLOTH"),
 )
 
 
-HIDDEN_REWARDS = {
+PICKUP_STONES = {
+    "ITEM_TM_EARTHQUAKE": "ITEM_GARCHOMPITE",
+    "ITEM_TM_SANDSTORM": "ITEM_TYRANITARITE",
+    "ITEM_TM_SOLAR_BEAM": "ITEM_VENUSAURITE",
+    "ITEM_TM_DRAGON_CLAW": "ITEM_SALAMENCITE",
+    "ITEM_TM_SUNNY_DAY": "ITEM_CHARIZARDITE_Y",
+    "ITEM_TM_ICE_BEAM": "ITEM_GLALITITE",
+    "ITEM_TM_HAIL": "ITEM_ABOMASITE",
+    "ITEM_TM_SHADOW_BALL": "ITEM_BANETTITE",
+    "ITEM_TM_TOXIC": "ITEM_HOUNDOOMINITE",
+    "ITEM_TM_FOCUS_PUNCH": "ITEM_MEDICHAMITE",
+    "ITEM_TM_SKILL_SWAP": "ITEM_GARDEVOIRITE",
+    "ITEM_TM_PSYCHIC": "ITEM_ALAKAZITE",
+    "ITEM_TM_IRON_TAIL": "ITEM_AGGRONITE",
+    "ITEM_TM_RAIN_DANCE": "ITEM_SWAMPERTITE",
+}
+
+FREE_PICKUPS = {
+    ("data/maps/SSTidalLowerDeck/map.json", "ITEM_LEFTOVERS"): "ITEM_RARE_CANDY",
     ("data/maps/Route116/map.json", "ITEM_BLACK_GLASSES"): "ITEM_DUSK_STONE",
-    ("data/maps/Route117/map.json", "ITEM_BRIGHT_POWDER"): "ITEM_MOON_STONE",
-    ("data/maps/Route123/map.json", "ITEM_BLACK_SLUDGE"): "ITEM_DUSK_STONE",
+    ("data/maps/ShoalCave_LowTideIceRoom/map.json", "ITEM_NEVER_MELT_ICE"): "ITEM_ICE_STONE",
 }
 
 
-DIALOGUE_REWRITES = {
-    ("data/maps/Route104/scripts.inc", "Route104_Text_DontNeedThisTakeIt"): ("I found this Leaf Stone among the\\n", "flowers. You should have it!$"),
-    ("data/maps/RustboroCity_Gym/scripts.inc", "RustboroCity_Gym_Text_ExplainRockTomb"): ("Protector evolves Rhydon when it\\n", "levels up while holding it.$"),
-    ("data/maps/RustboroCity_PokemonSchool/scripts.inc", "RustboroCity_PokemonSchool_Text_StudentsWhoDontStudyGetQuickClaw"): ("A good student learns when to grow.\\p", "Take this Sun Stone and experiment!$"),
-    ("data/maps/RustboroCity_PokemonSchool/scripts.inc", "RustboroCity_PokemonSchool_Text_ExplainQuickClaw"): ("A Sun Stone evolves certain Pokémon.\\n", "Use it from your Bag when ready.$"),
-    ("data/maps/RustboroCity_DevonCorp_3F/scripts.inc", "RustboroCity_DevonCorp_3F_Text_ExplainScopeLens"): ("The Up-Grade evolves Porygon when it\\n", "levels up while holding it.$"),
-    ("data/maps/RustboroCity_Mart/scripts.inc", "RustboroCity_Mart_Text_ExcuseMeTrainer"): ("Excuse me, Trainer!\\p", "I'm offering one free Moon Stone today.\\n", "Put it to good use!$"),
-    ("data/maps/DewfordTown_Hall/scripts.inc", "DewfordTown_Hall_Text_LoveSludgeBombButTrendInToo"): ("The Deep Sea Scale evolves Clamperl\\n", "into Gorebyss. That's the new trend!$"),
-    ("data/maps/DewfordTown_Gym/scripts.inc", "DewfordTown_Gym_Text_ExplainBulkUp"): ("A Razor Claw evolves Sneasel.\\p", "Level it at night while holding it.$"),
-    ("data/maps/DewfordTown_House2/scripts.inc", "DewfordTown_House2_Text_WantYouToHaveSilkScarf"): ("This Reaper Cloth feels strange…\\p", "I think you should take it.$"),
-    ("data/maps/DewfordTown_House2/scripts.inc", "DewfordTown_House2_Text_ExplainSilkScarf"): ("A Reaper Cloth evolves Dusclops when\\n", "it levels up while holding it.$"),
-    ("data/maps/SlateportCity_PokemonFanClub/scripts.inc", "SlateportCity_PokemonFanClub_Text_GiveTM58"): ("Your Pokémon look remarkably sturdy!\\p", "Take this Deep Sea Tooth!$"),
-    ("data/maps/SlateportCity_BattleTentLobby/scripts.inc", "SlateportCity_BattleTentLobby_Text_ExplainTorment"): ("A Prism Scale evolves Feebas when it\\n", "levels up while holding it.$"),
-    ("data/maps/Route110/scripts.inc", "Route110_Text_GiveTM93"): ("Outstanding! Take this valuable\\n", "Bottle Cap as your prize.$"),
-    ("data/maps/Route110/scripts.inc", "Route110_Text_GiveTM83"): ("Well ridden! Take this Rare Candy to\\n", "prepare another teammate.$"),
-    ("data/maps/MauvilleCity/scripts.inc", "MauvilleCity_Text_GiveTM74"): ("Here, let them try this Dubious Disc.\\n", "It evolves Porygon2 while held.$"),
-    ("data/maps/MauvilleCity/scripts.inc", "MauvilleCity_Text_HaveTM74"): ("A Dubious Disc evolves Porygon2 when\\n", "it levels up while holding it.$"),
-    ("data/maps/MauvilleCity/scripts.inc", "MauvilleCity_Text_WattsonThanksTakeTM"): ("This is my thanks--a rare Coin!\\p", "It unlocks an unusual evolution.$"),
-    ("data/maps/MauvilleCity_Gym/scripts.inc", "MauvilleCity_Gym_Text_ExplainVoltSwitch"): ("The Electirizer evolves Electabuzz.\\p", "Level it while holding this item.$"),
-    ("data/maps/FallarborTown_CozmosHouse/scripts.inc", "FallarborTown_CozmosHouse_Text_IsThatMeteoriteMayIHaveIt"): ("Is that the Meteorite? May I have it?\\p", "I'll trade you this Dawn Stone.$"),
-    ("data/maps/FallarborTown_CozmosHouse/scripts.inc", "FallarborTown_CozmosHouse_Text_PleaseUseThisTM"): ("A Dawn Stone evolves some Pokémon.\\n", "Please put it to good use.$"),
-    ("data/maps/FallarborTown_CozmosHouse/scripts.inc", "FallarborTown_CozmosHouse_Text_MayIHaveMeteorite"): ("May I have that Meteorite?\\p", "I'll trade you this Dawn Stone.$"),
-    ("data/maps/FallarborTown_Mart/scripts.inc", "FallarborTown_Mart_Text_FreeSample"): ("How about this Shiny Stone as a free\\n", "sample? It evolves certain Pokémon.$"),
-    ("data/maps/FallarborTown_Mart/scripts.inc", "FallarborTown_Mart_Text_HaveTM60"): ("A Shiny Stone evolves some Pokémon.\\n", "Use it from your Bag when ready.$"),
-    ("data/maps/Route114_FossilManiacsHouse/scripts.inc", "Route114_FossilManiacsHouse_Text_HaveThisToDigLikeMyBrother"): ("My brother dug up this Sail Fossil.\\p", "Take it to Devon to restore its Pokémon!$"),
-    ("data/maps/Route114/scripts.inc", "Route114_Text_AllMyMonDoesIsRoarTakeThis"): ("All my Pokémon does is Roar…\\p", "Please take this Dragon Scale away.$"),
-    ("data/maps/LavaridgeTown_HerbShop/scripts.inc", "LavaridgeTown_HerbShop_Text_YouveComeToLookAtHerbalMedicine"): ("You've come to look at herbal medicine?\\p", "Then take this Fire Stone, too.$"),
-    ("data/maps/LavaridgeTown_HerbShop/scripts.inc", "LavaridgeTown_HerbShop_Text_ExplainCharcoal"): ("A Fire Stone evolves certain Pokémon.\\n", "Use it from your Bag when ready.$"),
-    ("data/maps/VerdanturfTown_Mart/scripts.inc", "VerdanturfTown_Mart_Text_SlowPokemon"): ("Do slow Pokémon tire of waiting?\\p", "Try this Gimmighoul Coin instead!$"),
-    ("data/maps/VerdanturfTown_Mart/scripts.inc", "VerdanturfTown_Mart_Text_HaveTM66"): ("A Gimmighoul Coin unlocks one very\\n", "unusual evolution.$"),
-    ("data/maps/PetalburgCity_Gym/scripts.inc", "PetalburgCity_Gym_Text_ExplainFacade"): ("Dad: Lopunnite enables Mega power.\\n", "Let Lopunny hold it in battle.$"),
+DIALOGUE = {
+    ("data/maps/RustboroCity_Gym/scripts.inc", "RustboroCity_Gym_Text_ExplainRockTomb"): ("Aerodactylite lets Aerodactyl Mega\n", "Evolve once you possess a Mega Ring.$"),
+    ("data/maps/DewfordTown_Gym/scripts.inc", "DewfordTown_Gym_Text_ExplainBulkUp"): ("Lucarionite lets Lucario Mega Evolve.\n", "You'll soon receive the Ring it needs.$"),
+    ("data/maps/GraniteCave_StevensRoom/scripts.inc", "GraniteCave_StevensRoom_Text_ThankYouTakeThis"): ("Thank you. Take this Mega Ring.\\p", "With a matching stone, one Pokémon can\n", "Mega Evolve in each battle.$"),
+    ("data/maps/MauvilleCity_Gym/scripts.inc", "MauvilleCity_Gym_Text_ExplainShockWave"): ("Manectite lets Manectric Mega Evolve.\n", "Let it hold the stone in battle.$"),
+    ("data/maps/LavaridgeTown_Gym_1F/scripts.inc", "LavaridgeTown_Gym_1F_Text_ExplainOverheat"): ("Cameruptite lets Camerupt Mega Evolve.\n", "Let it hold the stone in battle.$"),
+    ("data/maps/PetalburgCity_Gym/scripts.inc", "PetalburgCity_Gym_Text_ExplainFacade"): ("Dad: Lopunnite lets Lopunny Mega Evolve.\n", "Let it hold the stone in battle.$"),
+    ("data/maps/FortreeCity_Gym/scripts.inc", "FortreeCity_Gym_Text_ExplainAerialAce"): ("Altarianite lets Altaria Mega Evolve.\n", "Let it hold the stone in battle.$"),
+    ("data/maps/MossdeepCity_Gym/scripts.inc", "MossdeepCity_Gym_Text_ExplainCalmMind"): ("Tate: Metagrossite lets Metagross Mega\n", "Evolve. Let it hold the stone.$"),
+    ("data/maps/SootopolisCity_Gym_1F/scripts.inc", "SootopolisCity_Gym_1F_Text_ExplainWaterPulse"): ("Gyaradosite lets Gyarados Mega Evolve.\n", "Let it hold the stone in battle.$"),
+    ("data/scripts/secret_power_tm.inc", "Route111_Text_ExplainSecretPower"): ("Your Center tutor can teach Secret Power.\\p", "Take this Rare Candy for exploring,\n", "and use Secret Power at marked trees.$"),
+    ("data/maps/Route114_FossilManiacsHouse/scripts.inc", "Route114_FossilManiacsHouse_Text_HaveThisToDigLikeMyBrother"): ("My brother dug up this Metal Coat.\\p", "It evolves Onix or Scyther when used.$"),
+    ("data/maps/SlateportCity_BattleTentLobby/scripts.inc", "SlateportCity_BattleTentLobby_Text_ExplainTorment"): ("A Prism Scale evolves Feebas.\n", "Use it from the Bag when ready.$"),
+    ("data/maps/FortreeCity_House2/scripts.inc", "FortreeCity_House2_Text_YourHiddenPowerHasAwoken"): ("Your insight has awoken!\\p", "Take this Dubious Disc for Porygon2.$"),
+    ("data/maps/FallarborTown_CozmosHouse/scripts.inc", "FallarborTown_CozmosHouse_Text_PleaseUseThisTM"): ("This Dawn Stone is my thanks.\n", "Please put it to good use.$"),
+    ("data/maps/DewfordTown_Hall/scripts.inc", "DewfordTown_Hall_Text_GiveYouSludgeBomb"): ("The Deep Sea Scale is trending!\\p", "It evolves Clamperl into Gorebyss.$"),
+    ("data/maps/Route114/scripts.inc", "Route114_Text_ExplainRoar"): ("A Dragon Scale evolves Seadra.\n", "Use it from the Bag when ready.$"),
+    ("data/maps/SootopolisCity_House1/scripts.inc", "SootopolisCity_House1_Text_ExplainBrickBreak"): ("A Razor Claw evolves Sneasel.\n", "Use it at night when ready.$"),
+    ("data/maps/Route104/scripts.inc", "Route104_Text_DontNeedThisTakeIt"): ("I found this Leaf Stone among the\n", "flowers. You should have it!$"),
     ("data/maps/FortreeCity_House4/scripts.inc", "FortreeCity_House4_Text_WelcomeWingullTakeMentalHerb"): ("Welcome back, Wingull! And thank you.\\p", "Please take this Sachet as my thanks.$"),
-    ("data/maps/FortreeCity_House2/scripts.inc", "FortreeCity_House2_Text_WantSleepTalk"): ("I have a spare Ice Stone.\\n", "Would you like it?$"),
-    ("data/maps/FortreeCity_House2/scripts.inc", "FortreeCity_Text_GiveTM49"): ("Ah, an appreciative child!\\n", "Please take this Ice Stone.$"),
-    ("data/maps/FortreeCity_House2/scripts.inc", "FortreeCity_House2_Text_YourHiddenPowerHasAwoken"): ("Oh! Splendid! Your insight has awoken!\\p", "Take this Dubious Disc.$"),
-    ("data/maps/LilycoveCity_DepartmentStoreRooftop/scripts.inc", "LilycoveCity_DepartmentStoreRooftop_Text_GiveSubstitute"): ("I know! Take this Metal Alloy.\\n", "It evolves Duraludon while held.$"),
+    ("data/maps/LavaridgeTown_HerbShop/scripts.inc", "LavaridgeTown_HerbShop_Text_ExplainCharcoal"): ("A Fire Stone evolves certain Pokémon.\n", "Use it from the Bag when ready.$"),
+    ("data/maps/RustboroCity_PokemonSchool/scripts.inc", "RustboroCity_PokemonSchool_Text_ExplainQuickClaw"): ("A Sun Stone evolves certain Pokémon.\n", "Use it from the Bag when ready.$"),
     ("data/maps/ShoalCave_LowTideLowerRoom/scripts.inc", "ShoalCave_LowTideLowerRoom_Text_CanOvercomeColdWithFocus"): ("Your focus overcame the cold!\\p", "Take this Deep Sea Scale.$"),
-    ("data/maps/MossdeepCity_Gym/scripts.inc", "MossdeepCity_Gym_Text_ExplainCalmMind"): ("Tate: Metagrossite lets Metagross Mega\\n", "Evolve. Let it hold the stone.$"),
-    ("data/maps/MossdeepCity/scripts.inc", "MossdeepCity_Text_AvalancheNonsense"): ("An Ice Stone? Now that's a useful\\n", "reward. Take it!$"),
-    ("data/maps/SootopolisCity_House1/scripts.inc", "SootopolisCity_House1_Text_DevelopedThisTM"): ("I found this Razor Claw training.\\n", "You should have it.$"),
-    ("data/maps/SootopolisCity_House1/scripts.inc", "SootopolisCity_House1_Text_ExplainBrickBreak"): ("A Razor Claw evolves Sneasel.\\p", "Level it at night while holding it.$"),
-    ("data/maps/SSTidalRooms/scripts.inc", "SSTidalRooms_Text_NotSuspiciousTakeThis"): ("Uh… Hi! I'm not acting suspicious!\\p", "You can have this Reaper Cloth!$"),
-    ("data/maps/PacifidlogTown_PokemonCenter_1F/scripts.inc", "PacifidlogTown_PokemonCenter_1F_Text_GiveExplosion"): ("I'm going to cause an Explosion of\\n", "popularity! Take this Up-Grade!$"),
-    ("data/maps/FortreeCity_Gym/scripts.inc", "FortreeCity_Gym_Text_ExplainRoost"): ("Altarianite lets Altaria Mega Evolve.\\n", "Let it hold the stone in battle.$"),
-    ("data/maps/SootopolisCity_Gym_1F/scripts.inc", "SootopolisCity_Gym_1F_Text_ExplainScald"): ("Miloticite lets Milotic Mega Evolve.\\n", "Let it hold the stone with elegance.$"),
-    ("data/maps/LilycoveCity/scripts.inc", "LilycoveCity_Text_ExplainAltarianite"): ("Winona already entrusted you with her\\n", "Altarianite. Take this Bottle Cap for\\l", "showing me your Altaria instead!$"),
-    ("data/maps/LavaridgeTown_Gym_1F/scripts.inc", "LavaridgeTown_Gym_1F_Text_ExplainOverheat"): ("The Magmarizer evolves Magmar.\\p", "Level it while holding this item.$"),
+    ("data/maps/DewfordTown_House2/scripts.inc", "DewfordTown_House2_Text_ExplainSilkScarf"): ("A Reaper Cloth evolves Dusclops.\n", "Use it from the Bag when ready.$"),
 }
 
 
-def replace_in_label(text: str, label: str, old: str, new: str) -> str:
-    pattern = rf"(^\s*{re.escape(label)}(?:::|:).*?)(?=^\s*[A-Za-z0-9_]+(?:::|:)|\Z)"
-    match = re.search(pattern, text, re.M | re.S)
+def label_block(text: str, label: str) -> re.Match[str]:
+    match = re.search(rf"(^\s*{re.escape(label)}(?:::|:).*?)(?=^\s*[A-Za-z0-9_]+(?:::|:)|\Z)", text, re.M | re.S)
     if match is None:
-        raise ValueError(f"missing reward label {label}")
+        raise ValueError(f"missing label {label}")
+    return match
+
+
+def rewrite_reward(text: str, reward: Reward) -> str:
+    match = label_block(text, reward.label)
     block = match.group(1)
-    if new in block and old not in block:
-        return text
-    if block.count(old) < 1:
-        raise ValueError(f"{label}: expected {old}")
-    return text[:match.start(1)] + block.replace(old, new) + text[match.end(1):]
+    changed, count = re.subn(r"giveitem\s+ITEM_[A-Z0-9_]+", f"giveitem {reward.item}", block, count=1)
+    if count == 0:
+        if f"giveitem {reward.item}" in block:
+            return text
+        raise ValueError(f"{reward.path}:{reward.label} has no TM reward")
+    return text[:match.start(1)] + changed + text[match.end(1):]
 
 
-def rewrite() -> None:
+def rewrite_dialogue(text: str, label: str, lines: tuple[str, ...]) -> str:
+    match = label_block(text, label)
+    encoded = (line.replace("\n", "\\n") for line in lines)
+    block = label + ":\n" + "".join(f'\t.string "{line}"\n' for line in encoded)
+    return text[:match.start(1)] + block + text[match.end(1):]
+
+
+def write() -> None:
     by_path: dict[str, list[Reward]] = {}
     for reward in REWARDS:
         by_path.setdefault(reward.path, []).append(reward)
@@ -167,48 +155,64 @@ def rewrite() -> None:
         target = ROOT / path
         text = target.read_text()
         for reward in rewards:
-            text = replace_in_label(text, reward.label, reward.old_item, reward.new_item)
+            text = rewrite_reward(text, reward)
         target.write_text(text)
 
-    for (path, old), new in HIDDEN_REWARDS.items():
+    for target in (ROOT / "data" / "maps").glob("*/map.json"):
+        payload = json.loads(target.read_text())
+        changed = False
+        for section in ("object_events", "bg_events"):
+            for event in payload.get(section, []):
+                for field in ("trainer_sight_or_berry_tree_id", "item"):
+                    old = event.get(field)
+                    if isinstance(old, str) and old.startswith("ITEM_TM_"):
+                        event[field] = PICKUP_STONES.get(old, "ITEM_RARE_CANDY")
+                        changed = True
+        if changed:
+            target.write_text(json.dumps(payload, indent=2) + "\n")
+
+    for (path, old_item), new_item in FREE_PICKUPS.items():
         target = ROOT / path
         payload = json.loads(target.read_text())
-        matches = [event for event in payload["bg_events"] if event.get("item") in {old, new}]
+        matches = []
+        for section in ("object_events", "bg_events"):
+            for event in payload.get(section, []):
+                for field in ("trainer_sight_or_berry_tree_id", "item"):
+                    if event.get(field) in (old_item, new_item):
+                        matches.append((event, field))
         if len(matches) != 1:
-            raise ValueError(f"{path}: expected one hidden {old}/{new}, found {len(matches)}")
-        matches[0]["item"] = new
+            raise ValueError(f"{path}: expected one {old_item}/{new_item} pickup, found {len(matches)}")
+        matches[0][0][matches[0][1]] = new_item
         target.write_text(json.dumps(payload, indent=2) + "\n")
 
-    by_path = {}
-    for (path, label), lines in DIALOGUE_REWRITES.items():
-        by_path.setdefault(path, []).append((label, lines))
-    for path, entries in by_path.items():
+    by_path_dialogue: dict[str, list[tuple[str, tuple[str, ...]]]] = {}
+    for (path, label), lines in DIALOGUE.items():
+        by_path_dialogue.setdefault(path, []).append((label, lines))
+    for path, entries in by_path_dialogue.items():
         target = ROOT / path
         text = target.read_text()
         for label, lines in entries:
-            pattern = rf"(^\s*{re.escape(label)}(?:::|:).*?)(?=^\s*[A-Za-z0-9_]+(?:::|:)|\Z)"
-            match = re.search(pattern, text, re.M | re.S)
-            if match is None:
-                raise ValueError(f"missing dialogue label {label}")
-            block = label + ":\n" + "".join(f'\t.string "{line}"\n' for line in lines)
-            text = text[:match.start(1)] + block + text[match.end(1):]
+            text = rewrite_dialogue(text, label, lines)
         target.write_text(text)
 
 
 def check() -> None:
     for reward in REWARDS:
-        text = (ROOT / reward.path).read_text()
-        match = re.search(
-            rf"(^\s*{re.escape(reward.label)}(?:::|:).*?)(?=^\s*[A-Za-z0-9_]+(?:::|:)|\Z)",
-            text,
-            re.M | re.S,
-        )
-        if match is None or reward.new_item not in match.group(1) or reward.old_item in match.group(1):
-            raise ValueError(f"reward rewrite stale: {reward.path} / {reward.label}")
-    for (path, label), lines in DIALOGUE_REWRITES.items():
-        block = (ROOT / path).read_text()
-        if label not in block or not all(line in block for line in lines):
-            raise ValueError(f"dialogue rewrite stale: {path} / {label}")
+        block = label_block((ROOT / reward.path).read_text(), reward.label).group(1)
+        if f"giveitem {reward.item}" not in block or re.search(r"giveitem\s+ITEM_TM_", block):
+            raise ValueError(f"stale reward {reward.path}:{reward.label}")
+    for path in (ROOT / "data" / "maps").glob("*/map.json"):
+        payload = json.loads(path.read_text())
+        for section in ("object_events", "bg_events"):
+            for event in payload.get(section, []):
+                values = (event.get("trainer_sight_or_berry_tree_id"), event.get("item"))
+                if any(isinstance(value, str) and value.startswith("ITEM_TM_") for value in values):
+                    raise ValueError(f"TM pickup remains in {path}")
+    for (path, old_item), new_item in FREE_PICKUPS.items():
+        text = (ROOT / path).read_text()
+        if old_item in text or new_item not in text:
+            raise ValueError(f"stale free-item pickup {path}:{old_item}")
+    print(f"PASS: {len(REWARDS)} scripted rewards and all map TM pickups are finite progression rewards")
 
 
 def main() -> None:
@@ -216,9 +220,8 @@ def main() -> None:
     parser.add_argument("--write", action="store_true")
     args = parser.parse_args()
     if args.write:
-        rewrite()
+        write()
     check()
-    print(f"PASS: {len(REWARDS)} scripted and {len(HIDDEN_REWARDS)} hidden rewards are finite progression rewards")
 
 
 if __name__ == "__main__":

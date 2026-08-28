@@ -3,6 +3,7 @@
 
 #include "sprite.h"
 #include "constants/field_weather.h"
+#include "constants/weather.h"
 
 #define TAG_WEATHER_START 0x1200
 enum {
@@ -19,6 +20,8 @@ enum {
     PALTAG_WEATHER_2
 };
 
+#define NUM_WEATHER_COLOR_MAPS 19
+
 struct Weather
 {
     union
@@ -31,7 +34,6 @@ struct Weather
         } s1;
         struct
         {
-            u8 filler0[0xA0];
             struct Sprite *fogHSprites[NUM_FOG_HORIZONTAL_SPRITES];
             struct Sprite *ashSprites[NUM_ASH_SPRITES];
             struct Sprite *fogDSprites[NUM_FOG_DIAGONAL_SPRITES];
@@ -39,13 +41,12 @@ struct Weather
             struct Sprite *sandstormSprites2[NUM_SWIRL_SANDSTORM_SPRITES];
         } s2;
     } sprites;
-    u8 gammaShifts[19][32];
-    u8 altGammaShifts[19][32];
-    s8 gammaIndex;
-    s8 gammaTargetIndex;
-    u8 gammaStepDelay;
-    u8 gammaStepFrameCounter;
-    u16 fadeDestColor;
+    s8 colorMapIndex;
+    s8 targetColorMapIndex;
+    u8 colorMapStepDelay;
+    u8 colorMapStepCounter;
+    u16 fadeDestColor:15;
+    u16 noShadows:1; // Certain weathers require blend coeffs that do not work nice with shadows
     u8 palProcessingState;
     u8 fadeScreenCounter;
     bool8 readyForInit;
@@ -59,7 +60,7 @@ struct Weather
     u8 weatherGfxLoaded;
     bool8 weatherChangeComplete;
     u8 weatherPicSpritePalIndex;
-    u8 altGammaSpritePalIndex;
+    u8 contrastColorMapSpritePalIndex;
     // Rain
     u16 rainSpriteVisibleCounter;
     u8 curRainSpriteIndex;
@@ -75,12 +76,12 @@ struct Weather
     u8 snowflakeSpriteCount;
     u8 targetSnowflakeSpriteCount;
     // Thunderstorm
-    u16 thunderDelay;
-    u16 thunderCounter;
+    u16 thunderTimer;        // general-purpose timer for state transitions
+    u16 thunderSETimer;      // timer for thunder sound effect
     bool8 thunderAllowEnd;
-    bool8 thunderSkipShort;
-    u8 thunderShortRetries;
-    bool8 thunderTriggered;
+    bool8 thunderLongBolt;   // true if this cycle will end in a long lightning bolt
+    u8 thunderShortBolts;    // the number of short bolts this cycle
+    bool8 thunderEnqueued;
     // Horizontal fog
     u16 fogHScrollPosX;
     u16 fogHScrollCounter;
@@ -129,8 +130,7 @@ struct Weather
     s16 droughtLastBrightnessStage;
     s16 droughtTimer;
     s16 droughtState;
-    u8 droughtUnused[9];
-    s8 loadDroughtPalsIndex;
+    u8 loadDroughtPalsIndex;
     u8 loadDroughtPalsOffset;
 };
 
@@ -146,12 +146,14 @@ void StartWeather(void);
 void SetNextWeather(u8 weather);
 void SetCurrentAndNextWeather(u8 weather);
 void SetCurrentAndNextWeatherNoDelay(u8 weather);
-void ApplyWeatherGammaShiftIfIdle(s8 gammaIndex);
-void sub_80ABC7C(u8 gammaIndex, u8 gammaTargetIndex, u8 gammaStepDelay);
+void ApplyWeatherColorMapIfIdle(s8 colorMapIndex);
+void ApplyWeatherColorMapIfIdle_Gradual(u8 colorMapIndex, u8 targetColorMapIndex, u8 colorMapStepDelay);
 void FadeScreen(u8 mode, s8 delay);
+void FadeSelectedPals(u8 mode, s8 delay, u32 selectedPalettes);
+void FadeScreenHardware(u32 mode, s32 delay);
 bool8 IsWeatherNotFadingIn(void);
-void UpdateSpritePaletteWithWeather(u8 spritePaletteIndex);
-void ApplyWeatherGammaShiftToPal(u8 paletteIndex);
+void UpdateSpritePaletteWithWeather(u8 spritePaletteIndex, bool8 allowFog);
+void ApplyWeatherColorMapToPals(u8 startPalIndex, u8 numPalettes);
 void LoadCustomWeatherSpritePalette(const u16 *palette);
 void ResetDroughtWeatherPaletteLoading(void);
 bool8 LoadDroughtWeatherPalettes(void);
@@ -166,8 +168,11 @@ void PlayRainStoppingSoundEffect(void);
 u8 IsWeatherChangeComplete(void);
 void SetWeatherScreenFadeOut(void);
 void SetWeatherPalStateIdle(void);
+const u8 *SetPaletteColorMapType(u8 paletteIndex, enum ColorMapType colorMapType);
 void PreservePaletteInWeather(u8 preservedPalIndex);
+void ResetPaletteColorMapType(u8 paletteIndex);
 void ResetPreservedPalettesInWeather(void);
+bool32 IsWeatherAlphaBlend(void);
 
 // field_weather_effect.c
 void Clouds_InitVars(void);
@@ -191,6 +196,7 @@ void Thunderstorm_Main(void);
 void Thunderstorm_InitAll(void);
 bool8 Thunderstorm_Finish(void);
 void FogHorizontal_InitVars(void);
+u8 UpdateShadowColor(u16 color);
 void FogHorizontal_Main(void);
 void FogHorizontal_InitAll(void);
 bool8 FogHorizontal_Finish(void);
@@ -221,10 +227,10 @@ void Bubbles_Main(void);
 void Bubbles_InitAll(void);
 bool8 Bubbles_Finish(void);
 
-u8 GetSav1Weather(void);
-void SetSav1Weather(u32 weather);
-void SetSav1WeatherFromCurrMapHeader(void);
-void SetWeather(u32 weather);
+u8 GetSavedWeather(void);
+void SetSavedWeather(enum OverworldWeather weather);
+void SetSavedWeatherFromCurrMapHeader(void);
+void SetWeather(enum OverworldWeather weather);
 void DoCurrentWeather(void);
 void UpdateWeatherPerDay(u16 increment);
 void ResumePausedWeather(void);

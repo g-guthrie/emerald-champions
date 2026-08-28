@@ -3,6 +3,7 @@
   "name": "AbandonedShip_Rooms_B1F",
   "layout": "LAYOUT_ABANDONED_SHIP_ROOMS_B1F",
   "music": "MUS_ABANDONED_SHIP",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_ABANDONED_SHIP",
   "requires_flash": false,
   "weather": "WEATHER_SHADE",
@@ -36,9 +37,9 @@
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "AbandonedShip_Rooms_B1F_EventScript_ItemBigNugget",
-      "flag": "FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_BIG_NUGGET"
+      "trainer_sight_or_berry_tree_id": "ITEM_ESCAPE_ROPE",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_ESCAPE_ROPE"
     }
   ],
   "warp_events": [
@@ -47,21 +48,21 @@
       "y": 1,
       "elevation": 3,
       "dest_map": "MAP_ABANDONED_SHIP_CORRIDORS_B1F",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 13,
       "y": 1,
       "elevation": 3,
       "dest_map": "MAP_ABANDONED_SHIP_CORRIDORS_B1F",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 22,
       "y": 1,
       "elevation": 3,
       "dest_map": "MAP_ABANDONED_SHIP_CORRIDORS_B1F",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     }
   ],
   "coord_events": [],

@@ -25,6 +25,9 @@
 #include "menu.h"
 #include "text_window.h"
 #include "overworld.h"
+#include "walda_phrase.h"
+#include "main.h"
+#include "decompress.h"
 #include "constants/event_objects.h"
 #include "constants/rgb.h"
 
@@ -57,17 +60,19 @@ enum {
     GFXTAG_CURSOR_FILLED,
     GFXTAG_INPUT_ARROW,
     GFXTAG_UNDERSCORE,
+    GFXTAG_RIVAL = 255,
 };
 
 enum {
-    PALTAG_PC_ICON,
+    PALTAG_MENU, // Also the PC icon
     PALTAG_PAGE_SWAP_UPPER,
     PALTAG_PAGE_SWAP_LOWER,
-    PALTAG_PAGE_SWAP_OTHERS,
+    PALTAG_PAGE_SWAP_OTHERS, // Also the input arrow/underscore
     PALTAG_PAGE_SWAP,
     PALTAG_CURSOR,
     PALTAG_BACK_BUTTON,
     PALTAG_OK_BUTTON,
+    PALTAG_RIVAL = 255,
 };
 
 enum {
@@ -149,7 +154,7 @@ struct NamingScreenTemplate
     const u8 *title;
 };
 
-struct NamingScreenData 
+struct NamingScreenData
 {
     u8 tilemapBuffer1[0x800];
     u8 tilemapBuffer2[0x800];
@@ -172,28 +177,19 @@ struct NamingScreenData
     const struct NamingScreenTemplate *template;
     u8 templateNum;
     u8 *destBuffer;
-    u16 monSpecies;
+    enum Species monSpecies;
     u16 monGender;
     u32 monPersonality;
     MainCallback returnCallback;
 };
 
 EWRAM_DATA static struct NamingScreenData *sNamingScreen = NULL;
-extern u16 gKeyRepeatStartDelay;
 
-// extern text
-extern const u8 gText_MoveOkBack[];
-extern const u8 gText_YourName[];
-extern const u8 gText_BoxName[];
-extern const u8 gText_PkmnsNickname[];
-extern const u8 gText_TellHimTheWords[];
-
-
-// start of .rodata
-static const u8 sPCIconOff_Gfx[] = INCBIN_U8("graphics/naming_screen/pc_icon/off.4bpp");
-static const u8 sPCIconOn_Gfx[] = INCBIN_U8("graphics/naming_screen/pc_icon/on.4bpp");
-static const u16 sKeyboard_Pal[] = INCBIN_U16("graphics/naming_screen/keyboard.gbapal");
-static const u16 sUnused_Pal[] = INCBIN_U16("graphics/naming_screen/unused.gbapal");
+static const u8 sPCIconOff_Gfx[] = INCGFX_U8("graphics/naming_screen/pc_icon_off.png", ".4bpp");
+static const u8 sPCIconOn_Gfx[] = INCGFX_U8("graphics/naming_screen/pc_icon_on.png", ".4bpp");
+static const u16 sKeyboard_Pal[] = INCGFX_U16("graphics/naming_screen/keyboard.pal", ".gbapal");
+static const u16 sRival_Gfx[] = INCGFX_U16("graphics/naming_screen/rival.png", ".4bpp");
+static const u16 sRival_Pal[] = INCGFX_U16("graphics/naming_screen/rival.pal", ".gbapal");
 
 static const u8 *const sTransferredToPCMessages[] =
 {
@@ -203,6 +199,8 @@ static const u8 *const sTransferredToPCMessages[] =
     gText_PkmnTransferredLanettesPCBoxFull
 };
 
+
+static const u8 sText_RivalsName[] = _("RIVAL's NAME?");
 static const u8 sText_AlphabetUpperLower[] = _("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!");
 
 static const struct BgTemplate sBgTemplates[] =
@@ -275,7 +273,7 @@ static const struct WindowTemplate sWindowTemplates[WIN_COUNT + 1] =
         .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 0,
-        .width = 30,
+        .width = DISPLAY_TILE_WIDTH,
         .height = 2,
         .paletteNum = 11,
         .baseBlock = 0x074
@@ -285,32 +283,38 @@ static const struct WindowTemplate sWindowTemplates[WIN_COUNT + 1] =
 
 // This handles what characters get inserted when a key is pressed
 // The keys shown on the keyboard are handled separately by sNamingScreenKeyboardText
-static const u8 sKeyboardChars[KBPAGE_COUNT * KBROW_COUNT * KBCOL_COUNT] = __(
-    "abcdef ."
-    "ghijkl ,"
-    "mnopqrs "
-    "tuvwxyz "
-    "ABCDEF ."
-    "GHIJKL ,"
-    "MNOPQRS "
-    "TUVWXYZ "
-    "01234   "
-    "56789   "
-    "!?♂♀/-  "
-    "…“”‘'   ");
-
-static const u8 sPageColumnCounts[KBPAGE_COUNT] = { 
-    [KEYBOARD_LETTERS_LOWER] = KBCOL_COUNT, 
-    [KEYBOARD_LETTERS_UPPER] = KBCOL_COUNT, 
-    [KEYBOARD_SYMBOLS]       = 6 
-};
-static const u8 sPageColumnXPos[KBPAGE_COUNT * KBCOL_COUNT] = { 
-    0, 12, 24, 56, 68, 80, 92, 123, // KEYBOARD_LETTERS_LOWER
-    0, 12, 24, 56, 68, 80, 92, 123, // KEYBOARD_LETTERS_UPPER
-    0, 22, 44, 66, 88, 110          // KEYBOARD_SYMBOLS
+static const u8 sKeyboardChars[KBPAGE_COUNT][KBROW_COUNT][KBCOL_COUNT] = {
+    [KEYBOARD_LETTERS_LOWER] = {
+        __("abcdef ."),
+        __("ghijkl ,"),
+        __("mnopqrs "),
+        __("tuvwxyz "),
+    },
+    [KEYBOARD_LETTERS_UPPER] = {
+        __("ABCDEF ."),
+        __("GHIJKL ,"),
+        __("MNOPQRS "),
+        __("TUVWXYZ "),
+    },
+    [KEYBOARD_SYMBOLS] = {
+        __("01234   "),
+        __("56789   "),
+        __("!?♂♀/-  "),
+        __("…“”‘'   "),
+    }
 };
 
-// forward declarations
+static const u8 sPageColumnCounts[KBPAGE_COUNT] = {
+    [KEYBOARD_LETTERS_LOWER] = KBCOL_COUNT,
+    [KEYBOARD_LETTERS_UPPER] = KBCOL_COUNT,
+    [KEYBOARD_SYMBOLS]       = 6
+};
+static const u8 sPageColumnXPos[KBPAGE_COUNT][KBCOL_COUNT] = {
+    [KEYBOARD_LETTERS_LOWER] = {0, 12, 24, 56, 68, 80, 92, 123},
+    [KEYBOARD_LETTERS_UPPER] = {0, 12, 24, 56, 68, 80, 92, 123},
+    [KEYBOARD_SYMBOLS]       = {0, 22, 44, 66, 88, 110}
+};
+
 static const struct NamingScreenTemplate *const sNamingScreenTemplates[];
 static const struct SubspriteTable sSubspriteTable_PageSwapFrame[];
 static const struct SubspriteTable sSubspriteTable_PageSwapText[];
@@ -325,7 +329,7 @@ static const struct SpriteTemplate sSpriteTemplate_Cursor;
 static const struct SpriteTemplate sSpriteTemplate_InputArrow;
 static const struct SpriteTemplate sSpriteTemplate_Underscore;
 static const struct SpriteTemplate sSpriteTemplate_PCIcon;
-static const u8* const sNamingScreenKeyboardText[KBPAGE_COUNT][KBROW_COUNT];
+static const u8 *const sNamingScreenKeyboardText[KBPAGE_COUNT][KBROW_COUNT];
 static const struct SpriteSheet sSpriteSheets[];
 static const struct SpritePalette sSpritePalettes[];
 
@@ -394,7 +398,9 @@ static void VBlankCB_NamingScreen(void);
 static void NamingScreen_ShowBgs(void);
 static bool8 IsWideLetter(u8);
 
-void DoNamingScreen(u8 templateNum, u8 *destBuffer, u16 monSpecies, u16 monGender, u32 monPersonality, MainCallback returnCallback)
+static const u8 sText_MoveOkBack[] = _("{DPAD_NONE}MOVE  {A_BUTTON}OK  {B_BUTTON}BACK");
+
+void DoNamingScreen(u8 templateNum, u8 *destBuffer, u16 monSpeciesOrPlayerGender, u16 monGender, u32 monPersonality, MainCallback returnCallback)
 {
     sNamingScreen = Alloc(sizeof(struct NamingScreenData));
     if (!sNamingScreen)
@@ -404,7 +410,7 @@ void DoNamingScreen(u8 templateNum, u8 *destBuffer, u16 monSpecies, u16 monGende
     else
     {
         sNamingScreen->templateNum = templateNum;
-        sNamingScreen->monSpecies = monSpecies;
+        sNamingScreen->monSpecies = monSpeciesOrPlayerGender;
         sNamingScreen->monGender = monGender;
         sNamingScreen->monPersonality = monPersonality;
         sNamingScreen->destBuffer = destBuffer;
@@ -508,14 +514,14 @@ static void NamingScreen_InitBGs(void)
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
 
-    ChangeBgX(0, 0, 0);
-    ChangeBgY(0, 0, 0);
-    ChangeBgX(1, 0, 0);
-    ChangeBgY(1, 0, 0);
-    ChangeBgX(2, 0, 0);
-    ChangeBgY(2, 0, 0);
-    ChangeBgX(3, 0, 0);
-    ChangeBgY(3, 0, 0);
+    ChangeBgX(0, 0, BG_COORD_SET);
+    ChangeBgY(0, 0, BG_COORD_SET);
+    ChangeBgX(1, 0, BG_COORD_SET);
+    ChangeBgY(1, 0, BG_COORD_SET);
+    ChangeBgX(2, 0, BG_COORD_SET);
+    ChangeBgY(2, 0, BG_COORD_SET);
+    ChangeBgX(3, 0, BG_COORD_SET);
+    ChangeBgY(3, 0, BG_COORD_SET);
 
     InitStandardTextBoxWindows();
     InitTextBoxGfxAndPrinters();
@@ -583,25 +589,25 @@ static void Task_NamingScreen(u8 taskId)
 }
 
 // Which gfx/pal to load for the swap page button
-static const u8 sPageToNextGfxId[KBPAGE_COUNT] = 
-{ 
-    [KBPAGE_SYMBOLS]       = PAGE_SWAP_UPPER, 
-    [KBPAGE_LETTERS_UPPER] = PAGE_SWAP_LOWER, 
-    [KBPAGE_LETTERS_LOWER] = PAGE_SWAP_OTHERS 
+static const u8 sPageToNextGfxId[KBPAGE_COUNT] =
+{
+    [KBPAGE_SYMBOLS]       = PAGE_SWAP_UPPER,
+    [KBPAGE_LETTERS_UPPER] = PAGE_SWAP_LOWER,
+    [KBPAGE_LETTERS_LOWER] = PAGE_SWAP_OTHERS
 };
 
-static const u8 sPageToNextKeyboardId[KBPAGE_COUNT] = 
-{ 
-    [KBPAGE_SYMBOLS]       = KEYBOARD_LETTERS_UPPER, 
-    [KBPAGE_LETTERS_UPPER] = KEYBOARD_LETTERS_LOWER, 
-    [KBPAGE_LETTERS_LOWER] = KEYBOARD_SYMBOLS 
+static const u8 sPageToNextKeyboardId[KBPAGE_COUNT] =
+{
+    [KBPAGE_SYMBOLS]       = KEYBOARD_LETTERS_UPPER,
+    [KBPAGE_LETTERS_UPPER] = KEYBOARD_LETTERS_LOWER,
+    [KBPAGE_LETTERS_LOWER] = KEYBOARD_SYMBOLS
 };
 
-static const u8 sPageToKeyboardId[KBPAGE_COUNT] = 
-{ 
-    [KBPAGE_SYMBOLS]       = KEYBOARD_SYMBOLS, 
-    [KBPAGE_LETTERS_UPPER] = KEYBOARD_LETTERS_UPPER, 
-    [KBPAGE_LETTERS_LOWER] = KEYBOARD_LETTERS_LOWER 
+static const u8 sPageToKeyboardId[KBPAGE_COUNT] =
+{
+    [KBPAGE_SYMBOLS]       = KEYBOARD_SYMBOLS,
+    [KBPAGE_LETTERS_UPPER] = KEYBOARD_LETTERS_UPPER,
+    [KBPAGE_LETTERS_LOWER] = KEYBOARD_LETTERS_LOWER
 };
 
 static u8 PageToNextGfxId(u8 page)
@@ -674,18 +680,8 @@ static bool8 MainState_PressedOKButton(void)
     SetInputState(INPUT_STATE_DISABLED);
     SetCursorFlashing(FALSE);
     TryStartButtonFlash(BUTTON_COUNT, FALSE, TRUE);
-    if (sNamingScreen->templateNum == NAMING_SCREEN_CAUGHT_MON 
-        && CalculatePlayerPartyCount() >= PARTY_SIZE)
-    {
-        DisplaySentToPCMessage();
-        sNamingScreen->state = STATE_WAIT_SENT_TO_PC_MESSAGE;
-        return FALSE;
-    }
-    else
-    {
-        sNamingScreen->state = STATE_FADE_OUT;
-        return TRUE;
-    }
+    sNamingScreen->state = STATE_FADE_OUT;
+    return TRUE;
 }
 
 static bool8 MainState_FadeOut(void)
@@ -701,7 +697,11 @@ static bool8 MainState_Exit(void)
     {
         if (sNamingScreen->templateNum == NAMING_SCREEN_PLAYER)
             SeedRngAndSetTrainerId();
-        SetMainCallback2(sNamingScreen->returnCallback);
+        if (sNamingScreen->templateNum == NAMING_SCREEN_CAUGHT_MON
+         && CalculatePlayerPartyCount() < PARTY_SIZE)
+            SetMainCallback2(BattleMainCB2);
+        else
+            SetMainCallback2(sNamingScreen->returnCallback);
         DestroyTask(FindTaskIdByFunc(Task_NamingScreen));
         FreeAllWindowBuffers();
         FREE_AND_SET_NULL(sNamingScreen);
@@ -709,7 +709,7 @@ static bool8 MainState_Exit(void)
     return FALSE;
 }
 
-static void DisplaySentToPCMessage(void)
+static UNUSED void DisplaySentToPCMessage(void)
 {
     u8 stringToDisplay = 0;
 
@@ -730,16 +730,16 @@ static void DisplaySentToPCMessage(void)
         stringToDisplay++;
 
     StringExpandPlaceholders(gStringVar4, sTransferredToPCMessages[stringToDisplay]);
-    DrawDialogueFrame(0, 0);
+    DrawDialogueFrame(0, FALSE);
     gTextFlags.canABSpeedUpPrint = TRUE;
-    AddTextPrinterParameterized2(0, 1, gStringVar4, GetPlayerTextSpeedDelay(), 0, 2, 1, 3);
-    CopyWindowToVram(0, 3);
+    AddTextPrinterParameterized2(0, FONT_NORMAL, gStringVar4, GetPlayerTextSpeedDelay(), 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+    CopyWindowToVram(0, COPYWIN_FULL);
 }
 
 static bool8 MainState_WaitSentToPCMessage(void)
 {
     RunTextPrinters();
-    if (!IsTextPrinterActive(0) && JOY_NEW(A_BUTTON))
+    if (!IsTextPrinterActiveOnWindow(0) && JOY_NEW(A_BUTTON))
         sNamingScreen->state = STATE_FADE_OUT;
 
     return FALSE;
@@ -915,12 +915,7 @@ static void CreateButtonFlashTask(void)
 
 static void TryStartButtonFlash(u8 button, bool8 keepFlashing, bool8 interruptCurFlash)
 {
-    u8 taskId = FindTaskIdByFunc(Task_UpdateButtonFlash);
-    struct Task *task;
-
-    if (taskId == TASK_NONE)
-        return;
-    task = &gTasks[taskId];
+    struct Task *task = &gTasks[FindTaskIdByFunc(Task_UpdateButtonFlash)];
 
     if (button == task->tButtonId && !interruptCurFlash)
     {
@@ -985,10 +980,10 @@ static u16 GetButtonPalOffset(u8 button)
 {
     const u16 palOffsets[BUTTON_COUNT + 1] =
     {
-        [BUTTON_PAGE]  = IndexOfSpritePaletteTag(PALTAG_PAGE_SWAP) * 16 + 0x10E,
-        [BUTTON_BACK]  = IndexOfSpritePaletteTag(PALTAG_BACK_BUTTON) * 16 + 0x10E,
-        [BUTTON_OK]    = IndexOfSpritePaletteTag(PALTAG_OK_BUTTON) * 16 + 0x10E,
-        [BUTTON_COUNT] = IndexOfSpritePaletteTag(PALTAG_OK_BUTTON) * 16 + 0x101,
+        [BUTTON_PAGE]  = OBJ_PLTT_ID(IndexOfSpritePaletteTag(PALTAG_PAGE_SWAP)) + 14,
+        [BUTTON_BACK]  = OBJ_PLTT_ID(IndexOfSpritePaletteTag(PALTAG_BACK_BUTTON)) + 14,
+        [BUTTON_OK]    = OBJ_PLTT_ID(IndexOfSpritePaletteTag(PALTAG_OK_BUTTON)) + 14,
+        [BUTTON_COUNT] = OBJ_PLTT_ID(IndexOfSpritePaletteTag(PALTAG_OK_BUTTON)) + 1,
     };
 
     return palOffsets[button];
@@ -1035,9 +1030,9 @@ static void SpriteCB_Cursor(struct Sprite *sprite)
     if (sprite->sX == GetCurrentPageColumnCount())
         sprite->invisible = TRUE;
 
-    if (sprite->invisible 
+    if (sprite->invisible
        || !(sprite->sFlashing)
-       || sprite->sX != sprite->sPrevX 
+       || sprite->sX != sprite->sPrevX
        || sprite->sY != sprite->sPrevY)
     {
         sprite->sColor = 0;
@@ -1058,7 +1053,7 @@ static void SpriteCB_Cursor(struct Sprite *sprite)
     {
         s8 gb = sprite->sColor;
         s8 r = sprite->sColor >> 1;
-        u16 index = IndexOfSpritePaletteTag(PALTAG_CURSOR) * 16 + 0x0101;
+        u16 index = OBJ_PLTT_ID(IndexOfSpritePaletteTag(PALTAG_CURSOR)) + 1;
 
         MultiplyInvertedPaletteRGBComponents(index, r, gb, gb);
     }
@@ -1074,7 +1069,7 @@ static void SpriteCB_InputArrow(struct Sprite *sprite)
     if (sprite->sDelay == 0 || --sprite->sDelay == 0)
     {
         sprite->sDelay = 8;
-        sprite->sXPosId = (sprite->sXPosId + 1) & (ARRAY_COUNT(x) - 1);
+        sprite->sXPosId = MOD(sprite->sXPosId + 1, ARRAY_COUNT(x));
     }
     sprite->x2 = x[sprite->sXPosId];
 }
@@ -1104,7 +1099,7 @@ static void SpriteCB_Underscore(struct Sprite *sprite)
         sprite->sDelay++;
         if (sprite->sDelay > 8)
         {
-            sprite->sYPosId = (sprite->sYPosId + 1) & (ARRAY_COUNT(y) - 1);
+            sprite->sYPosId = MOD(sprite->sYPosId + 1, ARRAY_COUNT(y));
             sprite->sDelay = 0;
         }
     }
@@ -1139,7 +1134,7 @@ static void SetCursorPos(s16 x, s16 y)
     struct Sprite *cursorSprite = &gSprites[sNamingScreen->cursorSpriteId];
 
     if (x < sPageColumnCounts[CurrentPageToKeyboardId()])
-        cursorSprite->x = sPageColumnXPos[x + CurrentPageToKeyboardId() * KBCOL_COUNT] + 38;
+        cursorSprite->x = sPageColumnXPos[CurrentPageToKeyboardId()][x] + 38;
     else
         cursorSprite->x = 0;
 
@@ -1315,14 +1310,14 @@ static bool8 PageSwapSprite_SlideOn(struct Sprite *sprite)
 }
 
 static const u16 sPageSwapPalTags[] = {
-    [PAGE_SWAP_UPPER]  = PALTAG_PAGE_SWAP_UPPER, 
-    [PAGE_SWAP_OTHERS] = PALTAG_PAGE_SWAP_OTHERS, 
+    [PAGE_SWAP_UPPER]  = PALTAG_PAGE_SWAP_UPPER,
+    [PAGE_SWAP_OTHERS] = PALTAG_PAGE_SWAP_OTHERS,
     [PAGE_SWAP_LOWER]  = PALTAG_PAGE_SWAP_LOWER
 };
 
 static const u16 sPageSwapGfxTags[] = {
-    [PAGE_SWAP_UPPER]  = GFXTAG_PAGE_SWAP_UPPER, 
-    [PAGE_SWAP_OTHERS] = GFXTAG_PAGE_SWAP_OTHERS, 
+    [PAGE_SWAP_UPPER]  = GFXTAG_PAGE_SWAP_UPPER,
+    [PAGE_SWAP_OTHERS] = GFXTAG_PAGE_SWAP_OTHERS,
     [PAGE_SWAP_LOWER]  = GFXTAG_PAGE_SWAP_LOWER
 };
 
@@ -1380,6 +1375,8 @@ static void NamingScreen_CreatePlayerIcon(void);
 static void NamingScreen_CreatePCIcon(void);
 static void NamingScreen_CreateMonIcon(void);
 static void NamingScreen_CreateWaldaDadIcon(void);
+static void NamingScreen_CreateCodeIcon(void);
+static void NamingScreen_CreateRivalIcon(void);
 
 static void (*const sIconFunctions[])(void) =
 {
@@ -1388,6 +1385,8 @@ static void (*const sIconFunctions[])(void) =
     NamingScreen_CreatePCIcon,
     NamingScreen_CreateMonIcon,
     NamingScreen_CreateWaldaDadIcon,
+    NamingScreen_CreateCodeIcon,
+    NamingScreen_CreateRivalIcon,
 };
 
 static void CreateInputTargetIcon(void)
@@ -1402,13 +1401,13 @@ static void NamingScreen_NoIcon(void)
 
 static void NamingScreen_CreatePlayerIcon(void)
 {
-    u8 rivalGfxId;
+    u16 rivalGfxId;
     u8 spriteId;
 
-    rivalGfxId = GetRivalAvatarGraphicsIdByStateIdAndGender(0, sNamingScreen->monSpecies);
-    spriteId = AddPseudoObjectEvent(rivalGfxId, SpriteCallbackDummy, 56, 37, 0);
+    rivalGfxId = GetRivalAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_STATE_NORMAL, (enum Gender)sNamingScreen->monSpecies);
+    spriteId = CreateObjectGraphicsSprite(rivalGfxId, SpriteCallbackDummy, 56, 37, 0);
     gSprites[spriteId].oam.priority = 3;
-    StartSpriteAnim(&gSprites[spriteId], 4);
+    StartSpriteAnim(&gSprites[spriteId], ANIM_STD_GO_SOUTH);
 }
 
 static void NamingScreen_CreatePCIcon(void)
@@ -1433,9 +1432,53 @@ static void NamingScreen_CreateWaldaDadIcon(void)
 {
     u8 spriteId;
 
-    spriteId = AddPseudoObjectEvent(OBJ_EVENT_GFX_MAN_1, SpriteCallbackDummy, 56, 37, 0);
+    spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_MAN_1, SpriteCallbackDummy, 56, 37, 0);
     gSprites[spriteId].oam.priority = 3;
-    StartSpriteAnim(&gSprites[spriteId], 4);
+    StartSpriteAnim(&gSprites[spriteId], ANIM_STD_GO_SOUTH);
+}
+
+static void NamingScreen_CreateCodeIcon(void)
+{
+    u8 spriteId;
+    spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_MYSTERY_GIFT_MAN, SpriteCallbackDummy, 56, 37, 0);
+    gSprites[spriteId].oam.priority = 3;
+}
+
+static const union AnimCmd sAnim_Rival[] =
+{
+    ANIMCMD_FRAME( 0, 10),
+    ANIMCMD_FRAME(24, 10),
+    ANIMCMD_FRAME( 0, 10),
+    ANIMCMD_FRAME(32, 10),
+    ANIMCMD_JUMP(0)
+};
+
+static const union AnimCmd *const sAnims_Rival[] =
+{
+    sAnim_Rival
+};
+
+static void NamingScreen_CreateRivalIcon(void)
+{
+    const struct SpriteSheet sheet = {
+        sRival_Gfx, 0x900, GFXTAG_RIVAL
+    };
+    const struct SpritePalette palette = {
+        sRival_Pal, PALTAG_RIVAL
+    };
+    struct SpriteTemplate template;
+    const struct SubspriteTable * tables_p;
+    u8 spriteId;
+
+    CopyObjectGraphicsInfoToSpriteTemplate(OBJ_EVENT_GFX_RED_NORMAL, SpriteCallbackDummy, &template, &tables_p);
+
+    template.tileTag = sheet.tag;
+    template.paletteTag = palette.tag;
+    template.anims = sAnims_Rival;
+    LoadSpriteSheet(&sheet);
+    LoadSpritePalette(&palette);
+    spriteId = CreateSprite(&template, 56, 37, 0);
+    gSprites[spriteId].oam.priority = 3;
 }
 
 //--------------------------------------------------
@@ -1443,6 +1486,7 @@ static void NamingScreen_CreateWaldaDadIcon(void)
 //--------------------------------------------------
 
 static bool8 KeyboardKeyHandler_Character(u8);
+static void SwapKeyboardToLowerAfterFirstCapitalLetter(void);
 static bool8 KeyboardKeyHandler_Page(u8);
 static bool8 KeyboardKeyHandler_Backspace(u8);
 static bool8 KeyboardKeyHandler_OK(u8);
@@ -1487,6 +1531,8 @@ static bool8 KeyboardKeyHandler_Character(u8 input)
     {
         bool8 textFull = AddTextCharacter();
 
+        SwapKeyboardToLowerAfterFirstCapitalLetter();
+
         SquishCursor();
         if (textFull)
         {
@@ -1495,6 +1541,20 @@ static bool8 KeyboardKeyHandler_Character(u8 input)
         }
     }
     return FALSE;
+}
+
+static void SwapKeyboardToLowerAfterFirstCapitalLetter(void)
+{
+    if (AUTO_LOWERCASE_KEYBOARD < GEN_6)
+        return;
+
+    if (sNamingScreen->currentPage != KBPAGE_LETTERS_UPPER)
+        return;
+
+    if (GetTextEntryPosition() != 1)
+        return;
+
+    MainState_StartPageSwap();
 }
 
 static bool8 KeyboardKeyHandler_Page(u8 input)
@@ -1565,8 +1625,6 @@ static u8 GetInputEvent(void)
 {
     u8 taskId = FindTaskIdByFunc(Task_HandleInput);
 
-    if (taskId == TASK_NONE)
-        return INPUT_NONE;
     return gTasks[taskId].tKeyboardEvent;
 }
 
@@ -1574,8 +1632,7 @@ static void SetInputState(u8 state)
 {
     u8 taskId = FindTaskIdByFunc(Task_HandleInput);
 
-    if (taskId != TASK_NONE)
-        gTasks[taskId].tState = state;
+    gTasks[taskId].tState = state;
 }
 
 static void Task_HandleInput(u8 taskId)
@@ -1659,7 +1716,7 @@ static void HandleDpadMovement(struct Task *task)
     if (cursorX > GetCurrentPageColumnCount())
         cursorX = 0;
 
-    
+
     // Handle moving on/off the button column
     if (sDpadDeltaX[input] != 0)
     {
@@ -1714,18 +1771,19 @@ static void HandleDpadMovement(struct Task *task)
 static void DrawNormalTextEntryBox(void)
 {
     FillWindowPixelBuffer(sNamingScreen->windows[WIN_TEXT_ENTRY_BOX], PIXEL_FILL(1));
-    AddTextPrinterParameterized(sNamingScreen->windows[WIN_TEXT_ENTRY_BOX], 1, sNamingScreen->template->title, 8, 1, 0, 0);
+    AddTextPrinterParameterized(sNamingScreen->windows[WIN_TEXT_ENTRY_BOX], FONT_NORMAL, sNamingScreen->template->title, 8, 1, 0, 0);
     PutWindowTilemap(sNamingScreen->windows[WIN_TEXT_ENTRY_BOX]);
 }
 
 static void DrawMonTextEntryBox(void)
 {
-    u8 buffer[32];
+    u8 buffer[64];
 
-    StringCopy(buffer, gSpeciesNames[sNamingScreen->monSpecies]);
-    StringAppendN(buffer, sNamingScreen->template->title, 15);
+    u8 *end = StringCopy(buffer, GetSpeciesName(sNamingScreen->monSpecies));
+    WrapFontIdToFit(buffer, end, FONT_NORMAL, 128 - 64);
+    StringAppendN(end, sNamingScreen->template->title, 15);
     FillWindowPixelBuffer(sNamingScreen->windows[WIN_TEXT_ENTRY_BOX], PIXEL_FILL(1));
-    AddTextPrinterParameterized(sNamingScreen->windows[WIN_TEXT_ENTRY_BOX], 1, buffer, 8, 1, 0, 0);
+    AddTextPrinterParameterized(sNamingScreen->windows[WIN_TEXT_ENTRY_BOX], FONT_NORMAL, buffer, 8, 1, 0, 0);
     PutWindowTilemap(sNamingScreen->windows[WIN_TEXT_ENTRY_BOX]);
 }
 
@@ -1736,6 +1794,8 @@ static void (*const sDrawTextEntryBoxFuncs[])(void) =
     [NAMING_SCREEN_CAUGHT_MON] = DrawMonTextEntryBox,
     [NAMING_SCREEN_NICKNAME]   = DrawMonTextEntryBox,
     [NAMING_SCREEN_WALDA]      = DrawNormalTextEntryBox,
+    [NAMING_SCREEN_CODE]       = DrawNormalTextEntryBox,
+    [NAMING_SCREEN_RIVAL]      = DrawNormalTextEntryBox
 };
 
 static void DrawTextEntryBox(void)
@@ -1781,13 +1841,13 @@ static void DrawGenderIcon(void)
             StringCopy(text, gText_FemaleSymbol);
             isFemale = TRUE;
         }
-        AddTextPrinterParameterized3(sNamingScreen->windows[WIN_TEXT_ENTRY], 1, 0x68, 1, sGenderColors[isFemale], -1, text);
+        AddTextPrinterParameterized3(sNamingScreen->windows[WIN_TEXT_ENTRY], FONT_NORMAL, (POKEMON_NAME_LENGTH * 4) + 64, 1, sGenderColors[isFemale], TEXT_SKIP_DRAW, text);
     }
 }
 
 static u8 GetCharAtKeyboardPos(s16 x, s16 y)
 {
-    return sKeyboardChars[x + y * KBCOL_COUNT + CurrentPageToKeyboardId() * KBCOL_COUNT * KBROW_COUNT];
+    return sKeyboardChars[CurrentPageToKeyboardId()][y][x];
 }
 
 
@@ -1874,7 +1934,7 @@ static void SaveInputText(void)
 
 static void LoadGfx(void)
 {
-    LZ77UnCompWram(gNamingScreenMenu_Gfx, sNamingScreen->tileBuffer);
+    DecompressDataWithHeaderWram(gNamingScreenMenu_Gfx, sNamingScreen->tileBuffer);
     LoadBgTiles(1, sNamingScreen->tileBuffer, sizeof(sNamingScreen->tileBuffer), 0);
     LoadBgTiles(2, sNamingScreen->tileBuffer, sizeof(sNamingScreen->tileBuffer), 0);
     LoadBgTiles(3, sNamingScreen->tileBuffer, sizeof(sNamingScreen->tileBuffer), 0);
@@ -1890,9 +1950,9 @@ static void CreateHelperTasks(void)
 
 static void LoadPalettes(void)
 {
-    LoadPalette(gNamingScreenMenu_Pal, 0, 0xC0);
-    LoadPalette(sKeyboard_Pal, 0xA0, sizeof(sKeyboard_Pal));
-    LoadPalette(GetTextWindowPalette(2), 0xB0, 0x20);
+    LoadPalette(gNamingScreenMenu_Pal, BG_PLTT_ID(0), sizeof(gNamingScreenMenu_Pal));
+    LoadPalette(sKeyboard_Pal, BG_PLTT_ID(10), sizeof(sKeyboard_Pal));
+    LoadPalette(GetTextWindowPalette(2), BG_PLTT_ID(11), PLTT_SIZE_4BPP);
 }
 
 static void DrawBgTilemap(u8 bg, const void *src)
@@ -1921,26 +1981,19 @@ static void DrawTextEntry(void)
         temp[1] = gText_ExpandedPlaceholder_Empty[0];
         extraWidth = (IsWideLetter(temp[0]) == TRUE) ? 2 : 0;
 
-        AddTextPrinterParameterized(sNamingScreen->windows[WIN_TEXT_ENTRY], 1, temp, i * 8 + x + extraWidth, 1, 0xFF, NULL);
+        AddTextPrinterParameterized(sNamingScreen->windows[WIN_TEXT_ENTRY], FONT_NORMAL, temp, i * 8 + x + extraWidth, 1, TEXT_SKIP_DRAW, NULL);
     }
 
     TryDrawGenderIcon();
-    CopyWindowToVram(sNamingScreen->windows[WIN_TEXT_ENTRY], 2);
+    CopyWindowToVram(sNamingScreen->windows[WIN_TEXT_ENTRY], COPYWIN_GFX);
     PutWindowTilemap(sNamingScreen->windows[WIN_TEXT_ENTRY]);
 }
 
-struct TextColor   // Needed because of alignment
+ALIGNED(4) static const u8 sTextColorStruct[3][4] =
 {
-    u8 colors[3][4];
-};
-
-static const struct TextColor sTextColorStruct =
-{
-    {
-        {TEXT_DYNAMIC_COLOR_4, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY},
-        {TEXT_DYNAMIC_COLOR_5, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY},
-        {TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY}
-    }
+    {TEXT_DYNAMIC_COLOR_4, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY},
+    {TEXT_DYNAMIC_COLOR_5, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY},
+    {TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY}
 };
 
 static const u8 sFillValues[KBPAGE_COUNT] =
@@ -1952,9 +2005,9 @@ static const u8 sFillValues[KBPAGE_COUNT] =
 
 static const u8 *const sKeyboardTextColors[KBPAGE_COUNT] =
 {
-    [KEYBOARD_LETTERS_LOWER] = sTextColorStruct.colors[1],
-    [KEYBOARD_LETTERS_UPPER] = sTextColorStruct.colors[0],
-    [KEYBOARD_SYMBOLS]       = sTextColorStruct.colors[2]
+    [KEYBOARD_LETTERS_LOWER] = sTextColorStruct[1],
+    [KEYBOARD_LETTERS_UPPER] = sTextColorStruct[0],
+    [KEYBOARD_SYMBOLS]       = sTextColorStruct[2]
 };
 
 static void PrintKeyboardKeys(u8 window, u8 page)
@@ -1964,12 +2017,12 @@ static void PrintKeyboardKeys(u8 window, u8 page)
     FillWindowPixelBuffer(window, sFillValues[page]);
 
     for (i = 0; i < KBROW_COUNT; i++)
-        AddTextPrinterParameterized3(window, 1, 0, i * 16 + 1, sKeyboardTextColors[page], 0, sNamingScreenKeyboardText[page][i]);
+        AddTextPrinterParameterized3(window, FONT_NORMAL, 0, i * 16 + 1, sKeyboardTextColors[page], 0, sNamingScreenKeyboardText[page][i]);
 
     PutWindowTilemap(window);
 }
 
-static const u8 *const sNextKeyboardPageTilemaps[] =
+static const u32 *const sNextKeyboardPageTilemaps[] =
 {
     [KBPAGE_SYMBOLS] = gNamingScreenKeyboardUpper_Tilemap,
     [KBPAGE_LETTERS_UPPER] = gNamingScreenKeyboardLower_Tilemap, // lower
@@ -2010,9 +2063,9 @@ static void PrintControls(void)
     const u8 color[3] = { TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY };
 
     FillWindowPixelBuffer(sNamingScreen->windows[WIN_BANNER], PIXEL_FILL(15));
-    AddTextPrinterParameterized3(sNamingScreen->windows[WIN_BANNER], 0, 2, 1, color, 0, gText_MoveOkBack);
+    AddTextPrinterParameterized3(sNamingScreen->windows[WIN_BANNER], FONT_SMALL, 2, 1, color, 0, sText_MoveOkBack);
     PutWindowTilemap(sNamingScreen->windows[WIN_BANNER]);
-    CopyWindowToVram(sNamingScreen->windows[WIN_BANNER], 3);
+    CopyWindowToVram(sNamingScreen->windows[WIN_BANNER], COPYWIN_FULL);
 }
 
 static void CB2_NamingScreen(void)
@@ -2068,23 +2121,23 @@ static bool8 IsWideLetter(u8 character)
     return FALSE;
 }
 
-// Debug? Unused, and arguments aren't sensible for non-player screens.
-static void Debug_NamingScreenPlayer(void)
+// Debug? Arguments aren't sensible for non-player screens.
+static void UNUSED Debug_NamingScreenPlayer(void)
 {
     DoNamingScreen(NAMING_SCREEN_PLAYER, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToFieldWithOpenMenu);
 }
 
-static void Debug_NamingScreenBox(void)
+static void UNUSED Debug_NamingScreenBox(void)
 {
     DoNamingScreen(NAMING_SCREEN_BOX, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToFieldWithOpenMenu);
 }
 
-static void Debug_NamingScreenCaughtMon(void)
+static void UNUSED Debug_NamingScreenCaughtMon(void)
 {
     DoNamingScreen(NAMING_SCREEN_CAUGHT_MON, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToFieldWithOpenMenu);
 }
 
-static void Debug_NamingScreenNickname(void)
+static void UNUSED Debug_NamingScreenNickname(void)
 {
     DoNamingScreen(NAMING_SCREEN_NICKNAME, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToFieldWithOpenMenu);
 }
@@ -2097,45 +2150,66 @@ static void Debug_NamingScreenNickname(void)
 static const struct NamingScreenTemplate sPlayerNamingScreenTemplate =
 {
     .copyExistingString = FALSE,
-    .maxChars = 7,
+    .maxChars = PLAYER_NAME_LENGTH,
     .iconFunction = 1,
     .addGenderIcon = FALSE,
     .initialPage = KBPAGE_LETTERS_UPPER,
     .unused = 35,
-    .title = gText_YourName,
+    .title = COMPOUND_STRING("YOUR NAME?"),
 };
 
 static const struct NamingScreenTemplate sPCBoxNamingTemplate =
 {
     .copyExistingString = FALSE,
-    .maxChars = 8,
+    .maxChars = BOX_NAME_LENGTH,
     .iconFunction = 2,
     .addGenderIcon = FALSE,
     .initialPage = KBPAGE_LETTERS_UPPER,
     .unused = 19,
-    .title = gText_BoxName,
+    .title = COMPOUND_STRING("BOX NAME?"),
 };
 
 static const struct NamingScreenTemplate sMonNamingScreenTemplate =
 {
     .copyExistingString = FALSE,
-    .maxChars = 10,
+    .maxChars = POKEMON_NAME_LENGTH,
     .iconFunction = 3,
     .addGenderIcon = TRUE,
     .initialPage = KBPAGE_LETTERS_UPPER,
     .unused = 35,
-    .title = gText_PkmnsNickname,
+    .title = COMPOUND_STRING("{STR_VAR_1}'s nickname?"),
 };
 
 static const struct NamingScreenTemplate sWaldaWordsScreenTemplate =
 {
     .copyExistingString = TRUE,
-    .maxChars = 15,
+    .maxChars = WALDA_PHRASE_LENGTH,
     .iconFunction = 4,
     .addGenderIcon = FALSE,
     .initialPage = KBPAGE_LETTERS_UPPER,
     .unused = 11,
-    .title = gText_TellHimTheWords,
+    .title = COMPOUND_STRING("Tell him the words."),
+};
+
+static const struct NamingScreenTemplate sCodeScreenTemplate =
+{
+    .copyExistingString = FALSE,
+    .maxChars = CODE_NAME_LENGTH,
+    .iconFunction = 5,
+    .addGenderIcon = FALSE,
+    .initialPage = KBPAGE_LETTERS_UPPER,
+    .unused = 35,
+    .title = COMPOUND_STRING("Enter code:"),
+};
+
+static const struct NamingScreenTemplate sRivalNamingScreenTemplate =
+{
+    .copyExistingString = FALSE,
+    .maxChars = PLAYER_NAME_LENGTH,
+    .iconFunction = 6,
+    .addGenderIcon = FALSE,
+    .initialPage = KBPAGE_LETTERS_UPPER,
+    .title = sText_RivalsName,
 };
 
 static const struct NamingScreenTemplate *const sNamingScreenTemplates[] =
@@ -2145,6 +2219,8 @@ static const struct NamingScreenTemplate *const sNamingScreenTemplates[] =
     [NAMING_SCREEN_CAUGHT_MON] = &sMonNamingScreenTemplate,
     [NAMING_SCREEN_NICKNAME]   = &sMonNamingScreenTemplate,
     [NAMING_SCREEN_WALDA]      = &sWaldaWordsScreenTemplate,
+    [NAMING_SCREEN_CODE]       = &sCodeScreenTemplate,
+    [NAMING_SCREEN_RIVAL]      = &sRivalNamingScreenTemplate,
 };
 
 static const struct OamData sOam_8x8 =
@@ -2189,170 +2265,190 @@ static const struct OamData sOam_32x16 =
     .paletteNum = 0,
 };
 
+/*
+[0_____][] <-1   40x32
+[2_____][] <-3
+[4___+_][] <-5/Origin
+[6     ][] <-7
+*/
 static const struct Subsprite sSubsprites_PageSwapFrame[] =
 {
     {
-        .x = -20,  
-        .y = -16, 
-        .shape = SPRITE_SHAPE(32x8),  
-        .size = SPRITE_SIZE(32x8),  
-        .tileOffset = 0,     
-        .priority = 1
-    },
-    {
-        .x =  12,  
-        .y = -16, 
-        .shape = SPRITE_SHAPE(8x8),  
-        .size = SPRITE_SIZE(8x8),  
-        .tileOffset = 4,     
-        .priority = 1
-    },
-    {
-        .x = -20,  
-        .y = -8,  
-        .shape = SPRITE_SHAPE(32x8),  
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 5,     
-        .priority = 1
-    },
-    {
-        .x =  12,  
-        .y = -8,  
-        .shape = SPRITE_SHAPE(8x8),  
-        .size = SPRITE_SIZE(8x8),
-        .tileOffset = 9,     
-        .priority = 1
-    },
-    {
-        .x = -20,  
-        .y =  0,  
-        .shape = SPRITE_SHAPE(32x8),  
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 10,    
-        .priority = 1
-    },
-    {
-        .x =  12,  
-        .y =  0,  
-        .shape = SPRITE_SHAPE(8x8),  
-        .size = SPRITE_SIZE(8x8), 
-        .tileOffset = 14,    
-        .priority = 1
-    },
-    {
-        .x = -20,  
-        .y =  8,  
-        .shape = SPRITE_SHAPE(32x8),  
+        .x = -20,
+        .y = -16,
+        .shape = SPRITE_SHAPE(32x8),
         .size = SPRITE_SIZE(32x8),
-        .tileOffset = 15,    
+        .tileOffset = 0,
         .priority = 1
     },
     {
-        .x =  12,  
-        .y =  8,  
-        .shape = SPRITE_SHAPE(8x8),  
+        .x =  12,
+        .y = -16,
+        .shape = SPRITE_SHAPE(8x8),
         .size = SPRITE_SIZE(8x8),
-        .tileOffset = 19,    
+        .tileOffset = 4,
+        .priority = 1
+    },
+    {
+        .x = -20,
+        .y = -8,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 5,
+        .priority = 1
+    },
+    {
+        .x =  12,
+        .y = -8,
+        .shape = SPRITE_SHAPE(8x8),
+        .size = SPRITE_SIZE(8x8),
+        .tileOffset = 9,
+        .priority = 1
+    },
+    {
+        .x = -20,
+        .y =  0,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 10,
+        .priority = 1
+    },
+    {
+        .x =  12,
+        .y =  0,
+        .shape = SPRITE_SHAPE(8x8),
+        .size = SPRITE_SIZE(8x8),
+        .tileOffset = 14,
+        .priority = 1
+    },
+    {
+        .x = -20,
+        .y =  8,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 15,
+        .priority = 1
+    },
+    {
+        .x =  12,
+        .y =  8,
+        .shape = SPRITE_SHAPE(8x8),
+        .size = SPRITE_SIZE(8x8),
+        .tileOffset = 19,
         .priority = 1
     }
 };
 
+/*
+[0_][] <-1    24x8
+   ^-- Origin
+*/
 static const struct Subsprite sSubsprites_PageSwapText[] =
 {
     {
-        .x = -12,  
-        .y = -4,  
-        .shape = SPRITE_SHAPE(16x8),  
-        .size = SPRITE_SIZE(16x8),  
-        .tileOffset = 0,     
+        .x = -12,
+        .y = -4,
+        .shape = SPRITE_SHAPE(16x8),
+        .size = SPRITE_SIZE(16x8),
+        .tileOffset = 0,
         .priority = 1
     },
     {
-        .x =   4,  
-        .y = -4,  
-        .shape = SPRITE_SHAPE(8x8),  
-        .size = SPRITE_SIZE(8x8), 
-        .tileOffset = 2,     
+        .x =   4,
+        .y = -4,
+        .shape = SPRITE_SHAPE(8x8),
+        .size = SPRITE_SIZE(8x8),
+        .tileOffset = 2,
         .priority = 1
     }
 };
 
+/*
+[0_____][] <-1   40x24
+[2_____][] <-3
+[4___+_][] <-5/Origin
+*/
 static const struct Subsprite sSubsprites_Button[] =
 {
     {
-        .x = -20,  
-        .y = -12, 
-        .shape = SPRITE_SHAPE(32x8),  
+        .x = -20,
+        .y = -12,
+        .shape = SPRITE_SHAPE(32x8),
         .size = SPRITE_SIZE(32x8),
-        .tileOffset = 0,     
+        .tileOffset = 0,
         .priority = 1
     },
     {
-        .x =  12,  
-        .y = -12, 
-        .shape = SPRITE_SHAPE(8x8),  
+        .x =  12,
+        .y = -12,
+        .shape = SPRITE_SHAPE(8x8),
         .size = SPRITE_SIZE(8x8),
-        .tileOffset = 4,     
+        .tileOffset = 4,
         .priority = 1
     },
     {
-        .x = -20,  
-        .y = -4,  
-        .shape = SPRITE_SHAPE(32x8),  
+        .x = -20,
+        .y = -4,
+        .shape = SPRITE_SHAPE(32x8),
         .size = SPRITE_SIZE(32x8),
-        .tileOffset = 5,     
+        .tileOffset = 5,
         .priority = 1
     },
     {
-        .x =  12,  
-        .y = -4,  
-        .shape = SPRITE_SHAPE(8x8),  
+        .x =  12,
+        .y = -4,
+        .shape = SPRITE_SHAPE(8x8),
         .size = SPRITE_SIZE(8x8),
-        .tileOffset = 9,     
+        .tileOffset = 9,
         .priority = 1
     },
     {
-        .x = -20,  
-        .y =  4,  
-        .shape = SPRITE_SHAPE(32x8),  
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 10,    
+        .x = -20,
+        .y =  4,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 10,
         .priority = 1
     },
     {
-        .x =  12,  
-        .y =  4,  
-        .shape = SPRITE_SHAPE(8x8),  
+        .x =  12,
+        .y =  4,
+        .shape = SPRITE_SHAPE(8x8),
         .size = SPRITE_SIZE(8x8),
-        .tileOffset = 14,    
+        .tileOffset = 14,
         .priority = 1
     }
 };
 
+/*
+[0_]    16x24
+[1+] <--Origin
+[2_]
+*/
 static const struct Subsprite sSubsprites_PCIcon[] =
 {
     {
-        .x = -8,   
-        .y = -12, 
-        .shape = SPRITE_SHAPE(16x8),  
-        .size = SPRITE_SIZE(16x8), 
-        .tileOffset = 0,     
-        .priority = 3
-    },
-    {
-        .x = -8,   
-        .y = -4,  
-        .shape = SPRITE_SHAPE(16x8),  
+        .x = -8,
+        .y = -12,
+        .shape = SPRITE_SHAPE(16x8),
         .size = SPRITE_SIZE(16x8),
-        .tileOffset = 2,     
+        .tileOffset = 0,
         .priority = 3
     },
     {
-        .x = -8,   
-        .y =  4,  
-        .shape = SPRITE_SHAPE(16x8),  
-        .size = SPRITE_SIZE(16x8), 
-        .tileOffset = 4,     
+        .x = -8,
+        .y = -4,
+        .shape = SPRITE_SHAPE(16x8),
+        .size = SPRITE_SIZE(16x8),
+        .tileOffset = 2,
+        .priority = 3
+    },
+    {
+        .x = -8,
+        .y =  4,
+        .shape = SPRITE_SHAPE(16x8),
+        .size = SPRITE_SIZE(16x8),
+        .tileOffset = 4,
         .priority = 3
     }
 };
@@ -2427,8 +2523,6 @@ static const struct SpriteTemplate sSpriteTemplate_PageSwapFrame =
     .paletteTag = PALTAG_PAGE_SWAP,
     .oam = &sOam_8x8,
     .anims = sAnims_Loop,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_PageSwap
 };
 
@@ -2438,9 +2532,6 @@ static const struct SpriteTemplate sSpriteTemplate_PageSwapButton =
     .paletteTag = PALTAG_PAGE_SWAP_UPPER,
     .oam = &sOam_32x16,
     .anims = sAnims_Loop,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy
 };
 
 static const struct SpriteTemplate sSpriteTemplate_PageSwapText =
@@ -2449,9 +2540,6 @@ static const struct SpriteTemplate sSpriteTemplate_PageSwapText =
     .paletteTag = PALTAG_PAGE_SWAP,
     .oam = &sOam_8x8,
     .anims = sAnims_Loop,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy
 };
 
 static const struct SpriteTemplate sSpriteTemplate_BackButton =
@@ -2460,9 +2548,6 @@ static const struct SpriteTemplate sSpriteTemplate_BackButton =
     .paletteTag = PALTAG_BACK_BUTTON,
     .oam = &sOam_8x8,
     .anims = sAnims_Loop,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy
 };
 
 static const struct SpriteTemplate sSpriteTemplate_OkButton =
@@ -2471,9 +2556,6 @@ static const struct SpriteTemplate sSpriteTemplate_OkButton =
     .paletteTag = PALTAG_OK_BUTTON,
     .oam = &sOam_8x8,
     .anims = sAnims_Loop,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy
 };
 
 static const struct SpriteTemplate sSpriteTemplate_Cursor =
@@ -2482,8 +2564,6 @@ static const struct SpriteTemplate sSpriteTemplate_Cursor =
     .paletteTag = PALTAG_CURSOR,
     .oam = &sOam_16x16,
     .anims = sAnims_Cursor,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_Cursor
 };
 
@@ -2493,8 +2573,6 @@ static const struct SpriteTemplate sSpriteTemplate_InputArrow =
     .paletteTag = PALTAG_PAGE_SWAP_OTHERS,
     .oam = &sOam_8x8,
     .anims = sAnims_Loop,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_InputArrow
 };
 
@@ -2504,39 +2582,35 @@ static const struct SpriteTemplate sSpriteTemplate_Underscore =
     .paletteTag = PALTAG_PAGE_SWAP_OTHERS,
     .oam = &sOam_8x8,
     .anims = sAnims_Loop,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_Underscore
 };
 
 static const struct SpriteTemplate sSpriteTemplate_PCIcon =
 {
-    .tileTag = 0xFFFF,
-    .paletteTag = PALTAG_PC_ICON,
+    .tileTag = TAG_NONE,
+    .paletteTag = PALTAG_MENU,
     .oam = &sOam_8x8,
     .anims = sAnims_PCIcon,
     .images = sImageTable_PCIcon,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy
 };
 
-static const u8* const sNamingScreenKeyboardText[KBPAGE_COUNT][KBROW_COUNT] =
+static const u8 *const sNamingScreenKeyboardText[KBPAGE_COUNT][KBROW_COUNT] =
 {
-    [KEYBOARD_LETTERS_LOWER] = 
+    [KEYBOARD_LETTERS_LOWER] =
     {
         gText_NamingScreenKeyboard_abcdef,
         gText_NamingScreenKeyboard_ghijkl,
         gText_NamingScreenKeyboard_mnopqrs,
         gText_NamingScreenKeyboard_tuvwxyz
     },
-    [KEYBOARD_LETTERS_UPPER] = 
+    [KEYBOARD_LETTERS_UPPER] =
     {
         gText_NamingScreenKeyboard_ABCDEF,
         gText_NamingScreenKeyboard_GHIJKL,
         gText_NamingScreenKeyboard_MNOPQRS,
         gText_NamingScreenKeyboard_TUVWXYZ
     },
-    [KEYBOARD_SYMBOLS] = 
+    [KEYBOARD_SYMBOLS] =
     {
         gText_NamingScreenKeyboard_01234,
         gText_NamingScreenKeyboard_56789,
@@ -2547,30 +2621,30 @@ static const u8* const sNamingScreenKeyboardText[KBPAGE_COUNT][KBROW_COUNT] =
 
 static const struct SpriteSheet sSpriteSheets[] =
 {
-    {gNamingScreenRWindow_Gfx + 0x280,          0x1E0,  GFXTAG_BACK_BUTTON},
-    {gNamingScreenRWindow_Gfx + 0x460,          0x1E0,  GFXTAG_OK_BUTTON},
-    {gNamingScreenRWindow_Gfx,                  0x280,  GFXTAG_PAGE_SWAP_FRAME},
-    {gNamingScreenPageButton_Gfx + 0x20,        0x100,  GFXTAG_PAGE_SWAP_BUTTON},
-    {gNamingScreenROptions_Gfx,                 0x060,  GFXTAG_PAGE_SWAP_UPPER},
-    {gNamingScreenROptions_Gfx + 0xA0,          0x060,  GFXTAG_PAGE_SWAP_LOWER},
-    {gNamingScreenROptions_Gfx + 0x140,         0x060,  GFXTAG_PAGE_SWAP_OTHERS},
-    {gNamingScreenCursor_Gfx,                   0x080,  GFXTAG_CURSOR},
-    {gNamingScreenCursor_Gfx + 0xA0,            0x080,  GFXTAG_CURSOR_SQUISHED},
-    {gNamingScreenCursor_Gfx + 0x140,           0x080,  GFXTAG_CURSOR_FILLED},
-    {gNamingScreenInputArrow_Gfx,               0x020,  GFXTAG_INPUT_ARROW},
-    {gNamingScreenUnderscore_Gfx,               0x020,  GFXTAG_UNDERSCORE},
+    {gNamingScreenBackButton_Gfx,     0x1E0,  GFXTAG_BACK_BUTTON},
+    {gNamingScreenOKButton_Gfx,       0x1E0,  GFXTAG_OK_BUTTON},
+    {gNamingScreenPageSwapFrame_Gfx,  0x280,  GFXTAG_PAGE_SWAP_FRAME},
+    {gNamingScreenPageSwapButton_Gfx, 0x100,  GFXTAG_PAGE_SWAP_BUTTON},
+    {gNamingScreenPageSwapUpper_Gfx,  0x060,  GFXTAG_PAGE_SWAP_UPPER},
+    {gNamingScreenPageSwapLower_Gfx,  0x060,  GFXTAG_PAGE_SWAP_LOWER},
+    {gNamingScreenPageSwapOthers_Gfx, 0x060,  GFXTAG_PAGE_SWAP_OTHERS},
+    {gNamingScreenCursor_Gfx,         0x080,  GFXTAG_CURSOR},
+    {gNamingScreenCursorSquished_Gfx, 0x080,  GFXTAG_CURSOR_SQUISHED},
+    {gNamingScreenCursorFilled_Gfx,   0x080,  GFXTAG_CURSOR_FILLED},
+    {gNamingScreenInputArrow_Gfx,     0x020,  GFXTAG_INPUT_ARROW},
+    {gNamingScreenUnderscore_Gfx,     0x020,  GFXTAG_UNDERSCORE},
     {}
 };
 
 static const struct SpritePalette sSpritePalettes[] =
 {
-    {gNamingScreenMenu_Pal,         PALTAG_PC_ICON},
-    {gNamingScreenMenu_Pal + 0x10,  PALTAG_PAGE_SWAP_UPPER},
-    {gNamingScreenMenu_Pal + 0x20,  PALTAG_PAGE_SWAP_LOWER},
-    {gNamingScreenMenu_Pal + 0x30,  PALTAG_PAGE_SWAP_OTHERS},
-    {gNamingScreenMenu_Pal + 0x40,  PALTAG_PAGE_SWAP},
-    {gNamingScreenMenu_Pal + 0x50,  PALTAG_CURSOR},
-    {gNamingScreenMenu_Pal + 0x40,  PALTAG_BACK_BUTTON},
-    {gNamingScreenMenu_Pal + 0x40,  PALTAG_OK_BUTTON},
+    {gNamingScreenMenu_Pal[0], PALTAG_MENU},
+    {gNamingScreenMenu_Pal[1], PALTAG_PAGE_SWAP_UPPER},
+    {gNamingScreenMenu_Pal[2], PALTAG_PAGE_SWAP_LOWER},
+    {gNamingScreenMenu_Pal[3], PALTAG_PAGE_SWAP_OTHERS},
+    {gNamingScreenMenu_Pal[4], PALTAG_PAGE_SWAP},
+    {gNamingScreenMenu_Pal[5], PALTAG_CURSOR},
+    {gNamingScreenMenu_Pal[4], PALTAG_BACK_BUTTON},
+    {gNamingScreenMenu_Pal[4], PALTAG_OK_BUTTON},
     {}
 };

@@ -40,12 +40,12 @@ static void VBlankCB(void)
 
 static const u16 sDiplomaPalettes[][16] =
 {
-    INCBIN_U16("graphics/misc/diploma_national.gbapal"),
-    INCBIN_U16("graphics/misc/diploma_hoenn.gbapal"),
+    INCGFX_U16("graphics/diploma/national.pal", ".gbapal"),
+    INCGFX_U16("graphics/diploma/hoenn.pal", ".gbapal"),
 };
 
-static const u32 sDiplomaTilemap[] = INCBIN_U32("graphics/misc/diploma_map.bin.lz");
-static const u32 sDiplomaTiles[] = INCBIN_U32("graphics/misc/diploma.4bpp.lz");
+static const u32 sDiplomaTilemap[] = INCGFX_U32("graphics/diploma/tilemap.bin", ".smolTM");
+static const u32 sDiplomaTiles[] = INCGFX_U32("graphics/diploma/tiles.png", ".4bpp.smol");
 
 void CB2_ShowDiploma(void)
 {
@@ -72,18 +72,18 @@ void CB2_ShowDiploma(void)
     ResetSpriteData();
     ResetPaletteFade();
     FreeAllSpritePalettes();
-    LoadPalette(sDiplomaPalettes, 0, 64);
-    sDiplomaTilemapPtr = malloc(0x1000);
+    LoadPalette(sDiplomaPalettes, BG_PLTT_ID(0), sizeof(sDiplomaPalettes));
+    sDiplomaTilemapPtr = Alloc(0x1000);
     InitDiplomaBg();
     InitDiplomaWindow();
     ResetTempTileDataBuffers();
     DecompressAndCopyTileDataToVram(1, &sDiplomaTiles, 0, 0, 0);
     while (FreeTempTileDataBuffersIfPossible())
         ;
-    LZDecompressWram(sDiplomaTilemap, sDiplomaTilemapPtr);
+    DecompressDataWithHeaderWram(sDiplomaTilemap, sDiplomaTilemapPtr);
     CopyBgTilemapBufferToVram(1);
     DisplayDiplomaText();
-    BlendPalettes(-1, 16, 0);
+    BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
     BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
     EnableInterrupts(1);
     SetVBlankCallback(VBlankCB);
@@ -140,7 +140,7 @@ static void DisplayDiplomaText(void)
     StringExpandPlaceholders(gStringVar4, gText_PokedexDiploma);
     PrintDiplomaText(gStringVar4, 0, 1);
     PutWindowTilemap(0);
-    CopyWindowToVram(0, 3);
+    CopyWindowToVram(0, COPYWIN_FULL);
 }
 
 static const struct BgTemplate sDiplomaBgTemplates[2] =
@@ -196,7 +196,7 @@ static void InitDiplomaWindow(void)
 {
     InitWindows(sDiplomaWinTemplates);
     DeactivateAllTextPrinters();
-    LoadPalette(gUnknown_0860F074, 0xF0, 0x20);
+    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
     PutWindowTilemap(0);
 }
@@ -205,5 +205,5 @@ static void PrintDiplomaText(u8 *text, u8 var1, u8 var2)
 {
     u8 color[3] = {0, 2, 3};
 
-    AddTextPrinterParameterized4(0, 1, var1, var2, 0, 0, color, -1, text);
+    AddTextPrinterParameterized4(0, FONT_NORMAL, var1, var2, 0, 0, color, TEXT_SKIP_DRAW, text);
 }

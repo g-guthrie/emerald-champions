@@ -1,62 +1,55 @@
-const struct FormChange *const gFormChangeTablePointers[NUM_SPECIES] = 
+const struct Fusion *const gFusionTablePointers[NUM_SPECIES] =
 {
-    [SPECIES_GIRATINA] = sGiratinaFormChangeTable,
-    [SPECIES_SHAYMIN] = sShayminFormChangeTable,
-    [SPECIES_SHAYMIN_SKY] = sShayminSkyFormChangeTable,
-    [SPECIES_ARCEUS] = sArceusFormChangeTable,
-    [SPECIES_ARCEUS_FIGHTING] = sArceusFormChangeTable,
-    [SPECIES_ARCEUS_FLYING] = sArceusFormChangeTable,
-    [SPECIES_ARCEUS_POISON] = sArceusFormChangeTable,
-    [SPECIES_ARCEUS_ROCK] = sArceusFormChangeTable,
-    [SPECIES_ARCEUS_GROUND] = sArceusFormChangeTable,
-    [SPECIES_ARCEUS_BUG] = sArceusFormChangeTable,
-    [SPECIES_ARCEUS_GHOST] = sArceusFormChangeTable,
-    [SPECIES_ARCEUS_STEEL] = sArceusFormChangeTable,
-    [SPECIES_ARCEUS_FIRE] = sArceusFormChangeTable,
-    [SPECIES_ARCEUS_WATER] = sArceusFormChangeTable,
-    [SPECIES_ARCEUS_GRASS] = sArceusFormChangeTable,
-    [SPECIES_ARCEUS_ELECTRIC] = sArceusFormChangeTable,
-    [SPECIES_ARCEUS_PSYCHIC] = sArceusFormChangeTable,
-    [SPECIES_ARCEUS_ICE] = sArceusFormChangeTable,
-    [SPECIES_ARCEUS_DRAGON] = sArceusFormChangeTable,
-    [SPECIES_ARCEUS_DARK] = sArceusFormChangeTable,
-    [SPECIES_ARCEUS_FAIRY] = sArceusFormChangeTable,
-    [SPECIES_TORNADUS] = sTornadusFormChangeTable,
-    [SPECIES_TORNADUS_THERIAN] = sTornadusTherianFormChangeTable,
-    [SPECIES_THUNDURUS] = sThundurusFormChangeTable,
-    [SPECIES_THUNDURUS_THERIAN] = sThundurusTherianFormChangeTable,
-    [SPECIES_LANDORUS] = sLandorusFormChangeTable,
-    [SPECIES_LANDORUS_THERIAN] = sLandorusTherianFormChangeTable,
-    [SPECIES_KELDEO] = sKeldeoFormChangeTable,
-    [SPECIES_KELDEO_RESOLUTE] = sKeldeoResoluteFormChangeTable,
-    [SPECIES_GENESECT] = sGenesectFormChangeTable, 
-    [SPECIES_GENESECT_DOUSE_DRIVE] = sGenesectFormChangeTable,
-    [SPECIES_GENESECT_SHOCK_DRIVE] = sGenesectFormChangeTable,
-    [SPECIES_GENESECT_BURN_DRIVE] = sGenesectFormChangeTable,
-    [SPECIES_GENESECT_CHILL_DRIVE] = sGenesectFormChangeTable,
-    [SPECIES_HOOPA] = sHoopaFormChangeTable,
-    [SPECIES_HOOPA_UNBOUND] = sHoopaUnboundFormChangeTable,
-    [SPECIES_ORICORIO] = sOricorioFormChangeTable,
-    [SPECIES_ORICORIO_POM_POM] = sOricorioFormChangeTable,
-    [SPECIES_ORICORIO_PAU] = sOricorioFormChangeTable,
-    [SPECIES_ORICORIO_SENSU] = sOricorioFormChangeTable,
-    [SPECIES_SILVALLY] = sSilvallyFormChangeTable,
-    [SPECIES_SILVALLY_BUG] = sSilvallyFormChangeTable,
-    [SPECIES_SILVALLY_DARK] = sSilvallyFormChangeTable,
-    [SPECIES_SILVALLY_DRAGON] = sSilvallyFormChangeTable,
-    [SPECIES_SILVALLY_ELECTRIC] = sSilvallyFormChangeTable,
-    [SPECIES_SILVALLY_FAIRY] = sSilvallyFormChangeTable,
-    [SPECIES_SILVALLY_FIGHTING] = sSilvallyFormChangeTable,
-    [SPECIES_SILVALLY_FIRE] = sSilvallyFormChangeTable,
-    [SPECIES_SILVALLY_FLYING] = sSilvallyFormChangeTable,
-    [SPECIES_SILVALLY_GHOST] = sSilvallyFormChangeTable,
-    [SPECIES_SILVALLY_GRASS] = sSilvallyFormChangeTable,
-    [SPECIES_SILVALLY_GROUND] = sSilvallyFormChangeTable,
-    [SPECIES_SILVALLY_ICE] = sSilvallyFormChangeTable,
-    [SPECIES_SILVALLY_POISON] = sSilvallyFormChangeTable,
-    [SPECIES_SILVALLY_PSYCHIC] = sSilvallyFormChangeTable,
-    [SPECIES_SILVALLY_ROCK] = sSilvallyFormChangeTable,
-    [SPECIES_SILVALLY_STEEL] = sSilvallyFormChangeTable,
-    [SPECIES_SILVALLY_WATER] = sSilvallyFormChangeTable,
-#include "verdant_gen9_form_change_pointers.h"
+#if P_FUSION_FORMS
+#if P_FAMILY_KYUREM
+    [SPECIES_KYUREM] = sKyuremFusionTable,
+#if P_FAMILY_RESHIRAM
+    [SPECIES_KYUREM_WHITE] = sKyuremFusionTable,
+    [SPECIES_RESHIRAM] = sKyuremFusionTable,
+#endif //P_FAMILY_RESHIRAM
+#if P_FAMILY_ZEKROM
+    [SPECIES_KYUREM_BLACK] = sKyuremFusionTable,
+    [SPECIES_ZEKROM] = sKyuremFusionTable,
+#endif //P_FAMILY_ZEKROM
+#endif //P_FAMILY_KYUREM
+#if P_FAMILY_NECROZMA
+    [SPECIES_NECROZMA] = sNecrozmaFusionTable,
+#if P_FAMILY_COSMOG
+    [SPECIES_NECROZMA_DAWN_WINGS] = sNecrozmaFusionTable,
+    [SPECIES_SOLGALEO] = sNecrozmaFusionTable,
+    [SPECIES_NECROZMA_DUSK_MANE] = sNecrozmaFusionTable,
+    [SPECIES_LUNALA] = sNecrozmaFusionTable,
+#endif //P_FAMILY_COSMOG
+#endif //P_FAMILY_NECROZMA
+#if P_FAMILY_CALYREX
+    [SPECIES_CALYREX] = sCalyrexFusionTable,
+#if P_FAMILY_SPECTRIER
+    [SPECIES_CALYREX_SHADOW] = sCalyrexFusionTable,
+    [SPECIES_SPECTRIER] = sCalyrexFusionTable,
+#endif //P_FAMILY_SPECTRIER
+#if P_FAMILY_GLASTRIER
+    [SPECIES_CALYREX_ICE] = sCalyrexFusionTable,
+    [SPECIES_GLASTRIER] = sCalyrexFusionTable,
+#endif //P_FAMILY_GLASTRIER
+#endif //P_FAMILY_CALYREX
+#endif //P_FUSION_FORMS
 };
+
+#if P_FUSION_FORMS
+#if P_FAMILY_KYUREM
+#if P_FAMILY_RESHIRAM
+const u16 gKyuremWhiteSwapMoveTable[][2] =
+{
+    {MOVE_SCARY_FACE, MOVE_FUSION_FLARE},
+    {MOVE_GLACIATE, MOVE_ICE_BURN},
+};
+#endif //P_FAMILY_RESHIRAM
+#if P_FAMILY_ZEKROM
+const u16 gKyuremBlackSwapMoveTable[][2] =
+{
+    {MOVE_SCARY_FACE, MOVE_FUSION_BOLT},
+    {MOVE_GLACIATE, MOVE_FREEZE_SHOCK},
+};
+#endif //P_FAMILY_ZEKROM
+#endif //P_FAMILY_KYUREM
+#endif //P_FUSION_FORMS

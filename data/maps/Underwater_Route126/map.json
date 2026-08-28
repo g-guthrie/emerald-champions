@@ -3,6 +3,7 @@
   "name": "Underwater_Route126",
   "layout": "LAYOUT_UNDERWATER_ROUTE126",
   "music": "MUS_UNDERWATER",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_UNDERWATER_126",
   "requires_flash": false,
   "weather": "WEATHER_UNDERWATER_BUBBLES",
@@ -14,44 +15,40 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "direction": "up",
+      "map": "MAP_UNDERWATER_ROUTE124",
       "offset": 0,
-      "map": "MAP_UNDERWATER_ROUTE124"
+      "direction": "up"
     },
     {
-      "direction": "right",
+      "map": "MAP_UNDERWATER_ROUTE127",
       "offset": 0,
-      "map": "MAP_UNDERWATER_ROUTE127"
+      "direction": "right"
     },
     {
-      "direction": "emerge",
+      "map": "MAP_ROUTE126",
       "offset": 0,
-      "map": "MAP_ROUTE126"
+      "direction": "emerge"
     }
   ],
-  "object_events": [
-
-  ],
+  "object_events": [],
   "warp_events": [
     {
       "x": 45,
       "y": 65,
       "elevation": 0,
       "dest_map": "MAP_UNDERWATER_SOOTOPOLIS_CITY",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
-  "coord_events": [
-
-  ],
+  "coord_events": [],
   "bg_events": [
     {
       "type": "hidden_item",
       "x": 30,
       "y": 17,
       "elevation": 3,
-      "item": "ITEM_BOTTLE_CAP",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_126_BOTTLE_CAP"
+      "item": "ITEM_HEART_SCALE",
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_126_HEART_SCALE"
     },
     {
       "type": "hidden_item",
@@ -74,7 +71,7 @@
       "x": 10,
       "y": 36,
       "elevation": 3,
-      "item": "ITEM_BIG_PEARL",
+      "item": "ITEM_PEARL",
       "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_126_PEARL"
     },
     {
@@ -108,14 +105,6 @@
       "elevation": 3,
       "item": "ITEM_BLUE_SHARD",
       "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_126_BLUE_SHARD"
-    },
-    {
-      "type": "hidden_item",
-      "x": 18,
-      "y": 37,
-      "elevation": 3,
-      "item": "ITEM_IRON_PLATE",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_126_IRON_PLATE"
     }
   ]
 }

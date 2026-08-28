@@ -3,6 +3,7 @@
   "name": "BattleFrontier_PokemonCenter_1F",
   "layout": "LAYOUT_POKEMON_CENTER_1F",
   "music": "MUS_POKE_CENTER",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_BATTLE_FRONTIER",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -15,8 +16,9 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_FRONTIER_NURSE",
       "graphics_id": "OBJ_EVENT_GFX_NURSE",
-      "x": 8,
+      "x": 7,
       "y": 2,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
@@ -28,19 +30,6 @@
       "flag": "0"
     },
     {
-			"graphics_id": "OBJ_EVENT_GFX_OLD_MAN",
-			"x": 13,
-			"y": 2,
-			"elevation": 3,
-			"movement_type": "MOVEMENT_TYPE_FACE_DOWN",
-			"movement_range_x": 0,
-			"movement_range_y": 0,
-			"trainer_type": "0",
-			"trainer_sight_or_berry_tree_id": "0",
-			"script": "PKMN_Center_Move_Tutor",
-			"flag": "0"
-    },
-    {
       "graphics_id": "OBJ_EVENT_GFX_MART_EMPLOYEE",
       "x": 2,
       "y": 2,
@@ -48,9 +37,22 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PokemonCenter_BattleItemMart_Script",
+      "script": "Common_EventScript_EmeraldChampionsBattleVendor",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_OLD_MAN",
+      "x": 13,
+      "y": 2,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Common_EventScript_EmeraldChampionsMoveTutor",
       "flag": "0"
     },
     {
@@ -68,10 +70,10 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_MAN_3",
-      "x": 12,
-      "y": 6,
+      "x": 11,
+      "y": 4,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
@@ -81,8 +83,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_PICNICKER",
-      "x": 4,
-      "y": 8,
+      "x": 2,
+      "y": 3,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 1,
@@ -94,8 +96,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_SKITTY",
-      "x": 3,
-      "y": 8,
+      "x": 1,
+      "y": 3,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 1,
@@ -108,25 +110,25 @@
   ],
   "warp_events": [
     {
-      "x": 8,
-      "y": 8,
-      "elevation": 3,
-      "dest_map": "MAP_BATTLE_FRONTIER_OUTSIDE_EAST",
-      "dest_warp_id": 12
-    },
-    {
       "x": 7,
       "y": 8,
       "elevation": 3,
       "dest_map": "MAP_BATTLE_FRONTIER_OUTSIDE_EAST",
-      "dest_warp_id": 12
+      "dest_warp_id": "12"
+    },
+    {
+      "x": 6,
+      "y": 8,
+      "elevation": 3,
+      "dest_map": "MAP_BATTLE_FRONTIER_OUTSIDE_EAST",
+      "dest_warp_id": "12"
     },
     {
       "x": 1,
       "y": 6,
       "elevation": 4,
       "dest_map": "MAP_BATTLE_FRONTIER_POKEMON_CENTER_2F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

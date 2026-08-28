@@ -1,6 +1,8 @@
 #include "global.h"
+#include "clock.h"
 #include "new_game.h"
 #include "random.h"
+#include "clock.h"
 #include "pokemon.h"
 #include "roamer.h"
 #include "pokemon_size_record.h"
@@ -19,6 +21,7 @@
 #include "event_data.h"
 #include "money.h"
 #include "trainer_hill.h"
+#include "trainer_tower.h"
 #include "tv.h"
 #include "coins.h"
 #include "text.h"
@@ -29,7 +32,6 @@
 #include "pokedex.h"
 #include "apprentice.h"
 #include "frontier_util.h"
-#include "constants/maps.h"
 #include "pokedex.h"
 #include "save.h"
 #include "link_rfu.h"
@@ -40,20 +42,25 @@
 #include "pokemon_jump.h"
 #include "decoration_inventory.h"
 #include "secret_base.h"
+#include "string_util.h"
 #include "player_pc.h"
 #include "field_specials.h"
 #include "berry_powder.h"
-#include "mevent.h"
+#include "mystery_gift.h"
 #include "union_room_chat.h"
+#include "constants/map_groups.h"
 #include "constants/items.h"
-#include "constants/flags.h"
+#include "difficulty.h"
+#include "follower_npc.h"
 
 extern const u8 EventScript_ResetAllMapFlags[];
+extern const u8 EventScript_ResetAllMapFlagsFrlg[];
 
 static void ClearFrontierRecord(void);
 static void WarpToTruck(void);
 static void ResetMiniGamesRecords(void);
-static void RandomizeBerryEncounters(void);
+static void ResetItemFlags(void);
+static void ResetDexNav(void);
 
 EWRAM_DATA bool8 gDifferentSaveFile = FALSE;
 EWRAM_DATA bool8 gEnableContestDebugging = FALSE;
@@ -93,19 +100,16 @@ static void InitPlayerTrainerId(void)
 // L=A isnt set here for some reason.
 static void SetDefaultOptions(void)
 {
-    gSaveBlock2Ptr->optionsTextSpeed = TRAINER_LEVEL_DIFFICULTY_HARD;
+    gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_MID;
     gSaveBlock2Ptr->optionsWindowFrameType = 0;
-    gSaveBlock2Ptr->optionsSound = OPTIONS_SOUND_STEREO;
-    gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SET;
+    gSaveBlock2Ptr->optionsSound = OPTIONS_SOUND_MONO;
+    gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SHIFT;
     gSaveBlock2Ptr->optionsBattleSceneOff = FALSE;
     gSaveBlock2Ptr->regionMapZoom = FALSE;
-    gSaveBlock2Ptr->gameDifficulty = DIFFICULTY_CHALLENGE;
-    gSaveBlock2Ptr->levelCaps = LEVEL_CAPS_STRICT;
 }
 
 static void ClearPokedexFlags(void)
 {
-    gUnusedPokedexU8 = 0;
     memset(&gSaveBlock1Ptr->dexCaught, 0, sizeof(gSaveBlock1Ptr->dexCaught));
     memset(&gSaveBlock1Ptr->dexSeen, 0, sizeof(gSaveBlock1Ptr->dexSeen));
 }
@@ -131,7 +135,10 @@ static void ClearFrontierRecord(void)
 
 static void WarpToTruck(void)
 {
-    SetWarpDestination(MAP_GROUP(INSIDE_OF_TRUCK), MAP_NUM(INSIDE_OF_TRUCK), -1, -1, -1);
+    if (IS_FRLG)
+        SetWarpDestination(MAP_GROUP(MAP_PALLET_TOWN_PLAYERS_HOUSE_2F), MAP_NUM(MAP_PALLET_TOWN_PLAYERS_HOUSE_2F), WARP_ID_NONE, 6, 6);
+    else
+        SetWarpDestination(MAP_GROUP(MAP_INSIDE_OF_TRUCK), MAP_NUM(MAP_INSIDE_OF_TRUCK), WARP_ID_NONE, -1, -1);
     WarpIntoMap();
 }
 
@@ -153,9 +160,15 @@ void ResetMenuAndMonGlobals(void)
 
 void NewGameInitData(void)
 {
+#if IS_FRLG
+    u8 rivalName[PLAYER_NAME_LENGTH + 1];
+#endif
     if (gSaveFileStatus == SAVE_STATUS_EMPTY || gSaveFileStatus == SAVE_STATUS_CORRUPT)
         RtcReset();
 
+#if IS_FRLG
+    StringCopy(rivalName, gSaveBlock1Ptr->rivalName);
+#endif
     gDifferentSaveFile = TRUE;
     gSaveBlock2Ptr->encryptionKey = 0;
     ZeroPlayerPartyMons();
@@ -163,21 +176,19 @@ void NewGameInitData(void)
     ResetPokedex();
     ClearFrontierRecord();
     ClearSav1();
-    ClearMailData();
+    ClearSav3();
+    ClearAllMail();
     gSaveBlock2Ptr->specialSaveWarpFlags = 0;
     gSaveBlock2Ptr->gcnLinkFlags = 0;
     InitPlayerTrainerId();
     PlayTimeCounter_Reset();
     ClearPokedexFlags();
     InitEventData();
-    FlagSet(FLAG_EMERALD_CHAMPIONS_MIGRATED_GYM_REWARDS);
-    FlagSet(FLAG_EMERALD_CHAMPIONS_MIGRATED_ITEM_BALLS);
-    FlagSet(FLAG_EMERALD_CHAMPIONS_DIFFICULTY_MIGRATED);
     ClearTVShowData();
     ResetGabbyAndTy();
     ClearSecretBases();
     ClearBerryTrees();
-    SetMoney(&gSaveBlock1Ptr->money, 25000);
+    SetMoney(&gSaveBlock1Ptr->money, 3000);
     SetCoins(0);
     ResetLinkContestBoolean();
     ResetGameStats();
@@ -185,12 +196,11 @@ void NewGameInitData(void)
     ClearPlayerLinkBattleRecords();
     InitSeedotSizeRecord();
     InitLotadSizeRecord();
-    gPlayerPartyCount = 0;
+    gPartiesCount[B_TRAINER_PLAYER] = 0;
     ZeroPlayerPartyMons();
     ResetPokemonStorageSystem();
-    ClearRoamerData();
-    ClearRoamerLocationData();
-    gSaveBlock1Ptr->registeredItem = 0;
+    DeactivateAllRoamers();
+    gSaveBlock1Ptr->registeredItem = ITEM_NONE;
     ClearBag();
     NewGameInitPCItems();
     ClearPokeblocks();
@@ -200,19 +210,30 @@ void NewGameInitData(void)
     InitDewfordTrend();
     ResetFanClub();
     ResetLotteryCorner();
+    UpdateDailySeed();
     WarpToTruck();
-    ScriptContext2_RunNewScript(EventScript_ResetAllMapFlags);
+    if (IS_FRLG)
+        RunScriptImmediately(EventScript_ResetAllMapFlagsFrlg);
+    else
+        RunScriptImmediately(EventScript_ResetAllMapFlags);
+#if IS_FRLG
+        StringCopy(gSaveBlock1Ptr->rivalName, rivalName);
+#endif
     ResetMiniGamesRecords();
     InitUnionRoomChatRegisteredTexts();
     InitLilycoveLady();
     ResetAllApprenticeData();
     ClearRankingHallRecords();
     InitMatchCallCounters();
-    sub_801AFD8();
+    ClearMysteryGift();
     WipeTrainerNameRecords();
     ResetTrainerHillResults();
+    ResetTrainerTowerResults();
     ResetContestLinkResults();
-    RandomizeBerryEncounters();
+    SetCurrentDifficultyLevel(DIFFICULTY_HARD);
+    ResetItemFlags();
+    ResetDexNav();
+    ClearFollowerNPCData();
 }
 
 static void ResetMiniGamesRecords(void)
@@ -223,20 +244,17 @@ static void ResetMiniGamesRecords(void)
     CpuFill16(0, &gSaveBlock2Ptr->berryPick, sizeof(struct BerryPickingResults));
 }
 
-// Determines whether or not the player should encounter a Pokemon in new game berry trees
-static void RandomizeBerryEncounters(void)
+static void ResetItemFlags(void)
 {
-    u8 treeId = 0;
-    int i = 0;
+#if OW_SHOW_ITEM_DESCRIPTIONS == OW_ITEM_DESCRIPTIONS_FIRST_TIME
+    memset(&gSaveBlock3Ptr->itemFlags, 0, sizeof(gSaveBlock3Ptr->itemFlags));
+#endif
+}
 
-    struct BerryTree *tree;
-
-    for (i = 0; i < BERRY_TREES_COUNT; i++)
-    {
-        if (Random() % 2) // 50/50 encounter chance
-        {
-            tree = &gSaveBlock1Ptr->berryTrees[i];
-            tree->EncounterBerryStage = TRUE;
-        }
-    }
+static void ResetDexNav(void)
+{
+#if USE_DEXNAV_SEARCH_LEVELS == TRUE
+    memset(gSaveBlock3Ptr->dexNavSearchLevels, 0, sizeof(gSaveBlock3Ptr->dexNavSearchLevels));
+#endif
+    gSaveBlock3Ptr->dexNavChain = 0;
 }

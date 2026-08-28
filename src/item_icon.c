@@ -1,8 +1,11 @@
 #include "global.h"
+#include "battle_main.h"
 #include "decompress.h"
 #include "graphics.h"
+#include "item.h"
 #include "item_icon.h"
 #include "malloc.h"
+#include "move.h"
 #include "sprite.h"
 #include "constants/items.h"
 
@@ -10,15 +13,12 @@
 EWRAM_DATA u8 *gItemIconDecompressionBuffer = NULL;
 EWRAM_DATA u8 *gItemIcon4x4Buffer = NULL;
 
-// const rom data
-#include "data/item_icon_table.h"
-
 static const struct OamData sOamData_ItemIcon =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
     .x = 0,
@@ -47,17 +47,11 @@ const struct SpriteTemplate gItemIconSpriteTemplate =
     .paletteTag = 0,
     .oam = &sOamData_ItemIcon,
     .anims = sSpriteAnimTable_ItemIcon,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy,
 };
 
 // code
 bool8 AllocItemIconTemporaryBuffers(void)
 {
-    if (gItemIconDecompressionBuffer != NULL || gItemIcon4x4Buffer != NULL)
-        return FALSE;
-
     gItemIconDecompressionBuffer = Alloc(0x120);
     if (gItemIconDecompressionBuffer == NULL)
         return FALSE;
@@ -65,7 +59,7 @@ bool8 AllocItemIconTemporaryBuffers(void)
     gItemIcon4x4Buffer = AllocZeroed(0x200);
     if (gItemIcon4x4Buffer == NULL)
     {
-        FREE_AND_SET_NULL(gItemIconDecompressionBuffer);
+        Free(gItemIconDecompressionBuffer);
         return FALSE;
     }
 
@@ -74,8 +68,8 @@ bool8 AllocItemIconTemporaryBuffers(void)
 
 void FreeItemIconTemporaryBuffers(void)
 {
-    TRY_FREE_AND_SET_NULL(gItemIconDecompressionBuffer);
-    TRY_FREE_AND_SET_NULL(gItemIcon4x4Buffer);
+    Free(gItemIconDecompressionBuffer);
+    Free(gItemIcon4x4Buffer);
 }
 
 void CopyItemIconPicTo4x4Buffer(const void *src, void *dest)
@@ -86,116 +80,104 @@ void CopyItemIconPicTo4x4Buffer(const void *src, void *dest)
         CpuCopy16(src + i * 96, dest + i * 128, 0x60);
 }
 
-u8 AddItemIconSprite(u16 tilesTag, u16 paletteTag, u16 itemId)
+u8 AddItemIconSprite(u16 tilesTag, u16 paletteTag, enum Item itemId)
 {
-    u8 spriteId = MAX_SPRITES;
-    bool8 tilesLoaded = FALSE;
-    bool8 paletteLoaded = FALSE;
-    struct SpriteSheet spriteSheet;
-    struct CompressedSpritePalette spritePalette;
-    struct SpriteTemplate spriteTemplate;
-
     if (!AllocItemIconTemporaryBuffers())
-        return MAX_SPRITES;
-
-    // Item icon tags are single-owner resources. Reusing a live tag would let
-    // either sprite release graphics still needed by the other one.
-    if (GetSpriteTileStartByTag(tilesTag) != 0xFFFF
-     || IndexOfSpritePaletteTag(paletteTag) != 0xFF)
-        goto cleanup;
-
-    LZDecompressWram(GetItemIconPicOrPalette(itemId, 0), gItemIconDecompressionBuffer);
-    CopyItemIconPicTo4x4Buffer(gItemIconDecompressionBuffer, gItemIcon4x4Buffer);
-    spriteSheet.data = gItemIcon4x4Buffer;
-    spriteSheet.size = 0x200;
-    spriteSheet.tag = tilesTag;
-    LoadSpriteSheet(&spriteSheet);
-    if (GetSpriteTileStartByTag(tilesTag) == 0xFFFF)
-        goto cleanup;
-    tilesLoaded = TRUE;
-
-    spritePalette.data = GetItemIconPicOrPalette(itemId, 1);
-    spritePalette.tag = paletteTag;
-    LoadCompressedSpritePalette(&spritePalette);
-    if (IndexOfSpritePaletteTag(paletteTag) == 0xFF)
-        goto cleanup;
-    paletteLoaded = TRUE;
-
-    CpuCopy16(&gItemIconSpriteTemplate, &spriteTemplate, sizeof(spriteTemplate));
-    spriteTemplate.tileTag = tilesTag;
-    spriteTemplate.paletteTag = paletteTag;
-    spriteId = CreateSprite(&spriteTemplate, 0, 0, 0);
-
-cleanup:
-    FreeItemIconTemporaryBuffers();
-    if (spriteId == MAX_SPRITES)
     {
-        if (paletteLoaded)
-            FreeSpritePaletteByTag(paletteTag);
-        if (tilesLoaded)
-            FreeSpriteTilesByTag(tilesTag);
+        return MAX_SPRITES;
     }
+    else
+    {
+        u8 spriteId;
+        struct SpriteSheet spriteSheet;
+        struct SpritePalette spritePalette;
+        struct SpriteTemplate *spriteTemplate;
 
-    return spriteId;
+        DecompressDataWithHeaderWram(GetItemIconPic(itemId), gItemIconDecompressionBuffer);
+        CopyItemIconPicTo4x4Buffer(gItemIconDecompressionBuffer, gItemIcon4x4Buffer);
+        spriteSheet.data = gItemIcon4x4Buffer;
+        spriteSheet.size = 0x200;
+        spriteSheet.tag = tilesTag;
+        LoadSpriteSheet(&spriteSheet);
+
+        spritePalette.data = GetItemIconPalette(itemId);
+        spritePalette.tag = paletteTag;
+        LoadSpritePalette(&spritePalette);
+
+        spriteTemplate = Alloc(sizeof(*spriteTemplate));
+        CpuCopy16(&gItemIconSpriteTemplate, spriteTemplate, sizeof(*spriteTemplate));
+        spriteTemplate->tileTag = tilesTag;
+        spriteTemplate->paletteTag = paletteTag;
+        spriteId = CreateSprite(spriteTemplate, 0, 0, 0);
+
+        FreeItemIconTemporaryBuffers();
+        Free(spriteTemplate);
+
+        return spriteId;
+    }
 }
 
-u8 AddCustomItemIconSprite(const struct SpriteTemplate *customSpriteTemplate, u16 tilesTag, u16 paletteTag, u16 itemId)
+u8 AddCustomItemIconSprite(const struct SpriteTemplate *customSpriteTemplate, u16 tilesTag, u16 paletteTag, enum Item itemId)
 {
-    u8 spriteId = MAX_SPRITES;
-    bool8 tilesLoaded = FALSE;
-    bool8 paletteLoaded = FALSE;
-    struct SpriteSheet spriteSheet;
-    struct CompressedSpritePalette spritePalette;
-    struct SpriteTemplate spriteTemplate;
-
     if (!AllocItemIconTemporaryBuffers())
-        return MAX_SPRITES;
-
-    if (GetSpriteTileStartByTag(tilesTag) != 0xFFFF
-     || IndexOfSpritePaletteTag(paletteTag) != 0xFF)
-        goto cleanup;
-
-    LZDecompressWram(GetItemIconPicOrPalette(itemId, 0), gItemIconDecompressionBuffer);
-    CopyItemIconPicTo4x4Buffer(gItemIconDecompressionBuffer, gItemIcon4x4Buffer);
-    spriteSheet.data = gItemIcon4x4Buffer;
-    spriteSheet.size = 0x200;
-    spriteSheet.tag = tilesTag;
-    LoadSpriteSheet(&spriteSheet);
-    if (GetSpriteTileStartByTag(tilesTag) == 0xFFFF)
-        goto cleanup;
-    tilesLoaded = TRUE;
-
-    spritePalette.data = GetItemIconPicOrPalette(itemId, 1);
-    spritePalette.tag = paletteTag;
-    LoadCompressedSpritePalette(&spritePalette);
-    if (IndexOfSpritePaletteTag(paletteTag) == 0xFF)
-        goto cleanup;
-    paletteLoaded = TRUE;
-
-    CpuCopy16(customSpriteTemplate, &spriteTemplate, sizeof(spriteTemplate));
-    spriteTemplate.tileTag = tilesTag;
-    spriteTemplate.paletteTag = paletteTag;
-    spriteId = CreateSprite(&spriteTemplate, 0, 0, 0);
-
-cleanup:
-    FreeItemIconTemporaryBuffers();
-    if (spriteId == MAX_SPRITES)
     {
-        if (paletteLoaded)
-            FreeSpritePaletteByTag(paletteTag);
-        if (tilesLoaded)
-            FreeSpriteTilesByTag(tilesTag);
+        return MAX_SPRITES;
     }
+    else
+    {
+        u8 spriteId;
+        struct SpriteSheet spriteSheet;
+        struct SpritePalette spritePalette;
+        struct SpriteTemplate *spriteTemplate;
 
-    return spriteId;
+        DecompressDataWithHeaderWram(GetItemIconPic(itemId), gItemIconDecompressionBuffer);
+        CopyItemIconPicTo4x4Buffer(gItemIconDecompressionBuffer, gItemIcon4x4Buffer);
+        spriteSheet.data = gItemIcon4x4Buffer;
+        spriteSheet.size = 0x200;
+        spriteSheet.tag = tilesTag;
+        LoadSpriteSheet(&spriteSheet);
+
+        spritePalette.data = GetItemIconPalette(itemId);
+        spritePalette.tag = paletteTag;
+        LoadSpritePalette(&spritePalette);
+
+        spriteTemplate = Alloc(sizeof(*spriteTemplate));
+        CpuCopy16(customSpriteTemplate, spriteTemplate, sizeof(*spriteTemplate));
+        spriteTemplate->tileTag = tilesTag;
+        spriteTemplate->paletteTag = paletteTag;
+        spriteId = CreateSprite(spriteTemplate, 0, 0, 0);
+
+        FreeItemIconTemporaryBuffers();
+        Free(spriteTemplate);
+
+        return spriteId;
+    }
 }
 
-const void *GetItemIconPicOrPalette(u16 itemId, u8 which)
+const void *GetItemIconPic(enum Item itemId)
 {
-    if (itemId == 0xFFFF)
-        itemId = ITEM_FIELD_ARROW;
-    else if (itemId >= ITEMS_COUNT)
-        itemId = 0;
+    if (itemId == ITEM_LIST_END)
+        return gItemIcon_ReturnToFieldArrow; // Use last icon, the "return to field" arrow
+    if (itemId >= ITEMS_COUNT)
+        return gItemsInfo[0].iconPic;
+    if (gItemsInfo[itemId].pocket == POCKET_TM_HM)
+    {
+        if (GetItemTMHMIndex(itemId) > NUM_TECHNICAL_MACHINES)
+            return gItemIcon_HM;
+        return gItemIcon_TM;
+    }
 
-    return gItemIconTable[itemId][which];
+    return gItemsInfo[itemId].iconPic;
+}
+
+const u16 *GetItemIconPalette(enum Item itemId)
+{
+    if (itemId == ITEM_LIST_END)
+        return gItemIconPalette_ReturnToFieldArrow;
+    if (itemId >= ITEMS_COUNT)
+        return gItemsInfo[0].iconPalette;
+    if (gItemsInfo[itemId].pocket == POCKET_TM_HM)
+        return gTypesInfo[GetMoveType(GetItemTMHMMoveId(itemId))].paletteTMHM;
+
+    return gItemsInfo[itemId].iconPalette;
 }

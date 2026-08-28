@@ -3,6 +3,7 @@
   "name": "Route117_PokemonDayCare",
   "layout": "LAYOUT_ROUTE117_POKEMON_DAY_CARE",
   "music": "MUS_RUSTBORO",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_ROUTE_117",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -15,6 +16,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_DAYCARE_LADY",
       "graphics_id": "OBJ_EVENT_GFX_OLD_WOMAN",
       "x": 2,
       "y": 2,
@@ -26,19 +28,6 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route117_PokemonDayCare_EventScript_DaycareWoman",
       "flag": "0"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
-      "x": 9,
-      "y": 6,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "0",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route117_PokemonDayCare_EventScript_RandomEgg",
-      "flag": "0"
     }
   ],
   "warp_events": [
@@ -47,14 +36,14 @@
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_ROUTE117",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 3,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_ROUTE117",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

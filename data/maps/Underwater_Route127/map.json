@@ -3,6 +3,7 @@
   "name": "Underwater_Route127",
   "layout": "LAYOUT_UNDERWATER_ROUTE127",
   "music": "MUS_UNDERWATER",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_UNDERWATER_127",
   "requires_flash": false,
   "weather": "WEATHER_UNDERWATER_BUBBLES",
@@ -14,43 +15,39 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "direction": "emerge",
+      "map": "MAP_ROUTE127",
       "offset": 0,
-      "map": "MAP_ROUTE127"
+      "direction": "emerge"
     },
     {
-      "direction": "left",
+      "map": "MAP_UNDERWATER_ROUTE126",
       "offset": 0,
-      "map": "MAP_UNDERWATER_ROUTE126"
+      "direction": "left"
     },
     {
-      "direction": "down",
+      "map": "MAP_UNDERWATER_ROUTE128",
       "offset": 0,
-      "map": "MAP_UNDERWATER_ROUTE128"
+      "direction": "down"
     }
   ],
-  "object_events": [
-
-  ],
+  "object_events": [],
   "warp_events": [
     {
       "x": 57,
       "y": 5,
       "elevation": 0,
       "dest_map": "MAP_UNDERWATER_MARINE_CAVE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 67,
       "y": 38,
       "elevation": 0,
       "dest_map": "MAP_UNDERWATER_MARINE_CAVE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
-  "coord_events": [
-
-  ],
+  "coord_events": [],
   "bg_events": [
     {
       "type": "hidden_item",
@@ -73,8 +70,8 @@
       "x": 34,
       "y": 72,
       "elevation": 3,
-      "item": "ITEM_BOTTLE_CAP",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_127_BOTTLE_CAP"
+      "item": "ITEM_HEART_SCALE",
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_127_HEART_SCALE"
     },
     {
       "type": "hidden_item",
@@ -83,14 +80,6 @@
       "elevation": 3,
       "item": "ITEM_RED_SHARD",
       "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_127_RED_SHARD"
-    },
-    {
-      "type": "hidden_item",
-      "x": 25,
-      "y": 17,
-      "elevation": 3,
-      "item": "ITEM_MIND_PLATE",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_127_MIND_PLATE"
     }
   ]
 }

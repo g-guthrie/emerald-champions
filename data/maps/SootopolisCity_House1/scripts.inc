@@ -1,39 +1,42 @@
-SootopolisCity_House1_MapScripts:: @ 822694C
+SootopolisCity_House1_MapScripts::
 	.byte 0
 
-SootopolisCity_House1_EventScript_BrickBreakBlackBelt:: @ 822694D
+SootopolisCity_House1_EventScript_BrickBreakBlackBelt::
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_TM75, SootopolisCity_House1_EventScript_ReceivedBrickBreak
+	goto_if_set FLAG_RECEIVED_TM_BRICK_BREAK, SootopolisCity_House1_EventScript_ReceivedBrickBreak
 	msgbox SootopolisCity_House1_Text_DevelopedThisTM, MSGBOX_DEFAULT
 	giveitem ITEM_RAZOR_CLAW
-	compare VAR_RESULT, FALSE
-	goto_if_eq Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_TM75
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_RECEIVED_TM_BRICK_BREAK
 	msgbox SootopolisCity_House1_Text_ExplainBrickBreak, MSGBOX_DEFAULT
 	release
 	end
 
-SootopolisCity_House1_EventScript_ReceivedBrickBreak:: @ 8226984
+SootopolisCity_House1_EventScript_ReceivedBrickBreak::
 	msgbox SootopolisCity_House1_Text_ExplainBrickBreak, MSGBOX_DEFAULT
 	release
 	end
 
-SootopolisCity_House1_EventScript_Kecleon:: @ 822698E
+SootopolisCity_House1_EventScript_Kecleon::
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_KECLEON, 0
+	playmoncry SPECIES_KECLEON, CRY_MODE_NORMAL
 	msgbox SootopolisCity_House1_Text_Kecleon, MSGBOX_DEFAULT
 	waitmoncry
 	release
 	end
-SootopolisCity_House1_Text_DevelopedThisTM:
-	.string "I found this Razor Claw training.\n"
-	.string "You should have it.$"
-SootopolisCity_House1_Text_ExplainBrickBreak:
-	.string "A Razor Claw evolves Sneasel.\p"
-	.string "Level it at night while holding it.$"
 
-SootopolisCity_House1_Text_Kecleon: @ 8226A60
-	.string "Kecleon: Puu puhyaah.$"
+SootopolisCity_House1_Text_DevelopedThisTM:
+	.string "For thirty years I've remained in\n"
+	.string "SOOTOPOLIS honing my skills.\p"
+	.string "I developed a shattering TM.\n"
+	.string "I bequeath it to you!$"
+SootopolisCity_House1_Text_ExplainBrickBreak:
+	.string "A Razor Claw evolves Sneasel.\n"
+	.string "Use it at night when ready.$"
+
+SootopolisCity_House1_Text_Kecleon:
+	.string "KECLEON: Puu puhyaah.$"
+

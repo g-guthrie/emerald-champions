@@ -4,6 +4,7 @@
 #include "berry_powder.h"
 #include "bg.h"
 #include "decompress.h"
+#include "digit_obj_util.h"
 #include "dynamic_placeholder_text_util.h"
 #include "event_data.h"
 #include "gpu_regs.h"
@@ -17,11 +18,10 @@
 #include "malloc.h"
 #include "math_util.h"
 #include "menu.h"
+#include "minigame_countdown.h"
 #include "overworld.h"
 #include "palette.h"
-#include "minigame_countdown.h"
 #include "random.h"
-#include "digit_obj_util.h"
 #include "save.h"
 #include "scanline_effect.h"
 #include "script.h"
@@ -171,7 +171,7 @@ enum {
 #define INPUT_FLAG_MASK ((1 << INPUT_FLAGS_PER_PLAYER) - 1)
 
 // Values for the inputState field
-enum { 
+enum {
     INPUT_STATE_NONE,
     INPUT_STATE_HIT,      // Hit the crusher
     INPUT_STATE_HIT_SYNC, // Hit the crusher at same time as another player
@@ -241,7 +241,7 @@ struct BerryCrushGame_Results
 };
 
 // playerIdsRanked above has 3 additional elements after the players.
-// Only 1 of these 2*3 is ever used, and it stores the id for which 
+// Only 1 of these 2*3 is ever used, and it stores the id for which
 // random results page to show. Its define below is for readability.
 #define randomPageId playerIdsRanked[0][7]
 
@@ -369,33 +369,33 @@ static u32 Cmd_Quit(struct BerryCrushGame *, u8 *);
 
 static EWRAM_DATA struct BerryCrushGame *sGame = NULL;
 
-static const u8 sBitTable[] = { 
-    1 << 0, 
-    1 << 1, 
-    1 << 2, 
-    1 << 3, 
-    1 << 4, 
-    1 << 5, 
-    1 << 6, 
-    1 << 7 
+static const u8 sBitTable[] = {
+    1 << 0,
+    1 << 1,
+    1 << 2,
+    1 << 3,
+    1 << 4,
+    1 << 5,
+    1 << 6,
+    1 << 7
 };
 // Additional A presses are counted depending on the number of players
 // The bonus of 5 is unobtainable
 static const u8 sSyncPressBonus[MAX_RFU_PLAYERS] = { 0, 1, 2, 3, 5 };
 ALIGNED(4)
-static const s8 sIntroOutroVibrationData[][7] = 
+static const s8 sIntroOutroVibrationData[][7] =
 {
-    { 4, 1, 0, -1,  0,  0, 0}, 
-    { 4, 2, 0, -1,  0,  0, 0}, 
-    { 4, 2, 0, -2,  0,  0, 0}, 
-    { 6, 3, 1, -1, -3, -1, 0}, 
+    { 4, 1, 0, -1,  0,  0, 0},
+    { 4, 2, 0, -1,  0,  0, 0},
+    { 4, 2, 0, -2,  0,  0, 0},
+    { 6, 3, 1, -1, -3, -1, 0},
     { 6, 4, 1, -2, -4, -2, 0},
 };
 
 ALIGNED(4)
-static const u8 sVibrationData[MAX_RFU_PLAYERS][4] = 
+static const u8 sVibrationData[MAX_RFU_PLAYERS][4] =
 {
-    {3, 2, 1, 0}, 
+    {3, 2, 1, 0},
     {3, 3, 1, 0},
     {3, 3, 2, 0},
     {3, 4, 2, 0},
@@ -433,7 +433,7 @@ static const struct BgTemplate sBgTemplates[4] =
         .screenSize = 2,
         .paletteMode = 0,
         .priority = 1,
-        .baseTile = 0, 
+        .baseTile = 0,
     },
     {
         .bg = 2,
@@ -442,7 +442,7 @@ static const struct BgTemplate sBgTemplates[4] =
         .screenSize = 0,
         .paletteMode = 0,
         .priority = 2,
-        .baseTile = 0, 
+        .baseTile = 0,
     },
     {
         .bg = 3,
@@ -451,7 +451,7 @@ static const struct BgTemplate sBgTemplates[4] =
         .screenSize = 0,
         .paletteMode = 0,
         .priority = 3,
-        .baseTile = 0, 
+        .baseTile = 0,
     },
 };
 
@@ -468,11 +468,11 @@ static const u8 sTextColorTable[][3] =
 
 static const struct WindowTemplate sWindowTemplate_Rankings =
 {
-    .bg = 0, 
-    .tilemapLeft = 3, 
-    .tilemapTop = 4, 
-    .width = 24, 
-    .height = 13, 
+    .bg = 0,
+    .tilemapLeft = 3,
+    .tilemapTop = 4,
+    .width = 24,
+    .height = 13,
     .paletteNum = 15,
     .baseBlock = 1
 };
@@ -480,48 +480,48 @@ static const struct WindowTemplate sWindowTemplate_Rankings =
 static const struct WindowTemplate sWindowTemplates_PlayerNames[MAX_RFU_PLAYERS + 1] =
 {
     {
-        .bg = 0, 
-        .tilemapLeft = 0, 
-        .tilemapTop = 0, 
-        .width = 9, 
-        .height = 2, 
-        .paletteNum = 8, 
+        .bg = 0,
+        .tilemapLeft = 0,
+        .tilemapTop = 0,
+        .width = 9,
+        .height = 2,
+        .paletteNum = 8,
         .baseBlock = 1005
     },
     {
-        .bg = 0, 
-        .tilemapLeft = 0, 
-        .tilemapTop = 3, 
-        .width = 9, 
-        .height = 2, 
-        .paletteNum = 8, 
+        .bg = 0,
+        .tilemapLeft = 0,
+        .tilemapTop = 3,
+        .width = 9,
+        .height = 2,
+        .paletteNum = 8,
         .baseBlock = 987
     },
     {
-        .bg = 0, 
-        .tilemapLeft = 0, 
-        .tilemapTop = 6, 
-        .width = 9, 
-        .height = 2, 
-        .paletteNum = 8, 
+        .bg = 0,
+        .tilemapLeft = 0,
+        .tilemapTop = 6,
+        .width = 9,
+        .height = 2,
+        .paletteNum = 8,
         .baseBlock = 969
     },
     {
-        .bg = 0, 
-        .tilemapLeft = 21, 
-        .tilemapTop = 3, 
-        .width = 9, 
-        .height = 2, 
-        .paletteNum = 8, 
+        .bg = 0,
+        .tilemapLeft = 21,
+        .tilemapTop = 3,
+        .width = 9,
+        .height = 2,
+        .paletteNum = 8,
         .baseBlock = 951
     },
     {
-        .bg = 0, 
-        .tilemapLeft = 21, 
-        .tilemapTop = 6, 
-        .width = 9, 
-        .height = 2, 
-        .paletteNum = 8, 
+        .bg = 0,
+        .tilemapLeft = 21,
+        .tilemapTop = 6,
+        .width = 9,
+        .height = 2,
+        .paletteNum = 8,
         .baseBlock = 933
     },
     DUMMY_WIN_TEMPLATE,
@@ -530,30 +530,30 @@ static const struct WindowTemplate sWindowTemplates_PlayerNames[MAX_RFU_PLAYERS 
 static const struct WindowTemplate sWindowTemplates_Results[] =
 {
     [STATE_RESULTS_PRESSES - RESULTS_STATE_START] = {
-        .bg = 0, 
-        .tilemapLeft = 5, 
-        .tilemapTop = 2, 
-        .width = 20, 
-        .height = 16, 
-        .paletteNum = 15, 
+        .bg = 0,
+        .tilemapLeft = 5,
+        .tilemapTop = 2,
+        .width = 20,
+        .height = 16,
+        .paletteNum = 15,
         .baseBlock = 1
     },
     [STATE_RESULTS_RANDOM - RESULTS_STATE_START] = {
-        .bg = 0, 
-        .tilemapLeft = 5, 
-        .tilemapTop = 2, 
-        .width = 20, 
-        .height = 16, 
-        .paletteNum = 15, 
+        .bg = 0,
+        .tilemapLeft = 5,
+        .tilemapTop = 2,
+        .width = 20,
+        .height = 16,
+        .paletteNum = 15,
         .baseBlock = 1
     },
     [STATE_RESULTS_CRUSHING - RESULTS_STATE_START] = {
-        .bg = 0, 
-        .tilemapLeft = 4, 
-        .tilemapTop = 2, 
-        .width = 22, 
-        .height = 16, 
-        .paletteNum = 15, 
+        .bg = 0,
+        .tilemapLeft = 4,
+        .tilemapTop = 2,
+        .width = 22,
+        .height = 16,
+        .paletteNum = 15,
         .baseBlock = 1
     },
     DUMMY_WIN_TEMPLATE,
@@ -567,7 +567,7 @@ static const u8 sResultsWindowHeights[][MAX_RFU_PLAYERS - 1] =
     {12, 14, 15, 16}, // "Crushing" page
 };
 
-static const u32 sPressingSpeedConversionTable[] = 
+static const u32 sPressingSpeedConversionTable[] =
 {
     50000000, // 50
     25000000, // 25
@@ -579,20 +579,20 @@ static const u32 sPressingSpeedConversionTable[] =
       390625  //  0.390625
 };
 
-static const u16 sCrusherBase_Pal[]     = INCBIN_U16("graphics/berry_crush/crusher_base.gbapal");
-static const u16 sEffects_Pal[]         = INCBIN_U16("graphics/berry_crush/effects.gbapal");
-static const u16 sTimerDigits_Pal[]     = INCBIN_U16("graphics/berry_crush/timer_digits.gbapal");
-static const u32 sCrusherBase_Gfx[]     = INCBIN_U32("graphics/berry_crush/crusher_base.4bpp.lz");
-static const u32 sImpact_Gfx[]          = INCBIN_U32("graphics/berry_crush/impact.4bpp.lz");
-static const u32 sSparkle_Gfx[]         = INCBIN_U32("graphics/berry_crush/sparkle.4bpp.lz");
-static const u32 sTimerDigits_Gfx[]     = INCBIN_U32("graphics/berry_crush/timer_digits.4bpp.lz");
-static const u8 sCrusherTop_Tilemap[]   = INCBIN_U8("graphics/berry_crush/crusher_top.bin.lz");
-static const u8 sContainerCap_Tilemap[] = INCBIN_U8("graphics/berry_crush/container_cap.bin.lz");
-static const u8 sBg_Tilemap[]           = INCBIN_U8("graphics/berry_crush/bg.bin.lz");
+static const u16 sCrusherBase_Pal[]     = INCGFX_U16("graphics/berry_crush/crusher_base.png", ".gbapal");
+static const u16 sEffects_Pal[]         = INCGFX_U16("graphics/berry_crush/effects.pal", ".gbapal");
+static const u16 sTimerDigits_Pal[]     = INCGFX_U16("graphics/berry_crush/timer_digits.png", ".gbapal");
+static const u32 sCrusherBase_Gfx[]     = INCGFX_U32("graphics/berry_crush/crusher_base.png", ".4bpp.smol");
+static const u32 sImpact_Gfx[]          = INCGFX_U32("graphics/berry_crush/impact.png", ".4bpp.smol");
+static const u32 sSparkle_Gfx[]         = INCGFX_U32("graphics/berry_crush/sparkle.png", ".4bpp.smol");
+static const u32 sTimerDigits_Gfx[]     = INCGFX_U32("graphics/berry_crush/timer_digits.png", ".4bpp.smol");
+static const u8 sCrusherTop_Tilemap[]   = INCBIN_U8("graphics/berry_crush/crusher_top.bin.smolTM");
+static const u8 sContainerCap_Tilemap[] = INCBIN_U8("graphics/berry_crush/container_cap.bin.smolTM");
+static const u8 sBg_Tilemap[]           = INCBIN_U8("graphics/berry_crush/bg.bin.smolTM");
 
-// Takes the number of players - 2 and a player id and returns the 
+// Takes the number of players - 2 and a player id and returns the
 // index into sPlayerCoords where that player should be seated
-static const u8 sPlayerIdToPosId[MAX_RFU_PLAYERS - 1][MAX_RFU_PLAYERS] = 
+static const u8 sPlayerIdToPosId[MAX_RFU_PLAYERS - 1][MAX_RFU_PLAYERS] =
 {
     {1, 3},
     {0, 1, 3},
@@ -672,18 +672,18 @@ static const s8 sSparkleCoords[][2] =
     { 40, -16},
 };
 
-static const u16 sPlayerBerrySpriteTags[MAX_RFU_PLAYERS] = 
+static const u16 sPlayerBerrySpriteTags[MAX_RFU_PLAYERS] =
 {
-    TAG_PLAYER1_BERRY, 
-    TAG_PLAYER2_BERRY, 
-    TAG_PLAYER3_BERRY, 
-    TAG_PLAYER4_BERRY, 
+    TAG_PLAYER1_BERRY,
+    TAG_PLAYER2_BERRY,
+    TAG_PLAYER3_BERRY,
+    TAG_PLAYER4_BERRY,
     TAG_PLAYER5_BERRY
 };
 
 // sTimerDigits_Gfx is part of this array but is (apparently) uncompressed
 // It gets cast to raw uncompressed data when used in sDigitObjTemplates
-static const struct CompressedSpriteSheet sSpriteSheets[] = 
+static const struct CompressedSpriteSheet sSpriteSheets[] =
 {
     { .data = sCrusherBase_Gfx, .size = 0x800, .tag = TAG_CRUSHER_BASE },
     { .data = sImpact_Gfx,      .size = 0xE00, .tag = GFXTAG_IMPACT },
@@ -727,23 +727,23 @@ static const union AnimCmd sAnim_Impact_Big[] =
 static const union AnimCmd sAnim_Sparkle_Small[] =
 {
     ANIMCMD_FRAME(0, 2),
-    ANIMCMD_FRAME(4, 2), 
+    ANIMCMD_FRAME(4, 2),
     ANIMCMD_FRAME(8, 2),
     ANIMCMD_FRAME(12, 2),
-    ANIMCMD_FRAME(16, 2), 
-    ANIMCMD_FRAME(20, 2), 
+    ANIMCMD_FRAME(16, 2),
+    ANIMCMD_FRAME(20, 2),
     ANIMCMD_JUMP(0)
 };
 
 static const union AnimCmd sAnim_Sparkle_Big[] =
 {
-    ANIMCMD_FRAME(24, 4), 
-    ANIMCMD_FRAME(28, 4), 
-    ANIMCMD_FRAME(32, 4), 
+    ANIMCMD_FRAME(24, 4),
+    ANIMCMD_FRAME(28, 4),
+    ANIMCMD_FRAME(32, 4),
     ANIMCMD_FRAME(36, 4),
-    ANIMCMD_FRAME(40, 4), 
-    ANIMCMD_FRAME(44, 4), 
-    ANIMCMD_FRAME(48, 4), 
+    ANIMCMD_FRAME(40, 4),
+    ANIMCMD_FRAME(44, 4),
+    ANIMCMD_FRAME(48, 4),
     ANIMCMD_FRAME(52, 4),
     ANIMCMD_JUMP(0)
 };
@@ -756,7 +756,7 @@ static const union AnimCmd sAnim_Timer[] =
 
 static const union AnimCmd sAnim_PlayerBerry[] =
 {
-    ANIMCMD_FRAME(0, 0), 
+    ANIMCMD_FRAME(0, 0),
     ANIMCMD_END
 };
 
@@ -810,71 +810,58 @@ static const union AffineAnimCmd *const sAffineAnims_PlayerBerry[] =
 
 static const struct SpriteTemplate sSpriteTemplate_CrusherBase =
 {
-    .tileTag = TAG_CRUSHER_BASE, 
-    .paletteTag = TAG_CRUSHER_BASE, 
-    .oam = &gOamData_AffineOff_ObjNormal_64x64, 
-    .anims = sAnims_CrusherBase, 
-    .images = NULL, 
-    .affineAnims = gDummySpriteAffineAnimTable, 
-    .callback = SpriteCallbackDummy
+    .tileTag = TAG_CRUSHER_BASE,
+    .paletteTag = TAG_CRUSHER_BASE,
+    .oam = &gOamData_AffineOff_ObjNormal_64x64,
+    .anims = sAnims_CrusherBase,
 };
 
 static const struct SpriteTemplate sSpriteTemplate_Impact =
 {
     .tileTag = GFXTAG_IMPACT,
-    .paletteTag = PALTAG_EFFECT, 
-    .oam = &gOamData_AffineOff_ObjNormal_32x32, 
-    .anims = sAnims_Impact, 
-    .images = NULL, 
-    .affineAnims = gDummySpriteAffineAnimTable, 
+    .paletteTag = PALTAG_EFFECT,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
+    .anims = sAnims_Impact,
     .callback = SpriteCB_Impact
 };
 
 static const struct SpriteTemplate sSpriteTemplate_Sparkle =
 {
-    .tileTag = GFXTAG_SPARKLE, 
-    .paletteTag = PALTAG_EFFECT, 
-    .oam = &gOamData_AffineOff_ObjNormal_16x16, 
-    .anims = sAnims_Sparkle, 
-    .images = NULL, 
-    .affineAnims = gDummySpriteAffineAnimTable, 
-    .callback = SpriteCallbackDummy
+    .tileTag = GFXTAG_SPARKLE,
+    .paletteTag = PALTAG_EFFECT,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
+    .anims = sAnims_Sparkle,
 };
 
 static const struct SpriteTemplate sSpriteTemplate_Timer =
 {
-    .tileTag = TAG_TIMER_DIGITS, 
-    .paletteTag = TAG_TIMER_DIGITS, 
-    .oam = &gOamData_AffineOff_ObjNormal_8x16, 
-    .anims = sAnims_Timer, 
-    .images = NULL, 
-    .affineAnims = gDummySpriteAffineAnimTable, 
-    .callback = SpriteCallbackDummy
+    .tileTag = TAG_TIMER_DIGITS,
+    .paletteTag = TAG_TIMER_DIGITS,
+    .oam = &gOamData_AffineOff_ObjNormal_8x16,
+    .anims = sAnims_Timer,
 };
 
 static const struct SpriteTemplate sSpriteTemplate_PlayerBerry =
 {
-    .tileTag = TAG_PLAYER1_BERRY, 
-    .paletteTag = TAG_PLAYER1_BERRY, 
-    .oam = &gOamData_AffineDouble_ObjNormal_32x32, 
-    .anims = sAnims_PlayerBerry, 
-    .images = NULL, 
-    .affineAnims = sAffineAnims_PlayerBerry, 
-    .callback = SpriteCallbackDummy
+    .tileTag = TAG_PLAYER1_BERRY,
+    .paletteTag = TAG_PLAYER1_BERRY,
+    .oam = &gOamData_AffineDouble_ObjNormal_32x32,
+    .anims = sAnims_PlayerBerry,
+    .affineAnims = sAffineAnims_PlayerBerry,
 };
 
-static const struct DigitObjUtilTemplate sDigitObjTemplates[] = 
+static const struct DigitObjUtilTemplate sDigitObjTemplates[] =
 {
     { // Minutes
         .strConvMode = 1,
         .shape = 2,
         .size = 0,
         .priority = 0,
-        .oamCount = 2, 
-        .xDelta = 8, 
+        .oamCount = 2,
+        .xDelta = 8,
         .x = 156,
         .y = 0,
-        .spriteSheet = (void*) &sSpriteSheets[3],
+        .spriteSheet = (void *) &sSpriteSheets[3],
         .spritePal = &sSpritePals[2],
     },
     { // Seconds
@@ -882,11 +869,11 @@ static const struct DigitObjUtilTemplate sDigitObjTemplates[] =
         .shape = 2,
         .size = 0,
         .priority = 0,
-        .oamCount = 2, 
-        .xDelta = 8, 
+        .oamCount = 2,
+        .xDelta = 8,
         .x = 180,
         .y = 0,
-        .spriteSheet = (void*) &sSpriteSheets[3],
+        .spriteSheet = (void *) &sSpriteSheets[3],
         .spritePal = &sSpritePals[2],
     },
     { // 1/60ths of a second
@@ -894,11 +881,11 @@ static const struct DigitObjUtilTemplate sDigitObjTemplates[] =
         .shape = 2,
         .size = 0,
         .priority = 0,
-        .oamCount = 2, 
-        .xDelta = 8, 
+        .oamCount = 2,
+        .xDelta = 8,
         .x = 204,
         .y = 0,
-        .spriteSheet = (void*) &sSpriteSheets[3],
+        .spriteSheet = (void *) &sSpriteSheets[3],
         .spritePal = &sSpritePals[2],
     }
 };
@@ -914,7 +901,7 @@ static const u8 *const sResultsTexts[] =
     [RESULTS_PAGE_POWER + NUM_RESULTS_PAGES]       = gText_PressingPowerRankings,
 };
 
-static u32 (*const sBerryCrushCommands[])(struct BerryCrushGame * game, u8 * data) =
+static u32 (*const sBerryCrushCommands[])(struct BerryCrushGame *game, u8 *data) =
 {
     [CMD_NONE]             = NULL,
     [CMD_FADE]             = Cmd_BeginNormalPaletteFade,
@@ -944,7 +931,7 @@ static u32 (*const sBerryCrushCommands[])(struct BerryCrushGame * game, u8 * dat
     [CMD_QUIT]             = Cmd_Quit,
 };
 
-// Per group size, the number of A presses required to increase the number of sparkles. 
+// Per group size, the number of A presses required to increase the number of sparkles.
 static const u8 sSparkleThresholds[MAX_RFU_PLAYERS - 1][4] =
 {
     {2,  4,  6,  7}, // 2 players
@@ -984,12 +971,12 @@ static u32 QuitBerryCrush(MainCallback exitCallback)
     return 0;
 }
 
-#define ERROR_EXIT(exitCallback)        \
-    {                                   \
-        SetMainCallback2(exitCallback); \
-        Rfu.unk_10 = 0;                 \
-        Rfu.unk_12 = 0;                 \
-        Rfu.errorState = 1;             \
+#define ERROR_EXIT(exitCallback)                    \
+    {                                               \
+        SetMainCallback2(exitCallback);             \
+        gRfu.errorParam0 = 0;                       \
+        gRfu.errorParam1 = 0;                       \
+        gRfu.errorState = RFU_ERROR_STATE_OCCURRED; \
     }
 
 void StartBerryCrush(MainCallback exitCallback)
@@ -1037,12 +1024,18 @@ void StartBerryCrush(MainCallback exitCallback)
 
 static void GetBerryFromBag(void)
 {
-    if (gSpecialVar_ItemId < FIRST_BERRY_INDEX || gSpecialVar_ItemId > LAST_BERRY_INDEX + 1)
-        gSpecialVar_ItemId = FIRST_BERRY_INDEX;
+    enum BerryId berryId = ItemIdToBerryType(gSpecialVar_ItemId);
+    if (!berryId)
+    {
+        berryId = 1;
+        gSpecialVar_ItemId = BerryTypeToItemId(1);
+    }
     else
+    {
         RemoveBagItem(gSpecialVar_ItemId, 1);
+    }
 
-    sGame->players[sGame->localId].berryId = gSpecialVar_ItemId - FIRST_BERRY_INDEX;
+    sGame->players[sGame->localId].berryId = berryId;
     sGame->nextCmd = CMD_FADE;
     sGame->afterPalFadeCmd = CMD_WAIT_BERRIES;
     SetPaletteFadeArgs(sGame->commandArgs, FALSE, PALETTES_ALL, 0, 16, 0, RGB_BLACK);
@@ -1062,7 +1055,7 @@ static void BerryCrush_SetVBlankCB(void)
     SetVBlankCallback(VBlankCB);
 }
 
-static void BerryCrush_InitVBlankCB(void)
+static void UNUSED BerryCrush_InitVBlankCB(void)
 {
     SetVBlankCallback(NULL);
 }
@@ -1191,12 +1184,12 @@ static s32 ShowGameDisplay(void)
         SetBgTilemapBuffer(1, game->gfx.bgBuffers[0]);
         SetBgTilemapBuffer(2, game->gfx.bgBuffers[2]);
         SetBgTilemapBuffer(3, game->gfx.bgBuffers[3]);
-        ChangeBgX(0, 0, 0);
-        ChangeBgY(0, 0, 0);
-        ChangeBgX(2, 0, 0);
-        ChangeBgY(2, 0, 0);
-        ChangeBgX(3, 0, 0);
-        ChangeBgY(3, 0, 0);
+        ChangeBgX(0, 0, BG_COORD_SET);
+        ChangeBgY(0, 0, BG_COORD_SET);
+        ChangeBgX(2, 0, BG_COORD_SET);
+        ChangeBgY(2, 0, BG_COORD_SET);
+        ChangeBgX(3, 0, BG_COORD_SET);
+        ChangeBgY(3, 0, BG_COORD_SET);
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
         SetGpuReg(REG_OFFSET_BLDALPHA, 0);
         break;
@@ -1224,7 +1217,7 @@ static s32 ShowGameDisplay(void)
         gPaletteFade.bufferTransferDisabled = TRUE;
         break;
     case 7:
-        LoadPalette(gBerryCrush_Crusher_Pal, 0, 0x180);
+        LoadPalette(gBerryCrush_Crusher_Pal, BG_PLTT_ID(0), 12 * PLTT_SIZE_4BPP);
         CopyToBgTilemapBuffer(1, sCrusherTop_Tilemap, 0, 0);
         CopyToBgTilemapBuffer(2, sContainerCap_Tilemap, 0, 0);
         CopyToBgTilemapBuffer(3, sBg_Tilemap, 0, 0);
@@ -1238,8 +1231,8 @@ static s32 ShowGameDisplay(void)
         CreateWirelessStatusIndicatorSprite(0,  0);
         CreateGameSprites(game);
         SetGpuReg(REG_OFFSET_BG1VOFS, -gSpriteCoordOffsetY);
-        ChangeBgX(1, 0, 0);
-        ChangeBgY(1, 0, 0);
+        ChangeBgX(1, 0, BG_COORD_SET);
+        ChangeBgY(1, 0, BG_COORD_SET);
         break;
     case 9:
         gPaletteFade.bufferTransferDisabled = FALSE;
@@ -1272,7 +1265,11 @@ static s32 HideGameDisplay(void)
     case 1:
         if (!IsLinkTaskFinished())
             return 0;
+        // fall through
+        // This will call BeginNormalPaletteFade() twice.
+#ifdef BUGFIX
         break;
+#endif
     case 2:
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         UpdatePaletteFade();
@@ -1358,7 +1355,6 @@ static void CreateBerrySprites(struct BerryCrushGame *game, struct BerryCrushGam
     u8 spriteId;
     s16 distance, var1;
     s16 *data;
-    s32 amplitude;
     s16 speed;
     u32 var2;
 
@@ -1368,7 +1364,7 @@ static void CreateBerrySprites(struct BerryCrushGame *game, struct BerryCrushGam
             &sSpriteTemplate_PlayerBerry,
             sPlayerBerrySpriteTags[i],
             sPlayerBerrySpriteTags[i],
-            game->players[i].berryId + FIRST_BERRY_INDEX);
+            BerryTypeToItemId(game->players[i].berryId));
         gfx->berrySprites[i] = &gSprites[spriteId];
         gfx->berrySprites[i]->oam.priority = 3;
         gfx->berrySprites[i]->affineAnimPaused = TRUE;
@@ -1380,11 +1376,7 @@ static void CreateBerrySprites(struct BerryCrushGame *game, struct BerryCrushGam
         sYAccel = 32;
         sBitfield = 112; // Setting bits in MASK_TARGET_Y
         distance = gfx->playerCoords[i]->berryXDest - gfx->playerCoords[i]->berryXOffset;
-        amplitude = distance;
-        if (distance < 0)
-            amplitude += 3;
-
-        sAmplitude = amplitude >> 2;
+        sAmplitude = distance / 4;
         distance *= 128;
         var2 = speed + 32;
         var2 = var2 / 2;
@@ -1457,7 +1449,7 @@ static void UpdateInputEffects(struct BerryCrushGame *game, struct BerryCrushGam
 
     numPlayersPressed = 0;
     linkState = (struct BerryCrushGame_LinkState *)game->recvCmd;
-    
+
     // Read inputs and update impact effects
     for (i = 0; i < game->playerCount; i++)
     {
@@ -1576,18 +1568,18 @@ static void FramesToMinSec(struct BerryCrushGame_Gfx *gfx, u16 frames)
 
 static void PrintTextCentered(u8 windowId, u8 left, u8 colorId, const u8 *string)
 {
-    left = (left * 4) - (GetStringWidth(2, string, -1) / 2u);
-    AddTextPrinterParameterized3(windowId, 2, left, 0, sTextColorTable[colorId], 0, string);
+    left = (left * 4) - (GetStringWidth(FONT_SHORT, string, -1) / 2u);
+    AddTextPrinterParameterized3(windowId, FONT_SHORT, left, 0, sTextColorTable[colorId], 0, string);
 }
 
-static void PrintResultsText(struct BerryCrushGame * game, u8 page, u8 sp14, u8 baseY)
+static void PrintResultsText(struct BerryCrushGame *game, u8 page, u8 sp14, u8 baseY)
 {
     u8 i, j;
     u8 playerId = 0;
     u8 ranking = 0;
     s32 x;
     u8 stat;
-    struct BerryCrushGame_Results * results = &game->results;
+    struct BerryCrushGame_Results *results = &game->results;
     u32 xOffset;
     s32 y;
 
@@ -1631,14 +1623,14 @@ static void PrintResultsText(struct BerryCrushGame * game, u8 page, u8 sp14, u8 
             playerId = i;
             ranking = i;
             j = game->players[i].berryId;
-            if (j >= LAST_BERRY_INDEX - FIRST_BERRY_INDEX + 2)
-                j = 0;
-            StringCopy(gStringVar1, gBerries[j].name);
+            if (j > NUM_BERRIES)
+                j = 1;
+            StringCopy(gStringVar1, GetBerryInfo(j)->name);
             StringExpandPlaceholders(gStringVar4, sResultsTexts[page]);
             break;
         }
-        x = GetStringRightAlignXOffset(2, gStringVar4, sp14 - 4);
-        AddTextPrinterParameterized3(game->gfx.resultsWindowId, 2, x, y, sTextColorTable[COLORID_GRAY], 0, gStringVar4);
+        x = GetStringRightAlignXOffset(FONT_SHORT, gStringVar4, sp14 - 4);
+        AddTextPrinterParameterized3(game->gfx.resultsWindowId, FONT_SHORT, x, y, sTextColorTable[COLORID_GRAY], 0, gStringVar4);
         if (playerId == game->localId)
             StringCopy(gStringVar3, gText_1DotBlueF700);
         else
@@ -1646,7 +1638,7 @@ static void PrintResultsText(struct BerryCrushGame * game, u8 page, u8 sp14, u8 
         gStringVar3[0] = ranking + CHAR_1;
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, game->players[playerId].name);
         DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gStringVar3);
-        AddTextPrinterParameterized3(game->gfx.resultsWindowId, 2, 4, y, sTextColorTable[COLORID_GRAY], 0, gStringVar4);
+        AddTextPrinterParameterized3(game->gfx.resultsWindowId, FONT_SHORT, 4, y, sTextColorTable[COLORID_GRAY], 0, gStringVar4);
     }
 }
 
@@ -1661,35 +1653,35 @@ static void PrintCrushingResults(struct BerryCrushGame *game)
     FramesToMinSec(&game->gfx, results->time);
 
     // Print time text
-    AddTextPrinterParameterized3(game->gfx.resultsWindowId, 2, x, y, sTextColorTable[COLORID_GRAY], 0, gText_TimeColon);
+    AddTextPrinterParameterized3(game->gfx.resultsWindowId, FONT_SHORT, x, y, sTextColorTable[COLORID_GRAY], 0, gText_TimeColon);
 
     // Print seconds text
-    x = 176 - (u8)GetStringWidth(2, gText_SpaceSec, -1);
-    AddTextPrinterParameterized3(game->gfx.resultsWindowId, 2, x, y, sTextColorTable[COLORID_GRAY], 0, gText_SpaceSec);
+    x = 176 - (u8)GetStringWidth(FONT_SHORT, gText_SpaceSec, -1);
+    AddTextPrinterParameterized3(game->gfx.resultsWindowId, FONT_SHORT, x, y, sTextColorTable[COLORID_GRAY], 0, gText_SpaceSec);
 
     // Print seconds value
     ConvertIntToDecimalStringN(gStringVar1, game->gfx.secondsInt, STR_CONV_MODE_LEADING_ZEROS, 2);
     ConvertIntToDecimalStringN(gStringVar2, game->gfx.secondsFrac, STR_CONV_MODE_LEADING_ZEROS, 2);
     StringExpandPlaceholders(gStringVar4, gText_XDotY2);
-    x -= GetStringWidth(2, gStringVar4, -1);
-    AddTextPrinterParameterized3(game->gfx.resultsWindowId, 2, x, y, sTextColorTable[COLORID_GRAY], 0, gStringVar4);
+    x -= GetStringWidth(FONT_SHORT, gStringVar4, -1);
+    AddTextPrinterParameterized3(game->gfx.resultsWindowId, FONT_SHORT, x, y, sTextColorTable[COLORID_GRAY], 0, gStringVar4);
 
     // Print minutes text
-    x -= GetStringWidth(2, gText_SpaceMin, -1);
-    AddTextPrinterParameterized3(game->gfx.resultsWindowId, 2, x, y, sTextColorTable[COLORID_GRAY], 0, gText_SpaceMin);
+    x -= GetStringWidth(FONT_SHORT, gText_SpaceMin, -1);
+    AddTextPrinterParameterized3(game->gfx.resultsWindowId, FONT_SHORT, x, y, sTextColorTable[COLORID_GRAY], 0, gText_SpaceMin);
 
     // Print minutes value
     ConvertIntToDecimalStringN(gStringVar1, game->gfx.minutes, STR_CONV_MODE_LEADING_ZEROS, 1);
     StringExpandPlaceholders(gStringVar4, gText_StrVar1);
-    x -= GetStringWidth(2, gStringVar4, -1);
-    AddTextPrinterParameterized3(game->gfx.resultsWindowId, 2, x, y, sTextColorTable[COLORID_GRAY], 0, gStringVar4);
-    
+    x -= GetStringWidth(FONT_SHORT, gStringVar4, -1);
+    AddTextPrinterParameterized3(game->gfx.resultsWindowId, FONT_SHORT, x, y, sTextColorTable[COLORID_GRAY], 0, gStringVar4);
+
     // Print pressing speed text
     y += 14;
-    AddTextPrinterParameterized3(game->gfx.resultsWindowId, 2, 0, y, sTextColorTable[COLORID_GRAY], 0, gText_PressingSpeed);
-    x = 176 - (u8)GetStringWidth(2, gText_TimesPerSec, -1);
-    AddTextPrinterParameterized3(game->gfx.resultsWindowId, 2, x, y, sTextColorTable[COLORID_GRAY], 0, gText_TimesPerSec);
-    
+    AddTextPrinterParameterized3(game->gfx.resultsWindowId, FONT_SHORT, 0, y, sTextColorTable[COLORID_GRAY], 0, gText_PressingSpeed);
+    x = 176 - (u8)GetStringWidth(FONT_SHORT, gText_TimesPerSec, -1);
+    AddTextPrinterParameterized3(game->gfx.resultsWindowId, FONT_SHORT, x, y, sTextColorTable[COLORID_GRAY], 0, gText_TimesPerSec);
+
     // Print pressing speed value
     for (i = 0; i < 8; i++)
         if (((u8)game->pressingSpeed >> (7 - i)) & 1)
@@ -1697,21 +1689,21 @@ static void PrintCrushingResults(struct BerryCrushGame *game)
     ConvertIntToDecimalStringN(gStringVar1, game->pressingSpeed >> 8, STR_CONV_MODE_RIGHT_ALIGN, 3);
     ConvertIntToDecimalStringN(gStringVar2, pressingSpeedFrac / 1000000, STR_CONV_MODE_LEADING_ZEROS, 2);
     StringExpandPlaceholders(gStringVar4, gText_XDotY3);
-    x -= GetStringWidth(2, gStringVar4, -1);
+    x -= GetStringWidth(FONT_SHORT, gStringVar4, -1);
     if (game->newRecord)
-        AddTextPrinterParameterized3(game->gfx.resultsWindowId, 2, x, y, sTextColorTable[COLORID_RED], 0, gStringVar4);
+        AddTextPrinterParameterized3(game->gfx.resultsWindowId, FONT_SHORT, x, y, sTextColorTable[COLORID_RED], 0, gStringVar4);
     else
-        AddTextPrinterParameterized3(game->gfx.resultsWindowId, 2, x, y, sTextColorTable[COLORID_GRAY], 0, gStringVar4);
+        AddTextPrinterParameterized3(game->gfx.resultsWindowId, FONT_SHORT, x, y, sTextColorTable[COLORID_GRAY], 0, gStringVar4);
 
     // Print silkiness text
     y += 14;
-    AddTextPrinterParameterized3(game->gfx.resultsWindowId, 2, 0, y, sTextColorTable[COLORID_GRAY], 0, gText_Silkiness);
+    AddTextPrinterParameterized3(game->gfx.resultsWindowId, FONT_SHORT, 0, y, sTextColorTable[COLORID_GRAY], 0, gText_Silkiness);
 
     // Print silkiness value
     ConvertIntToDecimalStringN(gStringVar1, results->silkiness, STR_CONV_MODE_RIGHT_ALIGN, 3);
     StringExpandPlaceholders(gStringVar4, gText_Var1Percent);
-    x = 176 - (u8)GetStringWidth(2, gStringVar4, -1);
-    AddTextPrinterParameterized3(game->gfx.resultsWindowId, 2, x, y, sTextColorTable[COLORID_GRAY], 0, gStringVar4);
+    x = 176 - (u8)GetStringWidth(FONT_SHORT, gStringVar4, -1);
+    AddTextPrinterParameterized3(game->gfx.resultsWindowId, FONT_SHORT, x, y, sTextColorTable[COLORID_GRAY], 0, gStringVar4);
 }
 
 static bool32 OpenResultsWindow(struct BerryCrushGame *game, struct BerryCrushGame_Gfx *gfx)
@@ -1736,8 +1728,8 @@ static bool32 OpenResultsWindow(struct BerryCrushGame *game, struct BerryCrushGa
         FillWindowPixelBuffer(gfx->resultsWindowId, PIXEL_FILL(0));
         break;
     case 2:
-        LoadUserWindowBorderGfx_(gfx->resultsWindowId, 541, 208);
-        DrawStdFrameWithCustomTileAndPalette(gfx->resultsWindowId, 0, 541, 13);
+        LoadUserWindowBorderGfx_(gfx->resultsWindowId, 541, BG_PLTT_ID(13));
+        DrawStdFrameWithCustomTileAndPalette(gfx->resultsWindowId, FALSE, 541, 13);
         break;
     case 3:
         playerCountIdx = game->playerCount - 2;
@@ -1763,7 +1755,7 @@ static bool32 OpenResultsWindow(struct BerryCrushGame *game, struct BerryCrushGa
         PrintCrushingResults(game);
         break;
     case 5:
-        CopyWindowToVram(gfx->resultsWindowId, 3);
+        CopyWindowToVram(gfx->resultsWindowId, COPYWIN_FULL);
         gfx->resultsState = 0;
         return TRUE;
     }
@@ -1773,7 +1765,7 @@ static bool32 OpenResultsWindow(struct BerryCrushGame *game, struct BerryCrushGa
 
 static void CloseResultsWindow(struct BerryCrushGame *game)
 {
-    ClearStdWindowAndFrameToTransparent(game->gfx.resultsWindowId, 1);
+    ClearStdWindowAndFrameToTransparent(game->gfx.resultsWindowId, TRUE);
     RemoveWindow(game->gfx.resultsWindowId);
     DrawPlayerNameWindows(game);
 }
@@ -1787,32 +1779,32 @@ static void Task_ShowRankings(u8 taskId)
     u8 i = 0, j, xPos, yPos;
     u32 score = 0;
     s16 *data = gTasks[taskId].data;
-    
+
     switch (tState)
     {
     case 0:
         tWindowId = AddWindow(&sWindowTemplate_Rankings);
         PutWindowTilemap(tWindowId);
         FillWindowPixelBuffer(tWindowId, PIXEL_FILL(0));
-        LoadUserWindowBorderGfx_(tWindowId, 541, 208);
-        DrawStdFrameWithCustomTileAndPalette(tWindowId, 0, 541, 13);
+        LoadUserWindowBorderGfx_(tWindowId, 541, BG_PLTT_ID(13));
+        DrawStdFrameWithCustomTileAndPalette(tWindowId, FALSE, 541, 13);
         break;
     case 1:
         // Print header text
-        xPos = 96 - GetStringWidth(1, gText_BerryCrush2, -1) / 2u;
-        AddTextPrinterParameterized3(tWindowId, 1, xPos, 1, sTextColorTable[COLORID_BLUE], 0, gText_BerryCrush2);
-        xPos = 96 - GetStringWidth(1, gText_PressingSpeedRankings, -1) / 2u;
-        AddTextPrinterParameterized3(tWindowId, 1, xPos, 17, sTextColorTable[COLORID_BLUE], 0, gText_PressingSpeedRankings);
-        
+        xPos = 96 - GetStringWidth(FONT_NORMAL, gText_BerryCrush2, -1) / 2u;
+        AddTextPrinterParameterized3(tWindowId, FONT_NORMAL, xPos, 1, sTextColorTable[COLORID_BLUE], 0, gText_BerryCrush2);
+        xPos = 96 - GetStringWidth(FONT_NORMAL, gText_PressingSpeedRankings, -1) / 2u;
+        AddTextPrinterParameterized3(tWindowId, FONT_NORMAL, xPos, 17, sTextColorTable[COLORID_BLUE], 0, gText_PressingSpeedRankings);
+
         // Print pressing speed record for each group size, ranked
         yPos = 41;
         for (i = 0; i < MAX_RFU_PLAYERS - 1; i++)
         {
             ConvertIntToDecimalStringN(gStringVar1, i + 2, STR_CONV_MODE_LEFT_ALIGN, 1);
             StringExpandPlaceholders(gStringVar4, gText_Var1Players);
-            AddTextPrinterParameterized3(tWindowId, 1, 0, yPos, sTextColorTable[COLORID_GRAY], 0, gStringVar4);
-            xPos = 192 - (u8)GetStringWidth(1, gText_TimesPerSec, -1);
-            AddTextPrinterParameterized3(tWindowId, 1, xPos, yPos, sTextColorTable[COLORID_GRAY], 0, gText_TimesPerSec);
+            AddTextPrinterParameterized3(tWindowId, FONT_NORMAL, 0, yPos, sTextColorTable[COLORID_GRAY], 0, gStringVar4);
+            xPos = 192 - (u8)GetStringWidth(FONT_NORMAL, gText_TimesPerSec, -1);
+            AddTextPrinterParameterized3(tWindowId, FONT_NORMAL, xPos, yPos, sTextColorTable[COLORID_GRAY], 0, gText_TimesPerSec);
             for (j = 0; j < 8; j++)
             {
                 if (((tPressingSpeeds(i) & 0xFF) >> (7 - j)) & 1)
@@ -1821,12 +1813,12 @@ static void Task_ShowRankings(u8 taskId)
             ConvertIntToDecimalStringN(gStringVar1, (u16)tPressingSpeeds(i) >> 8, STR_CONV_MODE_RIGHT_ALIGN, 3);
             ConvertIntToDecimalStringN(gStringVar2, score / 1000000, STR_CONV_MODE_LEADING_ZEROS, 2);
             StringExpandPlaceholders(gStringVar4, gText_XDotY3);
-            xPos -= GetStringWidth(1, gStringVar4, -1);
-            AddTextPrinterParameterized3(tWindowId, 1, xPos, yPos, sTextColorTable[COLORID_GRAY], 0, gStringVar4);
+            xPos -= GetStringWidth(FONT_NORMAL, gStringVar4, -1);
+            AddTextPrinterParameterized3(tWindowId, FONT_NORMAL, xPos, yPos, sTextColorTable[COLORID_GRAY], 0, gStringVar4);
             yPos += 16;
             score = 0;
         }
-        CopyWindowToVram(tWindowId, 3);
+        CopyWindowToVram(tWindowId, COPYWIN_FULL);
         break;
     case 2:
         if (JOY_NEW(A_BUTTON | B_BUTTON))
@@ -1834,12 +1826,12 @@ static void Task_ShowRankings(u8 taskId)
         else
             return;
     case 3:
-        ClearStdWindowAndFrameToTransparent(tWindowId, 1);
+        ClearStdWindowAndFrameToTransparent(tWindowId, TRUE);
         ClearWindowTilemap(tWindowId);
         RemoveWindow(tWindowId);
         DestroyTask(taskId);
-        EnableBothScriptContexts();
-        ScriptContext2_Disable();
+        ScriptContext_Enable();
+        UnlockPlayerFieldControls();
         tState = 0;
         return;
     }
@@ -1850,7 +1842,7 @@ void ShowBerryCrushRankings(void)
 {
     u8 taskId;
 
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     taskId = CreateTask(Task_ShowRankings, 0);
     gTasks[taskId].tPressingSpeeds(0) = gSaveBlock2Ptr->berryCrush.pressingSpeeds[0];
     gTasks[taskId].tPressingSpeeds(1) = gSaveBlock2Ptr->berryCrush.pressingSpeeds[1];
@@ -1870,9 +1862,9 @@ static void HideTimer(struct BerryCrushGame_Gfx *gfx)
 {
     gfx->timerSprites[0]->invisible = TRUE;
     gfx->timerSprites[1]->invisible = TRUE;
-    DigitObjUtil_HideOrShow(2, 1);
-    DigitObjUtil_HideOrShow(1, 1);
-    DigitObjUtil_HideOrShow(0, 1);
+    DigitObjUtil_HideOrShow(2, TRUE);
+    DigitObjUtil_HideOrShow(1, TRUE);
+    DigitObjUtil_HideOrShow(0, TRUE);
 }
 
 static void CreatePlayerNameWindows(struct BerryCrushGame *game)
@@ -1898,8 +1890,8 @@ static void DrawPlayerNameWindows(struct BerryCrushGame *game)
             // Print the player's name
             AddTextPrinterParameterized4(
                 game->gfx.nameWindowIds[i],
-                2,
-                36 - GetStringWidth(2, game->players[i].name, 0) / 2u,
+                FONT_SHORT,
+                36 - GetStringWidth(FONT_SHORT, game->players[i].name, 0) / 2u,
                 1,
                 0,
                 0,
@@ -1913,8 +1905,8 @@ static void DrawPlayerNameWindows(struct BerryCrushGame *game)
             // Print a partner's name
             AddTextPrinterParameterized4(
                 game->gfx.nameWindowIds[i],
-                2,
-                36 - GetStringWidth(2, game->players[i].name, 0) / 2u,
+                FONT_SHORT,
+                36 - GetStringWidth(FONT_SHORT, game->players[i].name, 0) / 2u,
                 1,
                 0,
                 0,
@@ -1923,7 +1915,7 @@ static void DrawPlayerNameWindows(struct BerryCrushGame *game)
                 game->players[i].name
             );
         }
-        CopyWindowToVram(game->gfx.nameWindowIds[i], 3);
+        CopyWindowToVram(game->gfx.nameWindowIds[i], COPYWIN_FULL);
     }
     CopyBgTilemapBufferToVram(0);
 }
@@ -1931,16 +1923,14 @@ static void DrawPlayerNameWindows(struct BerryCrushGame *game)
 // Each player name window border uses a color that corresponds to a slot of the crusher lid
 static void CopyPlayerNameWindowGfxToBg(struct BerryCrushGame *game)
 {
-    u8 i = 0;
-    u8 * crusherGfx;
+    s32 i;
+    u8 *windowGfx = malloc_and_decompress(gBerryCrush_TextWindows_Tilemap, NULL);
 
-    LZ77UnCompWram(gBerryCrush_Crusher_Tilemap, gDecompressionBuffer);
-
-    for (crusherGfx = gDecompressionBuffer; i < game->playerCount; i++)
+    for (i = 0; i < game->playerCount; i++)
     {
         CopyToBgTilemapBufferRect(
             3,
-            &crusherGfx[game->gfx.playerCoords[i]->playerId * 40],
+            &windowGfx[game->gfx.playerCoords[i]->playerId * 40],
             game->gfx.playerCoords[i]->windowGfxX,
             game->gfx.playerCoords[i]->windowGfxY,
             10,
@@ -1948,6 +1938,8 @@ static void CopyPlayerNameWindowGfxToBg(struct BerryCrushGame *game)
         );
     }
     CopyBgTilemapBufferToVram(3);
+
+    Free(windowGfx);
 }
 
 static void CreateGameSprites(struct BerryCrushGame *game)
@@ -1962,7 +1954,7 @@ static void CreateGameSprites(struct BerryCrushGame *game)
     for (i = 0; i < ARRAY_COUNT(sSpriteSheets) - 1; i++)
         LoadCompressedSpriteSheet(&sSpriteSheets[i]);
     LoadSpritePalettes(sSpritePals);
-    
+
     // Create sprite for crusher base
     spriteId = CreateSprite(&sSpriteTemplate_CrusherBase, 120, 88, 5);
     game->gfx.coreSprite = &gSprites[spriteId];
@@ -2204,7 +2196,7 @@ static u32 Cmd_WaitPaletteFade(struct BerryCrushGame *game, u8 *args)
     case 0:
         if (UpdatePaletteFade())
             return 0;
-        if(args[0] != 0)
+        if (args[0] != 0)
             game->cmdState++;
         else
             game->cmdState = 3;
@@ -2239,20 +2231,20 @@ static u32 Cmd_PrintMessage(struct BerryCrushGame *game, u8 *args)
     switch (game->cmdState)
     {
     case 0:
-        DrawDialogueFrame(0, 0);
+        DrawDialogueFrame(0, FALSE);
         if (args[1] & F_MSG_EXPAND)
         {
             StringExpandPlaceholders(gStringVar4, sMessages[args[0]]);
-            AddTextPrinterParameterized2(0, 1, gStringVar4, game->textSpeed, 0, 2, 1, 3);
+            AddTextPrinterParameterized2(0, FONT_NORMAL, gStringVar4, game->textSpeed, 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
         }
         else
         {
-            AddTextPrinterParameterized2(0, 1, sMessages[args[0]], game->textSpeed, 0, 2, 1, 3);
+            AddTextPrinterParameterized2(0, FONT_NORMAL, sMessages[args[0]], game->textSpeed, 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
         }
-        CopyWindowToVram(0, 3);
+        CopyWindowToVram(0, COPYWIN_FULL);
         break;
     case 1:
-        if (!IsTextPrinterActive(0))
+        if (!IsTextPrinterActiveOnWindow(0))
         {
             // If no wait keys are given, skip
             // waiting state below
@@ -2267,7 +2259,7 @@ static u32 Cmd_PrintMessage(struct BerryCrushGame *game, u8 *args)
         break;
     case 3:
         if (args[1] & F_MSG_CLEAR)
-            ClearDialogWindowAndFrame(0, 1);
+            ClearDialogWindowAndFrame(0, TRUE);
         RunOrScheduleCommand(game->nextCmd, SCHEDULE_CMD, NULL);
         game->cmdState = args[4];
         return 0;
@@ -2357,7 +2349,7 @@ static u32 Cmd_WaitForOthersToPickBerries(struct BerryCrushGame *game, u8 *args)
     case 2:
         if (!IsLinkTaskFinished())
             return 0;
-        
+
         // Send player's chosen berry to partners
         memset(game->sendCmd, 0, sizeof(game->sendCmd));
         game->sendCmd[0] = game->players[game->localId].berryId;
@@ -2377,17 +2369,17 @@ static u32 Cmd_WaitForOthersToPickBerries(struct BerryCrushGame *game, u8 *args)
         for (i = 0; i < game->playerCount; i++)
         {
             game->players[i].berryId = gBlockRecvBuffer[i][0];
-            if (game->players[i].berryId > LAST_BERRY_INDEX + 1)
-                game->players[i].berryId = 0;
-            game->targetAPresses += gBerryCrush_BerryData[game->players[i].berryId].difficulty;
-            game->powder += gBerryCrush_BerryData[game->players[i].berryId].powder;
+            if (game->players[i].berryId > NUM_BERRIES)
+                game->players[i].berryId = 1;
+            game->targetAPresses += gBerries[game->players[i].berryId].berryCrushDifficulty;
+            game->powder += gBerries[game->players[i].berryId].berryCrushPowder;
         }
         game->cmdTimer = 0;
         ResetBlockReceivedFlags();
         game->targetDepth = MathUtil_Div32(Q_24_8(game->targetAPresses), Q_24_8(32));
         break;
     case 5:
-        ClearDialogWindowAndFrame(0, 1);
+        ClearDialogWindowAndFrame(0, TRUE);
         RunOrScheduleCommand(CMD_DROP_BERRIES, SCHEDULE_CMD, NULL);
         game->gameState = STATE_DROP_BERRIES;
         game->cmdState = 0;
@@ -2548,13 +2540,13 @@ static void HandlePartnerInput(struct BerryCrushGame *game)
     for (i = 0; i < game->playerCount; i++)
     {
         linkState = (struct BerryCrushGame_LinkState *)gRecvCmds[i];
-        
+
         // Skip player if we have not received a packet from them
-        if ((linkState->rfuCmd & 0xFF00) != RFUCMD_SEND_PACKET)
+        if ((linkState->rfuCmd & RFUCMD_MASK) != RFUCMD_SEND_PACKET)
             continue;
         if (linkState->sendFlag != SEND_GAME_STATE)
             continue;
-        
+
         if (linkState->pushedAButton)
         {
             game->localState.playerPressedAFlags |= sBitTable[i];
@@ -2562,10 +2554,10 @@ static void HandlePartnerInput(struct BerryCrushGame *game)
             game->players[i].numAPresses++;
             numPlayersPressed++;
             timeDiff = game->timer - game->players[i].inputTime;
-            
+
             // If the interval between inputs is regular, the input is considered "neat"
             // This counts toward the player's neatness score
-            if (timeDiff >= game->players[i].timeSincePrevInput - 1 
+            if (timeDiff >= game->players[i].timeSincePrevInput - 1
              && timeDiff <= game->players[i].timeSincePrevInput + 1)
             {
                 // On neat input streak
@@ -2580,7 +2572,7 @@ static void HandlePartnerInput(struct BerryCrushGame *game)
                 game->players[i].neatInputStreak = 0;
                 game->players[i].timeSincePrevInput = timeDiff;
             }
-            
+
             game->players[i].inputTime = game->timer;
             game->players[i].inputFlags++;
             if (game->players[i].inputFlags > F_INPUT_HIT_B)
@@ -2622,7 +2614,7 @@ static void HandlePartnerInput(struct BerryCrushGame *game)
 
     // Target number of A presses has been reached, game is complete
     game->newDepth = 32;
-    game->localState.endGame = TRUE;    
+    game->localState.endGame = TRUE;
 }
 
 // Updates the crusher, input flags, and timer to send to group members
@@ -2633,7 +2625,7 @@ static void UpdateLeaderGameState(struct BerryCrushGame *game)
     u16 flags = 0;
     u16 temp = 0;
     u8 i = 0;
-    
+
     for (i = 0; i < game->playerCount; i++)
     {
         if (game->players[i].inputState != INPUT_STATE_NONE)
@@ -2712,7 +2704,7 @@ static void HandlePlayerInput(struct BerryCrushGame *game)
     if (game->localId != 0 && !game->localState.pushedAButton)
         return;
     game->localState.sendFlag = SEND_GAME_STATE;
-    
+
     // Every 30 frames, check whether the sparkles produced should be big,
     // depending on how many A presses there were in that time
     if (game->timer % 30 == 0)
@@ -2729,22 +2721,32 @@ static void HandlePlayerInput(struct BerryCrushGame *game)
         game->bigSparkleCounter = 0;
         game->numBigSparkleChecks++;
     }
-    
+
     // Every 15 frames, update the amount of sparkles that should be produced,
     // depending on how many A presses there were in that time (including the bonus)
     if (game->timer % 15 == 0)
     {
+        // BUG: The wrong field is used twice below
+        // As a result, only a sparkleAmount of 0, 1, or 4 is attainable
+        #ifdef BUGFIX
+        #define field sparkleAmount
+        #else
+        #define field sparkleCounter
+        #endif
+
         if (game->sparkleCounter < sSparkleThresholds[game->playerCount - 2][0])
             game->sparkleAmount = 0;
         else if (game->sparkleCounter < sSparkleThresholds[game->playerCount - 2][1])
             game->sparkleAmount = 1;
         else if (game->sparkleCounter < sSparkleThresholds[game->playerCount - 2][2])
-            game->sparkleAmount = 2;
+            game->field = 2;
         else if (game->sparkleCounter < sSparkleThresholds[game->playerCount - 2][3])
-            game->sparkleAmount = 3;
+            game->field = 3;
         else
             game->sparkleAmount = 4;
         game->sparkleCounter = 0;
+
+        #undef field
     }
     else
     {
@@ -2762,7 +2764,7 @@ static void HandlePlayerInput(struct BerryCrushGame *game)
                 game->cmdTimer = 0;
             }
         }
-        
+
     }
     if (game->timer >= MAX_TIME)
         game->localState.endGame = TRUE;
@@ -2780,7 +2782,7 @@ static void RecvLinkData(struct BerryCrushGame *game)
     for (i = 0; i < game->playerCount; i++)
         game->players[i].inputState = INPUT_STATE_NONE;
 
-    if ((gRecvCmds[0][0] & 0xFF00) != RFUCMD_SEND_PACKET)
+    if ((gRecvCmds[0][0] & RFUCMD_MASK) != RFUCMD_SEND_PACKET)
     {
         game->playedSound = FALSE;
         return;
@@ -2873,13 +2875,13 @@ static u32 Cmd_FinishGame(struct BerryCrushGame *game, u8 *args)
     case 0:
         game->gameState = STATE_FINISHED;
         PlaySE(SE_M_STRENGTH);
-        BlendPalettes(PALETTES_ALL, 8, RGB(31, 31, 0));
+        BlendPalettes(PALETTES_ALL, 8, RGB_YELLOW);
         game->gfx.counter = 2;
         break;
     case 1:
         if (--game->gfx.counter != (u8)-1)
             return 0;
-        BlendPalettes(PALETTES_ALL, 0, RGB(31, 31, 0));
+        BlendPalettes(PALETTES_ALL, 0, RGB_YELLOW);
         game->gfx.vibrationIdx = 4;
         game->gfx.counter = 0;
         game->gfx.numVibrations = sIntroOutroVibrationData[game->gfx.vibrationIdx][0];
@@ -2930,13 +2932,13 @@ static u32 Cmd_HandleTimeUp(struct BerryCrushGame *game, u8 *args)
     case 0:
         game->gameState = STATE_TIMES_UP;
         PlaySE(SE_FAILURE);
-        BlendPalettes(PALETTES_ALL, 8, RGB(31, 0, 0));
+        BlendPalettes(PALETTES_ALL, 8, RGB_RED);
         game->gfx.counter = 4;
         break;
     case 1:
         if (--game->gfx.counter != (u8)-1)
             return 0;
-        BlendPalettes(PALETTES_ALL, 0, RGB(31, 0, 0));
+        BlendPalettes(PALETTES_ALL, 0, RGB_RED);
         game->gfx.counter = 0;
         break;
     case 2:
@@ -3031,14 +3033,14 @@ static u32 Cmd_TabulateResults(struct BerryCrushGame *game, u8 *args)
             game->results.playerIdsRanked[RESULTS_PAGE_RANDOM][i] = i;
             game->results.stats[RESULTS_PAGE_PRESSES][i] = game->players[i].numAPresses;
             game->results.totalAPresses += game->results.stats[RESULTS_PAGE_PRESSES][i];
-            
+
             // Calculate value for random second results page
             switch (game->results.randomPageId)
             {
             case RESULTS_PAGE_NEATNESS:
                 if (game->players[i].numAPresses != 0)
                 {
-                    // Calculate percentage of inputs that were in largest "neat" streak 
+                    // Calculate percentage of inputs that were in largest "neat" streak
                     // "Neat" inputs are those done at a regular interval
                     temp1 = game->players[i].maxNeatInputStreak;
                     temp1 = Q_24_8(temp1);
@@ -3104,7 +3106,7 @@ static u32 Cmd_TabulateResults(struct BerryCrushGame *game, u8 *args)
                 // Calculate player rankings for "Number of Presses" by sorting arrays
                 if (game->results.stats[RESULTS_PAGE_PRESSES][j - 1] < game->results.stats[RESULTS_PAGE_PRESSES][j])
                 {
-                    SWAP(game->results.stats[RESULTS_PAGE_PRESSES][j], 
+                    SWAP(game->results.stats[RESULTS_PAGE_PRESSES][j],
                          game->results.stats[RESULTS_PAGE_PRESSES][j - 1],
                          tempStat);
                     SWAP(game->results.playerIdsRanked[RESULTS_PAGE_PRESSES][j],
@@ -3114,7 +3116,7 @@ static u32 Cmd_TabulateResults(struct BerryCrushGame *game, u8 *args)
                 // Calculate player rankings for random second results page by sorting arrays
                 if (game->results.stats[RESULTS_PAGE_RANDOM][j - 1] < game->results.stats[RESULTS_PAGE_RANDOM][j])
                 {
-                    SWAP(game->results.stats[RESULTS_PAGE_RANDOM][j], 
+                    SWAP(game->results.stats[RESULTS_PAGE_RANDOM][j],
                          game->results.stats[RESULTS_PAGE_RANDOM][j - 1],
                          tempStat);
                     SWAP(game->results.playerIdsRanked[RESULTS_PAGE_RANDOM][j],
@@ -3216,13 +3218,13 @@ static u32 Cmd_SaveGame(struct BerryCrushGame *game, u8 *args)
     case 2:
         if (!IsLinkTaskFinished())
             return 0;
-        DrawDialogueFrame(0, 0);
-        AddTextPrinterParameterized2(0, 1, gText_SavingDontTurnOffPower, 0, 0, 2, 1, 3);
-        CopyWindowToVram(0, 3);
-        CreateTask(Task_LinkSave, 0);
+        DrawDialogueFrame(0, FALSE);
+        AddTextPrinterParameterized2(0, FONT_NORMAL, gText_SavingDontTurnOffPower, 0, 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+        CopyWindowToVram(0, COPYWIN_FULL);
+        CreateTask(Task_LinkFullSave, 0);
         break;
     case 3:
-        if (FuncIsActiveTask(Task_LinkSave))
+        if (FuncIsActiveTask(Task_LinkFullSave))
             return 0;
         break;
     case 4:
@@ -3270,7 +3272,7 @@ static u32 Cmd_AskPlayAgain(struct BerryCrushGame *game, u8 *args)
             }
 
             // Close Yes/No and start communication
-            ClearDialogWindowAndFrame(0, 1);
+            ClearDialogWindowAndFrame(0, TRUE);
             SetPrintMessageArgs(args, MSG_COMM_STANDBY, 0, 0, 0);
             game->nextCmd = CMD_COMM_PLAY_AGAIN;
             RunOrScheduleCommand(CMD_PRINT_MSG, SCHEDULE_CMD, NULL);
@@ -3294,7 +3296,7 @@ static u32 Cmd_CommunicatePlayAgainResponses(struct BerryCrushGame *game, u8 *ar
     case 1:
         if (!IsLinkTaskFinished())
             return 0;
-        
+
         // Send player's Yes/No response to partners
         game->sendCmd[0] = game->playAgainState;
         game->recvCmd[0] = 0;
@@ -3342,7 +3344,7 @@ static u32 Cmd_PlayAgain(struct BerryCrushGame *game, u8 *args)
             return 0;
         break;
     case 2:
-        ClearDialogWindowAndFrame(0, 1);
+        ClearDialogWindowAndFrame(0, TRUE);
         ResetCrusherPos(game);
         BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         UpdatePaletteFade();
@@ -3364,21 +3366,23 @@ static u32 Cmd_StopGame(struct BerryCrushGame *game, u8 *args)
     switch (game->cmdState)
     {
     case 0:
-        DrawDialogueFrame(0, 0);
+        DrawDialogueFrame(0, FALSE);
         if (game->playAgainState == PLAY_AGAIN_NO_BERRIES)
-            AddTextPrinterParameterized2(0, 1, sMessages[MSG_NO_BERRIES], game->textSpeed, 0, 2, 1, 3);
+            AddTextPrinterParameterized2(0, FONT_NORMAL, sMessages[MSG_NO_BERRIES], game->textSpeed, 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
         else
-            AddTextPrinterParameterized2(0, 1, sMessages[MSG_DROPPED], game->textSpeed, 0, 2, 1, 3);
-        CopyWindowToVram(0, 3);
+            AddTextPrinterParameterized2(0, FONT_NORMAL, sMessages[MSG_DROPPED], game->textSpeed, 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+        CopyWindowToVram(0, COPYWIN_FULL);
         break;
     case 1:
-        if (IsTextPrinterActive(0))
+        if (IsTextPrinterActiveOnWindow(0))
             return 0;
         game->gfx.counter = 120;
         break;
     case 2:
         if (game->gfx.counter != 0)
+        {
             game->gfx.counter--;
+        }
         else
         {
             RunOrScheduleCommand(CMD_CLOSE_LINK, SCHEDULE_CMD, NULL);
@@ -3403,7 +3407,7 @@ static u32 Cmd_CloseLink(struct BerryCrushGame *game, u8 *args)
         SetCloseLinkCallback();
         break;
     case 2:
-        if (gReceivedRemoteLinkPlayers != 0)
+        if (gReceivedRemoteLinkPlayers)
             return 0;
         game->nextCmd = CMD_QUIT;
         RunOrScheduleCommand(CMD_HIDE_GAME, SCHEDULE_CMD, NULL);
@@ -3448,7 +3452,7 @@ static void ResetGame(struct BerryCrushGame *game)
     game->sparkleCounter = 0;
     for (i = 0; i < MAX_RFU_PLAYERS; i++)
     {
-        game->players[i].berryId = -1;
+        game->players[i].berryId = 0;
         game->players[i].inputTime = 0;
         game->players[i].neatInputStreak = 0;
         game->players[i].timeSincePrevInput = 1;

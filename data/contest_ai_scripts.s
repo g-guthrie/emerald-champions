@@ -1,3 +1,4 @@
+#include "config/general.h"
 #include "constants/global.h"
 #include "constants/contest.h"
 	.include "asm/macros.inc"
@@ -48,7 +49,7 @@ gContestAI_ScriptsTable::
 	.4byte AI_Nothing           @ CONTEST_AI_DUMMY_25
 
 
-@ Unused. Encourages improving condition on the 1st appeal, or startling mons if the users turn is later 
+@ Unused. Encourages improving condition on the 1st appeal, or startling mons if the users turn is later
 AI_CheckTiming:
 	if_appeal_num_not_eq 0, AI_CheckTiming_SkipCondition
 	if_effect_not_eq CONTEST_EFFECT_IMPROVE_CONDITION_PREVENT_NERVOUSNESS, AI_CheckTiming_SkipCondition
@@ -388,7 +389,7 @@ AI_CGM_AppealAsGoodAsPrevOnes_Last:
 	score +20
 	end
 
-@ Encourages move more for each opponent who will have a turn before the user 
+@ Encourages move more for each opponent who will have a turn before the user
 AI_CGM_AppealAsGoodAsPrevOne:
 	if_user_order_eq MON_1, AI_CGM_AppealAsGoodAsPrevOne_1stUp
 	if_user_order_eq MON_2, AI_CGM_AppealAsGoodAsPrevOne_2ndUp
@@ -426,18 +427,24 @@ AI_CGM_AppealAsGoodAsPrevOne_Last_CheckMon3:
 	score +5
 	end
 
-@ Encourage move if audience is close to full excitement and user goes first
+@ Encourage move if audience is close to full exictement and user goes first
+@ See bug note, only does this on 1st appeal (when it will never happen)
 AI_CGM_BetterWhenAudienceExcited:
 	if_user_order_eq MON_1, AI_CGM_BetterWhenAudienceExcited_1stUp
 	if_user_order_more_than MON_1, AI_CGM_BetterWhenAudienceExcited_Not1stUp
 	end
 AI_CGM_BetterWhenAudienceExcited_1stUp:
+	@ BUG: Should be if_appeal_num_eq 0
 	@ 1st up on 1st appeal excitement will always be 0
-	if_appeal_num_eq 0, AI_CGM_BetterWhenAudienceExcited_Not1stAppeal
+#ifdef BUGFIX
+	if_appeal_num_eq 0, AI_CGM_BetterWhenAudienceExcited_1stAppeal
+#else
+	if_appeal_num_not_eq 0, AI_CGM_BetterWhenAudienceExcited_1stAppeal
+#endif
 	if_excitement_eq 4, AI_CGM_BetterWhenAudienceExcited_1AwayFromMax
 	if_excitement_eq 3, AI_CGM_BetterWhenAudienceExcited_2AwayFromMax
 	end
-AI_CGM_BetterWhenAudienceExcited_Not1stAppeal:
+AI_CGM_BetterWhenAudienceExcited_1stAppeal:
 	if_random_less_than 125, AI_CGM_End
 	score -15
 	end
@@ -454,7 +461,7 @@ AI_CGM_BetterWhenAudienceExcited_Not1stUp:
 	score +10
 	end
 
-@ Encourage move more for each condition star the prev mons have 
+@ Encourage move more for each condition star the prev mons have
 AI_CGM_WorsenConditionOfPrevMons:
 	if_user_order_eq MON_1, AI_CGM_End
 	goto AI_CGM_WorsenConditionOfPrevMons_CheckMon1
@@ -532,13 +539,19 @@ AI_CGM_WorsenConditionOfPrevMons_end:
 	end
 
 @ Encourage if a prev mon has started a combo, esp if they havent completed it yet
+@ BUG: Incorrectly uses if_used_combo_starter below, instead of if_not_used_combo_starter
+@      As a result it encourages move if a prev mon has not begun a combo
 AI_CGM_TargetMonWithJudgesAttention:
 	if_user_order_eq MON_1, AI_CGM_End
 	goto AI_CGM_TargetMonWithJudgesAttention_CheckMon1
 	end
 AI_CGM_TargetMonWithJudgesAttention_CheckMon1:
 	if_cannot_participate MON_1, AI_CGM_TargetMonWithJudgesAttention_CheckMon2
+#ifdef BUGFIX
 	if_not_used_combo_starter MON_1, AI_CGM_TargetMonWithJudgesAttention_CheckMon2
+#else
+	if_used_combo_starter MON_1, AI_CGM_TargetMonWithJudgesAttention_CheckMon2
+#endif
 	if_random_less_than 125, AI_CGM_TargetMonWithJudgesAttention_CheckMon2
 	score +2
 	if_not_completed_combo MON_1, AI_CGM_TargetMonWithJudgesAttention_CheckMon2
@@ -547,7 +560,11 @@ AI_CGM_TargetMonWithJudgesAttention_CheckMon1:
 AI_CGM_TargetMonWithJudgesAttention_CheckMon2:
 	if_user_order_eq MON_2, AI_CGM_End
 	if_cannot_participate MON_2, AI_CGM_TargetMonWithJudgesAttention_CheckMon3
+#ifdef BUGFIX
 	if_not_used_combo_starter MON_2, AI_CGM_TargetMonWithJudgesAttention_CheckMon3
+#else
+	if_used_combo_starter MON_2, AI_CGM_TargetMonWithJudgesAttention_CheckMon3
+#endif
 	if_random_less_than 125, AI_CGM_TargetMonWithJudgesAttention_CheckMon3
 	score +2
 	if_not_completed_combo MON_2, AI_CGM_TargetMonWithJudgesAttention_CheckMon3
@@ -556,7 +573,11 @@ AI_CGM_TargetMonWithJudgesAttention_CheckMon2:
 AI_CGM_TargetMonWithJudgesAttention_CheckMon3:
 	if_user_order_eq MON_3, AI_CGM_End
 	if_cannot_participate MON_3, AI_CGM_End
+#ifdef BUGFIX
 	if_not_used_combo_starter MON_3, AI_CGM_End
+#else
+	if_used_combo_starter MON_3, AI_CGM_End
+#endif
 	if_random_less_than 125, AI_CGM_End
 	score +2
 	if_not_completed_combo MON_3, AI_CGM_End

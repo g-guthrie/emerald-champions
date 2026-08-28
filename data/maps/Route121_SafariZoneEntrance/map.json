@@ -3,6 +3,7 @@
   "name": "Route121_SafariZoneEntrance",
   "layout": "LAYOUT_ROUTE121_SAFARI_ZONE_ENTRANCE",
   "music": "MUS_FORTREE",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_ROUTE_121",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -60,28 +61,28 @@
       "y": 5,
       "elevation": 0,
       "dest_map": "MAP_SAFARI_ZONE_SOUTH",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 3,
       "y": 5,
       "elevation": 0,
       "dest_map": "MAP_SAFARI_ZONE_SOUTH",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 14,
       "y": 13,
       "elevation": 0,
       "dest_map": "MAP_ROUTE121",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 15,
       "y": 13,
       "elevation": 0,
       "dest_map": "MAP_ROUTE121",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [

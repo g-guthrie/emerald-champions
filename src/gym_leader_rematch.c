@@ -5,7 +5,9 @@
 #include "gym_leader_rematch.h"
 
 static void UpdateGymLeaderRematchFromArray(const u16 *data, size_t size, u32 maxRematch);
+#if FREE_MATCH_CALL == FALSE
 static s32 GetRematchIndex(u32 trainerIdx);
+#endif //FREE_MATCH_CALL
 
 static const u16 GymLeaderRematches_AfterNewMauville[] = {
     REMATCH_ROXANNE,
@@ -31,6 +33,9 @@ static const u16 GymLeaderRematches_BeforeNewMauville[] = {
 
 void UpdateGymLeaderRematch(void)
 {
+    if (!OW_TRAINER_REMATCHES)
+        return;
+
     if (FlagGet(FLAG_SYS_GAME_CLEAR) && (Random() % 100) <= 30)
     {
         if (FlagGet(FLAG_WATTSON_REMATCH_AVAILABLE))
@@ -40,12 +45,35 @@ void UpdateGymLeaderRematch(void)
     }
 }
 
+s32 GetCurrentGymLeaderRematchLevel(void)
+{
+    u32 i, j;
+    u32 maxLevel = REMATCHES_COUNT;
+    if (!OW_TRAINER_REMATCHES)
+        return 0;
+    if (!FlagGet(FLAG_SYS_GAME_CLEAR))
+        return 0;
+    for (i = REMATCH_SPECIAL_TRAINER_START; i < REMATCH_ELITE_FOUR_ENTRIES; i++)
+    {
+        for (j = 0; j < REMATCHES_COUNT; j++)
+        {
+            if (!HasTrainerBeenFought(gRematchTable[i].trainerIds[j]))
+                break;
+        }
+        if (maxLevel > j)
+            j = maxLevel;
+    }
+    return maxLevel;
+}
+
 static void UpdateGymLeaderRematchFromArray(const u16 *data, size_t size, u32 maxRematch)
 {
+#if FREE_MATCH_CALL == FALSE
     s32 whichLeader = 0;
     s32 lowestRematchIndex = 5;
     u32 i;
     s32 rematchIndex;
+
     for (i = 0; i < size; i++)
     {
         if (!gSaveBlock1Ptr->trainerRematches[data[i]])
@@ -89,8 +117,10 @@ static void UpdateGymLeaderRematchFromArray(const u16 *data, size_t size, u32 ma
             }
         }
     }
+#endif //FREE_MATCH_CALL
 }
 
+#if FREE_MATCH_CALL == FALSE
 static s32 GetRematchIndex(u32 trainerIdx)
 {
     s32 i;
@@ -103,3 +133,4 @@ static s32 GetRematchIndex(u32 trainerIdx)
     }
     return 5;
 }
+#endif //FREE_MATCH_CALL

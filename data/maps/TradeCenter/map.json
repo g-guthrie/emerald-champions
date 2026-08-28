@@ -3,6 +3,7 @@
   "name": "TradeCenter",
   "layout": "LAYOUT_TRADE_CENTER",
   "music": "MUS_EVER_GRANDE",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_DYNAMIC",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -33,15 +34,15 @@
       "x": 5,
       "y": 8,
       "elevation": 3,
-      "dest_map": "MAP_NONE",
-      "dest_warp_id": 127
+      "dest_map": "MAP_DYNAMIC",
+      "dest_warp_id": "WARP_ID_DYNAMIC"
     },
     {
       "x": 6,
       "y": 8,
       "elevation": 3,
-      "dest_map": "MAP_NONE",
-      "dest_warp_id": 127
+      "dest_map": "MAP_DYNAMIC",
+      "dest_warp_id": "WARP_ID_DYNAMIC"
     }
   ],
   "coord_events": [

@@ -3,6 +3,7 @@
   "name": "Route128",
   "layout": "LAYOUT_ROUTE128",
   "music": "MUS_ROUTE120",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_ROUTE_128",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
@@ -14,24 +15,24 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "direction": "up",
+      "map": "MAP_ROUTE127",
       "offset": 0,
-      "map": "MAP_ROUTE127"
+      "direction": "up"
     },
     {
-      "direction": "down",
+      "map": "MAP_ROUTE129",
       "offset": 0,
-      "map": "MAP_ROUTE129"
+      "direction": "down"
     },
     {
-      "direction": "right",
+      "map": "MAP_EVER_GRANDE_CITY",
       "offset": -40,
-      "map": "MAP_EVER_GRANDE_CITY"
+      "direction": "right"
     },
     {
-      "direction": "dive",
+      "map": "MAP_UNDERWATER_ROUTE128",
       "offset": 0,
-      "map": "MAP_UNDERWATER_ROUTE128"
+      "direction": "dive"
     }
   ],
   "object_events": [
@@ -62,6 +63,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_ROUTE128_STEVEN",
       "graphics_id": "OBJ_EVENT_GFX_STEVEN",
       "x": 40,
       "y": 22,
@@ -75,6 +77,7 @@
       "flag": "FLAG_HIDE_ROUTE_128_STEVEN"
     },
     {
+      "local_id": "LOCALID_ROUTE128_ARCHIE",
       "graphics_id": "OBJ_EVENT_GFX_ARCHIE",
       "x": 37,
       "y": 22,
@@ -88,6 +91,7 @@
       "flag": "FLAG_HIDE_ROUTE_128_ARCHIE"
     },
     {
+      "local_id": "LOCALID_ROUTE128_MAXIE",
       "graphics_id": "OBJ_EVENT_GFX_MAXIE",
       "x": 38,
       "y": 21,
@@ -174,24 +178,24 @@
       "x": 49,
       "y": 9,
       "elevation": 3,
-      "item": "ITEM_BOTTLE_CAP",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_128_BOTTLE_CAP_1"
+      "item": "ITEM_HEART_SCALE",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_128_HEART_SCALE_1"
     },
     {
       "type": "hidden_item",
       "x": 57,
       "y": 21,
       "elevation": 3,
-      "item": "ITEM_BOTTLE_CAP",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_128_BOTTLE_CAP_2"
+      "item": "ITEM_HEART_SCALE",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_128_HEART_SCALE_2"
     },
     {
       "type": "hidden_item",
       "x": 31,
       "y": 33,
       "elevation": 3,
-      "item": "ITEM_BOTTLE_CAP",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_128_BOTTLE_CAP_3"
+      "item": "ITEM_HEART_SCALE",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_128_HEART_SCALE_3"
     }
   ]
 }

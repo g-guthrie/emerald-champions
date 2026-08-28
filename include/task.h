@@ -20,13 +20,9 @@ struct Task
     s16 data[NUM_TASK_DATA];
 };
 
-// Slot NUM_TASKS is an inactive overflow sentinel. It is never scheduled, but
-// keeps legacy callers that immediately initialize gTasks[CreateTask(...)] in
-// bounds when all real task slots are occupied.
-extern struct Task gTasks[NUM_TASKS + 1];
+extern struct Task gTasks[];
 
 void ResetTasks(void);
-bool8 IsTaskIdValid(u8 taskId);
 u8 CreateTask(TaskFunc func, u8 priority);
 void DestroyTask(u8 taskId);
 void RunTasks(void);
@@ -35,7 +31,6 @@ void SetTaskFuncWithFollowupFunc(u8 taskId, TaskFunc func, TaskFunc followupFunc
 void SwitchTaskToFollowupFunc(u8 taskId);
 bool8 FuncIsActiveTask(TaskFunc func);
 u8 FindTaskIdByFunc(TaskFunc func);
-u8 GetTaskCount(void);
 void SetWordTaskArg(u8 taskId, u8 dataElem, u32 value);
 u32 GetWordTaskArg(u8 taskId, u8 dataElem);
 

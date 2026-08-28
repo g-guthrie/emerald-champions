@@ -3,6 +3,7 @@
   "name": "SootopolisCity_PokemonCenter_1F",
   "layout": "LAYOUT_POKEMON_CENTER_1F",
   "music": "MUS_POKE_CENTER",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_SOOTOPOLIS_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -12,11 +13,12 @@
   "allow_running": false,
   "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": 0,
+  "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_SOOTOPOLIS_NURSE",
       "graphics_id": "OBJ_EVENT_GFX_NURSE",
-      "x": 8,
+      "x": 7,
       "y": 2,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
@@ -28,19 +30,6 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_OLD_MAN",
-      "x": 13,
-      "y": 2,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "0",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "PKMN_Center_Move_Tutor",
-      "flag": "0"
-    },
-    {
       "graphics_id": "OBJ_EVENT_GFX_MART_EMPLOYEE",
       "x": 2,
       "y": 2,
@@ -48,15 +37,28 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": "0",
+      "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PokemonCenter_BattleItemMart_Script",
+      "script": "Common_EventScript_EmeraldChampionsBattleVendor",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_OLD_MAN",
+      "x": 13,
+      "y": 2,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Common_EventScript_EmeraldChampionsMoveTutor",
       "flag": "0"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
-      "x": 10,
-      "y": 6,
+      "x": 12,
+      "y": 4,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 1,
@@ -80,46 +82,42 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_ROOFTOP_SALE_WOMAN",
-      "x": 1,
-      "y": 2,
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_1",
+      "x": 2,
+      "y": 3,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SootopolisCity_PokemonCenter_1F_EventScript_Clerk2",
+      "script": "SootopolisCity_PokemonCenter_1F_EventScript_DoubleEdgeTutor",
       "flag": "0"
     }
   ],
   "warp_events": [
     {
-      "x": 8,
-      "y": 8,
-      "elevation": 3,
-      "dest_map": "MAP_SOOTOPOLIS_CITY",
-      "dest_warp_id": 0
-    },
-    {
       "x": 7,
       "y": 8,
       "elevation": 3,
       "dest_map": "MAP_SOOTOPOLIS_CITY",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 6,
+      "y": 8,
+      "elevation": 3,
+      "dest_map": "MAP_SOOTOPOLIS_CITY",
+      "dest_warp_id": "0"
     },
     {
       "x": 1,
       "y": 6,
       "elevation": 4,
       "dest_map": "MAP_SOOTOPOLIS_CITY_POKEMON_CENTER_2F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
-  "coord_events": [
-
-  ],
-  "bg_events": [
-
-  ]
+  "coord_events": [],
+  "bg_events": []
 }

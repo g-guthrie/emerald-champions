@@ -3,6 +3,7 @@
   "name": "FortreeCity_DecorationShop",
   "layout": "LAYOUT_FORTREE_CITY_DECORATION_SHOP",
   "music": "MUS_FORTREE",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_FORTREE_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -73,14 +74,14 @@
       "y": 5,
       "elevation": 0,
       "dest_map": "MAP_FORTREE_CITY",
-      "dest_warp_id": 8
+      "dest_warp_id": "8"
     },
     {
       "x": 4,
       "y": 5,
       "elevation": 0,
       "dest_map": "MAP_FORTREE_CITY",
-      "dest_warp_id": 8
+      "dest_warp_id": "8"
     }
   ],
   "coord_events": [],

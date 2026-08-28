@@ -1,6 +1,6 @@
 EventScript_PC::
 	lockall
-	setvar VAR_0x8004, 0
+	setvar VAR_0x8004, PC_LOCATION_OTHER
 	special DoPCTurnOnEffect
 	playse SE_PC_ON
 	msgbox Text_BootUpPC, MSGBOX_DEFAULT
@@ -11,7 +11,6 @@ EventScript_PCMainMenu::
 	message gText_WhichPCShouldBeAccessed
 	waitmessage
 	special ScriptMenu_CreatePCMultichoice
-	waitstate
 	goto EventScript_AccessPC
 	end
 
@@ -28,7 +27,6 @@ EventScript_AccessPlayersPC::
 	playse SE_PC_LOGIN
 	msgbox gText_AccessedPlayersPC, MSGBOX_DEFAULT
 	special PlayerPC
-	waitstate
 	goto EventScript_PCMainMenu
 	end
 
@@ -38,7 +36,6 @@ EventScript_AccessPokemonStorage::
 	call_if_set FLAG_SYS_PC_LANETTE, EventScript_AccessLanettesPC
 	msgbox gText_StorageSystemOpened, MSGBOX_DEFAULT
 	special ShowPokemonStorageSystemPC
-	waitstate
 	goto EventScript_PCMainMenu
 	end
 
@@ -47,11 +44,15 @@ EventScript_AccessSomeonesPC::
 	return
 
 EventScript_AccessLanettesPC::
+#if IS_FRLG
+	msgbox gText_AccessedBillsPC, MSGBOX_DEFAULT
+#else
 	msgbox gText_AccessedLanettesPC, MSGBOX_DEFAULT
+#endif
 	return
 
 EventScript_TurnOffPC::
-	setvar VAR_0x8004, 0
+	setvar VAR_0x8004, PC_LOCATION_OTHER
 	playse SE_PC_OFF
 	special DoPCTurnOffEffect
 	releaseall
@@ -61,6 +62,12 @@ EventScript_AccessHallOfFame::
 	goto_if_unset FLAG_SYS_GAME_CLEAR, EventScript_TurnOffPC
 	playse SE_PC_LOGIN
 	special AccessHallOfFamePC
-	waitstate
 	goto EventScript_AccessPC
+	end
+
+EventScript_AccessPokemonBoxLink::
+	playse SE_PC_LOGIN
+	msgbox gText_StorageSystemOpened, MSGBOX_DEFAULT
+	special ShowPokemonStorageSystemPC
+	goto EventScript_TurnOffPC
 	end

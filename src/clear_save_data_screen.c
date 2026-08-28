@@ -79,8 +79,8 @@ void CB2_InitClearSaveDataScreen(void)
 
 static void Task_DoClearSaveDataScreenYesNo(u8 taskId)
 {
-    DrawStdFrameWithCustomTileAndPalette(0, 0, 2, 14);
-    AddTextPrinterParameterized(0, 1, gText_ClearAllSaveData, 0, 1, 0, 0);
+    DrawStdFrameWithCustomTileAndPalette(0, FALSE, 2, 14);
+    AddTextPrinterParameterized(0, FONT_NORMAL, gText_ClearAllSaveData, 0, 1, 0, 0);
     CreateYesNoMenu(sClearSaveYesNo, 2, 14, 1);
     gTasks[taskId].func = Task_ClearSaveDataScreenYesNoChoice;
 }
@@ -91,11 +91,11 @@ static void Task_ClearSaveDataScreenYesNoChoice(u8 taskId)
     {
     case 0:
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        AddTextPrinterParameterized(0, 1, gText_ClearingData, 0, 1, 0, 0);
+        AddTextPrinterParameterized(0, FONT_NORMAL, gText_ClearingData, 0, 1, 0, 0);
         gTasks[taskId].func = Task_ClearSaveData;
         break;
     case 1:
-    case -1:
+    case MENU_B_PRESSED:
         PlaySE(SE_SELECT);
         DestroyTask(taskId);
         SetMainCallback2(CB2_FadeAndDoReset);
@@ -124,7 +124,7 @@ static bool8 SetupClearSaveDataScreen(void)
 {
     u16 i;
 
-    switch(gMain.state)
+    switch (gMain.state)
     {
     case 0:
     default:
@@ -170,7 +170,7 @@ static bool8 SetupClearSaveDataScreen(void)
         break;
     case 1:
         UpdatePaletteFade();
-        if(!gPaletteFade.active)
+        if (!gPaletteFade.active)
         {
             SetMainCallback2(MainCB);
             return TRUE;
@@ -181,7 +181,7 @@ static bool8 SetupClearSaveDataScreen(void)
 
 static void CB2_FadeAndDoReset(void)
 {
-    switch(gMain.state)
+    switch (gMain.state)
     {
     case 0:
     default:
@@ -190,7 +190,7 @@ static void CB2_FadeAndDoReset(void)
         break;
     case 1:
         UpdatePaletteFade();
-        if(!gPaletteFade.active)
+        if (!gPaletteFade.active)
         {
             FreeAllWindowBuffers();
             DoSoftReset();
@@ -204,6 +204,6 @@ static void InitClearSaveDataScreenWindows(void)
     InitWindows(sClearSaveTextWindow);
     DeactivateAllTextPrinters();
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
-    LoadWindowGfx(0, 0, 2, 224);
-    LoadPalette(gUnknown_0860F074, 0xF0, 0x20);
+    LoadWindowGfx(0, 0, 2, BG_PLTT_ID(14));
+    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
 }

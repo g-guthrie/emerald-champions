@@ -1,9 +1,11 @@
 #include "global.h"
 #include "battle_dome.h"
 #include "battle.h"
+#include "battle_ai_util.h"
 #include "battle_main.h"
 #include "battle_setup.h"
 #include "battle_tower.h"
+#include "battle_stat_change.h"
 #include "frontier_util.h"
 #include "battle_message.h"
 #include "event_data.h"
@@ -26,6 +28,7 @@
 #include "sound.h"
 #include "pokemon_icon.h"
 #include "data.h"
+#include "item.h"
 #include "international_string_util.h"
 #include "trainer_pokemon_sprites.h"
 #include "scanline_effect.h"
@@ -34,14 +37,14 @@
 #include "constants/battle_dome.h"
 #include "constants/battle_move_effects.h"
 #include "constants/frontier_util.h"
-#include "constants/items.h"
 #include "constants/moves.h"
-#include "constants/pokemon.h"
 #include "constants/trainers.h"
 #include "constants/abilities.h"
 #include "constants/songs.h"
 #include "constants/battle_frontier.h"
 #include "constants/rgb.h"
+
+#define TAG_BUTTONS 0
 
 // Enough space to hold 2 match info cards worth of trainers and their parties
 #define NUM_INFOCARD_SPRITES ((FRONTIER_PARTY_SIZE + 1) * 4)
@@ -59,7 +62,7 @@ struct TourneyTreeLineSection
 {
     u8 x;
     u8 y;
-    u16 src;
+    u16 tile;
 };
 
 #define DOME_TRAINERS gSaveBlock2Ptr->frontier.domeTrainers
@@ -76,40 +79,64 @@ struct TourneyTreeLineSection
 #define tMode               data[2]
 #define tPrevTaskId         data[3]
 
-// This file's functions.
-static u8 GetDomeTrainerMonIvs(u16 trainerId);
-static void SwapDomeTrainers(int id1, int id2, u16 *statsArray);
-static void CalcDomeMonStats(u16 species, int level, int ivs, u8 evBits, u8 nature, int *stats);
-static void CreateDomeOpponentMons(u16 tournamentTrainerId);
-static int SelectOpponentMonsUsingPersonality(u16 tournamentTrainerId, bool8 arg1);
-static int SelectOpponentMonsUsingOtId(u16 tournamentTrainerId, bool8 arg1);
-static int GetTypeEffectivenessPoints(int move, int species, int arg2);
-static int SelectOpponentMonsFromParty(int *arr, bool8 arg1);
-static void Task_ShowTourneyInfoCard(u8 taskId);
-static void Task_HandleInfoCardInput(u8 taskId);
-static u8 Task_GetInfoCardInput(u8 taskId);
+enum {
+    EFFECTIVENESS_MODE_GOOD,
+    EFFECTIVENESS_MODE_BAD,
+    EFFECTIVENESS_MODE_AI_VS_AI,
+};
+
+// Window IDs for the tourney tree
+enum {
+    TOURNEYWIN_NAMES_LEFT,
+    TOURNEYWIN_NAMES_RIGHT,
+    TOURNEYWIN_TITLE,
+};
+
+// Window IDs for the trainer (WIN_TRAINER_*) and match (WIN_MATCH_*) info cards.
+// All 9 have a duplicate window at WIN + NUM_INFO_CARD_WINDOWS used by the alternate info card
+enum {
+    WIN_TRAINER_NAME,
+    WIN_TRAINER_MON1_NAME,
+    WIN_TRAINER_MON2_NAME, // Used implicitly
+    WIN_TRAINER_MON3_NAME, // Used implicitly
+    WIN_TRAINER_FLAVOR_TEXT = WIN_TRAINER_MON1_NAME + FRONTIER_PARTY_SIZE, // Trainer's potential, battle style, and stat texts
+    WIN_MATCH_NUMBER,
+    WIN_MATCH_TRAINER_NAME_LEFT,
+    WIN_MATCH_TRAINER_NAME_RIGHT,
+    WIN_MATCH_WIN_TEXT,
+    NUM_INFO_CARD_WINDOWS
+};
+
+static u8 GetDomeTrainerMonIvs(u16);
+static void SwapDomeTrainers(int, int, u16 *);
+static void CalcDomeMonStats(const struct TrainerMon *fmon, int level, u8 ivs, int *stats);
+static void CreateDomeOpponentMons(u16);
+static int SelectOpponentMons_Good(u16, bool8);
+static int SelectOpponentMons_Bad(u16, bool8);
+static int GetTypeEffectivenessPoints(enum Move, enum Species, int);
+static int SelectOpponentMonsFromParty(int *, bool8);
+static void Task_ShowTourneyInfoCard(u8);
+static void Task_HandleInfoCardInput(u8);
+static u8 Task_GetInfoCardInput(u8);
 static void SetFacilityTrainerAndMonPtrs(void);
-static int TrainerIdToTournamentId(u16 trainerId);
+static int TrainerIdToTournamentId(u16);
 static u16 TrainerIdOfPlayerOpponent(void);
-static void Task_ShowTourneyTree(u8 taskId);
-static void Task_HandleStaticTourneyTreeInput(u8 taskId);
+static void Task_ShowTourneyTree(u8);
+static void Task_HandleStaticTourneyTreeInput(u8);
 static void CB2_TourneyTree(void);
 static void VblankCb_TourneyInfoCard(void);
-static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo);
-static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId);
-static int BufferDomeWinString(u8, u8*);
-static u8 GetDomeBrainTrainerPicId(void);
-static u8 GetDomeBrainTrainerClass(void);
-static void CopyDomeBrainTrainerName(u8 *str);
-static void CopyDomeTrainerName(u8 *str, u16 trainerId);
+static void DisplayMatchInfoOnCard(u8, u8);
+static void DisplayTrainerInfoOnCard(u8, u8);
+static int BufferDomeWinString(u8, u8 *);
+static void CopyDomeTrainerName(u8 *, u16);
 static void HblankCb_TourneyTree(void);
 static void VblankCb_TourneyTree(void);
-static u8 UpdateTourneyTreeCursor(u8 taskId);
-static void DecideRoundWinners(u8 roundId);
-static u8 sub_81953E8(u8 tournamentId, u8);
+static u8 UpdateTourneyTreeCursor(u8);
+static void DecideRoundWinners(u8);
+static u8 GetOpposingNPCTournamentIdByRound(u8, u8);
 static void DrawTourneyAdvancementLine(u8, u8);
-static void SpriteCb_HorizontalScrollArrow(struct Sprite *sprite);
-static void SpriteCb_VerticalScrollArrow(struct Sprite *sprite);
+static void SpriteCB_HorizontalScrollArrow(struct Sprite *);
+static void SpriteCB_VerticalScrollArrow(struct Sprite *);
 static void InitDomeChallenge(void);
 static void GetDomeData(void);
 static void SetDomeData(void);
@@ -133,372 +160,8 @@ static void BufferLastDomeWinnerName(void);
 static void InitRandomTourneyTreeResults(void);
 static void InitDomeTrainers(void);
 
-// EWRAM variables.
-EWRAM_DATA u32 gPlayerPartyLostHP = 0; // never read
-static EWRAM_DATA u32 sPlayerPartyMaxHP = 0; // never read
 static EWRAM_DATA struct TourneyTreeInfoCard *sInfoCard = {0};
 static EWRAM_DATA u8 *sTilemapBuffer = NULL;
-
-// Each move has an array of points for different move characteristics which contribute to a tourney trainers listed battle style (see sBattleStyleThresholds)
-// All move points are either 1 or 0, so theyre essentially flags saying whether or not the move has that characteristic
-static const u8 sBattleStyleMovePoints[MOVES_COUNT][NUM_MOVE_POINT_TYPES] =
-{
-    [MOVE_NONE]          = {0},
-    [MOVE_POUND]         = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_KARATE_CHOP]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_DOUBLE_SLAP]   = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_COMET_PUNCH]   = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_MEGA_PUNCH]    = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_PAY_DAY]       = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_FIRE_PUNCH]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_ICE_PUNCH]     = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_THUNDER_PUNCH] = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_SCRATCH]       = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_VISE_GRIP]     = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_GUILLOTINE]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_RAZOR_WIND]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_SWORDS_DANCE]  = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_STAT_RAISE] = 1, [MOVE_POINTS_POPULAR] = 1},
-    [MOVE_CUT]           = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_GUST]          = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_WING_ATTACK]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_WHIRLWIND]     = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_FLY]           = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_BIND]          = {[MOVE_POINTS_STATUS] = 1, [MOVE_POINTS_DMG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_SLAM]          = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_VINE_WHIP]     = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_STOMP]         = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_DOUBLE_KICK]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_MEGA_KICK]     = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_JUMP_KICK]     = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_ROLLING_KICK]  = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_SAND_ATTACK]   = {[MOVE_POINTS_STAT_LOWER] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_HEADBUTT]      = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_HORN_ATTACK]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_FURY_ATTACK]   = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_HORN_DRILL]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_TACKLE]        = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_BODY_SLAM]     = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_WRAP]          = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_TAKE_DOWN]     = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_THRASH]        = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_DOUBLE_EDGE]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_TAIL_WHIP]     = {[MOVE_POINTS_STAT_LOWER] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_POISON_STING]  = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_TWINEEDLE]     = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_PIN_MISSILE]   = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_LEER]          = {[MOVE_POINTS_STAT_LOWER] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_BITE]          = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_GROWL]         = {[MOVE_POINTS_STAT_LOWER] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_ROAR]          = {[MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_SING]          = {[MOVE_POINTS_STATUS] = 1},
-    [MOVE_SUPERSONIC]    = {[MOVE_POINTS_STATUS] = 1},
-    [MOVE_SONIC_BOOM]    = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_DISABLE]       = {[MOVE_POINTS_STATUS] = 1},
-    [MOVE_ACID]          = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_EMBER]         = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_FLAMETHROWER]  = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_POPULAR] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_MIST]          = {0},
-    [MOVE_WATER_GUN]     = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_HYDRO_PUMP]    = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_DMG] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_SURF]          = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_POPULAR] = 1, [MOVE_POINTS_STRONG] = 1},
-    [MOVE_ICE_BEAM]      = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_POPULAR] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_BLIZZARD]      = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_LOW_PP] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_PSYBEAM]       = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_BUBBLE_BEAM]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_AURORA_BEAM]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_HYPER_BEAM]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_POPULAR] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_PECK]          = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_DRILL_PECK]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_SUBMISSION]    = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_LOW_KICK]      = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_COUNTER]       = {[MOVE_POINTS_DEF] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_LUCK] = 1},
-    [MOVE_SEISMIC_TOSS]  = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_STRENGTH]      = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_ABSORB]        = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_MEGA_DRAIN]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_LEECH_SEED]    = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_STATUS] = 1},
-    [MOVE_GROWTH]        = {[MOVE_POINTS_STAT_RAISE] = 1},
-    [MOVE_RAZOR_LEAF]    = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_SOLAR_BEAM]    = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_POPULAR] = 1, [MOVE_POINTS_STRONG] = 1},
-    [MOVE_POISON_POWDER] = {[MOVE_POINTS_STATUS] = 1},
-    [MOVE_STUN_SPORE]    = {[MOVE_POINTS_STATUS] = 1},
-    [MOVE_SLEEP_POWDER]  = {[MOVE_POINTS_STATUS] = 1},
-    [MOVE_PETAL_DANCE]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_STRING_SHOT]   = {[MOVE_POINTS_STAT_LOWER] = 1},
-    [MOVE_DRAGON_RAGE]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_FIRE_SPIN]     = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_THUNDER_SHOCK] = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_THUNDERBOLT]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_POPULAR] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_THUNDER_WAVE]  = {[MOVE_POINTS_STATUS] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_THUNDER]       = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_ROCK_THROW]    = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_EARTHQUAKE]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_POPULAR] = 1, [MOVE_POINTS_STRONG] = 1},
-    [MOVE_FISSURE]       = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_LUCK] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_DIG]           = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_TOXIC]         = {[MOVE_POINTS_STATUS] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_CONFUSION]     = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_PSYCHIC]       = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_POPULAR] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_HYPNOSIS]      = {[MOVE_POINTS_COMBO] = 1},
-    [MOVE_MEDITATE]      = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_STAT_RAISE] = 1},
-    [MOVE_AGILITY]       = {[MOVE_POINTS_STAT_RAISE] = 1},
-    [MOVE_QUICK_ATTACK]  = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_RAGE]          = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_TELEPORT]      = {0},
-    [MOVE_NIGHT_SHADE]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_MIMIC]         = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_SCREECH]       = {[MOVE_POINTS_STAT_LOWER] = 1},
-    [MOVE_DOUBLE_TEAM]   = {[MOVE_POINTS_STAT_RAISE] = 1, [MOVE_POINTS_DEF] = 1},
-    [MOVE_RECOVER]       = {0},
-    [MOVE_HARDEN]        = {[MOVE_POINTS_STAT_RAISE] = 1, [MOVE_POINTS_DEF] = 1},
-    [MOVE_MINIMIZE]      = {[MOVE_POINTS_STAT_RAISE] = 1, [MOVE_POINTS_DEF] = 1},
-    [MOVE_SMOKESCREEN]   = {[MOVE_POINTS_STAT_LOWER] = 1, [MOVE_POINTS_DEF] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_CONFUSE_RAY]   = {[MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_WITHDRAW]      = {[MOVE_POINTS_STAT_RAISE] = 1, [MOVE_POINTS_DEF] = 1},
-    [MOVE_DEFENSE_CURL]  = {[MOVE_POINTS_STAT_RAISE] = 1, [MOVE_POINTS_DEF] = 1},
-    [MOVE_BARRIER]       = {[MOVE_POINTS_DEF] = 1},
-    [MOVE_LIGHT_SCREEN]  = {[MOVE_POINTS_DEF] = 1},
-    [MOVE_HAZE]          = {0},
-    [MOVE_REFLECT]       = {[MOVE_POINTS_DEF] = 1},
-    [MOVE_FOCUS_ENERGY]  = {[MOVE_POINTS_COMBO] = 1},
-    [MOVE_BIDE]          = {[MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_METRONOME]     = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_LUCK] = 1},
-    [MOVE_MIRROR_MOVE]   = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_LUCK] = 1},
-    [MOVE_SELF_DESTRUCT] = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_EGG_BOMB]      = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_STRONG] = 1},
-    [MOVE_LICK]          = {[MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_SMOG]          = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_SLUDGE]        = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_BONE_CLUB]     = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_FIRE_BLAST]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_LOW_PP] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_WATERFALL]     = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_CLAMP]         = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_SWIFT]         = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_SKULL_BASH]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_STRONG] = 1},
-    [MOVE_SPIKE_CANNON]  = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_CONSTRICT]     = {[MOVE_POINTS_STATUS] = 1, [MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_AMNESIA]       = {[MOVE_POINTS_STAT_RAISE] = 1, [MOVE_POINTS_DEF] = 1},
-    [MOVE_KINESIS]       = {[MOVE_POINTS_STAT_LOWER] = 1},
-    [MOVE_SOFT_BOILED]   = {[MOVE_POINTS_HEAL] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_HIGH_JUMP_KICK]  = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_GLARE]         = {[MOVE_POINTS_STAT_LOWER] = 1},
-    [MOVE_DREAM_EATER]   = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_RARE] = 1, [MOVE_POINTS_HEAL] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_STRONG] = 1},
-    [MOVE_POISON_GAS]    = {[MOVE_POINTS_STATUS] = 1},
-    [MOVE_BARRAGE]       = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_LEECH_LIFE]    = {[MOVE_POINTS_HEAL] = 1, [MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_LOVELY_KISS]   = {[MOVE_POINTS_STATUS] = 1},
-    [MOVE_SKY_ATTACK]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_LOW_PP] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_TRANSFORM]     = {[MOVE_POINTS_RARE] = 1},
-    [MOVE_BUBBLE]        = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_DIZZY_PUNCH]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_SPORE]         = {[MOVE_POINTS_STATUS] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_FLASH]         = {0},
-    [MOVE_PSYWAVE]       = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_SPLASH]        = {[MOVE_POINTS_RARE] = 1},
-    [MOVE_ACID_ARMOR]    = {[MOVE_POINTS_STAT_RAISE] = 1, [MOVE_POINTS_DEF] = 1},
-    [MOVE_CRABHAMMER]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_STRONG] = 1},
-    [MOVE_EXPLOSION]     = {[MOVE_POINTS_RISKY] = 1, [MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_POPULAR] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_FURY_SWIPES]   = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_BONEMERANG]    = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_REST]          = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_HEAL] = 1},
-    [MOVE_ROCK_SLIDE]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_HYPER_FANG]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_SHARPEN]       = {[MOVE_POINTS_STAT_RAISE] = 1, [MOVE_POINTS_DEF] = 1},
-    [MOVE_CONVERSION]    = {[MOVE_POINTS_DEF] = 1},
-    [MOVE_TRI_ATTACK]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_SUPER_FANG]    = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_SLASH]         = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_SUBSTITUTE]    = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_DEF] = 1},
-    [MOVE_STRUGGLE]      = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_LOW_PP] = 1}, // Odd that this is assigned qualities
-    [MOVE_SKETCH]        = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_LUCK] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_TRIPLE_KICK]   = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_THIEF]         = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_SPIDER_WEB]    = {[MOVE_POINTS_STAT_LOWER] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_MIND_READER]   = {[MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_NIGHTMARE]     = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_STATUS] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_FLAME_WHEEL]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_SNORE]         = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_CURSE]         = {[MOVE_POINTS_STATUS] = 1},
-    [MOVE_FLAIL]         = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_CONVERSION_2]  = {[MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_AEROBLAST]     = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_COTTON_SPORE]  = {[MOVE_POINTS_STAT_LOWER] = 1},
-    [MOVE_REVERSAL]      = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_SPITE]         = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_RISKY] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_POWDER_SNOW]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_PROTECT]       = {[MOVE_POINTS_DEF] = 1, [MOVE_POINTS_POPULAR] = 1},
-    [MOVE_MACH_PUNCH]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_SCARY_FACE]    = {0},
-    [MOVE_FEINT_ATTACK]  = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_SWEET_KISS]    = {0},
-    [MOVE_BELLY_DRUM]    = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_STAT_RAISE] = 1},
-    [MOVE_SLUDGE_BOMB]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_MUD_SLAP]      = {[MOVE_POINTS_STAT_LOWER] = 1, [MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_OCTAZOOKA]     = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_SPIKES]        = {[MOVE_POINTS_COMBO] = 1},
-    [MOVE_ZAP_CANNON]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_LUCK] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_LOW_PP] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_FORESIGHT]     = {[MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_DESTINY_BOND]  = {[MOVE_POINTS_RISKY] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_PERISH_SONG]   = {[MOVE_POINTS_RISKY] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_ICY_WIND]      = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_DETECT]        = {[MOVE_POINTS_DEF] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_BONE_RUSH]     = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_LOCK_ON]       = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_OUTRAGE]       = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_SANDSTORM]     = {0},
-    [MOVE_GIGA_DRAIN]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_ENDURE]        = {[MOVE_POINTS_DEF] = 1},
-    [MOVE_CHARM]         = {[MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_ROLLOUT]       = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_FALSE_SWIPE]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_SWAGGER]       = {[MOVE_POINTS_EFFECT] = 1},
-    [MOVE_MILK_DRINK]    = {[MOVE_POINTS_HEAL] = 1},
-    [MOVE_SPARK]         = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_FURY_CUTTER]   = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_STEEL_WING]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_MEAN_LOOK]     = {[MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_ATTRACT]       = {[MOVE_POINTS_STATUS] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_SLEEP_TALK]    = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_LUCK] = 1},
-    [MOVE_HEAL_BELL]     = {[MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_RETURN]        = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_PRESENT]       = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_LUCK] = 1},
-    [MOVE_FRUSTRATION]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_SAFEGUARD]     = {[MOVE_POINTS_DEF] = 1},
-    [MOVE_PAIN_SPLIT]    = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_SACRED_FIRE]   = {[MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_LOW_PP] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_MAGNITUDE]     = {[MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_DYNAMIC_PUNCH] = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_LUCK] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_LOW_PP] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_MEGAHORN]      = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_STRONG] = 1},
-    [MOVE_DRAGON_BREATH] = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_BATON_PASS]    = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_RARE] = 1},
-    [MOVE_ENCORE]        = {[MOVE_POINTS_STATUS] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_PURSUIT]       = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_RAPID_SPIN]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_SWEET_SCENT]   = {[MOVE_POINTS_STAT_LOWER] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_IRON_TAIL]     = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_METAL_CLAW]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_VITAL_THROW]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_MORNING_SUN]   = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_HEAL] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_SYNTHESIS]     = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_HEAL] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_MOONLIGHT]     = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_HEAL] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_HIDDEN_POWER]  = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_CROSS_CHOP]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_TWISTER]       = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_RAIN_DANCE]    = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_SUNNY_DAY]     = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_CRUNCH]        = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_MIRROR_COAT]   = {[MOVE_POINTS_DEF] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_PSYCH_UP]      = {[MOVE_POINTS_STAT_RAISE] = 1},
-    [MOVE_EXTREME_SPEED] = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_ANCIENT_POWER] = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_LOW_PP] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_SHADOW_BALL]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_FUTURE_SIGHT]  = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_DMG] = 1},
-    [MOVE_ROCK_SMASH]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_WHIRLPOOL]     = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_BEAT_UP]       = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_FAKE_OUT]      = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_UPROAR]        = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_STOCKPILE]     = {[MOVE_POINTS_COMBO] = 1},
-    [MOVE_SPIT_UP]       = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_STRONG] = 1},
-    [MOVE_SWALLOW]       = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_HEAL] = 1},
-    [MOVE_HEAT_WAVE]     = {[MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_HAIL]          = {0},
-    [MOVE_TORMENT]       = {[MOVE_POINTS_STATUS] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_FLATTER]       = {[MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_WILL_O_WISP]   = {[MOVE_POINTS_STATUS] = 1},
-    [MOVE_MEMENTO]       = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_FACADE]        = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_FOCUS_PUNCH]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_STRONG] = 1},
-    [MOVE_SMELLING_SALTS] = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_FOLLOW_ME]     = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_NATURE_POWER]  = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_CHARGE]        = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_TAUNT]         = {[MOVE_POINTS_STATUS] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_HELPING_HAND]  = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_TRICK]         = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_ROLE_PLAY]     = {[MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_WISH]          = {[MOVE_POINTS_HEAL] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_ASSIST]        = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_LUCK] = 1},
-    [MOVE_INGRAIN]       = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_HEAL] = 1, [MOVE_POINTS_DEF] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_SUPERPOWER]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_MAGIC_COAT]    = {[MOVE_POINTS_DEF] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_LUCK] = 1},
-    [MOVE_RECYCLE]       = {[MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_REVENGE]       = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_LUCK] = 1},
-    [MOVE_BRICK_BREAK]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_YAWN]          = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_STATUS] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_KNOCK_OFF]     = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_ENDEAVOR]      = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_ERUPTION]      = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_SKILL_SWAP]    = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_IMPRISON]      = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_LUCK] = 1},
-    [MOVE_REFRESH]       = {[MOVE_POINTS_HEAL] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_GRUDGE]        = {[MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_SNATCH]        = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_LUCK] = 1},
-    [MOVE_SECRET_POWER]  = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_DIVE]          = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_ARM_THRUST]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_CAMOUFLAGE]    = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_TAIL_GLOW]     = {[MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_LUSTER_PURGE]  = {[MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_LOW_PP] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_MIST_BALL]     = {[MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_LOW_PP] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_FEATHER_DANCE] = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_TEETER_DANCE]  = {[MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_BLAZE_KICK]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_MUD_SPORT]     = {[MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_ICE_BALL]      = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_NEEDLE_ARM]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_SLACK_OFF]     = {[MOVE_POINTS_HEAL] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_HYPER_VOICE]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_STRONG] = 1},
-    [MOVE_POISON_FANG]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_CRUSH_CLAW]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_BLAST_BURN]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_HYDRO_CANNON]  = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_METEOR_MASH]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_ASTONISH]      = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_WEATHER_BALL]  = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_AROMATHERAPY]  = {[MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_FAKE_TEARS]    = {[MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_AIR_CUTTER]    = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_OVERHEAT]      = {[MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_LOW_PP] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_ODOR_SLEUTH]   = {[MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_ROCK_TOMB]     = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_SILVER_WIND]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_LOW_PP] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_METAL_SOUND]   = {0},
-    [MOVE_GRASS_WHISTLE] = {0},
-    [MOVE_TICKLE]        = {[MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_COSMIC_POWER]  = {0},
-    [MOVE_WATER_SPOUT]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_SIGNAL_BEAM]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_SHADOW_PUNCH]  = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_EXTRASENSORY]  = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_SKY_UPPERCUT]  = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_SAND_TOMB]     = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_SHEER_COLD]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_LUCK] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_MUDDY_WATER]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_BULLET_SEED]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_AERIAL_ACE]    = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_ICICLE_SPEAR]  = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_IRON_DEFENSE]  = {[MOVE_POINTS_DEF] = 1},
-    [MOVE_BLOCK]         = {[MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_HOWL]          = {0},
-    [MOVE_DRAGON_CLAW]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_FRENZY_PLANT]  = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_BULK_UP]       = {[MOVE_POINTS_COMBO] = 1},
-    [MOVE_BOUNCE]        = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_LOW_PP] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_MUD_SHOT]      = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_POISON_TAIL]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_COVET]         = {[MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_VOLT_TACKLE]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_STRONG] = 1},
-    [MOVE_MAGICAL_LEAF]  = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_WATER_SPORT]   = {[MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_CALM_MIND]     = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_STAT_RAISE] = 1},
-    [MOVE_LEAF_BLADE]    = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1},
-    [MOVE_DRAGON_DANCE]  = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_STAT_RAISE] = 1},
-    [MOVE_ROCK_BLAST]    = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_SHOCK_WAVE]    = {[MOVE_POINTS_DMG] = 1},
-    [MOVE_WATER_PULSE]   = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_ACCURATE] = 1, [MOVE_POINTS_EFFECT] = 1},
-    [MOVE_DOOM_DESIRE]   = {[MOVE_POINTS_RARE] = 1, [MOVE_POINTS_DMG] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_LOW_PP] = 1},
-    [MOVE_PSYCHO_BOOST]  = {[MOVE_POINTS_DMG] = 1, [MOVE_POINTS_POWERFUL] = 1, [MOVE_POINTS_STRONG] = 1, [MOVE_POINTS_LOW_PP] = 1, [MOVE_POINTS_EFFECT] = 1},
-};
 
 // This array is searched in-order to determine what battle style a tourney trainer uses.
 // If the sum of the points for the party's moves meets/exceeds all the point totals of an element, then they use that battle style
@@ -522,13 +185,13 @@ static const u8 sBattleStyleThresholds[NUM_BATTLE_STYLES - 1][NUM_MOVE_POINT_TYP
     [DOME_BATTLE_STYLE_STRAIGHTFORWARD] = {[MOVE_POINTS_ACCURATE] = 3, [MOVE_POINTS_STRONG] = 3},
     [DOME_BATTLE_STYLE_AGGRESSIVE]      = {[MOVE_POINTS_STRONG] = 4},
     [DOME_BATTLE_STYLE_DEF]             = {[MOVE_POINTS_DEF] = 3},
-    [DOME_BATTLE_STYLE_ENFEEBLE_HIGH]   = {[MOVE_POINTS_STAT_LOWER] = 2, [MOVE_POINTS_STATUS] = 2},
+    [DOME_BATTLE_STYLE_ENFEEBLE_HIGH]   = {[MOVE_POINTS_STAT_LOWER] = 2, [MOVE_POINTS_STATUS] = 2}, // BUG: This battle style is unobtainable; DOME_BATTLE_STYLE_ENFEEBLE_LOW will always succeed before it
     [DOME_BATTLE_STYLE_POPULAR_POWER]   = {[MOVE_POINTS_POWERFUL] = 3, [MOVE_POINTS_POPULAR] = 3},
     [DOME_BATTLE_STYLE_COMBO_LOW]       = {[MOVE_POINTS_COMBO] = 2},
     [DOME_BATTLE_STYLE_ACCURATE]        = {[MOVE_POINTS_HEAL] = 1, [MOVE_POINTS_ACCURATE] = 3},
     [DOME_BATTLE_STYLE_POWERFUL]        = {[MOVE_POINTS_POWERFUL] = 4},
     [DOME_BATTLE_STYLE_ATK_OVER_DEF]    = {[MOVE_POINTS_DMG] = 7},
-    [DOME_BATTLE_STYLE_DEF_OVER_ATK]    = {[MOVE_POINTS_DEF] = 4},
+    [DOME_BATTLE_STYLE_DEF_OVER_ATK]    = {[MOVE_POINTS_DEF] = 4}, // BUG: This battle style is unobtainable; DOME_BATTLE_STYLE_DEF will always succeed before it
     [DOME_BATTLE_STYLE_POPULAR_STRONG]  = {[MOVE_POINTS_POPULAR] = 2, [MOVE_POINTS_STRONG] = 4},
     [DOME_BATTLE_STYLE_EFFECTS]         = {[MOVE_POINTS_EFFECT] = 4},
     [DOME_BATTLE_STYLE_BALANCED]        = {0}, // If no other thresholds are met, this battle style is used
@@ -536,51 +199,6 @@ static const u8 sBattleStyleThresholds[NUM_BATTLE_STYLES - 1][NUM_MOVE_POINT_TYP
     [DOME_BATTLE_STYLE_UNUSED2]         = {0},
     [DOME_BATTLE_STYLE_UNUSED3]         = {0},
   //[DOME_BATTLE_STYLE_UNUSED4]         = {0}, // Excluded here, presumably was meant to be a style just for Dome Ace Tucker
-};
-
-// Specific styles must be tested before their broader subsets. The original
-// numeric order made ENFEEBLE_HIGH and DEF_OVER_ATK impossible to display.
-static const u8 sBattleStyleEvaluationOrder[] =
-{
-    DOME_BATTLE_STYLE_RISKY,
-    DOME_BATTLE_STYLE_STALL,
-    DOME_BATTLE_STYLE_VARIED,
-    DOME_BATTLE_STYLE_COMBO_HIGH,
-    DOME_BATTLE_STYLE_RARE_MOVES,
-    DOME_BATTLE_STYLE_RARE_MOVE,
-    DOME_BATTLE_STYLE_HP,
-    DOME_BATTLE_STYLE_STORE_POWER,
-    DOME_BATTLE_STYLE_ENFEEBLE_HIGH,
-    DOME_BATTLE_STYLE_ENFEEBLE_LOW,
-    DOME_BATTLE_STYLE_LUCK,
-    DOME_BATTLE_STYLE_REGAL,
-    DOME_BATTLE_STYLE_LOW_PP,
-    DOME_BATTLE_STYLE_STATUS_ATK,
-    DOME_BATTLE_STYLE_ENDURE,
-    DOME_BATTLE_STYLE_STATUS,
-    DOME_BATTLE_STYLE_STRAIGHTFORWARD,
-    DOME_BATTLE_STYLE_AGGRESSIVE,
-    DOME_BATTLE_STYLE_DEF_OVER_ATK,
-    DOME_BATTLE_STYLE_DEF,
-    DOME_BATTLE_STYLE_POPULAR_POWER,
-    DOME_BATTLE_STYLE_COMBO_LOW,
-    DOME_BATTLE_STYLE_ACCURATE,
-    DOME_BATTLE_STYLE_POWERFUL,
-    DOME_BATTLE_STYLE_ATK_OVER_DEF,
-    DOME_BATTLE_STYLE_POPULAR_STRONG,
-    DOME_BATTLE_STYLE_EFFECTS,
-    DOME_BATTLE_STYLE_BALANCED,
-};
-static const u8 sUnusedArray[] =
-{
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    3, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 3, 0, 0, 0,
-    0, 0, 3, 0, 0, 0, 0, 0, 3, 2, 0, 0, 0, 0, 0, 2,
-    0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0,
-    0, 2, 253, 0, 0, 0, 0, 0, 253, 0, 0, 0, 0, 0, 253, 0,
-    0, 0, 0, 0, 253, 0, 0, 0, 0, 0, 253, 254, 0, 0, 0, 0,
-    0, 254, 0, 0, 0, 0, 0, 254, 0, 0, 0, 0, 0, 254, 0, 0,
-    0, 0, 0, 254, 0, 0, 0, 0, 0,
 };
 
 // 1st array is for cursor position (sprite id): cursor can be on a trainer info button, a match info button, or the exit/cancel button
@@ -705,7 +323,7 @@ static const struct BgTemplate sInfoCardBgTemplates[4] =
 
 static const struct WindowTemplate sTourneyTreeWindowTemplates[] =
 {
-    {
+    [TOURNEYWIN_NAMES_LEFT] = {
         .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 3,
@@ -714,7 +332,7 @@ static const struct WindowTemplate sTourneyTreeWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 16,
     },
-    {
+    [TOURNEYWIN_NAMES_RIGHT] = {
         .bg = 0,
         .tilemapLeft = 22,
         .tilemapTop = 3,
@@ -723,7 +341,7 @@ static const struct WindowTemplate sTourneyTreeWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 144,
     },
-    {
+    [TOURNEYWIN_TITLE] = {
         .bg = 0,
         .tilemapLeft = 8,
         .tilemapTop = 1,
@@ -737,7 +355,7 @@ static const struct WindowTemplate sTourneyTreeWindowTemplates[] =
 
 static const struct WindowTemplate sInfoCardWindowTemplates[] =
 {
-    {
+    [WIN_TRAINER_NAME] = {
         .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 2,
@@ -746,7 +364,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 1,
     },
-    {
+    [WIN_TRAINER_MON1_NAME] = {
         .bg = 0,
         .tilemapLeft = 16,
         .tilemapTop = 5,
@@ -755,7 +373,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 53,
     },
-    {
+    [WIN_TRAINER_MON2_NAME] = {
         .bg = 0,
         .tilemapLeft = 19,
         .tilemapTop = 7,
@@ -764,7 +382,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 69,
     },
-    {
+    [WIN_TRAINER_MON3_NAME] = {
         .bg = 0,
         .tilemapLeft = 16,
         .tilemapTop = 10,
@@ -773,7 +391,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 96,
     },
-    {
+    [WIN_TRAINER_FLAVOR_TEXT] = {
         .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 12,
@@ -782,7 +400,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 112,
     },
-    {
+    [WIN_MATCH_NUMBER] = {
         .bg = 0,
         .tilemapLeft = 5,
         .tilemapTop = 2,
@@ -791,7 +409,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 294,
     },
-    {
+    [WIN_MATCH_TRAINER_NAME_LEFT] = {
         .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 5,
@@ -800,7 +418,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 340,
     },
-    {
+    [WIN_MATCH_TRAINER_NAME_RIGHT] = {
         .bg = 0,
         .tilemapLeft = 20,
         .tilemapTop = 5,
@@ -809,7 +427,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 356,
     },
-    {
+    [WIN_MATCH_WIN_TEXT] = {
         .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 16,
@@ -818,7 +436,9 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 372,
     },
-    {
+    // Duplicate windows used by the alternate info card
+    // Same as above but on bg 1 instead of bg 0
+    [WIN_TRAINER_NAME + NUM_INFO_CARD_WINDOWS] = {
         .bg = 1,
         .tilemapLeft = 2,
         .tilemapTop = 2,
@@ -827,7 +447,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 1,
     },
-    {
+    [WIN_TRAINER_MON1_NAME + NUM_INFO_CARD_WINDOWS] = {
         .bg = 1,
         .tilemapLeft = 16,
         .tilemapTop = 5,
@@ -836,7 +456,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 53,
     },
-    {
+    [WIN_TRAINER_MON2_NAME + NUM_INFO_CARD_WINDOWS] = {
         .bg = 1,
         .tilemapLeft = 19,
         .tilemapTop = 7,
@@ -845,7 +465,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 69,
     },
-    {
+    [WIN_TRAINER_MON3_NAME + NUM_INFO_CARD_WINDOWS] = {
         .bg = 1,
         .tilemapLeft = 16,
         .tilemapTop = 10,
@@ -854,7 +474,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 96,
     },
-    {
+    [WIN_TRAINER_FLAVOR_TEXT + NUM_INFO_CARD_WINDOWS] = {
         .bg = 1,
         .tilemapLeft = 2,
         .tilemapTop = 12,
@@ -863,7 +483,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 112,
     },
-    {
+    [WIN_MATCH_NUMBER + NUM_INFO_CARD_WINDOWS] = {
         .bg = 1,
         .tilemapLeft = 5,
         .tilemapTop = 2,
@@ -872,7 +492,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 294,
     },
-    {
+    [WIN_MATCH_TRAINER_NAME_LEFT + NUM_INFO_CARD_WINDOWS] = {
         .bg = 1,
         .tilemapLeft = 2,
         .tilemapTop = 5,
@@ -881,7 +501,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 340,
     },
-    {
+    [WIN_MATCH_TRAINER_NAME_RIGHT + NUM_INFO_CARD_WINDOWS] = {
         .bg = 1,
         .tilemapLeft = 20,
         .tilemapTop = 5,
@@ -890,7 +510,7 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 356,
     },
-    {
+    [WIN_MATCH_WIN_TEXT + NUM_INFO_CARD_WINDOWS] = {
         .bg = 1,
         .tilemapLeft = 2,
         .tilemapTop = 16,
@@ -899,26 +519,28 @@ static const struct WindowTemplate sInfoCardWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 372,
     },
+    #ifdef UBFIX
     DUMMY_WIN_TEMPLATE,
+    #endif
 };
 
 static const struct ScanlineEffectParams sTourneyTreeScanlineEffectParams =
 {
-    .dmaDest = (void *)REG_ADDR_BG3CNT,
+    .dmaDest = &REG_BG3CNT,
     .dmaControl = SCANLINE_EFFECT_DMACNT_16BIT,
     .initState = 1,
 };
 
 static const struct CompressedSpriteSheet sTourneyTreeButtonsSpriteSheet[] =
 {
-    {gDomeTourneyTreeButtons_Gfx, 0x0600, 0x0000},
+    {.data = gDomeTourneyTreeButtons_Gfx, .size = 0x0600, .tag = TAG_BUTTONS},
     {},
 };
 
 // Unused
-static const struct CompressedSpritePalette sTourneyTreeButtonsSpritePal[] =
+static const struct SpritePalette sTourneyTreeButtonsSpritePal[] =
 {
-    {gDomeTourneyTreeButtons_Pal, 0x0000},
+    {.data = gDomeTourneyTreeButtons_Pal, .tag = TAG_BUTTONS},
     {},
 };
 
@@ -927,7 +549,7 @@ static const struct OamData sOamData_TourneyTreePokeball =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
     .x = 0,
@@ -945,7 +567,7 @@ static const struct OamData sOamData_TourneyTreeCloseButton =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x16),
     .x = 0,
@@ -962,7 +584,7 @@ static const struct OamData sOamData_VerticalScrollArrow =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x8),
     .x = 0,
@@ -979,7 +601,7 @@ static const struct OamData sOamData_HorizontalScrollArrow =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x16),
     .x = 0,
@@ -1002,7 +624,7 @@ static const union AnimCmd sSpriteAnim_TourneyTreePokeballSelected[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd * const sSpriteAnimTable_TourneyTreePokeball[] =
+static const union AnimCmd *const sSpriteAnimTable_TourneyTreePokeball[] =
 {
     sSpriteAnim_TourneyTreePokeballNormal,
     sSpriteAnim_TourneyTreePokeballSelected,
@@ -1011,13 +633,10 @@ static const union AnimCmd * const sSpriteAnimTable_TourneyTreePokeball[] =
 // Sprite template for the pokeballs on the tourney tree that act as buttons to view a trainer/match info card
 static const struct SpriteTemplate sTourneyTreePokeballSpriteTemplate =
 {
-    .tileTag = 0x0000,
-    .paletteTag = 0xffff,
+    .tileTag = TAG_BUTTONS,
+    .paletteTag = TAG_NONE,
     .oam = &sOamData_TourneyTreePokeball,
     .anims = sSpriteAnimTable_TourneyTreePokeball,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy
 };
 
 static const union AnimCmd sSpriteAnim_TourneyTreeCancelButtonNormal[] =
@@ -1032,7 +651,7 @@ static const union AnimCmd sSpriteAnim_TourneyTreeCancelButtonSelected[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd * const sSpriteAnimTable_TourneyTreeCancelButton[] =
+static const union AnimCmd *const sSpriteAnimTable_TourneyTreeCancelButton[] =
 {
     sSpriteAnim_TourneyTreeCancelButtonNormal,
     sSpriteAnim_TourneyTreeCancelButtonSelected,
@@ -1040,13 +659,10 @@ static const union AnimCmd * const sSpriteAnimTable_TourneyTreeCancelButton[] =
 
 static const struct SpriteTemplate sCancelButtonSpriteTemplate =
 {
-    .tileTag = 0x0000,
-    .paletteTag = 0xffff,
+    .tileTag = TAG_BUTTONS,
+    .paletteTag = TAG_NONE,
     .oam = &sOamData_TourneyTreeCloseButton,
     .anims = sSpriteAnimTable_TourneyTreeCancelButton,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy
 };
 
 static const union AnimCmd sSpriteAnim_TourneyTreeExitButtonNormal[] =
@@ -1061,7 +677,7 @@ static const union AnimCmd sSpriteAnim_TourneyTreeExitButtonSelected[] =
     ANIMCMD_END,
  };
 
-static const union AnimCmd * const sSpriteAnimTable_TourneyTreeExitButton[] =
+static const union AnimCmd *const sSpriteAnimTable_TourneyTreeExitButton[] =
 {
     sSpriteAnim_TourneyTreeExitButtonNormal,
     sSpriteAnim_TourneyTreeExitButtonSelected,
@@ -1069,13 +685,10 @@ static const union AnimCmd * const sSpriteAnimTable_TourneyTreeExitButton[] =
 
 static const struct SpriteTemplate sExitButtonSpriteTemplate =
 {
-    .tileTag = 0x0000,
-    .paletteTag = 0xffff,
+    .tileTag = TAG_BUTTONS,
+    .paletteTag = TAG_NONE,
     .oam = &sOamData_TourneyTreeCloseButton,
     .anims = sSpriteAnimTable_TourneyTreeExitButton,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy
 };
 
 static const union AnimCmd sSpriteAnim_UpArrow[] =
@@ -1102,13 +715,13 @@ static const union AnimCmd sSpriteAnim_RightArrow[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd * const sSpriteAnimTable_VerticalScrollArrow[] =
+static const union AnimCmd *const sSpriteAnimTable_VerticalScrollArrow[] =
 {
     sSpriteAnim_UpArrow,
     sSpriteAnim_DownArrow,
 };
 
-static const union AnimCmd * const sSpriteAnimTable_HorizontalScrollArrow[] =
+static const union AnimCmd *const sSpriteAnimTable_HorizontalScrollArrow[] =
 {
     sSpriteAnim_LeftArrow,
     sSpriteAnim_RightArrow,
@@ -1116,30 +729,26 @@ static const union AnimCmd * const sSpriteAnimTable_HorizontalScrollArrow[] =
 
 static const struct SpriteTemplate sHorizontalScrollArrowSpriteTemplate =
 {
-    .tileTag = 0x0000,
-    .paletteTag = 0xffff,
+    .tileTag = TAG_BUTTONS,
+    .paletteTag = TAG_NONE,
     .oam = &sOamData_HorizontalScrollArrow,
     .anims = sSpriteAnimTable_HorizontalScrollArrow,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCb_HorizontalScrollArrow
+    .callback = SpriteCB_HorizontalScrollArrow
 };
 
 static const struct SpriteTemplate sVerticalScrollArrowSpriteTemplate =
 {
-    .tileTag = 0x0000,
-    .paletteTag = 0xffff,
+    .tileTag = TAG_BUTTONS,
+    .paletteTag = TAG_NONE,
     .oam = &sOamData_VerticalScrollArrow,
     .anims = sSpriteAnimTable_VerticalScrollArrow,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCb_VerticalScrollArrow
+    .callback = SpriteCB_VerticalScrollArrow
 };
 
 // Organized by seed starting position, i.e. seed 0 battles seed 8 first
 static const u8 sTourneyTreeTrainerIds[DOME_TOURNAMENT_TRAINERS_COUNT] = {0, 8, 12, 4, 7, 15, 11, 3, 2, 10, 14, 6, 5, 13, 9, 1};
 
-static void (* const sBattleDomeFunctions[])(void) =
+static void (*const sBattleDomeFunctions[])(void) =
 {
     [BATTLE_DOME_FUNC_INIT]                     = InitDomeChallenge,
     [BATTLE_DOME_FUNC_GET_DATA]                 = GetDomeData,
@@ -1231,7 +840,7 @@ static const u8 sLastMatchCardNum[DOME_ROUNDS_COUNT] =
     [DOME_FINAL]     = 30
 };
 
-static const u8 gUnknown_0860D1A0[DOME_TOURNAMENT_TRAINERS_COUNT / 2][DOME_ROUNDS_COUNT] =
+static const u8 sTrainerAndRoundToLastMatchCardNum[DOME_TOURNAMENT_TRAINERS_COUNT / 2][DOME_ROUNDS_COUNT] =
 {
     {16, 24, 28, 30},
     {17, 24, 28, 30},
@@ -1243,114 +852,114 @@ static const u8 gUnknown_0860D1A0[DOME_TOURNAMENT_TRAINERS_COUNT / 2][DOME_ROUND
     {23, 27, 29, 30},
 };
 
-static const u8 gUnknown_0860D1C0[DOME_TOURNAMENT_TRAINERS_COUNT] = {0, 15, 8, 7, 3, 12, 11, 4, 1, 14, 9, 6, 2, 13, 10, 5};
+static const u8 sTournamentIdToPairedTrainerIds[DOME_TOURNAMENT_TRAINERS_COUNT] = {0, 15, 8, 7, 3, 12, 11, 4, 1, 14, 9, 6, 2, 13, 10, 5};
 
 // The first line of text on a trainers info card. It describes their potential to win, based on their seed in the tournament tree.
 // Dome Ace Tucker has their own separate potential text.
 static const u8 *const sBattleDomePotentialTexts[DOME_TOURNAMENT_TRAINERS_COUNT + 1] =
 {
-    BattleDome_Text_Potential1, // Highest potential
-    BattleDome_Text_Potential2,
-    BattleDome_Text_Potential3,
-    BattleDome_Text_Potential4,
-    BattleDome_Text_Potential5,
-    BattleDome_Text_Potential6,
-    BattleDome_Text_Potential7,
-    BattleDome_Text_Potential8,
-    BattleDome_Text_Potential9,
-    BattleDome_Text_Potential10,
-    BattleDome_Text_Potential11,
-    BattleDome_Text_Potential12,
-    BattleDome_Text_Potential13,
-    BattleDome_Text_Potential14,
-    BattleDome_Text_Potential15,
-    BattleDome_Text_Potential16, // Lowest potential
-    BattleDome_Text_PotentialDomeAceTucker,
+    COMPOUND_STRING("The best candidate to be a champ!"), // Highest potential
+    COMPOUND_STRING("A sure-finalist team."),
+    COMPOUND_STRING("A likely top-three finisher."),
+    COMPOUND_STRING("A candidate to finish first."),
+    COMPOUND_STRING("A team with top-class potential."),
+    COMPOUND_STRING("The dark horse team this tournament."),
+    COMPOUND_STRING("A better-than-average team."),
+    COMPOUND_STRING("This tournament's average team."),
+    COMPOUND_STRING("A team with average potential."),
+    COMPOUND_STRING("A weaker-than-average team."),
+    COMPOUND_STRING("A team looking for its first win."),
+    COMPOUND_STRING("One win will make this team proud."),
+    COMPOUND_STRING("Overall, a weak team."),
+    COMPOUND_STRING("A team with very low potential."),
+    COMPOUND_STRING("A team unlikely to win the tournament."),
+    COMPOUND_STRING("The team most unlikely to win."), // Lowest potential
+    COMPOUND_STRING("The perfect, invincible superstar!"), // Dome Ace Tucker
 };
 
 // The second line of text on a trainers info card. It gives information about their battle style (dependent on their party's moves).
 static const u8 *const sBattleDomeOpponentStyleTexts[NUM_BATTLE_STYLES] =
 {
-    [DOME_BATTLE_STYLE_RISKY]           = BattleDome_Text_StyleRiskDisaster,
-    [DOME_BATTLE_STYLE_STALL]           = BattleDome_Text_StyleEndureLongBattles,
-    [DOME_BATTLE_STYLE_VARIED]          = BattleDome_Text_StyleVariesTactics,
-    [DOME_BATTLE_STYLE_COMBO_HIGH]      = BattleDome_Text_StyleToughWinningPattern,
-    [DOME_BATTLE_STYLE_RARE_MOVES]      = BattleDome_Text_StyleUsesVeryRareMove,   // Seems like the text for these two was swapped
-    [DOME_BATTLE_STYLE_RARE_MOVE]       = BattleDome_Text_StyleUsesStartlingMoves, //
-    [DOME_BATTLE_STYLE_HP]              = BattleDome_Text_StyleConstantlyWatchesHP,
-    [DOME_BATTLE_STYLE_STORE_POWER]     = BattleDome_Text_StyleStoresAndReleasesPower,
-    [DOME_BATTLE_STYLE_ENFEEBLE_LOW]    = BattleDome_Text_StyleEnfeeblesFoes,
-    [DOME_BATTLE_STYLE_LUCK]            = BattleDome_Text_StylePrefersLuckTactics,
-    [DOME_BATTLE_STYLE_REGAL]           = BattleDome_Text_StyleRegalAtmosphere,
-    [DOME_BATTLE_STYLE_LOW_PP]          = BattleDome_Text_StylePowerfulLowPPMoves,
-    [DOME_BATTLE_STYLE_STATUS_ATK]      = BattleDome_Text_StyleEnfeebleThenAttack,
-    [DOME_BATTLE_STYLE_ENDURE]          = BattleDome_Text_StyleBattlesWhileEnduring,
-    [DOME_BATTLE_STYLE_STATUS]          = BattleDome_Text_StyleUpsetsFoesEmotionally,
-    [DOME_BATTLE_STYLE_STRAIGHTFORWARD] = BattleDome_Text_StyleStrongAndStraightforward,
-    [DOME_BATTLE_STYLE_AGGRESSIVE]      = BattleDome_Text_StyleAggressivelyStrongMoves,
-    [DOME_BATTLE_STYLE_DEF]             = BattleDome_Text_StyleCleverlyDodgesAttacks,
-    [DOME_BATTLE_STYLE_ENFEEBLE_HIGH]   = BattleDome_Text_StyleUsesUpsettingMoves,
-    [DOME_BATTLE_STYLE_POPULAR_POWER]   = BattleDome_Text_StyleUsesPopularMoves,
-    [DOME_BATTLE_STYLE_COMBO_LOW]       = BattleDome_Text_StyleHasPowerfulComboMoves,
-    [DOME_BATTLE_STYLE_ACCURATE]        = BattleDome_Text_StyleUsesHighProbabilityMoves,
-    [DOME_BATTLE_STYLE_POWERFUL]        = BattleDome_Text_StyleAggressivelySpectacularMoves,
-    [DOME_BATTLE_STYLE_ATK_OVER_DEF]    = BattleDome_Text_StyleEmphasizesOffenseOverDefense,
-    [DOME_BATTLE_STYLE_DEF_OVER_ATK]    = BattleDome_Text_StyleEmphasizesDefenseOverOffense,
-    [DOME_BATTLE_STYLE_POPULAR_STRONG]  = BattleDome_Text_StyleAttacksQuicklyStrongMoves,
-    [DOME_BATTLE_STYLE_EFFECTS]         = BattleDome_Text_StyleUsesAddedEffectMoves,
-    [DOME_BATTLE_STYLE_BALANCED]        = BattleDome_Text_StyleUsesBalancedMixOfMoves,
-    [DOME_BATTLE_STYLE_UNUSED1]         = BattleDome_Text_StyleSampleMessage1,
-    [DOME_BATTLE_STYLE_UNUSED2]         = BattleDome_Text_StyleSampleMessage2,
-    [DOME_BATTLE_STYLE_UNUSED3]         = BattleDome_Text_StyleSampleMessage3,
-    [DOME_BATTLE_STYLE_UNUSED4]         = BattleDome_Text_StyleSampleMessage4,
+    [DOME_BATTLE_STYLE_RISKY]           = COMPOUND_STRING("Willing to risk total disaster at times."),
+    [DOME_BATTLE_STYLE_STALL]           = COMPOUND_STRING("Skilled at enduring long battles."),
+    [DOME_BATTLE_STYLE_VARIED]          = COMPOUND_STRING("Varies tactics to suit the opponent."),
+    [DOME_BATTLE_STYLE_COMBO_HIGH]      = COMPOUND_STRING("Has a tough winning pattern."),
+    [DOME_BATTLE_STYLE_RARE_MOVES]      = COMPOUND_STRING("Occasionally uses a very rare move."),  // Seems like the text for these two was swapped
+    [DOME_BATTLE_STYLE_RARE_MOVE]       = COMPOUND_STRING("Uses startling and disruptive moves."), //
+    [DOME_BATTLE_STYLE_HP]              = COMPOUND_STRING("Constantly watches HP in battle."),
+    [DOME_BATTLE_STYLE_STORE_POWER]     = COMPOUND_STRING("Good at storing then loosing power."),
+    [DOME_BATTLE_STYLE_ENFEEBLE_LOW]    = COMPOUND_STRING("Skilled at enfeebling foes."),
+    [DOME_BATTLE_STYLE_LUCK]            = COMPOUND_STRING("Prefers tactics that rely on luck."),
+    [DOME_BATTLE_STYLE_REGAL]           = COMPOUND_STRING("Attacks with a regal atmosphere."),
+    [DOME_BATTLE_STYLE_LOW_PP]          = COMPOUND_STRING("Attacks with powerful, low-PP moves."),
+    [DOME_BATTLE_STYLE_STATUS_ATK]      = COMPOUND_STRING("Skilled at enfeebling, then attacking."),
+    [DOME_BATTLE_STYLE_ENDURE]          = COMPOUND_STRING("Battles while enduring all attacks."),
+    [DOME_BATTLE_STYLE_STATUS]          = COMPOUND_STRING("Skilled at upsetting foes emotionally."),
+    [DOME_BATTLE_STYLE_STRAIGHTFORWARD] = COMPOUND_STRING("Uses strong and straightforward moves."),
+    [DOME_BATTLE_STYLE_AGGRESSIVE]      = COMPOUND_STRING("Aggressively uses strong moves."),
+    [DOME_BATTLE_STYLE_DEF]             = COMPOUND_STRING("Battles while cleverly dodging attacks."),
+    [DOME_BATTLE_STYLE_ENFEEBLE_HIGH]   = COMPOUND_STRING("Skilled at using upsetting attacks."),
+    [DOME_BATTLE_STYLE_POPULAR_POWER]   = COMPOUND_STRING("Uses many popular moves."),
+    [DOME_BATTLE_STYLE_COMBO_LOW]       = COMPOUND_STRING("Has moves for powerful combinations."),
+    [DOME_BATTLE_STYLE_ACCURATE]        = COMPOUND_STRING("Uses high-probability attacks."),
+    [DOME_BATTLE_STYLE_POWERFUL]        = COMPOUND_STRING("Aggressively uses spectacular moves."),
+    [DOME_BATTLE_STYLE_ATK_OVER_DEF]    = COMPOUND_STRING("Emphasizes offense over defense."),
+    [DOME_BATTLE_STYLE_DEF_OVER_ATK]    = COMPOUND_STRING("Emphasizes defense over offense."),
+    [DOME_BATTLE_STYLE_POPULAR_STRONG]  = COMPOUND_STRING("Attacks quickly with strong moves."),
+    [DOME_BATTLE_STYLE_EFFECTS]         = COMPOUND_STRING("Often uses moves with added effects."),
+    [DOME_BATTLE_STYLE_BALANCED]        = COMPOUND_STRING("Uses a well-balanced mix of moves."),
+    [DOME_BATTLE_STYLE_UNUSED1]         = COMPOUND_STRING("This is sample message 1."),
+    [DOME_BATTLE_STYLE_UNUSED2]         = COMPOUND_STRING("This is sample message 2."),
+    [DOME_BATTLE_STYLE_UNUSED3]         = COMPOUND_STRING("This is sample message 3."),
+    [DOME_BATTLE_STYLE_UNUSED4]         = COMPOUND_STRING("This is sample message 4."),
 };
 
 // The third line of text on a trainers info card. It that gives information about their party's stat spread (based on their Pokémon's effort values and Nature).
 static const u8 *const sBattleDomeOpponentStatsTexts[] =
 {
-    BattleDome_Text_EmphasizesHPAndAtk,      // DOME_TEXT_TWO_GOOD_STATS and DOME_TEXT_HP start here
-    BattleDome_Text_EmphasizesHPAndDef,
-    BattleDome_Text_EmphasizesHPAndSpeed,
-    BattleDome_Text_EmphasizesHPAndSpAtk,
-    BattleDome_Text_EmphasizesHPAndSpDef,
-    BattleDome_Text_EmphasizesAtkAndDef,     // DOME_TEXT_ATK starts here
-    BattleDome_Text_EmphasizesAtkAndSpeed,
-    BattleDome_Text_EmphasizesAtkAndSpAtk,
-    BattleDome_Text_EmphasizesAtkAndSpDef,
-    BattleDome_Text_EmphasizesDefAndSpeed,   // DOME_TEXT_DEF starts here
-    BattleDome_Text_EmphasizesDefAndSpAtk,
-    BattleDome_Text_EmphasizesDefAndSpDef,
-    BattleDome_Text_EmphasizesSpeedAndSpAtk, // DOME_TEXT_SPEED starts here
-    BattleDome_Text_EmphasizesSpeedAndSpDef,
-    BattleDome_Text_EmphasizesSpAtkAndSpDef, // DOME_TEXT_SPATK starts here
-    BattleDome_Text_EmphasizesHP,            // DOME_TEXT_ONE_GOOD_STAT starts here
-    BattleDome_Text_EmphasizesAtk,
-    BattleDome_Text_EmphasizesDef,
-    BattleDome_Text_EmphasizesSpeed,
-    BattleDome_Text_EmphasizesSpAtk,
-    BattleDome_Text_EmphasizesSpDef,
-    BattleDome_Text_NeglectsHPAndAtk,        // DOME_TEXT_TWO_BAD_STATS starts here
-    BattleDome_Text_NeglectsHPAndDef,
-    BattleDome_Text_NeglectsHPAndSpeed,
-    BattleDome_Text_NeglectsHPAndSpAtk,
-    BattleDome_Text_NeglectsHPAndSpDef,
-    BattleDome_Text_NeglectsAtkAndDef,
-    BattleDome_Text_NeglectsAtkAndSpeed,
-    BattleDome_Text_NeglectsAtkAndSpAtk,
-    BattleDome_Text_NeglectsAtkAndSpDef,
-    BattleDome_Text_NeglectsDefAndSpeed,
-    BattleDome_Text_NeglectsDefAndSpAtk,
-    BattleDome_Text_NeglectsDefAndSpDef,
-    BattleDome_Text_NeglectsSpeedAndSpAtk,
-    BattleDome_Text_NeglectsSpeedAndSpDef,
-    BattleDome_Text_NeglectsSpAtkAndSpDef,
-    BattleDome_Text_NeglectsHP,              // DOME_TEXT_ONE_BAD_STAT starts here
-    BattleDome_Text_NeglectsAtk,
-    BattleDome_Text_NeglectsDef,
-    BattleDome_Text_NeglectsSpeed,
-    BattleDome_Text_NeglectsSpAtk,
-    BattleDome_Text_NeglectsSpDef,
-    [DOME_TEXT_WELL_BALANCED] = BattleDome_Text_RaisesMonsWellBalanced,
+    COMPOUND_STRING("Emphasizes HP and ATTACK."),              // DOME_TEXT_TWO_GOOD_STATS and DOME_TEXT_HP start here
+    COMPOUND_STRING("Emphasizes HP and DEFENSE."),
+    COMPOUND_STRING("Emphasizes HP and SPEED."),
+    COMPOUND_STRING("Emphasizes HP and SP. ATTACK."),
+    COMPOUND_STRING("Emphasizes HP and SP. DEFENSE."),
+    COMPOUND_STRING("Emphasizes ATTACK and DEFENSE."),         // DOME_TEXT_ATK starts here
+    COMPOUND_STRING("Emphasizes ATTACK and SPEED."),
+    COMPOUND_STRING("Emphasizes ATTACK and SP. ATTACK."),
+    COMPOUND_STRING("Emphasizes ATTACK and SP. DEFENSE."),
+    COMPOUND_STRING("Emphasizes DEFENSE and SPEED."),          // DOME_TEXT_DEF starts here
+    COMPOUND_STRING("Emphasizes DEFENSE and SP. ATTACK."),
+    COMPOUND_STRING("Emphasizes DEFENSE and SP. DEFENSE."),
+    COMPOUND_STRING("Emphasizes SPEED and SP. ATTACK."),       // DOME_TEXT_SPEED starts here
+    COMPOUND_STRING("Emphasizes SPEED and SP. DEFENSE."),
+    COMPOUND_STRING("Emphasizes SP. ATTACK and SP. DEFENSE."), // DOME_TEXT_SPATK starts here
+    COMPOUND_STRING("Emphasizes HP."),                         // DOME_TEXT_ONE_GOOD_STAT starts here
+    COMPOUND_STRING("Emphasizes ATTACK."),
+    COMPOUND_STRING("Emphasizes DEFENSE."),
+    COMPOUND_STRING("Emphasizes SPEED."),
+    COMPOUND_STRING("Emphasizes SP. ATTACK."),
+    COMPOUND_STRING("Emphasizes SP. DEFENSE."),
+    COMPOUND_STRING("Neglects HP and ATTACK."),                // DOME_TEXT_TWO_BAD_STATS starts here
+    COMPOUND_STRING("Neglects HP and DEFENSE."),
+    COMPOUND_STRING("Neglects HP and SPEED."),
+    COMPOUND_STRING("Neglects HP and SP. ATTACK."),
+    COMPOUND_STRING("Neglects HP and SP. DEFENSE."),
+    COMPOUND_STRING("Neglects ATTACK and DEFENSE."),
+    COMPOUND_STRING("Neglects ATTACK and SPEED."),
+    COMPOUND_STRING("Neglects ATTACK and SP. ATTACK."),
+    COMPOUND_STRING("Neglects ATTACK and SP. DEFENSE."),
+    COMPOUND_STRING("Neglects DEFENSE and SPEED."),
+    COMPOUND_STRING("Neglects DEFENSE and SP. ATTACK."),
+    COMPOUND_STRING("Neglects DEFENSE and SP. DEFENSE."),
+    COMPOUND_STRING("Neglects SPEED and SP. ATTACK."),
+    COMPOUND_STRING("Neglects SPEED and SP. DEFENSE."),
+    COMPOUND_STRING("Neglects SP. ATTACK and SP. DEFENSE."),
+    COMPOUND_STRING("Neglects HP."),                           // DOME_TEXT_ONE_BAD_STAT starts here
+    COMPOUND_STRING("Neglects ATTACK."),
+    COMPOUND_STRING("Neglects DEFENSE."),
+    COMPOUND_STRING("Neglects SPEED."),
+    COMPOUND_STRING("Neglects SP. ATTACK."),
+    COMPOUND_STRING("Neglects SP. DEFENSE."),
+    [DOME_TEXT_WELL_BALANCED] = COMPOUND_STRING("Raises POKéMON in a well-balanced way."),
 };
 
 static const u8 sInfoTrainerMonX[FRONTIER_PARTY_SIZE] = {104, 136, 104};
@@ -1370,32 +979,32 @@ static const u8 sStatTextOffsets[NUM_STATS - 1] =
 
 static const u8 *const sBattleDomeMatchNumberTexts[DOME_TOURNAMENT_MATCHES_COUNT] =
 {
-    BattleDome_Text_Round1Match1,
-    BattleDome_Text_Round1Match2,
-    BattleDome_Text_Round1Match3,
-    BattleDome_Text_Round1Match4,
-    BattleDome_Text_Round1Match5,
-    BattleDome_Text_Round1Match6,
-    BattleDome_Text_Round1Match7,
-    BattleDome_Text_Round1Match8,
-    BattleDome_Text_Round2Match1,
-    BattleDome_Text_Round2Match2,
-    BattleDome_Text_Round2Match3,
-    BattleDome_Text_Round2Match4,
-    BattleDome_Text_SemifinalMatch1,
-    BattleDome_Text_SemifinalMatch2,
-    BattleDome_Text_FinalMatch,
+    COMPOUND_STRING("Round 1, Match 1"),
+    COMPOUND_STRING("Round 1, Match 2"),
+    COMPOUND_STRING("Round 1, Match 3"),
+    COMPOUND_STRING("Round 1, Match 4"),
+    COMPOUND_STRING("Round 1, Match 5"),
+    COMPOUND_STRING("Round 1, Match 6"),
+    COMPOUND_STRING("Round 1, Match 7"),
+    COMPOUND_STRING("Round 1, Match 8"),
+    COMPOUND_STRING("Round 2, Match 1"),
+    COMPOUND_STRING("Round 2, Match 2"),
+    COMPOUND_STRING("Round 2, Match 3"),
+    COMPOUND_STRING("Round 2, Match 4"),
+    COMPOUND_STRING("Semifinal Match 1"),
+    COMPOUND_STRING("Semifinal Match 2"),
+    COMPOUND_STRING("Final Match"),
 };
 
 static const u8 *const sBattleDomeWinTexts[] =
 {
-    [DOME_TEXT_NO_WINNER_YET]    = BattleDome_Text_LetTheBattleBegin,
-    [DOME_TEXT_WON_USING_MOVE]   = BattleDome_Text_TrainerWonUsingMove,
-    [DOME_TEXT_CHAMP_USING_MOVE] = BattleDome_Text_TrainerBecameChamp,
-    [DOME_TEXT_WON_ON_FORFEIT]   = BattleDome_Text_TrainerWonByDefault,
-    [DOME_TEXT_CHAMP_ON_FORFEIT] = BattleDome_Text_TrainerWonOutrightByDefault,
-    [DOME_TEXT_WON_NO_MOVES]     = BattleDome_Text_TrainerWonNoMoves,
-    [DOME_TEXT_CHAMP_NO_MOVES]   = BattleDome_Text_TrainerWonOutrightNoMoves,
+    [DOME_TEXT_NO_WINNER_YET]    = COMPOUND_STRING("Let the battle begin!"),
+    [DOME_TEXT_WON_USING_MOVE]   = COMPOUND_STRING("{STR_VAR_1} won using {STR_VAR_2}!"),
+    [DOME_TEXT_CHAMP_USING_MOVE] = COMPOUND_STRING("{STR_VAR_1} became the champ!"),
+    [DOME_TEXT_WON_ON_FORFEIT]   = COMPOUND_STRING("{STR_VAR_1} won by default!"),
+    [DOME_TEXT_CHAMP_ON_FORFEIT] = COMPOUND_STRING("{STR_VAR_1} won outright by default!"),
+    [DOME_TEXT_WON_NO_MOVES]     = COMPOUND_STRING("{STR_VAR_1} won without using a move!"),
+    [DOME_TEXT_CHAMP_NO_MOVES]   = COMPOUND_STRING("{STR_VAR_1} won outright with no moves!"),
 };
 
 static const u8 sLeftTrainerMonX[FRONTIER_PARTY_SIZE]  = { 96,  96,  96};
@@ -1430,26 +1039,27 @@ static const u8 sCompetitorRangeByMatch[DOME_TOURNAMENT_MATCHES_COUNT][3] =
     { NUM_POSSIBLE_MATCH_TRAINERS(DOME_FINAL) * 0,     NUM_POSSIBLE_MATCH_TRAINERS(DOME_FINAL),     DOME_FINAL},
 };
 
-// 1st value is the windowId (0 for left column, 1 for right column)
-// 2nd value is the y coord
+#define NAME_ROW_HEIGHT 16
+
+// 1st value is the windowId, 2nd value is the y coord
 static const u8 sTrainerNamePositions[DOME_TOURNAMENT_TRAINERS_COUNT][2] =
 {
-    { 0,   0},
-    { 1, 112},
-    { 1,   0},
-    { 0, 112},
-    { 0,  48},
-    { 1,  64},
-    { 1,  48},
-    { 0,  64},
-    { 0,  16},
-    { 1,  96},
-    { 1,  16},
-    { 0,  96},
-    { 0,  32},
-    { 1,  80},
-    { 1,  32},
-    { 0,  80},
+    { TOURNEYWIN_NAMES_LEFT,  0 * NAME_ROW_HEIGHT},
+    { TOURNEYWIN_NAMES_RIGHT, 7 * NAME_ROW_HEIGHT},
+    { TOURNEYWIN_NAMES_RIGHT, 0 * NAME_ROW_HEIGHT},
+    { TOURNEYWIN_NAMES_LEFT,  7 * NAME_ROW_HEIGHT},
+    { TOURNEYWIN_NAMES_LEFT,  3 * NAME_ROW_HEIGHT},
+    { TOURNEYWIN_NAMES_RIGHT, 4 * NAME_ROW_HEIGHT},
+    { TOURNEYWIN_NAMES_RIGHT, 3 * NAME_ROW_HEIGHT},
+    { TOURNEYWIN_NAMES_LEFT,  4 * NAME_ROW_HEIGHT},
+    { TOURNEYWIN_NAMES_LEFT,  1 * NAME_ROW_HEIGHT},
+    { TOURNEYWIN_NAMES_RIGHT, 6 * NAME_ROW_HEIGHT},
+    { TOURNEYWIN_NAMES_RIGHT, 1 * NAME_ROW_HEIGHT},
+    { TOURNEYWIN_NAMES_LEFT,  6 * NAME_ROW_HEIGHT},
+    { TOURNEYWIN_NAMES_LEFT,  2 * NAME_ROW_HEIGHT},
+    { TOURNEYWIN_NAMES_RIGHT, 5 * NAME_ROW_HEIGHT},
+    { TOURNEYWIN_NAMES_RIGHT, 2 * NAME_ROW_HEIGHT},
+    { TOURNEYWIN_NAMES_LEFT,  5 * NAME_ROW_HEIGHT},
 };
 
 // Coords for the pokeballs on the tourney tree that act as buttons to view trainer/match info
@@ -1488,589 +1098,617 @@ static const u8 sTourneyTreePokeballCoords[DOME_TOURNAMENT_TRAINERS_COUNT + DOME
     {120,  89}, // Final match
 };
 
+// Tile values from tourney_tree.png for the highlighted lines of the tourney tree.
+// These tiles will be used to replace the existing, unhighlighted line tiles on the tourney tree tilemap.
+#define LINE_PAL           (6 << 12)
+#define LINE_H             (LINE_PAL | 0x21) // Horizontal
+#define LINE_CORNER_R      (LINE_PAL | 0x23) // Horizontal into a right-side vertical
+#define LINE_CORNER_L      (LINE_PAL | 0x25) // Horizontal into a left-side vertical
+#define LINE_V_R           (LINE_PAL | 0x27) // Right-side vertical
+#define LINE_V_L           (LINE_PAL | 0x29) // Left-side vertical
+#define LINE_H_BOTTOM      (LINE_PAL | 0x2B) // Horizontal on the bottom of the tree
+#define LINE_H_LOGO1       (LINE_PAL | 0x2C) // Horizontal, logo behind
+#define LINE_H_LOGO2       (LINE_PAL | 0x2D) // Horizontal, logo behind
+#define LINE_H_LOGO3       (LINE_PAL | 0x2E) // Horizontal, logo behind
+#define LINE_H_LOGO4       (LINE_PAL | 0x2F) // Horizontal, logo behind
+#define LINE_V_R_LOGO1     (LINE_PAL | 0x30) // Right-side vertical, logo behind
+#define LINE_V_R_LOGO2     (LINE_PAL | 0x31) // Right-side vertical, logo behind
+#define LINE_V_R_LOGO3     (LINE_PAL | 0x32) // Right-side vertical, logo behind
+#define LINE_V_R_LOGO4     (LINE_PAL | 0x33) // Right-side vertical, logo behind
+#define LINE_V_L_LOGO1     (LINE_PAL | 0x35) // Left-side vertical, logo behind
+#define LINE_V_L_LOGO2     (LINE_PAL | 0x36) // Left-side vertical, logo behind
+#define LINE_V_L_LOGO3     (LINE_PAL | 0x37) // Left-side vertical, logo behind
+#define LINE_V_L_LOGO4     (LINE_PAL | 0x38) // Left-side vertical, logo behind
+#define LINE_V_R_HALF_LOGO (LINE_PAL | 0x3B) // Right-side vertical, half lit from the top, logo behind
+#define LINE_V_L_HALF_LOGO (LINE_PAL | 0x3C) // Left-side vertical, half lit from the top, logo behind
+#define LINE_CORNER_R_HALF (LINE_PAL | 0x43) // Lit horizontal, unlit right-side vertical
+#define LINE_CORNER_L_HALF (LINE_PAL | 0x45) // Lit horizontal, unlit left-side vertical
+#define LINE_V_R_HALF      (LINE_PAL | 0x47) // Right-side vertical, half lit from the top
+#define LINE_V_L_HALF      (LINE_PAL | 0x49) // Left-side vertical, half lit from the top
+
 // Each of these line sections define the position of the advancement line on the tourney tree for the victor of that round
 // The trainers here are numbered by tourney ID (rank/seed) and ordered according to where they start on the tourney tree
-#define LINESECTION_ROUND1_TRAINER1(lastSrc) \
-    {.src = 0x6021,  .y = 0x04, .x = 0x09},  \
-    {.src = 0x6023,  .y = 0x04, .x = 0x0a},  \
-    {.src = 0x6047,  .y = 0x05, .x = 0x0a},  \
-    {.src = lastSrc, .y = 0x05, .x = 0x0b},
+#define LINESECTION_ROUND1_TRAINER1(lastTile) \
+    {.tile = LINE_H,        .y =  4, .x =  9}, \
+    {.tile = LINE_CORNER_R, .y =  4, .x = 10}, \
+    {.tile = LINE_V_R_HALF, .y =  5, .x = 10}, \
+    {.tile = lastTile,      .y =  5, .x = 11},
 
-#define LINESECTION_ROUND1_TRAINER9(lastSrc) \
-    {.src = 0x6021,  .y = 0x06, .x = 0x09},  \
-    {.src = 0x6021,  .y = 0x06, .x = 0x0a},  \
-    {.src = 0x6027,  .y = 0x05, .x = 0x0a},  \
-    {.src = lastSrc, .y = 0x05, .x = 0x0b},
+#define LINESECTION_ROUND1_TRAINER9(lastTile) \
+    {.tile = LINE_H,   .y =  6, .x =  9}, \
+    {.tile = LINE_H,   .y =  6, .x = 10}, \
+    {.tile = LINE_V_R, .y =  5, .x = 10}, \
+    {.tile = lastTile, .y =  5, .x = 11},
 
-#define LINESECTION_ROUND1_TRAINER13(lastSrc) \
-    {.src = 0x6021,  .y = 0x08, .x = 0x09},   \
-    {.src = 0x6023,  .y = 0x08, .x = 0x0a},   \
-    {.src = 0x6047,  .y = 0x09, .x = 0x0a},   \
-    {.src = lastSrc, .y = 0x09, .x = 0x0b},
+#define LINESECTION_ROUND1_TRAINER13(lastTile) \
+    {.tile = LINE_H,        .y =  8, .x =  9}, \
+    {.tile = LINE_CORNER_R, .y =  8, .x = 10}, \
+    {.tile = LINE_V_R_HALF, .y =  9, .x = 10}, \
+    {.tile = lastTile,      .y =  9, .x = 11},
 
-#define LINESECTION_ROUND1_TRAINER5(lastSrc) \
-    {.src = 0x6021,  .y = 0x0a, .x = 0x09},  \
-    {.src = 0x6021,  .y = 0x0a, .x = 0x0a},  \
-    {.src = 0x6027,  .y = 0x09, .x = 0x0a},  \
-    {.src = lastSrc, .y = 0x09, .x = 0x0b},
+#define LINESECTION_ROUND1_TRAINER5(lastTile) \
+    {.tile = LINE_H,   .y = 10, .x =  9}, \
+    {.tile = LINE_H,   .y = 10, .x = 10}, \
+    {.tile = LINE_V_R, .y =  9, .x = 10}, \
+    {.tile = lastTile, .y =  9, .x = 11},
 
-#define LINESECTION_ROUND1_TRAINER8(lastSrc) \
-    {.src = 0x6021,  .y = 0x0c, .x = 0x09},  \
-    {.src = 0x6023,  .y = 0x0c, .x = 0x0a},  \
-    {.src = 0x6047,  .y = 0x0d, .x = 0x0a},  \
-    {.src = lastSrc, .y = 0x0d, .x = 0x0b},
+#define LINESECTION_ROUND1_TRAINER8(lastTile) \
+    {.tile = LINE_H,        .y = 12, .x =  9}, \
+    {.tile = LINE_CORNER_R, .y = 12, .x = 10}, \
+    {.tile = LINE_V_R_HALF, .y = 13, .x = 10}, \
+    {.tile = lastTile,      .y = 13, .x = 11},
 
-#define LINESECTION_ROUND1_TRAINER16(lastSrc) \
-    {.src = 0x6021,  .y = 0x0e, .x = 0x09},   \
-    {.src = 0x6021,  .y = 0x0e, .x = 0x0a},   \
-    {.src = 0x6027,  .y = 0x0d, .x = 0x0a},   \
-    {.src = lastSrc, .y = 0x0d, .x = 0x0b},
+#define LINESECTION_ROUND1_TRAINER16(lastTile) \
+    {.tile = LINE_H,   .y = 14, .x =  9}, \
+    {.tile = LINE_H,   .y = 14, .x = 10}, \
+    {.tile = LINE_V_R, .y = 13, .x = 10}, \
+    {.tile = lastTile, .y = 13, .x = 11},
 
-#define LINESECTION_ROUND1_TRAINER12(lastSrc) \
-    {.src = 0x6021,  .y = 0x10, .x = 0x09},   \
-    {.src = 0x6023,  .y = 0x10, .x = 0x0a},   \
-    {.src = 0x6047,  .y = 0x11, .x = 0x0a},   \
-    {.src = lastSrc, .y = 0x11, .x = 0x0b},
+#define LINESECTION_ROUND1_TRAINER12(lastTile) \
+    {.tile = LINE_H,        .y = 16, .x =  9}, \
+    {.tile = LINE_CORNER_R, .y = 16, .x = 10}, \
+    {.tile = LINE_V_R_HALF, .y = 17, .x = 10}, \
+    {.tile = lastTile,      .y = 17, .x = 11},
 
-#define LINESECTION_ROUND1_TRAINER4(lastSrc) \
-    {.src = 0x602b,  .y = 0x12, .x = 0x09},  \
-    {.src = 0x602b,  .y = 0x12, .x = 0x0a},  \
-    {.src = 0x6027,  .y = 0x11, .x = 0x0a},  \
-    {.src = lastSrc, .y = 0x11, .x = 0x0b},
+#define LINESECTION_ROUND1_TRAINER4(lastTile) \
+    {.tile = LINE_H_BOTTOM, .y = 18, .x =  9}, \
+    {.tile = LINE_H_BOTTOM, .y = 18, .x = 10}, \
+    {.tile = LINE_V_R,      .y = 17, .x = 10}, \
+    {.tile = lastTile,      .y = 17, .x = 11},
 
-#define LINESECTION_ROUND1_TRAINER3(lastSrc) \
-    {.src = 0x6021,  .y = 0x04, .x = 0x14},  \
-    {.src = 0x6025,  .y = 0x04, .x = 0x13},  \
-    {.src = 0x6049,  .y = 0x05, .x = 0x13},  \
-    {.src = lastSrc, .y = 0x05, .x = 0x12},
+#define LINESECTION_ROUND1_TRAINER3(lastTile) \
+    {.tile = LINE_H,        .y =  4, .x = 20}, \
+    {.tile = LINE_CORNER_L, .y =  4, .x = 19}, \
+    {.tile = LINE_V_L_HALF, .y =  5, .x = 19}, \
+    {.tile = lastTile,      .y =  5, .x = 18},
 
-#define LINESECTION_ROUND1_TRAINER11(lastSrc) \
-    {.src = 0x6021,  .y = 0x06, .x = 0x14},   \
-    {.src = 0x6021,  .y = 0x06, .x = 0x13},   \
-    {.src = 0x6029,  .y = 0x05, .x = 0x13},   \
-    {.src = lastSrc, .y = 0x05, .x = 0x12},
+#define LINESECTION_ROUND1_TRAINER11(lastTile) \
+    {.tile = LINE_H,   .y =  6, .x = 20}, \
+    {.tile = LINE_H,   .y =  6, .x = 19}, \
+    {.tile = LINE_V_L, .y =  5, .x = 19}, \
+    {.tile = lastTile, .y =  5, .x = 18},
 
-#define LINESECTION_ROUND1_TRAINER15(lastSrc) \
-    {.src = 0x6021,  .y = 0x08, .x = 0x14},   \
-    {.src = 0x6025,  .y = 0x08, .x = 0x13},   \
-    {.src = 0x6049,  .y = 0x09, .x = 0x13},   \
-    {.src = lastSrc, .y = 0x09, .x = 0x12},
+#define LINESECTION_ROUND1_TRAINER15(lastTile) \
+    {.tile = LINE_H,        .y =  8, .x = 20}, \
+    {.tile = LINE_CORNER_L, .y =  8, .x = 19}, \
+    {.tile = LINE_V_L_HALF, .y =  9, .x = 19}, \
+    {.tile = lastTile,      .y =  9, .x = 18},
 
-#define LINESECTION_ROUND1_TRAINER7(lastSrc) \
-    {.src = 0x6021,  .y = 0x0a, .x = 0x14},  \
-    {.src = 0x6021,  .y = 0x0a, .x = 0x13},  \
-    {.src = 0x6029,  .y = 0x09, .x = 0x13},  \
-    {.src = lastSrc, .y = 0x09, .x = 0x12},
+#define LINESECTION_ROUND1_TRAINER7(lastTile) \
+    {.tile = LINE_H,   .y = 10, .x = 20}, \
+    {.tile = LINE_H,   .y = 10, .x = 19}, \
+    {.tile = LINE_V_L, .y =  9, .x = 19}, \
+    {.tile = lastTile, .y =  9, .x = 18},
 
-#define LINESECTION_ROUND1_TRAINER6(lastSrc) \
-    {.src = 0x6021,  .y = 0x0c, .x = 0x14},  \
-    {.src = 0x6025,  .y = 0x0c, .x = 0x13},  \
-    {.src = 0x6049,  .y = 0x0d, .x = 0x13},  \
-    {.src = lastSrc, .y = 0x0d, .x = 0x12},
+#define LINESECTION_ROUND1_TRAINER6(lastTile) \
+    {.tile = LINE_H,        .y = 12, .x = 20}, \
+    {.tile = LINE_CORNER_L, .y = 12, .x = 19}, \
+    {.tile = LINE_V_L_HALF, .y = 13, .x = 19}, \
+    {.tile = lastTile,      .y = 13, .x = 18},
 
-#define LINESECTION_ROUND1_TRAINER14(lastSrc) \
-    {.src = 0x6021,  .y = 0x0e, .x = 0x14},   \
-    {.src = 0x6021,  .y = 0x0e, .x = 0x13},   \
-    {.src = 0x6029,  .y = 0x0d, .x = 0x13},   \
-    {.src = lastSrc, .y = 0x0d, .x = 0x12},
+#define LINESECTION_ROUND1_TRAINER14(lastTile) \
+    {.tile = LINE_H,   .y = 14, .x = 20}, \
+    {.tile = LINE_H,   .y = 14, .x = 19}, \
+    {.tile = LINE_V_L, .y = 13, .x = 19}, \
+    {.tile = lastTile, .y = 13, .x = 18},
 
-#define LINESECTION_ROUND1_TRAINER10(lastSrc) \
-    {.src = 0x6021,  .y = 0x10, .x = 0x14},   \
-    {.src = 0x6025,  .y = 0x10, .x = 0x13},   \
-    {.src = 0x6049,  .y = 0x11, .x = 0x13},   \
-    {.src = lastSrc, .y = 0x11, .x = 0x12},
+#define LINESECTION_ROUND1_TRAINER10(lastTile) \
+    {.tile = LINE_H,        .y = 16, .x = 20}, \
+    {.tile = LINE_CORNER_L, .y = 16, .x = 19}, \
+    {.tile = LINE_V_L_HALF, .y = 17, .x = 19}, \
+    {.tile = lastTile,      .y = 17, .x = 18},
 
-#define LINESECTION_ROUND1_TRAINER2(lastSrc) \
-    {.src = 0x602b,  .y = 0x12, .x = 0x14},  \
-    {.src = 0x602b,  .y = 0x12, .x = 0x13},  \
-    {.src = 0x6029,  .y = 0x11, .x = 0x13},  \
-    {.src = lastSrc, .y = 0x11, .x = 0x12},
+#define LINESECTION_ROUND1_TRAINER2(lastTile) \
+    {.tile = LINE_H_BOTTOM, .y = 18, .x = 20}, \
+    {.tile = LINE_H_BOTTOM, .y = 18, .x = 19}, \
+    {.tile = LINE_V_L,      .y = 17, .x = 19}, \
+    {.tile = lastTile,      .y = 17, .x = 18},
 
-#define LINESECTION_ROUND2_MATCH1(lastSrc)  \
-    {.src = 0x6027,  .y = 0x06, .x = 0x0b}, \
-    {.src = 0x6047,  .y = 0x07, .x = 0x0b}, \
-    {.src = lastSrc, .y = 0x07, .x = 0x0c},
+#define LINESECTION_ROUND2_MATCH1(lastTile) \
+    {.tile = LINE_V_R,      .y =  6, .x = 11}, \
+    {.tile = LINE_V_R_HALF, .y =  7, .x = 11}, \
+    {.tile = lastTile,      .y =  7, .x = 12},
 
-#define LINESECTION_ROUND2_MATCH2(lastSrc)  \
-    {.src = 0x6027,  .y = 0x08, .x = 0x0b}, \
-    {.src = 0x6027,  .y = 0x07, .x = 0x0b}, \
-    {.src = lastSrc, .y = 0x07, .x = 0x0c},
+#define LINESECTION_ROUND2_MATCH2(lastTile) \
+    {.tile = LINE_V_R, .y =  8, .x = 11}, \
+    {.tile = LINE_V_R, .y =  7, .x = 11}, \
+    {.tile = lastTile, .y =  7, .x = 12},
 
-#define LINESECTION_ROUND2_MATCH3(lastSrc)  \
-    {.src = 0x6027,  .y = 0x0e, .x = 0x0b}, \
-    {.src = 0x6047,  .y = 0x0f, .x = 0x0b}, \
-    {.src = lastSrc, .y = 0x0f, .x = 0x0c},
+#define LINESECTION_ROUND2_MATCH3(lastTile) \
+    {.tile = LINE_V_R,      .y = 14, .x = 11}, \
+    {.tile = LINE_V_R_HALF, .y = 15, .x = 11}, \
+    {.tile = lastTile,      .y = 15, .x = 12},
 
-#define LINESECTION_ROUND2_MATCH4(lastSrc)  \
-    {.src = 0x6027,  .y = 0x10, .x = 0x0b}, \
-    {.src = 0x6027,  .y = 0x0f, .x = 0x0b}, \
-    {.src = lastSrc, .y = 0x0f, .x = 0x0c},
+#define LINESECTION_ROUND2_MATCH4(lastTile) \
+    {.tile = LINE_V_R, .y = 16, .x = 11}, \
+    {.tile = LINE_V_R, .y = 15, .x = 11}, \
+    {.tile = lastTile, .y = 15, .x = 12},
 
-#define LINESECTION_ROUND2_MATCH5(lastSrc)  \
-    {.src = 0x6029,  .y = 0x06, .x = 0x12}, \
-    {.src = 0x6049,  .y = 0x07, .x = 0x12}, \
-    {.src = lastSrc, .y = 0x07, .x = 0x11},
+#define LINESECTION_ROUND2_MATCH5(lastTile) \
+    {.tile = LINE_V_L,      .y =  6, .x = 18}, \
+    {.tile = LINE_V_L_HALF, .y =  7, .x = 18}, \
+    {.tile = lastTile,      .y =  7, .x = 17},
 
-#define LINESECTION_ROUND2_MATCH6(lastSrc)  \
-    {.src = 0x6029,  .y = 0x08, .x = 0x12}, \
-    {.src = 0x6029,  .y = 0x07, .x = 0x12}, \
-    {.src = lastSrc, .y = 0x07, .x = 0x11},
+#define LINESECTION_ROUND2_MATCH6(lastTile) \
+    {.tile = LINE_V_L, .y =  8, .x = 18}, \
+    {.tile = LINE_V_L, .y =  7, .x = 18}, \
+    {.tile = lastTile, .y =  7, .x = 17},
 
-#define LINESECTION_ROUND2_MATCH7(lastSrc)  \
-    {.src = 0x6029,  .y = 0x0e, .x = 0x12}, \
-    {.src = 0x6049,  .y = 0x0f, .x = 0x12}, \
-    {.src = lastSrc, .y = 0x0f, .x = 0x11},
+#define LINESECTION_ROUND2_MATCH7(lastTile) \
+    {.tile = LINE_V_L,      .y = 14, .x = 18}, \
+    {.tile = LINE_V_L_HALF, .y = 15, .x = 18}, \
+    {.tile = lastTile,      .y = 15, .x = 17},
 
-#define LINESECTION_ROUND2_MATCH8(lastSrc)  \
-    {.src = 0x6029,  .y = 0x10, .x = 0x12}, \
-    {.src = 0x6029,  .y = 0x0f, .x = 0x12}, \
-    {.src = lastSrc, .y = 0x0f, .x = 0x11},
+#define LINESECTION_ROUND2_MATCH8(lastTile) \
+    {.tile = LINE_V_L, .y = 16, .x = 18}, \
+    {.tile = LINE_V_L, .y = 15, .x = 18}, \
+    {.tile = lastTile, .y = 15, .x = 17},
 
-#define LINESECTION_SEMIFINAL_TOP_LEFT     \
-    {.src = 0x6027, .y = 0x08, .x = 0x0c}, \
-    {.src = 0x6027, .y = 0x09, .x = 0x0c}, \
-    {.src = 0x6027, .y = 0x0a, .x = 0x0c}, \
-    {.src = 0x603b, .y = 0x0b, .x = 0x0c},
+#define LINESECTION_SEMIFINAL_TOP_LEFT \
+    {.tile = LINE_V_R,           .y =  8, .x = 12}, \
+    {.tile = LINE_V_R,           .y =  9, .x = 12}, \
+    {.tile = LINE_V_R,           .y = 10, .x = 12}, \
+    {.tile = LINE_V_R_HALF_LOGO, .y = 11, .x = 12},
 
-#define LINESECTION_SEMIFINAL_BOTTOM_LEFT  \
-    {.src = 0x6033, .y = 0x0e, .x = 0x0c}, \
-    {.src = 0x6032, .y = 0x0d, .x = 0x0c}, \
-    {.src = 0x6031, .y = 0x0c, .x = 0x0c}, \
-    {.src = 0x6030, .y = 0x0b, .x = 0x0c},
+#define LINESECTION_SEMIFINAL_BOTTOM_LEFT \
+    {.tile = LINE_V_R_LOGO4, .y = 14, .x = 12}, \
+    {.tile = LINE_V_R_LOGO3, .y = 13, .x = 12}, \
+    {.tile = LINE_V_R_LOGO2, .y = 12, .x = 12}, \
+    {.tile = LINE_V_R_LOGO1, .y = 11, .x = 12},
 
-#define LINESECTION_SEMIFINAL_TOP_RIGHT    \
-    {.src = 0x6029, .y = 0x08, .x = 0x11}, \
-    {.src = 0x6029, .y = 0x09, .x = 0x11}, \
-    {.src = 0x6029, .y = 0x0a, .x = 0x11}, \
-    {.src = 0x603c, .y = 0x0b, .x = 0x11},
+#define LINESECTION_SEMIFINAL_TOP_RIGHT \
+    {.tile = LINE_V_L,           .y =  8, .x = 17}, \
+    {.tile = LINE_V_L,           .y =  9, .x = 17}, \
+    {.tile = LINE_V_L,           .y = 10, .x = 17}, \
+    {.tile = LINE_V_L_HALF_LOGO, .y = 11, .x = 17},
 
 #define LINESECTION_SEMIFINAL_BOTTOM_RIGHT \
-    {.src = 0x6038, .y = 0x0e, .x = 0x11}, \
-    {.src = 0x6037, .y = 0x0d, .x = 0x11}, \
-    {.src = 0x6036, .y = 0x0c, .x = 0x11}, \
-    {.src = 0x6035, .y = 0x0b, .x = 0x11},
+    {.tile = LINE_V_L_LOGO4, .y = 14, .x = 17}, \
+    {.tile = LINE_V_L_LOGO3, .y = 13, .x = 17}, \
+    {.tile = LINE_V_L_LOGO2, .y = 12, .x = 17}, \
+    {.tile = LINE_V_L_LOGO1, .y = 11, .x = 17},
 
-#define LINESECTION_FINAL_LEFT             \
-    {.src = 0x602c, .y = 0x0b, .x = 0x0d}, \
-    {.src = 0x602d, .y = 0x0b, .x = 0x0e},
+#define LINESECTION_FINAL_LEFT \
+    {.tile = LINE_H_LOGO1, .y = 11, .x = 13}, \
+    {.tile = LINE_H_LOGO2, .y = 11, .x = 14},
 
-#define LINESECTION_FINAL_RIGHT            \
-    {.src = 0x602f, .y = 0x0b, .x = 0x10}, \
-    {.src = 0x602e, .y = 0x0b, .x = 0x0f},
+#define LINESECTION_FINAL_RIGHT \
+    {.tile = LINE_H_LOGO4, .y = 11, .x = 16}, \
+    {.tile = LINE_H_LOGO3, .y = 11, .x = 15},
 
 
 static const struct TourneyTreeLineSection sLineSectionTrainer1Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER1(0x6043)
+    LINESECTION_ROUND1_TRAINER1(LINE_CORNER_R_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer1Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER1(0x6023)
-    LINESECTION_ROUND2_MATCH1(0x6043)
+    LINESECTION_ROUND1_TRAINER1(LINE_CORNER_R)
+    LINESECTION_ROUND2_MATCH1(LINE_CORNER_R_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer1Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER1(0x6023)
-    LINESECTION_ROUND2_MATCH1(0x6023)
+    LINESECTION_ROUND1_TRAINER1(LINE_CORNER_R)
+    LINESECTION_ROUND2_MATCH1(LINE_CORNER_R)
     LINESECTION_SEMIFINAL_TOP_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer1Final[] =
 {
-    LINESECTION_ROUND1_TRAINER1(0x6023)
-    LINESECTION_ROUND2_MATCH1(0x6023)
+    LINESECTION_ROUND1_TRAINER1(LINE_CORNER_R)
+    LINESECTION_ROUND2_MATCH1(LINE_CORNER_R)
     LINESECTION_SEMIFINAL_TOP_LEFT
     LINESECTION_FINAL_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer9Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER9(0x6043)
+    LINESECTION_ROUND1_TRAINER9(LINE_CORNER_R_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer9Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER9(0x6023)
-    LINESECTION_ROUND2_MATCH1(0x6043)
+    LINESECTION_ROUND1_TRAINER9(LINE_CORNER_R)
+    LINESECTION_ROUND2_MATCH1(LINE_CORNER_R_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer9Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER9(0x6023)
-    LINESECTION_ROUND2_MATCH1(0x6023)
+    LINESECTION_ROUND1_TRAINER9(LINE_CORNER_R)
+    LINESECTION_ROUND2_MATCH1(LINE_CORNER_R)
     LINESECTION_SEMIFINAL_TOP_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer9Final[] =
 {
-    LINESECTION_ROUND1_TRAINER9(0x6023)
-    LINESECTION_ROUND2_MATCH1(0x6023)
+    LINESECTION_ROUND1_TRAINER9(LINE_CORNER_R)
+    LINESECTION_ROUND2_MATCH1(LINE_CORNER_R)
     LINESECTION_SEMIFINAL_TOP_LEFT
     LINESECTION_FINAL_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer13Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER13(0x6021)
+    LINESECTION_ROUND1_TRAINER13(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer13Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER13(0x6021)
-    LINESECTION_ROUND2_MATCH2(0x6043)
+    LINESECTION_ROUND1_TRAINER13(LINE_H)
+    LINESECTION_ROUND2_MATCH2(LINE_CORNER_R_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer13Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER13(0x6021)
-    LINESECTION_ROUND2_MATCH2(0x6023)
+    LINESECTION_ROUND1_TRAINER13(LINE_H)
+    LINESECTION_ROUND2_MATCH2(LINE_CORNER_R)
     LINESECTION_SEMIFINAL_TOP_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer13Final[] =
 {
-    LINESECTION_ROUND1_TRAINER13(0x6021)
-    LINESECTION_ROUND2_MATCH2(0x6023)
+    LINESECTION_ROUND1_TRAINER13(LINE_H)
+    LINESECTION_ROUND2_MATCH2(LINE_CORNER_R)
     LINESECTION_SEMIFINAL_TOP_LEFT
     LINESECTION_FINAL_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer5Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER5(0x6021)
+    LINESECTION_ROUND1_TRAINER5(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer5Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER5(0x6021)
-    LINESECTION_ROUND2_MATCH2(0x6043)
+    LINESECTION_ROUND1_TRAINER5(LINE_H)
+    LINESECTION_ROUND2_MATCH2(LINE_CORNER_R_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer5Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER5(0x6021)
-    LINESECTION_ROUND2_MATCH2(0x6023)
+    LINESECTION_ROUND1_TRAINER5(LINE_H)
+    LINESECTION_ROUND2_MATCH2(LINE_CORNER_R)
     LINESECTION_SEMIFINAL_TOP_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer5Final[] =
 {
-    LINESECTION_ROUND1_TRAINER5(0x6021)
-    LINESECTION_ROUND2_MATCH2(0x6023)
+    LINESECTION_ROUND1_TRAINER5(LINE_H)
+    LINESECTION_ROUND2_MATCH2(LINE_CORNER_R)
     LINESECTION_SEMIFINAL_TOP_LEFT
     LINESECTION_FINAL_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer8Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER8(0x6043)
+    LINESECTION_ROUND1_TRAINER8(LINE_CORNER_R_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer8Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER8(0x6023)
-    LINESECTION_ROUND2_MATCH3(0x6021)
+    LINESECTION_ROUND1_TRAINER8(LINE_CORNER_R)
+    LINESECTION_ROUND2_MATCH3(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer8Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER8(0x6023)
-    LINESECTION_ROUND2_MATCH3(0x6021)
+    LINESECTION_ROUND1_TRAINER8(LINE_CORNER_R)
+    LINESECTION_ROUND2_MATCH3(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer8Final[] =
 {
-    LINESECTION_ROUND1_TRAINER8(0x6023)
-    LINESECTION_ROUND2_MATCH3(0x6021)
+    LINESECTION_ROUND1_TRAINER8(LINE_CORNER_R)
+    LINESECTION_ROUND2_MATCH3(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_LEFT
     LINESECTION_FINAL_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer16Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER16(0x6043)
+    LINESECTION_ROUND1_TRAINER16(LINE_CORNER_R_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer16Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER16(0x6023)
-    LINESECTION_ROUND2_MATCH3(0x6021)
+    LINESECTION_ROUND1_TRAINER16(LINE_CORNER_R)
+    LINESECTION_ROUND2_MATCH3(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer16Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER16(0x6023)
-    LINESECTION_ROUND2_MATCH3(0x6021)
+    LINESECTION_ROUND1_TRAINER16(LINE_CORNER_R)
+    LINESECTION_ROUND2_MATCH3(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer16Final[] =
 {
-    LINESECTION_ROUND1_TRAINER16(0x6023)
-    LINESECTION_ROUND2_MATCH3(0x6021)
+    LINESECTION_ROUND1_TRAINER16(LINE_CORNER_R)
+    LINESECTION_ROUND2_MATCH3(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_LEFT
     LINESECTION_FINAL_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer12Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER12(0x6021)
+    LINESECTION_ROUND1_TRAINER12(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer12Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER12(0x6021)
-    LINESECTION_ROUND2_MATCH4(0x6021)
+    LINESECTION_ROUND1_TRAINER12(LINE_H)
+    LINESECTION_ROUND2_MATCH4(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer12Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER12(0x6021)
-    LINESECTION_ROUND2_MATCH4(0x6021)
+    LINESECTION_ROUND1_TRAINER12(LINE_H)
+    LINESECTION_ROUND2_MATCH4(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer12Final[] =
 {
-    LINESECTION_ROUND1_TRAINER12(0x6021)
-    LINESECTION_ROUND2_MATCH4(0x6021)
+    LINESECTION_ROUND1_TRAINER12(LINE_H)
+    LINESECTION_ROUND2_MATCH4(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_LEFT
     LINESECTION_FINAL_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer4Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER4(0x6021)
+    LINESECTION_ROUND1_TRAINER4(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer4Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER4(0x6021)
-    LINESECTION_ROUND2_MATCH4(0x6021)
+    LINESECTION_ROUND1_TRAINER4(LINE_H)
+    LINESECTION_ROUND2_MATCH4(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer4Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER4(0x6021)
-    LINESECTION_ROUND2_MATCH4(0x6021)
+    LINESECTION_ROUND1_TRAINER4(LINE_H)
+    LINESECTION_ROUND2_MATCH4(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer4Final[] =
 {
-    LINESECTION_ROUND1_TRAINER4(0x6021)
-    LINESECTION_ROUND2_MATCH4(0x6021)
+    LINESECTION_ROUND1_TRAINER4(LINE_H)
+    LINESECTION_ROUND2_MATCH4(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_LEFT
     LINESECTION_FINAL_LEFT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer3Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER3(0x6045)
+    LINESECTION_ROUND1_TRAINER3(LINE_CORNER_L_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer3Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER3(0x6025)
-    LINESECTION_ROUND2_MATCH5(0x6045)
+    LINESECTION_ROUND1_TRAINER3(LINE_CORNER_L)
+    LINESECTION_ROUND2_MATCH5(LINE_CORNER_L_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer3Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER3(0x6025)
-    LINESECTION_ROUND2_MATCH5(0x6025)
+    LINESECTION_ROUND1_TRAINER3(LINE_CORNER_L)
+    LINESECTION_ROUND2_MATCH5(LINE_CORNER_L)
     LINESECTION_SEMIFINAL_TOP_RIGHT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer3Final[] =
 {
-    LINESECTION_ROUND1_TRAINER3(0x6025)
-    LINESECTION_ROUND2_MATCH5(0x6025)
+    LINESECTION_ROUND1_TRAINER3(LINE_CORNER_L)
+    LINESECTION_ROUND2_MATCH5(LINE_CORNER_L)
     LINESECTION_SEMIFINAL_TOP_RIGHT
     LINESECTION_FINAL_RIGHT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer11Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER11(0x6045)
+    LINESECTION_ROUND1_TRAINER11(LINE_CORNER_L_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer11Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER11(0x6025)
-    LINESECTION_ROUND2_MATCH5(0x6045)
+    LINESECTION_ROUND1_TRAINER11(LINE_CORNER_L)
+    LINESECTION_ROUND2_MATCH5(LINE_CORNER_L_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer11Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER11(0x6025)
-    LINESECTION_ROUND2_MATCH5(0x6025)
+    LINESECTION_ROUND1_TRAINER11(LINE_CORNER_L)
+    LINESECTION_ROUND2_MATCH5(LINE_CORNER_L)
     LINESECTION_SEMIFINAL_TOP_RIGHT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer11Final[] =
 {
-    LINESECTION_ROUND1_TRAINER11(0x6025)
-    LINESECTION_ROUND2_MATCH5(0x6025)
+    LINESECTION_ROUND1_TRAINER11(LINE_CORNER_L)
+    LINESECTION_ROUND2_MATCH5(LINE_CORNER_L)
     LINESECTION_SEMIFINAL_TOP_RIGHT
     LINESECTION_FINAL_RIGHT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer15Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER15(0x6021)
+    LINESECTION_ROUND1_TRAINER15(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer15Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER15(0x6021)
-    LINESECTION_ROUND2_MATCH6(0x6045)
+    LINESECTION_ROUND1_TRAINER15(LINE_H)
+    LINESECTION_ROUND2_MATCH6(LINE_CORNER_L_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer15Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER15(0x6021)
-    LINESECTION_ROUND2_MATCH6(0x6025)
+    LINESECTION_ROUND1_TRAINER15(LINE_H)
+    LINESECTION_ROUND2_MATCH6(LINE_CORNER_L)
     LINESECTION_SEMIFINAL_TOP_RIGHT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer15Final[] =
 {
-    LINESECTION_ROUND1_TRAINER15(0x6021)
-    LINESECTION_ROUND2_MATCH6(0x6025)
+    LINESECTION_ROUND1_TRAINER15(LINE_H)
+    LINESECTION_ROUND2_MATCH6(LINE_CORNER_L)
     LINESECTION_SEMIFINAL_TOP_RIGHT
     LINESECTION_FINAL_RIGHT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer7Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER7(0x6021)
+    LINESECTION_ROUND1_TRAINER7(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer7Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER7(0x6021)
-    LINESECTION_ROUND2_MATCH6(0x6045)
+    LINESECTION_ROUND1_TRAINER7(LINE_H)
+    LINESECTION_ROUND2_MATCH6(LINE_CORNER_L_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer7Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER7(0x6021)
-    LINESECTION_ROUND2_MATCH6(0x6025)
+    LINESECTION_ROUND1_TRAINER7(LINE_H)
+    LINESECTION_ROUND2_MATCH6(LINE_CORNER_L)
     LINESECTION_SEMIFINAL_TOP_RIGHT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer7Final[] =
 {
-    LINESECTION_ROUND1_TRAINER7(0x6021)
-    LINESECTION_ROUND2_MATCH6(0x6025)
+    LINESECTION_ROUND1_TRAINER7(LINE_H)
+    LINESECTION_ROUND2_MATCH6(LINE_CORNER_L)
     LINESECTION_SEMIFINAL_TOP_RIGHT
     LINESECTION_FINAL_RIGHT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer6Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER6(0x6045)
+    LINESECTION_ROUND1_TRAINER6(LINE_CORNER_L_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer6Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER6(0x6025)
-    LINESECTION_ROUND2_MATCH7(0x6021)
+    LINESECTION_ROUND1_TRAINER6(LINE_CORNER_L)
+    LINESECTION_ROUND2_MATCH7(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer6Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER6(0x6025)
-    LINESECTION_ROUND2_MATCH7(0x6021)
+    LINESECTION_ROUND1_TRAINER6(LINE_CORNER_L)
+    LINESECTION_ROUND2_MATCH7(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_RIGHT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer6Final[] =
 {
-    LINESECTION_ROUND1_TRAINER6(0x6025)
-    LINESECTION_ROUND2_MATCH7(0x6021)
+    LINESECTION_ROUND1_TRAINER6(LINE_CORNER_L)
+    LINESECTION_ROUND2_MATCH7(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_RIGHT
     LINESECTION_FINAL_RIGHT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer14Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER14(0x6045)
+    LINESECTION_ROUND1_TRAINER14(LINE_CORNER_L_HALF)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer14Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER14(0x6025)
-    LINESECTION_ROUND2_MATCH7(0x6021)
+    LINESECTION_ROUND1_TRAINER14(LINE_CORNER_L)
+    LINESECTION_ROUND2_MATCH7(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer14Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER14(0x6025)
-    LINESECTION_ROUND2_MATCH7(0x6021)
+    LINESECTION_ROUND1_TRAINER14(LINE_CORNER_L)
+    LINESECTION_ROUND2_MATCH7(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_RIGHT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer14Final[] =
 {
-    LINESECTION_ROUND1_TRAINER14(0x6025)
-    LINESECTION_ROUND2_MATCH7(0x6021)
+    LINESECTION_ROUND1_TRAINER14(LINE_CORNER_L)
+    LINESECTION_ROUND2_MATCH7(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_RIGHT
     LINESECTION_FINAL_RIGHT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer10Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER10(0x6021)
+    LINESECTION_ROUND1_TRAINER10(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer10Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER10(0x6021)
-    LINESECTION_ROUND2_MATCH8(0x6021)
+    LINESECTION_ROUND1_TRAINER10(LINE_H)
+    LINESECTION_ROUND2_MATCH8(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer10Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER10(0x6021)
-    LINESECTION_ROUND2_MATCH8(0x6021)
+    LINESECTION_ROUND1_TRAINER10(LINE_H)
+    LINESECTION_ROUND2_MATCH8(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_RIGHT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer10Final[] =
 {
-    LINESECTION_ROUND1_TRAINER10(0x6021)
-    LINESECTION_ROUND2_MATCH8(0x6021)
+    LINESECTION_ROUND1_TRAINER10(LINE_H)
+    LINESECTION_ROUND2_MATCH8(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_RIGHT
     LINESECTION_FINAL_RIGHT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer2Round1[] =
 {
-    LINESECTION_ROUND1_TRAINER2(0x6021)
+    LINESECTION_ROUND1_TRAINER2(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer2Round2[] =
 {
-    LINESECTION_ROUND1_TRAINER2(0x6021)
-    LINESECTION_ROUND2_MATCH8(0x6021)
+    LINESECTION_ROUND1_TRAINER2(LINE_H)
+    LINESECTION_ROUND2_MATCH8(LINE_H)
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer2Semifinal[] =
 {
-    LINESECTION_ROUND1_TRAINER2(0x6021)
-    LINESECTION_ROUND2_MATCH8(0x6021)
+    LINESECTION_ROUND1_TRAINER2(LINE_H)
+    LINESECTION_ROUND2_MATCH8(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_RIGHT
 };
 
 static const struct TourneyTreeLineSection sLineSectionTrainer2Final[] =
 {
-    LINESECTION_ROUND1_TRAINER2(0x6021)
-    LINESECTION_ROUND2_MATCH8(0x6021)
+    LINESECTION_ROUND1_TRAINER2(LINE_H)
+    LINESECTION_ROUND2_MATCH8(LINE_H)
     LINESECTION_SEMIFINAL_BOTTOM_RIGHT
     LINESECTION_FINAL_RIGHT
 };
@@ -2115,20 +1753,14 @@ static const u8 sTourneyTreeLineSectionArrayCounts[DOME_TOURNAMENT_TRAINERS_COUN
     {ARRAY_COUNT(sLineSectionTrainer16Round1), ARRAY_COUNT(sLineSectionTrainer16Round2), ARRAY_COUNT(sLineSectionTrainer16Semifinal), ARRAY_COUNT(sLineSectionTrainer16Final)},
 };
 
-// code
 void CallBattleDomeFunction(void)
 {
-    if (gSpecialVar_0x8004 >= ARRAY_COUNT(sBattleDomeFunctions))
-    {
-        gSpecialVar_Result = FALSE;
-        return;
-    }
     sBattleDomeFunctions[gSpecialVar_0x8004]();
 }
 
 static void InitDomeChallenge(void)
 {
-    u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
 
     gSaveBlock2Ptr->frontier.challengeStatus = 0;
@@ -2138,13 +1770,13 @@ static void InitDomeChallenge(void)
     if (!(gSaveBlock2Ptr->frontier.winStreakActiveFlags & sWinStreakFlags[battleMode][lvlMode]))
         gSaveBlock2Ptr->frontier.domeWinStreaks[battleMode][lvlMode] = 0;
 
-    SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1);
-    gTrainerBattleOpponent_A = 0;
+    SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, WARP_ID_NONE);
+    TRAINER_BATTLE_PARAM.opponentA = 0;
 }
 
 static void GetDomeData(void)
 {
-    u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
 
     switch (gSpecialVar_0x8005)
@@ -2212,7 +1844,7 @@ static void GetDomeData(void)
 
 static void SetDomeData(void)
 {
-    u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
 
     switch (gSpecialVar_0x8005)
@@ -2280,17 +1912,20 @@ static void InitDomeTrainers(void)
 {
     int i, j, k;
     int monLevel;
-    int species[FRONTIER_PARTY_SIZE];
+    enum Species species[FRONTIER_PARTY_SIZE];
     int monTypesBits, monTypesCount;
     int trainerId;
     int monId;
-    u16 rankingScores[DOME_TOURNAMENT_TRAINERS_COUNT] = {0};
-    int statValues[NUM_STATS] = {0};
+    u16 *rankingScores;
+    int *statValues;
     u8 ivs = 0;
 
-    species[0] = 0;
-    species[1] = 0;
-    species[2] = 0;
+    species[0] = SPECIES_NONE;
+    species[1] = SPECIES_NONE;
+    species[2] = SPECIES_NONE;
+    rankingScores = AllocZeroed(sizeof(u16) * DOME_TOURNAMENT_TRAINERS_COUNT);
+    statValues = AllocZeroed(sizeof(int) * NUM_STATS);
+
     gSaveBlock2Ptr->frontier.domeLvlMode = gSaveBlock2Ptr->frontier.lvlMode + 1;
     gSaveBlock2Ptr->frontier.domeBattleMode = VarGet(VAR_FRONTIER_BATTLE_MODE) + 1;
     DOME_TRAINERS[0].trainerId = TRAINER_PLAYER;
@@ -2301,13 +1936,13 @@ static void InitDomeTrainers(void)
     // Store the data used to display party information on the player's tourney page
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
-        DOME_MONS[0][i] = GetMonData(&gPlayerParty[gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1], MON_DATA_SPECIES, NULL);
+        DOME_MONS[0][i] = GetMonData(&gParties[B_TRAINER_PLAYER][gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1], MON_DATA_SPECIES);
         for (j = 0; j < MAX_MON_MOVES; j++)
-            gSaveBlock2Ptr->frontier.domePlayerPartyData[i].moves[j] = GetMonData(&gPlayerParty[gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1], MON_DATA_MOVE1 + j, NULL);
+            gSaveBlock2Ptr->frontier.domePlayerPartyData[i].moves[j] = GetMonData(&gParties[B_TRAINER_PLAYER][gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1], MON_DATA_MOVE1 + j);
         for (j = 0; j < NUM_STATS; j++)
-            gSaveBlock2Ptr->frontier.domePlayerPartyData[i].evs[j] = GetMonData(&gPlayerParty[gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1], MON_DATA_HP_EV + j, NULL);
+            gSaveBlock2Ptr->frontier.domePlayerPartyData[i].evs[j] = GetMonData(&gParties[B_TRAINER_PLAYER][gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1], MON_DATA_HP_EV + j);
 
-        gSaveBlock2Ptr->frontier.domePlayerPartyData[i].nature = GetMonData(&gPlayerParty[gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1], MON_DATA_NATURE, NULL);
+        gSaveBlock2Ptr->frontier.domePlayerPartyData[i].nature = GetNature(&gParties[B_TRAINER_PLAYER][gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1]);
     }
 
     // Populate the tourney roster with random frontier trainers (dependent on streak)
@@ -2354,7 +1989,7 @@ static void InitDomeTrainers(void)
                     if (alreadySelectedMonId == monId
                         || species[0] == gFacilityTrainerMons[monId].species
                         || species[1] == gFacilityTrainerMons[monId].species
-                        || gFacilityTrainerMons[alreadySelectedMonId].itemTableId == gFacilityTrainerMons[monId].itemTableId)
+                        || gFacilityTrainerMons[alreadySelectedMonId].heldItem == gFacilityTrainerMons[monId].heldItem)
                         break;
                 }
             } while (k != j);
@@ -2378,14 +2013,14 @@ static void InitDomeTrainers(void)
     {
         // trainerId var re-used here as index of selected mons
         trainerId = gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1;
-        rankingScores[0] += GetMonData(&gPlayerParty[trainerId], MON_DATA_ATK, NULL);
-        rankingScores[0] += GetMonData(&gPlayerParty[trainerId], MON_DATA_DEF, NULL);
-        rankingScores[0] += GetMonData(&gPlayerParty[trainerId], MON_DATA_SPATK, NULL);
-        rankingScores[0] += GetMonData(&gPlayerParty[trainerId], MON_DATA_SPDEF, NULL);
-        rankingScores[0] += GetMonData(&gPlayerParty[trainerId], MON_DATA_SPEED, NULL);
-        rankingScores[0] += GetMonData(&gPlayerParty[trainerId], MON_DATA_MAX_HP, NULL);
-        monTypesBits |= gBitTable[gBaseStats[GetMonData(&gPlayerParty[trainerId], MON_DATA_SPECIES, NULL)].type1];
-        monTypesBits |= gBitTable[gBaseStats[GetMonData(&gPlayerParty[trainerId], MON_DATA_SPECIES, NULL)].type2];
+        rankingScores[0] += GetMonData(&gParties[B_TRAINER_PLAYER][trainerId], MON_DATA_ATK);
+        rankingScores[0] += GetMonData(&gParties[B_TRAINER_PLAYER][trainerId], MON_DATA_DEF);
+        rankingScores[0] += GetMonData(&gParties[B_TRAINER_PLAYER][trainerId], MON_DATA_SPATK);
+        rankingScores[0] += GetMonData(&gParties[B_TRAINER_PLAYER][trainerId], MON_DATA_SPDEF);
+        rankingScores[0] += GetMonData(&gParties[B_TRAINER_PLAYER][trainerId], MON_DATA_SPEED);
+        rankingScores[0] += GetMonData(&gParties[B_TRAINER_PLAYER][trainerId], MON_DATA_MAX_HP);
+        monTypesBits |= 1u << GetSpeciesType(GetMonData(&gParties[B_TRAINER_PLAYER][trainerId], MON_DATA_SPECIES), 0);
+        monTypesBits |= 1u << GetSpeciesType(GetMonData(&gParties[B_TRAINER_PLAYER][trainerId], MON_DATA_SPECIES), 1);
     }
 
     // Count the number of types in the players party, to factor into the ranking
@@ -2407,11 +2042,8 @@ static void InitDomeTrainers(void)
         ivs = GetDomeTrainerMonIvs(DOME_TRAINERS[i].trainerId);
         for (j = 0; j < FRONTIER_PARTY_SIZE; j++)
         {
-            CalcDomeMonStats(gFacilityTrainerMons[DOME_MONS[i][j]].species,
-                             monLevel, ivs,
-                             gFacilityTrainerMons[DOME_MONS[i][j]].evSpread,
-                             gFacilityTrainerMons[DOME_MONS[i][j]].nature,
-                             statValues);
+            CalcDomeMonStats(&gFacilityTrainerMons[DOME_MONS[i][j]],
+                             monLevel, ivs, statValues);
 
             rankingScores[i] += statValues[STAT_ATK];
             rankingScores[i] += statValues[STAT_DEF];
@@ -2419,8 +2051,8 @@ static void InitDomeTrainers(void)
             rankingScores[i] += statValues[STAT_SPDEF];
             rankingScores[i] += statValues[STAT_SPEED];
             rankingScores[i] += statValues[STAT_HP];
-            monTypesBits |= gBitTable[gBaseStats[gFacilityTrainerMons[DOME_MONS[i][j]].species].type1];
-            monTypesBits |= gBitTable[gBaseStats[gFacilityTrainerMons[DOME_MONS[i][j]].species].type2];
+            monTypesBits |= 1u << GetSpeciesType(gFacilityTrainerMons[DOME_MONS[i][j]].species, 0);
+            monTypesBits |= 1u << GetSpeciesType(gFacilityTrainerMons[DOME_MONS[i][j]].species, 1);
         }
 
         for (monTypesCount = 0, j = 0; j < 32; j++)
@@ -2463,7 +2095,7 @@ static void InitDomeTrainers(void)
                 break;
         }
 
-        if (sTrainerNamePositions[i][0] != 0)
+        if (sTrainerNamePositions[i][0] != TOURNEYWIN_NAMES_LEFT)
         {
             j = 0;
             DOME_TRAINERS[j].trainerId = TRAINER_FRONTIER_BRAIN;
@@ -2478,45 +2110,36 @@ static void InitDomeTrainers(void)
             DOME_MONS[j][i] = GetFrontierBrainMonSpecies(i);
     }
 
+    Free(rankingScores);
+    Free(statValues);
 }
 
 #define CALC_STAT(base, statIndex)                                                          \
 {                                                                                           \
-    u8 baseStat = gBaseStats[species].base;                                                 \
+    u8 baseStat = gSpeciesInfo[fmon->species].base;                                                 \
     stats[statIndex] = (((2 * baseStat + ivs + evs[statIndex] / 4) * level) / 100) + 5;     \
-    stats[statIndex] = ModifyStatByNature(nature, stats[statIndex], statIndex);             \
+    stats[statIndex] = (u8) ModifyStatByNature(fmon->nature, stats[statIndex], statIndex);        \
 }
 
-static void CalcDomeMonStats(u16 species, int level, int ivs, u8 evBits, u8 nature, int *stats)
+static void CalcDomeMonStats(const struct TrainerMon *fmon, int level, u8 ivs, int *stats)
 {
-    int i, count;
-    u8 bits;
-    u16 resultingEvs;
     int evs[NUM_STATS];
 
-    count = 0, bits = evBits;
-    for (i = 0; i < NUM_STATS; bits >>= 1, i++)
+    for (enum Stat i = 0; i < NUM_STATS; i++)
     {
-        if (bits & 1)
-            count++;
+        if (fmon->ev != NULL)
+            evs[i] = fmon->ev[i];
+        else
+            evs[i] = 0;
     }
 
-    resultingEvs = count == 0 ? 0 : MAX_TOTAL_EVS / count;
-    bits = 1;
-    for (i = 0; i < NUM_STATS; bits <<= 1, i++)
-    {
-        evs[i] = 0;
-        if (evBits & bits)
-            evs[i] = resultingEvs;
-    }
-
-    if (species == SPECIES_SHEDINJA)
+    if (HasShedinjaHPHandling(fmon->species))
     {
         stats[STAT_HP] = 1;
     }
     else
     {
-        int n = 2 * gBaseStats[species].baseHP;
+        int n = 2 * GetSpeciesBaseHP(fmon->species);
         stats[STAT_HP] = (((n + ivs + evs[STAT_HP] / 4) * level) / 100) + level + 10;
     }
 
@@ -2547,44 +2170,26 @@ static void BufferDomeRoundText(void)
 static void BufferDomeOpponentName(void)
 {
     StringCopy(gStringVar1, gRoundsStringTable[gSaveBlock2Ptr->frontier.curChallengeBattleNum]);
-    CopyDomeTrainerName(gStringVar2, gTrainerBattleOpponent_A);
+    CopyDomeTrainerName(gStringVar2, TRAINER_BATTLE_PARAM.opponentA);
 }
 
 static void InitDomeOpponentParty(void)
 {
-    gPlayerPartyLostHP = 0;
-    sPlayerPartyMaxHP =  GetMonData(&gPlayerParty[0], MON_DATA_MAX_HP, NULL);
-    sPlayerPartyMaxHP += GetMonData(&gPlayerParty[1], MON_DATA_MAX_HP, NULL);
     CalculatePlayerPartyCount();
-    CreateDomeOpponentMons(TrainerIdToTournamentId(gTrainerBattleOpponent_A));
+    CreateDomeOpponentMons(TrainerIdToTournamentId(TRAINER_BATTLE_PARAM.opponentA));
 }
 
 static void CreateDomeOpponentMon(u8 monPartyId, u16 tournamentTrainerId, u8 tournamentMonId, u32 otId)
 {
-    int i;
-    u8 friendship = MAX_FRIENDSHIP;
+    #ifdef BUGFIX
     u8 fixedIv = GetDomeTrainerMonIvs(DOME_TRAINERS[tournamentTrainerId].trainerId);
+    #else
+    u8 fixedIv = GetDomeTrainerMonIvs(tournamentTrainerId); // BUG: Using the wrong ID. As a result, all Pokémon have ivs of 3.
+    #endif
     u8 level = SetFacilityPtrsGetLevel();
-    CreateMonWithEVSpreadNatureOTID(&gEnemyParty[monPartyId],
-                                         gFacilityTrainerMons[DOME_MONS[tournamentTrainerId][tournamentMonId]].species,
-                                         level,
-                                         gFacilityTrainerMons[DOME_MONS[tournamentTrainerId][tournamentMonId]].nature,
-                                         fixedIv,
-                                         gFacilityTrainerMons[DOME_MONS[tournamentTrainerId][tournamentMonId]].evSpread, otId);
 
-    friendship = MAX_FRIENDSHIP;
-    for (i = 0; i < MAX_MON_MOVES; i++)
-    {
-        SetMonMoveSlot(&gEnemyParty[monPartyId],
-                       gFacilityTrainerMons[DOME_MONS[tournamentTrainerId][tournamentMonId]].moves[i], i);
-        if (gFacilityTrainerMons[DOME_MONS[tournamentTrainerId][tournamentMonId]].moves[i] == MOVE_FRUSTRATION)
-            friendship = 0;
-    }
-
-    SetMonData(&gEnemyParty[monPartyId], MON_DATA_FRIENDSHIP, &friendship);
-    SetMonData(&gEnemyParty[monPartyId], MON_DATA_HELD_ITEM,
-               &gBattleFrontierHeldItems[gFacilityTrainerMons[DOME_MONS[tournamentTrainerId][tournamentMonId]].itemTableId]);
-    TryUpdateMonFormForHeldItem(&gEnemyParty[monPartyId]);
+    CreateFacilityMon(&gFacilityTrainerMons[DOME_MONS[tournamentTrainerId][tournamentMonId]],
+                      level, fixedIv, otId, 0, &gParties[B_TRAINER_OPPONENT_A][monPartyId]);
 }
 
 static void CreateDomeOpponentMons(u16 tournamentTrainerId)
@@ -2625,48 +2230,53 @@ static void CreateDomeOpponentMons(u16 tournamentTrainerId)
     }
 }
 
+// Returns a bitmask representing which 2 of the trainer's 3 Pokémon to select.
+// The choice is calculated solely depending on the type effectiveness of their
+// movesets against the player's Pokémon.
+// There is a 50% chance of either a "good" or "bad" selection mode being used.
+// In the good mode movesets are preferred which are more effective against the
+// player, and in the bad mode the opposite is true. If all 3 Pokémon tie, the
+// other mode will be tried. If they tie again, the Pokémon selection is random.
 int GetDomeTrainerSelectedMons(u16 tournamentTrainerId)
 {
     int selectedMonBits;
     if (Random() & 1)
     {
-        selectedMonBits = SelectOpponentMonsUsingPersonality(tournamentTrainerId, FALSE);
+        selectedMonBits = SelectOpponentMons_Good(tournamentTrainerId, FALSE);
         if (selectedMonBits == 0)
-            selectedMonBits = SelectOpponentMonsUsingOtId(tournamentTrainerId, TRUE);
+            selectedMonBits = SelectOpponentMons_Bad(tournamentTrainerId, TRUE);
     }
     else
     {
-        selectedMonBits = SelectOpponentMonsUsingOtId(tournamentTrainerId, FALSE);
+        selectedMonBits = SelectOpponentMons_Bad(tournamentTrainerId, FALSE);
         if (selectedMonBits == 0)
-            selectedMonBits = SelectOpponentMonsUsingPersonality(tournamentTrainerId, TRUE);
+            selectedMonBits = SelectOpponentMons_Good(tournamentTrainerId, TRUE);
     }
 
     return selectedMonBits;
 }
 
-// Could probably use a better name once GetTypeEffectivenessPoints is clarified
-// Personality seems to be used to select a different weighting system for type effectiveness points
-static int SelectOpponentMonsUsingPersonality(u16 tournamentTrainerId, bool8 allowRandom)
+static int SelectOpponentMons_Good(u16 tournamentTrainerId, bool8 allowRandom)
 {
-    int i, moveId, playerMonId;
+    int i, moveIndex, playerMonId;
     int partyMovePoints[FRONTIER_PARTY_SIZE];
 
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
         partyMovePoints[i] = 0;
-        for (moveId = 0; moveId < MAX_MON_MOVES; moveId++)
+        for (moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
         {
             for (playerMonId = 0; playerMonId < FRONTIER_PARTY_SIZE; playerMonId++)
             {
                 if (DOME_TRAINERS[tournamentTrainerId].trainerId == TRAINER_FRONTIER_BRAIN)
                 {
-                    partyMovePoints[i] += GetTypeEffectivenessPoints(GetFrontierBrainMonMove(i, moveId),
-                                            GetMonData(&gPlayerParty[playerMonId], MON_DATA_SPECIES, NULL), MON_DATA_PERSONALITY);
+                    partyMovePoints[i] += GetTypeEffectivenessPoints(GetFrontierBrainMonMove(i, moveIndex),
+                                            GetMonData(&gParties[B_TRAINER_PLAYER][playerMonId], MON_DATA_SPECIES), EFFECTIVENESS_MODE_GOOD);
                 }
                 else
                 {
-                    partyMovePoints[i] += GetTypeEffectivenessPoints(gFacilityTrainerMons[DOME_MONS[tournamentTrainerId][i]].moves[moveId],
-                                            GetMonData(&gPlayerParty[playerMonId], MON_DATA_SPECIES, NULL), MON_DATA_PERSONALITY);
+                    partyMovePoints[i] += GetTypeEffectivenessPoints(gFacilityTrainerMons[DOME_MONS[tournamentTrainerId][i]].moves[moveIndex],
+                                            GetMonData(&gParties[B_TRAINER_PLAYER][playerMonId], MON_DATA_SPECIES), EFFECTIVENESS_MODE_GOOD);
                 }
             }
         }
@@ -2674,28 +2284,28 @@ static int SelectOpponentMonsUsingPersonality(u16 tournamentTrainerId, bool8 all
     return SelectOpponentMonsFromParty(partyMovePoints, allowRandom);
 }
 
-// See above function, identical but uses MON_DATA_OT_ID
-static int SelectOpponentMonsUsingOtId(u16 tournamentTrainerId, bool8 allowRandom)
+// Identical to function above, but uses EFFECTIVENESS_MODE_BAD
+static int SelectOpponentMons_Bad(u16 tournamentTrainerId, bool8 allowRandom)
 {
-    int i, moveId, playerMonId;
+    int i, moveIndex, playerMonId;
     int partyMovePoints[FRONTIER_PARTY_SIZE];
 
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
         partyMovePoints[i] = 0;
-        for (moveId = 0; moveId < MAX_MON_MOVES; moveId++)
+        for (moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
         {
             for (playerMonId = 0; playerMonId < FRONTIER_PARTY_SIZE; playerMonId++)
             {
                 if (DOME_TRAINERS[tournamentTrainerId].trainerId == TRAINER_FRONTIER_BRAIN)
                 {
-                    partyMovePoints[i] += GetTypeEffectivenessPoints(GetFrontierBrainMonMove(i, moveId),
-                                            GetMonData(&gPlayerParty[playerMonId], MON_DATA_SPECIES, NULL), MON_DATA_OT_ID);
+                    partyMovePoints[i] += GetTypeEffectivenessPoints(GetFrontierBrainMonMove(i, moveIndex),
+                                            GetMonData(&gParties[B_TRAINER_PLAYER][playerMonId], MON_DATA_SPECIES), EFFECTIVENESS_MODE_BAD);
                 }
                 else
                 {
-                    partyMovePoints[i] += GetTypeEffectivenessPoints(gFacilityTrainerMons[DOME_MONS[tournamentTrainerId][i]].moves[moveId],
-                                            GetMonData(&gPlayerParty[playerMonId], MON_DATA_SPECIES, NULL), MON_DATA_OT_ID);
+                    partyMovePoints[i] += GetTypeEffectivenessPoints(gFacilityTrainerMons[DOME_MONS[tournamentTrainerId][i]].moves[moveIndex],
+                                            GetMonData(&gParties[B_TRAINER_PLAYER][playerMonId], MON_DATA_SPECIES), EFFECTIVENESS_MODE_BAD);
                 }
             }
         }
@@ -2722,9 +2332,9 @@ static int SelectOpponentMonsFromParty(int *partyMovePoints, bool8 allowRandom)
             while (i != DOME_BATTLE_PARTY_SIZE)
             {
                 u32 rand = Random() & FRONTIER_PARTY_SIZE;
-                if (rand != FRONTIER_PARTY_SIZE && !(selectedMonBits & gBitTable[rand]))
+                if (rand != FRONTIER_PARTY_SIZE && !(selectedMonBits & (1u << rand)))
                 {
-                    selectedMonBits |= gBitTable[rand];
+                    selectedMonBits |= 1u << rand;
                     i++;
                 }
             }
@@ -2754,7 +2364,7 @@ static int SelectOpponentMonsFromParty(int *partyMovePoints, bool8 allowRandom)
 
         for (i = 0; i < DOME_BATTLE_PARTY_SIZE; i++)
         {
-            selectedMonBits |= gBitTable[partyPositions[i]];
+            selectedMonBits |= 1u << partyPositions[i];
         }
     }
 
@@ -2768,24 +2378,31 @@ static int SelectOpponentMonsFromParty(int *partyMovePoints, bool8 allowRandom)
 #define TYPE_x2     40
 #define TYPE_x4     80
 
-// arg2 is either 2, a personality, or an OTID
-static int GetTypeEffectivenessPoints(int move, int targetSpecies, int arg2)
+static int GetTypeEffectivenessPoints(enum Move move, enum Species targetSpecies, int mode)
 {
-    int defType1, defType2, defAbility, moveType;
-    int i = 0;
+    enum Type defType1, defType2, moveType;
     int typePower = TYPE_x1;
+    enum Ability defAbility;
 
-    if (move == MOVE_NONE || move == 0xFFFF || gBattleMoves[move].power == 0)
+    if (move == MOVE_NONE || move == MOVE_UNAVAILABLE || IsBattleMoveStatus(move))
         return 0;
 
-    defType1 = gBaseStats[targetSpecies].type1;
-    defType2 = gBaseStats[targetSpecies].type2;
-    defAbility = gBaseStats[targetSpecies].abilities[0];
-    moveType = gBattleMoves[move].type;
+    defType1 = GetSpeciesType(targetSpecies, 0);
+    defType2 = GetSpeciesType(targetSpecies, 1);
+    defAbility = GetSpeciesAbility(targetSpecies, 0);
+    moveType = GetMoveType(move);
 
-    if (defAbility == ABILITY_LEVITATE && moveType == TYPE_GROUND)
+    if ((defAbility == ABILITY_LEVITATE || defAbility == ABILITY_EELEVATE) && moveType == TYPE_GROUND)
     {
-        typePower = TYPE_x0;
+        // They likely meant to return here, as 8 is the number of points normally used in this mode for moves with no effect.
+        // Because there's no return the value instead gets interpreted by the switch, and the number of points becomes 0.
+        if (mode == EFFECTIVENESS_MODE_BAD)
+        {
+            typePower = 8;
+        #ifdef BUGFIX
+            return typePower;
+        #endif
+        }
     }
     else
     {
@@ -2796,21 +2413,19 @@ static int GetTypeEffectivenessPoints(int move, int targetSpecies, int arg2)
         if (defType2 != defType1)
             typePower = (typeEffectiveness2 * typePower) / 10;
 
+        if (defAbility == ABILITY_WONDER_GUARD && typeEffectiveness1 != TYPE_x1 && typeEffectiveness2 != TYPE_x1)
+            typePower = 0;
     }
 
-    // Wonder Guard checks the combined matchup. A neutral result produced by
-    // one weakness and one resistance is still blocked.
-    if (defAbility == ABILITY_WONDER_GUARD && typePower <= TYPE_x1)
-        typePower = TYPE_x0;
-
-    switch (arg2)
+    switch (mode)
     {
-    case 0:
+    case EFFECTIVENESS_MODE_GOOD:
+        // Weights moves that more effective.
         switch (typePower)
         {
-        case TYPE_x0_50:
-        case TYPE_x0_25:
         case TYPE_x0:
+        case TYPE_x0_25:
+        case TYPE_x0_50:
         default:
             typePower = 0;
             break;
@@ -2825,21 +2440,23 @@ static int GetTypeEffectivenessPoints(int move, int targetSpecies, int arg2)
             break;
         }
         break;
-    case 1:
+    case EFFECTIVENESS_MODE_BAD:
+        // Weights moves that are less effective.
+        // Odd that there's no limit on this being used, even the Frontier Brain could end up using this.
         switch (typePower)
         {
-        default:
-        case TYPE_x1:
-            typePower = 0;
+        case TYPE_x0:
+            typePower = 8;
             break;
         case TYPE_x0_25:
             typePower = 4;
             break;
-        case TYPE_x0:
-            typePower = 8;
-            break;
         case TYPE_x0_50:
             typePower = 2;
+            break;
+        default:
+        case TYPE_x1:
+            typePower = 0;
             break;
         case TYPE_x2:
             typePower = -2;
@@ -2849,7 +2466,9 @@ static int GetTypeEffectivenessPoints(int move, int targetSpecies, int arg2)
             break;
         }
         break;
-    case 2:
+    case EFFECTIVENESS_MODE_AI_VS_AI:
+        // Used as part of calculating the winner in a battle between two AIs.
+        // Weights moves that are more effective much more strongly in both directions.
         switch (typePower)
         {
         case TYPE_x0:
@@ -2909,17 +2528,12 @@ static int TournamentIdOfOpponent(int roundId, int trainerId)
 {
     int i, j, opponentMax;
 
-    if (roundId < DOME_ROUND1 || roundId > DOME_FINAL)
-        return 0xFF;
-
     // Get trainer's tournament id
     for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
     {
         if (DOME_TRAINERS[i].trainerId == trainerId)
             break;
     }
-    if (i == DOME_TOURNAMENT_TRAINERS_COUNT)
-        return 0xFF;
 
     // Get trainer's opponent's tournament id
     if (roundId != DOME_ROUND1)
@@ -2952,35 +2566,32 @@ static int TournamentIdOfOpponent(int roundId, int trainerId)
 
 static void SetDomeOpponentId(void)
 {
-    gTrainerBattleOpponent_A = TrainerIdOfPlayerOpponent();
+    TRAINER_BATTLE_PARAM.opponentA = TrainerIdOfPlayerOpponent();
 }
 
+// While not an issue in-game, this will overflow if called after the player's opponent for the current round has been eliminated
 static u16 TrainerIdOfPlayerOpponent(void)
 {
-    u16 tournamentId = TournamentIdOfOpponent(gSaveBlock2Ptr->frontier.curChallengeBattleNum, TRAINER_PLAYER);
-
-    if (tournamentId >= DOME_TOURNAMENT_TRAINERS_COUNT)
-        return TRAINER_NONE;
-    return DOME_TRAINERS[tournamentId].trainerId;
+    return DOME_TRAINERS[TournamentIdOfOpponent(gSaveBlock2Ptr->frontier.curChallengeBattleNum, TRAINER_PLAYER)].trainerId;
 }
 
 static void SetDomeOpponentGraphicsId(void)
 {
-    SetBattleFacilityTrainerGfxId(gTrainerBattleOpponent_A, 0);
+    SetBattleFacilityTrainerGfxId(TRAINER_BATTLE_PARAM.opponentA, 0);
 }
 
 static void SaveDomeChallenge(void)
 {
     ClearEnemyPartyAfterChallenge();
     gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
-    VarSet(VAR_TEMP_0, 0);
+    VarSet(VAR_TEMP_CHALLENGE_STATUS, 0);
     gSaveBlock2Ptr->frontier.challengePaused = TRUE;
     SaveGameFrontier();
 }
 
 static void IncrementDomeStreaks(void)
 {
-    u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
 
     if (gSaveBlock2Ptr->frontier.domeWinStreaks[battleMode][lvlMode] < 999)
@@ -2995,18 +2606,9 @@ static void IncrementDomeStreaks(void)
 // For showing the opponent info card of the upcoming trainer
 static void ShowDomeOpponentInfo(void)
 {
-    u8 taskId;
-    u16 tournamentId = TournamentIdOfOpponent(gSaveBlock2Ptr->frontier.curChallengeBattleNum, TRAINER_PLAYER);
-
-    if (tournamentId >= DOME_TOURNAMENT_TRAINERS_COUNT)
-    {
-        SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
-        return;
-    }
-
-    taskId = CreateTask(Task_ShowTourneyInfoCard, 0);
+    u8 taskId = CreateTask(Task_ShowTourneyInfoCard, 0);
     gTasks[taskId].tState = 0;
-    gTasks[taskId].tTournamentId = tournamentId;
+    gTasks[taskId].tTournamentId = TrainerIdToTournamentId(TrainerIdOfPlayerOpponent());
     gTasks[taskId].tMode = INFOCARD_NEXT_OPPONENT;
     gTasks[taskId].tPrevTaskId = 0;
 
@@ -3067,12 +2669,12 @@ static void Task_ShowTourneyInfoCard(u8 taskId)
         DecompressAndLoadBgGfxUsingHeap(2, gDomeTourneyInfoCard_Tilemap, 0x2000, 0, 1);
         DecompressAndLoadBgGfxUsingHeap(3, gDomeTourneyInfoCardBg_Tilemap, 0x800, 0, 1);
         LoadCompressedSpriteSheet(sTourneyTreeButtonsSpriteSheet);
-        LoadCompressedPalette(gDomeTourneyTree_Pal, 0, 0x200);
-        LoadCompressedPalette(gDomeTourneyTreeButtons_Pal, 0x100, 0x200);
-        LoadCompressedPalette(gBattleWindowTextPalette, 0xF0, 0x20);
+        LoadPalette(gDomeTourneyTree_Pal, BG_PLTT_OFFSET, BG_PLTT_SIZE);
+        LoadPalette(gDomeTourneyTreeButtons_Pal, OBJ_PLTT_OFFSET, OBJ_PLTT_SIZE);
+        LoadPalette(gBattleWindowTextPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         if (mode == INFOCARD_MATCH)
-            LoadCompressedPalette(gDomeTourneyMatchCardBg_Pal, 0x50, 0x20); // Changes the moving info card bg to orange when in match card mode
-        CpuFill32(0, gPlttBufferFaded, 0x400);
+            LoadPalette(gDomeTourneyMatchCardBg_Pal, BG_PLTT_ID(5), PLTT_SIZE_4BPP); // Changes the moving info card bg to orange when in match card mode
+        CpuFill32(0, gPlttBufferFaded, PLTT_SIZE);
         ShowBg(0);
         ShowBg(1);
         ShowBg(2);
@@ -3134,7 +2736,7 @@ static void Task_ShowTourneyInfoCard(u8 taskId)
 // Note: Card scrolling up means the current card goes down and another one appears from top.
 // The same is true for scrolling left.
 // That means that the sprite needs to move with the moving card in the opposite scrolling direction.
-static void SpriteCb_TrainerIconCardScrollUp(struct Sprite *sprite)
+static void SpriteCB_TrainerIconCardScrollUp(struct Sprite *sprite)
 {
     sprite->y += 4;
     if (sprite->data[0] != 0)
@@ -3154,7 +2756,7 @@ static void SpriteCb_TrainerIconCardScrollUp(struct Sprite *sprite)
     }
 }
 
-static void SpriteCb_TrainerIconCardScrollDown(struct Sprite *sprite)
+static void SpriteCB_TrainerIconCardScrollDown(struct Sprite *sprite)
 {
     sprite->y -= 4;
     if (sprite->data[0] != 0)
@@ -3174,7 +2776,7 @@ static void SpriteCb_TrainerIconCardScrollDown(struct Sprite *sprite)
     }
 }
 
-static void SpriteCb_TrainerIconCardScrollLeft(struct Sprite *sprite)
+static void SpriteCB_TrainerIconCardScrollLeft(struct Sprite *sprite)
 {
     sprite->x += 4;
     if (sprite->data[0] != 0)
@@ -3194,7 +2796,7 @@ static void SpriteCb_TrainerIconCardScrollLeft(struct Sprite *sprite)
     }
 }
 
-static void SpriteCb_TrainerIconCardScrollRight(struct Sprite *sprite)
+static void SpriteCB_TrainerIconCardScrollRight(struct Sprite *sprite)
 {
     sprite->x -= 4;
     if (sprite->data[0] != 0)
@@ -3216,13 +2818,13 @@ static void SpriteCb_TrainerIconCardScrollRight(struct Sprite *sprite)
 
 #define sMonIconStill data[3]
 
-static void SpriteCb_MonIcon(struct Sprite *sprite)
+static void SpriteCB_MonIconDomeInfo(struct Sprite *sprite)
 {
     if (!sprite->sMonIconStill)
         UpdateMonIconFrame(sprite);
 }
 
-static void SpriteCb_MonIconCardScrollUp(struct Sprite *sprite)
+static void SpriteCB_MonIconCardScrollUp(struct Sprite *sprite)
 {
     if (!sprite->sMonIconStill)
         UpdateMonIconFrame(sprite);
@@ -3232,7 +2834,7 @@ static void SpriteCb_MonIconCardScrollUp(struct Sprite *sprite)
         if (sprite->y >= -16)
             sprite->invisible = FALSE;
         if (++sprite->data[1] == 40)
-            sprite->callback = SpriteCb_MonIcon;
+            sprite->callback = SpriteCB_MonIconDomeInfo;
     }
     else
     {
@@ -3244,7 +2846,7 @@ static void SpriteCb_MonIconCardScrollUp(struct Sprite *sprite)
     }
 }
 
-static void SpriteCb_MonIconCardScrollDown(struct Sprite *sprite)
+static void SpriteCB_MonIconCardScrollDown(struct Sprite *sprite)
 {
     if (!sprite->sMonIconStill)
         UpdateMonIconFrame(sprite);
@@ -3254,7 +2856,7 @@ static void SpriteCb_MonIconCardScrollDown(struct Sprite *sprite)
         if (sprite->y <= 176)
             sprite->invisible = FALSE;
         if (++sprite->data[1] == 40)
-            sprite->callback = SpriteCb_MonIcon;
+            sprite->callback = SpriteCB_MonIconDomeInfo;
     }
     else
     {
@@ -3266,7 +2868,7 @@ static void SpriteCb_MonIconCardScrollDown(struct Sprite *sprite)
     }
 }
 
-static void SpriteCb_MonIconCardScrollLeft(struct Sprite *sprite)
+static void SpriteCB_MonIconCardScrollLeft(struct Sprite *sprite)
 {
     if (!sprite->sMonIconStill)
         UpdateMonIconFrame(sprite);
@@ -3276,7 +2878,7 @@ static void SpriteCb_MonIconCardScrollLeft(struct Sprite *sprite)
         if (sprite->x >= -16)
             sprite->invisible = FALSE;
         if (++sprite->data[1] == 64)
-            sprite->callback = SpriteCb_MonIcon;
+            sprite->callback = SpriteCB_MonIconDomeInfo;
     }
     else
     {
@@ -3288,7 +2890,7 @@ static void SpriteCb_MonIconCardScrollLeft(struct Sprite *sprite)
     }
 }
 
-static void SpriteCb_MonIconCardScrollRight(struct Sprite *sprite)
+static void SpriteCB_MonIconCardScrollRight(struct Sprite *sprite)
 {
     if (!sprite->sMonIconStill)
         UpdateMonIconFrame(sprite);
@@ -3298,7 +2900,7 @@ static void SpriteCb_MonIconCardScrollRight(struct Sprite *sprite)
         if (sprite->x <= DISPLAY_WIDTH + 16)
             sprite->invisible = FALSE;
         if (++sprite->data[1] == 64)
-            sprite->callback = SpriteCb_MonIcon;
+            sprite->callback = SpriteCB_MonIconDomeInfo;
     }
     else
     {
@@ -3310,7 +2912,7 @@ static void SpriteCb_MonIconCardScrollRight(struct Sprite *sprite)
     }
 }
 
-static void SpriteCb_HorizontalScrollArrow(struct Sprite *sprite)
+static void SpriteCB_HorizontalScrollArrow(struct Sprite *sprite)
 {
     int taskId1 = sprite->data[0];
     int arrId = gTasks[gTasks[taskId1].data[4]].data[1];
@@ -3379,7 +2981,7 @@ static void SpriteCb_HorizontalScrollArrow(struct Sprite *sprite)
     }
 }
 
-static void SpriteCb_VerticalScrollArrow(struct Sprite *sprite)
+static void SpriteCB_VerticalScrollArrow(struct Sprite *sprite)
 {
     int taskId1 = sprite->data[0];
 
@@ -3456,13 +3058,13 @@ static void Task_HandleInfoCardInput(u8 taskId)
         case MATCHCARD_INPUT_UP ... MATCHCARD_INPUT_RIGHT:
             gTasks[taskId].data[5] = i;
             if (gTasks[taskId].tUsingAlternateSlot)
-                windowId = 9;
+                windowId = NUM_INFO_CARD_WINDOWS;
             else
                 windowId = 0;
 
-            for (i = windowId; i < windowId + 9; i++)
+            for (i = windowId; i < windowId + NUM_INFO_CARD_WINDOWS; i++)
             {
-                CopyWindowToVram(i, 2);
+                CopyWindowToVram(i, COPYWIN_GFX);
                 FillWindowPixelBuffer(i, PIXEL_FILL(0));
             }
             gTasks[taskId].tState = STATE_REACT_INPUT;
@@ -3545,7 +3147,7 @@ static void Task_HandleInfoCardInput(u8 taskId)
                 {
                     if (sInfoCard->spriteIds[i] != SPRITE_NONE)
                     {
-                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCb_TrainerIconCardScrollUp;
+                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCB_TrainerIconCardScrollUp;
                         gSprites[sInfoCard->spriteIds[i]].data[0] = gTasks[taskId].tUsingAlternateSlot ^ 1;
                         gSprites[sInfoCard->spriteIds[i]].data[1] = 0;
                         gSprites[sInfoCard->spriteIds[i]].data[2] = i;
@@ -3556,7 +3158,7 @@ static void Task_HandleInfoCardInput(u8 taskId)
                 {
                     if (sInfoCard->spriteIds[i] != SPRITE_NONE)
                     {
-                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCb_MonIconCardScrollUp;
+                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCB_MonIconCardScrollUp;
                         gSprites[sInfoCard->spriteIds[i]].data[0] = gTasks[taskId].tUsingAlternateSlot ^ 1;
                         gSprites[sInfoCard->spriteIds[i]].data[1] = 0;
                         gSprites[sInfoCard->spriteIds[i]].data[2] = i;
@@ -3569,7 +3171,7 @@ static void Task_HandleInfoCardInput(u8 taskId)
                 {
                     if (sInfoCard->spriteIds[i] != SPRITE_NONE)
                     {
-                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCb_TrainerIconCardScrollUp;
+                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCB_TrainerIconCardScrollUp;
                         gSprites[sInfoCard->spriteIds[i]].data[0] = gTasks[taskId].tUsingAlternateSlot;
                         gSprites[sInfoCard->spriteIds[i]].data[1] = 0;
                         gSprites[sInfoCard->spriteIds[i]].data[2] = i;
@@ -3580,7 +3182,7 @@ static void Task_HandleInfoCardInput(u8 taskId)
                 {
                     if (sInfoCard->spriteIds[i] != SPRITE_NONE)
                     {
-                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCb_MonIconCardScrollUp;
+                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCB_MonIconCardScrollUp;
                         gSprites[sInfoCard->spriteIds[i]].data[0] = gTasks[taskId].tUsingAlternateSlot;
                         gSprites[sInfoCard->spriteIds[i]].data[1] = 0;
                         gSprites[sInfoCard->spriteIds[i]].data[2] = i;
@@ -3661,7 +3263,7 @@ static void Task_HandleInfoCardInput(u8 taskId)
                 {
                     if (sInfoCard->spriteIds[i] != SPRITE_NONE)
                     {
-                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCb_TrainerIconCardScrollDown;
+                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCB_TrainerIconCardScrollDown;
                         gSprites[sInfoCard->spriteIds[i]].data[0] = gTasks[taskId].tUsingAlternateSlot ^ 1;
                         gSprites[sInfoCard->spriteIds[i]].data[1] = 0;
                         gSprites[sInfoCard->spriteIds[i]].data[2] = i;
@@ -3672,7 +3274,7 @@ static void Task_HandleInfoCardInput(u8 taskId)
                 {
                     if (sInfoCard->spriteIds[i] != SPRITE_NONE)
                     {
-                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCb_MonIconCardScrollDown;
+                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCB_MonIconCardScrollDown;
                         gSprites[sInfoCard->spriteIds[i]].data[0] = gTasks[taskId].tUsingAlternateSlot ^ 1;
                         gSprites[sInfoCard->spriteIds[i]].data[1] = 0;
                         gSprites[sInfoCard->spriteIds[i]].data[2] = i;
@@ -3685,7 +3287,7 @@ static void Task_HandleInfoCardInput(u8 taskId)
                 {
                     if (sInfoCard->spriteIds[i] != SPRITE_NONE)
                     {
-                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCb_TrainerIconCardScrollDown;
+                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCB_TrainerIconCardScrollDown;
                         gSprites[sInfoCard->spriteIds[i]].data[0] = gTasks[taskId].tUsingAlternateSlot;
                         gSprites[sInfoCard->spriteIds[i]].data[1] = 0;
                         gSprites[sInfoCard->spriteIds[i]].data[2] = i;
@@ -3696,7 +3298,7 @@ static void Task_HandleInfoCardInput(u8 taskId)
                 {
                     if (sInfoCard->spriteIds[i] != SPRITE_NONE)
                     {
-                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCb_MonIconCardScrollDown;
+                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCB_MonIconCardScrollDown;
                         gSprites[sInfoCard->spriteIds[i]].data[0] = gTasks[taskId].tUsingAlternateSlot;
                         gSprites[sInfoCard->spriteIds[i]].data[1] = 0;
                         gSprites[sInfoCard->spriteIds[i]].data[2] = i;
@@ -3744,7 +3346,7 @@ static void Task_HandleInfoCardInput(u8 taskId)
                 {
                     if (sInfoCard->spriteIds[i] != SPRITE_NONE)
                     {
-                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCb_TrainerIconCardScrollLeft;
+                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCB_TrainerIconCardScrollLeft;
                         gSprites[sInfoCard->spriteIds[i]].data[0] = gTasks[taskId].tUsingAlternateSlot ^ 1;
                         gSprites[sInfoCard->spriteIds[i]].data[1] = 0;
                         gSprites[sInfoCard->spriteIds[i]].data[2] = i;
@@ -3755,7 +3357,7 @@ static void Task_HandleInfoCardInput(u8 taskId)
                 {
                     if (sInfoCard->spriteIds[i] != SPRITE_NONE)
                     {
-                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCb_MonIconCardScrollLeft;
+                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCB_MonIconCardScrollLeft;
                         gSprites[sInfoCard->spriteIds[i]].data[0] = gTasks[taskId].tUsingAlternateSlot ^ 1;
                         gSprites[sInfoCard->spriteIds[i]].data[1] = 0;
                         gSprites[sInfoCard->spriteIds[i]].data[2] = i;
@@ -3768,7 +3370,7 @@ static void Task_HandleInfoCardInput(u8 taskId)
                 {
                     if (sInfoCard->spriteIds[i] != SPRITE_NONE)
                     {
-                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCb_TrainerIconCardScrollLeft;
+                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCB_TrainerIconCardScrollLeft;
                         gSprites[sInfoCard->spriteIds[i]].data[0] = gTasks[taskId].tUsingAlternateSlot;
                         gSprites[sInfoCard->spriteIds[i]].data[1] = 0;
                         gSprites[sInfoCard->spriteIds[i]].data[2] = i;
@@ -3779,7 +3381,7 @@ static void Task_HandleInfoCardInput(u8 taskId)
                 {
                     if (sInfoCard->spriteIds[i] != SPRITE_NONE)
                     {
-                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCb_MonIconCardScrollLeft;
+                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCB_MonIconCardScrollLeft;
                         gSprites[sInfoCard->spriteIds[i]].data[0] = gTasks[taskId].tUsingAlternateSlot;
                         gSprites[sInfoCard->spriteIds[i]].data[1] = 0;
                         gSprites[sInfoCard->spriteIds[i]].data[2] = i;
@@ -3827,7 +3429,7 @@ static void Task_HandleInfoCardInput(u8 taskId)
                 {
                     if (sInfoCard->spriteIds[i] != SPRITE_NONE)
                     {
-                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCb_TrainerIconCardScrollLeft;
+                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCB_TrainerIconCardScrollLeft;
                         gSprites[sInfoCard->spriteIds[i]].data[0] = gTasks[taskId].tUsingAlternateSlot ^ 1;
                         gSprites[sInfoCard->spriteIds[i]].data[1] = 0;
                         gSprites[sInfoCard->spriteIds[i]].data[2] = i;
@@ -3838,7 +3440,7 @@ static void Task_HandleInfoCardInput(u8 taskId)
                 {
                     if (sInfoCard->spriteIds[i] != SPRITE_NONE)
                     {
-                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCb_MonIconCardScrollLeft;
+                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCB_MonIconCardScrollLeft;
                         gSprites[sInfoCard->spriteIds[i]].data[0] = gTasks[taskId].tUsingAlternateSlot ^ 1;
                         gSprites[sInfoCard->spriteIds[i]].data[1] = 0;
                         gSprites[sInfoCard->spriteIds[i]].data[2] = i;
@@ -3851,7 +3453,7 @@ static void Task_HandleInfoCardInput(u8 taskId)
                 {
                     if (sInfoCard->spriteIds[i] != SPRITE_NONE)
                     {
-                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCb_TrainerIconCardScrollLeft;
+                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCB_TrainerIconCardScrollLeft;
                         gSprites[sInfoCard->spriteIds[i]].data[0] = gTasks[taskId].tUsingAlternateSlot;
                         gSprites[sInfoCard->spriteIds[i]].data[1] = 0;
                         gSprites[sInfoCard->spriteIds[i]].data[2] = i;
@@ -3862,7 +3464,7 @@ static void Task_HandleInfoCardInput(u8 taskId)
                 {
                     if (sInfoCard->spriteIds[i] != SPRITE_NONE)
                     {
-                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCb_MonIconCardScrollLeft;
+                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCB_MonIconCardScrollLeft;
                         gSprites[sInfoCard->spriteIds[i]].data[0] = gTasks[taskId].tUsingAlternateSlot;
                         gSprites[sInfoCard->spriteIds[i]].data[1] = 0;
                         gSprites[sInfoCard->spriteIds[i]].data[2] = i;
@@ -3908,7 +3510,7 @@ static void Task_HandleInfoCardInput(u8 taskId)
                 {
                     if (sInfoCard->spriteIds[i] != SPRITE_NONE)
                     {
-                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCb_TrainerIconCardScrollRight;
+                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCB_TrainerIconCardScrollRight;
                         gSprites[sInfoCard->spriteIds[i]].data[0] = gTasks[taskId].tUsingAlternateSlot ^ 1;
                         gSprites[sInfoCard->spriteIds[i]].data[1] = 0;
                         gSprites[sInfoCard->spriteIds[i]].data[2] = i;
@@ -3919,7 +3521,7 @@ static void Task_HandleInfoCardInput(u8 taskId)
                 {
                     if (sInfoCard->spriteIds[i] != SPRITE_NONE)
                     {
-                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCb_MonIconCardScrollRight;
+                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCB_MonIconCardScrollRight;
                         gSprites[sInfoCard->spriteIds[i]].data[0] = gTasks[taskId].tUsingAlternateSlot ^ 1;
                         gSprites[sInfoCard->spriteIds[i]].data[1] = 0;
                         gSprites[sInfoCard->spriteIds[i]].data[2] = i;
@@ -3932,7 +3534,7 @@ static void Task_HandleInfoCardInput(u8 taskId)
                 {
                     if (sInfoCard->spriteIds[i] != SPRITE_NONE)
                     {
-                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCb_TrainerIconCardScrollRight;
+                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCB_TrainerIconCardScrollRight;
                         gSprites[sInfoCard->spriteIds[i]].data[0] = gTasks[taskId].tUsingAlternateSlot;
                         gSprites[sInfoCard->spriteIds[i]].data[1] = 0;
                         gSprites[sInfoCard->spriteIds[i]].data[2] = i;
@@ -3943,7 +3545,7 @@ static void Task_HandleInfoCardInput(u8 taskId)
                 {
                     if (sInfoCard->spriteIds[i] != SPRITE_NONE)
                     {
-                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCb_MonIconCardScrollRight;
+                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCB_MonIconCardScrollRight;
                         gSprites[sInfoCard->spriteIds[i]].data[0] = gTasks[taskId].tUsingAlternateSlot;
                         gSprites[sInfoCard->spriteIds[i]].data[1] = 0;
                         gSprites[sInfoCard->spriteIds[i]].data[2] = i;
@@ -3991,7 +3593,7 @@ static void Task_HandleInfoCardInput(u8 taskId)
                 {
                     if (sInfoCard->spriteIds[i] != SPRITE_NONE)
                     {
-                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCb_TrainerIconCardScrollRight;
+                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCB_TrainerIconCardScrollRight;
                         gSprites[sInfoCard->spriteIds[i]].data[0] = gTasks[taskId].tUsingAlternateSlot ^ 1;
                         gSprites[sInfoCard->spriteIds[i]].data[1] = 0;
                         gSprites[sInfoCard->spriteIds[i]].data[2] = i;
@@ -4002,7 +3604,7 @@ static void Task_HandleInfoCardInput(u8 taskId)
                 {
                     if (sInfoCard->spriteIds[i] != SPRITE_NONE)
                     {
-                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCb_MonIconCardScrollRight;
+                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCB_MonIconCardScrollRight;
                         gSprites[sInfoCard->spriteIds[i]].data[0] = gTasks[taskId].tUsingAlternateSlot ^ 1;
                         gSprites[sInfoCard->spriteIds[i]].data[1] = 0;
                         gSprites[sInfoCard->spriteIds[i]].data[2] = i;
@@ -4015,7 +3617,7 @@ static void Task_HandleInfoCardInput(u8 taskId)
                 {
                     if (sInfoCard->spriteIds[i] != SPRITE_NONE)
                     {
-                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCb_TrainerIconCardScrollRight;
+                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCB_TrainerIconCardScrollRight;
                         gSprites[sInfoCard->spriteIds[i]].data[0] = gTasks[taskId].tUsingAlternateSlot;
                         gSprites[sInfoCard->spriteIds[i]].data[1] = 0;
                         gSprites[sInfoCard->spriteIds[i]].data[2] = i;
@@ -4026,7 +3628,7 @@ static void Task_HandleInfoCardInput(u8 taskId)
                 {
                     if (sInfoCard->spriteIds[i] != SPRITE_NONE)
                     {
-                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCb_MonIconCardScrollRight;
+                        gSprites[sInfoCard->spriteIds[i]].callback = SpriteCB_MonIconCardScrollRight;
                         gSprites[sInfoCard->spriteIds[i]].data[0] = gTasks[taskId].tUsingAlternateSlot;
                         gSprites[sInfoCard->spriteIds[i]].data[1] = 0;
                         gSprites[sInfoCard->spriteIds[i]].data[2] = i;
@@ -4162,7 +3764,7 @@ static u8 Task_GetInfoCardInput(u8 taskId)
     if (JOY_NEW(A_BUTTON | B_BUTTON))
         input = INFOCARD_INPUT_AB;
 
-    // Next opponent card cant scroll
+    // Next opponent card can't scroll
     if (gTasks[taskId].data[3] == INFOCARD_NEXT_OPPONENT)
         return input;
 
@@ -4212,7 +3814,7 @@ static u8 Task_GetInfoCardInput(u8 taskId)
         if (input == INFOCARD_INPUT_AB)
         {
             if (sInfoCard->pos != 0)
-                gTasks[taskId2].data[1] = gUnknown_0860D1A0[position / 2][sInfoCard->pos - 1];
+                gTasks[taskId2].data[1] = sTrainerAndRoundToLastMatchCardNum[position / 2][sInfoCard->pos - 1];
             else
                 gTasks[taskId2].data[1] = position;
         }
@@ -4252,9 +3854,9 @@ static u8 Task_GetInfoCardInput(u8 taskId)
         if (input == INFOCARD_INPUT_AB)
         {
             if (sInfoCard->pos == 0) // On left trainer info card
-                gTasks[taskId2].data[1] = gUnknown_0860D1C0[sInfoCard->tournamentIds[0]];
+                gTasks[taskId2].data[1] = sTournamentIdToPairedTrainerIds[sInfoCard->tournamentIds[0]];
             else if (sInfoCard->pos == 2) // On right trainer info card
-                gTasks[taskId2].data[1] = gUnknown_0860D1C0[sInfoCard->tournamentIds[1]];
+                gTasks[taskId2].data[1] = sTournamentIdToPairedTrainerIds[sInfoCard->tournamentIds[1]];
             else // On match info card
                 gTasks[taskId2].data[1] = position;
         }
@@ -4272,56 +3874,193 @@ static u8 Task_GetInfoCardInput(u8 taskId)
 
 #undef tUsingAlternateSlot
 
-static bool8 IsDomeTmHmMove(u16 move)
+static bool32 IsDomeHealingMove(enum Move move)
 {
-    u16 i;
-
-    for (i = 0; i < NUM_TECHNICAL_MACHINES + NUM_HIDDEN_MACHINES; i++)
+    if (IsHealingMove(move))
+        return TRUE;
+    // Check extra effects not considered plain healing by AI
+    switch (GetMoveEffect(move))
     {
-        if (ItemIdToBattleMoveId(ITEM_TM01_FOCUS_PUNCH + i) == move)
-            return TRUE;
+    case EFFECT_INGRAIN:
+    case EFFECT_REFRESH:
+    case EFFECT_AQUA_RING:
+        return TRUE;
+    default:
+        return FALSE;
     }
+}
+static bool32 IsDomeDefensiveMove(enum Move move)
+{
+    switch (GetMoveEffect(move))
+    {
+    case EFFECT_REFLECT_DAMAGE:
+    case EFFECT_LIGHT_SCREEN:
+    case EFFECT_REFLECT:
+    case EFFECT_AURORA_VEIL:
+    case EFFECT_CONVERSION:
+    case EFFECT_PROTECT:
+    case EFFECT_MAT_BLOCK:
+    case EFFECT_ENDURE:
+    case EFFECT_SAFEGUARD:
+    case EFFECT_MAGIC_COAT:
+    case EFFECT_INGRAIN:
+    case EFFECT_AQUA_RING:
+    case EFFECT_SUBSTITUTE:
+        return TRUE;
+    default:
+        break;
+    }
+
+    if (IsStatChangeStatusMove(move, IsAccDownEvasionUpStatChangeMove)
+     || IsStatChangeStatusMove(move, IsDefSpDefStatUpMove))
+        return TRUE;
+
     return FALSE;
 }
 
-#define DOME_MOVE_POINT(point) (1u << (point))
-
-static u32 GetModernDomeMovePoints(u16 move)
+static bool32 IsDomeRiskyMove(enum Move move)
 {
-    const struct BattleMove *moveData = &gBattleMoves[move];
-    u16 effect = moveData->effect;
-    u32 points = 0;
+    switch (GetMoveEffect(move))
+    {
+    // TODO: None of those functions have been updated from gen3
+    case EFFECT_SPITE:
+    case EFFECT_DESTINY_BOND:
+    case EFFECT_PERISH_SONG:
+        return TRUE;
+    default:
+        return IsExplosionMove(move);
+    }
+}
 
-    if (moveData->split != SPLIT_STATUS)
-        points |= DOME_MOVE_POINT(MOVE_POINTS_DMG);
-    if (moveData->accuracy == 0 || moveData->accuracy >= 100)
-        points |= DOME_MOVE_POINT(MOVE_POINTS_ACCURATE);
-    if (moveData->power >= 100)
-        points |= DOME_MOVE_POINT(MOVE_POINTS_POWERFUL);
-    if (moveData->power >= 90)
-        points |= DOME_MOVE_POINT(MOVE_POINTS_STRONG);
-    if (moveData->pp <= 5)
-        points |= DOME_MOVE_POINT(MOVE_POINTS_LOW_PP);
-    if (moveData->secondaryEffectChance != 0 || moveData->flags & FLAG_SHEER_FORCE_BOOST)
-        points |= DOME_MOVE_POINT(MOVE_POINTS_EFFECT);
-    if (IsDomeTmHmMove(move))
-        points |= DOME_MOVE_POINT(MOVE_POINTS_POPULAR);
+static bool32 IsDomeLuckyMove(enum Move move)
+{
+    if (GetMoveAccuracy(move) <= 50 && GetMoveAccuracy(move) != 0)
+        return TRUE;
+    switch (GetMoveEffect(move))
+    {
+    case EFFECT_REFLECT_DAMAGE:
+        if (GetMoveReflectDamage_DamageCategories(move) != (1u << DAMAGE_CATEGORY_PHYSICAL)) // if not Counter
+            return FALSE;
+        // fallthrough
+    case EFFECT_OHKO:
+    case EFFECT_METRONOME:
+    case EFFECT_MIRROR_MOVE:
+    case EFFECT_SKETCH:
+    case EFFECT_SLEEP_TALK:
+    case EFFECT_PRESENT:
+    case EFFECT_ASSIST:
+    case EFFECT_MAGIC_COAT:
+    case EFFECT_REVENGE:
+    case EFFECT_IMPRISON:
+    case EFFECT_SNATCH:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
 
+static bool32 IsDomePopularMove(enum Move move)
+{
+    u8 i;
+    for (i = 0; i < NUM_ALL_MACHINES; i++)
+    {
+        if (GetTMHMMoveId(i + 1) == move)
+            return TRUE;
+    }
+    if (i == NUM_ALL_MACHINES)
+        return FALSE;
+    // Filter in TMs/HMs
+    if (GetMovePower(move) >= 90)
+        return TRUE;
+
+    switch (GetMoveEffect(move))
+    {
+    case EFFECT_PROTECT:
+    case EFFECT_MAT_BLOCK:
+        return TRUE;
+    default:
+        break;
+    }
+
+    return IsStatChangeStatusMove(move, IsAtkSpAtkStatUpMove);
+}
+
+static bool32 IsDomeStatusMove(enum Move move)
+{
+    switch (GetMoveEffect(move))
+    {
+    case EFFECT_CONFUSE:
+    case EFFECT_DISABLE:
+    case EFFECT_LEECH_SEED:
+    case EFFECT_TAUNT:
+    case EFFECT_TORMENT:
+    case EFFECT_ENCORE:
+    case EFFECT_ATTRACT:
+    case EFFECT_NIGHTMARE:
+    case EFFECT_CURSE:
+        return TRUE;
+    default:
+        break;
+    }
+
+    if (GetMoveNonVolatileStatus(move) != MOVE_EFFECT_NONE)
+        return TRUE;
+    if (MoveHasAdditionalEffect(move, MOVE_EFFECT_WRAP))
+        return TRUE;
+
+    return FALSE;
+}
+
+static bool32 IsDomeRareMove(enum Move move)
+{
+    u16 i, j;
+    enum Species species = SPECIES_NONE;
+    for (i = 0; i < NUM_SPECIES; i++)
+    {
+        if (!IsSpeciesEnabled(i))
+            continue;
+        const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(i);
+        for (j = 0; learnset[j].move != LEVEL_UP_MOVE_END; j++)
+        {
+            if (learnset[j].move == move)
+            {
+                species++;
+                break;
+            }
+        }
+        if (species >= NUM_SPECIES / 20) // At least 5% of all mons can learn this move
+            return FALSE;
+    }
+    return TRUE;
+}
+
+static bool32 IsDomeComboMove(enum Move move)
+{
+    enum BattleMoveEffects effect = GetMoveEffect(move);
     switch (effect)
     {
-    case EFFECT_RAIN_DANCE:
-    case EFFECT_SUNNY_DAY:
-    case EFFECT_SANDSTORM:
-    case EFFECT_HAIL:
-    case EFFECT_MISTY_TERRAIN:
-    case EFFECT_GRASSY_TERRAIN:
-    case EFFECT_ELECTRIC_TERRAIN:
-    case EFFECT_PSYCHIC_TERRAIN:
+    // Weather moves
+    case EFFECT_WEATHER:
+    // Terrain moves
+    case EFFECT_TERRAIN:
+    // Moves dependent on weather
+    case EFFECT_SYNTHESIS:
+    case EFFECT_MORNING_SUN:
+    case EFFECT_MOONLIGHT:
+    case EFFECT_SHORE_UP:
+    case EFFECT_SOLAR_BEAM:
+    case EFFECT_GROWTH:
+    case EFFECT_AURORA_VEIL:
     case EFFECT_WEATHER_BALL:
+    // Moves dependent on terrain
+    case EFFECT_GRASSY_GLIDE:
+    case EFFECT_TERRAIN_BOOST:
     case EFFECT_TERRAIN_PULSE:
+    // Stockpile group
     case EFFECT_STOCKPILE:
     case EFFECT_SPIT_UP:
     case EFFECT_SWALLOW:
+    // Entry hazards & cleaners
     case EFFECT_SPIKES:
     case EFFECT_TOXIC_SPIKES:
     case EFFECT_STEALTH_ROCK:
@@ -4329,233 +4068,59 @@ static u32 GetModernDomeMovePoints(u16 move)
     case EFFECT_YAWN:
     case EFFECT_DREAM_EATER:
     case EFFECT_NIGHTMARE:
+    case EFFECT_REST:
     case EFFECT_SLEEP_TALK:
     case EFFECT_SNORE:
+    // Others
     case EFFECT_FOCUS_ENERGY:
     case EFFECT_LOCK_ON:
+    case EFFECT_FLAIL:
     case EFFECT_BATON_PASS:
-        points |= DOME_MOVE_POINT(MOVE_POINTS_COMBO);
-        break;
-    case EFFECT_ATTACK_UP:
-    case EFFECT_DEFENSE_UP:
-    case EFFECT_SPEED_UP:
-    case EFFECT_SPECIAL_ATTACK_UP:
-    case EFFECT_SPECIAL_DEFENSE_UP:
-    case EFFECT_ACCURACY_UP:
-    case EFFECT_EVASION_UP:
-    case EFFECT_SPECIAL_ATTACK_UP_3:
-    case EFFECT_ATTACK_UP_2:
-    case EFFECT_DEFENSE_UP_2:
-    case EFFECT_SPEED_UP_2:
-    case EFFECT_SPECIAL_ATTACK_UP_2:
-    case EFFECT_SPECIAL_DEFENSE_UP_2:
-    case EFFECT_ACCURACY_UP_2:
-    case EFFECT_EVASION_UP_2:
-    case EFFECT_DEFENSE_CURL:
-    case EFFECT_BELLY_DRUM:
-    case EFFECT_PSYCH_UP:
-    case EFFECT_COSMIC_POWER:
-    case EFFECT_BULK_UP:
-    case EFFECT_CALM_MIND:
-    case EFFECT_DRAGON_DANCE:
-    case EFFECT_ATTACK_ACCURACY_UP:
-    case EFFECT_ATTACK_SPATK_UP:
-    case EFFECT_QUIVER_DANCE:
-    case EFFECT_COIL:
-    case EFFECT_SHELL_SMASH:
-    case EFFECT_SHIFT_GEAR:
-    case EFFECT_DEFENSE_UP_3:
-    case EFFECT_GEOMANCY:
-    case EFFECT_NO_RETREAT:
-    case EFFECT_CLANGOROUS_SOUL:
-    case EFFECT_STUFF_CHEEKS:
-    case EFFECT_DECORATE:
-    case EFFECT_COACHING:
-        points |= DOME_MOVE_POINT(MOVE_POINTS_STAT_RAISE);
-        break;
-    case EFFECT_ATTACK_DOWN:
-    case EFFECT_DEFENSE_DOWN:
-    case EFFECT_SPEED_DOWN:
-    case EFFECT_SPECIAL_ATTACK_DOWN:
-    case EFFECT_SPECIAL_DEFENSE_DOWN:
-    case EFFECT_ACCURACY_DOWN:
-    case EFFECT_EVASION_DOWN:
-    case EFFECT_ATTACK_DOWN_2:
-    case EFFECT_DEFENSE_DOWN_2:
-    case EFFECT_SPEED_DOWN_2:
-    case EFFECT_SPECIAL_ATTACK_DOWN_2:
-    case EFFECT_SPECIAL_DEFENSE_DOWN_2:
-    case EFFECT_ACCURACY_DOWN_2:
-    case EFFECT_EVASION_DOWN_2:
-    case EFFECT_CAPTIVATE:
-    case EFFECT_TICKLE:
-    case EFFECT_NOBLE_ROAR:
-    case EFFECT_VENOM_DRENCH:
-    case EFFECT_TOXIC_THREAD:
-    case EFFECT_OCTOLOCK:
-    case EFFECT_PARTING_SHOT:
-        points |= DOME_MOVE_POINT(MOVE_POINTS_STAT_LOWER);
-        break;
-    case EFFECT_RESTORE_HP:
-    case EFFECT_SOFTBOILED:
-    case EFFECT_MORNING_SUN:
-    case EFFECT_SYNTHESIS:
-    case EFFECT_MOONLIGHT:
-    case EFFECT_WISH:
-    case EFFECT_REFRESH:
-    case EFFECT_ROOST:
-    case EFFECT_HEAL_PULSE:
-    case EFFECT_SHORE_UP:
-    case EFFECT_JUNGLE_HEALING:
-    case EFFECT_HIT_ENEMY_HEAL_ALLY:
-        points |= DOME_MOVE_POINT(MOVE_POINTS_HEAL);
-        break;
-    case EFFECT_REST:
-        points |= DOME_MOVE_POINT(MOVE_POINTS_HEAL) | DOME_MOVE_POINT(MOVE_POINTS_COMBO);
-        break;
     case EFFECT_INGRAIN:
     case EFFECT_AQUA_RING:
-        points |= DOME_MOVE_POINT(MOVE_POINTS_HEAL) | DOME_MOVE_POINT(MOVE_POINTS_DEF) | DOME_MOVE_POINT(MOVE_POINTS_COMBO);
-        break;
-    case EFFECT_STRENGTH_SAP:
-        points |= DOME_MOVE_POINT(MOVE_POINTS_HEAL) | DOME_MOVE_POINT(MOVE_POINTS_STAT_LOWER);
-        break;
-    case EFFECT_PROTECT:
-    case EFFECT_ENDURE:
-    case EFFECT_LIGHT_SCREEN:
-    case EFFECT_REFLECT:
-    case EFFECT_AURORA_VEIL:
-    case EFFECT_MAT_BLOCK:
-    case EFFECT_SAFEGUARD:
-    case EFFECT_MIST:
-    case EFFECT_SUBSTITUTE:
-    case EFFECT_MAGIC_COAT:
-        points |= DOME_MOVE_POINT(MOVE_POINTS_DEF);
-        break;
-    case EFFECT_SLEEP:
-    case EFFECT_POISON:
-    case EFFECT_PARALYZE:
-    case EFFECT_TOXIC:
-    case EFFECT_CONFUSE:
-    case EFFECT_DISABLE:
     case EFFECT_LEECH_SEED:
-    case EFFECT_ENCORE:
-    case EFFECT_ATTRACT:
-    case EFFECT_TORMENT:
-    case EFFECT_TAUNT:
-    case EFFECT_WILL_O_WISP:
-    case EFFECT_MEAN_LOOK:
-    case EFFECT_IMPRISON:
-    case EFFECT_TEETER_DANCE:
-    case EFFECT_SWAGGER:
-    case EFFECT_FLATTER:
-        points |= DOME_MOVE_POINT(MOVE_POINTS_STATUS);
-        break;
-    case EFFECT_EXPLOSION:
-    case EFFECT_DESTINY_BOND:
-    case EFFECT_PERISH_SONG:
-    case EFFECT_MEMENTO:
-    case EFFECT_GRUDGE:
-    case EFFECT_FOCUS_PUNCH:
-    case EFFECT_FINAL_GAMBIT:
-    case EFFECT_MIND_BLOWN:
-    case EFFECT_HEALING_WISH:
-        points |= DOME_MOVE_POINT(MOVE_POINTS_RISKY);
-        break;
-    case EFFECT_RECHARGE:
-    case EFFECT_RECOIL_IF_MISS:
-    case EFFECT_RECOIL_25:
-    case EFFECT_RECOIL_33:
-    case EFFECT_RECOIL_33_STATUS:
-    case EFFECT_RECOIL_50:
-    case EFFECT_RECOIL_HP_25:
-        points |= DOME_MOVE_POINT(MOVE_POINTS_RISKY);
-        break;
-    case EFFECT_OHKO:
-        points |= DOME_MOVE_POINT(MOVE_POINTS_RISKY) | DOME_MOVE_POINT(MOVE_POINTS_LUCK);
-        break;
-    case EFFECT_METRONOME:
-    case EFFECT_MIRROR_MOVE:
-    case EFFECT_MIMIC:
-    case EFFECT_SKETCH:
-    case EFFECT_ASSIST:
-    case EFFECT_COPYCAT:
-    case EFFECT_ME_FIRST:
-    case EFFECT_NATURE_POWER:
-        points |= DOME_MOVE_POINT(MOVE_POINTS_RARE) | DOME_MOVE_POINT(MOVE_POINTS_LUCK);
-        break;
-    case EFFECT_TRANSFORM:
-    case EFFECT_ROLE_PLAY:
-    case EFFECT_SKILL_SWAP:
-    case EFFECT_SIMPLE_BEAM:
-    case EFFECT_ENTRAINMENT:
-    case EFFECT_REFLECT_TYPE:
-    case EFFECT_SOAK:
-    case EFFECT_TOPSY_TURVY:
-    case EFFECT_POWER_SWAP:
-    case EFFECT_GUARD_SWAP:
-    case EFFECT_HEART_SWAP:
-    case EFFECT_POWER_SPLIT:
-    case EFFECT_GUARD_SPLIT:
-        points |= DOME_MOVE_POINT(MOVE_POINTS_RARE);
-        break;
+    case EFFECT_ROAR:
+        return TRUE;
     default:
         break;
     }
 
-    if (effect == EFFECT_TWO_TURNS_ATTACK && moveData->accuracy != 0 && moveData->accuracy < 100)
-        points |= DOME_MOVE_POINT(MOVE_POINTS_RISKY);
-    if (!IsDomeTmHmMove(move) && moveData->pp <= 5)
-        points |= DOME_MOVE_POINT(MOVE_POINTS_RARE);
+    // Move flags
+    if (MoveAlwaysHitsInRain(move))
+        return TRUE;
+    else if (MoveAlwaysHitsInHailSnow(move))
+        return TRUE;
 
-    return points;
-}
-
-static void AddDomeMovePoints(s16 *totals, u16 move)
-{
-    u32 modernPoints;
-    u8 i;
-
-    if (move == MOVE_NONE || move >= MOVES_COUNT)
-        return;
-
-    if (move <= MOVE_PSYCHO_BOOST)
+    // Inflicting sleep & related effects
+    switch (GetMoveNonVolatileStatus(move))
     {
-        for (i = 0; i < NUM_MOVE_POINT_TYPES; i++)
-            totals[i] += sBattleStyleMovePoints[move][i];
-        return;
+    case MOVE_EFFECT_SLEEP:
+        return TRUE;
+    default:
+        return FALSE;
     }
 
-    modernPoints = GetModernDomeMovePoints(move);
-    for (i = 0; i < NUM_MOVE_POINT_TYPES; i++)
-    {
-        if (modernPoints & DOME_MOVE_POINT(i))
-            totals[i]++;
-    }
+    return IsStatChangeStatusMove(move, IsAtkSpAtkStatUpMove);
 }
-
-#undef DOME_MOVE_POINT
 
 // allocatedArray below needs to be large enough to hold stat totals for each mon, or totals of each type of move points
-#define ALLOC_ARRAY_SIZE (NUM_STATS * FRONTIER_PARTY_SIZE >= NUM_MOVE_POINT_TYPES ? (NUM_STATS * FRONTIER_PARTY_SIZE) :  NUM_MOVE_POINT_TYPES)
+#define ALLOC_ARRAY_SIZE max(NUM_STATS * FRONTIER_PARTY_SIZE, NUM_MOVE_POINT_TYPES)
 
 static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
 {
     struct TextPrinterTemplate textPrinter;
     int i, j, k;
-    int style;
     int trainerId = 0;
-    u16 move;
     u8 nature = 0;
     int arrId = 0;
-    int windowId = 0;
+    int windowId = WIN_TRAINER_NAME;
     int x = 0, y = 0;
     u8 palSlot = 0;
-    s16 allocatedArray[ALLOC_ARRAY_SIZE] = {0};
+    s16 *allocatedArray = AllocZeroed(sizeof(s16) * ALLOC_ARRAY_SIZE);
     trainerId = DOME_TRAINERS[trainerTourneyId].trainerId;
 
     if (flags & CARD_ALTERNATE_SLOT)
-        arrId = 2 * (FRONTIER_PARTY_SIZE + 1), windowId = 9, palSlot = 2;
+        arrId = 2 * (FRONTIER_PARTY_SIZE + 1), windowId = WIN_TRAINER_NAME + NUM_INFO_CARD_WINDOWS, palSlot = 2;
     if (flags & MOVE_CARD_RIGHT)
         x = DISPLAY_WIDTH + 16;
     if (flags & MOVE_CARD_DOWN)
@@ -4567,11 +4132,11 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
 
     // Create trainer pic sprite
     if (trainerId == TRAINER_PLAYER)
-        sInfoCard->spriteIds[arrId] = CreateTrainerPicSprite(PlayerGenderToFrontTrainerPicId(gSaveBlock2Ptr->playerGender), TRUE, x + 48, y + 64, palSlot + 12, 0xFFFF);
+        sInfoCard->spriteIds[arrId] = CreateTrainerPicSprite(PlayerGenderToFrontTrainerPicId(gSaveBlock2Ptr->playerGender), TRUE, x + 48, y + 64, palSlot + 12, TAG_NONE);
     else if (trainerId == TRAINER_FRONTIER_BRAIN)
-        sInfoCard->spriteIds[arrId] = CreateTrainerPicSprite(GetDomeBrainTrainerPicId(), TRUE, x + 48, y + 64, palSlot + 12, 0xFFFF);
+        sInfoCard->spriteIds[arrId] = CreateTrainerPicSprite(GetFrontierBrainTrainerPicIndex(), TRUE, x + 48, y + 64, palSlot + 12, TAG_NONE);
     else
-        sInfoCard->spriteIds[arrId] = CreateTrainerPicSprite(GetFrontierTrainerFrontSpriteId(trainerId), TRUE, x + 48, y + 64, palSlot + 12, 0xFFFF);
+        sInfoCard->spriteIds[arrId] = CreateTrainerPicSprite(GetFrontierTrainerFrontSpriteId(trainerId), TRUE, x + 48, y + 64, palSlot + 12, TAG_NONE);
 
     if (flags & MOVE_CARD)
         gSprites[sInfoCard->spriteIds[arrId]].invisible = TRUE;
@@ -4582,7 +4147,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
         if (trainerId == TRAINER_PLAYER)
         {
             sInfoCard->spriteIds[2 + i + arrId] = CreateMonIcon(DOME_MONS[trainerTourneyId][i],
-                                                                  SpriteCb_MonIcon,
+                                                                  SpriteCB_MonIconDomeInfo,
                                                                   x | sInfoTrainerMonX[i],
                                                                   y + sInfoTrainerMonY[i],
                                                                   0, 0);
@@ -4591,7 +4156,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
         else if (trainerId == TRAINER_FRONTIER_BRAIN)
         {
             sInfoCard->spriteIds[2 + i + arrId] = CreateMonIcon(DOME_MONS[trainerTourneyId][i],
-                                                                  SpriteCb_MonIcon,
+                                                                  SpriteCB_MonIconDomeInfo,
                                                                   x | sInfoTrainerMonX[i],
                                                                   y + sInfoTrainerMonY[i],
                                                                   0, 0);
@@ -4600,7 +4165,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
         else
         {
             sInfoCard->spriteIds[2 + i + arrId] = CreateMonIcon(gFacilityTrainerMons[DOME_MONS[trainerTourneyId][i]].species,
-                                                                  SpriteCb_MonIcon,
+                                                                  SpriteCB_MonIconDomeInfo,
                                                                   x | sInfoTrainerMonX[i],
                                                                   y + sInfoTrainerMonY[i],
                                                                   0, 0);
@@ -4612,29 +4177,30 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
     }
 
     // Initialize the text printer
-    textPrinter.fontId = 2;
+    textPrinter.type = WINDOW_TEXT_PRINTER;
+    textPrinter.fontId = FONT_SHORT;
     textPrinter.x = 0;
     textPrinter.y = 0;
     textPrinter.currentX = textPrinter.x;
     textPrinter.currentY = textPrinter.y;
     textPrinter.letterSpacing = 2;
     textPrinter.lineSpacing = 0;
-    textPrinter.unk = 0;
-    textPrinter.fgColor = TEXT_DYNAMIC_COLOR_5;
-    textPrinter.bgColor = TEXT_COLOR_TRANSPARENT;
-    textPrinter.shadowColor = TEXT_DYNAMIC_COLOR_4;
+    textPrinter.color.accent = TEXT_COLOR_TRANSPARENT;
+    textPrinter.color.foreground = TEXT_DYNAMIC_COLOR_5;
+    textPrinter.color.background = TEXT_COLOR_TRANSPARENT;
+    textPrinter.color.shadow = TEXT_DYNAMIC_COLOR_4;
 
     // Get class and trainer name
     i = 0;
     if (trainerId == TRAINER_PLAYER)
         j = gFacilityClassToTrainerClass[FACILITY_CLASS_BRENDAN];
     else if (trainerId == TRAINER_FRONTIER_BRAIN)
-        j = GetDomeBrainTrainerClass();
+        j = GetFrontierBrainTrainerClass();
     else
         j = GetFrontierOpponentClass(trainerId);
 
-    for (;gTrainerClassNames[j][i] != EOS; i++)
-        gStringVar1[i] = gTrainerClassNames[j][i];
+    for (;gTrainerClasses[j].name[i] != EOS; i++)
+        gStringVar1[i] = gTrainerClasses[j].name[i];
     gStringVar1[i] = CHAR_SPACE;
     gStringVar1[i + 1] = EOS;
 
@@ -4644,7 +4210,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
     }
     else if (trainerId == TRAINER_FRONTIER_BRAIN)
     {
-        CopyDomeBrainTrainerName(gStringVar2);
+        CopyFrontierBrainTrainerName(gStringVar2);
         StringAppend(gStringVar1, gStringVar2);
     }
     else
@@ -4658,7 +4224,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
     textPrinter.currentChar = gStringVar1;
     textPrinter.windowId = windowId;
     PutWindowTilemap(windowId);
-    CopyWindowToVram(windowId, 3);
+    CopyWindowToVram(windowId, COPYWIN_FULL);
     AddTextPrinter(&textPrinter, 0, NULL);
     textPrinter.letterSpacing = 0;
 
@@ -4667,27 +4233,27 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
     {
         textPrinter.currentY = sSpeciesNameTextYCoords[i];
         if (trainerId == TRAINER_PLAYER)
-            textPrinter.currentChar = gSpeciesNames[DOME_MONS[trainerTourneyId][i]];
+            textPrinter.currentChar = GetSpeciesName(DOME_MONS[trainerTourneyId][i]);
         else if (trainerId == TRAINER_FRONTIER_BRAIN)
-            textPrinter.currentChar = gSpeciesNames[DOME_MONS[trainerTourneyId][i]];
+            textPrinter.currentChar = GetSpeciesName(DOME_MONS[trainerTourneyId][i]);
         else
-            textPrinter.currentChar = gSpeciesNames[gFacilityTrainerMons[DOME_MONS[trainerTourneyId][i]].species];
+            textPrinter.currentChar = GetSpeciesName(gFacilityTrainerMons[DOME_MONS[trainerTourneyId][i]].species);
+        textPrinter.fontId = GetFontIdToFit(textPrinter.currentChar, FONT_SHORT, 0, 60);
 
-        textPrinter.fontId = GetStringWidth(2, textPrinter.currentChar, 0) > 60 ? 7 : 2;
-
-        textPrinter.windowId = 1 + i + windowId;
+        textPrinter.windowId = WIN_TRAINER_MON1_NAME + i + windowId;
         if (i == 1)
             textPrinter.currentX = 7;
         else
             textPrinter.currentX = 0;
 
-        PutWindowTilemap(1 + i + windowId);
-        CopyWindowToVram(1 + i + windowId, 3);
+        PutWindowTilemap(WIN_TRAINER_MON1_NAME + i + windowId);
+        CopyWindowToVram(WIN_TRAINER_MON1_NAME + i + windowId, COPYWIN_FULL);
         AddTextPrinter(&textPrinter, 0, NULL);
     }
+    textPrinter.fontId = FONT_SHORT;
 
-    PutWindowTilemap(windowId + 4);
-    CopyWindowToVram(windowId + 4, 3);
+    PutWindowTilemap(windowId + WIN_TRAINER_FLAVOR_TEXT);
+    CopyWindowToVram(windowId + WIN_TRAINER_FLAVOR_TEXT, COPYWIN_FULL);
 
     // Print text about trainers potential in the tourney
     if (trainerId == TRAINER_FRONTIER_BRAIN)
@@ -4695,8 +4261,8 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
     else
         textPrinter.currentChar = sBattleDomePotentialTexts[trainerTourneyId];
 
-    textPrinter.fontId = 1;
-    textPrinter.windowId = windowId + 4;
+    textPrinter.fontId = FONT_NORMAL;
+    textPrinter.windowId = windowId + WIN_TRAINER_FLAVOR_TEXT;
     textPrinter.currentX = 0;
     textPrinter.y = 4;
     textPrinter.currentY = 4;
@@ -4707,38 +4273,90 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
     {
         for (j = 0; j < MAX_MON_MOVES; j++)
         {
-            if (trainerId == TRAINER_FRONTIER_BRAIN)
-                move = GetFrontierBrainMonMove(i, j);
-            else if (trainerId == TRAINER_PLAYER)
-                move = gSaveBlock2Ptr->frontier.domePlayerPartyData[i].moves[j];
-            else
-                move = gFacilityTrainerMons[DOME_MONS[trainerTourneyId][i]].moves[j];
-            AddDomeMovePoints(allocatedArray, move);
+            for (k = 0; k < NUM_MOVE_POINT_TYPES; k++)
+            {
+                enum Move move;
+                if (trainerId == TRAINER_FRONTIER_BRAIN)
+                    move = GetFrontierBrainMonMove(i, j);
+                else if (trainerId == TRAINER_PLAYER)
+                    move = gSaveBlock2Ptr->frontier.domePlayerPartyData[i].moves[j];
+                else
+                    move = gFacilityTrainerMons[DOME_MONS[trainerTourneyId][i]].moves[j];
+                u32 accuracy = GetMoveAccuracy(move);
+
+                switch (k)
+                {
+                case MOVE_POINTS_COMBO:
+                    allocatedArray[k] = IsDomeComboMove(move) ? 1 : 0;
+                    break;
+                case MOVE_POINTS_STAT_RAISE:
+                    allocatedArray[k] = IsStatRaisingMove(move) ? 1 : 0;
+                    break;
+                case MOVE_POINTS_STAT_LOWER:
+                    allocatedArray[k] = IsStatLoweringMove(move) ? 1 : 0;
+                    break;
+                case MOVE_POINTS_RARE:
+                    allocatedArray[k] = IsDomeRareMove(move) ? 1 : 0;
+                    break;
+                case MOVE_POINTS_HEAL:
+                    allocatedArray[k] = IsDomeHealingMove(move) ? 1 : 0;
+                    break;
+                case MOVE_POINTS_RISKY:
+                    allocatedArray[k] = IsDomeRiskyMove(move) ? 1 : 0;
+                    break;
+                case MOVE_POINTS_STATUS:
+                    allocatedArray[k] = IsDomeStatusMove(move);
+                    break;
+                case MOVE_POINTS_DMG:
+                    allocatedArray[k] = (!IsBattleMoveStatus(move)) ? 1 : 0;
+                    break;
+                case MOVE_POINTS_DEF:
+                    allocatedArray[k] = IsDomeDefensiveMove(move) ? 1 : 0;
+                    break;
+                case MOVE_POINTS_ACCURATE:
+                    allocatedArray[k] = (accuracy == 0 || accuracy == 100) ? 1 : 0;
+                    break;
+                case MOVE_POINTS_POWERFUL:
+                    allocatedArray[k] = (GetMovePower(move) >= 100) ? 1 : 0;
+                    break;
+                case MOVE_POINTS_POPULAR:
+                    allocatedArray[k] = IsDomePopularMove(move) ? 1 : 0;
+                    break;
+                case MOVE_POINTS_LUCK:
+                    allocatedArray[k] = IsDomeLuckyMove(move) ? 1 : 0;
+                    break;
+                case MOVE_POINTS_STRONG:
+                    allocatedArray[k] = (GetMovePower(move) >= 90) ? 1 : 0;
+                    break;
+                case MOVE_POINTS_LOW_PP:
+                    allocatedArray[k] = (GetMovePP(move) <= 5) ? 1 : 0;
+                    break;
+                case MOVE_POINTS_EFFECT:
+                    allocatedArray[k] = MoveIsAffectedBySheerForce(move);
+                    break;
+                }
+            }
         }
     }
 
     // Get the battle style the trainer uses
     // Each element of sBattleStyleThresholds is an array of point thresholds for particular move qualities
     // If all the point thresholds in the array are satisfied, the player is considered to be using that battle style
-    for (i = 0; i < ARRAY_COUNT(sBattleStyleEvaluationOrder); i++)
+    for (i = 0; i < ARRAY_COUNT(sBattleStyleThresholds); i++)
     {
         int thresholdStatCount = 0;
-        style = sBattleStyleEvaluationOrder[i];
 
         for (k = 0, j = 0; j < NUM_MOVE_POINT_TYPES; j++)
         {
-            if (sBattleStyleThresholds[style][j] != 0)
+            if (sBattleStyleThresholds[i][j] != 0)
             {
                 thresholdStatCount++;
-                if (allocatedArray[j] != 0 && allocatedArray[j] >= sBattleStyleThresholds[style][j])
+                if (allocatedArray[j] != 0 && allocatedArray[j] >= sBattleStyleThresholds[i][j])
                     k++; // number of point thresholds met/exceeded
             }
         }
         if (thresholdStatCount == k)
-        {
-            i = style;
             break; // All thresholds for battle style met/exceeded, player uses this battle style
-        }
     }
 
     // Print the trainers battle style
@@ -4775,11 +4393,15 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
                 else
                     nature = gSaveBlock2Ptr->frontier.domePlayerPartyData[i].nature;
 
-                if (gNatureStatTable[nature][j] > 0)
+                if (gNaturesInfo[nature].statUp == gNaturesInfo[nature].statDown)
+                {
+                    allocatedArray[j + NUM_STATS + 1] += allocatedArray[j + 1];
+                }
+                else if (gNaturesInfo[nature].statUp == j + 1)
                 {
                     allocatedArray[j + NUM_STATS + 1] += (allocatedArray[j + 1] * 110) / 100;
                 }
-                else if (gNatureStatTable[nature][j] < 0)
+                else if (gNaturesInfo[nature].statDown == j + 1)
                 {
                     allocatedArray[j + NUM_STATS + 1] += (allocatedArray[j + 1] * 90) / 100;
                     allocatedArray[j + NUM_STATS + NUM_NATURE_STATS + 2]++;
@@ -4792,44 +4414,36 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
         }
         for (j = 0, i = 0; i < NUM_STATS; i++)
             j += allocatedArray[NUM_STATS + i];
-        if (j != 0)
-        {
-            for (i = 0; i < NUM_STATS; i++)
-                allocatedArray[i] = (allocatedArray[NUM_STATS + i] * 100) / j;
-        }
+        for (i = 0; i < NUM_STATS; i++)
+            allocatedArray[i] = (allocatedArray[NUM_STATS + i] * 100) / j;
     }
     // Same as above but for regular trainers instead of the frontier brain or player
     else
     {
         for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
         {
-            int evBits = gFacilityTrainerMons[DOME_MONS[trainerTourneyId][i]].evSpread;
-            for (k = 0, j = 0; j < NUM_STATS; j++)
-            {
-                allocatedArray[j] = 0;
-                if (evBits & 1)
-                    k++;
-                evBits >>= 1;
-            }
-            if (k != 0)
-                k = MAX_TOTAL_EVS / k;
-            evBits = gFacilityTrainerMons[DOME_MONS[trainerTourneyId][i]].evSpread;
             for (j = 0; j < NUM_STATS; j++)
             {
-                if (evBits & 1)
-                    allocatedArray[j] = k;
-                evBits >>= 1;
+                if (gFacilityTrainerMons[DOME_MONS[trainerTourneyId][i]].ev != NULL)
+                    allocatedArray[j] = gFacilityTrainerMons[DOME_MONS[trainerTourneyId][i]].ev[j];
+                else
+                    allocatedArray[j] = 0;
             }
 
             allocatedArray[NUM_STATS] += allocatedArray[STAT_HP];
             for (j = 0; j < NUM_NATURE_STATS; j++)
             {
                 nature = gFacilityTrainerMons[DOME_MONS[trainerTourneyId][i]].nature;
-                if (gNatureStatTable[nature][j] > 0)
+
+                if (gNaturesInfo[nature].statUp == gNaturesInfo[nature].statDown)
+                {
+                    allocatedArray[j + NUM_STATS + 1] += allocatedArray[j + 1];
+                }
+                else if (gNaturesInfo[nature].statUp == j + 1)
                 {
                     allocatedArray[j + NUM_STATS + 1] += (allocatedArray[j + 1] * 110) / 100;
                 }
-                else if (gNatureStatTable[nature][j] < 0)
+                else if (gNaturesInfo[nature].statDown == j + 1)
                 {
                     allocatedArray[j + NUM_STATS + 1] += (allocatedArray[j + 1] * 90) / 100;
                     allocatedArray[j + NUM_STATS + NUM_NATURE_STATS + 2]++;
@@ -4842,11 +4456,8 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
         }
         for (j = 0, i = 0; i < NUM_STATS; i++)
             j += allocatedArray[i + NUM_STATS];
-        if (j != 0)
-        {
-            for (i = 0; i < NUM_STATS; i++)
-                allocatedArray[i] = (allocatedArray[NUM_STATS + i] * 100) / j;
-        }
+        for (i = 0; i < NUM_STATS; i++)
+            allocatedArray[i] = (allocatedArray[NUM_STATS + i] * 100) / j;
     }
 
     // Count the number of good/bad stats for the party
@@ -4941,6 +4552,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
     textPrinter.y = 36;
     textPrinter.currentY = 36;
     AddTextPrinter(&textPrinter, 0, NULL);
+    Free(allocatedArray);
 }
 
 static int BufferDomeWinString(u8 matchNum, u8 *tournamentIds)
@@ -4960,7 +4572,7 @@ static int BufferDomeWinString(u8 matchNum, u8 *tournamentIds)
             if (DOME_TRAINERS[tournamentId].trainerId == TRAINER_PLAYER)
                 StringCopy(gStringVar1, gSaveBlock2Ptr->playerName);
             else if (DOME_TRAINERS[tournamentId].trainerId == TRAINER_FRONTIER_BRAIN)
-                CopyDomeBrainTrainerName(gStringVar1);
+                CopyFrontierBrainTrainerName(gStringVar1);
             else
                 CopyDomeTrainerName(gStringVar1, DOME_TRAINERS[tournamentId].trainerId);
             count++;
@@ -4984,7 +4596,7 @@ static int BufferDomeWinString(u8 matchNum, u8 *tournamentIds)
             if (DOME_TRAINERS[tournamentId].eliminatedAt == sCompetitorRangeByMatch[matchNum][2])
             {
                 // Set initial winStringId offset
-                StringCopy(gStringVar2, gMoveNames[gSaveBlock2Ptr->frontier.domeWinningMoves[tournamentId]]);
+                StringCopy(gStringVar2, GetMoveName(gSaveBlock2Ptr->frontier.domeWinningMoves[tournamentId]));
                 winStringId = DOME_TRAINERS[tournamentId].forfeited * 2; // (DOME_TEXT_WON_USING_MOVE - 1) or (DOME_TEXT_WON_ON_FORFEIT - 1)
 
                 if (gSaveBlock2Ptr->frontier.domeWinningMoves[tournamentId] == MOVE_NONE && DOME_TRAINERS[tournamentId].forfeited == FALSE)
@@ -4995,7 +4607,7 @@ static int BufferDomeWinString(u8 matchNum, u8 *tournamentIds)
                 if (DOME_TRAINERS[tournamentId].trainerId == TRAINER_PLAYER)
                     StringCopy(gStringVar1, gSaveBlock2Ptr->playerName);
                 else if (DOME_TRAINERS[tournamentId].trainerId == TRAINER_FRONTIER_BRAIN)
-                    CopyDomeBrainTrainerName(gStringVar1);
+                    CopyFrontierBrainTrainerName(gStringVar1);
                 else
                     CopyDomeTrainerName(gStringVar1, DOME_TRAINERS[tournamentId].trainerId);
             }
@@ -5025,7 +4637,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
     u8 palSlot = 0;
 
     if (flags & CARD_ALTERNATE_SLOT)
-        arrId = 2 * (FRONTIER_PARTY_SIZE + 1), windowId = 9, palSlot = 2;
+        arrId = 2 * (FRONTIER_PARTY_SIZE + 1), windowId = NUM_INFO_CARD_WINDOWS, palSlot = 2;
     if (flags & MOVE_CARD_RIGHT)
         x = DISPLAY_WIDTH + 16;
     if (flags & MOVE_CARD_DOWN)
@@ -5050,11 +4662,11 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
 
     // Draw left trainer sprite.
     if (trainerIds[0] == TRAINER_PLAYER)
-        sInfoCard->spriteIds[arrId] = CreateTrainerPicSprite(PlayerGenderToFrontTrainerPicId(gSaveBlock2Ptr->playerGender), TRUE, x + 48, y + 88, palSlot + 12, 0xFFFF);
+        sInfoCard->spriteIds[arrId] = CreateTrainerPicSprite(PlayerGenderToFrontTrainerPicId(gSaveBlock2Ptr->playerGender), TRUE, x + 48, y + 88, palSlot + 12, TAG_NONE);
     else if (trainerIds[0] == TRAINER_FRONTIER_BRAIN)
-        sInfoCard->spriteIds[arrId] = CreateTrainerPicSprite(GetDomeBrainTrainerPicId(), TRUE, x + 48, y + 88, palSlot + 12, 0xFFFF);
+        sInfoCard->spriteIds[arrId] = CreateTrainerPicSprite(GetFrontierBrainTrainerPicIndex(), TRUE, x + 48, y + 88, palSlot + 12, TAG_NONE);
     else
-        sInfoCard->spriteIds[arrId] = CreateTrainerPicSprite(GetFrontierTrainerFrontSpriteId(trainerIds[0]), TRUE, x + 48, y + 88, palSlot + 12, 0xFFFF);
+        sInfoCard->spriteIds[arrId] = CreateTrainerPicSprite(GetFrontierTrainerFrontSpriteId(trainerIds[0]), TRUE, x + 48, y + 88, palSlot + 12, TAG_NONE);
 
     if (flags & MOVE_CARD)
         gSprites[sInfoCard->spriteIds[arrId]].invisible = TRUE;
@@ -5063,24 +4675,24 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
 
     // Draw right trainer sprite.
     if (trainerIds[1] == TRAINER_PLAYER)
-        sInfoCard->spriteIds[1 + arrId] = CreateTrainerPicSprite(PlayerGenderToFrontTrainerPicId(gSaveBlock2Ptr->playerGender), TRUE, x + 192, y + 88, palSlot + 13, 0xFFFF);
+        sInfoCard->spriteIds[1 + arrId] = CreateTrainerPicSprite(PlayerGenderToFrontTrainerPicId(gSaveBlock2Ptr->playerGender), TRUE, x + 192, y + 88, palSlot + 13, TAG_NONE);
     else if (trainerIds[1] == TRAINER_FRONTIER_BRAIN)
-        sInfoCard->spriteIds[1 + arrId] = CreateTrainerPicSprite(GetDomeBrainTrainerPicId(), TRUE, x + 192, y + 88, palSlot + 13, 0xFFFF);
+        sInfoCard->spriteIds[1 + arrId] = CreateTrainerPicSprite(GetFrontierBrainTrainerPicIndex(), TRUE, x + 192, y + 88, palSlot + 13, TAG_NONE);
     else
-        sInfoCard->spriteIds[1 + arrId] = CreateTrainerPicSprite(GetFrontierTrainerFrontSpriteId(trainerIds[1]), TRUE, x + 192, y + 88, palSlot + 13, 0xFFFF);
+        sInfoCard->spriteIds[1 + arrId] = CreateTrainerPicSprite(GetFrontierTrainerFrontSpriteId(trainerIds[1]), TRUE, x + 192, y + 88, palSlot + 13, TAG_NONE);
 
     if (flags & MOVE_CARD)
         gSprites[sInfoCard->spriteIds[1 + arrId]].invisible = TRUE;
     if (lost[1])
         gSprites[sInfoCard->spriteIds[1 + arrId]].oam.paletteNum = 3;
 
-    // Draw left trainer's pokemon icons.
+    // Draw left trainer's Pokémon icons.
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
         if (trainerIds[0] == TRAINER_PLAYER)
         {
             sInfoCard->spriteIds[2 + i + arrId] = CreateMonIcon(DOME_MONS[tournamentIds[0]][i],
-                                                                  SpriteCb_MonIcon,
+                                                                  SpriteCB_MonIconDomeInfo,
                                                                   x | sLeftTrainerMonX[i],
                                                                   y + sLeftTrainerMonY[i],
                                                                   0, 0);
@@ -5089,7 +4701,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
         else if (trainerIds[0] == TRAINER_FRONTIER_BRAIN)
         {
             sInfoCard->spriteIds[2 + i + arrId] = CreateMonIcon(DOME_MONS[tournamentIds[0]][i],
-                                                                  SpriteCb_MonIcon,
+                                                                  SpriteCB_MonIconDomeInfo,
                                                                   x | sLeftTrainerMonX[i],
                                                                   y + sLeftTrainerMonY[i],
                                                                   0, 0);
@@ -5098,7 +4710,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
         else
         {
             sInfoCard->spriteIds[2 + i + arrId] = CreateMonIcon(gFacilityTrainerMons[DOME_MONS[tournamentIds[0]][i]].species,
-                                                                  SpriteCb_MonIcon,
+                                                                  SpriteCB_MonIconDomeInfo,
                                                                   x | sLeftTrainerMonX[i],
                                                                   y + sLeftTrainerMonY[i],
                                                                   0, 0);
@@ -5114,13 +4726,13 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
         }
     }
 
-    // Draw right trainer's pokemon icons.
+    // Draw right trainer's Pokémon icons.
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
         if (trainerIds[1] == TRAINER_PLAYER)
         {
             sInfoCard->spriteIds[5 + i + arrId] = CreateMonIcon(DOME_MONS[tournamentIds[1]][i],
-                                                                  SpriteCb_MonIcon,
+                                                                  SpriteCB_MonIconDomeInfo,
                                                                   x | sRightTrainerMonX[i],
                                                                   y + sRightTrainerMonY[i],
                                                                   0, 0);
@@ -5129,7 +4741,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
         else if (trainerIds[1] == TRAINER_FRONTIER_BRAIN)
         {
             sInfoCard->spriteIds[5 + i + arrId] = CreateMonIcon(DOME_MONS[tournamentIds[1]][i],
-                                                                  SpriteCb_MonIcon,
+                                                                  SpriteCB_MonIconDomeInfo,
                                                                   x | sRightTrainerMonX[i],
                                                                   y + sRightTrainerMonY[i],
                                                                   0, 0);
@@ -5138,7 +4750,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
         else
         {
             sInfoCard->spriteIds[5 + i + arrId] = CreateMonIcon(gFacilityTrainerMons[DOME_MONS[tournamentIds[1]][i]].species,
-                                                                  SpriteCb_MonIcon,
+                                                                  SpriteCB_MonIconDomeInfo,
                                                                   x | sRightTrainerMonX[i],
                                                                   y + sRightTrainerMonY[i],
                                                                   0, 0);
@@ -5155,22 +4767,23 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
     }
 
     // Print the win string (or 'Let the battle begin!').
+    textPrinter.type = WINDOW_TEXT_PRINTER;
     textPrinter.x = 0;
     textPrinter.y = 2;
     textPrinter.currentX = textPrinter.x;
     textPrinter.currentY = textPrinter.y;
     textPrinter.letterSpacing = 0;
     textPrinter.lineSpacing = 0;
-    textPrinter.unk = 0;
-    textPrinter.fgColor = TEXT_DYNAMIC_COLOR_5;
-    textPrinter.bgColor = TEXT_COLOR_TRANSPARENT;
-    textPrinter.shadowColor = TEXT_DYNAMIC_COLOR_4;
+    textPrinter.color.accent = TEXT_COLOR_TRANSPARENT;
+    textPrinter.color.foreground = TEXT_DYNAMIC_COLOR_5;
+    textPrinter.color.background = TEXT_COLOR_TRANSPARENT;
+    textPrinter.color.shadow = TEXT_DYNAMIC_COLOR_4;
     StringExpandPlaceholders(gStringVar4, sBattleDomeWinTexts[winStringId]);
     textPrinter.currentChar = gStringVar4;
-    textPrinter.windowId = windowId + 8;
-    textPrinter.fontId = 1;
-    PutWindowTilemap(windowId + 8);
-    CopyWindowToVram(windowId + 8, 3);
+    textPrinter.windowId = windowId + WIN_MATCH_WIN_TEXT;
+    textPrinter.fontId = FONT_NORMAL;
+    PutWindowTilemap(windowId + WIN_MATCH_WIN_TEXT);
+    CopyWindowToVram(windowId + WIN_MATCH_WIN_TEXT, COPYWIN_FULL);
     textPrinter.currentX = 0;
     textPrinter.currentY = textPrinter.y = 0;
     AddTextPrinter(&textPrinter, 0, NULL);
@@ -5179,44 +4792,44 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
     if (trainerIds[0] == TRAINER_PLAYER)
         StringCopy(gStringVar1, gSaveBlock2Ptr->playerName);
     else if (trainerIds[0] == TRAINER_FRONTIER_BRAIN)
-        CopyDomeBrainTrainerName(gStringVar1);
+        CopyFrontierBrainTrainerName(gStringVar1);
     else
         CopyDomeTrainerName(gStringVar1, trainerIds[0]);
 
-    textPrinter.fontId = 2;
+    textPrinter.fontId = FONT_SHORT;
     textPrinter.letterSpacing = 2;
     textPrinter.currentChar = gStringVar1;
-    textPrinter.windowId = windowId + 6;
+    textPrinter.windowId = windowId + WIN_MATCH_TRAINER_NAME_LEFT;
     textPrinter.currentX = GetStringCenterAlignXOffsetWithLetterSpacing(textPrinter.fontId, textPrinter.currentChar, 0x40, textPrinter.letterSpacing);
     textPrinter.currentY = textPrinter.y = 2;
-    PutWindowTilemap(windowId + 6);
-    CopyWindowToVram(windowId + 6, 3);
+    PutWindowTilemap(windowId + WIN_MATCH_TRAINER_NAME_LEFT);
+    CopyWindowToVram(windowId + WIN_MATCH_TRAINER_NAME_LEFT, COPYWIN_FULL);
     AddTextPrinter(&textPrinter, 0, NULL);
 
     // Print right trainer's name.
     if (trainerIds[1] == TRAINER_PLAYER)
         StringCopy(gStringVar1, gSaveBlock2Ptr->playerName);
     else if (trainerIds[1] == TRAINER_FRONTIER_BRAIN)
-        CopyDomeBrainTrainerName(gStringVar1);
+        CopyFrontierBrainTrainerName(gStringVar1);
     else
         CopyDomeTrainerName(gStringVar1, trainerIds[1]);
 
     textPrinter.currentChar = gStringVar1;
-    textPrinter.windowId = windowId + 7;
+    textPrinter.windowId = windowId + WIN_MATCH_TRAINER_NAME_RIGHT;
     textPrinter.currentX = GetStringCenterAlignXOffsetWithLetterSpacing(textPrinter.fontId, textPrinter.currentChar, 0x40, textPrinter.letterSpacing);
     textPrinter.currentY = textPrinter.y = 2;
-    PutWindowTilemap(windowId + 7);
-    CopyWindowToVram(windowId + 7, 3);
+    PutWindowTilemap(windowId + WIN_MATCH_TRAINER_NAME_RIGHT);
+    CopyWindowToVram(windowId + WIN_MATCH_TRAINER_NAME_RIGHT, COPYWIN_FULL);
     AddTextPrinter(&textPrinter, 0, NULL);
 
     // Print match number.
     textPrinter.letterSpacing = 0;
     textPrinter.currentChar = sBattleDomeMatchNumberTexts[matchNo];
-    textPrinter.windowId = windowId + 5;
+    textPrinter.windowId = windowId + WIN_MATCH_NUMBER;
     textPrinter.currentX = GetStringCenterAlignXOffsetWithLetterSpacing(textPrinter.fontId, textPrinter.currentChar, 0xA0, textPrinter.letterSpacing);
     textPrinter.currentY = textPrinter.y = 2;
-    PutWindowTilemap(windowId + 5);
-    CopyWindowToVram(windowId + 5, 3);
+    PutWindowTilemap(windowId + WIN_MATCH_NUMBER);
+    CopyWindowToVram(windowId + WIN_MATCH_NUMBER, COPYWIN_FULL);
     AddTextPrinter(&textPrinter, 0, NULL);
 }
 
@@ -5431,9 +5044,9 @@ static void ResolveDomeRoundWinners(void)
 
     if (gSpecialVar_0x8005 == DOME_PLAYER_WON_MATCH)
     {
-        DOME_TRAINERS[TrainerIdToTournamentId(gTrainerBattleOpponent_A)].isEliminated = TRUE;
-        DOME_TRAINERS[TrainerIdToTournamentId(gTrainerBattleOpponent_A)].eliminatedAt = gSaveBlock2Ptr->frontier.curChallengeBattleNum;
-        gSaveBlock2Ptr->frontier.domeWinningMoves[TrainerIdToTournamentId(gTrainerBattleOpponent_A)] = gBattleResults.lastUsedMovePlayer;
+        DOME_TRAINERS[TrainerIdToTournamentId(TRAINER_BATTLE_PARAM.opponentA)].isEliminated = TRUE;
+        DOME_TRAINERS[TrainerIdToTournamentId(TRAINER_BATTLE_PARAM.opponentA)].eliminatedAt = gSaveBlock2Ptr->frontier.curChallengeBattleNum;
+        gSaveBlock2Ptr->frontier.domeWinningMoves[TrainerIdToTournamentId(TRAINER_BATTLE_PARAM.opponentA)] = gBattleResults.lastUsedMovePlayer;
 
         // If the player's match was the final one, no NPC vs NPC matches to decide
         if (gSaveBlock2Ptr->frontier.curChallengeBattleNum < DOME_FINAL)
@@ -5459,121 +5072,115 @@ static u16 GetWinningMove(int winnerTournamentId, int loserTournamentId, u8 roun
 {
     int i, j, k;
     int moveScores[MAX_MON_MOVES * FRONTIER_PARTY_SIZE];
-    u16 moveIds[MAX_MON_MOVES * FRONTIER_PARTY_SIZE];
+    enum Move moves[MAX_MON_MOVES * FRONTIER_PARTY_SIZE] = {MOVE_NONE};
     u16 bestScore = 0;
     u16 bestId = 0;
     int movePower = 0;
     SetFacilityPtrsGetLevel();
 
-    // Calc move points of all 4 moves for all 3 pokemon hitting all 3 target mons.
+    // Calc move points of all 4 moves for all 3 Pokémon hitting all 3 target mons.
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
         for (j = 0; j < MAX_MON_MOVES; j++)
         {
-            // TODO: Clean this up, looks like a different data structure (2D array)
-            moveScores[i * MAX_MON_MOVES + j] = 0;
-            if (DOME_TRAINERS[winnerTournamentId].trainerId == TRAINER_FRONTIER_BRAIN)
-                moveIds[i * MAX_MON_MOVES + j] = GetFrontierBrainMonMove(i, j);
-            else
-                moveIds[i * MAX_MON_MOVES + j] = gFacilityTrainerMons[DOME_MONS[winnerTournamentId][i]].moves[j];
+            u32 moveIndex = i * MAX_MON_MOVES + j;
+            enum Move move;
 
-            movePower = gBattleMoves[moveIds[i * MAX_MON_MOVES + j]].power;
-            if (movePower == 0)
+            moveScores[moveIndex] = 0;
+            if (DOME_TRAINERS[winnerTournamentId].trainerId == TRAINER_FRONTIER_BRAIN)
+                move = GetFrontierBrainMonMove(i, j);
+            else
+                move = gFacilityTrainerMons[DOME_MONS[winnerTournamentId][i]].moves[j];
+            moves[moveIndex] = move;
+
+            movePower = GetMovePower(move);
+            if (IsBattleMoveStatus(move))
                 movePower = 40;
             else if (movePower == 1)
                 movePower = 60;
-            else if (moveIds[i * MAX_MON_MOVES + j] == MOVE_SELF_DESTRUCT
-                  || moveIds[i * MAX_MON_MOVES + j] == MOVE_EXPLOSION)
+            else if (GetConfig(B_EXPLOSION_DEFENSE) < GEN_5 && IsExplosionMove(move))
                 movePower /= 2;
 
             for (k = 0; k < FRONTIER_PARTY_SIZE; k++)
             {
                 u32 personality = 0;
-                u32 targetSpecies = 0;
-                u32 targetNature = 0;
-                u32 targetAbility = 0;
-                u32 typeMultiplier = 0;
-
-                if (DOME_TRAINERS[loserTournamentId].trainerId == TRAINER_FRONTIER_BRAIN)
-                {
-                    targetSpecies = DOME_MONS[loserTournamentId][k];
-                    targetNature = GetFrontierBrainMonNature(k);
-                }
-                else
-                {
-                    targetSpecies = gFacilityTrainerMons[DOME_MONS[loserTournamentId][k]].species;
-                    targetNature = gFacilityTrainerMons[DOME_MONS[loserTournamentId][k]].nature;
-                }
-
+                enum Species targetSpecies = SPECIES_NONE;
+                enum Ability targetAbility = ABILITY_NONE;
+                uq4_12_t typeMultiplier = 0;
                 do
                 {
                     personality = Random32();
-                } while (targetNature != GetNatureFromPersonality(personality));
+                } while (gFacilityTrainerMons[DOME_MONS[loserTournamentId][k]].nature != GetNatureFromPersonality(personality));
 
-                targetAbility = GetAbilityBySpecies(targetSpecies, personality & 1);
+                targetSpecies = gFacilityTrainerMons[DOME_MONS[loserTournamentId][k]].species;
 
-                typeMultiplier = CalcPartyMonTypeEffectivenessMultiplier(moveIds[i * 4 + j], targetSpecies, targetAbility);
-                if (typeMultiplier == UQ_4_12(0))
-                    moveScores[i * MAX_MON_MOVES + j] += 0;
-                else if (typeMultiplier >= UQ_4_12(2))
-                    moveScores[i * MAX_MON_MOVES + j] += movePower * 2;
-                else if (typeMultiplier <= UQ_4_12(0.5))
-                    moveScores[i * MAX_MON_MOVES + j] += movePower / 2;
+                if (personality & 1)
+                    targetAbility = GetSpeciesAbility(targetSpecies, 1);
                 else
-                    moveScores[i * MAX_MON_MOVES + j] += movePower;
+                    targetAbility = GetSpeciesAbility(targetSpecies, 0);
+
+                typeMultiplier = CalcPartyMonTypeEffectivenessMultiplier(moves[i * 4 + j], targetSpecies, targetAbility);
+                if (typeMultiplier == UQ_4_12(0))
+                    moveScores[moveIndex] += 0;
+                else if (typeMultiplier >= UQ_4_12(2.0))
+                    moveScores[moveIndex] += movePower * 2;
+                else if (typeMultiplier <= UQ_4_12(0.5))
+                    moveScores[moveIndex] += movePower / 2;
+                else
+                    moveScores[moveIndex] += movePower;
             }
 
-            if (bestScore < moveScores[i * MAX_MON_MOVES + j])
+            if (bestScore < moveScores[moveIndex])
             {
-                bestId = i * MAX_MON_MOVES + j;
-                bestScore = moveScores[i * MAX_MON_MOVES + j];
+                bestId = moveIndex;
+                bestScore = moveScores[moveIndex];
             }
-            else if (bestScore == moveScores[i * MAX_MON_MOVES + j])
+            else if (bestScore == moveScores[moveIndex])
             {
-                if (moveIds[bestId] < moveIds[i * MAX_MON_MOVES + j]) // Why not use (Random() & 1) instead of promoting moves with a higher id?
-                    bestId = i * MAX_MON_MOVES + j;
+                if (moves[bestId] < move) // Why not use (Random() & 1) instead of promoting moves with a higher id?
+                    bestId = moveIndex;
             }
         }
     }
 
     j = bestId;
-    while (roundId > 0)
+    do
     {
-        for (i = 0; i < roundId; i++)
+        for (i = 0; i < roundId - 1; i++)
         {
-            if (gSaveBlock2Ptr->frontier.domeWinningMoves[sub_81953E8(winnerTournamentId, i)] == moveIds[j])
+            if (gSaveBlock2Ptr->frontier.domeWinningMoves[GetOpposingNPCTournamentIdByRound(winnerTournamentId, i)] == moves[j])
                 break;
         }
-        if (i == roundId)
-            break;
-
-        moveScores[j] = 0;
-        bestScore = 0;
-        j = 0;
-        for (k = 0; k < MAX_MON_MOVES * FRONTIER_PARTY_SIZE; k++)
-            j += moveScores[k];
-        if (j == 0)
-            break;
-        j = 0;
-        for (k = 0; k < MAX_MON_MOVES * FRONTIER_PARTY_SIZE; k++)
+        if (i != roundId - 1)
         {
-            if (bestScore < moveScores[k])
+            moveScores[j] = 0;
+            bestScore = 0;
+            j = 0;
+            for (k = 0; k < MAX_MON_MOVES * FRONTIER_PARTY_SIZE; k++)
+                j += moveScores[k];
+            if (j == 0)
+                break;
+            j = 0;
+            for (k = 0; k < MAX_MON_MOVES * FRONTIER_PARTY_SIZE; k++)
             {
-                j = k;
-                bestScore = moveScores[k];
-            }
-            else if (bestScore == moveScores[k] && moveIds[j] < moveIds[k])
-            {
-                j = k;
-                bestScore = moveScores[k];
+                if (bestScore < moveScores[k])
+                {
+                    j = k;
+                    bestScore = moveScores[k];
+                }
+                else if (bestScore == moveScores[k] && moves[j] < moves[k]) // Yes, these conditions are redundant
+                {
+                    j = k;
+                    bestScore = moveScores[k];
+                }
             }
         }
-    }
+    } while (i != roundId - 1);
 
     if (moveScores[j] == 0)
         j = bestId;
 
-    return moveIds[j];
+    return moves[j];
 }
 
 static void Task_ShowTourneyTree(u8 taskId)
@@ -5598,10 +5205,10 @@ static void Task_ShowTourneyTree(u8 taskId)
         gBattle_BG0_Y = 0;
         gBattle_BG1_X = 0;
         gBattle_BG1_Y = 0;
-        ChangeBgX(2, 0, 0);
-        ChangeBgY(2, 0, 0);
-        ChangeBgX(3, 0, 0);
-        ChangeBgY(3, 0xB00, 0);
+        ChangeBgX(2, 0, BG_COORD_SET);
+        ChangeBgY(2, 0, BG_COORD_SET);
+        ChangeBgX(3, 0, BG_COORD_SET);
+        ChangeBgY(3, 0xB00, BG_COORD_SET);
         gTasks[taskId].tState++;
         break;
     case 1:
@@ -5622,17 +5229,17 @@ static void Task_ShowTourneyTree(u8 taskId)
         break;
     case 2:
         sTilemapBuffer = AllocZeroed(BG_SCREEN_SIZE);
-        LZDecompressWram(gDomeTourneyLineMask_Tilemap, sTilemapBuffer);
+        DecompressDataWithHeaderWram(gDomeTourneyTree_Tilemap, sTilemapBuffer);
         SetBgTilemapBuffer(1, sTilemapBuffer);
         CopyBgTilemapBufferToVram(1);
-        DecompressAndLoadBgGfxUsingHeap(1, gDomeTourneyBg_Gfx, 0x2000, 0, 0);
+        DecompressAndLoadBgGfxUsingHeap(1, gDomeTourneyTree_Gfx, 0x2000, 0, 0);
         DecompressAndLoadBgGfxUsingHeap(2, gDomeTourneyLine_Gfx, 0x2000, 0, 0);
         DecompressAndLoadBgGfxUsingHeap(2, gDomeTourneyLineDown_Tilemap, 0x2000, 0, 1);
         DecompressAndLoadBgGfxUsingHeap(3, gDomeTourneyLineUp_Tilemap, 0x2000, 0, 1);
-        LoadCompressedPalette(gDomeTourneyTree_Pal, 0, 0x200);
-        LoadCompressedPalette(gDomeTourneyTreeButtons_Pal, 0x100, 0x200);
-        LoadCompressedPalette(gBattleWindowTextPalette, 0xF0, 0x20);
-        CpuFill32(0, gPlttBufferFaded, 0x400);
+        LoadPalette(gDomeTourneyTree_Pal, BG_PLTT_OFFSET, BG_PLTT_SIZE);
+        LoadPalette(gDomeTourneyTreeButtons_Pal, OBJ_PLTT_OFFSET, OBJ_PLTT_SIZE);
+        LoadPalette(gBattleWindowTextPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
+        CpuFill32(0, gPlttBufferFaded, PLTT_SIZE);
         ShowBg(0);
         ShowBg(1);
         ShowBg(2);
@@ -5656,19 +5263,20 @@ static void Task_ShowTourneyTree(u8 taskId)
         gTasks[taskId].tState++;
         break;
     case 4:
-        textPrinter.fontId = 2;
+        textPrinter.type = WINDOW_TEXT_PRINTER;
+        textPrinter.fontId = FONT_SHORT;
         textPrinter.currentChar = gText_BattleTourney;
-        textPrinter.windowId = 2;
+        textPrinter.windowId = TOURNEYWIN_TITLE;
         textPrinter.x = 0;
         textPrinter.y = 0;
         textPrinter.letterSpacing = 2;
         textPrinter.lineSpacing = 0;
         textPrinter.currentX = GetStringCenterAlignXOffsetWithLetterSpacing(textPrinter.fontId, textPrinter.currentChar, 0x70, textPrinter.letterSpacing);
         textPrinter.currentY = 1;
-        textPrinter.unk = 0;
-        textPrinter.fgColor = TEXT_DYNAMIC_COLOR_5;
-        textPrinter.bgColor = TEXT_COLOR_TRANSPARENT;
-        textPrinter.shadowColor = TEXT_DYNAMIC_COLOR_4;
+        textPrinter.color.accent = TEXT_COLOR_TRANSPARENT;
+        textPrinter.color.foreground = TEXT_DYNAMIC_COLOR_5;
+        textPrinter.color.background = TEXT_COLOR_TRANSPARENT;
+        textPrinter.color.shadow = TEXT_DYNAMIC_COLOR_4;
         AddTextPrinter(&textPrinter, 0, NULL);
         for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
         {
@@ -5721,30 +5329,30 @@ static void Task_ShowTourneyTree(u8 taskId)
             {
                 if (DOME_TRAINERS[i].trainerId == TRAINER_PLAYER)
                 {
-                    textPrinter.fgColor = TEXT_COLOR_LIGHT_GRAY;
-                    textPrinter.shadowColor = TEXT_COLOR_RED;
+                    textPrinter.color.foreground = TEXT_COLOR_LIGHT_GRAY;
+                    textPrinter.color.shadow = TEXT_COLOR_RED;
                 }
                 else
                 {
-                    textPrinter.fgColor = TEXT_DYNAMIC_COLOR_2;
-                    textPrinter.shadowColor = TEXT_DYNAMIC_COLOR_4;
+                    textPrinter.color.foreground = TEXT_DYNAMIC_COLOR_2;
+                    textPrinter.color.shadow = TEXT_DYNAMIC_COLOR_4;
                 }
             }
             else
             {
                 if (DOME_TRAINERS[i].trainerId == TRAINER_PLAYER)
                 {
-                    textPrinter.fgColor = TEXT_COLOR_LIGHT_GRAY;
-                    textPrinter.shadowColor = TEXT_COLOR_RED;
+                    textPrinter.color.foreground = TEXT_COLOR_LIGHT_GRAY;
+                    textPrinter.color.shadow = TEXT_COLOR_RED;
                 }
                 else
                 {
-                    textPrinter.fgColor = TEXT_DYNAMIC_COLOR_5;
-                    textPrinter.shadowColor = TEXT_DYNAMIC_COLOR_4;
+                    textPrinter.color.foreground = TEXT_DYNAMIC_COLOR_5;
+                    textPrinter.color.shadow = TEXT_DYNAMIC_COLOR_4;
                 }
             }
 
-            if (sTrainerNamePositions[i][0] == 0)
+            if (sTrainerNamePositions[i][0] == TOURNEYWIN_NAMES_LEFT)
                 textPrinter.currentX = GetStringWidthDifference(textPrinter.fontId, gDisplayedStringBattle, 0x3D, textPrinter.letterSpacing);
             else
                 textPrinter.currentX = 3;
@@ -5756,12 +5364,12 @@ static void Task_ShowTourneyTree(u8 taskId)
         gTasks[taskId].tState++;
         break;
     case 5:
-        PutWindowTilemap(0);
-        PutWindowTilemap(1);
-        PutWindowTilemap(2);
-        CopyWindowToVram(0, 3);
-        CopyWindowToVram(1, 3);
-        CopyWindowToVram(2, 3);
+        PutWindowTilemap(TOURNEYWIN_NAMES_LEFT);
+        PutWindowTilemap(TOURNEYWIN_NAMES_RIGHT);
+        PutWindowTilemap(TOURNEYWIN_TITLE);
+        CopyWindowToVram(TOURNEYWIN_NAMES_LEFT, COPYWIN_FULL);
+        CopyWindowToVram(TOURNEYWIN_NAMES_RIGHT, COPYWIN_FULL);
+        CopyWindowToVram(TOURNEYWIN_TITLE, COPYWIN_FULL);
         SetHBlankCallback(HblankCb_TourneyTree);
         SetVBlankCallback(VblankCb_TourneyTree);
         if (r4 == 2)
@@ -5813,7 +5421,7 @@ static void DrawTourneyAdvancementLine(u8 tournamentId, u8 roundId)
     const struct TourneyTreeLineSection *lineSection = sTourneyTreeLineSections[tournamentId][roundId];
 
     for (i = 0; i < sTourneyTreeLineSectionArrayCounts[tournamentId][roundId]; i++)
-        CopyToBgTilemapBufferRect_ChangePalette(1, &lineSection[i].src, lineSection[i].x, lineSection[i].y, 1, 1, 17);
+        CopyToBgTilemapBufferRect_ChangePalette(1, &lineSection[i].tile, lineSection[i].x, lineSection[i].y, 1, 1, 17);
 
     CopyBgTilemapBufferToVram(1);
 }
@@ -5841,15 +5449,16 @@ static void Task_HandleStaticTourneyTreeInput(u8 taskId)
         {
             gTasks[taskId].tState = STATE_DELAY;
             gTasks[taskId].data[3] = 64;
-            textPrinter.fontId = 2;
+            textPrinter.type = WINDOW_TEXT_PRINTER;
+            textPrinter.fontId = FONT_SHORT;
             textPrinter.x = 0;
             textPrinter.y = 0;
             textPrinter.letterSpacing = 2;
             textPrinter.lineSpacing = 0;
-            textPrinter.unk = 0;
-            textPrinter.fgColor = TEXT_DYNAMIC_COLOR_2;
-            textPrinter.bgColor = TEXT_COLOR_TRANSPARENT;
-            textPrinter.shadowColor = TEXT_DYNAMIC_COLOR_4;
+            textPrinter.color.accent = TEXT_COLOR_TRANSPARENT;
+            textPrinter.color.foreground = TEXT_DYNAMIC_COLOR_2;
+            textPrinter.color.background = TEXT_COLOR_TRANSPARENT;
+            textPrinter.color.shadow = TEXT_DYNAMIC_COLOR_4;
 
             // Update the advancement lines and gray out eliminated trainer names
             for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
@@ -5858,7 +5467,7 @@ static void Task_HandleStaticTourneyTreeInput(u8 taskId)
                 if (DOME_TRAINERS[i].eliminatedAt == gSaveBlock2Ptr->frontier.curChallengeBattleNum - 1
                     && DOME_TRAINERS[i].isEliminated)
                 {
-                    if (sTrainerNamePositions[i][0] == 0)
+                    if (sTrainerNamePositions[i][0] == TOURNEYWIN_NAMES_LEFT)
                         textPrinter.currentX = GetStringWidthDifference(textPrinter.fontId, gDisplayedStringBattle, 0x3D, textPrinter.letterSpacing);
                     else
                         textPrinter.currentX = 3;
@@ -5914,8 +5523,8 @@ static void CB2_TourneyTree(void)
 
 static void VblankCb_TourneyInfoCard(void)
 {
-    ChangeBgX(3, 0x80, 1);
-    ChangeBgY(3, 0x80, 2);
+    ChangeBgX(3, 0x80, BG_COORD_ADD);
+    ChangeBgY(3, 0x80, BG_COORD_SUB);
     SetGpuReg(REG_OFFSET_BG0HOFS, gBattle_BG0_X);
     SetGpuReg(REG_OFFSET_BG0VOFS, gBattle_BG0_Y);
     SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
@@ -6010,8 +5619,8 @@ static void VblankCb_TourneyTree(void)
     SetGpuReg(REG_OFFSET_BG0VOFS, gBattle_BG0_Y);
     SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
     SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
-    ChangeBgY(2, 0x80, 2);
-    ChangeBgY(3, 0x80, 1);
+    ChangeBgY(2, 0x80, BG_COORD_SUB);
+    ChangeBgY(3, 0x80, BG_COORD_ADD);
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
@@ -6038,15 +5647,15 @@ static void ResetSketchedMoves(void)
             count = 0;
             while (count < MAX_MON_MOVES)
             {
-                if (GetMonData(&gSaveBlock1Ptr->playerParty[playerMonId], MON_DATA_MOVE1 + count, NULL) == GetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + moveSlot, NULL))
+                if (GetMonData(GetSavedPlayerPartyMon(playerMonId), MON_DATA_MOVE1 + count) == GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_MOVE1 + moveSlot))
                     break;
                 count++;
             }
             if (count == MAX_MON_MOVES)
-                SetMonMoveSlot(&gPlayerParty[i], MOVE_SKETCH, moveSlot);
+                SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][i], MOVE_SKETCH, moveSlot);
         }
 
-        gSaveBlock1Ptr->playerParty[playerMonId] = gPlayerParty[i];
+        SavePlayerPartyMon(playerMonId, &gParties[B_TRAINER_PLAYER][i]);
     }
 }
 
@@ -6057,9 +5666,8 @@ static void RestoreDomePlayerPartyHeldItems(void)
     for (i = 0; i < DOME_BATTLE_PARTY_SIZE; i++)
     {
         int playerMonId = gSaveBlock2Ptr->frontier.selectedPartyMons[gSelectedOrderFromParty[i] - 1] - 1;
-        u16 item = GetMonData(&gSaveBlock1Ptr->playerParty[playerMonId], MON_DATA_HELD_ITEM, NULL);
-        SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &item);
-        TryUpdateMonFormForHeldItem(&gPlayerParty[i]);
+        enum Item item = GetMonData(GetSavedPlayerPartyMon(playerMonId), MON_DATA_HELD_ITEM);
+        SetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_HELD_ITEM, &item);
     }
 }
 
@@ -6071,7 +5679,7 @@ static void ReduceDomePlayerPartyToSelectedMons(void)
 static void GetPlayerSeededBeforeOpponent(void)
 {
     // A higher tournament ID is a worse seed
-    if (TrainerIdToTournamentId(gTrainerBattleOpponent_A) > TrainerIdToTournamentId(TRAINER_PLAYER))
+    if (TrainerIdToTournamentId(TRAINER_BATTLE_PARAM.opponentA) > TrainerIdToTournamentId(TRAINER_PLAYER))
         gSpecialVar_Result = 1;
     else
         gSpecialVar_Result = 2;
@@ -6095,28 +5703,30 @@ static void InitRandomTourneyTreeResults(void)
 {
     int i, j, k;
     int monLevel;
-    int species[FRONTIER_PARTY_SIZE];
+    enum Species species[FRONTIER_PARTY_SIZE];
     int monTypesBits;
     int trainerId;
     int monId;
     int zero1;
     int zero2;
-    u8 lvlMode;
-    u16 statSums[DOME_TOURNAMENT_TRAINERS_COUNT] = {0};
-    int statValues[NUM_STATS] = {0};
+    enum FrontierLevelMode lvlMode;
+    u16 *statSums;
+    int *statValues;
     u8 ivs = 0;
 
-    species[0] = 0;
-    species[1] = 0;
-    species[2] = 0;
+    species[0] = SPECIES_NONE;
+    species[1] = SPECIES_NONE;
+    species[2] = SPECIES_NONE;
     if ((gSaveBlock2Ptr->frontier.domeLvlMode != -gSaveBlock2Ptr->frontier.domeBattleMode) && gSaveBlock2Ptr->frontier.challengeStatus != CHALLENGE_STATUS_SAVING)
         return;
 
+    statSums = AllocZeroed(sizeof(u16) * DOME_TOURNAMENT_TRAINERS_COUNT);
+    statValues = AllocZeroed(sizeof(int) * NUM_STATS);
     lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     gSaveBlock2Ptr->frontier.lvlMode = FRONTIER_LVL_50;
     zero1 = 0;
     zero2 = 0;
-    
+
     gSaveBlock2Ptr->frontier.domeLvlMode = zero1 + 1;
     gSaveBlock2Ptr->frontier.domeBattleMode = zero2 + 1;
 
@@ -6151,7 +5761,7 @@ static void InitRandomTourneyTreeResults(void)
                     if (alreadySelectedMonId == monId
                         || species[0] == gFacilityTrainerMons[monId].species
                         || species[1] == gFacilityTrainerMons[monId].species
-                        || gFacilityTrainerMons[alreadySelectedMonId].itemTableId == gFacilityTrainerMons[monId].itemTableId)
+                        || gFacilityTrainerMons[alreadySelectedMonId].heldItem == gFacilityTrainerMons[monId].heldItem)
                         break;
                 }
             } while (k != j);
@@ -6164,7 +5774,7 @@ static void InitRandomTourneyTreeResults(void)
         DOME_TRAINERS[i].forfeited = FALSE;
     }
 
-    monLevel = 50;
+    monLevel = FRONTIER_MAX_LEVEL_50;
     for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
     {
         monTypesBits = 0;
@@ -6172,11 +5782,8 @@ static void InitRandomTourneyTreeResults(void)
         ivs = GetDomeTrainerMonIvs(DOME_TRAINERS[i].trainerId);
         for (j = 0; j < FRONTIER_PARTY_SIZE; j++)
         {
-            CalcDomeMonStats(gFacilityTrainerMons[DOME_MONS[i][j]].species,
-                             monLevel, ivs,
-                             gFacilityTrainerMons[DOME_MONS[i][j]].evSpread,
-                             gFacilityTrainerMons[DOME_MONS[i][j]].nature,
-                             statValues);
+            CalcDomeMonStats(&gFacilityTrainerMons[DOME_MONS[i][j]],
+                             monLevel, ivs, statValues);
 
             statSums[i] += statValues[STAT_ATK];
             statSums[i] += statValues[STAT_DEF];
@@ -6184,8 +5791,8 @@ static void InitRandomTourneyTreeResults(void)
             statSums[i] += statValues[STAT_SPDEF];
             statSums[i] += statValues[STAT_SPEED];
             statSums[i] += statValues[STAT_HP];
-            monTypesBits |= gBitTable[gBaseStats[gFacilityTrainerMons[DOME_MONS[i][j]].species].type1];
-            monTypesBits |= gBitTable[gBaseStats[gFacilityTrainerMons[DOME_MONS[i][j]].species].type2];
+            monTypesBits |= 1u << GetSpeciesType(gFacilityTrainerMons[DOME_MONS[i][j]].species, 0);
+            monTypesBits |= 1u << GetSpeciesType(gFacilityTrainerMons[DOME_MONS[i][j]].species, 1);
         }
 
         // Because GF hates temporary vars, trainerId acts like monTypesCount here.
@@ -6213,6 +5820,9 @@ static void InitRandomTourneyTreeResults(void)
             }
         }
     }
+
+    Free(statSums);
+    Free(statValues);
 
     for (i = 0; i < DOME_ROUNDS_COUNT; i++)
         DecideRoundWinners(i);
@@ -6247,10 +5857,10 @@ int TrainerIdToDomeTournamentId(u16 trainerId)
     return i;
 }
 
-static u8 sub_81953E8(u8 tournamentId, u8 round)
+static u8 GetOpposingNPCTournamentIdByRound(u8 tournamentId, u8 round)
 {
     u8 tournamentIds[2];
-    BufferDomeWinString(gUnknown_0860D1A0[gUnknown_0860D1C0[tournamentId] / 2][round] - 16, tournamentIds);
+    BufferDomeWinString(sTrainerAndRoundToLastMatchCardNum[sTournamentIdToPairedTrainerIds[tournamentId] / 2][round] - 16, tournamentIds);
     if (tournamentId == tournamentIds[0])
         return tournamentIds[1];
     else
@@ -6263,7 +5873,7 @@ static void DecideRoundWinners(u8 roundId)
     int i;
     int moveSlot, monId1, monId2;
     int tournamentId1, tournamentId2;
-    int species;
+    enum Species species;
     int points1 = 0, points2 = 0;
 
     for (i = 0; i < DOME_TOURNAMENT_TRAINERS_COUNT; i++)
@@ -6290,8 +5900,11 @@ static void DecideRoundWinners(u8 roundId)
         // Decide which one of two trainers wins!
         else if (tournamentId2 != 0xFF)
         {
+            // BUG: points1 and points2 are not cleared at the beginning of the loop resulting in not fair results.
+            #ifdef BUGFIX
             points1 = 0;
             points2 = 0;
+            #endif
 
             // Calculate points for both trainers.
             for (monId1 = 0; monId1 < FRONTIER_PARTY_SIZE; monId1++)
@@ -6301,16 +5914,11 @@ static void DecideRoundWinners(u8 roundId)
                     for (monId2 = 0; monId2 < FRONTIER_PARTY_SIZE; monId2++)
                     {
                         points1 += GetTypeEffectivenessPoints(gFacilityTrainerMons[DOME_MONS[tournamentId1][monId1]].moves[moveSlot],
-                                                gFacilityTrainerMons[DOME_MONS[tournamentId2][monId2]].species, 2);
+                                                gFacilityTrainerMons[DOME_MONS[tournamentId2][monId2]].species, EFFECTIVENESS_MODE_AI_VS_AI);
                     }
                 }
                 species = gFacilityTrainerMons[DOME_MONS[tournamentId1][monId1]].species;
-                points1 += ( gBaseStats[species].baseHP
-                           + gBaseStats[species].baseAttack
-                           + gBaseStats[species].baseDefense
-                           + gBaseStats[species].baseSpeed
-                           + gBaseStats[species].baseSpAttack
-                           + gBaseStats[species].baseSpDefense) / 10;
+                points1 += GetTotalBaseStat(species) / 10;
             }
             // Random part of the formula.
             points1 += (Random() & 0x1F);
@@ -6324,16 +5932,11 @@ static void DecideRoundWinners(u8 roundId)
                     for (monId2 = 0; monId2 < FRONTIER_PARTY_SIZE; monId2++)
                     {
                         points2 += GetTypeEffectivenessPoints(gFacilityTrainerMons[DOME_MONS[tournamentId2][monId1]].moves[moveSlot],
-                                                gFacilityTrainerMons[DOME_MONS[tournamentId1][monId2]].species, 2);
+                                                gFacilityTrainerMons[DOME_MONS[tournamentId1][monId2]].species, EFFECTIVENESS_MODE_AI_VS_AI);
                     }
                 }
                 species = gFacilityTrainerMons[DOME_MONS[tournamentId2][monId1]].species;
-                points2 += ( gBaseStats[species].baseHP
-                           + gBaseStats[species].baseAttack
-                           + gBaseStats[species].baseDefense
-                           + gBaseStats[species].baseSpeed
-                           + gBaseStats[species].baseSpAttack
-                           + gBaseStats[species].baseSpDefense) / 10;
+                points2 += GetTotalBaseStat(species) / 10;
             }
             // Random part of the formula.
             points2 += (Random() & 0x1F);
@@ -6376,7 +5979,7 @@ static void CopyDomeTrainerName(u8 *str, u16 trainerId)
 
     if (trainerId == TRAINER_FRONTIER_BRAIN)
     {
-        CopyDomeBrainTrainerName(str);
+        CopyFrontierBrainTrainerName(str);
     }
     else
     {
@@ -6392,23 +5995,4 @@ static void CopyDomeTrainerName(u8 *str, u16 trainerId)
         }
         str[i] = EOS;
     }
-}
-
-static u8 GetDomeBrainTrainerPicId(void)
-{
-    return gTrainers[TRAINER_TUCKER].trainerPic;
-}
-
-static u8 GetDomeBrainTrainerClass(void)
-{
-    return gTrainers[TRAINER_TUCKER].trainerClass;
-}
-
-static void CopyDomeBrainTrainerName(u8 *str)
-{
-    int i;
-
-    for (i = 0; i < PLAYER_NAME_LENGTH; i++)
-        str[i] = gTrainers[TRAINER_TUCKER].trainerName[i];
-    str[i] = EOS;
 }

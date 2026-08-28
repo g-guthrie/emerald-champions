@@ -1,7 +1,7 @@
-VerdanturfTown_Mart_MapScripts:: @ 8202586
+VerdanturfTown_Mart_MapScripts::
 	.byte 0
 
-VerdanturfTown_Mart_EventScript_Clerk:: @ 8202587
+VerdanturfTown_Mart_EventScript_Clerk::
 	lock
 	faceplayer
 	message gText_HowMayIServeYou
@@ -11,67 +11,49 @@ VerdanturfTown_Mart_EventScript_Clerk:: @ 8202587
 	release
 	end
 
+	.align 2
 VerdanturfTown_Mart_Pokemart:
-	.2byte ITEM_X_ATTACK
-	.2byte ITEM_X_DEFENSE
+	.2byte ITEM_GREAT_BALL
+	.2byte ITEM_NEST_BALL
+	.2byte ITEM_SUPER_POTION
+	.2byte ITEM_ANTIDOTE
+	.2byte ITEM_PARALYZE_HEAL
+	.2byte ITEM_AWAKENING
+	.2byte ITEM_BURN_HEAL
+	.2byte ITEM_ICE_HEAL
+	.2byte ITEM_REPEL
 	.2byte ITEM_X_SP_ATK
-	.2byte ITEM_X_SP_DEF
-	.2byte ITEM_X_SPEED
-	.2byte ITEM_X_ACCURACY
-	.2byte ITEM_GUARD_SPEC
-	.2byte ITEM_DIRE_HIT
-	.2byte ITEM_NONE
-	release
-	end
+	.2byte ITEM_FLUFFY_TAIL
+	.2byte ITEM_RARE_CANDY
+	pokemartlistend
 
-VerdanturfTown_Mart_EventScript_Boy:: @ 82025BA
+VerdanturfTown_Mart_EventScript_Boy::
 	msgbox VerdanturfTown_Mart_Text_XSpecialIsCrucial, MSGBOX_NPC
 	end
 
-VerdanturfTown_Mart_EventScript_ExpertF:: @ 82025C3
+VerdanturfTown_Mart_EventScript_ExpertF::
 	msgbox VerdanturfTown_Mart_Text_NoStrategyGuidesForBattleTent, MSGBOX_NPC
 	end
 
-VerdanturfTown_Mart_EventScript_Lass:: @ 82025CC
+VerdanturfTown_Mart_EventScript_Lass::
 	msgbox VerdanturfTown_Mart_Text_NestBallOnWeakenedPokemon, MSGBOX_NPC
 	end
 
-VerdanturfTown_Mart_EventScript_PaybackTM::
-	lock
-	faceplayer
-	goto_if_set FLAG_VERDANT_GIFT_PAYBACK, VerdanturfTown_Mart_EventScript_ReceivedTM66
-	msgbox VerdanturfTown_Mart_Text_SlowPokemon, MSGBOX_DEFAULT
-	giveitem ITEM_GIMMIGHOUL_COIN
-	compare VAR_RESULT, FALSE
-	goto_if_eq Common_EventScript_ShowBagIsFull
-	setflag FLAG_VERDANT_GIFT_PAYBACK
-	msgbox VerdanturfTown_Mart_Text_HaveTM66, MSGBOX_DEFAULT
-	release
-	end
-
-VerdanturfTown_Mart_EventScript_ReceivedTM66::
-	msgbox VerdanturfTown_Mart_Text_HaveTM66, MSGBOX_DEFAULT
-	release
-	end
-VerdanturfTown_Mart_Text_SlowPokemon:
-	.string "Do slow Pokémon tire of waiting?\p"
-	.string "Try this Gimmighoul Coin instead!$"
-VerdanturfTown_Mart_Text_HaveTM66:
-	.string "A Gimmighoul Coin unlocks one very\n"
-	.string "unusual evolution.$"
-
-VerdanturfTown_Mart_Text_XSpecialIsCrucial: @ 82025D5
-	.string "For any Pokémon match, X Special\n"
+VerdanturfTown_Mart_Text_XSpecialIsCrucial:
+	.string "For any POKéMON match, X SPECIAL\n"
 	.string "is crucial.\p"
 	.string "It jacks up the power of some moves\n"
 	.string "even though it's only for one battle.$"
 
-VerdanturfTown_Mart_Text_NoStrategyGuidesForBattleTent: @ 820264C
+VerdanturfTown_Mart_Text_NoStrategyGuidesForBattleTent:
 	.string "They don't seem to sell any winning\n"
-	.string "strategy guides for the Battle Tent…\p"
+	.string "strategy guides for the BATTLE TENT…\p"
 	.string "It seems one must rely on one's\n"
 	.string "own wits after all…$"
 
 VerdanturfTown_Mart_Text_NestBallOnWeakenedPokemon:
-	.string "The Nest Ball works better on\n"
-	.string "weaker Pokémon.$"
+	.string "The NEST BALL works better on\n"
+	.string "weakened POKéMON.\p"
+	.string "VERDANTURF is the only place you can\n"
+	.string "buy it.$"
+

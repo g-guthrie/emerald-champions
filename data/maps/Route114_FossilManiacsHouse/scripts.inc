@@ -1,49 +1,49 @@
-Route114_FossilManiacsHouse_MapScripts:: @ 822AD30
+Route114_FossilManiacsHouse_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route114_FossilManiacsHouse_OnTransition
 	.byte 0
 
-Route114_FossilManiacsHouse_OnTransition: @ 822AD36
+Route114_FossilManiacsHouse_OnTransition:
 	setflag FLAG_LANDMARK_FOSSIL_MANIACS_HOUSE
 	end
 
-Route114_FossilManiacsHouse_EventScript_FossilManiacsBrother:: @ 822AD3A
+Route114_FossilManiacsHouse_EventScript_FossilManiacsBrother::
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_TM28, Route114_FossilManiacsHouse_EventScript_ReceivedDig
+	goto_if_set FLAG_RECEIVED_TM_DIG, Route114_FossilManiacsHouse_EventScript_ReceivedDig
 	msgbox Route114_FossilManiacsHouse_Text_HaveThisToDigLikeMyBrother, MSGBOX_DEFAULT
-	giveitem ITEM_SAIL_FOSSIL
-	compare VAR_RESULT, FALSE
-	goto_if_eq Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_TM28
+	giveitem ITEM_METAL_COAT
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_RECEIVED_TM_DIG
 	release
 	end
 
-Route114_FossilManiacsHouse_EventScript_ReceivedDig:: @ 822AD69
+Route114_FossilManiacsHouse_EventScript_ReceivedDig::
 	msgbox Route114_FossilManiacsHouse_Text_DigReturnsYouToEntrance, MSGBOX_DEFAULT
 	release
 	end
 
-Route114_FossilManiacsHouse_EventScript_RockDisplay:: @ 822AD73
+Route114_FossilManiacsHouse_EventScript_RockDisplay::
 	msgbox Route114_FossilManiacsHouse_Text_RocksFillDisplayCase, MSGBOX_SIGN
 	end
 
-Route114_FossilManiacsHouse_EventScript_Bookshelf:: @ 822AD7C
+Route114_FossilManiacsHouse_EventScript_Bookshelf::
 	msgbox Route114_FossilManiacsHouse_Text_CrammedWithBooks, MSGBOX_SIGN
 	end
 Route114_FossilManiacsHouse_Text_HaveThisToDigLikeMyBrother:
-	.string "My brother dug up this Sail Fossil.\p"
-	.string "Take it to Devon to restore its Pokémon!$"
+	.string "My brother dug up this Metal Coat.\p"
+	.string "It evolves Onix or Scyther when used.$"
 
-Route114_FossilManiacsHouse_Text_DigReturnsYouToEntrance: @ 822AE48
-	.string "That Sail Fossil can be restored into\n"
-	.string "a rare ancient Pokémon at Devon.$"
+Route114_FossilManiacsHouse_Text_DigReturnsYouToEntrance:
+	.string "If you make a POKéMON DIG inside a\n"
+	.string "cave, you're returned to the entrance…$"
 
-Route114_FossilManiacsHouse_Text_RocksFillDisplayCase: @ 822AE92
+Route114_FossilManiacsHouse_Text_RocksFillDisplayCase:
 	.string "Rocks in peculiar shapes fill\n"
 	.string "the display case…$"
 
-Route114_FossilManiacsHouse_Text_CrammedWithBooks: @ 822AEC2
+Route114_FossilManiacsHouse_Text_CrammedWithBooks:
 	.string "THE COMPOSITION OF STRATA…\n"
 	.string "HOW RAIN SHAPES THE LAND…\l"
 	.string "STONES, SOIL, AND ROCK…\p"
 	.string "It's crammed with books.$"
+

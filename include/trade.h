@@ -4,24 +4,23 @@
 #include "link_rfu.h"
 #include "constants/trade.h"
 
-// Exported type declarations
+#define TRADEMON_FROM_PC 1
 
-// Exported RAM declarations
-extern struct MailStruct gTradeMail[PARTY_SIZE];
+extern struct Mail gTradeMail[PARTY_SIZE];
 extern u8 gSelectedTradeMonPositions[2];
 
-// Exported ROM declarations
+extern const u16 gTradePlatform_Tilemap[];
 extern const struct WindowTemplate gTradeEvolutionSceneYesNoWindowTemplate;
 
 s32 GetGameProgressForLinkTrade(void);
 void CB2_StartCreateTradeMenu(void);
 void CB2_LinkTrade(void);
-int CanRegisterMonForTradingBoard(struct GFtgtGnameSub a0, u16, u16, u8);
-int GetUnionRoomTradeMessageId(struct GFtgtGnameSub a0, struct GFtgtGnameSub a1, u16 a2, u16 a3, u8 a4, u16 a5, u8 a6);
-int CanSpinTradeMon(struct Pokemon*, u16);
+int CanRegisterMonForTradingBoard(struct RfuGameCompatibilityData player, enum Species species2, enum Species species, bool8 isModernFatefulEncounter);
+int GetUnionRoomTradeMessageId(struct RfuGameCompatibilityData player, struct RfuGameCompatibilityData partner, enum Species playerSpecies2, enum Species partnerSpecies, enum Type requestedType, enum Species playerSpecies, bool8 isModernFatefulEncounter);
+enum CanTradeMon CanSpinTradeMon(struct Pokemon *mon, u16 monIdx);
 void InitTradeSequenceBgGpuRegs(void);
 void LinkTradeDrawWindow(void);
-void InitTradeBg(void);
-void DrawTextOnTradeWindow(u8, const u8 *, u8);
+void LoadTradeAnimGfx(void);
+void DrawTextOnTradeWindow(u8 windowId, const u8 *str, u8 speed);
 
 #endif //GUARD_TRADE_H

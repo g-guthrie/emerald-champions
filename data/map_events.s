@@ -1,3 +1,4 @@
+#include "constants/global.h"
 #include "constants/event_bg.h"
 #include "constants/event_object_movement.h"
 #include "constants/event_objects.h"
@@ -11,10 +12,11 @@
 #include "constants/trainer_hill.h"
 #include "constants/trainer_types.h"
 #include "constants/berry.h"
+#include "constants/species.h"
+#include "constants/apricorn_tree.h"
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
 
 	.section .rodata
 
 	.include "data/maps/events.inc"
-

@@ -3,6 +3,7 @@
   "name": "MtPyre_Exterior",
   "layout": "LAYOUT_MT_PYRE_EXTERIOR",
   "music": "MUS_MT_PYRE_EXTERIOR",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_MT_PYRE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -12,23 +13,23 @@
   "allow_running": true,
   "show_map_name": true,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": 0,
+  "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 27,
       "y": 15,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "MtPyre_Exterior_EventScript_ItemGengarite",
-      "flag": "FLAG_ITEM_MT_PYRE_EXTERIOR_GENGARITE"
+      "trainer_sight_or_berry_tree_id": "ITEM_MAX_POTION",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ITEM_MT_PYRE_EXTERIOR_MAX_POTION"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 19,
       "y": 40,
       "elevation": 3,
@@ -36,9 +37,9 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "MtPyre_Exterior_EventScript_ItemTM48",
-      "flag": "FLAG_ITEM_MT_PYRE_EXTERIOR_TM_48"
+      "trainer_sight_or_berry_tree_id": "ITEM_GARDEVOIRITE",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ITEM_MT_PYRE_EXTERIOR_TM_SKILL_SWAP"
     }
   ],
   "warp_events": [
@@ -47,21 +48,21 @@
       "y": 42,
       "elevation": 3,
       "dest_map": "MAP_MT_PYRE_1F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 19,
       "y": 10,
       "elevation": 3,
       "dest_map": "MAP_MT_PYRE_SUMMIT",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 20,
       "y": 10,
       "elevation": 3,
       "dest_map": "MAP_MT_PYRE_SUMMIT",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [
@@ -70,7 +71,7 @@
       "x": 24,
       "y": 21,
       "elevation": 3,
-      "var": "0",
+      "var": "TRIGGER_RUN_IMMEDIATELY",
       "var_value": "0",
       "script": "MtPyre_Exterior_EventScript_FogTrigger"
     },
@@ -79,7 +80,7 @@
       "x": 25,
       "y": 21,
       "elevation": 3,
-      "var": "0",
+      "var": "TRIGGER_RUN_IMMEDIATELY",
       "var_value": "0",
       "script": "MtPyre_Exterior_EventScript_FogTrigger"
     },
@@ -88,7 +89,7 @@
       "x": 22,
       "y": 27,
       "elevation": 3,
-      "var": "0",
+      "var": "TRIGGER_RUN_IMMEDIATELY",
       "var_value": "0",
       "script": "MtPyre_Exterior_EventScript_SunTrigger"
     },
@@ -97,7 +98,7 @@
       "x": 23,
       "y": 28,
       "elevation": 3,
-      "var": "0",
+      "var": "TRIGGER_RUN_IMMEDIATELY",
       "var_value": "0",
       "script": "MtPyre_Exterior_EventScript_SunTrigger"
     },
@@ -106,7 +107,7 @@
       "x": 26,
       "y": 21,
       "elevation": 3,
-      "var": "0",
+      "var": "TRIGGER_RUN_IMMEDIATELY",
       "var_value": "0",
       "script": "MtPyre_Exterior_EventScript_FogTrigger"
     }

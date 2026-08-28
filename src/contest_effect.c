@@ -1,4 +1,5 @@
 #include "global.h"
+#include "move.h"
 #include "random.h"
 #include "constants/moves.h"
 #include "contest.h"
@@ -48,7 +49,7 @@ static void ContestEffect_ExciteAudienceInAnyContest(void);
 static void ContestEffect_BadlyStartleMonsWithGoodAppeals(void);
 static void ContestEffect_BetterWhenAudienceExcited(void);
 static void ContestEffect_DontExciteAudience(void);
-static void JamByMoveCategory(u8);
+static void JamByMoveCategory(enum ContestCategories);
 static bool8 CanUnnerveContestant(u8);
 static u8 WasAtLeastOneOpponentJammed(void);
 static void JamContestant(u8, u8);
@@ -60,7 +61,7 @@ static s16 RoundUp(s16);
 bool8 AreMovesContestCombo(u16 lastMove, u16 nextMove)
 {
     int i;
-    u8 lastMoveComboStarterId = gContestMoves[lastMove].comboStarterId;
+    u8 lastMoveComboStarterId = GetMoveContestComboStarter(lastMove);
 
     if (lastMoveComboStarterId == 0)
     {
@@ -70,7 +71,7 @@ bool8 AreMovesContestCombo(u16 lastMove, u16 nextMove)
     {
         for (i = 0; i < MAX_COMBO_MOVES; i++)
         {
-            if (lastMoveComboStarterId == gContestMoves[nextMove].comboMoves[i])
+            if (lastMoveComboStarterId == GetMoveContestComboMoves(nextMove, i))
                 return TRUE;
         }
         return FALSE;
@@ -132,13 +133,14 @@ static void ContestEffect_UserLessEasilyStartled(void)
     SetContestantEffectStringID(eContestAppealResults.contestant,CONTEST_STRING_STOPPED_CARING);
 }
 
-// Slightly startles the POK�MON in front.
+// Badly startles the Pokémon in front.
 static void ContestEffect_StartleFrontMon(void)
 {
     u8 idx = 0;
     u8 a = eContestAppealResults.contestant;
 
-    if (eContestAppealResults.turnOrder[a] != 0) {
+    if (eContestAppealResults.turnOrder[a] != 0)
+    {
         int i;
 
         for (i = 0; i < CONTESTANT_COUNT; i++)
@@ -147,7 +149,7 @@ static void ContestEffect_StartleFrontMon(void)
                 break;
         }
         eContestAppealResults.jamQueue[0] = i;
-        eContestAppealResults.jamQueue[1] = 0xFF;
+        eContestAppealResults.jamQueue[1] = CONTESTANT_NONE;
         idx = WasAtLeastOneOpponentJammed();
     }
     if (idx == 0)
@@ -171,7 +173,7 @@ static void ContestEffect_StartlePrevMons(void)
                 eContestAppealResults.jamQueue[j++] = i;
         }
 
-        eContestAppealResults.jamQueue[j] = 0xFF;
+        eContestAppealResults.jamQueue[j] = CONTESTANT_NONE;
         idx = WasAtLeastOneOpponentJammed();
     }
     if (idx == 0)
@@ -214,7 +216,7 @@ static void ContestEffect_StartlePrevMons2(void)
                 u8 rval, jam;
 
                 eContestAppealResults.jamQueue[0] = i;
-                eContestAppealResults.jamQueue[1] = 0xFF;
+                eContestAppealResults.jamQueue[1] = CONTESTANT_NONE;
                 rval = Random() % 10;
 
                 if (rval == 0)
@@ -291,7 +293,7 @@ static void ContestEffect_StartleMonWithJudgesAttention(void)
                 else
                     eContestAppealResults.jam = 10;
                 eContestAppealResults.jamQueue[0] = i;
-                eContestAppealResults.jamQueue[1] = 0xFF;
+                eContestAppealResults.jamQueue[1] = CONTESTANT_NONE;
                 if (WasAtLeastOneOpponentJammed())
                     numStartled++;
             }
@@ -313,8 +315,8 @@ static void ContestEffect_JamsOthersButMissOneTurn(void)
 // Startles POK�MON that made a same-type appeal.
 static void ContestEffect_StartleMonsSameTypeAppeal(void)
 {
-    u16 move = eContestantStatus[eContestAppealResults.contestant].currMove;
-    JamByMoveCategory(gContestMoves[move].contestCategory);
+    enum Move move = eContestantStatus[eContestAppealResults.contestant].currMove;
+    JamByMoveCategory(GetMoveContestCategory(move));
     SetContestantEffectStringID(eContestAppealResults.contestant, CONTEST_STRING_ATTEMPT_STARTLE);
 }
 
@@ -396,7 +398,7 @@ static void ContestEffect_MakeFollowingMonsNervous(void)
     s16 oddsMod[CONTESTANT_COUNT];
     s16 odds[CONTESTANT_COUNT];
 
-    memset(contestantIds, 0xFF, ARRAY_COUNT(contestantIds));
+    memset(contestantIds, CONTESTANT_NONE, ARRAY_COUNT(contestantIds));
     for (i = 0, numAfter = 0; i < CONTESTANT_COUNT; i++)
     {
         if (eContestAppealResults.turnOrder[eContestAppealResults.contestant] < eContestAppealResults.turnOrder[i] &&
@@ -427,14 +429,14 @@ static void ContestEffect_MakeFollowingMonsNervous(void)
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
         if (eContestantStatus[i].hasJudgesAttention && IsContestantAllowedToCombo(i))
-            oddsMod[i] = gContestMoves[eContestantStatus[i].prevMove].comboStarterId == 0 ? 0 : 10;
+            oddsMod[i] = GetMoveContestComboStarter(eContestantStatus[i].prevMove) == 0 ? 0 : 10;
         else
             oddsMod[i] = 0;
         oddsMod[i] -= (eContestantStatus[i].condition / 10) * 10;
     }
     if (odds[0] != 0)
     {
-        for (i = 0; contestantIds[i] != 0xFF; i++)
+        for (i = 0; contestantIds[i] != CONTESTANT_NONE; i++)
         {
             if (Random() % 100 < odds[i] + oddsMod[contestantIds[i]])
             {
@@ -507,7 +509,7 @@ static void ContestEffect_BadlyStartlesMonsInGoodCondition(void)
             else
                 eContestAppealResults.jam = 10;
             eContestAppealResults.jamQueue[0] = i;
-            eContestAppealResults.jamQueue[1] = 0xFF;
+            eContestAppealResults.jamQueue[1] = CONTESTANT_NONE;
             if (WasAtLeastOneOpponentJammed())
                 numHit++;
         }
@@ -522,8 +524,8 @@ static void ContestEffect_BetterIfFirst(void)
 {
     if (gContestantTurnOrder[eContestAppealResults.contestant] == 0)
     {
-        u16 move = eContestantStatus[eContestAppealResults.contestant].currMove;
-        eContestantStatus[eContestAppealResults.contestant].appeal += 2 * gContestEffects[gContestMoves[move].effect].appeal;
+        enum Move move = eContestantStatus[eContestAppealResults.contestant].currMove;
+        eContestantStatus[eContestAppealResults.contestant].appeal += 2 * gContestEffects[GetMoveContestEffect(move)].appeal;
         SetContestantEffectStringID(eContestAppealResults.contestant, CONTEST_STRING_HUSTLE_STANDOUT);
     }
 }
@@ -533,8 +535,8 @@ static void ContestEffect_BetterIfLast(void)
 {
     if (gContestantTurnOrder[eContestAppealResults.contestant] == 3)
     {
-        u16 move = eContestantStatus[eContestAppealResults.contestant].currMove;
-        eContestantStatus[eContestAppealResults.contestant].appeal += 2 * gContestEffects[gContestMoves[move].effect].appeal;
+        enum Move move = eContestantStatus[eContestAppealResults.contestant].currMove;
+        eContestantStatus[eContestAppealResults.contestant].appeal += 2 * gContestEffects[GetMoveContestEffect(move)].appeal;
         SetContestantEffectStringID(eContestAppealResults.contestant, CONTEST_STRING_WORK_HARD_UNNOTICED);
     }
 }
@@ -609,6 +611,7 @@ static void ContestEffect_BetterWhenLater(void)
 }
 
 // The appeal's quality varies depending on its timing.
+// Despite the name, it seems to be random and not based on timing
 static void ContestEffect_QualityDependsOnTiming(void)
 {
     u8 rval = Random() % 10;
@@ -618,15 +621,18 @@ static void ContestEffect_QualityDependsOnTiming(void)
     {
         appeal = 10;
         SetContestantEffectStringID(eContestAppealResults.contestant, CONTEST_STRING_APPEAL_NOT_VERY_WELL);
-    } else if (rval < 6)
+    }
+    else if (rval < 6)
     {
         appeal = 20;
         SetContestantEffectStringID(eContestAppealResults.contestant, CONTEST_STRING_APPEAL_SLIGHTLY_WELL2);
-    } else if (rval < 8)
+    }
+    else if (rval < 8)
     {
         appeal = 40;
         SetContestantEffectStringID(eContestAppealResults.contestant, CONTEST_STRING_APPEAL_PRETTY_WELL2);
-    } else if (rval < 9)
+    }
+    else if (rval < 9)
     {
         appeal = 60;
         SetContestantEffectStringID(eContestAppealResults.contestant, CONTEST_STRING_APPEAL_VERY_WELL);
@@ -643,7 +649,7 @@ static void ContestEffect_BetterIfSameType(void)
 {
     s8 turnOrder = eContestAppealResults.turnOrder[eContestAppealResults.contestant];
     s8 i = turnOrder - 1, j;
-    u16 move;
+    enum Move move;
 
     if (turnOrder == 0)
         return;
@@ -667,9 +673,9 @@ static void ContestEffect_BetterIfSameType(void)
     }
 
     move = eContestantStatus[eContestAppealResults.contestant].currMove;
-    if (gContestMoves[move].contestCategory == gContestMoves[eContestantStatus[j].currMove].contestCategory)
+    if (GetMoveContestCategory(move) == GetMoveContestCategory(eContestantStatus[j].currMove))
     {
-        eContestantStatus[eContestAppealResults.contestant].appeal += gContestEffects[gContestMoves[move].effect].appeal * 2;
+        eContestantStatus[eContestAppealResults.contestant].appeal += gContestEffects[GetMoveContestEffect(move)].appeal * 2;
         SetContestantEffectStringID(eContestAppealResults.contestant, CONTEST_STRING_SAME_TYPE_GOOD);
     }
 }
@@ -679,15 +685,15 @@ static void ContestEffect_BetterIfDiffType(void)
 {
     if (eContestAppealResults.turnOrder[eContestAppealResults.contestant] != 0)
     {
-        u16 move = eContestantStatus[eContestAppealResults.contestant].currMove;
+        enum Move move = eContestantStatus[eContestAppealResults.contestant].currMove;
         int i;
 
         for (i = 0; i < CONTESTANT_COUNT; i++)
         {
             if (eContestAppealResults.turnOrder[eContestAppealResults.contestant] - 1 == eContestAppealResults.turnOrder[i] &&
-                gContestMoves[move].contestCategory != gContestMoves[eContestantStatus[i].currMove].contestCategory)
+                GetMoveContestCategory(move) != GetMoveContestCategory(eContestantStatus[i].currMove))
             {
-                eContestantStatus[eContestAppealResults.contestant].appeal += gContestEffects[gContestMoves[move].effect].appeal * 2;
+                eContestantStatus[eContestAppealResults.contestant].appeal += gContestEffects[GetMoveContestEffect(move)].appeal * 2;
                 SetContestantEffectStringID(eContestAppealResults.contestant, CONTEST_STRING_DIFF_TYPE_GOOD);
                 break;
             }
@@ -758,7 +764,7 @@ static void ContestEffect_NextAppealEarlier(void)
         for (i = 0; i < CONTESTANT_COUNT; i++)
             turnOrder[i] = eContestantStatus[i].nextTurnOrder;
 
-        turnOrder[eContestAppealResults.contestant] = 0xFF;
+        turnOrder[eContestAppealResults.contestant] = CONTESTANT_NONE;
 
         for (i = 0; i < CONTESTANT_COUNT; i++)
         {
@@ -800,7 +806,7 @@ static void ContestEffect_NextAppealLater(void)
         for (i = 0; i < CONTESTANT_COUNT; i++)
             turnOrder[i] = eContestantStatus[i].nextTurnOrder;
 
-        turnOrder[eContestAppealResults.contestant] = 0xFF;
+        turnOrder[eContestAppealResults.contestant] = CONTESTANT_NONE;
 
         for (i = CONTESTANT_COUNT - 1; i > -1; i--)
         {
@@ -858,16 +864,18 @@ static void ContestEffect_ScrambleNextTurnOrder(void)
 
             for (j = 0; j < CONTESTANT_COUNT; j++)
             {
-                if (unselectedContestants[j] != 0xFF)
+                if (unselectedContestants[j] != CONTESTANT_NONE)
                 {
                     if (rval == 0)
                     {
                         turnOrder[j] = i;
-                        unselectedContestants[j] = 0xFF;
+                        unselectedContestants[j] = CONTESTANT_NONE;
                         break;
                     }
                     else
+                    {
                         rval--;
+                    }
                 }
             }
         }
@@ -882,10 +890,10 @@ static void ContestEffect_ScrambleNextTurnOrder(void)
     }
 }
 
-// An appeal that excites the audience in any Contest.
+// An appeal that excites the audience in any CONTEST.
 static void ContestEffect_ExciteAudienceInAnyContest(void)
 {
-    if (gContestMoves[eContestantStatus[eContestAppealResults.contestant].currMove].contestCategory != gSpecialVar_ContestCategory)
+    if (GetMoveContestCategory(eContestantStatus[eContestAppealResults.contestant].currMove) != gSpecialVar_ContestCategory)
     {
         eContestantStatus[eContestAppealResults.contestant].overrideCategoryExcitementMod = TRUE;
     }
@@ -907,9 +915,11 @@ static void ContestEffect_BadlyStartleMonsWithGoodAppeals(void)
                 eContestAppealResults.jam = RoundUp(eContestAppealResults.jam);
             }
             else
+            {
                 eContestAppealResults.jam = 10;
+            }
             eContestAppealResults.jamQueue[0] = i;
-            eContestAppealResults.jamQueue[1] = 0xFF;
+            eContestAppealResults.jamQueue[1] = CONTESTANT_NONE;
             if (WasAtLeastOneOpponentJammed())
                 numJammed++;
         }
@@ -963,7 +973,7 @@ static void ContestEffect_DontExciteAudience(void)
     }
 }
 
-static void JamByMoveCategory(u8 category)
+static void JamByMoveCategory(enum ContestCategories category)
 {
     int i;
     int numJammed = 0;
@@ -972,12 +982,12 @@ static void JamByMoveCategory(u8 category)
     {
         if (eContestAppealResults.turnOrder[eContestAppealResults.contestant] > eContestAppealResults.turnOrder[i])
         {
-            if (category == gContestMoves[eContestantStatus[i].currMove].contestCategory)
+            if (category == GetMoveContestCategory(eContestantStatus[i].currMove))
                 eContestAppealResults.jam = 40;
             else
                 eContestAppealResults.jam = 10;
             eContestAppealResults.jamQueue[0] = i;
-            eContestAppealResults.jamQueue[1] = 0xFF;
+            eContestAppealResults.jamQueue[1] = CONTESTANT_NONE;
             if (WasAtLeastOneOpponentJammed())
                 numJammed++;
         }
@@ -1016,7 +1026,7 @@ static bool8 WasAtLeastOneOpponentJammed(void)
     s16 jamBuffer[CONTESTANT_COUNT] = {0};
     int i;
 
-    for (i = 0; eContestAppealResults.jamQueue[i] != 0xFF; i++)
+    for (i = 0; eContestAppealResults.jamQueue[i] != CONTESTANT_NONE; i++)
     {
         u8 contestant = eContestAppealResults.jamQueue[i];
         if (CanUnnerveContestant(contestant))
@@ -1070,7 +1080,9 @@ static s16 RoundTowardsZero(s16 score)
             score -= 10 - absScore;
     }
     else
+    {
         score -= absScore;
+    }
     return score;
 }
 

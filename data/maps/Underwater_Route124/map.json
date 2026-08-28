@@ -3,6 +3,7 @@
   "name": "Underwater_Route124",
   "layout": "LAYOUT_UNDERWATER_ROUTE124",
   "music": "MUS_UNDERWATER",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_UNDERWATER_124",
   "requires_flash": false,
   "weather": "WEATHER_UNDERWATER_BUBBLES",
@@ -14,25 +15,19 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "direction": "down",
+      "map": "MAP_UNDERWATER_ROUTE126",
       "offset": 0,
-      "map": "MAP_UNDERWATER_ROUTE126"
+      "direction": "down"
     },
     {
-      "direction": "emerge",
+      "map": "MAP_ROUTE124",
       "offset": 0,
-      "map": "MAP_ROUTE124"
+      "direction": "emerge"
     }
   ],
-  "object_events": [
-
-  ],
-  "warp_events": [
-
-  ],
-  "coord_events": [
-
-  ],
+  "object_events": [],
+  "warp_events": [],
+  "coord_events": [],
   "bg_events": [
     {
       "type": "hidden_item",
@@ -71,8 +66,8 @@
       "x": 70,
       "y": 64,
       "elevation": 3,
-      "item": "ITEM_BOTTLE_CAP",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_BOTTLE_CAP_1"
+      "item": "ITEM_HEART_SCALE",
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_HEART_SCALE_1"
     },
     {
       "type": "hidden_item",
@@ -87,16 +82,8 @@
       "x": 45,
       "y": 36,
       "elevation": 3,
-      "item": "ITEM_BOTTLE_CAP",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_BOTTLE_CAP_2"
-    },
-    {
-      "type": "hidden_item",
-      "x": 13,
-      "y": 33,
-      "elevation": 3,
-      "item": "ITEM_PIXIE_PLATE",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_PIXIE_PLATE"
+      "item": "ITEM_HEART_SCALE",
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_124_HEART_SCALE_2"
     }
   ]
 }

@@ -10,36 +10,13 @@
 #include "task.h"
 #include "util.h"
 #include "trainer_hill.h"
-#include "constants/easy_chat.h"
 #include "constants/trainers.h"
 #include "constants/moves.h"
 #include "constants/items.h"
 #include "constants/trainer_hill.h"
 
-enum {
-    EREADER_XFR_STATE_INIT = 0,
-    EREADER_XFR_STATE_HANDSHAKE,
-    EREADER_XFR_STATE_START,
-    EREADER_XFR_STATE_TRANSFER,
-    EREADER_XFR_STATE_TRANSFER_DONE,
-    EREADER_XFR_STATE_CHECKSUM,
-    EREADER_XFR_STATE_DONE
-};
-
-#define EREADER_XFER_EXE 1
-#define EREADER_XFER_CHK 2
-#define EREADER_XFER_SHIFT 0
-#define EREADER_XFER_MASK  3
-
-#define EREADER_CANCEL_TIMEOUT 1
-#define EREADER_CANCEL_KEY     2
-#define EREADER_CANCEL_MASK  0xC
-#define EREADER_CANCEL_SHIFT 2
-
-#define EREADER_CHECKSUM_OK  1
-#define EREADER_CHECKSUM_ERR 2
-#define EREADER_CHECKSUM_MASK  0x30
-#define EREADER_CHECKSUM_SHIFT 4
+// Save data using TryWriteSpecialSaveSector is allowed to exceed SECTOR_DATA_SIZE (up to the counter field)
+STATIC_ASSERT(sizeof(struct TrainerHillChallenge) <= SECTOR_COUNTER_OFFSET, TrainerHillChallengeFreeSpace);
 
 struct SendRecvMgr
 {
@@ -54,7 +31,6 @@ struct SendRecvMgr
     int checksum;
 };
 
-static void GetKeyInput(void);
 static u16 DetermineSendRecvState(u8);
 static void EnableSio(void);
 static void DisableTm3(void);
@@ -62,9 +38,6 @@ static void SetUpTransferManager(size_t, const void *, void *);
 static void StartTm3(void);
 
 static struct SendRecvMgr sSendRecvMgr;
-static u16 sJoyNewOrRepeated;
-static u16 sJoyNew;
-static u16 sSendRecvStatus;
 static u16 sCounter1;
 static u32 sCounter2;
 static u16 sSavedIme;
@@ -83,22 +56,20 @@ static const struct TrainerHillTrainer sTrainerHillTrainerTemplates_JP[] = {
         .speechLose = { EC_WORD_TO_HER, EC_WORD_WIN, EC_WORD_JOKING, EC_WORD_HIGHS, EC_WORD_SCARY, EC_WORD_ELLIPSIS_EXCL },
         .speechAfter = { EC_WORD_IGNORANT, EC_WORD_SO, EC_WORD_TODAY, EC_WORD_NIGHTTIME, EC_WORD_YOU_RE, EC_WORD_ELLIPSIS_ELLIPSIS_ELLIPSIS },
         .mons = {
-            [0] = NULL_BATTLE_TOWER_POKEMON,
-            [1] = NULL_BATTLE_TOWER_POKEMON,
-            [2] = NULL_BATTLE_TOWER_POKEMON,
+            [0] = DUMMY_HILL_MON,
+            [1] = DUMMY_HILL_MON,
+            [2] = DUMMY_HILL_MON,
             [3] = {
                 .species = SPECIES_SWALOT,
                 .heldItem = ITEM_SHELL_BELL,
                 .moves = { MOVE_SLUDGE_BOMB, MOVE_SHADOW_BALL, MOVE_PAIN_SPLIT, MOVE_YAWN },
-                .level = 0,
-                .ppBonuses = 0x0,
                 .hpEV = 55,
                 .attackEV = 255,
                 .defenseEV = 100,
                 .speedEV = 0,
                 .spAttackEV = 0,
                 .spDefenseEV = 100,
-                .otId = 0x10000000,
+                .otId = TRAINER_HILL_OTID,
                 .hpIV = 5,
                 .attackIV = 5,
                 .defenseIV = 5,
@@ -108,21 +79,19 @@ static const struct TrainerHillTrainer sTrainerHillTrainerTemplates_JP[] = {
                 .abilityNum = 1,
                 .personality = 0x80,
                 .nickname = __("マルノーム$$$$$$"),
-                .friendship = 255
+                .friendship = MAX_FRIENDSHIP
             },
             [4] = {
                 .species = SPECIES_DUSTOX,
                 .heldItem = ITEM_BRIGHT_POWDER,
                 .moves = { MOVE_SILVER_WIND, MOVE_SLUDGE_BOMB, MOVE_SHADOW_BALL, MOVE_GIGA_DRAIN },
-                .level = 0,
-                .ppBonuses = 0x0,
                 .hpEV = 0,
                 .attackEV = 255,
                 .defenseEV = 0,
                 .speedEV = 0,
                 .spAttackEV = 255,
                 .spDefenseEV = 0,
-                .otId = 0x10000000,
+                .otId = TRAINER_HILL_OTID,
                 .hpIV = 5,
                 .attackIV = 5,
                 .defenseIV = 5,
@@ -132,21 +101,19 @@ static const struct TrainerHillTrainer sTrainerHillTrainerTemplates_JP[] = {
                 .abilityNum = 0,
                 .personality = 0x6,
                 .nickname = __("ドクケイル$$$$$$"),
-                .friendship = 255
+                .friendship = MAX_FRIENDSHIP
             },
             [5] = {
                 .species = SPECIES_RELICANTH,
                 .heldItem = ITEM_QUICK_CLAW,
                 .moves = { MOVE_ANCIENT_POWER, MOVE_SURF, MOVE_EARTHQUAKE, MOVE_AMNESIA },
-                .level = 0,
-                .ppBonuses = 0x0,
                 .hpEV = 100,
                 .attackEV = 0,
                 .defenseEV = 0,
                 .speedEV = 0,
                 .spAttackEV = 155,
                 .spDefenseEV = 255,
-                .otId = 0x10000000,
+                .otId = TRAINER_HILL_OTID,
                 .hpIV = 5,
                 .attackIV = 5,
                 .defenseIV = 5,
@@ -156,7 +123,7 @@ static const struct TrainerHillTrainer sTrainerHillTrainerTemplates_JP[] = {
                 .abilityNum = 0,
                 .personality = 0x2f,
                 .nickname = __("ジーランス$$$$$$"),
-                .friendship = 255
+                .friendship = MAX_FRIENDSHIP
             },
         }
     },
@@ -169,22 +136,20 @@ static const struct TrainerHillTrainer sTrainerHillTrainerTemplates_JP[] = {
         .speechLose = { EC_MOVE2(MINIMIZE), EC_WORD_AS_MUCH_AS, EC_EMPTY_WORD, EC_WORD_THEY_RE, EC_WORD_SAD, EC_WORD_EXCL },
         .speechAfter = { EC_MOVE(BITE), EC_WORD_AS_MUCH_AS, EC_EMPTY_WORD, EC_WORD_THEY_RE, EC_WORD_ANGRY, EC_WORD_EXCL },
         .mons = {
-            [0] = NULL_BATTLE_TOWER_POKEMON,
-            [1] = NULL_BATTLE_TOWER_POKEMON,
-            [2] = NULL_BATTLE_TOWER_POKEMON,
+            [0] = DUMMY_HILL_MON,
+            [1] = DUMMY_HILL_MON,
+            [2] = DUMMY_HILL_MON,
             [3] = {
                 .species = SPECIES_CACTURNE,
                 .heldItem = ITEM_QUICK_CLAW,
                 .moves = { MOVE_GIGA_DRAIN, MOVE_FEINT_ATTACK, MOVE_THUNDER_PUNCH, MOVE_GROWTH },
-                .level = 0,
-                .ppBonuses = 0x0,
                 .hpEV = 55,
                 .attackEV = 0,
                 .defenseEV = 100,
                 .speedEV = 0,
                 .spAttackEV = 255,
                 .spDefenseEV = 100,
-                .otId = 0x10000000,
+                .otId = TRAINER_HILL_OTID,
                 .hpIV = 5,
                 .attackIV = 5,
                 .defenseIV = 5,
@@ -194,21 +159,19 @@ static const struct TrainerHillTrainer sTrainerHillTrainerTemplates_JP[] = {
                 .abilityNum = 0,
                 .personality = 0x8c,
                 .nickname = __("ノクタス$$$$$$$"),
-                .friendship = 255
+                .friendship = MAX_FRIENDSHIP
             },
             [4] = {
                 .species = SPECIES_SWELLOW,
                 .heldItem = ITEM_BRIGHT_POWDER,
                 .moves = { MOVE_FACADE, MOVE_AERIAL_ACE, MOVE_QUICK_ATTACK, MOVE_DOUBLE_TEAM },
-                .level = 0,
-                .ppBonuses = 0x0,
                 .hpEV = 255,
                 .attackEV = 255,
                 .defenseEV = 0,
                 .speedEV = 0,
                 .spAttackEV = 0,
                 .spDefenseEV = 0,
-                .otId = 0x10000000,
+                .otId = TRAINER_HILL_OTID,
                 .hpIV = 5,
                 .attackIV = 5,
                 .defenseIV = 5,
@@ -218,21 +181,19 @@ static const struct TrainerHillTrainer sTrainerHillTrainerTemplates_JP[] = {
                 .abilityNum = 0,
                 .personality = 0x80,
                 .nickname = __("オオスバメ$$$$$$"),
-                .friendship = 255
+                .friendship = MAX_FRIENDSHIP
             },
             [5] = {
                 .species = SPECIES_WHISCASH,
                 .heldItem = ITEM_CHESTO_BERRY,
                 .moves = { MOVE_SURF, MOVE_EARTHQUAKE, MOVE_AMNESIA, MOVE_REST },
-                .level = 0,
-                .ppBonuses = 0x0,
                 .hpEV = 0,
                 .attackEV = 255,
                 .defenseEV = 0,
                 .speedEV = 0,
                 .spAttackEV = 255,
                 .spDefenseEV = 0,
-                .otId = 0x10000000,
+                .otId = TRAINER_HILL_OTID,
                 .hpIV = 5,
                 .attackIV = 5,
                 .defenseIV = 5,
@@ -242,7 +203,7 @@ static const struct TrainerHillTrainer sTrainerHillTrainerTemplates_JP[] = {
                 .abilityNum = 0,
                 .personality = 0x0,
                 .nickname = __("ナマズン$$$$$$$"),
-                .friendship = 255
+                .friendship = MAX_FRIENDSHIP
             },
         }
     },
@@ -255,22 +216,20 @@ static const struct TrainerHillTrainer sTrainerHillTrainerTemplates_JP[] = {
         .speechLose = { EC_WORD_THAT, EC_WORD_ABOVE, EC_WORD_LOST, EC_WORD_STORES, EC_WORD_JOKING, EC_WORD_ELLIPSIS_ELLIPSIS_ELLIPSIS },
         .speechAfter = { EC_WORD_ENTERTAINING, EC_WORD_NONE, EC_WORD_HEY_QUES, EC_WORD_ALMOST, EC_WORD_EXCL, EC_EMPTY_WORD },
         .mons = {
-            [0] = NULL_BATTLE_TOWER_POKEMON,
-            [1] = NULL_BATTLE_TOWER_POKEMON,
-            [2] = NULL_BATTLE_TOWER_POKEMON,
+            [0] = DUMMY_HILL_MON,
+            [1] = DUMMY_HILL_MON,
+            [2] = DUMMY_HILL_MON,
             [3] = {
                 .species = SPECIES_DELCATTY,
                 .heldItem = ITEM_LUM_BERRY,
                 .moves = { MOVE_SING, MOVE_BODY_SLAM, MOVE_SHADOW_BALL, MOVE_IRON_TAIL },
-                .level = 0,
-                .ppBonuses = 0x0,
                 .hpEV = 0,
                 .attackEV = 255,
                 .defenseEV = 0,
                 .speedEV = 255,
                 .spAttackEV = 0,
                 .spDefenseEV = 0,
-                .otId = 0x10000000,
+                .otId = TRAINER_HILL_OTID,
                 .hpIV = 5,
                 .attackIV = 5,
                 .defenseIV = 5,
@@ -280,21 +239,19 @@ static const struct TrainerHillTrainer sTrainerHillTrainerTemplates_JP[] = {
                 .abilityNum = 0,
                 .personality = 0x3,
                 .nickname = __("エネコロロ$$$$$$"),
-                .friendship = 255
+                .friendship = MAX_FRIENDSHIP
             },
             [4] = {
                 .species = SPECIES_ROSELIA,
                 .heldItem = ITEM_LEFTOVERS,
                 .moves = { MOVE_GIGA_DRAIN, MOVE_GRASS_WHISTLE, MOVE_TOXIC, MOVE_LEECH_SEED },
-                .level = 0,
-                .ppBonuses = 0x0,
                 .hpEV = 255,
                 .attackEV = 0,
                 .defenseEV = 0,
                 .speedEV = 0,
                 .spAttackEV = 255,
                 .spDefenseEV = 0,
-                .otId = 0x10000000,
+                .otId = TRAINER_HILL_OTID,
                 .hpIV = 5,
                 .attackIV = 5,
                 .defenseIV = 5,
@@ -304,21 +261,19 @@ static const struct TrainerHillTrainer sTrainerHillTrainerTemplates_JP[] = {
                 .abilityNum = 1,
                 .personality = 0x6,
                 .nickname = __("ロゼリア$$$$$$$"),
-                .friendship = 255
+                .friendship = MAX_FRIENDSHIP
             },
             [5] = {
                 .species = SPECIES_BEAUTIFLY,
                 .heldItem = ITEM_BRIGHT_POWDER,
                 .moves = { MOVE_SILVER_WIND, MOVE_AERIAL_ACE, MOVE_ATTRACT, MOVE_PSYCHIC },
-                .level = 0,
-                .ppBonuses = 0x0,
                 .hpEV = 100,
                 .attackEV = 200,
                 .defenseEV = 0,
                 .speedEV = 0,
                 .spAttackEV = 200,
                 .spDefenseEV = 0,
-                .otId = 0x10000000,
+                .otId = TRAINER_HILL_OTID,
                 .hpIV = 5,
                 .attackIV = 5,
                 .defenseIV = 5,
@@ -328,7 +283,7 @@ static const struct TrainerHillTrainer sTrainerHillTrainerTemplates_JP[] = {
                 .abilityNum = 0,
                 .personality = 0x6,
                 .nickname = __("アゲハント$$$$$$"),
-                .friendship = 255
+                .friendship = MAX_FRIENDSHIP
             },
         }
     },
@@ -341,22 +296,20 @@ static const struct TrainerHillTrainer sTrainerHillTrainerTemplates_JP[] = {
         .speechLose = { EC_WORD_OUTSIDE, EC_WORD_UNCLE, EC_WORD_SURPRISE, EC_WORD_THESE, EC_WORD_HEY_QUES, EC_WORD_ELLIPSIS_EXCL },
         .speechAfter = { EC_WORD_HE_S, EC_WORD_NO_1, EC_WORD_STRONG, EC_WORD_CHILDREN, EC_WORD_CAN_T, EC_WORD_EXCL_EXCL },
         .mons = {
-            [0] = NULL_BATTLE_TOWER_POKEMON,
-            [1] = NULL_BATTLE_TOWER_POKEMON,
-            [2] = NULL_BATTLE_TOWER_POKEMON,
+            [0] = DUMMY_HILL_MON,
+            [1] = DUMMY_HILL_MON,
+            [2] = DUMMY_HILL_MON,
             [3] = {
                 .species = SPECIES_MAWILE,
                 .heldItem = ITEM_BRIGHT_POWDER,
                 .moves = { MOVE_CRUNCH, MOVE_FLAMETHROWER, MOVE_THUNDER_PUNCH, MOVE_COMET_PUNCH },
-                .level = 0,
-                .ppBonuses = 0x0,
                 .hpEV = 0,
                 .attackEV = 0,
                 .defenseEV = 100,
                 .speedEV = 0,
                 .spAttackEV = 255,
                 .spDefenseEV = 155,
-                .otId = 0x10000000,
+                .otId = TRAINER_HILL_OTID,
                 .hpIV = 5,
                 .attackIV = 5,
                 .defenseIV = 5,
@@ -366,21 +319,19 @@ static const struct TrainerHillTrainer sTrainerHillTrainerTemplates_JP[] = {
                 .abilityNum = 1,
                 .personality = 0x0,
                 .nickname = __("クチート$$$$$$$"),
-                .friendship = 255
+                .friendship = MAX_FRIENDSHIP
             },
             [4] = {
                 .species = SPECIES_SHARPEDO,
                 .heldItem = ITEM_SCOPE_LENS,
                 .moves = { MOVE_SURF, MOVE_CRUNCH, MOVE_DOUBLE_EDGE, MOVE_EARTHQUAKE },
-                .level = 0,
-                .ppBonuses = 0x0,
                 .hpEV = 255,
                 .attackEV = 0,
                 .defenseEV = 0,
                 .speedEV = 0,
                 .spAttackEV = 255,
                 .spDefenseEV = 0,
-                .otId = 0x10000000,
+                .otId = TRAINER_HILL_OTID,
                 .hpIV = 5,
                 .attackIV = 5,
                 .defenseIV = 5,
@@ -390,21 +341,19 @@ static const struct TrainerHillTrainer sTrainerHillTrainerTemplates_JP[] = {
                 .abilityNum = 0,
                 .personality = 0x96,
                 .nickname = __("サメハダー$$$$$$"),
-                .friendship = 255
+                .friendship = MAX_FRIENDSHIP
             },
             [5] = {
                 .species = SPECIES_BANETTE,
                 .heldItem = ITEM_LUM_BERRY,
                 .moves = { MOVE_PSYCHIC, MOVE_SHADOW_BALL, MOVE_THUNDERBOLT, MOVE_WILL_O_WISP },
-                .level = 0,
-                .ppBonuses = 0x0,
                 .hpEV = 255,
                 .attackEV = 0,
                 .defenseEV = 0,
                 .speedEV = 0,
                 .spAttackEV = 255,
                 .spDefenseEV = 0,
-                .otId = 0x10000000,
+                .otId = TRAINER_HILL_OTID,
                 .hpIV = 5,
                 .attackIV = 5,
                 .defenseIV = 5,
@@ -414,7 +363,7 @@ static const struct TrainerHillTrainer sTrainerHillTrainerTemplates_JP[] = {
                 .abilityNum = 0,
                 .personality = 0x96,
                 .nickname = __("ジュペッタ$$$$$$"),
-                .friendship = 255
+                .friendship = MAX_FRIENDSHIP
             },
         }
     },
@@ -422,10 +371,14 @@ static const struct TrainerHillTrainer sTrainerHillTrainerTemplates_JP[] = {
 
 static u8 GetTrainerHillUnkVal(void)
 {
+#if FREE_TRAINER_HILL == FALSE
     return (gSaveBlock1Ptr->trainerHill.unused + 1) % 256;
+#else
+    return 0;
+#endif //FREE_TRAINER_HILL
 }
 
-static bool32 ValidateTrainerChecksum(struct EReaderTrainerHillTrainer * hillTrainer)
+static bool32 ValidateTrainerChecksum(struct EReaderTrainerHillTrainer *hillTrainer)
 {
     int checksum = CalcByteArraySum((u8 *)hillTrainer, offsetof(typeof(*hillTrainer), checksum));
     if (checksum != hillTrainer->checksum)
@@ -434,7 +387,7 @@ static bool32 ValidateTrainerChecksum(struct EReaderTrainerHillTrainer * hillTra
     return TRUE;
 }
 
-bool8 ValidateTrainerHillData(struct EReaderTrainerHillSet * hillSet)
+bool8 ValidateTrainerHillData(struct EReaderTrainerHillSet *hillSet)
 {
     u32 i;
     u32 checksum;
@@ -473,46 +426,46 @@ static bool32 ValidateTrainerHillChecksum(struct EReaderTrainerHillSet *hillSet)
     return TRUE;
 }
 
-static bool32 TryWriteTrainerHill_Internal(struct EReaderTrainerHillSet * hillSet, struct TrHillTag * hillTag)
+static bool32 TryWriteTrainerHill_Internal(struct EReaderTrainerHillSet *hillSet, struct TrainerHillChallenge *challenge)
 {
     int i;
 
     AGB_ASSERT_EX(hillSet->dummy == 0, "cereader_tool.c", 450);
     AGB_ASSERT_EX(hillSet->id == 0, "cereader_tool.c", 452);
 
-    memset(hillTag, 0, SECTOR_SIZE);
-    hillTag->numTrainers = hillSet->numTrainers;
-    hillTag->unused1 = GetTrainerHillUnkVal();
-    hillTag->numFloors = (hillSet->numTrainers + 1) / TRAINER_HILL_TRAINERS_PER_FLOOR;
+    memset(challenge, 0, SECTOR_SIZE);
+    challenge->numTrainers = hillSet->numTrainers;
+    challenge->unused1 = GetTrainerHillUnkVal();
+    challenge->numFloors = (hillSet->numTrainers + 1) / HILL_TRAINERS_PER_FLOOR;
 
     for (i = 0; i < hillSet->numTrainers; i++)
     {
         if (!(i & 1))
         {
-            hillTag->floors[i / TRAINER_HILL_TRAINERS_PER_FLOOR].trainerNum1 = hillSet->trainers[i].trainerNum;
-            hillTag->floors[i / TRAINER_HILL_TRAINERS_PER_FLOOR].display = hillSet->trainers[i].display;
-            hillTag->floors[i / TRAINER_HILL_TRAINERS_PER_FLOOR].trainers[0] = hillSet->trainers[i].trainer;
+            challenge->floors[i / HILL_TRAINERS_PER_FLOOR].trainerNum1 = hillSet->trainers[i].trainerNum;
+            challenge->floors[i / HILL_TRAINERS_PER_FLOOR].map = hillSet->trainers[i].map;
+            challenge->floors[i / HILL_TRAINERS_PER_FLOOR].trainers[0] = hillSet->trainers[i].trainer;
         }
         else
         {
-            hillTag->floors[i / TRAINER_HILL_TRAINERS_PER_FLOOR].trainerNum2 = hillSet->trainers[i].trainerNum;
-            hillTag->floors[i / TRAINER_HILL_TRAINERS_PER_FLOOR].trainers[1] = hillSet->trainers[i].trainer;
+            challenge->floors[i / HILL_TRAINERS_PER_FLOOR].trainerNum2 = hillSet->trainers[i].trainerNum;
+            challenge->floors[i / HILL_TRAINERS_PER_FLOOR].trainers[1] = hillSet->trainers[i].trainer;
         }
     }
 
     if (i & 1)
     {
-        hillTag->floors[i / TRAINER_HILL_TRAINERS_PER_FLOOR].trainers[1] = sTrainerHillTrainerTemplates_JP[i / TRAINER_HILL_TRAINERS_PER_FLOOR];
+        challenge->floors[i / HILL_TRAINERS_PER_FLOOR].trainers[1] = sTrainerHillTrainerTemplates_JP[i / HILL_TRAINERS_PER_FLOOR];
     }
 
-    hillTag->checksum = CalcByteArraySum((u8 *)hillTag->floors, NUM_TRAINER_HILL_FLOORS * sizeof(struct TrHillFloor));
-    if (TryWriteSpecialSaveSection(SECTOR_ID_TRAINER_HILL, (u8 *)hillTag) != SAVE_STATUS_OK)
+    challenge->checksum = CalcByteArraySum((u8 *)challenge->floors, NUM_TRAINER_HILL_FLOORS * sizeof(struct TrainerHillFloor));
+    if (TryWriteSpecialSaveSector(SECTOR_ID_TRAINER_HILL, (u8 *)challenge) != SAVE_STATUS_OK)
         return FALSE;
 
     return TRUE;
 }
 
-bool32 TryWriteTrainerHill(struct EReaderTrainerHillSet * hillSet)
+bool32 TryWriteTrainerHill(struct EReaderTrainerHillSet *hillSet)
 {
     void *buffer = AllocZeroed(SECTOR_SIZE);
     bool32 result = TryWriteTrainerHill_Internal(hillSet, buffer);
@@ -520,9 +473,9 @@ bool32 TryWriteTrainerHill(struct EReaderTrainerHillSet * hillSet)
     return result;
 }
 
-static bool32 TryReadTrainerHill_Internal(struct EReaderTrainerHillSet * dest, u8 * buffer)
+static bool32 TryReadTrainerHill_Internal(struct EReaderTrainerHillSet *dest, u8 *buffer)
 {
-    if (TryReadSpecialSaveSection(SECTOR_ID_TRAINER_HILL, buffer) != SAVE_STATUS_OK)
+    if (TryReadSpecialSaveSector(SECTOR_ID_TRAINER_HILL, buffer) != SAVE_STATUS_OK)
         return FALSE;
 
     memcpy(dest, buffer, sizeof(struct EReaderTrainerHillSet));
@@ -532,7 +485,7 @@ static bool32 TryReadTrainerHill_Internal(struct EReaderTrainerHillSet * dest, u
     return TRUE;
 }
 
-static bool32 TryReadTrainerHill(struct EReaderTrainerHillSet * hillSet)
+static bool32 TryReadTrainerHill(struct EReaderTrainerHillSet *hillSet)
 {
     u8 *buffer = AllocZeroed(SECTOR_SIZE);
     bool32 result = TryReadTrainerHill_Internal(hillSet, buffer);
@@ -545,88 +498,6 @@ bool32 ReadTrainerHillAndValidate(void)
     struct EReaderTrainerHillSet *hillSet = AllocZeroed(SECTOR_SIZE);
     bool32 result = TryReadTrainerHill(hillSet);
     Free(hillSet);
-    return result;
-}
-
-int EReader_Send(int size, const void * src)
-{
-    int result;
-    int sendStatus;
-
-    EReaderHelper_SaveRegsState();
-    while (1)
-    {
-        GetKeyInput();
-        if (sJoyNew & B_BUTTON)
-            gShouldAdvanceLinkState = 2;
-
-        sendStatus = EReaderHandleTransfer(1, size, src, NULL);
-        sSendRecvStatus = sendStatus;
-        if ((sSendRecvStatus & 0x13) == 0x10)
-        {
-            result = 0;
-            break;
-        }
-        else if (sSendRecvStatus & 0x8)
-        {
-            result = 1;
-            break;
-        }
-        else if (sSendRecvStatus & 0x4)
-        {
-            result = 2;
-            break;
-        }
-        else
-        {
-            gShouldAdvanceLinkState = 0;
-            VBlankIntrWait();
-        }
-    }
-
-    CpuFill32(0, &sSendRecvMgr, sizeof(sSendRecvMgr));
-    EReaderHelper_RestoreRegsState();
-    return result;
-}
-
-int EReader_Recv(void * dest)
-{
-    int result;
-    int recvStatus;
-
-    EReaderHelper_SaveRegsState();
-    while (1)
-    {
-        GetKeyInput();
-        if (sJoyNew & B_BUTTON)
-            gShouldAdvanceLinkState = 2;
-
-        recvStatus = EReaderHandleTransfer(0, 0, NULL, dest);
-        sSendRecvStatus = recvStatus;
-        if ((sSendRecvStatus & 0x13) == 0x10)
-        {
-            result = 0;
-            break;
-        }
-        else if (sSendRecvStatus & 0x8)
-        {
-            result = 1;
-            break;
-        }
-        else if (sSendRecvStatus & 0x4)
-        {
-            result = 2;
-            break;
-        }
-        else
-        {
-            gShouldAdvanceLinkState = 0;
-            VBlankIntrWait();
-        }
-    }
-
-    CpuFill32(0, &sSendRecvMgr, sizeof(sSendRecvMgr));
-    EReaderHelper_RestoreRegsState();
     return result;
 }
 
@@ -666,7 +537,7 @@ static void OpenSerial32(void)
     sCounter2 = 0;
 }
 
-int EReaderHandleTransfer(u8 mode, size_t size, const void * data, void * recvBuffer)
+int EReaderHandleTransfer(u8 mode, size_t size, const void *data, void *recvBuffer)
 {
     switch (sSendRecvMgr.state)
     {
@@ -708,16 +579,8 @@ int EReaderHandleTransfer(u8 mode, size_t size, const void * data, void * recvBu
 
             if (sSendRecvMgr.xferState != EREADER_XFER_CHK)
             {
-                if (sSendRecvMgr.isParent && sCounter1 > 2)
-                {
-                    EnableSio();
-                    sSendRecvMgr.xferState = EREADER_XFER_CHK;
-                }
-                else
-                {
-                    EnableSio();
-                    sSendRecvMgr.xferState = EREADER_XFER_CHK;
-                }
+                EnableSio();
+                sSendRecvMgr.xferState = EREADER_XFER_CHK;
             }
         }
         break;
@@ -745,7 +608,7 @@ int EReaderHandleTransfer(u8 mode, size_t size, const void * data, void * recvBu
     }
 
     return (sSendRecvMgr.xferState << EREADER_XFER_SHIFT)
-         | (sSendRecvMgr.cancellationReason << EREADER_CANCEL_SHIFT) 
+         | (sSendRecvMgr.cancellationReason << EREADER_CANCEL_SHIFT)
          | (sSendRecvMgr.checksumResult << EREADER_CHECKSUM_SHIFT);
 }
 
@@ -759,7 +622,7 @@ static u16 DetermineSendRecvState(u8 mode)
     return resp;
 }
 
-static void SetUpTransferManager(size_t size, const void * data, void * recvBuffer)
+static void SetUpTransferManager(size_t size, const void *data, void *recvBuffer)
 {
     if (sSendRecvMgr.isParent)
     {
@@ -800,11 +663,11 @@ void EReaderHelper_SerialCallback(void)
     switch (sSendRecvMgr.state)
     {
     case EREADER_XFR_STATE_HANDSHAKE:
-        REG_SIOMLT_SEND = 0xCCD0; // Handshake id
+        REG_SIOMLT_SEND = EREADER_HANDSHAKE;
         *(u64 *)recv = REG_SIOMLT_RECV;
         for (i = 0, cnt1 = 0, cnt2 = 0; i < 4; i++)
         {
-            if (recv[i] == 0xCCD0)
+            if (recv[i] == EREADER_HANDSHAKE)
                 cnt1++;
             else if (recv[i] != 0xFFFF)
                 cnt2++;
@@ -889,13 +752,6 @@ static void DisableTm3(void)
 {
     REG_TM3CNT_H &= ~TIMER_ENABLE;
     REG_TM3CNT_L = 0xFDA7;
-}
-
-static void GetKeyInput(void)
-{
-    int rawKeys = REG_KEYINPUT ^ KEYS_MASK;
-    sJoyNew = rawKeys & ~sJoyNewOrRepeated;
-    sJoyNewOrRepeated = rawKeys;
 }
 
 void EReaderHelper_SaveRegsState(void)

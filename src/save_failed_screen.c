@@ -1,6 +1,7 @@
 #include "global.h"
 #include "text.h"
 #include "main.h"
+#include "malloc.h"
 #include "palette.h"
 #include "graphics.h"
 #include "gpu_regs.h"
@@ -41,16 +42,14 @@ enum
 
 static EWRAM_DATA u16 sSaveFailedType = {0};
 static EWRAM_DATA u16 sClockInfo[2] = {0};
-static EWRAM_DATA u8 sUnused1[12] = {0};
 static EWRAM_DATA u8 sWindowIds[2] = {0};
-static EWRAM_DATA u8 sUnused2[4] = {0};
 
 static const struct OamData sClockOamData =
 {
     .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
     .x = 0,
@@ -133,8 +132,8 @@ static const u8 sClockFrames[8][3] =
     { 5, 1, 0 },
 };
 
-static const u8 sSaveFailedClockPal[] = INCBIN_U8("graphics/misc/clock_small.gbapal");
-static const u32 sSaveFailedClockGfx[] = INCBIN_U32("graphics/misc/clock_small.4bpp.lz");
+static const u8 sSaveFailedClockPal[] = INCGFX_U8("graphics/misc/clock_small.png", ".gbapal");
+static const u32 sSaveFailedClockGfx[] = INCGFX_U32("graphics/misc/clock_small.png", ".4bpp.smol");
 
 static void CB2_SaveFailedScreen(void);
 static void CB2_WipeSave(void);
@@ -153,7 +152,7 @@ static void SaveFailedScreenTextPrint(const u8 *text, u8 x, u8 y)
     color[0] = TEXT_COLOR_TRANSPARENT;
     color[1] = TEXT_DYNAMIC_COLOR_6;
     color[2] = TEXT_COLOR_LIGHT_GRAY;
-    AddTextPrinterParameterized4(sWindowIds[TEXT_WIN_ID], 1, x * 8, y * 8 + 1, 0, 0, color, 0, text);
+    AddTextPrinterParameterized4(sWindowIds[TEXT_WIN_ID], FONT_NORMAL, x * 8, y * 8 + 1, 0, 0, color, 0, text);
 }
 
 void DoSaveFailedScreen(u8 saveType)
@@ -173,6 +172,15 @@ static void VBlankCB(void)
     TransferPlttBuffer();
 }
 
+struct SaveFailedBuffers
+{
+    ALIGNED(4) u8 tilemapBuffer[BG_SCREEN_SIZE];
+    ALIGNED(4) u8 window1TileData[0x200];
+    ALIGNED(4) u8 window2TileData[0x200];
+};
+
+static EWRAM_DATA struct SaveFailedBuffers *sSaveFailedBuffers = NULL;
+
 static void CB2_SaveFailedScreen(void)
 {
     switch (gMain.state)
@@ -180,6 +188,7 @@ static void CB2_SaveFailedScreen(void)
     case 0:
     default:
         SetVBlankCallback(NULL);
+        sSaveFailedBuffers = Alloc(sizeof(*sSaveFailedBuffers));
         SetGpuReg(REG_OFFSET_DISPCNT, 0);
         SetGpuReg(REG_OFFSET_BG3CNT, 0);
         SetGpuReg(REG_OFFSET_BG2CNT, 0);
@@ -196,34 +205,34 @@ static void CB2_SaveFailedScreen(void)
         DmaFill16(3, 0, VRAM, VRAM_SIZE);
         DmaFill32(3, 0, OAM, OAM_SIZE);
         DmaFill16(3, 0, PLTT, PLTT_SIZE);
-        LZ77UnCompVram(gBirchHelpGfx, (void *)VRAM);
-        LZ77UnCompVram(gBirchBagTilemap, (void *)(BG_SCREEN_ADDR(14)));
-        LZ77UnCompVram(gBirchGrassTilemap, (void *)(BG_SCREEN_ADDR(15)));
-        LZ77UnCompVram(sSaveFailedClockGfx, (void *)(OBJ_VRAM0 + 0x20));
+        DecompressDataWithHeaderVram(gBirchBagGrass_Gfx, (void *)VRAM);
+        DecompressDataWithHeaderVram(gBirchBagTilemap, (void *)(BG_SCREEN_ADDR(14)));
+        DecompressDataWithHeaderVram(gBirchGrassTilemap, (void *)(BG_SCREEN_ADDR(15)));
+        DecompressDataWithHeaderVram(sSaveFailedClockGfx, (void *)(OBJ_VRAM0 + 0x20));
         ResetBgsAndClearDma3BusyFlags(0);
         InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
-        SetBgTilemapBuffer(0, (void *)&gDecompressionBuffer[0x2000]);
-        CpuFill32(0, &gDecompressionBuffer[0x2000], 0x800);
+        SetBgTilemapBuffer(0, sSaveFailedBuffers->tilemapBuffer);
+        CpuFill32(0, sSaveFailedBuffers->tilemapBuffer, BG_SCREEN_SIZE);
         LoadBgTiles(0, gTextWindowFrame1_Gfx, 0x120, 0x214);
         InitWindows(sDummyWindowTemplate);
         sWindowIds[TEXT_WIN_ID] = AddWindowWithoutTileMap(sWindowTemplate_Text);
-        SetWindowAttribute(sWindowIds[TEXT_WIN_ID], 7, (u32)&gDecompressionBuffer[0x2800]);
+        SetWindowAttribute(sWindowIds[TEXT_WIN_ID], 7, (u32)&sSaveFailedBuffers->window1TileData);
         sWindowIds[CLOCK_WIN_ID] = AddWindowWithoutTileMap(sWindowTemplate_Clock);
-        SetWindowAttribute(sWindowIds[CLOCK_WIN_ID], 7, (u32)&gDecompressionBuffer[0x3D00]);
+        SetWindowAttribute(sWindowIds[CLOCK_WIN_ID], 7, (u32)&sSaveFailedBuffers->window2TileData);
         DeactivateAllTextPrinters();
         ResetSpriteData();
         ResetTasks();
         ResetPaletteFade();
-        LoadPalette(gBirchBagGrassPal, 0, 0x40);
-        LoadPalette(sSaveFailedClockPal, 0x100, 0x20);
-        LoadPalette(gTextWindowFrame1_Pal, 0xE0, 0x20);
-        LoadPalette(gUnknown_0860F074, 0xF0, 0x20);
+        LoadPalette(gBirchBagGrass_Pal, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
+        LoadPalette(sSaveFailedClockPal, OBJ_PLTT_ID(0), PLTT_SIZE_4BPP);
+        LoadPalette(gTextWindowFrame1_Pal, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
+        LoadPalette(gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         DrawStdFrameWithCustomTileAndPalette(sWindowIds[TEXT_WIN_ID], FALSE, 0x214, 0xE);
         DrawStdFrameWithCustomTileAndPalette(sWindowIds[CLOCK_WIN_ID], FALSE, 0x214, 0xE);
         FillWindowPixelBuffer(sWindowIds[CLOCK_WIN_ID], PIXEL_FILL(1)); // backwards?
         FillWindowPixelBuffer(sWindowIds[TEXT_WIN_ID], PIXEL_FILL(1));
-        CopyWindowToVram(sWindowIds[CLOCK_WIN_ID], 2); // again?
-        CopyWindowToVram(sWindowIds[TEXT_WIN_ID], 1);
+        CopyWindowToVram(sWindowIds[CLOCK_WIN_ID], COPYWIN_GFX); // again?
+        CopyWindowToVram(sWindowIds[TEXT_WIN_ID], COPYWIN_MAP);
         SaveFailedScreenTextPrint(gText_SaveFailedCheckingBackup, 1, 0);
         BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         EnableInterrupts(1);
@@ -320,13 +329,14 @@ static void CB2_ReturnToTitleScreen(void)
 {
     if (!UpdatePaletteFade())
     {
+        TRY_FREE_AND_SET_NULL(sSaveFailedBuffers);
         if (gGameContinueCallback == NULL) // no callback exists, so do a soft reset.
         {
             DoSoftReset();
         }
         else
         {
-            SetMainCallback2((MainCallback)gGameContinueCallback);
+            SetMainCallback2(gGameContinueCallback);
             gGameContinueCallback = NULL;
         }
     }
@@ -363,9 +373,10 @@ static bool8 VerifySectorWipe(u16 sector)
 
     ReadFlash(sector, 0, (u8 *)ptr, SECTOR_SIZE);
 
-    for (i = 0; i < 0x400; i++, ptr++)
+    // 1/4 because ptr is u32
+    for (i = 0; i < SECTOR_SIZE / 4; i++, ptr++)
         if (*ptr)
-            return TRUE;
+            return TRUE; // Sector has nonzero data, failed
 
     return FALSE;
 }
@@ -375,6 +386,7 @@ static bool8 WipeSector(u16 sector)
     u16 i, j;
     bool8 failed = TRUE;
 
+    // Attempt to wipe sector with an arbitrary attempt limit of 130
     for (i = 0; failed && i < 130; i++)
     {
         for (j = 0; j < SECTOR_SIZE; j++)
@@ -398,4 +410,57 @@ static bool8 WipeSectors(u32 sectorBits)
         return FALSE;
     else
         return TRUE;
+}
+
+void CB2_FlashNotDetectedScreen(void)
+{
+    static const struct WindowTemplate textWin[] =
+    {
+        {
+            .bg = 0,
+            .tilemapLeft = 3,
+            .tilemapTop = 2,
+            .width = 24,
+            .height = 16,
+            .paletteNum = 15,
+            .baseBlock = 1,
+        },
+        DUMMY_WIN_TEMPLATE
+    };
+
+    if (gMain.state)
+        return;
+
+    SetGpuReg(REG_OFFSET_DISPCNT, 0);
+    SetGpuReg(REG_OFFSET_BLDCNT, 0);
+    SetGpuReg(REG_OFFSET_BG0CNT, 0);
+    SetGpuReg(REG_OFFSET_BG0HOFS, 0);
+    SetGpuReg(REG_OFFSET_BG0VOFS, 0);
+    DmaFill16(3, 0, VRAM, VRAM_SIZE);
+    DmaFill32(3, 0, OAM, OAM_SIZE);
+    DmaFill16(3, 0, PLTT, PLTT_SIZE);
+    ResetBgsAndClearDma3BusyFlags(0);
+    InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
+    LoadBgTiles(0, gTextWindowFrame1_Gfx, 0x120, 0x214);
+    DeactivateAllTextPrinters();
+    ResetTasks();
+    ResetPaletteFade();
+    LoadPalette(gTextWindowFrame1_Pal, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
+    LoadPalette(gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
+    InitWindows(textWin);
+    DrawStdFrameWithCustomTileAndPalette(0, TRUE, 0x214, 0xE);
+    static const u8 saveFailedMessage[] =_(
+        "{COLOR RED}ERROR! {COLOR DARK_GRAY}Flash memory not detected!\n"
+        "\n"
+        "If playing on an emulator, set your\n"
+        "save type setting to\n"
+        "Flash 1Mb/128K and reload the ROM.\n"
+        "\n"
+        "If playing on hardware, your cart\n"
+        "does not have a working flash chip.");
+    SaveFailedScreenTextPrint(saveFailedMessage, 1, 0);
+    TransferPlttBuffer();
+    *(u16*)PLTT = RGB(17, 18, 31);
+    ShowBg(0);
+    gMain.state++;
 }

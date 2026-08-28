@@ -3,6 +3,7 @@
   "name": "FortreeCity_Gym",
   "layout": "LAYOUT_FORTREE_CITY_GYM",
   "music": "MUS_GYM",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_FORTREE_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -125,14 +126,14 @@
       "y": 24,
       "elevation": 0,
       "dest_map": "MAP_FORTREE_CITY",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 16,
       "y": 24,
       "elevation": 0,
       "dest_map": "MAP_FORTREE_CITY",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     }
   ],
   "coord_events": [],

@@ -1,17 +1,22 @@
 #include "global.h"
 #include "bg.h"
+#include "event_data.h"
+#include "field_effect.h"
 #include "gpu_regs.h"
 #include "international_string_util.h"
 #include "main.h"
 #include "malloc.h"
 #include "menu.h"
+#include "overworld.h"
 #include "palette.h"
 #include "region_map.h"
+#include "sound.h"
 #include "strings.h"
 #include "text.h"
 #include "text_window.h"
 #include "window.h"
 #include "constants/rgb.h"
+#include "constants/songs.h"
 
 /*
  *  This is the type of map shown when interacting with the metatiles for
@@ -23,9 +28,15 @@
  *  For the fly map, and utility functions all of the maps use, see region_map.c
  */
 
-// Static type declarations
+enum {
+    WIN_MAPSEC_NAME,
+    WIN_TITLE,
+};
 
-// Static RAM declarations
+enum {
+    TAG_PLAYER_ICON,
+    TAG_CURSOR,
+};
 
 static EWRAM_DATA struct {
     MainCallback callback;
@@ -34,15 +45,12 @@ static EWRAM_DATA struct {
     u16 state;
 } *sFieldRegionMapHandler = NULL;
 
-// Static ROM declarations
-
 static void MCB2_InitRegionMapRegisters(void);
 static void VBCB_FieldUpdateRegionMap(void);
 static void MCB2_FieldUpdateRegionMap(void);
 static void FieldUpdateRegionMap(void);
-static void PrintRegionMapSecName(void);
-
-// .rodata
+static void PrintRegionMapSecName();
+static void PrintTitleWindowText();
 
 static const struct BgTemplate sFieldRegionMapBgTemplates[] = {
     {
@@ -66,7 +74,7 @@ static const struct BgTemplate sFieldRegionMapBgTemplates[] = {
 
 static const struct WindowTemplate sFieldRegionMapWindowTemplates[] =
 {
-    {
+    [WIN_MAPSEC_NAME] = {
         .bg = 0,
         .tilemapLeft = 17,
         .tilemapTop = 17,
@@ -75,7 +83,7 @@ static const struct WindowTemplate sFieldRegionMapWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 1
     },
-    {
+    [WIN_TITLE] = {
         .bg = 0,
         .tilemapLeft = 22,
         .tilemapTop = 1,
@@ -87,12 +95,10 @@ static const struct WindowTemplate sFieldRegionMapWindowTemplates[] =
     DUMMY_WIN_TEMPLATE
 };
 
-// .text
-
 void FieldInitRegionMap(MainCallback callback)
 {
     SetVBlankCallback(NULL);
-    sFieldRegionMapHandler = malloc(sizeof(*sFieldRegionMapHandler));
+    sFieldRegionMapHandler = Alloc(sizeof(*sFieldRegionMapHandler));
     sFieldRegionMapHandler->state = 0;
     sFieldRegionMapHandler->callback = callback;
     SetMainCallback2(MCB2_InitRegionMapRegisters);
@@ -115,7 +121,7 @@ static void MCB2_InitRegionMapRegisters(void)
     InitBgsFromTemplates(1, sFieldRegionMapBgTemplates, ARRAY_COUNT(sFieldRegionMapBgTemplates));
     InitWindows(sFieldRegionMapWindowTemplates);
     DeactivateAllTextPrinters();
-    LoadUserWindowBorderGfx(0, 0x27, 0xd0);
+    LoadUserWindowBorderGfx(0, 0x27, BG_PLTT_ID(13));
     ClearScheduledBgCopiesToVram();
     SetMainCallback2(MCB2_FieldUpdateRegionMap);
     SetVBlankCallback(VBCB_FieldUpdateRegionMap);
@@ -139,66 +145,71 @@ static void MCB2_FieldUpdateRegionMap(void)
 
 static void FieldUpdateRegionMap(void)
 {
-    u8 offset;
-
     switch (sFieldRegionMapHandler->state)
     {
-        case 0:
-            InitRegionMap(&sFieldRegionMapHandler->regionMap, FALSE);
-            CreateRegionMapPlayerIcon(0, 0);
-            CreateRegionMapCursor(1, 1);
+    case 0:
+        InitRegionMap(&sFieldRegionMapHandler->regionMap, FALSE);
+        CreateRegionMapPlayerIcon(TAG_PLAYER_ICON, TAG_PLAYER_ICON);
+        CreateRegionMapCursor(TAG_CURSOR, TAG_CURSOR);
+        sFieldRegionMapHandler->state++;
+        break;
+    case 1:
+        DrawStdFrameWithCustomTileAndPalette(WIN_TITLE, FALSE, 0x27, 0xd);
+        FillWindowPixelBuffer(WIN_TITLE, PIXEL_FILL(1));
+        PrintTitleWindowText();
+        ScheduleBgCopyTilemapToVram(0);
+        DrawStdFrameWithCustomTileAndPalette(WIN_MAPSEC_NAME, FALSE, 0x27, 0xd);
+        PrintRegionMapSecName();
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+        sFieldRegionMapHandler->state++;
+        break;
+    case 2:
+        SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
+        ShowBg(0);
+        ShowBg(2);
+        sFieldRegionMapHandler->state++;
+        break;
+    case 3:
+        if (!gPaletteFade.active)
+        {
             sFieldRegionMapHandler->state++;
-            break;
-        case 1:
-            DrawStdFrameWithCustomTileAndPalette(1, 0, 0x27, 0xd);
-            offset = GetStringCenterAlignXOffset(1, gText_Hoenn, 0x38);
-            AddTextPrinterParameterized(1, 1, gText_Hoenn, offset, 1, 0, NULL);
-            ScheduleBgCopyTilemapToVram(0);
-            DrawStdFrameWithCustomTileAndPalette(0, 0, 0x27, 0xd);
-            PrintRegionMapSecName();
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
-            sFieldRegionMapHandler->state++;
-            break;
-        case 2:
-            SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
-            ShowBg(0);
-            ShowBg(2);
-            sFieldRegionMapHandler->state++;
-            break;
-        case 3:
-            if (!gPaletteFade.active)
-            {
+        }
+        break;
+    case 4:
+        switch (DoRegionMapInputCallback())
+        {
+        case MAP_INPUT_MOVE_END:
+                PrintRegionMapSecName();
+                PrintTitleWindowText();
+                break;
+        case MAP_INPUT_A_BUTTON:
+        case MAP_INPUT_B_BUTTON:
                 sFieldRegionMapHandler->state++;
-            }
-            break;
-        case 4:
-            switch (DoRegionMapInputCallback())
-            {
-                case MAP_INPUT_MOVE_END:
-                    PrintRegionMapSecName();
-                    break;
-                case MAP_INPUT_A_BUTTON:
-                case MAP_INPUT_B_BUTTON:
-                    sFieldRegionMapHandler->state++;
-                    break;
-            }
-            break;
-        case 5:
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-            sFieldRegionMapHandler->state++;
-            break;
-        case 6:
-            if (!gPaletteFade.active)
-            {
-                FreeRegionMapIconResources();
-                SetMainCallback2(sFieldRegionMapHandler->callback);
-                if (sFieldRegionMapHandler != NULL)
+                break;
+        case MAP_INPUT_R_BUTTON:
+                if (sFieldRegionMapHandler->regionMap.mapSecType == MAPSECTYPE_CITY_CANFLY
+                    && FlagGet(OW_FLAG_POKE_RIDER) && Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) == TRUE)
                 {
-                    FREE_AND_SET_NULL(sFieldRegionMapHandler);
+                    PlaySE(SE_SELECT);
+                    SetFlyDestination(&sFieldRegionMapHandler->regionMap);
+                    gSkipShowMonAnim = TRUE;
+                    ReturnToFieldFromFlyMapSelect();
                 }
-                FreeAllWindowBuffers();
-            }
-            break;
+        }
+        break;
+    case 5:
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        sFieldRegionMapHandler->state++;
+        break;
+    case 6:
+        if (!gPaletteFade.active)
+        {
+            FreeRegionMapIconResources();
+            SetMainCallback2(sFieldRegionMapHandler->callback);
+            TRY_FREE_AND_SET_NULL(sFieldRegionMapHandler);
+            FreeAllWindowBuffers();
+        }
+        break;
     }
 }
 
@@ -206,13 +217,39 @@ static void PrintRegionMapSecName(void)
 {
     if (sFieldRegionMapHandler->regionMap.mapSecType != MAPSECTYPE_NONE)
     {
-        FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        AddTextPrinterParameterized(0, 1, sFieldRegionMapHandler->regionMap.mapSecName, 0, 1, 0, NULL);
-        ScheduleBgCopyTilemapToVram(0);
+        FillWindowPixelBuffer(WIN_MAPSEC_NAME, PIXEL_FILL(1));
+        AddTextPrinterParameterized(WIN_MAPSEC_NAME, FONT_NORMAL, sFieldRegionMapHandler->regionMap.mapSecName, 0, 1, 0, NULL);
+        ScheduleBgCopyTilemapToVram(WIN_MAPSEC_NAME);
     }
     else
     {
-        FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        CopyWindowToVram(0, 3);
+        FillWindowPixelBuffer(WIN_MAPSEC_NAME, PIXEL_FILL(1));
+        CopyWindowToVram(WIN_MAPSEC_NAME, COPYWIN_FULL);
+    }
+}
+
+static void PrintTitleWindowText(void)
+{
+    static const u8 FlyPromptText[] = _("{R_BUTTON} FLY");
+    const u8 *region;
+    if (IS_FRLG)
+        region = gText_Kanto;
+    else
+        region = gText_Hoenn;
+    u32 hoennOffset = GetStringCenterAlignXOffset(FONT_NORMAL, region, 0x38);
+    u32 flyOffset = GetStringCenterAlignXOffset(FONT_NORMAL, FlyPromptText, 0x38);
+
+    FillWindowPixelBuffer(WIN_TITLE, PIXEL_FILL(1));
+
+    if (sFieldRegionMapHandler->regionMap.mapSecType == MAPSECTYPE_CITY_CANFLY
+        && FlagGet(OW_FLAG_POKE_RIDER) && Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) == TRUE)
+    {
+        AddTextPrinterParameterized(WIN_TITLE, FONT_NORMAL, FlyPromptText, flyOffset, 1, 0, NULL);
+        ScheduleBgCopyTilemapToVram(WIN_TITLE);
+    }
+    else
+    {
+        AddTextPrinterParameterized(WIN_TITLE, FONT_NORMAL, region, hoennOffset, 1, 0, NULL);
+        CopyWindowToVram(WIN_TITLE, COPYWIN_FULL);
     }
 }

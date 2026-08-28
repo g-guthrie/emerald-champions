@@ -3,6 +3,7 @@
   "name": "MtPyre_6F",
   "layout": "LAYOUT_MT_PYRE_6F",
   "music": "MUS_MT_PYRE",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_MT_PYRE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -12,7 +13,7 @@
   "allow_running": false,
   "show_map_name": true,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": 0,
+  "connections": null,
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_HEX_MANIAC",
@@ -28,7 +29,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 6,
       "y": 9,
       "elevation": 3,
@@ -36,9 +37,9 @@
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "MtPyre_6F_EventScript_ItemTM30",
-      "flag": "FLAG_ITEM_MT_PYRE_6F_TM_30"
+      "trainer_sight_or_berry_tree_id": "ITEM_BANETTITE",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ITEM_MT_PYRE_6F_TM_SHADOW_BALL"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_PSYCHIC_M",
@@ -60,20 +61,16 @@
       "y": 1,
       "elevation": 3,
       "dest_map": "MAP_MT_PYRE_5F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 1,
       "y": 10,
       "elevation": 3,
       "dest_map": "MAP_MT_PYRE_5F",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     }
   ],
-  "coord_events": [
-
-  ],
-  "bg_events": [
-
-  ]
+  "coord_events": [],
+  "bg_events": []
 }

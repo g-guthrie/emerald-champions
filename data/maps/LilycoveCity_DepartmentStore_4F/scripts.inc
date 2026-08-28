@@ -1,19 +1,19 @@
-LilycoveCity_DepartmentStore_4F_MapScripts:: @ 821FDEA
+LilycoveCity_DepartmentStore_4F_MapScripts::
 	.byte 0
 
-LilycoveCity_DepartmentStore_4F_EventScript_Gentleman:: @ 821FDEB
+LilycoveCity_DepartmentStore_4F_EventScript_Gentleman::
 	msgbox LilycoveCity_DepartmentStore_4F_Text_AttackOrDefenseTM, MSGBOX_NPC
 	end
 
-LilycoveCity_DepartmentStore_4F_EventScript_Woman:: @ 821FDF4
+LilycoveCity_DepartmentStore_4F_EventScript_Woman::
 	msgbox LilycoveCity_DepartmentStore_4F_Text_FiftyDifferentTMs, MSGBOX_NPC
 	end
 
-LilycoveCity_DepartmentStore_4F_EventScript_Youngster:: @ 821FDFD
+LilycoveCity_DepartmentStore_4F_EventScript_Youngster::
 	msgbox LilycoveCity_DepartmentStore_4F_Text_PokemonOnlyHaveFourMoves, MSGBOX_NPC
 	end
 
-LilycoveCity_DepartmentStore_4F_EventScript_ClerkLeft:: @ 821FE06
+LilycoveCity_DepartmentStore_4F_EventScript_ClerkLeft::
 	lock
 	faceplayer
 	message gText_HowMayIServeYou
@@ -24,18 +24,14 @@ LilycoveCity_DepartmentStore_4F_EventScript_ClerkLeft:: @ 821FE06
 	end
 
 	.align 2
-LilycoveCity_DepartmentStore_4F_Pokemart_AttackTMs: @ 821FE20
-	.2byte ITEM_NEVER_MELT_ICE
-	.2byte ITEM_SPELL_TAG
-	.2byte ITEM_TWISTED_SPOON
-	.2byte ITEM_DRAGON_FANG
-	.2byte ITEM_POISON_BARB
-	.2byte ITEM_BLACK_GLASSES
-	.2byte ITEM_NONE
-	release
-	end
+LilycoveCity_DepartmentStore_4F_Pokemart_AttackTMs:
+	.2byte ITEM_TM_FIRE_BLAST
+	.2byte ITEM_TM_THUNDER
+	.2byte ITEM_TM_BLIZZARD
+	.2byte ITEM_TM_HYPER_BEAM
+	pokemartlistend
 
-LilycoveCity_DepartmentStore_4F_EventScript_ClerkRight:: @ 821FE2C
+LilycoveCity_DepartmentStore_4F_EventScript_ClerkRight::
 	lock
 	faceplayer
 	message gText_HowMayIServeYou
@@ -46,28 +42,27 @@ LilycoveCity_DepartmentStore_4F_EventScript_ClerkRight:: @ 821FE2C
 	end
 
 	.align 2
-LilycoveCity_DepartmentStore_4F_Pokemart_DefenseTMs: @ 821FE44
-	.2byte ITEM_DAMP_ROCK
-	.2byte ITEM_HEAT_ROCK
-	.2byte ITEM_SMOOTH_ROCK
-	.2byte ITEM_ICY_ROCK
-	.2byte ITEM_NONE
-	release
-	end
+LilycoveCity_DepartmentStore_4F_Pokemart_DefenseTMs:
+	.2byte ITEM_TM_PROTECT
+	.2byte ITEM_TM_SAFEGUARD
+	.2byte ITEM_TM_REFLECT
+	.2byte ITEM_TM_LIGHT_SCREEN
+	pokemartlistend
 
-LilycoveCity_DepartmentStore_4F_Text_AttackOrDefenseTM: @ 821FE50
+LilycoveCity_DepartmentStore_4F_Text_AttackOrDefenseTM:
 	.string "Hmm…\p"
-	.string "A type-boosting item…\n"
-	.string "Or a weather-extending rock…\p"
-	.string "Choosing the right held item can\n"
-	.string "change an entire battle.$"
+	.string "An attacking move…\n"
+	.string "Or a defensive move…\p"
+	.string "It's no easy matter to decide which TM\n"
+	.string "moves should be taught to POKéMON…$"
 
-LilycoveCity_DepartmentStore_4F_Text_FiftyDifferentTMs: @ 821FEC7
-	.string "There are so many different held\n"
-	.string "items for team strategies.\p"
-	.string "Weather teams alone can use four\n"
-	.string "different kinds of rocks!$"
+LilycoveCity_DepartmentStore_4F_Text_FiftyDifferentTMs:
+	.string "There are so many different kinds of\n"
+	.string "TM moves.\p"
+	.string "A catalog I read said there are fifty\n"
+	.string "different kinds.$"
 
-LilycoveCity_DepartmentStore_4F_Text_PokemonOnlyHaveFourMoves: @ 821FF2D
-	.string "A Pokémon can hold only one item.\n"
-	.string "Picking the right one is hard!$"
+LilycoveCity_DepartmentStore_4F_Text_PokemonOnlyHaveFourMoves:
+	.string "I'd like to get all the different TMs,\n"
+	.string "but a POKéMON learns only four moves.$"
+

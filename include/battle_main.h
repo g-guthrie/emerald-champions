@@ -1,22 +1,16 @@
 #ifndef GUARD_BATTLE_MAIN_H
 #define GUARD_BATTLE_MAIN_H
 
-struct TrainerMoney
-{
-    u8 classId;
-    u8 value;
-};
+#include "battle_util.h"
+#include "pokemon.h"
+#include "data.h"
+#include "constants/hold_effects.h"
 
-struct TrainerBall
+// For displaying a multi battle partner's Pokémon in the party menu
+struct MultiPartnerMenuPokemon
 {
-    u8 classId;
-    u8 Ball;
-};
-
-struct UnknownPokemonStruct4
-{
-    /*0x00*/ u16 species;
-    /*0x02*/ u16 heldItem;
+    /*0x00*/ enum Species species;
+    /*0x02*/ enum Item heldItem;
     /*0x04*/ u8 nickname[POKEMON_NAME_LENGTH + 1];
     /*0x0F*/ u8 level;
     /*0x10*/ u16 hp;
@@ -27,68 +21,109 @@ struct UnknownPokemonStruct4
     /*0x1D*/ u8 language;
 };
 
-#define TYPE_NAME_LENGTH 6
-#define ABILITY_NAME_LENGTH 12
-
 // defines for the 'DoBounceEffect' function
 #define BOUNCE_MON          0x0
 #define BOUNCE_HEALTHBOX    0x1
 
+enum BattleIntroStates
+{
+    BATTLE_INTRO_STATE_GET_MON_DATA,
+    BATTLE_INTRO_STATE_LOOP_BATTLER_DATA,
+    BATTLE_INTRO_STATE_PREPARE_BG_SLIDE,
+    BATTLE_INTRO_STATE_WAIT_FOR_BG_SLIDE,
+    BATTLE_INTRO_STATE_DRAW_SPRITES,
+    BATTLE_INTRO_STATE_DRAW_PARTY_SUMMARY,
+    BATTLE_INTRO_STATE_WAIT_FOR_PARTY_SUMMARY,
+    BATTLE_INTRO_STATE_INTRO_TEXT,
+    BATTLE_INTRO_STATE_WAIT_FOR_INTRO_TEXT,
+    BATTLE_INTRO_STATE_TRAINER_SEND_OUT_TEXT,
+    BATTLE_INTRO_STATE_WAIT_FOR_TRAINER_SEND_OUT_TEXT,
+    BATTLE_INTRO_STATE_TRAINER_1_SEND_OUT_ANIM,
+    BATTLE_INTRO_STATE_TRAINER_2_SEND_OUT_ANIM,
+    BATTLE_INTRO_STATE_WAIT_FOR_TRAINER_2_SEND_OUT_ANIM,
+    BATTLE_INTRO_STATE_WAIT_FOR_WILD_BATTLE_TEXT,
+    BATTLE_INTRO_STATE_PRINT_PLAYER_SEND_OUT_TEXT,
+    BATTLE_INTRO_STATE_WAIT_FOR_PLAYER_SEND_OUT_TEXT,
+    BATTLE_INTRO_STATE_PRINT_PLAYER_1_SEND_OUT_TEXT,
+    BATTLE_INTRO_STATE_PRINT_PLAYER_2_SEND_OUT_TEXT,
+    BATTLE_INTRO_STATE_SET_DEX_AND_BATTLE_VARS
+};
+
+enum FirstTurnEventsStates
+{
+    FIRST_TURN_EVENTS_START,
+    FIRST_TURN_EVENTS_OVERWORLD_WEATHER,
+    FIRST_TURN_EVENTS_TERRAIN,
+    FIRST_TURN_EVENTS_STARTING_STATUS,
+    FIRST_TURN_EVENTS_TOTEM_BOOST,
+    FIRST_TURN_SWITCH_IN_EVENTS,
+    FIRST_TURN_FAINTED_BATTLERS,
+    FIRST_TURN_EVENTS_TRAINER_SLIDE_A,
+    FIRST_TURN_EVENTS_TRAINER_SLIDE_B,
+    FIRST_TURN_EVENTS_TRAINER_SLIDE_PARTNER,
+    FIRST_TURN_EVENTS_END,
+};
+
 void CB2_InitBattle(void);
 void BattleMainCB2(void);
 void CB2_QuitRecordedBattle(void);
-void sub_8038528(struct Sprite* sprite);
-void sub_8038A04(void); // unused
 void VBlankCB_Battle(void);
 void SpriteCB_VsLetterDummy(struct Sprite *sprite);
 void SpriteCB_VsLetterInit(struct Sprite *sprite);
 void CB2_InitEndLinkBattle(void);
 u32 GetBattleBgTemplateData(u8 arrayId, u8 caseId);
-u32 GetBattleWindowTemplatePixelWidth(u32 setId, u32 tableId);
-void SpriteCb_WildMon(struct Sprite *sprite);
+u32 GetBattleWindowTemplatePixelWidth(u32 windowsType, u32 tableId);
+void SpriteCB_WildMon(struct Sprite *sprite);
 void SpriteCallbackDummy_2(struct Sprite *sprite);
 void SpriteCB_FaintOpponentMon(struct Sprite *sprite);
-void SpriteCb_ShowAsMoveTarget(struct Sprite *sprite);
-void SpriteCb_HideAsMoveTarget(struct Sprite *sprite);
-void SpriteCb_OpponentMonFromBall(struct Sprite *sprite);
+void SpriteCB_ShowAsMoveTarget(struct Sprite *sprite);
+void SpriteCB_HideAsMoveTarget(struct Sprite *sprite);
+bool32 ShouldHideBattler(enum BattlerId battler);
+void SpriteCB_OpponentMonFromBall(struct Sprite *sprite);
 void SpriteCB_BattleSpriteStartSlideLeft(struct Sprite *sprite);
 void SpriteCB_FaintSlideAnim(struct Sprite *sprite);
-void DoBounceEffect(u8 battlerId, u8 b, s8 c, s8 d);
-void EndBounceEffect(u8 battlerId, bool8 b);
-void SpriteCb_PlayerMonFromBall(struct Sprite *sprite);
-void sub_8039E60(struct Sprite *sprite);
+void DoBounceEffect(enum BattlerId battler, u8 which, s8 delta, s8 amplitude);
+void EndBounceEffect(enum BattlerId battler, u8 which);
+void SpriteCB_PlayerMonFromBall(struct Sprite *sprite);
+void SpriteCB_PlayerMonSlideIn(struct Sprite *sprite);
 void SpriteCB_TrainerThrowObject(struct Sprite *sprite);
-void sub_8039E9C(struct Sprite *sprite);
+void AnimSetCenterToCornerVecX(struct Sprite *sprite);
 void BeginBattleIntroDummy(void);
 void BeginBattleIntro(void);
-void SwitchInClearSetData(void);
-void FaintClearSetData(void);
+void SwitchInClearSetData(enum BattlerId battler, struct Volatiles *volatilesCopy);
+void FaintClearSetData(enum BattlerId battler);
 void BattleTurnPassed(void);
-u8 IsRunningFromBattleImpossible(void);
-void SwitchTwoBattlersInParty(u8 battler, u8 battler2);
-void SwitchPartyOrder(u8 battlerId);
+bool32 EndTurnEvents(void);
+u8 IsRunningFromBattleImpossible(enum BattlerId battler);
+void SwitchTwoBattlersInParty(enum BattlerId battler, enum BattlerId battler2);
+void SwitchPartyOrder(enum BattlerId battler);
 void SwapTurnOrder(u8 id1, u8 id2);
-u32 GetBattlerTotalSpeedStat(u8 battlerId);
-s8 GetChosenMovePriority(u32 battlerId);
-s8 GetMovePriority(u32 battlerId, u16 move);
-u8 GetWhoStrikesFirst(u8 battlerId1, u8 battlerId2, bool8 ignoreChosenMoves);
+u32 GetBattlerTotalSpeedStat(enum BattlerId battler, enum Ability ability, enum HoldEffect holdEffect);
+s32 GetChosenMovePriority(enum BattlerId battler, enum Ability ability);
+s32 GetBattleMovePriority(enum BattlerId battler, enum Ability ability, enum Move move);
+s32 GetWhichBattlerFasterArgs(struct BattleCalcValues *calcValues, bool32 ignoreChosenMoves, u32 speedBattler1, u32 speedBattler2, s32 priority1, s32 priority2);
+s32 GetWhichBattlerFasterOrTies(struct BattleCalcValues *calcValues, bool32 ignoreChosenMoves);
+s32 GetWhichBattlerFaster(struct BattleCalcValues *calcValues, bool32 ignoreChosenMoves);
+const u8 *GetChargingSetUpScript(enum BattleMoveEffects moveEffect, bool32 inMiddleOfTurn);
 void RunBattleScriptCommands_PopCallbacksStack(void);
 void RunBattleScriptCommands(void);
-bool8 TryRunFromBattle(u8 battlerId);
-void SpecialStatusesClear(void);
-void SetTypeBeforeUsingMove(u16 move, u8 battlerAtk);
-s32 GetHighestLevelInPlayerParty(void);
+enum Type GetDynamicMoveType(struct Pokemon *mon, enum Move move, enum BattlerId battler, enum Ability ability, enum HoldEffect holdEffect, enum MonState state);
+void SetTypeBeforeUsingMove(enum Move move, enum BattlerId battler, enum Ability ability, enum HoldEffect holdEffect);
+bool32 IsWildMonSmart(void);
+void ModifyPersonalityForNature(u32 *personality, u32 newNature);
+void CustomTrainerPartyAssignMoves(struct Pokemon *mon, const struct TrainerMon *partyEntry);
+bool32 CanPlayerForfeitNormalTrainerBattle(void);
+bool32 DidPlayerForfeitNormalTrainerBattle(void);
+void BattleDebug_WonBattle(void);
+s32 Factorial(s32 n);
 
-extern struct UnknownPokemonStruct4 gMultiPartnerParty[MULTI_PARTY_SIZE];
+extern struct MultiPartnerMenuPokemon *gMultiPartnerParty;
 
-extern const struct SpriteTemplate gUnknown_0831AC88;
+extern const struct SpriteTemplate gUnusedBattleInitSprite;
 extern const struct OamData gOamData_BattleSpriteOpponentSide;
 extern const struct OamData gOamData_BattleSpritePlayerSide;
-extern const u8 gTypeNames[NUMBER_OF_MON_TYPES][TYPE_NAME_LENGTH + 1];
-extern const struct TrainerMoney gTrainerMoneyTable[];
-extern const struct TrainerBall gTrainerBallTable[];
-extern const u8 gAbilityNames[][ABILITY_NAME_LENGTH + 1];
-extern const u8 *const gAbilityDescriptionPointers[];
+extern const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES];
+extern const uq4_12_t gTypeEffectivenessTable[NUMBER_OF_MON_TYPES][NUMBER_OF_MON_TYPES];
 
 extern const u8 gStatusConditionString_PoisonJpn[8];
 extern const u8 gStatusConditionString_SleepJpn[8];

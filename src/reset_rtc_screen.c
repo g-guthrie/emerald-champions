@@ -1,6 +1,7 @@
 #include "global.h"
 #include "reset_rtc_screen.h"
 #include "event_data.h"
+#include "fake_rtc.h"
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
@@ -41,7 +42,10 @@ enum {
 #define tWindowId  data[8]
 
 enum {
-    SELECTION_DAYS = 1,
+    SELECTION_DAYS_1000 = 1,
+    SELECTION_DAYS_100,
+    SELECTION_DAYS_10,
+    SELECTION_DAYS_1,
     SELECTION_HOURS,
     SELECTION_MINS,
     SELECTION_SECS,
@@ -49,11 +53,17 @@ enum {
     SELECTION_NONE
 };
 
+enum {
+    WIN_TIME,
+    WIN_MSG,
+};
+
 struct ResetRtcInputMap
 {
     /*0x0*/ u8 dataIndex;
     /*0x2*/ u16 minVal;
     /*0x4*/ u16 maxVal;
+            u16 increment;
     /*0x6*/ u8 left;
     /*0x7*/ u8 right;
     /*0x8*/ u8 unk; // never read
@@ -79,76 +89,108 @@ static const struct BgTemplate sBgTemplates[] =
 
 static const struct WindowTemplate sWindowTemplates[] =
 {
-    {
-        .bg = 0, 
-        .tilemapLeft = 1, 
-        .tilemapTop = 1, 
-        .width = 19, 
-        .height = 9, 
-        .paletteNum = 15, 
+    [WIN_TIME] = {
+        .bg = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 1,
+        .width = 19,
+        .height = 9,
+        .paletteNum = 15,
         .baseBlock = 0x155
     },
-    {
-        .bg = 0, 
-        .tilemapLeft = 2, 
-        .tilemapTop = 15, 
-        .width = 27, 
-        .height = 4, 
-        .paletteNum = 15, 
+    [WIN_MSG] = {
+        .bg = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 15,
+        .width = 27,
+        .height = 4,
+        .paletteNum = 15,
         .baseBlock = 0xE9
     },
     DUMMY_WIN_TEMPLATE
 };
 
 static const struct WindowTemplate sInputTimeWindow = {
-    .bg = 0, 
-    .tilemapLeft = 4, 
-    .tilemapTop = 9, 
-    .width = 21, 
-    .height = 2, 
-    .paletteNum = 15, 
+    .bg = 0,
+    .tilemapLeft = 4,
+    .tilemapTop = 9,
+    .width = 21,
+    .height = 2,
+    .paletteNum = 15,
     .baseBlock = 0xBF
 };
 
 static const struct ResetRtcInputMap sInputMap[] =
 {
-    [SELECTION_DAYS - 1] = {
+    [SELECTION_DAYS_1000 - 1] = {
         .dataIndex = DATAIDX_DAYS,
         .minVal = 1,
         .maxVal = 9999,
+        .increment = 1000,
         .left = 0,
         .right = 2,
+        .unk = 0,
+    },
+    [SELECTION_DAYS_100 - 1] = {
+        .dataIndex = DATAIDX_DAYS,
+        .minVal = 1,
+        .maxVal = 9999,
+        .increment = 100,
+        .left = 1,
+        .right = 3,
+        .unk = 0,
+    },
+    [SELECTION_DAYS_10 - 1] = {
+        .dataIndex = DATAIDX_DAYS,
+        .minVal = 1,
+        .maxVal = 9999,
+        .increment = 10,
+        .left = 2,
+        .right = 4,
+        .unk = 0,
+    },
+    [SELECTION_DAYS_1 - 1] = {
+        .dataIndex = DATAIDX_DAYS,
+        .minVal = 1,
+        .maxVal = 9999,
+        .increment = 1,
+        .left = 3,
+        .right = 5,
         .unk = 0,
     },
     [SELECTION_HOURS - 1] = {
         .dataIndex = DATAIDX_HOURS,
         .minVal = 0,
         .maxVal = 23,
-        .left = 1,
-        .right = 3,
+        .increment = 1,
+        .left = 4,
+        .right = 6,
         .unk = 0,
     },
     [SELECTION_MINS - 1] = {
         .dataIndex = DATAIDX_MINS,
         .minVal = 0,
         .maxVal = 59,
-        .left = 2,
-        .right = 4,
+        .increment = 1,
+        .left = 5,
+        .right = 7,
         .unk = 0,
     },
     [SELECTION_SECS - 1] = {
         .dataIndex = DATAIDX_SECS,
         .minVal = 0,
         .maxVal = 59,
-        .left = 3,
-        .right = 5,
+        .increment = 1,
+        .left = 6,
+        .right = 8,
         .unk = 0,
     },
     [SELECTION_CONFIRM - 1] = {
         .dataIndex = DATAIDX_CONFIRM,
         .minVal = 0,
         .maxVal = 0,
-        .left = 4,
+        .increment = 1,
+        .left = 7,
         .right = 0,
         .unk = 6,
     },
@@ -159,7 +201,7 @@ static const struct OamData sOamData_Arrow =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x8),
     .x = 0,
@@ -171,9 +213,9 @@ static const struct OamData sOamData_Arrow =
     .affineParam = 0,
 };
 
-static const u8 sArrowDown_Gfx[] = INCBIN_U8("graphics/reset_rtc_screen/arrow_down.4bpp");
-static const u8 sArrowRight_Gfx[] = INCBIN_U8("graphics/reset_rtc_screen/arrow_right.4bpp");
-static const u16 sArrow_Pal[] = INCBIN_U16("graphics/reset_rtc_screen/arrow.gbapal");
+static const u8 sArrowDown_Gfx[] = INCGFX_U8("graphics/reset_rtc_screen/arrow_down.png", ".4bpp");
+static const u8 sArrowRight_Gfx[] = INCGFX_U8("graphics/reset_rtc_screen/arrow_right.png", ".4bpp");
+static const u16 sArrow_Pal[] = INCGFX_U16("graphics/reset_rtc_screen/arrow.pal", ".gbapal");
 
 static const struct SpriteFrameImage sPicTable_Arrow[] =
 {
@@ -219,13 +261,11 @@ static const union AnimCmd *const sAnims_Arrow[] =
 
 const struct SpriteTemplate gSpriteTemplate_Arrow =
 {
-    .tileTag = 0xFFFF,
+    .tileTag = TAG_NONE,
     .paletteTag = PALTAG_ARROW,
     .oam = &sOamData_Arrow,
     .anims = sAnims_Arrow,
     .images = sPicTable_Arrow,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy,
 };
 
 #define sTaskId data[0]
@@ -239,7 +279,28 @@ static void SpriteCB_Cursor_UpOrRight(struct Sprite *sprite)
         sprite->sState = state;
         switch (state)
         {
-        case SELECTION_DAYS:
+        case SELECTION_DAYS_1000:
+            sprite->invisible = FALSE;
+            sprite->animNum = ARROW_UP;
+            sprite->animDelayCounter = 0;
+            sprite->x = 35;
+            sprite->y = 68;
+            break;
+        case SELECTION_DAYS_100:
+            sprite->invisible = FALSE;
+            sprite->animNum = ARROW_UP;
+            sprite->animDelayCounter = 0;
+            sprite->x = 41;
+            sprite->y = 68;
+            break;
+        case SELECTION_DAYS_10:
+            sprite->invisible = FALSE;
+            sprite->animNum = ARROW_UP;
+            sprite->animDelayCounter = 0;
+            sprite->x = 47;
+            sprite->y = 68;
+            break;
+        case SELECTION_DAYS_1:
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_UP;
             sprite->animDelayCounter = 0;
@@ -289,7 +350,28 @@ static void SpriteCB_Cursor_Down(struct Sprite *sprite)
         sprite->sState = state;
         switch (state)
         {
-        case SELECTION_DAYS:
+        case SELECTION_DAYS_1000:
+            sprite->invisible = FALSE;
+            sprite->animNum = ARROW_DOWN;
+            sprite->animDelayCounter = 0;
+            sprite->x = 35;
+            sprite->y = 92;
+            break;
+        case SELECTION_DAYS_100:
+            sprite->invisible = FALSE;
+            sprite->animNum = ARROW_DOWN;
+            sprite->animDelayCounter = 0;
+            sprite->x = 41;
+            sprite->y = 92;
+            break;
+        case SELECTION_DAYS_10:
+            sprite->invisible = FALSE;
+            sprite->animNum = ARROW_DOWN;
+            sprite->animDelayCounter = 0;
+            sprite->x = 47;
+            sprite->y = 92;
+            break;
+        case SELECTION_DAYS_1:
             sprite->invisible = FALSE;
             sprite->animNum = ARROW_DOWN;
             sprite->animDelayCounter = 0;
@@ -362,7 +444,7 @@ static void PrintTime(u8 windowId, u8 x, u8 y, u16 days, u8 hours, u8 minutes, u
 {
     u8 *dest = gStringVar4;
 
-    // Print days    
+    // Print days
     ConvertIntToDecimalStringN(gStringVar1, days, STR_CONV_MODE_RIGHT_ALIGN, 4);
     dest = StringCopy(dest, gStringVar1);
     dest = StringCopy(dest, gText_Day);
@@ -381,28 +463,28 @@ static void PrintTime(u8 windowId, u8 x, u8 y, u16 days, u8 hours, u8 minutes, u
     ConvertIntToDecimalStringN(gStringVar1, seconds, STR_CONV_MODE_LEADING_ZEROS, 2);
     dest = StringCopy(dest, gStringVar1);
 
-    AddTextPrinterParameterized(windowId, 1, gStringVar4, x, y, TEXT_SPEED_FF, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar4, x, y, TEXT_SKIP_DRAW, NULL);
 }
 
 static void ShowChooseTimeWindow(u8 windowId, u16 days, u8 hours, u8 minutes, u8 seconds)
 {
     DrawStdFrameWithCustomTileAndPalette(windowId, FALSE, 0x214, 0xE);
     PrintTime(windowId, 0, 1, days, hours, minutes, seconds);
-    AddTextPrinterParameterized(windowId, 1, gText_Confirm2, 126, 1, 0, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_Confirm2, 126, 1, 0, NULL);
     ScheduleBgCopyTilemapToVram(0);
 }
 
-static bool32 MoveTimeUpDown(s16 *val, int minVal, int maxVal, u16 keys)
+static bool32 MoveTimeUpDown(s16 *val, int minVal, int maxVal, int increment, u16 keys)
 {
     if (keys & DPAD_DOWN)
     {
-        *val -= 1;
+        *val -= increment;
         if (*val < minVal)
             *val = maxVal;
     }
     else if (keys & DPAD_UP)
     {
-        *val += 1;
+        *val += increment;
         if (*val > maxVal)
             *val = minVal;
     }
@@ -489,11 +571,11 @@ static void Task_ResetRtc_HandleInput(u8 taskId)
             tSelection = SELECTION_NONE;
         }
     }
-    else if (MoveTimeUpDown(&data[selectionInfo->dataIndex], selectionInfo->minVal, selectionInfo->maxVal, JOY_REPEAT(DPAD_UP | DPAD_DOWN)))
+    else if (MoveTimeUpDown(&data[selectionInfo->dataIndex], selectionInfo->minVal, selectionInfo->maxVal, selectionInfo->increment, JOY_REPEAT(DPAD_UP | DPAD_DOWN)))
     {
         PlaySE(SE_SELECT);
         PrintTime(tWindowId, 0, 1, tDays, tHours, tMinutes, tSeconds);
-        CopyWindowToVram(tWindowId, 2);
+        CopyWindowToVram(tWindowId, COPYWIN_GFX);
     }
 }
 
@@ -517,7 +599,7 @@ void CB2_InitResetRtcScreen(void)
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
     SetVBlankCallback(NULL);
     DmaClear16(3, PLTT, PLTT_SIZE);
-    DmaFillLarge16(3, 0, (u8 *)VRAM, VRAM_SIZE, 0x1000);
+    DmaClearLarge16(3, (void *)VRAM, VRAM_SIZE, 0x1000);
     ResetOamRange(0, 128);
     LoadOam();
     ScanlineEffect_Stop();
@@ -562,8 +644,8 @@ static void VBlankCB(void)
 
 static void ShowMessage(const u8 *str)
 {
-    DrawDialogFrameWithCustomTileAndPalette(1, FALSE, 0x200, 0xF);
-    AddTextPrinterParameterized(1, 1, str, 0, 1, 0, NULL);
+    DrawDialogFrameWithCustomTileAndPalette(WIN_MSG, FALSE, 0x200, 0xF);
+    AddTextPrinterParameterized(WIN_MSG, FONT_NORMAL, str, 0, 1, 0, NULL);
     ScheduleBgCopyTilemapToVram(0);
 }
 
@@ -576,11 +658,11 @@ static void Task_ShowResetRtcPrompt(u8 taskId)
     switch (tState)
     {
     case 0:
-        DrawStdFrameWithCustomTileAndPalette(0, FALSE, 0x214, 0xE);
+        DrawStdFrameWithCustomTileAndPalette(WIN_TIME, FALSE, 0x214, 0xE);
 
-        AddTextPrinterParameterized(0, 1, gText_PresentTime, 0, 1, TEXT_SPEED_FF, 0);
+        AddTextPrinterParameterized(WIN_TIME, FONT_NORMAL, gText_PresentTime, 0, 1, TEXT_SKIP_DRAW, 0);
         PrintTime(
-            0,
+            WIN_TIME,
             0,
             17,
             gLocalTime.days,
@@ -588,9 +670,9 @@ static void Task_ShowResetRtcPrompt(u8 taskId)
             gLocalTime.minutes,
             gLocalTime.seconds);
 
-        AddTextPrinterParameterized(0, 1, gText_PreviousTime, 0, 33, TEXT_SPEED_FF, 0);
+        AddTextPrinterParameterized(WIN_TIME, FONT_NORMAL, gText_PreviousTime, 0, 33, TEXT_SKIP_DRAW, 0);
         PrintTime(
-            0,
+            WIN_TIME,
             0,
             49,
             gSaveBlock2Ptr->lastBerryTreeUpdate.days,
@@ -599,7 +681,7 @@ static void Task_ShowResetRtcPrompt(u8 taskId)
             gSaveBlock2Ptr->lastBerryTreeUpdate.seconds);
 
         ShowMessage(gText_ResetRTCConfirmCancel);
-        CopyWindowToVram(0, 2);
+        CopyWindowToVram(WIN_TIME, COPYWIN_GFX);
         ScheduleBgCopyTilemapToVram(0);
         tState++;
     case 1:
@@ -648,7 +730,7 @@ static void Task_ResetRtcScreen(u8 taskId)
     case MAINSTATE_CHECK_SAVE:
         if (!gPaletteFade.active)
         {
-            if (gSaveFileStatus == SAVE_STATUS_EMPTY 
+            if (gSaveFileStatus == SAVE_STATUS_EMPTY
              || gSaveFileStatus == SAVE_STATUS_CORRUPT)
             {
                 ShowMessage(gText_NoSaveFileCantSetTime);
@@ -666,7 +748,7 @@ static void Task_ResetRtcScreen(u8 taskId)
         // Wait for A or B press on prompt first
         if (gTasks[tSubTaskId].isActive != TRUE)
         {
-            ClearStdWindowAndFrameToTransparent(0, FALSE);
+            ClearStdWindowAndFrameToTransparent(WIN_TIME, FALSE);
             ShowMessage(gText_PleaseResetTime);
             gLocalTime = gSaveBlock2Ptr->lastBerryTreeUpdate;
             tSubTaskId = CreateTask(Task_ResetRtc_Init, 80);

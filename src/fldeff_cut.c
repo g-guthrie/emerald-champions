@@ -6,6 +6,7 @@
 #include "field_camera.h"
 #include "field_effect.h"
 #include "field_player_avatar.h"
+#include "field_specials.h"
 #include "fieldmap.h"
 #include "fldeff.h"
 #include "malloc.h"
@@ -66,6 +67,7 @@ static bool8 sHyperCutTiles[CUT_HYPER_AREA];
 
 // EWRAM variables
 static EWRAM_DATA u8 *sCutGrassSpriteArrayPtr = NULL;
+static EWRAM_DATA bool8 sScheduleOpenDottedHole = FALSE;
 
 // const rom data
 static const struct HyperCutterUnk sHyperCutStruct[] =
@@ -93,7 +95,7 @@ static const struct OamData sOamData_CutGrass =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(8x8),
     .x = 0,
@@ -125,26 +127,33 @@ const struct SpritePalette gSpritePalette_CutGrass = {gFieldEffectPal_CutGrass, 
 
 static const struct SpriteTemplate sSpriteTemplate_CutGrass =
 {
-    .tileTag = 0xFFFF,
+    .tileTag = TAG_NONE,
     .paletteTag = FLDEFF_PAL_TAG_CUT_GRASS,
     .oam = &sOamData_CutGrass,
     .anims = sSpriteAnimTable_CutGrass,
     .images = sSpriteImageTable_CutGrass,
-    .affineAnims = gDummySpriteAffineAnimTable,
     .callback = CutGrassSpriteCallback1,
 };
 
 // code
-bool8 SetUpFieldMove_Cut(void)
+bool32 SetUpFieldMove_Cut(void)
 {
     s16 x, y;
     u8 i, j;
     u8 tileBehavior;
-    u16 userAbility;
+    enum Ability userAbility;
     bool8 cutTiles[CUT_NORMAL_AREA];
     bool8 ret;
+    sScheduleOpenDottedHole = FALSE;
+    if (CutMoveRuinValleyCheck() == TRUE)
+    {
+        sScheduleOpenDottedHole = TRUE;
+        gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
+        gPostMenuFieldCallback = FieldCallback_CutGrass;
+        return TRUE;
+    }
 
-    if (CheckObjectGraphicsInFrontOfPlayer(OBJ_EVENT_GFX_CUTTABLE_TREE) == TRUE)
+    if (CheckObjectGraphicsInFrontOfPlayer(OBJ_EVENT_GFX_CUTTABLE_TREE) == TRUE || CheckObjectGraphicsInFrontOfPlayer(OBJ_EVENT_GFX_CUTTABLE_TREE_FRLG) == TRUE)
     {
         // Standing in front of cuttable tree.
         gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
@@ -154,7 +163,7 @@ bool8 SetUpFieldMove_Cut(void)
     else
     {
         PlayerGetDestCoords(&gPlayerFacingPosition.x, &gPlayerFacingPosition.y);
-        userAbility = GetMonAbility(&gPlayerParty[GetCursorSelectionMonId()]);
+        userAbility = GetMonAbility(&gParties[B_TRAINER_PLAYER][GetCursorSelectionMonId()]);
         if (userAbility == ABILITY_HYPER_CUTTER)
         {
             sCutSquareSide = CUT_HYPER_SIDE;
@@ -181,7 +190,7 @@ bool8 SetUpFieldMove_Cut(void)
             for (j = 0; j < CUT_NORMAL_SIDE; j++)
             {
                 x = j - 1 + gPlayerFacingPosition.x;
-                if (MapGridGetZCoordAt(x, y) == gPlayerFacingPosition.height)
+                if (MapGridGetElevationAt(x, y) == gPlayerFacingPosition.elevation)
                 {
                     tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
                     if (MetatileBehavior_IsPokeGrass(tileBehavior) == TRUE
@@ -191,7 +200,12 @@ bool8 SetUpFieldMove_Cut(void)
                         sHyperCutTiles[6 + (i * 5) + j] = TRUE;
                         ret = TRUE;
                     }
-                    if (MapGridIsImpassableAt(x, y) == TRUE)
+                #ifdef BUGFIX
+                    // Collision has a range 0-3, any value != 0 is impassable
+                    if (MapGridGetCollisionAt(x, y))
+                #else
+                    if (MapGridGetCollisionAt(x, y) == 1)
+                #endif
                     {
                         cutTiles[i * 3 + j] = FALSE;
                     }
@@ -238,7 +252,7 @@ bool8 SetUpFieldMove_Cut(void)
 
                 if (tileCuttable == TRUE)
                 {
-                    if (MapGridGetZCoordAt(x, y) == gPlayerFacingPosition.height)
+                    if (MapGridGetElevationAt(x, y) == gPlayerFacingPosition.elevation)
                     {
                         u8 tileArrayId = ((sHyperCutStruct[i].y * 5) + 12) + (sHyperCutStruct[i].x);
                         tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
@@ -272,8 +286,8 @@ bool8 SetUpFieldMove_Cut(void)
 
 static void FieldCallback_CutGrass(void)
 {
-    FieldEffectStart(FLDEFF_USE_CUT_ON_GRASS);
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
+    ScriptContext_SetupScript(EventScript_UseCutGrass);
 }
 
 bool8 FldEff_UseCutOnGrass(void)
@@ -289,7 +303,7 @@ bool8 FldEff_UseCutOnGrass(void)
 static void FieldCallback_CutTree(void)
 {
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
-    ScriptContext1_SetupScript(EventScript_UseCut);
+    ScriptContext_SetupScript(EventScript_UseCut);
 }
 
 bool8 FldEff_UseCutOnTree(void)
@@ -305,7 +319,10 @@ bool8 FldEff_UseCutOnTree(void)
 static void StartCutGrassFieldEffect(void)
 {
     FieldEffectActiveListRemove(FLDEFF_USE_CUT_ON_GRASS);
-    FieldEffectStart(FLDEFF_CUT_GRASS);
+    if (sScheduleOpenDottedHole == TRUE)
+        CutMoveOpenDottedHoleDoor();
+    else
+        FieldEffectStart(FLDEFF_CUT_GRASS);
 }
 
 bool8 FldEff_CutGrass(void)
@@ -348,9 +365,7 @@ bool8 FldEff_CutGrass(void)
 // set map grid metatile depending on x, y
 static void SetCutGrassMetatile(s16 x, s16 y)
 {
-    s32 metatileId = MapGridGetMetatileIdAt(x, y);
-
-    switch (metatileId)
+    switch (MapGridGetMetatileIdAt(x, y))
     {
     case METATILE_Fortree_LongGrass_Root:
     case METATILE_General_LongGrass:
@@ -578,10 +593,10 @@ static void CutGrassSpriteCallbackEnd(struct Sprite *sprite)
     FieldEffectStop(&gSprites[sCutGrassSpriteArrayPtr[0]], FLDEFF_CUT_GRASS);
     FREE_AND_SET_NULL(sCutGrassSpriteArrayPtr);
     ScriptUnfreezeObjectEvents();
-    ScriptContext2_Disable();
+    UnlockPlayerFieldControls();
 
     if (IsMewPlayingHideAndSeek() == TRUE)
-        ScriptContext1_SetupScript(FarawayIsland_Interior_EventScript_HideMewWhenGrassCut);
+        ScriptContext_SetupScript(FarawayIsland_Interior_EventScript_HideMewWhenGrassCut);
 }
 
 void FixLongGrassMetatilesWindowTop(s16 x, s16 y)
@@ -638,5 +653,5 @@ static void StartCutTreeFieldEffect(void)
 {
     PlaySE(SE_M_CUT);
     FieldEffectActiveListRemove(FLDEFF_USE_CUT_ON_TREE);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }

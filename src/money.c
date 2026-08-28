@@ -2,6 +2,7 @@
 #include "money.h"
 #include "graphics.h"
 #include "event_data.h"
+#include "palette.h"
 #include "string_util.h"
 #include "text.h"
 #include "menu.h"
@@ -9,20 +10,19 @@
 #include "sprite.h"
 #include "strings.h"
 #include "decompress.h"
-
-#define MAX_MONEY 9999999
+#include "tv.h"
 
 EWRAM_DATA static u8 sMoneyBoxWindowId = 0;
 EWRAM_DATA static u8 sMoneyLabelSpriteId = 0;
 
-#define MONEY_LABEL_TAG 0x2722
+#define MONEY_LABEL_TAG 0x2722 | BLEND_IMMUNE_FLAG
 
 static const struct OamData sOamData_MoneyLabel =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x16),
     .x = 0,
@@ -51,35 +51,32 @@ static const struct SpriteTemplate sSpriteTemplate_MoneyLabel =
     .paletteTag = MONEY_LABEL_TAG,
     .oam = &sOamData_MoneyLabel,
     .anims = sSpriteAnimTable_MoneyLabel,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy
 };
 
 static const struct CompressedSpriteSheet sSpriteSheet_MoneyLabel =
 {
-    .data = gMenuMoneyGfx,
+    .data = gShopMenuMoney_Gfx,
     .size = 256,
     .tag = MONEY_LABEL_TAG,
 };
 
-static const struct CompressedSpritePalette sSpritePalette_MoneyLabel =
+static const struct SpritePalette sSpritePalette_MoneyLabel =
 {
-    .data = gMenuMoneyPal,
+    .data = gShopMenu_Pal,
     .tag = MONEY_LABEL_TAG
 };
 
-u32 GetMoney(u32* moneyPtr)
+u32 GetMoney(u32 *moneyPtr)
 {
     return *moneyPtr ^ gSaveBlock2Ptr->encryptionKey;
 }
 
-void SetMoney(u32* moneyPtr, u32 newValue)
+void SetMoney(u32 *moneyPtr, u32 newValue)
 {
     *moneyPtr = gSaveBlock2Ptr->encryptionKey ^ newValue;
 }
 
-bool8 IsEnoughMoney(u32* moneyPtr, u32 cost)
+bool8 IsEnoughMoney(u32 *moneyPtr, u32 cost)
 {
     if (GetMoney(moneyPtr) >= cost)
         return TRUE;
@@ -87,7 +84,7 @@ bool8 IsEnoughMoney(u32* moneyPtr, u32 cost)
         return FALSE;
 }
 
-void AddMoney(u32* moneyPtr, u32 toAdd)
+void AddMoney(u32 *moneyPtr, u32 toAdd)
 {
     u32 toSet = GetMoney(moneyPtr);
 
@@ -107,7 +104,7 @@ void AddMoney(u32* moneyPtr, u32 toAdd)
     SetMoney(moneyPtr, toSet);
 }
 
-void RemoveMoney(u32* moneyPtr, u32 toSub)
+void RemoveMoney(u32 *moneyPtr, u32 toSub)
 {
     u32 toSet = GetMoney(moneyPtr);
 
@@ -132,24 +129,34 @@ void SubtractMoneyFromVar0x8005(void)
 
 void PrintMoneyAmountInMoneyBox(u8 windowId, int amount, u8 speed)
 {
-    PrintMoneyAmount(windowId, 0x20, 1, amount, speed);
+    PrintMoneyAmount(windowId, CalculateMoneyTextHorizontalPosition(amount), 1, amount, speed);
+}
+
+static u32 CalculateLeadingSpacesForMoney(u32 numDigits)
+{
+    u32 leadingSpaces = CountDigits(INT_MAX) - StringLength(gStringVar1);
+    return (numDigits > 8) ? leadingSpaces : leadingSpaces - 2;
 }
 
 void PrintMoneyAmount(u8 windowId, u8 x, u8 y, int amount, u8 speed)
 {
-    u8 *txtPtr;
-    s32 strLength;
+    u8 *txtPtr = gStringVar4;
+    u32 numDigits = CountDigits(amount);
+    u32 maxDigits = (numDigits > 6) ? MAX_MONEY_DIGITS: 6;
+    u32 leadingSpaces;
 
-    ConvertIntToDecimalStringN(gStringVar1, amount, STR_CONV_MODE_LEFT_ALIGN, 7);
+    ConvertIntToDecimalStringN(gStringVar1, amount, STR_CONV_MODE_LEFT_ALIGN, maxDigits);
 
-    strLength = 7 - StringLength(gStringVar1);
-    txtPtr = gStringVar4;
+    leadingSpaces = CalculateLeadingSpacesForMoney(numDigits);
 
-    while (strLength-- > 0)
-        *(txtPtr++) = 0x77;
+    while (leadingSpaces-- > 0)
+        *(txtPtr++) = CHAR_SPACER;
 
     StringExpandPlaceholders(txtPtr, gText_PokedollarVar1);
-    AddTextPrinterParameterized(windowId, 1, gStringVar4, x, y, speed, NULL);
+
+    if (numDigits > 8)
+        PrependFontIdToFit(gStringVar4, txtPtr + 1 + numDigits, FONT_NORMAL, 54);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar4, x, y, speed, NULL);
 }
 
 void PrintMoneyAmountInMoneyBoxWithBorder(u8 windowId, u16 tileStart, u8 pallete, int amount)
@@ -163,6 +170,11 @@ void ChangeAmountInMoneyBox(int amount)
     PrintMoneyAmountInMoneyBox(sMoneyBoxWindowId, amount, 0);
 }
 
+u32 CalculateMoneyTextHorizontalPosition(u32 amount)
+{
+    return (CountDigits(amount) > 8) ? 34 : 26;
+}
+
 void DrawMoneyBox(int amount, u8 x, u8 y)
 {
     struct WindowTemplate template;
@@ -171,7 +183,7 @@ void DrawMoneyBox(int amount, u8 x, u8 y)
     sMoneyBoxWindowId = AddWindow(&template);
     FillWindowPixelBuffer(sMoneyBoxWindowId, PIXEL_FILL(0));
     PutWindowTilemap(sMoneyBoxWindowId);
-    CopyWindowToVram(sMoneyBoxWindowId, 1);
+    CopyWindowToVram(sMoneyBoxWindowId, COPYWIN_MAP);
     PrintMoneyAmountInMoneyBoxWithBorder(sMoneyBoxWindowId, 0x214, 14, amount);
     AddMoneyLabelObject((8 * x) + 19, (8 * y) + 11);
 }
@@ -180,14 +192,14 @@ void HideMoneyBox(void)
 {
     RemoveMoneyLabelObject();
     ClearStdWindowAndFrameToTransparent(sMoneyBoxWindowId, FALSE);
-    CopyWindowToVram(sMoneyBoxWindowId, 2);
+    CopyWindowToVram(sMoneyBoxWindowId, COPYWIN_GFX);
     RemoveWindow(sMoneyBoxWindowId);
 }
 
 void AddMoneyLabelObject(u16 x, u16 y)
 {
     LoadCompressedSpriteSheet(&sSpriteSheet_MoneyLabel);
-    LoadCompressedSpritePalette(&sSpritePalette_MoneyLabel);
+    LoadSpritePalette(&sSpritePalette_MoneyLabel);
     sMoneyLabelSpriteId = CreateSprite(&sSpriteTemplate_MoneyLabel, x, y, 0);
 }
 

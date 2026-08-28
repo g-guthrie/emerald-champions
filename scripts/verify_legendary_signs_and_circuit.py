@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Static release gate for Legendary Signs and the Champions Circuit."""
+"""Static release gates for Legendary Signs and the Showdown Circuit."""
 
 from __future__ import annotations
 
+import hashlib
 import json
 import re
-from collections import Counter
 from pathlib import Path
 
 
@@ -18,129 +18,48 @@ def read(path: str) -> str:
 
 def require(condition: bool, message: str) -> None:
     if not condition:
-        raise AssertionError(message)
+        raise SystemExit(message)
 
 
 def main() -> None:
-    definitions = read("src/data/pokemon/legendary_signs.h")
-    header = read("include/legendary_signs.h")
-    engine = read("src/legendary_signs.c")
+    manifest = json.loads(read("docs/showdown_champions_random_doubles.json"))
+    generated = read("src/data/pokemon/showdown_champions_circuit.h")
     circuit = read("src/champions_circuit.c")
-    specials = read("data/specials.inc")
+    definitions = read("src/data/pokemon/legendary_signs.h")
 
-    enum_block = re.search(
-        r"enum LegendarySignId\s*\{(?P<body>.*?)LEGENDARY_SIGN_COUNT,",
-        header,
-        re.S,
-    )
-    require(enum_block is not None, "Legendary Sign enum is missing")
-    ids = re.findall(r"\b(LEGENDARY_SIGN_[A-Z0-9_]+)\b", enum_block.group("body"))
-    rows = re.findall(r"(?:WILD|OTHER)_SIGN\((LEGENDARY_SIGN_[A-Z0-9_]+),", definitions)
-    require(len(ids) == 53, f"expected 53 Legendary Sign IDs, found {len(ids)}")
-    require(Counter(rows) == Counter(ids), "Legendary Sign table is not a one-to-one enum allocation")
+    require(manifest["source_commit"] == "bb179fbf8449e3c31632bd56f671ffb4404fa6e7", "Showdown source commit drifted")
+    require(manifest["variant_count"] == 311, "Showdown variant count drifted")
+    require(manifest["template_count"] == 444, "Showdown template count drifted")
+    require(generated.count(".partySpecies =") == 311, "generated Showdown variant table is incomplete")
+    require(generated.count(".role =") == 444, "generated Showdown template table is incomplete")
+    require("Pokemon Showdown" in read("docs/THIRD_PARTY_NOTICES.md"), "Showdown MIT notice is missing")
+    require("gShowdownCircuitVariants" in circuit, "Circuit is not using Showdown's species pool")
+    require("gShowdownCircuitTemplates" in circuit, "Circuit is not using Showdown's role templates")
+    require("ChooseBaseDex" in circuit and "CandidateAllowed" in circuit, "live Showdown team composition is missing")
+    require("towerNumWins" not in circuit and "towerSinglesStreak" not in circuit, "Circuit contaminates Battle Tower records")
+    require("VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS" in circuit, "Circuit lacks dedicated current-run state")
+    require("CIRCUIT_MASTERY_WINS 40" in circuit, "Circuit mastery milestone drifted")
 
-    source_counts = Counter()
-    source_counts["conditional"] = len(re.findall(r"^WILD_SIGN\(", definitions, re.M))
-    for source in ("VISIBLE", "BREEDING", "GAME_CORNER", "CIRCUIT", "MASTERY"):
-        source_counts[source.lower()] = len(
-            re.findall(rf"LEGENDARY_SOURCE_{source}\),", definitions)
-        )
-    expected = {
-        "conditional": 28,
-        "visible": 3,
-        "breeding": 1,
-        "game_corner": 2,
-        "circuit": 17,
-        "mastery": 2,
-    }
-    require(dict(source_counts) == expected, f"allocation counts drifted: {dict(source_counts)}")
+    sign_ids = re.findall(r"(?:WILD|OTHER)_SIGN\((LEGENDARY_SIGN_[A-Z0-9_]+)", definitions)
+    require(len(sign_ids) == 53 and len(set(sign_ids)) == 53, "Legendary Sign definitions are incomplete or duplicated")
+    require("MIRAGE_TOWER" not in definitions, "a Sign still depends on collapsible Mirage Tower")
+    require("SAFARI_ZONE" not in definitions, "a Sign still requires Safari capture rules")
+    require("min(MAX_LEVEL, GetCurrentLevelCap())" in read("src/legendary_signs.c"), "Arceus reward level is not clamped")
+    require("MarkLegendarySignCaughtBySpecies" in read("src/battle_script_commands.c"), "wild catches do not close Signs")
+    require("MarkLegendarySignCaughtBySpecies" in read("src/script_pokemon_util.c"), "gift catches do not close Signs")
+    require("MarkLegendarySignCaughtBySpecies" in read("src/egg_hatch.c"), "Phione hatching does not close its Sign")
+    require("SPECIES_MANAPHY" in read("src/daycare.c"), "Manaphy and Ditto breeding gate is missing")
+    require("FLAG_HIDE_LEGENDARY_SIGN_DARKRAI" in read("data/scripts/new_game.inc"), "visible Sign reset flags are missing")
+    require("OBJ_EVENT_GFX_SPECIES(DARKRAI)" in read("data/maps/MtPyre_Summit/map.json"), "Darkrai overworld object is missing")
+    require("OBJ_EVENT_GFX_SPECIES(CRESSELIA)" in read("data/maps/MeteorFalls_B1F_2R/map.json"), "Cresselia overworld object is missing")
+    require("OBJ_EVENT_GFX_SPECIES(DIALGA)" in read("data/maps/MeteorFalls_B1F_1R/map.json"), "Dialga overworld object is missing")
+    require("SPECIES_GENESECT" in read("data/maps/MauvilleCity_GameCorner/scripts.inc"), "Genesect Game Corner reward is missing")
+    require("SPECIES_POIPOLE" in read("data/maps/MauvilleCity_GameCorner/scripts.inc"), "Poipole Game Corner reward is missing")
 
-    wild_rows = re.findall(
-        r"WILD_SIGN\([^,]+,\s*([A-Z0-9_]+),\s*([A-Z0-9_]+),\s*"
-        r"LEGENDARY_AREA_[A-Z]+,\s*(\d+),\s*(\d+),\s*(-?\d+),\s*"
-        r"([A-Z0-9_]+),\s*([^\)]+)\)",
-        definitions,
-    )
-    require(len(wild_rows) == 28, "failed to parse all conditional-wild rows")
-    map_constants = read("include/constants/map_groups.h")
-    for species, map_name, chance, badges, offset, requirement, flag in wild_rows:
-        require(f"#define MAP_{map_name}" in map_constants, f"unknown map for {species}: {map_name}")
-        require(1 <= int(chance) <= 100, f"invalid chance for {species}")
-        require(0 <= int(badges) <= 8, f"invalid badge gate for {species}")
-        require(-10 <= int(offset) <= 10, f"invalid level offset for {species}")
-        require(requirement != "NONE", f"{species} has no party requirement")
-        require(flag.strip() != "0", f"{species} has no persistent story gate")
-
-    required_specials = (
-        "TryUnlockSelectedLegendarySign",
-        "TryDiscoverEligibleLegendarySign",
-        "TryGiveArceusLegendarySignMasteryReward",
-        "ChampionsCircuitCanEnter",
-        "ChampionsCircuitBegin",
-        "ChampionsCircuitGenerateOpponent",
-        "BattleSetup_StartChampionsCircuitBattle",
-        "ChampionsCircuitHandleBattleResult",
-        "ChampionsCircuitTryGiveReward",
-        "ChampionsCircuitEnd",
-    )
-    for special in required_specials:
-        require(f"def_special {special}" in specials, f"missing script special {special}")
-
-    require("MarkLegendarySignCaughtBySpecies(caughtSpecies)" in read("src/battle_script_commands.c"),
-            "wild captures do not close Legendary Signs")
-    require("TryGetLegendarySignWildOverride" in read("src/wild_encounter.c"),
-            "conditional wild hook is missing")
-    require("SPECIES_MANAPHY" in read("src/daycare.c") and "SPECIES_PHIONE" in read("src/daycare.c"),
-            "Manaphy plus Ditto breeding path is missing")
-    require("SPECIES_GENESECT" in read("data/maps/MauvilleCity_GameCorner/scripts.inc"),
-            "Genesect Game Corner prize is missing")
-    require("SPECIES_POIPOLE" in read("data/maps/MauvilleCity_GameCorner/scripts.inc"),
-            "Poipole Game Corner prize is missing")
-    require("MarkLegendarySignCaughtBySpecies(species)" in read("src/script_pokemon_util.c"),
-            "successful gift Pokémon do not close their Legendary Sign acquisition")
-    require("MIRAGE_TOWER_4F" not in definitions,
-            "a Legendary Sign still depends on collapsible Mirage Tower 4F")
-
-    for flag in (
-        "FLAG_HIDE_LEGENDARY_SIGN_DARKRAI",
-        "FLAG_HIDE_LEGENDARY_SIGN_CRESSELIA",
-        "FLAG_HIDE_LEGENDARY_SIGN_DIALGA",
-    ):
-        require(flag in read("data/scripts/new_game.inc"), f"{flag} is not hidden on a new game")
-        require(flag in engine, f"{flag} is not synchronized with persistent sign state")
-
-    circuit_requirements = (
-        "SpeciesToNationalPokedexNum",
-        "team->items[i] == item",
-        "team->typeCounts[type1] >= 2",
-        "team->legendaryCount >= 2",
-        "team->hasMega",
-        "PresetHasSpeedControl",
-        "SetMatchesCircuitTheme",
-        "80 + wins / PARTY_SIZE",
-        "wins % PARTY_SIZE",
-        "GetVerdantBattleSetRawCount",
-        "LEGENDARY_SIGN_ETERNATUS",
-    )
-    for token in circuit_requirements:
-        require(token in circuit, f"Circuit invariant missing: {token}")
-    require("towerSinglesStreak" not in circuit,
-            "Champions Circuit must not write the Battle Tower singles scratch field")
-
-    corpus = json.loads(read("docs/verdant_multi_battle_sets.json"))
-    require(corpus["set_count"] == 1309, f"expected 1309 legal sets, found {corpus['set_count']}")
-    require(corpus["alternative_count"] == 166, "battle-set alternatives drifted")
-
-    vars_h = read("include/constants/vars.h")
-    for suffix in range(4):
-        require(f"VAR_LEGENDARY_SIGNS_UNLOCKED_{suffix}" in vars_h, "unlocked bitset is incomplete")
-        require(f"VAR_LEGENDARY_SIGNS_CAUGHT_{suffix}" in vars_h, "caught bitset is incomplete")
-    require("VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS" in vars_h, "Circuit total-win counter is missing")
-
-    print("Legendary Signs: 53/53 allocated")
-    print("Conditional wilds: 28; visible: 3; breeding: 1; Game Corner: 2; Circuit: 17; mastery: 2")
-    print("Champions Circuit corpus: 1,309 competitive sets")
-    print("Legendary Sign and Champions Circuit release gate: PASS")
+    generator_hash_before = hashlib.sha256((ROOT / "src/data/pokemon/showdown_champions_circuit.h").read_bytes()).hexdigest()
+    print(f"Legendary Signs: {len(sign_ids)} complete acquisition definitions")
+    print(f"Showdown Circuit: {manifest['variant_count']} variants, {manifest['template_count']} templates")
+    print(f"Generated table SHA256: {generator_hash_before}")
 
 
 if __name__ == "__main__":

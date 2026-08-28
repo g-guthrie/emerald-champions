@@ -1,31 +1,16 @@
-.set LOCALID_STEVEN, 1
-
-GraniteCave_StevensRoom_MapScripts:: @ 822DC7A
+GraniteCave_StevensRoom_MapScripts::
 	.byte 0
 
-GraniteCave_StevensRoom_EventScript_Steven:: @ 822DC7B
+GraniteCave_StevensRoom_EventScript_Steven::
 	lock
 	faceplayer
-	goto_if_set FLAG_DELIVERED_STEVEN_LETTER, GraniteCave_StevensRoom_EventScript_TryGiveRewards
 	msgbox GraniteCave_StevensRoom_Text_ImStevenLetterForMe, MSGBOX_DEFAULT
 	setvar VAR_0x8004, ITEM_LETTER
 	call Common_EventScript_PlayerHandedOverTheItem
 	setflag FLAG_DELIVERED_STEVEN_LETTER
-
-GraniteCave_StevensRoom_EventScript_TryGiveRewards:
-	goto_if_set FLAG_SYS_RECEIVED_KEYSTONE, GraniteCave_StevensRoom_EventScript_RegisterSteven
 	msgbox GraniteCave_StevensRoom_Text_ThankYouTakeThis, MSGBOX_DEFAULT
-	special TryGiveVerdantStevenRewardBundle
-	compare VAR_RESULT, FALSE
-	goto_if_eq GraniteCave_StevensRoom_EventScript_BagFull
-	setflag FLAG_SYS_RECEIVED_KEYSTONE
-	playfanfare MUS_OBTAIN_ITEM
-	message GraniteCave_StevensRoom_Text_ReceivedRewards
-	waitmessage
-	waitfanfare
-	msgbox GraniteCave_StevensRoom_Text_MegaBracelet, MSGBOX_DEFAULT
-	msgbox GraniteCave_StevensRoom_Text_StarterMegaStones, MSGBOX_DEFAULT
-GraniteCave_StevensRoom_EventScript_RegisterSteven:
+	giveitem ITEM_MEGA_RING
+	call_if_eq VAR_RESULT, FALSE, GraniteCave_StevensRoom_EventScript_BagFull
 	msgbox GraniteCave_StevensRoom_Text_CouldBecomeChampionLetsRegister, MSGBOX_DEFAULT
 	closemessage
 	delay 30
@@ -37,42 +22,37 @@ GraniteCave_StevensRoom_EventScript_RegisterSteven:
 	setflag FLAG_REGISTERED_STEVEN_POKENAV
 	msgbox GraniteCave_StevensRoom_Text_IveGotToHurryAlong, MSGBOX_DEFAULT
 	closemessage
-	compare VAR_FACING, DIR_NORTH
-	call_if_eq GraniteCave_StevensRoom_EventScript_StevenExitNorth
-	compare VAR_FACING, DIR_SOUTH
-	call_if_eq GraniteCave_StevensRoom_EventScript_StevenExitSouth
-	compare VAR_FACING, DIR_WEST
-	call_if_eq GraniteCave_StevensRoom_EventScript_StevenExitWestEast
-	compare VAR_FACING, DIR_EAST
-	call_if_eq GraniteCave_StevensRoom_EventScript_StevenExitWestEast
+	call_if_eq VAR_FACING, DIR_NORTH, GraniteCave_StevensRoom_EventScript_StevenExitNorth
+	call_if_eq VAR_FACING, DIR_SOUTH, GraniteCave_StevensRoom_EventScript_StevenExitSouth
+	call_if_eq VAR_FACING, DIR_WEST, GraniteCave_StevensRoom_EventScript_StevenExitWestEast
+	call_if_eq VAR_FACING, DIR_EAST, GraniteCave_StevensRoom_EventScript_StevenExitWestEast
 	playse SE_EXIT
-	removeobject LOCALID_STEVEN
+	removeobject LOCALID_GRANITE_CAVE_STEVEN
 	release
 	end
 
-GraniteCave_StevensRoom_EventScript_StevenExitNorth:: @ 822DD0D
-	applymovement LOCALID_STEVEN, GraniteCave_StevensRoom_Movement_StevenExit
+GraniteCave_StevensRoom_EventScript_StevenExitNorth::
+	applymovement LOCALID_GRANITE_CAVE_STEVEN, GraniteCave_StevensRoom_Movement_StevenExit
 	waitmovement 0
 	return
 
-GraniteCave_StevensRoom_EventScript_StevenExitWestEast:: @ 822DD18
-	applymovement OBJ_EVENT_ID_PLAYER, GraniteCave_StevensRoom_Movement_PlayerTurnTowardExit
-	applymovement LOCALID_STEVEN, GraniteCave_StevensRoom_Movement_StevenExit
+GraniteCave_StevensRoom_EventScript_StevenExitWestEast::
+	applymovement LOCALID_PLAYER, GraniteCave_StevensRoom_Movement_PlayerTurnTowardExit
+	applymovement LOCALID_GRANITE_CAVE_STEVEN, GraniteCave_StevensRoom_Movement_StevenExit
 	waitmovement 0
 	return
 
-GraniteCave_StevensRoom_EventScript_StevenExitSouth:: @ 822DD2A
-	applymovement OBJ_EVENT_ID_PLAYER, GraniteCave_StevensRoom_Movement_PlayerTurnTowardExit
-	applymovement LOCALID_STEVEN, GraniteCave_StevensRoom_Movement_StevenExitSouth
+GraniteCave_StevensRoom_EventScript_StevenExitSouth::
+	applymovement LOCALID_PLAYER, GraniteCave_StevensRoom_Movement_PlayerTurnTowardExit
+	applymovement LOCALID_GRANITE_CAVE_STEVEN, GraniteCave_StevensRoom_Movement_StevenExitSouth
 	waitmovement 0
 	return
 
-GraniteCave_StevensRoom_EventScript_BagFull:: @ 822DD3C
+GraniteCave_StevensRoom_EventScript_BagFull::
 	msgbox GraniteCave_StevensRoom_Text_OhBagIsFull, MSGBOX_DEFAULT
-	release
-	end
+	return
 
-GraniteCave_StevensRoom_Movement_StevenExit: @ 822DD45
+GraniteCave_StevensRoom_Movement_StevenExit:
 	walk_up
 	walk_up
 	walk_up
@@ -81,14 +61,14 @@ GraniteCave_StevensRoom_Movement_StevenExit: @ 822DD45
 	delay_8
 	step_end
 
-GraniteCave_StevensRoom_Movement_PlayerTurnTowardExit: @ 822DD4C
+GraniteCave_StevensRoom_Movement_PlayerTurnTowardExit:
 	delay_16
 	delay_16
 	delay_16
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
-GraniteCave_StevensRoom_Movement_StevenExitSouth: @ 822DD51
+GraniteCave_StevensRoom_Movement_StevenExitSouth:
 	walk_left
 	walk_up
 	walk_up
@@ -99,60 +79,36 @@ GraniteCave_StevensRoom_Movement_StevenExitSouth: @ 822DD51
 	delay_8
 	step_end
 
-GraniteCave_StevensRoom_Text_ImStevenLetterForMe: @ 822DD5A
-	.string "My name is Steven.\p"
+GraniteCave_StevensRoom_Text_ImStevenLetterForMe:
+	.string "My name is STEVEN.\p"
 	.string "I'm interested in rare stones,\n"
 	.string "so I travel here and there.\p"
 	.string "Oh?\n"
-	.string "A Letter for me?$"
+	.string "A LETTER for me?$"
+GraniteCave_StevensRoom_Text_ThankYouTakeThis:
+	.string "Thank you. Take this Mega Ring.\p"
+	.string "With a matching stone, one Pokémon can\n"
+	.string "Mega Evolve in each battle.$"
 
-GraniteCave_StevensRoom_Text_ThankYouTakeThis: @ 822DDBD
-	.string "Steven: Okay, thank you.\p"
-	.string "You went through all this trouble to\n"
-	.string "deliver that. I need to thank you.\p"
-	.string "Let me see…\n"
-	.string "I'll give you this Metal Coat.\p"
-	.string "Some Pokémon evolve by leveling up\n"
-	.string "while holding it.$"
-
-GraniteCave_StevensRoom_Text_ReceivedRewards:
-	.string "{PLAYER} received a Metal Coat,\n"
-	.string "a Mega Bracelet, and three\l"
-	.string "Mega Stones from Steven!$"
-
-GraniteCave_StevensRoom_Text_MegaBracelet:
-	.string "Steven: There's something else.\p"
-	.string "Rare stones react to the bond between\n"
-	.string "a Trainer and their Pokémon.\p"
-	.string "This Mega Bracelet lets you draw out\n"
-	.string "that power during battle.$"
-
-GraniteCave_StevensRoom_Text_StarterMegaStones:
-	.string "Let a compatible Pokémon hold its Mega\n"
-	.string "Stone, then press START before choosing\l"
-	.string "a move.\p"
-	.string "These three stones belong with Hoenn's\n"
-	.string "partner Pokémon. Use them well.$"
-
-GraniteCave_StevensRoom_Text_CouldBecomeChampionLetsRegister: @ 822DE6B
-	.string "Steven: Your Pokémon appear quite\n"
+GraniteCave_StevensRoom_Text_CouldBecomeChampionLetsRegister:
+	.string "STEVEN: Your POKéMON appear quite\n"
 	.string "capable.\p"
 	.string "If you keep training, you could even\n"
-	.string "become the Champion of the Pokémon\l"
-	.string "League one day. That's what I think.\p"
+	.string "become the CHAMPION of the POKéMON\l"
+	.string "LEAGUE one day. That's what I think.\p"
 	.string "I know, since we've gotten to know each\n"
 	.string "other, let's register one another in\l"
-	.string "our PokéNavs.\p"
+	.string "our POKéNAVS.\p"
 	.string "… … … … … …$"
 
-GraniteCave_StevensRoom_Text_RegisteredSteven: @ 822DF6A
-	.string "Registered Steven\n"
-	.string "in the PokéNav.$"
+GraniteCave_StevensRoom_Text_RegisteredSteven:
+	.string "Registered STEVEN\n"
+	.string "in the POKéNAV.$"
 
-GraniteCave_StevensRoom_Text_IveGotToHurryAlong: @ 822DF8C
+GraniteCave_StevensRoom_Text_IveGotToHurryAlong:
 	.string "Now, I've got to hurry along.$"
 
-GraniteCave_StevensRoom_Text_OhBagIsFull: @ 822DFAA
-	.string "Steven: Your Bag doesn't have room\n"
-	.string "for the full set. Make some space,\l"
-	.string "then speak with me again.$"
+GraniteCave_StevensRoom_Text_OhBagIsFull:
+	.string "Oh, your BAG is full…\n"
+	.string "That's too bad, then.$"
+

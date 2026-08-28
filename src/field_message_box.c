@@ -5,10 +5,14 @@
 #include "text.h"
 #include "match_call.h"
 #include "field_message_box.h"
+#include "text_window.h"
+#include "script.h"
+#include "field_name_box.h"
 
 static EWRAM_DATA u8 sFieldMessageBoxMode = 0;
+EWRAM_DATA u8 gWalkAwayFromSignpostTimer = 0;
 
-static void ExpandStringAndStartDrawFieldMessage(const u8*, bool32);
+static void ExpandStringAndStartDrawFieldMessage(const u8 *, bool32);
 static void StartDrawFieldMessage(void);
 
 void InitFieldMessageBox(void)
@@ -28,20 +32,28 @@ static void Task_DrawFieldMessage(u8 taskId)
 
     switch (task->tState)
     {
-        case 0:
-           LoadMessageBoxAndBorderGfx();
-           task->tState++;
-           break;
-        case 1:
-           DrawDialogueFrame(0, 1);
-           task->tState++;
-           break;
-        case 2:
-            if (RunTextPrintersAndIsPrinter0Active() != TRUE)
-            {
-                sFieldMessageBoxMode = FIELD_MESSAGE_BOX_HIDDEN;
-                DestroyTask(taskId);
-            }
+    case 0:
+        if (gMsgIsSignPost)
+            LoadSignPostWindowFrameGfx();
+        else
+            LoadMessageBoxAndBorderGfx();
+        task->tState++;
+        break;
+    case 1:
+    {
+        u32 nameboxWinId = GetNameboxWindowId();
+        DrawDialogueFrame(0, TRUE);
+        if (nameboxWinId != WINDOW_NONE)
+            DrawNamebox(nameboxWinId, NAME_BOX_BASE_TILE_NUM - NAME_BOX_BASE_TILES_TOTAL, TRUE);
+        task->tState++;
+        break;
+    }
+    case 2:
+        if (RunTextPrintersAndIsPrinter0Active() != TRUE)
+        {
+            sFieldMessageBoxMode = FIELD_MESSAGE_BOX_HIDDEN;
+            DestroyTask(taskId);
+        }
     }
 }
 
@@ -84,7 +96,7 @@ bool8 ShowPokenavFieldMessage(const u8 *str)
     StringExpandPlaceholders(gStringVar4, str);
     CreateTask(Task_HidePokenavMessageWhenDone, 0);
     StartMatchCallFromScript(str);
-    sFieldMessageBoxMode = 2;
+    sFieldMessageBoxMode = FIELD_MESSAGE_BOX_NORMAL;
     return TRUE;
 }
 
@@ -97,15 +109,14 @@ bool8 ShowFieldAutoScrollMessage(const u8 *str)
     return TRUE;
 }
 
-// Unused
-static bool8 ForceShowFieldAutoScrollMessage(const u8 *str)
+static bool8 UNUSED ForceShowFieldAutoScrollMessage(const u8 *str)
 {
     sFieldMessageBoxMode = FIELD_MESSAGE_BOX_AUTO_SCROLL;
     ExpandStringAndStartDrawFieldMessage(str, TRUE);
     return TRUE;
 }
 
-// Same as ShowFieldMessage, but instead of accepting a 
+// Same as ShowFieldMessage, but instead of accepting a
 // string arg it just prints whats already in gStringVar4
 bool8 ShowFieldMessageFromBuffer(void)
 {
@@ -116,9 +127,10 @@ bool8 ShowFieldMessageFromBuffer(void)
     return TRUE;
 }
 
-static void ExpandStringAndStartDrawFieldMessage(const u8* str, bool32 allowSkippingDelayWithButtonPress)
+static void ExpandStringAndStartDrawFieldMessage(const u8 *str, bool32 allowSkippingDelayWithButtonPress)
 {
     StringExpandPlaceholders(gStringVar4, str);
+    TrySpawnNamebox(gStringVar4, NAME_BOX_BASE_TILE_NUM);
     AddTextPrinterForMessage(allowSkippingDelayWithButtonPress);
     CreateTask_DrawFieldMessage();
 }
@@ -132,7 +144,8 @@ static void StartDrawFieldMessage(void)
 void HideFieldMessageBox(void)
 {
     DestroyTask_DrawFieldMessage();
-    ClearDialogWindowAndFrame(0, 1);
+    ClearDialogWindowAndFrame(0, TRUE);
+    DestroyNamebox();
     sFieldMessageBoxMode = FIELD_MESSAGE_BOX_HIDDEN;
 }
 
@@ -148,11 +161,10 @@ bool8 IsFieldMessageBoxHidden(void)
     return FALSE;
 }
 
-// Unused
-static void ReplaceFieldMessageWithFrame(void)
+static void UNUSED ReplaceFieldMessageWithFrame(void)
 {
     DestroyTask_DrawFieldMessage();
-    DrawStdWindowFrame(0, 1);
+    DrawStdWindowFrame(0, TRUE);
     sFieldMessageBoxMode = FIELD_MESSAGE_BOX_HIDDEN;
 }
 

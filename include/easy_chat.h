@@ -2,7 +2,6 @@
 #define GUARD_EASYCHAT_H
 
 #include "main.h"
-#include "constants/easy_chat.h"
 
 struct EasyChatScreenTemplate
 {
@@ -99,6 +98,7 @@ typedef union
 
 struct EasyChatGroup
 {
+    const u8 *name;
     EasyChatGroupWordData wordData;
     u16 numWords;
     u16 numEnabledWords;
@@ -123,17 +123,17 @@ struct EasyChatWordsByLetter
 
 void InitEasyChatPhrases(void);
 void ShowEasyChatScreen(void);
-u8 * CopyEasyChatWord(u8 *dest, u16 word);
-bool32 IsEasyChatAnswerUnlocked(int word);
+u8 *CopyEasyChatWord(u8 *dest, u16 easyChatWord);
+bool32 IsEasyChatAnswerUnlocked(int easyChatWord);
 void InitializeEasyChatWordArray(u16 *words, u16 length);
 u8 *ConvertEasyChatWordsToString(u8 *dest, const u16 *src, u16 columns, u16 rows);
-bool8 IsBardWordInvalid(u16 word);
-u16 GetRandomEasyChatWordFromGroup(u16 group);
-u16 GetNewHipsterPhraseToTeach(void);
-u16 EasyChat_GetNumWordsInGroup(u8);
-u16 GetRandomEasyChatWordFromUnlockedGroup(u16);
-void DoEasyChatScreen(u8 type, u16 *words, MainCallback callback, u8 displayedPersonType);
+bool8 IsBardWordInvalid(u16 easyChatWord);
+u16 GetRandomEasyChatWordFromGroup(u16 groupId);
+u16 UnlockRandomTrendySaying(void);
+u16 EasyChat_GetNumWordsInGroup(u8 groupId);
+u16 GetRandomEasyChatWordFromUnlockedGroup(u16 groupId);
+void DoEasyChatScreen(u8 type, u16 *words, MainCallback exitCallback, u8 displayedPersonType);
 void InitQuestionnaireWords(void);
-void UnlockAdditionalPhrase(u8 additionalPhraseId);
+void UnlockTrendySaying(u8 wordIndex);
 
 #endif // GUARD_EASYCHAT_H

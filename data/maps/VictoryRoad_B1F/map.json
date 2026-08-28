@@ -3,6 +3,7 @@
   "name": "VictoryRoad_B1F",
   "layout": "LAYOUT_VICTORY_ROAD_B1F",
   "music": "MUS_VICTORY_ROAD",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_VICTORY_ROAD",
   "requires_flash": true,
   "weather": "WEATHER_NONE",
@@ -12,7 +13,7 @@
   "allow_running": true,
   "show_map_name": true,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": 0,
+  "connections": null,
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
@@ -236,7 +237,7 @@
       "flag": "FLAG_TEMP_15"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 42,
       "y": 8,
       "elevation": 4,
@@ -244,9 +245,9 @@
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "VictoryRoad_B1F_EventScript_ItemTM29",
-      "flag": "FLAG_ITEM_VICTORY_ROAD_B1F_TM_29"
+      "trainer_sight_or_berry_tree_id": "ITEM_ALAKAZITE",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ITEM_VICTORY_ROAD_B1F_TM_PSYCHIC"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -257,8 +258,8 @@
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "VictoryRoad_B1F_EventScript_ItemFullRestore",
+      "trainer_sight_or_berry_tree_id": "ITEM_FULL_RESTORE",
+      "script": "Common_EventScript_FindItem",
       "flag": "FLAG_ITEM_VICTORY_ROAD_B1F_FULL_RESTORE"
     },
     {
@@ -294,55 +295,51 @@
       "y": 25,
       "elevation": 3,
       "dest_map": "MAP_VICTORY_ROAD_B2F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 17,
       "y": 16,
       "elevation": 3,
       "dest_map": "MAP_VICTORY_ROAD_B2F",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 42,
       "y": 25,
       "elevation": 3,
       "dest_map": "MAP_VICTORY_ROAD_1F",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 42,
       "y": 2,
       "elevation": 4,
       "dest_map": "MAP_VICTORY_ROAD_B2F",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 8,
       "y": 3,
       "elevation": 3,
       "dest_map": "MAP_VICTORY_ROAD_1F",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     },
     {
       "x": 20,
       "y": 21,
       "elevation": 3,
       "dest_map": "MAP_VICTORY_ROAD_1F",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 5,
       "y": 26,
       "elevation": 3,
       "dest_map": "MAP_VICTORY_ROAD_B2F",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     }
   ],
-  "coord_events": [
-
-  ],
-  "bg_events": [
-
-  ]
+  "coord_events": [],
+  "bg_events": []
 }

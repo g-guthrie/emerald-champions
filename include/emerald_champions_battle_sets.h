@@ -1,0 +1,49 @@
+#ifndef GUARD_EMERALD_CHAMPIONS_BATTLE_SETS_H
+#define GUARD_EMERALD_CHAMPIONS_BATTLE_SETS_H
+
+#include "global.h"
+#include "constants/emerald_champions.h"
+
+#define EMERALD_CHAMPIONS_SET_NAME_LENGTH 24
+
+struct EmeraldChampionsBattleSet
+{
+    enum Move moves[MAX_MON_MOVES];
+    enum Item item;
+    enum Item requiredItem;
+    u8 nature;
+    enum Ability ability;
+    u8 statPoints[NUM_STATS];
+};
+
+struct EmeraldChampionsBattleSetRange
+{
+    u16 offset;
+    u8 count;
+};
+
+struct EmeraldChampionsBattleSetChoice
+{
+    u8 name[EMERALD_CHAMPIONS_SET_NAME_LENGTH];
+    struct EmeraldChampionsBattleSet preset;
+};
+
+extern const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SPECIES];
+extern const u8 *const gEmeraldChampionsDefaultBattleSetNames[NUM_SPECIES];
+extern const struct EmeraldChampionsBattleSetRange gEmeraldChampionsBattleSetRanges[NUM_SPECIES];
+extern const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternatives[];
+
+u8 GetEmeraldChampionsBattleSetCount(struct Pokemon *mon);
+const u8 *GetEmeraldChampionsBattleSetName(struct Pokemon *mon, u8 choice);
+enum Item GetEmeraldChampionsBattleSetItem(struct Pokemon *mon, u8 choice);
+enum Item GetEmeraldChampionsBattleSetRequiredItem(struct Pokemon *mon, u8 choice);
+u8 ApplyEmeraldChampionsBattleSetChoice(struct Pokemon *mon, u8 choice);
+u8 ApplyEmeraldChampionsRandomWildSet(struct Pokemon *mon);
+u8 ApplyEmeraldChampionsRandomNonMegaSet(struct Pokemon *mon);
+u8 GetEmeraldChampionsRawBattleSetCount(enum Species species);
+const struct EmeraldChampionsBattleSet *GetEmeraldChampionsRawBattleSet(enum Species species, u8 rawChoice);
+u8 ApplyEmeraldChampionsOpponentSet(struct Pokemon *mon, u8 rawChoice);
+bool32 IsEmeraldChampionsProtectedProgressionItem(enum Item item);
+bool32 IsEmeraldChampionsOrdinaryWildSpecies(enum Species species);
+
+#endif // GUARD_EMERALD_CHAMPIONS_BATTLE_SETS_H

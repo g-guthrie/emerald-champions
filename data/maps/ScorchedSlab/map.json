@@ -3,6 +3,7 @@
   "name": "ScorchedSlab",
   "layout": "LAYOUT_SCORCHED_SLAB",
   "music": "MUS_PETALBURG_WOODS",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_SCORCHED_SLAB",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -12,10 +13,10 @@
   "allow_running": true,
   "show_map_name": true,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": 0,
+  "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 7,
       "y": 5,
       "elevation": 3,
@@ -23,9 +24,9 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "ScorchedSlab_EventScript_ItemTM11",
-      "flag": "FLAG_ITEM_SCORCHED_SLAB_TM_11"
+      "trainer_sight_or_berry_tree_id": "ITEM_CHARIZARDITE_Y",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ITEM_SCORCHED_SLAB_TM_SUNNY_DAY"
     }
   ],
   "warp_events": [
@@ -34,20 +35,9 @@
       "y": 16,
       "elevation": 1,
       "dest_map": "MAP_ROUTE120",
-      "dest_warp_id": 1
-    },
-    {
-      "x": 9,
-      "y": 3,
-      "elevation": 0,
-      "dest_map": "MAP_SCORCHED_SLAB_B1F",
-      "dest_warp_id": 0
+      "dest_warp_id": "1"
     }
   ],
-  "coord_events": [
-
-  ],
-  "bg_events": [
-
-  ]
+  "coord_events": [],
+  "bg_events": []
 }

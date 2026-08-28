@@ -2,11 +2,6 @@
 #include "event_data.h"
 #include "pokedex.h"
 
-#define NUM_SPECIAL_FLAGS (SPECIAL_FLAGS_END - SPECIAL_FLAGS_START + 1)
-#define NUM_TEMP_FLAGS    (TEMP_FLAGS_END - TEMP_FLAGS_START + 1)
-#define NUM_DAILY_FLAGS   (DAILY_FLAGS_END - DAILY_FLAGS_START + 1)
-#define NUM_TEMP_VARS     (TEMP_VARS_END - TEMP_VARS_START + 1)
-
 #define SPECIAL_FLAGS_SIZE  (NUM_SPECIAL_FLAGS / 8)  // 8 flags per byte
 #define TEMP_FLAGS_SIZE     (NUM_TEMP_FLAGS / 8)
 #define DAILY_FLAGS_SIZE    (NUM_DAILY_FLAGS / 8)
@@ -30,21 +25,40 @@ EWRAM_DATA u16 gSpecialVar_Facing = 0;
 EWRAM_DATA u16 gSpecialVar_MonBoxId = 0;
 EWRAM_DATA u16 gSpecialVar_MonBoxPos = 0;
 EWRAM_DATA u16 gSpecialVar_Unused_0x8014 = 0;
-EWRAM_DATA static u8 gSpecialFlags[SPECIAL_FLAGS_SIZE] = {0};
+EWRAM_DATA static u8 sSpecialFlags[SPECIAL_FLAGS_SIZE] = {0};
+
+#if TESTING
+#define TEST_FLAGS_SIZE     1
+#define TEST_VARS_SIZE      8
+EWRAM_DATA static u8 sTestFlags[TEST_FLAGS_SIZE] = {0};
+EWRAM_DATA static u16 sTestVars[TEST_VARS_SIZE] = {0};
+#endif // TESTING
 
 extern u16 *const gSpecialVars[];
+
+const u16 gBadgeFlags[NUM_BADGES] =
+{
+    FLAG_BADGE01_GET,
+    FLAG_BADGE02_GET,
+    FLAG_BADGE03_GET,
+    FLAG_BADGE04_GET,
+    FLAG_BADGE05_GET,
+    FLAG_BADGE06_GET,
+    FLAG_BADGE07_GET,
+    FLAG_BADGE08_GET,
+};
 
 void InitEventData(void)
 {
     memset(gSaveBlock1Ptr->flags, 0, sizeof(gSaveBlock1Ptr->flags));
     memset(gSaveBlock1Ptr->vars, 0, sizeof(gSaveBlock1Ptr->vars));
-    memset(gSpecialFlags, 0, sizeof(gSpecialFlags));
+    memset(sSpecialFlags, 0, sizeof(sSpecialFlags));
 }
 
 void ClearTempFieldEventData(void)
 {
-    memset(gSaveBlock1Ptr->flags + (TEMP_FLAGS_START / 8), 0, TEMP_FLAGS_SIZE);
-    memset(gSaveBlock1Ptr->vars + ((TEMP_VARS_START - VARS_START) * 2), 0, TEMP_VARS_SIZE);
+    memset(&gSaveBlock1Ptr->flags[TEMP_FLAGS_START / 8], 0, TEMP_FLAGS_SIZE);
+    memset(&gSaveBlock1Ptr->vars[TEMP_VARS_START - VARS_START], 0, TEMP_VARS_SIZE);
     FlagClear(FLAG_SYS_ENC_UP_ITEM);
     FlagClear(FLAG_SYS_ENC_DOWN_ITEM);
     FlagClear(FLAG_SYS_USE_STRENGTH);
@@ -54,7 +68,7 @@ void ClearTempFieldEventData(void)
 
 void ClearDailyFlags(void)
 {
-    memset(gSaveBlock1Ptr->flags + (DAILY_FLAGS_START / 8), 0, DAILY_FLAGS_SIZE);
+    memset(&gSaveBlock1Ptr->flags[DAILY_FLAGS_START / 8], 0, DAILY_FLAGS_SIZE);
 }
 
 void DisableNationalPokedex(void)
@@ -84,29 +98,9 @@ bool32 IsNationalPokedexEnabled(void)
         return FALSE;
 }
 
-void DisableMysteryEvent(void)
-{
-    FlagClear(FLAG_SYS_MYSTERY_EVENT_ENABLE);
-}
-
-void EnableMysteryEvent(void)
-{
-    FlagSet(FLAG_SYS_MYSTERY_EVENT_ENABLE);
-}
-
 bool32 IsMysteryEventEnabled(void)
 {
     return FlagGet(FLAG_SYS_MYSTERY_EVENT_ENABLE);
-}
-
-void DisableMysteryGift(void)
-{
-    FlagClear(FLAG_SYS_MYSTERY_GIFT_ENABLE);
-}
-
-void EnableMysteryGift(void)
-{
-    FlagSet(FLAG_SYS_MYSTERY_GIFT_ENABLE);
 }
 
 bool32 IsMysteryGiftEnabled(void)
@@ -114,36 +108,36 @@ bool32 IsMysteryGiftEnabled(void)
     return FlagGet(FLAG_SYS_MYSTERY_GIFT_ENABLE);
 }
 
-void ClearMysteryEventFlags(void)
+void ClearMysteryGiftFlags(void)
 {
-    FlagClear(FLAG_MYSTERY_EVENT_DONE);
-    FlagClear(FLAG_MYSTERY_EVENT_1);
-    FlagClear(FLAG_MYSTERY_EVENT_2);
-    FlagClear(FLAG_MYSTERY_EVENT_3);
-    FlagClear(FLAG_MYSTERY_EVENT_4);
-    FlagClear(FLAG_MYSTERY_EVENT_5);
-    FlagClear(FLAG_MYSTERY_EVENT_6);
-    FlagClear(FLAG_MYSTERY_EVENT_7);
-    FlagClear(FLAG_MYSTERY_EVENT_8);
-    FlagClear(FLAG_MYSTERY_EVENT_9);
-    FlagClear(FLAG_MYSTERY_EVENT_10);
-    FlagClear(FLAG_MYSTERY_EVENT_11);
-    FlagClear(FLAG_MYSTERY_EVENT_12);
-    FlagClear(FLAG_MYSTERY_EVENT_13);
-    FlagClear(FLAG_MYSTERY_EVENT_14);
-    FlagClear(FLAG_MYSTERY_EVENT_15);
+    FlagClear(FLAG_MYSTERY_GIFT_DONE);
+    FlagClear(FLAG_MYSTERY_GIFT_1);
+    FlagClear(FLAG_MYSTERY_GIFT_2);
+    FlagClear(FLAG_MYSTERY_GIFT_3);
+    FlagClear(FLAG_MYSTERY_GIFT_4);
+    FlagClear(FLAG_MYSTERY_GIFT_5);
+    FlagClear(FLAG_MYSTERY_GIFT_6);
+    FlagClear(FLAG_MYSTERY_GIFT_7);
+    FlagClear(FLAG_MYSTERY_GIFT_8);
+    FlagClear(FLAG_MYSTERY_GIFT_9);
+    FlagClear(FLAG_MYSTERY_GIFT_10);
+    FlagClear(FLAG_MYSTERY_GIFT_11);
+    FlagClear(FLAG_MYSTERY_GIFT_12);
+    FlagClear(FLAG_MYSTERY_GIFT_13);
+    FlagClear(FLAG_MYSTERY_GIFT_14);
+    FlagClear(FLAG_MYSTERY_GIFT_15);
 }
 
-void ClearMysteryEventVars(void)
+void ClearMysteryGiftVars(void)
 {
-    VarSet(VAR_EVENT_PICHU_SLOT, 0);
-    VarSet(VAR_NEVER_READ_0x40DE, 0);
-    VarSet(VAR_NEVER_READ_0x40DF, 0);
-    VarSet(VAR_NEVER_READ_0x40E0, 0);
-    VarSet(VAR_NEVER_READ_0x40E1, 0);
-    VarSet(VAR_NEVER_READ_0x40E2, 0);
-    VarSet(VAR_NEVER_READ_0x40E3, 0);
-    VarSet(VAR_NEVER_READ_0x40E4, 0);
+    VarSet(VAR_GIFT_PICHU_SLOT, 0);
+    VarSet(VAR_GIFT_UNUSED_1, 0);
+    VarSet(VAR_GIFT_UNUSED_2, 0);
+    VarSet(VAR_GIFT_UNUSED_3, 0);
+    VarSet(VAR_GIFT_UNUSED_4, 0);
+    VarSet(VAR_GIFT_UNUSED_5, 0);
+    VarSet(VAR_GIFT_UNUSED_6, 0);
+    VarSet(VAR_GIFT_UNUSED_7, 0);
 }
 
 void DisableResetRTC(void)
@@ -172,6 +166,10 @@ u16 *GetVarPointer(u16 id)
         return NULL;
     else if (id < SPECIAL_VARS_START)
         return &gSaveBlock1Ptr->vars[id - VARS_START];
+#if TESTING
+    else if (id >= TESTING_VARS_START)
+        return &sTestVars[id - TESTING_VARS_START];
+#endif // TESTING
     else
         return gSpecialVars[id - SPECIAL_VARS_START];
 }
@@ -181,6 +179,14 @@ u16 VarGet(u16 id)
     u16 *ptr = GetVarPointer(id);
     if (!ptr)
         return id;
+    return *ptr;
+}
+
+u16 VarGetIfExist(u16 id)
+{
+    u16 *ptr = GetVarPointer(id);
+    if (!ptr)
+        return 65535;
     return *ptr;
 }
 
@@ -204,8 +210,12 @@ u8 *GetFlagPointer(u16 id)
         return NULL;
     else if (id < SPECIAL_FLAGS_START)
         return &gSaveBlock1Ptr->flags[id / 8];
+#if TESTING
+    else if (id >= TESTING_FLAGS_START)
+        return &sTestFlags[(id - TESTING_FLAGS_START) / 8];
+#endif // TESTING
     else
-        return &gSpecialFlags[(id - SPECIAL_FLAGS_START) / 8];
+        return &sSpecialFlags[(id - SPECIAL_FLAGS_START) / 8];
 }
 
 u8 FlagSet(u16 id)
@@ -213,6 +223,14 @@ u8 FlagSet(u16 id)
     u8 *ptr = GetFlagPointer(id);
     if (ptr)
         *ptr |= 1 << (id & 7);
+    return 0;
+}
+
+u8 FlagToggle(u16 id)
+{
+    u8 *ptr = GetFlagPointer(id);
+    if (ptr)
+        *ptr ^= 1 << (id & 7);
     return 0;
 }
 

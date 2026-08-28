@@ -3,6 +3,7 @@
   "name": "JaggedPass",
   "layout": "LAYOUT_JAGGED_PASS",
   "music": "MUS_PETALBURG_WOODS",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_JAGGED_PASS",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -12,7 +13,7 @@
   "allow_running": true,
   "show_map_name": true,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": 0,
+  "connections": null,
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_HIKER",
@@ -41,7 +42,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 23,
       "y": 24,
       "elevation": 3,
@@ -49,13 +50,13 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "JaggedPass_EventScript_ItemTM69RockPolish",
-      "flag": "FLAG_ITEM_JAGGED_PASS_TM69_ROCK_POLISH"
+      "trainer_sight_or_berry_tree_id": "ITEM_BURN_HEAL",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ITEM_JAGGED_PASS_BURN_HEAL"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_PICNICKER",
-      "x": 10,
+      "x": 9,
       "y": 21,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_UP_AND_RIGHT",
@@ -67,6 +68,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_MAGMA_HIDEOUT_GUARD",
       "graphics_id": "OBJ_EVENT_GFX_MAGMA_MEMBER_M",
       "x": 16,
       "y": 19,
@@ -104,19 +106,6 @@
       "trainer_sight_or_berry_tree_id": "3",
       "script": "JaggedPass_EventScript_Julio",
       "flag": "0"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_CHANSEY",
-      "x": 12,
-      "y": 29,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "JaggedPass_EventScript_Chansey",
-      "flag": "FLAG_HIDE_JAGGED_PASS_CHANSEY"
     }
   ],
   "warp_events": [
@@ -125,42 +114,35 @@
       "y": 40,
       "elevation": 3,
       "dest_map": "MAP_ROUTE112",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 15,
       "y": 40,
       "elevation": 3,
       "dest_map": "MAP_ROUTE112",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 13,
       "y": 5,
       "elevation": 3,
       "dest_map": "MAP_MT_CHIMNEY",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     },
     {
       "x": 14,
       "y": 5,
       "elevation": 3,
       "dest_map": "MAP_MT_CHIMNEY",
-      "dest_warp_id": 3
+      "dest_warp_id": "3"
     },
     {
       "x": 16,
       "y": 18,
       "elevation": 0,
       "dest_map": "MAP_MAGMA_HIDEOUT_1F",
-      "dest_warp_id": 0
-    },
-    {
-      "x": 7,
-      "y": 28,
-      "elevation": 3,
-      "dest_map": "MAP_EMBER_PATH",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [
@@ -256,11 +238,11 @@
     },
     {
       "type": "hidden_item",
-      "x": 22,
-      "y": 32,
+      "x": 7,
+      "y": 29,
       "elevation": 3,
-      "item": "ITEM_LEVEL_BALL",
-      "flag": "FLAG_HIDDEN_ITEM_JAGGED_PASS_LEVEL_BALL"
+      "item": "ITEM_GREAT_BALL",
+      "flag": "FLAG_HIDDEN_ITEM_JAGGED_PASS_GREAT_BALL"
     }
   ]
 }

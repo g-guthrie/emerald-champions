@@ -26,14 +26,20 @@
 #include "overworld.h"
 #include "math_util.h"
 #include "constants/battle_frontier.h"
-#include "constants/maps.h"
 #include "constants/rgb.h"
 #include "constants/region_map_sections.h"
 #include "constants/songs.h"
 
-// The asset contains eight 16-color palettes. The original 0x1A0-byte load
-// read another 160 bytes from the following graphics symbol as palette data.
-#define NUM_FRONTIER_PASS_BG_PALETTES 8
+// gFrontierPassBg_Pal has 8*16 colors, but they attempt to load 13*16 colors.
+// As a result it goes out of bounds and interprets 160 bytes of whatever comes
+// after gFrontierPassBg_Pal (by default, gFrontierPassBg_Gfx) as a palette.
+// Nothing uses these colors (except the Trainer Card, which correctly writes them)
+// so in practice this bug has no effect on the game.
+#ifdef BUGFIX
+#define NUM_BG_PAL_SLOTS 8
+#else
+#define NUM_BG_PAL_SLOTS 13
+#endif
 
 // All windows displayed in the frontier pass.
 enum
@@ -100,7 +106,7 @@ enum {
 
 struct FrontierPassData
 {
-    void (*callback)(void);
+    MainCallback callback;
     u16 state;
     u16 battlePoints;
     s16 cursorX;
@@ -131,14 +137,14 @@ struct FrontierPassGfx
 
 struct FrontierPassSaved
 {
-    void (*callback)(void);
+    MainCallback callback;
     s16 cursorX;
     s16 cursorY;
 };
 
 struct FrontierMapData
 {
-    void (*callback)(void);
+    MainCallback callback;
     struct Sprite *cursorSprite;
     struct Sprite *playerHeadSprite;
     struct Sprite *mapIndicatorSprite;
@@ -154,10 +160,8 @@ static EWRAM_DATA struct FrontierPassGfx *sPassGfx = NULL;
 static EWRAM_DATA struct FrontierMapData *sMapData = NULL;
 static EWRAM_DATA struct FrontierPassSaved sSavedPassData = {0};
 
-static u32 AllocateFrontierPassData(void (*callback)(void));
-static u32 AllocateFrontierPassGfx(void);
-static u32 FreeFrontierPassGfx(void);
-static void ShowFrontierMap(void (*callback)(void));
+static u32 AllocateFrontierPassData(MainCallback callback);
+static void ShowFrontierMap(MainCallback callback);
 static void CB2_InitFrontierPass(void);
 static void DrawFrontierPassBg(void);
 static void FreeCursorAndSymbolSprites(void);
@@ -172,21 +176,21 @@ static void PrintAreaDescription(u8);
 static void ShowHideZoomingArea(bool8, bool8);
 static void SpriteCB_PlayerHead(struct Sprite *);
 
-static const u16 sMaleHead_Pal[]                 = INCBIN_U16("graphics/frontier_pass/map_heads.gbapal");
-static const u16 sFemaleHead_Pal[]               = INCBIN_U16("graphics/frontier_pass/map_heads_female.gbapal");
-static const u32 sMapScreen_Gfx[]                = INCBIN_U32("graphics/frontier_pass/map_screen.4bpp.lz");
-static const u32 sCursor_Gfx[]                   = INCBIN_U32("graphics/frontier_pass/cursor.4bpp.lz");
-static const u32 sHeads_Gfx[]                    = INCBIN_U32("graphics/frontier_pass/map_heads.4bpp.lz");
-static const u32 sMapCursor_Gfx[]                = INCBIN_U32("graphics/frontier_pass/map_cursor.4bpp.lz");
-static const u32 sMapScreen_Tilemap[]            = INCBIN_U32("graphics/frontier_pass/map_screen.bin.lz");
-static const u32 sMapAndCard_ZoomedOut_Tilemap[] = INCBIN_U32("graphics/frontier_pass/small_map_and_card.bin.lz");
-static const u32 sUnusedData[]                   = INCBIN_U32("graphics/frontier_pass/unused.bin");
-static const u32 sBattleRecord_Tilemap[]         = INCBIN_U32("graphics/frontier_pass/record_frame.bin.lz");
-static const u32 sMapAndCard_Zooming_Tilemap[]   = INCBIN_U32("graphics/frontier_pass/small_map_and_card_affine.bin.lz");
+static const u16 sMaleHead_Pal[]                 = INCGFX_U16("graphics/frontier_pass/map_heads.png", ".gbapal");
+static const u16 sFemaleHead_Pal[]               = INCGFX_U16("graphics/frontier_pass/map_heads_female.pal", ".gbapal");
+static const u32 sMapScreen_Gfx[]                = INCGFX_U32("graphics/frontier_pass/map_screen.png", ".4bpp.smol");
+static const u32 sCursor_Gfx[]                   = INCGFX_U32("graphics/frontier_pass/cursor.png", ".4bpp.smol");
+static const u32 sHeads_Gfx[]                    = INCGFX_U32("graphics/frontier_pass/map_heads.png", ".4bpp.smol");
+static const u32 sMapCursor_Gfx[]                = INCGFX_U32("graphics/frontier_pass/map_cursor.png", ".4bpp.smol");
+static const u32 sMapScreen_Tilemap[]            = INCGFX_U32("graphics/frontier_pass/map_screen.bin", ".smolTM");
+static const u32 sMapAndCard_ZoomedOut_Tilemap[] = INCGFX_U32("graphics/frontier_pass/small_map_and_card.bin", ".smolTM");
+static const u32 sCardBall_Filled_Tilemap[]      = INCBIN_U32("graphics/frontier_pass/card_ball_filled.bin"); // Unused
+static const u32 sBattleRecord_Tilemap[]         = INCGFX_U32("graphics/frontier_pass/record_frame.bin", ".smolTM");
+static const u32 sMapAndCard_Zooming_Tilemap[]   = INCGFX_U32("graphics/frontier_pass/small_map_and_card_affine.bin", ".smolTM");
 
-static const s16 sBgAffineCoords[][2] = 
+static const s16 sBgAffineCoords[][2] =
 {
-    [CURSOR_AREA_MAP - 1]  = {216,  32}, 
+    [CURSOR_AREA_MAP - 1]  = {216,  32},
     [CURSOR_AREA_CARD - 1] = {216, 128}
 };
 
@@ -485,9 +489,6 @@ static const struct SpriteTemplate sSpriteTemplates_Cursors[] =
         .paletteTag = TAG_CURSOR,
         .oam = &gOamData_AffineOff_ObjNormal_16x16,
         .anims = sAnims_TwoFrame,
-        .images = NULL,
-        .affineAnims = gDummySpriteAffineAnimTable,
-        .callback = SpriteCallbackDummy,
     },
     // Map indicator cursor
     {
@@ -495,9 +496,6 @@ static const struct SpriteTemplate sSpriteTemplates_Cursors[] =
         .paletteTag = TAG_MAP_INDICATOR,
         .oam = &gOamData_AffineOff_ObjNormal_32x16,
         .anims = sAnims_MapIndicatorCursor,
-        .images = NULL,
-        .affineAnims = gDummySpriteAffineAnimTable,
-        .callback = SpriteCallbackDummy,
     },
 };
 
@@ -507,9 +505,6 @@ static const struct SpriteTemplate sSpriteTemplate_Medal =
     .paletteTag = TAG_MEDAL_SILVER,
     .oam = &gOamData_AffineOff_ObjNormal_16x16,
     .anims = sAnims_Medal,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy,
 };
 
 static const struct SpriteTemplate sSpriteTemplate_PlayerHead =
@@ -518,8 +513,6 @@ static const struct SpriteTemplate sSpriteTemplate_PlayerHead =
     .paletteTag = TAG_HEAD_MALE,
     .oam = &gOamData_AffineOff_ObjNormal_16x16,
     .anims = sAnims_TwoFrame,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_PlayerHead,
 };
 
@@ -567,14 +560,14 @@ static void ResetGpuRegsAndBgs(void)
     SetGpuReg(REG_OFFSET_BG2CNT, 0);
     SetGpuReg(REG_OFFSET_BG1CNT, 0);
     SetGpuReg(REG_OFFSET_BG0CNT, 0);
-    ChangeBgX(0, 0, 0);
-    ChangeBgY(0, 0, 0);
-    ChangeBgX(1, 0, 0);
-    ChangeBgY(1, 0, 0);
-    ChangeBgX(2, 0, 0);
-    ChangeBgY(2, 0, 0);
-    ChangeBgX(3, 0, 0);
-    ChangeBgY(3, 0, 0);
+    ChangeBgX(0, 0, BG_COORD_SET);
+    ChangeBgY(0, 0, BG_COORD_SET);
+    ChangeBgX(1, 0, BG_COORD_SET);
+    ChangeBgY(1, 0, BG_COORD_SET);
+    ChangeBgX(2, 0, BG_COORD_SET);
+    ChangeBgY(2, 0, BG_COORD_SET);
+    ChangeBgX(3, 0, BG_COORD_SET);
+    ChangeBgY(3, 0, BG_COORD_SET);
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
     SetGpuReg(REG_OFFSET_BLDY, 0);
     SetGpuReg(REG_OFFSET_BLDALPHA, 0);
@@ -590,17 +583,7 @@ static void ResetGpuRegsAndBgs(void)
 
 void ShowFrontierPass(void (*callback)(void))
 {
-    if (AllocateFrontierPassData(callback) != SUCCESS)
-    {
-        SetMainCallback2(callback);
-        return;
-    }
-    if (AllocateFrontierPassGfx() != SUCCESS)
-    {
-        FreeFrontierPassData();
-        SetMainCallback2(callback);
-        return;
-    }
+    AllocateFrontierPassData(callback);
     SetMainCallback2(CB2_InitFrontierPass);
 }
 
@@ -610,9 +593,11 @@ static void LeaveFrontierPass(void)
     FreeFrontierPassData();
 }
 
-static u32 AllocateFrontierPassData(void (*callback)(void))
+static u32 AllocateFrontierPassData(MainCallback callback)
 {
-    u8 i;
+    // This variable is a MAPSEC initially, but is recycled as a
+    // bare integer near the end of the function.
+    mapsec_u8_t i;
 
     if (sPassData != NULL)
         return ERR_ALREADY_DONE;
@@ -753,6 +738,7 @@ static bool32 InitFrontierPass(void)
         ResetTempTileDataBuffers();
         break;
     case 3:
+        AllocateFrontierPassGfx();
         break;
     case 4:
         ResetBgsAndClearDma3BusyFlags(0);
@@ -770,33 +756,23 @@ static bool32 InitFrontierPass(void)
         sPassGfx->mapAndCardZoomTilemap = malloc_and_decompress(sMapAndCard_Zooming_Tilemap, &sizeOut);
         sPassGfx->mapAndCardTilemap = malloc_and_decompress(sMapAndCard_ZoomedOut_Tilemap, &sizeOut);
         sPassGfx->battleRecordTilemap = malloc_and_decompress(sBattleRecord_Tilemap, &sizeOut);
-        if (sPassGfx->mapAndCardZoomTilemap == NULL
-         || sPassGfx->mapAndCardTilemap == NULL
-         || sPassGfx->battleRecordTilemap == NULL)
-        {
-            void (*callback)(void) = sPassData->callback;
-            FreeFrontierPassGfx();
-            FreeFrontierPassData();
-            SetMainCallback2(callback);
-            return FALSE;
-        }
         DecompressAndCopyTileDataToVram(1, gFrontierPassBg_Gfx, 0, 0, 0);
         DecompressAndCopyTileDataToVram(2, gFrontierPassMapAndCard_Gfx, 0, 0, 0);
         break;
     case 7:
         if (FreeTempTileDataBuffersIfPossible())
             return FALSE;
-        FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 30, 20);
-        FillBgTilemapBufferRect_Palette0(1, 0, 0, 0, 30, 20);
-        FillBgTilemapBufferRect_Palette0(2, 0, 0, 0, 30, 20);
+        FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
+        FillBgTilemapBufferRect_Palette0(1, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
+        FillBgTilemapBufferRect_Palette0(2, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
         CopyBgTilemapBufferToVram(0);
         CopyBgTilemapBufferToVram(1);
         CopyBgTilemapBufferToVram(2);
         break;
     case 8:
-        LoadPalette(gFrontierPassBg_Pal, 0, NUM_FRONTIER_PASS_BG_PALETTES * sizeof(gFrontierPassBg_Pal[0]));
-        LoadPalette(gFrontierPassBg_Pal[1 + sPassData->trainerStars], 0x10, 0x20);
-        LoadPalette(GetTextWindowPalette(0), 0xF0, 0x20);
+        LoadPalette(gFrontierPassBg_Pal, 0, NUM_BG_PAL_SLOTS * PLTT_SIZE_4BPP);
+        LoadPalette(gFrontierPassBg_Pal[1 + sPassData->trainerStars], BG_PLTT_ID(1), PLTT_SIZE_4BPP);
+        LoadPalette(GetTextWindowPalette(0), BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         DrawFrontierPassBg();
         UpdateAreaHighlight(sPassData->cursorArea, sPassData->previousCursorArea);
         if (sPassData->areaToShow == CURSOR_AREA_MAP || sPassData->areaToShow == CURSOR_AREA_CARD)
@@ -906,21 +882,6 @@ void CB2_ReshowFrontierPass(void)
 {
     u8 taskId;
 
-    // Map, Trainer Card, and recorded-battle screens tear down the Pass gfx.
-    // Reallocate before InitFrontierPass starts clearing display state.
-    if (sPassData == NULL)
-    {
-        SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
-        return;
-    }
-    if (sPassGfx == NULL && AllocateFrontierPassGfx() != SUCCESS)
-    {
-        void (*callback)(void) = sPassData->callback;
-        FreeFrontierPassData();
-        SetMainCallback2(callback);
-        return;
-    }
-
     if (!InitFrontierPass())
         return;
 
@@ -943,23 +904,16 @@ void CB2_ReshowFrontierPass(void)
 
 static void CB2_ReturnFromRecord(void)
 {
-    void (*callback)(void) = sSavedPassData.callback;
-
-    if (AllocateFrontierPassData(callback) != SUCCESS)
-    {
-        memset(&sSavedPassData, 0, sizeof(sSavedPassData));
-        SetMainCallback2(callback);
-        return;
-    }
+    AllocateFrontierPassData(sSavedPassData.callback);
     sPassData->cursorX = sSavedPassData.cursorX;
     sPassData->cursorY = sSavedPassData.cursorY;
     memset(&sSavedPassData, 0, sizeof(sSavedPassData));
-    switch (InBattlePyramid())
+    switch (CurrentBattlePyramidLocation())
     {
-    case 1:
+    case PYRAMID_LOCATION_FLOOR:
         PlayBGM(MUS_B_PYRAMID);
         break;
-    case 2:
+    case PYRAMID_LOCATION_TOP:
         PlayBGM(MUS_B_PYRAMID_TOP);
         break;
     default:
@@ -1068,7 +1022,10 @@ static void Task_HandleFrontierPassInput(u8 taskId)
                 PlaySE(SE_PC_OFF);
                 SetMainCallback2(CB2_HideFrontierPass);
                 DestroyTask(taskId);
+                // BUG. The function should return here. Otherwise, it can play the same sound twice and destroy the same task twice.
+                #ifdef BUGFIX
                 return;
+                #endif
             }
         }
 
@@ -1143,7 +1100,7 @@ static void Task_PassAreaZoom(u8 taskId)
         tScaleY += tScaleSpeedY;
         sPassGfx->scaleX = MathUtil_Inv16(tScaleX);
         sPassGfx->scaleY = MathUtil_Inv16(tScaleY);
-        
+
         // Check if zoom hasn't reached target
         if (!tZoomOut)
         {
@@ -1161,7 +1118,7 @@ static void Task_PassAreaZoom(u8 taskId)
             sPassGfx->zooming = FALSE;
         if (UpdatePaletteFade())
             return;
-        
+
         if (!tZoomOut)
         {
             // Zoomed in and faded out, switch to map or trainer card
@@ -1194,23 +1151,23 @@ static void ShowAndPrintWindows(void)
         FillWindowPixelBuffer(i, PIXEL_FILL(0));
     }
 
-    x = GetStringCenterAlignXOffset(1, gText_SymbolsEarned, 96);
-    AddTextPrinterParameterized3(WINDOW_EARNED_SYMBOLS, 1, x, 5, sTextColors[0], 0, gText_SymbolsEarned);
+    x = GetStringCenterAlignXOffset(FONT_NORMAL, gText_SymbolsEarned, 96);
+    AddTextPrinterParameterized3(WINDOW_EARNED_SYMBOLS, FONT_NORMAL, x, 5, sTextColors[0], 0, gText_SymbolsEarned);
 
-    x = GetStringCenterAlignXOffset(1, gText_BattleRecord, 96);
-    AddTextPrinterParameterized3(WINDOW_BATTLE_RECORD, 1, x, 5, sTextColors[0], 0, gText_BattleRecord);
+    x = GetStringCenterAlignXOffset(FONT_NORMAL, gText_BattleRecord, 96);
+    AddTextPrinterParameterized3(WINDOW_BATTLE_RECORD, FONT_NORMAL, x, 5, sTextColors[0], 0, gText_BattleRecord);
 
-    AddTextPrinterParameterized3(WINDOW_BATTLE_POINTS, 8, 5, 4, sTextColors[0], 0, gText_BattlePoints);
+    AddTextPrinterParameterized3(WINDOW_BATTLE_POINTS, FONT_SMALL_NARROW, 5, 4, sTextColors[0], 0, gText_BattlePoints);
     ConvertIntToDecimalStringN(gStringVar4, sPassData->battlePoints, STR_CONV_MODE_LEFT_ALIGN, 5);
-    x = GetStringRightAlignXOffset(8, gStringVar4, 91);
-    AddTextPrinterParameterized3(WINDOW_BATTLE_POINTS, 8, x, 16, sTextColors[0], 0, gStringVar4);
+    x = GetStringRightAlignXOffset(FONT_SMALL_NARROW, gStringVar4, 91);
+    AddTextPrinterParameterized3(WINDOW_BATTLE_POINTS, FONT_SMALL_NARROW, x, 16, sTextColors[0], 0, gStringVar4);
 
     sPassData->cursorArea = GetCursorAreaFromCoords(sPassData->cursorX - 5, sPassData->cursorY + 5);
     sPassData->previousCursorArea = CURSOR_AREA_NOTHING;
     PrintAreaDescription(sPassData->cursorArea);
 
     for (i = 0; i < WINDOW_COUNT; i++)
-        CopyWindowToVram(i, 3);
+        CopyWindowToVram(i, COPYWIN_FULL);
 
     CopyBgTilemapBufferToVram(0);
 }
@@ -1218,13 +1175,13 @@ static void ShowAndPrintWindows(void)
 static void PrintAreaDescription(u8 cursorArea)
 {
     FillWindowPixelBuffer(WINDOW_DESCRIPTION, PIXEL_FILL(0));
-    
-    if (cursorArea == CURSOR_AREA_RECORD && !sPassData->hasBattleRecord)
-        AddTextPrinterParameterized3(WINDOW_DESCRIPTION, 1, 2, 0, sTextColors[1], 0, sPassAreaDescriptions[CURSOR_AREA_NOTHING]);
-    else if (cursorArea != CURSOR_AREA_NOTHING)
-        AddTextPrinterParameterized3(WINDOW_DESCRIPTION, 1, 2, 0, sTextColors[1], 0, sPassAreaDescriptions[cursorArea]);
 
-    CopyWindowToVram(WINDOW_DESCRIPTION, 3);
+    if (cursorArea == CURSOR_AREA_RECORD && !sPassData->hasBattleRecord)
+        AddTextPrinterParameterized3(WINDOW_DESCRIPTION, FONT_NORMAL, 2, 0, sTextColors[1], 0, sPassAreaDescriptions[CURSOR_AREA_NOTHING]);
+    else if (cursorArea != CURSOR_AREA_NOTHING)
+        AddTextPrinterParameterized3(WINDOW_DESCRIPTION, FONT_NORMAL, 2, 0, sTextColors[1], 0, sPassAreaDescriptions[cursorArea]);
+
+    CopyWindowToVram(WINDOW_DESCRIPTION, COPYWIN_FULL);
     CopyBgTilemapBufferToVram(0);
 }
 
@@ -1275,7 +1232,7 @@ static void ShowHideZoomingArea(bool8 show, bool8 zoomedIn)
 
 static void UpdateAreaHighlight(u8 cursorArea, u8 previousCursorArea)
 {
-    #define NON_HIGHLIGHT_AREA(area)((area) == CURSOR_AREA_NOTHING || (area) > CURSOR_AREA_CANCEL)
+    #define NON_HIGHLIGHT_AREA(area) ((area) == CURSOR_AREA_NOTHING || (area) > CURSOR_AREA_CANCEL)
 
     // If moving off highlightable area, unhighlight it
     switch (previousCursorArea)
@@ -1300,7 +1257,7 @@ static void UpdateAreaHighlight(u8 cursorArea, u8 previousCursorArea)
             return;
         break;
     }
-    
+
     // If moving on to highlightable area, highlight it
     switch (cursorArea)
     {
@@ -1397,20 +1354,12 @@ static void PrintOnFrontierMap(void);
 static void InitFrontierMapSprites(void);
 static void HandleFrontierMapCursorMove(u8 direction);
 
-static void ShowFrontierMap(void (*callback)(void))
+static void ShowFrontierMap(MainCallback callback)
 {
     if (sMapData != NULL)
-    {
-        SetMainCallback2(callback);
-        return;
-    }
+        SetMainCallback2(callback); // This line doesn't make sense at all, since it gets overwritten later anyway.
 
     sMapData = AllocZeroed(sizeof(*sMapData));
-    if (sMapData == NULL)
-    {
-        SetMainCallback2(callback);
-        return;
-    }
     sMapData->callback = callback;
     ResetTasks();
     CreateTask(Task_HandleFrontierMap, 0);
@@ -1449,9 +1398,9 @@ static bool32 InitFrontierMap(void)
         SetBgTilemapBuffer(0, sMapData->tilemapBuff0);
         SetBgTilemapBuffer(1, sMapData->tilemapBuff1);
         SetBgTilemapBuffer(2, sMapData->tilemapBuff2);
-        FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 30, 20);
-        FillBgTilemapBufferRect_Palette0(1, 0, 0, 0, 30, 20);
-        FillBgTilemapBufferRect_Palette0(2, 0, 0, 0, 30, 20);
+        FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
+        FillBgTilemapBufferRect_Palette0(1, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
+        FillBgTilemapBufferRect_Palette0(2, 0, 0, 0, DISPLAY_TILE_WIDTH, DISPLAY_TILE_HEIGHT);
         CopyBgTilemapBufferToVram(0);
         CopyBgTilemapBufferToVram(1);
         CopyBgTilemapBufferToVram(2);
@@ -1465,8 +1414,8 @@ static bool32 InitFrontierMap(void)
     case 5:
         if (FreeTempTileDataBuffersIfPossible())
             return FALSE;
-        LoadPalette(gFrontierPassBg_Pal, 0, NUM_FRONTIER_PASS_BG_PALETTES * sizeof(gFrontierPassBg_Pal[0]));
-        LoadPalette(GetTextWindowPalette(0), 0xF0, 0x20);
+        LoadPalette(gFrontierPassBg_Pal, BG_PLTT_ID(0), NUM_BG_PAL_SLOTS * PLTT_SIZE_4BPP);
+        LoadPalette(GetTextWindowPalette(0), BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         CopyToBgTilemapBuffer(2, sMapScreen_Tilemap, 0, 0);
         CopyBgTilemapBufferToVram(2);
         break;
@@ -1622,48 +1571,48 @@ static void Task_HandleFrontierMap(u8 taskId)
 static u8 MapNumToFrontierFacilityId(u16 mapNum) // id + 1, zero means not a frontier map number
 {
     // In Battle Tower
-    if ((mapNum >= MAP_NUM(BATTLE_FRONTIER_BATTLE_TOWER_LOBBY) && mapNum <= MAP_NUM(BATTLE_FRONTIER_BATTLE_TOWER_BATTLE_ROOM))
-     || (mapNum >= MAP_NUM(BATTLE_FRONTIER_BATTLE_TOWER_MULTI_PARTNER_ROOM) && mapNum <= MAP_NUM(BATTLE_FRONTIER_BATTLE_TOWER_MULTI_BATTLE_ROOM)))
+    if ((mapNum >= MAP_NUM(MAP_BATTLE_FRONTIER_BATTLE_TOWER_LOBBY) && mapNum <= MAP_NUM(MAP_BATTLE_FRONTIER_BATTLE_TOWER_BATTLE_ROOM))
+     || (mapNum >= MAP_NUM(MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_PARTNER_ROOM) && mapNum <= MAP_NUM(MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_BATTLE_ROOM)))
         return FRONTIER_FACILITY_TOWER + 1;
 
     // In Battle Dome
-    else if (mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_DOME_LOBBY)
-             || mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_DOME_CORRIDOR)
-             || mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_DOME_PRE_BATTLE_ROOM)
-             || mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_DOME_BATTLE_ROOM))
+    else if (mapNum == MAP_NUM(MAP_BATTLE_FRONTIER_BATTLE_DOME_LOBBY)
+             || mapNum == MAP_NUM(MAP_BATTLE_FRONTIER_BATTLE_DOME_CORRIDOR)
+             || mapNum == MAP_NUM(MAP_BATTLE_FRONTIER_BATTLE_DOME_PRE_BATTLE_ROOM)
+             || mapNum == MAP_NUM(MAP_BATTLE_FRONTIER_BATTLE_DOME_BATTLE_ROOM))
         return FRONTIER_FACILITY_DOME + 1;
 
     // In Battle Palace
-    else if (mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_PALACE_LOBBY)
-        || mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_PALACE_CORRIDOR)
-        || mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_PALACE_BATTLE_ROOM))
+    else if (mapNum == MAP_NUM(MAP_BATTLE_FRONTIER_BATTLE_PALACE_LOBBY)
+        || mapNum == MAP_NUM(MAP_BATTLE_FRONTIER_BATTLE_PALACE_CORRIDOR)
+        || mapNum == MAP_NUM(MAP_BATTLE_FRONTIER_BATTLE_PALACE_BATTLE_ROOM))
         return FRONTIER_FACILITY_PALACE + 1;
 
     // In Battle Arena
-    else if (mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_ARENA_LOBBY)
-        || mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_ARENA_CORRIDOR)
-        || mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_ARENA_BATTLE_ROOM))
+    else if (mapNum == MAP_NUM(MAP_BATTLE_FRONTIER_BATTLE_ARENA_LOBBY)
+        || mapNum == MAP_NUM(MAP_BATTLE_FRONTIER_BATTLE_ARENA_CORRIDOR)
+        || mapNum == MAP_NUM(MAP_BATTLE_FRONTIER_BATTLE_ARENA_BATTLE_ROOM))
         return FRONTIER_FACILITY_ARENA + 1;
 
     // In Battle Factory
-    else if (mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_FACTORY_LOBBY)
-        || mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_FACTORY_PRE_BATTLE_ROOM)
-        || mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_FACTORY_BATTLE_ROOM))
+    else if (mapNum == MAP_NUM(MAP_BATTLE_FRONTIER_BATTLE_FACTORY_LOBBY)
+        || mapNum == MAP_NUM(MAP_BATTLE_FRONTIER_BATTLE_FACTORY_PRE_BATTLE_ROOM)
+        || mapNum == MAP_NUM(MAP_BATTLE_FRONTIER_BATTLE_FACTORY_BATTLE_ROOM))
         return FRONTIER_FACILITY_FACTORY + 1;
 
     // In Battle Pike
-    else if (mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_PIKE_LOBBY)
-             || mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_PIKE_CORRIDOR)
-             || mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_PIKE_THREE_PATH_ROOM)
-             || mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_PIKE_ROOM_NORMAL)
-             || mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_PIKE_ROOM_FINAL)
-             || mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_PIKE_ROOM_WILD_MONS))
+    else if (mapNum == MAP_NUM(MAP_BATTLE_FRONTIER_BATTLE_PIKE_LOBBY)
+             || mapNum == MAP_NUM(MAP_BATTLE_FRONTIER_BATTLE_PIKE_CORRIDOR)
+             || mapNum == MAP_NUM(MAP_BATTLE_FRONTIER_BATTLE_PIKE_THREE_PATH_ROOM)
+             || mapNum == MAP_NUM(MAP_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_NORMAL)
+             || mapNum == MAP_NUM(MAP_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_FINAL)
+             || mapNum == MAP_NUM(MAP_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_WILD_MONS))
         return FRONTIER_FACILITY_PIKE + 1;
 
     // In Battle Pyramid
-    else if (mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY)
-        || mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR)
-        || mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_PYRAMID_TOP))
+    else if (mapNum == MAP_NUM(MAP_BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY)
+        || mapNum == MAP_NUM(MAP_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR)
+        || mapNum == MAP_NUM(MAP_BATTLE_FRONTIER_BATTLE_PYRAMID_TOP))
         return FRONTIER_FACILITY_PYRAMID + 1;
 
     else
@@ -1699,8 +1648,8 @@ static void InitFrontierMapSprites(void)
     {
         s8 mapNum = gSaveBlock1Ptr->location.mapNum;
 
-        if (mapNum == MAP_NUM(BATTLE_FRONTIER_OUTSIDE_WEST)
-            || (mapNum == MAP_NUM(BATTLE_FRONTIER_OUTSIDE_EAST) && (x = 55)))
+        if (mapNum == MAP_NUM(MAP_BATTLE_FRONTIER_OUTSIDE_WEST)
+            || (mapNum == MAP_NUM(MAP_BATTLE_FRONTIER_OUTSIDE_EAST) && (x = 55)))
         {
             x += gSaveBlock1Ptr->pos.x;
             y = gSaveBlock1Ptr->pos.y;
@@ -1721,7 +1670,7 @@ static void InitFrontierMapSprites(void)
             else
             {
                 // Handle Artisan Cave.
-                if (gSaveBlock1Ptr->escapeWarp.mapNum == MAP_NUM(BATTLE_FRONTIER_OUTSIDE_EAST))
+                if (gSaveBlock1Ptr->escapeWarp.mapNum == MAP_NUM(MAP_BATTLE_FRONTIER_OUTSIDE_EAST))
                     x = gSaveBlock1Ptr->escapeWarp.x + 55;
                 else
                     x = gSaveBlock1Ptr->escapeWarp.x;
@@ -1767,15 +1716,15 @@ static void PrintOnFrontierMap(void)
     for (i = 0; i < NUM_FRONTIER_FACILITIES; i++)
     {
         if (i == sMapData->cursorPos)
-            AddTextPrinterParameterized3(MAP_WINDOW_NAME, 7, 4, (i * 16) + 1, sTextColors[2], 0, sMapLandmarks[i].name);
+            AddTextPrinterParameterized3(MAP_WINDOW_NAME, FONT_NARROW, 4, (i * 16) + 1, sTextColors[2], 0, sMapLandmarks[i].name);
         else
-            AddTextPrinterParameterized3(MAP_WINDOW_NAME, 7, 4, (i * 16) + 1, sTextColors[1], 0, sMapLandmarks[i].name);
+            AddTextPrinterParameterized3(MAP_WINDOW_NAME, FONT_NARROW, 4, (i * 16) + 1, sTextColors[1], 0, sMapLandmarks[i].name);
     }
 
-    AddTextPrinterParameterized3(MAP_WINDOW_DESCRIPTION, 1, 4, 0, sTextColors[0], 0, sMapLandmarks[sMapData->cursorPos].description);
+    AddTextPrinterParameterized3(MAP_WINDOW_DESCRIPTION, FONT_NORMAL, 4, 0, sTextColors[0], 0, sMapLandmarks[sMapData->cursorPos].description);
 
     for (i = 0; i < MAP_WINDOW_COUNT; i++)
-        CopyWindowToVram(i, 3);
+        CopyWindowToVram(i, COPYWIN_FULL);
 
     CopyBgTilemapBufferToVram(0);
 }
@@ -1795,8 +1744,8 @@ static void HandleFrontierMapCursorMove(u8 direction)
         sMapData->cursorPos = (oldCursorPos + 1) % NUM_FRONTIER_FACILITIES;
     }
 
-    AddTextPrinterParameterized3(MAP_WINDOW_NAME, 7, 4, (oldCursorPos * 16) + 1, sTextColors[1], 0, sMapLandmarks[oldCursorPos].name);
-    AddTextPrinterParameterized3(MAP_WINDOW_NAME, 7, 4, (sMapData->cursorPos * 16) + 1, sTextColors[2], 0, sMapLandmarks[sMapData->cursorPos].name);
+    AddTextPrinterParameterized3(MAP_WINDOW_NAME, FONT_NARROW, 4, (oldCursorPos * 16) + 1, sTextColors[1], 0, sMapLandmarks[oldCursorPos].name);
+    AddTextPrinterParameterized3(MAP_WINDOW_NAME, FONT_NARROW, 4, (sMapData->cursorPos * 16) + 1, sTextColors[2], 0, sMapLandmarks[sMapData->cursorPos].name);
 
     sMapData->cursorSprite->y = (sMapData->cursorPos * 16) + 8;
 
@@ -1804,10 +1753,10 @@ static void HandleFrontierMapCursorMove(u8 direction)
     sMapData->mapIndicatorSprite->x = sMapLandmarks[sMapData->cursorPos].x;
     sMapData->mapIndicatorSprite->y = sMapLandmarks[sMapData->cursorPos].y;
     FillWindowPixelBuffer(MAP_WINDOW_DESCRIPTION, PIXEL_FILL(0));
-    AddTextPrinterParameterized3(MAP_WINDOW_DESCRIPTION, 1, 4, 0, sTextColors[0], 0, sMapLandmarks[sMapData->cursorPos].description);
+    AddTextPrinterParameterized3(MAP_WINDOW_DESCRIPTION, FONT_NORMAL, 4, 0, sTextColors[0], 0, sMapLandmarks[sMapData->cursorPos].description);
 
     for (i = 0; i < MAP_WINDOW_COUNT; i++)
-        CopyWindowToVram(i, 3);
+        CopyWindowToVram(i, COPYWIN_FULL);
 
     CopyBgTilemapBufferToVram(0);
     PlaySE(SE_DEX_SCROLL);

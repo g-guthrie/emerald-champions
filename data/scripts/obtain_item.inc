@@ -1,81 +1,57 @@
-Std_ObtainItem:: @ 8271AD3
-	additem VAR_0x8000, VAR_0x8001
+.set ITEMID, VAR_0x8000
+.set AMOUNT, VAR_0x8001
+
+Std_ObtainItem::
+	copyvar VAR_0x8006, ITEMID
+	additem ITEMID, AMOUNT
 	copyvar VAR_0x8007, VAR_RESULT
 	call EventScript_ObtainItemMessage
 	return
 
-EventScript_ObtainItemMessage:: @ 8271AE3
-	bufferitemnameplural 1, VAR_0x8000, VAR_0x8001
-	checkitemtype VAR_0x8000
+EventScript_ObtainItemMessage::
+	bufferitemnameplural STR_VAR_2, ITEMID, AMOUNT
+	checkitemtype ITEMID
 	call EventScript_BufferPocketNameAndTryFanfare
-	compare VAR_0x8007, 1
-	call_if_eq EventScript_ObtainedItem
-	compare VAR_0x8007, 0
-	call_if_eq EventScript_NoRoomForItem
+	call_if_eq VAR_0x8007, TRUE, EventScript_ObtainedItem
+	call_if_eq VAR_0x8007, FALSE, EventScript_NoRoomForItem
 	return
 
 EventScript_BufferPocketNameAndTryFanfare::
 	switch VAR_RESULT
-	case POCKET_ITEMS, EventScript_BufferItemsPocket
-	case POCKET_MEDICINE, EventScript_BufferMedicinePocket
-	case POCKET_BATTLE, EventScript_BufferBattlePocket
-	case POCKET_TM_HM, EventScript_BufferTMHMsPocket
-	case POCKET_BERRIES, EventScript_BufferBerriesPocket
+	case POCKET_ITEMS,      EventScript_BufferItemsPocket
+	case POCKET_KEY_ITEMS,  EventScript_BufferKeyItemsPocket
 	case POCKET_POKE_BALLS, EventScript_BufferPokeballsPocket
-	case POCKET_KEY_ITEMS, EventScript_BufferKeyItemsPocket
-	case POCKET_MEGA_STONES, EventScript_BufferMegaStonesPocket
+	case POCKET_TM_HM,      EventScript_BufferTMHMsPocket
+	case POCKET_BERRIES,    EventScript_BufferBerriesPocket
 	end
 
 EventScript_BufferItemsPocket::
-	bufferstdstring 2, STDSTRING_ITEMS
-	compare VAR_0x8007, 1
-	call_if_eq EventScript_PlayFanfareObtainedItem
-	return
-
-EventScript_BufferMedicinePocket::
-	bufferstdstring 2, STDSTRING_MEDICINE
-	compare VAR_0x8007, 1
-	call_if_eq EventScript_PlayFanfareObtainedItem
-	return
-
-EventScript_BufferBattlePocket::
-	bufferstdstring 2, STDSTRING_BATTLEITEMS
-	compare VAR_0x8007, 1
-	call_if_eq EventScript_PlayFanfareObtainedItem
-	return
-
-EventScript_BufferTMHMsPocket::
-	bufferstdstring 2, STDSTRING_TMHMS
-	compare VAR_0x8007, 1
-	call_if_eq EventScript_PlayFanfareObtainedTMHM
-	return
-
-EventScript_BufferPokeballsPocket::
-	bufferstdstring 2, STDSTRING_POKEBALLS
-	compare VAR_0x8007, 1
-	call_if_eq EventScript_PlayFanfareObtainedItem
-	return
-
-EventScript_BufferBerriesPocket::
-	bufferstdstring 2, STDSTRING_BERRIES
-	compare VAR_0x8007, 1
-	call_if_eq EventScript_PlayFanfareObtainedItem
+	bufferstdstring STR_VAR_3, STDSTRING_ITEMS
+	call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedItem
 	return
 
 EventScript_BufferKeyItemsPocket::
-	bufferstdstring 2, STDSTRING_KEYITEMS
-	compare VAR_0x8007, 1
-	call_if_eq EventScript_PlayFanfareObtainedItem
+	bufferstdstring STR_VAR_3, STDSTRING_KEYITEMS
+	call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedItem
 	return
 
-EventScript_BufferMegaStonesPocket::
-	bufferstdstring 2, STDSTRING_MEGASTONE
-	compare VAR_0x8007, 1
-	call_if_eq EventScript_PlayFanfareObtainedItem
+EventScript_BufferPokeballsPocket::
+	bufferstdstring STR_VAR_3, STDSTRING_POKEBALLS
+	call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedItem
 	return
 
-EventScript_ObtainedItem:: @ 8271B95
-	compare VAR_0x8001, 1
+EventScript_BufferTMHMsPocket::
+	bufferstdstring STR_VAR_3, STDSTRING_TMHMS
+	call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedTMHM
+	return
+
+EventScript_BufferBerriesPocket::
+	bufferstdstring STR_VAR_3, STDSTRING_BERRIES
+	call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedItem
+	return
+
+EventScript_ObtainedItem::
+	compare VAR_0x8001, TRUE
 	goto_if_eq EventScript_ObtainedItemMessage
 	buffernumberstring 0, VAR_0x8001
 	message gText_ObtainedTheItems
@@ -83,153 +59,260 @@ EventScript_ObtainedItem:: @ 8271B95
 EventScript_ObtainedItemMessage:
 	message gText_ObtainedTheItem
 EventScript_ContinueObtainedItem:
+	delay 10
+	showitemdescription
 	waitfanfare
 	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
-	setvar VAR_RESULT, 1
+	hideitemdescription
+	setvar VAR_RESULT, TRUE
 	return
 
-EventScript_NoRoomForItem:: @ 8271BA9
-	setvar VAR_RESULT, 0
+EventScript_NoRoomForItem::
+	setvar VAR_RESULT, FALSE
 	return
 
-EventScript_PlayFanfareObtainedItem:: @ 8271BAF
+EventScript_PlayFanfareObtainedItem::
 	playfanfare MUS_OBTAIN_ITEM
 	return
 
-EventScript_PlayFanfareObtainedTMHM:: @ 8271BB3
+EventScript_PlayFanfareObtainedTMHM::
 	playfanfare MUS_OBTAIN_TMHM
 	return
 
-Std_ObtainDecoration:: @ 8271BB7
-	adddecoration VAR_0x8000
+Std_ObtainDecoration::
+	adddecoration ITEMID
 	copyvar VAR_0x8007, VAR_RESULT
 	call EventScript_ObtainDecorationMessage
 	return
 
-EventScript_ObtainDecorationMessage:: @ 8271BC5
-	bufferdecorationname 1, VAR_0x8000
-	compare VAR_0x8007, 1
-	call_if_eq EventScript_ObtainedDecor
-	compare VAR_0x8007, 0
-	call_if_eq EventScript_NoRoomForDecor
+EventScript_ObtainDecorationMessage::
+	bufferdecorationname STR_VAR_2, ITEMID
+	call_if_eq VAR_0x8007, TRUE, EventScript_ObtainedDecor
+	call_if_eq VAR_0x8007, FALSE, EventScript_NoRoomForDecor
 	return
 
-EventScript_ObtainedDecor:: @ 8271BE0
+EventScript_ObtainedDecor::
 	playfanfare MUS_OBTAIN_ITEM
 	message gText_ObtainedTheDecor
 	waitfanfare
 	msgbox gText_TheDecorWasTransferredToThePC, MSGBOX_DEFAULT
-	setvar VAR_RESULT, 1
+	setvar VAR_RESULT, TRUE
 	return
 
-EventScript_NoRoomForDecor:: @ 8271BF7
-	setvar VAR_RESULT, 0
+EventScript_NoRoomForDecor::
+	setvar VAR_RESULT, FALSE
 	return
 
-Std_FindItem:: @ 8271BFD
+Std_FindItem::
 	lock
 	faceplayer
 	waitse
-	copyvar VAR_0x8004, VAR_0x8000
-	copyvar VAR_0x8005, VAR_0x8001
-	checkitemspace VAR_0x8000, VAR_0x8001
+	copyvar VAR_0x8006, ITEMID
+	copyvar VAR_0x8004, ITEMID
+	copyvar VAR_0x8005, AMOUNT
+	checkitemspace ITEMID, AMOUNT
 	copyvar VAR_0x8007, VAR_RESULT
-	bufferitemnameplural 1, VAR_0x8000, VAR_0x8001
-	checkitemtype VAR_0x8000
+	bufferitemnameplural STR_VAR_2, ITEMID, AMOUNT
+	checkitemtype ITEMID
 	call EventScript_BufferPocketNameAndTryFanfare
-	compare VAR_0x8007, 1
-	call_if_eq EventScript_PickUpItem
-	compare VAR_0x8007, 0
-	call_if_eq EventScript_NoRoomToPickUpItem
+	call_if_eq VAR_0x8007, TRUE, EventScript_PickUpItem
+	call_if_eq VAR_0x8007, FALSE, EventScript_NoRoomToPickUpItem
 	release
 	return
 
-EventScript_PickUpItem:: @ 8271C3A
+EventScript_PickUpItem::
 	removeobject VAR_LAST_TALKED
 	additem VAR_0x8004, VAR_0x8005
+	copyvar VAR_0x8006 VAR_0x8004
 	specialvar VAR_RESULT, BufferTMHMMoveName
 	copyvar VAR_0x8008, VAR_RESULT
-	compare VAR_0x8008, 1
-	call_if_eq EventScript_FoundTMHM
-	compare VAR_0x8008, 0
-	call_if_eq EventScript_FoundItem
+	call_if_eq VAR_0x8008, TRUE, EventScript_FoundTMHM
+	call_if_eq VAR_0x8008, FALSE, EventScript_FoundItem
+	delay 10
+	showitemdescription
 	waitfanfare
 	waitmessage
-	bufferitemnameplural 1, VAR_0x8004, VAR_0x8005
-	pyramid_inchallenge
-	compare VAR_RESULT, 1
-	goto_if_eq EventScript_PutBattlePyramidItemInBag
+	bufferitemnameplural STR_VAR_2, VAR_0x8004, VAR_0x8005
+	pyramid_getlocation
+	goto_if_eq VAR_RESULT, PYRAMID_LOCATION_FLOOR, EventScript_PutBattlePyramidItemInBag
 	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
+	hideitemdescription
 	return
 
-EventScript_PutBattlePyramidItemInBag:: @ 8271C86
+EventScript_PutBattlePyramidItemInBag::
 	msgbox gText_PlayerPutItemInBag, MSGBOX_DEFAULT
+	hideitemdescription
 	return
 
-EventScript_FoundTMHM:: @ 8271C8F
-	bufferitemnameplural 0, VAR_0x8004, VAR_0x8005
+EventScript_FoundTMHM::
+	bufferitemnameplural STR_VAR_1, VAR_0x8004, VAR_0x8005
+	compare VAR_0x8005, 2
+	goto_if_lt EventScript_FoundTMHMMessage
+	buffernumberstring STR_VAR_3, VAR_0x8005
+	message gText_PlayerFoundTMHMs
+	goto EventScript_BufferTMHMsPocket
+	return
+EventScript_FoundTMHMMessage::
 	message gText_PlayerFoundOneTMHM
 	return
 
-EventScript_FoundItem:: @ 8271C9B
+EventScript_FoundItem::
+	compare VAR_0x8001, TRUE
+	goto_if_eq EventScript_FoundItemMessage
+	buffernumberstring 0, VAR_0x8001
+	message gText_PlayerFoundItems
+	return
+EventScript_FoundItemMessage::
 	message gText_PlayerFoundOneItem
 	return
 
-EventScript_NoRoomToPickUpItem:: @ 8271CA1
+EventScript_NoRoomToPickUpItem::
 	msgbox gText_ObtainedTheItem, MSGBOX_DEFAULT
 	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
-	setvar VAR_RESULT, 0
+	setvar VAR_RESULT, FALSE
 	return
 
-EventScript_HiddenItemScript:: @ 8271CB7
+EventScript_HiddenItemScript::
 	lockall
 	waitse
-	additem VAR_0x8005
+	goto_if_eq VAR_0x8005, 0, EventScript_TryPickUpHiddenCoins
+	copyvar VAR_0x8006, VAR_0x8005
+	additem VAR_0x8005, VAR_0x8009
 	copyvar VAR_0x8007, VAR_RESULT
-	bufferitemnameplural 1, VAR_0x8005, 1
+	bufferitemnameplural STR_VAR_2, VAR_0x8005, 1
 	checkitemtype VAR_0x8005
 	call EventScript_BufferPocketNameAndTryFanfare
-	compare VAR_0x8007, 1
-	goto_if_eq EventScript_PickUpHiddenItem
-	compare VAR_0x8007, 0
-	goto_if_eq EventScript_NoRoomForHiddenItem
+	goto_if_eq VAR_0x8007, TRUE, EventScript_PickUpHiddenItem
+	goto_if_eq VAR_0x8007, FALSE, EventScript_NoRoomForHiddenItem
 	end
 
-EventScript_PickUpHiddenItem:: @ 8271CE8
+EventScript_PickUpHiddenItem::
 	copyvar VAR_0x8008, VAR_0x8004
 	copyvar VAR_0x8004, VAR_0x8005
 	specialvar VAR_RESULT, BufferTMHMMoveName
-	compare VAR_RESULT, 1
-	goto_if_eq EventScript_FoundHiddenTMHM
-	compare VAR_RESULT, 0
-	goto_if_eq EventScript_FoundHiddenItem
+	goto_if_eq VAR_RESULT, TRUE, EventScript_FoundHiddenTMHM
+	goto_if_eq VAR_RESULT, FALSE, EventScript_FoundHiddenItem
 	end
 
-EventScript_FoundHiddenTMHM:: @ 8271D0E
-	bufferitemnameplural 0, VAR_0x8004, 1
+EventScript_FoundHiddenTMHM::
+	bufferitemnameplural STR_VAR_1, VAR_0x8004, 1
 	message gText_PlayerFoundOneTMHM
 	goto EventScript_PutHiddenItemInPocket
 	end
 
-EventScript_FoundHiddenItem:: @ 8271D1F
-	message gText_PlayerFoundOneItem
+EventScript_FoundHiddenItem::
+	call_if_eq VAR_0x8009, 1, EventScript_FoundSingleItem
+	call_if_ne VAR_0x8009, 1, EventScript_FoundMultipleItems
 	goto EventScript_PutHiddenItemInPocket
 	end
 
-EventScript_PutHiddenItemInPocket:: @ 8271D2A
+EventScript_FoundSingleItem::
+	message gText_PlayerFoundOneItem
+	return
+
+EventScript_FoundMultipleItems::
+	buffernumberstring STR_VAR_1, VAR_0x8009
+	message gText_FoundXItems
+	return
+
+EventScript_PutHiddenItemInPocket::
+	callnative Script_ClearDowsingColor
+	delay 10
+	showitemdescription
 	waitmessage
 	waitfanfare
-	bufferitemnameplural 1, VAR_0x8004, 1
+	bufferitemnameplural STR_VAR_2, VAR_0x8004, 1
 	copyvar VAR_0x8004, VAR_0x8008
 	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
+	hideitemdescription
 	special TryPutTreasureInvestigatorsOnAir
+	special SetHiddenItemFlag
+	callnative Script_UpdateDowseState
+	releaseall
+	end
+
+EventScript_NoRoomForHiddenItem::
+	msgbox gText_PlayerFoundOneItem, MSGBOX_DEFAULT
+	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
+	setvar VAR_RESULT, 0
+	releaseall
+	end
+
+EventScript_RestorePrevTextColor::
+	copyvar VAR_TEXT_COLOR, VAR_PREV_TEXT_COLOR
+	return
+
+Std_PutItemAway::
+	bufferitemnameplural STR_VAR_2, VAR_0x8000, VAR_0x8001
+	checkitemtype VAR_0x8000
+	call EventScript_BufferPutAwayPocketName
+	msgbox gText_PutItemInPocket
+	return
+
+EventScript_BufferPutAwayPocketName::
+	switch VAR_RESULT
+	case POCKET_ITEMS,       EventScript_BufferPutAwayPocketItems
+	case POCKET_KEY_ITEMS,   EventScript_BufferPutAwayPocketKeyItems
+	case POCKET_POKE_BALLS,  EventScript_BufferPutAwayPocketPokeBalls
+	case POCKET_TM_HM,     EventScript_BufferPutAwayPocketTMCase
+	case POCKET_BERRIES, EventScript_BufferPutAwayPocketBerryPouch
+	end
+
+EventScript_BufferPutAwayPocketItems::
+	bufferstdstring STR_VAR_3, STDSTRING_ITEMS
+	return
+
+EventScript_BufferPutAwayPocketKeyItems::
+	bufferstdstring STR_VAR_3, STDSTRING_KEYITEMS
+	return
+
+EventScript_BufferPutAwayPocketPokeBalls::
+	bufferstdstring STR_VAR_3, STDSTRING_POKEBALLS
+	return
+
+EventScript_BufferPutAwayPocketTMCase::
+	bufferstdstring STR_VAR_3, STDSTRING_TMHMS
+	return
+
+EventScript_BufferPutAwayPocketBerryPouch::
+	bufferstdstring STR_VAR_3, STDSTRING_BERRIES
+	return
+
+EventScript_TryPickUpHiddenCoins::
+	goto_if_unset FLAG_GOT_COIN_CASE, EventScript_NoCaseForHiddenCoins
+	checkcoins VAR_RESULT
+	specialvar VAR_RESULT, CheckAddCoins
+	goto_if_eq VAR_RESULT, FALSE, EventScript_HiddenCoinsButCaseIsFull
+	addcoins VAR_0x8009
+	bufferstdstring STR_VAR_2, STDSTRING_COINS
+	call EventScript_PlayFanfareObtainedItem
+	call EventScript_FoundCoins
+	waitfanfare
+	waitmessage
+	msgbox gText_PutCoinsAwayInCoinCase
 	special SetHiddenItemFlag
 	releaseall
 	end
 
-EventScript_NoRoomForHiddenItem:: @ 8271D47
-	msgbox gText_PlayerFoundOneItem, MSGBOX_DEFAULT
-	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
+EventScript_FoundCoins::
+	buffernumberstring STR_VAR_1, VAR_0x8009
+	message gText_FoundXCoins
+	return
+
+EventScript_HiddenCoinsButCaseIsFull::
+	buffernumberstring STR_VAR_1, VAR_0x8009
+	bufferstdstring STR_VAR_2, STDSTRING_COINS
+	msgbox gText_FoundXCoins
+	msgbox gText_CoinCaseIsFull
+	setvar VAR_RESULT, 0
+	releaseall
+	end
+
+EventScript_NoCaseForHiddenCoins::
+	buffernumberstring STR_VAR_1, VAR_0x8009
+	bufferstdstring STR_VAR_2, STDSTRING_COINS
+	msgbox gText_FoundXCoins
+	msgbox gText_NothingToPutThemIn
 	setvar VAR_RESULT, 0
 	releaseall
 	end

@@ -3,6 +3,7 @@
   "name": "SafariZone_Southeast",
   "layout": "LAYOUT_SAFARI_ZONE_SOUTHEAST",
   "music": "MUS_SAFARI_ZONE",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_SAFARI_ZONE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -14,14 +15,14 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "direction": "left",
+      "map": "MAP_SAFARI_ZONE_SOUTH",
       "offset": 0,
-      "map": "MAP_SAFARI_ZONE_SOUTH"
+      "direction": "left"
     },
     {
-      "direction": "up",
+      "map": "MAP_SAFARI_ZONE_NORTHEAST",
       "offset": 0,
-      "map": "MAP_SAFARI_ZONE_NORTHEAST"
+      "direction": "up"
     }
   ],
   "object_events": [
@@ -65,7 +66,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 31,
       "y": 15,
       "elevation": 3,
@@ -73,9 +74,9 @@
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "SafariZone_Southeast_EventScript_ItemTM53EnergyBall",
-      "flag": "FLAG_ITEM_SAFARI_ZONE_SOUTH_EAST_TM53_ENERGY_BALL"
+      "trainer_sight_or_berry_tree_id": "ITEM_BIG_PEARL",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ITEM_SAFARI_ZONE_SOUTH_EAST_BIG_PEARL"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_CAMPER",
@@ -91,12 +92,8 @@
       "flag": "FLAG_HIDE_SAFARI_ZONE_SOUTH_EAST_EXPANSION"
     }
   ],
-  "warp_events": [
-
-  ],
-  "coord_events": [
-
-  ],
+  "warp_events": [],
+  "coord_events": [],
   "bg_events": [
     {
       "type": "hidden_item",

@@ -4,6 +4,7 @@
 
 #include "gba/gba.h"
 #include "siirtc.h"
+#include "config/general.h"
 
 #define STATUS_INTFE  0x02 // frequency interrupt enable
 #define STATUS_INTME  0x08 // per-minute interrupt enable
@@ -65,7 +66,6 @@
 
 extern vu16 GPIOPortDirection;
 
-static u16 sDummy; // unused variable
 static bool8 sLocked;
 
 static int WriteCommand(u8 value);
@@ -75,7 +75,7 @@ static u8 ReadData();
 static void EnableGpioPortRead();
 static void DisableGpioPortRead();
 
-static const char AgbLibRtcVersion[] = "SIIRTC_V001";
+KEEP_SECTION USED static const char AgbLibRtcVersion[] = "SIIRTC_V001";
 
 void SiiRtcUnprotect(void)
 {
@@ -99,7 +99,12 @@ u8 SiiRtcProbe(void)
 
     errorCode = 0;
 
+#ifdef BUGFIX
     if (!(rtc.status & SIIRTCINFO_24HOUR) || (rtc.status & SIIRTCINFO_POWER))
+#else
+    if ((rtc.status & (SIIRTCINFO_POWER | SIIRTCINFO_24HOUR)) == SIIRTCINFO_POWER
+     || (rtc.status & (SIIRTCINFO_POWER | SIIRTCINFO_24HOUR)) == 0)
+#endif
     {
         // The RTC is in 12-hour mode. Reset it and switch to 24-hour mode.
 
@@ -253,33 +258,6 @@ bool8 SiiRtcGetDateTime(struct SiiRtcInfo *rtc)
     return TRUE;
 }
 
-bool8 SiiRtcSetDateTime(struct SiiRtcInfo *rtc)
-{
-    u8 i;
-
-    if (sLocked == TRUE)
-        return FALSE;
-
-    sLocked = TRUE;
-
-    GPIO_PORT_DATA = SCK_HI;
-    GPIO_PORT_DATA = SCK_HI | CS_HI;
-
-    GPIO_PORT_DIRECTION = DIR_ALL_OUT;
-
-    WriteCommand(CMD_DATETIME | WR);
-
-    for (i = 0; i < DATETIME_BUF_LEN; i++)
-        WriteData(DATETIME_BUF(rtc, i));
-
-    GPIO_PORT_DATA = SCK_HI;
-    GPIO_PORT_DATA = SCK_HI;
-
-    sLocked = FALSE;
-
-    return TRUE;
-}
-
 bool8 SiiRtcGetTime(struct SiiRtcInfo *rtc)
 {
     u8 i;
@@ -311,34 +289,7 @@ bool8 SiiRtcGetTime(struct SiiRtcInfo *rtc)
     return TRUE;
 }
 
-bool8 SiiRtcSetTime(struct SiiRtcInfo *rtc)
-{
-    u8 i;
-
-    if (sLocked == TRUE)
-        return FALSE;
-
-    sLocked = TRUE;
-
-    GPIO_PORT_DATA = SCK_HI;
-    GPIO_PORT_DATA = SCK_HI | CS_HI;
-
-    GPIO_PORT_DIRECTION = DIR_ALL_OUT;
-
-    WriteCommand(CMD_TIME | WR);
-
-    for (i = 0; i < TIME_BUF_LEN; i++)
-        WriteData(TIME_BUF(rtc, i));
-
-    GPIO_PORT_DATA = SCK_HI;
-    GPIO_PORT_DATA = SCK_HI;
-
-    sLocked = FALSE;
-
-    return TRUE;
-}
-
-bool8 SiiRtcSetAlarm(struct SiiRtcInfo *rtc)
+static bool8 UNUSED SiiRtcSetAlarm(struct SiiRtcInfo *rtc)
 {
     u8 i;
     u8 alarmData[2];
@@ -392,7 +343,11 @@ static int WriteCommand(u8 value)
         GPIO_PORT_DATA = (temp << 1) | SCK_HI | CS_HI;
     }
 
+    // Nothing uses the returned value from this function,
+    // so the undefined behavior is harmless in the vanilla game.
+#ifdef UBFIX
     return 0;
+#endif
 }
 
 static int WriteData(u8 value)
@@ -409,14 +364,22 @@ static int WriteData(u8 value)
         GPIO_PORT_DATA = (temp << 1) | SCK_HI | CS_HI;
     }
 
+    // Nothing uses the returned value from this function,
+    // so the undefined behavior is harmless in the vanilla game.
+#ifdef UBFIX
     return 0;
+#endif
 }
 
 static u8 ReadData()
 {
     u8 i;
     u8 temp;
-    u8 value = 0;
+    u8 value;
+
+#ifdef UBFIX
+    value = 0;
+#endif
 
     for (i = 0; i < 8; i++)
     {

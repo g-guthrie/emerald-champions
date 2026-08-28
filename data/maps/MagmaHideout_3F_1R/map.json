@@ -3,6 +3,7 @@
   "name": "MagmaHideout_3F_1R",
   "layout": "LAYOUT_MAGMA_HIDEOUT_3F_1R",
   "music": "MUS_AQUA_MAGMA_HIDEOUT",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_MAGMA_HIDEOUT",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -12,7 +13,7 @@
   "allow_running": true,
   "show_map_name": true,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": 0,
+  "connections": null,
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_MAGMA_MEMBER_M",
@@ -41,17 +42,17 @@
       "flag": "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 9,
       "y": 16,
       "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "MagmaHideout_3F_1R_EventScript_ItemCameruptite",
-      "flag": "FLAG_ITEM_MAGMA_HIDEOUT_3F_1R_CAMERUPTITE"
+      "trainer_sight_or_berry_tree_id": "ITEM_NUGGET",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ITEM_MAGMA_HIDEOUT_3F_1R_NUGGET"
     }
   ],
   "warp_events": [
@@ -60,27 +61,23 @@
       "y": 21,
       "elevation": 0,
       "dest_map": "MAP_MAGMA_HIDEOUT_4F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 21,
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_MAGMA_HIDEOUT_3F_2R",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 23,
       "y": 3,
       "elevation": 0,
       "dest_map": "MAP_MAGMA_HIDEOUT_2F_1R",
-      "dest_warp_id": 2
+      "dest_warp_id": "2"
     }
   ],
-  "coord_events": [
-
-  ],
-  "bg_events": [
-
-  ]
+  "coord_events": [],
+  "bg_events": []
 }

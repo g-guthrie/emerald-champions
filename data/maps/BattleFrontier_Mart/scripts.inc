@@ -1,9 +1,7 @@
-.set LOCALID_OLD_WOMAN, 2
-
-BattleFrontier_Mart_MapScripts:: @ 8267ACB
+BattleFrontier_Mart_MapScripts::
 	.byte 0
 
-BattleFrontier_Mart_EventScript_Clerk:: @ 8267ACC
+BattleFrontier_Mart_EventScript_Clerk::
 	lock
 	faceplayer
 	message gText_HowMayIServeYou
@@ -14,7 +12,7 @@ BattleFrontier_Mart_EventScript_Clerk:: @ 8267ACC
 	end
 
 	.align 2
-BattleFrontier_Mart_Pokemart: @ 8267AE4
+BattleFrontier_Mart_Pokemart:
 	.2byte ITEM_ULTRA_BALL
 	.2byte ITEM_HYPER_POTION
 	.2byte ITEM_MAX_POTION
@@ -28,42 +26,55 @@ BattleFrontier_Mart_Pokemart: @ 8267AE4
 	.2byte ITEM_ZINC
 	.2byte ITEM_CARBOS
 	.2byte ITEM_HP_UP
-	.2byte ITEM_NONE
-	release
-	end
+	.2byte ITEM_RARE_CANDY
+	pokemartlistend
 
-BattleFrontier_Mart_EventScript_OldMan:: @ 8267B02
+BattleFrontier_Mart_EventScript_OldMan::
 	msgbox BattleFrontier_Mart_Text_ChaperonGrandson, MSGBOX_NPC
 	end
 
-BattleFrontier_Mart_EventScript_OldWoman:: @ 8267B0B
+BattleFrontier_Mart_EventScript_MegaArchive::
 	lock
-	applymovement LOCALID_OLD_WOMAN, Common_Movement_FaceDown
+	faceplayer
+	message BattleFrontier_Mart_Text_MegaArchive
+	waitmessage
+	special OpenEmeraldChampionsMegaStoneArchive
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+BattleFrontier_Mart_Text_MegaArchive:
+	.string "You reached the Battle Frontier, so\n"
+	.string "the complete Mega archive is open.\p"
+	.string "Take any stones your teams need.$"
+
+BattleFrontier_Mart_EventScript_OldWoman::
+	lock
+	applymovement LOCALID_FRONTIER_MART_OLD_WOMAN, Common_Movement_FaceDown
 	waitmovement 0
 	msgbox BattleFrontier_Mart_Text_ProteinMakeNiceGift, MSGBOX_DEFAULT
 	release
 	end
 
-BattleFrontier_Mart_EventScript_Boy:: @ 8267B20
+BattleFrontier_Mart_EventScript_Boy::
 	msgbox BattleFrontier_Mart_Text_FacilitiesDontAllowItems, MSGBOX_NPC
 	end
 
-BattleFrontier_Mart_Text_ChaperonGrandson: @ 8267B29
+BattleFrontier_Mart_Text_ChaperonGrandson:
 	.string "We came here to chaperon our\n"
 	.string "grandson.\p"
 	.string "But since we're here, we thought\n"
 	.string "we should get some souvenirs.$"
 
-BattleFrontier_Mart_Text_ProteinMakeNiceGift: @ 8267B8F
+BattleFrontier_Mart_Text_ProteinMakeNiceGift:
 	.string "Dear, what do you think of this?\n"
 	.string "Wouldn't this make a nice gift?\p"
 	.string "It's…PRO…TE…IN?\n"
 	.string "It sounds delicious, doesn't it?$"
 
-BattleFrontier_Mart_Text_FacilitiesDontAllowItems: @ 8267C01
-	.string "A lot of the Battle Frontier's\n"
+BattleFrontier_Mart_Text_FacilitiesDontAllowItems:
+	.string "A lot of the BATTLE FRONTIER's\n"
 	.string "facilities don't allow the use of items\l"
 	.string "during battles.\p"
 	.string "That rule makes things tougher than\n"
 	.string "they already are!$"
-

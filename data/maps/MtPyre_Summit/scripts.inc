@@ -1,275 +1,249 @@
-.set LOCALID_ARCHIE, 2
-.set LOCALID_OLD_LADY, 3
-.set LOCALID_GRUNT_1, 4
-.set LOCALID_GRUNT_2, 5
-.set LOCALID_GRUNT_3, 6
-.set LOCALID_GRUNT_4, 7
-.set LOCALID_MAXIE, 8
-.set LOCALID_MATT, 10
-.set LOCALID_DARKRAI, 11
+MtPyre_Summit_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, MtPyre_Summit_OnTransition
+	map_script MAP_SCRIPT_ON_RESUME, MtPyre_Summit_OnResume
+	.byte 0
+
 .set LEGENDARY_SIGN_CRESSELIA_ID, 8
 .set LEGENDARY_SIGN_DARKRAI_ID, 9
 .set LEGENDARY_SIGN_DIALGA_ID, 10
 
-MtPyre_Summit_MapScripts:: @ 8231FF7
-	map_script MAP_SCRIPT_ON_TRANSITION, MtPyre_Summit_OnTransition
-	map_script MAP_SCRIPT_ON_RESUME, Common_EventScript_RemoveOverworldAfterBattle
-	.byte 0
-
-MtPyre_Summit_OnTransition: @ 8231FFD
-	compare VAR_MT_PYRE_STATE, 2
-	call_if_eq MtPyre_Summit_EventScript_SetArchieMaxiePositions
+MtPyre_Summit_OnResume:
+	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, MtPyre_Summit_EventScript_TryRemoveDarkrai
 	end
 
-MtPyre_Summit_EventScript_SetArchieMaxiePositions:: @ 8232009
-	setobjectxyperm LOCALID_MAXIE, 23, 6
-	setobjectxyperm LOCALID_ARCHIE, 22, 6
+MtPyre_Summit_EventScript_TryRemoveDarkrai::
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_NopReturn
+	removeobject LOCALID_MT_PYRE_SUMMIT_DARKRAI
+	return
+
+MtPyre_Summit_OnTransition:
+	call_if_eq VAR_MT_PYRE_STATE, 2, MtPyre_Summit_EventScript_SetArchieMaxiePositions
 	end
 
-MtPyre_Summit_EventScript_TeamAquaTrigger0:: @ 8232018
+MtPyre_Summit_EventScript_SetArchieMaxiePositions::
+	setobjectxyperm LOCALID_MT_PYRE_SUMMIT_MAXIE, 23, 6
+	setobjectxyperm LOCALID_MT_PYRE_SUMMIT_ARCHIE, 22, 6
+	end
+
+MtPyre_Summit_EventScript_TeamAquaTrigger0::
 	lockall
 	setvar VAR_0x8008, 0
 	goto MtPyre_Summit_EventScript_TeamAquaExits
 	end
 
-MtPyre_Summit_EventScript_TeamAquaTrigger1:: @ 8232024
+MtPyre_Summit_EventScript_TeamAquaTrigger1::
 	lockall
 	setvar VAR_0x8008, 1
 	goto MtPyre_Summit_EventScript_TeamAquaExits
 	end
 
-MtPyre_Summit_EventScript_TeamAquaTrigger2:: @ 8232030
+MtPyre_Summit_EventScript_TeamAquaTrigger2::
 	lockall
 	setvar VAR_0x8008, 2
 	goto MtPyre_Summit_EventScript_TeamAquaExits
 	end
 
-MtPyre_Summit_EventScript_TeamAquaExits:: @ 823203C
+MtPyre_Summit_EventScript_TeamAquaExits::
 	playbgm MUS_ENCOUNTER_AQUA, FALSE
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
+	applymovement LOCALID_PLAYER, Common_Movement_FaceUp
 	waitmovement 0
-	applymovement LOCALID_ARCHIE, Common_Movement_WalkInPlaceFastestDown
+	applymovement LOCALID_MT_PYRE_SUMMIT_ARCHIE, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	delay 50
-	compare VAR_0x8008, 0
-	call_if_eq MtPyre_Summit_EventScript_ArchieFacePlayer0
-	compare VAR_0x8008, 1
-	call_if_eq MtPyre_Summit_EventScript_ArchieFacePlayer1
-	compare VAR_0x8008, 2
-	call_if_eq MtPyre_Summit_EventScript_ArchieFacePlayer2
+	call_if_eq VAR_0x8008, 0, MtPyre_Summit_EventScript_ArchieFacePlayer0
+	call_if_eq VAR_0x8008, 1, MtPyre_Summit_EventScript_ArchieFacePlayer1
+	call_if_eq VAR_0x8008, 2, MtPyre_Summit_EventScript_ArchieFacePlayer2
 	msgbox MtPyre_Summit_Text_ArchieWeGotTheOrbLetsGo, MSGBOX_DEFAULT
 	closemessage
-	fadescreen FADE_TO_BLACK
-	removeobject LOCALID_ARCHIE
-	removeobject LOCALID_GRUNT_1
-	removeobject LOCALID_GRUNT_2
-	removeobject LOCALID_GRUNT_3
-	removeobject LOCALID_GRUNT_4
-	removeobject LOCALID_MATT
+	fadescreenswapbuffers FADE_TO_BLACK
+	removeobject LOCALID_MT_PYRE_SUMMIT_ARCHIE
+	removeobject LOCALID_MT_PYRE_SUMMIT_GRUNT_1
+	removeobject LOCALID_MT_PYRE_SUMMIT_GRUNT_2
+	removeobject LOCALID_MT_PYRE_SUMMIT_GRUNT_3
+	removeobject LOCALID_MT_PYRE_SUMMIT_GRUNT_4
 	setflag FLAG_HIDE_MT_PYRE_SUMMIT_ARCHIE
 	setflag FLAG_HIDE_MT_PYRE_SUMMIT_TEAM_AQUA
 	fadedefaultbgm
-	fadescreen FADE_FROM_BLACK
+	fadescreenswapbuffers FADE_FROM_BLACK
 	delay 20
 	setvar VAR_MT_PYRE_STATE, 1
-	compare VAR_0x8008, 0
-	call_if_eq MtPyre_Summit_EventScript_OldLadyApproachPlayer0
-	compare VAR_0x8008, 1
-	call_if_eq MtPyre_Summit_EventScript_OldLadyApproachPlayer1
-	compare VAR_0x8008, 2
-	call_if_eq MtPyre_Summit_EventScript_OldLadyApproachPlayer2
+	call_if_eq VAR_0x8008, 0, MtPyre_Summit_EventScript_OldLadyApproachPlayer0
+	call_if_eq VAR_0x8008, 1, MtPyre_Summit_EventScript_OldLadyApproachPlayer1
+	call_if_eq VAR_0x8008, 2, MtPyre_Summit_EventScript_OldLadyApproachPlayer2
 	msgbox MtPyre_Summit_Text_BothOrbsTakenMagmaLeftThis, MSGBOX_DEFAULT
 	giveitem ITEM_MAGMA_EMBLEM
-	compare VAR_RESULT, FALSE
-	goto_if_eq Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_RED_OR_BLUE_ORB
 	setflag FLAG_HIDE_JAGGED_PASS_MAGMA_GUARD
 	releaseall
 	end
 
-MtPyre_Summit_EventScript_ArchieFacePlayer0:: @ 82320E0
-	applymovement LOCALID_ARCHIE, MtPyre_Summit_Movement_ArchieFacePlayer0
+MtPyre_Summit_EventScript_ArchieFacePlayer0::
+	applymovement LOCALID_MT_PYRE_SUMMIT_ARCHIE, MtPyre_Summit_Movement_ArchieFacePlayer0
 	waitmovement 0
 	return
 
 @ Archie is already facing player
-MtPyre_Summit_EventScript_ArchieFacePlayer1:: @ 82320EB
+MtPyre_Summit_EventScript_ArchieFacePlayer1::
 	return
 
-MtPyre_Summit_EventScript_ArchieFacePlayer2:: @ 82320EC
-	applymovement LOCALID_ARCHIE, MtPyre_Summit_Movement_ArchieFacePlayer2
-	waitmovement 0
-	return
-
-MtPyre_Summit_EventScript_OldLadyApproachPlayer0:: @ 82320F7
-	applymovement LOCALID_OLD_LADY, MtPyre_Summit_Movement_OldLadyApproachPlayer0
-	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
+MtPyre_Summit_EventScript_ArchieFacePlayer2::
+	applymovement LOCALID_MT_PYRE_SUMMIT_ARCHIE, MtPyre_Summit_Movement_ArchieFacePlayer2
 	waitmovement 0
 	return
 
-MtPyre_Summit_EventScript_OldLadyApproachPlayer1:: @ 823210C
-	applymovement LOCALID_OLD_LADY, MtPyre_Summit_Movement_OldLadyApproachPlayer1
+MtPyre_Summit_EventScript_OldLadyApproachPlayer0::
+	applymovement LOCALID_MT_PYRE_SUMMIT_OLD_LADY, MtPyre_Summit_Movement_OldLadyApproachPlayer0
+	waitmovement 0
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	return
 
-MtPyre_Summit_EventScript_OldLadyApproachPlayer2:: @ 8232117
-	applymovement LOCALID_OLD_LADY, MtPyre_Summit_Movement_OldLadyApproachPlayer2
-	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
+MtPyre_Summit_EventScript_OldLadyApproachPlayer1::
+	applymovement LOCALID_MT_PYRE_SUMMIT_OLD_LADY, MtPyre_Summit_Movement_OldLadyApproachPlayer1
 	waitmovement 0
 	return
 
-MtPyre_Summit_Movement_OldLadyApproachPlayer0: @ 823212C
+MtPyre_Summit_EventScript_OldLadyApproachPlayer2::
+	applymovement LOCALID_MT_PYRE_SUMMIT_OLD_LADY, MtPyre_Summit_Movement_OldLadyApproachPlayer2
+	waitmovement 0
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
+	waitmovement 0
+	return
+
+MtPyre_Summit_Movement_OldLadyApproachPlayer0:
 	walk_down
 	walk_down
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
-MtPyre_Summit_Movement_OldLadyApproachPlayer1: @ 8232130
+MtPyre_Summit_Movement_OldLadyApproachPlayer1:
 	walk_down
 	step_end
 
-MtPyre_Summit_Movement_OldLadyApproachPlayer2: @ 8232132
+MtPyre_Summit_Movement_OldLadyApproachPlayer2:
 	walk_down
 	walk_down
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
-MtPyre_Summit_Movement_ArchieFacePlayer0: @ 8232136
+MtPyre_Summit_Movement_ArchieFacePlayer0:
 	walk_left
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
-MtPyre_Summit_Movement_ArchieFacePlayer2: @ 8232139
+MtPyre_Summit_Movement_ArchieFacePlayer2:
 	walk_right
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
-MtPyre_Summit_EventScript_OldMan:: @ 823213C
+MtPyre_Summit_EventScript_OldMan::
 	lock
 	faceplayer
 	goto_if_set FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE, MtPyre_Summit_EventScript_OldManAfterRayquaza
 	msgbox MtPyre_Summit_Text_WillYouHearOutMyTale, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	call_if_eq MtPyre_Summit_EventScript_OldManTale
-	compare VAR_RESULT, NO
-	call_if_eq MtPyre_Summit_EventScript_DeclineOldManTale
+	call_if_eq VAR_RESULT, YES, MtPyre_Summit_EventScript_OldManTale
+	call_if_eq VAR_RESULT, NO, MtPyre_Summit_EventScript_DeclineOldManTale
 	call MtPyre_Summit_EventScript_LegendarySign
 	release
 	end
 
-MtPyre_Summit_EventScript_OldManAfterRayquaza:: @ 8232167
+MtPyre_Summit_EventScript_OldManAfterRayquaza::
 	msgbox MtPyre_Summit_Text_HearTheNewLegendOfHoenn, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	call_if_eq MtPyre_Summit_EventScript_OldManNewTale
-	compare VAR_RESULT, NO
-	call_if_eq MtPyre_Summit_EventScript_DeclineOldManTale
+	call_if_eq VAR_RESULT, YES, MtPyre_Summit_EventScript_OldManNewTale
+	call_if_eq VAR_RESULT, NO, MtPyre_Summit_EventScript_DeclineOldManTale
 	call MtPyre_Summit_EventScript_LegendarySign
 	release
 	end
 
-MtPyre_Summit_EventScript_OldManTale:: @ 8232187
+MtPyre_Summit_EventScript_OldManTale::
 	msgbox MtPyre_Summit_Text_GroudonKyogreTale, MSGBOX_DEFAULT
 	return
 
-MtPyre_Summit_EventScript_DeclineOldManTale:: @ 8232190
+MtPyre_Summit_EventScript_DeclineOldManTale::
 	msgbox MtPyre_Summit_Text_WellThatTooIsFine, MSGBOX_DEFAULT
 	return
 
-MtPyre_Summit_EventScript_OldManNewTale:: @ 8232199
+MtPyre_Summit_EventScript_OldManNewTale::
 	msgbox MtPyre_Summit_Text_HoennTrioTale, MSGBOX_DEFAULT
 	return
 
 MtPyre_Summit_EventScript_LegendarySign::
 	goto_if_unset FLAG_RECEIVED_RED_OR_BLUE_ORB, MtPyre_Summit_EventScript_LegendarySignReturn
 	special TryUnlockDarkraiLegendarySign
-	compare VAR_RESULT, 0
-	goto_if_eq MtPyre_Summit_EventScript_DarkraiNeedsTrainers
-	compare VAR_RESULT, 1
-	goto_if_eq MtPyre_Summit_EventScript_DarkraiNeedsMusharna
-	compare VAR_RESULT, 2
-	goto_if_eq MtPyre_Summit_EventScript_DarkraiAwakened
-	compare VAR_RESULT, 3
-	goto_if_eq MtPyre_Summit_EventScript_DarkraiAwaits
-	@ Once Darkrai is caught, the same storyteller advances the linked dream
-	@ quest without adding a new map, menu, or one-use NPC.
+	goto_if_eq VAR_RESULT, 0, MtPyre_Summit_EventScript_DarkraiNeedsTrainers
+	goto_if_eq VAR_RESULT, 1, MtPyre_Summit_EventScript_DarkraiNeedsMusharna
+	goto_if_eq VAR_RESULT, 2, MtPyre_Summit_EventScript_DarkraiAwakened
+	goto_if_eq VAR_RESULT, 3, MtPyre_Summit_EventScript_DarkraiAwaits
 	setvar VAR_0x8004, LEGENDARY_SIGN_CRESSELIA_ID
 	special TryUnlockSelectedLegendarySign
-	compare VAR_RESULT, 2
-	goto_if_eq MtPyre_Summit_EventScript_CresseliaAwakened
-	compare VAR_RESULT, 4
-	goto_if_eq MtPyre_Summit_EventScript_TryDialgaSign
+	goto_if_eq VAR_RESULT, 2, MtPyre_Summit_EventScript_CresseliaAwakened
+	goto_if_eq VAR_RESULT, 4, MtPyre_Summit_EventScript_TryDialgaSign
 	msgbox MtPyre_Summit_Text_CresseliaAwaits, MSGBOX_DEFAULT
 	return
 
-MtPyre_Summit_EventScript_TryDialgaSign:
+MtPyre_Summit_EventScript_TryDialgaSign::
 	goto_if_unset FLAG_SYS_GAME_CLEAR, MtPyre_Summit_EventScript_TimeSignDormant
 	setvar VAR_0x8004, LEGENDARY_SIGN_DIALGA_ID
 	special TryUnlockSelectedLegendarySign
-	compare VAR_RESULT, 2
-	goto_if_eq MtPyre_Summit_EventScript_DialgaAwakened
-	compare VAR_RESULT, 4
-	goto_if_eq MtPyre_Summit_EventScript_DreamChainComplete
+	goto_if_eq VAR_RESULT, 2, MtPyre_Summit_EventScript_DialgaAwakened
+	goto_if_eq VAR_RESULT, 4, MtPyre_Summit_EventScript_DreamChainComplete
 	msgbox MtPyre_Summit_Text_DialgaAwaits, MSGBOX_DEFAULT
 	return
 
-MtPyre_Summit_EventScript_DarkraiNeedsTrainers:
+MtPyre_Summit_EventScript_DarkraiNeedsTrainers::
 	msgbox MtPyre_Summit_Text_DarkraiNeedsTrainers, MSGBOX_DEFAULT
 	return
 
-MtPyre_Summit_EventScript_DarkraiNeedsMusharna:
+MtPyre_Summit_EventScript_DarkraiNeedsMusharna::
 	msgbox MtPyre_Summit_Text_DarkraiNeedsMusharna, MSGBOX_DEFAULT
 	return
 
-MtPyre_Summit_EventScript_DarkraiAwakened:
-	addobject LOCALID_DARKRAI
+MtPyre_Summit_EventScript_DarkraiAwakened::
+	addobject LOCALID_MT_PYRE_SUMMIT_DARKRAI
 	msgbox MtPyre_Summit_Text_DarkraiAwakened, MSGBOX_DEFAULT
 	return
 
-MtPyre_Summit_EventScript_DarkraiAwaits:
+MtPyre_Summit_EventScript_DarkraiAwaits::
 	msgbox MtPyre_Summit_Text_DarkraiAwaits, MSGBOX_DEFAULT
 	return
 
-MtPyre_Summit_EventScript_CresseliaAwakened:
+MtPyre_Summit_EventScript_CresseliaAwakened::
 	msgbox MtPyre_Summit_Text_CresseliaAwakened, MSGBOX_DEFAULT
 	return
 
-MtPyre_Summit_EventScript_TimeSignDormant:
+MtPyre_Summit_EventScript_TimeSignDormant::
 	msgbox MtPyre_Summit_Text_TimeSignDormant, MSGBOX_DEFAULT
 	return
 
-MtPyre_Summit_EventScript_DialgaAwakened:
+MtPyre_Summit_EventScript_DialgaAwakened::
 	msgbox MtPyre_Summit_Text_DialgaAwakened, MSGBOX_DEFAULT
 	return
 
-MtPyre_Summit_EventScript_DreamChainComplete:
+MtPyre_Summit_EventScript_DreamChainComplete::
 	msgbox MtPyre_Summit_Text_DreamChainComplete, MSGBOX_DEFAULT
-MtPyre_Summit_EventScript_LegendarySignReturn:
+MtPyre_Summit_EventScript_LegendarySignReturn::
 	return
 
 MtPyre_Summit_EventScript_Darkrai::
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_DARKRAI, 2
+	playmoncry SPECIES_DARKRAI, CRY_MODE_ENCOUNTER
 	delay 40
 	waitmoncry
 	setvar VAR_0x8004, LEGENDARY_SIGN_DARKRAI_ID
-	specialvar VAR_RESULT, GetSelectedLegendarySignLevel
-	copyvar VAR_0x800A, VAR_RESULT
-	setwildbattle SPECIES_DARKRAI, VAR_0x800A, ITEM_NONE
+	special CreateSelectedLegendarySignEncounter
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
-	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	compare VAR_RESULT, B_OUTCOME_CAUGHT
-	goto_if_eq MtPyre_Summit_EventScript_DarkraiCaught
-	setvar VAR_0x8004, SPECIES_DARKRAI
-	goto Common_EventScript_LegendaryFlewAway
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, MtPyre_Summit_EventScript_DarkraiCaught
+	msgbox MtPyre_Summit_Text_DarkraiRemains, MSGBOX_DEFAULT
+	release
+	end
 
-MtPyre_Summit_EventScript_DarkraiCaught:
+MtPyre_Summit_EventScript_DarkraiCaught::
 	release
 	end
 
@@ -291,11 +265,15 @@ MtPyre_Summit_Text_DarkraiAwaits:
 	.string "The awakened shadow still waits\n"
 	.string "at the summit.$"
 
+MtPyre_Summit_Text_DarkraiRemains:
+	.string "The nightmare Sign still waits.\n"
+	.string "DARKRAI will await your return.$"
+
 MtPyre_Summit_Text_CresseliaAwakened:
 	.string "DARKRAI's capture completes one\n"
 	.string "half of the dream.\p"
-	.string "A second Legendary Sign shines in\n"
-	.string "the deepest chamber of Meteor Falls.$"
+	.string "A second Sign shines in the deepest\n"
+	.string "chamber of Meteor Falls.$"
 
 MtPyre_Summit_Text_CresseliaAwaits:
 	.string "The lunar Sign still shines in the\n"
@@ -320,194 +298,160 @@ MtPyre_Summit_Text_DreamChainComplete:
 	.string "Nightmare, dream, and time have all\n"
 	.string "answered you. Their legend is yours.$"
 
-MtPyre_Summit_EventScript_OldLady:: @ 82321A2
+MtPyre_Summit_EventScript_OldLady::
 	lock
 	faceplayer
-	compare VAR_MT_PYRE_STATE, 1
-	goto_if_eq MtPyre_Summit_EventScript_TryGiveMagmaEmblem
 	goto_if_set FLAG_RETURNED_RED_OR_BLUE_ORB, MtPyre_Summit_EventScript_OldLadyAfterOrbsReturned
-	compare VAR_MT_PYRE_STATE, 3
-	call_if_ge MtPyre_Summit_EventScript_OldLadyOrbsReturned
+	call_if_ge VAR_MT_PYRE_STATE, 3, MtPyre_Summit_EventScript_OldLadyOrbsReturned
 	goto_if_set FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN, MtPyre_Summit_EventScript_OldLadyLegendariesAwake
 	msgbox MtPyre_Summit_Text_OrbsHaveBeenTaken, MSGBOX_DEFAULT
 	release
 	end
 
-MtPyre_Summit_EventScript_TryGiveMagmaEmblem::
-	goto_if_set FLAG_RECEIVED_RED_OR_BLUE_ORB, MtPyre_Summit_EventScript_OldLadyOrbsTaken
-	msgbox MtPyre_Summit_Text_BothOrbsTakenMagmaLeftThis, MSGBOX_DEFAULT
-	giveitem ITEM_MAGMA_EMBLEM
-	compare VAR_RESULT, FALSE
-	goto_if_eq Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_RED_OR_BLUE_ORB
-	setflag FLAG_HIDE_JAGGED_PASS_MAGMA_GUARD
-MtPyre_Summit_EventScript_OldLadyOrbsTaken:
-	msgbox MtPyre_Summit_Text_OrbsHaveBeenTaken, MSGBOX_DEFAULT
-	release
-	end
-
-MtPyre_Summit_EventScript_OldLadyOrbsReturned:: @ 82321CB
+MtPyre_Summit_EventScript_OldLadyOrbsReturned::
 	msgbox MtPyre_Summit_Text_ThoseTwoMenReturnedOrbs, MSGBOX_DEFAULT
 	setflag FLAG_RETURNED_RED_OR_BLUE_ORB
 	release
 	end
 
-MtPyre_Summit_EventScript_OldLadyLegendariesAwake:: @ 82321D8
+MtPyre_Summit_EventScript_OldLadyLegendariesAwake::
 	msgbox MtPyre_Summit_Text_GroudonKyogreAwakened, MSGBOX_DEFAULT
 	release
 	end
 
-MtPyre_Summit_EventScript_OldLadyAfterOrbsReturned:: @ 82321E2
+MtPyre_Summit_EventScript_OldLadyAfterOrbsReturned::
 	msgbox MtPyre_Summit_Text_SuperAncientPokemonTaughtUs, MSGBOX_DEFAULT
 	release
 	end
 
-MtPyre_Summit_EventScript_ArchieMaxieTrigger0:: @ 82321EC
+MtPyre_Summit_EventScript_ArchieMaxieTrigger0::
 	lockall
 	setvar VAR_0x8008, 0
 	goto MtPyre_Summit_EventScript_ArchieMaxieReturnOrbs
 	end
 
-MtPyre_Summit_EventScript_ArchieMaxieTrigger1:: @ 82321F8
+MtPyre_Summit_EventScript_ArchieMaxieTrigger1::
 	lockall
 	setvar VAR_0x8008, 1
 	goto MtPyre_Summit_EventScript_ArchieMaxieReturnOrbs
 	end
 
-MtPyre_Summit_EventScript_ArchieMaxieTrigger2:: @ 8232204
+MtPyre_Summit_EventScript_ArchieMaxieTrigger2::
 	lockall
 	setvar VAR_0x8008, 2
 	goto MtPyre_Summit_EventScript_ArchieMaxieReturnOrbs
 	end
 
-MtPyre_Summit_EventScript_ArchieMaxieReturnOrbs:: @ 8232210
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+MtPyre_Summit_EventScript_ArchieMaxieReturnOrbs::
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	delay 60
-	compare VAR_0x8008, 0
-	call_if_eq MtPyre_Summit_EventScript_ArchieMaxieBeginExit0
-	compare VAR_0x8008, 1
-	call_if_eq MtPyre_Summit_EventScript_ArchieMaxieBeginExit1
-	compare VAR_0x8008, 2
-	call_if_eq MtPyre_Summit_EventScript_ArchieMaxieBeginExit2
+	call_if_eq VAR_0x8008, 0, MtPyre_Summit_EventScript_ArchieMaxieBeginExit0
+	call_if_eq VAR_0x8008, 1, MtPyre_Summit_EventScript_ArchieMaxieBeginExit1
+	call_if_eq VAR_0x8008, 2, MtPyre_Summit_EventScript_ArchieMaxieBeginExit2
 	playse SE_PIN
-	applymovement LOCALID_MAXIE, Common_Movement_ExclamationMark
+	applymovement LOCALID_MT_PYRE_SUMMIT_MAXIE, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement LOCALID_MAXIE, Common_Movement_Delay48
+	applymovement LOCALID_MT_PYRE_SUMMIT_MAXIE, Common_Movement_Delay48
 	waitmovement 0
 	delay 30
-	compare VAR_0x8008, 0
-	call_if_eq MtPyre_Summit_EventScript_MaxieApproachPlayer0
-	compare VAR_0x8008, 1
-	call_if_eq MtPyre_Summit_EventScript_MaxieApproachPlayer1
-	compare VAR_0x8008, 2
-	call_if_eq MtPyre_Summit_EventScript_MaxieApproachPlayer2
+	call_if_eq VAR_0x8008, 0, MtPyre_Summit_EventScript_MaxieApproachPlayer0
+	call_if_eq VAR_0x8008, 1, MtPyre_Summit_EventScript_MaxieApproachPlayer1
+	call_if_eq VAR_0x8008, 2, MtPyre_Summit_EventScript_MaxieApproachPlayer2
 	msgbox MtPyre_Summit_Text_MaxieSilence, MSGBOX_DEFAULT
 	closemessage
-	compare VAR_0x8008, 0
-	call_if_eq MtPyre_Summit_EventScript_MaxieApproachArchie0
-	compare VAR_0x8008, 1
-	call_if_eq MtPyre_Summit_EventScript_MaxieApproachArchie1
-	compare VAR_0x8008, 2
-	call_if_eq MtPyre_Summit_EventScript_MaxieApproachArchie2
+	call_if_eq VAR_0x8008, 0, MtPyre_Summit_EventScript_MaxieApproachArchie0
+	call_if_eq VAR_0x8008, 1, MtPyre_Summit_EventScript_MaxieApproachArchie1
+	call_if_eq VAR_0x8008, 2, MtPyre_Summit_EventScript_MaxieApproachArchie2
 	delay 30
-	applymovement LOCALID_ARCHIE, MtPyre_Summit_Movement_ArchieExit
-	applymovement LOCALID_MAXIE, MtPyre_Summit_Movement_MaxieExit
+	applymovement LOCALID_MT_PYRE_SUMMIT_ARCHIE, MtPyre_Summit_Movement_ArchieExit
+	applymovement LOCALID_MT_PYRE_SUMMIT_MAXIE, MtPyre_Summit_Movement_MaxieExit
 	waitmovement 0
-	removeobject LOCALID_ARCHIE
-	removeobject LOCALID_MAXIE
+	removeobject LOCALID_MT_PYRE_SUMMIT_ARCHIE
+	removeobject LOCALID_MT_PYRE_SUMMIT_MAXIE
 	setvar VAR_MT_PYRE_STATE, 3
 	releaseall
 	end
 
-MtPyre_Summit_EventScript_ArchieMaxieBeginExit0:: @ 82322C4
-	applymovement OBJ_EVENT_ID_PLAYER, MtPyre_Summit_Movement_PlayerWatchArchieMaxieExit0
-	applymovement LOCALID_ARCHIE, MtPyre_Summit_Movement_ArchieExit
-	applymovement LOCALID_MAXIE, MtPyre_Summit_Movement_MaxieExit
+MtPyre_Summit_EventScript_ArchieMaxieBeginExit0::
+	applymovement LOCALID_PLAYER, MtPyre_Summit_Movement_PlayerWatchArchieMaxieExit0
+	applymovement LOCALID_MT_PYRE_SUMMIT_ARCHIE, MtPyre_Summit_Movement_ArchieExit
+	applymovement LOCALID_MT_PYRE_SUMMIT_MAXIE, MtPyre_Summit_Movement_MaxieExit
 	waitmovement 0
 	return
 
-MtPyre_Summit_EventScript_ArchieMaxieBeginExit1:: @ 82322DD
-	applymovement OBJ_EVENT_ID_PLAYER, MtPyre_Summit_Movement_PlayerWatchArchieMaxieExit1
-	applymovement LOCALID_ARCHIE, MtPyre_Summit_Movement_ArchieExit
-	applymovement LOCALID_MAXIE, MtPyre_Summit_Movement_MaxieExit
+MtPyre_Summit_EventScript_ArchieMaxieBeginExit1::
+	applymovement LOCALID_PLAYER, MtPyre_Summit_Movement_PlayerWatchArchieMaxieExit1
+	applymovement LOCALID_MT_PYRE_SUMMIT_ARCHIE, MtPyre_Summit_Movement_ArchieExit
+	applymovement LOCALID_MT_PYRE_SUMMIT_MAXIE, MtPyre_Summit_Movement_MaxieExit
 	waitmovement 0
 	return
 
-MtPyre_Summit_EventScript_ArchieMaxieBeginExit2:: @ 82322F6
-	applymovement OBJ_EVENT_ID_PLAYER, MtPyre_Summit_Movement_PlayerWatchArchieMaxieExit2
-	applymovement LOCALID_ARCHIE, MtPyre_Summit_Movement_ArchieExit
-	applymovement LOCALID_MAXIE, MtPyre_Summit_Movement_MaxieExit
+MtPyre_Summit_EventScript_ArchieMaxieBeginExit2::
+	applymovement LOCALID_PLAYER, MtPyre_Summit_Movement_PlayerWatchArchieMaxieExit2
+	applymovement LOCALID_MT_PYRE_SUMMIT_ARCHIE, MtPyre_Summit_Movement_ArchieExit
+	applymovement LOCALID_MT_PYRE_SUMMIT_MAXIE, MtPyre_Summit_Movement_MaxieExit
 	waitmovement 0
 	return
 
-MtPyre_Summit_EventScript_MaxieApproachPlayer0:: @ 823230F
-	applymovement OBJ_EVENT_ID_PLAYER, MtPyre_Summit_Movement_PlayerFaceMaxie0
-	applymovement LOCALID_ARCHIE, MtPyre_Summit_Movement_ArchieWatchMaxie
-	applymovement LOCALID_MAXIE, MtPyre_Summit_Movement_MaxieApproachPlayer0
+MtPyre_Summit_EventScript_MaxieApproachPlayer0::
+	applymovement LOCALID_PLAYER, MtPyre_Summit_Movement_PlayerFaceMaxie0
+	applymovement LOCALID_MT_PYRE_SUMMIT_ARCHIE, MtPyre_Summit_Movement_ArchieWatchMaxie
+	applymovement LOCALID_MT_PYRE_SUMMIT_MAXIE, MtPyre_Summit_Movement_MaxieApproachPlayer0
 	waitmovement 0
 	return
 
-MtPyre_Summit_EventScript_MaxieApproachPlayer1:: @ 8232328
-	applymovement OBJ_EVENT_ID_PLAYER, MtPyre_Summit_Movement_PlayerFaceMaxie
-	applymovement LOCALID_ARCHIE, MtPyre_Summit_Movement_ArchieWatchMaxie
-	applymovement LOCALID_MAXIE, MtPyre_Summit_Movement_MaxieApproachPlayer1
+MtPyre_Summit_EventScript_MaxieApproachPlayer1::
+	applymovement LOCALID_PLAYER, MtPyre_Summit_Movement_PlayerFaceMaxie
+	applymovement LOCALID_MT_PYRE_SUMMIT_ARCHIE, MtPyre_Summit_Movement_ArchieWatchMaxie
+	applymovement LOCALID_MT_PYRE_SUMMIT_MAXIE, MtPyre_Summit_Movement_MaxieApproachPlayer1
 	waitmovement 0
 	return
 
-MtPyre_Summit_EventScript_MaxieApproachPlayer2:: @ 8232341
-	applymovement OBJ_EVENT_ID_PLAYER, MtPyre_Summit_Movement_PlayerFaceMaxie
-	applymovement LOCALID_ARCHIE, MtPyre_Summit_Movement_ArchieWatchMaxie
-	applymovement LOCALID_MAXIE, MtPyre_Summit_Movement_MaxieApproachPlayer2
+MtPyre_Summit_EventScript_MaxieApproachPlayer2::
+	applymovement LOCALID_PLAYER, MtPyre_Summit_Movement_PlayerFaceMaxie
+	applymovement LOCALID_MT_PYRE_SUMMIT_ARCHIE, MtPyre_Summit_Movement_ArchieWatchMaxie
+	applymovement LOCALID_MT_PYRE_SUMMIT_MAXIE, MtPyre_Summit_Movement_MaxieApproachPlayer2
 	waitmovement 0
 	return
 
-MtPyre_Summit_EventScript_MaxieApproachArchie0:: @ 823235A
-	applymovement OBJ_EVENT_ID_PLAYER, MtPyre_Summit_Movement_PlayerWatchMaxie
-	applymovement LOCALID_MAXIE, MtPyre_Summit_Movement_MaxieApproachArchie0
+MtPyre_Summit_EventScript_MaxieApproachArchie0::
+	applymovement LOCALID_PLAYER, MtPyre_Summit_Movement_PlayerWatchMaxie
+	applymovement LOCALID_MT_PYRE_SUMMIT_MAXIE, MtPyre_Summit_Movement_MaxieApproachArchie0
 	waitmovement 0
-	applymovement LOCALID_ARCHIE, Common_Movement_WalkInPlaceFastestRight
-	waitmovement 0
-	return
-
-MtPyre_Summit_EventScript_MaxieApproachArchie1:: @ 8232376
-	applymovement OBJ_EVENT_ID_PLAYER, MtPyre_Summit_Movement_PlayerWatchMaxie
-	applymovement LOCALID_MAXIE, MtPyre_Summit_Movement_MaxieApproachArchie1
-	waitmovement 0
-	applymovement LOCALID_ARCHIE, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_MT_PYRE_SUMMIT_ARCHIE, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	return
 
-MtPyre_Summit_EventScript_MaxieApproachArchie2:: @ 8232392
-	applymovement OBJ_EVENT_ID_PLAYER, MtPyre_Summit_Movement_PlayerWatchMaxie
-	applymovement LOCALID_MAXIE, MtPyre_Summit_Movement_MaxieApproachArchie2
+MtPyre_Summit_EventScript_MaxieApproachArchie1::
+	applymovement LOCALID_PLAYER, MtPyre_Summit_Movement_PlayerWatchMaxie
+	applymovement LOCALID_MT_PYRE_SUMMIT_MAXIE, MtPyre_Summit_Movement_MaxieApproachArchie1
 	waitmovement 0
-	applymovement LOCALID_ARCHIE, Common_Movement_WalkInPlaceFastestRight
+	applymovement LOCALID_MT_PYRE_SUMMIT_ARCHIE, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	return
 
-MtPyre_Summit_Movement_PlayerFaceMaxie0: @ 82323AE
+MtPyre_Summit_EventScript_MaxieApproachArchie2::
+	applymovement LOCALID_PLAYER, MtPyre_Summit_Movement_PlayerWatchMaxie
+	applymovement LOCALID_MT_PYRE_SUMMIT_MAXIE, MtPyre_Summit_Movement_MaxieApproachArchie2
+	waitmovement 0
+	applymovement LOCALID_MT_PYRE_SUMMIT_ARCHIE, Common_Movement_WalkInPlaceFasterRight
+	waitmovement 0
+	return
+
+MtPyre_Summit_Movement_PlayerFaceMaxie0:
 	delay_16
 	delay_16
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
-MtPyre_Summit_Movement_PlayerFaceMaxie: @ 82323B2
+MtPyre_Summit_Movement_PlayerFaceMaxie:
 	delay_16
 	delay_16
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
-MtPyre_Summit_Movement_ArchieExit: @ 82323B6
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	step_end
-
-MtPyre_Summit_Movement_MaxieExit: @ 82323BD
+MtPyre_Summit_Movement_ArchieExit:
 	walk_down
 	walk_down
 	walk_down
@@ -516,212 +460,197 @@ MtPyre_Summit_Movement_MaxieExit: @ 82323BD
 	walk_down
 	step_end
 
-MtPyre_Summit_Movement_PlayerWatchArchieMaxieExit0: @ 82323C4
+MtPyre_Summit_Movement_MaxieExit:
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	step_end
+
+MtPyre_Summit_Movement_PlayerWatchArchieMaxieExit0:
 	delay_16
 	delay_8
 	walk_left
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	delay_16
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
-MtPyre_Summit_Movement_PlayerWatchArchieMaxieExit1: @ 82323CB
+MtPyre_Summit_Movement_PlayerWatchArchieMaxieExit1:
 	delay_16
 	delay_8
 	walk_right
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	delay_16
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
-MtPyre_Summit_Movement_PlayerWatchArchieMaxieExit2: @ 82323D2
+MtPyre_Summit_Movement_PlayerWatchArchieMaxieExit2:
 	delay_16
 	delay_8
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	delay_16
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
-MtPyre_Summit_Movement_MaxieApproachPlayer0: @ 82323D8
+MtPyre_Summit_Movement_MaxieApproachPlayer0:
 	walk_up
 	walk_up
 	walk_up
 	walk_left
 	step_end
 
-MtPyre_Summit_Movement_MaxieApproachPlayer1: @ 82323DD
+MtPyre_Summit_Movement_MaxieApproachPlayer1:
 	walk_up
 	walk_up
 	walk_up
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
-MtPyre_Summit_Movement_MaxieApproachPlayer2: @ 82323E2
+MtPyre_Summit_Movement_MaxieApproachPlayer2:
 	walk_up
 	walk_up
 	walk_up
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	step_end
 
-MtPyre_Summit_Movement_ArchieWatchMaxie: @ 82323E7
+MtPyre_Summit_Movement_ArchieWatchMaxie:
 	delay_16
-	walk_in_place_fastest_up
+	walk_in_place_faster_up
 	step_end
 
-MtPyre_Summit_Movement_PlayerWatchMaxie: @ 82323EA
+MtPyre_Summit_Movement_PlayerWatchMaxie:
 	delay_16
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
-MtPyre_Summit_Movement_MaxieApproachArchie0: @ 82323ED
+MtPyre_Summit_Movement_MaxieApproachArchie0:
 	walk_down
 	walk_right
 	walk_down
 	walk_down
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
-MtPyre_Summit_Movement_MaxieApproachArchie1: @ 82323F3
+MtPyre_Summit_Movement_MaxieApproachArchie1:
 	walk_down
 	walk_down
 	walk_down
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
-MtPyre_Summit_Movement_MaxieApproachArchie2: @ 82323F8
+MtPyre_Summit_Movement_MaxieApproachArchie2:
 	walk_down
 	walk_down
 	walk_down
-	walk_in_place_fastest_left
+	walk_in_place_faster_left
 	step_end
 
-MtPyre_Summit_EventScript_Grunt1:: @ 82323FD
+MtPyre_Summit_EventScript_Grunt1::
 	trainerbattle_single TRAINER_GRUNT_MT_PYRE_1, MtPyre_Summit_Text_Grunt1Intro, MtPyre_Summit_Text_Grunt1Defeat
 	msgbox MtPyre_Summit_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MtPyre_Summit_EventScript_Grunt2:: @ 8232414
+MtPyre_Summit_EventScript_Grunt2::
 	trainerbattle_single TRAINER_GRUNT_MT_PYRE_2, MtPyre_Summit_Text_Grunt2Intro, MtPyre_Summit_Text_Grunt2Defeat
 	msgbox MtPyre_Summit_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MtPyre_Summit_EventScript_Grunt3:: @ 823242B
+MtPyre_Summit_EventScript_Grunt3::
 	trainerbattle_single TRAINER_GRUNT_MT_PYRE_3, MtPyre_Summit_Text_Grunt3Intro, MtPyre_Summit_Text_Grunt3Defeat
 	msgbox MtPyre_Summit_Text_Grunt3PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MtPyre_Summit_EventScript_Grunt4:: @ 8232442
+MtPyre_Summit_EventScript_Grunt4::
 	trainerbattle_single TRAINER_GRUNT_MT_PYRE_4, MtPyre_Summit_Text_Grunt4Intro, MtPyre_Summit_Text_Grunt4Defeat
 	msgbox MtPyre_Summit_Text_Grunt4PostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MtPyre_Summit_EventScript_Matt::
-	trainerbattle_single TRAINER_MATT_MT_PYRE, MtPyre_Summit_Text_MattIntro, MtPyre_Summit_Text_MattDefeat
-	msgbox MtPyre_Summit_Text_MattPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-MtPyre_Summit_Text_MattIntro:
-	.string "Hehehe!\n"
-	.string "You must be the infamous {PLAYER}!\p"
-	.string "Come to mess with us here too,\n"
-	.string "have you?\p"
-	.string "Well, tough luck!\p"
-	.string "I'm a cut above the Grunts you've seen\n"
-	.string "so far.\p"
-	.string "You're not getting past me!$"
-
-MtPyre_Summit_Text_MattDefeat:
-	.string "Hehehe…\n"
-	.string "Guess I'll let you pass after all…$"
-
-MtPyre_Summit_Text_MattPostBattle:
-	.string "Hehehe…\n"
-	.string "You're strong, {PLAYER}, but too slow!\p"
-	.string "We've already got what we came for.$"
-
-MtPyre_Summit_Text_Grunt1Intro: @ 8232459
-	.string "No! Those Team Magma goons got\n"
+MtPyre_Summit_Text_Grunt1Intro:
+	.string "No! Those TEAM MAGMA goons got\n"
 	.string "here ahead of us!\p"
 	.string "We can't fall behind!$"
 
-MtPyre_Summit_Text_Grunt1Defeat: @ 82324A0
-	.string "I thought you were one of the Magmas\n"
+MtPyre_Summit_Text_Grunt1Defeat:
+	.string "I thought you were one of the MAGMAS\n"
 	.string "who happened to come back…$"
 
-MtPyre_Summit_Text_Grunt1PostBattle: @ 82324E0
+MtPyre_Summit_Text_Grunt1PostBattle:
 	.string "Yeah, so you are strong…\n"
 	.string "But there're a lot of us!$"
 
-MtPyre_Summit_Text_Grunt2Intro: @ 8232513
+MtPyre_Summit_Text_Grunt2Intro:
 	.string "Hah!\n"
 	.string "Too bad for you!\p"
 	.string "If you came earlier, you only would've\n"
-	.string "had to battle the wimpy Team Magma.\p"
+	.string "had to battle the wimpy TEAM MAGMA.\p"
 	.string "But since you arrived now, you have\n"
 	.string "to take on us toughies!$"
 
-MtPyre_Summit_Text_Grunt2Defeat: @ 82325B0
+MtPyre_Summit_Text_Grunt2Defeat:
 	.string "Urgh… I should've let you take on\n"
-	.string "Team Magma first…$"
+	.string "TEAM MAGMA first…$"
 
-MtPyre_Summit_Text_Grunt2PostBattle: @ 82325E4
+MtPyre_Summit_Text_Grunt2PostBattle:
 	.string "You don't know anything!\n"
 	.string "So why are you messing with us?$"
 
-MtPyre_Summit_Text_Grunt3Intro: @ 823261D
+MtPyre_Summit_Text_Grunt3Intro:
 	.string "You…\n"
-	.string "We saw you at Mt. Chimney.\p"
-	.string "You don't belong to either Team,\n"
+	.string "We saw you at MT. CHIMNEY.\p"
+	.string "You don't belong to either TEAM,\n"
 	.string "so why would you be here?$"
 
-MtPyre_Summit_Text_Grunt3Defeat: @ 8232678
+MtPyre_Summit_Text_Grunt3Defeat:
 	.string "If you're going to mess with anyone,\n"
-	.string "let it be Team Magma…$"
+	.string "let it be TEAM MAGMA…$"
 
-MtPyre_Summit_Text_Grunt3PostBattle: @ 82326B3
+MtPyre_Summit_Text_Grunt3PostBattle:
 	.string "Heh, it doesn't matter!\n"
 	.string "We bought ourselves some time!\p"
-	.string "The Boss should have snatched what\n"
+	.string "The BOSS should have snatched what\n"
 	.string "he was after!$"
 
-MtPyre_Summit_Text_Grunt4Intro: @ 823271B
+MtPyre_Summit_Text_Grunt4Intro:
 	.string "Oh, I know!\n"
-	.string "You tried to join Team Magma,\l"
+	.string "You tried to join TEAM MAGMA,\l"
 	.string "but they wouldn't have you!\p"
 	.string "Well, don't think that we'll let you\n"
-	.string "join our Team Aqua!$"
+	.string "join our TEAM AQUA!$"
 
-MtPyre_Summit_Text_Grunt4Defeat: @ 823279A
-	.string "If you want to join Team Aqua that\n"
+MtPyre_Summit_Text_Grunt4Defeat:
+	.string "If you want to join TEAM AQUA that\n"
 	.string "badly, we can consider it…$"
 
-MtPyre_Summit_Text_Grunt4PostBattle: @ 82327D8
+MtPyre_Summit_Text_Grunt4PostBattle:
 	.string "We have a great combination going\n"
 	.string "with us members and our leader.$"
 
-MtPyre_Summit_Text_ArchieWeGotTheOrbLetsGo: @ 823281A
-	.string "Archie: Team Magma's Maxie got ahead\n"
+MtPyre_Summit_Text_ArchieWeGotTheOrbLetsGo:
+	.string "ARCHIE: TEAM MAGMA's MAXIE got ahead\n"
 	.string "of us, but we also got what we wanted.\p"
-	.string "The Blue Orb preserved at Mt. Pyre…\n"
-	.string "I, Archie, now have it in my possession!\p"
+	.string "The RED ORB preserved at MT. PYRE…\n"
+	.string "I, ARCHIE, now have it in my possession!\p"
 	.string "Fufufu… Now we can bring our ultimate\n"
 	.string "objective to fruition!\p"
-	.string "Okay, Team!\n"
+	.string "Okay, TEAM!\n"
 	.string "We're pulling out!$"
 
-MtPyre_Summit_Text_BothOrbsTakenMagmaLeftThis: @ 823290E
+MtPyre_Summit_Text_BothOrbsTakenMagmaLeftThis:
 	.string "Oh, no…\n"
 	.string "This cannot happen…\p"
-	.string "Not only the Blue Orb, but even\n"
-	.string "the Red Orb has been taken…\p"
-	.string "The Blue Orb and Red Orb must never\n"
+	.string "Not only the BLUE ORB, but even\n"
+	.string "the RED ORB has been taken…\p"
+	.string "The BLUE ORB and RED ORB must never\n"
 	.string "be separated. They belong together.\p"
 	.string "What are those men trying to do with\n"
-	.string "the two Orbs?\p"
+	.string "the two ORBS?\p"
 	.string "… … … … … …\n"
 	.string "… … … … … …\p"
-	.string "Oh, yes. Was it Team Magma who came\n"
-	.string "and took the Red Orb first?\p"
+	.string "Oh, yes. Was it TEAM MAGMA who came\n"
+	.string "and took the BLUE ORB first?\p"
 	.string "Well, in their haste, they left this\n"
 	.string "behind.\p"
 	.string "I couldn't imagine what exactly it\n"
@@ -729,106 +658,106 @@ MtPyre_Summit_Text_BothOrbsTakenMagmaLeftThis: @ 823290E
 	.string "I would like you to have it.\n"
 	.string "Perhaps it will be useful in some way.$"
 
-MtPyre_Summit_Text_OrbsHaveBeenTaken: @ 8232AD8
-	.string "The Blue Orb and Red Orb taken by\n"
+MtPyre_Summit_Text_OrbsHaveBeenTaken:
+	.string "The BLUE ORB and RED ORB taken by\n"
 	.string "those sinister men…\p"
 	.string "They must never be apart…\n"
 	.string "I fear something terrible will happen…$"
 
-MtPyre_Summit_Text_GroudonKyogreAwakened: @ 8232B4F
+MtPyre_Summit_Text_GroudonKyogreAwakened:
 	.string "Oh, my goodness…\p"
-	.string "You say that both Groudon and Kyogre\n"
+	.string "You say that both GROUDON and KYOGRE\n"
 	.string "have been awakened?\p"
-	.string "It is said that the Blue Orb and\n"
-	.string "the Red Orb quelled the rage of\l"
-	.string "the two Pokémon…\p"
+	.string "It is said that the BLUE ORB and\n"
+	.string "the RED ORB quelled the rage of\l"
+	.string "the two POKéMON…\p"
 	.string "It is also said that the true owner\n"
-	.string "of the Orbs still exists.\p"
+	.string "of the ORBS still exists.\p"
 	.string "However, no one knows who, or what\n"
-	.string "exactly, the Orbs belong to.\p"
+	.string "exactly, the ORBS belong to.\p"
 	.string "It could be a human, or perhaps\n"
-	.string "a Pokémon, but no one knows.$"
+	.string "a POKéMON, but no one knows.$"
 
-MtPyre_Summit_Text_ThoseTwoMenReturnedOrbs: @ 8232CA6
-	.string "The two men who took the Orbs came\n"
+MtPyre_Summit_Text_ThoseTwoMenReturnedOrbs:
+	.string "The two men who took the ORBS came\n"
 	.string "back to return them on their own.\p"
 	.string "Those men…\n"
 	.string "Perhaps they are not so evil after all…$"
 
-MtPyre_Summit_Text_SuperAncientPokemonTaughtUs: @ 8232D1E
+MtPyre_Summit_Text_SuperAncientPokemonTaughtUs:
 	.string "The embodiments of the land, sea,\n"
 	.string "and the sky…\p"
 	.string "That is said to be the identities of\n"
-	.string "the super-ancient Pokémon…\p"
+	.string "the super-ancient POKéMON…\p"
 	.string "In the same way that we humans and\n"
-	.string "Pokémon have life, our world, too,\l"
+	.string "POKéMON have life, our world, too,\l"
 	.string "is alive…\p"
-	.string "The super-ancient Pokémon have\n"
+	.string "The super-ancient POKéMON have\n"
 	.string "taught us that…$"
 
-MtPyre_Summit_Text_WillYouHearOutMyTale: @ 8232E0C
-	.string "Mt. Pyre is where we calm the spirits\n"
-	.string "of Pokémon that have passed on…\p"
+MtPyre_Summit_Text_WillYouHearOutMyTale:
+	.string "MT. PYRE is where we calm the spirits\n"
+	.string "of POKéMON that have passed on…\p"
 	.string "This is a high place where one can\n"
-	.string "see all of Hoenn…\p"
-	.string "The disembodied spirits of Pokémon\n"
+	.string "see all of HOENN…\p"
+	.string "The disembodied spirits of POKéMON\n"
 	.string "must find solace here…\p"
 	.string "Is it coincidence that you are here…\p"
 	.string "Will you hear out my tale? A tale long\n"
-	.string "told in the Hoenn region?$"
+	.string "told in the HOENN region?$"
 
-MtPyre_Summit_Text_GroudonKyogreTale: @ 8232F27
+MtPyre_Summit_Text_GroudonKyogreTale:
 	.string "It happened long, long ago…\p"
 	.string "The world was wracked by a ferocious\n"
-	.string "clash between the Pokémon of the land\l"
-	.string "and the Pokémon of the sea…\p"
-	.string "The Pokémon of the land raised\n"
+	.string "clash between the POKéMON of the land\l"
+	.string "and the POKéMON of the sea…\p"
+	.string "The POKéMON of the land raised\n"
 	.string "mountains and created continents…\p"
-	.string "The Pokémon of the sea raised huge\n"
+	.string "The POKéMON of the sea raised huge\n"
 	.string "waves and carved out oceans…\p"
 	.string "Their fierce duel raged without end.\p"
 	.string "The world was engulfed in massive\n"
 	.string "infernos and vicious storms.\p"
-	.string "The Blue Orb and the Red Orb brought\n"
+	.string "The BLUE ORB and the RED ORB brought\n"
 	.string "an end to the calamity.\p"
-	.string "Light poured from the two Orbs and\n"
+	.string "Light poured from the two ORBS and\n"
 	.string "becalmed the enraged adversaries.\p"
 	.string "The pair, made docile, dove deep into\n"
 	.string "the sea where eventually they\l"
 	.string "disappeared…$"
 
-MtPyre_Summit_Text_WellThatTooIsFine: @ 8233162
+MtPyre_Summit_Text_WellThatTooIsFine:
 	.string "I see…\n"
 	.string "Well, that, too, is fine…$"
 
-MtPyre_Summit_Text_MaxieSilence: @ 8233183
-	.string "Maxie: {PLAYER}…\p"
+MtPyre_Summit_Text_MaxieSilence:
+	.string "MAXIE: {PLAYER}…\p"
 	.string "… … … … … …\n"
 	.string "… … … … … …$"
 
-MtPyre_Summit_Text_HearTheNewLegendOfHoenn: @ 82331A6
+MtPyre_Summit_Text_HearTheNewLegendOfHoenn:
 	.string "It is my role to pass on the legends\n"
-	.string "of Hoenn to future generations.\p"
+	.string "of HOENN to future generations.\p"
 	.string "And the crisis that just ended in\n"
-	.string "Sootopolis rewrote a legend…\p"
+	.string "SOOTOPOLIS rewrote a legend…\p"
 	.string "Have you the time to hear the new\n"
-	.string "legend of Hoenn?$"
+	.string "legend of HOENN?$"
 
-MtPyre_Summit_Text_HoennTrioTale: @ 823325D
+MtPyre_Summit_Text_HoennTrioTale:
 	.string "It happened long, long ago…\p"
 	.string "The world was wracked by a ferocious\n"
-	.string "clash between the Pokémon of the land\l"
-	.string "and the Pokémon of the sea…\p"
-	.string "The Pokémon of the land raised\n"
+	.string "clash between the POKéMON of the land\l"
+	.string "and the POKéMON of the sea…\p"
+	.string "The POKéMON of the land raised\n"
 	.string "mountains and created continents…\p"
-	.string "The Pokémon of the sea raised huge\n"
+	.string "The POKéMON of the sea raised huge\n"
 	.string "waves and carved out oceans…\p"
 	.string "Their fierce duel raged without end.\p"
 	.string "The world was engulfed in massive\n"
 	.string "fires and vicious storms.\p"
-	.string "It was then that the Pokémon of\n"
+	.string "It was then that the POKéMON of\n"
 	.string "the sky descended from a storm.\p"
-	.string "The Pokémon, shining a vivid green,\n"
-	.string "becalmed the two enraged Pokémon.\p"
-	.string "Then, its duty done, the green Pokémon\n"
+	.string "The POKéMON, shining a vivid green,\n"
+	.string "becalmed the two enraged POKéMON.\p"
+	.string "Then, its duty done, the green POKéMON\n"
 	.string "flew off into the wild blue yonder…$"

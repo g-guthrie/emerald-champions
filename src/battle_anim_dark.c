@@ -1,5 +1,6 @@
 #include "global.h"
 #include "battle_anim.h"
+#include "battle_anim_internal.h"
 #include "contest.h"
 #include "gpu_regs.h"
 #include "graphics.h"
@@ -29,9 +30,6 @@ static const struct SpriteTemplate sUnusedBagStealSpriteTemplate =
     .tileTag = ANIM_TAG_TIED_BAG,
     .paletteTag = ANIM_TAG_TIED_BAG,
     .oam = &gOamData_AffineOff_ObjNormal_16x16,
-    .anims = gDummySpriteAnimTable,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimUnusedBagSteal,
 };
 
@@ -100,8 +98,6 @@ const struct SpriteTemplate gSharpTeethSpriteTemplate =
     .tileTag = ANIM_TAG_SHARP_TEETH,
     .paletteTag = ANIM_TAG_SHARP_TEETH,
     .oam = &gOamData_AffineNormal_ObjBlend_64x64,
-    .anims = gDummySpriteAnimTable,
-    .images = NULL,
     .affineAnims = gAffineAnims_Bite,
     .callback = AnimBite,
 };
@@ -111,8 +107,6 @@ const struct SpriteTemplate gClampJawSpriteTemplate =
     .tileTag = ANIM_TAG_CLAMP,
     .paletteTag = ANIM_TAG_CLAMP,
     .oam = &gOamData_AffineNormal_ObjBlend_64x64,
-    .anims = gDummySpriteAnimTable,
-    .images = NULL,
     .affineAnims = gAffineAnims_Bite,
     .callback = AnimBite,
 };
@@ -142,8 +136,6 @@ const struct SpriteTemplate gTearDropSpriteTemplate =
     .tileTag = ANIM_TAG_SMALL_BUBBLES,
     .paletteTag = ANIM_TAG_SMALL_BUBBLES,
     .oam = &gOamData_AffineNormal_ObjNormal_16x16,
-    .anims = gDummySpriteAnimTable,
-    .images = NULL,
     .affineAnims = gAffineAnims_TearDrop,
     .callback = AnimTearDrop,
 };
@@ -180,8 +172,6 @@ const struct SpriteTemplate gClawSlashSpriteTemplate =
     .paletteTag = ANIM_TAG_CLAW_SLASH,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = gAnims_ClawSlash,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimClawSlash,
 };
 
@@ -241,8 +231,6 @@ const struct SpriteTemplate gPunishmentSpriteTemplate =
     .paletteTag = ANIM_TAG_POISON_BUBBLE,
     .oam = &gOamData_AffineNormal_ObjNormal_32x32,
     .anims = gPunishmentAnim,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimSpriteOnMonPos,
 };
 
@@ -251,12 +239,27 @@ const struct SpriteTemplate gPunishmentImpactSpriteTemplate =
     .tileTag = ANIM_TAG_IMPACT,
     .paletteTag = ANIM_TAG_POISON_BUBBLE,
     .oam = &gOamData_AffineNormal_ObjNormal_32x32,
-    .anims = gDummySpriteAnimTable,
-    .images = NULL,
     .affineAnims = gPunishmentImpactAffineAnim,
     .callback = AnimPunishment,
 };
 
+// See AnimShadowBall in battle_anim_ghost.c for more specifics
+// arg 0: duration step 1 (attacker -> center)
+// arg 1: duration step 2 (spin center)
+// arg 2: duration step 3 (center -> target)
+const struct SpriteTemplate gDarkPulseSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_PURPLE_RING,
+    .paletteTag = ANIM_TAG_PURPLE_RING,
+    .oam = &gOamData_AffineDouble_ObjNormal_16x32,
+    .affineAnims = gAffineAnims_SpinningBone,
+    .callback = AnimShadowBall,
+};
+
+// arg 0: x pixel offset
+// arg 1: y pixel offset
+// arg 2: Something
+// arg 3: Something
 static void AnimPunishment(struct Sprite *sprite)
 {
     StartSpriteAffineAnim(sprite, gBattleAnimArgs[3]);
@@ -271,8 +274,10 @@ static void AnimPunishment(struct Sprite *sprite)
 
 void AnimTask_AttackerFadeToInvisible(u8 taskId)
 {
-    int battler;
-    gTasks[taskId].data[0] = gBattleAnimArgs[0];
+    CMD_ARGS(stepDelay);
+
+    enum BattlerId battler;
+    gTasks[taskId].data[0] = cmd->stepDelay;
     battler = gBattleAnimAttacker;
     gTasks[taskId].data[1] = 16;
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(16, 0));
@@ -309,7 +314,9 @@ static void AnimTask_AttackerFadeToInvisible_Step(u8 taskId)
 
 void AnimTask_AttackerFadeFromInvisible(u8 taskId)
 {
-    gTasks[taskId].data[0] = gBattleAnimArgs[0];
+    CMD_ARGS(stepDelay);
+
+    gTasks[taskId].data[0] = cmd->stepDelay;
     gTasks[taskId].data[1] = BLDALPHA_BLEND(0, 16);
     gTasks[taskId].func = AnimTask_AttackerFadeFromInvisible_Step;
     SetGpuReg(REG_OFFSET_BLDALPHA, gTasks[taskId].data[1]);
@@ -396,12 +403,14 @@ static void AnimUnusedBagSteal_Step(struct Sprite *sprite)
 // Move sprite inward for Bite/Crunch and Clamp
 void AnimBite(struct Sprite *sprite)
 {
-    sprite->x += gBattleAnimArgs[0];
-    sprite->y += gBattleAnimArgs[1];
-    StartSpriteAffineAnim(sprite, gBattleAnimArgs[2]);
-    sprite->data[0] = gBattleAnimArgs[3];
-    sprite->data[1] = gBattleAnimArgs[4];
-    sprite->data[2] = gBattleAnimArgs[5];
+    CMD_ARGS(x, y, animation, xVelocity, yVelocity, halfDuration);
+
+    sprite->x += cmd->x;
+    sprite->y += cmd->y;
+    StartSpriteAffineAnim(sprite, cmd->animation);
+    sprite->data[0] = cmd->xVelocity;
+    sprite->data[1] = cmd->yVelocity;
+    sprite->data[2] = cmd->halfDuration;
     sprite->callback = AnimBite_Step1;
 }
 
@@ -428,10 +437,12 @@ static void AnimBite_Step2(struct Sprite *sprite)
 // Launches a tear drop away from the battler. Used by Fake Tears
 void AnimTearDrop(struct Sprite *sprite)
 {
-    u8 battler;
+    CMD_ARGS(relativeTo, type);
+
+    enum BattlerId battler;
     s8 xOffset;
 
-    if (gBattleAnimArgs[0] == ANIM_ATTACKER)
+    if (cmd->relativeTo == ANIM_ATTACKER)
         battler = gBattleAnimAttacker;
     else
         battler = gBattleAnimTarget;
@@ -439,7 +450,7 @@ void AnimTearDrop(struct Sprite *sprite)
     xOffset = 20;
     sprite->oam.tileNum += 4;
 
-    switch (gBattleAnimArgs[1])
+    switch (cmd->type)
     {
     case 0:
         sprite->x = GetBattlerSpriteCoordAttr(battler, BATTLER_COORD_ATTR_RIGHT) - 8;
@@ -497,7 +508,7 @@ void AnimTask_MoveAttackerMementoShadow(u8 taskId)
     task->data[14] = pos - 32;
     task->data[15] = pos + 32;
 
-    if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
+    if (IsOnPlayerSide(gBattleAnimAttacker))
         task->data[8] = -12;
     else
         task->data[8] = -64;
@@ -508,7 +519,7 @@ void AnimTask_MoveAttackerMementoShadow(u8 taskId)
         GetBattleAnimBg1Data(&animBg);
         task->data[10] = gBattle_BG1_Y;
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND | BLDCNT_TGT1_BG1);
-        FillPalette(0, animBg.paletteId * 16, 32);
+        FillPalette(RGB_BLACK, BG_PLTT_ID(animBg.paletteId), PLTT_SIZE_4BPP);
         scanlineParams.dmaDest = &REG_BG1VOFS;
         var0 = WINOUT_WIN01_BG1;
         if (!IsContest())
@@ -518,7 +529,7 @@ void AnimTask_MoveAttackerMementoShadow(u8 taskId)
     {
         task->data[10] = gBattle_BG2_Y;
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND | BLDCNT_TGT1_BG2);
-        FillPalette(0, 144, 32);
+        FillPalette(RGB_BLACK, BG_PLTT_ID(9), PLTT_SIZE_4BPP);
         scanlineParams.dmaDest = &REG_BG2VOFS;
         var0 = WINOUT_WIN01_BG2;
         if (!IsContest())
@@ -648,12 +659,12 @@ void AnimTask_MoveTargetMementoShadow(u8 taskId)
         {
             GetBattleAnimBg1Data(&animBg);
             task->data[10] = gBattle_BG1_Y;
-            FillPalette(0, animBg.paletteId * 16, 32);
+            FillPalette(RGB_BLACK, BG_PLTT_ID(animBg.paletteId), PLTT_SIZE_4BPP);
         }
         else
         {
             task->data[10] = gBattle_BG2_Y;
-            FillPalette(0, 9 * 16, 32);
+            FillPalette(RGB_BLACK, BG_PLTT_ID(9), PLTT_SIZE_4BPP);
         }
 
         SetAllBattlersSpritePriority(3);
@@ -667,7 +678,7 @@ void AnimTask_MoveTargetMementoShadow(u8 taskId)
         task->data[14] = x - 4;
         task->data[15] = x + 4;
 
-        if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER)
+        if (IsOnPlayerSide(gBattleAnimTarget))
             task->data[8] = -12;
         else
             task->data[8] = -64;
@@ -857,21 +868,21 @@ void AnimTask_InitMementoShadow(u8 taskId)
     MoveBattlerSpriteToBG(gBattleAnimAttacker, toBG2, TRUE);
     gSprites[gBattlerSpriteIds[gBattleAnimAttacker]].invisible = FALSE;
 
-    if (IsBattlerSpriteVisible(BATTLE_PARTNER(gBattleAnimAttacker)))
+    if (IsBattlerSpriteVisible(GetPartnerBattler(gBattleAnimAttacker)))
     {
-        MoveBattlerSpriteToBG(gBattleAnimAttacker ^ 2, toBG2 ^ 1, TRUE);
-        gSprites[gBattlerSpriteIds[gBattleAnimAttacker ^ 2]].invisible = FALSE;
+        MoveBattlerSpriteToBG(GetPartnerBattler(gBattleAnimAttacker), toBG2 ^ 1, TRUE);
+        gSprites[gBattlerSpriteIds[GetPartnerBattler(gBattleAnimAttacker)]].invisible = FALSE;
     }
 
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_8114470(u8 taskId)
+void AnimTask_MementoHandleBg(u8 taskId)
 {
-    u8 toBG2 = GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker) ^ 1 ? 1 : 0;
+    bool8 toBG2 = GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker) ^ 1 ? TRUE : FALSE;
     ResetBattleAnimBg(toBG2);
 
-    if (IsBattlerSpriteVisible(BATTLE_PARTNER(gBattleAnimAttacker)))
+    if (IsBattlerSpriteVisible(GetPartnerBattler(gBattleAnimAttacker)))
         ResetBattleAnimBg(toBG2 ^ 1);
 
     DestroyAnimVisualTask(taskId);
@@ -880,22 +891,23 @@ void sub_8114470(u8 taskId)
 // Animates a deep slash from a claw. Used by Metal Claw, Dragon Claw, and Crush Claw
 void AnimClawSlash(struct Sprite *sprite)
 {
-    sprite->x += gBattleAnimArgs[0];
-    sprite->y += gBattleAnimArgs[1];
-    StartSpriteAnim(sprite, gBattleAnimArgs[2]);
+    CMD_ARGS(x, y, animation);
+
+    sprite->x += cmd->x;
+    sprite->y += cmd->y;
+    StartSpriteAnim(sprite, cmd->animation);
     sprite->callback = RunStoredCallbackWhenAnimEnds;
     StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
 // Makes the attacker metallic and shining.
 // Used by MOVE_HARDEN and MOVE_IRON_DEFENSE.
-// arg0: if true won't change battler's palette back
-// arg1: if true, use custom color
-// arg2: custom color
 // Custom color argument is used in MOVE_POISON_TAIL to make the mon turn purplish/pinkish as if became cloaked in poison.
 void AnimTask_MetallicShine(u8 taskId)
 {
-    u16 species;
+    CMD_ARGS(permanent, useColor, color);
+
+    enum Species species;
     u8 spriteId;
     u8 newSpriteId;
     u16 paletteNum;
@@ -918,9 +930,9 @@ void AnimTask_MetallicShine(u8 taskId)
     {
         if (GetBattlerPosition(gBattleAnimAttacker) == B_POSITION_OPPONENT_RIGHT || GetBattlerPosition(gBattleAnimAttacker) == B_POSITION_PLAYER_LEFT)
         {
-            if (IsBattlerSpriteVisible(BATTLE_PARTNER(gBattleAnimAttacker)) == TRUE)
+            if (IsBattlerSpriteVisible(GetPartnerBattler(gBattleAnimAttacker)) == TRUE)
             {
-                gSprites[gBattlerSpriteIds[BATTLE_PARTNER(gBattleAnimAttacker)]].oam.priority--;
+                gSprites[gBattlerSpriteIds[GetPartnerBattler(gBattleAnimAttacker)]].oam.priority--;
                 SetAnimBgAttribute(1, BG_ANIM_PRIORITY, 1);
                 priorityChanged = TRUE;
             }
@@ -928,16 +940,9 @@ void AnimTask_MetallicShine(u8 taskId)
     }
 
     if (IsContest())
-    {
         species = gContestResources->moveAnim->species;
-    }
     else
-    {
-        if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
-            species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_SPECIES);
-        else
-            species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_SPECIES);
-    }
+        species = GetMonData(GetBattlerMon(gBattleAnimAttacker), MON_DATA_SPECIES);
 
     spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
     newSpriteId = CreateInvisibleSpriteCopy(gBattleAnimAttacker, spriteId, species);
@@ -945,21 +950,21 @@ void AnimTask_MetallicShine(u8 taskId)
     GetBattleAnimBg1Data(&animBg);
     AnimLoadCompressedBgTilemap(animBg.bgId, gMetalShineTilemap);
     AnimLoadCompressedBgGfx(animBg.bgId, gMetalShineGfx, animBg.tilesOffset);
-    LoadCompressedPalette(gMetalShinePalette, animBg.paletteId * 16, 32);
+    LoadPalette(gMetalShinePalette, BG_PLTT_ID(animBg.paletteId), PLTT_SIZE_4BPP);
 
     gBattle_BG1_X = -gSprites[spriteId].x + 96;
     gBattle_BG1_Y = -gSprites[spriteId].y + 32;
     paletteNum = 16 + gSprites[spriteId].oam.paletteNum;
 
-    if (gBattleAnimArgs[1] == 0)
+    if (cmd->useColor == 0)
         SetGrayscaleOrOriginalPalette(paletteNum, FALSE);
     else
-        BlendPalette(paletteNum * 16, 16, 11, gBattleAnimArgs[2]);
+        BlendPalette(BG_PLTT_ID(paletteNum), 16, 11, cmd->color);
 
     gTasks[taskId].data[0] = newSpriteId;
-    gTasks[taskId].data[1] = gBattleAnimArgs[0];
-    gTasks[taskId].data[2] = gBattleAnimArgs[1];
-    gTasks[taskId].data[3] = gBattleAnimArgs[2];
+    gTasks[taskId].data[1] = cmd->permanent;
+    gTasks[taskId].data[2] = cmd->useColor;
+    gTasks[taskId].data[3] = cmd->color;
     gTasks[taskId].data[6] = priorityChanged;
     gTasks[taskId].func = AnimTask_MetallicShine_Step;
 }
@@ -988,7 +993,7 @@ static void AnimTask_MetallicShine_Step(u8 taskId)
             GetBattleAnimBg1Data(&animBg);
             ClearBattleAnimBg(animBg.bgId);
             if (gTasks[taskId].data[6] == 1)
-                gSprites[gBattlerSpriteIds[BATTLE_PARTNER(gBattleAnimAttacker)]].oam.priority++;
+                gSprites[gBattlerSpriteIds[GetPartnerBattler(gBattleAnimAttacker)]].oam.priority++;
         }
         else if (gTasks[taskId].data[11] == 3)
         {
@@ -1008,36 +1013,37 @@ static void AnimTask_MetallicShine_Step(u8 taskId)
 }
 
 // Changes battler's palette to either grayscale or original.
-// arg0: which battler
-// arg1: FALSE grayscale, TRUE original
 void AnimTask_SetGrayscaleOrOriginalPal(u8 taskId)
 {
+    CMD_ARGS(battler, mode);
+
     u8 spriteId;
-    u8 battler;
+    enum BattlerId battler;
     bool8 calcSpriteId = FALSE;
     u8 position = B_POSITION_PLAYER_LEFT;
+    enum AnimBattler animBattler = cmd->battler;
 
-    switch (gBattleAnimArgs[0])
+    switch (animBattler)
     {
     case ANIM_ATTACKER:
     case ANIM_TARGET:
     case ANIM_ATK_PARTNER:
     case ANIM_DEF_PARTNER:
-        spriteId = GetAnimBattlerSpriteId(gBattleAnimArgs[0]);
+        spriteId = GetAnimBattlerSpriteId(animBattler);
         break;
-    case 4:
+    case ANIM_PLAYER_LEFT:
         position = B_POSITION_PLAYER_LEFT;
         calcSpriteId = TRUE;
         break;
-    case 5:
+    case ANIM_PLAYER_RIGHT:
         position = B_POSITION_PLAYER_RIGHT;
         calcSpriteId = TRUE;
         break;
-    case 6:
+    case ANIM_OPPONENT_LEFT:
         position = B_POSITION_OPPONENT_LEFT;
         calcSpriteId = TRUE;
         break;
-    case 7:
+    case ANIM_OPPONENT_RIGHT:
         position = B_POSITION_OPPONENT_RIGHT;
         calcSpriteId = TRUE;
         break;
@@ -1056,7 +1062,7 @@ void AnimTask_SetGrayscaleOrOriginalPal(u8 taskId)
     }
 
     if (spriteId != SPRITE_NONE)
-        SetGrayscaleOrOriginalPalette(gSprites[spriteId].oam.paletteNum + 16, gBattleAnimArgs[1]);
+        SetGrayscaleOrOriginalPalette(gSprites[spriteId].oam.paletteNum + 16, cmd->mode);
 
     DestroyAnimVisualTask(taskId);
 }

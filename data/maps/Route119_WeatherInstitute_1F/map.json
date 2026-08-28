@@ -3,6 +3,7 @@
   "name": "Route119_WeatherInstitute_1F",
   "layout": "LAYOUT_ROUTE119_WEATHER_INSTITUTE_1F",
   "music": "MUS_RUSTBORO",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_ROUTE_119",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -12,7 +13,7 @@
   "allow_running": false,
   "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": 0,
+  "connections": null,
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_AQUA_MEMBER_M",
@@ -67,6 +68,7 @@
       "flag": "FLAG_HIDE_WEATHER_INSTITUTE_1F_WORKERS"
     },
     {
+      "local_id": "LOCALID_WEATHER_INSTITUTE_LITTLE_BOY",
       "graphics_id": "OBJ_EVENT_GFX_NINJA_BOY",
       "x": 14,
       "y": 11,
@@ -86,26 +88,24 @@
       "y": 12,
       "elevation": 0,
       "dest_map": "MAP_ROUTE119",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 10,
       "y": 12,
       "elevation": 0,
       "dest_map": "MAP_ROUTE119",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     },
     {
       "x": 17,
       "y": 1,
       "elevation": 0,
       "dest_map": "MAP_ROUTE119_WEATHER_INSTITUTE_2F",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
-  "coord_events": [
-
-  ],
+  "coord_events": [],
   "bg_events": [
     {
       "type": "sign",

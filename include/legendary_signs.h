@@ -2,6 +2,8 @@
 #define GUARD_LEGENDARY_SIGNS_H
 
 #include "global.h"
+#include "wild_encounter.h"
+#include "constants/species.h"
 
 enum LegendarySignId
 {
@@ -71,23 +73,14 @@ enum LegendarySignSource
     LEGENDARY_SOURCE_MASTERY,
 };
 
-enum LegendarySignArea
-{
-    LEGENDARY_AREA_LAND,
-    LEGENDARY_AREA_WATER,
-    LEGENDARY_AREA_ROCKS,
-    LEGENDARY_AREA_FISHING,
-    LEGENDARY_AREA_HONEY,
-};
-
 struct LegendarySignDefinition
 {
-    u16 species;
+    enum Species species;
     u16 mapId;
-    u16 requiredSpecies;
+    enum Species requiredSpecies;
     u16 requiredFlag;
-    u8 source;
-    u8 area;
+    enum LegendarySignSource source;
+    enum WildPokemonArea area;
     u8 chance;
     u8 minimumBadges;
     s8 levelOffset;
@@ -95,19 +88,21 @@ struct LegendarySignDefinition
 
 extern const struct LegendarySignDefinition gLegendarySignDefinitions[LEGENDARY_SIGN_COUNT];
 
-bool8 IsLegendarySignUnlocked(u8 signId);
-bool8 IsLegendarySignCaught(u8 signId);
-void UnlockLegendarySign(u8 signId);
-void MarkLegendarySignCaughtBySpecies(u16 species);
-u8 GetLegendarySignIdBySpecies(u16 species);
-bool8 TryGetLegendarySignWildOverride(u8 area, u16 *species, u8 *level);
-bool8 PlayerPartyHasSpeciesFamily(u16 species);
+bool32 IsLegendarySignUnlocked(enum LegendarySignId signId);
+bool32 IsLegendarySignCaught(enum LegendarySignId signId);
+void UnlockLegendarySign(enum LegendarySignId signId);
+void MarkLegendarySignCaughtBySpecies(enum Species species);
+enum LegendarySignId GetLegendarySignIdBySpecies(enum Species species);
+bool32 TryGetLegendarySignWildOverride(enum WildPokemonArea area, enum Species *species, u8 *level);
+bool32 PlayerPartyHasSpeciesFamily(enum Species species);
 void TryUnlockSelectedLegendarySign(void);
 u16 GetSelectedLegendarySignState(void);
 u16 ShouldShowSelectedLegendarySignObject(void);
 u16 GetSelectedLegendarySignLevel(void);
+void CreateSelectedLegendarySignEncounter(void);
 void TryUnlockDarkraiLegendarySign(void);
 void TryDiscoverEligibleLegendarySign(void);
 void TryGiveArceusLegendarySignMasteryReward(void);
+u8 GiveLegendarySignReward(enum Species species, u8 level);
 
 #endif // GUARD_LEGENDARY_SIGNS_H

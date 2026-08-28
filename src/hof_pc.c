@@ -1,5 +1,6 @@
 #include "global.h"
 #include "hall_of_fame.h"
+#include "hall_of_fame_frlg.h"
 #include "main.h"
 #include "palette.h"
 #include "overworld.h"
@@ -13,8 +14,11 @@ static void Task_WaitForPaletteFade(u8);
 
 void AccessHallOfFamePC(void)
 {
-    SetMainCallback2(CB2_DoHallOfFamePC);
-    ScriptContext2_Enable();
+    if (IS_FRLG)
+        SetMainCallback2(CB2_InitHofPC);
+    else
+        SetMainCallback2(CB2_DoHallOfFamePC);
+    LockPlayerFieldControls();
 }
 
 void ReturnFromHallOfFamePC(void)
@@ -25,7 +29,7 @@ void ReturnFromHallOfFamePC(void)
 
 static void ReshowPCMenuAfterHallOfFamePC(void)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     Overworld_PlaySpecialMapMusic();
     ScriptMenu_CreatePCMultichoice();
     ScriptMenu_DisplayPCStartupPrompt();

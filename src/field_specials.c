@@ -1,14 +1,16 @@
 #include "global.h"
+#include "debug.h"
 #include "malloc.h"
 #include "battle.h"
-#include "battle_tower.h"
-#include "battle_main.h"
+#include "battle_special.h"
 #include "cable_club.h"
 #include "data.h"
+#include "daycare.h"
 #include "decoration.h"
 #include "diploma.h"
 #include "event_data.h"
 #include "event_object_movement.h"
+#include "emerald_champions_battle_sets.h"
 #include "fieldmap.h"
 #include "field_camera.h"
 #include "field_effect.h"
@@ -20,19 +22,24 @@
 #include "graphics.h"
 #include "international_string_util.h"
 #include "item.h"
-#include "item_menu.h"
 #include "item_icon.h"
+#include "item_menu.h"
 #include "link.h"
 #include "list_menu.h"
+#include "load_save.h"
+#include "mail.h"
 #include "main.h"
-#include "mevent.h"
 #include "match_call.h"
 #include "menu.h"
+#include "metatile_behavior.h"
+#include "mystery_gift.h"
 #include "overworld.h"
 #include "party_menu.h"
 #include "pokeblock.h"
+#include "pokedex.h"
 #include "pokemon.h"
 #include "pokemon_storage_system.h"
+#include "pokemon_summary_screen.h"
 #include "random.h"
 #include "rayquaza_scene.h"
 #include "region_map.h"
@@ -46,13 +53,14 @@
 #include "strings.h"
 #include "task.h"
 #include "text.h"
+#include "text_window.h"
+#include "tilesets.h"
 #include "tv.h"
 #include "wallclock.h"
 #include "window.h"
-#include "verdant_battle_sets.h"
 #include "constants/battle_frontier.h"
+#include "constants/battle_pyramid.h"
 #include "constants/battle_tower.h"
-#include "constants/abilities.h"
 #include "constants/decorations.h"
 #include "constants/event_objects.h"
 #include "constants/event_object_movement.h"
@@ -60,10 +68,7 @@
 #include "constants/field_specials.h"
 #include "constants/items.h"
 #include "constants/heal_locations.h"
-#include "constants/map_types.h"
-#include "constants/maps.h"
-#include "constants/mevent.h"
-#include "constants/script_menu.h"
+#include "constants/mystery_gift.h"
 #include "constants/slot_machine.h"
 #include "constants/songs.h"
 #include "constants/moves.h"
@@ -71,27 +76,20 @@
 #include "constants/battle_frontier.h"
 #include "constants/weather.h"
 #include "constants/metatile_labels.h"
+#include "constants/rgb.h"
 #include "palette.h"
+#include "battle_util.h"
+#include "naming_screen.h"
+#include "chooseboxmon.h"
 
-void TryGiveVerdantMegaKit(void)
-{
-    gSpecialVar_Result = TryAddVerdantMegaKit();
-}
+#define TAG_ITEM_ICON 5500
 
-void TryGiveVerdantStevenRewardBundle(void)
-{
-    gSpecialVar_Result = TryAddVerdantStevenRewardBundle();
-}
+#define GFXTAG_MULTICHOICE_SCROLL_ARROWS 2000
+#define PALTAG_MULTICHOICE_SCROLL_ARROWS 100
 
-void TryGiveVerdantLatiStoneBundle(void)
-{
-    gSpecialVar_Result = TryAddVerdantLatiStoneBundle();
-}
-
-void TryGiveVerdantWeatherRockBundle(void)
-{
-    gSpecialVar_Result = TryAddVerdantWeatherRockBundle();
-}
+#define ELEVATOR_WINDOW_WIDTH  3
+#define ELEVATOR_WINDOW_HEIGHT 3
+#define ELEVATOR_LIGHT_STAGES  3
 
 EWRAM_DATA bool8 gBikeCyclingChallenge = FALSE;
 EWRAM_DATA u8 gBikeCollisions = 0;
@@ -99,39 +97,189 @@ static EWRAM_DATA u32 sBikeCyclingTimer = 0;
 static EWRAM_DATA u8 sSlidingDoorNextFrameCounter = 0;
 static EWRAM_DATA u8 sSlidingDoorFrame = 0;
 static EWRAM_DATA u8 sTutorMoveAndElevatorWindowId = 0;
-static EWRAM_DATA u16 sLilycoveDeptStore_NeverRead = 0;
 static EWRAM_DATA u16 sLilycoveDeptStore_DefaultFloorChoice = 0;
 static EWRAM_DATA struct ListMenuItem *sScrollableMultichoice_ListMenuItem = NULL;
-static EWRAM_DATA u16 sScrollableMultichoice_ScrollOffset = 0;
+
 static EWRAM_DATA u16 sFrontierExchangeCorner_NeverRead = 0;
 static EWRAM_DATA u8 sScrollableMultichoice_ItemSpriteId = 0;
 static EWRAM_DATA u8 sBattlePointsWindowId = 0;
 static EWRAM_DATA u8 sFrontierExchangeCorner_ItemIconWindowId = 0;
 static EWRAM_DATA u8 sPCBoxToSendMon = 0;
 static EWRAM_DATA u32 sBattleTowerMultiBattleTypeFlags = 0;
-static EWRAM_DATA u16 sUnlockedBattleItemMart[192] = {0};
 
-struct ListMenuTemplate gScrollableMultichoice_ListMenuTemplate;
-
-void GiveAllTMs(void)
+static const u16 sEmeraldChampionsFreeBattleItems[] =
 {
-    u16 item;
-    u16 added = 0;
+    ITEM_BRIGHT_POWDER,
+    ITEM_WHITE_HERB,
+    ITEM_QUICK_CLAW,
+    ITEM_MENTAL_HERB,
+    ITEM_CHOICE_BAND,
+    ITEM_FOCUS_BAND,
+    ITEM_SCOPE_LENS,
+    ITEM_LEFTOVERS,
+    ITEM_POWER_HERB,
+    ITEM_CHOICE_SCARF,
+    ITEM_CHOICE_SPECS,
+    ITEM_FOCUS_SASH,
+    ITEM_WIDE_LENS,
+    ITEM_ZOOM_LENS,
+    ITEM_METRONOME,
+    ITEM_MUSCLE_BAND,
+    ITEM_WISE_GLASSES,
+    ITEM_EXPERT_BELT,
+    ITEM_LIGHT_CLAY,
+    ITEM_DAMP_ROCK,
+    ITEM_HEAT_ROCK,
+    ITEM_SMOOTH_ROCK,
+    ITEM_ICY_ROCK,
+    ITEM_LIFE_ORB,
+    ITEM_TOXIC_ORB,
+    ITEM_FLAME_ORB,
+    ITEM_BLACK_SLUDGE,
+    ITEM_SHED_SHELL,
+    ITEM_EVIOLITE,
+    ITEM_ROCKY_HELMET,
+    ITEM_AIR_BALLOON,
+    ITEM_RED_CARD,
+    ITEM_EJECT_BUTTON,
+    ITEM_ABSORB_BULB,
+    ITEM_CELL_BATTERY,
+    ITEM_LUMINOUS_MOSS,
+    ITEM_SNOWBALL,
+    ITEM_WEAKNESS_POLICY,
+    ITEM_ASSAULT_VEST,
+    ITEM_SAFETY_GOGGLES,
+    ITEM_ADRENALINE_ORB,
+    ITEM_TERRAIN_EXTENDER,
+    ITEM_PROTECTIVE_PADS,
+    ITEM_ELECTRIC_SEED,
+    ITEM_PSYCHIC_SEED,
+    ITEM_MISTY_SEED,
+    ITEM_GRASSY_SEED,
+    ITEM_THROAT_SPRAY,
+    ITEM_EJECT_PACK,
+    ITEM_HEAVY_DUTY_BOOTS,
+    ITEM_BLUNDER_POLICY,
+    ITEM_ROOM_SERVICE,
+    ITEM_UTILITY_UMBRELLA,
+    ITEM_CLEAR_AMULET,
+    ITEM_COVERT_CLOAK,
+    ITEM_LOADED_DICE,
+    ITEM_PUNCHING_GLOVE,
+    ITEM_ABILITY_SHIELD,
+    ITEM_MIRROR_HERB,
+    ITEM_BOOSTER_ENERGY,
+    ITEM_BINDING_BAND,
+    ITEM_GRIP_CLAW,
+    ITEM_BIG_ROOT,
+    ITEM_SHELL_BELL,
+    ITEM_FLOAT_STONE,
+    ITEM_RING_TARGET,
+    ITEM_IRON_BALL,
+    ITEM_LAGGING_TAIL,
+    ITEM_DESTINY_KNOT,
+    ITEM_SOUL_DEW,
+    ITEM_THICK_CLUB,
+    ITEM_LEEK,
+    ITEM_LIGHT_BALL,
+    ITEM_LUCKY_PUNCH,
+    ITEM_METAL_POWDER,
+    ITEM_QUICK_POWDER,
+    ITEM_SILK_SCARF,
+    ITEM_BLACK_BELT,
+    ITEM_SHARP_BEAK,
+    ITEM_POISON_BARB,
+    ITEM_SOFT_SAND,
+    ITEM_HARD_STONE,
+    ITEM_SILVER_POWDER,
+    ITEM_SPELL_TAG,
+    ITEM_CHARCOAL,
+    ITEM_MYSTIC_WATER,
+    ITEM_MIRACLE_SEED,
+    ITEM_MAGNET,
+    ITEM_NEVER_MELT_ICE,
+    ITEM_TWISTED_SPOON,
+    ITEM_DRAGON_FANG,
+    ITEM_BLACK_GLASSES,
+    ITEM_FAIRY_FEATHER,
+    ITEM_NORMAL_GEM,
+    ITEM_FIRE_GEM,
+    ITEM_WATER_GEM,
+    ITEM_ELECTRIC_GEM,
+    ITEM_GRASS_GEM,
+    ITEM_ICE_GEM,
+    ITEM_FIGHTING_GEM,
+    ITEM_POISON_GEM,
+    ITEM_GROUND_GEM,
+    ITEM_FLYING_GEM,
+    ITEM_PSYCHIC_GEM,
+    ITEM_BUG_GEM,
+    ITEM_ROCK_GEM,
+    ITEM_GHOST_GEM,
+    ITEM_DRAGON_GEM,
+    ITEM_DARK_GEM,
+    ITEM_STEEL_GEM,
+    ITEM_FAIRY_GEM,
+    ITEM_NONE,
+};
 
-    for (item = ITEM_TM01_FOCUS_PUNCH; item <= ITEM_TM100_CURSE; item++)
-    {
-        if (!CheckBagHasItem(item, 1) && AddBagItem(item, 1))
-            added++;
-    }
+static const u16 sEmeraldChampionsMegaStones[] =
+{
+#include "data/emerald_champions_mega_stones.h"
+    ITEM_NONE,
+};
 
-    gSpecialVar_Result = added;
+COMMON_DATA struct ListMenuTemplate gScrollableMultichoice_ListMenuTemplate = {0};
+EWRAM_DATA u16 gScrollableMultichoice_ScrollOffset = 0;
+
+static EWRAM_DATA u8 sElevatorCurrentFloorWindowId = 0;
+static EWRAM_DATA u16 sElevatorScroll = 0;
+static EWRAM_DATA u16 sElevatorCursorPos = 0;
+static EWRAM_DATA u8 sBrailleTextCursorSpriteID = 0;
+
+void OpenEmeraldChampionsBattleItemMart(void)
+{
+    CreateFreePokemartMenu(sEmeraldChampionsFreeBattleItems);
+    ScriptContext_Stop();
 }
 
-void OpenUnlockedBattleItemMart(void)
+void OpenEmeraldChampionsMegaStoneArchive(void)
 {
-    BuildUnlockedBattleItemList(sUnlockedBattleItemMart, ARRAY_COUNT(sUnlockedBattleItemMart));
-    CreateFreePokemartMenu(sUnlockedBattleItemMart);
-    ScriptContext1_Stop();
+    CreateFreePokemartMenu(sEmeraldChampionsMegaStones);
+    ScriptContext_Stop();
+}
+
+void ApplySelectedMonEmeraldChampionsBattleSet(void)
+{
+    gSpecialVar_Result = EC_BATTLE_SET_FAILED;
+    if (gSpecialVar_0x8004 < gPartiesCount[B_TRAINER_PLAYER])
+        gSpecialVar_Result = ApplyEmeraldChampionsBattleSetChoice(
+            &gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004],
+            gSpecialVar_0x8005
+        );
+}
+
+void GetSelectedMonEmeraldChampionsBattleSetCount(void)
+{
+    if (gSpecialVar_0x800A >= gPartiesCount[B_TRAINER_PLAYER])
+        gSpecialVar_Result = 0;
+    else
+        gSpecialVar_Result = GetEmeraldChampionsBattleSetCount(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x800A]);
+}
+
+void BufferSelectedMonEmeraldChampionsBattleSetName(void)
+{
+    gSpecialVar_Result = FALSE;
+    if (gSpecialVar_0x8004 >= gPartiesCount[B_TRAINER_PLAYER])
+    {
+        StringCopy(gStringVar2, gText_Exit);
+        return;
+    }
+
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004];
+    StringCopy(gStringVar2, GetEmeraldChampionsBattleSetName(mon, gSpecialVar_0x8005));
+    CopyItemName(GetEmeraldChampionsBattleSetItem(mon, gSpecialVar_0x8005), gStringVar3);
+    gSpecialVar_Result = GetEmeraldChampionsBattleSetRequiredItem(mon, gSpecialVar_0x8005) != ITEM_NONE;
 }
 
 void TryLoseFansFromPlayTime(void);
@@ -139,56 +287,87 @@ void SetPlayerGotFirstFans(void);
 u16 GetNumFansOfPlayerInTrainerFanClub(void);
 
 static void RecordCyclingRoadResults(u32, u8);
-static void LoadLinkPartnerObjectEventSpritePalette(u16 graphicsId, u8 localEventId, u8 paletteNum);
-static void Task_PetalburgGymSlideOpenRoomDoors(u8 taskId);
-static void PetalburgGymSetDoorMetatiles(u8 roomNumber, u16 metatileId);
+static void LoadLinkPartnerObjectEventSpritePalette(u16, u8, u8);
+static void Task_PetalburgGymSlideOpenRoomDoors(u8);
+static void PetalburgGymSetDoorMetatiles(u8, u16);
 static void Task_PCTurnOnEffect(u8);
-static void PCTurnOnEffect_0(struct Task *);
-static void PCTurnOnEffect_1(s16, s8, s8);
+static void PCTurnOnEffect(struct Task *);
+static void PCTurnOnEffect_SetMetatile(s16, s8, s8);
 static void PCTurnOffEffect(void);
 static void Task_LotteryCornerComputerEffect(u8);
 static void LotteryCornerComputerEffect(struct Task *);
-static void Task_ShakeCamera(u8 taskId);
-static void StopCameraShake(u8 taskId);
-static void Task_MoveElevator(u8 taskId);
-static void MoveElevatorWindowLights(u16 floorDelta, bool8 descending);
-static void Task_MoveElevatorWindowLights(u8 taskId);
-static void Task_ShowScrollableMultichoice(u8 taskId);
-static void FillFrontierExchangeCornerWindowAndItemIcon(u16 menu, u16 selection);
-static void ShowBattleFrontierTutorWindow(u8 menu, u16 selection);
+static void Task_ShakeCamera(u8);
+static void StopCameraShake(u8);
+static void Task_MoveElevator(u8);
+static void MoveElevatorWindowLights(u16, bool8);
+static void Task_MoveElevatorWindowLights(u8);
+static void Task_ShowScrollableMultichoice(u8);
+static void FillFrontierExchangeCornerWindowAndItemIcon(enum ScrollMulti, u16);
+static void ShowBattleFrontierTutorWindow(enum ScrollMulti, u16);
 static void InitScrollableMultichoice(void);
-static void ScrollableMultichoice_ProcessInput(u8 taskId);
-static void ScrollableMultichoice_UpdateScrollArrows(u8 taskId);
-static void ScrollableMultichoice_MoveCursor(s32 itemIndex, bool8 onInit, struct ListMenu *list);
-static void HideFrontierExchangeCornerItemIcon(u16 menu, u16 unused);
-static void ShowBattleFrontierTutorMoveDescription(u8 menu, u16 selection);
-static void CloseScrollableMultichoice(u8 taskId);
-static void ScrollableMultichoice_RemoveScrollArrows(u8 taskId);
-static void sub_813A600(u8 taskId);
-static void sub_813A664(u8 taskId);
-static void ShowFrontierExchangeCornerItemIcon(u16 item);
-static void Task_DeoxysRockInteraction(u8 taskId);
-static void ChangeDeoxysRockLevel(u8 a0);
-static void WaitForDeoxysRockMovement(u8 taskId);
-static void Task_LinkRetireStatusWithBattleTowerPartner(u8 taskId);
-static void Task_LoopWingFlapSE(u8 taskId);
-static void Task_CloseBattlePikeCurtain(u8 taskId);
+static void ScrollableMultichoice_ProcessInput(u8);
+static void ScrollableMultichoice_UpdateScrollArrows(u8);
+static void ScrollableMultichoice_MoveCursor(s32, bool8, struct ListMenu *);
+static void HideFrontierExchangeCornerItemIcon(enum ScrollMulti, u16);
+static void ShowBattleFrontierTutorMoveDescription(enum ScrollMulti, u16);
+static void CloseScrollableMultichoice(u8);
+static void ScrollableMultichoice_RemoveScrollArrows(u8);
+static void Task_ScrollableMultichoice_WaitReturnToList(u8);
+static void Task_ScrollableMultichoice_ReturnToList(u8);
+static void ShowFrontierExchangeCornerItemIcon(enum Item);
+static void Task_DeoxysRockInteraction(u8);
+static void ChangeDeoxysRockLevel(u8);
+static void WaitForDeoxysRockMovement(u8);
+static void Task_LinkRetireStatusWithBattleTowerPartner(u8);
+static void Task_LoopWingFlapSE(u8);
+static void Task_CloseBattlePikeCurtain(u8);
 static u8 DidPlayerGetFirstFans(void);
 static void SetInitialFansOfPlayer(void);
 static u16 PlayerGainRandomTrainerFan(void);
-static void BufferFanClubTrainerName_(struct LinkBattleRecords *linkRecords, u8 a, u8 b);
+static void CB2_ReturnToFieldWhileLearningMove(void);
+static void Task_ReturnToFieldWhileLearningMove(u8);
+#if FREE_LINK_BATTLE_RECORDS == FALSE
+static void BufferFanClubTrainerName_(struct LinkBattleRecords *, u8, u8);
+#else
+static void BufferFanClubTrainerName_(u8 whichLinkTrainer, u8 whichNPCTrainer);
+#endif //FREE_LINK_BATTLE_RECORDS
+static void Task_ElevatorShake(u8 taskId);
+static void AnimateElevatorWindowView(u16 nfloors, bool8 direction);
+static void Task_AnimateElevatorWindowView(u8 taskId);
+static void Task_RunPokemonLeagueLightingEffect(u8 taskId);
+static void Task_CancelPokemonLeagueLightingEffect(u8 taskId);
+static enum Species SampleResortGorgeousMon(void);
+static u16 SampleResortGorgeousReward(void);
+static void Task_ShakeScreen(u8 taskId);
+static void Task_EndScreenShake(u8 taskId);
+
+static const u8 sText_BigGuy[] = _("Big guy");
+static const u8 sText_BigGirl[] = _("Big girl");
+static const u8 sText_Son[] = _("son");
+static const u8 sText_Daughter[] = _("daughter");
+static const u8 sText_99TimesPlus[] = _("99 times +");
+static const u8 sText_1MinutePlus[] = _("1 minute +");
+static const u8 sText_SpaceSeconds[] = _(" seconds");
+static const u8 sText_SpaceTimes[] = _(" time(s)");
+
+static const u8 sText_Wallace[] = _("WALLACE");
+static const u8 sText_Steven[] = _("STEVEN");
+static const u8 sText_Brawly[] = _("BRAWLY");
+static const u8 sText_Winona[] = _("WINONA");
+static const u8 sText_Phoebe[] = _("PHOEBE");
+static const u8 sText_Glacia[] = _("GLACIA");
 
 void Special_ShowDiploma(void)
 {
     SetMainCallback2(CB2_ShowDiploma);
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
 }
 
 void Special_ViewWallClock(void)
 {
     gMain.savedCallback = CB2_ReturnToField;
     SetMainCallback2(CB2_ViewWallClock);
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
 }
 
 void ResetCyclingRoadChallengeData(void)
@@ -221,80 +400,61 @@ static void DetermineCyclingRoadResults(u32 numFrames, u8 numBikeCollisions)
     if (numBikeCollisions < 100)
     {
         ConvertIntToDecimalStringN(gStringVar1, numBikeCollisions, STR_CONV_MODE_LEFT_ALIGN, 2);
-        StringAppend(gStringVar1, gText_SpaceTimes);
+        StringAppend(gStringVar1, sText_SpaceTimes);
     }
     else
     {
-        StringCopy(gStringVar1, gText_99TimesPlus);
+        StringCopy(gStringVar1, sText_99TimesPlus);
     }
 
     if (numFrames < 3600)
     {
         ConvertIntToDecimalStringN(gStringVar2, numFrames / 60, STR_CONV_MODE_RIGHT_ALIGN, 2);
-        gStringVar2[2] = CHAR_PERIOD;
+        gStringVar2[2] = CHAR_DEC_SEPARATOR;
         ConvertIntToDecimalStringN(&gStringVar2[3], ((numFrames % 60) * 100) / 60, STR_CONV_MODE_LEADING_ZEROS, 2);
-        StringAppend(gStringVar2, gText_SpaceSeconds);
+        StringAppend(gStringVar2, sText_SpaceSeconds);
     }
     else
     {
-        StringCopy(gStringVar2, gText_1MinutePlus);
+        StringCopy(gStringVar2, sText_1MinutePlus);
     }
 
     result = 0;
     if (numBikeCollisions == 0)
-    {
         result = 5;
-    }
     else if (numBikeCollisions < 4)
-    {
         result = 4;
-    }
     else if (numBikeCollisions < 10)
-    {
         result = 3;
-    }
     else if (numBikeCollisions < 20)
-    {
         result = 2;
-    }
     else if (numBikeCollisions < 100)
-    {
         result = 1;
-    }
 
     if (numFrames / 60 <= 10)
-    {
         result += 5;
-    }
     else if (numFrames / 60 <= 15)
-    {
         result += 4;
-    }
     else if (numFrames / 60 <= 20)
-    {
         result += 3;
-    }
     else if (numFrames / 60 <= 40)
-    {
         result += 2;
-    }
     else if (numFrames / 60 < 60)
-    {
         result += 1;
-    }
-
 
     gSpecialVar_Result = result;
 }
 
-void FinishCyclingRoadChallenge(void) {
+void FinishCyclingRoadChallenge(void)
+{
     const u32 numFrames = gMain.vblankCounter1 - sBikeCyclingTimer;
 
     DetermineCyclingRoadResults(numFrames, gBikeCollisions);
     RecordCyclingRoadResults(numFrames, gBikeCollisions);
 }
 
-static void RecordCyclingRoadResults(u32 numFrames, u8 numBikeCollisions) {
+static void RecordCyclingRoadResults(u32 numFrames, u8 numBikeCollisions)
+{
     u16 low = VarGet(VAR_CYCLING_ROAD_RECORD_TIME_L);
     u16 high = VarGet(VAR_CYCLING_ROAD_RECORD_TIME_H);
     u32 framesRecord = low + (high << 16);
@@ -307,25 +467,23 @@ static void RecordCyclingRoadResults(u32 numFrames, u8 numBikeCollisions) {
     }
 }
 
-u16 GetRecordedCyclingRoadResults(void) {
+u16 GetRecordedCyclingRoadResults(void)
+{
     u16 low = VarGet(VAR_CYCLING_ROAD_RECORD_TIME_L);
     u16 high = VarGet(VAR_CYCLING_ROAD_RECORD_TIME_H);
     u32 framesRecord = low + (high << 16);
 
     if (framesRecord == 0)
-    {
         return FALSE;
-    }
 
     DetermineCyclingRoadResults(framesRecord, VarGet(VAR_CYCLING_ROAD_RECORD_COLLISIONS));
     return TRUE;
 }
 
-void UpdateCyclingRoadState(void) {
-    if (gLastUsedWarp.mapNum == MAP_NUM(ROUTE110_SEASIDE_CYCLING_ROAD_SOUTH_ENTRANCE) && gLastUsedWarp.mapGroup == MAP_GROUP(ROUTE110_SEASIDE_CYCLING_ROAD_SOUTH_ENTRANCE))
-    {
+void UpdateCyclingRoadState(void)
+{
+    if (gLastUsedWarp.mapNum == MAP_NUM(MAP_ROUTE110_SEASIDE_CYCLING_ROAD_NORTH_ENTRANCE) && gLastUsedWarp.mapGroup == MAP_GROUP(MAP_ROUTE110_SEASIDE_CYCLING_ROAD_NORTH_ENTRANCE))
         return;
-    }
 
     if (VarGet(VAR_CYCLING_CHALLENGE_STATE) == 2 || VarGet(VAR_CYCLING_CHALLENGE_STATE) == 3)
     {
@@ -349,64 +507,65 @@ void ResetSSTidalFlag(void)
 bool32 CountSSTidalStep(u16 delta)
 {
     if (!FlagGet(FLAG_SYS_CRUISE_MODE) || (*GetVarPointer(VAR_CRUISE_STEP_COUNT) += delta) < SS_TIDAL_MAX_STEPS)
-    {
         return FALSE;
-    }
+
     return TRUE;
 }
 
-u8 GetSSTidalLocation(s8 *mapGroup, s8 *mapNum, s16 *x, s16 *y)
+enum SSTidalLocation GetSSTidalLocation(s8 *mapGroup, s8 *mapNum, s16 *x, s16 *y)
 {
     u16 *varCruiseStepCount = GetVarPointer(VAR_CRUISE_STEP_COUNT);
-    switch (*GetVarPointer(VAR_SS_TIDAL_STATE))
+
+    switch ((enum SSTidalState)(*GetVarPointer(VAR_SS_TIDAL_STATE)))
     {
-        case SS_TIDAL_BOARD_SLATEPORT:
-        case SS_TIDAL_LAND_SLATEPORT:
-            return SS_TIDAL_LOCATION_SLATEPORT;
-        case SS_TIDAL_HALFWAY_LILYCOVE:
-        case SS_TIDAL_EXIT_CURRENTS_RIGHT:
-            return SS_TIDAL_LOCATION_ROUTE131;
-        case SS_TIDAL_LAND_LILYCOVE:
-        case SS_TIDAL_BOARD_LILYCOVE:
-            return SS_TIDAL_LOCATION_LILYCOVE;
-        case SS_TIDAL_DEPART_LILYCOVE:
-        case SS_TIDAL_EXIT_CURRENTS_LEFT:
-            return SS_TIDAL_LOCATION_ROUTE124;
-        case SS_TIDAL_DEPART_SLATEPORT:
-            if (*varCruiseStepCount < 60)
-            {
-                *mapNum = MAP_NUM(ROUTE134);
-                *x = *varCruiseStepCount + 19;
-            }
-            else if (*varCruiseStepCount < 140)
-            {
-                *mapNum = MAP_NUM(ROUTE133);
-                *x = *varCruiseStepCount - 60;
-            }
-            else
-            {
-                *mapNum = MAP_NUM(ROUTE132);
-                *x = *varCruiseStepCount - 140;
-            }
-            break;
-        case SS_TIDAL_HALFWAY_SLATEPORT:
-            if (*varCruiseStepCount < 66)
-            {
-                *mapNum = MAP_NUM(ROUTE132);
-                *x = 65 - *varCruiseStepCount;
-            }
-            else if (*varCruiseStepCount < 146) {
-                *mapNum = MAP_NUM(ROUTE133);
-                *x = 145 - *varCruiseStepCount;
-            }
-            else
-            {
-                *mapNum = MAP_NUM(ROUTE134);
-                *x = 224 - *varCruiseStepCount;
-            }
-            break;
+    case SS_TIDAL_BOARD_SLATEPORT:
+    case SS_TIDAL_LAND_SLATEPORT:
+        return SS_TIDAL_LOCATION_SLATEPORT;
+    case SS_TIDAL_HALFWAY_LILYCOVE:
+    case SS_TIDAL_EXIT_CURRENTS_RIGHT:
+        return SS_TIDAL_LOCATION_ROUTE131;
+    case SS_TIDAL_LAND_LILYCOVE:
+    case SS_TIDAL_BOARD_LILYCOVE:
+        return SS_TIDAL_LOCATION_LILYCOVE;
+    case SS_TIDAL_DEPART_LILYCOVE:
+    case SS_TIDAL_EXIT_CURRENTS_LEFT:
+        return SS_TIDAL_LOCATION_ROUTE124;
+    case SS_TIDAL_DEPART_SLATEPORT:
+        if (*varCruiseStepCount < 60)
+        {
+            *mapNum = MAP_NUM(MAP_ROUTE134);
+            *x = *varCruiseStepCount + 19;
+        }
+        else if (*varCruiseStepCount < 140)
+        {
+            *mapNum = MAP_NUM(MAP_ROUTE133);
+            *x = *varCruiseStepCount - 60;
+        }
+        else
+        {
+            *mapNum = MAP_NUM(MAP_ROUTE132);
+            *x = *varCruiseStepCount - 140;
+        }
+        break;
+    case SS_TIDAL_HALFWAY_SLATEPORT:
+        if (*varCruiseStepCount < 66)
+        {
+            *mapNum = MAP_NUM(MAP_ROUTE132);
+            *x = 65 - *varCruiseStepCount;
+        }
+        else if (*varCruiseStepCount < 146)
+        {
+            *mapNum = MAP_NUM(MAP_ROUTE133);
+            *x = 145 - *varCruiseStepCount;
+        }
+        else
+        {
+            *mapNum = MAP_NUM(MAP_ROUTE134);
+            *x = 224 - *varCruiseStepCount;
+        }
+        break;
     }
-    *mapGroup = MAP_GROUP(ROUTE132);
+    *mapGroup = MAP_GROUP(MAP_ROUTE132);
     *y = 20;
     return SS_TIDAL_LOCATION_CURRENTS;
 }
@@ -417,17 +576,15 @@ bool32 ShouldDoWallyCall(void)
     {
         switch (gMapHeader.mapType)
         {
-            case MAP_TYPE_TOWN:
-            case MAP_TYPE_CITY:
-            case MAP_TYPE_ROUTE:
-            case MAP_TYPE_OCEAN_ROUTE:
-                if (++(*GetVarPointer(VAR_WALLY_CALL_STEP_COUNTER)) < 250)
-                {
-                    return FALSE;
-                }
-                break;
-            default:
+        case MAP_TYPE_TOWN:
+        case MAP_TYPE_CITY:
+        case MAP_TYPE_ROUTE:
+        case MAP_TYPE_OCEAN_ROUTE:
+            if (++(*GetVarPointer(VAR_WALLY_CALL_STEP_COUNTER)) < 250)
                 return FALSE;
+            break;
+        default:
+            return FALSE;
         }
     }
     else
@@ -444,17 +601,15 @@ bool32 ShouldDoScottFortreeCall(void)
     {
         switch (gMapHeader.mapType)
         {
-            case MAP_TYPE_TOWN:
-            case MAP_TYPE_CITY:
-            case MAP_TYPE_ROUTE:
-            case MAP_TYPE_OCEAN_ROUTE:
-                if (++(*GetVarPointer(VAR_SCOTT_FORTREE_CALL_STEP_COUNTER)) < 10)
-                {
-                    return FALSE;
-                }
-                break;
-            default:
+        case MAP_TYPE_TOWN:
+        case MAP_TYPE_CITY:
+        case MAP_TYPE_ROUTE:
+        case MAP_TYPE_OCEAN_ROUTE:
+            if (++(*GetVarPointer(VAR_SCOTT_FORTREE_CALL_STEP_COUNTER)) < 10)
                 return FALSE;
+            break;
+        default:
+            return FALSE;
         }
     }
     else
@@ -471,17 +626,15 @@ bool32 ShouldDoScottBattleFrontierCall(void)
     {
         switch (gMapHeader.mapType)
         {
-            case MAP_TYPE_TOWN:
-            case MAP_TYPE_CITY:
-            case MAP_TYPE_ROUTE:
-            case MAP_TYPE_OCEAN_ROUTE:
-                if (++(*GetVarPointer(VAR_SCOTT_BF_CALL_STEP_COUNTER)) < 10)
-                {
-                    return FALSE;
-                }
-                break;
-            default:
+        case MAP_TYPE_TOWN:
+        case MAP_TYPE_CITY:
+        case MAP_TYPE_ROUTE:
+        case MAP_TYPE_OCEAN_ROUTE:
+            if (++(*GetVarPointer(VAR_SCOTT_BF_CALL_STEP_COUNTER)) < 10)
                 return FALSE;
+            break;
+        default:
+            return FALSE;
         }
     }
     else
@@ -498,17 +651,15 @@ bool32 ShouldDoRoxanneCall(void)
     {
         switch (gMapHeader.mapType)
         {
-            case MAP_TYPE_TOWN:
-            case MAP_TYPE_CITY:
-            case MAP_TYPE_ROUTE:
-            case MAP_TYPE_OCEAN_ROUTE:
-                if (++(*GetVarPointer(VAR_ROXANNE_CALL_STEP_COUNTER)) < 250)
-                {
-                    return FALSE;
-                }
-                break;
-            default:
+        case MAP_TYPE_TOWN:
+        case MAP_TYPE_CITY:
+        case MAP_TYPE_ROUTE:
+        case MAP_TYPE_OCEAN_ROUTE:
+            if (++(*GetVarPointer(VAR_ROXANNE_CALL_STEP_COUNTER)) < 250)
                 return FALSE;
+            break;
+        default:
+            return FALSE;
         }
     }
     else
@@ -525,17 +676,15 @@ bool32 ShouldDoRivalRayquazaCall(void)
     {
         switch (gMapHeader.mapType)
         {
-            case MAP_TYPE_TOWN:
-            case MAP_TYPE_CITY:
-            case MAP_TYPE_ROUTE:
-            case MAP_TYPE_OCEAN_ROUTE:
-                if (++(*GetVarPointer(VAR_RIVAL_RAYQUAZA_CALL_STEP_COUNTER)) < 250)
-                {
-                    return FALSE;
-                }
-                break;
-            default:
+        case MAP_TYPE_TOWN:
+        case MAP_TYPE_CITY:
+        case MAP_TYPE_ROUTE:
+        case MAP_TYPE_OCEAN_ROUTE:
+            if (++(*GetVarPointer(VAR_RIVAL_RAYQUAZA_CALL_STEP_COUNTER)) < 250)
                 return FALSE;
+            break;
+        default:
+            return FALSE;
         }
     }
     else
@@ -556,7 +705,7 @@ u8 GetLinkPartnerNames(void)
     {
         if (myLinkPlayerNumber != i)
         {
-            StringCopy(gTVStringVarPtrs[j], gLinkPlayers[i].name);
+            StringCopy(GetStringVar(j), gLinkPlayers[i].name);
             j++;
         }
     }
@@ -569,9 +718,9 @@ void SpawnLinkPartnerObjectEvent(void)
     s16 x = 0;
     s16 y = 0;
     u8 movementTypes[] = {
-        MOVEMENT_TYPE_FACE_UP, 
-        MOVEMENT_TYPE_FACE_LEFT, 
-        MOVEMENT_TYPE_FACE_DOWN, 
+        MOVEMENT_TYPE_FACE_UP,
+        MOVEMENT_TYPE_FACE_LEFT,
+        MOVEMENT_TYPE_FACE_DOWN,
         MOVEMENT_TYPE_FACE_RIGHT
     };
     s8 coordOffsets[][2] = {
@@ -581,66 +730,68 @@ void SpawnLinkPartnerObjectEvent(void)
         {-1,  0}
     };
     u8 myLinkPlayerNumber;
-    u8 playerFacingDirection;
-    u16 linkSpriteId;
+    enum Direction playerFacingDirection;
+    u8 linkSpriteId;
     u8 i;
 
     myLinkPlayerNumber = GetMultiplayerId();
     playerFacingDirection = GetPlayerFacingDirection();
     switch (playerFacingDirection)
     {
-        case DIR_WEST:
-            j = 2;
-            x = gSaveBlock1Ptr->pos.x - 1;
-            y = gSaveBlock1Ptr->pos.y;
-            break;
-        case DIR_NORTH:
-            j = 1;
-            x = gSaveBlock1Ptr->pos.x;
-            y = gSaveBlock1Ptr->pos.y - 1;
-            break;
-        case DIR_EAST:
-            x = gSaveBlock1Ptr->pos.x + 1;
-            y = gSaveBlock1Ptr->pos.y;
-            break;
-        case DIR_SOUTH:
-            j = 3;
-            x = gSaveBlock1Ptr->pos.x;
-            y = gSaveBlock1Ptr->pos.y + 1;
+    case DIR_WEST:
+        j = 2;
+        x = gSaveBlock1Ptr->pos.x - 1;
+        y = gSaveBlock1Ptr->pos.y;
+        break;
+    case DIR_NORTH:
+        j = 1;
+        x = gSaveBlock1Ptr->pos.x;
+        y = gSaveBlock1Ptr->pos.y - 1;
+        break;
+    case DIR_EAST:
+        x = gSaveBlock1Ptr->pos.x + 1;
+        y = gSaveBlock1Ptr->pos.y;
+        break;
+    case DIR_SOUTH:
+        j = 3;
+        x = gSaveBlock1Ptr->pos.x;
+        y = gSaveBlock1Ptr->pos.y + 1;
+    default:
+        break;
     }
+
     for (i = 0; i < gSpecialVar_0x8004; i++)
     {
         if (myLinkPlayerNumber != i)
         {
-            switch ((u8)gLinkPlayers[i].version)
+            enum GameVersion version = (u8)gLinkPlayers[i].version;
+            switch (version)
             {
-                case VERSION_RUBY:
-                case VERSION_SAPPHIRE:
-                    if (gLinkPlayers[i].gender == 0)
-                        linkSpriteId = OBJ_EVENT_GFX_LINK_RS_BRENDAN;
-                    else
-                        linkSpriteId = OBJ_EVENT_GFX_LINK_RS_MAY;
-                    break;
-                case VERSION_EMERALD:
-                    if (gLinkPlayers[i].gender == 0)
-                        linkSpriteId = OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL;
-                    else
-                        linkSpriteId = OBJ_EVENT_GFX_RIVAL_MAY_NORMAL;
-                    break;
-                default:
-                    if (gLinkPlayers[i].gender == 0)
-                        linkSpriteId = OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL;
-                    else
-                        linkSpriteId = OBJ_EVENT_GFX_RIVAL_MAY_NORMAL;
-                    break;
+            case VERSION_RUBY:
+            case VERSION_SAPPHIRE:
+                if (gLinkPlayers[i].gender == 0)
+                    linkSpriteId = OBJ_EVENT_GFX_LINK_RS_BRENDAN;
+                else
+                    linkSpriteId = OBJ_EVENT_GFX_LINK_RS_MAY;
+                break;
+            case VERSION_EMERALD:
+                if (gLinkPlayers[i].gender == 0)
+                    linkSpriteId = OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL;
+                else
+                    linkSpriteId = OBJ_EVENT_GFX_RIVAL_MAY_NORMAL;
+                break;
+            default:
+                if (gLinkPlayers[i].gender == 0)
+                    linkSpriteId = OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL;
+                else
+                    linkSpriteId = OBJ_EVENT_GFX_RIVAL_MAY_NORMAL;
+                break;
             }
-            SpawnSpecialObjectEventParameterized(linkSpriteId, movementTypes[j], 240 - i, coordOffsets[j][0] + x + 7, coordOffsets[j][1] + y + 7, 0);
-            LoadLinkPartnerObjectEventSpritePalette(linkSpriteId, 240 - i, i);
+            SpawnSpecialObjectEventParameterized(linkSpriteId, movementTypes[j], LOCALID_BERRY_BLENDER_PLAYER_END - i, coordOffsets[j][0] + x + MAP_OFFSET, coordOffsets[j][1] + y + MAP_OFFSET, 0);
+            LoadLinkPartnerObjectEventSpritePalette(linkSpriteId, LOCALID_BERRY_BLENDER_PLAYER_END - i, i);
             j++;
             if (j == MAX_LINK_PLAYERS)
-            {
                 j = 0;
-            }
         }
     }
 }
@@ -665,29 +816,28 @@ static void LoadLinkPartnerObjectEventSpritePalette(u16 graphicsId, u8 localEven
             switch (graphicsId)
             {
             case OBJ_EVENT_GFX_LINK_RS_BRENDAN:
-                LoadPalette(gObjectEventPal_RubySapphireBrendan, 0x100 + (adjustedPaletteNum << 4), 0x20);
+                LoadPalette(gObjectEventPal_RubySapphireBrendan, OBJ_PLTT_ID(adjustedPaletteNum), PLTT_SIZE_4BPP);
                 break;
             case OBJ_EVENT_GFX_LINK_RS_MAY:
-                LoadPalette(gObjectEventPal_RubySapphireMay, 0x100 + (adjustedPaletteNum << 4), 0x20);
+                LoadPalette(gObjectEventPal_RubySapphireMay, OBJ_PLTT_ID(adjustedPaletteNum), PLTT_SIZE_4BPP);
                 break;
             case OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL:
-                LoadPalette(gObjectEventPal_Brendan, 0x100 + (adjustedPaletteNum << 4), 0x20);
+                LoadPalette(gObjectEventPal_Brendan, OBJ_PLTT_ID(adjustedPaletteNum), PLTT_SIZE_4BPP);
                 break;
             case OBJ_EVENT_GFX_RIVAL_MAY_NORMAL:
-                LoadPalette(gObjectEventPal_May, 0x100 + (adjustedPaletteNum << 4), 0x20);
+                LoadPalette(gObjectEventPal_May, OBJ_PLTT_ID(adjustedPaletteNum), PLTT_SIZE_4BPP);
                 break;
             }
         }
     }
 }
 
-// NOTE: Coordinates are +7, +7 from actual in-map coordinates
 static const struct UCoords8 sMauvilleGymSwitchCoords[] =
 {
-    { 7, 22},
-    {11, 19},
-    {10, 16},
-    {15, 16}
+    { 0 + MAP_OFFSET, 15 + MAP_OFFSET},
+    { 4 + MAP_OFFSET, 12 + MAP_OFFSET},
+    { 3 + MAP_OFFSET,  9 + MAP_OFFSET},
+    { 8 + MAP_OFFSET,  9 + MAP_OFFSET}
 };
 
 // Presses the stepped-on switch and raises the rest
@@ -707,91 +857,91 @@ void MauvilleGymPressSwitch(void)
 void MauvilleGymSetDefaultBarriers(void)
 {
     int x, y;
-    // All switches/barriers are within these coord ranges -7
-    for (y = 12; y < 24; y++)
+    // All switches/barriers are within these coord ranges
+    for (y = 5 + MAP_OFFSET; y < 17 + MAP_OFFSET; y++)
     {
-        for (x = 7; x < 16; x++)
+        for (x = 0 + MAP_OFFSET; x < 9 + MAP_OFFSET; x++)
         {
             switch (MapGridGetMetatileIdAt(x, y))
             {
-                case METATILE_MauvilleGym_GreenBeamH1_On:
-                    MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_GreenBeamH1_Off);
-                    break;
-                case METATILE_MauvilleGym_GreenBeamH2_On:
-                    MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_GreenBeamH2_Off);
-                    break;
-                case METATILE_MauvilleGym_GreenBeamH3_On:
-                    MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_GreenBeamH3_Off);
-                    break;
-                case METATILE_MauvilleGym_GreenBeamH4_On:
-                    MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_GreenBeamH4_Off);
-                    break;
-                case METATILE_MauvilleGym_GreenBeamH1_Off:
-                    MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_GreenBeamH1_On);
-                    break;
-                case METATILE_MauvilleGym_GreenBeamH2_Off:
-                    MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_GreenBeamH2_On);
-                    break;
-                case METATILE_MauvilleGym_GreenBeamH3_Off:
-                    MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_GreenBeamH3_On | METATILE_COLLISION_MASK);
-                    break;
-                case METATILE_MauvilleGym_GreenBeamH4_Off:
-                    MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_GreenBeamH4_On | METATILE_COLLISION_MASK);
-                    break;
-                case METATILE_MauvilleGym_RedBeamH1_On:
-                    MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_RedBeamH1_Off);
-                    break;
-                case METATILE_MauvilleGym_RedBeamH2_On:
-                    MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_RedBeamH2_Off);
-                    break;
-                case METATILE_MauvilleGym_RedBeamH3_On:
-                    MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_RedBeamH3_Off);
-                    break;
-                case METATILE_MauvilleGym_RedBeamH4_On:
-                    MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_RedBeamH4_Off);
-                    break;
-                case METATILE_MauvilleGym_RedBeamH1_Off:
-                    MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_RedBeamH1_On);
-                    break;
-                case METATILE_MauvilleGym_RedBeamH2_Off:
-                    MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_RedBeamH2_On);
-                    break;
-                case METATILE_MauvilleGym_RedBeamH3_Off:
-                    MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_RedBeamH3_On | METATILE_COLLISION_MASK);
-                    break;
-                case METATILE_MauvilleGym_RedBeamH4_Off:
-                    MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_RedBeamH4_On | METATILE_COLLISION_MASK);
-                    break;
-                case METATILE_MauvilleGym_GreenBeamV1_On:
-                    MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_PoleBottom_On | METATILE_COLLISION_MASK);
-                    break;
-                case METATILE_MauvilleGym_GreenBeamV2_On:
-                    MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_FloorTile);
-                    break;
-                case METATILE_MauvilleGym_RedBeamV1_On:
-                    MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_PoleBottom_Off | METATILE_COLLISION_MASK);
-                    break;
-                case METATILE_MauvilleGym_RedBeamV2_On:
-                    MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_FloorTile);
-                    break;
-                case METATILE_MauvilleGym_PoleBottom_On:
-                    MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_GreenBeamV1_On | METATILE_COLLISION_MASK);
-                    break;
-                case METATILE_MauvilleGym_FloorTile:
-                    if (MapGridGetMetatileIdAt(x, y - 1) == METATILE_MauvilleGym_GreenBeamV1_On)
-                        MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_GreenBeamV2_On | METATILE_COLLISION_MASK);
-                    else
-                        MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_RedBeamV2_On | METATILE_COLLISION_MASK);
-                    break;
-                case METATILE_MauvilleGym_PoleBottom_Off:
-                    MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_RedBeamV1_On | METATILE_COLLISION_MASK);
-                    break;
-                case METATILE_MauvilleGym_PoleTop_Off:
-                    MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_PoleTop_On | METATILE_COLLISION_MASK);
-                    break;
-                case METATILE_MauvilleGym_PoleTop_On:
-                    MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_PoleTop_Off);
-                    break;
+            case METATILE_MauvilleGym_GreenBeamH1_On:
+                MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_GreenBeamH1_Off);
+                break;
+            case METATILE_MauvilleGym_GreenBeamH2_On:
+                MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_GreenBeamH2_Off);
+                break;
+            case METATILE_MauvilleGym_GreenBeamH3_On:
+                MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_GreenBeamH3_Off);
+                break;
+            case METATILE_MauvilleGym_GreenBeamH4_On:
+                MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_GreenBeamH4_Off);
+                break;
+            case METATILE_MauvilleGym_GreenBeamH1_Off:
+                MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_GreenBeamH1_On);
+                break;
+            case METATILE_MauvilleGym_GreenBeamH2_Off:
+                MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_GreenBeamH2_On);
+                break;
+            case METATILE_MauvilleGym_GreenBeamH3_Off:
+                MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_GreenBeamH3_On | MAPGRID_IMPASSABLE);
+                break;
+            case METATILE_MauvilleGym_GreenBeamH4_Off:
+                MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_GreenBeamH4_On | MAPGRID_IMPASSABLE);
+                break;
+            case METATILE_MauvilleGym_RedBeamH1_On:
+                MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_RedBeamH1_Off);
+                break;
+            case METATILE_MauvilleGym_RedBeamH2_On:
+                MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_RedBeamH2_Off);
+                break;
+            case METATILE_MauvilleGym_RedBeamH3_On:
+                MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_RedBeamH3_Off);
+                break;
+            case METATILE_MauvilleGym_RedBeamH4_On:
+                MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_RedBeamH4_Off);
+                break;
+            case METATILE_MauvilleGym_RedBeamH1_Off:
+                MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_RedBeamH1_On);
+                break;
+            case METATILE_MauvilleGym_RedBeamH2_Off:
+                MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_RedBeamH2_On);
+                break;
+            case METATILE_MauvilleGym_RedBeamH3_Off:
+                MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_RedBeamH3_On | MAPGRID_IMPASSABLE);
+                break;
+            case METATILE_MauvilleGym_RedBeamH4_Off:
+                MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_RedBeamH4_On | MAPGRID_IMPASSABLE);
+                break;
+            case METATILE_MauvilleGym_GreenBeamV1_On:
+                MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_PoleBottom_On | MAPGRID_IMPASSABLE);
+                break;
+            case METATILE_MauvilleGym_GreenBeamV2_On:
+                MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_FloorTile);
+                break;
+            case METATILE_MauvilleGym_RedBeamV1_On:
+                MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_PoleBottom_Off | MAPGRID_IMPASSABLE);
+                break;
+            case METATILE_MauvilleGym_RedBeamV2_On:
+                MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_FloorTile);
+                break;
+            case METATILE_MauvilleGym_PoleBottom_On:
+                MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_GreenBeamV1_On | MAPGRID_IMPASSABLE);
+                break;
+            case METATILE_MauvilleGym_FloorTile:
+                if (MapGridGetMetatileIdAt(x, y - 1) == METATILE_MauvilleGym_GreenBeamV1_On)
+                    MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_GreenBeamV2_On | MAPGRID_IMPASSABLE);
+                else
+                    MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_RedBeamV2_On | MAPGRID_IMPASSABLE);
+                break;
+            case METATILE_MauvilleGym_PoleBottom_Off:
+                MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_RedBeamV1_On | MAPGRID_IMPASSABLE);
+                break;
+            case METATILE_MauvilleGym_PoleTop_Off:
+                MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_PoleTop_On | MAPGRID_IMPASSABLE);
+                break;
+            case METATILE_MauvilleGym_PoleTop_On:
+                MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_PoleTop_Off);
+                break;
             }
         }
     }
@@ -807,49 +957,49 @@ void MauvilleGymDeactivatePuzzle(void)
         MapGridSetMetatileIdAt(switchCoords->x, switchCoords->y, METATILE_MauvilleGym_PressedSwitch);
         switchCoords++;
     }
-    for (y = 12; y < 24; y++)
+    for (y = 5 + MAP_OFFSET; y < 17 + MAP_OFFSET; y++)
     {
-        for (x = 7; x < 16; x++)
+        for (x = 0 + MAP_OFFSET; x < 9 + MAP_OFFSET; x++)
         {
             switch (MapGridGetMetatileIdAt(x, y))
             {
-                case METATILE_MauvilleGym_GreenBeamH1_On:
-                    MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_GreenBeamH1_Off);
-                    break;
-                case METATILE_MauvilleGym_GreenBeamH2_On:
-                    MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_GreenBeamH2_Off);
-                    break;
-                case METATILE_MauvilleGym_GreenBeamH3_On:
-                    MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_GreenBeamH3_Off);
-                    break;
-                case METATILE_MauvilleGym_GreenBeamH4_On:
-                    MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_GreenBeamH4_Off);
-                    break;
-                case METATILE_MauvilleGym_RedBeamH1_On:
-                    MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_RedBeamH1_Off);
-                    break;
-                case METATILE_MauvilleGym_RedBeamH2_On:
-                    MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_RedBeamH2_Off);
-                    break;
-                case METATILE_MauvilleGym_RedBeamH3_On:
-                    MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_RedBeamH3_Off);
-                    break;
-                case METATILE_MauvilleGym_RedBeamH4_On:
-                    MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_RedBeamH4_Off);
-                    break;
-                case METATILE_MauvilleGym_GreenBeamV1_On:
-                    MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_PoleBottom_On | METATILE_COLLISION_MASK);
-                    break;
-                case METATILE_MauvilleGym_RedBeamV1_On:
-                    MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_PoleBottom_Off | METATILE_COLLISION_MASK);
-                    break;
-                case METATILE_MauvilleGym_GreenBeamV2_On:
-                case METATILE_MauvilleGym_RedBeamV2_On:
-                    MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_FloorTile);
-                    break;
-                case METATILE_MauvilleGym_PoleTop_On:
-                    MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_PoleTop_Off);
-                    break;
+            case METATILE_MauvilleGym_GreenBeamH1_On:
+                MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_GreenBeamH1_Off);
+                break;
+            case METATILE_MauvilleGym_GreenBeamH2_On:
+                MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_GreenBeamH2_Off);
+                break;
+            case METATILE_MauvilleGym_GreenBeamH3_On:
+                MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_GreenBeamH3_Off);
+                break;
+            case METATILE_MauvilleGym_GreenBeamH4_On:
+                MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_GreenBeamH4_Off);
+                break;
+            case METATILE_MauvilleGym_RedBeamH1_On:
+                MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_RedBeamH1_Off);
+                break;
+            case METATILE_MauvilleGym_RedBeamH2_On:
+                MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_RedBeamH2_Off);
+                break;
+            case METATILE_MauvilleGym_RedBeamH3_On:
+                MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_RedBeamH3_Off);
+                break;
+            case METATILE_MauvilleGym_RedBeamH4_On:
+                MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_RedBeamH4_Off);
+                break;
+            case METATILE_MauvilleGym_GreenBeamV1_On:
+                MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_PoleBottom_On | MAPGRID_IMPASSABLE);
+                break;
+            case METATILE_MauvilleGym_RedBeamV1_On:
+                MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_PoleBottom_Off | MAPGRID_IMPASSABLE);
+                break;
+            case METATILE_MauvilleGym_GreenBeamV2_On:
+            case METATILE_MauvilleGym_RedBeamV2_On:
+                MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_FloorTile);
+                break;
+            case METATILE_MauvilleGym_PoleTop_On:
+                MapGridSetMetatileIdAt(x, y, METATILE_MauvilleGym_PoleTop_Off);
+                break;
             }
         }
     }
@@ -882,7 +1032,7 @@ static void Task_PetalburgGymSlideOpenRoomDoors(u8 taskId)
         if ((++sSlidingDoorFrame) == ARRAY_COUNT(sPetalburgGymSlidingDoorMetatiles))
         {
             DestroyTask(taskId);
-            EnableBothScriptContexts();
+            ScriptContext_Enable();
         }
     }
     else
@@ -899,59 +1049,59 @@ static void PetalburgGymSetDoorMetatiles(u8 roomNumber, u16 metatileId)
     u8 nDoors = 0;
     switch (roomNumber)
     {
-        case 1:
-            nDoors = 2;
-            doorCoordsX[0] = 1;
-            doorCoordsX[1] = 7;
-            doorCoordsY[0] = 104;
-            doorCoordsY[1] = 104;
-            break;
-        case 2:
-            nDoors = 2;
-            doorCoordsX[0] = 1;
-            doorCoordsX[1] = 7;
-            doorCoordsY[0] = 78;
-            doorCoordsY[1] = 78;
-            break;
-        case 3:
-            nDoors = 2;
-            doorCoordsX[0] = 1;
-            doorCoordsX[1] = 7;
-            doorCoordsY[0] = 91;
-            doorCoordsY[1] = 91;
-            break;
-        case 4:
-            nDoors = 1;
-            doorCoordsX[0] = 7;
-            doorCoordsY[0] = 39;
-            break;
-        case 5:
-            nDoors = 2;
-            doorCoordsX[0] = 1;
-            doorCoordsX[1] = 7;
-            doorCoordsY[0] = 52;
-            doorCoordsY[1] = 52;
-            break;
-        case 6:
-            nDoors = 1;
-            doorCoordsX[0] = 1;
-            doorCoordsY[0] = 65;
-            break;
-        case 7:
-            nDoors = 1;
-            doorCoordsX[0] = 7;
-            doorCoordsY[0] = 13;
-            break;
-        case 8:
-            nDoors = 1;
-            doorCoordsX[0] = 1;
-            doorCoordsY[0] = 26;
-            break;
+    case 1:
+        nDoors = 2;
+        doorCoordsX[0] = 1;
+        doorCoordsX[1] = 7;
+        doorCoordsY[0] = 104;
+        doorCoordsY[1] = 104;
+        break;
+    case 2:
+        nDoors = 2;
+        doorCoordsX[0] = 1;
+        doorCoordsX[1] = 7;
+        doorCoordsY[0] = 78;
+        doorCoordsY[1] = 78;
+        break;
+    case 3:
+        nDoors = 2;
+        doorCoordsX[0] = 1;
+        doorCoordsX[1] = 7;
+        doorCoordsY[0] = 91;
+        doorCoordsY[1] = 91;
+        break;
+    case 4:
+        nDoors = 1;
+        doorCoordsX[0] = 7;
+        doorCoordsY[0] = 39;
+        break;
+    case 5:
+        nDoors = 2;
+        doorCoordsX[0] = 1;
+        doorCoordsX[1] = 7;
+        doorCoordsY[0] = 52;
+        doorCoordsY[1] = 52;
+        break;
+    case 6:
+        nDoors = 1;
+        doorCoordsX[0] = 1;
+        doorCoordsY[0] = 65;
+        break;
+    case 7:
+        nDoors = 1;
+        doorCoordsX[0] = 7;
+        doorCoordsY[0] = 13;
+        break;
+    case 8:
+        nDoors = 1;
+        doorCoordsX[0] = 1;
+        doorCoordsY[0] = 26;
+        break;
     }
     for (i = 0; i < nDoors; i++)
     {
-        MapGridSetMetatileIdAt(doorCoordsX[i] + 7, doorCoordsY[i] + 7, metatileId | METATILE_COLLISION_MASK);
-        MapGridSetMetatileIdAt(doorCoordsX[i] + 7, doorCoordsY[i] + 8, (metatileId + 8) | METATILE_COLLISION_MASK);
+        MapGridSetMetatileIdAt(doorCoordsX[i] + MAP_OFFSET, doorCoordsY[i] + MAP_OFFSET, metatileId | MAPGRID_IMPASSABLE);
+        MapGridSetMetatileIdAt(doorCoordsX[i] + MAP_OFFSET, doorCoordsY[i] + MAP_OFFSET + 1, (metatileId + METATILE_ROW_WIDTH) | MAPGRID_IMPASSABLE);
     }
     DrawWholeMapView();
 }
@@ -980,25 +1130,17 @@ u8 GetPlayerTrainerIdOnesDigit(void)
 void GetPlayerBigGuyGirlString(void)
 {
     if (gSaveBlock2Ptr->playerGender == MALE)
-    {
-        StringCopy(gStringVar1, gText_BigGuy);
-    }
+        StringCopy(gStringVar1, sText_BigGuy);
     else
-    {
-        StringCopy(gStringVar1, gText_BigGirl);
-    }
+        StringCopy(gStringVar1, sText_BigGirl);
 }
 
 void GetRivalSonDaughterString(void)
 {
     if (gSaveBlock2Ptr->playerGender == MALE)
-    {
-        StringCopy(gStringVar1, gText_Daughter);
-    }
+        StringCopy(gStringVar1, sText_Daughter);
     else
-    {
-        StringCopy(gStringVar1, gText_Son);
-    }
+        StringCopy(gStringVar1, sText_Son);
 }
 
 u8 GetBattleOutcome(void)
@@ -1009,13 +1151,9 @@ u8 GetBattleOutcome(void)
 void CableCarWarp(void)
 {
     if (gSpecialVar_0x8004 != 0)
-    {
-        SetWarpDestination(MAP_GROUP(ROUTE112_CABLE_CAR_STATION), MAP_NUM(ROUTE112_CABLE_CAR_STATION), -1, 6, 4);
-    }
+        SetWarpDestination(MAP_GROUP(MAP_ROUTE112_CABLE_CAR_STATION), MAP_NUM(MAP_ROUTE112_CABLE_CAR_STATION), WARP_ID_NONE, 6, 4);
     else
-    {
-        SetWarpDestination(MAP_GROUP(MT_CHIMNEY_CABLE_CAR_STATION), MAP_NUM(MT_CHIMNEY_CABLE_CAR_STATION), -1, 6, 4);
-    }
+        SetWarpDestination(MAP_GROUP(MAP_MT_CHIMNEY_CABLE_CAR_STATION), MAP_NUM(MAP_MT_CHIMNEY_CABLE_CAR_STATION), WARP_ID_NONE, 6, 4);
 }
 
 void SetHiddenItemFlag(void)
@@ -1027,40 +1165,14 @@ u16 GetWeekCount(void)
 {
     u16 weekCount = gLocalTime.days / 7;
     if (weekCount > 9999)
-    {
         weekCount = 9999;
-    }
+
     return weekCount;
 }
 
 u8 GetLeadMonFriendshipScore(void)
 {
-    struct Pokemon *pokemon = &gPlayerParty[GetLeadMonIndex()];
-    if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) == MAX_FRIENDSHIP)
-    {
-        return 6;
-    }
-    if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 200)
-    {
-        return 5;
-    }
-    if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 150)
-    {
-        return 4;
-    }
-    if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 100)
-    {
-        return 3;
-    }
-    if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 50)
-    {
-        return 2;
-    }
-    if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 1)
-    {
-        return 1;
-    }
-    return 0;
+    return GetMonFriendshipScore(&gParties[B_TRAINER_PLAYER][GetLeadMonIndex()]);
 }
 
 static void CB2_FieldShowRegionMap(void)
@@ -1073,112 +1185,98 @@ void FieldShowRegionMap(void)
     SetMainCallback2(CB2_FieldShowRegionMap);
 }
 
+static bool32 IsBuildingPCTile(u32 tileId)
+{
+    if (IS_FRLG)
+        return FALSE;
+
+    return (MetatileBehavior_IsPC(GetAttributeByMetatileIdAndMapLayout(tileId, METATILE_ATTRIBUTE_BEHAVIOR, FALSE)));
+}
+
+static bool32 IsBuildingPCTileFrlg(u32 tileId)
+{
+    if (IS_FRLG)
+        return gMapHeader.mapLayout->primaryTileset == &gTileset_BuildingFrlg && (tileId == METATILE_BuildingFrlg_PCOn || tileId == METATILE_BuildingFrlg_PCOff);
+
+    return FALSE;
+}
+
+static bool32 IsPlayerHousePCTile(u32 tileId)
+{
+    if (IS_FRLG)
+        return FALSE;
+
+    return gMapHeader.mapLayout->secondaryTileset == &gTileset_BrendansMaysHouse
+        && (tileId == METATILE_BrendansMaysHouse_BrendanPC_On
+            || tileId == METATILE_BrendansMaysHouse_BrendanPC_Off
+            || tileId == METATILE_BrendansMaysHouse_MayPC_On
+            || tileId == METATILE_BrendansMaysHouse_MayPC_Off);
+}
+
+static bool32 IsPlayerHousePCTileFrlg(u32 tileId)
+{
+    if (IS_FRLG)
+        return gMapHeader.mapLayout->secondaryTileset == &gTileset_GenericBuilding1
+            && (tileId == METATILE_GenericBuilding1_PlayersPCOn || tileId == METATILE_GenericBuilding1_PlayersPCOff);
+
+    return FALSE;
+}
+
+static bool8 IsPlayerInFrontOfPC(void)
+{
+    s16 x, y;
+    u32 tileInFront;
+
+    GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
+    tileInFront = MapGridGetMetatileIdAt(x, y);
+
+    return IsBuildingPCTile(tileInFront)
+        || IsBuildingPCTileFrlg(tileInFront)
+        || IsPlayerHousePCTile(tileInFront)
+        || IsPlayerHousePCTileFrlg(tileInFront);
+}
+
+// Task data for Task_PCTurnOnEffect and Task_LotteryCornerComputerEffect
+#define tPaused       data[0] // Never set
+#define tTaskId       data[1]
+#define tFlickerCount data[2]
+#define tTimer        data[3]
+#define tIsScreenOn   data[4]
+
+// For this special, gSpecialVar_0x8004 is expected to be some PC_LOCATION_* value.
 void DoPCTurnOnEffect(void)
 {
-    if (FuncIsActiveTask(Task_PCTurnOnEffect) != TRUE)
+    if (FuncIsActiveTask(Task_PCTurnOnEffect) != TRUE && IsPlayerInFrontOfPC() == TRUE)
     {
         u8 taskId = CreateTask(Task_PCTurnOnEffect, 8);
-        gTasks[taskId].data[0] = 0;
-        gTasks[taskId].data[1] = taskId;
-        gTasks[taskId].data[2] = 0;
-        gTasks[taskId].data[3] = 0;
-        gTasks[taskId].data[4] = 0;
+        gTasks[taskId].tPaused = FALSE;
+        gTasks[taskId].tTaskId = taskId;
+        gTasks[taskId].tFlickerCount = 0;
+        gTasks[taskId].tTimer = 0;
+        gTasks[taskId].tIsScreenOn = FALSE;
     }
 }
 
 static void Task_PCTurnOnEffect(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    if (task->data[0] == 0)
-    {
-        PCTurnOnEffect_0(task);
-    }
+    if (!task->tPaused)
+        PCTurnOnEffect(task);
 }
 
-static void PCTurnOnEffect_0(struct Task *task)
+static void PCTurnOnEffect(struct Task *task)
 {
-    u8 playerDirection;
+    enum Direction playerDirection;
     s8 dx = 0;
     s8 dy = 0;
-    if (task->data[3] == 6)
+    if (task->tTimer == 6)
     {
-        task->data[3] = 0;
+        task->tTimer = 0;
+
+        // Get where the PC should be, depending on where the player is looking.
         playerDirection = GetPlayerFacingDirection();
         switch (playerDirection)
         {
-            case DIR_NORTH:
-                dx = 0;
-                dy = -1;
-                break;
-            case DIR_WEST:
-                dx = -1;
-                dy = -1;
-                break;
-            case DIR_EAST:
-                dx = 1;
-                dy = -1;
-                break;
-        }
-        PCTurnOnEffect_1(task->data[4], dx, dy);
-        DrawWholeMapView();
-        task->data[4] ^= 1;
-        if ((++task->data[2]) == 5)
-        {
-            DestroyTask(task->data[1]);
-        }
-    }
-    task->data[3]++;
-}
-
-static void PCTurnOnEffect_1(s16 isPcTurnedOn, s8 dx, s8 dy)
-{
-    u16 tileId = 0;
-    if (isPcTurnedOn)
-    {
-        if (gSpecialVar_0x8004 == PC_LOCATION_OTHER)
-        {
-            tileId = METATILE_Building_PC_Off;
-        }
-        else if (gSpecialVar_0x8004 == PC_LOCATION_BRENDANS_HOUSE)
-        {
-            tileId = METATILE_BrendansMaysHouse_BrendanPC_Off;
-        }
-        else if (gSpecialVar_0x8004 == PC_LOCATION_MAYS_HOUSE)
-        {
-            tileId = METATILE_BrendansMaysHouse_MayPC_Off;
-        }
-    }
-    else
-    {
-        if (gSpecialVar_0x8004 == PC_LOCATION_OTHER)
-        {
-            tileId = METATILE_Building_PC_On;
-        }
-        else if (gSpecialVar_0x8004 == PC_LOCATION_BRENDANS_HOUSE)
-        {
-            tileId = METATILE_BrendansMaysHouse_BrendanPC_On;
-        }
-        else if (gSpecialVar_0x8004 == PC_LOCATION_MAYS_HOUSE)
-        {
-            tileId = METATILE_BrendansMaysHouse_MayPC_On;
-        }
-    }
-    MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + dx + 7, gSaveBlock1Ptr->pos.y + dy + 7, tileId | METATILE_COLLISION_MASK);
-}
-
-void DoPCTurnOffEffect(void)
-{
-    PCTurnOffEffect();
-}
-
-static void PCTurnOffEffect(void)
-{
-    s8 dx = 0;
-    s8 dy = 0;
-    u16 tileId = 0;
-    u8 playerDirection = GetPlayerFacingDirection();
-    switch (playerDirection)
-    {
         case DIR_NORTH:
             dx = 0;
             dy = -1;
@@ -1191,20 +1289,98 @@ static void PCTurnOffEffect(void)
             dx = 1;
             dy = -1;
             break;
+        default:
+            break;
+        }
+
+        // Update map
+        PCTurnOnEffect_SetMetatile(task->tIsScreenOn, dx, dy);
+        DrawWholeMapView();
+
+        // Screen flickers 5 times. Odd number and starting with the
+        // screen off means the animation ends with the screen on.
+        task->tIsScreenOn ^= 1;
+        if (++task->tFlickerCount == 5)
+            DestroyTask(task->tTaskId);
     }
-    if (gSpecialVar_0x8004 == 0)
+    task->tTimer++;
+}
+
+static void PCTurnOnEffect_SetMetatile(s16 isScreenOn, s8 dx, s8 dy)
+{
+    u16 metatileId = 0;
+    if (isScreenOn)
     {
-        tileId = METATILE_Building_PC_Off;
+        // Screen is on, set it off
+        if (gSpecialVar_0x8004 == PC_LOCATION_OTHER)
+            metatileId = IS_FRLG ? METATILE_BuildingFrlg_PCOff : METATILE_Building_PC_Off;
+        else if (gSpecialVar_0x8004 == PC_LOCATION_BRENDANS_HOUSE)
+            metatileId = METATILE_BrendansMaysHouse_BrendanPC_Off;
+        else if (gSpecialVar_0x8004 == PC_LOCATION_MAYS_HOUSE)
+            metatileId = METATILE_BrendansMaysHouse_MayPC_Off;
+        else if (gSpecialVar_0x8004 == PC_LOCATION_PLAYER_HOUSE_FRLG)
+            metatileId = METATILE_GenericBuilding1_PlayersPCOff;
     }
-    else if (gSpecialVar_0x8004 == 1)
+    else
     {
-        tileId = METATILE_BrendansMaysHouse_BrendanPC_Off;
+        // Screen is off, set it on
+        if (gSpecialVar_0x8004 == PC_LOCATION_OTHER)
+            metatileId = IS_FRLG ? METATILE_BuildingFrlg_PCOn : METATILE_Building_PC_On;
+        else if (gSpecialVar_0x8004 == PC_LOCATION_BRENDANS_HOUSE)
+            metatileId = METATILE_BrendansMaysHouse_BrendanPC_On;
+        else if (gSpecialVar_0x8004 == PC_LOCATION_MAYS_HOUSE)
+            metatileId = METATILE_BrendansMaysHouse_MayPC_On;
+        else if (gSpecialVar_0x8004 == PC_LOCATION_PLAYER_HOUSE_FRLG)
+            metatileId = METATILE_GenericBuilding1_PlayersPCOn;
     }
-    else if (gSpecialVar_0x8004 == 2)
+    MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + dx + MAP_OFFSET, gSaveBlock1Ptr->pos.y + dy + MAP_OFFSET, metatileId | MAPGRID_IMPASSABLE);
+}
+
+// For this special, gSpecialVar_0x8004 is expected to be some PC_LOCATION_* value.
+void DoPCTurnOffEffect(void)
+{
+    PCTurnOffEffect();
+}
+
+static void PCTurnOffEffect(void)
+{
+    s8 dx = 0;
+    s8 dy = 0;
+    u16 metatileId = 0;
+
+    // Get where the PC should be, depending on where the player is looking.
+    enum Direction playerDirection = GetPlayerFacingDirection();
+
+    if (IsPlayerInFrontOfPC() == FALSE)
+        return;
+    switch (playerDirection)
     {
-        tileId = METATILE_BrendansMaysHouse_MayPC_Off;
+    case DIR_NORTH:
+        dx = 0;
+        dy = -1;
+        break;
+    case DIR_WEST:
+        dx = -1;
+        dy = -1;
+        break;
+    case DIR_EAST:
+        dx = 1;
+        dy = -1;
+        break;
+    default:
+        break;
     }
-    MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + dx + 7, gSaveBlock1Ptr->pos.y + dy + 7, tileId | METATILE_COLLISION_MASK);
+
+    if (gSpecialVar_0x8004 == PC_LOCATION_OTHER)
+        metatileId = IS_FRLG ? METATILE_BuildingFrlg_PCOff : METATILE_Building_PC_Off;
+    else if (gSpecialVar_0x8004 == PC_LOCATION_BRENDANS_HOUSE)
+        metatileId = METATILE_BrendansMaysHouse_BrendanPC_Off;
+    else if (gSpecialVar_0x8004 == PC_LOCATION_MAYS_HOUSE)
+        metatileId = METATILE_BrendansMaysHouse_MayPC_Off;
+    else if (gSpecialVar_0x8004 == PC_LOCATION_PLAYER_HOUSE_FRLG)
+        metatileId = METATILE_GenericBuilding1_PlayersPCOff;
+
+    MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + dx + MAP_OFFSET, gSaveBlock1Ptr->pos.y + dy + MAP_OFFSET, metatileId | MAPGRID_IMPASSABLE);
     DrawWholeMapView();
 }
 
@@ -1213,54 +1389,61 @@ void DoLotteryCornerComputerEffect(void)
     if (FuncIsActiveTask(Task_LotteryCornerComputerEffect) != TRUE)
     {
         u8 taskId = CreateTask(Task_LotteryCornerComputerEffect, 8);
-        gTasks[taskId].data[0] = 0;
-        gTasks[taskId].data[1] = taskId;
-        gTasks[taskId].data[2] = 0;
-        gTasks[taskId].data[3] = 0;
-        gTasks[taskId].data[4] = 0;
+        gTasks[taskId].tPaused = FALSE;
+        gTasks[taskId].tTaskId = taskId;
+        gTasks[taskId].tFlickerCount = 0;
+        gTasks[taskId].tTimer = 0;
+        gTasks[taskId].tIsScreenOn = FALSE;
     }
 }
 
 static void Task_LotteryCornerComputerEffect(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    if (task->data[0] == 0)
-    {
+    if (!task->tPaused)
         LotteryCornerComputerEffect(task);
-    }
 }
 
 static void LotteryCornerComputerEffect(struct Task *task)
 {
-    if (task->data[3] == 6)
+    if (task->tTimer == 6)
     {
-        task->data[3] = 0;
-        if (task->data[4] != 0)
+        task->tTimer = 0;
+        if (task->tIsScreenOn)
         {
-            MapGridSetMetatileIdAt(18, 8, METATILE_Shop_Laptop1_Normal | METATILE_COLLISION_MASK);
-            MapGridSetMetatileIdAt(18, 9, METATILE_Shop_Laptop2_Normal | METATILE_COLLISION_MASK);
+            // Screen is on, set it off
+            MapGridSetMetatileIdAt(11 + MAP_OFFSET, 1 + MAP_OFFSET, METATILE_Shop_Laptop1_Normal | MAPGRID_IMPASSABLE);
+            MapGridSetMetatileIdAt(11 + MAP_OFFSET, 2 + MAP_OFFSET, METATILE_Shop_Laptop2_Normal | MAPGRID_IMPASSABLE);
         }
         else
         {
-            MapGridSetMetatileIdAt(18, 8, METATILE_Shop_Laptop1_Flash | METATILE_COLLISION_MASK);
-            MapGridSetMetatileIdAt(18, 9, METATILE_Shop_Laptop2_Flash | METATILE_COLLISION_MASK);
+            // Screen is off, set it on
+            MapGridSetMetatileIdAt(11 + MAP_OFFSET, 1 + MAP_OFFSET, METATILE_Shop_Laptop1_Flash | MAPGRID_IMPASSABLE);
+            MapGridSetMetatileIdAt(11 + MAP_OFFSET, 2 + MAP_OFFSET, METATILE_Shop_Laptop2_Flash | MAPGRID_IMPASSABLE);
         }
         DrawWholeMapView();
-        task->data[4] ^= 1;
-        if ((++task->data[2]) == 5)
-        {
-            DestroyTask(task->data[1]);
-        }
+
+        // Screen flickers 5 times. Odd number and starting with the
+        // screen off means the animation ends with the screen on.
+        task->tIsScreenOn ^= 1;
+        if (++task->tFlickerCount == 5)
+            DestroyTask(task->tTaskId);
     }
-    task->data[3]++;
+    task->tTimer++;
 }
 
 void EndLotteryCornerComputerEffect(void)
 {
-    MapGridSetMetatileIdAt(18, 8, METATILE_Shop_Laptop1_Normal | METATILE_COLLISION_MASK);
-    MapGridSetMetatileIdAt(18, 9, METATILE_Shop_Laptop2_Normal | METATILE_COLLISION_MASK);
+    MapGridSetMetatileIdAt(11 + MAP_OFFSET, 1 + MAP_OFFSET, METATILE_Shop_Laptop1_Normal | MAPGRID_IMPASSABLE);
+    MapGridSetMetatileIdAt(11 + MAP_OFFSET, 2 + MAP_OFFSET, METATILE_Shop_Laptop2_Normal | MAPGRID_IMPASSABLE);
     DrawWholeMapView();
 }
+
+#undef tPaused
+#undef tTaskId
+#undef tFlickerCount
+#undef tTimer
+#undef tIsScreenOn
 
 void SetTrickHouseNuggetFlag(void)
 {
@@ -1280,61 +1463,56 @@ void ResetTrickHouseNuggetFlag(void)
 
 bool8 CheckLeadMonCool(void)
 {
-    if (GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_COOL) < 200)
-    {
+    if (GetMonData(&gParties[B_TRAINER_PLAYER][GetLeadMonIndex()], MON_DATA_COOL) < 200)
         return FALSE;
-    }
+
     return TRUE;
 }
 
 bool8 CheckLeadMonBeauty(void)
 {
-    if (GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_BEAUTY) < 200)
-    {
+    if (GetMonData(&gParties[B_TRAINER_PLAYER][GetLeadMonIndex()], MON_DATA_BEAUTY) < 200)
         return FALSE;
-    }
+
     return TRUE;
 }
 
 bool8 CheckLeadMonCute(void)
 {
-    if (GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_CUTE) < 200)
-    {
+    if (GetMonData(&gParties[B_TRAINER_PLAYER][GetLeadMonIndex()], MON_DATA_CUTE) < 200)
         return FALSE;
-    }
+
     return TRUE;
 }
 
 bool8 CheckLeadMonSmart(void)
 {
-    if (GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_SMART) < 200)
-    {
+    if (GetMonData(&gParties[B_TRAINER_PLAYER][GetLeadMonIndex()], MON_DATA_SMART) < 200)
         return FALSE;
-    }
+
     return TRUE;
 }
 
 bool8 CheckLeadMonTough(void)
 {
-    if (GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_TOUGH) < 200)
-    {
+    if (GetMonData(&gParties[B_TRAINER_PLAYER][GetLeadMonIndex()], MON_DATA_TOUGH) < 200)
         return FALSE;
-    }
+
     return TRUE;
 }
 
 void IsGrassTypeInParty(void)
 {
     u8 i;
-    u16 species;
+    enum Species species;
     struct Pokemon *pokemon;
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        pokemon = &gPlayerParty[i];
+        pokemon = &gParties[B_TRAINER_PLAYER][i];
         if (GetMonData(pokemon, MON_DATA_SANITY_HAS_SPECIES) && !GetMonData(pokemon, MON_DATA_IS_EGG))
         {
             species = GetMonData(pokemon, MON_DATA_SPECIES);
-            if (gBaseStats[species].type1 == TYPE_GRASS || gBaseStats[species].type2 == TYPE_GRASS)
+            if (GetSpeciesType(species, 0) == TYPE_GRASS || GetSpeciesType(species, 1) == TYPE_GRASS)
             {
                 gSpecialVar_Result = TRUE;
                 return;
@@ -1346,7 +1524,12 @@ void IsGrassTypeInParty(void)
 
 void SpawnCameraObject(void)
 {
-    u8 obj = SpawnSpecialObjectEventParameterized(OBJ_EVENT_GFX_BOY_1, MOVEMENT_TYPE_FACE_DOWN, OBJ_EVENT_ID_CAMERA, gSaveBlock1Ptr->pos.x + 7, gSaveBlock1Ptr->pos.y + 7, 3);
+    u8 obj = SpawnSpecialObjectEventParameterized(OBJ_EVENT_GFX_BOY_1,
+                                                  MOVEMENT_TYPE_FACE_DOWN,
+                                                  LOCALID_CAMERA,
+                                                  gSaveBlock1Ptr->pos.x + MAP_OFFSET,
+                                                  gSaveBlock1Ptr->pos.y + MAP_OFFSET,
+                                                  ELEVATION_DEFAULT);
     gObjectEvents[obj].invisible = TRUE;
     CameraObjectSetFollowedSpriteId(gObjectEvents[obj].spriteId);
 }
@@ -1354,12 +1537,12 @@ void SpawnCameraObject(void)
 void RemoveCameraObject(void)
 {
     CameraObjectSetFollowedSpriteId(GetPlayerAvatarSpriteId());
-    RemoveObjectEventByLocalIdAndMap(OBJ_EVENT_ID_CAMERA, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+    RemoveObjectEventByLocalIdAndMap(LOCALID_CAMERA, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
 }
 
 u8 GetPokeblockNameByMonNature(void)
 {
-    return CopyMonFavoritePokeblockName(GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NATURE), gStringVar1);
+    return CopyMonFavoritePokeblockName(GetNature(&gParties[B_TRAINER_PLAYER][GetLeadMonIndex()]), gStringVar1);
 }
 
 void GetSecretBaseNearbyMapName(void)
@@ -1367,9 +1550,9 @@ void GetSecretBaseNearbyMapName(void)
     GetMapName(gStringVar1, VarGet(VAR_SECRET_BASE_MAP), 0);
 }
 
-u16 GetBestBattleTowerStreak(void)
+u16 GetBattleTowerSinglesStreak(void)
 {
-    return GetGameStat(GAME_STAT_BATTLE_TOWER_BEST_STREAK);
+    return GetGameStat(GAME_STAT_BATTLE_TOWER_SINGLES_STREAK);
 }
 
 void BufferEReaderTrainerName(void)
@@ -1379,15 +1562,40 @@ void BufferEReaderTrainerName(void)
 
 u16 GetSlotMachineId(void)
 {
-    static const u8 sSlotMachineRandomSeeds[] = {12, 2, 4, 5, 1, 8, 7, 11, 3, 10, 9, 6};
-    static const u8 sSlotMachineIds[] = {0, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 5};
-    static const u8 sSlotMachineServiceDayIds[] = {3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5};
+    static const u8 sSlotMachineRandomSeeds[SLOT_MACHINE_COUNT] = {12, 2, 4, 5, 1, 8, 7, 11, 3, 10, 9, 6};
+    static const u8 sSlotMachineIds[SLOT_MACHINE_COUNT] = {
+        SLOT_MACHINE_UNLUCKIEST,
+        SLOT_MACHINE_UNLUCKIER,
+        SLOT_MACHINE_UNLUCKIER,
+        SLOT_MACHINE_UNLUCKY,
+        SLOT_MACHINE_UNLUCKY,
+        SLOT_MACHINE_UNLUCKY,
+        SLOT_MACHINE_LUCKY,
+        SLOT_MACHINE_LUCKY,
+        SLOT_MACHINE_LUCKY,
+        SLOT_MACHINE_LUCKIER,
+        SLOT_MACHINE_LUCKIER,
+        SLOT_MACHINE_LUCKIEST
+    };
+    static const u8 sSlotMachineServiceDayIds[SLOT_MACHINE_COUNT] = {
+        SLOT_MACHINE_LUCKY,
+        SLOT_MACHINE_LUCKY,
+        SLOT_MACHINE_LUCKY,
+        SLOT_MACHINE_LUCKY,
+        SLOT_MACHINE_LUCKY,
+        SLOT_MACHINE_LUCKY,
+        SLOT_MACHINE_LUCKIER,
+        SLOT_MACHINE_LUCKIER,
+        SLOT_MACHINE_LUCKIER,
+        SLOT_MACHINE_LUCKIER,
+        SLOT_MACHINE_LUCKIEST,
+        SLOT_MACHINE_LUCKIEST
+    };
 
     u32 rnd = gSaveBlock1Ptr->dewfordTrends[0].trendiness + gSaveBlock1Ptr->dewfordTrends[0].rand + sSlotMachineRandomSeeds[gSpecialVar_0x8004];
-    if (GetPriceReduction(POKENEWS_GAME_CORNER))
-    {
+    if (IsPokeNewsActive(POKENEWS_GAME_CORNER))
         return sSlotMachineServiceDayIds[rnd % SLOT_MACHINE_COUNT];
-    }
+
     return sSlotMachineIds[rnd % SLOT_MACHINE_COUNT];
 }
 
@@ -1397,9 +1605,8 @@ bool8 FoundAbandonedShipRoom1Key(void)
     u16 flag = FLAG_HIDDEN_ITEM_ABANDONED_SHIP_RM_1_KEY;
     *specVar = flag;
     if (!FlagGet(flag))
-    {
         return FALSE;
-    }
+
     return TRUE;
 }
 
@@ -1409,9 +1616,8 @@ bool8 FoundAbandonedShipRoom2Key(void)
     u16 flag = FLAG_HIDDEN_ITEM_ABANDONED_SHIP_RM_2_KEY;
     *specVar = flag;
     if (!FlagGet(flag))
-    {
         return FALSE;
-    }
+
     return TRUE;
 }
 
@@ -1421,9 +1627,8 @@ bool8 FoundAbandonedShipRoom4Key(void)
     u16 flag = FLAG_HIDDEN_ITEM_ABANDONED_SHIP_RM_4_KEY;
     *specVar = flag;
     if (!FlagGet(flag))
-    {
         return FALSE;
-    }
+
     return TRUE;
 }
 
@@ -1433,15 +1638,14 @@ bool8 FoundAbandonedShipRoom6Key(void)
     u16 flag = FLAG_HIDDEN_ITEM_ABANDONED_SHIP_RM_6_KEY;
     *specVar = flag;
     if (!FlagGet(flag))
-    {
         return FALSE;
-    }
+
     return TRUE;
 }
 
 bool8 LeadMonHasEffortRibbon(void)
 {
-    return GetMonData(&gPlayerParty[GetLeadMonIndex()], MON_DATA_EFFORT_RIBBON, NULL);
+    return GetMonData(&gParties[B_TRAINER_PLAYER][GetLeadMonIndex()], MON_DATA_EFFORT_RIBBON);
 }
 
 void GiveLeadMonEffortRibbon(void)
@@ -1451,28 +1655,25 @@ void GiveLeadMonEffortRibbon(void)
     IncrementGameStat(GAME_STAT_RECEIVED_RIBBONS);
     FlagSet(FLAG_SYS_RIBBON_GET);
     ribbonSet = TRUE;
-    leadMon = &gPlayerParty[GetLeadMonIndex()];
+    leadMon = &gParties[B_TRAINER_PLAYER][GetLeadMonIndex()];
     SetMonData(leadMon, MON_DATA_EFFORT_RIBBON, &ribbonSet);
     if (GetRibbonCount(leadMon) > NUM_CUTIES_RIBBONS)
-    {
         TryPutSpotTheCutiesOnAir(leadMon, MON_DATA_EFFORT_RIBBON);
-    }
 }
 
 bool8 Special_AreLeadMonEVsMaxedOut(void)
 {
-    if (GetMonEVCount(&gPlayerParty[GetLeadMonIndex()]) >= MAX_TOTAL_EVS)
-    {
+    if (GetMonEVCount(&gParties[B_TRAINER_PLAYER][GetLeadMonIndex()]) >= MAX_TOTAL_EVS)
         return TRUE;
-    }
+
     return FALSE;
 }
 
 u8 TryUpdateRusturfTunnelState(void)
 {
-    if (!FlagGet(FLAG_RUSTURF_TUNNEL_OPENED) 
-        && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(RUSTURF_TUNNEL) 
-        && gSaveBlock1Ptr->location.mapNum == MAP_NUM(RUSTURF_TUNNEL))
+    if (!FlagGet(FLAG_RUSTURF_TUNNEL_OPENED)
+        && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_RUSTURF_TUNNEL)
+        && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_RUSTURF_TUNNEL))
     {
         if (FlagGet(FLAG_HIDE_RUSTURF_TUNNEL_ROCK_1))
         {
@@ -1493,18 +1694,18 @@ void SetShoalItemFlag(u16 unused)
     FlagSet(FLAG_SYS_SHOAL_ITEM);
 }
 
-void PutZigzagoonInPlayerParty(void)
+void LoadWallyZigzagoon(void)
 {
     u16 monData;
-    CreateMon(&gPlayerParty[0], SPECIES_ZIGZAGOON, 7, 31, FALSE, 0, OT_ID_PLAYER_ID, 0);
+    CreateRandomMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_ZIGZAGOON, 7);
     monData = TRUE;
-    SetMonData(&gPlayerParty[0], MON_DATA_ABILITY_NUM, &monData);
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_ABILITY_NUM, &monData);
     monData = MOVE_TACKLE;
-    SetMonData(&gPlayerParty[0], MON_DATA_MOVE1, &monData);
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE1, &monData);
     monData = MOVE_NONE;
-    SetMonData(&gPlayerParty[0], MON_DATA_MOVE2, &monData);
-    SetMonData(&gPlayerParty[0], MON_DATA_MOVE3, &monData);
-    SetMonData(&gPlayerParty[0], MON_DATA_MOVE4, &monData);
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE2, &monData);
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE3, &monData);
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE4, &monData);
 }
 
 bool8 IsStarterInParty(void)
@@ -1514,10 +1715,8 @@ bool8 IsStarterInParty(void)
     u8 partyCount = CalculatePlayerPartyCount();
     for (i = 0; i < partyCount; i++)
     {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL) == starter)
-        {
+        if (GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES_OR_EGG) == starter)
             return TRUE;
-        }
     }
     return FALSE;
 }
@@ -1527,29 +1726,21 @@ bool8 ScriptCheckFreePokemonStorageSpace(void)
     return CheckFreePokemonStorageSpace();
 }
 
-bool8 IsPokerusInParty(void)
-{
-    if (!CheckPartyPokerus(gPlayerParty, 0x3f))
-    {
-        return FALSE;
-    }
-    return TRUE;
-}
-
-#define horizontalPan  data[0]
-#define delayCounter   data[1]
-#define numShakes      data[2]
-#define delay          data[3]
-#define verticalPan    data[4]
+// Task data for Task_ShakeCamera
+#define tHorizontalPan  data[0]
+#define tDelayCounter   data[1]
+#define tNumShakes      data[2]
+#define tDelay          data[3]
+#define tVerticalPan    data[4]
 
 void ShakeCamera(void)
 {
     u8 taskId = CreateTask(Task_ShakeCamera, 9);
-    gTasks[taskId].horizontalPan = gSpecialVar_0x8005;
-    gTasks[taskId].delayCounter = 0;
-    gTasks[taskId].numShakes = gSpecialVar_0x8006;
-    gTasks[taskId].delay = gSpecialVar_0x8007;
-    gTasks[taskId].verticalPan = gSpecialVar_0x8004;
+    gTasks[taskId].tHorizontalPan = gSpecialVar_0x8005;
+    gTasks[taskId].tDelayCounter = 0;
+    gTasks[taskId].tNumShakes = gSpecialVar_0x8006;
+    gTasks[taskId].tDelay = gSpecialVar_0x8007;
+    gTasks[taskId].tVerticalPan = gSpecialVar_0x8004;
     SetCameraPanningCallback(NULL);
     PlaySE(SE_M_STRENGTH);
 }
@@ -1558,15 +1749,15 @@ static void Task_ShakeCamera(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    delayCounter++;
-    if (delayCounter % delay == 0)
+    tDelayCounter++;
+    if (tDelayCounter % tDelay == 0)
     {
-        delayCounter = 0;
-        numShakes--;
-        horizontalPan = -horizontalPan;
-        verticalPan = -verticalPan;
-        SetCameraPanning(horizontalPan, verticalPan);
-        if (numShakes == 0)
+        tDelayCounter = 0;
+        tNumShakes--;
+        tHorizontalPan = -tHorizontalPan;
+        tVerticalPan = -tVerticalPan;
+        SetCameraPanning(tHorizontalPan, tVerticalPan);
+        if (tNumShakes == 0)
         {
             StopCameraShake(taskId);
             InstallCameraPanAheadCallback();
@@ -1577,14 +1768,14 @@ static void Task_ShakeCamera(u8 taskId)
 static void StopCameraShake(u8 taskId)
 {
     DestroyTask(taskId);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
-#undef horizontalPan
-#undef delayCounter
-#undef numShakes
-#undef delay
-#undef verticalPan
+#undef tHorizontalPan
+#undef tDelayCounter
+#undef tNumShakes
+#undef tDelay
+#undef tVerticalPan
 
 bool8 FoundBlackGlasses(void)
 {
@@ -1594,17 +1785,13 @@ bool8 FoundBlackGlasses(void)
 void SetRoute119Weather(void)
 {
     if (IsMapTypeOutdoors(GetLastUsedWarpMapType()) != TRUE)
-    {
-        SetSav1Weather(WEATHER_ROUTE119_CYCLE);
-    }
+        SetSavedWeather(WEATHER_ROUTE119_CYCLE);
 }
 
 void SetRoute123Weather(void)
 {
     if (IsMapTypeOutdoors(GetLastUsedWarpMapType()) != TRUE)
-    {
-        SetSav1Weather(WEATHER_ROUTE123_CYCLE);
-    }
+        SetSavedWeather(WEATHER_ROUTE123_CYCLE);
 }
 
 u8 GetLeadMonIndex(void)
@@ -1613,17 +1800,16 @@ u8 GetLeadMonIndex(void)
     u8 partyCount = CalculatePlayerPartyCount();
     for (i = 0; i < partyCount; i++)
     {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL) != SPECIES_EGG && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL) != 0)
-        {
+        if (GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES_OR_EGG) != SPECIES_EGG
+         && GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES_OR_EGG) != SPECIES_NONE)
             return i;
-        }
     }
     return 0;
 }
 
-u16 ScriptGetPartyMonSpecies(void)
+enum Species ScriptGetPartyMonSpecies(void)
 {
-    return GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES2, NULL);
+    return GetMonData(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004], MON_DATA_SPECIES_OR_EGG, NULL);
 }
 
 // Removed for Emerald
@@ -1636,13 +1822,10 @@ u16 GetDaysUntilPacifidlogTMAvailable(void)
 {
     u16 tmReceivedDay = VarGet(VAR_PACIFIDLOG_TM_RECEIVED_DAY);
     if (gLocalTime.days - tmReceivedDay >= 7)
-    {
         return 0;
-    }
     else if (gLocalTime.days < 0)
-    {
         return 8;
-    }
+
     return 7 - (gLocalTime.days - tmReceivedDay);
 }
 
@@ -1654,10 +1837,11 @@ u16 SetPacifidlogTMReceivedDay(void)
 
 bool8 MonOTNameNotPlayer(void)
 {
-    if (GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_LANGUAGE) != GAME_LANGUAGE)
+    struct BoxPokemon *boxmon = GetSelectedBoxMonFromPcOrParty();
+    if (GetBoxMonData(boxmon, MON_DATA_LANGUAGE) != GAME_LANGUAGE)
         return TRUE;
 
-    GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_OT_NAME, gStringVar1);
+    GetBoxMonData(boxmon, MON_DATA_OT_NAME, gStringVar1);
 
     if (!StringCompare(gSaveBlock2Ptr->playerName, gStringVar1))
         return FALSE;
@@ -1699,30 +1883,30 @@ void BufferLottoTicketNumber(void)
     }
 }
 
-u16 GetMysteryEventCardVal(void)
+u16 GetMysteryGiftCardStat(void)
 {
     switch (gSpecialVar_Result)
     {
-        case GET_NUM_STAMPS:
-            return mevent_081445C0(GET_NUM_STAMPS_INTERNAL);
-        case GET_MAX_STAMPS:
-            return mevent_081445C0(GET_MAX_STAMPS_INTERNAL);
-        case GET_CARD_BATTLES_WON:
-            return mevent_081445C0(GET_CARD_BATTLES_WON_INTERNAL);
-        case 3: // Never occurs
-            return mevent_081445C0(1);
-        case 4: // Never occurs
-            return mevent_081445C0(2);
-        default:
-            return 0;
+    case GET_NUM_STAMPS:
+        return MysteryGift_GetCardStat(CARD_STAT_NUM_STAMPS);
+    case GET_MAX_STAMPS:
+        return MysteryGift_GetCardStat(CARD_STAT_MAX_STAMPS);
+    case GET_CARD_BATTLES_WON:
+        return MysteryGift_GetCardStat(CARD_STAT_BATTLES_WON);
+    case GET_CARD_BATTLES_LOST: // Never occurs
+        return MysteryGift_GetCardStat(CARD_STAT_BATTLES_LOST);
+    case GET_CARD_NUM_TRADES: // Never occurs
+        return MysteryGift_GetCardStat(CARD_STAT_NUM_TRADES);
+    default:
+        return 0;
     }
 }
 
 bool8 BufferTMHMMoveName(void)
 {
-    if (gSpecialVar_0x8004 >= ITEM_TM01_FOCUS_PUNCH && gSpecialVar_0x8004 <= ITEM_HM08_DIVE)
+    if (gItemsInfo[gSpecialVar_0x8004].pocket == POCKET_TM_HM)
     {
-        StringCopy(gStringVar2, gMoveNamesLong[ItemIdToBattleMoveId(gSpecialVar_0x8004)]);
+        StringCopy(gStringVar2, GetMoveName(ItemIdToBattleMoveId(gSpecialVar_0x8004)));
         return TRUE;
     }
 
@@ -1736,7 +1920,7 @@ bool8 IsBadEggInParty(void)
 
     for (i = 0; i < partyCount; i++)
     {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SANITY_IS_BAD_EGG) == TRUE)
+        if (GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SANITY_IS_BAD_EGG) == TRUE)
             return TRUE;
     }
 
@@ -1745,8 +1929,8 @@ bool8 IsBadEggInParty(void)
 
 bool8 InMultiPartnerRoom(void)
 {
-    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(BATTLE_FRONTIER_BATTLE_TOWER_MULTI_PARTNER_ROOM)
-        && gSaveBlock1Ptr->location.mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_TOWER_MULTI_PARTNER_ROOM) &&
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_PARTNER_ROOM)
+        && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_PARTNER_ROOM) &&
         VarGet(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_MULTIS)
         return TRUE;
     return FALSE;
@@ -1758,7 +1942,7 @@ void OffsetCameraForBattle(void)
     SetCameraPanning(8, 0);
 }
 
-const struct WindowTemplate gElevatorFloor_WindowTemplate = 
+static const struct WindowTemplate sWindowTemplate_ElevatorFloor =
 {
     .bg = 0,
     .tilemapLeft = 21,
@@ -1769,7 +1953,7 @@ const struct WindowTemplate gElevatorFloor_WindowTemplate =
     .baseBlock = 8,
 };
 
-const u8 *const gDeptStoreFloorNames[] =
+static const u8 *const sDeptStoreFloorNames[] =
 {
     [DEPT_STORE_FLOORNUM_B4F] = gText_B4F,
     [DEPT_STORE_FLOORNUM_B3F] = gText_B3F,
@@ -1789,7 +1973,7 @@ const u8 *const gDeptStoreFloorNames[] =
     [DEPT_STORE_FLOORNUM_ROOFTOP] = gText_Rooftop
 };
 
-static const u16 sElevatorWindowTiles_Ascending[][3] =
+static const u16 sElevatorWindowTiles_Ascending[ELEVATOR_WINDOW_HEIGHT][ELEVATOR_LIGHT_STAGES] =
 {
     {
         METATILE_BattleFrontier_Elevator_Top0,
@@ -1808,7 +1992,7 @@ static const u16 sElevatorWindowTiles_Ascending[][3] =
     },
 };
 
-static const u16 sElevatorWindowTiles_Descending[][3] =
+static const u16 sElevatorWindowTiles_Descending[ELEVATOR_WINDOW_HEIGHT][ELEVATOR_LIGHT_STAGES] =
 {
     {
         METATILE_BattleFrontier_Elevator_Top0,
@@ -1829,147 +2013,152 @@ static const u16 sElevatorWindowTiles_Descending[][3] =
 
 void SetDeptStoreFloor(void)
 {
-    u8 deptStoreFloor;
+    enum DeptStoreFloorNumber deptStoreFloor;
     switch (gSaveBlock1Ptr->dynamicWarp.mapNum)
     {
-        case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_1F):
-            deptStoreFloor = DEPT_STORE_FLOORNUM_1F;
-            break;
-        case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_2F):
-            deptStoreFloor = DEPT_STORE_FLOORNUM_2F;
-            break;
-        case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_3F):
-            deptStoreFloor = DEPT_STORE_FLOORNUM_3F;
-            break;
-        case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_4F):
-            deptStoreFloor = DEPT_STORE_FLOORNUM_4F;
-            break;
-        case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_5F):
-            deptStoreFloor = DEPT_STORE_FLOORNUM_5F;
-            break;
-        case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_ROOFTOP):
-            deptStoreFloor = DEPT_STORE_FLOORNUM_ROOFTOP;
-            break;
-        default:
-            deptStoreFloor = DEPT_STORE_FLOORNUM_1F;
-            break;
+    case MAP_NUM(MAP_LILYCOVE_CITY_DEPARTMENT_STORE_1F):
+        deptStoreFloor = DEPT_STORE_FLOORNUM_1F;
+        break;
+    case MAP_NUM(MAP_LILYCOVE_CITY_DEPARTMENT_STORE_2F):
+        deptStoreFloor = DEPT_STORE_FLOORNUM_2F;
+        break;
+    case MAP_NUM(MAP_LILYCOVE_CITY_DEPARTMENT_STORE_3F):
+        deptStoreFloor = DEPT_STORE_FLOORNUM_3F;
+        break;
+    case MAP_NUM(MAP_LILYCOVE_CITY_DEPARTMENT_STORE_4F):
+        deptStoreFloor = DEPT_STORE_FLOORNUM_4F;
+        break;
+    case MAP_NUM(MAP_LILYCOVE_CITY_DEPARTMENT_STORE_5F):
+        deptStoreFloor = DEPT_STORE_FLOORNUM_5F;
+        break;
+    case MAP_NUM(MAP_LILYCOVE_CITY_DEPARTMENT_STORE_ROOFTOP):
+        deptStoreFloor = DEPT_STORE_FLOORNUM_ROOFTOP;
+        break;
+    default:
+        deptStoreFloor = DEPT_STORE_FLOORNUM_1F;
+        break;
     }
     VarSet(VAR_DEPT_STORE_FLOOR, deptStoreFloor);
 }
 
 u16 GetDeptStoreDefaultFloorChoice(void)
 {
-    sLilycoveDeptStore_NeverRead = 0;
     sLilycoveDeptStore_DefaultFloorChoice = 0;
 
-    if (gSaveBlock1Ptr->dynamicWarp.mapGroup == MAP_GROUP(LILYCOVE_CITY_DEPARTMENT_STORE_1F))
+    if (gSaveBlock1Ptr->dynamicWarp.mapGroup == MAP_GROUP(MAP_LILYCOVE_CITY_DEPARTMENT_STORE_1F))
     {
         switch (gSaveBlock1Ptr->dynamicWarp.mapNum)
         {
-            case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_5F):
-                sLilycoveDeptStore_NeverRead = 0;
-                sLilycoveDeptStore_DefaultFloorChoice = 0;
-                break;
-            case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_4F):
-                sLilycoveDeptStore_NeverRead = 0;
-                sLilycoveDeptStore_DefaultFloorChoice = 1;
-                break;
-            case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_3F):
-                sLilycoveDeptStore_NeverRead = 0;
-                sLilycoveDeptStore_DefaultFloorChoice = 2;
-                break;
-            case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_2F):
-                sLilycoveDeptStore_NeverRead = 0;
-                sLilycoveDeptStore_DefaultFloorChoice = 3;
-                break;
-            case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_1F):
-                sLilycoveDeptStore_NeverRead = 0;
-                sLilycoveDeptStore_DefaultFloorChoice = 4;
-                break;
+        case MAP_NUM(MAP_LILYCOVE_CITY_DEPARTMENT_STORE_5F):
+            sLilycoveDeptStore_DefaultFloorChoice = 0;
+            break;
+        case MAP_NUM(MAP_LILYCOVE_CITY_DEPARTMENT_STORE_4F):
+            sLilycoveDeptStore_DefaultFloorChoice = 1;
+            break;
+        case MAP_NUM(MAP_LILYCOVE_CITY_DEPARTMENT_STORE_3F):
+            sLilycoveDeptStore_DefaultFloorChoice = 2;
+            break;
+        case MAP_NUM(MAP_LILYCOVE_CITY_DEPARTMENT_STORE_2F):
+            sLilycoveDeptStore_DefaultFloorChoice = 3;
+            break;
+        case MAP_NUM(MAP_LILYCOVE_CITY_DEPARTMENT_STORE_1F):
+            sLilycoveDeptStore_DefaultFloorChoice = 4;
+            break;
         }
     }
 
     return sLilycoveDeptStore_DefaultFloorChoice;
 }
 
+// Task data for Task_MoveElevator
+#define tTimer       data[1]
+#define tMoveCounter data[2]
+#define tVerticalPan data[4]
+#define tTotalMoves  data[5]
+#define tDescending  data[6]
+
+// The maximum considered difference between floors.
+// Elevator trips with a larger difference are treated the same
+// (i.e. traveling 9 floors and 200 floors would take the same amount of time).
+#define MAX_ELEVATOR_TRIP 9
+
+// gSpecialVar_0x8005 here is expected to be the current floor number, and
+// gSpecialVar_0x8006 is expected to be the destination floor number.
 void MoveElevator(void)
 {
-    static const u8 sElevatorTripLength[] = { 8, 16, 24, 32, 38, 46, 52, 56, 57 };
+    static const u8 sElevatorTripLength[MAX_ELEVATOR_TRIP] = { 8, 16, 24, 32, 38, 46, 52, 56, 57 };
 
-    u8 taskId = CreateTask(Task_MoveElevator, 9);
-    s16 *data;
+    s16 *data = gTasks[CreateTask(Task_MoveElevator, 9)].data;
     u16 floorDelta;
 
-    if (!IsTaskIdValid(taskId))
-    {
-        EnableBothScriptContexts();
-        return;
-    }
-    data = gTasks[taskId].data;
+    tTimer = 0;
+    tMoveCounter = 0;
+    tVerticalPan = 1;
 
-    data[1] = 0;
-    data[2] = 0;
-    data[4] = 1;
-
-    // descending
     if (gSpecialVar_0x8005 > gSpecialVar_0x8006)
     {
         floorDelta = gSpecialVar_0x8005 - gSpecialVar_0x8006;
-        data[6] = TRUE;
+        tDescending = TRUE;
     }
     else
     {
         floorDelta = gSpecialVar_0x8006 - gSpecialVar_0x8005;
-        data[6] = FALSE;
+        tDescending = FALSE;
     }
 
-    if (floorDelta > 8)
-        floorDelta = 8;
+    if (floorDelta > MAX_ELEVATOR_TRIP - 1)
+        floorDelta = MAX_ELEVATOR_TRIP - 1;
 
-    data[5] = sElevatorTripLength[floorDelta];
+    tTotalMoves = sElevatorTripLength[floorDelta];
 
     SetCameraPanningCallback(NULL);
-    MoveElevatorWindowLights(floorDelta, data[6]);
+    MoveElevatorWindowLights(floorDelta, tDescending);
     PlaySE(SE_ELEVATOR);
 }
 
 static void Task_MoveElevator(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    data[1]++;
-    if (data[1] % 3 == 0)
+    tTimer++;
+    if (tTimer % 3 == 0)
     {
-        data[1] = 0;
-        data[2]++;
-        data[4] = -data[4];
-        SetCameraPanning(0, data[4]);
+        tTimer = 0;
+        tMoveCounter++;
+        tVerticalPan = -tVerticalPan;
+        SetCameraPanning(0, tVerticalPan);
 
-        // arrived at floor
-        if (data[2] == data[5])
+        if (tMoveCounter == tTotalMoves)
         {
+            // Arrived at floor
             PlaySE(SE_DING_DONG);
             DestroyTask(taskId);
-            EnableBothScriptContexts();
+            ScriptContext_Enable();
             InstallCameraPanAheadCallback();
         }
     }
 }
 
+#undef tTimer
+#undef tMoveCounter
+#undef tVerticalPan
+#undef tTotalMoves
+#undef tDescending
+
 void ShowDeptStoreElevatorFloorSelect(void)
 {
     int xPos;
 
-    sTutorMoveAndElevatorWindowId = AddWindow(&gElevatorFloor_WindowTemplate);
-    SetStandardWindowBorderStyle(sTutorMoveAndElevatorWindowId, 0);
+    sTutorMoveAndElevatorWindowId = AddWindow(&sWindowTemplate_ElevatorFloor);
+    SetStandardWindowBorderStyle(sTutorMoveAndElevatorWindowId, FALSE);
 
-    xPos = GetStringCenterAlignXOffset(1, gText_ElevatorNowOn, 64);
-    AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, gText_ElevatorNowOn, xPos, 1, TEXT_SPEED_FF, NULL);
+    xPos = GetStringCenterAlignXOffset(FONT_NORMAL, gText_ElevatorNowOn, 64);
+    AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, FONT_NORMAL, gText_ElevatorNowOn, xPos, 1, TEXT_SKIP_DRAW, NULL);
 
-    xPos = GetStringCenterAlignXOffset(1, gDeptStoreFloorNames[gSpecialVar_0x8005], 64);
-    AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, gDeptStoreFloorNames[gSpecialVar_0x8005], xPos, 17, TEXT_SPEED_FF, NULL);
+    xPos = GetStringCenterAlignXOffset(FONT_NORMAL, sDeptStoreFloorNames[gSpecialVar_0x8005], 64);
+    AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, FONT_NORMAL, sDeptStoreFloorNames[gSpecialVar_0x8005], xPos, 17, TEXT_SKIP_DRAW, NULL);
 
     PutWindowTilemap(sTutorMoveAndElevatorWindowId);
-    CopyWindowToVram(sTutorMoveAndElevatorWindowId, 3);
+    CopyWindowToVram(sTutorMoveAndElevatorWindowId, COPYWIN_FULL);
 }
 
 void CloseDeptStoreElevatorWindow(void)
@@ -1978,17 +2167,23 @@ void CloseDeptStoreElevatorWindow(void)
     RemoveWindow(sTutorMoveAndElevatorWindowId);
 }
 
+// Task data for Task_MoveElevatorWindowLights
+#define tMoveCounter data[0]
+#define tTimer       data[1]
+#define tDescending  data[2]
+#define tTotalMoves  data[3]
+
 static void MoveElevatorWindowLights(u16 floorDelta, bool8 descending)
 {
-    static const u8 sElevatorLightCycles[] = { 3, 6, 9, 12, 15, 18, 21, 24, 27 };
+    static const u8 sElevatorLightCycles[MAX_ELEVATOR_TRIP] = { 3, 6, 9, 12, 15, 18, 21, 24, 27 };
 
     if (FuncIsActiveTask(Task_MoveElevatorWindowLights) != TRUE)
     {
         u8 taskId = CreateTask(Task_MoveElevatorWindowLights, 8);
-        gTasks[taskId].data[0] = 0;
-        gTasks[taskId].data[1] = 0;
-        gTasks[taskId].data[2] = descending;
-        gTasks[taskId].data[3] = sElevatorLightCycles[floorDelta];
+        gTasks[taskId].tMoveCounter = 0;
+        gTasks[taskId].tTimer = 0;
+        gTasks[taskId].tDescending = descending;
+        gTasks[taskId].tTotalMoves = sElevatorLightCycles[floorDelta];
     }
 }
 
@@ -1997,60 +2192,57 @@ static void Task_MoveElevatorWindowLights(u8 taskId)
     u8 x, y;
     s16 *data = gTasks[taskId].data;
 
-    if (data[1] == 6)
+    if (tTimer == 6)
     {
-        data[0]++;
+        tMoveCounter++;
 
-        // ascending
-        if (data[2] == FALSE)
+        if (!tDescending)
         {
-            for (y = 0; y < 3; y++)
+            // Ascending
+            for (y = 0; y < ELEVATOR_WINDOW_HEIGHT; y++)
             {
-                for (x = 0; x < 3; x++)
-                {
-                    MapGridSetMetatileIdAt(x + 8, y + 7, sElevatorWindowTiles_Ascending[y][data[0] % 3] | METATILE_COLLISION_MASK);
-                }
+                for (x = 0; x < ELEVATOR_WINDOW_WIDTH; x++)
+                    MapGridSetMetatileIdAt(x + MAP_OFFSET + 1, y + MAP_OFFSET, sElevatorWindowTiles_Ascending[y][tMoveCounter % ELEVATOR_LIGHT_STAGES] | MAPGRID_IMPASSABLE);
             }
         }
-        // descending
         else
         {
-            for (y = 0; y < 3; y++)
+            // Descending
+            for (y = 0; y < ELEVATOR_WINDOW_HEIGHT; y++)
             {
-                for (x = 0; x < 3; x++)
-                {
-                    MapGridSetMetatileIdAt(x + 8, y + 7, sElevatorWindowTiles_Descending[y][data[0] % 3] | METATILE_COLLISION_MASK);
-                }
+                for (x = 0; x < ELEVATOR_WINDOW_WIDTH; x++)
+                    MapGridSetMetatileIdAt(x + MAP_OFFSET + 1, y + MAP_OFFSET, sElevatorWindowTiles_Descending[y][tMoveCounter % ELEVATOR_LIGHT_STAGES] | MAPGRID_IMPASSABLE);
             }
         }
         DrawWholeMapView();
-        data[1] = 0;
-        if (data[0] == data[3])
-        {
+        tTimer = 0;
+        if (tMoveCounter == tTotalMoves)
             DestroyTask(taskId);
-        }
     }
-    data[1]++;
+    tTimer++;
 }
+
+#undef tMoveCounter
+#undef tTimer
+#undef tDescending
+#undef tTotalMoves
 
 void BufferVarsForIVRater(void)
 {
-    u8 i;
+    u32 i;
     u32 ivStorage[NUM_STATS];
 
-    ivStorage[STAT_HP] = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HP_IV);
-    ivStorage[STAT_ATK] = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_ATK_IV);
-    ivStorage[STAT_DEF] = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_DEF_IV);
-    ivStorage[STAT_SPEED] = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPEED_IV);
-    ivStorage[STAT_SPATK] = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPATK_IV);
-    ivStorage[STAT_SPDEF] = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPDEF_IV);
+    struct BoxPokemon *boxmon = GetSelectedBoxMonFromPcOrParty();;
+
+    for (i = 0; i < NUM_STATS; i++)
+    {
+       ivStorage[i] = GetBoxMonData(boxmon, MON_DATA_HP_IV + i);
+    }
 
     gSpecialVar_0x8005 = 0;
 
     for (i = 0; i < NUM_STATS; i++)
-    {
         gSpecialVar_0x8005 += ivStorage[i];
-    }
 
     gSpecialVar_0x8006 = 0;
     gSpecialVar_0x8007 = ivStorage[STAT_HP];
@@ -2076,33 +2268,33 @@ void BufferVarsForIVRater(void)
 
 bool8 UsedPokemonCenterWarp(void)
 {
-    static const u16 sPokemonCenters[] = 
-    { 
-        MAP_OLDALE_TOWN_POKEMON_CENTER_1F, 
-        MAP_DEWFORD_TOWN_POKEMON_CENTER_1F, 
-        MAP_LAVARIDGE_TOWN_POKEMON_CENTER_1F, 
-        MAP_FALLARBOR_TOWN_POKEMON_CENTER_1F, 
-        MAP_VERDANTURF_TOWN_POKEMON_CENTER_1F, 
-        MAP_PACIFIDLOG_TOWN_POKEMON_CENTER_1F, 
-        MAP_PETALBURG_CITY_POKEMON_CENTER_1F, 
-        MAP_SLATEPORT_CITY_POKEMON_CENTER_1F, 
-        MAP_MAUVILLE_CITY_POKEMON_CENTER_1F, 
-        MAP_RUSTBORO_CITY_POKEMON_CENTER_1F, 
-        MAP_FORTREE_CITY_POKEMON_CENTER_1F, 
-        MAP_LILYCOVE_CITY_POKEMON_CENTER_1F, 
-        MAP_MOSSDEEP_CITY_POKEMON_CENTER_1F, 
-        MAP_SOOTOPOLIS_CITY_POKEMON_CENTER_1F, 
-        MAP_EVER_GRANDE_CITY_POKEMON_CENTER_1F, 
-        MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_1F, 
-        MAP_BATTLE_FRONTIER_POKEMON_CENTER_1F, 
-        MAP_UNION_ROOM, 
-        0xFFFF 
+    static const u16 sPokemonCenters[] =
+    {
+        MAP_OLDALE_TOWN_POKEMON_CENTER_1F,
+        MAP_DEWFORD_TOWN_POKEMON_CENTER_1F,
+        MAP_LAVARIDGE_TOWN_POKEMON_CENTER_1F,
+        MAP_FALLARBOR_TOWN_POKEMON_CENTER_1F,
+        MAP_VERDANTURF_TOWN_POKEMON_CENTER_1F,
+        MAP_PACIFIDLOG_TOWN_POKEMON_CENTER_1F,
+        MAP_PETALBURG_CITY_POKEMON_CENTER_1F,
+        MAP_SLATEPORT_CITY_POKEMON_CENTER_1F,
+        MAP_MAUVILLE_CITY_POKEMON_CENTER_1F,
+        MAP_RUSTBORO_CITY_POKEMON_CENTER_1F,
+        MAP_FORTREE_CITY_POKEMON_CENTER_1F,
+        MAP_LILYCOVE_CITY_POKEMON_CENTER_1F,
+        MAP_MOSSDEEP_CITY_POKEMON_CENTER_1F,
+        MAP_SOOTOPOLIS_CITY_POKEMON_CENTER_1F,
+        MAP_EVER_GRANDE_CITY_POKEMON_CENTER_1F,
+        MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_1F,
+        MAP_BATTLE_FRONTIER_POKEMON_CENTER_1F,
+        MAP_UNION_ROOM,
+        MAP_UNDEFINED
     };
 
     int i;
     u16 map = (gLastUsedWarp.mapGroup << 8) + gLastUsedWarp.mapNum;
 
-    for (i = 0; sPokemonCenters[i] != 0xFFFF; i++)
+    for (i = 0; sPokemonCenters[i] != MAP_UNDEFINED; i++)
     {
         if (sPokemonCenters[i] == map)
             return TRUE;
@@ -2113,10 +2305,9 @@ bool8 UsedPokemonCenterWarp(void)
 
 bool32 PlayerNotAtTrainerHillEntrance(void)
 {
-    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(TRAINER_HILL_ENTRANCE) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_HILL_ENTRANCE))
-    {
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_TRAINER_HILL_ENTRANCE) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_TRAINER_HILL_ENTRANCE))
         return FALSE;
-    }
+
     return TRUE;
 }
 
@@ -2129,85 +2320,82 @@ void UpdateFrontierManiac(u16 daysSince)
 
 void ShowFrontierManiacMessage(void)
 {
-    static const u8 *const sFrontierManiacMessages[][FRONTIER_MANIAC_MESSAGE_COUNT] = 
+    static const u8 *const sFrontierManiacMessages[][FRONTIER_MANIAC_MESSAGE_COUNT] =
     {
-        [FRONTIER_MANIAC_BATTLE_TOWER_SINGLES] =
-        { 
-            BattleFrontier_Lounge2_Text_SalonMaidenIsThere, 
-            BattleFrontier_Lounge2_Text_SalonMaidenSilverMons, 
-            BattleFrontier_Lounge2_Text_SalonMaidenGoldMons 
+        [FRONTIER_MANIAC_TOWER_SINGLES] =
+        {
+            BattleFrontier_Lounge2_Text_SalonMaidenIsThere,
+            BattleFrontier_Lounge2_Text_SalonMaidenSilverMons,
+            BattleFrontier_Lounge2_Text_SalonMaidenGoldMons
         },
-        [FRONTIER_MANIAC_BATTLE_TOWER_DOUBLES] =
-        { 
-            BattleFrontier_Lounge2_Text_DoubleBattleAdvice1, 
-            BattleFrontier_Lounge2_Text_DoubleBattleAdvice2, 
-            BattleFrontier_Lounge2_Text_DoubleBattleAdvice3 
+        [FRONTIER_MANIAC_TOWER_DOUBLES] =
+        {
+            BattleFrontier_Lounge2_Text_DoubleBattleAdvice1,
+            BattleFrontier_Lounge2_Text_DoubleBattleAdvice2,
+            BattleFrontier_Lounge2_Text_DoubleBattleAdvice3
         },
-        [FRONTIER_MANIAC_BATTLE_TOWER_MULTIS] = 
-        { 
-            BattleFrontier_Lounge2_Text_MultiBattleAdvice, 
-            BattleFrontier_Lounge2_Text_MultiBattleAdvice, 
-            BattleFrontier_Lounge2_Text_MultiBattleAdvice 
+        [FRONTIER_MANIAC_TOWER_MULTIS] =
+        {
+            BattleFrontier_Lounge2_Text_MultiBattleAdvice,
+            BattleFrontier_Lounge2_Text_MultiBattleAdvice,
+            BattleFrontier_Lounge2_Text_MultiBattleAdvice
         },
-        [FRONTIER_MANIAC_BATTLE_TOWER_LINK] =
-        { 
-            BattleFrontier_Lounge2_Text_LinkMultiBattleAdvice, 
-            BattleFrontier_Lounge2_Text_LinkMultiBattleAdvice, 
-            BattleFrontier_Lounge2_Text_LinkMultiBattleAdvice 
+        [FRONTIER_MANIAC_TOWER_LINK] =
+        {
+            BattleFrontier_Lounge2_Text_LinkMultiBattleAdvice,
+            BattleFrontier_Lounge2_Text_LinkMultiBattleAdvice,
+            BattleFrontier_Lounge2_Text_LinkMultiBattleAdvice
         },
-        [FRONTIER_MANIAC_BATTLE_DOME] =
-        { 
-            BattleFrontier_Lounge2_Text_DomeAceIsThere, 
-            BattleFrontier_Lounge2_Text_DomeAceSilverMons, 
-            BattleFrontier_Lounge2_Text_DomeAceGoldMons 
+        [FRONTIER_MANIAC_DOME] =
+        {
+            BattleFrontier_Lounge2_Text_DomeAceIsThere,
+            BattleFrontier_Lounge2_Text_DomeAceSilverMons,
+            BattleFrontier_Lounge2_Text_DomeAceGoldMons
         },
-        [FRONTIER_MANIAC_BATTLE_FACTORY] =
-        { 
-            BattleFrontier_Lounge2_Text_FactoryHeadIsThere, 
-            BattleFrontier_Lounge2_Text_FactoryHeadSilverMons, 
-            BattleFrontier_Lounge2_Text_FactoryHeadGoldMons 
+        [FRONTIER_MANIAC_FACTORY] =
+        {
+            BattleFrontier_Lounge2_Text_FactoryHeadIsThere,
+            BattleFrontier_Lounge2_Text_FactoryHeadSilverMons,
+            BattleFrontier_Lounge2_Text_FactoryHeadGoldMons
         },
-        [FRONTIER_MANIAC_BATTLE_PALACE] =
-        { 
-            BattleFrontier_Lounge2_Text_PalaceMavenIsThere, 
-            BattleFrontier_Lounge2_Text_PalaceMavenSilverMons, 
-            BattleFrontier_Lounge2_Text_PalaceMavenGoldMons 
+        [FRONTIER_MANIAC_PALACE] =
+        {
+            BattleFrontier_Lounge2_Text_PalaceMavenIsThere,
+            BattleFrontier_Lounge2_Text_PalaceMavenSilverMons,
+            BattleFrontier_Lounge2_Text_PalaceMavenGoldMons
         },
-        [FRONTIER_MANIAC_BATTLE_ARENA] =
-        { 
-            BattleFrontier_Lounge2_Text_ArenaTycoonIsThere, 
-            BattleFrontier_Lounge2_Text_ArenaTycoonSilverMons, 
-            BattleFrontier_Lounge2_Text_ArenaTycoonGoldMons 
+        [FRONTIER_MANIAC_ARENA] =
+        {
+            BattleFrontier_Lounge2_Text_ArenaTycoonIsThere,
+            BattleFrontier_Lounge2_Text_ArenaTycoonSilverMons,
+            BattleFrontier_Lounge2_Text_ArenaTycoonGoldMons
         },
-        [FRONTIER_MANIAC_BATTLE_PIKE] = 
-        { 
-            BattleFrontier_Lounge2_Text_PikeQueenIsThere, 
-            BattleFrontier_Lounge2_Text_PikeQueenSilverMons, 
-            BattleFrontier_Lounge2_Text_PikeQueenGoldMons 
+        [FRONTIER_MANIAC_PIKE] =
+        {
+            BattleFrontier_Lounge2_Text_PikeQueenIsThere,
+            BattleFrontier_Lounge2_Text_PikeQueenSilverMons,
+            BattleFrontier_Lounge2_Text_PikeQueenGoldMons
         },
-        [FRONTIER_MANIAC_BATTLE_PYRAMID] =
-        { 
-            BattleFrontier_Lounge2_Text_PyramidKingIsThere, 
-            BattleFrontier_Lounge2_Text_PyramidKingSilverMons, 
-            BattleFrontier_Lounge2_Text_PyramidKingGoldMons 
+        [FRONTIER_MANIAC_PYRAMID] =
+        {
+            BattleFrontier_Lounge2_Text_PyramidKingIsThere,
+            BattleFrontier_Lounge2_Text_PyramidKingSilverMons,
+            BattleFrontier_Lounge2_Text_PyramidKingGoldMons
         },
     };
 
-    static const u8 sFrontierManiacStreakThresholds[][FRONTIER_MANIAC_MESSAGE_COUNT - 1] = 
+    static const u8 sFrontierManiacStreakThresholds[][FRONTIER_MANIAC_MESSAGE_COUNT - 1] =
     {
-        [FRONTIER_MANIAC_BATTLE_TOWER_SINGLES] = { 21, 56 },
-        [FRONTIER_MANIAC_BATTLE_TOWER_DOUBLES] = { 21, 35 },
-        [FRONTIER_MANIAC_BATTLE_TOWER_MULTIS]  = { 255, 255 },
-        [FRONTIER_MANIAC_BATTLE_TOWER_LINK]    = { 255, 255 },
-        [FRONTIER_MANIAC_BATTLE_DOME]          = { 2, 4 },
-        [FRONTIER_MANIAC_BATTLE_FACTORY]       = { 7, 21 },
-        [FRONTIER_MANIAC_BATTLE_PALACE]        = { 7, 21 },
-        [FRONTIER_MANIAC_BATTLE_ARENA]         = { 14, 28 },
-        // The maniac is only reachable between 14-room Pike runs and the
-        // comparison below is strict. These reveal Lucy's teams at 14 and
-        // 126 rooms, one complete run before her 28- and 140-room battles.
-        [FRONTIER_MANIAC_BATTLE_PIKE]          = { 13, 112 },
-        [FRONTIER_MANIAC_BATTLE_PYRAMID]       = { 7, 56 }
+        [FRONTIER_MANIAC_TOWER_SINGLES] = { 21, 56 },
+        [FRONTIER_MANIAC_TOWER_DOUBLES] = { 21, 35 },
+        [FRONTIER_MANIAC_TOWER_MULTIS]  = { 255, 255 },
+        [FRONTIER_MANIAC_TOWER_LINK]    = { 255, 255 },
+        [FRONTIER_MANIAC_DOME]          = { 2, 4 },
+        [FRONTIER_MANIAC_FACTORY]       = { 7, 21 },
+        [FRONTIER_MANIAC_PALACE]        = { 7, 21 },
+        [FRONTIER_MANIAC_ARENA]         = { 14, 28 },
+        [FRONTIER_MANIAC_PIKE]          = { 13, 112 }, //BUG: 112 (0x70) is probably a mistake; the Pike Queen is battled twice well before that
+        [FRONTIER_MANIAC_PYRAMID]       = { 7, 56 }
     };
 
     u8 i;
@@ -2216,86 +2404,60 @@ void ShowFrontierManiacMessage(void)
 
     switch (facility)
     {
-        case FRONTIER_MANIAC_BATTLE_TOWER_SINGLES:
-        case FRONTIER_MANIAC_BATTLE_TOWER_DOUBLES:
-        case FRONTIER_MANIAC_BATTLE_TOWER_MULTIS:
-        case FRONTIER_MANIAC_BATTLE_TOWER_LINK:
-            if (gSaveBlock2Ptr->frontier.towerWinStreaks[facility][FRONTIER_LVL_50] 
-                >= gSaveBlock2Ptr->frontier.towerWinStreaks[facility][FRONTIER_LVL_OPEN])
-            {
-                winStreak = gSaveBlock2Ptr->frontier.towerWinStreaks[facility][FRONTIER_LVL_50];
-            }
-            else
-            {
-                winStreak = gSaveBlock2Ptr->frontier.towerWinStreaks[facility][FRONTIER_LVL_OPEN];
-            }
-            break;
-        case FRONTIER_MANIAC_BATTLE_DOME:
-            if (gSaveBlock2Ptr->frontier.domeWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50] 
-                >= gSaveBlock2Ptr->frontier.domeWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_OPEN])
-            {
-                winStreak = gSaveBlock2Ptr->frontier.domeWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50];
-            }
-            else
-            {
-                winStreak = gSaveBlock2Ptr->frontier.domeWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_OPEN];
-            }
-            break;
-        case FRONTIER_MANIAC_BATTLE_FACTORY:
-            if (gSaveBlock2Ptr->frontier.factoryWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50] 
-                >= gSaveBlock2Ptr->frontier.factoryWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_OPEN])
-            {
-                winStreak = gSaveBlock2Ptr->frontier.factoryWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50];
-            }
-            else
-            {
-                winStreak = gSaveBlock2Ptr->frontier.factoryWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_OPEN];
-            }
-            break;
-        case FRONTIER_MANIAC_BATTLE_PALACE:
-            if (gSaveBlock2Ptr->frontier.palaceWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50] 
-                >= gSaveBlock2Ptr->frontier.palaceWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_OPEN])
-            {
-                winStreak = gSaveBlock2Ptr->frontier.palaceWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50];
-            }
-            else
-            {
-                winStreak = gSaveBlock2Ptr->frontier.palaceWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_OPEN];
-            }
-            break;
-        case FRONTIER_MANIAC_BATTLE_ARENA:
-            if (gSaveBlock2Ptr->frontier.arenaWinStreaks[FRONTIER_LVL_50] 
-                >= gSaveBlock2Ptr->frontier.arenaWinStreaks[FRONTIER_LVL_OPEN])
-            {
-                winStreak = gSaveBlock2Ptr->frontier.arenaWinStreaks[FRONTIER_LVL_50];
-            }
-            else
-            {
-                winStreak = gSaveBlock2Ptr->frontier.arenaWinStreaks[FRONTIER_LVL_OPEN];
-            }
-            break;
-        case FRONTIER_MANIAC_BATTLE_PIKE:
-            if (gSaveBlock2Ptr->frontier.pikeWinStreaks[FRONTIER_LVL_50] 
-                >= gSaveBlock2Ptr->frontier.pikeWinStreaks[FRONTIER_LVL_OPEN])
-            {
-                winStreak = gSaveBlock2Ptr->frontier.pikeWinStreaks[FRONTIER_LVL_50];
-            }
-            else
-            {
-                winStreak = gSaveBlock2Ptr->frontier.pikeWinStreaks[FRONTIER_LVL_OPEN];
-            }
-            break;
-        case FRONTIER_MANIAC_BATTLE_PYRAMID:
-            if (gSaveBlock2Ptr->frontier.pyramidWinStreaks[FRONTIER_LVL_50] 
-                >= gSaveBlock2Ptr->frontier.pyramidWinStreaks[FRONTIER_LVL_OPEN])
-            {
-                winStreak = gSaveBlock2Ptr->frontier.pyramidWinStreaks[FRONTIER_LVL_50];
-            }
-            else
-            {
-                winStreak = gSaveBlock2Ptr->frontier.pyramidWinStreaks[FRONTIER_LVL_OPEN];
-            }
-            break;
+    case FRONTIER_MANIAC_TOWER_SINGLES:
+    case FRONTIER_MANIAC_TOWER_DOUBLES:
+    case FRONTIER_MANIAC_TOWER_MULTIS:
+    case FRONTIER_MANIAC_TOWER_LINK:
+        if (gSaveBlock2Ptr->frontier.towerWinStreaks[facility][FRONTIER_LVL_50]
+            >= gSaveBlock2Ptr->frontier.towerWinStreaks[facility][FRONTIER_LVL_OPEN])
+            winStreak = gSaveBlock2Ptr->frontier.towerWinStreaks[facility][FRONTIER_LVL_50];
+        else
+            winStreak = gSaveBlock2Ptr->frontier.towerWinStreaks[facility][FRONTIER_LVL_OPEN];
+        break;
+    case FRONTIER_MANIAC_DOME:
+        if (gSaveBlock2Ptr->frontier.domeWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50]
+            >= gSaveBlock2Ptr->frontier.domeWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_OPEN])
+            winStreak = gSaveBlock2Ptr->frontier.domeWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50];
+        else
+            winStreak = gSaveBlock2Ptr->frontier.domeWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_OPEN];
+        break;
+    case FRONTIER_MANIAC_FACTORY:
+        if (gSaveBlock2Ptr->frontier.factoryWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50]
+            >= gSaveBlock2Ptr->frontier.factoryWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_OPEN])
+            winStreak = gSaveBlock2Ptr->frontier.factoryWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50];
+        else
+            winStreak = gSaveBlock2Ptr->frontier.factoryWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_OPEN];
+        break;
+    case FRONTIER_MANIAC_PALACE:
+        if (gSaveBlock2Ptr->frontier.palaceWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50]
+            >= gSaveBlock2Ptr->frontier.palaceWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_OPEN])
+            winStreak = gSaveBlock2Ptr->frontier.palaceWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50];
+        else
+            winStreak = gSaveBlock2Ptr->frontier.palaceWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_OPEN];
+        break;
+    case FRONTIER_MANIAC_ARENA:
+        if (gSaveBlock2Ptr->frontier.arenaWinStreaks[FRONTIER_LVL_50]
+            >= gSaveBlock2Ptr->frontier.arenaWinStreaks[FRONTIER_LVL_OPEN])
+            winStreak = gSaveBlock2Ptr->frontier.arenaWinStreaks[FRONTIER_LVL_50];
+        else
+            winStreak = gSaveBlock2Ptr->frontier.arenaWinStreaks[FRONTIER_LVL_OPEN];
+        break;
+    case FRONTIER_MANIAC_PIKE:
+        if (gSaveBlock2Ptr->frontier.pikeWinStreaks[FRONTIER_LVL_50]
+            >= gSaveBlock2Ptr->frontier.pikeWinStreaks[FRONTIER_LVL_OPEN])
+            winStreak = gSaveBlock2Ptr->frontier.pikeWinStreaks[FRONTIER_LVL_50];
+        else
+            winStreak = gSaveBlock2Ptr->frontier.pikeWinStreaks[FRONTIER_LVL_OPEN];
+        break;
+    case FRONTIER_MANIAC_PYRAMID:
+        if (gSaveBlock2Ptr->frontier.pyramidWinStreaks[FRONTIER_LVL_50]
+            >= gSaveBlock2Ptr->frontier.pyramidWinStreaks[FRONTIER_LVL_OPEN])
+            winStreak = gSaveBlock2Ptr->frontier.pyramidWinStreaks[FRONTIER_LVL_50];
+        else
+            winStreak = gSaveBlock2Ptr->frontier.pyramidWinStreaks[FRONTIER_LVL_OPEN];
+        break;
+    default:
+        return;
     }
 
     for (i = 0; i < FRONTIER_MANIAC_MESSAGE_COUNT - 1 && sFrontierManiacStreakThresholds[facility][i] < winStreak; i++);
@@ -2312,7 +2474,7 @@ void BufferBattleTowerElevatorFloors(void)
 
     u8 i;
     u16 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
-    u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
 
     if (battleMode == FRONTIER_MODE_MULTIS && !FlagGet(FLAG_CHOSEN_MULTI_BATTLE_NPC_PARTNER))
     {
@@ -2358,347 +2520,262 @@ void ShowScrollableMultichoice(void)
     struct Task *task = &gTasks[taskId];
     task->tScrollMultiId = gSpecialVar_0x8004;
 
-    switch (gSpecialVar_0x8004)
+    switch ((enum ScrollMulti)gSpecialVar_0x8004)
     {
-        case SCROLL_MULTI_NONE:
-            task->tMaxItemsOnScreen = 1;
+    case SCROLL_MULTI_NONE:
+        task->tMaxItemsOnScreen = 1;
+        task->tNumItems = 1;
+        task->tLeft = 1;
+        task->tTop = 1;
+        task->tWidth = 1;
+        task->tHeight = 1;
+        task->tKeepOpenAfterSelect = FALSE;
+        task->tTaskId = taskId;
+        break;
+    case SCROLL_MULTI_GLASS_WORKSHOP_VENDOR:
+        task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN - 1;
+        task->tNumItems = 8;
+        task->tLeft = 1;
+        task->tTop = 1;
+        task->tWidth = 9;
+        task->tHeight = 10;
+        task->tKeepOpenAfterSelect = FALSE;
+        task->tTaskId = taskId;
+        break;
+    case SCROLL_MULTI_POKEMON_FAN_CLUB_RATER:
+        task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
+        task->tNumItems = 12;
+        task->tLeft = 1;
+        task->tTop = 1;
+        task->tWidth = 7;
+        task->tHeight = 12;
+        task->tKeepOpenAfterSelect = FALSE;
+        task->tTaskId = taskId;
+        break;
+    case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_1:
+        task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
+        task->tNumItems = 11;
+        task->tLeft = 14;
+        task->tTop = 1;
+        task->tWidth = 15;
+        task->tHeight = 12;
+        task->tKeepOpenAfterSelect = FALSE;
+        task->tTaskId = taskId;
+        break;
+    case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2:
+        task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
+        task->tNumItems = 6;
+        task->tLeft = 14;
+        task->tTop = 1;
+        task->tWidth = 15;
+        task->tHeight = 12;
+        task->tKeepOpenAfterSelect = FALSE;
+        task->tTaskId = taskId;
+        break;
+    case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR:
+        task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
+        task->tNumItems = 7;
+        task->tLeft = 14;
+        task->tTop = 1;
+        task->tWidth = 15;
+        task->tHeight = 12;
+        task->tKeepOpenAfterSelect = FALSE;
+        task->tTaskId = taskId;
+        break;
+    case SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR:
+        task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
+        task->tNumItems = 10;
+        task->tLeft = 14;
+        task->tTop = 1;
+        task->tWidth = 15;
+        task->tHeight = 12;
+        task->tKeepOpenAfterSelect = FALSE;
+        task->tTaskId = taskId;
+        break;
+    case SCROLL_MULTI_BERRY_POWDER_VENDOR:
+        task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
+        task->tNumItems = 12;
+        task->tLeft = 15;
+        task->tTop = 1;
+        task->tWidth = 14;
+        task->tHeight = 12;
+        task->tKeepOpenAfterSelect = FALSE;
+        task->tTaskId = taskId;
+        break;
+    case SCROLL_MULTI_BF_RECEPTIONIST:
+        task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
+        task->tNumItems = 10;
+        task->tLeft = 17;
+        task->tTop = 1;
+        task->tWidth = 11;
+        task->tHeight = 12;
+        task->tKeepOpenAfterSelect = FALSE;
+        task->tTaskId = taskId;
+        break;
+    case SCROLL_MULTI_BF_MOVE_TUTOR_1:
+    case SCROLL_MULTI_BF_MOVE_TUTOR_2:
+        task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
+        task->tNumItems = 11;
+        task->tLeft = 15;
+        task->tTop = 1;
+        task->tWidth = 14;
+        task->tHeight = 12;
+        task->tKeepOpenAfterSelect = FALSE;
+        task->tTaskId = taskId;
+        break;
+    case SCROLL_MULTI_SS_TIDAL_DESTINATION:
+        task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
+        task->tNumItems = 7;
+        task->tLeft = 19;
+        task->tTop = 1;
+        task->tWidth = 10;
+        task->tHeight = 12;
+        task->tKeepOpenAfterSelect = FALSE;
+        task->tTaskId = taskId;
+        break;
+    case SCROLL_MULTI_BATTLE_TENT_RULES:
+        task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
+        task->tNumItems = 7;
+        task->tLeft = 17;
+        task->tTop = 1;
+        task->tWidth = 12;
+        task->tHeight = 12;
+        task->tKeepOpenAfterSelect = FALSE;
+        task->tTaskId = taskId;
+        break;
+    case SCROLL_MULTI_BADGES:
+        task->tMaxItemsOnScreen = 4;
+        task->tNumItems = 9;
+        task->tLeft = 1;
+        task->tTop = 1;
+        task->tWidth = 12;
+        task->tHeight = 8;
+        task->tKeepOpenAfterSelect = FALSE;
+        task->tTaskId = taskId;
+        break;
+    case SCROLL_MULTI_SILPHCO_FLOORS:
+        task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
+        task->tNumItems = 12;
+        task->tLeft = 1;
+        task->tTop = 1;
+        task->tWidth = 8;
+        task->tHeight = 12;
+        task->tKeepOpenAfterSelect = FALSE;
+        task->tTaskId = taskId;
+        task->tScrollOffset = sElevatorScroll;
+        task->tSelectedRow = sElevatorCursorPos;
+        break;
+    case SCROLL_MULTI_EMERALD_CHAMPIONS_BATTLE_SET:
+        if (gSpecialVar_0x800A < gPartiesCount[B_TRAINER_PLAYER])
+            task->tNumItems = GetEmeraldChampionsBattleSetCount(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x800A]) + 1;
+        else
             task->tNumItems = 1;
-            task->tLeft = 1;
-            task->tTop = 1;
-            task->tWidth = 1;
-            task->tHeight = 1;
-            task->tKeepOpenAfterSelect = FALSE;
-            task->tTaskId = taskId;
-            break;
-        case SCROLL_MULTI_GLASS_WORKSHOP_VENDOR:
-            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN - 1;
-            task->tNumItems = 8;
-            task->tLeft = 1;
-            task->tTop = 1;
-            task->tWidth = 9;
-            task->tHeight = 10;
-            task->tKeepOpenAfterSelect = FALSE;
-            task->tTaskId = taskId;
-            break;
-        case SCROLL_MULTI_POKEMON_FAN_CLUB_RATER:
-            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
-            task->tNumItems = 12;
-            task->tLeft = 1;
-            task->tTop = 1;
-            task->tWidth = 7;
-            task->tHeight = 12;
-            task->tKeepOpenAfterSelect = FALSE;
-            task->tTaskId = taskId;
-            break;
-        case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_1:
-            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
-            task->tNumItems = 11;
-            task->tLeft = 14;
-            task->tTop = 1;
-            task->tWidth = 15;
-            task->tHeight = 12;
-            task->tKeepOpenAfterSelect = FALSE;
-            task->tTaskId = taskId;
-            break;
-        case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2:
-            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
-            task->tNumItems = 6;
-            task->tLeft = 14;
-            task->tTop = 1;
-            task->tWidth = 15;
-            task->tHeight = 12;
-            task->tKeepOpenAfterSelect = FALSE;
-            task->tTaskId = taskId;
-            break;
-        case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR:
-            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
-            task->tNumItems = 7;
-            task->tLeft = 14;
-            task->tTop = 1;
-            task->tWidth = 15;
-            task->tHeight = 12;
-            task->tKeepOpenAfterSelect = FALSE;
-            task->tTaskId = taskId;
-            break;
-        case SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR:
-            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
-            task->tNumItems = 10;
-            task->tLeft = 14;
-            task->tTop = 1;
-            task->tWidth = 15;
-            task->tHeight = 12;
-            task->tKeepOpenAfterSelect = FALSE;
-            task->tTaskId = taskId;
-            break;
-        case SCROLL_MULTI_BERRY_POWDER_VENDOR:
-            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
-            task->tNumItems = 12;
-            task->tLeft = 15;
-            task->tTop = 1;
-            task->tWidth = 14;
-            task->tHeight = 12;
-            task->tKeepOpenAfterSelect = FALSE;
-            task->tTaskId = taskId;
-            break;
-        case SCROLL_MULTI_BF_RECEPTIONIST:
-            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
-            task->tNumItems = 10;
-            task->tLeft = 17;
-            task->tTop = 1;
-            task->tWidth = 11;
-            task->tHeight = 12;
-            task->tKeepOpenAfterSelect = FALSE;
-            task->tTaskId = taskId;
-            break;
-        case SCROLL_MULTI_BF_MOVE_TUTOR_1:
-        case SCROLL_MULTI_BF_MOVE_TUTOR_2:
-            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
-            task->tNumItems = 11;
-            task->tLeft = 15;
-            task->tTop = 1;
-            task->tWidth = 14;
-            task->tHeight = 12;
-            task->tKeepOpenAfterSelect = FALSE;
-            task->tTaskId = taskId;
-            break;
-        case SCROLL_MULTI_SS_TIDAL_DESTINATION:
-            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
-            task->tNumItems = 7;
-            task->tLeft = 19;
-            task->tTop = 1;
-            task->tWidth = 10;
-            task->tHeight = 12;
-            task->tKeepOpenAfterSelect = FALSE;
-            task->tTaskId = taskId;
-            break;
-        case SCROLL_MULTI_BATTLE_TENT_RULES:
-            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
-            task->tNumItems = 7;
-            task->tLeft = 17;
-            task->tTop = 1;
-            task->tWidth = 12;
-            task->tHeight = 12;
-            task->tKeepOpenAfterSelect = FALSE;
-            task->tTaskId = taskId;
-            break;
-        case SCROLL_MULTI_PC_TUTOR_SET_1:
-            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
-            task->tNumItems = 21;
-            task->tLeft = 17;
-            task->tTop = 1;
-            task->tWidth = 14;
-            task->tHeight = 12;
-            task->tKeepOpenAfterSelect = FALSE;
-            task->tTaskId = taskId;
-            break;
-        case SCROLL_MULTI_PC_TUTOR_SET_2:
-        case SCROLL_MULTI_PC_TUTOR_SET_3:
-        case SCROLL_MULTI_PC_TUTOR_SET_4:
-        case SCROLL_MULTI_PC_TUTOR_SET_5:
-        case SCROLL_MULTI_PC_TUTOR_SET_6:
-            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
-            task->tNumItems = 19;
-            task->tLeft = 17;
-            task->tTop = 1;
-            task->tWidth = 14;
-            task->tHeight = 12;
-            task->tKeepOpenAfterSelect = FALSE;
-            task->tTaskId = taskId;
-            break;
-        case SCROLL_MULTI_PC_TUTOR_SET_7:
-            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
-            task->tNumItems = 16;
-            task->tLeft = 17;
-            task->tTop = 1;
-            task->tWidth = 14;
-            task->tHeight = 12;
-            task->tKeepOpenAfterSelect = FALSE;
-            task->tTaskId = taskId;
-            break;
-        case SCROLL_MULTI_PC_TUTOR_SET_SELECT:
-            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
-            task->tNumItems = 8;
-            task->tLeft = 19;
-            task->tTop = 1;
-            task->tWidth = 12;
-            task->tHeight = 12;
-            task->tKeepOpenAfterSelect = FALSE;
-            task->tTaskId = taskId;
-            break;
-        case SCROLL_MULTI_GAMECORNER_POKEMON:
-            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
-            task->tNumItems = 15;
-            task->tLeft = 19;
-            task->tTop = 1;
-            task->tWidth = 12;
-            task->tHeight = 12;
-            task->tKeepOpenAfterSelect = FALSE;
-            task->tTaskId = taskId;
-            break;
-        case SCROLL_MULTI_GAMECORNER_GRASS_STARTERS:
-        case SCROLL_MULTI_GAMECORNER_FIRE_STARTERS:
-        case SCROLL_MULTI_GAMECORNER_WATER_STARTERS:
-            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
-            task->tNumItems = 8;
-            task->tLeft = 19;
-            task->tTop = 1;
-            task->tWidth = 12;
-            task->tHeight = 12;
-            task->tKeepOpenAfterSelect = FALSE;
-            task->tTaskId = taskId;
-            break;
-        case SCROLL_MULTI_REGION_NAMES:
-            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
-            task->tNumItems = 7;
-            task->tLeft = 22;
-            task->tTop = 1;
-            task->tWidth = 12;
-            task->tHeight = 12;
-            task->tKeepOpenAfterSelect = FALSE;
-            task->tTaskId = taskId;
-            break;
-        case SCROLL_MULTI_FURFROU_TRIMS:
-            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
-            task->tNumItems = 11;
-            task->tLeft = 22;
-            task->tTop = 1;
-            task->tWidth = 12;
-            task->tHeight = 12;
-            task->tKeepOpenAfterSelect = FALSE;
-            task->tTaskId = taskId;
-            break;
-        case SCROLL_MULTI_POKE_CENTER_TUTOR:
-            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
-            task->tNumItems = 7;
-            task->tLeft = 20;
-            task->tTop = 1;
-            task->tWidth = 14;
-            task->tHeight = 12;
-            task->tKeepOpenAfterSelect = FALSE;
-            task->tTaskId = taskId;
-            break;
-        case SCROLL_MULTI_HIDDEN_POWER:
-            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
-            task->tNumItems = 17;
-            task->tLeft = 20;
-            task->tTop = 1;
-            task->tWidth = 14;
-            task->tHeight = 12;
-            task->tKeepOpenAfterSelect = FALSE;
-            task->tTaskId = taskId;
-            break;
-        case SCROLL_MULTI_BATTLE_SET_STYLE:
-            if (gSpecialVar_0x800A < PARTY_SIZE)
-                task->tNumItems = GetVerdantBattleSetCount(&gPlayerParty[gSpecialVar_0x800A]) + 1;
-            else
-                task->tNumItems = 1;
-            // The 8-tile-tall window fits exactly 4 rows; scroll beyond that.
-            task->tMaxItemsOnScreen = min(task->tNumItems, 4);
-            task->tLeft = 10;
-            task->tTop = 1;
-            task->tWidth = 20;
-            task->tHeight = 8;
-            task->tKeepOpenAfterSelect = FALSE;
-            task->tTaskId = taskId;
-            break;
-        default:
-            gSpecialVar_Result = MULTI_B_PRESSED;
-            DestroyTask(taskId);
-            break;
+        task->tMaxItemsOnScreen = min(task->tNumItems, 4);
+        task->tLeft = 10;
+        task->tTop = 1;
+        task->tWidth = 20;
+        task->tHeight = 8;
+        task->tKeepOpenAfterSelect = FALSE;
+        task->tTaskId = taskId;
+        break;
+    default:
+        gSpecialVar_Result = MULTI_B_PRESSED;
+        DestroyTask(taskId);
+        break;
     }
 }
 
-static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] = 
+static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] =
 {
-    [SCROLL_MULTI_NONE] = 
+    [SCROLL_MULTI_NONE] =
     {
         gText_Exit
     },
-    [SCROLL_MULTI_GLASS_WORKSHOP_VENDOR] = 
+    [SCROLL_MULTI_GLASS_WORKSHOP_VENDOR] =
     {
-        gText_BlueFlute,
-        gText_YellowFlute,
-        gText_RedFlute,
-        gText_WhiteFlute,
-        gText_BlackFlute,
-        gText_PrettyChair,
-        gText_PrettyDesk,
+        COMPOUND_STRING("BLUE FLUTE"),
+        COMPOUND_STRING("YELLOW FLUTE"),
+        COMPOUND_STRING("RED FLUTE"),
+        COMPOUND_STRING("WHITE FLUTE"),
+        COMPOUND_STRING("BLACK FLUTE"),
+        COMPOUND_STRING("PRETTY CHAIR"),
+        COMPOUND_STRING("PRETTY DESK"),
         gText_Exit
     },
-    [SCROLL_MULTI_POKEMON_FAN_CLUB_RATER] = 
+    [SCROLL_MULTI_POKEMON_FAN_CLUB_RATER] =
     {
-        gText_0Pts,
-        gText_10Pts,
-        gText_20Pts,
-        gText_30Pts,
-        gText_40Pts,
-        gText_50Pts,
-        gText_60Pts,
-        gText_70Pts,
-        gText_80Pts,
-        gText_90Pts,
-        gText_100Pts,
-        gText_QuestionMark
+        COMPOUND_STRING("0 pts"),
+        COMPOUND_STRING("10 pts"),
+        COMPOUND_STRING("20 pts"),
+        COMPOUND_STRING("30 pts"),
+        COMPOUND_STRING("40 pts"),
+        COMPOUND_STRING("50 pts"),
+        COMPOUND_STRING("60 pts"),
+        COMPOUND_STRING("70 pts"),
+        COMPOUND_STRING("80 pts"),
+        COMPOUND_STRING("90 pts"),
+        COMPOUND_STRING("100 pts"),
+        COMPOUND_STRING("?")
     },
-    [SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_1] = 
+    [SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_1] =
     {
-        gText_KissPoster16BP,
-        gText_KissCushion32BP,
-        gText_SmoochumDoll32BP,
-        gText_TogepiDoll48BP,
-        gText_MeowthDoll48BP,
-        gText_ClefairyDoll48BP,
-        gText_DittoDoll48BP,
-        gText_CyndaquilDoll80BP,
-        gText_ChikoritaDoll80BP,
-        gText_TotodileDoll80BP,
+        COMPOUND_STRING("KISS POSTER{CLEAR_TO 94}16BP"),
+        COMPOUND_STRING("KISS CUSHION{CLEAR_TO 94}32BP"),
+        COMPOUND_STRING("SMOOCHUM DOLL{CLEAR_TO 94}32BP"),
+        COMPOUND_STRING("TOGEPI DOLL{CLEAR_TO 94}48BP"),
+        COMPOUND_STRING("MEOWTH DOLL{CLEAR_TO 94}48BP"),
+        COMPOUND_STRING("CLEFAIRY DOLL{CLEAR_TO 94}48BP"),
+        COMPOUND_STRING("DITTO DOLL{CLEAR_TO 94}48BP"),
+        COMPOUND_STRING("CYNDAQUIL DOLL{CLEAR_TO 94}80BP"),
+        COMPOUND_STRING("CHIKORITA DOLL{CLEAR_TO 94}80BP"),
+        COMPOUND_STRING("TOTODILE DOLL{CLEAR_TO 94}80BP"),
         gText_Exit
     },
     [SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2] =
     {
-        gText_LaprasDoll128BP,
-        gText_SnorlaxDoll128BP,
-        gText_VenusaurDoll256BP,
-        gText_CharizardDoll256BP,
-        gText_BlastoiseDoll256BP,
+        COMPOUND_STRING("LAPRAS DOLL{CLEAR_TO 88}128BP"),
+        COMPOUND_STRING("SNORLAX DOLL{CLEAR_TO 88}128BP"),
+        COMPOUND_STRING("VENUSAUR DOLL{CLEAR_TO 88}256BP"),
+        COMPOUND_STRING("CHARIZARD DOLL{CLEAR_TO 88}256BP"),
+        COMPOUND_STRING("BLASTOISE DOLL{CLEAR_TO 88}256BP"),
         gText_Exit
     },
     [SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR] =
     {
-        gText_Protein1BP,
-        gText_Calcium1BP,
-        gText_Iron1BP,
-        gText_Zinc1BP,
-        gText_Carbos1BP,
-        gText_HpUp1BP,
+        COMPOUND_STRING("PROTEIN{CLEAR_TO 100}1BP"),
+        COMPOUND_STRING("CALCIUM{CLEAR_TO 100}1BP"),
+        COMPOUND_STRING("IRON{CLEAR_TO 100}1BP"),
+        COMPOUND_STRING("ZINC{CLEAR_TO 100}1BP"),
+        COMPOUND_STRING("CARBOS{CLEAR_TO 100}1BP"),
+        COMPOUND_STRING("HP UP{CLEAR_TO 100}1BP"),
         gText_Exit
     },
     [SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR] =
     {
-        gText_Leftovers48BP,
-        gText_WhiteHerb48BP,
-        gText_QuickClaw48BP,
-        gText_MentalHerb48BP,
-        gText_BrightPowder64BP,
-        gText_ChoiceBand64BP,
-        gText_KingsRock64BP,
-        gText_FocusBand64BP,
-        gText_ScopeLens64BP,
+        COMPOUND_STRING("LEFTOVERS{CLEAR_TO 94}48BP"),
+        COMPOUND_STRING("WHITE HERB{CLEAR_TO 94}48BP"),
+        COMPOUND_STRING("QUICK CLAW{CLEAR_TO 94}48BP"),
+        COMPOUND_STRING("MENTAL HERB{CLEAR_TO 94}48BP"),
+        COMPOUND_STRING("BRIGHTPOWDER{CLEAR_TO 94}64BP"),
+        COMPOUND_STRING("CHOICE BAND{CLEAR_TO 94}64BP"),
+        COMPOUND_STRING("KING'S ROCK{CLEAR_TO 94}64BP"),
+        COMPOUND_STRING("FOCUS BAND{CLEAR_TO 94}64BP"),
+        COMPOUND_STRING("SCOPE LENS{CLEAR_TO 94}64BP"),
         gText_Exit
     },
     [SCROLL_MULTI_BERRY_POWDER_VENDOR] =
     {
-        gText_EnergyPowder50,
-        gText_EnergyRoot80,
-        gText_HealPowder50,
-        gText_RevivalHerb300,
-        gText_Protein1000,
-        gText_Iron1000,
-        gText_Carbos1000,
-        gText_Calcium1000,
-        gText_Zinc1000,
-        gText_HPUp1000,
-        gText_PPUp3000,
+        COMPOUND_STRING("ENERGYPOWDER{CLEAR_TO 114}{FONT_SMALL}50"),
+        COMPOUND_STRING("ENERGY ROOT{CLEAR_TO 114}{FONT_SMALL}80"),
+        COMPOUND_STRING("HEAL POWDER{CLEAR_TO 114}{FONT_SMALL}50"),
+        COMPOUND_STRING("REVIVAL HERB{CLEAR_TO 108}{FONT_SMALL}300"),
+        COMPOUND_STRING("PROTEIN{CLEAR_TO 99}{FONT_SMALL}1,000"),
+        COMPOUND_STRING("IRON{CLEAR_TO 99}{FONT_SMALL}1,000"),
+        COMPOUND_STRING("CARBOS{CLEAR_TO 99}{FONT_SMALL}1,000"),
+        COMPOUND_STRING("CALCIUM{CLEAR_TO 99}{FONT_SMALL}1,000"),
+        COMPOUND_STRING("ZINC{CLEAR_TO 99}{FONT_SMALL}1,000"),
+        COMPOUND_STRING("HP UP{CLEAR_TO 99}{FONT_SMALL}1,000"),
+        COMPOUND_STRING("PP UP{CLEAR_TO 99}{FONT_SMALL}3,000"),
         gText_Exit
     },
     [SCROLL_MULTI_BF_RECEPTIONIST] =
@@ -2714,32 +2791,32 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_ExchangeService,
         gText_Exit
     },
-    [SCROLL_MULTI_BF_MOVE_TUTOR_1] = 
+    [SCROLL_MULTI_BF_MOVE_TUTOR_1] =
     {
-        gText_Softboiled16BP,
-        gText_SeismicToss24BP,
-        gText_DreamEater24BP,
-        gText_MegaPunch24BP,
-        gText_MegaKick48BP,
-        gText_BodySlam48BP,
-        gText_RockSlide48BP,
-        gText_Counter48BP,
-        gText_ThunderWave48BP,
-        gText_SwordsDance48BP,
+        COMPOUND_STRING("SOFTBOILED{CLEAR_TO 78}16BP"),
+        COMPOUND_STRING("SEISMIC TOSS{CLEAR_TO 78}24BP"),
+        COMPOUND_STRING("DREAM EATER{CLEAR_TO 78}24BP"),
+        COMPOUND_STRING("MEGA PUNCH{CLEAR_TO 78}24BP"),
+        COMPOUND_STRING("MEGA KICK{CLEAR_TO 78}48BP"),
+        COMPOUND_STRING("BODY SLAM{CLEAR_TO 78}48BP"),
+        COMPOUND_STRING("ROCK SLIDE{CLEAR_TO 78}48BP"),
+        COMPOUND_STRING("COUNTER{CLEAR_TO 78}48BP"),
+        COMPOUND_STRING("THUNDER WAVE{CLEAR_TO 78}48BP"),
+        COMPOUND_STRING("SWORDS DANCE{CLEAR_TO 78}48BP"),
         gText_Exit
     },
-    [SCROLL_MULTI_BF_MOVE_TUTOR_2] = 
+    [SCROLL_MULTI_BF_MOVE_TUTOR_2] =
     {
-        gText_DefenseCurl16BP,
-        gText_Snore24BP,
-        gText_MudSlap24BP,
-        gText_Swift24BP,
-        gText_IcyWind24BP,
-        gText_Endure48BP,
-        gText_PsychUp48BP,
-        gText_IcePunch48BP,
-        gText_ThunderPunch48BP,
-        gText_FirePunch48BP,
+        COMPOUND_STRING("DEFENSE CURL{CLEAR_TO 78}16BP"),
+        COMPOUND_STRING("SNORE{CLEAR_TO 78}24BP"),
+        COMPOUND_STRING("MUD-SLAP{CLEAR_TO 78}24BP"),
+        COMPOUND_STRING("SWIFT{CLEAR_TO 78}24BP"),
+        COMPOUND_STRING("ICY WIND{CLEAR_TO 78}24BP"),
+        COMPOUND_STRING("ENDURE{CLEAR_TO 78}48BP"),
+        COMPOUND_STRING("PSYCH UP{CLEAR_TO 78}48BP"),
+        COMPOUND_STRING("ICE PUNCH{CLEAR_TO 78}48BP"),
+        COMPOUND_STRING("THUNDERPUNCH{CLEAR_TO 78}48BP"),
+        COMPOUND_STRING("FIRE PUNCH{CLEAR_TO 78}48BP"),
         gText_Exit
     },
     [SCROLL_MULTI_SS_TIDAL_DESTINATION] =
@@ -2762,275 +2839,32 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_WhenInDanger,
         gText_Exit
     },
-    [SCROLL_MULTI_PC_TUTOR_SET_1] = 
+    [SCROLL_MULTI_BADGES] =
     {
-        gText_FuryCutter,
-        gText_Rollout,
-        gText_SeismicToss,
-        gText_Covet,
-        gText_VacuumWave,
-        gText_ShockWave,
-        gText_BugBite,
-        gText_AirCutter,
-        gText_Swift,
-        gText_Snatch,
-        gText_Mimic,
-        gText_MudSlap,
-        gText_Metronome,
-        gText_OminousWind,
-        gText_SuperFang,
-        gText_HoneClaws,
-        gText_PsychUp,
-        gText_FocusEnergy,
-        gText_Spikes,
-        gText_Infestation,
-        gText_Exit
+        gText_Boulderbadge,
+        gText_Cascadebadge,
+        gText_Thunderbadge,
+        gText_Rainbowbadge,
+        gText_Soulbadge,
+        gText_Marshbadge,
+        gText_Volcanobadge,
+        gText_Earthbadge,
+        gText_Exit,
     },
-    [SCROLL_MULTI_PC_TUTOR_SET_2] = 
+    [SCROLL_MULTI_SILPHCO_FLOORS] =
     {
-        gText_Counter,
-        gText_Endeavor,
-        gText_WorrySeed,
-        gText_DefenseCurl,
-        gText_Defog,
-        gText_MagicCoat,
-        gText_Uproar,
-        gText_Hex,
-        gText_GastroAcid,
-        gText_Synthesis,
-        gText_PainSplit,
-        gText_LowKick,
-        gText_IronDefense,
-        gText_MagnetRise,
-        gText_Swagger,
-        gText_PinMissile,
-        gText_MudShot,
-        gText_Agility,
-        gText_Exit
-    },
-    [SCROLL_MULTI_PC_TUTOR_SET_3] = 
-    {
-        gText_SignalBeam,
-        gText_Gravity,
-        gText_SeedBomb,
-        gText_PsychoCut,
-        gText_IcyWind,
-        gText_Electroweb,
-        gText_ThunderFang,
-        gText_FireFang,
-        gText_IceFang,
-        gText_Brine,
-        gText_RazorShell,
-        gText_Revenge,
-        gText_DrainingKiss,
-        gText_LeafBlade,
-        gText_RockBlast,
-        gText_SoftBoiled,
-        gText_AuroraBeam,
-        gText_Teleport,
-        gText_Exit
-    },
-    [SCROLL_MULTI_PC_TUTOR_SET_4] = 
-    {
-        gText_ThunderPunch,
-        gText_FirePunch,
-        gText_IcePunch,
-        gText_Tailwind,
-        gText_ZenHeadbutt,
-        gText_BodySlam,
-        gText_IcicleSpear,
-        gText_DualChop,
-        gText_Reversal,
-        gText_BugBuzz,
-        gText_LastResort,
-        gText_RolePlay,
-        gText_DrillRun,
-        gText_BlazeKick,
-        gText_CrossPoison,
-        gText_WeatherBall,
-        gText_AirSlash,
-        gText_StompingTantrum,
-        gText_Exit
-    },
-    [SCROLL_MULTI_PC_TUTOR_SET_5] = 
-    {
-        gText_IronHead,
-        gText_AquaTail,
-        gText_PowerGem,
-        gText_Bounce,
-        gText_HealBell,
-        gText_Superpower,
-        gText_Crunch,
-        gText_MysticalFire,
-        gText_GunkShot,
-        gText_HyperVoice,
-        gText_SkyAttack,
-        gText_HeatCrash,
-        gText_StoredPower,
-        gText_Trick,
-        gText_DynamicPunch,
-        gText_HelpingHand,
-        gText_ToxicSpikes,
-        gText_HighHorsepower,
-        gText_Exit
-    },
-    [SCROLL_MULTI_PC_TUTOR_SET_6] = 
-    {
-        gText_Megahorn,
-        gText_AuraSphere,
-        gText_ThroatChop,
-        gText_EarthPower,
-        gText_HeatWave,
-        gText_Liquidation,
-        gText_BatonPass,
-        gText_FoulPlay,
-        gText_SolarBlade,
-        gText_PhantomForce,
-        gText_MeteorMash,
-        gText_PsychicFangs,
-        gText_Encore,
-        gText_GrassyTerrain,
-        gText_ElectricTerrain,
-        gText_MistyTerrain,
-        gText_PsychicTerrain,
-        gText_PowerUpPunch,
-        gText_Exit
-    },
-    [SCROLL_MULTI_PC_TUTOR_SET_7] = 
-    {
-        gText_DoubleEdge,
-        gText_PlayRough,
-        gText_NastyPlot,
-        gText_SelfDestruct,
-        gText_CloseCombat,
-        gText_FlareBlitz,
-        gText_BraveBird,
-        gText_LeafStorm,
-        gText_PowerWhip,
-        gText_Hurricane,
-        gText_HydroPump,
-        gText_DragonDance,
-        gText_Outrage,
-        gText_KnockOff,
-        gText_QuiverDance,
-        gText_Exit
-    },
-    [SCROLL_MULTI_PC_TUTOR_SET_SELECT] =
-    {
-        gText_TutorMoveSet1,
-        gText_TutorMoveSet2,
-        gText_TutorMoveSet3,
-        gText_TutorMoveSet4,
-        gText_TutorMoveSet5,
-        gText_TutorMoveSet6,
-        gText_TutorMoveSet7,
-        gText_Exit
-    },
-    [SCROLL_MULTI_GAMECORNER_POKEMON] =
-    {
-        gText_GameCornerPorygon,
-        gText_GameCornerMunchlax,
-        gText_GameCornerVulpix,
-        gText_GameCornerSandshrew,
-        gText_GameCornerRattata,
-        gText_GameCornerMeowth,
-        gText_GameCornerGrimer,
-        gText_GameCornerDiglett,
-        gText_GameCornerGeodude,
-        gText_GameCornerRaichu,
-        gText_GameCornerMarowak,
-        gText_GameCornerExeggutor,
-        gText_GameCornerGenesect,
-        gText_GameCornerPoipole,
-        gText_Exit
-    },
-    [SCROLL_MULTI_GAMECORNER_GRASS_STARTERS] =
-    {
-        gText_GameCornerBulbasaur,
-        gText_GameCornerChikorita,
-        gText_GameCornerTreecko,
-        gText_GameCornerTurtwig,
-        gText_GameCornerSnivy,
-        gText_GameCornerChespin,
-        gText_GameCornerRowlet,
-        gText_Exit
-    },
-    [SCROLL_MULTI_GAMECORNER_FIRE_STARTERS] =
-    {
-        gText_GameCornerCharmander,
-        gText_GameCornerCyndaquil,
-        gText_GameCornerTorchic,
-        gText_GameCornerChimchar,
-        gText_GameCornerTepig,
-        gText_GameCornerFennekin,
-        gText_GameCornerLitten,
-        gText_Exit
-    },
-    [SCROLL_MULTI_GAMECORNER_WATER_STARTERS] =
-    {
-        gText_GameCornerSquirtle,
-        gText_GameCornerTotodile,
-        gText_GameCornerMudkip,
-        gText_GameCornerPiplup,
-        gText_GameCornerOshawott,
-        gText_GameCornerFroakie,
-        gText_GameCornerPopplio,
-        gText_Exit
-    },
-    [SCROLL_MULTI_REGION_NAMES] = 
-    {
-        gText_Kanto,
-        gText_Johto,
-        gText_Hoenn,
-        gText_Sinnoh,
-        gText_Unova,
-        gText_Kalos,
-        gText_Alola,
-        // gText_Galar,
-    },
-    [SCROLL_MULTI_FURFROU_TRIMS] = 
-    {
-        gText_HeartTrim,
-        gText_StarTrim,
-        gText_DiamondTrim,
-        gText_DebutanteTrim,
-        gText_MatronTrim,
-        gText_DandyTrim, 
-        gText_LaReineTrim,
-        gText_KabukiTrim,
-        gText_PharaohTrim,
-        gText_BackToNatural,
-        gText_Exit
-    },
-    [SCROLL_MULTI_POKE_CENTER_TUTOR] = 
-    {
-        gText_RememberAMove,
-        gText_ForgetAMove,
-        gText_RateANickname,
-        gText_MysteryGift,
-        gText_ResetEvents,
-        gText_BuildBattleSet,
-        gText_Exit
-    },
-    [SCROLL_MULTI_HIDDEN_POWER] = 
-    {
-        gText_HPFighting,
-        gText_HPFlying,
-        gText_HPPoison,
-        gText_HPGround,
-        gText_HPRock,
-        gText_HPBug,
-        gText_HPGhost,
-        gText_HPSteel,
-        gText_HPFire,
-        gText_HPWater,
-        gText_HPGrass,
-        gText_HPElectric,
-        gText_HPPsychic,
-        gText_HPIce,
-        gText_HPDragon,
-        gText_HPDark,
-        gText_Exit
+        gText_11F,
+        gText_10F,
+        gText_9F,
+        gText_8F,
+        gText_7F,
+        gText_6F,
+        gText_5F,
+        gText_4F,
+        gText_3F,
+        gText_2F,
+        gText_1F,
+        gText_Exit,
     }
 };
 
@@ -3041,27 +2875,29 @@ static void Task_ShowScrollableMultichoice(u8 taskId)
     struct WindowTemplate template;
     struct Task *task = &gTasks[taskId];
 
-    ScriptContext2_Enable();
-    sScrollableMultichoice_ScrollOffset = 0;
+    LockPlayerFieldControls();
+    gScrollableMultichoice_ScrollOffset = 0;
     sScrollableMultichoice_ItemSpriteId = MAX_SPRITES;
     FillFrontierExchangeCornerWindowAndItemIcon(task->tScrollMultiId, 0);
     ShowBattleFrontierTutorWindow(task->tScrollMultiId, 0);
-    sScrollableMultichoice_ListMenuItem = AllocZeroed(task->tNumItems * 8);
+    sScrollableMultichoice_ListMenuItem = AllocZeroed(task->tNumItems * sizeof(struct ListMenuItem));
     sFrontierExchangeCorner_NeverRead = 0;
     InitScrollableMultichoice();
 
     for (width = 0, i = 0; i < task->tNumItems; i++)
     {
         const u8 *text;
-        if (gSpecialVar_0x8004 == SCROLL_MULTI_BATTLE_SET_STYLE)
+        if (gSpecialVar_0x8004 == SCROLL_MULTI_EMERALD_CHAMPIONS_BATTLE_SET)
         {
-            if (i == task->tNumItems - 1 || gSpecialVar_0x800A >= PARTY_SIZE)
+            if (i == task->tNumItems - 1 || gSpecialVar_0x800A >= gPartiesCount[B_TRAINER_PLAYER])
                 text = gText_Exit;
             else
-                text = GetVerdantBattleSetName(&gPlayerParty[gSpecialVar_0x800A], i);
+                text = GetEmeraldChampionsBattleSetName(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x800A], i);
         }
         else
+        {
             text = sScrollableMultichoiceOptions[gSpecialVar_0x8004][i];
+        }
         sScrollableMultichoice_ListMenuItem[i].name = text;
         sScrollableMultichoice_ListMenuItem[i].id = i;
         width = DisplayTextAndGetWidth(text, width);
@@ -3073,19 +2909,15 @@ static void Task_ShowScrollableMultichoice(u8 taskId)
     {
         int adjustedLeft = MAX_MULTICHOICE_WIDTH + 1 - task->tWidth;
         if (adjustedLeft < 0)
-        {
             task->tLeft = 0;
-        }
         else
-        {
             task->tLeft = adjustedLeft;
-        }
     }
 
     template = CreateWindowTemplate(0, task->tLeft, task->tTop, task->tWidth, task->tHeight, 0xF, 0x64);
     windowId = AddWindow(&template);
     task->tWindowId = windowId;
-    SetStandardWindowBorderStyle(windowId, 0);
+    SetStandardWindowBorderStyle(windowId, FALSE);
 
     gScrollableMultichoice_ListMenuTemplate.totalItems = task->tNumItems;
     gScrollableMultichoice_ListMenuTemplate.maxShowed = task->tMaxItemsOnScreen;
@@ -3114,9 +2946,9 @@ static void InitScrollableMultichoice(void)
     gScrollableMultichoice_ListMenuTemplate.cursorShadowPal = 3;
     gScrollableMultichoice_ListMenuTemplate.lettersSpacing = 0;
     gScrollableMultichoice_ListMenuTemplate.itemVerticalPadding = 0;
-    gScrollableMultichoice_ListMenuTemplate.scrollMultiple = 0;
-    gScrollableMultichoice_ListMenuTemplate.fontId = 1;
-    gScrollableMultichoice_ListMenuTemplate.cursorKind = 0;
+    gScrollableMultichoice_ListMenuTemplate.scrollMultiple = LIST_NO_MULTIPLE_SCROLL;
+    gScrollableMultichoice_ListMenuTemplate.fontId = FONT_NORMAL;
+    gScrollableMultichoice_ListMenuTemplate.cursorKind = CURSOR_BLACK_ARROW;
 }
 
 static void ScrollableMultichoice_MoveCursor(s32 itemIndex, bool8 onInit, struct ListMenu *list)
@@ -3129,7 +2961,7 @@ static void ScrollableMultichoice_MoveCursor(s32 itemIndex, bool8 onInit, struct
         u16 selection;
         struct Task *task = &gTasks[taskId];
         ListMenuGetScrollAndRow(task->tListTaskId, &selection, NULL);
-        sScrollableMultichoice_ScrollOffset = selection;
+        gScrollableMultichoice_ScrollOffset = selection;
         ListMenuGetCurrentItemArrayId(task->tListTaskId, &selection);
         HideFrontierExchangeCornerItemIcon(task->tScrollMultiId, sFrontierExchangeCorner_NeverRead);
         FillFrontierExchangeCornerWindowAndItemIcon(task->tScrollMultiId, selection);
@@ -3159,16 +2991,17 @@ static void ScrollableMultichoice_ProcessInput(u8 taskId)
         {
             CloseScrollableMultichoice(taskId);
         }
-        // if selected option was the last one (Exit)
         else if (input == task->tNumItems - 1)
         {
+            // Selected option was the last one (Exit)
             CloseScrollableMultichoice(taskId);
         }
         else
         {
+            // Handle selection while keeping the menu open
             ScrollableMultichoice_RemoveScrollArrows(taskId);
-            task->func = sub_813A600;
-            EnableBothScriptContexts();
+            task->func = Task_ScrollableMultichoice_WaitReturnToList;
+            ScriptContext_Enable();
         }
         break;
     }
@@ -3183,46 +3016,42 @@ static void CloseScrollableMultichoice(u8 taskId)
     ScrollableMultichoice_RemoveScrollArrows(taskId);
     DestroyListMenuTask(task->tListTaskId, NULL, NULL);
     Free(sScrollableMultichoice_ListMenuItem);
-    ClearStdWindowAndFrameToTransparent(task->tWindowId, 1);
+    ClearStdWindowAndFrameToTransparent(task->tWindowId, TRUE);
     FillWindowPixelBuffer(task->tWindowId, PIXEL_FILL(0));
-    CopyWindowToVram(task->tWindowId, 2);
+    CopyWindowToVram(task->tWindowId, COPYWIN_GFX);
     RemoveWindow(task->tWindowId);
     DestroyTask(taskId);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
-// Functionally unused; tKeepOpenAfterSelect is only != 0 in unused functions
-static void sub_813A600(u8 taskId)
+// Never run, tKeepOpenAfterSelect is FALSE for all scrollable multichoices.
+static void Task_ScrollableMultichoice_WaitReturnToList(u8 taskId)
 {
     switch (gTasks[taskId].tKeepOpenAfterSelect)
     {
-        case 1:
-        default:
-            break;
-        case 2:
-            gTasks[taskId].tKeepOpenAfterSelect = 1;
-            gTasks[taskId].func = sub_813A664;
-            break;
+    case 1:
+    default:
+        break;
+    case 2:
+        gTasks[taskId].tKeepOpenAfterSelect = 1;
+        gTasks[taskId].func = Task_ScrollableMultichoice_ReturnToList;
+        break;
     }
 }
 
 // Never called
-void sub_813A630(void)
+void ScrollableMultichoice_TryReturnToList(void)
 {
-    u8 taskId = FindTaskIdByFunc(sub_813A600);
+    u8 taskId = FindTaskIdByFunc(Task_ScrollableMultichoice_WaitReturnToList);
     if (taskId == TASK_NONE)
-    {
-        EnableBothScriptContexts();
-    }
+        ScriptContext_Enable();
     else
-    {
-        gTasks[taskId].tKeepOpenAfterSelect++;
-    }
+        gTasks[taskId].tKeepOpenAfterSelect++; // Return to list
 }
 
-static void sub_813A664(u8 taskId)
+static void Task_ScrollableMultichoice_ReturnToList(u8 taskId)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     ScrollableMultichoice_UpdateScrollArrows(taskId);
     gTasks[taskId].func = ScrollableMultichoice_ProcessInput;
 }
@@ -3238,54 +3067,38 @@ static void ScrollableMultichoice_UpdateScrollArrows(u8 taskId)
         .secondY = 0,
         .fullyUpThreshold = 0,
         .fullyDownThreshold = 0,
-        .tileTag = 2000,
-        .palTag = 100,
+        .tileTag = GFXTAG_MULTICHOICE_SCROLL_ARROWS,
+        .palTag = PALTAG_MULTICHOICE_SCROLL_ARROWS,
         .palNum = 0
     };
 
     struct Task *task = &gTasks[taskId];
     struct ScrollArrowsTemplate template = sScrollableMultichoice_ScrollArrowsTemplate;
-    if (task->tMaxItemsOnScreen != task->data[1])
+    if (task->tMaxItemsOnScreen != task->tNumItems)
     {
+        u32 y0 = (8 * (task->tTop - 1));
+
         template.firstX = (task->tWidth / 2) * 8 + 12 + (task->tLeft - 1) * 8;
-        template.firstY = 8;
+        template.firstY = 8 + y0;
         template.secondX = (task->tWidth / 2) * 8 + 12 + (task->tLeft - 1) * 8;
-        template.secondY = task->tHeight * 8 + 10;
+        template.secondY = task->tHeight * 8 + 10 + y0;
         template.fullyUpThreshold = 0;
-        template.fullyDownThreshold = task->data[1] - task->tMaxItemsOnScreen;
-        task->tScrollArrowId = AddScrollIndicatorArrowPair(&template, &sScrollableMultichoice_ScrollOffset);
+        template.fullyDownThreshold = task->tNumItems - task->tMaxItemsOnScreen;
+        task->tScrollArrowId = AddScrollIndicatorArrowPair(&template, &gScrollableMultichoice_ScrollOffset);
     }
 }
 
 static void ScrollableMultichoice_RemoveScrollArrows(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    if (task->tMaxItemsOnScreen != task->data[1])
-    {
+    if (task->tMaxItemsOnScreen != task->tNumItems)
         RemoveScrollIndicatorArrowPair(task->tScrollArrowId);
-    }
 }
 
 // Removed for Emerald (replaced by ShowScrollableMultichoice)
 void ShowGlassWorkshopMenu(void)
 {
-    /*
-    u8 i;
-    ScriptContext2_Enable();
-    Menu_DrawStdWindowFrame(0, 0, 10, 11);
-    InitMenu(0, 1, 1, 5, 0, 9);
-    gUnknown_0203925C = 0;
-    ClearVerticalScrollIndicatorPalettes();
-    LoadScrollIndicatorPalette();
-    sub_810F2B4();
-    for (i = 0; i < 5; i++)
-    {
-        Menu_PrintText(gUnknown_083F83C0[i], 1, 2 * i + 1);
-    }
-    gUnknown_0203925B = 0;
-    gUnknown_0203925A = ARRAY_COUNT(gUnknown_083F83C0);
-    CreateTask(sub_810F118, 8);
-    */
+
 }
 
 void SetBattleTowerLinkPlayerGfx(void)
@@ -3294,55 +3107,22 @@ void SetBattleTowerLinkPlayerGfx(void)
     for (i = 0; i < 2; i++)
     {
         if (gLinkPlayers[i].gender == MALE)
-        {
-            VarSet(VAR_OBJ_GFX_ID_F - i, OBJ_EVENT_GFX_BRENDAN_NORMAL);
-        }
+            VarSet(VAR_OBJ_GFX_ID_F - i, PLAYER_AVATAR_GFX_MALE_NORMAL);
         else
-        {
-            VarSet(VAR_OBJ_GFX_ID_F - i, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL);
-        }
+            VarSet(VAR_OBJ_GFX_ID_F - i, PLAYER_AVATAR_GFX_FEMALE_NORMAL);
     }
 }
 
 void ShowNatureGirlMessage(void)
 {
-    static const u8 *const sNatureGirlMessages[NUM_NATURES] = {
-        [NATURE_HARDY]   = BattleFrontier_Lounge5_Text_NatureGirlHardy,
-        [NATURE_LONELY]  = BattleFrontier_Lounge5_Text_NatureGirlLonely,
-        [NATURE_BRAVE]   = BattleFrontier_Lounge5_Text_NatureGirlBrave,
-        [NATURE_ADAMANT] = BattleFrontier_Lounge5_Text_NatureGirlAdamant,
-        [NATURE_NAUGHTY] = BattleFrontier_Lounge5_Text_NatureGirlNaughty,
-        [NATURE_BOLD]    = BattleFrontier_Lounge5_Text_NatureGirlBold,
-        [NATURE_DOCILE]  = BattleFrontier_Lounge5_Text_NatureGirlDocileNaiveQuietQuirky,
-        [NATURE_RELAXED] = BattleFrontier_Lounge5_Text_NatureGirlRelaxed,
-        [NATURE_IMPISH]  = BattleFrontier_Lounge5_Text_NatureGirlImpish,
-        [NATURE_LAX]     = BattleFrontier_Lounge5_Text_NatureGirlLax,
-        [NATURE_TIMID]   = BattleFrontier_Lounge5_Text_NatureGirlTimid,
-        [NATURE_HASTY]   = BattleFrontier_Lounge5_Text_NatureGirlHasty,
-        [NATURE_SERIOUS] = BattleFrontier_Lounge5_Text_NatureGirlSerious,
-        [NATURE_JOLLY]   = BattleFrontier_Lounge5_Text_NatureGirlJolly,
-        [NATURE_NAIVE]   = BattleFrontier_Lounge5_Text_NatureGirlDocileNaiveQuietQuirky,
-        [NATURE_MODEST]  = BattleFrontier_Lounge5_Text_NatureGirlModest,
-        [NATURE_MILD]    = BattleFrontier_Lounge5_Text_NatureGirlMild,
-        [NATURE_QUIET]   = BattleFrontier_Lounge5_Text_NatureGirlDocileNaiveQuietQuirky,
-        [NATURE_BASHFUL] = BattleFrontier_Lounge5_Text_NatureGirlBashful,
-        [NATURE_RASH]    = BattleFrontier_Lounge5_Text_NatureGirlRash,
-        [NATURE_CALM]    = BattleFrontier_Lounge5_Text_NatureGirlCalm,
-        [NATURE_GENTLE]  = BattleFrontier_Lounge5_Text_NatureGirlGentle,
-        [NATURE_SASSY]   = BattleFrontier_Lounge5_Text_NatureGirlSassy,
-        [NATURE_CAREFUL] = BattleFrontier_Lounge5_Text_NatureGirlCareful,
-        [NATURE_QUIRKY]  = BattleFrontier_Lounge5_Text_NatureGirlDocileNaiveQuietQuirky,
-    };
+    u32 nature;
+    u32 personality;
 
-    u8 nature;
+    struct BoxPokemon *boxmon = GetSelectedBoxMonFromPcOrParty();
 
-    if (gSpecialVar_0x8004 >= PARTY_SIZE)
-    {
-        gSpecialVar_0x8004 = 0;
-    }
-
-    nature = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NATURE);
-    ShowFieldMessage(sNatureGirlMessages[nature]);
+    personality = GetBoxMonData(boxmon, MON_DATA_PERSONALITY);
+    nature = GetNatureFromPersonality(personality);
+    ShowFieldMessage(gNaturesInfo[nature].natureGirlMessage);
 }
 
 void UpdateFrontierGambler(u16 daysSince)
@@ -3354,7 +3134,7 @@ void UpdateFrontierGambler(u16 daysSince)
 
 void ShowFrontierGamblerLookingMessage(void)
 {
-    static const u8 *const sFrontierGamblerLookingMessages[] = 
+    static const u8 *const sFrontierGamblerLookingMessages[] =
     {
         BattleFrontier_Lounge3_Text_ChallengeBattleTowerSingle,
         BattleFrontier_Lounge3_Text_ChallengeBattleTowerDouble,
@@ -3377,7 +3157,7 @@ void ShowFrontierGamblerLookingMessage(void)
 
 void ShowFrontierGamblerGoMessage(void)
 {
-    static const u8 *const sFrontierGamblerGoMessages[] = 
+    static const u8 *const sFrontierGamblerGoMessages[] =
     {
         BattleFrontier_Lounge3_Text_GetToBattleTowerSingle,
         BattleFrontier_Lounge3_Text_GetToBattleTowerDouble,
@@ -3398,19 +3178,19 @@ void ShowFrontierGamblerGoMessage(void)
 
 void FrontierGamblerSetWonOrLost(bool8 won)
 {
-    static const u16 sFrontierChallenges[] = 
+    static const u16 sFrontierChallenges[] =
     {
         FRONTIER_CHALLENGE(FRONTIER_FACILITY_TOWER,   FRONTIER_MODE_SINGLES),
         FRONTIER_CHALLENGE(FRONTIER_FACILITY_TOWER,   FRONTIER_MODE_DOUBLES),
         FRONTIER_CHALLENGE(FRONTIER_FACILITY_TOWER,   FRONTIER_MODE_MULTIS),
         FRONTIER_CHALLENGE(FRONTIER_FACILITY_DOME,    FRONTIER_MODE_SINGLES),
         FRONTIER_CHALLENGE(FRONTIER_FACILITY_DOME,    FRONTIER_MODE_DOUBLES),
-        FRONTIER_CHALLENGE(FRONTIER_FACILITY_FACTORY, FRONTIER_MODE_SINGLES), 
-        FRONTIER_CHALLENGE(FRONTIER_FACILITY_FACTORY, FRONTIER_MODE_DOUBLES), 
-        FRONTIER_CHALLENGE(FRONTIER_FACILITY_PALACE,  FRONTIER_MODE_SINGLES), 
-        FRONTIER_CHALLENGE(FRONTIER_FACILITY_PALACE,  FRONTIER_MODE_DOUBLES), 
-        FRONTIER_CHALLENGE(FRONTIER_FACILITY_ARENA,   FRONTIER_MODE_SINGLES), 
-        FRONTIER_CHALLENGE(FRONTIER_FACILITY_PIKE,    FRONTIER_MODE_SINGLES), 
+        FRONTIER_CHALLENGE(FRONTIER_FACILITY_FACTORY, FRONTIER_MODE_SINGLES),
+        FRONTIER_CHALLENGE(FRONTIER_FACILITY_FACTORY, FRONTIER_MODE_DOUBLES),
+        FRONTIER_CHALLENGE(FRONTIER_FACILITY_PALACE,  FRONTIER_MODE_SINGLES),
+        FRONTIER_CHALLENGE(FRONTIER_FACILITY_PALACE,  FRONTIER_MODE_DOUBLES),
+        FRONTIER_CHALLENGE(FRONTIER_FACILITY_ARENA,   FRONTIER_MODE_SINGLES),
+        FRONTIER_CHALLENGE(FRONTIER_FACILITY_PIKE,    FRONTIER_MODE_SINGLES),
         FRONTIER_CHALLENGE(FRONTIER_FACILITY_PYRAMID, FRONTIER_MODE_SINGLES)
     };
 
@@ -3423,13 +3203,9 @@ void FrontierGamblerSetWonOrLost(bool8 won)
         if (sFrontierChallenges[challenge] ==  FRONTIER_CHALLENGE(frontierFacilityId, battleMode))
         {
             if (won)
-            {
                 VarSet(VAR_FRONTIER_GAMBLER_STATE, FRONTIER_GAMBLER_WON);
-            }
             else
-            {
                 VarSet(VAR_FRONTIER_GAMBLER_STATE, FRONTIER_GAMBLER_LOST);
-            }
         }
     }
 }
@@ -3439,13 +3215,14 @@ void UpdateBattlePointsWindow(void)
     u8 string[32];
     u32 x;
     StringCopy(ConvertIntToDecimalStringN(string, gSaveBlock2Ptr->frontier.battlePoints, STR_CONV_MODE_RIGHT_ALIGN, 4), gText_BP);
-    x = GetStringRightAlignXOffset(1, string, 48);
-    AddTextPrinterParameterized(sBattlePointsWindowId, 1, string, x, 1, 0, NULL);
+    x = GetStringRightAlignXOffset(FONT_NORMAL, string, 48);
+    AddTextPrinterParameterized(sBattlePointsWindowId, FONT_NORMAL, string, x, 1, 0, NULL);
 }
 
 void ShowBattlePointsWindow(void)
 {
-    static const struct WindowTemplate sBattlePoints_WindowTemplate = {
+    static const struct WindowTemplate sBattlePoints_WindowTemplate =
+    {
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 1,
@@ -3456,9 +3233,9 @@ void ShowBattlePointsWindow(void)
     };
 
     sBattlePointsWindowId = AddWindow(&sBattlePoints_WindowTemplate);
-    SetStandardWindowBorderStyle(sBattlePointsWindowId, 0);
+    SetStandardWindowBorderStyle(sBattlePointsWindowId, FALSE);
     UpdateBattlePointsWindow();
-    CopyWindowToVram(sBattlePointsWindowId, 2);
+    CopyWindowToVram(sBattlePointsWindowId, COPYWIN_GFX);
 }
 
 void CloseBattlePointsWindow(void)
@@ -3470,25 +3247,17 @@ void CloseBattlePointsWindow(void)
 void TakeFrontierBattlePoints(void)
 {
     if (gSaveBlock2Ptr->frontier.battlePoints < gSpecialVar_0x8004)
-    {
         gSaveBlock2Ptr->frontier.battlePoints = 0;
-    }
     else
-    {
         gSaveBlock2Ptr->frontier.battlePoints -= gSpecialVar_0x8004;
-    }
 }
 
 void GiveFrontierBattlePoints(void)
 {
     if (gSaveBlock2Ptr->frontier.battlePoints + gSpecialVar_0x8004 > MAX_BATTLE_FRONTIER_POINTS)
-    {
         gSaveBlock2Ptr->frontier.battlePoints = MAX_BATTLE_FRONTIER_POINTS;
-    }
     else
-    {
         gSaveBlock2Ptr->frontier.battlePoints = gSaveBlock2Ptr->frontier.battlePoints + gSpecialVar_0x8004;
-    }
 }
 
 u16 GetFrontierBattlePoints(void)
@@ -3498,7 +3267,8 @@ u16 GetFrontierBattlePoints(void)
 
 void ShowFrontierExchangeCornerItemIconWindow(void)
 {
-    static const struct WindowTemplate sFrontierExchangeCorner_ItemIconWindowTemplate = {
+    static const struct WindowTemplate sFrontierExchangeCorner_ItemIconWindowTemplate =
+    {
         .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 9,
@@ -3509,8 +3279,8 @@ void ShowFrontierExchangeCornerItemIconWindow(void)
     };
 
     sFrontierExchangeCorner_ItemIconWindowId = AddWindow(&sFrontierExchangeCorner_ItemIconWindowTemplate);
-    SetStandardWindowBorderStyle(sFrontierExchangeCorner_ItemIconWindowId, 0);
-    CopyWindowToVram(sFrontierExchangeCorner_ItemIconWindowId, 2);
+    SetStandardWindowBorderStyle(sFrontierExchangeCorner_ItemIconWindowId, FALSE);
+    CopyWindowToVram(sFrontierExchangeCorner_ItemIconWindowId, COPYWIN_GFX);
 }
 
 void CloseFrontierExchangeCornerItemIconWindow(void)
@@ -3519,7 +3289,7 @@ void CloseFrontierExchangeCornerItemIconWindow(void)
     RemoveWindow(sFrontierExchangeCorner_ItemIconWindowId);
 }
 
-static void FillFrontierExchangeCornerWindowAndItemIcon(u16 menu, u16 selection)
+static void FillFrontierExchangeCornerWindowAndItemIcon(enum ScrollMulti menu, u16 selection)
 {
     #include "data/battle_frontier/battle_frontier_exchange_corner.h"
 
@@ -3528,49 +3298,51 @@ static void FillFrontierExchangeCornerWindowAndItemIcon(u16 menu, u16 selection)
         FillWindowPixelRect(0, PIXEL_FILL(1), 0, 0, 216, 32);
         switch (menu)
         {
-            case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_1:
-                AddTextPrinterParameterized2(0, 1, sFrontierExchangeCorner_Decor1Descriptions[selection], 0, NULL, 2, 1, 3);
-                if (sFrontierExchangeCorner_Decor1[selection] == 0xFFFF)
-                {
-                    ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_Decor1[selection]);
-                }
-                else
-                {
-                    FreeSpriteTilesByTag(5500);
-                    FreeSpritePaletteByTag(5500);
-                    sScrollableMultichoice_ItemSpriteId = AddDecorationIconObject(sFrontierExchangeCorner_Decor1[selection], 33, 88, 0, 5500, 5500);
-                }
-                break;
-            case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2:
-                AddTextPrinterParameterized2(0, 1, sFrontierExchangeCorner_Decor2Descriptions[selection], 0, NULL, 2, 1, 3);
-                if (sFrontierExchangeCorner_Decor2[selection] == 0xFFFF)
-                {
-                    ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_Decor2[selection]);
-                }
-                else
-                {
-                    FreeSpriteTilesByTag(5500);
-                    FreeSpritePaletteByTag(5500);
-                    sScrollableMultichoice_ItemSpriteId = AddDecorationIconObject(sFrontierExchangeCorner_Decor2[selection], 33, 88, 0, 5500, 5500);
-                }
-                break;
-            case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR:
-                AddTextPrinterParameterized2(0, 1, sFrontierExchangeCorner_VitaminsDescriptions[selection], 0, NULL, 2, 1, 3);
-                ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_Vitamins[selection]);
-                break;
-            case SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR:
-                AddTextPrinterParameterized2(0, 1, sFrontierExchangeCorner_HoldItemsDescriptions[selection], 0, NULL, 2, 1, 3);
-                ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_HoldItems[selection]);
-                break;
+        case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_1:
+            AddTextPrinterParameterized2(0, FONT_NORMAL, sFrontierExchangeCorner_Decor1Descriptions[selection], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+            if (sFrontierExchangeCorner_Decor1[selection] == ITEM_LIST_END)
+            {
+                ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_Decor1[selection]);
+            }
+            else
+            {
+                FreeSpriteTilesByTag(TAG_ITEM_ICON);
+                FreeSpritePaletteByTag(TAG_ITEM_ICON);
+                sScrollableMultichoice_ItemSpriteId = AddDecorationIconObject(sFrontierExchangeCorner_Decor1[selection], 33, 88, 0, TAG_ITEM_ICON, TAG_ITEM_ICON);
+            }
+            break;
+        case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2:
+            AddTextPrinterParameterized2(0, FONT_NORMAL, sFrontierExchangeCorner_Decor2Descriptions[selection], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+            if (sFrontierExchangeCorner_Decor2[selection] == ITEM_LIST_END)
+            {
+                ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_Decor2[selection]);
+            }
+            else
+            {
+                FreeSpriteTilesByTag(TAG_ITEM_ICON);
+                FreeSpritePaletteByTag(TAG_ITEM_ICON);
+                sScrollableMultichoice_ItemSpriteId = AddDecorationIconObject(sFrontierExchangeCorner_Decor2[selection], 33, 88, 0, TAG_ITEM_ICON, TAG_ITEM_ICON);
+            }
+            break;
+        case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR:
+            AddTextPrinterParameterized2(0, FONT_NORMAL, sFrontierExchangeCorner_VitaminsDescriptions[selection], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+            ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_Vitamins[selection]);
+            break;
+        case SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR:
+            AddTextPrinterParameterized2(0, FONT_NORMAL, sFrontierExchangeCorner_HoldItemsDescriptions[selection], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+            ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_HoldItems[selection]);
+            break;
+        default:
+            break;
         }
     }
 }
 
-static void ShowFrontierExchangeCornerItemIcon(u16 item)
+static void ShowFrontierExchangeCornerItemIcon(enum Item item)
 {
-    FreeSpriteTilesByTag(5500);
-    FreeSpritePaletteByTag(5500);
-    sScrollableMultichoice_ItemSpriteId = AddItemIconSprite(5500, 5500, item);
+    FreeSpriteTilesByTag(TAG_ITEM_ICON);
+    FreeSpritePaletteByTag(TAG_ITEM_ICON);
+    sScrollableMultichoice_ItemSpriteId = AddItemIconSprite(TAG_ITEM_ICON, TAG_ITEM_ICON, item);
 
     if (sScrollableMultichoice_ItemSpriteId != MAX_SPRITES)
     {
@@ -3580,213 +3352,34 @@ static void ShowFrontierExchangeCornerItemIcon(u16 item)
     }
 }
 
-static void HideFrontierExchangeCornerItemIcon(u16 menu, u16 unused)
+static void HideFrontierExchangeCornerItemIcon(enum ScrollMulti menu, u16 unused)
 {
     if (sScrollableMultichoice_ItemSpriteId != MAX_SPRITES)
     {
         switch (menu)
         {
-            case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_1:
-            case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2:
-            case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR:
-            case SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR:
-                FieldEffectFreeGraphicsResources(&gSprites[sScrollableMultichoice_ItemSpriteId]);
-                break;
+        case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_1:
+        case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2:
+        case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR:
+        case SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR:
+            // This makes sure deleting the icon will not clear palettes in use by object events
+            FieldEffectFreeGraphicsResources(&gSprites[sScrollableMultichoice_ItemSpriteId]);
+            break;
+        default:
+            break;
         }
         sScrollableMultichoice_ItemSpriteId = MAX_SPRITES;
     }
 }
 
-static const u16 sPokemonCenter_TutorMoves1[] =
-{
-	MOVE_FURY_CUTTER,
-	MOVE_ROLLOUT,
-	MOVE_SEISMIC_TOSS,
-	MOVE_COVET,
-	MOVE_VACUUM_WAVE,
-	MOVE_SHOCK_WAVE,
-	MOVE_BUG_BITE,
-	MOVE_AIR_CUTTER,
-	MOVE_SWIFT,
-	MOVE_SNATCH,
-	MOVE_MIMIC,
-	MOVE_MUD_SLAP,
-	MOVE_METRONOME,
-	MOVE_OMINOUS_WIND,
-	MOVE_SUPER_FANG,
-	MOVE_HONE_CLAWS,
-	MOVE_PSYCH_UP,
-    MOVE_FOCUS_ENERGY,
-    MOVE_SPIKES,
-    MOVE_INFESTATION
-};
-
-static const u16 sPokemonCenter_TutorMoves2[] =
-{
-	MOVE_COUNTER,
-	MOVE_ENDEAVOR,
-	MOVE_WORRY_SEED,
-	MOVE_DEFENSE_CURL,
-	MOVE_DEFOG,
-	MOVE_MAGIC_COAT,
-	MOVE_UPROAR,
-	MOVE_HEX,
-	MOVE_GASTRO_ACID,
-	MOVE_SYNTHESIS,
-	MOVE_PAIN_SPLIT,
-	MOVE_LOW_KICK,
-	MOVE_IRON_DEFENSE,
-	MOVE_MAGNET_RISE,
-	MOVE_SWAGGER,
-	MOVE_PIN_MISSILE,
-	MOVE_MUD_SHOT,
-    MOVE_AGILITY
-};
-
-static const u16 sPokemonCenter_TutorMoves3[] =
-{
-	MOVE_SIGNAL_BEAM,
-	MOVE_GRAVITY,
-	MOVE_SEED_BOMB,
-	MOVE_PSYCHO_CUT,
-	MOVE_ICY_WIND,
-	MOVE_ELECTROWEB,
-	MOVE_THUNDER_FANG,
-	MOVE_FIRE_FANG,
-	MOVE_ICE_FANG,
-	MOVE_BRINE,
-	MOVE_RAZOR_SHELL,
-	MOVE_REVENGE,
-	MOVE_DRAINING_KISS,
-	MOVE_LEAF_BLADE,
-	MOVE_ROCK_BLAST,
-	MOVE_SOFT_BOILED,
-	MOVE_AURORA_BEAM,
-    MOVE_TELEPORT
-};
-
-static const u16 sPokemonCenter_TutorMoves4[] =
-{
-	MOVE_THUNDER_PUNCH,
-	MOVE_FIRE_PUNCH,
-	MOVE_ICE_PUNCH,
-	MOVE_TAILWIND,
-	MOVE_ZEN_HEADBUTT,
-	MOVE_BODY_SLAM,
-	MOVE_ICICLE_SPEAR,
-	MOVE_DUAL_CHOP,
-	MOVE_REVERSAL,
-	MOVE_BUG_BUZZ,
-	MOVE_LAST_RESORT,
-	MOVE_ROLE_PLAY,
-	MOVE_DRILL_RUN,
-	MOVE_BLAZE_KICK,
-	MOVE_CROSS_POISON,
-	MOVE_WEATHER_BALL,
-	MOVE_AIR_SLASH,
-    MOVE_STOMPING_TANTRUM
-};
-
-static const u16 sPokemonCenter_TutorMoves5[] =
-{
-	MOVE_IRON_HEAD,
-	MOVE_AQUA_TAIL,
-	MOVE_POWER_GEM,
-	MOVE_BOUNCE,
-	MOVE_HEAL_BELL,
-	MOVE_SUPERPOWER,
-	MOVE_CRUNCH,
-	MOVE_MYSTICAL_FIRE,
-	MOVE_GUNK_SHOT,
-	MOVE_HYPER_VOICE,
-	MOVE_SKY_ATTACK,
-	MOVE_HEAT_CRASH,
-	MOVE_STORED_POWER,
-	MOVE_TRICK,
-	MOVE_DYNAMIC_PUNCH,
-	MOVE_HELPING_HAND,
-	MOVE_TOXIC_SPIKES,
-    MOVE_HIGH_HORSEPOWER
-};
-
-static const u16 sPokemonCenter_TutorMoves6[] =
-{
-	MOVE_MEGAHORN,
-	MOVE_AURA_SPHERE,
-	MOVE_THROAT_CHOP,
-	MOVE_EARTH_POWER,
-	MOVE_HEAT_WAVE,
-	MOVE_LIQUIDATION,
-	MOVE_BATON_PASS,
-	MOVE_FOUL_PLAY,
-	MOVE_SOLAR_BLADE,
-	MOVE_PHANTOM_FORCE,
-	MOVE_METEOR_MASH,
-	MOVE_PSYCHIC_FANGS,
-	MOVE_ENCORE,
-	MOVE_GRASSY_TERRAIN,
-	MOVE_ELECTRIC_TERRAIN,
-	MOVE_MISTY_TERRAIN,
-	MOVE_PSYCHIC_TERRAIN,
-    MOVE_POWER_UP_PUNCH
-};
-
-static const u16 sPokemonCenter_TutorMoves7[] =
-{
-	MOVE_DOUBLE_EDGE,
-	MOVE_PLAY_ROUGH,
-	MOVE_NASTY_PLOT,
-	MOVE_SELF_DESTRUCT,
-	MOVE_CLOSE_COMBAT,
-	MOVE_FLARE_BLITZ,
-	MOVE_BRAVE_BIRD,
-	MOVE_LEAF_STORM,
-	MOVE_POWER_WHIP,
-	MOVE_HURRICANE,
-	MOVE_HYDRO_PUMP,
-	MOVE_DRAGON_DANCE,
-	MOVE_OUTRAGE,
-	MOVE_KNOCK_OFF,
-	MOVE_QUIVER_DANCE
-};
-
-static bool8 TryGetTutorMoveByMenu(u16 menu, u16 moveIndex, u16 *move)
-{
-#define TRY_TUTOR_LIST(menuId, list)             \
-    case menuId:                                 \
-        if (moveIndex >= ARRAY_COUNT(list))      \
-            return FALSE;                        \
-        *move = list[moveIndex];                 \
-        return TRUE
-
-    switch (menu)
-    {
-    TRY_TUTOR_LIST(SCROLL_MULTI_PC_TUTOR_SET_1, sPokemonCenter_TutorMoves1);
-    TRY_TUTOR_LIST(SCROLL_MULTI_PC_TUTOR_SET_2, sPokemonCenter_TutorMoves2);
-    TRY_TUTOR_LIST(SCROLL_MULTI_PC_TUTOR_SET_3, sPokemonCenter_TutorMoves3);
-    TRY_TUTOR_LIST(SCROLL_MULTI_PC_TUTOR_SET_4, sPokemonCenter_TutorMoves4);
-    TRY_TUTOR_LIST(SCROLL_MULTI_PC_TUTOR_SET_5, sPokemonCenter_TutorMoves5);
-    TRY_TUTOR_LIST(SCROLL_MULTI_PC_TUTOR_SET_6, sPokemonCenter_TutorMoves6);
-    TRY_TUTOR_LIST(SCROLL_MULTI_PC_TUTOR_SET_7, sPokemonCenter_TutorMoves7);
-    }
-
-    return FALSE;
-#undef TRY_TUTOR_LIST
-}
-
 void BufferBattleFrontierTutorMoveName(void)
 {
-    u16 move;
-
-    if (TryGetTutorMoveByMenu(VarGet(VAR_TEMP_C), gSpecialVar_0x8004, &move))
-        StringCopy(gStringVar1, gMoveNamesLong[move]);
-    else
-        gStringVar1[0] = EOS;
+    StringCopy(gStringVar1, GetMoveName(gSpecialVar_0x8005));
 }
 
-static void ShowBattleFrontierTutorWindow(u8 menu, u16 selection)
+static void ShowBattleFrontierTutorWindow(enum ScrollMulti menu, u16 selection)
 {
-    static const struct WindowTemplate sBattleFrontierTutor_WindowTemplate = 
+    static const struct WindowTemplate sBattleFrontierTutor_WindowTemplate =
     {
         .bg = 0,
         .tilemapLeft = 1,
@@ -3797,206 +3390,56 @@ static void ShowBattleFrontierTutorWindow(u8 menu, u16 selection)
         .baseBlock = 28,
     };
 
-    if ((menu >= SCROLL_MULTI_PC_TUTOR_SET_1) && (menu <= SCROLL_MULTI_PC_TUTOR_SET_7))
+    if (menu == SCROLL_MULTI_BF_MOVE_TUTOR_1 || menu == SCROLL_MULTI_BF_MOVE_TUTOR_2)
     {
         if (gSpecialVar_0x8006 == 0)
         {
             sTutorMoveAndElevatorWindowId = AddWindow(&sBattleFrontierTutor_WindowTemplate);
-            SetStandardWindowBorderStyle(sTutorMoveAndElevatorWindowId, 0);
+            SetStandardWindowBorderStyle(sTutorMoveAndElevatorWindowId, FALSE);
         }
         ShowBattleFrontierTutorMoveDescription(menu, selection);
     }
 }
 
-static void ShowBattleFrontierTutorMoveDescription(u8 menu, u16 selection)
+static void ShowBattleFrontierTutorMoveDescription(enum ScrollMulti menu, u16 selection)
 {
-	static const u8 *const sPokemonCenter_TutorMoveDescriptions1[] = 
-    {        
-		PokemonCenterMoveTutor_Text_FuryCutterDesc,
-        PokemonCenterMoveTutor_Text_RolloutDesc,
-        PokemonCenterMoveTutor_Text_SeismicTossDesc,
-        PokemonCenterMoveTutor_Text_CovetDesc,
-        PokemonCenterMoveTutor_Text_VacuumWaveDesc,
-        PokemonCenterMoveTutor_Text_ShockWaveDesc,
-        PokemonCenterMoveTutor_Text_BugBiteDesc,
-        PokemonCenterMoveTutor_Text_AirCutterDesc,
-        PokemonCenterMoveTutor_Text_SwiftDesc,
-        PokemonCenterMoveTutor_Text_SnatchDesc,
-        PokemonCenterMoveTutor_Text_MimicDesc,
-        PokemonCenterMoveTutor_Text_MudSlapDesc,
-        PokemonCenterMoveTutor_Text_MetronomeDesc,
-        PokemonCenterMoveTutor_Text_OminousWindDesc,
-        PokemonCenterMoveTutor_Text_SuperFangDesc,
-        PokemonCenterMoveTutor_Text_HoneClawsDesc,
-        PokemonCenterMoveTutor_Text_PsychUpDesc,
-        PokemonCenterMoveTutor_Text_FocusEnergyDesc,
-        PokemonCenterMoveTutor_Text_SpikesDesc,
-        PokemonCenterMoveTutor_Text_InfestationDesc,
+    static const u8 *const sBattleFrontier_TutorMoveDescriptions1[] =
+    {
+        BattleFrontier_Lounge7_Text_SoftboiledDesc,
+        BattleFrontier_Lounge7_Text_SeismicTossDesc,
+        BattleFrontier_Lounge7_Text_DreamEaterDesc,
+        BattleFrontier_Lounge7_Text_MegaPunchDesc,
+        BattleFrontier_Lounge7_Text_MegaKickDesc,
+        BattleFrontier_Lounge7_Text_BodySlamDesc,
+        BattleFrontier_Lounge7_Text_RockSlideDesc,
+        BattleFrontier_Lounge7_Text_CounterDesc,
+        BattleFrontier_Lounge7_Text_ThunderWaveDesc,
+        BattleFrontier_Lounge7_Text_SwordsDanceDesc,
         gText_Exit,
-	};
-	
-	static const u8 *const sPokemonCenter_TutorMoveDescriptions2[] = 
-    {        
-		PokemonCenterMoveTutor_Text_CounterDesc,
-        PokemonCenterMoveTutor_Text_EndeavorDesc,
-        PokemonCenterMoveTutor_Text_WorrySeedDesc,
-        PokemonCenterMoveTutor_Text_DefenseCurlDesc,
-        PokemonCenterMoveTutor_Text_DefogDesc,
-        PokemonCenterMoveTutor_Text_MagicCoatDesc,
-        PokemonCenterMoveTutor_Text_UproarDesc,
-        PokemonCenterMoveTutor_Text_HexDesc,
-        PokemonCenterMoveTutor_Text_GastroAcidDesc,
-        PokemonCenterMoveTutor_Text_SynthesisDesc,
-        PokemonCenterMoveTutor_Text_PainSplitDesc,
-        PokemonCenterMoveTutor_Text_LowKickDesc,
-        PokemonCenterMoveTutor_Text_IronDefenseDesc,
-        PokemonCenterMoveTutor_Text_MagnetRiseDesc,
-        PokemonCenterMoveTutor_Text_SwaggerDesc,
-        PokemonCenterMoveTutor_Text_PinMissileDesc,
-        PokemonCenterMoveTutor_Text_MudShotDesc,
-        PokemonCenterMoveTutor_Text_AgilityDesc,
-        gText_Exit,
-	};
-	
-	static const u8 *const sPokemonCenter_TutorMoveDescriptions3[] = 
-    {        
-		PokemonCenterMoveTutor_Text_SignalBeamDesc,
-        PokemonCenterMoveTutor_Text_GravityDesc,
-        PokemonCenterMoveTutor_Text_SeedBombDesc,
-        PokemonCenterMoveTutor_Text_PsychoCutDesc,
-        PokemonCenterMoveTutor_Text_IcyWindDesc,
-        PokemonCenterMoveTutor_Text_ElectroWebDesc,
-        PokemonCenterMoveTutor_Text_ThunderFangDesc,
-        PokemonCenterMoveTutor_Text_FireFangDesc,
-        PokemonCenterMoveTutor_Text_IceFangDesc,
-        PokemonCenterMoveTutor_Text_BrineDesc,
-        PokemonCenterMoveTutor_Text_RazorShellDesc,
-        PokemonCenterMoveTutor_Text_RevengeDesc,
-        PokemonCenterMoveTutor_Text_DrainingKissDesc,
-        PokemonCenterMoveTutor_Text_LeafBladeDesc,
-        PokemonCenterMoveTutor_Text_RockBlastDesc,
-        PokemonCenterMoveTutor_Text_SoftBoiledDesc,
-        PokemonCenterMoveTutor_Text_AuroraBeamDesc,
-        PokemonCenterMoveTutor_Text_TeleportDesc,
-        gText_Exit,
-	};
-	
-	static const u8 *const sPokemonCenter_TutorMoveDescriptions4[] = 
-    {        
-        PokemonCenterMoveTutor_Text_ThunderPunchDesc,
-        PokemonCenterMoveTutor_Text_FirePunchDesc,
-        PokemonCenterMoveTutor_Text_IcePunchDesc,
-        PokemonCenterMoveTutor_Text_TailwindDesc,
-        PokemonCenterMoveTutor_Text_ZenHeadbuttDesc,
-        PokemonCenterMoveTutor_Text_BodySlamDesc,
-        PokemonCenterMoveTutor_Text_IcicleSpearDesc,
-        PokemonCenterMoveTutor_Text_DualChopDesc,
-        PokemonCenterMoveTutor_Text_ReversalDesc,
-        PokemonCenterMoveTutor_Text_BugBuzzDesc,
-        PokemonCenterMoveTutor_Text_LastResortDesc,
-        PokemonCenterMoveTutor_Text_RolePlayDesc,
-        PokemonCenterMoveTutor_Text_DrillRunDesc,
-        PokemonCenterMoveTutor_Text_BlazeKickDesc,
-        PokemonCenterMoveTutor_Text_CrossPoisonDesc,
-        PokemonCenterMoveTutor_Text_WeatherBallDesc,
-        PokemonCenterMoveTutor_Text_AirSlashDesc,
-        PokemonCenterMoveTutor_Text_StompingTantrumDesc,
-        gText_Exit,
-	};
-	
-	static const u8 *const sPokemonCenter_TutorMoveDescriptions5[] = 
-    {        
-        PokemonCenterMoveTutor_Text_IronHeadDesc,
-        PokemonCenterMoveTutor_Text_AquaTailDesc,
-        PokemonCenterMoveTutor_Text_PowerGemDesc,
-        PokemonCenterMoveTutor_Text_BounceDesc,
-        PokemonCenterMoveTutor_Text_HealBellDesc,
-        PokemonCenterMoveTutor_Text_SuperpowerDesc,
-        PokemonCenterMoveTutor_Text_CrunchDesc,
-        PokemonCenterMoveTutor_Text_MysticalFireDesc,
-        PokemonCenterMoveTutor_Text_GunkShotDesc,
-        PokemonCenterMoveTutor_Text_HyperVoiceDesc,
-        PokemonCenterMoveTutor_Text_SkyAttackDesc,
-        PokemonCenterMoveTutor_Text_HeatCrashDesc,
-        PokemonCenterMoveTutor_Text_StoredPowerDesc,
-        PokemonCenterMoveTutor_Text_TrickDesc,
-        PokemonCenterMoveTutor_Text_DynamicPunchDesc,
-        PokemonCenterMoveTutor_Text_HelpingHandDesc,
-        PokemonCenterMoveTutor_Text_ToxicSpikesDesc,
-        PokemonCenterMoveTutor_Text_HighHorsepowerDesc,
-        gText_Exit,
-	};
-	
-	static const u8 *const sPokemonCenter_TutorMoveDescriptions6[] = 
-    {        
-        PokemonCenterMoveTutor_Text_MegahornDesc,
-        PokemonCenterMoveTutor_Text_AuraSphereDesc,
-        PokemonCenterMoveTutor_Text_ThroatChopDesc,
-        PokemonCenterMoveTutor_Text_EarthPowerDesc,
-        PokemonCenterMoveTutor_Text_HeatWaveDesc,
-        PokemonCenterMoveTutor_Text_LiquidationDesc,
-        PokemonCenterMoveTutor_Text_BatonPassDesc,
-        PokemonCenterMoveTutor_Text_FoulPlayDesc,
-        PokemonCenterMoveTutor_Text_SolarBladeDesc,
-        PokemonCenterMoveTutor_Text_PhantomForceDesc,
-        PokemonCenterMoveTutor_Text_MeteorMashDesc,
-        PokemonCenterMoveTutor_Text_PsychicFangsDesc,
-        PokemonCenterMoveTutor_Text_EncoreDesc,
-        PokemonCenterMoveTutor_Text_GrassyTerrainDesc,
-        PokemonCenterMoveTutor_Text_ElectricTerrainDesc,
-        PokemonCenterMoveTutor_Text_MistyTerrainDesc,
-        PokemonCenterMoveTutor_Text_PsychicTerrainDesc,
-        PokemonCenterMoveTutor_Text_PowerUpPunchDesc,
-        gText_Exit,
-	};
-	
-	static const u8 *const sPokemonCenter_TutorMoveDescriptions7[] = 
-    {        
-        PokemonCenterMoveTutor_Text_DoubleEdgeDesc,
-        PokemonCenterMoveTutor_Text_PlayRoughDesc,
-        PokemonCenterMoveTutor_Text_NastyPlotDesc,
-        PokemonCenterMoveTutor_Text_SelfDestructDesc,
-        PokemonCenterMoveTutor_Text_CloseCombatDesc,
-        PokemonCenterMoveTutor_Text_FlareBlitzDesc,
-        PokemonCenterMoveTutor_Text_BraveBirdDesc,
-        PokemonCenterMoveTutor_Text_LeafStormDesc,
-        PokemonCenterMoveTutor_Text_PowerWhipDesc,
-        PokemonCenterMoveTutor_Text_HurricaneDesc,
-        PokemonCenterMoveTutor_Text_HydroPumpDesc,
-        PokemonCenterMoveTutor_Text_DragonDanceDesc,
-        PokemonCenterMoveTutor_Text_OutrageDesc,
-        PokemonCenterMoveTutor_Text_KnockOffDesc,
-        PokemonCenterMoveTutor_Text_QuiverDanceDesc,
-        gText_Exit,
-	};
+    };
 
-    if ((menu >= SCROLL_MULTI_PC_TUTOR_SET_1) && (menu <= SCROLL_MULTI_PC_TUTOR_SET_7))
+    static const u8 *const sBattleFrontier_TutorMoveDescriptions2[] =
+    {
+        BattleFrontier_Lounge7_Text_DefenseCurlDesc,
+        BattleFrontier_Lounge7_Text_SnoreDesc,
+        BattleFrontier_Lounge7_Text_MudSlapDesc,
+        BattleFrontier_Lounge7_Text_SwiftDesc,
+        BattleFrontier_Lounge7_Text_IcyWindDesc,
+        BattleFrontier_Lounge7_Text_EndureDesc,
+        BattleFrontier_Lounge7_Text_PsychUpDesc,
+        BattleFrontier_Lounge7_Text_IcePunchDesc,
+        BattleFrontier_Lounge7_Text_ThunderPunchDesc,
+        BattleFrontier_Lounge7_Text_FirePunchDesc,
+        gText_Exit,
+    };
+
+    if (menu == SCROLL_MULTI_BF_MOVE_TUTOR_1 || menu == SCROLL_MULTI_BF_MOVE_TUTOR_2)
     {
         FillWindowPixelRect(sTutorMoveAndElevatorWindowId, PIXEL_FILL(1), 0, 0, 96, 48);
-        switch (menu)
-        {
-        case SCROLL_MULTI_PC_TUTOR_SET_1:
-            AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, sPokemonCenter_TutorMoveDescriptions1[selection], 0, 1, 0, NULL);
-            break;
-        case SCROLL_MULTI_PC_TUTOR_SET_2:
-            AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, sPokemonCenter_TutorMoveDescriptions2[selection], 0, 1, 0, NULL);
-            break;
-        case SCROLL_MULTI_PC_TUTOR_SET_3:
-            AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, sPokemonCenter_TutorMoveDescriptions3[selection], 0, 1, 0, NULL);
-            break;
-        case SCROLL_MULTI_PC_TUTOR_SET_4:
-            AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, sPokemonCenter_TutorMoveDescriptions4[selection], 0, 1, 0, NULL);
-            break;
-        case SCROLL_MULTI_PC_TUTOR_SET_5:
-            AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, sPokemonCenter_TutorMoveDescriptions5[selection], 0, 1, 0, NULL);
-            break;
-        case SCROLL_MULTI_PC_TUTOR_SET_6:
-            AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, sPokemonCenter_TutorMoveDescriptions6[selection], 0, 1, 0, NULL);
-            break;
-        case SCROLL_MULTI_PC_TUTOR_SET_7:
-            AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, 1, sPokemonCenter_TutorMoveDescriptions7[selection], 0, 1, 0, NULL);
-            break;
-        }
+        if (menu == SCROLL_MULTI_BF_MOVE_TUTOR_2)
+            AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, FONT_NORMAL, sBattleFrontier_TutorMoveDescriptions2[selection], 0, 1, 0, NULL);
+        else
+            AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, FONT_NORMAL, sBattleFrontier_TutorMoveDescriptions1[selection], 0, 1, 0, NULL);
     }
 }
 
@@ -4007,52 +3450,31 @@ void CloseBattleFrontierTutorWindow(void)
 }
 
 // Never called
-void sub_813ADD4(void)
+void ScrollableMultichoice_RedrawPersistentMenu(void)
 {
     u16 scrollOffset, selectedRow;
     u8 i;
-    u8 taskId = FindTaskIdByFunc(sub_813A600);
+    u8 taskId = FindTaskIdByFunc(Task_ScrollableMultichoice_WaitReturnToList);
     if (taskId != TASK_NONE)
     {
         struct Task *task = &gTasks[taskId];
         ListMenuGetScrollAndRow(task->tListTaskId, &scrollOffset, &selectedRow);
-        SetStandardWindowBorderStyle(task->tWindowId, 0);
+        SetStandardWindowBorderStyle(task->tWindowId, FALSE);
 
         for (i = 0; i < MAX_SCROLL_MULTI_ON_SCREEN; i++)
-        {
-            AddTextPrinterParameterized5(task->tWindowId, 1, sScrollableMultichoiceOptions[gSpecialVar_0x8004][scrollOffset + i], 10, i * 16, TEXT_SPEED_FF, NULL, 0, 0);
-        }
+            AddTextPrinterParameterized5(task->tWindowId, FONT_NORMAL, sScrollableMultichoiceOptions[gSpecialVar_0x8004][scrollOffset + i], 10, i * 16, TEXT_SKIP_DRAW, NULL, 0, 0);
 
-        AddTextPrinterParameterized(task->tWindowId, 1, gText_SelectorArrow, 0, selectedRow * 16, TEXT_SPEED_FF, NULL);
+        AddTextPrinterParameterized(task->tWindowId, FONT_NORMAL, gText_SelectorArrow, 0, selectedRow * 16, TEXT_SKIP_DRAW, NULL);
         PutWindowTilemap(task->tWindowId);
-        CopyWindowToVram(task->tWindowId, 3);
-    }
-}
-
-void GetBattleFrontierTutorMoveIndex(void)
-{
-    u8 i;
-    u16 move;
-
-    gSpecialVar_0x8005 = 0;
-
-    if (!TryGetTutorMoveByMenu(VarGet(VAR_TEMP_C), VarGet(VAR_TEMP_D), &move))
-        return;
-
-    for (i = 0; i < TUTOR_MOVE_COUNT; i++)
-    {
-        if (gTutorMoves[i] == move)
-        {
-            gSpecialVar_0x8005 = i;
-            return;
-        }
+        CopyWindowToVram(task->tWindowId, COPYWIN_FULL);
     }
 }
 
 // Never called
-void sub_813AF48(void)
+// Close a scrollable multichoice that stays open after selection
+void ScrollableMultichoice_ClosePersistentMenu(void)
 {
-    u8 taskId = FindTaskIdByFunc(sub_813A600);
+    u8 taskId = FindTaskIdByFunc(Task_ScrollableMultichoice_WaitReturnToList);
     if (taskId != TASK_NONE)
     {
         struct Task *task = &gTasks[taskId];
@@ -4061,48 +3483,50 @@ void sub_813AF48(void)
         ClearStdWindowAndFrameToTransparent(task->tWindowId, TRUE);
         FillWindowPixelBuffer(task->tWindowId, PIXEL_FILL(0));
         ClearWindowTilemap(task->tWindowId);
-        CopyWindowToVram(task->tWindowId, 2);
+        CopyWindowToVram(task->tWindowId, COPYWIN_GFX);
         RemoveWindow(task->tWindowId);
         DestroyTask(taskId);
     }
 }
 
 // Undefine Scrollable Multichoice task data macros
-#undef tMaxItemsOnScreen  
-#undef tNumItems           
-#undef tLeft               
-#undef tTop                 
-#undef tWidth              
-#undef tHeight             
-#undef tKeepOpenAfterSelect 
-#undef tScrollOffset      
-#undef tSelectedRow        
-#undef tScrollMultiId       
-#undef tScrollArrowId       
-#undef tWindowId            
-#undef tListTaskId         
-#undef tTaskId              
+#undef tMaxItemsOnScreen
+#undef tNumItems
+#undef tLeft
+#undef tTop
+#undef tWidth
+#undef tHeight
+#undef tKeepOpenAfterSelect
+#undef tScrollOffset
+#undef tSelectedRow
+#undef tScrollMultiId
+#undef tScrollArrowId
+#undef tWindowId
+#undef tListTaskId
+#undef tTaskId
+
+#define DEOXYS_ROCK_LEVELS 11
 
 void DoDeoxysRockInteraction(void)
 {
     CreateTask(Task_DeoxysRockInteraction, 8);
 }
 
-static const u16 sDeoxysRockPalettes[][16] = {
-    INCBIN_U16("graphics/misc/deoxys1.gbapal"),
-    INCBIN_U16("graphics/misc/deoxys2.gbapal"),
-    INCBIN_U16("graphics/misc/deoxys3.gbapal"),
-    INCBIN_U16("graphics/misc/deoxys4.gbapal"),
-    INCBIN_U16("graphics/misc/deoxys5.gbapal"),
-    INCBIN_U16("graphics/misc/deoxys6.gbapal"),
-    INCBIN_U16("graphics/misc/deoxys7.gbapal"),
-    INCBIN_U16("graphics/misc/deoxys8.gbapal"),
-    INCBIN_U16("graphics/misc/deoxys9.gbapal"),
-    INCBIN_U16("graphics/misc/deoxys10.gbapal"),
-    INCBIN_U16("graphics/misc/deoxys11.gbapal"),
+static const u16 sDeoxysRockPalettes[DEOXYS_ROCK_LEVELS][16] = {
+    INCGFX_U16("graphics/field_effects/palettes/deoxys_rock_1.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_effects/palettes/deoxys_rock_2.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_effects/palettes/deoxys_rock_3.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_effects/palettes/deoxys_rock_4.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_effects/palettes/deoxys_rock_5.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_effects/palettes/deoxys_rock_6.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_effects/palettes/deoxys_rock_7.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_effects/palettes/deoxys_rock_8.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_effects/palettes/deoxys_rock_9.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_effects/palettes/deoxys_rock_10.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_effects/palettes/deoxys_rock_11.pal", ".gbapal"),
 };
 
-static const u8 sDeoxysRockCoords[][2] = {
+static const u8 sDeoxysRockCoords[DEOXYS_ROCK_LEVELS][2] = {
     { 15, 12 },
     { 11, 14 },
     { 15,  8 },
@@ -4118,12 +3542,12 @@ static const u8 sDeoxysRockCoords[][2] = {
 
 static void Task_DeoxysRockInteraction(u8 taskId)
 {
-    static const u8 sStoneMaxStepCounts[] = { 4, 8, 8, 8, 4, 4, 4, 6, 3, 3 };
+    static const u8 sStoneMaxStepCounts[DEOXYS_ROCK_LEVELS - 1] = { 4, 8, 8, 8, 4, 4, 4, 6, 3, 3 };
 
     if (FlagGet(FLAG_DEOXYS_ROCK_COMPLETE) == TRUE)
     {
-        gSpecialVar_Result = 3;
-        EnableBothScriptContexts();
+        gSpecialVar_Result = DEOXYS_ROCK_COMPLETE;
+        ScriptContext_Enable();
         DestroyTask(taskId);
     }
     else
@@ -4137,14 +3561,14 @@ static void Task_DeoxysRockInteraction(u8 taskId)
             // Player failed to take the shortest path to the stone, so it resets.
             ChangeDeoxysRockLevel(0);
             VarSet(VAR_DEOXYS_ROCK_LEVEL, 0);
-            gSpecialVar_Result = 0;
+            gSpecialVar_Result = DEOXYS_ROCK_FAILED;
             DestroyTask(taskId);
         }
-        else if (rockLevel == 10)
+        else if (rockLevel == DEOXYS_ROCK_LEVELS - 1)
         {
             FlagSet(FLAG_DEOXYS_ROCK_COMPLETE);
-            gSpecialVar_Result = 2;
-            EnableBothScriptContexts();
+            gSpecialVar_Result = DEOXYS_ROCK_SOLVED;
+            ScriptContext_Enable();
             DestroyTask(taskId);
         }
         else
@@ -4152,7 +3576,7 @@ static void Task_DeoxysRockInteraction(u8 taskId)
             rockLevel++;
             ChangeDeoxysRockLevel(rockLevel);
             VarSet(VAR_DEOXYS_ROCK_LEVEL, rockLevel);
-            gSpecialVar_Result = 1;
+            gSpecialVar_Result = DEOXYS_ROCK_PROGRESSED;
             DestroyTask(taskId);
         }
     }
@@ -4160,61 +3584,70 @@ static void Task_DeoxysRockInteraction(u8 taskId)
 
 static void ChangeDeoxysRockLevel(u8 rockLevel)
 {
-    u8 objectEventId;
-    LoadPalette(&sDeoxysRockPalettes[rockLevel], 0x1A0, 8);
-    TryGetObjectEventIdByLocalIdAndMap(LOCALID_BIRTH_ISLAND_EXTERIOR_ROCK, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
+    u8 paletteNum = IndexOfSpritePaletteTag(OBJ_EVENT_PAL_TAG_BIRTH_ISLAND_STONE);
+    LoadPalette(&sDeoxysRockPalettes[rockLevel], OBJ_PLTT_ID(paletteNum), PLTT_SIZEOF(4));
+    UpdateSpritePaletteWithWeather(paletteNum, FALSE);
 
     if (rockLevel == 0)
-        PlaySE(SE_M_CONFUSE_RAY);
+        PlaySE(SE_M_CONFUSE_RAY); // Failure sound
     else
-        PlaySE(SE_RG_DEOXYS_MOVE);
+        PlaySE(SE_RG_DEOXYS_MOVE); // Success sound
 
     CreateTask(WaitForDeoxysRockMovement, 8);
     gFieldEffectArguments[0] = LOCALID_BIRTH_ISLAND_EXTERIOR_ROCK;
-    gFieldEffectArguments[1] = MAP_NUM(BIRTH_ISLAND_EXTERIOR);
-    gFieldEffectArguments[2] = MAP_GROUP(BIRTH_ISLAND_EXTERIOR);
+    if (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_BIRTH_ISLAND_EXTERIOR_FRLG) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_BIRTH_ISLAND_EXTERIOR_FRLG))
+    {
+        gFieldEffectArguments[1] = MAP_NUM(MAP_BIRTH_ISLAND_EXTERIOR_FRLG);
+        gFieldEffectArguments[2] = MAP_GROUP(MAP_BIRTH_ISLAND_EXTERIOR_FRLG);
+    }
+    else
+    {
+        gFieldEffectArguments[1] = MAP_NUM(MAP_BIRTH_ISLAND_EXTERIOR);
+        gFieldEffectArguments[2] = MAP_GROUP(MAP_BIRTH_ISLAND_EXTERIOR);
+    }
     gFieldEffectArguments[3] = sDeoxysRockCoords[rockLevel][0];
     gFieldEffectArguments[4] = sDeoxysRockCoords[rockLevel][1];
 
+    // Set number of movement steps.
+    // Resetting for failure is slow, successful movement is fast.
     if (rockLevel == 0)
         gFieldEffectArguments[5] = 60;
     else
         gFieldEffectArguments[5] = 5;
 
     FieldEffectStart(FLDEFF_MOVE_DEOXYS_ROCK);
-    Overworld_SetObjEventTemplateCoords(1, sDeoxysRockCoords[rockLevel][0], sDeoxysRockCoords[rockLevel][1]);
+    SetObjEventTemplateCoords(LOCALID_BIRTH_ISLAND_EXTERIOR_ROCK, sDeoxysRockCoords[rockLevel][0], sDeoxysRockCoords[rockLevel][1]);
 }
 
 static void WaitForDeoxysRockMovement(u8 taskId)
 {
     if (FieldEffectActiveListContains(FLDEFF_MOVE_DEOXYS_ROCK) == FALSE)
     {
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
         DestroyTask(taskId);
     }
 }
 
 void IncrementBirthIslandRockStepCount(void)
 {
-    u16 var = VarGet(VAR_DEOXYS_ROCK_STEP_COUNT);
-    if (gSaveBlock1Ptr->location.mapNum == MAP_NUM(BIRTH_ISLAND_EXTERIOR) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(BIRTH_ISLAND_EXTERIOR))
+    u16 stepCount = VarGet(VAR_DEOXYS_ROCK_STEP_COUNT);
+    if ((gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_BIRTH_ISLAND_EXTERIOR) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_BIRTH_ISLAND_EXTERIOR))
+     || (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_BIRTH_ISLAND_EXTERIOR_FRLG) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_BIRTH_ISLAND_EXTERIOR_FRLG)))
     {
-        var++;
-        if (var > 99)
-        {
+        if (++stepCount > 99)
             VarSet(VAR_DEOXYS_ROCK_STEP_COUNT, 0);
-        }
         else
-        {
-            VarSet(VAR_DEOXYS_ROCK_STEP_COUNT, var);
-        }
+            VarSet(VAR_DEOXYS_ROCK_STEP_COUNT, stepCount);
     }
 }
 
+// called before fade-in
 void SetDeoxysRockPalette(void)
 {
-    LoadPalette(&sDeoxysRockPalettes[(u8)VarGet(VAR_DEOXYS_ROCK_LEVEL)], 0x1A0, 8);
-    BlendPalettes(0x04000000, 16, 0);
+    u32 paletteNum = IndexOfSpritePaletteTag(OBJ_EVENT_PAL_TAG_BIRTH_ISLAND_STONE);
+    LoadPalette(&sDeoxysRockPalettes[(u8)VarGet(VAR_DEOXYS_ROCK_LEVEL)], OBJ_PLTT_ID(paletteNum), PLTT_SIZEOF(4));
+    // Set faded to all black, weather blending handled during fade-in
+    CpuFill16(RGB_BLACK, &gPlttBufferFaded[OBJ_PLTT_ID(paletteNum)], PLTT_SIZE_4BPP);
 }
 
 void SetPCBoxToSendMon(u8 boxId)
@@ -4253,18 +3686,14 @@ bool8 IsDestinationBoxFull(void)
             if (GetBoxMonData(GetBoxedMonPtr(box, i), MON_DATA_SPECIES, 0) == SPECIES_NONE)
             {
                 if (GetPCBoxToSendMon() != box)
-                {
                     FlagClear(FLAG_SHOWN_BOX_WAS_FULL_MESSAGE);
-                }
                 VarSet(VAR_PC_BOX_TO_SEND_MON, box);
                 return ShouldShowBoxWasFullMessage();
             }
         }
 
         if (++box == TOTAL_BOXES_COUNT)
-        {
             box = 0;
-        }
     } while (box != StorageGetCurrentBox());
     return FALSE;
 }
@@ -4299,22 +3728,22 @@ void CreateAbnormalWeatherEvent(void)
 bool32 GetAbnormalWeatherMapNameAndType(void)
 {
     static const u8 sAbnormalWeatherMapNumbers[] = {
-        MAP_NUM(ROUTE114),
-        MAP_NUM(ROUTE114),
-        MAP_NUM(ROUTE115),
-        MAP_NUM(ROUTE115),
-        MAP_NUM(ROUTE116),
-        MAP_NUM(ROUTE116),
-        MAP_NUM(ROUTE118),
-        MAP_NUM(ROUTE118),
-        MAP_NUM(ROUTE105),
-        MAP_NUM(ROUTE105),
-        MAP_NUM(ROUTE125),
-        MAP_NUM(ROUTE125),
-        MAP_NUM(ROUTE127),
-        MAP_NUM(ROUTE127),
-        MAP_NUM(ROUTE129),
-        MAP_NUM(ROUTE129)
+        MAP_NUM(MAP_ROUTE114),
+        MAP_NUM(MAP_ROUTE114),
+        MAP_NUM(MAP_ROUTE115),
+        MAP_NUM(MAP_ROUTE115),
+        MAP_NUM(MAP_ROUTE116),
+        MAP_NUM(MAP_ROUTE116),
+        MAP_NUM(MAP_ROUTE118),
+        MAP_NUM(MAP_ROUTE118),
+        MAP_NUM(MAP_ROUTE105),
+        MAP_NUM(MAP_ROUTE105),
+        MAP_NUM(MAP_ROUTE125),
+        MAP_NUM(MAP_ROUTE125),
+        MAP_NUM(MAP_ROUTE127),
+        MAP_NUM(MAP_ROUTE127),
+        MAP_NUM(MAP_ROUTE129),
+        MAP_NUM(MAP_ROUTE129)
     };
 
     u16 abnormalWeather = VarGet(VAR_ABNORMAL_WEATHER_LOCATION);
@@ -4330,64 +3759,63 @@ bool32 GetAbnormalWeatherMapNameAndType(void)
 bool8 AbnormalWeatherHasExpired(void)
 {
     // Duplicate array.
-    static const u8 sAbnormalWeatherMapNumbers[] = {
-        MAP_NUM(ROUTE114),
-        MAP_NUM(ROUTE114),
-        MAP_NUM(ROUTE115),
-        MAP_NUM(ROUTE115),
-        MAP_NUM(ROUTE116),
-        MAP_NUM(ROUTE116),
-        MAP_NUM(ROUTE118),
-        MAP_NUM(ROUTE118),
-        MAP_NUM(ROUTE105),
-        MAP_NUM(ROUTE105),
-        MAP_NUM(ROUTE125),
-        MAP_NUM(ROUTE125),
-        MAP_NUM(ROUTE127),
-        MAP_NUM(ROUTE127),
-        MAP_NUM(ROUTE129),
-        MAP_NUM(ROUTE129)
+    static const u8 sAbnormalWeatherMapNumbers[] =
+    {
+        MAP_NUM(MAP_ROUTE114),
+        MAP_NUM(MAP_ROUTE114),
+        MAP_NUM(MAP_ROUTE115),
+        MAP_NUM(MAP_ROUTE115),
+        MAP_NUM(MAP_ROUTE116),
+        MAP_NUM(MAP_ROUTE116),
+        MAP_NUM(MAP_ROUTE118),
+        MAP_NUM(MAP_ROUTE118),
+        MAP_NUM(MAP_ROUTE105),
+        MAP_NUM(MAP_ROUTE105),
+        MAP_NUM(MAP_ROUTE125),
+        MAP_NUM(MAP_ROUTE125),
+        MAP_NUM(MAP_ROUTE127),
+        MAP_NUM(MAP_ROUTE127),
+        MAP_NUM(MAP_ROUTE129),
+        MAP_NUM(MAP_ROUTE129)
     };
 
     u16 steps = VarGet(VAR_ABNORMAL_WEATHER_STEP_COUNTER);
     u16 abnormalWeather = VarGet(VAR_ABNORMAL_WEATHER_LOCATION);
 
     if (abnormalWeather == ABNORMAL_WEATHER_NONE)
-    {
         return FALSE;
-    }
 
     if (++steps > 999)
     {
         VarSet(VAR_ABNORMAL_WEATHER_STEP_COUNTER, 0);
-        if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(UNDERWATER_MARINE_CAVE))
+        if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_UNDERWATER_MARINE_CAVE))
         {
             switch (gSaveBlock1Ptr->location.mapNum)
             {
-                case MAP_NUM(UNDERWATER_MARINE_CAVE):
-                case MAP_NUM(MARINE_CAVE_ENTRANCE):
-                case MAP_NUM(MARINE_CAVE_END):
-                case MAP_NUM(TERRA_CAVE_ENTRANCE):
-                case MAP_NUM(TERRA_CAVE_END):
-                    VarSet(VAR_SHOULD_END_ABNORMAL_WEATHER, 1);
-                    return FALSE;
-                default:
-                    break;
+            case MAP_NUM(MAP_UNDERWATER_MARINE_CAVE):
+            case MAP_NUM(MAP_MARINE_CAVE_ENTRANCE):
+            case MAP_NUM(MAP_MARINE_CAVE_END):
+            case MAP_NUM(MAP_TERRA_CAVE_ENTRANCE):
+            case MAP_NUM(MAP_TERRA_CAVE_END):
+                VarSet(VAR_SHOULD_END_ABNORMAL_WEATHER, 1);
+                return FALSE;
+            default:
+                break;
             }
         }
 
-        if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(UNDERWATER_ROUTE127))
+        if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_UNDERWATER_ROUTE127))
         {
             switch (gSaveBlock1Ptr->location.mapNum)
             {
-                case MAP_NUM(UNDERWATER_ROUTE127):
-                case MAP_NUM(UNDERWATER_ROUTE129):
-                case MAP_NUM(UNDERWATER_ROUTE105):
-                case MAP_NUM(UNDERWATER_ROUTE125):
-                    VarSet(VAR_SHOULD_END_ABNORMAL_WEATHER, 1);
-                    return FALSE;
-                default:
-                    break;
+            case MAP_NUM(MAP_UNDERWATER_ROUTE127):
+            case MAP_NUM(MAP_UNDERWATER_ROUTE129):
+            case MAP_NUM(MAP_UNDERWATER_ROUTE105):
+            case MAP_NUM(MAP_UNDERWATER_ROUTE125):
+                VarSet(VAR_SHOULD_END_ABNORMAL_WEATHER, 1);
+                return FALSE;
+            default:
+                break;
             }
         }
 
@@ -4419,18 +3847,18 @@ u32 GetMartEmployeeObjectEventId(void)
 {
     static const u8 sPokeMarts[][3] =
     {
-        { MAP_GROUP(OLDALE_TOWN_MART),     MAP_NUM(OLDALE_TOWN_MART),     LOCALID_OLDALE_MART_CLERK },
-        { MAP_GROUP(LAVARIDGE_TOWN_MART),  MAP_NUM(LAVARIDGE_TOWN_MART),  LOCALID_LAVARIDGE_MART_CLERK },
-        { MAP_GROUP(FALLARBOR_TOWN_MART),  MAP_NUM(FALLARBOR_TOWN_MART),  LOCALID_FALLARBOR_MART_CLERK },
-        { MAP_GROUP(VERDANTURF_TOWN_MART), MAP_NUM(VERDANTURF_TOWN_MART), LOCALID_VERDANTURF_MART_CLERK },
-        { MAP_GROUP(PETALBURG_CITY_MART),  MAP_NUM(PETALBURG_CITY_MART),  LOCALID_PETALBURG_MART_CLERK },
-        { MAP_GROUP(SLATEPORT_CITY_MART),  MAP_NUM(SLATEPORT_CITY_MART),  LOCALID_SLATEPORT_MART_CLERK },
-        { MAP_GROUP(MAUVILLE_CITY_MART),   MAP_NUM(MAUVILLE_CITY_MART),   LOCALID_MAUVILLE_MART_CLERK },
-        { MAP_GROUP(RUSTBORO_CITY_MART),   MAP_NUM(RUSTBORO_CITY_MART),   LOCALID_RUSTBORO_MART_CLERK },
-        { MAP_GROUP(FORTREE_CITY_MART),    MAP_NUM(FORTREE_CITY_MART),    LOCALID_FORTREE_MART_CLERK },
-        { MAP_GROUP(MOSSDEEP_CITY_MART),   MAP_NUM(MOSSDEEP_CITY_MART),   LOCALID_MOSSDEEP_MART_CLERK },
-        { MAP_GROUP(SOOTOPOLIS_CITY_MART), MAP_NUM(SOOTOPOLIS_CITY_MART), LOCALID_SOOTOPOLIS_MART_CLERK },
-        { MAP_GROUP(BATTLE_FRONTIER_MART), MAP_NUM(BATTLE_FRONTIER_MART), LOCALID_BATTLE_FRONTIER_MART_CLERK }
+        { MAP_GROUP(MAP_OLDALE_TOWN_MART),     MAP_NUM(MAP_OLDALE_TOWN_MART),     LOCALID_OLDALE_MART_CLERK },
+        { MAP_GROUP(MAP_LAVARIDGE_TOWN_MART),  MAP_NUM(MAP_LAVARIDGE_TOWN_MART),  LOCALID_LAVARIDGE_MART_CLERK },
+        { MAP_GROUP(MAP_FALLARBOR_TOWN_MART),  MAP_NUM(MAP_FALLARBOR_TOWN_MART),  LOCALID_FALLARBOR_MART_CLERK },
+        { MAP_GROUP(MAP_VERDANTURF_TOWN_MART), MAP_NUM(MAP_VERDANTURF_TOWN_MART), LOCALID_VERDANTURF_MART_CLERK },
+        { MAP_GROUP(MAP_PETALBURG_CITY_MART),  MAP_NUM(MAP_PETALBURG_CITY_MART),  LOCALID_PETALBURG_MART_CLERK },
+        { MAP_GROUP(MAP_SLATEPORT_CITY_MART),  MAP_NUM(MAP_SLATEPORT_CITY_MART),  LOCALID_SLATEPORT_MART_CLERK },
+        { MAP_GROUP(MAP_MAUVILLE_CITY_MART),   MAP_NUM(MAP_MAUVILLE_CITY_MART),   LOCALID_MAUVILLE_MART_CLERK },
+        { MAP_GROUP(MAP_RUSTBORO_CITY_MART),   MAP_NUM(MAP_RUSTBORO_CITY_MART),   LOCALID_RUSTBORO_MART_CLERK },
+        { MAP_GROUP(MAP_FORTREE_CITY_MART),    MAP_NUM(MAP_FORTREE_CITY_MART),    LOCALID_FORTREE_MART_CLERK },
+        { MAP_GROUP(MAP_MOSSDEEP_CITY_MART),   MAP_NUM(MAP_MOSSDEEP_CITY_MART),   LOCALID_MOSSDEEP_MART_CLERK },
+        { MAP_GROUP(MAP_SOOTOPOLIS_CITY_MART), MAP_NUM(MAP_SOOTOPOLIS_CITY_MART), LOCALID_SOOTOPOLIS_MART_CLERK },
+        { MAP_GROUP(MAP_BATTLE_FRONTIER_MART), MAP_NUM(MAP_BATTLE_FRONTIER_MART), LOCALID_FRONTIER_MART_CLERK },
     };
 
     u8 i;
@@ -4439,9 +3867,7 @@ u32 GetMartEmployeeObjectEventId(void)
         if (gSaveBlock1Ptr->location.mapGroup == sPokeMarts[i][0])
         {
             if (gSaveBlock1Ptr->location.mapNum == sPokeMarts[i][1])
-            {
                 return sPokeMarts[i][2];
-            }
         }
     }
     return 1;
@@ -4452,7 +3878,7 @@ bool32 IsTrainerRegistered(void)
     int index = GetRematchIdxByTrainerIdx(gSpecialVar_0x8004);
     if (index >= 0)
     {
-        if (FlagGet(FLAG_MATCH_CALL_REGISTERED + index) == TRUE)
+        if (FlagGet(TRAINER_REGISTERED_FLAGS_START + index) == TRUE)
             return TRUE;
     }
     return FALSE;
@@ -4463,7 +3889,7 @@ bool32 ShouldDistributeEonTicket(void)
 {
     if (!VarGet(VAR_DISTRIBUTE_EON_TICKET))
         return FALSE;
-    
+
     return TRUE;
 }
 
@@ -4496,9 +3922,7 @@ static void Task_LinkRetireStatusWithBattleTowerPartner(u8 taskId)
     {
     case 0:
         if (!FuncIsActiveTask(Task_ReconnectWithLinkPlayers))
-        {
             gTasks[taskId].tState++;
-        }
         break;
     case 1:
         if (IsLinkTaskFinished() == TRUE)
@@ -4512,7 +3936,7 @@ static void Task_LinkRetireStatusWithBattleTowerPartner(u8 taskId)
             {
                 // Send value of gSpecialVar_0x8004 to leader
                 // Will either be BATTLE_TOWER_LINK_CONTINUE or BATTLE_TOWER_LINK_RETIRE
-                SendBlock(bitmask_all_link_players_but_self(), &gSpecialVar_0x8004, sizeof(gSpecialVar_0x8004));
+                SendBlock(BitmaskAllOtherLinkPlayers(), &gSpecialVar_0x8004, sizeof(gSpecialVar_0x8004));
                 gTasks[taskId].tState++;
             }
         }
@@ -4527,25 +3951,17 @@ static void Task_LinkRetireStatusWithBattleTowerPartner(u8 taskId)
                 gSpecialVar_0x8005 = gBlockRecvBuffer[1][0];
                 ResetBlockReceivedFlag(1);
 
-                if (gSpecialVar_0x8004 == BATTLE_TOWER_LINK_RETIRE 
+                if (gSpecialVar_0x8004 == BATTLE_TOWER_LINK_RETIRE
                  && gSpecialVar_0x8005 == BATTLE_TOWER_LINK_RETIRE)
-                {
                     gSpecialVar_Result = BATTLE_TOWER_LINKSTAT_BOTH_RETIRE;
-                }
-                else if (gSpecialVar_0x8004 == BATTLE_TOWER_LINK_CONTINUE 
+                else if (gSpecialVar_0x8004 == BATTLE_TOWER_LINK_CONTINUE
                       && gSpecialVar_0x8005 == BATTLE_TOWER_LINK_RETIRE)
-                {
                     gSpecialVar_Result = BATTLE_TOWER_LINKSTAT_MEMBER_RETIRE;
-                }
-                else if (gSpecialVar_0x8004 == BATTLE_TOWER_LINK_RETIRE 
+                else if (gSpecialVar_0x8004 == BATTLE_TOWER_LINK_RETIRE
                       && gSpecialVar_0x8005 == BATTLE_TOWER_LINK_CONTINUE)
-                {
                     gSpecialVar_Result = BATTLE_TOWER_LINKSTAT_LEADER_RETIRE;
-                }
                 else
-                {
                     gSpecialVar_Result = BATTLE_TOWER_LINKSTAT_CONTINUE;
-                }
             }
             gTasks[taskId].tState++;
         }
@@ -4561,7 +3977,7 @@ static void Task_LinkRetireStatusWithBattleTowerPartner(u8 taskId)
             else
             {
                 // Send whether or not play should continue
-                SendBlock(bitmask_all_link_players_but_self(), &gSpecialVar_Result, sizeof(gSpecialVar_Result));
+                SendBlock(BitmaskAllOtherLinkPlayers(), &gSpecialVar_Result, sizeof(gSpecialVar_Result));
                 gTasks[taskId].tState++;
             }
         }
@@ -4597,7 +4013,7 @@ static void Task_LinkRetireStatusWithBattleTowerPartner(u8 taskId)
         gTasks[taskId].tState++;
         break;
     case 6:
-        if (!IsTextPrinterActive(0))
+        if (!IsTextPrinterActiveOnWindow(0))
             gTasks[taskId].tState++;
         break;
     case 7:
@@ -4616,7 +4032,7 @@ static void Task_LinkRetireStatusWithBattleTowerPartner(u8 taskId)
             SetCloseLinkCallback();
 
         gBattleTypeFlags = sBattleTowerMultiBattleTypeFlags;
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
         DestroyTask(taskId);
         break;
     }
@@ -4660,21 +4076,24 @@ static void Task_LoopWingFlapSE(u8 taskId)
     }
 
     if (playCount == gSpecialVar_0x8004 - 1)
-    {
         DestroyTask(taskId);
-    }
 }
 
 #undef playCount
 #undef delay
 
+#define CURTAIN_HEIGHT 4
+#define CURTAIN_WIDTH 3
+#define tFrameTimer   data
+#define tCurrentFrame data[3]
+
 void CloseBattlePikeCurtain(void)
 {
     u8 taskId = CreateTask(Task_CloseBattlePikeCurtain, 8);
-    gTasks[taskId].data[0] = 4;
-    gTasks[taskId].data[1] = 4;
-    gTasks[taskId].data[2] = 4;
-    gTasks[taskId].data[3] = 0;
+    gTasks[taskId].tFrameTimer[0] = 4;
+    gTasks[taskId].tFrameTimer[1] = 4;
+    gTasks[taskId].tFrameTimer[2] = 4;
+    gTasks[taskId].tCurrentFrame = 0;
 }
 
 static void Task_CloseBattlePikeCurtain(u8 taskId)
@@ -4682,39 +4101,45 @@ static void Task_CloseBattlePikeCurtain(u8 taskId)
     u8 x, y;
     s16 *data = gTasks[taskId].data;
 
-    data[data[3]]--;
-    if (data[data[3]] == 0)
+    tFrameTimer[tCurrentFrame]--;
+    if (tFrameTimer[tCurrentFrame] == 0)
     {
-        for (y = 0; y < 4; y++)
+        for (y = 0; y < CURTAIN_HEIGHT; y++)
         {
-            for (x = 0; x < 3; x++)
+            for (x = 0; x < CURTAIN_WIDTH; x++)
             {
-                MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + x + 6, gSaveBlock1Ptr->pos.y + y + 4, x + 513 + y * 8 + data[3] * 32);
+                MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + x + MAP_OFFSET - 1,
+                                       gSaveBlock1Ptr->pos.y + y + MAP_OFFSET - 3,
+                                       (x + METATILE_BattlePike_CurtainFrames_Start) + (y * METATILE_ROW_WIDTH) + (tCurrentFrame * CURTAIN_HEIGHT * METATILE_ROW_WIDTH));
             }
         }
         DrawWholeMapView();
-        data[3]++;
-        if (data[3] == 3)
+        tCurrentFrame++;
+        if (tCurrentFrame == 3)
         {
             DestroyTask(taskId);
-            EnableBothScriptContexts();
+            ScriptContext_Enable();
         }
     }
 }
 
+#undef CURTAIN_HEIGHT
+#undef CURTAIN_WIDTH
+#undef tFrameTimer
+#undef tCurrentFrame
+
 void GetBattlePyramidHint(void)
 {
-    gSpecialVar_Result = gSpecialVar_0x8004 / 7;
-    gSpecialVar_Result -= (gSpecialVar_Result / 20) * 20;
+    // gSpecialVar_0x8004 here is expected to be the current Battle Pyramid win streak.
+    gSpecialVar_Result = gSpecialVar_0x8004 / FRONTIER_STAGES_PER_CHALLENGE;
+    gSpecialVar_Result -= (gSpecialVar_Result / TOTAL_PYRAMID_ROUNDS) * TOTAL_PYRAMID_ROUNDS;
 }
 
 // Used to avoid a potential softlock if the player respawns on Dewford with no way off
 void ResetHealLocationFromDewford(void)
 {
-    if (gSaveBlock1Ptr->lastHealLocation.mapGroup == MAP_GROUP(DEWFORD_TOWN) && gSaveBlock1Ptr->lastHealLocation.mapNum == MAP_NUM(DEWFORD_TOWN))
-    {
+    if (gSaveBlock1Ptr->lastHealLocation.mapGroup == MAP_GROUP(MAP_DEWFORD_TOWN) && gSaveBlock1Ptr->lastHealLocation.mapNum == MAP_NUM(MAP_DEWFORD_TOWN))
         SetLastHealLocationWarp(HEAL_LOCATION_PETALBURG_CITY);
-    }
 }
 
 bool8 InPokemonCenter(void)
@@ -4742,30 +4167,28 @@ bool8 InPokemonCenter(void)
         MAP_TRADE_CENTER,
         MAP_RECORD_CORNER,
         MAP_BATTLE_COLOSSEUM_4P,
-        0xFFFF
+        MAP_UNDEFINED
     };
 
     int i;
     u16 map = (gSaveBlock1Ptr->location.mapGroup << 8) + gSaveBlock1Ptr->location.mapNum;
 
-    for (i = 0; sPokemonCenters[i] != 0xFFFF; i++)
+    for (i = 0; sPokemonCenters[i] != MAP_UNDEFINED; i++)
     {
         if (sPokemonCenters[i] == map)
-        {
             return TRUE;
-        }
     }
     return FALSE;
 }
 
 /*  Summary of the Lilycove Trainer Fan Club, because it's a little messy
-    
+
     ## The Fan Club room itself
     There are initially 4 members of the Fan Club (+ an interviewer), none of whom are fans of the player
     After becoming the champion there will be 8 members of the Fan Club, 3 of whom are automatically fans of the player
     After this point, if a club member is a fan of the player they will sit at the front table and comment on the player
     If they are not fans of the player, they will sit at the far table and can make comments about a different trainer (see BufferFanClubTrainerName)
-    
+
     ## Gaining/losing fans
     After every link battle the player will gain a fan if they won, or lose a fan if they lost
     If the player has at least 3 fans, this is the only way to gain fans
@@ -4791,16 +4214,15 @@ bool8 InPokemonCenter(void)
 
 #define FANCLUB_BITFIELD (gSaveBlock1Ptr->vars[VAR_FANCLUB_FAN_COUNTER - VARS_START])
 #define FANCLUB_COUNTER    0x007F
-#define FANCLUB_FAN_FLAGS  0xFF80
 
-#define GET_TRAINER_FAN_CLUB_FLAG(flag) (FANCLUB_BITFIELD >> (flag) & 1)
-#define SET_TRAINER_FAN_CLUB_FLAG(flag) (FANCLUB_BITFIELD |= 1 << (flag))
-#define FLIP_TRAINER_FAN_CLUB_FLAG(flag)(FANCLUB_BITFIELD ^= 1 << (flag))
+#define GET_TRAINER_FAN_CLUB_FLAG(flag)  (FANCLUB_BITFIELD >> (flag) & 1)
+#define SET_TRAINER_FAN_CLUB_FLAG(flag)  (FANCLUB_BITFIELD |= 1 << (flag))
+#define FLIP_TRAINER_FAN_CLUB_FLAG(flag) (FANCLUB_BITFIELD ^= 1 << (flag))
 
-#define GET_TRAINER_FAN_CLUB_COUNTER        (FANCLUB_BITFIELD & FANCLUB_COUNTER)
-#define SET_TRAINER_FAN_CLUB_COUNTER(count) (FANCLUB_BITFIELD = (FANCLUB_BITFIELD & FANCLUB_FAN_FLAGS) | (count))
-#define INCR_TRAINER_FAN_CLUB_COUNTER(count)(FANCLUB_BITFIELD += (count))
-#define CLEAR_TRAINER_FAN_CLUB_COUNTER      (FANCLUB_BITFIELD &= ~(FANCLUB_COUNTER))
+#define GET_TRAINER_FAN_CLUB_COUNTER         (FANCLUB_BITFIELD & FANCLUB_COUNTER)
+#define SET_TRAINER_FAN_CLUB_COUNTER(count)  (FANCLUB_BITFIELD = (FANCLUB_BITFIELD & ~FANCLUB_COUNTER) | (count))
+#define INCR_TRAINER_FAN_CLUB_COUNTER(count) (FANCLUB_BITFIELD += (count))
+#define CLEAR_TRAINER_FAN_CLUB_COUNTER       (FANCLUB_BITFIELD &= ~FANCLUB_COUNTER)
 
 void ResetFanClub(void)
 {
@@ -4834,16 +4256,16 @@ void UpdateTrainerFanClubGameClear(void)
 }
 
 // If the player has < 3 fans, gain a new fan whenever the counter reaches 20+
-// Defeating Drake or participating in a Contest increments the counter by 2 
+// Defeating Drake or participating in a Contest increments the counter by 2
 // Participating at Battle Tower or in a Secret Base battle increments the counter by 1
 u8 TryGainNewFanFromCounter(u8 incrementId)
 {
-    static const u8 sCounterIncrements[] = 
-    { 
-        [FANCOUNTER_DEFEATED_DRAKE]    = 2, 
-        [FANCOUNTER_BATTLED_AT_BASE]   = 1, 
-        [FANCOUNTER_FINISHED_CONTEST]  = 2, 
-        [FANCOUNTER_USED_BATTLE_TOWER] = 1 
+    static const u8 sCounterIncrements[] =
+    {
+        [FANCOUNTER_DEFEATED_DRAKE]    = 2,
+        [FANCOUNTER_BATTLED_AT_BASE]   = 1,
+        [FANCOUNTER_FINISHED_CONTEST]  = 2,
+        [FANCOUNTER_USED_BATTLE_TOWER] = 1
     };
 
     if (VarGet(VAR_LILYCOVE_FAN_CLUB_STATE) == 2)
@@ -4876,16 +4298,16 @@ u8 TryGainNewFanFromCounter(u8 incrementId)
 // If all the members are already fans of the player then this redundantly sets the first fan in the list to be a fan
 static u16 PlayerGainRandomTrainerFan(void)
 {
-    static const u8 sFanClubMemberIds[NUM_TRAINER_FAN_CLUB_MEMBERS] = 
-    { 
-        FANCLUB_MEMBER1, 
-        FANCLUB_MEMBER2, 
-        FANCLUB_MEMBER3, 
-        FANCLUB_MEMBER4, 
-        FANCLUB_MEMBER5, 
+    static const u8 sFanClubMemberIds[NUM_TRAINER_FAN_CLUB_MEMBERS] =
+    {
+        FANCLUB_MEMBER1,
+        FANCLUB_MEMBER2,
+        FANCLUB_MEMBER3,
+        FANCLUB_MEMBER4,
+        FANCLUB_MEMBER5,
         FANCLUB_MEMBER6,
-        FANCLUB_MEMBER7, 
-        FANCLUB_MEMBER8 
+        FANCLUB_MEMBER7,
+        FANCLUB_MEMBER8
     };
 
     u8 i;
@@ -4912,25 +4334,23 @@ static u16 PlayerGainRandomTrainerFan(void)
 // If no fan was lost while looping, the last current fan in the list will stop being a fan
 static u16 PlayerLoseRandomTrainerFan(void)
 {
-    static const u8 sFanClubMemberIds[NUM_TRAINER_FAN_CLUB_MEMBERS] = 
-    { 
-        FANCLUB_MEMBER1, 
-        FANCLUB_MEMBER6, 
-        FANCLUB_MEMBER7, 
-        FANCLUB_MEMBER4, 
-        FANCLUB_MEMBER3, 
-        FANCLUB_MEMBER5, 
-        FANCLUB_MEMBER8, 
-        FANCLUB_MEMBER2 
+    static const u8 sFanClubMemberIds[NUM_TRAINER_FAN_CLUB_MEMBERS] =
+    {
+        FANCLUB_MEMBER1,
+        FANCLUB_MEMBER6,
+        FANCLUB_MEMBER7,
+        FANCLUB_MEMBER4,
+        FANCLUB_MEMBER3,
+        FANCLUB_MEMBER5,
+        FANCLUB_MEMBER8,
+        FANCLUB_MEMBER2
     };
 
     u8 i;
     u8 idx = 0;
 
     if (GetNumFansOfPlayerInTrainerFanClub() == 1)
-    {
         return 0;
-    }
 
     for (i = 0; i < ARRAY_COUNT(sFanClubMemberIds); i++)
     {
@@ -4946,9 +4366,7 @@ static u16 PlayerLoseRandomTrainerFan(void)
     }
 
     if (GET_TRAINER_FAN_CLUB_FLAG(sFanClubMemberIds[idx]))
-    {
         FLIP_TRAINER_FAN_CLUB_FLAG(sFanClubMemberIds[idx]);
-    }
 
     return idx;
 }
@@ -5013,36 +4431,41 @@ void BufferFanClubTrainerName(void)
     u8 whichNPCTrainer = 0;
     switch (gSpecialVar_0x8004)
     {
-        case FANCLUB_MEMBER1:
-            break;
-        case FANCLUB_MEMBER2:
-            break;
-        case FANCLUB_MEMBER3:
-            whichLinkTrainer = 0;
-            whichNPCTrainer = 3;
-            break;
-        case FANCLUB_MEMBER4:
-            whichLinkTrainer = 0;
-            whichNPCTrainer = 1;
-            break;
-        case FANCLUB_MEMBER5:
-            whichLinkTrainer = 1;
-            whichNPCTrainer = 0;
-            break;
-        case FANCLUB_MEMBER6:
-            whichLinkTrainer = 0;
-            whichNPCTrainer = 4;
-            break;
-        case FANCLUB_MEMBER7:
-            whichLinkTrainer = 1;
-            whichNPCTrainer = 5;
-            break;
-        case FANCLUB_MEMBER8:
-            break;
+    case FANCLUB_MEMBER1:
+        break;
+    case FANCLUB_MEMBER2:
+        break;
+    case FANCLUB_MEMBER3:
+        whichLinkTrainer = 0;
+        whichNPCTrainer = 3;
+        break;
+    case FANCLUB_MEMBER4:
+        whichLinkTrainer = 0;
+        whichNPCTrainer = 1;
+        break;
+    case FANCLUB_MEMBER5:
+        whichLinkTrainer = 1;
+        whichNPCTrainer = 0;
+        break;
+    case FANCLUB_MEMBER6:
+        whichLinkTrainer = 0;
+        whichNPCTrainer = 4;
+        break;
+    case FANCLUB_MEMBER7:
+        whichLinkTrainer = 1;
+        whichNPCTrainer = 5;
+        break;
+    case FANCLUB_MEMBER8:
+        break;
     }
+#if FREE_LINK_BATTLE_RECORDS == FALSE
     BufferFanClubTrainerName_(&gSaveBlock1Ptr->linkBattleRecords, whichLinkTrainer, whichNPCTrainer);
+#else
+    BufferFanClubTrainerName_(whichLinkTrainer, whichNPCTrainer);
+#endif //FREE_LINK_BATTLE_RECORDS
 }
 
+#if FREE_LINK_BATTLE_RECORDS == FALSE
 static void BufferFanClubTrainerName_(struct LinkBattleRecords *linkRecords, u8 whichLinkTrainer, u8 whichNPCTrainer)
 {
     struct LinkBattleRecord *record = &linkRecords->entries[whichLinkTrainer];
@@ -5050,27 +4473,27 @@ static void BufferFanClubTrainerName_(struct LinkBattleRecords *linkRecords, u8 
     {
         switch (whichNPCTrainer)
         {
-            case 0:
-                StringCopy(gStringVar1, gText_Wallace);
-                break;
-            case 1:
-                StringCopy(gStringVar1, gText_Steven);
-                break;
-            case 2:
-                StringCopy(gStringVar1, gText_Brawly);
-                break;
-            case 3:
-                StringCopy(gStringVar1, gText_Winona);
-                break;
-            case 4:
-                StringCopy(gStringVar1, gText_Phoebe);
-                break;
-            case 5:
-                StringCopy(gStringVar1, gText_Glacia);
-                break;
-            default:
-                StringCopy(gStringVar1, gText_Wallace);
-                break;
+        case 0:
+            StringCopy(gStringVar1, sText_Wallace);
+            break;
+        case 1:
+            StringCopy(gStringVar1, sText_Steven);
+            break;
+        case 2:
+            StringCopy(gStringVar1, sText_Brawly);
+            break;
+        case 3:
+            StringCopy(gStringVar1, sText_Winona);
+            break;
+        case 4:
+            StringCopy(gStringVar1, sText_Phoebe);
+            break;
+        case 5:
+            StringCopy(gStringVar1, sText_Glacia);
+            break;
+        default:
+            StringCopy(gStringVar1, sText_Wallace);
+            break;
         }
     }
     else
@@ -5080,6 +4503,35 @@ static void BufferFanClubTrainerName_(struct LinkBattleRecords *linkRecords, u8 
         ConvertInternationalString(gStringVar1, linkRecords->languages[whichLinkTrainer]);
     }
 }
+#else
+static void BufferFanClubTrainerName_(u8 whichLinkTrainer, u8 whichNPCTrainer)
+{
+    switch (whichNPCTrainer)
+    {
+    case 0:
+        StringCopy(gStringVar1, sText_Wallace);
+        break;
+    case 1:
+        StringCopy(gStringVar1, sText_Steven);
+        break;
+    case 2:
+        StringCopy(gStringVar1, sText_Brawly);
+        break;
+    case 3:
+        StringCopy(gStringVar1, sText_Winona);
+        break;
+    case 4:
+        StringCopy(gStringVar1, sText_Phoebe);
+        break;
+    case 5:
+        StringCopy(gStringVar1, sText_Glacia);
+        break;
+    default:
+        StringCopy(gStringVar1, sText_Wallace);
+        break;
+    }
+}
+#endif //FREE_LINK_BATTLE_RECORDS
 
 void UpdateTrainerFansAfterLinkBattle(void)
 {
@@ -5109,784 +4561,1401 @@ u8 Script_TryGainNewFanFromCounter(void)
     return TryGainNewFanFromCounter(gSpecialVar_0x8004);
 }
 
-// Applies the selected party member's complete preset only after every preset
-// field has been validated. Empty moves are permitted only as trailing slots
-// for species such as Ditto that do not have four distinct legal moves.
-void ApplySelectedMonBattleSet(void)
-{
-    struct Pokemon *mon;
-    u16 species;
-
-    gSpecialVar_Result = FALSE;
-
-    if (gSpecialVar_0x8004 >= PARTY_SIZE)
-        return;
-
-    mon = &gPlayerParty[gSpecialVar_0x8004];
-    species = GetMonData(mon, MON_DATA_SPECIES2, NULL);
-    if (species == SPECIES_NONE || species == SPECIES_EGG || species >= NUM_SPECIES)
-        return;
-
-    gSpecialVar_Result = ApplyVerdantBattleSetChoice(mon, gSpecialVar_0x8005);
-}
-
-void GetSelectedMonBattleSetCount(void)
-{
-    if (gSpecialVar_0x800A >= PARTY_SIZE)
-        gSpecialVar_Result = 0;
-    else
-        gSpecialVar_Result = GetVerdantBattleSetCount(&gPlayerParty[gSpecialVar_0x800A]);
-}
-
-void BufferSelectedMonBattleSetName(void)
-{
-    gSpecialVar_Result = FALSE;
-    if (gSpecialVar_0x8004 >= PARTY_SIZE)
-        StringCopy(gStringVar2, gText_Exit);
-    else
-    {
-        StringCopy(gStringVar2, GetVerdantBattleSetName(&gPlayerParty[gSpecialVar_0x8004], gSpecialVar_0x8005));
-        CopyItemName(GetVerdantBattleSetItem(&gPlayerParty[gSpecialVar_0x8004], gSpecialVar_0x8005), gStringVar3);
-        gSpecialVar_Result = GetVerdantBattleSetRequiredItem(
-            &gPlayerParty[gSpecialVar_0x8004],
-            gSpecialVar_0x8005
-        ) != ITEM_NONE;
-    }
-}
-
-// Changes the selected Pokemon's nature.
-// gSpecialVar_0x8004 must be set to the party slot of the Pokemon whose nature should be changed
-// Set gSpecialVar_0x8005 to the stat to icrease, and gSpecialVar_0x8006 to the stat to decrease
-void ChangePokemonNature (void)
-{
-    u8 newNature = 0;
-
-    newNature = (gSpecialVar_0x8005 * (NUM_STATS - 1)) + gSpecialVar_0x8006;
-	SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NATURE, &newNature);
-    CalculateMonStats(&gPlayerParty[gSpecialVar_0x8004]);
-}
-
-// Buffers the nature of a Pokemon chosen by the player.
-// gSpecialVar_0x8004 must be set to the party slot of the chosen Pokemon
-void BufferChosenMonNature (void)
-{
-    u8 nature = 0;
-
-    nature = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NATURE, NULL);
-    StringCopy (gStringVar2, gNatureNamePointers[nature]);
-}
-
-// Changes one of the selected Pokemon's IVs.
-// gSpecialVar_0x8004 must be set to the party slot of the Pokemon whose IVs should be changed
-// gSpecialVar_0x8005 must be set to the index of the IV to be changed (0 for HP, 1 for Attack, etc.)
-// gSpecialVar_0x8006 must be set to the value to change the IV to
-void ChangeChosenMonIVs (void)
-{
-    u8 statToChange = gSpecialVar_0x8005;
-    u8 newIV = gSpecialVar_0x8006;
-
-    switch (statToChange)
-    {
-    case STAT_HP: SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HP_IV, &newIV);
-        break;
-    case STAT_ATK: SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_ATK_IV, &newIV);
-        break;
-    case STAT_DEF: SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_DEF_IV, &newIV);
-        break;
-    case STAT_SPEED: SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPEED_IV, &newIV);
-        break;
-    case STAT_SPATK: SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPATK_IV, &newIV);
-        break;
-    case STAT_SPDEF: SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPDEF_IV, &newIV);
-        break;
-    }
-    CalculateMonStats(&gPlayerParty[gSpecialVar_0x8004]);
-}
-
-// Adds EVs to one of the selected Pokemon's stats.
-// gSpecialVar_0x8004 must be set to the party slot of the Pokemon whose EVs should be increased
-// gSpecialVar_0x8005 must be set to the index of the EV to be changed (0 for HP, 1 for Attack, etc.)
-// gSpecialVar_0x8006 must be set to the number of EVs to add to that stat
-// Stores the new sum of the EVs in that stat in gSpecialVar_0x8007
-void IncreaseChosenMonEVs (void)
-{
-    u8 statToChange = gSpecialVar_0x8005;
-    u8 increment = gSpecialVar_0x8006;
-    u8 oldEV;
-    u8 newEV;
-
-    // Get the number of EVs currently in the chosen stat
-    switch (statToChange)
-    {
-    case STAT_HP: oldEV = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HP_EV, NULL);
-        break;
-    case STAT_ATK: oldEV = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_ATK_EV, NULL);
-       break;
-    case STAT_DEF: oldEV = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_DEF_EV, NULL);
-       break;
-    case STAT_SPEED: oldEV = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPEED_EV, NULL);
-       break;
-    case STAT_SPATK: oldEV = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPATK_EV, NULL);
-       break;
-    case STAT_SPDEF: oldEV = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPDEF_EV, NULL);
-       break;
-    }
-
-    // Should replace 252 here with symbol for max EVs in a stat
-    if ((oldEV + increment) > 252)
-    {
-        newEV = 252;
-    }
-    else
-    {
-        newEV = oldEV + increment;
-    }
-    
-    switch (statToChange)
-    {
-    case STAT_HP: SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HP_EV, &newEV);
-       break;
-    case STAT_ATK: SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_ATK_EV, &newEV);
-       break;
-    case STAT_DEF: SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_DEF_EV, &newEV);
-       break;
-    case STAT_SPEED: SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPEED_EV, &newEV);
-       break;
-    case STAT_SPATK: SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPATK_EV, &newEV);
-       break;
-    case STAT_SPDEF: SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPDEF_EV, &newEV);
-       break;
-    }   
-
-    CalculateMonStats(&gPlayerParty[gSpecialVar_0x8004]);
-
-    // Store new EV value in variable so it can be reported to the player
-    gSpecialVar_0x8007 = newEV;
-}
-
-// Buffers the IV of a Pokemon's stat chosen by the player.
-// gSpecialVar_0x8004 must be set to the party slot of the chosen Pokemon
-// gSpecialVar_0x8005 must be set to the index of the IV to be shown (0 for HP, 1 for Attack, etc.)
-// Result is stored in gSpecialVar_0x8006
-void BufferChosenMonIV (void)
-{
-    u8 statToRead = gSpecialVar_0x8005;
-
-    switch (statToRead)
-    {
-    case STAT_HP: gSpecialVar_0x8006 = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HP_IV, NULL);
-       break;
-    case STAT_ATK: gSpecialVar_0x8006 = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_ATK_IV, NULL);
-       break;
-    case STAT_DEF: gSpecialVar_0x8006 = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_DEF_IV, NULL);
-       break;
-    case STAT_SPEED: gSpecialVar_0x8006 = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPEED_IV, NULL);
-       break;
-    case STAT_SPATK: gSpecialVar_0x8006 = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPATK_IV, NULL);
-       break;
-    case STAT_SPDEF: gSpecialVar_0x8006 = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPDEF_IV, NULL);
-       break;
-    }
-}
-
-// Buffers the EVs of a Pokemon's stat chosen by the player.
-// gSpecialVar_0x8004 must be set to the party slot of the chosen Pokemon
-// gSpecialVar_0x8005 must be set to the index of the EV to be shown (0 for HP, 1 for Attack, etc.)
-// Result is stored in gSpecialVar_0x8006
-void BufferChosenMonEV (void)
-{
-    u8 statToRead = gSpecialVar_0x8005;
-
-    switch (statToRead)
-    {
-    case STAT_HP: gSpecialVar_0x8006 = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HP_EV, NULL);
-       break;
-    case STAT_ATK: gSpecialVar_0x8006 = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_ATK_EV, NULL);
-       break;
-    case STAT_DEF: gSpecialVar_0x8006 = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_DEF_EV, NULL);
-       break;
-    case STAT_SPEED: gSpecialVar_0x8006 = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPEED_EV, NULL);
-       break;
-    case STAT_SPATK: gSpecialVar_0x8006 = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPATK_EV, NULL);
-       break;
-    case STAT_SPDEF: gSpecialVar_0x8006 = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPDEF_EV, NULL);
-       break;
-    }
-}
-
-void BufferChosenMonAllEVs (void)
-{
-    u32 i;
-    u8 EV[NUM_STATS] = {0};
-
-    for (i = 0; i < NUM_STATS; i++)
-    {
-        EV[i] = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HP_EV + i, NULL);
-    }
-
-    ConvertIntToDecimalStringN(gStringVar1, EV[0], STR_CONV_MODE_LEFT_ALIGN, 3);
-    ConvertIntToDecimalStringN(gStringVar2, EV[1], STR_CONV_MODE_LEFT_ALIGN, 3);
-    ConvertIntToDecimalStringN(gStringVar3, EV[2], STR_CONV_MODE_LEFT_ALIGN, 3);
-    ConvertIntToDecimalStringN(gExtraStringVar1, EV[3], STR_CONV_MODE_LEFT_ALIGN, 3);
-    ConvertIntToDecimalStringN(gExtraStringVar2, EV[4], STR_CONV_MODE_LEFT_ALIGN, 3);
-    ConvertIntToDecimalStringN(gExtraStringVar3, EV[5], STR_CONV_MODE_LEFT_ALIGN, 3);
-}
-
-void BufferChosenMonAllIVs (void)
-{
-    u32 i;
-    u8 IV[NUM_STATS] = {0};
-
-    for (i = 0; i < NUM_STATS; i++)
-    {
-        IV[i] = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HP_IV + i, NULL);
-    }
-
-    ConvertIntToDecimalStringN(gStringVar1, IV[0], STR_CONV_MODE_LEFT_ALIGN, 3);
-    ConvertIntToDecimalStringN(gStringVar2, IV[1], STR_CONV_MODE_LEFT_ALIGN, 3);
-    ConvertIntToDecimalStringN(gStringVar3, IV[2], STR_CONV_MODE_LEFT_ALIGN, 3);
-    ConvertIntToDecimalStringN(gExtraStringVar1, IV[3], STR_CONV_MODE_LEFT_ALIGN, 3);
-    ConvertIntToDecimalStringN(gExtraStringVar2, IV[4], STR_CONV_MODE_LEFT_ALIGN, 3);
-    ConvertIntToDecimalStringN(gExtraStringVar3, IV[5], STR_CONV_MODE_LEFT_ALIGN, 3);
-}
-
-// Removes all of a chosen Pokemon's EVs
-void ResetChosenMonEVs (void)
-{
-    u8 i;
-    u8 clearEVs = 0;
-
-    for (i = 0; i < NUM_STATS; i++)
-    {
-        SetMonData(&gPlayerParty[gSpecialVar_0x8004], (MON_DATA_HP_EV + i), &clearEVs);
-    }
-    CalculateMonStats(&gPlayerParty[gSpecialVar_0x8004]);
-}
-
-/* Changes a Pokemon's Hidden Power to a specified type.
- * gSpecialVar_0x800A must be set to the party slot of the chosen Pokemon
- * gSpecialVar_0x8007 must be set to the type of Hidden Power to change to (see table below,
- * or search ChangeChosenMonHiddenPower for a usage example)
- */
-void ChangeChosenMonHiddenPower (void) 
+void TrySkyBattle(void)
 {
     int i;
-    u8 hiddenPowerType = gSpecialVar_0x8007;
 
-    static const u8 hiddenPowerSpreads[NUMBER_OF_MON_TYPES - 3][NUM_STATS] = {
-    //   HP  Atk Def Spe SpA SpD
-        {31,  0, 30, 30, 30, 30}, // TYPE_FIGHTING
-        {30,  0, 30, 31, 30, 30}, // TYPE_FLYING
-        {30,  1, 30, 31, 30, 30}, // TYPE_POISON
-        {31,  1, 31, 31, 30, 30}, // TYPE_GROUND
-        {31,  1, 30, 30, 31, 30}, // TYPE_ROCK
-        {31,  0, 30, 31, 31, 30}, // TYPE_BUG
-        {31,  1, 30, 31, 31, 30}, // TYPE_GHOST
-        {31,  1, 31, 31, 31, 30}, // TYPE_STEEL
-        {31,  0, 31, 30, 30, 31}, // TYPE_FIRE
-        {31,  1, 31, 30, 30, 31}, // TYPE_WATER
-        {31,  0, 31, 31, 30, 31}, // TYPE_GRASS
-        {31,  1, 31, 31, 30, 31}, // TYPE_ELECTRIC
-        {31,  0, 31, 30, 31, 31}, // TYPE_PSYCHIC
-        {31,  0, 30, 31, 31, 31}, // TYPE_ICE
-        {31,  0, 31, 31, 31, 31}, // TYPE_DRAGON
-        {31, 31, 31, 31, 31, 31}, // TYPE_DARK
-    };
-  
-    for (i = 0; i < NUM_STATS; i++)
+    if (B_VAR_SKY_BATTLE == 0 || B_FLAG_SKY_BATTLE == 0)
     {
-        SetMonData(&gPlayerParty[gSpecialVar_0x800A], MON_DATA_HP_IV + i, &hiddenPowerSpreads[hiddenPowerType][i]);
+        LockPlayerFieldControls();
+        ScriptContext_SetupScript(Debug_FlagsAndVarNotSetBattleConfigMessage);
+        return;
     }
-    CalculateMonStats(&gPlayerParty[gSpecialVar_0x800A]);
-}
-
-// Used for the Super Training NPC; checks that the requested
-// number of EVS to add won't exceed the 510 EV limit
-// Sets VAR_RESULT to 1 if the addition is OK, or 0 if it isn't
-// gSpecialVar_0x8004 must be set to the party slot of the chosen Pokemon
-// gSpecialVar_0x8006 must be set to the number of EVs to add to that stat
-void CheckChosenMonCanGainEVs (void)
-{
-    u8 i = 0;
-    u8 statToChange = gSpecialVar_0x8005;
-    u16 requestedIncrement = gSpecialVar_0x8006;
-    u16 sumEVs = 0;
-    u16 statEVs;
-    u16 statSpace;
-    u16 totalSpace;
-    u16 actualIncrement;
-
-    for (i = 0; i < NUM_STATS; i++)
+    for (i = 0; i < CalculatePlayerPartyCount(); i++)
     {
-        sumEVs = sumEVs + GetMonData(&gPlayerParty[gSpecialVar_0x8004], (MON_DATA_HP_EV + i), NULL);
-    }
-
-    statEVs = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HP_EV + statToChange, NULL);
-    statSpace = MAX_PER_STAT_EVS - statEVs;
-    totalSpace = MAX_TOTAL_EVS - sumEVs;
-    actualIncrement = min(requestedIncrement, min(statSpace, totalSpace));
-
-    gSpecialVar_Result = (actualIncrement > 0);
-    gSpecialVar_0x8006 = actualIncrement;
-    gSpecialVar_0x8009 = actualIncrement * 100;
-
-    // Store total EVs in a variable so it can be reported to the player
-    gSpecialVar_0x8008 = sumEVs;
-}
-
-bool8 AreChosenMonEVsMaxedOut(void)
-{
-    if (GetMonEVCount(&gPlayerParty[gSpecialVar_0x8004]) >= 510)
-    {
-        return TRUE;
-    }
-    return FALSE;
-}
-
-// Lets player select an item from the items pocket
-// Chosen item ID is stored in gSpecialVar_Result
-void Bag_ChooseItem(void)
-{
-    SetMainCallback2(CB2_ChooseItem);
-}
-
-// Lets player select a ball from the Poke Balls pocket
-// Chosen item ID is stored in gSpecialVar_Result
-void Bag_ChoosePokeBall(void)
-{
-    SetMainCallback2(CB2_ChoosePokeBall);
-}
-
-// Gets a fossil item from gSpecialVar_0x8008 and stores the species it becomes in gSpecialVar_0x8006
-void FossilToSpecies(void)
-{
-    u16 species = SPECIES_NONE;
-    u16 item = gSpecialVar_0x8008;
-
-    switch (item)
-    {
-        case ITEM_HELIX_FOSSIL:
-            species = SPECIES_OMANYTE;
-            break;
-        case ITEM_DOME_FOSSIL:
-            species = SPECIES_KABUTO;
-            break;
-        case ITEM_OLD_AMBER:
-            species = SPECIES_AERODACTYL;
-            break;
-        case ITEM_ROOT_FOSSIL:
-            species = SPECIES_LILEEP;
-            break;
-        case ITEM_CLAW_FOSSIL:
-            species = SPECIES_ANORITH;
-            break;
-        case ITEM_ARMOR_FOSSIL:
-            species = SPECIES_SHIELDON;
-            break;
-        case ITEM_SKULL_FOSSIL:
-            species = SPECIES_CRANIDOS;
-            break;
-        case ITEM_COVER_FOSSIL:
-            species = SPECIES_TIRTOUGA;
-            break;
-        case ITEM_PLUME_FOSSIL:
-            species = SPECIES_ARCHEN;
-            break;
-        case ITEM_SAIL_FOSSIL:
-            species = SPECIES_AMAURA;
-            break;
-        case ITEM_JAW_FOSSIL:
-            species = SPECIES_TYRUNT;
-            break;
-    }
-
-    if (species != SPECIES_NONE)
-    {
-        gSpecialVar_0x8006 = species;
-    }
-    return;
-}
-
-// Checks if player chose a Fossil using Bag_ChooseItem
-bool8 IsItemFossil (void)
-{
-    u16 item = gSpecialVar_ItemId;
-    if ((item >= ITEM_ARMOR_FOSSIL && item <= ITEM_CLAW_FOSSIL) || item == ITEM_OLD_AMBER)
-    {
-        return TRUE;
-    }
-    return FALSE;
-}
-
-// Checks player's bag for a fossil item. Better than 12 "checkItem" lines in a script!
-bool8 DoesPlayerHaveFossil (void)
-{
-    u16 fossil = ITEM_ARMOR_FOSSIL;
-
-    for (fossil = ITEM_ARMOR_FOSSIL; fossil < (ITEM_CLAW_FOSSIL + 1); fossil++)
-    {
-        if (CheckBagHasItem(fossil, 1))
+        struct Pokemon* pokemon = &gParties[B_TRAINER_PLAYER][i];
+        if (CanMonParticipateInSkyBattle(pokemon) && GetMonData(pokemon, MON_DATA_HP) > 0)
         {
-            return TRUE;
+            PreparePartyForSkyBattle();
+            gSpecialVar_Result = TRUE;
+            return;
         }
     }
-    if (CheckBagHasItem(ITEM_OLD_AMBER, 1))
-    {
-        return TRUE;
-    }
-    return FALSE;
+    gSpecialVar_Result = FALSE;
 }
 
-// Checks how many Rotom player has with them
-// Stores the party position of the last Rotom found in gSpecialVar_0x8004
-// (Useful if there's only one Rotom in the party)
-u8 CountRotomInParty (void)
+void PreparePartyForSkyBattle(void)
 {
-    u8 partyCount, rotomCount = 0;
-    u16 i;
-    u32 species;
+    int i, participatingPokemonSlot = 0;
+    u8 partyCount = CalculatePlayerPartyCount();
 
-    partyCount = CalculatePlayerPartyCount();
-    
+    FlagSet(B_FLAG_SKY_BATTLE);
+    SavePlayerParty();
+
     for (i = 0; i < partyCount; i++)
     {
-        species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL);
-        if (gSpeciesToNationalPokedexNum[species - 1] == SPECIES_ROTOM)
-        {
-            gSpecialVar_0x8004 = i;
-            rotomCount++;
-        }
+        struct Pokemon* pokemon = &gParties[B_TRAINER_PLAYER][i];
+
+        if (CanMonParticipateInSkyBattle(pokemon))
+            participatingPokemonSlot += 1 << i;
+        else
+            ZeroMonData(pokemon);
     }
-    return rotomCount;
+    VarSet(B_VAR_SKY_BATTLE,participatingPokemonSlot);
+    CompactPartySlots();
 }
 
-// Rotom form change specials
-// Vars used:
-// gSpecialVar_0x8004: set to the party slot of the chosen Rotom, or the first Rotom found if there's only one
-// gSpecialVar_0x8005: set to the form to change Rotom to (e.g. SPECIES_ROTOM_WASH)
-// gSpecialVar_0x8006: special move learned by Rotom after form change (set by GetRotomNewSpecialMove)
-// gSpecialVar_0x8007: Rotom's initial form
-// gSpecialVar_0x8008: Rotom's initial special move (set by RotomForgetSpecialMove)
-
-// Takes a Rotom form as input and returns its special move
-u16 RotomFormToMove (u16 species)
+void GetObjectPosition(u16* xPointer, u16* yPointer, u32 localId, u32 useTemplate)
 {
-    u16 move;
+    u32 objectId;
+    struct ObjectEvent* objEvent;
 
-    switch (species)
+    if (useTemplate)
     {
-        case SPECIES_ROTOM_HEAT:
-            move = MOVE_OVERHEAT;
-            break;
-        case SPECIES_ROTOM_WASH:
-            move = MOVE_HYDRO_PUMP;
-            break;
-        case SPECIES_ROTOM_FROST:
-            move = MOVE_FREEZE_DRY;
-            break;
-        case SPECIES_ROTOM_FAN:
-            move = MOVE_HURRICANE;
-            break;
-        case SPECIES_ROTOM_MOW:
-            move = MOVE_LEAF_STORM;
-            break;
-        case SPECIES_ROTOM:
-            move = MOVE_THUNDER_SHOCK;
-            break;
+        const struct ObjectEventTemplate *objTemplate = FindObjectEventTemplateByLocalId(localId, gSaveBlock1Ptr->objectEventTemplates, gMapHeader.events->objectEventCount);
+        *xPointer = objTemplate->x;
+        *yPointer = objTemplate->y;
+        return;
     }
-    return move;
+
+    objectId = GetObjectEventIdByLocalId(localId);
+    objEvent = &gObjectEvents[objectId];
+    *xPointer = objEvent->currentCoords.x - MAP_OFFSET;
+    *yPointer = objEvent->currentCoords.y - MAP_OFFSET;
 }
 
-// Stores the special move of the Rotom form in gSpecialVar_0x8005 in gSpecialVar_0x8006
-void GetRotomNewSpecialMove (void)
+bool32 CheckObjectAtXY(u32 x, u32 y)
 {
-    gSpecialVar_0x8006 = RotomFormToMove(gSpecialVar_0x8005);
-}
+    u32 i;
 
-// Gets Rotom's current form and the matching move, stores them in gSpecialVar_0x8007 and gSpecialVar_0x8008
-void GetRotomState (void)
-{
-    gSpecialVar_0x8007 = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES2, NULL);
-    gSpecialVar_0x8008 = RotomFormToMove(gSpecialVar_0x8007);
-}
-
-// If Rotom is an appliance form, delete its special move
-// Rotom's initial form must be loaded into gSpecialVar_0x8007 before use.
-// Returns TRUE if the moove was forgotten, false if not
-void RotomForgetSpecialMove (void)
-{
-    u8 i, forgotSpecialMove = 0;
-    u16 currentMove;
-    u16 moveNone = MOVE_NONE;
-
-    currentMove = RotomFormToMove(gSpecialVar_0x8007);
-
-    for (i = 0; i < MAX_MON_MOVES; i++)
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
-        if (GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_MOVE1 + i, NULL) == currentMove)
-        {
-            RemoveMonPPBonus (&gPlayerParty[gSpecialVar_0x8004], i);
-            SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_MOVE1 + i, &moveNone);
-            forgotSpecialMove = TRUE;
-            break;
-        }
-    }
-}
+        if (!gObjectEvents[i].active)
+            continue;
 
-// Changes the chosen party mon's species to the one stored in gSpecialVar_0x8005
-void ChangeMonSpecies (void)
-{
-    u16 newSpecies;
-    
-    newSpecies = gSpecialVar_0x8005;
+        if (gObjectEvents[i].currentCoords.x != x)
+            continue;
 
-    SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES, &newSpecies);
-    SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES2, &newSpecies);
-    CalculateMonStats(&gPlayerParty[gSpecialVar_0x8004]);
-}
-
-// Teaches Rotom's forms their special moves
-// Rotom MUST have an empty moveslot first
-// Move to teach must be stored in gSpecialVar_0x8006
-void TeachRotomMove (void)
-{
-    GiveMoveToMon(&gPlayerParty[gSpecialVar_0x8004], gSpecialVar_0x8006);
-}
-
-// Checks if Rotom knows its special move
-bool8 DoesRotomKnowSpecialMove (void)
-{
-    u16 initialMove, initialSpecies;
-
-    initialSpecies = gSpecialVar_0x8007;
-    initialMove = RotomFormToMove(initialSpecies);
-    return MonKnowsMove(&gPlayerParty[gSpecialVar_0x8004], initialMove);
-}
-
-// Used to generate a random egg with a special move
-// gSpecialVar_0x8004: Species to give
-// gSpecialVar_0x8005: Move to give the egg
-void SetSpeciesAndEggMove (void)
-{
-    static const u16 eggMoves[][4] = {
-        {SPECIES_BAGON, MOVE_DRAGON_DANCE, MOVE_DRAGON_RUSH, MOVE_THRASH},
-        {SPECIES_SHUPPET, MOVE_GUNK_SHOT, MOVE_DESTINY_BOND, MOVE_PHANTOM_FORCE},
-        {SPECIES_SNEASEL, MOVE_FAKE_OUT, MOVE_ICICLE_CRASH, MOVE_BITE},
-        {SPECIES_CORPHISH, MOVE_DRAGON_DANCE, MOVE_AQUA_JET, MOVE_BODY_SLAM},
-        {SPECIES_MARILL, MOVE_BELLY_DRUM, MOVE_AQUA_JET, MOVE_PERISH_SONG},
-        {SPECIES_EMOLGA, MOVE_ROOST, MOVE_AIR_SLASH, MOVE_BATON_PASS},
-        {SPECIES_GOOMY, MOVE_ACID_ARMOR, MOVE_POISON_TAIL, MOVE_IRON_TAIL},
-        {SPECIES_RHYHORN, MOVE_CRUNCH, MOVE_METAL_BURST, MOVE_DRAGON_RUSH},
-        {SPECIES_GASTLY, MOVE_PERISH_SONG, MOVE_DISABLE, MOVE_CLEAR_SMOG},
-        {SPECIES_PICHU, MOVE_SURF, MOVE_FLY, MOVE_EXTREME_SPEED},
-        {SPECIES_WIMPOD, MOVE_SPIKES, MOVE_AQUA_JET, MOVE_METAL_CLAW},
-        {SPECIES_PONYTA, MOVE_HYPNOSIS, MOVE_MORNING_SUN, MOVE_HIGH_HORSEPOWER},
-        {SPECIES_SNOVER, MOVE_LEECH_SEED, MOVE_AVALANCHE, MOVE_SEED_BOMB},
-        {SPECIES_FERROSEED, MOVE_SPIKES, MOVE_LEECH_SEED, MOVE_ACID_SPRAY},
-        {SPECIES_TAILLOW, MOVE_BOOMBURST, MOVE_BOOMBURST, MOVE_BOOMBURST},
-        {SPECIES_DRATINI, MOVE_EXTREME_SPEED, MOVE_EXTREME_SPEED, MOVE_EXTREME_SPEED},
-        {SPECIES_FEEBAS, MOVE_HAZE, MOVE_HYPNOSIS, MOVE_MIRROR_COAT}
-    };
-    u8 numEggSpecies = ARRAY_COUNT(eggMoves);
-    u8 randSpecies, randEggMove;
-
-    randSpecies = Random() % numEggSpecies;
-    randEggMove = (Random() % 3) + 1; // Random number between 1 and 3
-
-    gSpecialVar_0x8004 = eggMoves[randSpecies][0];
-    gSpecialVar_0x8005 = eggMoves[randSpecies][randEggMove];
-}
-
-// Gives a mon in the party a move
-// gSpecialVar_0x8005: Move to give
-// gSpecialVar_0x8006: Party slot
-void SetGiftEggMove (void)
-{
-    if (MonKnowsMove(&gPlayerParty[gSpecialVar_0x8006], MOVE_NONE))
-    {
-        GiveMoveToMon(&gPlayerParty[gSpecialVar_0x8006], gSpecialVar_0x8005);
-    }
-    else
-    {
-        SetMonMoveSlot(&gPlayerParty[gSpecialVar_0x8006], gSpecialVar_0x8005, 0);
-    }
-}
-
-// Changes a chosen mon's Poke Ball to another one in the player's bag
-// gSpecialVar_0x8004: Party slot of chosen mon
-// gSpecialVar_0x8005: Ball to change to
-// gSpecialVar_0x8006: Previous Poke Ball
-void ChangePokeBall (void)
-{
-    u16 pokeball = gSpecialVar_0x8005;
-    // gSpecialVar_0x8006 = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_POKEBALL, NULL);
-    SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_POKEBALL, &pokeball);
-}
-
-// Returns TRUE if the player has a Diancie with maximum friendship, FALSE otherwise
-bool8 GetDiancieFriendshipScore (void)
-{
-    u8 i = 0;
-
-    for (i = 0; i < PARTY_SIZE; i++)
-    {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == SPECIES_DIANCIE)
-        {
-            if (GetMonData(&gPlayerParty[i], MON_DATA_FRIENDSHIP) == MAX_FRIENDSHIP)
-            return TRUE;
-        }
+        if (gObjectEvents[i].currentCoords.y != y)
+            continue;
+        return TRUE;
     }
     return FALSE;
 }
 
-// Returns TRUE if the player's party contains six Magikarp, FALSE otherwise
-bool8 CheckMagikarpBattle (void)
+bool32 CheckPartyHasSpecies(enum Species givenSpecies)
 {
-    u32 i = 0;
+    u32 partyIndex;
 
-    for (i = 0; i < PARTY_SIZE; i++)
+    for (partyIndex = 0; partyIndex < CalculatePlayerPartyCount(); partyIndex++)
+        if (GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_SPECIES) == givenSpecies)
+            return TRUE;
+
+    return FALSE;
+}
+
+void UseBlankMessageToCancelPokemonPic(void)
+{
+    DeactivateSingleTextPrinter(0, WINDOW_TEXT_PRINTER);
+    ScriptMenu_HidePokemonPic();
+}
+
+static void UIAskConfirmation(void)
+{
+    DisplayYesNoMenuDefaultYes();
+}
+
+static s32 UIWaitConfirmation(void)
+{
+    return Menu_ProcessInputNoWrapClearOnChoose();
+}
+
+static void UIPrintMessage(const u8 *message)
+{
+    ShowFieldMessage(message);
+}
+
+static void UIPlayFanfare(u32 songId)
+{
+    PlayFanfare(songId);
+}
+
+static void UIEndTask(u8 taskId)
+{
+    DestroyTask(taskId);
+    ScriptContext_Enable();
+}
+
+#define tState         data[0]
+#define tPartyIndex    data[1]
+#define tMove          data[2]
+#define tRecoverPp     data[3]
+
+static void UIShowMoveList(u8 taskId)
+{
+    gSpecialVar_0x8000 = gTasks[taskId].tPartyIndex;
+    gSpecialVar_0x8001 = gTasks[taskId].tMove;
+    DestroyTask(taskId);
+    ShowSelectMovePokemonSummaryScreen(gParties[B_TRAINER_PLAYER], gTasks[taskId].tPartyIndex, CB2_ReturnToFieldWhileLearningMove, gTasks[taskId].tMove);
+}
+
+static const struct MoveLearnUI sMoveLearnUI =
+{
+    .askConfirmation = UIAskConfirmation,
+    .waitConfirmation = UIWaitConfirmation,
+    .printMessage = UIPrintMessage,
+    .playFanfare = UIPlayFanfare,
+    .showMoveList = UIShowMoveList,
+    .endTask = UIEndTask
+};
+
+static void Task_LearnMove(u8 taskId)
+{
+    if (IsTextPrinterActiveOnWindow(0))
+        return;
+    gTasks[taskId].tState = LearnMove(&sMoveLearnUI, taskId);
+}
+
+void CanTeachMoveBoxMon(void)
+{
+    if (gSpecialVar_0x8004 == PARTY_NOTHING_CHOSEN)
     {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) != SPECIES_MAGIKARP)
-        {
-            return FALSE;
-        }
+        // We want to wait one frame before using ScriptContext_Enable() or the game freezes
+        CreateTask(UIEndTask, 1);
+        return;
     }
+    u32 taskId = CreateTask(Task_LearnMove, 1);
+    gTasks[taskId].tState = GetLearnMoveStartState();
+    gTasks[taskId].tPartyIndex = gSpecialVar_0x8004;
+    gTasks[taskId].tMove = gSpecialVar_0x8005;
+    gTasks[taskId].tRecoverPp = TRUE;
+}
+
+static void FieldCB_ContinueLearningMove(void)
+{
+    LockPlayerFieldControls();
+    FadeInFromBlack();
+    CreateTask(Task_ReturnToFieldWhileLearningMove, 1);
+}
+
+static void CB2_ReturnToFieldWhileLearningMove(void)
+{
+    gFieldCallback = FieldCB_ContinueLearningMove;
+    CB2_ReturnToField();
+}
+
+static void Task_ReturnToFieldWhileLearningMove(u8 taskId)
+{
+    if (IsWeatherNotFadingIn() == TRUE)
+    {
+        gTasks[taskId].func = Task_LearnMove;
+        gTasks[taskId].tState = GetLearnMoveResumeAfterSummaryScreenState();
+        gTasks[taskId].tPartyIndex = gSpecialVar_0x8000;
+        gTasks[taskId].tMove = gSpecialVar_0x8001;
+    }
+}
+
+#undef tState
+#undef tPartyIndex
+#undef tMove
+
+void EnterCode(void)
+{
+    StringCopy(gStringVar2, COMPOUND_STRING(""));
+    DoNamingScreen(NAMING_SCREEN_CODE, gStringVar2, 0, 0, 0, CB2_ReturnToFieldContinueScript);
+}
+
+void GetCodeFeedback(void)
+{
+    static const u8 sText_SampleCode[] = _("SampleCode");
+    if (!StringCompare(gStringVar2, sText_SampleCode))
+        gSpecialVar_Result = 1;
+    else
+        gSpecialVar_Result = 0;
+}
+
+void SetHiddenNature(void)
+{
+    u32 hiddenNature = gSpecialVar_Result;
+    SetMonData(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004], MON_DATA_HIDDEN_NATURE, &hiddenNature);
+    CalculateMonStats(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004]);
+}
+
+void SetAbility(void)
+{
+    enum Ability ability = gSpecialVar_Result;
+    SetMonData(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004], MON_DATA_ABILITY_NUM, &ability);
+}
+
+void DaisyMassageServices(void)
+{
+    AdjustFriendship(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004], FRIENDSHIP_EVENT_MASSAGE);
+    VarSet(VAR_MASSAGE_COOLDOWN_STEP_COUNTER, 0);
+}
+
+u8 GetLeadMonFriendship(void)
+{
+    struct Pokemon * pokemon = &gParties[B_TRAINER_PLAYER][GetLeadMonIndex()];
+    if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) == 255)
+        return 6;
+    else if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 200)
+        return 5;
+    else if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 150)
+        return 4;
+    else if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 100)
+        return 3;
+    else if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) >= 50)
+        return 2;
+    else if (GetMonData(pokemon, MON_DATA_FRIENDSHIP) > 0)
+        return 1;
+    else
+        return 0;
+}
+
+enum Move GetFirstPartnerMove(enum Species species)
+{
+    switch (species)
+    {
+    case SPECIES_VENUSAUR:
+        return MOVE_FRENZY_PLANT;
+    case SPECIES_CHARIZARD:
+        return MOVE_BLAST_BURN;
+    case SPECIES_BLASTOISE:
+        return MOVE_HYDRO_CANNON;
+    default:
+        return MOVE_NONE;
+    }
+}
+
+bool8 CapeBrinkGetMoveToTeachLeadPokemon(void)
+{
+    // Returns:
+    //   8005 = Move tutor index
+    //   8006 = Num moves known by lead mon
+    //   8007 = Index of lead mon
+    //   to specialvar = whether a move can be taught in the first place
+    u8 i, leadMonSlot, moveCount = 0;
+    enum Move moveId;
+    u16 tutorFlag;
+    struct Pokemon *leadMon;
+
+    leadMonSlot = GetLeadMonIndex();
+    leadMon = &gParties[B_TRAINER_PLAYER][leadMonSlot];
+
+    if (GetMonData(leadMon, MON_DATA_FRIENDSHIP) != 255)
+        return FALSE;
+
+    moveId = GetFirstPartnerMove(GetMonData(leadMon, MON_DATA_SPECIES_OR_EGG));
+    switch (moveId)
+    {
+    case MOVE_FRENZY_PLANT:
+        tutorFlag = FLAG_TUTOR_FRENZY_PLANT;
+        break;
+    case MOVE_BLAST_BURN:
+        tutorFlag = FLAG_TUTOR_BLAST_BURN;
+        break;
+    case MOVE_HYDRO_CANNON:
+        tutorFlag = FLAG_TUTOR_HYDRO_CANNON;
+        break;
+    default:
+        return FALSE;
+    }
+
+    StringCopy(gStringVar2, gMovesInfo[moveId].name);
+    if (FlagGet(tutorFlag) == TRUE)
+        return FALSE;
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+        moveCount += (GetMonData(leadMon, MON_DATA_MOVE1 + i) != MOVE_NONE);
+
+    gSpecialVar_0x8005 = moveId;
+    gSpecialVar_0x8006 = moveCount;
+    gSpecialVar_0x8007 = leadMonSlot;
+
     return TRUE;
 }
 
-// Makes any hidden items using these flags reappear daily
-void ResetDailyHiddenItemFlags(void)
+bool8 HasLearnedAllMovesFromCapeBrinkTutor(void)
 {
-    u16 *specVar = &gSpecialVar_0x8004;
-    u16 flag;
-    u32 i = 0;
-    static const u16 dailyItemflags[] = 
+    // 8005 is set by CapeBrinkGetMoveToTeachLeadPokemon
+    switch (gSpecialVar_0x8005)
     {
-        FLAG_HIDDEN_ITEM_ASHEN_WOODS_BALM_MUSHROOM_1,
-        FLAG_HIDDEN_ITEM_ASHEN_WOODS_BALM_MUSHROOM_2,
-        FLAG_HIDDEN_ITEM_RUINS_EXTERIOR_STAR_PIECE_1,
-        FLAG_HIDDEN_ITEM_RUINS_EXTERIOR_STAR_PIECE_2,
-        FLAG_HIDDEN_ITEM_RED_NECTAR,
-        FLAG_HIDDEN_ITEM_PINK_NECTAR,
-        FLAG_HIDDEN_ITEM_PURPLE_NECTAR,
-        FLAG_HIDDEN_ITEM_YELLOW_NECTAR,
-        FLAG_HIDDEN_ITEM_GAME_CORNER_BOTTLE_CAP1,
-        FLAG_HIDDEN_ITEM_GAME_CORNER_BOTTLE_CAP2,
-        0xFFFF
-    };
-
-    while (dailyItemflags[i] != 0xFFFF)
-    {
-        flag = dailyItemflags[i];
-        *specVar = flag;
-        FlagClear(flag);
-        i++;
+    case MOVE_FRENZY_PLANT:
+        FlagSet(FLAG_TUTOR_FRENZY_PLANT);
+        break;
+    case MOVE_BLAST_BURN:
+        FlagSet(FLAG_TUTOR_BLAST_BURN);
+        break;
+    case MOVE_HYDRO_CANNON:
+        FlagSet(FLAG_TUTOR_HYDRO_CANNON);
+        break;
     }
+
+    return (FlagGet(FLAG_TUTOR_FRENZY_PLANT) == TRUE)
+        && (FlagGet(FLAG_TUTOR_BLAST_BURN) == TRUE)
+        && (FlagGet(FLAG_TUTOR_HYDRO_CANNON) == TRUE);
 }
 
-// Checks the player's party for up to three different Pokemon. Useful for Legendary events.
-// gSpecialVar_0x8004: set to first species to check for
-// gSpecialVar_0x8005: set to second species to check for
-// gSpecialVar_0x8006: set to third species to check for
-// gSpecialVar_0x8007: set to number of species to check for
-// Returns TRUE if all species are found, FALSE if not
-bool8 CheckSpeciesInParty (void)
+void SetSeenMon(void)
 {
-    u16 species1 = gSpecialVar_0x8004;
-    u16 species2 = gSpecialVar_0x8005;
-    u16 species3 = gSpecialVar_0x8006;
-    u32 numSpecies = gSpecialVar_0x8007;
-    u32 i;
-    u32 speciesFound = 0;
-
-    for (i = 0; i < PARTY_SIZE; i++)
-    {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == species1)
-        {
-            speciesFound++;
-        }
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == species2)
-        {
-            speciesFound++;
-        }
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == species3)
-        {
-            speciesFound++;
-        }
-    }
-
-    if (speciesFound == numSpecies){
-        return TRUE;
-    }
-    return FALSE;
+    GetSetPokedexFlag(SpeciesToNationalPokedexNum(gSpecialVar_0x8004), 2);
 }
 
-// Checks if the species stored in gSpecialVar_0x8004 is an Eeveelution
-bool8 IsSelectedMonEeveelution (void)
+#define tTimer data[0]
+#define tState data[1]
+#define tX     data[2]
+#define tY     data[3]
+
+static void Task_DrawTeleporterHousing(u8 taskId)
 {
-    u32 species;
+    s16 *data = gTasks[taskId].data;
 
-    species = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES2, NULL);
-
-    if (species == SPECIES_VAPOREON || species == SPECIES_JOLTEON || species == SPECIES_FLAREON
-       || species == SPECIES_ESPEON || species == SPECIES_UMBREON || species == SPECIES_LEAFEON
-       || species == SPECIES_GLACEON || species == SPECIES_SYLVEON)
+    if (tTimer == 0)
     {
-        return TRUE;
+        // Alternate the teleporter light / brightness of the teleporter door
+        if ((tState & 1) == 0)
+        {
+            MapGridSetMetatileIdAt(tX, tY, METATILE_SeaCottage_Teleporter_Light_Yellow | MAPGRID_COLLISION_MASK);
+            MapGridSetMetatileIdAt(tX, tY + 2, METATILE_SeaCottage_Teleporter_Door_HalfGlowing | MAPGRID_COLLISION_MASK);
+        }
+        else
+        {
+            MapGridSetMetatileIdAt(tX, tY, METATILE_SeaCottage_Teleporter_Light_Red | MAPGRID_COLLISION_MASK);
+            MapGridSetMetatileIdAt(tX, tY + 2, METATILE_SeaCottage_Teleporter_Door_FullGlowing | MAPGRID_COLLISION_MASK);
+        }
+        CurrentMapDrawMetatileAt(tX, tY);
+        CurrentMapDrawMetatileAt(tX, tY + 2);
     }
-    return FALSE;
+
+    tTimer++;
+    if (tTimer != 16)
+        return;
+
+    tTimer = 0;
+    tState++;
+    if (tState != 13)
+        return;
+
+    MapGridSetMetatileIdAt(tX, tY, METATILE_SeaCottage_Teleporter_Light_Green | MAPGRID_COLLISION_MASK);
+    MapGridSetMetatileIdAt(tX, tY + 2, METATILE_SeaCottage_Teleporter_Door | MAPGRID_COLLISION_MASK);
+    CurrentMapDrawMetatileAt(tX, tY);
+    CurrentMapDrawMetatileAt(tX, tY + 2);
+    DestroyTask(taskId);
 }
 
-// Calculates level for gift mons and static encounters that can still evolve.
-// Sets that level to highest level - 3 and stores it in gSpecialVar_0x800A.
-void GetStaticEncounterLevel (void)
+void AnimateTeleporterHousing(void)
 {
-    gSpecialVar_0x800A = GetHighestLevelInPlayerParty();
+    u8 taskId;
+    s16 *data;
 
-    if (gSpecialVar_0x800A - 3 < 1)
+    taskId = CreateTask(Task_DrawTeleporterHousing, 0);
+    gTasks[taskId].tTimer = 0;
+    gTasks[taskId].tState = 0;
+    data = gTasks[taskId].data;
+    PlayerGetDestCoords(&tX, &tY);
+
+    // Set the coords of whichever teleporter is being animated
+    // 0 for the right teleporter, 1 for the left teleporter
+    if (gSpecialVar_0x8004 == 0)
     {
-        gSpecialVar_0x800A = 1;
+        gTasks[taskId].tX += 6;
+        gTasks[taskId].tY -= 5;
     }
     else
     {
-        gSpecialVar_0x800A -= 3;
+        gTasks[taskId].tX -= 1;
+        gTasks[taskId].tY -= 5;
     }
 }
 
-#define MYSTERY_GIFT_SPECIES       0
-#define MYSTERY_GIFT_ITEM          1
-#define MYSTERY_GIFT_RECEIVED_FLAG 2
-#define MYSTERY_GIFT_REQ_FLAG      3
-
-// Loops through array of mystery gift mons and checks requirements for the player to receive them.
-// If the requirements for a gift species are met, the gift's item is stored in gSpecialVar_0x8009 and that species is returned.
-// If no valid species is found, returns FALSE.
-u16 GetMysteryGiftSpecies (void)
+static void Task_DrawTeleporterCable(u8 taskId)
 {
-    static const u16 mysteryGiftData[][4] =
-    {
-        // Species, held item, flag set when received, flag needed to receive
-        {SPECIES_GRENINJA_BATTLE_BOND, ITEM_COMET_SHARD, FLAG_RECEIVED_ASH_GRENINJA, FLAG_BADGE04_GET},
-        {SPECIES_MAGEARNA, ITEM_MASTER_BALL, FLAG_RECEIVED_MAGEARNA, FLAG_SYS_GAME_CLEAR},
-        {SPECIES_MELOETTA, ITEM_RELIC_STATUE, FLAG_RECEIVED_MELOETTA, FLAG_BADGE05_GET}
-    };
+    s16 *data = gTasks[taskId].data;
 
-    int i;
-    u8 numMysteryGifts = ARRAY_COUNT(mysteryGiftData);
-
-    for (i = 0; i < numMysteryGifts; i++)
+    if (tTimer == 0)
     {
-        if (!FlagGet(mysteryGiftData[i][MYSTERY_GIFT_RECEIVED_FLAG]) && FlagGet(mysteryGiftData[i][MYSTERY_GIFT_REQ_FLAG]))
+        if (tState != 0)
         {
-            gSpecialVar_0x8009 =  mysteryGiftData[i][MYSTERY_GIFT_ITEM];
-            return mysteryGiftData[i][MYSTERY_GIFT_SPECIES];
+            // Set default cable tiles to clear the ball
+            MapGridSetMetatileIdAt(tX, tY, METATILE_SeaCottage_Teleporter_Cable_Top | MAPGRID_COLLISION_MASK);
+            MapGridSetMetatileIdAt(tX, tY + 1, METATILE_SeaCottage_Teleporter_Cable_Bottom | MAPGRID_COLLISION_MASK);
+            CurrentMapDrawMetatileAt(tX, tY);
+            CurrentMapDrawMetatileAt(tX, tY + 1);
+
+            // End after drawing 4 times (length of the cable)
+            if (tState == 4)
+            {
+                DestroyTask(taskId);
+                return;
+            }
+
+            tX--;
         }
+
+        // Draw the cable ball
+        MapGridSetMetatileIdAt(tX, tY, METATILE_SeaCottage_Teleporter_CableBall_Top | MAPGRID_COLLISION_MASK);
+        MapGridSetMetatileIdAt(tX, tY + 1, METATILE_SeaCottage_Teleporter_CableBall_Bottom | MAPGRID_COLLISION_MASK);
+        CurrentMapDrawMetatileAt(tX, tY);
+        CurrentMapDrawMetatileAt(tX, tY + 1);
     }
 
+    tTimer++;
+    if (tTimer == 4)
+    {
+        tTimer = 0;
+        tState++;
+    }
+}
+
+void AnimateTeleporterCable(void)
+{
+    u8 taskId;
+    s16 *data;
+
+    taskId = CreateTask(Task_DrawTeleporterCable, 0);
+    gTasks[taskId].tTimer = 0;
+    gTasks[taskId].tState = 0;
+    data = gTasks[taskId].data;
+    PlayerGetDestCoords(&tX, &tY);
+    gTasks[taskId].tX += 4;
+    gTasks[taskId].tY -= 5;
+}
+
+#undef tTimer
+#undef tState
+#undef tX
+#undef tY
+
+void SetVermilionTrashCans(void)
+{
+    u16 idx = (Random() % 15) + 1;
+    gSpecialVar_0x8004 = idx;
+    gSpecialVar_0x8005 = idx;
+    switch (gSpecialVar_0x8004)
+    {
+    case 1:
+        idx = Random() % 2;
+        if (idx == 0)
+            gSpecialVar_0x8005 += 1;
+        else
+            gSpecialVar_0x8005 += 5;
+        break;
+    case 2:
+    case 3:
+    case 4:
+        idx = Random() % 3;
+        if (idx == 0)
+            gSpecialVar_0x8005 += 1;
+        else if (idx == 1)
+            gSpecialVar_0x8005 += 5;
+        else
+            gSpecialVar_0x8005 -= 1;
+        break;
+    case 5:
+        idx = Random() % 2;
+        if (idx == 0)
+            gSpecialVar_0x8005 += 5;
+        else
+            gSpecialVar_0x8005 -= 1;
+        break;
+    case 6:
+        idx = Random() % 3;
+        if (idx == 0)
+            gSpecialVar_0x8005 -= 5;
+        else if (idx == 1)
+            gSpecialVar_0x8005 += 1;
+        else
+            gSpecialVar_0x8005 += 5;
+        break;
+    case 7:
+    case 8:
+    case 9:
+        idx = Random() % 4;
+        if (idx == 0)
+            gSpecialVar_0x8005 -= 5;
+        else if (idx == 1)
+            gSpecialVar_0x8005 += 1;
+        else if (idx == 2)
+            gSpecialVar_0x8005 += 5;
+        else
+            gSpecialVar_0x8005 -= 1;
+        break;
+    case 10:
+        idx = Random() % 3;
+        if (idx == 0)
+            gSpecialVar_0x8005 -= 5;
+        else if (idx == 1)
+            gSpecialVar_0x8005 += 5;
+        else
+            gSpecialVar_0x8005 -= 1;
+        break;
+    case 11:
+        idx = Random() % 2;
+        if (idx == 0)
+            gSpecialVar_0x8005 -= 5;
+        else
+            gSpecialVar_0x8005 += 1;
+        break;
+    case 12:
+    case 13:
+    case 14:
+        idx = Random() % 3;
+        if (idx == 0)
+            gSpecialVar_0x8005 -= 5;
+        else if (idx == 1)
+            gSpecialVar_0x8005 += 1;
+        else
+            gSpecialVar_0x8005 -= 1;
+        break;
+    case 15:
+        idx = Random() % 2;
+        if (idx == 0)
+            gSpecialVar_0x8005 -= 5;
+        else
+            gSpecialVar_0x8005 -= 1;
+        break;
+    }
+    if (gSpecialVar_0x8005 > 15)
+    {
+        if (gSpecialVar_0x8004 % 5 == 1)
+            gSpecialVar_0x8005 = gSpecialVar_0x8004 + 1;
+        else if (gSpecialVar_0x8004 % 5 == 0)
+            gSpecialVar_0x8005 = gSpecialVar_0x8004 - 1;
+        else
+            gSpecialVar_0x8005 = gSpecialVar_0x8004 + 1;
+    }
+}
+
+bool8 DoesPlayerPartyContainSpecies(void)
+{
+    u8 partyCount = CalculatePlayerPartyCount();
+    u8 i;
+    for (i = 0; i < partyCount; i++)
+    {
+        if (GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES_OR_EGG, NULL) == gSpecialVar_0x8004)
+            return TRUE;
+    }
     return FALSE;
 }
 
-#undef MYSTERY_GIFT_SPECIES
-#undef MYSTERY_GIFT_RECEIVED_FLAG
-#undef MYSTERY_GIFT_REQ_FLAG
-#undef MYSTERY_GIFT_ITEM
+static const u8 sSlotMachineIndices[] = {
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    2,
+    2,
+    2,
+    3,
+    3,
+    3,
+    4,
+    4,
+    5
+};
+
+u8 GetRandomSlotMachineId(void)
+{
+    u16 rval = Random() % NELEMS(sSlotMachineIndices);
+    return sSlotMachineIndices[rval];
+}
+
+static const struct WindowTemplate sElevatorCurrentFloorWindowTemplate = {
+    .bg = 0,
+    .tilemapLeft = 22,
+    .tilemapTop = 1,
+    .width = 7,
+    .height = 4,
+    .paletteNum = 15,
+    .baseBlock = 0x008
+};
+
+static const u8 *const sFloorNamePointers[] = {
+    gText_B4F,
+    gText_B3F,
+    gText_B2F,
+    gText_B1F,
+    gText_1F,
+    gText_2F,
+    gText_3F,
+    gText_4F,
+    gText_5F,
+    gText_6F,
+    gText_7F,
+    gText_8F,
+    gText_9F,
+    gText_10F,
+    gText_11F,
+    gText_Rooftop
+};
+
+static const u16 sElevatorWindowMetatilesGoingUp[][3] = {
+    {
+        METATILE_SilphCo_ElevatorWindow_Top0,
+        METATILE_SilphCo_ElevatorWindow_Top1,
+        METATILE_SilphCo_ElevatorWindow_Top2
+    },
+    {
+        METATILE_SilphCo_ElevatorWindow_Mid0,
+        METATILE_SilphCo_ElevatorWindow_Mid1,
+        METATILE_SilphCo_ElevatorWindow_Mid2
+    },
+    {
+        METATILE_SilphCo_ElevatorWindow_Bottom0,
+        METATILE_SilphCo_ElevatorWindow_Bottom1,
+        METATILE_SilphCo_ElevatorWindow_Bottom2
+    }
+};
+
+static const u16 sElevatorWindowMetatilesGoingDown[][3] = {
+    {
+        METATILE_SilphCo_ElevatorWindow_Top0,
+        METATILE_SilphCo_ElevatorWindow_Top2,
+        METATILE_SilphCo_ElevatorWindow_Top1
+    },
+    {
+        METATILE_SilphCo_ElevatorWindow_Mid0,
+        METATILE_SilphCo_ElevatorWindow_Mid2,
+        METATILE_SilphCo_ElevatorWindow_Mid1
+    },
+    {
+        METATILE_SilphCo_ElevatorWindow_Bottom0,
+        METATILE_SilphCo_ElevatorWindow_Bottom2,
+        METATILE_SilphCo_ElevatorWindow_Bottom1
+    }
+};
+
+static const u8 sElevatorAnimationDuration[] = {
+    8,
+    16,
+    24,
+    32,
+    38,
+    46,
+    53,
+    56,
+    57
+};
+
+static const u8 sElevatorWindowAnimDuration[] = {
+    3,
+    6,
+    9,
+    12,
+    15,
+    18,
+    21,
+    24,
+    27
+};
+
+void GetElevatorFloor(void)
+{
+    u16 floor = 4;
+    if (gSaveBlock1Ptr->dynamicWarp.mapGroup == MAP_GROUP(MAP_ROCKET_HIDEOUT_B1F))
+    {
+        switch (gSaveBlock1Ptr->dynamicWarp.mapNum)
+        {
+        case MAP_NUM(MAP_SILPH_CO_1F):
+            floor = 4;
+            break;
+        case MAP_NUM(MAP_SILPH_CO_2F):
+            floor = 5;
+            break;
+        case MAP_NUM(MAP_SILPH_CO_3F):
+            floor = 6;
+            break;
+        case MAP_NUM(MAP_SILPH_CO_4F):
+            floor = 7;
+            break;
+        case MAP_NUM(MAP_SILPH_CO_5F):
+            floor = 8;
+            break;
+        case MAP_NUM(MAP_SILPH_CO_6F):
+            floor = 9;
+            break;
+        case MAP_NUM(MAP_SILPH_CO_7F):
+            floor = 10;
+            break;
+        case MAP_NUM(MAP_SILPH_CO_8F):
+            floor = 11;
+            break;
+        case MAP_NUM(MAP_SILPH_CO_9F):
+            floor = 12;
+            break;
+        case MAP_NUM(MAP_SILPH_CO_10F):
+            floor = 13;
+            break;
+        case MAP_NUM(MAP_SILPH_CO_11F):
+            floor = 14;
+            break;
+        case MAP_NUM(MAP_ROCKET_HIDEOUT_B1F):
+            floor = 3;
+            break;
+        case MAP_NUM(MAP_ROCKET_HIDEOUT_B2F):
+            floor = 2;
+            break;
+        case MAP_NUM(MAP_ROCKET_HIDEOUT_B4F):
+            floor = 0;
+            break;
+        }
+    }
+    if (gSaveBlock1Ptr->dynamicWarp.mapGroup == MAP_GROUP(MAP_CELADON_CITY_DEPARTMENT_STORE_1F))
+    {
+        switch (gSaveBlock1Ptr->dynamicWarp.mapNum)
+        {
+        case MAP_NUM(MAP_CELADON_CITY_DEPARTMENT_STORE_1F):
+            floor = 4;
+            break;
+        case MAP_NUM(MAP_CELADON_CITY_DEPARTMENT_STORE_2F):
+            floor = 5;
+            break;
+        case MAP_NUM(MAP_CELADON_CITY_DEPARTMENT_STORE_3F):
+            floor = 6;
+            break;
+        case MAP_NUM(MAP_CELADON_CITY_DEPARTMENT_STORE_4F):
+            floor = 7;
+            break;
+        case MAP_NUM(MAP_CELADON_CITY_DEPARTMENT_STORE_5F):
+            floor = 8;
+            break;
+        }
+    }
+    if (gSaveBlock1Ptr->dynamicWarp.mapGroup == MAP_GROUP(MAP_TRAINER_TOWER_1F))
+    {
+        switch (gSaveBlock1Ptr->dynamicWarp.mapNum)
+        {
+        case MAP_NUM(MAP_TRAINER_TOWER_1F):
+        case MAP_NUM(MAP_TRAINER_TOWER_2F):
+        case MAP_NUM(MAP_TRAINER_TOWER_3F):
+        case MAP_NUM(MAP_TRAINER_TOWER_4F):
+        case MAP_NUM(MAP_TRAINER_TOWER_5F):
+        case MAP_NUM(MAP_TRAINER_TOWER_6F):
+        case MAP_NUM(MAP_TRAINER_TOWER_7F):
+        case MAP_NUM(MAP_TRAINER_TOWER_8F):
+        case MAP_NUM(MAP_TRAINER_TOWER_ROOF):
+            floor = 15;
+            break;
+        case MAP_NUM(MAP_TRAINER_TOWER_LOBBY):
+            floor = 3;
+            break;
+        }
+    }
+    VarSet(VAR_ELEVATOR_FLOOR, floor);
+}
+
+u16 InitElevatorFloorSelectMenuPos(void)
+{
+    sElevatorScroll = 0;
+    sElevatorCursorPos = 0;
+
+    if (gSaveBlock1Ptr->dynamicWarp.mapGroup == MAP_GROUP(MAP_ROCKET_HIDEOUT_B1F))
+    {
+        switch (gSaveBlock1Ptr->dynamicWarp.mapNum)
+        {
+        case MAP_NUM(MAP_SILPH_CO_11F):
+            sElevatorScroll = 0;
+            sElevatorCursorPos = 0;
+            break;
+        case MAP_NUM(MAP_SILPH_CO_10F):
+            sElevatorScroll = 0;
+            sElevatorCursorPos = 1;
+            break;
+        case MAP_NUM(MAP_SILPH_CO_9F):
+            sElevatorScroll = 0;
+            sElevatorCursorPos = 2;
+            break;
+        case MAP_NUM(MAP_SILPH_CO_8F):
+            sElevatorScroll = 0;
+            sElevatorCursorPos = 3;
+            break;
+        case MAP_NUM(MAP_SILPH_CO_7F):
+            sElevatorScroll = 0;
+            sElevatorCursorPos = 4;
+            break;
+        case MAP_NUM(MAP_SILPH_CO_6F):
+            sElevatorScroll = 1;
+            sElevatorCursorPos = 4;
+            break;
+        case MAP_NUM(MAP_SILPH_CO_5F):
+            sElevatorScroll = 2;
+            sElevatorCursorPos = 4;
+            break;
+        case MAP_NUM(MAP_SILPH_CO_4F):
+            sElevatorScroll = 3;
+            sElevatorCursorPos = 4;
+            break;
+        case MAP_NUM(MAP_SILPH_CO_3F):
+            sElevatorScroll = 4;
+            sElevatorCursorPos = 4;
+            break;
+        case MAP_NUM(MAP_SILPH_CO_2F):
+            sElevatorScroll = 5;
+            sElevatorCursorPos = 4;
+            break;
+        case MAP_NUM(MAP_SILPH_CO_1F):
+            sElevatorScroll = 5;
+            sElevatorCursorPos = 5;
+            break;
+        case MAP_NUM(MAP_ROCKET_HIDEOUT_B1F):
+            sElevatorScroll = 0;
+            sElevatorCursorPos = 0;
+            break;
+        case MAP_NUM(MAP_ROCKET_HIDEOUT_B2F):
+            sElevatorScroll = 0;
+            sElevatorCursorPos = 1;
+            break;
+        case MAP_NUM(MAP_ROCKET_HIDEOUT_B4F):
+            sElevatorScroll = 0;
+            sElevatorCursorPos = 2;
+            break;
+        }
+    }
+    if (gSaveBlock1Ptr->dynamicWarp.mapGroup == MAP_GROUP(MAP_CELADON_CITY_DEPARTMENT_STORE_1F))
+    {
+        switch (gSaveBlock1Ptr->dynamicWarp.mapNum)
+        {
+        case MAP_NUM(MAP_CELADON_CITY_DEPARTMENT_STORE_5F):
+            sElevatorScroll = 0;
+            sElevatorCursorPos = 0;
+            break;
+        case MAP_NUM(MAP_CELADON_CITY_DEPARTMENT_STORE_4F):
+            sElevatorScroll = 0;
+            sElevatorCursorPos = 1;
+            break;
+        case MAP_NUM(MAP_CELADON_CITY_DEPARTMENT_STORE_3F):
+            sElevatorScroll = 0;
+            sElevatorCursorPos = 2;
+            break;
+        case MAP_NUM(MAP_CELADON_CITY_DEPARTMENT_STORE_2F):
+            sElevatorScroll = 0;
+            sElevatorCursorPos = 3;
+            break;
+        case MAP_NUM(MAP_CELADON_CITY_DEPARTMENT_STORE_1F):
+            sElevatorScroll = 0;
+            sElevatorCursorPos = 4;
+            break;
+        }
+    }
+    if (gSaveBlock1Ptr->dynamicWarp.mapGroup == MAP_GROUP(MAP_TRAINER_TOWER_1F))
+    {
+        switch (gSaveBlock1Ptr->dynamicWarp.mapNum)
+        {
+        case MAP_NUM(MAP_TRAINER_TOWER_1F):
+        case MAP_NUM(MAP_TRAINER_TOWER_2F):
+        case MAP_NUM(MAP_TRAINER_TOWER_3F):
+        case MAP_NUM(MAP_TRAINER_TOWER_4F):
+        case MAP_NUM(MAP_TRAINER_TOWER_5F):
+        case MAP_NUM(MAP_TRAINER_TOWER_6F):
+        case MAP_NUM(MAP_TRAINER_TOWER_7F):
+        case MAP_NUM(MAP_TRAINER_TOWER_8F):
+        case MAP_NUM(MAP_TRAINER_TOWER_ROOF):
+            sElevatorScroll = 0;
+            sElevatorCursorPos = 0;
+            break;
+        case MAP_NUM(MAP_TRAINER_TOWER_LOBBY):
+            sElevatorScroll = 0;
+            sElevatorCursorPos = 1;
+            break;
+        }
+    }
+    return sElevatorCursorPos;
+}
+
+void AnimateElevator(void)
+{
+    u16 nfloors;
+    s16 *data = gTasks[CreateTask(Task_ElevatorShake, 9)].data;
+    data[1] = 0;
+    data[2] = 0;
+    data[4] = 1;
+    if (gSpecialVar_0x8005 > gSpecialVar_0x8006)
+    {
+        nfloors = gSpecialVar_0x8005 - gSpecialVar_0x8006;
+        data[6] = 1;
+    }
+    else
+    {
+        nfloors = gSpecialVar_0x8006 - gSpecialVar_0x8005;
+        data[6] = 0;
+    }
+    if (nfloors > 8)
+        nfloors = 8;
+    data[5] = sElevatorAnimationDuration[nfloors];
+    SetCameraPanningCallback(NULL);
+    AnimateElevatorWindowView(nfloors, data[6]);
+    PlaySE(SE_ELEVATOR);
+}
+
+static void Task_ElevatorShake(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    data[1]++;
+    if ((data[1] % 3) == 0)
+    {
+        data[1] = 0;
+        data[2]++;
+        data[4] = -data[4];
+        SetCameraPanning(0, data[4]);
+        if (data[2] == data[5])
+        {
+            PlaySE(SE_DING_DONG);
+            DestroyTask(taskId);
+            ScriptContext_Enable();
+            InstallCameraPanAheadCallback();
+        }
+    }
+}
+
+static const u8 sText_NowOn[] = _("Now on:");
+
+void DrawElevatorCurrentFloorWindow(void)
+{
+    const u8 *floorname;
+    u32 strwidth;
+
+    sElevatorCurrentFloorWindowId = AddWindow(&sElevatorCurrentFloorWindowTemplate);
+    LoadUserWindowBorderGfx(sElevatorCurrentFloorWindowId, 0x21D, BG_PLTT_ID(13));
+    DrawStdFrameWithCustomTileAndPalette(sElevatorCurrentFloorWindowId, FALSE, 0x21D, 13);
+    AddTextPrinterParameterized(sElevatorCurrentFloorWindowId, FONT_NORMAL, sText_NowOn, 0, 2, 0xFF, NULL);
+    floorname = sFloorNamePointers[gSpecialVar_0x8005];
+    strwidth = GetStringWidth(FONT_NORMAL, floorname, 0);
+    AddTextPrinterParameterized(sElevatorCurrentFloorWindowId, FONT_NORMAL, floorname, 56 - strwidth, 16, 0xFF, NULL);
+    PutWindowTilemap(sElevatorCurrentFloorWindowId);
+    CopyWindowToVram(sElevatorCurrentFloorWindowId, COPYWIN_FULL);
+}
+
+void CloseElevatorCurrentFloorWindow(void)
+{
+    ClearStdWindowAndFrameToTransparent(sElevatorCurrentFloorWindowId, TRUE);
+    RemoveWindow(sElevatorCurrentFloorWindowId);
+}
+
+static void AnimateElevatorWindowView(u16 nfloors, u8 direction)
+{
+    u8 taskId;
+    if (FuncIsActiveTask(Task_AnimateElevatorWindowView) != TRUE)
+    {
+        taskId = CreateTask(Task_AnimateElevatorWindowView, 8);
+        gTasks[taskId].data[0] = 0;
+        gTasks[taskId].data[1] = 0;
+        gTasks[taskId].data[2] = direction;
+        gTasks[taskId].data[3] = sElevatorWindowAnimDuration[nfloors];
+    }
+}
+
+static void Task_AnimateElevatorWindowView(u8 taskId)
+{
+    u8 i;
+    u8 j;
+    s16 *data = gTasks[taskId].data;
+    if (data[1] == 6)
+    {
+        data[0]++;
+        if (data[2] == 0)
+        {
+            for (i = 0; i < 3; i++)
+            {
+                for (j = 0; j < 3; j++)
+                    MapGridSetMetatileIdAt(j + 1 + MAP_OFFSET, i + MAP_OFFSET, sElevatorWindowMetatilesGoingUp[i][data[0] % 3] | MAPGRID_COLLISION_MASK);
+            }
+        }
+        else
+        {
+            for (i = 0; i < 3; i++)
+            {
+                for (j = 0; j < 3; j++)
+                    MapGridSetMetatileIdAt(j + 1 + MAP_OFFSET, i + MAP_OFFSET, sElevatorWindowMetatilesGoingDown[i][data[0] % 3] | MAPGRID_COLLISION_MASK);
+            }
+        }
+        DrawWholeMapView();
+        data[1] = 0;
+        if (data[0] == data[3])
+            DestroyTask(taskId);
+    }
+    data[1]++;
+}
+
+void ForcePlayerOntoBike(void)
+{
+    if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_ON_FOOT)
+        SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ACRO_BIKE);
+    Overworld_SetSavedMusic(IS_FRLG ? MUS_RG_CYCLING : MUS_CYCLING);
+    Overworld_ChangeMusicTo(IS_FRLG ? MUS_RG_CYCLING : MUS_CYCLING);
+}
+
+bool8 IsPlayerNotInTrainerTowerLobby(void)
+{
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_TRAINER_TOWER_LOBBY) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_TRAINER_TOWER_LOBBY))
+        return FALSE;
+    else
+        return TRUE;
+}
+
+void BrailleCursorToggle(void)
+{
+    // 8004 = x - 27
+    // 8005 = y
+    // 8006 = action (0 = create, 1 = delete)
+    u16 x = gSpecialVar_0x8004 + 27;
+
+    if (gSpecialVar_0x8006 == 0)
+        sBrailleTextCursorSpriteID = CreateTextCursorSprite(0, x, gSpecialVar_0x8005, 0, 0);
+    else
+        DestroyTextCursorSprite(sBrailleTextCursorSpriteID);
+}
+
+static const u16 sEliteFourLightingPalettes[][16] = {
+    INCGFX_U16("graphics/field_specials/elite_four_lighting_0.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/elite_four_lighting_1.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/elite_four_lighting_2.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/elite_four_lighting_3.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/elite_four_lighting_4.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/elite_four_lighting_5.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/elite_four_lighting_6.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/elite_four_lighting_7.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/elite_four_lighting_8.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/elite_four_lighting_9.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/elite_four_lighting_10.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/elite_four_lighting_11.pal", ".gbapal")
+};
+
+static const u16 sChampionRoomLightingPalettes[][16] = {
+    INCGFX_U16("graphics/field_specials/champion_room_lighting_0.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/champion_room_lighting_1.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/champion_room_lighting_2.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/champion_room_lighting_3.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/champion_room_lighting_4.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/champion_room_lighting_5.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/champion_room_lighting_6.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/champion_room_lighting_7.pal", ".gbapal"),
+    INCGFX_U16("graphics/field_specials/champion_room_lighting_8.pal", ".gbapal")
+};
+
+static const u8 sEliteFourLightingTimers[] = {
+    40,
+    12,
+    12,
+    12,
+    12,
+    12,
+    12,
+    12,
+    12,
+    12,
+    12
+};
+
+static const u8 sChampionRoomLightingTimers[] = {
+    20,
+     8,
+     8,
+     8,
+     8,
+     8,
+     8,
+     8
+};
+
+void DoPokemonLeagueLightingEffect(void)
+{
+    u8 taskId = CreateTask(Task_RunPokemonLeagueLightingEffect, 8);
+    s16 *data = gTasks[taskId].data;
+    if (FlagGet(FLAG_TEMP_3) == TRUE)
+    {
+        gTasks[taskId].func = Task_CancelPokemonLeagueLightingEffect;
+    }
+    else
+    {
+        if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_POKEMON_LEAGUE_CHAMPIONS_ROOM) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_POKEMON_LEAGUE_CHAMPIONS_ROOM))
+        {
+            data[0] = sChampionRoomLightingTimers[0];
+            data[2] = 8;
+            LoadPalette(sChampionRoomLightingPalettes[0], BG_PLTT_ID(7), PLTT_SIZE_4BPP);
+        }
+        else
+        {
+            data[0] = sEliteFourLightingTimers[0];
+            data[2] = 11;
+            LoadPalette(sEliteFourLightingPalettes[0], BG_PLTT_ID(7), PLTT_SIZE_4BPP);
+        }
+        data[1] = 0;
+        // ApplyGlobalTintToPaletteSlot(7, 1);
+    }
+}
+
+static void Task_RunPokemonLeagueLightingEffect(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    if (!gPaletteFade.active
+     && FlagGet(FLAG_TEMP_2) != FALSE
+     && FlagGet(FLAG_TEMP_5) != TRUE
+     && --data[0] == 0
+    )
+    {
+        if (++data[1] == data[2])
+            data[1] = 0;
+
+        if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_POKEMON_LEAGUE_CHAMPIONS_ROOM) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_POKEMON_LEAGUE_CHAMPIONS_ROOM))
+        {
+            data[0] = sChampionRoomLightingTimers[data[1]];
+            LoadPalette(sChampionRoomLightingPalettes[data[1]], BG_PLTT_ID(7), PLTT_SIZE_4BPP);
+        }
+        else
+        {
+            data[0] = sEliteFourLightingTimers[data[1]];
+            LoadPalette(sEliteFourLightingPalettes[data[1]], BG_PLTT_ID(7), PLTT_SIZE_4BPP);
+        }
+        // ApplyGlobalTintToPaletteSlot(7, 1);
+    }
+}
+
+static void Task_CancelPokemonLeagueLightingEffect(u8 taskId)
+{
+    if (FlagGet(FLAG_TEMP_4) != FALSE)
+    {
+        if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_POKEMON_LEAGUE_CHAMPIONS_ROOM) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_POKEMON_LEAGUE_CHAMPIONS_ROOM))
+            LoadPalette(sChampionRoomLightingPalettes[8], BG_PLTT_ID(7), PLTT_SIZE_4BPP);
+        else
+            LoadPalette(sEliteFourLightingPalettes[11], BG_PLTT_ID(7), PLTT_SIZE_4BPP);
+        // ApplyGlobalTintToPaletteSlot(7, 1);
+        if (gPaletteFade.active)
+        {
+            BlendPalettes(0x00000080, 16, RGB_BLACK);
+        }
+        DestroyTask(taskId);
+    }
+}
+
+/*
+ * Determines which of Lorelei's doll collection to show
+ * based on how many times you've entered the Hall of Fame.
+ */
+void UpdateLoreleiDollCollection(void)
+{
+    u32 numHofClears = GetGameStat(GAME_STAT_ENTERED_HOF);
+    if (numHofClears >= 25)
+    {
+        FlagClear(FLAG_HIDE_LORELEI_HOUSE_MEOWTH_DOLL);
+        if (numHofClears >= 50)
+            FlagClear(FLAG_HIDE_LORELEI_HOUSE_CHANSEY_DOLL);
+        if (numHofClears >= 75)
+            FlagClear(FLAG_HIDE_LORELEIS_HOUSE_NIDORAN_F_DOLL);
+        if (numHofClears >= 100)
+            FlagClear(FLAG_HIDE_LORELEI_HOUSE_JIGGLYPUFF_DOLL);
+        if (numHofClears >= 125)
+            FlagClear(FLAG_HIDE_LORELEIS_HOUSE_NIDORAN_M_DOLL);
+        if (numHofClears >= 150)
+            FlagClear(FLAG_HIDE_LORELEIS_HOUSE_FEAROW_DOLL);
+        if (numHofClears >= 175)
+            FlagClear(FLAG_HIDE_LORELEIS_HOUSE_PIDGEOT_DOLL);
+        if (numHofClears >= 200)
+            FlagClear(FLAG_HIDE_LORELEIS_HOUSE_LAPRAS_DOLL);
+    }
+}
+
+void SampleResortGorgeousMonAndReward(void)
+{
+    enum Species requestedSpecies = VarGet(VAR_RESORT_GORGEOUS_REQUESTED_MON);
+    if (requestedSpecies == SPECIES_NONE || requestedSpecies == 0xFFFF)
+    {
+        VarSet(VAR_RESORT_GORGEOUS_REQUESTED_MON, SampleResortGorgeousMon());
+        VarSet(VAR_RESORT_GORGEOUS_REWARD, SampleResortGorgeousReward());
+        VarSet(VAR_RESORT_GOREGEOUS_STEP_COUNTER, 0);
+    }
+    StringCopy(gStringVar1, gSpeciesInfo[VarGet(VAR_RESORT_GORGEOUS_REQUESTED_MON)].speciesName);
+}
+
+static enum Species SampleResortGorgeousMon(void)
+{
+    u16 i;
+    enum Species species;
+    for (i = 0; i < 100; i++)
+    {
+        species = (Random() % (NUM_SPECIES - 1)) + 1;
+        if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), 0) == TRUE)
+            return species;
+    }
+    while (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), 0) != TRUE)
+    {
+        if (species == SPECIES_BULBASAUR)
+            species = NUM_SPECIES - 1;
+        else
+            species--;
+    }
+    return species;
+}
+
+static const u16 sResortGorgeousDeluxeRewards[] = {
+    ITEM_BIG_PEARL,
+    ITEM_PEARL,
+    ITEM_STARDUST,
+    ITEM_STAR_PIECE,
+    ITEM_NUGGET,
+    ITEM_RARE_CANDY
+};
+
+static u16 SampleResortGorgeousReward(void)
+{
+    if ((Random() % 100) >= 30)
+        return ITEM_LUXURY_BALL;
+    else
+        return sResortGorgeousDeluxeRewards[Random() % NELEMS(sResortGorgeousDeluxeRewards)];
+}
+
+bool8 PlayerPartyContainsSpeciesWithPlayerID(void)
+{
+    // 8004 = species
+    u8 playerCount = CalculatePlayerPartyCount();
+    u8 i;
+    for (i = 0; i < playerCount; i++)
+    {
+        if (GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES_OR_EGG, NULL) == gSpecialVar_0x8004
+            && GetPlayerIDAsU32() == GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_OT_ID, NULL))
+            return TRUE;
+    }
+    return FALSE;
+}
+
+#define tXtrans   data[0]
+#define tTimer    data[1]
+#define tNremain  data[2]
+#define tDuration data[3]
+#define tYtrans   data[4]
+
+void ShakeScreen(void)
+{
+    /*
+     * 0x8004 = x translation
+     * 0x8005 = y translation
+     * 0x8006 = num interations
+     * 0x8007 = duration of an iteration
+     */
+    u8 taskId = CreateTask(Task_ShakeScreen, 9);
+    gTasks[taskId].tXtrans = gSpecialVar_0x8005;
+    gTasks[taskId].tTimer = 0;
+    gTasks[taskId].tNremain = gSpecialVar_0x8006;
+    gTasks[taskId].tDuration = gSpecialVar_0x8007;
+    gTasks[taskId].tYtrans = gSpecialVar_0x8004;
+    SetCameraPanningCallback(NULL);
+    PlaySE(SE_M_STRENGTH);
+}
+
+static void Task_ShakeScreen(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    tTimer++;
+    if (tTimer % tDuration == 0)
+    {
+        tTimer = 0;
+        tNremain--;
+        tXtrans = -tXtrans;
+        tYtrans = -tYtrans;
+        SetCameraPanning(tXtrans, tYtrans);
+        if (tNremain == 0)
+        {
+            Task_EndScreenShake(taskId);
+            InstallCameraPanAheadCallback();
+        }
+    }
+}
+
+static void Task_EndScreenShake(u8 taskId)
+{
+    DestroyTask(taskId);
+    ScriptContext_Enable();
+}
+
+#undef tYtrans
+#undef tDuration
+#undef tNremain
+#undef tTimer
+#undef tXtrans
+
+bool8 CutMoveRuinValleyCheck(void)
+{
+    if (FlagGet(FLAG_USED_CUT_ON_RUIN_VALLEY_BRAILLE) != TRUE
+     && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_SIX_ISLAND_RUIN_VALLEY)
+     && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_SIX_ISLAND_RUIN_VALLEY)
+     && gSaveBlock1Ptr->pos.x == 24
+     && gSaveBlock1Ptr->pos.y == 25
+     && GetPlayerFacingDirection() == DIR_NORTH
+    )
+        return TRUE;
+    else
+        return FALSE;
+}
+
+void CutMoveOpenDottedHoleDoor(void)
+{
+    MapGridSetMetatileIdAt(31, 31, METATILE_SeviiIslands67_DottedHoleDoor_Open);
+    DrawWholeMapView();
+    PlaySE(SE_BANG);
+    FlagSet(FLAG_USED_CUT_ON_RUIN_VALLEY_BRAILLE);
+    UnlockPlayerFieldControls();
+}
+
+void ForcePlayerToStartSurfing(void)
+{
+    SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_SURFING);
+}
+
+void UpdateTrainerCardPhotoIcons(void)
+{
+    enum Species species[PARTY_SIZE];
+    u32 personality[PARTY_SIZE];
+    u8 i;
+    u8 partyCount;
+    for (i = 0; i < PARTY_SIZE; i++)
+        species[i] = SPECIES_NONE;
+    partyCount = CalculatePlayerPartyCount();
+    for (i = 0; i < partyCount; i++)
+    {
+        species[i] = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES_OR_EGG, NULL);
+        personality[i] = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_PERSONALITY, NULL);
+    }
+    VarSet(VAR_TRAINER_CARD_MON_ICON_1, SpeciesToMailSpecies(species[0], personality[0]));
+    VarSet(VAR_TRAINER_CARD_MON_ICON_2, SpeciesToMailSpecies(species[1], personality[1]));
+    VarSet(VAR_TRAINER_CARD_MON_ICON_3, SpeciesToMailSpecies(species[2], personality[2]));
+    VarSet(VAR_TRAINER_CARD_MON_ICON_4, SpeciesToMailSpecies(species[3], personality[3]));
+    VarSet(VAR_TRAINER_CARD_MON_ICON_5, SpeciesToMailSpecies(species[4], personality[4]));
+    VarSet(VAR_TRAINER_CARD_MON_ICON_6, SpeciesToMailSpecies(species[5], personality[5]));
+    VarSet(VAR_TRAINER_CARD_MON_ICON_TINT_IDX, gSpecialVar_0x8004);
+}
+
+u16 StickerManGetBragFlags(void)
+{
+    u16 result = 0;
+    u32 numEggs;
+    gSpecialVar_0x8004 = GetGameStat(GAME_STAT_ENTERED_HOF);
+    numEggs = GetGameStat(GAME_STAT_HATCHED_EGGS);
+    gSpecialVar_0x8006 = GetGameStat(GAME_STAT_LINK_BATTLE_WINS);
+    if (numEggs > 0xFFFF)
+        gSpecialVar_0x8005 = 0xFFFF;
+    else
+        gSpecialVar_0x8005 = numEggs;
+    if (gSpecialVar_0x8004 != 0)
+        result |= 1 << 0;
+    if (gSpecialVar_0x8005 != 0)
+        result |= 1 << 1;
+    if (gSpecialVar_0x8006 != 0)
+        result |= 1 << 2;
+    return result;
+}
+
+bool8 CheckAddCoins(void)
+{
+    if (gSpecialVar_Result + gSpecialVar_0x8006 > 9999)
+        return FALSE;
+    else
+        return TRUE;
+}

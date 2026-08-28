@@ -3,6 +3,7 @@
   "name": "MagmaHideout_1F",
   "layout": "LAYOUT_MAGMA_HIDEOUT_1F",
   "music": "MUS_AQUA_MAGMA_HIDEOUT",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_MAGMA_HIDEOUT",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -36,8 +37,8 @@
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "MagmaHideout_1F_EventScript_ItemRareCandy",
+      "trainer_sight_or_berry_tree_id": "ITEM_RARE_CANDY",
+      "script": "Common_EventScript_FindItem",
       "flag": "FLAG_ITEM_MAGMA_HIDEOUT_1F_RARE_CANDY"
     },
     {
@@ -99,28 +100,28 @@
       "y": 34,
       "elevation": 3,
       "dest_map": "MAP_JAGGED_PASS",
-      "dest_warp_id": 4
+      "dest_warp_id": "4"
     },
     {
       "x": 25,
       "y": 34,
       "elevation": 3,
       "dest_map": "MAP_MAGMA_HIDEOUT_2F_1R",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 31,
       "y": 3,
       "elevation": 0,
       "dest_map": "MAP_MAGMA_HIDEOUT_2F_2R",
-      "dest_warp_id": 1
+      "dest_warp_id": "1"
     },
     {
       "x": 20,
       "y": 22,
       "elevation": 0,
       "dest_map": "MAP_MAGMA_HIDEOUT_2F_3R",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],

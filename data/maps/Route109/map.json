@@ -3,6 +3,7 @@
   "name": "Route109",
   "layout": "LAYOUT_ROUTE109",
   "music": "MUS_ROUTE104",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_ROUTE_109",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
@@ -14,18 +15,19 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "direction": "up",
+      "map": "MAP_SLATEPORT_CITY",
       "offset": 0,
-      "map": "MAP_SLATEPORT_CITY"
+      "direction": "up"
     },
     {
-      "direction": "left",
+      "map": "MAP_ROUTE108",
       "offset": 40,
-      "map": "MAP_ROUTE108"
+      "direction": "left"
     }
   ],
   "object_events": [
     {
+      "local_id": "LOCALID_ROUTE109_BOAT",
       "graphics_id": "OBJ_EVENT_GFX_MR_BRINEYS_BOAT",
       "x": 21,
       "y": 26,
@@ -39,6 +41,7 @@
       "flag": "FLAG_HIDE_ROUTE_109_MR_BRINEY_BOAT"
     },
     {
+      "local_id": "LOCALID_ROUTE109_BRINEY",
       "graphics_id": "OBJ_EVENT_GFX_EXPERT_M",
       "x": 21,
       "y": 24,
@@ -151,8 +154,8 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route109_EventScript_ItemPPUp",
+      "trainer_sight_or_berry_tree_id": "ITEM_PP_UP",
+      "script": "Common_EventScript_FindItem",
       "flag": "FLAG_ITEM_ROUTE_109_PP_UP"
     },
     {
@@ -320,9 +323,9 @@
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route109_EventScript_ItemZoomLens",
-      "flag": "FLAG_ITEM_ROUTE_109_ZOOM_LENS"
+      "trainer_sight_or_berry_tree_id": "ITEM_POTION",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ITEM_ROUTE_109_POTION"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_MAN_5",
@@ -336,45 +339,6 @@
       "trainer_sight_or_berry_tree_id": "3",
       "script": "Route109_EventScript_Elijah",
       "flag": "0"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
-      "x": 13,
-      "y": 19,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_NONE",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "0",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route_109_EventScript_SandMound",
-      "flag": "FLAG_TEMP_12"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
-      "x": 24,
-      "y": 22,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_NONE",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "0",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route_109_EventScript_SandMound1",
-      "flag": "FLAG_TEMP_11"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
-      "x": 31,
-      "y": 14,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_NONE",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "0",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route_109_EventScript_SandMound2",
-      "flag": "FLAG_TEMP_13"
     }
   ],
   "warp_events": [
@@ -383,12 +347,10 @@
       "y": 5,
       "elevation": 0,
       "dest_map": "MAP_ROUTE109_SEASHORE_HOUSE",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
-  "coord_events": [
-
-  ],
+  "coord_events": [],
   "bg_events": [
     {
       "type": "sign",
@@ -419,8 +381,8 @@
       "x": 33,
       "y": 5,
       "elevation": 3,
-      "item": "ITEM_BOTTLE_CAP",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_109_BOTTLE_CAP_1"
+      "item": "ITEM_HEART_SCALE",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_109_HEART_SCALE_1"
     },
     {
       "type": "hidden_item",
@@ -443,32 +405,16 @@
       "x": 13,
       "y": 16,
       "elevation": 3,
-      "item": "ITEM_BOTTLE_CAP",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_109_BOTTLE_CAP_2"
+      "item": "ITEM_HEART_SCALE",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_109_HEART_SCALE_2"
     },
     {
       "type": "hidden_item",
       "x": 8,
       "y": 42,
       "elevation": 3,
-      "item": "ITEM_BOTTLE_CAP",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_109_BOTTLE_CAP_3"
-    },
-    {
-      "type": "hidden_item",
-      "x": 31,
-      "y": 11,
-      "elevation": 3,
-      "item": "ITEM_BOTTLE_CAP",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_109_BOTTLE_CAP_4"
-    },
-    {
-      "type": "hidden_item",
-      "x": 21,
-      "y": 14,
-      "elevation": 4,
-      "item": "ITEM_BOTTLE_CAP",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_109_BOTTLE_CAP_5"
+      "item": "ITEM_HEART_SCALE",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_109_HEART_SCALE_3"
     }
   ]
 }

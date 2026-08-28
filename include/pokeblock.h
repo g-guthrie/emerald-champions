@@ -1,9 +1,6 @@
 #ifndef GUARD_POKEBLOCK_H
 #define GUARD_POKEBLOCK_H
 
-#include "constants/berry.h"
-#include "constants/pokemon.h"
-
 #define TAG_POKEBLOCK       14818
 
 enum
@@ -57,7 +54,7 @@ void PreparePokeblockFeedScene(void);
 extern const s8 gPokeblockFlavorCompatibilityTable[NUM_NATURES * FLAVOR_COUNT];
 extern const u8 *const gPokeblockNames[];
 extern const struct CompressedSpriteSheet gPokeblockCase_SpriteSheet;
-extern const struct CompressedSpritePalette gPokeblockCase_SpritePal;
+extern const struct SpritePalette gPokeblockCase_SpritePal;
 
 void OpenPokeblockCase(u8 caseId, void (*callback)(void));
 void OpenPokeblockCaseInBattle(void);

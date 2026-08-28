@@ -3,6 +3,7 @@
   "name": "Route132",
   "layout": "LAYOUT_ROUTE132",
   "music": "MUS_ROUTE119",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_ROUTE_132",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
@@ -14,14 +15,14 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "direction": "left",
+      "map": "MAP_ROUTE133",
       "offset": 0,
-      "map": "MAP_ROUTE133"
+      "direction": "left"
     },
     {
-      "direction": "right",
+      "map": "MAP_PACIFIDLOG_TOWN",
       "offset": 0,
-      "map": "MAP_PACIFIDLOG_TOWN"
+      "direction": "right"
     }
   ],
   "object_events": [
@@ -60,8 +61,8 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route132_EventScript_ItemRareCandy",
+      "trainer_sight_or_berry_tree_id": "ITEM_RARE_CANDY",
+      "script": "Common_EventScript_FindItem",
       "flag": "FLAG_ITEM_ROUTE_132_RARE_CANDY"
     },
     {
@@ -151,8 +152,8 @@
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route132_EventScript_ItemProtein",
+      "trainer_sight_or_berry_tree_id": "ITEM_PROTEIN",
+      "script": "Common_EventScript_FindItem",
       "flag": "FLAG_ITEM_ROUTE_132_PROTEIN"
     }
   ],

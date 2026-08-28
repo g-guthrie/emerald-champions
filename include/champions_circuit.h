@@ -3,7 +3,7 @@
 
 #include "global.h"
 
-bool8 IsChampionsCircuitBattle(void);
+bool32 IsChampionsCircuitBattle(void);
 void ChampionsCircuitCanEnter(void);
 void ChampionsCircuitBegin(void);
 void ChampionsCircuitGenerateOpponent(void);

@@ -33,24 +33,25 @@ static void Task_LinkContest_CalculateTurnOrderEm(u8);
 void Task_LinkContest_StartCommunicationEm(u8 taskId)
 {
     int gameCleared;
+    enum ContestCategories category = gTasks[taskId].tCategory;
 
-    switch (gTasks[taskId].tCategory)
+    switch (category)
     {
     case CONTEST_CATEGORY_COOL:
-        gHighestRibbonRank = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_COOL_RIBBON);
+        gHighestRibbonRank = GetMonData(&gParties[B_TRAINER_PLAYER][gContestMonPartyIndex], MON_DATA_COOL_RIBBON);
         break;
     case CONTEST_CATEGORY_BEAUTY:
-        gHighestRibbonRank = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_BEAUTY_RIBBON);
+        gHighestRibbonRank = GetMonData(&gParties[B_TRAINER_PLAYER][gContestMonPartyIndex], MON_DATA_BEAUTY_RIBBON);
         break;
     case CONTEST_CATEGORY_CUTE:
-        gHighestRibbonRank = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_CUTE_RIBBON);
+        gHighestRibbonRank = GetMonData(&gParties[B_TRAINER_PLAYER][gContestMonPartyIndex], MON_DATA_CUTE_RIBBON);
         break;
     case CONTEST_CATEGORY_SMART:
-        gHighestRibbonRank = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_SMART_RIBBON);
+        gHighestRibbonRank = GetMonData(&gParties[B_TRAINER_PLAYER][gContestMonPartyIndex], MON_DATA_SMART_RIBBON);
         break;
     case CONTEST_CATEGORY_TOUGH:
     default:
-        gHighestRibbonRank = GetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_TOUGH_RIBBON);
+        gHighestRibbonRank = GetMonData(&gParties[B_TRAINER_PLAYER][gContestMonPartyIndex], MON_DATA_TOUGH_RIBBON);
         break;
     }
 
@@ -88,7 +89,7 @@ static void Task_LinkContest_SetUpContestEm(u8 taskId)
 
     for (i = 0; i < gNumLinkContestPlayers; i++)
         categories[i] = gTasks[taskId].data[i + 1];
-    
+
     // Ensure all players are doing the same category
     for (i = 0; i < gNumLinkContestPlayers && categories[0] == categories[i]; i++)
         ;
@@ -100,7 +101,7 @@ static void Task_LinkContest_SetUpContestEm(u8 taskId)
 
     for (i = 0; i < gNumLinkContestPlayers; i++)
         leaderIds[i] = gTasks[taskId].data[i + 5];
-    
+
     // If < 4 players and player is leader, set AI contestants based on rank and game clear
     if (gNumLinkContestPlayers != CONTESTANT_COUNT && GetMultiplayerId() == 0)
     {
@@ -113,7 +114,7 @@ static void Task_LinkContest_SetUpContestEm(u8 taskId)
 
         if (rank)
             rank--;
-        
+
         gameCleared = TRUE;
         for (i = 0; i < gNumLinkContestPlayers; i++)
         {
@@ -202,7 +203,7 @@ static void Task_LinkContest_CommunicateRngEm(u8 taskId)
             // Only the leader sends the RNG seed
             if (!IsLinkTaskFinished())
                 return;
-            
+
             if (LinkContest_SendBlock(&gRngValue, sizeof(gRngValue)) == 1)
                 gTasks[taskId].data[0]++;
         }
@@ -321,7 +322,7 @@ static void Task_LinkContest_CommunicateAIMonsEm(u8 taskId)
         {
             if (!IsLinkTaskFinished())
                 return;
-            
+
             if (LinkContest_SendBlock(&gContestMons[gNumLinkContestPlayers], (CONTESTANT_COUNT - gNumLinkContestPlayers) * sizeof(struct ContestPokemon)) == 1)
                 gTasks[taskId].data[0]++;
         }

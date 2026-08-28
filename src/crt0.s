@@ -1,131 +1,33 @@
-#include "constants/global.h"
-#include "constants/flags.h"
-#include "constants/species.h"
-#include "constants/vars.h"
 	.include "constants/gba_constants.inc"
 
 	.syntax unified
 
-	.global Start
-
-	.text
-
 	.arm
 
-Start: @ 8000000
-	b Init
-
-	.include "asm/rom_header.inc"
-
-@ 80000C0
-	.word 0
-
-	.global GPIOPortData
-GPIOPortData: @ 80000C4
-	.2byte 0
-
-	.global GPIOPortDirection
-GPIOPortDirection: @ 80000C6
-	.2byte 0
-
-	.global GPIOPortReadEnable
-GPIOPortReadEnable: @ 80000C8
-	.2byte 0
-
-@ 80000CA
-	.2byte 0
-
-@ 80000CC
-	.space 0x34
-
-	.4byte GAME_VERSION
-	.4byte GAME_LANGUAGE
-
-	.ascii "pokemon emerald version"
-	.space 9
-
-	.4byte gMonFrontPicTable
-	.4byte gMonBackPicTable
-	.4byte gMonPaletteTable
-	.4byte gMonShinyPaletteTable
-	.4byte gMonIconTable
-	.4byte gMonIconPaletteIndices
-	.4byte gMonIconPaletteTable
-	.4byte gSpeciesNames
-	.4byte gMoveNames
-	.4byte gDecorations
-
-	.4byte 0x000018f8 @ offsetof(struct SaveBlock1, flags)
-	.4byte 0x00001a24 @ offsetof(struct SaveBlock1, vars)
-	.4byte 0x00000018 @ offsetof(struct SaveBlock2, pokedex)
-	.4byte 0x00003004 @ offsetof(struct SaveBlock1, dexSeen)
-	.4byte 0x00003004 @ dexSeen is the canonical seen bitfield
-	.4byte VAR_NATIONAL_DEX - VARS_START
-	.4byte FLAG_RECEIVED_POKEDEX_FROM_BIRCH
-	.4byte FLAG_SYS_MYSTERY_EVENT_ENABLE
-	.4byte VERDANT_LEGACY_NATIONAL_DEX_COUNT @ contiguous dexSeen bit count
-
-	.byte 0x07, 0x0a, 0x0a, 0x0a, 0x0c, 0x0c, 0x06, 0x0c
-	.byte 0x06, 0x10, 0x12, 0x0c, 0x0f, 0x0b, 0x01, 0x08
-
-	.4byte 0x0000000c @ ?
-	.4byte 0x00000f2c @ sizeof(struct SaveBlock2)
-	.4byte 0x0000380c @ sizeof(struct SaveBlock1)
-	.4byte 0x00000234 @ offsetof(struct SaveBlock1, playerPartyCount)
-	.4byte 0x00000238 @ offsetof(struct SaveBlock1, playerParty)
-	.4byte 0x00000009 @ offsetof(struct SaveBlock2, specialSaveWarpFlags)
-	.4byte 0x0000000a @ offsetof(struct SaveBlock2, playerTrainerId)
-	.4byte 0x00000000 @ offsetof(struct SaveBlock2, playerName)
-	.4byte 0x00000008 @ offsetof(struct SaveBlock2, playerGender)
-	.4byte 0x00000ca8 @ offsetof(struct SaveBlock2, frontier.challengeStatus)
-	.4byte 0x00000ca8 @ offsetof(struct SaveBlock2, frontier.challengeStatus)
-	.4byte 0x00002c33 @ offsetof(struct SaveBlock1, externalEventFlags)
-	.4byte 0x00002c1f @ offsetof(struct SaveBlock1, externalEventData)
-	.4byte 0x00000000
-
-	.4byte gBaseStats
-	.4byte gAbilityNames
-	.4byte gAbilityDescriptionPointers
-	.4byte gItems
-	.4byte gBattleMoves
-	.4byte gBallSpriteSheets
-	.4byte gBallSpritePalettes
-
-	.4byte 0x000000a8 @ offsetof(struct SaveBlock2, gcnLinkFlags)
-	.4byte FLAG_SYS_GAME_CLEAR
-	.4byte FLAG_SYS_RIBBON_GET
-
-	.byte BAG_ITEMS_COUNT, BAG_KEYITEMS_COUNT, BAG_POKEBALLS_COUNT, BAG_TMHM_COUNT
-	.byte BAG_BERRIES_COUNT, PC_ITEMS_COUNT
-	.2byte 0
-
-	.4byte 0x00000498 @ offsetof(struct SaveBlock1, pcItems)
-	.4byte 0x00002c14 @ offsetof(struct SaveBlock1, giftRibbons)
-	.4byte 0x00002c64 @ offsetof(struct SaveBlock1, enigmaBerry)
-	.4byte 0x00000034 @ sizeof(struct EnigmaBerry)
-	.4byte 0x00000000
-	.4byte 0x00000000
-
-	.arm
 	.align 2, 0
-	.global Init
-Init: @ 8000204
+Init::
+@ Set up location for IRQ stack
 	mov r0, #PSR_IRQ_MODE
 	msr cpsr_cf, r0
 	ldr sp, sp_irq
+@ Set up location for system stack
 	mov r0, #PSR_SYS_MODE
 	msr cpsr_cf, r0
 	ldr sp, sp_sys
-	ldr r1, =INTR_VECTOR
-	adr r0, IntrMain
-	str r0, [r1]
-	.if MODERN
+@ Dispatch memory reset request to hardware
 	mov r0, #255 @ RESET_ALL
 	svc #1 << 16
-	.endif @ MODERN
+@ Fill RAM areas with appropriate data
+	bl InitializeWorkingMemory
+@ Prepare for interrupt handling
+	ldr r1, =INTR_VECTOR
+	ldr r0, =IntrMain
+	str r0, [r1]
+@ Jump to AgbMain
 	ldr r1, =AgbMain + 1
 	mov lr, pc
 	bx r1
+@ Re-init if AgbMain exits
 	b Init
 
 	.align 2, 0
@@ -135,9 +37,9 @@ sp_irq: .word IWRAM_END - 0x60
 	.pool
 
 	.arm
+	.section .iwram.code, "ax", %progbits
 	.align 2, 0
-	.global IntrMain
-IntrMain: @ 8000248
+IntrMain::
 	mov r3, #REG_BASE
 	add r3, r3, #OFFSET_REG_IE
 	ldr r2, [r3]
@@ -224,6 +126,59 @@ IntrMain_RetAddr:
 	strh r2, [r3, #OFFSET_REG_IE - 0x200]
 	strh r1, [r3, #OFFSET_REG_IME - 0x200]
 	msr spsr_cf, r0
+	bx lr
+
+	.pool
+
+	.text
+	.align 2, 0 @ Don't pad with nop.
+
+@ Fills initialized IWRAM and EWRAM sections in RAM from LMA areas in ROM
+InitializeWorkingMemory:
+	push {r0-r3,lr}
+	ldr r0, =__iwram_lma
+	ldr r1, =__iwram_start
+	ldr r2, =__iwram_end
+	cmp r1, r2
+	beq skip_iwram_copy
+	bl CopyMemory_DMA
+skip_iwram_copy:
+	ldr r0, =__ewram_lma
+	ldr r1, =__ewram_start
+	ldr r2, =__ewram_end
+	cmp r1, r2
+	beq skip_ewram_copy
+	bl CopyMemory_DMA
+skip_ewram_copy:
+	pop {r0-r3,lr}
+	bx lr
+
+@ Uses a DMA transfer to load from r0 into r1 until r2
+CopyMemory_DMA:
+	subs r2, r2, r1
+	lsr r2, r2, #2
+	mov r4, #0x80000000
+	orr r4, r4, #(1 << 26)
+	orr r2, r2, r4
+	ldr r3, =REG_DMA3
+	stmia r3, {r0, r1, r2}
+	bx lr
+
+.thumb
+@ Called from C code to reinitialize working memory after a link connection failure
+ReInitializeEWRAM::
+	ldr r0, =__ewram_lma
+	ldr r1, =__ewram_start
+	ldr r2, =__ewram_end
+	cmp r1, r2
+	beq EndReinitializeEWRAM
+	subs r2, r1
+	lsrs r2, #2
+	movs r3, #1
+	lsls r3, r3, #26
+	orrs r2, r2, r3
+	swi 0x0B
+EndReinitializeEWRAM:
 	bx lr
 
 	.pool

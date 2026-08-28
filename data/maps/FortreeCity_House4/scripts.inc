@@ -1,90 +1,88 @@
-.set LOCALID_WINGULL, 3
-
-FortreeCity_House4_MapScripts:: @ 8217C80
+FortreeCity_House4_MapScripts::
 	.byte 0
 
-FortreeCity_House4_EventScript_Woman:: @ 8217C81
+FortreeCity_House4_EventScript_Woman::
 	msgbox FortreeCity_House4_Text_BringsWorldCloserTogether, MSGBOX_NPC
 	end
 
-FortreeCity_House4_EventScript_Boy:: @ 8217C8A
+FortreeCity_House4_EventScript_Boy::
 	lockall
-	goto_if_set FLAG_RECEIVED_CHOICE_SCARF, FortreeCity_House4_EventScript_ReceivedMentalHerb
+	goto_if_set FLAG_RECEIVED_MENTAL_HERB, FortreeCity_House4_EventScript_ReceivedMentalHerb
 	goto_if_set FLAG_WINGULL_DELIVERED_MAIL, FortreeCity_House4_EventScript_WingullReturned
 	goto_if_set FLAG_WINGULL_SENT_ON_ERRAND, FortreeCity_House4_EventScript_WingullOnErrand
 	msgbox FortreeCity_House4_Text_GoBirdPokemon, MSGBOX_DEFAULT
 	closemessage
 	setflag FLAG_WINGULL_SENT_ON_ERRAND
 	clearflag FLAG_HIDE_MOSSDEEP_CITY_HOUSE_2_WINGULL
-	applymovement LOCALID_WINGULL, FortreeCity_House4_Movement_WingullExit
+	applymovement LOCALID_FORTREE_HOUSE_WINGULL, FortreeCity_House4_Movement_WingullExit
 	waitmovement 0
-	removeobject LOCALID_WINGULL
+	removeobject LOCALID_FORTREE_HOUSE_WINGULL
 	releaseall
 	end
 
-FortreeCity_House4_EventScript_WingullOnErrand:: @ 8217CC4
+FortreeCity_House4_EventScript_WingullOnErrand::
 	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox FortreeCity_House4_Text_AskedWingullToRunErrand, MSGBOX_DEFAULT
 	releaseall
 	end
 
-FortreeCity_House4_EventScript_WingullReturned:: @ 8217CD8
+FortreeCity_House4_EventScript_WingullReturned::
 	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox FortreeCity_House4_Text_WelcomeWingullTakeMentalHerb, MSGBOX_DEFAULT
 	giveitem ITEM_SACHET
-	compare VAR_RESULT, FALSE
-	goto_if_eq Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_CHOICE_SCARF
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_RECEIVED_MENTAL_HERB
 	releaseall
 	end
 
-FortreeCity_House4_EventScript_ReceivedMentalHerb:: @ 8217D06
+FortreeCity_House4_EventScript_ReceivedMentalHerb::
 	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox FortreeCity_House4_Text_FriendsFarAwayThanksToWingull, MSGBOX_DEFAULT
 	releaseall
 	end
 
-FortreeCity_House4_Movement_WingullExit: @ 8217D1A
+FortreeCity_House4_Movement_WingullExit:
 	walk_fast_down
 	walk_fast_down
 	walk_fast_right
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	delay_8
 	step_end
 
-FortreeCity_House4_EventScript_Wingull:: @ 8217D20
+FortreeCity_House4_EventScript_Wingull::
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_WINGULL, 0
+	playmoncry SPECIES_WINGULL, CRY_MODE_NORMAL
 	msgbox FortreeCity_House4_Text_Wingull, MSGBOX_DEFAULT
 	waitmoncry
 	release
 	end
 
-FortreeCity_House4_Text_BringsWorldCloserTogether: @ 8217D33
-	.string "By being together with Pokémon,\n"
+FortreeCity_House4_Text_BringsWorldCloserTogether:
+	.string "By being together with POKéMON,\n"
 	.string "people make more and more friends.\p"
 	.string "And that brings the world closer\n"
 	.string "together. I think it's wonderful!$"
 
-FortreeCity_House4_Text_GoBirdPokemon: @ 8217DB9
+FortreeCity_House4_Text_GoBirdPokemon:
 	.string "There!\n"
-	.string "Go, Bird Pokémon!$"
+	.string "Go, BIRD POKéMON!$"
 
-FortreeCity_House4_Text_AskedWingullToRunErrand: @ 8217DD2
-	.string "Heheh, I asked my Wingull to run\n"
+FortreeCity_House4_Text_AskedWingullToRunErrand:
+	.string "Heheh, I asked my WINGULL to run\n"
 	.string "an errand for me.$"
 FortreeCity_House4_Text_WelcomeWingullTakeMentalHerb:
 	.string "Welcome back, Wingull! And thank you.\p"
 	.string "Please take this Sachet as my thanks.$"
 
-FortreeCity_House4_Text_FriendsFarAwayThanksToWingull: @ 8217EA8
-	.string "Thanks to my Wingull, I have friends\n"
+FortreeCity_House4_Text_FriendsFarAwayThanksToWingull:
+	.string "Thanks to my WINGULL, I have friends\n"
 	.string "who live far away.$"
 
-FortreeCity_House4_Text_Wingull: @ 8217EE0
-	.string "Wingull: Pihyoh!$"
+FortreeCity_House4_Text_Wingull:
+	.string "WINGULL: Pihyoh!$"
+

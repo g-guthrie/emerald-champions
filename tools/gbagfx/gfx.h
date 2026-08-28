@@ -10,6 +10,7 @@ struct Color {
 	unsigned char red;
 	unsigned char green;
 	unsigned char blue;
+	bool alpha;
 };
 
 struct Palette {
@@ -44,8 +45,16 @@ struct Image {
 	bool isAffine;
 };
 
-void ReadImage(char *path, int tilesWidth, int bitDepth, int metatileWidth, int metatileHeight, struct Image *image, bool invertColors);
-void WriteImage(char *path, int numTiles, int bitDepth, int metatileWidth, int metatileHeight, struct Image *image, bool invertColors);
+enum NumTilesMode {
+    NUM_TILES_IGNORE,
+    NUM_TILES_WARN,
+    NUM_TILES_ERROR,
+};
+
+void ReadTileImage(char *path, int tilesWidth, int metatileWidth, int metatileHeight, struct Image *image, bool invertColors);
+void WriteTileImage(char *path, enum NumTilesMode numTilesMode, int numTiles, int metatileWidth, int metatileHeight, struct Image *image, bool invertColors);
+void ReadPlainImage(char *path, int dataWidth, struct Image *image, bool invertColors);
+void WritePlainImage(char *path, int dataWidth, struct Image *image, bool invertColors);
 void FreeImage(struct Image *image);
 void ReadGbaPalette(char *path, struct Palette *palette);
 void WriteGbaPalette(char *path, struct Palette *palette);

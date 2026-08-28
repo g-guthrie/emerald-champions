@@ -4,51 +4,11 @@
 #include "palette.h"
 #include "constants/rgb.h"
 
-const u32 gBitTable[] =
-{
-    1 << 0,
-    1 << 1,
-    1 << 2,
-    1 << 3,
-    1 << 4,
-    1 << 5,
-    1 << 6,
-    1 << 7,
-    1 << 8,
-    1 << 9,
-    1 << 10,
-    1 << 11,
-    1 << 12,
-    1 << 13,
-    1 << 14,
-    1 << 15,
-    1 << 16,
-    1 << 17,
-    1 << 18,
-    1 << 19,
-    1 << 20,
-    1 << 21,
-    1 << 22,
-    1 << 23,
-    1 << 24,
-    1 << 25,
-    1 << 26,
-    1 << 27,
-    1 << 28,
-    1 << 29,
-    1 << 30,
-    1 << 31,
-};
-
 static const struct SpriteTemplate sInvisibleSpriteTemplate =
 {
     .tileTag = 0,
     .paletteTag = 0,
     .oam = &gDummyOamData,
-    .anims = gDummySpriteAnimTable,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy,
 };
 
 static const u8 sSpriteDimensions[3][4][2] =
@@ -114,15 +74,11 @@ static const u16 sCrc16Table[] =
     0x7BC7, 0x6A4E, 0x58D5, 0x495C, 0x3DE3, 0x2C6A, 0x1EF1, 0x0F78,
 };
 
-const u8 gMiscBlank_Gfx[] = INCBIN_U8("graphics/interface/blank.4bpp");
+const u8 gMiscBlank_Gfx[] = INCGFX_U8("graphics/interface/blank.png", ".4bpp");
 
 u8 CreateInvisibleSpriteWithCallback(void (*callback)(struct Sprite *))
 {
-    u8 sprite = CreateSprite(&sInvisibleSpriteTemplate, 248, 168, 14);
-
-    if (sprite == MAX_SPRITES)
-        return MAX_SPRITES;
-
+    u8 sprite = CreateSprite(&sInvisibleSpriteTemplate, DISPLAY_WIDTH + 8, DISPLAY_HEIGHT + 8, 14);
     gSprites[sprite].invisible = TRUE;
     gSprites[sprite].callback = callback;
     return sprite;
@@ -162,7 +118,7 @@ void CopySpriteTiles(u8 shape, u8 size, u8 *tiles, u16 *tilemap, u8 *output)
 {
     u8 x, y;
     s8 i, j;
-    u8 xflip[32];
+    u8 ALIGNED(4) xflip[32];
     u8 h = sSpriteDimensions[shape][size][1];
     u8 w = sSpriteDimensions[shape][size][0];
 
@@ -209,20 +165,6 @@ void CopySpriteTiles(u8 shape, u8 size, u8 *tiles, u16 *tilemap, u8 *output)
     }
 }
 
-int CountTrailingZeroBits(u32 value)
-{
-    u8 i;
-
-    for (i = 0; i < 32; i++)
-    {
-        if ((value & 1) == 0)
-            value >>= 1;
-        else
-            return i;
-    }
-    return 0;
-}
-
 u16 CalcCRC16(const u8 *data, s32 length)
 {
     u16 i, j;
@@ -257,7 +199,7 @@ u16 CalcCRC16WithTable(const u8 *data, u32 length)
     return ~crc;
 }
 
-u32 CalcByteArraySum(const u8* data, u32 length)
+u32 CalcByteArraySum(const u8 *data, u32 length)
 {
     u32 sum, i;
     for (sum = 0, i = 0; i < length; i++)
@@ -265,23 +207,35 @@ u32 CalcByteArraySum(const u8* data, u32 length)
     return sum;
 }
 
-void BlendPalette(u16 palOffset, u16 numEntries, u8 coeff, u16 blendColor)
+void BlendPalette(u16 palOffset, u16 numEntries, u8 coeff, u32 blendColor)
 {
     u16 i;
-
-    if (palOffset >= PLTT_BUFFER_SIZE || numEntries > PLTT_BUFFER_SIZE - palOffset)
+    struct PlttData *data2 = (struct PlttData *) & blendColor;
+    assertf(palOffset + numEntries <= PLTT_BUFFER_SIZE, "BlendPalette out of bounds: palOffset=%d numEntries=%d", palOffset, numEntries)
+    {
         return;
-
+    }
     for (i = 0; i < numEntries; i++)
     {
         u16 index = i + palOffset;
-        u16 color = gPlttBufferUnfaded[index];
-        s8 r = GET_R(color);
-        s8 g = GET_G(color);
-        s8 b = GET_B(color);
+        struct PlttData *data1 = (struct PlttData *)&gPlttBufferUnfaded[index];
+        s8 r = data1->r;
+        s8 g = data1->g;
+        s8 b = data1->b;
 
-        gPlttBufferFaded[index] = RGB(r + (((GET_R(blendColor) - r) * coeff) >> 4),
-                                      g + (((GET_G(blendColor) - g) * coeff) >> 4),
-                                      b + (((GET_B(blendColor) - b) * coeff) >> 4));
+        gPlttBufferFaded[index] = RGB(r + (((data2->r - r) * coeff) >> 4),
+                                      g + (((data2->g - g) * coeff) >> 4),
+                                      b + (((data2->b - b) * coeff) >> 4));
     }
+}
+
+s32 SubtractClamped(s32 lowestVal, s32 highestVal, s32 currentVal, s32 delta)
+{
+    s32 newValue = currentVal - delta;
+    if (newValue > highestVal)
+        newValue = highestVal;
+    else if (newValue < lowestVal)
+        newValue = lowestVal;
+
+    return newValue;
 }

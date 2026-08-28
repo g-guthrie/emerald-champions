@@ -21,8 +21,7 @@ static void Task_LinkContest_InitFlags(u8);
 
 bool32 LinkContest_SendBlock(void *src, u16 size)
 {
-    memcpy(gDecompressionBuffer, src, size);
-    if (SendBlock(bitmask_all_link_players_but_self(), gDecompressionBuffer, size))
+    if (SendBlock(BitmaskAllOtherLinkPlayers(), src, size))
         return TRUE;
     else
         return FALSE;
@@ -61,7 +60,7 @@ void Task_LinkContest_Init(u8 taskId)
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
         gBlockRecvBuffer[i][0] = 0xFF;
-    
+
     gTasks[taskId].tState = 0;
     gTasks[taskId].func = Task_LinkContest_StartInitFlags;
 }
@@ -99,7 +98,7 @@ bool32 LinkContest_TryLinkStandby(s16 *state)
     // Skip standby for RS cabled links
     if (gLinkContestFlags & LINK_CONTEST_FLAG_HAS_RS_PLAYER)
         return TRUE;
-    
+
     switch (*state)
     {
     case 0:
@@ -162,7 +161,7 @@ void Task_LinkContest_CommunicateMonsRS(u8 taskId)
         // Only if leader. Request other players data
         if (++gTasks[taskId].tTimer > 300)
         {
-            SendBlockRequest(2);
+            SendBlockRequest(BLOCK_REQ_SIZE_100);
             gTasks[taskId].tState = 1;
         }
         break;
@@ -238,7 +237,7 @@ void Task_LinkContest_CommunicateCategoryRS(u8 taskId)
     case 10:
         if (++gTasks[taskId].tTimer > 10)
         {
-            SendBlockRequest(2);
+            SendBlockRequest(BLOCK_REQ_SIZE_100);
             gTasks[taskId].tState = 1;
         }
         break;
@@ -491,7 +490,7 @@ void Task_LinkContest_CommunicateLeaderIdsRS(u8 taskId)
     case 10:
         if (++gTasks[taskId].tTimer > 10)
         {
-            SendBlockRequest(2);
+            SendBlockRequest(BLOCK_REQ_SIZE_100);
             gTasks[taskId].tState = 1;
         }
         break;

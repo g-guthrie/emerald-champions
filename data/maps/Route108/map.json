@@ -3,6 +3,7 @@
   "name": "Route108",
   "layout": "LAYOUT_ROUTE108",
   "music": "MUS_ROUTE104",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_ROUTE_108",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",
@@ -14,14 +15,14 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "direction": "left",
+      "map": "MAP_ROUTE107",
       "offset": 0,
-      "map": "MAP_ROUTE107"
+      "direction": "left"
     },
     {
-      "direction": "right",
+      "map": "MAP_ROUTE109",
       "offset": -40,
-      "map": "MAP_ROUTE109"
+      "direction": "right"
     }
   ],
   "object_events": [
@@ -112,8 +113,8 @@
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route108_EventScript_ItemStarPiece",
+      "trainer_sight_or_berry_tree_id": "ITEM_STAR_PIECE",
+      "script": "Common_EventScript_FindItem",
       "flag": "FLAG_ITEM_ROUTE_108_STAR_PIECE"
     }
   ],
@@ -123,7 +124,7 @@
       "y": 6,
       "elevation": 3,
       "dest_map": "MAP_ABANDONED_SHIP_DECK",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],
