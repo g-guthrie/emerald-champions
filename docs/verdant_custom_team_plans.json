@@ -657,32 +657,46 @@
     "TRAINER_ANGELINA": {
       "additions": [
         {
-          "level": 0,
-          "species": "SPECIES_DELPHOX",
-          "item": "ITEM_LIFE_ORB",
-          "ability_slot": 0,
+          "level": 1,
+          "species": "SPECIES_GLACEON",
+          "item": "ITEM_ICY_ROCK",
+          "ability_slot": 2,
           "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
           "moves": [
-            "MOVE_NASTY_PLOT",
-            "MOVE_PROTECT",
-            "MOVE_PSYCHIC",
-            "MOVE_FIRE_BLAST"
+            "MOVE_HAIL",
+            "MOVE_BLIZZARD",
+            "MOVE_FREEZE_DRY",
+            "MOVE_PROTECT"
           ],
-          "reference": "Verdant custom: Route 114 / Balanced disruption"
+          "reference": "showdown:gen9randomdoublesbattle:030"
         },
         {
-          "level": 0,
-          "species": "SPECIES_KROOKODILE",
-          "item": "ITEM_LEFTOVERS",
-          "ability_slot": 0,
+          "level": 3,
+          "species": "SPECIES_SANDSLASH_ALOLAN",
+          "item": "ITEM_WEAKNESS_POLICY",
+          "ability_slot": 2,
           "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
           "moves": [
-            "MOVE_STONE_EDGE",
-            "MOVE_EARTHQUAKE",
-            "MOVE_PROTECT",
-            "MOVE_SUPERPOWER"
+            "MOVE_ICICLE_CRASH",
+            "MOVE_IRON_HEAD",
+            "MOVE_DRILL_RUN",
+            "MOVE_PROTECT"
           ],
-          "reference": "Verdant custom: Route 114 / Balanced disruption"
+          "reference": "showdown:gen8randombattle:001"
+        },
+        {
+          "level": 4,
+          "species": "SPECIES_MAGNEZONE",
+          "item": "ITEM_AIR_BALLOON",
+          "ability_slot": 1,
+          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+          "moves": [
+            "MOVE_THUNDERBOLT",
+            "MOVE_FLASH_CANNON",
+            "MOVE_ELECTROWEB",
+            "MOVE_PROTECT"
+          ],
+          "reference": "showdown:gen9randomdoublesbattle:020"
         }
       ]
     },
@@ -995,50 +1009,106 @@
     "TRAINER_AUTUMN": {
       "additions": [
         {
-          "level": 0,
-          "species": "SPECIES_ORICORIO",
-          "item": "ITEM_SITRUS_BERRY",
-          "ability_slot": 0,
-          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+          "level": 1,
+          "species": "SPECIES_CHESNAUGHT",
+          "item": "ITEM_ROCKY_HELMET",
+          "ability_slot": 1,
+          "spread": "SPREAD_31_IV_HP_DEF_IMPISH",
           "moves": [
-            "MOVE_HURRICANE",
-            "MOVE_PROTECT",
-            "MOVE_TAILWIND",
-            "MOVE_REVELATION_DANCE"
+            "MOVE_SPIKY_SHIELD",
+            "MOVE_BODY_PRESS",
+            "MOVE_SEED_BOMB",
+            "MOVE_ROCK_SLIDE"
           ],
-          "reference": "Verdant custom: Jagged Pass / Balanced disruption"
+          "reference": "Battle 114: sure-footed Sturdy brace"
         },
         {
-          "level": 0,
-          "species": "SPECIES_ALCREMIE",
-          "item": "ITEM_SITRUS_BERRY",
-          "ability_slot": 2,
-          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+          "level": 2,
+          "species": "SPECIES_CONKELDURR",
+          "item": "ITEM_FLAME_ORB",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
           "moves": [
-            "MOVE_MYSTICAL_FIRE",
-            "MOVE_RECOVER",
-            "MOVE_PROTECT",
-            "MOVE_DAZZLING_GLEAM"
+            "MOVE_DRAIN_PUNCH",
+            "MOVE_MACH_PUNCH",
+            "MOVE_KNOCK_OFF",
+            "MOVE_ICE_PUNCH"
           ],
-          "reference": "Verdant custom: Jagged Pass / Balanced disruption"
+          "reference": "Battle 114: Flame Orb Guts drive"
+        },
+        {
+          "level": 3,
+          "species": "SPECIES_AVALUGG",
+          "item": "ITEM_WEAKNESS_POLICY",
+          "ability_slot": 2,
+          "spread": "SPREAD_31_IV_HP_DEF_IMPISH",
+          "moves": [
+            "MOVE_AVALANCHE",
+            "MOVE_BODY_PRESS",
+            "MOVE_HIGH_HORSEPOWER",
+            "MOVE_RECOVER"
+          ],
+          "reference": "Battle 114: Sturdy Weakness Policy anchor"
         }
       ]
     },
     "TRAINER_AXLE": {
       "additions": [
         {
-          "level": 0,
-          "species": "SPECIES_HEATMOR",
-          "item": "ITEM_LIFE_ORB",
-          "ability_slot": 0,
-          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+          "level": 1,
+          "species": "SPECIES_DRIFBLIM",
+          "item": "ITEM_WEAKNESS_POLICY",
+          "ability_slot": 1,
+          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
           "moves": [
+            "MOVE_ACROBATICS",
+            "MOVE_POLTERGEIST",
+            "MOVE_WILL_O_WISP",
+            "MOVE_DESTINY_BOND"
+          ],
+          "reference": "Battle 118: Policy Unburden release"
+        },
+        {
+          "level": 2,
+          "species": "SPECIES_MAGCARGO",
+          "item": "ITEM_WHITE_HERB",
+          "ability_slot": 1,
+          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+          "moves": [
+            "MOVE_SHELL_SMASH",
+            "MOVE_LAVA_PLUME",
+            "MOVE_POWER_GEM",
+            "MOVE_EARTH_POWER"
+          ],
+          "reference": "Battle 118: Simple White Herb vent"
+        },
+        {
+          "level": 3,
+          "species": "SPECIES_HEATMOR",
+          "item": "ITEM_EJECT_PACK",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+          "moves": [
+            "MOVE_OVERHEAT",
             "MOVE_FIRE_LASH",
             "MOVE_SUCKER_PUNCH",
-            "MOVE_PROTECT",
-            "MOVE_ROCK_TOMB"
+            "MOVE_GIGA_DRAIN"
           ],
-          "reference": "Verdant custom: Lavaridge Town Gym 1 F / Sun offense"
+          "reference": "Battle 118: Eject Pack Overheat pivot"
+        },
+        {
+          "level": 4,
+          "species": "SPECIES_HO_OH",
+          "item": "ITEM_HEAVY_DUTY_BOOTS",
+          "ability_slot": 2,
+          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+          "moves": [
+            "MOVE_SACRED_FIRE",
+            "MOVE_BRAVE_BIRD",
+            "MOVE_EARTHQUAKE",
+            "MOVE_ROOST"
+          ],
+          "reference": "Battle 118: Regenerator pressure reset"
         }
       ]
     },
@@ -1938,7 +2008,7 @@
         },
         {
           "level": 0,
-          "species": "SPECIES_ROTOM_MOW",
+          "species": "SPECIES_EELEKTROSS",
           "item": "ITEM_SITRUS_BERRY",
           "ability_slot": 0,
           "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
@@ -2120,45 +2190,45 @@
       "additions": [
         {
           "level": 1,
-          "species": "SPECIES_VOLCANION",
-          "item": "ITEM_ASSAULT_VEST",
+          "species": "SPECIES_LUNATONE",
+          "item": "ITEM_LIFE_ORB",
           "ability_slot": 0,
-          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
           "moves": [
-            "MOVE_STEAM_ERUPTION",
-            "MOVE_HEAT_WAVE",
-            "MOVE_EARTH_POWER",
-            "MOVE_SLUDGE_BOMB"
+            "MOVE_POWER_GEM",
+            "MOVE_PSYCHIC",
+            "MOVE_ICY_WIND",
+            "MOVE_PROTECT"
           ],
-          "reference": "Verdant explicit team design"
+          "reference": "Emerald Champions protected Meteor Falls impact anchor"
         },
         {
-          "level": 0,
-          "species": "SPECIES_DARMANITAN",
-          "item": "ITEM_LIFE_ORB",
+          "level": 2,
+          "species": "SPECIES_JIRACHI",
+          "item": "ITEM_CHOICE_SCARF",
           "ability_slot": 0,
           "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
           "moves": [
-            "MOVE_EARTHQUAKE",
+            "MOVE_IRON_HEAD",
+            "MOVE_ICY_WIND",
+            "MOVE_U_TURN",
+            "MOVE_TRICK"
+          ],
+          "reference": "showdown:gen5randomdoublesbattle:021"
+        },
+        {
+          "level": 4,
+          "species": "SPECIES_AERODACTYL",
+          "item": "ITEM_AERODACTYLITE",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+          "moves": [
             "MOVE_ROCK_SLIDE",
-            "MOVE_FLARE_BLITZ",
-            "MOVE_U_TURN"
+            "MOVE_DUAL_WINGBEAT",
+            "MOVE_ICE_FANG",
+            "MOVE_PROTECT"
           ],
-          "reference": "Verdant explicit team design"
-        },
-        {
-          "level": 0,
-          "species": "SPECIES_SHIFTRY",
-          "item": "ITEM_LIFE_ORB",
-          "ability_slot": 1,
-          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
-          "moves": [
-            "MOVE_NATURE_POWER",
-            "MOVE_SUCKER_PUNCH",
-            "MOVE_GIGA_DRAIN",
-            "MOVE_SEED_BOMB"
-          ],
-          "reference": "Verdant explicit team design"
+          "reference": "showdown:gen9championsrandomdoublesbattle:005"
         }
       ]
     },
@@ -2635,68 +2705,268 @@
     "TRAINER_DIANA_1": {
       "additions": [
         {
-          "level": 0,
-          "species": "SPECIES_HOUNDOOM",
+          "level": 1,
+          "species": "SPECIES_DELIBIRD",
           "item": "ITEM_FOCUS_SASH",
-          "ability_slot": 1,
+          "ability_slot": 0,
           "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
           "moves": [
-            "MOVE_PROTECT",
-            "MOVE_SUCKER_PUNCH",
-            "MOVE_DARK_PULSE",
-            "MOVE_HEAT_WAVE"
+            "MOVE_FAKE_OUT",
+            "MOVE_ICY_WIND",
+            "MOVE_FREEZE_DRY",
+            "MOVE_WATER_PULSE"
           ],
-          "reference": "Verdant custom: Jagged Pass / Balanced disruption"
+          "reference": "Battle 113: refrigerated picnic tempo"
+        },
+        {
+          "level": 2,
+          "species": "SPECIES_VESPIQUEN",
+          "item": "ITEM_ROCKY_HELMET",
+          "ability_slot": 1,
+          "spread": "SPREAD_31_IV_HP_DEF_IMPISH",
+          "moves": [
+            "MOVE_ATTACK_ORDER",
+            "MOVE_TAILWIND",
+            "MOVE_HEAL_ORDER",
+            "MOVE_DEFEND_ORDER"
+          ],
+          "reference": "Battle 113: Intimidate basket guard"
+        },
+        {
+          "level": 3,
+          "species": "SPECIES_GOURGEIST",
+          "item": "ITEM_FLAME_ORB",
+          "ability_slot": 1,
+          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+          "moves": [
+            "MOVE_SHADOW_BALL",
+            "MOVE_GIGA_DRAIN",
+            "MOVE_WILL_O_WISP",
+            "MOVE_LEECH_SEED"
+          ],
+          "reference": "Battle 113: Flare Boost picnic lantern"
+        },
+        {
+          "level": 4,
+          "species": "SPECIES_ROTOM_MOW",
+          "item": "ITEM_CHOICE_SPECS",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+          "moves": [
+            "MOVE_THUNDERBOLT",
+            "MOVE_FLAMETHROWER",
+            "MOVE_GIGA_DRAIN",
+            "MOVE_VOLT_SWITCH"
+          ],
+          "reference": "Battle 113: picnic power-cord pivot"
         }
       ]
     },
     "TRAINER_DIANA_2": {
       "additions": [
         {
-          "level": 0,
-          "species": "SPECIES_LYCANROC_MIDNIGHT",
-          "item": "ITEM_CHOICE_SCARF",
-          "ability_slot": 2,
-          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+          "level": 1,
+          "species": "SPECIES_DELIBIRD",
+          "item": "ITEM_FOCUS_SASH",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
           "moves": [
-            "MOVE_ROCK_SLIDE",
-            "MOVE_KNOCK_OFF",
-            "MOVE_STONE_EDGE",
-            "MOVE_CLOSE_COMBAT"
+            "MOVE_FAKE_OUT",
+            "MOVE_ICY_WIND",
+            "MOVE_FREEZE_DRY",
+            "MOVE_WATER_PULSE"
           ],
-          "reference": "Verdant custom: Jagged Pass / Balanced disruption"
+          "reference": "Battle 113: refrigerated picnic tempo"
+        },
+        {
+          "level": 2,
+          "species": "SPECIES_POLTEAGEIST",
+          "item": "ITEM_WHITE_HERB",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+          "moves": [
+            "MOVE_SHELL_SMASH",
+            "MOVE_STORED_POWER",
+            "MOVE_SHADOW_BALL",
+            "MOVE_GIGA_DRAIN"
+          ],
+          "reference": "Battle 113: Fake Out tea-service setup"
+        },
+        {
+          "level": 3,
+          "species": "SPECIES_VANILLUXE",
+          "item": "ITEM_WISE_GLASSES",
+          "ability_slot": 2,
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+          "moves": [
+            "MOVE_FREEZE_DRY",
+            "MOVE_FLASH_CANNON",
+            "MOVE_WATER_PULSE",
+            "MOVE_ICY_WIND"
+          ],
+          "reference": "Battle 113: weatherless dessert coverage"
+        },
+        {
+          "level": 4,
+          "species": "SPECIES_EELEKTROSS",
+          "item": "ITEM_CHOICE_SPECS",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+          "moves": [
+            "MOVE_THUNDERBOLT",
+            "MOVE_FLAMETHROWER",
+            "MOVE_GIGA_DRAIN",
+            "MOVE_VOLT_SWITCH"
+          ],
+          "reference": "Battle 113: picnic power-cord pivot"
+        }
+      ]
+    },
+    "TRAINER_DIANA_3": {
+      "additions": [
+        {
+          "level": 1,
+          "species": "SPECIES_VESPIQUEN",
+          "item": "ITEM_ROCKY_HELMET",
+          "ability_slot": 1,
+          "spread": "SPREAD_31_IV_HP_DEF_IMPISH",
+          "moves": [
+            "MOVE_ATTACK_ORDER",
+            "MOVE_TAILWIND",
+            "MOVE_HEAL_ORDER",
+            "MOVE_DEFEND_ORDER"
+          ],
+          "reference": "Battle 113: Intimidate basket guard"
+        },
+        {
+          "level": 2,
+          "species": "SPECIES_VANILLUXE",
+          "item": "ITEM_WISE_GLASSES",
+          "ability_slot": 2,
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+          "moves": [
+            "MOVE_FREEZE_DRY",
+            "MOVE_FLASH_CANNON",
+            "MOVE_WATER_PULSE",
+            "MOVE_ICY_WIND"
+          ],
+          "reference": "Battle 113: weatherless dessert coverage"
+        },
+        {
+          "level": 3,
+          "species": "SPECIES_GOURGEIST",
+          "item": "ITEM_FLAME_ORB",
+          "ability_slot": 1,
+          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+          "moves": [
+            "MOVE_SHADOW_BALL",
+            "MOVE_GIGA_DRAIN",
+            "MOVE_WILL_O_WISP",
+            "MOVE_LEECH_SEED"
+          ],
+          "reference": "Battle 113: Flare Boost picnic lantern"
+        },
+        {
+          "level": 4,
+          "species": "SPECIES_EELEKTROSS",
+          "item": "ITEM_CHOICE_SPECS",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+          "moves": [
+            "MOVE_THUNDERBOLT",
+            "MOVE_FLAMETHROWER",
+            "MOVE_GIGA_DRAIN",
+            "MOVE_VOLT_SWITCH"
+          ],
+          "reference": "Battle 113: picnic power-cord pivot"
         }
       ]
     },
     "TRAINER_DIANA_4": {
       "additions": [
         {
-          "level": 0,
-          "species": "SPECIES_MUK_ALOLAN",
-          "item": "ITEM_SITRUS_BERRY",
+          "level": 1,
+          "species": "SPECIES_DELIBIRD",
+          "item": "ITEM_FOCUS_SASH",
           "ability_slot": 0,
-          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
           "moves": [
-            "MOVE_PROTECT",
-            "MOVE_GUNK_SHOT",
-            "MOVE_SNARL",
-            "MOVE_STONE_EDGE"
+            "MOVE_FAKE_OUT",
+            "MOVE_ICY_WIND",
+            "MOVE_FREEZE_DRY",
+            "MOVE_WATER_PULSE"
           ],
-          "reference": "Verdant custom: Jagged Pass / Normal-rule breaker"
+          "reference": "Battle 113: refrigerated picnic tempo"
         },
         {
-          "level": 0,
-          "species": "SPECIES_CACTURNE",
-          "item": "ITEM_LEFTOVERS",
-          "ability_slot": 2,
-          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+          "level": 1,
+          "species": "SPECIES_POLTEAGEIST",
+          "item": "ITEM_WHITE_HERB",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
           "moves": [
-            "MOVE_SUBSTITUTE",
-            "MOVE_SUCKER_PUNCH",
-            "MOVE_DRAIN_PUNCH",
-            "MOVE_SEED_BOMB"
+            "MOVE_SHELL_SMASH",
+            "MOVE_STORED_POWER",
+            "MOVE_SHADOW_BALL",
+            "MOVE_GIGA_DRAIN"
           ],
-          "reference": "Verdant custom: Jagged Pass / Normal-rule breaker"
+          "reference": "Battle 113: Fake Out tea-service setup"
+        },
+        {
+          "level": 2,
+          "species": "SPECIES_VESPIQUEN",
+          "item": "ITEM_ROCKY_HELMET",
+          "ability_slot": 1,
+          "spread": "SPREAD_31_IV_HP_DEF_IMPISH",
+          "moves": [
+            "MOVE_ATTACK_ORDER",
+            "MOVE_TAILWIND",
+            "MOVE_HEAL_ORDER",
+            "MOVE_DEFEND_ORDER"
+          ],
+          "reference": "Battle 113: Intimidate basket guard"
+        },
+        {
+          "level": 2,
+          "species": "SPECIES_GOURGEIST",
+          "item": "ITEM_FLAME_ORB",
+          "ability_slot": 1,
+          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+          "moves": [
+            "MOVE_SHADOW_BALL",
+            "MOVE_GIGA_DRAIN",
+            "MOVE_WILL_O_WISP",
+            "MOVE_LEECH_SEED"
+          ],
+          "reference": "Battle 113: Flare Boost picnic lantern"
+        },
+        {
+          "level": 3,
+          "species": "SPECIES_EELEKTROSS",
+          "item": "ITEM_CHOICE_SPECS",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+          "moves": [
+            "MOVE_THUNDERBOLT",
+            "MOVE_FLAMETHROWER",
+            "MOVE_GIGA_DRAIN",
+            "MOVE_VOLT_SWITCH"
+          ],
+          "reference": "Battle 113: picnic power-cord pivot"
+        },
+        {
+          "level": 4,
+          "species": "SPECIES_VANILLUXE",
+          "item": "ITEM_WISE_GLASSES",
+          "ability_slot": 2,
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+          "moves": [
+            "MOVE_FREEZE_DRY",
+            "MOVE_FLASH_CANNON",
+            "MOVE_WATER_PULSE",
+            "MOVE_ICY_WIND"
+          ],
+          "reference": "Battle 113: weatherless dessert coverage"
         }
       ]
     },
@@ -2963,32 +3233,32 @@
     "TRAINER_ELI": {
       "additions": [
         {
-          "level": 0,
-          "species": "SPECIES_NIDOQUEEN",
-          "item": "ITEM_LIFE_ORB",
-          "ability_slot": 2,
-          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+          "level": 6,
+          "species": "SPECIES_TURTONATOR",
+          "item": "ITEM_ROCKY_HELMET",
+          "ability_slot": 1,
+          "spread": "SPREAD_31_IV_HP_DEF_BOLD",
           "moves": [
-            "MOVE_EARTH_POWER",
-            "MOVE_FIRE_BLAST",
-            "MOVE_ICE_BEAM",
-            "MOVE_PROTECT"
+            "MOVE_SHELL_TRAP",
+            "MOVE_DRACO_METEOR",
+            "MOVE_HEAT_WAVE",
+            "MOVE_WIDE_GUARD"
           ],
-          "reference": "Verdant custom: Lavaridge Town Gym 1 F | Lavaridge Town Gym B 1 F / Balanced disruption"
+          "reference": "Battle 121 volcanic gravity and contact-punishment half"
         },
         {
-          "level": 0,
-          "species": "SPECIES_INCINEROAR",
-          "item": "ITEM_SITRUS_BERRY",
-          "ability_slot": 2,
-          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+          "level": 7,
+          "species": "SPECIES_GARGANACL",
+          "item": "ITEM_LEFTOVERS",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_HP_DEF_SPDEF_SASSY",
           "moves": [
-            "MOVE_PARTING_SHOT",
-            "MOVE_FAKE_OUT",
-            "MOVE_FLARE_BLITZ",
-            "MOVE_DARKEST_LARIAT"
+            "MOVE_SALT_CURE",
+            "MOVE_RECOVER",
+            "MOVE_WIDE_GUARD",
+            "MOVE_HEAVY_SLAM"
           ],
-          "reference": "Verdant custom: Lavaridge Town Gym 1 F | Lavaridge Town Gym B 1 F / Balanced disruption"
+          "reference": "Battle 121 Eli-only split-branch saltstone closer"
         }
       ]
     },
@@ -3045,100 +3315,268 @@
     "TRAINER_ETHAN_1": {
       "additions": [
         {
-          "level": 0,
-          "species": "SPECIES_MOLTRES",
-          "item": "ITEM_CHARTI_BERRY",
-          "ability_slot": 2,
+          "level": 1,
+          "species": "SPECIES_TOXTRICITY",
+          "item": "ITEM_THROAT_SPRAY",
+          "ability_slot": 0,
           "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
           "moves": [
-            "MOVE_HURRICANE",
-            "MOVE_TAILWIND",
-            "MOVE_FIRE_BLAST",
-            "MOVE_PROTECT"
+            "MOVE_BOOMBURST",
+            "MOVE_OVERDRIVE",
+            "MOVE_SLUDGE_BOMB",
+            "MOVE_VOLT_SWITCH"
           ],
-          "reference": "Verdant explicit team design"
+          "reference": "Battle 115: Punk Rock chorus lead"
+        },
+        {
+          "level": 2,
+          "species": "SPECIES_BOUFFALANT",
+          "item": "ITEM_ASSAULT_VEST",
+          "ability_slot": 2,
+          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+          "moves": [
+            "MOVE_HEAD_CHARGE",
+            "MOVE_HIGH_HORSEPOWER",
+            "MOVE_CLOSE_COMBAT",
+            "MOVE_WILD_CHARGE"
+          ],
+          "reference": "Battle 115: Soundproof call-and-response"
+        },
+        {
+          "level": 3,
+          "species": "SPECIES_RILLABOOM",
+          "item": "ITEM_MIRACLE_SEED",
+          "ability_slot": 2,
+          "spread": "SPREAD_31_IV_ATK_SPEED_ADAMANT",
+          "moves": [
+            "MOVE_FAKE_OUT",
+            "MOVE_DRUM_BEATING",
+            "MOVE_GRASSY_GLIDE",
+            "MOVE_HIGH_HORSEPOWER"
+          ],
+          "reference": "Battle 115: Grassy Surge rhythm section"
+        },
+        {
+          "level": 4,
+          "species": "SPECIES_MR_RIME",
+          "item": "ITEM_EXPERT_BELT",
+          "ability_slot": 1,
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+          "moves": [
+            "MOVE_ENCORE",
+            "MOVE_FREEZE_DRY",
+            "MOVE_PSYCHIC",
+            "MOVE_FOCUS_BLAST"
+          ],
+          "reference": "Battle 115: Screen Cleaner dancer"
         }
       ]
     },
     "TRAINER_ETHAN_2": {
       "additions": [
         {
-          "level": 0,
-          "species": "SPECIES_HO_OH",
-          "item": "ITEM_CHARTI_BERRY",
+          "level": 1,
+          "species": "SPECIES_RILLABOOM",
+          "item": "ITEM_MIRACLE_SEED",
           "ability_slot": 2,
+          "spread": "SPREAD_31_IV_ATK_SPEED_ADAMANT",
+          "moves": [
+            "MOVE_FAKE_OUT",
+            "MOVE_DRUM_BEATING",
+            "MOVE_GRASSY_GLIDE",
+            "MOVE_HIGH_HORSEPOWER"
+          ],
+          "reference": "Battle 115: Grassy Surge rhythm section"
+        },
+        {
+          "level": 2,
+          "species": "SPECIES_MR_RIME",
+          "item": "ITEM_EXPERT_BELT",
+          "ability_slot": 1,
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+          "moves": [
+            "MOVE_ENCORE",
+            "MOVE_FREEZE_DRY",
+            "MOVE_PSYCHIC",
+            "MOVE_FOCUS_BLAST"
+          ],
+          "reference": "Battle 115: Screen Cleaner dancer"
+        },
+        {
+          "level": 3,
+          "species": "SPECIES_YANMEGA",
+          "item": "ITEM_LIFE_ORB",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+          "moves": [
+            "MOVE_BUG_BUZZ",
+            "MOVE_AIR_SLASH",
+            "MOVE_ANCIENT_POWER",
+            "MOVE_GIGA_DRAIN"
+          ],
+          "reference": "Battle 115: Speed Boost melody"
+        },
+        {
+          "level": 4,
+          "species": "SPECIES_KRICKETUNE",
+          "item": "ITEM_FOCUS_SASH",
+          "ability_slot": 0,
           "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
           "moves": [
-            "MOVE_EARTHQUAKE",
-            "MOVE_TAILWIND",
-            "MOVE_SUBSTITUTE",
-            "MOVE_SACRED_FIRE"
+            "MOVE_SWORDS_DANCE",
+            "MOVE_X_SCISSOR",
+            "MOVE_KNOCK_OFF",
+            "MOVE_AERIAL_ACE"
           ],
-          "reference": "Verdant custom: Jagged Pass / Tailwind offense"
+          "reference": "Battle 115: Sash Swarm finale"
         }
       ]
     },
     "TRAINER_ETHAN_3": {
       "additions": [
         {
-          "level": -3,
-          "species": "SPECIES_LEDIAN",
-          "item": "ITEM_LIGHT_CLAY",
+          "level": 1,
+          "species": "SPECIES_TOXTRICITY",
+          "item": "ITEM_THROAT_SPRAY",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+          "moves": [
+            "MOVE_BOOMBURST",
+            "MOVE_OVERDRIVE",
+            "MOVE_SLUDGE_BOMB",
+            "MOVE_VOLT_SWITCH"
+          ],
+          "reference": "Battle 115: Punk Rock chorus lead"
+        },
+        {
+          "level": 2,
+          "species": "SPECIES_BOUFFALANT",
+          "item": "ITEM_ASSAULT_VEST",
+          "ability_slot": 2,
+          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+          "moves": [
+            "MOVE_HEAD_CHARGE",
+            "MOVE_HIGH_HORSEPOWER",
+            "MOVE_CLOSE_COMBAT",
+            "MOVE_WILD_CHARGE"
+          ],
+          "reference": "Battle 115: Soundproof call-and-response"
+        },
+        {
+          "level": 3,
+          "species": "SPECIES_YANMEGA",
+          "item": "ITEM_LIFE_ORB",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+          "moves": [
+            "MOVE_BUG_BUZZ",
+            "MOVE_AIR_SLASH",
+            "MOVE_ANCIENT_POWER",
+            "MOVE_GIGA_DRAIN"
+          ],
+          "reference": "Battle 115: Speed Boost melody"
+        },
+        {
+          "level": 4,
+          "species": "SPECIES_KRICKETUNE",
+          "item": "ITEM_FOCUS_SASH",
           "ability_slot": 0,
           "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
           "moves": [
-            "MOVE_U_TURN",
-            "MOVE_REFLECT",
-            "MOVE_LIGHT_SCREEN",
-            "MOVE_TOXIC"
+            "MOVE_SWORDS_DANCE",
+            "MOVE_X_SCISSOR",
+            "MOVE_KNOCK_OFF",
+            "MOVE_AERIAL_ACE"
           ],
-          "reference": "Verdant custom: Jagged Pass / Tailwind offense"
-        },
-        {
-          "level": -1,
-          "species": "SPECIES_TORNADUS_THERIAN",
-          "item": "ITEM_FLYING_GEM",
-          "ability_slot": 0,
-          "spread": "SPREAD_31_IV_SPATK_SPEED_HASTY",
-          "moves": [
-            "MOVE_HURRICANE",
-            "MOVE_FOCUS_BLAST",
-            "MOVE_U_TURN",
-            "MOVE_HEAT_WAVE"
-          ],
-          "reference": "Verdant custom: Jagged Pass / Tailwind offense"
+          "reference": "Battle 115: Sash Swarm finale"
         }
       ]
     },
     "TRAINER_ETHAN_4": {
       "additions": [
         {
-          "level": -3,
-          "species": "SPECIES_NIHILEGO",
-          "item": "ITEM_POWER_HERB",
+          "level": 1,
+          "species": "SPECIES_TOXTRICITY",
+          "item": "ITEM_THROAT_SPRAY",
           "ability_slot": 0,
           "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
           "moves": [
-            "MOVE_METEOR_BEAM",
+            "MOVE_BOOMBURST",
+            "MOVE_OVERDRIVE",
             "MOVE_SLUDGE_BOMB",
-            "MOVE_TRICK_ROOM",
-            "MOVE_PROTECT"
+            "MOVE_VOLT_SWITCH"
           ],
-          "reference": "Verdant custom: Jagged Pass / Tailwind offense"
+          "reference": "Battle 115: Punk Rock chorus lead"
         },
         {
-          "level": -3,
-          "species": "SPECIES_MOTHIM",
-          "item": "ITEM_LIFE_ORB",
+          "level": 1,
+          "species": "SPECIES_BOUFFALANT",
+          "item": "ITEM_ASSAULT_VEST",
           "ability_slot": 2,
+          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+          "moves": [
+            "MOVE_HEAD_CHARGE",
+            "MOVE_HIGH_HORSEPOWER",
+            "MOVE_CLOSE_COMBAT",
+            "MOVE_WILD_CHARGE"
+          ],
+          "reference": "Battle 115: Soundproof call-and-response"
+        },
+        {
+          "level": 2,
+          "species": "SPECIES_RILLABOOM",
+          "item": "ITEM_MIRACLE_SEED",
+          "ability_slot": 2,
+          "spread": "SPREAD_31_IV_ATK_SPEED_ADAMANT",
+          "moves": [
+            "MOVE_FAKE_OUT",
+            "MOVE_DRUM_BEATING",
+            "MOVE_GRASSY_GLIDE",
+            "MOVE_HIGH_HORSEPOWER"
+          ],
+          "reference": "Battle 115: Grassy Surge rhythm section"
+        },
+        {
+          "level": 2,
+          "species": "SPECIES_MR_RIME",
+          "item": "ITEM_EXPERT_BELT",
+          "ability_slot": 1,
           "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
           "moves": [
-            "MOVE_AIR_SLASH",
-            "MOVE_GIGA_DRAIN",
-            "MOVE_QUIVER_DANCE",
-            "MOVE_BUG_BUZZ"
+            "MOVE_ENCORE",
+            "MOVE_FREEZE_DRY",
+            "MOVE_PSYCHIC",
+            "MOVE_FOCUS_BLAST"
           ],
-          "reference": "Verdant custom: Jagged Pass / Tailwind offense"
+          "reference": "Battle 115: Screen Cleaner dancer"
+        },
+        {
+          "level": 3,
+          "species": "SPECIES_YANMEGA",
+          "item": "ITEM_LIFE_ORB",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+          "moves": [
+            "MOVE_BUG_BUZZ",
+            "MOVE_AIR_SLASH",
+            "MOVE_ANCIENT_POWER",
+            "MOVE_GIGA_DRAIN"
+          ],
+          "reference": "Battle 115: Speed Boost melody"
+        },
+        {
+          "level": 4,
+          "species": "SPECIES_KRICKETUNE",
+          "item": "ITEM_FOCUS_SASH",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+          "moves": [
+            "MOVE_SWORDS_DANCE",
+            "MOVE_X_SCISSOR",
+            "MOVE_KNOCK_OFF",
+            "MOVE_AERIAL_ACE"
+          ],
+          "reference": "Battle 115: Sash Swarm finale"
         }
       ]
     },
@@ -3673,32 +4111,60 @@
     "TRAINER_GRUNT_JAGGED_PASS": {
       "additions": [
         {
-          "level": 0,
+          "level": 1,
+          "species": "SPECIES_STUNFISK_GALARIAN",
+          "item": "ITEM_BINDING_BAND",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_HP_SPDEF_CAREFUL",
+          "moves": [
+            "MOVE_STOMPING_TANTRUM",
+            "MOVE_SNAP_TRAP",
+            "MOVE_YAWN",
+            "MOVE_STEALTH_ROCK"
+          ],
+          "reference": "Battle 112: hidden-ground trap control"
+        },
+        {
+          "level": 2,
+          "species": "SPECIES_THIEVUL",
+          "item": "ITEM_THROAT_SPRAY",
+          "ability_slot": 2,
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+          "moves": [
+            "MOVE_DARK_PULSE",
+            "MOVE_PSYCHIC",
+            "MOVE_SNARL",
+            "MOVE_PARTING_SHOT"
+          ],
+          "reference": "Battle 112: Stakeout retreat punishment"
+        },
+        {
+          "level": 2,
+          "species": "SPECIES_GOLISOPOD",
+          "item": "ITEM_MUSCLE_BAND",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+          "moves": [
+            "MOVE_FIRST_IMPRESSION",
+            "MOVE_LIQUIDATION",
+            "MOVE_KNOCK_OFF",
+            "MOVE_WIDE_GUARD"
+          ],
+          "reference": "Battle 112: Emergency Exit reserve"
+        },
+        {
+          "level": 3,
           "species": "SPECIES_DUGTRIO",
-          "item": "ITEM_LEFTOVERS",
+          "item": "ITEM_CHOICE_BAND",
           "ability_slot": 1,
           "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
           "moves": [
+            "MOVE_HIGH_HORSEPOWER",
+            "MOVE_STONE_EDGE",
             "MOVE_SUCKER_PUNCH",
-            "MOVE_EARTHQUAKE",
-            "MOVE_ROCK_SLIDE",
-            "MOVE_PROTECT"
+            "MOVE_NIGHT_SLASH"
           ],
-          "reference": "Verdant custom: Jagged Pass / Balanced disruption"
-        },
-        {
-          "level": 0,
-          "species": "SPECIES_RAMPARDOS",
-          "item": "ITEM_LIFE_ORB",
-          "ability_slot": 2,
-          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
-          "moves": [
-            "MOVE_HEAD_SMASH",
-            "MOVE_PROTECT",
-            "MOVE_CRUNCH",
-            "MOVE_ZEN_HEADBUTT"
-          ],
-          "reference": "Verdant custom: Jagged Pass / Balanced disruption"
+          "reference": "Battle 112: Arena Trap exit seal"
         }
       ]
     },
@@ -3993,82 +4459,110 @@
     "TRAINER_GRUNT_METEOR_FALLS": {
       "additions": [
         {
-          "level": 0,
-          "species": "SPECIES_CINDERACE",
-          "item": "ITEM_SITRUS_BERRY",
+          "level": 1,
+          "species": "SPECIES_SOLROCK",
+          "item": "ITEM_FOCUS_SASH",
           "ability_slot": 0,
           "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
           "moves": [
-            "MOVE_PROTECT",
-            "MOVE_U_TURN",
-            "MOVE_PYRO_BALL",
-            "MOVE_HIGH_JUMP_KICK"
+            "MOVE_ROCK_SLIDE",
+            "MOVE_ZEN_HEADBUTT",
+            "MOVE_WILL_O_WISP",
+            "MOVE_EXPLOSION"
           ],
-          "reference": "Verdant custom: Meteor Falls 1 F 1 R / Sun offense"
+          "reference": "Emerald Champions protected Meteor Falls impact anchor"
+        },
+        {
+          "level": 2,
+          "species": "SPECIES_MINIOR",
+          "item": "ITEM_WHITE_HERB",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+          "moves": [
+            "MOVE_SHELL_SMASH",
+            "MOVE_ACROBATICS",
+            "MOVE_ROCK_SLIDE",
+            "MOVE_PROTECT"
+          ],
+          "reference": "Emerald Champions protected Meteor Falls impact anchor"
+        },
+        {
+          "level": 3,
+          "species": "SPECIES_CELESTEELA",
+          "item": "ITEM_ASSAULT_VEST",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+          "moves": [
+            "MOVE_HEAVY_SLAM",
+            "MOVE_FLAMETHROWER",
+            "MOVE_GIGA_DRAIN",
+            "MOVE_ROCK_SLIDE"
+          ],
+          "reference": "showdown:gen8randomdoublesbattle:014"
         }
       ]
     },
     "TRAINER_GRUNT_MT_CHIMNEY_1": {
       "additions": [
         {
-          "level": 0,
-          "species": "SPECIES_MAROWAK",
-          "item": "ITEM_THICK_CLUB",
+          "level": 3,
+          "species": "SPECIES_BLACEPHALON",
+          "item": "ITEM_WISE_GLASSES",
           "ability_slot": 0,
-          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
           "moves": [
-            "MOVE_SWORDS_DANCE",
-            "MOVE_DOUBLE_EDGE",
-            "MOVE_PROTECT",
-            "MOVE_BONEMERANG"
+            "MOVE_HEAT_WAVE",
+            "MOVE_SHADOW_BALL",
+            "MOVE_PSYCHIC",
+            "MOVE_FLAMETHROWER"
           ],
-          "reference": "Verdant custom: Mt Chimney / Sand and spread"
+          "reference": "showdown:gen7randomdoublesbattle:011"
         },
         {
-          "level": 0,
-          "species": "SPECIES_DUGTRIO_ALOLAN",
-          "item": "ITEM_LIFE_ORB",
+          "level": 4,
+          "species": "SPECIES_PALOSSAND",
+          "item": "ITEM_LEFTOVERS",
           "ability_slot": 1,
-          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
           "moves": [
-            "MOVE_PROTECT",
-            "MOVE_ROCK_SLIDE",
-            "MOVE_IRON_HEAD",
-            "MOVE_HIGH_HORSEPOWER"
+            "MOVE_EARTH_POWER",
+            "MOVE_SHADOW_BALL",
+            "MOVE_SHORE_UP",
+            "MOVE_GIGA_DRAIN"
           ],
-          "reference": "Verdant custom: Mt Chimney / Sand and spread"
+          "reference": "showdown:gen7randomdoublesbattle:022"
         }
       ]
     },
     "TRAINER_GRUNT_MT_CHIMNEY_2": {
       "additions": [
         {
-          "level": -2,
-          "species": "SPECIES_GRAVELER",
-          "item": "ITEM_LEFTOVERS",
-          "ability_slot": 1,
+          "level": 2,
+          "species": "SPECIES_SANDACONDA",
+          "item": "ITEM_SITRUS_BERRY",
+          "ability_slot": 0,
           "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
           "moves": [
-            "MOVE_HAMMER_ARM",
-            "MOVE_STEALTH_ROCK",
-            "MOVE_SUCKER_PUNCH",
-            "MOVE_STONE_EDGE"
+            "MOVE_HIGH_HORSEPOWER",
+            "MOVE_GLARE",
+            "MOVE_COIL",
+            "MOVE_BODY_PRESS"
           ],
-          "reference": "Verdant custom: Mt Chimney / Sand and spread"
+          "reference": "showdown:gen8randombattle:008"
         },
         {
-          "level": 0,
-          "species": "SPECIES_GOLURK",
-          "item": "ITEM_SITRUS_BERRY",
-          "ability_slot": 2,
-          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+          "level": 4,
+          "species": "SPECIES_KROOKODILE",
+          "item": "ITEM_ROSELI_BERRY",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
           "moves": [
-            "MOVE_DYNAMIC_PUNCH",
             "MOVE_HIGH_HORSEPOWER",
-            "MOVE_POLTERGEIST",
-            "MOVE_PROTECT"
+            "MOVE_KNOCK_OFF",
+            "MOVE_TAUNT",
+            "MOVE_STONE_EDGE"
           ],
-          "reference": "Verdant custom: Mt Chimney / Sand and spread"
+          "reference": "showdown:gen9championsrandomdoublesbattle:016"
         }
       ]
     },
@@ -5009,32 +5503,32 @@
     "TRAINER_JACE": {
       "additions": [
         {
-          "level": 0,
-          "species": "SPECIES_CAMERUPT",
-          "item": "ITEM_CAMERUPTITE",
-          "ability_slot": 1,
-          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+          "level": 5,
+          "species": "SPECIES_GOUGING_FIRE",
+          "item": "ITEM_BOOSTER_ENERGY",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
           "moves": [
-            "MOVE_PROTECT",
-            "MOVE_EARTH_POWER",
-            "MOVE_WILL_O_WISP",
-            "MOVE_HEAT_WAVE"
+            "MOVE_BURNING_BULWARK",
+            "MOVE_RAGING_FURY",
+            "MOVE_DRAGON_CLAW",
+            "MOVE_MORNING_SUN"
           ],
-          "reference": "Verdant explicit team design"
+          "reference": "Battle 121 rare ancient-fire joint closer"
         },
         {
-          "level": 0,
-          "species": "SPECIES_BRONZONG",
-          "item": "ITEM_LIGHT_CLAY",
-          "ability_slot": 0,
-          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+          "level": 6,
+          "species": "SPECIES_MAROWAK_ALOLAN",
+          "item": "ITEM_THICK_CLUB",
+          "ability_slot": 2,
+          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
           "moves": [
-            "MOVE_HYPNOSIS",
-            "MOVE_LIGHT_SCREEN",
-            "MOVE_STEALTH_ROCK",
-            "MOVE_PSYCHIC"
+            "MOVE_FLARE_BLITZ",
+            "MOVE_POLTERGEIST",
+            "MOVE_BONEMERANG",
+            "MOVE_PROTECT"
           ],
-          "reference": "Verdant explicit team design"
+          "reference": "Battle 121 Jace-only split-branch bonefire closer"
         }
       ]
     },
@@ -5309,18 +5803,18 @@
     "TRAINER_JEFF": {
       "additions": [
         {
-          "level": 1,
-          "species": "SPECIES_ARCEUS_GROUND",
-          "item": "ITEM_EARTH_PLATE",
-          "ability_slot": 0,
-          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+          "level": 5,
+          "species": "SPECIES_CENTISKORCH",
+          "item": "ITEM_ASSAULT_VEST",
+          "ability_slot": 1,
+          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
           "moves": [
-            "MOVE_SWORDS_DANCE",
-            "MOVE_STONE_EDGE",
-            "MOVE_EARTHQUAKE",
-            "MOVE_RECOVER"
+            "MOVE_FIRE_LASH",
+            "MOVE_POWER_WHIP",
+            "MOVE_LEECH_LIFE",
+            "MOVE_KNOCK_OFF"
           ],
-          "reference": "Verdant custom: Lavaridge Town Gym 1 F | Lavaridge Town Gym B 1 F / Balanced disruption"
+          "reference": "Battle 122 White Smoke physical flashover closer"
         }
       ]
     },
@@ -5382,7 +5876,7 @@
       "additions": [
         {
           "level": 2,
-          "species": "SPECIES_GENESECT",
+          "species": "SPECIES_ELECTIVIRE",
           "item": "ITEM_CHOICE_SCARF",
           "ability_slot": 0,
           "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
@@ -5727,32 +6221,46 @@
     "TRAINER_JULIO": {
       "additions": [
         {
-          "level": -1,
-          "species": "SPECIES_BOLDORE",
-          "item": "ITEM_NONE",
-          "ability_slot": 0,
-          "spread": "SPREAD_15_IV_0_EV",
+          "level": 1,
+          "species": "SPECIES_DRAGAPULT",
+          "item": "ITEM_CHOICE_SPECS",
+          "ability_slot": 1,
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
           "moves": [
-            "MOVE_POWER_GEM",
-            "MOVE_SHOCK_WAVE",
-            "MOVE_ROUND",
-            "MOVE_IRON_DEFENSE"
+            "MOVE_DRAGON_PULSE",
+            "MOVE_SHADOW_BALL",
+            "MOVE_FLAMETHROWER",
+            "MOVE_THUNDERBOLT"
           ],
-          "reference": "Verdant custom: Jagged Pass / Balanced disruption"
+          "reference": "Battle 114: Specs Infiltrator momentum"
         },
         {
-          "level": 0,
-          "species": "SPECIES_PERSIAN_ALOLAN",
-          "item": "ITEM_SITRUS_BERRY",
+          "level": 2,
+          "species": "SPECIES_JOLTEON",
+          "item": "ITEM_LIFE_ORB",
           "ability_slot": 0,
           "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
           "moves": [
-            "MOVE_SNARL",
-            "MOVE_ICY_WIND",
-            "MOVE_PROTECT",
-            "MOVE_FOUL_PLAY"
+            "MOVE_THUNDERBOLT",
+            "MOVE_SHADOW_BALL",
+            "MOVE_HYPER_VOICE",
+            "MOVE_VOLT_SWITCH"
           ],
-          "reference": "Verdant custom: Jagged Pass / Balanced disruption"
+          "reference": "Battle 114: Life Orb Volt Switch relay"
+        },
+        {
+          "level": 3,
+          "species": "SPECIES_DODRIO",
+          "item": "ITEM_CHOICE_BAND",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+          "moves": [
+            "MOVE_BRAVE_BIRD",
+            "MOVE_JUMP_KICK",
+            "MOVE_KNOCK_OFF",
+            "MOVE_QUICK_ATTACK"
+          ],
+          "reference": "Battle 114: Moxie downhill closer"
         }
       ]
     },
@@ -6383,32 +6891,60 @@
     "TRAINER_LENNY": {
       "additions": [
         {
-          "level": 0,
-          "species": "SPECIES_HIPPOWDON",
-          "item": "ITEM_LEFTOVERS",
-          "ability_slot": 0,
-          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+          "level": 3,
+          "species": "SPECIES_NOIVERN",
+          "item": "ITEM_FOCUS_SASH",
+          "ability_slot": 2,
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
           "moves": [
-            "MOVE_SLACK_OFF",
-            "MOVE_HIGH_HORSEPOWER",
-            "MOVE_WHIRLWIND",
-            "MOVE_STEALTH_ROCK"
+            "MOVE_TAILWIND",
+            "MOVE_BOOMBURST",
+            "MOVE_HURRICANE",
+            "MOVE_DRAGON_PULSE"
           ],
-          "reference": "Verdant explicit team design"
+          "reference": "showdown:gen6randomdoublesbattle:004"
         },
         {
-          "level": -3,
-          "species": "SPECIES_DRACOZOLT",
-          "item": "ITEM_LIFE_ORB",
-          "ability_slot": 2,
-          "spread": "SPREAD_31_IV_ATK_SPEED_ADAMANT",
+          "level": 2,
+          "species": "SPECIES_EXPLOUD",
+          "item": "ITEM_CHOICE_SPECS",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
           "moves": [
-            "MOVE_BOLT_BEAK",
-            "MOVE_DRAGON_CLAW",
-            "MOVE_HIGH_HORSEPOWER",
+            "MOVE_BOOMBURST",
+            "MOVE_FOCUS_BLAST",
+            "MOVE_FIRE_BLAST",
+            "MOVE_ICE_BEAM"
+          ],
+          "reference": "showdown:gen7randomdoublesbattle:008"
+        },
+        {
+          "level": 3,
+          "species": "SPECIES_KOMMO_O",
+          "item": "ITEM_ASSAULT_VEST",
+          "ability_slot": 1,
+          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+          "moves": [
+            "MOVE_CLOSE_COMBAT",
+            "MOVE_POISON_JAB",
+            "MOVE_ROCK_SLIDE",
+            "MOVE_DRAGON_CLAW"
+          ],
+          "reference": "showdown:gen7randomdoublesbattle:003"
+        },
+        {
+          "level": 4,
+          "species": "SPECIES_ALTARIA",
+          "item": "ITEM_ALTARIANITE",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+          "moves": [
+            "MOVE_HYPER_VOICE",
+            "MOVE_FIRE_BLAST",
+            "MOVE_ROOST",
             "MOVE_PROTECT"
           ],
-          "reference": "Verdant hand-authored competitive core"
+          "reference": "showdown:gen9championsrandomdoublesbattle:004"
         }
       ]
     },
@@ -6607,32 +7143,134 @@
     "TRAINER_LUCAS_1": {
       "additions": [
         {
-          "level": -2,
-          "species": "SPECIES_TYRUNT",
-          "item": "ITEM_EVIOLITE",
-          "ability_slot": 0,
-          "spread": "SPREAD_31_IV_HP_ATK_BRAVE",
+          "level": 2,
+          "species": "SPECIES_NINETALES_ALOLAN",
+          "item": "ITEM_LIGHT_CLAY",
+          "ability_slot": 2,
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
           "moves": [
-            "MOVE_ROCK_SLIDE",
-            "MOVE_DRAGON_CLAW",
+            "MOVE_AURORA_VEIL",
+            "MOVE_BLIZZARD",
+            "MOVE_MOONBLAST",
+            "MOVE_PROTECT"
+          ],
+          "reference": "showdown:gen9championsrandomdoublesbattle:024"
+        },
+        {
+          "level": 3,
+          "species": "SPECIES_BEARTIC",
+          "item": "ITEM_LIFE_ORB",
+          "ability_slot": 1,
+          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+          "moves": [
+            "MOVE_ICICLE_CRASH",
+            "MOVE_CLOSE_COMBAT",
+            "MOVE_AQUA_JET",
+            "MOVE_PROTECT"
+          ],
+          "reference": "showdown:gen9randomdoublesbattle:001"
+        },
+        {
+          "level": 4,
+          "species": "SPECIES_ARTICUNO",
+          "item": "ITEM_CHARTI_BERRY",
+          "ability_slot": 2,
+          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+          "moves": [
+            "MOVE_BLIZZARD",
+            "MOVE_HURRICANE",
+            "MOVE_FREEZE_DRY",
+            "MOVE_ROOST"
+          ],
+          "reference": "smogon:gen8uu:009"
+        }
+      ]
+    },
+    "TRAINER_LUCY_LAVARIDGE": {
+      "additions": [
+        {
+          "level": 1,
+          "species": "SPECIES_GALVANTULA",
+          "item": "ITEM_FOCUS_SASH",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+          "moves": [
+            "MOVE_THUNDER",
+            "MOVE_BUG_BUZZ",
+            "MOVE_ENERGY_BALL",
+            "MOVE_STICKY_WEB"
+          ],
+          "reference": "Battle 116: Compound Eyes odds lead"
+        },
+        {
+          "level": 2,
+          "species": "SPECIES_AMBIPOM",
+          "item": "ITEM_NORMAL_GEM",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+          "moves": [
+            "MOVE_FAKE_OUT",
+            "MOVE_DOUBLE_HIT",
+            "MOVE_KNOCK_OFF",
+            "MOVE_U_TURN"
+          ],
+          "reference": "Battle 116: Technician loaded opener"
+        },
+        {
+          "level": 2,
+          "species": "SPECIES_CINCCINO",
+          "item": "ITEM_WIDE_LENS",
+          "ability_slot": 2,
+          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+          "moves": [
+            "MOVE_TAIL_SLAP",
+            "MOVE_BULLET_SEED",
+            "MOVE_ROCK_BLAST",
+            "MOVE_KNOCK_OFF"
+          ],
+          "reference": "Battle 116: Skill Link deterministic hits"
+        },
+        {
+          "level": 3,
+          "species": "SPECIES_DRAPION",
+          "item": "ITEM_SCOPE_LENS",
+          "ability_slot": 1,
+          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+          "moves": [
+            "MOVE_CROSS_POISON",
+            "MOVE_NIGHT_SLASH",
             "MOVE_ICE_FANG",
             "MOVE_PROTECT"
           ],
-          "reference": "Verdant custom: Route 114 / Balanced disruption"
+          "reference": "Battle 116: Sniper critical branch"
         },
         {
-          "level": 0,
-          "species": "SPECIES_GEODUDE",
-          "item": "ITEM_EXPERT_BELT",
+          "level": 3,
+          "species": "SPECIES_CLEFABLE",
+          "item": "ITEM_LIFE_ORB",
           "ability_slot": 1,
-          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
           "moves": [
-            "MOVE_FIRE_PUNCH",
-            "MOVE_HAMMER_ARM",
-            "MOVE_SUCKER_PUNCH",
-            "MOVE_STONE_EDGE"
+            "MOVE_MOONBLAST",
+            "MOVE_DAZZLING_GLEAM",
+            "MOVE_FLAMETHROWER",
+            "MOVE_THUNDERBOLT"
           ],
-          "reference": "Verdant custom: Route 114 / Balanced disruption"
+          "reference": "Battle 116: Magic Guard fixed-cost pressure"
+        },
+        {
+          "level": 4,
+          "species": "SPECIES_ABSOL",
+          "item": "ITEM_ABSOLITE",
+          "ability_slot": 1,
+          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+          "moves": [
+            "MOVE_SUCKER_PUNCH",
+            "MOVE_KNOCK_OFF",
+            "MOVE_PLAY_ROUGH",
+            "MOVE_PROTECT"
+          ],
+          "reference": "Battle 116: Mega Absol bad-luck closer"
         }
       ]
     },
@@ -7027,18 +7665,18 @@
     "TRAINER_MAXIE_MT_CHIMNEY": {
       "additions": [
         {
-          "level": 0,
+          "level": 1,
           "species": "SPECIES_GROUDON",
-          "item": "ITEM_RED_ORB",
+          "item": "ITEM_HEAT_ROCK",
           "ability_slot": 0,
-          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
           "moves": [
-            "MOVE_PROTECT",
+            "MOVE_PRECIPICE_BLADES",
             "MOVE_FIRE_PUNCH",
-            "MOVE_SWORDS_DANCE",
-            "MOVE_PRECIPICE_BLADES"
+            "MOVE_STONE_EDGE",
+            "MOVE_PROTECT"
           ],
-          "reference": "Verdant explicit team design"
+          "reference": "vgc:naic-2022"
         }
       ]
     },
@@ -7427,7 +8065,7 @@
     "TRAINER_NICOLAS_3": {
       "additions": [
         {
-          "level": 0,
+          "level": 4,
           "species": "SPECIES_REGIDRAGO",
           "item": "ITEM_DRAGON_FANG",
           "ability_slot": 0,
@@ -7435,28 +8073,28 @@
           "moves": [
             "MOVE_DRAGON_ENERGY",
             "MOVE_DRACO_METEOR",
-            "MOVE_EARTH_POWER",
+            "MOVE_ANCIENT_POWER",
             "MOVE_PROTECT"
           ],
-          "reference": "Verdant explicit team design"
+          "reference": "Emerald Champions Nicolas dragon-discipline family"
         }
       ]
     },
     "TRAINER_NICOLAS_4": {
       "additions": [
         {
-          "level": 1,
-          "species": "SPECIES_CURSOLA",
-          "item": "ITEM_LEFTOVERS",
+          "level": 3,
+          "species": "SPECIES_DRAGALGE",
+          "item": "ITEM_BLACK_SLUDGE",
           "ability_slot": 2,
           "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
           "moves": [
-            "MOVE_STRENGTH_SAP",
-            "MOVE_HYDRO_PUMP",
-            "MOVE_SHADOW_BALL",
-            "MOVE_STEALTH_ROCK"
+            "MOVE_HAZE",
+            "MOVE_DRACO_METEOR",
+            "MOVE_SLUDGE_BOMB",
+            "MOVE_PROTECT"
           ],
-          "reference": "Verdant custom: Meteor Falls 1 F 2 R / Dragon pressure"
+          "reference": "showdown:gen8randomdoublesbattle:016"
         }
       ]
     },
@@ -7528,7 +8166,7 @@
       "additions": [
         {
           "level": 2,
-          "species": "SPECIES_GENESECT",
+          "species": "SPECIES_ELECTIVIRE",
           "item": "ITEM_CHOICE_SCARF",
           "ability_slot": 0,
           "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
@@ -8895,32 +9533,32 @@
     "TRAINER_TABITHA_MT_CHIMNEY": {
       "additions": [
         {
-          "level": 0,
-          "species": "SPECIES_GLALIE",
-          "item": "ITEM_SITRUS_BERRY",
+          "level": 2,
+          "species": "SPECIES_GENESECT",
+          "item": "ITEM_EXPERT_BELT",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+          "moves": [
+            "MOVE_WILD_CHARGE",
+            "MOVE_ICE_PUNCH",
+            "MOVE_FIRE_PUNCH",
+            "MOVE_CROSS_CHOP"
+          ],
+          "reference": "showdown:gen6randombattle:025"
+        },
+        {
+          "level": 2,
+          "species": "SPECIES_XURKITREE",
+          "item": "ITEM_CHOICE_SPECS",
           "ability_slot": 0,
           "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
           "moves": [
-            "MOVE_PROTECT",
-            "MOVE_ICY_WIND",
-            "MOVE_DISABLE",
-            "MOVE_FREEZE_DRY"
+            "MOVE_THUNDERBOLT",
+            "MOVE_VOLT_SWITCH",
+            "MOVE_DAZZLING_GLEAM",
+            "MOVE_ENERGY_BALL"
           ],
-          "reference": "Verdant custom: Mt Chimney / Sand and spread"
-        },
-        {
-          "level": 0,
-          "species": "SPECIES_AURORUS",
-          "item": "ITEM_CHOPLE_BERRY",
-          "ability_slot": 0,
-          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
-          "moves": [
-            "MOVE_PROTECT",
-            "MOVE_HYPER_VOICE",
-            "MOVE_ICY_WIND",
-            "MOVE_FREEZE_DRY"
-          ],
-          "reference": "Verdant custom: Mt Chimney / Sand and spread"
+          "reference": "showdown:gen8randombattle:014"
         }
       ]
     },
@@ -10169,6 +10807,138 @@
             "MOVE_FIRE_BLAST"
           ],
           "reference": "Verdant explicit team design"
+        }
+      }
+    ],
+    "TRAINER_JACE": [
+      {
+        "index": 0,
+        "from": "SPECIES_EMBOAR",
+        "build": {
+          "level": 1,
+          "species": "SPECIES_LAMPENT",
+          "item": "ITEM_BLUNDER_POLICY",
+          "ability_slot": 2,
+          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+          "moves": [
+            "MOVE_INFERNO",
+            "MOVE_SHADOW_BALL",
+            "MOVE_ENERGY_BALL",
+            "MOVE_PROTECT"
+          ],
+          "reference": "Battle 121 Gravity-enabled Inferno lead"
+        }
+      },
+      {
+        "index": 1,
+        "from": "SPECIES_FLAREON",
+        "build": {
+          "level": 3,
+          "species": "SPECIES_FLAREON",
+          "item": "ITEM_TOXIC_ORB",
+          "ability_slot": 2,
+          "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+          "moves": [
+            "MOVE_FACADE",
+            "MOVE_FLARE_BLITZ",
+            "MOVE_SUPERPOWER",
+            "MOVE_QUICK_ATTACK"
+          ],
+          "reference": "Battle 121 autonomous Guts reserve"
+        }
+      }
+    ],
+    "TRAINER_ELI": [
+      {
+        "index": 0,
+        "from": "SPECIES_HEATMOR",
+        "build": {
+          "level": 2,
+          "species": "SPECIES_CLAYDOL",
+          "item": "ITEM_LIGHT_CLAY",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_HP_SPDEF_CALM",
+          "moves": [
+            "MOVE_GRAVITY",
+            "MOVE_EARTH_POWER",
+            "MOVE_ROCK_SLIDE",
+            "MOVE_LIGHT_SCREEN"
+          ],
+          "reference": "Battle 121 volcanic gravity lead"
+        }
+      },
+      {
+        "index": 1,
+        "from": "SPECIES_LAMPENT",
+        "build": {
+          "level": 4,
+          "species": "SPECIES_COALOSSAL",
+          "item": "ITEM_PASSHO_BERRY",
+          "ability_slot": 0,
+          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+          "moves": [
+            "MOVE_TAR_SHOT",
+            "MOVE_HEAT_WAVE",
+            "MOVE_POWER_GEM",
+            "MOVE_PROTECT"
+          ],
+          "reference": "Battle 121 Tar Shot and Steam Engine reserve"
+        }
+      }
+    ],
+    "TRAINER_JEFF": [
+      {
+        "index": 0,
+        "from": "SPECIES_MAGCARGO",
+        "build": {
+          "level": 2,
+          "species": "SPECIES_SPINDA",
+          "item": "ITEM_SITRUS_BERRY",
+          "ability_slot": 2,
+          "spread": "SPREAD_31_IV_HP_SPEED_TIMID",
+          "moves": [
+            "MOVE_SKILL_SWAP",
+            "MOVE_FAKE_OUT",
+            "MOVE_ICY_WIND",
+            "MOVE_HELPING_HAND"
+          ],
+          "reference": "Battle 122 Contrary handoff lead"
+        }
+      },
+      {
+        "index": 1,
+        "from": "SPECIES_DELPHOX",
+        "build": {
+          "level": 3,
+          "species": "SPECIES_PYROAR",
+          "item": "ITEM_IRON_BALL",
+          "ability_slot": 1,
+          "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+          "moves": [
+            "MOVE_OVERHEAT",
+            "MOVE_HYPER_VOICE",
+            "MOVE_DARK_PULSE",
+            "MOVE_PROTECT"
+          ],
+          "reference": "Battle 122 weighted Contrary recipient"
+        }
+      },
+      {
+        "index": 2,
+        "from": "SPECIES_GOURGEIST",
+        "build": {
+          "level": 4,
+          "species": "SPECIES_CINDERACE",
+          "item": "ITEM_EXPERT_BELT",
+          "ability_slot": 2,
+          "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+          "moves": [
+            "MOVE_PYRO_BALL",
+            "MOVE_HIGH_JUMP_KICK",
+            "MOVE_SUCKER_PUNCH",
+            "MOVE_TAUNT"
+          ],
+          "reference": "Battle 122 Libero physical reserve"
         }
       }
     ]

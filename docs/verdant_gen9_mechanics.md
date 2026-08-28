@@ -9,10 +9,12 @@ the 25 chosen endpoints recognizable without importing Terastallization.
 - Armor Tail blocks opposing priority for both allies.
 - Beads, Sword, and Vessel of Ruin apply their native field-wide stat
   reductions; all three are Mold Breaker-aware.
-- Commander keeps Tatsugiri visible and targetable. While it is beside Dondozo,
-  Dondozo deals 1.5x damage. Order Up then raises Attack for Curly, Defense for
-  Droopy, or Speed for Stretchy. This is Verdant's deliberate old-engine rewrite
-  of the swallowed/untargetable mechanic.
+- Commander uses its canonical doubles behavior. Tatsugiri enters Dondozo,
+  becomes invisible and untargetable, gives Dondozo +2 Attack, Defense, Sp. Atk,
+  Sp. Def, and Speed, and prevents either partner from switching until Dondozo
+  leaves. Order Up raises Attack for Curly, Defense for Droopy, or Speed for
+  Stretchy, including after a swallowed Tatsugiri faints. The activation and
+  Order Up animations use the three native Emerald Expansion Tatsugiri sprites.
 - Cud Chew replays a Berry the holder actually ate on the following turn.
 - Good as Gold blocks status moves used by other battlers, and trainer AI avoids
   wasting those moves into it.

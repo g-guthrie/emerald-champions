@@ -436,6 +436,7 @@ extern const u8 BattleScript_DefDownSpeedUp[];
 extern const u8 BattleScript_BurnUpRemoveType[];
 extern const u8 BattleScript_CudChewActivates[];
 extern const u8 BattleScript_ToxicDebrisActivates[];
+extern const u8 BattleScript_CommanderActivates[];
 extern const u8 BattleScript_MoveEffectSaltCure[];
 extern const u8 BattleScript_EffectCombinedPledge_Water[];
 extern const u8 BattleScript_EffectCombinedPledge_Fire[];

@@ -1,0 +1,251 @@
+{
+  "version": 1,
+  "identity": "Emerald Champions Battle Design Operating System",
+  "objective": "Design marquee campaign anchors backward, then author and source-close every reachable physical trainer encounter forward from the unique canonical next battle.",
+  "policy": {
+    "advisory_not_allocator": true,
+    "judgment_owns_each_team": true,
+    "global_quotas_forbidden": true,
+    "historic_references_are_evidence_not_templates": true,
+    "strategy_precedes_level_tuning": true,
+    "difficulty_is_tuned_with_levels_before_weakening_sound_ai": true,
+    "implementation_order": "forward",
+    "marquee_design_order": "backward",
+    "source_mutation_requires_chronological_turn": true
+  },
+  "authoritative_sources": {
+    "philosophy": "docs/verdant_battle_audit_v2.md",
+    "production_contract": "docs/verdant_battle_dossier_spec.md",
+    "canonical_sequence": "docs/verdant_battle_sequence.json",
+    "experience_ledger": "docs/verdant_battle_experience_ledger.json",
+    "physical_atlas": "docs/verdant_physical_encounter_atlas.json",
+    "marquee_designs": "docs/verdant_marquee_battle_designs.json",
+    "campaign_reservations": "docs/verdant_historic_team_reservations.json",
+    "competitive_index": "docs/competitive_team_index.json",
+    "competitive_index_meta": "docs/competitive_team_index.meta.json",
+    "battle_guide": "docs/verdant_battle_guide.json",
+    "species_usage": "docs/verdant_species_usage_ledger.json",
+    "quality_audit": "docs/verdant_team_quality_audit.json"
+  },
+  "current_state": {
+    "closed_encounters": 143,
+    "next_index": 144,
+    "next_encounter_id": "BATTLE_144_ASHEN_WOODS_ALANNAH",
+    "queued_sequence_entries": 0,
+    "canonical_sequence_groups": 144,
+    "physical_encounter_groups": 522,
+    "unordered_physical_groups": 378,
+    "reachable_battle_definitions": 810,
+    "internal_unreachable_definitions": 44,
+    "trainer_records": 854,
+    "main_story_league_dossiers": 5,
+    "main_story_league_design_complete": 5,
+    "campaign_complete": false
+  },
+  "lifecycle": [
+    "blueprint",
+    "authored-draft",
+    "author-self-checked",
+    "design-complete",
+    "source-implemented",
+    "static-validated",
+    "source-closed",
+    "runtime-playtested",
+    "release-closed"
+  ],
+  "dossier_contract": {
+    "required_top_level": [
+      "anchor_id",
+      "planning_tier",
+      "status",
+      "campaign_state",
+      "runtime",
+      "rolling_context",
+      "identity",
+      "difficulty",
+      "team",
+      "ordering",
+      "ai",
+      "counterplay",
+      "competitive_research",
+      "campaign_reservations",
+      "presentation",
+      "author_self_check",
+      "verification",
+      "mechanics_proposal"
+    ],
+    "campaign_state_required": [
+      "canonical_stage",
+      "location",
+      "strict_cap",
+      "player_tools",
+      "mega_access",
+      "evolution_phase",
+      "preparation_access",
+      "gauntlet_position",
+      "mechanics_baseline_id"
+    ],
+    "runtime_required": [
+      "trainer_ids",
+      "canonical_format",
+      "party_size",
+      "required",
+      "variants",
+      "current_source_baseline",
+      "source_paths"
+    ],
+    "rolling_context_required": [
+      "available",
+      "reason",
+      "previous_encounters",
+      "protected_neighbor_anchors",
+      "required_preimplementation_review"
+    ],
+    "identity_required": [
+      "memory_hook",
+      "story_fit",
+      "primary_player_question",
+      "primary_mode",
+      "secondary_mode",
+      "preview_pressure"
+    ],
+    "difficulty_required": [
+      "target",
+      "observed",
+      "rationale",
+      "pressure_sources",
+      "resource_tax",
+      "tuning_order"
+    ],
+    "mon_required": [
+      "order",
+      "species",
+      "level_offset",
+      "item",
+      "ability",
+      "ability_slot",
+      "spread",
+      "moves",
+      "role",
+      "lead_group",
+      "mega_candidate"
+    ],
+    "ordering_required": [
+      "intended_lead",
+      "mandatory_order_reason",
+      "reserve_sequence"
+    ],
+    "ai_required": [
+      "existing_flags",
+      "required_flags",
+      "custom_requirements",
+      "forbidden_behaviors",
+      "state_machine"
+    ],
+    "counterplay_required": [
+      "classes",
+      "intentional_weakness",
+      "first_loss_lesson",
+      "revealed_information",
+      "unacceptable_failure_modes"
+    ],
+    "competitive_research_required": [
+      "index",
+      "queries",
+      "candidates",
+      "selected_reference_ids",
+      "rejected_gimmicks"
+    ],
+    "reservations_required": [
+      "spends",
+      "preserves",
+      "releases",
+      "collision_notes"
+    ],
+    "presentation_required": [
+      "intro_concept",
+      "defeat_concept",
+      "post_battle_concept",
+      "hint_concept",
+      "native_width_status",
+      "guide_summary"
+    ],
+    "verification_required": [
+      "design_schema",
+      "species_items_moves_abilities",
+      "source_implementation",
+      "script_and_format",
+      "dialogue_width",
+      "guide",
+      "runtime",
+      "observed_difficulty",
+      "evidence",
+      "source_blockers"
+    ],
+    "author_self_check_required": [
+      "strongest_part",
+      "weakest_link"
+    ]
+  },
+  "difficulty_contract": {
+    "minimum": 7.5,
+    "ordinary_target": 8.5,
+    "marquee_target": 10,
+    "authored_setting": "Hard",
+    "medium_level_delta": -2,
+    "easy_level_delta": -4,
+    "observed_is_null_until_real_rom_playtest": true,
+    "non_level_systems_identical_across_settings": true
+  },
+  "rolling_context_contract": {
+    "maximum_previous_encounters": 10,
+    "use_every_available_prior_encounter_at_opening": true,
+    "future_anchor_context_may_be_unavailable": true,
+    "future_anchor_requires_refresh_before_implementation": true,
+    "route_or_gym_zoom_out_required": true,
+    "similarity_is_advisory": true
+  },
+  "reference_contract": {
+    "rank_against_complete_index": true,
+    "inspect_selected_records_in_full": true,
+    "record_selected_and_rejected_reasons": true,
+    "allowed_imports": [
+      "exact team",
+      "competitive core",
+      "role",
+      "mechanic",
+      "mode discipline"
+    ],
+    "remove_unsupported_gimmicks": [
+      "Terastallization",
+      "Z-Moves",
+      "Dynamax",
+      "Gigantamax"
+    ],
+    "supported_gimmicks": [
+      "Mega Evolution",
+      "Primal Reversion"
+    ],
+    "public_evidence_only": true
+  },
+  "work_order": [
+    "Elite Four and Wallace connected attrition arc",
+    "Gyms backward from Juan through Wattson",
+    "Magma and Aqua backward from final leaders through admins",
+    "Rival milestones, Steven, rematches, and superbosses",
+    "Campaign-wide anchor collision and coverage review",
+    "Chronological source closure from Battle 73 through every physical encounter"
+  ],
+  "closure_contract": {
+    "all_reachable_formats_and_branches_required": true,
+    "optional_trainers_required": true,
+    "paired_and_split_paths_required": true,
+    "rematches_required": true,
+    "postgame_required": true,
+    "guide_generated_from_same_design": true,
+    "legality_and_visual_width_are_hard_gates": true,
+    "source_closed_does_not_imply_playtested": true,
+    "campaign_complete_requires_release_closed_physical_groups": true,
+    "final_build_and_full_regression_required": true
+  }
+}

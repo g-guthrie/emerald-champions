@@ -389,6 +389,9 @@
 #define ANIM_TAG_PRIMAL_PARTICLES           (ANIM_SPRITES_START + 384)
 #define ANIM_TAG_STEEL_BEAM                 (ANIM_SPRITES_START + 385)
 #define ANIM_TAG_POLTERGEIST                (ANIM_SPRITES_START + 386)
+#define ANIM_TAG_TATSUGIRI_CURLY            (ANIM_SPRITES_START + 387)
+#define ANIM_TAG_TATSUGIRI_DROOPY           (ANIM_SPRITES_START + 388)
+#define ANIM_TAG_TATSUGIRI_STRETCHY         (ANIM_SPRITES_START + 389)
 
 // battlers
 #define ANIM_ATTACKER    0
@@ -520,6 +523,7 @@
 #define B_ANIM_RAINBOW                  34
 #define B_ANIM_SEA_OF_FIRE              35
 #define B_ANIM_SWAMP                    36
+#define B_ANIM_COMMANDER                37
 
 // special animations table (gBattleAnims_Special)
 #define B_ANIM_LVL_UP                   0
@@ -602,5 +606,10 @@
 #define ANIM_SURF_PAL_SURF           0
 #define ANIM_SURF_PAL_MUDDY_WATER    1
 #define ANIM_SURF_PAL_SLUDGE_WAVE    2
+
+#define ANIM_ORDER_UP_NONE           0
+#define ANIM_ORDER_UP_CURLY          1
+#define ANIM_ORDER_UP_DROOPY         2
+#define ANIM_ORDER_UP_STRETCHY       3
 
 #endif // GUARD_CONSTANTS_BATTLE_ANIM_H

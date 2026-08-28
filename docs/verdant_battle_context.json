@@ -8,16 +8,16 @@
     "tuning_preference": "Preserve sound strategy; tune opponent levels relative to the fixed cap first."
   },
   "selection": {
-    "index": 73,
-    "encounter_id": "BATTLE_073_ROUTE_117_DEREK",
-    "location": "Route117",
-    "category": "optional single",
+    "index": 144,
+    "encounter_id": "BATTLE_144_ASHEN_WOODS_ALANNAH",
+    "location": "AshenWoods",
+    "category": "optional Ashen Woods trainer",
     "status": "next",
     "trainer_ids": [
-      "TRAINER_DEREK"
+      "TRAINER_ALANNAH"
     ],
-    "access_note": "Fixed at (17,12), facing up with four-tile sight. Derek is a normal independent single with no callback, direct reward, Match Call registration, or rematch. Derek and the upper-meadow cluster are reversible in open terrain; the lower-lane sweep is the canonical tie-break.",
-    "strict_cap": 40,
+    "access_note": "Alannah is the first unclosed Ashen Woods trainer after Route 111.",
+    "strict_cap": 45,
     "strict_cap_source": "canonical-sequence-stage",
     "campaign_point": null,
     "soft_reservation": null,
@@ -28,31 +28,41 @@
         "single"
       ],
       "source_variant_count": 1,
-      "representative_party_size": 2,
-      "average_party_size": 2.0,
+      "representative_party_size": 3,
+      "average_party_size": 3.0,
       "species": [
-        "SPECIES_MOTHIM",
-        "SPECIES_WORMADAM_SANDY_CLOAK"
+        "SPECIES_DURANT",
+        "SPECIES_DUSCLOPS",
+        "SPECIES_PRIMARINA"
       ],
       "items": [],
       "moves": [
-        "MOVE_HIDDEN_POWER",
-        "MOVE_PSYBEAM",
-        "MOVE_QUIVER_DANCE",
-        "MOVE_ROCK_BLAST",
-        "MOVE_SILVER_WIND"
+        "MOVE_CRUNCH",
+        "MOVE_CURSE",
+        "MOVE_ICY_WIND",
+        "MOVE_INFESTATION",
+        "MOVE_IRON_HEAD",
+        "MOVE_MOONBLAST",
+        "MOVE_NIGHT_SHADE",
+        "MOVE_PROTECT",
+        "MOVE_SING",
+        "MOVE_SPARKLING_ARIA",
+        "MOVE_THUNDER_FANG",
+        "MOVE_X_SCISSOR"
       ],
-      "synergy_tags": [],
+      "synergy_tags": [
+        "active speed control"
+      ],
       "level_offsets": [
-        -2
+        -1
       ],
-      "average_level_offset": -2.0,
-      "max_level_offset": -2,
+      "average_level_offset": -1.0,
+      "max_level_offset": -1,
       "densities": {
-        "protect": 0.0,
+        "protect": 0.333,
         "fake_out": 0.0,
-        "setup": 1.0,
-        "speed_control_or_priority": 0.0,
+        "setup": 0.0,
+        "speed_control_or_priority": 0.667,
         "premium_item": 0.0
       }
     }
@@ -60,241 +70,549 @@
   "ledger": {
     "path": "docs/verdant_battle_experience_ledger.json",
     "present": true,
-    "records": 72,
+    "records": 143,
     "rolling_fallback_records": []
   },
   "rolling_window": {
     "requested_size": 10,
     "actual_size": 10,
     "encounter_range": [
-      63,
-      72
+      134,
+      143
     ],
     "tempo_counts": {
-      "Ally-safe Punk Rock spread in the 3+3 joint, Vivian's disruptive/bulky coverage single, or Kirk's direct Ghost-backed special single.": 1,
-      "Fast item-removal and Tailwind lead, target-order-sensitive young Ground reserve, returning mixed partners, then source-last signature Mega balance closer.": 1,
-      "Four changing fast singles legs\u2014lock and pivot, Sash trade, special setup, physical priority\u2014without a persistent field or custom AI subsystem.": 1,
-      "One guaranteed Terrain/Tailwind opening followed by native resistance-and-base-damage reserve selection, reciprocal speed modes, priority denial, and a dynamically deployed story Mega.": 1,
-      "One order-changing slow-cannon lead followed by native adaptive special Unburden or physical Beast Boost speed, with no persistent field mode.": 1,
-      "One visible ally-targeting activation, Defense-powered physical pressure, then conditional inheritance or immediate reserve offense selected by the native matchup logic rather than a speed field.": 1,
-      "Proactive Stuff Cheeks opening, reactive berry thresholds, cross-trainer second-item transfers, and two independent item-economy singles.": 1,
-      "Slow protected setup lead, then adaptive physical priority, redirection and sleep, or fragile special pressure without weather, terrain, room, Tailwind, screens, or hazards.": 1,
-      "Two passive-but-dangerous trap leads, Good as Gold removal tax, then rare bulky phazing cashout with no speed field.": 1,
-      "Two-body contact toll, frail Rough Skin reserve, then rare special Flame Body spread finish with no speed or field mode.": 1
+      "Burn and room control open the ruin; Magic Guard and Rough Skin punish direct races; Lapras and Metagross deepen rematches before one psychic Mega finale.": 1,
+      "Fake Out buys Empoleon control; Roserade and Haxorus force opposite answers; Scizor and Latios turn later rematches into a six-stage elemental relay.": 1,
+      "Fake Out buys Steely Spirit's boosted Iron and Anchor attacks; Sirfetch'd brings critical pressure and Kartana supplies the frail Beast Boost finish.": 1,
+      "Flare Boost Gourgeist can reverse speed while Gengar attacks immediately; Choice Band Sudowoodo and Assault Vest Magmortar make the reserves physical and special props.": 1,
+      "Rain Dish and Giga Drain begin the growth, Dry Skin Parasect adds Spore and seeds, and Mega Venusaur closes behind Thick Fat recovery.": 1,
+      "Sash Victreebel spends a turn removing a partner's liability; Slaking, Golisopod, and Durant each become a different liberated threat.": 1,
+      "Sash setup and Baton Pass threaten a relay; Wonder Guard changes the answer; Marshadow steals any careless boost and closes.": 1,
+      "Scyther tests patient setup defense, Kabutops risks a Shell Smash race, and Mega Beedrill ends with immediate frail speed.": 1,
+      "Spiritomb blunts both damage categories, Scarf Tyrantrum fires recoil-free Head Smash, Contrary Serperior snowballs, and Sturdy Carracosta threatens one Shell Smash.": 1,
+      "Two Toxic Orbs advertise opposite payoffs; Vaporeon supplies speed and Helping Hand while Drapion turns high-crit edges into the finish.": 1
     },
     "format_counts": {
-      "double": 7,
-      "native-pair double": 2,
-      "single": 1
+      "double": 6,
+      "mixed": 1,
+      "single": 3
     },
     "novelty_tag_counts": {
-      "guarded-double": 6,
-      "adaptive-reserve-selection": 3,
-      "no-mega": 3,
-      "no-weather": 3,
-      "route-double": 3,
-      "gym-native-pair": 2,
-      "joint-3-plus-3": 2,
-      "moving-triathlete": 2,
-      "no-legendary": 2,
-      "no-room": 2,
-      "no-speed-field": 2,
-      "no-speed-mode": 2,
-      "no-terrain": 2,
-      "safe-one-usable": 2,
-      "split-four-singles": 2,
-      "ability-inheritance-relay": 1,
-      "abra-sash": 1,
-      "accelerock": 1,
-      "accelgor": 1,
-      "adaptive-replacement": 1,
-      "after-you": 1,
-      "alolan-muk": 1,
-      "armor-tail": 1,
+      "route111-north": 10,
+      "rock-head": 2,
+      "anchor-crew": 1,
+      "ancient-survivors": 1,
+      "baton-pass": 1,
       "beast-boost": 1,
-      "beat-up-stamina": 1,
-      "belly-drum": 1,
-      "body-press-conversion": 1,
-      "boomburst": 1,
-      "bug-gem-unburden": 1,
-      "cheek-pouch": 1,
-      "choice-band-lock": 1,
-      "contact-tax": 1,
-      "cycling-double": 1,
-      "day-care-class": 1,
-      "declinable-retry": 1,
-      "destiny-bond": 1,
-      "dragon-tail": 1,
-      "dual-speed-mode": 1,
-      "electric-terrain": 1,
-      "emolga": 1,
-      "encore-setup": 1,
-      "eternal-floette": 1,
-      "explicit-two-mon-guard": 1,
-      "five-young-plus-guardian": 1,
-      "flame-body": 1,
-      "flare-boost-pumpkaboo": 1,
-      "flower-collection": 1,
-      "follow-me": 1,
-      "foongus-redirection": 1,
-      "format-break": 1,
-      "four-leg-sprint": 1,
-      "four-of-six-electric": 1,
-      "froslass-sash": 1,
-      "ghost-immunity": 1,
-      "gluttony": 1,
-      "gluttony-figy": 1,
-      "good-as-gold-gholdengo": 1,
-      "guzzlord": 1,
-      "gym-double": 1,
-      "hazard-maze": 1,
-      "iron-barbs": 1,
-      "iron-hands": 1,
-      "knockout-order": 1,
-      "lightning-rod-ally-activation": 1,
-      "lycanroc-dusk": 1,
-      "mega-gallade": 1,
-      "mega-kangaskhan": 1,
-      "mega-raichu-y": 1,
-      "moltres": 1,
-      "move-order-relay": 1,
-      "munchlax": 1,
-      "mythical-showcase": 1,
-      "no-guard": 1,
-      "no-scripted-heal": 1,
-      "no-single-engine": 1,
-      "no-tailwind": 1,
-      "noncontact-counterplay": 1,
-      "normal-gengar": 1,
-      "parental-bond": 1,
-      "passimian": 1,
-      "pheromosa": 1,
-      "power-of-alchemy": 1,
-      "priority-closer": 1,
-      "published-balance-chassis": 1,
-      "punk-rock-toxtricity": 1,
-      "pure-power-medicham": 1,
-      "receiver": 1,
-      "reciprocal-mega": 1,
-      "red-card-skarmory": 1,
-      "regular-lopunny": 1,
-      "removal-tax": 1,
-      "required-gym-boss": 1,
-      "required-rival-double": 1,
-      "reusable-phazing-ai": 1,
-      "reusable-spread-ai": 1,
-      "rocky-helmet": 1,
+      "broken-shackles": 1,
+      "competitive-empoleon": 1,
+      "contrary": 1,
+      "critical-blade": 1,
+      "double-rematch-family": 1,
+      "dragon-dance": 1,
+      "draining-growth": 1,
+      "dry-skin": 1,
+      "elemental-relay": 1,
+      "emergency-exit": 1,
+      "eviolite-scyther": 1,
+      "fake-out": 1,
+      "flare-boost": 1,
+      "gastro-acid": 1,
+      "haunted-props": 1,
+      "helping-hand": 1,
+      "infiltrator": 1,
+      "magic-guard": 1,
+      "mega-beedrill": 1,
+      "mega-latios": 1,
+      "mega-mewtwo-y": 1,
+      "mega-venusaur": 1,
+      "mixed-rematch-family": 1,
+      "mixed-reserves": 1,
+      "poison-heal": 1,
+      "rain-dish": 1,
       "rough-skin": 1,
-      "route-single": 1,
-      "salazzle": 1,
-      "schooling-wishiwashi": 1,
-      "second-item-relay": 1,
-      "sharpedo": 1,
-      "soundproof-prefix": 1,
-      "staryu-analytic": 1,
-      "stuff-cheeks": 1,
-      "switch-puzzle": 1,
-      "symbiosis": 1,
-      "tailwind": 1,
-      "tapu-koko": 1,
-      "target-order-ground-geometry": 1,
-      "target-ten": 1,
-      "togepi": 1,
-      "toxic-debris-glimmet": 1,
+      "ruin-guardians": 1,
+      "shell-smash": 1,
+      "slow-start": 1,
+      "sniper": 1,
+      "spectral-thief": 1,
+      "spore": 1,
+      "steelworker": 1,
+      "steely-spirit": 1,
+      "sturdy-shell-smash": 1,
+      "three-blades": 1,
+      "three-shadow-relay": 1,
+      "toxic-boost": 1,
+      "toxic-edge": 1,
       "trick-room": 1,
-      "ultra-beast-showcase": 1,
-      "unburden-rejected": 1,
-      "volt-switch": 1,
-      "wally-continuity": 1,
-      "weavile-zapdos-lead": 1,
-      "white-herb": 1,
-      "wide-guard": 1,
-      "world-champion-spine": 1,
-      "young-drilbur": 1,
-      "young-ferroseed": 1,
-      "zapdos": 1,
-      "zeraora": 1
+      "trick-room-option": 1,
+      "truant": 1,
+      "wonder-guard": 1
     },
     "entries": [
       {
-        "index": 63,
-        "encounter_id": "BATTLE_063_ROUTE_110_CYCLING_JACOB",
+        "index": 134,
+        "encounter_id": "BATTLE_134_ROUTE_111_DAISUKE",
         "identity": {
-          "location": "Route110",
-          "category": "optional cycling double",
-          "format": "double",
-          "strict_cap": 30,
-          "memory_hook": "Rocky Helmet Iron Barbs and Rough Skin charge the first collision, Sharpedo keeps the toll fragile, and Flame Body Moltres turns the final contact into a burn risk."
+          "location": "Route111",
+          "category": "optional three-shadow Ninja Boy single",
+          "format": "single",
+          "strict_cap": 45,
+          "memory_hook": "Sash setup and Baton Pass threaten a relay; Wonder Guard changes the answer; Marshadow steals any careless boost and closes."
         },
-        "primary_player_question": "Can the player recognize that only contact is taxed, change attack class or move geometry, and exploit ordinary type seams before chip and Moltres spread pressure accumulate?",
-        "tempo": "Two-body contact toll, frail Rough Skin reserve, then rare special Flame Body spread finish with no speed or field mode.",
+        "primary_player_question": "Can the player deny Ninjask's relay without spending the move or passive-damage answer needed for Shedinja and Marshadow?",
+        "tempo": "Sash setup and Baton Pass threaten a relay; Wonder Guard changes the answer; Marshadow steals any careless boost and closes.",
         "pressure_sources": [
-          "Rocky Helmet plus Iron Barbs Ferroseed",
-          "Rough Skin Druddigon",
-          "Assault Vest",
-          "Rough Skin Sharpedo",
-          "Expert Belt coverage",
-          "Flame Body Moltres",
-          "Heat Wave and Hurricane",
-          "smart defensive switching"
+          "SPECIES_NINJASK",
+          "SPECIES_SHEDINJA",
+          "SPECIES_MARSHADOW"
         ],
-        "intentional_opening": "Ferroseed and Druddigon lead visibly; native AI attacks, seeds, protects, or switches according to the board without forcing a contact-triggering target.",
-        "intentional_weakness": "Special and noncontact damage bypasses the rule, Ferroseed is four-times Fire weak, Sharpedo is frail, Moltres is four-times Rock weak after Charti, and the roster has no speed control or redirection.",
-        "first_loss_lesson": "The damage came from touching, not attacking. Use ranged or noncontact pressure, then preserve Rock damage until Moltres spends or loses Charti Berry.",
+        "intentional_opening": "Source order is intentional and preserved.",
+        "intentional_weakness": "Only three bodies; Taunt, phazing, Haze, hazards, weather, status, multi-hit moves, priority, and ordinary Flying or Fairy pressure all create broad answers.",
+        "first_loss_lesson": "Interrupt the relay, but preserve one clean Wonder Guard answer and never donate boosts to Spectral Thief.",
         "revealed_information": [
-          "Jacob is now a guarded double",
-          "Ferroseed has Rocky Helmet and Iron Barbs",
-          "Druddigon and Sharpedo have Rough Skin",
-          "Moltres has Flame Body and Charti Berry",
-          "noncontact moves do not trigger the toll",
-          "Jacob has no reward or rematch"
+          "cap 45",
+          "single",
+          "3 main members",
+          "three-shadow-relay",
+          "baton-pass",
+          "wonder-guard",
+          "spectral-thief"
         ],
         "counterplay_classes": [
-          "special attacks and noncontact physical moves",
-          "Heat Wave, Surf, Earthquake, Rock Slide, or other spread pressure",
-          "Protective Pads, Long Reach, Neutralizing Gas, Gastro Acid, Skill Swap, item removal, or ability suppression",
-          "Magic Guard for Rocky Helmet only, not Rough Skin or Iron Barbs",
-          "Fire into Ferroseed",
-          "Ice, Fairy, or Dragon into Druddigon",
-          "Electric, Grass, Bug, Fighting, or priority into Sharpedo",
-          "Rock, Water, Electric, or special pressure into Moltres"
+          "Disrupt, redirect, Taunt, or remove the enabling lead or partner.",
+          "Exploit the listed type, item, and damage-category seams.",
+          "Use speed reversal, item removal, status control, focus fire, or setup denial.",
+          "Only three bodies; Taunt, phazing, Haze, hazards, weather, status, multi-hit moves, priority, and ordinary Flying or Fairy pressure all create broad answers."
         ],
-        "target_difficulty": 9.0,
-        "difficulty_rationale": "Four optimized legal levels 30-33 and smart lane-change switching punish autopilot contact, while a whole damage class plus common noncontact spread moves bypasses the central rule and each body has an exposed typed seam.",
-        "tuning_knob": "Tune Moltres from +3 to +2 first, then remove Druddigon's Assault Vest; preserve the contact-only rule and source order.",
+        "target_difficulty": 8.9,
+        "difficulty_rationale": "Optimized cap-plus sets and one coherent interaction create a serious optional puzzle while explicit seams preserve broad counterplay.",
+        "tuning_knob": "Lower the last main-story member by one level first; preserve species, mechanics, and order.",
         "playtest_status": "static-pass-runtime-unplayed",
         "novelty_tags": [
-          "cycling-double",
-          "guarded-double",
-          "contact-tax",
-          "iron-barbs",
-          "rocky-helmet",
-          "rough-skin",
-          "young-ferroseed",
-          "sharpedo",
-          "moltres",
-          "flame-body",
-          "noncontact-counterplay",
-          "no-speed-mode"
+          "route111-north",
+          "three-shadow-relay",
+          "baton-pass",
+          "wonder-guard",
+          "spectral-thief"
         ],
         "historic_reference_ids": [
-          "showdown:gen5randomdoublesbattle:027",
-          "showdown:gen6randomdoublesbattle:004",
-          "showdown:gen6randomdoublesbattle:014"
+          "showdown:gen8randombattle:011",
+          "showdown:gen5randomdoublesbattle:009",
+          "showdown:gen8randomdoublesbattle:002"
         ],
         "corpus_search": {
           "status": "complete-current-review",
           "pool_size": 1005,
-          "selection": "One full-set donor supplies both contact-tax leads and two full-set donors support the reserves; no complete roster fits the cap-30 four-body collision lesson."
+          "selection": "3 indexed references."
         },
         "author_self_check": {
-          "strongest_part": "The first contact teaches the rule instantly and an unexpected Moltres makes the final Cycling Road trainer memorable.",
-          "weakest_link": "A prepared special Fire plus Rock core solves the formation efficiently; that broad answer is intentional and Moltres level is the first tuning knob."
+          "strongest_part": "Sash setup and Baton Pass threaten a relay; Wonder Guard changes the answer; Marshadow steals any careless boost and closes.",
+          "weakest_link": "Only three bodies; Taunt, phazing, Haze, hazards, weather, status, multi-hit moves, priority, and ordinary Flying or Fairy pressure all create broad answers."
         },
         "record_source": "v2-ledger",
-        "location": "Route110",
-        "category": "optional cycling double",
-        "strict_cap": 30,
+        "location": "Route111",
+        "category": "optional three-shadow Ninja Boy single",
+        "strict_cap": 45,
+        "source_facts": {
+          "format": "single",
+          "source_record_formats": [
+            "single"
+          ],
+          "source_variant_count": 1,
+          "representative_party_size": 3,
+          "average_party_size": 3.0,
+          "species": [
+            "SPECIES_MARSHADOW",
+            "SPECIES_NINJASK",
+            "SPECIES_SHEDINJA"
+          ],
+          "items": [
+            "ITEM_FOCUS_SASH",
+            "ITEM_HEAVY_DUTY_BOOTS",
+            "ITEM_LIFE_ORB"
+          ],
+          "moves": [
+            "MOVE_BATON_PASS",
+            "MOVE_CLOSE_COMBAT",
+            "MOVE_ICE_PUNCH",
+            "MOVE_POLTERGEIST",
+            "MOVE_PROTECT",
+            "MOVE_SHADOW_SNEAK",
+            "MOVE_SPECTRAL_THIEF",
+            "MOVE_SWORDS_DANCE",
+            "MOVE_X_SCISSOR"
+          ],
+          "synergy_tags": [],
+          "level_offsets": [
+            2,
+            3,
+            4
+          ],
+          "average_level_offset": 3.0,
+          "max_level_offset": 4,
+          "densities": {
+            "protect": 0.667,
+            "fake_out": 0.0,
+            "setup": 0.333,
+            "speed_control_or_priority": 1.0,
+            "premium_item": 0.667
+          }
+        }
+      },
+      {
+        "index": 135,
+        "encounter_id": "BATTLE_135_ROUTE_111_WILTON",
+        "identity": {
+          "location": "Route111",
+          "category": "optional ruin-guardian Expert rematch family",
+          "format": "single",
+          "strict_cap": 45,
+          "memory_hook": "Burn and room control open the ruin; Magic Guard and Rough Skin punish direct races; Lapras and Metagross deepen rematches before one psychic Mega finale."
+        },
+        "primary_player_question": "Can the player solve a slow ruin in singles, then adapt when Trick Room, grounded spread damage, armor, and Mega Mewtwo Y become one doubles formation?",
+        "tempo": "Burn and room control open the ruin; Magic Guard and Rough Skin punish direct races; Lapras and Metagross deepen rematches before one psychic Mega finale.",
+        "pressure_sources": [
+          "SPECIES_COFAGRIGUS",
+          "SPECIES_REUNICLUS",
+          "SPECIES_GARCHOMP"
+        ],
+        "intentional_opening": "Source order is intentional and preserved.",
+        "intentional_weakness": "The main fight has three bodies; Trick Room is reversible; Cofagrigus is Tauntable; Lapras is slow outside room; Ground immunity, Dark, Ghost, Bug, burn, Wide Guard, and focused special damage remain broad.",
+        "first_loss_lesson": "Choose whether to reverse the room or exploit it, then preserve Dark or Ghost pressure for Reuniclus and the rematch's psychic closer.",
+        "revealed_information": [
+          "cap 45",
+          "single",
+          "3 main members",
+          "ruin-guardians",
+          "trick-room",
+          "magic-guard",
+          "rough-skin",
+          "mega-mewtwo-y",
+          "mixed-rematch-family"
+        ],
+        "counterplay_classes": [
+          "Disrupt, redirect, Taunt, or remove the enabling lead or partner.",
+          "Exploit the listed type, item, and damage-category seams.",
+          "Use speed reversal, item removal, status control, focus fire, or setup denial.",
+          "The main fight has three bodies; Trick Room is reversible; Cofagrigus is Tauntable; Lapras is slow outside room; Ground immunity, Dark, Ghost, Bug, burn, Wide Guard, and focused special damage remain broad."
+        ],
+        "target_difficulty": 9.3,
+        "difficulty_rationale": "Optimized cap-plus sets and one coherent interaction create a serious optional puzzle while explicit seams preserve broad counterplay.",
+        "tuning_knob": "Lower the last main-story member by one level first; preserve species, mechanics, and order.",
+        "playtest_status": "static-pass-runtime-unplayed",
+        "novelty_tags": [
+          "route111-north",
+          "ruin-guardians",
+          "trick-room",
+          "magic-guard",
+          "rough-skin",
+          "mega-mewtwo-y",
+          "mixed-rematch-family"
+        ],
+        "historic_reference_ids": [
+          "vgc:us-nationals-2011",
+          "elite:ray-rizzo:worlds-2012",
+          "vgc:worlds-2012",
+          "showdown:gen9championsrandomdoublesbattle:001"
+        ],
+        "corpus_search": {
+          "status": "complete-current-review",
+          "pool_size": 1005,
+          "selection": "4 indexed references."
+        },
+        "author_self_check": {
+          "strongest_part": "Burn and room control open the ruin; Magic Guard and Rough Skin punish direct races; Lapras and Metagross deepen rematches before one psychic Mega finale.",
+          "weakest_link": "The main fight has three bodies; Trick Room is reversible; Cofagrigus is Tauntable; Lapras is slow outside room; Ground immunity, Dark, Ghost, Bug, burn, Wide Guard, and focused special damage remain broad."
+        },
+        "record_source": "v2-ledger",
+        "location": "Route111",
+        "category": "optional ruin-guardian Expert rematch family",
+        "strict_cap": 45,
+        "source_facts": {
+          "format": "mixed",
+          "source_record_formats": [
+            "double",
+            "single"
+          ],
+          "source_variant_count": 4,
+          "representative_party_size": 6,
+          "average_party_size": 4.75,
+          "species": [
+            "SPECIES_COFAGRIGUS",
+            "SPECIES_GARCHOMP",
+            "SPECIES_LAPRAS",
+            "SPECIES_METAGROSS",
+            "SPECIES_MEWTWO",
+            "SPECIES_REUNICLUS"
+          ],
+          "items": [
+            "ITEM_ASSAULT_VEST",
+            "ITEM_EXPERT_BELT",
+            "ITEM_LIFE_ORB",
+            "ITEM_MENTAL_HERB",
+            "ITEM_MEWTWONITE_Y",
+            "ITEM_ROCKY_HELMET",
+            "ITEM_WEAKNESS_POLICY"
+          ],
+          "moves": [
+            "MOVE_AURA_SPHERE",
+            "MOVE_BODY_PRESS",
+            "MOVE_BULLET_PUNCH",
+            "MOVE_DRAGON_CLAW",
+            "MOVE_EARTHQUAKE",
+            "MOVE_FOCUS_BLAST",
+            "MOVE_FREEZE_DRY",
+            "MOVE_HYDRO_PUMP",
+            "MOVE_ICE_BEAM",
+            "MOVE_METEOR_MASH",
+            "MOVE_PROTECT",
+            "MOVE_PSYCHIC",
+            "MOVE_PSYSTRIKE",
+            "MOVE_RECOVER",
+            "MOVE_ROCK_SLIDE",
+            "MOVE_SHADOW_BALL",
+            "MOVE_THUNDERBOLT",
+            "MOVE_TRICK_ROOM",
+            "MOVE_WILL_O_WISP",
+            "MOVE_ZEN_HEADBUTT"
+          ],
+          "synergy_tags": [
+            "Psychic pressure",
+            "Trick Room"
+          ],
+          "level_offsets": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "average_level_offset": 3.21,
+          "max_level_offset": 6,
+          "densities": {
+            "protect": 0.526,
+            "fake_out": 0.0,
+            "setup": 0.0,
+            "speed_control_or_priority": 0.842,
+            "premium_item": 0.947
+          }
+        }
+      },
+      {
+        "index": 136,
+        "encounter_id": "BATTLE_136_ROUTE_111_BROOKE",
+        "identity": {
+          "location": "Route111",
+          "category": "optional elemental-relay Cooltrainer rematch family",
+          "format": "double",
+          "strict_cap": 45,
+          "memory_hook": "Fake Out buys Empoleon control; Roserade and Haxorus force opposite answers; Scizor and Latios turn later rematches into a six-stage elemental relay."
+        },
+        "primary_player_question": "Can the player keep changing defensive answers as Water, Fire, Grass, Dragon, Bug, Steel, and Psychic pass initiative across the board?",
+        "tempo": "Fake Out buys Empoleon control; Roserade and Haxorus force opposite answers; Scizor and Latios turn later rematches into a six-stage elemental relay.",
+        "pressure_sources": [
+          "SPECIES_EMPOLEON",
+          "SPECIES_INFERNAPE",
+          "SPECIES_ROSERADE",
+          "SPECIES_HAXORUS"
+        ],
+        "intentional_opening": "Source order is intentional and preserved.",
+        "intentional_weakness": "There is no weather, room, redirection, trap, or recovery loop; Infernape is Sash frail, Haxorus must set up, Scizor is Fire-vulnerable, and Latios remains exposed to Ice, Fairy, Ghost, Bug, and Dark.",
+        "first_loss_lesson": "Do not commit one wall to the whole relay: remove the tempo lead, deny Haxorus setup, and retain the correct answer for the current stage.",
+        "revealed_information": [
+          "cap 45",
+          "double",
+          "4 main members",
+          "elemental-relay",
+          "competitive-empoleon",
+          "fake-out",
+          "dragon-dance",
+          "mega-latios",
+          "double-rematch-family"
+        ],
+        "counterplay_classes": [
+          "Disrupt, redirect, Taunt, or remove the enabling lead or partner.",
+          "Exploit the listed type, item, and damage-category seams.",
+          "Use speed reversal, item removal, status control, focus fire, or setup denial.",
+          "There is no weather, room, redirection, trap, or recovery loop; Infernape is Sash frail, Haxorus must set up, Scizor is Fire-vulnerable, and Latios remains exposed to Ice, Fairy, Ghost, Bug, and Dark."
+        ],
+        "target_difficulty": 9.4,
+        "difficulty_rationale": "Optimized cap-plus sets and one coherent interaction create a serious optional puzzle while explicit seams preserve broad counterplay.",
+        "tuning_knob": "Lower the last main-story member by one level first; preserve species, mechanics, and order.",
+        "playtest_status": "static-pass-runtime-unplayed",
+        "novelty_tags": [
+          "route111-north",
+          "elemental-relay",
+          "competitive-empoleon",
+          "fake-out",
+          "dragon-dance",
+          "mega-latios",
+          "double-rematch-family"
+        ],
+        "historic_reference_ids": [
+          "smogon:gen4ou:002",
+          "showdown:gen9randomdoublesbattle:029",
+          "vgc:worlds-2013",
+          "vgc:worlds-2009"
+        ],
+        "corpus_search": {
+          "status": "complete-current-review",
+          "pool_size": 1005,
+          "selection": "4 indexed references."
+        },
+        "author_self_check": {
+          "strongest_part": "Fake Out buys Empoleon control; Roserade and Haxorus force opposite answers; Scizor and Latios turn later rematches into a six-stage elemental relay.",
+          "weakest_link": "There is no weather, room, redirection, trap, or recovery loop; Infernape is Sash frail, Haxorus must set up, Scizor is Fire-vulnerable, and Latios remains exposed to Ice, Fairy, Ghost, Bug, and Dark."
+        },
+        "record_source": "v2-ledger",
+        "location": "Route111",
+        "category": "optional elemental-relay Cooltrainer rematch family",
+        "strict_cap": 45,
+        "source_facts": {
+          "format": "double",
+          "source_record_formats": [
+            "double"
+          ],
+          "source_variant_count": 4,
+          "representative_party_size": 6,
+          "average_party_size": 5.0,
+          "species": [
+            "SPECIES_EMPOLEON",
+            "SPECIES_HAXORUS",
+            "SPECIES_INFERNAPE",
+            "SPECIES_LATIOS",
+            "SPECIES_ROSERADE",
+            "SPECIES_SCIZOR"
+          ],
+          "items": [
+            "ITEM_ASSAULT_VEST",
+            "ITEM_FOCUS_SASH",
+            "ITEM_LATIOSITE",
+            "ITEM_LIFE_ORB",
+            "ITEM_LUM_BERRY",
+            "ITEM_SITRUS_BERRY",
+            "ITEM_SOUL_DEW"
+          ],
+          "moves": [
+            "MOVE_BUG_BITE",
+            "MOVE_BULLET_PUNCH",
+            "MOVE_CLOSE_COMBAT",
+            "MOVE_DRACO_METEOR",
+            "MOVE_DRAGON_CLAW",
+            "MOVE_DRAGON_DANCE",
+            "MOVE_EARTHQUAKE",
+            "MOVE_EXTRASENSORY",
+            "MOVE_FAKE_OUT",
+            "MOVE_FIRE_PUNCH",
+            "MOVE_FLASH_CANNON",
+            "MOVE_GIGA_DRAIN",
+            "MOVE_ICY_WIND",
+            "MOVE_KNOCK_OFF",
+            "MOVE_MACH_PUNCH",
+            "MOVE_PROTECT",
+            "MOVE_PSYSHOCK",
+            "MOVE_SCALD",
+            "MOVE_SLUDGE_BOMB",
+            "MOVE_SUPERPOWER",
+            "MOVE_TAILWIND"
+          ],
+          "synergy_tags": [
+            "Earthquake immunity",
+            "Fake Out tempo",
+            "Tailwind",
+            "active speed control",
+            "priority pressure",
+            "status control"
+          ],
+          "level_offsets": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "average_level_offset": 3.1,
+          "max_level_offset": 6,
+          "densities": {
+            "protect": 0.7,
+            "fake_out": 0.2,
+            "setup": 0.2,
+            "speed_control_or_priority": 1.0,
+            "premium_item": 0.7
+          }
+        }
+      },
+      {
+        "index": 137,
+        "encounter_id": "BATTLE_137_ROUTE_111_HAYDEN",
+        "identity": {
+          "location": "Route111",
+          "category": "optional toxic-edge Kindler double",
+          "format": "double",
+          "strict_cap": 45,
+          "memory_hook": "Two Toxic Orbs advertise opposite payoffs; Vaporeon supplies speed and Helping Hand while Drapion turns high-crit edges into the finish."
+        },
+        "primary_player_question": "Can the player exploit the activation turn before poison becomes healing, boosted Facade, and Sniper pressure?",
+        "tempo": "Two Toxic Orbs advertise opposite payoffs; Vaporeon supplies speed and Helping Hand while Drapion turns high-crit edges into the finish.",
+        "pressure_sources": [
+          "SPECIES_GLISCOR",
+          "SPECIES_ZANGOOSE",
+          "SPECIES_VAPOREON",
+          "SPECIES_DRAPION"
+        ],
+        "intentional_opening": "Source order is intentional and preserved.",
+        "intentional_weakness": "The Orbs require activation; Zangoose is frail; Vaporeon has a visible Grass and Electric seam; burn, Haze, item removal, priority, and focused special pressure remain broad.",
+        "first_loss_lesson": "Use the free activation turn: remove Zangoose or strip an Orb before poison transforms the team's damage economy.",
+        "revealed_information": [
+          "cap 45",
+          "double",
+          "4 main members",
+          "toxic-edge",
+          "poison-heal",
+          "toxic-boost",
+          "helping-hand",
+          "sniper"
+        ],
+        "counterplay_classes": [
+          "Disrupt, redirect, Taunt, or remove the enabling lead or partner.",
+          "Exploit the listed type, item, and damage-category seams.",
+          "Use speed reversal, item removal, status control, focus fire, or setup denial.",
+          "The Orbs require activation; Zangoose is frail; Vaporeon has a visible Grass and Electric seam; burn, Haze, item removal, priority, and focused special pressure remain broad."
+        ],
+        "target_difficulty": 9.1,
+        "difficulty_rationale": "Optimized cap-plus sets and one coherent interaction create a serious optional puzzle while explicit seams preserve broad counterplay.",
+        "tuning_knob": "Lower the last main-story member by one level first; preserve species, mechanics, and order.",
+        "playtest_status": "static-pass-runtime-unplayed",
+        "novelty_tags": [
+          "route111-north",
+          "toxic-edge",
+          "poison-heal",
+          "toxic-boost",
+          "helping-hand",
+          "sniper"
+        ],
+        "historic_reference_ids": [
+          "smogon:gen9ou:010",
+          "smogon:gen8nu:009",
+          "smogon:gen8nu:002",
+          "showdown:gen6randomdoublesbattle:013"
+        ],
+        "corpus_search": {
+          "status": "complete-current-review",
+          "pool_size": 1005,
+          "selection": "4 indexed references."
+        },
+        "author_self_check": {
+          "strongest_part": "Two Toxic Orbs advertise opposite payoffs; Vaporeon supplies speed and Helping Hand while Drapion turns high-crit edges into the finish.",
+          "weakest_link": "The Orbs require activation; Zangoose is frail; Vaporeon has a visible Grass and Electric seam; burn, Haze, item removal, priority, and focused special pressure remain broad."
+        },
+        "record_source": "v2-ledger",
+        "location": "Route111",
+        "category": "optional toxic-edge Kindler double",
+        "strict_cap": 45,
         "source_facts": {
           "format": "double",
           "source_record_formats": [
@@ -304,439 +622,355 @@
           "representative_party_size": 4,
           "average_party_size": 4.0,
           "species": [
-            "SPECIES_DRUDDIGON",
-            "SPECIES_FERROSEED",
-            "SPECIES_MOLTRES",
-            "SPECIES_SHARPEDO"
+            "SPECIES_DRAPION",
+            "SPECIES_GLISCOR",
+            "SPECIES_VAPOREON",
+            "SPECIES_ZANGOOSE"
           ],
           "items": [
-            "ITEM_ASSAULT_VEST",
-            "ITEM_CHARTI_BERRY",
-            "ITEM_EXPERT_BELT",
-            "ITEM_ROCKY_HELMET"
+            "ITEM_LEFTOVERS",
+            "ITEM_SCOPE_LENS",
+            "ITEM_TOXIC_ORB"
           ],
           "moves": [
-            "MOVE_AIR_SLASH",
-            "MOVE_DRAGON_CLAW",
-            "MOVE_FIRE_PUNCH",
-            "MOVE_GYRO_BALL",
-            "MOVE_HEAT_WAVE",
-            "MOVE_ICE_FANG",
-            "MOVE_IRON_HEAD",
+            "MOVE_CLOSE_COMBAT",
+            "MOVE_CROSS_POISON",
+            "MOVE_EARTHQUAKE",
+            "MOVE_FACADE",
+            "MOVE_HELPING_HAND",
+            "MOVE_ICY_WIND",
             "MOVE_KNOCK_OFF",
-            "MOVE_LEECH_SEED",
-            "MOVE_LIQUIDATION",
+            "MOVE_MUDDY_WATER",
+            "MOVE_NIGHT_SLASH",
             "MOVE_PROTECT",
-            "MOVE_PSYCHIC_FANGS",
-            "MOVE_ROOST",
-            "MOVE_SUCKER_PUNCH"
+            "MOVE_QUICK_ATTACK",
+            "MOVE_ROCK_SLIDE"
           ],
           "synergy_tags": [
-            "residual control"
+            "Earthquake immunity",
+            "active speed control"
           ],
           "level_offsets": [
-            0,
             1,
             2,
-            3
+            3,
+            4
           ],
-          "average_level_offset": 1.5,
-          "max_level_offset": 3,
+          "average_level_offset": 2.5,
+          "max_level_offset": 4,
           "densities": {
             "protect": 0.75,
             "fake_out": 0.0,
             "setup": 0.0,
             "speed_control_or_priority": 1.0,
-            "premium_item": 0.75
+            "premium_item": 0.25
           }
         }
       },
       {
-        "index": 64,
-        "encounter_id": "BATTLE_064_MAUVILLE_WALLY",
+        "index": 138,
+        "encounter_id": "BATTLE_138_ROUTE_111_BIANCA",
         "identity": {
-          "location": "MauvilleCity",
-          "category": "required declinable gate",
+          "location": "Route111",
+          "category": "optional haunted-props Cooltrainer double",
           "format": "double",
-          "strict_cap": 30,
-          "memory_hook": "A published Mega Gallade balance chassis becomes Wally's six: Weavile and Zapdos contest tempo, young Drilbur changes its Ground move by survivor, Roselia and Azumarill preserve continuity, and Mega Gallade closes with three Keen Edge blades."
+          "strict_cap": 45,
+          "memory_hook": "Flare Boost Gourgeist can reverse speed while Gengar attacks immediately; Choice Band Sudowoodo and Assault Vest Magmortar make the reserves physical and special props."
         },
-        "primary_player_question": "Can the player break a six-way balance team with no single engine, denying Tailwind and preserving the right checks through mixed lanes until Wally's Wide Guard Mega Gallade?",
-        "tempo": "Fast item-removal and Tailwind lead, target-order-sensitive young Ground reserve, returning mixed partners, then source-last signature Mega balance closer.",
+        "primary_player_question": "Can the player read whether haunted props want fast offense or Trick Room before a false tree and living furnace enter?",
+        "tempo": "Flare Boost Gourgeist can reverse speed while Gengar attacks immediately; Choice Band Sudowoodo and Assault Vest Magmortar make the reserves physical and special props.",
         "pressure_sources": [
-          "Focus Sash Pickpocket Weavile",
-          "Triple Axel, Knock Off, Low Kick, and Ice Shard",
-          "Static Zapdos Tailwind",
-          "Thunderbolt and Heat Wave",
-          "Mold Breaker Drilbur Earthquake or Drill Run geometry",
-          "Eviolite Roselia mixed coverage",
-          "Assault Vest Huge Power Azumarill",
-          "level-34 Keen Edge Mega Gallade",
-          "Sacred Sword, Psycho Cut, Night Slash, and Wide Guard"
+          "SPECIES_GOURGEIST_SUPER",
+          "SPECIES_GENGAR",
+          "SPECIES_SUDOWOODO",
+          "SPECIES_MAGMORTAR"
         ],
-        "intentional_opening": "Weavile and Zapdos attack or establish Tailwind through visible-board scoring; no setup, redirection, switch, or Mega action is forced.",
-        "intentional_weakness": "The leads share Rock pressure, speed can be reversed, Drilbur is cap-even and frail, Roselia remains young, Azumarill cannot Protect, and Mega Gallade has no Protect or recovery and retains broad Flying, Ghost, Fairy, burn, and special-pressure answers.",
-        "first_loss_lesson": "There is no one setter to remove. Win the speed exchange, read which reserve answers the board, and preserve one Flying, Ghost, Fairy, or burn line for Mega Gallade.",
+        "intentional_opening": "Source order is intentional and preserved.",
+        "intentional_weakness": "The lead shares Ghost and Dark pressure; Gourgeist's Orb costs health; Sudowoodo is Choice locked; Magmortar is slow and lacks Protect; Rock, Ground, Water, Dark, Ghost, Taunt, and priority remain broad.",
+        "first_loss_lesson": "Read the first turn rather than assuming one speed mode, then exploit the visible Choice lock and protectless furnace.",
         "revealed_information": [
-          "Wally has six real roles",
-          "Weavile carries Focus Sash and Pickpocket",
-          "Zapdos owns Tailwind",
-          "Drilbur is cap-even and has both Earthquake and Drill Run",
-          "Roselia and Azumarill continue later",
-          "Gallade Mega Evolves and has Wide Guard",
-          "decline and loss remain retryable",
-          "victory clears the Gym door but does not change the cap"
+          "cap 45",
+          "double",
+          "4 main members",
+          "haunted-props",
+          "flare-boost",
+          "trick-room-option",
+          "rock-head",
+          "mixed-reserves"
         ],
         "counterplay_classes": [
-          "Rock Slide, competing Tailwind, Trick Room, paralysis, priority, or Protect",
-          "item removal and Focus Sash breaking",
-          "Water, Grass, Ice, or priority into Drilbur",
-          "Fire, Psychic, Flying, or Ice into Roselia",
-          "burn, Intimidate, physical walls, Grass, Electric, or Poison into Azumarill",
-          "Flying, Ghost, Fairy, burn, redirection, or special pressure into Mega Gallade",
-          "single-target moves to bait Wide Guard"
+          "Disrupt, redirect, Taunt, or remove the enabling lead or partner.",
+          "Exploit the listed type, item, and damage-category seams.",
+          "Use speed reversal, item removal, status control, focus fire, or setup denial.",
+          "The lead shares Ghost and Dark pressure; Gourgeist's Orb costs health; Sudowoodo is Choice locked; Magmortar is slow and lacks Protect; Rock, Ground, Water, Dark, Ghost, Taunt, and priority remain broad."
         ],
-        "target_difficulty": 9.7,
-        "difficulty_rationale": "Six optimized legal levels 30-34, one legendary, one story Mega, active speed control, mixed coverage, and smart switching create a major first-loss milestone, while two deliberately young seams, shared lead Rock pressure, reversible speed, and broad Mega counterplay prevent a single-solution lock.",
-        "tuning_knob": "Tune Gallade from +4 to +3 first, then Azumarill from +3 to +2; preserve the six roles, target-order Ground geometry, and Wally continuity.",
+        "target_difficulty": 9.2,
+        "difficulty_rationale": "Optimized cap-plus sets and one coherent interaction create a serious optional puzzle while explicit seams preserve broad counterplay.",
+        "tuning_knob": "Lower the last main-story member by one level first; preserve species, mechanics, and order.",
         "playtest_status": "static-pass-runtime-unplayed",
         "novelty_tags": [
-          "required-rival-double",
-          "declinable-retry",
-          "explicit-two-mon-guard",
-          "published-balance-chassis",
-          "weavile-zapdos-lead",
-          "target-order-ground-geometry",
-          "young-drilbur",
-          "wally-continuity",
-          "zapdos",
-          "mega-gallade",
-          "wide-guard",
-          "no-single-engine"
+          "route111-north",
+          "haunted-props",
+          "flare-boost",
+          "trick-room-option",
+          "rock-head",
+          "mixed-reserves"
         ],
         "historic_reference_ids": [
-          "smogon:gen6ou:010",
-          "showdown:gen9championsrandomdoublesbattle:012",
-          "showdown:gen9championsrandomdoublesbattle:007"
+          "showdown:gen9championsrandomdoublesbattle:030",
+          "smogon:gen4ou:014",
+          "smogon:gen6nu:003",
+          "showdown:gen9randomdoublesbattle:019"
         ],
         "corpus_search": {
           "status": "complete-current-review",
           "pool_size": 1005,
-          "selection": "One published Mega Gallade balance roster supplies four family roles; two full-set doubles donors support Weavile and Azumarill, while Roselia and Azumarill preserve native Wally continuity."
+          "selection": "4 indexed references."
         },
         "author_self_check": {
-          "strongest_part": "The published balance team becomes unmistakably Wally's through legal staging, returning partners, target-order-sensitive Ground choices, and a three-blade signature Mega.",
-          "weakest_link": "Rock spread and Trick Room can reverse the opening, while Drilbur and Roselia are young seams; those broad answers make the 9.7 milestone learnable."
+          "strongest_part": "Flare Boost Gourgeist can reverse speed while Gengar attacks immediately; Choice Band Sudowoodo and Assault Vest Magmortar make the reserves physical and special props.",
+          "weakest_link": "The lead shares Ghost and Dark pressure; Gourgeist's Orb costs health; Sudowoodo is Choice locked; Magmortar is slow and lacks Protect; Rock, Ground, Water, Dark, Ghost, Taunt, and priority remain broad."
         },
         "record_source": "v2-ledger",
-        "location": "MauvilleCity",
-        "category": "required declinable gate",
-        "strict_cap": 30,
+        "location": "Route111",
+        "category": "optional haunted-props Cooltrainer double",
+        "strict_cap": 45,
         "source_facts": {
           "format": "double",
           "source_record_formats": [
             "double"
           ],
           "source_variant_count": 1,
-          "representative_party_size": 6,
-          "average_party_size": 6.0,
+          "representative_party_size": 4,
+          "average_party_size": 4.0,
           "species": [
-            "SPECIES_AZUMARILL",
-            "SPECIES_DRILBUR",
-            "SPECIES_GALLADE",
-            "SPECIES_ROSELIA",
-            "SPECIES_WEAVILE",
-            "SPECIES_ZAPDOS"
+            "SPECIES_GENGAR",
+            "SPECIES_GOURGEIST_SUPER",
+            "SPECIES_MAGMORTAR",
+            "SPECIES_SUDOWOODO"
           ],
           "items": [
             "ITEM_ASSAULT_VEST",
-            "ITEM_EVIOLITE",
-            "ITEM_FOCUS_SASH",
-            "ITEM_GALLADITE",
-            "ITEM_MAGNET",
-            "ITEM_SOFT_SAND"
+            "ITEM_CHOICE_BAND",
+            "ITEM_FLAME_ORB",
+            "ITEM_LIFE_ORB"
           ],
           "moves": [
             "MOVE_DAZZLING_GLEAM",
-            "MOVE_DRILL_RUN",
             "MOVE_EARTHQUAKE",
-            "MOVE_GIGA_DRAIN",
+            "MOVE_ENERGY_BALL",
+            "MOVE_FOCUS_BLAST",
+            "MOVE_HEAD_SMASH",
             "MOVE_HEAT_WAVE",
-            "MOVE_ICE_PUNCH",
-            "MOVE_ICE_SHARD",
-            "MOVE_KNOCK_OFF",
             "MOVE_LOW_KICK",
-            "MOVE_NIGHT_SLASH",
-            "MOVE_PLAY_ROUGH",
             "MOVE_PROTECT",
-            "MOVE_PSYCHO_CUT",
-            "MOVE_ROCK_SLIDE",
-            "MOVE_ROOST",
-            "MOVE_SACRED_SWORD",
+            "MOVE_PSYCHIC",
+            "MOVE_SHADOW_BALL",
             "MOVE_SLUDGE_BOMB",
-            "MOVE_TAILWIND",
+            "MOVE_SUCKER_PUNCH",
             "MOVE_THUNDERBOLT",
-            "MOVE_TRIPLE_AXEL",
-            "MOVE_WATERFALL",
-            "MOVE_WIDE_GUARD"
+            "MOVE_TRICK_ROOM"
           ],
           "synergy_tags": [
-            "Earthquake immunity",
-            "Tailwind",
-            "spread + Wide Guard"
+            "Trick Room"
           ],
           "level_offsets": [
-            0,
             1,
             2,
             3,
             4
           ],
-          "average_level_offset": 2.0,
+          "average_level_offset": 2.5,
           "max_level_offset": 4,
           "densities": {
             "protect": 0.5,
             "fake_out": 0.0,
             "setup": 0.0,
-            "speed_control_or_priority": 0.833,
-            "premium_item": 0.5
+            "speed_control_or_priority": 0.75,
+            "premium_item": 0.75
           }
         }
       },
       {
-        "index": 65,
-        "encounter_id": "BATTLE_065_MAUVILLE_GYM_VIVIAN_KIRK",
+        "index": 139,
+        "encounter_id": "BATTLE_139_ROUTE_111_TYRON",
         "identity": {
-          "location": "MauvilleCity_Gym",
-          "category": "optional native pair",
-          "format": "native-pair double",
-          "strict_cap": 30,
-          "memory_hook": "Kirk's Punk Rock Boomburst crosses the whole joint board while Vivian's complete loaded prefix is Soundproof; each four-member split safely becomes a separate single."
+          "location": "Route111",
+          "category": "optional three-blade Collector single",
+          "format": "single",
+          "strict_cap": 45,
+          "memory_hook": "Scyther tests patient setup defense, Kabutops risks a Shell Smash race, and Mega Beedrill ends with immediate frail speed."
         },
-        "primary_player_question": "Can the player stop the lone Boomburst amplifier or bring a sound answer, then recognize that the split branches no longer have a partner engine?",
-        "tempo": "Ally-safe Punk Rock spread in the 3+3 joint, Vivian's disruptive/bulky coverage single, or Kirk's direct Ghost-backed special single.",
+        "primary_player_question": "Can the player answer three different blade tempos: Eviolite setup, Shell Smash priority, and one blistering Mega?",
+        "tempo": "Scyther tests patient setup defense, Kabutops risks a Shell Smash race, and Mega Beedrill ends with immediate frail speed.",
         "pressure_sources": [
-          "Focus Sash Fake Out and Encore Mr. Mime",
-          "Soundproof Eviolite Loudred",
-          "Shuca Soundproof Bastiodon Metal Burst",
-          "Flame Orb Flare Boost Pumpkaboo",
-          "Throat Spray Punk Rock Toxtricity Boomburst",
-          "Pixilate Hyper Voice Mismagius",
-          "Iron Fist Golett",
-          "Life Orb Gengar"
+          "SPECIES_SCYTHER",
+          "SPECIES_KABUTOPS",
+          "SPECIES_BEEDRILL"
         ],
-        "intentional_opening": "Mr. Mime and Toxtricity lead the joint; native spread scoring recognizes zero ally damage but does not force Boomburst. Each split begins as an ordinary single from the same source order.",
-        "intentional_weakness": "Toxtricity alone owns Boomburst and is four-times Ground weak. Ghost, Soundproof, Wide Guard, special bulk, and focus fire compress sound; Mr. Mime and the young forms are fragile, and Bastiodon exposes four-times Ground/Fighting pressure.",
-        "first_loss_lesson": "Vivian's team was deliberately immune, not the whole game. Remove Toxtricity or bring Ghost, Soundproof, Wide Guard, or special defense; in a split, stop waiting for a combo that cannot occur.",
+        "intentional_opening": "Source order is intentional and preserved.",
+        "intentional_weakness": "Only three bodies; Stealth Rock, burn, priority, Intimidate, phazing, Electric, Rock, Water, Psychic, and Flying attacks remain broad, and every setup turn can be denied.",
+        "first_loss_lesson": "Do not use the same answer three times: deny the first two setup windows and preserve priority or a speed answer for Mega Beedrill.",
         "revealed_information": [
-          "joint play loads Vivian and Kirk slots 1-3",
-          "both split branches are four-member singles",
-          "one usable Pok\u00e9mon safely selects Vivian's split on the shared lane",
-          "Vivian's joint prefix is entirely Soundproof",
-          "Toxtricity is the only Boomburst user",
-          "Kirk's later members are Ghosts",
-          "neither trainer has a reward or rematch"
+          "cap 45",
+          "single",
+          "3 main members",
+          "three-blades",
+          "eviolite-scyther",
+          "shell-smash",
+          "mega-beedrill"
         ],
         "counterplay_classes": [
-          "Ground, priority, Fake Out, Taunt, Encore, Disable, or Toxtricity focus fire",
-          "Ghost typing, Soundproof, Wide Guard, Protect, Snarl, Light Screen, or special walls",
-          "item removal",
-          "Steel, Poison, Dark, Ghost, Fire, Ice, Water, Fighting, or Ground pressure by slot",
-          "hazards and smart switching against split closers"
+          "Disrupt, redirect, Taunt, or remove the enabling lead or partner.",
+          "Exploit the listed type, item, and damage-category seams.",
+          "Use speed reversal, item removal, status control, focus fire, or setup denial.",
+          "Only three bodies; Stealth Rock, burn, priority, Intimidate, phazing, Electric, Rock, Water, Psychic, and Flying attacks remain broad, and every setup turn can be denied."
         ],
-        "target_difficulty": 9.3,
-        "difficulty_rationale": "The joint has six optimized legal levels 31-33 and a safe Punk Rock spread rule, while Vivian's 8.8 and Kirk's 9.1 splits gain level-34 closers. One four-times-weak amplifier and several broad sound counters keep the Gym opener learnable.",
-        "tuning_knob": "Tune Toxtricity from +2 to +1 first, then Gengar and Pumpkaboo from +4 to +3; preserve source prefixes and safe split singles.",
+        "target_difficulty": 8.9,
+        "difficulty_rationale": "Optimized cap-plus sets and one coherent interaction create a serious optional puzzle while explicit seams preserve broad counterplay.",
+        "tuning_knob": "Lower the last main-story member by one level first; preserve species, mechanics, and order.",
         "playtest_status": "static-pass-runtime-unplayed",
         "novelty_tags": [
-          "gym-native-pair",
-          "joint-3-plus-3",
-          "split-four-singles",
-          "boomburst",
-          "soundproof-prefix",
-          "ghost-immunity",
-          "punk-rock-toxtricity",
-          "flare-boost-pumpkaboo",
-          "normal-gengar",
-          "safe-one-usable",
-          "reusable-spread-ai"
+          "route111-north",
+          "three-blades",
+          "eviolite-scyther",
+          "shell-smash",
+          "mega-beedrill"
         ],
         "historic_reference_ids": [
-          "showdown:gen9randomdoublesbattle:028",
-          "showdown:gen4randomdoublesbattle:012",
-          "showdown:gen9championsrandomdoublesbattle:002",
-          "showdown:gen5randomdoublesbattle:017",
-          "showdown:gen8randomdoublesbattle:028"
+          "smogon:gen9nu:004",
+          "smogon:gen4uu:004",
+          "showdown:gen6randomdoublesbattle:021"
         ],
         "corpus_search": {
           "status": "complete-current-review",
           "pool_size": 1005,
-          "selection": "Five full-set donors support exact members; no complete indexed roster supplies a source-slice-safe Boomburst native pair plus two coherent singles."
+          "selection": "3 indexed references."
         },
         "author_self_check": {
-          "strongest_part": "One acoustic rule is true in every source slice without a forced move, while both safe singles remain independently hard.",
-          "weakest_link": "Ghost, Soundproof, Wide Guard, or strong Ground compresses Kirk's centerpiece; that broad answer is intentionally visible."
+          "strongest_part": "Scyther tests patient setup defense, Kabutops risks a Shell Smash race, and Mega Beedrill ends with immediate frail speed.",
+          "weakest_link": "Only three bodies; Stealth Rock, burn, priority, Intimidate, phazing, Electric, Rock, Water, Psychic, and Flying attacks remain broad, and every setup turn can be denied."
         },
         "record_source": "v2-ledger",
-        "location": "MauvilleCity_Gym",
-        "category": "optional native pair",
-        "strict_cap": 30,
+        "location": "Route111",
+        "category": "optional three-blade Collector single",
+        "strict_cap": 45,
         "source_facts": {
-          "format": "native-pair double",
+          "format": "single",
           "source_record_formats": [
             "single"
           ],
-          "source_variant_count": 2,
-          "representative_party_size": 4,
-          "average_party_size": 4.0,
+          "source_variant_count": 1,
+          "representative_party_size": 3,
+          "average_party_size": 3.0,
           "species": [
-            "SPECIES_BASTIODON",
-            "SPECIES_GENGAR",
-            "SPECIES_GOLETT",
-            "SPECIES_LOUDRED",
-            "SPECIES_MISMAGIUS",
-            "SPECIES_MR_MIME",
-            "SPECIES_PUMPKABOO",
-            "SPECIES_TOXTRICITY"
+            "SPECIES_BEEDRILL",
+            "SPECIES_KABUTOPS",
+            "SPECIES_SCYTHER"
           ],
           "items": [
+            "ITEM_BEEDRILLITE",
             "ITEM_EVIOLITE",
-            "ITEM_EXPERT_BELT",
-            "ITEM_FLAME_ORB",
-            "ITEM_FOCUS_SASH",
-            "ITEM_LIFE_ORB",
-            "ITEM_SHUCA_BERRY",
-            "ITEM_THROAT_SPRAY",
-            "ITEM_WISE_GLASSES"
+            "ITEM_LIFE_ORB"
           ],
           "moves": [
-            "MOVE_BOOMBURST",
-            "MOVE_DAZZLING_GLEAM",
-            "MOVE_DRAIN_PUNCH",
-            "MOVE_ENCORE",
-            "MOVE_FAKE_OUT",
-            "MOVE_FLAMETHROWER",
-            "MOVE_FLASH_CANNON",
-            "MOVE_FOCUS_BLAST",
-            "MOVE_GIGA_DRAIN",
-            "MOVE_HYPER_VOICE",
-            "MOVE_ICE_BEAM",
-            "MOVE_ICE_PUNCH",
-            "MOVE_METAL_BURST",
-            "MOVE_MYSTICAL_FIRE",
-            "MOVE_OVERDRIVE",
-            "MOVE_POWER_GEM",
-            "MOVE_PROTECT",
-            "MOVE_PSYCHIC",
-            "MOVE_ROCK_SLIDE",
-            "MOVE_SHADOW_BALL",
-            "MOVE_SHADOW_PUNCH",
-            "MOVE_SLUDGE_BOMB",
-            "MOVE_STOMPING_TANTRUM",
-            "MOVE_THUNDERBOLT"
+            "MOVE_AQUA_JET",
+            "MOVE_BUG_BITE",
+            "MOVE_DRILL_RUN",
+            "MOVE_DUAL_WINGBEAT",
+            "MOVE_LIQUIDATION",
+            "MOVE_POISON_JAB",
+            "MOVE_QUICK_ATTACK",
+            "MOVE_SHELL_SMASH",
+            "MOVE_STONE_EDGE",
+            "MOVE_SWORDS_DANCE",
+            "MOVE_X_SCISSOR"
           ],
-          "synergy_tags": [
-            "Ghost pressure",
-            "sound offense"
-          ],
+          "synergy_tags": [],
           "level_offsets": [
-            1,
             2,
             3,
             4
           ],
-          "average_level_offset": 2.62,
+          "average_level_offset": 3.0,
           "max_level_offset": 4,
           "densities": {
-            "protect": 0.5,
-            "fake_out": 0.125,
-            "setup": 0.0,
-            "speed_control_or_priority": 0.625,
-            "premium_item": 0.5
+            "protect": 0.0,
+            "fake_out": 0.0,
+            "setup": 1.0,
+            "speed_control_or_priority": 0.667,
+            "premium_item": 0.667
           }
         }
       },
       {
-        "index": 66,
-        "encounter_id": "BATTLE_066_MAUVILLE_GYM_BEN",
+        "index": 140,
+        "encounter_id": "BATTLE_140_ROUTE_111_CELINA",
         "identity": {
-          "location": "MauvilleCity_Gym",
-          "category": "optional puzzle-route double",
+          "location": "Route111",
+          "category": "optional broken-shackles Cooltrainer double",
           "format": "double",
-          "strict_cap": 30,
-          "memory_hook": "Glimmet and Red Card Skarmory build a switch maze, Gholdengo taxes removal, and Assault Vest Guzzlord cashes every surviving layer through Dragon Tail."
+          "strict_cap": 45,
+          "memory_hook": "Sash Victreebel spends a turn removing a partner's liability; Slaking, Golisopod, and Durant each become a different liberated threat."
         },
-        "primary_player_question": "Can the player stop the maze before layers accumulate, remove hazards through the correct target, and block forced switching before every reserve pays another entry toll?",
-        "tempo": "Two passive-but-dangerous trap leads, Good as Gold removal tax, then rare bulky phazing cashout with no speed field.",
+        "primary_player_question": "Can the player stop Gastro Acid from turning Slow Start, Emergency Exit, and Truant into three unrestricted attackers?",
+        "tempo": "Sash Victreebel spends a turn removing a partner's liability; Slaking, Golisopod, and Durant each become a different liberated threat.",
         "pressure_sources": [
-          "Shuca Toxic Debris Glimmet",
-          "Stealth Rock",
-          "Red Card Sturdy Skarmory",
-          "Spikes and Whirlwind",
-          "Air Balloon Good as Gold Gholdengo",
-          "Make It Rain",
-          "Assault Vest Beast Boost Guzzlord",
-          "Dragon Tail, Knock Off, Heavy Slam, and Stomping Tantrum"
+          "SPECIES_VICTREEBEL",
+          "SPECIES_SLAKING",
+          "SPECIES_GOLISOPOD",
+          "SPECIES_DURANT"
         ],
-        "intentional_opening": "Glimmet and Skarmory can attack, Protect, recover, or build layers through native scoring; first-turn setup and hazard/phazing combo scores are moderate and never fix a move or target.",
-        "intentional_weakness": "Both leads spend turns building, special pressure avoids Toxic Debris, Taunt and focus fire prevent layers, Red Card is one-use, Gholdengo cannot block removal through its partner, Guzzlord is four-times Fairy weak, and the team has no speed control or redirection.",
-        "first_loss_lesson": "The switches were the damage. Stop a lead before the field fills, direct removal away from Gholdengo, and save Fairy, Substitute, or anti-phazing counterplay for Guzzlord.",
+        "intentional_opening": "Source order is intentional and preserved.",
+        "intentional_weakness": "The engine is one visible, interruptible support move; Victreebel is frail, Slaking is Choice locked, Golisopod is slow, Durant is specially fragile, and Taunt, redirection, Fake Out, priority, Flying, Psychic, and Fire remain broad.",
+        "first_loss_lesson": "Treat Gastro Acid as the target: deny or redirect it before fighting the raw stats it was meant to unlock.",
         "revealed_information": [
-          "Ben is a guarded double",
-          "Glimmet sets Rocks and creates Toxic Spikes only when physically struck",
-          "Skarmory has Red Card, Spikes, and Whirlwind",
-          "Gholdengo blocks removal only when targeted",
-          "Guzzlord has Dragon Tail",
-          "Switch-4 bypasses Ben",
-          "Ben has no reward or rematch"
+          "cap 45",
+          "double",
+          "4 main members",
+          "broken-shackles",
+          "gastro-acid",
+          "slow-start",
+          "emergency-exit",
+          "truant"
         ],
         "counterplay_classes": [
-          "Taunt, Encore, Fake Out, Magic Bounce, focus fire, or special spread offense",
-          "multihit Sturdy breaking, Knock Off, Trick, or Magic Room",
-          "Poison, Flying, Steel, or Heavy-Duty Boots hazard answers",
-          "removal through Gholdengo's partner",
-          "Substitute, Protect, Fairy typing, Suction Cups, Ingrain, or direct phazer pressure",
-          "Fire or Electric into Skarmory",
-          "Ground, Fire, Dark, or Ghost into Gholdengo",
-          "Fairy into Guzzlord"
+          "Disrupt, redirect, Taunt, or remove the enabling lead or partner.",
+          "Exploit the listed type, item, and damage-category seams.",
+          "Use speed reversal, item removal, status control, focus fire, or setup denial.",
+          "The engine is one visible, interruptible support move; Victreebel is frail, Slaking is Choice locked, Golisopod is slow, Durant is specially fragile, and Taunt, redirection, Fake Out, priority, Flying, Psychic, and Fire remain broad."
         ],
         "target_difficulty": 9.3,
-        "difficulty_rationale": "Four optimized legal levels 31-34, two hazard engines, removal tax, one Ultra Beast, and contextual phazing form a severe Gym maze, while passive lead turns, no speed mode, broad prevention/removal, and Guzzlord's four-times weakness preserve several solutions.",
-        "tuning_knob": "Tune Guzzlord from +4 to +3 first, then Gholdengo from +3 to +2; preserve the hazard and phazing structure.",
+        "difficulty_rationale": "Optimized cap-plus sets and one coherent interaction create a serious optional puzzle while explicit seams preserve broad counterplay.",
+        "tuning_knob": "Lower the last main-story member by one level first; preserve species, mechanics, and order.",
         "playtest_status": "static-pass-runtime-unplayed",
         "novelty_tags": [
-          "gym-double",
-          "guarded-double",
-          "hazard-maze",
-          "toxic-debris-glimmet",
-          "red-card-skarmory",
-          "good-as-gold-gholdengo",
-          "guzzlord",
-          "dragon-tail",
-          "removal-tax",
-          "switch-puzzle",
-          "no-speed-mode",
-          "reusable-phazing-ai"
+          "route111-north",
+          "broken-shackles",
+          "gastro-acid",
+          "slow-start",
+          "emergency-exit",
+          "truant"
         ],
         "historic_reference_ids": [
-          "smogon:gen9ou:001",
-          "smogon:gen9ou:002",
-          "smogon:gen4ou:008",
-          "showdown:gen8randombattle:022"
+          "showdown:gen9randomdoublesbattle:022",
+          "showdown:gen9randomdoublesbattle:011",
+          "smogon:gen8uu:014",
+          "showdown:gen7randombattle:011"
         ],
         "corpus_search": {
           "status": "complete-current-review",
           "pool_size": 1005,
-          "selection": "Four full teams supply hazard, removal-tax, phazing, and rare-bulky roles; the Gym-specific maze is hand-authored."
+          "selection": "4 indexed references."
         },
         "author_self_check": {
-          "strongest_part": "The overworld switch maze becomes the battle rule, and each reserve changes how removal or switching must be handled.",
-          "weakest_link": "Fast special offense can remove both passive leads before the maze exists; that is intentional fair counterplay."
+          "strongest_part": "Sash Victreebel spends a turn removing a partner's liability; Slaking, Golisopod, and Durant each become a different liberated threat.",
+          "weakest_link": "The engine is one visible, interruptible support move; Victreebel is frail, Slaking is Choice locked, Golisopod is slow, Durant is specially fragile, and Taunt, redirection, Fake Out, priority, Flying, Psychic, and Fire remain broad."
         },
         "record_source": "v2-ledger",
-        "location": "MauvilleCity_Gym",
-        "category": "optional puzzle-route double",
-        "strict_cap": 30,
+        "location": "Route111",
+        "category": "optional broken-shackles Cooltrainer double",
+        "strict_cap": 45,
         "source_facts": {
           "format": "double",
           "source_record_formats": [
@@ -746,37 +980,37 @@
           "representative_party_size": 4,
           "average_party_size": 4.0,
           "species": [
-            "SPECIES_GHOLDENGO",
-            "SPECIES_GLIMMET",
-            "SPECIES_GUZZLORD",
-            "SPECIES_SKARMORY"
+            "SPECIES_DURANT",
+            "SPECIES_GOLISOPOD",
+            "SPECIES_SLAKING",
+            "SPECIES_VICTREEBEL"
           ],
           "items": [
-            "ITEM_AIR_BALLOON",
             "ITEM_ASSAULT_VEST",
-            "ITEM_RED_CARD",
-            "ITEM_SHUCA_BERRY"
+            "ITEM_CHOICE_BAND",
+            "ITEM_FOCUS_SASH",
+            "ITEM_LIFE_ORB"
           ],
           "moves": [
-            "MOVE_BODY_PRESS",
-            "MOVE_DRAGON_TAIL",
-            "MOVE_HEAVY_SLAM",
-            "MOVE_KNOCK_OFF",
-            "MOVE_MAKE_IT_RAIN",
-            "MOVE_POWER_GEM",
+            "MOVE_AQUA_JET",
+            "MOVE_DOUBLE_EDGE",
+            "MOVE_FIRST_IMPRESSION",
+            "MOVE_GASTRO_ACID",
+            "MOVE_HIGH_HORSEPOWER",
+            "MOVE_IRON_HEAD",
+            "MOVE_LEAF_STORM",
+            "MOVE_LEECH_LIFE",
+            "MOVE_LIQUIDATION",
+            "MOVE_PLAY_ROUGH",
             "MOVE_PROTECT",
-            "MOVE_RECOVER",
-            "MOVE_ROOST",
-            "MOVE_SHADOW_BALL",
-            "MOVE_SLUDGE_WAVE",
-            "MOVE_SPIKES",
-            "MOVE_STEALTH_ROCK",
-            "MOVE_STOMPING_TANTRUM",
-            "MOVE_THUNDERBOLT",
-            "MOVE_WHIRLWIND"
+            "MOVE_ROCK_SLIDE",
+            "MOVE_SLUDGE_BOMB",
+            "MOVE_SUCKER_PUNCH",
+            "MOVE_SUPERPOWER",
+            "MOVE_X_SCISSOR"
           ],
           "synergy_tags": [
-            "hazard stack"
+            "priority pressure"
           ],
           "level_offsets": [
             1,
@@ -790,142 +1024,355 @@
             "protect": 0.25,
             "fake_out": 0.0,
             "setup": 0.0,
-            "speed_control_or_priority": 0.25,
-            "premium_item": 0.25
+            "speed_control_or_priority": 0.75,
+            "premium_item": 1.0
           }
         }
       },
       {
-        "index": 67,
-        "encounter_id": "BATTLE_067_MAUVILLE_GYM_SHAWN_ANGELO",
+        "index": 141,
+        "encounter_id": "BATTLE_141_ROUTE_111_CELIA",
         "identity": {
-          "location": "MauvilleCity_Gym",
-          "category": "optional native pair",
-          "format": "native-pair double",
-          "strict_cap": 30,
-          "memory_hook": "Shawn's berry consumers keep their Cheek Pouch or Gluttony gains, then Angelo's colored Symbiosis flowers pass a second useful item across the native pair."
+          "location": "Route111",
+          "category": "optional draining-growth Picnicker single",
+          "format": "single",
+          "strict_cap": 45,
+          "memory_hook": "Rain Dish and Giga Drain begin the growth, Dry Skin Parasect adds Spore and seeds, and Mega Venusaur closes behind Thick Fat recovery."
         },
-        "primary_player_question": "Can the player control when a berry threshold occurs and which flower still owns the second item, or deny the donor before one threshold becomes two resources?",
-        "tempo": "Proactive Stuff Cheeks opening, reactive berry thresholds, cross-trainer second-item transfers, and two independent item-economy singles.",
+        "primary_player_question": "Can the player prevent three different forms of recovery from turning one short single into an attrition lock?",
+        "tempo": "Rain Dish and Giga Drain begin the growth, Dry Skin Parasect adds Spore and seeds, and Mega Venusaur closes behind Thick Fat recovery.",
         "pressure_sources": [
-          "Sitrus Stuff Cheeks Cheek Pouch Greedent",
-          "Petaya Cheek Pouch Dedenne",
-          "Liechi Gluttony Simisage",
-          "Petaya Gluttony Belch Swalot",
-          "Life Orb Eternal Flower Floette",
-          "three additional Symbiosis flower forms",
-          "Light of Ruin",
-          "level-34 split closers"
+          "SPECIES_LUDICOLO",
+          "SPECIES_PARASECT",
+          "SPECIES_VENUSAUR"
         ],
-        "intentional_opening": "Stuff Cheeks receives a moderate bonus only while Greedent has a Berry and its live joint partner has Symbiosis plus an item; the engine resolves berry effects before optional item transfer. No target or pass is forced.",
-        "intentional_weakness": "Knock Off, Trick, Corrosive Gas, Magic Room, Unnerve, burst KOs, and donor focus stop transfers. Angelo shares Steel/Poison weakness, the consumers are slow or frail, and both split singles lose cross-trainer Symbiosis.",
-        "first_loss_lesson": "The first berry was only half the economy. Track the current flower's item, deny that donor before a threshold, or use Unnerve, item control, and burst so Symbiosis never gets a clean handoff.",
+        "intentional_opening": "Source order is intentional and preserved.",
+        "intentional_weakness": "Only three bodies; Ludicolo must spend a turn on rain, Parasect has crippling Fire and Flying weaknesses, Venusaur is Tauntable, and Psychic, Flying, Bug, strong neutral burst, weather replacement, and item removal remain broad.",
+        "first_loss_lesson": "Do not trade chip for chip: deny rain or Spore, then preserve immediate burst for Mega Venusaur before seeds compound.",
         "revealed_information": [
-          "joint play loads Shawn and Angelo slots 1-3",
-          "both splits are four-member singles",
-          "one usable Pok\u00e9mon safely selects one split",
-          "berry benefits resolve before Symbiosis",
-          "receiving an item would clear Unburden, so Unburden is not used",
-          "Eternal Flower Floette is the lead donor",
-          "neither trainer has a reward or rematch"
+          "cap 45",
+          "single",
+          "3 main members",
+          "draining-growth",
+          "rain-dish",
+          "dry-skin",
+          "spore",
+          "mega-venusaur"
         ],
         "counterplay_classes": [
-          "Unnerve, Knock Off, Trick, Corrosive Gas, Magic Room, or Embargo",
-          "Taunt or Encore into Stuff Cheeks",
-          "burst focus, Heal Block, or flower donor focus",
-          "Fighting into Greedent",
-          "Ground into Dedenne",
-          "Fire, Ice, Poison, Flying, Bug, Steel, or Fairy into Simisage",
-          "Psychic or Ground into Swalot",
-          "Steel, Poison, and physical pressure into Angelo"
+          "Disrupt, redirect, Taunt, or remove the enabling lead or partner.",
+          "Exploit the listed type, item, and damage-category seams.",
+          "Use speed reversal, item removal, status control, focus fire, or setup denial.",
+          "Only three bodies; Ludicolo must spend a turn on rain, Parasect has crippling Fire and Flying weaknesses, Venusaur is Tauntable, and Psychic, Flying, Bug, strong neutral burst, weather replacement, and item removal remain broad."
         ],
-        "target_difficulty": 9.2,
-        "difficulty_rationale": "The joint has six optimized legal levels 31-33 and can turn one berry threshold into two items, while each 8.9-9.0 split gains a level-34 closer. Broad item denial, shared flower weaknesses, and burst threshold skipping keep the relay learnable.",
-        "tuning_knob": "Tune Simisage from +3 to +2 first, then the level-34 split closers; preserve the first-three relay and safe singles.",
+        "target_difficulty": 8.8,
+        "difficulty_rationale": "Optimized cap-plus sets and one coherent interaction create a serious optional puzzle while explicit seams preserve broad counterplay.",
+        "tuning_knob": "Lower the last main-story member by one level first; preserve species, mechanics, and order.",
         "playtest_status": "static-pass-runtime-unplayed",
         "novelty_tags": [
-          "gym-native-pair",
-          "joint-3-plus-3",
-          "split-four-singles",
-          "symbiosis",
-          "second-item-relay",
-          "stuff-cheeks",
-          "cheek-pouch",
-          "gluttony",
-          "eternal-floette",
-          "flower-collection",
-          "safe-one-usable",
-          "unburden-rejected"
+          "route111-north",
+          "draining-growth",
+          "rain-dish",
+          "dry-skin",
+          "spore",
+          "mega-venusaur"
         ],
         "historic_reference_ids": [
-          "showdown:gen8randomdoublesbattle:003",
-          "showdown:gen9championsrandomdoublesbattle:016",
-          "showdown:gen7randomdoublesbattle:014",
-          "showdown:gen6randomdoublesbattle:003"
+          "vgc:special-event-cannes-2019",
+          "vgc:worlds-2010",
+          "showdown:gen4randomdoublesbattle:018"
         ],
         "corpus_search": {
           "status": "complete-current-review",
           "pool_size": 1005,
-          "selection": "Four full-set donors validate berry sustain and Symbiosis; the source-slice-safe relay and Eternal Flower centerpiece are hand-authored."
+          "selection": "3 indexed references."
         },
         "author_self_check": {
-          "strongest_part": "Arbitrary knockout order remains safe because every passed item is generally useful and both split singles keep complete identities.",
-          "weakest_link": "Steel or Poison compresses Angelo, while burst item control can erase the relay; those are intentionally broad answers."
+          "strongest_part": "Rain Dish and Giga Drain begin the growth, Dry Skin Parasect adds Spore and seeds, and Mega Venusaur closes behind Thick Fat recovery.",
+          "weakest_link": "Only three bodies; Ludicolo must spend a turn on rain, Parasect has crippling Fire and Flying weaknesses, Venusaur is Tauntable, and Psychic, Flying, Bug, strong neutral burst, weather replacement, and item removal remain broad."
         },
         "record_source": "v2-ledger",
-        "location": "MauvilleCity_Gym",
-        "category": "optional native pair",
-        "strict_cap": 30,
+        "location": "Route111",
+        "category": "optional draining-growth Picnicker single",
+        "strict_cap": 45,
         "source_facts": {
-          "format": "native-pair double",
+          "format": "single",
           "source_record_formats": [
             "single"
           ],
-          "source_variant_count": 2,
-          "representative_party_size": 4,
-          "average_party_size": 4.0,
+          "source_variant_count": 1,
+          "representative_party_size": 3,
+          "average_party_size": 3.0,
           "species": [
-            "SPECIES_DEDENNE",
-            "SPECIES_FLOETTE_ETERNAL_FLOWER",
-            "SPECIES_FLOETTE_WHITE_FLOWER",
-            "SPECIES_FLORGES_BLUE_FLOWER",
-            "SPECIES_FLORGES_ORANGE_FLOWER",
-            "SPECIES_GREEDENT",
-            "SPECIES_SIMISAGE",
-            "SPECIES_SWALOT"
+            "SPECIES_LUDICOLO",
+            "SPECIES_PARASECT",
+            "SPECIES_VENUSAUR"
           ],
           "items": [
-            "ITEM_EXPERT_BELT",
-            "ITEM_LEFTOVERS",
-            "ITEM_LIECHI_BERRY",
-            "ITEM_LIFE_ORB",
-            "ITEM_PETAYA_BERRY",
-            "ITEM_SITRUS_BERRY",
-            "ITEM_WISE_GLASSES"
+            "ITEM_BIG_ROOT",
+            "ITEM_FOCUS_SASH",
+            "ITEM_VENUSAURITE"
           ],
           "moves": [
-            "MOVE_BELCH",
-            "MOVE_BODY_PRESS",
-            "MOVE_CALM_MIND",
-            "MOVE_DAZZLING_GLEAM",
-            "MOVE_ENERGY_BALL",
             "MOVE_GIGA_DRAIN",
+            "MOVE_HYDRO_PUMP",
             "MOVE_ICE_BEAM",
-            "MOVE_KNOCK_OFF",
-            "MOVE_LIGHT_OF_RUIN",
-            "MOVE_MOONBLAST",
-            "MOVE_NUZZLE",
-            "MOVE_PARABOLIC_CHARGE",
+            "MOVE_LEECH_SEED",
             "MOVE_PROTECT",
-            "MOVE_PSYCHIC",
-            "MOVE_ROCK_SLIDE",
-            "MOVE_SEED_BOMB",
+            "MOVE_RAIN_DANCE",
             "MOVE_SLUDGE_BOMB",
-            "MOVE_STUFF_CHEEKS",
+            "MOVE_SPORE",
             "MOVE_SYNTHESIS"
           ],
           "synergy_tags": [
-            "Fairy pressure"
+            "Grass pressure",
+            "rain engine",
+            "residual control"
+          ],
+          "level_offsets": [
+            2,
+            3,
+            4
+          ],
+          "average_level_offset": 3.0,
+          "max_level_offset": 4,
+          "densities": {
+            "protect": 0.333,
+            "fake_out": 0.0,
+            "setup": 0.0,
+            "speed_control_or_priority": 0.333,
+            "premium_item": 0.333
+          }
+        }
+      },
+      {
+        "index": 142,
+        "encounter_id": "BATTLE_142_ROUTE_111_BRYAN",
+        "identity": {
+          "location": "Route111",
+          "category": "optional ancient-survivors Ruin Maniac double",
+          "format": "double",
+          "strict_cap": 45,
+          "memory_hook": "Spiritomb blunts both damage categories, Scarf Tyrantrum fires recoil-free Head Smash, Contrary Serperior snowballs, and Sturdy Carracosta threatens one Shell Smash."
+        },
+        "primary_player_question": "Can the player identify four unrelated survival rules before Rock Head, Contrary, and Sturdy convert them into offense?",
+        "tempo": "Spiritomb blunts both damage categories, Scarf Tyrantrum fires recoil-free Head Smash, Contrary Serperior snowballs, and Sturdy Carracosta threatens one Shell Smash.",
+        "pressure_sources": [
+          "SPECIES_SPIRITOMB",
+          "SPECIES_TYRANTRUM",
+          "SPECIES_SERPERIOR",
+          "SPECIES_CARRACOSTA"
+        ],
+        "intentional_opening": "Source order is intentional and preserved.",
+        "intentional_weakness": "There is no shared field mode; Spiritomb is passive under Taunt, Tyrantrum is Choice locked, Serperior is physically frail, Carracosta is priority-vulnerable after Sturdy, and Fairy, Ice, Fighting, status, Haze, and item removal remain broad.",
+        "first_loss_lesson": "Name each rule as it appears: do not feed Leaf Storm boosts, break Sturdy safely, and exploit Tyrantrum's lock instead of treating the quartet as one core.",
+        "revealed_information": [
+          "cap 45",
+          "double",
+          "4 main members",
+          "ancient-survivors",
+          "infiltrator",
+          "rock-head",
+          "contrary",
+          "sturdy-shell-smash"
+        ],
+        "counterplay_classes": [
+          "Disrupt, redirect, Taunt, or remove the enabling lead or partner.",
+          "Exploit the listed type, item, and damage-category seams.",
+          "Use speed reversal, item removal, status control, focus fire, or setup denial.",
+          "There is no shared field mode; Spiritomb is passive under Taunt, Tyrantrum is Choice locked, Serperior is physically frail, Carracosta is priority-vulnerable after Sturdy, and Fairy, Ice, Fighting, status, Haze, and item removal remain broad."
+        ],
+        "target_difficulty": 9.2,
+        "difficulty_rationale": "Optimized cap-plus sets and one coherent interaction create a serious optional puzzle while explicit seams preserve broad counterplay.",
+        "tuning_knob": "Lower the last main-story member by one level first; preserve species, mechanics, and order.",
+        "playtest_status": "static-pass-runtime-unplayed",
+        "novelty_tags": [
+          "route111-north",
+          "ancient-survivors",
+          "infiltrator",
+          "rock-head",
+          "contrary",
+          "sturdy-shell-smash"
+        ],
+        "historic_reference_ids": [
+          "smogon:gen4uu:001",
+          "smogon:gen8nu:003",
+          "smogon:gen7ou:009",
+          "showdown:gen5randomdoublesbattle:024"
+        ],
+        "corpus_search": {
+          "status": "complete-current-review",
+          "pool_size": 1005,
+          "selection": "4 indexed references."
+        },
+        "author_self_check": {
+          "strongest_part": "Spiritomb blunts both damage categories, Scarf Tyrantrum fires recoil-free Head Smash, Contrary Serperior snowballs, and Sturdy Carracosta threatens one Shell Smash.",
+          "weakest_link": "There is no shared field mode; Spiritomb is passive under Taunt, Tyrantrum is Choice locked, Serperior is physically frail, Carracosta is priority-vulnerable after Sturdy, and Fairy, Ice, Fighting, status, Haze, and item removal remain broad."
+        },
+        "record_source": "v2-ledger",
+        "location": "Route111",
+        "category": "optional ancient-survivors Ruin Maniac double",
+        "strict_cap": 45,
+        "source_facts": {
+          "format": "double",
+          "source_record_formats": [
+            "double"
+          ],
+          "source_variant_count": 1,
+          "representative_party_size": 4,
+          "average_party_size": 4.0,
+          "species": [
+            "SPECIES_CARRACOSTA",
+            "SPECIES_SERPERIOR",
+            "SPECIES_SPIRITOMB",
+            "SPECIES_TYRANTRUM"
+          ],
+          "items": [
+            "ITEM_CHOICE_SCARF",
+            "ITEM_LEFTOVERS",
+            "ITEM_WHITE_HERB"
+          ],
+          "moves": [
+            "MOVE_AQUA_JET",
+            "MOVE_DRAGON_CLAW",
+            "MOVE_DRAGON_PULSE",
+            "MOVE_GLARE",
+            "MOVE_HEAD_SMASH",
+            "MOVE_HIGH_HORSEPOWER",
+            "MOVE_LEAF_STORM",
+            "MOVE_LIQUIDATION",
+            "MOVE_PAIN_SPLIT",
+            "MOVE_PROTECT",
+            "MOVE_PSYCHIC_FANGS",
+            "MOVE_ROCK_SLIDE",
+            "MOVE_SHELL_SMASH",
+            "MOVE_SNARL",
+            "MOVE_WILL_O_WISP"
+          ],
+          "synergy_tags": [
+            "status control"
+          ],
+          "level_offsets": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "average_level_offset": 2.5,
+          "max_level_offset": 4,
+          "densities": {
+            "protect": 0.5,
+            "fake_out": 0.0,
+            "setup": 0.25,
+            "speed_control_or_priority": 0.75,
+            "premium_item": 0.75
+          }
+        }
+      },
+      {
+        "index": 143,
+        "encounter_id": "BATTLE_143_ROUTE_111_BRANDEN",
+        "identity": {
+          "location": "Route111",
+          "category": "optional anchor-crew Camper double",
+          "format": "double",
+          "strict_cap": 45,
+          "memory_hook": "Fake Out buys Steely Spirit's boosted Iron and Anchor attacks; Sirfetch'd brings critical pressure and Kartana supplies the frail Beast Boost finish."
+        },
+        "primary_player_question": "Can the player remove Steely Spirit before Anchor Shot traps the wrong answer and three different blades start collecting KOs?",
+        "tempo": "Fake Out buys Steely Spirit's boosted Iron and Anchor attacks; Sirfetch'd brings critical pressure and Kartana supplies the frail Beast Boost finish.",
+        "pressure_sources": [
+          "SPECIES_PERRSERKER",
+          "SPECIES_DHELMISE",
+          "SPECIES_SIRFETCHD",
+          "SPECIES_KARTANA"
+        ],
+        "intentional_opening": "Source order is intentional and preserved.",
+        "intentional_weakness": "The team is overwhelmingly physical; Perrserker is slow, Dhelmise is Dark-vulnerable, Sirfetch'd and Kartana are protect-dependent, and burn, Intimidate, Fire, Fighting, Ground, redirection, and special spread pressure remain broad.",
+        "first_loss_lesson": "Break the spirit-and-anchor link first, then deny Kartana its first Beast Boost rather than chasing every blade.",
+        "revealed_information": [
+          "cap 45",
+          "double",
+          "4 main members",
+          "anchor-crew",
+          "steely-spirit",
+          "steelworker",
+          "critical-blade",
+          "beast-boost"
+        ],
+        "counterplay_classes": [
+          "Disrupt, redirect, Taunt, or remove the enabling lead or partner.",
+          "Exploit the listed type, item, and damage-category seams.",
+          "Use speed reversal, item removal, status control, focus fire, or setup denial.",
+          "The team is overwhelmingly physical; Perrserker is slow, Dhelmise is Dark-vulnerable, Sirfetch'd and Kartana are protect-dependent, and burn, Intimidate, Fire, Fighting, Ground, redirection, and special spread pressure remain broad."
+        ],
+        "target_difficulty": 9.2,
+        "difficulty_rationale": "Optimized cap-plus sets and one coherent interaction create a serious optional puzzle while explicit seams preserve broad counterplay.",
+        "tuning_knob": "Lower the last main-story member by one level first; preserve species, mechanics, and order.",
+        "playtest_status": "static-pass-runtime-unplayed",
+        "novelty_tags": [
+          "route111-north",
+          "anchor-crew",
+          "steely-spirit",
+          "steelworker",
+          "critical-blade",
+          "beast-boost"
+        ],
+        "historic_reference_ids": [
+          "showdown:gen8randomdoublesbattle:001",
+          "vgc:worlds-2018",
+          "showdown:gen8randomdoublesbattle:018"
+        ],
+        "corpus_search": {
+          "status": "complete-current-review",
+          "pool_size": 1005,
+          "selection": "3 indexed references."
+        },
+        "author_self_check": {
+          "strongest_part": "Fake Out buys Steely Spirit's boosted Iron and Anchor attacks; Sirfetch'd brings critical pressure and Kartana supplies the frail Beast Boost finish.",
+          "weakest_link": "The team is overwhelmingly physical; Perrserker is slow, Dhelmise is Dark-vulnerable, Sirfetch'd and Kartana are protect-dependent, and burn, Intimidate, Fire, Fighting, Ground, redirection, and special spread pressure remain broad."
+        },
+        "record_source": "v2-ledger",
+        "location": "Route111",
+        "category": "optional anchor-crew Camper double",
+        "strict_cap": 45,
+        "source_facts": {
+          "format": "double",
+          "source_record_formats": [
+            "double"
+          ],
+          "source_variant_count": 1,
+          "representative_party_size": 4,
+          "average_party_size": 4.0,
+          "species": [
+            "SPECIES_DHELMISE",
+            "SPECIES_KARTANA",
+            "SPECIES_PERRSERKER",
+            "SPECIES_SIRFETCHD"
+          ],
+          "items": [
+            "ITEM_ASSAULT_VEST",
+            "ITEM_COLBUR_BERRY",
+            "ITEM_FOCUS_SASH",
+            "ITEM_LEEK"
+          ],
+          "moves": [
+            "MOVE_ANCHOR_SHOT",
+            "MOVE_BRAVE_BIRD",
+            "MOVE_CLOSE_COMBAT",
+            "MOVE_FAKE_OUT",
+            "MOVE_IRON_HEAD",
+            "MOVE_LEAF_BLADE",
+            "MOVE_METEOR_ASSAULT",
+            "MOVE_NIGHT_SLASH",
+            "MOVE_POLTERGEIST",
+            "MOVE_POWER_WHIP",
+            "MOVE_PROTECT",
+            "MOVE_SACRED_SWORD",
+            "MOVE_U_TURN"
+          ],
+          "synergy_tags": [
+            "pivot control"
           ],
           "level_offsets": [
             1,
@@ -937,773 +1384,10 @@
           "max_level_offset": 4,
           "densities": {
             "protect": 0.75,
-            "fake_out": 0.0,
-            "setup": 0.125,
-            "speed_control_or_priority": 0.75,
-            "premium_item": 0.5
-          }
-        }
-      },
-      {
-        "index": 68,
-        "encounter_id": "BATTLE_068_MAUVILLE_GYM_WATTSON",
-        "identity": {
-          "location": "MauvilleCity_Gym",
-          "category": "required badge boss",
-          "format": "double",
-          "strict_cap": 30,
-          "memory_hook": "Tapu Koko and Lightning Rod Emolga establish fast Electric Terrain; Wattson then answers the visible board with Iron Hands, Farigiraf, Porygon2, or Raichu modules, and Mega Raichu Y converts No Guard Thunder and Focus Blast whenever it actually arrives."
-        },
-        "primary_player_question": "Can the player dismantle the fixed fast lead, then read the adaptively selected reserve pair and choose whether to contest Terrain, priority, or move order before Mega Raichu appears?",
-        "tempo": "One guaranteed Terrain/Tailwind opening followed by native resistance-and-base-damage reserve selection, reciprocal speed modes, priority denial, and a dynamically deployed story Mega.",
-        "pressure_sources": [
-          "eight-turn Electric Terrain Tapu Koko",
-          "Nature's Madness, Taunt, and U-turn",
-          "Focus Sash Lightning Rod Emolga Tailwind, Encore, Helping Hand, and Thunderbolt",
-          "optional Koko Wild Charge into allied Lightning Rod for a safe Emolga Sp. Atk boost",
-          "Assault Vest Quark Drive Iron Hands",
-          "Fake Out, Close Combat, Wild Charge, and Ice Punch",
-          "Sitrus Armor Tail Farigiraf",
-          "Icy Wind and Light Screen",
-          "Eviolite Download Porygon2 Trick Room and Recover",
-          "level-35 No Guard Mega Raichu Y",
-          "perfectly accurate Thunder and Focus Blast"
-        ],
-        "intentional_opening": "Koko and Emolga are the only fixed pair. Emolga supplies Tailwind and an optional Lightning Rod activation target for Koko's Wild Charge; it can then convert the Sp. Atk boost through Thunderbolt. Emolga is Flying and therefore does not receive Electric Terrain's damage boost. After a knockout, U-turn, or voluntary switch, native AI selects any eligible reserve by predicted resistance and then base-form outgoing damage; earlier source slots only break exact ties. The partner-move conflict guard prevents an inactive Trick Room and fast control from being selected together, and ally move scoring ignores stale move positions when the partner switches or uses an item.",
-        "intentional_weakness": "Koko, Iron Hands, and Raichu are Ground weak; Emolga is Ground immune and Farigiraf and Porygon2 are neutral. There is no redirection or Wide Guard. Emolga depends on Focus Sash and lacks Prankster, Porygon2 alone sets Trick Room, Iron Hands has no Protect or recovery, and No Guard exposes physically frail Mega Raichu to inaccurate attacks.",
-        "first_loss_lesson": "Do not memorize a wave order. Track Terrain, identify the reserve actually selected, deny Porygon2 before committing to fast control, remove Farigiraf before relying on priority, and keep a Mega or physical Ground line available whenever Raichu enters.",
-        "revealed_information": [
-          "Koko and Emolga are the only fixed lead",
-          "four of six members are Electric-type",
-          "Koko can safely activate allied Lightning Rod with Wild Charge",
-          "replacement AI evaluates resistance and base-form outgoing damage",
-          "source order is only an exact-tie breaker",
-          "Iron Hands gains Quark Drive from Electric Terrain",
-          "Farigiraf is the only Armor Tail blocker",
-          "Porygon2 is the only Trick Room setter",
-          "Raichu Mega Evolves on its first legal move action after entering",
-          "Badge 3 changes the strict cap from 30 to 40",
-          "Wise Glasses is retry-safe if the Bag is full",
-          "there is no scripted heal"
-        ],
-        "counterplay_classes": [
-          "Ground spread pressure and Fake Out",
-          "Lightning Rod, Volt Absorb, Motor Drive, Grass resistance, terrain replacement, or terrain stalling",
-          "Sash breaking, Taunt, Encore, Imprison, competing Tailwind, opposing Trick Room, paralysis, or Protect cycling",
-          "burn, Intimidate, Fairy, Psychic, Ground, and physical walls into Iron Hands",
-          "Dark or Bug focus into Farigiraf before priority",
-          "Knock Off, Trick, Taunt, Encore, Fighting damage, or room reversal into Porygon2",
-          "physical Ground, preserved Mega pressure, or inaccurate high-power attacks into No Guard Mega Raichu"
-        ],
-        "target_difficulty": 10.0,
-        "difficulty_rationale": "Six optimized legal Pok\u00e9mon at levels 32-35, four Electric-types, a World Champion-derived architecture, automatic Terrain, optional allied Lightning Rod activation, adaptive reserve selection, dual speed modes, priority denial, and a reciprocal story Mega target a true badge-boss 10. Static review predicts a severe but broadly solvable puzzle; only runtime attempts can confirm the observed score because Ground spread, Fake Out, terrain denial, and focused Porygon2 removal remain intentionally real answers.",
-        "tuning_knob": "Tune Mega Raichu from +5 to +4 first, then Porygon2 from +4 to +3; preserve the fixed lead, adaptive reserve modules, sole Trick Room setter, Armor Tail role, and reciprocal Mega.",
-        "playtest_status": "static-pass-runtime-unplayed",
-        "novelty_tags": [
-          "required-gym-boss",
-          "guarded-double",
-          "target-ten",
-          "four-of-six-electric",
-          "world-champion-spine",
-          "electric-terrain",
-          "adaptive-reserve-selection",
-          "lightning-rod-ally-activation",
-          "dual-speed-mode",
-          "trick-room",
-          "tailwind",
-          "armor-tail",
-          "iron-hands",
-          "tapu-koko",
-          "emolga",
-          "mega-raichu-y",
-          "no-guard",
-          "reciprocal-mega",
-          "no-scripted-heal"
-        ],
-        "historic_reference_ids": [
-          "elite:luca-ceribelli:worlds-2024",
-          "showdown:gen9randomdoublesbattle:009",
-          "smogon:gen8ou:005",
-          "showdown:gen9championsrandomdoublesbattle:029",
-          "showdown:gen8randomdoublesbattle:005"
-        ],
-        "corpus_search": {
-          "status": "complete-current-review",
-          "pool_size": 1005,
-          "selection": "The 2024 World Champion roster supplies the Terrain, Iron Hands, Farigiraf, Whimsicott support role, and dual-speed spine; four full-set records validate Porygon2, Tapu Koko, Raichu, and the Electric-native Emolga translation. Verdant's custom No Guard Mega Y remains transparently engine-specific."
-        },
-        "author_self_check": {
-          "strongest_part": "The fixed opening teaches the vocabulary, then every adaptive reserve pairing asks the player to reclassify the board without abandoning the Terrain, priority, and speed identity.",
-          "weakest_link": "Ground spread plus Fake Out is the broadest fair opening answer, while focused Porygon2 removal simplifies slow mode. The partner-move conflict guard is required so mixed-speed pairs never establish opposite plans on the same turn."
-        },
-        "record_source": "v2-ledger",
-        "location": "MauvilleCity_Gym",
-        "category": "required badge boss",
-        "strict_cap": 30,
-        "source_facts": {
-          "format": "double",
-          "source_record_formats": [
-            "double"
-          ],
-          "source_variant_count": 1,
-          "representative_party_size": 6,
-          "average_party_size": 6.0,
-          "species": [
-            "SPECIES_EMOLGA",
-            "SPECIES_FARIGIRAF",
-            "SPECIES_IRON_HANDS",
-            "SPECIES_PORYGON2",
-            "SPECIES_RAICHU",
-            "SPECIES_TAPU_KOKO"
-          ],
-          "items": [
-            "ITEM_ASSAULT_VEST",
-            "ITEM_EVIOLITE",
-            "ITEM_FOCUS_SASH",
-            "ITEM_RAICHUNITE_Y",
-            "ITEM_SITRUS_BERRY",
-            "ITEM_TERRAIN_EXTENDER"
-          ],
-          "moves": [
-            "MOVE_CLOSE_COMBAT",
-            "MOVE_ENCORE",
-            "MOVE_FAKE_OUT",
-            "MOVE_FOCUS_BLAST",
-            "MOVE_GRASS_KNOT",
-            "MOVE_HELPING_HAND",
-            "MOVE_ICE_BEAM",
-            "MOVE_ICE_PUNCH",
-            "MOVE_ICY_WIND",
-            "MOVE_LIGHT_SCREEN",
-            "MOVE_NATURES_MADNESS",
-            "MOVE_PROTECT",
-            "MOVE_RECOVER",
-            "MOVE_TAILWIND",
-            "MOVE_TAUNT",
-            "MOVE_THUNDER",
-            "MOVE_THUNDERBOLT",
-            "MOVE_TRICK_ROOM",
-            "MOVE_TRI_ATTACK",
-            "MOVE_TWIN_BEAM",
-            "MOVE_U_TURN",
-            "MOVE_WILD_CHARGE"
-          ],
-          "synergy_tags": [
-            "Electric pressure",
-            "Fake Out tempo",
-            "Tailwind",
-            "Trick Room",
-            "active speed control",
-            "electric terrain",
-            "pivot control",
-            "status control"
-          ],
-          "level_offsets": [
-            2,
-            3,
-            4,
-            5
-          ],
-          "average_level_offset": 3.17,
-          "max_level_offset": 5,
-          "densities": {
-            "protect": 0.333,
-            "fake_out": 0.167,
+            "fake_out": 0.25,
             "setup": 0.0,
-            "speed_control_or_priority": 0.833,
-            "premium_item": 0.667
-          }
-        }
-      },
-      {
-        "index": 69,
-        "encounter_id": "BATTLE_069_ROUTE_117_ANNA_AND_MEG",
-        "identity": {
-          "location": "Route117",
-          "category": "optional guarded solo double with two avatars",
-          "format": "double",
-          "strict_cap": 40,
-          "memory_hook": "Passimian Beats Up Stamina Mudsdale to turn little hits into Body Press power; knockout order and native reserve selection determine whether Receiver, Power of Alchemy, or Pure Power defines the next board."
-        },
-        "primary_player_question": "Can the player stop the initial multi-hit Defense conversion, then choose a knockout order that limits Receiver or a matchup-selected Power of Alchemy branch before Pure Power Medicham creates another phase?",
-        "tempo": "One visible ally-targeting activation, Defense-powered physical pressure, then conditional inheritance or immediate reserve offense selected by the native matchup logic rather than a speed field.",
-        "pressure_sources": [
-          "Roseli Receiver Passimian",
-          "ally-targeted Beat Up",
-          "Leftovers Stamina Mudsdale",
-          "Stamina-powered Body Press",
-          "High Horsepower, Heavy Slam, and Rock Slide",
-          "Black Sludge Power of Alchemy Alolan Muk",
-          "Gunk Shot, Knock Off, and Snarl",
-          "level-43 Expert Belt Pure Power Medicham",
-          "Feint, Zen Headbutt, Drain Punch, and Ice Punch"
-        ],
-        "intentional_opening": "Passimian and Mudsdale are fixed leads. Combo scoring strongly but non-forcingly values a safe Beat Up into a living Stamina partner that knows Body Press and can still raise Defense. No switch, sacrifice, target, or move is forced, and Mudsdale has no Protect that can invalidate its partner's activation.",
-        "intentional_weakness": "Special attacks ignore Stamina, the whole roster is physical, the activation can be disrupted, and simultaneous lead KOs skip Receiver and Power of Alchemy handoffs. Passimian and Medicham are Fairy weak; Mudsdale has exposed Water, Grass, and Ice weaknesses; Alolan Muk is Ground weak.",
-        "first_loss_lesson": "The ally hit was the setup. Stop Passimian or pressure Mudsdale specially; Mudsdale-first passes Stamina to Receiver, while a double knockout skips that transfer and native matchup selection determines which reserve appears.",
-        "revealed_information": [
-          "both avatars load one shared trainer record",
-          "Badge 3 is required",
-          "Passimian leads beside Mudsdale",
-          "Beat Up may target allied Stamina",
-          "Mudsdale converts Defense through Body Press",
-          "forced reserves use native matchup ranking",
-          "Receiver and Power of Alchemy copy only allowed current abilities",
-          "simultaneous lead KOs skip the first handoff",
-          "the battle gives only Match Call and ordinary rewards"
-        ],
-        "counterplay_classes": [
-          "Fake Out, sleep, paralysis, Encore, Taunt, focus fire, or ally-move denial",
-          "special Water, Grass, Ice, Psychic, Fairy, Ground, or Flying pressure by slot",
-          "Haze, Clear Smog, Unaware, phazing, critical hits, or simultaneous spread KOs",
-          "burn, Intimidate, Charm, Reflect, physical walls, or contact punishment",
-          "Protect scouting and deliberate target order"
-        ],
-        "target_difficulty": 9.0,
-        "difficulty_rationale": "Four optimized legal levels 41-43, full items, a multi-hit Body Press conversion, two conditional inheritance mechanics, native matchup-selected reserves, and Pure Power cleanup make a severe optional route puzzle. Broad special offense, status, stat resets, exposed type seams, and player-controlled simultaneous KOs keep it from becoming a boss-scale lock.",
-        "tuning_knob": "Tune Medicham from +3 to +2 first, then Alolan Muk from +2 to +1; preserve the fixed Beat Up-Stamina lead and native adaptive reserve selection.",
-        "playtest_status": "static-pass-runtime-unplayed",
-        "novelty_tags": [
-          "route-double",
-          "guarded-double",
-          "beat-up-stamina",
-          "body-press-conversion",
-          "receiver",
-          "power-of-alchemy",
-          "ability-inheritance-relay",
-          "knockout-order",
-          "passimian",
-          "alolan-muk",
-          "pure-power-medicham",
-          "no-speed-field",
-          "no-mega",
-          "no-legendary"
-        ],
-        "historic_reference_ids": [
-          "showdown:gen9championsrandomdoublesbattle:008",
-          "showdown:gen7randomdoublesbattle:009",
-          "showdown:gen7randomdoublesbattle:002",
-          "showdown:gen4randomdoublesbattle:017",
-          "vgc:regional-san-jose-ca-2018"
-        ],
-        "corpus_search": {
-          "status": "complete-current-review",
-          "pool_size": 1005,
-          "selection": "Four full-set donors and one verified champion roster support the exact species and direct sets; the Beat Up-Stamina opening and knockout-dependent Receiver/Power of Alchemy branches are transparently hand-authored from native mechanics."
-        },
-        "author_self_check": {
-          "strongest_part": "The readable fixed lead produces an honestly adaptive aftermath: Mudsdale-first yields Receiver, native matchup selection chooses the reserve, and an active Muk can add a second handoff while a simultaneous knockout skips the first.",
-          "weakest_link": "Fast special Water or Grass pressure and physical debuffs compress the battle, and not every native reserve choice creates an inheritance phase; those are intentional broad answers and Medicham level is the first tuning knob."
-        },
-        "record_source": "v2-ledger",
-        "location": "Route117",
-        "category": "optional guarded solo double with two avatars",
-        "strict_cap": 40,
-        "source_facts": {
-          "format": "double",
-          "source_record_formats": [
-            "double"
-          ],
-          "source_variant_count": 1,
-          "representative_party_size": 4,
-          "average_party_size": 4.0,
-          "species": [
-            "SPECIES_MEDICHAM",
-            "SPECIES_MUDSDALE",
-            "SPECIES_MUK_ALOLAN",
-            "SPECIES_PASSIMIAN"
-          ],
-          "items": [
-            "ITEM_BLACK_SLUDGE",
-            "ITEM_EXPERT_BELT",
-            "ITEM_LEFTOVERS",
-            "ITEM_ROSELI_BERRY"
-          ],
-          "moves": [
-            "MOVE_BEAT_UP",
-            "MOVE_BODY_PRESS",
-            "MOVE_CLOSE_COMBAT",
-            "MOVE_DRAIN_PUNCH",
-            "MOVE_FEINT",
-            "MOVE_GUNK_SHOT",
-            "MOVE_HEAVY_SLAM",
-            "MOVE_HIGH_HORSEPOWER",
-            "MOVE_ICE_PUNCH",
-            "MOVE_KNOCK_OFF",
-            "MOVE_PROTECT",
-            "MOVE_ROCK_SLIDE",
-            "MOVE_SNARL",
-            "MOVE_ZEN_HEADBUTT"
-          ],
-          "synergy_tags": [
-            "Beat Up + Stamina",
-            "ability inheritance relay"
-          ],
-          "level_offsets": [
-            1,
-            2,
-            3
-          ],
-          "average_level_offset": 2.0,
-          "max_level_offset": 3,
-          "densities": {
-            "protect": 0.5,
-            "fake_out": 0.0,
-            "setup": 0.0,
-            "speed_control_or_priority": 0.75,
+            "speed_control_or_priority": 1.0,
             "premium_item": 0.5
-          }
-        }
-      },
-      {
-        "index": 70,
-        "encounter_id": "BATTLE_070_ROUTE_117_ISAAC",
-        "identity": {
-          "location": "Route117",
-          "category": "optional guarded Breeder double",
-          "format": "double",
-          "strict_cap": 40,
-          "memory_hook": "Five competitive young pupils open with Follow Me plus Gluttony Belly Drum, while one adult Mega Kangaskhan guardian and native matchup-selected reserves turn the Day Care lesson into a full six-member exam."
-        },
-        "primary_player_question": "Can the player deny or contain Munchlax's Belly Drum through Togepi's active redirection, then correctly reclassify the board when native matchup logic selects a guardian, second redirector, or special attacker?",
-        "tempo": "Slow protected setup lead, then adaptive physical priority, redirection and sleep, or fragile special pressure without weather, terrain, room, Tailwind, screens, or hazards.",
-        "pressure_sources": [
-          "level-42 Gluttony Figy Munchlax",
-          "Belly Drum and Body Slam",
-          "level-41 Eviolite Serene Grace Togepi",
-          "Follow Me, Yawn, Encore, and Ancient Power",
-          "level-44 Parental Bond Mega Kangaskhan guardian",
-          "Fake Out, Return, Power-Up Punch, and Sucker Punch",
-          "Coba Regenerator Foongus redirection and Spore",
-          "Sash Magic Guard Abra special coverage",
-          "Life Orb Analytic Staryu special coverage and Recover"
-        ],
-        "intentional_opening": "Munchlax and Togepi are the only fixed pair. Existing viability may choose Belly Drum only from a safe state; partner-aware AI moderately values Follow Me whenever Munchlax selects or carries the setup, and reciprocal combo scoring values Drum only when neither foe shows a lethal redirection bypass. No opening move or target is forced.",
-        "intentional_weakness": "There is no speed control. Spread attacks bypass both redirectors; Munchlax and Kangaskhan share Fighting pressure; Togepi has low base HP and no recovery despite Eviolite; Foongus is answerable through powder immunity, spread damage, Taunt, Flying, and Psychic; Kangaskhan has no Protect; Abra depends on an unbroken Sash; Staryu is frail and takes Life Orb recoil.",
-        "first_loss_lesson": "The tiny lead has expert jobs. Break Follow Me with spread pressure or disruption, survive and clear Belly Drum, then read the reserve that actually enters instead of assuming source order: each guardian, redirection, and special-offense branch demands a different target.",
-        "revealed_information": [
-          "Badge 3 is required",
-          "Isaac is a guarded native double",
-          "Munchlax and Togepi are the fixed lead",
-          "five exact members are intentionally unevolved",
-          "Kangaskhan is the adult guardian and only Mega",
-          "Kangaskhan automatically Mega Evolves before its first selected move",
-          "forced reserves use native matchup ranking",
-          "Foongus supplies Rage Powder, Spore, and Clear Smog",
-          "Abra and Staryu prevent physical debuffs from solving all six",
-          "Match Call records 2-4 remain unresolved legacy cohorts"
-        ],
-        "counterplay_classes": [
-          "spread damage through Follow Me; Fake Out, flinching, priority damage, or enough redirected focus into Togepi; later-turn Taunt",
-          "Fighting focus, Encore, Haze, Clear Smog, Unaware, phazing, burn, Intimidate, Charm, Reflect, or immediate special damage into Munchlax",
-          "Grass typing, Overcoat, Safety Goggles, terrain, Taunt, Flying, or Psychic into Foongus",
-          "Ghost positioning, Fighting, burn, Intimidate, Protect, and priority management into Mega Kangaskhan",
-          "chip or priority into Abra's Sash",
-          "Electric, Grass, recovery denial, and faster pressure into Staryu",
-          "Knock Off, Trick, or item denial across the young specialists"
-        ],
-        "target_difficulty": 9.2,
-        "difficulty_rationale": "Six optimized legal Pok\u00e9mon at levels 41-44, a supported Belly Drum lead, one fresh Mega guardian, redirection plus sleep, mixed damage lanes, full items, and native adaptive replacements make a brutal optional route battle. No speed field, visibly frail pupils, broad disruption, shared Fighting pressure, powder answers, Sash chip, and exposed type seams keep it below boss ten.",
-        "tuning_knob": "Tune Kangaskhan from +4 to +3 first, then Abra and Staryu from +3 to +2; preserve the five-young-plus-guardian identity, fixed lead, and native reserve selection.",
-        "playtest_status": "static-pass-runtime-unplayed",
-        "novelty_tags": [
-          "route-double",
-          "guarded-double",
-          "day-care-class",
-          "five-young-plus-guardian",
-          "munchlax",
-          "togepi",
-          "follow-me",
-          "belly-drum",
-          "gluttony-figy",
-          "mega-kangaskhan",
-          "parental-bond",
-          "foongus-redirection",
-          "abra-sash",
-          "staryu-analytic",
-          "adaptive-reserve-selection",
-          "no-speed-field",
-          "no-weather",
-          "no-legendary"
-        ],
-        "historic_reference_ids": [
-          "showdown:gen7randomdoublesbattle:021",
-          "showdown:gen9championsrandomdoublesbattle:003",
-          "vgc:worlds-2015",
-          "smogon:gen4uu:001",
-          "smogon:gen5nu:004"
-        ],
-        "corpus_search": {
-          "status": "complete-current-review",
-          "pool_size": 1005,
-          "selection": "Mega Kangaskhan's exact role is supported by two full-set doubles donors, two published lower-tier samples, and the 2015 World Champion Kangaskhan plus Amoonguss spine. The five exact young pupils are transparently hand-authored because the corpus contains no complete baby-form team matching Route 117's Day Care context."
-        },
-        "author_self_check": {
-          "strongest_part": "The location earns a roster that would feel artificial elsewhere: Togepi creates a real Follow Me-Belly Drum puzzle, five young-form roles preserve the early-middle evolution phase, and a World Champion Mega guardian keeps the adaptive second half dangerous.",
-          "weakest_link": "Spread pressure, Fake Out, or enough redirected damage can break Togepi's first turn, while Taunt denies repeats; native replacement also does not guarantee immediate Kangaskhan. The other five still cover redirection, physical priority, and two special lanes; Kangaskhan level is the first tuning knob."
-        },
-        "record_source": "v2-ledger",
-        "location": "Route117",
-        "category": "optional solo double",
-        "strict_cap": 40,
-        "source_facts": {
-          "format": "double",
-          "source_record_formats": [
-            "double"
-          ],
-          "source_variant_count": 1,
-          "representative_party_size": 6,
-          "average_party_size": 6.0,
-          "species": [
-            "SPECIES_ABRA",
-            "SPECIES_FOONGUS",
-            "SPECIES_KANGASKHAN",
-            "SPECIES_MUNCHLAX",
-            "SPECIES_STARYU",
-            "SPECIES_TOGEPI"
-          ],
-          "items": [
-            "ITEM_COBA_BERRY",
-            "ITEM_EVIOLITE",
-            "ITEM_FIGY_BERRY",
-            "ITEM_FOCUS_SASH",
-            "ITEM_KANGASKHANITE",
-            "ITEM_LIFE_ORB"
-          ],
-          "moves": [
-            "MOVE_ANCIENT_POWER",
-            "MOVE_BELLY_DRUM",
-            "MOVE_BODY_SLAM",
-            "MOVE_CLEAR_SMOG",
-            "MOVE_DAZZLING_GLEAM",
-            "MOVE_ENCORE",
-            "MOVE_FAKE_OUT",
-            "MOVE_FIRE_PUNCH",
-            "MOVE_FOLLOW_ME",
-            "MOVE_GIGA_DRAIN",
-            "MOVE_HYDRO_PUMP",
-            "MOVE_ICE_BEAM",
-            "MOVE_POWER_UP_PUNCH",
-            "MOVE_PROTECT",
-            "MOVE_PSYCHIC",
-            "MOVE_RAGE_POWDER",
-            "MOVE_RECOVER",
-            "MOVE_RETURN",
-            "MOVE_SHADOW_BALL",
-            "MOVE_SPORE",
-            "MOVE_SUCKER_PUNCH",
-            "MOVE_THUNDERBOLT",
-            "MOVE_YAWN"
-          ],
-          "synergy_tags": [
-            "Fake Out tempo",
-            "redirection setup",
-            "status control"
-          ],
-          "level_offsets": [
-            1,
-            2,
-            3,
-            4
-          ],
-          "average_level_offset": 2.5,
-          "max_level_offset": 4,
-          "densities": {
-            "protect": 0.167,
-            "fake_out": 0.167,
-            "setup": 0.167,
-            "speed_control_or_priority": 0.667,
-            "premium_item": 0.5
-          }
-        }
-      },
-      {
-        "index": 71,
-        "encounter_id": "BATTLE_071_ROUTE_117_DYLAN",
-        "identity": {
-          "location": "Route117",
-          "category": "optional guarded moving Triathlete double",
-          "format": "double",
-          "strict_cap": 40,
-          "memory_hook": "Regular Lopunny changes the race order so slow School-form Wishiwashi attacks next, then Bug Gem Unburden Accelgor or rare White Herb Pheromosa turns the relay into a glass-cannon sprint."
-        },
-        "primary_player_question": "Can the player stop or exploit After You before one of the game's slowest threatening forms attacks immediately, then contain two fragile speed finishers without relying on the same answer twice?",
-        "tempo": "One order-changing slow-cannon lead followed by native adaptive special Unburden or physical Beast Boost speed, with no persistent field mode.",
-        "pressure_sources": [
-          "level-43 Payapa Scrappy regular Lopunny",
-          "After You, Return, Close Combat, and Protect",
-          "level-42 Sitrus Schooling Wishiwashi",
-          "Hydro Pump, Muddy Water, Ice Beam, and U-turn",
-          "level-41 Bug Gem Unburden Accelgor",
-          "Bug Buzz, Sludge Bomb, Energy Ball, and Water Shuriken",
-          "level-43 White Herb Beast Boost Pheromosa",
-          "Close Combat, Triple Axel, Lunge, and Protect"
-        ],
-        "intentional_opening": "Lopunny and Wishiwashi are the fixed lead. Generic combo scoring values ally-targeted After You only when Trick Room is absent, Lopunny acts first, Wishiwashi is slower than a living foe and has damaging pressure, and any known selected move has ordinary priority. The bonus offsets the generic ally penalty but forces no move or target.",
-        "intentional_weakness": "After You fails when Lopunny is stopped, moves too late, or faces Trick Room. Lopunny and Pheromosa share Flying, Psychic, and Fairy pressure; Wishiwashi collapses below one-quarter HP; Accelgor and Pheromosa are extremely frail and vulnerable to priority; Lopunny can Protect but the team has no healing beyond one Sitrus Berry.",
-        "first_loss_lesson": "The apparent slow slot was the sprinter: After You changed the order. Stop Lopunny, reverse the race with Trick Room or priority, or punish the Water action; after a knockout, identify the actual adaptive reserve rather than memorizing source order.",
-        "revealed_information": [
-          "Badge 3 is required",
-          "Dylan is a guarded native double",
-          "Lopunny and Wishiwashi are the fixed lead",
-          "After You changes the current turn rather than raw Speed stats",
-          "Speed Swap was rejected because this engine swaps only stages",
-          "Wishiwashi has spread and single-target Water pressure",
-          "forced reserves use native matchup ranking",
-          "Accelgor consumes Bug Gem to activate Unburden",
-          "Pheromosa is the first Ultra Beast speed showcase",
-          "Lopunny deliberately does not Mega Evolve",
-          "Match Call record 2 has an even fourth placeholder but later rosters remain unresolved"
-        ],
-        "counterplay_classes": [
-          "Fake Out, flinching, paralysis, sleep, Taunt, priority, faster pressure, or Trick Room into Lopunny",
-          "Wide Guard for Muddy Water plus separate Hydro Pump scouting",
-          "Water Absorb, Storm Drain, Dry Skin, Electric, Grass, and focused threshold damage into Wishiwashi",
-          "Flying, Psychic, Fairy, burn, Intimidate, Protect, and physical walls into Lopunny or Pheromosa",
-          "priority, Rock, Fire, Flying, chip, and item denial into Accelgor",
-          "Protect scouting and deliberate focus against either adaptive reserve"
-        ],
-        "target_difficulty": 9.1,
-        "difficulty_rationale": "Four optimized legal levels 41-43, real move-order manipulation, School-form bulk, spread and single-target Water pressure, consumable Unburden, rare Beast Boost cleanup, full items, and adaptive reserves make a severe optional route battle. Trick Room, priority, Water immunity, Wide Guard plus Hydro Pump reads, shared type seams, and two glass cannons keep it below a boss ten.",
-        "tuning_knob": "Tune Pheromosa from +3 to +2 first, then Lopunny from +3 to +2; preserve the After You-Wishiwashi lead and no-Mega identity.",
-        "playtest_status": "static-pass-runtime-unplayed",
-        "novelty_tags": [
-          "route-double",
-          "guarded-double",
-          "moving-triathlete",
-          "after-you",
-          "move-order-relay",
-          "regular-lopunny",
-          "schooling-wishiwashi",
-          "bug-gem-unburden",
-          "accelgor",
-          "pheromosa",
-          "ultra-beast-showcase",
-          "white-herb",
-          "beast-boost",
-          "adaptive-reserve-selection",
-          "no-mega",
-          "no-weather",
-          "no-terrain",
-          "no-room",
-          "no-tailwind"
-        ],
-        "historic_reference_ids": [
-          "showdown:gen9championsrandomdoublesbattle:007",
-          "showdown:gen7randomdoublesbattle:014",
-          "showdown:gen6randomdoublesbattle:009",
-          "vgc:regional-madison-wi-2017"
-        ],
-        "corpus_search": {
-          "status": "complete-current-review",
-          "pool_size": 1005,
-          "selection": "Three complete reproducible donors support Lopunny, Wishiwashi, and Accelgor roles; one verified regional-winning roster supports Pheromosa's tournament legitimacy. The After You relay and exact White Herb set are transparently hand-authored for Dylan."
-        },
-        "author_self_check": {
-          "strongest_part": "A Running Triathlete makes one of the game's slowest threatening forms look like the sprinter, then passes the race to two distinct glass-cannon reserves without another field mode or Mega.",
-          "weakest_link": "Trick Room, priority, Water immunity, Wide Guard plus Hydro Pump scouting, and shared Flying, Psychic, and Fairy pressure are broad answers. Those seams are intentional; Pheromosa level is the first tuning knob."
-        },
-        "record_source": "v2-ledger",
-        "location": "Route117",
-        "category": "optional moving solo double",
-        "strict_cap": 40,
-        "source_facts": {
-          "format": "double",
-          "source_record_formats": [
-            "double"
-          ],
-          "source_variant_count": 1,
-          "representative_party_size": 4,
-          "average_party_size": 4.0,
-          "species": [
-            "SPECIES_ACCELGOR",
-            "SPECIES_LOPUNNY",
-            "SPECIES_PHEROMOSA",
-            "SPECIES_WISHIWASHI"
-          ],
-          "items": [
-            "ITEM_BUG_GEM",
-            "ITEM_PAYAPA_BERRY",
-            "ITEM_SITRUS_BERRY",
-            "ITEM_WHITE_HERB"
-          ],
-          "moves": [
-            "MOVE_AFTER_YOU",
-            "MOVE_BUG_BUZZ",
-            "MOVE_CLOSE_COMBAT",
-            "MOVE_ENERGY_BALL",
-            "MOVE_HYDRO_PUMP",
-            "MOVE_ICE_BEAM",
-            "MOVE_LUNGE",
-            "MOVE_MUDDY_WATER",
-            "MOVE_PROTECT",
-            "MOVE_RETURN",
-            "MOVE_SLUDGE_BOMB",
-            "MOVE_TRIPLE_AXEL",
-            "MOVE_U_TURN",
-            "MOVE_WATER_SHURIKEN"
-          ],
-          "synergy_tags": [
-            "Schooling HP threshold"
-          ],
-          "level_offsets": [
-            1,
-            2,
-            3
-          ],
-          "average_level_offset": 2.25,
-          "max_level_offset": 3,
-          "densities": {
-            "protect": 0.5,
-            "fake_out": 0.0,
-            "setup": 0.0,
-            "speed_control_or_priority": 0.75,
-            "premium_item": 0.25
-          }
-        }
-      },
-      {
-        "index": 72,
-        "encounter_id": "BATTLE_072_ROUTE_117_MARIA",
-        "identity": {
-          "location": "Route117",
-          "category": "optional moving Triathlete single",
-          "format": "single",
-          "strict_cap": 40,
-          "memory_hook": "Mythical Choice Band Zeraora opens a four-leg sprint, followed by a Sash Destiny Bond trade, special Encore setup, or physical priority setup chosen by native matchup logic."
-        },
-        "primary_player_question": "Can the player answer Choice-locked pivoting, a Sash trade, special setup plus Encore, and physical priority setup without one Ground or Water answer solving the entire sprint?",
-        "tempo": "Four changing fast singles legs\u2014lock and pivot, Sash trade, special setup, physical priority\u2014without a persistent field or custom AI subsystem.",
-        "pressure_sources": [
-          "level-42 Choice Band Volt Absorb Zeraora",
-          "Wild Charge recoil, Close Combat, Knock Off, and Volt Switch",
-          "level-41 Focus Sash Cursed Body Froslass",
-          "Ice Beam, Shadow Ball, Will-O-Wisp, and Destiny Bond",
-          "level-42 Life Orb Corrosion Salazzle",
-          "Flamethrower, Sludge Bomb, Nasty Plot, and Encore",
-          "level-43 Expert Belt Tough Claws Dusk Lycanroc",
-          "Accelerock, Stone Edge, Close Combat, and Swords Dance"
-        ],
-        "intentional_opening": "Zeraora is the only fixed slot. Choice Band makes its first attack or pivot readable after revelation, while Wild Charge recoil and Ground immunity create immediate counterplay. Every later replacement remains native matchup-ranked.",
-        "intentional_weakness": "All four are offense-first with no recovery or defensive field. Zeraora is choice-locked and takes recoil; Froslass depends on Sash and loses to priority or chip; Froslass and Salazzle are physically frail; Lycanroc is vulnerable before setup; three members expose Ground pressure and sturdy Water balance compresses the finish.",
-        "first_loss_lesson": "Raw Speed was not one puzzle. Read Zeraora's lock, preserve a Sash or Destiny Bond answer, deny the setup reserve that actually enters, and keep priority or Trick Room for Lycanroc rather than trying to outspeed all four.",
-        "revealed_information": [
-          "Badge 3 is required",
-          "Maria is an intentional single after three Route 117 doubles",
-          "Zeraora is the fixed mythical opener",
-          "local Zeraora uses legal Wild Charge rather than unavailable Plasma Fists",
-          "forced reserves use native matchup ranking",
-          "Froslass carries Sash, burn, and Destiny Bond",
-          "Salazzle has the exact published Encore setup set",
-          "Dusk Lycanroc has priority and Swords Dance",
-          "all four Match Call records are single-format",
-          "Zeraora remains separate player-obtainability debt"
-        ],
-        "counterplay_classes": [
-          "Ground immunity or resistance, Protect, Disable, Encore, Trick, item removal, and lock prediction into Zeraora",
-          "hazards, weather chip, priority, multi-hit moves, Scarf pressure, and Destiny Bond avoidance into Froslass",
-          "Haze, Clear Smog, Unaware, phazing, Taunt, paralysis, and revenge pressure into either setup lane",
-          "bulky Water, Ground, Rock, Steel, Fighting, Ghost, or Psychic answers by slot",
-          "Trick Room or speed reversal across the whole roster"
-        ],
-        "target_difficulty": 8.8,
-        "difficulty_rationale": "Four optimized legal levels 41-43, full distinct items, a mythical Band opener, Sash Destiny Bond, exact published Encore setup, and Tough Claws priority setup make a serious adaptation-heavy route single. No healing, broad Ground and Water pressure, Choice exploitation, Sash chip, setup denial, and Trick Room keep it below the adjacent doubles and bosses.",
-        "tuning_knob": "Tune Dusk Lycanroc from +3 to +2 first, then Zeraora from +2 to +1; preserve the four-leg identity and mythical opener.",
-        "playtest_status": "static-pass-runtime-unplayed",
-        "novelty_tags": [
-          "route-single",
-          "moving-triathlete",
-          "format-break",
-          "four-leg-sprint",
-          "zeraora",
-          "mythical-showcase",
-          "choice-band-lock",
-          "volt-switch",
-          "froslass-sash",
-          "destiny-bond",
-          "salazzle",
-          "encore-setup",
-          "lycanroc-dusk",
-          "accelerock",
-          "priority-closer",
-          "adaptive-replacement",
-          "no-mega",
-          "no-weather",
-          "no-terrain",
-          "no-room"
-        ],
-        "historic_reference_ids": [
-          "showdown:gen7randombattle:013",
-          "smogon:gen7uu:002",
-          "smogon:gen8uu:012",
-          "smogon:gen8uu:018",
-          "showdown:gen8randombattle:028",
-          "vgc:special-event-buenos-aires-2017"
-        ],
-        "corpus_search": {
-          "status": "complete-current-review",
-          "pool_size": 1005,
-          "selection": "Five complete donors support the four exact roles and one verified event winner supports Salazzle's legitimacy. The mixed four-leg sprint is transparently hand-authored, and unavailable local Plasma Fists is explicitly rejected for legal Wild Charge."
-        },
-        "author_self_check": {
-          "strongest_part": "Four fast Pok\u00e9mon ask four different questions without another subsystem, and an ordinary route trainer receives a memorable mythical opener in the rare-everywhere spirit of the game.",
-          "weakest_link": "Sturdy Ground and Water balance compresses the roster after identifying Zeraora's lock. That broad answer is intentional; Dusk Lycanroc level is the first tuning knob."
-        },
-        "record_source": "v2-ledger",
-        "location": "Route117",
-        "category": "optional moving single",
-        "strict_cap": 40,
-        "source_facts": {
-          "format": "single",
-          "source_record_formats": [
-            "single"
-          ],
-          "source_variant_count": 1,
-          "representative_party_size": 4,
-          "average_party_size": 4.0,
-          "species": [
-            "SPECIES_FROSLASS",
-            "SPECIES_LYCANROC_DUSK",
-            "SPECIES_SALAZZLE",
-            "SPECIES_ZERAORA"
-          ],
-          "items": [
-            "ITEM_CHOICE_BAND",
-            "ITEM_EXPERT_BELT",
-            "ITEM_FOCUS_SASH",
-            "ITEM_LIFE_ORB"
-          ],
-          "moves": [
-            "MOVE_ACCELEROCK",
-            "MOVE_CLOSE_COMBAT",
-            "MOVE_DESTINY_BOND",
-            "MOVE_ENCORE",
-            "MOVE_FLAMETHROWER",
-            "MOVE_ICE_BEAM",
-            "MOVE_KNOCK_OFF",
-            "MOVE_NASTY_PLOT",
-            "MOVE_SHADOW_BALL",
-            "MOVE_SLUDGE_BOMB",
-            "MOVE_STONE_EDGE",
-            "MOVE_SWORDS_DANCE",
-            "MOVE_VOLT_SWITCH",
-            "MOVE_WILD_CHARGE",
-            "MOVE_WILL_O_WISP"
-          ],
-          "synergy_tags": [],
-          "level_offsets": [
-            1,
-            2,
-            3
-          ],
-          "average_level_offset": 2.0,
-          "max_level_offset": 3,
-          "densities": {
-            "protect": 0.0,
-            "fake_out": 0.0,
-            "setup": 0.5,
-            "speed_control_or_priority": 0.25,
-            "premium_item": 1.0
           }
         }
       }
@@ -1715,21 +1399,43 @@
       "code": "NOVELTY_TAG_REPEAT",
       "scope": "rolling-window",
       "encounter_ids": [
-        "BATTLE_063_ROUTE_110_CYCLING_JACOB",
-        "BATTLE_066_MAUVILLE_GYM_BEN",
-        "BATTLE_068_MAUVILLE_GYM_WATTSON",
-        "BATTLE_069_ROUTE_117_ANNA_AND_MEG",
-        "BATTLE_070_ROUTE_117_ISAAC",
-        "BATTLE_071_ROUTE_117_DYLAN",
-        "BATTLE_072_ROUTE_117_MARIA"
+        "BATTLE_134_ROUTE_111_DAISUKE",
+        "BATTLE_135_ROUTE_111_WILTON",
+        "BATTLE_136_ROUTE_111_BROOKE",
+        "BATTLE_137_ROUTE_111_HAYDEN",
+        "BATTLE_138_ROUTE_111_BIANCA",
+        "BATTLE_139_ROUTE_111_TYRON",
+        "BATTLE_140_ROUTE_111_CELINA",
+        "BATTLE_141_ROUTE_111_CELIA",
+        "BATTLE_142_ROUTE_111_BRYAN",
+        "BATTLE_143_ROUTE_111_BRANDEN"
       ],
       "message": "One or more mechanics recur in at least three rolling encounters.",
       "evidence": {
-        "adaptive-reserve-selection": 3,
-        "guarded-double": 6,
-        "no-mega": 3,
-        "no-weather": 3,
-        "route-double": 3
+        "route111-north": 10
+      },
+      "overridden": false,
+      "override_reason": null
+    },
+    {
+      "code": "PROTECT_DENSITY",
+      "scope": "rolling-window",
+      "encounter_ids": [
+        "BATTLE_134_ROUTE_111_DAISUKE",
+        "BATTLE_135_ROUTE_111_WILTON",
+        "BATTLE_136_ROUTE_111_BROOKE",
+        "BATTLE_137_ROUTE_111_HAYDEN",
+        "BATTLE_138_ROUTE_111_BIANCA",
+        "BATTLE_139_ROUTE_111_TYRON",
+        "BATTLE_140_ROUTE_111_CELINA",
+        "BATTLE_141_ROUTE_111_CELIA",
+        "BATTLE_142_ROUTE_111_BRYAN",
+        "BATTLE_143_ROUTE_111_BRANDEN"
+      ],
+      "message": "Rolling protect density is high enough to merit an editorial look, not an automatic change.",
+      "evidence": {
+        "density": 0.516,
+        "threshold": 0.45
       },
       "overridden": false,
       "override_reason": null
@@ -1738,20 +1444,20 @@
       "code": "SPEED_CONTROL_DENSITY",
       "scope": "rolling-window",
       "encounter_ids": [
-        "BATTLE_063_ROUTE_110_CYCLING_JACOB",
-        "BATTLE_064_MAUVILLE_WALLY",
-        "BATTLE_065_MAUVILLE_GYM_VIVIAN_KIRK",
-        "BATTLE_066_MAUVILLE_GYM_BEN",
-        "BATTLE_067_MAUVILLE_GYM_SHAWN_ANGELO",
-        "BATTLE_068_MAUVILLE_GYM_WATTSON",
-        "BATTLE_069_ROUTE_117_ANNA_AND_MEG",
-        "BATTLE_070_ROUTE_117_ISAAC",
-        "BATTLE_071_ROUTE_117_DYLAN",
-        "BATTLE_072_ROUTE_117_MARIA"
+        "BATTLE_134_ROUTE_111_DAISUKE",
+        "BATTLE_135_ROUTE_111_WILTON",
+        "BATTLE_136_ROUTE_111_BROOKE",
+        "BATTLE_137_ROUTE_111_HAYDEN",
+        "BATTLE_138_ROUTE_111_BIANCA",
+        "BATTLE_139_ROUTE_111_TYRON",
+        "BATTLE_140_ROUTE_111_CELINA",
+        "BATTLE_141_ROUTE_111_CELIA",
+        "BATTLE_142_ROUTE_111_BRYAN",
+        "BATTLE_143_ROUTE_111_BRANDEN"
       ],
       "message": "Rolling speed control or priority density is high enough to merit an editorial look, not an automatic change.",
       "evidence": {
-        "density": 0.685,
+        "density": 0.826,
         "threshold": 0.55
       },
       "overridden": false,
@@ -1761,23 +1467,20 @@
       "code": "PREMIUM_ITEM_REPEAT",
       "scope": "rolling-window",
       "encounter_ids": [
-        "BATTLE_063_ROUTE_110_CYCLING_JACOB",
-        "BATTLE_064_MAUVILLE_WALLY",
-        "BATTLE_065_MAUVILLE_GYM_VIVIAN_KIRK",
-        "BATTLE_066_MAUVILLE_GYM_BEN",
-        "BATTLE_067_MAUVILLE_GYM_SHAWN_ANGELO",
-        "BATTLE_068_MAUVILLE_GYM_WATTSON",
-        "BATTLE_069_ROUTE_117_ANNA_AND_MEG",
-        "BATTLE_070_ROUTE_117_ISAAC",
-        "BATTLE_072_ROUTE_117_MARIA"
+        "BATTLE_134_ROUTE_111_DAISUKE",
+        "BATTLE_135_ROUTE_111_WILTON",
+        "BATTLE_136_ROUTE_111_BROOKE",
+        "BATTLE_138_ROUTE_111_BIANCA",
+        "BATTLE_139_ROUTE_111_TYRON",
+        "BATTLE_140_ROUTE_111_CELINA",
+        "BATTLE_141_ROUTE_111_CELIA",
+        "BATTLE_143_ROUTE_111_BRANDEN"
       ],
       "message": "A premium item appears across at least four rolling encounters.",
       "evidence": {
-        "Assault Vest": 4,
-        "Eviolite": 4,
-        "Expert Belt": 5,
+        "Assault Vest": 5,
         "Focus Sash": 5,
-        "Life Orb": 4
+        "Life Orb": 6
       },
       "overridden": false,
       "override_reason": null
@@ -1786,28 +1489,22 @@
       "code": "SIGNATURE_MOVE_REPEAT",
       "scope": "rolling-window",
       "encounter_ids": [
-        "BATTLE_064_MAUVILLE_WALLY",
-        "BATTLE_065_MAUVILLE_GYM_VIVIAN_KIRK",
-        "BATTLE_066_MAUVILLE_GYM_BEN",
-        "BATTLE_067_MAUVILLE_GYM_SHAWN_ANGELO",
-        "BATTLE_068_MAUVILLE_GYM_WATTSON",
-        "BATTLE_069_ROUTE_117_ANNA_AND_MEG",
-        "BATTLE_070_ROUTE_117_ISAAC",
-        "BATTLE_071_ROUTE_117_DYLAN",
-        "BATTLE_072_ROUTE_117_MARIA"
+        "BATTLE_134_ROUTE_111_DAISUKE",
+        "BATTLE_135_ROUTE_111_WILTON",
+        "BATTLE_136_ROUTE_111_BROOKE",
+        "BATTLE_137_ROUTE_111_HAYDEN",
+        "BATTLE_138_ROUTE_111_BIANCA",
+        "BATTLE_140_ROUTE_111_CELINA",
+        "BATTLE_141_ROUTE_111_CELIA",
+        "BATTLE_142_ROUTE_111_BRYAN",
+        "BATTLE_143_ROUTE_111_BRANDEN"
       ],
       "message": "A non-generic move appears across at least four rolling encounters.",
       "evidence": {
         "Close Combat": 4,
-        "Dazzling Gleam": 4,
-        "Encore": 4,
-        "Giga Drain": 4,
-        "Ice Beam": 6,
-        "Ice Punch": 4,
+        "Earthquake": 4,
         "Rock Slide": 4,
-        "Shadow Ball": 4,
-        "Sludge Bomb": 5,
-        "Thunderbolt": 5
+        "Sludge Bomb": 4
       },
       "overridden": false,
       "override_reason": null

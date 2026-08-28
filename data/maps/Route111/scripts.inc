@@ -284,10 +284,16 @@ Route111_EventScript_Victor:: @ 81F0FC5
 	lock
 	faceplayer
 	setflag FLAG_LANDMARK_WINSTRATE_FAMILY
+	goto_if_unset FLAG_BADGE03_GET, Route111_EventScript_WinstratesStillTraining
 	msgbox Route111_Text_BattleOurFamily, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq Route111_EventScript_BattleWinstrates
 	msgbox Route111_Text_IsThatSo, MSGBOX_DEFAULT
+	release
+	end
+
+Route111_EventScript_WinstratesStillTraining::
+	msgbox Route111_Text_WinstratesStillTraining, MSGBOX_DEFAULT
 	release
 	end
 
@@ -487,13 +493,23 @@ Route111_EventScript_RematchDusty:: @ 81F12AB
 	end
 
 Route111_EventScript_Travis:: @ 81F12C2
-	trainerbattle_single TRAINER_TRAVIS, Route111_Text_TravisIntro, Route111_Text_TravisDefeat
+	goto_if_unset FLAG_BADGE03_GET, Route111_EventScript_TravisStillTraining
+	trainerbattle_double TRAINER_TRAVIS, Route111_Text_TravisIntro, Route111_Text_TravisDefeat, Route111_Text_TravisNotEnoughMons
 	msgbox Route111_Text_TravisPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+Route111_EventScript_TravisStillTraining::
+	msgbox Route111_Text_TravisStillTraining, MSGBOX_AUTOCLOSE
+	end
+
 Route111_EventScript_Irene:: @ 81F12D9
+	goto_if_unset FLAG_BADGE03_GET, Route111_EventScript_IreneStillTraining
 	trainerbattle_single TRAINER_IRENE, Route111_Text_IreneIntro, Route111_Text_IreneDefeat
 	msgbox Route111_Text_IrenePostBattle, MSGBOX_AUTOCLOSE
+	end
+
+Route111_EventScript_IreneStillTraining::
+	msgbox Route111_Text_IreneStillTraining, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_Daisuke:: @ 81F12F0
@@ -701,54 +717,67 @@ Route111_Text_IsThatSo: @ 81F14F5
 	.string "Is that so?\n"
 	.string "Drop in, if you change your mind!$"
 
+Route111_Text_WinstratesStillTraining:
+	.string "Our family battles at full\n"
+	.string "strength, no breaks between!\p"
+	.string "Come back wearing Mauville's\n"
+	.string "Dynamo Badge!$"
+
 Route111_Text_VictorIntro: @ 81F1523
-	.string "That's the spirit! I like you!$"
+	.string "That's the spirit! I like you!\p"
+	.string "Father goes first: straight,\n"
+	.string "fast, and nothing held back!$"
 
 Route111_Text_VictorDefeat: @ 81F1542
 	.string "Aiyah!\n"
-	.string "You're a lot tougher than I expected!$"
+	.string "You're tougher than I expected!$"
 
 Route111_Text_VictorPostBattle: @ 81F156F
-	.string "Hey, all!\n"
-	.string "I've found a pretty strong Trainer!$"
+	.string "Hey, all! A real challenger!\p"
+	.string "My Obstagoon burns itself to hit\n"
+	.string "harder. Don't tell my wife!$"
 
 Route111_Text_VictoriaIntro: @ 81F159D
-	.string "Oh, my goodness! Aren't you young?\p"
-	.string "You must be quite the Trainer to beat\n"
-	.string "my husband, though.\p"
+	.string "Oh, my goodness! You beat my\n"
+	.string "husband?\p"
+	.string "My garden wilts for no one.\n"
 	.string "It's my turn to battle now!$"
 
 Route111_Text_VictoriaDefeat: @ 81F1616
 	.string "Oh, gosh!\n"
-	.string "I can't get over how strong you are!$"
+	.string "Even my Blissey ran out of song!$"
 
 Route111_Text_VictoriaPostBattle: @ 81F1645
-	.string "There's a strong Trainer here!\n"
-	.string "This one's really strong!$"
+	.string "Sleep, seeds, and soft-boiled\n"
+	.string "patience… yet you never slowed!$"
 
 Route111_Text_ViviIntro: @ 81F167E
 	.string "You're stronger than Mommy? Wow!\p"
-	.string "But I'm strong, too!\n"
-	.string "Really! Honestly!$"
+	.string "But my Pokémon all grew up with\n"
+	.string "me! Really! Honestly!$"
 
 Route111_Text_ViviDefeat: @ 81F16C6
 	.string "Huh? Did I just lose?$"
 
 Route111_Text_ViviPostBattle: @ 81F16DC
-	.string "This stinks…\p"
+	.string "My Lurantis gets STRONGER when\n"
+	.string "you try to drag it down!\p"
+	.string "This stinks…\n"
 	.string "…Snivel… Grandma!$"
 
 Route111_Text_VickyIntro: @ 81F16FB
 	.string "How dare you make my granddaughter\n"
 	.string "cry!\p"
-	.string "For that, I'm going to smack you!\n"
-	.string "Prepare to lose!$"
+	.string "No guard, no mercy!\n"
+	.string "Not one punch will miss!$"
 
 Route111_Text_VickyDefeat: @ 81F1756
-	.string "Kwah! You are strong…\n"
-	.string "My granddaughter was right…$"
+	.string "Kwah! Every punch landed,\n"
+	.string "and still you stand…$"
 
 Route111_Text_VickyPostBattle: @ 81F1788
+	.string "Four of us and not one moment to\n"
+	.string "rest. You've earned our respect.\p"
 	.string "If you're not in any hurry,\n"
 	.string "visit with us awhile.$"
 

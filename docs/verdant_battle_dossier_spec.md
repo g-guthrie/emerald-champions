@@ -1,7 +1,9 @@
-# Verdant battle-design operating system
+# Emerald Champions battle-design operating system
 
 This is the canonical production contract for authoring every physical trainer
-encounter in Verdant. It supplements `verdant_battle_audit_v2.md`: that document
+encounter in Emerald Champions. Legacy artifact filenames retain the `verdant_`
+prefix for save- and tooling-compatible continuity. This contract supplements
+`verdant_battle_audit_v2.md`: that document
 defines the design philosophy; this one defines the durable record, state
 machine, and evidence required to move a battle forward.
 
@@ -85,7 +87,8 @@ Each dossier contains the following sections.
 
 ### Rolling and campaign context
 
-- Previous eight-to-ten physical encounters when chronological context exists.
+- The previous ten physical encounters when chronological context exists. At
+  the opening, use every available prior encounter until ten exist.
 - Nearby protected boss mechanics and future reveals.
 - Cumulative used-species history plus rolling species, family, Mega,
   legendary, item, move, tempo, and player-question overlap.
@@ -145,7 +148,7 @@ and expands only the strongest candidates.
   itself is sound.
 
 Every independently reachable branch must clear the 7.5 floor. Ordinary
-Verdant battles normally target roughly 8.5; marquee bosses target 10.
+Emerald Champions battles normally target roughly 8.5; marquee bosses target 10.
 
 ### Presentation and guide
 

@@ -2,7 +2,7 @@ MeteorFalls_1F_2R_MapScripts:: @ 822C4DD
 	.byte 0
 
 MeteorFalls_1F_2R_EventScript_Nicolas:: @ 822C4DE
-	trainerbattle_single TRAINER_NICOLAS_1, MeteorFalls_1F_2R_Text_NicolasIntro, MeteorFalls_1F_2R_Text_NicolasDefeat, MeteorFalls_1F_2R_EventScript_RegisterNicolas
+	trainerbattle_double TRAINER_NICOLAS_1, MeteorFalls_1F_2R_Text_NicolasIntro, MeteorFalls_1F_2R_Text_NicolasDefeat, MeteorFalls_1F_2R_Text_NicolasNotEnoughMons, MeteorFalls_1F_2R_EventScript_RegisterNicolas
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq MeteorFalls_1F_2R_EventScript_RematchNicolas
@@ -19,7 +19,7 @@ MeteorFalls_1F_2R_EventScript_RegisterNicolas:: @ 822C50A
 	end
 
 MeteorFalls_1F_2R_EventScript_RematchNicolas:: @ 822C529
-	trainerbattle_rematch TRAINER_NICOLAS_1, MeteorFalls_1F_2R_Text_NicolasRematchIntro, MeteorFalls_1F_2R_Text_NicolasRematchDefeat
+	trainerbattle_rematch_double TRAINER_NICOLAS_1, MeteorFalls_1F_2R_Text_NicolasRematchIntro, MeteorFalls_1F_2R_Text_NicolasRematchDefeat, MeteorFalls_1F_2R_Text_NicolasRematchNotEnoughMons
 	msgbox MeteorFalls_1F_2R_Text_NicolasPostRematch, MSGBOX_AUTOCLOSE
 	end
 
@@ -107,125 +107,127 @@ MoveTutor_EventScript_OpenPartyMenu::
 	return
 
 MeteorFalls_1F_2R_Text_NicolasIntro: @ 822C608
-	.string "This is where we Dragon users do our\n"
-	.string "training.\p"
-	.string "The Champion even visits.\n"
-	.string "Now do you see how special it is here?$"
+	.string "Each dragon here trains its own way!\n"
+	.string "Roots endure, ancient wings sharpen,\l"
+	.string "voltage bites, and venom adapts!\p"
+	.string "Show me which lesson needs work!$"
 
 MeteorFalls_1F_2R_Text_NicolasDefeat: @ 822C678
 	.string "Urgh!\n"
 	.string "I didn't expect you to be so strong!$"
 
 MeteorFalls_1F_2R_Text_NicolasPostBattle: @ 822C6A3
-	.string "The road ahead remains long and harsh.\p"
-	.string "When will my Pokémon and I become\n"
-	.string "the best?$"
+	.string "Harvest restores Exeggutor's Berry.\n"
+	.string "Wide Lens steadies Dracozolt.\l"
+	.string "Naganadel grows after a knockout.\p"
+	.string "Roaring Moon needs one safe turn.$"
 
 MeteorFalls_1F_2R_Text_NicolasRegister: @ 822C6F6
-	.string "I want to know more about your power.\n"
+	.string "I want to study your power.\n"
 	.string "Let me register you in my PokéNav.$"
 
 MeteorFalls_1F_2R_Text_NicolasRematchIntro: @ 822C73F
-	.string "Since we met, we have trained hard\n"
-	.string "with our sights on number one.\p"
-	.string "Help us see how much stronger we've\n"
-	.string "become!$"
+	.string "We added two dragon disciplines!\n"
+	.string "Dragalge clears boosts with Haze,\l"
+	.string "and Regidrago rewards full health.\p"
+	.string "Test the lesson we trained today!$"
 
 MeteorFalls_1F_2R_Text_NicolasRematchDefeat: @ 822C7AD
 	.string "Urgh!\n"
 	.string "I didn't expect you to be so strong!$"
 
 MeteorFalls_1F_2R_Text_NicolasPostRematch: @ 822C7D8
-	.string "You've obviously kept up your\n"
-	.string "Pokémon training.\p"
-	.string "So long as you remain strong, I, too,\n"
-	.string "can become stronger!$"
+	.string "White Herb restores Draco Meteor.\n"
+	.string "Haze can erase our own boosts, too,\l"
+	.string "so timing matters.\p"
+	.string "Dragon Energy weakens after damage.$"
+
+MeteorFalls_1F_2R_Text_NicolasNotEnoughMons:
+	.string "A double lesson needs two ready\n"
+	.string "Pokémon. Return when you have them!$"
+
+MeteorFalls_1F_2R_Text_NicolasRematchNotEnoughMons:
+	.string "Each rematch is a double lesson.\n"
+	.string "Bring two Pokémon ready to battle!$"
 
 MeteorFalls_1F_2R_Text_JohnIntro: @ 822C843
-	.string "John: We've always battled Pokémon\n"
-	.string "together as a twosome.\l"
-	.string "We've confidence in ourselves.$"
+	.string "John: Fifty years taught us this:\n"
+	.string "a partner changes your best move.\p"
+	.string "Plusle and Minun amplify each other.\n"
+	.string "We trust them to open together!$"
 
 MeteorFalls_1F_2R_Text_JohnDefeat: @ 822C89C
 	.string "John: Oh, my.\n"
 	.string "We've lost, dear wife.$"
 
 MeteorFalls_1F_2R_Text_JohnPostBattle: @ 822C8C1
-	.string "John: We've been married for\n"
-	.string "fifty years.\p"
-	.string "Come to think of it, I've yet to beat\n"
-	.string "my dear wife in a battle.$"
+	.string "John: Plus and Minus raise Sp. Atk.\n"
+	.string "Fake Tears and Helping Hand multiply\l"
+	.string "the pressure without changing Speed.$"
 
 MeteorFalls_1F_2R_Text_JohnNotEnoughMons: @ 822C92B
-	.string "John: Well, well, what a young Trainer!\p"
-	.string "Will you battle with us? If so, you'll\n"
-	.string "have to return with more Pokémon.$"
+	.string "John: A double battle needs two\n"
+	.string "ready Pokémon. Return prepared!$"
 
 MeteorFalls_1F_2R_Text_JohnRegister: @ 822C99C
-	.string "John: Young Trainer, if the chance\n"
-	.string "arises, will you battle with us again?$"
+	.string "John: May we register you for\n"
+	.string "another battle someday?$"
 
 MeteorFalls_1F_2R_Text_JayIntro: @ 822C9E6
-	.string "Jay: We've been married for\n"
-	.string "fifty years.\p"
-	.string "The bond we share as a couple could\n"
-	.string "never be broken.$"
+	.string "Jay: Fifty years taught us trust.\n"
+	.string "Volbeat grows, Illumise supports,\l"
+	.string "and each protects the other's turn.$"
 
 MeteorFalls_1F_2R_Text_JayDefeat: @ 822CA44
 	.string "Jay: Oh, dear.\n"
 	.string "We've lost, my dear husband.$"
 
 MeteorFalls_1F_2R_Text_JayPostBattle: @ 822CA70
-	.string "Jay: Fifty years of marriage…\p"
-	.string "If we ever argued, we always settled\n"
-	.string "it with a Pokémon battle…$"
+	.string "Jay: Prankster makes support quick.\n"
+	.string "Tail Glow powers Volbeat.\n"
+	.string "Struggle Bug softens both foes.$"
 
 MeteorFalls_1F_2R_Text_JayNotEnoughMons: @ 822CACD
-	.string "Jay: Well, well, aren't you a young\n"
-	.string "Trainer?\p"
-	.string "If you'd care to battle with us, you'll\n"
-	.string "have to come back with more Pokémon.$"
+	.string "Jay: Please bring two ready Pokémon\n"
+	.string "if you'd like to battle us.$"
 
 MeteorFalls_1F_2R_Text_JohnRematchIntro: @ 822CB47
-	.string "John: We've always battled Pokémon\n"
-	.string "together as a twosome.\l"
-	.string "We've confidence in ourselves.$"
+	.string "John: Our newest pair became strong\n"
+	.string "by trading places.\p"
+	.string "Accelgor gained speed; Escavalier\n"
+	.string "gained armor. Face them together!$"
 
 MeteorFalls_1F_2R_Text_JohnRematchDefeat: @ 822CBA0
 	.string "John: Oh, my.\n"
 	.string "We've lost, dear wife.$"
 
 MeteorFalls_1F_2R_Text_JohnPostRematch: @ 822CBC5
-	.string "John: Married for fifty years…\p"
-	.string "On reflection, the dear wife and I,\n"
-	.string "we battled day in and day out…$"
+	.string "John: Acid Spray opens Sp. Def.\n"
+	.string "Overcoat ignores powder, and Occa\l"
+	.string "softens Escavalier's Fire weakness.$"
 
 MeteorFalls_1F_2R_Text_JohnRematchNotEnoughMons: @ 822CC27
-	.string "John: Well, well, what a young Trainer!\p"
-	.string "Will you battle with us? If so, you'll\n"
-	.string "have to return with more Pokémon.$"
+	.string "John: A double battle needs two\n"
+	.string "ready Pokémon. Return prepared!$"
 
 MeteorFalls_1F_2R_Text_JayRematchIntro: @ 822CC98
-	.string "Jay: We've been married for\n"
-	.string "fifty years.\p"
-	.string "We've supported each other all that\n"
-	.string "time. We've made ourselves strong.$"
+	.string "Jay: Karrablast and Shelmet traded\n"
+	.string "places to become our newest pair.\p"
+	.string "Every rematch joins two lessons.\n"
+	.string "Can you separate them?$"
 
 MeteorFalls_1F_2R_Text_JayRematchDefeat: @ 822CD08
 	.string "Jay: Oh, dear.\n"
 	.string "We've lost, my dear husband.$"
 
 MeteorFalls_1F_2R_Text_JayPostRematch: @ 822CD34
-	.string "Jay: Fifty years of marriage…\n"
-	.string "Many things have happened.\p"
-	.string "I hope that we will continue to make\n"
-	.string "happy memories together.$"
+	.string "Jay: Accelgor strips Sp. Def, while\n"
+	.string "Escavalier strikes physically.\p"
+	.string "Our final team keeps three pairs.$"
 
 MeteorFalls_1F_2R_Text_JayRematchNotEnoughMons: @ 822CDAB
-	.string "Jay: Well, well, aren't you a young\n"
-	.string "Trainer?\p"
-	.string "If you'd care to battle with us, you'll\n"
-	.string "have to come back with more Pokémon.$"
+	.string "Jay: Please bring two ready Pokémon\n"
+	.string "if you'd like to battle us.$"
 
 MoveTutor_Text_DragonAscentTeach:
 	.string "Hmm… Do you want me to teach\n"

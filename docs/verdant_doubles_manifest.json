@@ -9,11 +9,12 @@
     "TRAINER_SAWYER_1": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Sand and spread",
-      "difficulty": 36,
-      "partner_interaction": false,
-      "level_offset": -2,
-      "location": "Mt Chimney"
+      "archetype": "Mountain-strata sand double",
+      "difficulty": 93,
+      "partner_interaction": true,
+      "level_offset": 3,
+      "location": "MtChimney",
+      "smart_switching": true
     },
     "TRAINER_GRUNT_AQUA_HIDEOUT_1": {
       "format": "double",
@@ -144,8 +145,8 @@
     "TRAINER_GRUNT_RUSTURF_TUNNEL": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Visible Commander chain and poison cover",
-      "difficulty": 93,
+      "archetype": "Canonical Commander juggernaut and poison cover",
+      "difficulty": 96,
       "partner_interaction": true,
       "smart_switching": false,
       "level_offset": 1,
@@ -387,21 +388,23 @@
     },
     "TRAINER_GRUNT_METEOR_FALLS": {
       "format": "double",
-      "target_size": 4,
-      "archetype": "Sun offense",
-      "difficulty": 67,
+      "target_size": 3,
+      "archetype": "Impact fragment half",
+      "difficulty": 100,
       "partner_interaction": true,
-      "level_offset": 0,
+      "multi_partner": true,
+      "level_offset": 2,
       "location": "Meteor Falls 1 F 1 R"
     },
     "TRAINER_DUSTY_1": {
       "format": "single",
       "target_size": 3,
-      "archetype": "Balanced disruption",
-      "difficulty": 36,
+      "archetype": "Fossil-excavation single",
+      "difficulty": 89,
       "partner_interaction": false,
-      "level_offset": -3,
-      "location": "Route 111"
+      "level_offset": 3,
+      "location": "Route111",
+      "smart_switching": true
     },
     "TRAINER_CHIP": {
       "format": "single",
@@ -424,37 +427,41 @@
     "TRAINER_DUSTY_2": {
       "format": "single",
       "target_size": 3,
-      "archetype": "Balanced disruption",
-      "difficulty": 36,
+      "archetype": "Fossil offense singles rematch",
+      "difficulty": 91,
       "partner_interaction": false,
-      "level_offset": -3,
-      "location": "Route 111"
+      "level_offset": 3,
+      "location": "Route111",
+      "smart_switching": true
     },
     "TRAINER_DUSTY_3": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 42,
-      "partner_interaction": false,
-      "level_offset": -3,
-      "location": "Route 111"
+      "archetype": "Fossil excavation doubles rematch",
+      "difficulty": 94,
+      "partner_interaction": true,
+      "level_offset": 3,
+      "location": "Route111",
+      "smart_switching": true
     },
     "TRAINER_DUSTY_4": {
       "format": "double",
       "target_size": 6,
-      "archetype": "Balanced disruption",
-      "difficulty": 45,
-      "partner_interaction": false,
-      "level_offset": -3,
-      "location": "Route 111"
+      "archetype": "Fossil excavation final rematch",
+      "difficulty": 98,
+      "partner_interaction": true,
+      "level_offset": 3,
+      "location": "Route111",
+      "smart_switching": true
     },
     "TRAINER_COURTNEY_METEOR_FALLS": {
       "format": "double",
-      "target_size": 6,
-      "archetype": "Sun offense",
-      "difficulty": 73,
+      "target_size": 3,
+      "archetype": "Impact trajectory half",
+      "difficulty": 100,
       "partner_interaction": true,
-      "level_offset": 0,
+      "multi_partner": true,
+      "level_offset": 2,
       "location": "Meteor Falls 1 F 1 R"
     },
     "TRAINER_GABBY_AND_TY_1": {
@@ -685,11 +692,12 @@
     "TRAINER_WILTON_1": {
       "format": "single",
       "target_size": 3,
-      "archetype": "Balanced disruption",
-      "difficulty": 55,
+      "archetype": "Ruin-guardian single",
+      "difficulty": 90,
       "partner_interaction": false,
-      "level_offset": -1,
-      "location": "Route 111"
+      "level_offset": 3,
+      "location": "Route111",
+      "smart_switching": true
     },
     "TRAINER_EDGAR": {
       "format": "double",
@@ -739,29 +747,32 @@
     "TRAINER_WILTON_2": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 61,
-      "partner_interaction": false,
-      "level_offset": -1,
-      "location": "Route 111"
+      "archetype": "Ruin-guardian room double",
+      "difficulty": 93,
+      "partner_interaction": true,
+      "level_offset": 3,
+      "location": "Route111",
+      "smart_switching": true
     },
     "TRAINER_WILTON_3": {
       "format": "double",
       "target_size": 6,
-      "archetype": "Balanced disruption",
-      "difficulty": 64,
-      "partner_interaction": false,
-      "level_offset": -1,
-      "location": "Route 111"
+      "archetype": "Ruin-guardian full rematch",
+      "difficulty": 96,
+      "partner_interaction": true,
+      "level_offset": 3,
+      "location": "Route111",
+      "smart_switching": true
     },
     "TRAINER_WILTON_4": {
       "format": "double",
       "target_size": 6,
-      "archetype": "Balanced disruption",
-      "difficulty": 74,
-      "partner_interaction": false,
-      "level_offset": -1,
-      "location": "Route 111"
+      "archetype": "Ruin-guardian Mega finale",
+      "difficulty": 98,
+      "partner_interaction": true,
+      "level_offset": 3,
+      "location": "Route111",
+      "smart_switching": true
     },
     "TRAINER_WARREN": {
       "format": "double",
@@ -820,11 +831,12 @@
     "TRAINER_BROOKE_1": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 54,
-      "partner_interaction": false,
-      "level_offset": -1,
-      "location": "Route 111"
+      "archetype": "Elemental relay double",
+      "difficulty": 94,
+      "partner_interaction": true,
+      "level_offset": 3,
+      "location": "Route111",
+      "smart_switching": true
     },
     "TRAINER_JENNIFER": {
       "format": "double",
@@ -883,29 +895,32 @@
     "TRAINER_BROOKE_2": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 64,
-      "partner_interaction": false,
-      "level_offset": -1,
-      "location": "Route 111"
+      "archetype": "Elemental relay reorder",
+      "difficulty": 94,
+      "partner_interaction": true,
+      "level_offset": 3,
+      "location": "Route111",
+      "smart_switching": true
     },
     "TRAINER_BROOKE_3": {
       "format": "double",
       "target_size": 6,
-      "archetype": "Balanced disruption",
-      "difficulty": 67,
-      "partner_interaction": false,
-      "level_offset": -1,
-      "location": "Route 111"
+      "archetype": "Elemental relay full rematch",
+      "difficulty": 97,
+      "partner_interaction": true,
+      "level_offset": 3,
+      "location": "Route111",
+      "smart_switching": true
     },
     "TRAINER_BROOKE_4": {
       "format": "double",
       "target_size": 6,
-      "archetype": "Balanced disruption",
-      "difficulty": 71,
-      "partner_interaction": false,
-      "level_offset": -1,
-      "location": "Route 111"
+      "archetype": "Elemental relay Mega finale",
+      "difficulty": 98,
+      "partner_interaction": true,
+      "level_offset": 3,
+      "location": "Route111",
+      "smart_switching": true
     },
     "TRAINER_PATRICIA": {
       "format": "single",
@@ -1062,30 +1077,33 @@
     },
     "TRAINER_MELISSA": {
       "format": "single",
-      "target_size": 3,
-      "archetype": "Balanced disruption",
-      "difficulty": 35,
+      "target_size": 4,
+      "archetype": "Volcanic poise single",
+      "difficulty": 89,
       "partner_interaction": false,
-      "level_offset": -3,
-      "location": "Mt Chimney"
+      "level_offset": 3,
+      "location": "MtChimney",
+      "smart_switching": true
     },
     "TRAINER_SHEILA": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 31,
-      "partner_interaction": false,
-      "level_offset": -2,
-      "location": "Mt Chimney"
+      "archetype": "Priority-proof royal court",
+      "difficulty": 91,
+      "partner_interaction": true,
+      "level_offset": 3,
+      "location": "MtChimney",
+      "smart_switching": true
     },
     "TRAINER_SHIRLEY": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 33,
-      "partner_interaction": false,
-      "level_offset": -2,
-      "location": "Mt Chimney"
+      "archetype": "Four-act summit performance",
+      "difficulty": 92,
+      "partner_interaction": true,
+      "level_offset": 3,
+      "location": "MtChimney",
+      "smart_switching": true
     },
     "TRAINER_JESSICA_1": {
       "format": "single",
@@ -1234,10 +1252,10 @@
     "TRAINER_STEVE_1": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Sand and spread",
-      "difficulty": 29,
-      "partner_interaction": false,
-      "level_offset": -3,
+      "archetype": "Hard-body engine opening",
+      "difficulty": 90,
+      "partner_interaction": true,
+      "level_offset": 3,
       "location": "Route 114"
     },
     "TRAINER_THALIA_1": {
@@ -1259,39 +1277,39 @@
       "location": "Mt Pyre 2 F"
     },
     "TRAINER_GRUNT_MT_CHIMNEY_1": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Sand and spread",
-      "difficulty": 32,
-      "partner_interaction": false,
-      "level_offset": -2,
+      "format": "single",
+      "target_size": 3,
+      "archetype": "Lava-house foundation",
+      "difficulty": 88,
+      "partner_interaction": true,
+      "level_offset": 3,
       "location": "Mt Chimney"
     },
     "TRAINER_STEVE_2": {
-      "format": "single",
-      "target_size": 3,
-      "archetype": "Sand and spread",
-      "difficulty": 35,
-      "partner_interaction": false,
-      "level_offset": -3,
+      "format": "double",
+      "target_size": 4,
+      "archetype": "Mixed engine rematch",
+      "difficulty": 92,
+      "partner_interaction": true,
+      "level_offset": 3,
       "location": "Route 114"
     },
     "TRAINER_STEVE_3": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 39,
-      "partner_interaction": false,
-      "level_offset": -3,
+      "archetype": "Setup and commitment rematch",
+      "difficulty": 94,
+      "partner_interaction": true,
+      "level_offset": 3,
       "location": "Route 114"
     },
     "TRAINER_STEVE_4": {
       "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 39,
-      "partner_interaction": false,
-      "level_offset": -3,
+      "target_size": 6,
+      "archetype": "Six-engine Mega collection",
+      "difficulty": 96,
+      "partner_interaction": true,
+      "level_offset": 2,
       "location": "Route 114"
     },
     "TRAINER_ROMAN": {
@@ -1647,12 +1665,13 @@
     },
     "TRAINER_DAISUKE": {
       "format": "single",
-      "target_size": 1,
-      "archetype": "Balanced disruption",
-      "difficulty": 38,
+      "target_size": 3,
+      "archetype": "Three-shadow relay single",
+      "difficulty": 89,
       "partner_interaction": false,
-      "level_offset": 2,
-      "location": "Route 111"
+      "level_offset": 3,
+      "location": "Route111",
+      "smart_switching": true
     },
     "TRAINER_ATSUSHI": {
       "format": "single",
@@ -1754,84 +1773,86 @@
       "location": "Ever Grande City Drakes Room"
     },
     "TRAINER_COLE": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Sun offense",
-      "difficulty": 57,
-      "partner_interaction": false,
-      "level_offset": -1,
+      "format": "single",
+      "target_size": 3,
+      "archetype": "Stored-heat Flash Fire half",
+      "difficulty": 89,
+      "partner_interaction": true,
+      "level_offset": 2,
       "location": "Lavaridge Town Gym 1 F"
     },
     "TRAINER_JEFF": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 60,
-      "partner_interaction": false,
-      "level_offset": -1,
-      "location": "Lavaridge Town Gym 1 F | Lavaridge Town Gym B 1 F"
+      "archetype": "Contrary flashover handoff",
+      "difficulty": 94,
+      "partner_interaction": true,
+      "level_offset": 4,
+      "location": "Lavaridge Town Gym B 1 F",
+      "smart_switching": true
     },
     "TRAINER_AXLE": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Sun offense",
-      "difficulty": 60,
-      "partner_interaction": false,
-      "level_offset": -1,
+      "archetype": "Pressure-release pivot circuit",
+      "difficulty": 93,
+      "partner_interaction": true,
+      "level_offset": 3,
       "location": "Lavaridge Town Gym 1 F"
     },
     "TRAINER_JACE": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 51,
-      "partner_interaction": false,
-      "level_offset": -1,
-      "location": "Lavaridge Town Gym 1 F | Lavaridge Town Gym B 1 F"
+      "archetype": "Gravity-enabled combustion half",
+      "difficulty": 94,
+      "partner_interaction": true,
+      "level_offset": 4,
+      "location": "Lavaridge Town Gym B 1 F",
+      "smart_switching": true
     },
     "TRAINER_KEEGAN": {
       "format": "single",
-      "target_size": 1,
-      "archetype": "Sun offense",
-      "difficulty": 59,
+      "target_size": 3,
+      "archetype": "Willpower endurance relay",
+      "difficulty": 89,
       "partner_interaction": false,
-      "level_offset": 3,
+      "level_offset": 2,
       "location": "Lavaridge Town Gym 1 F | Lavaridge Town Gym B 1 F"
     },
     "TRAINER_BERNIE_1": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 31,
-      "partner_interaction": false,
-      "level_offset": -3,
+      "archetype": "Controlled-burn opening",
+      "difficulty": 89,
+      "partner_interaction": true,
+      "level_offset": 3,
       "location": "Route 114"
     },
     "TRAINER_BERNIE_2": {
-      "format": "single",
-      "target_size": 3,
-      "archetype": "Balanced disruption",
-      "difficulty": 35,
-      "partner_interaction": false,
-      "level_offset": -3,
+      "format": "double",
+      "target_size": 4,
+      "archetype": "Active-safety rematch",
+      "difficulty": 91,
+      "partner_interaction": true,
+      "level_offset": 3,
       "location": "Route 114"
     },
     "TRAINER_BERNIE_3": {
-      "format": "single",
-      "target_size": 3,
-      "archetype": "Balanced disruption",
-      "difficulty": 35,
-      "partner_interaction": false,
-      "level_offset": -3,
+      "format": "double",
+      "target_size": 4,
+      "archetype": "Protected-reservoir rematch",
+      "difficulty": 93,
+      "partner_interaction": true,
+      "level_offset": 3,
       "location": "Route 114"
     },
     "TRAINER_BERNIE_4": {
-      "format": "single",
-      "target_size": 3,
-      "archetype": "Balanced disruption",
-      "difficulty": 33,
-      "partner_interaction": false,
-      "level_offset": -3,
+      "format": "double",
+      "target_size": 6,
+      "archetype": "Six-part fire-safety final",
+      "difficulty": 95,
+      "partner_interaction": true,
+      "level_offset": 2,
       "location": "Route 114"
     },
     "TRAINER_BERNIE_5": {
@@ -1845,21 +1866,23 @@
     },
     "TRAINER_DREW": {
       "format": "single",
-      "target_size": 2,
-      "archetype": "Intentional route singles relief",
-      "difficulty": 34,
+      "target_size": 3,
+      "archetype": "Three-trap desert single",
+      "difficulty": 87,
       "partner_interaction": false,
-      "level_offset": -3,
-      "location": "Route 111"
+      "level_offset": 3,
+      "location": "Route111",
+      "smart_switching": true
     },
     "TRAINER_BEAU": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 44,
-      "partner_interaction": false,
-      "level_offset": -3,
-      "location": "Route 111"
+      "archetype": "Scout-and-shelter control",
+      "difficulty": 90,
+      "partner_interaction": true,
+      "level_offset": 3,
+      "location": "Route111",
+      "smart_switching": true
     },
     "TRAINER_LARRY": {
       "format": "single",
@@ -1873,10 +1896,10 @@
     "TRAINER_SHANE": {
       "format": "single",
       "target_size": 3,
-      "archetype": "Balanced disruption",
-      "difficulty": 36,
+      "archetype": "Three-act campsite",
+      "difficulty": 87,
       "partner_interaction": false,
-      "level_offset": -3,
+      "level_offset": 2,
       "location": "Route 114"
     },
     "TRAINER_JUSTIN": {
@@ -1891,19 +1914,19 @@
     "TRAINER_ETHAN_1": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Tailwind offense",
-      "difficulty": 42,
-      "partner_interaction": false,
-      "level_offset": -3,
+      "archetype": "Soundproof call-and-response",
+      "difficulty": 90,
+      "partner_interaction": true,
+      "level_offset": 3,
       "location": "Jagged Pass"
     },
     "TRAINER_AUTUMN": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 33,
-      "partner_interaction": false,
-      "level_offset": -2,
+      "format": "single",
+      "target_size": 3,
+      "archetype": "Sure-footed strength half",
+      "difficulty": 88,
+      "partner_interaction": true,
+      "level_offset": 2,
       "location": "Jagged Pass"
     },
     "TRAINER_TRAVIS": {
@@ -1918,28 +1941,28 @@
     "TRAINER_ETHAN_2": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Tailwind offense",
-      "difficulty": 48,
-      "partner_interaction": false,
-      "level_offset": -3,
+      "archetype": "Drum-dance bug rematch",
+      "difficulty": 92,
+      "partner_interaction": true,
+      "level_offset": 3,
       "location": "Jagged Pass"
     },
     "TRAINER_ETHAN_3": {
       "format": "double",
-      "target_size": 6,
-      "archetype": "Tailwind offense",
-      "difficulty": 54,
-      "partner_interaction": false,
-      "level_offset": -3,
+      "target_size": 4,
+      "archetype": "Soundproof bug-chorus rematch",
+      "difficulty": 94,
+      "partner_interaction": true,
+      "level_offset": 3,
       "location": "Jagged Pass"
     },
     "TRAINER_ETHAN_4": {
       "format": "double",
       "target_size": 6,
-      "archetype": "Tailwind offense",
-      "difficulty": 54,
-      "partner_interaction": false,
-      "level_offset": -3,
+      "archetype": "Six-voice trail chorus final",
+      "difficulty": 96,
+      "partner_interaction": true,
+      "level_offset": 2,
       "location": "Jagged Pass"
     },
     "TRAINER_ETHAN_5": {
@@ -2359,11 +2382,12 @@
     "TRAINER_FLANNERY_1": {
       "format": "double",
       "target_size": 6,
-      "archetype": "Sun offense",
-      "difficulty": 82,
+      "archetype": "Thermal timing fast-slow furnace",
+      "difficulty": 100,
       "partner_interaction": true,
-      "level_offset": 0,
-      "location": "Lavaridge Town Gym 1 F"
+      "level_offset": 3,
+      "location": "Lavaridge Town Gym 1 F",
+      "smart_switching": true
     },
     "TRAINER_NORMAN_1": {
       "format": "single",
@@ -2573,12 +2597,12 @@
       "location": "Ever Grande City Champions Room"
     },
     "TRAINER_VICTOR": {
-      "format": "double",
+      "format": "single",
       "target_size": 4,
-      "archetype": "Normal-rule breaker",
-      "difficulty": 57,
+      "archetype": "Winstrate no-heal attrition",
+      "difficulty": 80,
       "partner_interaction": false,
-      "level_offset": -1,
+      "level_offset": 0,
       "location": "Route 111"
     },
     "TRAINER_MIGUEL_1": {
@@ -2636,12 +2660,12 @@
       "location": "Ever Grande City Glacias Room"
     },
     "TRAINER_VICTORIA": {
-      "format": "double",
+      "format": "single",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 60,
+      "archetype": "Winstrate no-heal attrition",
+      "difficulty": 80,
       "partner_interaction": false,
-      "level_offset": -1,
+      "level_offset": 0,
       "location": "Route 111"
     },
     "TRAINER_VANESSA": {
@@ -2755,47 +2779,51 @@
     "TRAINER_VICKY": {
       "format": "single",
       "target_size": 1,
-      "archetype": "Balanced disruption",
-      "difficulty": 60,
+      "archetype": "Winstrate no-heal attrition",
+      "difficulty": 75,
       "partner_interaction": false,
-      "level_offset": 2,
+      "level_offset": 3,
       "location": "Route 111"
     },
     "TRAINER_SHELBY_1": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 38,
-      "partner_interaction": false,
-      "level_offset": 0,
-      "location": "Mt Chimney"
+      "archetype": "Stance-reading counter double",
+      "difficulty": 92,
+      "partner_interaction": true,
+      "level_offset": 3,
+      "location": "MtChimney",
+      "smart_switching": true
     },
     "TRAINER_SHELBY_2": {
       "format": "single",
       "target_size": 3,
-      "archetype": "Balanced disruption",
-      "difficulty": 60,
+      "archetype": "Stance-reading singles rematch",
+      "difficulty": 90,
       "partner_interaction": false,
-      "level_offset": 0,
-      "location": "Mt Chimney"
+      "level_offset": 3,
+      "location": "MtChimney",
+      "smart_switching": true
     },
     "TRAINER_SHELBY_3": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 66,
-      "partner_interaction": false,
-      "level_offset": 0,
-      "location": "Mt Chimney"
+      "archetype": "Stance-reading doubles rematch",
+      "difficulty": 94,
+      "partner_interaction": true,
+      "level_offset": 3,
+      "location": "MtChimney",
+      "smart_switching": true
     },
     "TRAINER_SHELBY_4": {
       "format": "double",
       "target_size": 6,
-      "archetype": "Balanced disruption",
-      "difficulty": 73,
-      "partner_interaction": false,
-      "level_offset": 0,
-      "location": "Mt Chimney"
+      "archetype": "Stance-reading final rematch",
+      "difficulty": 98,
+      "partner_interaction": true,
+      "level_offset": 3,
+      "location": "MtChimney",
+      "smart_switching": true
     },
     "TRAINER_SHELBY_5": {
       "format": "single",
@@ -2881,19 +2909,19 @@
     "TRAINER_JAYLEN": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 31,
-      "partner_interaction": false,
-      "level_offset": -3,
+      "archetype": "Ash-glass thermal shock",
+      "difficulty": 89,
+      "partner_interaction": true,
+      "level_offset": 3,
       "location": "Route 113"
     },
     "TRAINER_DILLON": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 31,
-      "partner_interaction": false,
-      "level_offset": -3,
+      "archetype": "Living fault-line layers",
+      "difficulty": 88,
+      "partner_interaction": true,
+      "level_offset": 3,
       "location": "Route 113"
     },
     "TRAINER_CALVIN_2": {
@@ -2989,10 +3017,10 @@
     "TRAINER_CLAUDE": {
       "format": "single",
       "target_size": 3,
-      "archetype": "Balanced disruption",
-      "difficulty": 38,
+      "archetype": "Manual-rain category relay",
+      "difficulty": 87,
       "partner_interaction": false,
-      "level_offset": -3,
+      "level_offset": 2,
       "location": "Route 114"
     },
     "TRAINER_ELLIOT_1": {
@@ -3025,10 +3053,10 @@
     "TRAINER_NOLAN": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 29,
-      "partner_interaction": false,
-      "level_offset": -3,
+      "archetype": "Champion pond mechanics",
+      "difficulty": 96,
+      "partner_interaction": true,
+      "level_offset": 3,
       "location": "Route 114"
     },
     "TRAINER_BARNY": {
@@ -3475,37 +3503,37 @@
     "TRAINER_NICOLAS_1": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Dragon pressure",
-      "difficulty": 59,
-      "partner_interaction": false,
-      "level_offset": -2,
+      "archetype": "Four dragon disciplines",
+      "difficulty": 93,
+      "partner_interaction": true,
+      "level_offset": 3,
       "location": "Meteor Falls 1 F 2 R"
     },
     "TRAINER_NICOLAS_2": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Dragon pressure",
-      "difficulty": 61,
-      "partner_interaction": false,
-      "level_offset": -1,
+      "archetype": "Adaptability rematch",
+      "difficulty": 94,
+      "partner_interaction": true,
+      "level_offset": 3,
       "location": "Meteor Falls 1 F 2 R"
     },
     "TRAINER_NICOLAS_3": {
       "format": "double",
-      "target_size": 6,
-      "archetype": "Tailwind offense",
-      "difficulty": 66,
-      "partner_interaction": false,
-      "level_offset": 0,
+      "target_size": 4,
+      "archetype": "Rare dragon rematch",
+      "difficulty": 96,
+      "partner_interaction": true,
+      "level_offset": 3,
       "location": "Meteor Falls 1 F 2 R"
     },
     "TRAINER_NICOLAS_4": {
       "format": "double",
       "target_size": 6,
-      "archetype": "Dragon pressure",
-      "difficulty": 70,
-      "partner_interaction": false,
-      "level_offset": 0,
+      "archetype": "Six-discipline dragon final",
+      "difficulty": 98,
+      "partner_interaction": true,
+      "level_offset": 3,
       "location": "Meteor Falls 1 F 2 R"
     },
     "TRAINER_NICOLAS_5": {
@@ -3718,19 +3746,19 @@
     "TRAINER_LAO_1": {
       "format": "single",
       "target_size": 3,
-      "archetype": "Balanced disruption",
-      "difficulty": 35,
+      "archetype": "Identity-and-type deception",
+      "difficulty": 86,
       "partner_interaction": false,
-      "level_offset": -3,
+      "level_offset": 2,
       "location": "Route 113"
     },
     "TRAINER_LUNG": {
       "format": "single",
-      "target_size": 2,
-      "archetype": "Intentional route singles relief",
-      "difficulty": 31,
-      "partner_interaction": false,
-      "level_offset": -3,
+      "target_size": 3,
+      "archetype": "Triple-sight ash ninja half or split single",
+      "difficulty": 85,
+      "partner_interaction": true,
+      "level_offset": 2,
       "location": "Route 113"
     },
     "TRAINER_LAO_2": {
@@ -3853,10 +3881,10 @@
     "TRAINER_MADELINE_1": {
       "format": "single",
       "target_size": 3,
-      "archetype": "Sun offense",
-      "difficulty": 38,
+      "archetype": "Sheltered late-bloomer pivot relay",
+      "difficulty": 85,
       "partner_interaction": false,
-      "level_offset": -3,
+      "level_offset": 2,
       "location": "Route 113"
     },
     "TRAINER_CLARISSA": {
@@ -4168,20 +4196,22 @@
     "TRAINER_HEIDI": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Grassy control",
-      "difficulty": 46,
-      "partner_interaction": false,
-      "level_offset": -3,
-      "location": "Route 111"
+      "archetype": "Oasis seed circuit",
+      "difficulty": 92,
+      "partner_interaction": true,
+      "level_offset": 3,
+      "location": "Route111",
+      "smart_switching": true
     },
     "TRAINER_BECKY": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 53,
-      "partner_interaction": false,
-      "level_offset": -3,
-      "location": "Route 111"
+      "archetype": "Simple mirage setup",
+      "difficulty": 92,
+      "partner_interaction": true,
+      "level_offset": 3,
+      "location": "Route111",
+      "smart_switching": true
     },
     "TRAINER_CAROL": {
       "format": "single",
@@ -4194,11 +4224,11 @@
     },
     "TRAINER_NANCY": {
       "format": "single",
-      "target_size": 2,
-      "archetype": "Intentional route singles relief",
-      "difficulty": 34,
+      "target_size": 3,
+      "archetype": "Post-picnic category workout",
+      "difficulty": 86,
       "partner_interaction": false,
-      "level_offset": -3,
+      "level_offset": 3,
       "location": "Route 114"
     },
     "TRAINER_MARTHA": {
@@ -4213,10 +4243,10 @@
     "TRAINER_DIANA_1": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 41,
-      "partner_interaction": false,
-      "level_offset": -3,
+      "archetype": "Four-course trail picnic",
+      "difficulty": 89,
+      "partner_interaction": true,
+      "level_offset": 3,
       "location": "Jagged Pass"
     },
     "TRAINER_CEDRIC": {
@@ -4240,28 +4270,28 @@
     "TRAINER_DIANA_2": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 41,
-      "partner_interaction": false,
-      "level_offset": -3,
+      "archetype": "Fake Out tea-service rematch",
+      "difficulty": 92,
+      "partner_interaction": true,
+      "level_offset": 3,
       "location": "Jagged Pass"
     },
     "TRAINER_DIANA_3": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 45,
-      "partner_interaction": false,
-      "level_offset": -3,
+      "archetype": "Intimidate control-course rematch",
+      "difficulty": 93,
+      "partner_interaction": true,
+      "level_offset": 3,
       "location": "Jagged Pass"
     },
     "TRAINER_DIANA_4": {
       "format": "double",
       "target_size": 6,
-      "archetype": "Normal-rule breaker",
-      "difficulty": 48,
-      "partner_interaction": false,
-      "level_offset": -3,
+      "archetype": "Six-course picnic final",
+      "difficulty": 96,
+      "partner_interaction": true,
+      "level_offset": 2,
       "location": "Jagged Pass"
     },
     "TRAINER_DIANA_5": {
@@ -4456,11 +4486,12 @@
     "TRAINER_ELI": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 55,
-      "partner_interaction": false,
-      "level_offset": 0,
-      "location": "Lavaridge Town Gym 1 F | Lavaridge Town Gym B 1 F"
+      "archetype": "Volcanic gravity and contact-punishment half",
+      "difficulty": 95,
+      "partner_interaction": true,
+      "level_offset": 5,
+      "location": "Lavaridge Town Gym B 1 F",
+      "smart_switching": true
     },
     "TRAINER_ANNIKA": {
       "format": "single",
@@ -5039,12 +5070,12 @@
       "location": "Route 119"
     },
     "TRAINER_JULIO": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 36,
-      "partner_interaction": false,
-      "level_offset": -2,
+      "format": "single",
+      "target_size": 3,
+      "archetype": "No-brakes momentum half",
+      "difficulty": 89,
+      "partner_interaction": true,
+      "level_offset": 2,
       "location": "Jagged Pass"
     },
     "TRAINER_GRUNT_SEAFLOOR_CAVERN_5": {
@@ -5059,10 +5090,10 @@
     "TRAINER_LUCY_LAVARIDGE": {
       "format": "double",
       "target_size": 6,
-      "archetype": "Balanced disruption",
-      "difficulty": 79,
-      "partner_interaction": false,
-      "level_offset": 0,
+      "archetype": "Engineered-odds Frontier preview",
+      "difficulty": 100,
+      "partner_interaction": true,
+      "level_offset": 3,
       "location": "Lavaridge Town Pokemon Center 1 F"
     },
     "TRAINER_GRUNT_MT_PYRE_4": {
@@ -5077,10 +5108,10 @@
     "TRAINER_GRUNT_JAGGED_PASS": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 31,
-      "partner_interaction": false,
-      "level_offset": -2,
+      "archetype": "Hidden-ground trap and retreat",
+      "difficulty": 91,
+      "partner_interaction": true,
+      "level_offset": 2,
       "location": "Jagged Pass"
     },
     "TRAINER_MARC": {
@@ -5156,12 +5187,12 @@
       "location": "Route 128"
     },
     "TRAINER_GRUNT_MT_CHIMNEY_2": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Sand and spread",
-      "difficulty": 36,
-      "partner_interaction": false,
-      "level_offset": -2,
+      "format": "single",
+      "target_size": 3,
+      "archetype": "Land-reclamation crew",
+      "difficulty": 89,
+      "partner_interaction": true,
+      "level_offset": 3,
       "location": "Mt Chimney"
     },
     "TRAINER_CLARENCE": {
@@ -5320,10 +5351,10 @@
     "TRAINER_TABITHA_MT_CHIMNEY": {
       "format": "double",
       "target_size": 6,
-      "archetype": "Sand and spread",
-      "difficulty": 75,
-      "partner_interaction": false,
-      "level_offset": 0,
+      "archetype": "Prototype assembly line",
+      "difficulty": 100,
+      "partner_interaction": true,
+      "level_offset": 3,
       "location": "Mt Chimney"
     },
     "TRAINER_JONATHAN": {
@@ -5365,10 +5396,10 @@
     "TRAINER_MAXIE_MT_CHIMNEY": {
       "format": "double",
       "target_size": 6,
-      "archetype": "Balanced disruption",
-      "difficulty": 79,
+      "archetype": "Summit ridge command",
+      "difficulty": 100,
       "partner_interaction": true,
-      "level_offset": 1,
+      "level_offset": 3,
       "location": "Mt Chimney"
     },
     "TRAINER_TIANA": {
@@ -5399,12 +5430,12 @@
       "location": "Route 116"
     },
     "TRAINER_VIVI": {
-      "format": "double",
+      "format": "single",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 66,
+      "archetype": "Winstrate no-heal attrition",
+      "difficulty": 86,
       "partner_interaction": false,
-      "level_offset": -1,
+      "level_offset": 2,
       "location": "Route 111"
     },
     "TRAINER_HALEY_2": {
@@ -5599,19 +5630,19 @@
     "TRAINER_LENNY": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Sand and spread",
-      "difficulty": 29,
-      "partner_interaction": false,
-      "level_offset": -3,
+      "archetype": "Four-part mountain echo",
+      "difficulty": 93,
+      "partner_interaction": true,
+      "level_offset": 4,
       "location": "Route 114"
     },
     "TRAINER_LUCAS_1": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 29,
-      "partner_interaction": false,
-      "level_offset": -3,
+      "format": "single",
+      "target_size": 3,
+      "archetype": "Winter mountain trio",
+      "difficulty": 89,
+      "partner_interaction": true,
+      "level_offset": 3,
       "location": "Route 114"
     },
     "TRAINER_ALAN": {
@@ -5635,10 +5666,10 @@
     "TRAINER_ERIC": {
       "format": "single",
       "target_size": 3,
-      "archetype": "Balanced disruption",
-      "difficulty": 37,
+      "archetype": "Jagged late bloomers",
+      "difficulty": 88,
       "partner_interaction": false,
-      "level_offset": -2,
+      "level_offset": 3,
       "location": "Jagged Pass"
     },
     "TRAINER_SPENSER_FORTREE": {
@@ -5777,12 +5808,12 @@
       "location": "Route 109 Seashore House"
     },
     "TRAINER_GERALD": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 61,
-      "partner_interaction": false,
-      "level_offset": -1,
+      "format": "single",
+      "target_size": 3,
+      "archetype": "392-degree ignition half",
+      "difficulty": 90,
+      "partner_interaction": true,
+      "level_offset": 2,
       "location": "Lavaridge Town Gym 1 F"
     },
     "TRAINER_VIVIAN": {
@@ -5797,10 +5828,10 @@
     "TRAINER_DANIELLE": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Fake Out and pressure",
-      "difficulty": 51,
-      "partner_interaction": false,
-      "level_offset": -1,
+      "archetype": "Evolved Dancer performance",
+      "difficulty": 93,
+      "partner_interaction": true,
+      "level_offset": 3,
       "location": "Lavaridge Town Gym 1 F"
     },
     "TRAINER_HIDEO": {
@@ -6040,10 +6071,10 @@
     "TRAINER_TORI_AND_TIA": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Normal-rule breaker",
-      "difficulty": 40,
-      "partner_interaction": false,
-      "level_offset": -1,
+      "archetype": "Mirrored moth-and-Dancer recital",
+      "difficulty": 88,
+      "partner_interaction": true,
+      "level_offset": 3,
       "location": "Route 113"
     },
     "TRAINER_KIM_AND_IRIS": {
@@ -6058,10 +6089,10 @@
     "TRAINER_TYRA_AND_IVY": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 37,
-      "partner_interaction": false,
-      "level_offset": -1,
+      "archetype": "Four-style fighting curriculum",
+      "difficulty": 92,
+      "partner_interaction": true,
+      "level_offset": 3,
       "location": "Route 114"
     },
     "TRAINER_MEL_AND_PAUL": {
@@ -6076,37 +6107,37 @@
     "TRAINER_JOHN_AND_JAY_1": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Fake Out and pressure",
-      "difficulty": 67,
-      "partner_interaction": false,
-      "level_offset": -2,
+      "archetype": "Fifty-year amplification",
+      "difficulty": 90,
+      "partner_interaction": true,
+      "level_offset": 4,
       "location": "Meteor Falls 1 F 2 R"
     },
     "TRAINER_JOHN_AND_JAY_2": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Fake Out and pressure",
-      "difficulty": 69,
-      "partner_interaction": false,
-      "level_offset": -1,
+      "archetype": "Trade-pair rematch",
+      "difficulty": 92,
+      "partner_interaction": true,
+      "level_offset": 4,
       "location": "Meteor Falls 1 F 2 R"
     },
     "TRAINER_JOHN_AND_JAY_3": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Fake Out and pressure",
-      "difficulty": 71,
-      "partner_interaction": false,
-      "level_offset": 0,
+      "archetype": "Prankster-support rematch",
+      "difficulty": 94,
+      "partner_interaction": true,
+      "level_offset": 4,
       "location": "Meteor Falls 1 F 2 R"
     },
     "TRAINER_JOHN_AND_JAY_4": {
       "format": "double",
       "target_size": 6,
-      "archetype": "Fake Out and pressure",
-      "difficulty": 78,
-      "partner_interaction": false,
-      "level_offset": 0,
+      "archetype": "Three-pair anniversary final",
+      "difficulty": 96,
+      "partner_interaction": true,
+      "level_offset": 4,
       "location": "Meteor Falls 1 F 2 R"
     },
     "TRAINER_JOHN_AND_JAY_5": {
@@ -6282,101 +6313,105 @@
     },
     "TRAINER_TYRON": {
       "format": "single",
-      "target_size": 2,
-      "archetype": "Intentional route singles relief",
-      "difficulty": 31,
+      "target_size": 3,
+      "archetype": "Three-blade setup single",
+      "difficulty": 89,
       "partner_interaction": false,
-      "level_offset": -2,
-      "location": "Route 111"
+      "level_offset": 3,
+      "location": "Route111",
+      "smart_switching": true
     },
     "TRAINER_CELINA": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 33,
-      "partner_interaction": false,
-      "level_offset": -2,
-      "location": "Route 111"
+      "archetype": "Broken-shackles ability double",
+      "difficulty": 93,
+      "partner_interaction": true,
+      "level_offset": 3,
+      "location": "Route111",
+      "smart_switching": true
     },
     "TRAINER_BIANCA": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 31,
-      "partner_interaction": false,
-      "level_offset": -2,
-      "location": "Route 111"
+      "archetype": "Haunted-props mixed-speed double",
+      "difficulty": 92,
+      "partner_interaction": true,
+      "level_offset": 3,
+      "location": "Route111",
+      "smart_switching": true
     },
     "TRAINER_HAYDEN": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 33,
-      "partner_interaction": false,
-      "level_offset": -2,
-      "location": "Route 111"
+      "archetype": "Toxic-edge activation double",
+      "difficulty": 91,
+      "partner_interaction": true,
+      "level_offset": 3,
+      "location": "Route111",
+      "smart_switching": true
     },
     "TRAINER_SOPHIE": {
       "format": "single",
       "target_size": 3,
-      "archetype": "Balanced disruption",
-      "difficulty": 35,
-      "partner_interaction": false,
-      "level_offset": -3,
+      "archetype": "Native-pair ash hazards or split single",
+      "difficulty": 85,
+      "partner_interaction": true,
+      "level_offset": 2,
       "location": "Route 113"
     },
     "TRAINER_COBY": {
       "format": "single",
-      "target_size": 2,
-      "archetype": "Intentional route singles relief",
-      "difficulty": 29,
-      "partner_interaction": false,
-      "level_offset": -3,
+      "target_size": 3,
+      "archetype": "Native-pair phazing flock or split single",
+      "difficulty": 85,
+      "partner_interaction": true,
+      "level_offset": 2,
       "location": "Route 113"
     },
     "TRAINER_LAWRENCE": {
       "format": "single",
-      "target_size": 2,
-      "archetype": "Intentional route singles relief",
-      "difficulty": 34,
-      "partner_interaction": false,
-      "level_offset": -3,
+      "target_size": 3,
+      "archetype": "Triple-sight ash geology half or split single",
+      "difficulty": 85,
+      "partner_interaction": true,
+      "level_offset": 2,
       "location": "Route 113"
     },
     "TRAINER_WYATT": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 31,
-      "partner_interaction": false,
-      "level_offset": -2,
+      "format": "single",
+      "target_size": 3,
+      "archetype": "Triple-sight late-bloomer half or split single",
+      "difficulty": 86,
+      "partner_interaction": true,
+      "level_offset": 2,
       "location": "Route 113"
     },
     "TRAINER_ANGELINA": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 31,
-      "partner_interaction": false,
-      "level_offset": -3,
+      "format": "single",
+      "target_size": 3,
+      "archetype": "Cold-evolution trio",
+      "difficulty": 88,
+      "partner_interaction": true,
+      "level_offset": 3,
       "location": "Route 114"
     },
     "TRAINER_KAI": {
       "format": "single",
-      "target_size": 1,
-      "archetype": "Sand and spread",
-      "difficulty": 32,
-      "partner_interaction": false,
-      "level_offset": -1,
+      "target_size": 3,
+      "archetype": "Giant slow catches",
+      "difficulty": 86,
+      "partner_interaction": true,
+      "level_offset": 2,
       "location": "Route 114"
     },
     "TRAINER_CHARLOTTE": {
       "format": "single",
-      "target_size": 1,
-      "archetype": "Balanced disruption",
-      "difficulty": 30,
-      "partner_interaction": false,
-      "level_offset": -1,
+      "target_size": 3,
+      "archetype": "Cute Trick Room quirks",
+      "difficulty": 85,
+      "partner_interaction": true,
+      "level_offset": 2,
       "location": "Route 114"
     },
     "TRAINER_DEANDRE": {
@@ -6633,47 +6668,50 @@
     },
     "TRAINER_CELIA": {
       "format": "single",
-      "target_size": 2,
-      "archetype": "Intentional route singles relief",
-      "difficulty": 50,
+      "target_size": 3,
+      "archetype": "Draining-growth single",
+      "difficulty": 88,
       "partner_interaction": false,
-      "level_offset": -3,
-      "location": "Route 111"
+      "level_offset": 3,
+      "location": "Route111",
+      "smart_switching": true
     },
     "TRAINER_BRYAN": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 34,
-      "partner_interaction": false,
-      "level_offset": -3,
-      "location": "Route 111"
+      "archetype": "Ancient-survivors double",
+      "difficulty": 92,
+      "partner_interaction": true,
+      "level_offset": 3,
+      "location": "Route111",
+      "smart_switching": true
     },
     "TRAINER_BRANDEN": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Sun offense",
-      "difficulty": 52,
-      "partner_interaction": false,
-      "level_offset": -3,
-      "location": "Route 111"
+      "archetype": "Steely Spirit anchor double",
+      "difficulty": 92,
+      "partner_interaction": true,
+      "level_offset": 3,
+      "location": "Route111",
+      "smart_switching": true
     },
     "TRAINER_BRYANT": {
       "format": "single",
-      "target_size": 2,
-      "archetype": "Intentional route singles relief",
-      "difficulty": 33,
-      "partner_interaction": false,
-      "level_offset": -2,
+      "target_size": 3,
+      "archetype": "Native-pair sun relay or split Fire single",
+      "difficulty": 85,
+      "partner_interaction": true,
+      "level_offset": 2,
       "location": "Route 112"
     },
     "TRAINER_SHAYLA": {
-      "format": "double",
-      "target_size": 4,
-      "archetype": "Sun offense",
-      "difficulty": 50,
+      "format": "single",
+      "target_size": 3,
+      "archetype": "Native-pair sun relay or split garden single",
+      "difficulty": 85,
       "partner_interaction": true,
-      "level_offset": -2,
+      "level_offset": 2,
       "location": "Route 112"
     },
     "TRAINER_KYRA": {
@@ -6983,40 +7021,44 @@
       "location": "Mauville City Gym"
     },
     "TRAINER_FLANNERY_2": {
-      "format": "double",
+      "format": "single",
       "target_size": 6,
-      "archetype": "Sun offense",
-      "difficulty": 82,
-      "partner_interaction": true,
-      "level_offset": 0,
-      "location": "Lavaridge Town Gym 1 F"
-    },
-    "TRAINER_FLANNERY_3": {
-      "format": "double",
-      "target_size": 6,
-      "archetype": "Sun offense",
-      "difficulty": 79,
+      "archetype": "Nonlegendary sun singles",
+      "difficulty": 90,
       "partner_interaction": false,
       "level_offset": 0,
-      "location": "Lavaridge Town Gym 1 F"
+      "location": "Lavaridge Town Gym 1 F",
+      "smart_switching": true
+    },
+    "TRAINER_FLANNERY_3": {
+      "format": "single",
+      "target_size": 6,
+      "archetype": "Legendary sun singles",
+      "difficulty": 96,
+      "partner_interaction": false,
+      "level_offset": 0,
+      "location": "Lavaridge Town Gym 1 F",
+      "smart_switching": true
     },
     "TRAINER_FLANNERY_4": {
       "format": "double",
       "target_size": 6,
-      "archetype": "Sun offense",
-      "difficulty": 84,
-      "partner_interaction": false,
+      "archetype": "Legendary sun doubles",
+      "difficulty": 98,
+      "partner_interaction": true,
       "level_offset": 0,
-      "location": "Lavaridge Town Gym 1 F"
+      "location": "Lavaridge Town Gym 1 F",
+      "smart_switching": true
     },
     "TRAINER_FLANNERY_5": {
       "format": "double",
       "target_size": 6,
-      "archetype": "Sun offense",
-      "difficulty": 87,
-      "partner_interaction": false,
+      "archetype": "Nonlegendary sun doubles",
+      "difficulty": 96,
+      "partner_interaction": true,
       "level_offset": 0,
-      "location": "Lavaridge Town Gym 1 F"
+      "location": "Lavaridge Town Gym 1 F",
+      "smart_switching": true
     },
     "TRAINER_NORMAN_2": {
       "format": "single",
@@ -7470,30 +7512,33 @@
     },
     "TRAINER_SAWYER_2": {
       "format": "single",
-      "target_size": 3,
-      "archetype": "Sand and spread",
-      "difficulty": 40,
+      "target_size": 2,
+      "archetype": "Mountain-strata singles rematch",
+      "difficulty": 88,
       "partner_interaction": false,
-      "level_offset": -2,
-      "location": "Mt Chimney"
+      "level_offset": 3,
+      "location": "MtChimney",
+      "smart_switching": true
     },
     "TRAINER_SAWYER_3": {
       "format": "double",
       "target_size": 4,
-      "archetype": "Balanced disruption",
-      "difficulty": 44,
-      "partner_interaction": false,
-      "level_offset": -2,
-      "location": "Mt Chimney"
+      "archetype": "Mountain-strata doubles rematch",
+      "difficulty": 94,
+      "partner_interaction": true,
+      "level_offset": 3,
+      "location": "MtChimney",
+      "smart_switching": true
     },
     "TRAINER_SAWYER_4": {
       "format": "double",
       "target_size": 6,
-      "archetype": "Balanced disruption",
-      "difficulty": 62,
-      "partner_interaction": false,
-      "level_offset": -2,
-      "location": "Mt Chimney"
+      "archetype": "Mountain-strata final rematch",
+      "difficulty": 98,
+      "partner_interaction": true,
+      "level_offset": 3,
+      "location": "MtChimney",
+      "smart_switching": true
     },
     "TRAINER_SAWYER_5": {
       "format": "double",
@@ -7988,14 +8033,14 @@
           "item": "ITEM_EJECT_BUTTON",
           "ability": "ABILITY_DROUGHT",
           "ability_slot": 1,
-          "spread": "SPREAD_31_IV_HP_DEF_SPDEF_SASSY",
+          "spread": "SPREAD_31_IV_HP_DEF_BOLD",
           "moves": [
-            "MOVE_HEAT_WAVE",
+            "MOVE_ERUPTION",
             "MOVE_BODY_PRESS",
             "MOVE_YAWN",
             "MOVE_PROTECT"
           ],
-          "role": "sun lead"
+          "role": "visible sun and HP-sensitive temperature anchor"
         },
         {
           "species": "SPECIES_LILLIGANT",
@@ -8005,53 +8050,53 @@
           "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
           "moves": [
             "MOVE_AFTER_YOU",
-            "MOVE_SLEEP_POWDER",
+            "MOVE_HELPING_HAND",
             "MOVE_SOLAR_BEAM",
             "MOVE_PROTECT"
           ],
-          "role": "fast-mode enabler"
+          "role": "fast-mode move-order enabler"
         },
         {
-          "species": "SPECIES_CRESSELIA",
+          "species": "SPECIES_DELPHOX",
           "item": "ITEM_MENTAL_HERB",
-          "ability": "ABILITY_LEVITATE",
-          "ability_slot": 0,
-          "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
-          "moves": [
-            "MOVE_TRICK_ROOM",
-            "MOVE_HELPING_HAND",
-            "MOVE_ICE_BEAM",
-            "MOVE_LUNAR_DANCE"
-          ],
-          "role": "slow-mode enabler"
-        },
-        {
-          "species": "SPECIES_CAMERUPT",
-          "item": "ITEM_CHARCOAL",
-          "ability": "ABILITY_SOLID_ROCK",
+          "ability": "ABILITY_PYROMANCY",
+          "ability_slot": 1,
           "spread": "SPREAD_31_IV_HP_SPATK_QUIET",
           "moves": [
-            "MOVE_ERUPTION",
-            "MOVE_EARTH_POWER",
+            "MOVE_TRICK_ROOM",
             "MOVE_HEAT_WAVE",
-            "MOVE_PROTECT"
+            "MOVE_SHADOW_BALL",
+            "MOVE_WILL_O_WISP"
           ],
-          "role": "Trick Room special cannon",
-          "ability_slot": 1
+          "role": "conditional Fire-native slow-mode hinge"
         },
         {
-          "species": "SPECIES_VOLCANION",
-          "item": "ITEM_ASSAULT_VEST",
-          "ability": "ABILITY_WATER_ABSORB",
+          "species": "SPECIES_SKELEDIRGE",
+          "item": "ITEM_THROAT_SPRAY",
+          "ability": "ABILITY_UNAWARE",
+          "ability_slot": 2,
+          "spread": "SPREAD_31_IV_HP_SPATK_QUIET",
+          "moves": [
+            "MOVE_TORCH_SONG",
+            "MOVE_SHADOW_BALL",
+            "MOVE_HYPER_VOICE",
+            "MOVE_PROTECT"
+          ],
+          "role": "slow-mode sound snowball"
+        },
+        {
+          "species": "SPECIES_HEATRAN",
+          "item": "ITEM_AIR_BALLOON",
+          "ability": "ABILITY_FLASH_FIRE",
           "ability_slot": 0,
           "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
           "moves": [
-            "MOVE_STEAM_ERUPTION",
-            "MOVE_HEAT_WAVE",
+            "MOVE_MAGMA_STORM",
+            "MOVE_FLASH_CANNON",
             "MOVE_EARTH_POWER",
-            "MOVE_SLUDGE_BOMB"
+            "MOVE_PROTECT"
           ],
-          "role": "Water deterrent"
+          "role": "defensive heat bridge and exit seal"
         },
         {
           "species": "SPECIES_EMBOAR",
@@ -8062,7 +8107,7 @@
             "MOVE_HEAT_CRASH",
             "MOVE_CLOSE_COMBAT",
             "MOVE_HIGH_HORSEPOWER",
-            "MOVE_PROTECT"
+            "MOVE_WILD_CHARGE"
           ],
           "role": "Champions Mega physical closer",
           "ability_slot": 2
@@ -8533,7 +8578,7 @@
       "battle": "Phoebe",
       "trainer_id": "TRAINER_PHOEBE",
       "format": "doubles",
-      "identity": "Shadow Tag s\u00e9ance",
+      "identity": "Shadow Tag séance",
       "team": [
         {
           "species": "SPECIES_GENGAR",

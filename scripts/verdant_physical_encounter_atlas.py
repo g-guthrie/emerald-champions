@@ -700,12 +700,19 @@ def merge_groups(
         if group["sequenceIndex"] is not None
     }
     for entry in sequence_entries:
-        observed = set(result_by_sequence[entry["index"]]["sourceOpponentTrainerIds"])
+        group = result_by_sequence[entry["index"]]
+        observed_source = set(group["sourceOpponentTrainerIds"])
+        observed_resolved = set(group["resolvedOpponentTrainerIds"])
         expected = set(entry["trainer_ids"])
-        if observed != expected:
+        # A canonical encounter may name only the physical source record or
+        # explicitly own its whole rematch family.  Both are source-proven:
+        # the former comes from the map invocation and the latter from the
+        # REMATCH() expansion already stored on this atlas group.
+        if expected not in (observed_source, observed_resolved):
             raise ValueError(
                 f"Battle {entry['index']} membership drift: "
-                f"expected={sorted(expected)}, observed={sorted(observed)}"
+                f"expected={sorted(expected)}, source={sorted(observed_source)}, "
+                f"resolved={sorted(observed_resolved)}"
             )
     return result, sorted(conflicts, key=lambda row: (row["proofType"], row["detail"], row["invocationIds"]))
 

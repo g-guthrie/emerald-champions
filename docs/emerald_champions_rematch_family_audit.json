@@ -1,0 +1,3682 @@
+{
+  "version": 1,
+  "title": "Emerald Champions Gym and Wally rematch family audit",
+  "scope": "All 35 reachable Gym/Wally rematch records. TRAINER_TATE_AND_LIZA_5 is deliberately reported as an unreachable internal definition, not a physical battle.",
+  "families": {
+    "ROXANNE": {
+      "status": {
+        "design": "source-reviewed",
+        "source": "implemented",
+        "static": "validated",
+        "runtime": "unplayed"
+      },
+      "records": [
+        {
+          "tier": 2,
+          "trainer_id": "TRAINER_ROXANNE_2",
+          "format": "double",
+          "party_size": 6,
+          "quality_score": 90,
+          "issues": [],
+          "mega_count": 1,
+          "item_coverage": 1.0,
+          "complete_moveset_coverage": 1.0,
+          "level_offsets": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            2
+          ],
+          "team": [
+            {
+              "species": "SPECIES_TYRANITAR",
+              "item": "ITEM_RED_CARD",
+              "ability": "ABILITY_SAND_STREAM",
+              "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+              "moves": [
+                "MOVE_ROCK_TOMB",
+                "MOVE_STEALTH_ROCK",
+                "MOVE_CRUNCH",
+                "MOVE_THUNDER_PUNCH"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_TYRANTRUM",
+              "item": "ITEM_WEAKNESS_POLICY",
+              "ability": "ABILITY_ROCK_HEAD",
+              "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+              "moves": [
+                "MOVE_HEAD_SMASH",
+                "MOVE_OUTRAGE",
+                "MOVE_EARTHQUAKE",
+                "MOVE_DRAGON_DANCE"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_AERODACTYL",
+              "item": "ITEM_AERODACTYLITE",
+              "ability": "ABILITY_ROCK_HEAD",
+              "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+              "moves": [
+                "MOVE_BRAVE_BIRD",
+                "MOVE_ROCK_SLIDE",
+                "MOVE_EARTHQUAKE",
+                "MOVE_PROTECT"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_ARMALDO",
+              "item": "ITEM_ASSAULT_VEST",
+              "ability": "ABILITY_BATTLE_ARMOR",
+              "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+              "moves": [
+                "MOVE_LEECH_LIFE",
+                "MOVE_STONE_EDGE",
+                "MOVE_RAPID_SPIN",
+                "MOVE_IRON_TAIL"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_CRADILY",
+              "item": "ITEM_LEFTOVERS",
+              "ability": "ABILITY_STORM_DRAIN",
+              "spread": "SPREAD_31_IV_HP_DEF_BOLD",
+              "moves": [
+                "MOVE_GIGA_DRAIN",
+                "MOVE_TOXIC",
+                "MOVE_INFESTATION",
+                "MOVE_RECOVER"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_PROBOPASS",
+              "item": "ITEM_CHOICE_SPECS",
+              "ability": "ABILITY_SAND_FORCE",
+              "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+              "moves": [
+                "MOVE_POWER_GEM",
+                "MOVE_FLASH_CANNON",
+                "MOVE_EARTH_POWER",
+                "MOVE_THUNDERBOLT"
+              ],
+              "role": null
+            }
+          ],
+          "source_reachability": "rematch-table-or-Wally-chain"
+        },
+        {
+          "tier": 3,
+          "trainer_id": "TRAINER_ROXANNE_3",
+          "format": "double",
+          "party_size": 6,
+          "quality_score": 91,
+          "issues": [],
+          "mega_count": 1,
+          "item_coverage": 1.0,
+          "complete_moveset_coverage": 1.0,
+          "level_offsets": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            2
+          ],
+          "team": [
+            {
+              "species": "SPECIES_TYRANITAR",
+              "item": "ITEM_CUSTAP_BERRY",
+              "ability": "ABILITY_SAND_STREAM",
+              "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+              "moves": [
+                "MOVE_STONE_EDGE",
+                "MOVE_STEALTH_ROCK",
+                "MOVE_CRUNCH",
+                "MOVE_THUNDER_WAVE"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_NIHILEGO",
+              "item": "ITEM_FOCUS_SASH",
+              "ability": "ABILITY_BEAST_BOOST",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+              "moves": [
+                "MOVE_THUNDERBOLT",
+                "MOVE_GRASS_KNOT",
+                "MOVE_POWER_GEM",
+                "MOVE_SLUDGE_WAVE"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_TERRAKION",
+              "item": "ITEM_WEAKNESS_POLICY",
+              "ability": "ABILITY_JUSTIFIED",
+              "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+              "moves": [
+                "MOVE_STONE_EDGE",
+                "MOVE_CLOSE_COMBAT",
+                "MOVE_POISON_JAB",
+                "MOVE_SWORDS_DANCE"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_AERODACTYL",
+              "item": "ITEM_LIFE_ORB",
+              "ability": "ABILITY_ROCK_HEAD",
+              "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+              "moves": [
+                "MOVE_BRAVE_BIRD",
+                "MOVE_STRENGTH",
+                "MOVE_EARTHQUAKE",
+                "MOVE_AQUA_TAIL"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_DIANCIE",
+              "item": "ITEM_DIANCITE",
+              "ability": "ABILITY_CLEAR_BODY",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+              "moves": [
+                "MOVE_POWER_GEM",
+                "MOVE_MOONBLAST",
+                "MOVE_MYSTICAL_FIRE",
+                "MOVE_EARTH_POWER"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_PROBOPASS",
+              "item": "ITEM_CHOICE_SPECS",
+              "ability": "ABILITY_SAND_FORCE",
+              "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+              "moves": [
+                "MOVE_POWER_GEM",
+                "MOVE_FLASH_CANNON",
+                "MOVE_EARTH_POWER",
+                "MOVE_THUNDERBOLT"
+              ],
+              "role": null
+            }
+          ],
+          "source_reachability": "rematch-table-or-Wally-chain"
+        },
+        {
+          "tier": 4,
+          "trainer_id": "TRAINER_ROXANNE_4",
+          "format": "double",
+          "party_size": 6,
+          "quality_score": 88,
+          "issues": [],
+          "mega_count": 1,
+          "item_coverage": 1.0,
+          "complete_moveset_coverage": 1.0,
+          "level_offsets": [
+            0,
+            2,
+            0,
+            0,
+            0,
+            0
+          ],
+          "team": [
+            {
+              "species": "SPECIES_TYRANITAR",
+              "item": "ITEM_CHOPLE_BERRY",
+              "ability": "ABILITY_SAND_STREAM",
+              "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+              "moves": [
+                "MOVE_ROCK_SLIDE",
+                "MOVE_CRUNCH",
+                "MOVE_THUNDER_WAVE",
+                "MOVE_COUNTER"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_PROBOPASS",
+              "item": "ITEM_AIR_BALLOON",
+              "ability": "ABILITY_MAGNET_PULL",
+              "spread": "SPREAD_HP_FIRE_MODEST_BULKY",
+              "moves": [
+                "MOVE_POWER_GEM",
+                "MOVE_FLASH_CANNON",
+                "MOVE_EARTH_POWER",
+                "MOVE_HIDDEN_POWER"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_AURORUS",
+              "item": "ITEM_CHOICE_SCARF",
+              "ability": "ABILITY_REFRIGERATE",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+              "moves": [
+                "MOVE_HYPER_VOICE",
+                "MOVE_FREEZE_DRY",
+                "MOVE_EARTH_POWER",
+                "MOVE_WATER_PULSE"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_AERODACTYL",
+              "item": "ITEM_AERODACTYLITE",
+              "ability": "ABILITY_ROCK_HEAD",
+              "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+              "moves": [
+                "MOVE_BRAVE_BIRD",
+                "MOVE_ROCK_SLIDE",
+                "MOVE_TAILWIND",
+                "MOVE_PROTECT"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_LYCANROC",
+              "item": "ITEM_LIFE_ORB",
+              "ability": "ABILITY_SAND_RUSH",
+              "spread": "SPREAD_LYCANROC_MIDDAY",
+              "moves": [
+                "MOVE_ROCK_SLIDE",
+                "MOVE_DRILL_RUN",
+                "MOVE_CLOSE_COMBAT",
+                "MOVE_PSYCHIC_FANGS"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_CRADILY",
+              "item": "ITEM_SITRUS_BERRY",
+              "ability": "ABILITY_STORM_DRAIN",
+              "spread": "SPREAD_31_IV_HP_DEF_BOLD",
+              "moves": [
+                "MOVE_GIGA_DRAIN",
+                "MOVE_TICKLE",
+                "MOVE_INFESTATION",
+                "MOVE_RECOVER"
+              ],
+              "role": null
+            }
+          ],
+          "source_reachability": "rematch-table-or-Wally-chain"
+        },
+        {
+          "tier": 5,
+          "trainer_id": "TRAINER_ROXANNE_5",
+          "format": "double",
+          "party_size": 6,
+          "quality_score": 91,
+          "issues": [],
+          "mega_count": 1,
+          "item_coverage": 1.0,
+          "complete_moveset_coverage": 1.0,
+          "level_offsets": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            2
+          ],
+          "team": [
+            {
+              "species": "SPECIES_TYRANITAR",
+              "item": "ITEM_ASSAULT_VEST",
+              "ability": "ABILITY_SAND_STREAM",
+              "spread": "SPREAD_31_IV_HP_ATK_BRAVE",
+              "moves": [
+                "MOVE_ROCK_SLIDE",
+                "MOVE_CRUNCH",
+                "MOVE_SUPERPOWER",
+                "MOVE_ICE_PUNCH"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_STAKATAKA",
+              "item": "ITEM_MENTAL_HERB",
+              "ability": "ABILITY_BEAST_BOOST",
+              "spread": "SPREAD_STAKATAKA",
+              "moves": [
+                "MOVE_TRICK_ROOM",
+                "MOVE_GYRO_BALL",
+                "MOVE_ROCK_SLIDE",
+                "MOVE_ZEN_HEADBUTT"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_REGIROCK",
+              "item": "ITEM_SHUCA_BERRY",
+              "ability": "ABILITY_CLEAR_BODY",
+              "spread": "SPREAD_31_IV_HP_ATK_BRAVE",
+              "moves": [
+                "MOVE_ROCK_SLIDE",
+                "MOVE_HAMMER_ARM",
+                "MOVE_FIRE_PUNCH",
+                "MOVE_ICE_PUNCH"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_AGGRON",
+              "item": "ITEM_AGGRONITE",
+              "ability": "ABILITY_STURDY",
+              "spread": "SPREAD_31_IV_HP_ATK_BRAVE",
+              "moves": [
+                "MOVE_HEAVY_SLAM",
+                "MOVE_ICE_PUNCH",
+                "MOVE_THUNDER_PUNCH",
+                "MOVE_HIGH_HORSEPOWER"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_DIANCIE",
+              "item": "ITEM_LIFE_ORB",
+              "ability": "ABILITY_CLEAR_BODY",
+              "spread": "SPREAD_31_IV_HP_SPATK_QUIET",
+              "moves": [
+                "MOVE_POWER_GEM",
+                "MOVE_MOONBLAST",
+                "MOVE_MYSTICAL_FIRE",
+                "MOVE_CALM_MIND"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_PROBOPASS",
+              "item": "ITEM_CHOICE_SPECS",
+              "ability": "ABILITY_SAND_FORCE",
+              "spread": "SPREAD_31_IV_HP_SPATK_QUIET",
+              "moves": [
+                "MOVE_POWER_GEM",
+                "MOVE_FLASH_CANNON",
+                "MOVE_EARTH_POWER",
+                "MOVE_THUNDERBOLT"
+              ],
+              "role": null
+            }
+          ],
+          "source_reachability": "daily-postgame-script"
+        }
+      ],
+      "final_tier": "TRAINER_ROXANNE_5",
+      "final_target_difficulty": 10,
+      "final_observed_difficulty": null,
+      "format_contract": "double",
+      "progression_rule": "Earlier tiers remain distinct source-authored progression teams. The final tier is the marquee target-10 rematch; deliberate leader signatures and famous species may recur here."
+    },
+    "BRAWLY": {
+      "status": {
+        "design": "source-reviewed",
+        "source": "implemented",
+        "static": "validated",
+        "runtime": "unplayed"
+      },
+      "records": [
+        {
+          "tier": 2,
+          "trainer_id": "TRAINER_BRAWLY_2",
+          "format": "double",
+          "party_size": 6,
+          "quality_score": 83,
+          "issues": [],
+          "mega_count": 1,
+          "item_coverage": 1.0,
+          "complete_moveset_coverage": 1.0,
+          "level_offsets": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            2
+          ],
+          "team": [
+            {
+              "species": "SPECIES_MEDICHAM",
+              "item": "ITEM_MEDICHAMITE",
+              "ability": "ABILITY_PURE_POWER",
+              "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+              "moves": [
+                "MOVE_HIGH_JUMP_KICK",
+                "MOVE_FAKE_OUT",
+                "MOVE_ZEN_HEADBUTT",
+                "MOVE_ICE_PUNCH"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_SCRAFTY",
+              "item": "ITEM_LEFTOVERS",
+              "ability": "ABILITY_SHED_SKIN",
+              "spread": "SPREAD_31_IV_HP_SPDEF_CAREFUL",
+              "moves": [
+                "MOVE_DRAIN_PUNCH",
+                "MOVE_BULK_UP",
+                "MOVE_REST",
+                "MOVE_KNOCK_OFF"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_TOXICROAK",
+              "item": "ITEM_SHELL_BELL",
+              "ability": "ABILITY_DRY_SKIN",
+              "spread": "SPREAD_31_IV_HP_SPEED_JOLLY",
+              "moves": [
+                "MOVE_DRAIN_PUNCH",
+                "MOVE_BULK_UP",
+                "MOVE_POISON_JAB",
+                "MOVE_SUCKER_PUNCH"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_CRABOMINABLE",
+              "item": "ITEM_CHOICE_BAND",
+              "ability": "ABILITY_IRON_FIST",
+              "spread": "SPREAD_BRAWLY_ONE_MON",
+              "moves": [
+                "MOVE_ICE_HAMMER",
+                "MOVE_HAMMER_ARM",
+                "MOVE_CRABHAMMER",
+                "MOVE_MACH_PUNCH"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_SAMUROTT",
+              "item": "ITEM_WHITE_HERB",
+              "ability": "ABILITY_KEEN_EDGE",
+              "spread": "SPREAD_31_IV_ATK_SPEED_ADAMANT",
+              "moves": [
+                "MOVE_RAZOR_SHELL",
+                "MOVE_SACRED_SWORD",
+                "MOVE_X_SCISSOR",
+                "MOVE_SHELL_SMASH"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_HARIYAMA",
+              "item": "ITEM_FLAME_ORB",
+              "ability": "ABILITY_GUTS",
+              "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+              "moves": [
+                "MOVE_CLOSE_COMBAT",
+                "MOVE_FAKE_OUT",
+                "MOVE_KNOCK_OFF",
+                "MOVE_ROCK_SLIDE"
+              ],
+              "role": null
+            }
+          ],
+          "source_reachability": "rematch-table-or-Wally-chain"
+        },
+        {
+          "tier": 3,
+          "trainer_id": "TRAINER_BRAWLY_3",
+          "format": "double",
+          "party_size": 6,
+          "quality_score": 94,
+          "issues": [],
+          "mega_count": 1,
+          "item_coverage": 1.0,
+          "complete_moveset_coverage": 1.0,
+          "level_offsets": [
+            0,
+            0,
+            2,
+            0,
+            0,
+            0
+          ],
+          "team": [
+            {
+              "species": "SPECIES_COBALION",
+              "item": "ITEM_FOCUS_SASH",
+              "ability": "ABILITY_JUSTIFIED",
+              "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+              "moves": [
+                "MOVE_CLOSE_COMBAT",
+                "MOVE_IRON_HEAD",
+                "MOVE_STEALTH_ROCK",
+                "MOVE_VOLT_SWITCH"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_MARSHADOW",
+              "item": "ITEM_LEFTOVERS",
+              "ability": "ABILITY_TECHNICIAN",
+              "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+              "moves": [
+                "MOVE_FOCUS_PUNCH",
+                "MOVE_SPECTRAL_THIEF",
+                "MOVE_SHADOW_SNEAK",
+                "MOVE_SUBSTITUTE"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_HARIYAMA",
+              "item": "ITEM_FLAME_ORB",
+              "ability": "ABILITY_GUTS",
+              "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+              "moves": [
+                "MOVE_CLOSE_COMBAT",
+                "MOVE_FAKE_OUT",
+                "MOVE_KNOCK_OFF",
+                "MOVE_STONE_EDGE"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_BUZZWOLE",
+              "item": "ITEM_LEFTOVERS",
+              "ability": "ABILITY_BEAST_BOOST",
+              "spread": "SPREAD_31_IV_HP_SPDEF_CAREFUL",
+              "moves": [
+                "MOVE_DRAIN_PUNCH",
+                "MOVE_LEECH_LIFE",
+                "MOVE_BULK_UP",
+                "MOVE_ROOST"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_KELDEO",
+              "item": "ITEM_CHOICE_SPECS",
+              "ability": "ABILITY_JUSTIFIED",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+              "moves": [
+                "MOVE_HYDRO_PUMP",
+                "MOVE_SECRET_SWORD",
+                "MOVE_ICY_WIND",
+                "MOVE_AIR_SLASH"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_MEWTWO",
+              "item": "ITEM_MEWTWONITE_X",
+              "ability": "ABILITY_PRESSURE",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+              "moves": [
+                "MOVE_PSYSTRIKE",
+                "MOVE_AURA_SPHERE",
+                "MOVE_ICE_BEAM",
+                "MOVE_NASTY_PLOT"
+              ],
+              "role": null
+            }
+          ],
+          "source_reachability": "rematch-table-or-Wally-chain"
+        },
+        {
+          "tier": 4,
+          "trainer_id": "TRAINER_BRAWLY_4",
+          "format": "double",
+          "party_size": 6,
+          "quality_score": 86,
+          "issues": [],
+          "mega_count": 0,
+          "item_coverage": 1.0,
+          "complete_moveset_coverage": 1.0,
+          "level_offsets": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            2
+          ],
+          "team": [
+            {
+              "species": "SPECIES_CONKELDURR",
+              "item": "ITEM_PERSIM_BERRY",
+              "ability": "ABILITY_SHEER_FORCE",
+              "spread": "SPREAD_31_IV_HP_SPDEF_CAREFUL",
+              "moves": [
+                "MOVE_DRAIN_PUNCH",
+                "MOVE_ROCK_SLIDE",
+                "MOVE_POISON_JAB",
+                "MOVE_MACH_PUNCH"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_SCRAFTY",
+              "item": "ITEM_SITRUS_BERRY",
+              "ability": "ABILITY_INTIMIDATE",
+              "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+              "moves": [
+                "MOVE_DRAIN_PUNCH",
+                "MOVE_FAKE_OUT",
+                "MOVE_KNOCK_OFF",
+                "MOVE_SWAGGER"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_TOXICROAK",
+              "item": "ITEM_SHELL_BELL",
+              "ability": "ABILITY_DRY_SKIN",
+              "spread": "SPREAD_31_IV_HP_SPEED_JOLLY",
+              "moves": [
+                "MOVE_DRAIN_PUNCH",
+                "MOVE_FAKE_OUT",
+                "MOVE_GUNK_SHOT",
+                "MOVE_SUCKER_PUNCH"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_CHESNAUGHT",
+              "item": "ITEM_LIGHT_CLAY",
+              "ability": "ABILITY_STURDY",
+              "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+              "moves": [
+                "MOVE_DRAIN_PUNCH",
+                "MOVE_SEED_BOMB",
+                "MOVE_REFLECT",
+                "MOVE_SPIKY_SHIELD"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_HAWLUCHA",
+              "item": "ITEM_FLYING_GEM",
+              "ability": "ABILITY_UNBURDEN",
+              "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+              "moves": [
+                "MOVE_ACROBATICS",
+                "MOVE_CLOSE_COMBAT",
+                "MOVE_HELPING_HAND",
+                "MOVE_TAILWIND"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_HARIYAMA",
+              "item": "ITEM_FLAME_ORB",
+              "ability": "ABILITY_GUTS",
+              "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+              "moves": [
+                "MOVE_CLOSE_COMBAT",
+                "MOVE_FAKE_OUT",
+                "MOVE_KNOCK_OFF",
+                "MOVE_FACADE"
+              ],
+              "role": null
+            }
+          ],
+          "source_reachability": "rematch-table-or-Wally-chain"
+        },
+        {
+          "tier": 5,
+          "trainer_id": "TRAINER_BRAWLY_5",
+          "format": "double",
+          "party_size": 6,
+          "quality_score": 96,
+          "issues": [],
+          "mega_count": 1,
+          "item_coverage": 1.0,
+          "complete_moveset_coverage": 1.0,
+          "level_offsets": [
+            0,
+            0,
+            2,
+            0,
+            0,
+            0
+          ],
+          "team": [
+            {
+              "species": "SPECIES_LUCARIO",
+              "item": "ITEM_ROCKY_HELMET",
+              "ability": "ABILITY_STEADFAST",
+              "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+              "moves": [
+                "MOVE_FOLLOW_ME",
+                "MOVE_CLOSE_COMBAT",
+                "MOVE_IRON_TAIL",
+                "MOVE_EXTREME_SPEED"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_MARSHADOW",
+              "item": "ITEM_SITRUS_BERRY",
+              "ability": "ABILITY_TECHNICIAN",
+              "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+              "moves": [
+                "MOVE_FOCUS_PUNCH",
+                "MOVE_SPECTRAL_THIEF",
+                "MOVE_SHADOW_SNEAK",
+                "MOVE_ICE_PUNCH"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_HARIYAMA",
+              "item": "ITEM_FLAME_ORB",
+              "ability": "ABILITY_GUTS",
+              "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+              "moves": [
+                "MOVE_CLOSE_COMBAT",
+                "MOVE_FAKE_OUT",
+                "MOVE_KNOCK_OFF",
+                "MOVE_WIDE_GUARD"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_BUZZWOLE",
+              "item": "ITEM_LEFTOVERS",
+              "ability": "ABILITY_BEAST_BOOST",
+              "spread": "SPREAD_31_IV_HP_SPDEF_CAREFUL",
+              "moves": [
+                "MOVE_DRAIN_PUNCH",
+                "MOVE_LEECH_LIFE",
+                "MOVE_TAUNT",
+                "MOVE_ROOST"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_KELDEO",
+              "item": "ITEM_ASSAULT_VEST",
+              "ability": "ABILITY_JUSTIFIED",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+              "moves": [
+                "MOVE_MUDDY_WATER",
+                "MOVE_SECRET_SWORD",
+                "MOVE_ICY_WIND",
+                "MOVE_AIR_SLASH"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_MEWTWO",
+              "item": "ITEM_MEWTWONITE_X",
+              "ability": "ABILITY_PRESSURE",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+              "moves": [
+                "MOVE_PSYSTRIKE",
+                "MOVE_AURA_SPHERE",
+                "MOVE_ICE_BEAM",
+                "MOVE_NASTY_PLOT"
+              ],
+              "role": null
+            }
+          ],
+          "source_reachability": "daily-postgame-script"
+        }
+      ],
+      "final_tier": "TRAINER_BRAWLY_5",
+      "final_target_difficulty": 10,
+      "final_observed_difficulty": null,
+      "format_contract": "double",
+      "progression_rule": "Earlier tiers remain distinct source-authored progression teams. The final tier is the marquee target-10 rematch; deliberate leader signatures and famous species may recur here."
+    },
+    "WATTSON": {
+      "status": {
+        "design": "source-reviewed",
+        "source": "implemented",
+        "static": "validated",
+        "runtime": "unplayed"
+      },
+      "records": [
+        {
+          "tier": 2,
+          "trainer_id": "TRAINER_WATTSON_2",
+          "format": "double",
+          "party_size": 6,
+          "quality_score": 79,
+          "issues": [],
+          "mega_count": 1,
+          "item_coverage": 1.0,
+          "complete_moveset_coverage": 1.0,
+          "level_offsets": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            2
+          ],
+          "team": [
+            {
+              "species": "SPECIES_ELECTRODE",
+              "item": "ITEM_TERRAIN_EXTENDER",
+              "ability": "ABILITY_ELECTRIC_SURGE",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+              "moves": [
+                "MOVE_VOLT_SWITCH",
+                "MOVE_OVERHEAT",
+                "MOVE_ELECTRO_BALL",
+                "MOVE_FOUL_PLAY"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_GALVANTULA",
+              "item": "ITEM_LIFE_ORB",
+              "ability": "ABILITY_COMPOUND_EYES",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+              "moves": [
+                "MOVE_ENERGY_BALL",
+                "MOVE_BUG_BUZZ",
+                "MOVE_THUNDER",
+                "MOVE_STICKY_WEB"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_MAGNEZONE",
+              "item": "ITEM_CHOICE_SPECS",
+              "ability": "ABILITY_ANALYTIC",
+              "spread": "SPREAD_HP_FIRE_MODEST_BULKY",
+              "moves": [
+                "MOVE_VOLT_SWITCH",
+                "MOVE_FLASH_CANNON",
+                "MOVE_HIDDEN_POWER",
+                "MOVE_ELECTRIC_TERRAIN"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_ROTOM_WASH",
+              "item": "ITEM_CHOICE_SCARF",
+              "ability": "ABILITY_LEVITATE",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_MODEST",
+              "moves": [
+                "MOVE_VOLT_SWITCH",
+                "MOVE_HYDRO_PUMP",
+                "MOVE_THUNDERBOLT",
+                "MOVE_TRICK"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_RAICHU_ALOLAN",
+              "item": "ITEM_LIGHT_BALL",
+              "ability": "ABILITY_SURGE_SURFER",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+              "moves": [
+                "MOVE_VOLT_SWITCH",
+                "MOVE_PSYCHIC",
+                "MOVE_GRASS_KNOT",
+                "MOVE_SURF"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_MANECTRIC",
+              "item": "ITEM_MANECTITE",
+              "ability": "ABILITY_LIGHTNING_ROD",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+              "moves": [
+                "MOVE_VOLT_SWITCH",
+                "MOVE_FLAMETHROWER",
+                "MOVE_AURORA_BEAM",
+                "MOVE_THUNDER"
+              ],
+              "role": null
+            }
+          ],
+          "source_reachability": "rematch-table-or-Wally-chain"
+        },
+        {
+          "tier": 3,
+          "trainer_id": "TRAINER_WATTSON_3",
+          "format": "double",
+          "party_size": 6,
+          "quality_score": 93,
+          "issues": [],
+          "mega_count": 1,
+          "item_coverage": 1.0,
+          "complete_moveset_coverage": 1.0,
+          "level_offsets": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            2
+          ],
+          "team": [
+            {
+              "species": "SPECIES_TAPU_KOKO",
+              "item": "ITEM_TERRAIN_EXTENDER",
+              "ability": "ABILITY_ELECTRIC_SURGE",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+              "moves": [
+                "MOVE_VOLT_SWITCH",
+                "MOVE_DAZZLING_GLEAM",
+                "MOVE_THUNDER",
+                "MOVE_GRASS_KNOT"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_ZEKROM",
+              "item": "ITEM_LUM_BERRY",
+              "ability": "ABILITY_TERAVOLT",
+              "spread": "SPREAD_31_IV_ATK_SPEED_ADAMANT",
+              "moves": [
+                "MOVE_BOLT_STRIKE",
+                "MOVE_OUTRAGE",
+                "MOVE_ROOST",
+                "MOVE_DRAGON_DANCE"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_MAGNEZONE",
+              "item": "ITEM_CHOICE_SPECS",
+              "ability": "ABILITY_ANALYTIC",
+              "spread": "SPREAD_HP_FIRE_MODEST_BULKY",
+              "moves": [
+                "MOVE_VOLT_SWITCH",
+                "MOVE_FLASH_CANNON",
+                "MOVE_HIDDEN_POWER",
+                "MOVE_ELECTRIC_TERRAIN"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_ROTOM_WASH",
+              "item": "ITEM_CHOICE_SCARF",
+              "ability": "ABILITY_LEVITATE",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_MODEST",
+              "moves": [
+                "MOVE_VOLT_SWITCH",
+                "MOVE_HYDRO_PUMP",
+                "MOVE_THUNDERBOLT",
+                "MOVE_TRICK"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_ZAPDOS",
+              "item": "ITEM_LIFE_ORB",
+              "ability": "ABILITY_PRESSURE",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+              "moves": [
+                "MOVE_VOLT_SWITCH",
+                "MOVE_HURRICANE",
+                "MOVE_WEATHER_BALL",
+                "MOVE_RAIN_DANCE"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_MANECTRIC",
+              "item": "ITEM_MANECTITE",
+              "ability": "ABILITY_LIGHTNING_ROD",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+              "moves": [
+                "MOVE_VOLT_SWITCH",
+                "MOVE_FLAMETHROWER",
+                "MOVE_PROTECT",
+                "MOVE_THUNDER"
+              ],
+              "role": null
+            }
+          ],
+          "source_reachability": "rematch-table-or-Wally-chain"
+        },
+        {
+          "tier": 4,
+          "trainer_id": "TRAINER_WATTSON_4",
+          "format": "double",
+          "party_size": 6,
+          "quality_score": 79,
+          "issues": [],
+          "mega_count": 1,
+          "item_coverage": 1.0,
+          "complete_moveset_coverage": 1.0,
+          "level_offsets": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            2
+          ],
+          "team": [
+            {
+              "species": "SPECIES_ELECTRODE",
+              "item": "ITEM_TERRAIN_EXTENDER",
+              "ability": "ABILITY_ELECTRIC_SURGE",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+              "moves": [
+                "MOVE_VOLT_SWITCH",
+                "MOVE_OVERHEAT",
+                "MOVE_ELECTRO_BALL",
+                "MOVE_FOUL_PLAY"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_ROTOM_FROST",
+              "item": "ITEM_CHOICE_SCARF",
+              "ability": "ABILITY_LEVITATE",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_MODEST",
+              "moves": [
+                "MOVE_VOLT_SWITCH",
+                "MOVE_FREEZE_DRY",
+                "MOVE_THUNDERBOLT",
+                "MOVE_TRICK"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_MAGNEZONE",
+              "item": "ITEM_AIR_BALLOON",
+              "ability": "ABILITY_ANALYTIC",
+              "spread": "SPREAD_HP_FIRE_MODEST_BULKY",
+              "moves": [
+                "MOVE_VOLT_SWITCH",
+                "MOVE_FLASH_CANNON",
+                "MOVE_HIDDEN_POWER",
+                "MOVE_THUNDER_WAVE"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_LANTURN",
+              "item": "ITEM_SITRUS_BERRY",
+              "ability": "ABILITY_VOLT_ABSORB",
+              "spread": "SPREAD_31_IV_DEF_SPATK",
+              "moves": [
+                "MOVE_VOLT_SWITCH",
+                "MOVE_MUDDY_WATER",
+                "MOVE_THUNDERBOLT",
+                "MOVE_SOAK"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_RAICHU_ALOLAN",
+              "item": "ITEM_LIGHT_BALL",
+              "ability": "ABILITY_SURGE_SURFER",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_HASTY",
+              "moves": [
+                "MOVE_VOLT_SWITCH",
+                "MOVE_PSYCHIC",
+                "MOVE_GRASS_KNOT",
+                "MOVE_EXTREME_SPEED"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_MANECTRIC",
+              "item": "ITEM_MANECTITE",
+              "ability": "ABILITY_LIGHTNING_ROD",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+              "moves": [
+                "MOVE_VOLT_SWITCH",
+                "MOVE_FLAMETHROWER",
+                "MOVE_AURORA_BEAM",
+                "MOVE_THUNDER"
+              ],
+              "role": null
+            }
+          ],
+          "source_reachability": "rematch-table-or-Wally-chain"
+        },
+        {
+          "tier": 5,
+          "trainer_id": "TRAINER_WATTSON_5",
+          "format": "double",
+          "party_size": 6,
+          "quality_score": 86,
+          "issues": [],
+          "mega_count": 1,
+          "item_coverage": 1.0,
+          "complete_moveset_coverage": 1.0,
+          "level_offsets": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            2
+          ],
+          "team": [
+            {
+              "species": "SPECIES_TAPU_KOKO",
+              "item": "ITEM_TERRAIN_EXTENDER",
+              "ability": "ABILITY_ELECTRIC_SURGE",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+              "moves": [
+                "MOVE_VOLT_SWITCH",
+                "MOVE_DAZZLING_GLEAM",
+                "MOVE_REFLECT",
+                "MOVE_LIGHT_SCREEN"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_ZEKROM",
+              "item": "ITEM_SITRUS_BERRY",
+              "ability": "ABILITY_TERAVOLT",
+              "spread": "SPREAD_31_IV_ATK_SPEED_ADAMANT",
+              "moves": [
+                "MOVE_BOLT_STRIKE",
+                "MOVE_DRAGON_CLAW",
+                "MOVE_ROOST",
+                "MOVE_PROTECT"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_MAGNEZONE",
+              "item": "ITEM_CHOICE_SPECS",
+              "ability": "ABILITY_ANALYTIC",
+              "spread": "SPREAD_HP_FIRE_MODEST_BULKY",
+              "moves": [
+                "MOVE_VOLT_SWITCH",
+                "MOVE_FLASH_CANNON",
+                "MOVE_HIDDEN_POWER",
+                "MOVE_ELECTRIC_TERRAIN"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_ROTOM_WASH",
+              "item": "ITEM_CHOICE_SCARF",
+              "ability": "ABILITY_LEVITATE",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_MODEST",
+              "moves": [
+                "MOVE_VOLT_SWITCH",
+                "MOVE_HYDRO_PUMP",
+                "MOVE_THUNDERBOLT",
+                "MOVE_TRICK"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_RAIKOU",
+              "item": "ITEM_LIFE_ORB",
+              "ability": "ABILITY_PRESSURE",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+              "moves": [
+                "MOVE_VOLT_SWITCH",
+                "MOVE_SCALD",
+                "MOVE_AURA_SPHERE",
+                "MOVE_AURORA_BEAM"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_MANECTRIC",
+              "item": "ITEM_MANECTITE",
+              "ability": "ABILITY_LIGHTNING_ROD",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+              "moves": [
+                "MOVE_VOLT_SWITCH",
+                "MOVE_FLAMETHROWER",
+                "MOVE_AURORA_BEAM",
+                "MOVE_THUNDER"
+              ],
+              "role": null
+            }
+          ],
+          "source_reachability": "daily-postgame-script"
+        }
+      ],
+      "final_tier": "TRAINER_WATTSON_5",
+      "final_target_difficulty": 10,
+      "final_observed_difficulty": null,
+      "format_contract": "double",
+      "progression_rule": "Earlier tiers remain distinct source-authored progression teams. The final tier is the marquee target-10 rematch; deliberate leader signatures and famous species may recur here."
+    },
+    "FLANNERY": {
+      "status": {
+        "design": "source-reviewed",
+        "source": "implemented",
+        "static": "validated",
+        "runtime": "unplayed"
+      },
+      "records": [
+        {
+          "tier": 2,
+          "trainer_id": "TRAINER_FLANNERY_2",
+          "format": "single",
+          "party_size": 6,
+          "quality_score": 82,
+          "issues": [],
+          "mega_count": 1,
+          "item_coverage": 1.0,
+          "complete_moveset_coverage": 1.0,
+          "level_offsets": [
+            3,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "team": [
+            {
+              "species": "SPECIES_TORKOAL",
+              "item": "ITEM_WHITE_HERB",
+              "ability": "ABILITY_DROUGHT",
+              "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+              "moves": [
+                "MOVE_HEAT_WAVE",
+                "MOVE_STEALTH_ROCK",
+                "MOVE_YAWN",
+                "MOVE_PROTECT"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_HOUNDOOM",
+              "item": "ITEM_LIFE_ORB",
+              "ability": "ABILITY_FLASH_FIRE",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+              "moves": [
+                "MOVE_FIRE_BLAST",
+                "MOVE_DARK_PULSE",
+                "MOVE_SOLAR_BEAM",
+                "MOVE_NASTY_PLOT"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_ARCANINE",
+              "item": "ITEM_ASSAULT_VEST",
+              "ability": "ABILITY_INTIMIDATE",
+              "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+              "moves": [
+                "MOVE_FLARE_BLITZ",
+                "MOVE_PLAY_ROUGH",
+                "MOVE_CLOSE_COMBAT",
+                "MOVE_EXTREME_SPEED"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_BLAZIKEN",
+              "item": "ITEM_BLAZIKENITE",
+              "ability": "ABILITY_SPEED_BOOST",
+              "spread": "SPREAD_31_IV_ATK_SPEED_ADAMANT",
+              "moves": [
+                "MOVE_FLARE_BLITZ",
+                "MOVE_CLOSE_COMBAT",
+                "MOVE_STONE_EDGE",
+                "MOVE_SWORDS_DANCE"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_CHANDELURE",
+              "item": "ITEM_CHOICE_SCARF",
+              "ability": "ABILITY_FLAME_BODY",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+              "moves": [
+                "MOVE_OVERHEAT",
+                "MOVE_SHADOW_BALL",
+                "MOVE_ENERGY_BALL",
+                "MOVE_WILL_O_WISP"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_TALONFLAME",
+              "item": "ITEM_LEFTOVERS",
+              "ability": "ABILITY_GALE_WINGS",
+              "spread": "SPREAD_31_IV_HP_SPDEF_CAREFUL",
+              "moves": [
+                "MOVE_FLARE_BLITZ",
+                "MOVE_BRAVE_BIRD",
+                "MOVE_BULK_UP",
+                "MOVE_ROOST"
+              ],
+              "role": null
+            }
+          ],
+          "source_reachability": "rematch-table-or-Wally-chain"
+        },
+        {
+          "tier": 3,
+          "trainer_id": "TRAINER_FLANNERY_3",
+          "format": "single",
+          "party_size": 6,
+          "quality_score": 97,
+          "issues": [],
+          "mega_count": 1,
+          "item_coverage": 1.0,
+          "complete_moveset_coverage": 1.0,
+          "level_offsets": [
+            3,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "team": [
+            {
+              "species": "SPECIES_TORKOAL",
+              "item": "ITEM_WHITE_HERB",
+              "ability": "ABILITY_DROUGHT",
+              "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+              "moves": [
+                "MOVE_OVERHEAT",
+                "MOVE_STEALTH_ROCK",
+                "MOVE_YAWN",
+                "MOVE_EXPLOSION"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_RESHIRAM",
+              "item": "ITEM_LIFE_ORB",
+              "ability": "ABILITY_TURBOBLAZE",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+              "moves": [
+                "MOVE_BLUE_FLARE",
+                "MOVE_DRAGON_PULSE",
+                "MOVE_SOLAR_BEAM",
+                "MOVE_EARTH_POWER"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_HO_OH",
+              "item": "ITEM_CHOICE_BAND",
+              "ability": "ABILITY_REGENERATOR",
+              "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+              "moves": [
+                "MOVE_BRAVE_BIRD",
+                "MOVE_SACRED_FIRE",
+                "MOVE_EARTHQUAKE",
+                "MOVE_DEFOG"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_VOLCANION",
+              "item": "ITEM_ASSAULT_VEST",
+              "ability": "ABILITY_WATER_ABSORB",
+              "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+              "moves": [
+                "MOVE_STEAM_ERUPTION",
+                "MOVE_FLAMETHROWER",
+                "MOVE_SOLAR_BEAM",
+                "MOVE_SLUDGE_BOMB"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_VOLCARONA",
+              "item": "ITEM_LEFTOVERS",
+              "ability": "ABILITY_FLAME_BODY",
+              "spread": "SPREAD_31_IV_HP_DEF_BOLD",
+              "moves": [
+                "MOVE_FIERY_DANCE",
+                "MOVE_GIGA_DRAIN",
+                "MOVE_QUIVER_DANCE",
+                "MOVE_PROTECT"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_BLAZIKEN",
+              "item": "ITEM_BLAZIKENITE",
+              "ability": "ABILITY_SPEED_BOOST",
+              "spread": "SPREAD_31_IV_ATK_SPEED_ADAMANT",
+              "moves": [
+                "MOVE_FLARE_BLITZ",
+                "MOVE_CLOSE_COMBAT",
+                "MOVE_STONE_EDGE",
+                "MOVE_SWORDS_DANCE"
+              ],
+              "role": null
+            }
+          ],
+          "source_reachability": "rematch-table-or-Wally-chain"
+        },
+        {
+          "tier": 4,
+          "trainer_id": "TRAINER_FLANNERY_4",
+          "format": "double",
+          "party_size": 6,
+          "quality_score": 94,
+          "issues": [],
+          "mega_count": 1,
+          "item_coverage": 1.0,
+          "complete_moveset_coverage": 1.0,
+          "level_offsets": [
+            3,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "team": [
+            {
+              "species": "SPECIES_TORKOAL",
+              "item": "ITEM_WHITE_HERB",
+              "ability": "ABILITY_DROUGHT",
+              "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+              "moves": [
+                "MOVE_OVERHEAT",
+                "MOVE_FISSURE",
+                "MOVE_YAWN",
+                "MOVE_EXPLOSION"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_RESHIRAM",
+              "item": "ITEM_LIFE_ORB",
+              "ability": "ABILITY_TURBOBLAZE",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+              "moves": [
+                "MOVE_BLUE_FLARE",
+                "MOVE_DRAGON_PULSE",
+                "MOVE_SOLAR_BEAM",
+                "MOVE_EARTH_POWER"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_HO_OH",
+              "item": "ITEM_FIRE_GEM",
+              "ability": "ABILITY_REGENERATOR",
+              "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+              "moves": [
+                "MOVE_BRAVE_BIRD",
+                "MOVE_SACRED_FIRE",
+                "MOVE_IRON_HEAD",
+                "MOVE_ROOST"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_VOLCANION",
+              "item": "ITEM_ASSAULT_VEST",
+              "ability": "ABILITY_WATER_ABSORB",
+              "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+              "moves": [
+                "MOVE_STEAM_ERUPTION",
+                "MOVE_HEAT_WAVE",
+                "MOVE_SOLAR_BEAM",
+                "MOVE_SLUDGE_BOMB"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_VOLCARONA",
+              "item": "ITEM_LEFTOVERS",
+              "ability": "ABILITY_FLAME_BODY",
+              "spread": "SPREAD_31_IV_HP_DEF_BOLD",
+              "moves": [
+                "MOVE_HEAT_WAVE",
+                "MOVE_GIGA_DRAIN",
+                "MOVE_QUIVER_DANCE",
+                "MOVE_ROOST"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_BLAZIKEN",
+              "item": "ITEM_BLAZIKENITE",
+              "ability": "ABILITY_SPEED_BOOST",
+              "spread": "SPREAD_31_IV_ATK_SPEED_ADAMANT",
+              "moves": [
+                "MOVE_FLARE_BLITZ",
+                "MOVE_CLOSE_COMBAT",
+                "MOVE_STONE_EDGE",
+                "MOVE_PROTECT"
+              ],
+              "role": null
+            }
+          ],
+          "source_reachability": "rematch-table-or-Wally-chain"
+        },
+        {
+          "tier": 5,
+          "trainer_id": "TRAINER_FLANNERY_5",
+          "format": "double",
+          "party_size": 6,
+          "quality_score": 92,
+          "issues": [],
+          "mega_count": 1,
+          "item_coverage": 1.0,
+          "complete_moveset_coverage": 1.0,
+          "level_offsets": [
+            3,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "team": [
+            {
+              "species": "SPECIES_TORKOAL",
+              "item": "ITEM_FIRE_GEM",
+              "ability": "ABILITY_DROUGHT",
+              "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+              "moves": [
+                "MOVE_HEAT_WAVE",
+                "MOVE_EARTH_POWER",
+                "MOVE_YAWN",
+                "MOVE_ATTRACT"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_ARCANINE",
+              "item": "ITEM_SITRUS_BERRY",
+              "ability": "ABILITY_INTIMIDATE",
+              "spread": "SPREAD_31_IV_HP_SPDEF_CALM",
+              "moves": [
+                "MOVE_FLAMETHROWER",
+                "MOVE_SNARL",
+                "MOVE_WILL_O_WISP",
+                "MOVE_PROTECT"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_VOLCARONA",
+              "item": "ITEM_CHARTI_BERRY",
+              "ability": "ABILITY_FLAME_BODY",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+              "moves": [
+                "MOVE_HEAT_WAVE",
+                "MOVE_SOLAR_BEAM",
+                "MOVE_QUIVER_DANCE",
+                "MOVE_RAGE_POWDER"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_BLAZIKEN",
+              "item": "ITEM_BLAZIKENITE",
+              "ability": "ABILITY_SPEED_BOOST",
+              "spread": "SPREAD_HP_ICE_MODEST",
+              "moves": [
+                "MOVE_HEAT_WAVE",
+                "MOVE_AURA_SPHERE",
+                "MOVE_HIDDEN_POWER",
+                "MOVE_PROTECT"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_CHANDELURE",
+              "item": "ITEM_CHOICE_SCARF",
+              "ability": "ABILITY_FLAME_BODY",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+              "moves": [
+                "MOVE_HEAT_WAVE",
+                "MOVE_SHADOW_BALL",
+                "MOVE_ENERGY_BALL",
+                "MOVE_WILL_O_WISP"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_TALONFLAME",
+              "item": "ITEM_WHITE_HERB",
+              "ability": "ABILITY_GALE_WINGS",
+              "spread": "SPREAD_31_IV_ATK_SPEED_NAUGHTY",
+              "moves": [
+                "MOVE_OVERHEAT",
+                "MOVE_BRAVE_BIRD",
+                "MOVE_SOLAR_BEAM",
+                "MOVE_ROOST"
+              ],
+              "role": null
+            }
+          ],
+          "source_reachability": "daily-postgame-script"
+        }
+      ],
+      "final_tier": "TRAINER_FLANNERY_5",
+      "final_target_difficulty": 10,
+      "final_observed_difficulty": null,
+      "format_contract": "mixed singles/doubles",
+      "progression_rule": "Earlier tiers remain distinct source-authored progression teams. The final tier is the marquee target-10 rematch; deliberate leader signatures and famous species may recur here."
+    },
+    "NORMAN": {
+      "status": {
+        "design": "source-reviewed",
+        "source": "implemented",
+        "static": "validated",
+        "runtime": "unplayed"
+      },
+      "records": [
+        {
+          "tier": 2,
+          "trainer_id": "TRAINER_NORMAN_2",
+          "format": "single",
+          "party_size": 6,
+          "quality_score": 79,
+          "issues": [],
+          "mega_count": 1,
+          "item_coverage": 1.0,
+          "complete_moveset_coverage": 1.0,
+          "level_offsets": [
+            0,
+            0,
+            0,
+            0,
+            2,
+            0
+          ],
+          "team": [
+            {
+              "species": "SPECIES_SWELLOW",
+              "item": "ITEM_FLAME_ORB",
+              "ability": "ABILITY_GUTS",
+              "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+              "moves": [
+                "MOVE_BRAVE_BIRD",
+                "MOVE_FACADE",
+                "MOVE_REVERSAL",
+                "MOVE_U_TURN"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_TAUROS",
+              "item": "ITEM_LIFE_ORB",
+              "ability": "ABILITY_SHEER_FORCE",
+              "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+              "moves": [
+                "MOVE_BODY_SLAM",
+                "MOVE_EARTHQUAKE",
+                "MOVE_THROAT_CHOP",
+                "MOVE_CLOSE_COMBAT"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_LINOONE",
+              "item": "ITEM_FIGY_BERRY",
+              "ability": "ABILITY_GLUTTONY",
+              "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+              "moves": [
+                "MOVE_EXTREME_SPEED",
+                "MOVE_BELLY_DRUM",
+                "MOVE_THROAT_CHOP",
+                "MOVE_SEED_BOMB"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_GIRAFARIG",
+              "item": "ITEM_PSYCHIC_GEM",
+              "ability": "ABILITY_CONTRARY",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+              "moves": [
+                "MOVE_PSYCHO_BOOST",
+                "MOVE_HYPER_VOICE",
+                "MOVE_DARK_PULSE",
+                "MOVE_THUNDERBOLT"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_SLAKING",
+              "item": "ITEM_LEFTOVERS",
+              "ability": "ABILITY_STALL",
+              "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+              "moves": [
+                "MOVE_BODY_SLAM",
+                "MOVE_SLACK_OFF",
+                "MOVE_NIGHT_SLASH",
+                "MOVE_EARTHQUAKE"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_KANGASKHAN",
+              "item": "ITEM_KANGASKHANITE",
+              "ability": "ABILITY_EARLY_BIRD",
+              "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+              "moves": [
+                "MOVE_RETURN",
+                "MOVE_CRUNCH",
+                "MOVE_SEISMIC_TOSS",
+                "MOVE_EARTHQUAKE"
+              ],
+              "role": null
+            }
+          ],
+          "source_reachability": "rematch-table-or-Wally-chain"
+        },
+        {
+          "tier": 3,
+          "trainer_id": "TRAINER_NORMAN_3",
+          "format": "single",
+          "party_size": 6,
+          "quality_score": 90,
+          "issues": [],
+          "mega_count": 1,
+          "item_coverage": 1.0,
+          "complete_moveset_coverage": 1.0,
+          "level_offsets": [
+            2,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "team": [
+            {
+              "species": "SPECIES_SLAKING",
+              "item": "ITEM_LEFTOVERS",
+              "ability": "ABILITY_TRUANT",
+              "spread": "SPREAD_31_IV_ATK_SPEED_ADAMANT",
+              "moves": [
+                "MOVE_BODY_SLAM",
+                "MOVE_SLACK_OFF",
+                "MOVE_NIGHT_SLASH",
+                "MOVE_EARTHQUAKE"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_CHANSEY",
+              "item": "ITEM_EVIOLITE",
+              "ability": "ABILITY_NATURAL_CURE",
+              "spread": "SPREAD_CHANSEY",
+              "moves": [
+                "MOVE_SEISMIC_TOSS",
+                "MOVE_SKILL_SWAP",
+                "MOVE_HEAL_PULSE",
+                "MOVE_ICY_WIND"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_TAUROS",
+              "item": "ITEM_LIFE_ORB",
+              "ability": "ABILITY_INTIMIDATE",
+              "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+              "moves": [
+                "MOVE_BODY_SLAM",
+                "MOVE_EARTHQUAKE",
+                "MOVE_ROCK_SLIDE",
+                "MOVE_CLOSE_COMBAT"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_STARAPTOR",
+              "item": "ITEM_SITRUS_BERRY",
+              "ability": "ABILITY_INTIMIDATE",
+              "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+              "moves": [
+                "MOVE_BRAVE_BIRD",
+                "MOVE_DOUBLE_EDGE",
+                "MOVE_CLOSE_COMBAT",
+                "MOVE_U_TURN"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_SNORLAX",
+              "item": "ITEM_CHOPLE_BERRY",
+              "ability": "ABILITY_GLUTTONY",
+              "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+              "moves": [
+                "MOVE_BODY_SLAM",
+                "MOVE_CRUNCH",
+                "MOVE_ZEN_HEADBUTT",
+                "MOVE_SLACK_OFF"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_KANGASKHAN",
+              "item": "ITEM_KANGASKHANITE",
+              "ability": "ABILITY_EARLY_BIRD",
+              "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+              "moves": [
+                "MOVE_RETURN",
+                "MOVE_CRUNCH",
+                "MOVE_SEISMIC_TOSS",
+                "MOVE_FAKE_OUT"
+              ],
+              "role": null
+            }
+          ],
+          "source_reachability": "rematch-table-or-Wally-chain"
+        },
+        {
+          "tier": 4,
+          "trainer_id": "TRAINER_NORMAN_4",
+          "format": "single",
+          "party_size": 6,
+          "quality_score": 88,
+          "issues": [],
+          "mega_count": 1,
+          "item_coverage": 1.0,
+          "complete_moveset_coverage": 1.0,
+          "level_offsets": [
+            0,
+            0,
+            0,
+            0,
+            2,
+            0
+          ],
+          "team": [
+            {
+              "species": "SPECIES_SWELLOW",
+              "item": "ITEM_FLAME_ORB",
+              "ability": "ABILITY_GUTS",
+              "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+              "moves": [
+                "MOVE_BRAVE_BIRD",
+                "MOVE_FACADE",
+                "MOVE_REVERSAL",
+                "MOVE_U_TURN"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_REGIGIGAS",
+              "item": "ITEM_ASSAULT_VEST",
+              "ability": "ABILITY_CLEAR_BODY",
+              "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+              "moves": [
+                "MOVE_BODY_SLAM",
+                "MOVE_EARTHQUAKE",
+                "MOVE_POWER_UP_PUNCH",
+                "MOVE_FIRE_PUNCH"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_ARCEUS",
+              "item": "ITEM_POWER_HERB",
+              "ability": "ABILITY_MULTITYPE",
+              "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+              "moves": [
+                "MOVE_EXTREME_SPEED",
+                "MOVE_SWORDS_DANCE",
+                "MOVE_EARTHQUAKE",
+                "MOVE_SHADOW_FORCE"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_MELOETTA",
+              "item": "ITEM_SHELL_BELL",
+              "ability": "ABILITY_SERENE_GRACE",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+              "moves": [
+                "MOVE_HYPER_VOICE",
+                "MOVE_PSYSHOCK",
+                "MOVE_SHADOW_BALL",
+                "MOVE_QUIVER_DANCE"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_SLAKING",
+              "item": "ITEM_LEFTOVERS",
+              "ability": "ABILITY_SLOW_START",
+              "spread": "SPREAD_31_IV_HP_SPEED_JOLLY",
+              "moves": [
+                "MOVE_BODY_SLAM",
+                "MOVE_SLACK_OFF",
+                "MOVE_NIGHT_SLASH",
+                "MOVE_BULK_UP"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_KANGASKHAN",
+              "item": "ITEM_KANGASKHANITE",
+              "ability": "ABILITY_EARLY_BIRD",
+              "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+              "moves": [
+                "MOVE_RETURN",
+                "MOVE_SUCKER_PUNCH",
+                "MOVE_POWER_UP_PUNCH",
+                "MOVE_CRUNCH"
+              ],
+              "role": null
+            }
+          ],
+          "source_reachability": "rematch-table-or-Wally-chain"
+        },
+        {
+          "tier": 5,
+          "trainer_id": "TRAINER_NORMAN_5",
+          "format": "single",
+          "party_size": 6,
+          "quality_score": 93,
+          "issues": [],
+          "mega_count": 1,
+          "item_coverage": 1.0,
+          "complete_moveset_coverage": 1.0,
+          "level_offsets": [
+            2,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "team": [
+            {
+              "species": "SPECIES_SLAKING",
+              "item": "ITEM_LEFTOVERS",
+              "ability": "ABILITY_TRUANT",
+              "spread": "SPREAD_31_IV_ATK_SPEED_ADAMANT",
+              "moves": [
+                "MOVE_BODY_SLAM",
+                "MOVE_SLACK_OFF",
+                "MOVE_NIGHT_SLASH",
+                "MOVE_EARTHQUAKE"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_CHANSEY",
+              "item": "ITEM_EVIOLITE",
+              "ability": "ABILITY_NATURAL_CURE",
+              "spread": "SPREAD_CHANSEY",
+              "moves": [
+                "MOVE_SEISMIC_TOSS",
+                "MOVE_SKILL_SWAP",
+                "MOVE_HEAL_PULSE",
+                "MOVE_ICY_WIND"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_TAUROS",
+              "item": "ITEM_LIFE_ORB",
+              "ability": "ABILITY_INTIMIDATE",
+              "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+              "moves": [
+                "MOVE_BODY_SLAM",
+                "MOVE_EARTHQUAKE",
+                "MOVE_ROCK_SLIDE",
+                "MOVE_CLOSE_COMBAT"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_STARAPTOR",
+              "item": "ITEM_SITRUS_BERRY",
+              "ability": "ABILITY_INTIMIDATE",
+              "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+              "moves": [
+                "MOVE_BRAVE_BIRD",
+                "MOVE_DOUBLE_EDGE",
+                "MOVE_CLOSE_COMBAT",
+                "MOVE_U_TURN"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_ARCEUS",
+              "item": "ITEM_POWER_HERB",
+              "ability": "ABILITY_MULTITYPE",
+              "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+              "moves": [
+                "MOVE_EXTREME_SPEED",
+                "MOVE_SWORDS_DANCE",
+                "MOVE_EARTHQUAKE",
+                "MOVE_SHADOW_FORCE"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_KANGASKHAN",
+              "item": "ITEM_KANGASKHANITE",
+              "ability": "ABILITY_EARLY_BIRD",
+              "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+              "moves": [
+                "MOVE_RETURN",
+                "MOVE_CRUNCH",
+                "MOVE_SEISMIC_TOSS",
+                "MOVE_FAKE_OUT"
+              ],
+              "role": null
+            }
+          ],
+          "source_reachability": "daily-postgame-script"
+        }
+      ],
+      "final_tier": "TRAINER_NORMAN_5",
+      "final_target_difficulty": 10,
+      "final_observed_difficulty": null,
+      "format_contract": "single",
+      "progression_rule": "Earlier tiers remain distinct source-authored progression teams. The final tier is the marquee target-10 rematch; deliberate leader signatures and famous species may recur here."
+    },
+    "WINONA": {
+      "status": {
+        "design": "source-reviewed",
+        "source": "implemented",
+        "static": "validated",
+        "runtime": "unplayed"
+      },
+      "records": [
+        {
+          "tier": 2,
+          "trainer_id": "TRAINER_WINONA_2",
+          "format": "double",
+          "party_size": 6,
+          "quality_score": 82,
+          "issues": [],
+          "mega_count": 1,
+          "item_coverage": 1.0,
+          "complete_moveset_coverage": 1.0,
+          "level_offsets": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            2
+          ],
+          "team": [
+            {
+              "species": "SPECIES_SKARMORY",
+              "item": "ITEM_CUSTAP_BERRY",
+              "ability": "ABILITY_STURDY",
+              "spread": "SPREAD_31_IV_HP_DEF_IMPISH",
+              "moves": [
+                "MOVE_STEEL_WING",
+                "MOVE_STEALTH_ROCK",
+                "MOVE_SPIKES",
+                "MOVE_WHIRLWIND"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_DRAGONITE",
+              "item": "ITEM_CHOICE_BAND",
+              "ability": "ABILITY_MULTISCALE",
+              "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+              "moves": [
+                "MOVE_OUTRAGE",
+                "MOVE_EARTHQUAKE",
+                "MOVE_FIRE_PUNCH",
+                "MOVE_EXTREME_SPEED"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_GYARADOS",
+              "item": "ITEM_LEFTOVERS",
+              "ability": "ABILITY_INTIMIDATE",
+              "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+              "moves": [
+                "MOVE_WATERFALL",
+                "MOVE_EARTHQUAKE",
+                "MOVE_SUBSTITUTE",
+                "MOVE_DRAGON_DANCE"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_TOGEKISS",
+              "item": "ITEM_CHOICE_SCARF",
+              "ability": "ABILITY_SERENE_GRACE",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+              "moves": [
+                "MOVE_AIR_SLASH",
+                "MOVE_MOONBLAST",
+                "MOVE_FIRE_BLAST",
+                "MOVE_AURA_SPHERE"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_SIGILYPH",
+              "item": "ITEM_FLAME_ORB",
+              "ability": "ABILITY_MAGIC_GUARD",
+              "spread": "SPREAD_31_IV_HP_SPEED_TIMID",
+              "moves": [
+                "MOVE_STORED_POWER",
+                "MOVE_COSMIC_POWER",
+                "MOVE_ROOST",
+                "MOVE_PSYCHO_SHIFT"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_ALTARIA",
+              "item": "ITEM_ALTARIANITE",
+              "ability": "ABILITY_CLOUD_NINE",
+              "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+              "moves": [
+                "MOVE_RETURN",
+                "MOVE_EARTHQUAKE",
+                "MOVE_ROOST",
+                "MOVE_DRAGON_DANCE"
+              ],
+              "role": null
+            }
+          ],
+          "source_reachability": "rematch-table-or-Wally-chain"
+        },
+        {
+          "tier": 3,
+          "trainer_id": "TRAINER_WINONA_3",
+          "format": "double",
+          "party_size": 6,
+          "quality_score": 91,
+          "issues": [],
+          "mega_count": 1,
+          "item_coverage": 1.0,
+          "complete_moveset_coverage": 1.0,
+          "level_offsets": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            3
+          ],
+          "team": [
+            {
+              "species": "SPECIES_GYARADOS",
+              "item": "ITEM_WACAN_BERRY",
+              "ability": "ABILITY_INTIMIDATE",
+              "spread": "SPREAD_31_IV_ATK_SPEED_ADAMANT",
+              "moves": [
+                "MOVE_WATERFALL",
+                "MOVE_EARTHQUAKE",
+                "MOVE_STONE_EDGE",
+                "MOVE_POWER_WHIP"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_HAWLUCHA",
+              "item": "ITEM_FLYING_GEM",
+              "ability": "ABILITY_UNBURDEN",
+              "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+              "moves": [
+                "MOVE_CLOSE_COMBAT",
+                "MOVE_BRAVE_BIRD",
+                "MOVE_ROCK_SLIDE",
+                "MOVE_ENCORE"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_DRAGONITE",
+              "item": "ITEM_YACHE_BERRY",
+              "ability": "ABILITY_MULTISCALE",
+              "spread": "SPREAD_31_IV_ATK_SPEED_ADAMANT",
+              "moves": [
+                "MOVE_WING_ATTACK",
+                "MOVE_EARTHQUAKE",
+                "MOVE_FIRE_PUNCH",
+                "MOVE_EXTREME_SPEED"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_AERODACTYL",
+              "item": "ITEM_LIFE_ORB",
+              "ability": "ABILITY_ROCK_HEAD",
+              "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+              "moves": [
+                "MOVE_ROCK_SLIDE",
+                "MOVE_BRAVE_BIRD",
+                "MOVE_EARTHQUAKE",
+                "MOVE_WIDE_GUARD"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_GLISCOR",
+              "item": "ITEM_TOXIC_ORB",
+              "ability": "ABILITY_POISON_HEAL",
+              "spread": "SPREAD_31_IV_HP_SPEED_JOLLY",
+              "moves": [
+                "MOVE_SWORDS_DANCE",
+                "MOVE_EARTHQUAKE",
+                "MOVE_WING_ATTACK",
+                "MOVE_KNOCK_OFF"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_ALTARIA",
+              "item": "ITEM_ALTARIANITE",
+              "ability": "ABILITY_CLOUD_NINE",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+              "moves": [
+                "MOVE_HYPER_VOICE",
+                "MOVE_FIRE_BLAST",
+                "MOVE_ROOST",
+                "MOVE_ICE_BEAM"
+              ],
+              "role": null
+            }
+          ],
+          "source_reachability": "rematch-table-or-Wally-chain"
+        },
+        {
+          "tier": 4,
+          "trainer_id": "TRAINER_WINONA_4",
+          "format": "double",
+          "party_size": 6,
+          "quality_score": 95,
+          "issues": [],
+          "mega_count": 0,
+          "item_coverage": 1.0,
+          "complete_moveset_coverage": 1.0,
+          "level_offsets": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            2
+          ],
+          "team": [
+            {
+              "species": "SPECIES_LANDORUS",
+              "item": "ITEM_LIFE_ORB",
+              "ability": "ABILITY_SHEER_FORCE",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+              "moves": [
+                "MOVE_EARTH_POWER",
+                "MOVE_SLUDGE_WAVE",
+                "MOVE_PSYCHIC",
+                "MOVE_STEALTH_ROCK"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_SHAYMIN_SKY",
+              "item": "ITEM_CHOICE_SCARF",
+              "ability": "ABILITY_SERENE_GRACE",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+              "moves": [
+                "MOVE_SEED_FLARE",
+                "MOVE_AIR_SLASH",
+                "MOVE_EARTH_POWER",
+                "MOVE_PSYCHIC"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_YVELTAL",
+              "item": "ITEM_SHELL_BELL",
+              "ability": "ABILITY_DARK_AURA",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_HASTY",
+              "moves": [
+                "MOVE_SUCKER_PUNCH",
+                "MOVE_OBLIVION_WING",
+                "MOVE_DARK_PULSE",
+                "MOVE_ROOST"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_ZAPDOS",
+              "item": "ITEM_LEFTOVERS",
+              "ability": "ABILITY_STATIC",
+              "spread": "SPREAD_31_IV_HP_DEF_BOLD",
+              "moves": [
+                "MOVE_HURRICANE",
+                "MOVE_DISCHARGE",
+                "MOVE_U_TURN",
+                "MOVE_ROOST"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_CELESTEELA",
+              "item": "ITEM_BIG_ROOT",
+              "ability": "ABILITY_BEAST_BOOST",
+              "spread": "SPREAD_31_IV_HP_SPDEF_CALM",
+              "moves": [
+                "MOVE_LEECH_SEED",
+                "MOVE_FLASH_CANNON",
+                "MOVE_GIGA_DRAIN",
+                "MOVE_PROTECT"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_RAYQUAZA",
+              "item": "ITEM_LIFE_ORB",
+              "ability": "ABILITY_AIR_LOCK",
+              "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+              "moves": [
+                "MOVE_DRAGON_ASCENT",
+                "MOVE_EARTHQUAKE",
+                "MOVE_EXTREME_SPEED",
+                "MOVE_SWORDS_DANCE"
+              ],
+              "role": null
+            }
+          ],
+          "source_reachability": "rematch-table-or-Wally-chain"
+        },
+        {
+          "tier": 5,
+          "trainer_id": "TRAINER_WINONA_5",
+          "format": "double",
+          "party_size": 6,
+          "quality_score": 97,
+          "issues": [],
+          "mega_count": 0,
+          "item_coverage": 1.0,
+          "complete_moveset_coverage": 1.0,
+          "level_offsets": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            2
+          ],
+          "team": [
+            {
+              "species": "SPECIES_LANDORUS_THERIAN",
+              "item": "ITEM_ASSAULT_VEST",
+              "ability": "ABILITY_INTIMIDATE",
+              "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+              "moves": [
+                "MOVE_ROCK_SLIDE",
+                "MOVE_EARTHQUAKE",
+                "MOVE_U_TURN",
+                "MOVE_KNOCK_OFF"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_SHAYMIN_SKY",
+              "item": "ITEM_GRASS_GEM",
+              "ability": "ABILITY_SERENE_GRACE",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+              "moves": [
+                "MOVE_SEED_FLARE",
+                "MOVE_AIR_SLASH",
+                "MOVE_EARTH_POWER",
+                "MOVE_PSYCHIC"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_YVELTAL",
+              "item": "ITEM_SHELL_BELL",
+              "ability": "ABILITY_DARK_AURA",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_HASTY",
+              "moves": [
+                "MOVE_SUCKER_PUNCH",
+                "MOVE_OBLIVION_WING",
+                "MOVE_DARK_PULSE",
+                "MOVE_ROOST"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_LUGIA",
+              "item": "ITEM_SITRUS_BERRY",
+              "ability": "ABILITY_MULTISCALE",
+              "spread": "SPREAD_31_IV_HP_SPEED_TIMID",
+              "moves": [
+                "MOVE_AEROBLAST",
+                "MOVE_PSYCHIC",
+                "MOVE_TAILWIND",
+                "MOVE_ROOST"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_CELESTEELA",
+              "item": "ITEM_BIG_ROOT",
+              "ability": "ABILITY_BEAST_BOOST",
+              "spread": "SPREAD_31_IV_HP_SPDEF_CALM",
+              "moves": [
+                "MOVE_LEECH_SEED",
+                "MOVE_FLASH_CANNON",
+                "MOVE_GIGA_DRAIN",
+                "MOVE_PROTECT"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_RAYQUAZA",
+              "item": "ITEM_WHITE_HERB",
+              "ability": "ABILITY_AIR_LOCK",
+              "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+              "moves": [
+                "MOVE_DRAGON_ASCENT",
+                "MOVE_EARTHQUAKE",
+                "MOVE_EXTREME_SPEED",
+                "MOVE_V_CREATE"
+              ],
+              "role": null
+            }
+          ],
+          "source_reachability": "daily-postgame-script"
+        }
+      ],
+      "final_tier": "TRAINER_WINONA_5",
+      "final_target_difficulty": 10,
+      "final_observed_difficulty": null,
+      "format_contract": "double",
+      "progression_rule": "Earlier tiers remain distinct source-authored progression teams. The final tier is the marquee target-10 rematch; deliberate leader signatures and famous species may recur here."
+    },
+    "TATE_AND_LIZA": {
+      "status": {
+        "design": "source-reviewed",
+        "source": "implemented",
+        "static": "validated",
+        "runtime": "unplayed"
+      },
+      "records": [
+        {
+          "tier": 2,
+          "trainer_id": "TRAINER_TATE_AND_LIZA_2",
+          "format": "double",
+          "party_size": 6,
+          "quality_score": 86,
+          "issues": [],
+          "mega_count": 1,
+          "item_coverage": 1.0,
+          "complete_moveset_coverage": 1.0,
+          "level_offsets": [
+            2,
+            2,
+            2,
+            2,
+            3,
+            3
+          ],
+          "team": [
+            {
+              "species": "SPECIES_SLOWBRO",
+              "item": "ITEM_SLOWBRONITE",
+              "ability": "ABILITY_OBLIVIOUS",
+              "spread": "SPREAD_31_IV_HP_SPATK_QUIET",
+              "moves": [
+                "MOVE_SURF",
+                "MOVE_PSYCHIC",
+                "MOVE_ICE_BEAM",
+                "MOVE_CALM_MIND"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_CLAYDOL",
+              "item": "ITEM_ABSORB_BULB",
+              "ability": "ABILITY_LEVITATE",
+              "spread": "SPREAD_31_IV_HP_DEF_SPDEF_SASSY",
+              "moves": [
+                "MOVE_EARTH_POWER",
+                "MOVE_SIGNAL_BEAM",
+                "MOVE_PSYCHIC",
+                "MOVE_TRICK_ROOM"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_EXEGGUTOR",
+              "item": "ITEM_EXPERT_BELT",
+              "ability": "ABILITY_CHLOROPLAST",
+              "spread": "SPREAD_31_IV_HP_SPATK_QUIET",
+              "moves": [
+                "MOVE_PSYCHIC",
+                "MOVE_SLUDGE_BOMB",
+                "MOVE_SOLAR_BEAM",
+                "MOVE_TRICK_ROOM"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_REUNICLUS",
+              "item": "ITEM_LIFE_ORB",
+              "ability": "ABILITY_MAGIC_GUARD",
+              "spread": "SPREAD_31_IV_HP_SPATK_QUIET",
+              "moves": [
+                "MOVE_PSYCHIC",
+                "MOVE_AURA_SPHERE",
+                "MOVE_THUNDER",
+                "MOVE_CALM_MIND"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_LUNATONE",
+              "item": "ITEM_GHOST_GEM",
+              "ability": "ABILITY_LEVITATE",
+              "spread": "SPREAD_31_IV_HP_SPATK_QUIET",
+              "moves": [
+                "MOVE_POWER_GEM",
+                "MOVE_SHADOW_BALL",
+                "MOVE_GRASS_KNOT",
+                "MOVE_CALM_MIND"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_SOLROCK",
+              "item": "ITEM_WEAKNESS_POLICY",
+              "ability": "ABILITY_LEVITATE",
+              "spread": "SPREAD_31_IV_HP_ATK_BRAVE",
+              "moves": [
+                "MOVE_FLARE_BLITZ",
+                "MOVE_ROCK_SLIDE",
+                "MOVE_ZEN_HEADBUTT",
+                "MOVE_ROCK_POLISH"
+              ],
+              "role": null
+            }
+          ],
+          "source_reachability": "rematch-table-or-Wally-chain"
+        },
+        {
+          "tier": 3,
+          "trainer_id": "TRAINER_TATE_AND_LIZA_3",
+          "format": "double",
+          "party_size": 6,
+          "quality_score": 97,
+          "issues": [],
+          "mega_count": 1,
+          "item_coverage": 1.0,
+          "complete_moveset_coverage": 1.0,
+          "level_offsets": [
+            2,
+            2,
+            2,
+            2,
+            3,
+            3
+          ],
+          "team": [
+            {
+              "species": "SPECIES_SLOWBRO",
+              "item": "ITEM_SLOWBRONITE",
+              "ability": "ABILITY_OBLIVIOUS",
+              "spread": "SPREAD_31_IV_HP_SPATK_QUIET",
+              "moves": [
+                "MOVE_MUDDY_WATER",
+                "MOVE_PSYCHIC",
+                "MOVE_ICE_BEAM",
+                "MOVE_CALM_MIND"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_LUNALA",
+              "item": "ITEM_SITRUS_BERRY",
+              "ability": "ABILITY_SHADOW_SHIELD",
+              "spread": "SPREAD_31_IV_HP_SPATK_QUIET",
+              "moves": [
+                "MOVE_MOONGEIST_BEAM",
+                "MOVE_SIGNAL_BEAM",
+                "MOVE_PSYCHIC",
+                "MOVE_TRICK_ROOM"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_TAPU_LELE",
+              "item": "ITEM_PSYCHIC_SEED",
+              "ability": "ABILITY_PSYCHIC_SURGE",
+              "spread": "SPREAD_31_IV_HP_SPATK_QUIET",
+              "moves": [
+                "MOVE_PSYCHIC",
+                "MOVE_MOONBLAST",
+                "MOVE_FOCUS_BLAST",
+                "MOVE_ENERGY_BALL"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_CRESSELIA",
+              "item": "ITEM_SHELL_BELL",
+              "ability": "ABILITY_LEVITATE",
+              "spread": "SPREAD_31_IV_HP_DEF_BOLD",
+              "moves": [
+                "MOVE_PSYSHOCK",
+                "MOVE_MOONBLAST",
+                "MOVE_MOONLIGHT",
+                "MOVE_CALM_MIND"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_VICTINI",
+              "item": "ITEM_FIRE_GEM",
+              "ability": "ABILITY_VICTORY_STAR",
+              "spread": "SPREAD_31_IV_HP_ATK_BRAVE",
+              "moves": [
+                "MOVE_V_CREATE",
+                "MOVE_ZEN_HEADBUTT",
+                "MOVE_BOLT_STRIKE",
+                "MOVE_U_TURN"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_CALYREX_ICE_RIDER",
+              "item": "ITEM_WEAKNESS_POLICY",
+              "ability": "ABILITY_AS_ONE_ICE_RIDER",
+              "spread": "SPREAD_31_IV_HP_ATK_BRAVE",
+              "moves": [
+                "MOVE_GLACIAL_LANCE",
+                "MOVE_ZEN_HEADBUTT",
+                "MOVE_MEGAHORN",
+                "MOVE_TRICK_ROOM"
+              ],
+              "role": null
+            }
+          ],
+          "source_reachability": "rematch-table-or-Wally-chain"
+        },
+        {
+          "tier": 4,
+          "trainer_id": "TRAINER_TATE_AND_LIZA_4",
+          "format": "double",
+          "party_size": 6,
+          "quality_score": 100,
+          "issues": [],
+          "mega_count": 1,
+          "item_coverage": 1.0,
+          "complete_moveset_coverage": 1.0,
+          "level_offsets": [
+            1,
+            1,
+            2,
+            2,
+            3,
+            3
+          ],
+          "team": [
+            {
+              "species": "SPECIES_INDEEDEE_FEMALE",
+              "item": "ITEM_PSYCHIC_SEED",
+              "ability": "ABILITY_PSYCHIC_SURGE",
+              "spread": "SPREAD_31_IV_HP_SPDEF_CALM",
+              "moves": [
+                "MOVE_FOLLOW_ME",
+                "MOVE_HELPING_HAND",
+                "MOVE_EXPANDING_FORCE",
+                "MOVE_PROTECT"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_MEWTWO",
+              "item": "ITEM_MEWTWONITE_Y",
+              "ability": "ABILITY_PRESSURE",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+              "moves": [
+                "MOVE_EXPANDING_FORCE",
+                "MOVE_AURA_SPHERE",
+                "MOVE_ICE_BEAM",
+                "MOVE_PROTECT"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_STAKATAKA",
+              "item": "ITEM_WEAKNESS_POLICY",
+              "ability": "ABILITY_BEAST_BOOST",
+              "spread": "SPREAD_STAKATAKA",
+              "moves": [
+                "MOVE_TRICK_ROOM",
+                "MOVE_ROCK_SLIDE",
+                "MOVE_GYRO_BALL",
+                "MOVE_PROTECT"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_JIRACHI",
+              "item": "ITEM_SITRUS_BERRY",
+              "ability": "ABILITY_SERENE_GRACE",
+              "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+              "moves": [
+                "MOVE_IRON_HEAD",
+                "MOVE_ICY_WIND",
+                "MOVE_FOLLOW_ME",
+                "MOVE_HELPING_HAND"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_HOOPA_UNBOUND",
+              "item": "ITEM_LIFE_ORB",
+              "ability": "ABILITY_MAGICIAN",
+              "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+              "moves": [
+                "MOVE_HYPERSPACE_FURY",
+                "MOVE_ZEN_HEADBUTT",
+                "MOVE_GUNK_SHOT",
+                "MOVE_PROTECT"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_NECROZMA_DAWN_WINGS",
+              "item": "ITEM_POWER_HERB",
+              "ability": "ABILITY_PRISM_ARMOR",
+              "spread": "SPREAD_31_IV_HP_SPATK_QUIET",
+              "moves": [
+                "MOVE_MOONGEIST_BEAM",
+                "MOVE_METEOR_BEAM",
+                "MOVE_TRICK_ROOM",
+                "MOVE_PROTECT"
+              ],
+              "role": null
+            }
+          ],
+          "source_reachability": "rematch-table-or-Wally-chain"
+        }
+      ],
+      "final_tier": "TRAINER_TATE_AND_LIZA_4",
+      "final_target_difficulty": 10,
+      "final_observed_difficulty": null,
+      "format_contract": "double",
+      "progression_rule": "Earlier tiers remain distinct source-authored progression teams. The final tier is the marquee target-10 rematch; deliberate leader signatures and famous species may recur here."
+    },
+    "JUAN": {
+      "status": {
+        "design": "source-reviewed",
+        "source": "implemented",
+        "static": "validated",
+        "runtime": "unplayed"
+      },
+      "records": [
+        {
+          "tier": 2,
+          "trainer_id": "TRAINER_JUAN_2",
+          "format": "double",
+          "party_size": 6,
+          "quality_score": 83,
+          "issues": [],
+          "mega_count": 1,
+          "item_coverage": 1.0,
+          "complete_moveset_coverage": 1.0,
+          "level_offsets": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "team": [
+            {
+              "species": "SPECIES_POLITOED",
+              "item": "ITEM_EJECT_BUTTON",
+              "ability": "ABILITY_DRIZZLE",
+              "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+              "moves": [
+                "MOVE_SCALD",
+                "MOVE_BOOMBURST",
+                "MOVE_EARTH_POWER",
+                "MOVE_PERISH_SONG"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_LUDICOLO",
+              "item": "ITEM_WHITE_HERB",
+              "ability": "ABILITY_SWIFT_SWIM",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+              "moves": [
+                "MOVE_LEAF_STORM",
+                "MOVE_HYDRO_PUMP",
+                "MOVE_ICE_BEAM",
+                "MOVE_FOCUS_BLAST"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_KABUTOPS",
+              "item": "ITEM_FOCUS_SASH",
+              "ability": "ABILITY_SWIFT_SWIM",
+              "spread": "SPREAD_31_IV_ATK_SPEED_ADAMANT",
+              "moves": [
+                "MOVE_LIQUIDATION",
+                "MOVE_STONE_EDGE",
+                "MOVE_LEECH_LIFE",
+                "MOVE_SWORDS_DANCE"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_LAPRAS",
+              "item": "ITEM_ASSAULT_VEST",
+              "ability": "ABILITY_HYDRATION",
+              "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+              "moves": [
+                "MOVE_HYDRO_PUMP",
+                "MOVE_FREEZE_DRY",
+                "MOVE_THUNDER",
+                "MOVE_PSYCHIC"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_SWAMPERT",
+              "item": "ITEM_LIFE_ORB",
+              "ability": "ABILITY_SWIFT_SWIM",
+              "spread": "SPREAD_31_IV_ATK_SPEED_ADAMANT",
+              "moves": [
+                "MOVE_LIQUIDATION",
+                "MOVE_EARTHQUAKE",
+                "MOVE_ICE_PUNCH",
+                "MOVE_SUPERPOWER"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_KINGDRA",
+              "item": "ITEM_KINGDRANITE",
+              "ability": "ABILITY_SWIFT_SWIM",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_MODEST",
+              "moves": [
+                "MOVE_HYDRO_PUMP",
+                "MOVE_HURRICANE",
+                "MOVE_DRACO_METEOR",
+                "MOVE_PROTECT"
+              ],
+              "role": null
+            }
+          ],
+          "source_reachability": "rematch-table-or-Wally-chain"
+        },
+        {
+          "tier": 3,
+          "trainer_id": "TRAINER_JUAN_3",
+          "format": "double",
+          "party_size": 6,
+          "quality_score": 86,
+          "issues": [],
+          "mega_count": 1,
+          "item_coverage": 1.0,
+          "complete_moveset_coverage": 1.0,
+          "level_offsets": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "team": [
+            {
+              "species": "SPECIES_POLITOED",
+              "item": "ITEM_EJECT_BUTTON",
+              "ability": "ABILITY_DRIZZLE",
+              "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+              "moves": [
+                "MOVE_SURF",
+                "MOVE_PROTECT",
+                "MOVE_EARTH_POWER",
+                "MOVE_PSYCHIC"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_LUDICOLO",
+              "item": "ITEM_ABSORB_BULB",
+              "ability": "ABILITY_SWIFT_SWIM",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+              "moves": [
+                "MOVE_LEAF_STORM",
+                "MOVE_SURF",
+                "MOVE_ICE_BEAM",
+                "MOVE_FOCUS_BLAST"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_GASTRODON_EAST_SEA",
+              "item": "ITEM_FOCUS_SASH",
+              "ability": "ABILITY_STORM_DRAIN",
+              "spread": "SPREAD_31_IV_HP_DEF_BOLD",
+              "moves": [
+                "MOVE_MUDDY_WATER",
+                "MOVE_EARTH_POWER",
+                "MOVE_ICE_BEAM",
+                "MOVE_RECOVER"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_LAPRAS",
+              "item": "ITEM_ASSAULT_VEST",
+              "ability": "ABILITY_WATER_ABSORB",
+              "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+              "moves": [
+                "MOVE_SURF",
+                "MOVE_FREEZE_DRY",
+                "MOVE_THUNDER",
+                "MOVE_PSYCHIC"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_SWAMPERT",
+              "item": "ITEM_GROUND_GEM",
+              "ability": "ABILITY_SWIFT_SWIM",
+              "spread": "SPREAD_31_IV_ATK_SPEED_ADAMANT",
+              "moves": [
+                "MOVE_LIQUIDATION",
+                "MOVE_HIGH_HORSEPOWER",
+                "MOVE_ICE_PUNCH",
+                "MOVE_SUPERPOWER"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_KINGDRA",
+              "item": "ITEM_KINGDRANITE",
+              "ability": "ABILITY_SWIFT_SWIM",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_MODEST",
+              "moves": [
+                "MOVE_MUDDY_WATER",
+                "MOVE_HURRICANE",
+                "MOVE_DRACO_METEOR",
+                "MOVE_FLASH_CANNON"
+              ],
+              "role": null
+            }
+          ],
+          "source_reachability": "rematch-table-or-Wally-chain"
+        },
+        {
+          "tier": 4,
+          "trainer_id": "TRAINER_JUAN_4",
+          "format": "double",
+          "party_size": 6,
+          "quality_score": 89,
+          "issues": [],
+          "mega_count": 1,
+          "item_coverage": 1.0,
+          "complete_moveset_coverage": 1.0,
+          "level_offsets": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "team": [
+            {
+              "species": "SPECIES_KYOGRE",
+              "item": "ITEM_CHOICE_SCARF",
+              "ability": "ABILITY_DRIZZLE",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+              "moves": [
+                "MOVE_WATER_SPOUT",
+                "MOVE_ICE_BEAM",
+                "MOVE_THUNDER",
+                "MOVE_ORIGIN_PULSE"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_MANAPHY",
+              "item": "ITEM_LEFTOVERS",
+              "ability": "ABILITY_HYDRATION",
+              "spread": "SPREAD_31_IV_HP_SPEED_TIMID",
+              "moves": [
+                "MOVE_CALM_MIND",
+                "MOVE_SCALD",
+                "MOVE_ICE_BEAM",
+                "MOVE_REST"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_KABUTOPS",
+              "item": "ITEM_FOCUS_SASH",
+              "ability": "ABILITY_SWIFT_SWIM",
+              "spread": "SPREAD_31_IV_ATK_SPEED_ADAMANT",
+              "moves": [
+                "MOVE_LIQUIDATION",
+                "MOVE_STONE_EDGE",
+                "MOVE_LEECH_LIFE",
+                "MOVE_SWORDS_DANCE"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_PALKIA",
+              "item": "ITEM_ASSAULT_VEST",
+              "ability": "ABILITY_PRESSURE",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+              "moves": [
+                "MOVE_HYDRO_PUMP",
+                "MOVE_SPACIAL_REND",
+                "MOVE_THUNDER",
+                "MOVE_EARTH_POWER"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_SWAMPERT",
+              "item": "ITEM_RINDO_BERRY",
+              "ability": "ABILITY_SWIFT_SWIM",
+              "spread": "SPREAD_31_IV_ATK_SPEED_ADAMANT",
+              "moves": [
+                "MOVE_LIQUIDATION",
+                "MOVE_EARTHQUAKE",
+                "MOVE_ICE_PUNCH",
+                "MOVE_BULK_UP"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_KINGDRA",
+              "item": "ITEM_KINGDRANITE",
+              "ability": "ABILITY_SWIFT_SWIM",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_MODEST",
+              "moves": [
+                "MOVE_HYDRO_PUMP",
+                "MOVE_HURRICANE",
+                "MOVE_DRACO_METEOR",
+                "MOVE_PROTECT"
+              ],
+              "role": null
+            }
+          ],
+          "source_reachability": "rematch-table-or-Wally-chain"
+        },
+        {
+          "tier": 5,
+          "trainer_id": "TRAINER_JUAN_5",
+          "format": "double",
+          "party_size": 6,
+          "quality_score": 87,
+          "issues": [],
+          "mega_count": 1,
+          "item_coverage": 1.0,
+          "complete_moveset_coverage": 1.0,
+          "level_offsets": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "team": [
+            {
+              "species": "SPECIES_KYOGRE",
+              "item": "ITEM_CHOICE_SCARF",
+              "ability": "ABILITY_DRIZZLE",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+              "moves": [
+                "MOVE_WATER_SPOUT",
+                "MOVE_ICE_BEAM",
+                "MOVE_THUNDER",
+                "MOVE_ORIGIN_PULSE"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_LUDICOLO",
+              "item": "ITEM_WHITE_HERB",
+              "ability": "ABILITY_SWIFT_SWIM",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+              "moves": [
+                "MOVE_LEAF_STORM",
+                "MOVE_MUDDY_WATER",
+                "MOVE_ICE_BEAM",
+                "MOVE_FOCUS_BLAST"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_GASTRODON_EAST_SEA",
+              "item": "ITEM_FOCUS_SASH",
+              "ability": "ABILITY_STORM_DRAIN",
+              "spread": "SPREAD_31_IV_HP_DEF_BOLD",
+              "moves": [
+                "MOVE_MUDDY_WATER",
+                "MOVE_EARTH_POWER",
+                "MOVE_ICE_BEAM",
+                "MOVE_RECOVER"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_PALKIA",
+              "item": "ITEM_ASSAULT_VEST",
+              "ability": "ABILITY_PRESSURE",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+              "moves": [
+                "MOVE_MUDDY_WATER",
+                "MOVE_SPACIAL_REND",
+                "MOVE_THUNDER",
+                "MOVE_EARTH_POWER"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_SWAMPERT",
+              "item": "ITEM_ICE_GEM",
+              "ability": "ABILITY_SWIFT_SWIM",
+              "spread": "SPREAD_31_IV_ATK_SPEED_ADAMANT",
+              "moves": [
+                "MOVE_LIQUIDATION",
+                "MOVE_HIGH_HORSEPOWER",
+                "MOVE_ICE_PUNCH",
+                "MOVE_SUPERPOWER"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_KINGDRA",
+              "item": "ITEM_KINGDRANITE",
+              "ability": "ABILITY_SWIFT_SWIM",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_MODEST",
+              "moves": [
+                "MOVE_MUDDY_WATER",
+                "MOVE_HURRICANE",
+                "MOVE_DRACO_METEOR",
+                "MOVE_PROTECT"
+              ],
+              "role": null
+            }
+          ],
+          "source_reachability": "daily-postgame-script"
+        }
+      ],
+      "final_tier": "TRAINER_JUAN_5",
+      "final_target_difficulty": 10,
+      "final_observed_difficulty": null,
+      "format_contract": "double",
+      "progression_rule": "Earlier tiers remain distinct source-authored progression teams. The final tier is the marquee target-10 rematch; deliberate leader signatures and famous species may recur here."
+    },
+    "WALLY": {
+      "status": {
+        "design": "source-reviewed",
+        "source": "implemented",
+        "static": "validated",
+        "runtime": "unplayed"
+      },
+      "records": [
+        {
+          "tier": 2,
+          "trainer_id": "TRAINER_WALLY_VR_2",
+          "format": "double",
+          "party_size": 6,
+          "quality_score": 98,
+          "issues": [],
+          "mega_count": 1,
+          "item_coverage": 1.0,
+          "complete_moveset_coverage": 1.0,
+          "level_offsets": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            2
+          ],
+          "team": [
+            {
+              "species": "SPECIES_INDEEDEE_FEMALE",
+              "item": "ITEM_PSYCHIC_SEED",
+              "ability": "ABILITY_PSYCHIC_SURGE",
+              "spread": "SPREAD_31_IV_HP_SPDEF_CALM",
+              "moves": [
+                "MOVE_FOLLOW_ME",
+                "MOVE_HELPING_HAND",
+                "MOVE_EXPANDING_FORCE",
+                "MOVE_PROTECT"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_GALLADE",
+              "item": "ITEM_GALLADITE",
+              "ability": "ABILITY_JUSTIFIED",
+              "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+              "moves": [
+                "MOVE_PSYCHO_CUT",
+                "MOVE_CLOSE_COMBAT",
+                "MOVE_KNOCK_OFF",
+                "MOVE_PROTECT"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_DRAGAPULT",
+              "item": "ITEM_LIFE_ORB",
+              "ability": "ABILITY_INFILTRATOR",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+              "moves": [
+                "MOVE_DRACO_METEOR",
+                "MOVE_SHADOW_BALL",
+                "MOVE_WILL_O_WISP",
+                "MOVE_PROTECT"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_HEATRAN",
+              "item": "ITEM_SHUCA_BERRY",
+              "ability": "ABILITY_FLASH_FIRE",
+              "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+              "moves": [
+                "MOVE_ERUPTION",
+                "MOVE_EARTH_POWER",
+                "MOVE_FLASH_CANNON",
+                "MOVE_PROTECT"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_INCINEROAR",
+              "item": "ITEM_EJECT_BUTTON",
+              "ability": "ABILITY_INTIMIDATE",
+              "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+              "moves": [
+                "MOVE_FAKE_OUT",
+                "MOVE_FLARE_BLITZ",
+                "MOVE_SNARL",
+                "MOVE_PARTING_SHOT"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_SUICUNE",
+              "item": "ITEM_SITRUS_BERRY",
+              "ability": "ABILITY_INNER_FOCUS",
+              "spread": "SPREAD_31_IV_HP_DEF_BOLD",
+              "moves": [
+                "MOVE_TAILWIND",
+                "MOVE_SCALD",
+                "MOVE_ICY_WIND",
+                "MOVE_PROTECT"
+              ],
+              "role": null
+            }
+          ],
+          "source_reachability": "rematch-table-or-Wally-chain"
+        },
+        {
+          "tier": 3,
+          "trainer_id": "TRAINER_WALLY_VR_3",
+          "format": "double",
+          "party_size": 6,
+          "quality_score": 93,
+          "issues": [],
+          "mega_count": 1,
+          "item_coverage": 1.0,
+          "complete_moveset_coverage": 1.0,
+          "level_offsets": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            2
+          ],
+          "team": [
+            {
+              "species": "SPECIES_TYRANITAR",
+              "item": "ITEM_SMOOTH_ROCK",
+              "ability": "ABILITY_SAND_STREAM",
+              "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+              "moves": [
+                "MOVE_ROCK_SLIDE",
+                "MOVE_CRUNCH",
+                "MOVE_LOW_KICK",
+                "MOVE_PROTECT"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_EXCADRILL",
+              "item": "ITEM_FOCUS_SASH",
+              "ability": "ABILITY_SAND_RUSH",
+              "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+              "moves": [
+                "MOVE_HIGH_HORSEPOWER",
+                "MOVE_IRON_HEAD",
+                "MOVE_ROCK_SLIDE",
+                "MOVE_PROTECT"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_ROTOM_WASH",
+              "item": "ITEM_SITRUS_BERRY",
+              "ability": "ABILITY_LEVITATE",
+              "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+              "moves": [
+                "MOVE_HYDRO_PUMP",
+                "MOVE_VOLT_SWITCH",
+                "MOVE_WILL_O_WISP",
+                "MOVE_PROTECT"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_TOGEKISS",
+              "item": "ITEM_BABIRI_BERRY",
+              "ability": "ABILITY_SERENE_GRACE",
+              "spread": "SPREAD_31_IV_HP_DEF_BOLD",
+              "moves": [
+                "MOVE_FOLLOW_ME",
+                "MOVE_AIR_SLASH",
+                "MOVE_TAILWIND",
+                "MOVE_HELPING_HAND"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_ROSERADE",
+              "item": "ITEM_FOCUS_SASH",
+              "ability": "ABILITY_TECHNICIAN",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+              "moves": [
+                "MOVE_SLEEP_POWDER",
+                "MOVE_SLUDGE_BOMB",
+                "MOVE_LEAF_STORM",
+                "MOVE_PROTECT"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_GALLADE",
+              "item": "ITEM_GALLADITE",
+              "ability": "ABILITY_JUSTIFIED",
+              "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+              "moves": [
+                "MOVE_PSYCHO_CUT",
+                "MOVE_CLOSE_COMBAT",
+                "MOVE_WIDE_GUARD",
+                "MOVE_PROTECT"
+              ],
+              "role": null
+            }
+          ],
+          "source_reachability": "rematch-table-or-Wally-chain"
+        },
+        {
+          "tier": 4,
+          "trainer_id": "TRAINER_WALLY_VR_4",
+          "format": "double",
+          "party_size": 6,
+          "quality_score": 94,
+          "issues": [],
+          "mega_count": 1,
+          "item_coverage": 1.0,
+          "complete_moveset_coverage": 1.0,
+          "level_offsets": [
+            2,
+            2,
+            3,
+            3,
+            4,
+            4
+          ],
+          "team": [
+            {
+              "species": "SPECIES_PELIPPER",
+              "item": "ITEM_DAMP_ROCK",
+              "ability": "ABILITY_DRIZZLE",
+              "spread": "SPREAD_31_IV_HP_DEF_BOLD",
+              "moves": [
+                "MOVE_TAILWIND",
+                "MOVE_HURRICANE",
+                "MOVE_SCALD",
+                "MOVE_PROTECT"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_ZAPDOS",
+              "item": "ITEM_LIFE_ORB",
+              "ability": "ABILITY_STATIC",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+              "moves": [
+                "MOVE_THUNDER",
+                "MOVE_HURRICANE",
+                "MOVE_HEAT_WAVE",
+                "MOVE_PROTECT"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_BARRASKEWDA",
+              "item": "ITEM_FOCUS_SASH",
+              "ability": "ABILITY_SWIFT_SWIM",
+              "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+              "moves": [
+                "MOVE_LIQUIDATION",
+                "MOVE_CLOSE_COMBAT",
+                "MOVE_PSYCHIC_FANGS",
+                "MOVE_PROTECT"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_FERROTHORN",
+              "item": "ITEM_ROCKY_HELMET",
+              "ability": "ABILITY_IRON_BARBS",
+              "spread": "SPREAD_31_IV_HP_ATK_BRAVE",
+              "moves": [
+                "MOVE_POWER_WHIP",
+                "MOVE_GYRO_BALL",
+                "MOVE_LEECH_SEED",
+                "MOVE_PROTECT"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_DRAGAPULT",
+              "item": "ITEM_CHOICE_SPECS",
+              "ability": "ABILITY_INFILTRATOR",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+              "moves": [
+                "MOVE_DRACO_METEOR",
+                "MOVE_SHADOW_BALL",
+                "MOVE_THUNDER",
+                "MOVE_U_TURN"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_GALLADE",
+              "item": "ITEM_GALLADITE",
+              "ability": "ABILITY_JUSTIFIED",
+              "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+              "moves": [
+                "MOVE_PSYCHO_CUT",
+                "MOVE_CLOSE_COMBAT",
+                "MOVE_KNOCK_OFF",
+                "MOVE_PROTECT"
+              ],
+              "role": null
+            }
+          ],
+          "source_reachability": "rematch-table-or-Wally-chain"
+        },
+        {
+          "tier": 5,
+          "trainer_id": "TRAINER_WALLY_VR_5",
+          "format": "double",
+          "party_size": 6,
+          "quality_score": 100,
+          "issues": [],
+          "mega_count": 1,
+          "item_coverage": 1.0,
+          "complete_moveset_coverage": 1.0,
+          "level_offsets": [
+            2,
+            2,
+            3,
+            3,
+            4,
+            4
+          ],
+          "team": [
+            {
+              "species": "SPECIES_JIRACHI",
+              "item": "ITEM_SITRUS_BERRY",
+              "ability": "ABILITY_SERENE_GRACE",
+              "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
+              "moves": [
+                "MOVE_FOLLOW_ME",
+                "MOVE_ICY_WIND",
+                "MOVE_IRON_HEAD",
+                "MOVE_HELPING_HAND"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_TAPU_FINI",
+              "item": "ITEM_LEFTOVERS",
+              "ability": "ABILITY_MISTY_SURGE",
+              "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+              "moves": [
+                "MOVE_MUDDY_WATER",
+                "MOVE_MOONBLAST",
+                "MOVE_CALM_MIND",
+                "MOVE_PROTECT"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_GARCHOMP",
+              "item": "ITEM_LIFE_ORB",
+              "ability": "ABILITY_ROUGH_SKIN",
+              "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+              "moves": [
+                "MOVE_EARTHQUAKE",
+                "MOVE_DRAGON_CLAW",
+                "MOVE_ROCK_SLIDE",
+                "MOVE_PROTECT"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_MAGNEZONE",
+              "item": "ITEM_AIR_BALLOON",
+              "ability": "ABILITY_STURDY",
+              "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+              "moves": [
+                "MOVE_ELECTROWEB",
+                "MOVE_FLASH_CANNON",
+                "MOVE_THUNDERBOLT",
+                "MOVE_PROTECT"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_LATIAS",
+              "item": "ITEM_SOUL_DEW",
+              "ability": "ABILITY_LEVITATE",
+              "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+              "moves": [
+                "MOVE_TAILWIND",
+                "MOVE_DRACO_METEOR",
+                "MOVE_PSYCHIC",
+                "MOVE_HEAL_PULSE"
+              ],
+              "role": null
+            },
+            {
+              "species": "SPECIES_GALLADE",
+              "item": "ITEM_GALLADITE",
+              "ability": "ABILITY_JUSTIFIED",
+              "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY",
+              "moves": [
+                "MOVE_PSYCHO_CUT",
+                "MOVE_CLOSE_COMBAT",
+                "MOVE_WIDE_GUARD",
+                "MOVE_PROTECT"
+              ],
+              "role": null
+            }
+          ],
+          "source_reachability": "rematch-table-or-Wally-chain"
+        }
+      ],
+      "final_tier": "TRAINER_WALLY_VR_5",
+      "final_target_difficulty": 10,
+      "final_observed_difficulty": null,
+      "format_contract": "double",
+      "progression_rule": "Earlier tiers remain distinct source-authored progression teams. The final tier is the marquee target-10 rematch; deliberate leader signatures and famous species may recur here."
+    }
+  },
+  "totals": {
+    "families": 9,
+    "reachable_records": 35,
+    "pokemon_sets": 210,
+    "minimum_quality_score": 79,
+    "maximum_quality_score": 100,
+    "records_with_issues": 0,
+    "records_with_full_items": 35,
+    "records_with_full_moves": 35
+  },
+  "reachability_evidence": {
+    "rematch_table_source": "src/battle_setup.c",
+    "tier5_script_source": "data/maps/*/scripts.inc",
+    "rematch_macros_present": {
+      "ROXANNE": true,
+      "BRAWLY": true,
+      "WATTSON": true,
+      "FLANNERY": true,
+      "NORMAN": true,
+      "WINONA": true,
+      "TATE_AND_LIZA": true,
+      "JUAN": true
+    },
+    "wally_macro_present": true,
+    "reachable_tier5": [
+      "TRAINER_BRAWLY_5",
+      "TRAINER_FLANNERY_5",
+      "TRAINER_JUAN_5",
+      "TRAINER_NORMAN_5",
+      "TRAINER_ROXANNE_5",
+      "TRAINER_WATTSON_5",
+      "TRAINER_WINONA_5"
+    ],
+    "tate_liza_5_referenced": false
+  },
+  "policy": {
+    "do_not_global_dedupe_rematches": true,
+    "reason": "A rematch is the intentional return and evolution of a known leader. Reusing one signature or iconic species is progression, not encounter inflation.",
+    "runtime_gate": "Target 10 is a design target only. Observed difficulty remains null until real-ROM final-tier tests on Hard, Medium, and Easy."
+  }
+}

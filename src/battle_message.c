@@ -756,9 +756,11 @@ static const u8 sText_HurtByTheSeaOfFire[] = _("{B_ATK_NAME_WITH_PREFIX} was hur
 static const u8 sText_TheSeaOfFireDisappeared[] = _("The sea of fire around\n{B_ATK_TEAM2} team disappeared!");
 static const u8 sText_SwampEnvelopedSide[] = _("A swamp enveloped\n{B_DEF_TEAM2} team!");
 static const u8 sText_TheSwampDisappeared[] = _("The swamp around\n{B_ATK_TEAM2} team disappeared!");
+static const u8 sText_CommanderActivates[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} entered Dondozo\nand became its commander!");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
+    [STRINGID_COMMANDERACTIVATES - 12] = sText_CommanderActivates,
     [STRINGID_THESWAMPDISAPPEARED - 12] = sText_TheSwampDisappeared,
     [STRINGID_SWAMPENVELOPEDSIDE - 12] = sText_SwampEnvelopedSide,
     [STRINGID_THESEAOFFIREDISAPPEARED - 12] = sText_TheSeaOfFireDisappeared,

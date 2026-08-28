@@ -111,13 +111,16 @@ LavaridgeTown_PokemonCenter_1F_EventScript_LucyTrigger::
 	goto_if_eq LavaridgeTown_PokemonCenter_1F_EventScript_LucyRefuse
 LavaridgeTown_PokemonCenter_1F_EventScript_LucyBattle::
 	goto_if_defeated TRAINER_LUCY_LAVARIDGE, LavaridgeTown_PokemonCenter_1F_EventScript_LucyReward
+	special HasEnoughMonsForDoubleBattle
+	compare VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS
+	goto_if_ne LavaridgeTown_PokemonCenter_1F_EventScript_LucyNeedTwoMons
 	msgbox LavaridgeTown_PokemonCenter_1F_Text_LucyBattle, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_LUCY_LAVARIDGE, LavaridgeTown_PokemonCenter_1F_Text_LucyDefeat
 LavaridgeTown_PokemonCenter_1F_EventScript_LucyReward::
 	checkitemspace ITEM_BOTTLE_CAP, 3
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
-	msgbox LavaridgeTown_PokemonCenter_1F_Text_LucyGiveChoiceBand, MSGBOX_DEFAULT
+	msgbox LavaridgeTown_PokemonCenter_1F_Text_LucyGiveBottleCaps, MSGBOX_DEFAULT
 	giveitem ITEM_BOTTLE_CAP, 3
 	setvar VAR_LAVARIDGE_LUCY_STATE, 2
 	msgbox LavaridgeTown_PokemonCenter_1F_Text_LucyGoodbye, MSGBOX_AUTOCLOSE
@@ -140,6 +143,11 @@ LavaridgeTown_PokemonCenter_1F_EventScript_LucyRefuse::
 	msgbox LavaridgeTown_PokemonCenter_1F_Text_VeryWell, MSGBOX_AUTOCLOSE	
 	applymovement LOCALID_LUCY, LavaridgeTown_PokemonCenter_1F_Movement_LucyGoWait
 	waitmovement 0
+	release
+	end
+
+LavaridgeTown_PokemonCenter_1F_EventScript_LucyNeedTwoMons::
+	msgbox LavaridgeTown_PokemonCenter_1F_Text_LucyNeedTwoMons, MSGBOX_DEFAULT
 	release
 	end
 
@@ -173,31 +181,35 @@ LavaridgeTown_PokemonCenter_1F_Text_LucyYouThere:
 	.string "???: You there… Stop.$"
 
 LavaridgeTown_PokemonCenter_1F_Text_ScottSaid:
-	.string "???: Scott said I might find you here.\n"
+	.string "???: Scott said you'd come here.\n"
 	.string "I am Lucy…\p"
-	.string "I'm not one for idle chatter… I want\n"
-	.string "to battle. Are you ready?$"
+	.string "I don't trust luck. I stack the odds\n"
+	.string "until they obey. Are you ready?$"
 
 LavaridgeTown_PokemonCenter_1F_Text_VeryWell:
-	.string "Lucy: Very well…\n"
-	.string "I'll be by the PC.\p"
-	.string "Don't keep me waiting…$"
+	.string "Lucy: Prepare first. I'll wait by\n"
+	.string "the PC. Don't keep me waiting…$"
 
 LavaridgeTown_PokemonCenter_1F_Text_LucyDefeat:
-	.string "Urk…$"
+	.string "Lucy: So… You beat the odds.$"
 
 LavaridgeTown_PokemonCenter_1F_Text_LucyBattle:
-	.string "Lucy: Ready? Good.\n"
-	.string "Let's make this quick…$"
+	.string "Lucy: Six loaded chances.\n"
+	.string "Make yours count.$"
 
-LavaridgeTown_PokemonCenter_1F_Text_LucyGiveChoiceBand:
-	.string "Lucy: You were lucky, this time…\n"
-	.string "Here. Take these…$"
+LavaridgeTown_PokemonCenter_1F_Text_LucyGiveBottleCaps:
+	.string "Lucy: You made your own luck.\n"
+	.string "Take these three Bottle Caps.$"
 
 LavaridgeTown_PokemonCenter_1F_Text_LucyGoodbye:
-	.string "Lucy: Perhaps we'll meet again…\n"
-	.string "If your luck holds up.\p"
+	.string "Lucy: The Pike tests chance another\n"
+	.string "way. Don't expect this team--\n"
+	.string "or mercy.\p"
 	.string "Good-bye, for now…$"
+
+LavaridgeTown_PokemonCenter_1F_Text_LucyNeedTwoMons:
+	.string "Lucy: Odds mean nothing with one\n"
+	.string "fighter. Bring two healthy Pokémon.$"
 
 LavaridgeTown_PokemonCenter_1F_Text_WantToBuyMoomooMilk:
 	.string "Moomoo Milk?\p"

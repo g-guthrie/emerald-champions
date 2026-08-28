@@ -1647,6 +1647,14 @@ const u32 gBattleAnimSpriteGfx_WhiteFeather[] = INCBIN_U32("graphics/battle_anim
 const u32 gBattleAnimSpritePal_Sparkle6[] = INCBIN_U32("graphics/battle_anims/sprites/sparkle_6.gbapal.lz");
 const u32 gBattleAnimSpriteGfx_Sparkle6[] = INCBIN_U32("graphics/battle_anims/sprites/sparkle_6.4bpp.lz");
 
+// Canonical Emerald Expansion artwork used by Commander and Order Up.
+const u32 gBattleAnimSpriteGfx_TatsugiriCurly[] = INCBIN_U32("graphics/battle_anims/sprites/tatsugiri_curly.4bpp.lz");
+const u32 gBattleAnimSpritePal_TatsugiriCurly[] = INCBIN_U32("graphics/battle_anims/sprites/tatsugiri_curly.gbapal.lz");
+const u32 gBattleAnimSpriteGfx_TatsugiriDroopy[] = INCBIN_U32("graphics/battle_anims/sprites/tatsugiri_droopy.4bpp.lz");
+const u32 gBattleAnimSpritePal_TatsugiriDroopy[] = INCBIN_U32("graphics/battle_anims/sprites/tatsugiri_droopy.gbapal.lz");
+const u32 gBattleAnimSpriteGfx_TatsugiriStretchy[] = INCBIN_U32("graphics/battle_anims/sprites/tatsugiri_stretchy.4bpp.lz");
+const u32 gBattleAnimSpritePal_TatsugiriStretchy[] = INCBIN_U32("graphics/battle_anims/sprites/tatsugiri_stretchy.gbapal.lz");
+
 const u16 gCableCarBg_Pal[]    = INCBIN_U16("graphics/cable_car/bg.gbapal");
 const u16 gCableCar_Pal[]      = INCBIN_U16("graphics/cable_car/cable_car.gbapal");
 const u32 gCableCarBg_Gfx[]    = INCBIN_U32("graphics/cable_car/bg.4bpp.lz");

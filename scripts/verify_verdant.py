@@ -58,7 +58,107 @@ subprocess.run(
     check=True,
 )
 subprocess.run(
+    [sys.executable, str(ROOT / "scripts/normalize_marquee_dossiers.py"), "--check"],
+    cwd=ROOT,
+    check=True,
+)
+subprocess.run(
+    [sys.executable, str(ROOT / "scripts/verdant_battle_dossier.py"), "--check-all"],
+    cwd=ROOT,
+    check=True,
+)
+subprocess.run(
+    [sys.executable, str(ROOT / "scripts/verify_battle_design_operating_system.py")],
+    cwd=ROOT,
+    check=True,
+)
+subprocess.run(
     [sys.executable, str(ROOT / "scripts/verdant_marquee_collision_audit.py"), "--check"],
+    cwd=ROOT,
+    check=True,
+)
+subprocess.run(
+    [sys.executable, str(ROOT / "scripts/emerald_champions_league_arc.py"), "--check"],
+    cwd=ROOT,
+    check=True,
+)
+subprocess.run(
+    [sys.executable, str(ROOT / "scripts/emerald_champions_gym_anchors.py"), "--check"],
+    cwd=ROOT,
+    check=True,
+)
+subprocess.run(
+    [sys.executable, str(ROOT / "scripts/emerald_champions_faction_anchors.py"), "--check"],
+    cwd=ROOT,
+    check=True,
+)
+subprocess.run(
+    [sys.executable, str(ROOT / "scripts/emerald_champions_superboss_anchors.py"), "--check"],
+    cwd=ROOT,
+    check=True,
+)
+subprocess.run(
+    [sys.executable, str(ROOT / "scripts/emerald_champions_frontier_brain_anchors.py"), "--check"],
+    cwd=ROOT,
+    check=True,
+)
+subprocess.run(
+    [sys.executable, str(ROOT / "scripts/emerald_champions_rematch_family_audit.py"), "--check"],
+    cwd=ROOT,
+    check=True,
+)
+subprocess.run(
+    [sys.executable, str(ROOT / "scripts/emerald_champions_campaign_anchor_review.py"), "--check"],
+    cwd=ROOT,
+    check=True,
+)
+subprocess.run(
+    [sys.executable, str(ROOT / "scripts/emerald_champions_battle48_backfill.py"), "--check"],
+    cwd=ROOT,
+    check=True,
+)
+subprocess.run(
+    [sys.executable, str(ROOT / "scripts/restore_closed_battle_party_sources.py"), "--check"],
+    cwd=ROOT,
+    check=True,
+)
+subprocess.run(
+    [sys.executable, str(ROOT / "scripts/verify_closed_battle_generators.py")],
+    cwd=ROOT,
+    check=True,
+)
+subprocess.run(
+    [sys.executable, str(ROOT / "scripts/emerald_champions_route113_review.py"), "--check"],
+    cwd=ROOT,
+    check=True,
+)
+subprocess.run(
+    [sys.executable, str(ROOT / "scripts/emerald_champions_route114_review.py"), "--check"],
+    cwd=ROOT,
+    check=True,
+)
+subprocess.run(
+    [sys.executable, str(ROOT / "scripts/emerald_champions_meteor_falls_review.py"), "--check"],
+    cwd=ROOT,
+    check=True,
+)
+subprocess.run(
+    [sys.executable, str(ROOT / "scripts/emerald_champions_mt_chimney_story_review.py"), "--check"],
+    cwd=ROOT,
+    check=True,
+)
+subprocess.run(
+    [sys.executable, str(ROOT / "scripts/emerald_champions_heat_epilogue_review.py"), "--check"],
+    cwd=ROOT,
+    check=True,
+)
+subprocess.run(
+    [sys.executable, str(ROOT / "scripts/emerald_champions_route111_north_review.py"), "--check"],
+    cwd=ROOT,
+    check=True,
+)
+subprocess.run(
+    [sys.executable, str(ROOT / "scripts/verify_canonical_commander.py")],
     cwd=ROOT,
     check=True,
 )

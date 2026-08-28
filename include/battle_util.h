@@ -138,6 +138,11 @@ bool32 IsCuratedDriveStatBoosted(u8 battlerId, u8 statId);
 u32 IsAbilityPreventingEscape(u32 battlerId);
 bool32 IsBattlerProtected(u8 battlerId, u16 move);
 bool32 CanBattlerEscape(u32 battlerId); // no ability check
+bool32 IsCommanderTatsugiri(u32 battlerId);
+bool32 IsCommandedDondozo(u32 battlerId);
+void QueueCommanderRelease(u32 battlerId);
+bool32 ReleaseCommander(u32 battlerId);
+bool32 ReleaseFaintedCommanders(void);
 void BattleScriptExecute(const u8* BS_ptr);
 void BattleScriptPushCursorAndCallback(const u8* BS_ptr);
 u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn);

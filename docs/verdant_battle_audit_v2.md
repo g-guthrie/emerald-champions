@@ -1,7 +1,8 @@
-# Verdant Battle Audit v2
+# Emerald Champions Battle Audit v2
 
 This document is the editorial and executable design spine for rebuilding every
-physical trainer encounter in Verdant. It replaces checklist-driven team
+physical trainer encounter in Emerald Champions. Legacy artifact filenames keep
+their `verdant_` prefix. This replaces checklist-driven team
 generation with rolling context, soft long-range anchors, searchable competitive
 history, and exact source validation.
 
@@ -56,9 +57,11 @@ Use three planning tiers:
 `reserved` protects an idea. `locked` means an implemented encounter has
 survived chronological correctness, editorial, and playtest gates.
 
-### Rolling context: previous eight to ten battles
+### Rolling context: previous ten battles
 
-Before authoring a battle, read the rolling experience ledger and ask:
+Before authoring a battle, read the previous ten physical encounters in the
+rolling experience ledger. During the opening, use every available prior
+encounter until ten exist. Then ask:
 
 - Which formats, tempos, primary questions, and lead structures appeared?
 - Has the player repeatedly had to remove a support lead first?

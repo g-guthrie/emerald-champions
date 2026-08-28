@@ -49,12 +49,12 @@ Route113_EventScript_TrainerTipsRegisterKeyItems:: @ 81F21B7
 	end
 
 Route113_EventScript_Jaylen:: @ 81F21C0
-	trainerbattle_single TRAINER_JAYLEN, Route113_Text_JaylenIntro, Route113_Text_JaylenDefeat
+	trainerbattle_double TRAINER_JAYLEN, Route113_Text_JaylenIntro, Route113_Text_JaylenDefeat, Route113_Text_JaylenNotEnoughMons
 	msgbox Route113_Text_JaylenPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route113_EventScript_Dillon:: @ 81F21D7
-	trainerbattle_single TRAINER_DILLON, Route113_Text_DillonIntro, Route113_Text_DillonDefeat
+	trainerbattle_double TRAINER_DILLON, Route113_Text_DillonIntro, Route113_Text_DillonDefeat, Route113_Text_DillonNotEnoughMons
 	msgbox Route113_Text_DillonPostBattle, MSGBOX_AUTOCLOSE
 	end
 

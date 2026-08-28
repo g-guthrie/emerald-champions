@@ -21,6 +21,7 @@ BESPOKE_PATH = ROOT / "docs/verdant_bespoke_battle_designs.json"
 SEQUENCE_PATH = ROOT / "docs/verdant_battle_sequence.json"
 
 STRICT_CAPS = [14, 20, 30, 40, 45, 55, 60, 70, 80, 100]
+CAP_TITLES = ["Stone Badge", "Knuckle Badge", "Dynamo Badge", "Heat Badge", "Balance Badge", "Feather Badge", "Mind Badge", "Rain Badge", "League", "Postgame"]
 
 MAP_ORDER = [
     "Route103", "Route102", "PetalburgCity", "Route104", "PetalburgWoods", "RustboroCity_Gym",
@@ -308,6 +309,12 @@ def build_guide() -> dict:
         for entry in sequence.get("entries", [])
         for trainer_id in entry.get("trainer_ids", [])
     }
+    sequence_caps = {
+        trainer_id: entry.get("strict_cap")
+        for entry in sequence.get("entries", [])
+        for trainer_id in entry.get("trainer_ids", [])
+        if entry.get("strict_cap") is not None
+    }
     bespoke_by_trainer = {}
     bespoke_ids_by_trainer = {}
     for design_id, design in bespoke_designs.items():
@@ -376,6 +383,16 @@ def build_guide() -> dict:
             cap = chapter["cap"]
             badge = chapter["badge"]
             chapter_title = chapter["title"]
+            # Canonically indexed encounters may be intentionally deferred
+            # behind a later method/badge gate than their map's earliest
+            # physical access. The sequence is authoritative for that authored
+            # first-reach state (for example, east-side Rusturf Mike at cap 40).
+            sequence_cap = sequence_caps.get(trainer_id)
+            if sequence_cap is not None:
+                cap = sequence_cap
+                if sequence_cap in STRICT_CAPS:
+                    badge = STRICT_CAPS.index(sequence_cap)
+                    chapter_title = CAP_TITLES[badge]
 
         other_ids = sorted(
             value

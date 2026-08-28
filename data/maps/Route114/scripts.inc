@@ -87,7 +87,7 @@ Route114_EventScript_LanettesHouseSign:: @ 81F2637
 	end
 
 Route114_EventScript_Lenny:: @ 81F2640
-	trainerbattle_single TRAINER_LENNY, Route114_Text_LennyIntro, Route114_Text_LennyDefeat
+	trainerbattle_double TRAINER_LENNY, Route114_Text_LennyIntro, Route114_Text_LennyDefeat, Route114_Text_LennyNotEnoughMons
 	msgbox Route114_Text_LennyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -107,7 +107,7 @@ Route114_EventScript_Nancy:: @ 81F2685
 	end
 
 Route114_EventScript_Steve:: @ 81F269C
-	trainerbattle_single TRAINER_STEVE_1, Route114_Text_SteveIntro, Route114_Text_SteveDefeat, Route114_EventScript_RegisterSteve
+	trainerbattle_double TRAINER_STEVE_1, Route114_Text_SteveIntro, Route114_Text_SteveDefeat, Route114_Text_SteveNotEnoughMons, Route114_EventScript_RegisterSteve
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route114_EventScript_RematchSteve
@@ -124,12 +124,12 @@ Route114_EventScript_RegisterSteve:: @ 81F26C8
 	end
 
 Route114_EventScript_RematchSteve:: @ 81F26E7
-	trainerbattle_rematch TRAINER_STEVE_1, Route114_Text_SteveRematchIntro, Route114_Text_SteveRematchDefeat
+	trainerbattle_rematch_double TRAINER_STEVE_1, Route114_Text_SteveRematchIntro, Route114_Text_SteveRematchDefeat, Route114_Text_SteveNotEnoughMons
 	msgbox Route114_Text_StevePostRematch, MSGBOX_AUTOCLOSE
 	end
 
 Route114_EventScript_Bernie:: @ 81F26FE
-	trainerbattle_single TRAINER_BERNIE_1, Route114_Text_BernieIntro, Route114_Text_BernieDefeat, Route114_EventScript_RegisterBernie
+	trainerbattle_double TRAINER_BERNIE_1, Route114_Text_BernieIntro, Route114_Text_BernieDefeat, Route114_Text_BernieNotEnoughMons, Route114_EventScript_RegisterBernie
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route114_EventScript_RematchBernie
@@ -146,7 +146,7 @@ Route114_EventScript_RegisterBernie:: @ 81F272A
 	end
 
 Route114_EventScript_RematchBernie:: @ 81F2749
-	trainerbattle_rematch TRAINER_BERNIE_1, Route114_Text_BernieRematchIntro, Route114_Text_BernieRematchDefeat
+	trainerbattle_rematch_double TRAINER_BERNIE_1, Route114_Text_BernieRematchIntro, Route114_Text_BernieRematchDefeat, Route114_Text_BernieNotEnoughMons
 	msgbox Route114_Text_BerniePostRematch, MSGBOX_AUTOCLOSE
 	end
 
@@ -156,7 +156,7 @@ Route114_EventScript_Claude:: @ 81F2760
 	end
 
 Route114_EventScript_Nolan:: @ 81F2777
-	trainerbattle_single TRAINER_NOLAN, Route114_Text_NolanIntro, Route114_Text_NolanDefeat
+	trainerbattle_double TRAINER_NOLAN, Route114_Text_NolanIntro, Route114_Text_NolanDefeat, Route114_Text_NolanNotEnoughMons
 	msgbox Route114_Text_NolanPostBattle, MSGBOX_AUTOCLOSE
 	end
 

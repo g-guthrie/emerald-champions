@@ -47,7 +47,7 @@ BOSS_LEVEL_OFFSETS = {
     "Roxanne": [-1, -1, -2, -2, 0, 1],
     "Brawly": [2, 3, 3, 3, 4, 5],
     "Wattson": [2, 2, 3, 3, 4, 5],
-    "Flannery": [0, 0, 0, 0, 1, 2],
+    "Flannery": [1, 1, 2, 2, 3, 4],
     "Norman": [0, 0, 0, 1, 1, 2],
     "Winona": [0, 0, 0, 0, 1, 2],
     "Tate & Liza": [0, 0, 0, 0, 1, 2],
@@ -72,20 +72,52 @@ FORM_OVERRIDES = {
 # Verdant-specific improvements over the planning package. These keep the
 # Champions Mega additions visible during the main campaign.
 BOSS_SLOT_OVERRIDES = {
-    ("Flannery", 3): {
-        "species": "SPECIES_CAMERUPT",
-        "item": "ITEM_CHARCOAL",
-        "ability": "ABILITY_SOLID_ROCK",
+    ("Flannery", 0): {
+        "species": "SPECIES_TORKOAL",
+        "item": "ITEM_EJECT_BUTTON",
+        "ability": "ABILITY_DROUGHT",
+        "spread": "SPREAD_31_IV_HP_DEF_BOLD",
+        "moves": ["MOVE_ERUPTION", "MOVE_BODY_PRESS", "MOVE_YAWN", "MOVE_PROTECT"],
+        "role": "visible sun and HP-sensitive temperature anchor",
+    },
+    ("Flannery", 1): {
+        "species": "SPECIES_LILLIGANT",
+        "item": "ITEM_FOCUS_SASH",
+        "ability": "ABILITY_CHLOROPHYLL",
+        "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID",
+        "moves": ["MOVE_AFTER_YOU", "MOVE_HELPING_HAND", "MOVE_SOLAR_BEAM", "MOVE_PROTECT"],
+        "role": "fast-mode move-order enabler",
+    },
+    ("Flannery", 2): {
+        "species": "SPECIES_DELPHOX",
+        "item": "ITEM_MENTAL_HERB",
+        "ability": "ABILITY_PYROMANCY",
         "spread": "SPREAD_31_IV_HP_SPATK_QUIET",
-        "moves": ["MOVE_ERUPTION", "MOVE_EARTH_POWER", "MOVE_HEAT_WAVE", "MOVE_PROTECT"],
-        "role": "Trick Room special cannon",
+        "moves": ["MOVE_TRICK_ROOM", "MOVE_HEAT_WAVE", "MOVE_SHADOW_BALL", "MOVE_WILL_O_WISP"],
+        "role": "conditional Fire-native slow-mode hinge",
+    },
+    ("Flannery", 3): {
+        "species": "SPECIES_SKELEDIRGE",
+        "item": "ITEM_THROAT_SPRAY",
+        "ability": "ABILITY_UNAWARE",
+        "spread": "SPREAD_31_IV_HP_SPATK_QUIET",
+        "moves": ["MOVE_TORCH_SONG", "MOVE_SHADOW_BALL", "MOVE_HYPER_VOICE", "MOVE_PROTECT"],
+        "role": "slow-mode sound snowball",
+    },
+    ("Flannery", 4): {
+        "species": "SPECIES_HEATRAN",
+        "item": "ITEM_AIR_BALLOON",
+        "ability": "ABILITY_FLASH_FIRE",
+        "spread": "SPREAD_31_IV_HP_SPATK_MODEST",
+        "moves": ["MOVE_MAGMA_STORM", "MOVE_FLASH_CANNON", "MOVE_EARTH_POWER", "MOVE_PROTECT"],
+        "role": "defensive heat bridge and exit seal",
     },
     ("Flannery", 5): {
         "species": "SPECIES_EMBOAR",
         "item": "ITEM_EMBOARITE",
         "ability": "ABILITY_RECKLESS",
         "spread": "SPREAD_31_IV_HP_ATK_ADAMANT",
-        "moves": ["MOVE_HEAT_CRASH", "MOVE_CLOSE_COMBAT", "MOVE_HIGH_HORSEPOWER", "MOVE_PROTECT"],
+        "moves": ["MOVE_HEAT_CRASH", "MOVE_CLOSE_COMBAT", "MOVE_HIGH_HORSEPOWER", "MOVE_WILD_CHARGE"],
         "role": "Champions Mega physical closer",
     },
 }

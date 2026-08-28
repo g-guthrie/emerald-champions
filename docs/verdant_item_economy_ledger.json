@@ -50,7 +50,7 @@
     },
     {
       "boss": "Flannery",
-      "guideOrder": 206,
+      "guideOrder": 214,
       "badgesBeforeBattle": 3,
       "item": "ITEM_MAGMARIZER",
       "source": {
@@ -714,7 +714,7 @@
         "label": "sBattleItemUnlocks",
         "map": null,
         "fixed": true,
-        "order": 207,
+        "order": 215,
         "badge": 4,
         "cap": null,
         "note": "available with 4 badge(s)"
@@ -727,7 +727,7 @@
           "label": "sBattleItemUnlocks",
           "map": null,
           "fixed": true,
-          "order": 207,
+          "order": 215,
           "badge": 4,
           "cap": null,
           "note": "available with 4 badge(s)"
@@ -11024,7 +11024,7 @@
         "label": "sBattleItemUnlocks",
         "map": null,
         "fixed": true,
-        "order": 207,
+        "order": 215,
         "badge": 4,
         "cap": null,
         "note": "available with 4 badge(s)"
@@ -11049,7 +11049,7 @@
           "label": "sBattleItemUnlocks",
           "map": null,
           "fixed": true,
-          "order": 207,
+          "order": 215,
           "badge": 4,
           "cap": null,
           "note": "available with 4 badge(s)"
@@ -12104,7 +12104,7 @@
         "label": "Meteor_Falls1F_2R_EventScript_Salamencite",
         "map": "MeteorFalls_1F_2R",
         "fixed": true,
-        "order": 188,
+        "order": 182,
         "badge": 3,
         "cap": 40,
         "note": "data/maps/MeteorFalls_1F_2R/map.json; FLAG_METEOR_FALLS_SALAMENCITE"
@@ -12117,7 +12117,7 @@
           "label": "Meteor_Falls1F_2R_EventScript_Salamencite",
           "map": "MeteorFalls_1F_2R",
           "fixed": true,
-          "order": 188,
+          "order": 182,
           "badge": 3,
           "cap": 40,
           "note": "data/maps/MeteorFalls_1F_2R/map.json; FLAG_METEOR_FALLS_SALAMENCITE"

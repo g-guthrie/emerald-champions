@@ -56,6 +56,7 @@ functions instead of at the top of the file with the other declarations.
 
 static bool32 TryRemoveScreens(u8 battler);
 static bool32 IsUnnerveAbilityOnOpposingSide(u8 battlerId);
+static bool32 TryActivateCommander(u8 switchedBattler, u8 *commanderBattler);
 
 extern const u8 *const gBattleScriptsForMoveEffects[];
 extern const u8 *const gBattlescriptsForBallThrow[];
@@ -144,6 +145,7 @@ static const u16 sRolePlayBannedAbilities[] =
 static const u16 sRolePlayBannedAttackerAbilities[] =
 {
     ABILITY_ZERO_TO_HERO,
+    ABILITY_COMMANDER,
     ABILITY_MULTITYPE,
     ABILITY_ZEN_MODE,
     ABILITY_STANCE_CHANGE,
@@ -161,6 +163,7 @@ static const u16 sRolePlayBannedAttackerAbilities[] =
 static const u16 sWorrySeedBannedAbilities[] =
 {
     ABILITY_ZERO_TO_HERO,
+    ABILITY_COMMANDER,
     ABILITY_MULTITYPE,
     ABILITY_STANCE_CHANGE,
     ABILITY_SCHOOLING,
@@ -178,6 +181,7 @@ static const u16 sWorrySeedBannedAbilities[] =
 static const u16 sGastroAcidBannedAbilities[] =
 {
     ABILITY_ZERO_TO_HERO,
+    ABILITY_COMMANDER,
     ABILITY_AS_ONE_ICE_RIDER,
     ABILITY_AS_ONE_SHADOW_RIDER,
     ABILITY_BATTLE_BOND,
@@ -219,6 +223,7 @@ static const u16 sEntrainmentBannedAttackerAbilities[] =
 static const u16 sEntrainmentTargetSimpleBeamBannedAbilities[] =
 {
     ABILITY_ZERO_TO_HERO,
+    ABILITY_COMMANDER,
     ABILITY_TRUANT,
     ABILITY_MULTITYPE,
     ABILITY_STANCE_CHANGE,
@@ -3450,7 +3455,9 @@ bool8 HandleFaintedMonActions(void)
             gBattleStruct->faintedActionsState++;
             for (i = 0; i < gBattlersCount; i++)
             {
-                if (gAbsentBattlerFlags & gBitTable[i] && !HasNoMonsToSwitch(i, PARTY_SIZE, PARTY_SIZE))
+                if (gAbsentBattlerFlags & gBitTable[i]
+                 && !IsCommanderTatsugiri(i)
+                 && !HasNoMonsToSwitch(i, PARTY_SIZE, PARTY_SIZE))
                     gAbsentBattlerFlags &= ~(gBitTable[i]);
             }
             // fall through
@@ -3476,6 +3483,15 @@ bool8 HandleFaintedMonActions(void)
             else
                 gBattleStruct->faintedActionsState = 1;
 
+            // A Tatsugiri that faints while swallowed does not get replaced
+            // until Dondozo leaves.  Keep the slot absent without clearing the
+            // stored commander form on Dondozo.
+            if (IsCommanderTatsugiri(gBattlerFainted))
+            {
+                gAbsentBattlerFlags |= gBitTable[gBattlerFainted];
+                return FALSE;
+            }
+
             // Don't switch mons until all pokemon performed their actions or the battle's over.
             if (gBattleOutcome == 0
                 && !NoAliveMonsForEitherParty()
@@ -3493,6 +3509,9 @@ bool8 HandleFaintedMonActions(void)
             {
                 return FALSE;
             }
+            // Residual damage does not run through move-end processing.  This
+            // is the equivalent safe point after every battler has acted.
+            ReleaseFaintedCommanders();
             gBattleStruct->faintedActionsBattlerId = 0;
             gBattleStruct->faintedActionsState++;
             // fall through
@@ -4463,7 +4482,9 @@ bool32 CanBattlerActivateEmergencyExit(u8 battler)
 {
     u32 ability = GetBattlerAbility(battler);
 
-    if ((ability != ABILITY_EMERGENCY_EXIT && ability != ABILITY_WIMP_OUT)
+    if (IsCommanderTatsugiri(battler)
+     || IsCommandedDondozo(battler)
+     || (ability != ABILITY_EMERGENCY_EXIT && ability != ABILITY_WIMP_OUT)
      || !IsBattlerAlive(battler)
      || gBattleTypeFlags & BATTLE_TYPE_ARENA)
         return FALSE;
@@ -4510,9 +4531,94 @@ static bool32 MoveMakesContactForAttackerAbility(u16 move, u8 battlerAtk)
     return makesContact;
 }
 
+static u16 GetBattlerOriginalSpecies(u8 battler)
+{
+    struct Pokemon *party = GetBattlerSide(battler) == B_SIDE_PLAYER ? gPlayerParty : gEnemyParty;
+
+    return GetMonData(&party[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES);
+}
+
+static bool32 HasPendingSwitchAction(u8 battler)
+{
+    // At battle start gCurrentTurnActionNumber is gBattlersCount and there is
+    // no selected action to protect.  Mid-turn, the battler currently being
+    // processed has already committed its switch; a different queued switch
+    // must resolve before Commander is allowed to bind the pair.
+    if (gChosenActionByBattler[battler] != B_ACTION_SWITCH
+     || gCurrentTurnActionNumber >= gBattlersCount)
+        return FALSE;
+
+    return gBattlerByTurnOrder[gCurrentTurnActionNumber] != battler;
+}
+
+static bool32 TryActivateCommander(u8 switchedBattler, u8 *commanderBattler)
+{
+    u8 commander = switchedBattler;
+    u8 dondozo;
+    u8 turnOrderId;
+    u8 savedActiveBattler;
+
+    if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+     || gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER | BATTLE_TYPE_TWO_OPPONENTS))
+        return FALSE;
+
+    // Re-evaluate the already-present ally when Dondozo is the new arrival.
+    // This is required for Commander to trigger regardless of lead order.
+    if (gBattleMons[switchedBattler].species == SPECIES_DONDOZO)
+        commander = BATTLE_PARTNER(switchedBattler);
+
+    dondozo = BATTLE_PARTNER(commander);
+    if (!IsBattlerAlive(commander)
+     || !IsBattlerAlive(dondozo)
+     || gBattleMons[dondozo].species != SPECIES_DONDOZO
+     || GetBattlerAbility(commander) != ABILITY_COMMANDER
+     || IsCommandedDondozo(dondozo)
+     || GET_BASE_SPECIES_ID(GetBattlerOriginalSpecies(commander)) != SPECIES_TATSUGIRI
+     || HasPendingSwitchAction(commander)
+     || HasPendingSwitchAction(dondozo))
+        return FALSE;
+
+    gBattleScripting.savedBattler = gBattlerAttacker;
+    gBattleScripting.battler = commander;
+    gSpecialStatuses[commander].switchInAbilityDone = TRUE;
+    gBattlerAttacker = dondozo;
+    gBattleStruct->commandingDondozo |= gBitTable[commander];
+    gBattleStruct->commanderActive[dondozo] = gBattleMons[commander].species;
+    gStatuses4[commander] |= STATUS4_COMMANDER;
+
+    // Action selection may already be complete when Dondozo enters mid-turn.
+    // Cancel Tatsugiri's queued action immediately; waiting for next turn
+    // would allow the swallowed battler to attack once from inside Dondozo.
+    gChosenActionByBattler[commander] = B_ACTION_NOTHING_FAINTED;
+    if (gCurrentTurnActionNumber < gBattlersCount)
+    {
+        for (turnOrderId = gCurrentTurnActionNumber; turnOrderId < gBattlersCount; turnOrderId++)
+        {
+            if (gBattlerByTurnOrder[turnOrderId] == commander)
+                gActionsByTurnOrder[turnOrderId] = B_ACTION_NOTHING_FAINTED;
+        }
+    }
+
+    // Commander consumes Tatsugiri's action.  Match the official behavior by
+    // advancing a finite confusion counter once as the action disappears.
+    if (gBattleMons[commander].status2 & STATUS2_CONFUSION)
+        gBattleMons[commander].status2 -= STATUS2_CONFUSION_TURN(1);
+
+    savedActiveBattler = gActiveBattler;
+    gActiveBattler = commander;
+    BtlController_EmitSpriteInvisibility(0, TRUE);
+    MarkBattlerForControllerExec(gActiveBattler);
+    gActiveBattler = savedActiveBattler;
+
+    *commanderBattler = commander;
+    BattleScriptPushCursorAndCallback(BattleScript_CommanderActivates);
+    return TRUE;
+}
+
 u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 moveArg)
 {
     u8 effect = 0;
+    u8 commanderBattler;
     u32 speciesAtk, speciesDef;
     u32 pidAtk, pidDef;
     u32 moveType, move;
@@ -4545,6 +4651,13 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
     switch (caseID)
     {
     case ABILITYEFFECT_ON_SWITCHIN: // 0
+        if (TryActivateCommander(battler, &commanderBattler))
+        {
+            battler = commanderBattler;
+            gLastUsedAbility = ABILITY_COMMANDER;
+            effect++;
+            break;
+        }
         gBattleScripting.battler = battler;
         switch (gLastUsedAbility)
         {
@@ -5571,6 +5684,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 case ABILITY_SHIELDS_DOWN:
                 case ABILITY_STANCE_CHANGE:
                 case ABILITY_ZERO_TO_HERO:
+                case ABILITY_COMMANDER:
                     break;
                 default:
                     gLastUsedAbility = gBattleMons[gBattlerAttacker].ability = ABILITY_MUMMY;
@@ -6273,6 +6387,7 @@ bool32 IsNeutralizingGasBannedAbility(u32 ability)
     case ABILITY_AS_ONE_ICE_RIDER:
     case ABILITY_AS_ONE_SHADOW_RIDER:
     case ABILITY_ZERO_TO_HERO:
+    case ABILITY_COMMANDER:
         return TRUE;
     default:
         return FALSE;
@@ -6431,8 +6546,73 @@ u32 IsAbilityPreventingEscape(u32 battlerId)
     return 0;
 }
 
+bool32 IsCommanderTatsugiri(u32 battlerId)
+{
+    return battlerId < gBattlersCount
+        && (gBattleStruct->commandingDondozo & gBitTable[battlerId]);
+}
+
+bool32 IsCommandedDondozo(u32 battlerId)
+{
+    return battlerId < gBattlersCount
+        && gBattleStruct->commanderActive[battlerId] != SPECIES_NONE;
+}
+
+void QueueCommanderRelease(u32 battlerId)
+{
+    if (IsCommandedDondozo(battlerId))
+        gBattleStruct->commanderReleasePending |= gBitTable[battlerId];
+}
+
+bool32 ReleaseCommander(u32 battlerId)
+{
+    u32 commander;
+    u32 savedActiveBattler;
+
+    if (!IsCommandedDondozo(battlerId))
+        return FALSE;
+
+    commander = BATTLE_PARTNER(battlerId);
+    gBattleStruct->commanderActive[battlerId] = SPECIES_NONE;
+    gBattleStruct->commanderReleasePending &= ~gBitTable[battlerId];
+    gBattleStruct->commandingDondozo &= ~gBitTable[commander];
+    gStatuses4[commander] &= ~STATUS4_COMMANDER;
+
+    // A fainted swallowed Tatsugiri was kept absent while Dondozo remained.
+    // Let the normal faint replacement flow see that battler again now.
+    gAbsentBattlerFlags &= ~gBitTable[commander];
+
+    if (IsBattlerAlive(commander))
+    {
+        savedActiveBattler = gActiveBattler;
+        gActiveBattler = commander;
+        BtlController_EmitSpriteInvisibility(0, FALSE);
+        MarkBattlerForControllerExec(gActiveBattler);
+        gActiveBattler = savedActiveBattler;
+    }
+
+    return TRUE;
+}
+
+bool32 ReleaseFaintedCommanders(void)
+{
+    bool32 released = FALSE;
+    u32 battlerId;
+
+    for (battlerId = 0; battlerId < gBattlersCount; battlerId++)
+    {
+        if ((gBattleStruct->commanderReleasePending & gBitTable[battlerId])
+         && !IsBattlerAlive(battlerId))
+            released |= ReleaseCommander(battlerId);
+    }
+
+    return released;
+}
+
 bool32 CanBattlerEscape(u32 battlerId) // no ability check
 {
+    if (IsCommanderTatsugiri(battlerId) || IsCommandedDondozo(battlerId))
+        return FALSE;
     if (IsSkyDropUser(battlerId) || IsSkyDropTarget(battlerId))
         return FALSE;
     if (GetBattlerHoldEffect(battlerId, TRUE) == HOLD_EFFECT_SHED_SHELL)
@@ -7141,6 +7321,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
             case HOLD_EFFECT_EJECT_PACK:
                 if (gProtectStructs[battlerId].statFell
                  && gProtectStructs[battlerId].disableEjectPack == 0
+                 && CanBattlerSwitch(battlerId)
                  && !(gCurrentMove == MOVE_PARTING_SHOT && CanBattlerSwitch(gBattlerAttacker))) // Does not activate if attacker used Parting Shot and can switch out
                 {
                     gProtectStructs[battlerId].statFell = FALSE;
@@ -8974,10 +9155,6 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
             break;
         case ABILITY_POWER_SPOT:
             MulModifier(&modifier, UQ_4_12(1.3));
-            break;
-        case ABILITY_COMMANDER:
-            if (gBattleMons[battlerAtk].species == SPECIES_DONDOZO)
-                MulModifier(&modifier, UQ_4_12(1.5));
             break;
         case ABILITY_STEELY_SPIRIT:
             if (moveType == TYPE_STEEL)

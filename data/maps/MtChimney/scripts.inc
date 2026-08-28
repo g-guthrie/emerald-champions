@@ -40,6 +40,9 @@ MtChimney_EventScript_ArchieBusyFighting:: @ 822EE02
 
 MtChimney_EventScript_Maxie:: @ 822EE0B
 	lockall
+	special HasEnoughMonsForDoubleBattle
+	compare VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS
+	goto_if_ne MtChimney_EventScript_MaxieNeedsTwoMons
 	playbgm MUS_ENCOUNTER_MAGMA, FALSE
 	msgbox MtChimney_Text_MeteoriteWillActivateVolcano, MSGBOX_DEFAULT
 	applymovement LOCALID_MAXIE, Common_Movement_FacePlayer
@@ -81,6 +84,11 @@ MtChimney_EventScript_Maxie:: @ 822EE0B
 	clearflag FLAG_HIDE_FALLARBOR_HOUSE_PROF_COZMO
 	setflag FLAG_HIDE_METEOR_FALLS_1F_1R_COZMO
 	clearflag FLAG_HIDE_MT_CHIMNEY_LAVA_COOKIE_LADY
+	releaseall
+	end
+
+MtChimney_EventScript_MaxieNeedsTwoMons::
+	msgbox MtChimney_Text_MaxieNeedsTwoMons, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -407,7 +415,7 @@ MtChimney_EventScript_BusyAquaGrunt3:: @ 822F065
 	end
 
 MtChimney_EventScript_Tabitha:: @ 822F06E
-	trainerbattle_single TRAINER_TABITHA_MT_CHIMNEY, MtChimney_Text_TabithaIntro, MtChimney_Text_TabithaDefeat
+	trainerbattle_double TRAINER_TABITHA_MT_CHIMNEY, MtChimney_Text_TabithaIntro, MtChimney_Text_TabithaDefeat, MtChimney_Text_TabithaNotEnoughMons
 	msgbox MtChimney_Text_TabithaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -579,69 +587,78 @@ MtChimney_Text_MaxieIntro: @ 822F32E
 	.string "what sleeps within this mountain…\p"
 	.string "Oh! There was no need for you to\n"
 	.string "learn that much.\p"
-	.string "But, no matter!\n"
-	.string "I'll teach you the consequences of\l"
-	.string "meddling in our grand design!$"
+	.string "But, no matter!\p"
+	.string "This summit belongs to whoever\n"
+	.string "controls every approach.\p"
+	.string "Groudon raises the heat. Crobat owns\n"
+	.string "the air, my ambushers steal tempo,\l"
+	.string "and Flygon claims the ridge!$"
 
 MtChimney_Text_MaxieDefeat: @ 822F5CF
-	.string "What?!\p"
-	.string "I, Maxie, was caught off guard?!$"
+	.string "You took the ridge… not the land!$"
 
 MtChimney_Text_MaxieYouHaventSeenLastOfMagma: @ 822F5F7
 	.string "Maxie: But, enough.\n"
 	.string "I will back off this time.\p"
-	.string "But don't think that this is the last\n"
+	.string "Don't think that this is the last\n"
 	.string "you've seen of Team Magma.\p"
 	.string "Fufufu…\p"
 	.string "Even without the Meteorite, if we\n"
 	.string "obtain that Orb… Fufufu…$"
 
+MtChimney_Text_MaxieNeedsTwoMons:
+	.string "A leader's formation demands a\n"
+	.string "double battle. Bring two Pokémon!$"
+
 MtChimney_Text_TabithaIntro: @ 822F6AA
-	.string "Hehehe!\p"
-	.string "So you've come all the way here!\p"
-	.string "But you're too late!\n"
-	.string "Courtney's already delivered the\l"
-	.string "Meteorite from Meteor Falls to\l"
-	.string "the Boss!$"
+	.string "Tabitha: Behold our prototype line!\n"
+	.string "Coalossal is the boiler, Klinklang\l"
+	.string "turns gears; Electivire drives,\l"
+	.string "and Xurkitree powers the circuit!\p"
+	.string "Rhyperior braces the frame.\n"
+	.string "Machamp does the work!\p"
+	.string "It needn't be finished to crush you!$"
 
 MtChimney_Text_TabithaDefeat: @ 822F72C
-	.string "Hehehe…\p"
-	.string "Even though I've lost, if our leader\n"
-	.string "awakens that thing…$"
+	.string "You found the weak coupling?!$"
 
 MtChimney_Text_TabithaPostBattle: @ 822F76D
 	.string "Boss, hurry!\n"
-	.string "Give it the Meteorite's energy!\p"
-	.string "Hehehe…$"
+	.string "This prototype needs an ignition,\l"
+	.string "but the Meteorite can still power\l"
+	.string "the real machine!$"
+
+MtChimney_Text_TabithaNotEnoughMons:
+	.string "A machine this large needs a double\n"
+	.string "battle. Bring two ready Pokémon!$"
 
 MtChimney_Text_Grunt2Intro: @ 822F7A2
-	.string "We of Team Magma are working hard for\n"
-	.string "everyone's sake.\p"
-	.string "Like, if that thing's power made more\n"
-	.string "land, there'd be more places to live.\p"
-	.string "Everyone'd be happy!$"
+	.string "We're breaking ground for everyone!\n"
+	.string "Golurk digs, Sandaconda compacts,\l"
+	.string "and Krookodile guards the new land!$"
 
 MtChimney_Text_Grunt2Defeat: @ 822F83A
 	.string "Hunh?\n"
 	.string "What do you mean I lost?$"
 
 MtChimney_Text_Grunt2PostBattle: @ 822F859
-	.string "Our Boss says, “It will make everyone\n"
-	.string "happy.”\p"
-	.string "But why does everyone keep getting\n"
-	.string "in our way?$"
+	.string "No Guard makes Dynamic Punch hit.\n"
+	.string "Sand Spit answers contact, while\l"
+	.string "Intimidate protects our ground crew.$"
 
 MtChimney_Text_Grunt1Intro: @ 822F8B6
-	.string "If there were more land, I'd be able\n"
-	.string "to get a big house of my own!\p"
-	.string "I'm going to build it on hardened lava!$"
+	.string "My lava house needs a foundation!\n"
+	.string "Stonjourner marks safe ground,\l"
+	.string "Blacephalon fires the kiln, and\l"
+	.string "Palossand lays the foundation!$"
 
 MtChimney_Text_Grunt1Defeat: @ 822F921
 	.string "My dream of a big house…$"
 
 MtChimney_Text_Grunt1PostBattle: @ 822F93A
-	.string "A kid like you, you ought to be\n"
-	.string "splashing about in the waves!$"
+	.string "Power Spot strengthens my partner.\n"
+	.string "Palossand's sand supports our stone,\l"
+	.string "but Blacephalon must act quickly.$"
 
 MtChimney_Text_TeamAquaAlwaysMessingWithPlans: @ 822F978
 	.string "That annoying Team Aqua…\n"
@@ -760,17 +777,16 @@ MtChimney_Text_RouteSign: @ 822FFFA
 	.string "Lavaridge Town Ahead$"
 
 MtChimney_Text_ShelbyIntro: @ 823001D
-	.string "I've been to the hot springs and\n"
-	.string "refreshed my tired bones.\l"
-	.string "Right now I'm feeling strong!$"
+	.string "Every stance has an answer.\p"
+	.string "Mienshao probes; Wobbuffet reads,\n"
+	.string "then steel chooses the finish!$"
 
 MtChimney_Text_ShelbyDefeat: @ 8230076
-	.string "Oh, my goodness.\n"
-	.string "Now, aren't you something!$"
+	.string "You changed rhythm before I could!$"
 
 MtChimney_Text_ShelbyPostBattle: @ 82300A2
-	.string "Well, well, I've lost. I can't call\n"
-	.string "myself an Expert now, can I?$"
+	.string "Mixed damage defeats Counter and\n"
+	.string "Mirror Coat. Taunt breaks Encore.$"
 
 MtChimney_Text_ShelbyRegister: @ 82300E3
 	.string "Thank you, child. It was fun, as if\n"
@@ -779,83 +795,74 @@ MtChimney_Text_ShelbyRegister: @ 82300E3
 	.string "a rematch.$"
 
 MtChimney_Text_ShelbyRematchIntro: @ 8230153
-	.string "If you can mesh your heart with those\n"
-	.string "of your Pokémon, why, you should be\l"
-	.string "able to achieve great things.$"
+	.string "I brought every stance this time.\n"
+	.string "Show me how quickly you can adapt!$"
 
 MtChimney_Text_ShelbyRematchDefeat: @ 82301BB
-	.string "Oh, my goodness.\n"
-	.string "Now, aren't you something!$"
+	.string "You read the whole sequence!$"
 
 MtChimney_Text_ShelbyPostRematch: @ 82301E7
-	.string "Perhaps your heart has become one\n"
-	.string "with the hearts of your Pokémon.$"
+	.string "A stance is strongest only while its\n"
+	.string "answer stays hidden.$"
 
 MtChimney_Text_MelissaIntro: @ 823022A
-	.string "I've got the fire in me, baby.\n"
-	.string "I can't stand it! I have to battle!$"
+	.string "Beauty is control under pressure!\p"
+	.string "Poise, tricks, and one bright Mega--\n"
+	.string "show me what can break the pattern!$"
 
 MtChimney_Text_MelissaDefeat: @ 823026D
-	.string "Ooh, that was a scorching-hot match!$"
+	.string "You never lost your composure!$"
 
 MtChimney_Text_MelissaPostBattle: @ 8230292
-	.string "The heat of Mt. Chimney warms\n"
-	.string "me up, baby!$"
+	.string "Fur Coat fears special attacks.\n"
+	.string "Klutz Lopunny wants to trade items.$"
 
 MtChimney_Text_SheilaIntro: @ 82302BD
-	.string "I've finally made it to Mt. Chimney.\n"
-	.string "I want to make my Pokémon battle!$"
+	.string "A royal court permits no cheap shot!\p"
+	.string "Tsareena guards priority while\n"
+	.string "Cinccino volleys. Two rulers wait!$"
 
 MtChimney_Text_SheilaDefeat: @ 8230304
-	.string "The way you battle…\n"
-	.string "It's like a Mt. Chimney eruption!$"
+	.string "You overthrew the whole court!$"
 
 MtChimney_Text_SheilaPostBattle: @ 823033A
-	.string "Like I said, I've finally made it to\n"
-	.string "Mt. Chimney. It would be a shame if\l"
-	.string "I only do a little sightseeing…\p"
-	.string "I want to get in some battles and buy\n"
-	.string "Cookies as souvenirs.$"
+	.string "Queenly Majesty blocks priority.\n"
+	.string "It does not block ordinary speed.$"
 
 MtChimney_Text_ShirleyIntro: @ 82303DF
-	.string "Since I bathed in the hot springs,\n"
-	.string "I've been feeling great!\l"
-	.string "I'm sure I'm going to win!$"
+	.string "The summit is my stage!\p"
+	.string "Alcremie Decorates Meloetta; then\n"
+	.string "Nihilego and Mr. Rime take over!$"
 
 MtChimney_Text_ShirleyDefeat: @ 8230436
-	.string "Yowch!\n"
-	.string "I'm getting a chill out of the water.$"
+	.string "You stole the final bow!$"
 
 MtChimney_Text_ShirleyPostBattle: @ 8230463
-	.string "I'll have to take another dip in the\n"
-	.string "hot springs. Want to join me?\p"
-	.string "Just joking!$"
+	.string "Break the support act first.\n"
+	.string "Then deny Nihilego its first KO.$"
 
 MtChimney_Text_SawyerIntro: @ 82304B3
-	.string "This is one fine mountain! Plenty of\n"
-	.string "hot people around for company!\p"
-	.string "Sand makes one partner faster and\n"
-	.string "the other harder to move!$"
+	.string "Read the mountain's layers!\p"
+	.string "Sand wakes Dracozolt, Cradily drinks\n"
+	.string "Water, and Mega Excadrill drills!$"
 
 MtChimney_Text_SawyerDefeat: @ 82304F7
-	.string "Oh, you're a real firebrand, too!$"
+	.string "You split every layer!$"
 
 MtChimney_Text_SawyerPostBattle: @ 8230519
-	.string "I think I need a dip in Lavaridge\n"
-	.string "Hot Spring with the locals!$"
+	.string "Replace sand or deny Sand Rush.\n"
+	.string "Never feed Storm Drain for free.$"
 
 MtChimney_Text_SawyerRegister: @ 8230557
 	.string "I like little fireballs like you.\n"
 	.string "Let me register you in my PokéNav.$"
 
 MtChimney_Text_SawyerRematchIntro: @ 823059C
-	.string "I'm happily surrounded by hot people\n"
-	.string "around these parts. I won't lose!$"
+	.string "The mountain grew two new layers!\n"
+	.string "Can your formation grow with it?$"
 
 MtChimney_Text_SawyerRematchDefeat: @ 82305E3
-	.string "Gosh, you're still the same\n"
-	.string "firebrand as before!$"
+	.string "Your answer reached the summit!$"
 
 MtChimney_Text_SawyerPostRematch: @ 8230614
-	.string "Actually, it really is hot here.\n"
-	.string "I'm overdressed for these parts.$"
+	.string "Each rematch exposes a deeper layer.$"

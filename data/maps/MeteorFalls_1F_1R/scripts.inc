@@ -497,17 +497,17 @@ MeteorFalls_1F_1R_Text_BrendayLetsBattle:
 	.string "Thanks, pal!$"
 
 MeteorFalls_1F_1R_Text_CourtneyLetsBattle:
-	.string "Ahahaha!\p"
-	.string "You brats are no match for a Team\n"
-	.string "Magma Admin!\p"
-	.string "I'll put you in your place, kiddos!$"
+	.string "Courtney: Meteor Falls supplies\n"
+	.string "perfect impact data.\p"
+	.string "Trajectory. Collision. Fracture.\n"
+	.string "Then the fossil left behind.\p"
+	.string "Grunt, deploy the twin meteors!$"
 
 MeteorFalls_1F_1R_Text_CourtneyLose:
-	.string "Ahhh?! Did I go too easy on you?!$"
+	.string "Courtney: Impact model… rejected?!$"
 
 MeteorFalls_1F_1R_Text_GruntLose:
-	.string "Are you telling me you're that strong\n"
-	.string "and still just kids?!$"
+	.string "The moon sheltered the sun?!$"
 
 MeteorFalls_1F_1R_Text_ChooseMons:
 	.string "Choose which Pokémon will battle.$"

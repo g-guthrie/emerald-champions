@@ -10,6 +10,7 @@ from pathlib import Path
 import verdant_custom_teams as custom
 import verdant_doubles_conversion as doubles
 import verdant_team_polish as polish
+import emerald_champions_battle48_backfill as battle48_backfill
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -2832,6 +2833,8 @@ def main() -> None:
     if battles_1_to_25 & {build["species"] for build in expected_janice + expected_jerry}: problems.append("Battle 26 repeats a species from Battles 2-25")
 
     grunt27 = designs["BATTLE_027_RUSTURF_TUNNEL_AQUA_GRUNT"]
+    if grunt27.get("manual_difficulty") != 9.6:
+        problems.append("Battle 27: canonical Commander difficulty is stale")
     expected_grunt27 = [
         {"level": 2, "species": "SPECIES_DONDOZO", "item": "ITEM_LEFTOVERS", "ability_slot": 0, "spread": "SPREAD_31_IV_HP_ATK_ADAMANT", "moves": ["MOVE_ORDER_UP", "MOVE_WAVE_CRASH", "MOVE_ROCK_SLIDE", "MOVE_PROTECT"]},
         {"level": 1, "species": "SPECIES_TATSUGIRI_STRETCHY", "item": "ITEM_FOCUS_SASH", "ability_slot": 0, "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID", "moves": ["MOVE_MUDDY_WATER", "MOVE_DRAGON_PULSE", "MOVE_TAUNT", "MOVE_PROTECT"]},
@@ -2861,9 +2864,9 @@ def main() -> None:
                 legal = move_is_legal(species, species_name, move, level_source, tmhm_source, tm_indices, tutor_source, indices, egg_source)
             if not legal: problems.append(f"Battle 27: {species} cannot legally learn {move}")
     commander_source = read("src/battle_script_commands.c") + read("src/battle_util.c") + read("src/battle_ai_main.c")
-    for token in ("SPECIES_TATSUGIRI_STRETCHY", "ABILITY_COMMANDER", "UQ_4_12(1.5)", "move == MOVE_ORDER_UP", "partnerAbility == ABILITY_MERCILESS"):
+    for token in ("TryActivateCommander", "STATUS4_COMMANDER", "commanderActive", "move == MOVE_ORDER_UP", "partnerAbility == ABILITY_MERCILESS"):
         if token not in commander_source: problems.append(f"Battle 27: Commander/poison engine drifted {token}")
-    for cue in ("little one calls", "broke my command chain", "little commander", "two healthy"):
+    for cue in ("little one dives", "broke my command chain", "raise every stat", "two healthy"):
         if cue not in rusturf: problems.append(f"Battle 27: Grunt dialogue misses {cue}")
     champions = json.loads(read("docs/vgc_major_champion_teams.json"))["teams"]
     for tournament in ("regional-merida-2025", "regional-curitiba-2024", "regional-liverpool-2023"):
@@ -4101,14 +4104,7 @@ def main() -> None:
         problems.append("Battle 47 repeats a species from Battles 1-46")
 
     archie48 = designs["BATTLE_048_SLATEPORT_MUSEUM_ARCHIE"]
-    expected_archie48 = [
-        {"level": 0, "species": "SPECIES_KYOGRE", "item": "ITEM_BLUE_ORB", "ability_slot": 0, "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID", "moves": ["MOVE_ORIGIN_PULSE", "MOVE_ICE_BEAM", "MOVE_THUNDER", "MOVE_PROTECT"]},
-        {"level": 1, "species": "SPECIES_RAICHU", "item": "ITEM_SITRUS_BERRY", "ability_slot": 2, "spread": "SPREAD_31_IV_HP_SPEED_TIMID", "moves": ["MOVE_NUZZLE", "MOVE_VOLT_SWITCH", "MOVE_THUNDERBOLT", "MOVE_ENCORE"]},
-        {"level": 1, "species": "SPECIES_HITMONTOP", "item": "ITEM_EJECT_BUTTON", "ability_slot": 0, "spread": "SPREAD_31_IV_HP_ATK_ADAMANT", "moves": ["MOVE_FAKE_OUT", "MOVE_WIDE_GUARD", "MOVE_FEINT", "MOVE_CLOSE_COMBAT"]},
-        {"level": 2, "species": "SPECIES_LUDICOLO", "item": "ITEM_LIFE_ORB", "ability_slot": 0, "spread": "SPREAD_31_IV_SPATK_SPEED_TIMID", "moves": ["MOVE_FAKE_OUT", "MOVE_HYDRO_PUMP", "MOVE_GIGA_DRAIN", "MOVE_ICE_BEAM"]},
-        {"level": 2, "species": "SPECIES_CROBAT", "item": "ITEM_BLACK_SLUDGE", "ability_slot": 0, "spread": "SPREAD_31_IV_ATK_SPEED_JOLLY", "moves": ["MOVE_ROOST", "MOVE_TAUNT", "MOVE_BRAVE_BIRD", "MOVE_U_TURN"]},
-        {"level": 3, "species": "SPECIES_MALAMAR", "item": "ITEM_MALAMARITE", "ability_slot": 0, "spread": "SPREAD_31_IV_HP_ATK_ADAMANT", "moves": ["MOVE_SUPERPOWER", "MOVE_PSYCHO_CUT", "MOVE_KNOCK_OFF", "MOVE_PROTECT"]},
-    ]
+    expected_archie48 = battle48_backfill.TEAM
     if archie48["trainer_ids"] != ["TRAINER_ARCHIE_SLATEPORT"] or party_builds("TRAINER_ARCHIE_SLATEPORT", trainers_text, parties_text) != expected_archie48:
         problems.append("Battle 48: Slateport Archie closure or source party differs from design")
     if archie48.get("strict_cap") != 30 or archie48.get("evolution_stage_fit", {}).get("status") != "pass":
@@ -4119,38 +4115,35 @@ def main() -> None:
         problems.append("Battle 48: author self-check is incomplete")
     if archie48.get("ordering", {}).get("source_order") != [build["species"] for build in expected_archie48]:
         problems.append("Battle 48: recorded ordering differs from exact source order")
-    if "twelve encounters" not in archie48.get("uniqueness", ""):
-        problems.append("Battle 48: deliberate Hitmontop reuse lacks a written disposition")
+    if not all(cue in archie48.get("uniqueness", "") for cue in ("Hitmontop intentionally returns", "Qwilfish returns")):
+        problems.append("Battle 48: deliberate Hitmontop/Qwilfish reuse lacks a written disposition")
     archie48_block = trainer_blocks["TRAINER_ARCHIE_SLATEPORT"].group(0)
-    for token in (".doubleBattle = TRUE", "AI_FLAG_SMART_SWITCHING", "AI_FLAG_HELP_PARTNER", "AI_FLAG_HP_AWARE", "AI_FLAG_SPEED_CONTROL", "AI_FLAG_FIELD_CONTROL"):
+    for token in (".doubleBattle = TRUE", "AI_FLAG_SMART_SWITCHING", "AI_FLAG_HELP_PARTNER", "AI_FLAG_HP_AWARE", "AI_FLAG_SPEED_CONTROL", "AI_FLAG_FIELD_CONTROL", "AI_FLAG_COMBO_SETUP"):
         if token not in archie48_block:
             problems.append(f"Battle 48: Archie missing {token}")
-    for token in ("AI_FLAG_COMBO_SETUP", "AI_FLAG_SETUP_FIRST_TURN", "AI_FLAG_PERISH_TRAP"):
+    for token in ("AI_FLAG_SETUP_FIRST_TURN", "AI_FLAG_PERISH_TRAP"):
         if token in archie48_block:
             problems.append(f"Battle 48: Archie has reserved later-doctrine flag {token}")
     abilities48 = {
-        "SPECIES_KYOGRE": (0, "ABILITY_DRIZZLE"),
-        "SPECIES_RAICHU": (2, "ABILITY_LIGHTNING_ROD"),
+        "SPECIES_LIEPARD": (2, "ABILITY_PRANKSTER"),
         "SPECIES_HITMONTOP": (0, "ABILITY_INTIMIDATE"),
-        "SPECIES_LUDICOLO": (0, "ABILITY_SWIFT_SWIM"),
-        "SPECIES_CROBAT": (0, "ABILITY_INNER_FOCUS"),
+        "SPECIES_MANAPHY": (0, "ABILITY_HYDRATION"),
+        "SPECIES_KINGDRA": (0, "ABILITY_SWIFT_SWIM"),
+        "SPECIES_QWILFISH": (2, "ABILITY_INTIMIDATE"),
         "SPECIES_MALAMAR": (0, "ABILITY_CONTRARY"),
     }
     for species, (slot, ability) in abilities48.items():
         slots = ability_slots.get(species, [])
         if len(slots) <= slot or slots[slot] != ability:
             problems.append(f"Battle 48: {species} slot {slot} is not {ability}: {slots}")
-    names48 = {"KYOGRE": "Kyogre", "RAICHU": "Raichu", "HITMONTOP": "Hitmontop", "LUDICOLO": "Ludicolo", "CROBAT": "Crobat", "MALAMAR": "Malamar"}
+    names48 = {"LIEPARD": "Liepard", "HITMONTOP": "Hitmontop", "MANAPHY": "Manaphy", "KINGDRA": "Kingdra", "QWILFISH": "Qwilfish", "MALAMAR": "Malamar"}
     for build in expected_archie48:
         species = build["species"].removeprefix("SPECIES_")
         for move in build["moves"]:
             if not move_is_legal(species, names48[species], move, level_source, tmhm_source, tm_indices, tutor_source, indices, egg_source):
                 problems.append(f"Battle 48: {species} cannot legally learn {move}")
     evolution_source = read("src/data/pokemon/evolution.h")
-    for token in (
-        "[SPECIES_KYOGRE]     = {{EVO_PRIMAL_REVERSION, ITEM_BLUE_ORB, SPECIES_KYOGRE_PRIMAL}}",
-        "[SPECIES_MALAMAR]    = {{EVO_MEGA_EVOLUTION, ITEM_MALAMARITE, SPECIES_MALAMAR_MEGA}}",
-    ):
+    for token in ("[SPECIES_MALAMAR]    = {{EVO_MEGA_EVOLUTION, ITEM_MALAMARITE, SPECIES_MALAMAR_MEGA}}",):
         if token not in evolution_source:
             problems.append(f"Battle 48: transformation mapping lost {token}")
     mega_stats = read("src/data/pokemon/base_stats.h").split("[SPECIES_MALAMAR_MEGA]", 1)[1].split("[SPECIES_CHANDELURE_MEGA]", 1)[0]
@@ -4158,7 +4151,7 @@ def main() -> None:
         problems.append("Battle 48: Mega Malamar no longer preserves Contrary")
     if museum.count("special HealPlayerParty") < 2:
         problems.append("Battle 48: scripted full heals before and after Archie are not both present")
-    for cue in ("survived both waves", "primal rain", "Mega Malamar", "first tide", "complete plan"):
+    for cue in ("survived both waves", "brings its own storm", "Mega Malamar", "first heist", "complete plan"):
         if cue not in museum:
             problems.append(f"Battle 48: Archie dialogue misses {cue}")
     if "simps" in museum:
@@ -4171,29 +4164,30 @@ def main() -> None:
                 problems.append(f"Battle 48: dialogue line is too long: {visible}")
     reservation_rows = json.loads(read("docs/verdant_historic_team_reservations.json"))["marquee_blueprints"]["entries"]
     slateport_reservation = next(row for row in reservation_rows if row.get("anchor") == "SLATEPORT_ARCHIE_INTERCEPTION")
-    if slateport_reservation.get("design_commitment") != "spent" or "Primal Kyogre is explicitly allowed here" not in slateport_reservation.get("mega_legendary_posture", {}).get("legendary", ""):
-        problems.append("Battle 48: Slateport Archie Primal reservation is not spent and explicit")
+    if slateport_reservation.get("design_commitment") != "spent" or "Kyogre and every Primal mechanic are forbidden here" not in slateport_reservation.get("mega_legendary_posture", {}).get("legendary", ""):
+        problems.append("Battle 48: Slateport Archie no-Kyogre reservation is not spent and explicit")
     donor_requirements48 = {
-        "elite:wolfe:worlds-2016": {"Kyogre", "Hitmontop", "Raichu"},
-        "showdown:gen7randomdoublesbattle:011": {"Kyogre"},
-        "showdown:gen9randomdoublesbattle:025": {"Kyogre", "Hitmontop"},
-        "showdown:gen6randomdoublesbattle:013": {"Ludicolo"},
-        "showdown:gen7randomdoublesbattle:013": {"Crobat"},
+        "showdown:gen6randomdoublesbattle:018": {"Liepard"},
+        "elite:wolfe:worlds-2016": {"Hitmontop"},
+        "showdown:gen6randomdoublesbattle:009": {"Manaphy"},
+        "elite:wolfe:toronto-2024": {"Kingdra"},
+        "showdown:gen9championsrandomdoublesbattle:011": {"Qwilfish"},
         "showdown:gen9championsrandomdoublesbattle:002": {"Malamar"},
     }
     for reference_id, required_species in donor_requirements48.items():
         row = refs29.get(reference_id)
         if row is None or not required_species <= set(row.get("roster", [])):
             problems.append(f"Battle 48: competitive donor drifted {reference_id}")
-        elif reference_id != "elite:wolfe:worlds-2016" and row.get("completeness") != "full-sets":
+        elif not reference_id.startswith("elite:") and row.get("completeness") != "full-sets":
             problems.append(f"Battle 48: full-set donor lost completeness {reference_id}")
     controller_source = read("src/battle_controller_opponent.c")
     for token in ("TrySimulateMegaEvolutionForAI(&savedBattleMon)", "SetMonData(&simulatedMon, MON_DATA_SPECIES, &megaSpecies)", "CalculateMonStats(&simulatedMon)"):
         if token not in controller_source:
             problems.append(f"Battle 48: transformed-form AI simulation lost {token}")
     battles_1_to_47 = battles_1_to_46 | {build["species"] for build in expected_grunt47}
-    if battles_1_to_47 & {build["species"] for build in expected_archie48}:
-        problems.append("Battle 48 repeats a species from Battles 1-47")
+    repeats48 = battles_1_to_47 & {build["species"] for build in expected_archie48}
+    if repeats48 != {"SPECIES_HITMONTOP", "SPECIES_QWILFISH"}:
+        problems.append(f"Battle 48 has unexpected repeats from Battles 1-47: {sorted(repeats48)}")
 
     pair49 = designs["BATTLE_049_ROUTE_110_ISABEL_KALEB"]
     expected_isabel49 = [
@@ -5819,8 +5813,8 @@ def main() -> None:
         problems.append("Battle 68: Luca Ceribelli World Champion architecture drifted")
     battles_1_to_67 = battles_1_to_66 | {build["species"] for build in expected_shawn67 + expected_angelo67}
     repeats68 = battles_1_to_67 & {build["species"] for build in expected_wattson68}
-    if repeats68 != {"SPECIES_EMOLGA", "SPECIES_RAICHU"}:
-        problems.append(f"Battle 68: intended earned Emolga/Raichu repeats changed: {sorted(repeats68)}")
+    if repeats68 != {"SPECIES_EMOLGA"}:
+        problems.append(f"Battle 68: intended earned Emolga repeat or first Raichu reveal changed: {sorted(repeats68)}")
 
     anna_meg69 = designs["BATTLE_069_ROUTE_117_ANNA_AND_MEG"]
     expected_anna_meg69 = [
@@ -6342,7 +6336,7 @@ def main() -> None:
     print("PASS: Battle 24 Devan sand excavation, four legal young stages, guarded double, and native weather counterplay")
     print("PASS: Battle 25 Sarah+Dawson native treasure/fur pair, independent legal halves, and three runtime branches")
     print("PASS: Battle 26 Janice+Jerry terrain circuit, independent legal halves, Motor Drive bridge, and native pairing")
-    print("PASS: Battle 27 Rusturf Commander payoff, visible legal core, poison cover, guarded story continuation, and contextual AI")
+    print("PASS: Battle 27 Rusturf canonical Commander payoff, poison cover, guarded story continuation, and contextual AI")
     print("PASS: Battle 28 dynamic forecast rival, 21 legal middle starters, six guarded source branches, parity, and story-safe decline")
     print("PASS: Battle 29 Dazzling rain sprint, four legal species, guarded double, native AI, donors, dialogue, and author self-check")
     print("PASS: Battle 30 three-depth singles, three legal species, Match Call routing, native AI, donors, dialogue, and author self-check")
@@ -6363,7 +6357,7 @@ def main() -> None:
     print("PASS: Battle 45 four-mount Tailwind double, legal rare Keldeo, guarded routing, donors, dialogue, and self-check")
     print("PASS: Battle 46 museum half-HP attrition opener, legal no-heal handoff, one-survivor safety, donors, dialogue, and self-check")
     print("PASS: Battle 47 museum Brine-Venoshock cleanup, one-slot safety, Illusion order, donors, dialogue, and self-check")
-    print("PASS: Battle 48 healed Archie Primal-plus-Mega boss, legal target-10 roster, transformation AI, reservations, dialogue, and self-check")
+    print("PASS: Battle 48 healed Archie manual-rain tactical Mega boss, legal target-10 roster, story chronology, reservations, dialogue, and self-check")
     print("PASS: Battle 49 Round chorus native pair, exact joint/split prefixes, one-slot and Match Call routing, donors, dialogue, and self-check")
     print("PASS: Battle 50 four-edge singles, legal stage mix, collision-forced ordering, reward independence, donors, dialogue, and self-check")
     print("PASS: Battle 51 no-exit double, safe Earthquake order, collision-forced exit, donors, dialogue, and self-check")

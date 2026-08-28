@@ -652,6 +652,13 @@ struct BattleStruct
     u8 appearedInBattle; // Bitfield to track which Pokemon appeared in battle. Used for Burmy's form change
     u8 pledgeState;
     u16 pledgeOriginalMove;
+    // Commander is stored separately from legacy STATUS3 because this engine
+    // already uses bit 15 for STATUS3_CANT_SCORE_A_CRIT.  The bitmasks name
+    // the Tatsugiri and pending Dondozo battler slots; commanderActive stores
+    // the swallowed form on Dondozo so Order Up still works if Tatsugiri faints.
+    u8 commandingDondozo;
+    u8 commanderReleasePending;
+    u16 commanderActive[MAX_BATTLERS_COUNT];
 };
 
 #define GET_MOVE_TYPE(move, typeArg)                        \

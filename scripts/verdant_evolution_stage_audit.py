@@ -32,6 +32,11 @@ PARTIES_PATH = ROOT / "src/data/trainer_parties.h"
 TRAINERS_PATH = ROOT / "src/data/trainers.h"
 POLICY_PATH = ROOT / "docs/verdant_evolution_stage_policy.md"
 WILD_ENCOUNTERS_PATH = ROOT / "src/data/wild_encounters.json"
+REMATCH_RE = re.compile(
+    r"\[(REMATCH_[A-Z0-9_]+)\]\s*=\s*REMATCH\("
+    r"(TRAINER_[A-Z0-9_]+),\s*(TRAINER_[A-Z0-9_]+),\s*"
+    r"(TRAINER_[A-Z0-9_]+),\s*(TRAINER_[A-Z0-9_]+),\s*[A-Z0-9_]+\)"
+)
 
 # These change a Pokemon during battle and are not family-stage progression.
 BATTLE_TRANSFORM_METHODS = {
@@ -446,12 +451,20 @@ def encounter_campaign_state(
     references: dict[str, list[dict]],
     strict_caps: list[int],
     expected_cap: int | None = None,
+    rematch_first_ids: dict[str, str] | None = None,
 ) -> dict:
     sources = []
+    rematch_first_ids = rematch_first_ids or {}
     for trainer_id in trainer_ids:
         trainer_sources = [
             row for row in references.get(trainer_id, []) if row["role"] == "opponent"
         ]
+        if not trainer_sources and trainer_id in rematch_first_ids:
+            trainer_sources = [
+                row
+                for row in references.get(rematch_first_ids[trainer_id], [])
+                if row["role"] == "opponent"
+            ]
         if not trainer_sources:
             raise ValueError(f"{trainer_id}: no reachable campaign trainerbattle reference")
         sources.extend(trainer_sources)
@@ -508,6 +521,11 @@ def main() -> None:
     parties_text = read(PARTIES_PATH)
     trainer_blocks = doubles.trainer_blocks(trainers_text)
     references = guide.script_references()
+    rematch_first_ids = {
+        trainer_id: match.group(2)
+        for match in REMATCH_RE.finditer(read(ROOT / "src/battle_setup.c"))
+        for trainer_id in match.groups()[1:]
+    }
     strict_caps = parse_strict_caps()
     evolutions = parse_evolutions()
     incoming, outgoing = stage_graph(evolutions)
@@ -543,7 +561,11 @@ def main() -> None:
         if design.get("status") != "closed":
             continue
         state = encounter_campaign_state(
-            design.get("trainer_ids", []), references, strict_caps, design.get("strict_cap")
+            design.get("trainer_ids", []),
+            references,
+            strict_caps,
+            design.get("strict_cap"),
+            rematch_first_ids,
         )
         # The strict young-stage gate applies until the first reachable Mega
         # Bracelet grant, including the cap-20 Route 116/Dewford chapter.

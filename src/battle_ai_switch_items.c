@@ -14,6 +14,7 @@
 #include "constants/items.h"
 #include "constants/hold_effects.h"
 #include "constants/moves.h"
+#include "constants/opponents.h"
 
 // this file's functions
 static bool8 HasSuperEffectiveMoveAgainstOpponents(bool8 noRng);
@@ -24,6 +25,7 @@ static bool8 CanPartyMonSurviveHazards(struct Pokemon *mon);
 static u32 CalculateHazardDamage(void);
 static u16 GetTypeMatchup(u8 attackingType, u8 defendingType1, u8 defendingType2);
 static u8 PredictFoesMoveType(u32 opposingBattler);
+static u8 GetFlanneryFormationSwitch(struct Pokemon *party, u8 invalidMons, u8 partnerBattler);
 
 void GetAIPartyIndexes(u32 battlerId, s32 *firstId, s32 *lastId)
 {
@@ -852,6 +854,82 @@ static u32 GetBestMonForSwitch(struct Pokemon *party, int firstId, int lastId, u
     return bestDamageMonId;
 }
 
+static u8 FindFlanneryFormationMember(struct Pokemon *party, u8 invalidMons, u16 species)
+{
+    u32 i;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (!(invalidMons & gBitTable[i])
+         && GetMonData(&party[i], MON_DATA_SPECIES) == species)
+            return i;
+    }
+
+    return PARTY_SIZE;
+}
+
+// Flannery's main-story party is two formations and a finale, not six
+// interchangeable damage rolls. Preserve the fast lead while either original
+// partner remains, pair the two slow Fire users when both leads fall together,
+// then bridge through Heatran before exposing Mega Emboar. Invalid slots still
+// include active battlers, simultaneous selections, faints, and lethal hazards.
+static u8 GetFlanneryFormationSwitch(struct Pokemon *party, u8 invalidMons, u8 partnerBattler)
+{
+    static const u16 sLeadPartnerOrder[] =
+    {
+        SPECIES_HEATRAN, SPECIES_DELPHOX, SPECIES_SKELEDIRGE, SPECIES_EMBOAR,
+    };
+    static const u16 sDelphoxPartnerOrder[] =
+    {
+        SPECIES_SKELEDIRGE, SPECIES_HEATRAN, SPECIES_EMBOAR, SPECIES_TORKOAL, SPECIES_LILLIGANT,
+    };
+    static const u16 sSkeledirgePartnerOrder[] =
+    {
+        SPECIES_DELPHOX, SPECIES_HEATRAN, SPECIES_EMBOAR, SPECIES_TORKOAL, SPECIES_LILLIGANT,
+    };
+    static const u16 sNoPartnerOrder[] =
+    {
+        SPECIES_DELPHOX, SPECIES_SKELEDIRGE, SPECIES_HEATRAN, SPECIES_EMBOAR, SPECIES_TORKOAL, SPECIES_LILLIGANT,
+    };
+    const u16 *order = sNoPartnerOrder;
+    u32 orderCount = ARRAY_COUNT(sNoPartnerOrder);
+    u16 partnerSpecies = SPECIES_NONE;
+    u32 i;
+
+    if (GetBattlerSide(gActiveBattler) != B_SIDE_OPPONENT
+     || gTrainerBattleOpponent_A != TRAINER_FLANNERY_1
+     || !(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
+        return PARTY_SIZE;
+
+    if (partnerBattler != gActiveBattler && IsBattlerAlive(partnerBattler))
+        partnerSpecies = gBattleMons[partnerBattler].species;
+
+    if (partnerSpecies == SPECIES_TORKOAL || partnerSpecies == SPECIES_LILLIGANT)
+    {
+        order = sLeadPartnerOrder;
+        orderCount = ARRAY_COUNT(sLeadPartnerOrder);
+    }
+    else if (partnerSpecies == SPECIES_DELPHOX)
+    {
+        order = sDelphoxPartnerOrder;
+        orderCount = ARRAY_COUNT(sDelphoxPartnerOrder);
+    }
+    else if (partnerSpecies == SPECIES_SKELEDIRGE)
+    {
+        order = sSkeledirgePartnerOrder;
+        orderCount = ARRAY_COUNT(sSkeledirgePartnerOrder);
+    }
+
+    for (i = 0; i < orderCount; i++)
+    {
+        u8 partyIndex = FindFlanneryFormationMember(party, invalidMons, order[i]);
+        if (partyIndex != PARTY_SIZE)
+            return partyIndex;
+    }
+
+    return PARTY_SIZE;
+}
+
 u8 GetMostSuitableMonToSwitchInto(void)
 {
     u32 opposingBattler = 0;
@@ -909,6 +987,10 @@ u8 GetMostSuitableMonToSwitchInto(void)
         else
             aliveCount++;
     }
+
+    bestMonId = GetFlanneryFormationSwitch(party, invalidMons, battlerIn2);
+    if (bestMonId != PARTY_SIZE)
+        return bestMonId;
 
     bestMonId = GetBestMonBatonPass(party, firstId, lastId, invalidMons, aliveCount);
     if (bestMonId != PARTY_SIZE)

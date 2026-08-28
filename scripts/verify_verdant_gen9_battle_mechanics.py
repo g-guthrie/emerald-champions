@@ -116,7 +116,8 @@ def main() -> None:
     )
     for fragment in (
         "SPECIES_DONDOZO",
-        "ABILITY_COMMANDER",
+        "IsCommandedDondozo(gBattlerAttacker)",
+        "gBattleStruct->commanderActive[gBattlerAttacker]",
         "SPECIES_TATSUGIRI_DROOPY",
         "MOVE_EFFECT_DEF_PLUS_1",
         "SPECIES_TATSUGIRI_STRETCHY",

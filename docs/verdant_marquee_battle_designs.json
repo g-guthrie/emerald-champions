@@ -11,8 +11,20 @@
     "pokemon_league_main_story": {
       "strict_cap": 80,
       "level_semantics": "Trainer levels are offsets from the active strict cap.",
-      "allowed_battle_transformations": ["Mega Evolution", "Primal Reversion"],
-      "forbidden_battle_transformations": ["Terastallization", "Z-Moves", "Dynamax", "Gigantamax"],
+      "authored_difficulty_setting": "Hard",
+      "medium_trainer_level_delta": -2,
+      "easy_trainer_level_delta": -4,
+      "difficulty_changes_only_opposing_trainer_levels": true,
+      "allowed_battle_transformations": [
+        "Mega Evolution",
+        "Primal Reversion"
+      ],
+      "forbidden_battle_transformations": [
+        "Terastallization",
+        "Z-Moves",
+        "Dynamax",
+        "Gigantamax"
+      ],
       "automatic_healing_between_members": false,
       "manual_overworld_bag_between_members": true,
       "pokemon_menu_between_members": true,
@@ -55,6 +67,8 @@
       },
       "concise_rationale": "Sidney has one escalation: Incineroar and Urshifu create the opening target dilemma, Yveltal establishes Dark Aura and Tailwind, Mega Absol owns one stable item-and-burn disruption phase, Darkrai proactively changes speed or controls a revealed answer, and Iron Head Supreme Overlord Kingambit is the sole final boss.",
       "campaign_state": {
+        "canonical_stage": "First main-story Elite Four member at League entry",
+        "location": "EverGrandeCity_SidneysRoom",
         "strict_cap": 80,
         "player_tools": [
           "Six cap-80 Pokemon chosen from the campaign encounter pool available before League entry",
@@ -67,7 +81,8 @@
         "evolution_phase": "Fully evolved and single-stage Pokemon are expected. No early-stage preservation rule applies at cap 80.",
         "preparation_access": "Full PC, move-teacher, ability, item, and leveling preparation is available before League entry; party composition is locked after entry.",
         "gauntlet_position": "First Elite Four member. The player enters fully prepared, then must manually repair Sidney's HP and faint pressure before Phoebe.",
-        "mechanics_baseline_id": "pokemon_league_main_story"
+        "mechanics_baseline_id": "pokemon_league_main_story",
+        "live_difficulty": "Hard uses authored offsets; Medium subtracts two levels and Easy subtracts four from every opposing trainer Pokemon without changing teams, stages, sets, items, abilities, EVs, AI, formats, or the player cap."
       },
       "runtime": {
         "trainer_ids": [
@@ -128,6 +143,7 @@
       "rolling_context": {
         "available": false,
         "reason": "The exact chronological rolling ledger has not yet reached the Pokemon League. This dossier therefore binds to the campaign anchors and must be rechecked against the final preceding ten battles before source implementation.",
+        "previous_encounters": [],
         "protected_neighbor_anchors": [
           "ELITE_FOUR_PHOEBE",
           "ELITE_FOUR_GLACIA",
@@ -356,12 +372,12 @@
           {
             "state": "steal-position",
             "condition": "Opening Incineroar plus Urshifu board",
-                    "behavior": "Enumerate joint legal action and target pairs for Incineroar and Urshifu. Prefer pressure on two distinct opposing actions, allow a shared target for a knockout or superior visible board, and choose from Fake Out, Knock Off, Wicked Blow, Close Combat, Iron Head, U-turn, Flare Blitz, or Parting Shot after resolving redirection, immunity, Choice lock, Fairy knockout value, and Eject timing."
+            "behavior": "Enumerate joint legal action and target pairs for Incineroar and Urshifu. Prefer pressure on two distinct opposing actions, allow a shared target for a knockout or superior visible board, and choose from Fake Out, Knock Off, Wicked Blow, Close Combat, Iron Head, U-turn, Flare Blitz, or Parting Shot after resolving redirection, immunity, Choice lock, Fairy knockout value, and Eject timing."
           },
           {
             "state": "aura-tempo",
-                    "condition": "A reserve is required and healthy Yveltal either supplies absent-Tailwind tempo or the active-Trick-Room survival branch",
-                    "behavior": "Under ordinary speed state establish Tailwind when Yveltal survives. Under active Trick Room suppress Tailwind, use Roseli-backed Snarl, Protect, or Oblivion Wing to consume room turns and blunt Fairy pressure, then shape the next visible reserve decision."
+            "condition": "A reserve is required and healthy Yveltal either supplies absent-Tailwind tempo or the active-Trick-Room survival branch",
+            "behavior": "Under ordinary speed state establish Tailwind when Yveltal survives. Under active Trick Room suppress Tailwind, use Roseli-backed Snarl, Protect, or Oblivion Wing to consume room turns and blunt Fairy pressure, then shape the next visible reserve decision."
           },
           {
             "state": "mega-disruption",
@@ -376,7 +392,7 @@
           {
             "state": "overlord-climax",
             "condition": "At least four Sidney allies have visibly fainted and no other healthy reserve exists, or Kingambit is the only legal replacement in an unusual simultaneous-faint or forced-replacement state",
-                    "behavior": "Select the final queued Kingambit and use the actual Supreme Overlord multiplier. Set Swords Dance only after full two-slot survival and revealed-disruption checks. Use Sucker Punch only for a visible priority knockout against an established damaging pattern and never repeat after failure; otherwise finish through Kowtow Cleave or Iron Head."
+            "behavior": "Select the final queued Kingambit and use the actual Supreme Overlord multiplier. Set Swords Dance only after full two-slot survival and revealed-disruption checks. Use Sucker Punch only for a visible priority knockout against an established damaging pattern and never repeat after failure; otherwise finish through Kowtow Cleave or Iron Head."
           }
         ]
       },
@@ -647,6 +663,8 @@
       },
       "concise_rationale": "Phoebe converts Wolfe Glick's Orlando-winning survival clock into a Ghost-led League battle: Mega Gengar is the only trapper, Gengar and Flutter Mane are credible singers, Amoonguss and Aegislash buy finite turns, then non-Protect Mimikyu and four-attack Marshadow make the direct-cleanup phase visibly different from the clock.",
       "campaign_state": {
+        "canonical_stage": "Second main-story Elite Four member immediately after Sidney",
+        "location": "EverGrandeCity_PhoebesRoom",
         "strict_cap": 80,
         "player_tools": [
           "The same six-Pokemon cap-80 party carried out of Sidney's room",
@@ -659,7 +677,8 @@
         "evolution_phase": "Fully evolved, mythical, paradox, and single-stage threats are appropriate at the League.",
         "preparation_access": "The player may manually heal Sidney's damage before entering but cannot change the six-member party from the PC.",
         "gauntlet_position": "Second Elite Four member. Her clock can create faints, sleep, and burn that require manual Bag recovery before Glacia.",
-        "mechanics_baseline_id": "pokemon_league_main_story"
+        "mechanics_baseline_id": "pokemon_league_main_story",
+        "live_difficulty": "Hard uses authored offsets; Medium subtracts two levels and Easy subtracts four from every opposing trainer Pokemon without changing teams, stages, sets, items, abilities, EVs, AI, formats, or the player cap."
       },
       "runtime": {
         "trainer_ids": [
@@ -720,6 +739,7 @@
       "rolling_context": {
         "available": false,
         "reason": "The chronological ledger has not reached the League. This design is anchored against Sidney and the reserved later League identities and must be compared with the final preceding ten battles before implementation.",
+        "previous_encounters": [],
         "protected_neighbor_anchors": [
           "ELITE_FOUR_SIDNEY",
           "ELITE_FOUR_GLACIA",
@@ -1227,7 +1247,9 @@
         ],
         "mega_access": "Full main-story Mega access; one player Mega and one opponent Mega remain the only battle gimmick.",
         "evolution_phase": "Endgame phase; fully evolved, single-stage, legendary, mythical, regional-form, curated Gen 9, and Champions Mega Pokemon are eligible.",
-        "preparation_access": "There is no automatic restoration after Phoebe. The player regains normal control in Phoebe's room and Hall 2 and may use carried healing, status, PP, held-item, Pokemon-menu, and save options before entering Glacia's room. Party composition remains locked after League entry."
+        "preparation_access": "There is no automatic restoration after Phoebe. The player regains normal control in Phoebe's room and Hall 2 and may use carried healing, status, PP, held-item, Pokemon-menu, and save options before entering Glacia's room. Party composition remains locked after League entry.",
+        "gauntlet_position": "Third Elite Four member. Her poison, trapping, item disruption, and detonation pressure can force manual status, HP, PP, and held-item repair before Drake.",
+        "live_difficulty": "Hard uses authored offsets; Medium subtracts two levels and Easy subtracts four from every opposing trainer Pokemon without changing teams, stages, sets, items, abilities, EVs, AI, formats, or the player cap."
       },
       "runtime": {
         "trainer_ids": [
@@ -1265,7 +1287,34 @@
             "scope": "deferred-to-rematch-phase",
             "reachability": "four labels exist, but current VAR_ELITE_4_MODE selections have no source consumer; audit before treating the unused labels as reachable"
           }
-        ]
+        ],
+        "party_size": 6,
+        "required": true,
+        "source_paths": [
+          "src/data/trainer_parties.h:sParty_Glacia",
+          "src/data/trainers.h:TRAINER_GLACIA",
+          "data/maps/EverGrandeCity_GlaciasRoom/scripts.inc"
+        ],
+        "current_source_baseline": {
+          "party": [
+            "SPECIES_NINETALES_ALOLAN",
+            "SPECIES_KYUREM",
+            "SPECIES_FROSLASS",
+            "SPECIES_ARTICUNO",
+            "SPECIES_GLASTRIER",
+            "SPECIES_ABOMASNOW"
+          ],
+          "level_offsets": [
+            0,
+            0,
+            0,
+            0,
+            1,
+            2
+          ],
+          "guide_difficulty": 96,
+          "guide_design_status": "not individually closed"
+        }
       },
       "rolling_context": {
         "available": false,
@@ -1276,7 +1325,9 @@
           "CHAMPION_WALLACE",
           "POSTGAME_ELITE_FOUR_REMATCH_GAUNTLET"
         ],
-        "recent_hook_refresh_required": true
+        "recent_hook_refresh_required": true,
+        "previous_encounters": [],
+        "required_preimplementation_review": "Refresh the exact prior-ten physical encounters at chronological implementation, then review species, family, Mega, legendary, item, signature-move, tempo, primary-question, and historic-reference collisions before changing source."
       },
       "identity": {
         "memory_hook": "Mega Glalie visibly pressures with Double-Edge before its later detonation window, Toxapex traps and strips an item, and Glastrier closes the shattered field as the one late snowball.",
@@ -1661,6 +1712,15 @@
           "The previous-ten chronological context does not exist yet.",
           "Real-ROM AI behavior and observed difficulty are unknown.",
           "Postgame rematch variants remain deferred."
+        ],
+        "source_blockers": [
+          "The detonation cue, source state machine, and revised reserve roles remain unimplemented and unplayed.",
+          "The revised party, lower offsets, no-turn-zero-Explosion gate, one-time pre-selection crack cue, Toxapex transition, board-state reserve selection, and Glastrier climax are not implemented.",
+          "Exact dialogue is not written or width-rendered.",
+          "The guide still describes an older Glacia roster.",
+          "The previous-ten chronological context does not exist yet.",
+          "Real-ROM AI behavior and observed difficulty are unknown.",
+          "Postgame rematch variants remain deferred."
         ]
       },
       "mechanics_proposal": null,
@@ -1729,7 +1789,9 @@
         ],
         "mega_access": "Full main-story Mega access; one player Mega and one opponent Mega remain the only battle gimmick.",
         "evolution_phase": "Endgame phase; fully evolved, single-stage, legendary, mythical, regional-form, curated Gen 9, and Champions Mega Pokemon are eligible.",
-        "preparation_access": "There is no automatic restoration after Glacia. The player regains normal control in Glacia's room and Hall 3 and may use carried healing, status, PP, held-item, Pokemon-menu, and save options before initiating Drake. After victory, Drake's room and Hall 4 provide another manual preparation window before the Champion room forces Wallace's approach."
+        "preparation_access": "There is no automatic restoration after Glacia. The player regains normal control in Glacia's room and Hall 3 and may use carried healing, status, PP, held-item, Pokemon-menu, and save options before initiating Drake. After victory, Drake's room and Hall 4 provide another manual preparation window before the Champion room forces Wallace's approach.",
+        "gauntlet_position": "Fourth Elite Four member and the only intentional singles duel in the main-story League. Victory restores overworld control for manual repair before Wallace.",
+        "live_difficulty": "Hard uses authored offsets; Medium subtracts two levels and Easy subtracts four from every opposing trainer Pokemon without changing teams, stages, sets, items, abilities, EVs, AI, formats, or the player cap."
       },
       "runtime": {
         "trainer_ids": [
@@ -1767,7 +1829,34 @@
             "scope": "deferred-to-rematch-phase",
             "reachability": "four labels exist, but current VAR_ELITE_4_MODE selections have no source consumer; audit before treating the unused labels as reachable"
           }
-        ]
+        ],
+        "party_size": 6,
+        "required": true,
+        "source_paths": [
+          "src/data/trainer_parties.h:sParty_Drake",
+          "src/data/trainers.h:TRAINER_DRAKE",
+          "data/maps/EverGrandeCity_DrakesRoom/scripts.inc"
+        ],
+        "current_source_baseline": {
+          "party": [
+            "SPECIES_DIALGA",
+            "SPECIES_ZYGARDE_50_POWER_CONSTRUCT",
+            "SPECIES_RESHIRAM",
+            "SPECIES_NAGANADEL",
+            "SPECIES_RAYQUAZA",
+            "SPECIES_SALAMENCE"
+          ],
+          "level_offsets": [
+            0,
+            0,
+            0,
+            0,
+            1,
+            2
+          ],
+          "guide_difficulty": 88,
+          "guide_design_status": "not individually closed"
+        }
       },
       "rolling_context": {
         "available": false,
@@ -1778,7 +1867,9 @@
           "POSTGAME_ELITE_FOUR_REMATCH_GAUNTLET",
           "STEVEN_POSTGAME_SUPERBOSS"
         ],
-        "recent_hook_refresh_required": true
+        "recent_hook_refresh_required": true,
+        "previous_encounters": [],
+        "required_preimplementation_review": "Refresh the exact prior-ten physical encounters at chronological implementation, then review species, family, Mega, legendary, item, signature-move, tempo, primary-question, and historic-reference collisions before changing source."
       },
       "identity": {
         "memory_hook": "Garchomp marks the field, mixed Dragapult and Scarf Hydreigon force different defenses, anti-Fairy Dragalge clears the lane, and Latios visibly sacrifices its momentum so special Mega Dragonite can become the one true climax.",
@@ -2178,6 +2269,16 @@
           "The previous-ten chronological context does not exist yet.",
           "Real-ROM AI behavior and observed difficulty are unknown.",
           "Postgame rematch variants remain deferred."
+        ],
+        "source_blockers": [
+          "No source implementation or runtime matchup evidence exists for the revised handoff and final Mega sequence.",
+          "The revised party, lower offsets, board-state selector, no-pivot mixed Dragapult, Latios handoff, accurate coverage, and sole four-attack Mega Dragonite climax are not implemented.",
+          "Required matchup tests against cap-80 Fairy, Ice, priority, hazard, bulky-special, Tailwind-stall, Memento-switch, and anti-Mega plans have not run.",
+          "Exact dialogue is not written or width-rendered.",
+          "The guide still describes an older Drake roster.",
+          "The previous-ten chronological context does not exist yet.",
+          "Real-ROM AI behavior and observed difficulty are unknown.",
+          "Postgame rematch variants remain deferred."
         ]
       },
       "mechanics_proposal": null,
@@ -2282,7 +2383,9 @@
         ],
         "mega_access": "Full main-story Mega access; one player Mega and one opponent Mega remain the only battle gimmick.",
         "evolution_phase": "Endgame phase; fully evolved, single-stage, legendary, mythical, regional-form, curated Gen 9, and Champions Mega Pokemon are eligible.",
-        "preparation_access": "The League clerk before entry sells Hyper Potions, Max Potions, Full Restores, Revives, Full Heals, Ethers, and Max Ethers. After Drake, the player regains control in Drake's room and Hall 4 for manual healing, item changes, and saving; entering the Champion room then forces the Wallace approach."
+        "preparation_access": "The League clerk before entry sells Hyper Potions, Max Potions, Full Restores, Revives, Full Heals, Ethers, and Max Ethers. After Drake, the player regains control in Drake's room and Hall 4 for manual healing, item changes, and saving; entering the Champion room then forces the Wallace approach.",
+        "gauntlet_position": "Final main-story League battle. The player may manually repair and save in Drake's room and Hall 4, but entering the Champion room forces Wallace's approach.",
+        "live_difficulty": "Hard uses authored offsets; Medium subtracts two levels and Easy subtracts four from every opposing trainer Pokemon without changing teams, stages, sets, items, abilities, EVs, AI, formats, or the player cap."
       },
       "runtime": {
         "trainer_ids": [
@@ -2318,7 +2421,34 @@
             "scope": "deferred-to-rematch-phase",
             "reachability": "labels exist, but current VAR_ELITE_4_MODE selections have no source consumer; audit before treating them as reachable"
           }
-        ]
+        ],
+        "party_size": 6,
+        "required": true,
+        "source_paths": [
+          "src/data/trainer_parties.h:sParty_Wallace",
+          "src/data/trainers.h:TRAINER_WALLACE",
+          "data/maps/EverGrandeCity_ChampionsRoom/scripts.inc"
+        ],
+        "current_source_baseline": {
+          "party": [
+            "SPECIES_KYOGRE",
+            "SPECIES_ZAPDOS",
+            "SPECIES_FERROTHORN",
+            "SPECIES_MANAPHY",
+            "SPECIES_PALKIA",
+            "SPECIES_MILOTIC"
+          ],
+          "level_offsets": [
+            0,
+            0,
+            0,
+            0,
+            1,
+            2
+          ],
+          "guide_difficulty": 99,
+          "guide_design_status": "not individually closed"
+        }
       },
       "rolling_context": {
         "available": false,
@@ -2329,7 +2459,9 @@
           "POSTGAME_GYM_REMATCH_CYCLE",
           "POSTGAME_ELITE_FOUR_REMATCH_GAUNTLET"
         ],
-        "recent_hook_refresh_required": true
+        "recent_hook_refresh_required": true,
+        "previous_encounters": [],
+        "required_preimplementation_review": "Refresh the exact prior-ten physical encounters at chronological implementation, then review species, family, Mega, legendary, item, signature-move, tempo, primary-question, and historic-reference collisions before changing source."
       },
       "identity": {
         "memory_hook": "Wallace opens a royal rain assault whose speed depends on an interactable Tailwind, reverses the board behind Ogerpon, then closes with an aggressive Ferrothorn and Mega Milotic pair.",
@@ -2480,7 +2612,7 @@
           "SPECIES_FERROTHORN",
           "SPECIES_MILOTIC"
         ],
-        "mandatory_order_reason": "Kyogre and Tornadus establish the visible fast mode. A required trainer-aware reserve selector\u2014not raw array order\u2014must present Ogerpon with Palkia as the middle pair and Ferrothorn with Mega Milotic as the final pair whenever both members are healthy. If the state cannot produce those pairs honestly, the dossier is not implementation-ready."
+        "mandatory_order_reason": "Kyogre and Tornadus establish the visible fast mode. A required trainer-aware reserve selector—not raw array order—must present Ogerpon with Palkia as the middle pair and Ferrothorn with Mega Milotic as the final pair whenever both members are healthy. If the state cannot produce those pairs honestly, the dossier is not implementation-ready."
       },
       "ai": {
         "existing_flags": [
@@ -2704,6 +2836,15 @@
           "No game source has been changed for this dossier and no real-ROM battle has been run."
         ],
         "known_blockers": [
+          "The dual-speed mode selector and Wallace-specific state machine are not implemented.",
+          "Exact dialogue is not written or width-rendered.",
+          "The previous-ten chronological context does not exist yet.",
+          "Real-ROM AI behavior and observed difficulty are unknown.",
+          "The reserve selector must prove intelligent and legible rather than manufacturing pairs regardless of board history.",
+          "The Ferrothorn and Milotic phase must prove proactive in runtime pacing tests rather than becoming slow cleanup.",
+          "Postgame rematch variants remain deferred."
+        ],
+        "source_blockers": [
           "The dual-speed mode selector and Wallace-specific state machine are not implemented.",
           "Exact dialogue is not written or width-rendered.",
           "The previous-ten chronological context does not exist yet.",

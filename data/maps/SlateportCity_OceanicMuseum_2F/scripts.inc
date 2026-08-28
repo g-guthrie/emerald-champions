@@ -371,19 +371,20 @@ SlateportCity_OceanicMuseum_2F_Text_ArchieWarning: @ 820C059
 	.string "You're not taking this seriously,\n"
 	.string "are you?\p"
 	.string "Fine! You survived both waves.\p"
-	.string "Now Kyogre calls the primal rain,\n"
-	.string "and Mega Malamar turns every\l"
-	.string "setback into power!\p"
+	.string "A good crew brings its own storm,\n"
+	.string "and mine planned every handoff!\p"
+	.string "Mega Malamar turns every setback\n"
+	.string "into power!\p"
 	.string "I, Archie, will stop your meddling!$"
 
 SlateportCity_OceanicMuseum_2F_Text_ArchieDefeat:
-	.string "What?! You broke the primal rain\n"
-	.string "and my Mega's advance?$"
+	.string "What?! You broke every handoff\n"
+	.string "and stopped my Mega's advance?$"
 
 SlateportCity_OceanicMuseum_2F_Text_ArchieDefeated:
 	.string "Ah, whatever. You can keep the parts\n"
 	.string "for the time being.\p"
-	.string "This was only Aqua's first tide!\n"
+	.string "This was only Aqua's first heist!\n"
 	.string "Our complete plan will prevail!\p"
 	.string "And don't you forget it!$"
 

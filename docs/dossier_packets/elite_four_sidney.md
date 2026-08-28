@@ -15,6 +15,12 @@ This packet is authoring context, not an implemented or closed design.
 
 - Strict Cap: `80`
 - Level Semantics: `Trainer levels are offsets from the active strict cap.`
+- Authored Difficulty Setting: `Hard`
+- Medium Trainer Level Delta: `-2`
+- Easy Trainer Level Delta: `-4`
+- Difficulty Changes Only Opposing Trainer Levels: `True`
+- Allowed Battle Transformations: `['Mega Evolution', 'Primal Reversion']`
+- Forbidden Battle Transformations: `['Terastallization', 'Z-Moves', 'Dynamax', 'Gigantamax']`
 - Automatic Healing Between Members: `False`
 - Manual Overworld Bag Between Members: `True`
 - Pokemon Menu Between Members: `True`

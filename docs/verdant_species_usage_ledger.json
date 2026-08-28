@@ -9,28 +9,28 @@
     "final_coverage": "Requires an explicitly complete canonical sequence and actual use of every required legendary family and Mega mechanism."
   },
   "source_identity": {
-    "docs/verdant_battle_sequence.json": "a98cc065cc93ffc2d78d21ea86cfb394612b208012f915a8e79e1689468ccb7b",
-    "docs/verdant_bespoke_battle_designs.json": "776c38bf68ccf37ce49cbd42e5b2346b9e4aa2e728cfd8bcb970a564507a691b",
-    "docs/verdant_historic_team_reservations.json": "b6d485c178a02919a1c5709776d813d98bd416d0c7384616d2dc0376e4ab30ae",
-    "docs/verdant_marquee_battle_designs.json": "ffa1c35cf391bc4dbed8aa708b7a2d4d7cd7c9eb02f00385b898c5fa902f1870",
-    "src/data/trainers.h": "30a43dc3077b57b0be2fa1b5a7bac4eedc421a17db77a4a257173642c2a66b64",
-    "src/data/trainer_parties.h": "82ca2f495bdd4c89a0bb59a2fde1fe912b9afe53eb0804c8ca022d32ac20ca79",
+    "docs/verdant_battle_sequence.json": "96bcaa84e9061468cffbc6bab2073765ed0c81674f543d27566a029e0807bdc4",
+    "docs/verdant_bespoke_battle_designs.json": "9cd14ecc0ec9c3739b8d89b72724484ff0d7af4d223523cb2a892995c0f6e3d7",
+    "docs/verdant_historic_team_reservations.json": "7f05095624a28352d5e7d075f766eee7dfe6b0d0b9af09d0991efaef923d4ccb",
+    "docs/verdant_marquee_battle_designs.json": "3dc93e9072fef14a9262624d431d73e0c35f9ffa0f701b94798aa2f1761973e3",
+    "src/data/trainers.h": "e200f42fa48d71e743b3f319e19b90abe542c8f3e1abfbbf9e97bcd28028e13b",
+    "src/data/trainer_parties.h": "74a77247636a43bd07401243808ce1dcbbd0bffc112dc6c122c04d126749cbc9",
     "src/starter_choose.c": "7cc07796e9226a479d1b7da66ef17555e8a8e6de50516434720559d902b1b7d8"
   },
   "summary": {
-    "sequence_entries": 76,
-    "closed_encounters": 72,
-    "used_species": 343,
-    "duplicated_species": 34,
+    "sequence_entries": 144,
+    "closed_encounters": 143,
+    "used_species": 574,
+    "duplicated_species": 128,
     "legendary_families": {
-      "used": 23,
-      "reserved": 10,
-      "unplaced": 63
+      "used": 40,
+      "reserved": 9,
+      "unplaced": 47
     },
     "mega_showcases": {
-      "used": 5,
-      "reserved": 5,
-      "unplaced": 60
+      "used": 19,
+      "reserved": 4,
+      "unplaced": 47
     }
   },
   "species": [
@@ -51,8 +51,24 @@
       ]
     },
     {
-      "species": "SPECIES_ACCELGOR",
+      "species": "SPECIES_ABSOL",
       "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 116,
+          "encounter_id": "BATTLE_116_LAVARIDGE_POKECENTER_LUCY",
+          "trainer_ids": [
+            "TRAINER_LUCY_LAVARIDGE"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_ACCELGOR",
+      "appearance_count": 2,
       "appearances": [
         {
           "battle_index": 71,
@@ -63,12 +79,44 @@
           "basis": [
             "trainer-party"
           ]
+        },
+        {
+          "battle_index": 107,
+          "encounter_id": "BATTLE_107_METEOR_FALLS_JOHN_JAY",
+          "trainer_ids": [
+            "TRAINER_JOHN_AND_JAY_1",
+            "TRAINER_JOHN_AND_JAY_2",
+            "TRAINER_JOHN_AND_JAY_3",
+            "TRAINER_JOHN_AND_JAY_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_AEGISLASH",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 124,
+          "encounter_id": "BATTLE_124_MT_CHIMNEY_SHELBY",
+          "trainer_ids": [
+            "TRAINER_SHELBY_1",
+            "TRAINER_SHELBY_2",
+            "TRAINER_SHELBY_3",
+            "TRAINER_SHELBY_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
         }
       ]
     },
     {
       "species": "SPECIES_AERODACTYL",
-      "appearance_count": 1,
+      "appearance_count": 2,
       "appearances": [
         {
           "battle_index": 18,
@@ -79,12 +127,39 @@
           "basis": [
             "trainer-party"
           ]
+        },
+        {
+          "battle_index": 105,
+          "encounter_id": "BATTLE_105_METEOR_FALLS_COURTNEY_GRUNT",
+          "trainer_ids": [
+            "TRAINER_COURTNEY_METEOR_FALLS",
+            "TRAINER_GRUNT_METEOR_FALLS"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_AGGRON",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 84,
+          "encounter_id": "BATTLE_084_ROUTE_112_TRENT",
+          "trainer_ids": [
+            "TRAINER_TRENT_1"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
         }
       ]
     },
     {
       "species": "SPECIES_ALCREMIE",
-      "appearance_count": 1,
+      "appearance_count": 2,
       "appearances": [
         {
           "battle_index": 54,
@@ -96,6 +171,32 @@
             "TRAINER_BRENDAN_ROUTE_110_TREECKO",
             "TRAINER_BRENDAN_ROUTE_110_TORCHIC",
             "TRAINER_BRENDAN_ROUTE_110_MUDKIP"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 127,
+          "encounter_id": "BATTLE_127_MT_CHIMNEY_SHIRLEY",
+          "trainer_ids": [
+            "TRAINER_SHIRLEY"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_ALTARIA",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 103,
+          "encounter_id": "BATTLE_103_ROUTE_114_LENNY",
+          "trainer_ids": [
+            "TRAINER_LENNY"
           ],
           "basis": [
             "trainer-party"
@@ -112,6 +213,22 @@
           "encounter_id": "BATTLE_005_ROUTE_102_TIANA",
           "trainer_ids": [
             "TRAINER_TIANA"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_AMBIPOM",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 116,
+          "encounter_id": "BATTLE_116_LAVARIDGE_POKECENTER_LUCY",
+          "trainer_ids": [
+            "TRAINER_LUCY_LAVARIDGE"
           ],
           "basis": [
             "trainer-party"
@@ -152,6 +269,37 @@
       ]
     },
     {
+      "species": "SPECIES_ARCANINE",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 117,
+          "encounter_id": "BATTLE_117_LAVARIDGE_GYM_COLE_GERALD",
+          "trainer_ids": [
+            "TRAINER_COLE",
+            "TRAINER_GERALD"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 123,
+          "encounter_id": "BATTLE_123_LAVARIDGE_GYM_FLANNERY",
+          "trainer_ids": [
+            "TRAINER_FLANNERY_1",
+            "TRAINER_FLANNERY_2",
+            "TRAINER_FLANNERY_3",
+            "TRAINER_FLANNERY_4",
+            "TRAINER_FLANNERY_5"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_ARCHEN",
       "appearance_count": 1,
       "appearances": [
@@ -161,6 +309,22 @@
           "trainer_ids": [
             "TRAINER_EDWIN_1",
             "TRAINER_JOSEPH"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_ARCHEOPS",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 82,
+          "encounter_id": "BATTLE_082_ROUTE_111_TRAVIS",
+          "trainer_ids": [
+            "TRAINER_TRAVIS"
           ],
           "basis": [
             "trainer-party"
@@ -201,6 +365,25 @@
       ]
     },
     {
+      "species": "SPECIES_ARMALDO",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 133,
+          "encounter_id": "BATTLE_133_ROUTE_111_DUSTY",
+          "trainer_ids": [
+            "TRAINER_DUSTY_1",
+            "TRAINER_DUSTY_2",
+            "TRAINER_DUSTY_3",
+            "TRAINER_DUSTY_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_ARON",
       "appearance_count": 1,
       "appearances": [
@@ -233,6 +416,23 @@
       ]
     },
     {
+      "species": "SPECIES_ARTICUNO",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 104,
+          "encounter_id": "BATTLE_104_ROUTE_114_ANGELINA_LUCAS",
+          "trainer_ids": [
+            "TRAINER_ANGELINA",
+            "TRAINER_LUCAS_1"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_AUDINO",
       "appearance_count": 1,
       "appearances": [
@@ -242,6 +442,39 @@
           "trainer_ids": [
             "TRAINER_ISABEL_1",
             "TRAINER_KALEB"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_AURORUS",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 84,
+          "encounter_id": "BATTLE_084_ROUTE_112_TRENT",
+          "trainer_ids": [
+            "TRAINER_TRENT_1"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_AVALUGG",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 114,
+          "encounter_id": "BATTLE_114_JAGGED_PASS_AUTUMN_JULIO",
+          "trainer_ids": [
+            "TRAINER_AUTUMN",
+            "TRAINER_JULIO"
           ],
           "basis": [
             "trainer-party"
@@ -292,6 +525,22 @@
       ]
     },
     {
+      "species": "SPECIES_BARRASKEWDA",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 97,
+          "encounter_id": "BATTLE_097_ROUTE_114_CLAUDE",
+          "trainer_ids": [
+            "TRAINER_CLAUDE"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_BASCULIN",
       "appearance_count": 1,
       "appearances": [
@@ -309,7 +558,7 @@
     },
     {
       "species": "SPECIES_BASTIODON",
-      "appearance_count": 1,
+      "appearance_count": 2,
       "appearances": [
         {
           "battle_index": 65,
@@ -317,6 +566,19 @@
           "trainer_ids": [
             "TRAINER_VIVIAN",
             "TRAINER_KIRK"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 133,
+          "encounter_id": "BATTLE_133_ROUTE_111_DUSTY",
+          "trainer_ids": [
+            "TRAINER_DUSTY_1",
+            "TRAINER_DUSTY_2",
+            "TRAINER_DUSTY_3",
+            "TRAINER_DUSTY_4"
           ],
           "basis": [
             "trainer-party"
@@ -361,6 +623,83 @@
       ]
     },
     {
+      "species": "SPECIES_BEARTIC",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 104,
+          "encounter_id": "BATTLE_104_ROUTE_114_ANGELINA_LUCAS",
+          "trainer_ids": [
+            "TRAINER_ANGELINA",
+            "TRAINER_LUCAS_1"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_BEEDRILL",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 139,
+          "encounter_id": "BATTLE_139_ROUTE_111_TYRON",
+          "trainer_ids": [
+            "TRAINER_TYRON"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_BEHEEYEM",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 96,
+          "encounter_id": "BATTLE_096_ROUTE_114_KAI_CHARLOTTE",
+          "trainer_ids": [
+            "TRAINER_KAI",
+            "TRAINER_CHARLOTTE"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_BELLOSSOM",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 87,
+          "encounter_id": "BATTLE_087_ROUTE_112_BRYANT_SHAYLA",
+          "trainer_ids": [
+            "TRAINER_BRYANT",
+            "TRAINER_SHAYLA"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 130,
+          "encounter_id": "BATTLE_130_ROUTE_111_HEIDI",
+          "trainer_ids": [
+            "TRAINER_HEIDI"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_BIBAREL",
       "appearance_count": 1,
       "appearances": [
@@ -393,6 +732,93 @@
       ]
     },
     {
+      "species": "SPECIES_BISHARP",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 126,
+          "encounter_id": "BATTLE_126_MT_CHIMNEY_SHEILA",
+          "trainer_ids": [
+            "TRAINER_SHEILA"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_BLACEPHALON",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 108,
+          "encounter_id": "BATTLE_108_MT_CHIMNEY_GRUNT_PAIR",
+          "trainer_ids": [
+            "TRAINER_GRUNT_MT_CHIMNEY_1",
+            "TRAINER_GRUNT_MT_CHIMNEY_2"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_BLAZIKEN",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 123,
+          "encounter_id": "BATTLE_123_LAVARIDGE_GYM_FLANNERY",
+          "trainer_ids": [
+            "TRAINER_FLANNERY_1",
+            "TRAINER_FLANNERY_2",
+            "TRAINER_FLANNERY_3",
+            "TRAINER_FLANNERY_4",
+            "TRAINER_FLANNERY_5"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_BLISSEY",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 78,
+          "encounter_id": "BATTLE_078_ROUTE_111_VICTORIA",
+          "trainer_ids": [
+            "TRAINER_VICTORIA"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_BOLTUND",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 74,
+          "encounter_id": "BATTLE_074_ROUTE_117_AISHA_MELINA_BRANDI",
+          "trainer_ids": [
+            "TRAINER_AISHA",
+            "TRAINER_MELINA",
+            "TRAINER_BRANDI"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_BONSLY",
       "appearance_count": 1,
       "appearances": [
@@ -401,6 +827,25 @@
           "encounter_id": "BATTLE_019_RUSTBORO_GYM_ROXANNE",
           "trainer_ids": [
             "TRAINER_ROXANNE_1"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_BOUFFALANT",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 115,
+          "encounter_id": "BATTLE_115_JAGGED_PASS_ETHAN",
+          "trainer_ids": [
+            "TRAINER_ETHAN_1",
+            "TRAINER_ETHAN_2",
+            "TRAINER_ETHAN_3",
+            "TRAINER_ETHAN_4"
           ],
           "basis": [
             "trainer-party"
@@ -592,6 +1037,48 @@
       ]
     },
     {
+      "species": "SPECIES_CACTURNE",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 85,
+          "encounter_id": "BATTLE_085_ROUTE_112_LARRY",
+          "trainer_ids": [
+            "TRAINER_LARRY"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 129,
+          "encounter_id": "BATTLE_129_ROUTE_111_DREW",
+          "trainer_ids": [
+            "TRAINER_DREW"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_CAMERUPT",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 79,
+          "encounter_id": "BATTLE_079_ROUTE_111_VIVI",
+          "trainer_ids": [
+            "TRAINER_VIVI"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_CARBINK",
       "appearance_count": 1,
       "appearances": [
@@ -641,6 +1128,32 @@
       ]
     },
     {
+      "species": "SPECIES_CARRACOSTA",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 82,
+          "encounter_id": "BATTLE_082_ROUTE_111_TRAVIS",
+          "trainer_ids": [
+            "TRAINER_TRAVIS"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 142,
+          "encounter_id": "BATTLE_142_ROUTE_111_BRYAN",
+          "trainer_ids": [
+            "TRAINER_BRYAN"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_CASTFORM",
       "appearance_count": 1,
       "appearances": [
@@ -670,6 +1183,97 @@
           "encounter_id": "BATTLE_011_PETALBURG_WOODS_JAMES",
           "trainer_ids": [
             "TRAINER_JAMES_1"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_CELESTEELA",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 105,
+          "encounter_id": "BATTLE_105_METEOR_FALLS_COURTNEY_GRUNT",
+          "trainer_ids": [
+            "TRAINER_COURTNEY_METEOR_FALLS",
+            "TRAINER_GRUNT_METEOR_FALLS"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_CENTISKORCH",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 100,
+          "encounter_id": "BATTLE_100_ROUTE_114_SHANE",
+          "trainer_ids": [
+            "TRAINER_SHANE"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 122,
+          "encounter_id": "BATTLE_122_LAVARIDGE_GYM_JEFF",
+          "trainer_ids": [
+            "TRAINER_JEFF"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_CHANDELURE",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 117,
+          "encounter_id": "BATTLE_117_LAVARIDGE_GYM_COLE_GERALD",
+          "trainer_ids": [
+            "TRAINER_COLE",
+            "TRAINER_GERALD"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 123,
+          "encounter_id": "BATTLE_123_LAVARIDGE_GYM_FLANNERY",
+          "trainer_ids": [
+            "TRAINER_FLANNERY_1",
+            "TRAINER_FLANNERY_2",
+            "TRAINER_FLANNERY_3",
+            "TRAINER_FLANNERY_4",
+            "TRAINER_FLANNERY_5"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_CHARIZARD",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 117,
+          "encounter_id": "BATTLE_117_LAVARIDGE_GYM_COLE_GERALD",
+          "trainer_ids": [
+            "TRAINER_COLE",
+            "TRAINER_GERALD"
           ],
           "basis": [
             "trainer-party"
@@ -784,6 +1388,23 @@
       ]
     },
     {
+      "species": "SPECIES_CHESNAUGHT",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 114,
+          "encounter_id": "BATTLE_114_JAGGED_PASS_AUTUMN_JULIO",
+          "trainer_ids": [
+            "TRAINER_AUTUMN",
+            "TRAINER_JULIO"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_CHESPIN",
       "appearance_count": 1,
       "appearances": [
@@ -863,6 +1484,58 @@
       ]
     },
     {
+      "species": "SPECIES_CINCCINO",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 116,
+          "encounter_id": "BATTLE_116_LAVARIDGE_POKECENTER_LUCY",
+          "trainer_ids": [
+            "TRAINER_LUCY_LAVARIDGE"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 126,
+          "encounter_id": "BATTLE_126_MT_CHIMNEY_SHEILA",
+          "trainer_ids": [
+            "TRAINER_SHEILA"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_CINDERACE",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 92,
+          "encounter_id": "BATTLE_092_ROUTE_113_LAO",
+          "trainer_ids": [
+            "TRAINER_LAO_1"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 122,
+          "encounter_id": "BATTLE_122_LAVARIDGE_GYM_JEFF",
+          "trainer_ids": [
+            "TRAINER_JEFF"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_CLAMPERL",
       "appearance_count": 1,
       "appearances": [
@@ -905,6 +1578,67 @@
       ]
     },
     {
+      "species": "SPECIES_CLAWITZER",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 95,
+          "encounter_id": "BATTLE_095_ROUTE_114_NOLAN",
+          "trainer_ids": [
+            "TRAINER_NOLAN"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_CLAYDOL",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 88,
+          "encounter_id": "BATTLE_088_ROUTE_113_LUNG_WYATT_LAWRENCE",
+          "trainer_ids": [
+            "TRAINER_LUNG",
+            "TRAINER_WYATT",
+            "TRAINER_LAWRENCE"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 121,
+          "encounter_id": "BATTLE_121_LAVARIDGE_GYM_JACE_ELI",
+          "trainer_ids": [
+            "TRAINER_JACE",
+            "TRAINER_ELI"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_CLEFABLE",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 116,
+          "encounter_id": "BATTLE_116_LAVARIDGE_POKECENTER_LUCY",
+          "trainer_ids": [
+            "TRAINER_LUCY_LAVARIDGE"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_CLEFAIRY",
       "appearance_count": 1,
       "appearances": [
@@ -931,6 +1665,52 @@
           "trainer_ids": [
             "TRAINER_LILITH",
             "TRAINER_BRENDEN"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_COALOSSAL",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 109,
+          "encounter_id": "BATTLE_109_MT_CHIMNEY_TABITHA",
+          "trainer_ids": [
+            "TRAINER_TABITHA_MT_CHIMNEY"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 121,
+          "encounter_id": "BATTLE_121_LAVARIDGE_GYM_JACE_ELI",
+          "trainer_ids": [
+            "TRAINER_JACE",
+            "TRAINER_ELI"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_COFAGRIGUS",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 135,
+          "encounter_id": "BATTLE_135_ROUTE_111_WILTON",
+          "trainer_ids": [
+            "TRAINER_WILTON_1",
+            "TRAINER_WILTON_2",
+            "TRAINER_WILTON_3",
+            "TRAINER_WILTON_4"
           ],
           "basis": [
             "trainer-party"
@@ -985,6 +1765,42 @@
           "encounter_id": "BATTLE_041_ROUTE_109_LOLA",
           "trainer_ids": [
             "TRAINER_LOLA_1"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_CONKELDURR",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 114,
+          "encounter_id": "BATTLE_114_JAGGED_PASS_AUTUMN_JULIO",
+          "trainer_ids": [
+            "TRAINER_AUTUMN",
+            "TRAINER_JULIO"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_COPPERAJAH",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 101,
+          "encounter_id": "BATTLE_101_ROUTE_114_STEVE",
+          "trainer_ids": [
+            "TRAINER_STEVE_1",
+            "TRAINER_STEVE_2",
+            "TRAINER_STEVE_3",
+            "TRAINER_STEVE_4"
           ],
           "basis": [
             "trainer-party"
@@ -1074,6 +1890,37 @@
       ]
     },
     {
+      "species": "SPECIES_CRADILY",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 88,
+          "encounter_id": "BATTLE_088_ROUTE_113_LUNG_WYATT_LAWRENCE",
+          "trainer_ids": [
+            "TRAINER_LUNG",
+            "TRAINER_WYATT",
+            "TRAINER_LAWRENCE"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 128,
+          "encounter_id": "BATTLE_128_MT_CHIMNEY_SAWYER",
+          "trainer_ids": [
+            "TRAINER_SAWYER_1",
+            "TRAINER_SAWYER_2",
+            "TRAINER_SAWYER_3",
+            "TRAINER_SAWYER_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_CRAMORANT",
       "appearance_count": 1,
       "appearances": [
@@ -1123,13 +1970,24 @@
     },
     {
       "species": "SPECIES_CROBAT",
-      "appearance_count": 1,
+      "appearance_count": 2,
       "appearances": [
         {
-          "battle_index": 48,
-          "encounter_id": "BATTLE_048_SLATEPORT_MUSEUM_ARCHIE",
+          "battle_index": 94,
+          "encounter_id": "BATTLE_094_ROUTE_113_SOPHIE_COBY",
           "trainer_ids": [
-            "TRAINER_ARCHIE_SLATEPORT"
+            "TRAINER_SOPHIE",
+            "TRAINER_COBY"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 110,
+          "encounter_id": "BATTLE_110_MT_CHIMNEY_MAXIE",
+          "trainer_ids": [
+            "TRAINER_MAXIE_MT_CHIMNEY"
           ],
           "basis": [
             "trainer-party"
@@ -1174,14 +2032,40 @@
       ]
     },
     {
-      "species": "SPECIES_CRYOGONAL",
+      "species": "SPECIES_CRUSTLE",
       "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 83,
+          "encounter_id": "BATTLE_083_ROUTE_112_BRICE",
+          "trainer_ids": [
+            "TRAINER_BRICE"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_CRYOGONAL",
+      "appearance_count": 2,
       "appearances": [
         {
           "battle_index": 42,
           "encounter_id": "BATTLE_042_ROUTE_109_CHANDLER",
           "trainer_ids": [
             "TRAINER_CHANDLER"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 89,
+          "encounter_id": "BATTLE_089_ROUTE_113_JAYLEN",
+          "trainer_ids": [
+            "TRAINER_JAYLEN"
           ],
           "basis": [
             "trainer-party"
@@ -1238,6 +2122,22 @@
           ],
           "basis": [
             "runtime-source"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_DARMANITAN_GALARIAN",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 89,
+          "encounter_id": "BATTLE_089_ROUTE_113_JAYLEN",
+          "trainer_ids": [
+            "TRAINER_JAYLEN"
+          ],
+          "basis": [
+            "trainer-party"
           ]
         }
       ]
@@ -1323,6 +2223,56 @@
       ]
     },
     {
+      "species": "SPECIES_DELIBIRD",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 113,
+          "encounter_id": "BATTLE_113_JAGGED_PASS_DIANA",
+          "trainer_ids": [
+            "TRAINER_DIANA_1",
+            "TRAINER_DIANA_2",
+            "TRAINER_DIANA_3",
+            "TRAINER_DIANA_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_DELPHOX",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 94,
+          "encounter_id": "BATTLE_094_ROUTE_113_SOPHIE_COBY",
+          "trainer_ids": [
+            "TRAINER_SOPHIE",
+            "TRAINER_COBY"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 123,
+          "encounter_id": "BATTLE_123_LAVARIDGE_GYM_FLANNERY",
+          "trainer_ids": [
+            "TRAINER_FLANNERY_1",
+            "TRAINER_FLANNERY_2",
+            "TRAINER_FLANNERY_3",
+            "TRAINER_FLANNERY_4",
+            "TRAINER_FLANNERY_5"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_DEWOTT",
       "appearance_count": 2,
       "appearances": [
@@ -1376,7 +2326,7 @@
     },
     {
       "species": "SPECIES_DHELMISE",
-      "appearance_count": 1,
+      "appearance_count": 2,
       "appearances": [
         {
           "battle_index": 37,
@@ -1387,12 +2337,22 @@
           "basis": [
             "trainer-party"
           ]
+        },
+        {
+          "battle_index": 143,
+          "encounter_id": "BATTLE_143_ROUTE_111_BRANDEN",
+          "trainer_ids": [
+            "TRAINER_BRANDEN"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
         }
       ]
     },
     {
       "species": "SPECIES_DIANCIE",
-      "appearance_count": 1,
+      "appearance_count": 2,
       "appearances": [
         {
           "battle_index": 25,
@@ -1400,6 +2360,32 @@
           "trainer_ids": [
             "TRAINER_SARAH",
             "TRAINER_DAWSON"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 125,
+          "encounter_id": "BATTLE_125_MT_CHIMNEY_MELISSA",
+          "trainer_ids": [
+            "TRAINER_MELISSA"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_DIGGERSBY",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 77,
+          "encounter_id": "BATTLE_077_ROUTE_111_VICTOR",
+          "trainer_ids": [
+            "TRAINER_VICTOR"
           ],
           "basis": [
             "trainer-party"
@@ -1416,6 +2402,23 @@
           "encounter_id": "BATTLE_006_ROUTE_104_BILLY",
           "trainer_ids": [
             "TRAINER_BILLY"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_DODRIO",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 114,
+          "encounter_id": "BATTLE_114_JAGGED_PASS_AUTUMN_JULIO",
+          "trainer_ids": [
+            "TRAINER_AUTUMN",
+            "TRAINER_JULIO"
           ],
           "basis": [
             "trainer-party"
@@ -1441,13 +2444,39 @@
     },
     {
       "species": "SPECIES_DONDOZO",
-      "appearance_count": 1,
+      "appearance_count": 2,
       "appearances": [
         {
           "battle_index": 27,
           "encounter_id": "BATTLE_027_RUSTURF_TUNNEL_AQUA_GRUNT",
           "trainer_ids": [
             "TRAINER_GRUNT_RUSTURF_TUNNEL"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 95,
+          "encounter_id": "BATTLE_095_ROUTE_114_NOLAN",
+          "trainer_ids": [
+            "TRAINER_NOLAN"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_DONPHAN",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 84,
+          "encounter_id": "BATTLE_084_ROUTE_112_TRENT",
+          "trainer_ids": [
+            "TRAINER_TRENT_1"
           ],
           "basis": [
             "trainer-party"
@@ -1493,6 +2522,74 @@
       ]
     },
     {
+      "species": "SPECIES_DRACOZOLT",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 106,
+          "encounter_id": "BATTLE_106_METEOR_FALLS_NICOLAS",
+          "trainer_ids": [
+            "TRAINER_NICOLAS_1",
+            "TRAINER_NICOLAS_2",
+            "TRAINER_NICOLAS_3",
+            "TRAINER_NICOLAS_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 128,
+          "encounter_id": "BATTLE_128_MT_CHIMNEY_SAWYER",
+          "trainer_ids": [
+            "TRAINER_SAWYER_1",
+            "TRAINER_SAWYER_2",
+            "TRAINER_SAWYER_3",
+            "TRAINER_SAWYER_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_DRAGALGE",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 106,
+          "encounter_id": "BATTLE_106_METEOR_FALLS_NICOLAS",
+          "trainer_ids": [
+            "TRAINER_NICOLAS_1",
+            "TRAINER_NICOLAS_2",
+            "TRAINER_NICOLAS_3",
+            "TRAINER_NICOLAS_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_DRAGAPULT",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 114,
+          "encounter_id": "BATTLE_114_JAGGED_PASS_AUTUMN_JULIO",
+          "trainer_ids": [
+            "TRAINER_AUTUMN",
+            "TRAINER_JULIO"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_DRAMPA",
       "appearance_count": 1,
       "appearances": [
@@ -1509,8 +2606,66 @@
       ]
     },
     {
-      "species": "SPECIES_DRIFBLIM",
+      "species": "SPECIES_DRAPION",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 116,
+          "encounter_id": "BATTLE_116_LAVARIDGE_POKECENTER_LUCY",
+          "trainer_ids": [
+            "TRAINER_LUCY_LAVARIDGE"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 137,
+          "encounter_id": "BATTLE_137_ROUTE_111_HAYDEN",
+          "trainer_ids": [
+            "TRAINER_HAYDEN"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_DRATINI",
       "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 75,
+          "encounter_id": "BATTLE_075_ROUTE_117_LYDIA",
+          "trainer_ids": [
+            "TRAINER_LYDIA_1"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_DREDNAW",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 100,
+          "encounter_id": "BATTLE_100_ROUTE_114_SHANE",
+          "trainer_ids": [
+            "TRAINER_SHANE"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_DRIFBLIM",
+      "appearance_count": 2,
       "appearances": [
         {
           "battle_index": 56,
@@ -1518,6 +2673,16 @@
           "trainer_ids": [
             "TRAINER_EDWARD",
             "TRAINER_ALYSSA"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 118,
+          "encounter_id": "BATTLE_118_LAVARIDGE_GYM_AXLE",
+          "trainer_ids": [
+            "TRAINER_AXLE"
           ],
           "basis": [
             "trainer-party"
@@ -1585,13 +2750,39 @@
     },
     {
       "species": "SPECIES_DUGTRIO",
-      "appearance_count": 1,
+      "appearance_count": 2,
       "appearances": [
         {
           "battle_index": 51,
           "encounter_id": "BATTLE_051_TRICK_HOUSE_PUZZLE_1_EDDIE",
           "trainer_ids": [
             "TRAINER_EDDIE"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 112,
+          "encounter_id": "BATTLE_112_JAGGED_PASS_MAGMA_GUARD",
+          "trainer_ids": [
+            "TRAINER_GRUNT_JAGGED_PASS"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_DUNSPARCE",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 129,
+          "encounter_id": "BATTLE_129_ROUTE_111_DREW",
+          "trainer_ids": [
+            "TRAINER_DREW"
           ],
           "basis": [
             "trainer-party"
@@ -1637,6 +2828,22 @@
       ]
     },
     {
+      "species": "SPECIES_DURANT",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 140,
+          "encounter_id": "BATTLE_140_ROUTE_111_CELINA",
+          "trainer_ids": [
+            "TRAINER_CELINA"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_DWEBBLE",
       "appearance_count": 1,
       "appearances": [
@@ -1670,6 +2877,25 @@
       ]
     },
     {
+      "species": "SPECIES_EELEKTROSS",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 113,
+          "encounter_id": "BATTLE_113_JAGGED_PASS_DIANA",
+          "trainer_ids": [
+            "TRAINER_DIANA_1",
+            "TRAINER_DIANA_2",
+            "TRAINER_DIANA_3",
+            "TRAINER_DIANA_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_EEVEE",
       "appearance_count": 1,
       "appearances": [
@@ -1695,6 +2921,22 @@
           "trainer_ids": [
             "TRAINER_ISABEL_1",
             "TRAINER_KALEB"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_ELECTIVIRE",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 109,
+          "encounter_id": "BATTLE_109_MT_CHIMNEY_TABITHA",
+          "trainer_ids": [
+            "TRAINER_TABITHA_MT_CHIMNEY"
           ],
           "basis": [
             "trainer-party"
@@ -1752,6 +2994,26 @@
       ]
     },
     {
+      "species": "SPECIES_EMBOAR",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 123,
+          "encounter_id": "BATTLE_123_LAVARIDGE_GYM_FLANNERY",
+          "trainer_ids": [
+            "TRAINER_FLANNERY_1",
+            "TRAINER_FLANNERY_2",
+            "TRAINER_FLANNERY_3",
+            "TRAINER_FLANNERY_4",
+            "TRAINER_FLANNERY_5"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_EMOLGA",
       "appearance_count": 2,
       "appearances": [
@@ -1771,6 +3033,150 @@
           "encounter_id": "BATTLE_068_MAUVILLE_GYM_WATTSON",
           "trainer_ids": [
             "TRAINER_WATTSON_1"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_EMPOLEON",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 136,
+          "encounter_id": "BATTLE_136_ROUTE_111_BROOKE",
+          "trainer_ids": [
+            "TRAINER_BROOKE_1",
+            "TRAINER_BROOKE_2",
+            "TRAINER_BROOKE_3",
+            "TRAINER_BROOKE_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_ENTEI",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 110,
+          "encounter_id": "BATTLE_110_MT_CHIMNEY_MAXIE",
+          "trainer_ids": [
+            "TRAINER_MAXIE_MT_CHIMNEY"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_ESCAVALIER",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 107,
+          "encounter_id": "BATTLE_107_METEOR_FALLS_JOHN_JAY",
+          "trainer_ids": [
+            "TRAINER_JOHN_AND_JAY_1",
+            "TRAINER_JOHN_AND_JAY_2",
+            "TRAINER_JOHN_AND_JAY_3",
+            "TRAINER_JOHN_AND_JAY_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 126,
+          "encounter_id": "BATTLE_126_MT_CHIMNEY_SHEILA",
+          "trainer_ids": [
+            "TRAINER_SHEILA"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_EXCADRILL",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 83,
+          "encounter_id": "BATTLE_083_ROUTE_112_BRICE",
+          "trainer_ids": [
+            "TRAINER_BRICE"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 128,
+          "encounter_id": "BATTLE_128_MT_CHIMNEY_SAWYER",
+          "trainer_ids": [
+            "TRAINER_SAWYER_1",
+            "TRAINER_SAWYER_2",
+            "TRAINER_SAWYER_3",
+            "TRAINER_SAWYER_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_EXEGGUTOR",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 81,
+          "encounter_id": "BATTLE_081_ROUTE_111_IRENE",
+          "trainer_ids": [
+            "TRAINER_IRENE"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_EXEGGUTOR_ALOLAN",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 106,
+          "encounter_id": "BATTLE_106_METEOR_FALLS_NICOLAS",
+          "trainer_ids": [
+            "TRAINER_NICOLAS_1",
+            "TRAINER_NICOLAS_2",
+            "TRAINER_NICOLAS_3",
+            "TRAINER_NICOLAS_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_EXPLOUD",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 103,
+          "encounter_id": "BATTLE_103_ROUTE_114_LENNY",
+          "trainer_ids": [
+            "TRAINER_LENNY"
           ],
           "basis": [
             "trainer-party"
@@ -1912,6 +3318,39 @@
       ]
     },
     {
+      "species": "SPECIES_FLAPPLE",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 81,
+          "encounter_id": "BATTLE_081_ROUTE_111_IRENE",
+          "trainer_ids": [
+            "TRAINER_IRENE"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_FLAREON",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 121,
+          "encounter_id": "BATTLE_121_LAVARIDGE_GYM_JACE_ELI",
+          "trainer_ids": [
+            "TRAINER_JACE",
+            "TRAINER_ELI"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_FLOATZEL",
       "appearance_count": 1,
       "appearances": [
@@ -1978,6 +3417,23 @@
       ]
     },
     {
+      "species": "SPECIES_FLORGES",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 87,
+          "encounter_id": "BATTLE_087_ROUTE_112_BRYANT_SHAYLA",
+          "trainer_ids": [
+            "TRAINER_BRYANT",
+            "TRAINER_SHAYLA"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_FLORGES_BLUE_FLOWER",
       "appearance_count": 1,
       "appearances": [
@@ -2012,6 +3468,45 @@
       ]
     },
     {
+      "species": "SPECIES_FLYGON",
+      "appearance_count": 3,
+      "appearances": [
+        {
+          "battle_index": 79,
+          "encounter_id": "BATTLE_079_ROUTE_111_VIVI",
+          "trainer_ids": [
+            "TRAINER_VIVI"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 110,
+          "encounter_id": "BATTLE_110_MT_CHIMNEY_MAXIE",
+          "trainer_ids": [
+            "TRAINER_MAXIE_MT_CHIMNEY"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 133,
+          "encounter_id": "BATTLE_133_ROUTE_111_DUSTY",
+          "trainer_ids": [
+            "TRAINER_DUSTY_1",
+            "TRAINER_DUSTY_2",
+            "TRAINER_DUSTY_3",
+            "TRAINER_DUSTY_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_FOONGUS",
       "appearance_count": 1,
       "appearances": [
@@ -2020,6 +3515,23 @@
           "encounter_id": "BATTLE_070_ROUTE_117_ISAAC",
           "trainer_ids": [
             "TRAINER_ISAAC_1"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_FORRETRESS",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 94,
+          "encounter_id": "BATTLE_094_ROUTE_113_SOPHIE_COBY",
+          "trainer_ids": [
+            "TRAINER_SOPHIE",
+            "TRAINER_COBY"
           ],
           "basis": [
             "trainer-party"
@@ -2045,7 +3557,7 @@
     },
     {
       "species": "SPECIES_FROAKIE",
-      "appearance_count": 1,
+      "appearance_count": 2,
       "appearances": [
         {
           "battle_index": 1,
@@ -2060,6 +3572,16 @@
           ],
           "basis": [
             "runtime-source"
+          ]
+        },
+        {
+          "battle_index": 75,
+          "encounter_id": "BATTLE_075_ROUTE_117_LYDIA",
+          "trainer_ids": [
+            "TRAINER_LYDIA_1"
+          ],
+          "basis": [
+            "trainer-party"
           ]
         }
       ]
@@ -2113,13 +3635,65 @@
     },
     {
       "species": "SPECIES_FROSLASS",
-      "appearance_count": 1,
+      "appearance_count": 2,
       "appearances": [
         {
           "battle_index": 72,
           "encounter_id": "BATTLE_072_ROUTE_117_MARIA",
           "trainer_ids": [
             "TRAINER_MARIA_1"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 120,
+          "encounter_id": "BATTLE_120_LAVARIDGE_GYM_DANIELLE",
+          "trainer_ids": [
+            "TRAINER_DANIELLE"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_FROSMOTH",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 91,
+          "encounter_id": "BATTLE_091_ROUTE_113_TORI_AND_TIA",
+          "trainer_ids": [
+            "TRAINER_TORI_AND_TIA"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_FURFROU",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 98,
+          "encounter_id": "BATTLE_098_ROUTE_114_NANCY",
+          "trainer_ids": [
+            "TRAINER_NANCY"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 125,
+          "encounter_id": "BATTLE_125_MT_CHIMNEY_MELISSA",
+          "trainer_ids": [
+            "TRAINER_MELISSA"
           ],
           "basis": [
             "trainer-party"
@@ -2136,6 +3710,24 @@
           "encounter_id": "BATTLE_008_ROUTE_104_CINDY",
           "trainer_ids": [
             "TRAINER_CINDY_1"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_GABITE",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 88,
+          "encounter_id": "BATTLE_088_ROUTE_113_LUNG_WYATT_LAWRENCE",
+          "trainer_ids": [
+            "TRAINER_LUNG",
+            "TRAINER_WYATT",
+            "TRAINER_LAWRENCE"
           ],
           "basis": [
             "trainer-party"
@@ -2170,8 +3762,70 @@
       ]
     },
     {
-      "species": "SPECIES_GASTRODON",
+      "species": "SPECIES_GALVANTULA",
       "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 116,
+          "encounter_id": "BATTLE_116_LAVARIDGE_POKECENTER_LUCY",
+          "trainer_ids": [
+            "TRAINER_LUCY_LAVARIDGE"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_GARCHOMP",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 135,
+          "encounter_id": "BATTLE_135_ROUTE_111_WILTON",
+          "trainer_ids": [
+            "TRAINER_WILTON_1",
+            "TRAINER_WILTON_2",
+            "TRAINER_WILTON_3",
+            "TRAINER_WILTON_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_GARGANACL",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 93,
+          "encounter_id": "BATTLE_093_ROUTE_113_DILLON",
+          "trainer_ids": [
+            "TRAINER_DILLON"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 121,
+          "encounter_id": "BATTLE_121_LAVARIDGE_GYM_JACE_ELI",
+          "trainer_ids": [
+            "TRAINER_JACE",
+            "TRAINER_ELI"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_GASTRODON",
+      "appearance_count": 2,
       "appearances": [
         {
           "battle_index": 60,
@@ -2182,12 +3836,22 @@
           "basis": [
             "trainer-party"
           ]
+        },
+        {
+          "battle_index": 131,
+          "encounter_id": "BATTLE_131_ROUTE_111_BEAU",
+          "trainer_ids": [
+            "TRAINER_BEAU"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
         }
       ]
     },
     {
       "species": "SPECIES_GENGAR",
-      "appearance_count": 1,
+      "appearance_count": 2,
       "appearances": [
         {
           "battle_index": 65,
@@ -2195,6 +3859,16 @@
           "trainer_ids": [
             "TRAINER_VIVIAN",
             "TRAINER_KIRK"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 138,
+          "encounter_id": "BATTLE_138_ROUTE_111_BIANCA",
+          "trainer_ids": [
+            "TRAINER_BIANCA"
           ],
           "basis": [
             "trainer-party"
@@ -2211,6 +3885,35 @@
           "encounter_id": "BATTLE_066_MAUVILLE_GYM_BEN",
           "trainer_ids": [
             "TRAINER_BEN"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_GIGALITH",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 76,
+          "encounter_id": "BATTLE_076_RUSTURF_TUNNEL_MIKE",
+          "trainer_ids": [
+            "TRAINER_MIKE_2"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 128,
+          "encounter_id": "BATTLE_128_MT_CHIMNEY_SAWYER",
+          "trainer_ids": [
+            "TRAINER_SAWYER_1",
+            "TRAINER_SAWYER_2",
+            "TRAINER_SAWYER_3",
+            "TRAINER_SAWYER_4"
           ],
           "basis": [
             "trainer-party"
@@ -2244,6 +3947,23 @@
           "encounter_id": "BATTLE_053_ROUTE_110_TIMMY",
           "trainer_ids": [
             "TRAINER_TIMMY"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_GLACEON",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 104,
+          "encounter_id": "BATTLE_104_ROUTE_114_ANGELINA_LUCAS",
+          "trainer_ids": [
+            "TRAINER_ANGELINA",
+            "TRAINER_LUCAS_1"
           ],
           "basis": [
             "trainer-party"
@@ -2295,6 +4015,102 @@
       ]
     },
     {
+      "species": "SPECIES_GLISCOR",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 137,
+          "encounter_id": "BATTLE_137_ROUTE_111_HAYDEN",
+          "trainer_ids": [
+            "TRAINER_HAYDEN"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_GOGOAT",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 82,
+          "encounter_id": "BATTLE_082_ROUTE_111_TRAVIS",
+          "trainer_ids": [
+            "TRAINER_TRAVIS"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_GOLDUCK",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 102,
+          "encounter_id": "BATTLE_102_ROUTE_114_BERNIE",
+          "trainer_ids": [
+            "TRAINER_BERNIE_1",
+            "TRAINER_BERNIE_2",
+            "TRAINER_BERNIE_3",
+            "TRAINER_BERNIE_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 132,
+          "encounter_id": "BATTLE_132_ROUTE_111_BECKY",
+          "trainer_ids": [
+            "TRAINER_BECKY"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_GOLEM",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 76,
+          "encounter_id": "BATTLE_076_RUSTURF_TUNNEL_MIKE",
+          "trainer_ids": [
+            "TRAINER_MIKE_2"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_GOLEM_ALOLAN",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 101,
+          "encounter_id": "BATTLE_101_ROUTE_114_STEVE",
+          "trainer_ids": [
+            "TRAINER_STEVE_1",
+            "TRAINER_STEVE_2",
+            "TRAINER_STEVE_3",
+            "TRAINER_STEVE_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_GOLETT",
       "appearance_count": 1,
       "appearances": [
@@ -2304,6 +4120,88 @@
           "trainer_ids": [
             "TRAINER_VIVIAN",
             "TRAINER_KIRK"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_GOLISOPOD",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 112,
+          "encounter_id": "BATTLE_112_JAGGED_PASS_MAGMA_GUARD",
+          "trainer_ids": [
+            "TRAINER_GRUNT_JAGGED_PASS"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 140,
+          "encounter_id": "BATTLE_140_ROUTE_111_CELINA",
+          "trainer_ids": [
+            "TRAINER_CELINA"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_GOLURK",
+      "appearance_count": 3,
+      "appearances": [
+        {
+          "battle_index": 82,
+          "encounter_id": "BATTLE_082_ROUTE_111_TRAVIS",
+          "trainer_ids": [
+            "TRAINER_TRAVIS"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 108,
+          "encounter_id": "BATTLE_108_MT_CHIMNEY_GRUNT_PAIR",
+          "trainer_ids": [
+            "TRAINER_GRUNT_MT_CHIMNEY_1",
+            "TRAINER_GRUNT_MT_CHIMNEY_2"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 133,
+          "encounter_id": "BATTLE_133_ROUTE_111_DUSTY",
+          "trainer_ids": [
+            "TRAINER_DUSTY_1",
+            "TRAINER_DUSTY_2",
+            "TRAINER_DUSTY_3",
+            "TRAINER_DUSTY_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_GOREBYSS",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 97,
+          "encounter_id": "BATTLE_097_ROUTE_114_CLAUDE",
+          "trainer_ids": [
+            "TRAINER_CLAUDE"
           ],
           "basis": [
             "trainer-party"
@@ -2362,6 +4260,75 @@
       ]
     },
     {
+      "species": "SPECIES_GOUGING_FIRE",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 121,
+          "encounter_id": "BATTLE_121_LAVARIDGE_GYM_JACE_ELI",
+          "trainer_ids": [
+            "TRAINER_JACE",
+            "TRAINER_ELI"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_GOURGEIST",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 113,
+          "encounter_id": "BATTLE_113_JAGGED_PASS_DIANA",
+          "trainer_ids": [
+            "TRAINER_DIANA_1",
+            "TRAINER_DIANA_2",
+            "TRAINER_DIANA_3",
+            "TRAINER_DIANA_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_GOURGEIST_SUPER",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 138,
+          "encounter_id": "BATTLE_138_ROUTE_111_BIANCA",
+          "trainer_ids": [
+            "TRAINER_BIANCA"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_GRAPPLOCT",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 96,
+          "encounter_id": "BATTLE_096_ROUTE_114_KAI_CHARLOTTE",
+          "trainer_ids": [
+            "TRAINER_KAI",
+            "TRAINER_CHARLOTTE"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_GREEDENT",
       "appearance_count": 2,
       "appearances": [
@@ -2381,6 +4348,22 @@
           "trainer_ids": [
             "TRAINER_SHAWN",
             "TRAINER_ANGELO"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_GRENINJA",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 92,
+          "encounter_id": "BATTLE_092_ROUTE_113_LAO",
+          "trainer_ids": [
+            "TRAINER_LAO_1"
           ],
           "basis": [
             "trainer-party"
@@ -2436,6 +4419,22 @@
           ],
           "basis": [
             "runtime-source"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_GROUDON",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 110,
+          "encounter_id": "BATTLE_110_MT_CHIMNEY_MAXIE",
+          "trainer_ids": [
+            "TRAINER_MAXIE_MT_CHIMNEY"
+          ],
+          "basis": [
+            "trainer-party"
           ]
         }
       ]
@@ -2528,6 +4527,56 @@
       ]
     },
     {
+      "species": "SPECIES_HAKAMO_O",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 111,
+          "encounter_id": "BATTLE_111_JAGGED_PASS_ERIC",
+          "trainer_ids": [
+            "TRAINER_ERIC"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_HAPPINY",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 75,
+          "encounter_id": "BATTLE_075_ROUTE_117_LYDIA",
+          "trainer_ids": [
+            "TRAINER_LYDIA_1"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_HARIYAMA",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 74,
+          "encounter_id": "BATTLE_074_ROUTE_117_AISHA_MELINA_BRANDI",
+          "trainer_ids": [
+            "TRAINER_AISHA",
+            "TRAINER_MELINA",
+            "TRAINER_BRANDI"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_HATTREM",
       "appearance_count": 1,
       "appearances": [
@@ -2545,13 +4594,89 @@
     },
     {
       "species": "SPECIES_HAWLUCHA",
-      "appearance_count": 1,
+      "appearance_count": 2,
       "appearances": [
         {
           "battle_index": 36,
           "encounter_id": "BATTLE_036_DEWFORD_GYM_BRAWLY",
           "trainer_ids": [
             "TRAINER_BRAWLY_1"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 130,
+          "encounter_id": "BATTLE_130_ROUTE_111_HEIDI",
+          "trainer_ids": [
+            "TRAINER_HEIDI"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_HAXORUS",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 136,
+          "encounter_id": "BATTLE_136_ROUTE_111_BROOKE",
+          "trainer_ids": [
+            "TRAINER_BROOKE_1",
+            "TRAINER_BROOKE_2",
+            "TRAINER_BROOKE_3",
+            "TRAINER_BROOKE_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_HEATMOR",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 87,
+          "encounter_id": "BATTLE_087_ROUTE_112_BRYANT_SHAYLA",
+          "trainer_ids": [
+            "TRAINER_BRYANT",
+            "TRAINER_SHAYLA"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 118,
+          "encounter_id": "BATTLE_118_LAVARIDGE_GYM_AXLE",
+          "trainer_ids": [
+            "TRAINER_AXLE"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_HEATRAN",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 123,
+          "encounter_id": "BATTLE_123_LAVARIDGE_GYM_FLANNERY",
+          "trainer_ids": [
+            "TRAINER_FLANNERY_1",
+            "TRAINER_FLANNERY_2",
+            "TRAINER_FLANNERY_3",
+            "TRAINER_FLANNERY_4",
+            "TRAINER_FLANNERY_5"
           ],
           "basis": [
             "trainer-party"
@@ -2577,13 +4702,26 @@
     },
     {
       "species": "SPECIES_HERACROSS",
-      "appearance_count": 1,
+      "appearance_count": 2,
       "appearances": [
         {
           "battle_index": 11,
           "encounter_id": "BATTLE_011_PETALBURG_WOODS_JAMES",
           "trainer_ids": [
             "TRAINER_JAMES_1"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 101,
+          "encounter_id": "BATTLE_101_ROUTE_114_STEVE",
+          "trainer_ids": [
+            "TRAINER_STEVE_1",
+            "TRAINER_STEVE_2",
+            "TRAINER_STEVE_3",
+            "TRAINER_STEVE_4"
           ],
           "basis": [
             "trainer-party"
@@ -2600,6 +4738,40 @@
           "encounter_id": "BATTLE_024_ROUTE_116_DEVAN",
           "trainer_ids": [
             "TRAINER_DEVAN"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_HIPPOWDON",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 88,
+          "encounter_id": "BATTLE_088_ROUTE_113_LUNG_WYATT_LAWRENCE",
+          "trainer_ids": [
+            "TRAINER_LUNG",
+            "TRAINER_WYATT",
+            "TRAINER_LAWRENCE"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_HITMONCHAN",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 99,
+          "encounter_id": "BATTLE_099_ROUTE_114_TYRA_IVY",
+          "trainer_ids": [
+            "TRAINER_TYRA_AND_IVY"
           ],
           "basis": [
             "trainer-party"
@@ -2626,6 +4798,23 @@
           "encounter_id": "BATTLE_048_SLATEPORT_MUSEUM_ARCHIE",
           "trainer_ids": [
             "TRAINER_ARCHIE_SLATEPORT"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_HONCHKROW",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 94,
+          "encounter_id": "BATTLE_094_ROUTE_113_SOPHIE_COBY",
+          "trainer_ids": [
+            "TRAINER_SOPHIE",
+            "TRAINER_COBY"
           ],
           "basis": [
             "trainer-party"
@@ -2667,7 +4856,7 @@
     },
     {
       "species": "SPECIES_HOUNDOOM",
-      "appearance_count": 1,
+      "appearance_count": 2,
       "appearances": [
         {
           "battle_index": 55,
@@ -2675,6 +4864,85 @@
           "trainer_ids": [
             "TRAINER_EDWIN_1",
             "TRAINER_JOSEPH"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 123,
+          "encounter_id": "BATTLE_123_LAVARIDGE_GYM_FLANNERY",
+          "trainer_ids": [
+            "TRAINER_FLANNERY_1",
+            "TRAINER_FLANNERY_2",
+            "TRAINER_FLANNERY_3",
+            "TRAINER_FLANNERY_4",
+            "TRAINER_FLANNERY_5"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_HO_OH",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 118,
+          "encounter_id": "BATTLE_118_LAVARIDGE_GYM_AXLE",
+          "trainer_ids": [
+            "TRAINER_AXLE"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 123,
+          "encounter_id": "BATTLE_123_LAVARIDGE_GYM_FLANNERY",
+          "trainer_ids": [
+            "TRAINER_FLANNERY_1",
+            "TRAINER_FLANNERY_2",
+            "TRAINER_FLANNERY_3",
+            "TRAINER_FLANNERY_4",
+            "TRAINER_FLANNERY_5"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_HUNTAIL",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 97,
+          "encounter_id": "BATTLE_097_ROUTE_114_CLAUDE",
+          "trainer_ids": [
+            "TRAINER_CLAUDE"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_HYDREIGON",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 128,
+          "encounter_id": "BATTLE_128_MT_CHIMNEY_SAWYER",
+          "trainer_ids": [
+            "TRAINER_SAWYER_1",
+            "TRAINER_SAWYER_2",
+            "TRAINER_SAWYER_3",
+            "TRAINER_SAWYER_4"
           ],
           "basis": [
             "trainer-party"
@@ -2700,6 +4968,25 @@
       ]
     },
     {
+      "species": "SPECIES_ILLUMISE",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 107,
+          "encounter_id": "BATTLE_107_METEOR_FALLS_JOHN_JAY",
+          "trainer_ids": [
+            "TRAINER_JOHN_AND_JAY_1",
+            "TRAINER_JOHN_AND_JAY_2",
+            "TRAINER_JOHN_AND_JAY_3",
+            "TRAINER_JOHN_AND_JAY_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_IMPIDIMP",
       "appearance_count": 1,
       "appearances": [
@@ -2716,6 +5003,23 @@
       ]
     },
     {
+      "species": "SPECIES_INCINEROAR",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 117,
+          "encounter_id": "BATTLE_117_LAVARIDGE_GYM_COLE_GERALD",
+          "trainer_ids": [
+            "TRAINER_COLE",
+            "TRAINER_GERALD"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_INDEEDEE_FEMALE",
       "appearance_count": 1,
       "appearances": [
@@ -2724,6 +5028,38 @@
           "encounter_id": "BATTLE_052_TRICK_HOUSE_PUZZLE_1_ROBIN",
           "trainer_ids": [
             "TRAINER_ROBIN"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_INFERNAPE",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 102,
+          "encounter_id": "BATTLE_102_ROUTE_114_BERNIE",
+          "trainer_ids": [
+            "TRAINER_BERNIE_1",
+            "TRAINER_BERNIE_2",
+            "TRAINER_BERNIE_3",
+            "TRAINER_BERNIE_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 136,
+          "encounter_id": "BATTLE_136_ROUTE_111_BROOKE",
+          "trainer_ids": [
+            "TRAINER_BROOKE_1",
+            "TRAINER_BROOKE_2",
+            "TRAINER_BROOKE_3",
+            "TRAINER_BROOKE_4"
           ],
           "basis": [
             "trainer-party"
@@ -2832,6 +5168,40 @@
       ]
     },
     {
+      "species": "SPECIES_JIRACHI",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 105,
+          "encounter_id": "BATTLE_105_METEOR_FALLS_COURTNEY_GRUNT",
+          "trainer_ids": [
+            "TRAINER_COURTNEY_METEOR_FALLS",
+            "TRAINER_GRUNT_METEOR_FALLS"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_JOLTEON",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 114,
+          "encounter_id": "BATTLE_114_JAGGED_PASS_AUTUMN_JULIO",
+          "trainer_ids": [
+            "TRAINER_AUTUMN",
+            "TRAINER_JULIO"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_JOLTIK",
       "appearance_count": 1,
       "appearances": [
@@ -2848,6 +5218,22 @@
       ]
     },
     {
+      "species": "SPECIES_JUMPLUFF",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 132,
+          "encounter_id": "BATTLE_132_ROUTE_111_BECKY",
+          "trainer_ids": [
+            "TRAINER_BECKY"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_JYNX",
       "appearance_count": 1,
       "appearances": [
@@ -2856,6 +5242,22 @@
           "encounter_id": "BATTLE_043_SEASHORE_HOUSE_DWAYNE",
           "trainer_ids": [
             "TRAINER_DWAYNE"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_KABUTOPS",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 139,
+          "encounter_id": "BATTLE_139_ROUTE_111_TYRON",
+          "trainer_ids": [
+            "TRAINER_TYRON"
           ],
           "basis": [
             "trainer-party"
@@ -2913,13 +5315,23 @@
     },
     {
       "species": "SPECIES_KARTANA",
-      "appearance_count": 1,
+      "appearance_count": 2,
       "appearances": [
         {
           "battle_index": 50,
           "encounter_id": "BATTLE_050_TRICK_HOUSE_PUZZLE_1_SALLY",
           "trainer_ids": [
             "TRAINER_SALLY"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 143,
+          "encounter_id": "BATTLE_143_ROUTE_111_BRANDEN",
+          "trainer_ids": [
+            "TRAINER_BRANDEN"
           ],
           "basis": [
             "trainer-party"
@@ -2952,6 +5364,41 @@
           "encounter_id": "BATTLE_045_SEASHORE_HOUSE_SIMON",
           "trainer_ids": [
             "TRAINER_SIMON"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_KINGAMBIT",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 124,
+          "encounter_id": "BATTLE_124_MT_CHIMNEY_SHELBY",
+          "trainer_ids": [
+            "TRAINER_SHELBY_1",
+            "TRAINER_SHELBY_2",
+            "TRAINER_SHELBY_3",
+            "TRAINER_SHELBY_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_KINGDRA",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 48,
+          "encounter_id": "BATTLE_048_SLATEPORT_MUSEUM_ARCHIE",
+          "trainer_ids": [
+            "TRAINER_ARCHIE_SLATEPORT"
           ],
           "basis": [
             "trainer-party"
@@ -3009,6 +5456,22 @@
       ]
     },
     {
+      "species": "SPECIES_KLINKLANG",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 109,
+          "encounter_id": "BATTLE_109_MT_CHIMNEY_TABITHA",
+          "trainer_ids": [
+            "TRAINER_TABITHA_MT_CHIMNEY"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_KOFFING",
       "appearance_count": 1,
       "appearances": [
@@ -3017,6 +5480,68 @@
           "encounter_id": "BATTLE_039_ROUTE_109_EDMOND",
           "trainer_ids": [
             "TRAINER_EDMOND"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_KOMALA",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 96,
+          "encounter_id": "BATTLE_096_ROUTE_114_KAI_CHARLOTTE",
+          "trainer_ids": [
+            "TRAINER_KAI",
+            "TRAINER_CHARLOTTE"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_KOMMO_O",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 103,
+          "encounter_id": "BATTLE_103_ROUTE_114_LENNY",
+          "trainer_ids": [
+            "TRAINER_LENNY"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 132,
+          "encounter_id": "BATTLE_132_ROUTE_111_BECKY",
+          "trainer_ids": [
+            "TRAINER_BECKY"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_KRICKETUNE",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 115,
+          "encounter_id": "BATTLE_115_JAGGED_PASS_ETHAN",
+          "trainer_ids": [
+            "TRAINER_ETHAN_1",
+            "TRAINER_ETHAN_2",
+            "TRAINER_ETHAN_3",
+            "TRAINER_ETHAN_4"
           ],
           "basis": [
             "trainer-party"
@@ -3042,6 +5567,23 @@
       ]
     },
     {
+      "species": "SPECIES_KROOKODILE",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 108,
+          "encounter_id": "BATTLE_108_MT_CHIMNEY_GRUNT_PAIR",
+          "trainer_ids": [
+            "TRAINER_GRUNT_MT_CHIMNEY_1",
+            "TRAINER_GRUNT_MT_CHIMNEY_2"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_KUBFU",
       "appearance_count": 1,
       "appearances": [
@@ -3059,14 +5601,15 @@
       ]
     },
     {
-      "species": "SPECIES_KYOGRE",
+      "species": "SPECIES_LAMPENT",
       "appearance_count": 1,
       "appearances": [
         {
-          "battle_index": 48,
-          "encounter_id": "BATTLE_048_SLATEPORT_MUSEUM_ARCHIE",
+          "battle_index": 121,
+          "encounter_id": "BATTLE_121_LAVARIDGE_GYM_JACE_ELI",
           "trainer_ids": [
-            "TRAINER_ARCHIE_SLATEPORT"
+            "TRAINER_JACE",
+            "TRAINER_ELI"
           ],
           "basis": [
             "trainer-party"
@@ -3076,13 +5619,26 @@
     },
     {
       "species": "SPECIES_LAPRAS",
-      "appearance_count": 1,
+      "appearance_count": 2,
       "appearances": [
         {
           "battle_index": 45,
           "encounter_id": "BATTLE_045_SEASHORE_HOUSE_SIMON",
           "trainer_ids": [
             "TRAINER_SIMON"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 135,
+          "encounter_id": "BATTLE_135_ROUTE_111_WILTON",
+          "trainer_ids": [
+            "TRAINER_WILTON_1",
+            "TRAINER_WILTON_2",
+            "TRAINER_WILTON_3",
+            "TRAINER_WILTON_4"
           ],
           "basis": [
             "trainer-party"
@@ -3107,6 +5663,25 @@
       ]
     },
     {
+      "species": "SPECIES_LATIOS",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 136,
+          "encounter_id": "BATTLE_136_ROUTE_111_BROOKE",
+          "trainer_ids": [
+            "TRAINER_BROOKE_1",
+            "TRAINER_BROOKE_2",
+            "TRAINER_BROOKE_3",
+            "TRAINER_BROOKE_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_LEAFEON",
       "appearance_count": 1,
       "appearances": [
@@ -3123,6 +5698,38 @@
       ]
     },
     {
+      "species": "SPECIES_LICKILICKY",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 98,
+          "encounter_id": "BATTLE_098_ROUTE_114_NANCY",
+          "trainer_ids": [
+            "TRAINER_NANCY"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_LIEPARD",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 48,
+          "encounter_id": "BATTLE_048_SLATEPORT_MUSEUM_ARCHIE",
+          "trainer_ids": [
+            "TRAINER_ARCHIE_SLATEPORT"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_LILEEP",
       "appearance_count": 1,
       "appearances": [
@@ -3131,6 +5738,36 @@
           "encounter_id": "BATTLE_016_RUSTBORO_GYM_JOSH",
           "trainer_ids": [
             "TRAINER_JOSH"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_LILLIGANT",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 78,
+          "encounter_id": "BATTLE_078_ROUTE_111_VICTORIA",
+          "trainer_ids": [
+            "TRAINER_VICTORIA"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 123,
+          "encounter_id": "BATTLE_123_LAVARIDGE_GYM_FLANNERY",
+          "trainer_ids": [
+            "TRAINER_FLANNERY_1",
+            "TRAINER_FLANNERY_2",
+            "TRAINER_FLANNERY_3",
+            "TRAINER_FLANNERY_4",
+            "TRAINER_FLANNERY_5"
           ],
           "basis": [
             "trainer-party"
@@ -3177,13 +5814,23 @@
     },
     {
       "species": "SPECIES_LOPUNNY",
-      "appearance_count": 1,
+      "appearance_count": 2,
       "appearances": [
         {
           "battle_index": 71,
           "encounter_id": "BATTLE_071_ROUTE_117_DYLAN",
           "trainer_ids": [
             "TRAINER_DYLAN_1"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 125,
+          "encounter_id": "BATTLE_125_MT_CHIMNEY_MELISSA",
+          "trainer_ids": [
+            "TRAINER_MELISSA"
           ],
           "basis": [
             "trainer-party"
@@ -3209,14 +5856,33 @@
       ]
     },
     {
+      "species": "SPECIES_LUCARIO",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 124,
+          "encounter_id": "BATTLE_124_MT_CHIMNEY_SHELBY",
+          "trainer_ids": [
+            "TRAINER_SHELBY_1",
+            "TRAINER_SHELBY_2",
+            "TRAINER_SHELBY_3",
+            "TRAINER_SHELBY_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_LUDICOLO",
       "appearance_count": 1,
       "appearances": [
         {
-          "battle_index": 48,
-          "encounter_id": "BATTLE_048_SLATEPORT_MUSEUM_ARCHIE",
+          "battle_index": 141,
+          "encounter_id": "BATTLE_141_ROUTE_111_CELIA",
           "trainer_ids": [
-            "TRAINER_ARCHIE_SLATEPORT"
+            "TRAINER_CELIA"
           ],
           "basis": [
             "trainer-party"
@@ -3242,7 +5908,7 @@
     },
     {
       "species": "SPECIES_LUNATONE",
-      "appearance_count": 1,
+      "appearance_count": 2,
       "appearances": [
         {
           "battle_index": 56,
@@ -3250,6 +5916,33 @@
           "trainer_ids": [
             "TRAINER_EDWARD",
             "TRAINER_ALYSSA"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 105,
+          "encounter_id": "BATTLE_105_METEOR_FALLS_COURTNEY_GRUNT",
+          "trainer_ids": [
+            "TRAINER_COURTNEY_METEOR_FALLS",
+            "TRAINER_GRUNT_METEOR_FALLS"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_LURANTIS",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 79,
+          "encounter_id": "BATTLE_079_ROUTE_111_VIVI",
+          "trainer_ids": [
+            "TRAINER_VIVI"
           ],
           "basis": [
             "trainer-party"
@@ -3274,14 +5967,66 @@
       ]
     },
     {
-      "species": "SPECIES_LYCANROC_DUSK",
+      "species": "SPECIES_LYCANROC",
       "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 132,
+          "encounter_id": "BATTLE_132_ROUTE_111_BECKY",
+          "trainer_ids": [
+            "TRAINER_BECKY"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_LYCANROC_DUSK",
+      "appearance_count": 2,
       "appearances": [
         {
           "battle_index": 72,
           "encounter_id": "BATTLE_072_ROUTE_117_MARIA",
           "trainer_ids": [
             "TRAINER_MARIA_1"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 131,
+          "encounter_id": "BATTLE_131_ROUTE_111_BEAU",
+          "trainer_ids": [
+            "TRAINER_BEAU"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_MACHAMP",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 80,
+          "encounter_id": "BATTLE_080_ROUTE_111_VICKY",
+          "trainer_ids": [
+            "TRAINER_VICKY"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 109,
+          "encounter_id": "BATTLE_109_MT_CHIMNEY_TABITHA",
+          "trainer_ids": [
+            "TRAINER_TABITHA_MT_CHIMNEY"
           ],
           "basis": [
             "trainer-party"
@@ -3298,6 +6043,49 @@
           "encounter_id": "BATTLE_033_DEWFORD_GYM_TAKAO",
           "trainer_ids": [
             "TRAINER_TAKAO"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_MAGBY",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 75,
+          "encounter_id": "BATTLE_075_ROUTE_117_LYDIA",
+          "trainer_ids": [
+            "TRAINER_LYDIA_1"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_MAGCARGO",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 87,
+          "encounter_id": "BATTLE_087_ROUTE_112_BRYANT_SHAYLA",
+          "trainer_ids": [
+            "TRAINER_BRYANT",
+            "TRAINER_SHAYLA"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 118,
+          "encounter_id": "BATTLE_118_LAVARIDGE_GYM_AXLE",
+          "trainer_ids": [
+            "TRAINER_AXLE"
           ],
           "basis": [
             "trainer-party"
@@ -3338,6 +6126,69 @@
       ]
     },
     {
+      "species": "SPECIES_MAGMORTAR",
+      "appearance_count": 3,
+      "appearances": [
+        {
+          "battle_index": 89,
+          "encounter_id": "BATTLE_089_ROUTE_113_JAYLEN",
+          "trainer_ids": [
+            "TRAINER_JAYLEN"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 119,
+          "encounter_id": "BATTLE_119_LAVARIDGE_GYM_KEEGAN",
+          "trainer_ids": [
+            "TRAINER_KEEGAN"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 138,
+          "encounter_id": "BATTLE_138_ROUTE_111_BIANCA",
+          "trainer_ids": [
+            "TRAINER_BIANCA"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_MAGNEZONE",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 89,
+          "encounter_id": "BATTLE_089_ROUTE_113_JAYLEN",
+          "trainer_ids": [
+            "TRAINER_JAYLEN"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 104,
+          "encounter_id": "BATTLE_104_ROUTE_114_ANGELINA_LUCAS",
+          "trainer_ids": [
+            "TRAINER_ANGELINA",
+            "TRAINER_LUCAS_1"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_MAKUHITA",
       "appearance_count": 1,
       "appearances": [
@@ -3362,6 +6213,64 @@
           "encounter_id": "BATTLE_048_SLATEPORT_MUSEUM_ARCHIE",
           "trainer_ids": [
             "TRAINER_ARCHIE_SLATEPORT"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_MAMOSWINE",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 93,
+          "encounter_id": "BATTLE_093_ROUTE_113_DILLON",
+          "trainer_ids": [
+            "TRAINER_DILLON"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_MANAPHY",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 48,
+          "encounter_id": "BATTLE_048_SLATEPORT_MUSEUM_ARCHIE",
+          "trainer_ids": [
+            "TRAINER_ARCHIE_SLATEPORT"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_MANDIBUZZ",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 93,
+          "encounter_id": "BATTLE_093_ROUTE_113_DILLON",
+          "trainer_ids": [
+            "TRAINER_DILLON"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 131,
+          "encounter_id": "BATTLE_131_ROUTE_111_BEAU",
+          "trainer_ids": [
+            "TRAINER_BEAU"
           ],
           "basis": [
             "trainer-party"
@@ -3426,6 +6335,52 @@
           "encounter_id": "BATTLE_027_RUSTURF_TUNNEL_AQUA_GRUNT",
           "trainer_ids": [
             "TRAINER_GRUNT_RUSTURF_TUNNEL"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_MAROWAK_ALOLAN",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 102,
+          "encounter_id": "BATTLE_102_ROUTE_114_BERNIE",
+          "trainer_ids": [
+            "TRAINER_BERNIE_1",
+            "TRAINER_BERNIE_2",
+            "TRAINER_BERNIE_3",
+            "TRAINER_BERNIE_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 121,
+          "encounter_id": "BATTLE_121_LAVARIDGE_GYM_JACE_ELI",
+          "trainer_ids": [
+            "TRAINER_JACE",
+            "TRAINER_ELI"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_MARSHADOW",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 134,
+          "encounter_id": "BATTLE_134_ROUTE_111_DAISUKE",
+          "trainer_ids": [
+            "TRAINER_DAISUKE"
           ],
           "basis": [
             "trainer-party"
@@ -3522,7 +6477,7 @@
     },
     {
       "species": "SPECIES_MELOETTA",
-      "appearance_count": 1,
+      "appearance_count": 2,
       "appearances": [
         {
           "battle_index": 49,
@@ -3530,6 +6485,34 @@
           "trainer_ids": [
             "TRAINER_ISABEL_1",
             "TRAINER_KALEB"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 127,
+          "encounter_id": "BATTLE_127_MT_CHIMNEY_SHIRLEY",
+          "trainer_ids": [
+            "TRAINER_SHIRLEY"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_MEOWSTIC",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 74,
+          "encounter_id": "BATTLE_074_ROUTE_117_AISHA_MELINA_BRANDI",
+          "trainer_ids": [
+            "TRAINER_AISHA",
+            "TRAINER_MELINA",
+            "TRAINER_BRANDI"
           ],
           "basis": [
             "trainer-party"
@@ -3555,8 +6538,27 @@
       ]
     },
     {
-      "species": "SPECIES_METANG",
+      "species": "SPECIES_METAGROSS",
       "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 135,
+          "encounter_id": "BATTLE_135_ROUTE_111_WILTON",
+          "trainer_ids": [
+            "TRAINER_WILTON_1",
+            "TRAINER_WILTON_2",
+            "TRAINER_WILTON_3",
+            "TRAINER_WILTON_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_METANG",
+      "appearance_count": 2,
       "appearances": [
         {
           "battle_index": 54,
@@ -3568,6 +6570,16 @@
             "TRAINER_BRENDAN_ROUTE_110_TREECKO",
             "TRAINER_BRENDAN_ROUTE_110_TORCHIC",
             "TRAINER_BRENDAN_ROUTE_110_MUDKIP"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 111,
+          "encounter_id": "BATTLE_111_JAGGED_PASS_ERIC",
+          "trainer_ids": [
+            "TRAINER_ERIC"
           ],
           "basis": [
             "trainer-party"
@@ -3592,14 +6604,106 @@
       ]
     },
     {
-      "species": "SPECIES_MIENFOO",
+      "species": "SPECIES_MEWTWO",
       "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 135,
+          "encounter_id": "BATTLE_135_ROUTE_111_WILTON",
+          "trainer_ids": [
+            "TRAINER_WILTON_1",
+            "TRAINER_WILTON_2",
+            "TRAINER_WILTON_3",
+            "TRAINER_WILTON_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_MIENFOO",
+      "appearance_count": 2,
       "appearances": [
         {
           "battle_index": 31,
           "encounter_id": "BATTLE_031_DEWFORD_GYM_LAURA",
           "trainer_ids": [
             "TRAINER_LAURA"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 90,
+          "encounter_id": "BATTLE_090_ROUTE_113_MADELINE",
+          "trainer_ids": [
+            "TRAINER_MADELINE_1"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_MIENSHAO",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 74,
+          "encounter_id": "BATTLE_074_ROUTE_117_AISHA_MELINA_BRANDI",
+          "trainer_ids": [
+            "TRAINER_AISHA",
+            "TRAINER_MELINA",
+            "TRAINER_BRANDI"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 124,
+          "encounter_id": "BATTLE_124_MT_CHIMNEY_SHELBY",
+          "trainer_ids": [
+            "TRAINER_SHELBY_1",
+            "TRAINER_SHELBY_2",
+            "TRAINER_SHELBY_3",
+            "TRAINER_SHELBY_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_MILOTIC",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 125,
+          "encounter_id": "BATTLE_125_MT_CHIMNEY_MELISSA",
+          "trainer_ids": [
+            "TRAINER_MELISSA"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_MILTANK",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 77,
+          "encounter_id": "BATTLE_077_ROUTE_111_VICTOR",
+          "trainer_ids": [
+            "TRAINER_VICTOR"
           ],
           "basis": [
             "trainer-party"
@@ -3643,7 +6747,7 @@
     },
     {
       "species": "SPECIES_MINIOR",
-      "appearance_count": 1,
+      "appearance_count": 2,
       "appearances": [
         {
           "battle_index": 23,
@@ -3651,6 +6755,36 @@
           "trainer_ids": [
             "TRAINER_CLARK",
             "TRAINER_JOHNSON"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 105,
+          "encounter_id": "BATTLE_105_METEOR_FALLS_COURTNEY_GRUNT",
+          "trainer_ids": [
+            "TRAINER_COURTNEY_METEOR_FALLS",
+            "TRAINER_GRUNT_METEOR_FALLS"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_MINUN",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 107,
+          "encounter_id": "BATTLE_107_METEOR_FALLS_JOHN_JAY",
+          "trainer_ids": [
+            "TRAINER_JOHN_AND_JAY_1",
+            "TRAINER_JOHN_AND_JAY_2",
+            "TRAINER_JOHN_AND_JAY_3",
+            "TRAINER_JOHN_AND_JAY_4"
           ],
           "basis": [
             "trainer-party"
@@ -3676,7 +6810,7 @@
     },
     {
       "species": "SPECIES_MISMAGIUS",
-      "appearance_count": 1,
+      "appearance_count": 2,
       "appearances": [
         {
           "battle_index": 65,
@@ -3684,6 +6818,16 @@
           "trainer_ids": [
             "TRAINER_VIVIAN",
             "TRAINER_KIRK"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 100,
+          "encounter_id": "BATTLE_100_ROUTE_114_SHANE",
+          "trainer_ids": [
+            "TRAINER_SHANE"
           ],
           "basis": [
             "trainer-party"
@@ -3760,6 +6904,22 @@
       ]
     },
     {
+      "species": "SPECIES_MOTHIM",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 73,
+          "encounter_id": "BATTLE_073_ROUTE_117_DEREK",
+          "trainer_ids": [
+            "TRAINER_DEREK"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_MR_MIME",
       "appearance_count": 1,
       "appearances": [
@@ -3769,6 +6929,35 @@
           "trainer_ids": [
             "TRAINER_VIVIAN",
             "TRAINER_KIRK"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_MR_RIME",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 115,
+          "encounter_id": "BATTLE_115_JAGGED_PASS_ETHAN",
+          "trainer_ids": [
+            "TRAINER_ETHAN_1",
+            "TRAINER_ETHAN_2",
+            "TRAINER_ETHAN_3",
+            "TRAINER_ETHAN_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 127,
+          "encounter_id": "BATTLE_127_MT_CHIMNEY_SHIRLEY",
+          "trainer_ids": [
+            "TRAINER_SHIRLEY"
           ],
           "basis": [
             "trainer-party"
@@ -3816,7 +7005,7 @@
     },
     {
       "species": "SPECIES_MUDSDALE",
-      "appearance_count": 2,
+      "appearance_count": 3,
       "appearances": [
         {
           "battle_index": 45,
@@ -3833,6 +7022,16 @@
           "encounter_id": "BATTLE_069_ROUTE_117_ANNA_AND_MEG",
           "trainer_ids": [
             "TRAINER_ANNA_AND_MEG_1"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 130,
+          "encounter_id": "BATTLE_130_ROUTE_111_HEIDI",
+          "trainer_ids": [
+            "TRAINER_HEIDI"
           ],
           "basis": [
             "trainer-party"
@@ -3890,6 +7089,43 @@
       ]
     },
     {
+      "species": "SPECIES_MUSHARNA",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 74,
+          "encounter_id": "BATTLE_074_ROUTE_117_AISHA_MELINA_BRANDI",
+          "trainer_ids": [
+            "TRAINER_AISHA",
+            "TRAINER_MELINA",
+            "TRAINER_BRANDI"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_NAGANADEL",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 106,
+          "encounter_id": "BATTLE_106_METEOR_FALLS_NICOLAS",
+          "trainer_ids": [
+            "TRAINER_NICOLAS_1",
+            "TRAINER_NICOLAS_2",
+            "TRAINER_NICOLAS_3",
+            "TRAINER_NICOLAS_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_NATU",
       "appearance_count": 1,
       "appearances": [
@@ -3898,6 +7134,41 @@
           "encounter_id": "BATTLE_035_DEWFORD_GYM_JOCELYN",
           "trainer_ids": [
             "TRAINER_JOCELYN"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_NIDOKING",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 101,
+          "encounter_id": "BATTLE_101_ROUTE_114_STEVE",
+          "trainer_ids": [
+            "TRAINER_STEVE_1",
+            "TRAINER_STEVE_2",
+            "TRAINER_STEVE_3",
+            "TRAINER_STEVE_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_NIHILEGO",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 127,
+          "encounter_id": "BATTLE_127_MT_CHIMNEY_SHIRLEY",
+          "trainer_ids": [
+            "TRAINER_SHIRLEY"
           ],
           "basis": [
             "trainer-party"
@@ -3922,6 +7193,99 @@
       ]
     },
     {
+      "species": "SPECIES_NINETALES_ALOLAN",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 104,
+          "encounter_id": "BATTLE_104_ROUTE_114_ANGELINA_LUCAS",
+          "trainer_ids": [
+            "TRAINER_ANGELINA",
+            "TRAINER_LUCAS_1"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_NINJASK",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 88,
+          "encounter_id": "BATTLE_088_ROUTE_113_LUNG_WYATT_LAWRENCE",
+          "trainer_ids": [
+            "TRAINER_LUNG",
+            "TRAINER_WYATT",
+            "TRAINER_LAWRENCE"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 134,
+          "encounter_id": "BATTLE_134_ROUTE_111_DAISUKE",
+          "trainer_ids": [
+            "TRAINER_DAISUKE"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_NOCTOWL",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 86,
+          "encounter_id": "BATTLE_086_ROUTE_112_CAROL",
+          "trainer_ids": [
+            "TRAINER_CAROL"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_NOIBAT",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 90,
+          "encounter_id": "BATTLE_090_ROUTE_113_MADELINE",
+          "trainer_ids": [
+            "TRAINER_MADELINE_1"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_NOIVERN",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 103,
+          "encounter_id": "BATTLE_103_ROUTE_114_LENNY",
+          "trainer_ids": [
+            "TRAINER_LENNY"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_NOSEPASS",
       "appearance_count": 1,
       "appearances": [
@@ -3930,6 +7294,22 @@
           "encounter_id": "BATTLE_017_RUSTBORO_GYM_TOMMY",
           "trainer_ids": [
             "TRAINER_TOMMY"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_OBSTAGOON",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 77,
+          "encounter_id": "BATTLE_077_ROUTE_111_VICTOR",
+          "trainer_ids": [
+            "TRAINER_VICTOR"
           ],
           "basis": [
             "trainer-party"
@@ -4003,13 +7383,55 @@
     },
     {
       "species": "SPECIES_ORICORIO",
-      "appearance_count": 1,
+      "appearance_count": 2,
       "appearances": [
         {
           "battle_index": 14,
           "encounter_id": "BATTLE_014_ROUTE_104_GINA_MIA",
           "trainer_ids": [
             "TRAINER_GINA_AND_MIA_1"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 120,
+          "encounter_id": "BATTLE_120_LAVARIDGE_GYM_DANIELLE",
+          "trainer_ids": [
+            "TRAINER_DANIELLE"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_ORICORIO_POM_POM",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 91,
+          "encounter_id": "BATTLE_091_ROUTE_113_TORI_AND_TIA",
+          "trainer_ids": [
+            "TRAINER_TORI_AND_TIA"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_ORICORIO_SENSU",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 91,
+          "encounter_id": "BATTLE_091_ROUTE_113_TORI_AND_TIA",
+          "trainer_ids": [
+            "TRAINER_TORI_AND_TIA"
           ],
           "basis": [
             "trainer-party"
@@ -4055,6 +7477,39 @@
       ]
     },
     {
+      "species": "SPECIES_PALAFIN",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 95,
+          "encounter_id": "BATTLE_095_ROUTE_114_NOLAN",
+          "trainer_ids": [
+            "TRAINER_NOLAN"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_PALOSSAND",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 108,
+          "encounter_id": "BATTLE_108_MT_CHIMNEY_GRUNT_PAIR",
+          "trainer_ids": [
+            "TRAINER_GRUNT_MT_CHIMNEY_1",
+            "TRAINER_GRUNT_MT_CHIMNEY_2"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_PALPITOAD",
       "appearance_count": 1,
       "appearances": [
@@ -4087,6 +7542,22 @@
       ]
     },
     {
+      "species": "SPECIES_PANGORO",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 99,
+          "encounter_id": "BATTLE_099_ROUTE_114_TYRA_IVY",
+          "trainer_ids": [
+            "TRAINER_TYRA_AND_IVY"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_PARAS",
       "appearance_count": 1,
       "appearances": [
@@ -4095,6 +7566,22 @@
           "encounter_id": "BATTLE_004_ROUTE_102_ALLEN",
           "trainer_ids": [
             "TRAINER_ALLEN"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_PARASECT",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 141,
+          "encounter_id": "BATTLE_141_ROUTE_111_CELIA",
+          "trainer_ids": [
+            "TRAINER_CELIA"
           ],
           "basis": [
             "trainer-party"
@@ -4152,13 +7639,39 @@
     },
     {
       "species": "SPECIES_PERRSERKER",
-      "appearance_count": 1,
+      "appearance_count": 2,
       "appearances": [
         {
           "battle_index": 37,
           "encounter_id": "BATTLE_037_ROUTE_109_HUEY",
           "trainer_ids": [
             "TRAINER_HUEY"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 143,
+          "encounter_id": "BATTLE_143_ROUTE_111_BRANDEN",
+          "trainer_ids": [
+            "TRAINER_BRANDEN"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_PERSIAN_ALOLAN",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 131,
+          "encounter_id": "BATTLE_131_ROUTE_111_BEAU",
+          "trainer_ids": [
+            "TRAINER_BEAU"
           ],
           "basis": [
             "trainer-party"
@@ -4191,6 +7704,22 @@
           "encounter_id": "BATTLE_042_ROUTE_109_CHANDLER",
           "trainer_ids": [
             "TRAINER_CHANDLER"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_PICHU",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 75,
+          "encounter_id": "BATTLE_075_ROUTE_117_LYDIA",
+          "trainer_ids": [
+            "TRAINER_LYDIA_1"
           ],
           "basis": [
             "trainer-party"
@@ -4306,13 +7835,45 @@
     },
     {
       "species": "SPECIES_PLUSLE",
-      "appearance_count": 1,
+      "appearance_count": 2,
       "appearances": [
         {
           "battle_index": 53,
           "encounter_id": "BATTLE_053_ROUTE_110_TIMMY",
           "trainer_ids": [
             "TRAINER_TIMMY"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 107,
+          "encounter_id": "BATTLE_107_METEOR_FALLS_JOHN_JAY",
+          "trainer_ids": [
+            "TRAINER_JOHN_AND_JAY_1",
+            "TRAINER_JOHN_AND_JAY_2",
+            "TRAINER_JOHN_AND_JAY_3",
+            "TRAINER_JOHN_AND_JAY_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_POLTEAGEIST",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 113,
+          "encounter_id": "BATTLE_113_JAGGED_PASS_DIANA",
+          "trainer_ids": [
+            "TRAINER_DIANA_1",
+            "TRAINER_DIANA_2",
+            "TRAINER_DIANA_3",
+            "TRAINER_DIANA_4"
           ],
           "basis": [
             "trainer-party"
@@ -4406,6 +7967,22 @@
       ]
     },
     {
+      "species": "SPECIES_PRIMEAPE",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 76,
+          "encounter_id": "BATTLE_076_RUSTURF_TUNNEL_MIKE",
+          "trainer_ids": [
+            "TRAINER_MIKE_2"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_PRINPLUP",
       "appearance_count": 2,
       "appearances": [
@@ -4459,6 +8036,34 @@
       ]
     },
     {
+      "species": "SPECIES_PUPITAR",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 88,
+          "encounter_id": "BATTLE_088_ROUTE_113_LUNG_WYATT_LAWRENCE",
+          "trainer_ids": [
+            "TRAINER_LUNG",
+            "TRAINER_WYATT",
+            "TRAINER_LAWRENCE"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 111,
+          "encounter_id": "BATTLE_111_JAGGED_PASS_ERIC",
+          "trainer_ids": [
+            "TRAINER_ERIC"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_PURRLOIN",
       "appearance_count": 1,
       "appearances": [
@@ -4467,6 +8072,51 @@
           "encounter_id": "BATTLE_010_PETALBURG_WOODS_AQUA_GRUNT",
           "trainer_ids": [
             "TRAINER_GRUNT_PETALBURG_WOODS"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_PYROAR",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 102,
+          "encounter_id": "BATTLE_102_ROUTE_114_BERNIE",
+          "trainer_ids": [
+            "TRAINER_BERNIE_1",
+            "TRAINER_BERNIE_2",
+            "TRAINER_BERNIE_3",
+            "TRAINER_BERNIE_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 122,
+          "encounter_id": "BATTLE_122_LAVARIDGE_GYM_JEFF",
+          "trainer_ids": [
+            "TRAINER_JEFF"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_QUAGSIRE",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 79,
+          "encounter_id": "BATTLE_079_ROUTE_111_VIVI",
+          "trainer_ids": [
+            "TRAINER_VIVI"
           ],
           "basis": [
             "trainer-party"
@@ -4548,13 +8198,23 @@
     },
     {
       "species": "SPECIES_QWILFISH",
-      "appearance_count": 1,
+      "appearance_count": 2,
       "appearances": [
         {
           "battle_index": 7,
           "encounter_id": "BATTLE_007_ROUTE_104_DARIAN",
           "trainer_ids": [
             "TRAINER_DARIAN"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 48,
+          "encounter_id": "BATTLE_048_SLATEPORT_MUSEUM_ARCHIE",
+          "trainer_ids": [
+            "TRAINER_ARCHIE_SLATEPORT"
           ],
           "basis": [
             "trainer-party"
@@ -4580,18 +8240,8 @@
     },
     {
       "species": "SPECIES_RAICHU",
-      "appearance_count": 2,
+      "appearance_count": 1,
       "appearances": [
-        {
-          "battle_index": 48,
-          "encounter_id": "BATTLE_048_SLATEPORT_MUSEUM_ARCHIE",
-          "trainer_ids": [
-            "TRAINER_ARCHIE_SLATEPORT"
-          ],
-          "basis": [
-            "trainer-party"
-          ]
-        },
         {
           "battle_index": 68,
           "encounter_id": "BATTLE_068_MAUVILLE_GYM_WATTSON",
@@ -4622,13 +8272,54 @@
     },
     {
       "species": "SPECIES_RAMPARDOS",
-      "appearance_count": 1,
+      "appearance_count": 2,
       "appearances": [
         {
           "battle_index": 59,
           "encounter_id": "BATTLE_059_ROUTE_110_CYCLING_ANTHONY",
           "trainer_ids": [
             "TRAINER_ANTHONY"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 133,
+          "encounter_id": "BATTLE_133_ROUTE_111_DUSTY",
+          "trainer_ids": [
+            "TRAINER_DUSTY_1",
+            "TRAINER_DUSTY_2",
+            "TRAINER_DUSTY_3",
+            "TRAINER_DUSTY_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_RAPIDASH",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 74,
+          "encounter_id": "BATTLE_074_ROUTE_117_AISHA_MELINA_BRANDI",
+          "trainer_ids": [
+            "TRAINER_AISHA",
+            "TRAINER_MELINA",
+            "TRAINER_BRANDI"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 120,
+          "encounter_id": "BATTLE_120_LAVARIDGE_GYM_DANIELLE",
+          "trainer_ids": [
+            "TRAINER_DANIELLE"
           ],
           "basis": [
             "trainer-party"
@@ -4645,6 +8336,25 @@
           "encounter_id": "BATTLE_046_SLATEPORT_MUSEUM_AQUA_GRUNT_1",
           "trainer_ids": [
             "TRAINER_GRUNT_MUSEUM_1"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_REGIDRAGO",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 106,
+          "encounter_id": "BATTLE_106_METEOR_FALLS_NICOLAS",
+          "trainer_ids": [
+            "TRAINER_NICOLAS_1",
+            "TRAINER_NICOLAS_2",
+            "TRAINER_NICOLAS_3",
+            "TRAINER_NICOLAS_4"
           ],
           "basis": [
             "trainer-party"
@@ -4701,6 +8411,56 @@
       ]
     },
     {
+      "species": "SPECIES_RESHIRAM",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 117,
+          "encounter_id": "BATTLE_117_LAVARIDGE_GYM_COLE_GERALD",
+          "trainer_ids": [
+            "TRAINER_COLE",
+            "TRAINER_GERALD"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 123,
+          "encounter_id": "BATTLE_123_LAVARIDGE_GYM_FLANNERY",
+          "trainer_ids": [
+            "TRAINER_FLANNERY_1",
+            "TRAINER_FLANNERY_2",
+            "TRAINER_FLANNERY_3",
+            "TRAINER_FLANNERY_4",
+            "TRAINER_FLANNERY_5"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_REUNICLUS",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 135,
+          "encounter_id": "BATTLE_135_ROUTE_111_WILTON",
+          "trainer_ids": [
+            "TRAINER_WILTON_1",
+            "TRAINER_WILTON_2",
+            "TRAINER_WILTON_3",
+            "TRAINER_WILTON_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_RHYHORN",
       "appearance_count": 1,
       "appearances": [
@@ -4718,6 +8478,51 @@
       ]
     },
     {
+      "species": "SPECIES_RHYPERIOR",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 84,
+          "encounter_id": "BATTLE_084_ROUTE_112_TRENT",
+          "trainer_ids": [
+            "TRAINER_TRENT_1"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 109,
+          "encounter_id": "BATTLE_109_MT_CHIMNEY_TABITHA",
+          "trainer_ids": [
+            "TRAINER_TABITHA_MT_CHIMNEY"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_RILLABOOM",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 115,
+          "encounter_id": "BATTLE_115_JAGGED_PASS_ETHAN",
+          "trainer_ids": [
+            "TRAINER_ETHAN_1",
+            "TRAINER_ETHAN_2",
+            "TRAINER_ETHAN_3",
+            "TRAINER_ETHAN_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_RIOLU",
       "appearance_count": 1,
       "appearances": [
@@ -4726,6 +8531,25 @@
           "encounter_id": "BATTLE_034_DEWFORD_GYM_CRISTIAN",
           "trainer_ids": [
             "TRAINER_CRISTIAN"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_ROARING_MOON",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 106,
+          "encounter_id": "BATTLE_106_METEOR_FALLS_NICOLAS",
+          "trainer_ids": [
+            "TRAINER_NICOLAS_1",
+            "TRAINER_NICOLAS_2",
+            "TRAINER_NICOLAS_3",
+            "TRAINER_NICOLAS_4"
           ],
           "basis": [
             "trainer-party"
@@ -4766,6 +8590,35 @@
       ]
     },
     {
+      "species": "SPECIES_ROSERADE",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 78,
+          "encounter_id": "BATTLE_078_ROUTE_111_VICTORIA",
+          "trainer_ids": [
+            "TRAINER_VICTORIA"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 136,
+          "encounter_id": "BATTLE_136_ROUTE_111_BROOKE",
+          "trainer_ids": [
+            "TRAINER_BROOKE_1",
+            "TRAINER_BROOKE_2",
+            "TRAINER_BROOKE_3",
+            "TRAINER_BROOKE_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_ROTOM",
       "appearance_count": 1,
       "appearances": [
@@ -4779,6 +8632,44 @@
             "TRAINER_BRENDAN_RUSTBORO_TREECKO",
             "TRAINER_BRENDAN_RUSTBORO_TORCHIC",
             "TRAINER_BRENDAN_RUSTBORO_MUDKIP"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_ROTOM_FROST",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 128,
+          "encounter_id": "BATTLE_128_MT_CHIMNEY_SAWYER",
+          "trainer_ids": [
+            "TRAINER_SAWYER_1",
+            "TRAINER_SAWYER_2",
+            "TRAINER_SAWYER_3",
+            "TRAINER_SAWYER_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_ROTOM_HEAT",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 102,
+          "encounter_id": "BATTLE_102_ROUTE_114_BERNIE",
+          "trainer_ids": [
+            "TRAINER_BERNIE_1",
+            "TRAINER_BERNIE_2",
+            "TRAINER_BERNIE_3",
+            "TRAINER_BERNIE_4"
           ],
           "basis": [
             "trainer-party"
@@ -4825,6 +8716,23 @@
       ]
     },
     {
+      "species": "SPECIES_RUNERIGUS",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 94,
+          "encounter_id": "BATTLE_094_ROUTE_113_SOPHIE_COBY",
+          "trainer_ids": [
+            "TRAINER_SOPHIE",
+            "TRAINER_COBY"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_SABLEYE",
       "appearance_count": 1,
       "appearances": [
@@ -4859,13 +8767,40 @@
     },
     {
       "species": "SPECIES_SALAZZLE",
-      "appearance_count": 1,
+      "appearance_count": 2,
       "appearances": [
         {
           "battle_index": 72,
           "encounter_id": "BATTLE_072_ROUTE_117_MARIA",
           "trainer_ids": [
             "TRAINER_MARIA_1"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 110,
+          "encounter_id": "BATTLE_110_MT_CHIMNEY_MAXIE",
+          "trainer_ids": [
+            "TRAINER_MAXIE_MT_CHIMNEY"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_SANDACONDA",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 108,
+          "encounter_id": "BATTLE_108_MT_CHIMNEY_GRUNT_PAIR",
+          "trainer_ids": [
+            "TRAINER_GRUNT_MT_CHIMNEY_1",
+            "TRAINER_GRUNT_MT_CHIMNEY_2"
           ],
           "basis": [
             "trainer-party"
@@ -4882,6 +8817,39 @@
           "encounter_id": "BATTLE_005_ROUTE_102_TIANA",
           "trainer_ids": [
             "TRAINER_TIANA"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_SANDSLASH",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 129,
+          "encounter_id": "BATTLE_129_ROUTE_111_DREW",
+          "trainer_ids": [
+            "TRAINER_DREW"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_SANDSLASH_ALOLAN",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 104,
+          "encounter_id": "BATTLE_104_ROUTE_114_ANGELINA_LUCAS",
+          "trainer_ids": [
+            "TRAINER_ANGELINA",
+            "TRAINER_LUCAS_1"
           ],
           "basis": [
             "trainer-party"
@@ -4908,6 +8876,25 @@
           "encounter_id": "BATTLE_044_SEASHORE_HOUSE_JOHANNA",
           "trainer_ids": [
             "TRAINER_JOHANNA"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_SCIZOR",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 136,
+          "encounter_id": "BATTLE_136_ROUTE_111_BROOKE",
+          "trainer_ids": [
+            "TRAINER_BROOKE_1",
+            "TRAINER_BROOKE_2",
+            "TRAINER_BROOKE_3",
+            "TRAINER_BROOKE_4"
           ],
           "basis": [
             "trainer-party"
@@ -4950,13 +8937,23 @@
     },
     {
       "species": "SPECIES_SCYTHER",
-      "appearance_count": 1,
+      "appearance_count": 2,
       "appearances": [
         {
           "battle_index": 21,
           "encounter_id": "BATTLE_021_ROUTE_116_JOSE",
           "trainer_ids": [
             "TRAINER_JOSE"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 139,
+          "encounter_id": "BATTLE_139_ROUTE_111_TYRON",
+          "trainer_ids": [
+            "TRAINER_TYRON"
           ],
           "basis": [
             "trainer-party"
@@ -4973,6 +8970,22 @@
           "encounter_id": "BATTLE_047_SLATEPORT_MUSEUM_AQUA_GRUNT_2",
           "trainer_ids": [
             "TRAINER_GRUNT_MUSEUM_2"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_SERPERIOR",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 142,
+          "encounter_id": "BATTLE_142_ROUTE_111_BRYAN",
+          "trainer_ids": [
+            "TRAINER_BRYAN"
           ],
           "basis": [
             "trainer-party"
@@ -5049,6 +9062,52 @@
       ]
     },
     {
+      "species": "SPECIES_SHEDINJA",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 88,
+          "encounter_id": "BATTLE_088_ROUTE_113_LUNG_WYATT_LAWRENCE",
+          "trainer_ids": [
+            "TRAINER_LUNG",
+            "TRAINER_WYATT",
+            "TRAINER_LAWRENCE"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 134,
+          "encounter_id": "BATTLE_134_ROUTE_111_DAISUKE",
+          "trainer_ids": [
+            "TRAINER_DAISUKE"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_SHELGON",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 88,
+          "encounter_id": "BATTLE_088_ROUTE_113_LUNG_WYATT_LAWRENCE",
+          "trainer_ids": [
+            "TRAINER_LUNG",
+            "TRAINER_WYATT",
+            "TRAINER_LAWRENCE"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_SHELLDER",
       "appearance_count": 1,
       "appearances": [
@@ -5097,6 +9156,39 @@
       ]
     },
     {
+      "species": "SPECIES_SHIFTRY",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 110,
+          "encounter_id": "BATTLE_110_MT_CHIMNEY_MAXIE",
+          "trainer_ids": [
+            "TRAINER_MAXIE_MT_CHIMNEY"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_SHIINOTIC",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 96,
+          "encounter_id": "BATTLE_096_ROUTE_114_KAI_CHARLOTTE",
+          "trainer_ids": [
+            "TRAINER_KAI",
+            "TRAINER_CHARLOTTE"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_SHUCKLE",
       "appearance_count": 1,
       "appearances": [
@@ -5130,13 +9222,26 @@
     },
     {
       "species": "SPECIES_SIGILYPH",
-      "appearance_count": 1,
+      "appearance_count": 2,
       "appearances": [
         {
           "battle_index": 51,
           "encounter_id": "BATTLE_051_TRICK_HOUSE_PUZZLE_1_EDDIE",
           "trainer_ids": [
             "TRAINER_EDDIE"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 133,
+          "encounter_id": "BATTLE_133_ROUTE_111_DUSTY",
+          "trainer_ids": [
+            "TRAINER_DUSTY_1",
+            "TRAINER_DUSTY_2",
+            "TRAINER_DUSTY_3",
+            "TRAINER_DUSTY_4"
           ],
           "basis": [
             "trainer-party"
@@ -5154,6 +9259,49 @@
           "trainer_ids": [
             "TRAINER_SHAWN",
             "TRAINER_ANGELO"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_SIMISEAR",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 117,
+          "encounter_id": "BATTLE_117_LAVARIDGE_GYM_COLE_GERALD",
+          "trainer_ids": [
+            "TRAINER_COLE",
+            "TRAINER_GERALD"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_SIRFETCHD",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 99,
+          "encounter_id": "BATTLE_099_ROUTE_114_TYRA_IVY",
+          "trainer_ids": [
+            "TRAINER_TYRA_AND_IVY"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 143,
+          "encounter_id": "BATTLE_143_ROUTE_111_BRANDEN",
+          "trainer_ids": [
+            "TRAINER_BRANDEN"
           ],
           "basis": [
             "trainer-party"
@@ -5194,6 +9342,26 @@
       ]
     },
     {
+      "species": "SPECIES_SKELEDIRGE",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 123,
+          "encounter_id": "BATTLE_123_LAVARIDGE_GYM_FLANNERY",
+          "trainer_ids": [
+            "TRAINER_FLANNERY_1",
+            "TRAINER_FLANNERY_2",
+            "TRAINER_FLANNERY_3",
+            "TRAINER_FLANNERY_4",
+            "TRAINER_FLANNERY_5"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_SKRELP",
       "appearance_count": 1,
       "appearances": [
@@ -5202,6 +9370,41 @@
           "encounter_id": "BATTLE_010_PETALBURG_WOODS_AQUA_GRUNT",
           "trainer_ids": [
             "TRAINER_GRUNT_PETALBURG_WOODS"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_SLAKING",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 140,
+          "encounter_id": "BATTLE_140_ROUTE_111_CELINA",
+          "trainer_ids": [
+            "TRAINER_CELINA"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_SLOWBRO",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 124,
+          "encounter_id": "BATTLE_124_MT_CHIMNEY_SHELBY",
+          "trainer_ids": [
+            "TRAINER_SHELBY_1",
+            "TRAINER_SHELBY_2",
+            "TRAINER_SHELBY_3",
+            "TRAINER_SHELBY_4"
           ],
           "basis": [
             "trainer-party"
@@ -5251,6 +9454,22 @@
           "encounter_id": "BATTLE_002_ROUTE_102_CALVIN",
           "trainer_ids": [
             "TRAINER_CALVIN_1"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_SMOOCHUM",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 75,
+          "encounter_id": "BATTLE_075_ROUTE_117_LYDIA",
+          "trainer_ids": [
+            "TRAINER_LYDIA_1"
           ],
           "basis": [
             "trainer-party"
@@ -5350,6 +9569,23 @@
       ]
     },
     {
+      "species": "SPECIES_SOLROCK",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 105,
+          "encounter_id": "BATTLE_105_METEOR_FALLS_COURTNEY_GRUNT",
+          "trainer_ids": [
+            "TRAINER_COURTNEY_METEOR_FALLS",
+            "TRAINER_GRUNT_METEOR_FALLS"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_SPHEAL",
       "appearance_count": 1,
       "appearances": [
@@ -5358,6 +9594,48 @@
           "encounter_id": "BATTLE_029_ROUTE_106_NED",
           "trainer_ids": [
             "TRAINER_NED"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_SPINDA",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 98,
+          "encounter_id": "BATTLE_098_ROUTE_114_NANCY",
+          "trainer_ids": [
+            "TRAINER_NANCY"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 122,
+          "encounter_id": "BATTLE_122_LAVARIDGE_GYM_JEFF",
+          "trainer_ids": [
+            "TRAINER_JEFF"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_SPIRITOMB",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 142,
+          "encounter_id": "BATTLE_142_ROUTE_111_BRYAN",
+          "trainer_ids": [
+            "TRAINER_BRYAN"
           ],
           "basis": [
             "trainer-party"
@@ -5403,6 +9681,22 @@
       ]
     },
     {
+      "species": "SPECIES_STARAPTOR",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 77,
+          "encounter_id": "BATTLE_077_ROUTE_111_VICTOR",
+          "trainer_ids": [
+            "TRAINER_VICTOR"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_STARAVIA",
       "appearance_count": 1,
       "appearances": [
@@ -5436,13 +9730,24 @@
     },
     {
       "species": "SPECIES_STONJOURNER",
-      "appearance_count": 1,
+      "appearance_count": 2,
       "appearances": [
         {
           "battle_index": 12,
           "encounter_id": "BATTLE_012_ROUTE_104_WINSTON",
           "trainer_ids": [
             "TRAINER_WINSTON_1"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 108,
+          "encounter_id": "BATTLE_108_MT_CHIMNEY_GRUNT_PAIR",
+          "trainer_ids": [
+            "TRAINER_GRUNT_MT_CHIMNEY_1",
+            "TRAINER_GRUNT_MT_CHIMNEY_2"
           ],
           "basis": [
             "trainer-party"
@@ -5484,6 +9789,22 @@
       ]
     },
     {
+      "species": "SPECIES_STUNFISK_GALARIAN",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 112,
+          "encounter_id": "BATTLE_112_JAGGED_PASS_MAGMA_GUARD",
+          "trainer_ids": [
+            "TRAINER_GRUNT_JAGGED_PASS"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_STUNKY",
       "appearance_count": 1,
       "appearances": [
@@ -5492,6 +9813,39 @@
           "encounter_id": "BATTLE_053_ROUTE_110_TIMMY",
           "trainer_ids": [
             "TRAINER_TIMMY"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_SUDOWOODO",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 138,
+          "encounter_id": "BATTLE_138_ROUTE_111_BIANCA",
+          "trainer_ids": [
+            "TRAINER_BIANCA"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_SUNFLORA",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 87,
+          "encounter_id": "BATTLE_087_ROUTE_112_BRYANT_SHAYLA",
+          "trainer_ids": [
+            "TRAINER_BRYANT",
+            "TRAINER_SHAYLA"
           ],
           "basis": [
             "trainer-party"
@@ -5582,6 +9936,42 @@
       ]
     },
     {
+      "species": "SPECIES_TALONFLAME",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 123,
+          "encounter_id": "BATTLE_123_LAVARIDGE_GYM_FLANNERY",
+          "trainer_ids": [
+            "TRAINER_FLANNERY_1",
+            "TRAINER_FLANNERY_2",
+            "TRAINER_FLANNERY_3",
+            "TRAINER_FLANNERY_4",
+            "TRAINER_FLANNERY_5"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_TAPU_BULU",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 130,
+          "encounter_id": "BATTLE_130_ROUTE_111_HEIDI",
+          "trainer_ids": [
+            "TRAINER_HEIDI"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_TAPU_KOKO",
       "appearance_count": 1,
       "appearances": [
@@ -5590,6 +9980,22 @@
           "encounter_id": "BATTLE_068_MAUVILLE_GYM_WATTSON",
           "trainer_ids": [
             "TRAINER_WATTSON_1"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_TATSUGIRI",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 95,
+          "encounter_id": "BATTLE_095_ROUTE_114_NOLAN",
+          "trainer_ids": [
+            "TRAINER_NOLAN"
           ],
           "basis": [
             "trainer-party"
@@ -5684,14 +10090,40 @@
       ]
     },
     {
-      "species": "SPECIES_THROH",
+      "species": "SPECIES_THIEVUL",
       "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 112,
+          "encounter_id": "BATTLE_112_JAGGED_PASS_MAGMA_GUARD",
+          "trainer_ids": [
+            "TRAINER_GRUNT_JAGGED_PASS"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_THROH",
+      "appearance_count": 2,
       "appearances": [
         {
           "battle_index": 34,
           "encounter_id": "BATTLE_034_DEWFORD_GYM_CRISTIAN",
           "trainer_ids": [
             "TRAINER_CRISTIAN"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 99,
+          "encounter_id": "BATTLE_099_ROUTE_114_TYRA_IVY",
+          "trainer_ids": [
+            "TRAINER_TYRA_AND_IVY"
           ],
           "basis": [
             "trainer-party"
@@ -5803,6 +10235,26 @@
       ]
     },
     {
+      "species": "SPECIES_TORKOAL",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 123,
+          "encounter_id": "BATTLE_123_LAVARIDGE_GYM_FLANNERY",
+          "trainer_ids": [
+            "TRAINER_FLANNERY_1",
+            "TRAINER_FLANNERY_2",
+            "TRAINER_FLANNERY_3",
+            "TRAINER_FLANNERY_4",
+            "TRAINER_FLANNERY_5"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_TORRACAT",
       "appearance_count": 2,
       "appearances": [
@@ -5839,6 +10291,22 @@
       ]
     },
     {
+      "species": "SPECIES_TORTERRA",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 93,
+          "encounter_id": "BATTLE_093_ROUTE_113_DILLON",
+          "trainer_ids": [
+            "TRAINER_DILLON"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_TOTODILE",
       "appearance_count": 1,
       "appearances": [
@@ -5855,6 +10323,23 @@
           ],
           "basis": [
             "runtime-source"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_TOUCANNON",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 94,
+          "encounter_id": "BATTLE_094_ROUTE_113_SOPHIE_COBY",
+          "trainer_ids": [
+            "TRAINER_SOPHIE",
+            "TRAINER_COBY"
+          ],
+          "basis": [
+            "trainer-party"
           ]
         }
       ]
@@ -5878,7 +10363,7 @@
     },
     {
       "species": "SPECIES_TOXTRICITY",
-      "appearance_count": 1,
+      "appearance_count": 2,
       "appearances": [
         {
           "battle_index": 65,
@@ -5886,6 +10371,19 @@
           "trainer_ids": [
             "TRAINER_VIVIAN",
             "TRAINER_KIRK"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 115,
+          "encounter_id": "BATTLE_115_JAGGED_PASS_ETHAN",
+          "trainer_ids": [
+            "TRAINER_ETHAN_1",
+            "TRAINER_ETHAN_2",
+            "TRAINER_ETHAN_3",
+            "TRAINER_ETHAN_4"
           ],
           "basis": [
             "trainer-party"
@@ -5916,6 +10414,22 @@
       ]
     },
     {
+      "species": "SPECIES_TREVENANT",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 81,
+          "encounter_id": "BATTLE_081_ROUTE_111_IRENE",
+          "trainer_ids": [
+            "TRAINER_IRENE"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_TROPIUS",
       "appearance_count": 1,
       "appearances": [
@@ -5933,13 +10447,53 @@
     },
     {
       "species": "SPECIES_TSAREENA",
-      "appearance_count": 1,
+      "appearance_count": 2,
       "appearances": [
         {
           "battle_index": 44,
           "encounter_id": "BATTLE_044_SEASHORE_HOUSE_JOHANNA",
           "trainer_ids": [
             "TRAINER_JOHANNA"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 126,
+          "encounter_id": "BATTLE_126_MT_CHIMNEY_SHEILA",
+          "trainer_ids": [
+            "TRAINER_SHEILA"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_TURTONATOR",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 101,
+          "encounter_id": "BATTLE_101_ROUTE_114_STEVE",
+          "trainer_ids": [
+            "TRAINER_STEVE_1",
+            "TRAINER_STEVE_2",
+            "TRAINER_STEVE_3",
+            "TRAINER_STEVE_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 121,
+          "encounter_id": "BATTLE_121_LAVARIDGE_GYM_JACE_ELI",
+          "trainer_ids": [
+            "TRAINER_JACE",
+            "TRAINER_ELI"
           ],
           "basis": [
             "trainer-party"
@@ -5990,6 +10544,62 @@
       ]
     },
     {
+      "species": "SPECIES_TYPHLOSION",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 87,
+          "encounter_id": "BATTLE_087_ROUTE_112_BRYANT_SHAYLA",
+          "trainer_ids": [
+            "TRAINER_BRYANT",
+            "TRAINER_SHAYLA"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 119,
+          "encounter_id": "BATTLE_119_LAVARIDGE_GYM_KEEGAN",
+          "trainer_ids": [
+            "TRAINER_KEEGAN"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_TYRANTRUM",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 101,
+          "encounter_id": "BATTLE_101_ROUTE_114_STEVE",
+          "trainer_ids": [
+            "TRAINER_STEVE_1",
+            "TRAINER_STEVE_2",
+            "TRAINER_STEVE_3",
+            "TRAINER_STEVE_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 142,
+          "encounter_id": "BATTLE_142_ROUTE_111_BRYAN",
+          "trainer_ids": [
+            "TRAINER_BRYAN"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_TYRUNT",
       "appearance_count": 1,
       "appearances": [
@@ -5998,6 +10608,163 @@
           "encounter_id": "BATTLE_017_RUSTBORO_GYM_TOMMY",
           "trainer_ids": [
             "TRAINER_TOMMY"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_VANILLISH",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 90,
+          "encounter_id": "BATTLE_090_ROUTE_113_MADELINE",
+          "trainer_ids": [
+            "TRAINER_MADELINE_1"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_VANILLUXE",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 113,
+          "encounter_id": "BATTLE_113_JAGGED_PASS_DIANA",
+          "trainer_ids": [
+            "TRAINER_DIANA_1",
+            "TRAINER_DIANA_2",
+            "TRAINER_DIANA_3",
+            "TRAINER_DIANA_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_VAPOREON",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 102,
+          "encounter_id": "BATTLE_102_ROUTE_114_BERNIE",
+          "trainer_ids": [
+            "TRAINER_BERNIE_1",
+            "TRAINER_BERNIE_2",
+            "TRAINER_BERNIE_3",
+            "TRAINER_BERNIE_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 137,
+          "encounter_id": "BATTLE_137_ROUTE_111_HAYDEN",
+          "trainer_ids": [
+            "TRAINER_HAYDEN"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_VENUSAUR",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 141,
+          "encounter_id": "BATTLE_141_ROUTE_111_CELIA",
+          "trainer_ids": [
+            "TRAINER_CELIA"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_VESPIQUEN",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 113,
+          "encounter_id": "BATTLE_113_JAGGED_PASS_DIANA",
+          "trainer_ids": [
+            "TRAINER_DIANA_1",
+            "TRAINER_DIANA_2",
+            "TRAINER_DIANA_3",
+            "TRAINER_DIANA_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_VICTREEBEL",
+      "appearance_count": 2,
+      "appearances": [
+        {
+          "battle_index": 85,
+          "encounter_id": "BATTLE_085_ROUTE_112_LARRY",
+          "trainer_ids": [
+            "TRAINER_LARRY"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 140,
+          "encounter_id": "BATTLE_140_ROUTE_111_CELINA",
+          "trainer_ids": [
+            "TRAINER_CELINA"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_VIGOROTH",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 119,
+          "encounter_id": "BATTLE_119_LAVARIDGE_GYM_KEEGAN",
+          "trainer_ids": [
+            "TRAINER_KEEGAN"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_VILEPLUME",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 86,
+          "encounter_id": "BATTLE_086_ROUTE_112_CAROL",
+          "trainer_ids": [
+            "TRAINER_CAROL"
           ],
           "basis": [
             "trainer-party"
@@ -6022,14 +10789,104 @@
       ]
     },
     {
-      "species": "SPECIES_VOLCANION",
+      "species": "SPECIES_VOLBEAT",
       "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 107,
+          "encounter_id": "BATTLE_107_METEOR_FALLS_JOHN_JAY",
+          "trainer_ids": [
+            "TRAINER_JOHN_AND_JAY_1",
+            "TRAINER_JOHN_AND_JAY_2",
+            "TRAINER_JOHN_AND_JAY_3",
+            "TRAINER_JOHN_AND_JAY_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_VOLCANION",
+      "appearance_count": 2,
       "appearances": [
         {
           "battle_index": 43,
           "encounter_id": "BATTLE_043_SEASHORE_HOUSE_DWAYNE",
           "trainer_ids": [
             "TRAINER_DWAYNE"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 123,
+          "encounter_id": "BATTLE_123_LAVARIDGE_GYM_FLANNERY",
+          "trainer_ids": [
+            "TRAINER_FLANNERY_1",
+            "TRAINER_FLANNERY_2",
+            "TRAINER_FLANNERY_3",
+            "TRAINER_FLANNERY_4",
+            "TRAINER_FLANNERY_5"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_VOLCARONA",
+      "appearance_count": 3,
+      "appearances": [
+        {
+          "battle_index": 91,
+          "encounter_id": "BATTLE_091_ROUTE_113_TORI_AND_TIA",
+          "trainer_ids": [
+            "TRAINER_TORI_AND_TIA"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 120,
+          "encounter_id": "BATTLE_120_LAVARIDGE_GYM_DANIELLE",
+          "trainer_ids": [
+            "TRAINER_DANIELLE"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 123,
+          "encounter_id": "BATTLE_123_LAVARIDGE_GYM_FLANNERY",
+          "trainer_ids": [
+            "TRAINER_FLANNERY_1",
+            "TRAINER_FLANNERY_2",
+            "TRAINER_FLANNERY_3",
+            "TRAINER_FLANNERY_4",
+            "TRAINER_FLANNERY_5"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_WALREIN",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 96,
+          "encounter_id": "BATTLE_096_ROUTE_114_KAI_CHARLOTTE",
+          "trainer_ids": [
+            "TRAINER_KAI",
+            "TRAINER_CHARLOTTE"
           ],
           "basis": [
             "trainer-party"
@@ -6082,6 +10939,57 @@
           "encounter_id": "BATTLE_064_MAUVILLE_WALLY",
           "trainer_ids": [
             "TRAINER_WALLY_MAUVILLE"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_WEEZING",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 88,
+          "encounter_id": "BATTLE_088_ROUTE_113_LUNG_WYATT_LAWRENCE",
+          "trainer_ids": [
+            "TRAINER_LUNG",
+            "TRAINER_WYATT",
+            "TRAINER_LAWRENCE"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_WHIMSICOTT",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 78,
+          "encounter_id": "BATTLE_078_ROUTE_111_VICTORIA",
+          "trainer_ids": [
+            "TRAINER_VICTORIA"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_WHISCASH",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 96,
+          "encounter_id": "BATTLE_096_ROUTE_114_KAI_CHARLOTTE",
+          "trainer_ids": [
+            "TRAINER_KAI",
+            "TRAINER_CHARLOTTE"
           ],
           "basis": [
             "trainer-party"
@@ -6149,6 +11057,25 @@
       ]
     },
     {
+      "species": "SPECIES_WOBBUFFET",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 124,
+          "encounter_id": "BATTLE_124_MT_CHIMNEY_SHELBY",
+          "trainer_ids": [
+            "TRAINER_SHELBY_1",
+            "TRAINER_SHELBY_2",
+            "TRAINER_SHELBY_3",
+            "TRAINER_SHELBY_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_WOOBAT",
       "appearance_count": 1,
       "appearances": [
@@ -6182,6 +11109,54 @@
       ]
     },
     {
+      "species": "SPECIES_WORMADAM",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 73,
+          "encounter_id": "BATTLE_073_ROUTE_117_DEREK",
+          "trainer_ids": [
+            "TRAINER_DEREK"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_WORMADAM_SANDY_CLOAK",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 73,
+          "encounter_id": "BATTLE_073_ROUTE_117_DEREK",
+          "trainer_ids": [
+            "TRAINER_DEREK"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_WORMADAM_TRASH_CLOAK",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 73,
+          "encounter_id": "BATTLE_073_ROUTE_117_DEREK",
+          "trainer_ids": [
+            "TRAINER_DEREK"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
       "species": "SPECIES_XATU",
       "appearance_count": 1,
       "appearances": [
@@ -6199,14 +11174,59 @@
       ]
     },
     {
-      "species": "SPECIES_ZANGOOSE",
+      "species": "SPECIES_XURKITREE",
       "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 109,
+          "encounter_id": "BATTLE_109_MT_CHIMNEY_TABITHA",
+          "trainer_ids": [
+            "TRAINER_TABITHA_MT_CHIMNEY"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_YANMEGA",
+      "appearance_count": 1,
+      "appearances": [
+        {
+          "battle_index": 115,
+          "encounter_id": "BATTLE_115_JAGGED_PASS_ETHAN",
+          "trainer_ids": [
+            "TRAINER_ETHAN_1",
+            "TRAINER_ETHAN_2",
+            "TRAINER_ETHAN_3",
+            "TRAINER_ETHAN_4"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        }
+      ]
+    },
+    {
+      "species": "SPECIES_ZANGOOSE",
+      "appearance_count": 2,
       "appearances": [
         {
           "battle_index": 50,
           "encounter_id": "BATTLE_050_TRICK_HOUSE_PUZZLE_1_SALLY",
           "trainer_ids": [
             "TRAINER_SALLY"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 137,
+          "encounter_id": "BATTLE_137_ROUTE_111_HAYDEN",
+          "trainer_ids": [
+            "TRAINER_HAYDEN"
           ],
           "basis": [
             "trainer-party"
@@ -6280,13 +11300,23 @@
     },
     {
       "species": "SPECIES_ZOROARK",
-      "appearance_count": 1,
+      "appearance_count": 2,
       "appearances": [
         {
           "battle_index": 47,
           "encounter_id": "BATTLE_047_SLATEPORT_MUSEUM_AQUA_GRUNT_2",
           "trainer_ids": [
             "TRAINER_GRUNT_MUSEUM_2"
+          ],
+          "basis": [
+            "trainer-party"
+          ]
+        },
+        {
+          "battle_index": 92,
+          "encounter_id": "BATTLE_092_ROUTE_113_LAO",
+          "trainer_ids": [
+            "TRAINER_LAO_1"
           ],
           "basis": [
             "trainer-party"
@@ -6313,6 +11343,38 @@
   ],
   "duplications": [
     {
+      "species": "SPECIES_ACCELGOR",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_071_ROUTE_117_DYLAN",
+        "BATTLE_107_METEOR_FALLS_JOHN_JAY"
+      ]
+    },
+    {
+      "species": "SPECIES_AERODACTYL",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_018_RUSTBORO_GYM_MARC",
+        "BATTLE_105_METEOR_FALLS_COURTNEY_GRUNT"
+      ]
+    },
+    {
+      "species": "SPECIES_ALCREMIE",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_054_ROUTE_110_RIVAL",
+        "BATTLE_127_MT_CHIMNEY_SHIRLEY"
+      ]
+    },
+    {
+      "species": "SPECIES_ARCANINE",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_117_LAVARIDGE_GYM_COLE_GERALD",
+        "BATTLE_123_LAVARIDGE_GYM_FLANNERY"
+      ]
+    },
+    {
       "species": "SPECIES_AZUMARILL",
       "appearance_count": 2,
       "encounter_ids": [
@@ -6321,11 +11383,27 @@
       ]
     },
     {
+      "species": "SPECIES_BASTIODON",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_065_MAUVILLE_GYM_VIVIAN_KIRK",
+        "BATTLE_133_ROUTE_111_DUSTY"
+      ]
+    },
+    {
       "species": "SPECIES_BAYLEEF",
       "appearance_count": 2,
       "encounter_ids": [
         "BATTLE_028_RUSTBORO_RIVAL",
         "BATTLE_054_ROUTE_110_RIVAL"
+      ]
+    },
+    {
+      "species": "SPECIES_BELLOSSOM",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_087_ROUTE_112_BRYANT_SHAYLA",
+        "BATTLE_130_ROUTE_111_HEIDI"
       ]
     },
     {
@@ -6346,11 +11424,59 @@
       ]
     },
     {
+      "species": "SPECIES_CACTURNE",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_085_ROUTE_112_LARRY",
+        "BATTLE_129_ROUTE_111_DREW"
+      ]
+    },
+    {
+      "species": "SPECIES_CARRACOSTA",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_082_ROUTE_111_TRAVIS",
+        "BATTLE_142_ROUTE_111_BRYAN"
+      ]
+    },
+    {
+      "species": "SPECIES_CENTISKORCH",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_100_ROUTE_114_SHANE",
+        "BATTLE_122_LAVARIDGE_GYM_JEFF"
+      ]
+    },
+    {
+      "species": "SPECIES_CHANDELURE",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_117_LAVARIDGE_GYM_COLE_GERALD",
+        "BATTLE_123_LAVARIDGE_GYM_FLANNERY"
+      ]
+    },
+    {
       "species": "SPECIES_CHARMELEON",
       "appearance_count": 2,
       "encounter_ids": [
         "BATTLE_028_RUSTBORO_RIVAL",
         "BATTLE_054_ROUTE_110_RIVAL"
+      ]
+    },
+    {
+      "species": "SPECIES_CINCCINO",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_116_LAVARIDGE_POKECENTER_LUCY",
+        "BATTLE_126_MT_CHIMNEY_SHEILA"
+      ]
+    },
+    {
+      "species": "SPECIES_CINDERACE",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_092_ROUTE_113_LAO",
+        "BATTLE_122_LAVARIDGE_GYM_JEFF"
       ]
     },
     {
@@ -6362,6 +11488,22 @@
       ]
     },
     {
+      "species": "SPECIES_CLAYDOL",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_088_ROUTE_113_LUNG_WYATT_LAWRENCE",
+        "BATTLE_121_LAVARIDGE_GYM_JACE_ELI"
+      ]
+    },
+    {
+      "species": "SPECIES_COALOSSAL",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_109_MT_CHIMNEY_TABITHA",
+        "BATTLE_121_LAVARIDGE_GYM_JACE_ELI"
+      ]
+    },
+    {
       "species": "SPECIES_COMBUSKEN",
       "appearance_count": 2,
       "encounter_ids": [
@@ -6370,11 +11512,35 @@
       ]
     },
     {
+      "species": "SPECIES_CRADILY",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_088_ROUTE_113_LUNG_WYATT_LAWRENCE",
+        "BATTLE_128_MT_CHIMNEY_SAWYER"
+      ]
+    },
+    {
+      "species": "SPECIES_CROBAT",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_094_ROUTE_113_SOPHIE_COBY",
+        "BATTLE_110_MT_CHIMNEY_MAXIE"
+      ]
+    },
+    {
       "species": "SPECIES_CROCONAW",
       "appearance_count": 2,
       "encounter_ids": [
         "BATTLE_028_RUSTBORO_RIVAL",
         "BATTLE_054_ROUTE_110_RIVAL"
+      ]
+    },
+    {
+      "species": "SPECIES_CRYOGONAL",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_042_ROUTE_109_CHANDLER",
+        "BATTLE_089_ROUTE_113_JAYLEN"
       ]
     },
     {
@@ -6394,11 +11560,67 @@
       ]
     },
     {
+      "species": "SPECIES_DELPHOX",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_094_ROUTE_113_SOPHIE_COBY",
+        "BATTLE_123_LAVARIDGE_GYM_FLANNERY"
+      ]
+    },
+    {
       "species": "SPECIES_DEWOTT",
       "appearance_count": 2,
       "encounter_ids": [
         "BATTLE_028_RUSTBORO_RIVAL",
         "BATTLE_054_ROUTE_110_RIVAL"
+      ]
+    },
+    {
+      "species": "SPECIES_DHELMISE",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_037_ROUTE_109_HUEY",
+        "BATTLE_143_ROUTE_111_BRANDEN"
+      ]
+    },
+    {
+      "species": "SPECIES_DIANCIE",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_025_ROUTE_116_SARAH_DAWSON",
+        "BATTLE_125_MT_CHIMNEY_MELISSA"
+      ]
+    },
+    {
+      "species": "SPECIES_DONDOZO",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_027_RUSTURF_TUNNEL_AQUA_GRUNT",
+        "BATTLE_095_ROUTE_114_NOLAN"
+      ]
+    },
+    {
+      "species": "SPECIES_DRACOZOLT",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_106_METEOR_FALLS_NICOLAS",
+        "BATTLE_128_MT_CHIMNEY_SAWYER"
+      ]
+    },
+    {
+      "species": "SPECIES_DRAPION",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_116_LAVARIDGE_POKECENTER_LUCY",
+        "BATTLE_137_ROUTE_111_HAYDEN"
+      ]
+    },
+    {
+      "species": "SPECIES_DRIFBLIM",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_056_ROUTE_110_EDWARD_ALYSSA",
+        "BATTLE_118_LAVARIDGE_GYM_AXLE"
       ]
     },
     {
@@ -6410,11 +11632,52 @@
       ]
     },
     {
+      "species": "SPECIES_DUGTRIO",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_051_TRICK_HOUSE_PUZZLE_1_EDDIE",
+        "BATTLE_112_JAGGED_PASS_MAGMA_GUARD"
+      ]
+    },
+    {
       "species": "SPECIES_EMOLGA",
       "appearance_count": 2,
       "encounter_ids": [
         "BATTLE_056_ROUTE_110_EDWARD_ALYSSA",
         "BATTLE_068_MAUVILLE_GYM_WATTSON"
+      ]
+    },
+    {
+      "species": "SPECIES_ESCAVALIER",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_107_METEOR_FALLS_JOHN_JAY",
+        "BATTLE_126_MT_CHIMNEY_SHEILA"
+      ]
+    },
+    {
+      "species": "SPECIES_EXCADRILL",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_083_ROUTE_112_BRICE",
+        "BATTLE_128_MT_CHIMNEY_SAWYER"
+      ]
+    },
+    {
+      "species": "SPECIES_FLYGON",
+      "appearance_count": 3,
+      "encounter_ids": [
+        "BATTLE_079_ROUTE_111_VIVI",
+        "BATTLE_110_MT_CHIMNEY_MAXIE",
+        "BATTLE_133_ROUTE_111_DUSTY"
+      ]
+    },
+    {
+      "species": "SPECIES_FROAKIE",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_001_ROUTE_103_RIVAL",
+        "BATTLE_075_ROUTE_117_LYDIA"
       ]
     },
     {
@@ -6427,6 +11690,22 @@
       ]
     },
     {
+      "species": "SPECIES_FROSLASS",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_072_ROUTE_117_MARIA",
+        "BATTLE_120_LAVARIDGE_GYM_DANIELLE"
+      ]
+    },
+    {
+      "species": "SPECIES_FURFROU",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_098_ROUTE_114_NANCY",
+        "BATTLE_125_MT_CHIMNEY_MELISSA"
+      ]
+    },
+    {
       "species": "SPECIES_GALLADE",
       "appearance_count": 2,
       "encounter_ids": [
@@ -6435,11 +11714,68 @@
       ]
     },
     {
+      "species": "SPECIES_GARGANACL",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_093_ROUTE_113_DILLON",
+        "BATTLE_121_LAVARIDGE_GYM_JACE_ELI"
+      ]
+    },
+    {
+      "species": "SPECIES_GASTRODON",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_060_ROUTE_110_CYCLING_ABIGAIL",
+        "BATTLE_131_ROUTE_111_BEAU"
+      ]
+    },
+    {
+      "species": "SPECIES_GENGAR",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_065_MAUVILLE_GYM_VIVIAN_KIRK",
+        "BATTLE_138_ROUTE_111_BIANCA"
+      ]
+    },
+    {
+      "species": "SPECIES_GIGALITH",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_076_RUSTURF_TUNNEL_MIKE",
+        "BATTLE_128_MT_CHIMNEY_SAWYER"
+      ]
+    },
+    {
       "species": "SPECIES_GLIMMET",
       "appearance_count": 2,
       "encounter_ids": [
         "BATTLE_016_RUSTBORO_GYM_JOSH",
         "BATTLE_066_MAUVILLE_GYM_BEN"
+      ]
+    },
+    {
+      "species": "SPECIES_GOLDUCK",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_102_ROUTE_114_BERNIE",
+        "BATTLE_132_ROUTE_111_BECKY"
+      ]
+    },
+    {
+      "species": "SPECIES_GOLISOPOD",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_112_JAGGED_PASS_MAGMA_GUARD",
+        "BATTLE_140_ROUTE_111_CELINA"
+      ]
+    },
+    {
+      "species": "SPECIES_GOLURK",
+      "appearance_count": 3,
+      "encounter_ids": [
+        "BATTLE_082_ROUTE_111_TRAVIS",
+        "BATTLE_108_MT_CHIMNEY_GRUNT_PAIR",
+        "BATTLE_133_ROUTE_111_DUSTY"
       ]
     },
     {
@@ -6467,11 +11803,59 @@
       ]
     },
     {
+      "species": "SPECIES_HAWLUCHA",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_036_DEWFORD_GYM_BRAWLY",
+        "BATTLE_130_ROUTE_111_HEIDI"
+      ]
+    },
+    {
+      "species": "SPECIES_HEATMOR",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_087_ROUTE_112_BRYANT_SHAYLA",
+        "BATTLE_118_LAVARIDGE_GYM_AXLE"
+      ]
+    },
+    {
+      "species": "SPECIES_HERACROSS",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_011_PETALBURG_WOODS_JAMES",
+        "BATTLE_101_ROUTE_114_STEVE"
+      ]
+    },
+    {
       "species": "SPECIES_HITMONTOP",
       "appearance_count": 2,
       "encounter_ids": [
         "BATTLE_036_DEWFORD_GYM_BRAWLY",
         "BATTLE_048_SLATEPORT_MUSEUM_ARCHIE"
+      ]
+    },
+    {
+      "species": "SPECIES_HOUNDOOM",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_055_ROUTE_110_EDWIN_JOSEPH",
+        "BATTLE_123_LAVARIDGE_GYM_FLANNERY"
+      ]
+    },
+    {
+      "species": "SPECIES_HO_OH",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_118_LAVARIDGE_GYM_AXLE",
+        "BATTLE_123_LAVARIDGE_GYM_FLANNERY"
+      ]
+    },
+    {
+      "species": "SPECIES_INFERNAPE",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_102_ROUTE_114_BERNIE",
+        "BATTLE_136_ROUTE_111_BROOKE"
       ]
     },
     {
@@ -6483,11 +11867,164 @@
       ]
     },
     {
+      "species": "SPECIES_KARTANA",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_050_TRICK_HOUSE_PUZZLE_1_SALLY",
+        "BATTLE_143_ROUTE_111_BRANDEN"
+      ]
+    },
+    {
+      "species": "SPECIES_KOMMO_O",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_103_ROUTE_114_LENNY",
+        "BATTLE_132_ROUTE_111_BECKY"
+      ]
+    },
+    {
+      "species": "SPECIES_LAPRAS",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_045_SEASHORE_HOUSE_SIMON",
+        "BATTLE_135_ROUTE_111_WILTON"
+      ]
+    },
+    {
+      "species": "SPECIES_LILLIGANT",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_078_ROUTE_111_VICTORIA",
+        "BATTLE_123_LAVARIDGE_GYM_FLANNERY"
+      ]
+    },
+    {
+      "species": "SPECIES_LOPUNNY",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_071_ROUTE_117_DYLAN",
+        "BATTLE_125_MT_CHIMNEY_MELISSA"
+      ]
+    },
+    {
+      "species": "SPECIES_LUNATONE",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_056_ROUTE_110_EDWARD_ALYSSA",
+        "BATTLE_105_METEOR_FALLS_COURTNEY_GRUNT"
+      ]
+    },
+    {
+      "species": "SPECIES_LYCANROC_DUSK",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_072_ROUTE_117_MARIA",
+        "BATTLE_131_ROUTE_111_BEAU"
+      ]
+    },
+    {
+      "species": "SPECIES_MACHAMP",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_080_ROUTE_111_VICKY",
+        "BATTLE_109_MT_CHIMNEY_TABITHA"
+      ]
+    },
+    {
+      "species": "SPECIES_MAGCARGO",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_087_ROUTE_112_BRYANT_SHAYLA",
+        "BATTLE_118_LAVARIDGE_GYM_AXLE"
+      ]
+    },
+    {
+      "species": "SPECIES_MAGMORTAR",
+      "appearance_count": 3,
+      "encounter_ids": [
+        "BATTLE_089_ROUTE_113_JAYLEN",
+        "BATTLE_119_LAVARIDGE_GYM_KEEGAN",
+        "BATTLE_138_ROUTE_111_BIANCA"
+      ]
+    },
+    {
+      "species": "SPECIES_MAGNEZONE",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_089_ROUTE_113_JAYLEN",
+        "BATTLE_104_ROUTE_114_ANGELINA_LUCAS"
+      ]
+    },
+    {
+      "species": "SPECIES_MANDIBUZZ",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_093_ROUTE_113_DILLON",
+        "BATTLE_131_ROUTE_111_BEAU"
+      ]
+    },
+    {
+      "species": "SPECIES_MAROWAK_ALOLAN",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_102_ROUTE_114_BERNIE",
+        "BATTLE_121_LAVARIDGE_GYM_JACE_ELI"
+      ]
+    },
+    {
       "species": "SPECIES_MARSHTOMP",
       "appearance_count": 2,
       "encounter_ids": [
         "BATTLE_028_RUSTBORO_RIVAL",
         "BATTLE_054_ROUTE_110_RIVAL"
+      ]
+    },
+    {
+      "species": "SPECIES_MELOETTA",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_049_ROUTE_110_ISABEL_KALEB",
+        "BATTLE_127_MT_CHIMNEY_SHIRLEY"
+      ]
+    },
+    {
+      "species": "SPECIES_METANG",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_054_ROUTE_110_RIVAL",
+        "BATTLE_111_JAGGED_PASS_ERIC"
+      ]
+    },
+    {
+      "species": "SPECIES_MIENFOO",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_031_DEWFORD_GYM_LAURA",
+        "BATTLE_090_ROUTE_113_MADELINE"
+      ]
+    },
+    {
+      "species": "SPECIES_MIENSHAO",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_074_ROUTE_117_AISHA_MELINA_BRANDI",
+        "BATTLE_124_MT_CHIMNEY_SHELBY"
+      ]
+    },
+    {
+      "species": "SPECIES_MINIOR",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_023_ROUTE_116_CLARK_JOHNSON",
+        "BATTLE_105_METEOR_FALLS_COURTNEY_GRUNT"
+      ]
+    },
+    {
+      "species": "SPECIES_MISMAGIUS",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_065_MAUVILLE_GYM_VIVIAN_KIRK",
+        "BATTLE_100_ROUTE_114_SHANE"
       ]
     },
     {
@@ -6499,11 +12036,44 @@
       ]
     },
     {
-      "species": "SPECIES_MUDSDALE",
+      "species": "SPECIES_MR_RIME",
       "appearance_count": 2,
       "encounter_ids": [
+        "BATTLE_115_JAGGED_PASS_ETHAN",
+        "BATTLE_127_MT_CHIMNEY_SHIRLEY"
+      ]
+    },
+    {
+      "species": "SPECIES_MUDSDALE",
+      "appearance_count": 3,
+      "encounter_ids": [
         "BATTLE_045_SEASHORE_HOUSE_SIMON",
-        "BATTLE_069_ROUTE_117_ANNA_AND_MEG"
+        "BATTLE_069_ROUTE_117_ANNA_AND_MEG",
+        "BATTLE_130_ROUTE_111_HEIDI"
+      ]
+    },
+    {
+      "species": "SPECIES_NINJASK",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_088_ROUTE_113_LUNG_WYATT_LAWRENCE",
+        "BATTLE_134_ROUTE_111_DAISUKE"
+      ]
+    },
+    {
+      "species": "SPECIES_ORICORIO",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_014_ROUTE_104_GINA_MIA",
+        "BATTLE_120_LAVARIDGE_GYM_DANIELLE"
+      ]
+    },
+    {
+      "species": "SPECIES_PERRSERKER",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_037_ROUTE_109_HUEY",
+        "BATTLE_143_ROUTE_111_BRANDEN"
       ]
     },
     {
@@ -6515,11 +12085,35 @@
       ]
     },
     {
+      "species": "SPECIES_PLUSLE",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_053_ROUTE_110_TIMMY",
+        "BATTLE_107_METEOR_FALLS_JOHN_JAY"
+      ]
+    },
+    {
       "species": "SPECIES_PRINPLUP",
       "appearance_count": 2,
       "encounter_ids": [
         "BATTLE_028_RUSTBORO_RIVAL",
         "BATTLE_054_ROUTE_110_RIVAL"
+      ]
+    },
+    {
+      "species": "SPECIES_PUPITAR",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_088_ROUTE_113_LUNG_WYATT_LAWRENCE",
+        "BATTLE_111_JAGGED_PASS_ERIC"
+      ]
+    },
+    {
+      "species": "SPECIES_PYROAR",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_102_ROUTE_114_BERNIE",
+        "BATTLE_122_LAVARIDGE_GYM_JEFF"
       ]
     },
     {
@@ -6539,11 +12133,59 @@
       ]
     },
     {
-      "species": "SPECIES_RAICHU",
+      "species": "SPECIES_QWILFISH",
       "appearance_count": 2,
       "encounter_ids": [
-        "BATTLE_048_SLATEPORT_MUSEUM_ARCHIE",
-        "BATTLE_068_MAUVILLE_GYM_WATTSON"
+        "BATTLE_007_ROUTE_104_DARIAN",
+        "BATTLE_048_SLATEPORT_MUSEUM_ARCHIE"
+      ]
+    },
+    {
+      "species": "SPECIES_RAMPARDOS",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_059_ROUTE_110_CYCLING_ANTHONY",
+        "BATTLE_133_ROUTE_111_DUSTY"
+      ]
+    },
+    {
+      "species": "SPECIES_RAPIDASH",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_074_ROUTE_117_AISHA_MELINA_BRANDI",
+        "BATTLE_120_LAVARIDGE_GYM_DANIELLE"
+      ]
+    },
+    {
+      "species": "SPECIES_RESHIRAM",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_117_LAVARIDGE_GYM_COLE_GERALD",
+        "BATTLE_123_LAVARIDGE_GYM_FLANNERY"
+      ]
+    },
+    {
+      "species": "SPECIES_RHYPERIOR",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_084_ROUTE_112_TRENT",
+        "BATTLE_109_MT_CHIMNEY_TABITHA"
+      ]
+    },
+    {
+      "species": "SPECIES_ROSERADE",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_078_ROUTE_111_VICTORIA",
+        "BATTLE_136_ROUTE_111_BROOKE"
+      ]
+    },
+    {
+      "species": "SPECIES_SALAZZLE",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_072_ROUTE_117_MARIA",
+        "BATTLE_110_MT_CHIMNEY_MAXIE"
       ]
     },
     {
@@ -6555,6 +12197,14 @@
       ]
     },
     {
+      "species": "SPECIES_SCYTHER",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_021_ROUTE_116_JOSE",
+        "BATTLE_139_ROUTE_111_TYRON"
+      ]
+    },
+    {
       "species": "SPECIES_SERVINE",
       "appearance_count": 2,
       "encounter_ids": [
@@ -6563,11 +12213,132 @@
       ]
     },
     {
+      "species": "SPECIES_SHEDINJA",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_088_ROUTE_113_LUNG_WYATT_LAWRENCE",
+        "BATTLE_134_ROUTE_111_DAISUKE"
+      ]
+    },
+    {
+      "species": "SPECIES_SIGILYPH",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_051_TRICK_HOUSE_PUZZLE_1_EDDIE",
+        "BATTLE_133_ROUTE_111_DUSTY"
+      ]
+    },
+    {
+      "species": "SPECIES_SIRFETCHD",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_099_ROUTE_114_TYRA_IVY",
+        "BATTLE_143_ROUTE_111_BRANDEN"
+      ]
+    },
+    {
+      "species": "SPECIES_SPINDA",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_098_ROUTE_114_NANCY",
+        "BATTLE_122_LAVARIDGE_GYM_JEFF"
+      ]
+    },
+    {
+      "species": "SPECIES_STONJOURNER",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_012_ROUTE_104_WINSTON",
+        "BATTLE_108_MT_CHIMNEY_GRUNT_PAIR"
+      ]
+    },
+    {
+      "species": "SPECIES_THROH",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_034_DEWFORD_GYM_CRISTIAN",
+        "BATTLE_099_ROUTE_114_TYRA_IVY"
+      ]
+    },
+    {
       "species": "SPECIES_TORRACAT",
       "appearance_count": 2,
       "encounter_ids": [
         "BATTLE_028_RUSTBORO_RIVAL",
         "BATTLE_054_ROUTE_110_RIVAL"
+      ]
+    },
+    {
+      "species": "SPECIES_TOXTRICITY",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_065_MAUVILLE_GYM_VIVIAN_KIRK",
+        "BATTLE_115_JAGGED_PASS_ETHAN"
+      ]
+    },
+    {
+      "species": "SPECIES_TSAREENA",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_044_SEASHORE_HOUSE_JOHANNA",
+        "BATTLE_126_MT_CHIMNEY_SHEILA"
+      ]
+    },
+    {
+      "species": "SPECIES_TURTONATOR",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_101_ROUTE_114_STEVE",
+        "BATTLE_121_LAVARIDGE_GYM_JACE_ELI"
+      ]
+    },
+    {
+      "species": "SPECIES_TYPHLOSION",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_087_ROUTE_112_BRYANT_SHAYLA",
+        "BATTLE_119_LAVARIDGE_GYM_KEEGAN"
+      ]
+    },
+    {
+      "species": "SPECIES_TYRANTRUM",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_101_ROUTE_114_STEVE",
+        "BATTLE_142_ROUTE_111_BRYAN"
+      ]
+    },
+    {
+      "species": "SPECIES_VAPOREON",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_102_ROUTE_114_BERNIE",
+        "BATTLE_137_ROUTE_111_HAYDEN"
+      ]
+    },
+    {
+      "species": "SPECIES_VICTREEBEL",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_085_ROUTE_112_LARRY",
+        "BATTLE_140_ROUTE_111_CELINA"
+      ]
+    },
+    {
+      "species": "SPECIES_VOLCANION",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_043_SEASHORE_HOUSE_DWAYNE",
+        "BATTLE_123_LAVARIDGE_GYM_FLANNERY"
+      ]
+    },
+    {
+      "species": "SPECIES_VOLCARONA",
+      "appearance_count": 3,
+      "encounter_ids": [
+        "BATTLE_091_ROUTE_113_TORI_AND_TIA",
+        "BATTLE_120_LAVARIDGE_GYM_DANIELLE",
+        "BATTLE_123_LAVARIDGE_GYM_FLANNERY"
       ]
     },
     {
@@ -6585,14 +12356,34 @@
         "BATTLE_015_ROUTE_104_IVAN",
         "BATTLE_071_ROUTE_117_DYLAN"
       ]
+    },
+    {
+      "species": "SPECIES_ZANGOOSE",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_050_TRICK_HOUSE_PUZZLE_1_SALLY",
+        "BATTLE_137_ROUTE_111_HAYDEN"
+      ]
+    },
+    {
+      "species": "SPECIES_ZOROARK",
+      "appearance_count": 2,
+      "encounter_ids": [
+        "BATTLE_047_SLATEPORT_MUSEUM_AQUA_GRUNT_2",
+        "BATTLE_092_ROUTE_113_LAO"
+      ]
     }
   ],
   "legendary_families": [
     {
       "family_id": "ARTICUNO",
-      "status": "unplaced",
-      "used_species": [],
-      "used_encounter_ids": [],
+      "status": "used",
+      "used_species": [
+        "SPECIES_ARTICUNO"
+      ],
+      "used_encounter_ids": [
+        "BATTLE_104_ROUTE_114_ANGELINA_LUCAS"
+      ],
       "reservations": []
     },
     {
@@ -6619,9 +12410,13 @@
     },
     {
       "family_id": "MEWTWO",
-      "status": "unplaced",
-      "used_species": [],
-      "used_encounter_ids": [],
+      "status": "used",
+      "used_species": [
+        "SPECIES_MEWTWO"
+      ],
+      "used_encounter_ids": [
+        "BATTLE_135_ROUTE_111_WILTON"
+      ],
       "reservations": []
     },
     {
@@ -6644,9 +12439,13 @@
     },
     {
       "family_id": "ENTEI",
-      "status": "unplaced",
-      "used_species": [],
-      "used_encounter_ids": [],
+      "status": "used",
+      "used_species": [
+        "SPECIES_ENTEI"
+      ],
+      "used_encounter_ids": [
+        "BATTLE_110_MT_CHIMNEY_MAXIE"
+      ],
       "reservations": []
     },
     {
@@ -6665,9 +12464,14 @@
     },
     {
       "family_id": "HO_OH",
-      "status": "unplaced",
-      "used_species": [],
-      "used_encounter_ids": [],
+      "status": "used",
+      "used_species": [
+        "SPECIES_HO_OH"
+      ],
+      "used_encounter_ids": [
+        "BATTLE_118_LAVARIDGE_GYM_AXLE",
+        "BATTLE_123_LAVARIDGE_GYM_FLANNERY"
+      ],
       "reservations": []
     },
     {
@@ -6715,9 +12519,13 @@
     },
     {
       "family_id": "LATIOS",
-      "status": "reserved",
-      "used_species": [],
-      "used_encounter_ids": [],
+      "status": "used",
+      "used_species": [
+        "SPECIES_LATIOS"
+      ],
+      "used_encounter_ids": [
+        "BATTLE_136_ROUTE_111_BROOKE"
+      ],
       "reservations": [
         {
           "anchor_id": "ELITE_FOUR_DRAKE",
@@ -6728,13 +12536,9 @@
     },
     {
       "family_id": "KYOGRE",
-      "status": "used",
-      "used_species": [
-        "SPECIES_KYOGRE"
-      ],
-      "used_encounter_ids": [
-        "BATTLE_048_SLATEPORT_MUSEUM_ARCHIE"
-      ],
+      "status": "reserved",
+      "used_species": [],
+      "used_encounter_ids": [],
       "reservations": [
         {
           "anchor_id": "CHAMPION_WALLACE",
@@ -6745,9 +12549,13 @@
     },
     {
       "family_id": "GROUDON",
-      "status": "unplaced",
-      "used_species": [],
-      "used_encounter_ids": [],
+      "status": "used",
+      "used_species": [
+        "SPECIES_GROUDON"
+      ],
+      "used_encounter_ids": [
+        "BATTLE_110_MT_CHIMNEY_MAXIE"
+      ],
       "reservations": []
     },
     {
@@ -6759,9 +12567,13 @@
     },
     {
       "family_id": "JIRACHI",
-      "status": "unplaced",
-      "used_species": [],
-      "used_encounter_ids": [],
+      "status": "used",
+      "used_species": [
+        "SPECIES_JIRACHI"
+      ],
+      "used_encounter_ids": [
+        "BATTLE_105_METEOR_FALLS_COURTNEY_GRUNT"
+      ],
       "reservations": []
     },
     {
@@ -6814,9 +12626,13 @@
     },
     {
       "family_id": "HEATRAN",
-      "status": "unplaced",
-      "used_species": [],
-      "used_encounter_ids": [],
+      "status": "used",
+      "used_species": [
+        "SPECIES_HEATRAN"
+      ],
+      "used_encounter_ids": [
+        "BATTLE_123_LAVARIDGE_GYM_FLANNERY"
+      ],
       "reservations": []
     },
     {
@@ -6853,9 +12669,13 @@
     },
     {
       "family_id": "MANAPHY",
-      "status": "unplaced",
-      "used_species": [],
-      "used_encounter_ids": [],
+      "status": "used",
+      "used_species": [
+        "SPECIES_MANAPHY"
+      ],
+      "used_encounter_ids": [
+        "BATTLE_048_SLATEPORT_MUSEUM_ARCHIE"
+      ],
       "reservations": []
     },
     {
@@ -6943,9 +12763,14 @@
     },
     {
       "family_id": "RESHIRAM",
-      "status": "unplaced",
-      "used_species": [],
-      "used_encounter_ids": [],
+      "status": "used",
+      "used_species": [
+        "SPECIES_RESHIRAM"
+      ],
+      "used_encounter_ids": [
+        "BATTLE_117_LAVARIDGE_GYM_COLE_GERALD",
+        "BATTLE_123_LAVARIDGE_GYM_FLANNERY"
+      ],
       "reservations": []
     },
     {
@@ -6987,7 +12812,8 @@
         "SPECIES_MELOETTA"
       ],
       "used_encounter_ids": [
-        "BATTLE_049_ROUTE_110_ISABEL_KALEB"
+        "BATTLE_049_ROUTE_110_ISABEL_KALEB",
+        "BATTLE_127_MT_CHIMNEY_SHIRLEY"
       ],
       "reservations": []
     },
@@ -7032,7 +12858,8 @@
         "SPECIES_DIANCIE"
       ],
       "used_encounter_ids": [
-        "BATTLE_025_ROUTE_116_SARAH_DAWSON"
+        "BATTLE_025_ROUTE_116_SARAH_DAWSON",
+        "BATTLE_125_MT_CHIMNEY_MELISSA"
       ],
       "reservations": []
     },
@@ -7054,7 +12881,8 @@
         "SPECIES_VOLCANION"
       ],
       "used_encounter_ids": [
-        "BATTLE_043_SEASHORE_HOUSE_DWAYNE"
+        "BATTLE_043_SEASHORE_HOUSE_DWAYNE",
+        "BATTLE_123_LAVARIDGE_GYM_FLANNERY"
       ],
       "reservations": []
     },
@@ -7096,9 +12924,13 @@
     },
     {
       "family_id": "TAPU_BULU",
-      "status": "unplaced",
-      "used_species": [],
-      "used_encounter_ids": [],
+      "status": "used",
+      "used_species": [
+        "SPECIES_TAPU_BULU"
+      ],
+      "used_encounter_ids": [
+        "BATTLE_130_ROUTE_111_HEIDI"
+      ],
       "reservations": []
     },
     {
@@ -7138,9 +12970,13 @@
     },
     {
       "family_id": "NIHILEGO",
-      "status": "unplaced",
-      "used_species": [],
-      "used_encounter_ids": [],
+      "status": "used",
+      "used_species": [
+        "SPECIES_NIHILEGO"
+      ],
+      "used_encounter_ids": [
+        "BATTLE_127_MT_CHIMNEY_SHIRLEY"
+      ],
       "reservations": []
     },
     {
@@ -7163,16 +12999,24 @@
     },
     {
       "family_id": "XURKITREE",
-      "status": "unplaced",
-      "used_species": [],
-      "used_encounter_ids": [],
+      "status": "used",
+      "used_species": [
+        "SPECIES_XURKITREE"
+      ],
+      "used_encounter_ids": [
+        "BATTLE_109_MT_CHIMNEY_TABITHA"
+      ],
       "reservations": []
     },
     {
       "family_id": "CELESTEELA",
-      "status": "unplaced",
-      "used_species": [],
-      "used_encounter_ids": [],
+      "status": "used",
+      "used_species": [
+        "SPECIES_CELESTEELA"
+      ],
+      "used_encounter_ids": [
+        "BATTLE_105_METEOR_FALLS_COURTNEY_GRUNT"
+      ],
       "reservations": []
     },
     {
@@ -7182,7 +13026,8 @@
         "SPECIES_KARTANA"
       ],
       "used_encounter_ids": [
-        "BATTLE_050_TRICK_HOUSE_PUZZLE_1_SALLY"
+        "BATTLE_050_TRICK_HOUSE_PUZZLE_1_SALLY",
+        "BATTLE_143_ROUTE_111_BRANDEN"
       ],
       "reservations": []
     },
@@ -7217,9 +13062,13 @@
     },
     {
       "family_id": "MARSHADOW",
-      "status": "reserved",
-      "used_species": [],
-      "used_encounter_ids": [],
+      "status": "used",
+      "used_species": [
+        "SPECIES_MARSHADOW"
+      ],
+      "used_encounter_ids": [
+        "BATTLE_134_ROUTE_111_DAISUKE"
+      ],
       "reservations": [
         {
           "anchor_id": "ELITE_FOUR_PHOEBE",
@@ -7237,9 +13086,13 @@
     },
     {
       "family_id": "NAGANADEL",
-      "status": "unplaced",
-      "used_species": [],
-      "used_encounter_ids": [],
+      "status": "used",
+      "used_species": [
+        "SPECIES_NAGANADEL"
+      ],
+      "used_encounter_ids": [
+        "BATTLE_106_METEOR_FALLS_NICOLAS"
+      ],
       "reservations": []
     },
     {
@@ -7255,9 +13108,13 @@
     },
     {
       "family_id": "BLACEPHALON",
-      "status": "unplaced",
-      "used_species": [],
-      "used_encounter_ids": [],
+      "status": "used",
+      "used_species": [
+        "SPECIES_BLACEPHALON"
+      ],
+      "used_encounter_ids": [
+        "BATTLE_108_MT_CHIMNEY_GRUNT_PAIR"
+      ],
       "reservations": []
     },
     {
@@ -7346,9 +13203,13 @@
     },
     {
       "family_id": "REGIDRAGO",
-      "status": "unplaced",
-      "used_species": [],
-      "used_encounter_ids": [],
+      "status": "used",
+      "used_species": [
+        "SPECIES_REGIDRAGO"
+      ],
+      "used_encounter_ids": [
+        "BATTLE_106_METEOR_FALLS_NICOLAS"
+      ],
       "reservations": []
     },
     {
@@ -7436,8 +13297,10 @@
       "mechanism": "item",
       "requirement": "ITEM_ABSOLITE",
       "mega_species": "SPECIES_ABSOL_MEGA",
-      "status": "reserved",
-      "used_encounter_ids": [],
+      "status": "used",
+      "used_encounter_ids": [
+        "BATTLE_116_LAVARIDGE_POKECENTER_LUCY"
+      ],
       "reservations": [
         {
           "anchor_id": "ELITE_FOUR_SIDNEY",
@@ -7451,8 +13314,10 @@
       "mechanism": "item",
       "requirement": "ITEM_AERODACTYLITE",
       "mega_species": "SPECIES_AERODACTYL_MEGA",
-      "status": "unplaced",
-      "used_encounter_ids": [],
+      "status": "used",
+      "used_encounter_ids": [
+        "BATTLE_105_METEOR_FALLS_COURTNEY_GRUNT"
+      ],
       "reservations": []
     },
     {
@@ -7481,8 +13346,10 @@
       "mechanism": "item",
       "requirement": "ITEM_ALTARIANITE",
       "mega_species": "SPECIES_ALTARIA_MEGA",
-      "status": "unplaced",
-      "used_encounter_ids": [],
+      "status": "used",
+      "used_encounter_ids": [
+        "BATTLE_103_ROUTE_114_LENNY"
+      ],
       "reservations": []
     },
     {
@@ -7521,8 +13388,10 @@
       "mechanism": "item",
       "requirement": "ITEM_BEEDRILLITE",
       "mega_species": "SPECIES_BEEDRILL_MEGA",
-      "status": "unplaced",
-      "used_encounter_ids": [],
+      "status": "used",
+      "used_encounter_ids": [
+        "BATTLE_139_ROUTE_111_TYRON"
+      ],
       "reservations": []
     },
     {
@@ -7541,8 +13410,10 @@
       "mechanism": "item",
       "requirement": "ITEM_BLAZIKENITE",
       "mega_species": "SPECIES_BLAZIKEN_MEGA",
-      "status": "unplaced",
-      "used_encounter_ids": [],
+      "status": "used",
+      "used_encounter_ids": [
+        "BATTLE_123_LAVARIDGE_GYM_FLANNERY"
+      ],
       "reservations": []
     },
     {
@@ -7601,8 +13472,10 @@
       "mechanism": "item",
       "requirement": "ITEM_DIANCITE",
       "mega_species": "SPECIES_DIANCIE_MEGA",
-      "status": "unplaced",
-      "used_encounter_ids": [],
+      "status": "used",
+      "used_encounter_ids": [
+        "BATTLE_125_MT_CHIMNEY_MELISSA"
+      ],
       "reservations": []
     },
     {
@@ -7626,8 +13499,10 @@
       "mechanism": "item",
       "requirement": "ITEM_EMBOARITE",
       "mega_species": "SPECIES_EMBOAR_MEGA",
-      "status": "unplaced",
-      "used_encounter_ids": [],
+      "status": "used",
+      "used_encounter_ids": [
+        "BATTLE_123_LAVARIDGE_GYM_FLANNERY"
+      ],
       "reservations": []
     },
     {
@@ -7636,8 +13511,10 @@
       "mechanism": "item",
       "requirement": "ITEM_EXCADRITE",
       "mega_species": "SPECIES_EXCADRILL_MEGA",
-      "status": "unplaced",
-      "used_encounter_ids": [],
+      "status": "used",
+      "used_encounter_ids": [
+        "BATTLE_128_MT_CHIMNEY_SAWYER"
+      ],
       "reservations": []
     },
     {
@@ -7656,8 +13533,11 @@
       "mechanism": "item",
       "requirement": "ITEM_FLYGONITE",
       "mega_species": "SPECIES_FLYGON_MEGA",
-      "status": "unplaced",
-      "used_encounter_ids": [],
+      "status": "used",
+      "used_encounter_ids": [
+        "BATTLE_110_MT_CHIMNEY_MAXIE",
+        "BATTLE_133_ROUTE_111_DUSTY"
+      ],
       "reservations": []
     },
     {
@@ -7770,8 +13650,10 @@
       "mechanism": "item",
       "requirement": "ITEM_HERACRONITE",
       "mega_species": "SPECIES_HERACROSS_MEGA",
-      "status": "unplaced",
-      "used_encounter_ids": [],
+      "status": "used",
+      "used_encounter_ids": [
+        "BATTLE_101_ROUTE_114_STEVE"
+      ],
       "reservations": []
     },
     {
@@ -7842,8 +13724,10 @@
       "mechanism": "item",
       "requirement": "ITEM_LATIOSITE",
       "mega_species": "SPECIES_LATIOS_MEGA",
-      "status": "unplaced",
-      "used_encounter_ids": [],
+      "status": "used",
+      "used_encounter_ids": [
+        "BATTLE_136_ROUTE_111_BROOKE"
+      ],
       "reservations": []
     },
     {
@@ -7872,8 +13756,10 @@
       "mechanism": "item",
       "requirement": "ITEM_MACHAMPITE",
       "mega_species": "SPECIES_MACHAMP_MEGA",
-      "status": "unplaced",
-      "used_encounter_ids": [],
+      "status": "used",
+      "used_encounter_ids": [
+        "BATTLE_109_MT_CHIMNEY_TABITHA"
+      ],
       "reservations": []
     },
     {
@@ -7954,8 +13840,10 @@
       "mechanism": "item",
       "requirement": "ITEM_MEWTWONITE_Y",
       "mega_species": "SPECIES_MEWTWO_MEGA_Y",
-      "status": "unplaced",
-      "used_encounter_ids": [],
+      "status": "used",
+      "used_encounter_ids": [
+        "BATTLE_135_ROUTE_111_WILTON"
+      ],
       "reservations": []
     },
     {
@@ -8151,8 +14039,10 @@
       "mechanism": "item",
       "requirement": "ITEM_VENUSAURITE",
       "mega_species": "SPECIES_VENUSAUR_MEGA",
-      "status": "unplaced",
-      "used_encounter_ids": [],
+      "status": "used",
+      "used_encounter_ids": [
+        "BATTLE_141_ROUTE_111_CELIA"
+      ],
       "reservations": []
     }
   ]

@@ -1,6 +1,6 @@
 static const u8 sArmorTailDescription[] = _("Blocks priority for allies.");
 static const u8 sBeadsOfRuinDescription[] = _("Lowers others' Sp. Def.");
-static const u8 sCommanderDescription[] = _("Boosts an allied Dondozo.");
+static const u8 sCommanderDescription[] = _("Enters Dondozo and sharply\nraises all its stats.");
 static const u8 sCudChewDescription[] = _("Reuses an eaten Berry later.");
 static const u8 sGoodAsGoldDescription[] = _("Blocks others' status moves.");
 static const u8 sProtosynthesisDescription[] = _("Sun/item boosts top stat.");

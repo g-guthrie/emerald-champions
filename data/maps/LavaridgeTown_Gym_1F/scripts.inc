@@ -110,13 +110,19 @@ LavaridgeTown_Gym_1F_EventScript_GiveOverheat:: @ 81FE841
 	return
 
 LavaridgeTown_Gym_1F_EventScript_FlanneryRematch::
-	trainerbattle_no_intro TRAINER_FLANNERY_4, LavaridgeTown_Gym_1F_Text_FlanneryRematchDefeat
-	setflag FLAG_DAILY_REMATCH_FLANNERY
-	releaseall
-	end
+	lockall
+	faceplayer
+	message LavaridgeTown_Gym_1F_Text_FlanneryChooseFormat
+	waitmessage
+	multichoice 17, 6, MULTI_REMATCH_BATTLE_MODE, 0
+	switch VAR_RESULT
+	case 0, LavaridgeTown_Gym_1F_EventScript_SetSingles
+	case 1, LavaridgeTown_Gym_1F_EventScript_SetDoubles
+	case 2, LavaridgeTown_Gym_1F_EventScript_Exit
+	case 127, LavaridgeTown_Gym_1F_EventScript_Exit
 
-@ 2: singles, legendaries
-@ 3: singles, no legendaries
+@ 2: singles, no legendaries
+@ 3: singles, legendaries
 @ 4: doubles, legendaries
 @ 5: doubles, no legendaries
 
@@ -258,153 +264,144 @@ LavaridgeTown_Gym_1F_Text_GymGuideAdvice1:
 	.string "to help with your challenge.$"
 
 LavaridgeTown_Gym_1F_Text_GymGuideAdvice2: @ 81FE9BF
-	.string "Lavaridge's Gym Leader Flannery\n"
-	.string "uses Fire-type Pokémon.\p"
-	.string "Her passion for Pokémon burns stronger\n"
-	.string "and hotter than a volcano.\p"
-	.string "She likes to battle in the sun, and\n"
-	.string "her Pokémon are all trained to hit as\l"
-	.string "hard as they can.\p"
-	.string "You might need some extra power to\n"
-	.string "keep up!\p"	
-	.string "Try buying some Gems from the local\n"
-	.string "Poké Mart to boost your attacks.$"
+	.string "Flannery battles at two speeds.\p"
+	.string "Lilligant pulls Torkoal forward\n"
+	.string "with After You and sun.\p"
+	.string "Chip Torkoal to weaken Eruption,\n"
+	.string "or replace its weather.\p"
+	.string "Delphox may reverse the order.\n"
+	.string "Taunt it, or exploit Trick Room.\p"
+	.string "Heatran floats until its Balloon\n"
+	.string "breaks. Mega Emboar has no Protect.$"
 
 LavaridgeTown_Gym_1F_Text_GymGuidePostVictory: @ 81FEAB8
-	.string "Yow! That was a scorching-hot battle!$"
+	.string "Yow! What a scorching-hot battle!$"
 
 LavaridgeTown_Gym_1F_Text_ColeIntro: @ 81FEADE
-	.string "Owowowowow!\n"
-	.string "Yikes, it's hot!$"
+	.string "Hot sand stores heat underfoot!\p"
+	.string "Chandelure draws it in.\n"
+	.string "Incineroar carries it forward,\l"
+	.string "and Simisear waits for a flare!$"
 
 LavaridgeTown_Gym_1F_Text_ColeDefeat: @ 81FEAFB
-	.string "I'm blinded by sweat in my eyes…$"
+	.string "The stored heat escaped!$"
 
 LavaridgeTown_Gym_1F_Text_ColePostBattle: @ 81FEB1C
-	.string "Being buried in hot sand promotes\n"
-	.string "circulation.\p"
-	.string "It's effective for healing pain in\n"
-	.string "your joints.$"
+	.string "Gerald can target Chandelure with\n"
+	.string "Flamethrower to feed Flash Fire.\p"
+	.string "Alone, each of my three still burns.$"
 
 LavaridgeTown_Gym_1F_Text_AxleIntro: @ 81FEB7B
-	.string "I'm trying to relieve my stress.\n"
-	.string "Don't come along and stress me out!$"
+	.string "Pressure has to escape somewhere!\p"
+	.string "Drifblim pops, Magcargo vents,\l"
+	.string "Heatmor ejects, and Ho-Oh resets!$"
 
 LavaridgeTown_Gym_1F_Text_AxleDefeat: @ 81FEBC0
-	.string "I hope Flannery flames you good!$"
+	.string "All my pressure escaped at once!$"
 
 LavaridgeTown_Gym_1F_Text_AxlePostBattle: @ 81FEBE1
-	.string "Haaah… Whew…\p"
-	.string "If you spend too much time buried in\n"
-	.string "hot sand, it tuckers you out…$"
+	.string "Policy triggers Unburden. White Herb\n"
+	.string "cleans up Simple Shell Smash.\p"
+	.string "Eject Pack pivots after Overheat,\l"
+	.string "Regenerator rewards Ho-Oh's exit.$"
 
 LavaridgeTown_Gym_B1F_Text_KeeganIntro: @ 81FEC31
-	.string "You must be getting tired by now.\n"
-	.string "You'd like to rest in the hot sand,\l"
-	.string "wouldn't you?\p"
-	.string "But you should know that maintaining\n"
-	.string "your willpower is an important ability\l"
-	.string "for all Trainers.$"
+	.string "Heat tests willpower, not weather!\p"
+	.string "Vigoroth and Magmortar won't sleep.\n"
+	.string "Typhlosion must stay healthy to keep\l"
+	.string "Eruption at full strength!$"
 
 LavaridgeTown_Gym_B1F_Text_KeeganDefeat: @ 81FECE3
-	.string "Play with fire, and be burned…$"
+	.string "Your will outlasted mine!$"
 
 LavaridgeTown_Gym_B1F_Text_KeeganPostBattle: @ 81FED02
-	.string "Your skill is real…\n"
-	.string "But our Leader Flannery is strong.\p"
-	.string "If you don't watch yourself, you'll be\n"
-	.string "burned seriously.$"
+	.string "Vital Spirit blocks sleep. Eviolite\n"
+	.string "and Assault Vest reward endurance.\p"
+	.string "Chip Typhlosion early to weaken\n"
+	.string "its Choice Scarf Eruption.$"
 
 LavaridgeTown_Gym_1F_Text_GeraldIntro: @ 81FED72
-	.string "Can your Pokémon withstand\n"
-	.string "392-degree heat?$"
+	.string "392 degrees is only the first test!\p"
+	.string "Arcanine ignites, Charizard lifts,\l"
+	.string "and Reshiram brings the furnace!$"
 
 LavaridgeTown_Gym_1F_Text_GeraldDefeat: @ 81FED9E
-	.string "It didn't burn hotly enough…$"
+	.string "Your answer burned hotter!$"
 
 LavaridgeTown_Gym_1F_Text_GeraldPostBattle: @ 81FEDBB
-	.string "The temperature of magma is\n"
-	.string "392 degrees.\p"
-	.string "Your Pokémon beat me, so they should\n"
-	.string "easily survive in magma.$"
+	.string "Flamethrower can boost an allied\n"
+	.string "Flash Fire user without harm.\p"
+	.string "Without Cole, my three attack alone.$"
 
 LavaridgeTown_Gym_1F_Text_DanielleIntro: @ 81FEE22
-	.string "Um…\n"
-	.string "Okay, I'll battle with you.$"
+	.string "Strength can still be beautiful!\p"
+	.string "Volcarona dances; Oricorio copies,\l"
+	.string "then Rapidash and Froslass perform!$"
 
 LavaridgeTown_Gym_1F_Text_DanielleDefeat: @ 81FEE42
-	.string "Oh, but you're too strong.$"
+	.string "You broke the whole performance!$"
 
 LavaridgeTown_Gym_1F_Text_DaniellePostBattle: @ 81FEE5D
-	.string "I'm going to be a pretty and strong\n"
-	.string "Trainer just like Flannery.$"
+	.string "Dancer copies Quiver Dance, but\n"
+	.string "Haze or Taunt can stop both.\p"
+	.string "Choice Band and Focus Sash make the\n"
+	.string "second act a different challenge.$"
 
 LavaridgeTown_Gym_B1F_Text_JaceIntro: @ 81FEE9D
-	.string "Come on, get with it!\n"
-	.string "Let's go before my feelings cool!$"
+	.string "The mountain pulls; my fire answers!\p"
+	.string "Eli bends gravity so Lampent's\n"
+	.string "Inferno can light the chamber!$"
 
 LavaridgeTown_Gym_B1F_Text_JaceDefeat: @ 81FEED5
-	.string "It's so hot, and yet my heart is\n"
-	.string "clutched by ice…$"
+	.string "You cooled every layer!$"
 
 LavaridgeTown_Gym_B1F_Text_JacePostBattle: @ 81FEF07
-	.string "The way the battling spirit burns\n"
-	.string "within you, you may stand a chance\l"
-	.string "against our Leader.$"
+	.string "Gravity steadies Inferno.\p"
+	.string "Then Guts Flareon and Gouging Fire\n"
+	.string "punish hesitation.$"
 
 LavaridgeTown_Gym_B1F_Text_JeffIntro: @ 81FEF60
-	.string "See how the flames blaze wildly?\n"
-	.string "They flare in anticipation of my win!$"
+	.string "See how the flames wait to blaze?\p"
+	.string "Spinda trades Contrary to Pyroar;\n"
+	.string "then Overheat burns even higher!$"
 
 LavaridgeTown_Gym_B1F_Text_JeffDefeat: @ 81FEFA7
-	.string "Something didn't go right.$"
+	.string "You stopped the flashover!$"
 
 LavaridgeTown_Gym_B1F_Text_JeffPostBattle: @ 81FEFC2
-	.string "Well, so what? I say so what?\n"
-	.string "I can walk on hot coals barefoot!\p"
-	.string "…Don't even think about trying it!$"
+	.string "Iron Ball slows Pyroar, so Spinda's\n"
+	.string "Skill Swap lands before Overheat.\p"
+	.string "Stop Spinda, then prepare for\n"
+	.string "Cinderace and Centiskorch.$"
 
 LavaridgeTown_Gym_B1F_Text_EliIntro: @ 81FF025
-	.string "As much as I love mountains,\n"
-	.string "I especially love volcanoes.$"
+	.string "A volcano's pull is as dangerous\n"
+	.string "as its flame!\p"
+	.string "Claydol grounds you; Coalossal marks\n"
+	.string "you; Turtonator traps your swing!$"
 
 LavaridgeTown_Gym_B1F_Text_EliDefeat: @ 81FF05F
-	.string "Well, it seems to me I lost without\n"
-	.string "ever being in control.$"
+	.string "You escaped the pressure chamber!$"
 
 LavaridgeTown_Gym_B1F_Text_EliPostBattle: @ 81FF09A
-	.string "I stay here because I became a fan\n"
-	.string "of Flannery's power.\p"
-	.string "Hehehehe.$"
+	.string "Gravity aids Inferno and Rock Slide.\p"
+	.string "Tar Shot adds a Fire weakness;\n"
+	.string "special attacks bypass Shell Trap.$"
 
 LavaridgeTown_Gym_1F_Text_FlanneryIntro: @ 81FF0DC
-	.string "Welcome… No, wait.\p"
-	.string "Puny Trainer, how good to see you've\n"
-	.string "made it here!\p"
-	.string "I have been entrusted with the…\n"
-	.string "No, wait.\p"
-	.string "I am Flannery, and I'm the Gym\n"
-	.string "Leader here!\p"
-	.string "Uh…\n"
-	.string "Dare not underestimate me, though\l"
-	.string "I have been Leader only a short time!\p"
-	.string "With skills inherited from my grand-\n"
-	.string "father, I shall, uh…demonstrate the\l"
-	.string "hot moves we have honed on this land!\p"
-	.string "Fast sun or slow fire--I can burn you\n"
-	.string "at either pace!$"
+	.string "Welcome! I am Flannery, the\n"
+	.string "Lavaridge Gym Leader!\p"
+	.string "My grandfather taught me strength,\n"
+	.string "but this Gym taught me timing.\p"
+	.string "A slow flame can surge first--\n"
+	.string "or reverse the order entirely.\p"
+	.string "Read the temperature, or burn!$"
 
 LavaridgeTown_Gym_1F_Text_FlanneryDefeat: @ 81FF233
-	.string "Oh…\n"
-	.string "I guess I was trying too hard…\p"
-	.string "I… I've only recently become\n"
-	.string "a Gym Leader.\p"
-	.string "I tried too hard to be someone\n"
-	.string "I'm not.\p"
-	.string "I have to do things my natural way. If\n"
-	.string "I don't, my Pokémon will be confused.\p"
-	.string "Thanks for teaching me that.\n"
-	.string "For that, you deserve this.$"
+	.string "You controlled the heat and pace!\p"
+	.string "I don't need to imitate anyone.\n"
+	.string "I'll keep battling my own way.\p"
+	.string "You earned the Heat Badge!$"
 
 LavaridgeTown_Gym_1F_Text_ReceivedHeatBadge: @ 81FF32F
 	.string "{PLAYER} received the Heat Badge\n"
@@ -436,9 +433,8 @@ LavaridgeTown_Gym_1F_Text_RegisteredArcanine: @ 81FF517
 	.string "in the PokéNav.$"
 
 LavaridgeTown_Gym_1F_Text_FlanneryPostBattle: @ 81FF546
-	.string "Your power reminds me of someone…\p"
-	.string "Oh! I know! You battle like Norman,\n"
-	.string "the Gym Leader of Petalburg.$"
+	.string "Your timing reminds me of Norman.\p"
+	.string "Petalburg's Gym now awaits you.$"
 
 LavaridgeTown_Gym_1F_Text_GymStatue: @ 81FF5A9
 	.string "Lavaridge Town Pokémon Gym$"

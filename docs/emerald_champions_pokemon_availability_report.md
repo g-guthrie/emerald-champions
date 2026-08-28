@@ -8,13 +8,13 @@ The report distinguishes **within-method species probability** from an encounter
 
 ## Technical summary
 
-- Source state: commit `f2a3e50a1ece4bce0455ff12bc7953db92f231aa`; clean working tree at generation: **True**.
+- Source state: commit `f2a3e50a1ece4bce0455ff12bc7953db92f231aa`; clean working tree at generation: **False**.
 - Random encounter coverage: **139** populated main overworld maps from **147** configured entries, plus **576** distinct species/forms in catchable random pools.
 - Loadout system: **1309** total competitive sets. Wild Pokémon roll the exact one/two/three-set tutor count at 100%, 50/50, or approximately one-third each.
 - Item system: **65** ordinary competitive held items are free and unlimited. Berries and evolution/transformation progression items are not vendor stock.
 - Species/form appendix: **1269** runtime IDs classified; **0** remain unresolved by the automated source scan and are explicitly listed rather than guessed.
 - Probability validation: **PASS** — every emitted method pool sums independently to 100%.
-- Battle context: **810** reachable definitions, including **565 doubles** and **289 singles**; **72** canonical encounters are currently source-closed bespoke redesigns.
+- Battle context: **810** reachable definitions, including **554 doubles** and **300 singles**; **143** canonical encounters are currently source-closed bespoke redesigns.
 
 ## Acquisition classification summary
 
@@ -34,7 +34,7 @@ Emerald Champions is an extremely hard, doubles-focused competitive Pokémon cam
 
 The player selects from 21 Generation 1–7 starters. The first Route 103 rival uses the same-region type-counter starter at level 15 against the opening cap of 14.
 
-The current guide resolves 810 reachable battle definitions: 565 doubles and 289 intentional singles. The first 72 canonical encounters have source-closed bespoke redesigns; the remaining campaign is still part of the continuing battle-authoring program.
+The current guide resolves 810 reachable battle definitions: 554 doubles and 300 intentional singles. The first 143 canonical encounters have source-closed bespoke redesigns; the remaining campaign is still part of the continuing battle-authoring program.
 
 The game front-loads competitive agency and moves the challenge into battle solving. Players can catch unusual and powerful species early, teach every legal move at Pokémon Centers, switch legal abilities natively, obtain free ordinary competitive held items, and immediately raise a party to the strict cap. The campaign is mostly doubles, ordinary trainers are intended to be serious threats, and bosses are built as bespoke competitive puzzles rather than stat-only checks.
 

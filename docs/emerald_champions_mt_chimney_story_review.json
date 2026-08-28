@@ -1,0 +1,131 @@
+{
+  "version": 1,
+  "scope": {
+    "location": "MtChimney",
+    "battle_indices": [
+      108,
+      110
+    ],
+    "encounter_count": 3,
+    "status": "source-closed-static-pass-runtime-unplayed"
+  },
+  "difficulty": {
+    "minimum": 9.4,
+    "median": 10.0,
+    "maximum": 10.0,
+    "targets": [
+      9.4,
+      10.0,
+      10.0
+    ],
+    "interpretation": "Editorial targets only; observed difficulty requires playtesting on Hard/Medium/Easy."
+  },
+  "format_mix": {
+    "boss-double": 2,
+    "mixed-native-pair": 1
+  },
+  "species_usage": {
+    "slots": 18,
+    "unique_species_forms": 18,
+    "duplicates_across_physical_encounters": [],
+    "by_encounter": {
+      "BATTLE_108_MT_CHIMNEY_GRUNT_PAIR": [
+        "SPECIES_BLACEPHALON",
+        "SPECIES_GOLURK",
+        "SPECIES_KROOKODILE",
+        "SPECIES_PALOSSAND",
+        "SPECIES_SANDACONDA",
+        "SPECIES_STONJOURNER"
+      ],
+      "BATTLE_109_MT_CHIMNEY_TABITHA": [
+        "SPECIES_COALOSSAL",
+        "SPECIES_ELECTIVIRE",
+        "SPECIES_KLINKLANG",
+        "SPECIES_MACHAMP",
+        "SPECIES_RHYPERIOR",
+        "SPECIES_XURKITREE"
+      ],
+      "BATTLE_110_MT_CHIMNEY_MAXIE": [
+        "SPECIES_CROBAT",
+        "SPECIES_ENTEI",
+        "SPECIES_FLYGON",
+        "SPECIES_GROUDON",
+        "SPECIES_SALAZZLE",
+        "SPECIES_SHIFTRY"
+      ]
+    }
+  },
+  "evidence": {
+    "quality_ten_dossiers": 3,
+    "competitive_reference_count": 17,
+    "runtime_playtested": 0
+  },
+  "variety_review": {
+    "result": "pass-no-local-maximum",
+    "encounter_modes": [
+      "opposing-sight land-construction native pair or split singles",
+      "unactivated prototype assembly-line Admin boss",
+      "base-Groudon air-control and positioning leader boss"
+    ],
+    "difficulty_shape": "The ascent begins at target 9.4, then delivers two distinct target-10 bosses with manual Bag recovery between them.",
+    "species_result": "All 18 physical species/form identities are unique across the initial ascent.",
+    "progression_result": "Magma visibly progresses from laborers, to Tabitha machinery, to Maxie command. Coalossal remains unactivated and Groudon remains base form, preserving both later finales.",
+    "next_chapter_guardrail": "Jagged Pass must release boss density without becoming easy. Start with the active Magma guard, avoid sun/Tailwind, machinery, construction, base Groudon, and another Mega; then order every descent trainer from map geometry before Lavaridge."
+  },
+  "battles": [
+    {
+      "index": 108,
+      "encounter_id": "BATTLE_108_MT_CHIMNEY_GRUNT_PAIR",
+      "format": "native-pair double or two split singles",
+      "target_difficulty": 9.4,
+      "manual_quality": 10,
+      "tempo": "Six-member joint construction double or two autonomous three-member singles: boosted breaker lead, rare kiln/compactor middles, then sand foundation and Intimidate guard.",
+      "species": [
+        "SPECIES_BLACEPHALON",
+        "SPECIES_GOLURK",
+        "SPECIES_KROOKODILE",
+        "SPECIES_PALOSSAND",
+        "SPECIES_SANDACONDA",
+        "SPECIES_STONJOURNER"
+      ],
+      "reference_count": 6,
+      "playtest_status": "static-pass-runtime-unplayed"
+    },
+    {
+      "index": 109,
+      "encounter_id": "BATTLE_109_MT_CHIMNEY_TABITHA",
+      "format": "guarded six-member double",
+      "target_difficulty": 10.0,
+      "manual_quality": 10,
+      "tempo": "Six-stage prototype boss: unactivated boiler/gears lead, mixed rare circuit, heavy independent chassis, then priority Mega laborer.",
+      "species": [
+        "SPECIES_COALOSSAL",
+        "SPECIES_ELECTIVIRE",
+        "SPECIES_KLINKLANG",
+        "SPECIES_MACHAMP",
+        "SPECIES_RHYPERIOR",
+        "SPECIES_XURKITREE"
+      ],
+      "reference_count": 6,
+      "playtest_status": "static-pass-runtime-unplayed"
+    },
+    {
+      "index": 110,
+      "encounter_id": "BATTLE_110_MT_CHIMNEY_MAXIE",
+      "format": "guarded six-member double",
+      "target_difficulty": 10.0,
+      "manual_quality": 10,
+      "tempo": "Six-stage summit boss: base-sun air-control lead, physical/special tempo reserves, rare priority guardian, then partner-sensitive Mega ridge ace.",
+      "species": [
+        "SPECIES_CROBAT",
+        "SPECIES_ENTEI",
+        "SPECIES_FLYGON",
+        "SPECIES_GROUDON",
+        "SPECIES_SALAZZLE",
+        "SPECIES_SHIFTRY"
+      ],
+      "reference_count": 5,
+      "playtest_status": "static-pass-runtime-unplayed"
+    }
+  ]
+}

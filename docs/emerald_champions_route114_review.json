@@ -1,0 +1,300 @@
+{
+  "version": 1,
+  "scope": {
+    "location": "Route114",
+    "battle_indices": [
+      95,
+      104
+    ],
+    "encounter_count": 10,
+    "status": "source-closed-static-pass-runtime-unplayed"
+  },
+  "difficulty": {
+    "minimum": 8.6,
+    "median": 9.1,
+    "maximum": 9.6,
+    "targets": [
+      9.6,
+      9.3,
+      8.7,
+      8.6,
+      9.2,
+      8.7,
+      9.0,
+      8.9,
+      9.3,
+      9.5
+    ],
+    "interpretation": "Editorial targets only; observed difficulty requires playtesting on Hard/Medium/Easy."
+  },
+  "format_mix": {
+    "double": 3,
+    "mixed": 2,
+    "rematch-family": 2,
+    "single": 3
+  },
+  "species_usage": {
+    "slots": 45,
+    "unique_species_forms": 45,
+    "duplicates_across_physical_encounters": [],
+    "by_encounter": {
+      "BATTLE_095_ROUTE_114_NOLAN": [
+        "SPECIES_CLAWITZER",
+        "SPECIES_DONDOZO",
+        "SPECIES_PALAFIN",
+        "SPECIES_TATSUGIRI"
+      ],
+      "BATTLE_096_ROUTE_114_KAI_CHARLOTTE": [
+        "SPECIES_BEHEEYEM",
+        "SPECIES_GRAPPLOCT",
+        "SPECIES_KOMALA",
+        "SPECIES_SHIINOTIC",
+        "SPECIES_WALREIN",
+        "SPECIES_WHISCASH"
+      ],
+      "BATTLE_097_ROUTE_114_CLAUDE": [
+        "SPECIES_BARRASKEWDA",
+        "SPECIES_GOREBYSS",
+        "SPECIES_HUNTAIL"
+      ],
+      "BATTLE_098_ROUTE_114_NANCY": [
+        "SPECIES_FURFROU",
+        "SPECIES_LICKILICKY",
+        "SPECIES_SPINDA"
+      ],
+      "BATTLE_099_ROUTE_114_TYRA_IVY": [
+        "SPECIES_HITMONCHAN",
+        "SPECIES_PANGORO",
+        "SPECIES_SIRFETCHD",
+        "SPECIES_THROH"
+      ],
+      "BATTLE_100_ROUTE_114_SHANE": [
+        "SPECIES_CENTISKORCH",
+        "SPECIES_DREDNAW",
+        "SPECIES_MISMAGIUS"
+      ],
+      "BATTLE_101_ROUTE_114_STEVE": [
+        "SPECIES_COPPERAJAH",
+        "SPECIES_GOLEM_ALOLAN",
+        "SPECIES_HERACROSS",
+        "SPECIES_NIDOKING",
+        "SPECIES_TURTONATOR",
+        "SPECIES_TYRANTRUM"
+      ],
+      "BATTLE_102_ROUTE_114_BERNIE": [
+        "SPECIES_GOLDUCK",
+        "SPECIES_INFERNAPE",
+        "SPECIES_MAROWAK_ALOLAN",
+        "SPECIES_PYROAR",
+        "SPECIES_ROTOM_HEAT",
+        "SPECIES_VAPOREON"
+      ],
+      "BATTLE_103_ROUTE_114_LENNY": [
+        "SPECIES_ALTARIA",
+        "SPECIES_EXPLOUD",
+        "SPECIES_KOMMO_O",
+        "SPECIES_NOIVERN"
+      ],
+      "BATTLE_104_ROUTE_114_ANGELINA_LUCAS": [
+        "SPECIES_ARTICUNO",
+        "SPECIES_BEARTIC",
+        "SPECIES_GLACEON",
+        "SPECIES_MAGNEZONE",
+        "SPECIES_NINETALES_ALOLAN",
+        "SPECIES_SANDSLASH_ALOLAN"
+      ]
+    }
+  },
+  "evidence": {
+    "quality_ten_dossiers": 10,
+    "competitive_reference_count": 44,
+    "runtime_playtested": 0
+  },
+  "variety_review": {
+    "result": "pass-no-local-maximum",
+    "encounter_modes": [
+      "canonical Commander and Zero to Hero water showcase",
+      "joint-or-split Trick Room pond cluster",
+      "manual-rain three-category fishing single",
+      "Contrary and Fur Coat workout single",
+      "Coaching and Wide Guard fighting curriculum",
+      "Choice-to-sustain-to-setup campsite single",
+      "four-stage hard-body Match Call family",
+      "four-stage controlled-burn safety Match Call family",
+      "mutual-immunity mountain echo double with Mega Altaria",
+      "joint-or-split snow expedition with Articuno"
+    ],
+    "difficulty_shape": "The route ranges from 8.6 to 9.6, with a 9.1 median and no encounter below the campaign's serious-adaptation floor.",
+    "format_result": "Three direct doubles, three singles, two joint/split clusters, and two rematch families prevent one format from becoming the route's default rhythm.",
+    "species_result": "All 45 physical-encounter species/form identities are unique across Route 114; rematch-family internal recurrence is intentional progression, not cross-encounter duplication.",
+    "protected_reveal_result": "Route 114 spends canonical Commander, one Mega Altaria, and Articuno while preserving every protected faction, Gym, League, Primal, and historic-team anchor.",
+    "next_chapter_guardrail": "Meteor Falls should sharply change tone to required faction coordination. Do not repeat snow, sound immunity, route-style rematch progression, a four-member standalone double, or a passive weather lesson. The Courtney/Grunt multi battle must exploit the player's rival partner and Magma's competitive identity."
+  },
+  "battles": [
+    {
+      "index": 95,
+      "encounter_id": "BATTLE_095_ROUTE_114_NOLAN",
+      "format": "double",
+      "target_difficulty": 9.6,
+      "manual_quality": 10,
+      "tempo": "Four-member champion-mechanics double: one-slot Commander juggernaut, exposed Sash contingency, native switch transformation, and four-type special closer.",
+      "species": [
+        "SPECIES_CLAWITZER",
+        "SPECIES_DONDOZO",
+        "SPECIES_PALAFIN",
+        "SPECIES_TATSUGIRI"
+      ],
+      "reference_count": 4,
+      "playtest_status": "static-pass-runtime-unplayed"
+    },
+    {
+      "index": 96,
+      "encounter_id": "BATTLE_096_ROUTE_114_KAI_CHARLOTTE",
+      "format": "native-pair double or two split singles",
+      "target_difficulty": 9.3,
+      "manual_quality": 10,
+      "tempo": "Six-member joint Trick Room double with Telepathy-safe spread, trap, status-immune setup, Policy, and sleep; or two autonomous three-member singles.",
+      "species": [
+        "SPECIES_BEHEEYEM",
+        "SPECIES_GRAPPLOCT",
+        "SPECIES_KOMALA",
+        "SPECIES_SHIINOTIC",
+        "SPECIES_WALREIN",
+        "SPECIES_WHISCASH"
+      ],
+      "reference_count": 4,
+      "playtest_status": "static-pass-runtime-unplayed"
+    },
+    {
+      "index": 97,
+      "encounter_id": "BATTLE_097_ROUTE_114_CLAUDE",
+      "format": "single",
+      "target_difficulty": 8.7,
+      "manual_quality": 10,
+      "tempo": "Three-fish singles relay: bulky physical jaw opener, special Sash weather hinge, then very fast Choice-locked physical closer.",
+      "species": [
+        "SPECIES_BARRASKEWDA",
+        "SPECIES_GOREBYSS",
+        "SPECIES_HUNTAIL"
+      ],
+      "reference_count": 3,
+      "playtest_status": "static-pass-runtime-unplayed"
+    },
+    {
+      "index": 98,
+      "encounter_id": "BATTLE_098_ROUTE_114_NANCY",
+      "format": "single",
+      "target_difficulty": 8.6,
+      "manual_quality": 10,
+      "tempo": "Three-stage singles workout: bulky special coverage, fast Contrary physical snowball, then Fur Coat/Cotton Guard physical tax and pivot.",
+      "species": [
+        "SPECIES_FURFROU",
+        "SPECIES_LICKILICKY",
+        "SPECIES_SPINDA"
+      ],
+      "reference_count": 3,
+      "playtest_status": "static-pass-runtime-unplayed"
+    },
+    {
+      "index": 99,
+      "encounter_id": "BATTLE_099_ROUTE_114_TYRA_IVY",
+      "format": "double",
+      "target_difficulty": 9.2,
+      "manual_quality": 10,
+      "tempo": "Four-member fighting curriculum: support-plus-pupil lead, priority coverage specialist, then recoil/critical wallbreaker.",
+      "species": [
+        "SPECIES_HITMONCHAN",
+        "SPECIES_PANGORO",
+        "SPECIES_SIRFETCHD",
+        "SPECIES_THROH"
+      ],
+      "reference_count": 4,
+      "playtest_status": "static-pass-runtime-unplayed"
+    },
+    {
+      "index": 100,
+      "encounter_id": "BATTLE_100_ROUTE_114_SHANE",
+      "format": "single",
+      "target_difficulty": 8.7,
+      "manual_quality": 10,
+      "tempo": "Three-act campsite single: Choice physical catch, physical defense-lowering sustain fire, then special Sash setup story.",
+      "species": [
+        "SPECIES_CENTISKORCH",
+        "SPECIES_DREDNAW",
+        "SPECIES_MISMAGIUS"
+      ],
+      "reference_count": 4,
+      "playtest_status": "static-pass-runtime-unplayed"
+    },
+    {
+      "index": 101,
+      "encounter_id": "BATTLE_101_ROUTE_114_STEVE",
+      "format": "four guarded doubles",
+      "target_difficulty": 9.0,
+      "manual_quality": 10,
+      "tempo": "Four cap-relative doubles: four-engine introduction, mixed rematch, setup/lock rematch, then six-engine one-Mega final.",
+      "species": [
+        "SPECIES_COPPERAJAH",
+        "SPECIES_GOLEM_ALOLAN",
+        "SPECIES_HERACROSS",
+        "SPECIES_NIDOKING",
+        "SPECIES_TURTONATOR",
+        "SPECIES_TYRANTRUM"
+      ],
+      "reference_count": 6,
+      "playtest_status": "static-pass-runtime-unplayed"
+    },
+    {
+      "index": 102,
+      "encounter_id": "BATTLE_102_ROUTE_114_BERNIE",
+      "format": "four guarded doubles",
+      "target_difficulty": 8.9,
+      "manual_quality": 10,
+      "tempo": "Four cap-relative doubles: four-part safety opening, active Fake Out rematch, protected reservoir rematch, then six-part final.",
+      "species": [
+        "SPECIES_GOLDUCK",
+        "SPECIES_INFERNAPE",
+        "SPECIES_MAROWAK_ALOLAN",
+        "SPECIES_PYROAR",
+        "SPECIES_ROTOM_HEAT",
+        "SPECIES_VAPOREON"
+      ],
+      "reference_count": 6,
+      "playtest_status": "static-pass-runtime-unplayed"
+    },
+    {
+      "index": 103,
+      "encounter_id": "BATTLE_103_ROUTE_114_LENNY",
+      "format": "guarded double",
+      "target_difficulty": 9.3,
+      "manual_quality": 10,
+      "tempo": "Four-part echo double: fast speed-control spread lead, slow Choice spread cannon, physical Soundproof bridge, then Pixilate Mega closer.",
+      "species": [
+        "SPECIES_ALTARIA",
+        "SPECIES_EXPLOUD",
+        "SPECIES_KOMMO_O",
+        "SPECIES_NOIVERN"
+      ],
+      "reference_count": 4,
+      "playtest_status": "static-pass-runtime-unplayed"
+    },
+    {
+      "index": 104,
+      "encounter_id": "BATTLE_104_ROUTE_114_ANGELINA_LUCAS",
+      "format": "native-pair double or two split singles",
+      "target_difficulty": 9.5,
+      "manual_quality": 10,
+      "tempo": "Six-member joint snow double or two autonomous three-member weather singles: field lead, physical Slush Rush middle, then special apex.",
+      "species": [
+        "SPECIES_ARTICUNO",
+        "SPECIES_BEARTIC",
+        "SPECIES_GLACEON",
+        "SPECIES_MAGNEZONE",
+        "SPECIES_NINETALES_ALOLAN",
+        "SPECIES_SANDSLASH_ALOLAN"
+      ],
+      "reference_count": 6,
+      "playtest_status": "static-pass-runtime-unplayed"
+    }
+  ]
+}

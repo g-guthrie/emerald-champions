@@ -46,6 +46,14 @@ def main() -> None:
         "move == MOVE_ROUND && HasMove(BATTLE_PARTNER(battlerAtk), MOVE_ROUND)",
         "AI_DATA->partnerMove == MOVE_ROUND ? 10 : 4",
         "partnerAbility == ABILITY_DANCER && TestMoveFlags(move, FLAG_DANCE)",
+        "effect == EFFECT_GRAVITY",
+        "HasMoveWithLowAccuracy(BATTLE_PARTNER(battlerAtk)",
+        "HasMove(BATTLE_PARTNER(battlerAtk), MOVE_GRAVITY)",
+        "AI_DATA->partnerMove == MOVE_SKILL_SWAP",
+        "AI_DATA->atkAbility == ABILITY_CONTRARY",
+        "HasMove(battlerDef, MOVE_OVERHEAT)",
+        "effect == EFFECT_SIMPLE_BEAM",
+        "IsStatRaisingEffect(gBattleMoves[AI_DATA->partnerMove].effect)",
         "effect == EFFECT_GUARD_SPLIT",
         "effect == EFFECT_INSTRUCT",
         "effect == EFFECT_SAFEGUARD",
@@ -97,7 +105,7 @@ def main() -> None:
     combo_tags = {
         "Beat Up + Justified", "Frost Breath + Anger Point", "Surf ally activation",
         "Neutralizing Gas + Regigigas", "Dancer recital", "Guard Split transfer", "Instruct repetition",
-        "Safeguard + Swagger",
+        "Safeguard + Swagger", "protected Explosion",
     }
     for trainer_id in custom.AI_PROFILES["AI_FLAG_COMBO_SETUP"]:
         moves = {move for mon in teams[trainer_id]["mons"] for move in mon["moves"]}
@@ -111,11 +119,21 @@ def main() -> None:
             and "ABILITY_MOTOR_DRIVE" in abilities
             and any("MOVE_DISCHARGE" in mon["moves"] for mon in teams["TRAINER_JANICE"]["mons"])
         )
+        gravity_partner = {"TRAINER_JACE": "TRAINER_ELI", "TRAINER_ELI": "TRAINER_JACE"}.get(trainer_id)
+        native_gravity_accuracy_pair = False
+        if gravity_partner is not None:
+            pair_moves = moves | {
+                move
+                for mon in teams[gravity_partner]["mons"]
+                for move in mon["moves"]
+            }
+            native_gravity_accuracy_pair = "MOVE_GRAVITY" in pair_moves and "MOVE_INFERNO" in pair_moves
         if not (
             combo_tags & set(teams[trainer_id]["synergy_tags"])
-            or moves & {"MOVE_BEAT_UP", "MOVE_FROST_BREATH", "MOVE_SURF", "MOVE_SKILL_SWAP", "MOVE_ROUND"}
+            or moves & {"MOVE_BEAT_UP", "MOVE_FROST_BREATH", "MOVE_SURF", "MOVE_SKILL_SWAP", "MOVE_SIMPLE_BEAM", "MOVE_ROUND", "MOVE_AFTER_YOU"}
             or "ABILITY_COMMANDER" in abilities
             or native_motor_drive_circuit
+            or native_gravity_accuracy_pair
         ):
             problems.append(f"{trainer_id}: combo profile has no ally activation")
     for trainer_id in custom.AI_PROFILES["AI_FLAG_SPEED_CONTROL"]:

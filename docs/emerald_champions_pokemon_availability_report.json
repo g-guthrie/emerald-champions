@@ -3,14 +3,14 @@
     "title": "Emerald Champions — Complete Pokémon Encounter and Acquisition Report",
     "generated_at": "2026-08-27T21:36:33Z",
     "source_commit": "f2a3e50a1ece4bce0455ff12bc7953db92f231aa",
-    "source_clean": true,
+    "source_clean": false,
     "scope": "All current random encounter tables plus source-resolved non-random acquisition paths and every runtime species/form ID."
   },
   "game_context": {
     "identity": "Emerald Champions is an extremely hard, doubles-focused competitive Pokémon campaign built on Emerald/Inclement Emerald foundations.",
     "difficulty": "Challenge Mode, mandatory Set battle style, and strict caps remain permanent. The native live Difficulty option changes only opposing trainer levels: Hard uses authored levels, Medium subtracts two, and Easy subtracts four. Teams, evolution stages, moves, items, abilities, natures, EVs, AI, formats, and player caps remain identical.",
     "opening": "The player selects from 21 Generation 1–7 starters. The first Route 103 rival uses the same-region type-counter starter at level 15 against the opening cap of 14.",
-    "battle_inventory": "The current guide resolves 810 reachable battle definitions: 565 doubles and 289 intentional singles. The first 72 canonical encounters have source-closed bespoke redesigns; the remaining campaign is still part of the continuing battle-authoring program.",
+    "battle_inventory": "The current guide resolves 810 reachable battle definitions: 554 doubles and 300 intentional singles. The first 143 canonical encounters have source-closed bespoke redesigns; the remaining campaign is still part of the continuing battle-authoring program.",
     "level_caps": [
       14,
       20,

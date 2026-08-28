@@ -1565,6 +1565,9 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     {gBattleAnimSpriteGfx_PrimalParticles, 0x0180, ANIM_TAG_PRIMAL_PARTICLES},
     {gBattleAnimSpriteGfx_Orbs, 0x0180, ANIM_TAG_STEEL_BEAM},
     {gBattleAnimSpriteGfx_AuraSphere, 0x0200, ANIM_TAG_POLTERGEIST},
+    [ANIM_TAG_TATSUGIRI_CURLY - ANIM_SPRITES_START] = {gBattleAnimSpriteGfx_TatsugiriCurly, 0x0200, ANIM_TAG_TATSUGIRI_CURLY},
+    [ANIM_TAG_TATSUGIRI_DROOPY - ANIM_SPRITES_START] = {gBattleAnimSpriteGfx_TatsugiriDroopy, 0x0200, ANIM_TAG_TATSUGIRI_DROOPY},
+    [ANIM_TAG_TATSUGIRI_STRETCHY - ANIM_SPRITES_START] = {gBattleAnimSpriteGfx_TatsugiriStretchy, 0x0200, ANIM_TAG_TATSUGIRI_STRETCHY},
 };
 
 const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
@@ -2010,6 +2013,9 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_PrimalParticles, ANIM_TAG_PRIMAL_PARTICLES},
     {gBattleAnimSpritePal_SteelBeam, ANIM_TAG_STEEL_BEAM},
     {gBattleAnimSpritePal_Poltergeist, ANIM_TAG_POLTERGEIST},
+    [ANIM_TAG_TATSUGIRI_CURLY - ANIM_SPRITES_START] = {gBattleAnimSpritePal_TatsugiriCurly, ANIM_TAG_TATSUGIRI_CURLY},
+    [ANIM_TAG_TATSUGIRI_DROOPY - ANIM_SPRITES_START] = {gBattleAnimSpritePal_TatsugiriDroopy, ANIM_TAG_TATSUGIRI_DROOPY},
+    [ANIM_TAG_TATSUGIRI_STRETCHY - ANIM_SPRITES_START] = {gBattleAnimSpritePal_TatsugiriStretchy, ANIM_TAG_TATSUGIRI_STRETCHY},
 };
 
 bool8 TryLoadBattleAnimPalette(u16 tag)

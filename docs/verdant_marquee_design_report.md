@@ -8,6 +8,10 @@ These are design dossiers, not source implementation or observed ROM results. Ta
 
 - Strict Cap: `80`
 - Level Semantics: `Trainer levels are offsets from the active strict cap.`
+- Authored Difficulty Setting: `Hard`
+- Medium Trainer Level Delta: `-2`
+- Easy Trainer Level Delta: `-4`
+- Difficulty Changes Only Opposing Trainer Levels: `True`
 - Allowed Battle Transformations: `['Mega Evolution', 'Primal Reversion']`
 - Forbidden Battle Transformations: `['Terastallization', 'Z-Moves', 'Dynamax', 'Gigantamax']`
 - Automatic Healing Between Members: `False`

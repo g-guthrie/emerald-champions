@@ -175,6 +175,7 @@
 
 #define STATUS4_ELECTRIFIED             (1 << 0)
 #define STATUS4_PLASMA_FISTS            (1 << 1)
+#define STATUS4_COMMANDER                (1 << 2)
 
 #define HITMARKER_x10                   (1 << 4)
 #define HITMARKER_SKIP_DMG_TRACK        (1 << 5)

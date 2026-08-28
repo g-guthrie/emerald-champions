@@ -434,8 +434,13 @@ RusturfTunnel_Movement_PeekoExit: @ 822D1A7
 	step_end
 
 RusturfTunnel_EventScript_Mike:: @ 822D1B1
+	goto_if_unset FLAG_BADGE03_GET, RusturfTunnel_EventScript_MikeStillTraining
 	trainerbattle_single TRAINER_MIKE_2, RusturfTunnel_Text_MikeIntro, RusturfTunnel_Text_MikeDefeat
 	msgbox RusturfTunnel_Text_MikePostBattle, MSGBOX_AUTOCLOSE
+	end
+
+RusturfTunnel_EventScript_MikeStillTraining::
+	msgbox RusturfTunnel_Text_MikeStillTraining, MSGBOX_AUTOCLOSE
 	end
 
 RusturfTunnel_Text_ComeAndGetSome: @ 822D1C8
@@ -446,8 +451,8 @@ RusturfTunnel_Text_Peeko: @ 822D1F7
 	.string "Peeko: Pii pihyoh!$"
 
 RusturfTunnel_Text_GruntIntro: @ 822D20A
-	.string "Keelhaul it! The little one calls\n"
-	.string "the shots. The big one guards\l"
+	.string "Keelhaul it! The little one dives\n"
+	.string "inside. The big one guards\l"
 	.string "the goods.\p"
 	.string "Come closer and you'll breathe\n"
 	.string "poison!$"
@@ -460,8 +465,8 @@ RusturfTunnel_Text_GruntNotEnoughPokemon:
 	.string "Pokémon. Come back prepared!$"
 
 RusturfTunnel_Text_GruntTakePackage: @ 822D2E1
-	.string "The little commander was meant\n"
-	.string "to cover my escape…\p"
+	.string "That commander was meant to\n"
+	.string "raise every stat and cover me…\p"
 	.string "The Boss called this an easy job.\n"
 	.string "Take the Devon Goods and beat it!$"
 
@@ -529,16 +534,16 @@ RusturfTunnel_Text_BoyfriendOnOtherSideOfRock: @ 822D7A3
 	.string "for the benefit of everyone.$"
 
 RusturfTunnel_Text_MikeIntro: @ 822D84D
-	.string "What do you call a wild man up in the\n"
-	.string "mountains? A mountain man, right?\p"
-	.string "So why don't they call a Pokémon in\n"
-	.string "the mountains a mountain Pokémon?$"
+	.string "You dig through MY tunnel,\n"
+	.string "you pay MY toll!$"
 
 RusturfTunnel_Text_MikeDefeat: @ 822D8DB
-	.string "My Pokémon…\n"
-	.string "Ran out of power…$"
+	.string "Blasted through solid rock…$"
 
 RusturfTunnel_Text_MikePostBattle: @ 822D8F9
-	.string "They halted development here to\n"
-	.string "protect Pokémon, right?\l"
-	.string "There's a feel-good story!$"
+	.string "Sand, Sturdy, and one big boom.\n"
+	.string "that's honest tunnel work.$"
+
+RusturfTunnel_Text_MikeStillTraining:
+	.string "This toll gate opens only for\n"
+	.string "Dynamo Badge holders.$"

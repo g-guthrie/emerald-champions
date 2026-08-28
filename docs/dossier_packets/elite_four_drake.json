@@ -1,7 +1,7 @@
 {
   "anchor": {
     "adaptation_constraints": [
-      "Mega-only gimmick policy; no Tera, Z-Moves, Dynamax, Gigantamax, or Primal Reversion.",
+      "Mega-and-Primal policy; no Tera, Z-Moves, Dynamax, or Gigantamax.",
       "Adapt the fast-slow and preservation concepts to singles instead of copying doubles support roles."
     ],
     "anchor": "ELITE_FOUR_DRAKE",
@@ -53,8 +53,8 @@
         "AI_FLAG_CHECK_BAD_MOVE",
         "AI_FLAG_TRY_TO_FAINT",
         "AI_FLAG_CHECK_VIABILITY",
-        "AI_FLAG_CHECK_FOE",
-        "AI_FLAG_SMART_SWITCHING"
+        "AI_FLAG_SMART_SWITCHING",
+        "AI_FLAG_CHECK_FOE"
       ],
       "current_party": [
         {
@@ -138,6 +138,10 @@
   "dossier_template": {
     "ai": null,
     "anchor_id": "ELITE_FOUR_DRAKE",
+    "author_self_check": {
+      "strongest_part": null,
+      "weakest_link": null
+    },
     "campaign_reservations": null,
     "campaign_state": null,
     "competitive_research": null,
@@ -146,7 +150,6 @@
       "observed": null,
       "target": 10
     },
-    "fresh_critic_review": null,
     "identity": null,
     "mechanics_proposal": null,
     "ordering": null,
@@ -155,8 +158,8 @@
     "rolling_context": null,
     "runtime": null,
     "status": {
+      "author_self_check": null,
       "design": null,
-      "fresh_critic": null,
       "runtime": "unplayed",
       "source": "unimplemented",
       "static": null
@@ -165,14 +168,28 @@
     "verification": null
   },
   "mechanics_baseline": {
+    "allowed_battle_transformations": [
+      "Mega Evolution",
+      "Primal Reversion"
+    ],
+    "authored_difficulty_setting": "Hard",
     "automatic_healing_between_members": false,
     "champion_room_forces_approach_after_entry": true,
+    "difficulty_changes_only_opposing_trainer_levels": true,
     "drake_releases_player_control_after_victory": true,
+    "easy_trainer_level_delta": -4,
+    "forbidden_battle_transformations": [
+      "Terastallization",
+      "Z-Moves",
+      "Dynamax",
+      "Gigantamax"
+    ],
     "hall4_allows_normal_overworld_menu": true,
     "items_during_trainer_battles": false,
     "level_semantics": "Trainer levels are offsets from the active strict cap.",
     "manual_overworld_bag_between_members": true,
     "mechanics_proposal": null,
+    "medium_trainer_level_delta": -2,
     "party_composition_locked_after_entry": true,
     "pokemon_menu_between_members": true,
     "save_menu_between_members": true,

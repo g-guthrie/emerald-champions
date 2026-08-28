@@ -5932,3 +5932,104 @@ static void SpriteCB_AstralFlameStep2(struct Sprite *sprite)
     if (TranslateAnimHorizontalArc(sprite))
         DestroySpriteAndMatrix(sprite);
 }
+
+static void SpriteCB_CommanderTatsugiriStep(struct Sprite *sprite)
+{
+    if (TranslateAnimHorizontalArc(sprite))
+        DestroyAnimSprite(sprite);
+}
+
+// Shows the exact Expansion Tatsugiri form darting into its allied Dondozo.
+// The battler's full-size sprite has already been hidden by the battle state,
+// so this 32x32 sprite reads as a clean native swallow transition.
+static void SpriteCB_CommanderTatsugiri(struct Sprite *sprite)
+{
+    u8 dondozo = BATTLE_PARTNER(gBattleAnimAttacker);
+
+    sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
+    sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
+    sprite->data[0] = 18;
+    sprite->data[2] = GetBattlerSpriteCoord(dondozo, BATTLER_COORD_X_2);
+    sprite->data[4] = GetBattlerSpriteCoord(dondozo, BATTLER_COORD_Y_PIC_OFFSET);
+    sprite->data[5] = -12;
+    InitAnimArcTranslation(sprite);
+    sprite->callback = SpriteCB_CommanderTatsugiriStep;
+}
+
+static void SpriteCB_OrderUpTatsugiriStep(struct Sprite *sprite)
+{
+    sprite->invisible = FALSE;
+    if (sprite->data[3] != 0)
+    {
+        sprite->y2 = sprite->data[2] + sprite->data[3];
+        sprite->data[3] += sprite->data[0];
+        sprite->data[0]++;
+        if (sprite->data[3] > 0)
+            sprite->data[3] = 0;
+    }
+    else if (--sprite->data[1] == 0)
+    {
+        DestroyAnimSprite(sprite);
+    }
+}
+
+// Keep Expansion's Order Up staging: three fish of the stored Commander form
+// descend around the target.  With no active Commander, show all three forms.
+static void SpriteCB_OrderUpTatsugiri(struct Sprite *sprite)
+{
+    sprite->x2 = gBattleAnimArgs[0];
+    sprite->data[2] = gBattleAnimArgs[1];
+    sprite->data[3] -= gBattleAnimArgs[2];
+    sprite->data[0] = 3;
+    sprite->data[1] = gBattleAnimArgs[3];
+    sprite->callback = SpriteCB_OrderUpTatsugiriStep;
+    sprite->invisible = TRUE;
+}
+
+#define COMMANDER_TATSUGIRI_TEMPLATE(name, tag, cb)       \
+const struct SpriteTemplate name =                         \
+{                                                          \
+    .tileTag = tag,                                        \
+    .paletteTag = tag,                                     \
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,             \
+    .anims = gDummySpriteAnimTable,                         \
+    .images = NULL,                                        \
+    .affineAnims = gDummySpriteAffineAnimTable,             \
+    .callback = cb,                                        \
+}
+
+COMMANDER_TATSUGIRI_TEMPLATE(gCommanderTatsugiriCurlySpriteTemplate, ANIM_TAG_TATSUGIRI_CURLY, SpriteCB_CommanderTatsugiri);
+COMMANDER_TATSUGIRI_TEMPLATE(gCommanderTatsugiriDroopySpriteTemplate, ANIM_TAG_TATSUGIRI_DROOPY, SpriteCB_CommanderTatsugiri);
+COMMANDER_TATSUGIRI_TEMPLATE(gCommanderTatsugiriStretchySpriteTemplate, ANIM_TAG_TATSUGIRI_STRETCHY, SpriteCB_CommanderTatsugiri);
+COMMANDER_TATSUGIRI_TEMPLATE(gOrderUpTatsugiriCurlySpriteTemplate, ANIM_TAG_TATSUGIRI_CURLY, SpriteCB_OrderUpTatsugiri);
+COMMANDER_TATSUGIRI_TEMPLATE(gOrderUpTatsugiriDroopySpriteTemplate, ANIM_TAG_TATSUGIRI_DROOPY, SpriteCB_OrderUpTatsugiri);
+COMMANDER_TATSUGIRI_TEMPLATE(gOrderUpTatsugiriStretchySpriteTemplate, ANIM_TAG_TATSUGIRI_STRETCHY, SpriteCB_OrderUpTatsugiri);
+
+#undef COMMANDER_TATSUGIRI_TEMPLATE
+
+// Both the Commander entry animation (attacker is Tatsugiri) and Order Up
+// (attacker is Dondozo) resolve the same stored form on Dondozo.
+void AnimTask_GetCommanderType(u8 taskId)
+{
+    u8 dondozo = gBattleMons[gBattleAnimAttacker].species == SPECIES_DONDOZO
+               ? gBattleAnimAttacker
+               : BATTLE_PARTNER(gBattleAnimAttacker);
+
+    switch (gBattleStruct->commanderActive[dondozo])
+    {
+    case SPECIES_TATSUGIRI:
+        gBattleAnimArgs[ARG_RET_ID] = ANIM_ORDER_UP_CURLY;
+        break;
+    case SPECIES_TATSUGIRI_DROOPY:
+        gBattleAnimArgs[ARG_RET_ID] = ANIM_ORDER_UP_DROOPY;
+        break;
+    case SPECIES_TATSUGIRI_STRETCHY:
+        gBattleAnimArgs[ARG_RET_ID] = ANIM_ORDER_UP_STRETCHY;
+        break;
+    default:
+        gBattleAnimArgs[ARG_RET_ID] = ANIM_ORDER_UP_NONE;
+        break;
+    }
+
+    DestroyAnimVisualTask(taskId);
+}

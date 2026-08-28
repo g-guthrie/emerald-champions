@@ -72,6 +72,9 @@ JaggedPass_EventScript_OpenMagmaHideout:: @ 82306BB
 JaggedPass_EventScript_MagmaHideoutGuard:: @ 8230718
 	lockall
 	goto_if_set FLAG_BEAT_MAGMA_GRUNT_JAGGED_PASS, JaggedPass_EventScript_GuardDefeated
+	special HasEnoughMonsForDoubleBattle
+	compare VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS
+	goto_if_ne JaggedPass_EventScript_GuardNeedsTwoMons
 	waitse
 	playse SE_PIN
 	applymovement LOCALID_HIDEOUT_GUARD, Common_Movement_ExclamationMark
@@ -86,6 +89,11 @@ JaggedPass_EventScript_MagmaHideoutGuard:: @ 8230718
 	setflag FLAG_BEAT_MAGMA_GRUNT_JAGGED_PASS
 	applymovement LOCALID_HIDEOUT_GUARD, Common_Movement_FaceOriginalDirection
 	waitmovement 0
+	releaseall
+	end
+
+JaggedPass_EventScript_GuardNeedsTwoMons::
+	msgbox JaggedPass_Text_GuardNeedsTwoMons, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -183,7 +191,7 @@ JaggedPass_EventScript_Eric:: @ 8230785
 	end
 
 JaggedPass_EventScript_Diana:: @ 823079C
-	trainerbattle_single TRAINER_DIANA_1, JaggedPass_Text_DianaIntro, JaggedPass_Text_DianaDefeat, JaggedPass_EventScript_RegisterDiana
+	trainerbattle_double TRAINER_DIANA_1, JaggedPass_Text_DianaIntro, JaggedPass_Text_DianaDefeat, JaggedPass_Text_DianaNeedTwoMons, JaggedPass_EventScript_RegisterDiana
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq JaggedPass_EventScript_DianaRematch
@@ -199,12 +207,12 @@ JaggedPass_EventScript_RegisterDiana:: @ 82307C8
 	end
 
 JaggedPass_EventScript_DianaRematch:: @ 82307E4
-	trainerbattle_rematch TRAINER_DIANA_1, JaggedPass_Text_DianaRematchIntro, JaggedPass_Text_DianaRematchDefeat
+	trainerbattle_rematch_double TRAINER_DIANA_1, JaggedPass_Text_DianaRematchIntro, JaggedPass_Text_DianaRematchDefeat, JaggedPass_Text_DianaNeedTwoMons
 	msgbox JaggedPass_Text_DianaPostRematch, MSGBOX_AUTOCLOSE
 	end
 
 JaggedPass_EventScript_Ethan:: @ 82307FB
-	trainerbattle_single TRAINER_ETHAN_1, JaggedPass_Text_EthanIntro, JaggedPass_Text_EthanDefeat, JaggedPass_EventScript_RegisterEthan
+	trainerbattle_double TRAINER_ETHAN_1, JaggedPass_Text_EthanIntro, JaggedPass_Text_EthanDefeat, JaggedPass_Text_EthanNeedTwoMons, JaggedPass_EventScript_RegisterEthan
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq JaggedPass_EventScript_EthanRematch
@@ -220,7 +228,7 @@ JaggedPass_EventScript_RegisterEthan:: @ 8230827
 	end
 
 JaggedPass_EventScript_EthanRematch:: @ 8230843
-	trainerbattle_rematch TRAINER_ETHAN_1, JaggedPass_Text_EthanRematchIntro, JaggedPass_Text_EthanRematchDefeat
+	trainerbattle_rematch_double TRAINER_ETHAN_1, JaggedPass_Text_EthanRematchIntro, JaggedPass_Text_EthanRematchDefeat, JaggedPass_Text_EthanNeedTwoMons
 	msgbox JaggedPass_Text_EthanPostRematch, MSGBOX_AUTOCLOSE
 	end
 
@@ -235,119 +243,152 @@ JaggedPass_EventScript_Autumn:: @ 8230871
 	end
 
 JaggedPass_Text_EricIntro: @ 8230888
-	.string "Mt. Chimney's Jagged Pass…\p"
-	.string "Now this is what I've always wanted\n"
-	.string "in a mountain.\p"
-	.string "This jagged bumpiness…\n"
-	.string "It rocks my soul!$"
+	.string "These three harden late!\n"
+	.string "Pupitar, Metang, and Hakamo-o still\l"
+	.string "have their final forms ahead.\p"
+	.string "Jagged Pass is where they earn them!$"
 
 JaggedPass_Text_EricDefeat: @ 82308FF
 	.string "Losing left me bitter!$"
 
 JaggedPass_Text_EricPostBattle: @ 8230916
-	.string "Yes, I did lose at Pokémon…\p"
-	.string "But, when it comes to the love of\n"
-	.string "the mountains, I have you beat!$"
+	.string "Pupitar evolves at 55. Metang and\n"
+	.string "Hakamo-o evolve at 45.\p"
+	.string "Eviolite, two resist Berries, and\n"
+	.string "their own strength carry them now.$"
 
 JaggedPass_Text_DianaIntro: @ 8230974
-	.string "This place isn't your casual hike.\n"
-	.string "It's not suited for a picnic.$"
+	.string "This jagged picnic needs a plan!\p"
+	.string "Delibird chills the basket.\n"
+	.string "Vespiquen guards it.\p"
+	.string "Gourgeist lights the picnic.\n"
+	.string "Eelektross powers every tool!$"
 
 JaggedPass_Text_DianaDefeat: @ 82309B5
 	.string "Ohhh, no!\n"
-	.string "The ground is too bumpy…$"
+	.string "You broke up the whole course!$"
 
 JaggedPass_Text_DianaPostBattle: @ 82309D8
-	.string "Did you know?\p"
-	.string "Some people cleverly ride their\n"
-	.string "bicycles up this horribly bumpy pass.$"
+	.string "Delibird handles tempo.\n"
+	.string "Vespiquen brings Intimidate and\l"
+	.string "Tailwind.\p"
+	.string "Gourgeist burns and drains.\n"
+	.string "Eelektross pivots with Volt Switch.$"
 
 JaggedPass_Text_DianaRegister: @ 8230A2C
-	.string "Will you ever be back in this area?\n"
-	.string "If you do return, I'd like a rematch.$"
+	.string "Come back for another course!\n"
+	.string "I change the menu every rematch.$"
 
 JaggedPass_Text_DianaRematchIntro: @ 8230A76
-	.string "Picnics are fun wherever you go.\n"
-	.string "Just like Pokémon!$"
+	.string "The menu changed! Delibird may buy\n"
+	.string "Polteageist a Shell Smash turn,\l"
+	.string "or I may serve a control course.\p"
+	.string "Let's see what you can digest!$"
 
 JaggedPass_Text_DianaRematchDefeat: @ 8230AAA
-	.string "I only lost because the ground is\n"
-	.string "too bumpy!$"
+	.string "You cleared every plate again!$"
 
 JaggedPass_Text_DianaPostRematch: @ 8230AD7
-	.string "I'll forget about losing and just\n"
-	.string "enjoy this bumpy hike.$"
+	.string "Fake Out can shelter Shell Smash.\n"
+	.string "Tailwind or Icy Wind changes tempo,\l"
+	.string "and my final menu mixes all six.$"
+
+JaggedPass_Text_DianaNeedTwoMons:
+	.string "A full picnic needs two healthy\n"
+	.string "Pokémon. Come back with a partner!$"
 
 JaggedPass_Text_EthanIntro: @ 8230B10
-	.string "Jagged Pass is hard to walk on.\n"
-	.string "It's a good place for training.$"
+	.string "I found a rhythm for this trail!\p"
+	.string "Toxtricity plays loud because\n"
+	.string "Soundproof Bouffalant can take it.\p"
+	.string "Rillaboom and Mr. Rime keep time!$"
 
 JaggedPass_Text_EthanDefeat: @ 8230B50
-	.string "It was all over while we were still\n"
-	.string "trying to find a good footing…$"
+	.string "You broke my rhythm!$"
 
 JaggedPass_Text_EthanPostBattle: @ 8230B93
-	.string "If I had an Acro Bike, I'd be able to\n"
-	.string "jump ledges.$"
+	.string "Boomburst hits foes and my ally.\n"
+	.string "Soundproof shields Bouffalant.\p"
+	.string "Overdrive is the safer refrain when\n"
+	.string "another partner takes the stage.$"
 
 JaggedPass_Text_EthanRegister: @ 8230BC6
-	.string "When I get more used to this bumpiness,\n"
-	.string "I'll be sure to win!\p"
-	.string "Can you register me in your PokéNav?$"
+	.string "I'll learn a new verse every climb.\n"
+	.string "Register me for the next rematch!$"
 
 JaggedPass_Text_EthanRematchIntro: @ 8230C28
-	.string "I got used to this bumpiness.\n"
-	.string "I sing while I climb now.$"
+	.string "The chorus changed!\n"
+	.string "The drum and dancer may lead,\l"
+	.string "or the bugs may take the melody.\p"
+	.string "My final verse uses every voice!$"
 
 JaggedPass_Text_EthanRematchDefeat: @ 8230C60
-	.string "It's still not easy to battle on this\n"
-	.string "bumpy ground…$"
+	.string "You silenced the whole chorus!$"
 
 JaggedPass_Text_EthanPostRematch: @ 8230C94
-	.string "I should get an Acro Bike from RYDEL\n"
-	.string "in Mauville City…$"
+	.string "Rillaboom brings Grassy Surge.\n"
+	.string "Mr. Rime erases screens.\p"
+	.string "Yanmega gains Speed while Kricketune\n"
+	.string "waits for Swarm. Listen, then move!$"
+
+JaggedPass_Text_EthanNeedTwoMons:
+	.string "A full chorus needs two healthy\n"
+	.string "Pokémon. Bring another voice!$"
 
 JaggedPass_Text_GruntIntro: @ 8230CCB
-	.string "Wah!\n"
-	.string "What are you doing here?\p"
-	.string "What am I doing in a place like this?\p"
-	.string "What business is it of yours?$"
+	.string "Wah! You found the wrong footing!\n"
+	.string "This pass swallows intruders whole.\p"
+	.string "We pin you down, punish escape,\n"
+	.string "then vanish before you hit back!$"
 
 JaggedPass_Text_GruntDefeat: @ 8230D2D
 	.string "Urrrgh…\p"
+	.string "You read every retreat.\p"
 	.string "I should've ducked into our Hideout\n"
 	.string "right away…$"
 
 JaggedPass_Text_GoWhereverYouWant: @ 8230D65
-	.string "Okay, oh-kay!\n"
-	.string "I admit it--you're strong!\p"
-	.string "Don't worry about me.\n"
+	.string "Okay, oh-kay! You're strong!\p"
+	.string "Stunfisk held the ground.\n"
+	.string "Thievul punished your switches.\p"
+	.string "Golisopod retreated.\n"
+	.string "Dugtrio sealed the exits.\p"
 	.string "Go wherever you want!$"
+
+JaggedPass_Text_GuardNeedsTwoMons:
+	.string "This guard drill needs two healthy\n"
+	.string "Pokémon. Come back prepared!$"
 
 JaggedPass_Text_BoulderShakingInResponseToEmblem: @ 8230DBA
 	.string "Oh! This boulder is shaking in response\n"
 	.string "to the Magma Emblem!$"
 
 JaggedPass_Text_JulioIntro: @ 8230DF7
-	.string "Aiyeeh! It's awfully scary to shoot\n"
-	.string "down the mountain in one go!$"
+	.string "Downhill riding is all momentum!\p"
+	.string "Dragapult, Jolteon, and Dodrio\n"
+	.string "never touch the brakes!$"
 
 JaggedPass_Text_JulioDefeat: @ 8230E38
-	.string "I feel like I'm falling apart…$"
+	.string "I hit the brakes too late!$"
 
 JaggedPass_Text_JulioPostBattle: @ 8230E57
-	.string "My bicycle bounced around so much,\n"
-	.string "my rear end's sore…$"
+	.string "Choice Specs, Life Orb, Choice Band:\n"
+	.string "every leg trades safety for speed.\p"
+	.string "Autumn's strength gives my speed\n"
+	.string "a safe line in a double battle.$"
 
 JaggedPass_Text_AutumnIntro: @ 8230E8E
 	.string "I climb this hill every day.\n"
-	.string "I have confidence in my strength!$"
+	.string "Strength starts with sure footing!\p"
+	.string "Chesnaught braces.\n"
+	.string "Conkeldurr drives forward.\p"
+	.string "Avalugg refuses to slide!$"
 
 JaggedPass_Text_AutumnDefeat: @ 8230ECD
-	.string "Hmm…\n"
-	.string "What went wrong?$"
+	.string "My footing gave way!$"
 
 JaggedPass_Text_AutumnPostBattle: @ 8230EE3
-	.string "What is that odd rock protrusion\n"
-	.string "a little up the hill from here?$"
-
+	.string "Sturdy lets Chesnaught hold once.\n"
+	.string "Avalugg does the same.\p"
+	.string "Flame Orb wakes Conkeldurr's Guts.\p"
+	.string "I anchor Julio's speed in a pair.$"

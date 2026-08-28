@@ -77,14 +77,37 @@ AI_PROFILES = {
         "TRAINER_MARC",
         "TRAINER_JANICE",
         "TRAINER_JERRY_1",
+        "TRAINER_JACE",
+        "TRAINER_ELI",
+        "TRAINER_JEFF",
+        "TRAINER_FLANNERY_1",
+        "TRAINER_FLANNERY_2",
+        "TRAINER_FLANNERY_3",
+        "TRAINER_FLANNERY_4",
+        "TRAINER_FLANNERY_5",
+        "TRAINER_SHELBY_1", "TRAINER_SHELBY_2", "TRAINER_SHELBY_3", "TRAINER_SHELBY_4",
+        "TRAINER_MELISSA", "TRAINER_SHEILA", "TRAINER_SHIRLEY",
+        "TRAINER_SAWYER_1", "TRAINER_SAWYER_2", "TRAINER_SAWYER_3", "TRAINER_SAWYER_4",
+        "TRAINER_DREW", "TRAINER_HEIDI", "TRAINER_BEAU", "TRAINER_BECKY",
+        "TRAINER_DUSTY_1", "TRAINER_DUSTY_2", "TRAINER_DUSTY_3", "TRAINER_DUSTY_4",
         "TRAINER_SARAH",
     },
     "AI_FLAG_WILL_SUICIDE": {
         "TRAINER_LYLE",
+        "TRAINER_FLANNERY_3",
+        "TRAINER_FLANNERY_4",
     },
     "AI_FLAG_HELP_PARTNER": {
         "TRAINER_CLARK", "TRAINER_JOHNSON",
         "TRAINER_SARAH", "TRAINER_DAWSON", "TRAINER_JANICE", "TRAINER_JERRY_1",
+        "TRAINER_JACE", "TRAINER_ELI",
+        "TRAINER_JEFF",
+        "TRAINER_FLANNERY_4", "TRAINER_FLANNERY_5",
+        "TRAINER_SHELBY_1", "TRAINER_SHELBY_3", "TRAINER_SHELBY_4",
+        "TRAINER_SHEILA", "TRAINER_SHIRLEY",
+        "TRAINER_SAWYER_1", "TRAINER_SAWYER_3", "TRAINER_SAWYER_4",
+        "TRAINER_HEIDI", "TRAINER_BEAU", "TRAINER_BECKY",
+        "TRAINER_DUSTY_3", "TRAINER_DUSTY_4",
         "MAY_TREECKO_METEOR_FALLS", "MAY_TORCHIC_METEOR_FALLS", "MAY_MUDKIP_METEOR_FALLS",
         "BRENDAN_TREECKO_METEOR_FALLS", "BRENDAN_TORCHIC_METEOR_FALLS", "BRENDAN_MUDKIP_METEOR_FALLS",
     },
@@ -100,6 +123,12 @@ AI_PROFILES = {
         "TRAINER_JOSH",
         "TRAINER_JANICE",
         "TRAINER_JERRY_1",
+        "TRAINER_JACE",
+        "TRAINER_ELI",
+        "TRAINER_JEFF",
+        "TRAINER_FLANNERY_1",
+        "TRAINER_FLANNERY_4",
+        "TRAINER_BECKY",
         "TRAINER_JOEY",
         "TRAINER_TOMMY",
         "TRAINER_ROXANNE_1",
@@ -124,6 +153,8 @@ AI_PROFILES = {
         "TRAINER_SIDNEY", "TRAINER_PHOEBE", "TRAINER_GLACIA", "TRAINER_WALLACE",
         "TRAINER_SYLVIA", "TRAINER_VIRGIL", "TRAINER_NICHOLAS", "TRAINER_MAURA",
         "TRAINER_YUJI", "TRAINER_BETH", "TRAINER_VALERIE_4",
+        "TRAINER_LENNY",
+        "TRAINER_SAWYER_4", "TRAINER_BEAU", "TRAINER_BECKY",
         "MAY_TREECKO_METEOR_FALLS", "MAY_TORCHIC_METEOR_FALLS", "MAY_MUDKIP_METEOR_FALLS",
         "BRENDAN_TREECKO_METEOR_FALLS", "BRENDAN_TORCHIC_METEOR_FALLS", "BRENDAN_MUDKIP_METEOR_FALLS",
     },
@@ -136,12 +167,15 @@ AI_PROFILES = {
         "TRAINER_JOHNSON",
         "TRAINER_KAREN_1",
         "TRAINER_LYLE",
+        "TRAINER_JACE",
+        "TRAINER_ELI",
         "TRAINER_TIANA",
         "TRAINER_SARAH",
-        "TRAINER_WATTSON_1", "TRAINER_FLANNERY_1",
+        "TRAINER_WATTSON_1", "TRAINER_FLANNERY_1", "TRAINER_FLANNERY_2", "TRAINER_FLANNERY_3", "TRAINER_FLANNERY_4", "TRAINER_FLANNERY_5",
+        "TRAINER_SAWYER_1", "TRAINER_SAWYER_2", "TRAINER_SAWYER_3", "TRAINER_SAWYER_4", "TRAINER_HEIDI",
         "TRAINER_TATE_AND_LIZA_1", "TRAINER_JUAN_1",
         "TRAINER_GLACIA", "TRAINER_WALLACE", "TRAINER_SAWYER_1", "TRAINER_BETH",
-        "TRAINER_SHAYLA", "TRAINER_CLIFFORD", "TRAINER_NICHOLAS", "TRAINER_LENNY",
+        "TRAINER_SHAYLA", "TRAINER_CLIFFORD", "TRAINER_NICHOLAS",
         "TRAINER_LINDA", "TRAINER_TABITHA_MAGMA_HIDEOUT", "TRAINER_MAXIE_MT_CHIMNEY",
         "TRAINER_MAXIE_MOSSDEEP", "TRAINER_ARCHIE_SLATEPORT",
     },
@@ -380,7 +414,7 @@ def check() -> None:
     route_singles = set(custom["route_single_trainers"])
     if len(route_singles) != 64:
         problems.append(f"route singles: expected 64, found {len(route_singles)}")
-    if len(custom["plans"]) != 374:
+    if len(custom["plans"]) != 376:
         problems.append(f"customized trainer count drifted: {len(custom['plans'])}")
 
     for flag, trainer_ids in AI_PROFILES.items():
@@ -469,7 +503,7 @@ def check() -> None:
     doubles_count = sum(rule["format"] == "double" for rule in formats["formats"].values())
     print(f"PASS: {len(formats['formats'])} trainers; {doubles_count} doubles and {len(formats['formats']) - doubles_count} intentional singles")
     print(
-        "PASS: 374 explicit custom plans; "
+        "PASS: 376 explicit custom plans; "
         f"{added_slot_count} addition slots and {added_unique_count} added species"
     )
     repeated_pairs = sum(1 for count in pairs.values() if count > 1)

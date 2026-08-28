@@ -3229,6 +3229,9 @@ void SwitchInClearSetData(void)
     s32 i;
     struct DisableStruct disableStructCopy = gDisableStructs[gActiveBattler];
 
+    // This slot is about to receive a replacement.  If its outgoing Dondozo
+    // had swallowed Tatsugiri, restore Tatsugiri before clearing the slot.
+    ReleaseCommander(gActiveBattler);
     ClearIllusionMon(gActiveBattler);
     gProtectStructs[gActiveBattler].beakBlastCharge = FALSE;
     if (gBattleMoves[gCurrentMove].effect != EFFECT_BATON_PASS)
@@ -3352,6 +3355,11 @@ void FaintClearSetData(void)
     // are reset, so a later replacement can never inherit a Sky Drop pair.
     if (IsSkyDropUser(gActiveBattler) || IsSkyDropTarget(gActiveBattler))
         ReleaseSkyDrop(gActiveBattler);
+
+    // Keep Tatsugiri untargetable through the remainder of a spread move.
+    // MOVEEND_CLEAR_BITS (or the faint-action gate for residual damage) will
+    // release it only after all current attacks are finished.
+    QueueCommanderRelease(gActiveBattler);
 
     for (i = 0; i < NUM_BATTLE_STATS; i++)
         gBattleMons[gActiveBattler].statStages[i] = DEFAULT_STAT_STAGE;
@@ -4145,7 +4153,8 @@ static void HandleTurnActionSelectionState(void)
                 || gBattleStruct->field_91 & gBitTable[GetBattlerAtPosition(BATTLE_PARTNER(position))]
                 || gBattleCommunication[GetBattlerAtPosition(BATTLE_PARTNER(position))] == STATE_WAIT_ACTION_CONFIRMED)
             {
-                if (gBattleStruct->field_91 & gBitTable[gActiveBattler])
+                if (gBattleStruct->field_91 & gBitTable[gActiveBattler]
+                 || IsCommanderTatsugiri(gActiveBattler))
                 {
                     gChosenActionByBattler[gActiveBattler] = B_ACTION_NOTHING_FAINTED;
                     if (!(gBattleTypeFlags & BATTLE_TYPE_MULTI))

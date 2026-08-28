@@ -1989,6 +1989,18 @@ static void Cmd_accuracycheck(void)
     if (move == ACC_CURR_MOVE)
         move = gCurrentMove;
 
+    // A swallowed Tatsugiri is not on the battlefield as a legal target.
+    // Transform is the one canonical exception; No Guard, Lock-On, always-hit
+    // moves, spread moves, and later hits of a multi-hit move still miss.
+    if (IsCommanderTatsugiri(gBattlerTarget)
+     && gBattleMoves[move == NO_ACC_CALC_CHECK_LOCK_ON ? gCurrentMove : move].effect != EFFECT_TRANSFORM)
+    {
+        gMoveResultFlags |= MOVE_RESULT_MISSED;
+        gBattleCommunication[MISS_TYPE] = B_MSG_AVOIDED_ATK;
+        JumpIfMoveFailed(7, move);
+        return;
+    }
+
     if (move == NO_ACC_CALC_CHECK_LOCK_ON)
     {
         if (gStatuses3[gBattlerTarget] & STATUS3_ALWAYS_HITS && gDisableStructs[gBattlerTarget].battlerWithSureHit == gBattlerAttacker)
@@ -3109,24 +3121,22 @@ void SetMoveEffect(bool32 primary, u32 certain)
     u32 flags = 0;
     u32 baseMoveEffect = gBattleScripting.moveEffect & ~(MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN);
 
-    // In Verdant's visible-partner Commander rewrite, Order Up receives its
-    // form bonus only while Dondozo's living partner is a Commander Tatsugiri.
+    // Order Up keys off the form swallowed by this Dondozo.  The stored form
+    // intentionally survives Tatsugiri fainting until Dondozo leaves.
     if (gCurrentMove == MOVE_ORDER_UP
      && (gBattleScripting.moveEffect & ~(MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN)) == MOVE_EFFECT_ATK_PLUS_1)
     {
-        u8 partner = BATTLE_PARTNER(gBattlerAttacker);
         u32 orderUpFlags = gBattleScripting.moveEffect & (MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN);
 
         if (gBattleMons[gBattlerAttacker].species != SPECIES_DONDOZO
-         || !IsBattlerAlive(partner)
-         || GetBattlerAbility(partner) != ABILITY_COMMANDER)
+         || !IsCommandedDondozo(gBattlerAttacker))
         {
             gBattleScripting.moveEffect = 0;
             gBattlescriptCurrInstr++;
             return;
         }
 
-        switch (gBattleMons[partner].species)
+        switch (gBattleStruct->commanderActive[gBattlerAttacker])
         {
         case SPECIES_TATSUGIRI_DROOPY:
             gBattleScripting.moveEffect = MOVE_EFFECT_DEF_PLUS_1 | orderUpFlags;
@@ -5755,7 +5765,8 @@ static void Cmd_moveend(void)
         case MOVEEND_TARGET_VISIBLE: // make target sprite visible
             if (gBattlerTarget < gBattlersCount
                 && !gSpecialStatuses[gBattlerTarget].restoredBattlerSprite
-                && !(gStatuses3[gBattlerTarget] & STATUS3_SEMI_INVULNERABLE))
+                && !(gStatuses3[gBattlerTarget] & STATUS3_SEMI_INVULNERABLE)
+                && !IsCommanderTatsugiri(gBattlerTarget))
             {
                 gActiveBattler = gBattlerTarget;
                 BtlController_EmitSpriteInvisibility(0, FALSE);
@@ -5934,6 +5945,7 @@ static void Cmd_moveend(void)
                       && GetBattlerHoldEffect(battler, TRUE) == HOLD_EFFECT_EJECT_BUTTON
                       && !DoesSubstituteBlockMove(gBattlerAttacker, battler, gCurrentMove)
                       && (gSpecialStatuses[battler].physicalDmg != 0 || gSpecialStatuses[battler].specialDmg != 0)
+                      && CanBattlerSwitch(battler)
                       && CountUsablePartyMons(battler) > 0)  // Has mon to switch into
                     {
                         gActiveBattler = gBattleScripting.battler = battler;
@@ -5997,6 +6009,7 @@ static void Cmd_moveend(void)
                      && gProtectStructs[battler].statFell
                      && gProtectStructs[battler].disableEjectPack == 0
                      && GetBattlerHoldEffect(battler, TRUE) == HOLD_EFFECT_EJECT_PACK
+                     && CanBattlerSwitch(battler)
                      && !(gCurrentMove == MOVE_PARTING_SHOT && CanBattlerSwitch(gBattlerAttacker))  // Does not activate if attacker used Parting Shot and can switch out
                      && CountUsablePartyMons(battler) > 0)  // Has mon to switch into
                     {
@@ -6209,6 +6222,10 @@ static void Cmd_moveend(void)
                 gBattleScripting.moveendState++;
             break;
         case MOVEEND_CLEAR_BITS: // Clear/Set bits for things like using a move for all targets and all hits.
+            // Release Tatsugiri only after every target of the current move has
+            // resolved.  This prevents a spread move from KOing Dondozo and
+            // then striking the newly exposed Tatsugiri in the same action.
+            ReleaseFaintedCommanders();
             if (gBattleStruct->pledgeState == PLEDGE_COMBO_ATTACK
              || gBattleStruct->pledgeOriginalMove != MOVE_NONE)
             {
@@ -6404,6 +6421,9 @@ bool32 CanBattlerSwitch(u32 battlerId)
     s32 i, lastMonId, battlerIn1, battlerIn2;
     bool32 ret = FALSE;
     struct Pokemon *party;
+
+    if (IsCommanderTatsugiri(battlerId) || IsCommandedDondozo(battlerId))
+        return FALSE;
 
     if (IsSkyDropUser(battlerId) || IsSkyDropTarget(battlerId))
         return FALSE;
@@ -8131,6 +8151,11 @@ static void Cmd_makevisible(void)
         return;
 
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
+    if (IsCommanderTatsugiri(gActiveBattler))
+    {
+        gBattlescriptCurrInstr += 2;
+        return;
+    }
     BtlController_EmitSpriteInvisibility(0, FALSE);
     MarkBattlerForControllerExec(gActiveBattler);
 
@@ -8626,6 +8651,10 @@ static void Cmd_various(void)
         return;
     case VARIOUS_JUMP_IF_NO_ALLY:
         if (!IsBattlerAlive(BATTLE_PARTNER(gActiveBattler))
+         || IsCommanderTatsugiri(gActiveBattler)
+         || IsCommandedDondozo(gActiveBattler)
+         || IsCommanderTatsugiri(BATTLE_PARTNER(gActiveBattler))
+         || IsCommandedDondozo(BATTLE_PARTNER(gActiveBattler))
          || (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER
           && gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER | BATTLE_TYPE_TOWER_LINK_MULTI))
          || (GetBattlerSide(gActiveBattler) == B_SIDE_OPPONENT
@@ -11716,6 +11745,12 @@ static void Cmd_forcerandomswitch(void)
         gBattlerTarget = i;
     }
 
+    if (IsCommanderTatsugiri(gBattlerTarget) || IsCommandedDondozo(gBattlerTarget))
+    {
+        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+        return;
+    }
+
     // Swapping pokemon happens in:
     // trainer battles
     // wild double battles when an opposing pokemon uses it against one of the two alive player mons
@@ -13019,6 +13054,7 @@ static void Cmd_trysetperishsong(void)
     {
         if (gStatuses3[i] & STATUS3_PERISH_SONG
             || GetBattlerAbility(i) == ABILITY_SOUNDPROOF
+            || IsCommanderTatsugiri(i)
             || BlocksPrankster(gCurrentMove, gBattlerAttacker, i, TRUE))
         {
             notAffectedCount++;

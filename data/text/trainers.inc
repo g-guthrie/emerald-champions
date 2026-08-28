@@ -1281,72 +1281,62 @@ Route110_Text_KalebPostBattle: @ 8298755
 	.string "Helping each other is adorable!$"
 
 Route111_Text_DrewIntro: @ 829878E
-	.string "Oh, hey! Those Go-Goggles suit you.\n"
-	.string "But I think they look better on me.\p"
-	.string "Let's decide who they look better on\n"
-	.string "with a battle!$"
+	.string "Three desert traps. Pick your path!$"
 
 Route111_Text_DrewDefeat: @ 829880A
-	.string "I couldn't see what was happening at\n"
-	.string "my sides because of the Go-Goggles.$"
+	.string "You escaped all three!$"
 
 Route111_Text_DrewPostBattle: @ 8298853
-	.string "The Go-Goggles make it possible to\n"
-	.string "get through sandstorms.\l"
-	.string "That makes me happy!$"
+	.string "Deny Sandslash, refuse Cacturne's\n"
+	.string "guessing game, then Taunt Dunsparce.$"
 
 Route111_Text_HeidiIntro: @ 82988A3
-	.string "I'm having a picnic in the desert.\p"
-	.string "You can always find a Trainer,\n"
-	.string "so I can enjoy a battle here, too!$"
+	.string "An oasis can be a battlefield!\p"
+	.string "Tapu Bulu grows the terrain;\n"
+	.string "Hawlucha spends its Grassy Seed!$"
 
 Route111_Text_HeidiDefeat: @ 8298908
-	.string "Ohhh! You're mean!$"
+	.string "You crossed the whole oasis!$"
 
 Route111_Text_HeidiPostBattle: @ 829891B
-	.string "When you're battling in a sandstorm,\n"
-	.string "watch out for your Pokémon's HP.\p"
-	.string "It can faint if you don't keep\n"
-	.string "an eye on it!$"
+	.string "Replace terrain or remove Hawlucha.\n"
+	.string "Attack Mudsdale specially.$"
 
 Route111_Text_BeauIntro: @ 829898E
-	.string "Wearing these Go-Goggles makes me\n"
-	.string "feel like a superhero.\l"
-	.string "Right now, nobody can beat me!$"
+	.string "Scouts survive by controlling pace!\p"
+	.string "Persian disrupts, Mandibuzz lifts,\n"
+	.string "then the sheltered hunters enter!$"
 
 Route111_Text_BeauDefeat: @ 82989E6
-	.string "I can't win on spirit alone…$"
+	.string "You caught every signal!$"
 
 Route111_Text_BeauPostBattle: @ 8298A03
-	.string "I'm going to be a real hero one day.\n"
-	.string "I'm going to work harder to make me\l"
-	.string "and my Pokémon stronger.$"
+	.string "Stop Tailwind or Parting Shot first.\n"
+	.string "Save Grass pressure for Gastrodon.$"
 
 Route111_Text_BeckyIntro: @ 8298A65
-	.string "I heard there are fossils to be found\n"
-	.string "in the desert. Where could they be?$"
+	.string "A mirage makes one step become two!\p"
+	.string "Golduck makes Kommo-o Simple;\n"
+	.string "one Dragon Dance doubles its gains!$"
 
 Route111_Text_BeckyDefeat: @ 8298AAF
-	.string "I came up short…$"
+	.string "You saw through the mirage!$"
 
 Route111_Text_BeckyPostBattle: @ 8298AC0
-	.string "If they can find fossils in the desert,\n"
-	.string "it must have been a sea before.$"
+	.string "Stop Simple Beam or clear boosts.\n"
+	.string "Do not try to race doubled growth.$"
 
 Route111_Text_DustyIntro: @ 8298B08
-	.string "For thirty years I have searched for\n"
-	.string "ancient ruins!\l"
-	.string "I am to be challenged?$"
+	.string "Every fossil tells a battle story!\p"
+	.string "Golurk guards, Sigilyph remembers,\n"
+	.string "Bastiodon survives the first dig!$"
 
 Route111_Text_DustyDefeat: @ 8298B53
-	.string "While I have searched for ruins,\n"
-	.string "I've not searched for strong Pokémon.$"
+	.string "You uncovered the whole formation!$"
 
 Route111_Text_DustyPostBattle: @ 8298B9A
-	.string "For thirty years I have searched for\n"
-	.string "ancient ruins!\p"
-	.string "No, wait, was that forty years?\n"
-	.string "Which was it now?$"
+	.string "Change tools at every layer.\n"
+	.string "Never strike Metal Burst blindly.$"
 
 Route111_Text_DustyRegister: @ 8298C00
 	.string "I haven't been searching for any\n"
@@ -1355,71 +1345,81 @@ Route111_Text_DustyRegister: @ 8298C00
 	.string "PokéNavs.$"
 
 Route111_Text_DustyRematchIntro: @ 8298C5F
-	.string "For thirty years I have searched for\n"
-	.string "ancient ruins!\p"
-	.string "No, wait, was that forty years?\n"
-	.string "Anyway, am I to be challenged?$"
+	.string "I found a deeper fossil layer!\n"
+	.string "This excavation ends with a Mega!$"
 
 Route111_Text_DustyRematchDefeat: @ 8298CD2
-	.string "I've found no ruins, nor have I found\n"
-	.string "any strong Pokémon…$"
+	.string "You read the entire dig site!$"
 
 Route111_Text_DustyPostRematch: @ 8298D0C
-	.string "For thirty years I have searched for\n"
-	.string "ancient ruins!\p"
-	.string "No, wait, was that forty years\n"
-	.string "I've searched?\p"
-	.string "Hmm… It could even be fifty…\n"
-	.string "How long have I been at this?$"
+	.string "The best teams preserve old layers\n"
+	.string "while revealing something new.$"
 
 Route111_Text_TravisIntro: @ 8298DA9
 	.string "I'm full of pep!\n"
-	.string "And my Pokémon is peppy, too!$"
+	.string "And my whole campsite is peppy!\p"
+	.string "Two at a time! Every tool I pack\n"
+	.string "has exactly one catch!$"
 
 Route111_Text_TravisDefeat: @ 8298DD8
-	.string "My Pokémon lost its pep…$"
+	.string "My pep found its catch…$"
 
 Route111_Text_TravisPostBattle: @ 8298DF1
-	.string "When I see a Trainer with a lot of pep,\n"
-	.string "I can't help looking.$"
+	.string "Archeops folds below half, and a\n"
+	.string "Shell Smash drops both guards.\p"
+	.string "Great gear still needs a steady\n"
+	.string "hand.$"
+
+Route111_Text_TravisNotEnoughMons:
+	.string "Bring two able Pokémon and I'll\n"
+	.string "show you real camp power!$"
+
+Route111_Text_TravisStillTraining:
+	.string "Camp rule: Dynamo Badge first,\n"
+	.string "battles second!$"
 
 Route111_Text_IreneIntro: @ 8298E2F
 	.string "I don't know where you're going,\n"
-	.string "but would you like to battle?$"
+	.string "but stay for a picnic battle!\p"
+	.string "My basket holds three nasty\n"
+	.string "surprises!$"
 
 Route111_Text_IreneDefeat: @ 8298E6E
-	.string "Oh, you're disgustingly good!$"
+	.string "You picked my basket clean!$"
 
 Route111_Text_IrenePostBattle: @ 8298E8C
-	.string "I'm thinking that I should go to\n"
-	.string "Mt. Chimney, but the view around\l"
-	.string "here is very nice, too.$"
+	.string "Ripen makes one berry count double;\n"
+	.string "Harvest may grow another.\p"
+	.string "Knock them away, or go hungry\n"
+	.string "trying to out-snack us.$"
+
+Route111_Text_IreneStillTraining:
+	.string "We picnic seriously here.\p"
+	.string "Come back with the Dynamo Badge.$"
 
 Route111_Text_DaisukeIntro: @ 8298EE6
-	.string "To train myself, I challenge all\n"
-	.string "whom I meet!$"
+	.string "Three shadows, one relay!\p"
+	.string "Ninjask passes power, Shedinja\\n"
+	.string "tests answers, Marshadow steals!$"
 
 Route111_Text_DaisukeDefeat: @ 8298F14
-	.string "Uncle! I give up!$"
+	.string "You broke every shadow!$"
 
 Route111_Text_DaisukePostBattle: @ 8298F26
-	.string "All I can do is keep training until\n"
-	.string "I can defeat strong Trainers such\l"
-	.string "as yourself.$"
+	.string "Stop the relay, but save one answer\\n"
+	.string "for Wonder Guard and stolen boosts.$"
 
 Route111_Text_WiltonIntro: @ 8298F79
-	.string "Show me how much you've toughened\n"
-	.string "your Pokémon.$"
+	.string "Ruin guardians change the room!\p"
+	.string "Burn, reverse speed, rough hide--\\n"
+	.string "show me how you read the chamber!$"
 
 Route111_Text_WiltonDefeat: @ 8298FA9
-	.string "I see, you've toughened them\n"
-	.string "considerably.$"
+	.string "You solved the first chamber!$"
 
 Route111_Text_WiltonPostBattle: @ 8298FD4
-	.string "Pokémon and Trainers learn much\n"
-	.string "through battling.\p"
-	.string "What's important is to never give up\n"
-	.string "even if you lose.$"
+	.string "Reverse Trick Room or exploit it.\\n"
+	.string "Preserve Dark pressure for Psychic.$"
 
 Route111_Text_WiltonRegister: @ 829903D
 	.string "There is much to be learned from\n"
@@ -1428,165 +1428,153 @@ Route111_Text_WiltonRegister: @ 829903D
 	.string "behooves you.$"
 
 Route111_Text_WiltonRematchIntro: @ 829909B
-	.string "We're training here to elevate our\n"
-	.string "game to the next level.\l"
-	.string "Stay and train with us!$"
+	.string "The ruin opened its inner chamber!\\n"
+	.string "Armor and one great mind await!$"
 
 Route111_Text_WiltonRematchDefeat: @ 82990EE
-	.string "Ooh, you're decent!$"
+	.string "You mastered every chamber!$"
 
 Route111_Text_WiltonPostRematch: @ 8299102
-	.string "Since you're that strong, you should\n"
-	.string "aim for the Pokémon League.$"
+	.string "A room is a tool, never a prison.\\n"
+	.string "Choose whether to reverse it.$"
 
 Route111_Text_BrookeIntro: @ 8299143
-	.string "Oh, your Pokémon look like serious\n"
-	.string "actors.\l"
-	.string "I have to ask you for an engagement.$"
+	.string "Every relay leg changes type!\p"
+	.string "Water, Fire, Grass, and Dragon--\\n"
+	.string "change answers without losing pace!$"
 
 Route111_Text_BrookeDefeat: @ 8299193
-	.string "They didn't just look strong,\n"
-	.string "they are strong!$"
+	.string "You passed every relay leg!$"
 
 Route111_Text_BrookePostBattle: @ 82991C2
-	.string "I thought I was raising my Pokémon\n"
-	.string "diligently, but, oh no, there is still\l"
-	.string "much to be done.$"
+	.string "Remove Fake Out's tempo, then deny\\n"
+	.string "Haxorus before it can set up.$"
 
 Route111_Text_BrookeRegister: @ 829921D
 	.string "I wish I could become friends with\n"
 	.string "more strong people like you!$"
 
 Route111_Text_BrookeRematchIntro: @ 829925D
-	.string "You can make Pokémon stronger or\n"
-	.string "weaker depending on the moves you\l"
-	.string "teach them.\p"
-	.string "What kinds of moves do your Pokémon\n"
-	.string "know?$"
+	.string "The relay has two final runners!\\n"
+	.string "Steel flashes before Psychic flies!$"
 
 Route111_Text_BrookeRematchDefeat: @ 82992D6
-	.string "You've taught them good moves!$"
+	.string "You won the whole relay!$"
 
 Route111_Text_BrookePostRematch: @ 82992F5
-	.string "Maybe I should have stopped my\n"
-	.string "Pokémon from evolving until they\l"
-	.string "learned better moves…$"
+	.string "One wall cannot cover every stage.\\n"
+	.string "Change your answer with the board.$"
 
 Route111_Text_CeliaIntro: @ 829934B
-	.string "I shouldn't have come to a place like\n"
-	.string "this for a picnic!$"
+	.string "Everything in my garden grows back!\p"
+	.string "Rain, spores, seeds, and one Mega--\\n"
+	.string "can you win before roots spread?$"
 
 Route111_Text_CeliaDefeat: @ 8299384
-	.string "Aww!\n"
-	.string "I really shouldn't have come!$"
+	.string "You uprooted everything!$"
 
 Route111_Text_CeliaPostBattle: @ 82993A7
-	.string "In a sandstorm like this, I can't set\n"
-	.string "the places for a picnic even with my\l"
-	.string "Go-Goggles on…$"
+	.string "Do not trade chip for chip. Deny\\n"
+	.string "rain or Spore, then burst Venusaur.$"
 
 Route111_Text_BryanIntro: @ 8299401
-	.string "How tough are you?\n"
-	.string "We shall expose that secret!$"
+	.string "Four ancient survivors, four rules!\p"
+	.string "Rock Head, Contrary, and Sturdy--\\n"
+	.string "identify each before it attacks!$"
 
 Route111_Text_BryanDefeat: @ 8299431
-	.string "Oh! Your strength!\n"
-	.string "It is shrouded in mystery!$"
+	.string "You uncovered every rule!$"
 
 Route111_Text_BryanPostBattle: @ 829945F
-	.string "This desert hoards mysteries in\n"
-	.string "its shifting sands!$"
+	.string "Exploit the Choice lock, then stop\\n"
+	.string "Leaf Storm and break Sturdy safely.$"
 
 Route111_Text_BrandenIntro: @ 8299493
-	.string "I'll give you some of my sandwich\n"
-	.string "if you'll lose.$"
+	.string "Steely Spirit strengthens my crew!\p"
+	.string "Anchor traps; three blades finish--\\n"
+	.string "break their link before they strike!$"
 
 Route111_Text_BrandenDefeat: @ 82994C5
-	.string "Tch! I thought a sandwich would be\n"
-	.string "enough of a bribe…$"
+	.string "You broke the whole crew!$"
 
 Route111_Text_BrandenPostBattle: @ 82994FB
-	.string "My SANDSHREW loves eating\n"
-	.string "my sandwiches.$"
+	.string "Remove Perrserker, then deny\\n"
+	.string "Kartana its first Beast Boost.$"
 
 Route111_Text_TyronIntro: @ 8299524
-	.string "This is my favorite kind of Pokémon!$"
+	.string "Every blade has a different tempo!$"
 
 Route111_Text_TyronDefeat: @ 8299549
-	.string "Wait!\n"
-	.string "Did you get a good look at my Pokémon?$"
+	.string "You dulled all three!$"
 
 Route111_Text_TyronPostBattle: @ 8299576
-	.string "When having a battle, I get a kick out\n"
-	.string "of showing off my Pokémon.\p"
-	.string "I bet everyone feels that way when\n"
-	.string "they enter a battle!$"
+	.string "Deny both setup turns, then save\\n"
+	.string "priority for Mega Beedrill.$"
 
 Route111_Text_CelinaIntro: @ 82995F0
-	.string "Show me how to put a little excitement\n"
-	.string "into my life.$"
+	.string "Bad abilities are only shackles!\p"
+	.string "Gastro Acid frees Slow Start, Exit,\\n"
+	.string "and Truant. Stop the cure!$"
 
 Route111_Text_CelinaDefeat: @ 8299625
-	.string "Oh… My…\n"
-	.string "That was too much excitement.$"
+	.string "You never let them run free!$"
 
 Route111_Text_CelinaPostBattle: @ 829964B
-	.string "My pulse is still racing.\n"
-	.string "You're one fabulous Trainer.$"
+	.string "Target or redirect Gastro Acid.\\n"
+	.string "The whole engine spends that turn.$"
 
 Route111_Text_HaydenIntro: @ 8299682
-	.string "When you're as famished as I am,\n"
-	.string "there is no room for pity!$"
+	.string "Two poisoned attackers awaken!\p"
+	.string "One heals, one hits harder--\\n"
+	.string "use their activation turn wisely!$"
 
 Route111_Text_HaydenDefeat: @ 82996BE
-	.string "Groan…$"
+	.string "You cut off every edge!$"
 
 Route111_Text_HaydenPostBattle: @ 82996C5
-	.string "My stomach is grumbling!\n"
-	.string "Maybe I can grill some BERRIES…$"
+	.string "Strip an Orb or remove Zangoose\\n"
+	.string "before poison becomes an advantage.$"
 
 Route111_Text_BiancaIntro: @ 82996FE
-	.string "Did you come from Mauville?\n"
-	.string "Then you should be full of energy!$"
+	.string "These props are haunted!\p"
+	.string "Ghosts bend speed; the false tree\\n"
+	.string "and living furnace wait backstage!$"
 
 Route111_Text_BiancaDefeat: @ 829973D
-	.string "Ooh lala!\n"
-	.string "That's a lot to take!$"
+	.string "You saw through every prop!$"
 
 Route111_Text_BiancaPostBattle: @ 829975D
-	.string "This road here…\n"
-	.string "You have quite a ways to travel.$"
+	.string "Read Trick Room before setting pace.\\n"
+	.string "Then exploit Sudowoodo's move lock.$"
 
 Route112_Text_BriceIntro: @ 829978E
-	.string "Hahahaha!\n"
-	.string "How about we have a battle?\l"
-	.string "You and me!\l"
-	.string "Hahahaha!$"
+	.string "Hahaha! Two layers block this trail:\n"
+	.string "a steel drill and a stone shell!$"
 
 Route112_Text_BriceDefeat: @ 82997CA
-	.string "I lost!\n"
-	.string "Hahahaha!$"
+	.string "You drilled through both layers!$"
 
 Route112_Text_BricePostBattle: @ 82997DC
-	.string "Hahahahaha! Something flew up my nose!\n"
-	.string "Hahahaha-hatchoo!$"
+	.string "Break the Sash, deny the Smash.\n"
+	.string "That's honest trail work!$"
 
 Route112_Text_TrentIntro: @ 8299815
-	.string "My legs are solid from pounding up\n"
-	.string "and down the mountains.\p"
-	.string "They're not going to buckle easily,\n"
-	.string "friend!$"
+	.string "Every mountain step trained my team!\p"
+	.string "Donphan clears the path;\n"
+	.string "Aurorus sets the pace!$"
 
 Route112_Text_TrentDefeat: @ 829987C
-	.string "Ouch! My legs cramped up!$"
+	.string "Your footing never broke!$"
 
 Route112_Text_TrentPostBattle: @ 8299896
-	.string "Try hiking, and I mean really\n"
-	.string "pounding, on these mountain trails\l"
-	.string "with a heavy pack weighing dozens of\l"
-	.string "pounds.\p"
-	.string "That, my friend, will get your body\n"
-	.string "into serious shape.$"
+	.string "No explosions, just four heavy\n"
+	.string "bodies and steady coverage.\p"
+	.string "If Icy Wind slows you, Aggron\n"
+	.string "finishes the climb.$"
+
+Route112_Text_TrentNotEnoughMons:
+	.string "Bring two able Pokémon for this\n"
+	.string "heavy-pack climb!$"
 
 Route112_Text_TrentRegister: @ 829993C
 	.string "Ow, my legs have cramped up.\n"
@@ -1609,95 +1597,105 @@ Route112_Text_TrentRematchPostBattle: @ 8299A0F
 	.string "a challenge!$"
 
 Route112_Text_LarryIntro: @ 8299A89
-	.string "I'm strong.\n"
-	.string "I won't cry if I lose.$"
+	.string "Two hungry plants guard this trail.\p"
+	.string "One cuts first; one waits behind\n"
+	.string "a shield of needles!$"
 
 Route112_Text_LarryDefeat: @ 8299AAC
-	.string "Waaaah!$"
+	.string "You crossed without getting eaten!$"
 
 Route112_Text_LarryPostBattle: @ 8299AB4
-	.string "I'm not crying because I miss my mommy!\n"
-	.string "Snivel…$"
+	.string "Gluttony spends a berry early;\n"
+	.string "Water Absorb punishes an easy wash.$"
 
 Route112_Text_CarolIntro: @ 8299AE4
-	.string "When you're out on a picnic, why,\n"
-	.string "you simply have to sing!\l"
-	.string "Come on, sing with me!$"
+	.string "A mountain picnic needs a song!\p"
+	.string "No sleep tricks! Noctowl sings loud,\n"
+	.string "and Vileplume answers!$"
 
 Route112_Text_CarolDefeat: @ 8299B36
-	.string "Oh, you're so strong!$"
+	.string "Your answer drowned out our song!$"
 
 Route112_Text_CarolPostBattle: @ 8299B4C
-	.string "It doesn't matter if you're good or bad\n"
-	.string "at singing or Pokémon.\p"
-	.string "If you have the most fun, you win!$"
+	.string "Tinted Lens keeps the chorus strong;\n"
+	.string "Effect Spore punishes rough hands.$"
 
 Route112_Text_BryantIntro: @ 8299BAE
-	.string "I caught hot Pokémon in Fiery Path!\n"
-	.string "Take a look!$"
+	.string "I caught three hot Pokémon\n"
+	.string "inside Fiery Path!\p"
+	.string "Shayla's sun makes them burn\n"
+	.string "brighter, but they fight alone, too!$"
 
 Route112_Text_BryantDefeat: @ 8299BDF
-	.string "What a bumpy ride that was!$"
+	.string "You cooled every last one!$"
 
 Route112_Text_BryantPostBattle: @ 8299BFB
-	.string "I like the way you battle.\n"
-	.string "It has a certain flair to it.$"
+	.string "Break Magcargo's Balloon, blunt\n"
+	.string "Typhlosion's Eruption, then mind\l"
+	.string "Heatmor's Fire Lash and Knock Off.$"
 
 Route112_Text_ShaylaIntro: @ 8299C34
-	.string "Oh, aren't you an adorable Trainer!\n"
-	.string "Please, I need a romantic battle!\l"
-	.string "I'm somewhat decent!\p"
-	.string "Sunlight, flowers, and one enormous\n"
-	.string "surprise. How romantic!$"
+	.string "Sunlight and flowers make the\n"
+	.string "perfect mountain garden!\p"
+	.string "My Sunflora starts the weather;\n"
+	.string "every blossom uses it differently!$"
 
 Route112_Text_ShaylaDefeat: @ 8299C8F
-	.string "Oh, how strong you are!\n"
-	.string "You've given me quite a shock!$"
+	.string "You weathered our brightest bloom!$"
 
 Route112_Text_ShaylaPostBattle: @ 8299CC6
-	.string "Are you busy right now?\n"
-	.string "I was thinking that maybe we can have\l"
-	.string "a rematch right now…\l"
-	.string "But it's all right if you're busy.$"
+	.string "Sunflora brings Drought, Bellossom\n"
+	.string "uses Chlorophyll, and Florges keeps\l"
+	.string "its Grass partners safe.$"
 
 Route113_Text_JaylenIntro: @ 8299D3C
-	.string "Can you guess why it's so cool\n"
-	.string "around here?$"
+	.string "Guess why this ash feels so cool?\p"
+	.string "Cryogonal chills it into glass;\n"
+	.string "Magnezone shapes every edge!$"
 
 Route113_Text_JaylenDefeat: @ 8299D68
-	.string "Peeuuw!\n"
-	.string "That stinks!$"
+	.string "You broke the whole workshop!$"
 
 Route113_Text_JaylenPostBattle: @ 8299D7D
-	.string "The volcanic ash blocks the sun,\n"
-	.string "so it doesn't get very warm.\p"
-	.string "That's good for me--I can't stand heat!$"
+	.string "Magmortar reheats the glass;\n"
+	.string "Galarian Darmanitan shatters it.\p"
+	.string "Four temperatures, no weather trick!$"
+
+Route113_Text_JaylenNotEnoughMons:
+	.string "Bring two able Pokémon if you want\n"
+	.string "to work with molten glass!$"
 
 Route113_Text_DillonIntro: @ 8299DE3
-	.string "The volcano's eruption is proof that\n"
-	.string "the earth is alive.$"
+	.string "The volcano proves earth is alive!\p"
+	.string "Mamoswine cracks the frozen crust;\n"
+	.string "Mandibuzz circles above it!$"
 
 Route113_Text_DillonDefeat: @ 8299E1C
-	.string "You're some kind of strong!$"
+	.string "You shook every layer apart!$"
 
 Route113_Text_DillonPostBattle: @ 8299E38
-	.string "Ouch! Owww! I can't see!\n"
-	.string "I got ashes in my eyelashes!\p"
-	.string "Get it? Ashes and eyelashes?\p"
-	.string "Okay, that was bad, sorry…$"
+	.string "Garganacl is living salt;\n"
+	.string "Torterra carries a world of soil.\p"
+	.string "Every layer fights differently!$"
+
+Route113_Text_DillonNotEnoughMons:
+	.string "Bring two able Pokémon if you want\n"
+	.string "to test the whole fault line!$"
 
 Route113_Text_MadelineIntro: @ 8299EA6
-	.string "I use this parasol to ward off this\n"
-	.string "filthy, yucky volcanic ash from\l"
-	.string "my dear Numel.$"
+	.string "My parasol shelters three young\n"
+	.string "Pokémon from this filthy ash.\p"
+	.string "They retreat, recover, and return\n"
+	.string "until their time to evolve arrives!$"
 
 Route113_Text_MadelineDefeat: @ 8299EF9
-	.string "Huff, huff…\n"
-	.string "I am exhausted…$"
+	.string "Huff… You broke our whole relay!$"
 
 Route113_Text_MadelinePostBattle: @ 8299F15
-	.string "You're very good at this.\n"
-	.string "I must say I'm impressed!$"
+	.string "Noibat and Mienfoo pivot away.\n"
+	.string "Vanillish stays to catch the answer.\p"
+	.string "None is being held back. Their time\n"
+	.string "simply hasn't come yet.$"
 
 Route113_Text_MadelineRegister: @ 8299F49
 	.string "Here, slide under my parasol.\n"
@@ -1715,15 +1713,17 @@ Route113_Text_MadelinePostRematch: @ 8299FD8
 	.string "I must say I'm impressed!$"
 
 Route113_Text_LaoIntro: @ 829A015
-	.string "From out of the ashes I leap! Hiyah!\n"
-	.string "I challenge thee!$"
+	.string "From the ashes I leap! Hiyah!\p"
+	.string "Three masks hide three battle types.\n"
+	.string "The first face you see is false!$"
 
 Route113_Text_LaoDefeat: @ 829A04C
-	.string "With honor I admit defeat!$"
+	.string "With honor, my true face yields!$"
 
 Route113_Text_LaoPostBattle: @ 829A067
-	.string "I must refine the art of concealment.\n"
-	.string "I bid thee farewell.$"
+	.string "Zoroark wears Cinderace's face.\n"
+	.string "Greninja changes type with Protean;\l"
+	.string "Cinderace answers with Libero.$"
 
 Route113_Text_LaoRegister: @ 829A0A2
 	.string "Yiiyaah! Witness the ancient ninja\n"
@@ -1742,310 +1742,351 @@ Route113_Text_LaoPostRematch: @ 829A13A
 	.string "I bid thee farewell.$"
 
 Route113_Text_LungIntro: @ 829A192
-	.string "Thanks for finding me!\n"
-	.string "But we still have to battle!$"
+	.string "You found one ninja in the ash.\n"
+	.string "Did you notice the other two?\p"
+	.string "My three shadows fight alone or\n"
+	.string "beside whoever spots you!$"
 
 Route113_Text_LungDefeat: @ 829A1C6
-	.string "I'll use my ninjutsu on you…\n"
-	.string "“VOLCANIC ASH SWIRL CLOAK”!\p"
-	.string "…What?\n"
-	.string "It's already over?$"
+	.string "My ash cloak scattered!$"
 
 Route113_Text_LungPostBattle: @ 829A219
-	.string "You know what's crummy about hiding?\n"
-	.string "It's lonely if no one comes along.$"
+	.string "Weezing and Ninjask float above\n"
+	.string "Ground attacks. Shedinja's Goggles\l"
+	.string "keep Lawrence's sand away.$"
 
 Route113_Text_ToriIntro: @ 829A261
-	.string "Tori: Both of us, we collect ashes.\n"
-	.string "We battle Pokémon, too.$"
+	.string "Tori: We dance the ash in pairs!\p"
+	.string "One moth leads; one bird copies.\n"
+	.string "Then our second pair takes over!$"
 
 Route113_Text_ToriDefeat: @ 829A29D
-	.string "Tori: We lost… It's boring, so I'm going\n"
-	.string "to get some more ashes.$"
+	.string "Tori: You broke our rhythm!$"
 
 Route113_Text_ToriPostBattle: @ 829A2DE
-	.string "Tori: How much ash do we have?\n"
-	.string "Enough for a White Flute, I hope.$"
+	.string "Tori: Volcarona leads Pom-Pom;\n"
+	.string "Frosmoth leads Sensu.\p"
+	.string "Dancer copies each Quiver Dance.$"
 
 Route113_Text_ToriNotEnoughMons: @ 829A31F
-	.string "Tori: We want to battle 2-on-2.\n"
-	.string "If we didn't, we would lose!$"
+	.string "Tori: Bring two able Pokémon.\n"
+	.string "Our recital needs two partners!$"
 
 Route113_Text_TiaIntro: @ 829A35C
-	.string "Tia: Both of us, we collect ashes.\n"
-	.string "We battle Pokémon, too.$"
+	.string "Tia: Watch both pairs closely!\p"
+	.string "When one moth dances, its twin\n"
+	.string "moves to the same rhythm!$"
 
 Route113_Text_TiaDefeat: @ 829A397
-	.string "Tia: We couldn't win… It's boring,\n"
-	.string "so I'm getting some more ashes.$"
+	.string "Tia: Our last step fell apart!$"
 
 Route113_Text_TiaPostBattle: @ 829A3DA
-	.string "Tia: We have a lot of ashes!\n"
-	.string "I think enough for a White Flute!$"
+	.string "Tia: No sleep, no confusion.\n"
+	.string "Stop the moth before both partners\l"
+	.string "finish their dance!$"
 
 Route113_Text_TiaNotEnoughMons: @ 829A419
-	.string "Tia: We want to battle 2-on-2.\n"
-	.string "If we don't, we won't win!$"
+	.string "Tia: Bring two able Pokémon.\n"
+	.string "Twins should battle two-on-two!$"
 
 Route113_Text_CobyIntro: @ 829A453
-	.string "Pfft, with these wings I can\n"
-	.string "flick you away!$"
+	.string "My wings won't just flick you away!\p"
+	.string "Crobat throws you through Sophie's\n"
+	.string "traps; my flock fights alone, too!$"
 
 Route113_Text_CobyDefeat: @ 829A480
-	.string "A… What?$"
+	.string "You flew straight through our trap!$"
 
 Route113_Text_CobyPostBattle: @ 829A489
-	.string "I don't know what to say when I get\n"
-	.string "beaten so easily…$"
+	.string "Crobat uses Whirlwind, Toucannon\n"
+	.string "punishes contact, and Honchkrow\l"
+	.string "hunts for critical hits.$"
 
 Route113_Text_SophieIntro: @ 829A4BF
-	.string "The warmth here is making me drowsy.\n"
-	.string "Battle with me so I can stay awake.$"
+	.string "Warm ash makes me drowsy, so I\n"
+	.string "scatter traps to stay alert!\p"
+	.string "Coby sends you through them, but\n"
+	.string "Delphox guards my traps alone.$"
 
 Route113_Text_SophieDefeat: @ 829A508
-	.string "This is a dream.\n"
-	.string "I'm sure of it…$"
+	.string "You cleared every layer!$"
 
 Route113_Text_SophiePostBattle: @ 829A529
-	.string "Losing burns me up…\n"
-	.string "I'm just going to sleep right here!\l"
-	.string "Zzz!$"
+	.string "Forretress and Runerigus build\n"
+	.string "the trap. Delphox ends the chase.\p"
+	.string "No sleeping needed!$"
 
 Route113_Text_LawrenceIntro: @ 829A566
-	.string "Were you maybe in the middle\n"
-	.string "of gathering volcanic ashes?$"
+	.string "Were you gathering volcanic ash?\p"
+	.string "Claydol screens it, Hippowdon\n"
+	.string "stirs it, and Cradily drinks!$"
 
 Route113_Text_LawrenceDefeat: @ 829A5A0
-	.string "Ehehe.\n"
-	.string "We got beaten cleanly.$"
+	.string "You saw clearly through the storm!$"
 
 Route113_Text_LawrencePostBattle: @ 829A5BE
-	.string "I ought to hide under the ashes, too.$"
+	.string "My partners all tolerate sand.\n"
+	.string "Some nearby Trainers do, too.$"
 
 Route113_Text_WyattIntro: @ 829A5E4
-	.string "Y-you want to battle with me?\n"
-	.string "Even though I just caught my Pokémon?$"
+	.string "I just caught three late bloomers!\p"
+	.string "Gabite, Pupitar, and Shelgon still\n"
+	.string "have their final forms ahead!$"
 
 Route113_Text_WyattDefeat: @ 829A628
-	.string "Y-you're all happy to win?\n"
-	.string "Even though it's only me?$"
+	.string "They'll recall this when they grow!$"
 
 Route113_Text_WyattPostBattle: @ 829A65D
-	.string "Oh, so now you want to say a word to\n"
-	.string "the loser?\p"
-	.string "Aren't you just the coolest?\n"
-	.string "Humph!$"
+	.string "All three evolve later than this\n"
+	.string "route's level. They're young, not\l"
+	.string "artificially held back.$"
 
 Route114_Text_LennyIntro: @ 829A6B1
 	.string "Yodelayhihoo!\p"
-	.string "… …\p"
-	.string "You're supposed to shout\n"
-	.string "“yodelayhihoo” since it doesn't\l"
-	.string "echo here!\p"
-	.string "My sandstorm carries thunder under\n"
-	.string "every step. Yodelayhihoo!$"
+	.string "Four voices answer from these peaks:\n"
+	.string "Noivern, Exploud, Kommo-o, Altaria!\p"
+	.string "Each knows which partner can safely\n"
+	.string "hear its full-force echo!$"
 
 Route114_Text_LennyDefeat: @ 829A707
-	.string "Yodelayhihoo!$"
+	.string "Even the echo went quiet!$"
 
 Route114_Text_LennyPostBattle: @ 829A715
-	.string "When I was a wee tyke, I believed there\n"
-	.string "was someone copying me and shouting\l"
-	.string "back, “Yodelayhihoo.”$"
+	.string "Telepathy and Soundproof let my lead\n"
+	.string "pair use Boomburst safely.\p"
+	.string "Kommo-o blocks sound; Mega Altaria\n"
+	.string "answers with Pixilate Hyper Voice.$"
+
+Route114_Text_LennyNotEnoughMons:
+	.string "Bring two ready Pokémon if you want\n"
+	.string "to hear my four-part echo!$"
 
 Route114_Text_LucasIntro: @ 829A777
-	.string "If you're not prepared, you shouldn't\n"
-	.string "be up in the mountains!$"
+	.string "If you're not prepared, the winter\n"
+	.string "mountain will find out!\p"
+	.string "Ninetales calls snow, Beartic races\n"
+	.string "through it; Articuno owns the sky!$"
 
 Route114_Text_LucasDefeat: @ 829A7B5
-	.string "The mountains are unforgiving…$"
+	.string "You weathered the whole mountain!$"
 
 Route114_Text_LucasPostBattle: @ 829A7D4
-	.string "In the winter, mountains turn deadly\n"
-	.string "with blizzards and avalanches.$"
+	.string "Snow Warning enables Aurora Veil\n"
+	.string "and doubles Beartic's Slush Rush.\p"
+	.string "Articuno stays dangerous even when\n"
+	.string "the weather disappears.$"
 
 Route114_Text_ShaneIntro: @ 829A818
-	.string "Camping's fun! You can fish, roast\n"
-	.string "marshmallows, and tell spooky stories!\p"
-	.string "But the best of all are the Pokémon\n"
-	.string "battles!$"
+	.string "Camping has three perfect acts!\n"
+	.string "Drednaw catches dinner, Centiskorch\l"
+	.string "roasts it, and Mismagius tells\l"
+	.string "the spooky story!$"
 
 Route114_Text_ShaneDefeat: @ 829A88F
-	.string "Way too strong!$"
+	.string "That story had a scary ending!$"
 
 Route114_Text_ShanePostBattle: @ 829A89F
-	.string "I think it's great that I can go\n"
-	.string "camping with my Pokémon.$"
+	.string "Strong Jaw boosts biting moves.\n"
+	.string "Fire Lash lowers Defense, and\l"
+	.string "Nasty Plot powers the last story.$"
 
 Route114_Text_NancyIntro: @ 829A8D9
-	.string "I need to exercise after a meal.\n"
-	.string "Let's have a match!$"
+	.string "I need exercise after that meal!\n"
+	.string "Lickilicky stretches its coverage,\l"
+	.string "Spinda grows with every Superpower,\l"
+	.string "and Furfrou toughens its coat!$"
 
 Route114_Text_NancyDefeat: @ 829A90E
-	.string "Oh, no!$"
+	.string "I need a longer workout!$"
 
 Route114_Text_NancyPostBattle: @ 829A916
-	.string "I just had a tasty meal.\n"
-	.string "I'm getting drowsy…$"
+	.string "Cloud Nine clears away weather.\n"
+	.string "Contrary flips Superpower's drops,\l"
+	.string "and Fur Coat plus Cotton Guard taxes\l"
+	.string "physical attacks.$"
 
 Route114_Text_SteveIntro: @ 829A943
-	.string "Ufufufufufu…\n"
-	.string "Want to battle against my Pokémon?$"
+	.string "Ufufufu… I collect hard bodies,\n"
+	.string "horns, fangs, and impossible weight!\p"
+	.string "Tyrantrum and Copperajah lead;\n"
+	.string "Turtonator and Golem wait!$"
 
 Route114_Text_SteveDefeat: @ 829A973
-	.string "M-My Pokémon…$"
+	.string "My collection cracked!$"
 
 Route114_Text_StevePostBattle: @ 829A981
-	.string "A big body that's all lumpy and hard,\n"
-	.string "enormous horns, and vicious fangs…\p"
-	.string "Ufufufufu…\n"
-	.string "I wish I had a Pokémon like that…$"
+	.string "Rock Head removes Head Smash recoil.\n"
+	.string "Heavy Metal strengthens Heavy Slam.\p"
+	.string "Shell Smash and Galvanize change\n"
+	.string "the pace without hiding the plan.$"
 
 Route114_Text_SteveRegister: @ 829A9F7
 	.string "Don't forget what you've done to me!\n"
 	.string "I'll make it so you can't forget!$"
 
 Route114_Text_SteveRematchIntro: @ 829AA3E
-	.string "Ufufufufufu…\n"
-	.string "Come on, battle my Pokémon…$"
+	.string "Ufufufu… My collection keeps adding\n"
+	.string "new engines and harder bodies!$"
 
 Route114_Text_SteveRematchDefeat: @ 829AA67
-	.string "I feel so lucky getting to see your\n"
-	.string "Pokémon…$"
+	.string "You cracked another layer!$"
 
 Route114_Text_StevePostRematch: @ 829AA94
-	.string "Ufufufufufu…\p"
-	.string "When I see Pokémon battling, I get all\n"
-	.string "shivery and shaky…$"
+	.string "Weight, Sheer Force, Shell Smash,\n"
+	.string "Galvanize, Choice locks, Skill Link…\p"
+	.string "Every rematch adds another engine.$"
+
+Route114_Text_SteveNotEnoughMons:
+	.string "Bring two able Pokémon.\n"
+	.string "My collection battles in pairs!$"
 
 Route114_Text_BernieIntro: @ 829AADB
-	.string "If you're lighting a campfire,\n"
-	.string "make sure you have water handy.$"
+	.string "Keep water near every flame!\n"
+	.string "Competitive Pyroar and Cloud Nine\l"
+	.string "Golduck lead; Lightning Rod guards\l"
+	.string "Vaporeon in reserve!$"
 
 Route114_Text_BernieDefeat: @ 829AB1A
-	.string "Thanks for dousing my fire!$"
+	.string "You controlled every flame!$"
 
 Route114_Text_BerniePostBattle: @ 829AB36
-	.string "You really do have to be careful with\n"
-	.string "any sort of fire in a forest.\p"
-	.string "Don't ever underestimate the power\n"
-	.string "of fire.$"
+	.string "Cloud Nine clears away weather.\n"
+	.string "Lightning Rod protects Water allies,\l"
+	.string "and Water Absorb rewards prediction.$"
 
 Route114_Text_BernieRegister: @ 829ABA6
 	.string "You set my spirit on fire.\n"
 	.string "Let's register each other!$"
 
 Route114_Text_BernieRematchIntro: @ 829ABDC
-	.string "Have you learned to keep water handy\n"
-	.string "for campfires?$"
+	.string "My fire line added safety checks!\n"
+	.string "Fake Out, Helping Hand, burns,\l"
+	.string "and Volt Switch keep it controlled.$"
 
 Route114_Text_BernieRematchDefeat: @ 829AC10
-	.string "I got hosed down before I could\n"
-	.string "flare up, I guess.$"
+	.string "Your control held again!$"
 
 Route114_Text_BerniePostRematch: @ 829AC43
-	.string "You really do have to be careful with\n"
-	.string "any sort of fire in a forest.\p"
-	.string "Don't ever underestimate the power\n"
-	.string "of fire.$"
+	.string "Competitive punishes stat drops.\n"
+	.string "Iron Fist boosts punches; Rotom\l"
+	.string "pivots while Levitate avoids Ground.$"
+
+Route114_Text_BernieNotEnoughMons:
+	.string "Bring two able Pokémon.\n"
+	.string "Fire safety needs a partner!$"
 
 Route114_Text_ClaudeIntro: @ 829ACB3
-	.string "If we were fishing, you wouldn't stand\n"
-	.string "a chance against me.\l"
-	.string "So, bring on your Pokémon!$"
+	.string "If fishing were battling, I'd win!\n"
+	.string "Huntail bites, Gorebyss calls rain,\l"
+	.string "and Barraskewda ends the race!$"
 
 Route114_Text_ClaudeDefeat: @ 829AD0A
-	.string "If we were fishing, I would've won…$"
+	.string "You broke my perfect handoff!$"
 
 Route114_Text_ClaudePostBattle: @ 829AD2E
-	.string "I think I'll try my luck at landing\n"
-	.string "a big one at Meteor Falls.\p"
-	.string "There has to be something in there.\n"
-	.string "I just know it.$"
+	.string "Gorebyss is the hinge. Its Sash\n"
+	.string "can buy rain for Barraskewda.\p"
+	.string "Choice Band makes the last fish hit\n"
+	.string "hard, but locks it to one move.$"
 
 Route114_Text_NolanIntro: @ 829ADA1
-	.string "I like to fish. But I also like to\n"
-	.string "battle!\p"
-	.string "If anyone challenges me, I'm there,\n"
-	.string "even if I'm fishing.$"
+	.string "I landed a boss and its commander!\p"
+	.string "Tatsugiri orders Dondozo, then\n"
+	.string "Palafin dives out and returns!$"
 
 Route114_Text_NolanDefeat: @ 829AE05
-	.string "I like to battle, but that doesn't\n"
-	.string "mean I'm good at it…$"
+	.string "You broke my champion catch!$"
 
 Route114_Text_NolanPostBattle: @ 829AE3D
-	.string "This time I'll do it!\p"
-	.string "I always think that, so I can't walk\n"
-	.string "away from fishing or Pokémon.$"
+	.string "Commander sends Tatsugiri inside\n"
+	.string "and sharply raises all five stats.\p"
+	.string "Order Up keeps its form bonus.\n"
+	.string "Drop Dondozo to expose Tatsugiri.\p"
+	.string "Palafin leaves to become a hero;\n"
+	.string "Clawitzer covers.$"
+
+Route114_Text_NolanNotEnoughMons:
+	.string "Bring two able Pokémon.\n"
+	.string "A commander needs its partner!$"
 
 Route114_Text_TyraIntro: @ 829AE96
-	.string "Tyra: Well, sure.\n"
-	.string "I'm in the mood for it.\l"
-	.string "I'll teach you a little about Pokémon.$"
+	.string "Tyra: Ivy, lesson one: Coach!\n"
+	.string "Throh guards while Pangoro learns;\l"
+	.string "then our specialists take over!$"
 
 Route114_Text_TyraDefeat: @ 829AEE7
-	.string "Tyra: What an amazing battle style!$"
+	.string "Tyra: You passed every lesson!$"
 
 Route114_Text_TyraPostBattle: @ 829AF0B
-	.string "Tyra: I was teaching my junior Ivy\n"
-	.string "about Pokémon.$"
+	.string "Tyra: Coaching raises an ally's\n"
+	.string "Attack and Defense.\p"
+	.string "Wide Guard covers spread attacks,\n"
+	.string "but Throh can fight when it should.$"
 
 Route114_Text_TyraNotEnoughMons: @ 829AF3D
 	.string "Tyra: Giggle…\n"
-	.string "If you want to battle with us, just one\l"
+	.string "If you want to battle us, one\l"
 	.string "Pokémon isn't enough!$"
 
 Route114_Text_IvyIntro: @ 829AF89
-	.string "Ivy: Who taught you about Pokémon?$"
+	.string "Ivy: I learned four fighting styles!\n"
+	.string "Coaching, Scrappy, priority punches,\l"
+	.string "and Sirfetch'd's critical leek!$"
 
 Route114_Text_IvyDefeat: @ 829AFAC
-	.string "Ivy: What an amazing battle style!$"
+	.string "Ivy: I still have more to learn!$"
 
 Route114_Text_IvyPostBattle: @ 829AFCF
-	.string "Ivy: I started training Pokémon\n"
-	.string "because Tyra, my student mentor,\l"
-	.string "taught me!$"
+	.string "Ivy: Scrappy hits Ghost Pokémon.\n"
+	.string "Blitz Boxer makes punches act first,\l"
+	.string "and the Leek raises critical hits!$"
 
 Route114_Text_IvyNotEnoughMons: @ 829B01B
 	.string "Ivy: Do you only have one Pokémon?\n"
 	.string "I think it must feel lonesome.$"
 
 Route114_Text_KaiIntro: @ 829B05D
-	.string "I landed a big one!\n"
-	.string "A huge one, I tell you!$"
+	.string "I landed three giants!\n"
+	.string "They move slow, but hit like waves;\l"
+	.string "one can lock you in its grasp!$"
 
 Route114_Text_KaiDefeat: @ 829B089
-	.string "What was that about?\n"
-	.string "Did mine lose in size?$"
+	.string "Size wasn't enough!$"
 
 Route114_Text_KaiPostBattle: @ 829B0B5
-	.string "Okay!\n"
-	.string "I'll just fish me a bigger one!$"
+	.string "Telepathy makes Earthquake and Surf\n"
+	.string "safe beside Beheeyem.\p"
+	.string "Trick Room favors my slow catches,\n"
+	.string "but Octolock can trap you anywhere.$"
 
 Route114_Text_CharlotteIntro: @ 829B0DB
-	.string "Me!\n"
-	.string "I'm not just a pretty face!$"
+	.string "My cute team is full of quirks!\n"
+	.string "Beheeyem twists the room, Komala\l"
+	.string "never wakes, and Shiinotic steals\l"
+	.string "your dreams!$"
 
 Route114_Text_CharlotteDefeat: @ 829B0FB
-	.string "That wasn't cute in the least!$"
+	.string "You solved every quirk!$"
 
 Route114_Text_CharlottePostBattle: @ 829B11A
-	.string "I don't want a Pokémon that's\n"
-	.string "just cute.\p"
-	.string "I adore cute ones that have a quirk\n"
-	.string "or two!$"
+	.string "Mental Herb protects Trick Room.\n"
+	.string "Comatose blocks status, and Spore\l"
+	.string "lets Shiinotic use Dream Eater.$"
 
 Route114_Text_AngelinaIntro: @ 829B16F
-	.string "Have you made your Pokémon evolve\n"
-	.string "very much?$"
+	.string "Have you seen how much a Pokémon\n"
+	.string "can change when it evolves?\p"
+	.string "Glaceon calls snow for Sandslash,\n"
+	.string "then Magnezone seals the climb!$"
 
 Route114_Text_AngelinaDefeat: @ 829B19C
-	.string "Oh, I see.\n"
-	.string "That's good to know.$"
+	.string "Your team adapted faster than mine!$"
 
 Route114_Text_AngelinaPostBattle: @ 829B1BC
-	.string "Some Pokémon change so much when\n"
-	.string "they evolve, it's startling!$"
+	.string "Ice Stones create Glaceon and\n"
+	.string "Alolan Sandslash.\p"
+	.string "Magneton evolves in New Mauville.\n"
+	.string "Magnezone covers their weak spots.$"
 
 Route115_Text_TimothyIntro: @ 829B1FA
 	.string "Hm…\n"
@@ -2463,18 +2504,29 @@ Route117_Text_IsaacStillTraining:
 	.string "Come back after the Dynamo Badge!$"
 
 Route117_Text_LydiaIntro: @ 829C612
-	.string "Please, allow me to evaluate if you\n"
-	.string "have raised your Pokémon properly.$"
+	.string "Please, allow me to evaluate your\n"
+	.string "raising, two hatchlings at a time!$"
 
 Route117_Text_LydiaDefeat: @ 829C659
-	.string "Yes, they are growing properly.$"
+	.string "Yes… raised properly indeed.$"
 
 Route117_Text_LydiaPostBattle: @ 829C679
-	.string "Try raising Pokémon with more\n"
-	.string "attention to their character traits.$"
+	.string "Each of my six knows a move it\n"
+	.string "could only inherit through an egg.\p"
+	.string "Pedigree shows before level ever\n"
+	.string "does.$"
+
+Route117_Text_LydiaNotEnoughMons:
+	.string "Bring at least two able Pokémon\n"
+	.string "for a proper evaluation.$"
+
+Route117_Text_LydiaStillTraining:
+	.string "My hatchlings are napping.\p"
+	.string "Return holding the Dynamo Badge.$"
 
 Route117_Text_LydiaRegister: @ 829C6BC
-	.string "I'm glad I met a superb Trainer in you.\n"
+	.string "I'm glad I met a superb Trainer\n"
+	.string "in you.\n"
 	.string "I hope to see you again.$"
 
 Route117_Text_LydiaRematchIntro: @ 829C6FD
@@ -2486,7 +2538,8 @@ Route117_Text_LydiaRematchDefeat: @ 829C73E
 
 Route117_Text_LydiaPostRematch: @ 829C75A
 	.string "Pokémon seem to like different kinds\n"
-	.string "of {POKEBLOCK}S, depending on their nature.$"
+	.string "of {POKEBLOCK}S, depending on\n"
+	.string "their nature.$"
 
 Route117_Text_DylanIntro: @ 829C7A5
 	.string "I'm deep into my triathlon!\n"
@@ -2555,19 +2608,23 @@ Route117_Text_MariaStillTraining:
 Route117_Text_DerekIntro: @ 829CB32
 	.string "Once a Bug Catcher!\n"
 	.string "And now a Bug Maniac!\p"
-	.string "But my love for Pokémon remains\n"
-	.string "unchanged!$"
+	.string "One Burmy swarm raised into four\n"
+	.string "grown cloaks! Can you tell which\l"
+	.string "answer is which?$"
 
 Route117_Text_DerekDefeat: @ 829CB87
-	.string "My ineptitude also remains\n"
-	.string "unchanged…$"
+	.string "You read every cloak correctly…$"
 
 Route117_Text_DerekPostBattle: @ 829CBAD
-	.string "All I did was follow my heart, and now\n"
-	.string "they call me a Bug Maniac…\p"
-	.string "Still, I am an expert on Bug Pokémon,\n"
-	.string "so it's only natural that they call me\l"
-	.string "a Bug Maniac.$"
+	.string "Plant, Sandy, Trash, and Mothim:\n"
+	.string "one swarm, four different answers.\p"
+	.string "Tinted Lens means resisting my\n"
+	.string "moth is not the same as stopping it.$"
+
+Route117_Text_DerekStillTraining:
+	.string "My cloaks are still cocooned.\p"
+	.string "Come back once the Dynamo Badge\n"
+	.string "is pinned on you.$"
 
 Route117_Text_AnnaIntro: @ 829CC4A
 	.string "Anna: Meg and I trained a relay!\p"
@@ -2649,38 +2706,52 @@ Route117_Text_MegRematchNotEnoughMons: @ 829D053
 	.string "We want to have a 2-on-2 battle.$"
 
 Route117_Text_MelinaIntro: @ 829D0B7
-	.string "Isn't it nice? To battle while looking\n"
-	.string "at pretty flowers?$"
+	.string "A sprint is won at full tilt!\n"
+	.string "My runners never touch the brakes!$"
 
 Route117_Text_MelinaDefeat: @ 829D0F1
-	.string "Oh, that's quite impressive!$"
+	.string "We overran the finish line…$"
 
 Route117_Text_MelinaPostBattle: @ 829D10E
-	.string "It feels wonderful to go for a jog\n"
-	.string "while looking at flowers.$"
+	.string "Flare Blitz costs my Rapidash a\n"
+	.string "little to cost you a lot.\p"
+	.string "Boltund's jaws? Pure closing speed.$"
+
+Route117_Text_MelinaStillTraining:
+	.string "Mid-training lap!\p"
+	.string "Race me after you take the\n"
+	.string "Dynamo Badge.$"
 
 Route117_Text_BrandiIntro: @ 829D14B
-	.string "Let me demonstrate the power\n"
+	.string "Let me demonstrate the calm\n"
 	.string "hidden within a Psychic Pokémon!$"
 
 Route117_Text_BrandiDefeat: @ 829D189
-	.string "Astonishing!$"
+	.string "You broke through my calm!$"
 
 Route117_Text_BrandiPostBattle: @ 829D196
-	.string "Psychic Pokémon are complex.\n"
-	.string "You should try catching some.$"
+	.string "Twin screens soften every blow,\n"
+	.string "and a Yawn makes haste a mistake.$"
+
+Route117_Text_BrandiStillTraining:
+	.string "My study circle isn't ready.\p"
+	.string "Return with the Dynamo Badge.$"
 
 Route117_Text_AishaIntro: @ 829D1D1
 	.string "Concentrate on getting the win.\n"
-	.string "That's how I battle!$"
+	.string "My partners leave nothing free!$"
 
 Route117_Text_AishaDefeat: @ 829D206
-	.string "I don't waste any time being angry\n"
-	.string "over a loss--I would rather train.$"
+	.string "Clean hits.\n"
+	.string "I have no complaints.$"
 
 Route117_Text_AishaPostBattle: @ 829D24C
-	.string "I think that if you worry about losing,\n"
-	.string "you're more likely to lose.$"
+	.string "Mienshao heals whenever it cycles\n"
+	.string "out. Pressure it, or chase it.$"
+
+Route117_Text_AishaStillTraining:
+	.string "We spar at full strength only.\p"
+	.string "Earn the Dynamo Badge first.$"
 
 Route118_Text_RoseIntro: @ 829D290
 	.string "The aroma of flowers has a magical\n"

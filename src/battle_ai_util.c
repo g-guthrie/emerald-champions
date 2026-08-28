@@ -1267,7 +1267,8 @@ u16 AI_GetHoldEffect(u32 battlerId)
 
 bool32 AI_IsTerrainAffected(u8 battlerId, u32 flags)
 {
-    if (gStatuses3[battlerId] & STATUS3_SEMI_INVULNERABLE)
+    if (IsCommanderTatsugiri(battlerId)
+     || gStatuses3[battlerId] & STATUS3_SEMI_INVULNERABLE)
         return FALSE;
     else if (!(gFieldStatuses & flags))
         return FALSE;
@@ -1509,6 +1510,9 @@ u32 AI_GetMoveAccuracy(u8 battlerAtk, u8 battlerDef, u16 atkAbility, u16 defAbil
 
 bool32 IsSemiInvulnerable(u8 battlerDef, u16 move)
 {
+    if (IsCommanderTatsugiri(battlerDef)
+     && gBattleMoves[move].effect != EFFECT_TRANSFORM)
+        return TRUE;
     if (gStatuses3[battlerDef] & STATUS3_PHANTOM_FORCE)
         return TRUE;
     else if (!TestMoveFlags(move, FLAG_DMG_IN_AIR) && gStatuses3[battlerDef] & STATUS3_ON_AIR)
@@ -1523,6 +1527,10 @@ bool32 IsSemiInvulnerable(u8 battlerDef, u16 move)
 
 bool32 IsMoveEncouragedToHit(u8 battlerAtk, u8 battlerDef, u16 move)
 {
+    if (IsCommanderTatsugiri(battlerDef)
+     && gBattleMoves[move].effect != EFFECT_TRANSFORM)
+        return FALSE;
+
     // No Guard and Toxic can hit semi-invulnerable mons
     if (AI_GetAbility(battlerDef) == ABILITY_NO_GUARD || AI_GetAbility(battlerAtk) == ABILITY_NO_GUARD)
         return TRUE;

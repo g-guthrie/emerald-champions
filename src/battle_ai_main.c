@@ -2541,7 +2541,7 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         case EFFECT_ERUPTION:
             if (effectiveness <= AI_EFFECTIVENESS_x0_5)
                 score--;
-            if (GetHealthPercentage(battlerDef) < 50)
+            if (GetHealthPercentage(battlerAtk) < 50)
                 score--;
             break;
         case EFFECT_VITAL_THROW:
@@ -3231,6 +3231,55 @@ static s16 AI_ComboSetup(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
     if (AI_DATA->partnerMove != MOVE_NONE && gBattleMoves[AI_DATA->partnerMove].effect == EFFECT_HELPING_HAND)
         score += IS_MOVE_STATUS(move) ? -12 : 7;
 
+    // Gravity is a doubles combo when one partner establishes the field for
+    // the other's deliberately inaccurate attack. Reward both halves without
+    // fixing either move or target; ordinary viability still decides whether
+    // the attack is useful into the selected foe.
+    if (effect == EFFECT_GRAVITY
+      && !(gFieldStatuses & STATUS_FIELD_GRAVITY)
+      && HasMoveWithLowAccuracy(BATTLE_PARTNER(battlerAtk), FOE(BATTLE_PARTNER(battlerAtk)), 70, FALSE,
+                                partnerAbility, AI_GetAbility(FOE(BATTLE_PARTNER(battlerAtk))),
+                                AI_GetHoldEffect(BATTLE_PARTNER(battlerAtk)), AI_GetHoldEffect(FOE(BATTLE_PARTNER(battlerAtk)))))
+        score += AI_DATA->partnerMove != MOVE_NONE && gBattleMoves[AI_DATA->partnerMove].accuracy <= 70 ? 10 : 5;
+    else if (!(gFieldStatuses & STATUS_FIELD_GRAVITY)
+          && gBattleMoves[move].accuracy != 0
+          && gBattleMoves[move].accuracy <= 70
+          && HasMove(BATTLE_PARTNER(battlerAtk), MOVE_GRAVITY))
+        score += AI_DATA->partnerMove == MOVE_GRAVITY ? 10 : 4;
+
+    // A fast Contrary user can hand its ability to an Overheat partner. Score
+    // both visible halves of that authored exchange without forcing either
+    // target; normal speed order, disruption, and viability still apply.
+    if (AI_DATA->partnerMove == MOVE_SKILL_SWAP
+      && partnerAbility == ABILITY_CONTRARY
+      && effect == EFFECT_OVERHEAT)
+        score += 12;
+
+    // Controlled detonation is a partner puzzle, not a generic suicide roll.
+    // A low-HP ally with Explosion makes Protect valuable; Explosion itself is
+    // rewarded only when the visible partner action or immunity makes it safe.
+    // The ordinary doubles collateral scorer remains active as a second guard.
+    if (effect == EFFECT_PROTECT
+      && HasMove(BATTLE_PARTNER(battlerAtk), MOVE_EXPLOSION)
+      && GetHealthPercentage(BATTLE_PARTNER(battlerAtk)) <= 50)
+    {
+        score += 8;
+    }
+    else if (effect == EFFECT_EXPLOSION)
+    {
+        bool32 partnerProtecting = AI_DATA->partnerMove != MOVE_NONE
+                                 && gBattleMoves[AI_DATA->partnerMove].effect == EFFECT_PROTECT;
+        bool32 partnerImmune = AI_DATA->atkPartnerAbility == ABILITY_TELEPATHY
+                            || AI_GetMoveEffectiveness(move, battlerAtk, BATTLE_PARTNER(battlerAtk)) == AI_EFFECTIVENESS_x0;
+
+        if (!partnerProtecting && !partnerImmune)
+            score -= 12;
+        else if (GetHealthPercentage(battlerAtk) <= 50)
+            score += 10;
+        else
+            score -= 4;
+    }
+
     // Round is a foe-targeting partner combo: a second singer acts
     // immediately and doubles its power. Encourage a legal duet without
     // forcing either target or requiring an ally-targeting move.
@@ -3303,9 +3352,7 @@ static s16 AI_ComboSetup(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
 
     if (move == MOVE_ORDER_UP
       && gBattleMons[battlerAtk].species == SPECIES_DONDOZO
-      && IsBattlerAlive(BATTLE_PARTNER(battlerAtk))
-      && partnerAbility == ABILITY_COMMANDER
-      && gBattleMons[BATTLE_PARTNER(battlerAtk)].species == SPECIES_TATSUGIRI_STRETCHY
+      && gBattleStruct->commanderActive[battlerAtk] == SPECIES_TATSUGIRI_STRETCHY
       && BattlerStatCanRise(battlerAtk, AI_DATA->atkAbility, STAT_SPEED))
         score += 12;
 
@@ -3373,6 +3420,15 @@ static s16 AI_ComboSetup(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
         score += 10;
     else if (IsStatLoweringEffect(effect) && partnerAbility == ABILITY_CONTRARY)
         score += 10;
+    else if (effect == EFFECT_SKILL_SWAP
+          && AI_DATA->atkAbility == ABILITY_CONTRARY
+          && HasMove(battlerDef, MOVE_OVERHEAT))
+        score += 15;
+    else if (effect == EFFECT_SIMPLE_BEAM
+          && AI_DATA->partnerMove != MOVE_NONE
+          && IsStatRaisingEffect(gBattleMoves[AI_DATA->partnerMove].effect)
+          && partnerAbility != ABILITY_SIMPLE)
+        score += 15;
     else if ((effect == EFFECT_SKILL_SWAP || effect == EFFECT_GASTRO_ACID
            || effect == EFFECT_WORRY_SEED || effect == EFFECT_SIMPLE_BEAM)
           && GetAbilityRating(partnerAbility) < 0)
@@ -5051,6 +5107,10 @@ static s16 AI_CheckViability(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                 score += 2;
             else
                 score++;
+        }
+        else
+        {
+            score -= 10;
         }
         break;
     case EFFECT_ION_DELUGE:

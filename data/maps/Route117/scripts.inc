@@ -66,7 +66,8 @@ Route117_EventScript_IsaacStillTraining::
 	end
 
 Route117_EventScript_Lydia:: @ 81F3A32
-	trainerbattle_single TRAINER_LYDIA_1, Route117_Text_LydiaIntro, Route117_Text_LydiaDefeat, Route117_EventScript_RegisterLydia
+	goto_if_unset FLAG_BADGE03_GET, Route117_EventScript_LydiaStillTraining
+	trainerbattle_double TRAINER_LYDIA_1, Route117_Text_LydiaIntro, Route117_Text_LydiaDefeat, Route117_Text_LydiaNotEnoughMons, Route117_EventScript_RegisterLydia
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq Route117_EventScript_RematchLydia
@@ -83,8 +84,12 @@ Route117_EventScript_RegisterLydia:: @ 81F3A5E
 	end
 
 Route117_EventScript_RematchLydia:: @ 81F3A7D
-	trainerbattle_rematch TRAINER_LYDIA_1, Route117_Text_LydiaRematchIntro, Route117_Text_LydiaRematchDefeat
+	trainerbattle_rematch_double TRAINER_LYDIA_1, Route117_Text_LydiaRematchIntro, Route117_Text_LydiaRematchDefeat, Route117_Text_LydiaNotEnoughMons
 	msgbox Route117_Text_LydiaPostRematch, MSGBOX_AUTOCLOSE
+	end
+
+Route117_EventScript_LydiaStillTraining::
+	msgbox Route117_Text_LydiaStillTraining, MSGBOX_AUTOCLOSE
 	end
 
 Route117_EventScript_Dylan:: @ 81F3A94
@@ -142,8 +147,13 @@ Route117_EventScript_MariaStillTraining::
 	end
 
 Route117_EventScript_Derek:: @ 81F3B58
+	goto_if_unset FLAG_BADGE03_GET, Route117_EventScript_DerekStillTraining
 	trainerbattle_single TRAINER_DEREK, Route117_Text_DerekIntro, Route117_Text_DerekDefeat
 	msgbox Route117_Text_DerekPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+Route117_EventScript_DerekStillTraining::
+	msgbox Route117_Text_DerekStillTraining, MSGBOX_AUTOCLOSE
 	end
 
 Route117_EventScript_Anna:: @ 81F3B6F
@@ -193,18 +203,33 @@ Route117_EventScript_AnnaAndMegStillTraining::
 	end
 
 Route117_EventScript_Melina:: @ 81F3C37
+	goto_if_unset FLAG_BADGE03_GET, Route117_EventScript_MelinaStillTraining
 	trainerbattle_single TRAINER_MELINA, Route117_Text_MelinaIntro, Route117_Text_MelinaDefeat
 	msgbox Route117_Text_MelinaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+Route117_EventScript_MelinaStillTraining::
+	msgbox Route117_Text_MelinaStillTraining, MSGBOX_AUTOCLOSE
+	end
+
 Route117_EventScript_Brandi:: @ 81F3C4E
+	goto_if_unset FLAG_BADGE03_GET, Route117_EventScript_BrandiStillTraining
 	trainerbattle_single TRAINER_BRANDI, Route117_Text_BrandiIntro, Route117_Text_BrandiDefeat
 	msgbox Route117_Text_BrandiPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+Route117_EventScript_BrandiStillTraining::
+	msgbox Route117_Text_BrandiStillTraining, MSGBOX_AUTOCLOSE
+	end
+
 Route117_EventScript_Aisha:: @ 81F3C65
+	goto_if_unset FLAG_BADGE03_GET, Route117_EventScript_AishaStillTraining
 	trainerbattle_single TRAINER_AISHA, Route117_Text_AishaIntro, Route117_Text_AishaDefeat
 	msgbox Route117_Text_AishaPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+Route117_EventScript_AishaStillTraining::
+	msgbox Route117_Text_AishaStillTraining, MSGBOX_AUTOCLOSE
 	end
 
 Route117_Text_DayCarePokemonHadNewMove: @ 81F3C7C
