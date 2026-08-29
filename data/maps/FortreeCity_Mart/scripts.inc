@@ -43,7 +43,7 @@ FortreeCity_Mart_EventScript_Spenser::
 	faceplayer
 	goto_if_defeated TRAINER_SPENSER_FORTREE, FortreeCity_Mart_EventScript_SpenserAfter
 	msgbox FortreeCity_Mart_Text_SpenserChallenge, MSGBOX_DEFAULT
-	trainerbattle_no_intro TRAINER_SPENSER_FORTREE, FortreeCity_Mart_Text_SpenserDefeat
+	trainerbattle_no_intro_double TRAINER_SPENSER_FORTREE, FortreeCity_Mart_Text_SpenserDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	checkitemspace ITEM_PROTECTOR, 1
 	goto_if_eq VAR_RESULT, FALSE, FortreeCity_Mart_EventScript_SpenserBagFull
 	giveitem ITEM_PROTECTOR

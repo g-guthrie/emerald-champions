@@ -823,10 +823,21 @@
 	trainerbattle LOCALID_NONE, \trainer, NULL, \lose_text, NULL, LOCALID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, NULL, FALSE, TRUE, FALSE, FALSE, TRUE, FALSE, FALSE, TRUE
 	.endm
 
+	@ Starts a doubles trainer battle after dialogue has already been shown.
+	@ This retains the native two-usable-Pokemon guard used by trainerbattle_double.
+	.macro trainerbattle_no_intro_double trainer:req, lose_text:req, not_enough_pkmn_text:req
+	trainerbattle LOCALID_NONE, \trainer, NULL, \lose_text, NULL, LOCALID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, \not_enough_pkmn_text, TRUE, TRUE, FALSE, FALSE, TRUE, FALSE, FALSE, TRUE
+	.endm
+
 	@ Starts a double battle with the player against two trainers
 	@ Takes two trainers and defeat text for each
 	.macro trainerbattle_two_trainers trainer_a:req, lose_text_a:req, trainer_b:req, lose_text_b:req
 	trainerbattle OBJ_ID_NONE, \trainer_a, NULL, \lose_text_a, NULL, OBJ_ID_NONE, \trainer_b, NULL, \lose_text_b, NULL, NULL, NULL, FALSE, TRUE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE
+	.endm
+
+	@ Starts a checked Double Battle against two opposing trainers.
+	.macro trainerbattle_double_two_trainers trainer_a:req, lose_text_a:req, trainer_b:req, lose_text_b:req, not_enough_pkmn_text:req
+	trainerbattle OBJ_ID_NONE, \trainer_a, NULL, \lose_text_a, NULL, OBJ_ID_NONE, \trainer_b, NULL, \lose_text_b, NULL, NULL, \not_enough_pkmn_text, TRUE, TRUE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE
 	.endm
 
 	@ Starts a trainer battle with victory text if the player loses. If flags is nonzero, the player will be healed after battle (and its assumed to be the tutorial battle)
@@ -837,6 +848,12 @@
 	@ Starts a lavaridge gym battle
 	.macro trainerbattle_lavaridge localId: req, trainer: req, intro_text: req, lose_text: req, event_script: req
 	trainerbattle \localId, \trainer, \intro_text, \lose_text, \event_script, OBJ_ID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, NULL, FALSE, TRUE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE
+	.endm
+
+
+	@ Starts a checked Double Battle using Lavaridge Gym's buried-trainer flow.
+	.macro trainerbattle_lavaridge_double localId:req, trainer:req, intro_text:req, lose_text:req, not_enough_pkmn_text:req, event_script:req
+	trainerbattle \localId, \trainer, \intro_text, \lose_text, \event_script, OBJ_ID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, \not_enough_pkmn_text, TRUE, TRUE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE
 	.endm
 
 	@ Starts a trainer battle using the battle information stored in RAM (usually by the scripts in trainer_battle.inc, which

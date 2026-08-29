@@ -29,6 +29,9 @@ def main() -> None:
     nurse = read("data/scripts/pkmn_center_nurse.inc")
     items = read("src/data/items.h")
     field_specials = read("src/field_specials.c")
+    party_menu = read("src/party_menu.c")
+    party_menu_data = read("src/data/party_menu.h")
+    vendor_scripts = read("data/scripts/emerald_champions.inc")
 
     require("COMPOUND_STRING(\"DIFFICULTY\")" in option_menu, "Options no longer exposes Difficulty")
     require(all(label in option_menu for label in ("DifficultyHard", "DifficultyMedium", "DifficultyEasy")), "Difficulty choices are incomplete")
@@ -46,6 +49,31 @@ def main() -> None:
     require("giveitem ITEM_POKE_VIAL" in nurse and "giveitem ITEM_LEVELER" in nurse, "Center does not grant both tools")
     require("copyvar VAR_POKE_VIAL_CHARGES, VAR_POKE_VIAL_MAX_CHARGES" in nurse, "Center does not refill the Vial")
     require(re.search(r"\[ITEM_RARE_CANDY\].*?\.price = 1000,", items, re.S) is not None, "Rare Candy price is not 1,000")
+    route111 = read("data/maps/Route111/scripts.inc")
+    route133 = read("data/maps/Route133/scripts.inc")
+    require(
+        "setvar VAR_POKE_VIAL_MAX_CHARGES, 2" in route111
+        and "setvar VAR_CHANSEY_NURSE_STATE, 7" in route111,
+        "the one-time Chansey quest does not grant the second Vial charge",
+    )
+    require(
+        "setvar VAR_POKE_VIAL_MAX_CHARGES, 3" in route133,
+        "Route 133 does not grant the final Vial charge",
+    )
+
+    oldale = read("data/maps/OldaleTown_Mart/scripts.inc")
+    expanded_oldale = oldale.split("OldaleTown_Mart_Pokemart_Expanded:", 1)[1].split("pokemartlistend", 1)[0]
+    require("ITEM_POKE_BALL" in expanded_oldale, "Oldale Mart never stocks Poke Balls after the adventure starts")
+
+    require(
+        "AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_OPEN_ABILITY)" in party_menu,
+        "the normal party menu lacks on-the-fly Ability switching",
+    )
+    require(
+        "SELECTWINDOW_ABILITY" in party_menu
+        and all(token in party_menu_data for token in ("MENU_ABILITY_SLOT_0", "MENU_ABILITY_SLOT_1", "MENU_ABILITY_SLOT_2")),
+        "the native Ability chooser is incomplete",
+    )
 
     centers = tuple((ROOT / "data" / "maps").glob("*PokemonCenter_1F/map.json"))
     target_centers = []
@@ -91,6 +119,51 @@ def main() -> None:
     forbidden_parts = ("_PLATE", "_MEMORY", "_DRIVE", "_MASK", "_Z_CRYSTAL", "TERA_SHARD")
     require(not any(any(part in item for part in forbidden_parts) for item in free_items), "Progression held items leaked into the free vendor")
     require(not free_items.intersection({"ITEM_RED_ORB", "ITEM_BLUE_ORB", "ITEM_RUSTED_SWORD", "ITEM_RUSTED_SHIELD"}), "Transformation items leaked into the free vendor")
+
+    category_names = (
+        "sEmeraldChampionsOffenseItems",
+        "sEmeraldChampionsDefenseItems",
+        "sEmeraldChampionsFieldItems",
+        "sEmeraldChampionsTypeItems",
+        "sEmeraldChampionsGemItems",
+        "sEmeraldChampionsSpeciesItems",
+    )
+    categories = []
+    for name in category_names:
+        block = field_specials.split(f"{name}[]", 1)[1].split("};", 1)[0]
+        categories.append(set(re.findall(r"ITEM_[A-Z0-9_]+", block)) - {"ITEM_NONE"})
+    require(set().union(*categories) == free_items - {"ITEM_NONE"}, "held-item categories do not cover the free vendor exactly")
+    require(sum(map(len, categories)) == len(set().union(*categories)), "a held item appears in multiple vendor categories")
+    require(
+        all(token in vendor_scripts for token in (
+            "EmeraldChampions_Text_HeldItems",
+            "EmeraldChampions_Text_OffenseItems",
+            "EmeraldChampions_Text_DefenseItems",
+            "EmeraldChampions_Text_FieldItems",
+            "EmeraldChampions_Text_TypeItems",
+            "EmeraldChampions_Text_GemItems",
+            "EmeraldChampions_Text_SpeciesItems",
+        )),
+        "the Pokemon Center held-item category menu is incomplete",
+    )
+
+    presets = json.loads(read("docs/emerald_champions_battle_sets.json"))
+    preset_items = {
+        entry[field]
+        for group in ("defaults", "alternatives")
+        for entry in presets[group]
+        for field in ("item", "required_item")
+    }
+    preset_protected = mega_items | {
+        item for item in preset_items
+        if any(part in item for part in forbidden_parts)
+    } | {"ITEM_RED_ORB", "ITEM_BLUE_ORB", "ITEM_RUSTED_SWORD", "ITEM_RUSTED_SHIELD"}
+    preset_berries = {item for item in preset_items if "_BERRY" in item}
+    ordinary_preset_items = preset_items - preset_protected - preset_berries - {"ITEM_NONE"}
+    require(
+        ordinary_preset_items <= free_items,
+        f"competitive presets use unavailable ordinary held items: {sorted(ordinary_preset_items - free_items)}",
+    )
 
     print("core_service_static_checks=PASS")
     print(f"pokemon_centers={len(target_centers)}")

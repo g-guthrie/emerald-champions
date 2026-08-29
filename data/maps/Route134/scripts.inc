@@ -12,42 +12,42 @@ Route134_EventScript_Jack::
 	end
 
 Route134_EventScript_Laurel::
-	trainerbattle_single TRAINER_LAUREL, Route134_Text_LaurelIntro, Route134_Text_LaurelDefeat
+	trainerbattle_double TRAINER_LAUREL, Route134_Text_LaurelIntro, Route134_Text_LaurelDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route134_Text_LaurelPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route134_EventScript_Alex::
-	trainerbattle_single TRAINER_ALEX, Route134_Text_AlexIntro, Route134_Text_AlexDefeat
+	trainerbattle_double TRAINER_ALEX, Route134_Text_AlexIntro, Route134_Text_AlexDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route134_Text_AlexPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route134_EventScript_Aaron::
-	trainerbattle_single TRAINER_AARON, Route134_Text_AaronIntro, Route134_Text_AaronDefeat
+	trainerbattle_double TRAINER_AARON, Route134_Text_AaronIntro, Route134_Text_AaronDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route134_Text_AaronPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route134_EventScript_Hitoshi::
-	trainerbattle_single TRAINER_HITOSHI, Route134_Text_HitoshiIntro, Route134_Text_HitoshiDefeat
+	trainerbattle_double TRAINER_HITOSHI, Route134_Text_HitoshiIntro, Route134_Text_HitoshiDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route134_Text_HitoshiPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route134_EventScript_Hudson::
-	trainerbattle_single TRAINER_HUDSON, Route134_Text_HudsonIntro, Route134_Text_HudsonDefeat
+	trainerbattle_double TRAINER_HUDSON, Route134_Text_HudsonIntro, Route134_Text_HudsonDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route134_Text_HudsonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route134_EventScript_Reyna::
-	trainerbattle_single TRAINER_REYNA, Route134_Text_ReynaIntro, Route134_Text_ReynaDefeat
+	trainerbattle_double TRAINER_REYNA, Route134_Text_ReynaIntro, Route134_Text_ReynaDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route134_Text_ReynaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route134_EventScript_Marley::
-	trainerbattle_single TRAINER_MARLEY, Route134_Text_MarleyIntro, Route134_Text_MarleyDefeat
+	trainerbattle_double TRAINER_MARLEY, Route134_Text_MarleyIntro, Route134_Text_MarleyDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route134_Text_MarleyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route134_EventScript_Kelvin::
-	trainerbattle_single TRAINER_KELVIN, Route134_Text_KelvinIntro, Route134_Text_KelvinDefeat
+	trainerbattle_double TRAINER_KELVIN, Route134_Text_KelvinIntro, Route134_Text_KelvinDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route134_Text_KelvinPostBattle, MSGBOX_AUTOCLOSE
 	end
 

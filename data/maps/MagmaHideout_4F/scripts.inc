@@ -53,7 +53,7 @@ MagmaHideout_4F_EventScript_Maxie::
 	waitmovement 0
 	msgbox MagmaHideout_4F_Text_MaxieOhItWasYou, MSGBOX_DEFAULT
 	closemessage
-	trainerbattle_no_intro TRAINER_MAXIE_MAGMA_HIDEOUT, MagmaHideout_4F_Text_MaxieDefeat
+	trainerbattle_no_intro_double TRAINER_MAXIE_MAGMA_HIDEOUT, MagmaHideout_4F_Text_MaxieDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox MagmaHideout_4F_Text_MaxieImGoingAfterGroudon, MSGBOX_DEFAULT
 	closemessage
 	clearflag FLAG_HIDE_SLATEPORT_CITY_CAPTAIN_STERN
@@ -105,24 +105,41 @@ MagmaHideout_4F_Movement_MaxieLookAround:
 	step_end
 
 MagmaHideout_4F_EventScript_Grunt11::
-	trainerbattle_single TRAINER_GRUNT_MAGMA_HIDEOUT_11, MagmaHideout_4F_Text_Grunt11Intro, MagmaHideout_4F_Text_Grunt11Defeat
+	trainerbattle_double TRAINER_GRUNT_MAGMA_HIDEOUT_11, MagmaHideout_4F_Text_Grunt11Intro, MagmaHideout_4F_Text_Grunt11Defeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox MagmaHideout_4F_Text_Grunt11PostBattle, MSGBOX_AUTOCLOSE
 	end
 
 MagmaHideout_4F_EventScript_Grunt12::
-	trainerbattle_single TRAINER_GRUNT_MAGMA_HIDEOUT_12, MagmaHideout_4F_Text_Grunt12Intro, MagmaHideout_4F_Text_Grunt12Defeat
+	trainerbattle_double TRAINER_GRUNT_MAGMA_HIDEOUT_12, MagmaHideout_4F_Text_Grunt12Intro, MagmaHideout_4F_Text_Grunt12Defeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox MagmaHideout_4F_Text_Grunt12PostBattle, MSGBOX_AUTOCLOSE
 	end
 
 MagmaHideout_4F_EventScript_Grunt13::
-	trainerbattle_single TRAINER_GRUNT_MAGMA_HIDEOUT_13, MagmaHideout_4F_Text_Grunt13Intro, MagmaHideout_4F_Text_Grunt13Defeat
+	trainerbattle_double TRAINER_GRUNT_MAGMA_HIDEOUT_13, MagmaHideout_4F_Text_Grunt13Intro, MagmaHideout_4F_Text_Grunt13Defeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox MagmaHideout_4F_Text_Grunt13PostBattle, MSGBOX_AUTOCLOSE
 	end
 
 MagmaHideout_4F_EventScript_Tabitha::
-	trainerbattle_single TRAINER_TABITHA_MAGMA_HIDEOUT, MagmaHideout_4F_Text_TabithaIntro, MagmaHideout_4F_Text_TabithaDefeat
+	trainerbattle_double TRAINER_TABITHA_MAGMA_HIDEOUT, MagmaHideout_4F_Text_TabithaIntro, MagmaHideout_4F_Text_TabithaDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox MagmaHideout_4F_Text_TabithaPostBattle, MSGBOX_AUTOCLOSE
 	end
+
+MagmaHideout_4F_EventScript_Courtney::
+	trainerbattle_double TRAINER_COURTNEY_MAGMA_HIDEOUT, MagmaHideout_4F_Text_CourtneyIntro, MagmaHideout_4F_Text_CourtneyDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	msgbox MagmaHideout_4F_Text_CourtneyAfter, MSGBOX_AUTOCLOSE
+	end
+
+MagmaHideout_4F_Text_CourtneyIntro:
+	.string "COURTNEY: Prediction: you will target the\n"
+	.string "sun before noticing the reversed clock.\p"
+	.string "Let us measure how quickly you correct.$"
+
+MagmaHideout_4F_Text_CourtneyDefeat:
+	.string "Correction arrived before failure. Noted.$"
+
+MagmaHideout_4F_Text_CourtneyAfter:
+	.string "MAXIE values certainty. You keep proving\n"
+	.string "that adaptation is also measurable.$"
 
 MagmaHideout_4F_Text_Grunt11Intro:
 	.string "I want to see GROUDON, too, but they\n"
@@ -162,14 +179,10 @@ MagmaHideout_4F_Text_Grunt13PostBattle:
 	.string "C-come on, one more match…$"
 
 MagmaHideout_4F_Text_TabithaIntro:
-	.string "Hehehe!\n"
-	.string "You made it this far, so I'll tell you!\p"
-	.string "That's right!\n"
-	.string "Up ahead, GROUDON is sleeping!\p"
-	.string "MAXIE went to GROUDON just seconds\n"
-	.string "ago!\p"
-	.string "It's going to awaken real soon!\n"
-	.string "Hehe! Hehehe!$"
+	.string "TABITHA: Every chamber behind you was\n"
+	.string "built to make one approach predictable.\p"
+	.string "MAXIE is already with GROUDON. I only\n"
+	.string "need to make your last answer too slow.$"
 
 MagmaHideout_4F_Text_TabithaDefeat:
 	.string "Taken down again…\n"
@@ -180,44 +193,30 @@ MagmaHideout_4F_Text_TabithaPostBattle:
 	.string "MAXIE should have awakened GROUDON…$"
 
 MagmaHideout_4F_Text_MaxieAwakenGroudon:
-	.string "MAXIE: GROUDON…\p"
-	.string "Nothing could awaken you from your\n"
-	.string "sleep bathed in magma…\p"
-	.string "This BLUE ORB is what you sought.\n"
-	.string "Wasn't it?\p"
-	.string "I have brought you the BLUE ORB.\n"
-	.string "Let its shine awaken you!\p"
-	.string "And show me…\n"
-	.string "Show me the full extent of your power!$"
+	.string "MAXIE: GROUDON, ancient architect of\n"
+	.string "continents... accept the BLUE ORB.\p"
+	.string "The SIGN network is awake. Bind its\n"
+	.string "energy to land that will never yield.\p"
+	.string "Show HOENN the certainty of your power!$"
 
 MagmaHideout_4F_Text_MaxieGroudonWhatsWrong:
-	.string "MAXIE: GROUDON!\n"
-	.string "What's wrong?\p"
-	.string "Wasn't the BLUE ORB the key?\p"
-	.string "GROUDON!\n"
-	.string "Where have you gone…$"
+	.string "MAXIE: GROUDON! The model was exact.\n"
+	.string "Why did the ORB make you reject me?\p"
+	.string "Where are you going?$"
 
 MagmaHideout_4F_Text_MaxieOhItWasYou:
-	.string "MAXIE: Oh, so it was you?\p"
-	.string "I've seen you poking around uninvited\n"
-	.string "here and there…\p"
-	.string "I get it now!\n"
-	.string "You must have pulled a cheap stunt!$"
+	.string "MAXIE: You again. GROUDON fled before\n"
+	.string "you touched the machine.\p"
+	.string "Then prove the error is mine, not yours.$"
 
 MagmaHideout_4F_Text_MaxieDefeat:
 	.string "What makes you so adept at handling\n"
 	.string "POKéMON?$"
 
 MagmaHideout_4F_Text_MaxieImGoingAfterGroudon:
-	.string "MAXIE: There has to be some reason\n"
-	.string "why GROUDON fled…\p"
-	.string "That's what you're trying to say,\n"
-	.string "aren't you?\p"
-	.string "… … … … … …\n"
-	.string "… … … … … …\p"
-	.string "Humph…\n"
-	.string "You think I didn't know that?\p"
-	.string "With GROUDON gone, there is no longer\n"
-	.string "any need for this blasted volcano.\p"
-	.string "I am going after GROUDON, so this\n"
-	.string "is where we part!$"
+	.string "MAXIE: Your team adapted; my plan did\n"
+	.string "not. I understand the lesson.\p"
+	.string "But GROUDON is loose, and ARCHIE still\n"
+	.string "holds the matching disaster.\p"
+	.string "I am going after it. This is no longer\n"
+	.string "an experiment we control.$"

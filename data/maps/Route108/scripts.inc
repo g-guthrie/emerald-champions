@@ -7,12 +7,12 @@ Route108_EventScript_Jerome::
 	end
 
 Route108_EventScript_Matthew::
-	trainerbattle_single TRAINER_MATTHEW, Route108_Text_MatthewIntro, Route108_Text_MatthewDefeated
+	trainerbattle_double TRAINER_MATTHEW, Route108_Text_MatthewIntro, Route108_Text_MatthewDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route108_Text_MatthewPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route108_EventScript_Tara::
-	trainerbattle_single TRAINER_TARA, Route108_Text_TaraIntro, Route108_Text_TaraDefeated
+	trainerbattle_double TRAINER_TARA, Route108_Text_TaraIntro, Route108_Text_TaraDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route108_Text_TaraPostBattle, MSGBOX_AUTOCLOSE
 	end
 

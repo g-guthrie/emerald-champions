@@ -468,3 +468,69 @@ RustboroCity_DevonCorp_2F_Text_WhatToWorkOnNext:
 	.string "inspirations into reality.\p"
 	.string "One couldn't ask for a better\n"
 	.string "environment as an engineer.$"
+
+@ BEGIN EMERALD CHAMPIONS LEGENDARY ROOTS
+.set EC_SIGN_MAGEARNA_ID, 58
+
+RustboroCity_DevonCorp_2F_EventScript_Magearna::
+	lock
+	faceplayer
+	setvar VAR_0x8004, EC_SIGN_MAGEARNA_ID
+	special TryUnlockSelectedLegendarySign
+	goto_if_eq VAR_RESULT, 0, RustboroCity_DevonCorp_2F_EventScript_MagearnaDormant
+	goto_if_eq VAR_RESULT, 1, RustboroCity_DevonCorp_2F_EventScript_MagearnaNeedsPartner
+	goto_if_eq VAR_RESULT, 4, RustboroCity_DevonCorp_2F_EventScript_MagearnaCleanup
+	msgbox RustboroCity_DevonCorp_2F_Text_MagearnaAwakens, MSGBOX_DEFAULT
+	waitse
+	playmoncry SPECIES_MAGEARNA, CRY_MODE_ENCOUNTER
+	delay 40
+	waitmoncry
+	setvar VAR_0x8004, EC_SIGN_MAGEARNA_ID
+	special CreateSelectedLegendarySignEncounter
+	setflag FLAG_SYS_CTRL_OBJ_DELETE
+	special BattleSetup_StartLegendaryBattle
+	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, RustboroCity_DevonCorp_2F_EventScript_MagearnaCaught
+	msgbox RustboroCity_DevonCorp_2F_Text_MagearnaRemains, MSGBOX_DEFAULT
+	release
+	end
+
+RustboroCity_DevonCorp_2F_EventScript_MagearnaDormant::
+	msgbox RustboroCity_DevonCorp_2F_Text_MagearnaDormant, MSGBOX_DEFAULT
+	release
+	end
+
+RustboroCity_DevonCorp_2F_EventScript_MagearnaNeedsPartner::
+	msgbox RustboroCity_DevonCorp_2F_Text_MagearnaNeedsPartner, MSGBOX_DEFAULT
+	release
+	end
+
+RustboroCity_DevonCorp_2F_EventScript_MagearnaCaught::
+	setflag FLAG_EC_CAUGHT_MAGEARNA
+RustboroCity_DevonCorp_2F_EventScript_MagearnaCleanup::
+	setflag FLAG_EC_CAUGHT_MAGEARNA
+	removeobject LOCALID_EC_MAGEARNA
+	release
+	end
+
+RustboroCity_DevonCorp_2F_Text_MagearnaDormant:
+	.string "A CHAMPION'S SIGN marks DEVON's sealed prototype.\p"
+	.string "Its light is dormant. HOENN's story\n"
+	.string "has not yet reached this place.$"
+
+RustboroCity_DevonCorp_2F_Text_MagearnaNeedsPartner:
+	.string "The SIGN sketches DIANCIE.\p"
+	.string "Bring that POKéMON's family here, and\n"
+	.string "the hidden challenger may answer.$"
+
+RustboroCity_DevonCorp_2F_Text_MagearnaAwakens:
+	.string "The CHAMPION'S SIGN erupts with light!\n"
+	.string "MAGEARNA answers the challenge!$"
+
+RustboroCity_DevonCorp_2F_Text_MagearnaRemains:
+	.string "The SIGN remains bright. MAGEARNA\n"
+	.string "will accept another challenge.$"
+
+
+@ END EMERALD CHAMPIONS LEGENDARY ROOTS

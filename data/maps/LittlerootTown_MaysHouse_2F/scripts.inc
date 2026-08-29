@@ -83,6 +83,8 @@ LittlerootTown_MaysHouse_2F_EventScript_MeetMayNorth::
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	msgbox RivalsHouse_2F_Text_MayWhoAreYou, MSGBOX_DEFAULT
+	call Common_EventScript_ChooseStarterRegion
+	msgbox EmeraldChampions_Text_StarterRegionChosen, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_PLAYER, LittlerootTown_MaysHouse_2F_Movement_PlayerWatchMayNorth
 	applymovement LOCALID_RIVALS_HOUSE_2F_RIVAL, LittlerootTown_MaysHouse_2F_Movement_MayWalkToPCNorth
@@ -95,6 +97,8 @@ LittlerootTown_MaysHouse_2F_EventScript_MeetMaySouth::
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	msgbox RivalsHouse_2F_Text_MayWhoAreYou, MSGBOX_DEFAULT
+	call Common_EventScript_ChooseStarterRegion
+	msgbox EmeraldChampions_Text_StarterRegionChosen, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_PLAYER, LittlerootTown_MaysHouse_2F_Movement_PlayerWatchMaySouth
 	applymovement LOCALID_RIVALS_HOUSE_2F_RIVAL, LittlerootTown_MaysHouse_2F_Movement_MayWalkToPCSouth
@@ -107,6 +111,8 @@ LittlerootTown_MaysHouse_2F_EventScript_MeetMayWest::
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	msgbox RivalsHouse_2F_Text_MayWhoAreYou, MSGBOX_DEFAULT
+	call Common_EventScript_ChooseStarterRegion
+	msgbox EmeraldChampions_Text_StarterRegionChosen, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_RIVALS_HOUSE_2F_RIVAL, LittlerootTown_MaysHouse_2F_Movement_MayWalkToPCWest
 	waitmovement 0
@@ -118,6 +124,8 @@ LittlerootTown_MaysHouse_2F_EventScript_MeetMayEast::
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	msgbox RivalsHouse_2F_Text_MayWhoAreYou, MSGBOX_DEFAULT
+	call Common_EventScript_ChooseStarterRegion
+	msgbox EmeraldChampions_Text_StarterRegionChosen, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_PLAYER, LittlerootTown_MaysHouse_2F_Movement_PlayerWatchMayEast
 	applymovement LOCALID_RIVALS_HOUSE_2F_RIVAL, LittlerootTown_MaysHouse_2F_Movement_MayWalkToPCEast
@@ -308,52 +316,28 @@ LittlerootTown_MaysHouse_2F_EventScript_TurnOffPlayerPC::
 	end
 
 RivalsHouse_2F_Text_MayWhoAreYou:
-	.string "Huh?\n"
-	.string "Who… Who are you?\p"
-	.string "… … … … … … … …\n"
-	.string "… … … … … … … …\p"
-	.string "Oh, you're {PLAYER}{KUN}.\n"
-	.string "So your move was today.\p"
-	.string "Um… I'm MAY.\n"
-	.string "Glad to meet you!\p"
-	.string "I…\n"
-	.string "I have this dream of becoming friends\l"
-	.string "with POKéMON all over the world.\p"
-	.string "I… I heard about you, {PLAYER}{KUN}, from\n"
-	.string "my dad, PROF. BIRCH.\p"
-	.string "I was hoping that you would be nice,\n"
-	.string "{PLAYER}{KUN}, and that we could be friends.\p"
-	.string "Oh, this is silly, isn't it?\n"
-	.string "I… I've just met you, {PLAYER}{KUN}.\p"
-	.string "Eheheh…\p"
-	.string "Oh, no! I forgot!\p"
-	.string "I was supposed to go help Dad catch\n"
-	.string "some wild POKéMON!\p"
-	.string "{PLAYER}{KUN}, I'll catch you later!$"
+	.string "You're {PLAYER}, right?\n"
+	.string "I'm MAY. Welcome to LITTLEROOT!\p"
+	.string "Dad said a GYM LEADER's kid was\n"
+	.string "moving next door. I hoped we'd battle.\p"
+	.string "He studies how Trainers from different\n"
+	.string "regions build around their partners.\p"
+	.string "For today's fieldwork, he packed all\n"
+	.string "nine regional starter trios.$"
 
 RivalsHouse_2F_Text_MayGettingReady:
 	.string "POKéMON fully restored!\n"
 	.string "Items ready, and…$"
 
 RivalsHouse_2F_Text_BrendanWhoAreYou:
-	.string "Hey!\n"
-	.string "You…\p"
-	.string "Who are you?\p"
-	.string "Oh, you're {PLAYER}, aren't you?\n"
-	.string "Moved in next door, right?\p"
-	.string "I didn't know that you're a girl.\p"
-	.string "Dad, PROF. BIRCH, said that our new\n"
-	.string "next-door neighbor is a GYM LEADER's\l"
-	.string "kid, so I assumed you'd be a guy.\p"
-	.string "My name's BRENDAN.\n"
-	.string "So, hi, neighbor!\p"
-	.string "Huh? Hey, {PLAYER}, don't you have\n"
-	.string "a POKéMON?\p"
-	.string "Do you want me to go catch you one?\p"
-	.string "Aw, darn, I forgot…\p"
-	.string "I'm supposed to go help my dad catch\n"
-	.string "some wild POKéMON.\p"
-	.string "Some other time, okay?$"
+	.string "You're {PLAYER}, right?\n"
+	.string "I'm BRENDAN. Welcome to LITTLEROOT!\p"
+	.string "Dad said a GYM LEADER's kid was\n"
+	.string "moving next door. I hoped we'd battle.\p"
+	.string "He studies how Trainers from different\n"
+	.string "regions build around their partners.\p"
+	.string "For today's fieldwork, he packed all\n"
+	.string "nine regional starter trios.$"
 
 RivalsHouse_2F_Text_BrendanGettingReady:
 	.string "POKéMON fully restored…\n"

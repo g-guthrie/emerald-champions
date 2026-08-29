@@ -198,7 +198,7 @@ MauvilleCity_EventScript_ScottExitEast::
 
 MauvilleCity_EventScript_BattleWally::
 	msgbox MauvilleCity_Text_WallyHereICome, MSGBOX_DEFAULT
-	trainerbattle_no_intro TRAINER_WALLY_MAUVILLE, MauvilleCity_Text_WallyDefeat
+	trainerbattle_no_intro_double TRAINER_WALLY_MAUVILLE, MauvilleCity_Text_WallyDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	applymovement LOCALID_MAUVILLE_WALLY, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	msgbox MauvilleCity_Text_WallyIllGoBackToVerdanturf, MSGBOX_DEFAULT
@@ -595,14 +595,11 @@ MauvilleCity_Text_WattsonWontBeChallenge:
 	.string "a short SURF away from ROUTE 110.\p"
 	.string "That's it, then, you have my trust!\n"
 	.string "Wahahahaha!$"
-
 MauvilleCity_Text_WattsonThanksTakeTM:
-	.string "WATTSON: Wahahahaha!\p"
-	.string "I knew it, {PLAYER}{KUN}! I knew I'd made\n"
+	.string "WATTSON: Wahahahaha! I knew I'd made\n"
 	.string "the right choice asking you!\p"
-	.string "This is my thanks--a TM containing\n"
-	.string "THUNDERBOLT!\p"
-	.string "Go on, you've earned it!$"
+	.string "This ELECTIRIZER came from the old\n"
+	.string "GENERATOR. You've earned it!$"
 
 MauvilleCity_Text_WattsonYoungTakeCharge:
 	.string "WATTSON: Wahahahaha!\p"

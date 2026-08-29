@@ -88,6 +88,7 @@
 #define SELECTWINDOW_MOVES       3
 #define SELECTWINDOW_CATALOG     4
 #define SELECTWINDOW_ZYGARDECUBE 5
+#define SELECTWINDOW_ABILITY     6
 
 enum PcMonSelectionType
 {

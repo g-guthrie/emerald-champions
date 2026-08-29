@@ -196,7 +196,7 @@ Route128_EventScript_RematchIsaiah::
 	end
 
 Route128_EventScript_Katelyn::
-	trainerbattle_single TRAINER_KATELYN_1, Route128_Text_KatelynIntro, Route128_Text_KatelynDefeat, Route128_EventScript_RegisterKatelyn
+	trainerbattle_double TRAINER_KATELYN_1, Route128_Text_KatelynIntro, Route128_Text_KatelynDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route128_EventScript_RegisterKatelyn
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route128_EventScript_RematchKatelyn
 	msgbox Route128_Text_KatelynPostBattle, MSGBOX_DEFAULT
@@ -212,22 +212,22 @@ Route128_EventScript_RegisterKatelyn::
 	end
 
 Route128_EventScript_RematchKatelyn::
-	trainerbattle_rematch TRAINER_KATELYN_1, Route128_Text_KatelynRematchIntro, Route128_Text_KatelynRematchDefeat
+	trainerbattle_rematch_double TRAINER_KATELYN_1, Route128_Text_KatelynRematchIntro, Route128_Text_KatelynRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route128_Text_KatelynPostRematch, MSGBOX_AUTOCLOSE
 	end
 
 Route128_EventScript_Alexa::
-	trainerbattle_single TRAINER_ALEXA, Route128_Text_AlexaIntro, Route128_Text_AlexaDefeat
+	trainerbattle_double TRAINER_ALEXA, Route128_Text_AlexaIntro, Route128_Text_AlexaDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route128_Text_AlexaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route128_EventScript_Ruben::
-	trainerbattle_single TRAINER_RUBEN, Route128_Text_RubenIntro, Route128_Text_RubenDefeat
+	trainerbattle_double TRAINER_RUBEN, Route128_Text_RubenIntro, Route128_Text_RubenDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route128_Text_RubenPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route128_EventScript_Wayne::
-	trainerbattle_single TRAINER_WAYNE, Route128_Text_WayneIntro, Route128_Text_WayneDefeat
+	trainerbattle_double TRAINER_WAYNE, Route128_Text_WayneIntro, Route128_Text_WayneDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route128_Text_WaynePostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -237,7 +237,7 @@ Route128_EventScript_Harrison::
 	end
 
 Route128_EventScript_Carlee::
-	trainerbattle_single TRAINER_CARLEE, Route128_Text_CarleeIntro, Route128_Text_CarleeDefeat
+	trainerbattle_double TRAINER_CARLEE, Route128_Text_CarleeIntro, Route128_Text_CarleeDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route128_Text_CarleePostBattle, MSGBOX_AUTOCLOSE
 	end
 

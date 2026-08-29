@@ -76,17 +76,17 @@ Route119_EventScript_BattleMay::
 	end
 
 Route119_EventScript_BattleMayTreecko::
-	trainerbattle_no_intro TRAINER_MAY_ROUTE_119_TREECKO, Route119_Text_MayDefeat
+	trainerbattle_no_intro_double TRAINER_MAY_ROUTE_119_TREECKO, Route119_Text_MayDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	goto Route119_EventScript_DefeatedMay
 	end
 
 Route119_EventScript_BattleMayTorchic::
-	trainerbattle_no_intro TRAINER_MAY_ROUTE_119_TORCHIC, Route119_Text_MayDefeat
+	trainerbattle_no_intro_double TRAINER_MAY_ROUTE_119_TORCHIC, Route119_Text_MayDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	goto Route119_EventScript_DefeatedMay
 	end
 
 Route119_EventScript_BattleMayMudkip::
-	trainerbattle_no_intro TRAINER_MAY_ROUTE_119_MUDKIP, Route119_Text_MayDefeat
+	trainerbattle_no_intro_double TRAINER_MAY_ROUTE_119_MUDKIP, Route119_Text_MayDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	goto Route119_EventScript_DefeatedMay
 	end
 
@@ -106,17 +106,17 @@ Route119_EventScript_BattleBrendan::
 	end
 
 Route119_EventScript_BattleBrendanTreecko::
-	trainerbattle_no_intro TRAINER_BRENDAN_ROUTE_119_TREECKO, Route119_Text_BrendanDefeat
+	trainerbattle_no_intro_double TRAINER_BRENDAN_ROUTE_119_TREECKO, Route119_Text_BrendanDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	goto Route119_EventScript_DefeatedBrendan
 	end
 
 Route119_EventScript_BattleBrendanTorchic::
-	trainerbattle_no_intro TRAINER_BRENDAN_ROUTE_119_TORCHIC, Route119_Text_BrendanDefeat
+	trainerbattle_no_intro_double TRAINER_BRENDAN_ROUTE_119_TORCHIC, Route119_Text_BrendanDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	goto Route119_EventScript_DefeatedBrendan
 	end
 
 Route119_EventScript_BattleBrendanMudkip::
-	trainerbattle_no_intro TRAINER_BRENDAN_ROUTE_119_MUDKIP, Route119_Text_BrendanDefeat
+	trainerbattle_no_intro_double TRAINER_BRENDAN_ROUTE_119_MUDKIP, Route119_Text_BrendanDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	goto Route119_EventScript_DefeatedBrendan
 	end
 
@@ -323,32 +323,32 @@ Route119_EventScript_Brent::
 	end
 
 Route119_EventScript_Donald::
-	trainerbattle_single TRAINER_DONALD, Route119_Text_DonaldIntro, Route119_Text_DonaldDefeat
+	trainerbattle_double TRAINER_DONALD, Route119_Text_DonaldIntro, Route119_Text_DonaldDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route119_Text_DonaldPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_Taylor::
-	trainerbattle_single TRAINER_TAYLOR, Route119_Text_TaylorIntro, Route119_Text_TaylorDefeat
+	trainerbattle_double TRAINER_TAYLOR, Route119_Text_TaylorIntro, Route119_Text_TaylorDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route119_Text_TaylorPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_Doug::
-	trainerbattle_single TRAINER_DOUG, Route119_Text_DougIntro, Route119_Text_DougDefeat
+	trainerbattle_double TRAINER_DOUG, Route119_Text_DougIntro, Route119_Text_DougDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route119_Text_DougPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_Greg::
-	trainerbattle_single TRAINER_GREG, Route119_Text_GregIntro, Route119_Text_GregDefeat
+	trainerbattle_double TRAINER_GREG, Route119_Text_GregIntro, Route119_Text_GregDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route119_Text_GregPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_Kent::
-	trainerbattle_single TRAINER_KENT, Route119_Text_KentIntro, Route119_Text_KentDefeat
+	trainerbattle_double TRAINER_KENT, Route119_Text_KentIntro, Route119_Text_KentDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route119_Text_KentPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_Jackson::
-	trainerbattle_single TRAINER_JACKSON_1, Route119_Text_JacksonIntro, Route119_Text_JacksonDefeat, Route119_EventScript_RegisterJackson
+	trainerbattle_double TRAINER_JACKSON_1, Route119_Text_JacksonIntro, Route119_Text_JacksonDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route119_EventScript_RegisterJackson
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route119_EventScript_RematchJackson
 	msgbox Route119_Text_JacksonPostBattle, MSGBOX_DEFAULT
@@ -364,12 +364,12 @@ Route119_EventScript_RegisterJackson::
 	end
 
 Route119_EventScript_RematchJackson::
-	trainerbattle_rematch TRAINER_JACKSON_1, Route119_Text_JacksonRematchIntro, Route119_Text_JacksonRematchDefeat
+	trainerbattle_rematch_double TRAINER_JACKSON_1, Route119_Text_JacksonRematchIntro, Route119_Text_JacksonRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route119_Text_JacksonPostRematch, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_Catherine::
-	trainerbattle_single TRAINER_CATHERINE_1, Route119_Text_CatherineIntro, Route119_Text_CatherineDefeat, Route119_EventScript_RegisterCatherine
+	trainerbattle_double TRAINER_CATHERINE_1, Route119_Text_CatherineIntro, Route119_Text_CatherineDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route119_EventScript_RegisterCatherine
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route119_EventScript_RematchCatherine
 	msgbox Route119_Text_CatherinePostBattle, MSGBOX_DEFAULT
@@ -385,42 +385,42 @@ Route119_EventScript_RegisterCatherine::
 	end
 
 Route119_EventScript_RematchCatherine::
-	trainerbattle_rematch TRAINER_CATHERINE_1, Route119_Text_CatherineRematchIntro, Route119_Text_CatherineRematchDefeat
+	trainerbattle_rematch_double TRAINER_CATHERINE_1, Route119_Text_CatherineRematchIntro, Route119_Text_CatherineRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route119_Text_CatherinePostRematch, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_Hugh::
-	trainerbattle_single TRAINER_HUGH, Route119_Text_HughIntro, Route119_Text_HughDefeat
+	trainerbattle_double TRAINER_HUGH, Route119_Text_HughIntro, Route119_Text_HughDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route119_Text_HughPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_Phil::
-	trainerbattle_single TRAINER_PHIL, Route119_Text_PhilIntro, Route119_Text_PhilDefeat
+	trainerbattle_double TRAINER_PHIL, Route119_Text_PhilIntro, Route119_Text_PhilDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route119_Text_PhilPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_Yasu::
-	trainerbattle_single TRAINER_YASU, Route119_Text_YasuIntro, Route119_Text_YasuDefeat
+	trainerbattle_double TRAINER_YASU, Route119_Text_YasuIntro, Route119_Text_YasuDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route119_Text_YasuPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_Takashi::
-	trainerbattle_single TRAINER_TAKASHI, Route119_Text_TakashiIntro, Route119_Text_TakashiDefeat
+	trainerbattle_double TRAINER_TAKASHI, Route119_Text_TakashiIntro, Route119_Text_TakashiDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route119_Text_TakashiPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_Hideo::
-	trainerbattle_single TRAINER_HIDEO, Route119_Text_HideoIntro, Route119_Text_HideoDefeat
+	trainerbattle_double TRAINER_HIDEO, Route119_Text_HideoIntro, Route119_Text_HideoDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route119_Text_HideoPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_Chris::
-	trainerbattle_single TRAINER_CHRIS, Route119_Text_ChrisIntro, Route119_Text_ChrisDefeat
+	trainerbattle_double TRAINER_CHRIS, Route119_Text_ChrisIntro, Route119_Text_ChrisDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route119_Text_ChrisPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_Fabian::
-	trainerbattle_single TRAINER_FABIAN, Route119_Text_FabianIntro, Route119_Text_FabianDefeat
+	trainerbattle_double TRAINER_FABIAN, Route119_Text_FabianIntro, Route119_Text_FabianDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route119_Text_FabianPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -430,7 +430,7 @@ Route119_EventScript_Dayton::
 	end
 
 Route119_EventScript_Rachel::
-	trainerbattle_single TRAINER_RACHEL, Route119_Text_RachelIntro, Route119_Text_RachelDefeat
+	trainerbattle_double TRAINER_RACHEL, Route119_Text_RachelIntro, Route119_Text_RachelDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route119_Text_RachelPostBattle, MSGBOX_AUTOCLOSE
 	end
 

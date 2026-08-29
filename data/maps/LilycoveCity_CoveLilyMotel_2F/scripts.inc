@@ -65,6 +65,24 @@ LilycoveCity_CoveLilyMotel_2F_EventScript_MetScott::
 	release
 	end
 
+LilycoveCity_CoveLilyMotel_2F_EventScript_Buffel::
+	lock
+	faceplayer
+	goto_if_defeated TRAINER_BUFFEL, LilycoveCity_CoveLilyMotel_2F_EventScript_BuffelAfter
+	msgbox LilycoveCity_CoveLilyMotel_2F_Text_BuffelChallenge, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, LilycoveCity_CoveLilyMotel_2F_EventScript_BuffelDecline
+	trainerbattle_no_intro_double TRAINER_BUFFEL, LilycoveCity_CoveLilyMotel_2F_Text_BuffelDefeat, EmeraldChampions_Text_NeedTwoPokemon
+
+LilycoveCity_CoveLilyMotel_2F_EventScript_BuffelAfter::
+	msgbox LilycoveCity_CoveLilyMotel_2F_Text_BuffelAfter, MSGBOX_DEFAULT
+	release
+	end
+
+LilycoveCity_CoveLilyMotel_2F_EventScript_BuffelDecline::
+	msgbox LilycoveCity_CoveLilyMotel_2F_Text_BuffelDecline, MSGBOX_DEFAULT
+	release
+	end
+
 LilycoveCity_CoveLilyMotel_2F_Text_ShowMeCompletedDex:
 	.string "I'm the GAME DESIGNER.\p"
 	.string "Oh, is that right?\n"
@@ -73,6 +91,21 @@ LilycoveCity_CoveLilyMotel_2F_Text_ShowMeCompletedDex:
 	.string "but don't give up.\p"
 	.string "If you do complete it, please come\n"
 	.string "show me.$"
+
+LilycoveCity_CoveLilyMotel_2F_Text_BuffelChallenge:
+	.string "I helped design battles where every role\n"
+	.string "hands momentum to the next.\p"
+	.string "Want to test one of my favorite teams?$"
+
+LilycoveCity_CoveLilyMotel_2F_Text_BuffelDefeat:
+	.string "You broke the redirect before the setup.$"
+
+LilycoveCity_CoveLilyMotel_2F_Text_BuffelAfter:
+	.string "The best battle is difficult, readable,\n"
+	.string "and different from the one before it.$"
+
+LilycoveCity_CoveLilyMotel_2F_Text_BuffelDecline:
+	.string "Come back when you want a designer's test.$"
 
 LilycoveCity_CoveLilyMotel_2F_Text_FilledPokedexGiveYouThis:
 	.string "Wow! That's awesome!\n"
@@ -132,4 +165,3 @@ LilycoveCity_CoveLilyMotel_2F_Text_ContestsDoTakeStrategy:
 	.string "to win a CONTEST.\p"
 	.string "Devising CONTEST strategies is one way\n"
 	.string "of becoming a better TRAINER, I'd say.$"
-

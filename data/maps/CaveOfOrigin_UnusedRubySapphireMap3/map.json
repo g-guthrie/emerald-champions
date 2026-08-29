@@ -27,8 +27,8 @@
       "x": 12,
       "y": 6,
       "elevation": 3,
-      "dest_map": "MAP_CAVE_OF_ORIGIN_B1F",
-      "dest_warp_id": "0"
+      "dest_map": "MAP_CAVE_OF_ORIGIN_DIANCIES_ROOM",
+      "dest_warp_id": 0
     }
   ],
   "coord_events": [],

@@ -25,15 +25,11 @@ DewfordTown_House2_EventScript_ExplainSilkScarf::
 DewfordTown_House2_EventScript_Boy::
 	msgbox DewfordTown_House2_Text_BrawlySoCool, MSGBOX_NPC
 	end
-
 DewfordTown_House2_Text_WantYouToHaveSilkScarf:
-	.string "Gorge your eyes on this!\p"
-	.string "It's a SILK SCARF. It's right at the\n"
-	.string "cutting edge of fashion, yeah!\p"
-	.string "Oh, I can see your eyes twinkling!\n"
-	.string "You appreciate my dazzling style!\p"
-	.string "Oh, you're a delight!\n"
-	.string "Here you go. I want you to have it!$"
+	.string "Gorge your eyes on this rare\n"
+	.string "REAPER CLOTH! Spooky, yet stylish!\p"
+	.string "You appreciate my dazzling taste.\n"
+	.string "Here, I want you to have it!$"
 
 DewfordTown_House2_Text_NoRoom:
 	.string "Oh, you don't have room?\p"

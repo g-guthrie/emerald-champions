@@ -1570,72 +1570,43 @@ SootopolisCity_Text_YouBroughtFlyingMon:
 	.string "Well, aren't you amazing!$"
 
 SootopolisCity_Text_GroudonPleaseStop:
-	.string "MAXIE: G… GROUDON…\n"
-	.string "Please! Stop what you're doing!\p"
-	.string "I know the extent of your power now!\p"
-	.string "If you keep going, all HOENN, not just\n"
-	.string "SOOTOPOLIS, will be utterly ruined!$"
+	.string "MAXIE: GROUDON, stop! I wanted land that\n"
+	.string "could sustain a future, not consume it.\p"
+	.string "My certainty left no room for yours.$"
 
 SootopolisCity_Text_AfterAllOurScheming:
-	.string "MAXIE: So the super-ancient POKéMON\n"
-	.string "weren't only GROUDON and KYOGRE…\p"
-	.string "After all our fruitless scheming and\n"
-	.string "frantic efforts, that one POKéMON's\l"
-	.string "simple action puts everything right\l"
-	.string "again as if nothing had happened…\p"
-	.string "Fu…\n"
-	.string "Fuhahaha…$"
+	.string "MAXIE: RAYQUAZA did not overpower both\n"
+	.string "rivals. It restored their relationship.\p"
+	.string "All our models optimized one side of a\n"
+	.string "system that could only live in balance.$"
 
 SootopolisCity_Text_KyogreCalmDown:
-	.string "ARCHIE: KYOGRE! What's wrong?!\n"
-	.string "Look over here! It's the RED ORB!\l"
-	.string "Calm down! KYOGRE!\p"
-	.string "… … … … … …\n"
-	.string "… … … … … …\p"
-	.string "It's no good!\n"
-	.string "It's not responding at all!$"
+	.string "ARCHIE: KYOGRE! I called this freedom,\n"
+	.string "but even the sea needs a shore.\p"
+	.string "The RED ORB cannot make you hear me.$"
 
 SootopolisCity_Text_TryingMeaninglessToPokemon:
-	.string "ARCHIE: KYOGRE and GROUDON both\n"
-	.string "flew off to who knows where.\p"
-	.string "The weather in HOENN has returned\n"
-	.string "to its normal state…\p"
-	.string "Haha…\n"
-	.string "Hahaha…\p"
-	.string "Maybe what we were trying to do was\n"
-	.string "something small, even meaningless,\l"
-	.string "to POKéMON…$"
+	.string "ARCHIE: Land, sea, and sky returned to\n"
+	.string "motion without belonging to any of us.\p"
+	.string "AQUA tried to free the world by choosing\n"
+	.string "its answer for it. That was control too.$"
 
 SootopolisCity_Text_InvolvedWithCrisisComeWithMe:
-	.string "STEVEN: Those POKéMON fighting…\n"
-	.string "GROUDON… And KYOGRE…\p"
-	.string "The two super-ancient POKéMON\n"
-	.string "were awakened from a long sleep…\p"
-	.string "And now they are smashing each other\n"
-	.string "with their uncontrollable energy…\p"
-	.string "…{PLAYER}{KUN}.\p"
-	.string "You being here now I'll take to mean\n"
-	.string "that you're prepared to become\l"
-	.string "involved in this crisis.\p"
-	.string "Well, then, there's someone that\n"
-	.string "I'd like you to meet.\p"
-	.string "Come with me, please.$"
+	.string "STEVEN: GROUDON and KYOGRE are pulling\n"
+	.string "every awakened SIGN toward this crater.\p"
+	.string "No battle team can defeat this weather.\n"
+	.string "The board itself must be restored.\p"
+	.string "You have solved that kind of problem all\n"
+	.string "across HOENN. Come meet WALLACE.$"
 
 SootopolisCity_Text_DoesThisMakeYourFearPokemon:
-	.string "STEVEN: Listen, {PLAYER}{KUN}.\p"
-	.string "Does seeing GROUDON and KYOGRE make\n"
-	.string "you think POKéMON are to be feared?\p"
-	.string "But that's not true.\n"
-	.string "POKéMON are really more…\p"
-	.string "…Why am I asking you this?\n"
-	.string "You already know.$"
+	.string "STEVEN: Power without relationship looks\n"
+	.string "terrifying. You already know the answer:\l"
+	.string "a partner is not a tool to command.$"
 
 SootopolisCity_Text_HereWereAreHelpWallace:
-	.string "STEVEN: Okay, here we are!\p"
-	.string "Inside here you'll find someone named\n"
-	.string "WALLACE.\p"
-	.string "I think you have what's needed to\n"
-	.string "help him…$"
+	.string "WALLACE knows HOENN's oldest balance\n"
+	.string "ritual. Share what the SIGNS taught you.$"
 
 SootopolisCity_Text_KnowWhatsNeededToHelpHim:
 	.string "STEVEN: I think you have what's\n"
@@ -1647,9 +1618,8 @@ SootopolisCity_Text_NeverBeenToSkyPillar:
 	.string "I wonder where it could be?$"
 
 SootopolisCity_Text_SoThatsRayquaza:
-	.string "STEVEN: So that's RAYQUAZA…\p"
-	.string "It's incredible how the two rampaging\n"
-	.string "POKéMON would flee from it in fear…$"
+	.string "STEVEN: RAYQUAZA did not make them flee.\n"
+	.string "It reminded land and sea of the whole.$"
 
 SootopolisCity_Text_MaxieArchieLeft:
 	.string "STEVEN: It looks like both MAXIE and\n"
@@ -1666,20 +1636,17 @@ SootopolisCity_Text_HaventYouScaledSkyPillar:
 	.string "the top of the SKY PILLAR…$"
 
 SootopolisCity_Text_AquaMagmaDidntMeanHarm:
-	.string "WALLACE: {PLAYER}{KUN}…\p"
-	.string "The leaders of TEAM MAGMA and AQUA,\n"
-	.string "I don't think they meant harm.\p"
-	.string "It wouldn't hurt to hear what they\n"
-	.string "have to say for themselves.$"
+	.string "WALLACE: MAXIE and ARCHIE caused this,\n"
+	.string "but both finally understand the cost.\p"
+	.string "Hear them. Accountability matters more\n"
+	.string "when the motive once sounded noble.$"
 
 SootopolisCity_Text_ThankYouForHelpAcceptThis:
-	.string "WALLACE: {PLAYER}{KUN}…\n"
-	.string "My eyes didn't deceive me.\p"
-	.string "Thanks to your help, SOOTOPOLIS…\n"
-	.string "No, all of HOENN was saved.\p"
-	.string "On behalf of the people, I thank you.\p"
-	.string "This is a gift from me.\n"
-	.string "Please accept it.$"
+	.string "WALLACE: You did not win by possessing\n"
+	.string "the strongest POKéMON in the crater.\p"
+	.string "You found the one relationship that made\n"
+	.string "every other action possible.\p"
+	.string "HOENN is safe. Please accept this.$"
 
 SootopolisCity_Text_ExplainWaterfallGoToGym:
 	.string "That HIDDEN MACHINE contains\n"
@@ -1695,6 +1662,5 @@ SootopolisCity_Text_ExplainWaterfallGoToGym:
 	.string "that door.$"
 
 SootopolisCity_Text_DazzledByMentor:
-	.string "WALLACE: I'm sure that you will be\n"
-	.string "dazzled by my mentor's breathtakingly\l"
-	.string "elegant battle style.$"
+	.string "WALLACE: JUAN's Gym is the final authored\n"
+	.string "test before the LEAGUE. Expect no mercy.$"

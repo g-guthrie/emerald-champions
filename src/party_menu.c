@@ -110,6 +110,10 @@ enum {
     MENU_CATALOG_MOWER,
     MENU_CHANGE_FORM,
     MENU_CHANGE_ABILITY,
+    MENU_OPEN_ABILITY,
+    MENU_ABILITY_SLOT_0,
+    MENU_ABILITY_SLOT_1,
+    MENU_ABILITY_SLOT_2,
     MENU_FIELD_MOVES
 };
 
@@ -185,7 +189,7 @@ struct PartyMenuInternal
     u32 spriteIdCancelPokeball:7;
     u32 messageId:14;
     u8 windowId[3];
-    u8 actions[8];
+    u8 actions[9];
     u8 numActions;
     // In vanilla Emerald, only the first 0xB0 hwords (0x160 bytes) are actually used.
     // However, a full 0x100 hwords (0x200 bytes) are allocated.
@@ -490,6 +494,12 @@ static void CursorCb_CatalogFan(u8);
 static void CursorCb_CatalogMower(u8);
 static void CursorCb_ChangeForm(u8);
 static void CursorCb_ChangeAbility(u8);
+static void CursorCb_OpenAbilityMenu(u8);
+static void CursorCb_AbilitySlot0(u8);
+static void CursorCb_AbilitySlot1(u8);
+static void CursorCb_AbilitySlot2(u8);
+static void Task_ConfirmAbilityChange(u8);
+static u8 CountSelectableAbilities(struct Pokemon *);
 void TryItemHoldFormChange(struct Pokemon *mon, s8 slotId, enum BattleTrainer trainer);
 static void ShowMoveSelectWindow(u8 slot);
 static void Task_HandleWhichMoveInput(u8 taskId);
@@ -515,6 +525,8 @@ static u8 IndividualToCombinedPartyId(u8 index, enum BattlerId battler);
 
 static const u8 sText_askText[] = _("Would you like to change {STR_VAR_1}'s\nability to {STR_VAR_2}?");
 static const u8 sText_doneText[] = _("{STR_VAR_1}'s ability became\n{STR_VAR_2}!{PAUSE_UNTIL_PRESS}");
+static const u8 sText_ChooseAbility[] = _("Which Ability should this Pokémon use?");
+static const u8 sText_AbilityAlreadyActive[] = _("{STR_VAR_1} already has\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_BasePointsResetToZero[] = _("{STR_VAR_1}'s base points\nwere all reset to zero!{PAUSE_UNTIL_PRESS}");
 static const u8 sText_CannotSendMonToBoxHM[] = _("Cannot send that mon to the box,\nbecause it knows a HM move.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_CannotSendMonToBoxPartner[] = _("Cannot send a mon that doesn't\nbelong to you to the box.{PAUSE_UNTIL_PRESS}");
@@ -2880,6 +2892,9 @@ static u8 DisplaySelectionWindow(u8 windowType)
     case SELECTWINDOW_ZYGARDECUBE:
         window = sZygardeCubeSelectWindowTemplate;
         break;
+    case SELECTWINDOW_ABILITY:
+        SetWindowTemplateFields(&window, 2, 13, 19 - (sPartyMenuInternal->numActions * 2), 16, sPartyMenuInternal->numActions * 2, 14, 0x2E9);
+        break;
     default: // SELECTWINDOW_MOVES
         window = sMoveSelectWindowTemplate;
         break;
@@ -2900,7 +2915,17 @@ static u8 DisplaySelectionWindow(u8 windowType)
         if (sPartyMenuInternal->actions[i] >= MENU_FIELD_MOVES)
             fontColorsId = 4;
 
-        if (sPartyMenuInternal->actions[i] >= MENU_FIELD_MOVES)
+        if (windowType == SELECTWINDOW_ABILITY
+         && sPartyMenuInternal->actions[i] >= MENU_ABILITY_SLOT_0
+         && sPartyMenuInternal->actions[i] <= MENU_ABILITY_SLOT_2)
+        {
+            struct Pokemon *mon = GetPartyMonFromPartyMenuId(gPartyMenu.slotId);
+            enum Species species = GetMonData(mon, MON_DATA_SPECIES);
+            u8 abilitySlot = sPartyMenuInternal->actions[i] - MENU_ABILITY_SLOT_0;
+
+            text = gAbilitiesInfo[GetAbilityBySpecies(species, abilitySlot)].name;
+        }
+        else if (sPartyMenuInternal->actions[i] >= MENU_FIELD_MOVES)
             text = GetMoveName(FieldMove_GetMoveId(sPartyMenuInternal->actions[i] - MENU_FIELD_MOVES));
         else
             text = sCursorOptions[sPartyMenuInternal->actions[i]].text;
@@ -2955,6 +2980,27 @@ static void SetPartyMonSelectionActions(struct Pokemon *mons, u8 slotId, u8 acti
     }
 }
 
+static u8 CountSelectableAbilities(struct Pokemon *mon)
+{
+    enum Species species = GetMonData(mon, MON_DATA_SPECIES);
+    enum Ability seen[NUM_ABILITY_SLOTS] = {ABILITY_NONE};
+    u8 count = 0;
+
+    for (u8 slot = 0; slot < NUM_ABILITY_SLOTS; slot++)
+    {
+        enum Ability ability = GetAbilityBySpecies(species, slot);
+        bool32 duplicate = FALSE;
+
+        if (ability == ABILITY_NONE)
+            continue;
+        for (u8 i = 0; i < count; i++)
+            duplicate |= seen[i] == ability;
+        if (!duplicate)
+            seen[count++] = ability;
+    }
+    return count;
+}
+
 static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
 {
     u8 i, j;
@@ -2980,6 +3026,8 @@ static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
 
     if (!InBattlePike())
     {
+        if (CountSelectableAbilities(&mons[slotId]) > 1)
+            AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_OPEN_ABILITY);
         if (GetMonData(&mons[1], MON_DATA_SPECIES) != SPECIES_NONE)
             AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_SWITCH);
         if (ItemIsMail(GetMonData(&mons[slotId], MON_DATA_HELD_ITEM)))
@@ -7120,6 +7168,135 @@ void TryItemHoldFormChange(struct Pokemon *mon, s8 slotId, enum BattleTrainer tr
 #undef tTargetSpecies
 #undef tAnimWait
 #undef tNextFunc
+
+#define tEcAbilityState data[0]
+#define tEcAbilitySlot  data[1]
+
+static void CursorCb_OpenAbilityMenu(u8 taskId)
+{
+    struct Pokemon *mon = GetPartyMonFromPartyMenuId(gPartyMenu.slotId);
+    enum Species species = GetMonData(mon, MON_DATA_SPECIES);
+    enum Ability seen[NUM_ABILITY_SLOTS] = {ABILITY_NONE};
+    u8 count = 0;
+
+    PlaySE(SE_SELECT);
+    PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);
+    PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
+    sPartyMenuInternal->numActions = 0;
+    for (u8 slot = 0; slot < NUM_ABILITY_SLOTS; slot++)
+    {
+        enum Ability ability = GetAbilityBySpecies(species, slot);
+        bool32 duplicate = FALSE;
+
+        if (ability == ABILITY_NONE)
+            continue;
+        for (u8 i = 0; i < count; i++)
+            duplicate |= seen[i] == ability;
+        if (duplicate)
+            continue;
+        seen[count++] = ability;
+        AppendToList(
+            sPartyMenuInternal->actions,
+            &sPartyMenuInternal->numActions,
+            MENU_ABILITY_SLOT_0 + slot);
+    }
+    AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_CANCEL2);
+    DisplaySelectionWindow(SELECTWINDOW_ABILITY);
+    DisplayPartyMenuMessage(sText_ChooseAbility, TRUE);
+    gTasks[taskId].data[0] = 0xFF;
+    gTasks[taskId].func = Task_HandleSelectionMenuInput;
+}
+
+static void BeginAbilityChange(u8 taskId, u8 abilitySlot)
+{
+    struct Pokemon *mon = GetPartyMonFromPartyMenuId(gPartyMenu.slotId);
+    enum Species species = GetMonData(mon, MON_DATA_SPECIES);
+    enum Ability ability = GetAbilityBySpecies(species, abilitySlot);
+
+    PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);
+    PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
+    GetMonNickname(mon, gStringVar1);
+    StringCopy(gStringVar2, gAbilitiesInfo[ability].name);
+    if (GetMonAbility(mon) == ability)
+    {
+        StringExpandPlaceholders(gStringVar4, sText_AbilityAlreadyActive);
+        DisplayPartyMenuMessage(gStringVar4, TRUE);
+        gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+        return;
+    }
+
+    StringExpandPlaceholders(gStringVar4, sText_askText);
+    DisplayPartyMenuMessage(gStringVar4, TRUE);
+    ScheduleBgCopyTilemapToVram(2);
+    gTasks[taskId].tEcAbilityState = 0;
+    gTasks[taskId].tEcAbilitySlot = abilitySlot;
+    gTasks[taskId].func = Task_ConfirmAbilityChange;
+}
+
+static void CursorCb_AbilitySlot0(u8 taskId)
+{
+    BeginAbilityChange(taskId, 0);
+}
+
+static void CursorCb_AbilitySlot1(u8 taskId)
+{
+    BeginAbilityChange(taskId, 1);
+}
+
+static void CursorCb_AbilitySlot2(u8 taskId)
+{
+    BeginAbilityChange(taskId, 2);
+}
+
+static void Task_ConfirmAbilityChange(u8 taskId)
+{
+    struct Pokemon *mon = GetPartyMonFromPartyMenuId(gPartyMenu.slotId);
+
+    switch (gTasks[taskId].tEcAbilityState)
+    {
+    case 0:
+        if (!IsPartyMenuTextPrinterActive())
+        {
+            PartyMenuDisplayYesNoMenu();
+            gTasks[taskId].tEcAbilityState++;
+        }
+        break;
+    case 1:
+        switch (Menu_ProcessInputNoWrapClearOnChoose())
+        {
+        case 0:
+        {
+            u8 abilitySlot = gTasks[taskId].tEcAbilitySlot;
+
+            SetMonData(mon, MON_DATA_ABILITY_NUM, &abilitySlot);
+            GetMonNickname(mon, gStringVar1);
+            StringCopy(gStringVar2, gAbilitiesInfo[GetMonAbility(mon)].name);
+            StringExpandPlaceholders(gStringVar4, sText_doneText);
+            PlaySE(SE_USE_ITEM);
+            DisplayPartyMenuMessage(gStringVar4, TRUE);
+            ScheduleBgCopyTilemapToVram(2);
+            gTasks[taskId].tEcAbilityState++;
+            break;
+        }
+        case 1:
+        case MENU_B_PRESSED:
+            PlaySE(SE_SELECT);
+            ClearStdWindowAndFrameToTransparent(WIN_MSG, FALSE);
+            ClearWindowTilemap(WIN_MSG);
+            DisplayPartyMenuStdMessage(PARTY_MSG_CHOOSE_MON);
+            gTasks[taskId].func = Task_HandleChooseMonInput;
+            break;
+        }
+        break;
+    case 2:
+        if (!IsPartyMenuTextPrinterActive())
+            gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+        break;
+    }
+}
+
+#undef tEcAbilityState
+#undef tEcAbilitySlot
 
 enum ItemEffectType GetItemEffectType(enum Item item)
 {

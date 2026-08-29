@@ -509,7 +509,14 @@ gSpecials::
 	def_special GetAbnormalWeatherMapNameAndType
 	def_special GetMartEmployeeObjectEventId
 	def_special OpenEmeraldChampionsBattleItemMart
+	def_special OpenEmeraldChampionsOffenseItemMart
+	def_special OpenEmeraldChampionsDefenseItemMart
+	def_special OpenEmeraldChampionsFieldItemMart
+	def_special OpenEmeraldChampionsTypeItemMart
+	def_special OpenEmeraldChampionsGemItemMart
+	def_special OpenEmeraldChampionsSpeciesItemMart
 	def_special OpenEmeraldChampionsMegaStoneArchive
+	def_special OpenEmeraldChampionsEvolutionItemArchive
 	def_special ApplySelectedMonEmeraldChampionsBattleSet
 	def_special GetSelectedMonEmeraldChampionsBattleSetCount
 	def_special BufferSelectedMonEmeraldChampionsBattleSetName
@@ -518,6 +525,8 @@ gSpecials::
 	def_special ShouldShowSelectedLegendarySignObject
 	def_special GetSelectedLegendarySignLevel
 	def_special CreateSelectedLegendarySignEncounter
+	def_special CreateEmeraldChampionsStaticLegendaryEncounter
+	def_special DoesPlayerPartyHaveSelectedSpeciesFamily
 	def_special BufferCurrentMapRouteSignSpecies
 	def_special TryUnlockDarkraiLegendarySign
 	def_special TryDiscoverEligibleLegendarySign

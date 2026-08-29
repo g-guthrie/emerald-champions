@@ -27,7 +27,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_CaptStern::
 	waitmovement 0
 	call_if_eq VAR_FACING, DIR_SOUTH, SlateportCity_OceanicMuseum_2F_EventScript_PlayerApproachGruntSouth
 	call_if_eq VAR_FACING, DIR_WEST, SlateportCity_OceanicMuseum_2F_EventScript_PlayerApproachGruntWest
-	trainerbattle_no_intro TRAINER_GRUNT_MUSEUM_1, SlateportCity_OceanicMuseum_2F_Text_Grunt1Defeat
+	trainerbattle_no_intro_double TRAINER_GRUNT_MUSEUM_1, SlateportCity_OceanicMuseum_2F_Text_Grunt1Defeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox SlateportCity_OceanicMuseum_2F_Text_BossGoingToBeFurious, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_OCEANIC_MUSEUM_2F_GRUNT_2, SlateportCity_OceanicMuseum_2F_Movement_GruntDefeated
@@ -35,7 +35,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_CaptStern::
 	applymovement LOCALID_OCEANIC_MUSEUM_2F_GRUNT_1, SlateportCity_OceanicMuseum_2F_Movement_GruntApproachToBattle
 	waitmovement 0
 	msgbox SlateportCity_OceanicMuseum_2F_Text_LetMeTakeCareOfThis, MSGBOX_DEFAULT
-	trainerbattle_no_intro TRAINER_GRUNT_MUSEUM_2, SlateportCity_OceanicMuseum_2F_Text_Grunt2Defeat
+	trainerbattle_no_intro_double TRAINER_GRUNT_MUSEUM_2, SlateportCity_OceanicMuseum_2F_Text_Grunt2Defeat, EmeraldChampions_Text_NeedTwoPokemon
 	applymovement LOCALID_OCEANIC_MUSEUM_2F_GRUNT_1, SlateportCity_OceanicMuseum_2F_Movement_GruntDefeated
 	waitmovement 0
 	applymovement LOCALID_OCEANIC_MUSEUM_2F_GRUNT_1, Common_Movement_WalkInPlaceFasterDown
@@ -53,7 +53,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_CaptStern::
 	applymovement LOCALID_OCEANIC_MUSEUM_2F_ARCHIE, SlateportCity_OceanicMuseum_2F_Movement_ArchieApproachPlayer
 	waitmovement 0
 	msgbox SlateportCity_OceanicMuseum_2F_Text_ArchieWarning, MSGBOX_DEFAULT
-	trainerbattle_no_intro TRAINER_ARCHIE_SLATEPORT, SlateportCity_OceanicMuseum_2F_Text_ArchieDefeat
+	trainerbattle_no_intro_double TRAINER_ARCHIE_SLATEPORT, SlateportCity_OceanicMuseum_2F_Text_ArchieDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox SlateportCity_OceanicMuseum_2F_Text_ArchieDefeated, MSGBOX_DEFAULT
 	closemessage
 	savebgm MUS_DUMMY
@@ -271,12 +271,10 @@ SlateportCity_OceanicMuseum_2F_EventScript_MuseumPatron3::
 	end
 
 SlateportCity_OceanicMuseum_2F_Text_ThankYouForTheParts:
-	.string "Yes? If you're looking for STERN,\n"
-	.string "that would be me.\p"
-	.string "Ah! Those must be the parts I ordered\n"
-	.string "from MR. STONE of DEVON.\p"
-	.string "Thank you! That's great!\n"
-	.string "We can prepare for our expedition now.$"
+	.string "I'm STERN. Those DEVON parts will let\n"
+	.string "us map pressure beneath the seafloor.\p"
+	.string "The tides have shifted since strange\n"
+	.string "marks began shining across HOENN.$"
 
 SlateportCity_OceanicMuseum_2F_Text_WellTakeThoseParts:
 	.string "Hehehe, hold it!\n"
@@ -287,9 +285,8 @@ SlateportCity_OceanicMuseum_2F_Text_SternWhoAreYou:
 	.string "Who are you people?$"
 
 SlateportCity_OceanicMuseum_2F_Text_WereTeamAqua:
-	.string "We're TEAM AQUA!\p"
-	.string "Our BOSS wants those parts!\n"
-	.string "Shut your yap and fork them over!$"
+	.string "We're TEAM AQUA! Those parts belong to\n"
+	.string "the people who understand the sea!$"
 
 SlateportCity_OceanicMuseum_2F_Text_Grunt1Defeat:
 	.string "Awaaaah!\n"
@@ -314,64 +311,41 @@ SlateportCity_OceanicMuseum_2F_Text_MeddlingKid:
 	.string "with by some meddling kid!$"
 
 SlateportCity_OceanicMuseum_2F_Text_CameToSeeWhatsTakingSoLong:
-	.string "I came to see what was taking so\n"
-	.string "long to snatch some parts, and you\l"
-	.string "simps are held up by a mere child?$"
+	.string "Two trained crews, stopped by one new\n"
+	.string "Trainer? Then I will test you myself.$"
 
 SlateportCity_OceanicMuseum_2F_Text_ArchieWarning:
-	.string "We are TEAM AQUA,\n"
-	.string "and we love the sea!\p"
-	.string "And I am TEAM AQUA's leader,\n"
-	.string "ARCHIE!\p"
-	.string "What makes you interfere with us?\p"
-	.string "…No! You can't be!\n"
-	.string "You're not one of TEAM MAGMA?\p"
-	.string "Wait, that can't be right.\n"
-	.string "You're not dressed for the part.\p"
-	.string "… … … … … …\n"
-	.string "… … … … … …\p"
-	.string "POKéMON, people… All life depends on\n"
-	.string "the sea.\p"
-	.string "So, TEAM AQUA is dedicated to\n"
-	.string "the expansion of the sea.\p"
-	.string "Don't you agree? What we are doing\n"
-	.string "is a magnificent undertaking.\p"
-	.string "Ah, fine…\n"
-	.string "You're still too young to understand\l"
-	.string "our noble objective.\p"
-	.string "But, I warn you, don't even consider\n"
-	.string "interfering with our plans again.\p"
-	.string "The consequences will cost you\n"
-	.string "dearly!\p"
-	.string "And don't you forget it!$"
+	.string "I'm ARCHIE, leader of TEAM AQUA.\p"
+	.string "Land divides life into borders. The sea\n"
+	.string "connects it, changes it, sets it free.\p"
+	.string "STERN's parts can trace the deep current\n"
+	.string "that is waking HOENN's ancient marks.\p"
+	.string "MAXIE wants to lock that power beneath\n"
+	.string "more land. I intend to let it flow.\p"
+	.string "You already beat my crews, so no empty\n"
+	.string "threat: show me your answer in battle.$"
 
 SlateportCity_OceanicMuseum_2F_Text_ArchieDefeat:
 	.string "What?! You broke every handoff\n"
 	.string "and stopped my advance?$"
 
 SlateportCity_OceanicMuseum_2F_Text_ArchieDefeated:
-	.string "Ah, whatever. You can keep the parts\n"
-	.string "for the time being.\p"
-	.string "This was only AQUA's first heist!\n"
-	.string "Our complete plan will prevail!$"
+	.string "You changed course faster than I did.\n"
+	.string "Good. Keep the parts for now.\p"
+	.string "AQUA will find the current without them.\n"
+	.string "When we meet again, the sea will answer.$"
 
 SlateportCity_OceanicMuseum_2F_Text_SternThankYouForSavingUs:
-	.string "CAPT. STERN: You're…\n"
-	.string "Ah, okay, you're {PLAYER}{KUN}…\p"
-	.string "Anyway, that was a tense situation!\n"
-	.string "Thank you for saving us!\p"
-	.string "Oh, yes, I almost forgot that you\n"
-	.string "even brought the parts from DEVON!$"
+	.string "STERN: {PLAYER}, you protected us and\n"
+	.string "proved ARCHIE can be beaten. Thank you.\p"
+	.string "These parts may reveal why the ocean\n"
+	.string "and the CHAMPION'S SIGNS move together.$"
 
 SlateportCity_OceanicMuseum_2F_Text_SternIveGotToGo:
-	.string "CAPT. STERN: Whoops!\n"
-	.string "There's no time to lose!\p"
-	.string "We have to set out on our ocean-floor\n"
-	.string "expedition really soon.\p"
-	.string "Thanks again, but now I've got\n"
-	.string "to go!\p"
-	.string "Feel free to wander around and check\n"
-	.string "out our facilities, though.$"
+	.string "We sail immediately. If AQUA reaches the\n"
+	.string "seafloor first, this becomes a race.\p"
+	.string "Study the exhibits. HOENN's old balance\n"
+	.string "is written in land, sea, and sky.$"
 
 SlateportCity_OceanicMuseum_2F_Text_RemindsMeOfAbandonedShip:
 	.string "I saw a model of a ship here.\p"

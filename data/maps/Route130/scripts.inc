@@ -39,12 +39,12 @@ Route130_EventScript_Rodney::
 	end
 
 Route130_EventScript_Katie::
-	trainerbattle_single TRAINER_KATIE, Route130_Text_KatieIntro, Route130_Text_KatieDefeat
+	trainerbattle_double TRAINER_KATIE, Route130_Text_KatieIntro, Route130_Text_KatieDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route130_Text_KatiePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route130_EventScript_Santiago::
-	trainerbattle_single TRAINER_SANTIAGO, Route130_Text_SantiagoIntro, Route130_Text_SantiagoDefeat
+	trainerbattle_double TRAINER_SANTIAGO, Route130_Text_SantiagoIntro, Route130_Text_SantiagoDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route130_Text_SantiagoPostBattle, MSGBOX_AUTOCLOSE
 	end
 

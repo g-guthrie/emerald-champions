@@ -18,7 +18,7 @@ MtPyre_2F_EventScript_PokefanM::
 	end
 
 MtPyre_2F_EventScript_Mark::
-	trainerbattle_single TRAINER_MARK, MtPyre_2F_Text_MarkIntro, MtPyre_2F_Text_MarkDefeat
+	trainerbattle_double TRAINER_MARK, MtPyre_2F_Text_MarkIntro, MtPyre_2F_Text_MarkDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox MtPyre_2F_Text_MarkPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -33,12 +33,12 @@ MtPyre_2F_EventScript_Dez::
 	end
 
 MtPyre_2F_EventScript_Leah::
-	trainerbattle_single TRAINER_LEAH, MtPyre_2F_Text_LeahIntro, MtPyre_2F_Text_LeahDefeat
+	trainerbattle_double TRAINER_LEAH, MtPyre_2F_Text_LeahIntro, MtPyre_2F_Text_LeahDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox MtPyre_2F_Text_LeahPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 MtPyre_2F_EventScript_Zander::
-	trainerbattle_single TRAINER_ZANDER, MtPyre_2F_Text_ZanderIntro, MtPyre_2F_Text_ZanderDefeat
+	trainerbattle_double TRAINER_ZANDER, MtPyre_2F_Text_ZanderIntro, MtPyre_2F_Text_ZanderDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox MtPyre_2F_Text_ZanderPostBattle, MSGBOX_AUTOCLOSE
 	end
 

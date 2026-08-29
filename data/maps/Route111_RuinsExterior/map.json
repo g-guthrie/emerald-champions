@@ -1,0 +1,70 @@
+{
+  "id": "MAP_ROUTE111_RUINS_EXTERIOR",
+  "name": "Route111_RuinsExterior",
+  "layout": "LAYOUT_ROUTE111_RUINS_EXTERIOR",
+  "music": "MUS_ROUTE110",
+  "region_map_section": "MAPSEC_ROUTE_111",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_ROUTE",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": 0,
+  "object_events": [
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 10,
+      "y": 22,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_MEDICHAMITE",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_EC_ITEM_RUINS_MEDICHAMITE"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(LANDORUS)",
+      "x": 10,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route111_RuinsExterior_EventScript_Landorus",
+      "flag": "FLAG_EC_CAUGHT_LANDORUS",
+      "local_id": "LOCALID_EC_LANDORUS"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_MANIAC",
+      "x": 8,
+      "y": 20,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route111_RuinsExterior_EventScript_Archaeologist",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 13,
+      "y": 11,
+      "elevation": 0,
+      "dest_map": "MAP_SANDSTREWN_RUINS_3F",
+      "dest_warp_id": 1
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [],
+  "region": "REGION_HOENN"
+}

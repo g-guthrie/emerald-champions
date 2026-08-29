@@ -59,36 +59,36 @@ Route133_Text_VialChansey:
 	.string "Chansey!$"
 
 Route133_EventScript_Franklin::
-	trainerbattle_single TRAINER_FRANKLIN, Route133_Text_FranklinIntro, Route133_Text_FranklinDefeat
+	trainerbattle_double TRAINER_FRANKLIN, Route133_Text_FranklinIntro, Route133_Text_FranklinDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route133_Text_FranklinPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route133_EventScript_Debra::
-	trainerbattle_single TRAINER_DEBRA, Route133_Text_DebraIntro, Route133_Text_DebraDefeat
+	trainerbattle_double TRAINER_DEBRA, Route133_Text_DebraIntro, Route133_Text_DebraDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route133_Text_DebraPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route133_EventScript_Linda::
-	trainerbattle_single TRAINER_LINDA, Route133_Text_LindaIntro, Route133_Text_LindaDefeat
+	trainerbattle_double TRAINER_LINDA, Route133_Text_LindaIntro, Route133_Text_LindaDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route133_Text_LindaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route133_EventScript_Warren::
-	trainerbattle_single TRAINER_WARREN, Route133_Text_WarrenIntro, Route133_Text_WarrenDefeat
+	trainerbattle_double TRAINER_WARREN, Route133_Text_WarrenIntro, Route133_Text_WarrenDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route133_Text_WarrenPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route133_EventScript_Beck::
-	trainerbattle_single TRAINER_BECK, Route133_Text_BeckIntro, Route133_Text_BeckDefeat
+	trainerbattle_double TRAINER_BECK, Route133_Text_BeckIntro, Route133_Text_BeckDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route133_Text_BeckPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route133_EventScript_Mollie::
-	trainerbattle_single TRAINER_MOLLIE, Route133_Text_MollieIntro, Route133_Text_MollieDefeat
+	trainerbattle_double TRAINER_MOLLIE, Route133_Text_MollieIntro, Route133_Text_MollieDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route133_Text_MolliePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route133_EventScript_Conor::
-	trainerbattle_single TRAINER_CONOR, Route133_Text_ConorIntro, Route133_Text_ConorDefeat
+	trainerbattle_double TRAINER_CONOR, Route133_Text_ConorIntro, Route133_Text_ConorDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route133_Text_ConorPostBattle, MSGBOX_AUTOCLOSE
 	end

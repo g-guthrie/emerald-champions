@@ -1,103 +1,90 @@
-# Emerald Champions feature-parity ledger
+# Emerald Champions release-candidate ledger
 
-This ledger compares the preserved playable campaign at
-`33202c162ebc34a1dbe2000acd26b0720baa109d` with the modern Champions branch.
-An item is complete only when its source, build, regression, and representative
-emulator path are closed. File presence alone is not parity.
-
-Status values are `COMPLETE`, `PARTIAL`, `MISSING`, and `BLOCKED`.
+This ledger records measurable source and runtime closure for the standalone
+GBA ROM. `COMPLETE` means the implementation, deterministic verifier, clean
+production build, and relevant mGBA regression path are closed. `MANUAL` means
+the code is release-ready but still needs human campaign playtesting.
 
 ## Foundation
 
-| Feature | Preserved evidence | Modern status | Completion gate |
-| --- | --- | --- | --- |
-| Champions battle rules | New migration requirement | COMPLETE | 40/40 selected Champions regressions pass |
-| All families and forms through Gen 9 | Curated subset in old ROM | COMPLETE | Modern expansion constants, data, graphics, icons, and cries compile |
-| Official modern Mega roster | Hand-ported subset in old ROM | COMPLETE | Modern expansion Mega data and art compile |
-| Custom Mega Tatsugiri and Glimmora | Old custom species, stones, art, and Commander presentation | PARTIAL | Preserve extension data; add legality, graphics, AI, faint/revive, and Commander tests |
-| Mega-only selectable gimmick | Old campaign configuration | PARTIAL | Disable Z-Moves, Dynamax, Terastallization, and Ultra Burst in every player and trainer path; retain approved Primals |
-| Strict cap curve | Old cap implementation and `src/caps.c` | PARTIAL | Cap values compile and every badge transition, Rare Candy, Leveler, Day Care, and postgame sentinel is tested |
-| Instant text | Old option replacement | COMPLETE | Native instant text is forced in the modern configuration |
-| Save layout and migration | Old Inclement-derived save blocks | PARTIAL | Compatibility boundary and stable modern state slots are documented; new game, save, reload, power-cycle, and build-update tests remain |
-
-## Player preparation and economy
-
-| Feature | Preserved evidence | Modern status | Completion gate |
-| --- | --- | --- | --- |
-| Live Hard/Medium/Easy setting | `fb8dfaaa190` | COMPLETE | Native Options row; Hard 0, Medium -2, Easy -4 enemy levels; allies unchanged |
-| Poke Vial | Preserved campaign scripts and item behavior | PARTIAL | Granted and refillable; remaining capacity-upgrade and emulator paths must close |
-| Reusable party Leveler | `476951be145` | PARTIAL | Source/build path is complete; evolution-chain emulator testing remains |
-| No level-up move interruption | Preserved battle-ready workflow | COMPLETE | Bulk leveling never opens move-learning prompts; tutor remains complete |
-| Legal move tutor from game start | Preserved Pokemon Center tutor | PARTIAL | All native legal move categories are ungated in every Center; competitive preset selector remains |
-| Multiple competitive presets | `0c7b185494f` plus authored handbook corpus | PARTIAL | 1,309 sets execute with full Champions fields; all newly obtainable modern species and emulator UI paths remain |
-| Battle-ready ordinary wild catches | `78e3716e353` and `712da9a722a` | PARTIAL | All 222 current wild-table species are covered; final redistributed tables and capture runtime paths remain |
-| Protected progression items | Preserved Mega/progression exclusions | PARTIAL | Services block protected items and never gift Mega Stones; final evolution-item and reward audit remains |
-| Free Pokemon Center battle vendor | Preserved economy contract | PARTIAL | Free non-Berry/non-progression vendor is in all 16 Centers; category UX and final policy audit remain |
-| Berry economy retained | Preserved economy contract | PARTIAL | Free vendor excludes Berries and presets may attach them; final tree, pickup, and reward audit remains |
-| Normal Mart progression plus Rare Candy | Preserved reward/economy rewrite | COMPLETE | Native Mart progression is unchanged and every Hoenn medicine list sells the 1,000 ten-level Rare Candy |
-| Consumable held-item restoration | Preserved loadout restoration | PARTIAL | Champions restoration now includes Berries and captures; theft, Knock Off, and Frontier runtime fixtures remain |
-| Reward and pickup rewrite | `0b2bc96c7d6` | MISSING | No reward is redundant with free moves/items; every removed TM/item has a coherent replacement |
-| Trade and held-item evolutions | Preserved Inclement solutions | MISSING | Every enabled species has an obtainable native evolution method and required nonbattle item |
-
-## Campaign, encounters, and endgame
-
-| Feature | Preserved evidence | Modern status | Completion gate |
-| --- | --- | --- | --- |
-| Emerald Champions branding and title | `06d3882095f` | MISSING | Title, intro, credits, save metadata, UI strings, and ROM header contain no Verdant/Inclement branding |
-| Wild encounter distribution | Preserved availability report and tables | MISSING | Every ordinary species has a deliberate acquisition path; bespoke species are not duplicated casually |
-| Route-sign encounter lists | `f2f9fa3e962` and later fixes | MISSING | Signs list methods and species without false percentages or broken pagination |
-| Story/reward cohesion | `3701ae0c046` and `0b2bc96c7d6` | MISSING | Required flags, gifts, shops, tutorials, dialogue, and one-time progression remain reachable and meaningful |
-| Match Call and Gym rematch escalation | Vanilla infrastructure plus old rematch families | COMPLETE | Match Call contacts may remain for flavor, but no trainer can request or launch an escalated rematch; League replays reuse the finished League teams |
-| Legendary Signs | `d38f0f470f1` and `88805ebfccf` | PARTIAL | All 53 source paths compile and static gates pass; discovery, catch, reload, and mastery emulator paths remain |
-| Visible legendary encounters | Preserved prototype and final maps/scripts | PARTIAL | Native Darkrai, Cresselia, and Dialga objects/scripts compile; catch, loss, reload, and duplicate-prevention emulator paths remain |
-| Legendary mastery reward | Preserved Arceus path | PARTIAL | Source count and level clamp pass; full acquisition and no-room runtime cases remain |
-| Champions Circuit | Preserved concept plus pinned Showdown Champions generator | PARTIAL | Live 311-variant/444-template Showdown port, dedicated state, scaling, and rewards compile; multi-seed and full-run runtime gates remain |
-| Native Battle Frontier | Preserved Frontier plus Circuit design | PARTIAL | Upstream facilities and new Circuit compile; every facility and Frontier Brain must still be completed under Champions mechanics |
-
-## Trainers, AI, dialogue, and design source
-
-| Feature | Preserved evidence | Modern status | Completion gate |
-| --- | --- | --- | --- |
-| Physical encounter index | Legacy master: 522 groups / 808 branches including rematches | MISSING | Regenerated from modern maps and scripts with every first-time required, optional, pair, story branch, and postgame invocation; Match Call/Gym rematch tiers excluded |
-| Previously authored first encounters | Preserved trainer sources and checkpoint | MISSING | Retained first-time designs are revalidated under Champions legality and implemented in modern trainer format |
-| Remaining first encounters | Preserved source baselines | MISSING | Every retained branch has exact team, format, levels, items, moves, ability, Stat Points, AI, dialogue intent, and difficulty |
-| Approximately 85 percent doubles | New completion requirement | MISSING | Reachable trainer-branch report is 83-87 percent doubles; intentional singles are documented |
-| Ordinary-trainer fatigue distribution | Master provisional bands | MISSING | Ordinary encounters approximate 30% at 6.0-6.9, 35% at 7.0-7.9, 25% at 8.0-8.9, and no more than 10% at 9.0-9.5 |
-| Boss difficulty | Preserved anchor dossiers | MISSING | Gyms, rivals, factions, League, champion, Brains, and superbosses retain bespoke near-maximum designs |
-| Species and strategy diversity | Preserved usage/reservation ledgers | MISSING | Repetition audit protects rarity, legendary coverage, all Megas, and rolling tactical variety without quota-forced teams |
-| Doubles-aware AI | Preserved custom AI plus modern AI | PARTIAL | Partner targeting, spread moves, redirection, Protect, speed control, weather, terrain, setup, switching, Mega, and trainer-specific scripts pass fixtures |
-| Trainer dialogue | Preserved rewrites through implemented range | MISSING | Every edited battle has pre/post/rematch text consistent with format, team identity, story, and GBA width limits |
-| Master encounter document | Legacy document authored through Battle 203 | MISSING | The rematch-free campaign is reindexed, fully reauthored against final Champions data, globally audited, then source-locked to implementation |
-
-## Packaging and runtime
-
-| Feature | Modern status | Completion gate |
+| Feature | Status | Evidence |
 | --- | --- | --- |
-| Clean standalone ROM | PARTIAL | Release build, header, checksum, memory report, and mGBA/Miyoo-compatible boot smoke test |
-| Full playthrough readiness | MISSING | Automated progression audit plus representative saves at every badge, faction gate, League, and postgame |
-| Web integration | MISSING | New ROM is packaged into the preserved interface and native/cloud saves survive compatible ROM updates |
-| Release checkpoint | MISSING | Clean Git state, no unreviewed generated drift, packaged artifacts, and final parity report |
+| Champions battle standard | COMPLETE | 57 Champions-named mechanics tests pass |
+| Species/forms through Gen 9 | COMPLETE | Modern expansion data and assets build in the 32 MiB ROM |
+| Official and custom Megas | COMPLETE | All 92 stones appear in the campaign battle master; Tatsugiri/Glimmora asset tests pass |
+| Mega-only selectable gimmick | COMPLETE | Mega allowed; Z-Move, Ultra Burst, Dynamax, and Tera rejected; approved Primals retained |
+| Strict cap curve | COMPLETE | Every badge milestone and postgame cap passes runtime tests |
+| Instant text and live difficulty | COMPLETE | Hard 0, Medium -2, Easy -4; enemy parties only |
+| Modern save layout | COMPLETE | SaveBlock1/2/3 compatibility tests pass; state IDs are unique |
+| Old Inclement-derived saves | UNSUPPORTED | Deliberate save-family boundary documented in `SAVE_COMPATIBILITY.md` |
 
-## Current truth
+## Preparation and economy
 
-This checkpoint has a proven Champions battle foundation and a fully authored
-campaign battle source, but it is not the final rebuilt campaign.
+| Feature | Status | Evidence |
+| --- | --- | --- |
+| Poke Vial and capacity quest | COMPLETE | Native four-map Chansey chase and Route 133 third charge verified |
+| Reusable Leveler and ten-level Candy | COMPLETE | Strict-cap behavior, no move interruption, all medicine marts verified |
+| Complete legal move tutor | COMPLETE | Level, pre-evolution, egg, TM, and tutor sources enabled from the start |
+| Competitive preset selector | COMPLETE | 1,461 executable presets; exact nature, Ability, item, moves, and 66 Stat Points |
+| Battle-ready ordinary wild catches | COMPLETE | Every one of 613 current wild species and every valid ordinary form resolves to a preset |
+| Native Ability switching | COMPLETE | Party-menu action enumerates unique legal abilities |
+| Free held-item vendor | COMPLETE | Six categories, 111 ordinary items, all 16 Centers |
+| Berry/progression economy | COMPLETE | Berries and transformation items excluded; Mega/evolution archives unlock at badge eight |
+| Mart and reward progression | COMPLETE | Native Mart stock retained, 1,000 Candy added, 47 rewards plus all TM pickups audited |
+| Single-player evolutions | COMPLETE | 30 trade evolutions and all required evolution items verified |
 
-- The canonical master contains 509 rematch-free physical encounters and 557
-  explicit trainer branches; 84.92 percent are doubles.
-- All 557 parties are present in `trainers.party` with exact species, items,
-  abilities, natures, Stat Points, legal moves, levels, and difficulty-tier AI.
-- All 543 trainer IDs already reachable in the modern Hoenn source are wired.
-- Fourteen disabled rematch slots were safely repurposed for selected one-time
-  bespoke encounters without changing the save layout. Six are currently wired
-  on retained maps; eight remain explicitly planned rather than falsely closed.
-- The Champions Circuit generates teams live from the pinned Showdown
-  Champions random-doubles corpus (311 variants, 444 role templates); it is not
-  a finite seeded-team list.
-- The next campaign phase restores the 22 missing Inclement-era map directories
-  as coherent side-area clusters, then rewrites story, dialogue, rewards, wild
-  availability, and Legendary Sign discovery around the expanded geography.
+## Campaign, story, and encounters
 
-No remaining `PARTIAL` or `MISSING` row should be promoted merely because a
-similarly named facility or source file exists. Runtime and playthrough gates
-still control release status.
+| Feature | Status | Evidence |
+| --- | --- | --- |
+| Emerald Champions branding | COMPLETE | ROM title `EM CHAMPIONS`, game code `BPEE`; obsolete player-facing branding rejected |
+| Restored side areas | COMPLETE | 22 maps, 129 objects, 40 pickups, 21 wild tables, directed reachability pass |
+| Wild distribution and route signs | COMPLETE | 602 unique wild species; 89 early species; 32 method-grouped signs |
+| Story/reward cohesion | COMPLETE | Magma/Aqua-Rayquaza-Wallace-Frontier arc preserved; restored areas and Signs discoverable |
+| Legendary acquisition | COMPLETE | 101 legendary-class families rooted; all 81 dependency chains terminate |
+| Visible legendary presentation | COMPLETE | 23 visible quests, four static sanctuaries, giant Regigigas, native follower assets |
+| Regional starter selection | COMPLETE | Nine trios, 81 starter-stage presets, rival counter family verified |
+| Rematch-free campaign | COMPLETE | Match Call/Gym escalation disabled; replayable League keeps final teams |
+
+## Trainers, battles, dialogue, and AI
+
+| Feature | Status | Evidence |
+| --- | --- | --- |
+| Canonical encounter index | COMPLETE | 513 physical encounters and 561 reachable branches |
+| Materialized trainer parties | COMPLETE | Every branch source-locks exactly to `trainers.party` |
+| Battle format | COMPLETE | 84 singles, 475 doubles, 2 multi; 85.03 percent doubles/multi |
+| Fatigue curve | COMPLETE | Mean 7.56; 31.9 percent ordinary 6.x encounters; no ordinary 9.x compression |
+| Boss and showcase coverage | COMPLETE | All marquee bosses at 10.0; all 92 Megas and 58 targeted legendary showcases used |
+| Team diversity | COMPLETE | 751 unique species, no duplicate team fingerprints, rolling-repeat gate passes |
+| Trainer Bag rules | COMPLETE | No campaign trainer carries healing inventory; player Bag disabled in trainer battles |
+| Trainer dialogue/layout | COMPLETE | 10,471 dialogue lines fit the native 216 px window; stale party references rejected |
+| Doubles AI | COMPLETE | Core Champions, Commander, multi, Mega, status, viability, Circuit, and 56 doubles-AI fixtures pass; two upstream fixtures remain explicitly known-failing; harmful friendly fire is corrected |
+
+## Frontier and packaging
+
+| Feature | Status | Evidence |
+| --- | --- | --- |
+| Live Showdown Champions Circuit | COMPLETE | 311 variants, 444 templates, sixteen seeded teams and exact party restoration pass |
+| Native Battle Frontier | MANUAL | Original facilities remain available beside the Circuit and compile under Champions rules; full facility streaks need playtesting |
+| Standalone ROM | COMPLETE | Clean 32 MiB build, valid header/checksum, 80.45% ROM, 86.77% EWRAM, 86.58% IWRAM |
+| Headless emulator boot | COMPLETE | Production ROM reaches the first BIOS/VBlank boundary with exit 0 |
+| Full human campaign playthrough | MANUAL | Automated progression and runtime gates pass; balance and late-story feel require human playtesting |
+| Hosted web ROM/cloud save | OUT OF SCOPE | Separate deployment project; do not infer deployment from this standalone build |
+| GitHub publication | NOT REQUESTED | Branch remains local until the user explicitly asks to push |
+
+## Current release candidate
+
+- ROM: `pokeemerald.gba`
+- SHA-256:
+  `d5a9a17ce23a00c449b84b2b28e983107f862adfa0c3427df01913e94aefa008`
+- Consolidated release verifier: PASS
+- Emerald Champions custom tests: 14 passed, 0 failed
+- Champions Circuit tests: 3 passed, 0 failed
+- All Champions-named tests: 57 passed, 0 failed
+- Commander tests: 41 passed, 0 failed
+- Save-layout tests: 4 passed, 0 failed
+- Doubles AI tests: 56 passed, 0 unexpected failed, 2 known-failing
+
+This is a standalone-ROM release candidate. The remaining work is playtest
+feedback and any explicitly requested deployment/publication, not missing
+campaign source.

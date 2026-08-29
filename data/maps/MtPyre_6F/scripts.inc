@@ -2,7 +2,7 @@ MtPyre_6F_MapScripts::
 	.byte 0
 
 MtPyre_6F_EventScript_Valerie::
-	trainerbattle_single TRAINER_VALERIE_1, MtPyre_6F_Text_ValerieIntro, MtPyre_6F_Text_ValerieDefeat, MtPyre_6F_EventScript_RegisterValerie
+	trainerbattle_double TRAINER_VALERIE_1, MtPyre_6F_Text_ValerieIntro, MtPyre_6F_Text_ValerieDefeat, EmeraldChampions_Text_NeedTwoPokemon, MtPyre_6F_EventScript_RegisterValerie
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, MtPyre_6F_EventScript_RematchValerie
 	msgbox MtPyre_6F_Text_ValeriePostBattle, MSGBOX_DEFAULT
@@ -18,12 +18,12 @@ MtPyre_6F_EventScript_RegisterValerie::
 	end
 
 MtPyre_6F_EventScript_RematchValerie::
-	trainerbattle_rematch TRAINER_VALERIE_1, MtPyre_6F_Text_ValerieRematchIntro, MtPyre_6F_Text_ValerieRematchDefeat
+	trainerbattle_rematch_double TRAINER_VALERIE_1, MtPyre_6F_Text_ValerieRematchIntro, MtPyre_6F_Text_ValerieRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox MtPyre_6F_Text_ValeriePostRematch, MSGBOX_AUTOCLOSE
 	end
 
 MtPyre_6F_EventScript_Cedric::
-	trainerbattle_single TRAINER_CEDRIC, MtPyre_6F_Text_CedricIntro, MtPyre_6F_Text_CedricDefeat
+	trainerbattle_double TRAINER_CEDRIC, MtPyre_6F_Text_CedricIntro, MtPyre_6F_Text_CedricDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox MtPyre_6F_Text_CedricPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -67,3 +67,59 @@ MtPyre_6F_Text_CedricPostBattle:
 	.string "would be panicked and easy to beat.\p"
 	.string "It's dirty and I won't try it again…$"
 
+@ BEGIN EMERALD CHAMPIONS LEGENDARY ROOTS
+.set EC_SIGN_PECHARUNT_ID, 65
+
+MtPyre_6F_EventScript_Pecharunt::
+	lock
+	faceplayer
+	setvar VAR_0x8004, 64
+	special GetSelectedLegendarySignState
+	goto_if_ne VAR_RESULT, 2, MtPyre_6F_EventScript_PecharuntDormant
+	setvar VAR_0x8004, 63
+	special GetSelectedLegendarySignState
+	goto_if_ne VAR_RESULT, 2, MtPyre_6F_EventScript_PecharuntDormant
+	setvar VAR_0x8004, 56
+	special GetSelectedLegendarySignState
+	goto_if_ne VAR_RESULT, 2, MtPyre_6F_EventScript_PecharuntDormant
+	setvar VAR_0x8004, EC_SIGN_PECHARUNT_ID
+	special TryUnlockSelectedLegendarySign
+	msgbox MtPyre_6F_Text_PecharuntAwakens, MSGBOX_DEFAULT
+	setvar VAR_0x8004, EC_SIGN_PECHARUNT_ID
+	special CreateSelectedLegendarySignEncounter
+	setflag FLAG_SYS_CTRL_OBJ_DELETE
+	special BattleSetup_StartLegendaryBattle
+	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, MtPyre_6F_EventScript_PecharuntCaught
+	msgbox MtPyre_6F_Text_PecharuntRemains, MSGBOX_DEFAULT
+	release
+	end
+
+MtPyre_6F_EventScript_PecharuntDormant::
+	msgbox MtPyre_6F_Text_PecharuntDormant, MSGBOX_DEFAULT
+	release
+	end
+
+MtPyre_6F_EventScript_PecharuntCaught::
+	setflag FLAG_EC_CAUGHT_PECHARUNT
+	removeobject LOCALID_EC_PECHARUNT
+	release
+	end
+
+MtPyre_6F_Text_PecharuntDormant:
+	.string "A violet SIGN shows three masks: a dog,\n"
+	.string "a monkey, and a brilliant bird.\p"
+	.string "Catch all three challengers before\n"
+	.string "returning to this poisoned shrine.$"
+
+MtPyre_6F_Text_PecharuntAwakens:
+	.string "The three masks flare, and the shrine's\n"
+	.string "hidden master rolls into view!$"
+
+MtPyre_6F_Text_PecharuntRemains:
+	.string "PECHARUNT settles back onto the shrine.\n"
+	.string "The three masks remain lit.$"
+
+
+@ END EMERALD CHAMPIONS LEGENDARY ROOTS

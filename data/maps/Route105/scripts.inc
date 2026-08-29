@@ -26,22 +26,22 @@ Route105_OnFrame:
 	.2byte 0
 
 Route105_EventScript_Foster::
-	trainerbattle_single TRAINER_FOSTER, Route105_Text_FosterIntro, Route105_Text_FosterDefeated
+	trainerbattle_double TRAINER_FOSTER, Route105_Text_FosterIntro, Route105_Text_FosterDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route105_Text_FosterPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route105_EventScript_Luis::
-	trainerbattle_single TRAINER_LUIS, Route105_Text_LuisIntro, Route105_Text_LuisDefeated
+	trainerbattle_double TRAINER_LUIS, Route105_Text_LuisIntro, Route105_Text_LuisDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route105_Text_LuisPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route105_EventScript_Dominik::
-	trainerbattle_single TRAINER_DOMINIK, Route105_Text_DominikIntro, Route105_Text_DominikDefeated
+	trainerbattle_double TRAINER_DOMINIK, Route105_Text_DominikIntro, Route105_Text_DominikDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route105_Text_DominikPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route105_EventScript_Beverly::
-	trainerbattle_single TRAINER_BEVERLY, Route105_Text_BeverlyIntro, Route105_Text_BeverlyDefeated
+	trainerbattle_double TRAINER_BEVERLY, Route105_Text_BeverlyIntro, Route105_Text_BeverlyDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route105_Text_PostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -51,12 +51,12 @@ Route105_EventScript_Imani::
 	end
 
 Route105_EventScript_Josue::
-	trainerbattle_single TRAINER_JOSUE, Route105_Text_JosueIntro, Route105_Text_JosueDefeated
+	trainerbattle_double TRAINER_JOSUE, Route105_Text_JosueIntro, Route105_Text_JosueDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route105_Text_JosuePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route105_EventScript_Andres::
-	trainerbattle_single TRAINER_ANDRES_1, Route105_Text_AndresIntro, Route105_Text_AndresDefeated, Route105_EventScript_AndresRegisterMatchCallAfterBattle
+	trainerbattle_double TRAINER_ANDRES_1, Route105_Text_AndresIntro, Route105_Text_AndresDefeated, EmeraldChampions_Text_NeedTwoPokemon, Route105_EventScript_AndresRegisterMatchCallAfterBattle
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route105_EventScript_AndresRematch
 	msgbox Route105_Text_AndresPostBattle, MSGBOX_DEFAULT
@@ -72,7 +72,7 @@ Route105_EventScript_AndresRegisterMatchCallAfterBattle::
 	end
 
 Route105_EventScript_AndresRematch::
-	trainerbattle_rematch TRAINER_ANDRES_1, Route105_Text_AndresRematchIntro, Route105_Text_AndresRematchDefeated
+	trainerbattle_rematch_double TRAINER_ANDRES_1, Route105_Text_AndresRematchIntro, Route105_Text_AndresRematchDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route105_Text_AndresRematchPostBattle, MSGBOX_AUTOCLOSE
 	end
 

@@ -1,6 +1,7 @@
 #include "global.h"
 #include "data.h"
 #include "difficulty.h"
+#include "emerald_champions_battle_sets.h"
 #include "main.h"
 #include "battle.h"
 #include "battle_frontier.h"
@@ -55,6 +56,7 @@
 #include "constants/event_objects.h"
 #include "constants/game_stat.h"
 #include "constants/items.h"
+#include "constants/opponents.h"
 #include "constants/songs.h"
 #include "constants/trainers.h"
 #include "constants/trainer_hill.h"
@@ -94,6 +96,7 @@ static void HandleRematchVarsOnBattleEnd(void);
 static const u8 *GetIntroSpeechOfApproachingTrainer(void);
 static const u8 *GetTrainerCantBattleSpeech(void);
 static void CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum);
+static void ApplyRegionalRivalStarter(struct Pokemon *party, u16 trainerNum);
 static void DoTrainerBattle(void);
 
 EWRAM_DATA TrainerBattleParameter gTrainerBattleParameter = {0};
@@ -1013,6 +1016,7 @@ static void CB2_GiveStarter(void)
     *GetVarPointer(VAR_STARTER_MON) = gSpecialVar_Result;
     starterMon = GetStarterPokemon(gSpecialVar_Result);
     ScriptGiveMon(starterMon, 5, ITEM_NONE);
+    ApplyEmeraldChampionsOpponentSet(&gParties[B_TRAINER_PLAYER][0], 0);
     ResetTasks();
     PlayBattleBGM();
     SetMainCallback2(CB2_StartFirstBattle);
@@ -1524,7 +1528,7 @@ void BattleSetup_StartChampionsCircuitBattle(void)
 {
     ScriptContext_Enable();
     gFacilityTrainers = gBattleFrontierTrainers;
-    TRAINER_BATTLE_PARAM.opponentA = Random() % FRONTIER_TRAINERS_COUNT;
+    TRAINER_BATTLE_PARAM.opponentA = RandomUniform(RNG_NONE, 0, FRONTIER_TRAINERS_COUNT - 1);
     TRAINER_BATTLE_PARAM.opponentB = 0;
     gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_BATTLE_TOWER;
     gMain.savedCallback = CB2_EndChampionsCircuitBattle;
@@ -2301,6 +2305,7 @@ static void CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
     if (!GetTrainerStructFromId(trainerNum)->overrideTrainer)
     {
         CreateNPCTrainerPartyFromTrainer(party, GetTrainerStructFromId(trainerNum));
+        ApplyRegionalRivalStarter(party, trainerNum);
         return;
     }
 
@@ -2314,6 +2319,93 @@ static void CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
     if (tempTrainer.partySize == 0)
         tempTrainer.partySize = origTrainer->partySize;
     CreateNPCTrainerPartyFromTrainer(party, (const struct Trainer *)(&tempTrainer));
+    ApplyRegionalRivalStarter(party, trainerNum);
+}
+
+static bool32 IsRegionalRivalTrainer(u16 trainerNum)
+{
+    if (trainerNum >= TRAINER_BRENDAN_ROUTE_103_MUDKIP
+     && trainerNum <= TRAINER_MAY_ROUTE_119_TORCHIC)
+        return TRUE;
+    if (trainerNum >= TRAINER_BRENDAN_LILYCOVE_MUDKIP
+     && trainerNum <= TRAINER_MAY_LILYCOVE_TORCHIC)
+        return TRUE;
+
+    switch (trainerNum)
+    {
+    case TRAINER_BRENDAN_RUSTBORO_TREECKO:
+    case TRAINER_BRENDAN_RUSTBORO_MUDKIP:
+    case TRAINER_BRENDAN_RUSTBORO_TORCHIC:
+    case TRAINER_MAY_RUSTBORO_TREECKO:
+    case TRAINER_MAY_RUSTBORO_MUDKIP:
+    case TRAINER_MAY_RUSTBORO_TORCHIC:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
+static u8 GetHoennStarterStage(enum Species species)
+{
+    switch (species)
+    {
+    case SPECIES_TREECKO:
+    case SPECIES_TORCHIC:
+    case SPECIES_MUDKIP:
+        return 0;
+    case SPECIES_GROVYLE:
+    case SPECIES_COMBUSKEN:
+    case SPECIES_MARSHTOMP:
+        return 1;
+    case SPECIES_SCEPTILE:
+    case SPECIES_BLAZIKEN:
+    case SPECIES_SWAMPERT:
+        return 2;
+    default:
+        return 0xFF;
+    }
+}
+
+static void ApplyRegionalRivalStarter(struct Pokemon *party, u16 trainerNum)
+{
+    enum Species baseSpecies;
+
+    if (!IsRegionalRivalTrainer(trainerNum))
+        return;
+
+    baseSpecies = GetStarterPokemonForGeneration(
+        (VarGet(VAR_STARTER_MON) + 1) % 3,
+        VarGet(VAR_STARTER_GEN));
+    for (u32 i = 0; i < PARTY_SIZE; i++)
+    {
+        enum Species oldSpecies = GetMonData(&party[i], MON_DATA_SPECIES);
+        enum Species newSpecies;
+        u8 stage;
+        u8 level;
+        u32 experience;
+
+        if (oldSpecies == SPECIES_NONE)
+            continue;
+        stage = GetHoennStarterStage(oldSpecies);
+        if (stage == 0xFF)
+            continue;
+        newSpecies = baseSpecies;
+        if (stage == 1)
+            newSpecies = GetMiddleEvolutionForStarter(baseSpecies);
+        else if (stage == 2)
+            newSpecies = GetFinalEvolutionForStarter(baseSpecies);
+        if (newSpecies == oldSpecies)
+            return;
+
+        level = GetMonData(&party[i], MON_DATA_LEVEL);
+        SetMonData(&party[i], MON_DATA_SPECIES, &newSpecies);
+        SetMonData(&party[i], MON_DATA_NICKNAME, GetSpeciesName(newSpecies));
+        experience = gExperienceTables[gSpeciesInfo[newSpecies].growthRate][level];
+        SetMonData(&party[i], MON_DATA_EXP, &experience);
+        ApplyEmeraldChampionsOpponentSet(&party[i], 0);
+        CalculateMonStats(&party[i]);
+        return;
+    }
 }
 
 void CreateTrainerPartyForPlayer(void)

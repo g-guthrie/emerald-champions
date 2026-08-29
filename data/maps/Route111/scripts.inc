@@ -45,8 +45,28 @@ Route111_OnTransition:
 	call_if_eq VAR_MIRAGE_TOWER_STATE, 2, Route111_EventScript_SetMirageTowerGone
 	call Route111_EventScript_CheckSetSandstorm
 	call GabbyAndTy_EventScript_UpdateLocation
+	call Route111_EventScript_UpdateVialQuestObjects
 	goto_if_not_defeated TRAINER_VICKY, Route111_EventScript_SetWinstratesNotDefeated
 	end
+
+Route111_EventScript_UpdateVialQuestObjects::
+	setflag FLAG_HIDE_ROUTE111_VIAL_NURSE
+	setflag FLAG_HIDE_ROUTE111_VIAL_CHANSEY
+	switch VAR_CHANSEY_NURSE_STATE
+	case 0, Route111_EventScript_ShowVialNurseAndChansey
+	case 1, Route111_EventScript_ShowVialNurse
+	case 2, Route111_EventScript_ShowVialNurse
+	case 3, Route111_EventScript_ShowVialNurse
+	case 4, Route111_EventScript_ShowVialNurse
+	case 5, Route111_EventScript_ShowVialNurse
+	case 6, Route111_EventScript_ShowVialNurse
+	return
+
+Route111_EventScript_ShowVialNurseAndChansey::
+	clearflag FLAG_HIDE_ROUTE111_VIAL_CHANSEY
+Route111_EventScript_ShowVialNurse::
+	clearflag FLAG_HIDE_ROUTE111_VIAL_NURSE
+	return
 
 Route111_EventScript_SetFallingPlayerGfx::
 	checkplayergender
@@ -264,7 +284,7 @@ Route111_EventScript_Victor::
 
 Route111_EventScript_BattleWinstrates::
 	msgbox Route111_Text_VictorIntro, MSGBOX_DEFAULT
-	trainerbattle_no_intro TRAINER_VICTOR, Route111_Text_VictorDefeat
+	trainerbattle_no_intro_double TRAINER_VICTOR, Route111_Text_VictorDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	applymovement LOCALID_ROUTE111_VICTOR, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	call Route111_EventScript_OpenWinstrateDoor
@@ -282,7 +302,7 @@ Route111_EventScript_BattleWinstrates::
 	waitmovement 0
 	call Route111_EventScript_CloseWinstrateDoor
 	msgbox Route111_Text_VictoriaIntro, MSGBOX_DEFAULT
-	trainerbattle_no_intro TRAINER_VICTORIA, Route111_Text_VictoriaDefeat
+	trainerbattle_no_intro_double TRAINER_VICTORIA, Route111_Text_VictoriaDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	applymovement LOCALID_ROUTE111_VICTORIA, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	call Route111_EventScript_OpenWinstrateDoor
@@ -300,7 +320,7 @@ Route111_EventScript_BattleWinstrates::
 	waitmovement 0
 	call Route111_EventScript_CloseWinstrateDoor
 	msgbox Route111_Text_ViviIntro, MSGBOX_DEFAULT
-	trainerbattle_no_intro TRAINER_VIVI, Route111_Text_ViviDefeat
+	trainerbattle_no_intro_double TRAINER_VIVI, Route111_Text_ViviDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	applymovement LOCALID_ROUTE111_VIVI, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	call Route111_EventScript_OpenWinstrateDoor
@@ -413,6 +433,112 @@ Route111_EventScript_HikerMirageTowerVisible::
 	release
 	end
 
+Route111_EventScript_VialChanseyEscape::
+	lockall
+	specialvar VAR_RESULT, GetPlayerFacingDirection
+	call_if_ne VAR_RESULT, DIR_NORTH, Route111_EventScript_VialPlayerFaceUp
+	applymovement LOCALID_ROUTE111_VIAL_NURSE, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_ROUTE111_VIAL_CHANSEY, Common_Movement_WalkInPlaceFasterDown
+	waitmovement 0
+	msgbox Route111_Text_VialBlobGetBackHere, MSGBOX_DEFAULT
+	applymovement LOCALID_ROUTE111_VIAL_CHANSEY, Route111_Movement_VialChanseyJump
+	waitmovement 0
+	playmoncry SPECIES_CHANSEY, CRY_MODE_NORMAL
+	delay 40
+	waitmoncry
+	applymovement LOCALID_ROUTE111_VIAL_CHANSEY, Route111_Movement_VialChanseyEscape
+	waitmovement 0
+	msgbox Route111_Text_VialNurseNeedsHelp, MSGBOX_DEFAULT
+	giveitem ITEM_HEAL_BALL
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setvar VAR_CHANSEY_NURSE_STATE, 1
+	setflag FLAG_HIDE_ROUTE111_VIAL_CHANSEY
+	removeobject LOCALID_ROUTE111_VIAL_CHANSEY
+	msgbox Route111_Text_VialHealBall, MSGBOX_DEFAULT
+	releaseall
+	end
+
+Route111_EventScript_VialUpgradeNurse::
+	lock
+	faceplayer
+	goto_if_eq VAR_CHANSEY_NURSE_STATE, 6, Route111_EventScript_VialUpgradeComplete
+	goto_if_eq VAR_CHANSEY_NURSE_STATE, 0, Route111_EventScript_VialNurseWatching
+	checkitem ITEM_HEAL_BALL
+	goto_if_eq VAR_RESULT, TRUE, Route111_EventScript_VialNurseReminder
+	msgbox Route111_Text_VialReplacementBall, MSGBOX_DEFAULT
+	giveitem ITEM_HEAL_BALL
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+Route111_EventScript_VialNurseReminder::
+	msgbox Route111_Text_VialBringBlobBack, MSGBOX_DEFAULT
+	release
+	end
+
+Route111_EventScript_VialNurseWatching::
+	msgbox Route111_Text_VialNurseWatching, MSGBOX_DEFAULT
+	release
+	end
+
+Route111_EventScript_VialUpgradeComplete::
+	msgbox Route111_Text_VialThanks, MSGBOX_DEFAULT
+	goto_if_ge VAR_POKE_VIAL_MAX_CHARGES, 2, Route111_EventScript_VialUpgradeMarkDone
+	setvar VAR_POKE_VIAL_MAX_CHARGES, 2
+	setvar VAR_POKE_VIAL_CHARGES, 2
+Route111_EventScript_VialUpgradeMarkDone::
+	setvar VAR_CHANSEY_NURSE_STATE, 7
+	setflag FLAG_HIDE_ROUTE111_VIAL_NURSE
+	removeobject LOCALID_ROUTE111_VIAL_NURSE
+	release
+	end
+
+Route111_EventScript_VialPlayerFaceUp::
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
+	waitmovement 0
+	return
+
+Route111_Movement_VialChanseyJump:
+	jump_in_place_down
+	delay_4
+	jump_in_place_down
+	step_end
+
+Route111_Movement_VialChanseyEscape:
+	walk_up
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	step_end
+
+Route111_Text_VialBlobGetBackHere:
+	.string "Blob! Stop goofing around and get back\n"
+	.string "here! How did you get over there?$"
+
+Route111_Text_VialNurseNeedsHelp:
+	.string "Oh, no! My CHANSEY ran north!\p"
+	.string "Please bring Blob back. I'll improve\n"
+	.string "your Poké Vial's capacity as thanks.$"
+
+Route111_Text_VialHealBall:
+	.string "Blob trusts this HEAL BALL.\n"
+	.string "Follow the trail north and use it.$"
+
+Route111_Text_VialNurseWatching:
+	.string "Blob and I help travelers here.\n"
+	.string "CHANSEY can be rather playful.$"
+
+Route111_Text_VialReplacementBall:
+	.string "You lost the HEAL BALL? Take another.\n"
+	.string "Blob will recognize it.$"
+
+Route111_Text_VialBringBlobBack:
+	.string "Blob ran north along ROUTE 111.\n"
+	.string "Please bring my CHANSEY home!$"
+
+Route111_Text_VialThanks:
+	.string "You caught Blob! Thank you!\p"
+	.string "Poké Centers will now refill your\n"
+	.string "Poké Vial with two full charges.$"
+
 Route111_EventScript_RockSmashTipFatMan::
 	lockall
 	applymovement LOCALID_ROUTE111_ROCK_SMASH_MAN, Common_Movement_FacePlayer
@@ -425,22 +551,22 @@ Route111_EventScript_RockSmashTipFatMan::
 	end
 
 Route111_EventScript_Drew::
-	trainerbattle_single TRAINER_DREW, Route111_Text_DrewIntro, Route111_Text_DrewDefeat
+	trainerbattle_double TRAINER_DREW, Route111_Text_DrewIntro, Route111_Text_DrewDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route111_Text_DrewPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_Heidi::
-	trainerbattle_single TRAINER_HEIDI, Route111_Text_HeidiIntro, Route111_Text_HeidiDefeat
+	trainerbattle_double TRAINER_HEIDI, Route111_Text_HeidiIntro, Route111_Text_HeidiDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route111_Text_HeidiPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_Beau::
-	trainerbattle_single TRAINER_BEAU, Route111_Text_BeauIntro, Route111_Text_BeauDefeat
+	trainerbattle_double TRAINER_BEAU, Route111_Text_BeauIntro, Route111_Text_BeauDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route111_Text_BeauPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_Becky::
-	trainerbattle_single TRAINER_BECKY, Route111_Text_BeckyIntro, Route111_Text_BeckyDefeat
+	trainerbattle_double TRAINER_BECKY, Route111_Text_BeckyIntro, Route111_Text_BeckyDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route111_Text_BeckyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -466,7 +592,7 @@ Route111_EventScript_RematchDusty::
 	end
 
 Route111_EventScript_Travis::
-	trainerbattle_single TRAINER_TRAVIS, Route111_Text_TravisIntro, Route111_Text_TravisDefeat
+	trainerbattle_double TRAINER_TRAVIS, Route111_Text_TravisIntro, Route111_Text_TravisDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route111_Text_TravisPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -481,7 +607,7 @@ Route111_EventScript_Daisuke::
 	end
 
 Route111_EventScript_Wilton::
-	trainerbattle_single TRAINER_WILTON_1, Route111_Text_WiltonIntro, Route111_Text_WiltonDefeat, Route111_EventScript_RegisterWilton
+	trainerbattle_double TRAINER_WILTON_1, Route111_Text_WiltonIntro, Route111_Text_WiltonDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route111_EventScript_RegisterWilton
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route111_EventScript_RematchWilton
 	msgbox Route111_Text_WiltonPostBattle, MSGBOX_DEFAULT
@@ -497,12 +623,12 @@ Route111_EventScript_RegisterWilton::
 	end
 
 Route111_EventScript_RematchWilton::
-	trainerbattle_rematch TRAINER_WILTON_1, Route111_Text_WiltonRematchIntro, Route111_Text_WiltonRematchDefeat
+	trainerbattle_rematch_double TRAINER_WILTON_1, Route111_Text_WiltonRematchIntro, Route111_Text_WiltonRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route111_Text_WiltonPostRematch, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_Brooke::
-	trainerbattle_single TRAINER_BROOKE_1, Route111_Text_BrookeIntro, Route111_Text_BrookeDefeat, Route111_EventScript_RegisterBrooke
+	trainerbattle_double TRAINER_BROOKE_1, Route111_Text_BrookeIntro, Route111_Text_BrookeDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route111_EventScript_RegisterBrooke
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route111_EventScript_RematchBrooke
 	msgbox Route111_Text_BrookePostBattle, MSGBOX_DEFAULT
@@ -518,17 +644,17 @@ Route111_EventScript_RegisterBrooke::
 	end
 
 Route111_EventScript_RematchBrooke::
-	trainerbattle_rematch TRAINER_BROOKE_1, Route111_Text_BrookeRematchIntro, Route111_Text_BrookeRematchDefeat
+	trainerbattle_rematch_double TRAINER_BROOKE_1, Route111_Text_BrookeRematchIntro, Route111_Text_BrookeRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route111_Text_BrookePostRematch, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_Hayden::
-	trainerbattle_single TRAINER_HAYDEN, Route111_Text_HaydenIntro, Route111_Text_HaydenDefeat
+	trainerbattle_double TRAINER_HAYDEN, Route111_Text_HaydenIntro, Route111_Text_HaydenDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route111_Text_HaydenPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_Bianca::
-	trainerbattle_single TRAINER_BIANCA, Route111_Text_BiancaIntro, Route111_Text_BiancaDefeat
+	trainerbattle_double TRAINER_BIANCA, Route111_Text_BiancaIntro, Route111_Text_BiancaDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route111_Text_BiancaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -538,7 +664,7 @@ Route111_EventScript_Tyron::
 	end
 
 Route111_EventScript_Celina::
-	trainerbattle_single TRAINER_CELINA, Route111_Text_CelinaIntro, Route111_Text_CelinaDefeat
+	trainerbattle_double TRAINER_CELINA, Route111_Text_CelinaIntro, Route111_Text_CelinaDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route111_Text_CelinaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -548,12 +674,12 @@ Route111_EventScript_Celia::
 	end
 
 Route111_EventScript_Bryan::
-	trainerbattle_single TRAINER_BRYAN, Route111_Text_BryanIntro, Route111_Text_BryanDefeat
+	trainerbattle_double TRAINER_BRYAN, Route111_Text_BryanIntro, Route111_Text_BryanDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route111_Text_BryanPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_Branden::
-	trainerbattle_single TRAINER_BRANDEN, Route111_Text_BrandenIntro, Route111_Text_BrandenDefeat
+	trainerbattle_double TRAINER_BRANDEN, Route111_Text_BrandenIntro, Route111_Text_BrandenDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route111_Text_BrandenPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -671,28 +797,20 @@ Route111_Text_ShouldBeMirageTowerAroundHere:
 	.string "That's why I call it the MIRAGE TOWER.$"
 
 Route111_Text_MirageTowerClearlyVisible:
-	.string "I see it!\n"
-	.string "The tower of sand!\p"
-	.string "The sand tower they called a mirage\n"
-	.string "is clearly visible!\p"
-	.string "But it looks so fragile…\n"
-	.string "It could crumble away anytime…\p"
-	.string "I want to go inside it, but I can't\n"
-	.string "get my courage up for it…$"
+	.string "The MIRAGE TOWER is visible! Beneath its\n"
+	.string "first floor lies an older stairway.\p"
+	.string "Archaeologists say it reaches a fossil\n"
+	.string "archive called SANDSTREWN RUINS.$"
 
 Route111_Text_ThatWasShockingSandRainedDown:
-	.string "Whoa…\n"
-	.string "That was shocking.\p"
-	.string "Sand rained down in chunks all of\n"
-	.string "a sudden.\p"
-	.string "What was it like inside?\n"
-	.string "Were there sandy ghosts and such?$"
+	.string "The tower collapsed, but its basement\n"
+	.string "passage may still meet DESERT UNDERPASS.\p"
+	.string "That route leads into SANDSTREWN RUINS.$"
 
 Route111_Text_MirageTowerHasntBeenSeenSince:
-	.string "Since I spoke to you, the tower of sand\n"
-	.string "hasn't been seen.\p"
-	.string "Perhaps it really was\n"
-	.string "the MIRAGE TOWER…$"
+	.string "MIRAGE TOWER is gone, but the ruins below\n"
+	.string "remain. FOSSIL MANIAC's tunnel on\l"
+	.string "ROUTE 114 now reaches DESERT UNDERPASS.$"
 
 Route111_Text_ClawFossilDisappeared:
 	.string "The CLAW FOSSIL disappeared into\n"
@@ -714,4 +832,3 @@ Route111_Text_TrainerHillSign:
 	.string "{RIGHT_ARROW} TRAINER HILL ENTRANCE\p"
 	.string "“Scale the heights, you hot-blooded\n"
 	.string "TRAINERS!”$"
-

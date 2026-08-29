@@ -341,14 +341,11 @@ VerdanturfTown_BattleTentLobby_Text_GentleMonsScaryIfAngry:
 	.string "she's really, really scary!\p"
 	.string "I bet a gentle POKéMON will be scary\n"
 	.string "if it gets angry!$"
-
 VerdanturfTown_BattleTentLobby_Text_AttractionRunsDeep:
 	.string "My feelings toward my POKéMON…\n"
 	.string "The attraction runs deep…\p"
-	.string "Oh, hi, you didn't see that, did you?\n"
-	.string "Well, it doesn't matter.\p"
-	.string "How would you like this TM for\n"
-	.string "your POKéMON?$"
+	.string "Oh, hi! A bond like yours deserves\n"
+	.string "this SHINY STONE.$"
 
 VerdanturfTown_BattleTentLobby_Text_AttractionMutual:
 	.string "My feelings toward my POKéMON…\n"

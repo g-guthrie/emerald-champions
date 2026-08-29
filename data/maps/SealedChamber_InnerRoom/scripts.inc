@@ -67,3 +67,67 @@ SealedChamber_InnerRoom_EventScript_BrailleStoryPart6::
 	releaseall
 	end
 
+@ BEGIN EMERALD CHAMPIONS LEGENDARY ROOTS
+.set EC_SIGN_REGIGIGAS_ID, 66
+
+SealedChamber_InnerRoom_EventScript_RegigigasEC::
+	lock
+	faceplayer
+	goto_if_unset FLAG_BADGE07_GET, SealedChamber_InnerRoom_EventScript_RegigigasECDormant
+	setvar VAR_0x8004, SPECIES_REGICE
+	special DoesPlayerPartyHaveSelectedSpeciesFamily
+	goto_if_eq VAR_RESULT, FALSE, SealedChamber_InnerRoom_EventScript_RegigigasECNeedsRegis
+	setvar VAR_0x8004, SPECIES_REGIROCK
+	special DoesPlayerPartyHaveSelectedSpeciesFamily
+	goto_if_eq VAR_RESULT, FALSE, SealedChamber_InnerRoom_EventScript_RegigigasECNeedsRegis
+	setvar VAR_0x8004, SPECIES_REGISTEEL
+	special DoesPlayerPartyHaveSelectedSpeciesFamily
+	goto_if_eq VAR_RESULT, FALSE, SealedChamber_InnerRoom_EventScript_RegigigasECNeedsRegis
+	setvar VAR_0x8004, EC_SIGN_REGIGIGAS_ID
+	special TryUnlockSelectedLegendarySign
+	msgbox SealedChamber_InnerRoom_Text_RegigigasECAwakens, MSGBOX_DEFAULT
+	setvar VAR_0x8004, EC_SIGN_REGIGIGAS_ID
+	special CreateSelectedLegendarySignEncounter
+	setflag FLAG_SYS_CTRL_OBJ_DELETE
+	special BattleSetup_StartLegendaryBattle
+	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, SealedChamber_InnerRoom_EventScript_RegigigasECCaught
+	msgbox SealedChamber_InnerRoom_Text_RegigigasECRemains, MSGBOX_DEFAULT
+	release
+	end
+
+SealedChamber_InnerRoom_EventScript_RegigigasECDormant::
+	msgbox SealedChamber_InnerRoom_Text_RegigigasECDormant, MSGBOX_DEFAULT
+	release
+	end
+
+SealedChamber_InnerRoom_EventScript_RegigigasECNeedsRegis::
+	msgbox SealedChamber_InnerRoom_Text_RegigigasECNeedsRegis, MSGBOX_DEFAULT
+	release
+	end
+
+SealedChamber_InnerRoom_EventScript_RegigigasECCaught::
+	setflag FLAG_EC_CAUGHT_REGIGIGAS
+	removeobject LOCALID_EC_REGIGIGAS
+	release
+	end
+
+SealedChamber_InnerRoom_Text_RegigigasECDormant:
+	.string "The giant statue is silent. Seven BADGES\n"
+	.string "are needed to read its final seal.$"
+
+SealedChamber_InnerRoom_Text_RegigigasECNeedsRegis:
+	.string "Braille names REGIROCK, REGICE, and\n"
+	.string "REGISTEEL. Bring all three in your party.$"
+
+SealedChamber_InnerRoom_Text_RegigigasECAwakens:
+	.string "The three REGIS answer together!\n"
+	.string "The colossal statue begins to move!$"
+
+SealedChamber_InnerRoom_Text_RegigigasECRemains:
+	.string "REGIGIGAS returns to its stone stance.\n"
+	.string "The three seals remain open.$"
+
+
+@ END EMERALD CHAMPIONS LEGENDARY ROOTS

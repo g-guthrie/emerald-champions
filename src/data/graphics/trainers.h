@@ -277,6 +277,9 @@ const u16 gTrainerPalette_Red[] = INCGFX_U16("graphics/trainers/front_pics/red.p
 const u32 gTrainerFrontPic_Leaf[] = INCGFX_U32("graphics/trainers/front_pics/leaf.png", ".4bpp.smol");
 const u16 gTrainerPalette_Leaf[] = INCGFX_U16("graphics/trainers/front_pics/leaf.png", ".gbapal");
 
+const u32 gTrainerFrontPic_Cynthia[] = INCGFX_U32("graphics/trainers/front_pics/cynthia.png", ".4bpp.smol");
+const u16 gTrainerPalette_Cynthia[] = INCGFX_U16("graphics/trainers/front_pics/cynthia.png", ".gbapal");
+
 const u32 gTrainerFrontPic_RubySapphireBrendan[] = INCGFX_U32("graphics/trainers/front_pics/brendan_rs.png", ".4bpp.smol");
 const u16 gTrainerPalette_RubySapphireBrendan[] = INCGFX_U16("graphics/trainers/palettes/brendan_rs.pal", ".gbapal");
 
@@ -609,6 +612,11 @@ const struct TrainerPicInfo gTrainerPicInfo[TRAINER_PIC_COUNT] =
     {
         .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_Leaf, gTrainerPalette_Leaf),
         .backPic = TRAINER_BACK_PIC(5, gTrainerBackPic_Leaf, gTrainerBackPicPalette_Leaf, sBackAnims_Kanto),
+    },
+    [TRAINER_PIC_CYNTHIA] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_Cynthia, gTrainerPalette_Cynthia),
+        .backPic = TRAINER_BACK_PIC(1, gTrainerBackPic_None, gTrainerPalette_None, sBackAnims_None),
     },
     [TRAINER_PIC_RS_BRENDAN] =
     {

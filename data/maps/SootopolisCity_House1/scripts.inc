@@ -27,11 +27,10 @@ SootopolisCity_House1_EventScript_Kecleon::
 	waitmoncry
 	release
 	end
-
 SootopolisCity_House1_Text_DevelopedThisTM:
 	.string "For thirty years I've remained in\n"
 	.string "SOOTOPOLIS honing my skills.\p"
-	.string "I developed a shattering TM.\n"
+	.string "This RAZOR CLAW is just as sharp.\n"
 	.string "I bequeath it to you!$"
 SootopolisCity_House1_Text_ExplainBrickBreak:
 	.string "A Razor Claw evolves Sneasel.\n"

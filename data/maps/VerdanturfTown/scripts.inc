@@ -107,8 +107,9 @@ VerdanturfTown_Text_EasyToGetToRustboroNow:
 
 VerdanturfTown_Text_TownSign:
 	.string "VERDANTURF TOWN\p"
-	.string "“The windswept highlands with the\n"
-	.string "sweet fragrance of grass.”$"
+	.string "The windswept highlands where grass and\n"
+	.string "people recover after every storm.\p"
+	.string "A restored meadow lies to the south.$"
 
 VerdanturfTown_Text_WandasHouse:
 	.string "WANDA'S HOUSE$"
@@ -122,4 +123,3 @@ VerdanturfTown_Text_RusturfTunnelSign:
 	.string "“Linking RUSTBORO and VERDANTURF\p"
 	.string "“The tunnel project has been\n"
 	.string "canceled.”$"
-

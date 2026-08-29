@@ -21,17 +21,17 @@ Route131_EventScript_Richard::
 	end
 
 Route131_EventScript_Herman::
-	trainerbattle_single TRAINER_HERMAN, Route131_Text_HermanIntro, Route131_Text_HermanDefeat
+	trainerbattle_double TRAINER_HERMAN, Route131_Text_HermanIntro, Route131_Text_HermanDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route131_Text_HermanPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route131_EventScript_Susie::
-	trainerbattle_single TRAINER_SUSIE, Route131_Text_SusieIntro, Route131_Text_SusieDefeat
+	trainerbattle_double TRAINER_SUSIE, Route131_Text_SusieIntro, Route131_Text_SusieDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route131_Text_SusiePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route131_EventScript_Kara::
-	trainerbattle_single TRAINER_KARA, Route131_Text_KaraIntro, Route131_Text_KaraDefeat
+	trainerbattle_double TRAINER_KARA, Route131_Text_KaraIntro, Route131_Text_KaraDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route131_Text_KaraPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -46,7 +46,7 @@ Route131_EventScript_Ian::
 	end
 
 Route131_EventScript_Talia::
-	trainerbattle_single TRAINER_TALIA, Route131_Text_TaliaIntro, Route131_Text_TaliaDefeat
+	trainerbattle_double TRAINER_TALIA, Route131_Text_TaliaIntro, Route131_Text_TaliaDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route131_Text_TaliaPostBattle, MSGBOX_AUTOCLOSE
 	end
 

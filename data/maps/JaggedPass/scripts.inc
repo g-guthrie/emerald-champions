@@ -20,7 +20,15 @@ JaggedPass_EventScript_SetReadyToOpenHideout::
 
 JaggedPass_OnTransition:
 	call_if_eq VAR_JAGGED_PASS_ASH_WEATHER, 1, JaggedPass_EventScript_SetWeatherAsh
+	call JaggedPass_EventScript_UpdateVialChansey
 	end
+
+JaggedPass_EventScript_UpdateVialChansey::
+	setflag FLAG_HIDE_JAGGED_PASS_VIAL_CHANSEY
+	goto_if_ne VAR_CHANSEY_NURSE_STATE, 2, JaggedPass_EventScript_EndUpdateVialChansey
+	clearflag FLAG_HIDE_JAGGED_PASS_VIAL_CHANSEY
+JaggedPass_EventScript_EndUpdateVialChansey::
+	return
 
 JaggedPass_EventScript_SetWeatherAsh::
 	setweather WEATHER_VOLCANIC_ASH
@@ -75,7 +83,7 @@ JaggedPass_EventScript_MagmaHideoutGuard::
 	waitmovement 0
 	msgbox JaggedPass_Text_GruntIntro, MSGBOX_DEFAULT
 	closemessage
-	trainerbattle_no_intro TRAINER_GRUNT_JAGGED_PASS, JaggedPass_Text_GruntDefeat
+	trainerbattle_no_intro_double TRAINER_GRUNT_JAGGED_PASS, JaggedPass_Text_GruntDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	setflag FLAG_BEAT_MAGMA_GRUNT_JAGGED_PASS
 	applymovement LOCALID_MAGMA_HIDEOUT_GUARD, Common_Movement_FaceOriginalDirection
 	waitmovement 0
@@ -92,13 +100,93 @@ JaggedPass_EventScript_GuardDefeated::
 	releaseall
 	end
 
+JaggedPass_EventScript_VialChansey::
+	lockall
+	applymovement LOCALID_JAGGED_PASS_VIAL_CHANSEY, Common_Movement_FacePlayer
+	waitmovement 0
+	getplayerxy VAR_0x8004, VAR_0x8005
+	goto_if_eq VAR_0x8004, 11, JaggedPass_EventScript_VialChanseyShove
+	applymovement LOCALID_JAGGED_PASS_VIAL_CHANSEY, JaggedPass_Movement_VialChanseyJumpRight
+	waitmovement 0
+	playmoncry SPECIES_CHANSEY, CRY_MODE_NORMAL
+	delay 40
+	waitmoncry
+	applymovement LOCALID_JAGGED_PASS_VIAL_CHANSEY, JaggedPass_Movement_VialChanseyEscape
+	waitmovement 0
+	goto JaggedPass_EventScript_VialChanseyGone
+
+JaggedPass_EventScript_VialChanseyShove::
+	applymovement LOCALID_JAGGED_PASS_VIAL_CHANSEY, JaggedPass_Movement_VialChanseyJumpLeft
+	waitmovement 0
+	playmoncry SPECIES_CHANSEY, CRY_MODE_NORMAL
+	delay 40
+	waitmoncry
+	applymovement LOCALID_JAGGED_PASS_VIAL_CHANSEY, JaggedPass_Movement_VialChanseyShove
+	applymovement LOCALID_PLAYER, JaggedPass_Movement_VialPlayerShove
+	waitmovement 0
+	applymovement LOCALID_JAGGED_PASS_VIAL_CHANSEY, JaggedPass_Movement_VialChanseyEscape
+	waitmovement 0
+
+JaggedPass_EventScript_VialChanseyGone::
+	setvar VAR_CHANSEY_NURSE_STATE, 3
+	setflag FLAG_HIDE_JAGGED_PASS_VIAL_CHANSEY
+	removeobject LOCALID_JAGGED_PASS_VIAL_CHANSEY
+	msgbox JaggedPass_Text_VialChanseyAshenWoods, MSGBOX_DEFAULT
+	releaseall
+	end
+
+JaggedPass_Movement_VialChanseyJumpRight:
+	jump_in_place_right
+	delay_4
+	jump_in_place_right
+	step_end
+
+JaggedPass_Movement_VialChanseyJumpLeft:
+	jump_in_place_left
+	delay_4
+	jump_in_place_left
+	step_end
+
+JaggedPass_Movement_VialChanseyEscape:
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	jump_left
+	walk_up
+	delay_4
+	step_end
+
+JaggedPass_Movement_VialChanseyShove:
+	walk_left
+	jump_in_place_down
+	walk_left
+	walk_left
+	walk_left
+	jump_left
+	walk_up
+	delay_4
+	step_end
+
+JaggedPass_Movement_VialPlayerShove:
+	walk_in_place_faster_up
+	lock_facing_direction
+	walk_down
+	jump_down
+	unlock_facing_direction
+	step_end
+
+JaggedPass_Text_VialChanseyAshenWoods:
+	.string "Blob vanished into ASHEN WOODS.\n"
+	.string "The HEAL BALL is still warm.$"
+
 JaggedPass_EventScript_Eric::
 	trainerbattle_single TRAINER_ERIC, JaggedPass_Text_EricIntro, JaggedPass_Text_EricDefeat
 	msgbox JaggedPass_Text_EricPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 JaggedPass_EventScript_Diana::
-	trainerbattle_single TRAINER_DIANA_1, JaggedPass_Text_DianaIntro, JaggedPass_Text_DianaDefeat, JaggedPass_EventScript_RegisterDiana
+	trainerbattle_double TRAINER_DIANA_1, JaggedPass_Text_DianaIntro, JaggedPass_Text_DianaDefeat, EmeraldChampions_Text_NeedTwoPokemon, JaggedPass_EventScript_RegisterDiana
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, JaggedPass_EventScript_DianaRematch
 	msgbox JaggedPass_Text_DianaPostBattle, MSGBOX_DEFAULT
@@ -113,12 +201,12 @@ JaggedPass_EventScript_RegisterDiana::
 	end
 
 JaggedPass_EventScript_DianaRematch::
-	trainerbattle_rematch TRAINER_DIANA_1, JaggedPass_Text_DianaRematchIntro, JaggedPass_Text_DianaRematchDefeat
+	trainerbattle_rematch_double TRAINER_DIANA_1, JaggedPass_Text_DianaRematchIntro, JaggedPass_Text_DianaRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox JaggedPass_Text_DianaPostRematch, MSGBOX_AUTOCLOSE
 	end
 
 JaggedPass_EventScript_Ethan::
-	trainerbattle_single TRAINER_ETHAN_1, JaggedPass_Text_EthanIntro, JaggedPass_Text_EthanDefeat, JaggedPass_EventScript_RegisterEthan
+	trainerbattle_double TRAINER_ETHAN_1, JaggedPass_Text_EthanIntro, JaggedPass_Text_EthanDefeat, EmeraldChampions_Text_NeedTwoPokemon, JaggedPass_EventScript_RegisterEthan
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, JaggedPass_EventScript_EthanRematch
 	msgbox JaggedPass_Text_EthanPostBattle, MSGBOX_DEFAULT
@@ -133,17 +221,17 @@ JaggedPass_EventScript_RegisterEthan::
 	end
 
 JaggedPass_EventScript_EthanRematch::
-	trainerbattle_rematch TRAINER_ETHAN_1, JaggedPass_Text_EthanRematchIntro, JaggedPass_Text_EthanRematchDefeat
+	trainerbattle_rematch_double TRAINER_ETHAN_1, JaggedPass_Text_EthanRematchIntro, JaggedPass_Text_EthanRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox JaggedPass_Text_EthanPostRematch, MSGBOX_AUTOCLOSE
 	end
 
 JaggedPass_EventScript_Julio::
-	trainerbattle_single TRAINER_JULIO, JaggedPass_Text_JulioIntro, JaggedPass_Text_JulioDefeat
+	trainerbattle_double TRAINER_JULIO, JaggedPass_Text_JulioIntro, JaggedPass_Text_JulioDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox JaggedPass_Text_JulioPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 JaggedPass_EventScript_Autumn::
-	trainerbattle_single TRAINER_AUTUMN, JaggedPass_Text_AutumnIntro, JaggedPass_Text_AutumnDefeat
+	trainerbattle_double TRAINER_AUTUMN, JaggedPass_Text_AutumnIntro, JaggedPass_Text_AutumnDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox JaggedPass_Text_AutumnPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -263,4 +351,3 @@ JaggedPass_Text_AutumnDefeat:
 JaggedPass_Text_AutumnPostBattle:
 	.string "What is that odd rock protrusion\n"
 	.string "a little up the hill from here?$"
-

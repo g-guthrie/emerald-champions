@@ -71,17 +71,11 @@ FallarborTown_CozmosHouse_Text_MeteoriteWillNeverBeMineNow:
 	.string "you can find METEORITES…\p"
 	.string "That METEORITE from METEOR FALLS…\n"
 	.string "It's never going to be mine now…$"
-
 FallarborTown_CozmosHouse_Text_IsThatMeteoriteMayIHaveIt:
-	.string "Oh!\n"
-	.string "Hah?\p"
-	.string "That item…\p"
-	.string "Could it be?\p"
-	.string "Is it the METEORITE that TEAM MAGMA\n"
+	.string "Oh! Is that the METEORITE TEAM MAGMA\n"
 	.string "took from METEOR FALLS?\p"
-	.string "Please, may I have it?\p"
-	.string "I'm not asking for it for free.\n"
-	.string "How about in exchange for this TM?$"
+	.string "Please, may I have it? I can offer this\n"
+	.string "rare DAWN STONE in exchange.$"
 FallarborTown_CozmosHouse_Text_PleaseUseThisTM:
 	.string "This Dawn Stone is my thanks.\n"
 	.string "Please put it to good use.$"
@@ -94,12 +88,11 @@ FallarborTown_CozmosHouse_Text_ReallyGoingToHelpMyResearch:
 FallarborTown_CozmosHouse_Text_CrushedWithDisappointment:
 	.string "PROF. COZMO: Oh, but…\n"
 	.string "I'm crushed with disappointment…$"
-
 FallarborTown_CozmosHouse_Text_MayIHaveMeteorite:
 	.string "PROF. COZMO: Please, may I have that\n"
 	.string "METEORITE?\p"
-	.string "I'm not asking for it for free.\n"
-	.string "How about in exchange for this TM?$"
+	.string "I can offer this rare DAWN STONE\n"
+	.string "in exchange.$"
 
 FallarborTown_CozmosHouse_Text_CozmoWentToMeteorFalls:
 	.string "PROF. COZMO went off to METEOR FALLS\n"

@@ -1,12 +1,10 @@
 Route111_Text_MakingRoomUseTMToMakeYourOwn:
-	.string "What's that?\n"
-	.string "What am I doing?\p"
-	.string "I'm thinking about making my own room\n"
-	.string "here using a POKéMON move.\p"
-	.string "I know! I'll give you this TM.\n"
-	.string "Will you use it to make your own room?$"
+	.string "I'm making my own room here with the\n"
+	.string "POKéMON move SECRET POWER.\p"
+	.string "Center tutors can teach it anytime.\n"
+	.string "Want a RARE CANDY for the road?$"
 Route111_Text_ExplainSecretPower:
-	.string "Your Center tutor can teach Secret Power.\p"
+	.string "Center tutors can teach Secret Power.\p"
 	.string "Take this Rare Candy for exploring,\n"
 	.string "and use Secret Power at marked trees.$"
 

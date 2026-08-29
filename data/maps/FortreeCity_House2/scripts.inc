@@ -67,10 +67,9 @@ FortreeCity_House2_Text_CorrectTryAgainWhichHand2:
 FortreeCity_House2_Text_YourHiddenPowerHasAwoken:
 	.string "Your insight has awoken!\p"
 	.string "Take this Dubious Disc for Porygon2.$"
-
 FortreeCity_House2_Text_ExplainHiddenPower:
-	.string "HIDDEN POWER is a move that changes\n"
-	.string "with the POKéMON.$"
+	.string "A DUBIOUS DISC evolves PORYGON2.\n"
+	.string "Use it from the Bag when ready.$"
 
 FortreeCity_House2_Text_YouGuessedWrong:
 	.string "No, too bad.\n"

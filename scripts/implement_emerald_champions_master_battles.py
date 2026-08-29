@@ -138,6 +138,9 @@ def rewrite_trainer_block(block: str, design: Design) -> str:
     header = block[:section_end] if section_end >= 0 else block.rstrip()
     header = replace_attribute(header, "Double Battle", "Yes" if design.format in ("double", "multi") else "No")
     header = replace_attribute(header, "AI", ai_flags(design))
+    # Campaign battles are competitive puzzles.  The player and opposing
+    # Trainer both rely on held loadouts rather than Potion/Full Restore AI.
+    header = re.sub(r"(?m)^Items:.*\n?", "", header)
     if design.format == "multi":
         header = replace_attribute(header, "Multi Party", "Half")
     else:
@@ -173,8 +176,8 @@ def main() -> None:
     parser.add_argument("--through-encounter", type=int, required=True)
     parser.add_argument("--verify-only", action="store_true")
     args = parser.parse_args()
-    if not 1 <= args.through_encounter <= 509:
-        raise SystemExit("--through-encounter must be in 1..509")
+    if not 1 <= args.through_encounter <= 513:
+        raise SystemExit("--through-encounter must be in 1..513")
     output, applied, missing = implement(args.through_encounter)
     if args.verify_only:
         if output != TRAINERS_PARTY.read_text():

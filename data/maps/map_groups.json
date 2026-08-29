@@ -34,6 +34,7 @@
     "gMapGroup_IndoorRoute123",
     "gMapGroup_IndoorRoute119",
     "gMapGroup_IndoorRoute124",
+    "gMapGroup_EmeraldChampionsExpansion",
     "gMapGroup_Link_Frlg",
     "gMapGroup_Dungeons_Frlg",
     "gMapGroup_SpecialArea_Frlg",
@@ -1160,5 +1161,29 @@
   ],
   "gMapGroup_IndoorSevenIslandRoute_Frlg": [
     "SevenIsland_SevaultCanyon_House_Frlg"
+  ],
+  "gMapGroup_EmeraldChampionsExpansion": [
+    "AlteringCave_1F",
+    "AlteringCave_B1F",
+    "AshenWoods",
+    "CaveOfOrigin_DianciesRoom",
+    "DewfordManor_1F",
+    "DewfordMeadow",
+    "EmberPath",
+    "MeteorFalls_JirachisRoom",
+    "MirageTower_B1F",
+    "PetalburgWoods_2",
+    "PetalburgWoods_3",
+    "Route111_RuinsExterior",
+    "SandstrewnRuins",
+    "SandstrewnRuins_2F",
+    "SandstrewnRuins_3F",
+    "SandstrewnRuins_B1F",
+    "ScorchedSlab_B1F",
+    "ScorchedSlab_B2F",
+    "ScorchedSlab_HeatransRoom",
+    "Seaspray_Cave",
+    "Seaspray_Cave_B1F",
+    "VerdanturfMeadow"
   ]
 }

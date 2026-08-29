@@ -434,6 +434,47 @@ LilycoveCity_Harbor_EventScript_Sailor::
 
 LilycoveCity_Harbor_EventScript_SailorFerryAvailable::
 	msgbox LilycoveCity_Harbor_Text_SailorFerryAvailable, MSGBOX_DEFAULT
+	checkitem ITEM_EON_TICKET, 1
+	call_if_eq VAR_RESULT, FALSE, LilycoveCity_Harbor_EventScript_GiveEonTicket
+	setflag FLAG_ENABLE_SHIP_SOUTHERN_ISLAND
+	checkitem ITEM_MYSTIC_TICKET, 1
+	call_if_eq VAR_RESULT, FALSE, LilycoveCity_Harbor_EventScript_GiveMysticTicket
+	setflag FLAG_ENABLE_SHIP_NAVEL_ROCK
+	setflag FLAG_RECEIVED_MYSTIC_TICKET
+	checkitem ITEM_AURORA_TICKET, 1
+	call_if_eq VAR_RESULT, FALSE, LilycoveCity_Harbor_EventScript_GiveAuroraTicket
+	setflag FLAG_ENABLE_SHIP_BIRTH_ISLAND
+	setflag FLAG_RECEIVED_AURORA_TICKET
+	checkitem ITEM_OLD_SEA_MAP, 1
+	call_if_eq VAR_RESULT, FALSE, LilycoveCity_Harbor_EventScript_GiveOldSeaMap
+	setflag FLAG_ENABLE_SHIP_FARAWAY_ISLAND
+	setflag FLAG_RECEIVED_OLD_SEA_MAP
+	msgbox LilycoveCity_Harbor_Text_ChampionPassesReady, MSGBOX_DEFAULT
+	release
+	end
+
+LilycoveCity_Harbor_EventScript_GiveEonTicket::
+	giveitem ITEM_EON_TICKET
+	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_Harbor_EventScript_PassesBagFull
+	return
+
+LilycoveCity_Harbor_EventScript_GiveMysticTicket::
+	giveitem ITEM_MYSTIC_TICKET
+	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_Harbor_EventScript_PassesBagFull
+	return
+
+LilycoveCity_Harbor_EventScript_GiveAuroraTicket::
+	giveitem ITEM_AURORA_TICKET
+	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_Harbor_EventScript_PassesBagFull
+	return
+
+LilycoveCity_Harbor_EventScript_GiveOldSeaMap::
+	giveitem ITEM_OLD_SEA_MAP
+	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_Harbor_EventScript_PassesBagFull
+	return
+
+LilycoveCity_Harbor_EventScript_PassesBagFull::
+	msgbox LilycoveCity_Harbor_Text_ChampionPassesBagFull, MSGBOX_DEFAULT
 	release
 	end
 
@@ -578,8 +619,17 @@ LilycoveCity_Harbor_Text_SailorFerryUnavailable:
 	.string "at the SHIPYARD in SLATEPORT.$"
 
 LilycoveCity_Harbor_Text_SailorFerryAvailable:
-	.string "The ferry S.S. TIDAL is finally in\n"
-	.string "operation.\p"
-	.string "The folks at the SHIPYARD in SLATEPORT\n"
-	.string "must've worked extra hard.\p"
-	.string "Well, it's my turn to get busy now!$"
+	.string "CHAMPION! STERN and DEVON authenticated\n"
+	.string "four old exploration passes for you.\p"
+	.string "They chart SOUTHERN ISLAND, NAVEL ROCK,\n"
+	.string "BIRTH ISLAND, and FARAWAY ISLAND.$"
+
+LilycoveCity_Harbor_Text_ChampionPassesReady:
+	.string "All four routes are active. Show the\n"
+	.string "attendant a pass to choose its island.\p"
+	.string "Each destination preserves a unique\n"
+	.string "legendary encounter. Explore them all.$"
+
+LilycoveCity_Harbor_Text_ChampionPassesBagFull:
+	.string "Your BAG cannot hold the next pass. Make\n"
+	.string "room and speak to me again.$"

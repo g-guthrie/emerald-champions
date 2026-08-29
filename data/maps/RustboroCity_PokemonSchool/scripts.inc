@@ -242,13 +242,10 @@ RustboroCity_PokemonSchool_Text_ExplainFreeze:
 	.string "completely helpless.\p"
 	.string "It will remain frozen after battle.\n"
 	.string "Thaw it out using an ICE HEAL.$"
-
 RustboroCity_PokemonSchool_Text_StudentsWhoDontStudyGetQuickClaw:
-	.string "Students who don't study get a little\n"
-	.string "taste of my QUICK CLAW.\p"
-	.string "Whether or not you are a good student \n"
-	.string "will be evident from the way you use\l"
-	.string "this item.$"
+	.string "A good TRAINER studies every tool.\p"
+	.string "This SUN STONE evolves certain POKéMON.\n"
+	.string "Show me that you know when to use it.$"
 RustboroCity_PokemonSchool_Text_ExplainQuickClaw:
 	.string "A Sun Stone evolves certain Pokémon.\n"
 	.string "Use it from the Bag when ready.$"

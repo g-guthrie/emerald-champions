@@ -51,19 +51,19 @@ MossdeepCity_SpaceCenter_2F_Movement_PlayerExit:
 
 MossdeepCity_SpaceCenter_2F_EventScript_BattleThreeMagmaGrunts::
 	msgbox MossdeepCity_SpaceCenter_2F_Text_Grunt5Intro, MSGBOX_DEFAULT
-	trainerbattle_no_intro TRAINER_GRUNT_SPACE_CENTER_5, MossdeepCity_SpaceCenter_2F_Text_Grunt5Defeat
+	trainerbattle_no_intro_double TRAINER_GRUNT_SPACE_CENTER_5, MossdeepCity_SpaceCenter_2F_Text_Grunt5Defeat, EmeraldChampions_Text_NeedTwoPokemon
 	applymovement LOCALID_SPACE_CENTER_GRUNT_5, MossdeepCity_SpaceCenter_2F_Movement_Grunt5Defeated
 	waitmovement 0
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	msgbox MossdeepCity_SpaceCenter_2F_Text_Grunt6Intro, MSGBOX_DEFAULT
-	trainerbattle_no_intro TRAINER_GRUNT_SPACE_CENTER_6, MossdeepCity_SpaceCenter_2F_Text_Grunt6Defeat
+	trainerbattle_no_intro_double TRAINER_GRUNT_SPACE_CENTER_6, MossdeepCity_SpaceCenter_2F_Text_Grunt6Defeat, EmeraldChampions_Text_NeedTwoPokemon
 	applymovement LOCALID_SPACE_CENTER_GRUNT_6, MossdeepCity_SpaceCenter_2F_Movement_Grunt6Defeated
 	waitmovement 0
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	msgbox MossdeepCity_SpaceCenter_2F_Text_Grunt7Intro, MSGBOX_DEFAULT
-	trainerbattle_no_intro TRAINER_GRUNT_SPACE_CENTER_7, MossdeepCity_SpaceCenter_2F_Text_Grunt7Defeat
+	trainerbattle_no_intro_double TRAINER_GRUNT_SPACE_CENTER_7, MossdeepCity_SpaceCenter_2F_Text_Grunt7Defeat, EmeraldChampions_Text_NeedTwoPokemon
 	applymovement LOCALID_SPACE_CENTER_GRUNT_7, MossdeepCity_SpaceCenter_2F_Movement_Grunt7Defeated
 	waitmovement 0
 	setvar VAR_MOSSDEEP_SPACE_CENTER_STATE, 2
@@ -162,9 +162,14 @@ MossdeepCity_SpaceCenter_2F_EventScript_Grunt5::
 	end
 
 MossdeepCity_SpaceCenter_2F_EventScript_Tabitha::
+	trainerbattle_double TRAINER_TABITHA_MOSSDEEP, MossdeepCity_SpaceCenter_2F_Text_TabithaIntro, MossdeepCity_SpaceCenter_Text_TabithaDefeat, MossdeepCity_SpaceCenter_2F_Text_TabithaNotEnoughMons
+	msgbox MossdeepCity_SpaceCenter_2F_Text_TabithaAfter, MSGBOX_AUTOCLOSE
+	end
+
+MossdeepCity_SpaceCenter_2F_EventScript_Courtney::
 	lock
 	faceplayer
-	msgbox MossdeepCity_SpaceCenter_2F_Text_WellTakeCareOfYou, MSGBOX_DEFAULT
+	msgbox MossdeepCity_SpaceCenter_2F_Text_CourtneyFormation, MSGBOX_DEFAULT
 	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
@@ -245,7 +250,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_ChoosePartyForMultiBattle::
 	goto MossdeepCity_SpaceCenter_2F_EventScript_ReadyForBattlePrompt
 
 MossdeepCity_SpaceCenter_2F_EventScript_DoStevenMultiBattle::
-	multi_2_vs_2 TRAINER_MAXIE_MOSSDEEP, MossdeepCity_SpaceCenter_2F_Text_JustWantToExpandLand, TRAINER_TABITHA_MOSSDEEP, MossdeepCity_SpaceCenter_Text_TabithaDefeat, PARTNER_STEVEN
+	multi_2_vs_2 TRAINER_MAXIE_MOSSDEEP, MossdeepCity_SpaceCenter_2F_Text_JustWantToExpandLand, TRAINER_COURTNEY_MOSSDEEP, MossdeepCity_SpaceCenter_Text_CourtneyDefeat, PARTNER_STEVEN
 	switch VAR_RESULT
 	case 1, MossdeepCity_SpaceCenter_2F_EventScript_DefeatedMaxieTabitha
 	fadescreen FADE_TO_BLACK
@@ -256,11 +261,11 @@ MossdeepCity_SpaceCenter_2F_EventScript_DefeatedMaxieTabitha::
 	closemessage
 	delay 20
 	applymovement LOCALID_SPACE_CENTER_MAXIE, Common_Movement_WalkInPlaceFasterLeft
-	applymovement LOCALID_SPACE_CENTER_TABITHA, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_EC_COURTNEY_MOSSDEEP, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	delay 60
 	applymovement LOCALID_SPACE_CENTER_MAXIE, Common_Movement_WalkInPlaceFasterUp
-	applymovement LOCALID_SPACE_CENTER_TABITHA, Common_Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_EC_COURTNEY_MOSSDEEP, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	delay 20
 	msgbox MossdeepCity_SpaceCenter_2F_Text_MaxieWeWillGiveUp, MSGBOX_DEFAULT
@@ -275,6 +280,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_DefeatedMaxieTabitha::
 	removeobject LOCALID_SPACE_CENTER_GRUNT_6
 	removeobject LOCALID_SPACE_CENTER_GRUNT_7
 	removeobject LOCALID_SPACE_CENTER_GRUNT_5
+	removeobject LOCALID_EC_COURTNEY_MOSSDEEP
 	removeobject LOCALID_SPACE_CENTER_TABITHA
 	removeobject LOCALID_SPACE_CENTER_MAXIE
 	setobjectxy LOCALID_SPACE_CENTER_2F_SCIENTIST, 5, 6
@@ -426,26 +432,20 @@ MossdeepCity_SpaceCenter_2F_Text_MaxieDontInterfere:
 	.string "Don't you dare interfere!$"
 
 MossdeepCity_SpaceCenter_2F_Text_StevenWhyStealRocketFuel:
-	.string "STEVEN: TEAM MAGMA…\p"
-	.string "What's the point of stealing rocket\n"
-	.string "fuel?$"
+	.string "STEVEN: Rocket fuel cannot control\n"
+	.string "GROUDON. What are you truly targeting?$"
 
 MossdeepCity_SpaceCenter_2F_Text_MaxieUseFuelToEruptVolcano:
-	.string "MAXIE: Fufufu… Since you're so\n"
-	.string "curious, you deserve an explanation.\p"
-	.string "We're going to jettison the entire\n"
-	.string "load into MT. CHIMNEY!\p"
-	.string "With GROUDON gone, we have no need\n"
-	.string "for that slag heap of a mountain!\p"
-	.string "So we'll use the fuel's power to make\n"
-	.string "the volcano erupt!\p"
-	.string "It will be savage!$"
+	.string "MAXIE: The rocket can strike MT. CHIMNEY\n"
+	.string "with a measured charge from above.\p"
+	.string "If GROUDON will not obey, I will sever\n"
+	.string "the fault network before AQUA uses it.\p"
+	.string "The calculation is brutal, not savage.$"
 
 MossdeepCity_SpaceCenter_2F_Text_StevenAreYouReadyToBattle:
-	.string "STEVEN: {PLAYER}{KUN}!\n"
-	.string "You're going to help me?\p"
-	.string "Let's go into battle together!\n"
-	.string "Are you ready?$"
+	.string "STEVEN: {PLAYER}! We fight together.\n"
+	.string "Their formation is built for two targets.\p"
+	.string "Are you ready to break it as partners?$"
 
 MossdeepCity_SpaceCenter_2F_Text_StevenHurryGetReadyQuickly:
 	.string "STEVEN: Then, hurry!\n"
@@ -456,35 +456,44 @@ MossdeepCity_SpaceCenter_2F_Text_JustWantToExpandLand:
 	.string "I just want to expand the land mass…$"
 
 MossdeepCity_SpaceCenter_Text_TabithaDefeat:
-	.string "I'm with our leader…$"
+	.string "The launch angle collapsed…$"
+
+MossdeepCity_SpaceCenter_2F_Text_TabithaIntro:
+	.string "TABITHA: The rocket needs a stable base.\p"
+	.string "My sand formation will pin both of your\n"
+	.string "POKéMON before you reach MAXIE.$"
+
+MossdeepCity_SpaceCenter_2F_Text_TabithaAfter:
+	.string "You broke the foundation, but the real\n"
+	.string "launch sequence is still ahead.$"
+
+MossdeepCity_SpaceCenter_2F_Text_TabithaNotEnoughMons:
+	.string "A formation requires two usable\n"
+	.string "POKéMON. Return when both can battle.$"
+
+MossdeepCity_SpaceCenter_Text_CourtneyDefeat:
+	.string "Joint model... broken by partnership.$"
+
+MossdeepCity_SpaceCenter_2F_Text_CourtneyFormation:
+	.string "COURTNEY: MAXIE supplies force. I supply\n"
+	.string "the alternate clock. STEVEN is accounted\l"
+	.string "for. You remain the unstable variable.$"
 
 MossdeepCity_SpaceCenter_2F_Text_MaxieWeFailedIsAquaAlsoMisguided:
-	.string "MAXIE: We failed to make the volcano\n"
-	.string "erupt…\p"
-	.string "We failed to control GROUDON after\n"
-	.string "we had awoken it…\p"
-	.string "Is our goal to expand the land\n"
-	.string "misguided?\p"
-	.string "… … … … … …\n"
-	.string "… … … … … …\p"
-	.string "If…\n"
-	.string "If we, TEAM MAGMA, are wrong…\l"
-	.string "… … … … … …\p"
-	.string "Then might TEAM AQUA's goal to expand\n"
-	.string "the sea also be equally misguided?$"
+	.string "MAXIE: Again, your partnership adapted\n"
+	.string "while my certainty narrowed.\p"
+	.string "We failed to control GROUDON, and now we\n"
+	.string "would destroy what refused control.\p"
+	.string "If MAGMA's premise is wrong, then AQUA's\n"
+	.string "opposite certainty must be wrong as well.$"
 
 MossdeepCity_SpaceCenter_2F_Text_MaxieWeWillGiveUp:
-	.string "MAXIE: All right…\n"
-	.string "We will give up on the fuel…\p"
-	.string "There appear to be more important\n"
-	.string "matters that I must examine…$"
+	.string "MAXIE: Keep the fuel. I must find GROUDON\n"
+	.string "before ARCHIE repeats the same mistake.$"
 
 MossdeepCity_SpaceCenter_2F_Text_StevenThankYouComeSeeMeAtHome:
-	.string "STEVEN: Whew, that was too tense.\n"
-	.string "{PLAYER}{KUN}, thank you.\p"
-	.string "I have something to give you as\n"
-	.string "thanks for your support.\p"
-	.string "Please come see me at home\n"
-	.string "after this.\p"
-	.string "Oh, yes, I don't live in RUSTBORO CITY.\n"
-	.string "I live right here on this island.$"
+	.string "STEVEN: That was true doubles play: each\n"
+	.string "of us made the other's options better.\p"
+	.string "Come to my home here in MOSSDEEP. I have\n"
+	.string "a reward and data on a hidden chamber\l"
+	.string "in METEOR FALLS.$"

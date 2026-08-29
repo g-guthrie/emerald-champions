@@ -287,7 +287,7 @@ Route110_TrickHousePuzzle3_EventScript_FoundScroll::
 	end
 
 Route110_TrickHousePuzzle3_EventScript_Justin::
-	trainerbattle_single TRAINER_JUSTIN, Route110_TrickHousePuzzle3_Text_JustinIntro, Route110_TrickHousePuzzle3_Text_JustinDefeat
+	trainerbattle_double TRAINER_JUSTIN, Route110_TrickHousePuzzle3_Text_JustinIntro, Route110_TrickHousePuzzle3_Text_JustinDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route110_TrickHousePuzzle3_Text_JustinPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -297,7 +297,7 @@ Route110_TrickHousePuzzle3_EventScript_Martha::
 	end
 
 Route110_TrickHousePuzzle3_EventScript_Alan::
-	trainerbattle_single TRAINER_ALAN, Route110_TrickHousePuzzle3_Text_AlanIntro, Route110_TrickHousePuzzle3_Text_AlanDefeat
+	trainerbattle_double TRAINER_ALAN, Route110_TrickHousePuzzle3_Text_AlanIntro, Route110_TrickHousePuzzle3_Text_AlanDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route110_TrickHousePuzzle3_Text_AlanPostBattle, MSGBOX_AUTOCLOSE
 	end
 

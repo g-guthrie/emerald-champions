@@ -43,7 +43,7 @@ MtChimney_EventScript_Maxie::
 	applymovement LOCALID_MT_CHIMNEY_MAXIE, Common_Movement_Delay48
 	waitmovement 0
 	msgbox MtChimney_Text_MaxieIntro, MSGBOX_DEFAULT
-	trainerbattle_no_intro TRAINER_MAXIE_MT_CHIMNEY, MtChimney_Text_MaxieDefeat
+	trainerbattle_no_intro_double TRAINER_MAXIE_MT_CHIMNEY, MtChimney_Text_MaxieDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox MtChimney_Text_MaxieYouHaventSeenLastOfMagma, MSGBOX_DEFAULT
 	closemessage
 	delay 30
@@ -406,7 +406,7 @@ MtChimney_EventScript_BusyAquaGrunt3::
 	end
 
 MtChimney_EventScript_Tabitha::
-	trainerbattle_single TRAINER_TABITHA_MT_CHIMNEY, MtChimney_Text_TabithaIntro, MtChimney_Text_TabithaDefeat
+	trainerbattle_double TRAINER_TABITHA_MT_CHIMNEY, MtChimney_Text_TabithaIntro, MtChimney_Text_TabithaDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox MtChimney_Text_TabithaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -480,7 +480,7 @@ MtChimney_EventScript_RouteSign::
 	end
 
 MtChimney_EventScript_Shelby::
-	trainerbattle_single TRAINER_SHELBY_1, MtChimney_Text_ShelbyIntro, MtChimney_Text_ShelbyDefeat, MtChimney_EventScript_DefeatedShelby
+	trainerbattle_double TRAINER_SHELBY_1, MtChimney_Text_ShelbyIntro, MtChimney_Text_ShelbyDefeat, EmeraldChampions_Text_NeedTwoPokemon, MtChimney_EventScript_DefeatedShelby
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, MtChimney_EventScript_RematchShelby
 	msgbox MtChimney_Text_ShelbyPostBattle, MSGBOX_DEFAULT
@@ -496,22 +496,22 @@ MtChimney_EventScript_DefeatedShelby::
 	end
 
 MtChimney_EventScript_RematchShelby::
-	trainerbattle_rematch TRAINER_SHELBY_1, MtChimney_Text_ShelbyRematchIntro, MtChimney_Text_ShelbyRematchDefeat
+	trainerbattle_rematch_double TRAINER_SHELBY_1, MtChimney_Text_ShelbyRematchIntro, MtChimney_Text_ShelbyRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox MtChimney_Text_ShelbyPostRematch, MSGBOX_AUTOCLOSE
 	end
 
 MtChimney_EventScript_Melissa::
-	trainerbattle_single TRAINER_MELISSA, MtChimney_Text_MelissaIntro, MtChimney_Text_MelissaDefeat
+	trainerbattle_double TRAINER_MELISSA, MtChimney_Text_MelissaIntro, MtChimney_Text_MelissaDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox MtChimney_Text_MelissaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 MtChimney_EventScript_Sheila::
-	trainerbattle_single TRAINER_SHEILA, MtChimney_Text_SheilaIntro, MtChimney_Text_SheilaDefeat
+	trainerbattle_double TRAINER_SHEILA, MtChimney_Text_SheilaIntro, MtChimney_Text_SheilaDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox MtChimney_Text_SheilaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 MtChimney_EventScript_Shirley::
-	trainerbattle_single TRAINER_SHIRLEY, MtChimney_Text_ShirleyIntro, MtChimney_Text_ShirleyDefeat
+	trainerbattle_double TRAINER_SHIRLEY, MtChimney_Text_ShirleyIntro, MtChimney_Text_ShirleyDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox MtChimney_Text_ShirleyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -521,7 +521,7 @@ MtChimney_EventScript_Grunt1::
 	end
 
 MtChimney_EventScript_Sawyer::
-	trainerbattle_single TRAINER_SAWYER_1, MtChimney_Text_SawyerIntro, MtChimney_Text_SawyerDefeat, MtChimney_EventScript_SawyerDefeated
+	trainerbattle_double TRAINER_SAWYER_1, MtChimney_Text_SawyerIntro, MtChimney_Text_SawyerDefeat, EmeraldChampions_Text_NeedTwoPokemon, MtChimney_EventScript_SawyerDefeated
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, MtChimney_EventScript_SawyerRematch
 	msgbox MtChimney_Text_SawyerPostBattle, MSGBOX_DEFAULT
@@ -537,59 +537,37 @@ MtChimney_EventScript_SawyerDefeated::
 	end
 
 MtChimney_EventScript_SawyerRematch::
-	trainerbattle_rematch TRAINER_SAWYER_1, MtChimney_Text_SawyerRematchIntro, MtChimney_Text_SawyerRematchDefeat
+	trainerbattle_rematch_double TRAINER_SAWYER_1, MtChimney_Text_SawyerRematchIntro, MtChimney_Text_SawyerRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox MtChimney_Text_SawyerPostRematch, MSGBOX_AUTOCLOSE
 	end
 
 MtChimney_Text_MeteoriteWillActivateVolcano:
-	.string "The power contained in the METEORITE…\p"
-	.string "By amplifying its power with this\n"
-	.string "machine, MT. CHIMNEY's volcanic\l"
-	.string "activity will instantly intensify…\p"
-	.string "Its energy will grow deep inside\n"
-	.string "the crater and…\l"
-	.string "Fufufu…$"
+	.string "The METEORITE will force MT. CHIMNEY's\n"
+	.string "energy into a stable, permanent field.\p"
+	.string "Every cavern on the fault line will\n"
+	.string "open, and every ancient SIGN will wake.$"
 
 MtChimney_Text_MaxieIntro:
-	.string "MAXIE: Hm?\n"
-	.string "Who are you?\p"
-	.string "… … … … … …\n"
-	.string "… … … … … …\p"
-	.string "I'd heard ARCHIE bemoaning a child\n"
-	.string "who's been meddling in TEAM AQUA's\l"
-	.string "affairs.\p"
-	.string "It must be you he meant.\p"
-	.string "Humph! So you're thinking of\n"
-	.string "interfering with us, TEAM MAGMA?\p"
-	.string "Now you listen.\n"
-	.string "Long ago, living things used the\l"
-	.string "land to live and grow.\p"
-	.string "That is why land is all important!\n"
-	.string "It is the cradle of all!\p"
-	.string "That is why TEAM MAGMA is dedicated\n"
-	.string "to the expansion of the land mass.\p"
-	.string "It is for further advancement of\n"
-	.string "humankind and POKéMON!\p"
-	.string "And for that, we need the power of\n"
-	.string "what sleeps within this mountain…\p"
-	.string "Oh! There was no need for you to\n"
-	.string "learn that much.\p"
-	.string "But, no matter!\n"
-	.string "I'll teach you the consequences of\l"
-	.string "meddling in our grand design!$"
+	.string "MAXIE: So you are ARCHIE's unexpected\n"
+	.string "variable. I prefer solvable systems.\p"
+	.string "The sea changes without permission.\n"
+	.string "Land lets people build, plan, and grow.\p"
+	.string "This machine will stabilize the fault\n"
+	.string "network and expand that certainty.\p"
+	.string "The marks you call CHAMPION'S SIGNS are\n"
+	.string "nodes of the same ancient system.\p"
+	.string "You may test my model. You will not stop\n"
+	.string "it.$"
 
 MtChimney_Text_MaxieDefeat:
-	.string "What?!\p"
-	.string "I, MAXIE, was caught off guard?!$"
+	.string "You found the flaw before I could\n"
+	.string "stabilize the field...$"
 
 MtChimney_Text_MaxieYouHaventSeenLastOfMagma:
-	.string "MAXIE: But, enough.\n"
-	.string "I will back off this time.\p"
-	.string "But don't think that this is the last\n"
-	.string "you've seen of TEAM MAGMA.\p"
-	.string "Fufufu…\p"
-	.string "Even without the METEORITE, if we\n"
-	.string "obtain that ORB… Fufufu…$"
+	.string "MAXIE: The METEORITE was one input, not\n"
+	.string "the plan itself. The BLUE ORB remains.\p"
+	.string "You stopped this eruption, but the fault\n"
+	.string "line is already moving beneath HOENN.$"
 
 MtChimney_Text_TabithaIntro:
 	.string "Hehehe!\p"
@@ -666,14 +644,10 @@ MtChimney_Text_Bufoh:
 	.string "Bufoh!$"
 
 MtChimney_Text_ArchieGoStopTeamMagma:
-	.string "ARCHIE: Grr, {PLAYER}!\n"
-	.string "I should've guessed you'd show up!\p"
-	.string "See for yourself what the fanatics\n"
-	.string "of TEAM MAGMA are up to!\p"
-	.string "They're trying to inject the stolen\n"
-	.string "METEORITE's power into the volcano!\p"
-	.string "Doing something like that will cause\n"
-	.string "the volcano's eruption!$"
+	.string "ARCHIE: {PLAYER}! MAXIE is forcing the\n"
+	.string "METEORITE into the volcano's fault line.\p"
+	.string "If it breaks, fire will tear through the\n"
+	.string "mountain and every connected cavern.$"
 
 MtChimney_Text_ArchieIHaveMyHandsFull:
 	.string "ARCHIE: Grrr…\p"
@@ -683,16 +657,11 @@ MtChimney_Text_ArchieIHaveMyHandsFull:
 	.string "three opponents at once!$"
 
 MtChimney_Text_ArchieThankYou:
-	.string "ARCHIE: {PLAYER}!\n"
-	.string "Thank you!\p"
-	.string "With your help, we thwarted TEAM\n"
-	.string "MAGMA's destructive plan!\p"
-	.string "But… You…\n"
-	.string "Whose side are you on?\p"
-	.string "Ah, it doesn't matter.\p"
-	.string "We will remain vigilant and keep up\n"
-	.string "our pursuit of TEAM MAGMA.\p"
-	.string "{PLAYER}, we shall meet again!$"
+	.string "ARCHIE: You stopped him. I owe you that.\p"
+	.string "But do not confuse AQUA with MAGMA. We\n"
+	.string "would free the old current, not cage it.\p"
+	.string "If you stand in our way again, I will\n"
+	.string "expect an even better battle.$"
 
 MtChimney_Text_MagmaOutnumbersUs:
 	.string "Darn… TEAM MAGMA outnumbers us!\n"

@@ -1,66 +1,59 @@
-# Legendary Signs and Champions Circuit checkpoint
+# Legendary Signs and Champions Circuit
 
 ## Legendary acquisition layer
 
-Emerald Champions tracks 53 additional legendary, mythical, and Ultra Beast
-acquisitions without adding a quest-log UI. Existing Hoenn NPCs and locations
-carry the discovery layer:
+Emerald Champions has 81 complete Sign definitions and 101 legendary-class
+families with a Hoenn acquisition root.
 
-- The Devon dream researcher reveals conditional wild Signs once the player
-  has the required badge/story state and brings the paired species.
-- The Mt. Pyre storyteller owns the Darkrai to Cresselia to Dialga visible
-  encounter chain.
-- Manaphy and Ditto produce Phione through the native Day Care.
-- Genesect and Poipole replace the now-redundant TM reward counter at Mauville
-  Game Corner and are one-time prizes.
-- Seventeen endgame species are Champions Circuit milestones; Eternatus is the
-  mastery reward.
-- Capturing every conditional and visible Sign unlocks Arceus.
+- Twenty-three visible quests use native overworld objects, including giant
+  Regigigas and the Darkrai-Cresselia-Dialga chain.
+- Eighteen ordinary-wild roots place Ultra Beasts and other special species in
+  coherent restored areas without duplicating one-off sanctuaries.
+- Conditional quests accept any member of the required evolution family.
+- Every prerequisite chain terminates; no Sign depends on collapsible Mirage
+  Tower or Safari capture rules.
+- Manaphy and Ditto produce Phione through the Day Care.
+- Genesect and Poipole are one-time Game Corner prizes.
+- Four postgame island passes are obtainable through the native harbor.
+- Twelve finite Circuit rewards complete before the win-40 mastery reward.
+- Arceus mastery uses all required Sign state and clamps its level to 100.
 
-Hoopa is on permanent Route 111 rather than collapsible Mirage Tower. Tapu
-Bulu and Xerneas were moved out of the Safari Zone, so no mastery acquisition
-is forced through Safari flee, ball, or step rules. Visible encounters use the
-modern expansion's native follower graphics for Darkrai, Cresselia, and
-Dialga. Every reward level is clamped to `MAX_LEVEL`.
+The restored 22-map side-area network contains seventeen Sign objects, four
+static sanctuaries, forty unique progression pickups, and twenty-one themed
+wild tables. All restored maps are reachable from the directed Hoenn campaign
+graph, including the permanent post-collapse Sandstrewn Ruins route and the
+restored Cave of Origin crystal chamber.
 
 ## Live Showdown Champions Circuit
 
-The Circuit does not choose from preseeded teams. Every match is generated in
-the ROM when the player requests it.
+The Battle Frontier lobby exposes an indefinitely replayable doubles Circuit.
+Teams are generated inside the ROM rather than selected from a finite seed
+list.
 
-Pinned source:
-
-- Pokemon Showdown commit:
+- Pinned Pokemon Showdown commit:
   `bb179fbf8449e3c31632bd56f671ffb4404fa6e7`
-- Champions doubles data SHA-256:
+- Source data SHA-256:
   `851114e68805aafbecbed0aaee7994164d199d890deed78bafc2beaf3c2221d8`
-- Source pool: 311 species/form variants and 444 role templates.
+- Pool: 311 species/form variants and 444 role templates
+- Live rules: species and item uniqueness, one Mega, type/weakness limits,
+  weather and field compatibility, role-driven moves, Ability filtering, and
+  doubles item selection
+- Player party: temporarily normalized to level 80 and restored exactly on
+  retirement or defeat
+- Opponent scaling: one additional slot gains one level after each win, then
+  the whole team advances
+- State: dedicated variables; no Battle Tower record contamination
 
-The C port preserves the defining Showdown allocator behavior: uniform
-base-species sampling, species clause, Mega-form preference before the team's
-single Mega slot is spent, two-per-type limit, weakness and double-weakness
-limits, Freeze-Dry pressure, conflicting weather exclusions, screen/web and
-Lightning Rod compatibility, team-detail tracking, role-enforced moves,
-Ability culling, and Champions doubles item rules. GBA-specific adaptations
-are the Circuit's level escalation, Emerald battle presentation and AI, and
-the campaign's Mega-only selectable-gimmick contract.
+The GBA generator now samples each National Dex family in one linear pass
+instead of nested full-table scans. Sixteen seeded live generations (96 sets)
+pass level, 66-Stat-Point, move, Ability, species, item, and diversity checks.
+Transform-only Ditto and Fake Out plus Last Resort remain intentional native
+Showdown sets.
 
-Player teams are temporarily normalized to level 80. Opponents begin at level
-80; after each victory one additional slot rises by one level, then the whole
-team advances. HP and held loadouts restore between matches. The original
-party is restored on defeat or retirement. The generator uses dedicated event
-variables and never writes Battle Tower records.
+## Evidence
 
-Circuit species rewards arrive every two wins; all 17 are available by win 34.
-Eternatus requires those rewards plus win 40. The random circuit remains
-playable indefinitely after mastery.
-
-## Current evidence
-
-- Static acquisition and source-lock verifier: passing.
-- Production build: passing.
-- ROM: 26,829,684 / 33,554,432 bytes (79.96 percent).
-- EWRAM: 227,060 / 262,144 bytes (86.62 percent).
-- IWRAM: 28,388 / 32,768 bytes (86.63 percent).
-- Multi-seed mGBA generator and representative overworld/save tests remain
-  release gates rather than assumed complete.
+- Legendary dependency and source verifier: PASS
+- Restored-world verifier: PASS
+- Circuit source-lock verifier: PASS
+- Circuit runtime suite: 3 passed, 0 failed
+- Commander suite: 41 passed, 0 failed

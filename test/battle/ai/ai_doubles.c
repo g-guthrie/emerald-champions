@@ -933,7 +933,11 @@ AI_DOUBLE_BATTLE_TEST("AI sees corresponding absorbing abilities on partners")
 
 AI_DOUBLE_BATTLE_TEST("AI sees random rolls correctly")
 {
-    PASSES_RANDOMLY(3, 15, RNG_AI_DMG_ROLL_RANDOM); // Slaking KOs with 3 rolls
+    // Champions Stat Points move this fixture completely above the Scratch
+    // threshold; older stat models straddle it on three damage rolls.
+    PASSES_RANDOMLY(P_STAT_CALCULATION >= GEN_CHAMPIONS ? 1 : 3,
+                    P_STAT_CALCULATION >= GEN_CHAMPIONS ? 1 : 15,
+                    RNG_AI_DMG_ROLL_RANDOM);
     GIVEN {
         WITH_CONFIG(AI_ROLL_ATTACKING, AI_ROLL_RANDOM);
         ASSUME(GetMoveTarget(MOVE_DISCHARGE) == TARGET_FOES_AND_ALLY);

@@ -45,7 +45,7 @@ AbandonedShip_Rooms2_1F_EventScript_Jani::
 	end
 
 AbandonedShip_Rooms2_1F_EventScript_Garrison::
-	trainerbattle_single TRAINER_GARRISON, AbandonedShip_Rooms2_1F_Text_GarrisonIntro, AbandonedShip_Rooms2_1F_Text_GarrisonDefeat
+	trainerbattle_double TRAINER_GARRISON, AbandonedShip_Rooms2_1F_Text_GarrisonIntro, AbandonedShip_Rooms2_1F_Text_GarrisonDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox AbandonedShip_Rooms2_1F_Text_GarrisonPostBattle, MSGBOX_AUTOCLOSE
 	end
 

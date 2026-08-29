@@ -301,7 +301,7 @@ RusturfTunnel_EventScript_Grunt::
 	faceplayer
 	playbgm MUS_ENCOUNTER_AQUA, FALSE
 	msgbox RusturfTunnel_Text_GruntIntro, MSGBOX_DEFAULT
-	trainerbattle_no_intro TRAINER_GRUNT_RUSTURF_TUNNEL, RusturfTunnel_Text_GruntDefeat
+	trainerbattle_no_intro_double TRAINER_GRUNT_RUSTURF_TUNNEL, RusturfTunnel_Text_GruntDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox RusturfTunnel_Text_GruntTakePackage, MSGBOX_DEFAULT
 	giveitem ITEM_DEVON_PARTS
 	closemessage
@@ -414,7 +414,7 @@ RusturfTunnel_Movement_PeekoExit:
 	step_end
 
 RusturfTunnel_EventScript_Mike::
-	trainerbattle_single TRAINER_MIKE_2, RusturfTunnel_Text_MikeIntro, RusturfTunnel_Text_MikeDefeat
+	trainerbattle_double TRAINER_MIKE_2, RusturfTunnel_Text_MikeIntro, RusturfTunnel_Text_MikeDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox RusturfTunnel_Text_MikePostBattle, MSGBOX_AUTOCLOSE
 	end
 

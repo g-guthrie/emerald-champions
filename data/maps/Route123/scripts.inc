@@ -43,12 +43,12 @@ Route123_EventScript_BerryMastersHouseSign::
 	end
 
 Route123_EventScript_Wendy::
-	trainerbattle_single TRAINER_WENDY, Route123_Text_WendyIntro, Route123_Text_WendyDefeat
+	trainerbattle_double TRAINER_WENDY, Route123_Text_WendyIntro, Route123_Text_WendyDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route123_Text_WendyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route123_EventScript_Braxton::
-	trainerbattle_single TRAINER_BRAXTON, Route123_Text_BraxtonIntro, Route123_Text_BraxtonDefeat
+	trainerbattle_double TRAINER_BRAXTON, Route123_Text_BraxtonIntro, Route123_Text_BraxtonDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route123_Text_BraxtonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -58,7 +58,7 @@ Route123_EventScript_Violet::
 	end
 
 Route123_EventScript_Cameron::
-	trainerbattle_single TRAINER_CAMERON_1, Route123_Text_CameronIntro, Route123_Text_CameronDefeat, Route123_EventScript_RegisterCameron
+	trainerbattle_double TRAINER_CAMERON_1, Route123_Text_CameronIntro, Route123_Text_CameronDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route123_EventScript_RegisterCameron
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route123_EventScript_RematchCameron
 	msgbox Route123_Text_CameronPostBattle, MSGBOX_DEFAULT
@@ -74,12 +74,12 @@ Route123_EventScript_RegisterCameron::
 	end
 
 Route123_EventScript_RematchCameron::
-	trainerbattle_rematch TRAINER_CAMERON_1, Route123_Text_CameronRematchIntro, Route123_Text_CameronRematchDefeat
+	trainerbattle_rematch_double TRAINER_CAMERON_1, Route123_Text_CameronRematchIntro, Route123_Text_CameronRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route123_Text_CameronPostRematch, MSGBOX_AUTOCLOSE
 	end
 
 Route123_EventScript_Jacki::
-	trainerbattle_single TRAINER_JACKI_1, Route123_Text_JackiIntro, Route123_Text_JackiDefeat, Route123_EventScript_RegisterJacki
+	trainerbattle_double TRAINER_JACKI_1, Route123_Text_JackiIntro, Route123_Text_JackiDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route123_EventScript_RegisterJacki
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route123_EventScript_RematchJacki
 	msgbox Route123_Text_JackiPostBattle, MSGBOX_DEFAULT
@@ -95,7 +95,7 @@ Route123_EventScript_RegisterJacki::
 	end
 
 Route123_EventScript_RematchJacki::
-	trainerbattle_rematch TRAINER_JACKI_1, Route123_Text_JackiRematchIntro, Route123_Text_JackiRematchDefeat
+	trainerbattle_rematch_double TRAINER_JACKI_1, Route123_Text_JackiRematchIntro, Route123_Text_JackiRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route123_Text_JackiPostRematch, MSGBOX_AUTOCLOSE
 	end
 
@@ -110,22 +110,22 @@ Route123_EventScript_Yuki::
 	end
 
 Route123_EventScript_Kindra::
-	trainerbattle_single TRAINER_KINDRA, Route123_Text_KindraIntro, Route123_Text_KindraDefeat
+	trainerbattle_double TRAINER_KINDRA, Route123_Text_KindraIntro, Route123_Text_KindraDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route123_Text_KindraPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route123_EventScript_Frederick::
-	trainerbattle_single TRAINER_FREDRICK, Route123_Text_FrederickIntro, Route123_Text_FrederickDefeat
+	trainerbattle_double TRAINER_FREDRICK, Route123_Text_FrederickIntro, Route123_Text_FrederickDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route123_Text_FrederickPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route123_EventScript_Alberto::
-	trainerbattle_single TRAINER_ALBERTO, Route123_Text_AlbertoIntro, Route123_Text_AlbertoDefeat
+	trainerbattle_double TRAINER_ALBERTO, Route123_Text_AlbertoIntro, Route123_Text_AlbertoDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route123_Text_AlbertoPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route123_EventScript_Ed::
-	trainerbattle_single TRAINER_ED, Route123_Text_EdIntro, Route123_Text_EdDefeat
+	trainerbattle_double TRAINER_ED, Route123_Text_EdIntro, Route123_Text_EdDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route123_Text_EdPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -140,17 +140,17 @@ Route123_EventScript_Jonas::
 	end
 
 Route123_EventScript_Jazmyn::
-	trainerbattle_single TRAINER_JAZMYN, Route123_Text_JazmynIntro, Route123_Text_JazmynDefeat
+	trainerbattle_double TRAINER_JAZMYN, Route123_Text_JazmynIntro, Route123_Text_JazmynDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route123_Text_JazmynPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route123_EventScript_Davis::
-	trainerbattle_single TRAINER_DAVIS, Route123_Text_DavisIntro, Route123_Text_DavisDefeat
+	trainerbattle_double TRAINER_DAVIS, Route123_Text_DavisIntro, Route123_Text_DavisDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route123_Text_DavisPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route123_EventScript_Fernando::
-	trainerbattle_single TRAINER_FERNANDO_1, Route123_Text_FernandoIntro, Route123_Text_FernandoDefeat, Route123_EventScript_RegisterFernando
+	trainerbattle_double TRAINER_FERNANDO_1, Route123_Text_FernandoIntro, Route123_Text_FernandoDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route123_EventScript_RegisterFernando
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route123_EventScript_RematchFernando
 	msgbox Route123_Text_FernandoPostBattle, MSGBOX_DEFAULT
@@ -166,7 +166,7 @@ Route123_EventScript_RegisterFernando::
 	end
 
 Route123_EventScript_RematchFernando::
-	trainerbattle_rematch TRAINER_FERNANDO_1, Route123_Text_FernandoRematchIntro, Route123_Text_FernandoRematchDefeat
+	trainerbattle_rematch_double TRAINER_FERNANDO_1, Route123_Text_FernandoRematchIntro, Route123_Text_FernandoRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route123_Text_FernandoPostRematch, MSGBOX_AUTOCLOSE
 	end
 

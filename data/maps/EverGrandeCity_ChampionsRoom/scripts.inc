@@ -40,7 +40,7 @@ EverGrandeCity_ChampionsRoom_Movement_PlayerApproachWallace:
 EverGrandeCity_ChampionsRoom_EventScript_Wallace::
 	playbgm MUS_ENCOUNTER_CHAMPION, FALSE
 	msgbox EverGrandeCity_ChampionsRoom_Text_IntroSpeech, MSGBOX_DEFAULT
-	trainerbattle_no_intro TRAINER_WALLACE, EverGrandeCity_ChampionsRoom_Text_Defeat
+	trainerbattle_no_intro_double TRAINER_WALLACE, EverGrandeCity_ChampionsRoom_Text_Defeat, EmeraldChampions_Text_NeedTwoPokemon
 	goto EverGrandeCity_ChampionsRoom_EventScript_Defeated
 	end
 
@@ -220,51 +220,32 @@ EverGrandeCity_ChampionsRoom_Movement_BirchArrives:
 	step_end
 
 EverGrandeCity_ChampionsRoom_Text_IntroSpeech:
-	.string "WALLACE: Welcome, {PLAYER}{KUN}.\p"
-	.string "That incident in SOOTOPOLIS CITY…\n"
-	.string "That was superb work, putting an end\l"
-	.string "to that crisis all by yourself.\p"
-	.string "Oops!\p"
-	.string "It wouldn't be fair to say that you\n"
-	.string "alone ended the crisis.\p"
-	.string "You overcame that difficult situation\n"
-	.string "by working as one with your POKéMON.\p"
-	.string "We TRAINERS raise POKéMON by giving\n"
-	.string "them items and by teaching them new\l"
-	.string "techniques for battle.\p"
-	.string "But we ourselves also learn many\n"
-	.string "things from POKéMON.\p"
-	.string "And this is where your achievements\n"
-	.string "are put to the test against what\l"
-	.string "others like you have achieved.\p"
-	.string "Now!\p"
-	.string "Who can most elegantly dance with\n"
-	.string "their POKéMON in HOENN?\p"
-	.string "Show me right here and now!$"
+	.string "WALLACE: Welcome, {PLAYER}.\p"
+	.string "You crossed HOENN with every tool made\n"
+	.string "available: moves, items, rare partners,\l"
+	.string "and the power of Mega Evolution.\p"
+	.string "Nothing was hidden behind grinding. Every\n"
+	.string "loss asked you to build a better answer.\p"
+	.string "You restored SOOTOPOLIS's board and\n"
+	.string "survived four Champions without healing\l"
+	.string "inside their battles.\p"
+	.string "Now face the region's complete exam. My\n"
+	.string "team shifts rhythm until yours breaks.\p"
+	.string "Show me the Champion you became!$"
 
 EverGrandeCity_ChampionsRoom_Text_Defeat:
-	.string "I, the CHAMPION, fall in defeat…\p"
-	.string "That was wonderful work.\n"
-	.string "You were elegant, infuriatingly so.\l"
-	.string "And yet it was utterly glorious!\p"
-	.string "Kudos to you, {PLAYER}{KUN}!\p"
-	.string "You are a truly noble POKéMON\n"
-	.string "TRAINER!$"
+	.string "Every time I changed the question, you\n"
+	.string "found another answer. Magnificent.$"
 
 EverGrandeCity_ChampionsRoom_Text_PostBattleSpeech:
-	.string "WALLACE: The POKéMON you sent into\n"
-	.string "battle…\p"
-	.string "At times they danced like a spring\n"
-	.string "breeze, and at times they struck\l"
-	.string "like lightning.\p"
-	.string "It was with light, yet surefooted,\n"
-	.string "elegance that you led your POKéMON.\p"
-	.string "Even I felt bedazzled by your\n"
-	.string "masterful performance!\p"
-	.string "You now stand at the glorious peak\n"
-	.string "of the POKéMON LEAGUE.\p"
-	.string "I now proclaim you to be the new\n"
-	.string "HOENN region…$"
+	.string "WALLACE: Your final six were not the only\n"
+	.string "team that brought you here.\p"
+	.string "Every partner caught and puzzle you\n"
+	.string "lost, and every rebuilt strategy became\l"
+	.string "part of this victory.\p"
+	.string "You stand at HOENN's peak, but the\n"
+	.string "The FRONTIER waits beyond the summit.\p"
+	.string "I proclaim you the new HOENN CHAMPION!$"
 
 EverGrandeCity_ChampionsRoom_Text_MayAdvice:
 	.string "MAY: {PLAYER}{KUN}!\p"
@@ -289,25 +270,15 @@ EverGrandeCity_ChampionsRoom_Text_BrendanYouveWon:
 	.string "You've beaten the CHAMPION?$"
 
 EverGrandeCity_ChampionsRoom_Text_BirchArriveRatePokedex:
-	.string "PROF. BIRCH: See?\n"
-	.string "What did I tell you, {RIVAL}?\p"
-	.string "Didn't I tell you that you don't need\n"
-	.string "to worry about {PLAYER}{KUN}?\p"
-	.string "… … … … … … … …\n"
-	.string "{PLAYER}{KUN}, you've finally done it.\p"
-	.string "When I heard that you defeated your\n"
-	.string "own father at the PETALBURG GYM,\l"
-	.string "I thought perhaps you had a chance…\p"
-	.string "But to think you've actually become\n"
-	.string "the CHAMPION!\p"
-	.string "Ah, yes!\p"
-	.string "What became of your POKéDEX?\n"
-	.string "Here, let me see.$"
+	.string "BIRCH: You did it, {PLAYER}!\p"
+	.string "You began with one of nine traditions,\n"
+	.string "then made HOENN's whole ecosystem yours.\p"
+	.string "Let me see the POKéDEX that recorded all\n"
+	.string "those possible teams.$"
 
 EverGrandeCity_ChampionsRoom_Text_BirchCongratulations:
-	.string "PROF. BIRCH: Anyways,\n"
-	.string "congratulations!\p"
-	.string "Now, go proudly into the final room!$"
+	.string "BIRCH: Congratulations. The final room\n"
+	.string "records one team; HOENN remembers all.$"
 
 EverGrandeCity_ChampionsRoom_Text_WallaceComeWithMe:
 	.string "WALLACE: {PLAYER}{KUN}…\p"
@@ -337,4 +308,3 @@ EverGrandeCity_ChampionsRoom_Text_BrendanCongratulations:
 	.string "It can't be helped if that's the rule.\p"
 	.string "{PLAYER}, way to go!\n"
 	.string "Congratulations!$"
-

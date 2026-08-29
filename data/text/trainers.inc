@@ -424,8 +424,8 @@ Route104_Text_DarianDefeat:
 	.string "What the…$"
 
 Route104_Text_DarianPostBattle:
-	.string "Hey, MAGIKARP, you sure don't live up\n"
-	.string "to your name, do you?$"
+	.string "Every catch has a different trick.\n"
+	.string "I still have plenty to learn.$"
 
 Route105_Text_FosterIntro:
 	.string "There's supposed to be a mystical\n"
@@ -1458,7 +1458,7 @@ Route111_Text_BrandenDefeat:
 	.string "enough of a bribe…$"
 
 Route111_Text_BrandenPostBattle:
-	.string "My SANDSHREW loves eating\n"
+	.string "My whole crew loves sharing\n"
 	.string "my sandwiches.$"
 
 Route111_Text_TyronIntro:
@@ -1639,7 +1639,7 @@ Route113_Text_DillonPostBattle:
 Route113_Text_MadelineIntro:
 	.string "I use this parasol to ward off this\n"
 	.string "filthy, yucky volcanic ash from\l"
-	.string "my dear NUMEL.$"
+	.string "my dear NOIBAT.$"
 
 Route113_Text_MadelineDefeat:
 	.string "Huff, huff…\n"
@@ -2030,14 +2030,14 @@ Route115_Text_TimothyPostRematch:
 
 Route115_Text_KoichiIntro:
 	.string "You!\p"
-	.string "My MACHOP!\p"
-	.string "Demand a battle!$"
+	.string "My fighting crew!\p"
+	.string "We demand a battle!$"
 
 Route115_Text_KoichiDefeat:
 	.string "Ouch, ouch, ouch!$"
 
 Route115_Text_KoichiPostBattle:
-	.string "My MACHOP crew!\p"
+	.string "My fighting crew!\p"
 	.string "So long as they seek power, I will\n"
 	.string "grow strong with them!$"
 

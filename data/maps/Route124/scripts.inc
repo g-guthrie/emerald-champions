@@ -21,7 +21,7 @@ Route124_EventScript_Roland::
 	end
 
 Route124_EventScript_Jenny::
-	trainerbattle_single TRAINER_JENNY_1, Route124_Text_JennyIntro, Route124_Text_JennyDefeat, Route124_EventScript_RegisterJenny
+	trainerbattle_double TRAINER_JENNY_1, Route124_Text_JennyIntro, Route124_Text_JennyDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route124_EventScript_RegisterJenny
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route124_EventScript_RematchJenny
 	msgbox Route124_Text_JennyPostBattle, MSGBOX_DEFAULT
@@ -37,17 +37,17 @@ Route124_EventScript_RegisterJenny::
 	end
 
 Route124_EventScript_RematchJenny::
-	trainerbattle_rematch TRAINER_JENNY_1, Route124_Text_JennyRematchIntro, Route124_Text_JennyRematchDefeat
+	trainerbattle_rematch_double TRAINER_JENNY_1, Route124_Text_JennyRematchIntro, Route124_Text_JennyRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route124_Text_JennyPostRematch, MSGBOX_AUTOCLOSE
 	end
 
 Route124_EventScript_Grace::
-	trainerbattle_single TRAINER_GRACE, Route124_Text_GraceIntro, Route124_Text_GraceDefeat
+	trainerbattle_double TRAINER_GRACE, Route124_Text_GraceIntro, Route124_Text_GraceDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route124_Text_GracePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route124_EventScript_Chad::
-	trainerbattle_single TRAINER_CHAD, Route124_Text_ChadIntro, Route124_Text_ChadDefeat
+	trainerbattle_double TRAINER_CHAD, Route124_Text_ChadIntro, Route124_Text_ChadDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route124_Text_ChadPostBattle, MSGBOX_AUTOCLOSE
 	end
 
