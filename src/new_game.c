@@ -231,6 +231,7 @@ void NewGameInitData(void)
     ResetTrainerTowerResults();
     ResetContestLinkResults();
     SetCurrentDifficultyLevel(DIFFICULTY_HARD);
+    FlagSet(FLAG_EC_BESPOKE_TRAINER_FLAGS_MIGRATED);
     ResetItemFlags();
     ResetDexNav();
     ClearFollowerNPCData();

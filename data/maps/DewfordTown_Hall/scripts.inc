@@ -428,8 +428,7 @@ DewfordTown_Hall_Text_GiveYouSludgeBomb:
 	.string "It evolves Clamperl into Gorebyss.$"
 
 DewfordTown_Hall_Text_LoveSludgeBombButTrendInToo:
-	.string "I love SLUDGE BOMB.\p"
-	.string "But POKéMON with the move\n"
-	.string "“{STR_VAR_1}”\l"
-	.string "are in, too.$"
-
+	.string "That DEEP SEA SCALE evolves CLAMPERL\n"
+	.string "into GOREBYSS.\p"
+	.string "The trendy move “{STR_VAR_1}” is\n"
+	.string "making waves, too.$"

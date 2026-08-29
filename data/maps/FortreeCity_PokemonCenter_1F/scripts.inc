@@ -48,8 +48,7 @@ FortreeCity_PokemonCenter_1F_Text_DoYouKnowAboutPokenav:
 	.string "MATCH CALL system?\p"
 	.string "Access it, and you can chat with\n"
 	.string "registered TRAINERS anytime.\p"
-	.string "It also shows you which TRAINERS\n"
-	.string "want a rematch with you.\p"
+	.string "It also lets TRAINERS share news\n"
+	.string "and training notes with you.\p"
 	.string "It's really nifty! Those DEVON guys\n"
 	.string "sure know what they're doing!$"
-

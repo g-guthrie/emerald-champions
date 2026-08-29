@@ -228,27 +228,27 @@ BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseVitamin::
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Protein::
-	setitemandprice ITEM_PROTEIN, 1
+	setitemandprice ITEM_PP_UP, 4
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseVitamin
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Calcium::
-	setitemandprice ITEM_CALCIUM, 1
+	setitemandprice ITEM_PP_MAX, 12
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseVitamin
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Iron::
-	setitemandprice ITEM_IRON, 1
+	setitemandprice ITEM_MAX_REVIVE, 8
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseVitamin
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Zinc::
-	setitemandprice ITEM_ZINC, 1
+	setitemandprice ITEM_SACRED_ASH, 32
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseVitamin
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Carbos::
-	setitemandprice ITEM_CARBOS, 1
+	setitemandprice ITEM_DREAM_BALL, 8
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseVitamin
 
 BattleFrontier_ExchangeServiceCorner_EventScript_HPUp::
-	setitemandprice ITEM_HP_UP, 1
+	setitemandprice ITEM_BEAST_BALL, 8
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseVitamin
 
 
@@ -287,39 +287,39 @@ BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseHoldItem::
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Leftovers::
-	setitemandprice ITEM_LEFTOVERS, 48
+	setitemandprice ITEM_LINKING_CORD, 8
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseHoldItem
 
 BattleFrontier_ExchangeServiceCorner_EventScript_WhiteHerb::
-	setitemandprice ITEM_WHITE_HERB, 48
+	setitemandprice ITEM_PROTECTOR, 12
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseHoldItem
 
 BattleFrontier_ExchangeServiceCorner_EventScript_QuickClaw::
-	setitemandprice ITEM_QUICK_CLAW, 48
+	setitemandprice ITEM_ELECTIRIZER, 12
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseHoldItem
 
 BattleFrontier_ExchangeServiceCorner_EventScript_MentalHerb::
-	setitemandprice ITEM_MENTAL_HERB, 48
+	setitemandprice ITEM_MAGMARIZER, 12
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseHoldItem
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Brightpowder::
-	setitemandprice ITEM_BRIGHT_POWDER, 64
+	setitemandprice ITEM_REAPER_CLOTH, 12
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseHoldItem
 
 BattleFrontier_ExchangeServiceCorner_EventScript_ChoiceBand::
-	setitemandprice ITEM_CHOICE_BAND, 64
+	setitemandprice ITEM_RAZOR_CLAW, 12
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseHoldItem
 
 BattleFrontier_ExchangeServiceCorner_EventScript_KingsRock::
-	setitemandprice ITEM_KINGS_ROCK, 64
+	setitemandprice ITEM_SWEET_APPLE, 8
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseHoldItem
 
 BattleFrontier_ExchangeServiceCorner_EventScript_FocusBand::
-	setitemandprice ITEM_FOCUS_BAND, 64
+	setitemandprice ITEM_TART_APPLE, 8
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseHoldItem
 
 BattleFrontier_ExchangeServiceCorner_EventScript_ScopeLens::
-	setitemandprice ITEM_SCOPE_LENS, 64
+	setitemandprice ITEM_PRISM_SCALE, 16
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseHoldItem
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Man::
@@ -397,10 +397,10 @@ BattleFrontier_ExchangeServiceCorner_Text_GetYouAnythingYouWant:
 	.string "through anything to get it, honey!$"
 
 BattleFrontier_ExchangeServiceCorner_Text_ItemsWillGetMonTougher:
-	.string "If I can get hold of the items here,\n"
-	.string "my POKéMON will get tougher.\p"
-	.string "You bet they will!\n"
-	.string "No question about it!$"
+	.string "The items here aren't ordinary held\n"
+	.string "battle gear.\p"
+	.string "They're rare supplies and evolution\n"
+	.string "tools worth saving Battle Points for!$"
 
 BattleFrontier_ExchangeServiceCorner_Text_GoGetYourOwnDoll:
 	.string "Hah?\n"
@@ -460,60 +460,47 @@ BattleFrontier_ExchangeServiceCorner_Text_LargeDollDesc::
 	.string "Place it on a mat or a desk.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_ProteinDesc::
-	.string "Raises the stat ATTACK of one\n"
-	.string "POKéMON.$"
+	.string "Raises the PP of one selected move.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_CalciumDesc::
-	.string "Raises the stat SP. ATK of one\n"
-	.string "POKéMON.$"
+	.string "Fully raises one selected move's PP.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_IronDesc::
-	.string "Raises the stat DEFENSE of one\n"
-	.string "POKéMON.$"
+	.string "Revives one POKéMON with full HP.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_ZincDesc::
-	.string "Raises the stat SP. DEF of one\n"
-	.string "POKéMON.$"
+	.string "Revives every fainted party member.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_CarbosDesc::
-	.string "Raises the stat SPEED of one\n"
-	.string "POKéMON.$"
+	.string "A rare BALL for dreamlike POKéMON.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_HPUpDesc::
-	.string "Raises the HP of one POKéMON.$"
+	.string "A rare BALL made for ULTRA BEASTS.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_LeftoversDesc::
-	.string "A hold item that gradually restores\n"
-	.string "HP in battle.$"
+	.string "Evolves certain trade-only POKéMON.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_WhiteHerbDesc::
-	.string "A hold item that restores any\n"
-	.string "lowered stat.$"
+	.string "A stiff guard that evolves RHYDON.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_QuickClawDesc::
-	.string "A hold item that occasionally allows\n"
-	.string "the first strike.$"
+	.string "A box of energy that evolves\n"
+	.string "ELECTABUZZ.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_MentalHerbDesc::
-	.string "A hold item that snaps POKéMON out\n"
-	.string "of infatuation.$"
+	.string "A box of magma that evolves MAGMAR.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_BrightpowderDesc::
-	.string "A hold item that casts a glare to\n"
-	.string "reduce accuracy.$"
+	.string "A cloth filled with spiritual energy.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_ChoiceBandDesc::
-	.string "Raises a move's power, but permits\n"
-	.string "only that move.$"
+	.string "A sharp claw that evolves SNEASEL.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_KingsRockDesc::
-	.string "A hold item that may cause flinching\n"
-	.string "when the foe is hit.$"
+	.string "A sweet apple that causes evolution.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_FocusBandDesc::
-	.string "A hold item that occasionally\n"
-	.string "prevents fainting.$"
+	.string "A tart apple that causes evolution.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_ScopeLensDesc::
-	.string "A hold item that raises the\n"
-	.string "critical-hit rate.$"
+	.string "A shining scale that evolves FEEBAS.$"

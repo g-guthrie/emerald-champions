@@ -33,24 +33,30 @@ MarineCave_End_EventScript_Kyogre::
 	delay 40
 	waitmoncry
 	setvar VAR_LAST_TALKED, LOCALID_MARINE_CAVE_KYOGRE
-	setwildbattle SPECIES_KYOGRE, 70
+	setvar VAR_0x8004, SPECIES_KYOGRE
+	setvar VAR_0x8005, 0
+	special CreateEmeraldChampionsStaticLegendaryEncounter
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	setvar VAR_TEMP_1, 0
 	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, MarineCave_End_EventScript_CaughtKyogre
 	goto_if_eq VAR_RESULT, B_OUTCOME_WON, MarineCave_End_EventScript_DefeatedKyogre
 	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, MarineCave_End_EventScript_RanFromKyogre
 	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, MarineCave_End_EventScript_RanFromKyogre
+	releaseall
+	end
+
+MarineCave_End_EventScript_CaughtKyogre::
 	setvar VAR_SHOULD_END_ABNORMAL_WEATHER, 1
 	setflag FLAG_DEFEATED_KYOGRE
 	releaseall
 	end
 
 MarineCave_End_EventScript_DefeatedKyogre::
-	setvar VAR_SHOULD_END_ABNORMAL_WEATHER, 1
-	setflag FLAG_DEFEATED_KYOGRE
-	goto Common_EventScript_RemoveStaticPokemon
+	setvar VAR_0x8004, SPECIES_KYOGRE
+	goto Common_EventScript_LegendaryFlewAway
 	end
 
 MarineCave_End_EventScript_RanFromKyogre::
@@ -68,4 +74,3 @@ MarineCave_End_Movement_KyogreApproach:
 	delay_16
 	walk_down_affine
 	step_end
-

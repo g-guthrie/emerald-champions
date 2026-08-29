@@ -15500,6 +15500,7 @@ const struct ItemInfo gItemsInfo[] =
     {
         .name = ITEM_NAME("Linking Cord"),
         .price = 0,
+        .importance = 1,
         .description = COMPOUND_STRING(
             "A reusable cord\n"
             "that evolves certain\n"

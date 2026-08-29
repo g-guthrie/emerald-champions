@@ -5,94 +5,63 @@ FallarborTown_MoveRelearnersHouse_EventScript_MoveRelearner::
 	lockall
 	applymovement LOCALID_MOVE_RELEARNER, Common_Movement_FacePlayer
 	waitmovement 0
-	goto_if_set FLAG_TEMP_1, FallarborTown_MoveRelearnersHouse_EventScript_AskTeachMove
-	msgbox FallarborTown_MoveRelearnersHouse_Text_ImTheMoveTutor, MSGBOX_DEFAULT
+	goto_if_set FLAG_TEMP_1, FallarborTown_MoveRelearnersHouse_EventScript_AskExchange
+	msgbox FallarborTown_MoveRelearnersHouse_Text_ImTheScaleCollector, MSGBOX_DEFAULT
 	setflag FLAG_TEMP_1
-	goto FallarborTown_MoveRelearnersHouse_EventScript_AskTeachMove
+	goto FallarborTown_MoveRelearnersHouse_EventScript_AskExchange
 	end
 
-FallarborTown_MoveRelearnersHouse_EventScript_AskTeachMove::
-	checkitem ITEM_HEART_SCALE
-	goto_if_eq VAR_RESULT, FALSE, FallarborTown_MoveRelearnersHouse_EventScript_ComeBackWithHeartScale
-	msgbox FallarborTown_MoveRelearnersHouse_Text_ThatsAHeartScaleWantMeToTeachMove, MSGBOX_YESNO
-	switch VAR_RESULT
-	case NO, FallarborTown_MoveRelearnersHouse_EventScript_ComeBackWithHeartScale
-	goto FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon
+FallarborTown_MoveRelearnersHouse_EventScript_AskExchange::
+	checkitem ITEM_HEART_SCALE, 1
+	goto_if_eq VAR_RESULT, FALSE, FallarborTown_MoveRelearnersHouse_EventScript_NoHeartScale
+	msgbox FallarborTown_MoveRelearnersHouse_Text_TradeScaleForPPUp, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, FallarborTown_MoveRelearnersHouse_EventScript_MaybeLater
+	checkitemspace ITEM_PP_UP, 1
+	goto_if_eq VAR_RESULT, FALSE, FallarborTown_MoveRelearnersHouse_EventScript_NoRoom
+	removeitem ITEM_HEART_SCALE, 1
+	giveitem ITEM_PP_UP, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull @ Space was checked before payment.
+	msgbox FallarborTown_MoveRelearnersHouse_Text_ExchangeComplete, MSGBOX_DEFAULT
+	goto FallarborTown_MoveRelearnersHouse_EventScript_AskExchange
 	end
 
-FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon::
-	msgbox FallarborTown_MoveRelearnersHouse_Text_TutorWhichMon, MSGBOX_DEFAULT
-	setmoverelearnerstate MOVE_RELEARNER_LEVEL_UP_MOVES @ Specifically supposed to teach level up moves
-	chooseboxmon SELECT_PC_MON_MOVE_RELEARNER
-	waitstate
-	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, FallarborTown_MoveRelearnersHouse_EventScript_ComeBackWithHeartScale
-	special IsSelectedMonEgg
-	goto_if_eq VAR_RESULT, TRUE, FallarborTown_MoveRelearnersHouse_EventScript_CantTeachEgg
-	special Special_HasMoveToRelearn
-	goto_if_eq VAR_RESULT, FALSE, FallarborTown_MoveRelearnersHouse_EventScript_NoMoveToTeachMon
-	goto FallarborTown_MoveRelearnersHouse_EventScript_ChooseMove
-	end
-
-FallarborTown_MoveRelearnersHouse_EventScript_ChooseMove::
-	msgbox FallarborTown_MoveRelearnersHouse_Text_TeachWhichMove, MSGBOX_DEFAULT
-	special TeachMoveRelearnerMove
-	goto_if_eq VAR_RESULT, FALSE, FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon
-	msgbox FallarborTown_MoveRelearnersHouse_Text_HandedOverHeartScale, MSGBOX_DEFAULT
-	removeitem ITEM_HEART_SCALE
-	goto FallarborTown_MoveRelearnersHouse_EventScript_ComeBackWithHeartScale
-	end
-
-FallarborTown_MoveRelearnersHouse_EventScript_NoMoveToTeachMon::
-	msgbox FallarborTown_MoveRelearnersHouse_Text_DontHaveMoveToTeachPokemon, MSGBOX_DEFAULT
-	goto FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon
-	end
-
-FallarborTown_MoveRelearnersHouse_EventScript_CantTeachEgg::
-	msgbox FallarborTown_MoveRelearnersHouse_Text_CantTeachEgg, MSGBOX_DEFAULT
-	goto FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon
-	end
-
-FallarborTown_MoveRelearnersHouse_EventScript_ComeBackWithHeartScale::
-	msgbox FallarborTown_MoveRelearnersHouse_Text_ComeBackWithHeartScale, MSGBOX_DEFAULT
+FallarborTown_MoveRelearnersHouse_EventScript_NoHeartScale::
+	msgbox FallarborTown_MoveRelearnersHouse_Text_BringHeartScale, MSGBOX_DEFAULT
 	releaseall
 	end
 
-FallarborTown_MoveRelearnersHouse_Text_ImTheMoveTutor:
-	.string "I'm the MOVE TUTOR.\p"
-	.string "I know all the moves that POKéMON\n"
-	.string "learn--every one of them--and I can\l"
-	.string "teach POKéMON those moves.\p"
-	.string "I can teach a move to a POKéMON\n"
-	.string "of yours if you'd like.\p"
-	.string "I'll do it for a HEART SCALE.\n"
-	.string "I'm collecting those now.$"
+FallarborTown_MoveRelearnersHouse_EventScript_NoRoom::
+	msgbox FallarborTown_MoveRelearnersHouse_Text_NoRoomForPPUp, MSGBOX_DEFAULT
+	releaseall
+	end
 
-FallarborTown_MoveRelearnersHouse_Text_ThatsAHeartScaleWantMeToTeachMove:
-	.string "Oh! That's it! That's an honest to\n"
-	.string "goodness HEART SCALE!\p"
-	.string "Let me guess, you want me to teach\n"
-	.string "a move?$"
+FallarborTown_MoveRelearnersHouse_EventScript_MaybeLater::
+	msgbox FallarborTown_MoveRelearnersHouse_Text_MaybeLater, MSGBOX_DEFAULT
+	releaseall
+	end
 
-FallarborTown_MoveRelearnersHouse_Text_TutorWhichMon:
-	.string "Which POKéMON needs tutoring?$"
+FallarborTown_MoveRelearnersHouse_Text_ImTheScaleCollector:
+	.string "I'm a HEART SCALE collector.\p"
+	.string "The tutors at every POKéMON CENTER\n"
+	.string "already teach moves for free.\p"
+	.string "I polish HEART SCALES into PP UPS,\n"
+	.string "one for one.$"
 
-FallarborTown_MoveRelearnersHouse_Text_TeachWhichMove:
-	.string "Which move should I teach?$"
+FallarborTown_MoveRelearnersHouse_Text_TradeScaleForPPUp:
+	.string "Trade one HEART SCALE for one PP UP?$"
 
-FallarborTown_MoveRelearnersHouse_Text_DontHaveMoveToTeachPokemon:
-	.string "Sorry…\p"
-	.string "It doesn't appear as if I have any move\n"
-	.string "I can teach that POKéMON.$"
+FallarborTown_MoveRelearnersHouse_Text_ExchangeComplete:
+	.string "A fine trade! I can polish another\n"
+	.string "HEART SCALE whenever you're ready.$"
 
-FallarborTown_MoveRelearnersHouse_Text_HandedOverHeartScale:
-	.string "{PLAYER} handed over one HEART SCALE\n"
-	.string "in exchange.$"
+FallarborTown_MoveRelearnersHouse_Text_BringHeartScale:
+	.string "Bring me a HEART SCALE and I'll trade\n"
+	.string "you a PP UP.$"
 
-FallarborTown_MoveRelearnersHouse_Text_ComeBackWithHeartScale:
-	.string "If your POKéMON need to learn a move,\n"
-	.string "come back with a HEART SCALE.$"
+FallarborTown_MoveRelearnersHouse_Text_NoRoomForPPUp:
+	.string "Your BAG has no room for a PP UP.\n"
+	.string "Make space before we trade.$"
 
-FallarborTown_MoveRelearnersHouse_Text_CantTeachEgg:
-	.string "Hunh? There isn't a single move that\n"
-	.string "I can teach an EGG.$"
-
+FallarborTown_MoveRelearnersHouse_Text_MaybeLater:
+	.string "No rush. Your HEART SCALE stays safe\n"
+	.string "with you until you're ready.$"

@@ -88,15 +88,23 @@ PICKUP_STONES = {
     "ITEM_TM_RAIN_DANCE": "ITEM_SWAMPERTITE",
 }
 
-FREE_PICKUPS = {
+FINITE_PICKUPS = {
     ("data/maps/SSTidalLowerDeck/map.json", "ITEM_LEFTOVERS"): "ITEM_RARE_CANDY",
     ("data/maps/Route116/map.json", "ITEM_BLACK_GLASSES"): "ITEM_DUSK_STONE",
+    ("data/maps/Route116/map.json", "ITEM_X_SPECIAL"): "ITEM_THUNDER_STONE",
     ("data/maps/ShoalCave_LowTideIceRoom/map.json", "ITEM_NEVER_MELT_ICE"): "ITEM_ICE_STONE",
+    ("data/maps/Seaspray_Cave_B1F/map.json", "ITEM_ABOMASITE"): "ITEM_SLOWBRONITE",
+    ("data/maps/DewfordManor_1F/map.json", "ITEM_BANETTITE"): "ITEM_SABLENITE",
+    ("data/maps/EmberPath/map.json", "ITEM_CHARIZARDITE_Y"): "ITEM_BLAZIKENITE",
+    ("data/maps/SeafloorCavern_Room9/map.json", "ITEM_GARCHOMPITE"): "ITEM_SHARPEDONITE",
+    ("data/maps/Route111_RuinsExterior/map.json", "ITEM_MEDICHAMITE"): "ITEM_STEELIXITE",
+    ("data/maps/ScorchedSlab_B2F/map.json", "ITEM_TYRANITARITE"): "ITEM_CHARIZARDITE_X",
+    ("data/maps/SandstrewnRuins/map.json", "ITEM_OLD_AMBER"): "ITEM_BLACK_AUGURITE",
 }
 
 
 DIALOGUE = {
-    ("data/maps/RustboroCity_Gym/scripts.inc", "RustboroCity_Gym_Text_ExplainRockTomb"): ("Aerodactylite lets Aerodactyl Mega\n", "Evolve once you possess a Mega Ring.$"),
+    ("data/maps/RustboroCity_Gym/scripts.inc", "RustboroCity_Gym_Text_ExplainRockTomb"): ("Aerodactylite lets Aerodactyl Mega\n", "Evolve once you possess a Mega Ring.\\p", "DEVON can restore that OLD AMBER.\n", "Consider Aerodactyl your first Mega\\l", "project.$"),
     ("data/maps/DewfordTown_Gym/scripts.inc", "DewfordTown_Gym_Text_ExplainBulkUp"): ("Lucarionite lets Lucario Mega Evolve.\n", "You'll soon receive the Ring it needs.$"),
     ("data/maps/MauvilleCity_Gym/scripts.inc", "MauvilleCity_Gym_Text_ExplainShockWave"): ("Manectite lets Manectric Mega Evolve.\n", "Let it hold the stone in battle.$"),
     ("data/maps/LavaridgeTown_Gym_1F/scripts.inc", "LavaridgeTown_Gym_1F_Text_ExplainOverheat"): ("Cameruptite lets Camerupt Mega Evolve.\n", "Let it hold the stone in battle.$"),
@@ -195,7 +203,7 @@ def write() -> None:
         if changed:
             target.write_text(json.dumps(payload, indent=2) + "\n")
 
-    for (path, old_item), new_item in FREE_PICKUPS.items():
+    for (path, old_item), new_item in FINITE_PICKUPS.items():
         target = ROOT / path
         payload = json.loads(target.read_text())
         matches = []
@@ -232,7 +240,7 @@ def check() -> None:
                 values = (event.get("trainer_sight_or_berry_tree_id"), event.get("item"))
                 if any(isinstance(value, str) and value.startswith("ITEM_TM_") for value in values):
                     raise ValueError(f"TM pickup remains in {path}")
-    for (path, old_item), new_item in FREE_PICKUPS.items():
+    for (path, old_item), new_item in FINITE_PICKUPS.items():
         text = (ROOT / path).read_text()
         if old_item in text or new_item not in text:
             raise ValueError(f"stale free-item pickup {path}:{old_item}")

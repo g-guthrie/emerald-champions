@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import json
 import re
 from pathlib import Path
 
@@ -144,6 +145,55 @@ def verify_widths() -> int:
     return checked
 
 
+def all_hoenn_dialogue_files() -> list[Path]:
+    """Return every player-facing Hoenn script/text source exactly once."""
+    groups = json.loads((ROOT / "data/maps/map_groups.json").read_text())
+    paths: list[Path] = []
+    for group in groups["group_order"]:
+        for map_name in groups[group]:
+            if "_Frlg" in map_name:
+                continue
+            path = ROOT / "data/maps" / map_name / "scripts.inc"
+            if path.is_file():
+                paths.append(path)
+    paths.extend(
+        path
+        for path in (ROOT / "data/scripts").glob("*.inc")
+        if "frlg" not in path.name.lower() and path.name != "debug.inc"
+    )
+    paths.extend((ROOT / "data/text").glob("*.inc"))
+    return list(dict.fromkeys(paths))
+
+
+def verify_all_static_widths() -> int:
+    """Measure every literal dialogue line that has no runtime substitution.
+
+    Dynamic names and numbers are deliberately covered by their owning UI and
+    selected conservative checks above. Literal lines, including every trainer
+    and NPC sentence, have an exact width and must never clip the native box.
+    """
+    widths = font_widths()
+    codes = glyph_codes()
+    checked = 0
+    for path in all_hoenn_dialogue_files():
+        relative = path.relative_to(ROOT)
+        for line_number, source_line in enumerate(path.read_text(errors="ignore").splitlines(), 1):
+            match = re.search(r'\.string "(.*)"', source_line)
+            if match is None:
+                continue
+            for visual_line in re.split(r"\\[npl]", match.group(1)):
+                visual_line = visual_line.rstrip("$")
+                if "{" in visual_line:
+                    continue
+                if any(char not in codes for char in visual_line):
+                    # Japanese/debug/control-font strings do not use this table.
+                    continue
+                width = sum(widths[codes[char]] for char in visual_line)
+                require(width <= 216, f"{relative}:{line_number}: {width}px dialogue overflow: {visual_line}")
+                checked += 1
+    return checked
+
+
 def verify_cynthia_assets() -> None:
     required_assets = (
         "graphics/object_events/pics/people/cynthia.png",
@@ -172,6 +222,56 @@ def verify_cynthia_assets() -> None:
     match = re.search(r"=== TRAINER_CYNTHIA_1 ===\n(.*?)(?=\n=== |\Z)", trainers, re.S)
     require(match is not None, "Cynthia trainer block is missing")
     require("Pic: Cynthia" in match.group(1), "Cynthia battle still uses a generic trainer portrait")
+
+
+def verify_elite_four_retirement_path() -> None:
+    """Prove a one-survivor League run can never become a locked-room save trap."""
+    helper = (ROOT / "data/scripts/elite_four.inc").read_text()
+    helper_contract = (
+        "PokemonLeague_EliteFour_EventScript_CheckReadyOrOfferRetire::",
+        "special HasEnoughMonsForDoubleBattle",
+        "goto_if_eq VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS",
+        "msgbox PokemonLeague_EliteFour_Text_RetirePrompt, MSGBOX_YESNO",
+        "setrespawn HEAL_LOCATION_EVER_GRANDE_CITY_POKEMON_LEAGUE",
+        "special Script_FadeOutMapMusic",
+        "fadescreen FADE_TO_BLACK",
+        "special SetCB2WhiteOut",
+    )
+    for needle in helper_contract:
+        require(needle in helper, f"Elite Four retirement helper is missing {needle!r}")
+
+    fights = {
+        "data/maps/EverGrandeCity_SidneysRoom/scripts.inc": "TRAINER_SIDNEY",
+        "data/maps/EverGrandeCity_PhoebesRoom/scripts.inc": "TRAINER_PHOEBE",
+        "data/maps/EverGrandeCity_GlaciasRoom/scripts.inc": "TRAINER_GLACIA",
+        "data/maps/EverGrandeCity_DrakesRoom/scripts.inc": "TRAINER_DRAKE",
+        "data/maps/EverGrandeCity_ChampionsRoom/scripts.inc": "TRAINER_WALLACE",
+    }
+    helper_call = "call PokemonLeague_EliteFour_EventScript_CheckReadyOrOfferRetire"
+    for relative, trainer in fights.items():
+        text = (ROOT / relative).read_text()
+        require(helper_call in text, f"{relative}: League readiness check is missing")
+        require(text.index(helper_call) < text.index(f"trainerbattle_no_intro_double {trainer}"),
+                f"{relative}: readiness check runs after the battle command")
+        require("goto_if_eq VAR_RESULT, FALSE" in text,
+                f"{relative}: declining retirement cannot return control to the player")
+
+    champion_map = json.loads((ROOT / "data/maps/EverGrandeCity_ChampionsRoom/map.json").read_text())
+    wallace = next(
+        (event for event in champion_map["object_events"]
+         if event["local_id"] == "LOCALID_CHAMPIONS_ROOM_WALLACE"),
+        None,
+    )
+    require(wallace is not None, "Champion room Wallace object is missing")
+    require(wallace["script"] == "EverGrandeCity_ChampionsRoom_EventScript_Wallace",
+            "Wallace cannot be challenged again after declining retirement to use the Bag")
+
+    whiteout = (ROOT / "data/event_scripts.s").read_text()
+    require("EventScript_WhiteOut::\n\tcall EverGrandeCity_HallOfFame_EventScript_ResetEliteFour" in whiteout,
+            "native whiteout no longer resets the active League run")
+    lobby = (ROOT / "data/maps/EverGrandeCity_PokemonLeague_1F/scripts.inc").read_text()
+    require("setrespawn HEAL_LOCATION_EVER_GRANDE_CITY_POKEMON_LEAGUE" in lobby,
+            "League lobby no longer establishes the retirement respawn point")
 
 
 def main() -> None:
@@ -219,11 +319,15 @@ def main() -> None:
         require(obsolete not in text, f"{relative}: redundant archived Mega Stone reward remains")
 
     verify_cynthia_assets()
+    verify_elite_four_retirement_path()
     checked = verify_widths()
+    all_static_checked = verify_all_static_widths()
     print("PASS: core Hoenn story preserves Magma/Aqua, Rayquaza, Wallace, and the Frontier")
     print("PASS: Mega and restored-area progression is narratively discoverable")
     print("PASS: Cynthia uses her dedicated overworld sprite and trainer portrait")
+    print("PASS: every League room has a one-survivor retirement and retry path")
     print(f"PASS: {checked} story dialogue lines fit the native 216px window")
+    print(f"PASS: {all_static_checked} literal Hoenn dialogue lines fit the native 216px window")
 
 
 if __name__ == "__main__":

@@ -9274,18 +9274,34 @@ void SortBattlersBySpeed(enum BattlerId *battlers, bool32 slowToFast)
     }
 }
 
+void RestorePlayerPartyMonHeldItem(u32 partySlot)
+{
+    enum Item originalItem;
+
+    if (partySlot >= PARTY_SIZE
+     || GetMonData(&gParties[B_TRAINER_PLAYER][partySlot], MON_DATA_SPECIES) == SPECIES_NONE)
+        return;
+
+    originalItem = gBattleStruct->itemLost[B_TRAINER_PLAYER][partySlot].originalItem;
+    if (GetMonData(&gParties[B_TRAINER_PLAYER][partySlot], MON_DATA_HELD_ITEM) != originalItem)
+        SetMonData(&gParties[B_TRAINER_PLAYER][partySlot], MON_DATA_HELD_ITEM, &originalItem);
+}
+
+void RecordPlayerPartyMonHeldItemForRestoration(u32 partySlot)
+{
+    if (partySlot >= PARTY_SIZE)
+        return;
+
+    gBattleStruct->itemLost[B_TRAINER_PLAYER][partySlot].originalItem =
+        GetMonData(&gParties[B_TRAINER_PLAYER][partySlot], MON_DATA_HELD_ITEM);
+}
+
 void TryRestoreHeldItems(void)
 {
     if (GEN_LATEST == GEN_CHAMPIONS)
     {
         for (u32 i = 0; i < PARTY_SIZE; i++)
-        {
-            enum Item originalItem = gBattleStruct->itemLost[B_TRAINER_PLAYER][i].originalItem;
-
-            if (GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES) != SPECIES_NONE
-             && GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_HELD_ITEM) != originalItem)
-                SetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_HELD_ITEM, &originalItem);
-        }
+            RestorePlayerPartyMonHeldItem(i);
         return;
     }
 

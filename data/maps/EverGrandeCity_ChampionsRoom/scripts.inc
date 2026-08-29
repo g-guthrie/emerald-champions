@@ -38,10 +38,17 @@ EverGrandeCity_ChampionsRoom_Movement_PlayerApproachWallace:
 	step_end
 
 EverGrandeCity_ChampionsRoom_EventScript_Wallace::
+	lockall
+	call PokemonLeague_EliteFour_EventScript_CheckReadyOrOfferRetire
+	goto_if_eq VAR_RESULT, FALSE, EverGrandeCity_ChampionsRoom_EventScript_NotReady
 	playbgm MUS_ENCOUNTER_CHAMPION, FALSE
 	msgbox EverGrandeCity_ChampionsRoom_Text_IntroSpeech, MSGBOX_DEFAULT
 	trainerbattle_no_intro_double TRAINER_WALLACE, EverGrandeCity_ChampionsRoom_Text_Defeat, EmeraldChampions_Text_NeedTwoPokemon
 	goto EverGrandeCity_ChampionsRoom_EventScript_Defeated
+	end
+
+EverGrandeCity_ChampionsRoom_EventScript_NotReady::
+	releaseall
 	end
 
 EverGrandeCity_ChampionsRoom_EventScript_Defeated::
@@ -240,11 +247,11 @@ EverGrandeCity_ChampionsRoom_Text_Defeat:
 EverGrandeCity_ChampionsRoom_Text_PostBattleSpeech:
 	.string "WALLACE: Your final six were not the only\n"
 	.string "team that brought you here.\p"
-	.string "Every partner caught and puzzle you\n"
-	.string "lost, and every rebuilt strategy became\l"
+	.string "Every partner you caught, every puzzle\n"
+	.string "you lost, and every rebuilt plan became\l"
 	.string "part of this victory.\p"
 	.string "You stand at HOENN's peak, but the\n"
-	.string "The FRONTIER waits beyond the summit.\p"
+	.string "FRONTIER waits beyond the summit.\p"
 	.string "I proclaim you the new HOENN CHAMPION!$"
 
 EverGrandeCity_ChampionsRoom_Text_MayAdvice:

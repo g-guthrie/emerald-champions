@@ -84,6 +84,9 @@ MtPyre_6F_EventScript_Pecharunt::
 	goto_if_ne VAR_RESULT, 2, MtPyre_6F_EventScript_PecharuntDormant
 	setvar VAR_0x8004, EC_SIGN_PECHARUNT_ID
 	special TryUnlockSelectedLegendarySign
+	goto_if_eq VAR_RESULT, 0, MtPyre_6F_EventScript_PecharuntStoryLocked
+	goto_if_eq VAR_RESULT, 1, MtPyre_6F_EventScript_PecharuntNeedsOkidogi
+	goto_if_eq VAR_RESULT, 4, MtPyre_6F_EventScript_PecharuntCaught
 	msgbox MtPyre_6F_Text_PecharuntAwakens, MSGBOX_DEFAULT
 	setvar VAR_0x8004, EC_SIGN_PECHARUNT_ID
 	special CreateSelectedLegendarySignEncounter
@@ -101,6 +104,16 @@ MtPyre_6F_EventScript_PecharuntDormant::
 	release
 	end
 
+MtPyre_6F_EventScript_PecharuntStoryLocked::
+	msgbox MtPyre_6F_Text_PecharuntStoryLocked, MSGBOX_DEFAULT
+	release
+	end
+
+MtPyre_6F_EventScript_PecharuntNeedsOkidogi::
+	msgbox MtPyre_6F_Text_PecharuntNeedsOkidogi, MSGBOX_DEFAULT
+	release
+	end
+
 MtPyre_6F_EventScript_PecharuntCaught::
 	setflag FLAG_EC_CAUGHT_PECHARUNT
 	removeobject LOCALID_EC_PECHARUNT
@@ -112,6 +125,16 @@ MtPyre_6F_Text_PecharuntDormant:
 	.string "a monkey, and a brilliant bird.\p"
 	.string "Catch all three challengers before\n"
 	.string "returning to this poisoned shrine.$"
+
+MtPyre_6F_Text_PecharuntStoryLocked:
+	.string "All three masks are lit, but the violet\n"
+	.string "SIGN still rejects the challenge.\p"
+	.string "Return as HOENN's CHAMPION.$"
+
+MtPyre_6F_Text_PecharuntNeedsOkidogi:
+	.string "The three masks turn toward OKIDOGI.\p"
+	.string "Bring that partner here to call their\n"
+	.string "hidden master from the shrine.$"
 
 MtPyre_6F_Text_PecharuntAwakens:
 	.string "The three masks flare, and the shrine's\n"

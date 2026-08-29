@@ -116,8 +116,8 @@ MeteorFalls_1F_2R_Text_JohnNotEnoughMons:
 	.string "have to return with more POKéMON.$"
 
 MeteorFalls_1F_2R_Text_JohnRegister:
-	.string "JOHN: Young TRAINER, if the chance\n"
-	.string "arises, will you battle with us again?$"
+	.string "JOHN: Young TRAINER, may we trade\n"
+	.string "notes on teamwork through MATCH CALL?$"
 
 MeteorFalls_1F_2R_Text_JayIntro:
 	.string "JAY: We've been married for\n"
@@ -180,4 +180,3 @@ MeteorFalls_1F_2R_Text_JayRematchNotEnoughMons:
 	.string "TRAINER?\p"
 	.string "If you'd care to battle with us, you'll\n"
 	.string "have to come back with more POKéMON.$"
-

@@ -186,9 +186,10 @@ LavaridgeTown_Gym_1F_Text_GymGuideAdvice:
 	.string "uses FIRE-type POKéMON.\p"
 	.string "Her passion for POKéMON burns stronger\n"
 	.string "and hotter than a volcano.\p"
-	.string "Don't get too close to her--you'll burn!\n"
-	.string "Hose her down with water and then\l"
-	.string "go for it!$"
+	.string "Her sun weakens WATER and speeds SOLAR\n"
+	.string "BEAM, while TRICK ROOM reverses tempo.\p"
+	.string "Protect your WATER answer and disrupt\n"
+	.string "the field before attacking.$"
 
 LavaridgeTown_Gym_1F_Text_GymGuidePostVictory:
 	.string "Yow! That was a scorching-hot battle!$"

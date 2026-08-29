@@ -12,6 +12,7 @@
 #include "item.h"
 #include "legendary_signs.h"
 #include "load_save.h"
+#include "overworld.h"
 #include "pokemon.h"
 #include "random.h"
 #include "showdown_champions_circuit.h"
@@ -31,6 +32,17 @@ TEST("Emerald Champions disables Match Call and Gym rematches")
 
     EXPECT_EQ(ShouldTryRematchBattleForTrainerId(TRAINER_ROSE_1), FALSE);
     EXPECT_EQ(GetCurrentGymLeaderRematchLevel(), 0);
+
+    SetTrainerFlag(TRAINER_BRAWLY_1);
+    SetTrainerFlag(TRAINER_ARCHIE_SLATEPORT); // Reuses the disabled Brawly-2 slot.
+    EXPECT_EQ(GetLastBeatenRematchTrainerId(TRAINER_BRAWLY_1), TRAINER_BRAWLY_1);
+    EXPECT_EQ(CountBattledRematchTeams(REMATCH_BRAWLY), 1);
+
+    gTrainerBattleParameter.params.opponentA = TRAINER_ROSE_1;
+    FlagClear(TRAINER_REGISTERED_FLAGS_START + REMATCH_ROSE);
+    EXPECT_EQ(IsTrainerReadyForRematch(), FALSE);
+    FlagSet(TRAINER_REGISTERED_FLAGS_START + REMATCH_ROSE);
+    EXPECT_EQ(IsTrainerReadyForRematch(), TRUE);
 }
 
 TEST("Emerald Champions exposes Mega as its only selectable gimmick")
@@ -51,6 +63,45 @@ TEST("Emerald Champions disables the Bag only in competitive trainer battles")
     EXPECT(IsAllowedToUseBag());
     gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_PYRAMID;
     EXPECT(IsAllowedToUseBag());
+}
+
+TEST("Emerald Champions catch transfers preserve both held-item loadouts")
+{
+    static struct BattleStruct sCaptureTransferBattleStruct;
+    struct BattleStruct *savedBattleStruct = gBattleStruct;
+    enum Item item;
+    u32 outgoingItem;
+    u32 caughtItem;
+
+    memset(&sCaptureTransferBattleStruct, 0, sizeof(sCaptureTransferBattleStruct));
+    gBattleStruct = &sCaptureTransferBattleStruct;
+    ZeroPlayerPartyMons();
+    CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_BULBASAUR, 14, 0, OTID_STRUCT_PLAYER_ID);
+
+    // Catch-and-swap boxes the outgoing mon before the normal end-of-battle
+    // restoration pass. Its battle-start item must be restored first.
+    item = ITEM_EVIOLITE;
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM, &item);
+    RecordPlayerPartyMonHeldItemForRestoration(0);
+    item = ITEM_NONE;
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM, &item);
+    RestorePlayerPartyMonHeldItem(0);
+    outgoingItem = GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM);
+
+    // A caught mon entering an empty/replaced slot needs a fresh restoration
+    // baseline; otherwise the battle-start ITEM_NONE erases its authored item.
+    CreateMon(&gParties[B_TRAINER_PLAYER][1], SPECIES_CHARMANDER, 14, 0, OTID_STRUCT_PLAYER_ID);
+    item = ITEM_LIFE_ORB;
+    SetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_HELD_ITEM, &item);
+    RecordPlayerPartyMonHeldItemForRestoration(1);
+    item = ITEM_NONE;
+    SetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_HELD_ITEM, &item);
+    TryRestoreHeldItems();
+    caughtItem = GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_HELD_ITEM);
+    gBattleStruct = savedBattleStruct;
+
+    EXPECT_EQ(outgoingItem, ITEM_EVIOLITE);
+    EXPECT_EQ(caughtItem, ITEM_LIFE_ORB);
 }
 
 TEST("Emerald Champions custom Megas retain complete native assets")
@@ -173,6 +224,7 @@ TEST("Emerald Champions applies a complete authored battle set")
 
 TEST("Emerald Champions protects progression items from preparation services")
 {
+    EXPECT(GetItemImportance(ITEM_LINKING_CORD));
     EXPECT(IsEmeraldChampionsProtectedProgressionItem(ITEM_VENUSAURITE));
     EXPECT(IsEmeraldChampionsProtectedProgressionItem(ITEM_RED_ORB));
     EXPECT(IsEmeraldChampionsProtectedProgressionItem(ITEM_WELLSPRING_MASK));
@@ -181,9 +233,27 @@ TEST("Emerald Champions protects progression items from preparation services")
     EXPECT(!IsEmeraldChampionsProtectedProgressionItem(ITEM_LIFE_ORB));
 }
 
+TEST("Emerald Champions migrates Linking Cord into one reusable Key Item")
+{
+    ClearBag();
+    BagPocket_SetSlotItemIdAndCount(&gBagPockets[POCKET_ITEMS], 0, ITEM_LINKING_CORD, 12);
+
+    MigrateEmeraldChampionsLinkingCord();
+
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_LINKING_CORD), 1);
+    for (u32 i = 0; i < gBagPockets[POCKET_ITEMS].capacity; i++)
+        EXPECT_NE(GetBagItemId(POCKET_ITEMS, i), ITEM_LINKING_CORD);
+
+    // The migration is idempotent and cannot produce a second Key Item.
+    MigrateEmeraldChampionsLinkingCord();
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_LINKING_CORD), 1);
+}
+
 TEST("Emerald Champions battle-ready wild presets exclude special encounters")
 {
     EXPECT(IsEmeraldChampionsOrdinaryWildSpecies(SPECIES_BULBASAUR));
+    EXPECT(IsEmeraldChampionsOrdinaryWildSpecies(SPECIES_NIHILEGO));
+    EXPECT(IsEmeraldChampionsOrdinaryWildSpecies(SPECIES_GREAT_TUSK));
     EXPECT(!IsEmeraldChampionsOrdinaryWildSpecies(SPECIES_MEW));
     EXPECT(!IsEmeraldChampionsOrdinaryWildSpecies(SPECIES_VENUSAUR_MEGA));
 }
@@ -289,6 +359,7 @@ TEST("Champions Circuit generates live Showdown doubles teams")
     static EWRAM_DATA bool8 seenSpecies[NUM_SPECIES];
     u32 diversity = 0;
 
+    SetCurrentDifficultyLevel(DIFFICULTY_HARD);
     memset(seenSpecies, 0, sizeof(seenSpecies));
     // Sixteen live generations exercise 96 complete sets while staying below
     // the GBA test runner's per-test cycle budget.
@@ -345,6 +416,29 @@ TEST("Champions Circuit generates live Showdown doubles teams")
         }
     }
     EXPECT_GE(diversity, 50);
+}
+
+TEST("Champions Circuit honors the live difficulty level reduction")
+{
+    static const enum DifficultyLevel difficulties[] =
+    {
+        DIFFICULTY_HARD,
+        DIFFICULTY_NORMAL,
+        DIFFICULTY_EASY,
+    };
+    static const u8 expectedLevels[] = {80, 78, 76};
+
+    VarSet(VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, 0);
+    for (u32 i = 0; i < ARRAY_COUNT(difficulties); i++)
+    {
+        SetCurrentDifficultyLevel(difficulties[i]);
+        SeedRng(7);
+        ChampionsCircuitGenerateOpponent();
+        EXPECT_EQ(gSpecialVar_Result, PARTY_SIZE);
+        for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+            EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][slot], MON_DATA_LEVEL), expectedLevels[i]);
+    }
+    SetCurrentDifficultyLevel(DIFFICULTY_HARD);
 }
 
 TEST("Champions Circuit variant families are contiguous and retain a base form")

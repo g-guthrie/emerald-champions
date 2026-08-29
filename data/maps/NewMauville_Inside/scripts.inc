@@ -405,7 +405,7 @@ NewMauville_Inside_EventScript_ZapdosCleanup::
 	end
 
 NewMauville_Inside_Text_ZapdosDormant:
-	.string "A CHAMPION'S SIGN marks the silent generator.\p"
+	.string "A CHAMPION'S SIGN marks the generator.\p"
 	.string "Its light is dormant. HOENN's story\n"
 	.string "has not yet reached this place.$"
 
@@ -468,7 +468,7 @@ NewMauville_Inside_EventScript_MeltanCleanup::
 	end
 
 NewMauville_Inside_Text_MeltanDormant:
-	.string "A CHAMPION'S SIGN marks the liquid-metal conduit.\p"
+	.string "A CHAMPION'S SIGN marks a metal conduit.\p"
 	.string "Its light is dormant. HOENN's story\n"
 	.string "has not yet reached this place.$"
 

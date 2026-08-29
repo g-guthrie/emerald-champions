@@ -32,7 +32,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@v4
         with:
           fetch-depth: 1
 
@@ -48,7 +48,7 @@ jobs:
             python3
 
       - name: Cache native build tools
-        uses: actions/cache@v6
+        uses: actions/cache@v4
         with:
           path: |
             tools/bin2c/bin2c
@@ -90,6 +90,7 @@ jobs:
           }
 
           run_tests '*Champions'
+          run_tests '*Eggs safely inherit*'
           run_tests 'Commander'
           run_tests 'test/save.c'
           run_tests 'test/battle/ai/ai_doubles.c'

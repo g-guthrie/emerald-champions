@@ -47,6 +47,24 @@ TEST("(Daycare) Pokémon offspring species is based off the mother's species")
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), offspring);
 }
 
+TEST("(Daycare) Eggs safely inherit level-up moves shared by both parents")
+{
+    ASSUME(P_FAMILY_BULBASAUR == TRUE);
+
+    ZeroPlayerPartyMons();
+    memset(&gSaveBlock1Ptr->daycare, 0, sizeof(gSaveBlock1Ptr->daycare));
+    RUN_OVERWORLD_SCRIPT(
+        givemon SPECIES_BULBASAUR, 20, gender=MON_MALE, move1=MOVE_RAZOR_LEAF, move2=MOVE_NONE, move3=MOVE_NONE, move4=MOVE_NONE;
+        givemon SPECIES_BULBASAUR, 20, gender=MON_FEMALE, move1=MOVE_RAZOR_LEAF, move2=MOVE_NONE, move3=MOVE_NONE, move4=MOVE_NONE;
+    );
+    STORE_IN_DAYCARE_AND_GET_EGG();
+
+    EXPECT(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE1) == MOVE_RAZOR_LEAF
+        || GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE2) == MOVE_RAZOR_LEAF
+        || GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE3) == MOVE_RAZOR_LEAF
+        || GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE4) == MOVE_RAZOR_LEAF);
+}
+
 TEST("(Daycare) Pokémon can breed with Ditto if they don't belong to the Ditto or No Eggs Discovered group")
 {
     u32 j = 0;
@@ -981,7 +999,7 @@ TEST("InheritPokeball make eggs inherit their mother ball unless it's a 'forbidd
     u32 slot = 0;
     for (enum PokeBall j = BALL_STRANGE; j < POKEBALL_COUNT; j++)
     {
-        for (enum PokeBall k = BALL_STRANGE; j < POKEBALL_COUNT; j++)
+        for (enum PokeBall k = BALL_STRANGE; k < POKEBALL_COUNT; k++)
         {
             PARAMETRIZE { ball0 = j; ball1 = k; species = SPECIES_BULBASAUR; gender = MON_MALE; slot = 0; }
             PARAMETRIZE { ball0 = j; ball1 = k; species = SPECIES_DITTO; gender = MON_GENDERLESS; slot = 0; }
@@ -1130,7 +1148,7 @@ TEST("InheritPokeball give the mother ball to pokemon born two different non-dit
     u32 slot = 0;
     for (enum PokeBall j = BALL_STRANGE; j < POKEBALL_COUNT; j++)
     {
-        for (enum PokeBall k = BALL_STRANGE; j < POKEBALL_COUNT; j++)
+        for (enum PokeBall k = BALL_STRANGE; k < POKEBALL_COUNT; k++)
         {
             PARAMETRIZE { ball0 = j; ball1 = k; species = SPECIES_IVYSAUR; slot = 0; }
             PARAMETRIZE { ball0 = j; ball1 = k; species = SPECIES_SLOWBRO; slot = 0; }
@@ -1174,7 +1192,7 @@ TEST("InheritPokeball give a parent ball at random to pokemon born from parents 
     u32 randomParent = 0;
     for (u32 j = BALL_STRANGE; j < POKEBALL_COUNT; j++)
     {
-        for (u32 k = BALL_STRANGE; j < POKEBALL_COUNT; j++)
+        for (u32 k = BALL_STRANGE; k < POKEBALL_COUNT; k++)
         {
             PARAMETRIZE { ball0 = j; ball1 = k; species = SPECIES_VULPIX; randomParent = 0; }
             PARAMETRIZE { ball0 = j; ball1 = k; species = SPECIES_VULPIX_ALOLA; randomParent = 0; }

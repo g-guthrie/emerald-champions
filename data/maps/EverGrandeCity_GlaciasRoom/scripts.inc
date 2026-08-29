@@ -40,10 +40,16 @@ EverGrandeCity_GlaciasRoom_EventScript_Glacia::
 	lock
 	faceplayer
 	goto_if_set FLAG_DEFEATED_ELITE_4_GLACIA, EverGrandeCity_GlaciasRoom_EventScript_PostBattleSpeech
+	call PokemonLeague_EliteFour_EventScript_CheckReadyOrOfferRetire
+	goto_if_eq VAR_RESULT, FALSE, EverGrandeCity_GlaciasRoom_EventScript_NotReady
 	playbgm MUS_ENCOUNTER_ELITE_FOUR, FALSE
 	msgbox EverGrandeCity_GlaciasRoom_Text_IntroSpeech, MSGBOX_DEFAULT
 	trainerbattle_no_intro_double TRAINER_GLACIA, EverGrandeCity_GlaciasRoom_Text_Defeat, EmeraldChampions_Text_NeedTwoPokemon
 	goto EverGrandeCity_GlaciasRoom_EventScript_Defeated
+	end
+
+EverGrandeCity_GlaciasRoom_EventScript_NotReady::
+	release
 	end
 
 EverGrandeCity_GlaciasRoom_EventScript_PostBattleSpeech::

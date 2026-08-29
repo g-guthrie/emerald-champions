@@ -265,7 +265,7 @@ JaggedPass_Text_DianaPostBattle:
 
 JaggedPass_Text_DianaRegister:
 	.string "Will you ever be back in this area?\n"
-	.string "If you do return, I'd like a rematch.$"
+	.string "If you return, share what you've learned.$"
 
 JaggedPass_Text_DianaRematchIntro:
 	.string "Picnics are fun wherever you go.\n"
@@ -293,7 +293,7 @@ JaggedPass_Text_EthanPostBattle:
 
 JaggedPass_Text_EthanRegister:
 	.string "When I get more used to this bumpiness,\n"
-	.string "I'll be sure to win!\p"
+	.string "I'll send you my best climbing tips!\p"
 	.string "Can you register me in your POKéNAV?$"
 
 JaggedPass_Text_EthanRematchIntro:

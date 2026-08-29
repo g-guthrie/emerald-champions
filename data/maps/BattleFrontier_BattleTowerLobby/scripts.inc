@@ -511,11 +511,13 @@ BattleFrontier_BattleTowerLobby_EventScript_CircuitGenerationFailed::
 	end
 
 BattleFrontier_BattleTowerLobby_Text_CircuitWelcome:
-	.string "This is the CHAMPIONS CIRCUIT.\p"
-	.string "Every match is a full-team Double\n"
-	.string "Battle built from competitive sets.\p"
+	.string "This is the FRONTIER's premier challenge:\n"
+	.string "the CHAMPIONS CIRCUIT.\p"
+	.string "Every match is a full-team Double Battle\n"
+	.string "assembled from competitive roles.\p"
 	.string "Your team becomes Lv. 80. Opponents\n"
-	.string "grow stronger after every victory.$"
+	.string "grow stronger after every victory.\p"
+	.string "Other desks preserve classic formats.$"
 
 BattleFrontier_BattleTowerLobby_Text_CircuitEnter:
 	.string "Bring six healthy Pokémon. Held items\n"

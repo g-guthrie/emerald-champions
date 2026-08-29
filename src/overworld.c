@@ -9,6 +9,7 @@
 #include "credits_frlg.h"
 #include "clock.h"
 #include "dexnav.h"
+#include "difficulty.h"
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "event_scripts.h"
@@ -78,6 +79,7 @@
 #include "constants/abilities.h"
 #include "constants/event_object_movement.h"
 #include "constants/event_objects.h"
+#include "constants/opponents.h"
 #include "constants/layouts.h"
 #include "constants/region_map_sections.h"
 #include "constants/rgb.h"
@@ -2114,6 +2116,44 @@ static void FieldCB_FadeTryShowMapPopup(void)
     FieldCB_WarpExitFadeFromBlack();
 }
 
+void MigrateEmeraldChampionsLinkingCord(void)
+{
+    bool32 foundLegacyCord = FALSE;
+    bool32 canClearLegacyCord;
+    u16 keyItemCount = CountTotalItemQuantityInBag(ITEM_LINKING_CORD);
+
+    // Linking Cord used to live in the ordinary Items pocket. Item APIs route
+    // by the item's current pocket, so an old copy must be found explicitly.
+    for (u32 i = 0; i < gBagPockets[POCKET_ITEMS].capacity; i++)
+    {
+        if (GetBagItemId(POCKET_ITEMS, i) == ITEM_LINKING_CORD)
+        {
+            foundLegacyCord = TRUE;
+            break;
+        }
+    }
+
+    canClearLegacyCord = keyItemCount > 0;
+    if (foundLegacyCord && keyItemCount == 0)
+        canClearLegacyCord = AddBagItem(ITEM_LINKING_CORD, 1);
+
+    // Never destroy the legacy copy unless the reusable Key Item is safely in
+    // its new pocket. If that pocket is full, the migration retries next load.
+    if (foundLegacyCord && canClearLegacyCord)
+    {
+        for (u32 i = 0; i < gBagPockets[POCKET_ITEMS].capacity; i++)
+        {
+            if (GetBagItemId(POCKET_ITEMS, i) == ITEM_LINKING_CORD)
+                BagPocket_SetSlotItemIdAndCount(&gBagPockets[POCKET_ITEMS], i, ITEM_NONE, 0);
+        }
+        CompactItemsInBagPocket(POCKET_ITEMS);
+    }
+
+    keyItemCount = CountTotalItemQuantityInBag(ITEM_LINKING_CORD);
+    if (keyItemCount > 1)
+        RemoveBagItem(ITEM_LINKING_CORD, keyItemCount - 1);
+}
+
 void CB2_ContinueSavedGame(void)
 {
     u8 trainerHillMapId;
@@ -2123,6 +2163,52 @@ void CB2_ContinueSavedGame(void)
     ResetSafariZoneFlag_();
     if (gSaveFileStatus == SAVE_STATUS_ERROR)
         ResetWinStreaks();
+
+    if (!FlagGet(FLAG_EC_BESPOKE_TRAINER_FLAGS_MIGRATED))
+    {
+        static const u16 sRepurposedRematchTrainerIds[] =
+        {
+            TRAINER_ARCHIE_SLATEPORT,
+            TRAINER_COURTNEY_METEOR_FALLS,
+            TRAINER_GRUNT_METEOR_FALLS,
+            TRAINER_LUCY_LAVARIDGE,
+            TRAINER_GRETA_SLATEPORT,
+            TRAINER_SPENSER_FORTREE,
+            TRAINER_MAGIKARP_GUY,
+            TRAINER_BUFFEL,
+            TRAINER_COURTNEY_MAGMA_HIDEOUT,
+            TRAINER_MATT_MT_PYRE,
+            TRAINER_COURTNEY_MOSSDEEP,
+            TRAINER_WALLACE_DOUBLES_LEGENDS,
+            TRAINER_LEAF_ALTERING_CAVE,
+            TRAINER_CYNTHIA_1,
+            TRAINER_ALANNAH,
+            TRAINER_MARTIN,
+            TRAINER_ROMAN,
+            TRAINER_ELMER,
+        };
+        static const u16 sRepurposedRewardFlags[] =
+        {
+            FLAG_RECEIVED_WINSTRATE_KANGASKHANITE,
+            FLAG_EC_ITEM_MANOR_SABLENITE,
+            FLAG_EC_ITEM_EMBER_BLAZIKENITE,
+            FLAG_ITEM_SEAFLOOR_CAVERN_ROOM_9_TM_EARTHQUAKE,
+            FLAG_EC_ITEM_RUINS_STEELIXITE,
+            FLAG_EC_ITEM_SCORCHED_CHARIZARDITE_X,
+            FLAG_EC_ITEM_SEASPRAY_SLOWBRONITE,
+            FLAG_EC_ITEM_RUINS_BLACK_AUGURITE,
+        };
+
+        for (u32 i = 0; i < ARRAY_COUNT(sRepurposedRematchTrainerIds); i++)
+            ClearTrainerFlag(sRepurposedRematchTrainerIds[i]);
+        for (u32 i = 0; i < ARRAY_COUNT(sRepurposedRewardFlags); i++)
+            FlagClear(sRepurposedRewardFlags[i]);
+        if (GetCurrentDifficultyLevel() > DIFFICULTY_MAX)
+            SetCurrentDifficultyLevel(DIFFICULTY_HARD);
+        FlagSet(FLAG_EC_BESPOKE_TRAINER_FLAGS_MIGRATED);
+    }
+
+    MigrateEmeraldChampionsLinkingCord();
 
     LoadSaveblockMapHeader();
     ClearDiveAndHoleWarps();

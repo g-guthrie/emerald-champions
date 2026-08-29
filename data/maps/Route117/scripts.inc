@@ -216,10 +216,10 @@ Route117_EventScript_Aisha::
 	end
 
 Route117_Text_DayCarePokemonHadNewMove:
-	.string "I left my POKéMON at the DAY CARE.\p"
-	.string "When I got it back, it had a new move\n"
-	.string "that I didn't teach it.\l"
-	.string "I was really, really surprised.$"
+	.string "I left two compatible POKéMON at the\n"
+	.string "DAY CARE, and they produced an EGG!\p"
+	.string "Center tutors handle moves. The DAY CARE\n"
+	.string "is where new partners inherit traits.$"
 
 Route117_Text_ArentTheseFlowersPretty:
 	.string "What do you think?\n"

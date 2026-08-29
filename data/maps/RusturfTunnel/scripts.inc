@@ -304,6 +304,16 @@ RusturfTunnel_EventScript_Grunt::
 	trainerbattle_no_intro_double TRAINER_GRUNT_RUSTURF_TUNNEL, RusturfTunnel_Text_GruntDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox RusturfTunnel_Text_GruntTakePackage, MSGBOX_DEFAULT
 	giveitem ITEM_DEVON_PARTS
+	goto_if_eq VAR_RESULT, FALSE, RusturfTunnel_EventScript_ArchiveDevonParts
+	goto RusturfTunnel_EventScript_ReceivedDevonParts
+	end
+
+RusturfTunnel_EventScript_ArchiveDevonParts::
+	addpcitem ITEM_DEVON_PARTS
+	goto_if_eq VAR_RESULT, FALSE, RusturfTunnel_EventScript_DevonPartsNoRoom
+	msgbox RusturfTunnel_Text_DevonPartsSentToPC, MSGBOX_DEFAULT
+
+RusturfTunnel_EventScript_ReceivedDevonParts::
 	closemessage
 	applymovement LOCALID_PLAYER, RusturfTunnel_Movement_PushPlayerAsideForGrunt
 	applymovement LOCALID_RUSTURF_TUNNEL_GRUNT, RusturfTunnel_Movement_GruntEscape
@@ -337,6 +347,11 @@ RusturfTunnel_EventScript_Grunt::
 	setvar VAR_RUSTBORO_CITY_STATE, 4
 	setvar VAR_BRINEY_HOUSE_STATE, 1
 	setflag FLAG_HIDE_ROUTE_116_MR_BRINEY
+	release
+	end
+
+RusturfTunnel_EventScript_DevonPartsNoRoom::
+	msgbox RusturfTunnel_Text_DevonPartsNoRoom, MSGBOX_DEFAULT
 	release
 	end
 
@@ -447,6 +462,14 @@ RusturfTunnel_Text_GruntTakePackage:
 	.string "Tch!\n"
 	.string "You want it back that badly, take it!$"
 
+RusturfTunnel_Text_DevonPartsSentToPC:
+	.string "Your KEY ITEMS pocket is full, so the\n"
+	.string "DEVON PARTS were sent to your PC.$"
+
+RusturfTunnel_Text_DevonPartsNoRoom:
+	.string "Your KEY ITEMS pocket and PC are full.\n"
+	.string "Make room, then take the DEVON PARTS.$"
+
 RusturfTunnel_Text_PeekoGladToSeeYouSafe:
 	.string "PEEKO!\n"
 	.string "Am I glad to see you're safe!$"
@@ -524,4 +547,3 @@ RusturfTunnel_Text_MikePostBattle:
 	.string "They halted development here to\n"
 	.string "protect POKéMON, right?\l"
 	.string "There's a feel-good story!$"
-

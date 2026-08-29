@@ -37,7 +37,9 @@ MossdeepCity_House1_Text_DoesntLikeOrDislikePokeblocks:
 
 MossdeepCity_House1_Text_HusbandCanTellPokeblockMonLikes:
 	.string "My husband can tell what kind of\n"
-	.string "{POKEBLOCK}S a POKéMON likes at a glance.$"
+	.string "{POKEBLOCK}S a POKéMON likes at a glance.\p"
+	.string "CYNTHIA is our guest while she studies\n"
+	.string "MOSSDEEP's myths and meteor records.$"
 
 MossdeepCity_House1_EventScript_CynthiaEC::
 	lock
@@ -89,6 +91,8 @@ MossdeepCity_House1_Text_CynthiaAfter:
 	.string "journey reveal something extraordinary.$"
 
 MossdeepCity_House1_Text_CynthiaNotReady:
+	.string "These kind hosts gave me a quiet place\n"
+	.string "to study HOENN's meteor records.\p"
 	.string "Your journey continues. Return after\n"
 	.string "the HOENN LEAGUE knows your name.$"
 

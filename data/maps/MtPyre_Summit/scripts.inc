@@ -73,8 +73,23 @@ MtPyre_Summit_EventScript_TeamAquaExits::
 	call_if_eq VAR_0x8008, 2, MtPyre_Summit_EventScript_OldLadyApproachPlayer2
 	msgbox MtPyre_Summit_Text_BothOrbsTakenMagmaLeftThis, MSGBOX_DEFAULT
 	giveitem ITEM_MAGMA_EMBLEM
+	goto_if_eq VAR_RESULT, FALSE, MtPyre_Summit_EventScript_ArchiveMagmaEmblem
+	goto MtPyre_Summit_EventScript_ReceivedMagmaEmblem
+	end
+
+MtPyre_Summit_EventScript_ArchiveMagmaEmblem::
+	addpcitem ITEM_MAGMA_EMBLEM
+	goto_if_eq VAR_RESULT, FALSE, MtPyre_Summit_EventScript_MagmaEmblemNoRoom
+	msgbox MtPyre_Summit_Text_MagmaEmblemSentToPC, MSGBOX_DEFAULT
+
+MtPyre_Summit_EventScript_ReceivedMagmaEmblem::
 	setflag FLAG_RECEIVED_RED_OR_BLUE_ORB
 	setflag FLAG_HIDE_JAGGED_PASS_MAGMA_GUARD
+	releaseall
+	end
+
+MtPyre_Summit_EventScript_MagmaEmblemNoRoom::
+	msgbox MtPyre_Summit_Text_MagmaEmblemNoRoom, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -301,11 +316,22 @@ MtPyre_Summit_Text_DreamChainComplete:
 MtPyre_Summit_EventScript_OldLady::
 	lock
 	faceplayer
+	goto_if_set FLAG_RECEIVED_RED_OR_BLUE_ORB, MtPyre_Summit_EventScript_OldLadyAfterEmblem
+	goto_if_eq VAR_MT_PYRE_STATE, 1, MtPyre_Summit_EventScript_RetryMagmaEmblem
+
+MtPyre_Summit_EventScript_OldLadyAfterEmblem::
 	goto_if_set FLAG_RETURNED_RED_OR_BLUE_ORB, MtPyre_Summit_EventScript_OldLadyAfterOrbsReturned
 	call_if_ge VAR_MT_PYRE_STATE, 3, MtPyre_Summit_EventScript_OldLadyOrbsReturned
 	goto_if_set FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN, MtPyre_Summit_EventScript_OldLadyLegendariesAwake
 	msgbox MtPyre_Summit_Text_OrbsHaveBeenTaken, MSGBOX_DEFAULT
 	release
+	end
+
+MtPyre_Summit_EventScript_RetryMagmaEmblem::
+	msgbox MtPyre_Summit_Text_MagmaEmblemWaiting, MSGBOX_DEFAULT
+	giveitem ITEM_MAGMA_EMBLEM
+	goto_if_eq VAR_RESULT, FALSE, MtPyre_Summit_EventScript_ArchiveMagmaEmblem
+	goto MtPyre_Summit_EventScript_ReceivedMagmaEmblem
 	end
 
 MtPyre_Summit_EventScript_OldLadyOrbsReturned::
@@ -660,6 +686,18 @@ MtPyre_Summit_Text_BothOrbsTakenMagmaLeftThis:
 	.string "outer pattern, spread across HOENN.\p"
 	.string "MAGMA dropped this EMBLEM in its haste.\n"
 	.string "Take it. You may need every path open.$"
+
+MtPyre_Summit_Text_MagmaEmblemSentToPC:
+	.string "Your KEY ITEMS pocket is full, so the\n"
+	.string "MAGMA EMBLEM was sent to your PC.$"
+
+MtPyre_Summit_Text_MagmaEmblemWaiting:
+	.string "The MAGMA EMBLEM is still waiting for\n"
+	.string "you. Make room and take it now.$"
+
+MtPyre_Summit_Text_MagmaEmblemNoRoom:
+	.string "Both your KEY ITEMS pocket and PC are\n"
+	.string "full. Make room, then speak to me again.$"
 
 MtPyre_Summit_Text_OrbsHaveBeenTaken:
 	.string "With the ORBS apart, land and sea will\n"

@@ -55,21 +55,27 @@ NavelRock_Top_EventScript_HoOh::
 	applymovement LOCALID_NAVEL_ROCK_HO_OH, NavelRock_Top_Movement_HoOhApproach
 	waitmovement 0
 	special RemoveCameraObject
-	seteventmon SPECIES_HO_OH, 70
+	setvar VAR_0x8004, SPECIES_HO_OH
+	setvar VAR_0x8005, 0
+	special CreateEmeraldChampionsStaticLegendaryEncounter
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	setvar VAR_LAST_TALKED, LOCALID_NAVEL_ROCK_HO_OH
 	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, NavelRock_Top_EventScript_CaughtHoOh
 	goto_if_eq VAR_RESULT, B_OUTCOME_WON, NavelRock_Top_EventScript_DefeatedHoOh
 	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, NavelRock_Top_EventScript_RanFromHoOh
 	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, NavelRock_Top_EventScript_RanFromHoOh
+	releaseall
+	end
+
+NavelRock_Top_EventScript_CaughtHoOh::
 	setflag FLAG_CAUGHT_HO_OH
 	releaseall
 	end
 
 NavelRock_Top_EventScript_DefeatedHoOh::
-	setflag FLAG_DEFEATED_HO_OH
 	setvar VAR_0x8004, SPECIES_HO_OH
 	goto Common_EventScript_LegendaryFlewAway
 	end

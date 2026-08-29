@@ -262,7 +262,7 @@ Route119_WeatherInstitute_2F_Text_ShellyPostBattle:
 
 Route119_WeatherInstitute_2F_Text_TeamMagmaJustPassedBy:
 	.string "TEAM MAGMA just passed below us. They\n"
-	.string "were carrying an ancient BLUE ORB.\p"
+	.string "were searching for an ancient BLUE ORB.\p"
 	.string "They are headed for MT. PYRE!$"
 
 Route119_WeatherInstitute_2F_Text_WeHaveToHurryToMtPyre:

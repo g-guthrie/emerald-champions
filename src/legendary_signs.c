@@ -394,6 +394,7 @@ void TryUnlockDarkraiLegendarySign(void)
         TRAINER_GRUNT_MT_PYRE_2,
         TRAINER_GRUNT_MT_PYRE_3,
         TRAINER_GRUNT_MT_PYRE_4,
+        TRAINER_MATT_MT_PYRE,
     };
 
     gSpecialVar_Result = 0;

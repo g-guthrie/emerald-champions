@@ -102,6 +102,9 @@ def main() -> None:
     runtime = (ROOT / "src" / "emerald_champions_battle_sets.c").read_text()
     assert "RandomUniform(RNG_NONE, 0, count - 1)" in runtime
     assert "ResolveBattleSetSpecies" in runtime and "formSpeciesIdTable" in runtime
+    ordinary_wild_gate = runtime.split("bool32 IsEmeraldChampionsOrdinaryWildSpecies", 1)[1].split("static bool32 FindAbilitySlot", 1)[0]
+    assert ".isUltraBeast" not in ordinary_wild_gate, "random-table Ultra Beasts bypass competitive presets"
+    assert ".isParadox" not in ordinary_wild_gate, "random-table Paradox Pokemon bypass competitive presets"
 
     handbook_species = {
         entry["species"] for entry in defaults

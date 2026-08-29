@@ -10,7 +10,8 @@ PetalburgCity_Gym_OnLoad:
 	call_if_ge VAR_PETALBURG_GYM_STATE, 7, PetalburgCity_Gym_EventScript_UnlockAllDoors
 	end
 
-@ NOTE: Strength and OHKO rooms are misleading. Both are more accurately Critical-Hit
+@ Internal OHKO labels are retained for map compatibility; player-facing text
+@ correctly identifies Berke's room as the Burst Room.
 PetalburgCity_Gym_EventScript_OpenUnlockedDoors::
 	setvar VAR_0x8005, 1
 	call PetalburgCity_Gym_EventScript_OpenGymEntranceDoors
@@ -1270,9 +1271,8 @@ PetalburgCity_Gym_Text_ReceivedBalanceBadge:
 	.string "from DAD!$"
 
 PetalburgCity_Gym_Text_ExplainBalanceBadgeTakeThis:
-	.string "DAD: With that BADGE, the DEFENSE\n"
-	.string "of all your POKéMON will increase.\p"
-	.string "POKéMON that know the HM move SURF\n"
+	.string "DAD: With that BADGE, POKéMON that\n"
+	.string "know the hidden move SURF\n"
 	.string "will be able to travel over water.\p"
 	.string "This is my gift to you. {PLAYER}, I'm\n"
 	.string "sure you can use it correctly.$"
@@ -1281,8 +1281,8 @@ PetalburgCity_Gym_Text_ExplainFacade:
 	.string "Let it hold the stone in battle.$"
 
 PetalburgCity_Gym_Text_DadHappyAndSad:
-	.string "DAD: As a LEADER, I already want the\n"
-	.string "rematch. As your father, I'm simply proud.$"
+	.string "DAD: As a LEADER, I learned from you.\n"
+	.string "As your father, I'm simply proud.$"
 
 PetalburgCity_Gym_Text_PleaseComeWithMe:
 	.string "Ah, there you are, {PLAYER}{KUN}!\p"
@@ -1398,22 +1398,17 @@ PetalburgCity_Gym_Text_GeorgePostBadge:
 	.string "One day, I'll become a LEADER.$"
 
 PetalburgCity_Gym_Text_BerkeIntro:
-	.string "I'm not going to take it easy just\n"
-	.string "because you're our LEADER's kid.\p"
-	.string "I'll show you how horrid it is for\n"
-	.string "a POKéMON to take a critical hit!$"
+	.string "This is the BURST ROOM. SCRAPPY sound\n"
+	.string "crosses Ghosts. One visible EXPLOSION\l"
+	.string "can erase a careless board. Position!$"
 
 PetalburgCity_Gym_Text_BerkeDefeat:
-	.string "Your power…\n"
-	.string "You're the real deal.$"
+	.string "You made every burst hit the wrong turn!$"
 
 PetalburgCity_Gym_Text_BerkePostBattle:
-	.string "Your father really is strong.\n"
-	.string "He's a TRAINER worth my respect.\p"
-	.string "And, I sense the same glow coming\n"
-	.string "from you as your father.\p"
-	.string "I hope that you'll stage a terrific\n"
-	.string "battle with your father!$"
+	.string "Track TRICK ROOM, guard the telegraphed\n"
+	.string "EXPLOSION, and keep an answer for the\l"
+	.string "refrigerated final impact.$"
 
 PetalburgCity_Gym_Text_BerkePostBadge:
 	.string "Since your dad became the LEADER,\n"
@@ -1519,7 +1514,7 @@ PetalburgCity_Gym_Text_EnterStrengthRoom:
 	.string "Do you want to go through?$"
 
 PetalburgCity_Gym_Text_EnterOHKORoom:
-	.string "“ONE-HIT KO ROOM,” the sign says.\p"
+	.string "“BURST ROOM,” the sign says.\p"
 	.string "Do you want to go through?$"
 
 PetalburgCity_Gym_Text_EnterGymLeadersRoom:

@@ -57,11 +57,15 @@ bool32 IsEmeraldChampionsOrdinaryWildSpecies(enum Species species)
     if (gSpeciesInfo[species].baseHP == 0)
         return FALSE;
 
+    // Ultra Beasts and Paradox Pokemon are ordinary random encounters in the
+    // restored campaign maps. They therefore receive the same immediately
+    // usable competitive loadouts as every other table-seeded wild species.
+    // True legendary/mythical and temporary battle forms remain excluded;
+    // Legendary Signs opt in separately when their quest calls for a wild
+    // encounter.
     return !gSpeciesInfo[species].isRestrictedLegendary
         && !gSpeciesInfo[species].isSubLegendary
         && !gSpeciesInfo[species].isMythical
-        && !gSpeciesInfo[species].isUltraBeast
-        && !gSpeciesInfo[species].isParadox
         && !gSpeciesInfo[species].isMegaEvolution
         && !gSpeciesInfo[species].isPrimalReversion
         && !gSpeciesInfo[species].isUltraBurst

@@ -738,8 +738,8 @@ MtChimney_Text_ShelbyPostBattle:
 MtChimney_Text_ShelbyRegister:
 	.string "Thank you, child. It was fun, as if\n"
 	.string "I were battling my own grandchild.\p"
-	.string "Please, come see me again for\n"
-	.string "a rematch.$"
+	.string "Please, keep in touch and tell me\n"
+	.string "where your journey takes you.$"
 
 MtChimney_Text_ShelbyRematchIntro:
 	.string "If you can mesh your heart with those\n"

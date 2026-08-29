@@ -20,8 +20,8 @@ MossdeepCity_Mart_Pokemart:
 	.2byte ITEM_FULL_HEAL
 	.2byte ITEM_REVIVE
 	.2byte ITEM_MAX_REPEL
-	.2byte ITEM_X_ATTACK
-	.2byte ITEM_X_DEFENSE
+	.2byte ITEM_TIMER_BALL
+	.2byte ITEM_QUICK_BALL
 	.2byte ITEM_RARE_CANDY
 	pokemartlistend
 
@@ -56,4 +56,3 @@ MossdeepCity_Mart_Text_NetAndDiveBallsRare:
 	.string "BUG-type and WATER-type POKéMON.\p"
 	.string "A DIVE BALL works best on POKéMON\n"
 	.string "at the bottom of the sea.$"
-

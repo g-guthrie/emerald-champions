@@ -405,12 +405,12 @@ PetalburgWoods_Text_PeopleRespectYou:
 	.string "people respect you for it.$"
 
 PetalburgWoods_Text_IWantRematch1:
-	.string "I want a rematch when my BUG\n"
+	.string "I want to tell you when my BUG\n"
 	.string "POKéMON grow up!\p"
 	.string "I'm registering you in my POKéNAV!$"
 
 PetalburgWoods_Text_IWantRematch2:
-	.string "I want a rematch when my BUG \n"
+	.string "I want to tell you when my BUG\n"
 	.string "POKéMON grow up!\p"
 	.string "I'm registering you in my POKéNAV!$"
 
@@ -446,22 +446,17 @@ PetalburgWoods_Text_TryUsingThisItem:
 	.string "You should try using this item.$"
 
 PetalburgWoods_Text_MiracleSeedExplanation:
-	.string "It's a MIRACLE SEED.\n"
-	.string "If a POKéMON holds that item, its\l"
-	.string "GRASS-type moves become stronger.\p"
-	.string "Besides MIRACLE SEED, I think there are\n"
-	.string "other convenient items for POKéMON\l"
-	.string "to hold.$"
+	.string "It's a TART APPLE.\n"
+	.string "Use it to evolve the right APPLIN.\p"
+	.string "Evolution items reward exploring even\n"
+	.string "when battle gear is easy to obtain.$"
 
 PetalburgWoods_Text_TrainerTipsExperience:
 	.string "TRAINER TIPS\p"
-	.string "Any POKéMON that appears even once\n"
-	.string "in a battle is awarded EXP Points.\p"
-	.string "To raise a weak POKéMON, put it at the\n"
-	.string "left of the team list.\p"
-	.string "As soon as a battle starts, switch it\n"
-	.string "out. It will earn EXP Points without\l"
-	.string "being exposed to any harm.$"
+	.string "Use the LEVELER to bring a new partner\n"
+	.string "to your current training limit.\p"
+	.string "Then prepare its moves, Ability, Nature,\n"
+	.string "and held item before the next battle.$"
 
 PetalburgWoods_Text_TrainerTipsPP:
 	.string "TRAINER TIPS\p"

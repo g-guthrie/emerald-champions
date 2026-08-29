@@ -151,6 +151,7 @@ enum BattleSide
 
 #define RIVAL_BATTLE_HEAL_AFTER  1
 #define RIVAL_BATTLE_TUTORIAL    3
+#define TRAINER_BATTLE_ALLOW_ONE_MON_IN_DOUBLES (1 << 7)
 
 // Battle Outcome defines
 #define B_OUTCOME_WON                  1

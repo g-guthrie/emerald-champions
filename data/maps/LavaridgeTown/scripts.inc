@@ -60,6 +60,16 @@ LavaridgeTown_EventScript_RivalGiveGoGoggles::
 LavaridgeTown_EventScript_MayGiveGoGoggles::
 	msgbox LavaridgeTown_Text_MayNiceBadgesTakeThis, MSGBOX_DEFAULT
 	giveitem ITEM_GO_GOGGLES
+	goto_if_eq VAR_RESULT, FALSE, LavaridgeTown_EventScript_ArchiveGoGogglesMay
+	goto LavaridgeTown_EventScript_MayReceivedGoGoggles
+	end
+
+LavaridgeTown_EventScript_ArchiveGoGogglesMay::
+	addpcitem ITEM_GO_GOGGLES
+	goto_if_eq VAR_RESULT, FALSE, LavaridgeTown_EventScript_GoGogglesNoRoom
+	msgbox LavaridgeTown_Text_GoGogglesSentToPC, MSGBOX_DEFAULT
+
+LavaridgeTown_EventScript_MayReceivedGoGoggles::
 	setflag FLAG_RECEIVED_GO_GOGGLES
 	msgbox LavaridgeTown_Text_MayExplainGoGogglesChallengeDad, MSGBOX_DEFAULT
 	goto LavaridgeTown_EventScript_RivalExit
@@ -68,9 +78,24 @@ LavaridgeTown_EventScript_MayGiveGoGoggles::
 LavaridgeTown_EventScript_BrendanGiveGoGoggles::
 	msgbox LavaridgeTown_Text_BrendanNiceBadgesTakeThis, MSGBOX_DEFAULT
 	giveitem ITEM_GO_GOGGLES
+	goto_if_eq VAR_RESULT, FALSE, LavaridgeTown_EventScript_ArchiveGoGogglesBrendan
+	goto LavaridgeTown_EventScript_BrendanReceivedGoGoggles
+	end
+
+LavaridgeTown_EventScript_ArchiveGoGogglesBrendan::
+	addpcitem ITEM_GO_GOGGLES
+	goto_if_eq VAR_RESULT, FALSE, LavaridgeTown_EventScript_GoGogglesNoRoom
+	msgbox LavaridgeTown_Text_GoGogglesSentToPC, MSGBOX_DEFAULT
+
+LavaridgeTown_EventScript_BrendanReceivedGoGoggles::
 	setflag FLAG_RECEIVED_GO_GOGGLES
 	msgbox LavaridgeTown_Text_BrendanExplainGoGogglesChallengeDad, MSGBOX_DEFAULT
 	goto LavaridgeTown_EventScript_RivalExit
+	end
+
+LavaridgeTown_EventScript_GoGogglesNoRoom::
+	msgbox LavaridgeTown_Text_GoGogglesNoRoom, MSGBOX_DEFAULT
+	releaseall
 	end
 
 LavaridgeTown_EventScript_RivalExit::
@@ -283,6 +308,14 @@ LavaridgeTown_Text_MayNiceBadgesTakeThis:
 	.string "I guess it would be okay for you to\n"
 	.string "have this.$"
 
+LavaridgeTown_Text_GoGogglesSentToPC:
+	.string "Your KEY ITEMS pocket is full, so the\n"
+	.string "GO-GOGGLES were sent to your PC.$"
+
+LavaridgeTown_Text_GoGogglesNoRoom:
+	.string "Your KEY ITEMS pocket and PC are full.\n"
+	.string "Make room before taking the GO-GOGGLES.$"
+
 LavaridgeTown_Text_MayExplainGoGogglesChallengeDad:
 	.string "MAY: With those GO-GOGGLES, you'll\n"
 	.string "have no trouble getting through the\l"
@@ -403,4 +436,3 @@ LavaridgeTown_Text_GymSign:
 LavaridgeTown_Text_HerbShopSign:
 	.string "POKéMON HERB SHOP\n"
 	.string "“Bitter taste--better cure!”$"
-

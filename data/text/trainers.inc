@@ -14,12 +14,12 @@ Route102_Text_CalvinPostBattle:
 Route102_Text_CalvinRegister:
 	.string "I've been working hard at this since\n"
 	.string "I saw you before.\p"
-	.string "I'd like to battle you again, so can\n"
-	.string "you register me in your POKéNAV?$"
+	.string "I want to keep comparing training\n"
+	.string "notes. Register me in your POKéNAV!$"
 
 Route102_Text_CalvinRegisterShort:
-	.string "I'd like to battle you again, so can\n"
-	.string "you register me in your POKéNAV?$"
+	.string "Let's compare training notes.\n"
+	.string "Register me in your POKéNAV!$"
 
 Route102_Text_CalvinRematchIntro:
 	.string "Ever since I lost to you, I desperately\n"
@@ -111,8 +111,8 @@ Route103_Text_LivPostBattle:
 	.string "But we still lost…$"
 
 Route103_Text_AmyLivRegister:
-	.string "LIV: Really, we're a lot better…\n"
-	.string "It's true! We'll show you next time!$"
+	.string "LIV: Really, we're getting better…\n"
+	.string "Your teamwork gave us new ideas!$"
 
 Route103_Text_LivNotEnoughPokemon:
 	.string "LIV: If you want to battle us,\n"
@@ -858,8 +858,8 @@ Route109_Text_RickyPostBattle:
 	.string "looks like a giant doughnut…$"
 
 Route109_Text_RickyRegister:
-	.string "Will you have another match with me\n"
-	.string "when I'm not all thirsty?$"
+	.string "Call me sometime when I'm not\n"
+	.string "all thirsty, okay?$"
 
 Route109_Text_RickyRematchIntro:
 	.string "I'm hungry, but I've got enough pep in\n"
@@ -1067,7 +1067,7 @@ Route110_Text_AbigailPostBattle:
 
 Route110_Text_AbigailRegister:
 	.string "You know, I like you!\n"
-	.string "Let's have a rematch on CYCLING ROAD.$"
+	.string "Let's swap tips about CYCLING ROAD.$"
 
 Route110_Text_AbigailRematchIntro:
 	.string "Isn't it neat to hold a battle while\n"
@@ -1376,8 +1376,8 @@ Route111_Text_WiltonPostBattle:
 Route111_Text_WiltonRegister:
 	.string "There is much to be learned from\n"
 	.string "your training style.\p"
-	.string "I request a rematch if it\n"
-	.string "behooves you.$"
+	.string "I request permission to record your\n"
+	.string "contact, if it behooves you.$"
 
 Route111_Text_WiltonRematchIntro:
 	.string "We're training here to elevate our\n"
@@ -1605,10 +1605,9 @@ Route112_Text_ShaylaDefeat:
 	.string "You've given me quite a shock!$"
 
 Route112_Text_ShaylaPostBattle:
-	.string "Are you busy right now?\n"
-	.string "I was thinking that maybe we can have\l"
-	.string "a rematch right now…\l"
-	.string "But it's all right if you're busy.$"
+	.string "That was wonderfully dramatic!\n"
+	.string "I need time to think about every\l"
+	.string "turn. What a romantic battle!$"
 
 Route113_Text_JaylenIntro:
 	.string "Can you guess why it's so cool\n"
@@ -2012,8 +2011,8 @@ Route115_Text_TimothyPostBattle:
 Route115_Text_TimothyRegister:
 	.string "Hmm… A loss this thorough has been\n"
 	.string "a distant memory.\p"
-	.string "If you would allow it, I wish for\n"
-	.string "another opportunity to do battle.$"
+	.string "If you would allow it, I wish to\n"
+	.string "exchange training observations.$"
 
 Route115_Text_TimothyRematchIntro:
 	.string "Hm… As always, your agility speaks\n"
@@ -2055,8 +2054,8 @@ Route115_Text_NobPostBattle:
 	.string "than me. I'm excited about that.$"
 
 Route115_Text_NobRegister:
-	.string "You impress me! Give me a rematch\n"
-	.string "after I redo my training!$"
+	.string "You impress me! Let me share how\n"
+	.string "our training develops!$"
 
 Route115_Text_NobRematchIntro:
 	.string "After you beat me, we trained hard to\n"
@@ -2085,7 +2084,7 @@ Route115_Text_CyndyPostBattle:
 
 Route115_Text_CyndyRegister:
 	.string "Okay, fine, you're free to come here.\n"
-	.string "In return, I'd like to battle you again.$"
+	.string "In return, share your training tips.$"
 
 Route115_Text_CyndyRematchIntro:
 	.string "Okay, let's get this battle on!$"
@@ -2438,7 +2437,7 @@ Route117_Text_MariaPostBattle:
 
 Route117_Text_MariaRegister:
 	.string "You appear to be training properly…\n"
-	.string "If you'd like, I'll battle you later!$"
+	.string "I'd like to compare our routines!$"
 
 Route117_Text_MariaRematchIntro:
 	.string "Are you keeping up with your training?\n"
@@ -2484,8 +2483,8 @@ Route117_Text_AnnaPostBattle:
 	.string "I'd say you're second only to us!$"
 
 Route117_Text_AnnaAndMegRegister:
-	.string "ANNA: We can't take this lying down!\n"
-	.string "You will come back, won't you?$"
+	.string "ANNA: We learned from that loss!\n"
+	.string "Let us share what we discover.$"
 
 Route117_Text_AnnaNotEnoughMons:
 	.string "ANNA: If you want to battle us,\n"
@@ -2778,7 +2777,7 @@ Route119_Text_JacksonPostBattle:
 	.string "That's our vision.$"
 
 Route119_Text_JacksonRegister:
-	.string "I hope you'll give me a rematch without\n"
+	.string "I hope you'll share advice without\n"
 	.string "mocking my lack of knowledge.$"
 
 Route119_Text_JacksonRematchIntro:
@@ -3239,8 +3238,8 @@ Route121_Text_JessicaPostBattle:
 	.string "the SAFARI.$"
 
 Route121_Text_JessicaRegister:
-	.string "I took it easy on you this time!\n"
-	.string "It won't be that way the next time!$"
+	.string "I took it easy on you!\n"
+	.string "Still, I learned plenty from that.$"
 
 Route121_Text_JessicaRematchIntro:
 	.string "My precious POKéMON grew!\n"
@@ -3387,8 +3386,8 @@ Route123_Text_CameronPostBattle:
 
 Route123_Text_CameronRegister:
 	.string "I sense it!\n"
-	.string "You and I shall battle again!\l"
-	.string "I can't tell if I'll win, though…\p"
+	.string "You and I shall stay connected!\l"
+	.string "I can't tell what I'll sense, though…\p"
 	.string "Let's see your POKéNAV.$"
 
 Route123_Text_CameronRematchIntro:
@@ -3416,8 +3415,8 @@ Route123_Text_JackiPostBattle:
 	.string "We've just forgotten how to use them.$"
 
 Route123_Text_JackiRegister:
-	.string "I would like to face you again.\n"
-	.string "Is that okay with you?$"
+	.string "I would like to study your technique.\n"
+	.string "May I register your contact?$"
 
 Route123_Text_JackiRematchIntro:
 	.string "Have you awoken the psychic powers\n"
@@ -3709,8 +3708,8 @@ Route124_Text_RoyPostBattle:
 	.string "boyfriend.$"
 
 Route124_Text_LilaRoyRegister:
-	.string "ROY: Will you battle with us again?\n"
-	.string "But take it easy next time, okay?$"
+	.string "ROY: Can we trade training tips?\n"
+	.string "LILA keeps working me too hard!$"
 
 Route124_Text_RoyNotEnoughMons:
 	.string "ROY: Did you want to battle us?\n"
@@ -4120,7 +4119,7 @@ Route127_Text_KojiPostBattle:
 
 Route127_Text_KojiRegister:
 	.string "This is what I do to people who beat me!\n"
-	.string "I hope we can do this again.$"
+	.string "I'll send you my barefoot training tips.$"
 
 Route127_Text_KojiRematchIntro:
 	.string "I still run in my bare feet daily.\n"
@@ -4161,7 +4160,7 @@ Route128_Text_IsaiahPostBattle:
 Route128_Text_IsaiahRegister:
 	.string "I know I'm not good now, but I think\n"
 	.string "I can win eventually.\p"
-	.string "Please register me in your POKéNAV.$"
+	.string "Please register me and track my progress.$"
 
 Route128_Text_IsaiahRematchIntro:
 	.string "I'm still feeling good. I'll keep on\n"
@@ -4189,7 +4188,7 @@ Route128_Text_KatelynPostBattle:
 
 Route128_Text_KatelynRegister:
 	.string "Well, I may as well make the best\n"
-	.string "of this. I'd like a rematch sometime.$"
+	.string "of this. Let's exchange training notes.$"
 
 Route128_Text_KatelynRematchIntro:
 	.string "A triathlon is long. But I guess the\n"

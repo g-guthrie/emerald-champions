@@ -236,7 +236,7 @@ SootopolisCity_Gym_1F_Text_RegisteredJuan:
 
 SootopolisCity_Gym_1F_Text_JuanPostBattle:
 	.string "Eight BADGES open EVER GRANDE. Its\n"
-	.string "is five consecutive master teams.\p"
+	.string "challenge is five master teams in a row.\p"
 	.string "You may heal with your BAG between rooms,\n"
 	.string "but never use items inside their battles.$"
 

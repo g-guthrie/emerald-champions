@@ -216,6 +216,16 @@ Route120_EventScript_StevenGiveDeconScope::
 	waitmovement 0
 	msgbox Route120_Text_StevenGiveDevonScope, MSGBOX_DEFAULT
 	giveitem ITEM_DEVON_SCOPE
+	goto_if_eq VAR_RESULT, FALSE, Route120_EventScript_ArchiveDevonScope
+	goto Route120_EventScript_ReceivedDevonScope
+	end
+
+Route120_EventScript_ArchiveDevonScope::
+	addpcitem ITEM_DEVON_SCOPE
+	goto_if_eq VAR_RESULT, FALSE, Route120_EventScript_DevonScopeNoRoom
+	msgbox Route120_Text_DevonScopeSentToPC, MSGBOX_DEFAULT
+
+Route120_EventScript_ReceivedDevonScope::
 	setflag FLAG_RECEIVED_DEVON_SCOPE
 	msgbox Route120_Text_StevenGoodbye, MSGBOX_DEFAULT
 	closemessage
@@ -232,6 +242,11 @@ Route120_EventScript_StevenGiveDeconScope::
 	setmetatile 12, 17, METATILE_General_ReflectiveWater, FALSE
 	setmetatile 13, 17, METATILE_General_ReflectiveWater, FALSE
 	special DrawWholeMapView
+	release
+	end
+
+Route120_EventScript_DevonScopeNoRoom::
+	msgbox Route120_Text_DevonScopeNoRoom, MSGBOX_DEFAULT
 	release
 	end
 
@@ -399,6 +414,14 @@ Route120_Text_StevenGiveDevonScope:
 	.string "DEVON SCOPE.\p"
 	.string "Who knows, there may be other\n"
 	.string "concealed POKéMON.$"
+
+Route120_Text_DevonScopeSentToPC:
+	.string "Your KEY ITEMS pocket is full, so the\n"
+	.string "DEVON SCOPE was sent to your PC.$"
+
+Route120_Text_DevonScopeNoRoom:
+	.string "Your KEY ITEMS pocket and PC are full.\n"
+	.string "Make room, then speak to me again.$"
 
 Route120_Text_StevenGoodbye:
 	.string "STEVEN: {PLAYER}{KUN}.\p"

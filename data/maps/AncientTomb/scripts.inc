@@ -61,21 +61,28 @@ AncientTomb_EventScript_Registeel::
 	playmoncry SPECIES_REGISTEEL, CRY_MODE_ENCOUNTER
 	delay 40
 	waitmoncry
-	setwildbattle SPECIES_REGISTEEL, 40
+	setvar VAR_0x8004, SPECIES_REGISTEEL
+	setvar VAR_0x8005, 0
+	special CreateEmeraldChampionsStaticLegendaryEncounter
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special StartRegiBattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, AncientTomb_EventScript_CaughtRegisteel
 	goto_if_eq VAR_RESULT, B_OUTCOME_WON, AncientTomb_EventScript_DefeatedRegisteel
 	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, AncientTomb_EventScript_RanFromRegisteel
 	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, AncientTomb_EventScript_RanFromRegisteel
+	release
+	end
+
+AncientTomb_EventScript_CaughtRegisteel::
 	setflag FLAG_DEFEATED_REGISTEEL
 	release
 	end
 
 AncientTomb_EventScript_DefeatedRegisteel::
-	setflag FLAG_DEFEATED_REGISTEEL
-	goto Common_EventScript_RemoveStaticPokemon
+	msgbox AncientTomb_Text_RegisteelStillAwaitsCapture, MSGBOX_DEFAULT
+	release
 	end
 
 AncientTomb_EventScript_RanFromRegisteel::
@@ -83,3 +90,6 @@ AncientTomb_EventScript_RanFromRegisteel::
 	goto Common_EventScript_LegendaryFlewAway
 	end
 
+AncientTomb_Text_RegisteelStillAwaitsCapture:
+	.string "REGISTEEL steadies itself again.\p"
+	.string "It still awaits a true capture.$"

@@ -50,6 +50,7 @@ def main() -> None:
     linking_start = item_info.index("[ITEM_LINKING_CORD]")
     linking_block = item_info[linking_start: item_info.index("[ITEM_PEAT_BLOCK]", linking_start)]
     require(".pocket = POCKET_KEY_ITEMS" in linking_block, "Linking Cord is still consumable")
+    require(".importance = 1" in linking_block, "Linking Cord can be purchased as a duplicate stack")
     require("reusable cord" in linking_block, "Linking Cord description does not explain reuse")
     require("giveitem ITEM_LINKING_CORD" in (ROOT / "data/maps/ShoalCave_LowTideEntranceRoom/scripts.inc").read_text(),
             "Linking Cord has no campaign acquisition")
@@ -74,6 +75,11 @@ def main() -> None:
             "Karrablast solo evolution does not retain Shelmet's identity")
     require("IF_SPECIES_IN_PARTY, SPECIES_KARRABLAST" in (ROOT / "src/data/pokemon/species_info/gen_5_families.h").read_text(),
             "Shelmet solo evolution does not retain Karrablast's identity")
+    load = (ROOT / "src/overworld.c").read_text()
+    require("CountTotalItemQuantityInBag(ITEM_LINKING_CORD)" in load,
+            "older save stacks of Linking Cord are not normalized")
+    require("GetBagItemId(POCKET_ITEMS" in load and "AddBagItem(ITEM_LINKING_CORD, 1)" in load,
+            "legacy Linking Cords are not moved out of their former Items pocket")
 
     print(f"PASS: all {len(trade_paths)} trade evolutions have single-player alternatives")
     print(f"PASS: all {len(solo_items)} required evolution items are obtainable")

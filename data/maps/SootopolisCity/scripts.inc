@@ -46,7 +46,7 @@ SootopolisCity_OnTransition:
 	call_if_eq VAR_SOOTOPOLIS_CITY_STATE, 3, SootopolisCity_EventScript_CheckSetEnterCaveOfOriginObjPos
 	call_if_eq VAR_SOOTOPOLIS_CITY_STATE, 4, SootopolisCity_EventScript_SetExitCaveOfOriginObjPos
 	call_if_eq VAR_SOOTOPOLIS_CITY_STATE, 5, SootopolisCity_EventScript_SetOutsideGymObjPos
-	call_if_eq VAR_SOOTOPOLIS_CITY_STATE, 6, SootopolisCity_EventScript_SetExpertBlockCaveEntrance
+	call_if_eq VAR_SOOTOPOLIS_CITY_STATE, 6, SootopolisCity_EventScript_SetExpertBesideCaveEntrance
 	end
 
 SootopolisCity_EventScript_HideMapNamePopup::
@@ -136,8 +136,9 @@ SootopolisCity_EventScript_SetWallaceLeft::
 	setobjectmovementtype LOCALID_SOOTOPOLIS_WALLACE, MOVEMENT_TYPE_FACE_DOWN
 	return
 
-SootopolisCity_EventScript_SetExpertBlockCaveEntrance::
-	setobjectxyperm LOCALID_SOOTOPOLIS_EXPERT, 31, 18
+SootopolisCity_EventScript_SetExpertBesideCaveEntrance::
+	setobjectxyperm LOCALID_SOOTOPOLIS_EXPERT, 30, 18
+	setobjectmovementtype LOCALID_SOOTOPOLIS_EXPERT, MOVEMENT_TYPE_FACE_RIGHT
 	return
 
 SootopolisCity_OnWarp:
@@ -1524,8 +1525,8 @@ SootopolisCity_Text_AwakenedPokemonClash:
 
 SootopolisCity_Text_CaveOfOriginSleepsToo:
 	.string "This is the CAVE OF ORIGIN…\p"
-	.string "With the passing of the crisis,\n"
-	.string "the cave, too, shall sleep…$"
+	.string "The crisis has passed, but new signs\n"
+	.string "stir within. You may enter.$"
 
 SootopolisCity_Text_SootopolisSkyBeautiful:
 	.string "SOOTOPOLIS sprang up as a town in\n"

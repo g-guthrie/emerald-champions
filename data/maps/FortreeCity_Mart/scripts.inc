@@ -41,12 +41,15 @@ FortreeCity_Mart_EventScript_Boy::
 FortreeCity_Mart_EventScript_Spenser::
 	lock
 	faceplayer
-	goto_if_defeated TRAINER_SPENSER_FORTREE, FortreeCity_Mart_EventScript_SpenserAfter
+	goto_if_set FLAG_RECEIVED_SPENSER_PROTECTOR, FortreeCity_Mart_EventScript_SpenserAfter
+	goto_if_defeated TRAINER_SPENSER_FORTREE, FortreeCity_Mart_EventScript_SpenserReward
 	msgbox FortreeCity_Mart_Text_SpenserChallenge, MSGBOX_DEFAULT
 	trainerbattle_no_intro_double TRAINER_SPENSER_FORTREE, FortreeCity_Mart_Text_SpenserDefeat, EmeraldChampions_Text_NeedTwoPokemon
+FortreeCity_Mart_EventScript_SpenserReward::
 	checkitemspace ITEM_PROTECTOR, 1
 	goto_if_eq VAR_RESULT, FALSE, FortreeCity_Mart_EventScript_SpenserBagFull
 	giveitem ITEM_PROTECTOR
+	setflag FLAG_RECEIVED_SPENSER_PROTECTOR
 FortreeCity_Mart_EventScript_SpenserAfter::
 	msgbox FortreeCity_Mart_Text_SpenserAfter, MSGBOX_DEFAULT
 	release
@@ -83,4 +86,5 @@ FortreeCity_Mart_Text_StockUpOnItems:
 
 FortreeCity_Mart_Text_RareCandyMakesMonGrow:
 	.string "A RARE CANDY makes a POKéMON grow\n"
-	.string "immediately by one level.$"
+	.string "by up to ten levels at once.\p"
+	.string "It stops cleanly at the current limit.$"
