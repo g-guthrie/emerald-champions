@@ -1,7 +1,7 @@
 EMERALD CHAMPIONS — EXHAUSTIVE CAMPAIGN EVIDENCE
 =========================================================
 
-Campaign input SHA-256: f41d6887f1f905d5e11ad03e8ff328db3fa9efe40db9966888d08646c525c7ea
+Campaign input SHA-256: a62efcae12d00eeb35930c8011c2b210ceff1179111eb8836626dc18afe85712
 Physical encounter groups: 513
 Trainer branches: 561
 
@@ -460,15 +460,15 @@ PHYSICAL TRAINER ATLAS
 [0019] Route115 — optional
   Chapter: Stone Badge
   Cap / target difficulty / fatigue: 14 / 7.9 / ordinary_standard
-  Battle question: Can the player read Meditite's Fake Out opening, solve the Trick Room, Tailwind, spread pressure board, and still preserve an answer for Litwick's Trick Room finish?
-  First-loss lesson: Decide whether Meditite is damage or infrastructure, then preserve the answer that best denies Litwick's Trick Room rather than spending it on Spoink, Tropius.
-  Strongest feature: Meditite's Fake Out creates a readable handoff through Spoink, Tropius into Litwick's Trick Room, so the team has one identity without becoming one scripted solution.
-  Weakest seam: If the player breaks the Trick Room layer or removes Meditite early, the remaining members must win through ordinary positioning; that intentional seam keeps difficulty 7.9 honest.
+  Battle question: Can the player read Meditite's Fake Out opening, solve the Tailwind, spread pressure board, and still preserve an answer for Litwick's Will-O-Wisp finish?
+  First-loss lesson: Decide whether Meditite is damage or infrastructure, then preserve the answer that best denies Litwick's Will-O-Wisp rather than spending it on Spoink, Tropius.
+  Strongest feature: Meditite's Fake Out creates a readable handoff through Spoink, Tropius into Litwick's Will-O-Wisp, so the team has one identity without becoming one scripted solution.
+  Weakest seam: If the player breaks the Tailwind layer or removes Meditite early, the remaining members must win through ordinary positioning; that intentional seam keeps difficulty 7.9 honest.
   Branch: Psychic MARLENE (TRAINER_MARLENE) — double
     - Meditite @ Life Orb; offset -3; Pure Power; Nature Jolly; Stat Points 2/32/0/0/0/32; Fake Out, High Jump Kick, Zen Headbutt, Bullet Punch
     - Spoink @ Sitrus Berry; offset -3; Thick Fat; Nature Timid; Stat Points 2/0/0/32/0/32; Thunder Wave, Protect, Psychic, Taunt
-    - Tropius @ Clear Amulet; offset -3; Aerilate; Nature Sassy; Stat Points 2/32/0/0/0/32; Double Edge, Earthquake, Tailwind, Protect
-    - Litwick @ Eviolite; offset +0; Flash Fire; Nature Quiet; Stat Points 32/0/2/32/0/0; Trick Room, Heat Wave, Shadow Ball, Protect
+    - Tropius @ Clear Amulet; offset -3; Aerilate; Nature Jolly; Stat Points 2/32/0/0/0/32; Double Edge, Earthquake, Tailwind, Protect
+    - Litwick @ Eviolite; offset +0; Flash Fire; Nature Modest; Stat Points 32/0/2/32/0/0; Will O Wisp, Heat Wave, Shadow Ball, Protect
     Dialogue source: data/maps/Route115/scripts.inc:128 (Route115_EventScript_Marlene)
     Route115_Text_MarleneIntro:
       > You've disturbed my meditation…
@@ -1445,7 +1445,7 @@ PHYSICAL TRAINER ATLAS
     - Celesteela @ Leftovers; offset +2; Beast Boost; Nature Careful; Stat Points 32/0/2/0/32/0; Heavy Slam, Flamethrower, Leech Seed, Protect
     - Urshifu Rapid Strike @ Choice Band; offset +2; Unseen Fist; Nature Jolly; Stat Points 2/32/0/0/0/32; Surging Strikes, Close Combat, Aqua Jet, U Turn
     - Rillaboom @ Assault Vest; offset +5; Grassy Surge; Nature Adamant; Stat Points 2/32/0/0/0/32; Knock Off, Grassy Glide, Wood Hammer, U Turn
-    Dialogue source: data/maps/SlateportCity/scripts.inc:1384 (SlateportCity_EventScript_Greta)
+    Dialogue source: data/maps/SlateportCity/scripts.inc:1344 (SlateportCity_EventScript_Greta)
     SlateportCity_Text_GretaDefeat:
       > All three were sharp. Nicely done!
 
@@ -2211,7 +2211,7 @@ PHYSICAL TRAINER ATLAS
   Branch: Winstrate VIVI (TRAINER_VIVI) — single
     - Fomantis @ Coba Berry; offset +0; Contrary; Nature Modest; Stat Points 32/32/2/0/0/0; Leaf Storm, Leaf Blade, Superpower, Protect
     - Numel @ Passho Berry; offset +0; Simple; Nature Quiet; Stat Points 32/0/2/32/0/0; Earth Power, Heat Wave, Rock Slide, Protect
-    - Quagsire @ Rindo Berry; offset +0; Unaware; Nature Bold; Stat Points 2/32/0/0/0/32; Waterfall, Ice Punch, Earthquake, Protect
+    - Quagsire @ Rindo Berry; offset +0; Unaware; Nature Adamant; Stat Points 2/32/0/0/0/32; Waterfall, Ice Punch, Earthquake, Protect
     - Vibrava @ Sitrus Berry; offset +5; Levitate; Nature Jolly; Stat Points 2/32/0/0/0/32; Tailwind, Dragon Claw, Earthquake, Rock Slide
     Dialogue source: data/maps/Route111/scripts.inc:323 (Route111_EventScript_BattleWinstrates)
     Route111_Text_ViviDefeat:
@@ -2803,7 +2803,7 @@ PHYSICAL TRAINER ATLAS
   Branch: Picnicker IRENE (TRAINER_IRENE) — single
     - Flapple @ Sitrus Berry; offset -2; Ripen; Nature Adamant; Stat Points 2/32/0/0/0/32; Grav Apple, Dragon Rush, U Turn, Protect
     - Trevenant @ Figy Berry; offset -2; Grassy Surge; Nature Adamant; Stat Points 2/32/0/0/0/32; Horn Leech, Poltergeist, Will O Wisp, Protect
-    - Exeggutor @ Life Orb; offset -2; Chlorophyll; Nature Modest; Stat Points 32/0/2/32/0/0; Solar Beam, Psychic, Sludge Bomb, Protect
+    - Exeggutor @ Life Orb; offset -2; Chlorophyll; Nature Modest; Stat Points 32/0/2/32/0/0; Energy Ball, Psychic, Sludge Bomb, Protect
     Dialogue source: data/maps/Route111/scripts.inc:600 (Route111_EventScript_Irene)
     Route111_Text_IreneIntro:
       > I don't know where you're going,
@@ -3660,7 +3660,7 @@ PHYSICAL TRAINER ATLAS
   Weakest seam: Sun/Tailwind/Fake Out are familiar tools. One Fake Out, Salazzle's different support, Stone Edge substitutions, no sleep, and legal Mega positioning keep the sequence distinct.
   Branch: Magma Leader MAXIE (TRAINER_MAXIE_MT_CHIMNEY) — double
     - Groudon @ Heat Rock; offset +1; Drought; Nature Adamant; Stat Points 2/32/0/0/0/32; Precipice Blades, Fire Punch, Stone Edge, Protect
-    - Crobat @ Sitrus Berry; offset +1; Infiltrator; Nature Timid; Stat Points 2/32/0/0/0/32; Tailwind, Taunt, Brave Bird, Quick Guard
+    - Crobat @ Sitrus Berry; offset +1; Infiltrator; Nature Jolly; Stat Points 2/32/0/0/0/32; Tailwind, Taunt, Brave Bird, Quick Guard
     - Shiftry @ Focus Sash; offset +2; Chlorophyll; Nature Jolly; Stat Points 2/32/0/0/0/32; Fake Out, Leaf Blade, Knock Off, Protect
     - Salazzle @ Life Orb; offset +2; Corrosion; Nature Timid; Stat Points 2/0/0/32/0/32; Heat Wave, Sludge Bomb, Encore, Helping Hand
     - Entei @ Assault Vest; offset +3; Inner Focus; Nature Adamant; Stat Points 2/32/0/0/0/32; Sacred Fire, Extreme Speed, Stomping Tantrum, Snarl
@@ -5480,7 +5480,7 @@ PHYSICAL TRAINER ATLAS
   Branch: Tuber F GWEN (TRAINER_GWEN) — double
     - Floatzel @ Life Orb; offset -2; Water Veil; Nature Jolly; Stat Points 2/32/0/0/0/32; Liquidation, Ice Fang, Crunch, Aqua Jet
     - Luvdisc @ Focus Sash; offset -1; Swift Swim; Nature Timid; Stat Points 2/0/0/32/0/32; Hydro Pump, Draining Kiss, Charm, Protect
-    - Quagsire @ Leftovers; offset +0; Unaware; Nature Bold; Stat Points 2/32/0/0/0/32; Earthquake, Waterfall, Toxic, Protect
+    - Quagsire @ Leftovers; offset +0; Unaware; Nature Adamant; Stat Points 2/32/0/0/0/32; Earthquake, Waterfall, Toxic, Protect
     Dialogue source: data/maps/Route109/scripts.inc:445 (Route109_EventScript_Gwen)
     Route109_Text_GwenIntro:
       > Hi, big TRAINER.
@@ -5576,7 +5576,7 @@ PHYSICAL TRAINER ATLAS
     - Cherubi @ Focus Sash; offset -2; Chlorophyll; Nature Modest; Stat Points 2/0/0/32/0/32; Sunny Day, Solar Beam, Weather Ball, Protect
     - Roselia @ Eviolite; offset -3; Natural Cure; Nature Timid; Stat Points 2/0/0/32/0/32; Sleep Powder, Giga Drain, Sludge Bomb, Protect
     - Sawsbuck Autumn @ Life Orb; offset -2; Sap Sipper; Nature Jolly; Stat Points 2/32/0/0/0/32; Horn Leech, Double Edge, Protect, Helping Hand
-    - Cherrim @ Sitrus Berry; offset -2; Flower Gift; Nature Timid; Stat Points 2/32/0/0/0/32; Sunny Day, Helping Hand, Seed Bomb, Protect
+    - Cherrim @ Sitrus Berry; offset -2; Flower Gift; Nature Jolly; Stat Points 2/32/0/0/0/32; Sunny Day, Helping Hand, Seed Bomb, Protect
     Dialogue source: data/maps/Route103/scripts.inc:203 (Route103_EventScript_Daisy)
     Route103_Text_DaisyIntro:
       > Did you feel the tug of our
@@ -6353,7 +6353,7 @@ PHYSICAL TRAINER ATLAS
     - Golbat @ Eviolite; offset -2; Inner Focus; Nature Jolly; Stat Points 2/32/0/0/0/32; Taunt, Protect, Quick Attack, Attract
     - Dragalge @ Life Orb; offset -2; Adaptability; Nature Quiet; Stat Points 32/0/2/32/0/0; Draco Meteor, Sludge Bomb, Focus Blast, Protect
     - Liepard @ Focus Sash; offset -2; Prankster; Nature Timid; Stat Points 32/0/2/0/0/32; Fake Out, Foul Play, Encore, Taunt
-    - Gourgeist Large @ Flame Orb; offset -2; Flare Boost; Nature Adamant; Stat Points 2/0/0/32/0/32; Shadow Ball, Energy Ball, Will O Wisp, Protect
+    - Gourgeist Large @ Flame Orb; offset -2; Flare Boost; Nature Timid; Stat Points 2/0/0/32/0/32; Shadow Ball, Energy Ball, Will O Wisp, Protect
     Dialogue source: data/maps/Route119_WeatherInstitute_1F/scripts.inc:62 (Route119_WeatherInstitute_1F_EventScript_Grunt1)
     Route119_WeatherInstitute_1F_Text_Grunt1Intro:
       > The INSTITUTE mapped every pressure
@@ -6380,7 +6380,7 @@ PHYSICAL TRAINER ATLAS
     - Walrein @ Sitrus Berry; offset -2; Thick Fat; Nature Calm; Stat Points 32/0/2/0/32/0; Icy Wind, Protect, Encore, Attract
     - Floatzel @ Life Orb; offset -2; Swift Swim; Nature Jolly; Stat Points 2/32/0/0/0/32; Liquidation, Ice Punch, Aqua Jet, Protect
     - Malamar @ Clear Amulet; offset -2; Contrary; Nature Jolly; Stat Points 2/32/0/0/0/32; Superpower, Knock Off, Rock Slide, Protect
-    - Gourgeist Super @ Flame Orb; offset -2; Flare Boost; Nature Adamant; Stat Points 32/0/2/32/0/0; Trick Room, Shadow Ball, Energy Ball, Protect
+    - Gourgeist Super @ Flame Orb; offset -2; Flare Boost; Nature Quiet; Stat Points 32/0/2/32/0/0; Trick Room, Shadow Ball, Energy Ball, Protect
     Dialogue source: data/maps/Route119_WeatherInstitute_1F/scripts.inc:67 (Route119_WeatherInstitute_1F_EventScript_Grunt4)
     Route119_WeatherInstitute_1F_Text_Grunt4Intro:
       > You crossed the flooded grass alone?
@@ -6428,7 +6428,7 @@ PHYSICAL TRAINER ATLAS
   Branch: Team Aqua GRUNT (TRAINER_GRUNT_WEATHER_INST_2) — double
     - Pelipper @ Damp Rock; offset -1; Drizzle; Nature Calm; Stat Points 32/0/2/0/32/0; Weather Ball, Hurricane, Tailwind, Wide Guard
     - Ferrothorn @ Leftovers; offset -1; Iron Barbs; Nature Bold; Stat Points 32/0/32/0/2/0; Body Press, Iron Defense, Giga Drain, Protect
-    - Gourgeist Small @ Flame Orb; offset -1; Flare Boost; Nature Jolly; Stat Points 2/0/0/32/0/32; Shadow Ball, Energy Ball, Will O Wisp, Protect
+    - Gourgeist Small @ Flame Orb; offset -1; Flare Boost; Nature Timid; Stat Points 2/0/0/32/0/32; Shadow Ball, Energy Ball, Will O Wisp, Protect
     - Inteleon @ Scope Lens; offset -1; Sniper; Nature Timid; Stat Points 2/0/0/32/0/32; Snipe Shot, Ice Beam, Protect, Taunt
     Dialogue source: data/maps/Route119_WeatherInstitute_2F/scripts.inc:32 (Route119_WeatherInstitute_2F_EventScript_Grunt2)
     Route119_WeatherInstitute_2F_Text_Grunt2Intro:
@@ -6504,7 +6504,7 @@ PHYSICAL TRAINER ATLAS
   Weakest seam: Mimikyu is the only Trick Room setter, and the roster mixes fast attackers with that reversal; denying or stalling its room exposes the branch's ordinary positioning seam at difficulty 9.4.
   Branch: Rival BRENDAN (TRAINER_BRENDAN_ROUTE_119_MUDKIP) — double
     - Araquanid @ Sitrus Berry; offset +0; Water Bubble; Nature Adamant; Stat Points 32/32/2/0/0/0; Liquidation, Lunge, Wide Guard, Protect
-    - Swellow @ Flame Orb; offset +0; Guts; Nature Timid; Stat Points 2/32/0/0/0/32; Protect, Quick Attack, Facade, Brave Bird
+    - Swellow @ Flame Orb; offset +0; Guts; Nature Jolly; Stat Points 2/32/0/0/0/32; Protect, Quick Attack, Facade, Brave Bird
     - Arcanine @ Clear Amulet; offset +0; Intimidate; Nature Jolly; Stat Points 2/32/0/0/0/32; Flare Blitz, Extreme Speed, Snarl, Protect
     - Mimikyu @ Mental Herb; offset +0; Disguise; Nature Jolly; Stat Points 32/0/32/0/2/0; Play Rough, Shadow Sneak, Will O Wisp, Trick Room
     - Vikavolt @ Wise Glasses; offset +0; Levitate; Nature Timid; Stat Points 2/0/0/32/0/32; Thunderbolt, Bug Buzz, Electroweb, Protect
@@ -6514,7 +6514,7 @@ PHYSICAL TRAINER ATLAS
       > Hmm…
       > You've gotten pretty darn decent.
   Branch: Rival BRENDAN (TRAINER_BRENDAN_ROUTE_119_TORCHIC) — double
-    - Swellow @ Flame Orb; offset +0; Guts; Nature Timid; Stat Points 2/32/0/0/0/32; Protect, Quick Attack, Facade, Brave Bird
+    - Swellow @ Flame Orb; offset +0; Guts; Nature Jolly; Stat Points 2/32/0/0/0/32; Protect, Quick Attack, Facade, Brave Bird
     - Arcanine @ Sitrus Berry; offset +0; Intimidate; Nature Jolly; Stat Points 2/32/0/0/0/32; Flare Blitz, Extreme Speed, Snarl, Protect
     - Breloom @ Focus Sash; offset +0; Technician; Nature Jolly; Stat Points 2/32/0/0/0/32; Spore, Mach Punch, Bullet Seed, Protect
     - Mimikyu @ Mental Herb; offset +0; Disguise; Nature Jolly; Stat Points 32/0/32/0/2/0; Play Rough, Shadow Sneak, Will O Wisp, Trick Room
@@ -6524,7 +6524,7 @@ PHYSICAL TRAINER ATLAS
     Dialogue: identical to the preceding branch in this encounter; not repeated.
   Branch: Rival BRENDAN (TRAINER_BRENDAN_ROUTE_119_TREECKO) — double
     - Araquanid @ Sitrus Berry; offset +0; Water Bubble; Nature Adamant; Stat Points 32/32/2/0/0/0; Liquidation, Lunge, Wide Guard, Protect
-    - Swellow @ Flame Orb; offset +0; Guts; Nature Timid; Stat Points 2/32/0/0/0/32; Protect, Quick Attack, Facade, Brave Bird
+    - Swellow @ Flame Orb; offset +0; Guts; Nature Jolly; Stat Points 2/32/0/0/0/32; Protect, Quick Attack, Facade, Brave Bird
     - Breloom @ Focus Sash; offset +0; Technician; Nature Jolly; Stat Points 2/32/0/0/0/32; Spore, Mach Punch, Bullet Seed, Protect
     - Mimikyu @ Mental Herb; offset +0; Disguise; Nature Jolly; Stat Points 32/0/32/0/2/0; Play Rough, Shadow Sneak, Will O Wisp, Trick Room
     - Vikavolt @ Wise Glasses; offset +0; Levitate; Nature Timid; Stat Points 2/0/0/32/0/32; Thunderbolt, Bug Buzz, Electroweb, Protect
@@ -6532,7 +6532,7 @@ PHYSICAL TRAINER ATLAS
     Dialogue source: data/maps/Route119/scripts.inc:109 (Route119_EventScript_BattleBrendanTreecko)
     Dialogue: identical to the preceding branch in this encounter; not repeated.
   Branch: Rival MAY (TRAINER_MAY_ROUTE_119_MUDKIP) — double
-    - Swellow @ Flame Orb; offset +0; Guts; Nature Timid; Stat Points 2/32/0/0/0/32; Protect, Quick Attack, Facade, Brave Bird
+    - Swellow @ Flame Orb; offset +0; Guts; Nature Jolly; Stat Points 2/32/0/0/0/32; Protect, Quick Attack, Facade, Brave Bird
     - Starmie @ Life Orb; offset +0; Natural Cure; Nature Timid; Stat Points 2/0/0/32/0/32; Hydro Pump, Thunderbolt, Ice Beam, Protect
     - Rapidash @ Clear Amulet; offset +0; Reckless; Nature Jolly; Stat Points 2/32/0/0/0/32; Flare Blitz, Wild Charge, High Horsepower, Protect
     - Mimikyu @ Mental Herb; offset +0; Disguise; Nature Jolly; Stat Points 32/0/32/0/2/0; Play Rough, Shadow Sneak, Will O Wisp, Trick Room
@@ -6546,7 +6546,7 @@ PHYSICAL TRAINER ATLAS
       > I was worried that you might be
       > struggling with your training.
   Branch: Rival MAY (TRAINER_MAY_ROUTE_119_TORCHIC) — double
-    - Swellow @ Flame Orb; offset +0; Guts; Nature Timid; Stat Points 2/32/0/0/0/32; Protect, Quick Attack, Facade, Brave Bird
+    - Swellow @ Flame Orb; offset +0; Guts; Nature Jolly; Stat Points 2/32/0/0/0/32; Protect, Quick Attack, Facade, Brave Bird
     - Rapidash @ Life Orb; offset +0; Reckless; Nature Jolly; Stat Points 2/32/0/0/0/32; Flare Blitz, Wild Charge, High Horsepower, Protect
     - Tsareena @ Clear Amulet; offset +0; Queenly Majesty; Nature Jolly; Stat Points 2/32/0/0/0/32; Power Whip, High Jump Kick, Triple Axel, Protect
     - Mimikyu @ Mental Herb; offset +0; Disguise; Nature Jolly; Stat Points 32/0/32/0/2/0; Play Rough, Shadow Sneak, Will O Wisp, Trick Room
@@ -6555,7 +6555,7 @@ PHYSICAL TRAINER ATLAS
     Dialogue source: data/maps/Route119/scripts.inc:84 (Route119_EventScript_BattleMayTorchic)
     Dialogue: identical to the preceding branch in this encounter; not repeated.
   Branch: Rival MAY (TRAINER_MAY_ROUTE_119_TREECKO) — double
-    - Swellow @ Flame Orb; offset +0; Guts; Nature Timid; Stat Points 2/32/0/0/0/32; Protect, Quick Attack, Facade, Brave Bird
+    - Swellow @ Flame Orb; offset +0; Guts; Nature Jolly; Stat Points 2/32/0/0/0/32; Protect, Quick Attack, Facade, Brave Bird
     - Starmie @ Life Orb; offset +0; Natural Cure; Nature Timid; Stat Points 2/0/0/32/0/32; Hydro Pump, Thunderbolt, Ice Beam, Protect
     - Tsareena @ Clear Amulet; offset +0; Queenly Majesty; Nature Jolly; Stat Points 2/32/0/0/0/32; Power Whip, High Jump Kick, Triple Axel, Protect
     - Mimikyu @ Mental Herb; offset +0; Disguise; Nature Jolly; Stat Points 32/0/32/0/2/0; Play Rough, Shadow Sneak, Will O Wisp, Trick Room
@@ -6691,7 +6691,7 @@ PHYSICAL TRAINER ATLAS
   Branch: Pkmn Ranger LORENZO (TRAINER_LORENZO) — double
     - Ludicolo @ Life Orb; offset -2; Swift Swim; Nature Modest; Stat Points 2/0/0/32/0/32; Energy Ball, Protect, Rain Dance, Hydro Pump
     - Zangoose @ Toxic Orb; offset -2; Toxic Boost; Nature Jolly; Stat Points 2/32/0/0/0/32; Knock Off, Protect, Facade, Close Combat
-    - Nidoqueen @ Wise Glasses; offset -2; Sheer Force; Nature Adamant; Stat Points 2/0/0/32/0/32; Earth Power, Sludge Bomb, Ice Beam, Protect
+    - Nidoqueen @ Wise Glasses; offset -2; Sheer Force; Nature Modest; Stat Points 2/0/0/32/0/32; Earth Power, Sludge Bomb, Ice Beam, Protect
     - Starmie @ Expert Belt; offset -2; Natural Cure; Nature Timid; Stat Points 2/0/0/32/0/32; Hydro Pump, Thunderbolt, Ice Beam, Protect
     Dialogue source: data/maps/Route120/scripts.inc:326 (Route120_EventScript_Lorenzo)
     Route120_Text_LorenzoIntro:
@@ -6714,8 +6714,8 @@ PHYSICAL TRAINER ATLAS
   Weakest seam: If the player breaks the Tailwind layer or removes Shiftry early, the remaining members must win through ordinary positioning; that intentional seam keeps difficulty 7.6 honest.
   Branch: Pkmn Ranger JENNA (TRAINER_JENNA) — double
     - Shiftry @ Focus Sash; offset -2; Chlorophyll; Nature Jolly; Stat Points 2/32/0/0/0/32; Leaf Blade, Tailwind, Knock Off, Fake Out
-    - Seviper @ Sitrus Berry; offset -2; Infiltrator; Nature Jolly; Stat Points 2/0/0/32/0/32; Glare, Sludge Bomb, Flamethrower, Protect
-    - Nidoking @ Life Orb; offset -2; Sheer Force; Nature Adamant; Stat Points 2/0/0/32/0/32; Earth Power, Sludge Bomb, Ice Beam, Protect
+    - Seviper @ Sitrus Berry; offset -2; Infiltrator; Nature Timid; Stat Points 2/0/0/32/0/32; Glare, Sludge Bomb, Flamethrower, Protect
+    - Nidoking @ Life Orb; offset -2; Sheer Force; Nature Modest; Stat Points 2/0/0/32/0/32; Earth Power, Sludge Bomb, Ice Beam, Protect
     - Cloyster @ Clear Amulet; offset -2; Skill Link; Nature Jolly; Stat Points 2/32/0/0/0/32; Shell Smash, Icicle Spear, Rock Blast, Protect
     Dialogue source: data/maps/Route120/scripts.inc:331 (Route120_EventScript_Jenna)
     Route120_Text_JennaIntro:
@@ -7048,7 +7048,7 @@ PHYSICAL TRAINER ATLAS
   Weakest seam: If the player breaks the Trick Room layer or removes Solrock early, the remaining members must win through ordinary positioning; that intentional seam keeps difficulty 7.9 honest.
   Branch: Psychic CAMERON (TRAINER_CAMERON_1) — double
     - Solrock @ Sitrus Berry; offset -2; Levitate; Nature Brave; Stat Points 32/32/2/0/0/0; Trick Room, Rock Slide, Will O Wisp, Protect
-    - Exeggutor Alola @ Life Orb; offset -2; Frisk; Nature Quiet; Stat Points 32/0/2/32/0/0; Trick Room, Draco Meteor, Solar Beam, Protect
+    - Exeggutor Alola @ Life Orb; offset -2; Frisk; Nature Quiet; Stat Points 32/0/2/32/0/0; Trick Room, Draco Meteor, Giga Drain, Protect
     - Delphox @ Focus Sash; offset -2; Blaze; Nature Timid; Stat Points 2/0/0/32/0/32; Heat Wave, Psychic, Nasty Plot, Protect
     - Shaymin @ Wise Glasses; offset -2; Natural Cure; Nature Timid; Stat Points 2/0/0/32/0/32; Seed Flare, Earth Power, Tailwind, Protect
     Dialogue source: data/maps/Route123/scripts.inc:61 (Route123_EventScript_Cameron)
@@ -7476,9 +7476,9 @@ PHYSICAL TRAINER ATLAS
   Strongest feature: Tropius's Tailwind creates a readable handoff through Dodrio, Emolga into Archeops's Acrobatics, so the team has one identity without becoming one scripted solution.
   Weakest seam: If the player breaks the Tailwind layer or removes Tropius early, the remaining members must win through ordinary positioning; that intentional seam keeps difficulty 7.6 honest.
   Branch: Bird Keeper DARIUS (TRAINER_DARIUS) — double
-    - Tropius @ Sitrus Berry; offset +0; Aerilate; Nature Bold; Stat Points 2/32/0/0/0/32; Double Edge, Earthquake, Tailwind, Protect
+    - Tropius @ Sitrus Berry; offset +0; Aerilate; Nature Impish; Stat Points 2/32/0/0/0/32; Double Edge, Earthquake, Tailwind, Protect
     - Dodrio @ Choice Band; offset +0; Early Bird; Nature Jolly; Stat Points 2/32/0/0/0/32; Double Edge, Quick Attack, Brave Bird, Drill Run
-    - Emolga @ Focus Sash; offset +0; Lightning Rod; Nature Jolly; Stat Points 2/0/0/32/0/32; Thunderbolt, Electroweb, Encore, Protect
+    - Emolga @ Focus Sash; offset +0; Lightning Rod; Nature Timid; Stat Points 2/0/0/32/0/32; Thunderbolt, Electroweb, Encore, Protect
     - Archeops @ Flying Gem; offset +0; Defeatist; Nature Jolly; Stat Points 2/32/0/0/0/32; Acrobatics, Rock Slide, Quick Attack, Protect
     Dialogue source: data/maps/FortreeCity_Gym/scripts.inc:99 (FortreeCity_Gym_EventScript_Darius)
     FortreeCity_Gym_Text_DariusIntro:
@@ -8338,7 +8338,7 @@ PHYSICAL TRAINER ATLAS
     - Dhelmise @ Life Orb; offset +0; Steelworker; Nature Adamant; Stat Points 32/32/2/0/0/0; Heavy Slam, Power Whip, Shadow Claw, Protect
     - Heliolisk @ Sitrus Berry; offset +0; Dry Skin; Nature Timid; Stat Points 2/0/0/32/0/32; Thunderbolt, Hyper Voice, Glare, Protect
     - Toxicroak @ Focus Sash; offset +0; Dry Skin; Nature Careful; Stat Points 2/32/0/0/0/32; Fake Out, Drain Punch, Sucker Punch, Protect
-    - Seismitoad @ Wise Glasses; offset +0; Water Absorb; Nature Adamant; Stat Points 2/0/0/32/0/32; Muddy Water, Earth Power, Grass Knot, Protect
+    - Seismitoad @ Wise Glasses; offset +0; Water Absorb; Nature Timid; Stat Points 2/0/0/32/0/32; Muddy Water, Earth Power, Grass Knot, Protect
     - Heatran @ Heatranite; offset +2; Flash Fire; Nature Modest; Stat Points 2/0/0/32/0/32; Heat Wave, Earth Power, Flash Cannon, Protect
     Dialogue source: data/maps/MtPyre_Summit/scripts.inc:598 (MtPyre_Summit_EventScript_Matt)
     MtPyre_Summit_Text_MattIntro:
@@ -8487,15 +8487,15 @@ PHYSICAL TRAINER ATLAS
 [0326] MagmaHideout_2F_1R — optional
   Chapter: Mind Badge
   Cap / target difficulty / fatigue: 60 / 8.4 / notable_optional_or_route_ace
-  Battle question: Can the player read Talonflame's Tailwind opening, solve the Trick Room, Tailwind, setup board, and still preserve an answer for Dusknoir's Trick Room finish?
-  First-loss lesson: Decide whether Talonflame is damage or infrastructure, then preserve the answer that best denies Dusknoir's Trick Room rather than spending it on Bisharp, Venomoth.
-  Strongest feature: Talonflame's Tailwind creates a readable handoff through Bisharp, Venomoth into Dusknoir's Trick Room, so the team has one identity without becoming one scripted solution.
-  Weakest seam: If the player breaks the Trick Room layer or removes Talonflame early, the remaining members must win through ordinary positioning; that intentional seam keeps difficulty 8.4 honest.
+  Battle question: Can the player read Talonflame's Tailwind opening, solve the Tailwind, setup board, and still preserve an answer for Dusknoir's Pain Split finish?
+  First-loss lesson: Decide whether Talonflame is damage or infrastructure, then preserve the answer that best denies Dusknoir's Pain Split rather than spending it on Bisharp, Venomoth.
+  Strongest feature: Talonflame's Tailwind creates a readable handoff through Bisharp, Venomoth into Dusknoir's Pain Split, so the team has one identity without becoming one scripted solution.
+  Weakest seam: If the player breaks the Tailwind layer or removes Talonflame early, the remaining members must win through ordinary positioning; that intentional seam keeps difficulty 8.4 honest.
   Branch: Team Magma GRUNT (TRAINER_GRUNT_MAGMA_HIDEOUT_5) — double
     - Talonflame @ Life Orb; offset -1; Gale Wings; Nature Jolly; Stat Points 2/32/0/0/0/32; Tailwind, Brave Bird, Flare Blitz, Protect
     - Bisharp @ Clear Amulet; offset -1; Defiant; Nature Adamant; Stat Points 2/32/0/0/0/32; Throat Chop, Foul Play, Iron Head, Protect
     - Venomoth @ Focus Sash; offset -1; Tinted Lens; Nature Timid; Stat Points 2/0/0/32/0/32; Quiver Dance, Bug Buzz, Sludge Bomb, Protect
-    - Dusknoir @ Sitrus Berry; offset -1; Frisk; Nature Sassy; Stat Points 32/0/2/0/32/0; Trick Room, Will O Wisp, Shadow Sneak, Protect
+    - Dusknoir @ Sitrus Berry; offset -1; Frisk; Nature Sassy; Stat Points 32/0/2/0/32/0; Pain Split, Will O Wisp, Shadow Sneak, Protect
     Dialogue source: data/maps/MagmaHideout_2F_1R/scripts.inc:20 (MagmaHideout_2F_1R_EventScript_Grunt5)
     MagmaHideout_2F_1R_Text_Grunt5Intro:
       > Oh, oh!
@@ -8770,11 +8770,11 @@ PHYSICAL TRAINER ATLAS
   Strongest feature: Gigalith's Rock Slide creates a readable handoff through Darmanitan, Excadrill, Coalossal, Dragapult into Gastrodon's Earth Power, so the team has one identity without becoming one scripted solution.
   Weakest seam: If the player breaks the sand layer or removes Gigalith early, the remaining members must win through ordinary positioning; that intentional seam keeps difficulty 9.4 honest.
   Branch: Magma Admin TABITHA (TRAINER_TABITHA_MAGMA_HIDEOUT) — double
-    - Gigalith @ Weakness Policy; offset +1; Sand Stream; Nature Modest; Stat Points 32/32/2/0/0/0; Rock Slide, Heavy Slam, Earthquake, Protect
+    - Gigalith @ Weakness Policy; offset +1; Sand Stream; Nature Adamant; Stat Points 32/32/2/0/0/0; Rock Slide, Heavy Slam, Earthquake, Protect
     - Darmanitan @ Life Orb; offset +1; Sheer Force; Nature Jolly; Stat Points 2/32/0/0/0/32; Flare Blitz, Superpower, Rock Slide, Protect
     - Excadrill @ None; offset +2; Sand Rush; Nature Jolly; Stat Points 2/32/0/0/0/32; Iron Head, Protect, Rock Slide, High Horsepower
-    - Coalossal @ Wise Glasses; offset +1; Steam Engine; Nature Modest; Stat Points 2/0/0/32/0/32; Heat Wave, Power Gem, Solar Beam, Protect
-    - Dragapult @ Expert Belt; offset +1; Infiltrator; Nature Jolly; Stat Points 2/0/0/32/0/32; Draco Meteor, Shadow Ball, Will O Wisp, Protect
+    - Coalossal @ Wise Glasses; offset +1; Steam Engine; Nature Modest; Stat Points 2/0/0/32/0/32; Heat Wave, Power Gem, Earth Power, Protect
+    - Dragapult @ Expert Belt; offset +1; Infiltrator; Nature Timid; Stat Points 2/0/0/32/0/32; Draco Meteor, Shadow Ball, Will O Wisp, Protect
     - Gastrodon @ Leftovers; offset +1; Storm Drain; Nature Modest; Stat Points 32/0/2/0/32/0; Earth Power, Ice Beam, Recover, Protect
     Dialogue source: data/maps/MagmaHideout_4F/scripts.inc:123 (MagmaHideout_4F_EventScript_Tabitha)
     MagmaHideout_4F_Text_TabithaIntro:
@@ -8954,7 +8954,7 @@ PHYSICAL TRAINER ATLAS
   Branch: Team Aqua GRUNT (TRAINER_GRUNT_AQUA_HIDEOUT_7) — double
     - Cloyster @ Focus Sash; offset -2; Skill Link; Nature Adamant; Stat Points 2/32/0/0/0/32; Shell Smash, Icicle Spear, Rock Blast, Protect
     - Kingler @ Life Orb; offset -2; Sheer Force; Nature Adamant; Stat Points 2/32/0/0/0/32; Crabhammer, Rock Slide, Protect, Attract
-    - Skuntank @ Clear Amulet; offset -2; Aftermath; Nature Modest; Stat Points 2/32/0/0/0/32; Sucker Punch, Poison Jab, Taunt, Protect
+    - Skuntank @ Clear Amulet; offset -2; Aftermath; Nature Jolly; Stat Points 2/32/0/0/0/32; Sucker Punch, Poison Jab, Taunt, Protect
     - Thievul @ Wise Glasses; offset -2; Stakeout; Nature Timid; Stat Points 2/0/0/32/0/32; Dark Pulse, Psychic, Snarl, Protect
     Dialogue source: data/maps/AquaHideout_B1F/scripts.inc:105 (AquaHideout_B1F_EventScript_Grunt7)
     AquaHideout_B1F_Text_Grunt7Intro:
@@ -9058,7 +9058,7 @@ PHYSICAL TRAINER ATLAS
     - Dhelmise @ Life Orb; offset +0; Steelworker; Nature Adamant; Stat Points 32/32/2/0/0/0; Heavy Slam, Power Whip, Shadow Claw, Protect
     - Heliolisk @ Sitrus Berry; offset +0; Dry Skin; Nature Timid; Stat Points 2/0/0/32/0/32; Thunderbolt, Hyper Voice, Glare, Protect
     - Toxicroak @ Focus Sash; offset +0; Dry Skin; Nature Jolly; Stat Points 2/32/0/0/0/32; Fake Out, Drain Punch, Sucker Punch, Protect
-    - Seismitoad @ Wise Glasses; offset +0; Water Absorb; Nature Adamant; Stat Points 2/0/0/32/0/32; Muddy Water, Earth Power, Grass Knot, Protect
+    - Seismitoad @ Wise Glasses; offset +0; Water Absorb; Nature Timid; Stat Points 2/0/0/32/0/32; Muddy Water, Earth Power, Grass Knot, Protect
     - Gyarados @ None; offset +2; Intimidate; Nature Jolly; Stat Points 2/32/0/0/0/32; Waterfall, Dragon Dance, Protect, Crunch
     Dialogue source: data/maps/AquaHideout_B2F/scripts.inc:26 (AquaHideout_B2F_EventScript_Matt)
     AquaHideout_B2F_Text_MattIntro:
@@ -9176,13 +9176,13 @@ PHYSICAL TRAINER ATLAS
 [0353] Route124 — optional
   Chapter: Mind Badge
   Cap / target difficulty / fatigue: 60 / 7.2 / ordinary_standard
-  Battle question: Can the player read Stoutland's Facade opening, solve the Trick Room, Tailwind board, and still preserve an answer for Lumineon's Tailwind finish?
+  Battle question: Can the player read Stoutland's Facade opening, solve the rain, Tailwind board, and still preserve an answer for Lumineon's Tailwind finish?
   First-loss lesson: Decide whether Stoutland is damage or infrastructure, then preserve the answer that best denies Lumineon's Tailwind rather than spending it on Jellicent.
   Strongest feature: Stoutland's Facade creates a readable handoff through Jellicent into Lumineon's Tailwind, so the team has one identity without becoming one scripted solution.
-  Weakest seam: If the player breaks the Trick Room layer or removes Stoutland early, the remaining members must win through ordinary positioning; that intentional seam keeps difficulty 7.2 honest.
+  Weakest seam: If the player breaks the rain layer or removes Stoutland early, the remaining members must win through ordinary positioning; that intentional seam keeps difficulty 7.2 honest.
   Branch: Swimmer M CHAD (TRAINER_CHAD) — double
-    - Stoutland @ Life Orb; offset -3; Sand Rush; Nature Adamant; Stat Points 2/32/0/0/0/32; Facade, Wild Charge, Crunch, Protect
-    - Jellicent @ Sitrus Berry; offset -3; Water Absorb; Nature Quiet; Stat Points 32/0/2/32/0/0; Trick Room, Water Spout, Shadow Ball, Recover
+    - Stoutland @ Life Orb; offset -3; Intimidate; Nature Adamant; Stat Points 2/32/0/0/0/32; Facade, Wild Charge, Crunch, Protect
+    - Jellicent @ Sitrus Berry; offset -3; Water Absorb; Nature Modest; Stat Points 32/0/2/32/0/0; Rain Dance, Water Spout, Shadow Ball, Recover
     - Lumineon @ Wise Glasses; offset -3; Storm Drain; Nature Timid; Stat Points 2/0/0/32/0/32; Chilling Water, Ice Beam, Tailwind, Protect
     Dialogue source: data/maps/Route124/scripts.inc:50 (Route124_EventScript_Chad)
     Route124_Text_ChadIntro:
@@ -9717,13 +9717,13 @@ PHYSICAL TRAINER ATLAS
 [0376] Route127 — optional
   Chapter: Mind Badge
   Cap / target difficulty / fatigue: 60 / 7.7 / ordinary_standard
-  Battle question: Can the player read Tentacruel's Icy Wind opening, solve the Trick Room, Tailwind, spread pressure board, and still preserve an answer for Fletchinder's Tailwind finish?
+  Battle question: Can the player read Tentacruel's Icy Wind opening, solve the rain, Tailwind, spread pressure board, and still preserve an answer for Fletchinder's Tailwind finish?
   First-loss lesson: Decide whether Tentacruel is damage or infrastructure, then preserve the answer that best denies Fletchinder's Tailwind rather than spending it on Jellicent, Chatot.
   Strongest feature: Tentacruel's Icy Wind creates a readable handoff through Jellicent, Chatot into Fletchinder's Tailwind, so the team has one identity without becoming one scripted solution.
-  Weakest seam: If the player breaks the Trick Room layer or removes Tentacruel early, the remaining members must win through ordinary positioning; that intentional seam keeps difficulty 7.7 honest.
+  Weakest seam: If the player breaks the rain layer or removes Tentacruel early, the remaining members must win through ordinary positioning; that intentional seam keeps difficulty 7.7 honest.
   Branch: Fisherman HENRY (TRAINER_HENRY) — double
     - Tentacruel @ Black Sludge; offset -2; Clear Body; Nature Timid; Stat Points 2/0/0/32/0/32; Chilling Water, Acid Spray, Icy Wind, Protect
-    - Jellicent @ Sitrus Berry; offset -2; Water Absorb; Nature Quiet; Stat Points 32/0/2/32/0/0; Trick Room, Water Spout, Shadow Ball, Recover
+    - Jellicent @ Sitrus Berry; offset -2; Water Absorb; Nature Modest; Stat Points 32/0/2/32/0/0; Rain Dance, Water Spout, Shadow Ball, Recover
     - Chatot @ Focus Sash; offset -2; Big Pecks; Nature Timid; Stat Points 2/0/0/32/0/32; Boomburst, Heat Wave, Tailwind, Protect
     - Fletchinder @ Eviolite; offset -2; Gale Wings; Nature Jolly; Stat Points 2/32/0/0/0/32; Tailwind, Dual Wingbeat, Will O Wisp, Protect
     Dialogue source: data/maps/Route127/scripts.inc:39 (Route127_EventScript_Henry)
@@ -9934,7 +9934,7 @@ PHYSICAL TRAINER ATLAS
   Branch: Fisherman WAYNE (TRAINER_WAYNE) — double
     - Wailord @ Sitrus Berry; offset -2; Drizzle; Nature Quiet; Stat Points 32/0/2/32/0/0; Water Spout, Hydro Pump, Ice Beam, Protect
     - Dhelmise @ Life Orb; offset -2; Steelworker; Nature Brave; Stat Points 32/32/2/0/0/0; Heavy Slam, Power Whip, Shadow Claw, Protect
-    - Lickilicky @ Normal Gem; offset -2; Cloud Nine; Nature Adamant; Stat Points 2/32/0/0/0/32; Power Whip, Stomping Tantrum, Protect, Helping Hand
+    - Lickilicky @ Covert Cloak; offset -2; Oblivious; Nature Adamant; Stat Points 2/32/0/0/0/32; Power Whip, Stomping Tantrum, Protect, Helping Hand
     - Meowstic F @ Meowsticite; offset -2; Competitive; Nature Timid; Stat Points 2/0/0/32/0/32; Psychic, Shadow Ball, Thunderbolt, Protect
     Dialogue source: data/maps/Route128/scripts.inc:230 (Route128_EventScript_Wayne)
     Route128_Text_WayneIntro:
@@ -10108,14 +10108,14 @@ PHYSICAL TRAINER ATLAS
 [0392] MossdeepCity_Gym — optional
   Chapter: Mind Badge
   Cap / target difficulty / fatigue: 60 / 8.0 / notable_optional_or_route_ace
-  Battle question: Can the player read Xatu's Tailwind opening, solve the Trick Room, Tailwind, hazard pressure, spread pressure board, and still preserve an answer for Glimmora's Stealth Rock finish?
+  Battle question: Can the player read Xatu's Tailwind opening, solve the Tailwind, hazard pressure, spread pressure board, and still preserve an answer for Glimmora's Stealth Rock finish?
   First-loss lesson: Decide whether Xatu is damage or infrastructure, then preserve the answer that best denies Glimmora's Stealth Rock rather than spending it on Gardevoir, Magearna.
   Strongest feature: Xatu's Tailwind creates a readable handoff through Gardevoir, Magearna into Glimmora's Stealth Rock, so the team has one identity without becoming one scripted solution.
-  Weakest seam: If the player breaks the Trick Room layer or removes Xatu early, the remaining members must win through ordinary positioning; that intentional seam keeps difficulty 8.0 honest.
+  Weakest seam: If the player breaks the Tailwind layer or removes Xatu early, the remaining members must win through ordinary positioning; that intentional seam keeps difficulty 8.0 honest.
   Branch: Psychic SAMANTHA (TRAINER_SAMANTHA) — double
     - Xatu @ Sitrus Berry; offset -2; Magic Bounce; Nature Timid; Stat Points 2/0/0/32/0/32; Tailwind, Psychic, Heat Wave, Protect
     - Gardevoir @ Focus Sash; offset -2; Telepathy; Nature Timid; Stat Points 2/0/0/32/0/32; Dazzling Gleam, Protect, Encore, Future Sight
-    - Magearna @ Room Service; offset -2; Soul Heart; Nature Modest; Stat Points 32/0/2/32/0/0; Fleur Cannon, Flash Cannon, Trick Room, Protect
+    - Magearna @ Leftovers; offset -2; Soul Heart; Nature Modest; Stat Points 32/0/2/32/0/0; Fleur Cannon, Flash Cannon, Helping Hand, Protect
     - Glimmora @ Glimmoranite; offset +2; Toxic Debris; Nature Timid; Stat Points 2/0/0/32/0/32; Stealth Rock, Sludge Bomb, Power Gem, Spiky Shield
     Dialogue source: data/maps/MossdeepCity_Gym/scripts.inc:238 (MossdeepCity_Gym_EventScript_Samantha)
     MossdeepCity_Gym_Text_SamanthaIntro:
@@ -10506,7 +10506,7 @@ PHYSICAL TRAINER ATLAS
   Strongest feature: Gigalith's Rock Slide creates a readable handoff through Darmanitan, Steelix, Gliscor, Excadrill into Gastrodon's Earth Power, so the team has one identity without becoming one scripted solution.
   Weakest seam: If the player breaks the sand layer or removes Gigalith early, the remaining members must win through ordinary positioning; that intentional seam keeps difficulty 9.4 honest.
   Branch: Magma Admin TABITHA (TRAINER_TABITHA_MOSSDEEP) — double
-    - Gigalith @ Weakness Policy; offset +0; Sand Stream; Nature Modest; Stat Points 32/32/2/0/0/0; Rock Slide, Heavy Slam, Earthquake, Protect
+    - Gigalith @ Weakness Policy; offset +0; Sand Stream; Nature Adamant; Stat Points 32/32/2/0/0/0; Rock Slide, Heavy Slam, Earthquake, Protect
     - Darmanitan @ Life Orb; offset +0; Sheer Force; Nature Jolly; Stat Points 2/32/0/0/0/32; Flare Blitz, Superpower, Rock Slide, Protect
     - Steelix @ Sitrus Berry; offset +2; Sturdy; Nature Brave; Stat Points 32/32/2/0/0/0; High Horsepower, Heavy Slam, Wide Guard, Protect
     - Gliscor @ Toxic Orb; offset +0; Poison Heal; Nature Impish; Stat Points 2/32/0/0/0/32; Earthquake, Rock Slide, Tailwind, Protect
@@ -11825,7 +11825,7 @@ PHYSICAL TRAINER ATLAS
   Branch: Lady BRIANNA (TRAINER_BRIANNA) — double
     - Greninja @ Life Orb; offset -2; Protean; Nature Naive; Stat Points 2/32/0/32/0/0; Ice Beam, Dark Pulse, Low Kick, Protect
     - Dewgong @ Sitrus Berry; offset -2; Fur Coat; Nature Modest; Stat Points 2/0/0/32/0/32; Helping Hand, Ice Beam, Icy Wind, Encore
-    - Quagsire @ Clear Amulet; offset -2; Water Absorb; Nature Bold; Stat Points 2/32/0/0/0/32; High Horsepower, Waterfall, Yawn, Protect
+    - Quagsire @ Clear Amulet; offset -2; Water Absorb; Nature Adamant; Stat Points 2/32/0/0/0/32; High Horsepower, Waterfall, Yawn, Protect
     - Skarmory @ Skarmorite; offset -2; Sturdy; Nature Impish; Stat Points 32/0/32/0/2/0; Tailwind, Taunt, Brave Bird, Roost
     Dialogue source: data/maps/SootopolisCity_Gym_B1F/scripts.inc:15 (SootopolisCity_Gym_B1F_EventScript_Brianna)
     SootopolisCity_Gym_B1F_Text_BriannaIntro:
@@ -11947,8 +11947,8 @@ PHYSICAL TRAINER ATLAS
   Weakest seam: If the player breaks the Trick Room layer or removes Slowking early, the remaining members must win through ordinary positioning; that intentional seam keeps difficulty 8.0 honest.
   Branch: Pokefan BETHANY (TRAINER_BETHANY) — double
     - Slowking @ Mental Herb; offset -1; Regenerator; Nature Quiet; Stat Points 32/0/16/0/18/0; Trick Room, Scald, Psychic, Protect
-    - Azumarill @ Sitrus Berry; offset -1; Huge Power; Nature Brave; Stat Points 2/32/0/0/0/32; Belly Drum, Aqua Jet, Play Rough, Protect
-    - Relicanth @ Life Orb; offset -1; Rock Head; Nature Brave; Stat Points 2/32/0/0/0/32; Waterfall, Rock Slide, Head Smash, Protect
+    - Azumarill @ Sitrus Berry; offset -1; Huge Power; Nature Brave; Stat Points 32/32/2/0/0/0; Belly Drum, Aqua Jet, Play Rough, Protect
+    - Relicanth @ Life Orb; offset -1; Rock Head; Nature Brave; Stat Points 32/32/2/0/0/0; Waterfall, Rock Slide, Head Smash, Protect
     - Staraptor @ Staraptite; offset +2; Intimidate; Nature Jolly; Stat Points 2/32/0/0/0/32; Brave Bird, Close Combat, Tailwind, Protect
     Dialogue source: data/maps/SootopolisCity_Gym_B1F/scripts.inc:40 (SootopolisCity_Gym_B1F_EventScript_Bethany)
     SootopolisCity_Gym_B1F_Text_BethanyIntro:
@@ -11970,7 +11970,7 @@ PHYSICAL TRAINER ATLAS
   Branch: Pokefan ANNIKA (TRAINER_ANNIKA) — double
     - Milotic @ Maranga Berry; offset -1; Competitive; Nature Bold; Stat Points 32/0/32/0/2/0; Scald, Icy Wind, Recover, Protect
     - Primarina @ Throat Spray; offset -1; Liquid Voice; Nature Modest; Stat Points 2/0/0/32/0/32; Hyper Voice, Moonblast, Icy Wind, Protect
-    - Golduck @ Life Orb; offset -1; Swift Swim; Nature Jolly; Stat Points 2/0/0/32/0/32; Hydro Pump, Ice Beam, Psychic, Protect
+    - Golduck @ Life Orb; offset -1; Swift Swim; Nature Timid; Stat Points 2/0/0/32/0/32; Hydro Pump, Ice Beam, Psychic, Protect
     Dialogue source: data/maps/SootopolisCity_Gym_B1F/scripts.inc:45 (SootopolisCity_Gym_B1F_EventScript_Annika)
     SootopolisCity_Gym_B1F_Text_AnnikaIntro:
       > I can battle with really rare POKéMON
@@ -11994,7 +11994,7 @@ PHYSICAL TRAINER ATLAS
   Weakest seam: If the player breaks the setup layer or removes Luvdisc early, the remaining members must win through ordinary positioning; that intentional seam keeps difficulty 7.2 honest.
   Branch: Lady DAPHNE (TRAINER_DAPHNE) — double
     - Luvdisc @ Life Orb; offset -1; Soul Heart; Nature Timid; Stat Points 2/0/0/32/0/32; Icy Wind, Surf, Draining Kiss, Protect
-    - Lapras @ Leftovers; offset -1; Water Absorb; Nature Jolly; Stat Points 2/0/0/32/0/32; Freeze Dry, Hydro Pump, Icy Wind, Protect
+    - Lapras @ Leftovers; offset -1; Water Absorb; Nature Timid; Stat Points 2/0/0/32/0/32; Freeze Dry, Hydro Pump, Icy Wind, Protect
     - Samurott @ Clear Amulet; offset -1; Torrent; Nature Jolly; Stat Points 2/32/0/0/0/32; Swords Dance, Aqua Jet, Megahorn, Detect
     Dialogue source: data/maps/SootopolisCity_Gym_B1F/scripts.inc:50 (SootopolisCity_Gym_B1F_EventScript_Daphne)
     SootopolisCity_Gym_B1F_Text_DaphneIntro:
@@ -12363,17 +12363,17 @@ PHYSICAL TRAINER ATLAS
 [0483] VictoryRoad_B1F — optional
   Chapter: Pokémon League
   Cap / target difficulty / fatigue: 80 / 8.9 / notable_optional_or_route_ace
-  Battle question: Can the player read Blaziken's Flare Blitz opening, solve the Trick Room, Tailwind, setup, spread pressure board, and still preserve an answer for Orbeetle's Trick Room finish?
-  First-loss lesson: Decide whether Blaziken is damage or infrastructure, then preserve the answer that best denies Orbeetle's Trick Room rather than spending it on Escavalier, Dragonite, Sawsbuck, Ribombee.
-  Strongest feature: Blaziken's Flare Blitz creates a readable handoff through Escavalier, Dragonite, Sawsbuck, Ribombee into Orbeetle's Trick Room, so the team has one identity without becoming one scripted solution.
-  Weakest seam: If the player breaks the Trick Room layer or removes Blaziken early, the remaining members must win through ordinary positioning; that intentional seam keeps difficulty 8.9 honest.
+  Battle question: Can the player read Blaziken's Flare Blitz opening, solve the Tailwind, setup, spread pressure board, and still preserve an answer for Orbeetle's Helping Hand finish?
+  First-loss lesson: Decide whether Blaziken is damage or infrastructure, then preserve the answer that best denies Orbeetle's Helping Hand rather than spending it on Escavalier, Dragonite, Sawsbuck, Ribombee.
+  Strongest feature: Blaziken's Flare Blitz creates a readable handoff through Escavalier, Dragonite, Sawsbuck, Ribombee into Orbeetle's Helping Hand, so the team has one identity without becoming one scripted solution.
+  Weakest seam: If the player breaks the Tailwind layer or removes Blaziken early, the remaining members must win through ordinary positioning; that intentional seam keeps difficulty 8.9 honest.
   Branch: Cooltrainer SHANNON (TRAINER_SHANNON) — double
     - Blaziken @ Blazikenite; offset +0; Speed Boost; Nature Adamant; Stat Points 2/32/0/0/0/32; Flare Blitz, Close Combat, Rock Slide, Protect
     - Escavalier @ Bug Gem; offset -1; Swarm; Nature Adamant; Stat Points 32/32/2/0/0/0; Megahorn, Iron Head, Swords Dance, Protect
     - Dragonite @ Clear Amulet; offset -1; Multiscale; Nature Adamant; Stat Points 2/32/0/0/0/32; Dragon Dance, Dragon Claw, Extreme Speed, Protect
     - Sawsbuck @ Muscle Band; offset -1; Serene Grace; Nature Jolly; Stat Points 2/32/0/0/0/32; Horn Leech, Double Edge, Protect, Helping Hand
     - Ribombee @ Focus Sash; offset -1; Sweet Veil; Nature Timid; Stat Points 2/0/0/32/0/32; Pollen Puff, Dazzling Gleam, Tailwind, Protect
-    - Orbeetle @ Sitrus Berry; offset +1; Telepathy; Nature Timid; Stat Points 32/0/2/0/32/0; Trick Room, Psychic, Helping Hand, Protect
+    - Orbeetle @ Sitrus Berry; offset +1; Telepathy; Nature Calm; Stat Points 32/0/2/0/32/0; Reflect, Psychic, Helping Hand, Protect
     Dialogue source: data/maps/VictoryRoad_B1F/scripts.inc:10 (VictoryRoad_B1F_EventScript_Shannon)
     VictoryRoad_B1F_Text_ShannonIntro:
       > To win your way through the POKéMON
@@ -12443,7 +12443,7 @@ PHYSICAL TRAINER ATLAS
   Branch: Cooltrainer HALLE (TRAINER_HALLE) — double
     - Pinsir @ Life Orb; offset +0; Moxie; Nature Jolly; Stat Points 2/32/0/0/0/32; X Scissor, Close Combat, Feint, Protect
     - Pachirisu @ Sitrus Berry; offset -1; Volt Absorb; Nature Impish; Stat Points 32/0/2/0/32/0; Follow Me, Nuzzle, Super Fang, Protect
-    - Lickilicky @ Normal Gem; offset -1; Cloud Nine; Nature Modest; Stat Points 2/32/0/0/0/32; Power Whip, Stomping Tantrum, Protect, Helping Hand
+    - Lickilicky @ Normal Gem; offset -1; Cloud Nine; Nature Adamant; Stat Points 2/32/0/0/0/32; Power Whip, Stomping Tantrum, Protect, Helping Hand
     - Naganadel @ Wise Glasses; offset +0; Beast Boost; Nature Timid; Stat Points 2/0/0/32/0/32; Draco Meteor, Sludge Bomb, Heat Wave, Helping Hand
     Dialogue source: data/maps/VictoryRoad_B1F/scripts.inc:25 (VictoryRoad_B1F_EventScript_Halle)
     VictoryRoad_B1F_Text_HalleIntro:
@@ -12643,7 +12643,7 @@ PHYSICAL TRAINER ATLAS
     - Gengar @ Focus Sash; offset +0; Levitate; Nature Timid; Stat Points 2/0/0/32/0/32; Shadow Ball, Sludge Bomb, Will O Wisp, Protect
     - Marshadow @ Life Orb; offset +0; Technician; Nature Jolly; Stat Points 2/32/0/0/0/32; Spectral Thief, Close Combat, Shadow Sneak, Protect
     - Lunala @ Mental Herb; offset +0; Shadow Shield; Nature Modest; Stat Points 32/0/2/32/0/0; Moongeist Beam, Moonblast, Trick Room, Wide Guard
-    - Giratina @ Leftovers; offset +0; Telepathy; Nature Adamant; Stat Points 2/0/0/32/0/32; Draco Meteor, Shadow Ball, Will O Wisp, Protect
+    - Giratina @ Leftovers; offset +0; Telepathy; Nature Quiet; Stat Points 32/0/2/32/0/0; Draco Meteor, Shadow Ball, Will O Wisp, Protect
     - Shedinja @ Clear Amulet; offset +1; Wonder Guard; Nature Jolly; Stat Points 2/32/0/0/0/32; X Scissor, Shadow Sneak, Protect, Sunny Day
     - Calyrex Shadow @ Wise Glasses; offset +2; As One Shadow Rider; Nature Timid; Stat Points 2/0/0/32/0/32; Astral Barrage, Psychic, Nasty Plot, Protect
     Dialogue source: data/maps/EverGrandeCity_PhoebesRoom/scripts.inc:47 (EverGrandeCity_PhoebesRoom_EventScript_Phoebe)
@@ -12655,14 +12655,14 @@ PHYSICAL TRAINER ATLAS
   Cap / target difficulty / fatigue: 80 / 10.0 / marquee_boss
   Battle question: Can the player read Ninetales Alola's Blizzard opening, solve the snow, Tailwind, spread pressure board, and still preserve an answer for Abomasnow's Blizzard finish?
   First-loss lesson: Decide whether Ninetales Alola is damage or infrastructure, respect Chien-Pao's defense drop and Sucker Punch without surrendering tempo, then preserve the answer that best denies Abomasnow's Blizzard.
-  Strongest feature: Ninetales Alola's Blizzard creates a readable handoff through Kyurem, Froslass, Articuno, Glastrier into Abomasnow's Blizzard, so the team has one identity without becoming one scripted solution.
+  Strongest feature: Ninetales Alola's Blizzard creates a readable handoff through Kyurem, Chien-Pao, Articuno, Glastrier into Abomasnow's Blizzard, so the team has one identity without becoming one scripted solution.
   Weakest seam: If the player breaks the snow layer or removes Ninetales Alola early, the remaining members must win through ordinary positioning; that intentional seam keeps difficulty 10.0 honest.
   Branch: Elite Four GLACIA (TRAINER_GLACIA) — double
     - Ninetales Alola @ Light Clay; offset +0; Snow Warning; Nature Timid; Stat Points 2/0/0/32/0/32; Blizzard, Aurora Veil, Encore, Protect
     - Kyurem @ Choice Specs; offset +0; Pressure; Nature Timid; Stat Points 2/0/0/32/0/32; Blizzard, Freeze Dry, Draco Meteor, Flash Cannon
     - Chien Pao @ Focus Sash; offset +0; Sword Of Ruin; Nature Jolly; Stat Points 2/32/0/0/0/32; Icicle Crash, Sucker Punch, Sacred Sword, Protect
     - Articuno @ Sitrus Berry; offset +0; Pressure; Nature Modest; Stat Points 2/0/0/32/0/32; Freeze Dry, Icy Wind, Tailwind, Protect
-    - Glastrier @ Life Orb; offset +1; Chilling Neigh; Nature Jolly; Stat Points 32/32/2/0/0/0; Icicle Crash, High Horsepower, Close Combat, Protect
+    - Glastrier @ Life Orb; offset +1; Chilling Neigh; Nature Adamant; Stat Points 32/32/2/0/0/0; Icicle Crash, High Horsepower, Close Combat, Protect
     - Abomasnow @ Expert Belt; offset +2; Snow Warning; Nature Modest; Stat Points 32/0/2/32/0/0; Blizzard, Giga Drain, Ice Shard, Protect
     Dialogue source: data/maps/EverGrandeCity_GlaciasRoom/scripts.inc:47 (EverGrandeCity_GlaciasRoom_EventScript_Glacia)
     EverGrandeCity_GlaciasRoom_Text_Defeat:
@@ -12671,12 +12671,12 @@ PHYSICAL TRAINER ATLAS
 [0496] EverGrandeCity_DrakesRoom — required
   Chapter: Pokémon League
   Cap / target difficulty / fatigue: 80 / 10.0 / marquee_boss
-  Battle question: Can the player read Dialga's Trick Room opening, solve the Trick Room, Tailwind, setup board, and still preserve an answer for Salamence's Dragon Dance finish?
+  Battle question: Can the player contain Dialga's immediate coverage, solve Reshiram's Tailwind and Koraidon's sun, and still preserve an answer for Salamence's Dragon Dance finish?
   First-loss lesson: Decide whether Dialga is damage or infrastructure, track when Koraidon's sun helps either side, and preserve the answer that best denies Mega Salamence rather than spending it on the first legendary dragon.
-  Strongest feature: Dialga's Trick Room creates a readable handoff through Zygarde 50 Power Construct, Reshiram, Naganadel, Rayquaza into Salamence's Dragon Dance, so the team has one identity without becoming one scripted solution.
-  Weakest seam: If the player breaks the Trick Room layer or removes Dialga early, the remaining members must win through ordinary positioning; that intentional seam keeps difficulty 10.0 honest.
+  Strongest feature: Dialga's immediate coverage creates a readable handoff through Zygarde 50 Power Construct, Reshiram, Koraidon, and Rayquaza into Salamence's Dragon Dance, so the spectacular roster now executes one coherent speed plan.
+  Weakest seam: If the player denies Tailwind and exploits the turns when Air Lock suppresses Koraidon's sun, the remaining dragons must win through ordinary positioning; that visible seam keeps difficulty 10.0 honest.
   Branch: Elite Four DRAKE (TRAINER_DRAKE) — double
-    - Dialga @ Life Orb; offset +0; Telepathy; Nature Timid; Stat Points 32/0/2/32/0/0; Draco Meteor, Flash Cannon, Trick Room, Protect
+    - Dialga @ Life Orb; offset +0; Telepathy; Nature Timid; Stat Points 32/0/2/32/0/0; Draco Meteor, Flash Cannon, Earth Power, Protect
     - Zygarde 50 Power Construct @ Leftovers; offset +0; Power Construct; Nature Jolly; Stat Points 32/0/2/0/32/0; Lands Wrath, Crunch, Glare, Coil
     - Reshiram @ Wise Glasses; offset +0; Turboblaze; Nature Timid; Stat Points 2/0/0/32/0/32; Tailwind, Heat Wave, Protect, Draco Meteor
     - Koraidon @ Clear Amulet; offset +0; Orichalcum Pulse; Nature Jolly; Stat Points 2/32/0/0/0/32; Collision Course, Dragon Claw, Flare Blitz, Protect
@@ -12695,11 +12695,11 @@ PHYSICAL TRAINER ATLAS
   Weakest seam: If the player breaks the rain layer or removes Kyogre early, the remaining members must win through ordinary positioning; that intentional seam keeps difficulty 10.0 honest.
   Branch: Champion WALLACE (TRAINER_WALLACE) — double
     - Kyogre @ Mystic Water; offset +0; Drizzle; Nature Timid; Stat Points 2/0/0/32/0/32; Water Spout, Origin Pulse, Thunder, Protect
-    - Zapdos @ Sitrus Berry; offset +0; Static; Nature Modest; Stat Points 2/0/0/32/0/32; Volt Switch, Hurricane, Tailwind, Protect
-    - Ferrothorn @ Leftovers; offset +0; Iron Barbs; Nature Jolly; Stat Points 32/0/32/0/2/0; Body Press, Iron Defense, Giga Drain, Protect
+    - Zapdos @ Sitrus Berry; offset +0; Static; Nature Modest; Stat Points 2/0/0/32/0/32; Volt Switch, Hurricane, Tailwind, Roost
+    - Ferrothorn @ Leftovers; offset +0; Iron Barbs; Nature Relaxed; Stat Points 32/0/32/0/2/0; Body Press, Iron Defense, Power Whip, Thunder Wave
     - Manaphy @ Wise Glasses; offset +0; Hydration; Nature Timid; Stat Points 2/0/0/32/0/32; Tail Glow, Scald, Ice Beam, Protect
     - Palkia @ Life Orb; offset +1; Telepathy; Nature Timid; Stat Points 2/0/0/32/0/32; Hydro Pump, Spacial Rend, Earth Power, Protect
-    - Milotic @ Maranga Berry; offset +2; Competitive; Nature Timid; Stat Points 32/0/32/0/2/0; Scald, Icy Wind, Recover, Protect
+    - Milotic @ Maranga Berry; offset +2; Competitive; Nature Bold; Stat Points 32/0/32/0/2/0; Scald, Icy Wind, Recover, Haze
     Dialogue source: data/maps/EverGrandeCity_ChampionsRoom/scripts.inc:46 (EverGrandeCity_ChampionsRoom_EventScript_Wallace)
     EverGrandeCity_ChampionsRoom_Text_Defeat:
       > Every time I changed the question, you
@@ -12790,16 +12790,16 @@ PHYSICAL TRAINER ATLAS
   Chapter: Postgame Trick House puzzle 8
   Cap / target difficulty / fatigue: 100 / 8.9 / notable_optional_or_route_ace
   Battle question: Can the player navigate Cresselia's speed choice while Volcanion, Salamence, Mega Mawile, Kartana, and Unburden Slurpuff threaten opposite endgames?
-  First-loss lesson: Decide whether to deny or exploit Trick Room, prevent Calm Mind, and preserve Fire or special pressure for Kartana and Mega Mawile.
+  First-loss lesson: Decide whether to deny or exploit Trick Room, prevent Slurpuff's Cotton Guard and Unburden endgame, and preserve Fire or special pressure for Kartana and Mega Mawile.
   Strongest feature: Six premium Pokemon form a real final puzzle with two viable speed modes, one Mega, and no retired gimmick.
   Weakest seam: The roster is intentionally star-heavy; its exact order and only-one-setup-per-mode discipline must prevent generic good-stuff overload.
   Branch: Cooltrainer LEROY (TRAINER_LEROY) — double
     - Cresselia @ Mental Herb; offset +0; Levitate; Nature Bold; Stat Points 32/0/2/0/32/0; Trick Room, Icy Wind, Psychic, Helping Hand
-    - Volcanion @ Assault Vest; offset +0; Water Absorb; Nature Modest; Stat Points 2/0/0/32/0/32; Steam Eruption, Heat Wave, Earth Power, Sludge Bomb
+    - Volcanion @ Assault Vest; offset +0; Water Absorb; Nature Quiet; Stat Points 32/0/2/32/0/0; Steam Eruption, Heat Wave, Earth Power, Sludge Bomb
     - Salamence @ Life Orb; offset +0; Intimidate; Nature Timid; Stat Points 2/0/0/32/0/32; Draco Meteor, Hurricane, Flamethrower, Tailwind
-    - Mawile @ Mawilite; offset +0; Hyper Cutter; Nature Adamant; Stat Points 2/32/0/0/0/32; Play Rough, Iron Head, Sucker Punch, Protect
+    - Mawile @ Mawilite; offset +0; Hyper Cutter; Nature Brave; Stat Points 32/32/2/0/0/0; Play Rough, Iron Head, Sucker Punch, Protect
     - Kartana @ Focus Sash; offset +0; Beast Boost; Nature Jolly; Stat Points 2/32/0/0/0/32; Leaf Blade, Sacred Sword, Night Slash, Protect
-    - Slurpuff @ Sitrus Berry; offset +0; Sweet Veil; Nature Jolly; Stat Points 2/32/0/0/0/32; Calm Mind, Play Rough, Drain Punch, Protect
+    - Slurpuff @ Sitrus Berry; offset +0; Unburden; Nature Jolly; Stat Points 2/32/0/0/0/32; Cotton Guard, Play Rough, Drain Punch, Protect
     Dialogue source: data/maps/Route110_TrickHousePuzzle8/scripts.inc:26 (Route110_TrickHousePuzzle8_EventScript_Leroy)
     Route110_TrickHousePuzzle8_Text_LeroyIntro:
       > You've been slugging through the TRICK

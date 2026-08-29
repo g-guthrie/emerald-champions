@@ -644,7 +644,12 @@ def audit(path: Path) -> tuple[list[str], list[str]]:
 
     for encounter_index, block in enumerate(groups, 1):
         encounter_species_sets.append(set(re.findall(r"(?m)^  \d+\. (SPECIES_[A-Z0-9_]+)", block)))
-        primary_strategies.append(next((name for name, pattern in strategy_patterns if re.search(pattern, block)), "balanced tempo"))
+        # A team can deliberately layer weather, speed control, setup, and
+        # spread pressure.  Treat that combination as its strategy signature;
+        # collapsing every such team to the first matching token made distinct
+        # League battles look like six copies of "Tailwind."
+        signature = tuple(name for name, pattern in strategy_patterns if re.search(pattern, block))
+        primary_strategies.append(" + ".join(signature) if signature else "balanced tempo")
         for field in required_fields:
             if not line_value(block, field):
                 errors.append(f"encounter {encounter_index}: missing {field}")
