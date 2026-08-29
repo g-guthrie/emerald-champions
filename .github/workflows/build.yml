@@ -69,14 +69,14 @@ jobs:
             tools/wav2agb/wav2agb
           key: emerald-champions-tools-${{ runner.os }}-${{ hashFiles('tools/*/Makefile', 'tools/**/*.c', 'tools/**/*.cpp', 'tools/**/*.h') }}
 
-      - name: Build Emerald Champions ROM
-        run: make -j"$(nproc)" all
+      - name: Build Emerald Champions release ROM
+        run: make -j"$(nproc)" release
 
       - name: Verify campaign, generated data, and ROM layout
         run: python3 scripts/verify_emerald_champions_release.py
 
       - name: Headless ROM boot smoke
-        run: tools/mgba/mgba-rom-test -l15 -ClogLevel.gba.dma=16 -S 5 pokeemerald.gba
+        run: tools/mgba/mgba-rom-test -l15 -ClogLevel.gba.dma=16 -S 5 pokeemerald-release.gba
 
       - name: Run Emerald Champions runtime gates
         shell: bash
@@ -90,12 +90,18 @@ jobs:
           }
 
           run_tests '*Champions'
+          run_tests '*Item descriptions fit on Bag and Shop Screen*'
           run_tests '*Eggs safely inherit*'
+          run_tests 'test/upstream_critical_fixes.c'
           run_tests 'Commander'
+          run_tests 'test/battle/ability/forecast.c'
+          run_tests 'test/battle/ability/flower_gift.c'
+          run_tests '*Simultaneous manual switches*'
+          run_tests '*transforms into a mon with Insomnia*'
           run_tests 'test/save.c'
           run_tests 'test/battle/ai/ai_doubles.c'
 
       - name: Report ROM identity
         run: |
-          sha256sum pokeemerald.gba
-          arm-none-eabi-size pokeemerald.elf
+          sha256sum pokeemerald-release.gba
+          arm-none-eabi-size pokeemerald-release.elf

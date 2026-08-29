@@ -103,7 +103,9 @@ RustboroCity_DevonCorp_2F_Text_LegendarySignResearcherIntro:
 	.string "My dream visualizer detected marks\n"
 	.string "I call LEGENDARY SIGNS.\p"
 	.string "They wake when the right Pokémon\n"
-	.string "returns with an accomplished Trainer.$"
+	.string "returns to the marked place.\p"
+	.string "I can also tune an eligible Sign\n"
+	.string "remotely if you bring its partner here.$"
 
 RustboroCity_DevonCorp_2F_Text_LegendarySignAwakened:
 	.string "{STR_VAR_1} resonates with my data!\p"
@@ -114,7 +116,8 @@ RustboroCity_DevonCorp_2F_Text_LegendarySignAwakened:
 RustboroCity_DevonCorp_2F_Text_LegendarySignClue:
 	.string "My next readable Sign points toward\n"
 	.string "{STR_VAR_2} at {STR_VAR_3}.\p"
-	.string "Bring me {STR_VAR_1} to awaken it.$"
+	.string "Take {STR_VAR_1} there to wake it,\n"
+	.string "or bring that partner to me.$"
 
 RustboroCity_DevonCorp_2F_Text_NoLegendarySignYet:
 	.string "The next Sign is still beyond the\n"
@@ -577,7 +580,8 @@ RustboroCity_DevonCorp_2F_Text_FossilizedMonBroughtBackToLife:
 	.string "Thanks for waiting!\p"
 	.string "Your fossilized POKéMON has been\n"
 	.string "brought back to life!\p"
-	.string "It was {STR_VAR_2}, an ancient POKéMON!$"
+	.string "It was {STR_VAR_2}!\n"
+	.string "An ancient POKéMON!$"
 
 RustboroCity_DevonCorp_2F_Text_ReceivedMonFromResearcher:
 	.string "{PLAYER} received {STR_VAR_2} from\n"

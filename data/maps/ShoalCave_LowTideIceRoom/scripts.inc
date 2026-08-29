@@ -49,12 +49,16 @@ ShoalCave_LowTideIceRoom_EventScript_ArticunoCleanup::
 ShoalCave_LowTideIceRoom_Text_ArticunoDormant:
 	.string "A CHAMPION'S SIGN marks the ice altar.\p"
 	.string "Its light is dormant. HOENN's story\n"
-	.string "has not yet reached this place.$"
+	.string "has not yet reached this place.\p"
+	.string "Fainter ice marks resemble SNORUNT\n"
+	.string "and RESHIRAM.$"
 
 ShoalCave_LowTideIceRoom_Text_ArticunoNeedsPartner:
 	.string "The SIGN sketches FROSLASS.\p"
 	.string "Bring that POKéMON's family here, and\n"
-	.string "the hidden challenger may answer.$"
+	.string "the hidden challenger may answer.\p"
+	.string "Two fainter marks pair this ice room\n"
+	.string "with SNORUNT and RESHIRAM.$"
 
 ShoalCave_LowTideIceRoom_Text_ArticunoAwakens:
 	.string "The CHAMPION'S SIGN erupts with light!\n"

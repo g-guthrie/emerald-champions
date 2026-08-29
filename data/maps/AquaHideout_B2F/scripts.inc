@@ -87,53 +87,41 @@ AquaHideout_B2F_EventScript_Grunt8::
 	end
 
 AquaHideout_B2F_Text_MattIntro:
-	.string "Hehehe…\p"
-	.string "Got here already, did you?\n"
-	.string "We underestimated you!\p"
-	.string "But this is it!\p"
-	.string "I'm a cut above the GRUNTS you've seen\n"
-	.string "so far.\p"
-	.string "I'm not stalling for time.\n"
-	.string "I'm going to pulverize you!$"
+	.string "MATT: You crossed the entire hideout\n"
+	.string "before the tide changed. Impressive.\p"
+	.string "ARCHIE needs one final current of time.\n"
+	.string "My job is to make every turn cost you.$"
 
 AquaHideout_B2F_Text_MattDefeat:
-	.string "Hehehe…\n"
-	.string "So, I lost, too…$"
+	.string "You refused every delay I offered…$"
 
 AquaHideout_B2F_Text_OurBossGotThroughHisPreparations:
-	.string "Hehehe!\p"
-	.string "While I was toying with you, our BOSS\n"
-	.string "got through his preparations!$"
+	.string "MATT: You won the battle. ARCHIE still\n"
+	.string "finished the dive sequence.$"
 
 AquaHideout_B2F_Text_MattPostBattle:
-	.string "Hehehe!\p"
-	.string "Our BOSS has already gone on his way to\n"
-	.string "some cave under the sea!\p"
-	.string "If you're going to give chase, you'd\n"
-	.string "better search the big, wide sea beyond\l"
-	.string "LILYCOVE.\p"
-	.string "But will you find it then?\n"
-	.string "Hehehe!$"
+	.string "MATT: ARCHIE is headed for a cavern\n"
+	.string "beneath the sea beyond LILYCOVE.\p"
+	.string "You can cross the ocean. Finding one\n"
+	.string "moving current inside it is harder.$"
 
 AquaHideout_B2F_Text_Grunt4Intro:
-	.string "Wahahah, I grew weary of waiting!\n"
-	.string "You owe me a battle, too!$"
+	.string "Waiting is part of an ambush. You finally\n"
+	.string "entered the current I was assigned.$"
 
 AquaHideout_B2F_Text_Grunt4Defeat:
-	.string "Tired of waiting…\n"
-	.string "Lost and dazed…$"
+	.string "You turned my ambush back on me…$"
 
 AquaHideout_B2F_Text_Grunt4PostBattle:
-	.string "BOSS…\n"
-	.string "Is this good enough?$"
+	.string "The delay still served ARCHIE. Whether it\n"
+	.string "was enough is happening below us now.$"
 
 AquaHideout_B2F_Text_Grunt6Intro:
 	.string "Warp panels, the HIDEOUT's pride\n"
 	.string "and joy!\p"
-	.string "You're clueless about where you are,\n"
-	.string "aren't you?\p"
-	.string "Fluster and tire out the enemy, then\n"
-	.string "lower the boom! That's our plan!$"
+	.string "Every panel changes your position and\n"
+	.string "every battle changes your resources.\p"
+	.string "AQUA wins by making the field move.$"
 
 AquaHideout_B2F_Text_Grunt6Defeat:
 	.string "What's wrong with you?\n"

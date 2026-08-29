@@ -8756,6 +8756,23 @@ bool32 TryBattleFormChange(enum BattlerId battler, enum FormChanges method, enum
     if (!CanBattlerFormChange(battler, method))
         return FALSE;
 
+    if (method == FORM_CHANGE_BATTLE_WEATHER)
+    {
+        enum Species baseSpecies = GET_BASE_SPECIES_ID(gBattleMons[battler].species);
+
+        // Forecast's weather form persists while Forecast is suppressed or
+        // replaced. It is reconciled with the weather when Forecast returns.
+        if (baseSpecies == SPECIES_CASTFORM && ability != ABILITY_FORECAST)
+            return FALSE;
+
+        // Flower Gift normally reverts without its Ability, except while the
+        // Cherrim is Dynamaxed.
+        if (baseSpecies == SPECIES_CHERRIM
+         && ability != ABILITY_FLOWER_GIFT
+         && GetActiveGimmick(battler) == GIMMICK_DYNAMAX)
+            return FALSE;
+    }
+
     enum Species currentSpecies = GetMonData(mon, MON_DATA_SPECIES);
     enum Species targetSpecies = GetBattleFormChangeTargetSpecies(battler, method, ability);
 

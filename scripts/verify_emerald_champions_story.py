@@ -70,6 +70,12 @@ COHESION_FILES = [
     "data/maps/CaveOfOrigin_1F/scripts.inc",
     "data/maps/Route114_FossilManiacsTunnel/scripts.inc",
     "data/maps/Route133/scripts.inc",
+    "data/maps/NewMauville_Inside/scripts.inc",
+    "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
+    "data/maps/LilycoveCity_Harbor/scripts.inc",
+    "data/maps/Route118/scripts.inc",
+    "data/maps/VerdanturfMeadow/scripts.inc",
+    "data/maps/LilycoveCity_CoveLilyMotel_2F/scripts.inc",
 ]
 DIALOGUE_FILES = tuple(dict.fromkeys(STORY_FILES + COHESION_FILES))
 STORY_BEATS = {

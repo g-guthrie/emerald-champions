@@ -10,17 +10,17 @@ transitions, one-time rewards, legendary encounters, and the Battle Frontier.
 - 540 Hoenn maps
 - 4,086 NPC, trigger, and sign events
 - 1,402 map warps
-- 17,927 script control-flow, dialogue, and movement references
-- 10,439 story-dialogue visual lines and 47,831 literal Hoenn dialogue lines
+- 17,888 script control-flow, dialogue, and movement references
+- 10,844 story-dialogue visual lines and 47,628 literal Hoenn dialogue lines
 - 513 physical trainer encounters containing 561 reachable battle branches
 - Every badge, HM license, Mega Ring, League, fossil, legendary-sign, and
   critical story-item progression contract
 
 The automated release gate is `scripts/verify_emerald_champions_release.py`.
-It combines source-graph checks, authored-battle validation, generated-data
-verification, a clean ROM build, memory-layout checks, a headless boot, and
-focused runtime tests. A release is not accepted when one of those stages
-fails.
+GitHub CI first builds the optimized `pokeemerald-release.gba`; the verifier
+then rejects missing or stale Make dependencies before checking source graphs,
+authored battles, generated data, memory layout, bootability, and focused
+runtime tests. A release is not accepted when one of those stages fails.
 
 ## Progression defects corrected
 
@@ -41,6 +41,13 @@ fails.
   full.
 - Field HMs require the matching badge and the actual campaign HM license;
   early move-tutor access no longer bypasses story progression.
+- The Pokémon League entrance explicitly checks all eight badge flags.
+- Steven now holds Route 120's one-tile bridge until Winona is defeated, with
+  Tate and Liza and Juan carrying defense-in-depth Feather Badge checks. This
+  closes the native sequence break that previously allowed 200 late encounters
+  to be reached while the first-unset-badge cap remained 55.
+- Birch's redundant repeat-Johto-starter prize is now a retry-safe Legendary
+  Form Research Kit for postgame Kyurem, Zygarde, Necrozma, and Calyrex tools.
 
 ## Battle-flow defects corrected
 
@@ -53,6 +60,9 @@ fails.
 - The Winstrate family no longer creates an unintended doubles attrition lock.
 - Match Call remains useful for contact and flavor but never promises disabled
   rematches. Repurposed trainer IDs cannot leak into rematch reporting.
+- Norman's accidentally reachable postgame rematch state is migrated back to
+  the normal post-battle state; every retained legacy rematch block now has no
+  physical entry and remains behind the disabled runtime guard.
 - Live Hard/Medium/Easy difficulty also applies to Champions Circuit teams.
 - Regional rival replacements respect preset legality and Item Clause.
 - Battle-ready wild catches retain their authored held item when entering the
@@ -61,6 +71,12 @@ fails.
 - Random-table Ultra Beasts and Paradox Pokémon receive competitive presets
   just like other ordinary wild encounters; true one-off legendary and
   temporary battle forms remain excluded unless their quest opts in.
+- Conditional wild Legendary Signs awaken in their own habitat when the same
+  badge, story, and partner requirements are met. Devon remains an optional
+  remote oracle rather than mandatory backtracking.
+- Arceus mastery requires all 80 other finite Sign definitions, including
+  ordinary wilds, Game Corner prizes, Phione breeding, Circuit rewards, and
+  the Eternatus mastery milestone.
 
 ## Encounter and reward defects corrected
 
@@ -94,6 +110,39 @@ fails.
 - Route signs, NPC dialogue, trainer dialogue, and tutor descriptions are
   measured against the native font and window dimensions; overflowing literal
   lines fail the release gate.
+- Devon's Pidgeotite reward, save flag, labels, and Match Call state now use
+  the same terminology, and the campaign battle master follows live chronology
+  through the Elite Four, Wallace, and postgame.
+- Forty-one optional-route encounters now use their true earliest reachable
+  caps on Routes 115–118, southern/perimeter Route 111, and Mt. Chimney. Teams
+  moved earlier use legal evolution phases, reserve Megas until the bracelet,
+  and retain all 92 Mega showcases elsewhere in the campaign.
+
+## Inherited upstream defects corrected or contained
+
+- Direct interaction with a reloaded, defeated buried trainer can no longer
+  dispatch beyond its four-entry movement-state table.
+- Keldeo now enters and leaves Resolute Form consistently when Secret Sword is
+  learned or forgotten through party, PC, tutor, deleter, wild, and preset
+  paths.
+- Unsafe Battle Frontier recording and replay is hidden pending a proven
+  upstream repair; save-layout support remains intact.
+- Pokémon Storage held-item messages reserve an EOS byte and select a native
+  fitting font for every legal item name.
+- Pledge coordination and Decorate targeting have explicit doubles-AI rules.
+  The upstream Imposter report remains a documented test-runner limitation:
+  its harness cannot reliably model copied move slots after Transform, so no
+  speculative cartridge-engine patch is applied.
+- Commander preserves swallowed Tatsugiri visibility while sleep/Yawn state
+  progresses correctly. Forecast, Flower Gift, Skill Swap reconciliation, and
+  simultaneous modern manual-switch order have focused fixes.
+- The optional post-KO idle/cry replay is disabled to avoid later affine
+  animation corruption.
+
+Known upstream areas deliberately not rewritten without a proven target are
+fainted-replacement ordering, full cross-target move-end interleaving, the
+unconfirmed mid-turn AI-cache report, missing authored Gen 8/9 second frames,
+Terapagos's two-pixel raster defect, and the broad doubles-animation backlog.
 
 ## Battle-master guarantees
 
@@ -106,6 +155,11 @@ multiple Mega Stones, pre-bracelet Megas, broken Choice/Assault Vest sets,
 dead item-dependent Abilities, nonfunctional Helping Hand in singles, missing
 Gym typing, exact duplicate teams, missing campaign trainers, and missing Mega
 or legendary showcases.
+
+The master also enforces the 41 optional-route earliest-cap contracts and
+milestone chronology: Mt. Pyre precedes the Magma and Aqua hideouts; Space
+Center precedes Seafloor Cavern and Sootopolis; Sidney, Phoebe, Glacia, Drake,
+and Wallace close the League before postgame begins.
 
 ## Evidence boundary
 

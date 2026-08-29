@@ -224,6 +224,40 @@ def verify_critical_progression_contracts() -> None:
     require("FLAG_SYS_NATIONAL_DEX" in birch and "EnableNationalPokedex" in birch,
             "initial Pokedex does not expose the campaign's national roster")
 
+    league_path = "data/maps/EverGrandeCity_PokemonLeague_1F/scripts.inc"
+    league = label_block(league_path, "EverGrandeCity_PokemonLeague_1F_EventScript_DoorGuard")
+    for badge in range(1, 9):
+        require(
+            f"goto_if_unset FLAG_BADGE{badge:02d}_GET, EverGrandeCity_PokemonLeague_1F_EventScript_NotAllBadges" in league,
+            f"League entrance does not explicitly require badge {badge}",
+        )
+    require(
+        league.index("FLAG_BADGE08_GET") < league.index("setflag FLAG_ENTERED_ELITE_FOUR"),
+        "League opens before completing its explicit eight-badge checks",
+    )
+
+    route120 = label_block("data/maps/Route120/scripts.inc", "Route120_EventScript_Steven")
+    require(
+        route120.index("FLAG_BADGE06_GET") < route120.index("FLAG_RECEIVED_DEVON_SCOPE")
+        < route120.index("Route120_EventScript_StevenBattleKecleon"),
+        "Route 120 does not hold the eastward story path behind Winona",
+    )
+    fortree = label_block("data/maps/FortreeCity_Gym/scripts.inc", "FortreeCity_Gym_EventScript_WinonaDefeated")
+    require(
+        fortree.index("FLAG_BADGE06_GET") < fortree.index("FLAG_HIDE_ROUTE_120_STEVEN"),
+        "the Route 120 Winona gate is not retired with the Feather Badge",
+    )
+    mossdeep = label_block("data/maps/MossdeepCity_Gym/scripts.inc", "MossdeepCity_Gym_EventScript_TateAndLiza")
+    require(
+        mossdeep.index("FLAG_BADGE06_GET") < mossdeep.index("trainerbattle_double"),
+        "Tate and Liza can be challenged before Winona",
+    )
+    juan = label_block("data/maps/SootopolisCity_Gym_1F/scripts.inc", "SootopolisCity_Gym_1F_EventScript_Juan")
+    require(
+        juan.index("FLAG_BADGE06_GET") < juan.index("trainerbattle_double"),
+        "Juan can be defeated before Winona",
+    )
+
     dewford = label_block("data/maps/DewfordTown/scripts.inc", "DewfordTown_EventScript_Briney")
     require(
         dewford.index("FLAG_BADGE02_GET") < dewford.index("checkitem ITEM_MEGA_RING")
@@ -232,6 +266,76 @@ def verify_critical_progression_contracts() -> None:
     )
     devon = label_block("data/maps/RustboroCity_DevonCorp_3F/scripts.inc", "RustboroCity_DevonCorp_3F_EventScript_MrStone")
     require("checkitem ITEM_MEGA_RING" in devon, "Devon gives its Mega reward before the player owns the Mega Ring")
+    devon_path = ROOT / "data/maps/RustboroCity_DevonCorp_3F/scripts.inc"
+    devon_text = devon_path.read_text()
+    require(
+        "FLAG_RECEIVED_PIDGEOTITE_FROM_DEVON" in devon_text
+        and "RustboroCity_DevonCorp_3F_EventScript_GivePidgeotite" in devon_text,
+        "Devon's Pidgeotite reward still has misleading internal names",
+    )
+    require(
+        "FLAG_RECEIVED_EXP_SHARE" not in devon_text
+        and "GiveExpShare" not in devon_text
+        and "ExplainExpShare" not in devon_text,
+        "obsolete EXP Share terminology remains in Devon's Pidgeotite path",
+    )
+    require(
+        len(re.findall(r"^RustboroCity_DevonCorp_3F_EventScript_Employee::$", devon_text, re.MULTILINE)) == 1,
+        "Devon's employee event label is missing or duplicated",
+    )
+
+    vars_text = (ROOT / "include/constants/vars.h").read_text()
+    require(
+        re.search(r"#define\s+VAR_BIRCH_POSTGAME_RESEARCH_STATE\s+0x40D3\b", vars_text) is not None,
+        "Birch's renamed postgame state no longer preserves old-save storage",
+    )
+    birch_path = ROOT / "data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc"
+    birch_text = birch_path.read_text()
+    require("VAR_DEX_UPGRADE_JOHTO_STARTER_STATE" not in birch_text,
+            "Birch's postgame state still claims to be a Johto starter reward")
+    require(
+        not re.search(r"givemon\s+SPECIES_(?:CYNDAQUIL|TOTODILE|CHIKORITA)\b", birch_text),
+        "Birch still gives a redundant Johto starter after all regions are initial choices",
+    )
+    research_tools = (
+        "ITEM_DNA_SPLICERS",
+        "ITEM_ZYGARDE_CUBE",
+        "ITEM_N_SOLARIZER",
+        "ITEM_N_LUNARIZER",
+        "ITEM_REINS_OF_UNITY",
+    )
+    campaign_acquisition_sources = assembled_sources(hoenn_map_names())
+    campaign_acquisition_sources.extend(MAPS_ROOT.glob("*/map.json"))
+    for item in research_tools:
+        require(f"checkitem {item}, 1" in birch_text, f"Birch reward cannot resume safely at {item}")
+        require(f"giveitem {item}" in birch_text, f"Birch reward does not deliver {item}")
+        require(
+            len(re.findall(rf"\bgiveitem\s+{item}\b", birch_text)) == 1,
+            f"Birch's completion reward gives {item} more than once",
+        )
+        other_sources = [
+            str(path.relative_to(ROOT))
+            for path in campaign_acquisition_sources
+            if path != birch_path and re.search(rf"\b{item}\b", path.read_text(errors="ignore"))
+        ]
+        require(
+            not other_sources,
+            f"{item} is not unique to Birch's completion reward: {', '.join(other_sources)}",
+        )
+    require(
+        birch_text.index("giveitem ITEM_REINS_OF_UNITY")
+        < birch_text.index("setvar VAR_BIRCH_POSTGAME_RESEARCH_STATE, 6"),
+        "Birch marks the research kit complete before offering every tool",
+    )
+    migration = label_block(
+        "data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc",
+        "LittlerootTown_ProfessorBirchsLab_EventScript_MigrateLegacyResearchReward",
+    )
+    require(
+        all(item in migration for item in research_tools)
+        and "LittlerootTown_ProfessorBirchsLab_EventScript_ReopenResearchReward" in migration,
+        "old state-six saves cannot reopen the replacement Birch reward",
+    )
 
     sootopolis = (ROOT / "data/maps/SootopolisCity/scripts.inc").read_text()
     require(

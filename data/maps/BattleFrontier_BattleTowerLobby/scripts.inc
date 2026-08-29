@@ -1213,9 +1213,10 @@ BattleFrontier_BattleTowerLobby_Text_RecordLastMatch:
 @ Unused
 BattleFrontier_BattleTowerLobby_Text_NotEnoughValidMonsLv50:
 	.string "Excuse me!\p"
-	.string "You don't have {STR_VAR_2} eligible POKéMON.\p"
-	.string "You must have {STR_VAR_2} different POKéMON\n"
-	.string "of Level 50 or less to enter.\p"
+	.string "You need {STR_VAR_2} eligible\n"
+	.string "POKéMON.\p"
+	.string "Bring {STR_VAR_2} different POKéMON\n"
+	.string "of Level 50 or less.\p"
 	.string "They also must be holding different\n"
 	.string "kinds of items.\p"
 	.string "EGGS{STR_VAR_1}.$"
@@ -1226,8 +1227,9 @@ BattleFrontier_BattleTowerLobby_Text_NotEnoughValidMonsEnd:
 @ Unused
 BattleFrontier_BattleTowerLobby_Text_NotEnoughValidMonsLvOpen:
 	.string "Excuse me!\p"
-	.string "You don't have {STR_VAR_2} eligible POKéMON.\p"
-	.string "You must have {STR_VAR_2} different POKéMON\n"
+	.string "You need {STR_VAR_2} eligible\n"
+	.string "POKéMON.\p"
+	.string "Bring {STR_VAR_2} different POKéMON\n"
 	.string "to enter.\p"
 	.string "They also must be holding different\n"
 	.string "kinds of items.\p"
@@ -1478,7 +1480,8 @@ BattleFrontier_BattleTowerLobby_Text_AwardYouTheseBattlePoints:
 	.string "we award you these Battle Point(s).$"
 
 BattleFrontier_Text_ObtainedXBattlePoints:
-	.string "{PLAYER} obtained {STR_VAR_1} Battle Point(s).$"
+	.string "{PLAYER} obtained\n"
+	.string "{STR_VAR_1} Battle Point(s).$"
 
 BattleFrontier_BattleTowerLobby_Text_RulesAreListed:
 	.string "The BATTLE TOWER rules are listed.$"

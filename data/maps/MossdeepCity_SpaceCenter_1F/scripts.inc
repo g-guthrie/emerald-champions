@@ -280,7 +280,7 @@ MossdeepCity_SpaceCenter_1F_Text_RocketLaunchImminent:
 
 MossdeepCity_SpaceCenter_1F_Text_SuccessfulLaunchNumber:
 	.string "The rocket launched safely!\n"
-	.string "That's successful launch no. {STR_VAR_1}!$"
+	.string "That's launch no. {STR_VAR_1}!$"
 
 MossdeepCity_SpaceCenter_1F_Text_HaywireButRocketLaunchImminent:
 	.string "I know that things are a little\n"
@@ -291,7 +291,7 @@ MossdeepCity_SpaceCenter_1F_Text_HaywireButSuccessfulLaunchNumber:
 	.string "I know that things are a little\n"
 	.string "haywire right now, but…\p"
 	.string "The rocket launched safely!\n"
-	.string "That's successful launch no. {STR_VAR_1}!$"
+	.string "That's launch no. {STR_VAR_1}!$"
 
 MossdeepCity_SpaceCenter_1F_Text_RocketLaunchDemandsPerfection:
 	.string "A rocket launch demands perfection.\n"

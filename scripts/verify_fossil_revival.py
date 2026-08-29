@@ -8,6 +8,18 @@ ROOT = Path(__file__).resolve().parents[1]
 DEVON = ROOT / "data/maps/RustboroCity_DevonCorp_2F/scripts.inc"
 MANIAC = ROOT / "data/maps/Route114_FossilManiacsTunnel/scripts.inc"
 ROUTE = ROOT / "data/maps/Route114/scripts.inc"
+ACQUISITION_SOURCES = {
+    "ITEM_ROOT_FOSSIL": ("data/maps/MirageTower_4F/scripts.inc", "data/maps/DesertUnderpass/scripts.inc"),
+    "ITEM_CLAW_FOSSIL": ("data/maps/MirageTower_4F/scripts.inc", "data/maps/DesertUnderpass/scripts.inc"),
+    "ITEM_OLD_AMBER": ("data/maps/RustboroCity_Gym/scripts.inc",),
+    **{
+        item: ("data/maps/SandstrewnRuins/map.json",)
+        for item in (
+            "ITEM_HELIX_FOSSIL", "ITEM_DOME_FOSSIL", "ITEM_ARMOR_FOSSIL", "ITEM_SKULL_FOSSIL",
+            "ITEM_COVER_FOSSIL", "ITEM_PLUME_FOSSIL", "ITEM_JAW_FOSSIL", "ITEM_SAIL_FOSSIL",
+        )
+    },
+}
 
 FOSSILS = (
     ("ITEM_ROOT_FOSSIL", 1, "SPECIES_LILEEP", "RootFossil", "Lileep"),
@@ -77,6 +89,10 @@ def main() -> None:
         require(line in finish, f"revival completion is missing: {line}")
 
     for item, revival_id, species, choice_suffix, ready_suffix in FOSSILS:
+        require(
+            any(item in (ROOT / source).read_text() for source in ACQUISITION_SOURCES[item]),
+            f"{item} has no verified Hoenn acquisition source",
+        )
         require(f"checkitem {item}" in scientist, f"Devon does not recognize {item}")
         require(
             f"call_if_eq VAR_RESULT, TRUE, RustboroCity_DevonCorp_2F_EventScript_Push{choice_suffix}"

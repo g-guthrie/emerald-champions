@@ -21,6 +21,7 @@
 #include "constants/rematches.h"
 #include "constants/cries.h"
 #include "constants/flags.h"
+#include "constants/maps.h"
 #include "constants/trainers.h"
 #include "constants/vars.h"
 
@@ -272,6 +273,42 @@ TEST("Emerald Champions legendary requirements accept the whole evolution family
     EXPECT(PlayerPartyHasSpeciesFamily(SPECIES_TAUROS));
 }
 
+TEST("Emerald Champions conditional Signs awaken at their marked place")
+{
+    static const u16 signStateVars[] =
+    {
+        VAR_LEGENDARY_SIGNS_UNLOCKED_0,
+        VAR_LEGENDARY_SIGNS_UNLOCKED_1,
+        VAR_LEGENDARY_SIGNS_UNLOCKED_2,
+        VAR_LEGENDARY_SIGNS_UNLOCKED_3,
+        VAR_LEGENDARY_SIGNS_UNLOCKED_4,
+        VAR_LEGENDARY_SIGNS_UNLOCKED_5,
+        VAR_LEGENDARY_SIGNS_CAUGHT_0,
+        VAR_LEGENDARY_SIGNS_CAUGHT_1,
+        VAR_LEGENDARY_SIGNS_CAUGHT_2,
+        VAR_LEGENDARY_SIGNS_CAUGHT_3,
+        VAR_LEGENDARY_SIGNS_CAUGHT_4,
+        VAR_LEGENDARY_SIGNS_CAUGHT_5,
+    };
+    enum Species species = SPECIES_NONE;
+    u8 level = 0;
+
+    for (u32 i = 0; i < ARRAY_COUNT(signStateVars); i++)
+        VarSet(signStateVars[i], 0);
+    for (u32 i = 0; i < NUM_BADGES; i++)
+        FlagClear(FLAG_BADGE01_GET + i);
+    FlagSet(FLAG_BADGE01_GET);
+
+    ZeroPlayerPartyMons();
+    CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_RIOLU, 20, 0, OTID_STRUCT_PLAYER_ID);
+    gSaveBlock1Ptr->location.mapGroup = MAP_GROUP(MAP_GRANITE_CAVE_B2F);
+    gSaveBlock1Ptr->location.mapNum = MAP_NUM(MAP_GRANITE_CAVE_B2F);
+
+    EXPECT(!IsLegendarySignUnlocked(LEGENDARY_SIGN_COBALION));
+    TryGetLegendarySignWildOverride(WILD_AREA_LAND, &species, &level);
+    EXPECT(IsLegendarySignUnlocked(LEGENDARY_SIGN_COBALION));
+}
+
 TEST("Emerald Champions persists appended legendary sign bits")
 {
     static const u16 vars[] =
@@ -298,6 +335,38 @@ TEST("Emerald Champions persists appended legendary sign bits")
     MarkLegendarySignCaughtBySpecies(SPECIES_KELDEO);
     EXPECT(IsLegendarySignCaught(LEGENDARY_SIGN_KELDEO));
     EXPECT(!IsLegendarySignCaught(LEGENDARY_SIGN_ARCEUS));
+}
+
+TEST("Emerald Champions Arceus mastery requires every finite Sign source")
+{
+    static const u16 caughtVars[] =
+    {
+        VAR_LEGENDARY_SIGNS_CAUGHT_0,
+        VAR_LEGENDARY_SIGNS_CAUGHT_1,
+        VAR_LEGENDARY_SIGNS_CAUGHT_2,
+        VAR_LEGENDARY_SIGNS_CAUGHT_3,
+        VAR_LEGENDARY_SIGNS_CAUGHT_4,
+        VAR_LEGENDARY_SIGNS_CAUGHT_5,
+    };
+
+    ZeroPlayerPartyMons();
+    for (u32 i = 0; i < ARRAY_COUNT(caughtVars); i++)
+        VarSet(caughtVars[i], 0);
+    for (enum LegendarySignId signId = 0; signId < LEGENDARY_SIGN_COUNT; signId++)
+    {
+        if (signId == LEGENDARY_SIGN_ARCEUS || signId == LEGENDARY_SIGN_GENESECT)
+            continue;
+        MarkLegendarySignCaughtBySpecies(gLegendarySignDefinitions[signId].species);
+    }
+
+    TryGiveArceusLegendarySignMasteryReward();
+    EXPECT_EQ(gSpecialVar_Result, 0);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_NONE);
+
+    MarkLegendarySignCaughtBySpecies(SPECIES_GENESECT);
+    TryGiveArceusLegendarySignMasteryReward();
+    EXPECT_EQ(gSpecialVar_Result, 1);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_ARCEUS);
 }
 
 TEST("Emerald Champions imported battle sets remain legal against current data")

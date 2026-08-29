@@ -106,4 +106,6 @@ Route114_FossilManiacsTunnel_Text_NotSafeThatWay:
 	.string "I think there's a giant cavern\n"
 	.string "underneath now…\p"
 	.string "But I've left it alone because I don't\n"
-	.string "think there are any FOSSILS there…$"
+	.string "think there are any FOSSILS there…\p"
+	.string "One new wall mark does resemble\n"
+	.string "LANDORUS. That is not a fossil.$"

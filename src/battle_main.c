@@ -4618,6 +4618,24 @@ static const u8 sBattlerOrders[24][4] =
     { 3, 2, 1, 0 },
 };
 
+static s32 GetWhichBattlerSwitchesFirst(struct BattleCalcValues *calcValues)
+{
+    u32 speed1 = GetBattlerTotalSpeedStat(calcValues->battlerAtk, calcValues->abilities[calcValues->battlerAtk], calcValues->holdEffects[calcValues->battlerAtk]);
+    u32 speed2 = GetBattlerTotalSpeedStat(calcValues->battlerDef, calcValues->abilities[calcValues->battlerDef], calcValues->holdEffects[calcValues->battlerDef]);
+
+    // Modern manual switches use effective Speed (and Trick Room), but not
+    // move-order effects such as Custap, Quick Claw, Stall, or Lagging Tail.
+    if (speed1 == speed2)
+    {
+        s32 order1 = sBattlerOrders[gBattleStruct->speedTieBreaks][calcValues->battlerAtk];
+        s32 order2 = sBattlerOrders[gBattleStruct->speedTieBreaks][calcValues->battlerDef];
+        return order1 < order2 ? 1 : -1;
+    }
+    if (gFieldStatuses & STATUS_FIELD_TRICK_ROOM)
+        return speed1 < speed2 ? 1 : -1;
+    return speed1 > speed2 ? 1 : -1;
+}
+
 s32 GetWhichBattlerFaster(struct BattleCalcValues *calcValues, bool32 ignoreChosenMoves)
 {
     s32 strikesFirst = GetWhichBattlerFasterOrTies(calcValues, ignoreChosenMoves);
@@ -4731,7 +4749,15 @@ static void SetActionsAndBattlersTurnOrder(void)
                     calcValues.battlerAtk = gBattlerByTurnOrder[battler];
                     calcValues.battlerDef = gBattlerByTurnOrder[battler2];
                     TryChangingTurnOrderEffects(&calcValues, quickClawRandom, quickDrawRandom);
-                    if (gActionsByTurnOrder[battler] != B_ACTION_USE_ITEM
+                    if (gActionsByTurnOrder[battler] == B_ACTION_SWITCH
+                        && gActionsByTurnOrder[battler2] == B_ACTION_SWITCH)
+                    {
+                        // Since Gen 4, simultaneous manual switches resolve in
+                        // Speed order instead of Gen 3's battler-slot order.
+                        if (GetWhichBattlerSwitchesFirst(&calcValues) == -1)
+                            SwapTurnOrder(battler, battler2);
+                    }
+                    else if (gActionsByTurnOrder[battler] != B_ACTION_USE_ITEM
                         && gActionsByTurnOrder[battler2] != B_ACTION_USE_ITEM
                         && gActionsByTurnOrder[battler] != B_ACTION_SWITCH
                         && gActionsByTurnOrder[battler2] != B_ACTION_SWITCH

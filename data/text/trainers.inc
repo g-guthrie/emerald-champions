@@ -2706,15 +2706,16 @@ Route119_Text_BrentPostBattle:
 	.string "You'll never understand…$"
 
 Route119_Text_DonaldIntro:
-	.string "So, we finally meet!\n"
-	.string "My BUG POKéMON will keep you company!$"
+	.string "My swarm redirects attacks, spreads\n"
+	.string "sleep, and steals the route's tempo.\p"
+	.string "Try to keep your plan through all three.$"
 
 Route119_Text_DonaldDefeat:
-	.string "I wish we'd never met…$"
+	.string "You found the target behind the swarm…$"
 
 Route119_Text_DonaldPostBattle:
-	.string "I want to MIMIC you some more.\n"
-	.string "Can you hurry up and move?$"
+	.string "Redirection buys time; it does not decide\n"
+	.string "what to do with that time. You did.$"
 
 Route119_Text_TaylorIntro:
 	.string "If you step forward, we step forward.\p"
@@ -2740,27 +2741,29 @@ Route119_Text_DougPostBattle:
 	.string "I hope you enjoyed our performance.$"
 
 Route119_Text_GregIntro:
-	.string "You don't know who I am, do you?\p"
-	.string "But, I also don't know you.\n"
-	.string "So, we'll battle!$"
+	.string "First I copy your pace with TAILWIND.\n"
+	.string "Then my screens copy your defenses.\p"
+	.string "Show me the move I cannot mimic.$"
 
 Route119_Text_GregDefeat:
-	.string "You're pretty strong!$"
+	.string "You attacked around every reflection…$"
 
 Route119_Text_GregPostBattle:
-	.string "Until you go away somewhere, we'll\n"
-	.string "keep on mimicking your every move.$"
+	.string "Screens soften power, not judgment.\n"
+	.string "Your choices stayed sharper than mine.$"
 
 Route119_Text_KentIntro:
-	.string "The MIMIC CIRCLE was formed by people\n"
-	.string "who like to MIMIC.\p"
-	.string "A battle starts the instant we meet!$"
+	.string "One shell accelerates. One empty shell\n"
+	.string "refuses almost every attack.\p"
+	.string "Read which threat is real before the\n"
+	.string "forest catches fire.$"
 
 Route119_Text_KentDefeat:
-	.string "I give up!$"
+	.string "You identified the real threat…$"
 
 Route119_Text_KentPostBattle:
-	.string "Won't you join our MIMIC CIRCLE?$"
+	.string "A strange gimmick is only dangerous once\n"
+	.string "if the opponent learns its question.$"
 
 Route119_Text_JacksonIntro:
 	.string "Who has the knowledge and\n"
@@ -2849,28 +2852,28 @@ Route119_Text_PhilPostBattle:
 	.string "admired BIRD POKéMON…$"
 
 Route119_Text_YasuIntro:
-	.string "To lurk in shadows, and live in\n"
-	.string "darkness… That is my destiny.\p"
-	.string "I emerge to challenge you!$"
+	.string "One shadow changes type. One erases\n"
+	.string "boosts. One turns precision into power.\p"
+	.string "A ninja survives by changing roles.$"
 
 Route119_Text_YasuDefeat:
-	.string "I admit defeat!$"
+	.string "You saw every role before it changed…$"
 
 Route119_Text_YasuPostBattle:
-	.string "Those defeated in battle withdraw\n"
-	.string "quietly back into the shadows.\l"
-	.string "That, too, is destiny…$"
+	.string "Flexibility is not randomness. Each form\n"
+	.string "must answer a specific threat.$"
 
 Route119_Text_TakashiIntro:
-	.string "If you're not on your guard,\n"
-	.string "you're in for some pain!$"
+	.string "First I silence every Ability. Then sand\n"
+	.string "turns the route against both sides.\p"
+	.string "Can your plan survive losing its premise?$"
 
 Route119_Text_TakashiDefeat:
-	.string "You're surprisingly good!$"
+	.string "Your plan survived without its premise…$"
 
 Route119_Text_TakashiPostBattle:
-	.string "My surprise attack ended in\n"
-	.string "failure…$"
+	.string "Suppression punishes dependence, but\n"
+	.string "punishes my own team if timed badly.$"
 
 Route119_Text_HideoIntro:
 	.string "To hide a tree, use a forest!$"
@@ -2900,18 +2903,16 @@ Route119_Text_ChrisPostBattle:
 	.string "It's an indescribably luxuriant moment!$"
 
 Route119_Text_FabianIntro:
-	.string "Hit me with a power chord!\n"
-	.string "Victory is mine!\l"
-	.string "It's our time to shine, whoa, yeah!$"
+	.string "My rhythm is thunder, voice, and wind.\n"
+	.string "LIGHTNING ROD keeps the band in tune.\p"
+	.string "Try to break the chorus.$"
 
 Route119_Text_FabianDefeat:
-	.string "You showed me who's the boss!\n"
-	.string "We'll have to take the loss, oh, no!$"
+	.string "You cut the power before the last chord!$"
 
 Route119_Text_FabianPostBattle:
-	.string "Hit me with another power chord!\n"
-	.string "Leave me alone!\l"
-	.string "Your win you have to atone!$"
+	.string "A doubles team is a band: each part can\n"
+	.string "solo, but the arrangement wins.$"
 
 Route119_Text_DaytonIntro:
 	.string "Hohoho!\n"
@@ -2928,17 +2929,16 @@ Route119_Text_DaytonPostBattle:
 	.string "TRAINERS like you!$"
 
 Route119_Text_RachelIntro:
-	.string "Wherever and whenever I may be,\n"
-	.string "I always have my parasol in hand.$"
+	.string "My parasol is for more than rain.\n"
+	.string "This whole team changes with weather.\p"
+	.string "Choose the forecast you can survive.$"
 
 Route119_Text_RachelDefeat:
-	.string "Oh, but…\n"
-	.string "That's not fair.$"
+	.string "You made my own forecast unsafe…$"
 
 Route119_Text_RachelPostBattle:
-	.string "You're asking if my parasol is heavy?\n"
-	.string "Your BAG is filled with more junk than\l"
-	.string "I ever carry around.$"
+	.string "Weather should create options, not force\n"
+	.string "one script. Your team found another.$"
 
 Route120_Text_ColinIntro:
 	.string "Do you have any moves that can strike\n"

@@ -2,6 +2,48 @@
 #include "test/battle.h"
 #include "battle_ai_util.h"
 
+AI_DOUBLE_BATTLE_TEST("AI coordinates complementary Pledge moves even when both users have stronger physical STAB")
+{
+    u32 reverseOrderChance;
+
+    PARAMETRIZE { reverseOrderChance = 0; }
+    PARAMETRIZE { reverseOrderChance = 100; }
+
+    GIVEN {
+        WITH_CONFIG(AI_REVERSE_BATTLER_LOGIC_ORDER_CHANCE, reverseOrderChance);
+        ASSUME(GetMoveEffect(MOVE_GRASS_PLEDGE) == EFFECT_PLEDGE);
+        ASSUME(GetMoveEffect(MOVE_FIRE_PLEDGE) == EFFECT_PLEDGE);
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_DOUBLE_BATTLE);
+        PLAYER(SPECIES_WOBBUFFET) { HP(400); }
+        PLAYER(SPECIES_WOBBUFFET) { HP(400); }
+        OPPONENT(SPECIES_THWACKEY) { Attack(120); SpAttack(40); Moves(MOVE_GRASS_PLEDGE, MOVE_WOOD_HAMMER, MOVE_PROTECT); }
+        OPPONENT(SPECIES_RABOOT) { Attack(120); SpAttack(40); Moves(MOVE_FIRE_PLEDGE, MOVE_FLARE_BLITZ, MOVE_PROTECT); }
+    } WHEN {
+        TURN {
+            EXPECT_MOVE(opponentLeft, MOVE_GRASS_PLEDGE);
+            EXPECT_MOVE(opponentRight, MOVE_FIRE_PLEDGE);
+        }
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("AI only targets its ally with Decorate")
+{
+    GIVEN {
+        ASSUME_STAT_CHANGE(MOVE_DECORATE, attack: +2, spAtk: +2);
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_DOUBLE_BATTLE);
+        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
+        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_ALCREMIE) { Moves(MOVE_DECORATE, MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_TAUROS) { Moves(MOVE_TACKLE); }
+    } WHEN {
+        TURN {
+            EXPECT_MOVE(opponentLeft, MOVE_DECORATE, target: opponentRight);
+            SCORE_EQ_VAL(opponentLeft, MOVE_DECORATE, 0, target: playerLeft);
+            SCORE_EQ_VAL(opponentLeft, MOVE_DECORATE, 0, target: playerRight);
+        }
+    }
+}
+
 AI_DOUBLE_BATTLE_TEST("AI won't use a Weather changing move if partner already chose such move")
 {
     enum Move j, k;

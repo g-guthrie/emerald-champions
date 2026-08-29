@@ -129,7 +129,11 @@ GraniteCave_StevensRoom_Text_RegisteredSteven:
 
 GraniteCave_StevensRoom_Text_IveGotToHurryAlong:
 	.string "I am heading east. MAGMA and AQUA are\n"
-	.string "disturbing more than land and sea.$"
+	.string "disturbing more than land and sea.\p"
+	.string "One lower-cave mark sketches LUCARIO.\n"
+	.string "Bring that family back to the bedrock.\p"
+	.string "A local SIGN can awaken by itself;\n"
+	.string "DEVON is an oracle, not a requirement.$"
 
 GraniteCave_StevensRoom_Text_OhBagIsFull:
 	.string "Your BAG is full. Make room and return;\n"

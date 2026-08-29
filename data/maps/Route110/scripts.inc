@@ -952,7 +952,9 @@ Route110_Text_SeasideParkingSign:
 
 Route110_Text_MauvilleCitySign:
 	.string "ROUTE 110\n"
-	.string "{UP_ARROW} MAUVILLE CITY$"
+	.string "{UP_ARROW} MAUVILLE CITY\p"
+	.string "A scorched note pairs this route's\n"
+	.string "lightning with MANECTRIC and RAICHU.$"
 
 Route110_Text_TrainerTipsPrlzSleep:
 	.string "TRAINER TIPS\p"

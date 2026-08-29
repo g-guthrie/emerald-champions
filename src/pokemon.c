@@ -1521,7 +1521,11 @@ u8 GetLevelFromBoxMonExp(struct BoxPokemon *boxMon)
 
 u16 GiveMoveToMon(struct Pokemon *mon, enum Move move)
 {
-    return GiveMoveToBoxMon(&mon->box, move);
+    u16 result = GiveMoveToBoxMon(&mon->box, move);
+
+    if (result == move)
+        TryFormChangeOnMove(mon, move, B_TRAINER_PLAYER);
+    return result;
 }
 
 u16 GiveMoveToBoxMon(struct BoxPokemon *boxMon, enum Move move)
@@ -1563,7 +1567,14 @@ u16 GiveMoveToBattleMon(struct BattlePokemon *mon, enum Move move)
 
 void SetMonMoveSlot(struct Pokemon *mon, enum Move move, u8 slot)
 {
+    enum Move oldMove = GetMonData(mon, MON_DATA_MOVE1 + slot);
+
     SetBoxMonMoveSlot(&mon->box, move, slot);
+    if (oldMove != move)
+    {
+        TryFormChangeOnMove(mon, oldMove, B_TRAINER_PLAYER);
+        TryFormChangeOnMove(mon, move, B_TRAINER_PLAYER);
+    }
 }
 
 void SetBoxMonMoveSlot(struct BoxPokemon *mon, enum Move move, u8 slot)
@@ -5932,8 +5943,10 @@ u8 GetFormIdFromFormSpeciesId(enum Species formSpeciesId)
     return targetFormId;
 }
 
-// Returns the current species if no form change is possible
-enum Species GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *boxMon, enum FormChanges method)
+// Returns the current species if no form change is possible.
+// changedMove is only used by FORM_CHANGE_MOVE. The final moveset determines
+// whether that move was learned or forgotten.
+static enum Species GetFormChangeTargetSpeciesBoxMonWithMove(struct BoxPokemon *boxMon, enum FormChanges method, enum Move changedMove)
 {
     enum Species species = GetBoxMonData(boxMon, MON_DATA_SPECIES, NULL);
     const struct FormChange *formChanges = GetSpeciesFormChanges(species);
@@ -5950,9 +5963,19 @@ enum Species GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *boxMon, enum Fo
         .partyItemUsed = gSpecialVar_ItemId,
         .multichoiceSelection = gSpecialVar_Result,
         .status = GetBoxMonData(boxMon, MON_DATA_STATUS),
+        .learnedMove = changedMove,
     };
 
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+        ctx.moves[i] = GetBoxMonData(boxMon, MON_DATA_MOVE1 + i);
+
     return GetFormChangeTargetSpecies_Internal(ctx);
+}
+
+// Returns the current species if no form change is possible
+enum Species GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *boxMon, enum FormChanges method)
+{
+    return GetFormChangeTargetSpeciesBoxMonWithMove(boxMon, method, MOVE_NONE);
 }
 
 // Returns the current species if no form change is possible
@@ -6029,9 +6052,24 @@ enum Species GetFormChangeTargetSpecies_Internal(struct FormChangeContext ctx)
             }
             break;
         case FORM_CHANGE_MOVE:
-            if (ctx.learnedMove != formChanges[i].param2)
+        {
+            bool32 knowsMove = FALSE;
+
+            if (ctx.learnedMove != formChanges[i].param1)
+                break;
+            for (u32 j = 0; j < MAX_MON_MOVES; j++)
+            {
+                if (ctx.moves[j] == formChanges[i].param1)
+                {
+                    knowsMove = TRUE;
+                    break;
+                }
+            }
+            if ((formChanges[i].param2 == WHEN_LEARNED && knowsMove)
+             || (formChanges[i].param2 == WHEN_FORGOTTEN && !knowsMove))
                 targetSpecies = formChanges[i].targetSpecies;
             break;
+        }
         case FORM_CHANGE_BEGIN_BATTLE:
         case FORM_CHANGE_END_BATTLE:
             if (ctx.heldItem == formChanges[i].param1 || formChanges[i].param1 == ITEM_NONE)
@@ -6312,6 +6350,9 @@ static struct PartyState *GetBattlerPartyStateByPokemon(struct Pokemon *partyMon
 {
     struct Pokemon *party = GetTrainerParty(trainer);
 
+    if (gBattleStruct == NULL)
+        return NULL;
+
     for (int i = 0; i < PARTY_SIZE; i++)
     {
         struct Pokemon *mon = &party[i];
@@ -6321,14 +6362,14 @@ static struct PartyState *GetBattlerPartyStateByPokemon(struct Pokemon *partyMon
     return NULL;
 }
 
-bool32 TryFormChange(struct Pokemon *mon, enum FormChanges method, enum BattleTrainer trainer)
+static bool32 TryFormChangeInternal(struct Pokemon *mon, enum FormChanges method, enum Move changedMove, enum BattleTrainer trainer)
 {
     if (GetMonData(mon, MON_DATA_SPECIES_OR_EGG, 0) == SPECIES_NONE
      || GetMonData(mon, MON_DATA_SPECIES_OR_EGG, 0) == SPECIES_EGG)
         return FALSE;
 
     enum Species currentSpecies = GetMonData(mon, MON_DATA_SPECIES);
-    enum Species targetSpecies = GetFormChangeTargetSpecies(mon, method);
+    enum Species targetSpecies = GetFormChangeTargetSpeciesBoxMonWithMove(&mon->box, method, changedMove);
 
     struct PartyState *battlePartyState = GetBattlerPartyStateByPokemon(mon, trainer);
     // If the battle ends, and there's not a specified species to change back to,
@@ -6359,14 +6400,26 @@ bool32 TryFormChange(struct Pokemon *mon, enum FormChanges method, enum BattleTr
     return FALSE;
 }
 
-bool32 TryBoxMonFormChange(struct BoxPokemon *boxMon, enum FormChanges method)
+bool32 TryFormChange(struct Pokemon *mon, enum FormChanges method, enum BattleTrainer trainer)
+{
+    return TryFormChangeInternal(mon, method, MOVE_NONE, trainer);
+}
+
+bool32 TryFormChangeOnMove(struct Pokemon *mon, enum Move changedMove, enum BattleTrainer trainer)
+{
+    if (changedMove == MOVE_NONE)
+        return FALSE;
+    return TryFormChangeInternal(mon, FORM_CHANGE_MOVE, changedMove, trainer);
+}
+
+static bool32 TryBoxMonFormChangeInternal(struct BoxPokemon *boxMon, enum FormChanges method, enum Move changedMove)
 {
     if (GetBoxMonData(boxMon, MON_DATA_SPECIES_OR_EGG, 0) == SPECIES_NONE
      || GetBoxMonData(boxMon, MON_DATA_SPECIES_OR_EGG, 0) == SPECIES_EGG)
         return FALSE;
 
     enum Species currentSpecies = GetBoxMonData(boxMon, MON_DATA_SPECIES, NULL);
-    enum Species targetSpecies = GetFormChangeTargetSpeciesBoxMon(boxMon, method);
+    enum Species targetSpecies = GetFormChangeTargetSpeciesBoxMonWithMove(boxMon, method, changedMove);
 
     assertf(targetSpecies != SPECIES_NONE, "form change target returned NONE. cur:%d, method:%d", currentSpecies, method)
     {
@@ -6379,6 +6432,18 @@ bool32 TryBoxMonFormChange(struct BoxPokemon *boxMon, enum FormChanges method)
         return TRUE;
     }
     return FALSE;
+}
+
+bool32 TryBoxMonFormChange(struct BoxPokemon *boxMon, enum FormChanges method)
+{
+    return TryBoxMonFormChangeInternal(boxMon, method, MOVE_NONE);
+}
+
+bool32 TryBoxMonFormChangeOnMove(struct BoxPokemon *boxMon, enum Move changedMove)
+{
+    if (changedMove == MOVE_NONE)
+        return FALSE;
+    return TryBoxMonFormChangeInternal(boxMon, FORM_CHANGE_MOVE, changedMove);
 }
 
 enum Species SanitizeSpeciesId(enum Species species)

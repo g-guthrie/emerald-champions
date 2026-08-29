@@ -5,6 +5,7 @@
 #include "pokemon.h"
 #include "random.h"
 #include "string_util.h"
+#include "constants/battle.h"
 #include "constants/hold_effects.h"
 #include "constants/items.h"
 
@@ -307,6 +308,10 @@ static u8 ApplyPreset(
     SetMonData(mon, MON_DATA_PP_BONUSES, &ppBonuses);
     for (u32 i = 0; i < MAX_MON_MOVES; i++)
         SetMonMoveSlot(mon, preset->moves[i], i);
+    // Normalize move-driven forms even when the authored move already occupied
+    // the same slot and SetMonMoveSlot therefore had no transition to observe.
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+        TryFormChangeOnMove(mon, preset->moves[i], B_TRAINER_PLAYER);
     SetMonData(mon, MON_DATA_HIDDEN_NATURE, &preset->nature);
     SetMonData(mon, MON_DATA_ABILITY_NUM, &abilitySlot);
     SetMonData(mon, MON_DATA_HP_EV, &preset->statPoints[0]);

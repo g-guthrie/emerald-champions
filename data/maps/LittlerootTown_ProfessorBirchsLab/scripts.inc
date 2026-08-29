@@ -4,13 +4,14 @@ LittlerootTown_ProfessorBirchsLab_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, LittlerootTown_ProfessorBirchsLab_OnFrame
 	.byte 0
 
-	@ State descriptions for VAR_DEX_UPGRADE_JOHTO_STARTER_STATE
-	@ 1: Beat Elite Four, Dex upgrade ready
-	@ 2: Received National Dex
-	@ 3: Left lab after receiving National Dex
-	@ 4: Entered lab after catching all Hoenn mons
-	@ 5: Birch told player to choose Johto starter
-	@ 6: Chose Johto starter
+	@ State descriptions for VAR_BIRCH_POSTGAME_RESEARCH_STATE
+	@ The numeric states are preserved for old-save compatibility.
+	@ 1: Beat Elite Four, final field-note sync ready
+	@ 2: Synchronized the postgame research notes
+	@ 3: Left lab after the research sync
+	@ 4: Entered lab after catching every Hoenn species
+	@ 5: Legendary Form Research Kit offered or partially delivered
+	@ 6: Legendary Form Research Kit fully delivered
 
 	@ State descriptions for VAR_BIRCH_LAB_STATE
 	@ 1: Never occurs
@@ -22,40 +23,62 @@ LittlerootTown_ProfessorBirchsLab_MapScripts::
 LittlerootTown_ProfessorBirchsLab_OnTransition:
 	call Common_EventScript_SetupRivalGfxId
 	call ProfBirch_EventScript_UpdateLocation
-	goto_if_ge VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6, LittlerootTown_ProfessorBirchsLab_EventScript_SetAfterJohtoStarterLayout
-	goto_if_ge VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 4, LittlerootTown_ProfessorBirchsLab_EventScript_SetJohtoStarterLayout
-	goto_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 3, LittlerootTown_ProfessorBirchsLab_EventScript_CheckReadyForJohtoStarter
+	call_if_ge VAR_BIRCH_POSTGAME_RESEARCH_STATE, 6, LittlerootTown_ProfessorBirchsLab_EventScript_MigrateLegacyResearchReward
+	goto_if_ge VAR_BIRCH_POSTGAME_RESEARCH_STATE, 6, LittlerootTown_ProfessorBirchsLab_EventScript_SetAfterResearchRewardLayout
+	goto_if_ge VAR_BIRCH_POSTGAME_RESEARCH_STATE, 4, LittlerootTown_ProfessorBirchsLab_EventScript_SetResearchRewardLayout
+	goto_if_eq VAR_BIRCH_POSTGAME_RESEARCH_STATE, 3, LittlerootTown_ProfessorBirchsLab_EventScript_CheckReadyForResearchReward
 	end
 
-LittlerootTown_ProfessorBirchsLab_EventScript_CheckReadyForJohtoStarter::
+LittlerootTown_ProfessorBirchsLab_EventScript_CheckReadyForResearchReward::
 	specialvar VAR_RESULT, HasAllHoennMons
-	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_SetReadyForJohtoStarter
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_SetReadyForResearchReward
 	setobjectmovementtype LOCALID_BIRCHS_LAB_RIVAL, MOVEMENT_TYPE_WANDER_UP_AND_DOWN
 	setobjectxyperm LOCALID_BIRCHS_LAB_RIVAL, 5, 10
 	end
 
-LittlerootTown_ProfessorBirchsLab_EventScript_SetReadyForJohtoStarter::
-	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 4
-	goto LittlerootTown_ProfessorBirchsLab_EventScript_SetJohtoStarterLayout
+LittlerootTown_ProfessorBirchsLab_EventScript_SetReadyForResearchReward::
+	setvar VAR_BIRCH_POSTGAME_RESEARCH_STATE, 4
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_SetResearchRewardLayout
 
-LittlerootTown_ProfessorBirchsLab_EventScript_SetJohtoStarterLayout::
+LittlerootTown_ProfessorBirchsLab_EventScript_SetResearchRewardLayout::
 	setmaplayoutindex LAYOUT_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB_WITH_TABLE
 	end
 
-LittlerootTown_ProfessorBirchsLab_EventScript_SetAfterJohtoStarterLayout::
+LittlerootTown_ProfessorBirchsLab_EventScript_SetAfterResearchRewardLayout::
 	setmaplayoutindex LAYOUT_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB_WITH_TABLE
 	setobjectmovementtype LOCALID_BIRCHS_LAB_RIVAL, MOVEMENT_TYPE_WANDER_UP_AND_DOWN
 	setobjectxyperm LOCALID_BIRCHS_LAB_RIVAL, 5, 10
 	end
+
+@ State 6 used to mean that an old save had claimed one Johto starter.  The
+@ value remains valid, but those players must still be able to claim the new
+@ finite research tools.  Key Items cannot be discarded, so owning all five is
+@ a durable completion marker and needs no additional flag.
+LittlerootTown_ProfessorBirchsLab_EventScript_MigrateLegacyResearchReward::
+	checkitem ITEM_DNA_SPLICERS, 1
+	goto_if_eq VAR_RESULT, FALSE, LittlerootTown_ProfessorBirchsLab_EventScript_ReopenResearchReward
+	checkitem ITEM_ZYGARDE_CUBE, 1
+	goto_if_eq VAR_RESULT, FALSE, LittlerootTown_ProfessorBirchsLab_EventScript_ReopenResearchReward
+	checkitem ITEM_N_SOLARIZER, 1
+	goto_if_eq VAR_RESULT, FALSE, LittlerootTown_ProfessorBirchsLab_EventScript_ReopenResearchReward
+	checkitem ITEM_N_LUNARIZER, 1
+	goto_if_eq VAR_RESULT, FALSE, LittlerootTown_ProfessorBirchsLab_EventScript_ReopenResearchReward
+	checkitem ITEM_REINS_OF_UNITY, 1
+	goto_if_eq VAR_RESULT, FALSE, LittlerootTown_ProfessorBirchsLab_EventScript_ReopenResearchReward
+	return
+
+LittlerootTown_ProfessorBirchsLab_EventScript_ReopenResearchReward::
+	setvar VAR_BIRCH_POSTGAME_RESEARCH_STATE, 5
+	return
 
 LittlerootTown_ProfessorBirchsLab_OnWarp:
 	map_script_2 VAR_BIRCH_LAB_STATE, 2, LittlerootTown_ProfessorBirchsLab_EventScript_SetPlayerPosForReceiveStarter
-	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 1, LittlerootTown_ProfessorBirchsLab_EventScript_SetObjectPosForDexUpgrade
-	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2, LittlerootTown_ProfessorBirchsLab_EventScript_SetObjectPosForDexUpgrade
-	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 3, LittlerootTown_ProfessorBirchsLab_EventScript_AddRivalObject
-	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6, LittlerootTown_ProfessorBirchsLab_EventScript_AddRivalObject
-	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 4, LittlerootTown_ProfessorBirchsLab_EventScript_SetObjectPosForJohtoStarters
-	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 5, LittlerootTown_ProfessorBirchsLab_EventScript_SetObjectPosForJohtoStarters
+	map_script_2 VAR_BIRCH_POSTGAME_RESEARCH_STATE, 1, LittlerootTown_ProfessorBirchsLab_EventScript_SetObjectPosForDexUpgrade
+	map_script_2 VAR_BIRCH_POSTGAME_RESEARCH_STATE, 2, LittlerootTown_ProfessorBirchsLab_EventScript_SetObjectPosForDexUpgrade
+	map_script_2 VAR_BIRCH_POSTGAME_RESEARCH_STATE, 3, LittlerootTown_ProfessorBirchsLab_EventScript_AddRivalObject
+	map_script_2 VAR_BIRCH_POSTGAME_RESEARCH_STATE, 6, LittlerootTown_ProfessorBirchsLab_EventScript_AddRivalObject
+	map_script_2 VAR_BIRCH_POSTGAME_RESEARCH_STATE, 4, LittlerootTown_ProfessorBirchsLab_EventScript_SetObjectPosForResearchReward
+	map_script_2 VAR_BIRCH_POSTGAME_RESEARCH_STATE, 5, LittlerootTown_ProfessorBirchsLab_EventScript_SetObjectPosForResearchReward
 	.2byte 0
 
 LittlerootTown_ProfessorBirchsLab_EventScript_SetPlayerPosForReceiveStarter::
@@ -78,17 +101,8 @@ LittlerootTown_ProfessorBirchsLab_EventScript_AddRivalObject::
 	addobject LOCALID_BIRCHS_LAB_RIVAL
 	end
 
-LittlerootTown_ProfessorBirchsLab_EventScript_SetObjectPosForJohtoStarters::
-	addobject LOCALID_BIRCHS_LAB_CYNDAQUIL_BALL
-	addobject LOCALID_BIRCHS_LAB_TOTODILE_BALL
-	addobject LOCALID_BIRCHS_LAB_CHIKORITA_BALL
+LittlerootTown_ProfessorBirchsLab_EventScript_SetObjectPosForResearchReward::
 	addobject LOCALID_BIRCHS_LAB_RIVAL
-	turnobject LOCALID_BIRCHS_LAB_CYNDAQUIL_BALL, DIR_SOUTH
-	setobjectxy LOCALID_BIRCHS_LAB_CYNDAQUIL_BALL, 8, 4
-	turnobject LOCALID_BIRCHS_LAB_TOTODILE_BALL, DIR_SOUTH
-	setobjectxy LOCALID_BIRCHS_LAB_TOTODILE_BALL, 9, 4
-	turnobject LOCALID_BIRCHS_LAB_CHIKORITA_BALL, DIR_SOUTH
-	setobjectxy LOCALID_BIRCHS_LAB_CHIKORITA_BALL, 10, 4
 	turnobject LOCALID_BIRCHS_LAB_BIRCH, DIR_SOUTH
 	setobjectxy LOCALID_BIRCHS_LAB_BIRCH, 6, 4
 	turnobject LOCALID_BIRCHS_LAB_RIVAL, DIR_EAST
@@ -98,8 +112,8 @@ LittlerootTown_ProfessorBirchsLab_EventScript_SetObjectPosForJohtoStarters::
 LittlerootTown_ProfessorBirchsLab_OnFrame:
 	map_script_2 VAR_BIRCH_LAB_STATE, 2, LittlerootTown_ProfessorBirchsLab_EventScript_GiveStarterEvent
 	map_script_2 VAR_BIRCH_LAB_STATE, 4, LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedexEvent
-	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 1, LittlerootTown_ProfessorBirchsLab_EventScript_UpgradeToNationalDex
-	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 4, LittlerootTown_ProfessorBirchsLab_EventScript_ChooseJohtoStarter
+	map_script_2 VAR_BIRCH_POSTGAME_RESEARCH_STATE, 1, LittlerootTown_ProfessorBirchsLab_EventScript_UpgradeToNationalDex
+	map_script_2 VAR_BIRCH_POSTGAME_RESEARCH_STATE, 4, LittlerootTown_ProfessorBirchsLab_EventScript_OfferResearchReward
 	.2byte 0
 
 @ The starter is technically given prior to this on Route 101 by special ChooseStarter
@@ -199,7 +213,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_UpgradeToNationalDex::
 	closemessage
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCH
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_RIVAL
-	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2
+	setvar VAR_BIRCH_POSTGAME_RESEARCH_STATE, 2
 	setvar VAR_SCOTT_BF_CALL_STEP_COUNTER, 0
 	setflag FLAG_SCOTT_CALL_BATTLE_FRONTIER
 	releaseall
@@ -247,16 +261,15 @@ LittlerootTown_ProfessorBirchsLab_Movement_BirchReturnPokedex:
 	walk_in_place_faster_down
 	step_end
 
-LittlerootTown_ProfessorBirchsLab_EventScript_ChooseJohtoStarter::
+LittlerootTown_ProfessorBirchsLab_EventScript_OfferResearchReward::
 	lockall
-	applymovement LOCALID_PLAYER, LittlerootTown_ProfessorBirchsLab_Movement_PlayerEnterLabForJohtoStarter
+	applymovement LOCALID_PLAYER, LittlerootTown_ProfessorBirchsLab_Movement_PlayerEnterLabForResearchReward
 	waitmovement 0
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_CompletedDexChoosePokemon, MSGBOX_DEFAULT
-	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 5
-	releaseall
-	end
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_CompletedDexResearchReward, MSGBOX_DEFAULT
+	setvar VAR_BIRCH_POSTGAME_RESEARCH_STATE, 5
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_TryGiveResearchReward
 
-LittlerootTown_ProfessorBirchsLab_Movement_PlayerEnterLabForJohtoStarter:
+LittlerootTown_ProfessorBirchsLab_Movement_PlayerEnterLabForResearchReward:
 	walk_up
 	walk_up
 	walk_up
@@ -286,193 +299,71 @@ LittlerootTown_ProfessorBirchsLab_EventScript_AideReceivedStarter::
 	release
 	end
 
+@ The three historical Johto-starter objects remain hidden in map data so old
+@ save/object IDs stay stable.  If a debug or legacy state exposes one, it now
+@ resumes the same finite research reward instead of reviving deleted content.
 LittlerootTown_ProfessorBirchsLab_EventScript_Cyndaquil::
-	release
-	goto_if_ge VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6, LittlerootTown_ProfessorBirchsLab_EventScript_AlreadyChoseJohtoStarter
-	applymovement LOCALID_BIRCHS_LAB_BIRCH, Common_Movement_WalkInPlaceFasterRight
-	waitmovement 0
-	showmonpic SPECIES_CYNDAQUIL, 10, 3
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_YoullTakeCyndaquil, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_TakeYourTime
-	goto LittlerootTown_ProfessorBirchsLab_EventScript_GiveCyndaquil
-	end
-
 LittlerootTown_ProfessorBirchsLab_EventScript_Totodile::
-	release
-	goto_if_ge VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6, LittlerootTown_ProfessorBirchsLab_EventScript_AlreadyChoseJohtoStarter
-	applymovement LOCALID_BIRCHS_LAB_BIRCH, Common_Movement_WalkInPlaceFasterRight
-	waitmovement 0
-	showmonpic SPECIES_TOTODILE, 10, 3
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_YoullTakeTotodile, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_TakeYourTime
-	goto LittlerootTown_ProfessorBirchsLab_EventScript_GiveTotodile
-	end
-
 LittlerootTown_ProfessorBirchsLab_EventScript_Chikorita::
-	release
-	goto_if_ge VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6, LittlerootTown_ProfessorBirchsLab_EventScript_AlreadyChoseJohtoStarter
-	applymovement LOCALID_BIRCHS_LAB_BIRCH, Common_Movement_WalkInPlaceFasterRight
-	waitmovement 0
-	showmonpic SPECIES_CHIKORITA, 10, 3
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_YoullTakeChikorita, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_TakeYourTime
-	goto LittlerootTown_ProfessorBirchsLab_EventScript_GiveChikorita
-	end
+	lock
+	faceplayer
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_ResearchRewardWaiting
 
-LittlerootTown_ProfessorBirchsLab_EventScript_AlreadyChoseJohtoStarter::
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_BetterLeaveOthersAlone, MSGBOX_DEFAULT
+LittlerootTown_ProfessorBirchsLab_EventScript_ResearchRewardWaiting::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_ResearchRewardWaiting, MSGBOX_DEFAULT
+
+@ Deliver each tool independently.  If the Key Items pocket fills partway,
+@ state 5 and the per-item ownership checks make the reward exactly-once and
+@ resumable without duplicating anything already received.
+LittlerootTown_ProfessorBirchsLab_EventScript_TryGiveResearchReward::
+	checkitem ITEM_DNA_SPLICERS, 1
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TryGiveZygardeCube
+	giveitem ITEM_DNA_SPLICERS
+	goto_if_eq VAR_RESULT, FALSE, LittlerootTown_ProfessorBirchsLab_EventScript_ResearchRewardBagFull
+
+LittlerootTown_ProfessorBirchsLab_EventScript_TryGiveZygardeCube::
+	checkitem ITEM_ZYGARDE_CUBE, 1
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TryGiveNSolarizer
+	giveitem ITEM_ZYGARDE_CUBE
+	goto_if_eq VAR_RESULT, FALSE, LittlerootTown_ProfessorBirchsLab_EventScript_ResearchRewardBagFull
+
+LittlerootTown_ProfessorBirchsLab_EventScript_TryGiveNSolarizer::
+	checkitem ITEM_N_SOLARIZER, 1
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TryGiveNLunarizer
+	giveitem ITEM_N_SOLARIZER
+	goto_if_eq VAR_RESULT, FALSE, LittlerootTown_ProfessorBirchsLab_EventScript_ResearchRewardBagFull
+
+LittlerootTown_ProfessorBirchsLab_EventScript_TryGiveNLunarizer::
+	checkitem ITEM_N_LUNARIZER, 1
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_TryGiveReinsOfUnity
+	giveitem ITEM_N_LUNARIZER
+	goto_if_eq VAR_RESULT, FALSE, LittlerootTown_ProfessorBirchsLab_EventScript_ResearchRewardBagFull
+
+LittlerootTown_ProfessorBirchsLab_EventScript_TryGiveReinsOfUnity::
+	checkitem ITEM_REINS_OF_UNITY, 1
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_ResearchRewardComplete
+	giveitem ITEM_REINS_OF_UNITY
+	goto_if_eq VAR_RESULT, FALSE, LittlerootTown_ProfessorBirchsLab_EventScript_ResearchRewardBagFull
+
+LittlerootTown_ProfessorBirchsLab_EventScript_ResearchRewardComplete::
+	setvar VAR_BIRCH_POSTGAME_RESEARCH_STATE, 6
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_ResearchRewardComplete, MSGBOX_DEFAULT
 	releaseall
 	end
 
-LittlerootTown_ProfessorBirchsLab_EventScript_TakeYourTime::
-	hidemonpic
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_TakeYourTimeAllInvaluable, MSGBOX_DEFAULT
+LittlerootTown_ProfessorBirchsLab_EventScript_ResearchRewardBagFull::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_ResearchRewardBagFull, MSGBOX_DEFAULT
 	releaseall
 	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_GiveCyndaquil::
-	bufferspeciesname STR_VAR_1, SPECIES_CYNDAQUIL
-	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_CYNDAQUIL
-	givemon SPECIES_CYNDAQUIL, 5
-	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, LittlerootTown_ProfessorBirchsLab_EventScript_SendCyndaquilToParty
-	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, LittlerootTown_ProfessorBirchsLab_EventScript_SendCyndaquilToPC
-	hidemonpic
-	goto Common_EventScript_NoMoreRoomForPokemon
-	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_SendCyndaquilToParty::
-	call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter
-	removeobject LOCALID_BIRCHS_LAB_CYNDAQUIL_BALL
-	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedCyndaquil
-	call Common_EventScript_GetGiftMonPartySlot
-	call Common_EventScript_NameReceivedPartyMon
-	goto LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedCyndaquil
-	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_SendCyndaquilToPC::
-	call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter
-	removeobject LOCALID_BIRCHS_LAB_CYNDAQUIL_BALL
-	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_CyndaquilTransferredToPC
-	call Common_EventScript_NameReceivedBoxMon
-	goto LittlerootTown_ProfessorBirchsLab_EventScript_CyndaquilTransferredToPC
-	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_CyndaquilTransferredToPC::
-	call Common_EventScript_TransferredToPC
-	goto LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedCyndaquil
-	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedCyndaquil::
-	hidemonpic
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_GrassyPatchWaiting, MSGBOX_DEFAULT
-	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6
-	releaseall
-	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_GiveTotodile::
-	bufferspeciesname STR_VAR_1, SPECIES_TOTODILE
-	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_TOTODILE
-	givemon SPECIES_TOTODILE, 5
-	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, LittlerootTown_ProfessorBirchsLab_EventScript_SendTotodileToParty
-	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, LittlerootTown_ProfessorBirchsLab_EventScript_SendTotodileToPC
-	hidemonpic
-	goto Common_EventScript_NoMoreRoomForPokemon
-	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_SendTotodileToParty::
-	call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter
-	removeobject LOCALID_BIRCHS_LAB_TOTODILE_BALL
-	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedTotodile
-	call Common_EventScript_GetGiftMonPartySlot
-	call Common_EventScript_NameReceivedPartyMon
-	goto LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedTotodile
-	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_SendTotodileToPC::
-	call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter
-	removeobject LOCALID_BIRCHS_LAB_TOTODILE_BALL
-	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_TotodileTransferredToPC
-	call Common_EventScript_NameReceivedBoxMon
-	goto LittlerootTown_ProfessorBirchsLab_EventScript_TotodileTransferredToPC
-	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_TotodileTransferredToPC::
-	call Common_EventScript_TransferredToPC
-	goto LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedTotodile
-	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedTotodile::
-	hidemonpic
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_GrassyPatchWaiting, MSGBOX_DEFAULT
-	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6
-	releaseall
-	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_GiveChikorita::
-	bufferspeciesname STR_VAR_1, SPECIES_CHIKORITA
-	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_CHIKORITA
-	givemon SPECIES_CHIKORITA, 5
-	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, LittlerootTown_ProfessorBirchsLab_EventScript_SendChikoritaToParty
-	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, LittlerootTown_ProfessorBirchsLab_EventScript_SendChikoritaToPC
-	hidemonpic
-	goto Common_EventScript_NoMoreRoomForPokemon
-	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_SendChikoritaToParty::
-	call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter
-	removeobject LOCALID_BIRCHS_LAB_CHIKORITA_BALL
-	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedChikorita
-	call Common_EventScript_GetGiftMonPartySlot
-	call Common_EventScript_NameReceivedPartyMon
-	goto LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedChikorita
-	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_SendChikoritaToPC::
-	call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter
-	removeobject LOCALID_BIRCHS_LAB_CHIKORITA_BALL
-	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_ChikoritaTransferredToPC
-	call Common_EventScript_NameReceivedBoxMon
-	goto LittlerootTown_ProfessorBirchsLab_EventScript_ChikoritaTransferredToPC
-	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_ChikoritaTransferredToPC::
-	call Common_EventScript_TransferredToPC
-	goto LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedChikorita
-	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedChikorita::
-	hidemonpic
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_GrassyPatchWaiting, MSGBOX_DEFAULT
-	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6
-	releaseall
-	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter::
-	playfanfare MUS_OBTAIN_ITEM
-	message LittlerootTown_ProfessorBirchsLab_Text_ReceivedJohtoStarter
-	waitmessage
-	waitfanfare
-	return
 
 LittlerootTown_ProfessorBirchsLab_EventScript_Birch::
 	lock
 	faceplayer
-	goto_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 5, LittlerootTown_ProfessorBirchsLab_EventScript_CanHaveAnyOneOfRarePokemon
-	goto_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2, LittlerootTown_ProfessorBirchsLab_EventScript_GrassyPatchWaiting
+	goto_if_eq VAR_BIRCH_POSTGAME_RESEARCH_STATE, 5, LittlerootTown_ProfessorBirchsLab_EventScript_ResearchRewardWaiting
+	goto_if_eq VAR_BIRCH_POSTGAME_RESEARCH_STATE, 2, LittlerootTown_ProfessorBirchsLab_EventScript_GrassyPatchWaiting
 	goto_if_unset FLAG_HAS_MATCH_CALL, LittlerootTown_ProfessorBirchsLab_EventScript_TryRatePokedexOrRegister
 	goto_if_unset FLAG_ENABLE_PROF_BIRCH_MATCH_CALL, EventScript_RegisterProfBirch
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_TryRatePokedexOrRegister
-	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_CanHaveAnyOneOfRarePokemon::
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_CanHaveAnyOneOfRarePokemon, MSGBOX_DEFAULT
-	release
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_GrassyPatchWaiting::
@@ -482,8 +373,8 @@ LittlerootTown_ProfessorBirchsLab_EventScript_GrassyPatchWaiting::
 
 LittlerootTown_ProfessorBirchsLab_EventScript_TryRatePokedexOrRegister::
 	goto_if_unset FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_UNKNOWN_0x380, ProfBirch_EventScript_RatePokedexOrRegister
-	goto_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 3, ProfBirch_EventScript_RatePokedexOrRegister
-	goto_if_ge VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6, ProfBirch_EventScript_RatePokedexOrRegister
+	goto_if_eq VAR_BIRCH_POSTGAME_RESEARCH_STATE, 3, ProfBirch_EventScript_RatePokedexOrRegister
+	goto_if_ge VAR_BIRCH_POSTGAME_RESEARCH_STATE, 6, ProfBirch_EventScript_RatePokedexOrRegister
 	goto_if_eq VAR_BIRCH_LAB_STATE, 5, LittlerootTown_ProfessorBirchsLab_EventScript_PokemonAwait
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_BirchRivalGoneHome, MSGBOX_DEFAULT
 	release
@@ -576,9 +467,9 @@ LittlerootTown_ProfessorBirchsLab_EventScript_Machine::
 LittlerootTown_ProfessorBirchsLab_EventScript_Rival::
 	lock
 	faceplayer
-	goto_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 5, LittlerootTown_ProfessorBirchsLab_EventScript_RivalFuturePlans
-	goto_if_ge VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6, LittlerootTown_ProfessorBirchsLab_EventScript_RivalHaveYouGoneToBattleFrontier
-	goto_if_ge VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2, LittlerootTown_ProfessorBirchsLab_EventScript_RivalTakeBreakFromFieldwork
+	goto_if_eq VAR_BIRCH_POSTGAME_RESEARCH_STATE, 5, LittlerootTown_ProfessorBirchsLab_EventScript_RivalFuturePlans
+	goto_if_ge VAR_BIRCH_POSTGAME_RESEARCH_STATE, 6, LittlerootTown_ProfessorBirchsLab_EventScript_RivalHaveYouGoneToBattleFrontier
+	goto_if_ge VAR_BIRCH_POSTGAME_RESEARCH_STATE, 2, LittlerootTown_ProfessorBirchsLab_EventScript_RivalTakeBreakFromFieldwork
 	checkplayergender
 	call_if_eq VAR_RESULT, MALE, LittlerootTown_ProfessorBirchsLab_EventScript_MayWhereShouldIGoNext
 	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_ProfessorBirchsLab_EventScript_BrendanWhereShouldIGoNext
@@ -842,83 +733,31 @@ LittlerootTown_ProfessorBirchsLab_Text_BrendanTakeBreakFromFieldwork:
 	.string "I'll be helping out the PROF here\n"
 	.string "for a while.$"
 
-LittlerootTown_ProfessorBirchsLab_Text_CompletedDexChoosePokemon:
+LittlerootTown_ProfessorBirchsLab_Text_CompletedDexResearchReward:
 	.string "PROF. BIRCH: Oh, {PLAYER}{KUN}!\n"
 	.string "Let's have a look at your POKéDEX.\p"
 	.string "… … … … … …\n"
 	.string "… … … … … …\p"
-	.string "Yes, there's no doubt about it.\p"
-	.string "You really have completed the HOENN\n"
-	.string "region's POKéDEX.\p"
-	.string "That's more than just impressive.\p"
-	.string "I have a gift for you.\p"
-	.string "Consider it my show of appreciation\n"
-	.string "for the fantastic work you've done.\p"
-	.string "My gift is a rare POKéMON only found\n"
-	.string "in another region!\p"
-	.string "You can have any one of these\n"
-	.string "three POKéMON!$"
+	.string "Every known HOENN species. Wonderful!\n"
+	.string "You proved how each habitat connects.\p"
+	.string "DEVON helped me restore five tools\n"
+	.string "from our LEGENDARY FORM research.\p"
+	.string "They let certain rare POKéMON change\n"
+	.string "or combine outside battle. Take them!$"
 
-LittlerootTown_ProfessorBirchsLab_Text_CanHaveAnyOneOfRarePokemon:
-	.string "PROF. BIRCH: These are rare POKéMON\n"
-	.string "only found in another region!\p"
-	.string "You can have any one of these\n"
-	.string "three POKéMON!$"
+LittlerootTown_ProfessorBirchsLab_Text_ResearchRewardWaiting:
+	.string "PROF. BIRCH: Your LEGENDARY FORM tools\n"
+	.string "are still here. Let's finish the set.$"
 
-LittlerootTown_ProfessorBirchsLab_Text_YoullTakeCyndaquil:
-	.string "PROF. BIRCH: The FIRE POKéMON\n"
-	.string "CYNDAQUIL caught your eye!\p"
-	.string "You're as sharp as ever!\p"
-	.string "So the CYNDAQUIL is your choice?$"
+LittlerootTown_ProfessorBirchsLab_Text_ResearchRewardComplete:
+	.string "Those tools affect KYUREM, ZYGARDE,\n"
+	.string "NECROZMA, and CALYREX.\p"
+	.string "The POKéMON must still choose you. The\n"
+	.string "tools only reveal forms they can take.$"
 
-LittlerootTown_ProfessorBirchsLab_Text_YoullTakeTotodile:
-	.string "PROF. BIRCH: The WATER POKéMON\n"
-	.string "TOTODILE is your choice!\p"
-	.string "You know how to pick a good one.\p"
-	.string "So, you'll take the TOTODILE?$"
-
-LittlerootTown_ProfessorBirchsLab_Text_YoullTakeChikorita:
-	.string "PROF. BIRCH: The GRASS POKéMON\n"
-	.string "CHIKORITA is your choice!\p"
-	.string "You sure know what you're doing.\p"
-	.string "So, you'll take the CHIKORITA?$"
-
-LittlerootTown_ProfessorBirchsLab_Text_TakeYourTimeAllInvaluable:
-	.string "PROF. BIRCH: Take your time before\n"
-	.string "you decide.\p"
-	.string "They're all invaluable POKéMON.$"
-
-@ Unused
-LittlerootTown_ProfessorBirchsLab_Text_PickedFinePokemon:
-	.string "PROF. BIRCH: I see!\n"
-	.string "You picked a fine POKéMON!$"
-
-LittlerootTown_ProfessorBirchsLab_Text_ReceivedJohtoStarter:
-	.string "{PLAYER} received the {STR_VAR_1}\n"
-	.string "from PROF. BIRCH!$"
-
-@ Unused
-LittlerootTown_ProfessorBirchsLab_Text_NicknameJohtoStarter:
-	.string "Want to give a nickname to\n"
-	.string "the {STR_VAR_1} you received?$"
-
-LittlerootTown_ProfessorBirchsLab_Text_GrassyPatchWaiting:
-	.string "PROF. BIRCH: Listen, {PLAYER}{KUN}.\n"
-	.string "You've completed the HOENN POKéDEX,\l"
-	.string "but your POKéMON journey isn't over.\p"
-	.string "There is no end to the road\n"
-	.string "that is POKéMON.\p"
-	.string "Somewhere, there is a grassy patch\n"
-	.string "that's waiting for you!$"
-
-LittlerootTown_ProfessorBirchsLab_Text_BetterLeaveOthersAlone:
-	.string "You received the promised POKéMON.\n"
-	.string "Better leave the others alone.$"
-
-@ Unused
-LittlerootTown_ProfessorBirchsLab_Text_DontHaveAnyRoomForPokemon:
-	.string "Oh, you don't have any room for\n"
-	.string "this POKéMON.$"
+LittlerootTown_ProfessorBirchsLab_Text_ResearchRewardBagFull:
+	.string "Your KEY ITEMS pocket is full. Make room\n"
+	.string "and return; every remaining tool is safe.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_MayWhatNextImStayingHere:
 	.string "MAY: {PLAYER}{KUN}, after this…\n"

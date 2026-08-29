@@ -54,11 +54,17 @@ MossdeepCity_Gym_EventScript_SetSwitch4Metatiles::
 	end
 
 MossdeepCity_Gym_EventScript_TateAndLiza::
+	goto_if_unset FLAG_BADGE06_GET, MossdeepCity_Gym_EventScript_NeedFeatherBadge
 	trainerbattle_double TRAINER_TATE_AND_LIZA_1, MossdeepCity_Gym_Text_TateAndLizaIntro, MossdeepCity_Gym_Text_TateAndLizaDefeat, MossdeepCity_Gym_Text_TateAndLizaNeedTwoMons, MossdeepCity_Gym_EventScript_TateAndLizaDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, MossdeepCity_Gym_EventScript_TateAndLizaRematch
 	goto_if_unset FLAG_RECEIVED_TM_CALM_MIND, MossdeepCity_Gym_EventScript_GiveCalmMind2
 	msgbox MossdeepCity_Gym_Text_TateAndLizaPostBattle, MSGBOX_DEFAULT
+	release
+	end
+
+MossdeepCity_Gym_EventScript_NeedFeatherBadge::
+	msgbox MossdeepCity_Gym_Text_NeedFeatherBadge, MSGBOX_DEFAULT
 	release
 	end
 
@@ -549,6 +555,12 @@ MossdeepCity_Gym_Text_NicholasDefeat:
 MossdeepCity_Gym_Text_NicholasPostBattle:
 	.string "All right! I think I'll develop a special\n"
 	.string "invincible POKéMON power next.$"
+
+MossdeepCity_Gym_Text_NeedFeatherBadge:
+	.string "TATE: Your path still bends west.\n"
+	.string "LIZA: WINONA awaits in FORTREE.\p"
+	.string "Return with the FEATHER BADGE, and\n"
+	.string "we'll accept your challenge.$"
 
 MossdeepCity_Gym_Text_TateAndLizaIntro:
 	.string "TATE: We share one board.\n"

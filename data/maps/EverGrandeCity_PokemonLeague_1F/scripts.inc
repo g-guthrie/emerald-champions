@@ -44,8 +44,8 @@ EverGrandeCity_PokemonLeague_1F_Pokemart:
 	.2byte ITEM_RARE_CANDY
 	pokemartlistend
 
-@ The door guards only check for FLAG_BADGE06_GET because Winonas badge is the only one that can be skipped
-@ Its assumed the player has the remaining badges
+@ Keep this as an explicit eight-badge contract.  Normal story progression also
+@ leads here in order, but the League entrance must remain correct on its own.
 EverGrandeCity_PokemonLeague_1F_EventScript_DoorGuard::
 	lockall
 	goto_if_set FLAG_ENTERED_ELITE_FOUR, EverGrandeCity_PokemonLeague_1F_EventScript_GoForth
@@ -55,7 +55,14 @@ EverGrandeCity_PokemonLeague_1F_EventScript_DoorGuard::
 	message EverGrandeCity_PokemonLeague_1F_Text_MustHaveAllGymBadges
 	waitmessage
 	delay 120
+	goto_if_unset FLAG_BADGE01_GET, EverGrandeCity_PokemonLeague_1F_EventScript_NotAllBadges
+	goto_if_unset FLAG_BADGE02_GET, EverGrandeCity_PokemonLeague_1F_EventScript_NotAllBadges
+	goto_if_unset FLAG_BADGE03_GET, EverGrandeCity_PokemonLeague_1F_EventScript_NotAllBadges
+	goto_if_unset FLAG_BADGE04_GET, EverGrandeCity_PokemonLeague_1F_EventScript_NotAllBadges
+	goto_if_unset FLAG_BADGE05_GET, EverGrandeCity_PokemonLeague_1F_EventScript_NotAllBadges
 	goto_if_unset FLAG_BADGE06_GET, EverGrandeCity_PokemonLeague_1F_EventScript_NotAllBadges
+	goto_if_unset FLAG_BADGE07_GET, EverGrandeCity_PokemonLeague_1F_EventScript_NotAllBadges
+	goto_if_unset FLAG_BADGE08_GET, EverGrandeCity_PokemonLeague_1F_EventScript_NotAllBadges
 	closemessage
 	applymovement LOCALID_LEAGUE_GUARD_1, EverGrandeCity_PokemonLeague_1F_Movement_LeftGuardOutOfWay
 	applymovement LOCALID_LEAGUE_GUARD_2, EverGrandeCity_PokemonLeague_1F_Movement_RightGuardOutOfWay
@@ -128,11 +135,10 @@ EverGrandeCity_PokemonLeague_1F_Text_MustHaveAllGymBadges:
 	.string "all the GYM BADGES.$"
 
 EverGrandeCity_PokemonLeague_1F_Text_HaventObtainedAllBadges:
-	.string "You haven't obtained all the BADGES.\p"
+	.string "You need all eight GYM BADGES.\p"
 	.string "If you're bound for the POKéMON\n"
 	.string "LEAGUE, you must return with them.$"
 
 EverGrandeCity_PokemonLeague_1F_Text_GoForth:
 	.string "TRAINER! Believe in yourself and your\n"
 	.string "POKéMON, and go forth!$"
-

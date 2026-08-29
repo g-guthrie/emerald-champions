@@ -71,9 +71,10 @@ MeteorFalls_1F_2R_Text_NicolasDefeat:
 	.string "I didn't expect you to be so strong!$"
 
 MeteorFalls_1F_2R_Text_NicolasPostBattle:
-	.string "The road ahead remains long and harsh.\p"
-	.string "When will my POKéMON and I become\n"
-	.string "the best?$"
+	.string "The rear wall rings near REGIROCK.\n"
+	.string "A deeper mark resembles ALAKAZAM.\p"
+	.string "Bring those families through the Falls;\n"
+	.string "the cave may answer without DEVON.$"
 
 MeteorFalls_1F_2R_Text_NicolasRegister:
 	.string "I want to know more about your power.\n"

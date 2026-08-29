@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import json
 import re
 from pathlib import Path
 
@@ -152,6 +153,72 @@ def verify_runtime_guards() -> None:
     )
 
 
+def verify_compiled_rematch_branches_are_dormant() -> tuple[int, int]:
+    """Prove retained vanilla rematch data has no physical or live script entry.
+
+    Keeping the data compiled is intentional save/source compatibility, not an
+    invitation to execute it.  Every conditional branch into a rematch block
+    must be in the same script block as ShouldTryRematchBattle, whose runtime
+    entry point is proven above to return FALSE when rematches are disabled.
+    """
+
+    map_scripts = [
+        path
+        for path in sorted((ROOT / "data/maps").glob("*/scripts.inc"))
+        if "_Frlg" not in path.parts[-2]
+    ]
+    physical_entries: list[str] = []
+    for path in sorted((ROOT / "data/maps").glob("*/map.json")):
+        if "_Frlg" in path.parts[-2]:
+            continue
+        payload = json.loads(path.read_text())
+        for section in ("object_events", "coord_events", "bg_events"):
+            for event in payload.get(section, []) or []:
+                script = event.get("script") or ""
+                if "Rematch" in script:
+                    physical_entries.append(f"{path.relative_to(ROOT)}:{section}:{script}")
+    require(
+        not physical_entries,
+        "physical map events enter disabled rematch content:\n" + "\n".join(physical_entries),
+    )
+
+    guarded_branches = 0
+    compiled_battles = 0
+    for path in map_scripts:
+        for label, (line, block) in asm_blocks(path).items():
+            rematch_calls = re.findall(r"\btrainerbattle_rematch(?:_double)?\b", block)
+            if rematch_calls:
+                compiled_battles += len(rematch_calls)
+                require(
+                    "Rematch" in label,
+                    f"{path.relative_to(ROOT)}:{line}: rematch battle lives in a non-rematch block {label}",
+                )
+            targets: list[str] = []
+            for raw_line in block.splitlines():
+                source_line = raw_line.split("@", 1)[0].strip()
+                if re.match(
+                    r"^(?:goto|call|goto_if_\w+|call_if_\w+|case|switchcase|map_script(?:_2)?)\b",
+                    source_line,
+                ) is None:
+                    continue
+                targets.extend(
+                    re.findall(
+                        r"\b([A-Za-z_][A-Za-z0-9_]*EventScript_[A-Za-z0-9_]*Rematch[A-Za-z0-9_]*)\b",
+                        source_line,
+                    )
+                )
+            if targets:
+                guarded_branches += len(targets)
+                require(
+                    "ShouldTryRematchBattle" in block,
+                    f"{path.relative_to(ROOT)}:{line}: {label} can enter {targets[0]} without the disabled runtime guard",
+                )
+
+    require(compiled_battles > 0, "rematch data unexpectedly vanished; compatibility decision must be explicit")
+    require(guarded_branches > 0, "no guarded rematch branches were audited")
+    return compiled_battles, guarded_branches
+
+
 def verify_dialogue() -> tuple[int, int]:
     sources = [ROOT / "data/text/trainers.inc", ROOT / "data/text/match_call.inc"]
     sources.extend(
@@ -240,9 +307,12 @@ def verify_dialogue() -> tuple[int, int]:
 
 def main() -> None:
     verify_runtime_guards()
+    compiled_battles, guarded_branches = verify_compiled_rematch_branches_are_dormant()
     registrations, total = verify_dialogue()
     print(
         "PASS: rematches are disabled; "
+        f"{compiled_battles} retained battle blocks have no physical entry and "
+        f"{guarded_branches} conditional entries sit behind the false runtime guard; "
         f"{registrations} registration prompts and {total} reachable Match Call texts are promise-free"
     )
 

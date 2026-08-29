@@ -621,7 +621,9 @@ Route119_Text_RouteSignFortree:
 	.string "{RIGHT_ARROW} FORTREE CITY$"
 
 Route119_Text_WeatherInstitute:
-	.string "WEATHER INSTITUTE$"
+	.string "WEATHER INSTITUTE\p"
+	.string "FIELD NOTE: CASTFORM may wake storm\n"
+	.string "SIGNS in ROUTE 119's grass and water.$"
 
 Route119_Text_TrainerTipsDecoration:
 	.string "TRAINER TIPS\p"

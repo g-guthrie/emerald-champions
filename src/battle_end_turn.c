@@ -928,6 +928,32 @@ static bool32 HandleEndTurnYawn(enum BattlerId battler)
 
     gBattleStruct->eventState.endTurnBattler++;
 
+    // Commander cancels Tatsugiri's action before the normal sleep canceler
+    // runs. Advance an existing sleep here so it still wakes naturally while
+    // swallowed. This runs before Yawn below, so a Tatsugiri that falls asleep
+    // from Yawn this turn does not immediately lose a sleep turn.
+    if (gBattleStruct->battlerState[battler].commandingDondozo
+     && (gBattleMons[battler].status1 & STATUS1_SLEEP))
+    {
+        gBattleMons[battler].status1 -= STATUS1_SLEEP_TURN(1);
+        if (!(gBattleMons[battler].status1 & STATUS1_SLEEP))
+        {
+            TryDeactivateSleepClause(battler, gBattlerPartyIndexes[battler]);
+            gBattleMons[battler].volatiles.nightmare = FALSE;
+            gEffectBattler = gBattlerTarget = battler;
+            BattleScriptCall(BattleScript_TargetWokeUp);
+            effect = TRUE;
+        }
+        BtlController_EmitSetMonData(
+            battler,
+            B_COMM_TO_CONTROLLER,
+            REQUEST_STATUS_BATTLE,
+            0,
+            sizeof(gBattleMons[battler].status1),
+            &gBattleMons[battler].status1);
+        MarkBattlerForControllerExec(battler);
+    }
+
     if (gBattleMons[battler].volatiles.yawn > 0)
     {
         gBattleMons[battler].volatiles.yawn--;

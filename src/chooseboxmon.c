@@ -229,6 +229,14 @@ static struct BoxPokemon *LearnMove_GetBoxMonFromTaskData(u8 partyIndex)
     return boxmon;
 }
 
+static void LearnMove_TryFormChange(u8 partyIndex, struct BoxPokemon *boxMon, enum Move changedMove)
+{
+    if (partyIndex == PC_MON_CHOSEN)
+        TryBoxMonFormChangeOnMove(boxMon, changedMove);
+    else
+        TryFormChangeOnMove(&gParties[B_TRAINER_PLAYER][partyIndex], changedMove, B_TRAINER_PLAYER);
+}
+
 #define state         gTasks[taskId].data[0]
 #define partyIndex    gTasks[taskId].data[1]
 #define move          gTasks[taskId].data[2]
@@ -273,7 +281,10 @@ s32 LearnMove(const struct MoveLearnUI *ui, u8 taskId)
         }
     case LEARN_MOVE:
         if (GiveMoveToBoxMon(boxmon, move) != MON_HAS_MAX_MOVES)
+        {
+            LearnMove_TryFormChange(partyIndex, boxmon, move);
             return LEARNED_MOVE_1;
+        }
         else
             return ASK_REPLACEMENT_1;
     case ASK_REPLACEMENT_1:
@@ -339,6 +350,7 @@ s32 LearnMove(const struct MoveLearnUI *ui, u8 taskId)
     case REPLACE_MOVE_1:
     {
         u32 slot = GetMoveSlotToReplace();
+        enum Move forgottenMove = GetBoxMonData(boxmon, MON_DATA_MOVE1 + slot);
         RemoveBoxMonPPBonus(boxmon, slot);
         u32 originalPP = GetBoxMonData(boxmon, MON_DATA_PP1 + slot);
         u8 ppBonuses = GetBoxMonData(boxmon, MON_DATA_PP_BONUSES);
@@ -346,6 +358,8 @@ s32 LearnMove(const struct MoveLearnUI *ui, u8 taskId)
         SetBoxMonData(boxmon, MON_DATA_MOVE1 + slot, &move);
         if (recoverPP || (pp < originalPP))
             SetBoxMonData(boxmon, MON_DATA_PP1 + slot, &pp);
+        LearnMove_TryFormChange(partyIndex, boxmon, forgottenMove);
+        LearnMove_TryFormChange(partyIndex, boxmon, move);
         GetBoxMonNickname(boxmon, gStringVar1);
         StringCopy(gStringVar2, GetMoveName(move));
         gSpecialVar_Result = TRUE;

@@ -1129,6 +1129,14 @@ static struct ChosenAction ChooseMoveOrAction_Doubles(enum BattlerId battlerAtk)
 static inline bool32 ShouldConsiderMoveForBattler(enum BattlerId battlerAi, enum BattlerId battlerDef, enum Move move)
 {
     enum MoveTarget target = AI_GetBattlerMoveTargetType(battlerAi, move);
+
+    // Decorate is intentionally ally support. Its generic TARGET_SELECTED data
+    // also permits foes, but scoring it against a foe can leave a neutral tie
+    // when that foe has no relevant damaging category. Never let the trainer AI
+    // hand an opponent +2 Attack and +2 Sp. Atk.
+    if (move == MOVE_DECORATE && !IsBattlerAlly(battlerAi, battlerDef))
+        return FALSE;
+
     if (battlerAi == GetPartnerBattler(battlerDef))
     {
         if (target == TARGET_OPPONENT
@@ -3226,7 +3234,11 @@ static s32 AI_DoubleBattle(enum BattlerId battlerAtk, enum BattlerId battlerDef,
     case EFFECT_PLEDGE:
         if (ShouldUsePledgeMove(battlerAtk, battlerDef, move))
         {
-            ADJUST_SCORE(BEST_EFFECT);
+            // A Pledge pair spends both allies' actions on one combined attack
+            // and field effect. Account for the combination explicitly; scoring
+            // either 80-power move in isolation made strong physical coverage
+            // routinely break otherwise intentional Pledge teams.
+            ADJUST_SCORE(PERFECT_EFFECT);
         }
         break;
     case EFFECT_HELPING_HAND:
@@ -5382,8 +5394,8 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
         }
         break;
     case EFFECT_PLEDGE:
-        if (hasPartner && HasMoveWithEffect(GetPartnerBattler(battlerAtk), EFFECT_PLEDGE))
-            ADJUST_SCORE(GOOD_EFFECT); // Partner might use pledge move
+        if (hasPartner && ShouldUsePledgeMove(battlerAtk, battlerDef, move))
+            ADJUST_SCORE(PERFECT_EFFECT); // Partner can create a combined Pledge attack
         break;
     case EFFECT_TRICK_ROOM:
         if (!(gAiThinkingStruct->aiFlags[battlerAtk] & AI_FLAG_POWERFUL_STATUS))

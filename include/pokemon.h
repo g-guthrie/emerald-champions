@@ -956,6 +956,8 @@ void TrySpecialOverworldEvo(void);
 bool32 SpeciesHasGenderDifferences(enum Species species);
 bool32 TryFormChange(struct Pokemon *mon, enum FormChanges method, enum BattleTrainer trainer);
 bool32 TryBoxMonFormChange(struct BoxPokemon *boxMon, enum FormChanges method);
+bool32 TryFormChangeOnMove(struct Pokemon *mon, enum Move changedMove, enum BattleTrainer trainer);
+bool32 TryBoxMonFormChangeOnMove(struct BoxPokemon *boxMon, enum Move changedMove);
 void TryToSetBattleFormChangeMoves(struct Pokemon *mon, enum FormChanges method);
 u32 GetMonFriendshipScore(struct Pokemon *pokemon);
 u32 GetMonAffectionHearts(struct Pokemon *pokemon);

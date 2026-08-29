@@ -276,9 +276,21 @@ bool32 TryGetLegendarySignWildOverride(enum WildPokemonArea area, enum Species *
         if (sign->source != LEGENDARY_SOURCE_CONDITIONAL_WILD
          || sign->mapId != currentMap
          || sign->area != area
-         || !IsLegendarySignUnlocked(signId)
-         || IsLegendarySignCaught(signId)
-         || RandomUniform(RNG_NONE, 0, 99) >= sign->chance)
+         || IsLegendarySignCaught(signId))
+            continue;
+
+        // Devon can reveal these Signs remotely, but it is not a required hub.
+        // Returning to the marked place with the depicted partner wakes the
+        // Sign locally under the same story and Badge requirements.
+        if (!IsLegendarySignUnlocked(signId))
+        {
+            if (GetBadgeCountForLegendarySigns() < sign->minimumBadges
+             || (sign->requiredFlag != 0 && !FlagGet(sign->requiredFlag))
+             || !PlayerPartyHasSpeciesFamily(sign->requiredSpecies))
+                continue;
+            UnlockLegendarySign(signId);
+        }
+        if (RandomUniform(RNG_NONE, 0, 99) >= sign->chance)
             continue;
 
         *species = sign->species;
@@ -512,10 +524,7 @@ void TryGiveArceusLegendarySignMasteryReward(void)
     }
     for (enum LegendarySignId signId = 0; signId < LEGENDARY_SIGN_COUNT; signId++)
     {
-        enum LegendarySignSource source = gLegendarySignDefinitions[signId].source;
-
-        if ((source == LEGENDARY_SOURCE_CONDITIONAL_WILD || source == LEGENDARY_SOURCE_VISIBLE)
-         && !IsLegendarySignCaught(signId))
+        if (signId != LEGENDARY_SIGN_ARCEUS && !IsLegendarySignCaught(signId))
             return;
     }
 

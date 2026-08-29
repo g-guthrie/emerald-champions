@@ -930,7 +930,8 @@ static void GetFrontierData(void)
         gBattleOutcome = 0;
         break;
     case FRONTIER_DATA_RECORD_DISABLED:
-        gSpecialVar_Result = gSaveBlock2Ptr->frontier.disableRecordBattle;
+        gSpecialVar_Result = !B_RECORDED_BATTLES_ENABLED
+                           || gSaveBlock2Ptr->frontier.disableRecordBattle;
         break;
     case FRONTIER_DATA_HEARD_BRAIN_SPEECH:
         gSpecialVar_Result = gSaveBlock2Ptr->frontier.battledBrainFlags & gFrontierBrainInfo[facility].battledBit[hasSymbol];
@@ -965,7 +966,11 @@ static void SetFrontierData(void)
             gSaveBlock2Ptr->frontier.selectedPartyMons[i] = gSelectedOrderFromParty[i];
         break;
     case FRONTIER_DATA_RECORD_DISABLED:
-        gSaveBlock2Ptr->frontier.disableRecordBattle = gSpecialVar_0x8006;
+        // Facility scripts reset this field before each battle. Do not let
+        // those writes expose a player-facing recorder while playback is
+        // disabled for safety.
+        gSaveBlock2Ptr->frontier.disableRecordBattle = !B_RECORDED_BATTLES_ENABLED
+                                                     || gSpecialVar_0x8006;
         break;
     case FRONTIER_DATA_HEARD_BRAIN_SPEECH:
         gSaveBlock2Ptr->frontier.battledBrainFlags |= gFrontierBrainInfo[facility].battledBit[hasSymbol];

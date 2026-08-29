@@ -612,64 +612,53 @@ MtPyre_Summit_Text_MattAfter:
 	.string "you follow, expect the sea to fight back.$"
 
 MtPyre_Summit_Text_Grunt1Intro:
-	.string "No! Those TEAM MAGMA goons got\n"
-	.string "here ahead of us!\p"
-	.string "We can't fall behind!$"
+	.string "MAGMA reached the ORBS first, but their\n"
+	.string "fixed formation left a path behind them.\p"
+	.string "AQUA will take that path and the ORB.$"
 
 MtPyre_Summit_Text_Grunt1Defeat:
-	.string "I thought you were one of the MAGMAS\n"
-	.string "who happened to come back…$"
+	.string "You changed course inside my attack…$"
 
 MtPyre_Summit_Text_Grunt1PostBattle:
-	.string "Yeah, so you are strong…\n"
-	.string "But there're a lot of us!$"
+	.string "One current broke. Others still run\n"
+	.string "between you and ARCHIE.$"
 
 MtPyre_Summit_Text_Grunt2Intro:
-	.string "Hah!\n"
-	.string "Too bad for you!\p"
-	.string "If you came earlier, you only would've\n"
-	.string "had to battle the wimpy TEAM MAGMA.\p"
-	.string "But since you arrived now, you have\n"
-	.string "to take on us toughies!$"
+	.string "MAGMA guards one lane and calls it order.\n"
+	.string "AQUA attacks from every open current.\p"
+	.string "Read this one before it carries you away.$"
 
 MtPyre_Summit_Text_Grunt2Defeat:
-	.string "Urgh… I should've let you take on\n"
-	.string "TEAM MAGMA first…$"
+	.string "You found still water inside the rush…$"
 
 MtPyre_Summit_Text_Grunt2PostBattle:
-	.string "You don't know anything!\n"
-	.string "So why are you messing with us?$"
+	.string "You keep interfering, but have you\n"
+	.string "decided what the ORBS should protect?$"
 
 MtPyre_Summit_Text_Grunt3Intro:
-	.string "You…\n"
 	.string "We saw you at MT. CHIMNEY.\p"
-	.string "You don't belong to either TEAM,\n"
-	.string "so why would you be here?$"
+	.string "You reject MAGMA and still pursue AQUA.\n"
+	.string "Then show me the answer you chose.$"
 
 MtPyre_Summit_Text_Grunt3Defeat:
-	.string "If you're going to mess with anyone,\n"
-	.string "let it be TEAM MAGMA…$"
+	.string "You refused both currents…$"
 
 MtPyre_Summit_Text_Grunt3PostBattle:
-	.string "Heh, it doesn't matter!\n"
-	.string "We bought ourselves some time!\p"
-	.string "The BOSS should have snatched what\n"
-	.string "he was after!$"
+	.string "The battle still bought ARCHIE time.\n"
+	.string "The RED ORB is already within reach.$"
 
 MtPyre_Summit_Text_Grunt4Intro:
-	.string "Oh, I know!\n"
-	.string "You tried to join TEAM MAGMA,\l"
-	.string "but they wouldn't have you!\p"
-	.string "Well, don't think that we'll let you\n"
-	.string "join our TEAM AQUA!$"
+	.string "You adapt too freely for MAGMA and\n"
+	.string "question too much for AQUA.\p"
+	.string "A lone Trainer should not be able to\n"
+	.string "break two organizations. Prove me wrong.$"
 
 MtPyre_Summit_Text_Grunt4Defeat:
-	.string "If you want to join TEAM AQUA that\n"
-	.string "badly, we can consider it…$"
+	.string "You needed neither uniform…$"
 
 MtPyre_Summit_Text_Grunt4PostBattle:
-	.string "We have a great combination going\n"
-	.string "with us members and our leader.$"
+	.string "Our crews make ARCHIE's plans possible.\n"
+	.string "Your team did the same for yours.$"
 
 MtPyre_Summit_Text_ArchieWeGotTheOrbLetsGo:
 	.string "ARCHIE: MAXIE took the BLUE ORB, but the\n"
@@ -756,7 +745,9 @@ MtPyre_Summit_Text_GroudonKyogreTale:
 	.string "The RED and BLUE ORBS joined that net,\n"
 	.string "but RAYQUAZA supplied its balance.\p"
 	.string "The ORBS calmed the rivals, the SIGNS\n"
-	.string "fell dark, and the sky guardian departed.$"
+	.string "fell dark, and the sky guardian departed.\p"
+	.string "The exterior still bears lesser marks:\n"
+	.string "one sketches GARDEVOIR, one ABSOL.$"
 
 MtPyre_Summit_Text_WellThatTooIsFine:
 	.string "I see…\n"
@@ -781,4 +772,6 @@ MtPyre_Summit_Text_HoennTrioTale:
 	.string "RAYQUAZA restored the board. The Trainer\n"
 	.string "restored the reason to keep playing.\p"
 	.string "Each awakened SIGN waits to see what\n"
-	.string "kind of Champion that Trainer becomes.$"
+	.string "kind of Champion that Trainer becomes.\p"
+	.string "On the sixth floor, a broken-world mark\n"
+	.string "now sketches DUSKNOIR.$"

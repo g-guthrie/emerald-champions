@@ -440,6 +440,104 @@ def blocks(text: str) -> list[str]:
     return [text[m.start():marks[i + 1].start() if i + 1 < len(marks) else len(text)] for i, m in enumerate(marks)]
 
 
+EARLIEST_REACHABLE_CAPS = {
+    **{group: 14 for group in (
+        "PHYSICAL_ROUTE115_0067", "PHYSICAL_ROUTE115_0089", "PHYSICAL_ROUTE115_0111", "PHYSICAL_ROUTE115_0136",
+        "BATTLE_020_ROUTE_116_JOEY", "BATTLE_021_ROUTE_116_JOSE", "BATTLE_022_ROUTE_116_KAREN",
+        "BATTLE_023_ROUTE_116_CLARK_JOHNSON", "BATTLE_024_ROUTE_116_DEVAN",
+        "BATTLE_025_ROUTE_116_SARAH_DAWSON", "BATTLE_026_ROUTE_116_JANICE_JERRY",
+    )},
+    **{group: 30 for group in (
+        "BATTLE_069_ROUTE_117_ANNA_AND_MEG", "BATTLE_070_ROUTE_117_ISAAC", "BATTLE_071_ROUTE_117_DYLAN",
+        "BATTLE_072_ROUTE_117_MARIA", "BATTLE_073_ROUTE_117_DEREK", "BATTLE_074_ROUTE_117_AISHA_MELINA_BRANDI",
+        "BATTLE_075_ROUTE_117_LYDIA", "BATTLE_077_ROUTE_111_VICTOR", "BATTLE_078_ROUTE_111_VICTORIA",
+        "BATTLE_079_ROUTE_111_VIVI", "BATTLE_080_ROUTE_111_VICKY", "BATTLE_137_ROUTE_111_HAYDEN",
+        "BATTLE_138_ROUTE_111_BIANCA", "BATTLE_139_ROUTE_111_TYRON", "BATTLE_140_ROUTE_111_CELINA",
+        "PHYSICAL_ROUTE118_0193", "PHYSICAL_ROUTE118_0220", "PHYSICAL_ROUTE118_0225", "PHYSICAL_ROUTE118_0257",
+    )},
+    **{group: 40 for group in (
+        "PHYSICAL_GLOBAL_GABBY_AND_TY_0128", "BATTLE_124_MT_CHIMNEY_SHELBY", "BATTLE_125_MT_CHIMNEY_MELISSA",
+        "BATTLE_126_MT_CHIMNEY_SHEILA", "BATTLE_127_MT_CHIMNEY_SHIRLEY", "BATTLE_128_MT_CHIMNEY_SAWYER",
+        "BATTLE_135_ROUTE_111_WILTON", "BATTLE_136_ROUTE_111_BROOKE", "BATTLE_141_ROUTE_111_CELIA",
+        "BATTLE_142_ROUTE_111_BRYAN", "BATTLE_143_ROUTE_111_BRANDEN",
+    )},
+}
+
+
+def campaign_chronology_errors(groups: list[str]) -> list[str]:
+    """Protect the live Hoenn story spine from documentation-order drift."""
+    errors: list[str] = []
+    physical_ids = [line_value(block, "physical_group_id") for block in groups]
+    positions = {physical_id: index for index, physical_id in enumerate(physical_ids)}
+
+    for block in groups:
+        physical_id = line_value(block, "physical_group_id")
+        expected_cap = EARLIEST_REACHABLE_CAPS.get(physical_id)
+        if expected_cap is not None and line_value(block, "strict_cap") != str(expected_cap):
+            errors.append(f"campaign chronology: {physical_id} must use earliest reachable cap {expected_cap}")
+
+    def require_sequence(label: str, ordered_ids: tuple[str, ...]) -> None:
+        missing = [physical_id for physical_id in ordered_ids if physical_id not in positions]
+        if missing:
+            errors.append(f"campaign chronology {label}: missing {', '.join(missing)}")
+            return
+        actual = [positions[physical_id] for physical_id in ordered_ids]
+        if actual != sorted(actual):
+            errors.append(f"campaign chronology {label}: milestone order is wrong")
+
+    def require_location_before(first: str, second: str) -> None:
+        first_positions = [
+            index for index, block in enumerate(groups)
+            if line_value(block, "location").startswith(first)
+        ]
+        second_positions = [
+            index for index, block in enumerate(groups)
+            if line_value(block, "location").startswith(second)
+        ]
+        if not first_positions or not second_positions:
+            errors.append(f"campaign chronology: missing location group {first} or {second}")
+        elif max(first_positions) >= min(second_positions):
+            errors.append(f"campaign chronology: {first} must finish before {second} begins")
+
+    # These are the finite trainer milestones in the exact order enforced by
+    # the live map scripts. The Sootopolis crisis and Rayquaza awakening contain
+    # no Trainer battle block, so their position is represented by Archie before
+    # the Sootopolis Gym and Juan after its students.
+    require_sequence("late-story spine", (
+        "PHYSICAL_MTPYRE_SUMMIT_0619",
+        "PHYSICAL_MAGMAHIDEOUT_4F_0056",
+        "PHYSICAL_AQUAHIDEOUT_B2F_0029",
+        "PHYSICAL_MOSSDEEPCITY_GYM_0056",
+        "PHYSICAL_MOSSDEEPCITY_SPACECENTER_2F_0269",
+        "PHYSICAL_SEAFLOORCAVERN_ROOM9_0071",
+        "PHYSICAL_SOOTOPOLISCITY_GYM_1F_0088",
+        "PHYSICAL_EVERGRANDECITY_SIDNEYSROOM_0053",
+        "PHYSICAL_EVERGRANDECITY_PHOEBESROOM_0047",
+        "PHYSICAL_EVERGRANDECITY_GLACIASROOM_0047",
+        "PHYSICAL_EVERGRANDECITY_DRAKESROOM_0048",
+        "PHYSICAL_EVERGRANDECITY_CHAMPIONSROOM_0048",
+        "PHYSICAL_CAVE_OF_ORIGIN_DIANCIES_ROOM_WALLACE_EXHIBITION",
+    ))
+    require_location_before("MtPyre_", "MagmaHideout_")
+    require_location_before("MagmaHideout_", "AquaHideout_")
+    require_location_before("AquaHideout_", "MossdeepCity_Gym")
+    require_location_before("MossdeepCity_Gym", "MossdeepCity_SpaceCenter_")
+    require_location_before("MossdeepCity_SpaceCenter_", "SeafloorCavern_")
+    require_location_before("SeafloorCavern_", "SootopolisCity_Gym")
+
+    wallace_id = "PHYSICAL_EVERGRANDECITY_CHAMPIONSROOM_0048"
+    if wallace_id in positions:
+        wallace_position = positions[wallace_id]
+        for index, block in enumerate(groups):
+            if line_value(block, "chapter").startswith("Postgame") and index <= wallace_position:
+                errors.append(
+                    "campaign chronology: postgame encounter appears before the League Champion"
+                )
+                break
+
+    return errors
+
+
 def current_campaign_trainer_refs() -> set[str]:
     paths = [p for p in (ROOT / "data" / "maps").rglob("*.inc") if "_Frlg" not in str(p)]
     paths += [p for p in (ROOT / "data" / "scripts").rglob("*.inc") if p.name != "trainers_frlg.inc"]
@@ -493,6 +591,10 @@ def audit(path: Path) -> tuple[list[str], list[str]]:
     campaign_orders = [line_value(block, "campaign_order") for block in groups]
     if campaign_orders != [str(i) for i in range(1, len(groups) + 1)]:
         errors.append("campaign_order values do not match encounter order")
+    atlas_ordinals = [line_value(block, "atlas_ordinal") for block in groups]
+    if atlas_ordinals != [str(i) for i in range(1, len(groups) + 1)]:
+        errors.append("atlas_ordinal values do not match canonical encounter order")
+    errors.extend(campaign_chronology_errors(groups))
     if text.count("=== END ENCOUNTER ===") != len(groups):
         errors.append("every encounter must have exactly one END ENCOUNTER marker")
 

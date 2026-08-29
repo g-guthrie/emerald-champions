@@ -490,16 +490,11 @@ BattleFrontier_ReceptionGate_Text_SymbolsInfo:
 	.string "I wish you the best of luck!$"
 
 BattleFrontier_ReceptionGate_Text_RecordedBattleInfo:
-	.string "It is possible to record one battle\n"
-	.string "on your FRONTIER PASS.\p"
-	.string "You may record a battle you had with\n"
-	.string "a friend or friends.\p"
-	.string "Or you may record a battle conducted\n"
-	.string "at the BATTLE FRONTIER excluding\l"
-	.string "matches at the BATTLE PIKE or\l"
-	.string "the BATTLE PYRAMID.\p"
-	.string "You may choose to record your match\n"
-	.string "at the end of a battle.$"
+	.string "Battle recordings are not offered\n"
+	.string "at this BATTLE FRONTIER.\p"
+	.string "Your FRONTIER PASS instead tracks\n"
+	.string "symbols, BATTLE POINTS, and your\l"
+	.string "challenge records.$"
 
 BattleFrontier_ReceptionGate_Text_BattlePointsInfo:
 	.string "Battle Points are rewards given to\n"

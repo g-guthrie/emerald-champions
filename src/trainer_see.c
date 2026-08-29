@@ -942,6 +942,7 @@ static void Task_SetBuriedTrainerMovement(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
     struct ObjectEvent *objEvent;
+    const u32 funcCount = ARRAY_COUNT(sTrainerSeeFuncList2);
 
     LoadWordFromTwoHalfwords((u16*) &task->tObjEvent, (u32 *)&objEvent);
     if (!task->data[7])
@@ -949,8 +950,15 @@ static void Task_SetBuriedTrainerMovement(u8 taskId)
         ObjectEventClearHeldMovement(objEvent);
         task->data[7]++;
     }
-    sTrainerSeeFuncList2[task->tFuncId](taskId, task, objEvent);
-    if (task->tFuncId == ((int)ARRAY_COUNT(sTrainerSeeFuncList2) - 1) && !FieldEffectActiveListContains(FLDEFF_ASH_PUFF))
+
+    // WaitRevealBuriedTrainer shares the main approach state enum and advances
+    // to TRSEE_MOVE_TO_PLAYER when it finishes.  That value is one past this
+    // direct-interaction table; never dispatch it as a function pointer.
+    if (task->tFuncId < funcCount)
+        sTrainerSeeFuncList2[task->tFuncId](taskId, task, objEvent);
+
+    if (task->tFuncId >= funcCount
+     || (task->tFuncId == funcCount - 1 && !FieldEffectActiveListContains(FLDEFF_ASH_PUFF)))
     {
         SetTrainerMovementType(objEvent, GetTrainerFacingDirectionMovementType(objEvent->facingDirection));
         TryOverrideTemplateCoordsForObjectEvent(objEvent, GetTrainerFacingDirectionMovementType(objEvent->facingDirection));

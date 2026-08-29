@@ -23,6 +23,7 @@ STATIC_GATES = (
     ("wild distribution", (PYTHON, "scripts/emerald_champions_wild_distribution.py")),
     ("route signs", (PYTHON, "scripts/emerald_champions_route_signs.py")),
     ("competitive presets", (PYTHON, "scripts/verify_emerald_champions_battle_sets.py")),
+    ("upstream critical fixes", (PYTHON, "scripts/verify_upstream_critical_fixes.py")),
     ("campaign roster", (PYTHON, "scripts/verify_emerald_champions_campaign_roster.py")),
     ("story and dialogue", (PYTHON, "scripts/verify_emerald_champions_story.py")),
     ("rematch-free Match Call", (PYTHON, "scripts/verify_rematch_free_match_call.py")),
@@ -35,6 +36,7 @@ STATIC_GATES = (
     ("fossil revival", (PYTHON, "scripts/verify_fossil_revival.py")),
     ("Poke Vial quest", (PYTHON, "scripts/restore_poke_vial_quest.py")),
     ("campaign battle master", (PYTHON, "scripts/audit_emerald_champions_master_battles.py")),
+    ("campaign evidence freshness", (PYTHON, "scripts/generate_emerald_champions_campaign_evidence.py", "--check")),
     ("battle script formats", (PYTHON, "scripts/align_emerald_champions_battle_scripts.py")),
 )
 
@@ -150,10 +152,51 @@ def verify_rom(rom: Path, elf: Path) -> None:
     )
 
 
+def verify_build_freshness(rom: Path, elf: Path) -> None:
+    require(rom.parent == ROOT and elf.parent == ROOT, "release artifacts must live at the repository root")
+    require(rom.name.replace(".gba", ".elf") == elf.name, "ROM and ELF names do not describe the same build")
+    require(rom.is_file() and elf.is_file(), f"release artifacts are missing: {rom}, {elf}")
+
+    inputs: list[Path] = []
+    for directory in ("src", "data", "include", "asm", "graphics", "sound", "libagbsyscall"):
+        inputs.extend(
+            path for path in (ROOT / directory).rglob("*")
+            if path.is_file() and not path.name.startswith("._")
+        )
+    inputs.extend(
+        path for path in ROOT.iterdir()
+        if path.is_file()
+        and (path.name in {"Makefile", "config.mk", "make_tools.mk", "charmap.txt"}
+             or path.suffix in {".mk", ".ld"})
+    )
+    require(inputs, "no build inputs were found")
+    newest = max(inputs, key=lambda path: path.stat().st_mtime_ns)
+    artifact_time = min(rom.stat().st_mtime_ns, elf.stat().st_mtime_ns)
+    require(
+        artifact_time >= newest.stat().st_mtime_ns,
+        f"{rom.name} is stale: {newest.relative_to(ROOT)} is newer; rebuild the current source first",
+    )
+    print(f"PASS: {rom.name} is newer than every canonical ROM build input")
+
+
+def verify_patch_integrity() -> None:
+    probe = subprocess.run(
+        ("git", "rev-parse", "--is-inside-work-tree"),
+        cwd=ROOT,
+        check=False,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+    if probe.returncode != 0:
+        print("SKIP: git diff --check (source bundle has no Git metadata)")
+        return
+    run_gate("whitespace and patch integrity", ("git", "diff", "--check"))
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--rom", type=Path, default=ROOT / "pokeemerald.gba")
-    parser.add_argument("--elf", type=Path, default=ROOT / "pokeemerald.elf")
+    parser.add_argument("--rom", type=Path, default=ROOT / "pokeemerald-release.gba")
+    parser.add_argument("--elf", type=Path, default=ROOT / "pokeemerald-release.elf")
     args = parser.parse_args()
 
     for label, command in STATIC_GATES:
@@ -161,7 +204,8 @@ def main() -> None:
     verify_materialized_trainers()
     verify_unique_state_ids()
     verify_branding()
-    run_gate("whitespace and patch integrity", ("git", "diff", "--check"))
+    verify_patch_integrity()
+    verify_build_freshness(args.rom.resolve(), args.elf.resolve())
     verify_rom(args.rom.resolve(), args.elf.resolve())
     print("\nEMERALD CHAMPIONS RELEASE GATES: PASS")
 

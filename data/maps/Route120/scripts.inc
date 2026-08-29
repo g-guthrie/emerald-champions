@@ -55,8 +55,22 @@ Route120_EventScript_SetBridgeKecleonMovement::
 
 Route120_OnTransition:
 	call GabbyAndTy_EventScript_UpdateLocation
+	call_if_set FLAG_RECEIVED_DEVON_SCOPE, Route120_EventScript_ClearBridgeKecleon
+	call_if_set FLAG_BADGE06_GET, Route120_EventScript_ClearStevenFeatherGate
 	call Route120_EventScript_SetWeather
 	end
+
+Route120_EventScript_ClearBridgeKecleon::
+	setflag FLAG_HIDE_ROUTE_120_KECLEON_BRIDGE
+	setflag FLAG_HIDE_ROUTE_120_KECLEON_BRIDGE_SHADOW
+	removeobject LOCALID_BRIDGE_KECLEON
+	removeobject LOCALID_BRIDGE_KECLEON_SHADOW
+	return
+
+Route120_EventScript_ClearStevenFeatherGate::
+	setflag FLAG_HIDE_ROUTE_120_STEVEN
+	removeobject LOCALID_ROUTE120_STEVEN
+	return
 
 Route120_EventScript_SetWeather::
 	getplayerxy VAR_TEMP_0, VAR_TEMP_1
@@ -154,10 +168,22 @@ Route120_EventScript_BerryNotLove::
 Route120_EventScript_Steven::
 	lock
 	faceplayer
+	goto_if_set FLAG_BADGE06_GET, Route120_EventScript_ClearStevenFeatherGateAndRelease
+	goto_if_set FLAG_RECEIVED_DEVON_SCOPE, Route120_EventScript_StevenFeatherGate
 	goto_if_set FLAG_NOT_READY_FOR_BATTLE_ROUTE_120, Route120_EventScript_StevenAskReadyForBattle
 	msgbox Route120_Text_StevenGreeting, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, Route120_EventScript_StevenNotReady
 	goto Route120_EventScript_StevenBattleKecleon
+	end
+
+Route120_EventScript_ClearStevenFeatherGateAndRelease::
+	call Route120_EventScript_ClearStevenFeatherGate
+	release
+	end
+
+Route120_EventScript_StevenFeatherGate::
+	msgbox Route120_Text_StevenFeatherGate, MSGBOX_DEFAULT
+	release
 	end
 
 Route120_EventScript_StevenNotReady::
@@ -227,16 +253,9 @@ Route120_EventScript_ArchiveDevonScope::
 
 Route120_EventScript_ReceivedDevonScope::
 	setflag FLAG_RECEIVED_DEVON_SCOPE
+	call Route120_EventScript_ClearBridgeKecleon
 	msgbox Route120_Text_StevenGoodbye, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_ROUTE120_STEVEN, Common_Movement_WalkInPlaceFasterDown
-	waitmovement 0
-	delay 50
-	setfieldeffectargument 0, 1
-	dofieldeffect FLDEFF_NPCFLY_OUT
-	delay 15
-	removeobject LOCALID_ROUTE120_STEVEN
-	waitfieldeffect FLDEFF_NPCFLY_OUT
 	setmetatile 13, 15, METATILE_Fortree_WoodBridge1_Top, FALSE
 	setmetatile 12, 16, METATILE_Fortree_WoodBridge1_Bottom, FALSE
 	setmetatile 12, 17, METATILE_General_ReflectiveWater, FALSE
@@ -427,8 +446,15 @@ Route120_Text_StevenGoodbye:
 	.string "STEVEN: {PLAYER}{KUN}.\p"
 	.string "I enjoy seeing POKéMON and TRAINERS\n"
 	.string "who strive together.\p"
-	.string "I think you're doing great.\p"
-	.string "Well, let's meet again somewhere.$"
+	.string "WINONA is waiting in FORTREE.\n"
+	.string "Earn her FEATHER BADGE, then the road\l"
+	.string "east is yours.$"
+
+Route120_Text_StevenFeatherGate:
+	.string "STEVEN: The road east can wait.\p"
+	.string "WINONA is ready to test you in\n"
+	.string "FORTREE GYM. Return with her\l"
+	.string "FEATHER BADGE.$"
 
 Kecleon_Text_SomethingUnseeable:
 	.string "Something unseeable is in the way.$"
@@ -445,7 +471,9 @@ Kecleon_Text_UseDevonScopeMonAttacked:
 
 Route120_Text_RouteSignFortree:
 	.string "ROUTE 120\n"
-	.string "{LEFT_ARROW} FORTREE CITY$"
+	.string "{LEFT_ARROW} FORTREE CITY\p"
+	.string "Two weathered marks show GARDEVOIR\n"
+	.string "beside water and XATU beside grass.$"
 
 Route120_Text_RouteSign121:
 	.string "{RIGHT_ARROW} ROUTE 121\n"

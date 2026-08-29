@@ -296,7 +296,8 @@ BattleFrontier_BattleTowerMultiPartnerRoom_Text_ThankYouForChoosingPartner::
 	.string "MULTI BATTLE ROOM.$"
 
 BattleFrontier_BattleTowerMultiPartnerRoom_Text_UnusedApprentice1Intro::
-	.string "I'm {STR_VAR_1}'s no. {STR_VAR_2} apprentice.\n"
+	.string "I'm {STR_VAR_1}'s\n"
+	.string "no. {STR_VAR_2} apprentice.\p"
 	.string "You can call me {STR_VAR_3}!$"
 
 BattleFrontier_BattleTowerMultiPartnerRoom_Text_UnusedApprentice1Mon1::
@@ -316,7 +317,8 @@ BattleFrontier_BattleTowerMultiPartnerRoom_Text_UnusedApprentice1Reject::
 	.string "with you, {PLAYER}…$"
 
 BattleFrontier_BattleTowerMultiPartnerRoom_Text_UnusedApprentice2Intro::
-	.string "I am {STR_VAR_1}'s no. {STR_VAR_2} apprentice.\n"
+	.string "I am {STR_VAR_1}'s\n"
+	.string "no. {STR_VAR_2} apprentice.\p"
 	.string "My name is {STR_VAR_3}.$"
 
 BattleFrontier_BattleTowerMultiPartnerRoom_Text_UnusedApprentice2Mon1::
@@ -1803,4 +1805,3 @@ BattleFrontier_BattleTowerMultiPartnerRoom_Text_SwimmerMAccept::
 BattleFrontier_BattleTowerMultiPartnerRoom_Text_SwimmerMReject::
 	.string "If we meet again, you have to team up\n"
 	.string "with me. You'll do that, right?$"
-

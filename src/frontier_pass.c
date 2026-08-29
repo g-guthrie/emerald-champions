@@ -624,7 +624,11 @@ static u32 AllocateFrontierPassData(MainCallback callback)
     }
 
     sPassData->battlePoints = gSaveBlock2Ptr->frontier.battlePoints;
-    sPassData->hasBattleRecord = CanCopyRecordedBattleSaveData();
+    // Hide playback even when an older save contains a structurally valid
+    // record. Current Expansion recordings can crash or replay a different
+    // battle, so validity of the save sector is not sufficient.
+    sPassData->hasBattleRecord = B_RECORDED_BATTLES_ENABLED
+                              && CanCopyRecordedBattleSaveData();
     sPassData->areaToShow = CURSOR_AREA_NOTHING;
     sPassData->trainerStars = CountPlayerTrainerStars();
     for (i = 0; i < NUM_FRONTIER_FACILITIES; i++)

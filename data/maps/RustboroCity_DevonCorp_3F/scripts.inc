@@ -164,11 +164,11 @@ RustboroCity_DevonCorp_3F_Movement_PlayerApproachDesk:
 RustboroCity_DevonCorp_3F_EventScript_MrStone::
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_EXP_SHARE, RustboroCity_DevonCorp_3F_EventScript_MrStoneAfterFavor
+	goto_if_set FLAG_RECEIVED_PIDGEOTITE_FROM_DEVON, RustboroCity_DevonCorp_3F_EventScript_MrStoneAfterFavor
 	goto_if_unset FLAG_DELIVERED_STEVEN_LETTER, RustboroCity_DevonCorp_3F_EventScript_MrStoneFavorPending
 	checkitem ITEM_MEGA_RING, 1
 	goto_if_eq VAR_RESULT, FALSE, RustboroCity_DevonCorp_3F_EventScript_MegaRingPending
-	goto RustboroCity_DevonCorp_3F_EventScript_GiveExpShare
+	goto RustboroCity_DevonCorp_3F_EventScript_GivePidgeotite
 	end
 
 RustboroCity_DevonCorp_3F_EventScript_MrStoneFavorPending::
@@ -187,12 +187,12 @@ RustboroCity_DevonCorp_3F_EventScript_MegaRingPending::
 	release
 	end
 
-RustboroCity_DevonCorp_3F_EventScript_GiveExpShare::
+RustboroCity_DevonCorp_3F_EventScript_GivePidgeotite::
 	msgbox RustboroCity_DevonCorp_3F_Text_ThankYouForDeliveringLetter, MSGBOX_DEFAULT
 	giveitem ITEM_PIDGEOTITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_EXP_SHARE
-	msgbox RustboroCity_DevonCorp_3F_Text_ExplainExpShare, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_PIDGEOTITE_FROM_DEVON
+	msgbox RustboroCity_DevonCorp_3F_Text_ExplainPidgeotite, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
@@ -279,7 +279,7 @@ RustboroCity_DevonCorp_3F_Text_ThankYouForDeliveringLetter:
 	.string "This stone was found above RUSTBORO.\n"
 	.string "Let PIDGEOT show you what it can become.$"
 
-RustboroCity_DevonCorp_3F_Text_ExplainExpShare:
+RustboroCity_DevonCorp_3F_Text_ExplainPidgeotite:
 	.string "Shops do not stock rare MEGA STONES.\n"
 	.string "Each one marks a discovery or victory.\p"
 	.string "Seek them in HOENN's gyms,\n"
