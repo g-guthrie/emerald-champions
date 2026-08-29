@@ -1,7 +1,7 @@
 EMERALD CHAMPIONS — EXHAUSTIVE CAMPAIGN EVIDENCE
 =========================================================
 
-Campaign input SHA-256: a5b1c37d6ab6574413d6643b08189281c26b51bbe0bbdde197a0505a98299aa2
+Campaign input SHA-256: f41d6887f1f905d5e11ad03e8ff328db3fa9efe40db9966888d08646c525c7ea
 Physical encounter groups: 513
 Trainer branches: 561
 
@@ -1261,7 +1261,7 @@ PHYSICAL TRAINER ATLAS
   Strongest feature: Every member visibly answers Simon's wish for a Pokémon that can carry him, and Keldeo provides the rare sea-rider payoff inside a coherent Tailwind formation rather than as isolated legendary stats.
   Weakest seam: Tailwind balance is a familiar competitive structure. The literal four-mount identity, mixed physical and special reserves, one setter, and broad speed-reversal counterplay make that familiarity a clean final House exam rather than repetitive filler.
   Branch: Tuber M SIMON (TRAINER_SIMON) — double
-    - Tropius @ Mental Herb; offset +0; Solar Power; Nature Adamant; Stat Points 2/32/0/0/0/32; Tailwind, Double Edge, Seed Bomb, Protect
+    - Tropius @ Mental Herb; offset +0; Aerilate; Nature Adamant; Stat Points 2/32/0/0/0/32; Tailwind, Double Edge, Seed Bomb, Protect
     - Keldeo @ Life Orb; offset +0; Justified; Nature Timid; Stat Points 2/0/0/32/0/32; Hydro Pump, Secret Sword, Icy Wind, Protect
     - Mudsdale @ Assault Vest; offset +0; Stamina; Nature Adamant; Stat Points 32/32/2/0/0/0; High Horsepower, Heavy Slam, Rock Slide, Body Press
     - Lapras @ Choice Specs; offset +0; Shell Armor; Nature Modest; Stat Points 2/0/0/32/0/32; Freeze Dry, Hydro Pump, Thunderbolt, Psychic
@@ -1974,7 +1974,7 @@ PHYSICAL TRAINER ATLAS
   Strongest feature: A Running Triathlete makes one of the game's slowest threatening forms look like the sprinter, then hands the race to two radically different glass-cannon reserves without using another field mode or Mega.
   Weakest seam: Trick Room, priority, Water immunity, Wide Guard plus Hydro Pump scouting, and shared Flying/Psychic/Fairy pressure are broad answers. Those seams are intentional; Pheromosa from +3 to +2 is the first runtime tuning knob if the adaptive finish is too punishing.
   Branch: Triathlete DYLAN (TRAINER_DYLAN_1) — double
-    - Lopunny @ Payapa Berry; offset -2; Klutz; Nature Jolly; Stat Points 2/32/0/0/0/32; After You, Facade, Close Combat, Protect
+    - Lopunny @ Payapa Berry; offset -2; Scrappy; Nature Jolly; Stat Points 2/32/0/0/0/32; After You, Facade, Close Combat, Protect
     - Wishiwashi @ Sitrus Berry; offset -2; Schooling; Nature Modest; Stat Points 2/0/0/32/0/32; Hydro Pump, Muddy Water, Ice Beam, U Turn
     - Accelgor @ Bug Gem; offset -2; Unburden; Nature Timid; Stat Points 2/0/0/32/0/32; Bug Buzz, Sludge Bomb, Energy Ball, Water Shuriken
     - Pheromosa @ White Herb; offset -2; Beast Boost; Nature Adamant; Stat Points 2/32/0/0/0/32; Close Combat, Triple Axel, Lunge, Protect
@@ -2277,7 +2277,7 @@ PHYSICAL TRAINER ATLAS
   Strongest feature: Frisk Gourgeist can reverse speed, but its Flame Orb is a visible self-damaging liability while Gengar attacks immediately; Choice Band Sudowoodo and Assault Vest Magmortar make the reserves physical and special props.
   Weakest seam: The lead shares Ghost and Dark pressure; Gourgeist's Orb costs health; Sudowoodo is Choice locked; Magmortar is slow and lacks Protect; Rock, Ground, Water, Dark, Ghost, Taunt, and priority remain broad.
   Branch: Picnicker BIANCA (TRAINER_BIANCA) — double
-    - Gourgeist Super @ Flame Orb; offset +0; Frisk; Nature Quiet; Stat Points 32/0/2/32/0/0; Shadow Ball, Energy Ball, Trick Room, Protect
+    - Gourgeist Super @ Flame Orb; offset +0; Flare Boost; Nature Quiet; Stat Points 32/0/2/32/0/0; Shadow Ball, Energy Ball, Trick Room, Protect
     - Gengar @ Life Orb; offset +0; Levitate; Nature Timid; Stat Points 2/0/0/32/0/32; Sludge Bomb, Shadow Ball, Dazzling Gleam, Protect
     - Sudowoodo @ Choice Band; offset +0; Rock Head; Nature Adamant; Stat Points 32/32/2/0/0/0; Head Smash, Low Kick, Sucker Punch, Earthquake
     - Magmortar @ Assault Vest; offset +0; Vital Spirit; Nature Modest; Stat Points 2/0/0/32/0/32; Heat Wave, Thunderbolt, Psychic, Focus Blast
@@ -2327,7 +2327,7 @@ PHYSICAL TRAINER ATLAS
     - Victreebel @ Focus Sash; offset +0; Chlorophyll; Nature Timid; Stat Points 2/0/0/32/0/32; Gastro Acid, Leaf Storm, Sludge Bomb, Protect
     - Vigoroth @ Choice Band; offset +0; Vital Spirit; Nature Adamant; Stat Points 2/32/0/0/0/32; Double Edge, Earthquake, Play Rough, Knock Off
     - Golisopod @ Assault Vest; offset +0; Emergency Exit; Nature Adamant; Stat Points 2/32/0/0/0/32; First Impression, Liquidation, Leech Life, Waterfall
-    - Durant @ Life Orb; offset +0; Vital Spirit; Nature Jolly; Stat Points 2/32/0/0/0/32; Iron Head, X Scissor, Superpower, Rock Slide
+    - Durant @ Life Orb; offset +0; Hustle; Nature Jolly; Stat Points 2/32/0/0/0/32; Iron Head, X Scissor, Superpower, Rock Slide
     Dialogue source: data/maps/Route111/scripts.inc:667 (Route111_EventScript_Celina)
     Route111_Text_CelinaIntro:
       > Show me how to put a little excitement
@@ -2802,7 +2802,7 @@ PHYSICAL TRAINER ATLAS
   Weakest seam: Ice and strong special coverage can compress the trio. Levels +1/+2/+3, Ripen, finite Figy recovery, Life Orb coverage, and smart switching are the explicit compensation.
   Branch: Picnicker IRENE (TRAINER_IRENE) — single
     - Flapple @ Sitrus Berry; offset -2; Ripen; Nature Adamant; Stat Points 2/32/0/0/0/32; Grav Apple, Dragon Rush, U Turn, Protect
-    - Trevenant @ Figy Berry; offset -2; Frisk; Nature Adamant; Stat Points 2/32/0/0/0/32; Horn Leech, Poltergeist, Will O Wisp, Protect
+    - Trevenant @ Figy Berry; offset -2; Grassy Surge; Nature Adamant; Stat Points 2/32/0/0/0/32; Horn Leech, Poltergeist, Will O Wisp, Protect
     - Exeggutor @ Life Orb; offset -2; Chlorophyll; Nature Modest; Stat Points 32/0/2/32/0/0; Solar Beam, Psychic, Sludge Bomb, Protect
     Dialogue source: data/maps/Route111/scripts.inc:600 (Route111_EventScript_Irene)
     Route111_Text_IreneIntro:
@@ -2943,7 +2943,7 @@ PHYSICAL TRAINER ATLAS
   Branch: Kindler BRYANT (TRAINER_BRYANT) — double
     - Magcargo @ Air Balloon; offset +0; Weak Armor; Nature Modest; Stat Points 2/0/0/32/0/32; Heat Wave, Power Gem, Earth Power, Protect
     - Typhlosion @ Choice Scarf; offset +0; Blaze; Nature Timid; Stat Points 2/0/0/32/0/32; Eruption, Heat Wave, Focus Blast, Extrasensory
-    - Heatmor @ Assault Vest; offset +0; Flash Fire; Nature Adamant; Stat Points 2/32/0/0/0/32; Fire Lash, Throat Chop, Thunder Punch, Superpower
+    - Heatmor @ Assault Vest; offset +0; Tough Claws; Nature Adamant; Stat Points 2/32/0/0/0/32; Fire Lash, Throat Chop, Thunder Punch, Superpower
     Dialogue source: data/maps/Route112/scripts.inc:142 (Route112_EventScript_Bryant)
     Route112_Text_BryantIntro:
       > I caught hot POKéMON in FIERY PATH!
@@ -3378,7 +3378,7 @@ PHYSICAL TRAINER ATLAS
   Strongest feature: Pyroar's Hyper Voice creates a readable handoff through Golduck, Marowak Alola into Vaporeon's Helping Hand, so the team has one identity without becoming one scripted solution.
   Weakest seam: If the player breaks the spread pressure layer or removes Pyroar early, the remaining members must win through ordinary positioning; that intentional seam keeps difficulty 7.7 honest.
   Branch: Kindler BERNIE (TRAINER_BERNIE_1) — double
-    - Pyroar @ Throat Spray; offset +0; Unnerve; Nature Timid; Stat Points 2/0/0/32/0/32; Hyper Voice, Heat Wave, Dark Pulse, Will O Wisp
+    - Pyroar @ Throat Spray; offset +0; Competitive; Nature Timid; Stat Points 2/0/0/32/0/32; Hyper Voice, Heat Wave, Dark Pulse, Will O Wisp
     - Golduck @ Expert Belt; offset +0; Cloud Nine; Nature Timid; Stat Points 2/0/0/32/0/32; Chilling Water, Ice Beam, Psychic, Encore
     - Marowak Alola @ Thick Club; offset +0; Lightning Rod; Nature Brave; Stat Points 32/32/2/0/0/0; Flare Blitz, Poltergeist, Bonemerang, Protect
     - Vaporeon @ Leftovers; offset +0; Water Absorb; Nature Modest; Stat Points 2/0/0/32/0/32; Water Pulse, Ice Beam, Helping Hand, Protect
@@ -3741,7 +3741,7 @@ PHYSICAL TRAINER ATLAS
   Branch: Picnicker DIANA (TRAINER_DIANA_1) — double
     - Delibird @ Focus Sash; offset +0; Vital Spirit; Nature Timid; Stat Points 2/0/0/32/0/32; Fake Out, Icy Wind, Freeze Dry, Water Pulse
     - Vespiquen @ Rocky Helmet; offset +0; Pressure; Nature Impish; Stat Points 32/0/2/0/32/0; Attack Order, Protect, Helping Hand, Defend Order
-    - Gourgeist @ Flame Orb; offset +0; Frisk; Nature Modest; Stat Points 2/0/0/32/0/32; Shadow Ball, Giga Drain, Will O Wisp, Leech Seed
+    - Gourgeist @ Flame Orb; offset +0; Flare Boost; Nature Modest; Stat Points 2/0/0/32/0/32; Shadow Ball, Giga Drain, Will O Wisp, Leech Seed
     - Eelektross @ Choice Specs; offset +0; Levitate; Nature Timid; Stat Points 2/0/0/32/0/32; Thunderbolt, Flamethrower, Giga Drain, Volt Switch
     Dialogue source: data/maps/JaggedPass/scripts.inc:189 (JaggedPass_EventScript_Diana)
     JaggedPass_Text_DianaIntro:
@@ -3780,7 +3780,7 @@ PHYSICAL TRAINER ATLAS
   Branch: Triathlete JULIO (TRAINER_JULIO) — double
     - Haunter @ Choice Specs; offset +0; Levitate; Nature Timid; Stat Points 2/0/0/32/0/32; Shadow Ball, Sludge Bomb, Dazzling Gleam, Thunderbolt
     - Jolteon @ Life Orb; offset +0; Volt Absorb; Nature Timid; Stat Points 2/0/0/32/0/32; Thunderbolt, Shadow Ball, Hyper Voice, Volt Switch
-    - Dodrio @ Choice Band; offset +0; Run Away; Nature Jolly; Stat Points 2/32/0/0/0/32; Brave Bird, Low Kick, Knock Off, Quick Attack
+    - Dodrio @ Choice Band; offset +0; Moxie; Nature Jolly; Stat Points 2/32/0/0/0/32; Brave Bird, Low Kick, Knock Off, Quick Attack
     Dialogue source: data/maps/JaggedPass/scripts.inc:229 (JaggedPass_EventScript_Julio)
     JaggedPass_Text_JulioIntro:
       > Aiyeeh! It's awfully scary to shoot
@@ -3996,8 +3996,8 @@ PHYSICAL TRAINER ATLAS
   Weakest seam: Two members are Rock-weak; Policy, Simple, pivots and mixed categories prevent one Rock move from solving the full board.
   Branch: Kindler AXLE (TRAINER_AXLE) — double
     - Drifblim @ Weakness Policy; offset +0; Unburden; Nature Jolly; Stat Points 2/0/0/32/0/32; Acrobatics, Shadow Ball, Will O Wisp, Destiny Bond
-    - Magcargo @ White Herb; offset +0; Flame Body; Nature Modest; Stat Points 2/0/0/32/0/32; Shell Smash, Lava Plume, Power Gem, Earth Power
-    - Heatmor @ Eject Pack; offset +0; Flash Fire; Nature Timid; Stat Points 2/32/0/0/0/32; Overheat, Fire Lash, Sucker Punch, Giga Drain
+    - Magcargo @ White Herb; offset +0; Simple; Nature Modest; Stat Points 2/0/0/32/0/32; Shell Smash, Lava Plume, Power Gem, Earth Power
+    - Heatmor @ Eject Pack; offset +0; Tough Claws; Nature Timid; Stat Points 2/32/0/0/0/32; Overheat, Fire Lash, Sucker Punch, Giga Drain
     - Ho-Oh @ Heavy Duty Boots; offset +0; Regenerator; Nature Adamant; Stat Points 2/32/0/0/0/32; Sacred Fire, Brave Bird, Earthquake, Tailwind
     Dialogue source: data/maps/LavaridgeTown_Gym_1F/scripts.inc:113 (LavaridgeTown_Gym_1F_EventScript_Axle)
     LavaridgeTown_Gym_1F_Text_AxleIntro:
@@ -4050,7 +4050,7 @@ PHYSICAL TRAINER ATLAS
   Branch: Battle Girl DANIELLE (TRAINER_DANIELLE) — double
     - Oricorio @ Charti Berry; offset +0; Dancer; Nature Timid; Stat Points 2/0/0/32/0/32; Revelation Dance, Air Slash, Helping Hand, Protect
     - Bellossom @ Lum Berry; offset +0; Chlorophyll; Nature Timid; Stat Points 2/0/0/32/0/32; Quiver Dance, Giga Drain, Sludge Bomb, Protect
-    - Rapidash @ Choice Band; offset +0; Run Away; Nature Jolly; Stat Points 2/32/0/0/0/32; Flare Blitz, Wild Charge, Low Kick, Poison Jab
+    - Rapidash @ Choice Band; offset +0; Reckless; Nature Jolly; Stat Points 2/32/0/0/0/32; Flare Blitz, Wild Charge, Low Kick, Poison Jab
     - Froslass @ Focus Sash; offset +0; Snow Cloak; Nature Timid; Stat Points 2/0/0/32/0/32; Frost Breath, Icy Wind, Taunt, Destiny Bond
     Dialogue source: data/maps/LavaridgeTown_Gym_1F/scripts.inc:123 (LavaridgeTown_Gym_1F_EventScript_Danielle)
     LavaridgeTown_Gym_1F_Text_DanielleIntro:
@@ -4110,7 +4110,7 @@ PHYSICAL TRAINER ATLAS
   Weakest seam: If Spinda is removed immediately, the opening becomes ordinary special Fire pressure. That is earned broad counterplay; two optimized cap-plus physical reserves keep the battle above the floor without hiding a second mandatory trick.
   Branch: Kindler JEFF (TRAINER_JEFF) — double
     - Spinda @ Sitrus Berry; offset +0; Contrary; Nature Timid; Stat Points 32/32/2/0/0/0; Skill Swap, Fake Out, Icy Wind, Helping Hand
-    - Pyroar @ Iron Ball; offset +0; Unnerve; Nature Modest; Stat Points 2/0/0/32/0/32; Overheat, Hyper Voice, Dark Pulse, Protect
+    - Pyroar @ Iron Ball; offset +0; Competitive; Nature Modest; Stat Points 2/0/0/32/0/32; Overheat, Hyper Voice, Dark Pulse, Protect
     - Cinderace @ Expert Belt; offset +0; Libero; Nature Jolly; Stat Points 2/32/0/0/0/32; Pyro Ball, Low Kick, Gunk Shot, Taunt
     - Centiskorch @ Assault Vest; offset +0; White Smoke; Nature Adamant; Stat Points 32/0/32/0/2/0; Fire Lash, Power Whip, Leech Life, Crunch
     Dialogue source: data/maps/LavaridgeTown_Gym_1F/scripts.inc:138 (LavaridgeTown_Gym_B1F_EventScript_Jeff)
@@ -4313,7 +4313,7 @@ PHYSICAL TRAINER ATLAS
   Strongest feature: Four forest survivors reveal one defensive rule at a time before Mega Sceptile ends the single with immediate speed.
   Weakest seam: No field mode, trap, priority loop, or shared resistance; Taunt, item removal, Ice, Flying, Fairy, Poison, Dragon, and immediate physical or special burst remain broad.
   Branch: Picnicker ALANNAH (TRAINER_ALANNAH) — double
-    - Trevenant @ Sitrus Berry; offset -1; Frisk; Nature Adamant; Stat Points 2/32/0/0/0/32; Horn Leech, Poltergeist, Leech Seed, Protect
+    - Trevenant @ Sitrus Berry; offset -1; Grassy Surge; Nature Adamant; Stat Points 2/32/0/0/0/32; Horn Leech, Poltergeist, Leech Seed, Protect
     - Chesnaught @ Leftovers; offset +0; Bulletproof; Nature Adamant; Stat Points 32/0/32/0/2/0; Drain Punch, Wood Hammer, Spiky Shield, Leech Seed
     - Goodra @ Assault Vest; offset +5; Gooey; Nature Modest; Stat Points 2/0/0/32/0/32; Dragon Pulse, Sludge Bomb, Thunderbolt, Flamethrower
     - Sceptile @ Sceptilite; offset +0; Overgrow; Nature Timid; Stat Points 2/0/0/32/0/32; Leaf Storm, Dragon Pulse, Focus Blast, Protect
@@ -4471,8 +4471,8 @@ PHYSICAL TRAINER ATLAS
   Branch: Cooltrainer RANDALL (TRAINER_RANDALL) — double
     - Regieleki @ Magnet; offset +0; Transistor; Nature Timid; Stat Points 2/0/0/32/0/32; Thunderbolt, Electroweb, Volt Switch, Protect
     - Ambipom @ Focus Sash; offset +0; Technician; Nature Jolly; Stat Points 2/32/0/0/0/32; Helping Hand, Double Hit, Knock Off, U Turn
-    - Dodrio @ Choice Scarf; offset +0; Run Away; Nature Jolly; Stat Points 2/32/0/0/0/32; Brave Bird, Double Edge, Low Kick, Knock Off
-    - Lopunny @ Lopunnite; offset +0; Klutz; Nature Jolly; Stat Points 2/32/0/0/0/32; Fake Out, Facade, High Jump Kick, Ice Punch
+    - Dodrio @ Choice Scarf; offset +0; Moxie; Nature Jolly; Stat Points 2/32/0/0/0/32; Brave Bird, Double Edge, Low Kick, Knock Off
+    - Lopunny @ Lopunnite; offset +0; Scrappy; Nature Jolly; Stat Points 2/32/0/0/0/32; Fake Out, Facade, High Jump Kick, Ice Punch
     Dialogue source: data/maps/PetalburgCity_Gym/scripts.inc:863 (PetalburgCity_Gym_EventScript_Randall)
     PetalburgCity_Gym_Text_RandallIntro:
       > The ability to attack before the
@@ -4588,7 +4588,7 @@ PHYSICAL TRAINER ATLAS
     - Cinccino @ Wide Lens; offset +0; Skill Link; Nature Jolly; Stat Points 2/32/0/0/0/32; Tail Slap, Bullet Seed, Rock Blast, Protect
     - Toucannon @ Muscle Band; offset +0; Skill Link; Nature Adamant; Stat Points 2/32/0/0/0/32; Bullet Seed, Rock Blast, Beak Blast, Protect
     - Drampa @ Zoom Lens; offset +0; Berserk; Nature Quiet; Stat Points 2/0/0/32/0/32; Hyper Voice, Draco Meteor, Fire Blast, Focus Blast
-    - Pidgeot @ Pidgeotite; offset +0; Keen Eye; Nature Timid; Stat Points 2/0/0/32/0/32; Hurricane, Heat Wave, Tailwind, Protect
+    - Pidgeot @ Pidgeotite; offset +0; No Guard; Nature Timid; Stat Points 2/0/0/32/0/32; Hurricane, Heat Wave, Tailwind, Protect
     Dialogue source: data/maps/PetalburgCity_Gym/scripts.inc:931 (PetalburgCity_Gym_EventScript_Mary)
     PetalburgCity_Gym_Text_MaryIntro:
       > Giggle…
@@ -10840,11 +10840,11 @@ PHYSICAL TRAINER ATLAS
   Strongest feature: Heracross's Megahorn creates a readable handoff through Florges, Lycanroc, Bronzong, Gourgeist into Kyurem White's Blizzard, so the team has one identity without becoming one scripted solution.
   Weakest seam: If the player breaks the Trick Room layer or removes Heracross early, the remaining members must win through ordinary positioning; that intentional seam keeps difficulty 8.5 honest.
   Branch: Swimmer M HERMAN (TRAINER_HERMAN) — double
-    - Heracross @ Flame Orb; offset +0; Guts; Nature Adamant; Stat Points 2/32/0/0/0/32; Megahorn, Close Combat, Rock Slide, Protect
+    - Heracross @ Toxic Orb; offset +0; Guts; Nature Adamant; Stat Points 2/32/0/0/0/32; Megahorn, Close Combat, Rock Slide, Protect
     - Florges @ Sitrus Berry; offset -1; Misty Surge; Nature Modest; Stat Points 32/0/2/0/32/0; Dazzling Gleam, Helping Hand, Wish, Protect
     - Lycanroc @ Life Orb; offset -1; Sand Rush; Nature Jolly; Stat Points 2/32/0/0/0/32; Rock Slide, Drill Run, Close Combat, Protect
     - Bronzong @ Mental Herb; offset -1; Levitate; Nature Brave; Stat Points 32/0/32/0/2/0; Trick Room, Gyro Ball, Hypnosis, Protect
-    - Gourgeist @ Occa Berry; offset -1; Frisk; Nature Modest; Stat Points 2/0/0/32/0/32; Shadow Ball, Energy Ball, Will O Wisp, Protect
+    - Gourgeist @ Flame Orb; offset -1; Flare Boost; Nature Modest; Stat Points 2/0/0/32/0/32; Shadow Ball, Energy Ball, Will O Wisp, Protect
     - Kyurem White @ Choice Scarf; offset +0; Turboblaze; Nature Timid; Stat Points 2/0/0/32/0/32; Blizzard, Ice Beam, Fusion Flare, Draco Meteor
     Dialogue source: data/maps/Route131/scripts.inc:24 (Route131_EventScript_Herman)
     Route131_Text_HermanIntro:

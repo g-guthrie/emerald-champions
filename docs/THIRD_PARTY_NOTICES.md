@@ -1,5 +1,18 @@
 # Third-party notices
 
+## Inclement Emerald balance data
+
+Selected species Ability assignments are adapted from Inclement Emerald's
+public `REBALANCED_VERSION` species tables at commit
+`93e96730fb3c771f7f08f9623ae36f0643c52d3d`:
+https://github.com/jrci-dev/inclementemerald
+
+Emerald Champions ports only the relevant Ability identities into its current
+Pokemon Champions-oriented species data; it does not import Inclement
+Emerald's battle-engine source. Inclement Emerald is credited to its project
+authors and contributors. Its repository does not publish a standalone license
+file, so this notice makes no additional license claim.
+
 ## Pokemon Showdown
 
 The Champions Circuit random-doubles data and runtime selection rules are

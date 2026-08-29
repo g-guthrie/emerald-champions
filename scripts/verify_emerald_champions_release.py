@@ -25,6 +25,7 @@ STATIC_GATES = (
     ("competitive presets", (PYTHON, "scripts/verify_emerald_champions_battle_sets.py")),
     ("upstream critical fixes", (PYTHON, "scripts/verify_upstream_critical_fixes.py")),
     ("campaign roster", (PYTHON, "scripts/verify_emerald_champions_campaign_roster.py")),
+    ("trainer Ability legality", (PYTHON, "scripts/verify_trainer_ability_legality.py")),
     ("story and dialogue", (PYTHON, "scripts/verify_emerald_champions_story.py")),
     ("rematch-free Match Call", (PYTHON, "scripts/verify_rematch_free_match_call.py")),
     ("whole-campaign progression graph", (PYTHON, "scripts/verify_emerald_champions_progression.py")),

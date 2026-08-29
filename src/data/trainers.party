@@ -3022,7 +3022,7 @@ AI: Basic Trainer / Hp Aware / Smart Mon Choices / Assume Stab / Assume Status M
 
 SPECIES_TROPIUS @ ITEM_MENTAL_HERB
 Level: 30
-Ability: ABILITY_SOLAR_POWER
+Ability: ABILITY_AERILATE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_ADAMANT
@@ -3196,7 +3196,7 @@ Nature: NATURE_JOLLY
 
 SPECIES_DODRIO @ ITEM_CHOICE_SCARF
 Level: 45
-Ability: ABILITY_RUN_AWAY
+Ability: ABILITY_MOXIE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_JOLLY
@@ -3207,7 +3207,7 @@ Nature: NATURE_JOLLY
 
 SPECIES_LOPUNNY @ ITEM_LOPUNNITE
 Level: 45
-Ability: ABILITY_KLUTZ
+Ability: ABILITY_SCRAPPY
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_JOLLY
@@ -4224,7 +4224,7 @@ Nature: NATURE_QUIET
 
 SPECIES_PIDGEOT @ ITEM_PIDGEOTITE
 Level: 45
-Ability: ABILITY_KEEN_EYE
+Ability: ABILITY_NO_GUARD
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
 Nature: NATURE_TIMID
@@ -7282,7 +7282,7 @@ Music: Swimmer
 Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Switching / Predict Switch / Predict Incoming Mon / Pp Stall Prevention / Assume Stab / Assume Status Moves
 
-SPECIES_HERACROSS @ ITEM_FLAME_ORB
+SPECIES_HERACROSS @ ITEM_TOXIC_ORB
 Level: 70
 Ability: ABILITY_GUTS
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
@@ -7326,9 +7326,9 @@ Nature: NATURE_BRAVE
 - MOVE_HYPNOSIS
 - MOVE_PROTECT
 
-SPECIES_GOURGEIST @ ITEM_OCCA_BERRY
+SPECIES_GOURGEIST @ ITEM_FLAME_ORB
 Level: 69
-Ability: ABILITY_FRISK
+Ability: ABILITY_FLARE_BOOST
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
 Nature: NATURE_MODEST
@@ -8473,7 +8473,7 @@ Nature: NATURE_TIMID
 
 SPECIES_PYROAR @ ITEM_IRON_BALL
 Level: 40
-Ability: ABILITY_UNNERVE
+Ability: ABILITY_COMPETITIVE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
 Nature: NATURE_MODEST
@@ -8526,7 +8526,7 @@ Nature: NATURE_JOLLY
 
 SPECIES_MAGCARGO @ ITEM_WHITE_HERB
 Level: 40
-Ability: ABILITY_FLAME_BODY
+Ability: ABILITY_SIMPLE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
 Nature: NATURE_MODEST
@@ -8537,7 +8537,7 @@ Nature: NATURE_MODEST
 
 SPECIES_HEATMOR @ ITEM_EJECT_PACK
 Level: 40
-Ability: ABILITY_FLASH_FIRE
+Ability: ABILITY_TOUGH_CLAWS
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_TIMID
@@ -8653,7 +8653,7 @@ AI: Basic Trainer / Hp Aware / Smart Mon Choices / Assume Stab / Assume Status M
 
 SPECIES_PYROAR @ ITEM_THROAT_SPRAY
 Level: 40
-Ability: ABILITY_UNNERVE
+Ability: ABILITY_COMPETITIVE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
 Nature: NATURE_TIMID
@@ -14690,7 +14690,7 @@ AI: Basic Trainer
 
 SPECIES_LOPUNNY @ ITEM_PAYAPA_BERRY
 Level: 28
-Ability: ABILITY_KLUTZ
+Ability: ABILITY_SCRAPPY
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_JOLLY
@@ -18682,7 +18682,7 @@ Nature: NATURE_IMPISH
 
 SPECIES_GOURGEIST @ ITEM_FLAME_ORB
 Level: 40
-Ability: ABILITY_FRISK
+Ability: ABILITY_FLARE_BOOST
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
 Nature: NATURE_MODEST
@@ -18766,7 +18766,7 @@ Nature: NATURE_ADAMANT
 
 SPECIES_TREVENANT @ ITEM_FIGY_BERRY
 Level: 38
-Ability: ABILITY_FRISK
+Ability: ABILITY_GRASSY_SURGE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_ADAMANT
@@ -22446,7 +22446,7 @@ Nature: NATURE_TIMID
 
 SPECIES_DODRIO @ ITEM_CHOICE_BAND
 Level: 40
-Ability: ABILITY_RUN_AWAY
+Ability: ABILITY_MOXIE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_JOLLY
@@ -26056,7 +26056,7 @@ Nature: NATURE_TIMID
 
 SPECIES_RAPIDASH @ ITEM_CHOICE_BAND
 Level: 40
-Ability: ABILITY_RUN_AWAY
+Ability: ABILITY_RECKLESS
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_JOLLY
@@ -28731,7 +28731,7 @@ Nature: NATURE_ADAMANT
 
 SPECIES_DURANT @ ITEM_LIFE_ORB
 Level: 30
-Ability: ABILITY_VITAL_SPIRIT
+Ability: ABILITY_HUSTLE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_JOLLY
@@ -28751,7 +28751,7 @@ AI: Basic Trainer / Hp Aware / Smart Mon Choices / Assume Stab / Assume Status M
 
 SPECIES_GOURGEIST_SUPER @ ITEM_FLAME_ORB
 Level: 30
-Ability: ABILITY_FRISK
+Ability: ABILITY_FLARE_BOOST
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 2 Def / 32 SpA / 0 SpD / 0 Spe
 Nature: NATURE_QUIET
@@ -30696,7 +30696,7 @@ Nature: NATURE_TIMID
 
 SPECIES_HEATMOR @ ITEM_ASSAULT_VEST
 Level: 40
-Ability: ABILITY_FLASH_FIRE
+Ability: ABILITY_TOUGH_CLAWS
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_ADAMANT
@@ -31942,7 +31942,7 @@ AI: Basic Trainer / Hp Aware / Smart Mon Choices / Assume Stab / Assume Status M
 
 SPECIES_TREVENANT @ ITEM_SITRUS_BERRY
 Level: 44
-Ability: ABILITY_FRISK
+Ability: ABILITY_GRASSY_SURGE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_ADAMANT

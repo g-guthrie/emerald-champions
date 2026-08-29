@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "source_commit": "33202c162ebc34a1dbe2000acd26b0720baa109d",
+  "source_commit": "0b2bc96c7d6480187f70f5b83a705c081780983e",
   "policy": {
     "format": "doubles-first",
     "stat_points": "66 total, 32 maximum per stat",
@@ -213,7 +213,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_MODEST",
-      "ability": "ABILITY_RAIN_DISH",
+      "ability": "ABILITY_MEGA_LAUNCHER",
       "item": "ITEM_SITRUS_BERRY",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -429,7 +429,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_TIMID",
-      "ability": "ABILITY_BIG_PECKS",
+      "ability": "ABILITY_NO_GUARD",
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -525,7 +525,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_JOLLY",
-      "ability": "ABILITY_SNIPER",
+      "ability": "ABILITY_INTIMIDATE",
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -1869,7 +1869,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_JOLLY",
-      "ability": "ABILITY_FLAME_BODY",
+      "ability": "ABILITY_RECKLESS",
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -2037,7 +2037,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_JOLLY",
-      "ability": "ABILITY_TANGLED_FEET",
+      "ability": "ABILITY_MOXIE",
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -2085,7 +2085,7 @@
         "MOVE_ENCORE"
       ],
       "nature": "NATURE_TIMID",
-      "ability": "ABILITY_ICE_BODY",
+      "ability": "ABILITY_FUR_COAT",
       "item": "ITEM_SITRUS_BERRY",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -2253,7 +2253,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_TIMID",
-      "ability": "ABILITY_CURSED_BODY",
+      "ability": "ABILITY_LEVITATE",
       "item": "ITEM_FOCUS_SASH",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -2421,7 +2421,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_TIMID",
-      "ability": "ABILITY_AFTERMATH",
+      "ability": "ABILITY_ELECTRIC_SURGE",
       "item": "ITEM_FOCUS_SASH",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -3690,7 +3690,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_BOLD",
-      "ability": "ABILITY_LEAF_GUARD",
+      "ability": "ABILITY_TRIAGE",
       "item": "ITEM_SITRUS_BERRY",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -4864,7 +4864,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_JOLLY",
-      "ability": "ABILITY_SAP_SIPPER",
+      "ability": "ABILITY_STRONG_JAW",
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -5248,7 +5248,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_MODEST",
-      "ability": "ABILITY_WEAK_ARMOR",
+      "ability": "ABILITY_SIMPLE",
       "item": "ITEM_WHITE_HERB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -6400,7 +6400,7 @@
         "MOVE_ROOST"
       ],
       "nature": "NATURE_TIMID",
-      "ability": "ABILITY_RIVALRY",
+      "ability": "ABILITY_BERSERK",
       "item": "ITEM_FOCUS_SASH",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -6448,7 +6448,7 @@
         "MOVE_ROOST"
       ],
       "nature": "NATURE_BOLD",
-      "ability": "ABILITY_COMPOUND_EYES",
+      "ability": "ABILITY_UNAWARE",
       "item": "ITEM_LEFTOVERS",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -7696,7 +7696,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_QUIET",
-      "ability": "ABILITY_PRESSURE",
+      "ability": "ABILITY_DRIZZLE",
       "item": "ITEM_SITRUS_BERRY",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -7912,7 +7912,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_JOLLY",
-      "ability": "ABILITY_LEVITATE",
+      "ability": "ABILITY_TINTED_LENS",
       "item": "ITEM_YACHE_BERRY",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -8560,7 +8560,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_ADAMANT",
-      "ability": "ABILITY_HARVEST",
+      "ability": "ABILITY_AERILATE",
       "item": "ITEM_SITRUS_BERRY",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -8872,7 +8872,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_TIMID",
-      "ability": "ABILITY_HYDRATION",
+      "ability": "ABILITY_SOUL_HEART",
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -9328,7 +9328,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_BRAVE",
-      "ability": "ABILITY_SHELL_ARMOR",
+      "ability": "ABILITY_SOLID_ROCK",
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -9976,7 +9976,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_CAREFUL",
-      "ability": "ABILITY_UNNERVE",
+      "ability": "ABILITY_INTIMIDATE",
       "item": "ITEM_LEFTOVERS",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -10264,7 +10264,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_JOLLY",
-      "ability": "ABILITY_LIMBER",
+      "ability": "ABILITY_SCRAPPY",
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -10288,7 +10288,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_TIMID",
-      "ability": "ABILITY_LEVITATE",
+      "ability": "ABILITY_PIXILATE",
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -11200,7 +11200,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_MODEST",
-      "ability": "ABILITY_VITAL_SPIRIT",
+      "ability": "ABILITY_MEGA_LAUNCHER",
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -11296,7 +11296,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_MODEST",
-      "ability": "ABILITY_ICE_BODY",
+      "ability": "ABILITY_SLUSH_RUSH",
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -11656,7 +11656,7 @@
         "MOVE_WIDE_GUARD"
       ],
       "nature": "NATURE_ADAMANT",
-      "ability": "ABILITY_SLOW_START",
+      "ability": "ABILITY_CLEAR_BODY",
       "item": "ITEM_SITRUS_BERRY",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -14080,7 +14080,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_TIMID",
-      "ability": "ABILITY_MOTOR_DRIVE",
+      "ability": "ABILITY_LIGHTNING_ROD",
       "item": "ITEM_FOCUS_SASH",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -15136,7 +15136,7 @@
         "MOVE_ROCK_TOMB"
       ],
       "nature": "NATURE_ADAMANT",
-      "ability": "ABILITY_WHITE_SMOKE",
+      "ability": "ABILITY_TOUGH_CLAWS",
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -16024,7 +16024,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_TIMID",
-      "ability": "ABILITY_MOXIE",
+      "ability": "ABILITY_COMPETITIVE",
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -16072,7 +16072,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_CALM",
-      "ability": "ABILITY_SYMBIOSIS",
+      "ability": "ABILITY_HEALER",
       "item": "ITEM_EVIOLITE",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -16096,7 +16096,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_CALM",
-      "ability": "ABILITY_SYMBIOSIS",
+      "ability": "ABILITY_MISTY_SURGE",
       "item": "ITEM_SITRUS_BERRY",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -16144,7 +16144,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_CAREFUL",
-      "ability": "ABILITY_GRASS_PELT",
+      "ability": "ABILITY_GRASSY_SURGE",
       "item": "ITEM_LEFTOVERS",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -16936,7 +16936,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_MODEST",
-      "ability": "ABILITY_GOOEY",
+      "ability": "ABILITY_POISON_HEAL",
       "item": "ITEM_TOXIC_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -17008,7 +17008,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_ADAMANT",
-      "ability": "ABILITY_HARVEST",
+      "ability": "ABILITY_GRASSY_SURGE",
       "item": "ITEM_LEFTOVERS",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -17056,7 +17056,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_MODEST",
-      "ability": "ABILITY_INSOMNIA",
+      "ability": "ABILITY_FLARE_BOOST",
       "item": "ITEM_FLAME_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -17368,7 +17368,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_JOLLY",
-      "ability": "ABILITY_LONG_REACH",
+      "ability": "ABILITY_TINTED_LENS",
       "item": "ITEM_SITRUS_BERRY",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -18472,7 +18472,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_BOLD",
-      "ability": "ABILITY_SAND_VEIL",
+      "ability": "ABILITY_SAND_STREAM",
       "item": "ITEM_LEFTOVERS",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -23104,7 +23104,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_TIMID",
-      "ability": "ABILITY_LEVITATE",
+      "ability": "ABILITY_MOTOR_DRIVE",
       "item": "ITEM_SITRUS_BERRY",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -25120,7 +25120,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_TIMID",
-      "ability": "ABILITY_INSOMNIA",
+      "ability": "ABILITY_FLARE_BOOST",
       "item": "ITEM_FLAME_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -25144,7 +25144,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_MODEST",
-      "ability": "ABILITY_INSOMNIA",
+      "ability": "ABILITY_FLARE_BOOST",
       "item": "ITEM_FLAME_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -25168,7 +25168,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_QUIET",
-      "ability": "ABILITY_INSOMNIA",
+      "ability": "ABILITY_FLARE_BOOST",
       "item": "ITEM_FLAME_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -31866,7 +31866,7 @@
         "MOVE_GIGA_IMPACT"
       ],
       "nature": "NATURE_JOLLY",
-      "ability": "ABILITY_LIMBER",
+      "ability": "ABILITY_SCRAPPY",
       "item": "ITEM_CHOICE_SCARF",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -33066,7 +33066,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_MODEST",
-      "ability": "ABILITY_GOOEY",
+      "ability": "ABILITY_POISON_HEAL",
       "item": "ITEM_LEFTOVERS",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -33090,7 +33090,7 @@
         "MOVE_DESTINY_BOND"
       ],
       "nature": "NATURE_RELAXED",
-      "ability": "ABILITY_INSOMNIA",
+      "ability": "ABILITY_FLARE_BOOST",
       "item": "ITEM_OCCA_BERRY",
       "required_item": "ITEM_NONE",
       "stat_points": [

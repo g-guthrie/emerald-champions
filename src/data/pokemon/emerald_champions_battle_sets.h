@@ -316,7 +316,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_SITRUS_BERRY,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_MODEST,
-        .ability = ABILITY_RAIN_DISH,
+        .ability = ABILITY_MEGA_LAUNCHER,
         .statPoints = {2, 0, 0, 32, 0, 32},
     },
     [SPECIES_CATERPIE] =
@@ -397,7 +397,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_LIFE_ORB,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_TIMID,
-        .ability = ABILITY_BIG_PECKS,
+        .ability = ABILITY_NO_GUARD,
         .statPoints = {2, 0, 0, 32, 0, 32},
     },
     [SPECIES_RATTATA] =
@@ -433,7 +433,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_LIFE_ORB,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_JOLLY,
-        .ability = ABILITY_SNIPER,
+        .ability = ABILITY_INTIMIDATE,
         .statPoints = {2, 32, 0, 0, 0, 32},
     },
     [SPECIES_EKANS] =
@@ -937,7 +937,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_LIFE_ORB,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_JOLLY,
-        .ability = ABILITY_FLAME_BODY,
+        .ability = ABILITY_RECKLESS,
         .statPoints = {2, 32, 0, 0, 0, 32},
     },
     [SPECIES_SLOWPOKE] =
@@ -1000,7 +1000,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_LIFE_ORB,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_JOLLY,
-        .ability = ABILITY_TANGLED_FEET,
+        .ability = ABILITY_MOXIE,
         .statPoints = {2, 32, 0, 0, 0, 32},
     },
     [SPECIES_SEEL] =
@@ -1018,7 +1018,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_SITRUS_BERRY,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_TIMID,
-        .ability = ABILITY_ICE_BODY,
+        .ability = ABILITY_FUR_COAT,
         .statPoints = {2, 0, 0, 32, 0, 32},
     },
     [SPECIES_GRIMER] =
@@ -1081,7 +1081,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_FOCUS_SASH,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_TIMID,
-        .ability = ABILITY_CURSED_BODY,
+        .ability = ABILITY_LEVITATE,
         .statPoints = {2, 0, 0, 32, 0, 32},
     },
     [SPECIES_ONIX] =
@@ -1144,7 +1144,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_FOCUS_SASH,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_TIMID,
-        .ability = ABILITY_AFTERMATH,
+        .ability = ABILITY_ELECTRIC_SURGE,
         .statPoints = {2, 0, 0, 32, 0, 32},
     },
     [SPECIES_EXEGGCUTE] =
@@ -1621,7 +1621,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_SITRUS_BERRY,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_BOLD,
-        .ability = ABILITY_LEAF_GUARD,
+        .ability = ABILITY_TRIAGE,
         .statPoints = {32, 0, 32, 0, 2, 0},
     },
     [SPECIES_CYNDAQUIL] =
@@ -2062,7 +2062,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_LIFE_ORB,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_JOLLY,
-        .ability = ABILITY_SAP_SIPPER,
+        .ability = ABILITY_STRONG_JAW,
         .statPoints = {2, 32, 0, 0, 0, 32},
     },
     [SPECIES_PINECO] =
@@ -2206,7 +2206,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_WHITE_HERB,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_MODEST,
-        .ability = ABILITY_WEAK_ARMOR,
+        .ability = ABILITY_SIMPLE,
         .statPoints = {2, 0, 0, 32, 0, 32},
     },
     [SPECIES_SWINUB] =
@@ -2638,7 +2638,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_FOCUS_SASH,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_TIMID,
-        .ability = ABILITY_RIVALRY,
+        .ability = ABILITY_BERSERK,
         .statPoints = {2, 0, 0, 32, 0, 32},
     },
     [SPECIES_CASCOON] =
@@ -2656,7 +2656,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_LEFTOVERS,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_BOLD,
-        .ability = ABILITY_COMPOUND_EYES,
+        .ability = ABILITY_UNAWARE,
         .statPoints = {32, 0, 32, 0, 2, 0},
     },
     [SPECIES_LOTAD] =
@@ -3124,7 +3124,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_SITRUS_BERRY,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_QUIET,
-        .ability = ABILITY_PRESSURE,
+        .ability = ABILITY_DRIZZLE,
         .statPoints = {32, 0, 2, 32, 0, 0},
     },
     [SPECIES_NUMEL] =
@@ -3205,7 +3205,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_YACHE_BERRY,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_JOLLY,
-        .ability = ABILITY_LEVITATE,
+        .ability = ABILITY_TINTED_LENS,
         .statPoints = {2, 32, 0, 0, 0, 32},
     },
     [SPECIES_CACNEA] =
@@ -3448,7 +3448,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_SITRUS_BERRY,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_ADAMANT,
-        .ability = ABILITY_HARVEST,
+        .ability = ABILITY_AERILATE,
         .statPoints = {2, 32, 0, 0, 0, 32},
     },
     [SPECIES_CHIMECHO] =
@@ -3565,7 +3565,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_LIFE_ORB,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_TIMID,
-        .ability = ABILITY_HYDRATION,
+        .ability = ABILITY_SOUL_HEART,
         .statPoints = {2, 0, 0, 32, 0, 32},
     },
     [SPECIES_BAGON] =
@@ -3736,7 +3736,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_LIFE_ORB,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_BRAVE,
-        .ability = ABILITY_SHELL_ARMOR,
+        .ability = ABILITY_SOLID_ROCK,
         .statPoints = {32, 32, 2, 0, 0, 0},
     },
     [SPECIES_CHIMCHAR] =
@@ -3979,7 +3979,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_LEFTOVERS,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_CAREFUL,
-        .ability = ABILITY_UNNERVE,
+        .ability = ABILITY_INTIMIDATE,
         .statPoints = {32, 0, 2, 0, 32, 0},
     },
     [SPECIES_PACHIRISU] =
@@ -4087,7 +4087,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_LIFE_ORB,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_JOLLY,
-        .ability = ABILITY_LIMBER,
+        .ability = ABILITY_SCRAPPY,
         .statPoints = {2, 32, 0, 0, 0, 32},
     },
     [SPECIES_MISMAGIUS] =
@@ -4096,7 +4096,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_LIFE_ORB,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_TIMID,
-        .ability = ABILITY_LEVITATE,
+        .ability = ABILITY_PIXILATE,
         .statPoints = {2, 0, 0, 32, 0, 32},
     },
     [SPECIES_HONCHKROW] =
@@ -4438,7 +4438,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_LIFE_ORB,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_MODEST,
-        .ability = ABILITY_VITAL_SPIRIT,
+        .ability = ABILITY_MEGA_LAUNCHER,
         .statPoints = {2, 0, 0, 32, 0, 32},
     },
     [SPECIES_TOGEKISS] =
@@ -4474,7 +4474,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_LIFE_ORB,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_MODEST,
-        .ability = ABILITY_ICE_BODY,
+        .ability = ABILITY_SLUSH_RUSH,
         .statPoints = {2, 0, 0, 32, 0, 32},
     },
     [SPECIES_GLISCOR] =
@@ -4609,7 +4609,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_SITRUS_BERRY,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_ADAMANT,
-        .ability = ABILITY_SLOW_START,
+        .ability = ABILITY_CLEAR_BODY,
         .statPoints = {2, 32, 0, 0, 0, 32},
     },
     [SPECIES_GIRATINA] =
@@ -5518,7 +5518,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_FOCUS_SASH,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_TIMID,
-        .ability = ABILITY_MOTOR_DRIVE,
+        .ability = ABILITY_LIGHTNING_ROD,
         .statPoints = {2, 0, 0, 32, 0, 32},
     },
     [SPECIES_KARRABLAST] =
@@ -5914,7 +5914,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_LIFE_ORB,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_ADAMANT,
-        .ability = ABILITY_WHITE_SMOKE,
+        .ability = ABILITY_TOUGH_CLAWS,
         .statPoints = {2, 32, 0, 0, 0, 32},
     },
     [SPECIES_DURANT] =
@@ -6247,7 +6247,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_LIFE_ORB,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_TIMID,
-        .ability = ABILITY_MOXIE,
+        .ability = ABILITY_COMPETITIVE,
         .statPoints = {2, 0, 0, 32, 0, 32},
     },
     [SPECIES_FLABEBE] =
@@ -6265,7 +6265,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_EVIOLITE,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_CALM,
-        .ability = ABILITY_SYMBIOSIS,
+        .ability = ABILITY_HEALER,
         .statPoints = {32, 0, 2, 0, 32, 0},
     },
     [SPECIES_FLORGES] =
@@ -6274,7 +6274,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_SITRUS_BERRY,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_CALM,
-        .ability = ABILITY_SYMBIOSIS,
+        .ability = ABILITY_MISTY_SURGE,
         .statPoints = {32, 0, 2, 0, 32, 0},
     },
     [SPECIES_SKIDDO] =
@@ -6292,7 +6292,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_LEFTOVERS,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_CAREFUL,
-        .ability = ABILITY_GRASS_PELT,
+        .ability = ABILITY_GRASSY_SURGE,
         .statPoints = {32, 0, 2, 0, 32, 0},
     },
     [SPECIES_PANCHAM] =
@@ -6589,7 +6589,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_TOXIC_ORB,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_MODEST,
-        .ability = ABILITY_GOOEY,
+        .ability = ABILITY_POISON_HEAL,
         .statPoints = {2, 0, 0, 32, 0, 32},
     },
     [SPECIES_KLEFKI] =
@@ -6616,7 +6616,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_LEFTOVERS,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_ADAMANT,
-        .ability = ABILITY_HARVEST,
+        .ability = ABILITY_GRASSY_SURGE,
         .statPoints = {2, 32, 0, 0, 0, 32},
     },
     [SPECIES_PUMPKABOO] =
@@ -6634,7 +6634,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_FLAME_ORB,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_MODEST,
-        .ability = ABILITY_INSOMNIA,
+        .ability = ABILITY_FLARE_BOOST,
         .statPoints = {2, 0, 0, 32, 0, 32},
     },
     [SPECIES_BERGMITE] =
@@ -6751,7 +6751,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_SITRUS_BERRY,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_JOLLY,
-        .ability = ABILITY_LONG_REACH,
+        .ability = ABILITY_TINTED_LENS,
         .statPoints = {2, 32, 0, 0, 0, 32},
     },
     [SPECIES_LITTEN] =
@@ -7165,7 +7165,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_LEFTOVERS,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_BOLD,
-        .ability = ABILITY_SAND_VEIL,
+        .ability = ABILITY_SAND_STREAM,
         .statPoints = {32, 0, 32, 0, 2, 0},
     },
     [SPECIES_PYUKUMUKU] =
@@ -8902,7 +8902,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_SITRUS_BERRY,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_TIMID,
-        .ability = ABILITY_LEVITATE,
+        .ability = ABILITY_MOTOR_DRIVE,
         .statPoints = {2, 0, 0, 32, 0, 32},
     },
     [SPECIES_ROTOM_MOW] =
@@ -9658,7 +9658,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_FLAME_ORB,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_TIMID,
-        .ability = ABILITY_INSOMNIA,
+        .ability = ABILITY_FLARE_BOOST,
         .statPoints = {2, 0, 0, 32, 0, 32},
     },
     [SPECIES_GOURGEIST_LARGE] =
@@ -9667,7 +9667,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_FLAME_ORB,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_MODEST,
-        .ability = ABILITY_INSOMNIA,
+        .ability = ABILITY_FLARE_BOOST,
         .statPoints = {2, 0, 0, 32, 0, 32},
     },
     [SPECIES_GOURGEIST_SUPER] =
@@ -9676,7 +9676,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_FLAME_ORB,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_QUIET,
-        .ability = ABILITY_INSOMNIA,
+        .ability = ABILITY_FLARE_BOOST,
         .statPoints = {32, 0, 2, 32, 0, 0},
     },
     [SPECIES_ZYGARDE_10] =
@@ -12837,7 +12837,7 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .item = ITEM_CHOICE_SCARF,
             .requiredItem = ITEM_NONE,
             .nature = NATURE_JOLLY,
-            .ability = ABILITY_LIMBER,
+            .ability = ABILITY_SCRAPPY,
             .statPoints = {2, 32, 0, 0, 0, 32},
         },
     },
@@ -13437,7 +13437,7 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .item = ITEM_LEFTOVERS,
             .requiredItem = ITEM_NONE,
             .nature = NATURE_MODEST,
-            .ability = ABILITY_GOOEY,
+            .ability = ABILITY_POISON_HEAL,
             .statPoints = {2, 0, 0, 32, 0, 32},
         },
     },
@@ -13449,7 +13449,7 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .item = ITEM_OCCA_BERRY,
             .requiredItem = ITEM_NONE,
             .nature = NATURE_RELAXED,
-            .ability = ABILITY_INSOMNIA,
+            .ability = ABILITY_FLARE_BOOST,
             .statPoints = {32, 0, 32, 0, 2, 0},
         },
     },

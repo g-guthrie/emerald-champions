@@ -7,6 +7,12 @@ import json
 import re
 from pathlib import Path
 
+from verify_trainer_ability_legality import (
+    configured_species_abilities,
+    resolve_species,
+    species_aliases,
+)
+
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -17,7 +23,7 @@ def main() -> None:
     alternatives = manifest["alternatives"]
     entries = defaults + alternatives
 
-    assert manifest["source_commit"] == "33202c162ebc34a1dbe2000acd26b0720baa109d"
+    assert manifest["source_commit"] == "0b2bc96c7d6480187f70f5b83a705c081780983e"
     assert manifest["default_count"] == len(defaults) == 1258
     assert manifest["alternative_count"] == len(alternatives) == 203
     assert manifest["set_count"] == len(entries) == 1461
@@ -31,6 +37,20 @@ def main() -> None:
         assert sum(entry["stat_points"]) == 66, entry["species"]
         assert max(entry["stat_points"]) <= 32, entry["species"]
         assert not entry["item"].endswith("ITE") or entry["item"] == "ITEM_EVIOLITE", entry["item"]
+
+    configured_abilities = configured_species_abilities()
+    aliases = species_aliases()
+    for entry in entries:
+        # Mega presets deliberately name the transformed Ability; ApplyPreset
+        # keeps a legal base Ability until the stone transforms the Pokemon.
+        if entry["required_item"] != "ITEM_NONE":
+            continue
+        species = resolve_species(entry["species"], aliases)
+        assert entry["ability"] in configured_abilities.get(species, frozenset()), (
+            entry["species"],
+            entry["ability"],
+            sorted(configured_abilities.get(species, frozenset())),
+        )
 
     wild_text = (ROOT / "src" / "data" / "wild_encounters.json").read_text()
     wild_species = set(re.findall(r"SPECIES_[A-Z0-9_]+", wild_text))
