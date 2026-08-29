@@ -20,12 +20,12 @@ BattleFrontier_Mart_Pokemart:
 	.2byte ITEM_FULL_HEAL
 	.2byte ITEM_REVIVE
 	.2byte ITEM_MAX_REPEL
-	.2byte ITEM_PROTEIN
-	.2byte ITEM_CALCIUM
-	.2byte ITEM_IRON
-	.2byte ITEM_ZINC
-	.2byte ITEM_CARBOS
-	.2byte ITEM_HP_UP
+	.2byte ITEM_QUICK_BALL
+	.2byte ITEM_DUSK_BALL
+	.2byte ITEM_TIMER_BALL
+	.2byte ITEM_REPEAT_BALL
+	.2byte ITEM_DIVE_BALL
+	.2byte ITEM_LUXURY_BALL
 	.2byte ITEM_RARE_CANDY
 	pokemartlistend
 
@@ -52,7 +52,7 @@ BattleFrontier_Mart_EventScript_OldWoman::
 	lock
 	applymovement LOCALID_FRONTIER_MART_OLD_WOMAN, Common_Movement_FaceDown
 	waitmovement 0
-	msgbox BattleFrontier_Mart_Text_ProteinMakeNiceGift, MSGBOX_DEFAULT
+	msgbox BattleFrontier_Mart_Text_CaptureBallsMakeNiceGift, MSGBOX_DEFAULT
 	release
 	end
 
@@ -66,11 +66,11 @@ BattleFrontier_Mart_Text_ChaperonGrandson:
 	.string "But since we're here, we thought\n"
 	.string "we should get some souvenirs.$"
 
-BattleFrontier_Mart_Text_ProteinMakeNiceGift:
+BattleFrontier_Mart_Text_CaptureBallsMakeNiceGift:
 	.string "Dear, what do you think of this?\n"
-	.string "Wouldn't this make a nice gift?\p"
-	.string "It's…PRO…TE…IN?\n"
-	.string "It sounds delicious, doesn't it?$"
+	.string "Wouldn't these BALLS make a nice gift?\p"
+	.string "Our grandson is always searching for\n"
+	.string "one more teammate.$"
 
 BattleFrontier_Mart_Text_FacilitiesDontAllowItems:
 	.string "A lot of the BATTLE FRONTIER's\n"

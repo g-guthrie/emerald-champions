@@ -2761,7 +2761,7 @@ void ShowScrollableMultichoice(void)
         task->tKeepOpenAfterSelect = FALSE;
         task->tTaskId = taskId;
         break;
-    case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR:
+    case SCROLL_MULTI_BF_EXCHANGE_CORNER_SUPPLY_VENDOR:
         task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
         task->tNumItems = 7;
         task->tLeft = 14;
@@ -2771,7 +2771,7 @@ void ShowScrollableMultichoice(void)
         task->tKeepOpenAfterSelect = FALSE;
         task->tTaskId = taskId;
         break;
-    case SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR:
+    case SCROLL_MULTI_BF_EXCHANGE_CORNER_EVOLUTION_VENDOR:
         task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
         task->tNumItems = 10;
         task->tLeft = 14;
@@ -2939,7 +2939,7 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         COMPOUND_STRING("BLASTOISE DOLL{CLEAR_TO 88}256BP"),
         gText_Exit
     },
-    [SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR] =
+    [SCROLL_MULTI_BF_EXCHANGE_CORNER_SUPPLY_VENDOR] =
     {
         COMPOUND_STRING("PP UP{CLEAR_TO 100}4BP"),
         COMPOUND_STRING("PP MAX{CLEAR_TO 94}12BP"),
@@ -2949,7 +2949,7 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         COMPOUND_STRING("BEAST BALL{CLEAR_TO 100}8BP"),
         gText_Exit
     },
-    [SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR] =
+    [SCROLL_MULTI_BF_EXCHANGE_CORNER_EVOLUTION_VENDOR] =
     {
         COMPOUND_STRING("LINKING CORD{CLEAR_TO 100}8BP"),
         COMPOUND_STRING("PROTECTOR{CLEAR_TO 94}12BP"),
@@ -2968,13 +2968,13 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         COMPOUND_STRING("ENERGY ROOT{CLEAR_TO 114}{FONT_SMALL}80"),
         COMPOUND_STRING("HEAL POWDER{CLEAR_TO 114}{FONT_SMALL}50"),
         COMPOUND_STRING("REVIVAL HERB{CLEAR_TO 108}{FONT_SMALL}300"),
-        COMPOUND_STRING("PROTEIN{CLEAR_TO 99}{FONT_SMALL}1,000"),
-        COMPOUND_STRING("IRON{CLEAR_TO 99}{FONT_SMALL}1,000"),
-        COMPOUND_STRING("CARBOS{CLEAR_TO 99}{FONT_SMALL}1,000"),
-        COMPOUND_STRING("CALCIUM{CLEAR_TO 99}{FONT_SMALL}1,000"),
-        COMPOUND_STRING("ZINC{CLEAR_TO 99}{FONT_SMALL}1,000"),
-        COMPOUND_STRING("HP UP{CLEAR_TO 99}{FONT_SMALL}1,000"),
+        COMPOUND_STRING("ETHER{CLEAR_TO 99}{FONT_SMALL}500"),
+        COMPOUND_STRING("MAX ETHER{CLEAR_TO 99}{FONT_SMALL}1,000"),
+        COMPOUND_STRING("ELIXIR{CLEAR_TO 99}{FONT_SMALL}1,500"),
+        COMPOUND_STRING("MAX ELIXIR{CLEAR_TO 99}{FONT_SMALL}3,000"),
         COMPOUND_STRING("PP UP{CLEAR_TO 99}{FONT_SMALL}3,000"),
+        COMPOUND_STRING("PP MAX{CLEAR_TO 99}{FONT_SMALL}9,000"),
+        COMPOUND_STRING("SACRED ASH{CLEAR_TO 99}{FONT_SMALL}12,000"),
         gText_Exit
     },
     [SCROLL_MULTI_BF_RECEPTIONIST] =
@@ -3504,7 +3504,7 @@ static void FillFrontierExchangeCornerWindowAndItemIcon(enum ScrollMulti menu, u
 {
     #include "data/battle_frontier/battle_frontier_exchange_corner.h"
 
-    if (menu >= SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_1 && menu <= SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR)
+    if (menu >= SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_1 && menu <= SCROLL_MULTI_BF_EXCHANGE_CORNER_EVOLUTION_VENDOR)
     {
         FillWindowPixelRect(0, PIXEL_FILL(1), 0, 0, 216, 32);
         switch (menu)
@@ -3535,13 +3535,13 @@ static void FillFrontierExchangeCornerWindowAndItemIcon(enum ScrollMulti menu, u
                 sScrollableMultichoice_ItemSpriteId = AddDecorationIconObject(sFrontierExchangeCorner_Decor2[selection], 33, 88, 0, TAG_ITEM_ICON, TAG_ITEM_ICON);
             }
             break;
-        case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR:
-            AddTextPrinterParameterized2(0, FONT_NORMAL, sFrontierExchangeCorner_VitaminsDescriptions[selection], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
-            ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_Vitamins[selection]);
+        case SCROLL_MULTI_BF_EXCHANGE_CORNER_SUPPLY_VENDOR:
+            AddTextPrinterParameterized2(0, FONT_NORMAL, sFrontierExchangeCorner_SupplyDescriptions[selection], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+            ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_Supplies[selection]);
             break;
-        case SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR:
-            AddTextPrinterParameterized2(0, FONT_NORMAL, sFrontierExchangeCorner_HoldItemsDescriptions[selection], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
-            ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_HoldItems[selection]);
+        case SCROLL_MULTI_BF_EXCHANGE_CORNER_EVOLUTION_VENDOR:
+            AddTextPrinterParameterized2(0, FONT_NORMAL, sFrontierExchangeCorner_EvolutionItemDescriptions[selection], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+            ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_EvolutionItems[selection]);
             break;
         default:
             break;
@@ -3571,8 +3571,8 @@ static void HideFrontierExchangeCornerItemIcon(enum ScrollMulti menu, u16 unused
         {
         case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_1:
         case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2:
-        case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR:
-        case SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR:
+        case SCROLL_MULTI_BF_EXCHANGE_CORNER_SUPPLY_VENDOR:
+        case SCROLL_MULTI_BF_EXCHANGE_CORNER_EVOLUTION_VENDOR:
             // This makes sure deleting the icon will not clear palettes in use by object events
             FieldEffectFreeGraphicsResources(&gSprites[sScrollableMultichoice_ItemSpriteId]);
             break;

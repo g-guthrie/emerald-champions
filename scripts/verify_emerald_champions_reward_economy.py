@@ -17,11 +17,60 @@ X_ITEMS = {
     "ITEM_X_DEFENSE",
     "ITEM_X_SP_ATK",
     "ITEM_X_SPECIAL",
+    "ITEM_X_SP_DEF",
     "ITEM_X_SPEED",
     "ITEM_X_ACCURACY",
     "ITEM_DIRE_HIT",
     "ITEM_GUARD_SPEC",
 }
+
+INERT_VITAMINS = {
+    "ITEM_HP_UP",
+    "ITEM_PROTEIN",
+    "ITEM_IRON",
+    "ITEM_CALCIUM",
+    "ITEM_ZINC",
+    "ITEM_CARBOS",
+}
+
+INERT_ACQUISITIONS = X_ITEMS | INERT_VITAMINS
+
+CAPTURE_VENDOR_ITEMS = (
+    "ITEM_QUICK_BALL",
+    "ITEM_DUSK_BALL",
+    "ITEM_TIMER_BALL",
+    "ITEM_REPEAT_BALL",
+    "ITEM_DIVE_BALL",
+    "ITEM_LUXURY_BALL",
+)
+
+SLATEPORT_CAPTURE_VENDOR_ITEMS = (
+    "ITEM_HEAL_BALL",
+    "ITEM_NET_BALL",
+    "ITEM_NEST_BALL",
+    "ITEM_DIVE_BALL",
+    "ITEM_TIMER_BALL",
+    "ITEM_REPEAT_BALL",
+)
+
+FINITE_ECONOMY_PRIZES = (
+    "ITEM_NUGGET",
+    "ITEM_STAR_PIECE",
+    "ITEM_BIG_PEARL",
+    "ITEM_BALM_MUSHROOM",
+    "ITEM_RARE_BONE",
+    "ITEM_PEARL_STRING",
+)
+
+BERRY_POWDER_SUPPLIES = (
+    ("ITEM_ETHER", 500),
+    ("ITEM_MAX_ETHER", 1000),
+    ("ITEM_ELIXIR", 1500),
+    ("ITEM_MAX_ELIXIR", 3000),
+    ("ITEM_PP_UP", 3000),
+    ("ITEM_PP_MAX", 9000),
+    ("ITEM_SACRED_ASH", 12000),
+)
 
 TRAINER_HILL_GRAND_PRIZES = {
     "ITEM_LEVEL_BALL",
@@ -77,7 +126,7 @@ def read(relative: str) -> str:
 
 
 def c_array(text: str, name: str) -> tuple[str, ...]:
-    match = re.search(rf"\b{name}\[\]\s*=\s*\{{(.*?)\n\s*\}};", text, re.S)
+    match = re.search(rf"\b{name}\[\]\s*=\s*\{{(.*?)\}};", text, re.S)
     require(match is not None, f"missing C array {name}")
     return tuple(
         item for item in re.findall(r"\bITEM_[A-Z0-9_]+\b", match.group(1))
@@ -108,7 +157,13 @@ def verify_trainer_hill() -> None:
             "Trainer Hill's ten grand prizes are not the ten scarce rare Balls")
 
 
-def verify_x_item_cleanup() -> None:
+def verify_inert_item_cleanup() -> None:
+    caps = read("include/config/caps.h")
+    require(
+        re.search(r"^#define\s+B_EV_CAP_TYPE\s+EV_CAP_NO_GAIN\b", caps, re.M) is not None,
+        "reward-economy gate must be revisited if EV gain is re-enabled",
+    )
+
     marts = {
         "data/maps/FallarborTown_Mart/scripts.inc": ("FallarborTown_Mart_Pokemart",),
         "data/maps/LavaridgeTown_Mart/scripts.inc": ("LavaridgeTown_Mart_Pokemart",),
@@ -122,7 +177,8 @@ def verify_x_item_cleanup() -> None:
         for label in labels:
             block = text.split(f"{label}:", 1)[1].split("pokemartlistend", 1)[0]
             listed = set(re.findall(r"ITEM_[A-Z0-9_]+", block))
-            require(not listed.intersection(X_ITEMS), f"{label} still stocks unusable X-items")
+            require(not listed.intersection(INERT_ACQUISITIONS),
+                    f"{label} still stocks an inert vitamin or unusable X-item")
 
     route = json.loads(read("data/maps/Route116/map.json"))
     item = next(
@@ -145,10 +201,132 @@ def verify_x_item_cleanup() -> None:
         if "frlg" not in path.name.lower()
     )
     for path in campaign_files:
-        found = X_ITEMS.intersection(re.findall(r"\bITEM_[A-Z0-9_]+\b", path.read_text(errors="ignore")))
+        found = INERT_ACQUISITIONS.intersection(
+            re.findall(r"\bITEM_[A-Z0-9_]+\b", path.read_text(errors="ignore"))
+        )
         if found:
             violations.append(f"{path.relative_to(ROOT)}: {sorted(found)}")
-    require(not violations, "unusable X-items remain in the Hoenn campaign:\n" + "\n".join(violations))
+
+    # These C tables are acquisition paths outside map scripts: direct facility
+    # prizes, Pyramid floor pickups, and the Lilycove Favor Lady's inputs/prize.
+    native_reward_files = (
+        "src/battle_arena.c",
+        "src/battle_palace.c",
+        "src/battle_pyramid.c",
+        "src/trainer_tower.c",
+        "src/data/lilycove_lady.h",
+    )
+    for relative in native_reward_files:
+        found = INERT_ACQUISITIONS.intersection(
+            re.findall(r"\bITEM_[A-Z0-9_]+\b", read(relative))
+        )
+        if found:
+            violations.append(f"{relative}: {sorted(found)}")
+
+    require(
+        not violations,
+        "inert vitamins or unusable X-items remain obtainable in the active game:\n"
+        + "\n".join(violations),
+    )
+
+    lilycove = read("data/maps/LilycoveCity_DepartmentStore_3F/scripts.inc")
+    lilycove_shop = lilycove.split(
+        "LilycoveCity_DepartmentStore_3F_Pokemart_CaptureBalls:", 1
+    )[1].split("pokemartlistend", 1)[0]
+    require(
+        tuple(re.findall(r"\bITEM_[A-Z0-9_]+\b", lilycove_shop))
+        == ("ITEM_ULTRA_BALL",) + CAPTURE_VENDOR_ITEMS[:4] + ("ITEM_LUXURY_BALL",),
+        "Lilycove's former vitamin counter is not a coherent capture counter",
+    )
+
+    frontier_mart = read("data/maps/BattleFrontier_Mart/scripts.inc")
+    frontier_shop = frontier_mart.split("BattleFrontier_Mart_Pokemart:", 1)[1].split(
+        "pokemartlistend", 1
+    )[0]
+    frontier_items = tuple(re.findall(r"\bITEM_[A-Z0-9_]+\b", frontier_shop))
+    require(
+        frontier_items[-7:-1] == CAPTURE_VENDOR_ITEMS,
+        "Battle Frontier Mart's former vitamin shelf is not a capture shelf",
+    )
+
+    slateport = read("data/maps/SlateportCity/scripts.inc")
+    slateport_shop = slateport.split("SlateportCity_Pokemart_CatchingGuru:", 1)[1].split(
+        "pokemartlistend", 1
+    )[0]
+    require(
+        tuple(re.findall(r"\bITEM_[A-Z0-9_]+\b", slateport_shop))
+        == SLATEPORT_CAPTURE_VENDOR_ITEMS,
+        "Slateport's former vitamin vendor is not a coherent capture counter",
+    )
+    powder_block = slateport.split("SlateportCity_EventScript_EnergyPowder::", 1)[1].split(
+        "SlateportCity_EventScript_CancelPowderItemSelect::", 1
+    )[0]
+    powder_entries = tuple(
+        (item, int(price))
+        for item, repeated, price in re.findall(
+            r"bufferitemname STR_VAR_1, (ITEM_[A-Z0-9_]+)\s+"
+            r"setvar VAR_0x8008, (ITEM_[A-Z0-9_]+)\s+"
+            r"setvar VAR_0x8009, (\d+)",
+            powder_block,
+        )
+        if item == repeated
+    )
+    require(
+        powder_entries[-7:] == BERRY_POWDER_SUPPLIES,
+        "Berry Powder's former vitamins are not coherent endurance supplies",
+    )
+    require(
+        len({item for item, _ in powder_entries}) == len(powder_entries),
+        "Berry Powder exchange contains a duplicate item",
+    )
+    require(
+        "Special_AreLeadMonEVsMaxedOut" not in slateport
+        and "GiveLeadMonEffortRibbon" not in slateport,
+        "Slateport still exposes the unreachable EV-training reward loop",
+    )
+    for stale_copy in ("PROTEIN", "CALCIUM", "EFFORT RIBBON"):
+        require(stale_copy not in slateport, f"Slateport still advertises {stale_copy}")
+
+    stale_copy_files = (
+        "data/maps/LilycoveCity_DepartmentStore_3F/scripts.inc",
+        "data/maps/BattleFrontier_Mart/scripts.inc",
+        "data/maps/SlateportCity_PokemonFanClub/scripts.inc",
+        "data/text/pokemon_news.inc",
+    )
+    for relative in stale_copy_files:
+        text = read(relative)
+        for stale_copy in ("HP UP", "PROTEIN", "CARBOS", "CALCIUM", "ZINC", "EFFORT RIBBON"):
+            require(stale_copy not in text, f"{relative} still advertises {stale_copy}")
+
+    stale_flag_suffixes = ("_HP_UP", "_PROTEIN", "_IRON", "_CALCIUM", "_ZINC", "_CARBOS")
+    for path in (ROOT / "data/maps").glob("*/map.json"):
+        if path.parent.name.endswith("_Frlg"):
+            continue
+        payload = json.loads(path.read_text())
+        for section in ("object_events", "bg_events"):
+            for event in payload.get(section, []):
+                flag = str(event.get("flag", ""))
+                require(
+                    not flag.endswith(stale_flag_suffixes),
+                    f"{path.relative_to(ROOT)} retains stale reward flag {flag}",
+                )
+
+    require(
+        c_array(read("src/battle_arena.c"), "sShortStreakPrizeItems") == FINITE_ECONOMY_PRIZES,
+        "Battle Arena early prizes drifted from finite economy rewards",
+    )
+    require(
+        c_array(read("src/battle_palace.c"), "sBattlePalaceEarlyPrizes") == FINITE_ECONOMY_PRIZES,
+        "Battle Palace early prizes drifted from finite economy rewards",
+    )
+    require(
+        c_array(read("src/battle_pyramid.c"), "sShortStreakRewardItems") == FINITE_ECONOMY_PRIZES,
+        "Battle Pyramid early prizes drifted from finite economy rewards",
+    )
+    require(
+        c_array(read("src/trainer_tower.c"), "sPrizeList")[:6] == FINITE_ECONOMY_PRIZES,
+        "Trainer Tower's first prize tier drifted from finite economy rewards",
+    )
 
 
 def verify_finite_side_rewards() -> None:
@@ -214,9 +392,9 @@ def verify_finite_side_rewards() -> None:
 
 def verify_frontier_exchange() -> None:
     header = read("src/data/battle_frontier/battle_frontier_exchange_corner.h")
-    require(c_array(header, "sFrontierExchangeCorner_Vitamins") == FRONTIER_SUPPLIES,
+    require(c_array(header, "sFrontierExchangeCorner_Supplies") == FRONTIER_SUPPLIES,
             "Frontier supply shelf drifted")
-    require(c_array(header, "sFrontierExchangeCorner_HoldItems") == FRONTIER_EVOLUTION_ITEMS,
+    require(c_array(header, "sFrontierExchangeCorner_EvolutionItems") == FRONTIER_EVOLUTION_ITEMS,
             "Frontier evolution shelf drifted")
 
     scripts = read("data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc")
@@ -279,7 +457,7 @@ def verify_unique_world_stones() -> None:
 
 def main() -> None:
     verify_trainer_hill()
-    verify_x_item_cleanup()
+    verify_inert_item_cleanup()
     verify_finite_side_rewards()
     verify_frontier_exchange()
     verify_unique_world_stones()

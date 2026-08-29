@@ -10,7 +10,7 @@ transitions, one-time rewards, legendary encounters, and the Battle Frontier.
 - 540 Hoenn maps
 - 4,086 NPC, trigger, and sign events
 - 1,402 map warps
-- 17,888 script control-flow, dialogue, and movement references
+- 17,882 script control-flow, dialogue, and movement references
 - 10,844 story-dialogue visual lines and 47,628 literal Hoenn dialogue lines
 - 513 physical trainer encounters containing 561 reachable battle branches
 - Every badge, HM license, Mega Ring, League, fossil, legendary-sign, and

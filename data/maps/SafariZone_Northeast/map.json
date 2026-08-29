@@ -160,8 +160,8 @@
       "x": 21,
       "y": 5,
       "elevation": 3,
-      "item": "ITEM_ZINC",
-      "flag": "FLAG_HIDDEN_ITEM_SAFARI_ZONE_NORTH_EAST_ZINC"
+      "item": "ITEM_BIG_NUGGET",
+      "flag": "FLAG_HIDDEN_ITEM_SAFARI_ZONE_NORTH_EAST_BIG_NUGGET"
     }
   ]
 }

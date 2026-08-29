@@ -852,8 +852,8 @@
       "x": 24,
       "y": 42,
       "elevation": 3,
-      "item": "ITEM_ZINC",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_120_ZINC"
+      "item": "ITEM_LUXURY_BALL",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_120_LUXURY_BALL"
     },
     {
       "type": "secret_base",
