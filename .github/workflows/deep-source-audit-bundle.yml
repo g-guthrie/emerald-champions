@@ -27,16 +27,18 @@ jobs:
             --exclude='pokeemerald-release.gba' \
             --exclude='*.gba' \
             --exclude='*.elf' \
-            --exclude='graphics' \
             --exclude='sound' \
             --exclude='tools' \
             -czf emerald-champions-audit-source.tgz \
             .github \
             Makefile \
             config.mk \
+            asm \
             constants \
             data \
             docs \
+            graphics/object_events/pics/people/cynthia.png \
+            graphics/trainers/front_pics/cynthia.png \
             include \
             migration_scripts \
             scripts \
@@ -48,7 +50,7 @@ jobs:
       - name: Upload source bundle
         uses: actions/upload-artifact@v4
         with:
-          name: emerald-champions-audit-source-e2d40e0
+          name: emerald-champions-audit-source-e2d40e0-complete-gates
           path: |
             emerald-champions-audit-source.tgz
             emerald-champions-audit-source.tgz.sha256
