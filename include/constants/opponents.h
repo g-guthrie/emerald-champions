@@ -877,6 +877,10 @@
 #define TRAINER_WALLACE_DOUBLES_LEGENDS     TRAINER_WATTSON_5
 #define TRAINER_LEAF_ALTERING_CAVE          TRAINER_ROXANNE_2
 #define TRAINER_CYNTHIA_1                   TRAINER_ROXANNE_3
+#define TRAINER_ALANNAH                     TRAINER_ROXANNE_4
+#define TRAINER_MARTIN                      TRAINER_ROXANNE_5
+#define TRAINER_ROMAN                       TRAINER_JUAN_4
+#define TRAINER_ELMER                       TRAINER_JUAN_5
 
 // NOTE: Because each Trainer uses a flag to determine when they are defeated, there is only space for 9 additional trainers before trainer flag space overflows
 //       More space can be made by shifting flags around in constants/flags.h or changing how trainer flags are handled

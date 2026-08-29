@@ -43,7 +43,7 @@ EverGrandeCity_DrakesRoom_EventScript_Drake::
 	goto_if_set FLAG_DEFEATED_ELITE_4_DRAKE, EverGrandeCity_DrakesRoom_EventScript_PostBattleSpeech
 	playbgm MUS_ENCOUNTER_ELITE_FOUR, FALSE
 	msgbox EverGrandeCity_DrakesRoom_Text_IntroSpeech, MSGBOX_DEFAULT
-	trainerbattle_no_intro TRAINER_DRAKE, EverGrandeCity_DrakesRoom_Text_Defeat
+	trainerbattle_no_intro_double TRAINER_DRAKE, EverGrandeCity_DrakesRoom_Text_Defeat, EmeraldChampions_Text_NeedTwoPokemon
 	goto EverGrandeCity_DrakesRoom_EventScript_Defeated
 	end
 
@@ -62,31 +62,17 @@ EverGrandeCity_DrakesRoom_EventScript_Defeated::
 	end
 
 EverGrandeCity_DrakesRoom_Text_IntroSpeech:
-	.string "I am the last of the POKéMON LEAGUE\n"
-	.string "ELITE FOUR, DRAKE the DRAGON master!\p"
-	.string "In their natural state, POKéMON are\n"
-	.string "wild living things. They are free.\p"
-	.string "At times, they hinder us.\n"
-	.string "At times, they help us.\p"
-	.string "For us to battle with POKéMON as\n"
-	.string "partners, do you know what it takes?\p"
-	.string "Do you know what is needed?\p"
-	.string "If you don't, then you will never\n"
-	.string "prevail over me!$"
+	.string "I am DRAKE, last of the ELITE FOUR.\p"
+	.string "Dragons remember every age of battle.\n"
+	.string "DIALGA reverses time; RESHIRAM drives\l"
+	.string "wind, and two aces can set themselves.\p"
+	.string "Deny the first clock without arriving\n"
+	.string "empty-handed at SALAMENCE.$"
 
 EverGrandeCity_DrakesRoom_Text_Defeat:
-	.string "Superb, it should be said.$"
+	.string "Superb. You mastered both clocks.$"
 
 EverGrandeCity_DrakesRoom_Text_PostBattleSpeech:
-	.string "You deserve every credit for coming\n"
-	.string "this far as a TRAINER of POKéMON.\p"
-	.string "You do seem to know what is needed.\p"
-	.string "Yes, what a TRAINER needs is a\n"
-	.string "virtuous heart.\p"
-	.string "POKéMON touch the good hearts of\n"
-	.string "TRAINERS and learn good from wrong.\p"
-	.string "They touch the good hearts of\n"
-	.string "TRAINERS and grow strong.\p"
-	.string "Go! Go onwards!\n"
-	.string "The CHAMPION is waiting!$"
-
+	.string "You may heal now. Beyond that door,\n"
+	.string "WALLACE combines every lesson at once.\p"
+	.string "Go. The CHAMPION is waiting.$"

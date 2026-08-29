@@ -38,6 +38,8 @@ NewMauville_Inside_EventScript_ShowVoltorb3::
 
 NewMauville_Inside_OnLoad:
 	call_if_eq VAR_NEW_MAUVILLE_STATE, 2, NewMauville_Inside_EventScript_SetGeneratorOffMetatiles
+	call_if_eq VAR_NEW_MAUVILLE_STATE, 4, NewMauville_Inside_EventScript_SetGeneratorOffMetatiles
+	call_if_eq VAR_NEW_MAUVILLE_STATE, 6, NewMauville_Inside_EventScript_SetGeneratorOffMetatiles
 	end
 
 NewMauville_Inside_EventScript_BlueButton::
@@ -148,6 +150,65 @@ NewMauville_Inside_EventScript_RedButton::
 	releaseall
 	end
 
+NewMauville_Inside_EventScript_RotomStirs::
+	lockall
+	playmoncry SPECIES_ROTOM, CRY_MODE_ENCOUNTER
+	waitmoncry
+	msgbox NewMauville_Inside_Text_GeneratorRestarted, MSGBOX_DEFAULT
+	call NewMauville_Inside_EventScript_SetGeneratorOnMetatiles
+	setvar VAR_NEW_MAUVILLE_STATE, 3
+	releaseall
+	end
+
+NewMauville_Inside_EventScript_RedButtonAgain::
+	lockall
+	msgbox NewMauville_Inside_Text_SteppedOnSwitchGeneratorStopped, MSGBOX_DEFAULT
+	call NewMauville_Inside_EventScript_SetGeneratorOffMetatiles
+	setvar VAR_NEW_MAUVILLE_STATE, 4
+	releaseall
+	end
+
+NewMauville_Inside_EventScript_RotomStirsAgain::
+	lockall
+	playmoncry SPECIES_ROTOM, CRY_MODE_ENCOUNTER
+	waitmoncry
+	msgbox NewMauville_Inside_Text_GeneratorRestartedAgain, MSGBOX_DEFAULT
+	call NewMauville_Inside_EventScript_SetGeneratorOnMetatiles
+	setvar VAR_NEW_MAUVILLE_STATE, 5
+	releaseall
+	end
+
+NewMauville_Inside_EventScript_RotomEncounter::
+	lockall
+	setmetatile 33, 6, METATILE_BikeShop_Button_Pressed, FALSE
+	special DrawWholeMapView
+	playmoncry SPECIES_ROTOM, CRY_MODE_ENCOUNTER
+	delay 40
+	waitmoncry
+	playse SE_PIN
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark
+	waitmovement 0
+	msgbox NewMauville_Inside_Text_RotomAppears, MSGBOX_DEFAULT
+	setvar VAR_0x8004, SPECIES_ROTOM
+	setvar VAR_0x8005, 0
+	special CreateEmeraldChampionsStaticLegendaryEncounter
+	setflag FLAG_SYS_CTRL_OBJ_DELETE
+	special BattleSetup_StartLegendaryBattle
+	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, NewMauville_Inside_EventScript_RotomCaught
+	setvar VAR_NEW_MAUVILLE_STATE, 5
+	msgbox NewMauville_Inside_Text_RotomRemains, MSGBOX_DEFAULT
+	releaseall
+	end
+
+NewMauville_Inside_EventScript_RotomCaught::
+	setvar VAR_NEW_MAUVILLE_STATE, 6
+	call NewMauville_Inside_EventScript_SetGeneratorOffMetatiles
+	msgbox NewMauville_Inside_Text_RotomCaught, MSGBOX_DEFAULT
+	releaseall
+	end
+
 NewMauville_Inside_EventScript_SetGeneratorOffMetatiles::
 	setmetatile 33, 6, METATILE_BikeShop_Button_Pressed, FALSE
 	setmetatile 32, 2, METATILE_BikeShop_Generator_Off_Tile0, TRUE
@@ -161,9 +222,24 @@ NewMauville_Inside_EventScript_SetGeneratorOffMetatiles::
 	special DrawWholeMapView
 	return
 
+NewMauville_Inside_EventScript_SetGeneratorOnMetatiles::
+	setmetatile 33, 6, METATILE_BikeShop_Button_Red, FALSE
+	setmetatile 32, 2, METATILE_BikeShop_Generator_On_Tile0, TRUE
+	setmetatile 33, 2, METATILE_BikeShop_Generator_On_Tile1, TRUE
+	setmetatile 34, 2, METATILE_BikeShop_Generator_On_Tile2, TRUE
+	setmetatile 35, 2, METATILE_BikeShop_Generator_On_Tile3, TRUE
+	setmetatile 32, 3, METATILE_BikeShop_Generator_On_Tile4, TRUE
+	setmetatile 33, 3, METATILE_BikeShop_Generator_On_Tile5, TRUE
+	setmetatile 34, 3, METATILE_BikeShop_Generator_On_Tile6, TRUE
+	setmetatile 35, 3, METATILE_BikeShop_Generator_On_Tile7, TRUE
+	special DrawWholeMapView
+	return
+
 NewMauville_Inside_EventScript_Generator::
 	lockall
 	goto_if_eq VAR_NEW_MAUVILLE_STATE, 2, NewMauville_Inside_EventScript_GeneratorOff
+	goto_if_eq VAR_NEW_MAUVILLE_STATE, 4, NewMauville_Inside_EventScript_GeneratorOff
+	goto_if_eq VAR_NEW_MAUVILLE_STATE, 6, NewMauville_Inside_EventScript_GeneratorOff
 	msgbox NewMauville_Inside_Text_GeneratorRadiatingHeat, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -261,3 +337,153 @@ NewMauville_Inside_Text_SteppedOnSwitchGeneratorStopped:
 	.string "… … … … … … … …\p"
 	.string "The generator appears to have\n"
 	.string "stopped…$"
+
+NewMauville_Inside_Text_GeneratorRestarted:
+	.string "Bzzzt! Something laughed inside the\n"
+	.string "generator, and it restarted itself!$"
+
+NewMauville_Inside_Text_GeneratorRestartedAgain:
+	.string "The same cry rings through the plant.\p"
+	.string "Whatever is inside wants a battle.$"
+
+NewMauville_Inside_Text_RotomAppears:
+	.string "The generator bursts open!\n"
+	.string "ROTOM challenges your team!$"
+
+NewMauville_Inside_Text_RotomRemains:
+	.string "ROTOM slips back into the generator.\n"
+	.string "It is still waiting for your answer.$"
+
+NewMauville_Inside_Text_RotomCaught:
+	.string "The generator finally falls silent.\p"
+	.string "The ROTOM CATALOG nearby can change\n"
+	.string "ROTOM between all five appliances.$"
+
+@ BEGIN EMERALD CHAMPIONS LEGENDARY ROOTS
+.set EC_SIGN_ZAPDOS_ID, 69
+
+NewMauville_Inside_EventScript_Zapdos::
+	lock
+	faceplayer
+	setvar VAR_0x8004, EC_SIGN_ZAPDOS_ID
+	special TryUnlockSelectedLegendarySign
+	goto_if_eq VAR_RESULT, 0, NewMauville_Inside_EventScript_ZapdosDormant
+	goto_if_eq VAR_RESULT, 1, NewMauville_Inside_EventScript_ZapdosNeedsPartner
+	goto_if_eq VAR_RESULT, 4, NewMauville_Inside_EventScript_ZapdosCleanup
+	msgbox NewMauville_Inside_Text_ZapdosAwakens, MSGBOX_DEFAULT
+	waitse
+	playmoncry SPECIES_ZAPDOS, CRY_MODE_ENCOUNTER
+	delay 40
+	waitmoncry
+	setvar VAR_0x8004, EC_SIGN_ZAPDOS_ID
+	special CreateSelectedLegendarySignEncounter
+	setflag FLAG_SYS_CTRL_OBJ_DELETE
+	special BattleSetup_StartLegendaryBattle
+	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, NewMauville_Inside_EventScript_ZapdosCaught
+	msgbox NewMauville_Inside_Text_ZapdosRemains, MSGBOX_DEFAULT
+	release
+	end
+
+NewMauville_Inside_EventScript_ZapdosDormant::
+	msgbox NewMauville_Inside_Text_ZapdosDormant, MSGBOX_DEFAULT
+	release
+	end
+
+NewMauville_Inside_EventScript_ZapdosNeedsPartner::
+	msgbox NewMauville_Inside_Text_ZapdosNeedsPartner, MSGBOX_DEFAULT
+	release
+	end
+
+NewMauville_Inside_EventScript_ZapdosCaught::
+	setflag FLAG_EC_CAUGHT_ZAPDOS
+NewMauville_Inside_EventScript_ZapdosCleanup::
+	setflag FLAG_EC_CAUGHT_ZAPDOS
+	removeobject LOCALID_EC_ZAPDOS
+	release
+	end
+
+NewMauville_Inside_Text_ZapdosDormant:
+	.string "A CHAMPION'S SIGN marks the silent generator.\p"
+	.string "Its light is dormant. HOENN's story\n"
+	.string "has not yet reached this place.$"
+
+NewMauville_Inside_Text_ZapdosNeedsPartner:
+	.string "The SIGN sketches MANECTRIC.\p"
+	.string "Bring that POKéMON's family here, and\n"
+	.string "the hidden challenger may answer.$"
+
+NewMauville_Inside_Text_ZapdosAwakens:
+	.string "The CHAMPION'S SIGN erupts with light!\n"
+	.string "ZAPDOS answers the challenge!$"
+
+NewMauville_Inside_Text_ZapdosRemains:
+	.string "The SIGN remains bright. ZAPDOS\n"
+	.string "will accept another challenge.$"
+
+
+.set EC_SIGN_MELTAN_ID, 60
+
+NewMauville_Inside_EventScript_Meltan::
+	lock
+	faceplayer
+	setvar VAR_0x8004, EC_SIGN_MELTAN_ID
+	special TryUnlockSelectedLegendarySign
+	goto_if_eq VAR_RESULT, 0, NewMauville_Inside_EventScript_MeltanDormant
+	goto_if_eq VAR_RESULT, 1, NewMauville_Inside_EventScript_MeltanNeedsPartner
+	goto_if_eq VAR_RESULT, 4, NewMauville_Inside_EventScript_MeltanCleanup
+	msgbox NewMauville_Inside_Text_MeltanAwakens, MSGBOX_DEFAULT
+	waitse
+	playmoncry SPECIES_MELTAN, CRY_MODE_ENCOUNTER
+	delay 40
+	waitmoncry
+	setvar VAR_0x8004, EC_SIGN_MELTAN_ID
+	special CreateSelectedLegendarySignEncounter
+	setflag FLAG_SYS_CTRL_OBJ_DELETE
+	special BattleSetup_StartLegendaryBattle
+	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, NewMauville_Inside_EventScript_MeltanCaught
+	msgbox NewMauville_Inside_Text_MeltanRemains, MSGBOX_DEFAULT
+	release
+	end
+
+NewMauville_Inside_EventScript_MeltanDormant::
+	msgbox NewMauville_Inside_Text_MeltanDormant, MSGBOX_DEFAULT
+	release
+	end
+
+NewMauville_Inside_EventScript_MeltanNeedsPartner::
+	msgbox NewMauville_Inside_Text_MeltanNeedsPartner, MSGBOX_DEFAULT
+	release
+	end
+
+NewMauville_Inside_EventScript_MeltanCaught::
+	setflag FLAG_EC_CAUGHT_MELTAN
+NewMauville_Inside_EventScript_MeltanCleanup::
+	setflag FLAG_EC_CAUGHT_MELTAN
+	removeobject LOCALID_EC_MELTAN
+	release
+	end
+
+NewMauville_Inside_Text_MeltanDormant:
+	.string "A CHAMPION'S SIGN marks the liquid-metal conduit.\p"
+	.string "Its light is dormant. HOENN's story\n"
+	.string "has not yet reached this place.$"
+
+NewMauville_Inside_Text_MeltanNeedsPartner:
+	.string "The SIGN sketches MAGNETON.\p"
+	.string "Bring that POKéMON's family here, and\n"
+	.string "the hidden challenger may answer.$"
+
+NewMauville_Inside_Text_MeltanAwakens:
+	.string "The CHAMPION'S SIGN erupts with light!\n"
+	.string "MELTAN answers the challenge!$"
+
+NewMauville_Inside_Text_MeltanRemains:
+	.string "The SIGN remains bright. MELTAN\n"
+	.string "will accept another challenge.$"
+
+
+@ END EMERALD CHAMPIONS LEGENDARY ROOTS

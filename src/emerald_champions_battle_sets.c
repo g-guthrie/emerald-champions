@@ -54,6 +54,8 @@ bool32 IsEmeraldChampionsOrdinaryWildSpecies(enum Species species)
 {
     if (species == SPECIES_NONE || species == SPECIES_EGG || species >= NUM_SPECIES)
         return FALSE;
+    if (gSpeciesInfo[species].baseHP == 0)
+        return FALSE;
 
     return !gSpeciesInfo[species].isRestrictedLegendary
         && !gSpeciesInfo[species].isSubLegendary
@@ -103,8 +105,41 @@ static bool32 FindFallbackAbilitySlot(enum Species species, u32 *slot)
     return FALSE;
 }
 
+static bool32 HasDirectBattleSet(enum Species species)
+{
+    return species > SPECIES_NONE
+        && species < NUM_SPECIES
+        && gEmeraldChampionsDefaultBattleSets[species].moves[0] != MOVE_NONE;
+}
+
+static enum Species ResolveBattleSetSpecies(enum Species species)
+{
+    const u16 *formTable;
+
+    if (HasDirectBattleSet(species))
+        return species;
+    if (species <= SPECIES_NONE || species >= NUM_SPECIES)
+        return species;
+
+    // Cosmetic, Totem, and temporary battle forms share the first authored
+    // set in their native form table. Regional and mechanically distinct
+    // forms receive explicit entries from the handbook supplement instead.
+    formTable = gSpeciesInfo[species].formSpeciesIdTable;
+    if (formTable != NULL)
+    {
+        for (u32 i = 0; formTable[i] != FORM_SPECIES_END; i++)
+        {
+            enum Species candidate = formTable[i];
+            if (HasDirectBattleSet(candidate))
+                return candidate;
+        }
+    }
+    return species;
+}
+
 u8 GetEmeraldChampionsRawBattleSetCount(enum Species species)
 {
+    species = ResolveBattleSetSpecies(species);
     if (species == SPECIES_NONE || species == SPECIES_EGG || species >= NUM_SPECIES)
         return 0;
     if (gEmeraldChampionsDefaultBattleSets[species].moves[0] == MOVE_NONE)
@@ -118,6 +153,7 @@ const struct EmeraldChampionsBattleSet *GetEmeraldChampionsRawBattleSet(enum Spe
 
     if (GetEmeraldChampionsRawBattleSetCount(species) == 0)
         return NULL;
+    species = ResolveBattleSetSpecies(species);
     range = &gEmeraldChampionsBattleSetRanges[species];
     if (rawChoice == 0)
         return &gEmeraldChampionsDefaultBattleSets[species];
@@ -133,13 +169,15 @@ static bool32 ResolveVisibleChoice(
     const u8 **nameOut)
 {
     enum Species species = GetMonData(mon, MON_DATA_SPECIES);
+    enum Species setSpecies;
     const struct EmeraldChampionsBattleSetRange *range;
     u8 visibleChoice = 0;
 
     if (GetEmeraldChampionsRawBattleSetCount(species) == 0)
         return FALSE;
 
-    range = &gEmeraldChampionsBattleSetRanges[species];
+    setSpecies = ResolveBattleSetSpecies(species);
+    range = &gEmeraldChampionsBattleSetRanges[setSpecies];
     for (u8 rawChoice = 0; rawChoice <= range->count; rawChoice++)
     {
         const struct EmeraldChampionsBattleSet *preset;
@@ -147,9 +185,9 @@ static bool32 ResolveVisibleChoice(
 
         if (rawChoice == 0)
         {
-            preset = &gEmeraldChampionsDefaultBattleSets[species];
-            name = gEmeraldChampionsDefaultBattleSetNames[species] != NULL
-                 ? gEmeraldChampionsDefaultBattleSetNames[species]
+            preset = &gEmeraldChampionsDefaultBattleSets[setSpecies];
+            name = gEmeraldChampionsDefaultBattleSetNames[setSpecies] != NULL
+                 ? gEmeraldChampionsDefaultBattleSetNames[setSpecies]
                  : sRecommendedSetName;
         }
         else
@@ -177,12 +215,14 @@ static bool32 ResolveVisibleChoice(
 u8 GetEmeraldChampionsBattleSetCount(struct Pokemon *mon)
 {
     enum Species species = GetMonData(mon, MON_DATA_SPECIES);
+    enum Species setSpecies;
     const struct EmeraldChampionsBattleSetRange *range;
     u8 count = 0;
 
     if (GetEmeraldChampionsRawBattleSetCount(species) == 0)
         return 0;
-    range = &gEmeraldChampionsBattleSetRanges[species];
+    setSpecies = ResolveBattleSetSpecies(species);
+    range = &gEmeraldChampionsBattleSetRanges[setSpecies];
     for (u8 rawChoice = 0; rawChoice <= range->count; rawChoice++)
     {
         const struct EmeraldChampionsBattleSet *preset = GetEmeraldChampionsRawBattleSet(species, rawChoice);
@@ -223,6 +263,7 @@ static u8 ApplyPreset(
     bool32 requireMegaAccess)
 {
     enum Species species = GetMonData(mon, MON_DATA_SPECIES);
+    enum Species setSpecies = ResolveBattleSetSpecies(species);
     enum Item currentItem = GetMonData(mon, MON_DATA_HELD_ITEM);
     u32 abilitySlot;
     u8 ppBonuses = 0;
@@ -233,7 +274,7 @@ static u8 ApplyPreset(
     {
         // Mega presets name the transformed Ability. The base Pokémon keeps a
         // legal base Ability until the engine performs Mega Evolution.
-        if (!FindAbilitySlot(species, gEmeraldChampionsDefaultBattleSets[species].ability, &abilitySlot)
+        if (!FindAbilitySlot(species, gEmeraldChampionsDefaultBattleSets[setSpecies].ability, &abilitySlot)
          && !FindFallbackAbilitySlot(species, &abilitySlot))
             return EC_BATTLE_SET_FAILED;
     }
@@ -294,7 +335,7 @@ u8 ApplyEmeraldChampionsRandomWildSet(struct Pokemon *mon)
 
     if (count == 0)
         return EC_BATTLE_SET_FAILED;
-    if (!ResolveVisibleChoice(mon, Random() % count, &preset, NULL))
+    if (!ResolveVisibleChoice(mon, RandomUniform(RNG_NONE, 0, count - 1), &preset, NULL))
         return EC_BATTLE_SET_FAILED;
     return ApplyPreset(mon, preset, FALSE, FALSE, TRUE);
 }
@@ -311,7 +352,7 @@ u8 ApplyEmeraldChampionsRandomNonMegaSet(struct Pokemon *mon)
 
         if (preset == NULL || preset->requiredItem != ITEM_NONE)
             continue;
-        if (Random() % ++matches == 0)
+        if (RandomUniform(RNG_NONE, 0, ++matches - 1) == 0)
             selected = preset;
     }
     if (selected == NULL)

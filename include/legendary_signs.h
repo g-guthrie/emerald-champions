@@ -60,6 +60,35 @@ enum LegendarySignId
     LEGENDARY_SIGN_ZEKROM,
     LEGENDARY_SIGN_ZERAORA,
     LEGENDARY_SIGN_ZYGARDE,
+    // Append only: existing IDs are persisted in save variables.
+    LEGENDARY_SIGN_ARTICUNO,
+    LEGENDARY_SIGN_COSMOG,
+    LEGENDARY_SIGN_ENAMORUS,
+    LEGENDARY_SIGN_FEZANDIPITI,
+    LEGENDARY_SIGN_KORAIDON,
+    LEGENDARY_SIGN_MAGEARNA,
+    LEGENDARY_SIGN_MELOETTA,
+    LEGENDARY_SIGN_MELTAN,
+    LEGENDARY_SIGN_MEWTWO,
+    LEGENDARY_SIGN_MIRAIDON,
+    LEGENDARY_SIGN_MUNKIDORI,
+    LEGENDARY_SIGN_OKIDOGI,
+    LEGENDARY_SIGN_PECHARUNT,
+    LEGENDARY_SIGN_REGIGIGAS,
+    LEGENDARY_SIGN_TERAPAGOS,
+    LEGENDARY_SIGN_WO_CHIEN,
+    LEGENDARY_SIGN_ZAPDOS,
+    LEGENDARY_SIGN_CHIEN_PAO,
+    LEGENDARY_SIGN_CHI_YU,
+    LEGENDARY_SIGN_KUBFU,
+    LEGENDARY_SIGN_MANAPHY,
+    LEGENDARY_SIGN_SUICUNE,
+    LEGENDARY_SIGN_TAPU_FINI,
+    LEGENDARY_SIGN_TERRAKION,
+    LEGENDARY_SIGN_TING_LU,
+    LEGENDARY_SIGN_TYPE_NULL,
+    LEGENDARY_SIGN_VOLCANION,
+    LEGENDARY_SIGN_KELDEO,
     LEGENDARY_SIGN_COUNT,
 };
 
@@ -71,6 +100,7 @@ enum LegendarySignSource
     LEGENDARY_SOURCE_GAME_CORNER,
     LEGENDARY_SOURCE_CIRCUIT,
     LEGENDARY_SOURCE_MASTERY,
+    LEGENDARY_SOURCE_ORDINARY_WILD,
 };
 
 struct LegendarySignDefinition
@@ -95,11 +125,14 @@ void MarkLegendarySignCaughtBySpecies(enum Species species);
 enum LegendarySignId GetLegendarySignIdBySpecies(enum Species species);
 bool32 TryGetLegendarySignWildOverride(enum WildPokemonArea area, enum Species *species, u8 *level);
 bool32 PlayerPartyHasSpeciesFamily(enum Species species);
+bool32 IsLegendarySignOrdinaryWildSpecies(enum Species species);
+void DoesPlayerPartyHaveSelectedSpeciesFamily(void);
 void TryUnlockSelectedLegendarySign(void);
 u16 GetSelectedLegendarySignState(void);
 u16 ShouldShowSelectedLegendarySignObject(void);
 u16 GetSelectedLegendarySignLevel(void);
 void CreateSelectedLegendarySignEncounter(void);
+void CreateEmeraldChampionsStaticLegendaryEncounter(void);
 void TryUnlockDarkraiLegendarySign(void);
 void TryDiscoverEligibleLegendarySign(void);
 void TryGiveArceusLegendarySignMasteryReward(void);

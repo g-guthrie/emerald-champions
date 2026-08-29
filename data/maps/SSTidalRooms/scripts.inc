@@ -28,17 +28,17 @@ SSTidalRooms_EventScript_Bed::
 	end
 
 SSTidalRooms_EventScript_Colton::
-	trainerbattle_single TRAINER_COLTON, SSTidalRooms_Text_ColtonIntro, SSTidalRooms_Text_ColtonDefeat
+	trainerbattle_double TRAINER_COLTON, SSTidalRooms_Text_ColtonIntro, SSTidalRooms_Text_ColtonDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox SSTidalRooms_Text_ColtonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 SSTidalRooms_EventScript_Micah::
-	trainerbattle_single TRAINER_MICAH, SSTidalRooms_Text_MicahIntro, SSTidalRooms_Text_MicahDefeat
+	trainerbattle_double TRAINER_MICAH, SSTidalRooms_Text_MicahIntro, SSTidalRooms_Text_MicahDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox SSTidalRooms_Text_MicahPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 SSTidalRooms_EventScript_Thomas::
-	trainerbattle_single TRAINER_THOMAS, SSTidalRooms_Text_ThomasIntro, SSTidalRooms_Text_ThomasDefeat
+	trainerbattle_double TRAINER_THOMAS, SSTidalRooms_Text_ThomasIntro, SSTidalRooms_Text_ThomasDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox SSTidalRooms_Text_ThomasPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -53,12 +53,12 @@ SSTidalRooms_EventScript_Lea::
 	end
 
 SSTidalRooms_EventScript_Garret::
-	trainerbattle_single TRAINER_GARRET, SSTidalRooms_Text_GarretIntro, SSTidalRooms_Text_GarretDefeat
+	trainerbattle_double TRAINER_GARRET, SSTidalRooms_Text_GarretIntro, SSTidalRooms_Text_GarretDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox SSTidalRooms_Text_GarretPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 SSTidalRooms_EventScript_Naomi::
-	trainerbattle_single TRAINER_NAOMI, SSTidalRooms_Text_NaomiIntro, SSTidalRooms_Text_NaomiDefeat
+	trainerbattle_double TRAINER_NAOMI, SSTidalRooms_Text_NaomiIntro, SSTidalRooms_Text_NaomiDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox SSTidalRooms_Text_NaomiPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -160,16 +160,10 @@ SSTidalRooms_Text_NaomiPostBattle:
 	.string "charms, I must say…\p"
 	.string "But, I will admit there is an appealing\n"
 	.string "side to touring HOENN by ferry.$"
-
 SSTidalRooms_Text_NotSuspiciousTakeThis:
-	.string "Uh… Hi! I… I'm not acting suspicious!\n"
-	.string "Uh… You can have this! For free!\p"
-	.string "It… Honestly, I didn't SNATCH it from\n"
-	.string "someone! I'd never do such a thing!\l"
-	.string "It's clean! You can use it!$"
-
+	.string "Uh… Hi! I'm not acting suspicious!\p"
+	.string "I didn't SNATCH this REAPER CLOTH\n"
+	.string "from anyone. It's clean! Take it!$"
 SSTidalRooms_Text_ExplainSnatch:
-	.string "SNATCH steals the beneficial effects\n"
-	.string "of certain moves before they can be\l"
-	.string "used by a foe or ally.$"
-
+	.string "A REAPER CLOTH evolves DUSCLOPS.\n"
+	.string "Use it from the Bag when ready.$"

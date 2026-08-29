@@ -2,6 +2,7 @@
 #include "battle_setup.h"
 #include "caps.h"
 #include "data.h"
+#include "daycare.h"
 #include "emerald_champions_battle_sets.h"
 #include "event_data.h"
 #include "legendary_signs.h"
@@ -106,7 +107,29 @@ static const u8 *GetLegendarySignLocationName(enum LegendarySignId signId)
 
 static u16 GetLegendaryStateVar(u16 firstVar, enum LegendarySignId signId)
 {
-    return firstVar + signId / 16;
+    static const u16 sUnlockedVars[] =
+    {
+        VAR_LEGENDARY_SIGNS_UNLOCKED_0,
+        VAR_LEGENDARY_SIGNS_UNLOCKED_1,
+        VAR_LEGENDARY_SIGNS_UNLOCKED_2,
+        VAR_LEGENDARY_SIGNS_UNLOCKED_3,
+        VAR_LEGENDARY_SIGNS_UNLOCKED_4,
+        VAR_LEGENDARY_SIGNS_UNLOCKED_5,
+    };
+    static const u16 sCaughtVars[] =
+    {
+        VAR_LEGENDARY_SIGNS_CAUGHT_0,
+        VAR_LEGENDARY_SIGNS_CAUGHT_1,
+        VAR_LEGENDARY_SIGNS_CAUGHT_2,
+        VAR_LEGENDARY_SIGNS_CAUGHT_3,
+        VAR_LEGENDARY_SIGNS_CAUGHT_4,
+        VAR_LEGENDARY_SIGNS_CAUGHT_5,
+    };
+    u32 index = signId / 16;
+
+    if (index >= ARRAY_COUNT(sUnlockedVars))
+        return VAR_LEGENDARY_SIGNS_UNLOCKED_0;
+    return firstVar == VAR_LEGENDARY_SIGNS_CAUGHT_0 ? sCaughtVars[index] : sUnlockedVars[index];
 }
 
 static bool32 GetLegendaryStateBit(u16 firstVar, enum LegendarySignId signId)
@@ -172,6 +195,14 @@ enum LegendarySignId GetLegendarySignIdBySpecies(enum Species species)
     return LEGENDARY_SIGN_COUNT;
 }
 
+bool32 IsLegendarySignOrdinaryWildSpecies(enum Species species)
+{
+    enum LegendarySignId signId = GetLegendarySignIdBySpecies(species);
+
+    return signId < LEGENDARY_SIGN_COUNT
+        && gLegendarySignDefinitions[signId].source == LEGENDARY_SOURCE_ORDINARY_WILD;
+}
+
 void MarkLegendarySignCaughtBySpecies(enum Species species)
 {
     enum LegendarySignId signId = GetLegendarySignIdBySpecies(species);
@@ -198,10 +229,12 @@ void MarkLegendarySignCaughtBySpecies(enum Species species)
 
 bool32 PlayerPartyHasSpeciesFamily(enum Species species)
 {
+    enum Species requestedRoot;
     enum NationalDexOrder requestedDex;
 
     if (species == SPECIES_NONE)
         return TRUE;
+    requestedRoot = GetEggSpecies(species);
     requestedDex = SpeciesToNationalPokedexNum(species);
     for (u8 slot = 0; slot < PARTY_SIZE; slot++)
     {
@@ -209,10 +242,16 @@ bool32 PlayerPartyHasSpeciesFamily(enum Species species)
 
         if (partySpecies != SPECIES_NONE
          && partySpecies != SPECIES_EGG
-         && SpeciesToNationalPokedexNum(partySpecies) == requestedDex)
+         && (GetEggSpecies(partySpecies) == requestedRoot
+          || SpeciesToNationalPokedexNum(partySpecies) == requestedDex))
             return TRUE;
     }
     return FALSE;
+}
+
+void DoesPlayerPartyHaveSelectedSpeciesFamily(void)
+{
+    gSpecialVar_Result = PlayerPartyHasSpeciesFamily(gSpecialVar_0x8004);
 }
 
 static u8 GetSignLevel(s8 offset)
@@ -239,7 +278,7 @@ bool32 TryGetLegendarySignWildOverride(enum WildPokemonArea area, enum Species *
          || sign->area != area
          || !IsLegendarySignUnlocked(signId)
          || IsLegendarySignCaught(signId)
-         || Random() % 100 >= sign->chance)
+         || RandomUniform(RNG_NONE, 0, 99) >= sign->chance)
             continue;
 
         *species = sign->species;
@@ -324,6 +363,16 @@ void CreateSelectedLegendarySignEncounter(void)
         gLegendarySignDefinitions[signId].species,
         GetSignLevel(gLegendarySignDefinitions[signId].levelOffset),
         ITEM_NONE);
+}
+
+void CreateEmeraldChampionsStaticLegendaryEncounter(void)
+{
+    enum Species species = gSpecialVar_0x8004;
+    s16 levelOffset = gSpecialVar_0x8005;
+
+    if (species == SPECIES_NONE || species >= NUM_SPECIES)
+        return;
+    CreateScriptedWildMon(species, GetSignLevel(levelOffset), ITEM_NONE);
 }
 
 void TryUnlockDarkraiLegendarySign(void)
@@ -425,7 +474,7 @@ static bool32 ApplyNonMegaGiftSet(struct Pokemon *mon)
 
         if (preset == NULL || preset->requiredItem != ITEM_NONE)
             continue;
-        if (Random() % ++matches == 0)
+        if (RandomUniform(RNG_NONE, 0, ++matches - 1) == 0)
             selected = choice;
     }
     if (matches == 0)

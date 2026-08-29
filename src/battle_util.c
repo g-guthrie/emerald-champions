@@ -10828,6 +10828,13 @@ bool32 IsBattlerInvalidForSpreadMove(enum BattlerId battlerAtk, enum BattlerId b
 
 bool32 IsAllowedToUseBag(void)
 {
+    // Emerald Champions is a competitive puzzle campaign.  Ordinary Trainer
+    // battles never permit Bag actions; Battle Pyramid keeps its facility Bag.
+    if (GEN_LATEST == GEN_CHAMPIONS
+     && gBattleTypeFlags & BATTLE_TYPE_TRAINER
+     && !(gBattleTypeFlags & BATTLE_TYPE_PYRAMID))
+        return FALSE;
+
     switch (VarGet(B_VAR_NO_BAG_USE))
     {
     case NO_BAG_RESTRICTION:

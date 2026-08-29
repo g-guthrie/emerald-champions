@@ -12,22 +12,22 @@ Route126_EventScript_Barry::
 	end
 
 Route126_EventScript_Dean::
-	trainerbattle_single TRAINER_DEAN, Route126_Text_DeanIntro, Route126_Text_DeanDefeat
+	trainerbattle_double TRAINER_DEAN, Route126_Text_DeanIntro, Route126_Text_DeanDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route126_Text_DeanPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route126_EventScript_Nikki::
-	trainerbattle_single TRAINER_NIKKI, Route126_Text_NikkiIntro, Route126_Text_NikkiDefeat
+	trainerbattle_double TRAINER_NIKKI, Route126_Text_NikkiIntro, Route126_Text_NikkiDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route126_Text_NikkiPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route126_EventScript_Brenda::
-	trainerbattle_single TRAINER_BRENDA, Route126_Text_BrendaIntro, Route126_Text_BrendaDefeat
+	trainerbattle_double TRAINER_BRENDA, Route126_Text_BrendaIntro, Route126_Text_BrendaDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route126_Text_BrendaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route126_EventScript_Leonardo::
-	trainerbattle_single TRAINER_LEONARDO, Route126_Text_LeonardoIntro, Route126_Text_LeonardoDefeat
+	trainerbattle_double TRAINER_LEONARDO, Route126_Text_LeonardoIntro, Route126_Text_LeonardoDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route126_Text_LeonardoPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -37,12 +37,12 @@ Route126_EventScript_Isobel::
 	end
 
 Route126_EventScript_Sienna::
-	trainerbattle_single TRAINER_SIENNA, Route126_Text_SiennaIntro, Route126_Text_SiennaDefeat
+	trainerbattle_double TRAINER_SIENNA, Route126_Text_SiennaIntro, Route126_Text_SiennaDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route126_Text_SiennaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route126_EventScript_Pablo::
-	trainerbattle_single TRAINER_PABLO_1, Route126_Text_PabloIntro, Route126_Text_PabloDefeat, Route126_EventScript_RegisterPablo
+	trainerbattle_double TRAINER_PABLO_1, Route126_Text_PabloIntro, Route126_Text_PabloDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route126_EventScript_RegisterPablo
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route126_EventScript_RematchPablo
 	msgbox Route126_Text_PabloPostBattle, MSGBOX_DEFAULT
@@ -58,7 +58,7 @@ Route126_EventScript_RegisterPablo::
 	end
 
 Route126_EventScript_RematchPablo::
-	trainerbattle_rematch TRAINER_PABLO_1, Route126_Text_PabloRematchIntro, Route126_Text_PabloRematchDefeat
+	trainerbattle_rematch_double TRAINER_PABLO_1, Route126_Text_PabloRematchIntro, Route126_Text_PabloRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route126_Text_PabloPostRematch, MSGBOX_AUTOCLOSE
 	end
 

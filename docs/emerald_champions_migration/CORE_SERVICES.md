@@ -1,50 +1,43 @@
-# Core preparation and economy checkpoint
+# Core preparation and economy
 
-This checkpoint restores the first playable Emerald Champions service slice on
-top of the Champions engine. It does not claim preset, wild-distribution,
-story, or trainer parity.
+Emerald Champions removes preparation grind while preserving campaign
+progression around Mega Stones, evolution items, berries, and legendary
+acquisition.
 
-## Implemented
+## Complete systems
 
-- Native Options difficulty row: Hard keeps authored enemy levels, Medium
-  subtracts two, and Easy subtracts four. Enemy parties A and B are adjusted
-  after creation; player and allied partner parties are not touched.
-- Hard is the new-game default. Native instant text remains forced.
-- The first Pokemon Center visit grants a Poke Vial and Leveler. Center healing
-  and whiteout refill the Vial.
-- The Poke Vial restores the active party outside battle without healing the
-  PC boxes.
-- The reusable Leveler raises every eligible party member to the current cap,
-  preserves multi-stage evolution handling, and never consumes itself.
-- Rare Candy costs 1,000, raises up to ten levels without crossing the cap,
-  and is added to all 20 Hoenn medicine-mart lists.
-- Level-up and evolution move prompts are disabled. The complete native move
-  relearner exposes level, pre-evolution, egg, TM, and tutor moves without item
-  or level ownership gates.
-- All 16 Hoenn Pokemon Centers contain the shared move tutor and free battle
-  vendor. The vendor excludes Berries and explicit transformation/progression
-  items.
-- Champions loadouts restore their original held item after battle, including
-  consumed Berries. Captured preset Pokemon also retain their original Berry.
+- Native Difficulty option: Hard uses authored levels, Medium applies -2, and
+  Easy applies -4 to every enemy trainer Pokemon. Hard is the default.
+- Text speed is forced to the instant setting.
+- The first Pokemon Center visit grants the reusable Poke Vial and Leveler.
+  Healing and whiteout refill the Vial; its native Chansey quest raises
+  capacity to two, and Route 133 raises it to three.
+- The Leveler raises the party to the current strict cap. Level-up move prompts
+  are disabled, while normal evolution handling remains active.
+- Rare Candy costs 1,000 in all twenty Hoenn medicine lists and raises up to
+  ten levels without crossing the cap.
+- All sixteen Hoenn Pokemon Centers have the shared move tutor and held-item
+  vendor. The tutor exposes level, pre-evolution, egg, TM, and tutor moves.
+- The free held-item vendor is split into six native categories containing 111
+  ordinary competitive items. Berries, Mega Stones, Orbs, masks, Drives,
+  Memories, Plates, and other transformation/progression items are excluded.
+- The normal party menu has an Ability action listing the Pokemon's unique
+  legal abilities; no external item, currency, or special screen is required.
+- Badge eight unlocks complete Mega Stone and evolution-item archives before
+  the League. Earlier story rewards remain finite and meaningful.
+- Every scripted reward and every former TM map pickup has been audited for
+  finite, nonredundant progression value.
+- All thirty trade evolutions have single-player methods; every required
+  evolution item is obtainable, and the Linking Cord is reusable.
+- Held loadouts, including consumed Berries, restore after battle.
 
-## Build and regression evidence
+## Evidence
 
-- Production build: clean
-- Padded ROM SHA-256:
-  `a4c8d9e4656402be677211e1c230654fe4a0eaa556c930d730c154250f069a74`
-- Linked ROM used: 26,726,316 bytes (79.65 percent)
-- EWRAM used: 226,436 / 262,144 bytes (86.38 percent)
-- IWRAM used: 28,388 / 32,768 bytes (86.63 percent)
-- Selected Champions plus Emerald Champions regressions: 43 passed, 0 failed
-
-## Still open in this feature family
-
-- Real-emulator interaction testing for the Leveler evolution sequence, Vial,
-  difficulty menu, complete move lists, and free shop quantity flow.
-- The Route 111 and Route 133 Poke Vial capacity upgrades and their story
-  validation.
-- Competitive preset selection with moves, nature, Ability, Stat Points, and
-  held item.
-- Battle-ready wild preset assignment.
-- Native vendor category UX and complete item-policy verification.
-- Reward/economy rewrites that remove redundant campaign gifts and pickups.
+- Core-service static verifier: PASS
+- Pokemon Centers: 16 / 16
+- Medicine marts: 20 / 20
+- Free ordinary held items: 111
+- Reward scripts audited: 47 plus all map TM pickups
+- Poke Vial quest verifier: PASS
+- Solo evolution verifier: PASS
+- Emerald Champions mGBA suite: 14 passed, 0 failed

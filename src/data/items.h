@@ -15499,12 +15499,12 @@ const struct ItemInfo gItemsInfo[] =
     [ITEM_LINKING_CORD] =
     {
         .name = ITEM_NAME("Linking Cord"),
-        .price = 8000,
+        .price = 0,
         .description = COMPOUND_STRING(
-            "A string exuding\n"
-            "energy loved by\n"
-            "certain Pokémon."),
-        .pocket = POCKET_ITEMS,
+            "A reusable cord\n"
+            "that evolves certain\n"
+            "trade-linked Pokémon."),
+        .pocket = POCKET_KEY_ITEMS,
         .sortType = ITEM_TYPE_EVOLUTION_ITEM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,

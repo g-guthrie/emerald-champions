@@ -7,9 +7,9 @@
     "ability": "resolved by Ability identity against current species data",
     "protected_items": "never supplied by a preset"
   },
-  "default_count": 1143,
-  "alternative_count": 166,
-  "set_count": 1309,
+  "default_count": 1258,
+  "alternative_count": 203,
+  "set_count": 1461,
   "defaults": [
     {
       "species": "SPECIES_BULBASAUR",
@@ -165,7 +165,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_BOLD",
-      "ability": "ABILITY_OVERCOAT",
+      "ability": "ABILITY_RAIN_DISH",
       "item": "ITEM_EVIOLITE",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -213,7 +213,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_MODEST",
-      "ability": "ABILITY_MEGA_LAUNCHER",
+      "ability": "ABILITY_RAIN_DISH",
       "item": "ITEM_SITRUS_BERRY",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -381,7 +381,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_TIMID",
-      "ability": "ABILITY_NO_GUARD",
+      "ability": "ABILITY_BIG_PECKS",
       "item": "ITEM_FOCUS_SASH",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -405,7 +405,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_TIMID",
-      "ability": "ABILITY_NO_GUARD",
+      "ability": "ABILITY_BIG_PECKS",
       "item": "ITEM_EVIOLITE",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -429,7 +429,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_TIMID",
-      "ability": "ABILITY_NO_GUARD",
+      "ability": "ABILITY_BIG_PECKS",
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -525,7 +525,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_JOLLY",
-      "ability": "ABILITY_INTIMIDATE",
+      "ability": "ABILITY_SNIPER",
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -1845,7 +1845,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_JOLLY",
-      "ability": "ABILITY_RECKLESS",
+      "ability": "ABILITY_FLAME_BODY",
       "item": "ITEM_EVIOLITE",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -1869,7 +1869,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_JOLLY",
-      "ability": "ABILITY_RECKLESS",
+      "ability": "ABILITY_FLAME_BODY",
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -2037,7 +2037,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_JOLLY",
-      "ability": "ABILITY_MOXIE",
+      "ability": "ABILITY_TANGLED_FEET",
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -2061,7 +2061,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_ADAMANT",
-      "ability": "ABILITY_FUR_COAT",
+      "ability": "ABILITY_ICE_BODY",
       "item": "ITEM_EVIOLITE",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -2085,7 +2085,7 @@
         "MOVE_ENCORE"
       ],
       "nature": "NATURE_TIMID",
-      "ability": "ABILITY_FUR_COAT",
+      "ability": "ABILITY_ICE_BODY",
       "item": "ITEM_SITRUS_BERRY",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -2253,7 +2253,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_TIMID",
-      "ability": "ABILITY_LEVITATE",
+      "ability": "ABILITY_CURSED_BODY",
       "item": "ITEM_FOCUS_SASH",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -2421,7 +2421,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_TIMID",
-      "ability": "ABILITY_ELECTRIC_SURGE",
+      "ability": "ABILITY_AFTERMATH",
       "item": "ITEM_FOCUS_SASH",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -3642,7 +3642,7 @@
         "MOVE_GIGA_DRAIN"
       ],
       "nature": "NATURE_BOLD",
-      "ability": "ABILITY_TRIAGE",
+      "ability": "ABILITY_LEAF_GUARD",
       "item": "ITEM_LIGHT_CLAY",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -3666,7 +3666,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_BOLD",
-      "ability": "ABILITY_TRIAGE",
+      "ability": "ABILITY_LEAF_GUARD",
       "item": "ITEM_EVIOLITE",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -3690,7 +3690,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_BOLD",
-      "ability": "ABILITY_TRIAGE",
+      "ability": "ABILITY_LEAF_GUARD",
       "item": "ITEM_SITRUS_BERRY",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -3858,7 +3858,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_CAREFUL",
-      "ability": "ABILITY_FUR_COAT",
+      "ability": "ABILITY_FRISK",
       "item": "ITEM_EVIOLITE",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -3882,7 +3882,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_JOLLY",
-      "ability": "ABILITY_FUR_COAT",
+      "ability": "ABILITY_FRISK",
       "item": "ITEM_SITRUS_BERRY",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -3954,7 +3954,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_JOLLY",
-      "ability": "ABILITY_AERILATE",
+      "ability": "ABILITY_RATTLED",
       "item": "ITEM_EVIOLITE",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -4002,7 +4002,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_ADAMANT",
-      "ability": "ABILITY_MERCILESS",
+      "ability": "ABILITY_SNIPER",
       "item": "ITEM_FOCUS_SASH",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -4602,7 +4602,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_MODEST",
-      "ability": "ABILITY_DROUGHT",
+      "ability": "ABILITY_EARLY_BIRD",
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -4864,7 +4864,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_JOLLY",
-      "ability": "ABILITY_STRONG_JAW",
+      "ability": "ABILITY_SAP_SIPPER",
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -5248,7 +5248,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_MODEST",
-      "ability": "ABILITY_SIMPLE",
+      "ability": "ABILITY_WEAK_ARMOR",
       "item": "ITEM_WHITE_HERB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -5392,7 +5392,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_JOLLY",
-      "ability": "ABILITY_REFRIGERATE",
+      "ability": "ABILITY_INSOMNIA",
       "item": "ITEM_FOCUS_SASH",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -6352,7 +6352,7 @@
         "MOVE_TACKLE"
       ],
       "nature": "NATURE_IMPISH",
-      "ability": "ABILITY_POISON_POINT",
+      "ability": "ABILITY_RUN_AWAY",
       "item": "ITEM_FOCUS_SASH",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -6400,7 +6400,7 @@
         "MOVE_ROOST"
       ],
       "nature": "NATURE_TIMID",
-      "ability": "ABILITY_BERSERK",
+      "ability": "ABILITY_RIVALRY",
       "item": "ITEM_FOCUS_SASH",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -6448,7 +6448,7 @@
         "MOVE_ROOST"
       ],
       "nature": "NATURE_BOLD",
-      "ability": "ABILITY_UNAWARE",
+      "ability": "ABILITY_COMPOUND_EYES",
       "item": "ITEM_LEFTOVERS",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -6880,7 +6880,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_BRAVE",
-      "ability": "ABILITY_STALL",
+      "ability": "ABILITY_TRUANT",
       "item": "ITEM_EVIOLITE",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -7696,7 +7696,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_QUIET",
-      "ability": "ABILITY_DRIZZLE",
+      "ability": "ABILITY_PRESSURE",
       "item": "ITEM_SITRUS_BERRY",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -7912,7 +7912,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_JOLLY",
-      "ability": "ABILITY_TINTED_LENS",
+      "ability": "ABILITY_LEVITATE",
       "item": "ITEM_YACHE_BERRY",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -8560,7 +8560,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_ADAMANT",
-      "ability": "ABILITY_AERILATE",
+      "ability": "ABILITY_HARVEST",
       "item": "ITEM_SITRUS_BERRY",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -8680,7 +8680,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_JOLLY",
-      "ability": "ABILITY_REFRIGERATE",
+      "ability": "ABILITY_MOODY",
       "item": "ITEM_SITRUS_BERRY",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -8872,7 +8872,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_TIMID",
-      "ability": "ABILITY_SOUL_HEART",
+      "ability": "ABILITY_HYDRATION",
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -9280,7 +9280,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_CAREFUL",
-      "ability": "ABILITY_SOLID_ROCK",
+      "ability": "ABILITY_SHELL_ARMOR",
       "item": "ITEM_EVIOLITE",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -9304,7 +9304,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_CAREFUL",
-      "ability": "ABILITY_SOLID_ROCK",
+      "ability": "ABILITY_SHELL_ARMOR",
       "item": "ITEM_EVIOLITE",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -9328,7 +9328,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_BRAVE",
-      "ability": "ABILITY_SOLID_ROCK",
+      "ability": "ABILITY_SHELL_ARMOR",
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -9976,7 +9976,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_CAREFUL",
-      "ability": "ABILITY_INTIMIDATE",
+      "ability": "ABILITY_UNNERVE",
       "item": "ITEM_LEFTOVERS",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -10264,7 +10264,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_JOLLY",
-      "ability": "ABILITY_SCRAPPY",
+      "ability": "ABILITY_LIMBER",
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -10288,7 +10288,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_TIMID",
-      "ability": "ABILITY_PIXILATE",
+      "ability": "ABILITY_LEVITATE",
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -11200,7 +11200,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_MODEST",
-      "ability": "ABILITY_MEGA_LAUNCHER",
+      "ability": "ABILITY_VITAL_SPIRIT",
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -11296,7 +11296,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_MODEST",
-      "ability": "ABILITY_SLUSH_RUSH",
+      "ability": "ABILITY_ICE_BODY",
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -11656,7 +11656,7 @@
         "MOVE_WIDE_GUARD"
       ],
       "nature": "NATURE_ADAMANT",
-      "ability": "ABILITY_CLEAR_BODY",
+      "ability": "ABILITY_SLOW_START",
       "item": "ITEM_SITRUS_BERRY",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -12112,7 +12112,7 @@
         "MOVE_DETECT"
       ],
       "nature": "NATURE_JOLLY",
-      "ability": "ABILITY_DAZZLING",
+      "ability": "ABILITY_ANALYTIC",
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -14080,7 +14080,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_TIMID",
-      "ability": "ABILITY_LIGHTNING_ROD",
+      "ability": "ABILITY_MOTOR_DRIVE",
       "item": "ITEM_FOCUS_SASH",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -15136,7 +15136,7 @@
         "MOVE_ROCK_TOMB"
       ],
       "nature": "NATURE_ADAMANT",
-      "ability": "ABILITY_TOUGH_CLAWS",
+      "ability": "ABILITY_WHITE_SMOKE",
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -16024,7 +16024,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_TIMID",
-      "ability": "ABILITY_COMPETITIVE",
+      "ability": "ABILITY_MOXIE",
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -16048,7 +16048,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_CALM",
-      "ability": "ABILITY_HEALER",
+      "ability": "ABILITY_SYMBIOSIS",
       "item": "ITEM_EVIOLITE",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -16072,7 +16072,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_CALM",
-      "ability": "ABILITY_HEALER",
+      "ability": "ABILITY_SYMBIOSIS",
       "item": "ITEM_EVIOLITE",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -16096,7 +16096,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_CALM",
-      "ability": "ABILITY_MISTY_SURGE",
+      "ability": "ABILITY_SYMBIOSIS",
       "item": "ITEM_SITRUS_BERRY",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -16144,7 +16144,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_CAREFUL",
-      "ability": "ABILITY_GRASSY_SURGE",
+      "ability": "ABILITY_GRASS_PELT",
       "item": "ITEM_LEFTOVERS",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -16936,7 +16936,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_MODEST",
-      "ability": "ABILITY_POISON_HEAL",
+      "ability": "ABILITY_GOOEY",
       "item": "ITEM_TOXIC_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -17008,7 +17008,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_ADAMANT",
-      "ability": "ABILITY_GRASSY_SURGE",
+      "ability": "ABILITY_HARVEST",
       "item": "ITEM_LEFTOVERS",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -17056,7 +17056,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_MODEST",
-      "ability": "ABILITY_FLARE_BOOST",
+      "ability": "ABILITY_INSOMNIA",
       "item": "ITEM_FLAME_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -17320,7 +17320,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_ADAMANT",
-      "ability": "ABILITY_TINTED_LENS",
+      "ability": "ABILITY_LONG_REACH",
       "item": "ITEM_EVIOLITE",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -17344,7 +17344,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_ADAMANT",
-      "ability": "ABILITY_TINTED_LENS",
+      "ability": "ABILITY_LONG_REACH",
       "item": "ITEM_EVIOLITE",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -17368,7 +17368,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_JOLLY",
-      "ability": "ABILITY_TINTED_LENS",
+      "ability": "ABILITY_LONG_REACH",
       "item": "ITEM_SITRUS_BERRY",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -18472,7 +18472,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_BOLD",
-      "ability": "ABILITY_SAND_STREAM",
+      "ability": "ABILITY_SAND_VEIL",
       "item": "ITEM_LEFTOVERS",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -23104,7 +23104,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_TIMID",
-      "ability": "ABILITY_MOTOR_DRIVE",
+      "ability": "ABILITY_LEVITATE",
       "item": "ITEM_SITRUS_BERRY",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -25120,7 +25120,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_TIMID",
-      "ability": "ABILITY_FLARE_BOOST",
+      "ability": "ABILITY_INSOMNIA",
       "item": "ITEM_FLAME_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -25144,7 +25144,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_MODEST",
-      "ability": "ABILITY_FLARE_BOOST",
+      "ability": "ABILITY_INSOMNIA",
       "item": "ITEM_FLAME_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -25168,7 +25168,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_QUIET",
-      "ability": "ABILITY_FLARE_BOOST",
+      "ability": "ABILITY_INSOMNIA",
       "item": "ITEM_FLAME_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -27056,27 +27056,27 @@
     },
     {
       "species": "SPECIES_GIMMIGHOUL",
-      "name": "Recommended",
+      "name": "Nasty Plot Chest",
       "moves": [
         "MOVE_SHADOW_BALL",
-        "MOVE_ICY_WIND",
-        "MOVE_LIGHT_SCREEN",
+        "MOVE_POWER_GEM",
+        "MOVE_NASTY_PLOT",
         "MOVE_PROTECT"
       ],
-      "nature": "NATURE_MODEST",
+      "nature": "NATURE_QUIET",
       "ability": "ABILITY_RATTLED",
       "item": "ITEM_EVIOLITE",
       "required_item": "ITEM_NONE",
       "stat_points": [
-        2,
-        0,
-        0,
         32,
         0,
-        32
+        2,
+        32,
+        0,
+        0
       ],
-      "role": "Eviolite slow special support",
-      "source": "preserved-authored-default"
+      "role": "slow bulky special setup attacker",
+      "source": "Emerald Champions authored modern doubles supplement"
     },
     {
       "species": "SPECIES_GIMMIGHOUL_ROAMING",
@@ -27437,6 +27437,2766 @@
       ],
       "role": "Calm Mind bulky priority special sweeper",
       "source": "preserved-authored-default"
+    },
+    {
+      "species": "SPECIES_QUAXLY",
+      "name": "Rapid Spin Support",
+      "moves": [
+        "MOVE_LIQUIDATION",
+        "MOVE_AQUA_JET",
+        "MOVE_RAPID_SPIN",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_MOXIE",
+      "item": "ITEM_EVIOLITE",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Fast physical support",
+      "source": "modern-expansion-supplement"
+    },
+    {
+      "species": "SPECIES_QUAXWELL",
+      "name": "Bulky Moxie",
+      "moves": [
+        "MOVE_LIQUIDATION",
+        "MOVE_LOW_SWEEP",
+        "MOVE_ROOST",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_MOXIE",
+      "item": "ITEM_EVIOLITE",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Physical tempo attacker",
+      "source": "modern-expansion-supplement"
+    },
+    {
+      "species": "SPECIES_QUAQUAVAL",
+      "name": "Moxie Dancer",
+      "moves": [
+        "MOVE_AQUA_STEP",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_KNOCK_OFF",
+        "MOVE_DETECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_MOXIE",
+      "item": "ITEM_CLEAR_AMULET",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Showdown offensive Protect attacker",
+      "source": "Showdown Champions plus modern expansion"
+    },
+    {
+      "species": "SPECIES_ENAMORUS",
+      "name": "Contrary Attacker",
+      "moves": [
+        "MOVE_SPRINGTIDE_STORM",
+        "MOVE_EARTH_POWER",
+        "MOVE_MYSTICAL_FIRE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_CONTRARY",
+      "item": "ITEM_LIFE_ORB",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Contrary special attacker",
+      "source": "modern-expansion-supplement"
+    },
+    {
+      "species": "SPECIES_FEZANDIPITI",
+      "name": "Toxic Wind Support",
+      "moves": [
+        "MOVE_MOONBLAST",
+        "MOVE_ICY_WIND",
+        "MOVE_TAILWIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_TOXIC_CHAIN",
+      "item": "ITEM_COVERT_CLOAK",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        0,
+        2,
+        0,
+        32,
+        0
+      ],
+      "role": "Toxic Chain speed support",
+      "source": "modern-expansion-supplement"
+    },
+    {
+      "species": "SPECIES_KORAIDON",
+      "name": "Sun Vanguard",
+      "moves": [
+        "MOVE_COLLISION_COURSE",
+        "MOVE_DRAGON_CLAW",
+        "MOVE_FLARE_BLITZ",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_ORICHALCUM_PULSE",
+      "item": "ITEM_CLEAR_AMULET",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Orichalcum Pulse physical attacker",
+      "source": "modern-expansion-supplement"
+    },
+    {
+      "species": "SPECIES_MIRAIDON",
+      "name": "Terrain Cannon",
+      "moves": [
+        "MOVE_ELECTRO_DRIFT",
+        "MOVE_DRACO_METEOR",
+        "MOVE_VOLT_SWITCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_HADRON_ENGINE",
+      "item": "ITEM_LIFE_ORB",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Hadron Engine special attacker",
+      "source": "modern-expansion-supplement"
+    },
+    {
+      "species": "SPECIES_MUNKIDORI",
+      "name": "Toxic Pivot",
+      "moves": [
+        "MOVE_PSYCHIC",
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_PARTING_SHOT",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_TOXIC_CHAIN",
+      "item": "ITEM_FOCUS_SASH",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Toxic Chain special pivot",
+      "source": "modern-expansion-supplement"
+    },
+    {
+      "species": "SPECIES_OKIDOGI",
+      "name": "Toxic Bruiser",
+      "moves": [
+        "MOVE_DRAIN_PUNCH",
+        "MOVE_POISON_JAB",
+        "MOVE_KNOCK_OFF",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_TOXIC_CHAIN",
+      "item": "ITEM_CLEAR_AMULET",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        32,
+        2,
+        0,
+        0,
+        0
+      ],
+      "role": "Toxic Chain physical bruiser",
+      "source": "modern-expansion-supplement"
+    },
+    {
+      "species": "SPECIES_PECHARUNT",
+      "name": "Poison Puppeteer",
+      "moves": [
+        "MOVE_MALIGNANT_CHAIN",
+        "MOVE_SHADOW_BALL",
+        "MOVE_RECOVER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BOLD",
+      "ability": "ABILITY_POISON_PUPPETEER",
+      "item": "ITEM_LEFTOVERS",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        0,
+        32,
+        0,
+        2,
+        0
+      ],
+      "role": "Poison Puppeteer control wall",
+      "source": "modern-expansion-supplement"
+    },
+    {
+      "species": "SPECIES_TERAPAGOS",
+      "name": "Crystal Anchor",
+      "moves": [
+        "MOVE_TERA_STARSTORM",
+        "MOVE_EARTH_POWER",
+        "MOVE_CALM_MIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_TERA_SHIFT",
+      "item": "ITEM_LEFTOVERS",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        0,
+        2,
+        32,
+        0,
+        0
+      ],
+      "role": "bulky crystal setup attacker",
+      "source": "modern-expansion-supplement"
+    },
+    {
+      "species": "SPECIES_WO_CHIEN",
+      "name": "Tablets Wall",
+      "moves": [
+        "MOVE_GIGA_DRAIN",
+        "MOVE_FOUL_PLAY",
+        "MOVE_LEECH_SEED",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CALM",
+      "ability": "ABILITY_TABLETS_OF_RUIN",
+      "item": "ITEM_LEFTOVERS",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        0,
+        2,
+        0,
+        32,
+        0
+      ],
+      "role": "Tablets of Ruin special wall",
+      "source": "modern-expansion-supplement"
+    },
+    {
+      "species": "SPECIES_BASCULIN_WHITE_STRIPED",
+      "name": "Adaptability Breaker",
+      "moves": [
+        "MOVE_WAVE_CRASH",
+        "MOVE_AQUA_JET",
+        "MOVE_LAST_RESPECTS",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_ADAPTABILITY",
+      "item": "ITEM_LIFE_ORB",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "fast physical breaker and priority cleaner",
+      "source": "Emerald Champions authored modern doubles supplement"
+    },
+    {
+      "species": "SPECIES_CAPSAKID",
+      "name": "Rage Powder Support",
+      "moves": [
+        "MOVE_SEED_BOMB",
+        "MOVE_RAGE_POWDER",
+        "MOVE_HELPING_HAND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CAREFUL",
+      "ability": "ABILITY_CHLOROPHYLL",
+      "item": "ITEM_EVIOLITE",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        0,
+        2,
+        0,
+        32,
+        0
+      ],
+      "role": "sun-enabled redirection and partner support",
+      "source": "Emerald Champions authored modern doubles supplement"
+    },
+    {
+      "species": "SPECIES_CHARCADET",
+      "name": "Flame Body Control",
+      "moves": [
+        "MOVE_HEAT_WAVE",
+        "MOVE_WILL_O_WISP",
+        "MOVE_CLEAR_SMOG",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BOLD",
+      "ability": "ABILITY_FLAME_BODY",
+      "item": "ITEM_EVIOLITE",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        0,
+        32,
+        0,
+        2,
+        0
+      ],
+      "role": "burn and setup-control support",
+      "source": "Emerald Champions authored modern doubles supplement"
+    },
+    {
+      "species": "SPECIES_FLITTLE",
+      "name": "Speed Boost Hypnosis",
+      "moves": [
+        "MOVE_PSYCHIC",
+        "MOVE_HYPNOSIS",
+        "MOVE_HELPING_HAND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_SPEED_BOOST",
+      "item": "ITEM_FOCUS_SASH",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "fast sleep and partner support",
+      "source": "Emerald Champions authored modern doubles supplement"
+    },
+    {
+      "species": "SPECIES_GREAVARD",
+      "name": "Fluffy Priority",
+      "moves": [
+        "MOVE_POLTERGEIST",
+        "MOVE_SHADOW_SNEAK",
+        "MOVE_PLAY_ROUGH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_FLUFFY",
+      "item": "ITEM_EVIOLITE",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        32,
+        2,
+        0,
+        0,
+        0
+      ],
+      "role": "bulky physical attacker and priority cleaner",
+      "source": "Emerald Champions authored modern doubles supplement"
+    },
+    {
+      "species": "SPECIES_GROWLITHE_HISUI",
+      "name": "Rock Head Breaker",
+      "moves": [
+        "MOVE_FLARE_BLITZ",
+        "MOVE_HEAD_SMASH",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_ROCK_HEAD",
+      "item": "ITEM_LIFE_ORB",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "recoil-free physical wallbreaker",
+      "source": "Emerald Champions authored modern doubles supplement"
+    },
+    {
+      "species": "SPECIES_ORTHWORM",
+      "name": "Earth Eater Body Press",
+      "moves": [
+        "MOVE_BODY_PRESS",
+        "MOVE_SHED_TAIL",
+        "MOVE_IRON_DEFENSE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_RELAXED",
+      "ability": "ABILITY_EARTH_EATER",
+      "item": "ITEM_SITRUS_BERRY",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        0,
+        32,
+        0,
+        2,
+        0
+      ],
+      "role": "physical wall, pivot, and Body Press win condition",
+      "source": "Emerald Champions authored modern doubles supplement"
+    },
+    {
+      "species": "SPECIES_POLTCHAGEIST",
+      "name": "Hospitality Trick Room",
+      "moves": [
+        "MOVE_LEAF_STORM",
+        "MOVE_RAGE_POWDER",
+        "MOVE_TRICK_ROOM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_QUIET",
+      "ability": "ABILITY_HOSPITALITY",
+      "item": "ITEM_EVIOLITE",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        0,
+        2,
+        32,
+        0,
+        0
+      ],
+      "role": "Trick Room redirection support",
+      "source": "Emerald Champions authored modern doubles supplement"
+    },
+    {
+      "species": "SPECIES_QWILFISH_HISUI",
+      "name": "Intimidate Utility",
+      "moves": [
+        "MOVE_BARB_BARRAGE",
+        "MOVE_CRUNCH",
+        "MOVE_ICY_WIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CAREFUL",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_EVIOLITE",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        0,
+        2,
+        0,
+        32,
+        0
+      ],
+      "role": "Intimidate status and speed control",
+      "source": "Emerald Champions authored modern doubles supplement"
+    },
+    {
+      "species": "SPECIES_SNEASEL_HISUI",
+      "name": "Inner Focus Opener",
+      "moves": [
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_POISON_JAB",
+        "MOVE_FAKE_OUT",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_INNER_FOCUS",
+      "item": "ITEM_FOCUS_SASH",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "fast Fake Out physical attacker",
+      "source": "Emerald Champions authored modern doubles supplement"
+    },
+    {
+      "species": "SPECIES_TADBULB",
+      "name": "Damp Tempo Control",
+      "moves": [
+        "MOVE_ELECTROWEB",
+        "MOVE_ACID_SPRAY",
+        "MOVE_EERIE_IMPULSE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CALM",
+      "ability": "ABILITY_DAMP",
+      "item": "ITEM_EVIOLITE",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        0,
+        2,
+        0,
+        32,
+        0
+      ],
+      "role": "speed, damage, and special-attack control",
+      "source": "Emerald Champions authored modern doubles supplement"
+    },
+    {
+      "species": "SPECIES_TANDEMAUS",
+      "name": "Population Support",
+      "moves": [
+        "MOVE_POPULATION_BOMB",
+        "MOVE_SUPER_FANG",
+        "MOVE_HELPING_HAND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_OWN_TEMPO",
+      "item": "ITEM_EVIOLITE",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "chip damage and partner amplification",
+      "source": "Emerald Champions authored modern doubles supplement"
+    },
+    {
+      "species": "SPECIES_TAUROS_PALDEA_COMBAT",
+      "name": "Combat Intimidator",
+      "moves": [
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_RAGING_BULL",
+        "MOVE_HIGH_HORSEPOWER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_CLEAR_AMULET",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "fast Intimidate physical attacker",
+      "source": "Emerald Champions authored modern doubles supplement"
+    },
+    {
+      "species": "SPECIES_TAUROS_PALDEA_BLAZE",
+      "name": "Blaze Intimidator",
+      "moves": [
+        "MOVE_RAGING_BULL",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_HIGH_HORSEPOWER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_CLEAR_AMULET",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "fast Fire and Fighting physical attacker",
+      "source": "Emerald Champions authored modern doubles supplement"
+    },
+    {
+      "species": "SPECIES_TAUROS_PALDEA_AQUA",
+      "name": "Aqua Intimidator",
+      "moves": [
+        "MOVE_WAVE_CRASH",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_AQUA_JET",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_CLEAR_AMULET",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "fast Water and Fighting priority attacker",
+      "source": "Emerald Champions authored modern doubles supplement"
+    },
+    {
+      "species": "SPECIES_TINKATINK",
+      "name": "Mold Breaker Opener",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_KNOCK_OFF",
+        "MOVE_PLAY_ROUGH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CAREFUL",
+      "ability": "ABILITY_MOLD_BREAKER",
+      "item": "ITEM_EVIOLITE",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        0,
+        2,
+        0,
+        32,
+        0
+      ],
+      "role": "Fake Out and item-removal support",
+      "source": "Emerald Champions authored modern doubles supplement"
+    },
+    {
+      "species": "SPECIES_ZORUA_HISUI",
+      "name": "Illusion Burn Attacker",
+      "moves": [
+        "MOVE_BITTER_MALICE",
+        "MOVE_HYPER_VOICE",
+        "MOVE_WILL_O_WISP",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_ILLUSION",
+      "item": "ITEM_FOCUS_SASH",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Illusion special attacker and burn control",
+      "source": "Emerald Champions authored modern doubles supplement"
+    },
+    {
+      "species": "SPECIES_VOLTORB_HISUI",
+      "name": "Fast Seed Support",
+      "moves": [
+        "MOVE_ELECTROWEB",
+        "MOVE_GIGA_DRAIN",
+        "MOVE_LEECH_SEED",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_SOUNDPROOF",
+      "item": "ITEM_EVIOLITE",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "fast Grass and Electric support",
+      "source": "Emerald Champions authored modern doubles supplement"
+    },
+    {
+      "species": "SPECIES_ELECTRODE_HISUI",
+      "name": "Chloroblast Pivot",
+      "moves": [
+        "MOVE_CHLOROBLAST",
+        "MOVE_ELECTROWEB",
+        "MOVE_VOLT_SWITCH",
+        "MOVE_TAUNT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_SOUNDPROOF",
+      "item": "ITEM_FOCUS_SASH",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "fast special pivot and speed control",
+      "source": "Emerald Champions authored modern doubles supplement"
+    },
+    {
+      "species": "SPECIES_LILLIGANT_HISUI",
+      "name": "Victory Dance",
+      "moves": [
+        "MOVE_VICTORY_DANCE",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_LEAF_BLADE",
+        "MOVE_SLEEP_POWDER"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_CHLOROPHYLL",
+      "item": "ITEM_FOCUS_SASH",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "sleep pressure and physical setup",
+      "source": "Emerald Champions authored modern doubles supplement"
+    },
+    {
+      "species": "SPECIES_BRAVIARY_HISUI",
+      "name": "Tinted Lens",
+      "moves": [
+        "MOVE_ESPER_WING",
+        "MOVE_AIR_SLASH",
+        "MOVE_HEAT_WAVE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_TINTED_LENS",
+      "item": "ITEM_LIFE_ORB",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Tinted Lens special attacker",
+      "source": "Emerald Champions authored modern doubles supplement"
+    },
+    {
+      "species": "SPECIES_SLIGGOO_HISUI",
+      "name": "Shelter Press",
+      "moves": [
+        "MOVE_BODY_PRESS",
+        "MOVE_HEAVY_SLAM",
+        "MOVE_SHELTER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_RELAXED",
+      "ability": "ABILITY_SHELL_ARMOR",
+      "item": "ITEM_EVIOLITE",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        0,
+        32,
+        0,
+        2,
+        0
+      ],
+      "role": "Eviolite Body Press win condition",
+      "source": "Emerald Champions authored modern doubles supplement"
+    },
+    {
+      "species": "SPECIES_URSALUNA_BLOODMOON",
+      "name": "Blood Moon Voice",
+      "moves": [
+        "MOVE_BLOOD_MOON",
+        "MOVE_EARTH_POWER",
+        "MOVE_HYPER_VOICE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_QUIET",
+      "ability": "ABILITY_MINDS_EYE",
+      "item": "ITEM_THROAT_SPRAY",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        0,
+        2,
+        32,
+        0,
+        0
+      ],
+      "role": "slow special wallbreaker",
+      "source": "Emerald Champions authored modern doubles supplement"
+    },
+    {
+      "species": "SPECIES_WYRDEER",
+      "name": "Trick Room Support",
+      "moves": [
+        "MOVE_TRICK_ROOM",
+        "MOVE_PSYSHIELD_BASH",
+        "MOVE_SKILL_SWAP",
+        "MOVE_GRAVITY"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_COLBUR_BERRY",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        32,
+        2,
+        0,
+        0,
+        0
+      ],
+      "role": "Trick Room Support",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
+      "species": "SPECIES_KLEAVOR",
+      "name": "Choice Attacker",
+      "moves": [
+        "MOVE_STONE_AXE",
+        "MOVE_X_SCISSOR",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_U_TURN"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_SHARPNESS",
+      "item": "ITEM_CHOICE_SCARF",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Choice Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
+      "species": "SPECIES_URSALUNA",
+      "name": "Doubles Wallbreaker",
+      "moves": [
+        "MOVE_HEADLONG_RUSH",
+        "MOVE_FACADE",
+        "MOVE_PROTECT",
+        "MOVE_EARTHQUAKE"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_GUTS",
+      "item": "ITEM_FLAME_ORB",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Doubles Wallbreaker",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_BASCULEGION",
+      "name": "Choice Attacker",
+      "moves": [
+        "MOVE_LAST_RESPECTS",
+        "MOVE_AQUA_JET",
+        "MOVE_WAVE_CRASH",
+        "MOVE_FLIP_TURN"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_ADAPTABILITY",
+      "item": "ITEM_CHOICE_SCARF",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Choice Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
+      "species": "SPECIES_SNEASLER",
+      "name": "Physical Attacker",
+      "moves": [
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_FAKE_OUT",
+        "MOVE_DIRE_CLAW",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_UNBURDEN",
+      "item": "ITEM_FOCUS_SASH",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
+      "species": "SPECIES_OVERQWIL",
+      "name": "Physical Attacker",
+      "moves": [
+        "MOVE_MINIMIZE",
+        "MOVE_STOCKPILE",
+        "MOVE_PROTECT",
+        "MOVE_BARB_BARRAGE"
+      ],
+      "nature": "NATURE_CAREFUL",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_LEFTOVERS",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        0,
+        2,
+        0,
+        32,
+        0
+      ],
+      "role": "Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
+      "species": "SPECIES_LECHONK",
+      "name": "Physical Attacker",
+      "moves": [
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_BODY_SLAM",
+        "MOVE_FACADE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_THICK_FAT",
+      "item": "ITEM_EVIOLITE",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: Projected"
+    },
+    {
+      "species": "SPECIES_OINKOLOGNE",
+      "name": "Doubles Support",
+      "moves": [
+        "MOVE_YAWN",
+        "MOVE_PROTECT",
+        "MOVE_HELPING_HAND",
+        "MOVE_DOUBLE_EDGE"
+      ],
+      "nature": "NATURE_CAREFUL",
+      "ability": "ABILITY_THICK_FAT",
+      "item": "ITEM_SITRUS_BERRY",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        0,
+        2,
+        0,
+        32,
+        0
+      ],
+      "role": "Doubles Support",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_TAROUNTULA",
+      "name": "Physical Attacker",
+      "moves": [
+        "MOVE_FIRST_IMPRESSION",
+        "MOVE_LEECH_LIFE",
+        "MOVE_LUNGE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_INSOMNIA",
+      "item": "ITEM_EVIOLITE",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: Projected"
+    },
+    {
+      "species": "SPECIES_SPIDOPS",
+      "name": "Doubles Support",
+      "moves": [
+        "MOVE_LUNGE",
+        "MOVE_STICKY_WEB",
+        "MOVE_STRING_SHOT",
+        "MOVE_U_TURN"
+      ],
+      "nature": "NATURE_CAREFUL",
+      "ability": "ABILITY_STAKEOUT",
+      "item": "ITEM_SITRUS_BERRY",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        0,
+        2,
+        0,
+        32,
+        0
+      ],
+      "role": "Doubles Support",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_NYMBLE",
+      "name": "Physical Attacker",
+      "moves": [
+        "MOVE_FIRST_IMPRESSION",
+        "MOVE_LEECH_LIFE",
+        "MOVE_X_SCISSOR",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_SWARM",
+      "item": "ITEM_EVIOLITE",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: Projected"
+    },
+    {
+      "species": "SPECIES_LOKIX",
+      "name": "Offensive Protect",
+      "moves": [
+        "MOVE_LEECH_LIFE",
+        "MOVE_FIRST_IMPRESSION",
+        "MOVE_PROTECT",
+        "MOVE_KNOCK_OFF"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_TINTED_LENS",
+      "item": "ITEM_LIFE_ORB",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Offensive Protect",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_PAWMI",
+      "name": "Physical Attacker",
+      "moves": [
+        "MOVE_WILD_CHARGE",
+        "MOVE_SPARK",
+        "MOVE_THUNDER_FANG",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_NATURAL_CURE",
+      "item": "ITEM_EVIOLITE",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: Projected"
+    },
+    {
+      "species": "SPECIES_PAWMO",
+      "name": "Physical Attacker",
+      "moves": [
+        "MOVE_FOCUS_PUNCH",
+        "MOVE_UPPER_HAND",
+        "MOVE_WILD_CHARGE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_NATURAL_CURE",
+      "item": "ITEM_EVIOLITE",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: Projected"
+    },
+    {
+      "species": "SPECIES_PAWMOT",
+      "name": "Doubles Wallbreaker",
+      "moves": [
+        "MOVE_REVIVAL_BLESSING",
+        "MOVE_DOUBLE_SHOCK",
+        "MOVE_PROTECT",
+        "MOVE_CLOSE_COMBAT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_VOLT_ABSORB",
+      "item": "ITEM_LIFE_ORB",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Doubles Wallbreaker",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_MAUSHOLD",
+      "name": "Physical Attacker",
+      "moves": [
+        "MOVE_FOLLOW_ME",
+        "MOVE_PROTECT",
+        "MOVE_SUPER_FANG",
+        "MOVE_POPULATION_BOMB"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_FRIEND_GUARD",
+      "item": "ITEM_WIDE_LENS",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
+      "species": "SPECIES_FIDOUGH",
+      "name": "Physical Attacker",
+      "moves": [
+        "MOVE_PLAY_ROUGH",
+        "MOVE_LAST_RESORT",
+        "MOVE_PSYCHIC_FANGS",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_OWN_TEMPO",
+      "item": "ITEM_EVIOLITE",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: Projected"
+    },
+    {
+      "species": "SPECIES_DACHSBUN",
+      "name": "Doubles Support",
+      "moves": [
+        "MOVE_SNARL",
+        "MOVE_HELPING_HAND",
+        "MOVE_PLAY_ROUGH",
+        "MOVE_YAWN"
+      ],
+      "nature": "NATURE_CALM",
+      "ability": "ABILITY_WELL_BAKED_BODY",
+      "item": "ITEM_SITRUS_BERRY",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        0,
+        2,
+        0,
+        32,
+        0
+      ],
+      "role": "Doubles Support",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_SMOLIV",
+      "name": "Special Attacker",
+      "moves": [
+        "MOVE_LEAF_STORM",
+        "MOVE_ENERGY_BALL",
+        "MOVE_SOLARBEAM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_EARLY_BIRD",
+      "item": "ITEM_EVIOLITE",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Special Attacker",
+      "source": "Pokemon Champions doubles handbook: Projected"
+    },
+    {
+      "species": "SPECIES_DOLLIV",
+      "name": "Special Attacker",
+      "moves": [
+        "MOVE_LEAF_STORM",
+        "MOVE_ENERGY_BALL",
+        "MOVE_SOLARBEAM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_EARLY_BIRD",
+      "item": "ITEM_EVIOLITE",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Special Attacker",
+      "source": "Pokemon Champions doubles handbook: Projected"
+    },
+    {
+      "species": "SPECIES_ARBOLIVA",
+      "name": "Doubles Wallbreaker",
+      "moves": [
+        "MOVE_POLLEN_PUFF",
+        "MOVE_ENERGY_BALL",
+        "MOVE_HYPER_VOICE",
+        "MOVE_EARTH_POWER"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_SEED_SOWER",
+      "item": "ITEM_CHOICE_SPECS",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Doubles Wallbreaker",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_SQUAWKABILLY",
+      "name": "Offensive Protect",
+      "moves": [
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_BRAVE_BIRD",
+        "MOVE_PROTECT",
+        "MOVE_QUICK_ATTACK"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_LIFE_ORB",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Offensive Protect",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_ARMAROUGE",
+      "name": "Trick Room Support",
+      "moves": [
+        "MOVE_ARMOR_CANNON",
+        "MOVE_TRICK_ROOM",
+        "MOVE_PROTECT",
+        "MOVE_EXPANDING_FORCE"
+      ],
+      "nature": "NATURE_QUIET",
+      "ability": "ABILITY_FLASH_FIRE",
+      "item": "ITEM_FOCUS_SASH",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        0,
+        2,
+        32,
+        0,
+        0
+      ],
+      "role": "Trick Room Support",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
+      "species": "SPECIES_CERULEDGE",
+      "name": "Setup Sweeper",
+      "moves": [
+        "MOVE_BITTER_BLADE",
+        "MOVE_PROTECT",
+        "MOVE_SHADOW_SNEAK",
+        "MOVE_BULK_UP"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_FLASH_FIRE",
+      "item": "ITEM_COLBUR_BERRY",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Setup Sweeper",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
+      "species": "SPECIES_BELLIBOLT",
+      "name": "Special Attacker",
+      "moves": [
+        "MOVE_PARABOLIC_CHARGE",
+        "MOVE_PROTECT",
+        "MOVE_SOAK",
+        "MOVE_THUNDERBOLT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_ELECTROMORPHOSIS",
+      "item": "ITEM_SITRUS_BERRY",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Special Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
+      "species": "SPECIES_WATTREL",
+      "name": "Special Attacker",
+      "moves": [
+        "MOVE_DISCHARGE",
+        "MOVE_THUNDERBOLT",
+        "MOVE_AIR_CUTTER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_COMPETITIVE",
+      "item": "ITEM_EVIOLITE",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Special Attacker",
+      "source": "Pokemon Champions doubles handbook: Projected"
+    },
+    {
+      "species": "SPECIES_KILOWATTREL",
+      "name": "Doubles Wallbreaker",
+      "moves": [
+        "MOVE_HURRICANE",
+        "MOVE_TAILWIND",
+        "MOVE_PROTECT",
+        "MOVE_THUNDERBOLT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_COMPETITIVE",
+      "item": "ITEM_LIFE_ORB",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Doubles Wallbreaker",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_MASCHIFF",
+      "name": "Physical Attacker",
+      "moves": [
+        "MOVE_CRUNCH",
+        "MOVE_JAW_LOCK",
+        "MOVE_LASH_OUT",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_EVIOLITE",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: Projected"
+    },
+    {
+      "species": "SPECIES_MABOSSTIFF",
+      "name": "Doubles Wallbreaker",
+      "moves": [
+        "MOVE_CRUNCH",
+        "MOVE_WILD_CHARGE",
+        "MOVE_PSYCHIC_FANGS",
+        "MOVE_PLAY_ROUGH"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_CHOICE_BAND",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Doubles Wallbreaker",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_SHROODLE",
+      "name": "Physical Attacker",
+      "moves": [
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_GUNK_SHOT",
+        "MOVE_POISON_JAB",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_PRANKSTER",
+      "item": "ITEM_EVIOLITE",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: Projected"
+    },
+    {
+      "species": "SPECIES_GRAFAIAI",
+      "name": "Doubles Support",
+      "moves": [
+        "MOVE_SUPER_FANG",
+        "MOVE_KNOCK_OFF",
+        "MOVE_U_TURN",
+        "MOVE_GUNK_SHOT"
+      ],
+      "nature": "NATURE_CAREFUL",
+      "ability": "ABILITY_POISON_TOUCH",
+      "item": "ITEM_ASSAULT_VEST",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        0,
+        2,
+        0,
+        32,
+        0
+      ],
+      "role": "Doubles Support",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_BRAMBLIN",
+      "name": "Physical Attacker",
+      "moves": [
+        "MOVE_POWER_WHIP",
+        "MOVE_POLTERGEIST",
+        "MOVE_SEED_BOMB",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_WIND_RIDER",
+      "item": "ITEM_EVIOLITE",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: Projected"
+    },
+    {
+      "species": "SPECIES_BRAMBLEGHAST",
+      "name": "Doubles Support",
+      "moves": [
+        "MOVE_PROTECT",
+        "MOVE_POWER_WHIP",
+        "MOVE_POLTERGEIST",
+        "MOVE_STRENGTH_SAP"
+      ],
+      "nature": "NATURE_CAREFUL",
+      "ability": "ABILITY_WIND_RIDER",
+      "item": "ITEM_SITRUS_BERRY",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        0,
+        2,
+        0,
+        32,
+        0
+      ],
+      "role": "Doubles Support",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_TOEDSCOOL",
+      "name": "Trick Room Support",
+      "moves": [
+        "MOVE_POWER_WHIP",
+        "MOVE_SPORE",
+        "MOVE_RAGE_POWDER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BRAVE",
+      "ability": "ABILITY_MYCELIUM_MIGHT",
+      "item": "ITEM_EVIOLITE",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        32,
+        2,
+        0,
+        0,
+        0
+      ],
+      "role": "Trick Room Support",
+      "source": "Pokemon Champions doubles handbook: Projected"
+    },
+    {
+      "species": "SPECIES_TOEDSCRUEL",
+      "name": "Doubles Support",
+      "moves": [
+        "MOVE_EARTH_POWER",
+        "MOVE_RAGE_POWDER",
+        "MOVE_SPORE",
+        "MOVE_KNOCK_OFF"
+      ],
+      "nature": "NATURE_BOLD",
+      "ability": "ABILITY_MYCELIUM_MIGHT",
+      "item": "ITEM_SITRUS_BERRY",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        0,
+        32,
+        0,
+        2,
+        0
+      ],
+      "role": "Doubles Support",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_KLAWF",
+      "name": "Offensive Protect",
+      "moves": [
+        "MOVE_PROTECT",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_HIGH_HORSEPOWER",
+        "MOVE_KNOCK_OFF"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_REGENERATOR",
+      "item": "ITEM_LIFE_ORB",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Offensive Protect",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_SCOVILLAIN",
+      "name": "Mega Special Attacker",
+      "moves": [
+        "MOVE_RAGE_POWDER",
+        "MOVE_PROTECT",
+        "MOVE_OVERHEAT",
+        "MOVE_GIGA_DRAIN"
+      ],
+      "nature": "NATURE_BOLD",
+      "ability": "ABILITY_SPICY_SPRAY",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_SCOVILLAINITE",
+      "stat_points": [
+        32,
+        0,
+        32,
+        0,
+        2,
+        0
+      ],
+      "role": "Mega Special Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
+      "species": "SPECIES_RELLOR",
+      "name": "Physical Attacker",
+      "moves": [
+        "MOVE_LEECH_LIFE",
+        "MOVE_LUNGE",
+        "MOVE_X_SCISSOR",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_COMPOUND_EYES",
+      "item": "ITEM_EVIOLITE",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: Projected"
+    },
+    {
+      "species": "SPECIES_RABSCA",
+      "name": "Doubles Support",
+      "moves": [
+        "MOVE_REVIVAL_BLESSING",
+        "MOVE_STRUGGLE_BUG",
+        "MOVE_PSYCHIC",
+        "MOVE_TRICK_ROOM"
+      ],
+      "nature": "NATURE_QUIET",
+      "ability": "ABILITY_SYNCHRONIZE",
+      "item": "ITEM_SITRUS_BERRY",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        0,
+        2,
+        32,
+        0,
+        0
+      ],
+      "role": "Doubles Support",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_ESPATHRA",
+      "name": "Setup Sweeper",
+      "moves": [
+        "MOVE_LUMINA_CRASH",
+        "MOVE_PROTECT",
+        "MOVE_CALM_MIND",
+        "MOVE_BATON_PASS"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_SPEED_BOOST",
+      "item": "ITEM_FOCUS_SASH",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Setup Sweeper",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
+      "species": "SPECIES_TINKATUFF",
+      "name": "Physical Attacker",
+      "moves": [
+        "MOVE_PLAY_ROUGH",
+        "MOVE_METAL_CLAW",
+        "MOVE_FOUL_PLAY",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_MOLD_BREAKER",
+      "item": "ITEM_EVIOLITE",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: Projected"
+    },
+    {
+      "species": "SPECIES_TINKATON",
+      "name": "Doubles Support",
+      "moves": [
+        "MOVE_GIGATON_HAMMER",
+        "MOVE_FAKE_OUT",
+        "MOVE_ENCORE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_MOLD_BREAKER",
+      "item": "ITEM_SHUCA_BERRY",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Doubles Support",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
+      "species": "SPECIES_WIGLETT",
+      "name": "Physical Attacker",
+      "moves": [
+        "MOVE_LIQUIDATION",
+        "MOVE_AQUA_JET",
+        "MOVE_FOUL_PLAY",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_GOOEY",
+      "item": "ITEM_EVIOLITE",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: Projected"
+    },
+    {
+      "species": "SPECIES_WUGTRIO",
+      "name": "Choice Attacker",
+      "moves": [
+        "MOVE_AQUA_JET",
+        "MOVE_THROAT_CHOP",
+        "MOVE_LIQUIDATION",
+        "MOVE_STOMPING_TANTRUM"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_GOOEY",
+      "item": "ITEM_CHOICE_BAND",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Choice Attacker",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_BOMBIRDIER",
+      "name": "Offensive Protect",
+      "moves": [
+        "MOVE_BRAVE_BIRD",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_KNOCK_OFF",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_ROCKY_PAYLOAD",
+      "item": "ITEM_LIFE_ORB",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Offensive Protect",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_VAROOM",
+      "name": "Physical Attacker",
+      "moves": [
+        "MOVE_GUNK_SHOT",
+        "MOVE_SPIN_OUT",
+        "MOVE_IRON_HEAD",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_OVERCOAT",
+      "item": "ITEM_EVIOLITE",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: Projected"
+    },
+    {
+      "species": "SPECIES_REVAVROOM",
+      "name": "Offensive Protect",
+      "moves": [
+        "MOVE_IRON_HEAD",
+        "MOVE_GUNK_SHOT",
+        "MOVE_PROTECT",
+        "MOVE_PARTING_SHOT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_FILTER",
+      "item": "ITEM_LIFE_ORB",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Offensive Protect",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_CYCLIZAR",
+      "name": "Doubles Support",
+      "moves": [
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_BREAKING_SWIPE",
+        "MOVE_KNOCK_OFF",
+        "MOVE_SHED_TAIL"
+      ],
+      "nature": "NATURE_CAREFUL",
+      "ability": "ABILITY_REGENERATOR",
+      "item": "ITEM_SITRUS_BERRY",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        0,
+        2,
+        0,
+        32,
+        0
+      ],
+      "role": "Doubles Support",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_HOUNDSTONE",
+      "name": "Physical Attacker",
+      "moves": [
+        "MOVE_LAST_RESPECTS",
+        "MOVE_PROTECT",
+        "MOVE_WILL_O_WISP",
+        "MOVE_ALLY_SWITCH"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_SAND_RUSH",
+      "item": "ITEM_SITRUS_BERRY",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
+      "species": "SPECIES_FLAMIGO",
+      "name": "Choice Attacker",
+      "moves": [
+        "MOVE_U_TURN",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_BRAVE_BIRD",
+        "MOVE_THROAT_CHOP"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_SCRAPPY",
+      "item": "ITEM_CHOICE_BAND",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Choice Attacker",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_CETODDLE",
+      "name": "Physical Attacker",
+      "moves": [
+        "MOVE_ICE_SPINNER",
+        "MOVE_ICICLE_CRASH",
+        "MOVE_ICE_FANG",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_THICK_FAT",
+      "item": "ITEM_EVIOLITE",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: Projected"
+    },
+    {
+      "species": "SPECIES_CETITAN",
+      "name": "Doubles Wallbreaker",
+      "moves": [
+        "MOVE_ICICLE_CRASH",
+        "MOVE_LIQUIDATION",
+        "MOVE_ICE_SHARD",
+        "MOVE_HIGH_HORSEPOWER"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_SHEER_FORCE",
+      "item": "ITEM_LIFE_ORB",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Doubles Wallbreaker",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_VELUZA",
+      "name": "Choice Attacker",
+      "moves": [
+        "MOVE_AQUA_CUTTER",
+        "MOVE_PSYCHO_CUT",
+        "MOVE_NIGHT_SLASH",
+        "MOVE_AQUA_JET"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_SHARPNESS",
+      "item": "ITEM_CHOICE_BAND",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Choice Attacker",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_CLODSIRE",
+      "name": "Doubles Bulky Attacker",
+      "moves": [
+        "MOVE_TOXIC_SPIKES",
+        "MOVE_RECOVER",
+        "MOVE_HIGH_HORSEPOWER",
+        "MOVE_GUNK_SHOT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_WATER_ABSORB",
+      "item": "ITEM_LEFTOVERS",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Doubles Bulky Attacker",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_DUDUNSPARCE",
+      "name": "Doubles Bulky Attacker",
+      "moves": [
+        "MOVE_PROTECT",
+        "MOVE_BOOMBURST",
+        "MOVE_EARTH_POWER",
+        "MOVE_HELPING_HAND"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_RATTLED",
+      "item": "ITEM_SITRUS_BERRY",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Doubles Bulky Attacker",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_SCREAM_TAIL",
+      "name": "Doubles Support",
+      "moves": [
+        "MOVE_THUNDER_WAVE",
+        "MOVE_DISABLE",
+        "MOVE_PLAY_ROUGH",
+        "MOVE_HOWL"
+      ],
+      "nature": "NATURE_IMPISH",
+      "ability": "ABILITY_PROTOSYNTHESIS",
+      "item": "ITEM_SITRUS_BERRY",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        0,
+        32,
+        0,
+        2,
+        0
+      ],
+      "role": "Doubles Support",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_BRUTE_BONNET",
+      "name": "Doubles Support",
+      "moves": [
+        "MOVE_SPORE",
+        "MOVE_SEED_BOMB",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_RAGE_POWDER"
+      ],
+      "nature": "NATURE_CAREFUL",
+      "ability": "ABILITY_PROTOSYNTHESIS",
+      "item": "ITEM_ROCKY_HELMET",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        0,
+        2,
+        0,
+        32,
+        0
+      ],
+      "role": "Doubles Support",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_SLITHER_WING",
+      "name": "Doubles Wallbreaker",
+      "moves": [
+        "MOVE_FIRST_IMPRESSION",
+        "MOVE_WILD_CHARGE",
+        "MOVE_FLARE_BLITZ",
+        "MOVE_CLOSE_COMBAT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_PROTOSYNTHESIS",
+      "item": "ITEM_LIFE_ORB",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Doubles Wallbreaker",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_SANDY_SHOCKS",
+      "name": "Doubles Fast Attacker",
+      "moves": [
+        "MOVE_EARTH_POWER",
+        "MOVE_THUNDERBOLT",
+        "MOVE_VOLT_SWITCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_PROTOSYNTHESIS",
+      "item": "ITEM_LIFE_ORB",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Doubles Fast Attacker",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_IRON_TREADS",
+      "name": "Doubles Bulky Attacker",
+      "moves": [
+        "MOVE_RAPID_SPIN",
+        "MOVE_STONE_EDGE",
+        "MOVE_IRON_HEAD",
+        "MOVE_HIGH_HORSEPOWER"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_QUARK_DRIVE",
+      "item": "ITEM_ASSAULT_VEST",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Doubles Bulky Attacker",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_IRON_JUGULIS",
+      "name": "Doubles Fast Attacker",
+      "moves": [
+        "MOVE_HURRICANE",
+        "MOVE_EARTH_POWER",
+        "MOVE_DARK_PULSE",
+        "MOVE_TAUNT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_QUARK_DRIVE",
+      "item": "ITEM_BOOSTER_ENERGY",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Doubles Fast Attacker",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_IRON_MOTH",
+      "name": "Offensive Protect",
+      "moves": [
+        "MOVE_SLUDGE_WAVE",
+        "MOVE_ENERGY_BALL",
+        "MOVE_FIERY_DANCE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_QUARK_DRIVE",
+      "item": "ITEM_BOOSTER_ENERGY",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Offensive Protect",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_IRON_THORNS",
+      "name": "Doubles Setup Sweeper",
+      "moves": [
+        "MOVE_WILD_CHARGE",
+        "MOVE_HIGH_HORSEPOWER",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_DRAGON_DANCE"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_QUARK_DRIVE",
+      "item": "ITEM_CLEAR_AMULET",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Doubles Setup Sweeper",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_FRIGIBAX",
+      "name": "Physical Attacker",
+      "moves": [
+        "MOVE_OUTRAGE",
+        "MOVE_DRAGON_CLAW",
+        "MOVE_ICICLE_CRASH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_THERMAL_EXCHANGE",
+      "item": "ITEM_EVIOLITE",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: Projected"
+    },
+    {
+      "species": "SPECIES_ARCTIBAX",
+      "name": "Physical Attacker",
+      "moves": [
+        "MOVE_OUTRAGE",
+        "MOVE_DRAGON_CLAW",
+        "MOVE_ICICLE_CRASH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_THERMAL_EXCHANGE",
+      "item": "ITEM_EVIOLITE",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: Projected"
+    },
+    {
+      "species": "SPECIES_BAXCALIBUR",
+      "name": "Doubles Setup Sweeper",
+      "moves": [
+        "MOVE_ICICLE_SPEAR",
+        "MOVE_SWORDS_DANCE",
+        "MOVE_PROTECT",
+        "MOVE_SCALE_SHOT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_THERMAL_EXCHANGE",
+      "item": "ITEM_LOADED_DICE",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Doubles Setup Sweeper",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_IRON_LEAVES",
+      "name": "Offensive Protect",
+      "moves": [
+        "MOVE_LEAF_BLADE",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_PSYBLADE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_QUARK_DRIVE",
+      "item": "ITEM_BOOSTER_ENERGY",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Offensive Protect",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_DIPPLIN",
+      "name": "Doubles Bulky Attacker",
+      "moves": [
+        "MOVE_RECOVER",
+        "MOVE_DRAGON_PULSE",
+        "MOVE_POLLEN_PUFF",
+        "MOVE_SYRUP_BOMB"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_STICKY_HOLD",
+      "item": "ITEM_EVIOLITE",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Doubles Bulky Attacker",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_SINISTCHA",
+      "name": "Trick Room Support",
+      "moves": [
+        "MOVE_MATCHA_GOTCHA",
+        "MOVE_RAGE_POWDER",
+        "MOVE_PROTECT",
+        "MOVE_TRICK_ROOM"
+      ],
+      "nature": "NATURE_BOLD",
+      "ability": "ABILITY_HOSPITALITY",
+      "item": "ITEM_KASIB_BERRY",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        0,
+        32,
+        0,
+        2,
+        0
+      ],
+      "role": "Trick Room Support",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
+      "species": "SPECIES_HYDRAPPLE",
+      "name": "Special Attacker",
+      "moves": [
+        "MOVE_FICKLE_BEAM",
+        "MOVE_EARTH_POWER",
+        "MOVE_PROTECT",
+        "MOVE_GIGA_DRAIN"
+      ],
+      "nature": "NATURE_BOLD",
+      "ability": "ABILITY_SUPERSWEET_SYRUP",
+      "item": "ITEM_LIFE_ORB",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        0,
+        32,
+        0,
+        2,
+        0
+      ],
+      "role": "Special Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
+      "species": "SPECIES_IRON_BOULDER",
+      "name": "Offensive Protect",
+      "moves": [
+        "MOVE_ZEN_HEADBUTT",
+        "MOVE_PROTECT",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_MIGHTY_CLEAVE"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_QUARK_DRIVE",
+      "item": "ITEM_BOOSTER_ENERGY",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Offensive Protect",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_IRON_CROWN",
+      "name": "Offensive Protect",
+      "moves": [
+        "MOVE_FOCUS_BLAST",
+        "MOVE_TACHYON_CUTTER",
+        "MOVE_PSYCHIC",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_QUARK_DRIVE",
+      "item": "ITEM_BOOSTER_ENERGY",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Offensive Protect",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_ARCANINE_HISUI",
+      "name": "Physical Attacker",
+      "moves": [
+        "MOVE_FLARE_BLITZ",
+        "MOVE_EXTREMESPEED",
+        "MOVE_HEAD_SMASH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_ROCK_HEAD",
+      "item": "ITEM_FOCUS_SASH",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
+      "species": "SPECIES_TYPHLOSION_HISUI",
+      "name": "Choice Attacker",
+      "moves": [
+        "MOVE_ERUPTION",
+        "MOVE_SHADOW_BALL",
+        "MOVE_HEAT_WAVE",
+        "MOVE_OVERHEAT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_FRISK",
+      "item": "ITEM_CHOICE_SCARF",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Choice Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
+      "species": "SPECIES_SAMUROTT_HISUI",
+      "name": "Choice Attacker",
+      "moves": [
+        "MOVE_SACRED_SWORD",
+        "MOVE_AQUA_CUTTER",
+        "MOVE_CEASELESS_EDGE",
+        "MOVE_SUCKER_PUNCH"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_SHARPNESS",
+      "item": "ITEM_CHOICE_SCARF",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Choice Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
+      "species": "SPECIES_ZOROARK_HISUI",
+      "name": "Choice Attacker",
+      "moves": [
+        "MOVE_SHADOW_BALL",
+        "MOVE_ICY_WIND",
+        "MOVE_HYPER_VOICE",
+        "MOVE_BITTER_MALICE"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_ILLUSION",
+      "item": "ITEM_CHOICE_SCARF",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Choice Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
+      "species": "SPECIES_GOODRA_HISUI",
+      "name": "Physical Attacker",
+      "moves": [
+        "MOVE_BODY_PRESS",
+        "MOVE_LIFE_DEW",
+        "MOVE_SHELTER",
+        "MOVE_HEAVY_SLAM"
+      ],
+      "nature": "NATURE_BRAVE",
+      "ability": "ABILITY_SHELL_ARMOR",
+      "item": "ITEM_LEFTOVERS",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        32,
+        2,
+        0,
+        0,
+        0
+      ],
+      "role": "Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
+      "species": "SPECIES_AVALUGG_HISUI",
+      "name": "Physical Attacker",
+      "moves": [
+        "MOVE_ROCK_SLIDE",
+        "MOVE_MOUNTAIN_GALE",
+        "MOVE_BODY_PRESS",
+        "MOVE_WIDE_GUARD"
+      ],
+      "nature": "NATURE_BRAVE",
+      "ability": "ABILITY_STURDY",
+      "item": "ITEM_WIDE_LENS",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        32,
+        2,
+        0,
+        0,
+        0
+      ],
+      "role": "Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
+      "species": "SPECIES_DECIDUEYE_HISUI",
+      "name": "Physical Attacker",
+      "moves": [
+        "MOVE_LEAF_BLADE",
+        "MOVE_PROTECT",
+        "MOVE_TRIPLE_ARROWS",
+        "MOVE_SUCKER_PUNCH"
+      ],
+      "nature": "NATURE_BRAVE",
+      "ability": "ABILITY_SCRAPPY",
+      "item": "ITEM_SCOPE_LENS",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        32,
+        2,
+        0,
+        0,
+        0
+      ],
+      "role": "Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
+      "species": "SPECIES_BASCULEGION_F",
+      "name": "Special Attacker",
+      "moves": [
+        "MOVE_SHADOW_BALL",
+        "MOVE_MUDDY_WATER",
+        "MOVE_PROTECT",
+        "MOVE_AQUA_JET"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_SWIFT_SWIM",
+      "item": "ITEM_LIFE_ORB",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Special Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
     }
   ],
   "alternatives": [
@@ -28818,7 +31578,7 @@
         "MOVE_LIGHT_SCREEN"
       ],
       "nature": "NATURE_ADAMANT",
-      "ability": "ABILITY_REFRIGERATE",
+      "ability": "ABILITY_MOODY",
       "item": "ITEM_SILK_SCARF",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -29106,7 +31866,7 @@
         "MOVE_GIGA_IMPACT"
       ],
       "nature": "NATURE_JOLLY",
-      "ability": "ABILITY_SCRAPPY",
+      "ability": "ABILITY_LIMBER",
       "item": "ITEM_CHOICE_SCARF",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -30306,7 +33066,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_MODEST",
-      "ability": "ABILITY_POISON_HEAL",
+      "ability": "ABILITY_GOOEY",
       "item": "ITEM_LEFTOVERS",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -30330,7 +33090,7 @@
         "MOVE_DESTINY_BOND"
       ],
       "nature": "NATURE_RELAXED",
-      "ability": "ABILITY_FLARE_BOOST",
+      "ability": "ABILITY_INSOMNIA",
       "item": "ITEM_OCCA_BERRY",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -31257,6 +34017,30 @@
       "source": "preserved-handbook-alternative"
     },
     {
+      "species": "SPECIES_GIMMIGHOUL",
+      "name": "Dual Screens Chest",
+      "moves": [
+        "MOVE_SHADOW_BALL",
+        "MOVE_REFLECT",
+        "MOVE_LIGHT_SCREEN",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CALM",
+      "ability": "ABILITY_RATTLED",
+      "item": "ITEM_EVIOLITE",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        0,
+        2,
+        0,
+        32,
+        0
+      ],
+      "role": "slow dual-screen support",
+      "source": "Emerald Champions authored modern doubles supplement"
+    },
+    {
       "species": "SPECIES_CHIEN_PAO",
       "name": "Wallbreaker",
       "moves": [
@@ -31423,6 +34207,870 @@
       ],
       "role": "Doubles Wallbreaker",
       "source": "preserved-handbook-alternative"
+    },
+    {
+      "species": "SPECIES_BASCULIN_WHITE_STRIPED",
+      "name": "Scarf Final Gambit",
+      "moves": [
+        "MOVE_FINAL_GAMBIT",
+        "MOVE_WAVE_CRASH",
+        "MOVE_FLIP_TURN",
+        "MOVE_CRUNCH"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_ADAPTABILITY",
+      "item": "ITEM_CHOICE_SCARF",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        0,
+        2,
+        0,
+        0,
+        32
+      ],
+      "role": "fast sacrifice and pivot attacker",
+      "source": "Emerald Champions authored modern doubles supplement"
+    },
+    {
+      "species": "SPECIES_CAPSAKID",
+      "name": "Sun Super Fang",
+      "moves": [
+        "MOVE_LEAF_STORM",
+        "MOVE_SUPER_FANG",
+        "MOVE_LEECH_SEED",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_CHLOROPHYLL",
+      "item": "ITEM_FOCUS_SASH",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "sun disruption and percentage damage",
+      "source": "Emerald Champions authored modern doubles supplement"
+    },
+    {
+      "species": "SPECIES_CHARCADET",
+      "name": "Flash Fire Ambush",
+      "moves": [
+        "MOVE_FLARE_BLITZ",
+        "MOVE_HELPING_HAND",
+        "MOVE_DESTINY_BOND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_FLASH_FIRE",
+      "item": "ITEM_EVIOLITE",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        32,
+        2,
+        0,
+        0,
+        0
+      ],
+      "role": "Flash Fire physical ambush and trade support",
+      "source": "Emerald Champions authored modern doubles supplement"
+    },
+    {
+      "species": "SPECIES_FLITTLE",
+      "name": "Reverse The Room",
+      "moves": [
+        "MOVE_TRICK_ROOM",
+        "MOVE_FOUL_PLAY",
+        "MOVE_REFLECT",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_RELAXED",
+      "ability": "ABILITY_FRISK",
+      "item": "ITEM_EVIOLITE",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        0,
+        32,
+        0,
+        2,
+        0
+      ],
+      "role": "Trick Room reversal and physical disruption",
+      "source": "Emerald Champions authored modern doubles supplement"
+    },
+    {
+      "species": "SPECIES_GREAVARD",
+      "name": "Memento Support",
+      "moves": [
+        "MOVE_POLTERGEIST",
+        "MOVE_SNARL",
+        "MOVE_MEMENTO",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CAREFUL",
+      "ability": "ABILITY_FLUFFY",
+      "item": "ITEM_EVIOLITE",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        0,
+        2,
+        0,
+        32,
+        0
+      ],
+      "role": "special suppression and Memento positioning",
+      "source": "Emerald Champions authored modern doubles supplement"
+    },
+    {
+      "species": "SPECIES_GROWLITHE_HISUI",
+      "name": "Intimidate Control",
+      "moves": [
+        "MOVE_ROCK_SLIDE",
+        "MOVE_WILL_O_WISP",
+        "MOVE_SNARL",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CAREFUL",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_EVIOLITE",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        0,
+        2,
+        0,
+        32,
+        0
+      ],
+      "role": "Intimidate burn and special-damage control",
+      "source": "Emerald Champions authored modern doubles supplement"
+    },
+    {
+      "species": "SPECIES_ORTHWORM",
+      "name": "Coil Heavy Slam",
+      "moves": [
+        "MOVE_HEAVY_SLAM",
+        "MOVE_HIGH_HORSEPOWER",
+        "MOVE_COIL",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CAREFUL",
+      "ability": "ABILITY_EARTH_EATER",
+      "item": "ITEM_LEFTOVERS",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        32,
+        2,
+        0,
+        0,
+        0
+      ],
+      "role": "Coil setup physical attacker",
+      "source": "Emerald Champions authored modern doubles supplement"
+    },
+    {
+      "species": "SPECIES_POLTCHAGEIST",
+      "name": "Bulky Tea Support",
+      "moves": [
+        "MOVE_GIGA_DRAIN",
+        "MOVE_LIFE_DEW",
+        "MOVE_SHADOW_BALL",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_BOLD",
+      "ability": "ABILITY_HOSPITALITY",
+      "item": "ITEM_EVIOLITE",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        0,
+        32,
+        0,
+        2,
+        0
+      ],
+      "role": "team healing and bulky special pressure",
+      "source": "Emerald Champions authored modern doubles supplement"
+    },
+    {
+      "species": "SPECIES_QWILFISH_HISUI",
+      "name": "Swift Swim Attacker",
+      "moves": [
+        "MOVE_GUNK_SHOT",
+        "MOVE_LIQUIDATION",
+        "MOVE_AQUA_JET",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_SWIFT_SWIM",
+      "item": "ITEM_LIFE_ORB",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "rain physical attacker and priority cleaner",
+      "source": "Emerald Champions authored modern doubles supplement"
+    },
+    {
+      "species": "SPECIES_SNEASEL_HISUI",
+      "name": "Coaching Disruptor",
+      "moves": [
+        "MOVE_COACHING",
+        "MOVE_TAUNT",
+        "MOVE_FEINT",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_INNER_FOCUS",
+      "item": "ITEM_EVIOLITE",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        0,
+        2,
+        0,
+        0,
+        32
+      ],
+      "role": "fast partner coaching and Protect denial",
+      "source": "Emerald Champions authored modern doubles supplement"
+    },
+    {
+      "species": "SPECIES_TADBULB",
+      "name": "Parabolic Discharge",
+      "moves": [
+        "MOVE_DISCHARGE",
+        "MOVE_PARABOLIC_CHARGE",
+        "MOVE_MUDDY_WATER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_OWN_TEMPO",
+      "item": "ITEM_EVIOLITE",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        0,
+        2,
+        32,
+        0,
+        0
+      ],
+      "role": "bulky spread special attacker",
+      "source": "Emerald Champions authored modern doubles supplement"
+    },
+    {
+      "species": "SPECIES_TANDEMAUS",
+      "name": "Encore Team Support",
+      "moves": [
+        "MOVE_SUPER_FANG",
+        "MOVE_ENCORE",
+        "MOVE_HELPING_HAND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_OWN_TEMPO",
+      "item": "ITEM_EVIOLITE",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        0,
+        2,
+        0,
+        0,
+        32
+      ],
+      "role": "Encore and partner support",
+      "source": "Emerald Champions authored modern doubles supplement"
+    },
+    {
+      "species": "SPECIES_TAUROS_PALDEA_COMBAT",
+      "name": "Anger Point Setup",
+      "moves": [
+        "MOVE_RAGING_BULL",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_BULK_UP",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_ANGER_POINT",
+      "item": "ITEM_SITRUS_BERRY",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Anger Point or Bulk Up sweeper",
+      "source": "Emerald Champions authored modern doubles supplement"
+    },
+    {
+      "species": "SPECIES_TAUROS_PALDEA_BLAZE",
+      "name": "Blaze Team Control",
+      "moves": [
+        "MOVE_RAGING_BULL",
+        "MOVE_WILL_O_WISP",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_HELPING_HAND"
+      ],
+      "nature": "NATURE_CAREFUL",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_SITRUS_BERRY",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        0,
+        2,
+        0,
+        32,
+        0
+      ],
+      "role": "Intimidate burn and partner support",
+      "source": "Emerald Champions authored modern doubles supplement"
+    },
+    {
+      "species": "SPECIES_TAUROS_PALDEA_AQUA",
+      "name": "Aqua Speed Control",
+      "moves": [
+        "MOVE_RAGING_BULL",
+        "MOVE_ICY_WIND",
+        "MOVE_HELPING_HAND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_SITRUS_BERRY",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        0,
+        2,
+        0,
+        0,
+        32
+      ],
+      "role": "Intimidate speed and partner support",
+      "source": "Emerald Champions authored modern doubles supplement"
+    },
+    {
+      "species": "SPECIES_TINKATINK",
+      "name": "Fairy Screen Support",
+      "moves": [
+        "MOVE_FOUL_PLAY",
+        "MOVE_HELPING_HAND",
+        "MOVE_REFLECT",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_CAREFUL",
+      "ability": "ABILITY_OWN_TEMPO",
+      "item": "ITEM_EVIOLITE",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        0,
+        2,
+        0,
+        32,
+        0
+      ],
+      "role": "screen and partner support",
+      "source": "Emerald Champions authored modern doubles supplement"
+    },
+    {
+      "species": "SPECIES_ZORUA_HISUI",
+      "name": "Illusion Nasty Plot",
+      "moves": [
+        "MOVE_SHADOW_BALL",
+        "MOVE_SNARL",
+        "MOVE_NASTY_PLOT",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_ILLUSION",
+      "item": "ITEM_EVIOLITE",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Illusion setup attacker and Snarl control",
+      "source": "Emerald Champions authored modern doubles supplement"
+    },
+    {
+      "species": "SPECIES_BASCULEGION",
+      "name": "Special Attacker",
+      "moves": [
+        "MOVE_SHADOW_BALL",
+        "MOVE_MUDDY_WATER",
+        "MOVE_PROTECT",
+        "MOVE_AQUA_JET"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_SWIFT_SWIM",
+      "item": "ITEM_LIFE_ORB",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Special Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
+      "species": "SPECIES_OINKOLOGNE",
+      "name": "Doubles Wallbreaker",
+      "moves": [
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_LASH_OUT",
+        "MOVE_BODY_SLAM",
+        "MOVE_HIGH_HORSEPOWER"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_THICK_FAT",
+      "item": "ITEM_CHOICE_BAND",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Doubles Wallbreaker",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_KILOWATTREL",
+      "name": "Doubles Fast Attacker",
+      "moves": [
+        "MOVE_HURRICANE",
+        "MOVE_THUNDERBOLT",
+        "MOVE_TAILWIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_COMPETITIVE",
+      "item": "ITEM_FOCUS_SASH",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Doubles Fast Attacker",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_GRAFAIAI",
+      "name": "Doubles Bulky Attacker",
+      "moves": [
+        "MOVE_GUNK_SHOT",
+        "MOVE_KNOCK_OFF",
+        "MOVE_PARTING_SHOT",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_PRANKSTER",
+      "item": "ITEM_SITRUS_BERRY",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Doubles Bulky Attacker",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_BRAMBLEGHAST",
+      "name": "Offensive Protect",
+      "moves": [
+        "MOVE_PROTECT",
+        "MOVE_POWER_WHIP",
+        "MOVE_SHADOW_SNEAK",
+        "MOVE_POLTERGEIST"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_WIND_RIDER",
+      "item": "ITEM_LIFE_ORB",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Offensive Protect",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_SCOVILLAIN",
+      "name": "Special Attacker",
+      "moves": [
+        "MOVE_PROTECT",
+        "MOVE_RAGE_POWDER",
+        "MOVE_OVERHEAT",
+        "MOVE_GIGA_DRAIN"
+      ],
+      "nature": "NATURE_BOLD",
+      "ability": "ABILITY_MOODY",
+      "item": "ITEM_SITRUS_BERRY",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        0,
+        32,
+        0,
+        2,
+        0
+      ],
+      "role": "Special Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
+      "species": "SPECIES_RABSCA",
+      "name": "Doubles Bulky Attacker",
+      "moves": [
+        "MOVE_PSYCHIC",
+        "MOVE_REVIVAL_BLESSING",
+        "MOVE_TRICK_ROOM",
+        "MOVE_BUG_BUZZ"
+      ],
+      "nature": "NATURE_QUIET",
+      "ability": "ABILITY_SYNCHRONIZE",
+      "item": "ITEM_SITRUS_BERRY",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        32,
+        0,
+        2,
+        32,
+        0,
+        0
+      ],
+      "role": "Doubles Bulky Attacker",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_BOMBIRDIER",
+      "name": "Choice Attacker",
+      "moves": [
+        "MOVE_KNOCK_OFF",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_BRAVE_BIRD",
+        "MOVE_ROCK_SLIDE"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_ROCKY_PAYLOAD",
+      "item": "ITEM_CHOICE_BAND",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Choice Attacker",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_REVAVROOM",
+      "name": "Doubles Fast Attacker",
+      "moves": [
+        "MOVE_IRON_HEAD",
+        "MOVE_SHIFT_GEAR",
+        "MOVE_HIGH_HORSEPOWER",
+        "MOVE_GUNK_SHOT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_FILTER",
+      "item": "ITEM_LIFE_ORB",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Doubles Fast Attacker",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_CYCLIZAR",
+      "name": "Doubles Fast Attacker",
+      "moves": [
+        "MOVE_SHED_TAIL",
+        "MOVE_KNOCK_OFF",
+        "MOVE_DRACO_METEOR",
+        "MOVE_DOUBLE_EDGE"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_REGENERATOR",
+      "item": "ITEM_LIFE_ORB",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Doubles Fast Attacker",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_DUDUNSPARCE",
+      "name": "Bulky Protect",
+      "moves": [
+        "MOVE_HYPER_DRILL",
+        "MOVE_TAILWIND",
+        "MOVE_EARTH_POWER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_RATTLED",
+      "item": "ITEM_SITRUS_BERRY",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Bulky Protect",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_BRUTE_BONNET",
+      "name": "Doubles Bulky Attacker",
+      "moves": [
+        "MOVE_CRUNCH",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_SEED_BOMB",
+        "MOVE_SPORE"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_PROTOSYNTHESIS",
+      "item": "ITEM_SITRUS_BERRY",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Doubles Bulky Attacker",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_IRON_MOTH",
+      "name": "Doubles Setup Sweeper",
+      "moves": [
+        "MOVE_ENERGY_BALL",
+        "MOVE_HEAT_WAVE",
+        "MOVE_METEOR_BEAM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_QUARK_DRIVE",
+      "item": "ITEM_POWER_HERB",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Doubles Setup Sweeper",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_BAXCALIBUR",
+      "name": "Choice Attacker",
+      "moves": [
+        "MOVE_ICICLE_CRASH",
+        "MOVE_GLAIVE_RUSH",
+        "MOVE_HIGH_HORSEPOWER",
+        "MOVE_ICE_SHARD"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_THERMAL_EXCHANGE",
+      "item": "ITEM_CHOICE_BAND",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Choice Attacker",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_IRON_LEAVES",
+      "name": "Doubles Setup Sweeper",
+      "moves": [
+        "MOVE_PROTECT",
+        "MOVE_SWORDS_DANCE",
+        "MOVE_LEAF_BLADE",
+        "MOVE_CLOSE_COMBAT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_QUARK_DRIVE",
+      "item": "ITEM_BOOSTER_ENERGY",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Doubles Setup Sweeper",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_IRON_LEAVES",
+      "name": "Doubles Wallbreaker",
+      "moves": [
+        "MOVE_PSYBLADE",
+        "MOVE_WILD_CHARGE",
+        "MOVE_LEAF_BLADE",
+        "MOVE_CLOSE_COMBAT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_QUARK_DRIVE",
+      "item": "ITEM_CHOICE_BAND",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Doubles Wallbreaker",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_IRON_BOULDER",
+      "name": "Doubles Setup Sweeper",
+      "moves": [
+        "MOVE_PROTECT",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_MIGHTY_CLEAVE",
+        "MOVE_SWORDS_DANCE"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_QUARK_DRIVE",
+      "item": "ITEM_BOOSTER_ENERGY",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Doubles Setup Sweeper",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_IRON_CROWN",
+      "name": "Doubles Wallbreaker",
+      "moves": [
+        "MOVE_VOLT_SWITCH",
+        "MOVE_PSYCHIC",
+        "MOVE_TACHYON_CUTTER",
+        "MOVE_FOCUS_BLAST"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_QUARK_DRIVE",
+      "item": "ITEM_CHOICE_SPECS",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Doubles Wallbreaker",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_IRON_CROWN",
+      "name": "Doubles Bulky Setup",
+      "moves": [
+        "MOVE_AGILITY",
+        "MOVE_PROTECT",
+        "MOVE_TACHYON_CUTTER",
+        "MOVE_PSYCHIC"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_QUARK_DRIVE",
+      "item": "ITEM_WEAKNESS_POLICY",
+      "required_item": "ITEM_NONE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Doubles Bulky Setup",
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
     }
   ]
 }

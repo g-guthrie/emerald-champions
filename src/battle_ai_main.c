@@ -3407,6 +3407,30 @@ static s32 AI_DoubleBattle(enum BattlerId battlerAtk, enum BattlerId battlerDef,
 
         // Partner will not faint.
         else {
+            bool32 partnerItemBenefits =
+                   (atkPartnerHoldEffect == HOLD_EFFECT_WEAKNESS_POLICY
+                    && aiData->effectiveness[battlerAtk][battlerAtkPartner][gAiThinkingStruct->movesetIndex] >= UQ_4_12(2.0))
+                || (atkPartnerHoldEffect == HOLD_EFFECT_ABSORB_BULB && moveType == TYPE_WATER)
+                || (atkPartnerHoldEffect == HOLD_EFFECT_CELL_BATTERY && moveType == TYPE_ELECTRIC)
+                || (atkPartnerHoldEffect == HOLD_EFFECT_LUMINOUS_MOSS && moveType == TYPE_WATER)
+                || (atkPartnerHoldEffect == HOLD_EFFECT_SNOWBALL && moveType == TYPE_ICE);
+            bool32 partnerAbilityBenefits = ShouldTriggerPartnerAbility(battlerAtk, move, atkPartnerAbility);
+            bool32 spicySprayBenefits = ShouldTriggerSpicySprayForBurn(battlerAtk, move, noOfHitsToKOPartner, aiData);
+            bool32 spreadKOsFoe =
+                   CanIndexMoveFaintTarget(battlerAtk, GetOppositeBattler(battlerAtk), gAiThinkingStruct->movesetIndex, AI_ATTACKING)
+                || CanIndexMoveFaintTarget(battlerAtk, GetOppositeBattler(battlerAtkPartner), gAiThinkingStruct->movesetIndex, AI_ATTACKING);
+
+            // Spread damage is not free just because it misses the KO. A
+            // competitive doubles AI should require an immunity, activation,
+            // or explicit partner-attacking flag before accepting ally chip.
+            if (!partnerProtecting
+             && friendlyFireThreshold != 0
+             && noOfHitsToKOPartner != 0
+             && !spreadKOsFoe
+             && !partnerItemBenefits
+             && !partnerAbilityBenefits
+             && !spicySprayBenefits)
+                ADJUST_SCORE(AWFUL_EFFECT);
 
             // Triggering your ally's hold item should only be done deliberately with a spread move.
             switch (atkPartnerHoldEffect)
@@ -3425,7 +3449,7 @@ static s32 AI_DoubleBattle(enum BattlerId battlerAtk, enum BattlerId battlerDef,
 
             if (!partnerProtecting
              && isFriendlyFireOK
-             && ShouldTriggerSpicySprayForBurn(battlerAtk, move, noOfHitsToKOPartner, aiData))
+             && spicySprayBenefits)
                 ADJUST_SCORE(DECENT_EFFECT);
         }
     }

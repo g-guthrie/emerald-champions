@@ -200,7 +200,7 @@ Route103_EventScript_RouteSign::
 	goto Common_EventScript_ShowRouteSpecies
 
 Route103_EventScript_Daisy::
-	trainerbattle_single TRAINER_DAISY, Route103_Text_DaisyIntro, Route103_Text_DaisyDefeated
+	trainerbattle_double TRAINER_DAISY, Route103_Text_DaisyIntro, Route103_Text_DaisyDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route103_Text_DaisyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -241,12 +241,12 @@ Route102_EventScript_LivRematch::
 	end
 
 Route103_EventScript_Andrew::
-	trainerbattle_single TRAINER_ANDREW, Route103_Text_AndrewIntro, Route103_Text_AndrewDefeated
+	trainerbattle_double TRAINER_ANDREW, Route103_Text_AndrewIntro, Route103_Text_AndrewDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route103_Text_AndrewPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route103_EventScript_Miguel::
-	trainerbattle_single TRAINER_MIGUEL_1, Route103_Text_MiguelIntro, Route103_Text_MiguelDefeated, Route102_EventScript_MiguelRegisterMatchCallAfterBattle
+	trainerbattle_double TRAINER_MIGUEL_1, Route103_Text_MiguelIntro, Route103_Text_MiguelDefeated, EmeraldChampions_Text_NeedTwoPokemon, Route102_EventScript_MiguelRegisterMatchCallAfterBattle
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route103_EventScript_MiguelRematch
 	msgbox Route103_Text_MiguelPostBattle, MSGBOX_DEFAULT
@@ -262,7 +262,7 @@ Route102_EventScript_MiguelRegisterMatchCallAfterBattle::
 	end
 
 Route103_EventScript_MiguelRematch::
-	trainerbattle_rematch TRAINER_MIGUEL_1, Route103_Text_MiguelRematchIntro, Route103_Text_MiguelRematchDefeated
+	trainerbattle_rematch_double TRAINER_MIGUEL_1, Route103_Text_MiguelRematchIntro, Route103_Text_MiguelRematchDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route103_Text_MiguelRematchPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -282,7 +282,7 @@ Route103_EventScript_Pete::
 	end
 
 Route103_EventScript_Isabelle::
-	trainerbattle_single TRAINER_ISABELLE, Route103_Text_IsabelleIntro, Route103_Text_IsabelleDefeated
+	trainerbattle_double TRAINER_ISABELLE, Route103_Text_IsabelleIntro, Route103_Text_IsabelleDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route103_Text_IsabellePostBattle, MSGBOX_AUTOCLOSE
 	end
 

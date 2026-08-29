@@ -12,7 +12,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_MASTER = ROOT / "docs" / "emerald_champions_master_battle_design_v2.txt"
+DEFAULT_MASTER = ROOT / "docs" / "emerald_champions_master_battle_design.txt"
 ENCOUNTER_RE = re.compile(r"(?m)^=== ENCOUNTER (\d{4}) ===$")
 BRANCH_RE = re.compile(r"(?m)^--- BRANCH ([A-Z0-9_]+) ---$")
 MON_RE = re.compile(
@@ -23,19 +23,23 @@ MON_RE = re.compile(
 )
 
 PLANNED_RESTORE_TRAINERS = {
+    "TRAINER_ALANNAH",
     "TRAINER_ARCHIE_SLATEPORT",
     "TRAINER_BUFFEL",
     "TRAINER_COURTNEY_MAGMA_HIDEOUT",
     "TRAINER_COURTNEY_METEOR_FALLS",
     "TRAINER_COURTNEY_MOSSDEEP",
     "TRAINER_CYNTHIA_1",
+    "TRAINER_ELMER",
     "TRAINER_GRETA_SLATEPORT",
     "TRAINER_GRUNT_METEOR_FALLS",
     "TRAINER_LEAF_ALTERING_CAVE",
     "TRAINER_LUCY_LAVARIDGE",
+    "TRAINER_MARTIN",
     "TRAINER_MAGIKARP_GUY",
     "TRAINER_MATT_MT_PYRE",
     "TRAINER_SPENSER_FORTREE",
+    "TRAINER_ROMAN",
     "TRAINER_WALLACE_DOUBLES_LEGENDS",
 }
 
@@ -404,6 +408,27 @@ def audit(path: Path) -> tuple[list[str], list[str]]:
     missing_planned = sorted(PLANNED_RESTORE_TRAINERS - documented)
     if missing_planned:
         errors.append(f"declared restoration trainers absent from master: {missing_planned}")
+
+    party_source = (ROOT / "src" / "data" / "trainers.party").read_text()
+    party_blocks = {
+        match.group(1): match.group(2)
+        for match in re.finditer(
+            r"(?ms)^=== (TRAINER_[A-Z0-9_]+) ===\n(.*?)(?=^=== |\Z)",
+            party_source,
+        )
+    }
+    missing_parties = sorted(current_refs - set(party_blocks))
+    if missing_parties:
+        errors.append(f"runtime trainers absent from trainers.party: {missing_parties}")
+    campaign_bag_users = sorted(
+        trainer for trainer in current_refs
+        if trainer in party_blocks and re.search(r"(?m)^Items:", party_blocks[trainer])
+    )
+    if campaign_bag_users:
+        errors.append(
+            "campaign trainers still carry Bag healing items despite the no-Bag ruleset: "
+            + ", ".join(campaign_bag_users)
+        )
 
     ordinary_bands = Counter(min(9, int(value)) for value in ordinary_difficulties)
     ordinary_total = len(ordinary_difficulties)

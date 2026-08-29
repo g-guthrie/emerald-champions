@@ -1356,7 +1356,7 @@ SlateportCity_EventScript_Greta::
 	faceplayer
 	goto_if_defeated TRAINER_GRETA_SLATEPORT, SlateportCity_EventScript_GretaAfter
 	msgbox SlateportCity_Text_GretaChallenge, MSGBOX_DEFAULT
-	trainerbattle_no_intro TRAINER_GRETA_SLATEPORT, SlateportCity_Text_GretaDefeat
+	trainerbattle_no_intro_double TRAINER_GRETA_SLATEPORT, SlateportCity_Text_GretaDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	checkitemspace ITEM_GENGARITE, 1
 	goto_if_eq VAR_RESULT, FALSE, SlateportCity_EventScript_GretaBagFull
 	giveitem ITEM_GENGARITE

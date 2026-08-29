@@ -114,11 +114,127 @@ static const u8 sEmeraldChampionsSetName_SPECIES_ETERNATUS[] = _("Special Attack
 static const u8 sEmeraldChampionsSetName_SPECIES_TATSUGIRI[] = _("Special Attacker");
 static const u8 sEmeraldChampionsSetName_SPECIES_FLUTTER_MANE[] = _("Special Attacker");
 static const u8 sEmeraldChampionsSetName_SPECIES_IRON_BUNDLE[] = _("Special Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_GIMMIGHOUL[] = _("Nasty Plot Chest");
 static const u8 sEmeraldChampionsSetName_SPECIES_CHIEN_PAO[] = _("Physical Attacker");
 static const u8 sEmeraldChampionsSetName_SPECIES_TING_LU[] = _("Special Attacker");
 static const u8 sEmeraldChampionsSetName_SPECIES_CHI_YU[] = _("Special Attacker");
 static const u8 sEmeraldChampionsSetName_SPECIES_ROARING_MOON[] = _("Physical Attacker");
 static const u8 sEmeraldChampionsSetName_SPECIES_RAGING_BOLT[] = _("Special Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_QUAXLY[] = _("Rapid Spin Support");
+static const u8 sEmeraldChampionsSetName_SPECIES_QUAXWELL[] = _("Bulky Moxie");
+static const u8 sEmeraldChampionsSetName_SPECIES_QUAQUAVAL[] = _("Moxie Dancer");
+static const u8 sEmeraldChampionsSetName_SPECIES_ENAMORUS[] = _("Contrary Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_FEZANDIPITI[] = _("Toxic Wind Support");
+static const u8 sEmeraldChampionsSetName_SPECIES_KORAIDON[] = _("Sun Vanguard");
+static const u8 sEmeraldChampionsSetName_SPECIES_MIRAIDON[] = _("Terrain Cannon");
+static const u8 sEmeraldChampionsSetName_SPECIES_MUNKIDORI[] = _("Toxic Pivot");
+static const u8 sEmeraldChampionsSetName_SPECIES_OKIDOGI[] = _("Toxic Bruiser");
+static const u8 sEmeraldChampionsSetName_SPECIES_PECHARUNT[] = _("Poison Puppeteer");
+static const u8 sEmeraldChampionsSetName_SPECIES_TERAPAGOS[] = _("Crystal Anchor");
+static const u8 sEmeraldChampionsSetName_SPECIES_WO_CHIEN[] = _("Tablets Wall");
+static const u8 sEmeraldChampionsSetName_SPECIES_BASCULIN_WHITE_STRIPED[] = _("Adaptability Breaker");
+static const u8 sEmeraldChampionsSetName_SPECIES_CAPSAKID[] = _("Rage Powder Support");
+static const u8 sEmeraldChampionsSetName_SPECIES_CHARCADET[] = _("Flame Body Control");
+static const u8 sEmeraldChampionsSetName_SPECIES_FLITTLE[] = _("Speed Boost Hypnosis");
+static const u8 sEmeraldChampionsSetName_SPECIES_GREAVARD[] = _("Fluffy Priority");
+static const u8 sEmeraldChampionsSetName_SPECIES_GROWLITHE_HISUI[] = _("Rock Head Breaker");
+static const u8 sEmeraldChampionsSetName_SPECIES_ORTHWORM[] = _("Earth Eater Body Press");
+static const u8 sEmeraldChampionsSetName_SPECIES_POLTCHAGEIST[] = _("Hospitality Trick Room");
+static const u8 sEmeraldChampionsSetName_SPECIES_QWILFISH_HISUI[] = _("Intimidate Utility");
+static const u8 sEmeraldChampionsSetName_SPECIES_SNEASEL_HISUI[] = _("Inner Focus Opener");
+static const u8 sEmeraldChampionsSetName_SPECIES_TADBULB[] = _("Damp Tempo Control");
+static const u8 sEmeraldChampionsSetName_SPECIES_TANDEMAUS[] = _("Population Support");
+static const u8 sEmeraldChampionsSetName_SPECIES_TAUROS_PALDEA_COMBAT[] = _("Combat Intimidator");
+static const u8 sEmeraldChampionsSetName_SPECIES_TAUROS_PALDEA_BLAZE[] = _("Blaze Intimidator");
+static const u8 sEmeraldChampionsSetName_SPECIES_TAUROS_PALDEA_AQUA[] = _("Aqua Intimidator");
+static const u8 sEmeraldChampionsSetName_SPECIES_TINKATINK[] = _("Mold Breaker Opener");
+static const u8 sEmeraldChampionsSetName_SPECIES_ZORUA_HISUI[] = _("Illusion Burn Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_VOLTORB_HISUI[] = _("Fast Seed Support");
+static const u8 sEmeraldChampionsSetName_SPECIES_ELECTRODE_HISUI[] = _("Chloroblast Pivot");
+static const u8 sEmeraldChampionsSetName_SPECIES_LILLIGANT_HISUI[] = _("Victory Dance");
+static const u8 sEmeraldChampionsSetName_SPECIES_BRAVIARY_HISUI[] = _("Tinted Lens");
+static const u8 sEmeraldChampionsSetName_SPECIES_SLIGGOO_HISUI[] = _("Shelter Press");
+static const u8 sEmeraldChampionsSetName_SPECIES_URSALUNA_BLOODMOON[] = _("Blood Moon Voice");
+static const u8 sEmeraldChampionsSetName_SPECIES_WYRDEER[] = _("Trick Room Support");
+static const u8 sEmeraldChampionsSetName_SPECIES_KLEAVOR[] = _("Choice Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_URSALUNA[] = _("Doubles Wallbreaker");
+static const u8 sEmeraldChampionsSetName_SPECIES_BASCULEGION[] = _("Choice Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_SNEASLER[] = _("Physical Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_OVERQWIL[] = _("Physical Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_LECHONK[] = _("Physical Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_OINKOLOGNE[] = _("Doubles Support");
+static const u8 sEmeraldChampionsSetName_SPECIES_TAROUNTULA[] = _("Physical Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_SPIDOPS[] = _("Doubles Support");
+static const u8 sEmeraldChampionsSetName_SPECIES_NYMBLE[] = _("Physical Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_LOKIX[] = _("Offensive Protect");
+static const u8 sEmeraldChampionsSetName_SPECIES_PAWMI[] = _("Physical Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_PAWMO[] = _("Physical Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_PAWMOT[] = _("Doubles Wallbreaker");
+static const u8 sEmeraldChampionsSetName_SPECIES_MAUSHOLD[] = _("Physical Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_FIDOUGH[] = _("Physical Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_DACHSBUN[] = _("Doubles Support");
+static const u8 sEmeraldChampionsSetName_SPECIES_SMOLIV[] = _("Special Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_DOLLIV[] = _("Special Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_ARBOLIVA[] = _("Doubles Wallbreaker");
+static const u8 sEmeraldChampionsSetName_SPECIES_SQUAWKABILLY[] = _("Offensive Protect");
+static const u8 sEmeraldChampionsSetName_SPECIES_ARMAROUGE[] = _("Trick Room Support");
+static const u8 sEmeraldChampionsSetName_SPECIES_CERULEDGE[] = _("Setup Sweeper");
+static const u8 sEmeraldChampionsSetName_SPECIES_BELLIBOLT[] = _("Special Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_WATTREL[] = _("Special Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_KILOWATTREL[] = _("Doubles Wallbreaker");
+static const u8 sEmeraldChampionsSetName_SPECIES_MASCHIFF[] = _("Physical Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_MABOSSTIFF[] = _("Doubles Wallbreaker");
+static const u8 sEmeraldChampionsSetName_SPECIES_SHROODLE[] = _("Physical Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_GRAFAIAI[] = _("Doubles Support");
+static const u8 sEmeraldChampionsSetName_SPECIES_BRAMBLIN[] = _("Physical Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_BRAMBLEGHAST[] = _("Doubles Support");
+static const u8 sEmeraldChampionsSetName_SPECIES_TOEDSCOOL[] = _("Trick Room Support");
+static const u8 sEmeraldChampionsSetName_SPECIES_TOEDSCRUEL[] = _("Doubles Support");
+static const u8 sEmeraldChampionsSetName_SPECIES_KLAWF[] = _("Offensive Protect");
+static const u8 sEmeraldChampionsSetName_SPECIES_SCOVILLAIN[] = _("Mega Special Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_RELLOR[] = _("Physical Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_RABSCA[] = _("Doubles Support");
+static const u8 sEmeraldChampionsSetName_SPECIES_ESPATHRA[] = _("Setup Sweeper");
+static const u8 sEmeraldChampionsSetName_SPECIES_TINKATUFF[] = _("Physical Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_TINKATON[] = _("Doubles Support");
+static const u8 sEmeraldChampionsSetName_SPECIES_WIGLETT[] = _("Physical Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_WUGTRIO[] = _("Choice Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_BOMBIRDIER[] = _("Offensive Protect");
+static const u8 sEmeraldChampionsSetName_SPECIES_VAROOM[] = _("Physical Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_REVAVROOM[] = _("Offensive Protect");
+static const u8 sEmeraldChampionsSetName_SPECIES_CYCLIZAR[] = _("Doubles Support");
+static const u8 sEmeraldChampionsSetName_SPECIES_HOUNDSTONE[] = _("Physical Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_FLAMIGO[] = _("Choice Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_CETODDLE[] = _("Physical Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_CETITAN[] = _("Doubles Wallbreaker");
+static const u8 sEmeraldChampionsSetName_SPECIES_VELUZA[] = _("Choice Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_CLODSIRE[] = _("Doubles Bulky Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_DUDUNSPARCE[] = _("Doubles Bulky Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_SCREAM_TAIL[] = _("Doubles Support");
+static const u8 sEmeraldChampionsSetName_SPECIES_BRUTE_BONNET[] = _("Doubles Support");
+static const u8 sEmeraldChampionsSetName_SPECIES_SLITHER_WING[] = _("Doubles Wallbreaker");
+static const u8 sEmeraldChampionsSetName_SPECIES_SANDY_SHOCKS[] = _("Doubles Fast Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_IRON_TREADS[] = _("Doubles Bulky Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_IRON_JUGULIS[] = _("Doubles Fast Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_IRON_MOTH[] = _("Offensive Protect");
+static const u8 sEmeraldChampionsSetName_SPECIES_IRON_THORNS[] = _("Doubles Setup Sweeper");
+static const u8 sEmeraldChampionsSetName_SPECIES_FRIGIBAX[] = _("Physical Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_ARCTIBAX[] = _("Physical Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_BAXCALIBUR[] = _("Doubles Setup Sweeper");
+static const u8 sEmeraldChampionsSetName_SPECIES_IRON_LEAVES[] = _("Offensive Protect");
+static const u8 sEmeraldChampionsSetName_SPECIES_DIPPLIN[] = _("Doubles Bulky Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_SINISTCHA[] = _("Trick Room Support");
+static const u8 sEmeraldChampionsSetName_SPECIES_HYDRAPPLE[] = _("Special Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_IRON_BOULDER[] = _("Offensive Protect");
+static const u8 sEmeraldChampionsSetName_SPECIES_IRON_CROWN[] = _("Offensive Protect");
+static const u8 sEmeraldChampionsSetName_SPECIES_ARCANINE_HISUI[] = _("Physical Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_TYPHLOSION_HISUI[] = _("Choice Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_SAMUROTT_HISUI[] = _("Choice Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_ZOROARK_HISUI[] = _("Choice Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_GOODRA_HISUI[] = _("Physical Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_AVALUGG_HISUI[] = _("Physical Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_DECIDUEYE_HISUI[] = _("Physical Attacker");
+static const u8 sEmeraldChampionsSetName_SPECIES_BASCULEGION_F[] = _("Special Attacker");
 
 const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SPECIES] =
 {
@@ -182,7 +298,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_EVIOLITE,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_BOLD,
-        .ability = ABILITY_OVERCOAT,
+        .ability = ABILITY_RAIN_DISH,
         .statPoints = {32, 0, 32, 0, 2, 0},
     },
     [SPECIES_WARTORTLE] =
@@ -200,7 +316,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_SITRUS_BERRY,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_MODEST,
-        .ability = ABILITY_MEGA_LAUNCHER,
+        .ability = ABILITY_RAIN_DISH,
         .statPoints = {2, 0, 0, 32, 0, 32},
     },
     [SPECIES_CATERPIE] =
@@ -263,7 +379,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_FOCUS_SASH,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_TIMID,
-        .ability = ABILITY_NO_GUARD,
+        .ability = ABILITY_BIG_PECKS,
         .statPoints = {2, 0, 0, 32, 0, 32},
     },
     [SPECIES_PIDGEOTTO] =
@@ -272,7 +388,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_EVIOLITE,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_TIMID,
-        .ability = ABILITY_NO_GUARD,
+        .ability = ABILITY_BIG_PECKS,
         .statPoints = {2, 0, 0, 32, 0, 32},
     },
     [SPECIES_PIDGEOT] =
@@ -281,7 +397,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_LIFE_ORB,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_TIMID,
-        .ability = ABILITY_NO_GUARD,
+        .ability = ABILITY_BIG_PECKS,
         .statPoints = {2, 0, 0, 32, 0, 32},
     },
     [SPECIES_RATTATA] =
@@ -317,7 +433,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_LIFE_ORB,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_JOLLY,
-        .ability = ABILITY_INTIMIDATE,
+        .ability = ABILITY_SNIPER,
         .statPoints = {2, 32, 0, 0, 0, 32},
     },
     [SPECIES_EKANS] =
@@ -812,7 +928,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_EVIOLITE,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_JOLLY,
-        .ability = ABILITY_RECKLESS,
+        .ability = ABILITY_FLAME_BODY,
         .statPoints = {2, 32, 0, 0, 0, 32},
     },
     [SPECIES_RAPIDASH] =
@@ -821,7 +937,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_LIFE_ORB,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_JOLLY,
-        .ability = ABILITY_RECKLESS,
+        .ability = ABILITY_FLAME_BODY,
         .statPoints = {2, 32, 0, 0, 0, 32},
     },
     [SPECIES_SLOWPOKE] =
@@ -884,7 +1000,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_LIFE_ORB,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_JOLLY,
-        .ability = ABILITY_MOXIE,
+        .ability = ABILITY_TANGLED_FEET,
         .statPoints = {2, 32, 0, 0, 0, 32},
     },
     [SPECIES_SEEL] =
@@ -893,7 +1009,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_EVIOLITE,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_ADAMANT,
-        .ability = ABILITY_FUR_COAT,
+        .ability = ABILITY_ICE_BODY,
         .statPoints = {2, 32, 0, 0, 0, 32},
     },
     [SPECIES_DEWGONG] =
@@ -902,7 +1018,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_SITRUS_BERRY,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_TIMID,
-        .ability = ABILITY_FUR_COAT,
+        .ability = ABILITY_ICE_BODY,
         .statPoints = {2, 0, 0, 32, 0, 32},
     },
     [SPECIES_GRIMER] =
@@ -965,7 +1081,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_FOCUS_SASH,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_TIMID,
-        .ability = ABILITY_LEVITATE,
+        .ability = ABILITY_CURSED_BODY,
         .statPoints = {2, 0, 0, 32, 0, 32},
     },
     [SPECIES_ONIX] =
@@ -1028,7 +1144,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_FOCUS_SASH,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_TIMID,
-        .ability = ABILITY_ELECTRIC_SURGE,
+        .ability = ABILITY_AFTERMATH,
         .statPoints = {2, 0, 0, 32, 0, 32},
     },
     [SPECIES_EXEGGCUTE] =
@@ -1487,7 +1603,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_LIGHT_CLAY,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_BOLD,
-        .ability = ABILITY_TRIAGE,
+        .ability = ABILITY_LEAF_GUARD,
         .statPoints = {32, 0, 32, 0, 2, 0},
     },
     [SPECIES_BAYLEEF] =
@@ -1496,7 +1612,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_EVIOLITE,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_BOLD,
-        .ability = ABILITY_TRIAGE,
+        .ability = ABILITY_LEAF_GUARD,
         .statPoints = {32, 0, 32, 0, 2, 0},
     },
     [SPECIES_MEGANIUM] =
@@ -1505,7 +1621,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_SITRUS_BERRY,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_BOLD,
-        .ability = ABILITY_TRIAGE,
+        .ability = ABILITY_LEAF_GUARD,
         .statPoints = {32, 0, 32, 0, 2, 0},
     },
     [SPECIES_CYNDAQUIL] =
@@ -1568,7 +1684,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_EVIOLITE,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_CAREFUL,
-        .ability = ABILITY_FUR_COAT,
+        .ability = ABILITY_FRISK,
         .statPoints = {32, 0, 2, 0, 32, 0},
     },
     [SPECIES_FURRET] =
@@ -1577,7 +1693,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_SITRUS_BERRY,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_JOLLY,
-        .ability = ABILITY_FUR_COAT,
+        .ability = ABILITY_FRISK,
         .statPoints = {2, 32, 0, 0, 0, 32},
     },
     [SPECIES_HOOTHOOT] =
@@ -1604,7 +1720,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_EVIOLITE,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_JOLLY,
-        .ability = ABILITY_AERILATE,
+        .ability = ABILITY_RATTLED,
         .statPoints = {2, 32, 0, 0, 0, 32},
     },
     [SPECIES_LEDIAN] =
@@ -1622,7 +1738,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_FOCUS_SASH,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_ADAMANT,
-        .ability = ABILITY_MERCILESS,
+        .ability = ABILITY_SNIPER,
         .statPoints = {2, 32, 0, 0, 0, 32},
     },
     [SPECIES_ARIADOS] =
@@ -1847,7 +1963,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_LIFE_ORB,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_MODEST,
-        .ability = ABILITY_DROUGHT,
+        .ability = ABILITY_EARLY_BIRD,
         .statPoints = {2, 0, 0, 32, 0, 32},
     },
     [SPECIES_YANMA] =
@@ -1946,7 +2062,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_LIFE_ORB,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_JOLLY,
-        .ability = ABILITY_STRONG_JAW,
+        .ability = ABILITY_SAP_SIPPER,
         .statPoints = {2, 32, 0, 0, 0, 32},
     },
     [SPECIES_PINECO] =
@@ -2090,7 +2206,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_WHITE_HERB,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_MODEST,
-        .ability = ABILITY_SIMPLE,
+        .ability = ABILITY_WEAK_ARMOR,
         .statPoints = {2, 0, 0, 32, 0, 32},
     },
     [SPECIES_SWINUB] =
@@ -2144,7 +2260,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_FOCUS_SASH,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_JOLLY,
-        .ability = ABILITY_REFRIGERATE,
+        .ability = ABILITY_INSOMNIA,
         .statPoints = {2, 32, 0, 0, 0, 32},
     },
     [SPECIES_MANTINE] =
@@ -2504,7 +2620,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_FOCUS_SASH,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_IMPISH,
-        .ability = ABILITY_POISON_POINT,
+        .ability = ABILITY_RUN_AWAY,
         .statPoints = {32, 0, 32, 0, 2, 0},
     },
     [SPECIES_SILCOON] =
@@ -2522,7 +2638,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_FOCUS_SASH,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_TIMID,
-        .ability = ABILITY_BERSERK,
+        .ability = ABILITY_RIVALRY,
         .statPoints = {2, 0, 0, 32, 0, 32},
     },
     [SPECIES_CASCOON] =
@@ -2540,7 +2656,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_LEFTOVERS,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_BOLD,
-        .ability = ABILITY_UNAWARE,
+        .ability = ABILITY_COMPOUND_EYES,
         .statPoints = {32, 0, 32, 0, 2, 0},
     },
     [SPECIES_LOTAD] =
@@ -2702,7 +2818,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_EVIOLITE,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_BRAVE,
-        .ability = ABILITY_STALL,
+        .ability = ABILITY_TRUANT,
         .statPoints = {32, 32, 2, 0, 0, 0},
     },
     [SPECIES_VIGOROTH] =
@@ -3008,7 +3124,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_SITRUS_BERRY,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_QUIET,
-        .ability = ABILITY_DRIZZLE,
+        .ability = ABILITY_PRESSURE,
         .statPoints = {32, 0, 2, 32, 0, 0},
     },
     [SPECIES_NUMEL] =
@@ -3089,7 +3205,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_YACHE_BERRY,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_JOLLY,
-        .ability = ABILITY_TINTED_LENS,
+        .ability = ABILITY_LEVITATE,
         .statPoints = {2, 32, 0, 0, 0, 32},
     },
     [SPECIES_CACNEA] =
@@ -3332,7 +3448,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_SITRUS_BERRY,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_ADAMANT,
-        .ability = ABILITY_AERILATE,
+        .ability = ABILITY_HARVEST,
         .statPoints = {2, 32, 0, 0, 0, 32},
     },
     [SPECIES_CHIMECHO] =
@@ -3377,7 +3493,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_SITRUS_BERRY,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_JOLLY,
-        .ability = ABILITY_REFRIGERATE,
+        .ability = ABILITY_MOODY,
         .statPoints = {2, 32, 0, 0, 0, 32},
     },
     [SPECIES_SPHEAL] =
@@ -3449,7 +3565,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_LIFE_ORB,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_TIMID,
-        .ability = ABILITY_SOUL_HEART,
+        .ability = ABILITY_HYDRATION,
         .statPoints = {2, 0, 0, 32, 0, 32},
     },
     [SPECIES_BAGON] =
@@ -3602,7 +3718,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_EVIOLITE,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_CAREFUL,
-        .ability = ABILITY_SOLID_ROCK,
+        .ability = ABILITY_SHELL_ARMOR,
         .statPoints = {32, 0, 2, 0, 32, 0},
     },
     [SPECIES_GROTLE] =
@@ -3611,7 +3727,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_EVIOLITE,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_CAREFUL,
-        .ability = ABILITY_SOLID_ROCK,
+        .ability = ABILITY_SHELL_ARMOR,
         .statPoints = {32, 0, 2, 0, 32, 0},
     },
     [SPECIES_TORTERRA] =
@@ -3620,7 +3736,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_LIFE_ORB,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_BRAVE,
-        .ability = ABILITY_SOLID_ROCK,
+        .ability = ABILITY_SHELL_ARMOR,
         .statPoints = {32, 32, 2, 0, 0, 0},
     },
     [SPECIES_CHIMCHAR] =
@@ -3863,7 +3979,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_LEFTOVERS,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_CAREFUL,
-        .ability = ABILITY_INTIMIDATE,
+        .ability = ABILITY_UNNERVE,
         .statPoints = {32, 0, 2, 0, 32, 0},
     },
     [SPECIES_PACHIRISU] =
@@ -3971,7 +4087,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_LIFE_ORB,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_JOLLY,
-        .ability = ABILITY_SCRAPPY,
+        .ability = ABILITY_LIMBER,
         .statPoints = {2, 32, 0, 0, 0, 32},
     },
     [SPECIES_MISMAGIUS] =
@@ -3980,7 +4096,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_LIFE_ORB,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_TIMID,
-        .ability = ABILITY_PIXILATE,
+        .ability = ABILITY_LEVITATE,
         .statPoints = {2, 0, 0, 32, 0, 32},
     },
     [SPECIES_HONCHKROW] =
@@ -4322,7 +4438,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_LIFE_ORB,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_MODEST,
-        .ability = ABILITY_MEGA_LAUNCHER,
+        .ability = ABILITY_VITAL_SPIRIT,
         .statPoints = {2, 0, 0, 32, 0, 32},
     },
     [SPECIES_TOGEKISS] =
@@ -4358,7 +4474,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_LIFE_ORB,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_MODEST,
-        .ability = ABILITY_SLUSH_RUSH,
+        .ability = ABILITY_ICE_BODY,
         .statPoints = {2, 0, 0, 32, 0, 32},
     },
     [SPECIES_GLISCOR] =
@@ -4493,7 +4609,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_SITRUS_BERRY,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_ADAMANT,
-        .ability = ABILITY_CLEAR_BODY,
+        .ability = ABILITY_SLOW_START,
         .statPoints = {2, 32, 0, 0, 0, 32},
     },
     [SPECIES_GIRATINA] =
@@ -4664,7 +4780,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_LIFE_ORB,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_JOLLY,
-        .ability = ABILITY_DAZZLING,
+        .ability = ABILITY_ANALYTIC,
         .statPoints = {2, 32, 0, 0, 0, 32},
     },
     [SPECIES_LILLIPUP] =
@@ -5402,7 +5518,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_FOCUS_SASH,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_TIMID,
-        .ability = ABILITY_LIGHTNING_ROD,
+        .ability = ABILITY_MOTOR_DRIVE,
         .statPoints = {2, 0, 0, 32, 0, 32},
     },
     [SPECIES_KARRABLAST] =
@@ -5798,7 +5914,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_LIFE_ORB,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_ADAMANT,
-        .ability = ABILITY_TOUGH_CLAWS,
+        .ability = ABILITY_WHITE_SMOKE,
         .statPoints = {2, 32, 0, 0, 0, 32},
     },
     [SPECIES_DURANT] =
@@ -6131,7 +6247,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_LIFE_ORB,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_TIMID,
-        .ability = ABILITY_COMPETITIVE,
+        .ability = ABILITY_MOXIE,
         .statPoints = {2, 0, 0, 32, 0, 32},
     },
     [SPECIES_FLABEBE] =
@@ -6140,7 +6256,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_EVIOLITE,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_CALM,
-        .ability = ABILITY_HEALER,
+        .ability = ABILITY_SYMBIOSIS,
         .statPoints = {32, 0, 2, 0, 32, 0},
     },
     [SPECIES_FLOETTE] =
@@ -6149,7 +6265,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_EVIOLITE,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_CALM,
-        .ability = ABILITY_HEALER,
+        .ability = ABILITY_SYMBIOSIS,
         .statPoints = {32, 0, 2, 0, 32, 0},
     },
     [SPECIES_FLORGES] =
@@ -6158,7 +6274,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_SITRUS_BERRY,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_CALM,
-        .ability = ABILITY_MISTY_SURGE,
+        .ability = ABILITY_SYMBIOSIS,
         .statPoints = {32, 0, 2, 0, 32, 0},
     },
     [SPECIES_SKIDDO] =
@@ -6176,7 +6292,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_LEFTOVERS,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_CAREFUL,
-        .ability = ABILITY_GRASSY_SURGE,
+        .ability = ABILITY_GRASS_PELT,
         .statPoints = {32, 0, 2, 0, 32, 0},
     },
     [SPECIES_PANCHAM] =
@@ -6473,7 +6589,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_TOXIC_ORB,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_MODEST,
-        .ability = ABILITY_POISON_HEAL,
+        .ability = ABILITY_GOOEY,
         .statPoints = {2, 0, 0, 32, 0, 32},
     },
     [SPECIES_KLEFKI] =
@@ -6500,7 +6616,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_LEFTOVERS,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_ADAMANT,
-        .ability = ABILITY_GRASSY_SURGE,
+        .ability = ABILITY_HARVEST,
         .statPoints = {2, 32, 0, 0, 0, 32},
     },
     [SPECIES_PUMPKABOO] =
@@ -6518,7 +6634,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_FLAME_ORB,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_MODEST,
-        .ability = ABILITY_FLARE_BOOST,
+        .ability = ABILITY_INSOMNIA,
         .statPoints = {2, 0, 0, 32, 0, 32},
     },
     [SPECIES_BERGMITE] =
@@ -6617,7 +6733,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_EVIOLITE,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_ADAMANT,
-        .ability = ABILITY_TINTED_LENS,
+        .ability = ABILITY_LONG_REACH,
         .statPoints = {2, 32, 0, 0, 0, 32},
     },
     [SPECIES_DARTRIX] =
@@ -6626,7 +6742,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_EVIOLITE,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_ADAMANT,
-        .ability = ABILITY_TINTED_LENS,
+        .ability = ABILITY_LONG_REACH,
         .statPoints = {2, 32, 0, 0, 0, 32},
     },
     [SPECIES_DECIDUEYE] =
@@ -6635,7 +6751,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_SITRUS_BERRY,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_JOLLY,
-        .ability = ABILITY_TINTED_LENS,
+        .ability = ABILITY_LONG_REACH,
         .statPoints = {2, 32, 0, 0, 0, 32},
     },
     [SPECIES_LITTEN] =
@@ -7049,7 +7165,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_LEFTOVERS,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_BOLD,
-        .ability = ABILITY_SAND_STREAM,
+        .ability = ABILITY_SAND_VEIL,
         .statPoints = {32, 0, 32, 0, 2, 0},
     },
     [SPECIES_PYUKUMUKU] =
@@ -8786,7 +8902,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_SITRUS_BERRY,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_TIMID,
-        .ability = ABILITY_MOTOR_DRIVE,
+        .ability = ABILITY_LEVITATE,
         .statPoints = {2, 0, 0, 32, 0, 32},
     },
     [SPECIES_ROTOM_MOW] =
@@ -9542,7 +9658,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_FLAME_ORB,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_TIMID,
-        .ability = ABILITY_FLARE_BOOST,
+        .ability = ABILITY_INSOMNIA,
         .statPoints = {2, 0, 0, 32, 0, 32},
     },
     [SPECIES_GOURGEIST_LARGE] =
@@ -9551,7 +9667,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_FLAME_ORB,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_MODEST,
-        .ability = ABILITY_FLARE_BOOST,
+        .ability = ABILITY_INSOMNIA,
         .statPoints = {2, 0, 0, 32, 0, 32},
     },
     [SPECIES_GOURGEIST_SUPER] =
@@ -9560,7 +9676,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_FLAME_ORB,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_QUIET,
-        .ability = ABILITY_FLARE_BOOST,
+        .ability = ABILITY_INSOMNIA,
         .statPoints = {32, 0, 2, 32, 0, 0},
     },
     [SPECIES_ZYGARDE_10] =
@@ -10267,12 +10383,12 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
     },
     [SPECIES_GIMMIGHOUL] =
     {
-        .moves = {MOVE_SHADOW_BALL, MOVE_ICY_WIND, MOVE_LIGHT_SCREEN, MOVE_PROTECT},
+        .moves = {MOVE_SHADOW_BALL, MOVE_POWER_GEM, MOVE_NASTY_PLOT, MOVE_PROTECT},
         .item = ITEM_EVIOLITE,
         .requiredItem = ITEM_NONE,
-        .nature = NATURE_MODEST,
+        .nature = NATURE_QUIET,
         .ability = ABILITY_RATTLED,
-        .statPoints = {2, 0, 0, 32, 0, 32},
+        .statPoints = {32, 0, 2, 32, 0, 0},
     },
     [SPECIES_GIMMIGHOUL_ROAMING] =
     {
@@ -10409,6 +10525,1041 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .ability = ABILITY_PROTOSYNTHESIS,
         .statPoints = {2, 0, 0, 32, 0, 32},
     },
+    [SPECIES_QUAXLY] =
+    {
+        .moves = {MOVE_LIQUIDATION, MOVE_AQUA_JET, MOVE_RAPID_SPIN, MOVE_PROTECT},
+        .item = ITEM_EVIOLITE,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_JOLLY,
+        .ability = ABILITY_MOXIE,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_QUAXWELL] =
+    {
+        .moves = {MOVE_LIQUIDATION, MOVE_LOW_SWEEP, MOVE_ROOST, MOVE_PROTECT},
+        .item = ITEM_EVIOLITE,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_JOLLY,
+        .ability = ABILITY_MOXIE,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_QUAQUAVAL] =
+    {
+        .moves = {MOVE_AQUA_STEP, MOVE_CLOSE_COMBAT, MOVE_KNOCK_OFF, MOVE_DETECT},
+        .item = ITEM_CLEAR_AMULET,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_JOLLY,
+        .ability = ABILITY_MOXIE,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_ENAMORUS] =
+    {
+        .moves = {MOVE_SPRINGTIDE_STORM, MOVE_EARTH_POWER, MOVE_MYSTICAL_FIRE, MOVE_PROTECT},
+        .item = ITEM_LIFE_ORB,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_TIMID,
+        .ability = ABILITY_CONTRARY,
+        .statPoints = {2, 0, 0, 32, 0, 32},
+    },
+    [SPECIES_FEZANDIPITI] =
+    {
+        .moves = {MOVE_MOONBLAST, MOVE_ICY_WIND, MOVE_TAILWIND, MOVE_PROTECT},
+        .item = ITEM_COVERT_CLOAK,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_TIMID,
+        .ability = ABILITY_TOXIC_CHAIN,
+        .statPoints = {32, 0, 2, 0, 32, 0},
+    },
+    [SPECIES_KORAIDON] =
+    {
+        .moves = {MOVE_COLLISION_COURSE, MOVE_DRAGON_CLAW, MOVE_FLARE_BLITZ, MOVE_PROTECT},
+        .item = ITEM_CLEAR_AMULET,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_JOLLY,
+        .ability = ABILITY_ORICHALCUM_PULSE,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_MIRAIDON] =
+    {
+        .moves = {MOVE_ELECTRO_DRIFT, MOVE_DRACO_METEOR, MOVE_VOLT_SWITCH, MOVE_PROTECT},
+        .item = ITEM_LIFE_ORB,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_TIMID,
+        .ability = ABILITY_HADRON_ENGINE,
+        .statPoints = {2, 0, 0, 32, 0, 32},
+    },
+    [SPECIES_MUNKIDORI] =
+    {
+        .moves = {MOVE_PSYCHIC, MOVE_SLUDGE_BOMB, MOVE_PARTING_SHOT, MOVE_PROTECT},
+        .item = ITEM_FOCUS_SASH,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_TIMID,
+        .ability = ABILITY_TOXIC_CHAIN,
+        .statPoints = {2, 0, 0, 32, 0, 32},
+    },
+    [SPECIES_OKIDOGI] =
+    {
+        .moves = {MOVE_DRAIN_PUNCH, MOVE_POISON_JAB, MOVE_KNOCK_OFF, MOVE_PROTECT},
+        .item = ITEM_CLEAR_AMULET,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_ADAMANT,
+        .ability = ABILITY_TOXIC_CHAIN,
+        .statPoints = {32, 32, 2, 0, 0, 0},
+    },
+    [SPECIES_PECHARUNT] =
+    {
+        .moves = {MOVE_MALIGNANT_CHAIN, MOVE_SHADOW_BALL, MOVE_RECOVER, MOVE_PROTECT},
+        .item = ITEM_LEFTOVERS,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_BOLD,
+        .ability = ABILITY_POISON_PUPPETEER,
+        .statPoints = {32, 0, 32, 0, 2, 0},
+    },
+    [SPECIES_TERAPAGOS] =
+    {
+        .moves = {MOVE_TERA_STARSTORM, MOVE_EARTH_POWER, MOVE_CALM_MIND, MOVE_PROTECT},
+        .item = ITEM_LEFTOVERS,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_MODEST,
+        .ability = ABILITY_TERA_SHIFT,
+        .statPoints = {32, 0, 2, 32, 0, 0},
+    },
+    [SPECIES_WO_CHIEN] =
+    {
+        .moves = {MOVE_GIGA_DRAIN, MOVE_FOUL_PLAY, MOVE_LEECH_SEED, MOVE_PROTECT},
+        .item = ITEM_LEFTOVERS,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_CALM,
+        .ability = ABILITY_TABLETS_OF_RUIN,
+        .statPoints = {32, 0, 2, 0, 32, 0},
+    },
+    [SPECIES_BASCULIN_WHITE_STRIPED] =
+    {
+        .moves = {MOVE_WAVE_CRASH, MOVE_AQUA_JET, MOVE_LAST_RESPECTS, MOVE_PROTECT},
+        .item = ITEM_LIFE_ORB,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_JOLLY,
+        .ability = ABILITY_ADAPTABILITY,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_CAPSAKID] =
+    {
+        .moves = {MOVE_SEED_BOMB, MOVE_RAGE_POWDER, MOVE_HELPING_HAND, MOVE_PROTECT},
+        .item = ITEM_EVIOLITE,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_CAREFUL,
+        .ability = ABILITY_CHLOROPHYLL,
+        .statPoints = {32, 0, 2, 0, 32, 0},
+    },
+    [SPECIES_CHARCADET] =
+    {
+        .moves = {MOVE_HEAT_WAVE, MOVE_WILL_O_WISP, MOVE_CLEAR_SMOG, MOVE_PROTECT},
+        .item = ITEM_EVIOLITE,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_BOLD,
+        .ability = ABILITY_FLAME_BODY,
+        .statPoints = {32, 0, 32, 0, 2, 0},
+    },
+    [SPECIES_FLITTLE] =
+    {
+        .moves = {MOVE_PSYCHIC, MOVE_HYPNOSIS, MOVE_HELPING_HAND, MOVE_PROTECT},
+        .item = ITEM_FOCUS_SASH,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_TIMID,
+        .ability = ABILITY_SPEED_BOOST,
+        .statPoints = {2, 0, 0, 32, 0, 32},
+    },
+    [SPECIES_GREAVARD] =
+    {
+        .moves = {MOVE_POLTERGEIST, MOVE_SHADOW_SNEAK, MOVE_PLAY_ROUGH, MOVE_PROTECT},
+        .item = ITEM_EVIOLITE,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_ADAMANT,
+        .ability = ABILITY_FLUFFY,
+        .statPoints = {32, 32, 2, 0, 0, 0},
+    },
+    [SPECIES_GROWLITHE_HISUI] =
+    {
+        .moves = {MOVE_FLARE_BLITZ, MOVE_HEAD_SMASH, MOVE_CLOSE_COMBAT, MOVE_PROTECT},
+        .item = ITEM_LIFE_ORB,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_JOLLY,
+        .ability = ABILITY_ROCK_HEAD,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_ORTHWORM] =
+    {
+        .moves = {MOVE_BODY_PRESS, MOVE_SHED_TAIL, MOVE_IRON_DEFENSE, MOVE_PROTECT},
+        .item = ITEM_SITRUS_BERRY,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_RELAXED,
+        .ability = ABILITY_EARTH_EATER,
+        .statPoints = {32, 0, 32, 0, 2, 0},
+    },
+    [SPECIES_POLTCHAGEIST] =
+    {
+        .moves = {MOVE_LEAF_STORM, MOVE_RAGE_POWDER, MOVE_TRICK_ROOM, MOVE_PROTECT},
+        .item = ITEM_EVIOLITE,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_QUIET,
+        .ability = ABILITY_HOSPITALITY,
+        .statPoints = {32, 0, 2, 32, 0, 0},
+    },
+    [SPECIES_QWILFISH_HISUI] =
+    {
+        .moves = {MOVE_BARB_BARRAGE, MOVE_CRUNCH, MOVE_ICY_WIND, MOVE_PROTECT},
+        .item = ITEM_EVIOLITE,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_CAREFUL,
+        .ability = ABILITY_INTIMIDATE,
+        .statPoints = {32, 0, 2, 0, 32, 0},
+    },
+    [SPECIES_SNEASEL_HISUI] =
+    {
+        .moves = {MOVE_CLOSE_COMBAT, MOVE_POISON_JAB, MOVE_FAKE_OUT, MOVE_PROTECT},
+        .item = ITEM_FOCUS_SASH,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_JOLLY,
+        .ability = ABILITY_INNER_FOCUS,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_TADBULB] =
+    {
+        .moves = {MOVE_ELECTROWEB, MOVE_ACID_SPRAY, MOVE_EERIE_IMPULSE, MOVE_PROTECT},
+        .item = ITEM_EVIOLITE,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_CALM,
+        .ability = ABILITY_DAMP,
+        .statPoints = {32, 0, 2, 0, 32, 0},
+    },
+    [SPECIES_TANDEMAUS] =
+    {
+        .moves = {MOVE_POPULATION_BOMB, MOVE_SUPER_FANG, MOVE_HELPING_HAND, MOVE_PROTECT},
+        .item = ITEM_EVIOLITE,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_JOLLY,
+        .ability = ABILITY_OWN_TEMPO,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_TAUROS_PALDEA_COMBAT] =
+    {
+        .moves = {MOVE_CLOSE_COMBAT, MOVE_RAGING_BULL, MOVE_HIGH_HORSEPOWER, MOVE_PROTECT},
+        .item = ITEM_CLEAR_AMULET,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_JOLLY,
+        .ability = ABILITY_INTIMIDATE,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_TAUROS_PALDEA_BLAZE] =
+    {
+        .moves = {MOVE_RAGING_BULL, MOVE_CLOSE_COMBAT, MOVE_HIGH_HORSEPOWER, MOVE_PROTECT},
+        .item = ITEM_CLEAR_AMULET,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_JOLLY,
+        .ability = ABILITY_INTIMIDATE,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_TAUROS_PALDEA_AQUA] =
+    {
+        .moves = {MOVE_WAVE_CRASH, MOVE_CLOSE_COMBAT, MOVE_AQUA_JET, MOVE_PROTECT},
+        .item = ITEM_CLEAR_AMULET,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_JOLLY,
+        .ability = ABILITY_INTIMIDATE,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_TINKATINK] =
+    {
+        .moves = {MOVE_FAKE_OUT, MOVE_KNOCK_OFF, MOVE_PLAY_ROUGH, MOVE_PROTECT},
+        .item = ITEM_EVIOLITE,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_CAREFUL,
+        .ability = ABILITY_MOLD_BREAKER,
+        .statPoints = {32, 0, 2, 0, 32, 0},
+    },
+    [SPECIES_ZORUA_HISUI] =
+    {
+        .moves = {MOVE_BITTER_MALICE, MOVE_HYPER_VOICE, MOVE_WILL_O_WISP, MOVE_PROTECT},
+        .item = ITEM_FOCUS_SASH,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_TIMID,
+        .ability = ABILITY_ILLUSION,
+        .statPoints = {2, 0, 0, 32, 0, 32},
+    },
+    [SPECIES_VOLTORB_HISUI] =
+    {
+        .moves = {MOVE_ELECTROWEB, MOVE_GIGA_DRAIN, MOVE_LEECH_SEED, MOVE_PROTECT},
+        .item = ITEM_EVIOLITE,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_TIMID,
+        .ability = ABILITY_SOUNDPROOF,
+        .statPoints = {2, 0, 0, 32, 0, 32},
+    },
+    [SPECIES_ELECTRODE_HISUI] =
+    {
+        .moves = {MOVE_CHLOROBLAST, MOVE_ELECTROWEB, MOVE_VOLT_SWITCH, MOVE_TAUNT},
+        .item = ITEM_FOCUS_SASH,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_TIMID,
+        .ability = ABILITY_SOUNDPROOF,
+        .statPoints = {2, 0, 0, 32, 0, 32},
+    },
+    [SPECIES_LILLIGANT_HISUI] =
+    {
+        .moves = {MOVE_VICTORY_DANCE, MOVE_CLOSE_COMBAT, MOVE_LEAF_BLADE, MOVE_SLEEP_POWDER},
+        .item = ITEM_FOCUS_SASH,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_JOLLY,
+        .ability = ABILITY_CHLOROPHYLL,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_BRAVIARY_HISUI] =
+    {
+        .moves = {MOVE_ESPER_WING, MOVE_AIR_SLASH, MOVE_HEAT_WAVE, MOVE_PROTECT},
+        .item = ITEM_LIFE_ORB,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_MODEST,
+        .ability = ABILITY_TINTED_LENS,
+        .statPoints = {2, 0, 0, 32, 0, 32},
+    },
+    [SPECIES_SLIGGOO_HISUI] =
+    {
+        .moves = {MOVE_BODY_PRESS, MOVE_HEAVY_SLAM, MOVE_SHELTER, MOVE_PROTECT},
+        .item = ITEM_EVIOLITE,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_RELAXED,
+        .ability = ABILITY_SHELL_ARMOR,
+        .statPoints = {32, 0, 32, 0, 2, 0},
+    },
+    [SPECIES_URSALUNA_BLOODMOON] =
+    {
+        .moves = {MOVE_BLOOD_MOON, MOVE_EARTH_POWER, MOVE_HYPER_VOICE, MOVE_PROTECT},
+        .item = ITEM_THROAT_SPRAY,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_QUIET,
+        .ability = ABILITY_MINDS_EYE,
+        .statPoints = {32, 0, 2, 32, 0, 0},
+    },
+    [SPECIES_WYRDEER] =
+    {
+        .moves = {MOVE_TRICK_ROOM, MOVE_PSYSHIELD_BASH, MOVE_SKILL_SWAP, MOVE_GRAVITY},
+        .item = ITEM_COLBUR_BERRY,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_ADAMANT,
+        .ability = ABILITY_INTIMIDATE,
+        .statPoints = {32, 32, 2, 0, 0, 0},
+    },
+    [SPECIES_KLEAVOR] =
+    {
+        .moves = {MOVE_STONE_AXE, MOVE_X_SCISSOR, MOVE_CLOSE_COMBAT, MOVE_U_TURN},
+        .item = ITEM_CHOICE_SCARF,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_JOLLY,
+        .ability = ABILITY_SHARPNESS,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_URSALUNA] =
+    {
+        .moves = {MOVE_HEADLONG_RUSH, MOVE_FACADE, MOVE_PROTECT, MOVE_EARTHQUAKE},
+        .item = ITEM_FLAME_ORB,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_ADAMANT,
+        .ability = ABILITY_GUTS,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_BASCULEGION] =
+    {
+        .moves = {MOVE_LAST_RESPECTS, MOVE_AQUA_JET, MOVE_WAVE_CRASH, MOVE_FLIP_TURN},
+        .item = ITEM_CHOICE_SCARF,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_JOLLY,
+        .ability = ABILITY_ADAPTABILITY,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_SNEASLER] =
+    {
+        .moves = {MOVE_CLOSE_COMBAT, MOVE_FAKE_OUT, MOVE_DIRE_CLAW, MOVE_PROTECT},
+        .item = ITEM_FOCUS_SASH,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_JOLLY,
+        .ability = ABILITY_UNBURDEN,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_OVERQWIL] =
+    {
+        .moves = {MOVE_MINIMIZE, MOVE_STOCKPILE, MOVE_PROTECT, MOVE_BARB_BARRAGE},
+        .item = ITEM_LEFTOVERS,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_CAREFUL,
+        .ability = ABILITY_INTIMIDATE,
+        .statPoints = {32, 0, 2, 0, 32, 0},
+    },
+    [SPECIES_LECHONK] =
+    {
+        .moves = {MOVE_DOUBLE_EDGE, MOVE_BODY_SLAM, MOVE_FACADE, MOVE_PROTECT},
+        .item = ITEM_EVIOLITE,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_ADAMANT,
+        .ability = ABILITY_THICK_FAT,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_OINKOLOGNE] =
+    {
+        .moves = {MOVE_YAWN, MOVE_PROTECT, MOVE_HELPING_HAND, MOVE_DOUBLE_EDGE},
+        .item = ITEM_SITRUS_BERRY,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_CAREFUL,
+        .ability = ABILITY_THICK_FAT,
+        .statPoints = {32, 0, 2, 0, 32, 0},
+    },
+    [SPECIES_TAROUNTULA] =
+    {
+        .moves = {MOVE_FIRST_IMPRESSION, MOVE_LEECH_LIFE, MOVE_LUNGE, MOVE_PROTECT},
+        .item = ITEM_EVIOLITE,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_ADAMANT,
+        .ability = ABILITY_INSOMNIA,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_SPIDOPS] =
+    {
+        .moves = {MOVE_LUNGE, MOVE_STICKY_WEB, MOVE_STRING_SHOT, MOVE_U_TURN},
+        .item = ITEM_SITRUS_BERRY,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_CAREFUL,
+        .ability = ABILITY_STAKEOUT,
+        .statPoints = {32, 0, 2, 0, 32, 0},
+    },
+    [SPECIES_NYMBLE] =
+    {
+        .moves = {MOVE_FIRST_IMPRESSION, MOVE_LEECH_LIFE, MOVE_X_SCISSOR, MOVE_PROTECT},
+        .item = ITEM_EVIOLITE,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_ADAMANT,
+        .ability = ABILITY_SWARM,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_LOKIX] =
+    {
+        .moves = {MOVE_LEECH_LIFE, MOVE_FIRST_IMPRESSION, MOVE_PROTECT, MOVE_KNOCK_OFF},
+        .item = ITEM_LIFE_ORB,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_JOLLY,
+        .ability = ABILITY_TINTED_LENS,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_PAWMI] =
+    {
+        .moves = {MOVE_WILD_CHARGE, MOVE_SPARK, MOVE_THUNDER_FANG, MOVE_PROTECT},
+        .item = ITEM_EVIOLITE,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_ADAMANT,
+        .ability = ABILITY_NATURAL_CURE,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_PAWMO] =
+    {
+        .moves = {MOVE_FOCUS_PUNCH, MOVE_UPPER_HAND, MOVE_WILD_CHARGE, MOVE_PROTECT},
+        .item = ITEM_EVIOLITE,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_ADAMANT,
+        .ability = ABILITY_NATURAL_CURE,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_PAWMOT] =
+    {
+        .moves = {MOVE_REVIVAL_BLESSING, MOVE_DOUBLE_SHOCK, MOVE_PROTECT, MOVE_CLOSE_COMBAT},
+        .item = ITEM_LIFE_ORB,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_JOLLY,
+        .ability = ABILITY_VOLT_ABSORB,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_MAUSHOLD] =
+    {
+        .moves = {MOVE_FOLLOW_ME, MOVE_PROTECT, MOVE_SUPER_FANG, MOVE_POPULATION_BOMB},
+        .item = ITEM_WIDE_LENS,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_JOLLY,
+        .ability = ABILITY_FRIEND_GUARD,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_FIDOUGH] =
+    {
+        .moves = {MOVE_PLAY_ROUGH, MOVE_LAST_RESORT, MOVE_PSYCHIC_FANGS, MOVE_PROTECT},
+        .item = ITEM_EVIOLITE,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_ADAMANT,
+        .ability = ABILITY_OWN_TEMPO,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_DACHSBUN] =
+    {
+        .moves = {MOVE_SNARL, MOVE_HELPING_HAND, MOVE_PLAY_ROUGH, MOVE_YAWN},
+        .item = ITEM_SITRUS_BERRY,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_CALM,
+        .ability = ABILITY_WELL_BAKED_BODY,
+        .statPoints = {32, 0, 2, 0, 32, 0},
+    },
+    [SPECIES_SMOLIV] =
+    {
+        .moves = {MOVE_LEAF_STORM, MOVE_ENERGY_BALL, MOVE_SOLARBEAM, MOVE_PROTECT},
+        .item = ITEM_EVIOLITE,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_MODEST,
+        .ability = ABILITY_EARLY_BIRD,
+        .statPoints = {2, 0, 0, 32, 0, 32},
+    },
+    [SPECIES_DOLLIV] =
+    {
+        .moves = {MOVE_LEAF_STORM, MOVE_ENERGY_BALL, MOVE_SOLARBEAM, MOVE_PROTECT},
+        .item = ITEM_EVIOLITE,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_MODEST,
+        .ability = ABILITY_EARLY_BIRD,
+        .statPoints = {2, 0, 0, 32, 0, 32},
+    },
+    [SPECIES_ARBOLIVA] =
+    {
+        .moves = {MOVE_POLLEN_PUFF, MOVE_ENERGY_BALL, MOVE_HYPER_VOICE, MOVE_EARTH_POWER},
+        .item = ITEM_CHOICE_SPECS,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_MODEST,
+        .ability = ABILITY_SEED_SOWER,
+        .statPoints = {2, 0, 0, 32, 0, 32},
+    },
+    [SPECIES_SQUAWKABILLY] =
+    {
+        .moves = {MOVE_DOUBLE_EDGE, MOVE_BRAVE_BIRD, MOVE_PROTECT, MOVE_QUICK_ATTACK},
+        .item = ITEM_LIFE_ORB,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_JOLLY,
+        .ability = ABILITY_INTIMIDATE,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_ARMAROUGE] =
+    {
+        .moves = {MOVE_ARMOR_CANNON, MOVE_TRICK_ROOM, MOVE_PROTECT, MOVE_EXPANDING_FORCE},
+        .item = ITEM_FOCUS_SASH,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_QUIET,
+        .ability = ABILITY_FLASH_FIRE,
+        .statPoints = {32, 0, 2, 32, 0, 0},
+    },
+    [SPECIES_CERULEDGE] =
+    {
+        .moves = {MOVE_BITTER_BLADE, MOVE_PROTECT, MOVE_SHADOW_SNEAK, MOVE_BULK_UP},
+        .item = ITEM_COLBUR_BERRY,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_ADAMANT,
+        .ability = ABILITY_FLASH_FIRE,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_BELLIBOLT] =
+    {
+        .moves = {MOVE_PARABOLIC_CHARGE, MOVE_PROTECT, MOVE_SOAK, MOVE_THUNDERBOLT},
+        .item = ITEM_SITRUS_BERRY,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_MODEST,
+        .ability = ABILITY_ELECTROMORPHOSIS,
+        .statPoints = {2, 0, 0, 32, 0, 32},
+    },
+    [SPECIES_WATTREL] =
+    {
+        .moves = {MOVE_DISCHARGE, MOVE_THUNDERBOLT, MOVE_AIR_CUTTER, MOVE_PROTECT},
+        .item = ITEM_EVIOLITE,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_MODEST,
+        .ability = ABILITY_COMPETITIVE,
+        .statPoints = {2, 0, 0, 32, 0, 32},
+    },
+    [SPECIES_KILOWATTREL] =
+    {
+        .moves = {MOVE_HURRICANE, MOVE_TAILWIND, MOVE_PROTECT, MOVE_THUNDERBOLT},
+        .item = ITEM_LIFE_ORB,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_TIMID,
+        .ability = ABILITY_COMPETITIVE,
+        .statPoints = {2, 0, 0, 32, 0, 32},
+    },
+    [SPECIES_MASCHIFF] =
+    {
+        .moves = {MOVE_CRUNCH, MOVE_JAW_LOCK, MOVE_LASH_OUT, MOVE_PROTECT},
+        .item = ITEM_EVIOLITE,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_ADAMANT,
+        .ability = ABILITY_INTIMIDATE,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_MABOSSTIFF] =
+    {
+        .moves = {MOVE_CRUNCH, MOVE_WILD_CHARGE, MOVE_PSYCHIC_FANGS, MOVE_PLAY_ROUGH},
+        .item = ITEM_CHOICE_BAND,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_ADAMANT,
+        .ability = ABILITY_INTIMIDATE,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_SHROODLE] =
+    {
+        .moves = {MOVE_DOUBLE_EDGE, MOVE_GUNK_SHOT, MOVE_POISON_JAB, MOVE_PROTECT},
+        .item = ITEM_EVIOLITE,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_ADAMANT,
+        .ability = ABILITY_PRANKSTER,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_GRAFAIAI] =
+    {
+        .moves = {MOVE_SUPER_FANG, MOVE_KNOCK_OFF, MOVE_U_TURN, MOVE_GUNK_SHOT},
+        .item = ITEM_ASSAULT_VEST,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_CAREFUL,
+        .ability = ABILITY_POISON_TOUCH,
+        .statPoints = {32, 0, 2, 0, 32, 0},
+    },
+    [SPECIES_BRAMBLIN] =
+    {
+        .moves = {MOVE_POWER_WHIP, MOVE_POLTERGEIST, MOVE_SEED_BOMB, MOVE_PROTECT},
+        .item = ITEM_EVIOLITE,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_ADAMANT,
+        .ability = ABILITY_WIND_RIDER,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_BRAMBLEGHAST] =
+    {
+        .moves = {MOVE_PROTECT, MOVE_POWER_WHIP, MOVE_POLTERGEIST, MOVE_STRENGTH_SAP},
+        .item = ITEM_SITRUS_BERRY,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_CAREFUL,
+        .ability = ABILITY_WIND_RIDER,
+        .statPoints = {32, 0, 2, 0, 32, 0},
+    },
+    [SPECIES_TOEDSCOOL] =
+    {
+        .moves = {MOVE_POWER_WHIP, MOVE_SPORE, MOVE_RAGE_POWDER, MOVE_PROTECT},
+        .item = ITEM_EVIOLITE,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_BRAVE,
+        .ability = ABILITY_MYCELIUM_MIGHT,
+        .statPoints = {32, 32, 2, 0, 0, 0},
+    },
+    [SPECIES_TOEDSCRUEL] =
+    {
+        .moves = {MOVE_EARTH_POWER, MOVE_RAGE_POWDER, MOVE_SPORE, MOVE_KNOCK_OFF},
+        .item = ITEM_SITRUS_BERRY,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_BOLD,
+        .ability = ABILITY_MYCELIUM_MIGHT,
+        .statPoints = {32, 0, 32, 0, 2, 0},
+    },
+    [SPECIES_KLAWF] =
+    {
+        .moves = {MOVE_PROTECT, MOVE_ROCK_SLIDE, MOVE_HIGH_HORSEPOWER, MOVE_KNOCK_OFF},
+        .item = ITEM_LIFE_ORB,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_ADAMANT,
+        .ability = ABILITY_REGENERATOR,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_SCOVILLAIN] =
+    {
+        .moves = {MOVE_RAGE_POWDER, MOVE_PROTECT, MOVE_OVERHEAT, MOVE_GIGA_DRAIN},
+        .item = ITEM_NONE,
+        .requiredItem = ITEM_SCOVILLAINITE,
+        .nature = NATURE_BOLD,
+        .ability = ABILITY_SPICY_SPRAY,
+        .statPoints = {32, 0, 32, 0, 2, 0},
+    },
+    [SPECIES_RELLOR] =
+    {
+        .moves = {MOVE_LEECH_LIFE, MOVE_LUNGE, MOVE_X_SCISSOR, MOVE_PROTECT},
+        .item = ITEM_EVIOLITE,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_ADAMANT,
+        .ability = ABILITY_COMPOUND_EYES,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_RABSCA] =
+    {
+        .moves = {MOVE_REVIVAL_BLESSING, MOVE_STRUGGLE_BUG, MOVE_PSYCHIC, MOVE_TRICK_ROOM},
+        .item = ITEM_SITRUS_BERRY,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_QUIET,
+        .ability = ABILITY_SYNCHRONIZE,
+        .statPoints = {32, 0, 2, 32, 0, 0},
+    },
+    [SPECIES_ESPATHRA] =
+    {
+        .moves = {MOVE_LUMINA_CRASH, MOVE_PROTECT, MOVE_CALM_MIND, MOVE_BATON_PASS},
+        .item = ITEM_FOCUS_SASH,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_TIMID,
+        .ability = ABILITY_SPEED_BOOST,
+        .statPoints = {2, 0, 0, 32, 0, 32},
+    },
+    [SPECIES_TINKATUFF] =
+    {
+        .moves = {MOVE_PLAY_ROUGH, MOVE_METAL_CLAW, MOVE_FOUL_PLAY, MOVE_PROTECT},
+        .item = ITEM_EVIOLITE,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_ADAMANT,
+        .ability = ABILITY_MOLD_BREAKER,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_TINKATON] =
+    {
+        .moves = {MOVE_GIGATON_HAMMER, MOVE_FAKE_OUT, MOVE_ENCORE, MOVE_PROTECT},
+        .item = ITEM_SHUCA_BERRY,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_JOLLY,
+        .ability = ABILITY_MOLD_BREAKER,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_WIGLETT] =
+    {
+        .moves = {MOVE_LIQUIDATION, MOVE_AQUA_JET, MOVE_FOUL_PLAY, MOVE_PROTECT},
+        .item = ITEM_EVIOLITE,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_JOLLY,
+        .ability = ABILITY_GOOEY,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_WUGTRIO] =
+    {
+        .moves = {MOVE_AQUA_JET, MOVE_THROAT_CHOP, MOVE_LIQUIDATION, MOVE_STOMPING_TANTRUM},
+        .item = ITEM_CHOICE_BAND,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_JOLLY,
+        .ability = ABILITY_GOOEY,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_BOMBIRDIER] =
+    {
+        .moves = {MOVE_BRAVE_BIRD, MOVE_ROCK_SLIDE, MOVE_KNOCK_OFF, MOVE_PROTECT},
+        .item = ITEM_LIFE_ORB,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_ADAMANT,
+        .ability = ABILITY_ROCKY_PAYLOAD,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_VAROOM] =
+    {
+        .moves = {MOVE_GUNK_SHOT, MOVE_SPIN_OUT, MOVE_IRON_HEAD, MOVE_PROTECT},
+        .item = ITEM_EVIOLITE,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_ADAMANT,
+        .ability = ABILITY_OVERCOAT,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_REVAVROOM] =
+    {
+        .moves = {MOVE_IRON_HEAD, MOVE_GUNK_SHOT, MOVE_PROTECT, MOVE_PARTING_SHOT},
+        .item = ITEM_LIFE_ORB,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_JOLLY,
+        .ability = ABILITY_FILTER,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_CYCLIZAR] =
+    {
+        .moves = {MOVE_DOUBLE_EDGE, MOVE_BREAKING_SWIPE, MOVE_KNOCK_OFF, MOVE_SHED_TAIL},
+        .item = ITEM_SITRUS_BERRY,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_CAREFUL,
+        .ability = ABILITY_REGENERATOR,
+        .statPoints = {32, 0, 2, 0, 32, 0},
+    },
+    [SPECIES_HOUNDSTONE] =
+    {
+        .moves = {MOVE_LAST_RESPECTS, MOVE_PROTECT, MOVE_WILL_O_WISP, MOVE_ALLY_SWITCH},
+        .item = ITEM_SITRUS_BERRY,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_ADAMANT,
+        .ability = ABILITY_SAND_RUSH,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_FLAMIGO] =
+    {
+        .moves = {MOVE_U_TURN, MOVE_CLOSE_COMBAT, MOVE_BRAVE_BIRD, MOVE_THROAT_CHOP},
+        .item = ITEM_CHOICE_BAND,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_JOLLY,
+        .ability = ABILITY_SCRAPPY,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_CETODDLE] =
+    {
+        .moves = {MOVE_ICE_SPINNER, MOVE_ICICLE_CRASH, MOVE_ICE_FANG, MOVE_PROTECT},
+        .item = ITEM_EVIOLITE,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_ADAMANT,
+        .ability = ABILITY_THICK_FAT,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_CETITAN] =
+    {
+        .moves = {MOVE_ICICLE_CRASH, MOVE_LIQUIDATION, MOVE_ICE_SHARD, MOVE_HIGH_HORSEPOWER},
+        .item = ITEM_LIFE_ORB,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_ADAMANT,
+        .ability = ABILITY_SHEER_FORCE,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_VELUZA] =
+    {
+        .moves = {MOVE_AQUA_CUTTER, MOVE_PSYCHO_CUT, MOVE_NIGHT_SLASH, MOVE_AQUA_JET},
+        .item = ITEM_CHOICE_BAND,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_ADAMANT,
+        .ability = ABILITY_SHARPNESS,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_CLODSIRE] =
+    {
+        .moves = {MOVE_TOXIC_SPIKES, MOVE_RECOVER, MOVE_HIGH_HORSEPOWER, MOVE_GUNK_SHOT},
+        .item = ITEM_LEFTOVERS,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_ADAMANT,
+        .ability = ABILITY_WATER_ABSORB,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_DUDUNSPARCE] =
+    {
+        .moves = {MOVE_PROTECT, MOVE_BOOMBURST, MOVE_EARTH_POWER, MOVE_HELPING_HAND},
+        .item = ITEM_SITRUS_BERRY,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_MODEST,
+        .ability = ABILITY_RATTLED,
+        .statPoints = {2, 0, 0, 32, 0, 32},
+    },
+    [SPECIES_SCREAM_TAIL] =
+    {
+        .moves = {MOVE_THUNDER_WAVE, MOVE_DISABLE, MOVE_PLAY_ROUGH, MOVE_HOWL},
+        .item = ITEM_SITRUS_BERRY,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_IMPISH,
+        .ability = ABILITY_PROTOSYNTHESIS,
+        .statPoints = {32, 0, 32, 0, 2, 0},
+    },
+    [SPECIES_BRUTE_BONNET] =
+    {
+        .moves = {MOVE_SPORE, MOVE_SEED_BOMB, MOVE_SUCKER_PUNCH, MOVE_RAGE_POWDER},
+        .item = ITEM_ROCKY_HELMET,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_CAREFUL,
+        .ability = ABILITY_PROTOSYNTHESIS,
+        .statPoints = {32, 0, 2, 0, 32, 0},
+    },
+    [SPECIES_SLITHER_WING] =
+    {
+        .moves = {MOVE_FIRST_IMPRESSION, MOVE_WILD_CHARGE, MOVE_FLARE_BLITZ, MOVE_CLOSE_COMBAT},
+        .item = ITEM_LIFE_ORB,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_ADAMANT,
+        .ability = ABILITY_PROTOSYNTHESIS,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_SANDY_SHOCKS] =
+    {
+        .moves = {MOVE_EARTH_POWER, MOVE_THUNDERBOLT, MOVE_VOLT_SWITCH, MOVE_PROTECT},
+        .item = ITEM_LIFE_ORB,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_TIMID,
+        .ability = ABILITY_PROTOSYNTHESIS,
+        .statPoints = {2, 0, 0, 32, 0, 32},
+    },
+    [SPECIES_IRON_TREADS] =
+    {
+        .moves = {MOVE_RAPID_SPIN, MOVE_STONE_EDGE, MOVE_IRON_HEAD, MOVE_HIGH_HORSEPOWER},
+        .item = ITEM_ASSAULT_VEST,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_JOLLY,
+        .ability = ABILITY_QUARK_DRIVE,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_IRON_JUGULIS] =
+    {
+        .moves = {MOVE_HURRICANE, MOVE_EARTH_POWER, MOVE_DARK_PULSE, MOVE_TAUNT},
+        .item = ITEM_BOOSTER_ENERGY,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_TIMID,
+        .ability = ABILITY_QUARK_DRIVE,
+        .statPoints = {2, 0, 0, 32, 0, 32},
+    },
+    [SPECIES_IRON_MOTH] =
+    {
+        .moves = {MOVE_SLUDGE_WAVE, MOVE_ENERGY_BALL, MOVE_FIERY_DANCE, MOVE_PROTECT},
+        .item = ITEM_BOOSTER_ENERGY,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_TIMID,
+        .ability = ABILITY_QUARK_DRIVE,
+        .statPoints = {2, 0, 0, 32, 0, 32},
+    },
+    [SPECIES_IRON_THORNS] =
+    {
+        .moves = {MOVE_WILD_CHARGE, MOVE_HIGH_HORSEPOWER, MOVE_ROCK_SLIDE, MOVE_DRAGON_DANCE},
+        .item = ITEM_CLEAR_AMULET,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_ADAMANT,
+        .ability = ABILITY_QUARK_DRIVE,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_FRIGIBAX] =
+    {
+        .moves = {MOVE_OUTRAGE, MOVE_DRAGON_CLAW, MOVE_ICICLE_CRASH, MOVE_PROTECT},
+        .item = ITEM_EVIOLITE,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_ADAMANT,
+        .ability = ABILITY_THERMAL_EXCHANGE,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_ARCTIBAX] =
+    {
+        .moves = {MOVE_OUTRAGE, MOVE_DRAGON_CLAW, MOVE_ICICLE_CRASH, MOVE_PROTECT},
+        .item = ITEM_EVIOLITE,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_ADAMANT,
+        .ability = ABILITY_THERMAL_EXCHANGE,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_BAXCALIBUR] =
+    {
+        .moves = {MOVE_ICICLE_SPEAR, MOVE_SWORDS_DANCE, MOVE_PROTECT, MOVE_SCALE_SHOT},
+        .item = ITEM_LOADED_DICE,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_ADAMANT,
+        .ability = ABILITY_THERMAL_EXCHANGE,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_IRON_LEAVES] =
+    {
+        .moves = {MOVE_LEAF_BLADE, MOVE_CLOSE_COMBAT, MOVE_PSYBLADE, MOVE_PROTECT},
+        .item = ITEM_BOOSTER_ENERGY,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_JOLLY,
+        .ability = ABILITY_QUARK_DRIVE,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_DIPPLIN] =
+    {
+        .moves = {MOVE_RECOVER, MOVE_DRAGON_PULSE, MOVE_POLLEN_PUFF, MOVE_SYRUP_BOMB},
+        .item = ITEM_EVIOLITE,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_MODEST,
+        .ability = ABILITY_STICKY_HOLD,
+        .statPoints = {2, 0, 0, 32, 0, 32},
+    },
+    [SPECIES_SINISTCHA] =
+    {
+        .moves = {MOVE_MATCHA_GOTCHA, MOVE_RAGE_POWDER, MOVE_PROTECT, MOVE_TRICK_ROOM},
+        .item = ITEM_KASIB_BERRY,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_BOLD,
+        .ability = ABILITY_HOSPITALITY,
+        .statPoints = {32, 0, 32, 0, 2, 0},
+    },
+    [SPECIES_HYDRAPPLE] =
+    {
+        .moves = {MOVE_FICKLE_BEAM, MOVE_EARTH_POWER, MOVE_PROTECT, MOVE_GIGA_DRAIN},
+        .item = ITEM_LIFE_ORB,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_BOLD,
+        .ability = ABILITY_SUPERSWEET_SYRUP,
+        .statPoints = {32, 0, 32, 0, 2, 0},
+    },
+    [SPECIES_IRON_BOULDER] =
+    {
+        .moves = {MOVE_ZEN_HEADBUTT, MOVE_PROTECT, MOVE_CLOSE_COMBAT, MOVE_MIGHTY_CLEAVE},
+        .item = ITEM_BOOSTER_ENERGY,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_JOLLY,
+        .ability = ABILITY_QUARK_DRIVE,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_IRON_CROWN] =
+    {
+        .moves = {MOVE_FOCUS_BLAST, MOVE_TACHYON_CUTTER, MOVE_PSYCHIC, MOVE_PROTECT},
+        .item = ITEM_BOOSTER_ENERGY,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_TIMID,
+        .ability = ABILITY_QUARK_DRIVE,
+        .statPoints = {2, 0, 0, 32, 0, 32},
+    },
+    [SPECIES_ARCANINE_HISUI] =
+    {
+        .moves = {MOVE_FLARE_BLITZ, MOVE_EXTREMESPEED, MOVE_HEAD_SMASH, MOVE_PROTECT},
+        .item = ITEM_FOCUS_SASH,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_JOLLY,
+        .ability = ABILITY_ROCK_HEAD,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_TYPHLOSION_HISUI] =
+    {
+        .moves = {MOVE_ERUPTION, MOVE_SHADOW_BALL, MOVE_HEAT_WAVE, MOVE_OVERHEAT},
+        .item = ITEM_CHOICE_SCARF,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_MODEST,
+        .ability = ABILITY_FRISK,
+        .statPoints = {2, 0, 0, 32, 0, 32},
+    },
+    [SPECIES_SAMUROTT_HISUI] =
+    {
+        .moves = {MOVE_SACRED_SWORD, MOVE_AQUA_CUTTER, MOVE_CEASELESS_EDGE, MOVE_SUCKER_PUNCH},
+        .item = ITEM_CHOICE_SCARF,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_ADAMANT,
+        .ability = ABILITY_SHARPNESS,
+        .statPoints = {2, 32, 0, 0, 0, 32},
+    },
+    [SPECIES_ZOROARK_HISUI] =
+    {
+        .moves = {MOVE_SHADOW_BALL, MOVE_ICY_WIND, MOVE_HYPER_VOICE, MOVE_BITTER_MALICE},
+        .item = ITEM_CHOICE_SCARF,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_TIMID,
+        .ability = ABILITY_ILLUSION,
+        .statPoints = {2, 0, 0, 32, 0, 32},
+    },
+    [SPECIES_GOODRA_HISUI] =
+    {
+        .moves = {MOVE_BODY_PRESS, MOVE_LIFE_DEW, MOVE_SHELTER, MOVE_HEAVY_SLAM},
+        .item = ITEM_LEFTOVERS,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_BRAVE,
+        .ability = ABILITY_SHELL_ARMOR,
+        .statPoints = {32, 32, 2, 0, 0, 0},
+    },
+    [SPECIES_AVALUGG_HISUI] =
+    {
+        .moves = {MOVE_ROCK_SLIDE, MOVE_MOUNTAIN_GALE, MOVE_BODY_PRESS, MOVE_WIDE_GUARD},
+        .item = ITEM_WIDE_LENS,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_BRAVE,
+        .ability = ABILITY_STURDY,
+        .statPoints = {32, 32, 2, 0, 0, 0},
+    },
+    [SPECIES_DECIDUEYE_HISUI] =
+    {
+        .moves = {MOVE_LEAF_BLADE, MOVE_PROTECT, MOVE_TRIPLE_ARROWS, MOVE_SUCKER_PUNCH},
+        .item = ITEM_SCOPE_LENS,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_BRAVE,
+        .ability = ABILITY_SCRAPPY,
+        .statPoints = {32, 32, 2, 0, 0, 0},
+    },
+    [SPECIES_BASCULEGION_F] =
+    {
+        .moves = {MOVE_SHADOW_BALL, MOVE_MUDDY_WATER, MOVE_PROTECT, MOVE_AQUA_JET},
+        .item = ITEM_LIFE_ORB,
+        .requiredItem = ITEM_NONE,
+        .nature = NATURE_MODEST,
+        .ability = ABILITY_SWIFT_SWIM,
+        .statPoints = {2, 0, 0, 32, 0, 32},
+    },
 };
 
 const u8 *const gEmeraldChampionsDefaultBattleSetNames[NUM_SPECIES] =
@@ -10528,11 +11679,127 @@ const u8 *const gEmeraldChampionsDefaultBattleSetNames[NUM_SPECIES] =
     [SPECIES_TATSUGIRI] = sEmeraldChampionsSetName_SPECIES_TATSUGIRI,
     [SPECIES_FLUTTER_MANE] = sEmeraldChampionsSetName_SPECIES_FLUTTER_MANE,
     [SPECIES_IRON_BUNDLE] = sEmeraldChampionsSetName_SPECIES_IRON_BUNDLE,
+    [SPECIES_GIMMIGHOUL] = sEmeraldChampionsSetName_SPECIES_GIMMIGHOUL,
     [SPECIES_CHIEN_PAO] = sEmeraldChampionsSetName_SPECIES_CHIEN_PAO,
     [SPECIES_TING_LU] = sEmeraldChampionsSetName_SPECIES_TING_LU,
     [SPECIES_CHI_YU] = sEmeraldChampionsSetName_SPECIES_CHI_YU,
     [SPECIES_ROARING_MOON] = sEmeraldChampionsSetName_SPECIES_ROARING_MOON,
     [SPECIES_RAGING_BOLT] = sEmeraldChampionsSetName_SPECIES_RAGING_BOLT,
+    [SPECIES_QUAXLY] = sEmeraldChampionsSetName_SPECIES_QUAXLY,
+    [SPECIES_QUAXWELL] = sEmeraldChampionsSetName_SPECIES_QUAXWELL,
+    [SPECIES_QUAQUAVAL] = sEmeraldChampionsSetName_SPECIES_QUAQUAVAL,
+    [SPECIES_ENAMORUS] = sEmeraldChampionsSetName_SPECIES_ENAMORUS,
+    [SPECIES_FEZANDIPITI] = sEmeraldChampionsSetName_SPECIES_FEZANDIPITI,
+    [SPECIES_KORAIDON] = sEmeraldChampionsSetName_SPECIES_KORAIDON,
+    [SPECIES_MIRAIDON] = sEmeraldChampionsSetName_SPECIES_MIRAIDON,
+    [SPECIES_MUNKIDORI] = sEmeraldChampionsSetName_SPECIES_MUNKIDORI,
+    [SPECIES_OKIDOGI] = sEmeraldChampionsSetName_SPECIES_OKIDOGI,
+    [SPECIES_PECHARUNT] = sEmeraldChampionsSetName_SPECIES_PECHARUNT,
+    [SPECIES_TERAPAGOS] = sEmeraldChampionsSetName_SPECIES_TERAPAGOS,
+    [SPECIES_WO_CHIEN] = sEmeraldChampionsSetName_SPECIES_WO_CHIEN,
+    [SPECIES_BASCULIN_WHITE_STRIPED] = sEmeraldChampionsSetName_SPECIES_BASCULIN_WHITE_STRIPED,
+    [SPECIES_CAPSAKID] = sEmeraldChampionsSetName_SPECIES_CAPSAKID,
+    [SPECIES_CHARCADET] = sEmeraldChampionsSetName_SPECIES_CHARCADET,
+    [SPECIES_FLITTLE] = sEmeraldChampionsSetName_SPECIES_FLITTLE,
+    [SPECIES_GREAVARD] = sEmeraldChampionsSetName_SPECIES_GREAVARD,
+    [SPECIES_GROWLITHE_HISUI] = sEmeraldChampionsSetName_SPECIES_GROWLITHE_HISUI,
+    [SPECIES_ORTHWORM] = sEmeraldChampionsSetName_SPECIES_ORTHWORM,
+    [SPECIES_POLTCHAGEIST] = sEmeraldChampionsSetName_SPECIES_POLTCHAGEIST,
+    [SPECIES_QWILFISH_HISUI] = sEmeraldChampionsSetName_SPECIES_QWILFISH_HISUI,
+    [SPECIES_SNEASEL_HISUI] = sEmeraldChampionsSetName_SPECIES_SNEASEL_HISUI,
+    [SPECIES_TADBULB] = sEmeraldChampionsSetName_SPECIES_TADBULB,
+    [SPECIES_TANDEMAUS] = sEmeraldChampionsSetName_SPECIES_TANDEMAUS,
+    [SPECIES_TAUROS_PALDEA_COMBAT] = sEmeraldChampionsSetName_SPECIES_TAUROS_PALDEA_COMBAT,
+    [SPECIES_TAUROS_PALDEA_BLAZE] = sEmeraldChampionsSetName_SPECIES_TAUROS_PALDEA_BLAZE,
+    [SPECIES_TAUROS_PALDEA_AQUA] = sEmeraldChampionsSetName_SPECIES_TAUROS_PALDEA_AQUA,
+    [SPECIES_TINKATINK] = sEmeraldChampionsSetName_SPECIES_TINKATINK,
+    [SPECIES_ZORUA_HISUI] = sEmeraldChampionsSetName_SPECIES_ZORUA_HISUI,
+    [SPECIES_VOLTORB_HISUI] = sEmeraldChampionsSetName_SPECIES_VOLTORB_HISUI,
+    [SPECIES_ELECTRODE_HISUI] = sEmeraldChampionsSetName_SPECIES_ELECTRODE_HISUI,
+    [SPECIES_LILLIGANT_HISUI] = sEmeraldChampionsSetName_SPECIES_LILLIGANT_HISUI,
+    [SPECIES_BRAVIARY_HISUI] = sEmeraldChampionsSetName_SPECIES_BRAVIARY_HISUI,
+    [SPECIES_SLIGGOO_HISUI] = sEmeraldChampionsSetName_SPECIES_SLIGGOO_HISUI,
+    [SPECIES_URSALUNA_BLOODMOON] = sEmeraldChampionsSetName_SPECIES_URSALUNA_BLOODMOON,
+    [SPECIES_WYRDEER] = sEmeraldChampionsSetName_SPECIES_WYRDEER,
+    [SPECIES_KLEAVOR] = sEmeraldChampionsSetName_SPECIES_KLEAVOR,
+    [SPECIES_URSALUNA] = sEmeraldChampionsSetName_SPECIES_URSALUNA,
+    [SPECIES_BASCULEGION] = sEmeraldChampionsSetName_SPECIES_BASCULEGION,
+    [SPECIES_SNEASLER] = sEmeraldChampionsSetName_SPECIES_SNEASLER,
+    [SPECIES_OVERQWIL] = sEmeraldChampionsSetName_SPECIES_OVERQWIL,
+    [SPECIES_LECHONK] = sEmeraldChampionsSetName_SPECIES_LECHONK,
+    [SPECIES_OINKOLOGNE] = sEmeraldChampionsSetName_SPECIES_OINKOLOGNE,
+    [SPECIES_TAROUNTULA] = sEmeraldChampionsSetName_SPECIES_TAROUNTULA,
+    [SPECIES_SPIDOPS] = sEmeraldChampionsSetName_SPECIES_SPIDOPS,
+    [SPECIES_NYMBLE] = sEmeraldChampionsSetName_SPECIES_NYMBLE,
+    [SPECIES_LOKIX] = sEmeraldChampionsSetName_SPECIES_LOKIX,
+    [SPECIES_PAWMI] = sEmeraldChampionsSetName_SPECIES_PAWMI,
+    [SPECIES_PAWMO] = sEmeraldChampionsSetName_SPECIES_PAWMO,
+    [SPECIES_PAWMOT] = sEmeraldChampionsSetName_SPECIES_PAWMOT,
+    [SPECIES_MAUSHOLD] = sEmeraldChampionsSetName_SPECIES_MAUSHOLD,
+    [SPECIES_FIDOUGH] = sEmeraldChampionsSetName_SPECIES_FIDOUGH,
+    [SPECIES_DACHSBUN] = sEmeraldChampionsSetName_SPECIES_DACHSBUN,
+    [SPECIES_SMOLIV] = sEmeraldChampionsSetName_SPECIES_SMOLIV,
+    [SPECIES_DOLLIV] = sEmeraldChampionsSetName_SPECIES_DOLLIV,
+    [SPECIES_ARBOLIVA] = sEmeraldChampionsSetName_SPECIES_ARBOLIVA,
+    [SPECIES_SQUAWKABILLY] = sEmeraldChampionsSetName_SPECIES_SQUAWKABILLY,
+    [SPECIES_ARMAROUGE] = sEmeraldChampionsSetName_SPECIES_ARMAROUGE,
+    [SPECIES_CERULEDGE] = sEmeraldChampionsSetName_SPECIES_CERULEDGE,
+    [SPECIES_BELLIBOLT] = sEmeraldChampionsSetName_SPECIES_BELLIBOLT,
+    [SPECIES_WATTREL] = sEmeraldChampionsSetName_SPECIES_WATTREL,
+    [SPECIES_KILOWATTREL] = sEmeraldChampionsSetName_SPECIES_KILOWATTREL,
+    [SPECIES_MASCHIFF] = sEmeraldChampionsSetName_SPECIES_MASCHIFF,
+    [SPECIES_MABOSSTIFF] = sEmeraldChampionsSetName_SPECIES_MABOSSTIFF,
+    [SPECIES_SHROODLE] = sEmeraldChampionsSetName_SPECIES_SHROODLE,
+    [SPECIES_GRAFAIAI] = sEmeraldChampionsSetName_SPECIES_GRAFAIAI,
+    [SPECIES_BRAMBLIN] = sEmeraldChampionsSetName_SPECIES_BRAMBLIN,
+    [SPECIES_BRAMBLEGHAST] = sEmeraldChampionsSetName_SPECIES_BRAMBLEGHAST,
+    [SPECIES_TOEDSCOOL] = sEmeraldChampionsSetName_SPECIES_TOEDSCOOL,
+    [SPECIES_TOEDSCRUEL] = sEmeraldChampionsSetName_SPECIES_TOEDSCRUEL,
+    [SPECIES_KLAWF] = sEmeraldChampionsSetName_SPECIES_KLAWF,
+    [SPECIES_SCOVILLAIN] = sEmeraldChampionsSetName_SPECIES_SCOVILLAIN,
+    [SPECIES_RELLOR] = sEmeraldChampionsSetName_SPECIES_RELLOR,
+    [SPECIES_RABSCA] = sEmeraldChampionsSetName_SPECIES_RABSCA,
+    [SPECIES_ESPATHRA] = sEmeraldChampionsSetName_SPECIES_ESPATHRA,
+    [SPECIES_TINKATUFF] = sEmeraldChampionsSetName_SPECIES_TINKATUFF,
+    [SPECIES_TINKATON] = sEmeraldChampionsSetName_SPECIES_TINKATON,
+    [SPECIES_WIGLETT] = sEmeraldChampionsSetName_SPECIES_WIGLETT,
+    [SPECIES_WUGTRIO] = sEmeraldChampionsSetName_SPECIES_WUGTRIO,
+    [SPECIES_BOMBIRDIER] = sEmeraldChampionsSetName_SPECIES_BOMBIRDIER,
+    [SPECIES_VAROOM] = sEmeraldChampionsSetName_SPECIES_VAROOM,
+    [SPECIES_REVAVROOM] = sEmeraldChampionsSetName_SPECIES_REVAVROOM,
+    [SPECIES_CYCLIZAR] = sEmeraldChampionsSetName_SPECIES_CYCLIZAR,
+    [SPECIES_HOUNDSTONE] = sEmeraldChampionsSetName_SPECIES_HOUNDSTONE,
+    [SPECIES_FLAMIGO] = sEmeraldChampionsSetName_SPECIES_FLAMIGO,
+    [SPECIES_CETODDLE] = sEmeraldChampionsSetName_SPECIES_CETODDLE,
+    [SPECIES_CETITAN] = sEmeraldChampionsSetName_SPECIES_CETITAN,
+    [SPECIES_VELUZA] = sEmeraldChampionsSetName_SPECIES_VELUZA,
+    [SPECIES_CLODSIRE] = sEmeraldChampionsSetName_SPECIES_CLODSIRE,
+    [SPECIES_DUDUNSPARCE] = sEmeraldChampionsSetName_SPECIES_DUDUNSPARCE,
+    [SPECIES_SCREAM_TAIL] = sEmeraldChampionsSetName_SPECIES_SCREAM_TAIL,
+    [SPECIES_BRUTE_BONNET] = sEmeraldChampionsSetName_SPECIES_BRUTE_BONNET,
+    [SPECIES_SLITHER_WING] = sEmeraldChampionsSetName_SPECIES_SLITHER_WING,
+    [SPECIES_SANDY_SHOCKS] = sEmeraldChampionsSetName_SPECIES_SANDY_SHOCKS,
+    [SPECIES_IRON_TREADS] = sEmeraldChampionsSetName_SPECIES_IRON_TREADS,
+    [SPECIES_IRON_JUGULIS] = sEmeraldChampionsSetName_SPECIES_IRON_JUGULIS,
+    [SPECIES_IRON_MOTH] = sEmeraldChampionsSetName_SPECIES_IRON_MOTH,
+    [SPECIES_IRON_THORNS] = sEmeraldChampionsSetName_SPECIES_IRON_THORNS,
+    [SPECIES_FRIGIBAX] = sEmeraldChampionsSetName_SPECIES_FRIGIBAX,
+    [SPECIES_ARCTIBAX] = sEmeraldChampionsSetName_SPECIES_ARCTIBAX,
+    [SPECIES_BAXCALIBUR] = sEmeraldChampionsSetName_SPECIES_BAXCALIBUR,
+    [SPECIES_IRON_LEAVES] = sEmeraldChampionsSetName_SPECIES_IRON_LEAVES,
+    [SPECIES_DIPPLIN] = sEmeraldChampionsSetName_SPECIES_DIPPLIN,
+    [SPECIES_SINISTCHA] = sEmeraldChampionsSetName_SPECIES_SINISTCHA,
+    [SPECIES_HYDRAPPLE] = sEmeraldChampionsSetName_SPECIES_HYDRAPPLE,
+    [SPECIES_IRON_BOULDER] = sEmeraldChampionsSetName_SPECIES_IRON_BOULDER,
+    [SPECIES_IRON_CROWN] = sEmeraldChampionsSetName_SPECIES_IRON_CROWN,
+    [SPECIES_ARCANINE_HISUI] = sEmeraldChampionsSetName_SPECIES_ARCANINE_HISUI,
+    [SPECIES_TYPHLOSION_HISUI] = sEmeraldChampionsSetName_SPECIES_TYPHLOSION_HISUI,
+    [SPECIES_SAMUROTT_HISUI] = sEmeraldChampionsSetName_SPECIES_SAMUROTT_HISUI,
+    [SPECIES_ZOROARK_HISUI] = sEmeraldChampionsSetName_SPECIES_ZOROARK_HISUI,
+    [SPECIES_GOODRA_HISUI] = sEmeraldChampionsSetName_SPECIES_GOODRA_HISUI,
+    [SPECIES_AVALUGG_HISUI] = sEmeraldChampionsSetName_SPECIES_AVALUGG_HISUI,
+    [SPECIES_DECIDUEYE_HISUI] = sEmeraldChampionsSetName_SPECIES_DECIDUEYE_HISUI,
+    [SPECIES_BASCULEGION_F] = sEmeraldChampionsSetName_SPECIES_BASCULEGION_F,
 };
 
 const struct EmeraldChampionsBattleSetRange gEmeraldChampionsBattleSetRanges[NUM_SPECIES] =
@@ -10689,12 +11956,47 @@ const struct EmeraldChampionsBattleSetRange gEmeraldChampionsBattleSetRanges[NUM
     [SPECIES_IRON_BUNDLE] = {.offset = 156, .count = 1},
     [SPECIES_IRON_HANDS] = {.offset = 157, .count = 1},
     [SPECIES_GLIMMORA] = {.offset = 158, .count = 1},
-    [SPECIES_CHIEN_PAO] = {.offset = 159, .count = 1},
-    [SPECIES_TING_LU] = {.offset = 160, .count = 1},
-    [SPECIES_CHI_YU] = {.offset = 161, .count = 1},
-    [SPECIES_ROARING_MOON] = {.offset = 162, .count = 1},
-    [SPECIES_OGERPON] = {.offset = 163, .count = 1},
-    [SPECIES_RAGING_BOLT] = {.offset = 164, .count = 2},
+    [SPECIES_GIMMIGHOUL] = {.offset = 159, .count = 1},
+    [SPECIES_CHIEN_PAO] = {.offset = 160, .count = 1},
+    [SPECIES_TING_LU] = {.offset = 161, .count = 1},
+    [SPECIES_CHI_YU] = {.offset = 162, .count = 1},
+    [SPECIES_ROARING_MOON] = {.offset = 163, .count = 1},
+    [SPECIES_OGERPON] = {.offset = 164, .count = 1},
+    [SPECIES_RAGING_BOLT] = {.offset = 165, .count = 2},
+    [SPECIES_BASCULIN_WHITE_STRIPED] = {.offset = 167, .count = 1},
+    [SPECIES_CAPSAKID] = {.offset = 168, .count = 1},
+    [SPECIES_CHARCADET] = {.offset = 169, .count = 1},
+    [SPECIES_FLITTLE] = {.offset = 170, .count = 1},
+    [SPECIES_GREAVARD] = {.offset = 171, .count = 1},
+    [SPECIES_GROWLITHE_HISUI] = {.offset = 172, .count = 1},
+    [SPECIES_ORTHWORM] = {.offset = 173, .count = 1},
+    [SPECIES_POLTCHAGEIST] = {.offset = 174, .count = 1},
+    [SPECIES_QWILFISH_HISUI] = {.offset = 175, .count = 1},
+    [SPECIES_SNEASEL_HISUI] = {.offset = 176, .count = 1},
+    [SPECIES_TADBULB] = {.offset = 177, .count = 1},
+    [SPECIES_TANDEMAUS] = {.offset = 178, .count = 1},
+    [SPECIES_TAUROS_PALDEA_COMBAT] = {.offset = 179, .count = 1},
+    [SPECIES_TAUROS_PALDEA_BLAZE] = {.offset = 180, .count = 1},
+    [SPECIES_TAUROS_PALDEA_AQUA] = {.offset = 181, .count = 1},
+    [SPECIES_TINKATINK] = {.offset = 182, .count = 1},
+    [SPECIES_ZORUA_HISUI] = {.offset = 183, .count = 1},
+    [SPECIES_BASCULEGION] = {.offset = 184, .count = 1},
+    [SPECIES_OINKOLOGNE] = {.offset = 185, .count = 1},
+    [SPECIES_KILOWATTREL] = {.offset = 186, .count = 1},
+    [SPECIES_GRAFAIAI] = {.offset = 187, .count = 1},
+    [SPECIES_BRAMBLEGHAST] = {.offset = 188, .count = 1},
+    [SPECIES_SCOVILLAIN] = {.offset = 189, .count = 1},
+    [SPECIES_RABSCA] = {.offset = 190, .count = 1},
+    [SPECIES_BOMBIRDIER] = {.offset = 191, .count = 1},
+    [SPECIES_REVAVROOM] = {.offset = 192, .count = 1},
+    [SPECIES_CYCLIZAR] = {.offset = 193, .count = 1},
+    [SPECIES_DUDUNSPARCE] = {.offset = 194, .count = 1},
+    [SPECIES_BRUTE_BONNET] = {.offset = 195, .count = 1},
+    [SPECIES_IRON_MOTH] = {.offset = 196, .count = 1},
+    [SPECIES_BAXCALIBUR] = {.offset = 197, .count = 1},
+    [SPECIES_IRON_LEAVES] = {.offset = 198, .count = 2},
+    [SPECIES_IRON_BOULDER] = {.offset = 200, .count = 1},
+    [SPECIES_IRON_CROWN] = {.offset = 201, .count = 2},
 };
 
 const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternatives[] =
@@ -11391,7 +12693,7 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .item = ITEM_SILK_SCARF,
             .requiredItem = ITEM_NONE,
             .nature = NATURE_ADAMANT,
-            .ability = ABILITY_REFRIGERATE,
+            .ability = ABILITY_MOODY,
             .statPoints = {2, 32, 0, 0, 0, 32},
         },
     },
@@ -11535,7 +12837,7 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .item = ITEM_CHOICE_SCARF,
             .requiredItem = ITEM_NONE,
             .nature = NATURE_JOLLY,
-            .ability = ABILITY_SCRAPPY,
+            .ability = ABILITY_LIMBER,
             .statPoints = {2, 32, 0, 0, 0, 32},
         },
     },
@@ -12135,7 +13437,7 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .item = ITEM_LEFTOVERS,
             .requiredItem = ITEM_NONE,
             .nature = NATURE_MODEST,
-            .ability = ABILITY_POISON_HEAL,
+            .ability = ABILITY_GOOEY,
             .statPoints = {2, 0, 0, 32, 0, 32},
         },
     },
@@ -12147,7 +13449,7 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .item = ITEM_OCCA_BERRY,
             .requiredItem = ITEM_NONE,
             .nature = NATURE_RELAXED,
-            .ability = ABILITY_FLARE_BOOST,
+            .ability = ABILITY_INSOMNIA,
             .statPoints = {32, 0, 32, 0, 2, 0},
         },
     },
@@ -12608,6 +13910,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Dual Screens Chest"),
+        .preset =
+        {
+            .moves = {MOVE_SHADOW_BALL, MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CALM,
+            .ability = ABILITY_RATTLED,
+            .statPoints = {32, 0, 2, 0, 32, 0},
+        },
+    },
+    {
         .name = _("Wallbreaker"),
         .preset =
         {
@@ -12688,6 +14002,438 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .requiredItem = ITEM_NONE,
             .nature = NATURE_MODEST,
             .ability = ABILITY_PROTOSYNTHESIS,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Scarf Final Gambit"),
+        .preset =
+        {
+            .moves = {MOVE_FINAL_GAMBIT, MOVE_WAVE_CRASH, MOVE_FLIP_TURN, MOVE_CRUNCH},
+            .item = ITEM_CHOICE_SCARF,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_ADAPTABILITY,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Sun Super Fang"),
+        .preset =
+        {
+            .moves = {MOVE_LEAF_STORM, MOVE_SUPER_FANG, MOVE_LEECH_SEED, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_CHLOROPHYLL,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Flash Fire Ambush"),
+        .preset =
+        {
+            .moves = {MOVE_FLARE_BLITZ, MOVE_HELPING_HAND, MOVE_DESTINY_BOND, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_FLASH_FIRE,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Reverse The Room"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_FOUL_PLAY, MOVE_REFLECT, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_RELAXED,
+            .ability = ABILITY_FRISK,
+            .statPoints = {32, 0, 32, 0, 2, 0},
+        },
+    },
+    {
+        .name = _("Memento Support"),
+        .preset =
+        {
+            .moves = {MOVE_POLTERGEIST, MOVE_SNARL, MOVE_MEMENTO, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_FLUFFY,
+            .statPoints = {32, 0, 2, 0, 32, 0},
+        },
+    },
+    {
+        .name = _("Intimidate Control"),
+        .preset =
+        {
+            .moves = {MOVE_ROCK_SLIDE, MOVE_WILL_O_WISP, MOVE_SNARL, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_INTIMIDATE,
+            .statPoints = {32, 0, 2, 0, 32, 0},
+        },
+    },
+    {
+        .name = _("Coil Heavy Slam"),
+        .preset =
+        {
+            .moves = {MOVE_HEAVY_SLAM, MOVE_HIGH_HORSEPOWER, MOVE_COIL, MOVE_PROTECT},
+            .item = ITEM_LEFTOVERS,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_EARTH_EATER,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Bulky Tea Support"),
+        .preset =
+        {
+            .moves = {MOVE_GIGA_DRAIN, MOVE_LIFE_DEW, MOVE_SHADOW_BALL, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_HOSPITALITY,
+            .statPoints = {32, 0, 32, 0, 2, 0},
+        },
+    },
+    {
+        .name = _("Swift Swim Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_GUNK_SHOT, MOVE_LIQUIDATION, MOVE_AQUA_JET, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_SWIFT_SWIM,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Coaching Disruptor"),
+        .preset =
+        {
+            .moves = {MOVE_COACHING, MOVE_TAUNT, MOVE_FEINT, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_INNER_FOCUS,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Parabolic Discharge"),
+        .preset =
+        {
+            .moves = {MOVE_DISCHARGE, MOVE_PARABOLIC_CHARGE, MOVE_MUDDY_WATER, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_OWN_TEMPO,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Encore Team Support"),
+        .preset =
+        {
+            .moves = {MOVE_SUPER_FANG, MOVE_ENCORE, MOVE_HELPING_HAND, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_OWN_TEMPO,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Anger Point Setup"),
+        .preset =
+        {
+            .moves = {MOVE_RAGING_BULL, MOVE_ROCK_SLIDE, MOVE_BULK_UP, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_ANGER_POINT,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Blaze Team Control"),
+        .preset =
+        {
+            .moves = {MOVE_RAGING_BULL, MOVE_WILL_O_WISP, MOVE_ROCK_SLIDE, MOVE_HELPING_HAND},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_INTIMIDATE,
+            .statPoints = {32, 0, 2, 0, 32, 0},
+        },
+    },
+    {
+        .name = _("Aqua Speed Control"),
+        .preset =
+        {
+            .moves = {MOVE_RAGING_BULL, MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_INTIMIDATE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fairy Screen Support"),
+        .preset =
+        {
+            .moves = {MOVE_FOUL_PLAY, MOVE_HELPING_HAND, MOVE_REFLECT, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_OWN_TEMPO,
+            .statPoints = {32, 0, 2, 0, 32, 0},
+        },
+    },
+    {
+        .name = _("Illusion Nasty Plot"),
+        .preset =
+        {
+            .moves = {MOVE_SHADOW_BALL, MOVE_SNARL, MOVE_NASTY_PLOT, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_ILLUSION,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Special Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_SHADOW_BALL, MOVE_MUDDY_WATER, MOVE_PROTECT, MOVE_AQUA_JET},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_SWIFT_SWIM,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Doubles Wallbreaker"),
+        .preset =
+        {
+            .moves = {MOVE_DOUBLE_EDGE, MOVE_LASH_OUT, MOVE_BODY_SLAM, MOVE_HIGH_HORSEPOWER},
+            .item = ITEM_CHOICE_BAND,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_THICK_FAT,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Doubles Fast Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_HURRICANE, MOVE_THUNDERBOLT, MOVE_TAILWIND, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_COMPETITIVE,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Doubles Bulky Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_GUNK_SHOT, MOVE_KNOCK_OFF, MOVE_PARTING_SHOT, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_PRANKSTER,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Offensive Protect"),
+        .preset =
+        {
+            .moves = {MOVE_PROTECT, MOVE_POWER_WHIP, MOVE_SHADOW_SNEAK, MOVE_POLTERGEIST},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_WIND_RIDER,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Special Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_PROTECT, MOVE_RAGE_POWDER, MOVE_OVERHEAT, MOVE_GIGA_DRAIN},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_MOODY,
+            .statPoints = {32, 0, 32, 0, 2, 0},
+        },
+    },
+    {
+        .name = _("Doubles Bulky Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_PSYCHIC, MOVE_REVIVAL_BLESSING, MOVE_TRICK_ROOM, MOVE_BUG_BUZZ},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_SYNCHRONIZE,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Choice Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_KNOCK_OFF, MOVE_SUCKER_PUNCH, MOVE_BRAVE_BIRD, MOVE_ROCK_SLIDE},
+            .item = ITEM_CHOICE_BAND,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_ROCKY_PAYLOAD,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Doubles Fast Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_IRON_HEAD, MOVE_SHIFT_GEAR, MOVE_HIGH_HORSEPOWER, MOVE_GUNK_SHOT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_FILTER,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Doubles Fast Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_SHED_TAIL, MOVE_KNOCK_OFF, MOVE_DRACO_METEOR, MOVE_DOUBLE_EDGE},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_REGENERATOR,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Bulky Protect"),
+        .preset =
+        {
+            .moves = {MOVE_HYPER_DRILL, MOVE_TAILWIND, MOVE_EARTH_POWER, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_RATTLED,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Doubles Bulky Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_CRUNCH, MOVE_SUCKER_PUNCH, MOVE_SEED_BOMB, MOVE_SPORE},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_PROTOSYNTHESIS,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Doubles Setup Sweeper"),
+        .preset =
+        {
+            .moves = {MOVE_ENERGY_BALL, MOVE_HEAT_WAVE, MOVE_METEOR_BEAM, MOVE_PROTECT},
+            .item = ITEM_POWER_HERB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_QUARK_DRIVE,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Choice Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_ICICLE_CRASH, MOVE_GLAIVE_RUSH, MOVE_HIGH_HORSEPOWER, MOVE_ICE_SHARD},
+            .item = ITEM_CHOICE_BAND,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_THERMAL_EXCHANGE,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Doubles Setup Sweeper"),
+        .preset =
+        {
+            .moves = {MOVE_PROTECT, MOVE_SWORDS_DANCE, MOVE_LEAF_BLADE, MOVE_CLOSE_COMBAT},
+            .item = ITEM_BOOSTER_ENERGY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_QUARK_DRIVE,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Doubles Wallbreaker"),
+        .preset =
+        {
+            .moves = {MOVE_PSYBLADE, MOVE_WILD_CHARGE, MOVE_LEAF_BLADE, MOVE_CLOSE_COMBAT},
+            .item = ITEM_CHOICE_BAND,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_QUARK_DRIVE,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Doubles Setup Sweeper"),
+        .preset =
+        {
+            .moves = {MOVE_PROTECT, MOVE_CLOSE_COMBAT, MOVE_MIGHTY_CLEAVE, MOVE_SWORDS_DANCE},
+            .item = ITEM_BOOSTER_ENERGY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_QUARK_DRIVE,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Doubles Wallbreaker"),
+        .preset =
+        {
+            .moves = {MOVE_VOLT_SWITCH, MOVE_PSYCHIC, MOVE_TACHYON_CUTTER, MOVE_FOCUS_BLAST},
+            .item = ITEM_CHOICE_SPECS,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_QUARK_DRIVE,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Doubles Bulky Setup"),
+        .preset =
+        {
+            .moves = {MOVE_AGILITY, MOVE_PROTECT, MOVE_TACHYON_CUTTER, MOVE_PSYCHIC},
+            .item = ITEM_WEAKNESS_POLICY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_QUARK_DRIVE,
             .statPoints = {2, 0, 0, 32, 0, 32},
         },
     },

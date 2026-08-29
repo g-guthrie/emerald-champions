@@ -227,12 +227,12 @@ Route116_Movement_GlassesManExitEast:
 	step_end
 
 Route116_EventScript_Joey::
-	trainerbattle_single TRAINER_JOEY, Route116_Text_JoeyIntro, Route116_Text_JoeyDefeat
+	trainerbattle_double TRAINER_JOEY, Route116_Text_JoeyIntro, Route116_Text_JoeyDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route116_Text_JoeyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route116_EventScript_Jose::
-	trainerbattle_single TRAINER_JOSE, Route116_Text_JoseIntro, Route116_Text_JoseDefeat
+	trainerbattle_double TRAINER_JOSE, Route116_Text_JoseIntro, Route116_Text_JoseDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route116_Text_JosePostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -278,17 +278,17 @@ Route116_EventScript_RematchJerry::
 	end
 
 Route116_EventScript_Clark::
-	trainerbattle_single TRAINER_CLARK, Route116_Text_ClarkIntro, Route116_Text_ClarkDefeat
+	trainerbattle_double TRAINER_CLARK, Route116_Text_ClarkIntro, Route116_Text_ClarkDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route116_Text_ClarkPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route116_EventScript_Janice::
-	trainerbattle_single TRAINER_JANICE, Route116_Text_JaniceIntro, Route116_Text_JaniceDefeat
+	trainerbattle_double TRAINER_JANICE, Route116_Text_JaniceIntro, Route116_Text_JaniceDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route116_Text_JanicePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route116_EventScript_Karen::
-	trainerbattle_single TRAINER_KAREN_1, Route116_Text_KarenIntro, Route116_Text_KarenDefeat, Route116_EventScript_TryRegisterKarenAfterBattle
+	trainerbattle_double TRAINER_KAREN_1, Route116_Text_KarenIntro, Route116_Text_KarenDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route116_EventScript_TryRegisterKarenAfterBattle
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route116_EventScript_RematchKaren
 	setvar VAR_0x8004, TRAINER_KAREN_1
@@ -324,12 +324,12 @@ Route116_EventScript_RegisterKaren::
 	end
 
 Route116_EventScript_RematchKaren::
-	trainerbattle_rematch TRAINER_KAREN_1, Route116_Text_KarenRematchIntro, Route116_Text_KarenRematchDefeat
+	trainerbattle_rematch_double TRAINER_KAREN_1, Route116_Text_KarenRematchIntro, Route116_Text_KarenRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route116_Text_KarenPostRematch, MSGBOX_AUTOCLOSE
 	end
 
 Route116_EventScript_Sarah::
-	trainerbattle_single TRAINER_SARAH, Route116_Text_SarahIntro, Route116_Text_SarahDefeat
+	trainerbattle_double TRAINER_SARAH, Route116_Text_SarahIntro, Route116_Text_SarahDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route116_Text_SarahPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -339,12 +339,12 @@ Route116_EventScript_Dawson::
 	end
 
 Route116_EventScript_Devan::
-	trainerbattle_single TRAINER_DEVAN, Route116_Text_DevanIntro, Route116_Text_DevanDefeat
+	trainerbattle_double TRAINER_DEVAN, Route116_Text_DevanIntro, Route116_Text_DevanDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route116_Text_DevanPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route116_EventScript_Johnson::
-	trainerbattle_single TRAINER_JOHNSON, Route116_Text_JohnsonIntro, Route116_Text_JohnsonDefeat
+	trainerbattle_double TRAINER_JOHNSON, Route116_Text_JohnsonIntro, Route116_Text_JohnsonDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route116_Text_JohnsonPostBattle, MSGBOX_AUTOCLOSE
 	end
 

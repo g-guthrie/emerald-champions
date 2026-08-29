@@ -21,12 +21,12 @@ Route127_OnFrame:
 	.2byte 0
 
 Route127_EventScript_Camden::
-	trainerbattle_single TRAINER_CAMDEN, Route127_Text_CamdenIntro, Route127_Text_CamdenDefeat
+	trainerbattle_double TRAINER_CAMDEN, Route127_Text_CamdenIntro, Route127_Text_CamdenDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route127_Text_CamdenPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route127_EventScript_Donny::
-	trainerbattle_single TRAINER_DONNY, Route127_Text_DonnyIntro, Route127_Text_DonnyDefeat
+	trainerbattle_double TRAINER_DONNY, Route127_Text_DonnyIntro, Route127_Text_DonnyDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route127_Text_DonnyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -36,12 +36,12 @@ Route127_EventScript_Jonah::
 	end
 
 Route127_EventScript_Henry::
-	trainerbattle_single TRAINER_HENRY, Route127_Text_HenryIntro, Route127_Text_HenryDefeat
+	trainerbattle_double TRAINER_HENRY, Route127_Text_HenryIntro, Route127_Text_HenryDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route127_Text_HenryPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route127_EventScript_Roger::
-	trainerbattle_single TRAINER_ROGER, Route127_Text_RogerIntro, Route127_Text_RogerDefeat
+	trainerbattle_double TRAINER_ROGER, Route127_Text_RogerIntro, Route127_Text_RogerDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route127_Text_RogerPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -51,12 +51,12 @@ Route127_EventScript_Aidan::
 	end
 
 Route127_EventScript_Athena::
-	trainerbattle_single TRAINER_ATHENA, Route127_Text_AthenaIntro, Route127_Text_AthenaDefeat
+	trainerbattle_double TRAINER_ATHENA, Route127_Text_AthenaIntro, Route127_Text_AthenaDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route127_Text_AthenaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route127_EventScript_Koji::
-	trainerbattle_single TRAINER_KOJI_1, Route127_Text_KojiIntro, Route127_Text_KojiDefeat, Route127_EventScript_RegisterKoji
+	trainerbattle_double TRAINER_KOJI_1, Route127_Text_KojiIntro, Route127_Text_KojiDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route127_EventScript_RegisterKoji
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route127_EventScript_RematchKoji
 	msgbox Route127_Text_KojiPostBattle, MSGBOX_DEFAULT
@@ -72,7 +72,7 @@ Route127_EventScript_RegisterKoji::
 	end
 
 Route127_EventScript_RematchKoji::
-	trainerbattle_rematch TRAINER_KOJI_1, Route127_Text_KojiRematchIntro, Route127_Text_KojiRematchDefeat
+	trainerbattle_rematch_double TRAINER_KOJI_1, Route127_Text_KojiRematchIntro, Route127_Text_KojiRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route127_Text_KojiPostRematch, MSGBOX_AUTOCLOSE
 	end
 

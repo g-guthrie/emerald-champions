@@ -37,7 +37,7 @@ Route106_EventScript_ElliotRematch::
 	end
 
 Route106_EventScript_Ned::
-	trainerbattle_single TRAINER_NED, Route106_Text_NedIntro, Route106_Text_NedDefeated
+	trainerbattle_double TRAINER_NED, Route106_Text_NedIntro, Route106_Text_NedDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route106_Text_NedPostBattle, MSGBOX_AUTOCLOSE
 	end
 

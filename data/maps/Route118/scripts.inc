@@ -45,6 +45,18 @@ Route118_EventScript_DeclineGoodRod::
 
 Route118_EventScript_ReceivedGoodRod::
 	msgbox Route118_Text_TryCatchingMonWithGoodRod, MSGBOX_DEFAULT
+	goto_if_defeated TRAINER_MAGIKARP_GUY, Route118_EventScript_MagikarpGuyAfter
+	msgbox Route118_Text_MagikarpGuyChallenge, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, Route118_EventScript_MagikarpGuyDecline
+	trainerbattle_no_intro_double TRAINER_MAGIKARP_GUY, Route118_Text_MagikarpGuyDefeat, EmeraldChampions_Text_NeedTwoPokemon
+
+Route118_EventScript_MagikarpGuyAfter::
+	msgbox Route118_Text_MagikarpGuyAfter, MSGBOX_DEFAULT
+	release
+	end
+
+Route118_EventScript_MagikarpGuyDecline::
+	msgbox Route118_Text_MagikarpGuyDecline, MSGBOX_DEFAULT
 	release
 	end
 
@@ -177,7 +189,7 @@ Route118_Movement_StevenExit2:
 	step_end
 
 Route118_EventScript_Rose::
-	trainerbattle_single TRAINER_ROSE_1, Route118_Text_RoseIntro, Route118_Text_RoseDefeat, Route118_EventScript_RegisterRose
+	trainerbattle_double TRAINER_ROSE_1, Route118_Text_RoseIntro, Route118_Text_RoseDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route118_EventScript_RegisterRose
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route118_EventScript_RematchRose
 	msgbox Route118_Text_RosePostBattle, MSGBOX_DEFAULT
@@ -193,17 +205,17 @@ Route118_EventScript_RegisterRose::
 	end
 
 Route118_EventScript_RematchRose::
-	trainerbattle_rematch TRAINER_ROSE_1, Route118_Text_RoseRematchIntro, Route118_Text_RoseRematchDefeat
+	trainerbattle_rematch_double TRAINER_ROSE_1, Route118_Text_RoseRematchIntro, Route118_Text_RoseRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route118_Text_RosePostRematch, MSGBOX_AUTOCLOSE
 	end
 
 Route118_EventScript_Barny::
-	trainerbattle_single TRAINER_BARNY, Route118_Text_BarnyIntro, Route118_Text_BarnyDefeat
+	trainerbattle_double TRAINER_BARNY, Route118_Text_BarnyIntro, Route118_Text_BarnyDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route118_Text_BarnyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route118_EventScript_Wade::
-	trainerbattle_single TRAINER_WADE, Route118_Text_WadeIntro, Route118_Text_WadeDefeat
+	trainerbattle_double TRAINER_WADE, Route118_Text_WadeIntro, Route118_Text_WadeDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route118_Text_WadePostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -229,17 +241,17 @@ Route118_EventScript_RematchDalton::
 	end
 
 Route118_EventScript_Perry::
-	trainerbattle_single TRAINER_PERRY, Route118_Text_PerryIntro, Route118_Text_PerryDefeat
+	trainerbattle_double TRAINER_PERRY, Route118_Text_PerryIntro, Route118_Text_PerryDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route118_Text_PerryPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route118_EventScript_Chester::
-	trainerbattle_single TRAINER_CHESTER, Route118_Text_ChesterIntro, Route118_Text_ChesterDefeat
+	trainerbattle_double TRAINER_CHESTER, Route118_Text_ChesterIntro, Route118_Text_ChesterDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route118_Text_ChesterPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route118_EventScript_Deandre::
-	trainerbattle_single TRAINER_DEANDRE, Route118_Text_DeandreIntro, Route118_Text_DeandreDefeat
+	trainerbattle_double TRAINER_DEANDRE, Route118_Text_DeandreIntro, Route118_Text_DeandreDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route118_Text_DeandrePostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -283,6 +295,22 @@ Route118_Text_TryCatchingMonWithGoodRod:
 	.string "Try catching all sorts of POKéMON\n"
 	.string "with your GOOD ROD.$"
 
+Route118_Text_MagikarpGuyChallenge:
+	.string "A rod catches fish. A Trainer finds the\n"
+	.string "battle hidden inside them.\p"
+	.string "Want to face my complete fishing team?$"
+
+Route118_Text_MagikarpGuyDefeat:
+	.string "You never mistook the little fish for\n"
+	.string "the whole current.$"
+
+Route118_Text_MagikarpGuyAfter:
+	.string "MAGIKARP was the invitation, not the joke.\n"
+	.string "Every weak-looking lead can hide a plan.$"
+
+Route118_Text_MagikarpGuyDecline:
+	.string "No hurry. The river and my team will wait.$"
+
 Route118_Text_CanCrossRiversWithSurf:
 	.string "Even if there isn't a boat, you can\n"
 	.string "cross rivers and the sea if you have\l"
@@ -297,4 +325,3 @@ Route118_Text_RouteSignMauville:
 Route118_Text_RouteSign119:
 	.string "ROUTE 118\n"
 	.string "{UP_ARROW} ROUTE 119$"
-

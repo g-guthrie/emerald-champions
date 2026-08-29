@@ -13,7 +13,10 @@ Route114_FossilManiacsTunnel_EventScript_MoveFossilManiac::
 	return
 
 Route114_FossilManiacsTunnel_OnLoad:
-	call_if_unset FLAG_SYS_GAME_CLEAR, Route114_FossilManiacsTunnel_EventScript_CloseDesertUnderpass
+	goto_if_set FLAG_SYS_GAME_CLEAR, Route114_FossilManiacsTunnel_EventScript_EndLoad
+	goto_if_ge VAR_MIRAGE_TOWER_STATE, 2, Route114_FossilManiacsTunnel_EventScript_EndLoad
+	call Route114_FossilManiacsTunnel_EventScript_CloseDesertUnderpass
+Route114_FossilManiacsTunnel_EventScript_EndLoad:
 	end
 
 Route114_FossilManiacsTunnel_EventScript_CloseDesertUnderpass::
@@ -88,4 +91,3 @@ Route114_FossilManiacsTunnel_Text_NotSafeThatWay:
 	.string "underneath now…\p"
 	.string "But I've left it alone because I don't\n"
 	.string "think there are any FOSSILS there…$"
-

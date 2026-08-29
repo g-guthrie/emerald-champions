@@ -640,6 +640,34 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Route111_EventScript_RockSmashTipFatMan",
       "flag": "FLAG_HIDE_ROUTE_111_ROCK_SMASH_TIP_GUY"
+    },
+    {
+      "local_id": "LOCALID_ROUTE111_VIAL_NURSE",
+      "graphics_id": "OBJ_EVENT_GFX_NURSE",
+      "x": 18,
+      "y": 102,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route111_EventScript_VialUpgradeNurse",
+      "flag": "FLAG_HIDE_ROUTE111_VIAL_NURSE"
+    },
+    {
+      "local_id": "LOCALID_ROUTE111_VIAL_CHANSEY",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(CHANSEY)",
+      "x": 18,
+      "y": 100,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "0",
+      "flag": "FLAG_HIDE_ROUTE111_VIAL_CHANSEY"
     }
   ],
   "warp_events": [
@@ -985,6 +1013,33 @@
       "var": "TRIGGER_RUN_IMMEDIATELY",
       "var_value": "0",
       "script": "Route111_EventScript_SandstormTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 19,
+      "y": 102,
+      "elevation": 0,
+      "var": "VAR_CHANSEY_NURSE_STATE",
+      "var_value": "0",
+      "script": "Route111_EventScript_VialChanseyEscape"
+    },
+    {
+      "type": "trigger",
+      "x": 20,
+      "y": 102,
+      "elevation": 0,
+      "var": "VAR_CHANSEY_NURSE_STATE",
+      "var_value": "0",
+      "script": "Route111_EventScript_VialChanseyEscape"
+    },
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 103,
+      "elevation": 0,
+      "var": "VAR_CHANSEY_NURSE_STATE",
+      "var_value": "0",
+      "script": "Route111_EventScript_VialChanseyEscape"
     }
   ],
   "bg_events": [

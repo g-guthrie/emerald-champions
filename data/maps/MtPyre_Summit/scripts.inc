@@ -549,24 +549,41 @@ MtPyre_Summit_Movement_MaxieApproachArchie2:
 	step_end
 
 MtPyre_Summit_EventScript_Grunt1::
-	trainerbattle_single TRAINER_GRUNT_MT_PYRE_1, MtPyre_Summit_Text_Grunt1Intro, MtPyre_Summit_Text_Grunt1Defeat
+	trainerbattle_double TRAINER_GRUNT_MT_PYRE_1, MtPyre_Summit_Text_Grunt1Intro, MtPyre_Summit_Text_Grunt1Defeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox MtPyre_Summit_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE
 	end
 
 MtPyre_Summit_EventScript_Grunt2::
-	trainerbattle_single TRAINER_GRUNT_MT_PYRE_2, MtPyre_Summit_Text_Grunt2Intro, MtPyre_Summit_Text_Grunt2Defeat
+	trainerbattle_double TRAINER_GRUNT_MT_PYRE_2, MtPyre_Summit_Text_Grunt2Intro, MtPyre_Summit_Text_Grunt2Defeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox MtPyre_Summit_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE
 	end
 
 MtPyre_Summit_EventScript_Grunt3::
-	trainerbattle_single TRAINER_GRUNT_MT_PYRE_3, MtPyre_Summit_Text_Grunt3Intro, MtPyre_Summit_Text_Grunt3Defeat
+	trainerbattle_double TRAINER_GRUNT_MT_PYRE_3, MtPyre_Summit_Text_Grunt3Intro, MtPyre_Summit_Text_Grunt3Defeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox MtPyre_Summit_Text_Grunt3PostBattle, MSGBOX_AUTOCLOSE
 	end
 
 MtPyre_Summit_EventScript_Grunt4::
-	trainerbattle_single TRAINER_GRUNT_MT_PYRE_4, MtPyre_Summit_Text_Grunt4Intro, MtPyre_Summit_Text_Grunt4Defeat
+	trainerbattle_double TRAINER_GRUNT_MT_PYRE_4, MtPyre_Summit_Text_Grunt4Intro, MtPyre_Summit_Text_Grunt4Defeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox MtPyre_Summit_Text_Grunt4PostBattle, MSGBOX_AUTOCLOSE
 	end
+
+MtPyre_Summit_EventScript_Matt::
+	trainerbattle_double TRAINER_MATT_MT_PYRE, MtPyre_Summit_Text_MattIntro, MtPyre_Summit_Text_MattDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	msgbox MtPyre_Summit_Text_MattAfter, MSGBOX_AUTOCLOSE
+	end
+
+MtPyre_Summit_Text_MattIntro:
+	.string "MATT: Rain does more than boost Water. It\n"
+	.string "heals, redirects Fire, and changes tempo.\p"
+	.string "Break AQUA's formation before the wind!$"
+
+MtPyre_Summit_Text_MattDefeat:
+	.string "You kept one answer outside the current.$"
+
+MtPyre_Summit_Text_MattAfter:
+	.string "ARCHIE is beyond us with the RED ORB. If\n"
+	.string "you follow, expect the sea to fight back.$"
 
 MtPyre_Summit_Text_Grunt1Intro:
 	.string "No! Those TEAM MAGMA goons got\n"
@@ -629,40 +646,26 @@ MtPyre_Summit_Text_Grunt4PostBattle:
 	.string "with us members and our leader.$"
 
 MtPyre_Summit_Text_ArchieWeGotTheOrbLetsGo:
-	.string "ARCHIE: TEAM MAGMA's MAXIE got ahead\n"
-	.string "of us, but we also got what we wanted.\p"
-	.string "The RED ORB preserved at MT. PYRE…\n"
-	.string "I, ARCHIE, now have it in my possession!\p"
-	.string "Fufufu… Now we can bring our ultimate\n"
-	.string "objective to fruition!\p"
-	.string "Okay, TEAM!\n"
-	.string "We're pulling out!$"
+	.string "ARCHIE: MAXIE took the BLUE ORB, but the\n"
+	.string "RED ORB belongs to AQUA now.\p"
+	.string "The wardens say the ORBS once quieted\n"
+	.string "land, sea, and every shining SIGN.\p"
+	.string "Then the sea can use that same network\n"
+	.string "to wake. AQUA, move out!$"
 
 MtPyre_Summit_Text_BothOrbsTakenMagmaLeftThis:
-	.string "Oh, no…\n"
-	.string "This cannot happen…\p"
-	.string "Not only the BLUE ORB, but even\n"
-	.string "the RED ORB has been taken…\p"
-	.string "The BLUE ORB and RED ORB must never\n"
-	.string "be separated. They belong together.\p"
-	.string "What are those men trying to do with\n"
-	.string "the two ORBS?\p"
-	.string "… … … … … …\n"
-	.string "… … … … … …\p"
-	.string "Oh, yes. Was it TEAM MAGMA who came\n"
-	.string "and took the BLUE ORB first?\p"
-	.string "Well, in their haste, they left this\n"
-	.string "behind.\p"
-	.string "I couldn't imagine what exactly it\n"
-	.string "could be.\p"
-	.string "I would like you to have it.\n"
-	.string "Perhaps it will be useful in some way.$"
+	.string "Both ORBS are gone. They were never\n"
+	.string "weapons; together they completed a seal.\p"
+	.string "The CHAMPION'S SIGNS are that seal's\n"
+	.string "outer pattern, spread across HOENN.\p"
+	.string "MAGMA dropped this EMBLEM in its haste.\n"
+	.string "Take it. You may need every path open.$"
 
 MtPyre_Summit_Text_OrbsHaveBeenTaken:
-	.string "The BLUE ORB and RED ORB taken by\n"
-	.string "those sinister men…\p"
-	.string "They must never be apart…\n"
-	.string "I fear something terrible will happen…$"
+	.string "With the ORBS apart, land and sea will\n"
+	.string "pull against the same ancient network.\p"
+	.string "Only the guardian of the sky ever stood\n"
+	.string "outside that struggle.$"
 
 MtPyre_Summit_Text_GroudonKyogreAwakened:
 	.string "Oh, my goodness…\p"
@@ -707,24 +710,15 @@ MtPyre_Summit_Text_WillYouHearOutMyTale:
 	.string "told in the HOENN region?$"
 
 MtPyre_Summit_Text_GroudonKyogreTale:
-	.string "It happened long, long ago…\p"
-	.string "The world was wracked by a ferocious\n"
-	.string "clash between the POKéMON of the land\l"
-	.string "and the POKéMON of the sea…\p"
-	.string "The POKéMON of the land raised\n"
-	.string "mountains and created continents…\p"
-	.string "The POKéMON of the sea raised huge\n"
-	.string "waves and carved out oceans…\p"
-	.string "Their fierce duel raged without end.\p"
-	.string "The world was engulfed in massive\n"
-	.string "infernos and vicious storms.\p"
-	.string "The BLUE ORB and the RED ORB brought\n"
-	.string "an end to the calamity.\p"
-	.string "Light poured from the two ORBS and\n"
-	.string "becalmed the enraged adversaries.\p"
-	.string "The pair, made docile, dove deep into\n"
-	.string "the sea where eventually they\l"
-	.string "disappeared…$"
+	.string "Long ago, GROUDON raised the land and\n"
+	.string "KYOGRE carved the sea. Their clash grew\l"
+	.string "until neither could stop itself.\p"
+	.string "Ancient Trainers formed a network of\n"
+	.string "SIGNS with trusted POKéMON as its keys.\p"
+	.string "The RED and BLUE ORBS joined that net,\n"
+	.string "but RAYQUAZA supplied its balance.\p"
+	.string "The ORBS calmed the rivals, the SIGNS\n"
+	.string "fell dark, and the sky guardian departed.$"
 
 MtPyre_Summit_Text_WellThatTooIsFine:
 	.string "I see…\n"
@@ -736,28 +730,17 @@ MtPyre_Summit_Text_MaxieSilence:
 	.string "… … … … … …$"
 
 MtPyre_Summit_Text_HearTheNewLegendOfHoenn:
-	.string "It is my role to pass on the legends\n"
-	.string "of HOENN to future generations.\p"
-	.string "And the crisis that just ended in\n"
-	.string "SOOTOPOLIS rewrote a legend…\p"
-	.string "Have you the time to hear the new\n"
-	.string "legend of HOENN?$"
+	.string "The old legend named three great powers.\n"
+	.string "SOOTOPOLIS added a fourth: the Trainer\l"
+	.string "who understood why balance mattered.\p"
+	.string "Will you hear HOENN's new legend?$"
 
 MtPyre_Summit_Text_HoennTrioTale:
-	.string "It happened long, long ago…\p"
-	.string "The world was wracked by a ferocious\n"
-	.string "clash between the POKéMON of the land\l"
-	.string "and the POKéMON of the sea…\p"
-	.string "The POKéMON of the land raised\n"
-	.string "mountains and created continents…\p"
-	.string "The POKéMON of the sea raised huge\n"
-	.string "waves and carved out oceans…\p"
-	.string "Their fierce duel raged without end.\p"
-	.string "The world was engulfed in massive\n"
-	.string "fires and vicious storms.\p"
-	.string "It was then that the POKéMON of\n"
-	.string "the sky descended from a storm.\p"
-	.string "The POKéMON, shining a vivid green,\n"
-	.string "becalmed the two enraged POKéMON.\p"
-	.string "Then, its duty done, the green POKéMON\n"
-	.string "flew off into the wild blue yonder…$"
+	.string "Land and sea became absolute, and HOENN\n"
+	.string "began to break between them.\p"
+	.string "A green POKéMON descended from the sky,\n"
+	.string "but it answered a mortal Trainer's call.\p"
+	.string "RAYQUAZA restored the board. The Trainer\n"
+	.string "restored the reason to keep playing.\p"
+	.string "Each awakened SIGN waits to see what\n"
+	.string "kind of Champion that Trainer becomes.$"

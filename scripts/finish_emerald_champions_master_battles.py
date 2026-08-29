@@ -37,10 +37,6 @@ PHANTOM_SOURCE_GROUPS = {
     "PHYSICAL_ROUTE103_0131",  # Movement line was misread as a rival battle.
     "PHYSICAL_BATTLEFRONTIER_BATTLEPYRAMIDFLOOR_0116",  # Item script line, not a Trainer.
     "PHYSICAL_GLOBAL_TRAINER_HILL_0067",  # Comment names Phillip as a placeholder only.
-    "BATTLE_144_ASHEN_WOODS_ALANNAH",  # The modern campaign deliberately omits this removed Inclement-only map.
-    "PHYSICAL_ASHENWOODS_0169",
-    "PHYSICAL_ASHENWOODS_0174",
-    "PHYSICAL_ASHENWOODS_0179",
 }
 
 MARQUEE_TOKENS = (
@@ -1300,8 +1296,8 @@ def update_header(blocks: list[dict], difficulties: list[float], move_repairs: C
         f"rematch_free_explicit_trainer_branch_blocks: {branch_count}\n"
         f"format_counts: {{'single': {singles}, 'double': {doubles}}}\n"
         f"doubles_percentage: {doubles / branch_count * 100:.2f}\n"
-        "excluded_content: ordinary Match Call tiers, Gym rematch families, three phantom parser hits, and four battles from the absent Inclement-only Ashen Woods map\n"
-        "included_content: every current Hoenn trainer reference plus 14 explicitly planned bespoke restorations on maps retained by the modern campaign\n"
+        "excluded_content: ordinary Match Call tiers, Gym rematch families, and three phantom source-parser hits\n"
+        "included_content: every current Hoenn trainer reference plus 18 explicitly planned one-time bespoke restorations\n"
         "battle_frontier_boundary: facility battles are generated live from the pinned Showdown Champions random-doubles port and are not finite entries in this document\n\n"
         "DESIGN THESIS\n"
         "Every campaign battle is a bespoke, legal, readable puzzle. The player receives competitive Pokemon, moves, abilities, natures, Stat Points, and free ordinary held items; difficulty comes from decisions rather than grinding.\n"

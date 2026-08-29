@@ -159,19 +159,19 @@ Route104_EventScript_RestoreMusic::
 	return
 
 Route104_EventScript_BattleMayTreecko::
-	trainerbattle_no_intro TRAINER_MAY_RUSTBORO_TREECKO, Route104_Text_MayDefeat
+	trainerbattle_no_intro_double TRAINER_MAY_RUSTBORO_TREECKO, Route104_Text_MayDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	setflag FLAG_DEFEATED_RIVAL_ROUTE_104
 	goto Route104_EventScript_MayDefeated
 	end
 
 Route104_EventScript_BattleMayTorchic::
-	trainerbattle_no_intro TRAINER_MAY_RUSTBORO_TORCHIC, Route104_Text_MayDefeat
+	trainerbattle_no_intro_double TRAINER_MAY_RUSTBORO_TORCHIC, Route104_Text_MayDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	setflag FLAG_DEFEATED_RIVAL_ROUTE_104
 	goto Route104_EventScript_MayDefeated
 	end
 
 Route104_EventScript_BattleMayMudkip::
-	trainerbattle_no_intro TRAINER_MAY_RUSTBORO_MUDKIP, Route104_Text_MayDefeat
+	trainerbattle_no_intro_double TRAINER_MAY_RUSTBORO_MUDKIP, Route104_Text_MayDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	setflag FLAG_DEFEATED_RIVAL_ROUTE_104
 	goto Route104_EventScript_MayDefeated
 	end
@@ -226,19 +226,19 @@ Route104_EventScript_BrendanDefeated::
 	end
 
 Route104_EventScript_BattleBrendanTreecko::
-	trainerbattle_no_intro TRAINER_BRENDAN_RUSTBORO_TREECKO, Route104_Text_BrendanDefeat
+	trainerbattle_no_intro_double TRAINER_BRENDAN_RUSTBORO_TREECKO, Route104_Text_BrendanDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	setflag FLAG_DEFEATED_RIVAL_ROUTE_104
 	goto Route104_EventScript_BrendanDefeated
 	end
 
 Route104_EventScript_BattleBrendanTorchic::
-	trainerbattle_no_intro TRAINER_BRENDAN_RUSTBORO_TORCHIC, Route104_Text_BrendanDefeat
+	trainerbattle_no_intro_double TRAINER_BRENDAN_RUSTBORO_TORCHIC, Route104_Text_BrendanDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	setflag FLAG_DEFEATED_RIVAL_ROUTE_104
 	goto Route104_EventScript_BrendanDefeated
 	end
 
 Route104_EventScript_BattleBrendanMudkip::
-	trainerbattle_no_intro TRAINER_BRENDAN_RUSTBORO_MUDKIP, Route104_Text_BrendanDefeat
+	trainerbattle_no_intro_double TRAINER_BRENDAN_RUSTBORO_MUDKIP, Route104_Text_BrendanDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	setflag FLAG_DEFEATED_RIVAL_ROUTE_104
 	goto Route104_EventScript_BrendanDefeated
 	end
@@ -843,17 +843,17 @@ Route104_Movement_BrineyExitBoat:
 	step_end
 
 Route104_EventScript_Ivan::
-	trainerbattle_single TRAINER_IVAN, Route104_Text_IvanIntro, Route104_Text_IvanDefeat
+	trainerbattle_double TRAINER_IVAN, Route104_Text_IvanIntro, Route104_Text_IvanDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route104_Text_IvanPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route104_EventScript_Billy::
-	trainerbattle_single TRAINER_BILLY, Route104_Text_BillyIntro, Route104_Text_BillyDefeat
+	trainerbattle_double TRAINER_BILLY, Route104_Text_BillyIntro, Route104_Text_BillyDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route104_Text_BillyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route104_EventScript_Haley::
-	trainerbattle_single TRAINER_HALEY_1, Route104_Text_HaleyIntro, Route104_Text_HaleyDefeat, Route104_EventScript_TryRegisterHaleyAfterBattle
+	trainerbattle_double TRAINER_HALEY_1, Route104_Text_HaleyIntro, Route104_Text_HaleyDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route104_EventScript_TryRegisterHaleyAfterBattle
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route104_EventScript_RematchHaley
 	setvar VAR_0x8004, TRAINER_HALEY_1
@@ -889,12 +889,12 @@ Route104_EventScript_RegisterHaley::
 	end
 
 Route104_EventScript_RematchHaley::
-	trainerbattle_rematch TRAINER_HALEY_1, Route104_Text_HaleyRematchIntro, Route104_Text_HaleyRematchDefeat
+	trainerbattle_rematch_double TRAINER_HALEY_1, Route104_Text_HaleyRematchIntro, Route104_Text_HaleyRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route104_Text_HaleyPostRematch, MSGBOX_AUTOCLOSE
 	end
 
 Route104_EventScript_Winston::
-	trainerbattle_single TRAINER_WINSTON_1, Route104_Text_WinstonIntro, Route104_Text_WinstonDefeat, Route104_EventScript_TryRegisterWinstonAfterBattle
+	trainerbattle_double TRAINER_WINSTON_1, Route104_Text_WinstonIntro, Route104_Text_WinstonDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route104_EventScript_TryRegisterWinstonAfterBattle
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route104_EventScript_RematchWinston
 	setvar VAR_0x8004, TRAINER_WINSTON_1
@@ -930,12 +930,12 @@ Route104_EventScript_RegisterWinston::
 	end
 
 Route104_EventScript_RematchWinston::
-	trainerbattle_rematch TRAINER_WINSTON_1, Route104_Text_WinstonRematchIntro, Route104_Text_WinstonRematchDefeat
+	trainerbattle_rematch_double TRAINER_WINSTON_1, Route104_Text_WinstonRematchIntro, Route104_Text_WinstonRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route104_Text_WinstonPostRematch, MSGBOX_AUTOCLOSE
 	end
 
 Route104_EventScript_Cindy::
-	trainerbattle_single TRAINER_CINDY_1, Route104_Text_CindyIntro, Route104_Text_CindyDefeat, Route104_EventScript_TryRegisterCindyAfterBattle
+	trainerbattle_double TRAINER_CINDY_1, Route104_Text_CindyIntro, Route104_Text_CindyDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route104_EventScript_TryRegisterCindyAfterBattle
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route104_EventScript_RematchCindy
 	setvar VAR_0x8004, TRAINER_CINDY_1
@@ -971,7 +971,7 @@ Route104_EventScript_RegisterCindy::
 	end
 
 Route104_EventScript_RematchCindy::
-	trainerbattle_rematch TRAINER_CINDY_1, Route104_Text_CindyRematchIntro, Route104_Text_CindyRematchDefeat
+	trainerbattle_rematch_double TRAINER_CINDY_1, Route104_Text_CindyRematchIntro, Route104_Text_CindyRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route104_Text_CindyPostRematch, MSGBOX_AUTOCLOSE
 	end
 
@@ -990,7 +990,7 @@ Route104_EventScript_Mia::
 	end
 
 Route104_EventScript_Darian::
-	trainerbattle_single TRAINER_DARIAN, Route104_Text_DarianIntro, Route104_Text_DarianDefeat
+	trainerbattle_double TRAINER_DARIAN, Route104_Text_DarianIntro, Route104_Text_DarianDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route104_Text_DarianPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -1023,20 +1023,13 @@ Route104_Text_ImNotATrainer:
 	.string "it's a challenge to battle.\p"
 	.string "If you don't want to battle, stay out\n"
 	.string "of their sight.$"
-
 Route104_Text_LikeFillingMouthWithSeedsTakeThis:
-	.string "I like filling my mouth with seeds,\n"
-	.string "then spitting them out fast!\p"
-	.string "You can have this, so you try it out!\p"
-	.string "Use it on a POKéMON, and it will learn\n"
-	.string "a move for firing seeds rapidly.$"
-
+	.string "I found this LEAF STONE beneath the\n"
+	.string "flowers! Some GRASS POKéMON evolve\l"
+	.string "when exposed to it. You should have it!$"
 Route104_Text_TMsAreOneTimeUse:
-	.string "A word of advice!\p"
-	.string "A TM, TECHNICAL MACHINE, is good only\n"
-	.string "for one-time use.\p"
-	.string "Once you use it, it's gone.\n"
-	.string "Think twice before using it!$"
+	.string "That LEAF STONE can evolve certain\n"
+	.string "GRASS POKéMON. Use it when ready.$"
 Route104_Text_DontNeedThisTakeIt:
 	.string "I found this Leaf Stone among the\n"
 	.string "flowers. You should have it!$"

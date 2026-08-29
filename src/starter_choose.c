@@ -23,6 +23,7 @@
 #include "window.h"
 #include "constants/songs.h"
 #include "constants/rgb.h"
+#include "constants/vars.h"
 
 #define STARTER_MON_COUNT   3
 
@@ -110,15 +111,18 @@ static const u8 sStarterLabelCoords[STARTER_MON_COUNT][2] =
     {8, 4},
 };
 
-#define GRASS_STARTER (IS_FRLG ? SPECIES_BULBASAUR  : SPECIES_TREECKO)
-#define FIRE_STARTER  (IS_FRLG ? SPECIES_CHARMANDER : SPECIES_TORCHIC)
-#define WATER_STARTER (IS_FRLG ? SPECIES_SQUIRTLE   : SPECIES_MUDKIP )
-
-static const u16 sStarterMon[STARTER_MON_COUNT] =
+static const enum Species sStarterMons[][STARTER_MON_COUNT] =
 {
-    GRASS_STARTER,
-    FIRE_STARTER,
-    WATER_STARTER,
+    [0] = {SPECIES_TREECKO,    SPECIES_TORCHIC,    SPECIES_MUDKIP},     // Safe default for old saves.
+    [1] = {SPECIES_BULBASAUR,  SPECIES_CHARMANDER, SPECIES_SQUIRTLE},
+    [2] = {SPECIES_CHIKORITA,  SPECIES_CYNDAQUIL,  SPECIES_TOTODILE},
+    [3] = {SPECIES_TREECKO,    SPECIES_TORCHIC,    SPECIES_MUDKIP},
+    [4] = {SPECIES_TURTWIG,    SPECIES_CHIMCHAR,   SPECIES_PIPLUP},
+    [5] = {SPECIES_SNIVY,      SPECIES_TEPIG,      SPECIES_OSHAWOTT},
+    [6] = {SPECIES_CHESPIN,    SPECIES_FENNEKIN,   SPECIES_FROAKIE},
+    [7] = {SPECIES_ROWLET,     SPECIES_LITTEN,     SPECIES_POPPLIO},
+    [8] = {SPECIES_GROOKEY,    SPECIES_SCORBUNNY,  SPECIES_SOBBLE},
+    [9] = {SPECIES_SPRIGATITO, SPECIES_FUECOCO,    SPECIES_QUAXLY},
 };
 
 static const struct BgTemplate sBgTemplates[3] =
@@ -347,11 +351,90 @@ static const struct SpriteTemplate sSpriteTemplate_StarterCircle =
 };
 
 // .text
+enum Species GetStarterPokemonForGeneration(u16 chosenStarterId, u16 starterGeneration)
+{
+    if (chosenStarterId >= STARTER_MON_COUNT)
+        chosenStarterId = 0;
+    if (IS_FRLG)
+        starterGeneration = 1;
+    else if (starterGeneration >= ARRAY_COUNT(sStarterMons))
+        starterGeneration = 0;
+    return sStarterMons[starterGeneration][chosenStarterId];
+}
+
+enum Species GetMiddleEvolutionForStarter(enum Species species)
+{
+    switch (species)
+    {
+    case SPECIES_BULBASAUR:  return SPECIES_IVYSAUR;
+    case SPECIES_CHARMANDER: return SPECIES_CHARMELEON;
+    case SPECIES_SQUIRTLE:   return SPECIES_WARTORTLE;
+    case SPECIES_CHIKORITA:  return SPECIES_BAYLEEF;
+    case SPECIES_CYNDAQUIL:  return SPECIES_QUILAVA;
+    case SPECIES_TOTODILE:   return SPECIES_CROCONAW;
+    case SPECIES_TREECKO:    return SPECIES_GROVYLE;
+    case SPECIES_TORCHIC:    return SPECIES_COMBUSKEN;
+    case SPECIES_MUDKIP:     return SPECIES_MARSHTOMP;
+    case SPECIES_TURTWIG:    return SPECIES_GROTLE;
+    case SPECIES_CHIMCHAR:   return SPECIES_MONFERNO;
+    case SPECIES_PIPLUP:     return SPECIES_PRINPLUP;
+    case SPECIES_SNIVY:      return SPECIES_SERVINE;
+    case SPECIES_TEPIG:      return SPECIES_PIGNITE;
+    case SPECIES_OSHAWOTT:   return SPECIES_DEWOTT;
+    case SPECIES_CHESPIN:    return SPECIES_QUILLADIN;
+    case SPECIES_FENNEKIN:   return SPECIES_BRAIXEN;
+    case SPECIES_FROAKIE:    return SPECIES_FROGADIER;
+    case SPECIES_ROWLET:     return SPECIES_DARTRIX;
+    case SPECIES_LITTEN:     return SPECIES_TORRACAT;
+    case SPECIES_POPPLIO:    return SPECIES_BRIONNE;
+    case SPECIES_GROOKEY:    return SPECIES_THWACKEY;
+    case SPECIES_SCORBUNNY:  return SPECIES_RABOOT;
+    case SPECIES_SOBBLE:     return SPECIES_DRIZZILE;
+    case SPECIES_SPRIGATITO: return SPECIES_FLORAGATO;
+    case SPECIES_FUECOCO:    return SPECIES_CROCALOR;
+    case SPECIES_QUAXLY:     return SPECIES_QUAXWELL;
+    default:                 return species;
+    }
+}
+
+enum Species GetFinalEvolutionForStarter(enum Species species)
+{
+    switch (species)
+    {
+    case SPECIES_BULBASAUR:  case SPECIES_IVYSAUR:    return SPECIES_VENUSAUR;
+    case SPECIES_CHARMANDER: case SPECIES_CHARMELEON: return SPECIES_CHARIZARD;
+    case SPECIES_SQUIRTLE:   case SPECIES_WARTORTLE:  return SPECIES_BLASTOISE;
+    case SPECIES_CHIKORITA:  case SPECIES_BAYLEEF:    return SPECIES_MEGANIUM;
+    case SPECIES_CYNDAQUIL:  case SPECIES_QUILAVA:    return SPECIES_TYPHLOSION;
+    case SPECIES_TOTODILE:   case SPECIES_CROCONAW:   return SPECIES_FERALIGATR;
+    case SPECIES_TREECKO:    case SPECIES_GROVYLE:    return SPECIES_SCEPTILE;
+    case SPECIES_TORCHIC:    case SPECIES_COMBUSKEN:  return SPECIES_BLAZIKEN;
+    case SPECIES_MUDKIP:     case SPECIES_MARSHTOMP:  return SPECIES_SWAMPERT;
+    case SPECIES_TURTWIG:    case SPECIES_GROTLE:     return SPECIES_TORTERRA;
+    case SPECIES_CHIMCHAR:   case SPECIES_MONFERNO:   return SPECIES_INFERNAPE;
+    case SPECIES_PIPLUP:     case SPECIES_PRINPLUP:   return SPECIES_EMPOLEON;
+    case SPECIES_SNIVY:      case SPECIES_SERVINE:    return SPECIES_SERPERIOR;
+    case SPECIES_TEPIG:      case SPECIES_PIGNITE:    return SPECIES_EMBOAR;
+    case SPECIES_OSHAWOTT:   case SPECIES_DEWOTT:     return SPECIES_SAMUROTT;
+    case SPECIES_CHESPIN:    case SPECIES_QUILLADIN:  return SPECIES_CHESNAUGHT;
+    case SPECIES_FENNEKIN:   case SPECIES_BRAIXEN:    return SPECIES_DELPHOX;
+    case SPECIES_FROAKIE:    case SPECIES_FROGADIER:  return SPECIES_GRENINJA;
+    case SPECIES_ROWLET:     case SPECIES_DARTRIX:    return SPECIES_DECIDUEYE;
+    case SPECIES_LITTEN:     case SPECIES_TORRACAT:   return SPECIES_INCINEROAR;
+    case SPECIES_POPPLIO:    case SPECIES_BRIONNE:    return SPECIES_PRIMARINA;
+    case SPECIES_GROOKEY:    case SPECIES_THWACKEY:   return SPECIES_RILLABOOM;
+    case SPECIES_SCORBUNNY:  case SPECIES_RABOOT:     return SPECIES_CINDERACE;
+    case SPECIES_SOBBLE:     case SPECIES_DRIZZILE:   return SPECIES_INTELEON;
+    case SPECIES_SPRIGATITO: case SPECIES_FLORAGATO:  return SPECIES_MEOWSCARADA;
+    case SPECIES_FUECOCO:    case SPECIES_CROCALOR:   return SPECIES_SKELEDIRGE;
+    case SPECIES_QUAXLY:     case SPECIES_QUAXWELL:   return SPECIES_QUAQUAVAL;
+    default:                                           return species;
+    }
+}
+
 u16 GetStarterPokemon(u16 chosenStarterId)
 {
-    if (chosenStarterId > STARTER_MON_COUNT)
-        chosenStarterId = 0;
-    return sStarterMon[chosenStarterId];
+    return GetStarterPokemonForGeneration(chosenStarterId, VarGet(VAR_STARTER_GEN));
 }
 
 static void VblankCB_StarterChoose(void)

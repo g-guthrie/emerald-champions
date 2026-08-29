@@ -90,9 +90,88 @@ EmeraldChampions_EventScript_MoveTutorExit:
 Common_EventScript_EmeraldChampionsBattleVendor::
 	lock
 	faceplayer
+
+EmeraldChampions_EventScript_BattleVendorMain:
+	goto_if_set FLAG_BADGE08_GET, EmeraldChampions_EventScript_BattleVendorCompleteArchive
 	message EmeraldChampions_Text_BattleVendorWelcome
 	waitmessage
-	special OpenEmeraldChampionsBattleItemMart
+	dynmultipush EmeraldChampions_Text_HeldItems, 0
+	dynmultipush EmeraldChampions_Text_Exit, 1
+	dynmultistack 0, 0, FALSE, 2, 0, 0, DYN_MULTICHOICE_CB_NONE
+	closemessage
+	switch VAR_RESULT
+	case 0, EmeraldChampions_EventScript_BattleItemCategories
+	goto EmeraldChampions_EventScript_BattleVendorExit
+
+EmeraldChampions_EventScript_BattleVendorCompleteArchive:
+	message EmeraldChampions_Text_BattleVendorCompleteWelcome
+	waitmessage
+	dynmultipush EmeraldChampions_Text_HeldItems, 0
+	dynmultipush EmeraldChampions_Text_MegaArchive, 1
+	dynmultipush EmeraldChampions_Text_EvolutionArchive, 2
+	dynmultipush EmeraldChampions_Text_Exit, 3
+	dynmultistack 0, 0, FALSE, 4, 0, 0, DYN_MULTICHOICE_CB_NONE
+	closemessage
+	switch VAR_RESULT
+	case 0, EmeraldChampions_EventScript_BattleItemCategories
+	case 1, EmeraldChampions_EventScript_OpenMegaArchive
+	case 2, EmeraldChampions_EventScript_OpenEvolutionArchive
+	goto EmeraldChampions_EventScript_BattleVendorExit
+
+EmeraldChampions_EventScript_BattleItemCategories:
+	message EmeraldChampions_Text_BattleItemCategoryPrompt
+	waitmessage
+	dynmultipush EmeraldChampions_Text_OffenseItems, 0
+	dynmultipush EmeraldChampions_Text_DefenseItems, 1
+	dynmultipush EmeraldChampions_Text_FieldItems, 2
+	dynmultipush EmeraldChampions_Text_TypeItems, 3
+	dynmultipush EmeraldChampions_Text_GemItems, 4
+	dynmultipush EmeraldChampions_Text_SpeciesItems, 5
+	dynmultipush EmeraldChampions_Text_Back, 6
+	dynmultistack 0, 0, FALSE, 7, 0, 0, DYN_MULTICHOICE_CB_NONE
+	closemessage
+	switch VAR_RESULT
+	case 0, EmeraldChampions_EventScript_OpenOffenseItems
+	case 1, EmeraldChampions_EventScript_OpenDefenseItems
+	case 2, EmeraldChampions_EventScript_OpenFieldItems
+	case 3, EmeraldChampions_EventScript_OpenTypeItems
+	case 4, EmeraldChampions_EventScript_OpenGemItems
+	case 5, EmeraldChampions_EventScript_OpenSpeciesItems
+	goto EmeraldChampions_EventScript_BattleVendorMain
+
+EmeraldChampions_EventScript_OpenOffenseItems:
+	special OpenEmeraldChampionsOffenseItemMart
+	goto EmeraldChampions_EventScript_BattleItemCategories
+
+EmeraldChampions_EventScript_OpenDefenseItems:
+	special OpenEmeraldChampionsDefenseItemMart
+	goto EmeraldChampions_EventScript_BattleItemCategories
+
+EmeraldChampions_EventScript_OpenFieldItems:
+	special OpenEmeraldChampionsFieldItemMart
+	goto EmeraldChampions_EventScript_BattleItemCategories
+
+EmeraldChampions_EventScript_OpenTypeItems:
+	special OpenEmeraldChampionsTypeItemMart
+	goto EmeraldChampions_EventScript_BattleItemCategories
+
+EmeraldChampions_EventScript_OpenGemItems:
+	special OpenEmeraldChampionsGemItemMart
+	goto EmeraldChampions_EventScript_BattleItemCategories
+
+EmeraldChampions_EventScript_OpenSpeciesItems:
+	special OpenEmeraldChampionsSpeciesItemMart
+	goto EmeraldChampions_EventScript_BattleItemCategories
+
+EmeraldChampions_EventScript_OpenMegaArchive:
+	special OpenEmeraldChampionsMegaStoneArchive
+	goto EmeraldChampions_EventScript_BattleVendorMain
+
+EmeraldChampions_EventScript_OpenEvolutionArchive:
+	special OpenEmeraldChampionsEvolutionItemArchive
+	goto EmeraldChampions_EventScript_BattleVendorMain
+
+EmeraldChampions_EventScript_BattleVendorExit:
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
@@ -100,6 +179,44 @@ Common_EventScript_EmeraldChampionsBattleVendor::
 EmeraldChampions_Text_BattleVendorWelcome:
 	.string "Competitive held items are free here.\p"
 	.string "Take as many as your teams need!$"
+
+EmeraldChampions_Text_BattleVendorCompleteWelcome:
+	.string "All eight BADGES! The complete Mega\n"
+	.string "archive is open before the LEAGUE.\p"
+	.string "What does your team need?$"
+
+EmeraldChampions_Text_HeldItems:
+	.string "Held Items$"
+
+EmeraldChampions_Text_MegaArchive:
+	.string "Mega Stone Archive$"
+
+EmeraldChampions_Text_EvolutionArchive:
+	.string "Evolution Items$"
+
+EmeraldChampions_Text_BattleItemCategoryPrompt:
+	.string "Which kind of held item do you need?$"
+
+EmeraldChampions_Text_OffenseItems:
+	.string "Offense$"
+
+EmeraldChampions_Text_DefenseItems:
+	.string "Defense & Recovery$"
+
+EmeraldChampions_Text_FieldItems:
+	.string "Field & Tempo$"
+
+EmeraldChampions_Text_TypeItems:
+	.string "Type Boosts$"
+
+EmeraldChampions_Text_GemItems:
+	.string "Gems$"
+
+EmeraldChampions_Text_SpeciesItems:
+	.string "Species Items$"
+
+EmeraldChampions_Text_Back:
+	.string "Back$"
 
 EmeraldChampions_Text_MoveTutorHowCanHelp:
 	.string "How can I help prepare your Pokémon?$"
@@ -158,3 +275,98 @@ EmeraldChampions_Text_BattleSetSpecialItem:
 EmeraldChampions_Text_MoveTutorGoodbye:
 	.string "Come back whenever you want to\n"
 	.string "change your team.$"
+
+EmeraldChampions_Text_NeedTwoPokemon:
+	.string "This is a Double Battle. Come back\n"
+	.string "with two usable Pokémon.$"
+
+Common_EventScript_ChooseStarterRegion::
+	msgbox EmeraldChampions_Text_ChooseStarterRegion, MSGBOX_DEFAULT
+	setvar VAR_0x8004, SCROLL_MULTI_STARTER_REGIONS
+	special ShowScrollableMultichoice
+	switch VAR_RESULT
+	case 0, EmeraldChampions_EventScript_StarterKanto
+	case 1, EmeraldChampions_EventScript_StarterJohto
+	case 2, EmeraldChampions_EventScript_StarterHoenn
+	case 3, EmeraldChampions_EventScript_StarterSinnoh
+	case 4, EmeraldChampions_EventScript_StarterUnova
+	case 5, EmeraldChampions_EventScript_StarterKalos
+	case 6, EmeraldChampions_EventScript_StarterAlola
+	case 7, EmeraldChampions_EventScript_StarterGalar
+	case 8, EmeraldChampions_EventScript_StarterPaldea
+	goto EmeraldChampions_EventScript_StarterHoenn
+
+EmeraldChampions_EventScript_StarterKanto:
+	setvar VAR_STARTER_GEN, 1
+	bufferstring 1, EmeraldChampions_Text_StarterRegionKanto
+	return
+
+EmeraldChampions_EventScript_StarterJohto:
+	setvar VAR_STARTER_GEN, 2
+	bufferstring 1, EmeraldChampions_Text_StarterRegionJohto
+	return
+
+EmeraldChampions_EventScript_StarterHoenn:
+	setvar VAR_STARTER_GEN, 3
+	bufferstring 1, EmeraldChampions_Text_StarterRegionHoenn
+	return
+
+EmeraldChampions_EventScript_StarterSinnoh:
+	setvar VAR_STARTER_GEN, 4
+	bufferstring 1, EmeraldChampions_Text_StarterRegionSinnoh
+	return
+
+EmeraldChampions_EventScript_StarterUnova:
+	setvar VAR_STARTER_GEN, 5
+	bufferstring 1, EmeraldChampions_Text_StarterRegionUnova
+	return
+
+EmeraldChampions_EventScript_StarterKalos:
+	setvar VAR_STARTER_GEN, 6
+	bufferstring 1, EmeraldChampions_Text_StarterRegionKalos
+	return
+
+EmeraldChampions_EventScript_StarterAlola:
+	setvar VAR_STARTER_GEN, 7
+	bufferstring 1, EmeraldChampions_Text_StarterRegionAlola
+	return
+
+EmeraldChampions_EventScript_StarterGalar:
+	setvar VAR_STARTER_GEN, 8
+	bufferstring 1, EmeraldChampions_Text_StarterRegionGalar
+	return
+
+EmeraldChampions_EventScript_StarterPaldea:
+	setvar VAR_STARTER_GEN, 9
+	bufferstring 1, EmeraldChampions_Text_StarterRegionPaldea
+	return
+
+EmeraldChampions_Text_ChooseStarterRegion:
+	.string "Dad studies how battling traditions\n"
+	.string "differ across every region.\p"
+	.string "Which starter trio speaks to you?$"
+
+EmeraldChampions_Text_StarterRegionChosen:
+	.string "{STR_VAR_1}! Great choice!\p"
+	.string "Dad packed that trio in his field bag.\n"
+	.string "Whichever partner you choose, I'll train\l"
+	.string "the one with the type advantage.$"
+
+EmeraldChampions_Text_StarterRegionKanto:
+	.string "Kanto$"
+EmeraldChampions_Text_StarterRegionJohto:
+	.string "Johto$"
+EmeraldChampions_Text_StarterRegionHoenn:
+	.string "Hoenn$"
+EmeraldChampions_Text_StarterRegionSinnoh:
+	.string "Sinnoh$"
+EmeraldChampions_Text_StarterRegionUnova:
+	.string "Unova$"
+EmeraldChampions_Text_StarterRegionKalos:
+	.string "Kalos$"
+EmeraldChampions_Text_StarterRegionAlola:
+	.string "Alola$"
+EmeraldChampions_Text_StarterRegionGalar:
+	.string "Galar$"
+EmeraldChampions_Text_StarterRegionPaldea:
+	.string "Paldea$"

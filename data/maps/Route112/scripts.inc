@@ -5,7 +5,15 @@ Route112_MapScripts::
 Route112_OnTransition:
 	clearflag FLAG_FORCE_MIRAGE_TOWER_VISIBLE
 	setvar VAR_JAGGED_PASS_ASH_WEATHER, 0
+	call Route112_EventScript_UpdateVialChansey
 	end
+
+Route112_EventScript_UpdateVialChansey::
+	setflag FLAG_HIDE_ROUTE112_VIAL_CHANSEY
+	goto_if_ne VAR_CHANSEY_NURSE_STATE, 1, Route112_EventScript_EndUpdateVialChansey
+	clearflag FLAG_HIDE_ROUTE112_VIAL_CHANSEY
+Route112_EventScript_EndUpdateVialChansey::
+	return
 
 Route112_EventScript_MagmaGrunts::
 	lockall
@@ -44,6 +52,40 @@ Route112_EventScript_MagmaGrunts::
 	releaseall
 	end
 
+Route112_EventScript_VialChanseyEscape::
+	lockall
+	applymovement LOCALID_ROUTE112_VIAL_CHANSEY, Route112_Movement_VialChanseyJump
+	waitmovement 0
+	playmoncry SPECIES_CHANSEY, CRY_MODE_NORMAL
+	delay 40
+	waitmoncry
+	applymovement LOCALID_ROUTE112_VIAL_CHANSEY, Route112_Movement_VialChanseyEscape
+	waitmovement 0
+	setvar VAR_CHANSEY_NURSE_STATE, 2
+	setflag FLAG_HIDE_ROUTE112_VIAL_CHANSEY
+	removeobject LOCALID_ROUTE112_VIAL_CHANSEY
+	msgbox Route112_Text_VialChanseyClimbed, MSGBOX_DEFAULT
+	releaseall
+	end
+
+Route112_Movement_VialChanseyJump:
+	jump_in_place_down
+	delay_4
+	jump_in_place_down
+	step_end
+
+Route112_Movement_VialChanseyEscape:
+	walk_right
+	walk_right
+	walk_right
+	walk_up
+	walk_up
+	step_end
+
+Route112_Text_VialChanseyClimbed:
+	.string "Blob bounded toward JAGGED PASS.\n"
+	.string "The trail continues up the mountain.$"
+
 Route112_EventScript_MtChimneyCableCarSign::
 	msgbox Route112_Text_MtChimneyCableCarSign, MSGBOX_SIGN
 	goto Common_EventScript_ShowRouteSpecies
@@ -66,7 +108,7 @@ Route112_EventScript_Brice::
 	end
 
 Route112_EventScript_Trent::
-	trainerbattle_single TRAINER_TRENT_1, Route112_Text_TrentIntro, Route112_Text_TrentDefeat, Route112_EventScript_RegisterTrent
+	trainerbattle_double TRAINER_TRENT_1, Route112_Text_TrentIntro, Route112_Text_TrentDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route112_EventScript_RegisterTrent
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route112_EventScript_RematchTrent
 	msgbox Route112_Text_TrentPostBattle, MSGBOX_DEFAULT
@@ -82,7 +124,7 @@ Route112_EventScript_RegisterTrent::
 	end
 
 Route112_EventScript_RematchTrent::
-	trainerbattle_rematch TRAINER_TRENT_1, Route112_Text_TrentRematchIntro, Route112_Text_TrentRematchDefeat
+	trainerbattle_rematch_double TRAINER_TRENT_1, Route112_Text_TrentRematchIntro, Route112_Text_TrentRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route112_Text_TrentRematchPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -97,7 +139,7 @@ Route112_EventScript_Carol::
 	end
 
 Route112_EventScript_Bryant::
-	trainerbattle_single TRAINER_BRYANT, Route112_Text_BryantIntro, Route112_Text_BryantDefeat
+	trainerbattle_double TRAINER_BRYANT, Route112_Text_BryantIntro, Route112_Text_BryantDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route112_Text_BryantPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -139,4 +181,3 @@ Route112_Text_MtChimneySign:
 Route112_Text_RouteSignLavaridge:
 	.string "ROUTE 112\n"
 	.string "{LEFT_ARROW} LAVARIDGE TOWN$"
-

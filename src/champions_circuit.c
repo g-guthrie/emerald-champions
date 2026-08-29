@@ -19,6 +19,7 @@
 #include "string_util.h"
 #include "constants/battle_frontier_trainers.h"
 #include "constants/items.h"
+#include "constants/pokedex.h"
 #include "constants/pokemon.h"
 #include "constants/vars.h"
 
@@ -52,6 +53,7 @@ struct CircuitGeneratedSet
     enum Ability ability;
     enum Item item;
     u8 statPoints[NUM_STATS];
+    u8 nature;
     bool8 zeroAttackIv;
     bool8 zeroSpeedIv;
 };
@@ -75,8 +77,7 @@ struct CircuitMovePool
     u8 count;
 };
 
-static EWRAM_DATA u16 sExhaustedBaseDex[SHOWDOWN_CIRCUIT_VARIANT_COUNT];
-static EWRAM_DATA u16 sExhaustedBaseDexCount;
+static EWRAM_DATA bool8 sExhaustedBaseDex[NATIONAL_DEX_COUNT + 1];
 
 static const u8 sCircuitStyleShowdown[] = _("Showdown random doubles");
 static const u8 sCircuitStyleRain[] = _("Showdown rain offense");
@@ -162,6 +163,17 @@ static const enum Move sNoStabMoves[] =
 bool32 IsChampionsCircuitBattle(void)
 {
     return VarGet(VAR_CHAMPIONS_CIRCUIT_ACTIVE) != 0 && gMain.inBattle;
+}
+
+static u32 CircuitRandomUniform(u32 lo, u32 hi)
+{
+#if TESTING
+    // Function tests normally rig RNG_NONE to zero. The Circuit's multi-seed
+    // generator test needs the real seeded stream used by production.
+    return RandomUniformDefault(RNG_NONE, lo, hi);
+#else
+    return RandomUniform(RNG_NONE, lo, hi);
+#endif
 }
 
 static bool32 MoveInList(enum Move move, const enum Move *list, u32 count)
@@ -383,7 +395,8 @@ static bool32 AddRandomMoveFromList(
 
     for (u32 i = 0; i < pool->count; i++)
     {
-        if (MoveInList(pool->moves[i], list, listCount) && Random() % ++matches == 0)
+        if (MoveInList(pool->moves[i], list, listCount)
+         && CircuitRandomUniform(0, ++matches - 1) == 0)
             selected = pool->moves[i];
     }
     return selected != MOVE_NONE && AddMove(set, pool, selected, template, variant);
@@ -405,7 +418,7 @@ static bool32 AddRandomStabMove(
         if (IsDamagingMove(move)
          && !IsNoStabMove(move)
          && GetTemplateMoveType(move, template) == wantedType
-         && Random() % ++matches == 0)
+         && CircuitRandomUniform(0, ++matches - 1) == 0)
             selected = move;
     }
     return selected != MOVE_NONE && AddMove(set, pool, selected, template, variant);
@@ -446,7 +459,7 @@ static bool32 AddRandomDamagingMove(
         if (IsDamagingMove(move)
          && !IsNoStabMove(move)
          && (excludedType == TYPE_NONE || GetTemplateMoveType(move, template) != excludedType)
-         && Random() % ++matches == 0)
+         && CircuitRandomUniform(0, ++matches - 1) == 0)
             selected = move;
     }
     return selected != MOVE_NONE && AddMove(set, pool, selected, template, variant);
@@ -511,7 +524,7 @@ static void BuildShowdownMoveset(
             enum Type moveType = GetTemplateMoveType(move, template);
             if (IsDamagingMove(move) && GetMovePriority(move) > 0
              && (moveType == type1 || moveType == type2)
-             && Random() % ++matches == 0)
+             && CircuitRandomUniform(0, ++matches - 1) == 0)
                 selected = move;
         }
         if (selected != MOVE_NONE)
@@ -594,7 +607,7 @@ static void BuildShowdownMoveset(
 
     while (SetMoveCount(set) < MAX_MON_MOVES && pool.count != 0)
     {
-        enum Move move = pool.moves[Random() % pool.count];
+        enum Move move = pool.moves[CircuitRandomUniform(0, pool.count - 1)];
         AddMove(set, &pool, move, template, variant);
         if (move == MOVE_SLEEP_TALK)
             AddMove(set, &pool, MOVE_REST, template, variant);
@@ -676,7 +689,7 @@ static enum Ability ChooseShowdownAbility(
         if (AbilityAllowed(template->abilities[i], set, template, details))
             choices[count++] = template->abilities[i];
     if (count != 0)
-        return choices[Random() % count];
+        return choices[CircuitRandomUniform(0, count - 1)];
     for (u32 i = 0; i < template->abilityCount; i++)
     {
         enum Ability ability = template->abilities[i];
@@ -686,8 +699,8 @@ static enum Ability ChooseShowdownAbility(
             choices[count++] = ability;
     }
     if (count != 0)
-        return choices[Random() % count];
-    return template->abilities[Random() % template->abilityCount];
+        return choices[CircuitRandomUniform(0, count - 1)];
+    return template->abilities[CircuitRandomUniform(0, template->abilityCount - 1)];
 }
 
 static enum Item GetTypeBoostingItem(enum Type type)
@@ -738,7 +751,7 @@ static enum Item ChooseShowdownItem(
      || ability == ABILITY_HARVEST || ability == ABILITY_RIPEN
      || SetHasMove(set, MOVE_BELLY_DRUM))
         return ITEM_SITRUS_BERRY;
-    if (variant->partySpecies == SPECIES_ALAKAZAM && Random() % 2 == 0)
+    if (variant->partySpecies == SPECIES_ALAKAZAM && CircuitRandomUniform(0, 1) == 0)
         return ITEM_FOCUS_SASH;
     if (variant->partySpecies == SPECIES_GLIMMORA)
         return ITEM_FOCUS_SASH;
@@ -763,7 +776,9 @@ static enum Item ChooseShowdownItem(
      && SetHasMove(set, MOVE_DOUBLE_EDGE) && SetHasMove(set, MOVE_FAKE_OUT))
         return ITEM_SILK_SCARF;
     if (SetHasMove(set, MOVE_POPULATION_BOMB)
-     || (ability == ABILITY_HUSTLE && SetHasMoveFromList(set, sSetupMoves, ARRAY_COUNT(sSetupMoves)) && Random() % 2 == 0)
+     || (ability == ABILITY_HUSTLE
+      && SetHasMoveFromList(set, sSetupMoves, ARRAY_COUNT(sSetupMoves))
+      && CircuitRandomUniform(0, 1) == 0)
      || (variant->partySpecies == SPECIES_TSAREENA && template->role == SHOWDOWN_ROLE_OFFENSIVE_PROTECT))
         return ITEM_WIDE_LENS;
     if (template->preferredType != TYPE_NONE
@@ -785,35 +800,105 @@ static void SetShowdownStatPoints(
     const struct ShowdownCircuitTemplate *template)
 {
     bool32 physicalDamage = FALSE;
+    bool32 specialDamage = FALSE;
+    bool32 slow = SetHasMove(set, MOVE_GYRO_BALL)
+               || SetHasMove(set, MOVE_METAL_BURST)
+               || SetHasMove(set, MOVE_TRICK_ROOM);
+    bool32 bulky = template->role == SHOWDOWN_ROLE_BULKY_SETUP
+                || template->role == SHOWDOWN_ROLE_BULKY_ATTACKER;
 
     for (u32 i = 0; i < NUM_STATS; i++)
-        set->statPoints[i] = 11;
+        set->statPoints[i] = 0;
     for (u32 i = 0; i < MAX_MON_MOVES; i++)
     {
         enum Move move = set->moves[i];
+
         if (move != MOVE_NONE
          && GetMoveCategory(move) == DAMAGE_CATEGORY_PHYSICAL
          && move != MOVE_BODY_PRESS && move != MOVE_FOUL_PLAY)
             physicalDamage = TRUE;
+        if (move != MOVE_NONE && GetMoveCategory(move) == DAMAGE_CATEGORY_SPECIAL)
+            specialDamage = TRUE;
     }
+
+    if (!physicalDamage && !specialDamage)
+    {
+        set->statPoints[STAT_HP] = 32;
+        if (template->role == SHOWDOWN_ROLE_SUPPORT && !slow)
+        {
+            set->statPoints[STAT_DEF] = 2;
+            set->statPoints[STAT_SPEED] = 32;
+            set->nature = NATURE_TIMID;
+        }
+        else
+        {
+            set->statPoints[STAT_DEF] = 17;
+            set->statPoints[STAT_SPDEF] = 17;
+            set->nature = slow ? NATURE_SASSY : NATURE_CALM;
+        }
+    }
+    else if (physicalDamage && specialDamage)
+    {
+        if (slow || bulky)
+        {
+            set->statPoints[STAT_HP] = 32;
+            set->statPoints[STAT_ATK] = 16;
+            set->statPoints[STAT_SPATK] = 16;
+            set->statPoints[STAT_DEF] = 2;
+            set->nature = slow ? NATURE_QUIET : NATURE_RASH;
+        }
+        else
+        {
+            set->statPoints[STAT_ATK] = 22;
+            set->statPoints[STAT_SPATK] = 22;
+            set->statPoints[STAT_SPEED] = 22;
+            set->nature = NATURE_NAIVE;
+        }
+    }
+    else if (physicalDamage)
+    {
+        set->statPoints[STAT_ATK] = 32;
+        if (slow || bulky)
+        {
+            set->statPoints[STAT_HP] = 32;
+            set->statPoints[STAT_DEF] = 2;
+            set->nature = slow ? NATURE_BRAVE : NATURE_ADAMANT;
+        }
+        else
+        {
+            set->statPoints[STAT_HP] = 2;
+            set->statPoints[STAT_SPEED] = 32;
+            set->nature = NATURE_JOLLY;
+        }
+    }
+    else
+    {
+        set->statPoints[STAT_SPATK] = 32;
+        if (slow || bulky)
+        {
+            set->statPoints[STAT_HP] = 32;
+            set->statPoints[STAT_SPDEF] = 2;
+            set->nature = slow ? NATURE_QUIET : NATURE_MODEST;
+        }
+        else
+        {
+            set->statPoints[STAT_HP] = 2;
+            set->statPoints[STAT_SPEED] = 32;
+            set->nature = NATURE_TIMID;
+        }
+    }
+
     if (!physicalDamage && !SetHasMove(set, MOVE_TRANSFORM))
-    {
-        set->statPoints[STAT_ATK] = 0;
         set->zeroAttackIv = TRUE;
-    }
-    if (SetHasMove(set, MOVE_GYRO_BALL) || SetHasMove(set, MOVE_METAL_BURST) || SetHasMove(set, MOVE_TRICK_ROOM))
+    if (slow)
     {
-        set->statPoints[STAT_SPEED] = 0;
         set->zeroSpeedIv = TRUE;
     }
 }
 
 static bool32 IsBaseDexExhausted(enum NationalDexOrder dex)
 {
-    for (u32 i = 0; i < sExhaustedBaseDexCount; i++)
-        if (sExhaustedBaseDex[i] == dex)
-            return TRUE;
-    return FALSE;
+    return dex <= NATIONAL_DEX_COUNT && sExhaustedBaseDex[dex];
 }
 
 static bool32 VariantAllowedByMegaState(const struct ShowdownCircuitVariant *variant, bool32 hasMega, bool32 groupHasMega)
@@ -834,45 +919,29 @@ static bool32 GroupHasMega(enum NationalDexOrder dex)
     return FALSE;
 }
 
-static bool32 GroupHasAllowedVariant(enum NationalDexOrder dex, bool32 hasMega)
-{
-    bool32 groupHasMega = GroupHasMega(dex);
-
-    for (u32 i = 0; i < SHOWDOWN_CIRCUIT_VARIANT_COUNT; i++)
-    {
-        const struct ShowdownCircuitVariant *variant = &gShowdownCircuitVariants[i];
-        if (SpeciesToNationalPokedexNum(variant->partySpecies) == dex
-         && VariantAllowedByMegaState(variant, hasMega, groupHasMega))
-            return TRUE;
-    }
-    return FALSE;
-}
-
-static bool32 IsFirstVariantForDex(u16 variantIndex, enum NationalDexOrder dex)
-{
-    for (u32 i = 0; i < variantIndex; i++)
-        if (SpeciesToNationalPokedexNum(gShowdownCircuitVariants[i].partySpecies) == dex)
-            return FALSE;
-    return TRUE;
-}
-
-static bool32 ChooseBaseDex(bool32 hasMega, enum NationalDexOrder *dexOut)
+static bool32 ChooseBaseDex(enum NationalDexOrder *dexOut)
 {
     u32 matches = 0;
+    enum NationalDexOrder previousDex = NATIONAL_DEX_NONE;
 
     for (u32 i = 0; i < SHOWDOWN_CIRCUIT_VARIANT_COUNT; i++)
     {
         enum NationalDexOrder dex = SpeciesToNationalPokedexNum(gShowdownCircuitVariants[i].partySpecies);
-        if (!IsFirstVariantForDex(i, dex)
-         || IsBaseDexExhausted(dex)
-         || !GroupHasAllowedVariant(dex, hasMega))
+
+        // Generated variants are grouped by National Dex family. Sampling
+        // only each group's first row avoids the former nested full-table
+        // scans, which were prohibitively expensive on GBA hardware.
+        if (dex == previousDex)
             continue;
-        if (Random() % ++matches == 0)
+        previousDex = dex;
+        if (IsBaseDexExhausted(dex))
+            continue;
+        if (CircuitRandomUniform(0, ++matches - 1) == 0)
             *dexOut = dex;
     }
     if (matches == 0)
         return FALSE;
-    sExhaustedBaseDex[sExhaustedBaseDexCount++] = *dexOut;
+    sExhaustedBaseDex[*dexOut] = TRUE;
     return TRUE;
 }
 
@@ -887,7 +956,7 @@ static bool32 ChooseVariantForDex(enum NationalDexOrder dex, bool32 hasMega, u16
         if (SpeciesToNationalPokedexNum(variant->partySpecies) != dex
          || !VariantAllowedByMegaState(variant, hasMega, groupHasMega))
             continue;
-        if (Random() % ++matches == 0)
+        if (CircuitRandomUniform(0, ++matches - 1) == 0)
             *variantOut = i;
     }
     return matches != 0;
@@ -1012,7 +1081,7 @@ static void AddSetToTeamState(struct CircuitTeamState *team, struct CircuitGener
 
 static bool32 GenerateShowdownTeam(struct CircuitTeamState *team, bool32 strict)
 {
-    sExhaustedBaseDexCount = 0;
+    memset(sExhaustedBaseDex, 0, sizeof(sExhaustedBaseDex));
     memset(team, 0, sizeof(*team));
 
     while (team->count < CIRCUIT_TEAM_SIZE)
@@ -1024,7 +1093,7 @@ static bool32 GenerateShowdownTeam(struct CircuitTeamState *team, bool32 strict)
         struct CircuitGeneratedSet set = {0};
         u16 templateIndex;
 
-        if (!ChooseBaseDex(team->hasMega, &dex)
+        if (!ChooseBaseDex(&dex)
          || !ChooseVariantForDex(dex, team->hasMega, &variantIndex))
             break;
         variant = &gShowdownCircuitVariants[variantIndex];
@@ -1033,7 +1102,8 @@ static bool32 GenerateShowdownTeam(struct CircuitTeamState *team, bool32 strict)
         if (!CandidateAllowed(team, variant, strict))
             continue;
 
-        templateIndex = variant->templateOffset + Random() % variant->templateCount;
+        templateIndex = variant->templateOffset
+                      + CircuitRandomUniform(0, variant->templateCount - 1);
         template = &gShowdownCircuitTemplates[templateIndex];
         set.variantIndex = variantIndex;
         BuildShowdownMoveset(&set, template, variant, &team->details);
@@ -1072,7 +1142,7 @@ static void CreateCircuitMon(struct Pokemon *mon, const struct CircuitGeneratedS
     u8 ppBonuses = 0;
     u8 iv = MAX_PER_STAT_IVS;
     u32 abilitySlot = 0;
-    u8 nature = NATURE_SERIOUS;
+    u8 nature = set->nature;
 
     CreateMon(mon, variant->partySpecies, level, Random32(), OTID_STRUCT_RANDOM_NO_SHINY);
     for (u32 stat = 0; stat < NUM_STATS; stat++)

@@ -25,7 +25,11 @@ RESTORATIONS = {
     "TRAINER_WATTSON_4": ("TRAINER_COURTNEY_MOSSDEEP", "COURTNEY", "Team Magma", "Magma Grunt F", "Female", "Magma"),
     "TRAINER_WATTSON_5": ("TRAINER_WALLACE_DOUBLES_LEGENDS", "WALLACE", "Champion", "Champion Wallace", "Male", "Male"),
     "TRAINER_ROXANNE_2": ("TRAINER_LEAF_ALTERING_CAVE", "LEAF", "Rival", "Leaf", "Female", "Female"),
-    "TRAINER_ROXANNE_3": ("TRAINER_CYNTHIA_1", "CYNTHIA", "Cooltrainer", "Cooltrainer F", "Female", "Female"),
+    "TRAINER_ROXANNE_3": ("TRAINER_CYNTHIA_1", "CYNTHIA", "Cooltrainer", "Cynthia", "Female", "Female"),
+    "TRAINER_ROXANNE_4": ("TRAINER_ALANNAH", "ALANNAH", "Picnicker", "Picnicker", "Female", "Female"),
+    "TRAINER_ROXANNE_5": ("TRAINER_MARTIN", "MARTIN", "Camper", "Camper", "Male", "Male"),
+    "TRAINER_JUAN_4": ("TRAINER_ROMAN", "ROMAN", "Hiker", "Hiker", "Male", "Hiker"),
+    "TRAINER_JUAN_5": ("TRAINER_ELMER", "ELMER", "Ruin Maniac", "Ruin Maniac", "Male", "Hiker"),
 }
 
 
@@ -52,12 +56,15 @@ def main() -> None:
     prefix = text[:markers[0].start()]
     output = [prefix]
     restored = set()
+    existing_custom = {data[0]: donor for donor, data in RESTORATIONS.items()}
     for index, marker in enumerate(markers):
         block = text[marker.start():markers[index + 1].start() if index + 1 < len(markers) else len(text)]
         donor = marker.group(1)
         if donor in RESTORATIONS:
             block = placeholder_block(RESTORATIONS[donor])
             restored.add(donor)
+        elif donor in existing_custom:
+            restored.add(existing_custom[donor])
         output.append(block)
     missing = set(RESTORATIONS) - restored
     if missing:

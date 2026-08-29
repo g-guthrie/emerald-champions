@@ -2,6 +2,7 @@
 #include "battle_setup.h"
 #include "battle_pike.h"
 #include "battle_pyramid.h"
+#include "caps.h"
 #include "event_data.h"
 #include "emerald_champions_battle_sets.h"
 #include "legendary_signs.h"
@@ -678,7 +679,8 @@ void CreateWildMon(enum Species species, u8 level)
     GiveMonInitialMoveset(&gParties[B_TRAINER_OPPONENT_A][0]);
     if (!InBattlePike()
      && CurrentBattlePyramidLocation() == PYRAMID_LOCATION_NONE
-     && IsEmeraldChampionsOrdinaryWildSpecies(species))
+     && (IsEmeraldChampionsOrdinaryWildSpecies(species)
+      || IsLegendarySignOrdinaryWildSpecies(species)))
         ApplyEmeraldChampionsRandomWildSet(&gParties[B_TRAINER_OPPONENT_A][0]);
 }
 
@@ -747,6 +749,8 @@ bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, enum WildPok
     }
 
     level = ChooseWildMonLevel(wildMonInfo->wildPokemon, wildMonIndex, area);
+    if (IsLegendarySignOrdinaryWildSpecies(wildMonInfo->wildPokemon[wildMonIndex].species))
+        level = min(MAX_LEVEL, GetCurrentLevelCap());
     if (flags & WILD_CHECK_REPEL && !IsWildLevelAllowedByRepel(level))
         return FALSE;
     if (gMapHeader.mapLayoutId != LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_WILD_MONS && flags & WILD_CHECK_KEEN_EYE && !IsAbilityAllowingEncounter(level))

@@ -19,7 +19,9 @@ This branch does not resize either save block. New state uses previously
 unused native event slots:
 
 - `VAR_EMERALD_CHAMPIONS_DIFFICULTY` at `0x40F7`.
-- Eight Legendary Sign bitfield variables at `0x40F8` through `0x40FF`.
+- Twelve Legendary Sign bitfield variables: the original eight at `0x40F8`
+  through `0x40FF`, plus append-only unlock/caught fields at `0x408B`,
+  `0x409D`, `0x40A1`, and `0x40A8`.
 - Dedicated Champions Circuit current wins, lifetime wins, and active marker
   at `0x40DB`, `0x40DC`, and `0x40E5`.
 - Three visible-encounter hide flags at `0x4ED` through `0x4EF`.
@@ -31,7 +33,16 @@ The Circuit intentionally does not use Battle Tower streak or outcome fields.
 Its temporary level normalization uses the engine's existing saved-party
 buffer and the lobby script does not expose a save-and-quit path mid-run.
 
-## Release gates
+## Current evidence
+
+- SaveBlock1, SaveBlock2, SaveBlock3, and aggregate backward-layout tests:
+  4 passed, 0 failed.
+- Numeric flag and variable assignments are unique.
+- The Circuit runtime test proves exact party restoration after a run.
+- The modern ROM identity is stable at title `EM CHAMPIONS`, game code `BPEE`,
+  maker `01`.
+
+## Remaining deployment gate
 
 Before the modern baseline is called release-ready, automated and emulator
 tests must prove:
@@ -45,5 +56,7 @@ tests must prove:
 5. The web layer keys cloud saves to the stable modern game identity rather
    than the changing ROM hash.
 
-Until those runtime gates pass, source compatibility is established but save
-compatibility remains `PARTIAL`.
+The standalone modern save layout is release-ready. Cross-build browser/cloud
+retention remains a deployment concern: the web layer must key saves to this
+stable modern game identity rather than a changing ROM hash, and that behavior
+must be rechecked whenever the hosted ROM is replaced.

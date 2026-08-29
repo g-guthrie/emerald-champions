@@ -26,7 +26,7 @@ SeafloorCavern_Room9_EventScript_ArchieAwakenKyogre::
 	applymovement VAR_0x8004, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox SeafloorCavern_Room9_Text_ArchieYouMustDisappear, MSGBOX_DEFAULT
-	trainerbattle_no_intro TRAINER_ARCHIE, SeafloorCavern_Room9_Text_ArchieDefeat
+	trainerbattle_no_intro_double TRAINER_ARCHIE, SeafloorCavern_Room9_Text_ArchieDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox SeafloorCavern_Room9_Text_ArchieWithThisRedOrb, MSGBOX_DEFAULT
 	setweather WEATHER_NONE
 	doweather
@@ -223,30 +223,24 @@ SeafloorCavern_Room9_Text_ArchieSoItWasYou:
 	.string "So it was you, after all.$"
 
 SeafloorCavern_Room9_Text_ArchieBeholdKyogre:
-	.string "ARCHIE: Behold!\p"
-	.string "See how beautiful it is, the sleeping\n"
-	.string "form of the ancient POKéMON KYOGRE!\p"
-	.string "I have waited so long for this day to\n"
-	.string "come…$"
+	.string "ARCHIE: KYOGRE, the current before\n"
+	.string "maps, borders, or human permission.\p"
+	.string "Every awakened SIGN bends toward it.\n"
+	.string "Today the sea becomes free again.$"
 
 SeafloorCavern_Room9_Text_ArchieYouMustDisappear:
-	.string "ARCHIE: It surprises me, how you've\n"
-	.string "managed to chase me here.\p"
-	.string "But that's all over now.\p"
-	.string "For the realization of my dream,\n"
-	.string "you must disappear now!$"
+	.string "You chased us through every changing\n"
+	.string "route and answered every formation.\p"
+	.string "One final current stands between you and\n"
+	.string "my dream. Survive it if you can.$"
 
 SeafloorCavern_Room9_Text_ArchieDefeat:
-	.string "What?!\n"
-	.string "I lost to a mere child like you?!$"
+	.string "You kept your shape while breaking mine.$"
 
 SeafloorCavern_Room9_Text_ArchieWithThisRedOrb:
-	.string "ARCHIE: Fufufu…\p"
-	.string "I commend you. I must recognize that\n"
-	.string "you are truly gifted.\p"
-	.string "But!\n"
-	.string "I have this in my possession!\p"
-	.string "With this RED ORB, I can make KYOGRE…$"
+	.string "ARCHIE: You won the battle. The RED ORB\n"
+	.string "still decides the world.\p"
+	.string "KYOGRE, answer the sea!$"
 
 SeafloorCavern_Room9_Text_RedOrbShinesByItself:
 	.string "The RED ORB suddenly began shining\n"
@@ -263,53 +257,35 @@ SeafloorCavern_Room9_Text_ArchieAMessageFromOutside:
 	.string "members outside…$"
 
 SeafloorCavern_Room9_Text_ArchieWhatRainingTooHard:
-	.string "ARCHIE: Yes, what is it?\p"
-	.string "Hm…\n"
-	.string "It's raining heavily?\p"
-	.string "Good… That should have happened.\n"
-	.string "That is why we awakened KYOGRE,\l"
-	.string "to realize TEAM AQUA's vision of\l"
-	.string "expanding the sea.\p"
-	.string "What?!\p"
-	.string "It's raining far harder than we\n"
-	.string "envisioned? You're in danger?\p"
-	.string "That can't be…\n"
-	.string "That's just not possible…\p"
-	.string "Hold your position and monitor\n"
-	.string "the situation!$"
+	.string "ARCHIE: Heavy rain? Good. The current is\n"
+	.string "moving exactly as planned.\p"
+	.string "What? Routes flooded, crews trapped, and\n"
+	.string "the pressure still rising?\p"
+	.string "No. Freedom was not supposed to erase\n"
+	.string "everything it connected.$"
 
 SeafloorCavern_Room9_Text_ArchieWhyDidKyogreDisappear:
-	.string "ARCHIE: There's something wrong…\p"
-	.string "The RED ORB is supposed to awaken\n"
-	.string "and control KYOGRE…\p"
-	.string "But… Why?\n"
-	.string "Why did KYOGRE disappear?\p"
-	.string "Why?!$"
+	.string "ARCHIE: The RED ORB woke KYOGRE, but it\n"
+	.string "never promised me control.\p"
+	.string "I mistook motion for obedience.$"
 
 SeafloorCavern_Room9_Text_MaxieWhatHaveYouWrought:
-	.string "MAXIE: What have you wrought?\p"
-	.string "ARCHIE… You've finally awoken KYOGRE,\n"
-	.string "haven't you?\p"
-	.string "What will happen to the world if this\n"
-	.string "downpour continues for all eternity?\p"
-	.string "The world's landmass will drown in\n"
-	.string "the deepening sea…$"
+	.string "MAXIE: ARCHIE, the network is amplifying\n"
+	.string "KYOGRE exactly as it amplified GROUDON.\p"
+	.string "If this continues, neither land nor the\n"
+	.string "people you meant to free will remain.$"
 
 SeafloorCavern_Room9_Text_ArchieDontGetAllHighAndMighty:
-	.string "ARCHIE: W-what?!\n"
-	.string "Don't get all high and mighty with me!\p"
-	.string "Wasn't it you, TEAM MAGMA, that\n"
-	.string "infuriated GROUDON?\p"
-	.string "So long as I have this RED ORB,\n"
-	.string "I should be able to control KYOGRE…\p"
-	.string "I should be able to control it…$"
+	.string "ARCHIE: Your certainty woke GROUDON! My\n"
+	.string "mistake only mirrors yours.\p"
+	.string "And the RED ORB should still let me...\n"
+	.string "No. We never understood the ORBS.$"
 
 SeafloorCavern_Room9_Text_MaxieWeDontHaveTimeToArgue:
-	.string "MAXIE: We don't have the time to\n"
-	.string "argue about it here!\p"
-	.string "Get outside and see for yourself!\p"
-	.string "See if what you've wrought is the\n"
-	.string "world that we desired!$"
+	.string "MAXIE: Blame is another wasted turn.\n"
+	.string "Outside, HOENN is breaking now.\p"
+	.string "Look at the world our perfect answers\n"
+	.string "created.$"
 
 SeafloorCavern_Room9_Text_MaxieComeOnPlayer:
 	.string "MAXIE: {PLAYER}, come on, you have\n"
