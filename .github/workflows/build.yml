@@ -32,7 +32,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           fetch-depth: 1
 
@@ -48,7 +48,7 @@ jobs:
             python3
 
       - name: Cache native build tools
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: |
             tools/bin2c/bin2c
