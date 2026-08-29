@@ -355,6 +355,19 @@ SUPPLEMENTAL_DEFAULT_OVERRIDES = {
     ),
 }
 
+SUPPLEMENTAL_ALTERNATIVE_OVERRIDES = {
+    ("SPECIES_FLYGON", "Bulky Attacker"): authored_modern_set(
+        "SPECIES_FLYGON",
+        "Bulky Attacker",
+        ["MOVE_PROTECT", "MOVE_SCALE_SHOT", "MOVE_TAILWIND", "MOVE_HIGH_HORSEPOWER"],
+        "NATURE_JOLLY",
+        "ABILITY_LEVITATE",
+        "ITEM_YACHE_BERRY",
+        [2, 32, 0, 0, 0, 32],
+        "Yache physical attacker and Tailwind setter",
+    ),
+}
+
 
 def git_json(path: str) -> dict:
     result = subprocess.run(
@@ -660,6 +673,12 @@ def main() -> None:
         if entry["species"] in default_species
     )
     raw_alternatives.extend(handbook_alternatives)
+    raw_alternatives = [
+        SUPPLEMENTAL_ALTERNATIVE_OVERRIDES.get(
+            (entry["species"], entry["name"]), entry
+        )
+        for entry in raw_alternatives
+    ]
     alternatives_by_species: dict[str, list[dict]] = {}
     for entry in raw_alternatives:
         alternatives_by_species.setdefault(entry["species"], []).append(entry)

@@ -23,6 +23,7 @@ STATIC_GATES = (
     ("wild distribution", (PYTHON, "scripts/emerald_champions_wild_distribution.py")),
     ("route signs", (PYTHON, "scripts/emerald_champions_route_signs.py")),
     ("competitive presets", (PYTHON, "scripts/verify_emerald_champions_battle_sets.py")),
+    ("species stat rebalances", (PYTHON, "scripts/verify_species_stat_rebalances.py")),
     ("upstream critical fixes", (PYTHON, "scripts/verify_upstream_critical_fixes.py")),
     ("campaign roster", (PYTHON, "scripts/verify_emerald_champions_campaign_roster.py")),
     ("trainer Ability legality", (PYTHON, "scripts/verify_trainer_ability_legality.py")),

@@ -12641,7 +12641,7 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         .name = _("Bulky Attacker"),
         .preset =
         {
-            .moves = {MOVE_PROTECT, MOVE_SCALE_SHOT, MOVE_TAILWIND, MOVE_EARTH_POWER},
+            .moves = {MOVE_PROTECT, MOVE_SCALE_SHOT, MOVE_TAILWIND, MOVE_HIGH_HORSEPOWER},
             .item = ITEM_YACHE_BERRY,
             .requiredItem = ITEM_NONE,
             .nature = NATURE_JOLLY,

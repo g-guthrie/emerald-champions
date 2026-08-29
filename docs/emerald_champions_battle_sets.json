@@ -31479,7 +31479,7 @@
         "MOVE_PROTECT",
         "MOVE_SCALE_SHOT",
         "MOVE_TAILWIND",
-        "MOVE_EARTH_POWER"
+        "MOVE_HIGH_HORSEPOWER"
       ],
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_LEVITATE",
@@ -31493,8 +31493,8 @@
         0,
         32
       ],
-      "role": "Doubles Bulky Attacker",
-      "source": "preserved-handbook-alternative"
+      "role": "Yache physical attacker and Tailwind setter",
+      "source": "Emerald Champions authored modern doubles supplement"
     },
     {
       "species": "SPECIES_ALTARIA",
