@@ -275,6 +275,79 @@ static const struct MenuAction MultichoiceList_GameCornerTMs[] =
 {
     {COMPOUND_STRING("GENESECT{CLEAR_TO 72}7,500 COINS")},
     {COMPOUND_STRING("POIPOLE{CLEAR_TO 72}6,500 COINS")},
+    {COMPOUND_STRING("STARTER ARCHIVE")},
+    {gText_Exit},
+};
+
+static const struct MenuAction MultichoiceList_ECStarterArchiveKanto[] =
+{
+    {COMPOUND_STRING("BULBASAUR{CLEAR_TO 72}500 COINS")},
+    {COMPOUND_STRING("CHARMANDER{CLEAR_TO 72}500 COINS")},
+    {COMPOUND_STRING("SQUIRTLE{CLEAR_TO 72}500 COINS")},
+    {gText_Exit},
+};
+
+static const struct MenuAction MultichoiceList_ECStarterArchiveJohto[] =
+{
+    {COMPOUND_STRING("CHIKORITA{CLEAR_TO 72}500 COINS")},
+    {COMPOUND_STRING("CYNDAQUIL{CLEAR_TO 72}500 COINS")},
+    {COMPOUND_STRING("TOTODILE{CLEAR_TO 72}500 COINS")},
+    {gText_Exit},
+};
+
+static const struct MenuAction MultichoiceList_ECStarterArchiveHoenn[] =
+{
+    {COMPOUND_STRING("TREECKO{CLEAR_TO 72}500 COINS")},
+    {COMPOUND_STRING("TORCHIC{CLEAR_TO 72}500 COINS")},
+    {COMPOUND_STRING("MUDKIP{CLEAR_TO 72}500 COINS")},
+    {gText_Exit},
+};
+
+static const struct MenuAction MultichoiceList_ECStarterArchiveSinnoh[] =
+{
+    {COMPOUND_STRING("TURTWIG{CLEAR_TO 72}500 COINS")},
+    {COMPOUND_STRING("CHIMCHAR{CLEAR_TO 72}500 COINS")},
+    {COMPOUND_STRING("PIPLUP{CLEAR_TO 72}500 COINS")},
+    {gText_Exit},
+};
+
+static const struct MenuAction MultichoiceList_ECStarterArchiveUnova[] =
+{
+    {COMPOUND_STRING("SNIVY{CLEAR_TO 72}500 COINS")},
+    {COMPOUND_STRING("TEPIG{CLEAR_TO 72}500 COINS")},
+    {COMPOUND_STRING("OSHAWOTT{CLEAR_TO 72}500 COINS")},
+    {gText_Exit},
+};
+
+static const struct MenuAction MultichoiceList_ECStarterArchiveKalos[] =
+{
+    {COMPOUND_STRING("CHESPIN{CLEAR_TO 72}500 COINS")},
+    {COMPOUND_STRING("FENNEKIN{CLEAR_TO 72}500 COINS")},
+    {COMPOUND_STRING("FROAKIE{CLEAR_TO 72}500 COINS")},
+    {gText_Exit},
+};
+
+static const struct MenuAction MultichoiceList_ECStarterArchiveAlola[] =
+{
+    {COMPOUND_STRING("ROWLET{CLEAR_TO 72}500 COINS")},
+    {COMPOUND_STRING("LITTEN{CLEAR_TO 72}500 COINS")},
+    {COMPOUND_STRING("POPPLIO{CLEAR_TO 72}500 COINS")},
+    {gText_Exit},
+};
+
+static const struct MenuAction MultichoiceList_ECStarterArchiveGalar[] =
+{
+    {COMPOUND_STRING("GROOKEY{CLEAR_TO 72}500 COINS")},
+    {COMPOUND_STRING("SCORBUNNY{CLEAR_TO 72}500 COINS")},
+    {COMPOUND_STRING("SOBBLE{CLEAR_TO 72}500 COINS")},
+    {gText_Exit},
+};
+
+static const struct MenuAction MultichoiceList_ECStarterArchivePaldea[] =
+{
+    {COMPOUND_STRING("SPRIGATITO{CLEAR_TO 72}500 COINS")},
+    {COMPOUND_STRING("FUECOCO{CLEAR_TO 72}500 COINS")},
+    {COMPOUND_STRING("QUAXLY{CLEAR_TO 72}500 COINS")},
     {gText_Exit},
 };
 
@@ -1188,6 +1261,15 @@ static const struct MultichoiceListStruct sMultichoiceLists[] =
     [MULTI_SSTIDAL_BATTLE_FRONTIER]    = MULTICHOICE(MultichoiceList_SSTidalBattleFrontier),
     [MULTI_RIGHTLEFT]                  = MULTICHOICE(MultichoiceList_RightLeft),
     [MULTI_GAME_CORNER_TMS]            = MULTICHOICE(MultichoiceList_GameCornerTMs),
+    [MULTI_EC_STARTER_ARCHIVE_KANTO]   = MULTICHOICE(MultichoiceList_ECStarterArchiveKanto),
+    [MULTI_EC_STARTER_ARCHIVE_JOHTO]   = MULTICHOICE(MultichoiceList_ECStarterArchiveJohto),
+    [MULTI_EC_STARTER_ARCHIVE_HOENN]   = MULTICHOICE(MultichoiceList_ECStarterArchiveHoenn),
+    [MULTI_EC_STARTER_ARCHIVE_SINNOH]  = MULTICHOICE(MultichoiceList_ECStarterArchiveSinnoh),
+    [MULTI_EC_STARTER_ARCHIVE_UNOVA]   = MULTICHOICE(MultichoiceList_ECStarterArchiveUnova),
+    [MULTI_EC_STARTER_ARCHIVE_KALOS]   = MULTICHOICE(MultichoiceList_ECStarterArchiveKalos),
+    [MULTI_EC_STARTER_ARCHIVE_ALOLA]   = MULTICHOICE(MultichoiceList_ECStarterArchiveAlola),
+    [MULTI_EC_STARTER_ARCHIVE_GALAR]   = MULTICHOICE(MultichoiceList_ECStarterArchiveGalar),
+    [MULTI_EC_STARTER_ARCHIVE_PALDEA]  = MULTICHOICE(MultichoiceList_ECStarterArchivePaldea),
     [MULTI_SSTIDAL_SLATEPORT_NO_BF]    = MULTICHOICE(MultichoiceList_SSTidalSlateportNoBF),
     [MULTI_FLOORS]                     = MULTICHOICE(MultichoiceList_Floors),
     [MULTI_SHARDS_R]                   = MULTICHOICE(MultichoiceList_ShardsR),

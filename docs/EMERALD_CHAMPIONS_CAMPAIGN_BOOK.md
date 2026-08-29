@@ -4,7 +4,7 @@
 
 - **The campaign has a clear and unusually coherent identity.** It remains Emerald's land-versus-sea story, but every major system now supports one thesis: catching and preparing a team is easy; reading and winning battles is hard. The regional starter choice, immediate National Pokédex, Poké Vial, Leveler, competitive set tutor, free held-item vendor, strict caps, live difficulty control, mostly doubles trainers, Mega progression, and Legendary Signs all reinforce that promise.
 
-- **The playable story spine is structurally sound.** The current source passes full map, warp, script-reference, story-item, badge, HM, Mega, League, reward-economy, legendary-availability, and dialogue-width gates. The checked surface contains 540 Hoenn maps, 4,086 physical events, 1,402 warps, 17,882 script references, 513 finite physical trainer groups, 561 battle branches, and 81 complete Legendary Sign definitions.
+- **The playable story spine is structurally sound.** The current source passes full map, warp, script-reference, story-item, badge, HM, Mega, League, reward-economy, legendary-availability, and dialogue-width gates. The checked surface contains 540 Hoenn maps, 4,086 physical events, 1,402 warps, 17,957 script references, 513 finite physical trainer groups, 561 battle branches, and 81 complete Legendary Sign definitions.
 
 - **The story itself flows well from local discovery to regional catastrophe.** Champion's Signs begin as strange marks in Petalburg Woods and Granite Cave, become a Devon and Steven research problem, are connected to Magma and Aqua's machines at Slateport and Mt. Chimney, become a spiritual network at Mt. Pyre, and finally explain why Groudon, Kyogre, and Rayquaza react so violently. Rayquaza remains the campaign climax rather than being displaced by a new fan-made “true” villain.
 
@@ -259,7 +259,7 @@ Defeating Wattson awards:
 - field authorization for Rock Smash when the HM is owned;
 - Manectite.
 
-Rock Smash comes from the Mauville house. The badge and HM together open the northern Route 111 path and the Rusturf Tunnel reunion route. The bike shop and Game Corner are optional. The Game Corner's active prizes are Pokémon and decorations, including one-time Genesect and Poipole roots; the obsolete TM prize path is gone.
+Rock Smash comes from the Mauville house. The badge and HM together open the northern Route 111 path and the Rusturf Tunnel reunion route. The bike shop and Game Corner are optional. The Game Corner's active prizes are Pokémon and decorations: Genesect and Poipole remain unique high-value prizes, while the native Starter Archive offers each unchosen regional starter once with a competitive non-Mega set for 500 Coins. The obsolete TM prize path is gone.
 
 ### Optional systems now available
 

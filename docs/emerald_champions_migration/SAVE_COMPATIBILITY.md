@@ -26,6 +26,10 @@ unused native event slots:
   at `0x40DB`, `0x40DC`, and `0x40E5`.
 - Three visible-encounter hide flags at `0x4ED` through `0x4EF`.
 - Two one-time Game Corner reward flags at `0x4EB` and `0x4EC`.
+- Twenty-seven one-time Starter Archive flags reuse verified-unused persistent
+  slots at `0x4A2`–`0x4B0`, `0x4B4`–`0x4B5`, `0x4C7`–`0x4C9`, and
+  `0x4D0`–`0x4D6`; the originally selected starter is rejected from the
+  archive using its existing persistent selection variables.
 - Poke Vial and Leveler are append-only item identities in the modern item
   table; no existing item identity was renumbered by those additions.
 

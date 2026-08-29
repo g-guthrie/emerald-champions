@@ -119,4 +119,8 @@ enum {
     TEMPLATE_POSITION
 };
 
+// GiveEmeraldChampionsGameCornerPokemon otherwise returns the native
+// MON_GIVEN_TO_* / MON_CANT_GIVE values from constants/pokemon.h.
+#define EC_GAME_CORNER_PRIZE_SET_FAILED 3
+
 #endif // GUARD_CONSTANTS_FIELD_SPECIALS_H

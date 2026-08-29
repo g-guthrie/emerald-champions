@@ -196,6 +196,15 @@ def main() -> None:
     )
 
     wild_species, wild_maps = wild_locations()
+    require(
+        "MAP_SANDSTREWN_RUINS" in wild_species.get("SPECIES_UNOWN", set()),
+        "Hoopa prerequisite Unown must have a permanent Hoenn source in Sandstrewn Ruins",
+    )
+    desert_underpass = json.loads((ROOT / "data/maps/DesertUnderpass/map.json").read_text())
+    require(
+        any(warp.get("dest_map") == "MAP_SANDSTREWN_RUINS" for warp in desert_underpass["warp_events"]),
+        "Sandstrewn Ruins lost its Mirage-collapse-independent Desert Underpass entrance",
+    )
     ordinary_rows = [row for row in sign_rows if row[0] == "ORDINARY_WILD_SIGN"]
     for _, sign_id, species_name, map_name in ordinary_rows:
         species = "SPECIES_" + species_name

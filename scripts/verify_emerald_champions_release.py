@@ -26,6 +26,7 @@ STATIC_GATES = (
     ("species stat rebalances", (PYTHON, "scripts/verify_species_stat_rebalances.py")),
     ("upstream critical fixes", (PYTHON, "scripts/verify_upstream_critical_fixes.py")),
     ("campaign roster", (PYTHON, "scripts/verify_emerald_champions_campaign_roster.py")),
+    ("Game Corner starter archive", (PYTHON, "scripts/verify_game_corner_starter_archive.py")),
     ("trainer Ability legality", (PYTHON, "scripts/verify_trainer_ability_legality.py")),
     ("trainer runtime coherence", (PYTHON, "scripts/verify_trainer_runtime_coherence.py")),
     ("story and dialogue", (PYTHON, "scripts/verify_emerald_champions_story.py")),
@@ -182,7 +183,7 @@ def verify_build_freshness(rom: Path, elf: Path) -> None:
     print(f"PASS: {rom.name} is newer than every canonical ROM build input")
 
 
-def verify_patch_integrity() -> None:
+def verify_patch_integrity(*, allow_source_bundle: bool) -> None:
     probe = subprocess.run(
         ("git", "rev-parse", "--is-inside-work-tree"),
         cwd=ROOT,
@@ -191,7 +192,12 @@ def verify_patch_integrity() -> None:
         stderr=subprocess.DEVNULL,
     )
     if probe.returncode != 0:
-        print("SKIP: git diff --check (source bundle has no Git metadata)")
+        require(
+            allow_source_bundle,
+            "Git metadata is required for whitespace and patch-integrity verification; "
+            "pass --allow-source-bundle only for an intentionally metadata-free export",
+        )
+        print("SKIP (explicit): git diff --check for metadata-free source bundle")
         return
     run_gate("whitespace and patch integrity", ("git", "diff", "--check"))
 
@@ -200,6 +206,11 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--rom", type=Path, default=ROOT / "pokeemerald-release.gba")
     parser.add_argument("--elf", type=Path, default=ROOT / "pokeemerald-release.elf")
+    parser.add_argument(
+        "--allow-source-bundle",
+        action="store_true",
+        help="allow an intentional metadata-free export to skip git diff --check",
+    )
     args = parser.parse_args()
 
     for label, command in STATIC_GATES:
@@ -207,7 +218,7 @@ def main() -> None:
     verify_materialized_trainers()
     verify_unique_state_ids()
     verify_branding()
-    verify_patch_integrity()
+    verify_patch_integrity(allow_source_bundle=args.allow_source_bundle)
     verify_build_freshness(args.rom.resolve(), args.elf.resolve())
     verify_rom(args.rom.resolve(), args.elf.resolve())
     print("\nEMERALD CHAMPIONS RELEASE GATES: PASS")

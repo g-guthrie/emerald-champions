@@ -4003,7 +4003,7 @@
               {
                 "min_level": 16,
                 "max_level": 16,
-                "species": "SPECIES_CHARMANDER"
+                "species": "SPECIES_HOUNDOUR"
               },
               {
                 "min_level": 14,
@@ -9399,7 +9399,7 @@
               {
                 "min_level": 31,
                 "max_level": 31,
-                "species": "SPECIES_EMBOAR"
+                "species": "SPECIES_HEATMOR"
               },
               {
                 "min_level": 32,
@@ -9409,7 +9409,7 @@
               {
                 "min_level": 33,
                 "max_level": 33,
-                "species": "SPECIES_EMBOAR"
+                "species": "SPECIES_MAGMAR"
               }
             ]
           }
@@ -17380,7 +17380,7 @@
               {
                 "min_level": 3,
                 "max_level": 3,
-                "species": "SPECIES_SPRIGATITO"
+                "species": "SPECIES_PIDGEY"
               },
               {
                 "min_level": 3,
@@ -17643,7 +17643,7 @@
               {
                 "min_level": 2,
                 "max_level": 2,
-                "species": "SPECIES_FUECOCO"
+                "species": "SPECIES_GROWLITHE"
               },
               {
                 "min_level": 3,
@@ -17927,7 +17927,7 @@
               {
                 "min_level": 5,
                 "max_level": 10,
-                "species": "SPECIES_SOBBLE"
+                "species": "SPECIES_TENTACOOL"
               },
               {
                 "min_level": 10,
@@ -18597,7 +18597,7 @@
             ]
           },
           "rock_smash_mons": {
-            "encounter_rate": 255,
+            "encounter_rate": 20,
             "mons": [
               {
                 "min_level": 14,
@@ -20106,12 +20106,12 @@
               {
                 "min_level": 14,
                 "max_level": 14,
-                "species": "SPECIES_GROOKEY"
+                "species": "SPECIES_EXEGGCUTE"
               },
               {
                 "min_level": 14,
                 "max_level": 14,
-                "species": "SPECIES_SCORBUNNY"
+                "species": "SPECIES_PONYTA"
               },
               {
                 "min_level": 13,
@@ -21845,17 +21845,17 @@
               {
                 "min_level": 15,
                 "max_level": 25,
-                "species": "SPECIES_PRIMARINA"
+                "species": "SPECIES_MILOTIC"
               },
               {
                 "min_level": 25,
                 "max_level": 30,
-                "species": "SPECIES_PRIMARINA"
+                "species": "SPECIES_GOREBYSS"
               },
               {
                 "min_level": 25,
                 "max_level": 30,
-                "species": "SPECIES_PRIMARINA"
+                "species": "SPECIES_HUNTAIL"
               }
             ]
           },
@@ -22083,12 +22083,12 @@
               {
                 "min_level": 35,
                 "max_level": 40,
-                "species": "SPECIES_PRIMARINA"
+                "species": "SPECIES_DRAGALGE"
               },
               {
                 "min_level": 40,
                 "max_level": 45,
-                "species": "SPECIES_PRIMARINA"
+                "species": "SPECIES_DHELMISE"
               }
             ]
           }
@@ -29417,7 +29417,7 @@
               {
                 "min_level": 23,
                 "max_level": 23,
-                "species": "SPECIES_CLAYDOL"
+                "species": "SPECIES_UNOWN"
               },
               {
                 "min_level": 23,
@@ -30279,7 +30279,7 @@
               {
                 "min_level": 34,
                 "max_level": 34,
-                "species": "SPECIES_GRENINJA"
+                "species": "SPECIES_BARRASKEWDA"
               },
               {
                 "min_level": 35,
@@ -30289,7 +30289,7 @@
               {
                 "min_level": 33,
                 "max_level": 33,
-                "species": "SPECIES_GRENINJA"
+                "species": "SPECIES_GRAPPLOCT"
               },
               {
                 "min_level": 36,
@@ -30348,7 +30348,7 @@
               {
                 "min_level": 34,
                 "max_level": 34,
-                "species": "SPECIES_GRENINJA"
+                "species": "SPECIES_BASCULEGION"
               },
               {
                 "min_level": 35,
@@ -30358,7 +30358,7 @@
               {
                 "min_level": 33,
                 "max_level": 33,
-                "species": "SPECIES_GRENINJA"
+                "species": "SPECIES_DRAGALGE"
               },
               {
                 "min_level": 36,
@@ -30417,7 +30417,7 @@
               {
                 "min_level": 34,
                 "max_level": 34,
-                "species": "SPECIES_GRENINJA"
+                "species": "SPECIES_DHELMISE"
               },
               {
                 "min_level": 35,
@@ -30427,7 +30427,7 @@
               {
                 "min_level": 33,
                 "max_level": 33,
-                "species": "SPECIES_GRENINJA"
+                "species": "SPECIES_TOXAPEX"
               },
               {
                 "min_level": 36,
@@ -30486,7 +30486,7 @@
               {
                 "min_level": 34,
                 "max_level": 34,
-                "species": "SPECIES_GRENINJA"
+                "species": "SPECIES_SHARPEDO"
               },
               {
                 "min_level": 35,
@@ -30496,7 +30496,7 @@
               {
                 "min_level": 33,
                 "max_level": 33,
-                "species": "SPECIES_GRENINJA"
+                "species": "SPECIES_MALAMAR"
               },
               {
                 "min_level": 36,
@@ -30555,7 +30555,7 @@
               {
                 "min_level": 34,
                 "max_level": 34,
-                "species": "SPECIES_GRENINJA"
+                "species": "SPECIES_KINGDRA"
               },
               {
                 "min_level": 35,
@@ -30565,7 +30565,7 @@
               {
                 "min_level": 33,
                 "max_level": 33,
-                "species": "SPECIES_GRENINJA"
+                "species": "SPECIES_GOLISOPOD"
               },
               {
                 "min_level": 36,
@@ -30624,7 +30624,7 @@
               {
                 "min_level": 34,
                 "max_level": 34,
-                "species": "SPECIES_GRENINJA"
+                "species": "SPECIES_BARRASKEWDA"
               },
               {
                 "min_level": 35,
@@ -30634,7 +30634,7 @@
               {
                 "min_level": 33,
                 "max_level": 33,
-                "species": "SPECIES_GRENINJA"
+                "species": "SPECIES_DHELMISE"
               },
               {
                 "min_level": 36,
@@ -30778,7 +30778,7 @@
               {
                 "min_level": 34,
                 "max_level": 34,
-                "species": "SPECIES_GRENINJA"
+                "species": "SPECIES_BASCULEGION"
               },
               {
                 "min_level": 35,
@@ -30788,7 +30788,7 @@
               {
                 "min_level": 33,
                 "max_level": 33,
-                "species": "SPECIES_GRENINJA"
+                "species": "SPECIES_GRAPPLOCT"
               },
               {
                 "min_level": 36,
@@ -30932,7 +30932,7 @@
               {
                 "min_level": 34,
                 "max_level": 34,
-                "species": "SPECIES_GRENINJA"
+                "species": "SPECIES_DRAGALGE"
               },
               {
                 "min_level": 35,
@@ -30942,7 +30942,7 @@
               {
                 "min_level": 33,
                 "max_level": 33,
-                "species": "SPECIES_GRENINJA"
+                "species": "SPECIES_KINGDRA"
               },
               {
                 "min_level": 36,

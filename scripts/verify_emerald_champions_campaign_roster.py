@@ -22,6 +22,31 @@ POST_LEAGUE_MAP_PARTS = {
 }
 
 
+def hoenn_maps() -> tuple[set[str], set[str]]:
+    """Return real Emerald/Champions map directory names and MAP_* IDs.
+
+    Encounter IDs such as MAP_ROUTE1 are FireRed/LeafGreen data but do not
+    contain an `_FRLG` suffix.  The map-group manifest is the canonical way to
+    keep those unreachable tables out of a Hoenn availability proof.
+    """
+    groups = json.loads((ROOT / "data/maps/map_groups.json").read_text())
+    names = {
+        map_name
+        for group, maps in groups.items()
+        if group != "group_order" and "_Frlg" not in group
+        for map_name in maps
+    }
+    ids = set()
+    for map_name in names:
+        path = ROOT / "data/maps" / map_name / "map.json"
+        if path.exists():
+            ids.add(json.loads(path.read_text())["id"])
+    return names, ids
+
+
+HOENN_MAP_NAMES, HOENN_MAP_IDS = hoenn_maps()
+
+
 def require(condition: bool, message: str) -> None:
     if not condition:
         raise SystemExit(message)
@@ -95,7 +120,7 @@ class SpeciesGraph:
 
 
 def map_is_allowed(map_name: str, pre_league: bool) -> bool:
-    if "_FRLG" in map_name or "BATTLE_FRONTIER" in map_name:
+    if map_name not in HOENN_MAP_IDS or "BATTLE_FRONTIER" in map_name:
         return False
     return not pre_league or not any(part in map_name for part in POST_LEAGUE_MAP_PARTS)
 
@@ -113,11 +138,14 @@ def direct_species(pre_league: bool) -> set[str]:
                 if field.endswith("_mons") and isinstance(method, dict):
                     result.update(mon["species"] for mon in method.get("mons", []))
 
-    paths = list((ROOT / "data/maps").glob("*/scripts.inc"))
-    paths.extend((ROOT / "data/scripts").glob("*.inc"))
-    for path in paths:
-        map_name = path.parent.name.upper()
-        if path.name == "debug.inc" or not map_is_allowed(map_name, pre_league):
+    for path in (ROOT / "data/maps").glob("*/scripts.inc"):
+        if path.parent.name not in HOENN_MAP_NAMES:
+            continue
+        map_json = ROOT / "data/maps" / path.parent.name / "map.json"
+        if not map_json.exists():
+            continue
+        map_name = json.loads(map_json.read_text())["id"]
+        if not map_is_allowed(map_name, pre_league):
             continue
         source = path.read_text()
         result.update(re.findall(
@@ -127,11 +155,9 @@ def direct_species(pre_league: bool) -> set[str]:
             r"\bsetvar\s+VAR_0x8004,\s*(SPECIES_[A-Z0-9_]+)", source
         ))
 
-    # The native regional selector is itself the acquisition route for all
-    # twenty-seven starter roots.
-    result.update(re.findall(
-        r"\bSPECIES_[A-Z0-9_]+\b", (ROOT / "src/starter_choose.c").read_text()
-    ))
+    # Do not count all twenty-seven mutually exclusive opening choices.  The
+    # independently claimable Mauville archive is parsed from its live map
+    # script above, so a passing result represents one real save file.
     if not pre_league:
         for line in (ROOT / "src/data/pokemon/legendary_signs.h").read_text().splitlines():
             if "LEGENDARY_SOURCE_CIRCUIT" in line:

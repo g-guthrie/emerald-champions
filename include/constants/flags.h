@@ -1237,26 +1237,26 @@
 #define FLAG_UNUSED_0x49F                                           0x49F // Unused Flag
 #define FLAG_UNUSED_0x4A0                                           0x4A0 // Unused Flag
 #define FLAG_UNUSED_0x4A1                                           0x4A1 // Unused Flag
-#define FLAG_UNUSED_0x4A2                                           0x4A2 // Unused Flag
-#define FLAG_UNUSED_0x4A3                                           0x4A3 // Unused Flag
-#define FLAG_UNUSED_0x4A4                                           0x4A4 // Unused Flag
-#define FLAG_UNUSED_0x4A5                                           0x4A5 // Unused Flag
-#define FLAG_UNUSED_0x4A6                                           0x4A6 // Unused Flag
-#define FLAG_UNUSED_0x4A7                                           0x4A7 // Unused Flag
-#define FLAG_UNUSED_0x4A8                                           0x4A8 // Unused Flag
-#define FLAG_UNUSED_0x4A9                                           0x4A9 // Unused Flag
-#define FLAG_UNUSED_0x4AA                                           0x4AA // Unused Flag
-#define FLAG_UNUSED_0x4AB                                           0x4AB // Unused Flag
-#define FLAG_UNUSED_0x4AC                                           0x4AC // Unused Flag
-#define FLAG_UNUSED_0x4AD                                           0x4AD // Unused Flag
-#define FLAG_UNUSED_0x4AE                                           0x4AE // Unused Flag
-#define FLAG_UNUSED_0x4AF                                           0x4AF // Unused Flag
-#define FLAG_UNUSED_0x4B0                                           0x4B0 // Unused Flag
+#define FLAG_EC_STARTER_ARCHIVE_BULBASAUR                            0x4A2
+#define FLAG_EC_STARTER_ARCHIVE_CHARMANDER                           0x4A3
+#define FLAG_EC_STARTER_ARCHIVE_SQUIRTLE                             0x4A4
+#define FLAG_EC_STARTER_ARCHIVE_CHIKORITA                            0x4A5
+#define FLAG_EC_STARTER_ARCHIVE_CYNDAQUIL                            0x4A6
+#define FLAG_EC_STARTER_ARCHIVE_TOTODILE                             0x4A7
+#define FLAG_EC_STARTER_ARCHIVE_TREECKO                              0x4A8
+#define FLAG_EC_STARTER_ARCHIVE_TORCHIC                              0x4A9
+#define FLAG_EC_STARTER_ARCHIVE_MUDKIP                               0x4AA
+#define FLAG_EC_STARTER_ARCHIVE_TURTWIG                              0x4AB
+#define FLAG_EC_STARTER_ARCHIVE_CHIMCHAR                             0x4AC
+#define FLAG_EC_STARTER_ARCHIVE_PIPLUP                               0x4AD
+#define FLAG_EC_STARTER_ARCHIVE_SNIVY                                0x4AE
+#define FLAG_EC_STARTER_ARCHIVE_TEPIG                                0x4AF
+#define FLAG_EC_STARTER_ARCHIVE_OSHAWOTT                             0x4B0
 #define FLAG_RECEIVED_LUCY_ABSOLITE                                 0x4B1
 #define FLAG_RECEIVED_SPENSER_PROTECTOR                             0x4B2
 #define FLAG_RECEIVED_GRETA_GENGARITE                               0x4B3
-#define FLAG_UNUSED_0x4B4                                           0x4B4 // Unused Flag
-#define FLAG_UNUSED_0x4B5                                           0x4B5 // Unused Flag
+#define FLAG_EC_STARTER_ARCHIVE_CHESPIN                              0x4B4
+#define FLAG_EC_STARTER_ARCHIVE_FENNEKIN                             0x4B5
 #define FLAG_EC_CAUGHT_ARTICUNO                                    0x4B6
 #define FLAG_EC_CAUGHT_COSMOG                                      0x4B7
 #define FLAG_EC_CAUGHT_ENAMORUS                                    0x4B8
@@ -1273,23 +1273,23 @@
 #define FLAG_EC_CAUGHT_WO_CHIEN                                    0x4C3
 #define FLAG_EC_CAUGHT_ZAPDOS                                      0x4C4
 #define FLAG_EC_BESPOKE_TRAINER_FLAGS_MIGRATED                     0x4C5
-#define FLAG_EC_LEGENDARY_QUEST_RESERVED_2                         0x4C6
-#define FLAG_UNUSED_0x4C7                                           0x4C7 // Unused Flag
-#define FLAG_UNUSED_0x4C8                                           0x4C8 // Unused Flag
-#define FLAG_UNUSED_0x4C9                                           0x4C9 // Unused Flag
+#define FLAG_EC_LEGENDARY_QUEST_RESERVED_2                          0x4C6
+#define FLAG_EC_STARTER_ARCHIVE_ROWLET                               0x4C7
+#define FLAG_EC_STARTER_ARCHIVE_LITTEN                               0x4C8
+#define FLAG_EC_STARTER_ARCHIVE_POPPLIO                              0x4C9
 #define FLAG_HIDE_ROUTE111_VIAL_NURSE                               0x4CA
 #define FLAG_HIDE_ROUTE111_VIAL_CHANSEY                             0x4CB
 #define FLAG_HIDE_ROUTE112_VIAL_CHANSEY                             0x4CC
 #define FLAG_HIDE_JAGGED_PASS_VIAL_CHANSEY                          0x4CD
 #define FLAG_HIDE_ASHEN_WOODS_VIAL_CHANSEY                          0x4CE
 #define FLAG_HIDE_ASHEN_WOODS_VIAL_BALL                             0x4CF
-#define FLAG_UNUSED_0x4D0                                           0x4D0 // Unused Flag
-#define FLAG_UNUSED_0x4D1                                           0x4D1 // Unused Flag
-#define FLAG_UNUSED_0x4D2                                           0x4D2 // Unused Flag
-#define FLAG_UNUSED_0x4D3                                           0x4D3 // Unused Flag
-#define FLAG_UNUSED_0x4D4                                           0x4D4 // Unused Flag
-#define FLAG_UNUSED_0x4D5                                           0x4D5 // Unused Flag
-#define FLAG_UNUSED_0x4D6                                           0x4D6 // Unused Flag
+#define FLAG_EC_STARTER_ARCHIVE_GROOKEY                              0x4D0
+#define FLAG_EC_STARTER_ARCHIVE_SCORBUNNY                            0x4D1
+#define FLAG_EC_STARTER_ARCHIVE_SOBBLE                               0x4D2
+#define FLAG_EC_STARTER_ARCHIVE_SPRIGATITO                           0x4D3
+#define FLAG_EC_STARTER_ARCHIVE_FUECOCO                              0x4D4
+#define FLAG_EC_STARTER_ARCHIVE_QUAXLY                               0x4D5
+#define FLAG_EC_STARTER_ARCHIVE_FROAKIE                              0x4D6
 #define FLAG_UNUSED_0x4D7                                           0x4D7 // Unused Flag
 #define FLAG_UNUSED_0x4D8                                           0x4D8 // Unused Flag
 #define FLAG_UNUSED_0x4D9                                           0x4D9 // Unused Flag

@@ -8,22 +8,59 @@
 #include "difficulty.h"
 #include "emerald_champions_battle_sets.h"
 #include "event_data.h"
+#include "field_specials.h"
 #include "gym_leader_rematch.h"
 #include "item.h"
 #include "legendary_signs.h"
 #include "load_save.h"
 #include "overworld.h"
 #include "pokemon.h"
+#include "pokemon_storage_system.h"
 #include "random.h"
 #include "showdown_champions_circuit.h"
 #include "test/test.h"
 #include "constants/pokedex.h"
 #include "constants/rematches.h"
 #include "constants/cries.h"
+#include "constants/field_specials.h"
 #include "constants/flags.h"
 #include "constants/maps.h"
 #include "constants/trainers.h"
 #include "constants/vars.h"
+
+static void ResetEmeraldChampionsGameCornerTestState(void)
+{
+    ZeroPlayerPartyMons();
+    memset(gPokemonStoragePtr, 0, sizeof(*gPokemonStoragePtr));
+    VarSet(VAR_STARTER_GEN, 1);
+    VarSet(VAR_STARTER_MON, 0);
+    FlagClear(FLAG_EC_STARTER_ARCHIVE_BULBASAUR);
+    FlagClear(FLAG_EC_STARTER_ARCHIVE_CHARMANDER);
+    FlagClear(FLAG_EC_STARTER_ARCHIVE_SQUIRTLE);
+    FlagClear(FLAG_EC_STARTER_ARCHIVE_QUAXLY);
+}
+
+static bool32 MonMatchesEmeraldChampionsNonMegaPreset(struct Pokemon *mon)
+{
+    enum Species species = GetMonData(mon, MON_DATA_SPECIES);
+
+    for (u8 choice = 0; choice < GetEmeraldChampionsRawBattleSetCount(species); choice++)
+    {
+        const struct EmeraldChampionsBattleSet *preset = GetEmeraldChampionsRawBattleSet(species, choice);
+        bool32 matches = TRUE;
+
+        if (preset == NULL || preset->requiredItem != ITEM_NONE)
+            continue;
+        matches &= GetMonData(mon, MON_DATA_HIDDEN_NATURE) == preset->nature;
+        matches &= GetMonAbility(mon) == preset->ability;
+        matches &= GetMonData(mon, MON_DATA_HELD_ITEM) == preset->item;
+        for (u32 move = 0; move < MAX_MON_MOVES; move++)
+            matches &= GetMonData(mon, MON_DATA_MOVE1 + move) == preset->moves[move];
+        if (matches)
+            return TRUE;
+    }
+    return FALSE;
+}
 
 TEST("Emerald Champions disables Match Call and Gym rematches")
 {
@@ -257,6 +294,92 @@ TEST("Emerald Champions battle-ready wild presets exclude special encounters")
     EXPECT(IsEmeraldChampionsOrdinaryWildSpecies(SPECIES_GREAT_TUSK));
     EXPECT(!IsEmeraldChampionsOrdinaryWildSpecies(SPECIES_MEW));
     EXPECT(!IsEmeraldChampionsOrdinaryWildSpecies(SPECIES_VENUSAUR_MEGA));
+}
+
+TEST("Emerald Champions Game Corner rejects the initially chosen starter")
+{
+    ResetEmeraldChampionsGameCornerTestState();
+    gSpecialVar_0x8004 = SPECIES_BULBASAUR;
+
+    IsEmeraldChampionsGameCornerPokemonClaimed();
+    EXPECT_EQ(gSpecialVar_Result, TRUE);
+    GiveEmeraldChampionsGameCornerPokemon();
+    EXPECT_EQ(gSpecialVar_Result, EC_GAME_CORNER_PRIZE_SET_FAILED);
+    EXPECT(!FlagGet(FLAG_EC_STARTER_ARCHIVE_BULBASAUR));
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_NONE);
+}
+
+TEST("Emerald Champions Game Corner delivers a prepared alternate starter transactionally")
+{
+    ResetEmeraldChampionsGameCornerTestState();
+    SeedRng(7);
+    gSpecialVar_0x8004 = SPECIES_CHARMANDER;
+
+    IsEmeraldChampionsGameCornerPokemonClaimed();
+    EXPECT_EQ(gSpecialVar_Result, FALSE);
+    GiveEmeraldChampionsGameCornerPokemon();
+    EXPECT_EQ(gSpecialVar_Result, MON_GIVEN_TO_PARTY);
+    EXPECT(FlagGet(FLAG_EC_STARTER_ARCHIVE_CHARMANDER));
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_CHARMANDER);
+    EXPECT_NE(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM), ITEM_NONE);
+    EXPECT(MonMatchesEmeraldChampionsNonMegaPreset(&gParties[B_TRAINER_PLAYER][0]));
+}
+
+TEST("Emerald Champions Game Corner rejects a repeated archive claim")
+{
+    ResetEmeraldChampionsGameCornerTestState();
+    gSpecialVar_0x8004 = SPECIES_CHARMANDER;
+    GiveEmeraldChampionsGameCornerPokemon();
+    EXPECT_EQ(gSpecialVar_Result, MON_GIVEN_TO_PARTY);
+    EXPECT(FlagGet(FLAG_EC_STARTER_ARCHIVE_CHARMANDER));
+
+    GiveEmeraldChampionsGameCornerPokemon();
+    EXPECT_EQ(gSpecialVar_Result, EC_GAME_CORNER_PRIZE_SET_FAILED);
+    EXPECT_EQ(gPartiesCount[B_TRAINER_PLAYER], 1);
+}
+
+TEST("Emerald Champions Game Corner keeps a full-storage claim retryable")
+{
+    ResetEmeraldChampionsGameCornerTestState();
+    for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+        CreateMon(&gParties[B_TRAINER_PLAYER][slot], SPECIES_RATTATA, 5, 0, OTID_STRUCT_PLAYER_ID);
+    CalculatePlayerPartyCount();
+    for (u32 box = 0; box < TOTAL_BOXES_COUNT; box++)
+    {
+        for (u32 slot = 0; slot < IN_BOX_COUNT; slot++)
+            CreateBoxMon(&gPokemonStoragePtr->boxes[box][slot], SPECIES_RATTATA, 5, 0, OTID_STRUCT_PLAYER_ID);
+    }
+    gSpecialVar_0x8004 = SPECIES_SQUIRTLE;
+
+    GiveEmeraldChampionsGameCornerPokemon();
+    EXPECT_EQ(gSpecialVar_Result, MON_CANT_GIVE);
+    EXPECT(!FlagGet(FLAG_EC_STARTER_ARCHIVE_SQUIRTLE));
+
+    memset(gPokemonStoragePtr, 0, sizeof(*gPokemonStoragePtr));
+    ZeroPlayerPartyMons();
+}
+
+TEST("Emerald Champions Game Corner rejects invalid or presetless prizes")
+{
+    enum Species presetless = SPECIES_NONE;
+
+    ResetEmeraldChampionsGameCornerTestState();
+    for (enum Species species = SPECIES_BULBASAUR; species < NUM_SPECIES; species++)
+    {
+        if (gSpeciesInfo[species].baseHP != 0 && GetEmeraldChampionsRawBattleSetCount(species) == 0)
+        {
+            presetless = species;
+            break;
+        }
+    }
+    EXPECT_EQ(
+        GiveEmeraldChampionsGameCornerPokemonForTesting(presetless, FLAG_EC_STARTER_ARCHIVE_QUAXLY),
+        EC_GAME_CORNER_PRIZE_SET_FAILED);
+    EXPECT(!FlagGet(FLAG_EC_STARTER_ARCHIVE_QUAXLY));
+    EXPECT_EQ(
+        GiveEmeraldChampionsGameCornerPokemonForTesting(SPECIES_NONE, FLAG_EC_STARTER_ARCHIVE_QUAXLY),
+        EC_GAME_CORNER_PRIZE_SET_FAILED);
+    EXPECT(!FlagGet(FLAG_EC_STARTER_ARCHIVE_QUAXLY));
 }
 
 TEST("Emerald Champions legendary requirements accept the whole evolution family")

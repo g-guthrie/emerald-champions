@@ -1,7 +1,7 @@
 EMERALD CHAMPIONS — EXHAUSTIVE CAMPAIGN EVIDENCE
 =========================================================
 
-Campaign input SHA-256: a62efcae12d00eeb35930c8011c2b210ceff1179111eb8836626dc18afe85712
+Campaign input SHA-256: 358059fd1631ed4fb97cdf693f45cb8603f249f69bee607fb74b4c218d856d23
 Physical encounter groups: 513
 Trainer branches: 561
 

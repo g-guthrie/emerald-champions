@@ -3,6 +3,7 @@
 #include "malloc.h"
 #include "battle.h"
 #include "battle_special.h"
+#include "caps.h"
 #include "cable_club.h"
 #include "data.h"
 #include "daycare.h"
@@ -26,6 +27,7 @@
 #include "item_menu.h"
 #include "link.h"
 #include "list_menu.h"
+#include "legendary_signs.h"
 #include "load_save.h"
 #include "mail.h"
 #include "main.h"
@@ -106,6 +108,62 @@ static EWRAM_DATA u8 sBattlePointsWindowId = 0;
 static EWRAM_DATA u8 sFrontierExchangeCorner_ItemIconWindowId = 0;
 static EWRAM_DATA u8 sPCBoxToSendMon = 0;
 static EWRAM_DATA u32 sBattleTowerMultiBattleTypeFlags = 0;
+
+struct EmeraldChampionsGameCornerPokemonPrize
+{
+    enum Species species;
+    u16 claimedFlag;
+};
+
+static const struct EmeraldChampionsGameCornerPokemonPrize sEmeraldChampionsGameCornerPokemonPrizes[] =
+{
+    {SPECIES_BULBASAUR,  FLAG_EC_STARTER_ARCHIVE_BULBASAUR},
+    {SPECIES_CHARMANDER, FLAG_EC_STARTER_ARCHIVE_CHARMANDER},
+    {SPECIES_SQUIRTLE,   FLAG_EC_STARTER_ARCHIVE_SQUIRTLE},
+    {SPECIES_CHIKORITA,  FLAG_EC_STARTER_ARCHIVE_CHIKORITA},
+    {SPECIES_CYNDAQUIL,  FLAG_EC_STARTER_ARCHIVE_CYNDAQUIL},
+    {SPECIES_TOTODILE,   FLAG_EC_STARTER_ARCHIVE_TOTODILE},
+    {SPECIES_TREECKO,    FLAG_EC_STARTER_ARCHIVE_TREECKO},
+    {SPECIES_TORCHIC,    FLAG_EC_STARTER_ARCHIVE_TORCHIC},
+    {SPECIES_MUDKIP,     FLAG_EC_STARTER_ARCHIVE_MUDKIP},
+    {SPECIES_TURTWIG,    FLAG_EC_STARTER_ARCHIVE_TURTWIG},
+    {SPECIES_CHIMCHAR,   FLAG_EC_STARTER_ARCHIVE_CHIMCHAR},
+    {SPECIES_PIPLUP,     FLAG_EC_STARTER_ARCHIVE_PIPLUP},
+    {SPECIES_SNIVY,      FLAG_EC_STARTER_ARCHIVE_SNIVY},
+    {SPECIES_TEPIG,      FLAG_EC_STARTER_ARCHIVE_TEPIG},
+    {SPECIES_OSHAWOTT,   FLAG_EC_STARTER_ARCHIVE_OSHAWOTT},
+    {SPECIES_CHESPIN,    FLAG_EC_STARTER_ARCHIVE_CHESPIN},
+    {SPECIES_FENNEKIN,   FLAG_EC_STARTER_ARCHIVE_FENNEKIN},
+    {SPECIES_FROAKIE,    FLAG_EC_STARTER_ARCHIVE_FROAKIE},
+    {SPECIES_ROWLET,     FLAG_EC_STARTER_ARCHIVE_ROWLET},
+    {SPECIES_LITTEN,     FLAG_EC_STARTER_ARCHIVE_LITTEN},
+    {SPECIES_POPPLIO,    FLAG_EC_STARTER_ARCHIVE_POPPLIO},
+    {SPECIES_GROOKEY,    FLAG_EC_STARTER_ARCHIVE_GROOKEY},
+    {SPECIES_SCORBUNNY,  FLAG_EC_STARTER_ARCHIVE_SCORBUNNY},
+    {SPECIES_SOBBLE,     FLAG_EC_STARTER_ARCHIVE_SOBBLE},
+    {SPECIES_SPRIGATITO, FLAG_EC_STARTER_ARCHIVE_SPRIGATITO},
+    {SPECIES_FUECOCO,    FLAG_EC_STARTER_ARCHIVE_FUECOCO},
+    {SPECIES_QUAXLY,     FLAG_EC_STARTER_ARCHIVE_QUAXLY},
+    {SPECIES_GENESECT,   FLAG_RECEIVED_GAME_CORNER_GENESECT},
+    {SPECIES_POIPOLE,    FLAG_RECEIVED_GAME_CORNER_POIPOLE},
+};
+
+static u16 GetEmeraldChampionsGameCornerPokemonPrizeFlag(enum Species species)
+{
+    for (u32 i = 0; i < ARRAY_COUNT(sEmeraldChampionsGameCornerPokemonPrizes); i++)
+    {
+        if (sEmeraldChampionsGameCornerPokemonPrizes[i].species == species)
+            return sEmeraldChampionsGameCornerPokemonPrizes[i].claimedFlag;
+    }
+    return 0;
+}
+
+static bool32 IsEmeraldChampionsInitialStarter(enum Species species)
+{
+    return species == GetStarterPokemonForGeneration(
+        VarGet(VAR_STARTER_MON),
+        VarGet(VAR_STARTER_GEN));
+}
 
 static const u16 sEmeraldChampionsFreeBattleItems[] =
 {
@@ -383,6 +441,67 @@ static EWRAM_DATA u8 sElevatorCurrentFloorWindowId = 0;
 static EWRAM_DATA u16 sElevatorScroll = 0;
 static EWRAM_DATA u16 sElevatorCursorPos = 0;
 static EWRAM_DATA u8 sBrailleTextCursorSpriteID = 0;
+
+void IsEmeraldChampionsGameCornerPokemonClaimed(void)
+{
+    u16 flag = GetEmeraldChampionsGameCornerPokemonPrizeFlag(gSpecialVar_0x8004);
+
+    gSpecialVar_Result = flag != 0
+                      && (FlagGet(flag) || IsEmeraldChampionsInitialStarter(gSpecialVar_0x8004));
+}
+
+static u8 TryGiveEmeraldChampionsGameCornerPokemon(enum Species species, u16 flag, bool32 rejectInitialStarter)
+{
+    struct Pokemon mon;
+    u32 emptyPartySlot;
+    u32 giveResult;
+    u8 level;
+
+    if (species <= SPECIES_NONE
+     || species >= NUM_SPECIES
+     || flag == 0
+     || FlagGet(flag)
+     || (rejectInitialStarter && IsEmeraldChampionsInitialStarter(species))
+     || GetEmeraldChampionsRawBattleSetCount(species) == 0)
+        return EC_GAME_CORNER_PRIZE_SET_FAILED;
+
+    level = min(30, GetCurrentLevelCap());
+    CreateRandomMon(&mon, species, level);
+    if (ApplyEmeraldChampionsRandomNonMegaSet(&mon) != EC_BATTLE_SET_SUCCESS)
+        return EC_GAME_CORNER_PRIZE_SET_FAILED;
+
+    for (emptyPartySlot = 0; emptyPartySlot < PARTY_SIZE; emptyPartySlot++)
+    {
+        if (GetMonData(&gParties[B_TRAINER_PLAYER][emptyPartySlot], MON_DATA_SPECIES) == SPECIES_NONE)
+            break;
+    }
+    giveResult = GiveScriptedMonToPlayer(&mon, PARTY_SIZE);
+    if (giveResult == MON_CANT_GIVE)
+        return MON_CANT_GIVE;
+
+    if (giveResult == MON_GIVEN_TO_PARTY && emptyPartySlot < PARTY_SIZE)
+        RecordPlayerPartyMonHeldItemForRestoration(emptyPartySlot);
+    MarkLegendarySignCaughtBySpecies(species);
+    FlagSet(flag);
+    return giveResult;
+}
+
+void GiveEmeraldChampionsGameCornerPokemon(void)
+{
+    enum Species species = gSpecialVar_0x8004;
+
+    gSpecialVar_Result = TryGiveEmeraldChampionsGameCornerPokemon(
+        species,
+        GetEmeraldChampionsGameCornerPokemonPrizeFlag(species),
+        TRUE);
+}
+
+#if TESTING
+u8 GiveEmeraldChampionsGameCornerPokemonForTesting(enum Species species, u16 flag)
+{
+    return TryGiveEmeraldChampionsGameCornerPokemon(species, flag, FALSE);
+}
+#endif
 
 void OpenEmeraldChampionsBattleItemMart(void)
 {

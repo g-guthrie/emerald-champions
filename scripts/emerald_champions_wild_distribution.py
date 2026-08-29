@@ -1,80 +1,40 @@
 #!/usr/bin/env python3
-"""Merge the preserved curated Hoenn distribution into the modern engine."""
+"""Verify the authored Emerald Champions campaign encounter distribution.
+
+The distribution is now curated directly in wild_encounters.json.  This gate
+must never reconstruct it from an old Inclement snapshot or globally allocate
+species into whichever slot happens to be free.
+"""
 
 from __future__ import annotations
 
 import argparse
 import json
 import re
-import subprocess
+from collections import defaultdict
 from pathlib import Path
+
+from verify_emerald_champions_campaign_roster import SpeciesGraph
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE_COMMIT = "33202c162ebc34a1dbe2000acd26b0720baa109d"
-TARGET = ROOT / "src" / "data" / "wild_encounters.json"
-TARGET_COUNTS = {
+TARGET = ROOT / "src/data/wild_encounters.json"
+SLOT_COUNTS = {
     "land_mons": 12,
     "water_mons": 5,
     "rock_smash_mons": 5,
     "fishing_mons": 10,
+    "hidden_mons": 3,
 }
-NORMALIZATION = {
-    "_POKE_BALL": "_POKEBALL",
-    "_ALOLAN": "_ALOLA",
-    "_GALARIAN": "_GALAR",
-    "_HISUIAN": "_HISUI",
-    "_EAST_SEA": "_EAST",
-    "_BLUE_FLOWER": "_BLUE",
-    "_ORANGE_FLOWER": "_ORANGE",
-    "_WHITE_FLOWER": "_WHITE",
-    "_YELLOW_FLOWER": "_YELLOW",
-}
-BESPOKE_EXCLUSIONS = {
-    "SPECIES_ROTOM",
-    "SPECIES_GROUDON",
-    "SPECIES_KYOGRE",
-    "SPECIES_RAYQUAZA",
-    "SPECIES_DEOXYS",
-    "SPECIES_MEW",
-    "SPECIES_LATIAS",
-    "SPECIES_LATIOS",
-    "SPECIES_REGIROCK",
-    "SPECIES_REGICE",
-    "SPECIES_REGISTEEL",
+SLOT_RATES = {
+    "land_mons": (20, 20, 10, 10, 10, 10, 5, 5, 4, 4, 1, 1),
+    "water_mons": (60, 30, 5, 4, 1),
+    "rock_smash_mons": (60, 30, 5, 4, 1),
+    "fishing_mons": (70, 30, 60, 20, 20, 40, 40, 15, 4, 1),
 }
 
-# These Inclement areas were intentionally restored to Emerald Champions after
-# the modern-engine migration.  Their old encounter tables are still the best
-# thematic starting point, but the modern engine requires different slot
-# counts and uses hidden encounters in place of Inclement's honey field.
-RESTORED_ENCOUNTER_MAPS = {
-    "MAP_ALTERING_CAVE_1F",
-    "MAP_ALTERING_CAVE_B1F",
-    "MAP_ASHEN_WOODS",
-    "MAP_CAVE_OF_ORIGIN_DIANCIES_ROOM",
-    "MAP_DEWFORD_MANOR_1F",
-    "MAP_DEWFORD_MEADOW",
-    "MAP_EMBER_PATH",
-    "MAP_MIRAGE_TOWER_B1F",
-    "MAP_PETALBURG_WOODS_2",
-    "MAP_PETALBURG_WOODS_3",
-    "MAP_ROUTE111_RUINS_EXTERIOR",
-    "MAP_SANDSTREWN_RUINS",
-    "MAP_SANDSTREWN_RUINS_2F",
-    "MAP_SANDSTREWN_RUINS_3F",
-    "MAP_SANDSTREWN_RUINS_B1F",
-    "MAP_SCORCHED_SLAB_B1F",
-    "MAP_SCORCHED_SLAB_B2F",
-    "MAP_SCORCHED_SLAB_HEATRANS_ROOM",
-    "MAP_SEASPRAY_CAVE",
-    "MAP_SEASPRAY_CAVE_B1F",
-    "MAP_VERDANTURF_MEADOW",
-}
-
-# Ultra-space leakage is a deliberate identity of the restored side areas.
-# Slot 6 is a native 5-percent land slot: rare enough to feel startling, but
-# not a 1-percent grind.  These species are removed from Circuit rewards.
+# Ultra-space leakage is an explicit feature of restored sanctuaries.  Five
+# percent is rare without making a targeted catch into a grind.
 RESTORED_ULTRA_BEASTS = {
     "MAP_ALTERING_CAVE_B1F": "SPECIES_GUZZLORD",
     "MAP_ASHEN_WOODS": "SPECIES_BUZZWOLE",
@@ -85,215 +45,243 @@ RESTORED_ULTRA_BEASTS = {
     "MAP_SEASPRAY_CAVE": "SPECIES_NIHILEGO",
 }
 
-# These are deliberate campaign-roster holes, not a global species quota.
-# Every replacement uses a 5- or 10-percent slot (except no slot below 5) and
-# replaces a species that remains available elsewhere.  The result guarantees
-# the complete Champions roster and the original Kanto families before the
-# League while preserving each area's identity.
-CAMPAIGN_ROSTER_SLOTS = (
-    # map, method, slot, expected source species, replacement species
-    ("MAP_ROUTE116", "land_mons", 6, "SPECIES_HOUNDOUR", "SPECIES_EEVEE"),
-    ("MAP_SANDSTREWN_RUINS", "land_mons", 6, "SPECIES_CLAYDOL", "SPECIES_AERODACTYL"),
-    ("MAP_SEASPRAY_CAVE_B1F", "land_mons", 6, "SPECIES_VANILLITE", "SPECIES_AMAURA"),
-    ("MAP_ROUTE119", "water_mons", 2, "SPECIES_PELIPPER", "SPECIES_BASCULIN_WHITE_STRIPED"),
-    ("MAP_ROUTE112", "land_mons", 6, "SPECIES_RUFFLET", "SPECIES_CAPSAKID"),
-    ("MAP_FIERY_PATH", "land_mons", 6, "SPECIES_HEATMOR", "SPECIES_CHARCADET"),
-    ("MAP_VERDANTURF_MEADOW", "land_mons", 6, "SPECIES_STUFFUL", "SPECIES_COTTONEE"),
-    ("MAP_SANDSTREWN_RUINS_2F", "land_mons", 6, "SPECIES_CLAYDOL", "SPECIES_CRANIDOS"),
-    ("MAP_DESERT_UNDERPASS", "land_mons", 6, "SPECIES_DITTO", "SPECIES_FLITTLE"),
-    ("MAP_VERDANTURF_MEADOW", "land_mons", 7, "SPECIES_STUFFUL", "SPECIES_FLOETTE_ETERNAL"),
-    ("MAP_MIRAGE_TOWER_B1F", "land_mons", 6, "SPECIES_YAMASK", "SPECIES_GIMMIGHOUL_CHEST"),
-    ("MAP_MT_PYRE_6F", "land_mons", 6, "SPECIES_MISDREAVUS", "SPECIES_GREAVARD"),
-    ("MAP_ASHEN_WOODS", "land_mons", 5, "SPECIES_CAMERUPT", "SPECIES_GROWLITHE_HISUI"),
-    ("MAP_SANDSTREWN_RUINS_2F", "land_mons", 7, "SPECIES_GABITE", "SPECIES_ORTHWORM"),
-    ("MAP_MT_PYRE_6F", "land_mons", 7, "SPECIES_MURKROW", "SPECIES_POLTCHAGEIST"),
-    ("MAP_ROUTE115", "water_mons", 2, "SPECIES_TENTACRUEL", "SPECIES_QWILFISH_HISUI"),
-    ("MAP_PETALBURG_WOODS_2", "land_mons", 6, "SPECIES_BOUNSWEET", "SPECIES_SCATTERBUG"),
-    ("MAP_SANDSTREWN_RUINS_3F", "land_mons", 6, "SPECIES_CLAYDOL", "SPECIES_SHIELDON"),
-    ("MAP_DEWFORD_MANOR_1F", "land_mons", 6, "SPECIES_RATTATA", "SPECIES_SLOWPOKE_GALAR"),
-    ("MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM", "land_mons", 7, "SPECIES_JYNX", "SPECIES_SNEASEL_HISUI"),
-    ("MAP_SANDSTREWN_RUINS", "land_mons", 7, "SPECIES_GABITE", "SPECIES_SPIRITOMB"),
-    ("MAP_SEASPRAY_CAVE", "land_mons", 7, "SPECIES_WOOBAT", "SPECIES_STUNFISK_GALAR"),
-    ("MAP_ROUTE110", "land_mons", 5, "SPECIES_MAGNEMITE", "SPECIES_TADBULB"),
-    ("MAP_ROUTE117", "land_mons", 7, "SPECIES_MINCCINO", "SPECIES_TANDEMAUS"),
-    ("MAP_ROUTE112", "land_mons", 7, "SPECIES_VULLABY", "SPECIES_TAUROS_PALDEA_COMBAT"),
-    ("MAP_EMBER_PATH", "land_mons", 7, "SPECIES_GRUMPIG", "SPECIES_TAUROS_PALDEA_BLAZE"),
-    ("MAP_ROUTE118", "water_mons", 2, "SPECIES_PELIPPER", "SPECIES_TAUROS_PALDEA_AQUA"),
-    ("MAP_SANDSTREWN_RUINS_3F", "land_mons", 7, "SPECIES_GABITE", "SPECIES_TINKATINK"),
-    ("MAP_MIRAGE_TOWER_1F", "land_mons", 4, "SPECIES_GOLETT", "SPECIES_TYRUNT"),
-    ("MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM", "land_mons", 3, "SPECIES_BEARTIC", "SPECIES_VULPIX_ALOLA"),
-    ("MAP_MT_PYRE_EXTERIOR", "land_mons", 6, "SPECIES_GROWLITHE", "SPECIES_ZORUA_HISUI"),
-    ("MAP_ROUTE111_RUINS_EXTERIOR", "land_mons", 3, "SPECIES_ROCKRUFF", "SPECIES_ROCKRUFF_OWN_TEMPO"),
-    # Kanto's remaining non-legendary family roots.
-    ("MAP_MIRAGE_TOWER_1F", "land_mons", 5, "SPECIES_SIGILYPH", "SPECIES_KABUTO"),
-    ("MAP_SEASPRAY_CAVE", "rock_smash_mons", 2, "SPECIES_DWEBBLE", "SPECIES_OMANYTE"),
-    ("MAP_NEW_MAUVILLE_INSIDE", "land_mons", 7, "SPECIES_TOGEDEMARU", "SPECIES_PORYGON"),
-)
+# First acquisition pass: ordinary wild starters were replaced with species
+# that preserve the area's theme.  Evolved starter repetitions in Seafloor
+# Cavern are deliberately room-specific rather than one global substitution.
+STARTER_REPLACEMENTS = {
+    ("MAP_ROUTE101", "land_mons", 4): "SPECIES_PIDGEY",
+    ("MAP_ROUTE103", "land_mons", 4): "SPECIES_GROWLITHE",
+    ("MAP_ROUTE104", "fishing_mons", 1): "SPECIES_TENTACOOL",
+    ("MAP_ROUTE117", "land_mons", 8): "SPECIES_EXEGGCUTE",
+    ("MAP_ROUTE117", "land_mons", 9): "SPECIES_PONYTA",
+    ("MAP_FIERY_PATH", "land_mons", 9): "SPECIES_HOUNDOUR",
+    ("MAP_MAGMA_HIDEOUT_4F", "land_mons", 9): "SPECIES_HEATMOR",
+    ("MAP_MAGMA_HIDEOUT_4F", "land_mons", 11): "SPECIES_MAGMAR",
+    ("MAP_ROUTE126", "water_mons", 2): "SPECIES_MILOTIC",
+    ("MAP_ROUTE126", "water_mons", 3): "SPECIES_GOREBYSS",
+    ("MAP_ROUTE126", "water_mons", 4): "SPECIES_HUNTAIL",
+    ("MAP_ROUTE128", "fishing_mons", 8): "SPECIES_DRAGALGE",
+    ("MAP_ROUTE128", "fishing_mons", 9): "SPECIES_DHELMISE",
+    ("MAP_SEAFLOOR_CAVERN_ROOM1", "land_mons", 8): "SPECIES_BARRASKEWDA",
+    ("MAP_SEAFLOOR_CAVERN_ROOM1", "land_mons", 10): "SPECIES_GRAPPLOCT",
+    ("MAP_SEAFLOOR_CAVERN_ROOM2", "land_mons", 8): "SPECIES_BASCULEGION",
+    ("MAP_SEAFLOOR_CAVERN_ROOM2", "land_mons", 10): "SPECIES_DRAGALGE",
+    ("MAP_SEAFLOOR_CAVERN_ROOM3", "land_mons", 8): "SPECIES_DHELMISE",
+    ("MAP_SEAFLOOR_CAVERN_ROOM3", "land_mons", 10): "SPECIES_TOXAPEX",
+    ("MAP_SEAFLOOR_CAVERN_ROOM4", "land_mons", 8): "SPECIES_SHARPEDO",
+    ("MAP_SEAFLOOR_CAVERN_ROOM4", "land_mons", 10): "SPECIES_MALAMAR",
+    ("MAP_SEAFLOOR_CAVERN_ROOM5", "land_mons", 8): "SPECIES_KINGDRA",
+    ("MAP_SEAFLOOR_CAVERN_ROOM5", "land_mons", 10): "SPECIES_GOLISOPOD",
+    ("MAP_SEAFLOOR_CAVERN_ROOM6", "land_mons", 8): "SPECIES_BARRASKEWDA",
+    ("MAP_SEAFLOOR_CAVERN_ROOM6", "land_mons", 10): "SPECIES_DHELMISE",
+    ("MAP_SEAFLOOR_CAVERN_ROOM7", "land_mons", 8): "SPECIES_BASCULEGION",
+    ("MAP_SEAFLOOR_CAVERN_ROOM7", "land_mons", 10): "SPECIES_GRAPPLOCT",
+    ("MAP_SEAFLOOR_CAVERN_ROOM8", "land_mons", 8): "SPECIES_DRAGALGE",
+    ("MAP_SEAFLOOR_CAVERN_ROOM8", "land_mons", 10): "SPECIES_KINGDRA",
+}
+
+QUEST_DEPENDENCY_REPLACEMENTS = {
+    # Hoopa's visible Sign requires Unown.  Tanoby Ruins is unreachable FRLG
+    # data and Mirage Tower can collapse, so permanently reachable Sandstrewn
+    # Ruins provides the native Hoenn acquisition at 4%.
+    ("MAP_SANDSTREWN_RUINS", "land_mons", 8): "SPECIES_UNOWN",
+}
+
+OPENING_MAPS = {
+    "MAP_ROUTE101",
+    "MAP_ROUTE102",
+    "MAP_ROUTE103",
+    "MAP_ROUTE104",
+    "MAP_PETALBURG_WOODS",
+    "MAP_ROUTE116",
+    "MAP_RUSTURF_TUNNEL",
+}
+PRE_BRAWLY_MAPS = OPENING_MAPS | {
+    "MAP_GRANITE_CAVE_1F",
+    "MAP_GRANITE_CAVE_B1F",
+    "MAP_GRANITE_CAVE_B2F",
+}
+
+# Each policy row names candidate species and the authored behavior their
+# default preset must expose.  One source at four percent or better is enough.
+ROLE_POLICY = {
+    "opening Intimidate": (OPENING_MAPS, {"SPECIES_SHINX", "SPECIES_POOCHYENA"}, "ABILITY_INTIMIDATE"),
+    "opening Fake Out": (OPENING_MAPS, {"SPECIES_BUNEARY", "SPECIES_MEOWTH"}, "MOVE_FAKE_OUT"),
+    "opening redirection": (OPENING_MAPS, {"SPECIES_FOONGUS"}, "MOVE_RAGE_POWDER"),
+    "opening Trick Room": (OPENING_MAPS, {"SPECIES_RALTS"}, "MOVE_TRICK_ROOM"),
+    "opening Tailwind": (OPENING_MAPS, {"SPECIES_SCYTHER"}, "MOVE_TAILWIND"),
+    "opening sleep": (OPENING_MAPS, {"SPECIES_SHROOMISH", "SPECIES_FOONGUS"}, "MOVE_SPORE"),
+    "pre-Brawly Wide Guard": (PRE_BRAWLY_MAPS, {"SPECIES_ONIX"}, "MOVE_WIDE_GUARD"),
+}
 
 
-def source_json() -> dict:
-    result = subprocess.run(
-        ["git", "show", f"{SOURCE_COMMIT}:src/data/wild_encounters.json"],
-        cwd=ROOT,
-        check=True,
-        stdout=subprocess.PIPE,
-    )
-    return json.loads(result.stdout)
+def require(condition: bool, message: str) -> None:
+    if not condition:
+        raise SystemExit(message)
 
 
-def species_constants() -> set[str]:
-    return set(re.findall(r"\bSPECIES_[A-Z0-9_]+\b", (ROOT / "include" / "constants" / "species.h").read_text()))
-
-
-def normalize_species(species: str, constants: set[str]) -> str:
-    if species in constants:
-        return species
-    normalized = species
-    for old, new in NORMALIZATION.items():
-        normalized = normalized.replace(old, new)
-    if normalized not in constants:
-        raise ValueError(f"missing modern species constant for {species} -> {normalized}")
-    return normalized
-
-
-def normalize_method(method: dict, target_count: int, constants: set[str]) -> dict:
-    result = {"encounter_rate": method["encounter_rate"], "mons": []}
-    for mon in method["mons"]:
-        species = normalize_species(mon["species"], constants)
-        if species in BESPOKE_EXCLUSIONS:
+def hoenn_map_ids() -> set[str]:
+    groups = json.loads((ROOT / "data/maps/map_groups.json").read_text())
+    result = set()
+    for group, maps in groups.items():
+        if group == "group_order" or "_Frlg" in group:
             continue
-        result["mons"].append({**mon, "species": species})
-    if not result["mons"]:
-        raise ValueError("encounter method became empty after bespoke exclusions")
-    result["mons"] = result["mons"][:target_count]
-    while len(result["mons"]) < target_count:
-        result["mons"].append(dict(result["mons"][-1]))
+        for map_name in maps:
+            path = ROOT / "data/maps" / map_name / "map.json"
+            if path.exists():
+                result.add(json.loads(path.read_text())["id"])
     return result
 
 
-def normalize_hidden(method: dict, constants: set[str]) -> dict:
-    source = method["mons"]
-    picks = [source[0], source[len(source) // 2], source[-1]]
+def encounter_rows() -> list[dict]:
+    payload = json.loads(TARGET.read_text())
+    group = next(row for row in payload["wild_encounter_groups"] if row["label"] == "gWildMonHeaders")
+    allowed = hoenn_map_ids()
+    return [row for row in group["encounters"] if row.get("map") in allowed]
+
+
+def encounter_map() -> dict[str, dict]:
+    return {row["map"]: row for row in encounter_rows()}
+
+
+def species_generations(graph: SpeciesGraph) -> dict[str, int]:
+    result = {}
+    for generation in range(1, 10):
+        source = (ROOT / f"src/data/pokemon/species_info/gen_{generation}_families.h").read_text()
+        for species in re.findall(r"\[?(SPECIES_[A-Z0-9_]+)\]?\s*=", source):
+            if species in graph.species:
+                result.setdefault(graph.find(species), generation)
+    return result
+
+
+def starter_components(graph: SpeciesGraph) -> set[str]:
+    source = (ROOT / "src/starter_choose.c").read_text()
+    array = re.search(r"static const enum Species sStarterMons.*?\n\};", source, re.S)
+    require(array is not None, "regional starter table is missing")
     return {
-        "encounter_rate": method["encounter_rate"],
-        "mons": [
-            {**mon, "species": normalize_species(mon["species"], constants)}
-            for mon in picks
-            if normalize_species(mon["species"], constants) not in BESPOKE_EXCLUSIONS
-        ],
+        graph.find(species)
+        for species in re.findall(r"SPECIES_[A-Z0-9_]+", array.group())
+        if species in graph.species
     }
 
 
-def encounter_map(payload: dict) -> dict[str, dict]:
+def species_rate(entry: dict, species: str) -> int:
+    chance = 0
+    for method_name, rates in SLOT_RATES.items():
+        for index, mon in enumerate(entry.get(method_name, {}).get("mons", [])):
+            if mon["species"] == species:
+                chance += rates[index]
+    return chance
+
+
+def preset_blocks() -> dict[str, str]:
+    source = (ROOT / "src/data/pokemon/emerald_champions_battle_sets.h").read_text()
+    starts = list(re.finditer(r"\[(SPECIES_[A-Z0-9_]+)\]\s*=\s*\{", source))
     return {
-        entry["map"]: entry
-        for group in payload["wild_encounter_groups"]
-        for entry in group["encounters"]
-        if "map" in entry
+        match.group(1): source[match.start(): starts[index + 1].start() if index + 1 < len(starts) else len(source)]
+        for index, match in enumerate(starts)
     }
 
 
-def write() -> None:
-    modern = json.loads(TARGET.read_text())
-    preserved = source_json()
-    modern_by_map = encounter_map(modern)
-    preserved_by_map = encounter_map(preserved)
-    constants = species_constants()
+def verify_role_policy(by_map: dict[str, dict]) -> None:
+    presets = preset_blocks()
+    for label, (maps, candidates, required_token) in ROLE_POLICY.items():
+        qualifying = []
+        for species in candidates:
+            chance = sum(species_rate(by_map[map_name], species) for map_name in maps if map_name in by_map)
+            if chance >= 4 and required_token in presets.get(species, ""):
+                qualifying.append((species, chance))
+        require(qualifying, f"{label} has no >=4% source with {required_token}")
 
-    main_group = next(group for group in modern["wild_encounter_groups"] if group["label"] == "gWildMonHeaders")
 
-    for map_name, old_entry in preserved_by_map.items():
-        if map_name not in modern_by_map and map_name not in RESTORED_ENCOUNTER_MAPS:
-            continue
-        if map_name not in modern_by_map:
-            target = {"map": map_name, "base_label": map_name.removeprefix("MAP_").title().replace("_", "")}
-            main_group["encounters"].append(target)
-            modern_by_map[map_name] = target
-        else:
-            target = modern_by_map[map_name]
-        for field, count in TARGET_COUNTS.items():
-            if field in old_entry:
-                target[field] = normalize_method(old_entry[field], count, constants)
-            else:
-                target.pop(field, None)
-        target.pop("hidden_mons", None)
-        if "honey_mons" in old_entry:
-            hidden = normalize_hidden(old_entry["honey_mons"], constants)
-            if hidden["mons"]:
-                while len(hidden["mons"]) < 3:
-                    hidden["mons"].append(dict(hidden["mons"][-1]))
-                target["hidden_mons"] = hidden
-
-    missing_restored = RESTORED_ENCOUNTER_MAPS - modern_by_map.keys()
-    if missing_restored:
-        raise ValueError(f"restored maps lack preserved encounter tables: {sorted(missing_restored)}")
-
-    for map_name, species in RESTORED_ULTRA_BEASTS.items():
-        target = modern_by_map[map_name]
-        if "land_mons" not in target or len(target["land_mons"]["mons"]) != TARGET_COUNTS["land_mons"]:
-            raise ValueError(f"{map_name} lacks a complete land table for {species}")
-        target["land_mons"]["mons"][6]["species"] = species
-
-    for map_name, method, slot, expected, species in CAMPAIGN_ROSTER_SLOTS:
-        target = modern_by_map[map_name]
-        slots = target[method]["mons"]
-        if slots[slot]["species"] != expected:
-            raise ValueError(
-                f"{map_name} {method}[{slot}] drifted: "
-                f"{slots[slot]['species']} != {expected}"
-            )
-        slots[slot]["species"] = species
-
-    main_group["encounters"].sort(key=lambda entry: entry.get("map", ""))
-
-    TARGET.write_text(json.dumps(modern, indent=2) + "\n")
+def verify_opening_act_bias(by_map: dict[str, dict], graph: SpeciesGraph) -> tuple[float, float]:
+    generations = species_generations(graph)
+    common_slots = {
+        "land_mons": range(6),
+        "water_mons": range(2),
+        "rock_smash_mons": range(2),
+        "fishing_mons": (0, 1, 2, 5, 6),
+    }
+    values = []
+    for map_name in OPENING_MAPS:
+        entry = by_map.get(map_name, {})
+        for method_name, indexes in common_slots.items():
+            mons = entry.get(method_name, {}).get("mons", [])
+            for index in indexes:
+                if index >= len(mons) or mons[index]["species"] not in graph.species:
+                    continue
+                generation = generations.get(graph.find(mons[index]["species"]))
+                if generation is not None:
+                    values.append(generation)
+    require(values, "opening act has no measurable common encounter slots")
+    old_share = sum(generation <= 3 for generation in values) / len(values)
+    modern_share = sum(generation >= 7 for generation in values) / len(values)
+    require(old_share >= 0.60, f"opening common slots lost the Gen 1-3 bias: {old_share:.1%}")
+    require(modern_share <= 0.10, f"opening common slots overuse Gen 7-9 families: {modern_share:.1%}")
+    return old_share, modern_share
 
 
 def check() -> None:
-    payload = json.loads(TARGET.read_text())
-    by_map = encounter_map(payload)
+    rows = encounter_rows()
+    by_map = {row["map"]: row for row in rows}
+    graph = SpeciesGraph()
+
+    require(len(rows) == 145, f"Hoenn campaign encounter-header count drifted: {len(rows)}")
+    require(len(by_map) == 137, f"Hoenn campaign wild-map count drifted: {len(by_map)}")
+    for entry in rows:
+        map_name = entry["map"]
+        for method_name, method in entry.items():
+            if not method_name.endswith("_mons") or not isinstance(method, dict):
+                continue
+            require(method_name in SLOT_COUNTS, f"{map_name}: unknown encounter method {method_name}")
+            require(len(method.get("mons", [])) == SLOT_COUNTS[method_name],
+                    f"{map_name} {method_name}: invalid slot count")
+            require(0 < method.get("encounter_rate", 0) <= 100,
+                    f"{map_name} {method_name}: invalid encounter rate {method.get('encounter_rate')}")
+
+    for (map_name, method_name, slot), species in STARTER_REPLACEMENTS.items():
+        require(by_map[map_name][method_name]["mons"][slot]["species"] == species,
+                f"{map_name} {method_name}[{slot}] lost {species}")
+    for (map_name, method_name, slot), species in QUEST_DEPENDENCY_REPLACEMENTS.items():
+        require(by_map[map_name][method_name]["mons"][slot]["species"] == species,
+                f"{map_name} {method_name}[{slot}] lost quest dependency {species}")
+
+    starter_roots = starter_components(graph)
+    leaked_starters = []
+    for map_name, entry in by_map.items():
+        for method_name, method in entry.items():
+            if not method_name.endswith("_mons") or not isinstance(method, dict):
+                continue
+            for slot, mon in enumerate(method.get("mons", [])):
+                if mon["species"] in graph.species and graph.find(mon["species"]) in starter_roots:
+                    leaked_starters.append(f"{map_name}:{method_name}[{slot}]={mon['species']}")
+    require(not leaked_starters, "starter families remain ordinary Hoenn wilds: " + ", ".join(leaked_starters))
+
+    for map_name, species in RESTORED_ULTRA_BEASTS.items():
+        slots = by_map[map_name]["land_mons"]["mons"]
+        require(slots[6]["species"] == species,
+                f"{map_name} lost its no-grind 5% Ultra Beast {species}")
+
+    verify_role_policy(by_map)
+    old_share, modern_share = verify_opening_act_bias(by_map, graph)
     species = {
         mon["species"]
-        for entry in by_map.values()
-        for field in (*TARGET_COUNTS, "hidden_mons")
-        for mon in entry.get(field, {}).get("mons", [])
+        for entry in rows
+        for method_name, method in entry.items()
+        if method_name.endswith("_mons") and isinstance(method, dict)
+        for mon in method.get("mons", [])
     }
-    for map_name in ("MAP_ROUTE101", "MAP_ROUTE102", "MAP_ROUTE103", "MAP_PETALBURG_WOODS", "MAP_GRANITE_CAVE_1F"):
-        if map_name not in by_map:
-            raise ValueError(f"missing early-game table {map_name}")
-    missing_restored = RESTORED_ENCOUNTER_MAPS - by_map.keys()
-    if missing_restored:
-        raise ValueError(f"missing restored-area encounter tables: {sorted(missing_restored)}")
-    required_early = {"SPECIES_SPRIGATITO", "SPECIES_DREEPY", "SPECIES_SCYTHER", "SPECIES_AXEW", "SPECIES_FUECOCO"}
-    early_species = {
-        mon["species"]
-        for map_name in ("MAP_ROUTE101", "MAP_ROUTE102", "MAP_ROUTE103", "MAP_ROUTE104", "MAP_PETALBURG_WOODS", "MAP_GRANITE_CAVE_1F")
-        for field in (*TARGET_COUNTS, "hidden_mons")
-        for mon in by_map[map_name].get(field, {}).get("mons", [])
-    }
-    missing_early = required_early - early_species
-    if missing_early:
-        raise ValueError(f"curated early identity drifted: {sorted(missing_early)}")
-    duplicate_bespoke = BESPOKE_EXCLUSIONS & species
-    if duplicate_bespoke:
-        raise ValueError(f"bespoke species leaked into ordinary wild tables: {sorted(duplicate_bespoke)}")
-    for map_name, ultra_beast in RESTORED_ULTRA_BEASTS.items():
-        slots = by_map[map_name]["land_mons"]["mons"]
-        if slots[6]["species"] != ultra_beast:
-            raise ValueError(f"{map_name} lost its 5-percent Ultra Beast {ultra_beast}")
-    for map_name, method, slot, _, campaign_species in CAMPAIGN_ROSTER_SLOTS:
-        if by_map[map_name][method]["mons"][slot]["species"] != campaign_species:
-            raise ValueError(f"{map_name} lost campaign roster species {campaign_species}")
-    print(f"PASS: curated modern Hoenn tables expose {len(species)} unique wild species")
-    print(f"PASS: early routes expose {len(early_species)} unique species including rare competitive anchors")
+    print(f"PASS: {len(rows)} headers on {len(by_map)} Hoenn wild maps expose {len(species)} unique species/forms")
+    print("PASS: no ordinary Hoenn wild table contains a regional starter family")
+    print(f"PASS: opening common slots are {old_share:.1%} Gen 1-3 and {modern_share:.1%} Gen 7-9")
+    print(f"PASS: {len(ROLE_POLICY)} early doubles-role availability contracts hold")
 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--write", action="store_true")
     args = parser.parse_args()
-    if args.write:
-        write()
+    require(not args.write, "wild encounters are directly curated; the stale snapshot writer is retired")
     check()
 
 
